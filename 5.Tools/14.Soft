@@ -12,4 +12,6 @@
 - CodeBlock
 - IDEA
 - zsh
-      sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyruss
+      cat /etc/shells
+      chsh -s /bin/zsh(modify /etc/passwd user )
