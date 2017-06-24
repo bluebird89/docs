@@ -1,0 +1,15 @@
+### windows ###
+
+### ubuntu ###
+- note:simplenote
+   - wget https://github.com/Automattic/simplenote-electron/releases/download/v1.0.8/simplenote-1.0.8.deb
+   - sudo dpkg -i simplenote-1.0.8.deb
+- video: VLC
+- editor: atom
+- Guake Terminal
+- electronic wechat:github
+- gimp
+- CodeBlock
+- IDEA
+- zsh
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
