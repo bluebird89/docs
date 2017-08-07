@@ -2,7 +2,7 @@
 
 
 
-JavaScript
+JavaScript：代码的展现方式
 
 基础JavaScript
 
