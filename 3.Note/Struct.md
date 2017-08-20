@@ -35,6 +35,17 @@
 - Symfony
 - SOA，微服务架构
 - Go 的微服务架构
+- Java
+- PHP
+
+  - ThinkPHP
+  - [Laravel](https://laravel.com/)
+  - [Yii](http://www.yiiframework.com/)
+  - [CodeIgniter](https://codeigniter.com/)
+  - [Phalcon](https://phalconphp.com)
+  - [Symfony](http://symfony.com/)
+
+  - sinri/enoch
 
 ## 数据库
 
