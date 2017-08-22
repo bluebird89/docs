@@ -1,3 +1,5 @@
+作为一个传感器，将数据编码输出
+
 [硬件参数手册](http://bucket.download.slamtec.com/a3bdd2bbf5a531748052cd554f817b4b6081ff47/LD208_SLAMTEC_rplidar_datasheet_A2M8_v1.0_cn.pdf)
 
 [用户手册](http://117.143.109.160/cache/bucket.download.slamtec.com/7923ea8304fc3a9d954386b75cf25a3c5a977f9e/LM204_SLAMTEC_rplidarkit_usermanual_A2M4_v1.1_cn.pdf?ich_args2=142-22004412045827_553c04d1e752cf128be6807e6da47116_10001002_9c89642fd4c0f2d9923a518939a83798_891edb93dcdb9a56be64462bd3d39077)
