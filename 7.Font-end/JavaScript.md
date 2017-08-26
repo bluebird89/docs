@@ -33,6 +33,7 @@ Data Visualization
 - React Native
 
 - jQuery
+
 - [Underscore.js](http://underscorejs.org/)
 
 # IDE：
@@ -63,3 +64,7 @@ Data Visualization
 
   - clone本地，grunt安装，编译
   - test中的index.html会有测试断言
+
+## style guide
+
+[airbnb/javascript](https://github.com/airbnb/javascript)
