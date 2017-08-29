@@ -34,7 +34,6 @@
 - 阅读分类
 
   - feedly：
-  - trello
   - youdaonote simplenote
   - xmind
   - 读书记录：豆瓣读书
