@@ -36,7 +36,7 @@
   - feedly：
   - youdaonote simplenote
   - xmind
-  - 读书记录：豆瓣读书
+  - 读书记录：豆瓣读书、电影评论
   - github
 
 # 搜索
