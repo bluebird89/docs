@@ -10,3 +10,5 @@
 
 - mysql 官方文档
 - swarm
+- Clojure
+- rust
