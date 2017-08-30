@@ -33,11 +33,12 @@
 
 - 阅读分类
 
-  - feedly：
-  - youdaonote simplenote
-  - xmind
-  - 读书记录：豆瓣读书、电影评论
-  - github
+  - feedly：博客阅读与整理
+  - youdaonote ：格式化笔记
+  - simplenote：简单笔记（无格式）
+  - xmind：结构化整理
+  - 记录：豆瓣读书、电影评论
+  - github：代码的整理
 
 # 搜索
 
