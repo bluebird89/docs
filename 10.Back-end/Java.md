@@ -66,7 +66,10 @@ java HelloWorld
 ```
 sudo apt-get install maven2
 ```
-
+## 客户端
+- JavaFX
+- swing
+-
 ## todo
 
 Hadoop，Kafka，Zookeeper
