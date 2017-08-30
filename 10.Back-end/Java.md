@@ -64,12 +64,13 @@ java HelloWorld
 ## maven
 
 ```
-sudo apt-get install maven2
+sudo apt-get install maven2··
 ```
 ## 客户端
 - JavaFX
 - swing
--
+- Spring
+
 ## todo
 
 Hadoop，Kafka，Zookeeper
