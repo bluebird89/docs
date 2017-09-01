@@ -14,3 +14,4 @@
 - rust
 - PHPUnit：laravel
 - etcd
+- xdebug
