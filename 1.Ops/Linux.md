@@ -1,6 +1,6 @@
 # 系统
 
-Ubuntu 不用修改hosts can access google
+以Ubuntu为主要使用系统，不用修改hosts can access google
 
 # 软件
 
