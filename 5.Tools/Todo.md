@@ -15,3 +15,7 @@
 - PHPUnit：laravel
 - etcd
 - xdebug
+
+<https://segmentfault.com/a/1190000004505815>
+
+读官方文档 读源码 提高认知 熟练工具
