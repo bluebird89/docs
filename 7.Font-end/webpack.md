@@ -84,3 +84,7 @@ npm install --save-dev webpack
 - UglifyJsPlugin：压缩JS代码；
 - OccurenceOrderPlugin :为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
 - 缓存：一个哈希值添加到打包的文件名中，使用方法如下,添加特殊的字符串混合体（[name], [id] and [hash]）到输出文件名前 `filename: "bundle-[hash].js"`
+
+## 扩展功能
+
+[webpack-dashboard](https://github.com/FormidableLabs/webpack-dashboard)
