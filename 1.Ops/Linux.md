@@ -30,6 +30,8 @@ where||type compsoer
 
   ```
   scp id_rsa.pub git@172.26.186.117:/home/git/
+  \\ 登陆服务器
+  ssh -p 2222 user@host
   ```
 
 - 文件文件 cat file >> another file
