@@ -32,4 +32,16 @@
 
 websocket
 
-<http://supervisord.org/index.html>
+<http://supervisord.org/index.html> <https://github.com/EZLippi/practical-programming-books>
+
+木心在《文学回忆录里》
+
+<https://www.zhaoyafei.cn/>
+
+<https://www.slimframework.com/>
+
+<http://www.cnblogs.com/feng18/>
+
+<http://www.cnblogs.com/JohnABC/>
+
+<https://wenku.baidu.com/view/be804acc2f60ddccdb38a0c5.html><http://blog.jobbole.com/112161/?utm_source=blog.jobbole.com&utm_medium=relatedPosts>
