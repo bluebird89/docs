@@ -67,7 +67,8 @@ etcd是一个高可用的键值存储系统，分布式一致性k-v存储系统,
 
 用来构建托管在GitHub上的代码，最主要工作是自动运行项目的单元测试并生成报告，同时根据的配置文件，生成一个Linux虚拟机来运行你的命令，通常这些命令用于测试，构建等。默认设置下，每次对项目进行Push时，都会触发Travis CI运行一次测试。同时提供了一个项目状态图标，可以放置在项目主页告知用户当前的测试情况.
 
-- 
+-
+
 - 配置文件.travis.yml
 
 ```
@@ -80,3 +81,5 @@ before_script:
   - cd tests
 script: phpunit -v
 ```
+
+[sovereign/sovereign](https://github.com/sovereign/sovereign)
