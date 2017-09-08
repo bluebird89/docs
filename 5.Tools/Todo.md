@@ -32,7 +32,7 @@
 
 websocket
 
-<http://supervisord.org/index.html> <https://github.com/EZLippi/practical-programming-books>
+<http://supervisord.org/index.html> <https://github.com/EZLippi/practical-programming-books> <https://github.com/Bilibili/ijkplayer>
 
 木心在《文学回忆录里》
 
