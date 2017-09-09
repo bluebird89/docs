@@ -137,7 +137,7 @@ Shift+PgDn:将终端显示向下滚动;
 pwd打印当前目录
 cat:读取某一个文件内的内容
 wc:获取某一个文件的行数和字数
-
+psketch
 date:获取当前时间
 uname:返回系统名称
 hostname：返回系统的主机名称
@@ -148,6 +148,36 @@ ping 8.8.8.8检测连接
 whereis
 who
 locate
+```
+
+## Boot分区不足
+
+```
+\\ 查看已安装的linux-image各版本
+dpkg --get-selections |grep linux-image
+// 查看使用版本
+uname -a
+／／清除旧版本
+sudo apt-get purge linux-image-3.5.0-27-generic
+图中因使用remove命令而残留的deinstall的
+sudo dpkg -P linux-image-extra-3.5.0-17-generic
+```
+
+## 端口 进程
+
+```
+// 查看某一端口的占用情况
+[sudo ]lsof -i : (port)
+// 显示tcp，udp的端口和进程等相关
+netstat -tunlp
+// 指定端口号进程情况
+netstat -tunlp|grep (port)
+// 进程查看
+ps -ef | grep nginx
+ps aux | grep nginx
+lsof -Pni4 | grep LISTEN | grep php
+// 关闭进程
+kill -9 pid
 ```
 
 chkconfig --list sshd
