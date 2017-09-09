@@ -440,3 +440,5 @@ pm.start_servers=15
 pm.min_spare_servers=5
 pm.max_spare_servers=32
 ```
+
+启动 php-fpm -D 关闭 killall php-fpm
