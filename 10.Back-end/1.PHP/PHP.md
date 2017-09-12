@@ -123,10 +123,13 @@ laravel->symfony
 
 ## 框架
 
+- [pinguo/php-msf](https://github.com/pinguo/php-msf)PHP微服务框架即"Micro Service Framework For PHP"，是Camera360社区服务器端团队基于Swoole自主研发现代化的PHP协程服务框架，简称msf或者php-msf，是Swoole的工程级企业应用框架，经受了Camera360亿级用户高并发大流量的考验
+
 ## 资源
 
 - [Awesome PHP](http://coffeephp.com/resources)
+- [开源项目](https://my.oschina.net/editorial-story/blog/1535228)
 
-## 扩展
+## 社区
 
-<https://my.oschina.net/editorial-story/blog/1535228>
+- [coffeephp](http://coffeephp.com/)
