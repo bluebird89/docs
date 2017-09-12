@@ -44,24 +44,14 @@ websocket
 
 <http://www.cnblogs.com/JohnABC/>
 
-<https://wenku.baidu.com/view/be804acc2f60ddccdb38a0c5.html><http://blog.jobbole.com/112161/?utm_source=blog.jobbole.com&utm_medium=relatedPosts> <https://github.com/ElemeFE/keynote><https://github.com/ElemeFE/vscode-element-helper>
+<https://wenku.baidu.com/view/be804acc2f60ddccdb38a0c5.html><http://blog.jobbole.com/112161/?utm_source=blog.jobbole.com&utm_medium=relatedPosts>
 
 <https://news.zhibo8.cc/zuqiu/2017-09-12/59b77e827f1b6.htm> <http://v.youku.com/v_show/id_XNDQzNTgwOTg0.html>
 
-<http://coffeephp.com/users/1>
-
-<http://jsyzchen.com/>
-
 <http://www.oschina.net/translate/new-features-laravel-5-5>
-
-[https://mp.weixin.qq.com/s?__biz=MzIwNjEwNTQ4Mw==∣=2651577617&idx=1&sn=5d74f835ccb4e8070c2a03a215ee199e&chksm=8cd9c3f5bbae4ae3fbca8d88c7b5844a3bc7b5b8e2277200932074c26765ac04f4dfbc37637c#rd](https://mp.weixin.qq.com/s?__biz=MzIwNjEwNTQ4Mw==&mid=2651577617&idx=1&sn=5d74f835ccb4e8070c2a03a215ee199e&chksm=8cd9c3f5bbae4ae3fbca8d88c7b5844a3bc7b5b8e2277200932074c26765ac04f4dfbc37637c#rd)
 
 <http://blog.didiaoyuan.com/2017/04/18/%E6%80%BB%E6%9C%89%E4%BD%A0%E8%A6%81%E7%9A%84%E7%BC%96%E7%A8%8B%E4%B9%A6%E5%8D%95%EF%BC%88GitHub-%EF%BC%89/>
 
 <https://www.zhihu.com/question/20070065/answer/79557687>
 
 <https://juejin.im/post/59b78dfe5188257e7e115cae>
-
-<https://juejin.im/post/584e7b298d6d81005456eb53>
-
-<https://juejin.im/post/5842c27c61ff4b006c2a55d7>
