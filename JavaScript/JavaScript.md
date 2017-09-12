@@ -68,3 +68,7 @@ Data Visualization
 ## style guide
 
 [airbnb/javascript](https://github.com/airbnb/javascript)
+
+## 资源
+
+- [JavaScript深入系列15篇](https://juejin.im/post/59278e312f301e006c2e1510)

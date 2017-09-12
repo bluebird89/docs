@@ -1,5 +1,9 @@
 # Docs
 
+个人知识结构的记录
+
+虚实平衡，避免过度虚或太详实。实现在代码中体现。
+
 document
 
 并发：<https://www.zhihu.com/question/19683490>
