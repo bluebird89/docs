@@ -8,6 +8,7 @@
 - [weui](https://github.com/Tencent/weui)
 - [overtrue/wechat](https://github.com/overtrue/wechat):有overtrue/laravel-wechat 扩展
 - [wechat-php-sdk](https://github.com/dodgepudding/wechat-php-sdk)
+- [官方文档](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list)
 
 ## git 服务器搭建
 

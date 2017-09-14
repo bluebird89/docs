@@ -1,4 +1,6 @@
-RESTful
+# RESTful api
+
+## [RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api)
 
 C/S:请求端的分布式，建立在分布式体系上，通过互联网通信，具有高延时（high latency）、高并发等特点。如何开发在互联网环境中使用的软件。
 
@@ -48,3 +50,7 @@ DELETE（DELETE）：从服务器删除资源。
 RESTful API最好做到Hypermedia，即返回结果中提供链接，连向其他API方法，使得用户不查文档，也知道下一步应该做什么。比如 api.example.com {"link": { "rel": "collection <https://www.example.com/zoos>", "href": "<https://api.example.com/zoos>", "title": "List of zoos", "type": "application/vnd.yourformat+json" }} rel表示这个API与当前网址的关系（collection关系，并给出该collection的网址），href表示API的路径，title表示API的标题，type表示返回类型。
 
 API的身份认证应该使用OAuth 2.0框架。 （2）服务器返回的数据格式，应该尽量使用JSON，避免使用XML。
+
+### 实例
+
+<https://api.github.com/>
