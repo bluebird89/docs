@@ -123,11 +123,15 @@ laravel->symfony
 
 ## 框架
 
+- yaf
 - [pinguo/php-msf](https://github.com/pinguo/php-msf)PHP微服务框架即"Micro Service Framework For PHP"，是Camera360社区服务器端团队基于Swoole自主研发现代化的PHP协程服务框架，简称msf或者php-msf，是Swoole的工程级企业应用框架，经受了Camera360亿级用户高并发大流量的考验
+- [Youzan Zan Php Installer](https://github.com/youzan/zan-installer)Youzan Zan Php Installer
+- [tencent-php/tsf](https://github.com/tencent-php/tsf):coroutine and Swoole based php server framework in tencent
 
 ## 资源
 
 - [Awesome PHP](http://coffeephp.com/resources)
+- [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php)
 - [开源项目](https://my.oschina.net/editorial-story/blog/1535228)
 
 ## 社区
@@ -135,3 +139,12 @@ laravel->symfony
 - [coffeephp](http://coffeephp.com/)
 
 <http://www.jianshu.com/p/a5d905778b47>
+
+$GLOBALS['HTTP_RAW_POST_DATA']
+
+## 扩展
+
+- [youzan/php-co-koa](https://github.com/youzan/php-co-koa)PHP异步编程: 手把手教你实现co与Koa
+- [youzan/zan](https://github.com/youzan/zan)高效稳定、安全易用、线上实时验证的全异步高性能网络库，通过PHP扩展方式使用。
+- [HanSon/youzan-sdk](https://github.com/HanSon/youzan-sdk)有赞 SDK
+- [hprose/hprose-php](https://github.com/hprose/hprose-php)Hprose is a cross-language RPC
