@@ -59,3 +59,8 @@ react-native init AwesomeProject
 cd AwesomeProject
 react-native run-android
 ```
+
+## 扩展
+
+- [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
+- [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.

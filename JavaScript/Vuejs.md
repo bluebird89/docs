@@ -17,6 +17,10 @@
 - [ElemeFE/cooking](https://github.com/ElemeFE/cooking)
 - [PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
 
+## 重构
+
+- [tonyfree/youzan](https://github.com/tonyfree/youzan)
+
 ### App 流程
 
 - 需求分析
