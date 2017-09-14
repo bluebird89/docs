@@ -7,3 +7,6 @@
 当习题做，自己实现最重要；
 
 [python](https://github.com/ssjssh/algorithm)
+
+- Dijkstra算法
+- 算法是设计出来服务于这个协议的
