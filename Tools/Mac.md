@@ -1,12 +1,14 @@
+# MAC使用记录
+
 Mac：最大优势是 GUI 和命令行的完美结合
 
-# 使用说明
+## 硬件说明
 
-- Apple Magic Trackpad 2
+- Apple Magic Trackpad 2：重现Mac pro mul touch功能
 - 耳机 BeoPlay H6
-- iPad Pro
+- iPad Pro：阅读利器
 
-# 系统配置：
+## 系统配置：
 
 - 开启鼠标更多功能
 - 将功能键(F1-F12)的行为设置为标准的功能键
@@ -22,6 +24,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - iphone,只能同步一台设备itunes配置
 - 设置未收录的开发者应用`sudo spctl --master-disable`
 - [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
+- [Terminal](https://github.com/nicolashery/mac-dev-setup)
 
 ## 键位
 
@@ -32,7 +35,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - Caps Lock ⇪
 - Fn
 
-# 快捷键
+## 快捷键
 
 - option + command + sapce：finder
 - Command–空格键：打开Spotlight
@@ -79,8 +82,6 @@ Mac：最大优势是 GUI 和命令行的完美结合
   - control＋command＋f：全屏/还原
   - 直接新标签打开文件夹 Command+双击
 
-## [Terminal](https://github.com/nicolashery/mac-dev-setup)
-
 ```
 cd ~
 # .bash_profile 文件里引用了 .bash_prompt 和 .aliases，每次启动 Terminal 的时候，它都会引用 .bash_profile 里的设置，所以，以后你就可以把所有你需要的缩写都放到 .aliases 文件里去。
@@ -90,7 +91,7 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 [更换主题](https://github.com/tomislav/osx-terminal.app-colors-solarized)中的Solarized Dark.terminal，偏好导入并设置为默认，字体设为Courier New，20
 ```
 
-## Spoitlight
+### Spoitlight
 
 - 查词典 Command+L
 - 在浏览器查询 Command+B
@@ -209,26 +210,22 @@ Run "\\192.168.0.4" 来访问其他机器共享的目录
 在Mac中， 先打开Finder, command +K  打开共享目录 输入： smb://192.168.0.4/share
 ```
 
-# 软件
+## 软件
 
-- 安装
+### 安装
 
-  - app store：自动安装
-  - 互联网下载：下载dmg，会打开安装包，需将app图标拖到application中（文件位置/Users/henry/Library/Application Support）
-  - 还有文件包直接拖进application：sketch atom
-  - brew cask install firefox
+- app store：自动安装
+- 互联网下载：下载dmg，会打开安装包，需将app图标拖到application中（文件位置/Users/henry/Library/Application Support）
+- 还有文件包直接拖进application：sketch atom
+- brew cask install firefox
 
-- 卸载软件
+### 卸载软件
 
-  - launchpad 长按
-  - finder 找到移动到垃圾桶
-  - 通过appcleaner彻底清除
+- launchpad 长按
+- finder 找到移动到垃圾桶
+- 通过appcleaner彻底清除
 
-- UI:sketch sketch box
-
-- CheatSheet 长按⌘键可以显示当前程序快捷键
-
-- markdown: Mou for Mac Ulysses for Mac MWeb Lite
+### 包管理工具Brew
 
 - 资源包管理：Homebrew(安装完brew时，brew-cask已经安装好了，无需额外安装）
 
@@ -276,6 +273,7 @@ brew cask install mou
 brew cask install iterm2
 brew cask install sublime-text
 brew cask install virtualbox
+brew install tig
 # 卸载软件
 $brew cask info app
 # 列出应用的信息 $brew cask list
@@ -285,10 +283,22 @@ $brew cask cleanup
 $brew cask uninstall name && brew cask install name
 # 查看已安装的 composer 的位置
 brew info composerpubunut
+brew install caskroom/cask/brew-cask
+Cask 'brew-cask' is unavailable: '/usr/local/Homebrew/Library/Taps/caskroom/homebrew-cask/Casks/brew-cask.rb' does not exist.
+brew install brew-cask-completion
+
+brew tap homebrew/services // brew 服务管理 
+brew services start postgresql
 ```
 
 - get Homebrew-Cask:brew tap caskroom/cask
 - brower:brew cask install google-chrome
+
+### 软件列表
+
+- UI:sketch sketch box
+- CheatSheet 长按⌘键可以显示当前程序快捷键
+- markdown: Mou for Mac Ulysses for Mac MWeb Lite
 - shell：oh my zsh
 - CheatSheet
 - MySql：Sequel Pro
@@ -326,6 +336,13 @@ brew info composerpubunut
 - iTunes Movie Trailers
 - manico
 - SwitchHosts
+- [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
+- f.lux 屏幕颜色控制
+- iCHM
+- 文档：[apidoc](http://apidocjs.com/)
+- Reeder 3 RSS订阅（暂时feedly代替）
+- mounty:win的移动硬盘
+- [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
 - 苹果铃声制作
 
   - 音乐文件用itunes打开
@@ -336,33 +353,11 @@ brew info composerpubunut
   - 同步手机
 
 ```
-brew install tig
-```
-
-```
-brew install mysql
-brew services start mysql
-unset TMPDIR
-mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-mysql.server start
-配置文件：/usr/local/etc/my.cnf
-生成用户root与空密码登陆
-`
-```
-
-- Reeder 3 RSS订阅
-- f.lux 屏幕颜色控制
-- iCHM
-- 文档：[apidoc](http://apidocjs.com/)
-
-  ```
   npm install apidoc -g
   apidoc -i myapp/ -o apidoc/ -t mytemplate/
-  ```
+```
 
-- [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
-
-## iTerm2
+#### iTerm2
 
 iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配置完毕开箱即用的 tmux
 
@@ -391,7 +386,7 @@ iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配�
   - ⌘+;弹出自动补齐窗口 之前做法 control + r：历史命令行匹配
   - ⌘+Option+e全屏展示所有的 tab，可以搜索
 
-## sizeup窗口管理软件（多屏幕、半栏、1/4栏）
+#### sizeup窗口管理软件（多屏幕、半栏、1/4栏）
 
 - control+option+command + M ： 使当前窗口全屏
 - control+option+command + 方向键上键 ： 使当前窗口占用当前屏幕上半部分
@@ -401,7 +396,7 @@ iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配�
 - control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
 - control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
 
-## 文稿快捷键
+#### 文稿快捷键
 
 - Command-B 以粗体显示所选文本，或者打开或关闭粗体显示功能。
 - Command-I 以斜体显示所选文本，或者打开或关闭斜体显示功能。
@@ -418,7 +413,7 @@ iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配�
 - Control-K 删除插入点与行或段落末尾处之间的文本。
 - Command-Delete 在包含"删除"或"不存储"按钮的对话框中选择"删除"或"不存储"。
 
-## 翻页
+#### 翻页
 
 - Fn–上箭头 向上翻页：向上滚动一页。
 - Fn–下箭头 向下翻页：向下滚动一页。
@@ -468,12 +463,12 @@ iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配�
 - Shift–Command– 加号 (+) 放大所选项。
 - Command–等号 (=) 可执行相同的功能。
 
-## AirServer Connect：Mac显示iPhone
+#### AirServer Connect：Mac显示iPhone
 
 - 手机线接电脑；quickplayer 新建影片录制 录像按钮选择设备
 - 通过软件AirServer Connect（收费）
 
-## iPhone 控制keynote（同一个网路下）
+#### iPhone 控制keynote（同一个网路下）
 
 - mac端偏好设置中remote开启并连接手机
 - iphone keynote进入远程控制，开始控制
@@ -496,16 +491,6 @@ iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配�
 - 使用 Vagrant 或者 Docker（配合 docker-machine 和 docker-compose）
 
 - 用 Time Machine 做好备份
-
-- mounty:win的移动硬盘
-
-```
-brew install caskroom/cask/brew-cask
-Cask 'brew-cask' is unavailable: '/usr/local/Homebrew/Library/Taps/caskroom/homebrew-cask/Casks/brew-cask.rb' does not exist.
-brew install brew-cask-completion
-```
-
-- [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
 
 ### Keyboard shortcuts
 
