@@ -54,7 +54,31 @@ websocket
 
 <https://github.com/ElemeFE/hire/blob/master/job-description.md> [postman](http://lucia.xicp.cn/2016/05/21/test/postman%E7%AC%94%E8%AE%B0/)
 
-<https://www.learnapollo.com/introduction/get-started/> 作为程序员，要取得非凡成就需要记住的15件事。
+<https://www.learnapollo.com/introduction/get-started/>
+
+<https://laravel-china.org/articles/5932/bash-command-and-syntax-take-you-to-upgrade-hit-boss><https://github.com/chrislgarry/Apollo-11>
+
+<https://github.com/javve/list.js> <http://geek.csdn.net/news/detail/236081>
+
+<https://juejin.im/post/59b68a58f265da0648442847>
+
+<https://zhuanlan.zhihu.com/p/21644769>
+
+<https://juejin.im/post/584b711d8e450a006c586ca6> <http://www.infoq.com/cn/news/2017/09/streaming-Pipeline-kuaishou> <https://juejin.im/entry/59b86304f265da0649241a7c>
+
+<https://juejin.im/entry/597bce395188253e01773dd7>
+
+<https://juejin.im/entry/59b89b57f265da065d2b51fa>
+
+<https://juejin.im/entry/59b9fa096fb9a00a6a741e9f>
+
+<https://juejin.im/entry/59b9f7236fb9a00a6974d603>
+
+<https://juejin.im/entry/59b9e82df265da065f0488bb> <https://juejin.im/entry/59b8bf4b6fb9a00a4f1b0b05>
+
+<http://www.cnblogs.com/520fyl/p/5408591.html> <http://jingyan.baidu.com/article/215817f7e5eeb71eda142390.html>
+
+作为程序员，要取得非凡成就需要记住的15件事。
 
 1.走一条不一样的路
 
@@ -130,5 +154,4 @@ websocket
 
 书中还提到了"预警极客"，也就是那些始终引领技术发展的人。这些人说过的话往往带有预见性，他们提到事物也许过几天就会成为头条新闻。关注这些人，常看他们的Twitter和博客。
 
-
-“每个人都觉得这里遍地都是黄金。没有人在讲述大部分人经历的故事，这些人可以什么都做对了，非常卖命的工作，但半年之后还是不得不离开这座城市，他们可能破产了可能自信心受到了严重的打击，梦想也破碎了。”
+"每个人都觉得这里遍地都是黄金。没有人在讲述大部分人经历的故事，这些人可以什么都做对了，非常卖命的工作，但半年之后还是不得不离开这座城市，他们可能破产了可能自信心受到了严重的打击，梦想也破碎了。"
