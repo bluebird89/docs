@@ -668,6 +668,7 @@ git push --force origin myfeature
 - _保持统一_， 这涉及到从工作流到你的提交信息，分支名还有标签。 在整个 Repository 中保持统一的命名风格有助于辨认工作进度。
 
 - _push 前测试_， 不要提交未完成的工作。
+
 - 使用 [annotated tags](http://git-scm.com/book/en/v2/Git-Basics-Tagging#Annotated-Tags) 标记发布版本或者其他重要的时间点。
 
   个人开发可以使用 [lightweight tags](http://git-scm.com/book/en/v2/Git-Basics-Tagging#Lightweight-Tags)，例如为以后参考做标记。
@@ -692,3 +693,7 @@ Agis Anastasopoulos / [@agisanast](https://twitter.com/agisanast) / <http://agis
 
 - Qi Chen / aseaday@gmail.com
 - chadluo / i@yuki.rocks
+
+## Github
+
+### issue and comment
