@@ -1,7 +1,5 @@
 # 后端测试
 
-- [自动化测试的感悟](http://lucia.xicp.cn/2016/12/01/test/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%84%9F%E5%8F%97/)
-
 ## 压力测试
 
 ### 目的
@@ -98,7 +96,3 @@ Percentage of the requests served within a certain time (ms)
   99%     32
  100%     63 (longest request)
 ```
-
-## 测试框架
-
-- appium [appium环境搭建](http://lucia.xicp.cn/2016/11/07/appium/appium%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/)

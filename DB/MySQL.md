@@ -4,6 +4,19 @@
 
 - workbeach
 - SQLyog
+- phpAdmin
+
+## 安装
+
+```
+brew install mysql
+brew services start mysql
+unset TMPDIR
+mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+mysql.server start
+配置文件：/usr/local/etc/my.cnf
+生成用户root与空密码登陆
+```
 
 ## 问题
 
@@ -11,7 +24,7 @@
 - memcache内存分配机制
 - 获取按年龄分组的，条数大于1的记录 -- 自我评价与职业规划
 
-# 概念
+## 概念
 
 - SQL，指结构化查询语言，全称是 Structured Query Language.
 - RDBMS 指关系型数据库管理系统，全称 Relational Database Management System。
