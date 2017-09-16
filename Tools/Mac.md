@@ -287,7 +287,7 @@ brew install caskroom/cask/brew-cask
 Cask 'brew-cask' is unavailable: '/usr/local/Homebrew/Library/Taps/caskroom/homebrew-cask/Casks/brew-cask.rb' does not exist.
 brew install brew-cask-completion
 
-brew tap homebrew/services // brew 服务管理 
+brew tap homebrew/services // brew 服务管理
 brew services start postgresql
 ```
 
@@ -342,6 +342,7 @@ brew services start postgresql
 - 文档：[apidoc](http://apidocjs.com/)
 - Reeder 3 RSS订阅（暂时feedly代替）
 - mounty:win的移动硬盘
+- MacPorts：The MacPorts Project is an open-source community initiative to design an easy-to-use system for compiling, installing, and upgrading either command-line, X11 or Aqua based open-source software on the Mac operating system.
 - [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
 - 苹果铃声制作
 
@@ -551,19 +552,32 @@ sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist
 sudo launchctl load -w /System/Library/LaunchDaemons/org.apache.httpd.plist
 ```
 
+### [MacPORTS](https://guide.macports.org/)
+
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+
+#### 指令
+
+- port help selfupdate
+- port list
+- port search --name --glob 'php*'
+- port search --name --line --glob 'php*'
+- port search --name --line --regex '^php\d*$'
+- port info yubico-pam
+- port deps apache2 +openldap
+- sudo port uninstall portname
+- port contents xorg-renderproto
+- port installed
+- sudo port upgrade outdated
+
 ### brew 安装软件路径
 
 - brew（意为酿酒）的命名很有意思，全部都使用了酿酒过程中采用的材料/器具，名词对应以下的概念：
 - Formula（配方） 程序包定义，本质上是一个rb文件
-
 - Keg（桶）程序包的安装路径
-
 - Cellar（地窖）所有程序包（桶）的根目录
-
 - Tap（水龙头）程序包的源
-
 - Bottle （瓶子）编译打包好的程序包
-
 - 增加一个程序源（新增一个水龙头） brew tap homebrew/php
 
 文件安装位置：/usr/local/etc/

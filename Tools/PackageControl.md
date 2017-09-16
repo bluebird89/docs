@@ -69,6 +69,8 @@ echo $slugify->slugify('Hello World, this is a long sentence and I need to make 
 
 安装yarn( Yarn是Facebook提供的替代npm的工具，可以加速node模块的下载)与react-native-cli（React Native的命令行工具用于执行创建、初始化、更新项目、运行打包服务（packager）等任务）。快速(缓存它下载的每个包，所以不需要重复下载)、可靠(每个安装包的代码执行前使用校验码验证包的完整性)、安全的依赖管理(用一个格式详尽但简洁的 lockfile 和一个精确的算法来安装)
 
+[中文文档](https://yarnpkg.com/zh-Hans/)
+
 ### 安装
 
 ```
@@ -77,6 +79,7 @@ curl -sS <https://dl.yarnpkg.com/debian/pubkey.gpg> | sudo apt-key add - echo "d
 sudo apt-get update && sudo apt-get install yarn
 
 npm install -g yarn
+brew install yarn
 ```
 
 ### 镜像源配置
