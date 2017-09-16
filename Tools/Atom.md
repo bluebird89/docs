@@ -89,22 +89,18 @@ prefix 不要用缩写
 - angularjs@0.4.0
 - atom-autocomplete-php@0.25.6
 - atom-beautify@0.30.5 代码格式化，可以在setting中不同语言设置 保存格式化后置操作Beautify On Save
-
-  ```
-  # 出现问题
-  Could not find 'php-cs-fixer'. The program may not be installed.
-  mac：brew install homebrew/php/php-cs-fixer
-  ```
-
 - atom-terminal@0.8.0
-
 - atom-ternjs@0.18.3
-
 - atom-typescript@11.0.6
+
 - autocomplete-paths@2.8.0
+
 - busy-signal@1.4.3
+
 - color-picker@2.2.5
+
 - editorconfig@2.2.2
+
 - emmet@2.4.3
 - file-icons@2.1.11theme
 - git-plus@7.9.3
@@ -169,7 +165,9 @@ prefix 不要用缩写
   - i 显示(隐藏)版本控制忽略的文件
 
   - alt-right 和 alt-left 展开(隐藏)所有目录
+
   - ctrl + al-] 和 ctrl + al-[ 同上
+
   - ctrl + [ 和 ctrl + ] 展开(隐藏)当前目录
 
 - 书签
@@ -184,9 +182,13 @@ prefix 不要用缩写
 - git <http://blog.csdn.net/u010494080/article/details/51229211>
 
 - GitHub Alt+G O 在GitHub上打开当前文件
+
 - Alt+G B 在GitHub上用Blame方式打开当前文件
+
 - Alt+G H 在GitHub上用History方式打开当前文件
+
 - Alt+G C 将当前文件在GitHub上的URL复制到剪切板
+
 - Alt+G R 在GitHub上比较分支
 
 # Atom Keyboard Shortcuts
@@ -304,3 +306,13 @@ Command                    | Description
 `apm remove emmet`         |
 
 [awesome-atom](https://github.com/mehcode/awesome-atom)
+
+### atom-beautify
+
+```
+Could not find 'php-cs-fixer'. The program may not be installed. //
+mac：brew install homebrew/php/php-cs-fixer
+
+Could not find 'autopep8'. The program may not be installed. //
+sudo pip install --upgrade autopep8
+```
