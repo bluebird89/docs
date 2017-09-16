@@ -5,7 +5,7 @@ PostgreSQL是一个功能强大的开源对象关系数据库管理系统(ORDBMS
 ## 工具
 
 - psql
-- phpPgAmin
+- PgAdmin
 - pgFouine
 
 ## 安装
