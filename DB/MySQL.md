@@ -681,3 +681,56 @@ select * from (
 )f
 where grank=1;
 ```
+
+### [优化策略](http://www.techug.com/post/mysql-20-plus-tips.html)
+
+- 优化查询缓存
+
+```
+// query cache does NOT work 因为功能返回的结果是可变的。MySQL决定禁用查询器的查询缓存
+$r = mysql_query("SELECT username FROM user WHERE signup_date >= CURDATE()");
+// query cache works!
+$today = date("Y-m-d");
+$r = mysql_query("SELECT username FROM user WHERE signup_date >= '$today'");
+```
+
+- EXPLAIN你的选择查询:帮助了解MySQL是怎样运行你的查询的,索引、扫描范围
+- 获取唯一行时使用LIMIT 1
+- 索引搜索字段：索引不仅仅是为了主键或唯一键。如果会在你的表中按照任何列搜索，你就都应该索引它们。
+- 索引并对连接使用同样的字段类型：包含许多连接查询, 你需要确保连接的字段在两张表上都建立了索引，使用同样类型，相同的字符类型
+- 不要ORDER BY RAND()：
+
+```
+$r = mysql_query("SELECT count(*) FROM user");
+$d = mysql_fetch_row($r);
+$rand = mt_rand(0,$d[0] - 1);
+$r = mysql_query("SELECT username FROM user LIMIT $rand, 1");
+```
+
+- 避免使用SELECT *:从数据表中读取的数据越多，查询操作速度就越慢。它增加了磁盘操作所需的时间。此外，当数据库服务器与Web服务器分开时，由于必须在服务器之间传输数据，将会有更长的网络延迟。指定你需要的列
+- 几乎总是有一个id字段:每个以id列为PRIMARY KEY的数据表中，优先选择AUTO_INCREMENT或者INT. VARCHAR字段作为主键（检索）速度较慢.一个可能的例外是"关联表"，用于两个表之间的多对多类型的关联。例如，"posts_tags"表中包含两列：post_id，tag_id，用于保存表名为"post"和"tags"的两个表之间的关系。这些表可以具有包含两个id字段的PRIMARY键。
+- 相比VARCHAR优先使用ENUM:ENUM枚举类型是非常快速和紧凑的。在内部它们像TINYINT一样存储，但它们可以包含和显示字符串值。一个字段只包含几种不同的值，请使用ENUM而不是VARCHAR
+- 通过PROCEDURE ANALYZE()获取建议：使用MySQL分析列结构和表中的实际数据，为你提供一些建议。它只有在数据表中有实际数据时才有用，因为这在分析决策时很重要。
+- 如果可以的话使用NOT NULL：问一下你自己在空字符串值和NULL值之间（对应INT字段：0 vs. NULL）是否有任何的不同.如果没有理由一起使用这两个。NULL列需要额外的空间，他们增加了你的比较语句的复杂度。
+- 预处理语句：预处理语句默认情况下会过滤绑定到它的变量，这对于避免SQL注入攻击极为有效。当然你也可以指定要过滤的变量。但这些方法更容易出现人为错误，也更容易被程序员遗忘。
+
+```
+if ($stmt = $mysqli->prepare("SELECT username FROM user WHERE state=?")) {
+$stmt->bind_param("s", $state);
+$stmt->execute();
+$stmt->bind_result($username);
+$stmt->fetch();
+printf("%s is from %sn", $username, $state);
+$stmt->close();
+}
+```
+
+- 无缓冲查询:通常当你从脚本执行一个查询，在它可以继续后面的任务之前将需要等待查询执行完成。你可以使用无缓冲的查询来改变这一情况。"mysql_unbuffered_query() 发送SQL查询语句到MySQL不会像 mysql_query()那样自动地取并缓冲结果行。这让产生大量结果集的查询节省了大量的内存，在第一行已经被取回时你就可以立即在结果集上继续工 作，而不用等到SQL查询被执行完成。"有一定的局限性。你必须在执行另一个查询之前读取所有的行或调用mysql_free_result() 。另外你不能在结果集上使用mysql_num_rows() 或 mysql_data_seek() 。
+- 使用 UNSIGNED INT 存储IP地址：在查询中可以使用 INET_ATON() 来把一个IP转换为整数，用 INET_NTOA() 来进行相反的操作。在 PHP 也有类似的函数，ip2long() 和 long2ip()。 `$r = "UPDATE users SET ip = INET_ATON('{$_SERVER['REMOTE_ADDR']}') WHERE user_id = $user_id";`
+- 固定长度（静态）的表会更快：所有列都是"固定长度"，那么这个表被认为是"静态"或"固定长度"的。不固定的列类型包括 VARCHAR、TEXT、BLOB等。即使表中只包含一个这些类型的列，这个表就不再是固定长度的，MySQL 引擎会以不同的方式来处理它。固定长度的表会提高性能，因为 MySQL 引擎在记录中检索的时候速度会更快。它们也易于缓存，崩溃后容易重建。不过它们也会占用更多空间
+- 垂直分区是为了优化表结构而对其进行纵向拆分的行为。将低频信息放到另一个表中，这样你的主用户表就会更小。如你所知，表越小越快。例子：last_login" 字段，用户每次登录网站都会更新这个字段，而每次更新都会导致这个表缓存的查询数据被清空。这种情况下你可以将那个字段放到另一张表里，保持用户表更新量最小。
+- 拆分大型DELETE或INSERT语句：执行大型DELETE或INSERT查询，则需要注意不要影响网络流量。当执行大型语句时，它会锁表并使你的Web应用程序停止。Apache运行许多并行进程/线程。 因此它执行脚本效率很高。所以服务器不期望打开过多的连接和进程，这很消耗资源，特别是内存。如果你锁表很长时间（如30秒或更长），在一个高流量的网站，会导致进程和查询堆积，处理这些进程和查询可能需要很长时间，最终甚至使你的网站崩溃。维护脚本需要删除大量的行，只需使用LIMIT子句，以避免阻塞。`while (1) { mysql_query("DELETE FROM logs WHERE log_date`
+- 越少的列越快:对于数据库引擎，磁盘可能是最重要的瓶颈。更小更紧凑的数据、减少磁盘传输量，通常有助于性能提高。如果已知表具有很少的行，则没有理由是主键类型为INT，可以用MEDIUMINT、SMALLINT代替，甚至在某些情况下使用TINYINT。 如果不需要完整时间记录，请使用DATE而不是DATETIME。
+- 选择正确的存储引擎:MyISAM适用于读取繁重的应用程序，但是当有很多写入时它不能很好地扩展。 即使你正在更新一行的一个字段，整个表也被锁定，并且在语句执行完成之前，其他进程甚至无法读取该字段。 MyISAM在计算SELECT COUNT（*）的查询时非常快。InnoDB是一个更复杂的存储引擎，对于大多数小的应用程序，它比MyISAM慢。 但它支持基于行的锁定，使其更好地扩展。 它还支持一些更高级的功能，比如事务。
+- 使用对象关系映射器（ORM, Object Relational Mapper）:ORM以"延迟加载"著称。这意味着它们仅在需要时获取实际值。但是你需要小心处理他们，否则你可能最终创建了许多微型查询，这会降低数据库性能。ORM还可以将多个查询批处理到事务中，其操作速度比向数据库发送单个查询快得多。PHP-ORM是Doctrine
+- 小心使用持久连接:持久连接意味着减少重建连接到MySQL的成本。 当持久连接被创建时，它将保持打开状态直到脚本完成运行。 因为Apache重用它的子进程，下一次进程运行一个新的脚本时，它将重用相同的MySQL连接。`mysql_pconnect()`,可能会出现连接数限制问题、内存问题等等。
