@@ -30,3 +30,4 @@ brew install node
 ## 扩展
 
 - [youzan/zan-tool](https://github.com/youzan/zan-tool):Zan Node Web 框架的配套开发工具，例如初始化一个新项目、新建一个 NPM 包、本地开发等。
+- [NodeOS](https://github.com/NodeOS/NodeOS)
