@@ -8,7 +8,7 @@
 
 # 安装
 
-- mac：brew install Caskroom/cask/atom
+- mac：brew cask install atom
 - Window： choco install atom
 
 # 启动
