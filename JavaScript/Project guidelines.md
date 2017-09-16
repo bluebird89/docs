@@ -4,7 +4,7 @@ A set of best practices for JavaScript projects
 
 [ENGLISH](./README.md) | [日本語版](./README-ja.md) | [한국어](./REAMDE-ko.md)
 
-[![](./images/hive-red-logo.png)](http://wearehive.co.uk/)
+[![](https://github.com/wearehive/project-guidelines/blob/masterhttps://github.com/wearehive/project-guidelines/blob/master/images/hive-red-logo.png)](http://wearehive.co.uk/)
 
 # 项目规范 · [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
@@ -48,7 +48,7 @@ JavaScript工程项目的一系列最佳实践策略
 
 ## 1\. Git
 
-![git](/images/branching.png)
+![git](https://github.com/wearehive/project-guidelines/blob/master/images/branching.png)
 
 ### 1.1 一些Git规则
 
@@ -217,7 +217,7 @@ JavaScript工程项目的一系列最佳实践策略
 
 ## 2\. 文档
 
-![文档](/images/documentation.png)
+![文档](https://github.com/wearehive/project-guidelines/blob/master/images/documentation.png)
 
 - 可以使用这个 [模板](./README.sample.md) 作为 `README.md` （的一个参考）, 随时欢迎添加里面没有的内容。
 - 对于具有多个存储库的项目，请在各自的 `README.md` 文件中提供它们的链接。
@@ -230,7 +230,7 @@ JavaScript工程项目的一系列最佳实践策略
 
 ## 3\. 环境
 
-![环境](/images/laptop.png)
+![环境](https://github.com/wearehive/project-guidelines/blob/master/images/laptop.png)
 
 - 如果需要，请分别定义 `development`, `test` 和 `production` 三个环境。
 
@@ -304,7 +304,7 @@ JavaScript工程项目的一系列最佳实践策略
 
 ## 4\. 依赖
 
-![依赖](/images/modules.png)
+![依赖](https://github.com/wearehive/project-guidelines/blob/master/images/modules.png)
 
 - 持续跟踪您当前的可用依赖包: 举个例子, `npm ls --depth=0`。[更多请阅读...](https://docs.npmjs.com/cli/ls)
 - 查看这些软件包是否未使用或者与开发项目无关: `depcheck`。 [更多请阅读...](https://www.npmjs.com/package/depcheck)
@@ -337,7 +337,7 @@ JavaScript工程项目的一系列最佳实践策略
 
 ## 5\. 测试
 
-![测试](/images/testing.png)
+![测试](https://github.com/wearehive/project-guidelines/blob/master/images/testing.png)
 
 - 如果需要，请构建一个 `test` 环境.
 
@@ -385,7 +385,7 @@ JavaScript工程项目的一系列最佳实践策略
 
 ## 6\. 结构布局与命名
 
-![结构布局与命名](/images/folder-tree.png)
+![结构布局与命名](https://github.com/wearehive/project-guidelines/blob/master/images/folder-tree.png)
 
 - 请围绕产品功能/页面/组件，而不是围绕角色来组织文件。此外，请将测试文件放在他们对应实现的旁边。
 
@@ -456,7 +456,7 @@ _为什么：_
 
 ## 7\. 代码风格
 
-![代码风格](/images/code-style.png)
+![代码风格](https://github.com/wearehive/project-guidelines/blob/master/images/code-style.png)
 
 ### 7.1 若干个代码风格指导
 
@@ -546,7 +546,7 @@ _为什么：_
 
 ## 8\. 日志
 
-![日志](/images/logging.png)
+![日志](https://github.com/wearehive/project-guidelines/blob/master/images/logging.png)
 
 - 避免在生产环境中使用客户端的控制台日志。
 
@@ -562,7 +562,7 @@ _为什么：_
 
 ## 9\. API
 
-![API](/images/api.png)
+![API](https://github.com/wearehive/project-guidelines/blob/master/images/api.png)
 
 ### 9.1 API 设计
 
@@ -848,7 +848,7 @@ _注意：尽可能保持安全异常消息的通用性。例如，别说`不正
 
 ## 10\. 证书
 
-![证书](/images/licensing.png)
+![证书](https://github.com/wearehive/project-guidelines/blob/master/images/licensing.png)
 
 确保您有权使用的这些资源。如果您使用其中的软件库，请记住先查询MIT，Apache或BSD（以更好地了解您所能够拥有的权限），但如果您打算修改它们，请查看许可证详细信息。图像和视频的版权可能会导致法律问题。
 
