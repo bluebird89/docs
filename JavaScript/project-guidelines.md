@@ -46,11 +46,7 @@ JavaScript工程项目的一系列最佳实践策略
 
 > - [许可](#licensing)
 
-[]()
-
 ## 1\. Git
-
-[]()
 
 ![git](/images/branching.png)
 
@@ -107,8 +103,6 @@ JavaScript工程项目的一系列最佳实践策略
   _为什么：_
 
   > 这样可以保护您的生产分支免受意外情况和不可回退的变更。 更多请阅读... [Github](https://help.github.com/articles/about-protected-branches/) 以及 [Bitbucket](https://confluence.atlassian.com/bitbucketserver/using-branch-permissions-776639807.html)
-
-[]()
 
 ### 1.2 Git 工作流
 
@@ -193,8 +187,6 @@ JavaScript工程项目的一系列最佳实践策略
     git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done
   ```
 
-[]()
-
 ### 1.3 如何写好提交说明
 
 坚持遵循关于提交的标准指南，会让在与他人合作使用Git时更容易。这里有一些经验法则 ([来源](https://chris.beams.io/posts/git-commit/#seven-rules)):
@@ -223,9 +215,7 @@ JavaScript工程项目的一系列最佳实践策略
 
 - 使用主体部分去解释 **是什么** 和 **为什么** 而不是 **怎么做**。
 
-  []()
-
-  ## 2\. 文档
+## 2\. 文档
 
 ![文档](/images/documentation.png)
 
@@ -237,8 +227,6 @@ JavaScript工程项目的一系列最佳实践策略
 - 不要把注释作为坏代码的借口。保持您的代码干净整洁。
 - 也不要把那些清晰的代码作为不写注释的借口。
 - 当代码更新，也请确保注释的同步更新。
-
-[]()
 
 ## 3\. 环境
 
@@ -261,8 +249,6 @@ JavaScript工程项目的一系列最佳实践策略
   _为什么：_
 
   > 它可能会将其他人从上小时的故障排查中解救。
-
-[]()
 
 ### 3.1 一致的开发环境:
 
@@ -296,8 +282,6 @@ JavaScript工程项目的一系列最佳实践策略
 
   > 您不能指望您的同事在自己的全局环境都安装了相应的模块，本地模块可以方便您分享您的工具。
 
-[]()
-
 ### 3.2 依赖一致性:
 
 - 确保您的团队成员获得与您完全相同的依赖。
@@ -317,8 +301,6 @@ JavaScript工程项目的一系列最佳实践策略
   _我不太喜欢 `Yarn` ：_
 
   > 居然不喜欢Yarn，太糟糕了。对于旧版本的`npm`，在安装新的依赖关系时使用 `-save --save-exact` ，并在发布之前创建`npm-shrinkwrap.json` 。 [更多请阅读...](https://docs.npmjs.com/files/package-locks)
-
-[]()
 
 ## 4\. 依赖
 
@@ -352,8 +334,6 @@ JavaScript工程项目的一系列最佳实践策略
   > 依赖关系更新有时包含破坏性更改。当显示需要更新时，请始终先查看其发行说明。并逐一地更新您的依赖项，如果出现任何问题，可以使故障排除更容易。可以使用类似 [npm-check-updates](https://github.com/tjunnone/npm-check-updates) 的酷炫工具（来解决这个问题）。
 
 - 检查包是否有已知的安全漏洞，例如： [Snyk](https://snyk.io/test?utm_source=risingstack_blog)。
-
-[]()
 
 ## 5\. 测试
 
@@ -402,8 +382,6 @@ JavaScript工程项目的一系列最佳实践策略
   _为什么：_
 
   > 这是您为其他开发者或者DevOps专家或者QA或者其他如此幸运能和您一起协作的人留下的便捷笔记。
-
-[]()
 
 ## 6\. 结构布局与命名
 
@@ -476,13 +454,9 @@ _为什么：_
 
   > 这样您就可以通过简单地导入其父文件夹直接使用您预期的组件或模块。
 
-[]()
-
 ## 7\. 代码风格
 
 ![代码风格](/images/code-style.png)
-
-[]()
 
 ### 7.1 若干个代码风格指导
 
@@ -554,8 +528,6 @@ _为什么：_
 
   > 它使源代码的可读性更好。
 
-[]()
-
 ### 7.2 强制的代码风格标准
 
 - 让您的编辑器提示您关于代码风格方面的错误。 请将[eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier) 与 [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) 和您目前的ESLint配置一起搭配使用。 [更多请阅读...](https://github.com/prettier/eslint-config-prettier#installation)
@@ -571,8 +543,6 @@ _为什么：_
   _为什么：_
 
   > 虽然`prettier`自身已经非常强大，但是每次将其作为单独的一个npm任务去格式化代码，并不是那么地高效。 这正是`lint-staged`（还有`husky`）可以解决的地方。关于如何配置 `lint-staged` 请阅读[这里](https://github.com/okonet/lint-staged#configuration) 以及如何配置 `husky` 请阅读[这里](https://github.com/typicode/husky)。
-
-[]()
 
 ## 8\. 日志
 
@@ -590,13 +560,9 @@ _为什么：_
 
   > 它通过添加着色、时间戳、log到控制台或者文件中，甚至是夜以继日地轮流log到文件，来减少故障排除中那些令人不愉快的事情。[更多请阅读...](https://blog.risingstack.com/node-js-logging-tutorial/)
 
-[]()
-
 ## 9\. API
 
 ![API](/images/api.png)
-
-[]()
 
 ### 9.1 API 设计
 
@@ -804,8 +770,6 @@ _注意：尽可能保持安全异常消息的通用性。例如，别说`不正
 
 - 分页，过滤和排序功能并不需要从所有资源一开始就要得到支持。记录下那些提供过滤和排序的资源。
 
-[]()
-
 ### 9.2 API 安全
 
 这些是一些基本的安全最佳实践：
@@ -846,8 +810,6 @@ _注意：尽可能保持安全异常消息的通用性。例如，别说`不正
 
   > 例如，接受`application/x-www-form-urlencoded`MIME类型可以允许攻击者创建一个表单并触发一个简单的POST请求。服务器不应该假定`Content-Type`。缺少`Content-Type`请求头或异常的`Content-Type`请求头，应该让服务器直接以`4XX`响应内容去拒绝请求。
 
-[]()
-
 ### 9.3 API 文档
 
 - 在[README.md模板](./README.sample.md)为API填写 `API Reference` 段落。
@@ -883,8 +845,6 @@ _注意：尽可能保持安全异常消息的通用性。例如，别说`不正
   ```
 
 - 使用API​​设计工具，有很多开源工具可用于提供良好的文档，例如 [API Blueprint](https://apiblueprint.org/) and [Swagger](https://swagger.io/).
-
-[]()
 
 ## 10\. 证书
 
