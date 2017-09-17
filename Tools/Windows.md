@@ -1,4 +1,6 @@
-# 工具
+# Windows
+
+## 工具
 
 - launchy Wox Rolan
 - markdown编辑器: 作业部落 MarkdownPad(需要浏览器渲染插件awesome) MarkPad
@@ -10,7 +12,16 @@
 - 同步工具：goodsync
 - 词典：GoldenDict
 - vagrant
+- VistaSwitcher：程序切换工具
+- StrokeIt:让鼠标手势无处不在
+- Rolan 轻量级桌面启动器
+- Listary :Windows 文件浏览增强工具
+- f.lux 随时间改变屏幕色温
+- RSS:深蓝阅读 theoldreader
 - Foxit Reader
+- editor：Visual Studio Code
+- 命令行：xshell
+- CCleaner, Defraggler, Recuva & Speccy.
 - [Chocolatey](https://chocolatey.org/):The package manager for Windows Software Management Automation
 
   ```
@@ -18,26 +29,7 @@
   @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
   ```
 
-- VistaSwitcher：程序切换工具
-
-- StrokeIt:让鼠标手势无处不在
-
-- Rolan 轻量级桌面启动器
-
-- Listary :Windows 文件浏览增强工具
-- f.lux 随时间改变屏幕色温
-- RSS:深蓝阅读 theoldreader
-- editor：Visual Studio Code
-
-```
-choco search python php birtualbox jdk8 cclear
-choco uninstall python
-```
-
-- 命令行：xshell
-- CCleaner, Defraggler, Recuva & Speccy.
-
-# 配置
+## 配置
 
 添加自启动：启动文件放在C:\Users\henryli\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 
@@ -47,7 +39,7 @@ choco uninstall python
 - TIM
 - Youdao
 - Sticky Notes
-- 支持bash：在启用或关闭 Windows 功能，开启Windows Subsystem for linux (Beta)，通过bash切换到bash
+- 支持bash：在启用或关闭 Windows 功能，开启Windows Subsystem for linux (Beta)，通过bash切换到bash[参考](https://blog.jessfraz.com/post/windows-for-linux-nerds/)
 
   ```
   PowerShell as Administrator and run:
@@ -56,7 +48,7 @@ choco uninstall python
   cmd + r input:bash download ubuntu
   ```
 
-# 快捷键
+## 快捷键
 
 - alt+tab：长按为显示任务列表，短切为与上次任务切换
 - WIN+D：窗口最小化，显示桌面，再按一次还原桌面；
@@ -117,10 +109,11 @@ ipconfig /flushdns：刷新域名
 - Win+T to cycle through the taskbar icons
 - Win + d：删除文件
 
-## 数据库
-
-### mysql
+## 软件安装
 
 ```
+choco search python php birtualbox jdk8 cclear
+choco uninstall python
+
 choco install mysql.workbench
 ```
