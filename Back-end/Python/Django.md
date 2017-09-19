@@ -1,6 +1,6 @@
 # Django
 
-自身带有轻量级服务器，部署用 Apache with mod_wsgi
+自身带有轻量级服务器，部署用 Apache with mod_wsgi，每个django项目中可以包含多个APP，相当于一个大型项目中的分系统、子模块、功能部件等等，相互之间比较独立，但也有联系。
 
 ## 编译安装
 
@@ -16,6 +16,7 @@ sudo python3 setup.py install  //会注册脚本django-admin.py...
 
 ```
 django-admin.py startproject Django_app //新建项目
+python3 manage.py startapp cmdb
 cd Django_app
 python3 manage.py migrate
 python3 manage.py runserver
