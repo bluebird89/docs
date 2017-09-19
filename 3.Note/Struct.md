@@ -47,8 +47,6 @@
   - [Phalcon](https://phalconphp.com)
   - [Symfony](http://symfony.com/)
 
-  - sinri/enoch
-
 ## 数据库
 
 - MySQL数据库、事务及SQL优化
@@ -87,8 +85,6 @@
 - 高性能大容量系统架构设计和推进实施经验
 - 能有效协调各方资源
 - 工具集的使用与配置
-
-  - 博客HEXO
 
 ## 意识
 
