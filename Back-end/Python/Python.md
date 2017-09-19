@@ -20,7 +20,7 @@ brew install pyenv
 
 Wheels are the new standard of python distribution and are intended to replace eggs.`pip install wheel`
 
-## 包管理工具easy_install.py和pip第三方包的安装管理
+## 包管理工具easy_install.py和pip(pip3 python3)第三方包的安装管理
 
 Python2.7的安装包中，easy_install.py是默认安装的，而pip需要我们手动安装
 

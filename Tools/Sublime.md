@@ -78,28 +78,24 @@ E585BBA1 2538C270 E2E857C2 194283CA
 - Packages文件目录：Preferences > Browse Packages 打开文件夹 Installed Packages 下看到所安装的各类包,windows中~\AppData\Roaming\Sublime Text 3\Packages\User
 - [配置同步:同步Packages/User文件夹](https://packagecontrol.io/docs/syncing)
 
-  ```
-  通过云端工具git 网盘
-  # Close Sublime Text
-  # Open Terminal
-  cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-  mkdir ~/Dropbox/Sublime
-  mv User ~/Dropbox/Sublime/
-  ln -s ~/Dropbox/Sublime/User
-  # other machine
-  cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-  rm -r User
-  ln -s ~/Dropbox/Sublime/User
-  ```
+```
+通过云端工具git 网盘
+# Close Sublime Text
+# Open Terminal
+cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
+mkdir ~/Dropbox/Sublime
+mv User ~/Dropbox/Sublime/
+ln -s ~/Dropbox/Sublime/User
+# other machine
+cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
+rm -r User
+ln -s ~/Dropbox/Sublime/User
+```
 
 - 用户配置Preferences.sublime-settings： Preferences > setting
-
 - 包管理文件：Package Control.sublime-settings
-
 - 插件管理文件：
-
 - 主题目录识别：在包文件下Theme - Monokai Pro
-
 - 自定义快捷键Default (Windows).sublime-keymap:Preferences -> Key Bindings - User
 - 代码片段：
 
@@ -143,44 +139,32 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
 - HTML-CSS-JS Prettify：格式化（美化）html、css、js三种文件类型的插件
 - SublimeTmpl：文件模板都在插件目录的templates
 
-  ```
-  ctrl+alt+h html
-  ctrl+alt+j javascript
-  ctrl+alt+c css
-  ctrl+alt+p php
-  ctrl+alt+r ruby
-  ctrl+alt+shift+p python
-  ```
+```
+ctrl+alt+h html
+ctrl+alt+j javascript
+ctrl+alt+c css
+ctrl+alt+p php
+ctrl+alt+r ruby
+ctrl+alt+shift+p python
+```
 
 - Markdown Preview
-
 - MarkdownEditing
-
 - SublimeTableEditor:markdown表格插件
 
-  ```
-  表头：|Name|Phone + tab
-  删除：Alt + Shift + 左/右/上/下/
-  移动：Alt + 左/右/上/下/
-  ```
+```
+表头：|Name|Phone + tab
+删除：Alt + Shift + 左/右/上/下/
+移动：Alt + 左/右/上/下/
+```
 
 - Git:Plugin for some git integration into sublime text
-
-  <div>
-  </div>
-
 - Doc​Blockr: Simplifies writing DocBlock comments in Javascript, PHP, CoffeeScript, Actionscript, C & C++
-
 - sublime-text-git
-
 - Alignment：进行智能对齐。
-
 - SublimeCodeIntel:code intelligence and smart autocomplete engine
-
 - GitGutter:see git diff in gutter
-
 - GoSublime:A Golang plugin collection for SublimeText 3
-
 - Bootstrap 3 Snippets:A sublime plugin complete with Bootstrap 3 snippets
 
   ```
@@ -301,22 +285,19 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
 - a[href="<http://www.baidu.com"]{百度}>
 - 递增：
 
-  - ul>li.item${item$$}*5
-  - h$[title=item$]{Header $}*3(添加属性)
-  - ul>li.item$$$*5(多个占位符)
-  - ul>li.item$@-*5(逆序)
-  - ul>li.item$@3_5(定位起始符) div#v$@3_5
+```
+ul>li.item${item$$}*5
+h$[title=item$]{Header $}*3(添加属性)
+ul>li.item$$$*5(多个占位符)
+ul>li.item$@-*5(逆序)
+ul>li.item$@3_5(定位起始符) div#v$@3_5
+```
 
 - 包含多个类：p.class1.class2.class3
-
 - 自定义属性：p[title='hello'] td[rowspan=2 colspan=3 title]
-
 - 文本：{}
-
 - 隐标签：ul>.class table>.row>.col
-
 - a:link a:mail meta:utf
-
 - form：get
 
 # 检查
