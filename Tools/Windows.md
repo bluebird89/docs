@@ -116,4 +116,6 @@ choco search python php birtualbox jdk8 cclear
 choco uninstall python
 
 choco install mysql.workbench
+
+cinst Atom
 ```
