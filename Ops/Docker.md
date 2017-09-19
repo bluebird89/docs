@@ -66,9 +66,7 @@ docker rm name
 # 运行方式
 
 - 短暂方式：就是刚刚的那个"hello world"，命令执行完后，container就终止了，不过并没有消失，可以用 sudo docker ps -a 看一下所有的container，第一个就是刚刚执行过的container，可以再次执行一遍： linjiqin@ubuntu:~$ sudo docker start container_id：不过这次看不到"hello world"了，只能看到ID，用logs命令才能看得到：linjiqin@ubuntu:~$ sudo docker logs container_id可以看到两个"hello world"，因为这个container运行了两次。
-
 - 交互方式：linjiqin@ubuntu:~$ sudo docker run -i -t image_name /bin/bash #image_name为docker镜像名称 -t:在新容器内指定一个伪终端或终端。 -i:允许你对容器内的标准输入 (STDIN) 进行交互
-
 - daemon方式：即让软件作为长时间服务运行，这就是SAAS啊！例如，一个无限循环打印的脚本(替换为memcached、apache等，操作方法仍然不变！)：linjiqin@ubuntu:~$ CONTAINER_ID=$(sudo docker run -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done") --name标识来命名容器 -P:是容器内部端口随机映射到主机的高端口 -p : 是容器内部端口绑定到指定的主机端口。 docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py 查看端口： docker port adoring_stonebraker 5002
 
 # 构建镜像
