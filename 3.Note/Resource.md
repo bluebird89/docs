@@ -1,0 +1,1 @@
+- [sindresorhus/awesome](https://github.com/sindresorhus/awesome) Curated list of awesome lists

@@ -137,6 +137,7 @@ laravel->symfony
 ## 社区
 
 - [coffeephp](http://coffeephp.com/)
+- [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
 
 <http://www.jianshu.com/p/a5d905778b47>
 
@@ -148,6 +149,7 @@ $GLOBALS['HTTP_RAW_POST_DATA']
 - [youzan/zan](https://github.com/youzan/zan)高效稳定、安全易用、线上实时验证的全异步高性能网络库，通过PHP扩展方式使用。
 - [HanSon/youzan-sdk](https://github.com/HanSon/youzan-sdk)有赞 SDK
 - [hprose/hprose-php](https://github.com/hprose/hprose-php)Hprose is a cross-language RPC
+- [awesome-php](https://github.com/ziadoz/awesome-php)
 
 ## [PHP发展](https://segmentfault.com/a/1190000008888700)
 

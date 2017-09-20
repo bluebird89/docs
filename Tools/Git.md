@@ -706,3 +706,8 @@ Agis Anastasopoulos / [@agisanast](https://twitter.com/agisanast) / <http://agis
 - 写wiki：处理非结构化的页面集合
 - GitHub Pages + JekyII 将以最漂亮的主题来呈现你的 README.md
 - 直接修改仓库文件会创建分支
+
+
+## 扩展
+- Git User Manual：客户端含有的文档
+- [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet)
