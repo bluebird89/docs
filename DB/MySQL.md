@@ -28,6 +28,7 @@ mysql.server start
 
 - SQL，指结构化查询语言，全称是 Structured Query Language.
 - RDBMS 指关系型数据库管理系统，全称 Relational Database Management System。
+- DBMS:关联表公共字段的名字可以不一样，但是数据类型必须一样
 - 数据库操作：
 
   - CREATE DATABASE - 创建新数据库
@@ -91,14 +92,8 @@ sudo apt-get install mysql-proxy
 - 命令行
 
   ```
-  net start/stop nmysql
+  net start/stop mysql
   ```
-
-- phpMyadmin
-
-## 关系型数据库概念与结构
-
-DBMS:关联表公共字段的名字可以不一样，但是数据类型必须一样
 
 ## 配置文件my.ini
 
@@ -219,17 +214,17 @@ DBMS:关联表公共字段的名字可以不一样，但是数据类型必须一
 
   - 记录
 
-  - 添加 更新与删除数据(新增与修改不用添加TABLE关键字)：
+    + 添加 更新与删除数据(新增与修改不用添加TABLE关键字)：
 
-    ```
-    INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…);
-    INSERT INTO table_name values (null,值,....);全字段插入，自动增长列用null
-    INSERT INTO table_name values (null,值,....),(null,值,....),(null,值,....);插入多条数据
-    INSERT INTO table_name set volumn1=value1,volumn3=value3,volumn3=value3;
-    UPDATE table_name  SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件];
-    SELECT [DISTINCT] 字段列表 |* FROM table_name [WHERE条件][ORDER BY排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
-    DELETE FROM table_name [WHERE条件];
-    ```
+      ```
+      INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…);
+      INSERT INTO table_name values (null,值,....);全字段插入，自动增长列用null
+      INSERT INTO table_name values (null,值,....),(null,值,....),(null,值,....);插入多条数据
+      INSERT INTO table_name set volumn1=value1,volumn3=value3,volumn3=value3;
+      UPDATE table_name  SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件];
+      SELECT [DISTINCT] 字段列表 |* FROM table_name [WHERE条件][ORDER BY排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
+      DELETE FROM table_name [WHERE条件];
+      ```
 
   - 清空数据表:
 
@@ -273,13 +268,9 @@ DBMS:关联表公共字段的名字可以不一样，但是数据类型必须一
     - char(M) 固定长度 0-255个字符 char(11) //最多只能存储11个字节
     - varchar(M) 自动伸缩型:比固定长度类型占用更少的存储空间，只占用需要的空间,使用额外的1到2字节存储长度，列小于255使用1字节保存长度，大于255使用2字节保存，varchar保留字符串末尾的空格 0-65535个字节 M为字符个数，M为最大值
     - blob和text唯一区别就是blob保存二进制数据、没有字符集和排序规则。
-
     - tinytext: 2^8-1
-
     - text 2^16-1
-
     - mediumtext 中型文本型 2^24-1 0－1677个字符
-
     - longtext 大型文本 2^32-1 0-42亿个字符
 
   - 日期时间(发布日期"这样的数据时，请用时间戳来存)：
@@ -297,11 +288,8 @@ DBMS:关联表公共字段的名字可以不一样，但是数据类型必须一
   - DEFAULT value，给该列定一个默认值。value的值只能是整型、字符型。
   - DEFAULT 1 ，默认值为整型
   - DEFAULT "男" ，默认值为字符型
-
   - PRIMARY KEY，指定该列主键，值是唯一的，不能重复。
-
   - AUTO_INCREMENT，指定列的值是自动增长型。 注意：一个数据表，只能有一个主键和一个自动增长型。 提示：数据表的id字段，必须要有 not null primary key auto_incremtn 这三个属性。
-
   - where结构：
 
     - 运算符：＝ ＜ ＞ ＜＝ ＞＝ !＝ ＜＞ is not null IS NULL
@@ -338,7 +326,6 @@ DBMS:关联表公共字段的名字可以不一样，但是数据类型必须一
   - 更小的通常更好：更小的数据类型通常更快，占用更少的磁盘、 内存和CPU缓存， 并且处理时需要的CPU周期也更少。
   - 简单就好： 简单数据类型的操作通常需要更少的CPU周期。 例如， 整型比字符操作代价更低， 因为字符集和校对规则（排序规则 ）使字符比较比整型比较更复杂。
   - 尽量避免NULL： 如果查询中包含可为NULL 的列， 对MySQL来说更难优化， 因为可为NULL 的列 使得索引、 索引统计和值比较都更复杂。 可为 N ULL的列会使用更多的存储空间， 在MySQL里也需要特殊处理。 当可为NULL的列被索引时， 每个索引记录需要一个额 外的字节， 在MyISAM 里甚至还可能导致固定大小的索引（例如只有一个整数列的索引）变成可变大小的索引。例外， lnnoDB 使用单独的位 (bit) 存储NULL 值， 所以对于稀疏数据有很好的空间效率。
-
   - 整数类型
 
     - 有两种类型的数字：整数 (whole number) 和实数 (real number) 。 如果存储整数， 可以使用这几种整数类型：TINYINT, SMALLINT, MEDIUMINT, INT, BIGINT。分别使用8,16, 24, 32, 64位存储空间。 整数类型有可选的 UNSIGNED 属性，表示不允许负值，这大致可以使正数的上限提高一倍。 例如 TINYINT. UNSIGNED 可以存储的范围是 0 - 255, 而 TINYINT 的存储范围是 -128 -127 。有符号和无符号类型使用相同的存储空间，并具有相同的性能 ， 因此可以根据实际情况选择合适的类型。 你的选择决定 MySQL 是怎么在内存和磁盘中保存数据的。 然而， 整数计算一般使用64 位的 BIGINT 整数， 即使在 32 位环境也是如此。（ 一些聚合函数是例外， 它们使用DECIMAL 或 DOUBLE 进行计算）。 MySQL 可以为整数类型指定宽度， 例如 INT(11), 对大多数应用这是没有意义的：它不会限制值的合法范围，只是规定了MySQL 的一些交互工具（例如 MySQL 命令行客户端）用来显示字符的个数。 对千存储和计算来说， INT(1) 和 INT(20) 是相同的。
@@ -379,9 +366,7 @@ DBMS:关联表公共字段的名字可以不一样，但是数据类型必须一
 ## group by查询松散索引扫描（Loose Index Scan）与紧凑索引扫描（Tight Index Scan）[链接]（<http://isky000.com/database/mysql_group_by_implement）>
 
 - 正常流程 group by操作在没有合适的索引可用的时候，通常先扫描整个表提取数据并创建一个临时表，然后按照group by指定的列进行排序。在这个临时表里面，对于每一个group的数据行来说是连续在一起的。完成排序之后，就可以发现所有的groups，并可以执行聚集函数（aggregate function）。可以看到，在没有使用索引的时候，需要创建临时表和排序。在执行计划中通常可以看到"Using temporary; Using filesort"。
-
 - 通过索引 MySQL建立的索引（B+Tree）通常是有序的，如果通过读取索引就完成group by操作，那么就可避免创建临时表和排序。因而使用索引进行group by的最重要的前提条件是所有group by的参照列（分组依据的列）来自于同一个索引，且索引按照顺序存储所有的keys（即BTREE index，而HASH index没有顺序的概念）。松散索引扫描和紧凑索引扫描的最大区别是是否需要扫描整个索引或者整个范围扫描。
-
 - 松散索引扫描方式下，分组操作和范围预测（如果有的话）一起执行完成的。不需要连续的扫描索引中得每一个元组，扫描时仅考虑索引中得一部分。当查询中没有where条件的时候，松散索引扫描读取的索引元组的个数和groups的数量相同。如果where条件包含范围预测，松散索引扫描查找每个group中第一个满足范围条件，然后再读取最少可能数的keys。松散索引扫描只需要读取很少量的数据就可以完成group by操作，因而执行效率非常高，执行计划中Etra中提示" using index for group-by"。松散索引扫描可以作用于在select list中其它形式的聚集函数，除了min()和max()之外，还支持：
 
 1）AVG(DISTINCT), SUM(DISTINCT)和COUNT(DISTINCT)可以使用松散索引扫描。AVG(DISTINCT), SUM(DISTINCT)只能使用单一列作为参数。而COUNT(DISTINCT)可以使用多列参数。 2）在查询中没有group by和distinct条件。 3）之前声明的松散扫描限制条件同样起作用。
