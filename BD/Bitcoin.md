@@ -36,3 +36,4 @@ termianl1:open 5000
 terminal2:connect localhost 5000
 termianl1:bl + tab
 ```
+https://www.zhihu.com/question/27687960/answer/84583016
