@@ -21,10 +21,12 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)
 - [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)
 - [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
+- [herrbischoff/awesome-osx-command-line](https://github.com/herrbischoff/awesome-osx-command-line)
 - iphone,只能同步一台设备itunes配置
 - 设置未收录的开发者应用`sudo spctl --master-disable`
 - [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
 - [Terminal](https://github.com/nicolashery/mac-dev-setup)
+- [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
 
 ## 键位
 
@@ -211,6 +213,8 @@ Run "\\192.168.0.4" 来访问其他机器共享的目录
 ```
 
 ## 软件
+
+[jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers. 
 
 ### 安装
 

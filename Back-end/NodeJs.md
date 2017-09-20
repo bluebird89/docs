@@ -31,3 +31,6 @@ brew install node
 
 - [youzan/zan-tool](https://github.com/youzan/zan-tool):Zan Node Web 框架的配套开发工具，例如初始化一个新项目、新建一个 NPM 包、本地开发等。
 - [NodeOS](https://github.com/NodeOS/NodeOS)
+- [sindresorhus/awesome-electron](https://github.com/sindresorhus/awesome-electron)Useful resources for creating apps with Electron
+- [sindresorhus/awesome-nodejs](https://github.com/sindresorhus/awesome-nodejs)Delightful Node.js packages and resources 
+http://blog.csdn.net/u012939368/article/details/77444889

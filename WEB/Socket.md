@@ -20,3 +20,17 @@ Socket利用网间网通信设施实现进程通信，但它对通信设施的�
 
 socket则是对TCP/IP协议的封装和应用。也可以说，TPC/IP协议是传输层协议，主要解决数据 如何在网络中传输，而HTTP是应用层协议，主要解决如何包装数据。ocket编程接口在设计的时候，就希望也能适应其他的网络协议。
 TCP/IP也要提供可供程序员做网络开发所用的接口，这就是Socket编程接口。
+
+
+## 资源
+
+[Workerman](https://github.com/walkor/Workerman)An asynchronous event driven PHP framework for easily building fast, scalable network applications. Supports HTTP, Websocket, SSL and other custom protocols. Supports libevent, HHVM, ReactPHP. 
+
+
+http://blog.csdn.net/hguisu/article/details/7445768/ 
+
+http://blog.csdn.net/hguisu/article/details/7444092
+http://blog.csdn.net/hguisu/article/details/7448528
+http://blog.csdn.net/tongdoudpj/article/details/1750045
+https://www.zhihu.com/question/20215561
+http://www.cnblogs.com/JohnTsai/p/5197646.html

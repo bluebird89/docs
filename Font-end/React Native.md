@@ -14,6 +14,8 @@
 - [react-native-guide](https://github.com/reactnativecn/react-native-guide)
 - [react-native-macos](https://github.com/ptmt/react-native-macos)
 - [storybook](https://github.com/storybooks/storybook)
+- [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native)
+- [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
 
 ## [安装](https://facebook.github.io/react-native/docs/getting-started.html)
 

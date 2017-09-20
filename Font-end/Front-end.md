@@ -486,5 +486,6 @@
 
 所有客户端都是前端
 
-
-http://geek.csdn.net/news/detail/237049
+## 扩展
+- http://geek.csdn.net/news/detail/237049
+- [dypsilon/frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
