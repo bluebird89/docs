@@ -72,3 +72,5 @@ Data Visualization
 ## 资源
 
 - [JavaScript深入系列15篇](https://juejin.im/post/59278e312f301e006c2e1510)
+- [sorrycc/awesome-javascript](https://github.com/sorrycc/awesome-javascript)
+- [avajs/ava](https://github.com/avajs/ava)Futuristic JavaScript test runner
