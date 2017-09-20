@@ -96,7 +96,7 @@ ln -s ~/Dropbox/Sublime/User
 - 包管理文件：Package Control.sublime-settings
 - 插件管理文件：
 - 主题目录识别：在包文件下Theme - Monokai Pro
-- 自定义快捷键Default (Windows).sublime-keymap:Preferences -> Key Bindings - User
+- 自定义快捷键Default (Windows).sublime-keymap:Preferences -> Key Bindings - Users
 - 代码片段：
 
 [插件管理工具安装](https://packagecontrol.io/installation)
