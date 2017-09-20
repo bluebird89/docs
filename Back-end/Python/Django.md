@@ -16,7 +16,7 @@ sudo python3 setup.py install  //会注册脚本django-admin.py...
 
 ```
 django-admin.py startproject Django_app //新建项目
-python3 manage.py startapp cmdb
+python3 manage.py startapp cmdb  //如果要使用模型，必须要创建一个app
 cd Django_app
 python3 manage.py migrate
 python3 manage.py runserver
@@ -34,3 +34,5 @@ python3 manage.py runserver
 - Django_app/wsgi.py: 一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目。
 
 <https://github.com/jcalazan/ansible-django-stack>
+
+## 服务器搭建
