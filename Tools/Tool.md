@@ -104,4 +104,8 @@ Please make sure to update tests as appropriate.
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/) ```
+[MIT](https://choosealicense.com/licenses/mit/)
+
+feedly导出OPML：https://feedly.com/i/opml
+
+

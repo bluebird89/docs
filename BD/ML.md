@@ -14,3 +14,4 @@
 ## 资源
 
 - [tensorflow/tensor2tensor](https://github.com/tensorflow/tensor2tensor)
+- [josephmisiti/awesome-machine-learning](https://github.com/josephmisiti/awesome-machine-learning)A curated list of awesome Machine Learning frameworks, libraries and software.

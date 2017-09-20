@@ -201,3 +201,7 @@ ssh username@remote_host ls /var/www
 - md5sum:它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
 - Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程。
 - ln:unix 里面的链接同 Windows 中的快捷方式类似，允许你快速地访问到一个特定的文件。`sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
+
+## 扩展
+
+- [aleksandar-todorovic/awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux)A list of awesome projects and resources that make Linux even more awesome

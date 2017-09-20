@@ -90,6 +90,9 @@ DATABASES = {
 ## 教程
 
 - [python3](http://www.runoob.com/python3)
+- [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
+- http://www.cnblogs.com/linhaifeng/p/7278389.html
+- http://www.cnblogs.com/linhaifeng/p/7278389.html
 
 ## basic
 
