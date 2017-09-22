@@ -86,3 +86,4 @@ docker build -t runoob/centos:6.7 .
 ## boot2docker
 
 -
+http://blog.csdn.net/gitchat/article/details/78021539
