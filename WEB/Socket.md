@@ -23,3 +23,5 @@ socket则是对TCP/IP协议的封装和应用。也可以说，TPC/IP协议是�
 <http://blog.csdn.net/hguisu/article/details/7445768/>
 
 <http://blog.csdn.net/hguisu/article/details/7444092> <http://blog.csdn.net/hguisu/article/details/7448528> <http://blog.csdn.net/tongdoudpj/article/details/1750045> <https://www.zhihu.com/question/20215561> <http://www.cnblogs.com/JohnTsai/p/5197646.html>
+
+http://blog.csdn.net/dragonyangang/article/details/77937042

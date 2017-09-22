@@ -161,9 +161,16 @@ https://answers.teambition.com/
 打点
 
 
-https://www.zhihu.com/question/22508677
+https://www.zhihu.com/question/22508677说
 
 
 建议中文读起来感觉很痛苦的同学，可以试试看英文版，技术类书籍，翻译过后理解难度很可能不是减少，而是增加。
 
 最近在看pro git ，它甚至号称学习git命令必须得首先了解它的实现，这就有点邪气了。然后我也就真的按他的说法来，发现确实无需了解实现就理解和学习命令的。于是，我发现这样的类似的层次分离问题，其实是比较常见的问题，所以不能太过求全，毕竟早年间的东西，出来的快，市场需要，再加上IT作家通常都并不擅长写作。想要学就得啃。晚近一点的，就会好很多。
+
+
+http://www.chinaz.com/start/2017/0921/806662.shtml
+http://www.chinaz.com/news/2017/0921/806647.shtml
+https://segmentfault.com/a/1190000011225200
+
+http://blog.csdn.net/gitchat/article/details/78021539

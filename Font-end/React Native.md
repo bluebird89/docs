@@ -66,3 +66,6 @@ react-native run-android
 
 - [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
 - [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.
+
+
+http://blog.csdn.net/gitchat/article/details/77978708
