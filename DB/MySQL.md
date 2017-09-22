@@ -29,6 +29,7 @@ mysql.server start
 - SQL，指结构化查询语言，全称是 Structured Query Language.
 - RDBMS 指关系型数据库管理系统，全称 Relational Database Management System。
 - DBMS:关联表公共字段的名字可以不一样，但是数据类型必须一样
+- 索引：存储引擎用于快速查找记录的一种数据结构，通过合理的使用数据库索引可以大大提高系统的访问性能。大大减轻了服务器需要扫描的数据量，从而提高了数据的检索速度；帮助服务器避免排序和临时表；可以将随机 I/O 变为顺序 I/O
 - 数据库操作：
 
   - CREATE DATABASE - 创建新数据库
@@ -49,8 +50,11 @@ mysql.server start
 
 - 索引操作
 
-  - CREATE INDEX - 创建索引（搜索键）
-  - DROP INDEX - 删除索引
+```
+ALTER TABLE 'table_name' ADD PRIMARY KEY'index_name' ('column');
+ALTER TABLE 'table_name' ADD UNIQUE/INDEX/FULLTEXT 'index_name' ('column');
+ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
+```
 
 # 主从复制
 
@@ -719,3 +723,63 @@ $stmt->close();
 - 选择正确的存储引擎:MyISAM适用于读取繁重的应用程序，但是当有很多写入时它不能很好地扩展。 即使你正在更新一行的一个字段，整个表也被锁定，并且在语句执行完成之前，其他进程甚至无法读取该字段。 MyISAM在计算SELECT COUNT（*）的查询时非常快。InnoDB是一个更复杂的存储引擎，对于大多数小的应用程序，它比MyISAM慢。 但它支持基于行的锁定，使其更好地扩展。 它还支持一些更高级的功能，比如事务。
 - 使用对象关系映射器（ORM, Object Relational Mapper）:ORM以"延迟加载"著称。这意味着它们仅在需要时获取实际值。但是你需要小心处理他们，否则你可能最终创建了许多微型查询，这会降低数据库性能。ORM还可以将多个查询批处理到事务中，其操作速度比向数据库发送单个查询快得多。PHP-ORM是Doctrine
 - 小心使用持久连接:持久连接意味着减少重建连接到MySQL的成本。 当持久连接被创建时，它将保持打开状态直到脚本完成运行。 因为Apache重用它的子进程，下一次进程运行一个新的脚本时，它将重用相同的MySQL连接。`mysql_pconnect()`,可能会出现连接数限制问题、内存问题等等。
+
+
+### B+Tree树结构的索引规则
+
+前缀索引：索引很长的字符列，这会增加索引的存储空间以及降低索引的效率。选择字符列的前n个字符作为索引，这样可以大大节约索引空间，从而提高索引效率。要选择足够长的前缀以保证高的选择性，同时又不能太长。无法使用前缀索引做ORDER BY 和 GROUP BY以及使用前缀索引做覆盖扫描。
+```
+CREATE TABLE user_test( 
+  id int AUTO_INCREMENT PRIMARY KEY, 
+  user_name varchar(30) NOT NULL,
+  sex bit(1) NOT NULL DEFAULT b'1', 
+  city varchar(50) NOT NULL,  
+  age int NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE user_test ADD INDEX idx_user(user_name , city , age);
+通过以下方法
+SELECT COUNT(DISTINCT index_column)/COUNT(*) FROM table_name; -- index_column代表要添加前缀索引的列，前缀索引的选择性比值，比值越高说明索引的效率也就越高效。
+SELECT COUNT(DISTINCT LEFT(index_column,1))/COUNT(*),COUNT(DISTINCT LEFT(index_column,2))/COUNT(*),COUNT(DISTINCT LEFT(index_column,3))/COUNT(*)
+...FROM table_name;
+ALTER TABLE table_name ADD INDEX index_name (index_column(length));
+```
+组合索引：创建索引列的顺序非常重要，正确的索引顺序依赖于使用该索引的查询方式.对于组合索引的索引顺序可以通过经验法则来帮助我们完成：将选择性最高的列放到索引最前列，该法则与前缀索引的选择性方法一致，但并不是说所有的组合索引的顺序都使用该法则就能确定，还需要根据具体的查询场景来确定具体的索引顺序。
+
+聚簇索引：决定数据在物理磁盘上的物理排序，一个表只能有一个聚集索引，如果定义了主键，那么 InnoDB 会通过主键来聚集数据，如果没有定义主键，InnoDB 会选择一个唯一的非空索引代替，如果没有唯一的非空索引，InnoDB 会隐式定义一个主键来作为聚集索引。
+聚集索引可以很大程度的提高访问速度，因为聚集索引将索引和行数据保存在了同一个 B-Tree 中，所以找到了索引也就相应的找到了对应的行数据，但在使用聚集索引的时候需注意避免随机的聚集索引（一般指主键值不连续，且分布范围不均匀）。如使用 UUID 来作为聚集索引性能会很差，因为 UUID 值的不连续会导致增加很多的索引碎片和随机I/O，最终导致查询的性能急剧下降。
+
+非聚集索引：与聚集索引不同的是非聚集索引并不决定数据在磁盘上的物理排序，且在 B-Tree 中包含索引但不包含行数据，行数据只是通过保存在 B-Tree 中的索引对应的指针来指向行数据，如：上面在（user_name，city, age）上建立的索引就是非聚集索引。
+
+覆盖索引：索引（如：组合索引）中包含所有要查询的字段的值，查看是否使用了覆盖索引可以通过执行计划中的Extra中的值为Using index
+
+#### 有效索引
+
+- 全值匹配：`SELECT * FROM user_test WHERE user_name = 'feinik' AND age = 26 AND city = '广州';`
+- 匹配最左前缀:可用于查询条件为：（user_name ）、（user_name, city）、（user_name , city , age）,满足最左前缀查询条件的顺序与索引列的顺序无关
+- 匹配范围值:`SELECT * FROM user_test WHERE user_name LIKE 'feinik%';`
+
+#### 无效索引
+
+```
+SELECT * FROM user_test WHERE city = '广州';
+SELECT * FROM user_test WHERE age= 26;
+SELECT * FROM user_test WHERE user_name like '%feinik';
+SELECT * FROM user_test WHERE user_name ='feinik' AND city LIKE'广州%' AND age = 26;//有某个列的范围查询,则其右边的所有列都无法使用索引优化查询
+SELECT * FROM user_test WHERE user_name = concat(user_name, 'fei'); // 索引列不能是表达式的一部分，也不能作为函数的参数
+SELECT user_name, city, age FROM user_test ORDER BY user_name, sex; // 不在索引列中
+SELECT user_name, city, age FROM user_test ORDER BY user_name ASC, city DESC; //方向不一致
+SELECT user_name, city, age, sex FROM user_test ORDER BY user_name;
+SELECT user_name, city, age FROM user_test WHERE user_name LIKE 'feinik%' ORDER BY city;
+```
+
+使用索引排序：ORDER BY 子句后的列顺序要与组合索引的列顺序一致，且所有排序列的排序方向（正序/倒序）需一致；所查询的字段值需要包含在索引列中，及满足覆盖索引。
+
+```
+SELECT user_name, city, age FROM user_test ORDER BY user_name;
+SELECT user_name, city, age FROM user_test ORDER BY user_name, city;
+SELECT user_name, city, age FROM user_test ORDER BY user_name DESC, city DESC;
+SELECT user_name, city, age FROM user_test WHERE user_name = 'feinik' ORDER BY city;
+```
+
+[索引性能分析](http://draveness.me/sql-index-performance.html)
+[MySQL主从同步](http://geek.csdn.net/news/detail/236754)

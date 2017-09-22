@@ -1,4 +1,12 @@
-# 安装
+# IDE
+
+- IntelliJ IDEA
+- PyCharm
+- PHPStrom
+- WebStorm
+- 
+
+## PHPStrom
 
 ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/local/bin/pstorm,IDE启动需要占用单独进程终端，可以`pstorm&`启动
 
