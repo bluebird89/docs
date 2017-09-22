@@ -92,4 +92,27 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 
 ## 扩展
 
-- 
+
+## IDE:IntelliJ IDEA
+
+[插件](https://plugins.jetbrains.com/idea):Rust Scala Go Android
+
+- Framework
+- Build Tools
+- Web Development
+- Version Controls
+- Test Tools
+- Applicatiaon servers
+- swing
+- Android
+
+## 框架
+- Spring
+
+
+
+http://www.jianshu.com/p/d51551b0a8ba
+http://www.jianshu.com/p/9caf1c755889
+http://www.jianshu.com/p/5681a1f0aad6
+http://www.jianshu.com/p/4a41ee88bd82
+http://www.jianshu.com/p/40d4c7aebd66
