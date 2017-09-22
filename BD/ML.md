@@ -15,3 +15,4 @@
 
 - [tensorflow/tensor2tensor](https://github.com/tensorflow/tensor2tensor)
 - [josephmisiti/awesome-machine-learning](https://github.com/josephmisiti/awesome-machine-learning)A curated list of awesome Machine Learning frameworks, libraries and software.
+- [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow)Computation using data flow graphs for scalable machine learning
