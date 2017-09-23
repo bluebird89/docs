@@ -92,6 +92,7 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 
 ## 扩展
 
+- [zhanglei-workspace/shopping-management-system](https://github.com/zhanglei-workspace/shopping-management-system)
 
 ## IDE:IntelliJ IDEA
 
@@ -107,12 +108,11 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 - Android
 
 ## 框架
+
 - Spring
 
+## 工具
 
+- Maven
 
-http://www.jianshu.com/p/d51551b0a8ba
-http://www.jianshu.com/p/9caf1c755889
-http://www.jianshu.com/p/5681a1f0aad6
-http://www.jianshu.com/p/4a41ee88bd82
-http://www.jianshu.com/p/40d4c7aebd66
+<http://www.jianshu.com/p/d51551b0a8ba> <http://www.jianshu.com/p/9caf1c755889> <http://www.jianshu.com/p/5681a1f0aad6> <http://www.jianshu.com/p/4a41ee88bd82> <http://www.jianshu.com/p/40d4c7aebd66>
