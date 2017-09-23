@@ -55,8 +55,13 @@ $ . ~/.profile
 
 - iPython - 更强大的python交互shell，支持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能和函数
 - Anaconda:有命令行与图形界面两种方式
+- jupyter
 
 ## 框架
+
+- [django/django](https://github.com/django/django)The Web framework for perfectionists with deadlines. <https://www.djangoproject.com/>
+- [pallets/flask](https://github.com/pallets/flask)A microframework based on Werkzeug, Jinja2 and good intentions <http://flask.pocoo.org/>
+- [tornadoweb/tornado](https://github.com/tornadoweb/tornado)Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed. <http://www.tornadoweb.org/>
 
 ### 通过pip安装Django
 
@@ -114,3 +119,23 @@ DATABASES = {
 - matplotlib
 - scikit-learn
 - pandas
+
+## 扩展
+
+- [faif/python-patterns](https://github.com/faif/python-patterns)A collection of design patterns/idioms in Python
+- [requests/requests](https://github.com/requests/requests)Python HTTP Requests for Humans™ ✨🍰✨ <http://python-requests.org>
+- [scrapy/scrapy](https://github.com/scrapy/scrapy)Scrapy, a fast high-level web crawling & scraping framework for Python. <https://scrapy.org>
+- [fchollet/keras](https://github.com/fchollet/keras)
+- [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide)
+- [ipython/ipython](https://github.com/ipython/ipython)
+- [binux/pyspider](https://github.com/binux/pyspider)A Powerful Spider(Web Crawler) System in Python. <http://docs.pyspider.org/>
+- [fabric/fabric](https://github.com/fabric/fabric)Simple, Pythonic remote execution and deployment. <http://fabfile.org>
+- [vinta/awesome-python](https://github.com/vinta/awesome-python)
+- []()
+- [keon/algorithms](https://github.com/keon/algorithms)Minimal examples of data structures and algorithms in Python
+
+## 工具
+
+- ipython:`pip3 install ipython`
+- [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
+- [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges)Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.

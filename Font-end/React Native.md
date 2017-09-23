@@ -16,6 +16,7 @@
 - [storybook](https://github.com/storybooks/storybook)
 - [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native)
 - [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
+- [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
 
 ## [安装](https://facebook.github.io/react-native/docs/getting-started.html)
 
@@ -67,5 +68,4 @@ react-native run-android
 - [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
 - [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.
 
-
-http://blog.csdn.net/gitchat/article/details/77978708
+<http://blog.csdn.net/gitchat/article/details/77978708>
