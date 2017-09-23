@@ -19,33 +19,10 @@
 - 网站web 手机应用app
 - 支付系统、图像集群、广告平台
 
-## 前端
-
-- HTML CSS
-- JavaScript ES6
-- jQuery
-- Node.js, React Native（客户端）
-- Vue
-- angular
-- electron
-
 ## 后端
 
-- Python
-- Scala
-- Ruby
-- Symfony
 - SOA，微服务架构
 - Go 的微服务架构
-- Java
-- PHP
-
-  - ThinkPHP
-  - [Laravel](https://laravel.com/)
-  - [Yii](http://www.yiiframework.com/)
-  - [CodeIgniter](https://codeigniter.com/)
-  - [Phalcon](https://phalconphp.com)
-  - [Symfony](http://symfony.com/)
 
 ## 数据库
 
@@ -61,12 +38,6 @@
 - 擅长高效设计和ETL workflows；
 - 熟悉机器学习如自然语言处理或预测建模。
 - 数据驱动 数据设计与构建
-
-## 运维
-
-- Linux
-- 容器化部署
-- Shell
 
 ## 测试
 
