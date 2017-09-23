@@ -24,6 +24,7 @@ Initial Coin Offering的简称，是一种以出售新的初始数字加密货�
 ## 扩展
 
 - [seanseany/blockchain-cli](https://github.com/seanseany/blockchain-cli)
+- [lhartikk/naivechain](https://github.com/lhartikk/naivechain)
 
 ```
 npm install blockchain-cli -g
@@ -36,4 +37,5 @@ termianl1:open 5000
 terminal2:connect localhost 5000
 termianl1:bl + tab
 ```
-https://www.zhihu.com/question/27687960/answer/84583016
+
+<https://www.zhihu.com/question/27687960/answer/84583016>
