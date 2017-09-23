@@ -172,6 +172,8 @@ Loaders：使用不同的loader，webpack有能力调用外部的脚本或工具
 
 Source Maps：webpack就可以在打包时为我们生成的source maps，这为我们提供了一种对应编译文件和源文件的方法，使得编译后的代码可读性更高，也更容易调试。
 
+Webpack 的默认配置文件只有一个，即 webpack.config.js
+
 ### 区别
 
 Gulp/Grunt是一种能够优化前端的开发流程的工具，而WebPack是一种模块化的解决方案，不过Webpack的优点使得Webpack在很多场景下可以替代Gulp/Grunt类的工具。
@@ -188,6 +190,7 @@ npm init
 // 安装Webpack
 npm install --save-dev webpack
 // 构建npm脚本
+npm run dev
 ```
 
 ### 配置文件
@@ -237,6 +240,44 @@ npm install --save-dev webpack
 - UglifyJsPlugin：压缩JS代码；
 - OccurenceOrderPlugin :为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
 - 缓存：一个哈希值添加到打包的文件名中，使用方法如下,添加特殊的字符串混合体（[name], [id] and [hash]）到输出文件名前 `filename: "bundle-[hash].js"`
+
+### [重构webpack配置文件](https://zhuanlan.zhihu.com/p/29161762):配置不同环境
+
+- 开发环境
+
+  - NODE_ENV 为 development
+  - 启用模块热更新（hot module replacement）
+  - 额外的 webpack-dev-server 配置项，API Proxy 配置项
+  - 输出 Sourcemap
+
+- 生产环境
+
+  - NODE_ENV 为 production
+  - 将 React、jQuery 等常用库设置为 external，直接采用 CDN 线上的版本
+  - 样式源文件（如 css、less、scss 等）需要通过 ExtractTextPlugin 独立抽取成 css 文件
+  - 启用 post-css
+  - 启用 optimize-minimize（如 uglify 等）
+  - 中大型的商业网站生产环境下，是绝对不能有 console.log() 的，所以要为 babel 配置 Remove console transform
+
+这里需要说明的是因为开发环境下启用了 hot module replacement，为了让样式源文件的修改也同样能被热替换，不能使用 ExtractTextPlugin，而转为随 JS Bundle 一起输出。
+
+package.json 里添加相应的配置：
+
+```
+{
+  ...
+  "scripts": {
+    "build": "webpack --optimize-minimize",
+    "dev": "webpack-dev-server --config webpack.dev.config.js",
+    "start": "npm run dev" // 或添加你自己的 start 逻辑
+  },
+  ...
+}
+```
+
+在开发环境下的时候，你需要使用 npm run dev 来启动，而在生产环境中，则用 npm run build 来发布。
+
+在真实场景中，我们不会直接使用 webpack-dev-server，而采用 express + webpack/webpack-dev-middleware
 
 ### 扩展功能
 

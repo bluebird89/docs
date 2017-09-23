@@ -114,6 +114,7 @@ $controller->register();
 - sphinx
 - swoole
 - xdebug
+- apc:op缓存
 
 TP参考：<https://github.com/ijry/lyadmin>
 
@@ -150,6 +151,7 @@ $GLOBALS['HTTP_RAW_POST_DATA']
 - [HanSon/youzan-sdk](https://github.com/HanSon/youzan-sdk)有赞 SDK
 - [hprose/hprose-php](https://github.com/hprose/hprose-php)Hprose is a cross-language RPC
 - [awesome-php](https://github.com/ziadoz/awesome-php)
+- [swoole/php-cp](https://github.com/swoole/php-cp)
 
 ## [PHP发展](https://segmentfault.com/a/1190000008888700)
 
@@ -164,3 +166,5 @@ $GLOBALS['HTTP_RAW_POST_DATA']
 - Vue.js 可以非常方便地实现数据和 DOM 元素的绑定。通过 Ajax 请求后台接口返回数据后，更新前端数据自动实现界面渲染。
 - React Native 是一个不错的选择
 - 深度学习/人工智能:自动驾驶、大数据分析、网络游戏、图像识别、语言处理等。当然现在普通的工程师可能还无法参与到人工智能产品中，但至少应该理解深度学习/人工智能的基本概念和原理。
+
+- <http://phpbestpractices.justjavac.com/>
