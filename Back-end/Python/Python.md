@@ -2,25 +2,63 @@
 
 编译器首先会进行语法检查，代码检查
 
-为了不带入过多的累赘，Python 3.0在设计的时候没有考虑向下兼容。不同版本的python.exe使用不同的命名，命令行中可以调用的到`python` `python3`
+为了不带入过多的累赘，Python 3.0在设计的时候没有考虑向下兼容。不同版本的python.exe使用不同的命名，命令行中可以调用的到`python` `python3`.virtualenv 和 virtualenvwrapper 来管理不同项目的依赖环境，通过 workon 、 mkvirtualenv 等命令进行虚拟环境切换
 
-## virtualenv
+## 环境控制
+
+### 版本管理工具pyenv:修改系统环境变量 PATH
+
+多版本python共存的环境工具，可以在不改变系统环境的情况下，可以随意切换不同python版本。基于某个版本开发的工具，在更换了不同python版本之后，就会导致工具中的某个模块、代码错误，而不能正常使用。
+
+```
+brew install pyenv
+
+pyenv versions   // 查看当前系统中所有可用的 Python 版本
+pyenv commands  
+pyenv install -l  //可使用版本列表
+pyenv install 3.5.1 // 安装
+pyenv uninstall 3.5.1
+pyenv which python // 显示路径
+pyenv global 3.5.2  // 从三个维度来管理 Python 环境，简称为： 当前系统 、 当前目录 、 当前shell 。这三个维度的优先级从左到右依次升高，即 当前系统 的优先级最低、 当前shell 的优先级最高。
+pyenv local 3.5.2
+pyenv shell 3.5.2
+
+$ curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
+export PATH=$HOME/.pyenv/bin:$PATH  //加进系统的环境变量 ～／.zshrc
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)" 
+
+pyenv -v
+pyenv doctor
+pyenv update
+pyenv install --list
+cat ~/.pyenv/version
+pyenv version
+```
 
 ### 虚拟沙盒virtualenv
 
 virtualenv为应用提供了隔离的Python运行环境，解决了不同应用间多版本的冲突问题。
 
-### 版本管理工具pyenv:
-
-多版本python共存的环境工具，可以使我们在不改变系统环境的情况下，可以随意切换不同python版本。基于某个版本开发的工具，在更换了不同python版本之后，就会导致工具中的某个模块、代码错误，而不能正常使用。
-
 ```
-brew install pyenv
+pip install virtualenv
+virtualenv --no-site-packages app_env
+source app_env/bin/activate
+deactivate
 
-pyenv versions  
-pyenv install -l  //可使用版本列表
-pyenv install 3.5.1 // 安装
-pyenv which python // 显示路径
+brew install pyenv-virtualenv  // 集成安装
+virtualenv
+virtualenv-delete
+virtualenv-init
+virtualenv-prefix
+virtualenvs
+
+pyenv virtualenvs // 看到本地所有的项目环境
+pyenv virtualenv 3.5.0 v_env_3.5.0
+pyenv activate v_env_3.5.0
+pyenv deactivate
+pyenv uninstall v_env_3.5.0
+pyenv virtualenv PYTHON_VERSION PROJECT_NAME
 ```
 
 ## wheel

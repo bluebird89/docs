@@ -96,16 +96,7 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 
 ## IDE:IntelliJ IDEA
 
-[插件](https://plugins.jetbrains.com/idea):Rust Scala Go Android
-
-- Framework
-- Build Tools
-- Web Development
-- Version Controls
-- Test Tools
-- Applicatiaon servers
-- swing
-- Android
+[插件库](https://plugins.jetbrains.com/idea):
 
 ## 框架
 
