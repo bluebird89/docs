@@ -4,16 +4,23 @@
 
 为了不带入过多的累赘，Python 3.0在设计的时候没有考虑向下兼容。不同版本的python.exe使用不同的命名，命令行中可以调用的到`python` `python3`
 
-## 版本管理工具pyenv virtualenv
+## virtualenv
 
 ### 虚拟沙盒virtualenv
 
-### pyenv
-
 virtualenv为应用提供了隔离的Python运行环境，解决了不同应用间多版本的冲突问题。
+
+### 版本管理工具pyenv:
+
+多版本python共存的环境工具，可以使我们在不改变系统环境的情况下，可以随意切换不同python版本。基于某个版本开发的工具，在更换了不同python版本之后，就会导致工具中的某个模块、代码错误，而不能正常使用。
 
 ```
 brew install pyenv
+
+pyenv versions  
+pyenv install -l  //可使用版本列表
+pyenv install 3.5.1 // 安装
+pyenv which python // 显示路径
 ```
 
 ## wheel
@@ -54,7 +61,7 @@ $ . ~/.profile
 ## 工具
 
 - iPython - 更强大的python交互shell，支持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能和函数
-- Anaconda:有命令行与图形界面两种方式
+- [Anaconda](https://github.com/DamnWidget/anaconda):有命令行与图形界面两种方式,Anaconda turns your Sublime Text 3 in a full featured Python development IDE including autocompletion, code linting, IDE features, autopep8 formating, McCabe complexity checker Vagrant and Docker support for Sublime Text 3 using Jedi, PyFlakes, pep8, MyPy, PyLint, pep257 and McCabe that will never freeze your Sublime Text 3
 - jupyter
 
 ## 框架
@@ -69,6 +76,8 @@ $ . ~/.profile
 sudo apt-get install python-pip
 pip install --upgrade pip
 pip install Django==1.11.3
+
+pip3 install Django
 ```
 
 - 建立项目： `django-admin.py startproject app`
@@ -89,7 +98,7 @@ DATABASES = {
 
 - 数据库迁移到mysql准备：sudo apt-get install python-mysqldb
 - 数据迁移：python manage.py migrate
-- 运行服务：python manage.py runserver 127.0.0.1:8080
+- 运行服务：python manage.py runserver
 - 进入管理页面：127.0.0.1：8080/admin
 
 ## 搭建服务器todo
@@ -110,7 +119,7 @@ DATABASES = {
 ## 插件
 
 - [xadmin](https://github.com/sshwsfc/xadmin) [文档](https://xadmin.readthedocs.io/en/latest/index.html)
-- [django-bootstrap-toolkit]()
+- [django-bootstrap-toolkit](https://github.com/dyve/django-bootstrap-toolkit)
 
 ## 库
 
@@ -139,3 +148,47 @@ DATABASES = {
 - ipython:`pip3 install ipython`
 - [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
 - [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges)Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
+
+### Anaconda
+
+专注于数据分析的Python发行版本，包含了conda、Python等190多个科学包及其依赖项。适用于企业级大数据分析的Python工具。其包含了720多个数据科学相关的开源包，在数据可视化、机器学习、深度学习等多方面都有涉及。不仅可以做数据分析，甚至可以用在大数据和人工智能领域。
+
+conda 是开源包（packages）和虚拟环境（environment）的管理系统。
+
+- packages 管理： 可以使用 conda 来安装、更新 、卸载工具包 ，并且它更关注于数据科学相关的工具包。在安装 anaconda 时就预先集成了像 Numpy、Scipy、 pandas、Scikit-learn 这些在数据分析中常用的包。另外值得一提的是，conda 并不仅仅管理Python的工具包，它也能安装非python的包。比如在新版的 Anaconda 中就可以安装R语言的集成开发环境 Rstudio。
+- 虚拟环境管理： 在conda中可以建立多个虚拟环境，用于隔离不同项目所需的不同版本的工具包，以防止版本上的冲突。
+
+#### 使用
+
+- Anaconda Navigator ：用于管理工具包和环境的图形用户界面，后续涉及的众多管理命令也可以在 Navigator 中手工实现。
+- Jupyter notebook ：基于web的交互式计算环境，可以编辑易于人们阅读的文档，用于展示数据分析的过程。
+- qtconsole ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。
+- spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境。
+
+```
+// 更改镜像
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ 
+conda config --set show_channel_urls yes
+
+echo 'export PATH="~/User/henry/anaconda/bin:$PATH"' >> ~/.zshrc // 添加环境变量
+source ~/.zshrc
+conda upgrade --all   //升级工具包
+conda install numpy scipy pandas
+conda install numpy=1.10   conda install -n python34 numpy
+conda remove package_name
+conda update package_name
+conda list -n python34
+conda  search search_term
+conda update conda
+conda update anaconda
+
+conda create -n env_name  list of packages // 默认的环境是 root，你也可以创建一个新环境,-n 代表 name，env_name 是需要创建的环境名称，list of packages 则是列出在新环境中需要安装的工具包。
+conda create -n py2 python=2.7 pandas
+source activate env_name // 进入名为 env_name 的环境
+source deactivate  // 退出当前环境
+python --version //查看版本
+conda env remove -n env_name  // 删除名为 env_name 的环境
+conda env list // 显示所有的环境
+conda env export > environment.yaml  // 分享代码的时候，同时也需要将运行环境分享给大家，执行如下命令可以将当前环境下的 package 信息存入名为 environment 的 YAML 文件中
+conda env create -f environment.yaml //  用对方分享的 YAML 文件来创建一摸一样的运行环境。
+```
