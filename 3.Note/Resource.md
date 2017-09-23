@@ -1,3 +1,4 @@
 - [sindresorhus/awesome](https://github.com/sindresorhus/awesome) Curated list of awesome lists
 - [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books)Freely available programming books
 - [justjavac/free-programming-books-zh_CN](https://github.com/justjavac/free-programming-books-zh_CN)
+- [mr-mig/every-programmer-should-know](https://github.com/mr-mig/every-programmer-should-know)
