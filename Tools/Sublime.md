@@ -185,7 +185,7 @@ ctrl+alt+shift+p python
 
 # 新建模板
 
-- html：ctrl+alt+h php注释
+- html：ctrl+alt+h php注释 html:5
 - javascript：ctrl+alt+j
 - css：ctrl+alt+c
 - php：ctrl+alt+p
@@ -387,7 +387,6 @@ h1{foo} 和 a[href=#] 为h1和a标签
 (.foo>h1)+(.bar>h2) 
 ul>li*3
 ul>li.item$*3
-
 ```
 
 [总结配置](https://github.com/jikeytang/sublime-text)

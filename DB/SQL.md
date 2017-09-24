@@ -21,3 +21,7 @@ Laravel 也支持查询 JSON 类型的字段：仅支持，MySQL 5.7+ 和 Postgr
 ## 扩展
 
 - [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)
+
+## 原理
+
+<http://blog.jobbole.com/100349/>
