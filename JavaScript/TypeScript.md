@@ -16,6 +16,7 @@ npm install -g typescript
   - 可以被导出到一个单独的声明文件以让使用类型的已被编译为JavaScript的TypeScript脚本的类型信息可用。批注可以为一个现有的JavaScript库声明，就像已经为Node.js和jQuery所做的那样
 
 - 接口：对象作为数据集合
+
 - 箭头函数表达式（lambda表达式）：()=>{something}或()=>something 相当于js中的函数,它的好处是可以自动将函数中的this附加到上下文中。
 - 类：支持集成了可选的类型批注支持的ECMAScript 6的类。public 和 private 访问修饰符。Public 成员可以在任何地方访问， private 成员只允许在类中访问.默认为private
 - 继承：可以继承一个已存在的类并创建一个派生类，继承使用关键字 extends
@@ -30,3 +31,5 @@ npm install -g typescript
       return super.shoutout();
     }
     ```
+
+<https://tutorialzine.com/2016/07/learn-typescript-in-30-minutes>
