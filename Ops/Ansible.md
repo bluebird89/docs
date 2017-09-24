@@ -23,3 +23,5 @@ vagrant ssh
 - [ansible/ansible-container](https://github.com/ansible/ansible-container)
 - [ansible/ansible-examples](https://github.com/ansible/ansible-examples)
 - [ansible/ansible](https://github.com/ansible/ansible)
+
+[文档](http://docs.ansible.com/ansible/latest/intro_installation.html)

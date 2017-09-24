@@ -152,6 +152,7 @@ $GLOBALS['HTTP_RAW_POST_DATA']
 - [hprose/hprose-php](https://github.com/hprose/hprose-php)Hprose is a cross-language RPC
 - [awesome-php](https://github.com/ziadoz/awesome-php)
 - [swoole/php-cp](https://github.com/swoole/php-cp)
+- [PHP: The Right Way](http://www.phptherightway.com/)
 
 ## [PHP发展](https://segmentfault.com/a/1190000008888700)
 

@@ -255,3 +255,5 @@ Markdown 单元：在这里对文本进行编辑，采用 markdown 的语法规�
 #### IPython
 
 [官网](https://ipython.org/)
+
+### [pypy](http://pypy.org/)

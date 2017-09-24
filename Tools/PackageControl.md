@@ -151,6 +151,8 @@ gulp
 
 ## Webpack
 
+所有小文件打包成一个或多个大文件
+
 [入门Webpack](http://www.jianshu.com/p/42e11515c10f)
 
 [Webpack for React](http://www.pro-react.com/materials/appendixA/)
