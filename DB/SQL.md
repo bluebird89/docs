@@ -25,3 +25,11 @@ Laravel 也支持查询 JSON 类型的字段：仅支持，MySQL 5.7+ 和 Postgr
 ## 原理
 
 <http://blog.jobbole.com/100349/>
+
+## 工具
+
+- [getredash/redash](https://github.com/getredash/redash) Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. http://redash.io/
+- [pingcap/tidb](https://github.com/pingcap/tidb)TiDB is a distributed NewSQL database compatible with MySQL protocol 
+- [alibaba/druid](https://github.com/alibaba/druid) Druid是一个JDBC组件库，包括数据库连接池、SQL Parser等组件 为监控而生的数据库连接池！阿里云DRDS(https://www.aliyun.com/product/drds )、阿里巴巴TDDL 连接池powered by Druid https://github.com/alibaba/druid/wiki
+- [apache/incubator-superset](https://github.com/apache/incubator-superset): a modern, enterprise-ready business intelligence web application. a data exploration and visualization web application.
+- [Meituan-Dianping/SQLAdvisor](https://github.com/Meituan-Dianping/SQLAdvisor)输入SQL，输出索引优化建议

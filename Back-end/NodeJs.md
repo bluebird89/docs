@@ -1,7 +1,5 @@
 # Node
 
-[ElemeFE/node-interview](https://github.com/ElemeFE/node-interview)
-
 # 安装
 
 ```
@@ -26,6 +24,7 @@ brew install node
 ## 资料
 
 - [开发命令行工具](https://juejin.im/post/59b73c9df265da06670c5868)
+- [ElemeFE/node-interview](https://github.com/ElemeFE/node-interview)
 
 ## 扩展
 
@@ -33,4 +32,6 @@ brew install node
 - [NodeOS](https://github.com/NodeOS/NodeOS)
 - [sindresorhus/awesome-electron](https://github.com/sindresorhus/awesome-electron)Useful resources for creating apps with Electron
 - [sindresorhus/awesome-nodejs](https://github.com/sindresorhus/awesome-nodejs)Delightful Node.js packages and resources 
+- [sequelize/sequelize](https://github.com/sequelize/sequelize)An easy-to-use multi SQL dialect ORM for Node.js http://docs.sequelizejs.com
+- [thinkjs/thinkjs](https://github.com/thinkjs/thinkjs)Use full ES2015+ features to develop Node.js applications, Support TypeScript
 http://blog.csdn.net/u012939368/article/details/77444889
