@@ -489,3 +489,11 @@
 ## 扩展
 - http://geek.csdn.net/news/detail/237049
 - [dypsilon/frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
+- [AlloyTeam/Mars](https://github.com/AlloyTeam/Mars)腾讯移动Web前端知识库
+- [fex-team/webuploader](https://github.com/fex-team/webuploader)It's a new file uploader solution!
+- [ECharts](https://github.com/ecomfe/echarts)ECharts is a free, powerful charting and visualization library offering an easy way of adding intuitive, interactive, and highly customizable charts to your commercial products.
+
+
+## 面试
+
+- [DDFE/DDFE-blog](https://github.com/DDFE/DDFE-blog)
