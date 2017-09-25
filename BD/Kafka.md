@@ -1,6 +1,7 @@
 # Kafka
 
 大数据领域常用的消息队列，最初由 LinkedIn 采用 Scala 语言开发，用作 LinkedIn 的活动流追踪和运营系统数据处理管道的基础。 其高吞吐、自动容灾、出入队有序等特性.
+[apache/kafka](https://github.com/apache/kafka)
 
 ## 扩展
 
