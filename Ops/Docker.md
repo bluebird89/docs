@@ -8,8 +8,8 @@ Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.
 
 高效虚拟化：Docker借助LXC并进行革新提供了高效运行环境，而非类似VM的虚拟OS，GuestOS的弊端在于看起来够虚拟，隔离，然而使用起来又浪费资源，又难于管理。Docker则基于LXC的核心Linux Namespace,对cgroups/namespace机制及网络过封装，把隔离性，灵活性（资源分配），便携，安全性，最重要是其性能做到了极致。
 
-![Docker的总体架构图](..\_static\architect_docker.jpeg)
-![Docker与VM对比](..\_static\VMvsDocker.jpg)
+![Docker的总体架构图](../_static\architect_docker.jpeg)
+![Docker与VM对比](../_static\VMvsDocker.jpg)
 
 ## 组成
 
