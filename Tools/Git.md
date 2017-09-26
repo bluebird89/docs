@@ -110,7 +110,6 @@ fsckobjects = true
 # https://git-scm.com/docs/git-config#git-config-transferfsckObjects
 # via https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
 
-
 # A nice little github-like colorful, split diff right in the console.
 # via http://owen.cymru/github-style-diff-in-terminal-with-icdiff/
 [diff]
@@ -137,10 +136,9 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
   + default = simple可能是你已经设置的配置项。它可以更轻松地将您的本地分支推送到远程，当二者分支名一样的时候。
   + followTags = true很简单。配置它以后，当你 git push 的时候可以直接将本地的 tags 提交到远程，而不用每次都加参数 --follow-tags。不知道你是不是和我一样，我如果创建了一个tag，我就基本上一定会将它推到远程的。
 
-
-
-![Git 命令清单](..\_static\bg2015120901.png)
-![Git 命令清单](..\_static\git_2.png)
+Git 命令清单
+![](..\_static\bg2015120901.png)
+![](..\_static\git_2.png)
 
 ## 原理
 
@@ -187,6 +185,7 @@ git pull --rebase origin master:获取最新远程分支并合并
 git checkout [file]  恢复暂存区的指定文件到工作区
 git checkout [commit] [file] 恢复某个commit的指定文件到暂存区和工作区
 git checkout . 恢复暂存区的所有文件到工作区
+git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1234567a44341404 / HEAD
 git reset [file] 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
 git reset --hard 重置暂存区与工作区，与上一次commit保持一致
 git reset [commit] 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
