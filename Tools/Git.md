@@ -137,8 +137,8 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
   + followTags = true很简单。配置它以后，当你 git push 的时候可以直接将本地的 tags 提交到远程，而不用每次都加参数 --follow-tags。不知道你是不是和我一样，我如果创建了一个tag，我就基本上一定会将它推到远程的。
 
 Git 命令清单
-![](..\_static\bg2015120901.png)
-![](..\_static\git_2.png)
+![](../_static/bg2015120901.png)
+![](../_static/git_2.png)
 
 ## 原理
 
