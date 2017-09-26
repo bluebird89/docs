@@ -1,8 +1,25 @@
-# Document
+# Docker
 
 Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。
 
-# Install
+云计算时代的到来，极大程度上整合了硬件网络资源，开发于云端，如成功模版AWS，然而其相应大规模，分布式软件配置及管理则带来相当的复杂度，Docer则借鉴传统的虚拟及镜像机制，提供artifact集装箱能力，从而助力云计算，尤其是类似于提供了Web, Hadoop集群，消息队列等。
+
+镜像装箱机制：类似一个只读模版的文件结构，可以自定义及扩展，用来创建Docker容器。
+
+高效虚拟化：Docker借助LXC并进行革新提供了高效运行环境，而非类似VM的虚拟OS，GuestOS的弊端在于看起来够虚拟，隔离，然而使用起来又浪费资源，又难于管理。Docker则基于LXC的核心Linux Namespace,对cgroups/namespace机制及网络过封装，把隔离性，灵活性（资源分配），便携，安全性，最重要是其性能做到了极致。
+
+![Docker的总体架构图](..\_static\architect_docker.jpeg)
+![Docker与VM对比](..\_static\VMvsDocker.jpg)
+
+## 组成
+
+- docker Client
+- Docker Daemon
+- Docker Image
+- Docker Container
+- 
+
+## Install
 
 - Mac : [docker-ce-desktop-mac](https://store.docker.com/editions/community/docker-ce-desktop-mac)
 
@@ -85,5 +102,3 @@ docker build -t runoob/centos:6.7 .
 
 ## boot2docker
 
--
-http://blog.csdn.net/gitchat/article/details/78021539

@@ -1,5 +1,6 @@
 # React Native
 
+通过 React 来构建 iOS 原生应用和 Android 原生应用。Virtual DOM 保持不变，你仍然可以使用 JSX 来创建它，但实际的 UI 是用原生的组件构建，
 ## 资源
 
 - [react-native](https://github.com/facebook/react-native)
