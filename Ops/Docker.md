@@ -48,6 +48,8 @@ Docker基于LXC的改进
 
 ### 核心技术
 
+隔离性主要是来自kernel的namespace, 其中pid, net, ipc, mnt, uts 等namespace将container的进程, 网络, 消息, 文件系统和hostname 隔离开。
+
 - 隔离性
   + pid namespace：不同用户的进程就是通过pid隔离开的，且不同的namespace中可以有相同pid。所有LXC进程在Docker中的父进程为Docker进程，同时允许嵌套，实现Docker in Docker。
   + net namespace:网络的隔离则通过net namespace实现，每个net namspace有独立的network device， IP, IP routing table， /proc/net目录等。
@@ -78,37 +80,30 @@ Docker基于LXC的改进
   brew install boot2docker
   ```
 
-- Install packages to allow apt to use a repository over HTTPS
+- Ubuntu
 
-  ```
-  sudo apt-get install \
-  apt-transport-https \
-  ca-certificates \
-  curl \
-  software-properties-common
-  ```
+```
+// Install packages to allow apt to use a repository over HTTPS
+sudo apt-get install \
+apt-transport-https \
+ca-certificates \
+curl \
+software-properties-common
+ 
+// Add Docker's official GPG key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -   
+sudo apt-key fingerprint 0EBFCD88
 
-- Add Docker's official GPG key
+// set up the stable repository
+sudo add-apt-repository \
+ "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+ $(lsb_release -cs) \
+ stable"
 
-  ```
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  sudo apt-key fingerprint 0EBFCD88
-  ```
-
-- set up the stable repository
-
-  ```
-  sudo add-apt-repository \
-  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) \
-  stable"
-  ```
-
-- Update the apt package index and install
-
-  ```
-  sudo apt-get install docker-ce
-  ```
+// Update the apt package index and install
+sudo apt-get update
+sudo apt-get install docker-ce
+```
 
 ## Usage:
 
@@ -119,35 +114,27 @@ Docker基于LXC的改进
 - Automated testing and continuous integration/deployment
 - Deploying and scaling web apps, databases and backend services
 
+### 镜像使用
+
+- REPOSTITORY：表示镜像的仓库源
+- TAG：镜像的标签
+- IMAGE ID：镜像ID
+- CREATED：镜像创建时间
+- SIZE：镜像大小
+
 ```
-docker version
-docker search tutorial
-docker images
-docker pull learn/tutorial
-docker run learn/tutorial echo "hello word"   // 两个参数，一个是指定镜像名（从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像），一个是要在镜像中运行的命令
-docker run -i -t ubuntu:15.10 /bin/bash
-docker run learn/tutorial apt-get install -y ping   // learn/tutorial镜像里面安装ping程序
-docker ps -l(获取容器id)  
-docker commit 698 learn/ping：版本号 alias 提交，获取新的版本号
-docker run lean/ping ping www.google.com
-docker logs -f $CONTAINER_ID  | docker attach $CONTAINER_ID
-docker top determined_swanson
-docker stop $CONTAINER_ID
-docker inspect name  ||  docker ps -l(ast)/-a(ll)
-docker start name
-docker rm name
-docker push learn/ping
+docker images // 列出本地主机上的镜像
+docker pull ubuntu:13.10 // 获取镜像
+docker search httpd  // 搜索镜像
 ```
-
-## 运行方式
-
-- 短暂方式：就是刚刚的那个"hello world"，命令执行完后，container就终止了，不过并没有消失，可以用 sudo docker ps -a 看一下所有的container，第一个就是刚刚执行过的container，可以再次执行一遍： linjiqin@ubuntu:~$ sudo docker start container_id：不过这次看不到"hello world"了，只能看到ID，用logs命令才能看得到：linjiqin@ubuntu:~$ sudo docker logs container_id可以看到两个"hello world"，因为这个container运行了两次。
-- 交互方式：linjiqin@ubuntu:~$ sudo docker run -i -t image_name /bin/bash #image_name为docker镜像名称 -t:在新容器内指定一个伪终端或终端。 -i:允许你对容器内的标准输入 (STDIN) 进行交互
-- daemon方式：即让软件作为长时间服务运行，这就是SAAS啊！例如，一个无限循环打印的脚本(替换为memcached、apache等，操作方法仍然不变！)：linjiqin@ubuntu:~$ CONTAINER_ID=$(sudo docker run -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done") --name标识来命名容器 -P:是容器内部端口随机映射到主机的高端口 -p : 是容器内部端口绑定到指定的主机端口。 docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py 查看端口： docker port adoring_stonebraker 5002
-
-## 构建容器
-
-可以采用dockerfile来定义生成容器以及使用Fig来定义整个容器的运行框架, 构建Dockerfile：
+#### 创建镜像
+- 从已经创建的容器中更新镜像，并且提交这个镜像
+  + 使用镜像来创建一个容器 ` docker run -t -i ubuntu:15.10 /bin/bash`
+  + 在运行的容器内使用 apt-get update 命令进行更新,exit退出容器
+  + 提交容器`docker commit -m="has update" -a="runoob" e218edb10161 runoob/ubuntu:v2`
+  + 查看新镜像 docker images
+  + 使用我们的新镜像 runoob/ubuntu 来启动一个容器`docker run -t -i runoob/ubuntu:v2 /bin/bash`  
+- 使用 Dockerfile 指令来创建一个新的镜像,`cat Dockerfile`
 ```
 FROM centos:6.7 MAINTAINER Fisher "fisher@sudops.com"
 RUN /bin/echo 'root:123456' |chpasswd 
@@ -157,11 +144,55 @@ RUN /bin/echo -e "LANG=\"en_US.UTF-8\"" >/etc/default/local
 EXPOSE 22 
 EXPOSE 80 
 CMD /usr/sbin/sshd -D
-
-docker build -t runoob/centos:6.7 . 
+```
+  - 每一个指令都会在镜像上创建一个新的层，每一个指令的前缀都必须是大写的
+  - FROM：镜像源
+  - RUN:在镜像内执行命令
+  - `docker build -t runoob/centos:6.7 .`构建一个镜像
+  - -t ：指定要创建的目标镜像名
+  - . ：Dockerfile 文件所在目录，可以指定Dockerfile 的绝对路径
+  -  `docker tag 860c279d2fec runoob/centos:dev`  镜像添加一个新的标签
+  
+### 容器使用
+```
+docker version
+docker search tutorial
+docker run -d -P training/webapp python app.py   //  -P :是容器内部端口随机映射到主机的高端口。    
+docker run -d -p 127.0.0.1:5001:5002  --name runoob training/webapp python app.py   // -p : 是容器内部端口绑定到指定的主机端口。  使用--name标识来命名容器
+docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py  
+docker pull learn/tutorial
+docker run learn/tutorial echo "hello word"   // 两个参数，一个是指定镜像名（从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像），一个是要在镜像中运行的命令
+docker run -i -t ubuntu:15.10 /bin/bash // 在新容器内建立一个伪终端或终端。
+docker run learn/tutorial apt-get install -y ping   // learn/tutorial镜像里面安装ping程序
+docker ps    // 查看运行容器状态
+docker ps -l   // 查看最后一次创建的容器
+docker commit 698 learn/ping：版本号 alias 提交，获取新的版本号
+docker run lean/ping ping www.google.com
+docker logs -f $CONTAINER_ID  | docker attach $CONTAINER_ID  // -f:动态输出
+docker top determined_swanson    // 查看容器内部运行的进程
+docker stop $CONTAINER_ID  
+docker inspect name  ||  docker ps -l(ast)/-a(ll)     // 查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息
+docker start name
+docker rm name // 移除容器
+docker push learn/ping
+docker port 7a38a1ad55c6  docker port determined_swanson：查看指定 （ID或者名字）容器的某个确定端口映射到宿主机的端口号
 ```
 
--t ：指定要创建的目标镜像名 . ：Dockerfile 文件所在目录，可以指定Dockerfile 的绝对路径 `docker tag 860c279d2fec runoob/centos:dev`
+### 容器连接
+
+连接系统允许将多个容器连接在一起，共享连接信息。docker连接会创建一个父子关系，其中父容器可以看到子容器的信息。
+
+## 运行方式
+
+- 短暂方式：就是刚刚的那个"hello world"，命令执行完后，container就终止了，不过并没有消失，可以用 sudo docker ps -a 看一下所有的container，第一个就是刚刚执行过的container，可以再次执行一遍：`sudo docker start container_id`：不过这次看不到"hello world"了，只能看到ID，用logs命令才能看得到： `sudo docker logs container_id`可以看到两个"hello world"，因为这个container运行了两次。
+- 交互方式：`sudo docker run -i -t image_name /bin/bash` #image_name为docker镜像名称 -t:在新容器内指定一个伪终端或终端。 -i:允许你对容器内的标准输入 (STDIN) 进行交互
+- daemon方式：即让软件作为长时间服务运行，这就是SAAS啊！例如，一个无限循环打印的脚本(替换为memcached、apache等，操作方法仍然不变！)：linjiqin@ubuntu:~$ CONTAINER_ID=$(sudo docker run -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done") --name标识来命名容器 -P:是容器内部端口随机映射到主机的高端口 -p : 是容器内部端口绑定到指定的主机端口。 docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py 查看端口： docker port adoring_stonebraker 5002
+
+### 迁移docker
+- 分解：通过设计和部署把这些服务拆分成为它们自己的容器。如果一个应用程序能够被拆分成为越多的分布式组件，那么应用程序扩展的选择则越多。但是，分布式组件越多也意味着管理的复杂性越高。
+- 选择基础映像：搜索Docker注册库找到一个基本的Docker映像并将其作为应用程序的基础来使用。
+- 安全管理：安全性和管理应当是一个高优先级的考虑因素；企业用户不应再把它们当作应用程序迁移至容器的最后一步。反之，企业必须从一开始就做好安全性和管理的规划，把它们的功能纳入应用程序的开发过程中，并在应用程序运行过程中积极主动地关注这些方面。基于容器的应用程序是分布式应用程序。企业应当更新较老的应用程序以支持联合身份管理方法，这将非常有利于确保分布式应用程序的安全性。为了做到这一点，应为每一个应用程序组件和数据提供一个唯一的标识符，这个标识符可允许企业在一个细粒度的级别上进行安全性管理。企业用户还应当增加一个日志记录的方法。
+- 配置Dockerfile，添加到Docker Hub
 
 ## boot2docker
 
@@ -173,3 +204,5 @@ docker build -t runoob/centos:6.7 .
 
 - [Docker]http://blog.csdn.net/erixhao/article/details/72762851)
 - [Docker 教程](http://www.runoob.com/docker/docker-tutorial.html)
+- [Docker for Mac](https://docs.docker.com/docker-for-mac/)
+- [Docker mac 入门](https://docs.docker.com/mac/)
