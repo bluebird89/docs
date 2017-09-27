@@ -27,6 +27,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
 - [Terminal](https://github.com/nicolashery/mac-dev-setup)
 - [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
+- [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)
 
 ## 键位
 
