@@ -39,6 +39,7 @@ unset temp : 删除变量temp
 
 `sudo apt-get install cowsay` `source ~/.zshrc`
 
+ sudo add-apt-repository --remove ppa:finalterm/daily
 - 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
 - 根据这些信息在相关的服务器上下载软件安装
 - 安装某个软件时，如果该软件有其它依赖程序，系统会为我们自动安装所以来的程序；
@@ -318,6 +319,14 @@ sudo dpkg  -i   sogou_pinyin_linux_1.0.0.0033_amd64.deb
 sudo add-apt-repository ppa:webupd8team/atom
 sudo apt-get update
 sudo apt-get install atom
+
+
+// ervernote
+sudo add-apt-repository ppa:nixnote/nixnote2-daily
+sudo apt update
+sudo apt install nixnote2
+File->Add Another User…
+Tools->Synchronize
 ```
 
 ## clean
