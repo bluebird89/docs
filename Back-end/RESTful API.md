@@ -128,3 +128,4 @@ rel表示这个API与当前网址的关系（collection关系，并给出该coll
 ### 参考
 
 - [RESTful Web 服务：教程](https://zhuanlan.zhihu.com/p/21644769)
+- [Kerberos](http://danlebrero.com/2017/03/26/Kerberos-explained-in-pictures/)
