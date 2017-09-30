@@ -215,7 +215,7 @@ Run "\\192.168.0.4" 来访问其他机器共享的目录
 
 ## 软件
 
-[jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers. 
+[jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
 
 ### 安装
 
@@ -364,6 +364,8 @@ brew services start postgresql
 ```
 
 #### iTerm2
+
+[maximum-awesome](https://github.com/square/maximum-awesome)Config files for vim and tmux.
 
 iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配置完毕开箱即用的 tmux
 
