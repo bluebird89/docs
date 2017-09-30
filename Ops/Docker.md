@@ -107,6 +107,11 @@ sudo apt-get install docker-ce
 
 ## Usage:
 
+拉取或新建服务，挂载目录与运行.应用一般包括三种文件：
+- 应用文件或数据文件（htdocs/data）
+- 配置文件（conf）
+- 日志文件
+
 ### 应用场景
 
 - Automating the packaging and deployment of applications
@@ -196,6 +201,9 @@ docker port 7a38a1ad55c6  docker port determined_swanson：查看指定 （ID或
 
 ## boot2docker
 
+
+## 工具
+### docker-compose
 ## 分布式发布部署
 - Google的Kubernetes
 - Apache的Mesos
