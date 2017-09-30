@@ -16,3 +16,4 @@ The leading open source automation server, Jenkins provides hundreds of plugins 
 
 ## usage
 
+https://www.centos.bz/2017/07/jenkins-ansible-docker-swarm/
