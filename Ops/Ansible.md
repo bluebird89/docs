@@ -25,3 +25,5 @@ vagrant ssh
 - [ansible/ansible](https://github.com/ansible/ansible)
 
 [文档](http://docs.ansible.com/ansible/latest/intro_installation.html)
+
+https://www.centos.bz/2017/08/ansible-config-playbook-task/

@@ -174,3 +174,5 @@ http://www.chinaz.com/news/2017/0921/806647.shtml
 https://segmentfault.com/a/1190000011225200
 
 http://blog.csdn.net/gitchat/article/details/78021539
+
+https://blog.asana.com/2017/07/developer-environment-making-it-reliable-by-making-it-fast-to-reset/
