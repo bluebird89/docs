@@ -193,3 +193,10 @@ end
   - 缺点：
 
     - 需要有网络，有路由器分配IP
+
+
+### 记录
+
+It appears your machine doesn't support NFS, or there is not an adapter to enable NFS on this machine for Vagrant
+
+sudo apt-get install nfs-kernel-server
