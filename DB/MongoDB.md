@@ -23,8 +23,10 @@
 
 - 命令行工具运行客户端：mongo
 
+  mongod 启动服务
+
   ```
-   - --nodb: 阻止mongo在启动时连接到数据库实例；
+   -  --nodb: 阻止mongo在启动时连接到数据库实例；
    - --port ：指定mongo连接到mongod监听的TCP端口，默认的端口值是27017；
    - --host ：指定mongod运行的server，如果没有指定该参数，那么mongo尝试连接运行在本地（localhost）的mongod实例；
    - --db：指定mongo连接的数据库
@@ -80,67 +82,41 @@ db.test.find({"age":{$gt:5}}).sort({"age”:-1}) //查找age大于5的条目且�
 sudo apt-get install libssl-dev pkg-config
 pecl install mongodb
 ```
+
 ## docker
 
-- `mkdir -p ~/mongo  ~/mongo/db`  // db目录将映射为mongo容器配置的/data/db目录,作为mongo数据的存储目录
-- 创建Dockerfile
-```
-FROM debian:wheezy
+- `mkdir -p ~/mongo ~/mongo/db` // db目录将映射为mongo容器配置的/data/db目录,作为mongo数据的存储目录
+- 创建Dockerfile ``` FROM debian:wheezy
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
+
 RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        numactl \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \ && apt-get install -y --no-install-recommends \ numactl \ && rm -rf /var/lib/apt/lists/*
 
 # grab gosu for easy step-down from root
-ENV GOSU_VERSION 1.7
-RUN set -x \
-    && apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
-    && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
-    && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
-    && export GNUPGHOME="$(mktemp -d)" \
-    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-    && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-    && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
-    && chmod +x /usr/local/bin/gosu \
-    && gosu nobody true \
-    && apt-get purge -y --auto-remove ca-certificates wget
 
-# gpg: key 7F0CEB10: public key "Richard Kreuter <richard@10gen.com>" imported
+ENV GOSU_VERSION 1.7 RUN set -x \ && apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \ && wget -O /usr/local/bin/gosu "<https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg> --print-architecture)" \ && wget -O /usr/local/bin/gosu.asc "<https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg> --print-architecture).asc" \ && export GNUPGHOME="$(mktemp -d)" \ && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \ && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \ && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \ && chmod +x /usr/local/bin/gosu \ && gosu nobody true \ && apt-get purge -y --auto-remove ca-certificates wget
+
+# gpg: key 7F0CEB10: public key "Richard Kreuter [richard@10gen.com](mailto:richard@10gen.com)" imported
+
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 492EAFE8CD016A07919F1D2B9ECBEC467F0CEB10
 
-ENV MONGO_MAJOR 3.0
-ENV MONGO_VERSION 3.0.12
+ENV MONGO_MAJOR 3.0 ENV MONGO_VERSION 3.0.12
 
-RUN echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/$MONGO_MAJOR main" > /etc/apt/sources.list.d/mongodb-org.list
+RUN echo "deb <http://repo.mongodb.org/apt/debian> wheezy/mongodb-org/$MONGO_MAJOR main" > /etc/apt/sources.list.d/mongodb-org.list
 
-RUN set -x \
-    && apt-get update \
-    && apt-get install -y \
-        mongodb-org=$MONGO_VERSION \
-        mongodb-org-server=$MONGO_VERSION \
-        mongodb-org-shell=$MONGO_VERSION \
-        mongodb-org-mongos=$MONGO_VERSION \
-        mongodb-org-tools=$MONGO_VERSION \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /var/lib/mongodb \
-    && mv /etc/mongod.conf /etc/mongod.conf.orig
+RUN set -x \ && apt-get update \ && apt-get install -y \ mongodb-org=$MONGO_VERSION \ mongodb-org-server=$MONGO_VERSION \ mongodb-org-shell=$MONGO_VERSION \ mongodb-org-mongos=$MONGO_VERSION \ mongodb-org-tools=$MONGO_VERSION \ && rm -rf /var/lib/apt/lists/* \ && rm -rf /var/lib/mongodb \ && mv /etc/mongod.conf /etc/mongod.conf.orig
 
-RUN mkdir -p /data/db /data/configdb \
-    && chown -R mongodb:mongodb /data/db /data/configdb
-VOLUME /data/db /data/configdb
+RUN mkdir -p /data/db /data/configdb \ && chown -R mongodb:mongodb /data/db /data/configdb VOLUME /data/db /data/configdb
 
-COPY docker-entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+COPY docker-entrypoint.sh /entrypoint.sh ENTRYPOINT ["/entrypoint.sh"]
 
-EXPOSE 27017
-CMD ["mongod"]
-```
+EXPOSE 27017 CMD ["mongod"] ```
+
 - docker build -t mongo:3.2 .
--  docker run -p 27017:27017 -v $PWD/db:/data/db -d mongo:3.2
-### notice
+- docker run -p 27017:27017 -v $PWD/db:/data/db -d mongo:3.2
+
+  ### notice
 
 PHP不同版本的扩展库使用版本不一样 php5 使用内置方法 php7.1 使用composer扩展mongodb/mongodb
