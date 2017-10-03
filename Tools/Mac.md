@@ -28,6 +28,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - [Terminal](https://github.com/nicolashery/mac-dev-setup)
 - [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
 - [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)
+- 格式化移动硬盘：ExFAT格式
 
 ## 键位
 
@@ -169,6 +170,8 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 - 选中一个文件按 enter 可以直接改名的...cmd+up是回到上一层文件夹cmd+ down 如果是文件夹就进入文件夹
 - 使用Finder登录FTP：打开Finder然后按Command+K
 - Fn+Delete键，就可以向后删除
+- Command+Shift+G 可以前往任何文件夹,包括隐藏文件夹
+- Command+Shift+. 显示或隐藏 隐藏文件
 
 修改DNS提高Apple Store 网速:打开：systerm Preferences > Network > Advanced > DNS
 

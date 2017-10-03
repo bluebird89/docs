@@ -17,19 +17,23 @@ brew install git
 
 git clone有两种方式https与ssh，SSH keys的使用需保证remote的源为git方式
 
-- 全局配置：/etc/gitconfig文件 `git config --system` 
-- 用户配置：home目录下的 .gitconfig文件 `git config --global` 
-- 项目配置：项目目录下.git/config文件 `git config `
+- 全局配置：/etc/gitconfig文件 `git config --system`
+- 用户配置：home目录下的 .gitconfig文件 `git config --global`
+- 项目配置：项目目录下.git/config文件 `git config`
 - 查看配置:`git config --list --show-origin`
 
 ### key生成
 
 #### SSH
+
 ```
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
+
 #### GPG
-提交内容将会有一个“已验证”标记
+
+提交内容将会有一个"已验证"标记
+
 ```
 gpg --gen-key
 gpg --list-secret-keys --keyid-format LONG  //获取GPG key ID  3AA5C34371567BD2
@@ -38,7 +42,9 @@ sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
 gpg --armor --export 3AA5C34371567BD2  // get the key,add to github
 git config --global user.signingkey 35F5FFB2
 ```
+
 ### 用户信息配置
+
 ```
 git config --global user.name "name"
 git config --global user.email "email"
@@ -126,19 +132,22 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 - undo = reset --soft HEAD ^ - 如果我在做出提交时犯了一个错误，这个命令会把代码恢复到提交之前的样子。通常我只是在这种情况下修改现有的提交，因为它保留了提交信息。
 - stash-all = stash save --include-untracked - 当你正在开发，有人临时要求你切换分支时，stash 是非常有用的。这个命令确保当你 stash 时，可以记录没有被 git add 的新文件。
 - merge
-  + ff = only 确保只有在每一个合并都是 fast-forward 的时候，你才会看到报错。否则只要你配置了这个选项，什么合并提交，什么历史记录，通通都不需要，只是两次提交之间的平滑过渡。你可能会想知道如何完成这项工作。答案是用 git rebase，把一个分支的修改合并到当前分支，它非常有用当我 pull 代码与 master 有冲突的时候，我使用这种方式来处理。当你在本地分支上修改后，同时其他人在 master 上 做了修改，我想这样比你直接 merge 到你本地分支时的 commit 更好。这样你可以避免多出一个 merge 的 commit。如果我打算新建一个merge commit，我可以用明确的 git merge -ff 来创建。
+
+  - ff = only 确保只有在每一个合并都是 fast-forward 的时候，你才会看到报错。否则只要你配置了这个选项，什么合并提交，什么历史记录，通通都不需要，只是两次提交之间的平滑过渡。你可能会想知道如何完成这项工作。答案是用 git rebase，把一个分支的修改合并到当前分支，它非常有用当我 pull 代码与 master 有冲突的时候，我使用这种方式来处理。当你在本地分支上修改后，同时其他人在 master 上 做了修改，我想这样比你直接 merge 到你本地分支时的 commit 更好。这样你可以避免多出一个 merge 的 commit。如果我打算新建一个merge commit，我可以用明确的 git merge -ff 来创建。
+
 - commit
-  + gpgSign = true 确保您的所有 commit 都由你的 GPG 密钥签名。这通常是一个好主意，因为 .gitconfig 文件中没有验证您的用户信息，这意味着看起来像您这样的提交可能会轻松显示在其他人的提交 信息中。事实上，我曾经用过别人的凭据，因为帐户和机器配置耗时太长。我的提交请求是通过别人的帐号提交的，但内部的所有提交都是我的真实账号。将你的 GPG key 添加到 Github并尝试一次提交，你可能就会解决你现在的疑问，您提交内容将会有一个“已验证”标记。
+
+  - gpgSign = true 确保您的所有 commit 都由你的 GPG 密钥签名。这通常是一个好主意，因为 .gitconfig 文件中没有验证您的用户信息，这意味着看起来像您这样的提交可能会轻松显示在其他人的提交 信息中。事实上，我曾经用过别人的凭据，因为帐户和机器配置耗时太长。我的提交请求是通过别人的帐号提交的，但内部的所有提交都是我的真实账号。将你的 GPG key 添加到 Github并尝试一次提交，你可能就会解决你现在的疑问，您提交内容将会有一个"已验证"标记。
   - 如果您有多个 GPG 密钥，可以使用 user.signingKey 选项指定要使用的密钥。
   - 上述的配置在 GUI 工具里不会生效，你需要在工具里的设置里找配置项。
   - gpg-agent可以保存口令，让我们更方便。
-- Push
-  + default = simple可能是你已经设置的配置项。它可以更轻松地将您的本地分支推送到远程，当二者分支名一样的时候。
-  + followTags = true很简单。配置它以后，当你 git push 的时候可以直接将本地的 tags 提交到远程，而不用每次都加参数 --follow-tags。不知道你是不是和我一样，我如果创建了一个tag，我就基本上一定会将它推到远程的。
 
-Git 命令清单
-![](../_static/bg2015120901.png)
-![](../_static/git_2.png)
+- Push
+
+  - default = simple可能是你已经设置的配置项。它可以更轻松地将您的本地分支推送到远程，当二者分支名一样的时候。
+  - followTags = true很简单。配置它以后，当你 git push 的时候可以直接将本地的 tags 提交到远程，而不用每次都加参数 --follow-tags。不知道你是不是和我一样，我如果创建了一个tag，我就基本上一定会将它推到远程的。
+
+Git 命令清单 ![](../_static/bg2015120901.png) ![](../_static/git_2.png)
 
 ## 原理
 
@@ -160,8 +169,9 @@ Git 的工作就是创建和保存项目的快照及与之后的快照进行对�
 - git init：在当前目录新建一个Git代码库
 - git init [project-name] :# 新建一个目录，将其初始化为Git代码库
 - git clone [url] [project-name]:下载一个项目和它的整个代码历史
+- git subtree add --prefix=client <https://github.com/example/project-client.git> master // 建立主项目里子树
 
-### 编辑项目:提交到暂存区
+  ### 编辑项目:提交到暂存区
 
 ```
 git add ./<file1>(<file2> <file3>)/[dir] （所有修改过的文件/单个文件 或通过使用通配符将一组文件添加到暂存区）
