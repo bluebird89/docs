@@ -333,14 +333,27 @@ git branch --set-upstream master origin/master 建立追踪关系，在现有分
 git branch --set-upstream develop origin/develop
 ```
 
-# 搭建git服务器
+# 搭建git私有服务器
 
-- groupadd git adduser git -g git
-- 创建证书 mkdir -p ~/.ssh chmod 700 .ssh touch .ssh/authorized_keys chmod 600 .ssh/authorized_keys
-- 将客户端的id_rsa.pub文件，把导入到服务器端/home/git/.ssh/authorized_keys
-- 新建仓库 mkdir ~/gitrepo chown git:git gitrepo/ cd gitrepo git init --bare runoob.gitsudo git init --bare /path/to/repo.git sudo chown -R git:git sample.git
-- 禁止git用户登录shell:修改/etc/passwd 为git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell git:x:503:503::/home/git:/sbin/nologin
-- git clone git@server:/path/to/repo.git
+```
+groupadd git
+adduser git -g git
+
+创建证书 mkdir -p ~/.ssh 
+chmod 700 .ssh 
+touch .ssh/authorized_keys 
+chmod 600 .ssh/authorized_keys
+
+将客户端的id_rsa.pub文件，把导入到服务器端
+/home/git/.ssh/authorized_keys
+
+新建仓库 
+git init --bare /path/to/repo.git 
+sudo chown -R git:git sample.git
+禁止git用户登录shell:修改/etc/passwd 为
+git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell //可以正常通过ssh使用git，但无法登录shell
+git clone git@server:/path/to/repo.git
+```
 
 ## 工作流：
 
