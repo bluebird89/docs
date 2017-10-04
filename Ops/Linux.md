@@ -49,6 +49,8 @@ sudo add-apt-repository --remove ppa:finalterm/daily
 
 #### apt-get
 
+程序安装有home路径，bin路径
+
 ubuntu.16替换apt-get为apt
 
 - install 其后加上软件包名，用于安装一个软件包
@@ -93,7 +95,6 @@ ubuntu.16替换apt-get为apt
 - 云笔记:simplenote
 - video: VLC
 - editor: atom
-- zsh
 - oh my zsh 而非 zsh fish
 - KchmViewer:阅读CHM
 - LaTeX

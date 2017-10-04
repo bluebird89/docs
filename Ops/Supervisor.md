@@ -57,3 +57,17 @@ port=*:9001
 [group:appgroup]
 programs=app,hello
 ```
+
+Linux上创建一个ci用户，然后，用supervisor启动并指定9001端口：
+
+```
+# /etc/supervisor/conf.d/ci.conf
+
+[program:ci]
+command=java -jar /home/ci/jenkins.war --httpPort=9001
+user=ci
+autostart=true
+autorestart=true
+startsecs=30
+startretries=5
+```

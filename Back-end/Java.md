@@ -16,13 +16,13 @@ JDK：Java Development Kit
 
 JRE: Java Runtime Environment
 
-# [安装教程](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-debian-8)类debian系统
+## [安装教程](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-debian-8)类debian系统
 
 ```
 # using the version packaged with Debian：OpenJDK 8
 sudo apt-get update
 sudo apt-get install default-jre
-# JDK 包含JRE(推荐)
+# JDK 包含JRE(**推荐**)
 sudo apt-get install default-jdk
 
 # Installing the Oracle JDK
@@ -34,10 +34,10 @@ javac -version
 
 sudo apt-get install oracle-java9-installer
 # 多版本管理
-sudo update-alternatives --config java | javac 会获得程序路径
+sudo update-alternatives --config java | javac // 会获得程序路径
 ```
 
-# JAVA_HOME Environment Variable配置
+## JAVA_HOME Environment Variable配置
 
 ```
 sudo vim /etc/environment 添加 JAVA_HOME="/usr/lib/jvm/java-8-oracle"
@@ -46,7 +46,7 @@ echo $JAVA_HOME
 java -version
 ```
 
-# 例子
+### 例子
 
 ```
 新建文件 HelloWorld.java
@@ -62,6 +62,82 @@ public class HelloWorld {
 javac HelloWorld.java
 # 运行
 java HelloWorld
+```
+
+## Tomcat
+
+### 在线安装
+
+```
+  sudo apt-get install tomcat8
+  sudo vim /etc/default/tomcat8
+  JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC" // 修改内存使用
+  sudo service tomcat8 restart
+  访问 http://localhost:8080
+  sudo apt-get install tomcat8-docs tomcat8-admin tomcat8-examples
+  sudo vim /etc/tomcat7/tomcat-users.xml // 配置管理后台
+  <tomcat-users>
+    <user username="admin" password="password" roles="manager-gui,admin-gui"/>
+  </tomcat-users> 
+  sudo service tomcat8 restart
+  访问 http://localhost:8080/docs/
+  访问 http://localhost:8080/examples/ 
+  Virtual Host Manager http://localhost:8080/manager/html/
+```
+
+- /usr/share/tomcat8/：安装程序路径
+- /var/lib/tomcat8/：应用程序、配置与日志
+- /etc/tomcat8/：服务器配置server.xml 用户配置：tomcat-users.xml
+- 命令行脚本：sudo /etc/init.d/tomcat8 start
+- Tomcat 配置文件路径:Tomcat home directory : /usr/share/tomcat8 Tomcat base directory : /var/lib/tomcat8或/etc/tomcat8
+- Tomcat的用户帐号信息都保存在 /var/lib/tomcat6/conf/tomcat-users.xml 的文件中
+- 默认根目录：/usr/share/tomcat8-root
+
+### 手动安装
+
+```
+sudo apt-get update
+sudo apt-get install default-jdk
+sudo groupadd tomcat
+sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat   // a home directory of /opt/tomcat (where we will install Tomcat)  with a shell of /bin/false (so nobody can log into the account) 
+cd /tmp  // 存放临时文件
+curl -O http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.5/bin/apache-tomcat-8.5.5.tar.gz
+sudo mkdir /opt/tomcat
+sudo tar xzvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
+sudo chgrp -R tomcat /opt/tomcat
+sudo chmod -R g+r conf
+sudo chmod g+x conf
+sudo chown -R tomcat webapps/ work/ temp/ logs/ 
+
+// /etc/systemd/system/tomcat.service
+[Unit]
+Description=Apache Tomcat Web Application Container
+After=network.target
+
+[Service]
+Type=forking
+
+Environment=JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre
+Environment=CATALINA_PID=/opt/tomcat/temp/tomcat.pid
+Environment=CATALINA_HOME=/opt/tomcat
+Environment=CATALINA_BASE=/opt/tomcat
+Environment='CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'
+Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
+
+ExecStart=/opt/tomcat/bin/startup.sh
+ExecStop=/opt/tomcat/bin/shutdown.sh
+
+User=tomcat
+Group=tomcat
+UMask=0007
+RestartSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl daemon-reload
+sudo systemctl start tomcat
 ```
 
 ## maven
