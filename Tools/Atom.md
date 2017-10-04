@@ -118,7 +118,7 @@ prefix 不要用缩写
 - pigments@0.39.1
 - project-manager@3.3.5
 - react-snippets@0.9.0
-- atom-pair ：结对编程共同编辑代码：atompair new（获取session） atompair add（加入）
+- atom-pair ：结对编程共同编辑代码：atompair new（获取session） atompair add（加入），局域网中可以实现
 - sync-settings@0.8.2(<https://atom.io/packages/sync-settipngs)配置> 使用command + shift + P backup 或者restore插件
 - activate-power-mode：打字爆炸模式
 - atom-ide-ui

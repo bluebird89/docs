@@ -22,7 +22,7 @@ JRE: Java Runtime Environment
 # using the version packaged with Debian：OpenJDK 8
 sudo apt-get update
 sudo apt-get install default-jre
-# JDK 包含JRE
+# JDK 包含JRE(推荐)
 sudo apt-get install default-jdk
 
 # Installing the Oracle JDK
@@ -108,10 +108,5 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 - [apache/httpcomponents-core](https://github.com/apache/httpcomponents-core)
 - [apache/tomcat](https://github.com/apache/tomcat)
 - [apache/jmeter](https://github.com/apache/jmeter)a 100% pure Java application designed to test and measure performance. It may be used as a highly portable server benchmark as well as multi-client load generator.
-- [alibaba/fastjson](https://github.com/alibaba/fastjson)A fast JSON parser/generator for Java 
-- [Apache Camel](https://github.com/apache/camel) is a powerful open source integration framework based on known Enterprise Integration Patterns with powerful Bean Integration.
-<http://www.jianshu.com/p/d51551b0a8ba> 
-<http://www.jianshu.com/p/9caf1c755889> 
-<http://www.jianshu.com/p/5681a1f0aad6> 
-<http://www.jianshu.com/p/4a41ee88bd82> 
-<http://www.jianshu.com/p/40d4c7aebd66>
+- [alibaba/fastjson](https://github.com/alibaba/fastjson)A fast JSON parser/generator for Java
+- [Apache Camel](https://github.com/apache/camel) is a powerful open source integration framework based on known Enterprise Integration Patterns with powerful Bean Integration. <http://www.jianshu.com/p/d51551b0a8ba> <http://www.jianshu.com/p/9caf1c755889> <http://www.jianshu.com/p/5681a1f0aad6> <http://www.jianshu.com/p/4a41ee88bd82> <http://www.jianshu.com/p/40d4c7aebd66>

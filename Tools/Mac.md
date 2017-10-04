@@ -580,6 +580,10 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 - port installed
 - sudo port upgrade outdated
 
+### 网络连接
+
+在局域网mac通过内网地址链接ubuntu，远程ssh登陆mac需要mac开启允许远程登陆
+
 ### brew 安装软件路径
 
 - brew（意为酿酒）的命名很有意思，全部都使用了酿酒过程中采用的材料/器具，名词对应以下的概念：

@@ -39,7 +39,8 @@ unset temp : 删除变量temp
 
 `sudo apt-get install cowsay` `source ~/.zshrc`
 
- sudo add-apt-repository --remove ppa:finalterm/daily
+sudo add-apt-repository --remove ppa:finalterm/daily
+
 - 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
 - 根据这些信息在相关的服务器上下载软件安装
 - 安装某个软件时，如果该软件有其它依赖程序，系统会为我们自动安装所以来的程序；
@@ -47,6 +48,8 @@ unset temp : 删除变量temp
 - 软件源镜像服务器可能会有多个，有时候某些特定的软件需要我们添加特定的源；
 
 #### apt-get
+
+ubuntu.16替换apt-get为apt
 
 - install 其后加上软件包名，用于安装一个软件包
 - update 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表
@@ -346,9 +349,14 @@ sudo apt-get update
 sudo apt-get install google-chrome-stable
 ```
 
-## 防火墙
+## ufw防火墙
 
-- ufw： sudo ufw allow 'Nginx HTTP' sudo ufw status sudo ufw allow https
+```
+sudo ufw allow 'Nginx HTTP' 
+sudo ufw status 
+sudo ufw allow https
+sudo ufw enable/disable
+```
 
 ## 指令
 
@@ -460,6 +468,35 @@ Linux的最重要创新之一，引入Hypervisor，运行其他操作系统的�
 ## LXC(Linux Container）
 
 一种内核虚拟化技术，相比上述的Hypervisor技术则提供更轻量级的虚拟化，以隔离进程和资源，且无需提供指令解析机制及全虚拟化的复杂性，LXC或者容器将操作系统层面的资源分到孤立／隔离的组中，用来管理使用资源。LXC为Sourceforge上的开源项目，其实现是借助Linux的内核特性，（cgroups子系统+namespace）, 在OS层次上做整合为进程提供虚拟执行环境，即称之为容器，除了分配绑定cpu，内存，提供独立的namespace（网络，pid，ipc，mnt，uts）
+
+## Samba服务
+
+### 安装与配置
+
+```
+apt-get install samba
+mkdir -p /home／directory
+chmod 777 /home／directory
+vim /etc/samba/smb.conf
+[global]的地方添加 security = user
+文件最后添加下列设定
+
+[share]
+path = /home/username/share      
+available = yes
+browsealbe = yes
+public = yes
+writable = yes
+
+useradd username
+sudo smbpasswd -a username
+/etc/init.d/samba restart
+
+mac 链接
+finder中com＋K
+smb://192.168.100.106
+\\172.16.44.175\Ubuntu
+```
 
 ## 扩展
 
