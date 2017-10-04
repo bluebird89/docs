@@ -74,7 +74,8 @@ echo $slugify->slugify('Hello World, this is a long sentence and I need to make 
 ### 安装
 
 ```
-curl -sS <https://dl.yarnpkg.com/debian/pubkey.gpg> | sudo apt-key add - echo "deb <https://dl.yarnpkg.com/debian/> stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
 sudo apt-get update && sudo apt-get install yarn
 
