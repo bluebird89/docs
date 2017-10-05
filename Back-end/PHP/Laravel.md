@@ -8,17 +8,15 @@
 ## 测试准备
 
 - homestead
-
 - PhpStrom
-
 - terminal
 
 - [laravel入门教程](https://d.laravel-china.org/docs/5.5) [Laravel 教程 - Web 开发实战入门] [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
 
-# 环境配置
+## 环境配置
 
-- homestead:安装virtualbox and vagrant
-- valet
+### homestead:安装virtualbox and vagrant
+
 
 ```
 brew install homebrew/php/php71
@@ -89,6 +87,8 @@ Composer代理镜像
 from @golaravel
 
 "repositories": [ {"type": "composer", "url": "<http://packagist.phpcomposer.com"}>, {"packagist": false} ],
+
+## valet
 
 ## Artisan 命令
 

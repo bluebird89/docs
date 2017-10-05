@@ -242,18 +242,15 @@ ctrl+alt+shift+p python
 - 左右选择：alt+shift+left/right
 - 上下选择：shift+up/down
 
-# 查找与跳转
+## 查找与跳转
 
 - ctrl+p：搜索并跳转不同的文件
 - 跳转函数：ctrl+r
 - 直接查找文件
 - @symbol跳转到symbol符号所在的位置（函数）
-- # 关键字跳转：输入#keyword跳转到keyword所在的位置
-
+- `# 关键字跳转：输入#keyword跳转到keyword所在的位置`
 - 行号跳转：输入:12跳转到文件的第12行（ctrl+g）
-
 - 查找：ctrl+f
-
 - 替换：ctrl+h ctrl+shift+f：可选文件夹或过滤器
 
 # 显示
@@ -388,5 +385,17 @@ h1{foo} 和 a[href=#] 为h1和a标签
 ul>li*3
 ul>li.item$*3
 ```
+
+### 配置同步
+### 通过共享文件
+- 清除 Packages 目录下User
+- `ln -s ~/baiduyunebooks/sublime3/Packages/User User` // 建立符号链接
+
+### 通过sync-setting配置
+- 新建github的token
+- 安装syn-setting插件
+- 配置文件，主进程download，其它更新
+- 
+- 安装 
 
 [总结配置](https://github.com/jikeytang/sublime-text)

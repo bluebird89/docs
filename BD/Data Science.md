@@ -9,7 +9,8 @@
 - [apache/hadoop](https://github.com/apache/hadoop)a framework that allows for the distributed processing of large data sets across clusters of computers using simple programming models.
 - [apache/incubator-mxnet](https://github.com/apache/incubator-mxnet)Lightweight, Portable, Flexible Distributed/Mobile Deep Learning with Dynamic, Mutation-aware Dataflow Dep Scheduler; for Python, R, Julia, Scala, Go, Javascript and more <http://mxnet.io>
 - [douban/dpark](https://github.com/douban/dpark)Python clone of Spark, a MapReduce alike framework in Python
+- [wepe/MachineLearning](https://github.com/wepe/MachineLearning)Basic Machine Learning and Deep Learning
 
-  ## 扩展
+## 扩展
 
 <https://mp.weixin.qq.com/s/3jJ4w3fGeW56U15Vdl2xEw> <https://blog.algorithmia.com/becoming-a-10x-data-scientist/>
