@@ -7,6 +7,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - Apple Magic Trackpad 2：重现Mac pro mul touch功能
 - 耳机 BeoPlay H6
 - iPad Pro：阅读利器
+- 格式化移动硬盘：ExFAT格式
 
 ## 系统配置：
 
@@ -14,21 +15,26 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - 将功能键(F1-F12)的行为设置为标准的功能键
 - dock 停在左边
 - [修改hosts](https://github.com/racaljk/hosts)
-- [环境配置](https://github.com/thoughtbot/laptop)
-- [命令行指令](https://github.com/herrbischoff/awesome-osx-command-line)
+- [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
+- [awesome-osx-command-line](https://github.com/herrbischoff/awesome-osx-command-line)Use your OS X terminal shell to do awesome things.
 - [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
-- [donnemartin/dev-setup](https://github.com/donnemartin/dev-setup)
-- [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)
-- [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)
+- [donnemartin/dev-setup](https://github.com/donnemartin/dev-setup)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
+- [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
+- [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
 - [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
-- [herrbischoff/awesome-osx-command-line](https://github.com/herrbischoff/awesome-osx-command-line)
 - iphone,只能同步一台设备itunes配置
 - 设置未收录的开发者应用`sudo spctl --master-disable`
 - [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
-- [Terminal](https://github.com/nicolashery/mac-dev-setup)
 - [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
-- [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)
-- 格式化移动硬盘：ExFAT格式
+- [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
+- [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(推荐)
+- [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
+- [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
+- [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
+- [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
+- [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
+- [rgcr/m-cli](https://github.com/rgcr/m-cli) Swiss Army Knife for macOS
+- [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
 
 ## 键位
 
@@ -99,6 +105,12 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 
 - 查词典 Command+L
 - 在浏览器查询 Command+B
+
+### cli
+
+[guarinogabriel/Mac-CLI](https://github.com/guarinogabriel/Mac-CLI)  OS X command line tools for developers – The ultimate tool to manage your Mac. It provides a huge set of command line commands that automatize the usage of your OS X system.
+
+[0nn0/terminal-mac-cheatsheet](https://github.com/0nn0/terminal-mac-cheatsheet)List of my most used commands and shortcuts in the terminal for Mac
 
 ### finder
 
@@ -218,8 +230,6 @@ Run "\\192.168.0.4" 来访问其他机器共享的目录
 
 ## 软件
 
-[jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
-
 ### 安装
 
 - app store：自动安装
@@ -236,6 +246,9 @@ Run "\\192.168.0.4" 来访问其他机器共享的目录
 ### 包管理工具Brew
 
 - 资源包管理：Homebrew(安装完brew时，brew-cask已经安装好了，无需额外安装）
+- 程序文件 /usr/local/etc/
+- 应用文件 /usr/local/Cellar/
+- 日志文件/usr/local/var
 
 brew:从下载源码解压后。／.configure&& make install ,同时包含相关以来库，并自动配置好各种环境变量，易于卸载。
 
@@ -306,7 +319,7 @@ brew services start postgresql
 
 - UI:sketch sketch box
 - CheatSheet 长按⌘键可以显示当前程序快捷键
-- markdown: Mou for Mac Ulysses for Mac MWeb Lite
+- markdown: Mou for Mac,Ulysses for Mac,MWeb Lite,[MacDown](https://github.com/MacDownApp/macdown)Open source Markdown editor for macOS.
 - shell：oh my zsh
 - CheatSheet
 - MySql：Sequel Pro
@@ -322,6 +335,7 @@ brew services start postgresql
 - MindNode 2
 - Cloud Outline
 - 播放器：MPlayerX
+- UML:staruml
 - 清理垃圾：CleanMyMac（需购买解说功能）
 - 开发环境 MAMP:基础版不支持自定义
 - [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro)
@@ -340,6 +354,8 @@ brew services start postgresql
 - Fantastical：日程管理应用
 - Axure：原型工具
 - Quiver：笔记软件
+- [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
+- [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
 - ibooks：阅读支持pdf与epub，可以通过icloud同步
 - iTunes Movie Trailers
 - manico
@@ -347,11 +363,14 @@ brew services start postgresql
 - [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
 - f.lux 屏幕颜色控制
 - iCHM
+- [typcn/bilibili-mac-client](https://github.com/typcn/bilibili-mac-client)An unofficial bilibili client for mac
 - 文档：[apidoc](http://apidocjs.com/)
 - Reeder 3 RSS订阅（暂时feedly代替）
 - mounty:win的移动硬盘
+- [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
 - MacPorts：The MacPorts Project is an open-source community initiative to design an easy-to-use system for compiling, installing, and upgrading either command-line, X11 or Aqua based open-source software on the Mac operating system.
 - [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
+- Fantastical 2:日历工具 收费
 - 苹果铃声制作
 
   - 音乐文件用itunes打开
@@ -597,9 +616,3 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 文件安装位置：/usr/local/etc/
 
 /usr/local/opt/
-
-[](http://goahead2010.iteye.com/blog/2232869)
-
-<https://mac.aotu.io/> <https://github.com/smyhvae/Mac> <https://github.com/iCHAIT/awesome-macOS> <https://github.com/luin/medis> <https://github.com/jaywcjlove/awesome-mac> <https://github.com/matryer/bitbar> <https://github.com/rgcr/m-cli> <https://github.com/clementine-player/Clementine>
-
-<https://github.com/sb2nov/mac-setup> <https://github.com/guarinogabriel/Mac-CLI> <https://github.com/Louiszhai/tool> <https://github.com/docker/machine> <https://github.com/geerlingguy/mac-dev-playbook> <https://github.com/MacDownApp/macdown> <https://github.com/b4winckler/macvim> <https://github.com/0nn0/terminal-mac-cheatsheet> <https://github.com/macvim-dev/macvim> <https://github.com/nicolashery/mac-dev-setup> <https://github.com/wepe/MachineLearning> <https://github.com/typcn/bilibili-mac-client> <https://github.com/go-macaron/macaron> <https://github.com/donnemartin/dev-setup>
