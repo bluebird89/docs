@@ -1,5 +1,12 @@
+# php-fpm
+
 fastcgi_pass unix:/run/php/php7.1-fpm.sock;
 
+## Mac
+
+配置文件路径 /private/etc/php-fpm.conf
+32行的 error_log ，改为（正行替换，注意 ‘;' 和空格）：
+error_log = /usr/local/var/log/php-fpm.log
 /ect/init.d/php7.0-fpm
 
 sudo service php7.0-fpm reload

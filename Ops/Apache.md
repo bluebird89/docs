@@ -91,3 +91,12 @@ rm -f /usr/local/apache2/logs/httpd.pid
 - chmod +x httpd-foreground
 - docker build -t httpd .
 - docker run -p 80:80 -v $PWD/www/:/usr/local/apache2/htdocs/ -v $PWD/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf -v $PWD/logs/:/usr/local/apache2/logs/ -d httpd
+
+## mac
+
+系统本身带有apache2
+
+brew install httpd
+/private/etc/apache2/httpd.conf
+
+/usr/local/etc/httpd/httpd.conf
