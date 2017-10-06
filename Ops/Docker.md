@@ -83,6 +83,10 @@ Docker基于LXC的改进
 
 - Ubuntu
 
+sudo apt-get install -y docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+
 ```
 // Install packages to allow apt to use a repository over HTTPS
 sudo apt-get install \
@@ -108,6 +112,7 @@ sudo apt-get install docker-ce
 
 ## Usage:
 
+ensure docker daemon runing
 拉取或新建服务，挂载目录与运行.应用一般包括三种文件：
 
 - 应用文件或数据文件（htdocs/data）
@@ -133,6 +138,7 @@ sudo apt-get install docker-ce
 docker images // 列出本地主机上的镜像
 docker pull ubuntu:13.10 // 获取镜像
 docker search httpd  // 搜索镜像
+sudo apt-get upgrade docker-ce
 ```
 
 #### 创建镜像
@@ -171,12 +177,13 @@ docker search httpd  // 搜索镜像
 ```
 docker version
 docker search tutorial
+docker pull learn/tutorial  
+docker create ubuntu:14.04 //  create images
+docker run -i -t ubuntu:15.10 /bin/bash // 在新容器内建立一个伪终端或终端。
 docker run -d -P training/webapp python app.py   //  -P :是容器内部端口随机映射到主机的高端口。    
 docker run -d -p 127.0.0.1:5001:5002  --name runoob training/webapp python app.py   // -p : 是容器内部端口绑定到指定的主机端口。  使用--name标识来命名容器
 docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py  
-docker pull learn/tutorial
 docker run learn/tutorial echo "hello word"   // 两个参数，一个是指定镜像名（从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像），一个是要在镜像中运行的命令
-docker run -i -t ubuntu:15.10 /bin/bash // 在新容器内建立一个伪终端或终端。
 docker run learn/tutorial apt-get install -y ping   // learn/tutorial镜像里面安装ping程序
 docker ps    // 查看运行容器状态
 docker ps -l   // 查看最后一次创建的容器
@@ -191,7 +198,15 @@ docker rm name // 移除容器
 docker push learn/ping
 docker port 7a38a1ad55c6  docker port determined_swanson：查看指定 （ID或者名字）容器的某个确定端口映射到宿主机的端口号
 ```
+### avoid sudo
+```
+sudo groupadd docker
+sudo gpasswd -a ${USER} docker
+sudo service docker restart
 
+sudo usermod -aG docker ${USER}
+sudo usermod -aG docker $(whoami)
+```
 ### 容器连接
 
 连接系统允许将多个容器连接在一起，共享连接信息。docker连接会创建一个父子关系，其中父容器可以看到子容器的信息。

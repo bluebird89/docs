@@ -106,7 +106,9 @@ ubuntu.16替换apt-get为apt
 
 where||type composer
 ```
-
+### Network
+sudo gedit /etc/modprobe.d/iwlwifi.config 
+add `options iwlwifi 11n_disable=1`
 ### 终端
 
 终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
