@@ -206,6 +206,11 @@ sudo service docker restart
 
 sudo usermod -aG docker ${USER}
 sudo usermod -aG docker $(whoami)
+
+// mac
+docker-machine start # Start virtual machine for docker
+docker-machine env  # It's helps to get environment variables
+eval "$(docker-machine env default)" # Set environment variables
 ```
 ### 容器连接
 
