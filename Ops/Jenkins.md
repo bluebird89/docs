@@ -19,8 +19,18 @@ war包自带Jetty服务器 `java -jar jenkins.war`访问<http://localhost:8080>�
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 
-### 在线安装路径
+安装包自动完成的工作包含：
+- 设置Jenkins开机自启动，设置内容见/etc/init.d/Jenkins 文件
+- 创建了jenkins用户用来运行服务
+- 输出安装日志文件到  /var/log/jenkins/jenkins.log，检查日志文件可定位安装过程遇到的问题
+- 输出配置文件到/etc/default/Jenkins可修改相关配置
+- 设置Jenkins监听的端口为8080，通过浏览器可用该端口进行访问
 
+### docker安装
+```
+docker pull jenkins/Jenkins
+docker run -d -p 49001:8080 -v$PWD/jenkins:/var/jenkins_home -t jenkins/jenkins
+```
 ## usage
 
 <https://www.centos.bz/2017/07/jenkins-ansible-docker-swarm/>
