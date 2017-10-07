@@ -56,7 +56,7 @@
 
 - iwork
 - google docs [表单](https://docs.google.com/forms/u/0/)
-- libra
+- libre
 
 ## 整理工具列表：
 

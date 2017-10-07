@@ -222,13 +222,15 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 - Command+Q: 退出程序
 
 ## 共享目录
-
+smaba
 ```
-Run "\\192.168.0.4" 来访问其他机器共享的目录
+windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 在Mac中， 先打开Finder, command +K  打开共享目录 输入： smb://192.168.0.4/share
 ```
 
 ## 软件
+
+可以通过plist文件安装软件
 
 ### 安装
 
@@ -242,9 +244,26 @@ Run "\\192.168.0.4" 来访问其他机器共享的目录
 - launchpad 长按
 - finder 找到移动到垃圾桶
 - 通过appcleaner彻底清除
+## 包管理工具
+###  MacPORTS
+[MacPORTS](https://guide.macports.org/)an open-source community initiative to design an easy-to-use system for compiling, installing, and upgrading either command-line, X11 or Aqua based open-source software on the Mac operating system.
+Mac算是BSD的一个变种吧。所以，BSD的包管理软件port被移植到Mac上就显的理所当然了。 macports的工作方式是下载source code然后在本地编译。macport的理念是尽量减少对系统现有库的依赖。 所以，第一次用macport的时候，需要很长时间让macport重新build整个基本库。代价是较长的编译时间，较多的依赖关系下载。好处是不怎么依赖系统，也就是说，更新Mac OS不会破坏你现有的 package。 另外，macports安装所有的package到/opt/local下面。这样不会和系统现有的/usr/local有什么冲突。
+通过rsync维持数据索引一致
+```
+sudo port -v selfupdate // 更新 MacPorts 索引
+port search NAME
+sudo port install NAME
+sudo port uninstall NAME
+port outdated
+sudo port upgrade outdated
+```
+#### 问题
+Failed to initialize MacPorts, OS platform mismatch 重新安装
 
-### 包管理工具Brew
-
+### 包管理工具Homebrew
+下载source并在本地编译安装，与macports差别
+- homebrew的理念是尽量使用系统现有的库。这样可以大大的减少编译时间。
+- package都安装到/usr/local下面。
 - 资源包管理：Homebrew(安装完brew时，brew-cask已经安装好了，无需额外安装）
 - 程序文件 /usr/local/etc/
 - 应用文件 /usr/local/Cellar/
@@ -368,7 +387,6 @@ brew services start postgresql
 - Reeder 3 RSS订阅（暂时feedly代替）
 - mounty:win的移动硬盘
 - [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
-- MacPorts：The MacPorts Project is an open-source community initiative to design an easy-to-use system for compiling, installing, and upgrading either command-line, X11 or Aqua based open-source software on the Mac operating system.
 - [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
 - Fantastical 2:日历工具 收费
 - 苹果铃声制作
@@ -580,8 +598,6 @@ Insert Horizontal Rule | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>-</kbd>
 sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist
 sudo launchctl load -w /System/Library/LaunchDaemons/org.apache.httpd.plist
 ```
-
-### [MacPORTS](https://guide.macports.org/)
 
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 

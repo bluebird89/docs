@@ -501,6 +501,9 @@ smb://192.168.100.106
 \\172.16.44.175\Ubuntu
 ```
 
+### rsync
+类unix系统下的数据镜像备份工具。使用快速增量备份工具Remote Sync可以远程同步，支持本地复制，或者与其他SSH、rsync主机同步。
+
 ## 扩展
 
 - [aleksandar-todorovic/awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux)A list of awesome projects and resources that make Linux even more awesome
