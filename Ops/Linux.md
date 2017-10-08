@@ -504,19 +504,21 @@ smb://192.168.100.106
 ## shell扩展
 
 ### grep：Global search REgrular expression and Print out the line
---color=auto：对匹配到的文本着色显示
-_ -v：显示不被pattern 匹配到的行，反向选择
-_ -i：忽略字符大小写
-_ -n：显示匹配的行号
-_ -c：统计匹配的行数
-_ -o：仅显示匹配到的字符串
-_ -q：静默模式，不输出任何信息
-_ -A #：after，后#行 ,显示包含这行后续#行
-_ -B #：before，前#行
-_ -C #：context，前后各#行
-_ -e：实现多个选项间的成逻辑or关系，grep –e ‘cat ’ -e ‘dog’ file
-_ -w：匹配整个单词,（字母，数字，下划线不算单词边界）
-_ -E：使用ERE
+
+- --color=auto：对匹配到的文本着色显示
+- -v：显示不被pattern 匹配到的行，反向选择 ,查找文件中不包含”test“内容的行 `grep -v test log.txt`
+- -i：忽略字符大小写
+- -n：显示匹配的行号
+- -c：统计匹配的行数
+- -o：仅显示匹配到的字符串
+- -q：静默模式，不输出任何信息
+- -A #：after，后#行 ,显示包含这行后续#行
+- -B #：before，前#行
+- -C #：context，前后各#行
+- -e：实现多个选项间的成逻辑or关系，grep –e ‘cat ’ -e ‘dog’ file
+- -w：匹配整个单词,（字母，数字，下划线不算单词边界）
+- -E：使用ERE
+- -r或--recursive 此参数的效果和指定"-d recurse"参数相同。
 
 ## sed
 
@@ -536,22 +538,26 @@ sed的功能：主要用来自动编辑一个或多个文件，简化对文件�
 
 ### 编辑命令：地址定界后，对范围内的内容进行相关编辑。
 
-- d：删除模式空间匹配的行，并立即启用下一轮循环
+- d：删除模式空间匹配的行，并立即启用下一轮循环 `nl log.txt | sed '2,3d'`
 - p：打印当前模式空间内容，追加到默认输出之后
 - q：读取到指定行之后退出
-- a [\]text：在指定行后面追加文本支持使用\n 实现多行行后追加
-- i [\]text：在行前面插入文本
-- c [\]text：替换行为单行或多行文本
+- `a [\]text`：在指定行后面追加文本支持使用\n 实现多行行后追加 `sed -e 4a\newline log.txt`
+- `i [\]text`：在行前面插入文本
+- `c [\]text`：替换行为单行或多行文本  `nl log.txt | sed '2,3c No 2-3 number'`
 - w /path/somefile：保存模式匹配的行至指定文件
 - r /path/somefile：读取指定文件的文本至模式空间中匹配到的行后
 - =：为模式空间中的行打印行号
 - !：模式空间中匹配行取反处理
-- s///：查找替换, 支持使用其它分隔符，s@@@ ，s###
+- s///：查找替换, 支持使用其它分隔符，s@@@ ，s###  `nl log.txt | sed -e '3d' -e 's/test/TEST/'`
 - ；：对一行进行多次操作的命令的分割
 - &：配合s///使用，代表前面所查找到的字符等，&sm ；sm&。
 - g：行内全局替换。也可以指定行内的第几个符合要求的进行替换：2g,就表示第2个替换。
-- p：显示替换成功的行
+- p：显示替换成功的行 `nl log.txt | sed -n '/is/p'`  a替换A，多个用;分开`nl log.txt | sed -n '/is/{s/a/A/;p}'`
 - w /PATH/TO/SOMEFILE：将替换成功的行保存至文件中
+- -e<script>或--expression=<script> 以选项中指定的script来处理输入的文本文件。
+- -f<script文件>或--file=<script文件> 以选项中指定的script文件来处理输入的文本文件。
+- -n或--quiet或--silent 仅显示script处理后的结果。
+- sed 可以直接修改文件的内容，不必使用管道命令或数据流重导向！ 不过，由於这个动作会直接修改到原始的文件，所以请你千万不要随便拿系统配置来测试！ 添加一行`sed -i '$aHow are you today' log.txt`
 
 ### 高级编辑命令：也是对定界范围内的内容进行处理了，不过是处理起来更加高级。
 
@@ -567,7 +573,8 @@ sed的功能：主要用来自动编辑一个或多个文件，简化对文件�
 - D：如果模式空间包含换行符，则删除直到第一个换行符的模式空间中的文本，并不会读取新的 输入行，而使用合成的模式空间重新启动循环。如果模式空间不包含换行符，则会像发出d 命令那样启动正常的新循环
 
 看着有点有，这里写几个用法示例：
-```
+
+````
 sed ‘2p’ /etc/passwd
 sed –n ‘2p’ /etc/passwd
 sed –n ‘1,4p’ /etc/passwd
@@ -597,12 +604,16 @@ sed ‘g’ FILE
 sed ‘/^$/d;G’ FILE
 sed 'n;d' FILE
 sed -n '1!G;h;$p' FILE
-```
+````
 
+### nl 
+
+nl -- line numbering filter
 
 ### awk
 man awk
 awk是一种报表生成器，就是对文件进行格式化处理的，这里的格式化不是文件系统的格式化，而是对文件内容进行各种“排版”，进而格式化显示。
+
 ```
 gawk - pattern scanning and processing language：（模式扫描和处理语言）
 awk [options] 'BEGIN{ action;… } pattern{ action;… } END{ action;… }' file ...
@@ -617,6 +628,7 @@ awk [options] 'BEGIN{ action;… } pattern{ action;… } END{ action;… }' file
 - 当读至输入流末尾时，也就是所有行都被读取完执行完后，再执行END{action;…} 语句块。END 语句块在awk从输入流中读取完所有的行之后即被执行，比如打印所有行的分析结果这类信息汇总都是在END 语句块中完成，它也是一个可选语句块。
 
 #### 内置变量：
+
 ```
 FS：输入字段分隔符，默认为空白字符，这个想当于-F选项。分隔符可以是多个，用[]括起来表示,如：-v FS="[,./-:;]"
 OFS：输出字段分隔符，默认为空白字符，分隔符可以是多个，同上
@@ -706,13 +718,14 @@ awk -v FS=" " 'BEGIN{printf "%s %26s %10s\n","Module","Size","Used by"}{printf "
 ```
 
 #### 操作符
+
+```
 - 算术操作符：x+y, x-y, x*y, x/y, x^y, x%y
 - 赋值操作符：=, +=, -=, *=, /=, %=, ^=，++, --
 - 比较操作符：==, !=, >, >=, <, <=
 - 模式匹配符：~ ：左边是否和右边匹配包含；!~ ：是否不匹配
 - 逻辑操作符：与:&& ；或:|| ；非:!
 - 条件表达式（三目表达式）：selector ? if-true-expression : if-false-expression
-```
 awk –F: '$0 ~ /root/{print $1}‘ /etc/passwd
 awk '$0~“^root"' /etc/passwd
 awk '$0 !~ /root/‘ /etc/passwd
@@ -727,13 +740,15 @@ awk -F: '{$3>=1000?usertype="Common User":usertype="Sysadmin or SySUSEr";printf 
 #### pattern
 
 根据pattern条件，过滤匹配的行，再做处理。
+
+```
 - 未指定：表示空模式，匹配每一行
 - /regular expression/：仅处理能够模式匹配到的行，支持正则表达式，需要用/ /括起来
 - 关系表达式：结果为“真”才会被处理。真：结果为非0值，非空字符串。假：结果为空字符串或0值
 - /pat1/,/pat2/：startline,endline ，行范围,支持正则表达式，不支持直接给出数字格式
 - BEGIN{}和END{}：BEGIN{} 仅在开始处理文件中的文本之前执行一次。END{}仅在文本处理完成之后执行 一次
 
-```
+
 awk '/^UUID/{print $1}' /etc/fstab
 awk '!/^UUID/{print $1}' /etc/fstab
 awk -F: ‘/^root\>/,/^nobody\>/{print $1}' /etc/passwd
@@ -867,6 +882,7 @@ awk –f fun.awk
 ```
 
 #### 脚本
+
 将awk程序写成脚本形式，来直接调用或直接执行。
 
 格式1：`BEGIN{} pattern{} END{}`
