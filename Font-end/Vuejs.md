@@ -69,6 +69,11 @@ MVVM：ViewModel
 
 - package.json中添加"stylus-loader": "^1.4.0"，npm install安装插件
 
+## 项目
+
+- [vue2-happyfri](https://github.com/bailicangdu/vue2-happyfri)vue2 + vue-router + vuex 入门项目
+- [vue2-elm](https://github.com/bailicangdu/vue2-elm)基于 vue2 + vuex 构建一个具有 45 个页面的大型单页面应用
+
 # todo
 
 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) <http://www.cnblogs.com/keepfool/p/5619070.html>
