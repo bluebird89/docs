@@ -65,6 +65,10 @@ vagrant resume
 vagrant plugin install vagrant-vbguest
 ```
 
+## box管理
+- vagrant box add ubuntu/trusty64 通过包名先去本地是否存在，没有去仓库下载
+- vagrant box add hahaha ~/box/package.box 加载本地文件
+
 ## 搭建集群:ip中的0与1默认被占用，hostname不能含特殊符号
 
 ```
