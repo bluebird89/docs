@@ -178,7 +178,6 @@ DATABASES = {
 - [binux/pyspider](https://github.com/binux/pyspider)A Powerful Spider(Web Crawler) System in Python. <http://docs.pyspider.org/>
 - [fabric/fabric](https://github.com/fabric/fabric)Simple, Pythonic remote execution and deployment. <http://fabfile.org>
 - [vinta/awesome-python](https://github.com/vinta/awesome-python)
-- []()
 - [keon/algorithms](https://github.com/keon/algorithms)Minimal examples of data structures and algorithms in Python
 
 ## 工具
@@ -317,3 +316,13 @@ CMD ["python3"]
 ```
 - docker build -t python:3.5 .
 - docker run  -v $PWD/myapp:/usr/src/myapp  -w /usr/src/myapp python:3.5 python helloworld.py
+
+## selenium
+
+python3 -m pip install selenium 
+
+安装 chromedriver
+
+## 参考
+
+- http://blog.csdn.net/gitchat/article/details/77849725
