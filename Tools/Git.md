@@ -18,9 +18,18 @@ brew install git
 git clone有两种方式https与ssh，SSH keys的使用需保证remote的源为git方式
 
 - 全局配置：/etc/gitconfig文件 `git config --system`
-- 用户配置：home目录下的 .gitconfig文件 `git config --global`
-- 项目配置：项目目录下.git/config文件 `git config`
+- 用户配置：~/.gitconfig    `git config --global`
+- 项目配置：project/.git/config   `git config`
 - 查看配置:`git config --list --show-origin`
+
+
+```
+git config --global user.name "name"
+git config --global user.email "email"
+git config --global color.ui "auto"
+git config --global core.editor vim # 设置编辑器为 vim
+git config -l                       # 列举所有配置
+```
 
 ### key生成
 
@@ -41,14 +50,6 @@ gpg --list-key
 sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
 gpg --armor --export 3AA5C34371567BD2  // get the key,add to github
 git config --global user.signingkey 35F5FFB2
-```
-
-### 用户信息配置
-
-```
-git config --global user.name "name"
-git config --global user.email "email"
-git config --global color.ui "auto"
 ```
 
 ### 个性化配置
@@ -171,7 +172,7 @@ Git 的工作就是创建和保存项目的快照及与之后的快照进行对�
 - git clone [url] [project-name]:下载一个项目和它的整个代码历史
 - git subtree add --prefix=client <https://github.com/example/project-client.git> master // 建立主项目里子树
 
-  ### 编辑项目:提交到暂存区
+### 编辑项目
 
 ```
 git add ./<file1>(<file2> <file3>)/[dir] （所有修改过的文件/单个文件 或通过使用通配符将一组文件添加到暂存区）
@@ -179,6 +180,11 @@ git add -p 添加每个变化前，都会要求确认,对于同一个文件的�
 git rm [file1] [file2] ... 删除工作区文件，并且将这次删除放入暂存区
 git rm --cached [file]  停止追踪指定文件，但该文件会保留在工作区
 git mv [file-original] [file-renamed]  改名文件，并且将这个改名放入暂存区
+
+git checkout [file]  恢复暂存区的指定文件到工作区
+git checkout [commit] [file] 恢复某个commit的指定文件到暂存区和工作区
+git checkout ./file:回滚最新版本库文件，抛弃工作区修改
+git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1234567a44341404 / HEAD 
 
 git commit -m "the first commit"：提交修改
 git commit [file1] [file2] ... -m [message]
@@ -192,13 +198,6 @@ git pull --rebase origin master:获取最新远程分支并合并
 暂存区编辑:
 
 ```
-git checkout [file]  恢复暂存区的指定文件到工作区
-git checkout [commit] [file] 恢复某个commit的指定文件到暂存区和工作区
-git checkout . 恢复暂存区的所有文件到工作区
-git checkout ./file:回滚最新版本库文件，抛弃工作区修改
-
-git checkout  -- <file> # 抛弃工作区修改
-git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1234567a44341404 / HEAD
 git reset [file] 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
 git reset --hard 重置暂存区与工作区，与上一次commit保持一致
 git reset [commit] 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
@@ -229,7 +228,9 @@ git rebase --continue
 
 ```
 git stutus:工作树与暂存区的文件对比差别,显示有变更的文件
+
 git show [$id]:显示某次提交的内容
+
 git diff :查看执行 git status 的结果的详细信息
 git diff --staged:暂存区与最新一次提交之间的差别
 git diff HEAD:本次提交与上次提交之间的区别
@@ -278,6 +279,9 @@ git branch -d [branch-name] 删除分支
 git rebase source destiantion：将source压缩到destiantion
 git rebase master
 git branch --set-upstream-to=origin/master master
+
+git branch --set-upstream master origin/master 建立追踪关系，在现有分支与指定的远程分支之间
+git branch --set-upstream develop origin/develop
 ```
 
 标签
@@ -328,12 +332,6 @@ git push origin :<remote_branch>  #先删除本地分支(git branch -d <branch>)
 git archive
 ```
 
-设置跟踪远程库和本地库：
-
-```
-git branch --set-upstream master origin/master 建立追踪关系，在现有分支与指定的远程分支之间
-git branch --set-upstream develop origin/develop
-```
 
 # 搭建git私有服务器
 
