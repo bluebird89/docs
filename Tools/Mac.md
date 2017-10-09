@@ -26,7 +26,6 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - 设置未收录的开发者应用`sudo spctl --master-disable`
 - [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
 - [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
-- [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
 - [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(推荐)
 - [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
 - [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
@@ -35,6 +34,12 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
 - [rgcr/m-cli](https://github.com/rgcr/m-cli) Swiss Army Knife for macOS
 - [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
+
+### 配置文件
+- [arialdomartini/dotfiles](https://github.com/arialdomartini/dotfiles)Just my Mac OS X and Linux dot files
+- [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
+- 
+
 
 ## 键位
 
