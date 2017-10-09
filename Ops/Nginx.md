@@ -7,8 +7,13 @@
 - NGINX Unit，可运行 PHP、Python 和 Go 的新型开源应用服务器。
 - NGINX Controller NGINX Plus 的中央控制面板
 ![](../_static/nignx.png)
+
 ## 配置
+
 ### main（全局设置）
+
+PHP7默认的用户和组是www-data
+
 这部分的指令将会影响其他部分的设置
 
 - worker_processes 2
