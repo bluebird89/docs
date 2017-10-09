@@ -97,6 +97,12 @@ $ sudo reboot
   ```
   sudo apt-get install fish
   brew install fish
+
+  // iterm 配置
+  echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
+  chsh -s /usr/local/bin/fish
+  curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher  // 安装fisherman（fish 的插件管理器）
+  fisher omf/theme-default
   ```
 
   ```
@@ -156,8 +162,6 @@ $ sudo reboot
       end
   ```
 
-[窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
-
 所有操作都通过键盘，只适合命令行的重度用户.用来管理软件窗口的位置和大小，会自动在桌面上平铺（tiling）窗口。桌面环境通常很重，窗口管理器就很轻，不仅体积小，资源占用也少，用户可以配置各种细节，释放出系统的最大性能。
 
 - 安装
@@ -201,3 +205,10 @@ dmenu 在桌面顶部提供了一个菜单条，可以快速启动应用程序
 - 按下ESC键可以退出
 - 方向键用来选择应用程序
 - return键用来启动
+
+## 参考
+
+- [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager. 
+- [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community. 
+- [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
+- [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
