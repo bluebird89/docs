@@ -1,11 +1,6 @@
-# 工具
+# UML
 
-- ProcessOn
-- Umlet
-- ArgoUML
-- PlantUML
-
-[入门UML](http://www.jianshu.com/p/1256e2643923)
+[TOC]
 
 UML是一种开放的方法，用于说明、可视化、构建和编写一个正在开发的、面向对象的、软件密集系统的制品的开放方法。
 
@@ -104,3 +99,16 @@ class Dummy {
 
 ![Alt text](http://g.gravizo.com/g?
     Human *-- Brain)
+
+
+## 软件
+
+- ProcessOn
+- Umlet
+- ArgoUML
+- PlantUML
+- staruml
+
+## 参考
+
+- [入门UML](http://www.jianshu.com/p/1256e2643923)
