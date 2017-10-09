@@ -67,6 +67,8 @@ File Handling | null
 
 :n Edit next file | :n! Edit next file (ignoring warnings) | :n files Specify new list of files | :r file Insert file after cursor | :r !command Run command, and insert output after current line |
 
+![](../_static/vim.png)
+
 ```
 vi有3个模式：插入模式、命令模式、低行模式
 1）插入模式：在此模式下可以输入字符，按ESC将回到命令模式。
