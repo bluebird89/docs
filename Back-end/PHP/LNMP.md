@@ -1,10 +1,22 @@
-# linux 环境搭建
+# Lnmp 环境搭建
 
-## LNMP 配置
+## Linux
 
 ### Nginx
 
-安装：`sudo apt-get install nginx`
+```
+wget http://nginx.org/keys/nginx_signing.key
+sudo apt-key add nginx_signing.key
+
+echo "deb http://nginx.org/packages/ubuntu/ trusty nginx" >> /etc/apt/sources.list
+echo "deb-src http://nginx.org/packages/ubuntu/ trusty nginx" >> /etc/apt/sources.list
+
+echo "deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx" >> /etc/apt/sources.list  // Nginx1.9以上的版本可以在packages后添加/mainline，这是主线版本
+echo "deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx" >> /etc/apt/sources.listen 
+
+sudo apt-get update
+sudo apt-get install nginx
+```
 
 root目录显示文件列表
 
@@ -18,7 +30,7 @@ autoindex_localtime on;
 ### MySQL
 
 ```
-sudo apt-get install mysql-server(mariadb-server mariadb-client)
+sudo apt-get install mysql-server(mariadb-server mariadb-client)  mysql-client
 sudo mysql_secure_installation
 
 There are three levels of password validation policy:
@@ -27,20 +39,19 @@ MEDIUM Length >= 8, numeric, mixed case, and special characters
 STRONG Length >= 8, numeric, mixed case, special characters and dictionary
 ```
 
-### PHP（Default php5.5.9）
+### PHP
 
-- php5.6&php7&php7.1：
+```
+sudo apt-get install python-software-properties software-properties-common
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+sudo apt-get install php7.1-fpm php7.1-mysql php7.1-common php7.1-curl php7.1-cli php7.1-mcrypt php7.1-mbstring php7.1-dom
+```
 
-  ```
-  sudo apt-get install python-software-properties
-  sudo add-apt-repository ppa:ondrej/php
-  sudo apt-get update
-  sudo apt-get install -y php7.1-fpm（php5.6、php7.0、php7.1、php5.6-fpm、php7.0-fpm）php7.1-mysql
-  ```
-
-- 修改配置文件/etc/php/7.1/fpm/php.ini：`cgi.fix_pathinfo=0`
-
-- 检测版本：`php -v`
+- 修改配置文件sudo vim /etc/php/7.1/fpm/php.ini：`cgi.fix_pathinfo=0`
+- sudo phpenmod mcrypt // 启用 mcrypt
+- sudo service php7.1-fpm restart
+- php -v
 
 - Modules:
 

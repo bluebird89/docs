@@ -1295,3 +1295,8 @@ function boot()
 [laravel-admin](http://laravel-admin.org/docs/#/zh/quick-start)
 
 laravel-ide-helper
+
+
+## 参考
+
+- [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js. 
