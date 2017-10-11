@@ -125,4 +125,6 @@ react-native run-android
 
 
 ## 参考
+
 - [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
+- [React Native的极简手册](http://www.jianshu.com/p/318342e139c7)

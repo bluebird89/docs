@@ -38,7 +38,6 @@ Mac：最大优势是 GUI 和命令行的完美结合
 ### 配置文件
 - [arialdomartini/dotfiles](https://github.com/arialdomartini/dotfiles)Just my Mac OS X and Linux dot files
 - [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
-- 
 
 
 ## 键位
