@@ -69,6 +69,10 @@ MVVM：ViewModel
 
 - package.json中添加"stylus-loader": "^1.4.0"，npm install安装插件
 
+## 工具
+
+- vetur：vscode插件
+
 ## 项目
 
 - [vue2-happyfri](https://github.com/bailicangdu/vue2-happyfri)vue2 + vue-router + vuex 入门项目
