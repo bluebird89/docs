@@ -50,7 +50,7 @@ valet restart
 
 通过composer升级:根据升级文档修改composer.json配置`composer update`
 
-# 加载
+## 加载
 
 - vagrant box add --name laravel\homestead virtualbox.box
 - vagrant list
@@ -89,6 +89,10 @@ from @golaravel
 "repositories": [ {"type": "composer", "url": "<http://packagist.phpcomposer.com"}>, {"packagist": false} ],
 
 ## valet
+
+## Laragon
+
+## [laradock](https://github.com/LaraDock/laradock.git)
 
 ## Artisan 命令
 
@@ -1296,7 +1300,23 @@ function boot()
 
 laravel-ide-helper
 
+### traits
+
+不支持传递参数
+
+
+## 代码结构
+
+
+## API
+
+## 扩展框架
+
+- [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
+- [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks. 
 
 ## 参考
 
 - [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js. 
+- [快速入门 —— 使用 Laragon 在 Windows 中搭建 Laravel 开发环境](http://laravelacademy.org/post/7754.html)
+- [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
