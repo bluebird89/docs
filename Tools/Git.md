@@ -785,7 +785,9 @@ Agis Anastasopoulos / [@agisanast](https://twitter.com/agisanast) / <http://agis
 - Git User Manual：客户端含有的文档
 - [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet)
 - [atlassian](https://www.atlassian.com/git)
+## 文档
 - [Pro Git（中文版）](http://git.oschina.net/progit/)
+- [GitHub规范](https://guides.github.com/)
 
 ## 工具
 
