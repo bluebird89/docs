@@ -523,6 +523,8 @@
 会用代码管理工具来管理源码，然后将开发流程和部署流程与git结合起来。多人分支协作流程：用git flow来管理代码分支。
 
 
+## 文档
+- [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
 
 ## 参考
 - [从软件工程角度看大前端技术栈](http://blog.csdn.net/gitchat/article/details/77199990)
