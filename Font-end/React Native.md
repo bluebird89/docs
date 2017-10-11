@@ -11,6 +11,14 @@ RN的原理是将React代码转化为原生API，iOS一套，Android一套。RN�
 - 完全组件化：自动分析加载页面的静态资源依赖。
 - 生态圈：畅享所有 React 组件。
 
+React是由Facebook开发出来的用于开发用户交互界面的JS库。其源码由Facebook和社区优秀的程序员维护。React带来了很多新的东西，例如组件化、JSX、虚拟DOM等。其提供的虚拟DOM使得我们渲染组件呈现非常之快，让我们从频繁操作DOM的繁重工作之中解脱。它做的工作更多偏重于MVC中的V层，结合其它如Flux等一起，你可以非常容易构建强大的应用。
+
+React的世界里，一切都是组件。你可以构建任何直接的HTML没有的组件，例如下拉菜单、导航菜单等。同时，组件里也可以包含其它组件。每一个组件都有一个render方法，用于呈现该组件。同时，每一个组件都有属于自己的scope，从而与其它的组件界定开来，用于构建属于该组件的方法，以方便复用。JSX是基于JS的扩展，它允许你在JS里直接写HTML的代码，而不用像我们过去一样要想在JS里写HTML不得不拼接一大堆的字符串。React不直接操作DOM，频繁的操作DOM会非常影响性能和体验。React将DOM结构储存在内存中，与render方法的返回值进行比较，通过其自由的diff算法计算出不同的地方，然后反应到真实的DOM当中。也就是说，大多数情况我们渲染组件、更改组件状态等都是操作的虚拟DOM，只有在有所改变的情况下，才会反应到真实的DOM当中。React Native基于ReacJS，把 React 编程模式的能力带到移动开发,用来开发iOS和Android原生应用.
+
+odeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多系统级的API，如文件操作、网络编程等. 用事件驱动, 异步编程,主要是为后台网络服务设计.React Native 借助 Node.js，即 JavaScript 运行时来创建 JavaScript 代码。
+
+总结来说，React Native使用NodeJS来做系统处理，使用React来渲染。
+
 ## 资源
 
 - [react-native](https://github.com/facebook/react-native)
@@ -127,4 +135,11 @@ react-native run-android
 ## 参考
 
 - [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
-- [React Native的极简手册](http://www.jianshu.com/p/318342e139c7)
+- [React Native的极简手册](http://www.jianshu.com/p/318342e139c7) 没看懂
+
+## 教程
+
+- [fangwei716/30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
+## 图书
+
+- React Native入门与实战
