@@ -913,7 +913,7 @@ MWeb 引入的特别的语法来设置图片宽度，方法是在图片描述后
 Actions->Insert Read More Comment *或者* `Command + .`
 **注** 阅读更多的功能只用在生成网站或博客时，插入时注意要后空一行。
 
-#### TOC 内容列表
+#### TOC Table of Contents 内容列表
 
 Markdown 语法： **Example:**
 
@@ -940,6 +940,18 @@ Markdown 语法： **Example:**
 * 快捷键：`CMD + 3` 是在三栏模式和仅编辑器模式中切换。
 * 快捷键：`CMD + 4` 是在编辑器/预览模式和三栏模式中切换。
 * 快捷键：`CMD + R` 是在编辑器和预览模式中切换。
+
+
+###  编辑器插件
+
+#### sublime插件
+
+
+- Markdown Preview：预览
+- MarkdownEditing：代码提示
+- Markdown Extended：语法高亮
+- MarkdownLivePreview `alt + m`
+- Markdown​TOC
 
 ## 参考
 
