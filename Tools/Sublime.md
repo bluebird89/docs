@@ -398,4 +398,5 @@ ul>li.item$*3
 - 
 - 安装 
 
-[总结配置](https://github.com/jikeytang/sublime-text)
+* [总结配置](https://github.com/jikeytang/sublime-text)
+* [](http://laravelacademy.org/post/6711.html)

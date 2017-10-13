@@ -201,3 +201,9 @@ CMD ["nginx", "-g", "daemon off;"]
 docker pull nginx
 docker run -p 80:80 --name mynginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/wwwlogs  -d nginx  
 ```
+
+
+## 参考
+
+- [《Nginx官方文档》使用nginx作为HTTP负载均衡](http://ifeve.com/nginx-http/)
+- [并发](https://baike.baidu.com/item/%E5%B9%B6%E5%8F%91)

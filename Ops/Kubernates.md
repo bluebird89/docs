@@ -187,6 +187,7 @@ Kubelet是Kubernetes集群中每个Minion和Master API Server的连接点，Kube
 - [Kubernetes核心原理（二）之Controller Manager](http://blog.csdn.net/huwh_/article/details/75675761)
 - [Kubernetes核心原理（三）之Scheduler](http://blog.csdn.net/huwh_/article/details/77017353)
 - [Kubernetes核心原理（四）之Kubelet](http://blog.csdn.net/huwh_/article/details/77922293)
+- [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes)Production-Grade Container Scheduling and Management http://kubernetes.io
 
 <http://violetgo.com/blogs/> <http://www.winseliu.com/> <http://blog.csdn.net/qq1010885678/article/details/48832067>
 

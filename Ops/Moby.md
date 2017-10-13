@@ -235,6 +235,7 @@ eval "$(docker-machine env default)" # Set environment variables
 
 - docker-compose
 - [docker/machine](https://github.com/docker/machine)Machine management for a container-centric world
+- [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
 
 ## 分布式发布部署
 
@@ -247,3 +248,4 @@ eval "$(docker-machine env default)" # Set environment variables
 - [Docker 教程](http://www.runoob.com/docker/docker-tutorial.html)
 - [Docker for Mac](https://docs.docker.com/docker-for-mac/)
 - [Docker mac 入门](https://docs.docker.com/mac/)
+- [moby/moby](https://github.com/moby/moby)Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/

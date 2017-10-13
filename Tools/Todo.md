@@ -256,3 +256,42 @@ https://baike.baidu.com/item/%E5%A5%A5%E5%8C%88%E5%B8%9D%E5%9B%BD
 于是我说：嗯，有这个必要，而且，千万别撂挑子跟自己说：何不干脆就怎样。
 
 任何时候都别忘记，给自己留下一股子向前的力。
+
+
+https://www.lovelucy.info/git-command-cheatsheet.html 
+https://www.lovelucy.info/mvc-in-front-end-web-app-development-based-on-restful-api-design.html
+https://m.aoh.cc/149.html
+https://m.aoh.cc/1.html
+https://m.aoh.cc/161.html
+http://overtrue.me/articles/2015/01/how-to-deploy-project-with-git-hook.html
+https://pigjian.com/article/laravelrepository-pattern
+https://www.lovelucy.info/auto-deploy-website-by-webhooks-of-github-and-gitlab.html
+https://pigjian.com/article/collection
+https://pigjian.com/article/api-token-authentication
+https://github.com/arialdomartini/api-guidelines/blob/vNext/Guidelines.md
+https://pigjian.com/article/based-on-the-weui-js-weui-distpicker-area-selectors
+https://pigjian.com/article/simple-and-easy-deployment-of-your-project-deployer
+https://pigjian.com/article/laravel-vue
+https://pigjian.com/article/overtrue-coding
+
+一个姑娘，只要大学毕业，有一份能养活自己的工作，长相中上，会打扮会化妆，空闲时再有自己的一点小爱好，就会被认为是优秀的。
+
+可同样的条件，要是放在男人身上，那么，你得到的评价就只会是两个字：屌丝！
+
+评价男女是否优秀，女生只要自己优秀就行了，而男生光自己优秀还不行，你必须比别的男生优秀，那才叫优秀。 http://www.jianshu.com/p/c516bb540f5c
+
+早起 锻炼  读书  http://www.jianshu.com/p/622b40b9ac08
+http://www.jianshu.com/p/e6434fa3ca29
+http://www.jianshu.com/p/eb1c6401c33f
+http://www.jianshu.com/p/49515fc5cf58
+http://www.jianshu.com/p/65b9f56454ff
+http://www.jianshu.com/p/0c494120bdfa
+http://www.jianshu.com/p/3aa00bb22754
+http://www.jianshu.com/p/6d5d16d2b7f0
+http://www.jianshu.com/p/e76c2e3a3ef2
+
+自身环境、能力反思
+
+计划 安排
+
+效果
