@@ -11,8 +11,6 @@
 - PhpStrom
 - terminal
 
-- [laravel入门教程](https://d.laravel-china.org/docs/5.5) [Laravel 教程 - Web 开发实战入门] [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
-
 ## 环境配置
 
 ### homestead:安装virtualbox and vagrant
@@ -1304,9 +1302,17 @@ laravel-ide-helper
 
 不支持传递参数
 
+## 调试
+
+* 配置文件中`APP_DEBUG`
+* `storage/logs`中的日志文件
+
 
 ## 代码结构
 
+## 插件
+
+- [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp. 
 
 ## API
 
@@ -1320,3 +1326,9 @@ laravel-ide-helper
 - [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js. 
 - [快速入门 —— 使用 Laragon 在 Windows 中搭建 Laravel 开发环境](http://laravelacademy.org/post/7754.html)
 - [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
+- [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
+- [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)
+- [Laravel Cheat Sheet](http://cheats.jesse-obrien.ca/)
+- [laravel入门教程](https://d.laravel-china.org/docs/5.5) 
+- [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
+- [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)

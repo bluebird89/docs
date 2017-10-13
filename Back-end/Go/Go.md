@@ -58,16 +58,23 @@ LABLE标签 goto break continue
 
 slice reslice
 
+## 学习
+
+- [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
+- [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. https://iris-go.com
+
 ## 框架
 
-- [go-macaron/macaron](https://github.com/go-macaron/macaron)Package macaron is a high productive and modular web framework in Go.
+- [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
+- [astaxie/beego](https://github.com/astaxie/beego):beego is an open-source, high-performance web framework for the Go programming language. http://beego.me
 
 ## 扩展
 
 - [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
-
+- [grafana/grafana](https://github.com/grafana/grafana)The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
+- [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
 <http://www.infoq.com/cn/articles/history-go-package-management>
 
-- [avelino/awesome-go](https://github.com/avelino/awesome-go)
+- [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
 
 <https://juejin.im/post/59c384fa5188257e9349707e>
