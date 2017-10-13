@@ -36,7 +36,7 @@
   - 生成 git 用户公钥和部署公钥 -> 设置用户公钥到你帐户相关联的 SSH Keys -> 设置部署公钥到你项目的 Deploy keys -> 准备 hook 文件 -> 在项目上添加一个 Webhook 并设置 hook 的网址
 
 
-### walle - 瓦力部署
+### [walle](https://github.com/meolu/walle-web)A Web Deployment Tool
 
 ### 代码托管工具支持webhooks
 

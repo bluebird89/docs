@@ -16,6 +16,8 @@ brew cask install vagrant
 
 ## box下载[官网](https://app.vagrantup.com/boxes/search?provider=virtualbox) [资源](http://www.vagrantbox.es/)
 
+https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.4/providers/virtualbox.boxes 
+
 添加box时不带url或uri会默认从官网下载（速度不敢保证） vagrant box add {title} {url} :title ubuntu/trusty64 [laravel/homestead](https://vagrantcloud.com/laravel/boxes/homestead/versions/3.0.0/providers/virtualbox.box)外网不稳定，可以试着换时间下载 vagrant init {title} vagrant up
 
 ## 端口检测:
@@ -66,6 +68,8 @@ vagrant plugin install vagrant-vbguest
 ```
 
 ## box管理
+
+- vagrant box list 
 - vagrant box add ubuntu/trusty64 通过包名先去本地是否存在，没有去仓库下载
 - vagrant box add hahaha ~/box/package.box 加载本地文件
 
@@ -77,7 +81,7 @@ config.vm.define :web do |web|     #定义服务器名称，各种配置
     web.vm.provider "virtualbox" do |v|
           v.customize ["modifyvm", :id, "--name", "web", "--memory", "512"]
     end
-    web.vm.box = "ubuntu/trusty64"
+    web.vm.box = "ubuntu/trusty64" 
     web.vm.hostname = "web"
     web.vm.synced_folder "../", "/vagrant"
     web.vm.network :private_network, ip: "192.168.33.4"
@@ -204,3 +208,8 @@ end
 It appears your machine doesn't support NFS, or there is not an adapter to enable NFS on this machine for Vagrant
 
 sudo apt-get install nfs-kernel-server
+
+
+## 参考
+
+- [安装 Homestead ](https://pigjian.com/article/homestead-problems)

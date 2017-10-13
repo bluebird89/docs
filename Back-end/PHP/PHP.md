@@ -278,3 +278,7 @@ EXPOSE 9000 CMD ["php-fpm"] ```
 - docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/local/etc/php -v $PWD/logs:/phplogs -d php:5.6-fpm
 
 - <http://phpbestpractices.justjavac.com/>
+
+## 参考
+
+- [PHP 教程](http://www.w3school.com.cn/php/)

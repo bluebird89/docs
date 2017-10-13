@@ -791,6 +791,8 @@ Agis Anastasopoulos / [@agisanast](https://twitter.com/agisanast) / <http://agis
 
 ## 工具
 
+- [github/hub](https://github.com/github/hub)hub helps you win at git. http://hub.github.com/
+
 ### tig
 
 text-mode interface for git
