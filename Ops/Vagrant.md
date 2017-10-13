@@ -2,23 +2,46 @@
 
 方便开发环境迅速搭建与打包，windows下避免虚拟机安装的麻烦
 
-## mac安装
+## 安装
+
+mac
 
 ```
 brew cask install virtualbox
 brew cask install vagrant
 ```
 
-## 安装准备
+windows&&linux
 
-- virtualbox
-- vagrant
+- 下载安装virtualbox与vagrant
 
-## box下载[官网](https://app.vagrantup.com/boxes/search?provider=virtualbox) [资源](http://www.vagrantbox.es/)
+## box下载
 
-https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.4/providers/virtualbox.boxes 
+环境有默认的box名称，添加box时不带url或uri会默认从官网下载（速度不敢保证），国外服务器通过wget下载，scp root@192.168.10.10:virtualbox.box virtualbox.box
 
-添加box时不带url或uri会默认从官网下载（速度不敢保证） vagrant box add {title} {url} :title ubuntu/trusty64 [laravel/homestead](https://vagrantcloud.com/laravel/boxes/homestead/versions/3.0.0/providers/virtualbox.box)外网不稳定，可以试着换时间下载 vagrant init {title} vagrant up
+* [官网](https://app.vagrantup.com/boxes/search?provider=virtualbox) 比如：https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.4/providers/virtualbox.boxes 
+* [资源](http://www.vagrantbox.es/)
+
+解决版本号的问题
+新建
+```
+{
+    "name": "laravel/homestead",            //盒子名称
+    "versions": 
+    [
+        {
+            "version": "0.4.4",             //版本号
+            "providers": [
+                {
+                  "name": "virtualbox",
+                  "url": "virtualbox.box"   //盒子所在路径
+                }
+            ]
+        }
+    ]
+}
+```
+`vagrant box add metadata.json`
 
 ## 端口检测:
 
@@ -48,31 +71,46 @@ end`
 
 ## 命令
 
+### box管理
+
+- vagrant box list 
+- vagrant box add ubuntu/trusty64 通过包名先去本地是否存在，没有去仓库下载，下载的版本在上述命令行下加入 --box-version=版本号
+- vagrant box add hahaha ~/box/package.box 加载本地文件(package包)
+- vagrant box add {title} {url} :title ubuntu/trusty64 [laravel/homestead](https://vagrantcloud.com/laravel/boxes/homestead/versions/3.0.0/providers/virtualbox.box)外网不稳定，可以试着换时间下载 
+
+### 服务管理
+
 ```
-vagrant reload --provision
-vagrant add box    添加box，自动帮你生成vagrantfile
-vagrant box add     # 添加box的操作  vagrant box add ubuntu/trusty64 laravel/homestead
-vagrant init   hashicorp/precise64  #用 hashicorp/precise64 进行 box 初始化
+vagrant init {title}  hashicorp/precise64  #用 hashicorp/precise64 进行 box 初始化实例，自动帮你生成vagrantfile
+
 vagrant up      # 启动配置虚拟机
 vagrant halt      # 关闭虚拟机
-vagrant reload  # 重新加载vagarntfile文件
-vagrant reload --provision #系统更新配置文件的命令
-vagrant ssh      # SSH 至虚拟机
-vagrant status  # 查看虚拟机运行状态
-vagrant destroy 销毁虚拟机
-vagrant package 打包环境：vagrant package web --output web.box --vagrantfile Vagrantfile(一块打到包里)
-vagrant ssh web/dbmaster
 vagrant suspend
 vagrant resume
+vagrant status  # 查看虚拟机运行状态
+
+vagrant ssh      # SSH 至虚拟机
+vagrant ssh web/dbmaster
+
+vagrant reload  # 重新加载vagarntfile文件
+vagrant reload --provision #系统更新配置文件的命令
+
+vagrant destroy 销毁虚拟机
+
+vagrant package ：`vagrant package web --output web.box --vagrantfile Vagrantfile`(一块打到包里) 打包环境，包名、包文件
+
 vagrant plugin install vagrant-vbguest
 ```
 
-## box管理
-
-- vagrant box list 
-- vagrant box add ubuntu/trusty64 通过包名先去本地是否存在，没有去仓库下载
-- vagrant box add hahaha ~/box/package.box 加载本地文件
-
+### 配置选项
+```
+config.vm.synced_folder “path/on/host”, “/absolute/path/on/vm”
+config.vm.provision :shell, :inline => “ifconfig”  # inline script
+config.vm.provision :shell, :path => “initialize.sh”  # external script
+config.vm.network :forwarded_port, guest: 10022, host: 2255
+# config.ssh.port = 2255            # port of host  # commented in step1
+# config.ssh.guest_port = 10022     # port of VM    # commented in step1
+```
 ## 搭建集群:ip中的0与1默认被占用，hostname不能含特殊符号
 
 ```
@@ -202,14 +240,11 @@ end
 
     - 需要有网络，有路由器分配IP
 
-
 ### 记录
 
-It appears your machine doesn't support NFS, or there is not an adapter to enable NFS on this machine for Vagrant
+- `It appears your machine doesn't support NFS, or there is not an adapter to enable NFS on this machine for Vagrant`:`sudo apt-get install nfs-kernel-server`
+- `default: Warning: Authentication failure. Retrying...`;homestead.rb 中加入如下配置`config.ssh.username = 'vagrant'``config.ssh.password = 'vagrant'`
 
-sudo apt-get install nfs-kernel-server
+## 工具
 
-
-## 参考
-
-- [安装 Homestead ](https://pigjian.com/article/homestead-problems)
+- [Parallels/vagrant-parallels](https://github.com/Parallels/vagrant-parallels)Vagrant Parallels Provider 
