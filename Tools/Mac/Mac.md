@@ -36,8 +36,10 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
 
 ### 配置文件
+
 - [arialdomartini/dotfiles](https://github.com/arialdomartini/dotfiles)Just my Mac OS X and Linux dot files
 - [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
+- [skwp/dotfiles](https://github.com/skwp/dotfiles) YADR - The best vim,git,zsh plugins and the cleanest vimrc you've ever seen
 
 
 ## 键位
