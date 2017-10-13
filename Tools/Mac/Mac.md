@@ -40,7 +40,8 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - [arialdomartini/dotfiles](https://github.com/arialdomartini/dotfiles)Just my Mac OS X and Linux dot files
 - [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
 - [skwp/dotfiles](https://github.com/skwp/dotfiles) YADR - The best vim,git,zsh plugins and the cleanest vimrc you've ever seen
-
+- [holman/dotfiles](https://github.com/holman/dotfiles)@holman does dotfiles
+- [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files. 
 
 ## 键位
 
