@@ -137,3 +137,4 @@ package.json 里添加相应的配置：
 ## 参考
 
 * [webpack 从入门到工程实践](http://gitbook.cn/books/599270d5625e0436309466c7/index.html)
+* [Webpack 工程的 PWA 实战](http://gitbook.cn/books/59957adbebb0e06f9f24c389/index.html)
