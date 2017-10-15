@@ -305,6 +305,7 @@ Failed to initialize MacPorts, OS platform mismatch 重新安装
 - OmniFocus：GTD思路的应用
 - Fantastical：日程管理应用
 - Axure：原型工具
+- CmapTools：概念图
 - Quiver：笔记软件
 - [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
 - [macvim-dev/macvim](https://github.com/macvim-dev/macvim)

@@ -36,6 +36,7 @@ odeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多�
 - [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native)
 - [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
 - [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
+- [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app):Create React apps with no build configuration.
 
 ## [安装](https://facebook.github.io/react-native/docs/getting-started.html)
 
