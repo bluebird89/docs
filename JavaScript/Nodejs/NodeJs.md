@@ -262,6 +262,8 @@ nginx与node应用服务器的对比：nginx是一个高性能的反向代理服
 - [sequelize/sequelize](https://github.com/sequelize/sequelize)An easy-to-use multi SQL dialect ORM for Node.js <http://docs.sequelizejs.com>
 - [thinkjs/thinkjs](https://github.com/thinkjs/thinkjs)Use full ES2015+ features to develop Node.js applications, Support TypeScript 
 
+## 教程
+* [N-blog](https://maninboat.gitbooks.io/n-blog/content/):使用 Express + MongoDB 搭建多人博客
 ## 参考
 
 - [nodejs入门](https://leanpub.com/nodebeginner-chinese)

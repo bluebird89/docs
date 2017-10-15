@@ -176,8 +176,10 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 
 ## 框架
 
+- netty
 - Spring
 
+## 线程
 ## 工具
 
 - Maven
@@ -185,4 +187,13 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 - [apache/tomcat](https://github.com/apache/tomcat)
 - [apache/jmeter](https://github.com/apache/jmeter)a 100% pure Java application designed to test and measure performance. It may be used as a highly portable server benchmark as well as multi-client load generator.
 - [alibaba/fastjson](https://github.com/alibaba/fastjson)A fast JSON parser/generator for Java
-- [Apache Camel](https://github.com/apache/camel) is a powerful open source integration framework based on known Enterprise Integration Patterns with powerful Bean Integration. <http://www.jianshu.com/p/d51551b0a8ba> <http://www.jianshu.com/p/9caf1c755889> <http://www.jianshu.com/p/5681a1f0aad6> <http://www.jianshu.com/p/4a41ee88bd82> <http://www.jianshu.com/p/40d4c7aebd66>
+- [Apache Camel](https://github.com/apache/camel) is a powerful open source integration framework based on known Enterprise Integration Patterns with powerful Bean Integration. 
+- [grpc/grpc-java](https://github.com/grpc/grpc-java)The Java gRPC implementation. HTTP/2 based RPC https://grpc.io
+
+## 教程
+
+* [Java 教程](http://www.runoob.com/java/)
+* [Java学习路线图](http://www.jianshu.com/p/d51551b0a8ba) 
+* [史上最精炼JAVA知识点基础总结](http://www.jianshu.com/p/9caf1c755889)
+
+<>

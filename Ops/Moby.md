@@ -165,8 +165,10 @@ sudo apt-get upgrade docker-ce
   ```
 
   - 每一个指令都会在镜像上创建一个新的层，每一个指令的前缀都必须是大写的
-  - FROM：镜像源
+  - FROM 和 MAINTAINER 通常出现在文件第一行，用于选择基础镜像和说明维护人信息，
   - RUN:在镜像内执行命令
+  - ADD: 将本地目录中的文件添加到docker镜像中 `ADD unicorn.rb /app/config/unicorn.rb`
+  - ENV: 添加环境变量  `ENV RAILS_ENV staging`
   - `docker build -t runoob/centos:6.7 .`构建一个镜像
   - -t ：指定要创建的目标镜像名
   - . ：Dockerfile 文件所在目录，可以指定Dockerfile 的绝对路径
@@ -197,6 +199,15 @@ docker start name
 docker rm name // 移除容器
 docker push learn/ping
 docker port 7a38a1ad55c6  docker port determined_swanson：查看指定 （ID或者名字）容器的某个确定端口映射到宿主机的端口号
+
+如果要为底层主机添加卷（例如对于 DB 持久性数据），则应该在镜像内定义映射卷： RUN
+mkdir -p /data VOLUME ["/data"]
+sudo docker run -d -v /data:/data bat/spark
+
+sudo docker create -v /dbdata --name dbstore training/postgres /bin/true
+sudo docker run -d --volumes-from dbstore --name db1 training/postgres
+
+sudo docker run -d --add-host=SERVER_NAME:127.0.0.1 bat/spark
 ```
 ### avoid sudo
 ```
