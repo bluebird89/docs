@@ -37,3 +37,4 @@
 
 - [小程序快速上手：三步完成小程序从无到有的开发](http://blog.csdn.net/gitchat/article/details/77863478)
 - [首个微信小程序开发教程](https://juejin.im/entry/57e34d6bd2030900691e9ad7)
+- http://www.cnblogs.com/luyucheng/p/6274561.html
