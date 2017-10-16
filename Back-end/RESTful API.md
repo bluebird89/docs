@@ -89,9 +89,9 @@ DELETE（DELETE）：从服务器删除资源。
 
 ### 返回结果
 
-- GET /collection：返回资源对象的列表（数组）
+- GET /collection：返回资源对象的列表（数组）  get list
 - GET /collection/resource：返回单个资源对象
-- POST /collection：返回新生成的资源对象
+- POST /collection：返回新生成的资源对象    add
 - PUT /collection/resource：返回完整的资源对象
 - PATCH /collection/resource：返回完整的资源对象
 - DELETE /collection/resource：返回一个空文档
@@ -131,6 +131,7 @@ rel表示这个API与当前网址的关系（collection关系，并给出该coll
 - [Kerberos](http://danlebrero.com/2017/03/26/Kerberos-explained-in-pictures/)
 
 ## GraphQL
+
 ## StrongLoop
 
 StrongLoop API Platform构建于开源的LoopBack.io之上，LoopBack是一个高度可扩展的Node.js API框架。借助于LoopBack，我们可以快速创建可扩展的API和数据库映射。
