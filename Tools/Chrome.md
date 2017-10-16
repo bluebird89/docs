@@ -92,3 +92,8 @@
 
 ## 配置
 chrome://net-internals/#hsts
+
+## Developer Tools
+
+* console:直接输入JavaScript代码，按回车后执行
+* 
