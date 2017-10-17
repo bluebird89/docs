@@ -130,11 +130,20 @@ package.json 里添加相应的配置：
 
 在真实场景中，我们不会直接使用 webpack-dev-server，而采用 express + webpack/webpack-dev-middleware
 
-### 扩展功能
+## 仓库
 
-[webpack-dashboard](https://github.com/FormidableLabs/webpack-dashboard)
+* [webpack/webpack](https://github.com/webpack/webpack):A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows to load parts for the application on demand. Through "loaders," modules can be CommonJs, AMD, ES6 modules, CSS, Images, JSON, Coffeescript, LESS, ... and your custom stuff. https://webpack.js.org
+## 工具
+
+* [webpack-dashboard](https://github.com/FormidableLabs/webpack-dashboard):A CLI dashboard for webpack dev server
+* [webpack/webpack-dev-server](https://github.com/webpack/webpack-dev-server):Serves a webpack app. Updates the browser on changes.
+* 
 
 ## 参考
 
 * [webpack 从入门到工程实践](http://gitbook.cn/books/599270d5625e0436309466c7/index.html)
 * [Webpack 工程的 PWA 实战](http://gitbook.cn/books/59957adbebb0e06f9f24c389/index.html)
+
+## 教程
+
+* [webpack/react-starter](https://github.com/webpack/react-starter):[OUTDATED] Starter template for React with webpack. Doesn't focus on simplicity! NOT FOR BEGINNERS!

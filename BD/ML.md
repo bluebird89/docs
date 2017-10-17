@@ -17,3 +17,4 @@
 - [josephmisiti/awesome-machine-learning](https://github.com/josephmisiti/awesome-machine-learning)A curated list of awesome Machine Learning frameworks, libraries and software.
 - [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow)Computation using data flow graphs for scalable machine learning
 - [scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn)scikit-learn: machine learning in Python <http://scikit-learn.org>
+- [ZuzooVn/machine-learning-for-software-engineers](https://github.com/ZuzooVn/machine-learning-for-software-engineers):A complete daily plan for studying to become a machine learning engineer.
