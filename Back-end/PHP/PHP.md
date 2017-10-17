@@ -133,11 +133,20 @@ laravel->symfony
 - [pinguo/php-msf](https://github.com/pinguo/php-msf)PHP微服务框架即"Micro Service Framework For PHP"，是Camera360社区服务器端团队基于Swoole自主研发现代化的PHP协程服务框架，简称msf或者php-msf，是Swoole的工程级企业应用框架，经受了Camera360亿级用户高并发大流量的考验
 - [Youzan Zan Php Installer](https://github.com/youzan/zan-installer)Youzan Zan Php Installer
 - [tencent-php/tsf](https://github.com/tencent-php/tsf):coroutine and Swoole based php server framework in tencent
+- [slimphp/Slim](https://github.com/slimphp/Slim):Slim Framework source code http://slimframework.com
+
+## 论坛
+
+* [flarum/flarum](https://github.com/flarum/flarum):Delightfully simple forum software. http://flarum.org
+
+## 电商
+
+* [magento/magento2](https://github.com/magento/magento2): a cutting edge, feature-rich eCommerce solution that gets results.
 
 ## 资源
 
 - [Awesome PHP](http://coffeephp.com/resources)
-- [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php)
+- [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php):A curated list of amazingly awesome PHP libraries, resources and shiny things.
 - [开源项目](https://my.oschina.net/editorial-story/blog/1535228)
 
 ### Docker配置
@@ -159,7 +168,6 @@ $GLOBALS['HTTP_RAW_POST_DATA']
 - [hprose/hprose-php](https://github.com/hprose/hprose-php)Hprose is a cross-language RPC
 - [awesome-php](https://github.com/ziadoz/awesome-php)
 - [swoole/php-cp](https://github.com/swoole/php-cp)
-- [PHP: The Right Way](http://www.phptherightway.com/)
 
 ## [PHP发展](https://segmentfault.com/a/1190000008888700)
 
@@ -282,6 +290,21 @@ EXPOSE 9000 CMD ["php-fpm"] ```
 ## 工具
 
 - [PHP 开发者如何做代码审查?](http://blog.csdn.net/gitchat/article/details/78050953)
+- [twigphp/Twig](https://github.com/twigphp/Twig):Twig, the flexible, fast, and secure template language for PHP http://twig.sensiolabs.org/
+- [thephpleague/glide](https://github.com/thephpleague/glide):Wonderfully easy on-demand image manipulation library with an HTTP based API. http://glide.thephpleague.com
+- [dompdf/dompdf](https://github.com/dompdf/dompdf):HTML to PDF converter (PHP5) http://dompdf.github.com/
+- [PHPOffice/PHPExcel](https://github.com/PHPOffice/PHPExcel):A pure PHP library for reading and writing spreadsheet files
+- [briannesbitt/Carbon](https://github.com/briannesbitt/Carbon):A simple PHP API extension for DateTime. http://carbon.nesbot.com/
+- [Intervention/image](https://github.com/Intervention/image):PHP Image Manipulation http://image.intervention.io
+
+## 扩展
+
+* [CopernicaMarketingSoftware/PHP-CPP](https://github.com/CopernicaMarketingSoftware/PHP-CPP):Library to build PHP extensions with C++ http://www.php-cpp.com/
+
 ## 参考
 
 - [PHP 教程](http://www.w3school.com.cn/php/)
+
+## 文档
+
+- [codeguy/php-the-right-way](https://github.com/codeguy/php-the-right-way):An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web http://www.phptherightway.com

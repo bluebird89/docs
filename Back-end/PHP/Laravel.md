@@ -1294,10 +1294,6 @@ function boot()
 }
 ```
 
-[laravel-admin](http://laravel-admin.org/docs/#/zh/quick-start)
-
-laravel-ide-helper
-
 ### traits
 
 不支持传递参数
@@ -1308,27 +1304,61 @@ laravel-ide-helper
 * `storage/logs`中的日志文件
 
 
-## 代码结构
+## 框架
 
-## 插件
-
-- [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp. 
-
-## API
-
-## 扩展框架
-
+- [laravel/lumen-framework](https://github.com/laravel/lumen-framework)
+- [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. 
+- [laravel/framework](https://github.com/laravel/framework):
+* [laravel/laravel](https://github.com/laravel/framework):A PHP Framework For Web Artisans https://laravel.com
 - [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
 - [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks. 
 
+## 扩展
+
+- [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp. 
+- [laravel/cashier](https://github.com/laravel/cashier)
+- [laravel/passport](https://github.com/laravel/passport):Laravel Passport is an OAuth2 server and API authentication package that is simple and enjoyable to use.
+- [laravel/horizon](https://github.com/laravel/horizon):Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues.
+- [laravel/echo](https://github.com/laravel/echo):provides a more robust, efficient alternative to continually polling your application for websocket changes.
+- [laravel/socialite](https://github.com/laravel/socialite):Laravel Socialite provides an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub and Bitbucket. 
+- [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
+- [laravel/dusk](https://github.com/laravel/dusk):Laravel Dusk provides an expressive, easy-to-use browser automation and testing API. 
+- [laravel/envoy](https://github.com/laravel/envoy):Elegant SSH tasks for PHP.
+- [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
+- [barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf):A DOMPDF Wrapper for Laravel
+- [Zizaco/entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
 ## 参考
 
 - [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js. 
 - [快速入门 —— 使用 Laragon 在 Windows 中搭建 Laravel 开发环境](http://laravelacademy.org/post/7754.html)
 - [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
 - [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
-- [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)
-- [Laravel Cheat Sheet](http://cheats.jesse-obrien.ca/)
+- [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
 - [laravel入门教程](https://d.laravel-china.org/docs/5.5) 
 - [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
 - [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)
+
+## 文档
+
+* [laravel/docs](https://github.com/laravel/docs)
+* [laravel/spark-docs](https://github.com/laravel/spark-docs)
+* [summerblue/laravel5-cheatsheet](https://github.com/summerblue/laravel5-cheatsheet):A quick reference guide (cheat sheet) for Laravel 5.1 LTS, listing artisan, composer, routes and other useful bits of information. https://cs.laravel-china.org/
+* [Laravel Cheat Sheet](http://cheats.jesse-obrien.ca/)
+
+## 平台
+
+* [laravel/homestead](https://github.com/laravel/homestead)
+* [laravel/valet](https://github.com/laravel/valet):Valet is a Laravel development environment for Mac minimalists.
+* [weprovide/valet-plus](https://github.com/weprovide/valet-plus):Blazing fast macOS PHP development environment https://medium.com/@timneutkens/intro…
+
+## 工具
+
+* [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
+* [laravel-admin](http://laravel-admin.org/docs/#/zh/quick-start)
+* [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
+* [the-control-group/voyager](https://github.com/the-control-group/voyager):Voyager - The Missing Laravel Admin https://laravelvoyager.com
+* [codex-project/codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! http://codex-project.ninja
+
+## 教程
+
+* [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart

@@ -63,7 +63,7 @@ cluster模块，nodejs是单线程，不能充分利用多核cpu资源，因此�
 - 启多个进程，每个进程绑定不同的端口，主进程对外接受所有的网络请求，再将这些请求分别代理到不同的端口的进程上，通过代理可以避免端口不能重复监听的问题，甚至可以再代理进程上做适当的负载均衡，由于进程每接收到一个连接，将会用掉一个文件描述符，因此代理方案中客户端连接到代理进程，代理进程连接到工作进程的过程需要用掉两个文件描述符，操作系统的文件描述符是有限的，代理方案浪费掉一倍数量的文件描述符的做法影响了系统的扩展能力。
 - 父进程创建socket，并且bind、listen后，通过fork创建多个子进程，通过send方法给每个子进程传递这个socket，子进程调用accpet开始监听等待网络连接。
 
-```javascript
+```
 // master.js  
 var fork =require('child_process').fork;  
 var cpus =require('os').cpus();  
@@ -248,10 +248,10 @@ nginx就是图中的反向代理服务器，拥有诸多优势，可以做负载
 nginx 的负载均衡是用在多机器环境下的，单机的负载均衡还是要靠cluster 这类模块来做。
 nginx与node应用服务器的对比：nginx是一个高性能的反向代理服务器，要大量并且快速的转发请求，所以不能采用上面第三种方法，原因是仅有一个进程去accept，然后通过消息队列等同步方式使其他子进程处理这些新建的连接，效率会低一些。nginx采用第二种方法，那就依然可能会产生负载不完全均衡和惊群问题。nginx是怎么解决的呢：nginx中使用mutex互斥锁解决这个问题，具体措施有使用全局互斥锁，每个子进程在epoll_wait()之前先去申请锁，申请到则继续处理，获取不到则等待，并设置了一个负载均衡的算法（当某一个子进程的任务量达到总设置量的7/8时，则不会再尝试去申请锁）来均衡各个进程的任务量。具体的nginx如何解决惊群，看这篇文章: http://blog.csdn.net/russell_tao/article/details/7204260
 那么，node应用服务器为什么可以采用方案三呢，我的理解是：node作为具体的应该服务器负责实际处理用户的请求，处理可能包含数据库等操作，不是必须快速的接收大量请求，而且转发到某具体的node单台服务器上的请求较之nginx也少了很多。
+
 ## 资料
 
 - [开发命令行工具](https://juejin.im/post/59b73c9df265da06670c5868)
-- [ElemeFE/node-interview](https://github.com/ElemeFE/node-interview)
 
 ## 扩展
 
@@ -263,7 +263,21 @@ nginx与node应用服务器的对比：nginx是一个高性能的反向代理服
 - [thinkjs/thinkjs](https://github.com/thinkjs/thinkjs)Use full ES2015+ features to develop Node.js applications, Support TypeScript 
 
 ## 教程
+
 * [N-blog](https://maninboat.gitbooks.io/n-blog/content/):使用 Express + MongoDB 搭建多人博客
+* [ElemeFE/node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
+
 ## 参考
 
 - [nodejs入门](https://leanpub.com/nodebeginner-chinese)
+
+
+## 面试
+
+* [ElemeFE/node-interview](https://github.com/ElemeFE/node-interview):How to pass the Node.js interview of ElemeFE. https://elemefe.github.io/node-interv…
+
+## 工具
+
+* [koajs/koa](https://github.com/koajs/koa):Expressive middleware for node.js using ES2017 async functions http://koajs.com
+* [tj/n](https://github.com/tj/n):Node version management
+* [sequelize/sequelize](https://github.com/sequelize/sequelize):An easy-to-use multi SQL dialect ORM for Node.js http://docs.sequelizejs.com
