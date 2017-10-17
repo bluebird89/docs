@@ -1,7 +1,6 @@
 # 资源
 
 - [littlecodersh/ItChat](https://github.com/littlecodersh/ItChat)
-- [electronic-wechat](https://github.com/geeeeeeeeek/electronic-wechat)
 - [awesome-wechat-weapp](https://github.com/justjavac/awesome-wechat-weapp)
 - [vux](https://github.com/airyland/vux)
 - [mars](https://github.com/Tencent/mars)

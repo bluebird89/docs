@@ -83,7 +83,6 @@ Data Visualization
 - [JavaScript深入系列15篇](https://juejin.im/post/59278e312f301e006c2e1510)
 - [sorrycc/awesome-javascript](https://github.com/sorrycc/awesome-javascript)
 - [avajs/ava](https://github.com/avajs/ava)Futuristic JavaScript test runner
-- [airbnb/javascript](https://github.com/airbnb/javascript)JavaScript Style Guide
 - [moon](http://moonjs.ga/docs/getting-started.html)
 - [JavaScript文档](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
@@ -94,6 +93,15 @@ Data Visualization
 ## 教程
 
 * [JavaScript教程](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000)：廖雪峰的javascript教程
-* []()
-* []()
-* []()
+
+## 测试
+
+* [facebook/jest](https://github.com/facebook/jest):Delightful JavaScript Testing. http://facebook.github.io/jest/
+
+## 框架
+
+* [ecomfe/echarts](https://github.com/ecomfe/echarts):A powerful, interactive charting and visualization library for browser http://echarts.baidu.com/
+
+## 工具
+
+* [t4t5/sweetalert](https://github.com/t4t5/sweetalert):A beautiful replacement for JavaScript's "alert" https://sweetalert.js.org

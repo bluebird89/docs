@@ -41,3 +41,7 @@ echo $slugify->slugify('Hello World, this is a long sentence and I need to make 
 ```
 
 ### 卸载composer:找到文件删除即可
+
+## 仓库
+
+* [composer/composer](https://github.com/composer/composer):Dependency Manager for PHP https://getcomposer.org/

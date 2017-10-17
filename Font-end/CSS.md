@@ -50,3 +50,8 @@
     ```
     img, object { max-width: 100%;}
     ```
+
+
+## 扩展
+
+* [scottjehl/Respond](https://github.com/scottjehl/Respond):A fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more)

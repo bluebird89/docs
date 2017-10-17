@@ -23,16 +23,15 @@ odeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多�
 
 - [react-native](https://github.com/facebook/react-native)
 - [网站](http://facebook.github.io/react-native/)
-- [react-native-elements](https://github.com/react-native-training/react-native-elements)
+- [react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit https://react-native-training.github.…
 - [awesome-react-native](https://github.com/jondot/awesome-react-native)
 - [f8app](https://github.com/fbsamples/f8app)<http://makeitopen.com/>
-- [仓库](https://github.com/facebook/react)
+- [facebook/react](https://github.com/facebook/react):A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
 - [设计含结构](https://github.com/airbnb/react-sketchapp)
 - [文档](http://airbnb.io/react-sketchapp/docs/)
 - [页面设计](https://github.com/ant-design/ant-design/)
 - [react-native-guide](https://github.com/reactnativecn/react-native-guide)
 - [react-native-macos](https://github.com/ptmt/react-native-macos)
-- [storybook](https://github.com/storybooks/storybook)
 - [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native)
 - [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
 - [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
@@ -137,10 +136,31 @@ react-native run-android
 
 - [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
 - [React Native的极简手册](http://www.jianshu.com/p/318342e139c7) 没看懂
+- [xgrommx/awesome-redux](https://github.com/xgrommx/awesome-redux):Awesome list of Redux examples and middlewares
 
 ## 教程
 
 - [fangwei716/30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
+- [kdchang/reactjs101](https://github.com/kdchang/reactjs101):從零開始學 ReactJS（ReactJS 101）是一本希望讓初學者一看就懂的 ReactJS 中文入門教學書，由淺入深學習 ReactJS 生態系 (Flux, Redux, React Router, ImmutableJS, React Native, Relay/GraphQL etc.)。 https://www.gitbook.com/book/kdchang/…
+
+## 工具
+
+* [storybooks/storybook](https://github.com/storybooks/storybook): Interactive development & testing environment for React, React-Native, Vue UI components https://storybook.js.org
+* [reactjs/redux](https://github.com/reactjs/redux):Predictable state container for JavaScript apps http://redux.js.org
+* [ReactTraining/react-router](https://github.com/ReactTraining/react-router):Declarative routing for React https://reacttraining.com/react-router/
+* [aksonov/react-native-router-flux](https://github.com/aksonov/react-native-router-flux):First Declarative React Native Router
+* [AllenFang/react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-table):A Bootstrap table built with React.js https://allenfang.github.io/react-boo…
+* [gaearon/redux-devtools](https://github.com/gaearon/redux-devtools):DevTools for Redux with hot reloading, action replay, and customizable UI http://youtube.com/watch?v=xsSnOQynTHs
+* [akiran/react-slick](https://github.com/akiran/react-slick):React carousel component http://neostack.com/opensource/react-…
+* [acdlite/redux-router](https://github.com/acdlite/redux-router):Redux bindings for React Router – keep your router state inside your Redux store
+* [gabrielbull/react-desktop](https://github.com/gabrielbull/react-desktop):React UI Components for macOS Sierra and Windows 10 http://reactdesktop.js.org
+
+
+## 文档
+
+* [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
+* [reactnativecn/react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
+
 ## 图书
 
 - React Native入门与实战
