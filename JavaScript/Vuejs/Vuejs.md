@@ -1,7 +1,5 @@
 # vue
 
-官方文档为基本应用，扩展为模板与wepack方面的扩展,核心webpack.js的配置
-
 - 全局安装脚手架：sudo npm install -g vue-cli vue-router vuex vue-resource vue-loader webpack
 - 以webpack模板初始化项目： vue init webpack sell：程序文件名称
 - 模块安装：npm insall
@@ -10,15 +8,17 @@
 
 ## 项目：
 
-- [官方教程](https://cn.vuejs.org/v2/guide/)
+- [vuejs/vue](A progressive, incrementally-adoptable JavaScript framework for building UI on the web. http://vuejs.org):A progressive, incrementally-adoptable JavaScript framework for building UI on the web. http://vuejs.org
 - [webpack-simple](https://github.com/vuejs-templates/webpack-simple)
 - [pwa](https://github.com/vuejs-templates/pwa) progressive-web-apps
 - [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):通过webpack打包的vuejs模版
-- [awesome-vue](https://github.com/vuejs/awesome-vue)
-- [ElemeFE/cooking](https://github.com/ElemeFE/cooking)
-- [PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
 - [vue2-happyfri](https://github.com/bailicangdu/vue2-happyfri)vue2 + vue-router + vuex 入门项目
 - [vue2-elm](https://github.com/bailicangdu/vue2-elm)基于 vue2 + vuex 构建一个具有 45 个页面的大型单页面应用
+- [vuejs/vue-router](https://github.com/vuejs/vue-router):The official router for Vue.js.
+- [pagekit/vue-resource](https://github.com/pagekit/vue-resource):The HTTP client for Vue.js
+- [vuejs/vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
+- [liangxiaojuan/eleme](https://github.com/liangxiaojuan/eleme):vue2 +vue-router2 + es6 +webpack 高仿饿了么app商家详情，demo：http://yangyi1024.com/elem 还有我最新的实战项目,点它=》 http://yangyi1024.com/meizi
+- [ustbhuangyi/vue-sell](https://github.com/ustbhuangyi/vue-sell):Vue.js高仿饿了么外卖App课程源码 http://coding.imooc.com/class/74.html
 
 ## 重构
 
@@ -87,21 +87,35 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 
 ## 组件
 
-* [Vuex](https://vuex.vuejs.org/zh-cn/)
+* [Vuex](https://vuex.vuejs.org/zh-cn/):Centralized State Management for Vue.js.
+* [ElemeFE/vue-amap](https://github.com/ElemeFE/vue-amap):vue-amap - 基于 Vue 2.x 和高德地图的地图组件 https://elemefe.github.io/vue-amap/
 
 ## 工具
 
-- vetur：vscode插件
-
+- [vetur](https://github.com/vuejs/vetur)：Vue tooling for VSCode.
+- [vuejs/vue-loader](https://github.com/vuejs/vue-loader):Webpack loader for Vue.js components
+- [vuejs/vue-test-utils](https://github.com/vuejs/vue-test-utils):Utilities for testing Vue components https://vue-test-utils.vuejs.org
+- [vuejs/vue-class-component](https://github.com/vuejs/vue-class-component):ES / TypeScript decorator for class-style Vue components.
+- [vuejs/vue-devtools](https://github.com/vuejs/vue-devtools):Chrome devtools extension for debugging Vue.js applications.
+- [vuejs/vue-cli](https://github.com/vuejs/vue-cli):Simple CLI for scaffolding Vue.js projects
+- [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
 
 ## 参考
 
 * [Vue.js——60分钟快速入门](http://www.cnblogs.com/keepfool/p/5619070.html)
+* [官方文档](https://cn.vuejs.org/v2/guide/)
+* [awesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
 
+
+## UI
+
+* [ElemeFE/mint-ui](https://github.com/ElemeFE/mint-ui):Mobile UI elements for Vue.js http://mint-ui.github.io/#!/en
+* [ElemeFE/element](https://github.com/ElemeFE/element):A Vue.js 2.0 UI Toolkit for Web http://element.eleme.io/
+* [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin):vue2.0 admin / a management system template http://panjiachen.github.io/vue-element-admin
+* [vue-bulma/vue-admin](https://github.com/vue-bulma/vue-admin):Vue Admin Panel Framework, Powered by Vue 2.0 and Bulma 0.3 https://admin.vuebulma.com
 
 ## todo
 
-- [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
 - [JavaScript 进阶之 Vue.js + Node.js 入门实战开发](http://blog.csdn.net/gitchat/article/details/77931664)
 - http://www.cnblogs.com/keepfool/
 
