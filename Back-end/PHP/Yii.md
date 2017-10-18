@@ -1,4 +1,10 @@
-# yii-advanced 初始化
+# Yii
+
+## 仓库
+
+- [yiisoft/yii2](https://github.com/yiisoft/yii2):Yii 2: The Fast, Secure and Professional PHP Framework <http://www.yiiframework.com>
+
+## yii-advanced 初始化
 
 ```
 composer global require "fxp/composer-asset-plugin:^1.2.0"

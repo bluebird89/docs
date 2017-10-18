@@ -5,7 +5,7 @@
 - [vux](https://github.com/airyland/vux)
 - [mars](https://github.com/Tencent/mars)
 - [weui](https://github.com/Tencent/weui)
-- [overtrue/wechat](https://github.com/overtrue/wechat):有overtrue/laravel-wechat 扩展
+- [overtrue/wechat](https://github.com/overtrue/wechat): It is probably the best SDK in the world for developing WeChat App. <http://easywechat.org>
 - [wechat-php-sdk](https://github.com/dodgepudding/wechat-php-sdk)
 - [官方文档](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list)
 
