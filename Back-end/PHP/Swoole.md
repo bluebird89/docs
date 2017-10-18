@@ -2,7 +2,7 @@
 
 Event-driven asynchronous & concurrent & coroutine networking engine with high performance for PHP.
 
-- [swoole/swoole-src](https://github.com/swoole/swoole-src)
+- [swoole/swoole-src](https://github.com/swoole/swoole-src):Event-driven asynchronous & concurrent & coroutine networking engine with high performance for PHP. <http://www.swoole.com/>
 - [官方文档](https://github.com/cloes/swoole-doc)
 
 ## 资料
