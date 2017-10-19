@@ -10,3 +10,10 @@
 
 - Dijkstra算法
 - 算法是设计出来服务于这个协议的
+
+
+## 资源
+
+* [OpenGenus/cosmos](https://github.com/OpenGenus/cosmos):[Show ❤️ love by 🌟] Your personal library of every algorithm and data structure code that you will ever encounter
+* [keon/algorithms](https://github.com/keon/algorithms):Minimal examples of data structures and algorithms in Python\
+* [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges):Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.

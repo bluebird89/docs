@@ -104,3 +104,10 @@ rake db:create
 
 rails server
 ```
+
+
+## 资源
+
+* [rails/rails](https://github.com/rails/rails):Ruby on Rails http://rubyonrails.org
+* [activeadmin/activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. https://activeadmin.info
+* [tj/commander](https://github.com/tj/commander):The complete solution for Ruby command-line executables http://visionmedia.github.com/commander

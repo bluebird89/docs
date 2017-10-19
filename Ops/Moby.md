@@ -244,7 +244,7 @@ eval "$(docker-machine env default)" # Set environment variables
 
 ## 工具
 
-- docker-compose
+- [docker/compose](https://github.com/docker/compose):Define and run multi-container applications with Docker https://docs.docker.com/compose/
 - [docker/machine](https://github.com/docker/machine)Machine management for a container-centric world
 - [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
 

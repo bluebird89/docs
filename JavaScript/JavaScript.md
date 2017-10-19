@@ -85,6 +85,7 @@ Data Visualization
 - [avajs/ava](https://github.com/avajs/ava)Futuristic JavaScript test runner
 - [moon](http://moonjs.ga/docs/getting-started.html)
 - [JavaScript文档](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [mbeaudru/modern-js-cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet):Cheatsheet for the JavaScript knowledge you will frequently encounter in modern projects. https://mbeaudru.github.io/modern-js-…
 
 ## Web APIS
 
@@ -105,3 +106,10 @@ Data Visualization
 ## 工具
 
 * [t4t5/sweetalert](https://github.com/t4t5/sweetalert):A beautiful replacement for JavaScript's "alert" https://sweetalert.js.org
+* [Modernizr/Modernizr](https://github.com/Modernizr/Modernizr):Modernizr is a JavaScript library that detects HTML5 and CSS3 features in the user’s browser. https://modernizr.com
+* [mozilla/pdf.js](https://github.com/mozilla/pdf.js):PDF Reader in JavaScript
+* [mozilla-neutrino/neutrino-dev](https://github.com/mozilla-neutrino/neutrino-dev):Create and build modern JavaScript applications with zero initial configuration. https://neutrino.js.org
+* [facebook/immutable-js](https://github.com/facebook/immutable-js):Immutable persistent data collections for Javascript which increase efficiency and simplicity. http://facebook.github.io/immutable-js/
+## 扩展
+
+* [Microsoft/napajs](https://github.com/Microsoft/napajs):Napa.js: a multi-threaded JavaScript runtime

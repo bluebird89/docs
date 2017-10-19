@@ -4,6 +4,7 @@
 
 为了不带入过多的累赘，Python 3.0在设计的时候没有考虑向下兼容。不同版本的python.exe使用不同的命名，命令行中可以调用的到`python` `python3`.virtualenv 和 virtualenvwrapper 来管理不同项目的依赖环境，通过 workon 、 mkvirtualenv 等命令进行虚拟环境切换
 
+[代码](https://github.com/python/cpython):The Python programming language
 ## 环境控制
 
 ### 版本管理工具pyenv:修改系统环境变量 PATH
@@ -98,7 +99,7 @@ $ . ~/.profile
 
 ## 工具
 
-- iPython - 更强大的python交互shell，支持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能和函数
+- [iPython](https://github.com/ipython/ipython) - 更强大的python交互shell，支持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能和函数
 - [Anaconda](https://github.com/DamnWidget/anaconda):有命令行与图形界面两种方式,Anaconda turns your Sublime Text 3 in a full featured Python development IDE including autocompletion, code linting, IDE features, autopep8 formating, McCabe complexity checker Vagrant and Docker support for Sublime Text 3 using Jedi, PyFlakes, pep8, MyPy, PyLint, pep257 and McCabe that will never freeze your Sublime Text 3
 - jupyter
 
@@ -177,7 +178,7 @@ DATABASES = {
 - [ipython/ipython](https://github.com/ipython/ipython)
 - [binux/pyspider](https://github.com/binux/pyspider)A Powerful Spider(Web Crawler) System in Python. <http://docs.pyspider.org/>
 - [fabric/fabric](https://github.com/fabric/fabric)Simple, Pythonic remote execution and deployment. <http://fabfile.org>
-- [vinta/awesome-python](https://github.com/vinta/awesome-python)
+- [vinta/awesome-python](https://github.com/vinta/awesome-python):A curated list of awesome Python frameworks, libraries, software and resources https://awesome-python.com/
 - [keon/algorithms](https://github.com/keon/algorithms)Minimal examples of data structures and algorithms in Python
 
 ## 工具
@@ -185,7 +186,7 @@ DATABASES = {
 - ipython:`pip3 install ipython`
 - [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
 - [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges)Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
-
+- [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
 ### Anaconda
 
 专注于数据分析的Python发行版本，包含了conda、Python等190多个科学包及其依赖项。适用于企业级大数据分析的Python工具。其包含了720多个数据科学相关的开源包，在数据可视化、机器学习、深度学习等多方面都有涉及。不仅可以做数据分析，甚至可以用在大数据和人工智能领域。
@@ -325,4 +326,6 @@ python3 -m pip install selenium
 
 ## 参考
 
-- 
+- [donnemartin/data-science-ipython-notebooks](https://github.com/donnemartin/data-science-ipython-notebooks):Data science Python notebooks: Deep learning (TensorFlow, Theano, Caffe, Keras), scikit-learn, Kaggle, big data (Spark, Hadoop MapReduce, HDFS), matplotlib, pandas, NumPy, SciPy, Python essentials, AWS, and various command lines.
+- [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide):Python best practices guidebook, written for Humans. http://docs.python-guide.org
+- [faif/python-patterns](https://github.com/faif/python-patterns):A collection of design patterns/idioms in Python
