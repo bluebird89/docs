@@ -4,6 +4,8 @@
 
 - [apollographql/apollo-server](https://github.com/apollographql/apollo-server)GraphQL server for Express, Connect, Hapi and Koa
 - [apollographql/apollo-client](https://github.com/apollographql/apollo-client)A fully-featured, production ready caching GraphQL client for every server or UI framework
+- [apollographql/react-apollo](https://github.com/apollographql/react-apollo): React higher-order component for Apollo Client http://dev.apollodata.com/
+- 
 
 ## 学习资料
 
@@ -17,7 +19,7 @@
 
 ## 工具
 
-- [apollographql/graphql-tools](https://github.com/apollographql/graphql-tools) Build and mock your GraphQL.js schema using the schema language
+- [apollographql/graphql-tools](https://github.com/apollographql/graphql-tools)  Build and mock your GraphQL.js schema using the schema language http://dev.apollodata.com/tools/graph…
 - [graphql/graphql-js](https://github.com/graphql/graphql-js):A reference implementation of GraphQL for JavaScript http://graphql.org/graphql-js/
 
 ## 参考
