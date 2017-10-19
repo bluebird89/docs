@@ -1,3 +1,6 @@
+
+* [thedaviddias/Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist): The perfect Front-End Checklist for modern websites and meticulous developers http://frontendchecklist.com
+
 # 前端工程师技能清单@udacity
 
 ## HTML
@@ -816,3 +819,8 @@
 ## 工具
 
 * [ElemeFE/cooking](https://github.com/ElemeFE/cooking):更易上手的前端构建工具 http://elemefe.github.io/cooking/
+
+## 框架
+
+* [twbs/ratchet](https://github.com/twbs/ratchet):Build mobile apps with simple HTML, CSS, and JavaScript components. http://goratchet.com
+* [zurb/foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. http://foundation.zurb.com

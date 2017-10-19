@@ -18,3 +18,6 @@
 - [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow)Computation using data flow graphs for scalable machine learning
 - [scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn)scikit-learn: machine learning in Python <http://scikit-learn.org>
 - [ZuzooVn/machine-learning-for-software-engineers](https://github.com/ZuzooVn/machine-learning-for-software-engineers):A complete daily plan for studying to become a machine learning engineer.
+- [airbnb/aerosolve](https://github.com/airbnb/aerosolve):A machine learning package built for humans. http://airbnb.github.io/aerosolve/
+- [scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn):scikit-learn: machine learning in Python http://scikit-learn.org
+- [fchollet/keras](https://github.com/fchollet/keras):Deep Learning library for Python. Runs on TensorFlow, Theano, or CNTK. http://keras.io/

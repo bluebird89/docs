@@ -78,3 +78,8 @@ slice reslice
 - [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
 
 <https://juejin.im/post/59c384fa5188257e9349707e>
+
+
+## 教程
+
+* [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example 

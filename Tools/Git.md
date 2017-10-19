@@ -172,7 +172,7 @@ Git 的工作就是创建和保存项目的快照及与之后的快照进行对�
 - git clone [url] [project-name]:下载一个项目和它的整个代码历史
 - git subtree add --prefix=client <https://github.com/example/project-client.git> master // 建立主项目里子树
 
-### 编辑项目
+### 编辑项目:writing clear commit messages, you can make it easier for other people to follow along and provide feedback.
 
 ```
 git add ./<file1>(<file2> <file3>)/[dir] （所有修改过的文件/单个文件 或通过使用通配符将一组文件添加到暂存区）
@@ -262,7 +262,7 @@ git blame filename:查看文件中每行的操作时间
 HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
 ```
 
-分支：
+分支： branch name should be descriptive
 
 ```
 git branch [-r]/[-a] 列出所有本地分支/远程/所有
@@ -284,6 +284,8 @@ git branch --set-upstream master origin/master 建立追踪关系，在现有分
 git branch --set-upstream develop origin/develop
 ```
 
+Pull Request:useful for contributing to open source projects and for managing changes to shared repositories.
+code review:project guidelines,unit tests
 标签
 
 ```
@@ -325,6 +327,8 @@ git push origin <local_branch>   # 创建远程分支， origin是远程仓库�
 git push origin <local_branch>:<remote_branch>  # 创建远程分支
 git push origin :<remote_branch>  #先删除本地分支(git branch -d <branch>)，然后再push删除远程分支
 ```
+
+deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
 
 打包:
 
@@ -793,6 +797,7 @@ Agis Anastasopoulos / [@agisanast](https://twitter.com/agisanast) / <http://agis
 ## 工具
 
 - [github/hub](https://github.com/github/hub)hub helps you win at git. http://hub.github.com/
+- [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
 
 ### tig
 

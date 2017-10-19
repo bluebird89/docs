@@ -93,3 +93,7 @@
 
 
 a标签不能嵌套
+
+## 扩展
+
+* [hakimel/reveal.js](https://github.com/hakimel/reveal.js):The HTML Presentation Framework http://lab.hakim.se/reveal-js/

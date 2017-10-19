@@ -125,7 +125,7 @@ react-native run-android
 
 - [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
 - [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.
-
+- [zeit/next.js](https://github.com/zeit/next.js):Framework for server-rendered React apps https://zeit.co/blog/next4
 
 ## 项目
 
@@ -154,6 +154,13 @@ react-native run-android
 * [akiran/react-slick](https://github.com/akiran/react-slick):React carousel component http://neostack.com/opensource/react-…
 * [acdlite/redux-router](https://github.com/acdlite/redux-router):Redux bindings for React Router – keep your router state inside your Redux store
 * [gabrielbull/react-desktop](https://github.com/gabrielbull/react-desktop):React UI Components for macOS Sierra and Windows 10 http://reactdesktop.js.org
+* [react-boilerplate/react-boilerplate](https://github.com/react-boilerplate/react-boilerplate):A highly scalable, offline-first foundation with the best developer experience and a focus on performance and best practices. https://www.reactboilerplate.com
+* [ant-design/ant-design](https://github.com/ant-design/ant-design):🐜 A UI Design Language http://ant.design
+* [airbnb/react-dates](https://github.com/airbnb/react-dates):An easily internationalizable, mobile-friendly datepicker library for the web http://airbnb.io/react-dates
+* [airbnb/lottie-android](https://github.com/airbnb/lottie-android):Render After Effects animations natively on Android and iOS, Web, and React Native http://airbnb.io/lottie/
+* [airbnb/lottie-ios](https://github.com/airbnb/lottie-ios):An iOS library to natively render After Effects vector animations http://airbnb.io/lottie/
+* [airbnb/react-native-maps](https://github.com/airbnb/react-native-maps):React Native Mapview component for iOS + Android
+* [airbnb/native-navigation](https://github.com/airbnb/native-navigation):Native navigation library for React Native applications http://airbnb.io/native-navigation/
 
 
 ## 文档
@@ -161,6 +168,15 @@ react-native run-android
 * [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
 * [reactnativecn/react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
 
+## 项目
+
+* [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):这应该是最好的网易云音乐播放器了，没有之一，如果有请打醒 🤘
+* [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐nodejs api https://binaryify.github.io/NeteaseCl…
+
 ## 图书
 
 - React Native入门与实战
+
+## 测试
+
+- [airbnb/enzyme](https://github.com/airbnb/enzyme):JavaScript Testing utilities for React http://airbnb.io/enzyme/
