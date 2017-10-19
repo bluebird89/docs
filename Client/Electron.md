@@ -16,6 +16,7 @@ Electron 的架构包括 Node.js runtime 和嵌套的微型 Chromium 浏览器�
 * [electron/electron-api-demos](https://github.com/electron/electron-api-demos):Explore the Electron APIs http://electron.atom.io/#get-started
 * [electron/devtron](https://github.com/electron/devtron):An Electron DevTools Extension http://electron.atom.io/devtron
 * [fraserxu/electron-pdf](https://github.com/fraserxu/electron-pdf)：A command line tool to generate PDF from URL, HTML or Markdown files.
+* [connors/photon](https://github.com/connors/photon):The fastest way to build beautiful Electron apps using simple HTML and CSS http://photonkit.com
 
 ## 文档
 

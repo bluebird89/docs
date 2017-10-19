@@ -108,6 +108,7 @@ DNS（Domain Name System，域名系统），因特网上作为域名和IP地址
 ### CORS
 
 ```
+// server 
 $origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';  
   
 $allow_origin = array(  

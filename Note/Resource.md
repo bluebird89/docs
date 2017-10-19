@@ -1,7 +1,9 @@
 - [sindresorhus/awesome](https://github.com/sindresorhus/awesome) Curated list of awesome lists
 - [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books)Freely available programming books
 - [justjavac/free-programming-books-zh_CN](https://github.com/justjavac/free-programming-books-zh_CN)
-- [mr-mig/every-programmer-should-know](https://github.com/mr-mig/every-programmer-should-know)
+- [mr-mig/every-programmer-should-know](https://github.com/mr-mig/every-programmer-should-know):A collection of (mostly) technical things every software developer should know
+- [kdeldycke/awesome-falsehood](https://github.com/kdeldycke/awesome-falsehood):Curated list of falsehoods programmers believe in.
+- [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 
 # [经典编程书籍大全](https://github.com/jobbole/awesome-programming-books)
 

@@ -7,6 +7,7 @@
 - [weui](https://github.com/Tencent/weui)
 - [overtrue/wechat](https://github.com/overtrue/wechat): It is probably the best SDK in the world for developing WeChat App. <http://easywechat.org>
 - [wechat-php-sdk](https://github.com/dodgepudding/wechat-php-sdk)
+- [Eric-Guo/wechat](https://github.com/Eric-Guo/wechat):API, command and message handling for WeChat in Rails
 - [官方文档](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list)
 
 ## git 服务器搭建

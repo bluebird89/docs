@@ -113,11 +113,10 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 - 查词典 Command+L
 - 在浏览器查询 Command+B
 
-### cli
+### Cli
 
-[guarinogabriel/Mac-CLI](https://github.com/guarinogabriel/Mac-CLI)  OS X command line tools for developers – The ultimate tool to manage your Mac. It provides a huge set of command line commands that automatize the usage of your OS X system.
-
-[0nn0/terminal-mac-cheatsheet](https://github.com/0nn0/terminal-mac-cheatsheet)List of my most used commands and shortcuts in the terminal for Mac
+* [guarinogabriel/Mac-CLI](https://github.com/guarinogabriel/Mac-CLI)  OS X command line tools for developers – The ultimate tool to manage your Mac. It provides a huge set of command line commands that automatize the usage of your OS X system.
+* [0nn0/terminal-mac-cheatsheet](https://github.com/0nn0/terminal-mac-cheatsheet)List of my most used commands and shortcuts in the terminal for Mac
 
 ### finder
 

@@ -16,3 +16,8 @@ startdate  |  format: yyyy-mm-dd, start date |  Yes
 enddate | format: yyyy-mm-dd, end date  |   Yes
 zipcode|  Zipcode|  No
 fee_name  |   Name of fee schedule  |   No
+
+
+## 参考
+
+* [interagent/http-api-design](https://github.com/interagent/http-api-design):HTTP API design guide extracted from work on the Heroku Platform API https://www.gitbook.com/read/book/gee…

@@ -44,3 +44,8 @@
 #### 分布式思考
 
 保证分布式事务，特别是异构系统和异构 DB最终的数据一致性
+
+
+## 参考
+
+* [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer):Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.
