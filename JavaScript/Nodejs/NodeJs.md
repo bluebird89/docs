@@ -264,11 +264,12 @@ nginx就是图中的反向代理服务器，拥有诸多优势，可以做负载
 - [sequelize/sequelize](https://github.com/sequelize/sequelize)An easy-to-use multi SQL dialect ORM for Node.js <http://docs.sequelizejs.com>
 - [thinkjs/thinkjs](https://github.com/thinkjs/thinkjs)Use full ES2015+ features to develop Node.js applications, Support TypeScript
 - [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications [http://hackathonstarter-sahat.rhcloud...](http://hackathonstarter-sahat.rhcloud…)
-
+- [nodejitsu/node-http-proxy](https://github.com/nodejitsu/node-http-proxy):A full-featured http proxy for node.js http://github.com/nodejitsu/node-http…
 ## 教程
 
 - [N-blog](https://maninboat.gitbooks.io/n-blog/content/):使用 Express + MongoDB 搭建多人博客
 - [ElemeFE/node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
+- [Chiara-yen/startLearningNodejs](https://github.com/Chiara-yen/startLearningNodejs):
 
 ## 参考
 
@@ -285,3 +286,7 @@ nginx就是图中的反向代理服务器，拥有诸多优势，可以做负载
 - [sequelize/sequelize](https://github.com/sequelize/sequelize):An easy-to-use multi SQL dialect ORM for Node.js <http://docs.sequelizejs.com>
 - [creationix/nvm](https://github.com/creationix/nvm):Node Version Manager - Simple bash script to manage multiple active node.js versions
 - [caolan/async](https://github.com/caolan/async):Async utilities for node and the browser <http://caolan.github.io/async/>
+- [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
+- [tj/dox](https://github.com/tj/dox):JavaScript documentation generator for node using markdown and jsdoc
+- [tj/should.js](https://github.com/tj/should.js):BDD style assertions for node.js -- test framework agnostic
+- [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
