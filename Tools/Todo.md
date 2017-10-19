@@ -172,3 +172,15 @@ http://www.jianshu.com/p/3aa00bb22754
 http://www.jianshu.com/p/6d5d16d2b7f0
 http://www.jianshu.com/p/e76c2e3a3ef2
 http://www.cnblogs.com/luyucheng/
+
+
+$(function(){
+   $('img').each(function(){
+       par = $(this).parent();
+       if(par[0].tagName != 'A'){
+           $(this).replaceWith('<a class="downBtn"><img src='+$(this).attr('src')+'></a>');
+       }
+
+   })
+})
+
