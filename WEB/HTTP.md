@@ -105,6 +105,23 @@ DNS（Domain Name System，域名系统），因特网上作为域名和IP地址
 > 
 
 
+### CORS
+
+```
+$origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';  
+  
+$allow_origin = array(  
+    'http://client1.runoob.com',  
+    'http://client2.runoob.com'  
+);  
+  
+if(in_array($origin, $allow_origin)){  
+    header('Access-Control-Allow-Origin:'.$origin);       
+} 
+
+允许所有域名访问则只需在http://server.runoob.com/server.php文件头部添加如下代码：
+header('Access-Control-Allow-Origin:*'); 
+```
 ## 参考
 
 - [HTTP 下午茶](http://book.haoduoshipin.com/tealeaf-http/)
