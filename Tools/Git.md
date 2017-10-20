@@ -13,6 +13,13 @@ sudo apt-get install git
 brew install git
 ```
 
+
+## 搭建服务
+
+* [gitlabhq/gitlabhq](https://github.com/gitlabhq/gitlabhq):GitLab CE | Please open new issues in our issue tracker on GitLab.com https://about.gitlab.com/getting-help/
+* [gogits/gogs](https://github.com/gogits/gogs):Gogs is a painless self-hosted Git service. https://gogs.io
+* [git/git](https://github.com/git/git):Git Source Code Mirror - This is a publish-only repository and all pull requests are ignored. Please follow Documentation/SubmittingPatches procedure for any of your improvements.
+
 ## Config:
 
 git clone有两种方式https与ssh，SSH keys的使用需保证remote的源为git方式
@@ -784,21 +791,31 @@ Agis Anastasopoulos / [@agisanast](https://twitter.com/agisanast) / <http://agis
 - GitHub Pages + JekyII 将以最漂亮的主题来呈现你的 README.md
 - 直接修改仓库文件会创建分支
 
-## 扩展
+## 文档
 
 - Git User Manual：客户端含有的文档
-- [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet)
+- [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. http://git.io/sheet
 - [atlassian](https://www.atlassian.com/git)
-- [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
-## 文档
 - [Pro Git（中文版）](http://git.oschina.net/progit/)
+- [Pro Git2](https://git-scm.com/book/en/v2)
+- [progit/progit](https://github.com/progit/progit)
+- [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
 - [GitHub规范](https://guides.github.com/)
+- [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
+- [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
+
 
 ## 工具
 
 - [github/hub](https://github.com/github/hub)hub helps you win at git. http://hub.github.com/
 - [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
+- [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
+- [nvie/gitflow](https://github.com/nvie/gitflow):Git extensions to provide high-level repository operations for Vincent Driessen's branching model. 
+- [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
+- [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
+- [kennethreitz/legit](https://github.com/kennethreitz/legit):Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
+- [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
+- [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
 
 ### tig
-
-text-mode interface for git
+[jonas/tig](https://github.com/jonas/tig):text-mode interface for git

@@ -283,8 +283,9 @@ sudo deluser student --remove-home：删除用户及用户相关文件；
 - 传输文件通过ssh：
 
   ```
-  scp id_rsa.pub git@172.26.186.117:/home/git/    \\ 登陆服务器
-  ssh -p 2222 user@host
+  scp id_rsa.pub git@172.26.186.117:/home/git/
+  scp -P 1101 username@servername:/remote_path/filename  ~/local_destination   // 源文件  目标文件
+  ssh -p 2222 user@host   \\ 登陆服务器
   ```
 
 - 文件文件 cat file >> another file

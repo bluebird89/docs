@@ -29,6 +29,7 @@ odeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多�
 - [facebook/react](https://github.com/facebook/react):A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
 - [设计含结构](https://github.com/airbnb/react-sketchapp)
 - [文档](http://airbnb.io/react-sketchapp/docs/)
+- [文档](http://reactnative.cn/docs/0.49/getting-started.html)
 - [页面设计](https://github.com/ant-design/ant-design/)
 - [react-native-guide](https://github.com/reactnativecn/react-native-guide)
 - [react-native-macos](https://github.com/ptmt/react-native-macos)

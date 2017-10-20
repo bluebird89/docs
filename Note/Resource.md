@@ -4,7 +4,6 @@
 - [mr-mig/every-programmer-should-know](https://github.com/mr-mig/every-programmer-should-know):A collection of (mostly) technical things every software developer should know
 - [kdeldycke/awesome-falsehood](https://github.com/kdeldycke/awesome-falsehood):Curated list of falsehoods programmers believe in.
 - [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
-
 # [经典编程书籍大全](https://github.com/jobbole/awesome-programming-books)
 
 100+ 经典技术书籍，涵盖：计算机系统与网络、系统架构、算法与数据结构、前端开发、后端开发、移动开发、数据库、测试、项目与团队、程序员职业修炼、求职面试 和 编程相关的经典书籍。
