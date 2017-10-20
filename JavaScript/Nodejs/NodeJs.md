@@ -270,14 +270,11 @@ nginx就是图中的反向代理服务器，拥有诸多优势，可以做负载
 - [N-blog](https://maninboat.gitbooks.io/n-blog/content/):使用 Express + MongoDB 搭建多人博客
 - [ElemeFE/node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
 - [Chiara-yen/startLearningNodejs](https://github.com/Chiara-yen/startLearningNodejs):
+- [scotch-io/node-todo](https://github.com/scotch-io/node-todo):A simple Node/MongoDB/Angular todo app https://scotch.io/tutorials/creating-…
 
 ## 参考
 
 - [nodejs入门](https://leanpub.com/nodebeginner-chinese)
-
-## 面试
-
-- [ElemeFE/node-interview](https://github.com/ElemeFE/node-interview):How to pass the Node.js interview of ElemeFE. [https://elemefe.github.io/node-interv...](https://elemefe.github.io/node-interv…)
 
 ## 工具
 
