@@ -14,6 +14,7 @@
 
     - MacBook Pro:15寸，16G
     - Acer Chromebook R11
+    - 明基爱眼显示器EW2775ZH
 
 - 笔记：带标签功能，并且可以聚合统计
 
