@@ -962,6 +962,425 @@ catch (err) {
 }
 ```
 
+## 标准对象
+
+* 在JavaScript的世界里，一切都是对象，用typeof操作符获取对象的类型.用typeof将无法区分出null、Array和通常意义上的object
+* 包装对象：包装对象用new创建。看上去和原来的值一模一样，显示出来也是一模一样，但他们的类型已经变为object了！所以，包装对象和原始值用===比较会返回false。 所以闲的蛋疼也不要使用包装对象！尤其是针对string类型
+* 不写new情况下，Number()、Boolean和String()被当做普通函数，把任何类型的数据转换为number、boolean和string类型
+* 不要使用new Number()、new Boolean()、new String()创建包装对象；
+* 用parseInt()或parseFloat()来转换任意类型到number；
+* 用String()来转换任意类型到string，或者直接调用某个对象的toString()方法；
+* 通常不必把任意类型转换为boolean再判断，因为可以直接写if (myVar) {...}；
+* typeof操作符可以判断出number、boolean、string、function和undefined；
+* 判断Array要使用Array.isArray(arr)；
+* 判断null请使用myVar === null；
+* 判断某个全局变量是否存在用typeof window.myVar === 'undefined'；
+* 函数内部判断某个变量是否存在用typeof myVar === 'undefined'。
+* null和undefined就没有toString()
+```javascript
+typeof 123; // 'number'
+typeof NaN; // 'number'
+typeof 'str'; // 'string'
+typeof true; // 'boolean'
+typeof undefined; // 'undefined'
+typeof Math.abs; // 'function'
+typeof null; // 'object'
+typeof []; // 'object'
+typeof {}; // 'object'
+
+typeof new Number(123); // 'object'
+new Number(123) === 123; // false
+typeof new Boolean(true); // 'object'
+new Boolean(true) === true; // false
+typeof new String('str'); // 'object'
+new String('str') === 'str'; // false
+
+123..toString(); // '123', 注意是两个点！
+(123).toString(); // '123'
+```
+
+### Date 
+* 要获取系统当前时间,浏览器从本机操作系统获取的时间，所以不一定准确
+* 因为用户可以把当前时间设定为任何值,月份为0-11
+* 既可以显示本地时间，也可以显示调整后的UTC时间，只要我们传递的是一个number类型的时间戳，我们就不用关心时区转换。任何浏览器都可以把一个时间戳正确转换为本地时间。
+* 时间戳是一个自增的整数，它表示从1970年1月1日零时整的GMT时区开始的那一刻，到现在的毫秒数。假设浏览器所在电脑的时间是准确的，那么世界上无论哪个时区的电脑，它们此刻产生的时间戳数字都是一样的，所以，时间戳可以精确地表示一个时刻，并且与时区无关。我们只需要传递时间戳，或者把时间戳从数据库里读出来，再让JavaScript自动转换为当地时间就可以了
+```javascript
+var now = new Date();
+now; // Wed Jun 24 2015 19:49:22 GMT+0800 (CST)
+now.getFullYear(); // 2015, 年份
+now.getMonth(); // 5, 月份，注意月份范围是0~11，5表示六月
+now.getDate(); // 24, 表示24号
+now.getDay(); // 3, 表示星期三
+now.getHours(); // 19, 24小时制
+now.getMinutes(); // 49, 分钟
+now.getSeconds(); // 22, 秒
+now.getMilliseconds(); // 875, 毫秒数
+now.getTime(); // 1435146562875, 以number形式表示的时间戳
+
+var d = new Date(2015, 5, 19, 20, 15, 30, 123);
+d; // Fri Jun 19 2015 20:15:30 GMT+0800 (CST)
+
+// 创建一个指定日期和时间的方法是解析一个符合ISO 8601格式的字符串
+var d = Date.parse('2015-06-24T19:49:22.875+08:00');
+d; // 1435146562875
+var d = new Date(1435146562875);
+d; // Wed Jun 24 2015 19:49:22 GMT+0800 (CST)
+d.toLocaleString(); // '2015/6/24 下午7:49:22'，本地时间（北京时区+8:00），显示的字符串与操作系统设定的格式有关
+d.toUTCString(); // 'Wed, 24 Jun 2015 11:49:22 GMT'，UTC时间，与本地时间相差8小时
+```
+
+### RegExp
+
+正则表达式是一种用来匹配字符串的强有力的武器。它的设计思想是用一种描述性的语言来给字符串定义一个规则，凡是符合规则的字符串，我们就认为它“匹配”了
+
+* `\d`可以匹配一个数字，
+* `\w`可以匹配一个字母或数字
+* `.`可以匹配任意字符
+* `*`表示任意个字符（包括0个），
+* 用`+`表示至少一个字符，
+* 用`?`表示0个或1个字符，
+* 用`{n}`表示n个字符，
+* 用`{n,m}`表示n-m个字符
+* `A|B`可以匹配A或B
+* `^`表示行的开头，`^\d`表示必须以数字开头。
+* `$`表示行的结束，`\d$`表示必须以数字结束。
+* 直接通过/正则表达式/写出来
+* 通过new RegExp('正则表达式')创建一个RegExp对象
+* 用正则表达式切分字符串比用固定的字符更灵活
+* 提取子串的强大功能:用()表示的就是要提取的分组（Group）.在RegExp对象上用exec()方法提取出子串来。exec()方法在匹配成功后，会返回一个Array，第一个元素是正则表达式匹配到的整个字符串，后面的字符串表示匹配成功的子串。exec()方法在匹配失败时返回null。
+* 正则匹配默认是贪婪匹配，也就是匹配尽可能多的字符。举例，匹配出数字后面的0：由于\d+采用贪婪匹配，直接把后面的0全部匹配了，结果0*只能匹配空字符串了。必须让\d+采用非贪婪匹配（也就是尽可能少匹配），才能把后面的0匹配出来，加个?就可以让\d+采用非贪婪匹配
+* 全局匹配：`g`:可以多次执行exec()方法来搜索一个匹配的字符串。当我们指定g标志后，每次运行exec()，正则表达式本身会更新lastIndex属性，表示上次匹配到的最后索引.全局匹配类似搜索，因此不能使用/^...$/，那样只会最多匹配一次
+* 指定i标志，表示忽略大小写
+* m标志，表示执行多行匹配
+```javascript
+'00\d' //可以匹配'007'，但无法匹配'00A'；
+'\d\d\d' //可以匹配'010'；
+'\w\w' // 可以匹配'js'；
+'js.' // 可以匹配'jsp'、'jss'、'js!'
+
+`\d{3}` //表示匹配3个数字，例如'010'；
+`\s` // 可以匹配一个空格（也包括Tab等空白符），所以\s+表示至少有一个空格，例如匹配' '，'\t\t'等；
+`\d{3,8}`// 表示3-8个数字，例如'1234567'。
+
+`[0-9a-zA-Z\_]`// 可以匹配一个数字、字母或者下划线；
+`[0-9a-zA-Z\_]+` // 可以匹配至少由一个数字、字母或者下划线组成的字符串，比如'a100'，'0_Z'，'js2015'等等；
+`[a-zA-Z\_\$][0-9a-zA-Z\_\$]*`// 可以匹配由字母或下划线、$开头，后接任意个由一个数字、字母或者下划线、$组成的字符串，也就是JavaScript允许的变量名；
+`[a-zA-Z\_\$][0-9a-zA-Z\_\$]{0, 19}`// 更精确地限制了变量的长度是1-20个字符（前面1个字符+后面最多19个字符）。
+`(J|j)ava(S|s)cript`// 可以匹配'JavaScript'、'Javascript'、'javaScript'或者'javascript'。
+`^js$` // 就变成了整行匹配，就只能匹配'js'了
+
+var re = /^\d{3}\-\d{3,8}$/;
+var re2 = new RegExp('/^\d{3}\-\d{3,8}$/');
+
+re.test('010-12345'); // true
+re.test('010-1234x'); // false
+re.test('010 12345'); // false
+
+'a b   c'.split(/\s+/); // ['a', 'b', 'c']
+'a,b, c  d'.split(/[\s\,]+/); // ['a', 'b', 'c', 'd'
+'a,b;; c  d'.split(/[\s\,\;]+/); // ['a', 'b', 'c', 'd']
+
+var re = /^(\d{3})-(\d{3,8})$/;
+re.exec('010-12345'); // ['010-12345', '010', '12345']
+re.exec('010 12345'); // null
+
+var re = /^(0[0-9]|1[0-9]|2[0-3]|[0-9])\:(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|[0-9])\:(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|[0-9])$/; // 首部的0是做什么用的
+re.exec('19:05:30'); // ['19:05:30', '19', '05', '30']
+
+var re = /^(\d+)(0*)$/;
+re.exec('102300'); // ['102300', '102300', '']
+
+var re = /^(\d+?)(0*)$/;
+re.exec('102300'); // ['102300', '1023', '00']
+
+var s = 'JavaScript, VBScript, JScript and ECMAScript';
+var re=/[a-zA-Z]+Script/g;
+
+// 使用全局匹配:
+re.exec(s); // ['JavaScript']
+re.lastIndex; // 10
+re.exec(s); // ['VBScript']
+re.lastIndex; // 20
+re.exec(s); // ['JScript']
+re.lastIndex; // 29
+re.exec(s); // ['ECMAScript']
+re.lastIndex; // 44
+re.exec(s); // null，直到结束仍没有匹配到
+```
+
+### JSON JavaScript Object Notation
+* 一种数据交换格式,一共就这么几种数据类型：
+    - number：和JavaScript的number完全一致；
+    - boolean：就是JavaScript的true或false；
+    - string：就是JavaScript的string；
+    - null：就是JavaScript的null；
+    - array：就是JavaScript的Array表示方式——[]；
+    - object：就是JavaScript的{ ... }表示方式。
+* 字符集必须是UTF-8
+* 字符串规定必须用双引号""，Object的键也必须用双引号""。
+* 在JavaScript中，可以直接使用JSON，因为JavaScript内置了JSON的解析。
+* 序列化：把这个对象序列化成一个JSON格式的字符串，这样才能够通过网络传递给其他计算机:`JSON.stringify(obj, null, '   '); ` 第一个参数是对象；第二个参数用于控制如何筛选对象的键值，如果我们只想输出指定的属性，可以传入Array或者处理函数；第三个参数是输出缩进。要精确控制如何序列化小明，可以给xiaoming定义一个toJSON()的方法，直接返回JSON应该序列化的数据
+* 反序列化：收到一个JSON格式的字符串，只需要把它反序列化成一个JavaScript对象，就可以在JavaScript中直接使用这个对象了
+```javascript
+var xiaoming = {
+    name: '小明',
+    age: 14,
+    gender: true,
+    height: 1.65,
+    grade: null,
+    'middle-school': '\"W3C\" Middle School',
+    skills: ['JavaScript', 'Java', 'Python', 'Lisp']
+};
+
+JSON.stringify(xiaoming); // '{"name":"小明","age":14,"gender":true,"height":1.65,"grade":null,"middle-school":"\"W3C\" Middle School","skills":["JavaScript","Java","Python","Lisp"]}'
+JSON.stringify(xiaoming, null, '  '); //输出得好看一些，可以加上参数，按缩进输出
+JSON.stringify(xiaoming, ['name', 'skills'], '  ');  // 输出指定属性
+function convert(key, value) {
+    if (typeof value === 'string') {
+        return value.toUpperCase();
+    }
+    return value;
+}
+
+JSON.stringify(xiaoming, convert, '  ');
+
+var xiaoming = {
+    name: '小明',
+    age: 14,
+    gender: true,
+    height: 1.65,
+    grade: null,
+    'middle-school': '\"W3C\" Middle School',
+    skills: ['JavaScript', 'Java', 'Python', 'Lisp'],
+    toJSON: function () {
+        return { // 只输出name和age，并且改变了key：
+            'Name': this.name,
+            'Age': this.age
+        };
+    }
+};
+
+JSON.stringify(xiaoming); // '{"Name":"小明","Age":14}'
+
+JSON.parse('[1,2,3,true]'); // [1, 2, 3, true]
+JSON.parse('{"name":"小明","age":14}'); // Object {name: '小明', age: 14}
+JSON.parse('true'); // true
+JSON.parse('123.45'); // 123.45
+
+JSON.parse('{"name":"小明","age":14}', function (key, value) {
+    // 把number * 2:
+    if (key === 'name') {
+        return value + '同学';
+    }
+    return value;
+}); // Object {name: '小明同学', age: 14}
+```
+
+## 面向对象编程（设计模式）
+
+* 类：类是对象的类型模板，例如，定义Student类来表示学生，类本身是一种类型，Student表示学生类型，但不表示任何具体的某个学生；
+* 实例：实例是根据类创建的对象，例如，根据Student类可以创建出xiaoming、xiaohong、xiaojun等多个实例，每个实例表示一个具体的学生，他们全都属于Student类型。
+* JavaScript不区分类和实例的概念，而是通过原型（prototype）来实现面向对象编程。
+* 对象模型是基于原型实现的，特点是简单，缺点是理解起来比传统的类－实例模型要困难，
+* 最大的缺点是继承的实现需要编写大量代码，并且需要正确实现原型链。
+```javascript
+var Bird = {
+    fly: function () {
+        console.log(this.name + ' is flying...');
+    }
+};
+
+xiaoming.__proto__ = Bird;
+
+// 原型对象:
+var Student = {
+    name: 'Robot',
+    height: 1.2,
+    run: function () {
+        console.log(this.name + ' is running...');
+    }
+};
+
+function createStudent(name) {
+    // 基于Student原型创建一个新对象:
+    var s = Object.create(Student);
+    // 初始化新对象:
+    s.name = name;
+    return s;
+}
+
+var xiaoming = createStudent('小明');
+xiaoming.run(); // 小明 is running...
+xiaoming.__proto__ === Student; // true
+```
+
+### 创建对象
+JavaScript对每个创建的对象都会设置一个原型，指向它的原型对象。
+* 当我们用obj.xxx访问一个对象的属性时，JavaScript引擎先在当前对象上查找该属性，如果没有找到，就到其原型对象上找，如果还没有找到，就一直上溯到Object.prototype对象，最后，如果还没有找到，就只能返回undefined。原型链比如：`arr ----> Array.prototype ----> Object.prototype ----> null`
+* 访问一个对象的属性就会因为花更多的时间查找而变得更慢，因此要注意不要把原型链搞得太长。
+* 声明函数，通过关键字new来调用这个函数（写了new，它就变成了一个构造函数，它绑定的this指向新创建的对象，并默认返回this，也就是说，不需要在最后写return this;），并返回一个对象
+* 用new Student()创建的对象还从原型上获得了一个constructor属性，它指向函数Student本身。通过构造函数提升对象
+* 对象的hello函数实际上只需要共享同一个函数就可以了，这样可以节省很多内存。只要把hello函数移动到xiaoming、xiaohong这些对象共同的原型上就可以了，也就是Student.prototype
+* 调用构造函数千万不要忘记写new。为了区分普通函数和构造函数，按照约定，构造函数首字母应当大写，而普通函数首字母应当小写
+* 一是不需要new来调用，二是参数非常灵活，可以不传，也可以这么传。如果创建的对象有很多属性，我们只需要传递需要的某些属性，剩下的属性可以用默认值。由于参数是一个Object，我们无需记忆参数的顺序。如果恰好从JSON拿到了一个对象，就可以直接创建出xiaoming。
+![原型链](。。/_static/js-link.png "Optional title")
+![通用方法升级到原型中去](。。/_static/js-link-1.png "Optional title")
+```javascript
+function Student(name) {
+    this.name = name;
+    this.hello = function () {
+        alert('Hello, ' + this.name + '!');
+    }
+}
+
+// 原型链：xiaoming ----> Student.prototype ----> Object.prototype ----> null
+var xiaoming = new Student('小明');
+xiaoming.name; // '小明'
+xiaoming.hello(); // Hello, 小明!
+
+xiaoming.constructor === Student.prototype.constructor; // true
+Student.prototype.constructor === Student; // true
+Object.getPrototypeOf(xiaoming) === Student.prototype; // true
+xiaoming instanceof Student; // true
+
+xiaoming.hello === xiaohong.hello; // false
+
+function Student(name) {
+    this.name = name;
+}
+
+Student.prototype.hello = function () {
+    alert('Hello, ' + this.name + '!');
+};
+
+// 升级
+function Student(props) {
+    this.name = props.name || '匿名'; // 默认值为'匿名'
+    this.grade = props.grade || 1; // 默认值为1
+}
+
+Student.prototype.hello = function () {
+    alert('Hello, ' + this.name + '!');
+};
+
+function createStudent(props) {
+    return new Student(props || {})
+}
+var xiaoming = createStudent({
+    name: '小明'
+});
+xiaoming.grade;
+```
+
+### 原型继承
+* 要基于Student扩展出PrimaryStudent，可以先定义出PrimaryStudent
+* 原型链目标：`new PrimaryStudent() ----> PrimaryStudent.prototype ----> Student.prototype ----> Object.prototype ----> null`
+* 函数F仅用于桥接，我们仅创建了一个new F()实例，而且，没有改变原有的Student定义的原型链。如果把继承这个动作用一个inherits()函数封装起来，还可以隐藏F的定义，并简化代码
+* 定义新的构造函数，并在内部用call()调用希望“继承”的构造函数，并绑定this； 新的简化方法思路不一样，inherits中的构造与父类一级
+* 借助中间函数F实现原型链继承，最好通过封装的inherits函数完成；
+* 继续在新的构造函数的原型上定义新方法。
+![原型链](../_static/js-link3png "Optional title")
+```javascript
+// PrimaryStudent构造函数:
+function PrimaryStudent(props) {
+    Student.call(this, props);
+    this.grade = props.grade || 1;
+}
+
+// 空函数F:
+function F() {
+}
+
+// 把F的原型指向Student.prototype:
+F.prototype = Student.prototype;
+
+// 把PrimaryStudent的原型指向一个新的F对象，F对象的原型正好指向Student.prototype:
+PrimaryStudent.prototype = new F();
+
+// 把PrimaryStudent原型的构造函数修复为PrimaryStudent:
+PrimaryStudent.prototype.constructor = PrimaryStudent;
+
+// 继续在PrimaryStudent原型（就是new F()对象）上定义方法：
+PrimaryStudent.prototype.getGrade = function () {
+    return this.grade;
+};
+
+// 创建xiaoming:
+var xiaoming = new PrimaryStudent({
+    name: '小明',
+    grade: 2
+});
+xiaoming.name; // '小明'
+xiaoming.grade; // 2
+
+// 验证原型:
+xiaoming.__proto__ === PrimaryStudent.prototype; // true
+xiaoming.__proto__.__proto__ === Student.prototype; // true
+
+// 验证继承关系:
+xiaoming instanceof PrimaryStudent; // true
+xiaoming instanceof Student; // true
+
+function inherits(Child, Parent) {
+    var F = function () {};
+    F.prototype = Parent.prototype;
+    Child.prototype = new F();
+    Child.prototype.constructor = Child;
+}
+function Student(props) {
+    this.name = props.name || 'Unnamed';
+}
+
+Student.prototype.hello = function () {
+    alert('Hello, ' + this.name + '!');
+}
+
+function PrimaryStudent(props) {
+    Student.call(this, props);
+    this.grade = props.grade || 1;
+}
+
+// 实现原型继承链:
+inherits(PrimaryStudent, Student);
+
+// 绑定其他方法到PrimaryStudent原型:
+PrimaryStudent.prototype.getGrade = function () {
+    return this.grade;
+};
+```
+
+### class继承
+
+关键字class从ES6开始正式被引入到JavaScript中。class的目的就是让定义类更简单。
+* class的作用就是让JavaScript引擎去实现原来需要我们自己编写的原型链代码。简而言之，用class的好处就是极大地简化了原型链代码
+* class的定义包含了构造函数constructor与定义在原型对象上的函数hello()
+* 继承 extends更方便。需要通过super(name)来调用父类的构造函数，否则父类的name属性无法正常初始化。
+* 不是所有的主流浏览器都支持ES6的class。如果一定要现在就用上，就需要一个工具把class代码转换为传统的prototype代码，可以试试Babel这个工具
+```javascript
+class Student {
+    constructor(name) {
+        this.name = name;
+    }
+
+    hello() {
+        alert('Hello, ' + this.name + '!');
+    }
+}
+var xiaoming = new Student('小明');
+xiaoming.hello();
+
+class PrimaryStudent extends Student {
+    constructor(name, grade) {
+        super(name); // 记得用super调用父类的构造方法!
+        this.grade = grade;
+    }
+
+    myGrade() {
+        alert('I am at grade ' + this.grade);
+    }
+}
+```
+
 
 ## 调试
 
