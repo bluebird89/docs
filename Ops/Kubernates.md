@@ -187,7 +187,22 @@ Kubelet是Kubernetes集群中每个Minion和Master API Server的连接点，Kube
 - [Kubernetes核心原理（二）之Controller Manager](http://blog.csdn.net/huwh_/article/details/75675761)
 - [Kubernetes核心原理（三）之Scheduler](http://blog.csdn.net/huwh_/article/details/77017353)
 - [Kubernetes核心原理（四）之Kubelet](http://blog.csdn.net/huwh_/article/details/77922293)
-- [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes)Production-Grade Container Scheduling and Management http://kubernetes.io
+- [官方文档](https://kubernetes.io/docs/tutorials/)
+
+
+###  使用
+
+```
+kubectl delete deployments hello-minikube1
+```
+## 仓库
+
+* [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes):Production-Grade Container Scheduling and Management http://kubernetes.io
+* [kelseyhightower/kubernetes-the-hard-way](https://github.com/kelseyhightower/kubernetes-the-hard-way):Bootstrap Kubernetes the hard way on Google Cloud Platform. No scripts.
+* [kubernetes/minikube](https://github.com/kubernetes/minikube):Run Kubernetes locally
+* [openshift/origin](https://github.com/openshift/origin):Enterprise Kubernetes for Developers http://www.openshift.org
+* [kubernetes/kops](https://github.com/kubernetes/kops):Kubernetes Operations (kops) - Production Grade K8s Installation, Upgrades, and Management
+* [hobby-kube/guide](https://github.com/hobby-kube/guide):Kubernetes clusters for the hobbyist.
 
 <http://violetgo.com/blogs/> <http://www.winseliu.com/> <http://blog.csdn.net/qq1010885678/article/details/48832067>
 
