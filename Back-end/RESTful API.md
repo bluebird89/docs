@@ -120,6 +120,7 @@ rel表示这个API与当前网址的关系（collection关系，并给出该coll
 ### 实例
 
 <https://api.github.com/>
+* [yahoo天气api](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json)
 
 ### 工具
 
