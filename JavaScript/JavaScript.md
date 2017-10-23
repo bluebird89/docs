@@ -221,7 +221,7 @@ xiaohong['middle-school'];
 person.address = 'shanghai'
 delete person.address
 'name' in xiaoming;
-toString' in xiaoming; // true  因为toString定义在object对象中，而所有对象最终都会在原型链上指向object
+toString in xiaoming; // true  因为toString定义在object对象中，而所有对象最终都会在原型链上指向object
 xiaoming.hasOwnProperty('name'); // true
 xiaoming.hasOwnProperty('toString'); // false
 ```
@@ -241,7 +241,7 @@ JavaScript在设计之初，为了方便初学者学习，并不强制要求用v
 ### 控制语句
 
 * 条件语句：使用`if () { ... } else { ... }`来进行条件判断其中else语句是可选的。如果语句块只包含一条语句，那么可以省略`{}`.在多个if...else...语句中，如果某个条件成立，则后续就不再继续判断了(注意先后顺序)
-* 循环语句：重复运算.务必小心编写初始条件和判断条件，尤其是边界值。特别注意i < 100和i <= 100是不同的判断逻辑。__
+* 循环语句：重复运算.务必小心编写初始条件和判断条件，尤其是边界值。特别注意i < 100和i <= 100是不同的判断逻辑。
     * for循环最常用的地方是利用索引来遍历数组；for循环的3个条件都是可以省略的，如果没有退出循环的判断条件，就必须使用break语句退出循环，否则就是死循环；
     * `for ... in`循环，它可以把一个对象的所有属性依次循环出来
     * while循环只有一个判断条件，条件满足，就不断循环，条件不满足时则退出循环
@@ -429,7 +429,7 @@ function foo() {
 }
 foo(-9);
 
-unction foo(a, b, ...rest) {
+function foo(a, b, ...rest) {
     console.log('a = ' + a);
     console.log('b = ' + b);
     console.log(rest);
@@ -482,8 +482,9 @@ if (sum() !== 0) {
 ```
 ### 名字空间
 
-不同的JavaScript文件如果使用了相同的全局变量，或者定义了相同名字的顶层函数，都会造成命名冲突。把自己的代码全部放入唯一的名字空间MYAPP中，会大大减少全局变量冲突的可能。许多著名的JavaScript库都是这么干的：jQuery，YUI，underscore等等
-JavaScript的变量作用域实际上是函数内部，我们在for循环等语句块中是无法定义具有局部作用域的变量的。为了解决块级作用域，ES6引入了新的关键字let，用let替代var可以申明一个块级作用域的变量
+* 不同的JavaScript文件如果使用了相同的全局变量，或者定义了相同名字的顶层函数，都会造成命名冲突。
+* 把自己的代码全部放入唯一的名字空间MYAPP中，会大大减少全局变量冲突的可能。许多著名的JavaScript库都是这么干的：jQuery，YUI，underscore等等
+* JavaScript的变量作用域实际上是函数内部，我们在for循环等语句块中是无法定义具有局部作用域的变量的。为了解决块级作用域，ES6引入了新的关键字let，用let替代var可以申明一个块级作用域的变量
 ```javascript
 function foo() {
     for (var i=0; i<100; i++) {

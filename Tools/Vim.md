@@ -227,3 +227,12 @@ mesg：允许vi显示其他用户用write写到自己终端上的信息
 “?p：取出寄存器？中的内容并将其放到光标位置处。这里？可以是一个字母，也可以是一个数字
 ndd：将当前行及其下共n行文本删除，并将所删内容放到1号删除寄存器中。
 ```
+
+## 配置
+
+* [neovim/neovim](https://github.com/neovim/neovim):Vim-fork focused on extensibility and usability https://salt.bountysource.com/teams/n…
+* [amix/vimrc](https://github.com/amix/vimrc):The ultimate Vim configuration: vimrc
+* [Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe):A code-completion engine for Vim http://valloric.github.io/YouCompleteMe/
+* [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim):Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
+* [philc/vimium](https://github.com/philc/vimium):The hacker's browser.
+* [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen):pathogen.vim: manage your runtimepath
