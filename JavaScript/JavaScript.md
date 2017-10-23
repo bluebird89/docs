@@ -1382,6 +1382,154 @@ class PrimaryStudent extends Student {
 }
 ```
 
+## 浏览器
+
+* Google基于Webkit
+* Safari Webkit内核
+* Firefox自己研制的Gecko内核
+
+### 浏览器对象
+
+JavaScript可以获取浏览器提供的很多对象，并进行操作。
+* window对象不但充当全局作用域，而且表示浏览器窗口：
+    * `window.innerWidth`
+    * `window.innerHeight`
+    * `window.outerWidth`
+    * `window.outerHeight`
+* navigator对象表示浏览器的信息.navigator的信息可以很容易地被用户修改，所以JavaScript读取的值不一定是正确的
+    - `navigator.appName`：浏览器名称；
+    - `navigator.appVersion`：浏览器版本；
+    - `navigator.language`：浏览器设置的语言；
+    - `navigator.platfor`m：操作系统类型；
+    - `navigator.userAgent`：浏览器设定的User-Agent字符串。
+* screen对象表示屏幕的信息
+    - screen.width：屏幕宽度，以像素为单位；
+    - screen.height：屏幕高度，以像素为单位；
+    - screen.colorDepth：返回颜色位数，如8、16、24
+* location对象表示当前页面的URL信息
+    - location.href: http://www.example.com:8080/path/index.html?a=1&b=2#TOP
+    - location.protocol; // 'http'
+    - location.host; // 'www.example.com'
+    - location.port; // '8080'
+    - location.pathname; // '/path/index.html'
+    - location.search; // '?a=1&b=2'
+    - location.hash; // 'TOP'
+    - 要加载一个新页面，可以调用location.assign('/discuss')。如果要重新加载当前页面，调用location.reload();
+* document对象表示当前页面。由于HTML在浏览器中以DOM形式表示为树形结构，document对象就是整个DOM树的根节点。
+    - title赋值：document.title = '努力学习JavaScript!';
+    - 要查找DOM树的某个节点，需要从document对象开始查找。最常用的查找是根据ID和Tag Name
+    - document.getElementById('drink-menu')
+    - document.getElementsByTagName('dt')
+    - menu.tagName;
+    - Cookie是由服务器发送的key-value标示符。因为HTTP协议是无状态的，但是服务器要区分到底是哪个用户发过来的请求，就可以用Cookie来区分。当一个用户成功登录后，服务器发送一个Cookie给浏览器，例如user=ABC123XYZ(加密的字符串)...，此后，浏览器访问该网站时，会在请求头附上这个Cookie，服务器根据Cookie即可区分出用户。 `document.cookie`
+    - `<script src="http://www.foo.com/jquery.js"></script>`  引入的第三方的JavaScript中存在恶意代码，则www.foo.com网站将直接获取到www.example.com网站的用户登录信息.服务器在设置Cookie时可以使用httpOnly，`设定了httpOnly的Cookie将不能被JavaScript读取`
+- history对象保存了浏览器的历史记录，JavaScript可以调用history对象的back()或forward ().
+
+### 操作DOM
+
+由于HTML文档被浏览器解析后就是一棵DOM树，要改变HTML的结构，就需要通过JavaScript来操作DOM.DOM节点是指Element，但是DOM节点实际上是Node，在HTML中，Node包括Element、Comment、CDATA_SECTION等很多种，以及根节点Document类型，但是，绝大多数时候我们只关心Element，也就是实际控制页面结构的Node，其他类型的Node忽略即可。根节点Document已经自动绑定为全局变量document。
+
+* document.getElementById() 可以直接定位唯一的一个DOM节点
+* document.getElementsByTagName() 总是返回一组DOM节点
+* CSS选择器document.getElementsByClassName() 返回一组DOM节点
+* 使用querySelector()和querySelectorAll()
+
+- 更新：更新该DOM节点的内容，相当于更新了该DOM节点表示的HTML的内容
+    + innerText不返回隐藏元素的文本，而textContent返回所有文本
+    + 如果这个DOM节点是空的，例如，<div></div>，那么，直接使用innerHTML = '<span>child</span>'就可以修改DOM节点的内容，相当于“插入”了新的DOM节点。如果这个DOM节点不是空的，那就不能这么做，因为innerHTML会直接替换掉原来的所有子节点。
+- 遍历：遍历该DOM节点下的子节点，以便进行进一步操作；
+- 添加：在该DOM节点下新增一个子节点，相当于动态增加了一个HTML节点；
+    + 使用appendChild，把一个子节点添加到父节点的最后一个子节点.插入的js节点已经存在于当前的文档树，因此这个节点首先会从原先的位置删除，再插入到新的位置。
+    + 动态创建一个节点然后添加到DOM树中:从零创建一个新的节点，然后插入到指定位置
+    + parentElement.insertBefore(newElement, referenceElement);，子节点会插入到referenceElement之前。
+- 删除：将该节点从HTML中删除，相当于删掉了该DOM节点的内容以及它包含的所有子节点。
+    + 要删除一个节点，首先要获得该节点本身以及它的父节点，然后，调用父节点的removeChild把自己删掉
+    + 当<p>First</p>节点被删除后，parent.children的节点数量已经从2变为了1，索引[1]已经不存在了。
+
+```html
+<p id="js">JavaScript</p>
+<div id="list">
+    <p id="java">Java</p>
+    <p id="python">Python</p>
+    <p id="scheme">Scheme</p>
+</div>
+
+<div id="parent">
+    <p>First</p>
+    <p>Second</p>
+</div>
+```
+
+```javascript
+// 返回ID为'test'的节点：
+var test = document.getElementById('test');
+
+// 先定位ID为'test-table'的节点，再返回其内部所有tr节点：
+var trs = document.getElementById('test-table').getElementsByTagName('tr');
+
+// 先定位ID为'test-div'的节点，再返回其内部所有class包含red的节点：
+var reds = document.getElementById('test-div').getElementsByClassName('red');
+
+// 获取节点test下的所有直属子节点:
+var cs = test.children;
+
+// 获取节点test下第一个、最后一个子节点：
+var first = test.firstElementChild;
+var last = test.lastElementChild;
+
+// 通过querySelector获取ID为q1的节点：
+var q1 = document.querySelector('#q1');
+
+// 通过querySelectorAll获取q1节点内的符合条件的所有节点：
+var ps = q1.querySelectorAll('div.highlighted > p');
+
+// 获取<p id="p-id">...</p>
+var p = document.getElementById('p-id');
+// 设置文本为abc:
+p.innerHTML = 'ABC'; // <p id="p-id">ABC</p>
+// 设置HTML:
+p.innerHTML = 'ABC <span style="color:red">RED</span> XYZ'; // <p>...</p>的内部结构已修改
+
+p.innerText = '<script>alert("Hi")</script>';
+// HTML被自动编码，无法设置一个<script>节点:
+// <p id="p-id">&lt;script&gt;alert("Hi")&lt;/script&gt;</p>
+p.style.color = '#ff0000';
+p.style.fontSize = '20px';
+p.style.paddingTop = '2em';
+
+var
+    js = document.getElementById('js'),
+    list = document.getElementById('list');
+list.appendChild(js);
+
+var haskell = document.createElement('p');
+haskell.id = 'haskell';
+haskell.innerText = 'Haskell';
+list.appendChild(haskell);
+
+var d = document.createElement('style');
+d.setAttribute('type', 'text/css');
+d.innerHTML = 'p { color: red }';
+document.getElementsByTagName('head')[0].appendChild(d);
+
+var ref = document.getElementById('python');
+list.insertBefore(haskell, ref);
+
+var
+    i, c,
+    list = document.getElementById('list');
+for (i = 0; i < list.children.length; i++) {
+    c = list.children[i]; // 拿到第i个子节点
+}
+
+var parent = document.getElementById('parent');
+parent.removeChild(parent.children[0]);
+parent.removeChild(parent.children[1]); // <-- 浏览器报错
+```
+
+### 操作表单
+
+
 
 ## 调试
 
