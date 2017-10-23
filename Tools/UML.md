@@ -112,3 +112,4 @@ class Dummy {
 ## 参考
 
 - [入门UML](http://www.jianshu.com/p/1256e2643923)
+- [图说设计模式](http://design-patterns.readthedocs.io/zh_CN/latest/index.html)
