@@ -1,4 +1,6 @@
-# 代码托管
+# Git
+
+## 托管服务
 
 - [GitHub](https://github.com/)
 - [Bitbucket](https://bitbucket.org/product)
@@ -8,11 +10,12 @@
 
 ## Install:
 
-```
+```shell
 sudo apt-get install git
 brew install git
-```
 
+brew install git
+```
 
 ## 搭建服务
 
@@ -29,8 +32,7 @@ git clone有两种方式https与ssh，SSH keys的使用需保证remote的源为g
 - 项目配置：project/.git/config   `git config`
 - 查看配置:`git config --list --show-origin`
 
-
-```
+```shell
 git config --global user.name "name"
 git config --global user.email "email"
 git config --global color.ui "auto"
@@ -42,15 +44,16 @@ git config -l                       # 列举所有配置
 
 #### SSH
 
-```
+```shell
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
+公钥添加到github账户
 
 #### GPG
 
 提交内容将会有一个"已验证"标记
 
-```
+```shell
 gpg --gen-key
 gpg --list-secret-keys --keyid-format LONG  //获取GPG key ID  3AA5C34371567BD2
 gpg --list-key
@@ -61,7 +64,7 @@ git config --global user.signingkey 35F5FFB2
 
 ### 个性化配置
 
-理解每个指令的原理
+理解每个指令的原理，从操作流程理解命令
 
 ```
 [user]
@@ -140,9 +143,7 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 - undo = reset --soft HEAD ^ - 如果我在做出提交时犯了一个错误，这个命令会把代码恢复到提交之前的样子。通常我只是在这种情况下修改现有的提交，因为它保留了提交信息。
 - stash-all = stash save --include-untracked - 当你正在开发，有人临时要求你切换分支时，stash 是非常有用的。这个命令确保当你 stash 时，可以记录没有被 git add 的新文件。
 - merge
-
   - ff = only 确保只有在每一个合并都是 fast-forward 的时候，你才会看到报错。否则只要你配置了这个选项，什么合并提交，什么历史记录，通通都不需要，只是两次提交之间的平滑过渡。你可能会想知道如何完成这项工作。答案是用 git rebase，把一个分支的修改合并到当前分支，它非常有用当我 pull 代码与 master 有冲突的时候，我使用这种方式来处理。当你在本地分支上修改后，同时其他人在 master 上 做了修改，我想这样比你直接 merge 到你本地分支时的 commit 更好。这样你可以避免多出一个 merge 的 commit。如果我打算新建一个merge commit，我可以用明确的 git merge -ff 来创建。
-
 - commit
 
   - gpgSign = true 确保您的所有 commit 都由你的 GPG 密钥签名。这通常是一个好主意，因为 .gitconfig 文件中没有验证您的用户信息，这意味着看起来像您这样的提交可能会轻松显示在其他人的提交 信息中。事实上，我曾经用过别人的凭据，因为帐户和机器配置耗时太长。我的提交请求是通过别人的帐号提交的，但内部的所有提交都是我的真实账号。将你的 GPG key 添加到 Github并尝试一次提交，你可能就会解决你现在的疑问，您提交内容将会有一个"已验证"标记。
@@ -155,13 +156,14 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
   - default = simple可能是你已经设置的配置项。它可以更轻松地将您的本地分支推送到远程，当二者分支名一样的时候。
   - followTags = true很简单。配置它以后，当你 git push 的时候可以直接将本地的 tags 提交到远程，而不用每次都加参数 --follow-tags。不知道你是不是和我一样，我如果创建了一个tag，我就基本上一定会将它推到远程的。
 
-Git 命令清单 ![](../_static/bg2015120901.png) ![](../_static/git_2.png)
+ ![Git 命令清单-1](../_static/bg2015120901.png)
+ ![Git 命令清单-2](../_static/git_2.png)
 
 ## 原理
 
 - 工作区（当前文件状态Workspace）进行开发改动的地方，任何对象都是在工作区中诞生和被修改；
 - 暂存区（提交最新的版本Index / Stage）.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；
-- 版本库 本地仓库（所有历史版本Repository）保存了对象被提交 过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；
+- 版本库 本地仓库（所有历史版本Repository）保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；
 - 远程仓库(Remote)
 - 任何对象都是在工作区中诞生和被修改；
 - 任何修改都是从进入index区才开始被版本控制；
@@ -174,14 +176,26 @@ Git 的工作就是创建和保存项目的快照及与之后的快照进行对�
 
 ### 创建版本库
 
-- git init：在当前目录新建一个Git代码库
+- git init：在当前目录内新建一个Git代码库，会生成.git文件，用于新建空项目文件或者将项目添加git管理
 - git init [project-name] :# 新建一个目录，将其初始化为Git代码库
-- git clone [url] [project-name]:下载一个项目和它的整个代码历史
+- git clone [url] [project-name]:下载一个项目和它的整个代码历史,支持多种协议
+    + 克隆版本库的时候，所使用的远程主机自动被Git命名为origin。如果想用其他的主机名，需要用git clone命令的-o选项指定。
+    ```shell
+    git clone http[s]://example.com/path/to/repo.git/
+    git clone ssh://example.com/path/to/repo.git/
+    git clone [user@]example.com:path/to/repo.git/
+    git clone git://example.com/path/to/repo.git/
+    git clone /opt/git/project.git 
+    git clone file:///opt/git/project.git
+    git clone ftp[s]://example.com/path/to/repo.git/
+    git clone rsync://example.com/path/to/repo.git/
+    git clone -o jQuery https://github.com/jquery/jquery.git
+    ```
 - git subtree add --prefix=client <https://github.com/example/project-client.git> master // 建立主项目里子树
 
 ### 编辑项目:writing clear commit messages, you can make it easier for other people to follow along and provide feedback.
 
-```
+```shell
 git add ./<file1>(<file2> <file3>)/[dir] （所有修改过的文件/单个文件 或通过使用通配符将一组文件添加到暂存区）
 git add -p 添加每个变化前，都会要求确认,对于同一个文件的多处变化，可以实现分次提交
 git rm [file1] [file2] ... 删除工作区文件，并且将这次删除放入暂存区
@@ -199,12 +213,11 @@ git commit -a:提交工作区自上次commit之后的变化，直接到仓库区
 git commit -v：提交时显示所有diff信息
 git commit –-am/--amend -m [message]：使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
 git commit --amend [file1] [file2] ...  重做上一次commit，并包括指定文件的新变化
-git pull --rebase origin master:获取最新远程分支并合并
 ```
 
 暂存区编辑:
 
-```
+```shell
 git reset [file] 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
 git reset --hard 重置暂存区与工作区，与上一次commit保持一致
 git reset [commit] 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
@@ -220,11 +233,11 @@ git stash pop - 恢复stash内容到工作区，并删除stash中的内容
 
 git pull                         # 抓取远程仓库所有分支更新并合并到本地
 git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并
+git pull --rebase origin master // 取回远程主机某个分支的更新，再与本地的指定分支合并
 git fetch origin     git merge origin/master             # 抓取远程仓库更新   将远程主分支合并到本地当前分支 等同于git pull
 git checkout --track origin/branch     # 跟踪某个远程分支创建相应的本地分支
 git checkout -b <local_branch> origin/<remote_branch>  # 基于远程分支创建本地分支，功能同上
 
-git reset --hard:回滚到最后一次推送状态
 rebase:将本次修改起始的远程仓库节点之后的修改内容优先合并到本地修改分支上
 conflict：git rebase出现冲突，修改冲突文件，每次修改,只修改自己添加的内容，每次不需commit，最后git push -f提交到远程仓库
 git add file
@@ -233,7 +246,7 @@ git rebase --continue
 
 查看：
 
-```
+```shell
 git stutus:工作树与暂存区的文件对比差别,显示有变更的文件
 
 git show [$id]:显示某次提交的内容
@@ -271,12 +284,15 @@ HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
 
 分支： branch name should be descriptive
 
-```
-git branch [-r]/[-a] 列出所有本地分支/远程/所有
+```shell
+git branch [-r]/[-a] 列出所有远程/所有分支
 git branch [branch-name] [commit] 新建一个分支，指向指定commit,但依然停留在当前分支
-git branch -b new from:通过from创建new分支，并切换到new分支
+git checkout -b newBrach origin/master // 在origin/master的基础上，创建一个新分支，并切换到new分支
 git branch --track [branch] [remote-branch] 新建一个分支，与指定的远程分支建立追踪关系
 git checkout -b branch-name origin/branch-name 从本地创建和远程对应的分支
+
+git merge origin/master // 在本地分支上合并远程分支
+git rebase origin/master // 在本地分支上合并远程分支
 
 git checkout dev:切换
 git checkout -:切换到上一个分支
@@ -287,7 +303,7 @@ git rebase source destiantion：将source压缩到destiantion
 git rebase master
 git branch --set-upstream-to=origin/master master
 
-git branch --set-upstream master origin/master 建立追踪关系，在现有分支与指定的远程分支之间
+git branch --set-upstream master origin/master // 建立追踪关系，在现有分支与指定的远程分支之间
 git branch --set-upstream develop origin/develop
 ```
 
@@ -295,7 +311,7 @@ Pull Request:useful for contributing to open source projects and for managing ch
 code review:project guidelines,unit tests
 标签
 
-```
+```shell
 git tag:列出所有tag
 git tag [tag] :新建一个tag在指定commit
 git tag -d [tag] 删除本地tag
@@ -308,45 +324,50 @@ git checkout -b [branch] [tag]:新建一个分支，指向某个tag
 
 远程分支：
 
-```
+```shell
 git fetch [remote] 下载远程仓库的所有变动
-git remote -v 显示所有远程仓库
-git remote show [remote] 显示某个远程仓库的信息
-git remote add [shortname] [url] 增加一个新的远程仓库，并命名
-git pull [remote] [branch] 取回远程仓库的变化，并与本地分支合并
-git push [remote] [branch] 上传本地指定分支到远程仓库. git push origin my:master
-git push [remote] --force 强行推送当前分支到远程仓库，即使有冲突
-git push [remote] --all 推送所有分支到远程仓库
-git push origin branch-name 从本地推送分支
+git fetch <远程主机名> <分支名>  // 只想取回特定分支的更新,所取回的更新，在本地主机上要用"远程主机名/分支名"的形式读取
 
-git remote -v:每个别名的实际链接地址
-git remote show origin           # 查看远程服务器仓库状态
-git remote add [shortname] [url] 添加
+git remote -v 显示所有远程仓库
+git remote show [remote] // 显示某个远程仓库的信息
+git remote add [shortname] [url] 增加一个新的远程仓库，并命名
 git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 设置远程仓库地址(用于修改远程仓库地址)
+git remote rm <主机名> // 用于删除远程主机
+git remote rename <原主机名> <新主机名> // 用于远程主机的改名
+
+git pull <远程主机名> <远程分支名>:<本地分支名> //  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
+
+git push <远程主机名> <本地分支名>:<远程分支名> // 上传本地指定分支到远程仓库. git push origin my:master
+git push [remote] --force 强行推送当前分支到远程仓库，即使有冲突
+git push [remote] --all 不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机
+git push origin :master // 省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支
+git push origin --delete master // 表示删除origin主机的master分支
+git push origin branch-name 从本地推送分支
+git push --force origin  // 如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做git pull合并差异，然后再推送到远程主机。这时，如果你一定要推送，可以使用--force选项
 git push <remote repository name> <branch name>（第一次 git push -u：-u 选项设置本地分支去跟踪远程对应的分支）
 git push <remote name> <local branch name:remote branch name>
-git branch -dr [remote/branch] :删除远程分支
-git push origin --delete dev :删除远程分支
 git push                         # push所有分支
 git push origin master           # 将本地主分支推到远程主分支
 git push -u origin master        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)
 git push origin <local_branch>   # 创建远程分支， origin是远程仓库名
 git push origin <local_branch>:<remote_branch>  # 创建远程分支
 git push origin :<remote_branch>  #先删除本地分支(git branch -d <branch>)，然后再push删除远程分支
+
+git branch -dr [remote/branch] :删除远程分支
+git push origin --delete dev :删除远程分支
 ```
 
 deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
 
 打包:
 
-```
+```shell
 git archive
 ```
 
-
 # 搭建git私有服务器
 
-```
+```shell
 groupadd git
 adduser git -g git
 
@@ -380,7 +401,7 @@ git clone git@server:/path/to/repo.git
   - 功能分支也可以（且应该）push到中央仓库中 `git push -u origin animated-menu-items`
   - 合并：push到中央仓库的功能分支上并发起一个Pull Request请求去合并修改到master。Code Review
 
-    ```
+    ```shell
       git checkout master
       git pull
       git pull origin animated-menu-items(合并分支)
@@ -393,14 +414,14 @@ git clone git@server:/path/to/repo.git
 
     - develop分支作为功能的集成分支，包含了项目的全部历史。
 
-      ```
+      ```shell
         git branch develop
         git push -u origin develop
       ```
 
     - 功能分支（feature）：使用develop分支作为父分支。当新功能完成时，合并回develop分支。
 
-      ```
+      ```shell
         git checkout -b some-feature develop
         git pull origin develop
         git checkout develop
@@ -417,7 +438,7 @@ git clone git@server:/path/to/repo.git
 
     - master分支存储了正式发布的历史：合并修改到master分支和develop分支上，删除发布分支。
 
-      ```
+      ```shell
         git checkout master（功能回归分支）
         git merge release-0.1
         git push
@@ -431,7 +452,7 @@ git clone git@server:/path/to/repo.git
 
     - 维护分支：生成快速给产品发布版本（production releases）打补丁，这是唯一可以直接从master分支fork出来的分支。 修复完成，修改应该马上合并回master分支和develop分支（当前的发布分支），master分支应该用新的版本号打好Tag。
 
-      ```
+      ```shell
         git checkout -b issue-#001 master
         # Fix the bug
         git checkout master
@@ -451,7 +472,7 @@ git clone git@server:/path/to/repo.git
 
 让各个开发者都有一个服务端仓库。这意味着各个代码贡献者有2个Git仓库而不是1个：一个本地私有的（fork，其它开发者不允许push到这个仓库，但可以pull到修改。为了方便和其它的开发者共享分支。 各个开发者应该用分支隔离各个功能，就像在功能分支工作流和Gitflow工作流一样。），另一个服务端公开的（公开的正式仓库存储在服务器上，**让正式仓库之所以正式的唯一原因是它是项目维护者的公开仓库**）
 
-```
+```shell
 - 优点：贡献的代码可以被集成，而不需要所有人都能push代码到仅有的中央仓库中。 开发者push到自己的服务端仓库，而只有项目维护者才能push到正式仓库。 这样项目维护者可以接受任何开发者的提交，但无需给他正式代码库的写权限。
 
 - fork操作基本上就只是一个服务端的克隆，clone到本地
@@ -529,7 +550,7 @@ GitHub集成其他功能：`repository > Settings > Integrations & services`
 
 ![Git 使用规范流程](..\_static\bg2015080501.png)
 
-```
+```shell
 # 获取主干最新代码
 git checkout master
 git pull

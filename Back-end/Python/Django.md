@@ -82,3 +82,18 @@ server {
 ```
 Requested setting INSTALLED_APPS, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.
 ```
+
+## 资源
+
+* [rosarior/awesome-django](https://github.com/rosarior/awesome-django):
+* 
+## 工具
+
+* [nioperas06/awesome-django-rest-framework](https://github.com/nioperas06/awesome-django-rest-framework):Tools, processes and resources you need to create an awesome API with Django REST Framework
+* [django-extensions/django-extensions](https://github.com/django-extensions/django-extensions):This is a repository for collecting global custom management extensions for the Django Framework.
+* [jazzband/django-debug-toolbar](https://github.com/jazzband/django-debug-toolbar):A configurable set of panels that display various debug information about the current request/response.
+* [divio/django-cms](https://github.com/divio/django-cms):The easy-to-use and developer-friendly CMS http://www.django-cms.org
+* [encode/django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. http://www.django-rest-framework.org
+* [Taiga Documentation](http://taigaio.github.io/taiga-doc/dist/#_installation_guide)
+* [taigaio/taiga-front](https://github.com/taigaio/taiga-front):Project management web application with scrum in mind! Built on top of Django and AngularJS (Front) http://taiga.io
+* [taigaio/taiga-back](https://github.com/taigaio/taiga-back):Project management web application with scrum in mind! Built on top of Django and AngularJS (Backend Code) 
