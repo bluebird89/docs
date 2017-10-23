@@ -19,25 +19,6 @@ odeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多�
 
 总结来说，React Native使用NodeJS来做系统处理，使用React来渲染。
 
-## 资源
-
-- [react-native](https://github.com/facebook/react-native)
-- [网站](http://facebook.github.io/react-native/)
-- [react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit https://react-native-training.github.…
-- [awesome-react-native](https://github.com/jondot/awesome-react-native)
-- [f8app](https://github.com/fbsamples/f8app)<http://makeitopen.com/>
-- [facebook/react](https://github.com/facebook/react):A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
-- [设计含结构](https://github.com/airbnb/react-sketchapp)
-- [文档](http://airbnb.io/react-sketchapp/docs/)
-- [文档](http://reactnative.cn/docs/0.49/getting-started.html)
-- [页面设计](https://github.com/ant-design/ant-design/)
-- [react-native-guide](https://github.com/reactnativecn/react-native-guide)
-- [react-native-macos](https://github.com/ptmt/react-native-macos)
-- [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native)
-- [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
-- [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
-- [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app):Create React apps with no build configuration.
-
 ## [安装](https://facebook.github.io/react-native/docs/getting-started.html)
 
 - Chocolatey（ 基于Nuget的Windows包管理工具）安装与使用
@@ -132,7 +113,6 @@ react-native run-android
 
 - [react-pxq](https://github.com/bailicangdu/react-pxq)一个 react + redux 的完整项目 和 个人总结
 
-
 ## 参考
 
 - [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
@@ -163,6 +143,24 @@ react-native run-android
 * [airbnb/react-native-maps](https://github.com/airbnb/react-native-maps):React Native Mapview component for iOS + Android
 * [airbnb/native-navigation](https://github.com/airbnb/native-navigation):Native navigation library for React Native applications http://airbnb.io/native-navigation/
 
+## 资源
+
+- [facebook/react-native](https://github.com/facebook/react-native):A framework for building native apps with React. http://facebook.github.io/react-native/
+- [网站](http://facebook.github.io/react-native/)
+- [react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit https://react-native-training.github.…
+- [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native):Awesome React Native components, news, tools, and learning material! http://www.awesome-react-native.com
+- [f8app](https://github.com/fbsamples/f8app)<http://makeitopen.com/>
+- [facebook/react](https://github.com/facebook/react):A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
+- [设计含结构](https://github.com/airbnb/react-sketchapp)
+- [文档](http://airbnb.io/react-sketchapp/docs/)
+- [文档](http://reactnative.cn/docs/0.49/getting-started.html)
+- [页面设计](https://github.com/ant-design/ant-design/)
+- [react-native-guide](https://github.com/reactnativecn/react-native-guide)
+- [react-native-macos](https://github.com/ptmt/react-native-macos)
+- [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native)
+- [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
+- [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
+- [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app):Create React apps with no build configuration.
 
 ## 文档
 

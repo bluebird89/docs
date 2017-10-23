@@ -119,6 +119,7 @@ $controller->register();
 - swoole
 - xdebug
 - apc:op缓存
+- Opcache
 
 TP参考：<https://github.com/ijry/lyadmin>
 
@@ -323,3 +324,6 @@ EXPOSE 9000 CMD ["php-fpm"] ```
 - [codeguy/php-the-right-way](https://github.com/codeguy/php-the-right-way):An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web <http://www.phptherightway.com>
 - [walu/phpbook](https://github.com/walu/phpbook):PHP扩展开发及内核应用
 - [laruence/php7-internal](https://github.com/laruence/php7-internal):Understanding PHP7 Internal articles
+
+
+prof

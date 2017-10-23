@@ -19,3 +19,4 @@
 * [designmodo/Flat-UI](https://github.com/designmodo/Flat-UI):Flat UI Free - Design Framework (html/css3/less/js). Flat UI is based on Bootstrap, a comfortable, responsive, and functional framework that simplifies the development of websites. https://designmodo.com/flat-free/
 * [ionic-team/ionicons](https://github.com/ionic-team/ionicons):The premium icon font for Ionic http://ionicons.com/
 * [airbnb/airpal](https://github.com/airbnb/airpal):Web UI for PrestoDB. http://airbnb.github.io/airpal
+* [xinthink/react-native-material-kit](https://github.com/xinthink/react-native-material-kit):Bringing Material Design to React Native http://j.mp/rnmdk
