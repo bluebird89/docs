@@ -188,3 +188,20 @@ $(function(){
 https://github.com/chentsulin/learn-programming
 
 https://github.com/works-with
+
+https://github.com/Tencent/Biny
+
+https://github.com/microzz/news-app-by-react.js
+https://github.com/microzz/github-ranking
+https://github.com/microzz/vue-chat
+https://github.com/microzz/vue-music-player
+
+https://github.com/phanan/koel
+
+https://microzz.com/about.html
+
+http://design-patterns.readthedocs.io/zh_CN/latest/read_uml.html
+
+http://www.ruanyifeng.com/blog/2017/05/websocket.html
+
+https://github.com/devlinkcn/ppts_for_php2017
