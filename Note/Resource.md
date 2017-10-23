@@ -11,6 +11,9 @@
 - [bmorelli25/Become-A-Full-Stack-Web-Developer](https://github.com/bmorelli25/Become-A-Full-Stack-Web-Developer):Free resources for learning Full Stack Web Development
 - [gothinkster/realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 https://realworld.io/
 
+## 工具
+
+* [代码片段](http://www.phpxs.com/code/)
 
 # [经典编程书籍大全](https://github.com/jobbole/awesome-programming-books)
 
