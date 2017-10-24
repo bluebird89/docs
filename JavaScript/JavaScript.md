@@ -8,6 +8,8 @@ JavaScript是世界上最流行的脚本语言。运行在浏览器中的解释�
 
 最新版ECMAScript 6标准（简称ES6）已经在2015年6月正式发布了，所以，讲到JavaScript的版本，实际上就是说它实现了ECMAScript标准的哪个版本。
 
+[ECMAScript 2015](https://babeljs.io/learn-es2015/)
+
 ## 基础入门
 
 ### 引入方式
@@ -1529,8 +1531,194 @@ parent.removeChild(parent.children[1]); // <-- 浏览器报错
 
 ### 操作表单
 
+* 应用于text、password、hidden以及select,获取value的值
+* 对于单选框和复选框，value属性返回的永远是HTML预设的值，而我们需要获得的实际是用户是否“勾上了”选项，所以应该用checked判断
+* 通过<form>元素的submit()方法提交一个表单,响应一个<button>的click事件，在JavaScript代码中提交表单,这种方式的缺点是扰乱了浏览器对form的正常提交
+* 响应<form>本身的onsubmit事件，在提交form时作修改,要return true来告诉浏览器继续提交，如果return false，浏览器将不会继续提交form，这种情况通常对应用户输入有误，提示用户错误信息后终止提交form。
+* 没有name属性的<input>的数据不会被提交。
 
+```html
+<input type="text" id="email">
+<label><input type="radio" name="weekday" id="tuesday" value="2"> Tuesday</label>
+```
+```javascript
+var input = document.getElementById('email');
+input.value; // '用户输入的值'
+input.value = 'test@example.com'; // 文本框的内容已更新
 
+var tue = document.getElementById('tuesday');
+tue.value; // '2'
+tue.checked; // true或者false
+```
+```html
+<form id="test-form">
+    <input type="text" name="test">
+    <button type="button" onclick="doSubmitForm()">Submit</button>
+</form>
+
+<script>
+function doSubmitForm() {
+    var form = document.getElementById('test-form');
+    // 可以在此修改form的input...
+    // 提交form:
+    form.submit();
+}
+</script>
+
+<!-- HTML -->
+<form id="test-form" onsubmit="return checkForm()">
+    <input type="text" name="test">
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+function checkForm() {
+    var form = document.getElementById('test-form');
+    // 可以在此修改form的input...
+    // 继续下一步:
+    return true;
+}
+</script>
+
+<!-- HTML -->
+<form id="login-form" method="post" onsubmit="return checkForm()">
+    <input type="text" id="username" name="username">
+    <input type="password" id="input-password">
+    <input type="hidden" id="md5-password" name="password">
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+function checkForm() {
+    var input_pwd = document.getElementById('input-password');
+    var md5_pwd = document.getElementById('md5-password');
+    // 把用户输入的明文变为MD5:
+    md5_pwd.value = toMD5(input_pwd.value);
+    // 继续下一步:
+    return true;
+}
+</script>
+```
+
+### 操作文件
+
+* 以上传文件的唯一控件就是`<input type="file">`
+* 当一个表单包含<input type="file">时，表单的enctype必须指定为multipart/form-data，method必须指定为post，浏览器才能正确编码并以multipart/form-data格式发送表单的数据。
+* 只允许用户点击<input type="file">来选择本地文件，用JavaScript对<input type="file">的value赋值是没有任何效果的。当用户选择了上传某个文件后，JavaScript也无法获得该文件的真实路径
+* HTML5的普及，新增的File API允许JavaScript读取文件内容，获得更多的文件信息.提供了File和FileReader两个主要对象，可以获得文件信息并读取文件。
+* 通过HTML5的File API读取文件内容。以DataURL的形式读取到的文件是一个字符串，类似于data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...，常用于设置图像。如果需要服务器端处理，把字符串base64,后面的字符发送给服务器并用Base64解码就可以得到原始文件的二进制内容。
+* 在JavaScript中，浏览器的JavaScript执行引擎在执行JavaScript代码时，总是以单线程模式执行，也就是说，任何时候，JavaScript代码都不可能同时有多于1个线程在执行。
+* `reader.readAsDataURL(file);`就会发起一个异步操作来读取文件内容。因为是异步操作，所以我们在JavaScript代码中就不知道什么时候操作结束，因此需要先设置一个回调函数：`reader.onload = function(e) { // 当文件读取完成后，自动调用此函数:};`.当文件读取完成后，JavaScript引擎将自动调用我们设置的回调函数。执行回调函数时，文件已经读取完毕，所以我们可以在回调函数内部安全地获得文件内容。
+
+```javascript
+var f = document.getElementById('test-file-upload');
+var filename = f.value; // 'C:\fakepath\test.png'
+if (!filename || !(filename.endsWith('.jpg') || filename.endsWith('.png') || filename.endsWith('.gif'))) {
+    alert('Can only upload image file.');
+    return false;
+}
+```
+```html
+
+<form method="post" action="http://localhost/test" enctype="multipart/form-data">
+    <p>图片预览：</p>
+    <p><div id="test-image-preview" style="border: 1px solid #ccc; width: 100%; height: 200px; background-size: contain; background-repeat: no-repeat; background-position: center center;"></div></p>
+    <p>
+        <input type="file" id="test-image-file" name="test">
+    </p>
+    <p id="test-file-info"></p>
+</form>
+<script>
+// 
+var
+    fileInput = document.getElementById('test-image-file'),
+    info = document.getElementById('test-file-info'),
+    preview = document.getElementById('test-image-preview');
+// 监听change事件:
+fileInput.addEventListener('change', function () {
+    // 清除背景图片:
+    preview.style.backgroundImage = '';
+    // 检查文件是否选择:
+    if (!fileInput.value) {
+        info.innerHTML = '没有选择文件';
+        return;
+    }
+    // 获取File引用:
+    var file = fileInput.files[0];
+    // 获取File信息:
+    info.innerHTML = '文件: ' + file.name + '<br>' +
+                     '大小: ' + file.size + '<br>' +
+                     '修改: ' + file.lastModifiedDate;
+    if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
+        alert('不是有效的图片文件!');
+        return;
+    }
+    // 读取文件:
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var
+            data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'            
+        preview.style.backgroundImage = 'url(' + data + ')';
+    };
+    // 以DataURL的形式读取文件:
+    reader.readAsDataURL(file);
+});
+</script>
+```
+
+### AJAX Asynchronous JavaScript and XML
+
+用JavaScript执行异步网络请求。AJAX请求是异步执行的，也就是说，要通过回调函数获得响应。早大规模使用AJAX的就是Gmail，Gmail的页面在首次加载后，剩下的所有数据都依赖于AJAX来更新。
+
+* 一次HTTP请求对应一个页面
+* 如果要让用户留在当前页面中，同时发出新的HTTP请求，就必须用JavaScript发送这个新请求，接收到数据后，再用JavaScript更新页面，这样一来，用户就感觉自己仍然停留在当前页面，但是数据却可以不断地更新。
+* 通过检测window对象是否有XMLHttpRequest属性来确定浏览器是否支持标准的XMLHttpRequest。注意，不要根据浏览器的navigator.userAgent来检测浏览器是否支持某个JavaScript特性，一是因为这个字符串本身可以伪造，二是通过IE版本判断JavaScript特性将非常复杂。
+* 当创建了XMLHttpRequest对象后，要先设置onreadystatechange的回调函数。在回调函数中，通常我们只需通过readyState === 4判断请求是否完成，如果已完成，再根据status === 200判断是否是一个成功的响应。
+* XMLHttpRequest对象的open()方法有3个参数，第一个参数指定是GET还是POST，第二个参数指定URL地址，第三个参数指定是否使用异步，默认是true，所以不用写。
+* 注意，千万不要把第三个参数指定为false，否则浏览器将停止响应，直到AJAX请求完成。如果这个请求耗时10秒，那么10秒内你会发现浏览器处于“假死”状态。最后调用send()方法才真正发送请求。GET请求不需要参数，POST请求需要把body部分以字符串或者FormData对象传进去。
+* 默认情况下，JavaScript在发送AJAX请求时，URL的域名必须和当前页面完全一致。域名要相同（www.example.com和example.com不同），协议要相同（http和https不同），端口号要相同（默认是:80端口，它和:8080就不同）
+* 用JavaScript请求外域（就是其他网站）的URL
+    - 通过在同源域名下架设一个代理服务器来转发，JavaScript负责把请求发送到代理服务器：'/proxy?url=http://www.sina.com.cn',代理服务器再把结果返回，这样就遵守了浏览器的同源策略。这种方式麻烦之处在于需要服务器端额外做开发。
+    - JSONP:它有个限制，只能用GET请求，并且要求返回JavaScript。这种方式跨域实际上是利用了浏览器允许跨域引用JavaScript资源.常以函数调用的形式返回
+```javascript
+function success(text) {
+    var textarea = document.getElementById('test-response-text');
+    textarea.value = text;
+}
+
+function fail(code) {
+    var textarea = document.getElementById('test-response-text');
+    textarea.value = 'Error code: ' + code;
+}
+
+var request;
+if (window.XMLHttpRequest) {
+    request = new XMLHttpRequest();
+} else {
+    request = new ActiveXObject('Microsoft.XMLHTTP');
+}
+
+request.onreadystatechange = function () { // 状态发生变化时，函数被回调
+    if (request.readyState === 4) { // 成功完成
+        // 判断响应结果:
+        if (request.status === 200) {
+            // 成功，通过responseText拿到响应的文本:
+            return success(request.responseText);
+        } else {
+            // 失败，根据响应码判断失败原因:
+            return fail(request.status);
+        }
+    } else {
+        // HTTP请求还在继续...
+    }
+}
+
+// 发送请求:
+request.open('GET', '/api/categories');
+request.send();
+
+alert('请求已发送，请等待响应...');
+```
 ## 调试
 
 * 可以直接在develop中的console中测试代码
