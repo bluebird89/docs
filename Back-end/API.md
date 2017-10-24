@@ -15,3 +15,8 @@
 ## 接口
 
 * [douban](https://developers.douban.com/wiki/?title=guide)
+
+## 实例
+
+https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json
+http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice
