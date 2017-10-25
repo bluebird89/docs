@@ -144,8 +144,7 @@ TP参考：<https://github.com/ijry/lyadmin>
 
 - [Awesome PHP](http://coffeephp.com/resources)
 - [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php):A curated list of amazingly awesome PHP libraries, resources and shiny things.
-- PHP设计模式<https://github.com/domnikl/DesignPatternsPHP>
-- [开源项目](https://my.oschina.net/editorial-story/blog/1535228)
+- [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
 
 ### Docker配置
 
