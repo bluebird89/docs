@@ -1679,7 +1679,14 @@ fileInput.addEventListener('change', function () {
 * 默认情况下，JavaScript在发送AJAX请求时，URL的域名必须和当前页面完全一致。域名要相同（www.example.com和example.com不同），协议要相同（http和https不同），端口号要相同（默认是:80端口，它和:8080就不同）
 * 用JavaScript请求外域（就是其他网站）的URL
     - 通过在同源域名下架设一个代理服务器来转发，JavaScript负责把请求发送到代理服务器：'/proxy?url=http://www.sina.com.cn',代理服务器再把结果返回，这样就遵守了浏览器的同源策略。这种方式麻烦之处在于需要服务器端额外做开发。
-    - JSONP:它有个限制，只能用GET请求，并且要求返回JavaScript。这种方式跨域实际上是利用了浏览器允许跨域引用JavaScript资源.常以函数调用的形式返回
+    - JSONP:它有个限制，只能用GET请求，并且要求返回JavaScript。这种方式跨域实际上是利用了浏览器允许跨域引用JavaScript资源.常以函数调用的形式返回,实例：`http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice`，返回`refreshPrice({"0000001":{"code": "0000001", ... });`,在页面中准备好好回调函数refreshPrice。
+    - CORS全称Cross-Origin Resource Sharing：HTML5规范定义的如何跨域访问资源。Origin表示本域，也就是浏览器当前页面的域。当JavaScript向外域（如sina.com）发起请求后，浏览器收到响应后，首先检查Access-Control-Allow-Origin是否包含本域，如果是，则此次跨域请求成功，如果不是，则请求失败，JavaScript将无法获取到响应的任何数据。
+    - 只要响应头Access-Control-Allow-Origin为http://my.com，或者是*，本次请求就可以成功。跨域能否成功，取决于对方服务器是否愿意给你设置一个正确的Access-Control-Allow-Origin，决定权始终在对方手中。上面这种跨域请求，称之为“简单请求”。简单请求包括GET、HEAD和POST（POST的Content-Type类型仅限application/x-www-form-urlencoded、multipart/form-data和text/plain），并且不能出现任何自定义头（例如，X-Custom: 12345），通常能满足90%的需求。
+    - 最新的浏览器全面支持HTML5。在引用外域资源时，除了JavaScript和CSS外，都要验证CORS。例如，当你引用了某个第三方CDN上的字体文件时,如果该CDN服务商未正确设置Access-Control-Allow-Origin，那么浏览器无法加载字体资源。
+    - 对于PUT、DELETE以及其他类型如application/json的POST请求，在发送AJAX请求之前，浏览器会先发送一个OPTIONS请求（称为preflighted请求）到这个URL上，询问目标服务器是否接受
+    - 服务器必须响应并明确指出允许的Method：
+    - 浏览器确认服务器响应的Access-Control-Allow-Methods头确实包含将要发送的AJAX请求的Method，才会继续发送AJAX，否则，抛出一个错误。由于以POST、PUT方式传送JSON格式的数据在REST中很常见，所以要跨域正确处理POST和PUT请求，服务器端必须正确响应OPTIONS请求。
+![CORS](../_static/cors.png "Optional title")
 ```javascript
 function success(text) {
     var textarea = document.getElementById('test-response-text');
@@ -1718,7 +1725,201 @@ request.open('GET', '/api/categories');
 request.send();
 
 alert('请求已发送，请等待响应...');
+
+http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice
+function refreshPrice(data) {
+    var p = document.getElementById('test-jsonp');
+    p.innerHTML = '当前价格：' +
+        data['0000001'].name +': ' + 
+        data['0000001'].price + '；' +
+        data['1399001'].name + ': ' +
+        data['1399001'].price;
+}
+function getPrice() {
+    var
+        js = document.createElement('script'),
+        head = document.getElementsByTagName('head')[0];
+    js.src = 'http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice';
+    head.appendChild(js);
+}
 ```
+
+### promise
+
+在JavaScript的世界中，所有代码都是单线程执行的。
+* 由于这个“缺陷”，导致JavaScript的所有网络操作，浏览器事件，都必须是异步执行。所谓的单线程就是一次只能完成一个任务，其任务的调度方式就是排队，这就和火车站洗手间门口的等待一样，前面的那个人没有搞定，你就只能站在后面排队等着.这种模式的好处是实现起来比较简单，执行环境相对单纯；坏处是只要有一个任务耗时很长，后面的任务都必须排队等着，会拖延整个程序的执行。常见的浏览器无响应（假死），往往就是因为某一段Javascript代码长时间运行（比如死循环），导致整个页面卡在这个地方，其他任务无法执行。
+* "同步模式"就是上一段的模式，后一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的；
+* "异步模式"则完全不同，每一个任务有一个或多个回调函数（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数，后一个任务则是不等前一个任务结束就执行，所以程序的执行顺序与任务的排列顺序是不一致的、异步的。
+* "异步模式"非常重要。在浏览器端，耗时很长的操作都应该异步执行，避免浏览器失去响应，最好的例子就是Ajax操作。在服务器端，"异步模式"甚至是唯一的模式，因为执行环境是单线程的，如果允许同步执行所有http请求，服务器性能会急剧下降，很快就会失去响应。
+* 回调函数:假定有两个函数f1和f2，后者等待前者的执行结果。f1()和f2().
+    - 回调函数的优点是简单、容易理解和部署，
+    - 缺点是不利于代码的阅读和维护，各个部分之间高度耦合（Coupling），流程会很混乱，而且每个任务只能指定一个回调函数。
+* 采用事件驱动模式。任务的执行不取决于代码的顺序，而取决于某个事件是否发生. 
+    - 优点是比较容易理解，可以绑定多个事件，每个事件可以指定多个回调函数，而且可以"去耦合"（Decoupling），有利于实现模块化。
+    - 缺点是整个程序都要变成事件驱动型，运行流程会变得很不清晰。
+* 存在一个"信号中心"，某个任务执行完成，就向信号中心"发布"（publish）一个信号，其他任务可以向信号中心"订阅"（subscribe）这个信号，从而知道什么时候自己可以开始执行。这就叫做"发布/订阅模式"（publish-subscribe pattern），又称"观察者模式"（observer pattern）。
+* Promises对象:每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数.回调函数变成了链式写法，程序的流程可以看得很清楚.好处把执行代码和处理结果的代码清晰地分离了
+    - 串行执行若干异步任务外
+    - 并行执行异步任务：需要从两个不同的URL分别获得用户的个人信息和好友列表，这两个任务是可以并行执行的，用Promise.all()，多个异步任务是为了容错。比如，同时向两个URL读取用户的个人信息，只需要获得先返回的结果即可
+    - 可以把很多异步任务以并行和串行的方式组合起来执行
+```javascript
+function callback() {
+    console.log('Done');
+}
+console.log('before setTimeout()');
+setTimeout(callback, 1000); // 1秒钟后调用callback函数
+console.log('after setTimeout()');
+
+function f1(callback){
+　　setTimeout(function () {
+　　　　// f1的任务代码
+　　　　callback();
+　　}, 1000);
+}
+f1(f2);
+
+f1.on('done', f2);
+　function f1(){
+　　　　setTimeout(function () {
+　　　　　　// f1的任务代码
+　　　　　　f1.trigger('done');
+　　　　}, 1000);
+　　}
+
+jQuery.subscribe("done", f2);
+function f1(){
+　　　　setTimeout(function () {
+　　　　　　// f1的任务代码
+　　　　　　jQuery.publish("done");
+　　　　}, 1000);
+　　}
+// f2完成执行后，也可以取消订阅 jQuery.unsubscribe("done", f2);
+ 
+f1().then(f2);
+function f1(){
+　　　　var dfd = $.Deferred();
+　　　　setTimeout(function () {
+　　　　　　// f1的任务代码
+　　　　　　dfd.resolve();
+　　　　}, 500);
+　　　　return dfd.promise;
+　　}
+job1.then(job2).then(job3).catch(handleError); // job1、job2和job3都是Promise对象。
+f1().then(f2).fail(f3);
+
+
+ // <p id="test-promise-log"></p>
+var logging = document.getElementById('test-promise-log');
+while (logging.children.length > 1) {
+    logging.removeChild(logging.children[logging.children.length - 1]);
+}
+// 输出log到页面:
+function log(s) {
+    var p = document.createElement('p');
+    p.innerHTML = s;
+    logging.appendChild(p);
+}
+new Promise(function (resolve, reject) {
+    log('start new Promise...');
+    var timeOut = Math.random() * 2;
+    log('set timeout to: ' + timeOut + ' seconds.');
+    setTimeout(function () {
+        if (timeOut < 1) {
+            log('call resolve()...');
+            resolve('200 OK');
+        }
+        else {
+            log('call reject()...');
+            reject('timeout in ' + timeOut + ' seconds.');
+        }
+    }, timeOut * 1000);
+}).then(function (r) {
+    log('Done: ' + r);
+}).catch(function (reason) {
+    log('Failed: ' + reason);
+});
+
+var logging = document.getElementById('test-promise2-log');
+while (logging.children.length > 1) {
+    logging.removeChild(logging.children[logging.children.length - 1]);
+}
+
+function log(s) {
+    var p = document.createElement('p');
+    p.innerHTML = s;
+    logging.appendChild(p);
+}
+function multiply(input) {
+    return new Promise(function (resolve, reject) {
+        log('calculating ' + input + ' x ' + input + '...');
+        setTimeout(resolve, 500, input * input);
+    });
+}
+
+// 0.5秒后返回input+input的计算结果:
+function add(input) {
+    return new Promise(function (resolve, reject) {
+        log('calculating ' + input + ' + ' + input + '...');
+        setTimeout(resolve, 500, input + input);
+    });
+}
+
+var p = new Promise(function (resolve, reject) {
+    log('start new Promise...');
+    resolve(123);
+});
+
+p.then(multiply)
+ .then(add)
+ .then(multiply)
+ .then(add)
+ .then(function (result) {
+    log('Got value: ' + result);
+});
+
+function ajax(method, url, data) {
+    var request = new XMLHttpRequest();
+    return new Promise(function (resolve, reject) {
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    resolve(request.responseText);
+                } else {
+                    reject(request.status);
+                }
+            }
+        };
+        request.open(method, url);
+        request.send(data);
+    });
+}
+var log = document.getElementById('test-promise-ajax-result');
+var p = ajax('GET', '/api/categories');
+p.then(function (text) { // 如果AJAX成功，获得响应内容
+    log.innerText = text;
+}).catch(function (status) { // 如果AJAX失败，获得响应代码
+    log.innerText = 'ERROR: ' + status;
+});
+
+var p1 = new Promise(function (resolve, reject) {
+    setTimeout(resolve, 500, 'P1');
+});
+var p2 = new Promise(function (resolve, reject) {
+    setTimeout(resolve, 600, 'P2');
+});
+// 同时执行p1和p2，并在它们都完成后执行then:
+Promise.all([p1, p2]).then(function (results) {
+    console.log(results); // 获得一个Array: ['P1', 'P2']
+});
+
+Promise.race([p1, p2]).then(function (result) {
+    console.log(result); // 'P1'
+}); // 由于p1执行较快，Promise的then()将获得结果'P1'。p2仍在继续执行，但执行结果将被丢弃。
+```
+[Javascript异步编程的4种方法](http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html)
+
+### Canvas
+
 ## 调试
 
 * 可以直接在develop中的console中测试代码
