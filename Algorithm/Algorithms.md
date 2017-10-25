@@ -1,3 +1,7 @@
+# 算法
+
+逻辑和数学能力，用更少的代码和资源实现更复杂的逻辑；
+
 [MIT](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-spring-2008/)
 
 [公开课](http://open.163.com/special/opencourse/algorithms.html)
