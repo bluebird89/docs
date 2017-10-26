@@ -140,6 +140,10 @@ TP参考：<https://github.com/ijry/lyadmin>
 
 - [magento/magento2](https://github.com/magento/magento2): a cutting edge, feature-rich eCommerce solution that gets results.
 
+## CMS
+
+* [bolt/bolt](https://github.com/bolt/bolt):Bolt is a simple CMS written in PHP. It is based on Silex and Symfony components, uses Twig and either SQLite, MySQL or PostgreSQL.
+
 ## 资源
 
 - [Awesome PHP](http://coffeephp.com/resources)
