@@ -205,3 +205,22 @@ http://design-patterns.readthedocs.io/zh_CN/latest/read_uml.html
 http://www.ruanyifeng.com/blog/2017/05/websocket.html
 
 https://github.com/devlinkcn/ppts_for_php2017
+
+http://larabase.com/collection/5/post/152
+
+https://mp.weixin.qq.com/s/4vum1Muq2wXlq2g2mKsqcQ
+https://blog.thankbabe.com/2017/05/21/api-design/
+http://www.cnblogs.com/jukan/p/5670950.html
+https://zhuanlan.zhihu.com/p/27493130
+http://www.cnblogs.com/xiekeli/archive/2012/05/23/2514108.html
+https://mp.weixin.qq.com/s/G-UXWThBC9lH0f-Nx6UCBg
+https://draveness.me/sql-index-performance
+
+https://mp.weixin.qq.com/s/L3Tu-1DPUhj7i5ZJY1vRDA
+https://mp.weixin.qq.com/s/4UB4AZe2R0lVCT6f5ExEMw
+https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651959601&idx=1&sn=5684c39676b1f6d9366d9d15a2cdcec3&scene=21
+https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651959595&idx=1&sn=5f0633afd24c547b895f29f6538baa99&scene=21
+https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651959585&idx=1&sn=0a9222cbfeb62a662edffafb7f0b43ae&scene=21
+https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651960131&idx=1&sn=a3bbcbe03f9e12d32ba751ce6ffae067&chksm=bd2d069f8a5a8f895fed39cad842f6f5a390bb18493f964b910270128f19f0b8af1d1f30b5c7&scene=21
+https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651959830&idx=1&sn=ce1c5a58caed227d7dfdbc16d6e1cea4&chksm=bd2d07ca8a5a8edc45cc45c4787cc72cf4c8b96fb43d2840c7ccd44978036a7d39a03dd578b5&scene=21
+https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651959728&idx=1&sn=933227840ec8cdc35d3a33ae3fe97ec5&chksm=bd2d046c8a5a8d7a13551124af36bedf68f7a6e31f6f32828678d2adb108b86b7e08c678f22f&scene=21

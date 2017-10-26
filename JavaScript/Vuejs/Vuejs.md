@@ -18,6 +18,7 @@
 - [liangxiaojuan/eleme](https://github.com/liangxiaojuan/eleme):vue2 +vue-router2 + es6 +webpack 高仿饿了么app商家详情，demo：http://yangyi1024.com/elem 还有我最新的实战项目,点它=》 http://yangyi1024.com/meizi
 - [ustbhuangyi/vue-sell](https://github.com/ustbhuangyi/vue-sell):Vue.js高仿饿了么外卖App课程源码 http://coding.imooc.com/class/74.html
 - [vuejs/vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
+
 ## 重构
 
 - [tonyfree/youzan](https://github.com/tonyfree/youzan)
@@ -105,7 +106,7 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 ## 参考
 
 * [Vue.js——60分钟快速入门](http://www.cnblogs.com/keepfool/p/5619070.html)
-* [官方文档](https://cn.vuejs.org/v2/guide/)
+* [官方文档](https://cn.vuejs.org/v2/guide/) [文档](https://vuejs.org/v2/guide/)
 * [vuejs/awesome-vueawesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
 
 
