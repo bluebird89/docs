@@ -30,6 +30,9 @@ brew config
 brew doctor
 brew install -vd FORMULA
 
+brew tap homebrew/services
+brew update && brew upgrade
+
 brew install name
 # 安装源码 brew info svn
 # 显示软件的各种信息（包括版本、源码地址、依赖等等）
@@ -87,6 +90,27 @@ brew install brew-cask-completion
 
 brew tap homebrew/services // brew 服务管理
 brew services start postgresql
+
+
+brew update && brew upgrade && brew cleanup ; say mission complete
+
+echo 'export PATH="/usr/local/opt/sqlite/bin:$PATH"' >> ~/.zshrc
+brew services [-v|--verbose] [list | run | start | stop | restart | cleanup]
+
+brew install bash-completion
+subl ~/.bash_profile
+ ##
+  # Homebrew
+  ##
+  export PATH="/usr/local/bin:$PATH"
+  export PATH="/usr/local/sbin:$PATH"
+
+  ##
+  # Homebrew bash completion
+  ##
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    source $(brew --prefix)/etc/bash_completion
+  fi
 ```
 
 - get Homebrew-Cask:brew tap caskroom/cask
