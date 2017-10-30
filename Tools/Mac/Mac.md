@@ -34,6 +34,8 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
 - [rgcr/m-cli](https://github.com/rgcr/m-cli) Swiss Army Knife for macOS
 - [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
+- [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
+
 
 ### 配置文件
 

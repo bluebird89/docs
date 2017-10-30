@@ -4,6 +4,10 @@ brew install MacVim
 
 Vim的一个最大用途是批量修改文件，列模式，正则表达式替换，区域替换，
 
+## 配置文件
+
+～/.vimrc
+
 ## 使用
 
 Cursor control and position                             | Editing

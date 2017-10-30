@@ -47,3 +47,9 @@ ssserver -c /etc/shadowsocks.json -d stop
     "fast_open": false
 }
 ```
+
+## 使用
+
+```shell
+brew cask install shadowsocksx
+```
