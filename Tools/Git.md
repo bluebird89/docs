@@ -136,6 +136,10 @@ tool = icdiff
 prompt = false
 [difftool "icdiff"]
 cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
+
+[remote "public"] // 定义远程仓库
+ url = git@github.com:aaa/bbb.git
+ url = kch@homeserver:ccc/ddd.git
 ```
 
 #### alias说明
@@ -241,8 +245,9 @@ git checkout -b <local_branch> origin/<remote_branch>  # 基于远程分支创�
 
 rebase:将本次修改起始的远程仓库节点之后的修改内容优先合并到本地修改分支上
 conflict：git rebase出现冲突，修改冲突文件，每次修改,只修改自己添加的内容，每次不需commit，最后git push -f提交到远程仓库
-git add file
+git add .
 git rebase --continue
+git rebase --abort
 ```
 
 查看：
@@ -326,7 +331,7 @@ git checkout -b [branch] [tag]:新建一个分支，指向某个tag
 远程分支：
 
 ```shell
-git fetch [remote] 下载远程仓库的所有变动
+git fetch [remote] // 下载远程仓库的所有变动
 git fetch <远程主机名> <分支名>  // 只想取回特定分支的更新,所取回的更新，在本地主机上要用"远程主机名/分支名"的形式读取
 
 git remote -v 显示所有远程仓库
@@ -661,5 +666,59 @@ version
 - [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
 - [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
 
+
+## 格式化输出
+
+```
+git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%an, %cr)' --abbrev-commit
+git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%an, %cr)' --abbrev-commit"
+%H  commit hash
+%h  commit short hash
+%T  tree hash
+%t  tree short hash
+%P  parent hash
+%p  parent short hash
+%an 作者名字
+%aN .mailmap 中对应的作者名字
+%ae 作者邮箱
+%aE .mailmap 中对应的作者邮箱
+%ad –date=制定的日期格式
+%aD RFC2822 日期格式
+%ar 日期格式，例如：1 day ago
+%at UNIX timestamp 日期格式
+%ai ISO 8601 日期格式
+%cn 提交者名字
+%cN .mailmap 对应的提交的名字
+%ce 提交者邮箱
+%cE .mailmap 对应的提交者的邮箱
+%cd –data=制定的提交日期的格式
+%cD RFC2822 提交日期的格式
+%cr 提交日期的格式，例如：1day ago
+%ct UNIX timestamp 提交日期的格式
+%ci ISO 8601 提交日期的格式
+%d  ref 名称
+%e  encoding
+%s  commit 信息标题
+%f  过滤 commit 信息的标题使之可以作为文件名
+%b  commit 信息内容
+%N  commit notes
+%gD reflog selector, e.g., refs/stash@{1}
+%gd shortened reflog selector, e.g., stash@{1}
+%gs reflog subject
+%Cred   切换至红色
+%Cgreen 切换至绿色
+%Cblue  切换至蓝色
+%Creset 重设颜色
+%C(color)   制定颜色，as described in color.branch.* config option
+%m  left right or boundary mark
+%n  换行
+%%  a raw %
+%x00    print a byte from a hex code
+%w([[,[,]]])    switch line wrapping, like the -w option of git-shortlog(1).
+```
 ### tig
 [jonas/tig](https://github.com/jonas/tig):text-mode interface for git
+
+## 参考
+
+* [文档](https://git-scm.com/docs) 

@@ -252,3 +252,5 @@ https://github.com/liyu365/BG-UI
 https://github.com/xiongwilee/Gracejs
 
 https://www.datatables.net/
+
+服务端 添加 nginx或node自己加etag、cache-control

@@ -262,18 +262,24 @@ sudo mv phpunit.phar /usr/local/bin/phpunit
 // 系统默认apache 与php5
 httpd -v
 php -v
+
 // 停止httpd服务
 sudo apachectl stop
+
 // 卸载apache 与PHP56
 sudo rm /usr/sbin/apachectl
 sudo rm /usr/sbin/httpd
 sudo rm -r /etc/apache2/  sudo rm -r /usr/bin/php
+
 // 通过brew安装php71 nginx mysql
+brew install mysql
+mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql
 
 // 开启启动
 $ cp /usr/local/opt/php71/homebrew.mxcl.php71.plist ~/Library/LaunchAgents/
 $ launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php70.plist
 
+// 配置nginx
 $ cp /usr/local/Cellar/nginx/1.10.2_1/homebrew.mxcl.nginx.plist ~/Library/LaunchAgents/
 $ launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist
 
@@ -281,13 +287,27 @@ sudo chown root:wheel /usr/local/Cellar/nginx/1.10.2_1/bin/nginx
 sudo chmod u+s /usr/local/Cellar/nginx/1.10.2_1/bin/nginx
 sudo nginx -s reload/reopen/stop/quit
 
-// 配置nginx /usr/local/etc/nginx/nginx.conf
+/usr/local/etc/nginx/nginx.conf
+sudo brew services start nginx
+curl -IL http://127.0.0.1:8080
+sudo brew services stop nginx
+
+mkdir -p /usr/local/etc/nginx/sites-available && \
+mkdir -p /usr/local/etc/nginx/sites-enabled && \
+mkdir -p /usr/local/etc/nginx/conf.d && \
+mkdir -p /usr/local/etc/nginx/ssl
 
 cd /usr/local/opt/mysql/
 sudo vim my.cnf
 
 ./bin/mysql_install_db //初始化
-./bin/mysql_secure_installation  // 安全脚本
+mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql
+/usr/local/bin/mysqladmin -u root password 'new-password' // 设置密码
+/usr/local/bin/mysql_secure_installation  // 安全脚本
+mysql -u root -p
+
+// PHP配置
+brew install php71 --with-imap --with-tidy --with-debug --with-pgsql --with-mysql --with-fpm
 
 /usr/local/etc/php/7.1/php-fpm.conf
 
@@ -296,4 +316,25 @@ sudo vim my.cnf
 修改为
 pid = /usr/local/var/run/php-fpm.pid
 error_log = /usr/local/var/log/php-fpm.log
+
+// php配置
+/usr/local/etc/php/7.1/php.ini  // 错误级别定义
+
+/usr/local/etc/php/7.1/php-fpm.d/www.conf
+
+brew services start php70
+lsof -Pni4 | grep LISTEN | grep php
+
+alias nginx.start='launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist'
+alias nginx.stop='launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist'
+alias nginx.restart='nginx.stop && nginx.start'
+alias php-fpm.start="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php54.plist"
+alias php-fpm.stop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.php54.plist"
+alias php-fpm.restart='php-fpm.stop && php-fpm.start'
+alias mysql.start="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mariadb.plist"
+alias mysql.stop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mariadb.plist"
+alias mysql.restart='mysql.stop && mysql.start'
+
+openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=US/ST=State/L=Town/O=Office/CN=localhost" -keyout /usr/local/etc/nginx/ssl/localhost.key -out /usr/local/etc/nginx/ssl/localhost.crt
+openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=US/ST=State/L=Town/O=Office/CN=phpmyadmin" -keyout /usr/local/etc/nginx/ssl/phpmyadmin.key -out /usr/local/etc/nginx/ssl/phpmyadmin.crt
 ```

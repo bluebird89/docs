@@ -96,7 +96,54 @@ rm -f /usr/local/apache2/logs/httpd.pid
 
 系统本身带有apache2
 
-brew install httpd
-/private/etc/apache2/httpd.conf
+* 程序位置：/private/etc/apache2 或者 /etc/apache2
+* 配置文件：httpd.conf
+* 开启 `LoadModule php7_module libexec/apache2/libphp7.so`
+* 站点默认目录：`DocumentRoot "/Library/WebServer/Documents"`
+* `DirectoryIndex index.php index.html`
+* 进程管理,用httpd或者aapachectl
+    - `apachectl -v`
+    - `httpd -t`
+    - `sudo httpd -k start`
+    - `sudo httpd -k stop`
+    - `sudo apachectl -k restart`
 
-/usr/local/etc/httpd/httpd.conf
+### 添加phpmyadmin
+
+- httpd添加
+```
+Alias /phpmyadmin /usr/local/share/phpmyadmin
+  <Directory /usr/local/share/phpmyadmin/>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    <IfModule mod_authz_core.c>
+      Require all granted
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+      Order allow,deny
+      Allow from all
+    </IfModule>
+  </Directory>
+```
+- 访问 `http://localhost/phpmyadmin`
+```
+填入用户名密码却提示  [2002] No such file or directory 
+sudo mkdir /var/mysql
+sudo ln -s /private/tmp/mysql.sock /var/mysql/mysql.sock
+```
+
+### apache + mod_fastcgi
+
+```
+brew tap homebrew/apache
+brew install httpd24
+brew install mod_fastcgi --with-brewed-httpd24
+
+// 编辑 /usr/local/etc/apache2/2.4/httpd.conf
+LoadModule fastcgi_module /usr/local/opt/mod_fastcgi/libexec/mod_fastcgi.so 
+
+<IfModule fastcgi_module>
+    ProxyPassMatch ^/(.*\.php(/.*)?)$ 
+    unix:/usr/local/var/run/php-fpm.sock|fcgi://127.0.0.1:9000/usr/local/var/www/htdocs
+</IfModule>
+```

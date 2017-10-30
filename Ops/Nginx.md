@@ -57,32 +57,105 @@ events {
 }
 # http服务器设置
 http {
-  include mime.types;
-  default_type application/octet-stream;
+    upstream phpbackend { 
+        server unix:/var/run/php5-fpm.sock1 weight=100 max_fails=5 fail_timeout=5; 
+        server unix:/var/run/php5-fpm.sock2 weight=100 max_fails=5 fail_timeout=5; 
+        server unix:/var/run/php5-fpm.sock3 weight=100 max_fails=5 fail_timeout=5; 
+        server unix:/var/run/php5-fpm.sock4 weight=100 max_fails=5 fail_timeout=5; 
+    }
+    # Stop Displaying Server Version in Configuration
+    server_tokens off;
 
-  sendfile on;
+    # Let NGINX get the real client IP for its access logs
+    set_real_ip_from 127.0.0.1;
+    real_ip_header X-Forwarded-For;
+
+
+  # 文件扩展名与文件类型映射表
+  include mime.types;
+  # 设定默认文件类型
+  default_type application/octet-stream;
+    
+    # 为Nginx服务器设置详细的日志格式
+    log_format  main    '$remote_addr - $remote_user [$time_local] "$request" '
+                        '$status $body_bytes_sent "$http_referer" '
+                        '"$http_user_agent" "$http_x_forwarded_for"';  
+
+    access_log      /usr/local/var/log/nginx/access.log main;
+      # 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改成off。
+      sendfile on;
 
   keepalive_timeout 65;
+     include /usr/local/etc/nginx/conf.d/*.conf;
+    # Gzip Settings
+    gzip on;
+    gzip_static on;
+    gzip_disable "msie6";
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_min_length 1100;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/css text/javascript text/xml text/plain text/x-component 
+    application/javascript application/x-javascript application/json 
+    application/xml  application/rss+xml font/truetype application/x-font-ttf 
+    font/opentype application/vnd.ms-fontobject image/svg+xml;
+
+    # Cache
+    open_file_cache max=200000 inactive=20s; 
+    open_file_cache_valid 30s; 
+    open_file_cache_min_uses 2; 
+    open_file_cache_errors on;
+
+
+    # Client Timeouts
+    client_max_body_size 500M; 
+    client_body_buffer_size 1m; 
+    client_body_timeout 15; 
+    client_header_timeout 15; 
+    keepalive_timeout 2 2; 
+    send_timeout 15; 
+    sendfile on; 
+    tcp_nopush on; 
+    tcp_nodelay on;
+
 
   # server主机配置
   server {
     listen 8080;  #监听端口号
     server_name localhost;  #主机名
-
+    root /Users/www/test/; # 该项要修改为你准备存放相关网页的路径
+    # 定义路径下默认访问的文件名
+    index index.php;
     charset utf-8;
     access_log logs/host.access.log main;
+
+    ssl_client_certificate  /etc/ssl/nginx/intermediate.crt;
+    ssl_certificate  /etc/ssl/nginx/certificate.crt;
+    ssl_certificate_key  /etc/ssl/nginx/private.key;
 
     # location 配置
     location / {
       root   html;
       index  index.php index.shtml index.html index.htm;
+      # 打开目录浏览功能，可以列出整个目录
+      autoindex on;
     }       
 
     error_page 500 502 503 504 /50x.html;
     location = /50x.html {
       root html;
     }
-  }
+    #proxy the php scripts to php-fpm
+    location ~ \.php$ {
+        # fastcgi配置
+        include /usr/local/etc/nginx/fastcgi.conf;
+        # 指定是否传递4xx和5xx错误信息到客户端
+        fastcgi_intercept_errors on;
+        # 指定FastCGI服务器监听端口与地址，可以是本机或者其它
+        fastcgi_pass   127.0.0.1:9000;
+    }
 }
 
 server {
@@ -199,7 +272,84 @@ docker pull nginx
 docker run -p 80:80 --name mynginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/wwwlogs  -d nginx
 ```
 
-# 参考
+
+## Mac
+
+先调试nginx，再看php是否生效
+
+```
+brew info nginx
+
+Docroot is: /usr/local/Cellar/nginx/1.12.2_1/html // 软件更新后版本号会发生变化，默认也会失效
+The default:/usr/local/etc/nginx/nginx.conf  // 配置文件
+Severs config:/usr/local/etc/nginx/servers/
+local config:/usr/local/var/log/nginx/
+
+sudo chown root:wheel /usr/local/Cellar/nginx/1.10.0/sbin/nginx
+sudo chmod u+s /usr/local/Cellar/nginx/1.10.0/sbin/nginx
+
+brew services start nginx
+brew edit nginx
+```
+
+## 使用
+```
+sudo nginx // 启动命令
+sudo ngixn -c /usr/local/etc/nginx/nginx.conf
+sudo nginx -s reload|reload|reopen|stop|quit // 重新配置后都需要进行重启操作
+sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
+```
+
+## 配置
+
+### 跳转
+
+rewrite、return、error_page
+
+```
+server {
+    listen 80;
+    server_name domain.com;
+    rewrite ^(.*) https://$server_name$1 permanent;
+}
+server {
+    listen 443 ssl;
+    server_name domain.com;
+    ssl on;
+    # other
+}
+
+server {
+    listen 80;
+    server_name domain.com;
+    return 301 https://$server_name$request_uri;
+}
+server {
+    listen 443 ssl;
+    server_name domain.com;
+    ssl on;
+    # other
+}
+server {
+    listen 443 ssl;
+    listen 80;
+    server_name domain.com;
+    ssl on;
+    # other
+    error_page 497 https://$server_name$request_uri;
+}
+```
+
+## 日志分析
+
+```
+awk '{print $11}' access.log | sort | uniq -c | sort -rn // Processing log file group by HTTP Status Code
+awk '($11 ~ /502/)' access.log | awk '{print $4, $9}' | sort | uniq -c | sort -rn // Getting All URL's in log file of specific Status Code, below example 502
+awk '($11 ~ /502/)' access.log | awk '{print $9}' | sed '/^$/d' | sed 's/\?.*//g' | sort | uniq -c | sort -rn  // To group by request_uri's excluding query string params below is the command
+awk -F\" '{print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r // Most Requested URL
+awk -F\" '($2 ~ "xyz"){print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r // Most Requested URL containing xyz
+```
+## 参考
 
 - [git-mirror/nginx](https://github.com/git-mirror/nginx)：A mirror of the nginx SVN repository. <http://nginx.org/>
 - [《Nginx官方文档》使用nginx作为HTTP负载均衡](http://ifeve.com/nginx-http/)

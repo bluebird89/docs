@@ -72,12 +72,17 @@ end`
 ## 命令
 
 ### box管理
+```
+vagrant box list 
+vagrant box add ubuntu/trusty64 通过包名先去本地是否存在，没有去仓库下载，下载的版本在上述命令行下加入 --box-version=版本号
+vagrant box add hahaha ~/box/package.box 加载本地文件(package包)
+vagrant box add {title} {url} :title ubuntu/trusty64 [laravel/homestead](https://vagrantcloud.com/laravel/boxes/homestead/versions/3.0.0/providers/virtualbox.box)外网不稳定，可以试着换时间下载
 
-- vagrant box list 
-- vagrant box add ubuntu/trusty64 通过包名先去本地是否存在，没有去仓库下载，下载的版本在上述命令行下加入 --box-version=版本号
-- vagrant box add hahaha ~/box/package.box 加载本地文件(package包)
-- vagrant box add {title} {url} :title ubuntu/trusty64 [laravel/homestead](https://vagrantcloud.com/laravel/boxes/homestead/versions/3.0.0/providers/virtualbox.box)外网不稳定，可以试着换时间下载 
-
+vagrant box add name url      # 添加镜像
+vagrant box list              # 列表
+vagrant box remove name       # 移除镜像
+vagrant box repackage         # 重新打包
+```
 ### 服务管理
 
 ```
@@ -95,7 +100,7 @@ vagrant ssh web/dbmaster
 vagrant reload  # 重新加载vagarntfile文件
 vagrant reload --provision #系统更新配置文件的命令
 
-vagrant destroy 销毁虚拟机
+vagrant destroy // 销毁虚拟机
 
 vagrant package ：`vagrant package web --output web.box --vagrantfile Vagrantfile`(一块打到包里) 打包环境，包名、包文件
 
@@ -110,6 +115,28 @@ config.vm.provision :shell, :path => “initialize.sh”  # external script
 config.vm.network :forwarded_port, guest: 10022, host: 2255
 # config.ssh.port = 2255            # port of host  # commented in step1
 # config.ssh.guest_port = 10022     # port of VM    # commented in step1
+
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    config.vm.box = "gentoo"
+    config.vm.box_check_update = false
+    config.vm.network "forwarded_port", guest: 80, host: 8080   # 端口转发
+    config.vm.network "private_network", ip: "192.168.33.10"    # 或 config.vm.network "public_network"，顾名思义
+    config.ssh.forward_agent = true
+    config.vm.synced_folder "./", "/vagrant"
+end
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    ......
+    config.vm.provider "virtualbox" do |vb|
+        vb.gui = true
+        vb.name = "gentoo"
+        vb.memory = 1024
+        vb.cpus = 2
+        vb.customize ["modifyvm", :id, "--cpuexecutioncap", "80"]
+    end
+    ......
+end
 ```
 ## 搭建集群:ip中的0与1默认被占用，hostname不能含特殊符号
 
@@ -184,6 +211,24 @@ Vagrant.configure("2") do |config|
         end
     end
 end
+
+config.vm.define :app1 do |app1|
+    app1.vm.box = "app1"
+    app1.vm.network "private_network", ip: "192.168.33.10"
+    app1.memory = 512
+    app1.cpus = 2
+    app1.vm.customize [ "modifyvm", :id, "--name", "app1", "--cpuexecutioncap", "50" ]
+end
+config.vm.define :app2 do |app2|
+    app2.vm.box = "app2"
+    app2.vm.network "private_network", ip: "192.168.33.11"
+    app2.memory = 512
+    app2.cpus = 1
+    app1.vm.customize [ "modifyvm", :id, "--name", "app2", "--cpuexecutioncap", "40" ]
+end
+
+vagrant up app1
+vagrant up app2
 ```
 
 ## 记录
@@ -247,4 +292,5 @@ end
 
 ## 工具
 
-- [Parallels/vagrant-parallels](https://github.com/Parallels/vagrant-parallels)Vagrant Parallels Provider 
+- [Parallels/vagrant-parallels](https://github.com/Parallels/vagrant-parallels)Vagrant Parallels Provider
+- [Vagrant Documentation](https://www.vagrantup.com/docs/)
