@@ -448,4 +448,5 @@ pm.min_spare_servers=5
 pm.max_spare_servers=32
 ```
 
+`/usr/local/Cellar/php71/7.1.10_21/sbin/php-fpm --daemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf --pid /usr/local/var/run/php-fpm.pid`
 启动 php-fpm -D 关闭 killall php-fpm
