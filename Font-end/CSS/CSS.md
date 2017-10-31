@@ -65,6 +65,14 @@
     </style>
     ```
 
+## 框架
+
+自适应
+
+- 方法：
+- 组件：表单 、表格、图标、面包屑、菜单、导航、Modal 窗口
+- 修改源代码
+
 ## 扩展
 
 - [scottjehl/Respond](https://github.com/scottjehl/Respond):A fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more)
