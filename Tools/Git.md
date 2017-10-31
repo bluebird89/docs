@@ -1,5 +1,7 @@
 # Git
 
+fast, scalable, distributed revision control system
+
 ## 托管服务
 
 - [GitHub](https://github.com/)
@@ -666,8 +668,9 @@ version
 - [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
 - [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
 
+## 语法
 
-## 格式化输出
+### 格式化输出
 
 ```
 git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%an, %cr)' --abbrev-commit
@@ -716,6 +719,43 @@ git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -
 %x00    print a byte from a hex code
 %w([[,[,]]])    switch line wrapping, like the -w option of git-shortlog(1).
 ```
+
+## 功能
+
+### git-submodule
+它允许你的项目模块化成为每一个 Repository，最终汇聚成一个完整的项目。换句话说，Git Submodule 可以别人的 Repo 挂到你自己的 Repo 中的任何位置，成为的 Repo 的一部分。
+在你的项目 Repository 下产生一个 .gitmodules 文件，来记录你的 Submodule 信息，同时 another_project项目也clone下来.
+```
+git submodule add git@domain.com:another_project.git another_project
+git submodule foreach git pull  // 更新 repo 下所有的 submodules
+
+git rm --cached another_project
+vim .git/config
+...remove another_project...
+```
+
+### git-subtree
+Merge subtrees together and split repository into subtrees
+[文档](https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt)
+```
+$ git clone git@github.com:Ihavee/dotfiles.git
+$ cd dotfiles
+
+$ git remote add bash git@github.com:Ihavee/bash.git        # 可以理解为远程仓库的别名
+$ git subtree add pull -P home/.bash bash master --squash   # 拉取远程仓库 bash 到本地仓库的home/.bash 目录。
+
+...... edit home/.bash/file......
+$ git commit -a -m 'update some'
+$ git subtree push -P home/.bash bash master
+$ git push origin master                                    # 顺便主项目也 push 了
+
+$ git subtree pull -P home/.bash bash master --squash
+
+对 git-subtree 下子项目有修改需求的，请先 git subtree pull 
+```
+
+## 扩展
+
 ### tig
 [jonas/tig](https://github.com/jonas/tig):text-mode interface for git
 

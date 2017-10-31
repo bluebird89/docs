@@ -34,10 +34,10 @@ ssserver -c /etc/shadowsocks.json -d start
 ssserver -c /etc/shadowsocks.json -d stop
 ```
 
-
+### 配置
 ```json
 {
-    "server":"my_server_ip",  //服务器ip the address your server listens
+    "server":"my_server_ip",  //服务器监听ip the address your server listens
     "server_port":8388,  // 对外服务端口 server port
     "local_address": "127.0.0.1",  // 本地ip the address your local listens
     "local_port":1080,   // local port
@@ -53,3 +53,6 @@ ssserver -c /etc/shadowsocks.json -d stop
 ```shell
 brew cask install shadowsocksx
 ```
+
+## 参考
+* [Shadowsocks (简体中文)](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
