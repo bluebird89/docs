@@ -1302,6 +1302,9 @@ function boot()
 
 * 配置文件中`APP_DEBUG`
 * `storage/logs`中的日志文件
+* lavavel批量插入保证字段名称、数量一致，不要赛选数据
+
+$arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 
 
 ## 框架
@@ -1327,6 +1330,7 @@ function boot()
 - [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
 - [barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf):A DOMPDF Wrapper for Laravel
 - [Zizaco/entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
+
 ## 参考
 
 - [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js. 
