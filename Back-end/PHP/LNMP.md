@@ -271,10 +271,6 @@ sudo rm /usr/sbin/apachectl
 sudo rm /usr/sbin/httpd
 sudo rm -r /etc/apache2/  sudo rm -r /usr/bin/php
 
-// 通过brew安装php71 nginx mysql
-brew install mysql
-mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql
-
 // 开启启动
 $ cp /usr/local/opt/php71/homebrew.mxcl.php71.plist ~/Library/LaunchAgents/
 $ launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php70.plist
@@ -296,6 +292,9 @@ mkdir -p /usr/local/etc/nginx/sites-available && \
 mkdir -p /usr/local/etc/nginx/sites-enabled && \
 mkdir -p /usr/local/etc/nginx/conf.d && \
 mkdir -p /usr/local/etc/nginx/ssl
+
+// mysql
+brew install mysql
 
 cd /usr/local/opt/mysql/
 sudo vim my.cnf

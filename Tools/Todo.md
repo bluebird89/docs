@@ -265,3 +265,30 @@ https://github.com/rstacruz/cheatsheets
 https://github.com/RectorPHP/Rector
 https://github.com/weiboad/kafka-php
 https://github.com/wurstmeister/kafka-docker
+
+
+service php-fpm restart
+
+server {
+    listen       80 default_server;
+    server_name  _;
+
+    # Load configuration files for the default server block.
+    include /etc/nginx/default.d/*.conf;
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    location ~ \.php$ {
+        root           /data/www/tencentyun/;
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+}
+
+https://laravel-china.org/topics/166/entrust-laravel-user-rights-system-solution
+
+http://www.chinaz.com/web/2017/1028/821722.shtml
+https://github.com/exakat/php-static-analysis-tools
+http://janephp.blog.51cto.com/
