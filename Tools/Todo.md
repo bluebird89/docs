@@ -254,3 +254,14 @@ https://github.com/xiongwilee/Gracejs
 https://www.datatables.net/
 
 服务端 添加 nginx或node自己加etag、cache-control
+
+http://php01.com/
+http://blog.iwanli.me/
+https://www.glassdoor.com/Job/shanghai-php-jobs-SRCH_IL.0,8_IC2416009_KO9,12.htm
+https://github.com/deviantony/docker-elk
+https://github.com/cncf/landscape
+https://github.com/Microsoft/tolerant-php-parser
+https://github.com/rstacruz/cheatsheets
+https://github.com/RectorPHP/Rector
+https://github.com/weiboad/kafka-php
+https://github.com/wurstmeister/kafka-docker
