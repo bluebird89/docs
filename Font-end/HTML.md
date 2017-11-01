@@ -97,3 +97,7 @@ a标签不能嵌套
 ## 扩展
 
 * [hakimel/reveal.js](https://github.com/hakimel/reveal.js):The HTML Presentation Framework http://lab.hakim.se/reveal-js/
+
+## 参考
+
+* [joshbuchea/HEAD](https://github.com/joshbuchea/HEAD):A list of everything that *could* go in the head of your document https://gethead.info

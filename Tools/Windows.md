@@ -1,6 +1,6 @@
 # Windows
 
-[Awesome-Windows/Awesome](https://github.com/Awesome-Windows/Awesome)
+[Awesome-Windows/Awesome](https://github.com/Awesome-Windows/Awesome):An awesome & curated list of best applications and tools for Windows.
 
 ## 工具
 
