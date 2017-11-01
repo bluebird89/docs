@@ -142,6 +142,7 @@ react-native run-android
 * [airbnb/lottie-ios](https://github.com/airbnb/lottie-ios):An iOS library to natively render After Effects vector animations http://airbnb.io/lottie/
 * [airbnb/react-native-maps](https://github.com/airbnb/react-native-maps):React Native Mapview component for iOS + Android
 * [airbnb/native-navigation](https://github.com/airbnb/native-navigation):Native navigation library for React Native applications http://airbnb.io/native-navigation/
+* [React Studio](https://reactstudio.com/)
 
 ## 资源
 
@@ -171,6 +172,8 @@ react-native run-android
 
 * [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):这应该是最好的网易云音乐播放器了，没有之一，如果有请打醒 🤘
 * [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐nodejs api https://binaryify.github.io/NeteaseCl…
+* [JonJam/yorpw_ui_web](https://github.com/JonJam/yorpw_ui_web):Password manager SPA built using React and Redux    
+* [JonJam/react-redux-ts](https://github.com/JonJam/react-redux-ts):React/Redux TypeScript starter project
 
 ## 图书
 
