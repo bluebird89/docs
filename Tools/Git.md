@@ -217,6 +217,15 @@ git commit -v：提交时显示所有diff信息
 git commit –-am/--amend -m [message]：使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
 git commit --amend [file1] [file2] ...  重做上一次commit，并包括指定文件的新变化
 
+// 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
+git log 找到起始 commitID 
+git reset commitID ，切记不要用 --hard 参数 
+git add && git commit ✦ git push -f origin branchName
+合并到master，并推送远端master
+
+git commit --amend // 追加 commit 到上一个 commit 上。 
+git rebase -i // 通过交互式的 rebase，提供对分支 commit 的控制，从而可以清理混乱的历史。
+
 git checkout [file]  恢复暂存区的指定文件到工作区
 git checkout [commit] [file] 恢复某个commit的指定文件到暂存区和工作区
 git checkout ./file:回滚最新版本库文件，抛弃工作区修改
@@ -258,8 +267,12 @@ git add .
 git rebase --continue
 git rebase --abort
 ```
-git merge 处理冲突更直接，而git rebase 能够保证清晰的 commit 记录。
-![rebase vs merge](../_staic/mergevsrebase.jpeg "Optional title")
+* git merge 处理冲突更直接
+* git rebase 能够保证清晰的 commit 记录。
+    - rebase 先找出共同的祖先节点
+    - 从祖先节点把功能分支的提交记录摘下来，然后 rebase 到 master 分支
+    - rebase 之后的 commitID 其实已经发生了变化
+[rebase vs merge](../_staic/mergevsrebase.jpeg "rebase vs merge")
 
 查看：
 
@@ -291,13 +304,15 @@ git diff --shortstat "@{0 day ago}" 显示今天你写了多少行代码
 git show [commit] 显示某次提交的元数据和内容变化
 git show --name-only [commit] 显示某次提交发生变化的文件
 git show [commit]:[filename] 显示某次提交时，某个文件的内容
-git reflog 显示当前分支的最近几次提交
+git reflog // 显示当前分支的最近几次提交, 
 
 git log -3
 git log --since=yesterday
 git blame filename:查看文件中每行的操作时间
 HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
 ```
+
+使用 git reset --hard commitID 把本地开发代码回滚到了一个之前的版本，而且还没有推到远端，怎么才能找回丢失的代码呢？ 你如果使用 git log 查看提交日志，并不能找回丢弃的那些 commitID。 而 git reflog 却详细的记录了你每个操作的 commitID，可以轻易的让你复原当时的操作并且找回丢失的代码。
 
 分支： branch name should be descriptive
 
@@ -308,7 +323,7 @@ git checkout -b newBrach origin/master // 在origin/master的基础上，创建�
 git checkout -b branch-name origin/branch-name // 从本地创建和远程对应的分支
 git branch --track [branch] [remote-branch] 新建一个分支，与指定的远程分支建立追踪关系
 git push origin qixiu/feature  // 新建本地分支，然后更新到远端的方式来新增一个远端分支
-git push origin -d qixiu/feaure
+git push origin -d qixiu/feaure // 删除远程分支
 git push origin :qixiu/feature
 
 git merge origin/master // 在本地分支上合并远程分支
@@ -411,8 +426,12 @@ git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell //可以正常通过ssh使用gi
 git clone git@server:/path/to/repo.git
 ```
 
+### git hook，Git 的生命周期
 
+git操作有它自身的生命周期，在不同的生命周期，我们可以做一些自动化的事情。
 
+* pre-commit的时候我们可以做 eslint
+* post-commit的时候，我们可以做利用 jenkins 类似的工具做持续集成
 ### 基于功能分支的开发流程
 
 * 分支命名：ownerName/featureName
@@ -420,7 +439,10 @@ git clone git@server:/path/to/repo.git
 * 为了保证提交日志的清晰，建议备注清楚的注释。
 * 功能开发完成，可以发起一个CodeReview流程
 * 代码测试通过，合并到 master:合并到本地master分支还是功能分支
-```
+* 不要在公共的分支上使用 rebase
+* 团队用merge
+* pull request:方便CodeReview
+```shell
 git checkout master
 git pull -r origin master
 git checkout qixiu/newFeature
@@ -460,14 +482,14 @@ git push origin master // 将本地代码更新到远端
 
   - 分支：
 
-    - develop分支作为功能的集成分支，包含了项目的全部历史。
+    - develop分支作为功能的集成分支，包含了项目的全部历史。用于整合 Feature 分支。
 
       ```shell
         git branch develop
         git push -u origin develop
       ```
 
-    - 功能分支（feature）：使用develop分支作为父分支。当新功能完成时，合并回develop分支。
+    - 功能分支（feature）：使用develop分支作为父分支。当新功能完成时，合并回develop分支。不直接和 Master 分支交互。
 
       ```shell
         git checkout -b some-feature develop
@@ -478,13 +500,13 @@ git push origin master // 将本地代码更新到远端
         git branch -d some-feature
       ```
 
-    - 发布分支（release）：清理发布、执行所有测试、更新文档和其它为下个发布做准备操作的地方，像是一个专门用于改善发布的功能分支。只要创建这个分支并push到中央仓库，这个发布就是功能冻结的。任何不在develop分支中的新功能都推到下个发布循环中（自动化脚本执行）。
+    - 发布分支（release）：清理发布、执行所有测试、更新文档和其它为下个发布做准备操作的地方，像是一个专门用于改善发布的功能分支。只要创建这个分支并push到中央仓库，这个发布就是功能冻结的。任何不在develop分支中的新功能都推到下个发布循环中（自动化脚本执行）。通常对应一个迭代。将一个版本的功能全部合并到 Develop 分支之后，从 Develop 切出一个 Release 分支。这个分支不在追加新需求，可以完成 bug 修复、完善文档等工作。务必记住，代码发布后，需要将其合并到 Master 分支，同时也要合并到 Develop 分支。
 
       ```
         git checkout -b release-0.1 develop
       ```
 
-    - master分支存储了正式发布的历史：合并修改到master分支和develop分支上，删除发布分支。
+    - master分支存储了正式发布的历史：合并修改到master分支和develop分支上，删除发布分支。用于存放线上版本代码，可以方便的给代码打版本号。
 
       ```shell
         git checkout master（功能回归分支）
@@ -498,7 +520,7 @@ git push origin master // 将本地代码更新到远端
         git push --tags
       ```
 
-    - 维护分支：生成快速给产品发布版本（production releases）打补丁，这是唯一可以直接从master分支fork出来的分支。 修复完成，修改应该马上合并回master分支和develop分支（当前的发布分支），master分支应该用新的版本号打好Tag。
+    - Hotfix维护分支：生成快速给产品发布版本（production releases）打补丁，这是唯一可以直接从master分支fork出来的分支。 修复完成，修改应该马上合并回master分支和develop分支（当前的发布分支），master分支应该用新的版本号打好Tag。
 
       ```shell
         git checkout -b issue-#001 master
@@ -760,9 +782,14 @@ git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -
 %w([[,[,]]])    switch line wrapping, like the -w option of git-shortlog(1).
 ```
 
-## 功能
+## 功能 
+
+### 管理第三方模块
 
 ### git-submodule
+
+git submodule 主要用来管理一些单向更新的公共模块或底层逻辑。
+
 它允许你的项目模块化成为每一个 Repository，最终汇聚成一个完整的项目。换句话说，Git Submodule 可以别人的 Repo 挂到你自己的 Repo 中的任何位置，成为的 Repo 的一部分。
 在你的项目 Repository 下产生一个 .gitmodules 文件，来记录你的 Submodule 信息，同时 another_project项目也clone下来.
 ```
@@ -775,6 +802,9 @@ vim .git/config
 ```
 
 ### git-subtree
+
+git subtree 对于部分需要双向更新的可复用逻辑来说，特别适合管理.比如一些需要复用的业务组件代码。在我之前的实践中，我也曾用subtree来管理构建系统逻辑。
+
 Merge subtrees together and split repository into subtrees
 [文档](https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt)
 ```
@@ -802,3 +832,13 @@ $ git subtree pull -P home/.bash bash master --squash
 ## 参考
 
 * [文档](https://git-scm.com/docs) 
+* attributes   Defining attributes per path
+* everyday     Everyday Git With 20 Commands Or So
+* glossary     A Git glossary
+* ignore       Specifies intentionally untracked files to ignore
+* modules      Defining submodule properties
+* revisions    Specifying revisions and ranges for Git
+* tutorial     A tutorial introduction to Git (for version 1.5.1 or newer)
+* workflows    An overview of recommended workflows with Git
+* [alias](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git):oh my zsh 中的 alias
+* 

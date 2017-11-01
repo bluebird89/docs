@@ -14,6 +14,7 @@
 ## 工具
 
 * [代码片段](http://www.phpxs.com/code/)
+* [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
 
 ## 论坛资料
 
