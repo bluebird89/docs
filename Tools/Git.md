@@ -1,6 +1,6 @@
 # Git
 
-fast, scalable, distributed revision control system
+fast, scalable, distributed revision control system.一个分布式的代码管理容器，本地和远端都保有一份相同的代码。 Git 仓库主要是由是三部分组成：本地代码，缓存区，提交历史，这几乎是所有操作的本质
 
 ## 托管服务
 
@@ -15,7 +15,6 @@ fast, scalable, distributed revision control system
 
 ```shell
 sudo apt-get install git
-brew install git
 
 brew install git
 ```
@@ -168,6 +167,8 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
 ## 原理
 
+Git维护的就是一个commitID树，分别保存着不同状态下的代码。 所以你对代码的任何修改，最终都会反映到 commit 上面去。
+
 - 工作区（当前文件状态Workspace）进行开发改动的地方，任何对象都是在工作区中诞生和被修改；
 - 暂存区（提交最新的版本Index / Stage）.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；
 - 版本库 本地仓库（所有历史版本Repository）保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；
@@ -209,26 +210,29 @@ git rm [file1] [file2] ... 删除工作区文件，并且将这次删除放入�
 git rm --cached [file]  停止追踪指定文件，但该文件会保留在工作区
 git mv [file-original] [file-renamed]  改名文件，并且将这个改名放入暂存区
 
-git checkout [file]  恢复暂存区的指定文件到工作区
-git checkout [commit] [file] 恢复某个commit的指定文件到暂存区和工作区
-git checkout ./file:回滚最新版本库文件，抛弃工作区修改
-git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1234567a44341404 / HEAD 
-
-git commit -m "the first commit"：提交修改
+git commit -m "the first commit"：// 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志 
 git commit [file1] [file2] ... -m [message]
 git commit -a:提交工作区自上次commit之后的变化，直接到仓库区,通过编辑器添加message
 git commit -v：提交时显示所有diff信息
 git commit –-am/--amend -m [message]：使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
 git commit --amend [file1] [file2] ...  重做上一次commit，并包括指定文件的新变化
+
+git checkout [file]  恢复暂存区的指定文件到工作区
+git checkout [commit] [file] 恢复某个commit的指定文件到暂存区和工作区
+git checkout ./file:回滚最新版本库文件，抛弃工作区修改
+git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1234567a44341404 / HEAD
 ```
 
 暂存区编辑:
 
 ```shell
-git reset [file] 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
-git reset --hard 重置暂存区与工作区，与上一次commit保持一致
+git reset [file] // 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
+git reset --hard // 重置暂存区与工作区，与上一次commit保持一致
 git reset [commit] 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
-git reset --hard [commit] 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
+git reset --hard [commit] // 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
+git reset b14bb52 // 会将提交记录回滚，代码不回滚
+git checkout -- files // 将部分代码文件回滚
+git reset --hard b14bb52 // 会将提交记录和代码全部回滚
 git reset --keep [commit] 重置当前HEAD为指定commit，但保持暂存区和工作区不变
 git revert [commit] 新建一个commit，用来撤销指定commit,后者的所有变化都将被前者抵消，并且应用到当前分支
 git reset HEAD:拉回历史版本
@@ -245,17 +249,22 @@ git fetch origin     git merge origin/master             # 抓取远程仓库更
 git checkout --track origin/branch     # 跟踪某个远程分支创建相应的本地分支
 git checkout -b <local_branch> origin/<remote_branch>  # 基于远程分支创建本地分支，功能同上
 
+// 合并 commit
+git merge master //  merge是两个分支处理冲突后，新增一个 commit 追加到master上。
+git rebase master // 将someFeature分支上的commit记录追加到主分支上
 rebase:将本次修改起始的远程仓库节点之后的修改内容优先合并到本地修改分支上
 conflict：git rebase出现冲突，修改冲突文件，每次修改,只修改自己添加的内容，每次不需commit，最后git push -f提交到远程仓库
 git add .
 git rebase --continue
 git rebase --abort
 ```
+git merge 处理冲突更直接，而git rebase 能够保证清晰的 commit 记录。
+![rebase vs merge](../_staic/mergevsrebase.jpeg "Optional title")
 
 查看：
 
 ```shell
-git stutus:工作树与暂存区的文件对比差别,显示有变更的文件
+git stutus:查看本地的代码状态,工作树与暂存区的文件对比差别,显示有变更的文件
 
 git show [$id]:显示某次提交的内容
 
@@ -296,8 +305,11 @@ HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
 git branch [-r]/[-a] 列出所有远程/所有分支
 git branch [branch-name] [commit] 新建一个分支，指向指定commit,但依然停留在当前分支
 git checkout -b newBrach origin/master // 在origin/master的基础上，创建一个新分支，并切换到new分支
+git checkout -b branch-name origin/branch-name // 从本地创建和远程对应的分支
 git branch --track [branch] [remote-branch] 新建一个分支，与指定的远程分支建立追踪关系
-git checkout -b branch-name origin/branch-name 从本地创建和远程对应的分支
+git push origin qixiu/feature  // 新建本地分支，然后更新到远端的方式来新增一个远端分支
+git push origin -d qixiu/feaure
+git push origin :qixiu/feature
 
 git merge origin/master // 在本地分支上合并远程分支
 git rebase origin/master // 在本地分支上合并远程分支
@@ -312,7 +324,7 @@ git rebase master
 git branch --set-upstream-to=origin/master master
 
 git branch --set-upstream master origin/master // 建立追踪关系，在现有分支与指定的远程分支之间
-git branch --set-upstream develop origin/develop
+git branch --set-upstream develop origin/develop 
 ```
 
 Pull Request:useful for contributing to open source projects and for managing changes to shared repositories.
@@ -335,6 +347,9 @@ git checkout -b [branch] [tag]:新建一个分支，指向某个tag
 ```shell
 git fetch [remote] // 下载远程仓库的所有变动
 git fetch <远程主机名> <分支名>  // 只想取回特定分支的更新,所取回的更新，在本地主机上要用"远程主机名/分支名"的形式读取
+git fetch origin master // 拉取指定分支的变化
+git fetch // 拉取所有分支的变化
+git fetch -p // 拉取所有分支的变化，并且将远端不存在的分支同步移除
 
 git remote -v 显示所有远程仓库
 git remote show [remote] // 显示某个远程仓库的信息
@@ -344,7 +359,8 @@ git remote rm <主机名> // 用于删除远程主机
 git remote rename <原主机名> <新主机名> // 用于远程主机的改名
 
 git pull <远程主机名> <远程分支名>:<本地分支名> //  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
-
+git pull 执行的是 git merge，
+git pull -r origin master // 执行的是git rebase git pull origin master 
 git push <远程主机名> <本地分支名>:<远程分支名> // 上传本地指定分支到远程仓库. git push origin my:master
 git push [remote] --force 强行推送当前分支到远程仓库，即使有冲突
 git push [remote] --all 不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机
@@ -395,7 +411,31 @@ git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell //可以正常通过ssh使用gi
 git clone git@server:/path/to/repo.git
 ```
 
-## 工作流：
+
+
+### 基于功能分支的开发流程
+
+* 分支命名：ownerName/featureName
+* 较多频次的提交代码到本地仓库，以便能够更灵活的保存或撤销修改。
+* 为了保证提交日志的清晰，建议备注清楚的注释。
+* 功能开发完成，可以发起一个CodeReview流程
+* 代码测试通过，合并到 master:合并到本地master分支还是功能分支
+```
+git checkout master
+git pull -r origin master
+git checkout qixiu/newFeature
+git rebase master // 处理冲突
+git checkout master
+git merge qixiu/newFeature
+git push origin master// 精简版 合并到 master
+
+git checkout qixiu/newFeature
+git pull -r origin master // 将master的代码更新下来，并且rebase处理冲突
+git push origin master // 将本地代码更新到远端
+```
+* 
+
+## 工作流
 
 - **1.集中式工作流**：维护一个master分支，开发者提交自己功能修改到中央库前，需要先fetch在中央库的新增提交，rebase自己提交到中央库提交历史之上.
 

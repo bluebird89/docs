@@ -1,7 +1,8 @@
+# 前端
 
 * [thedaviddias/Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist): The perfect Front-End Checklist for modern websites and meticulous developers http://frontendchecklist.com
 
-# 前端工程师技能清单@udacity
+# 前端工程师技能清单
 
 ## HTML
 
@@ -45,8 +46,12 @@
 
 负责控制网站的交互操作。
 
-- 数据类型：该语言支持的不同变量类型（例如字符串和整型）
-- 语法：定义如何组织语言的一般规则
+- 基础语法
+    - 数据类型：该语言支持的不同变量类型（例如字符串和整型）。
+    - 有string,number,boolean,null,undefined,object等。其中，string,number和boolean是基础类型,null和undefined是JS中的两个特殊类型,object是引用类型
+    - 通过typeof来判断基础数据类型，但不能够准确判断引用类型, 因此需要用到另外一个方法，那就是Object的toString
+    - JS常用的内置对象有Date、Array、JSON,RegExp等。 一般来讲，Date和Array用的最频繁，JSON可以对对象和数组进行序列化和反序列化，还有一个作用就是实现对象的深拷贝。
+    - 语法：定义如何组织语言的一般规则
 - 函数：用来执行特定任务的代码块
 - 字面值可以简化代码
 - 对象字面值： JavaScript 中的所有内容都是对象， 但是自己编写对象
@@ -83,7 +88,7 @@
 - branch
 - log
 
-  #### GitHub
+### GitHub
 
   一种 Git 资源库网络托管服务，提供各种其他功能，使开发者能够相互协作
 
@@ -135,7 +140,7 @@
 - 积极上进： 及时掌握这一领域的发展动态，并了解最新的技术发展状况
 - 自我激励： 愿意实验和探索；勇于冒险，但是在面临挫折时能够坚持不懈
 
-# 2.个人技能系统性进步与视野@杨文坚：
+# 个人技能系统性进步与视野@杨文坚：
 
 - 个人通用能力
 - 技能知识点
@@ -228,8 +233,6 @@
 - CSRF防范技术
 - XSS
 - 富文本XSS防范
-
-# (前端工程师技能图谱)[<https://github.com/TeamStuQ/skill-map/blob/master/data/map-FrontEndEngineer.md>]
 
 ## 浏览器
 
@@ -520,7 +523,6 @@
 
 ### 部署需求
 会用代码管理工具来管理源码，然后将开发流程和部署流程与git结合起来。多人分支协作流程：用git flow来管理代码分支。
-
 
 
 ## 技术基本功
@@ -815,6 +817,8 @@
 ## 参考
 
 - [从软件工程角度看大前端技术栈](http://blog.csdn.net/gitchat/article/details/77199990)
+- [Web前端开发知识体系精简](www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
+- [前端工程师技能图谱](https://github.com/TeamStuQ/skill-map/blob/master/data/map-FrontEndEngineer.md)
 
 ## 工具
 
