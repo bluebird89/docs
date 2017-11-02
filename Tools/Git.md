@@ -66,7 +66,7 @@ git config --global user.signingkey 35F5FFB2
 
 ### 个性化配置
 
-理解每个指令的原理，从操作流程理解命令
+理解每个指令的原理，从操作流程理解命令`git config --global alias.st status`
 
 ```
 [user]

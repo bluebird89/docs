@@ -71,6 +71,7 @@ Docker基于LXC的改进
 
 - [Docker Hub](https://hub.docker.com)
 - [The Docker Store](https://store.docker.com/)
+- [docker cloud](https://cloud.docker.com/)
 
 ## Install
 
@@ -247,6 +248,8 @@ eval "$(docker-machine env default)" # Set environment variables
 - [docker/compose](https://github.com/docker/compose):Define and run multi-container applications with Docker https://docs.docker.com/compose/
 - [docker/machine](https://github.com/docker/machine)Machine management for a container-centric world
 - [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
+- Shipyard
+- Potainer
 
 ## 分布式发布部署
 
@@ -255,8 +258,9 @@ eval "$(docker-machine env default)" # Set environment variables
 
 ### 引用
 
-- [Docker]<http://blog.csdn.net/erixhao/article/details/72762851>)
+- [Docker](http://blog.csdn.net/erixhao/article/details/72762851)
 - [Docker 教程](http://www.runoob.com/docker/docker-tutorial.html)
 - [Docker for Mac](https://docs.docker.com/docker-for-mac/)
 - [Docker mac 入门](https://docs.docker.com/mac/)
+- [Product and tool manuals](https://docs.docker.com/manuals/) https://docs.docker.com/engine/installation/
 - [moby/moby](https://github.com/moby/moby)Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/

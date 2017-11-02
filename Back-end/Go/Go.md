@@ -76,6 +76,7 @@ slice reslice
 <http://www.infoq.com/cn/articles/history-go-package-management>
 
 - [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
+- [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 
 <https://juejin.im/post/59c384fa5188257e9349707e>
 
