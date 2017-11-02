@@ -23,7 +23,9 @@ brew:从下载源码解压后。／.configure&& make install ,同时包含相关
 brew cask：已经编译好的应用包（.dmg/.pkg）,仅仅下载解压，放到同】统一目录（／opt/homebrew-cask/caskroom）
 
 ```
-/usr/bin/ruby -e "$(curl -fsSL <https://raw.githubusercontent.com/Homebrew/install/master/install>)"
+// 安装homebrew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile(.zshrc)
 
 brew config

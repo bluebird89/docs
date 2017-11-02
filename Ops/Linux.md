@@ -232,6 +232,14 @@ Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。命令
 - man
 - info ls
 
+#### 修改时区
+```
+sudo tzselect
+sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+
+sudo vi /etc/timezone
+改为Asia/Shanghai
+```
 #### 网络相关：
 
 - host xx.xxx.com：显示某域名相关托管服务器/邮件服务器
@@ -279,7 +287,22 @@ sudo deluser student --remove-home：删除用户及用户相关文件；
 - 注意通配符大小写敏感
 
 ## 操作
+### ssh
+基于密钥的验证是最安全的几个身份验证模式使用OpenSSH,如普通密码和Kerberos票据。 基于密钥的验证密码身份验证有几个优点,例如键值更难以蛮力,比普通密码或者猜测,提供充足的密钥长度。 其他身份验证方法仅在非常特殊的情况下使用。
 
+SSH可以使用RSA(Rivest-Shamir-Adleman)或“DSA(数字签名算法)的钥匙。 这两个被认为是最先进的算法,当SSH发明,但DSA已经被视为近年来更不安全。 RSA是唯一推荐选择新钥匙,所以本指南使用RSA密钥”和“SSH密钥”可以互换使用。
+
+基于密钥的验证使用两个密钥,一个“公共”键,任何人都可以看到,和另一个“私人”键,只有老板是允许的。 安全通信使用的基于密钥的认证,需要创建一个密钥对,安全地存储私钥在电脑人想从登录,并存储公钥在电脑上一个想登录。
+
+使用基于密钥登录使用ssh通常被认为是比使用普通安全密码登录。 导的这个部分将解释的过程中生成的一组公共/私有RSA密钥,并将它们用于登录到你的Ubuntu电脑通过OpenSSH(s)。如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端，我们称为
+### 密钥生成
+
+```
+ssh-keygen -t rsa -b 4096
+ssh-copy-id <username>@<host>
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+```
 - 传输文件通过ssh：
 
   ```
