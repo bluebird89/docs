@@ -44,6 +44,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - [holman/dotfiles](https://github.com/holman/dotfiles)@holman does dotfiles
 - [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files. 
 - [使用 dotfiles 和 stow 管理你的 dotfiles](https://github.com/jcouyang/dotfiles)
+
 ## 键位
 
 - Command ⌘
@@ -307,6 +308,7 @@ Failed to initialize MacPorts, OS platform mismatch 重新安装
 - Axure：原型工具
 - CmapTools：概念图
 - Quiver：笔记软件
+- htop:运行于 Linux 系统监控与进程管理软件，用于取代 Unix 下传统的 top。与 top 只提供最消耗资源的进程列表不同，htop 提供所有进程的列表，并且使用彩色标识出处理器、swap 和内存状态
 - [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
 - [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
 - ibooks：阅读支持pdf与epub，可以通过icloud同步

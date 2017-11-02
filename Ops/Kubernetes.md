@@ -190,6 +190,31 @@ Kubelet是Kubernetes集群中每个Minion和Master API Server的连接点，Kube
 - [官方文档](https://kubernetes.io/docs/tutorials/)
 
 
+### minikube
+
+Minikube is a small setup by Kubernetes guys, which will spawn a virtual machine and have a tiny (but fully functional) Kubernetes cluster inside the VM.
+kubectl is the command line client you’ll use to connect to the Kubernetes cluster 
+
+* config file: `~/.kube/`
+* all the virtual machine bits:`~/.minikube/`
+
+
+```
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew cask install virtualbox
+
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.7.1/minikube-darwin-amd64
+chmod +x minikube
+sudo mv minikube /usr/local/bin/
+
+minikube status
+
+curl -Lo kubectl http://storage.googleapis.com/kubernetes-release/release/v1.3.0/bin/darwin/amd64/kubectl
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+
+kubectl get pods --all-namespaces  // list two pods, one an ‘addon-manager’ and another a ‘dashboard’
+```
 ###  使用
 
 ```
@@ -206,5 +231,7 @@ kubectl delete deployments hello-minikube1
 
 <http://violetgo.com/blogs/> <http://www.winseliu.com/> <http://blog.csdn.net/qq1010885678/article/details/48832067>
 
-<https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/>
+## 文档
+
+[官方](https://kubernetes.io/docs/tutorials)
 https://www.centos.bz/2017/07/kubernetes-pod-schedule-intro/
