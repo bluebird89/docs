@@ -1,6 +1,16 @@
 # HTTP
 
-超文本传输协议，首先它是一个协议，并且是基于TCP/IP协议基础之上的应用层协议。TCP/IP协议是传输层协议，主要解决数据如何在网络中传输，HTTP是应用层协议，主要解决如何包装数据。HTTP协议详细规定了浏览器与服务器之间相互通信的规则，是万维网交换信息的基础。HTTP是基于请求-响应形式并且是短连接，并且是无状态的协议。针对其无状态特性，在实际应用中又需要有状态的形式，因此一般会通过session/cookie技术来解决此问题。 HTTP连接最显著的特点是客户端发送的每次请求都需要服务器回送响应，在请求结束后，会主动释放连接。从建立连接到关闭连接的过程称为"一次连接"。在HTTP 1.1中则可以在一次连接中处理多个请求，并且多个请求可以重叠进行，不需要等待一个请求结束后再发送下一个请求。 由于HTTP在每次请求结束后都会主动释放连接，因此HTTP连接是一种"短连接"，要保持客户端程序的在线状态，需要不断地向服务器发起连接请求。通常的做法是即时不需要获得任何数据，客户端也保持每隔一段固定的时间向服务器发送一次"保持连接"的请求，服务器在收到该请求后对客户端进行回复，表明知道客户端"在线"。若服务器长时间无法收到客户端的请求，则认为客户端"下线"，若客户端长时间无法收到服务器的回复，则认为网络已经断开。
+HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网上应用最为广泛的一种基于 TCP/IP 通信协议来传递数据的网络传输应用层协议。
+
+* TCP/IP协议是传输层协议，主要解决数据如何在网络中传输
+* HTTP是应用层协议，主要解决如何包装数据。HTTP协议详细规定了浏览器与服务器之间相互通信的规则，是万维网交换信息的基础。
+* 无状态的协议。针对其无状态特性，在实际应用中又需要有状态的形式，因此一般会通过session/cookie技术来解决此问题。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。
+* HTTP 是媒体独立的：只要客户端和服务器知道如何处理的数据内容，任何类型的数据都可以通过 HTTP 发送。客户端以及服务器指定使用适合的 MIME-type 内容类型。 
+* HTTP是基于请求-响应形式并且是短连接，客户端发送的每次请求都需要服务器回送响应，在请求结束后，会主动释放连接（无连接）
+    * 从建立连接到关闭连接的过程称为"一次连接"。在HTTP 1.1中则可以在一次连接中处理多个请求，并且多个请求可以重叠进行，不需要等待一个请求结束后再发送下一个请求。 
+    * 由于HTTP在每次请求结束后都会主动释放连接，因此HTTP连接是一种"短连接"，要保持客户端程序的在线状态，需要不断地向服务器发起连接请求。
+    * 通常的做法是即时不需要获得任何数据，客户端也保持每隔一段固定的时间向服务器发送一次"保持连接"的请求，服务器在收到该请求后对客户端进行回复，表明知道客户端"在线"。
+    * 若服务器长时间无法收到客户端的请求，则认为客户端"下线"，若客户端长时间无法收到服务器的回复，则认为网络已经断开。
 
 # TCP/IP模型
 
@@ -101,9 +111,103 @@ TCP/UDP都是是传输层协议，但是两者具有不同的特性，同时也�
 
 DNS（Domain Name System，域名系统），因特网上作为域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过主机名，最终得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）。DNS协议运行在UDP协议之上，使用端口号53。
 
-> [关于 TCP/IP，必知必会的十个问题](https://juejin.im/post/598ba1d06fb9a03c4d6464ab)
-> 
+### 状态码 Status Code
 
+HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是编号
+
+* 1XX 信息：服务器收到请求，需要请求者继续执行操作
+    - 100 Continue：继续。客户端应继续其请求
+    - 101 Switching Protocols：切换协议。服务器根据客户端的请求切换协议。只能切换到更高级的协议，例如，切换到 HTTP 的新版本协议
+* 2XX 成功：操作被成功接收并处理
+    - 200 OK：请求成功。一般用于 GET 与 POST 请求
+    - 201 Created：已创建。成功请求并创建了新的资源
+    - 202 Accepted：已接受。已经接受请求，但未处理完成
+    - 203 Non-Authoritative Information：非授权信息。请求成功。但返回的 meta 信息不在原始的服务器，而是一个副本
+    - 204 No Content：无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档
+    - 205 Reset Content：重置内容。服务器处理成功，用户终端（例如：浏览器）应重置文档视图。可通过此返回码清除浏览器的表单域
+    - 206 Partial Content：部分内容。服务器成功处理了部分GET请求
+    - 3XX 重定向：需要进一步的操作以完成请求
+* 300 Multiple Choices：多种选择。请求的资源可包括多个位置，相应可返回一个资源特征与地址的列表用于用户终端（例如：浏览器）选择
+    - 301 Moved Permanently：永久移动。请求的资源已被永久的移动到新 URI，返回信息会包括新的 URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替
+    - 302 Found：临时移动。与 301 类似。但资源只是临时被移动。客户端应继续使用原有 URI
+    - 303 See Other：查看其它地址。与 301 类似。使用 GET 和 POST 请求查看
+    - 304 Not Modified：未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源
+    - 305 Use Proxy：使用代理。所请求的资源必须通过代理访问
+    - 306 Unused：已经被废弃的HTTP状态码
+    - 307 Temporary Redirect：临时重定向。与 302 类似。使用 GET 请求重定向
+* 4XX 客户端错误：请求包含语法错误或无法完成请求
+    - 400 Bad Request：客户端请求的语法错误，服务器无法理解
+    - 401 Unauthorized：请求要求用户的身份认证
+    - 402 Payment Required：保留，将来使用
+    - 403 Forbidden：服务器理解请求客户端的请求，但是拒绝执行此请求
+    - 404 Not Found：服务器无法根据客户端的请求找到资源（网页）。通过此代码，网站设计人员可设置”您所请求的资源无法找到”的个性页面
+    - 405 Method Not Allowed：客户端请求中的方法被禁止
+    - 406 Not Acceptable：服务器无法根据客户端请求的内容特性完成请求
+    - 407 Proxy Authentication Required：请求要求代理的身份认证，与401类似，但请求者应当使用代理进行授权
+    - 408 Request Time-out：服务器等待客户端发送的请求时间过长，超时
+    - 409 Conflict：服务器完成客户端的PUT请求是可能返回此代码，服务器处理请求时发生了冲突
+    - 410 Gone：客户端请求的资源已经不存在。410 不同于 404，如果资源以前有现在被永久删除了可使用 410 代码，网站设计人员可通过 301 代码指定资源的新位置
+    - 411 Length Required：服务器无法处理客户端发送的不带 Content-Length 的请求信息
+    - 412 Precondition Failed：客户端请求信息的先决条件错误
+    - 413 Request Entity Too Large：由于请求的实体过大，服务器无法处理，因此拒绝请求。为防止客户端的连续请求，服务器可能会关闭连接。如果只是服务器暂时无法处理，则会包含一个 Retry-After 的响应信息
+    - 414 Request-URI Too Large：请求的URI过长（URI通常为网址），服务器无法处理
+    - 415 Unsupported Media Type：服务器无法处理请求附带的媒体格式
+    - 416 Requested range not satisfiable：客户端请求的范围无效
+    - 417 Expectation Failed
+* 5XX 服务器端错误：服务器在处理请求的过程中发生了错误
+    - 500 Internal Server Error：服务器内部错误，无法完成请求
+    - 501 Not Implemented：服务器不支持请求的功能，无法完成请求
+    - 502 Bad Gateway：充当网关或代理的服务器，从远端服务器接收到了一个无效的请求
+    - 503 Service Unavailable：由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中
+    - 504 Gateway Time-out：充当网关或代理的服务器，未及时从远端服务器获取请求
+    - 505 HTTP Version not supported：服务器不支持请求的HTTP协议的版本，无法完成处理
+
+### HTTP Request Header
+
+* Allow：服务器支持哪些请求方法（如GET、POST等）。
+* Content-Encoding：
+    - 文档的编码(Encode)方法。只有在解码之后才可以得到 Content-Type 头指定的内容类型
+    - 利用gzip压缩文档能够显著地减少HTML文档的下载时间
+* Content-Length：表示内容长度。只有当浏览器使用持久 HTTP 连接时才需要这个数据
+* Content-Type：表示后面的文档属于什么 MIME 类型
+* Date：当前的 GMT 时间
+* Expires：应该在什么时候认为文档已经过期，从而不再缓存它
+* Last-Modified：文档的最后改动时间。客户可以通过 If-Modified-Since 请求头提供一个日期，该请求将被视为一个条件 GET，只有改动时间迟于指定时间的文档才会返回，否则返回一个 304(Not Modified) 状态
+* Location：表示客户应当到哪里去提取文档
+* Refresh：表示浏览器应该在多少时间之后刷新文档，以秒计
+    - 注意：这种功能通常是通过设置 HTML 页面 HEAD 区的 ＜META HTTP-EQUIV=”Refresh” CONTENT=”5;URL=http://host/path"＞实现
+    - 注意：Refresh 的意义是”N秒之后刷新本页面或访问指定页面”，而不是”每隔N秒刷新本页面或访问指定页面”。因此，连续刷新要求每次都发送一个Refresh头，而发送204状态代码则可以阻止浏览器继续刷新，不管是使用Refresh头还是＜META HTTP-EQUIV=”Refresh” …＞。
+    - 注意 Refresh 头不属于 HTTP 1.1 正式规范的一部分，而是一个扩展
+* Server：服务器名字
+* Set-Cookie：设置和页面关联的 Cookie
+* WWW-Authenticate：客户应该在 Authorization 头中提供什么类型的授权信息？在包含401(Unauthorized) 状态行的应答中这个头是必需的
+
+### Content Type
+
+用来向浏览器和服务器提供信息，表示该 URL 对应的资源类型
+
+```
+文件后缀    Content-Type(Mime-Type)
+.css    text/css
+.gif    image/gif
+.htm    text/html
+.html   text/html
+.jpeg   image/jpeg
+.jpg    image/jpeg
+.js application/x-javascript
+.ico    image/x-icon
+.mp3    audio/mp3
+.mp4    video/mpeg4
+.mpeg   video/mpg
+.mpg    video/mpg
+.pdf    application/pdf
+.png    image/png
+.tif    image/tiff
+.tiff   image/tiff
+.torrent    application/x-bittorrent
+.wav    audio/wav
+.xhtml  text/html
+```
 
 ### CORS
 
@@ -123,6 +227,8 @@ if(in_array($origin, $allow_origin)){
 允许所有域名访问则只需在http://server.runoob.com/server.php文件头部添加如下代码：
 header('Access-Control-Allow-Origin:*'); 
 ```
+
 ## 参考
 
 - [HTTP 下午茶](http://book.haoduoshipin.com/tealeaf-http/)
+- [关于 TCP/IP，必知必会的十个问题](https://juejin.im/post/598ba1d06fb9a03c4d6464ab)
