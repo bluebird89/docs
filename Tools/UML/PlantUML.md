@@ -4,7 +4,7 @@
 ## 文档
 
 * [Drawing UML with PlantUML](http://plantuml.com/PlantUML_Language_Reference_Guide.pdf)
-* [plantuml使用教程](http://www.cnblogs.com/ningskyer/articles/5397750.html)
+* [plantuml使用教程](http://archive.3zso.com/archives/plantuml-quickstart.html)
 
 ## 使用 Sublime + PlantUML 高效地画图
 
