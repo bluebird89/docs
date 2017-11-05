@@ -11,7 +11,7 @@ sudo mv phpunit.phar /usr/local/bin/phpunit
 phpunit --version
 ```
 
-# PHPDoc
+##  PHPDoc
 
 ```
 brew isntall php71
@@ -314,6 +314,14 @@ EXPOSE 9000 CMD ["php-fpm"] ```
 
 - [CopernicaMarketingSoftware/PHP-CPP](https://github.com/CopernicaMarketingSoftware/PHP-CPP):Library to build PHP extensions with C++ <http://www.php-cpp.com/>
 - [facebook/hhvm](https://github.com/facebook/hhvm):A virtual machine designed for executing programs written in Hack and PHP. <http://hhvm.com>
+- [nikic/PHP-Parser](https://github.com/nikic/PHP-Parser):A PHP parser written in PHP
+- [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb#installation):A MongoDB based Eloquent model and Query builder for Laravel (Moloquent) https://jenssegers.com
+
+### PHPCS
+
+PHP代码规范与质量检查工具
+
+`composer global require "squizlabs/php_codesniffer=*"`
 
 ## 源码
 
@@ -329,5 +337,9 @@ EXPOSE 9000 CMD ["php-fpm"] ```
 - [walu/phpbook](https://github.com/walu/phpbook):PHP扩展开发及内核应用
 - [laruence/php7-internal](https://github.com/laruence/php7-internal):Understanding PHP7 Internal articles
 
+## 图书
+
+* php：the right way
+* Morden php
 
 prof
