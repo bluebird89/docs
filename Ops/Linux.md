@@ -588,6 +588,9 @@ smb://192.168.100.106
 - -e
 
 
+## 扩展
+
+* [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/index.html):
 ## 参考
 
 * [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
