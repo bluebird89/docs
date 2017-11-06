@@ -5,13 +5,15 @@
 ```
 brew install git
 brew install node
-npm install hexo-cli -g
+npm install hexo-cli -g 
+
 cd filename
 hexo init
+
 # 新文章需先生成后再部署
 hexo g(enerate)
 hexo s(erver)
-#
+
 $ cd your-hexo-site
 $ git clone https://github.com/iissnan/hexo-theme-next themes/next
 npm install hexo-deployer-git --save
@@ -30,6 +32,15 @@ atom ~/.aliases
 alias hgs="hexo g&&hexo s"
 alias hgd="hexo g&&hexo d"
 ```
+
+## 扩展
+
+* [jaredly/hexo-admin](https://github.com/jaredly/hexo-admin):An Admin Interface for Hexo http://jaredly.github.io/hexo-admin/
+* [barretlee/hexo-admin](https://github.com/barretlee/hexo-admin):小胡子优化版本
+    - 按照官方的方式安装 hexo-admin
+    - 下载我修改的代码到一个文件夹，执行 npm link;
+    - 在 hexo 根目录下执行 npm link hexo-admin;
+
 
 ## 配置
 
