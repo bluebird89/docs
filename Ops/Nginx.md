@@ -30,18 +30,14 @@ PHP7默认的用户和组是www-data
 - client max body_ size 10m 允许客户端请求的最大单文件字节数，一般在上传较大文件时设置限制值
 - client body buffer_ size 128k 缓冲区代理缓冲用户用户端请求的最大字节数
 
-  ### server（主机设置）
+### server（主机设置）
 
-  http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
+http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
 
 - listen 监听端口，Mac下默认为8080，小于1024的要以root启动。可以为listen:*:8080、listen:127.0.0.1:8080等形式
-
 - server_name 服务器名，如localhost、www.jd.com，可以通过正则匹配
-
 - location（URL匹配特定位置配置） http服务中，某些特定的URL对应的一系列配置项
-
 - root html 定义服务器的默认网站根目录。如果locationURL匹配的是子目录或文件，root没什么作用，一般放在server指令里面或/下。
-
 - index index.php index.shtml index.html index.htm 定义路径下默认访问的文件名，一般跟着root放
 
 下面提供一份相对简单的配置文件示例：
@@ -220,7 +216,7 @@ location ~* \.(gif|jpg|jpeg)$ {
 
 ### 伪静态
 
-用 rewrite 来实现，通过 Nginx 提供的变量或自己设置的变量，配合正则与标志位来进行 URL 重写。
+用 rewrite 来实现，通过 Nginx 提供的变量或自己设置的变量，配合正则与标志位来进行 URL 重写。从请求参数中获取全局变量，
 
 标识位
 * last：标志完成
@@ -228,6 +224,71 @@ location ~* \.(gif|jpg|jpeg)$ {
 * redirect：302临时重定向
 * permanent：301 永久重定向
 
+```
+// 全局变量
+$args：请求中的参数
+$content_length：请求 HEAD 中的 Content-length
+$content_type：请求 HEAD 中的 Content_type
+$document_root：当前请求中 root 的值
+$host：主机头
+$http_user_agent：客户端 agent
+$http_cookie：客户端 cookie
+$limit_rate：限制连接速率
+$request_method：客户端请求方式，GET/POST
+$remote_addr：客户端 IP
+$remote_port：客户端端口
+$remote_user：验证的用户名
+$request_filename：请求的文件绝对路径
+$scheme：http/http
+$server_protocol：协议，HTTP/1.0 OR HTTP/1.1
+$server_addr：服务器地址
+$server_name：服务器名称
+$server_port：服务器端口
+$request_uri：包含请求参数的 URI
+$uri：不带请求参数的 URI
+$document_uri：同 $uri
+
+-f/!-f：判断文件是否存在
+-d/!-d：判断目录是否存在
+-e/!-e：判断文件或目录是否存在
+-x/!-x：判断文件是否可以执行
+
+location / {
+  try_files $uri $uri/ /index.php?q=$uri&$args;
+}
+
+location / {
+  if ( $args ~ "mosConfig_[a-zA-Z_]{1,21}(=|\%3d)" ) {
+    set $args "";
+    rewrite ^.*$ http://$host/index.php last;
+  return 403;}
+  if ( $args ~ "base64_encode.*\(.*\)") {
+    set $args "";
+    rewrite ^.*$ http://$host/index.php last;
+  return 403;}
+  if ( $args ~ "(\<|%3C).*script.*(\>|%3E)") {
+    set $args "";
+    rewrite ^.*$ http://$host/index.php last;
+  return 403;}
+  if ( $args ~ "GLOBALS(=|\[|\%[0-9A-Z]{0,2})") {
+   set $args "";
+    rewrite ^.*$ http://$host/index.php last;
+  return 403;}
+  if ( $args ~ "_REQUEST(=|\[|\%[0-9A-Z]{0,2})") {
+    set $args "";
+    rewrite ^.*$ http://$host/index.php last;
+  return 403;}
+  if (!-e $request_filename) {
+    rewrite (/|\.php|\.html|\.htm|\.feed|\.pdf|\.raw|/[^.]*)$ /index.php last;
+    break;}
+}
+
+location / {
+  rewrite ^/(space|network)\-(.+)\.html$ /$1.php?rewrite=$2 last;
+  rewrite ^/(space|network)\.html$ /$1.php last;
+  rewrite ^/([0-9]+)$ /space.php?uid=$1 last;
+}
+```
 
 ## docker 配置
 
