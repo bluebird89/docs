@@ -171,8 +171,8 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 * Content-Length：表示内容长度。只有当浏览器使用持久 HTTP 连接时才需要这个数据
 * Content-Type：表示后面的文档属于什么 MIME 类型
 * Date：当前的 GMT 时间
-* Expires：应该在什么时候认为文档已经过期，从而不再缓存它
-* Last-Modified：文档的最后改动时间。客户可以通过 If-Modified-Since 请求头提供一个日期，该请求将被视为一个条件 GET，只有改动时间迟于指定时间的文档才会返回，否则返回一个 304(Not Modified) 状态
+* Expires：应该在什么时候认为文档已经过期，从而不再缓存它.
+* Last-Modified：文档的最后改动时间。客户可以通过 If-Modified-Since 请求头提供一个日期，该请求将被视为一个条件 GET，服务器端的资源没有变化,只有改动时间迟于指定时间的文档才会返回，否则返回一个 304(Not Modified) 状态
 * Location：表示客户应当到哪里去提取文档
 * Refresh：表示浏览器应该在多少时间之后刷新文档，以秒计
     - 注意：这种功能通常是通过设置 HTML 页面 HEAD 区的 ＜META HTTP-EQUIV=”Refresh” CONTENT=”5;URL=http://host/path"＞实现
@@ -209,6 +209,7 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 .xhtml  text/html
 ```
 
+### 
 ### CORS
 
 ```

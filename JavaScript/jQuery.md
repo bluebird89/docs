@@ -261,6 +261,38 @@ var sub = langs.slice(2, 4); // Swift, Scheme, 参数和数组的slice()方法�
 
     var li = $('#test-div>ul>li');
     li.remove(); // 所有<li>全被删除
+
+    // 获 取一组radio被选中项的值 
+    var item = $('input[name=items][checked]').val(); 
+    // 获 取select被选中项的文本 
+    var item = $("select[name=items] option[selected]").text(); 
+    // select下拉框的第二个元素为当前选中值 
+    $('#select_id')[0].selectedIndex = 1; 
+    // radio单选组的第二个元素为当前选中值 
+    $('input[name=items]').get(1).checked = true; 
+    // 获取值： 
+    //文本框，文本区域：
+    $("#txt").attr("value")； 
+    // 多选框 checkbox：
+    $("#checkbox_id").attr("value")； 
+    // 单选组radio：   
+    $("input[type=radio][checked]").val(); 
+    // 下拉框select： 
+    $('#sel').val(); 
+    // 控制表单元素： 
+    // 文本框，文本区域：
+    $("#txt").attr("value",'');//清空内容 
+    $("#txt").attr("value",'11');//填充内容 
+    // 多选框checkbox： 
+    $("#chk1").attr("checked",'');//不打勾 
+    $("#chk2").attr("checked",true);//打勾 
+    if($("#chk1").attr('checked')==undefined) //判断是否已经打勾 
+    // 单选组 radio：    
+    $("input[type=radio]").attr("checked",'2');//设置value=2的项目为当前选中项 
+    // 下拉框 select：   
+    $("#sel").attr("value",'-sel3');//设置value=-sel3的项目为当前选中项 
+    $("<option value='1'>1111</option><option value='2'>2222</option>").appendTo("#sel")//添加下拉框的option 
+    $("#sel").empty()；//清空下拉框
 </script>
 ```
 
@@ -293,6 +325,7 @@ JavaScript在浏览器中以单线程模式运行，页面加载后，一旦页�
 * 有些事件，如mousemove和keypress，我们需要获取鼠标位置和按键的值，否则监听这些事件就没什么意义了。所有事件都会传入Event对象作为参数，可以从Event对象上获取到更多的信息
 * 取消绑定：一个已被绑定的事件可以解除绑定，通过off('click', function)实现。可以使用off('click')一次性移除已绑定的click事件的所有处理函数。无参数调用off()一次性移除已绑定的所有类型的事件处理函数。
 * 事件触发条件：事件的触发总是由用户操作引发的。比如：用户在文本框中输入时，就会触发change事件。但是，如果用JavaScript代码去改动文本框的值，将不会触发change事件
+    - 浏览器安全限制:浏览器中，有些JavaScript代码只有在用户触发下才能执行，例如，window.open()函数
 
 ```html
 <a id="test-link" href="#0">点我试试</a>
@@ -331,6 +364,12 @@ a.off('click', function () {
 var input = $('#test-input');  // 通过代码触发事件，直接调用无参数的change()方法来触发该事件
 input.val('change it!');
 input.change(); // 触发change事件
+
+
+// 无法弹出新窗口，将被浏览器屏蔽:
+$(function () {
+    window.open('/');
+});
 </script>
 
 <html>
@@ -366,6 +405,188 @@ input.change(); // 触发change事件
         ...
     </form>
 </body>
+```
+
+### 动画
+
+只需要以固定的时间间隔（例如，0.1秒），每次把DOM元素的CSS样式修改一点
+* show()和hide()，会显示和隐藏DOM元素从左上角逐渐展开或收缩的.toggle()方法则根据当前状态决定是show()还是hide()
+* slideUp()和slideDown()则是在垂直方向逐渐展开或收缩的。slideToggle()则根据元素是否可见来决定下一步动作
+* fadeIn()和fadeOut()的动画效果是淡入淡出，也就是通过不断设置DOM元素的opacity属性来实现，而fadeToggle()则根据元素是否可见来决定下一步动作
+* animate()，可以实现任意动画效果，需要传入的参数就是DOM元素最终的CSS状态和时间，jQuery在时间段内不断调整CSS直到达到设定的值.还可以再传入一个函数，当动画结束时，该函数将被调用
+* 动画效果还可以串行执行，通过delay()方法还可以实现暂停，这样，我们可以实现更复杂的动画效果.必须不断返回新的Promise对象才能后续执行操作
+* 有的动画如slideUp()根本没有效果。这是因为jQuery动画的原理是逐渐改变CSS的值，如height从100px逐渐变为0。但是很多不是block性质的DOM元素，对它们设置height根本就不起作用，所以动画也就没有效果
+* jQuery也没有实现对background-color的动画效果，用animate()设置background-color也没有效果。这种情况下可以使用CSS3的transition实现动画效果。
+```js
+var div = $('#test-show-hide');
+div.hide(3000); // 
+div.show('slow');
+div.toggle('slow');
+
+div.slideUp(3000); // 在3秒钟内逐渐向上消失
+div.slideDown(3000); 
+div.slideToggle('slow');
+
+div.fadeIn(3000); 
+div.fadeOut(3000); 
+div.fideToggle('slow');
+
+var div = $('#test-animate');
+div.animate({
+    opacity: 0.25,
+    width: '256px',
+    height: '256px'
+}, 3000); // 在3秒钟内CSS过渡到设定值
+
+var div = $('#test-animate');
+div.animate({
+    opacity: 0.25,
+    width: '256px',
+    height: '256px'
+}, 3000, function () {
+    console.log('动画已结束');
+    // 恢复至初始状态:
+    $(this).css('opacity', '1.0').css('width', '128px').css('height', '128px');
+});
+
+var div = $('#test-animates');
+// 动画效果：slideDown - 暂停 - 放大 - 暂停 - 缩小
+div.slideDown(2000)
+   .delay(1000)
+   .animate({
+       width: '256px',
+       height: '256px'
+   }, 2000)
+   .delay(1000)
+   .animate({
+       width: '128px',
+       height: '128px'
+   }, 2000);
+}
+```
+
+### AJAX
+
+在全局对象jQuery（也就是$）绑定了ajax()函数，可以处理AJAX请求。ajax(url, settings)函数需要接收一个URL和一个可选的settings对象，常用的选项如下：
+* async：是否异步执行AJAX请求，默认为true，千万不要指定为false；
+* method：发送的Method，缺省为'GET'，可指定为'POST'、'PUT'等；
+* contentType：发送POST请求的格式，默认值为'application/x-www-form-urlencoded; charset=UTF-8'，也可以指定为text/plain、application/json；
+* data：发送的数据，可以是字符串、数组或object。如果是GET请求，data将被转换成query附加到URL上，如果是POST请求，根据contentType把data序列化成合适的格式；
+* headers：发送的额外的HTTP头，必须是一个object；
+* dataType：接收的数据格式，可以指定为'html'、'xml'、'json'、'text'等，缺省情况下根据响应的Content-Type猜测。
+    * $.ajax() 
+    * $.get() 
+    * $.post():传入的第二个参数默认被序列化为application/x-www-form-urlencoded
+    * $.getJSON()
+* 用promise实现链式写法
+* 使用JSONP，可以在ajax()中设置jsonp: 'callback'，让jQuery实现JSONP跨域加载数据
+
+```js
+var jqxhr = $.ajax('/api/categories', {
+    dataType: 'json'
+});
+
+function ajaxLog(s) {
+    var txt = $('#test-response-text');
+    txt.val(txt.val() + '\n' + s);
+}
+
+$('#test-response-text').val('');
+var jqxhr = $.ajax('/api/categories', {
+    dataType: 'json'
+}).done(function (data) {
+    ajaxLog('成功, 收到的数据: ' + JSON.stringify(data));
+}).fail(function (xhr, status) {
+    ajaxLog('失败: ' + xhr.status + ', 原因: ' + status);
+}).always(function () {
+    ajaxLog('请求完成: 无论成功或失败都会调用');
+});
+
+var jqxhr = $.get('/path/to/resource', {
+    name: 'Bob Lee',
+    check: 1
+});
+
+var jqxhr = $.post('/path/to/resource', {
+    name: 'Bob Lee',
+    check: 1
+});
+
+var jqxhr = $.getJSON('/path/to/resource', {
+    name: 'Bob Lee',
+    check: 1
+}).done(function (data) {
+    // data已经被解析为JSON对象了
+});
+```
+
+### 插件
+
+* 给jQuery对象绑定一个新方法是通过扩展给$.fn绑定函数，实现插件的代码逻辑.返回`return this`,jQuery对象支持链式操作，自己写的扩展方法也要能继续链式下去
+* `$.extend(target, obj1, obj2, ...)`，它把多个object对象的属性合并到第一个target对象中，遇到同名属性，总是使用靠后的对象的值，也就是越往后优先级越高.插件函数要有默认值，绑定在$.fn.<pluginName>.defaults上；用户在调用时可传入设定值以便覆盖默认值。
+* 针对特定元素的扩展: jQuery对象的有些方法只能作用在特定DOM元素上，比如submit()方法只能针对form。如果我们编写的扩展只能针对某些类型的DOM元素.
+
+```html
+<div id="test-external">
+    <p>如何学习<a href="http://jquery.com">jQuery</a>？</p>
+    <p>首先，你要学习<a href="/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000">JavaScript</a>，并了解基本的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a>。</p>
+</div>
+
+<script>
+$.fn.highlight1 = function () {
+    // this已绑定为当前jQuery对象:
+    this.css('backgroundColor', '#fffceb').css('color', '#d85030');
+    return this;
+}
+$('#test-highlight1 span').highlight1();
+
+$.fn.highlight2 = function (options) {
+    // 要考虑到各种情况:
+    // options为undefined
+    // options只有部分key
+    var bgcolor = options && options.backgroundColor || '#fffceb';
+    var color = options && options.color || '#d85030';
+    this.css('backgroundColor', bgcolor).css('color', color);
+    return this;
+}
+$('#test-highlight2 span').highlight2({
+    backgroundColor: '#00a8e6',
+    color: '#ffffff'
+});
+
+$.fn.highlight = function (options) {
+    // 合并默认值和用户设定值:
+    var opts = $.extend({}, $.fn.highlight.defaults, options); // $.extend
+    this.css('backgroundColor', opts.backgroundColor).css('color', opts.color);
+    return this;
+}
+// 设定默认值:
+$.fn.highlight.defaults = {
+    color: '#d85030',
+    backgroundColor: '#fff8de'
+}
+
+// 现在我们要给所有指向外链的超链接加上跳转提示
+$.fn.external = function () {
+    // return返回的each()返回结果，支持链式调用:
+    return this.filter('a').each(function () {
+        // 注意: each()内部的回调函数的this绑定为DOM本身!
+        var a = $(this);
+        var url = a.attr('href');
+        if (url && (url.indexOf('http://')===0 || url.indexOf('https://')===0)) {
+            a.attr('href', '#0')
+             .removeAttr('target')
+             .append(' <i class="uk-icon-external-link"></i>')
+             .click(function () {
+                if(confirm('你确定要前往' + url + '？')) {
+                    window.open(url);
+                }
+            });
+        }
+    });
+}
+$('#test-external a').external();
+</script>
 ```
 
 ## 扩展
