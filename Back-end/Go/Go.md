@@ -5,34 +5,43 @@
 
 ## Install
 
-- download:
+### 卸载旧版本
 
-  ```
-    sudo wget  https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz
-    sudo tar -C /usr/local -xzf go1.8.3.linux-amd64.tar.gz
-  ```
+### linux
 
-- Mac:brew install go:设置GOPATH ,GOBIN fishshell设置GOPATH：
-
-set -gx GOPATH /usr/local/Cellar/go/1.7.6
-
-在bash中设置： vim .bash_profile
+GOROOT must be set only when installing to a custom location.install
 
 ```
-export GOPATH=/usr/local/Cellar/go/1.7.6
+wget  https://redirector.gvt1.com/edgedl/go/go$VERSION.$OS-$ARCH.tar.gz
+sudo tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
+export PATH=$PATH:/usr/local/go/bin // 默认安装路径`/usr/local/go`(c:\Go under Windows)添加到/etc/profile (for a system-wide installation) or $HOME/.profile
+
+export GOROOT=$HOME/go1.X  // Installing to a custom location.install the Go tools to a different location. In this case you must set the GOROOT environment variable to point to the directory in which it was installed.
+export PATH=$PATH:$GOROOT/bin
+```
+
+### Mac
+
+* `brew install go`
+* `go env` 查看配置环境
+* 设置GOPATH ,GOBIN
+
+```shell
+// bash中配置.bash_profile中添加 在zsh配置`.zshrc`添加
+GOROOT="/usr/local/Cellar/go/1.9.2/libexec"  // 已配置好的
+export GOPATH=/usr/local/Cellar/go/1.9.2 // 默认配置
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
+
+export GOPATH=$HOME/go   // 另一种做法配置到home下面
+export PATH=$HOME/bin:$GOPATH/bin:$PATH
+export GOPATH=/Users/henry/Workspace/go
+
+export PATH=$PATH:/usr/local/go/bin  // 通过文件包安装
+
+source .bash_profile // 使修改立刻生效
 ```
 
-使修改立刻生效:
-
-source .bash_profile
-
-- Environment variable
-
-  ```
-     export PATH=$PATH:/usr/local/go/bin
-  ```
 
 ## Build&Run
 
@@ -58,6 +67,14 @@ LABLE标签 goto break continue
 
 slice reslice
 
+### 工具
+
+### sublime
+* 安装gosublime插件
+* 在GoSublime，再往下找到 Settings - Default修改`"env": { "GOPATH":"$HOME/go","PATH": "$HOME/bin:$GOPATH/bin:$PATH" },` `"shell": [“$zsh"],`
+
+## 文档
+* 离线文档：`godoc -http=:6060` 访问`http://localhost:6060/`
 ## 学习
 
 - [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
@@ -73,6 +90,9 @@ slice reslice
 - [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
 - [grafana/grafana](https://github.com/grafana/grafana)The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
 - [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
+- [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
+
+
 <http://www.infoq.com/cn/articles/history-go-package-management>
 
 - [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
