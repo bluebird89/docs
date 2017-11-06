@@ -17,6 +17,7 @@
 - 程序文件 /usr/local/etc/
 - 应用文件 /usr/local/Cellar/
 - 日志文件/usr/local/var
+- 链接文件 /usr/local/opt
 
 brew:从下载源码解压后。／.configure&& make install ,同时包含相关以来库，并自动配置好各种环境变量，易于卸载。
 
