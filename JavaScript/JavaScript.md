@@ -1746,23 +1746,32 @@ function getPrice() {
 
 ### promise
 
-在JavaScript的世界中，所有代码都是单线程执行的。
-* 由于这个“缺陷”，导致JavaScript的所有网络操作，浏览器事件，都必须是异步执行。所谓的单线程就是一次只能完成一个任务，其任务的调度方式就是排队，这就和火车站洗手间门口的等待一样，前面的那个人没有搞定，你就只能站在后面排队等着.这种模式的好处是实现起来比较简单，执行环境相对单纯；坏处是只要有一个任务耗时很长，后面的任务都必须排队等着，会拖延整个程序的执行。常见的浏览器无响应（假死），往往就是因为某一段Javascript代码长时间运行（比如死循环），导致整个页面卡在这个地方，其他任务无法执行。
-* "同步模式"就是上一段的模式，后一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的；
-* "异步模式"则完全不同，每一个任务有一个或多个回调函数（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数，后一个任务则是不等前一个任务结束就执行，所以程序的执行顺序与任务的排列顺序是不一致的、异步的。
-* "异步模式"非常重要。在浏览器端，耗时很长的操作都应该异步执行，避免浏览器失去响应，最好的例子就是Ajax操作。在服务器端，"异步模式"甚至是唯一的模式，因为执行环境是单线程的，如果允许同步执行所有http请求，服务器性能会急剧下降，很快就会失去响应。
-* 回调函数:假定有两个函数f1和f2，后者等待前者的执行结果。f1()和f2().
-    - 回调函数的优点是简单、容易理解和部署，
-    - 缺点是不利于代码的阅读和维护，各个部分之间高度耦合（Coupling），流程会很混乱，而且每个任务只能指定一个回调函数。
-* 采用事件驱动模式。任务的执行不取决于代码的顺序，而取决于某个事件是否发生. 
-    - 优点是比较容易理解，可以绑定多个事件，每个事件可以指定多个回调函数，而且可以"去耦合"（Decoupling），有利于实现模块化。
-    - 缺点是整个程序都要变成事件驱动型，运行流程会变得很不清晰。
-* 存在一个"信号中心"，某个任务执行完成，就向信号中心"发布"（publish）一个信号，其他任务可以向信号中心"订阅"（subscribe）这个信号，从而知道什么时候自己可以开始执行。这就叫做"发布/订阅模式"（publish-subscribe pattern），又称"观察者模式"（observer pattern）。
-* Promises对象:每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数.回调函数变成了链式写法，程序的流程可以看得很清楚.好处把执行代码和处理结果的代码清晰地分离了
-    - 串行执行若干异步任务外
-    - 并行执行异步任务：需要从两个不同的URL分别获得用户的个人信息和好友列表，这两个任务是可以并行执行的，用Promise.all()，多个异步任务是为了容错。比如，同时向两个URL读取用户的个人信息，只需要获得先返回的结果即可
-    - 可以把很多异步任务以并行和串行的方式组合起来执行
+#### 异步编程
+
+在JavaScript的世界中，所有代码都是单线程（single thread）执行的。一个浏览器进程中只有一个JS的执行线程，同一时刻内只会有一段代码在执行。
+
+异步机制是浏览器的两个或以上常驻线程共同完成的，例如异步请求是由两个常驻线程：JS执行线程和事件触发线程共同完成的，JS的执行线程发起异步请求（这时浏览器会开一条新的HTTP请求线程来执行请求，这时JS的任务已完成，继续执行线程队列中剩下的其他任务），然后在未来的某一时刻事件触发线程监视到之前的发起的HTTP请求已完成，它就会把完成事件插入到JS执行队列的尾部等待JS处理。又例如定时触发（settimeout和setinterval）是由浏览器的定时器线程执行的定时计数，然后在定时时间把定时处理函数的执行请求插入到JS执行队列的尾端（所以用这两个函数的时候，实际的执行时间是大于或等于指定时间的，不保证能准确定时的）。
+
+* 所谓的单线程就是一次只能完成一个任务，其任务的调度方式就是排队，这就和火车站洗手间门口的等待一样，前面的那个人没有搞定，你就只能站在后面排队等着.这种模式的好处是实现起来比较简单，执行环境相对单纯；坏处是只要有一个任务耗时很长，后面的任务都必须排队等着，会拖延整个程序的执行。常见的浏览器无响应（假死），往往就是因为某一段Javascript代码长时间运行（比如死循环），导致整个页面卡在这个地方，其他任务无法执行。 
+* 由于这个“缺陷”，导致JavaScript的所有网络操作，浏览器事件，都必须是异步执行。
+* 将任务的执行模式分成两种：同步（Synchronous）和异步（Asynchronous）。
+    * "同步模式"就是后一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的；
+    * "异步模式"则完全不同，每一个任务有一个或多个回调函数（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数；后一个任务则是不等前一个任务结束就执行，所以程序的执行顺序与任务的排列顺序是不一致的、异步的。
+* "异步模式"非常重要。在浏览器端，耗时很长的操作都应该异步执行，避免浏览器失去响应，最好的例子就是Ajax操作。在服务器端，"异步模式"甚至是唯一的模式，因为执行环境是单线程的，如果允许同步执行所有http请求，服务器性能会急剧下降，很快就会失去响应。异步代码会被放入一个事件队列，等到所有其他代码执行后才进行，而不会阻塞线程。异步编程的方法：
+    - 回调函数:假定有两个函数f1和f2，后者等待前者的执行结果。f1()和f2().被压入了称之为Event Loop的队列。
+        - 回调函数的优点是简单、容易理解和部署，
+        - 缺点是不利于代码的阅读和维护，各个部分之间高度耦合（Coupling），流程会很混乱，而且每个任务只能指定一个回调函数
+        - 这个API不能保证计时会如期准确地运行。由于CPU负载、其他任务等所导致的延迟是可以预料到的
+    - 事件监听：采用事件驱动模式。任务的执行不取决于代码的顺序，而取决于某个事件是否发生. 
+        + 优点是比较容易理解，可以绑定多个事件，每个事件可以指定多个回调函数，而且可以"去耦合"（Decoupling），有利于实现模块化。
+        + 缺点是整个程序都要变成事件驱动型，运行流程会变得很不清晰。
+    - 发布/订阅（publish-subscribe pattern）：又称"观察者模式"（observer pattern）存在一个"信号中心"，某个任务执行完成，就向信号中心"发布"（publish）一个信号，其他任务可以向信号中心"订阅"（subscribe）这个信号，从而知道什么时候自己可以开始执行。
+    - Promises对象:每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数.回调函数变成了链式写法，程序的流程可以看得很清楚.好处把执行代码和处理结果的代码清晰地分离了
+        + 串行执行若干异步任务外
+        + 并行执行异步任务：需要从两个不同的URL分别获得用户的个人信息和好友列表，这两个任务是可以并行执行的，用Promise.all()，多个异步任务是为了容错。比如，同时向两个URL读取用户的个人信息，只需要获得先返回的结果即可
+        + 可以把很多异步任务以并行和串行的方式组合起来执行
 ```javascript
+// 异步测试
 function callback() {
     console.log('Done');
 }
@@ -1770,43 +1779,48 @@ console.log('before setTimeout()');
 setTimeout(callback, 1000); // 1秒钟后调用callback函数
 console.log('after setTimeout()');
 
+// f2等待f1的结果
+// 方法一 回调函数
 function f1(callback){
 　　setTimeout(function () {
 　　　　// f1的任务代码
 　　　　callback();
 　　}, 1000);
 }
-f1(f2);
+f1(f2); // 采用这种方式，把同步操作变成了异步操作，f1不会堵塞程序运行，相当于先执行程序的主要逻辑，将耗时的操作推迟执行。
 
+// 方法二  事件监听 f1.trigger('done')表示，执行完成后，立即触发done事件，从而开始执行f2。
 f1.on('done', f2);
-　function f1(){
-　　　　setTimeout(function () {
-　　　　　　// f1的任务代码
-　　　　　　f1.trigger('done');
-　　　　}, 1000);
-　　}
+function f1(){
+    setTimeout(function () {
+　　　　// f1的任务代码
+　　　　f1.trigger('done');
+　　　}, 1000);
+}
 
+//  方法三：发布/订阅模式
 jQuery.subscribe("done", f2);
 function f1(){
-　　　　setTimeout(function () {
-　　　　　　// f1的任务代码
-　　　　　　jQuery.publish("done");
-　　　　}, 1000);
-　　}
+　　setTimeout(function () {
+　　　　// f1的任务代码
+　　　　jQuery.publish("done");
+　　}, 1000);
+}
 // f2完成执行后，也可以取消订阅 jQuery.unsubscribe("done", f2);
  
+// 方法四：promise
 f1().then(f2);
 function f1(){
-　　　　var dfd = $.Deferred();
-　　　　setTimeout(function () {
-　　　　　　// f1的任务代码
-　　　　　　dfd.resolve();
-　　　　}, 500);
-　　　　return dfd.promise;
-　　}
+　　　var dfd = $.Deferred();
+　　　setTimeout(function () {
+　　　　　// f1的任务代码
+　　　　　dfd.resolve();
+　　　}, 500);
+　　　return dfd.promise;
+}
+
 job1.then(job2).then(job3).catch(handleError); // job1、job2和job3都是Promise对象。
 f1().then(f2).fail(f3);
-
 
  // <p id="test-promise-log"></p>
 var logging = document.getElementById('test-promise-log');
@@ -1915,9 +1929,40 @@ Promise.all([p1, p2]).then(function (results) {
 Promise.race([p1, p2]).then(function (result) {
     console.log(result); // 'P1'
 }); // 由于p1执行较快，Promise的then()将获得结果'P1'。p2仍在继续执行，但执行结果将被丢弃。
-```
-[Javascript异步编程的4种方法](http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html)
 
+var geocode = function( address ) {
+    var dfd = new $.Deferred();
+    GMaps.geocode({
+        address: address,
+        callback: function( response, status ) {
+            return dfd.resolve( response );
+        }
+    });
+    return dfd.promise();
+};
+var getRoute = function( fromLatLng, toLatLng ) {
+    var dfd = new $.Deferred();
+    map.getRoutes({
+        origin: [ fromLatLng.lat(), fromLatLng.lng() ],
+        destination: [ toLatLng.lat(), toLatLng.lng() ],
+        travelMode: "driving",
+        unitSystem: "imperial",
+        callback: function( e ) {
+            return dfd.resolve( e );
+        }
+    });
+    return dfd.promise();
+};
+var doSomethingCoolWithDirections = function( route ) {
+    // do something with route
+};
+$.when( geocode( fromAddress ), geocode( toAddress ) ).
+then(function( fromLatLng, toLatLng ) {
+    getRoute( fromLatLng, toLatLng ).then( doSomethingCoolWithDirections );
+});
+```
+* [Javascript异步编程的4种方法](http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html)
+* [JavaScript异步编程](http://www.cnblogs.com/hustskyking/p/javascript-asynchronous-programming.html)
 ### Canvas
 
 HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘制各种图表、动画等。没有Canvas的年代，绘图只能借助Flash插件实现，页面不得不用JavaScript和Flash进行交互。有了Canvas，我们就再也不需要Flash了，直接使用JavaScript完成绘制。
@@ -1965,6 +2010,132 @@ HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘�
     var gl = canvas.getContext("webgl");
 </script>
 ```
+
+### 错误处理
+
+遇见异常情况给用户反馈或者通过错误代码
+* 当代码块被try { ... }包裹的时候，就表示这部分代码执行过程中可能会发生错误，一旦发生错误，就不再继续执行后续代码，转而跳到catch块。
+* catch (e) { ... }包裹的代码就是错误处理代码，变量e表示捕获到的错误，编写错误处理语句。如果没有出错，catch (e) { ... }代码不会被执行；
+* 最后，无论有没有错误，finally一定会被执行。
+* catch和finally可以不必都出现
+* 程序也可以主动抛出一个错误，让执行流程直接跳转到catch块。抛出错误使用throw语句
+* 错误类型：有一个标准的Error对象表示错误，还有从Error派生的TypeError、ReferenceError等错误对象。我们在处理错误时，可以通过catch(e)捕获的变量e访问错误对象
+* 错误传播：如果在一个函数内部发生了错误，它自身没有捕获，错误就会被抛到外层调用函数，如果外层函数也没有捕获，该错误会一直沿着函数调用链向上抛出，直到被JavaScript引擎捕获，代码终止执行。
+* 不必在每一个函数内部捕获错误，只需要在合适的地方来个统一捕获，一网打尽：在最终的调用捕获
+* 异步错误处理：JavaScript引擎是一个事件驱动的执行引擎，代码总是以单线程执行，而回调函数的执行需要等到下一个满足条件的事件出现后，才会被执行。
+    - 原因就在于调用setTimeout()函数时，传入的printTime函数并未立刻执行！紧接着，JavaScript引擎会继续执行console.log('done');语句，而此时并没有错误发生。直到1秒钟后，执行printTime函数时才发生错误，但此时除了在printTime函数内部捕获错误外，外层代码并无法捕获。
+```html
+<form>
+    <input id="x"> + <input id="y">
+    <button id="calc" type="button">计算</button>
+</form>
+
+<script>
+var r1, r2, s = ‘hello’;
+try {
+    r1 = s.length; // 此处应产生错误
+    r2 = 100; // 该语句不会执行
+} catch (e) {
+    alert('出错了：' + e);
+} finally {
+    console.log('finally');
+}
+console.log('r1 = ' + r1); // r1应为undefined
+console.log('r2 = ' + r2); // r2应为undefined
+
+try {
+    ...
+} catch (e) {
+    if (e instanceof TypeError) {
+        alert('Type error!');
+    } else if (e instanceof Error) {
+        alert(e.message);
+    } else {
+        alert('Error: ' + e);
+    }
+}
+
+var r, n, s;
+try {
+    s = prompt('请输入一个数字');
+    n = parseInt(s);
+    if (isNaN(n)) {
+        throw new Error('输入错误');
+    }
+    // 计算平方:
+    r = n * n;
+    alert(n + ' * ' + n + ' = ' + r);
+} catch (e) {
+    alert('出错了：' + e);
+}
+
+function main(s) {
+    console.log('BEGIN main()');
+    try {
+        foo(s);
+    } catch (e) {
+        alert('出错了：' + e);
+    }
+    console.log('END main()');
+}
+
+function foo(s) {
+    console.log('BEGIN foo()');
+    bar(s);
+    console.log('END foo()');
+}
+
+function bar(s) {
+    console.log('BEGIN bar()');
+    console.log('length = ' + s.length);
+    console.log('END bar()');
+}
+
+main(null);
+
+// 无法捕获错误
+function printTime() {
+    throw new Error();
+}
+
+try {
+    setTimeout(printTime, 1000);
+    console.log('done');
+} catch (e) {
+    alert('error');
+}
+
+setTimeout(function () {
+    try {
+       throw new Error();
+    } catch (e) {
+      alert('error');
+    }
+    }, 1000);
+console.log('done');
+
+// 修改
+$btn.click(function () {
+        var
+            x = parseFloat($('#x').val()),
+            y = parseFloat($('#y').val()),
+            r;
+try {
+
+        if (isNaN(x) || isNaN(y)) {
+            throw new Error('输入有误');
+        }
+        r = x + y;
+        alert('计算结果：' + r);
+
+} catch (e) {
+    alert('输入有误！');
+}
+});
+</script>
+```
+
+
 ## 调试
 
 * 可以直接在develop中的console中测试代码
@@ -2071,3 +2242,5 @@ Data Visualization
 ## 扩展
 
 * [Microsoft/napajs](https://github.com/Microsoft/napajs):Napa.js: a multi-threaded JavaScript runtime
+
+## 文档
