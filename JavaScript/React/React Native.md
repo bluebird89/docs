@@ -182,3 +182,14 @@ react-native run-android
 ## 测试
 
 - [airbnb/enzyme](https://github.com/airbnb/enzyme):JavaScript Testing utilities for React http://airbnb.io/enzyme/
+
+## create-react-app
+
+```
+npm install -g create-react-app
+
+create-react-app my-app
+cd my-app/
+npm start
+npm run eject // 导出配置文件
+```

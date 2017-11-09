@@ -861,6 +861,12 @@ CMD ["mysqld"]
 - docker run -p 3306:3306 --name mymysql -v $PWD/conf/my.cnf:/etc/mysql/my.cnf -v $PWD/logs:/logs -v $PWD/data:/mysql_data -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
 
 
+## 性能
+
+`explain select … from … [where ...]`
+* 
+
+
 ## 扩展
 
 ### [o1lab/xmysql](https://github.com/o1lab/xmysql)
@@ -888,6 +894,7 @@ http://localhost:3000
 * _p indicates page and _size indicates size of response rows,By default 20 records and max of 100 are returned per GET request on a table.`/api/payments?_p=2&_size=50`
 * Sorting: `/api/payments?_sort=column1` `/api/payments?_sort=-column1` `/api/payments?_sort=column1,-column2`
 * Fields `/api/payments?_fields=customerNumber,checkNumber` `/api/payments?_fields=-checkNumber`
+
 ### 参考
 
 - [HOW TO INSTALL MYSQL NDB CLUSTER ON LINUX](https://clusterengine.me/how-to-install-mysql-ndb-cluster-on-linux/)
