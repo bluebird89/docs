@@ -108,11 +108,7 @@ ln -s ~/Dropbox/Sublime/User
 ctrl+`
 import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
 # 重启sublime
-```
-
-插件安装
-
-```
+# 插件安装
 # open Package Control's Command Palette：Control + Shift + P (Windows)，Command + Shift + P (on Mac)，或者通过菜单 Tools > Command Palette
 #  install package
 # 输入package文件名称，回车安装
@@ -173,7 +169,7 @@ ctrl+alt+shift+p python
   # 在Preferences.sublime-settings 添加
   "auto_complete_triggers": [{"selector": "text.html", "characters": "bs3"}]
   ```
-
+- autofilename:自动关联图片,css,js等资源路径插件
 # 自定义配置
 
 - 包配置：Package Control.sublime-settings
@@ -385,17 +381,91 @@ h1{foo} 和 a[href=#] 为h1和a标签
 ul>li*3
 ul>li.item$*3
 ```
+### 快捷键
 
+#### 选择类
+
+Ctrl+D选中光标所占的文本,继续操作则会选中下一个相同的的文本
+ctrl+G:输入行号,可快速跳转该行
+ctrl+p:输入冒号,在输入行号，可快速跳转到某一行
+Alt+F3选中文本按下快捷键,即可一次性选择全部相同的文本进行同时编辑:举个例子:快速选中并更改所有相同的变量名和函数名等
+Ctrl+L:选中整行,继续操作则继续选择下一行,效果和shift+向下箭头效果一样
+Ctrl+shift+L:先选中多行,在按下快捷键,会在每行行尾插入光标,即可同时编辑这行
+Ctrl+Shift+M 选择括号内的内容（继续选择父括号）。举个栗子：快速选中删除函数中的代码，重写函数体代码或重写括号内里的内容
+Ctrl+M 光标移动至括号内结束或开始的位置
+Ctrl+Enter 在下一行插入新行。举个栗子：即使光标不在行尾，也能快速向下插入一行
+Ctrl+Shift+Enter 在上一行插入新行。举个栗子：即使光标不在行首，也能快速向上插入一行
+ctrl+shift+[:选中代码,按下快捷键,折叠代码
+ctrl+shift+]:选中代码,按下快捷键,展开代码
+Ctrl+k+0:展开所有折叠代码
+ctrl+←:向左单位性地移动光标,快速移动光标
+ctrl+→:向右单位性移动光标,快速移动光标
+shift+↑ 向上选中多行
+shift+↓ 向下选中多行
+Shift+← 向左选中文本
+Shift+→ 向右选中文本
+Ctrl+Shift+← 向左单位性地选中文本
+Ctrl+Shift+→ 向右单位性地选中文本
+Ctrl+Shift+↑ 将光标所在行和上一行代码互换（将光标所在行插入到上一行之前）
+Ctrl+Shift+↓ 将光标所在行和下一行代码互换（将光标所在行插入到下一行之后）
+Ctrl+Alt+↑ 或Ctrl+Alt+鼠标向上拖动 向上添加多行光标，可同时编辑多行
+Ctrl+Alt+↓或Ctrl+Alt+鼠标向下拖动 向下添加多行光标，可同时编辑多行
+多重选择功能允许在页面中同时存在多个光标,让很多本来需要正则表达式,高级搜索和替换才能完成的的任务也变得游刃有余了 激活多重选择的方法有两及种:
+按住ctrl然后在页面中希望中现光标的位置点击
+选择数行文本,然后按下shift+ctrl+L
+通过反复按下ctrl+D即可将全文中与光标当前所在位置的词相同的词逐一加入选择,而直接按下Alt+F3即可一次性选择所有相同的词
+按下鼠标中键来进行垂直方向的纵列选择,也可以进入多重编辑状态
+
+#### 编辑类
+
+Ctrl+J:合并选中多行代码为一行:将多行格式的css属性合并为一行
+ctrl+shift+D:复制光标所在的整行,插入到下一行
+Tab 向右缩进。只对光标后（或者选中的）的代码有效
+Shift+Tab 向左缩进
+Ctrl+[ 向左缩进。对整行有效
+Ctrl+] 向右缩进。对整行有效
+Ctrl+K+K 从光标处开始删除代码至行尾。按住Ctrl，按两次K
+Ctrl+Shift+K 删除整行
+Ctrl+/ 注释单行
+Ctrl+Shift+/ 注释多行
+Ctrl+K+U 转换大写
+Ctrl+K+L 转换小写
+Ctrl+Z 撤销
+Ctrl+Y 恢复撤销
+Ctrl+U 软撤销，感觉和 Gtrl+Z 一样
+Ctrl+F2 设置书签，F2切换书签
+Ctrl+T 左右字母互换
+
+#### 搜索类
+Ctrl+F 打开底部搜索框，查找关键字
+Ctrl+shift+F 在文件夹内查找，与普通编辑器不同的地方是sublime允许添加多个文件夹进行查找
+Ctrl+P 打开搜索框。举个栗子
+
+
+输入当前项目中的文件名，快速搜索文件
+输入@和关键字，查找文件中函数名
+输入：和数字，跳转到文件中该行代码
+输入#和关键字，查找变量名
+
+
+Ctrl+G 打开搜索框，自动带：，输入数字跳转到该行代码。举个栗子：在页面代码比较长的文件中快速定位
+Ctrl+R 打开搜索框，自动带@，输入关键字，查找文件中的函数名。举个栗子：在函数较多的页面快速查找某个函数
+Ctrl+: 打开搜索框，自动带#，输入关键字，查找文件中的变量名、属性名等
+Esc 退出光标多行选择，退出搜索框，命令框
+Ctrl+Shift+P 打开命令框。场景栗子：打开命名框，输入关键字，调用sublime text或插件的功能，例如使用package安装插件
+
+#### 
 ### 配置同步
+
 ### 通过共享文件
 - 清除 Packages 目录下User
 - `ln -s ~/baiduyunebooks/sublime3/Packages/User User` // 建立符号链接
 
 ### 通过sync-setting配置
+
 - 新建github的token
 - 安装syn-setting插件
 - 配置文件，主进程download，其它更新
-- 
 - 安装 
 
 * [总结配置](https://github.com/jikeytang/sublime-text)

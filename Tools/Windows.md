@@ -19,10 +19,16 @@
 - Rolan 轻量级桌面启动器
 - Listary :Windows 文件浏览增强工具
 - f.lux 随时间改变屏幕色温
+- 全局鼠标手势：WGestures
+- 字体渲染增强：MacType
+- 任务栏透明化：TranslucentTB
+- 强大的桌面美化软件：Rainmeter
 - RSS:深蓝阅读 theoldreader
 - Foxit Reader
 - editor：Visual Studio Code
+- Sumatra PDF:pdf 支持 EPUB、MOBI 格式的电子书，以及 XPS、DjVu、CHM 
 - 命令行：xshell
+- 电子书管理神器：Calibre
 - CCleaner, Defraggler, Recuva & Speccy.
 - [Chocolatey](https://chocolatey.org/):The package manager for Windows Software Management Automation
 

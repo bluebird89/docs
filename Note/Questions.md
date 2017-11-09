@@ -7,11 +7,9 @@
 # Q2: vagrant客户机配置好docker后，无法挂载共享文件夹
 
 jsonp使用post方法405错误
-
+```js
 <script src="http://platform.cdn.xianyugame.com/platform/common/js/jquery-1.11.0.min.js">
 </script>
-
-
 
 <script>
   $.ajax(
@@ -30,3 +28,4 @@ jsonp使用post方法405错误
       }
   });
 </script>
+```

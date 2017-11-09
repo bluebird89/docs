@@ -16,4 +16,12 @@
 ## 简历工具
 
 * [salomonelli/best-resume-ever](https://github.com/salomonelli/best-resume-ever):Build fast 🚀 and easy multiple beautiful resumes and create your best CV ever! Made with Vue and LESS.
-* 
+
+## 技能点
+
+### 基础
+
+### 中级
+
+* 数据结构与算法
+* 大流量与并发
