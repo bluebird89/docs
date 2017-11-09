@@ -122,3 +122,10 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 - [JavaScript 进阶之 Vue.js + Node.js 入门实战开发](http://blog.csdn.net/gitchat/article/details/77931664)
 - http://www.cnblogs.com/keepfool/
 
+## vue-cli
+
+```shell
+npm install -g vue-cli
+vue init <template-name> <project-name> // vue init webpack my-project
+
+```

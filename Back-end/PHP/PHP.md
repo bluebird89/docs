@@ -317,6 +317,17 @@ EXPOSE 9000 CMD ["php-fpm"] ```
 - [nikic/PHP-Parser](https://github.com/nikic/PHP-Parser):A PHP parser written in PHP
 - [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb#installation):A MongoDB based Eloquent model and Query builder for Laravel (Moloquent) https://jenssegers.com
 
+### 对象
+
+对象是一堆属性组成。对象在底层的实现。采取属性数组+方法数组来实现的。对象在zend中的定义是使用了一种zend_object_value结构体来存储的，这个结构体包含：
+* 一个指针，也就是说明这个对象由哪个类实现出来的，这个类在哪里。
+* 这个对象的属性。
+* guards,阻止递归调用的。
+
+对象的方法不会存在对象里面，要使用对象的方法，实际上是通过指针找到这个类，再用这个类里面的方法来执行的。（通过类序列化检测）
+
+延迟绑定：之类重写父类方法，其它调用该方法时用static而非self
+
 ### PHPCS
 
 PHP代码规范与质量检查工具

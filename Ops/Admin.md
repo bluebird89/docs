@@ -3,6 +3,7 @@
 ## 资源
 
 - [kahun/awesome-sysadmin](https://github.com/kahun/awesome-sysadmin)
+- [zuiidea/antd-admin](https://github.com/zuiidea/antd-admin):A admin dashboard application demo built upon Ant Design and Dva.js http://antd-admin.zuiidea.com
 
 ## 扩展
 - [apache/mesos](https://github.com/apache/mesos):a cluster manager that provides efficient resource isolation and sharing across distributed applications, or frameworks. It can run Hadoop, Jenkins, Spark, Aurora, and other frameworks on a dynamically shared pool of nodes.
