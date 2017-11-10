@@ -13,8 +13,9 @@
 
 ## 环境配置
 
-### homestead:安装virtualbox and vagrant
+### homestead
 
+- 安装virtualbox and vagrant
 
 ```
 brew install homebrew/php/php71
@@ -22,16 +23,19 @@ brew install homebrew/php/php71
 sudo chown -R $USER .composer/
 composer global require laravel/valet
 export PATH=$PATH:~/.composer/vendor/bin
+
 valet install
 终端ping一下任意 *.dev 域名
 # 修改域名
 valet domain app
+
 # 安装MySQL
 brew install mysql
 # 启动服务
 brew services start mysql
 # 升级
 composer global update
+
 valet stop
 valet uninstall
 valet restart
@@ -64,7 +68,7 @@ valet restart
 - bash init.sh
 - 修改.homestread\Homestead.yaml
 
-  ```
+  ```yaml
         folders:
         - map: D:\Code    <!-- 项目地址 -->
             to: /home/vagrant/Code   <!-- 虚拟机的项目地址 -->
@@ -73,8 +77,9 @@ valet restart
         - map: laravel.app  <!-- 添加的站点名称 -->
             to: /home/vagrant/Code/Laravel/public <<!-- 站点对应的虚拟机文件 -->
   ```
-
-- vagrant init vagrant up
+- vagrant provision
+- vagrant init 
+- vagrant up
 
 - 添加ip
 
@@ -1366,3 +1371,28 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 ## 教程
 
 * [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart
+
+## 工程
+
+项目的搭建，以 [https://github.com/summerblue/larabbs](A forum project base on Laravel 5.5)
+
+```bash
+git clone git@github.com:summerblue/larabbs.git
+// 修改 homestead.html,添加配置
+vagrant provision
+composer install 
+// 配置.env文件
+
+php artisan migrate --seed
+php artisan key:generate
+
+yarn install
+
+首页地址：http://larabbs.app/
+管理后台：http://larabbs.app/admin
+
+username: summer@yousails.com
+password: password
+
+// Non-static method Redis::hGet() cannot be called statically
+```

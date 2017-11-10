@@ -162,6 +162,7 @@ react-native run-android
 - [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
 - [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
 - [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app):Create React apps with no build configuration.
+- [vasanthk/react-bits](https://github.com/vasanthk/react-bits):✨ React patterns, techniques, tips and tricks ✨ https://vasanthk.gitbooks.io/react-bits
 
 ## 文档
 
