@@ -1,11 +1,11 @@
 # MySQL
 
-[mysqljs/mysql](https://github.com/mysqljs/mysql)
+
 
 ## 客户端
 
 - workbeach
-- SQLyog   ttrar  59adfdfe-bcb0-4762-8267-d7fccf16beda
+- SQLyog   `ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
 - phpAdmin
 
 ## 安装
@@ -13,11 +13,17 @@
 ```
 brew install mysql
 brew services start mysql
+
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-mysql.server start
+mysql.server start  // Mac服务管理
+net start/stop mysql // win平台
+
 配置文件：/usr/local/etc/my.cnf
 生成用户root与空密码登陆
+
+mysql -h localhost  -P 3306 -u root -p
+exit;
 ```
 
 ## 问题
@@ -32,60 +38,52 @@ mysql.server start
 - RDBMS 指关系型数据库管理系统，全称 Relational Database Management System。
 - DBMS:关联表公共字段的名字可以不一样，但是数据类型必须一样
 - 索引：存储引擎用于快速查找记录的一种数据结构，通过合理的使用数据库索引可以大大提高系统的访问性能。大大减轻了服务器需要扫描的数据量，从而提高了数据的检索速度；帮助服务器避免排序和临时表；可以将随机 I/O 变为顺序 I/O
-- 数据库操作：
-
-  - CREATE DATABASE - 创建新数据库
-  - ALTER DATABASE - 修改数据库
-
-- 表操作：
-
-  - CREATE TABLE - 创建新表
-  - ALTER TABLE - 变更（改变）数据库表
-  - DROP TABLE - 删除表
-
+- 数据库操作
+- 表操作：SELECT 、UPDATE、DELETE 、INSERT
 - 数据操作
-
-  - SELECT - 从数据库中提取数据
-  - UPDATE - 更新数据库中的数据
-  - DELETE - 从数据库中删除数据
-  - INSERT INTO - 向数据库中插入新数据
-
 - 索引操作
 
-```
+```sql
+CREATE DATABASE test;  // 创建新数据库
+ALTER DATABASE test; // 修改数据库
+
+CREATE TABLE testTable; // 创建新表
+ALTER TABLE testTable; //变更（改变）数据库表
+DROP TABLE testTable; //删除表
+
 ALTER TABLE 'table_name' ADD PRIMARY KEY'index_name' ('column');
-ALTER TABLE 'table_name' ADD UNIQUE/INDEX/FULLTEXT 'index_name' ('column');
+ALTER TABLE 'table_name' ADD UNIQUE 'index_name' ('column');
+ALTER TABLE 'table_name' ADD INDEX'index_name' ('column');
+ALTER TABLE 'table_name' ADD FULLTEXT 'index_name' ('column');
 ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
 ```
 
-# 主从复制
+## 配置
+
+### 主从复制
 
 两台ubnutu
 
-## notice
+#### notice
 
 - 无法远程连接mysql(报错111)：注释掉my.cnf中的bind-address或绑定本地ip
 - 添加server-id and log_bin=
 - 主从服务器检查show variables like 'server%'
-- 主服务器
+- 主服务器与从服务器
 
-  ```
+  ```sql
   GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' IDENTIFIED BY 'slave_password';
-  FLUSH PRIVILEGES
-  SHOW MASTER STATUS
-  ```
+  FLUSH PRIVILEGES;
+  SHOW MASTER STATUS;
 
-- 从服务器
-
-  ```
   CHANGE MASTER TO MASTER_HOST='202.167.45.10',MASTER_USER='slave_user', MASTER_PASSWORD='slave_password', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=  107;
   START slave;
   show slave status\G;
+
+  Slave_IO_Running = NO：stop slave; reset slave;start slave;
   ```
 
-- Slave_IO_Running = NO：stop slave; reset slave;start slave;
-
-# 读写分离
+### 读写分离
 
 通过mysql-proxy调度：与主服务器在一台服务器上，用源代码安装含有lua脚本
 
@@ -93,25 +91,14 @@ ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
 sudo apt-get install mysql-proxy
 ```
 
-## 客户端
-
-- 命令行
-
-  ```
-  net start/stop mysql
-  ```
-
 ## 配置文件my.ini
 
-数据库路径
-
-字符集: 客户端向MySQL服务器端请求和返加的数据的字符集，在选择数据库后使用:set names gbk;
-
-- 数据库存储:一个汉字utf8下为两个长度,gbk下为一个长度
-- 正常一个汉字utf8下为三个字节,gbk下为两个字节
-
-保证客户端使用字符集与服务端返回数据字符集编码一致(以适应客户端为主,修改服务器服务器端配置) 查询系统变量:
-
+* 数据库路径
+* 字符集: 客户端向MySQL服务器端请求和返加的数据的字符集，在选择数据库后使用:set names gbk;
+    + 数据库存储:一个汉字utf8下为两个长度,gbk下为一个长度
+    + 正常一个汉字utf8下为三个字节,gbk下为两个字节
+* 保证客户端使用字符集与服务端返回数据字符集编码一致(以适应客户端为主,修改服务器服务器端配置) 查询系统变量:
+* 校对集: _bin：按二进制编码比较 _ci：不区分大小写比较
 ```
   SHOW VARIABLES LIKE "character_%";
   character_set_client:接受的客户端编码
@@ -120,9 +107,7 @@ sudo apt-get install mysql-proxy
   set names 修改client connection results字符集
 ```
 
-校对集: _bin：按二进制编码比较 _ci：不区分大小写比较
-
-# 存储引擎
+### 存储引擎
 
 - Myisam:表结构 数据 索引文件分离
 
@@ -144,6 +129,12 @@ sudo apt-get install mysql-proxy
   - 未压缩的索引：索引没有使用前缀压缩，阻塞auto_increment:Innodb使用表级锁产生新的auto_increment
   - 没有缓存的count():myisam 会把行数保存在表中 Innodb中的count()会全表或索引扫描
 
+### 索引
+
+索引：帮助mysql高效获取数据的数据结构，索引(mysql中叫"键(key)") 数据越大越重要。索引好比一本书，为了找到书中特定的话题，查看目录，获得页码。获取物理位置
+
+聚簇索引与非聚簇索引
+
 - B-tree 索引:大多数谈及的索引类型就是B-tree类型, 可以在create table 和其他命令使用它 myisam使用前缀压缩以减小索引，Innodb不会压缩索引，myiam索引按照行存储物理位置引用被索引的行，Innodb按照主键值引用行，B-tree数据存储是有序的，按照顺序保存了索引的列，加速了数据访问，存储引擎不会扫描整个表得到需要的数据。
 
   - 使用B-tree索引的查询类型，很好用于全键值、键值范围或键前缀查找，只有在超找使用了索引的最左前缀的时候才有用。只访问索引的查询：B-tree支持只访问索引的查询，不会访问行
@@ -158,95 +149,61 @@ sudo apt-get install mysql-proxy
   - blob列、text列及很长的varchar列，必须定义前缀索引，mysql不允许索引他们的全文。
 
 - 聚集索引不是一种单独的索引类型，而是一种存储数据的方式。Innodb 的聚集索引实际上同样的结构保存了B-tree索引和数据行，"聚集" 是指实际的数据行和相关的键值保存在一起，每个表只能有一个聚集索引，因此不能一次把行保存在两个地方。
-
 - 覆盖索引：索引支持高效查找行，mysql也能使用索引来接收列的数据。这样不用读取行数据，当发起一个被索引覆盖的查询，explain解释器的extra列看到 using index。
 
-- 登录 退出
-
-  ```
-  mysql -h localhost  -P 3306 -u root -p
-  exit;
-  ```
 
 - 数据库(DB):创建 切换 展示 修改 删除数据库
-
-  ```
-  SHOW DATABASES:
-  USE db_name;
-  CREATE DATABASE [IF NOT EXISTS] db_name [CHARSET utf8(gbk)] [COLLATE utf8_unicode_ci];  关键字表名加``
-  ALTER DATABASE db_name DEFAULT  CHARACTER SET utf8
-  DROP DATABASE [IF EXISTS] db_name;
-  显示创建数据库时的语句:SHOW CREATE DATABASE db_name;
-  ALTER DATABASE db_name DEFAULT  CHARACTER SET utf8
-  ```
-
 - 数据表(table)
 
-  - 查看 创建 删除数据表
+```sql
+SHOW DATABASES; // 数据库操作
+USE db_name;
+CREATE DATABASE [IF NOT EXISTS] db_name [CHARSET utf8(gbk)] [COLLATE utf8_unicode_ci];  关键字表名加``
+ALTER DATABASE db_name DEFAULT  CHARACTER SET utf8
+DROP DATABASE [IF EXISTS] db_name;
+显示创建数据库时的语句:SHOW CREATE DATABASE db_name;
+ALTER DATABASE db_name DEFAULT  CHARACTER SET utf8
 
-    ```
-    SHOW TABLES;
-    DROP TABLE [IF EXISTS] db_name;
-    CREATE TABLE table_name(col_name  type  attribute , col_name  type  attribute,…… );
-    create table news(
-      id int NOT null AUTO_INCREMENT primary KEY,
-      title varchar(100) not null comment '名称',
-      author varchar(20) not null,
-      source varchar(30) not null,
-      hits int(5) not null DEFAULT 0,
-      context text null,
-      adddate int(16) not null
-    )charset=utf8 collate=utf8_bin;
-    ```
 
-  - 修改数据表:
+SHOW TABLES; // 查看 创建 删除数据表
+DROP TABLE [IF EXISTS] db_name;
+CREATE TABLE table_name(col_name  type  attribute , col_name  type  attribute,…… );
+create table news(
+  id int NOT null AUTO_INCREMENT primary KEY,
+  title varchar(100) not null comment '名称',
+  author varchar(20) not null,
+  source varchar(30) not null,
+  hits int(5) not null DEFAULT 0,
+  context text null,
+  adddate int(16) not null
+)charset=utf8 collate=utf8_bin;
+DESCRIBE|DESC table_name; // 显示表的结构定义
+SHOW CREATE TABELE table_name\G; //  查看创建表的语句
 
-    ```
-    ALTER TABLE table_name ADD address varchar(30) first| after name;
-    ALTER TABLE table_name DROP address;
-    ALTER TABLE table_name MODIFY address varchar(100);  修改属性
-    ALTER TABLE table_name CHANGE address add varchar(100) after id; 修改字段名字
-    ALTER TABLE table_name engine=myisam;
-    ALTER TABLE table_name rename to new_table_name;
-    ALTER TABLE table_name rename to another_DB.new_table_name; 移动表
-    ```
+ALTER TABLE table_name ADD address varchar(30) first| after name; //  修改数据表
+ALTER TABLE table_name DROP address;
+ALTER TABLE table_name MODIFY address varchar(100);  修改属性
+ALTER TABLE table_name CHANGE address add varchar(100) after id; 修改字段名字
+ALTER TABLE table_name engine=myisam;
+ALTER TABLE table_name rename to new_table_name;
+ALTER TABLE table_name rename to another_DB.new_table_name; 移动表
 
-  - 复制表
+CREATE TABLE table_name SELECT column1,cloumn2 FROM another_table:// 复制数据不复制主键
+CREATE TABLE table_name like another_table； //  数据不复制，主键复制
+ 
+INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…);  // 记录操作：添加 更新与删除数据(新增与修改不用添加TABLE关键字)
+INSERT INTO table_name values (null,值,....);全字段插入，自动增长列用null
+INSERT INTO table_name values (null,值,....),(null,值,....),(null,值,....);插入多条数据
+INSERT INTO table_name set volumn1=value1,volumn3=value3,volumn3=value3;
+UPDATE table_name  SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件];
+SELECT [DISTINCT] 字段列表 |* FROM table_name [WHERE条件][ORDER BY排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
+DELETE FROM table_name [WHERE条件];
 
-    ```
-    CREATE TABLE table_name SELECT column1,cloumn2 FROM another_table:复制数据不复制主键
-    CREATE TABLE table_name like another_table: 数据不复制，主键复制
-    ```
+DELETE FROM table_name; // 清空数据表：数据一条条删除
+TRUNCATE TABLE table_name; // 删除表,重建同结构
+```
 
-  - 记录
-
-    - 添加 更新与删除数据(新增与修改不用添加TABLE关键字)：
-
-      ```
-      INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…);
-      INSERT INTO table_name values (null,值,....);全字段插入，自动增长列用null
-      INSERT INTO table_name values (null,值,....),(null,值,....),(null,值,....);插入多条数据
-      INSERT INTO table_name set volumn1=value1,volumn3=value3,volumn3=value3;
-      UPDATE table_name  SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件];
-      SELECT [DISTINCT] 字段列表 |* FROM table_name [WHERE条件][ORDER BY排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
-      DELETE FROM table_name [WHERE条件];
-      ```
-
-  - 清空数据表:
-
-    ```
-    DELETE FROM table_name;数据一条条删除
-    TRUNCATE TABLE table_name; 删除表,重建同结构
-    ```
-
-  - 展示数据表结构：
-
-    ```
-    显示表的结构定义:DESCRIBE|DESC table_name;
-    查看创建表的语句:SHOW CREATE TABELE table_name\G;
-    ```
-
-- 数据类型
+### 数据类型
 
   - 整型：
 
@@ -255,9 +212,7 @@ sudo apt-get install mysql-proxy
     - mediumint -2^23~2^23-1 3个字节
     - int 0-2^32-1 4个字节
     - bigint 0-2^64-1 8个字节
-
     - unsigned:无符号数
-
     - 显示宽度int(11):最小显示位数(默认不起作用),zerofill会用0填充,不决定数据大小
 
   - 浮点型(M代表总长度(不含小数点)，D代表小数位数),精度会丢失,不要作比较：
@@ -288,7 +243,7 @@ sudo apt-get install mysql-proxy
 
   - ip:通常使用varchar(15)保存IP地址.inet_aton() inet_ntoa()用于转换
 
-- 字段属性
+### 字段属性
 
   - NOT NULL | NULL，该列在添加数据时，是否可以为空。
   - DEFAULT value，给该列定一个默认值。value的值只能是整型、字符型。
@@ -318,10 +273,6 @@ sudo apt-get install mysql-proxy
     ```
 
 - 联表：联表查询降低查询速度
-
-## 索引：帮助mysql高效获取数据的数据结构，索引(mysql中叫"键(key)") 数据越大越重要。索引好比一本书，为了找到书中特定的话题，查看目录，获得页码。获取物理位置
-
-聚簇索引与非聚簇索引
 
 # 高性能表设计规范
 
@@ -470,7 +421,7 @@ $sql .= "(select min(主键ID) from 表名 group by 字段1,字段2 having count
 
 - 业务篇
 
-```
+```sql
 //创建测试表
 CREATE TABLE `test_number` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -730,7 +681,7 @@ $stmt->close();
 
 前缀索引：索引很长的字符列，这会增加索引的存储空间以及降低索引的效率。选择字符列的前n个字符作为索引，这样可以大大节约索引空间，从而提高索引效率。要选择足够长的前缀以保证高的选择性，同时又不能太长。无法使用前缀索引做ORDER BY 和 GROUP BY以及使用前缀索引做覆盖扫描。
 
-```
+```sql
 CREATE TABLE user_test( 
   id int AUTO_INCREMENT PRIMARY KEY, 
   user_name varchar(30) NOT NULL,
@@ -739,7 +690,7 @@ CREATE TABLE user_test(
   age int NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE user_test ADD INDEX idx_user(user_name , city , age);
-通过以下方法
+
 SELECT COUNT(DISTINCT index_column)/COUNT(*) FROM table_name; -- index_column代表要添加前缀索引的列，前缀索引的选择性比值，比值越高说明索引的效率也就越高效。
 SELECT COUNT(DISTINCT LEFT(index_column,1))/COUNT(*),COUNT(DISTINCT LEFT(index_column,2))/COUNT(*),COUNT(DISTINCT LEFT(index_column,3))/COUNT(*)
 ...FROM table_name;
@@ -762,7 +713,7 @@ ALTER TABLE table_name ADD INDEX index_name (index_column(length));
 
 #### 无效索引
 
-```
+```sql
 SELECT * FROM user_test WHERE city = '广州';
 SELECT * FROM user_test WHERE age= 26;
 SELECT * FROM user_test WHERE user_name like '%feinik';
@@ -864,16 +815,15 @@ CMD ["mysqld"]
 ## 性能
 
 `explain select … from … [where ...]`
-* 
-
 
 ## 扩展
+* [mysqljs/mysql](https://github.com/mysqljs/mysql):A pure node.js JavaScript Client implementing the MySql protocol.
+* [o1lab/xmysql](https://github.com/o1lab/xmysql):One command to generate REST APIs for any MySql Database.
 
-### [o1lab/xmysql](https://github.com/o1lab/xmysql)
+### xmysql
 
-One command to generate REST APIs for any MySql Database.
 ```shell
-npm install -g xmysql
+npm install -g xmysql 
 xmysql -h localhost -u mysqlUsername -p mysqlPassword -d databaseName
 http://localhost:3000
 ```
@@ -895,6 +845,6 @@ http://localhost:3000
 * Sorting: `/api/payments?_sort=column1` `/api/payments?_sort=-column1` `/api/payments?_sort=column1,-column2`
 * Fields `/api/payments?_fields=customerNumber,checkNumber` `/api/payments?_fields=-checkNumber`
 
-### 参考
+## 参考
 
 - [HOW TO INSTALL MYSQL NDB CLUSTER ON LINUX](https://clusterengine.me/how-to-install-mysql-ndb-cluster-on-linux/)
