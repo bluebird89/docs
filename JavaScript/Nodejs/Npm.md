@@ -16,7 +16,7 @@ Node的包描述文件是一个JSON文件，用于描述非代码相关的信息
 npm -v
 npm init // 创建一个npm项目,配置项目信息，在package.json文件
 npm install react react-dom --save // 安装依赖
-npm i -g npm
+npm i -g npm // npm更新
 ```
 
 ## 代码

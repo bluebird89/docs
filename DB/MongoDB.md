@@ -1,4 +1,8 @@
-# 安装与使用
+# Mongodb
+
+mongodb由C＋＋写就，其名字来自humongous这个单词的中间部分，从名字可见其野心所在就是海量数据的处理。关于它的一个最简洁描述为：scalable, high-performance, open source, schema-free, document-oriented database。MongoDB的主要目标是在键/值存储方式（提供了高性能和高度伸缩性）以及传统的RDBMS系统（丰富的功能）架起一座桥梁，集两者的优势于一身。
+
+## 安装与使用
 
 - 下载安装（或通过包工具）
 - 添加系统变量：C:\Program Files\MongoDB\Server\3.4\bin（echo 'export PATH=/usr/local/mongodb/bin:$PATH'>>~/.bash_profile）
@@ -6,6 +10,7 @@
 - 通过命令行工具启动服务: mongod（本地访问<http://localhost:27017/）MongoDB系统的主要守护进程，用于处理数据请求，数据访问和执行后台管理操作，必须启动，才能访问MongoDB数据库>
 
   ```
+  brew services mongodb // mac启动服务
   --dbpath ：存储MongoDB数据文件的目录` mongod --dbpath=C:datadb`
   --directoryperdb：指定每个数据库单独存储在一个目录中（directory），该目录位于–dbpath指定的目录下，每一个子目录都对应一个数据库名字。
   --logpath ：指定mongod记录日志的文件
@@ -13,28 +18,20 @@
   --journal：开始日志功能，通过保存操作日志来降低单机故障的恢复时间
   --config（或-f）：配置文件，用于指定runtime options
   --bind_ip ：指定对外服务的绑定IP地址
-  --port ：对外服务窗口
+  --port ：指定mongo连接到mongod监听的TCP端口，默认的端口值是27017；
   --auth：启用验证，验证用户权限控制
   --syncdelay：系统刷新disk的时间，单位是second，默认是60s
   --replSet ：以副本集方式启动mongod，副本集的标识是setname
   mongod的命令参数写入配置文档，以参数-f 启动     `mongod -f C:datadbmongodb_config.config`
   -查看mongod的启动参数： db.serverCmdLineOpts()
+  --nodb: 阻止mongo在启动时连接到数据库实例；
+   --host ：指定mongod运行的server，如果没有指定该参数，那么mongo尝试连接运行在本地（localhost）的mongod实例；
+   --db：指定mongo连接的数据库
+   --username/-u 和 –password/-p ：指定访问MongoDB数据库的账户和密码，只有当认证通过后，用户才能访问数据库；
+   --authenticationDatabase ：指定创建User的数据库，在哪个数据库中创建User时，该数据库就是User的Authentication Database；
   ```
 
-- 命令行工具运行客户端：mongo
-
-  mongod 启动服务
-
-  ```
-   -  --nodb: 阻止mongo在启动时连接到数据库实例；
-   - --port ：指定mongo连接到mongod监听的TCP端口，默认的端口值是27017；
-   - --host ：指定mongod运行的server，如果没有指定该参数，那么mongo尝试连接运行在本地（localhost）的mongod实例；
-   - --db：指定mongo连接的数据库
-   - --username/-u 和 –password/-p ：指定访问MongoDB数据库的账户和密码，只有当认证通过后，用户才能访问数据库；
-   - --authenticationDatabase ：指定创建User的数据库，在哪个数据库中创建User时，该数据库就是User的Authentication Database；
-  ```
-
-- 数据结构：db->collection->table
+- 数据结构：db->collection->document（BSON（binary json）存放于硬盘）
 
 - 指令
 
