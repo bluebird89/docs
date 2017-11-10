@@ -1,7 +1,7 @@
 # Bootstrap
 
 [twbs/bootstrap](https://github.com/twbs/bootstrap):The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web. http://getbootstrap.com
-[文档](http://v3.bootcss.com/)
+[文档](http://getbootstrap.com/)
 
 # 引入
 
@@ -30,4 +30,15 @@ npm install bootstrap@3
 ## 参考
 
 * [Bootstrap 4: Everything You Need to Know](https://medium.freecodecamp.org/bootstrap-4-everything-you-need-to-know-c750991f6784)
+* [Understanding Flexbox: Everything you need to know](https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af)
+* [How to Efficiently Master the CSS Grid in a Jiffy](https://medium.com/flexbox-and-grids/how-to-efficiently-master-the-css-grid-in-a-jiffy-585d0c213577)
 * [http://learnbootstrap.today/](http://learnbootstrap.today/):图书
+
+
+## CSS
+
+the browser’s default styles, styles from frameworks such as Bootstrap and your own written CSS
+
+A CDN is short for Content Delivery Network.:Anazon decides which warehouse is closest to your house in Antartica, and delivers your pair of shorts from that warehouse. Also, the next time you place an order, Anazon will check the same warehouse and deliver your goods in under 24hours.
+
+Bootstrap 4 embraces the idea of native font stacks. 
