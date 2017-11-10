@@ -1,12 +1,16 @@
 ## Webpack
 
-模块加载器兼打包工具。所有小文件打包成一个或多个大文件.一种前端模块化打包解决方案，但是更重要的是它又是一个可以融合运用各种前端新技术的平台，明白webpack的使用哲学后，只需要简单的配置,我们就可以随心所欲的在webpack项目中使用jsx/ts,使用babel/postcss等平台提供的众多其它功能，只需通过一条命令由源码构建最终可用文件.
+module bundler(模块加载器兼打包工具)。所有小文件打包成一个或多个大文件.一种前端模块化打包解决方案，但是更重要的是它又是一个可以融合运用各种前端新技术的平台，明白webpack的使用哲学后，只需要简单的配置,我们就可以随心所欲的在webpack项目中使用jsx/ts,使用babel/postcss等平台提供的众多其它功能，只需通过一条命令由源码构建最终可用文件.
 
 * 直接使用 require(XXX) 的形式来引入各模块，即使它们可能需要经过编译，有着各种健全的加载器（loader）处理
-* 以 commonJS 的形式来书写脚本滴，但对 AMD/CMD 的支持也很全面，方便旧项目进行代码迁移。
-* 能被模块化的不仅仅是 JS 了。
+* 对 CommonJS 、 AMD 、ES6的语法做了兼容.以 commonJS 的形式来书写脚本滴，但对 AMD/CMD 的支持也很全面，方便旧项目进行代码迁移。
+* web开发中常用到的静态资源主要有JavaScript、CSS、图片、Jade等文件，webpack中将静态资源文件称之为模块。能被模块化的不仅仅是 JS 了。
 * 开发便捷，能替代部分 grunt/gulp 的工作，比如打包、压缩混淆、图片转base64等。
-* 扩展性强，插件机制完善，特别是支持 React 热插拔（见 react-hot-loader ）的功能让人眼前一亮。
+* 扩展性强，插件机制完善，特别是支持 React 热插拔（见 react-hot-loader ）,串联式模块加载器以及插件机制，让其具有更好的灵活性和扩展性，例如提供对CoffeeScript、ES6的支持
+* 独立的配置文件webpack.config.js
+* 将代码切割成不同的chunk，实现按需加载，降低了初始化时间
+* 支持 SourceUrls 和 SourceMaps，易于调试
+* 使用异步 IO 并具有多级缓存。这使得 webpack 很快且在增量编译上更加快
 
 ### 概念
 
@@ -40,14 +44,16 @@ npm install -g webpack //全局安装
 npm install --save-dev webpack // 本地安装Webpack
 
 webpack hello.js hello.bundle.js  //基本使用
+webpack hello.js hello.bundle.js --module-bind 'css=style-loader!css-loader' --watch  // 单次绑定模块，实时更新
 
 --progress  // 显示打包过程的进度
 --display-modules  // 显示打包的模块
 --display-reasons // 显示打包这些模块的原因
---watch // 监听变动并自动打包
+--watch / -w  // 监听变动并自动打包
 --display-error-details // 能查阅更详尽的信息
 --config XXX.js // //使用另一份配置文件（比如webpack.config2.js）来打包
--p    //压缩混淆脚本，这个非常非常重要！
+-p    // 对打包后的文件进行压缩，提供production
+-d // 提供source map，方便调试。
 ```
 
 ### 配置文件
@@ -58,80 +64,84 @@ webpack hello.js hello.bundle.js  //基本使用
 - devtool: 'eval-source-map',
 - devserver：webpack-dev-server配置
 
-  ```js
-  var webpack = require('webpack');
-  var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
+```
+var webpack = require('webpack');
+var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
 
-  module.exports = {
-      //插件项 使用了一个 CommonsChunkPlugin 的插件,来提取多个页面之间的公共模块，并将该模块打包为 common.js 。
-      plugins: [commonsPlugin],
-      //页面入口文件配置 支持数组形式，将加载数组中的所有模块，但以最后一个模块作为输出
-      entry: {
-          index : './src/js/page/index.js'
-          // page2: ["./entry1", "./entry2"] 
-          // p1: "./page1",
-        // p2: "./page2",
-        // p3: "./page3",
-        // ap1: "./admin/page1",
-        // ap2: "./admin/page2"
-      },
-      //入口文件输出配置 
-      output: {
-          path: 'dist/js/page',
-          filename: '[name].js'
-      },
-      module: {
-          //加载器配置 每一种文件都需要使用什么加载器来处理 "-loader"其实是可以省略不写的，多个loader之间用“!”连接起来。
-          loaders: [
-              { test: /\.css$/, loader: 'style-loader!css-loader' },
-              { test: /\.js$/, loader: 'jsx-loader?harmony' },
-              { test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
-              { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'} //将样式中引用到的图片转为模块来处理,“?limit=8192”表示将所有小于8kb的图片都转为base64形式（其实应该说超过8kb的才使用 url-loader 来映射到文件，否则转为data url形式）。
-          ]
-      },
-      plugins: [
-          new CommonsChunkPlugin("admin-commons.js", ["ap1", "ap2"]),
-          new CommonsChunkPlugin("commons.js", ["p1", "p2", "admin-commons.js"])
+module.exports = {
+  //插件项 使用了一个 CommonsChunkPlugin 的插件,来提取多个页面之间的公共模块，并将该模块打包为 common.js 。
+  plugins: [commonsPlugin],
+  //页面入口文件配置 支持数组形式，将加载数组中的所有模块，但以最后一个模块作为输出
+  entry: {
+      index : './src/js/page/index.js'
+      // page2: ["./entry1", "./entry2"] 
+      // p1: "./page1",
+    // p2: "./page2",
+    // p3: "./page3",
+    // ap1: "./admin/page1",
+    // ap2: "./admin/page2"
+    //  page3: {
+      //  subp1: "./sp1",
+     //   subp2: "./sp2"
+    //}
+  },
+  //入口文件输出配置 
+  output: {
+      path: 'dist/js/page',
+      filename: '[name].js'
+  },
+  module: {
+      //加载器配置 表示匹配的资源类型 每一种文件都需要使用什么加载器来处理 "-loader"其实是可以省略不写的，多个loader之间用“!”连接起来。
+      loaders: [
+          { test: /\.css$/, loader: 'style-loader!css-loader' },
+          { test: /\.js$/, loader: 'jsx-loader?harmony' },
+          { test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
+          { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'} //将样式中引用到的图片转为模块来处理,“?limit=8192”表示将所有小于8kb的图片都转为base64形式（其实应该说超过8kb的才使用 url-loader 来映射到文件，否则转为data url形式）。
       ]
-      //其它解决方案配置
-      resolve: {
-          //查找module的话从这里开始查找
-        root: 'E:/github/flux-example/src', //绝对路径
-        //自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名
-        extensions: ['', '.js', '.json', '.scss'],
-        //模块别名定义，方便后续直接引用别名，无须多写长长的地址
-        alias: {
-            AppStore : 'js/stores/AppStores.js',//后续直接 require('AppStore') 即可
-            ActionType : 'js/actions/ActionType.js',
-            AppAction : 'js/actions/AppAction.js'
-        }
-        devServer: {
-            contentBase: "./public",//本地服务器所加载的页面所在的目录
-            historyApiFallback: true,//不跳转
-            inline: true//实时刷新
-        }
+  },
+  plugins: [
+      new CommonsChunkPlugin("admin-commons.js", ["ap1", "ap2"]),
+      new CommonsChunkPlugin("commons.js", ["p1", "p2", "admin-commons.js"])
+  ]
+  //其它解决方案配置
+  resolve: {
+      //查找module的话从这里开始查找
+    root: 'E:/github/flux-example/src', //绝对路径
+    //自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名,自行补全文件后缀
+    extensions: ['', '.js', '.json', '.scss'], 
+    //模块别名定义，方便后续直接引用别名，无须多写长长的地址
+    alias: {
+        AppStore : 'js/stores/AppStores.js',//后续直接 require('AppStore') 即可
+        ActionType : 'js/actions/ActionType.js',
+        AppAction : 'js/actions/AppAction.js'
+    }
+    devServer: {
+        contentBase: "./public",//本地服务器所加载的页面所在的目录
+        historyApiFallback: true,//不跳转
+        inline: true//实时刷新
+    }
 
-  };
+};
 
-  gulp.task("webpack", function(callback) { // 配合grunt/pulp使用
-      // run webpack
-      webpack({
-          // configuration
-      }, function(err, stats) {
-          if(err) throw new gutil.PluginError("webpack", err);
-          gutil.log("[webpack]", stats.toString({
-              // output options
-          }));
-          callback();
-      });
+gulp.task("webpack", function(callback) { // 配合grunt/pulp使用
+  // run webpack
+  webpack({
+      // configuration
+  }, function(err, stats) {
+      if(err) throw new gutil.PluginError("webpack", err);
+      gutil.log("[webpack]", stats.toString({
+          // output options
+      }));
+      callback();
   });
-  ```
+});
+```
 
 - loaders：
 
 ### 组件
 
-- webpack-dev-server：浏览器监听你的代码的修改，并自动刷新显示修改后的结果.
+- webpack-dev-server：浏览器监听你的代码的修改，并自动刷新显示修改后的结果.基于Node.js Express框架的开发服务器，它是一个静态资源Web服务器，对于简单静态页面或者仅依赖于独立服务的前端页面，都可以直接使用这个开发服务器进行开发。在开发过程中，开发服务器会监听每一个文件的变化，进行实时打包，并且可以推送通知前端页面代码发生了变化，从而可以实现页面的自动刷新。
 - babel：编译JavaScript的平台
 
   - 下一代的JavaScript代码（ES6，ES7...），即使这些标准目前并未被当前的浏览器完全的支持；
@@ -140,10 +150,8 @@ webpack hello.js hello.bundle.js  //基本使用
 - css-loader：能够使用类似@import 和 url(...)的方法实现 require()的功能。`require('css-loader!./style.css');`:可以解析执行css文件
 - style-loader：所有的计算后的样式加入页面中，二者组合在一起使你能够把样式表嵌入webpack打包后的JS文件中`require('style-loader!css-loader!./style.css');`:为了生成一个style标签，并且将解析后的css文件插入到style中去
 - CSS modules：通过CSS模块，所有的类名，动画名默认都只作用于当前模块。在CSS loader中进行配置后，你所需要做的一切就是把"modules"传递到所需要的地方，然后就可以直接把CSS的类名传递到组件的代码中，且这样做只对当前组件有效，不必担心在不同的模块中使用相同的类名造成冲突。
+- UglifyJsPlugin，可以优化（支持压缩、混淆）代码
 
-```shell
-webpack hello.js hello.bundle.js --module-bind 'css=style-loader!css-loader' --watch  // 单次绑定模块，实时更新
-```
 ### 插件
 
 插件（Plugins）是用来拓展Webpack功能的，它们会在整个构建过程中生效，执行相关的任务。
@@ -201,6 +209,7 @@ npm run dev // 构建npm脚本
 ## 仓库
 
 * [webpack/webpack](https://github.com/webpack/webpack):A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows to load parts for the application on demand. Through "loaders," modules can be CommonJs, AMD, ES6 modules, CSS, Images, JSON, Coffeescript, LESS, ... and your custom stuff. https://webpack.js.org
+
 ## 工具
 
 * [webpack-dashboard](https://github.com/FormidableLabs/webpack-dashboard):A CLI dashboard for webpack dev server
@@ -233,8 +242,20 @@ plugin 位置正确
 
 ### 跨域
 
-在config中index.js,dev-->proxyTable
+* 在config->index.js->dev-->proxyTable
+* webpack-dev-server开启proxy
 
+```js
+proxyTable: {
+  '/list': {
+    target: 'http://api.xxxxxxxx.com',
+    changeOrigin: true,
+    pathRewrite: {
+      '^/list': '/list'
+    }
+  }
+}
+```
 ## 部署
 
 
@@ -250,4 +271,5 @@ plugin 位置正确
 * [入门Webpack](http://www.jianshu.com/p/42e11515c10f)
 * [Webpack for React](http://www.pro-react.com/materials/appendixA/)
 * [代码](https://github.com/bluebird89/webpack_for_react)
+* [vue-cli](https://vuejs-templates.github.io/webpack/)
 

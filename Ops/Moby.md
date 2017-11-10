@@ -264,3 +264,6 @@ eval "$(docker-machine env default)" # Set environment variables
 - [Docker mac 入门](https://docs.docker.com/mac/)
 - [Product and tool manuals](https://docs.docker.com/manuals/) https://docs.docker.com/engine/installation/
 - [moby/moby](https://github.com/moby/moby)Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
+
+## 资源
+- [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects 
