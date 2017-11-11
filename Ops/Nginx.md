@@ -1,26 +1,145 @@
 # Nginx
 
-NGINX Application Platform.
+解决基于进程模型产生的C10k问题，请求时即使无状态连接如web服务都无法达到并发响应量级一万现状。2006年俄罗斯编写。全称为engine X，缩减合并称为nginx。
 
-- NGINX Plus，流行的开源 NGINX Web 服务器的商业版本。
-- NGINX Web 应用防火墙（WAF）。
-- NGINX Unit，可运行 PHP、Python 和 Go 的新型开源应用服务器。
+## 特性
+
+* 模块化设计、较好扩展性；早期不支持模块的动态装卸载
+* 高可靠性：基于master/worker模式
+    - master：负责启动服务，分析配置文件，父子启动子进程和worker进程
+    - worker：真正响应用户请求进程
+* 支持热部署(平滑迁移)：不停机更新配置文件、更换日志、更新服务器程序版本；
+* 内存消耗低：10000个keep-alive连接模式下的非活动连接仅消耗2.5M内存；
+* 支持event-driven事件驱动模型, aio一步驱动机制, mmap内存映射；
+
+## 功能
+
+* 静态资源的web服务器；
+* http协议的反向代理服务器；
+* pop3, smpt,imap4等邮件协议的反向代理；
+* 能缓存打开的文件（元数据：文件的描述符等等信息）
+* 支持FastCGI（php-fpm）, uWSGI（Python WebFramwork）等协议机制，实现代理后端应用程序交互
+* 高度模块化（非DSO机制）
+    - core module：核心公用模块
+    - Standard HTTP  modules：标准(核心)HTTP模块；自动编译进程序不止一个
+    - Optional HTTP  modules：可选HTTP模块
+    - Mail modules：邮件模块
+    - 3rd party modules：第三方模块，在编译时需手动指明加载方式加载
+* 支持过滤器，例如zip，SSI
+ * 支持SSL加密机制；
+ * web服务相关的功能：虚拟主机（server）、keepalive、访问日志（支持基于日志缓冲提高其性能）、urlrewirte、路径别名、基于IP及用户的访问控制、支持速率限制及并发数限制
+
+## 架构
+
+![](../../_static/nginx_archetect.png "Optional title")
+* master/worker模型：一个master进程可生成一个或多个worker进程；每个worker基于时间驱动机制可以并行响应多个请求
+    - master:加载配置文件、管理worker进程、平滑升级，...
+    - worker：http服务，http代理，fastcgi代理，...
+* 事件驱动：epoll(Linux),kqueue（FreeBSD）, /dev/poll(Solaris)
+* 消息通知：select,poll, rt signals
+    - 支持sendfile,  sendfile64
+    - 支持AIO，mmap
+
+
+## 模块
+- NGINX Plus 由 Web 服务器、内容缓存和负载均衡器组成。流行的开源 NGINX Web 服务器的商业版本。NGINX Web 应用程序防火墙（WAF）是一款基于开源 ModSecurity 研发的商业软件，为针对七层的攻击提供保护，例如 SQL 注入或跨站脚本攻击，并根据如 IP 地址或者报头之类的规则阻止或放行， NGNX WAF 作为 NGINX Plus 的动态模块运行，部署在网络的边缘，以保护内部的 Web 服务和应用程序免受 DDoS 攻击和骇客入侵。
+- NGINX Unit 是 Igor Sysoev 设计的新型开源应用服务器，由核心 NGINX 软件开发团队实施。可运行 PHP、Python 和 Go 的新型开源应用服务器。Unit 是"完全动态的"，并允许以蓝绿部署的方式无缝重启新版本的应用程序，而无需重启任何进程。所有的 Unit 配置都通过使用 JSON 配置语法的内置 REST API 进行处理，并没有配置文件。目前 Unit 可运行由最近版本的 PHP、Python 和 Go 编写的代码。在同一台服务器上可以支持多语言的不同版本混合运行。即将推出更多语言的支持，包括 Java 和 Node.JS。
+- NGINX Controller 是 NGINX Plus 的中央集中式监控和管理平台。Controller 充当控制面板，并允许用户通过使用图形用户界面"在单一位置管理数百个 NGINX Plus 服务器"。该界面可以创建 NGINX Plus 服务器的新实例，并实现负载平衡、 URL 路由和 SSL 终端的中央集中配置。Controller 还具备监控功能，可观察应用程序的健壮性和性能。
+- NGINX Plus（Kubernetes）Ingress Controller 解决方案基于开源的 NGINX kubernetes-ingress 项目，经过测试、认证和支持，为 Red Hat OpenShift 容器平台提供负载平衡。该解决方案增加了对 NGINX Plus 中高级功能的支持，包括高级负载平衡算法、第7层路由、端到端认证、request/rate 限制以及内容缓存和 Web 服务器。
+- NGINX 还发布了 nginmesh，这是 NGINX 的开源预览版本，作为 Istio Service Mesh 平台中第7层负载平衡和代理的服务代理。它旨在作为挎斗容器（sidecar container）时，能提供与 Istio 集成的关键功能，并以"标准、可靠和安全的方式"促进服务之间的通信能力。此外，NGINX 将通过加入 Istio 网络特别兴趣小组，与 Istio 社区合作。
+- NGINX Web 应用防火墙（WAF）
 - NGINX Controller NGINX Plus 的中央控制面板 ![](../_static/nignx.png)
 
-# 配置
+## 安装
 
-## main（全局设置）
+先调试nginx，再看php是否生效
+
+### Mac
+
+- 程序文件 /usr/local/etc/nginx/   /usr/local/Cellar/nginx // todops 
+- The default:/usr/local/etc/nginx/nginx.conf  // 配置文件
+- 日志与服务器文件 /usr/local/var/log/nginx/
+- Severs config:/usr/local/etc/nginx/servers/
+- Docroot is: /usr/local/Cellar/nginx/1.12.2_1/html // 软件更新后版本号会发生变化，默认也会失效
+
+```shell
+brew info nginx
+
+sudo chown root:wheel /usr/local/Cellar/nginx/1.10.0/sbin/nginx
+sudo chmod u+s /usr/local/Cellar/nginx/1.10.0/sbin/nginx
+
+brew services start nginx
+brew edit nginx
+
+sudo nginx // 启动命令
+sudo ngixn -c /usr/local/etc/nginx/nginx.conf
+sudo nginx -s reload|reload|reopen|stop|quit // 重新配置后都需要进行重启操作
+sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
+```
+## 配置
+
+全局变量
+
+```
+$args：请求中的参数
+$content_length：请求 HEAD 中的 Content-length
+$content_type：请求 HEAD 中的 Content_type
+$document_root：当前请求中 root 的值
+$host：主机头
+$http_user_agent：客户端 agent
+$http_cookie：客户端 cookie
+$limit_rate：限制连接速率
+$request_method：客户端请求方式，GET/POST
+$remote_addr：客户端 IP
+$remote_port：客户端端口
+$remote_user：验证的用户名
+$request_filename：请求的文件绝对路径
+$scheme：http/http
+$server_protocol：协议，HTTP/1.0 OR HTTP/1.1
+$server_addr：服务器地址
+$server_name：服务器名称
+$server_port：服务器端口
+$request_uri：包含请求参数的 URI
+$uri：不带请求参数的 URI
+$document_uri：同 $uri
+
+-f/!-f：判断文件是否存在
+-d/!-d：判断目录是否存在
+-e/!-e：判断文件或目录是否存在
+-x/!-x：判断文件是否可以执行
+```
+
+### main（全局设置）
 
 PHP7默认的用户和组是www-data
 
-这部分的指令将会影响其他部分的设置
+```
+# nginx.conf
+# 运行用户，linux系统尤其重要，如出现403 forbidden错误，很有可能是这个没有设置正确
+#user  nobody;
 
-- worker_processes 2 在配置文件的顶级main部分，worker角色的工作进程的个数，master进程是接收并分配给worker处理。一般情况下这个值可以设置为CPU的核数，如果开启了ssl和gzip一般设置为CPU数量的2倍，可以减少I/O操作。如果Nginx服务器还有其它服务，可以考虑适当减少。
-- worker_connections 2048 这个写在events部分，每一个worker进程能并发处理（发起）的最大连接数。Nginx作为反向代理服务器，计算公式最大连接数 = worker_processes * worker_connections / 4，所以这里客户端最大连接数是1024，这个可以增到8192，但不能超过worker_rlimit_nofile。当Nginx作为http服务器时，计算公式里面是除以2.
-- worker rlimit nofile 10240 写在main部分，默认没有设置，可以限制为操作系统最大的限制65535。
-- use epoll 写在events部分，在Linux操作系统下，Nginx默认使用epoll事件模型，得益于此，Nginx在Linux操作系统下效率相当高。同时Nginx在OpenBSD或FreeBSD操作系统上采用类似于epoll的高效事件模型kqueue。
+# 启动进程数量，通常和cpu的数量相同.在配置文件的顶级main部分，worker角色的工作进程的个数，master进程是接收并分配给worker处理。一般情况下这个值可以设置为CPU的核数，如果开启了ssl和gzip一般设置为CPU数量的2倍，可以减少I/O操作。如果Nginx服务器还有其它服务，可以考虑适当减少。
+worker_processes  1;
+#  写在main部分，默认没有设置，可以限制为操作系统最大的限制65535。
+worker rlimit nofile 10240
 
-## http（服务器设置）
+# 合局错误日志及pid，当nginx调试时，打开日志功能，会很有用
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+# 工作模式及链接数上限
+events {
+    # 在Linux操作系统下，Nginx默认使用epoll事件模型，得益于此，Nginx在Linux操作系统下效率相当高。同时Nginx在OpenBSD或FreeBSD操作系统上采用类似于epoll的高效事件模型kqueue。
+    use epoll;
+    #单个后台worker process进程的最大并发链接数 每一个worker进程能并发处理（发起）的最大连接数。Nginx作为反向代理服务器，计算公式最大连接数 = worker_processes * worker_connections / 4，所以这里客户端最大连接数是1024，这个可以增到8192，但不能超过worker_rlimit_nofile。当Nginx作为http服务器时，计算公式里面是除以2.
+    worker_connections  1024;
+}
+```
+
+### http（服务器设置）
 
 提供http服务相关的一些配置参数，如：是否使用keepalive，是否使用gzip进行压缩
 
@@ -30,35 +149,17 @@ PHP7默认的用户和组是www-data
 - client max body_ size 10m 允许客户端请求的最大单文件字节数，一般在上传较大文件时设置限制值
 - client body buffer_ size 128k 缓冲区代理缓冲用户用户端请求的最大字节数
 
-### server（主机设置）
-
-http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
-
-- listen 监听端口，Mac下默认为8080，小于1024的要以root启动。可以为listen:*:8080、listen:127.0.0.1:8080等形式
-- server_name 服务器名，如localhost、www.jd.com，可以通过正则匹配
-- location（URL匹配特定位置配置） http服务中，某些特定的URL对应的一系列配置项
-- root html 定义服务器的默认网站根目录。如果locationURL匹配的是子目录或文件，root没什么作用，一般放在server指令里面或/下。
-- index index.php index.shtml index.html index.htm 定义路径下默认访问的文件名，一般跟着root放
-
-下面提供一份相对简单的配置文件示例：
-
 ```
-user www www;
-worker_processes 2;
-error_log logs/error.log;
-pid logs/nginx.pid;
-events {
-  use epoll;
-  worker_connections 2048;
-}
-# http服务器设置
+# 设定http服务器，利用它的反向代理功能实现负载均衡支持
 http {
+
     upstream phpbackend { 
-        server unix:/var/run/php5-fpm.sock1 weight=100 max_fails=5 fail_timeout=5; 
-        server unix:/var/run/php5-fpm.sock2 weight=100 max_fails=5 fail_timeout=5; 
-        server unix:/var/run/php5-fpm.sock3 weight=100 max_fails=5 fail_timeout=5; 
-        server unix:/var/run/php5-fpm.sock4 weight=100 max_fails=5 fail_timeout=5; 
+      server unix:/var/run/php5-fpm.sock1 weight=100 max_fails=5 fail_timeout=5; 
+      server unix:/var/run/php5-fpm.sock2 weight=100 max_fails=5 fail_timeout=5; 
+      server unix:/var/run/php5-fpm.sock3 weight=100 max_fails=5 fail_timeout=5; 
+      server unix:/var/run/php5-fpm.sock4 weight=100 max_fails=5 fail_timeout=5; 
     }
+    
     # Stop Displaying Server Version in Configuration
     server_tokens off;
 
@@ -66,23 +167,23 @@ http {
     set_real_ip_from 127.0.0.1;
     real_ip_header X-Forwarded-For;
 
-
-  # 文件扩展名与文件类型映射表
-  include mime.types;
-  # 设定默认文件类型
-  default_type application/octet-stream;
-    
+    # 文件扩展名与文件类型映射表 设定mime类型,类型由mime.type文件定义
+    include mime.types;
+    # 设定默认文件类型
+    default_type application/octet-stream;
+      
     # 为Nginx服务器设置详细的日志格式
-    log_format  main    '$remote_addr - $remote_user [$time_local] "$request" '
-                        '$status $body_bytes_sent "$http_referer" '
-                        '"$http_user_agent" "$http_x_forwarded_for"';  
+    log_format  main   $remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';  
 
     access_log      /usr/local/var/log/nginx/access.log main;
-      # 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改成off。
-      sendfile on;
+    # 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改成off。
+    sendfile on;
 
-  keepalive_timeout 65;
-     include /usr/local/etc/nginx/conf.d/*.conf;
+    keepalive_timeout 65;
+    include /usr/local/etc/nginx/conf.d/*.conf;
+
     # Gzip Settings
     gzip on;
     gzip_static on;
@@ -104,21 +205,128 @@ http {
     open_file_cache_min_uses 2; 
     open_file_cache_errors on;
 
-
     # Client Timeouts
     client_max_body_size 500M; 
     client_body_buffer_size 1m; 
     client_body_timeout 15; 
     client_header_timeout 15; 
+    # 连接超时时间
     keepalive_timeout 2 2; 
     send_timeout 15; 
+    # sendfile 指令指定 nginx 是否调用 sendfile 函数（zero copy 方式）来输出文件，对于普通应用，必须设为 on,如果用来进行下载等应用磁盘IO重负载应用，可设置为 off，以平衡磁盘与网络I/O处理速度，降低系统的uptime.
     sendfile on; 
     tcp_nopush on; 
     tcp_nodelay on;
 
+    include servers/*;
 
-  # server主机配置
-  server {
+    # 加载配的本地虚拟机
+    include vhost/*.conf;
+}
+```
+
+### server（主机设置）
+
+http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
+
+- listen 监听端口，Mac下默认为8080，小于1024的要以root启动。可以为listen:*:8080、listen:127.0.0.1:8080等形式
+- server_name 服务器名，如localhost、www.jd.com，可以通过正则匹配
+- location（URL匹配特定位置配置） http服务中，某些特定的URL对应的一系列配置项
+- root html 定义服务器的默认网站根目录。如果locationURL匹配的是子目录或文件，root没什么作用，一般放在server指令里面或/下。
+- index index.php index.shtml index.html index.htm 定义路径下默认访问的文件名，一般跟着root放
+
+```
+server {
+    # nginx监听的端口，
+    #listen       8080;
+    listen       80;
+
+    # 定义使用www.exam.com访问， 记得一定要配Host
+    server_name  www.exam.com;
+
+    #charset koi8-r;
+
+    # 设定本虚拟机的访问日志
+    #access_log  logs/host.access.log  main;
+
+    location / {
+        # 定义服务器默认网站根目录，如果我们有在别的目录中起服务，这个应该没有什么用？？？
+        root   html;
+
+        # 定义首页索引文件的名称
+        index  index.html index.htm;
+    }
+
+    # 定义q
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    #location ~ \.php$ {
+    #    root           html;
+    #    fastcgi_pass   127.0.0.1:9000;
+    #    fastcgi_index  index.php;
+    #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+    #    include        fastcgi_params;
+    #}
+
+    # deny access to .htaccess files, if Apache"s document root
+    # concurs with nginx"s one
+    #
+    #location ~ /\.ht {
+    #    deny  all;
+    #}
+}
+
+# another virtual host using mix of IP-, name-, and port-based configuration
+#
+#server {
+    #listen       8000;
+#    listen       80;
+#    server_name  some.stage.com;
+
+#    location / {
+#        root   html;
+#        index  index.html index.htm;
+#    }
+#}
+
+
+# HTTPS server
+#
+#server {
+#    listen       443 ssl;
+#    server_name  localhost;
+
+#    ssl_certificate      cert.pem;
+#    ssl_certificate_key  cert.key;
+
+#    ssl_session_cache    shared:SSL:1m;
+#    ssl_session_timeout  5m;
+
+#    ssl_ciphers  HIGH:!aNULL:!MD5;
+#    ssl_prefer_server_ciphers  on;
+
+#    location / {
+#        root   html;
+#        index  index.html index.htm;
+#    }
+#}
+
+server {
     listen 8080;  #监听端口号
     server_name localhost;  #主机名
     root /Users/www/test/; # 该项要修改为你准备存放相关网页的路径
@@ -163,26 +371,7 @@ server {
       index  index.html index.htm;
   }
 }
-```
 
-## Mac
-
-- brew install nginx
-- 程序文件 /usr/local/etc/nginx/
-- 安装路径 /usr/local/Cellar/nginx
-- 日志与服务器文件/usr/local/var
-
-## 模块
-
-- NGINX Plus 由 Web 服务器、内容缓存和负载均衡器组成。NGINX Web 应用程序防火墙（WAF）是一款基于开源 ModSecurity 研发的商业软件，为针对七层的攻击提供保护，例如 SQL 注入或跨站脚本攻击，并根据如 IP 地址或者报头之类的规则阻止或放行， NGNX WAF 作为 NGINX Plus 的动态模块运行，部署在网络的边缘，以保护内部的 Web 服务和应用程序免受 DDoS 攻击和骇客入侵。
-- NGINX Unit 是 Igor Sysoev 设计的新型开源应用服务器，由核心 NGINX 软件开发团队实施。Unit 是"完全动态的"，并允许以蓝绿部署的方式无缝重启新版本的应用程序，而无需重启任何进程。所有的 Unit 配置都通过使用 JSON 配置语法的内置 REST API 进行处理，并没有配置文件。目前 Unit 可运行由最近版本的 PHP、Python 和 Go 编写的代码。在同一台服务器上可以支持多语言的不同版本混合运行。即将推出更多语言的支持，包括 Java 和 Node.JS。
-- NGINX Controller 是 NGINX Plus 的中央集中式监控和管理平台。Controller 充当控制面板，并允许用户通过使用图形用户界面"在单一位置管理数百个 NGINX Plus 服务器"。该界面可以创建 NGINX Plus 服务器的新实例，并实现负载平衡、 URL 路由和 SSL 终端的中央集中配置。Controller 还具备监控功能，可观察应用程序的健壮性和性能。
-- 新发布的 NGINX Plus（Kubernetes）Ingress Controller 解决方案基于开源的 NGINX kubernetes-ingress 项目，经过测试、认证和支持，为 Red Hat OpenShift 容器平台提供负载平衡。该解决方案增加了对 NGINX Plus 中高级功能的支持，包括高级负载平衡算法、第7层路由、端到端认证、request/rate 限制以及内容缓存和 Web 服务器。
-- NGINX 还发布了 nginmesh，这是 NGINX 的开源预览版本，作为 Istio Service Mesh 平台中第7层负载平衡和代理的服务代理。它旨在作为挎斗容器（sidecar container）时，能提供与 Istio 集成的关键功能，并以"标准、可靠和安全的方式"促进服务之间的通信能力。此外，NGINX 将通过加入 Istio 网络特别兴趣小组，与 Istio 社区合作。
-
-## Server 配置
-
-```
 location  = / {
   # matches the query / only.
   [ configuration A ]
@@ -225,34 +414,6 @@ location ~* \.(gif|jpg|jpeg)$ {
 * permanent：301 永久重定向
 
 ```
-// 全局变量
-$args：请求中的参数
-$content_length：请求 HEAD 中的 Content-length
-$content_type：请求 HEAD 中的 Content_type
-$document_root：当前请求中 root 的值
-$host：主机头
-$http_user_agent：客户端 agent
-$http_cookie：客户端 cookie
-$limit_rate：限制连接速率
-$request_method：客户端请求方式，GET/POST
-$remote_addr：客户端 IP
-$remote_port：客户端端口
-$remote_user：验证的用户名
-$request_filename：请求的文件绝对路径
-$scheme：http/http
-$server_protocol：协议，HTTP/1.0 OR HTTP/1.1
-$server_addr：服务器地址
-$server_name：服务器名称
-$server_port：服务器端口
-$request_uri：包含请求参数的 URI
-$uri：不带请求参数的 URI
-$document_uri：同 $uri
-
--f/!-f：判断文件是否存在
--d/!-d：判断目录是否存在
--e/!-e：判断文件或目录是否存在
--x/!-x：判断文件是否可以执行
-
 location / {
   try_files $uri $uri/ /index.php?q=$uri&$args;
 }
@@ -344,34 +505,6 @@ docker pull nginx
 docker run -p 80:80 --name mynginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/wwwlogs  -d nginx
 ```
 
-
-## Mac
-
-先调试nginx，再看php是否生效
-
-```
-brew info nginx
-
-Docroot is: /usr/local/Cellar/nginx/1.12.2_1/html // 软件更新后版本号会发生变化，默认也会失效
-The default:/usr/local/etc/nginx/nginx.conf  // 配置文件
-Severs config:/usr/local/etc/nginx/servers/
-local config:/usr/local/var/log/nginx/
-
-sudo chown root:wheel /usr/local/Cellar/nginx/1.10.0/sbin/nginx
-sudo chmod u+s /usr/local/Cellar/nginx/1.10.0/sbin/nginx
-
-brew services start nginx
-brew edit nginx
-```
-
-## 使用
-```
-sudo nginx // 启动命令
-sudo ngixn -c /usr/local/etc/nginx/nginx.conf
-sudo nginx -s reload|reload|reopen|stop|quit // 重新配置后都需要进行重启操作
-sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
-```
-
 ## 配置
 
 ### 跳转
@@ -422,9 +555,9 @@ awk -F\" '{print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r /
 awk -F\" '($2 ~ "xyz"){print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r // Most Requested URL containing xyz
 ```
 
-
 ## 参考
 
 - [git-mirror/nginx](https://github.com/git-mirror/nginx)：A mirror of the nginx SVN repository. <http://nginx.org/>
+- [nginx documentation](http://nginx.org/en/docs/)
 - [《Nginx官方文档》使用nginx作为HTTP负载均衡](http://ifeve.com/nginx-http/)
-- [并发](https://baike.baidu.com/item/%E5%B9%B6%E5%8F%91)
+- [xuexb/learn-nginx](https://github.com/xuexb/learn-nginx):学习nginx配置, 包括: 编译安装、反向代理、重定向、url重写、nginx缓存、跨域配置等
