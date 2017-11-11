@@ -19,7 +19,15 @@ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --
 mysql.server start  // Mac服务管理
 net start/stop mysql // win平台
 
-配置文件：/usr/local/etc/my.cnf
+// 配置文件：/usr/local/etc/my.cnf
+[client]
+default-character-set = utf8
+
+[mysqld]
+default-storage-engine = INNODB
+character-set-server = utf8
+collation-server = utf8_general_ci
+
 生成用户root与空密码登陆
 
 mysql -h localhost  -P 3306 -u root -p
