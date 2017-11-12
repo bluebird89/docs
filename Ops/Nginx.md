@@ -116,23 +116,22 @@ PHP7默认的用户和组是www-data
 ```
 # nginx.conf
 # 运行用户，linux系统尤其重要，如出现403 forbidden错误，很有可能是这个没有设置正确
-#user  nobody;
+#user  www-data;
 
 # 启动进程数量，通常和cpu的数量相同.在配置文件的顶级main部分，worker角色的工作进程的个数，master进程是接收并分配给worker处理。一般情况下这个值可以设置为CPU的核数，如果开启了ssl和gzip一般设置为CPU数量的2倍，可以减少I/O操作。如果Nginx服务器还有其它服务，可以考虑适当减少。
 worker_processes  1;
 #  写在main部分，默认没有设置，可以限制为操作系统最大的限制65535。
 worker rlimit nofile 10240
 
-# 合局错误日志及pid，当nginx调试时，打开日志功能，会很有用
-#error_log  logs/error.log;
+# 全局错误日志及pid
+error_log   /var/log/nginx/error.log;
 #error_log  logs/error.log  notice;
 #error_log  logs/error.log  info;
-
-#pid        logs/nginx.pid;
+pid        /var/run/nginx.pid;
 
 # 工作模式及链接数上限
 events {
-    # 在Linux操作系统下，Nginx默认使用epoll事件模型，得益于此，Nginx在Linux操作系统下效率相当高。同时Nginx在OpenBSD或FreeBSD操作系统上采用类似于epoll的高效事件模型kqueue。
+    # 在Linux操作系统下，Nginx默认使用epoll事件模型，得益于此，Nginx在Linux操作系统下效率相当高。同时Nginx在OpenBSD或FreeBSD操作系统上采用类似于epoll的高效事件模型kqueue。epoll是多路复用IO(I/O Multiplexing)中的一种方式
     use epoll;
     #单个后台worker process进程的最大并发链接数 每一个worker进程能并发处理（发起）的最大连接数。Nginx作为反向代理服务器，计算公式最大连接数 = worker_processes * worker_connections / 4，所以这里客户端最大连接数是1024，这个可以增到8192，但不能超过worker_rlimit_nofile。当Nginx作为http服务器时，计算公式里面是除以2.
     worker_connections  1024;
@@ -143,21 +142,16 @@ events {
 
 提供http服务相关的一些配置参数，如：是否使用keepalive，是否使用gzip进行压缩
 
-- sendfile on 开启高效文件传输模式，sendfile指令指定Nginx是否调用sendfile函数来输出文件，减少用户空间到内核空间的上下文切换。对于普通应用设为on，如果用来进行下载等磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。
-- keepalive_timeout 65 长连接超时时间，单位是秒，涉及到浏览器的种类、后端服务器的超时设置、操作系统的设置，相对比较敏感。
-- send_timeout 指定相应客户端的超时时间，这个超时仅限于两个连接活动之间的时间，如果超过这个时间，客户端没有任何活动，Nginx将会关系连接。
-- client max body_ size 10m 允许客户端请求的最大单文件字节数，一般在上传较大文件时设置限制值
-- client body buffer_ size 128k 缓冲区代理缓冲用户用户端请求的最大字节数
-
 ```
 # 设定http服务器，利用它的反向代理功能实现负载均衡支持
 http {
-
+    # 设定负载均衡的服务器列表 weigth参数表示权值，权值越高被分配到的几率越大
     upstream phpbackend { 
       server unix:/var/run/php5-fpm.sock1 weight=100 max_fails=5 fail_timeout=5; 
       server unix:/var/run/php5-fpm.sock2 weight=100 max_fails=5 fail_timeout=5; 
       server unix:/var/run/php5-fpm.sock3 weight=100 max_fails=5 fail_timeout=5; 
-      server unix:/var/run/php5-fpm.sock4 weight=100 max_fails=5 fail_timeout=5; 
+      server unix:/var/run/php5-fpm.sock4 weight=100 max_fails=5 fail_timeout=5;
+       server 192.168.8.3:80  weight=6;
     }
     
     # Stop Displaying Server Version in Configuration
@@ -180,8 +174,7 @@ http {
     access_log      /usr/local/var/log/nginx/access.log main;
     # 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改成off。
     sendfile on;
-
-    keepalive_timeout 65;
+   
     include /usr/local/etc/nginx/conf.d/*.conf;
 
     # Gzip Settings
@@ -205,13 +198,19 @@ http {
     open_file_cache_min_uses 2; 
     open_file_cache_errors on;
 
-    # Client Timeouts
+    # Client Timeouts 设定请求缓冲
     client_max_body_size 500M; 
+    # 缓冲区代理缓冲用户用户端请求的最大字节数
     client_body_buffer_size 1m; 
     client_body_timeout 15; 
     client_header_timeout 15; 
+    # 允许客户端请求的最大单文件字节数，一般在上传较大文件时设置限制值
+    client max body_ size 10m 
+
     # 连接超时时间
+    # 长连接超时时间，单位是秒，涉及到浏览器的种类、后端服务器的超时设置、操作系统的设置，相对比较敏感
     keepalive_timeout 2 2; 
+    # 指定相应客户端的超时时间，这个超时仅限于两个连接活动之间的时间，如果超过这个时间，客户端没有任何活动，Nginx将会关系连接。
     send_timeout 15; 
     # sendfile 指令指定 nginx 是否调用 sendfile 函数（zero copy 方式）来输出文件，对于普通应用，必须设为 on,如果用来进行下载等应用磁盘IO重负载应用，可设置为 off，以平衡磁盘与网络I/O处理速度，降低系统的uptime.
     sendfile on; 
@@ -229,31 +228,26 @@ http {
 
 http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
 
-- listen 监听端口，Mac下默认为8080，小于1024的要以root启动。可以为listen:*:8080、listen:127.0.0.1:8080等形式
-- server_name 服务器名，如localhost、www.jd.com，可以通过正则匹配
-- location（URL匹配特定位置配置） http服务中，某些特定的URL对应的一系列配置项
-- root html 定义服务器的默认网站根目录。如果locationURL匹配的是子目录或文件，root没什么作用，一般放在server指令里面或/下。
-- index index.php index.shtml index.html index.htm 定义路径下默认访问的文件名，一般跟着root放
-
 ```
 server {
-    # nginx监听的端口，
+    # nginx监听的端口，Mac下默认为8080，小于1024的要以root启动。可以为listen:*:8080、listen:127.0.0.1:8080等形式
     #listen       8080;
     listen       80;
 
-    # 定义使用www.exam.com访问， 记得一定要配Host
+    # 定义使用www.exam.com访问， 记得一定要配Host 服务器名，如localhost、www.jd.com，可以通过正则匹配
     server_name  www.exam.com;
 
     #charset koi8-r;
 
     # 设定本虚拟机的访问日志
     #access_log  logs/host.access.log  main;
-
+    
+    # location（URL匹配特定位置配置） http服务中，某些特定的URL对应的一系列配置项。
     location / {
-        # 定义服务器默认网站根目录，如果我们有在别的目录中起服务，这个应该没有什么用？？？
+        # 定义服务器默认网站根目录，如果locationURL匹配的是子目录或文件，root没什么作用，一般放在server指令里面或/下。
         root   html;
 
-        # 定义首页索引文件的名称
+        # 定义首页索引文件的名称，默认访问的文件名
         index  index.html index.htm;
     }
 
