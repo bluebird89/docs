@@ -172,7 +172,6 @@ DROP DATABASE [IF EXISTS] db_name;
 显示创建数据库时的语句:SHOW CREATE DATABASE db_name;
 ALTER DATABASE db_name DEFAULT  CHARACTER SET utf8
 
-
 SHOW TABLES; // 查看 创建 删除数据表
 DROP TABLE [IF EXISTS] db_name;
 CREATE TABLE table_name(col_name  type  attribute , col_name  type  attribute,…… );
@@ -210,6 +209,12 @@ DELETE FROM table_name [WHERE条件];
 DELETE FROM table_name; // 清空数据表：数据一条条删除
 TRUNCATE TABLE table_name; // 删除表,重建同结构
 ```
+
+### 用户管理
+
+```sql
+ CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; // 添加用户
+ ``` 
 
 ### 数据类型
 
