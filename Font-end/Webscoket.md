@@ -21,6 +21,7 @@ Origin: http://example.com
 - Sec-WebSocket-Version 是告诉服务器所使用的Websocket Draft（协议版本），在最初的时候，Websocket协议还在 Draft 阶段，各种奇奇怪怪的协议都有，而且还有很多期奇奇怪怪不同的东西，现在定为13
 
 ## 对比
+
 - ajax轮询 的原理非常简单，让浏览器隔个几秒就发送一次请求，询问服务器是否有新信息。需要服务器有很快的处理速度和资源。
 - long poll 其实原理跟 ajax轮询 差不多，都是采用轮询的方式，不过采取的是阻塞模型。需要有很高的并发，
 
@@ -37,3 +38,7 @@ curl -H "Content-Type: application/json" \
    -d 'Hello from Scaledrone' \
    https://api2.scaledrone.com/KtJ2qzn3CF3svSFe/notifications/publish
 ```
+
+## 扩展
+
+* [websockets/ws](https://github.com/websockets/ws):Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js
