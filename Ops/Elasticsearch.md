@@ -46,14 +46,22 @@ curl localhost:9200
   -Xmx512m
   ```
 
-  ## 权限
+### Mac
+
+```
+Data:    /usr/local/var/elasticsearch/elasticsearch_henry/
+Logs:    /usr/local/var/log/elasticsearch/elasticsearch_henry.log
+Plugins: /usr/local/opt/elasticsearch/libexec/plugins/
+Config:  /usr/local/etc/elasticsearch/
+plugin script: /usr/local/opt/elasticsearch/libexec/bin/elasticsearch-plugin
+```
+## 权限
 
   默认情况下，Elastic 只允许本机访问，如果需要远程访问，可以修改 Elastic 安装目录的config/elasticsearch.yml文件，去掉network.host的注释，将它的值改成0.0.0.0，然后重新启动 Elastic。(不要顶格写首字母前面加一空格，冒号后面要加一个空格)
 
-  ## 概念
+## 概念
 
 - node和cluster：Elastic 本质上是一个分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个 Elastic 实例。 单个 Elastic 实例称为一个节点（node）。一组节点构成一个集群（cluster）。
-
 - index：Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）。查找数据的时候，直接查找该索引。 所以，Elastic 数据管理的顶层单位就叫做 Index（索引）。它是单个数据库的同义词。每个 Index （即数据库）的名字必须是小写。
 
   ```
