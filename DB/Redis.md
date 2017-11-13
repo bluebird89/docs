@@ -1,23 +1,81 @@
 # Redis
 
-Remote Dictionary Server(Redis)是一个基于key-value键值对的持久化数据库存储系统。redis和大名鼎鼎的memcached缓存服务很像，
+Remote Dictionary Server(Redis)是一个基于key-value键值对的持久化数据库存储系统。Redis是一个数据结构存储，可用作数据库、缓存和消息中间件。
 
-* 支持二进制的Strings，Lists，Hashes，Sets及Ordered Sets等数据类型操作。
+* 丰富的数据结构，支持二进制的String，List，Hash，Set及Ordered Set等数据类型操作。
 * 与memchaed缓存服务一样，为了保证效率，数据都是缓存在内存中提供服务。
 * 而memcached不同的是，redis持久化存服务还会周期性的把更新的数据写入到磁盘以及把修改的操作记录追加到文件里记录下来，
 * 比memcached更有优势的是，redis还支持master-slave（主从）同步
 * 支持publish/subscribe，通知，key过期等等特性。，
 * 一定程序上弥补了memcached这类key-value内存缓存服务的不足
 * Redis能支持超过100K+每秒的读写频率。
+* 单线程，避免了线程切换和锁的性能消耗
+* 可持久化（RDB与AOF）
+* 分布式锁
+* 主从复制与高可用（Redis Sentinel）
+* 集群
+* 支持lua脚本
 
 Redis内部使用一个redisObject对象来表示所有的key和value,redisObject最主要的信息:type代表一个value对象具体是何种数据类型，encoding是不同数据类型在redis内部的存储方式，
 
 vm字段，只有打开了Redis的虚拟内存功能，此字段才会真正的分配内存
 
+## 安装
+
+### Mac
+
+默认配置路径：`redis-server /usr/local/etc/redis.conf`
+
+```shell
+brew install redis
+brew services start/stop/restart redis
+```
 ## 配置
 
 `/etc/redis/redis.conf`
 
+```
+<add key="RedisServerIP" value="redis:uuid845tylabc123@139.198.13.12:4125"/>
+<!-- 提供的 Redis 环境是单机版配置。如果 Redis 是主从配置，则还需设置 RedisSlaveServerIP-->
+<!--<add key="RedisSlaveServerIP" value="redis:uuid845tylabc123@139.198.13.13:4125"/>--> 
+
+<!--Redis 数据库。如果不需要指定 Redis 数据库，就配置默认值 0-->     
+<add key="RedisDefaultDb" value="0"/>
+
+// 读取 Redis 主机 IP 配置信息
+string[] redisMasterHosts = ConfigurationManager.ConnectionStrings["RedisServerIP"].ConnectionString.Split(','); 
+
+// 如果 Redis 服务器是主从配置，那么还需要读取 Redis Slave 机的 IP 配置信息
+string[] redisSlaveHosts = null;
+var slaveConnection = ConfigurationManager.ConnectionStrings["RedisSlaveServerIP"];
+if (slaveConnection != null && !string.IsNullOrWhiteSpace(slaveConnection.ConnectionString))
+{    
+    string redisSlaveHostConfig = slaveConnection.ConnectionString;    
+    redisSlaveHosts = redisSlaveHostConfig.Split(',');
+} 
+
+// 读取 RedisDefaultDb 配置
+int defaultDb = 0;
+string defaultDbSetting = ConfigurationManager.AppSettings["RedisDefaultDb"];
+if (!string.IsNullOrWhiteSpace(defaultDbSetting))
+{    
+    int.TryParse(defaultDbSetting, out defaultDb);
+} 
+
+var redisClientManagerConfig = new RedisClientManagerConfig
+{    
+    MaxReadPoolSize = 50,    
+    MaxWritePoolSize = 50,    
+    DefaultDb = defaultDb
+};
+
+// 创建 Redis 连接池
+Manager = new PooledRedisClientManager(redisMasterHosts, redisSlaveHosts, redisClientManagerConfig)
+{    
+    PoolTimeout = 2000,    
+    ConnectTimeout = 500                
+};
+```
 
 ## 数据类型
 
@@ -61,7 +119,7 @@ hset
 
 ### List
 
-twitter的关注列表，粉丝列表等都可以用Redis的list结构来实现。Lists 就是链表，相信略有数据结构知识的人都应该能理解其结构。使用Lists结构，我们可以轻松地实现最新消息排行等功能。Lists的另一个应用就是消息队列，可以利用Lists的PUSH操作，将任务存在Lists中，然后工作线程再用POP操作将任务取出进行执行。
+twitter的关注列表，粉丝列表等都可以用Redis的list结构来实现。Lists 就是链表。使用Lists结构，我们可以轻松地实现最新消息排行等功能。Lists的另一个应用就是消息队列，可以利用Lists的PUSH操作，将任务存在Lists中，然后工作线程再用POP操作将任务取出进行执行。
 
 Redis list的实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销，Redis内部的很多实现，包括发送缓冲队列等也都是用的这个数据结构。
 
@@ -160,6 +218,13 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
 ```
 
 
+###特性
+
+* 管道：Redis管道是指客户端可以将多个命令一次性发送到服务器，然后由服务器一次性返回所有结果。管道技术在批量执行命令的时候可以大大减少网络传输的开销，提高性能。
+* 事务：Redis事务是一组命令的集合。一个事务中的命令要么都执行，要么都不执行。如果命令在运行期间出现错误，不会自动回滚。管道与事务的区别：管道主要是网络上的优化，客户端缓冲一组命令，一次性发送到服务器端执行，但是并不能保证命令是在同一个事务里面执行；而事务是原子性的，可以确保命令执行的时候不会有来自其他客户端的命令插入到命令序列中。
+* 分布式锁：分布式锁是控制分布式系统之间同步访问共享资源的一种方式。在分布式系统中，常常需要协调他们的动作，如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。
+* 地理信息：从Redis 3.2版本开始，新增了地理信息相关的命令，可以将用户给定的地理位置信息（经纬度）存储起来，并对这些信息进行操作。
+
 ## install:
 
 ```
@@ -189,6 +254,20 @@ sudo apt-get install redis-server php-redis
 redis-cli -h localhost -p 6379 info // 功能统计
 ```
 
+## 注意
+
+* Key命名规范：AppID:KeyName
+* 缓存穿透处理：根据Redis key在缓存中查询后，不存在对应Value，就应该会在后端系统如DB中去查找，该Key的并发请求量一旦变大，那么就会对DB造成很大的压力
+    - 前端风险控制，将恶意穿透情况排除在外；
+    - 对查询结果为空的情况依然进行缓存，但缓存时间会设置得很短，一般是几分钟。
+* 缓存雪崩处理：当缓存服务器重启或者大量缓存集中在某一个时间段失效，这样在失效的时候，也会给后端系统(比如DB)带来很大压力。解决办法有：后端连接数限制，错误阈值限制，超时处理，缓存失效时间均匀分布，前端永不失效及后端主动更新。
+* 缓存时长：策略定位复杂，需要多维度的计算。
+* 缓存失效：按时失效，事件失效，后端主动更新。
+* 缓存Key：Hash、规则、前缀+Hash，异常情况可人工干预。
+* Lua脚本：服务端批量处理及事务能力，有条件逻辑的可扩展脚本。使用它的好处有：减少网络开销、原子操作、可复用。
+* Limit：可滑动时间窗口，如应用于Session，Memcached需每次传Key和Value。
+
+
 ## 集群配置
 
 ```
@@ -196,6 +275,11 @@ redis-cli -h localhost -p 6379 info // 功能统计
 slaveof 10.0.0.1 6379
 redis-cli -h localhost -p 6379 monitor // 从库执行该命令会一直ping主库
 ```
+
+## 工具
+
+* [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager)
+
 
 ## 参考
 
