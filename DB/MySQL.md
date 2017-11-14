@@ -160,8 +160,7 @@ sudo apt-get install mysql-proxy
 - 覆盖索引：索引支持高效查找行，mysql也能使用索引来接收列的数据。这样不用读取行数据，当发起一个被索引覆盖的查询，explain解释器的extra列看到 using index。
 
 
-- 数据库(DB):创建 切换 展示 修改 删除数据库
-- 数据表(table)
+### 操作
 
 ```sql
 SHOW DATABASES; // 数据库操作
@@ -214,7 +213,7 @@ TRUNCATE TABLE table_name; // 删除表,重建同结构
 
 ```sql
  CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; // 添加用户
- ``` 
+```
 
 ### 数据类型
 
