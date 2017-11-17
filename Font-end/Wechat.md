@@ -16,7 +16,7 @@ git密码：git8899
 
 ## 配置开发者模式
 
-```
+```php
 define("TOKEN", "weixin");
 $timestamp=$_GET['timestamp'];
 $nonce=$_GET['nonce'];
