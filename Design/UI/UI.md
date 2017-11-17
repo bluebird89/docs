@@ -20,3 +20,4 @@
 * [ionic-team/ionicons](https://github.com/ionic-team/ionicons):The premium icon font for Ionic http://ionicons.com/
 * [airbnb/airpal](https://github.com/airbnb/airpal):Web UI for PrestoDB. http://airbnb.github.io/airpal
 * [xinthink/react-native-material-kit](https://github.com/xinthink/react-native-material-kit):Bringing Material Design to React Native http://j.mp/rnmdk
+* [didi/cube-ui](https://github.com/didi/cube-ui):A fantastic mobile ui lib implement by Vue https://didi.github.io/cube-ui/

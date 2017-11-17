@@ -122,6 +122,7 @@ prefix 不要用缩写
 - sync-settings@0.8.2(<https://atom.io/packages/sync-settipngs)配置> 使用command + shift + P backup 或者restore插件
 - activate-power-mode：打字爆炸模式
 - atom-ide-ui
+- Teletype
 
 # 快捷键
 
