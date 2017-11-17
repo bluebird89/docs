@@ -12,7 +12,7 @@
   - style(元素的行内样式（inline style）)
   - title
 
-```
+```html
 /*声明为 HTML5 文档*/
 <!DOCTYPE html>
 /*<html> 元素是 HTML 页面的根元素*/
