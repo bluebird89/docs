@@ -13,22 +13,22 @@
 
 - 脚本例子：
 
-  ```
-  gulp.task('default',function(){
-  return gulp
-          .src(\\*\*/\*.js")
-          .pipe(jshint())
-          .pipe(concat())
-          .pipe(uglify())
-          .pipe(gulp.dest('./build/'))
-  })
-  ```
+```js
+gulp.task('default',function(){
+return gulp
+      .src("\\*\*/\*.js")
+      .pipe(jshint())
+      .pipe(concat())
+      .pipe(uglify())
+      .pipe(gulp.dest('./build/'))
+})
+```
 
 - API：
 
   - gulp.task(name [, deps, fn])：注册一个task, name 是task的名字，deps是可选项，就是这个task依赖的tasks, fn是task要执行的函数
 
-    ```
+    ```js
     gulp.task('js', ,['jscs', 'jshint'], function(){
      return gulp
         .src('./src/**/*.js')
@@ -41,7 +41,7 @@
 
   - gulp.src：构建源文件
 
-    ```
+    ```js
     gulp.src(['client/*.js', '!client/b*.js', 'client/c.js'])   # !是排除某些文件
 
     gulp.task('js',['jscs', 'jshint'],function(){
@@ -51,12 +51,12 @@
         .pipe(gulp.dest('./build/'));
 
     });
-    说明：options.base 是指多少路径被保留，比如上面的 ./src/users/list.js 会被输出到 ./build/users/list.js
+    // 说明：options.base 是指多少路径被保留，比如上面的 ./src/users/list.js 会被输出到 ./build/users/list.js
     ```
 
   - gulp.dest(path[, options]) 就是最终文件要输出的路径，options一般不用 - gulp.watch(glob [, opts], tasks) or gulp.watch(glob [, opts, cb]) 就是监视文件的变化，然后运行指定的Tasks或者函数
 
-    ```
+    ```js
     gulp.task('watch-js', function(){
       gulp.watch('./src/**/*.js',['jshint','jscs']);
     });
@@ -68,50 +68,48 @@
     });
     ```
 
-    #### 实例
+#### 实例
 
-    ```
-    npm install gulp -g
-    npm install gulp --save-dev
-    var gulp = require('gulp');
-    var concat = require('gulp-concat');
-    var stripDebug = require('gulp-strip-debug');
-    var uglify = require('gulp-uglify');
-    var autoprefix = require('gulp-autoprefixer');
-    var minifyCSS = require('gulp-minify-css');
+```js
+npm install gulp -g
+npm install gulp --save-dev
+var gulp = require('gulp');
+var concat = require('gulp-concat');
+var stripDebug = require('gulp-strip-debug');
+var uglify = require('gulp-uglify');
+var autoprefix = require('gulp-autoprefixer');
+var minifyCSS = require('gulp-minify-css');
 
-    gulp.task('scripts', function() {
-      gulp.src(['./src/scripts/*.js'])
-        .pipe(concat('all.js'))
-        .pipe(stripDebug())
-        .pipe(uglify())
-        .pipe(gulp.dest('./build/scripts/'));
-    });
-    ```
+gulp.task('scripts', function() {
+  gulp.src(['./src/scripts/*.js'])
+    .pipe(concat('all.js'))
+    .pipe(stripDebug())
+    .pipe(uglify())
+    .pipe(gulp.dest('./build/scripts/'));
+});
 
-```
-    // CSS concat, auto-prefix and minify
-    gulp.task('styles', function() {
-      gulp.src(['./src/styles/*.css'])
-        .pipe(concat('styles.css'))
-        .pipe(autoprefix('last 2 versions'))
-        .pipe(minifyCSS())
-        .pipe(gulp.dest('./build/styles/'));
-    });
+// CSS concat, auto-prefix and minify
+gulp.task('styles', function() {
+  gulp.src(['./src/styles/*.css'])
+    .pipe(concat('styles.css'))
+    .pipe(autoprefix('last 2 versions'))
+    .pipe(minifyCSS())
+    .pipe(gulp.dest('./build/styles/'));
+});
 
-    // default gulp task
-    gulp.task('default', [ 'scripts', 'styles'], function() {
+// default gulp task
+gulp.task('default', [ 'scripts', 'styles'], function() {
 
-    // watch for JS changes
-    gulp.watch('./src/scripts/*.js', function() {
-        gulp.run('jshint', 'scripts');
-      });
-    // watch for CSS changes
-        gulp.watch('./src/styles/*.css', function() {
-            gulp.run('styles');
-      });
-    });
-    gulp scripts
+// watch for JS changes
+gulp.watch('./src/scripts/*.js', function() {
+    gulp.run('jshint', 'scripts');
+  });
+// watch for CSS changes
+    gulp.watch('./src/styles/*.css', function() {
+        gulp.run('styles');
+  });
+});
+gulp scripts
 ```
 
 # 合并
@@ -126,7 +124,7 @@
 
 # webpack见代码仓库
 
-```
+```shell
 sudo npm install -g webpack
 sudo npm install -g webpack-dev-server
 ```
@@ -138,7 +136,7 @@ sudo npm install -g webpack-dev-server
 
 var path=require('path');
 
-```
+```js
 module.exports = {
     context: path.resolve('js'),
     entry: {
