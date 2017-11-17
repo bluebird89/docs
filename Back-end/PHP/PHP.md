@@ -339,15 +339,16 @@ PHP代码规范与质量检查工具
 
 - [php/php-src](https://github.com/php/php-src):The PHP Interpreter <http://www.php.net>
 
-## 参考
+## 模版
 
-- [PHP 教程](http://www.w3school.com.cn/php/)
-
+* [twigphp/Twig](https://github.com/twigphp/Twig):Twig, the flexible, fast, and secure template language for PHP http://twig.sensiolabs.org/
+* smarty
 ## 文档
 
 - [codeguy/php-the-right-way](https://github.com/codeguy/php-the-right-way):An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web <http://www.phptherightway.com>
 - [walu/phpbook](https://github.com/walu/phpbook):PHP扩展开发及内核应用
 - [laruence/php7-internal](https://github.com/laruence/php7-internal):Understanding PHP7 Internal articles
+- [PHP 教程](http://www.w3school.com.cn/php/)
 
 ## 图书
 
