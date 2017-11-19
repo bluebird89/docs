@@ -2136,6 +2136,8 @@ try {
 ```
 
 
+WebAssembly 已得到所有主流浏览器支持
+
 ## 调试
 
 * 可以直接在develop中的console中测试代码

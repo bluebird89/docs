@@ -77,6 +77,38 @@ server {
 }
 ```
 
+
+### 通过pip安装Django
+
+```shell
+sudo apt-get install python-pip
+pip install --upgrade pip
+pip install Django==1.11.3
+
+pip3 install Django
+```
+
+- 建立项目： `django-admin.py startproject app`
+- 修改数据配置（默认sqlite）：修改setting.py
+
+```shell
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 数据库名,
+        'USER': '用户名',
+        'PASSWORD': '密码',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+```
+
+- 数据库迁移到mysql准备：sudo apt-get install python-mysqldb
+- 数据迁移：python manage.py migrate
+- 运行服务：python manage.py runserver
+- 进入管理页面：127.0.0.1：8080/admin
+
 ## 问题
 
 ```
