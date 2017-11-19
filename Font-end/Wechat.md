@@ -1,4 +1,6 @@
-# 资源
+# wechat
+
+## 资源
 
 - [littlecodersh/ItChat](https://github.com/littlecodersh/ItChat)
 - [awesome-wechat-weapp](https://github.com/justjavac/awesome-wechat-weapp)
