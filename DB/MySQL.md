@@ -1,6 +1,10 @@
 # MySQL
 
+Open source relational database management system
 
+## 版本
+
+Percona分支版本，它是一个相对比较成熟的、优秀的MySQL分支版本，在性能提升、可靠性、管理型方面做了不少改善。它和官方ORACLE MySQL版本基本完全兼容，并且性能大约有20%以上的提升。
 
 ## 客户端
 
@@ -12,7 +16,8 @@
 
 ```shell
 brew install mysql
-brew services start mysql
+brew services start mysql # /usr/local/Cellar/mysql/5.7.20
+mysql_secure_installation
 
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
@@ -32,6 +37,11 @@ collation-server = utf8_general_ci
 
 mysql -h localhost  -P 3306 -u root -p
 exit;
+
+
+sudo apt autoremove mysql-server
+sudo apt remove mysql-common
+
 ```
 
 ## 问题
@@ -619,7 +629,7 @@ where grank=1;
 
 - 优化查询缓存
 
-```
+```php
 // query cache does NOT work 因为功能返回的结果是可变的。MySQL决定禁用查询器的查询缓存
 $r = mysql_query("SELECT username FROM user WHERE signup_date >= CURDATE()");
 // query cache works!
@@ -695,6 +705,17 @@ B-tree 索引:大多数谈及的索引类型就是B-tree类型, 可以在create 
 * 覆盖索引：索引（如：组合索引）中包含所有要查询的字段的值，查看是否使用了覆盖索引可以通过执行计划中的Extra中的值为Using index。索引支持高效查找行，mysql也能使用索引来接收列的数据。这样不用读取行数据，当发起一个被索引覆盖的查询，explain解释器的extra列看到 using index。
 
 ```sql
+create [UNIQUE|FULLTEXT]  index index_name on tbl_name (col_name [(length)] [ASC | DESC] , …..);
+alter table table_name ADD INDEX [index_name] (index_col_name,...);
+
+DROP INDEX index_name ON tbl_name;
+alter table table_name drop index index_name;
+alter table t_b drop primary key;
+
+show index from table_name;
+show keys from table_name;
+desc table_Name;
+
 CREATE TABLE user_test( 
   id int AUTO_INCREMENT PRIMARY KEY, 
   user_name varchar(30) NOT NULL,
