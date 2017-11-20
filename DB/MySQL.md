@@ -39,10 +39,17 @@ mysql -h localhost  -P 3306 -u root -p
 exit;
 
 
+sudo apt remove mysql-server
 sudo apt autoremove mysql-server
 sudo apt remove mysql-common
 
+sudo rm /var/lib/mysql/ -R
+sudo rm /etc/mysql/ -R
+
+dpkg -l | grep mysql  # 
+dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  # 
 ```
+
 
 ## 问题
 
