@@ -1,6 +1,13 @@
+
+# Percona
+
 数据库审计功能:需要使用MySQL企业版，或者Percona/MariaDB分支版本，MySQL社区版本不支持该功能。
 
-## 
+启用thread pool特性，可使得在高并发的情况下，性能不会发生大幅下降
+extra_port功能，非常实用， 关键时刻能救命的。
+QUERY_RESPONSE_TIME 功能，也能使我们对整体的SQL响应时间分布有直观感受
+
+## 安装
 
 ```shell
 wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
@@ -29,3 +36,6 @@ sudo service mysql restart
 systemctl unmask mysql.service
 
 ```
+
+
+percona-toolkit
