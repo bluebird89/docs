@@ -24,21 +24,6 @@ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --
 mysql.server start  // Mac服务管理
 net start/stop mysql // win平台
 
-// 配置文件：/usr/local/etc/my.cnf
-[client]
-default-character-set = utf8
-
-[mysqld]
-default-storage-engine = INNODB
-character-set-server = utf8
-collation-server = utf8_general_ci
-
-生成用户root与空密码登陆
-
-mysql -h localhost  -P 3306 -u root -p
-exit;
-
-
 sudo apt remove mysql-server
 sudo apt autoremove mysql-server
 sudo apt remove mysql-common
@@ -50,6 +35,42 @@ dpkg -l | grep mysql  #
 dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  # 
 ```
 
+### 配置
+
+配置文件：/usr/local/etc/my.cnf  或者 my.ini
+
+* 数据库路径
+* 字符集: 客户端向MySQL服务器端请求和返加的数据的字符集，在选择数据库后使用:set names gbk;
+    + 数据库存储:一个汉字utf8下为两个长度,gbk下为一个长度
+    + 正常一个汉字utf8下为三个字节,gbk下为两个字节
+* 保证客户端使用字符集与服务端返回数据字符集编码一致(以适应客户端为主,修改服务器服务器端配置) 查询系统变量:
+* 校对集: _bin：按二进制编码比较 _ci：不区分大小写比较
+
+```
+SHOW VARIABLES LIKE "character_%";
+character_set_client # 接受的客户端编码
+character_set_result # 返回结果集的编码
+SET character_set_client=GBK; # 不一致的话,修改
+set names # 修改client connection results字符集
+
+[client]
+default-character-set = utf8
+
+[mysqld]
+default-storage-engine = INNODB
+character-set-server = utf8
+collation-server = utf8_general_ci
+
+log-slow-queries=/data/mysqldata/slow-query.log # 慢查询日志存放的位置，一般这个目录要有mysql的运行帐号的可写权限，一般都将这个目录设置为mysql的数据存放目录；
+long_query_time=2     # 表示查询超过两秒才记录
+log-queries-not-using-indexes  # 表示记录下没有使用索引的查询
+
+innodb_buffer_pool_size # 如果是单实例且绝大多数是InnoDB引擎表的话，可考虑设置为物理内存的50% ~ 70%左右
+innodb_data_file_path = ibdata1:1G:autoextend # 千万不要用默认的10M，否则在有高并发事务时，会受到不小的影响
+innodb_log_file_size=256M，设置innodb_log_files_in_group=2，基本可满足90%以上的场景
+long_query_time = 1  # 5.5版本已经可以设置为小于1了，建议设置为0.05（50毫秒），记录那些执行较慢的SQL，用于后续的分析排查
+max_connection（最大连接数）、max_connection_error（最大错误数，建议设置为10万以上，而open_files_limit、innodb_open_files、table_open_cache、table_definition_cache这几个参数则可设为约10倍于max_connection的大小
+```
 
 ## 问题
 
@@ -116,29 +137,13 @@ ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
 sudo apt-get install mysql-proxy
 ```
 
-## 配置文件my.ini
-
-* 数据库路径
-* 字符集: 客户端向MySQL服务器端请求和返加的数据的字符集，在选择数据库后使用:set names gbk;
-    + 数据库存储:一个汉字utf8下为两个长度,gbk下为一个长度
-    + 正常一个汉字utf8下为三个字节,gbk下为两个字节
-* 保证客户端使用字符集与服务端返回数据字符集编码一致(以适应客户端为主,修改服务器服务器端配置) 查询系统变量:
-* 校对集: _bin：按二进制编码比较 _ci：不区分大小写比较
-```
-  SHOW VARIABLES LIKE "character_%";
-  character_set_client:接受的客户端编码
-  character_set_result:返回结果集的编码
-  不一致的话,修改SET character_set_client=GBK;
-  set names 修改client connection results字符集
-```
-
 ### 存储引擎
 
 * Myisam:表结构 数据 索引文件分离。适合于一些需要大量查询的应用，但其对于有大量写操作并不是很好。甚至你只是需要update一个字段，整个表都会被锁起来，而别的进程，就算是读进程都 无法操作直到读操作完成。
 
   - 表锁：myisam 表级锁 表锁，只有读读之间是并发的，写写之间和读写之间（读和插入之间是可以并发的，去设置concurrent_insert参数，定期执行表优化操作，更新操作就没有办法了）是串行的，所以写起来慢，并且默认的写优先级比读优先级高，高到写操作来了后，可以马上插入到读操作前面去，如果批量写，会导致读请求饿死，所以要设置读写优先级或设置多少写操作后执行读操作的策略;myisam不要使用查询时间太长的sql，如果策略使用不当，也会导致写饿死，所以尽量去拆分查询效率低的sql,
   - 读的效果好，写的效率差，这和它数据存储格式，索引的指针和锁的策略有关的，它的数据是顺序存储的.索引btree上的节点是一个指向数据物理位置的指针，所以查找起来很快
-  - 对于 SELECT COUNT(*) 这类的计算是超快无比的
+  - 对于 SELECT COUNT(*) 这类的计算是超快无比的(不含where条件)
   - 不支持自动恢复数据：断电之后 使用之前检查和执行可能的修复
   - 不支持事务：不保证单个命令会完成, 多行update 有错误 只有一些行会被更新
   - 只有索引缓存在内存中：mysiam只缓存进程内部的索引
@@ -208,7 +213,10 @@ TRUNCATE TABLE table_name; // 删除表,重建同结构
 ### 用户管理
 
 ```sql
- CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; // 添加用户
+mysql -h localhost  -P 3306 -u root -p  # 生成用户root与空密码登陆
+exit;
+
+CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; // 添加用户
 ```
 
 ### 数据类型
@@ -282,11 +290,11 @@ TRUNCATE TABLE table_name; // 删除表,重建同结构
 
 - 联表：联表查询降低查询速度
 
-# 高性能表设计规范
+## 高性能表设计规范
 
 良好的逻辑设计和物理设计是高性能的基石， 应该根据系统将要执行的查询语句来设计schema, 这往往需要权衡各种因素。
 
-- 数据类型
+### 数据类型
 
   - 更小的通常更好：更小的数据类型通常更快，占用更少的磁盘、 内存和CPU缓存， 并且处理时需要的CPU周期也更少。
   - 简单就好： 简单数据类型的操作通常需要更少的CPU周期。 例如， 整型比字符操作代价更低， 因为字符集和校对规则（排序规则 ）使字符比较比整型比较更复杂。
@@ -295,13 +303,10 @@ TRUNCATE TABLE table_name; // 删除表,重建同结构
 
     - 有两种类型的数字：整数 (whole number) 和实数 (real number) 。 如果存储整数， 可以使用这几种整数类型：TINYINT, SMALLINT, MEDIUMINT, INT, BIGINT。分别使用8,16, 24, 32, 64位存储空间。 整数类型有可选的 UNSIGNED 属性，表示不允许负值，这大致可以使正数的上限提高一倍。 例如 TINYINT. UNSIGNED 可以存储的范围是 0 - 255, 而 TINYINT 的存储范围是 -128 -127 。有符号和无符号类型使用相同的存储空间，并具有相同的性能 ， 因此可以根据实际情况选择合适的类型。 你的选择决定 MySQL 是怎么在内存和磁盘中保存数据的。 然而， 整数计算一般使用64 位的 BIGINT 整数， 即使在 32 位环境也是如此。（ 一些聚合函数是例外， 它们使用DECIMAL 或 DOUBLE 进行计算）。 MySQL 可以为整数类型指定宽度， 例如 INT(11), 对大多数应用这是没有意义的：它不会限制值的合法范围，只是规定了MySQL 的一些交互工具（例如 MySQL 命令行客户端）用来显示字符的个数。 对千存储和计算来说， INT(1) 和 INT(20) 是相同的。
 
-  2.实数类型 实数是带有小数部分的数字。 然而， 它们不只是为了存储小数部分，也可以使用DECIMAL 存储比 BIGINT 还大的整数。 FLOAT和DOUBLE类型支持使用标准的浮点运算进行近似计算。 DECIMAL类型用于存储精确的小数。 浮点和DECIMAL类型都可以指定精度。 对千DECIMAL列， 可以指定小数点前后所允许的 最大位数。这会影响列的空间消耗。 有多种方法可以指定浮点列所需要的精度， 这会使得MySQL悄悄选择不同的数据类型，或者在存储时对值进行取舍。 这些精度定义是非标准的， 所以我们建议只指定数据类型，不指定精度。 浮点类型在存储同样范围的值时， 通常比DECIMAL使用更少的空间。FLOAT使用4个字节存储。DOUBLE占用8个字节，相比FLOAT有更高的精度和更大的范围。和整数类型一样， 能选择的只是存储类型； MySQL使用DOUBLE作为内部浮点计算的类型。 因为需要额外的空间和计算开销，所以应该尽扯只在对小数进行精确计算时才使用DECIMAL。 但在数据最比较大的时候， 可以考虑使用BIGINT代替DECIMAL, 将需要存储的货币单位根据小数的位数乘以 相应的倍数即可。
-
-  3.字符串类型 VARCHAR 用于存储可变⻓字符串，长度支持到65535 需要使用1或2个额外字节记录字符串的长度 适合：字符串的最大⻓度比平均⻓度⼤很多；更新很少 CHAR 定⻓，⻓度范围是1~255 适合：存储很短的字符串，或者所有值接近同一个长度；经常变更 慷慨是不明智的 使用VARCHAR(5)和VARCHAR(200)存储'hello'的空间开销是一样的。 那么使用更 短的列有什么优势吗？ 事实证明有很大的优势。 更长的列会消耗更多的内存， 因为MySQL通常会分配固定大小的内存块来保存内部值。 尤其是使用内存临时表进行排序或操作时会特别糟糕。 在利用磁盘临时表进行排序时也同样糟糕。 所以最好的策略是只分配真正需要的空间。 4.BLOB和TEXT类型 BLOB和 TEXT都是为存储很大的数据而设计的字符串数据类型， 分别采用 二进制和字符方式存储 。 与其他类型不同， MySQL把每个BLOB和TEXT值当作一个独立的对象处理。 存储引擎 在存储时通常会做特殊处理。 当BLOB和TEXT值太大时，InnoDB会使用专门的 "外部"存储区域来进行存储， 此时每个值在行内需要1 - 4个字节存储 存储区域存储实际的值。 BLOB 和 TEXT 之间仅有的不同是 BLOB 类型存储的是二进制数据， 没有排序规则或字符集， 而 TEXT类型有字符集和排序规则
-
-  5.日期和时间类型 大部分时间类型 都没有替代品， 因此没有什么是最佳选择的问题。 唯一的问题是保存日期和时间的时候需要做什么。 MySQL提供两种相似的日期类型： DATE TIME和 TIMESTAMP。 但是目前我们更建议存储时间戳的方式，因此该处不再对 DATE TIME和 TIMESTAMP做过多说明。
-
-  5.其他类型 5.1选择标识符 在可以满足值的范围的需求， 井且预留未来增长空间的前提下， 应该选择最小的数据类型。 整数类型 整数通常是标识列最好的选择， 因为它们很快并且可以使用AUTO_INCREMENT。 ENUM和SET类型 对于标识列来说，EMUM和SET类型通常是一个糟糕的选择， 尽管对某些只包含固定状态或者类型的静态 "定义表" 来说可能是没有问题的。ENUM和SET列适合存储固定信息， 例如有序的状态、 产品类型、 人的性别。 字符串类型 如果可能， 应该避免使用字符串类型作为标识列， 因为它们很消耗空间， 并且通常比数字类型慢。 对千完全 "随机" 的字符串也需要多加注意， 例如 MDS() 、 SHAl() 或者 UUID() 产生的字符串。 这些函数生成的新值会任意分布在很大的空间内， 这会导致 INSERT 以及一些SELECT语句变得很慢。如果存储 UUID 值， 则应该移除 "-"符号。 5.2特殊类型数据 某些类型的数据井不直接与内置类型一致。 低千秒级精度的时间戳就是一个例子，另一个例子是以个1Pv4地址，人们经常使用VARCHAR(15)列来存储IP地址，然而， 它们实际上是32位无符号整数， 不是字符串。用小数点将地址分成四段的表示方法只是为了让人们阅读容易。所以应该用无符号整数存储IP地址。MySQL提供INET_ATON()和INET_NTOA()函数在这两种表示方法之间转换。
+  - 实数类型 实数是带有小数部分的数字。 然而， 它们不只是为了存储小数部分，也可以使用DECIMAL 存储比 BIGINT 还大的整数。 FLOAT和DOUBLE类型支持使用标准的浮点运算进行近似计算。 DECIMAL类型用于存储精确的小数。 浮点和DECIMAL类型都可以指定精度。 对千DECIMAL列， 可以指定小数点前后所允许的 最大位数。这会影响列的空间消耗。 有多种方法可以指定浮点列所需要的精度， 这会使得MySQL悄悄选择不同的数据类型，或者在存储时对值进行取舍。 这些精度定义是非标准的， 所以我们建议只指定数据类型，不指定精度。 浮点类型在存储同样范围的值时， 通常比DECIMAL使用更少的空间。FLOAT使用4个字节存储。DOUBLE占用8个字节，相比FLOAT有更高的精度和更大的范围。和整数类型一样， 能选择的只是存储类型； MySQL使用DOUBLE作为内部浮点计算的类型。 因为需要额外的空间和计算开销，所以应该尽扯只在对小数进行精确计算时才使用DECIMAL。 但在数据最比较大的时候， 可以考虑使用BIGINT代替DECIMAL, 将需要存储的货币单位根据小数的位数乘以 相应的倍数即可。
+  - 字符串类型 VARCHAR 用于存储可变⻓字符串，长度支持到65535 需要使用1或2个额外字节记录字符串的长度 适合：字符串的最大⻓度比平均⻓度⼤很多；更新很少 CHAR 定⻓，⻓度范围是1~255 适合：存储很短的字符串，或者所有值接近同一个长度；经常变更 慷慨是不明智的 使用VARCHAR(5)和VARCHAR(200)存储'hello'的空间开销是一样的。 那么使用更 短的列有什么优势吗？ 事实证明有很大的优势。 更长的列会消耗更多的内存， 因为MySQL通常会分配固定大小的内存块来保存内部值。 尤其是使用内存临时表进行排序或操作时会特别糟糕。 在利用磁盘临时表进行排序时也同样糟糕。 所以最好的策略是只分配真正需要的空间。 4.BLOB和TEXT类型 BLOB和 TEXT都是为存储很大的数据而设计的字符串数据类型， 分别采用 二进制和字符方式存储 。 与其他类型不同， MySQL把每个BLOB和TEXT值当作一个独立的对象处理。 存储引擎 在存储时通常会做特殊处理。 当BLOB和TEXT值太大时，InnoDB会使用专门的 "外部"存储区域来进行存储， 此时每个值在行内需要1 - 4个字节存储 存储区域存储实际的值。 BLOB 和 TEXT 之间仅有的不同是 BLOB 类型存储的是二进制数据， 没有排序规则或字符集， 而 TEXT类型有字符集和排序规则
+  - 日期和时间类型 大部分时间类型 都没有替代品， 因此没有什么是最佳选择的问题。 唯一的问题是保存日期和时间的时候需要做什么。 MySQL提供两种相似的日期类型： DATE TIME和 TIMESTAMP。 但是目前我们更建议存储时间戳的方式，因此该处不再对 DATE TIME和 TIMESTAMP做过多说明。
+  - 其他类型 5.1选择标识符 在可以满足值的范围的需求， 井且预留未来增长空间的前提下， 应该选择最小的数据类型。 整数类型 整数通常是标识列最好的选择， 因为它们很快并且可以使用AUTO_INCREMENT。 ENUM和SET类型 对于标识列来说，EMUM和SET类型通常是一个糟糕的选择， 尽管对某些只包含固定状态或者类型的静态 "定义表" 来说可能是没有问题的。ENUM和SET列适合存储固定信息， 例如有序的状态、 产品类型、 人的性别。 字符串类型 如果可能， 应该避免使用字符串类型作为标识列， 因为它们很消耗空间， 并且通常比数字类型慢。 对千完全 "随机" 的字符串也需要多加注意， 例如 MDS() 、 SHAl() 或者 UUID() 产生的字符串。 这些函数生成的新值会任意分布在很大的空间内， 这会导致 INSERT 以及一些SELECT语句变得很慢。如果存储 UUID 值， 则应该移除 "-"符号。 5.2特殊类型数据 某些类型的数据井不直接与内置类型一致。 低千秒级精度的时间戳就是一个例子，另一个例子是以个1Pv4地址，人们经常使用VARCHAR(15)列来存储IP地址，然而， 它们实际上是32位无符号整数， 不是字符串。用小数点将地址分成四段的表示方法只是为了让人们阅读容易。所以应该用无符号整数存储IP地址。MySQL提供INET_ATON()和INET_NTOA()函数在这两种表示方法之间转换。
 
 - 表结构设计
 
@@ -327,6 +332,20 @@ TRUNCATE TABLE table_name; // 删除表,重建同结构
     - 单表不超过20个CHAR(10)字段
     - 建议单表字段数控制在20个以内
     - 拆分TEXT/BLOB，TEXT类型处理性能远低于VARCHAR，强制生成硬盘临时表浪费更多空间。
+
+### Schema设计规范及SQL使用建议 
+
+* 所有的InnoDB表都设计一个无业务用途的自增列做主键，对于绝大多数场景都是如此，真正纯只读用InnoDB表的并不多，真如此的话还不如用TokuDB来得划算；
+* 字段长度满足需求前提下，尽可能选择长度小的。此外，字段属性尽量都加上NOT NULL约束，可一定程度提高性能；
+* 尽可能不使用TEXT/BLOB类型，确实需要的话，建议拆分到子表中，不要和主表放在一起，避免SELECT * 的时候读性能太差。
+* 读取数据时，只选取所需要的列，不要每次都SELECT *，避免产生严重的随机读问题，尤其是读到一些TEXT/BLOB列；
+* 对一个VARCHAR(N)列创建索引时，通常取其50%（甚至更小）左右长度创建前缀索引就足以满足80%以上的查询需求了，没必要创建整列的全长度索引；
+* 通常情况下，子查询的性能比较差，建议改造成JOIN写法；
+* 多表联接查询时，关联字段类型尽量一致，并且都要有索引；
+* 多表连接查询时，把结果集小的表（注意，这里是指过滤后的结果集，不一定是全表数据量小的）作为驱动表；
+* 多表联接并且有排序时，排序字段必须是驱动表里的，否则排序列无法用到索引；
+* 多用复合索引，少用多个独立索引，尤其是一些基数（Cardinality）太小（比如说，该列的唯一值总数少于255）的列就不要创建独立索引了；
+* 类似分页功能的SQL，建议先用主键关联，然后返回结果集，效率会高很多；
 
 ## group by查询松散索引扫描（Loose Index Scan）与紧凑索引扫描（Tight Index Scan）[链接]（<http://isky000.com/database/mysql_group_by_implement）>
 
@@ -688,12 +707,29 @@ $stmt->close();
 
 ### 索引
 
-索引：帮助mysql高效获取数据的数据结构，索引(mysql中叫"键(key)") 数据越大越重要。索引好比一本书，为了找到书中特定的话题，查看目录，获得页码。获取物理位置
+索引：帮助mysql高效获取数据的数据结构，索引(mysql中叫"键(key)") 数据越大越重要。索引好比一本书，为了找到书中特定的话题，查看目录，获得页码。获取物理位置。大多数MySQL索引(PRIMARY KEY、UNIQUE、INDEX和FULLTEXT)使用B树中存储。空间列类型的索引使用R-树，MEMORY表支持hash索引。
+
+* 快速找出匹配一个WHERE子句的行。
+* 删除行。当执行联接时，从其它表检索行。
+* 对具体有索引的列key_col找出MAX()或MIN()值。由预处理器进行优化，检查是否对索引中在key_col之前发生所有关键字元素使用了WHERE key_part_# = constant。在这种情况下，MySQL为每个MIN()或MAX()表达式执行一次关键字查找，并用常数替换它。如果所有表达式替换为常量，查询立即返回。例如：SELECT MIN(key2), MAX (key2)  FROM tb WHERE key1=10;
+* 如果对一个可用关键字的最左面的前缀进行了排序或分组(例如，ORDER BY key_part_1,key_part_2)，排序或分组一个表。如果所有关键字元素后面有DESC，关键字以倒序被读取。
+* 在一些情况中，可以对一个查询进行优化以便不用查询数据行即可以检索值。如果查询只使用来自某个表的数字型并且构成某些关键字的最左面前缀的列，为了更快，可以从索引树检索出值。SELECT key_part3 FROM tb WHERE key_part1=1
+* 有时MySQL不使用索引，即使有可用的索引。一种情形是当优化器估计到使用索引将需要MySQL访问表中的大部分行时。(在这种情况下，表扫描可能会更快些）。然而，如果此类查询使用LIMIT只搜索部分行，MySQL则使用索引，因为它可以更快地找到几行并在结果中返回。
+
+索引种类：
 
 * PRIMARY 索引:在主键上自动创建
 * INDEX 索引:就是普通索引
 * UNIQUE 索引:相当于INDEX + Unique
-* FULLTEXT索引:只在MYISAM 存储引擎支持, 目的是全文索引，在内容系统中用的多， 在全英文网站用多(英文词独立). 中文数据不常用，意义不大 国内全文索引通常 使用 sphinx 来完成.全文索引:fulltext是Myisam表特殊索引，从文本中找关键字不是直接和索引中的值进行比较
+* FULLTEXT索引:只在MYISAM 存储引擎支持, 目的是全文索引，在VARCHAR或者TEXT类型的列上创建，在内容系统中用的多， 在全英文网站用多(英文词独立). 中文数据不常用，意义不大 国内全文索引通常 使用 sphinx 来完成.全文索引:fulltext是Myisam表特殊索引，从文本中找关键字不是直接和索引中的值进行比较
+* 多个列创建索引。一个索引可以包括15个列。
+    - 最左前缀（Leftmost Prefixing）。假如有一个多列索引为key(firstname lastname age)，当搜索条件是以下各种列的组合和顺序时，MySQL将使用该多列索引：firstname，lastname，age  firstname，lastname firstname
+
+合理的建立索引的建议：
+
+* 越小的数据类型通常更好：越小的数据类型通常在磁盘、内存和CPU缓存中都需要更少的空间，处理起来更快。 
+* 简单的数据类型更好：整型数据比起字符，处理开销更小，因为字符串的比较更复杂。在MySQL中，应该用内置的日期和时间数据类型，而不是用字符串来存储时间；以及用整型数据类型存储IP地址。
+* 尽量避免NULL：应该指定列为NOT NULL，除非你想存储NULL。在MySQL中，含有空值的列很难进行查询优化，因为它们使得索引、索引的统计信息以及比较运算更加复杂。你应该用0、一个特殊的值或者一个空串代替空值
 
 #### B+Tree树结构的索引规则
 
@@ -844,12 +880,8 @@ CMD ["mysqld"]
 - docker build -t mysql .
 - docker run -p 3306:3306 --name mymysql -v $PWD/conf/my.cnf:/etc/mysql/my.cnf -v $PWD/logs:/logs -v $PWD/data:/mysql_data -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
 
-
-## 性能
-
-`explain select … from … [where ...]`
-
 ## 扩展
+
 * [mysqljs/mysql](https://github.com/mysqljs/mysql):A pure node.js JavaScript Client implementing the MySql protocol.
 * [o1lab/xmysql](https://github.com/o1lab/xmysql):One command to generate REST APIs for any MySql Database.
 
@@ -877,6 +909,17 @@ http://localhost:3000
 * _p indicates page and _size indicates size of response rows,By default 20 records and max of 100 are returned per GET request on a table.`/api/payments?_p=2&_size=50`
 * Sorting: `/api/payments?_sort=column1` `/api/payments?_sort=-column1` `/api/payments?_sort=column1,-column2`
 * Fields `/api/payments?_fields=customerNumber,checkNumber` `/api/payments?_fields=-checkNumber`
+
+## 维护
+
+* 通常地，单表物理大小不超过10GB，单表行数不超过1亿条，行平均长度不超过8KB，如果机器性能足够，这些数据量MySQL是完全能处理的过来的，不用担心性能问题，这么建议主要是考虑ONLINE DDL的代价较高；
+* 不用太担心mysqld进程占用太多内存，只要不发生OOM kill和用到大量的SWAP都还好；
+* 在以往，单机上跑多实例的目的是能最大化利用计算资源，如果单实例已经能耗尽大部分计算资源的话，就没必要再跑多实例了；
+* 定期使用pt-duplicate-key-checker检查并删除重复的索引。定期使用pt-index-usage工具检查并删除使用频率很低的索引；
+* 定期采集slow query log，用pt-query-digest工具进行分析，可结合Anemometer系统进行slow query管理以便分析slow query并进行后续优化工作；
+* 可使用pt-kill杀掉超长时间的SQL请求，Percona版本中有个选项 innodb_kill_idle_transaction 也可实现该功能；
+* 使用pt-online-schema-change来完成大表的ONLINE DDL需求；
+* 定期使用pt-table-checksum、pt-table-sync来检查并修复mysql主从复制的数据差异；
 
 ## 参考
 
