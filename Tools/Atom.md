@@ -312,3 +312,7 @@ mac：brew install homebrew/php/php-cs-fixer
 Could not find 'autopep8'. The program may not be installed. //
 sudo pip install --upgrade autopep8
 ```
+
+## 参考
+
+[Atom Flight Manual](http://flight-manual.atom.io/)
