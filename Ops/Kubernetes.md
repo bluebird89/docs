@@ -176,20 +176,6 @@ Kubelet是Kubernetes集群中每个Minion和Master API Server的连接点，Kube
 - 弹性容器及故障迁移
 - 集群监控
 
-### 引用
-
-- [网易云原生架构实践之服务治理](https://mp.weixin.qq.com/s/ixkFLfbr3kY8AF_3x-KfSA)
-- [中文文档](https://www.kubernetes.org.cn/doc-11)
-- [手动一步步搭建k8s(Kubernetes)高可用集群](https://www.centos.bz/2017/07/k8s-kubernetes-ha-cluster/)
-- [开源容器集群管理系统Kubernetes架构及组件介绍](https://yq.aliyun.com/articles/47308)
-- [Kubernetes总架构图](http://blog.csdn.net/huwh_/article/details/71308171)
-- [Kubernetes核心原理（一）之API Server](http://blog.csdn.net/huwh_/article/details/75675706)
-- [Kubernetes核心原理（二）之Controller Manager](http://blog.csdn.net/huwh_/article/details/75675761)
-- [Kubernetes核心原理（三）之Scheduler](http://blog.csdn.net/huwh_/article/details/77017353)
-- [Kubernetes核心原理（四）之Kubelet](http://blog.csdn.net/huwh_/article/details/77922293)
-- [官方文档](https://kubernetes.io/docs/tutorials/)
-
-
 ### minikube
 
 Minikube is a small setup by Kubernetes guys, which will spawn a virtual machine and have a tiny (but fully functional) Kubernetes cluster inside the VM.
@@ -199,7 +185,7 @@ kubectl is the command line client you’ll use to connect to the Kubernetes clu
 * all the virtual machine bits:`~/.minikube/`
 
 
-```
+```shell
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew cask install virtualbox
 
@@ -217,9 +203,10 @@ kubectl get pods --all-namespaces  // list two pods, one an ‘addon-manager’ 
 ```
 ###  使用
 
-```
+```shell
 kubectl delete deployments hello-minikube1
 ```
+
 ## 仓库
 
 * [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes):Production-Grade Container Scheduling and Management http://kubernetes.io
@@ -228,10 +215,21 @@ kubectl delete deployments hello-minikube1
 * [openshift/origin](https://github.com/openshift/origin):Enterprise Kubernetes for Developers http://www.openshift.org
 * [kubernetes/kops](https://github.com/kubernetes/kops):Kubernetes Operations (kops) - Production Grade K8s Installation, Upgrades, and Management
 * [hobby-kube/guide](https://github.com/hobby-kube/guide):Kubernetes clusters for the hobbyist.
-
-<http://violetgo.com/blogs/> <http://www.winseliu.com/> <http://blog.csdn.net/qq1010885678/article/details/48832067>
+* [datawire/telepresence](https://github.com/datawire/telepresence):Local development against a remote Kubernetes or OpenShift cluster http://www.telepresence.io
 
 ## 文档
 
-[官方](https://kubernetes.io/docs/tutorials)
+* [官方文档](https://kubernetes.io/docs/tutorials/)
+* [网易云原生架构实践之服务治理](https://mp.weixin.qq.com/s/ixkFLfbr3kY8AF_3x-KfSA)
+* [中文文档](https://www.kubernetes.org.cn/doc-11)
+* [手动一步步搭建k8s(Kubernetes)高可用集群](https://www.centos.bz/2017/07/k8s-kubernetes-ha-cluster/)
+* [开源容器集群管理系统Kubernetes架构及组件介绍](https://yq.aliyun.com/articles/47308)
+* [Kubernetes总架构图](http://blog.csdn.net/huwh_/article/details/71308171)
+* [Kubernetes核心原理（一）之API Server](http://blog.csdn.net/huwh_/article/details/75675706)
+* [Kubernetes核心原理（二）之Controller Manager](http://blog.csdn.net/huwh_/article/details/75675761)
+* [Kubernetes核心原理（三）之Scheduler](http://blog.csdn.net/huwh_/article/details/77017353)
+* [Kubernetes核心原理（四）之Kubelet](http://blog.csdn.net/huwh_/article/details/77922293)
+
 https://www.centos.bz/2017/07/kubernetes-pod-schedule-intro/
+
+<http://violetgo.com/blogs/> <http://www.winseliu.com/> <http://blog.csdn.net/qq1010885678/article/details/48832067>
