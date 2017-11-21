@@ -228,7 +228,8 @@ set  global long_query_time = on; # 开启慢查询
 select @@profiling;
 set profiling=1;
 show profiles\G;
-show profile for query 1;
+show profile for query 1; # 采取针对性的优化措施
+set profiling=0
 
 show processlist
 ```
