@@ -124,6 +124,7 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 * GET产生一个TCP数据包；POST产生两个TCP数据包。
     - 对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；
     - 对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok
+
 #### 参考
 
 - [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
