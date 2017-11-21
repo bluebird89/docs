@@ -68,3 +68,9 @@ GRUB必须设置密码，物理服务器的Idrac/imm/ilo等账号默认密码也
 ## 加密算法
 
 注意到AES有很多不同的算法，如aes192，aes-128-ecb，aes-256-cbc等，AES除了密钥外还可以指定IV（Initial Vector），不同的系统只要IV不同，用相同的密钥加密相同的数据得到的加密结果也是不同的。加密结果通常有两种表示方法：hex和base64，这些功能Nodejs全部都支持，但是在应用中要注意，如果加解密双方一方用Nodejs，另一方用Java、PHP等其它语言，需要仔细测试。如果无法正确解密，要确认双方是否遵循同样的AES算法，字符串密钥和IV是否相同，加密后的数据是否统一为hex或base64格式。
+
+## SQL 注入
+mysql_real_escape_string()
+## xss
+htmlspecialchars
+## cors
