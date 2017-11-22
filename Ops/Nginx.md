@@ -40,8 +40,8 @@
     - 支持sendfile,  sendfile64
     - 支持AIO，mmap
 
-
 ## 模块
+
 - NGINX Plus 由 Web 服务器、内容缓存和负载均衡器组成。流行的开源 NGINX Web 服务器的商业版本。NGINX Web 应用程序防火墙（WAF）是一款基于开源 ModSecurity 研发的商业软件，为针对七层的攻击提供保护，例如 SQL 注入或跨站脚本攻击，并根据如 IP 地址或者报头之类的规则阻止或放行， NGNX WAF 作为 NGINX Plus 的动态模块运行，部署在网络的边缘，以保护内部的 Web 服务和应用程序免受 DDoS 攻击和骇客入侵。
 - NGINX Unit 是 Igor Sysoev 设计的新型开源应用服务器，由核心 NGINX 软件开发团队实施。可运行 PHP、Python 和 Go 的新型开源应用服务器。Unit 是"完全动态的"，并允许以蓝绿部署的方式无缝重启新版本的应用程序，而无需重启任何进程。所有的 Unit 配置都通过使用 JSON 配置语法的内置 REST API 进行处理，并没有配置文件。目前 Unit 可运行由最近版本的 PHP、Python 和 Go 编写的代码。在同一台服务器上可以支持多语言的不同版本混合运行。即将推出更多语言的支持，包括 Java 和 Node.JS。
 - NGINX Controller 是 NGINX Plus 的中央集中式监控和管理平台。Controller 充当控制面板，并允许用户通过使用图形用户界面"在单一位置管理数百个 NGINX Plus 服务器"。该界面可以创建 NGINX Plus 服务器的新实例，并实现负载平衡、 URL 路由和 SSL 终端的中央集中配置。Controller 还具备监控功能，可观察应用程序的健壮性和性能。
@@ -228,7 +228,44 @@ http {
 
 http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
 
+匹配优先级：精确匹配=、^~、~或~*、不带符号的URL；
+* =：URI的精确匹配，其后多一个字符都不可以，精确匹配根
+* ~：做正则表达式匹配，区分字符大小写；
+* ~*：做正则表达式匹配，不区分字符大小写；
+* ^~：URI的左半部分匹配，不区分字符大小写；
+
+URL重写时所用的正则表达式需要使用PCRE格式。PCRE正则表达式元字符：
+字符匹配：.,[ ], [^]
+次数匹配：*,+, ?, {m}, {m,}, {m,n}
+位置锚定：^,$
+或者：|
+分组：(),后向引用, $1, $2, ...
+
 ```
+# 客户端请求限制
+imit_except  GET {
+    allow  172.16.0.0/16;
+    denyall;
+}
+
+imit_rate  # 限制客户端每秒钟所能够传输的字节数，默认为0表示无限制
+
+rewrite^(/download/.*)/media/(.*)\..*$ $1/mp3/$2.mp3 last;
+rewrite^(/download/.*)/audio/(.*)\..*$ $1/mp3/$2.ra last;
+return  403; # last和break请求处理是在服务器内部完成，客户端仅请求一次。redirect和permanent需要客户端再次请求
+
+ssl_certificate  FILE; # 证书文件路径
+ssl_certificate_key  FILE; # 证书对应的私钥文件
+ssl_ciphers  CIPHERS; # 指明由nginx使用的加密算法，可以是OpenSSL库中所支持各加密套件
+ssl_protocols  # ; # 指明支持的ssl协议版本，[SSLv2]  [SSLv3] [TLSv1] [TLSv1.1] [TLSv1.2]默认为后三个
+ssl_session_timeout  #; # ssl会话超时时长；即ssl  session cache中的缓存有效时长
+ssl_session_cache # ; # 指明ssl会话缓存机制；off | none | [builtin[:size]] [shared:name:size]，默认使用shared
+
+location /admin/ {
+    auth_basic"Admin Area";
+    auth_basic_user_file/etc/nginx/.ngxhtpasswd;
+} 
+
 server {
     # nginx监听的端口，Mac下默认为8080，小于1024的要以root启动。可以为listen:*:8080、listen:127.0.0.1:8080等形式
     #listen       8080;
@@ -364,6 +401,10 @@ server {
       root   html;
       index  index.html index.htm;
   }
+}
+
+location  /images/ {
+    alias/data/imgs/;
 }
 
 location  = / {
