@@ -9,6 +9,11 @@
 - [symphonyoss/plexus-interop](https://github.com/symphonyoss/plexus-interop):Plexus-interop open source project hosted by the Symphony Software Foundation
 
 
+## 问题
+
+- SQL注入与XSS攻击
+- memcache内存分配机制
+- 获取按年龄分组的，条数大于1的记录 -- 自我评价与职业规划
 
 https://careers.google.cn/students/guide-to-technical-development.html
 <https://segmentfault.com/a/1190000004505815>

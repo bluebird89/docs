@@ -8,7 +8,7 @@ Percona分支版本，它是一个相对比较成熟的、优秀的MySQL分支�
 
 ## 客户端
 
-- workbeach
+- MySQLWorkbench
 - SQLyog   `ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
 - phpAdmin
 
@@ -35,6 +35,24 @@ dpkg -l | grep mysql  #
 dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  # 
 ```
 
+## 概念
+
+- 支持sql语言，指结构化查询语言，全称是 Structured Query Language.
+- RDBMS 指关系型数据库管理系统，全称 Relational Database Management System。
+- DBMS:关联表公共字段的名字可以不一样，但是数据类型必须一样
+- 索引
+- 数据库操作
+- 表操作
+- 数据操作
+- 子查询
+- 存储过程
+- 触发器
+- 视图
+- 事务
+- 锁
+- 外键约束
+- 影像复制
+
 ### 配置
 
 配置文件：/usr/local/etc/my.cnf  或者 my.ini
@@ -45,6 +63,43 @@ dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  #
     + 正常一个汉字utf8下为三个字节,gbk下为两个字节
 * 保证客户端使用字符集与服务端返回数据字符集编码一致(以适应客户端为主,修改服务器服务器端配置) 查询系统变量:
 * 校对集: _bin：按二进制编码比较 _ci：不区分大小写比较
+* 连接变量
+    - max_connection # 最大连接数:增加该值增加mysqld 要求的文件描述符的数量。如果服务器的并发连接请求量比较大，建议调高此值，以增加并行连接数量，当然这建立在机器能支撑的情况下，因为如果连接数越多，介于MySQL会为每个连接提供连接缓冲区，就会开销越多的内存，所以要适当调整该值，不能盲目提高设值。
+        + max_used_connections / max_connections * 100% （理想值≈ 85%）
+        + max_used_connections跟max_connections相同 那么就是max_connections设置过低或者超过服务器负载上限了，低于10%则设置过大。
+    - back_log: MySQL能暂存的连接数量。当主要MySQL线程在一个很短时间内得到非常多的连接请求，这就起作用。如果MySQL的连接数据达到max_connections时，新来的请求将会被存在堆栈中，以等待某一连接释放资源，该堆栈的数量即back_log，如果等待连接的数量超过back_log，将不被授予连接资源。
+        + back_log值指出在MySQL暂时停止回答新请求之前的短时间内有多少个请求可以被存在堆栈中。只有如果期望在一个短时间内有很多连接，你需要增加它，换句话说，这值对到来的TCP/IP连接的侦听队列的大小。
+        + 默认数值是50，可调优为128，对于Linux系统设置范围为小于512的整数。 
+* 缓冲区变量
+    - key_buffer_size指定索引缓冲区的大小，它决定索引处理的速度，尤其是索引读的速度。通过检查状态值Key_read_requests和Key_reads，可以知道key_buffer_size设置是否合理。比例key_reads / key_read_requests应该尽可能的低，至少是1:100，1:1000更好（上述状态值可以使用SHOW STATUS LIKE ‘key_read%’获得）。
+        + key_buffer_size只对MyISAM表起作用。即使你不使用MyISAM表，但是内部的临时磁盘表是MyISAM表，也要使用该值。可以使用检查状态值created_tmp_disk_tables得知详情。
+        + 计算索引未命中缓存的概率：`key_cache_miss_rate ＝Key_reads / Key_read_requests * 100%`，设置在1/1000左右较好
+    - query_cache_size:使用查询缓冲，MySQL将查询结果存放在缓冲区中，今后对于同样的SELECT语句（区分大小写），将直接从缓冲区中读取结果。
+        + 如果Qcache_lowmem_prunes的值非常大，则表明经常出现缓冲不够的情况
+        + 如果Qcache_hits的值也非常大，则表明查询缓冲使用非常频繁，此时需要增加缓冲大小
+        + 如果Qcache_hits的值不大，则表明你的查询重复率很低，这种情况下使用查询缓冲反而会影响效率，那么可以考虑不用查询缓冲。
+        + query_cache_type指定是否使用查询缓冲，可以设置为0、1、2，该变量是SESSION级的变量。
+        + query_cache_limit指定单个查询能够使用的缓冲区大小，缺省为1M。
+        + query_cache_min_res_unit是在4.1版本以后引入的，它指定分配缓冲区空间的最小单位，缺省为4K。检查状态值Qcache_free_blocks，如果该值非常大，则表明缓冲区中碎片很多，这就表明查询结果都比较小，此时需要减小query_cache_min_res_unit。
+        + 查询缓存碎片率= Qcache_free_blocks / Qcache_total_blocks * 100%,如果查询缓存碎片率超过20%，可以用FLUSH QUERY CACHE整理缓存碎片，或者试试减小query_cache_min_res_unit，如果你的查询都是小数据量的话。
+        + 查询缓存利用率= (query_cache_size – Qcache_free_memory) / query_cache_size * 100%,查询缓存利用率在25%以下的话说明query_cache_size设置的过大，可适当减小；查询缓存利用率在80％以上而且Qcache_lowmem_prunes > 50的话说明query_cache_size可能有点小，要不就是碎片太多。
+        + 查询缓存命中率= (Qcache_hits – Qcache_inserts) / Qcache_hits * 100%,示例服务器查询缓存碎片率＝20.46％，查询缓存利用率＝62.26％，查询缓存命中率＝1.94％，命中率很差，可能写操作比较频繁吧，而且可能有些碎片。
+    - record_buffer_size:每个进行一个顺序扫描的线程为其扫描的每张表分配这个大小的一个缓冲区。如果你做很多顺序扫描，你可能想要增加该值。默认数值是131072(128K)，可改为16773120 (16M)
+    - read_rnd_buffer_size:随机读缓冲区大小。当按任意顺序读取行时(例如，按照排序顺序)，将分配一个随机读缓存区。进行排序查询时，MySQL会首先扫描一遍该缓冲，以避免磁盘搜索，提高查询速度，如果需要排序大量数据，可适当调高该值。但MySQL会为每个客户连接发放该缓冲空间，所以应尽量适当设置该值，以避免内存开销过大。一般可设置为16M.
+    - sort_buffer_size:每个需要进行排序的线程分配该大小的一个缓冲区。增加这值加速ORDER BY或GROUP BY操作。默认数值是2097144(2M)，可改为16777208 (16M)。
+    - join_buffer_size:联合查询操作所能使用的缓冲区大小.
+    - record_buffer_size，read_rnd_buffer_size，sort_buffer_size，join_buffer_size为每个线程独占，也就是说，如果有100个线程连接，则占用为16M*100
+    - table_cache:表高速缓存的大小。每当MySQL访问一个表时，如果在表缓冲区中还有空间，该表就被打开并放入其中，这样可以更快地访问表内容。通过检查峰值时间的状态值Open_tables和Opened_tables，可以决定是否需要增加table_cache的值。如果你发现open_tables等于table_cache，并且opened_tables在不断增长，那么你就需要增加table_cache的值了（上述状态值可以使用SHOW STATUS LIKE ‘Open%tables’获得）。注意，不能盲目地把table_cache设置成很大的值。如果设置得太高，可能会造成文件描述符不足，从而造成性能不稳定或者连接失败。1G内存机器，推荐值是128－256。内存在4GB左右的服务器该参数可设置为256M或384M。
+    - max_heap_table_size:用户可以创建的内存表(memory table)的大小。这个值用来计算内存表的最大行数值。这个变量支持动态改变，即set @max_heap_table_size=#,这个变量和tmp_table_size一起限制了内部内存表的大小。如果某个内部heap（堆积）表大小超过tmp_table_size，MySQL可以根据需要自动将内存中的heap表改为基于硬盘的MyISAM表。
+    - 通过设置tmp_table_size选项来增加一张临时表的大小，例如做高级GROUP BY操作生成的临时表。如果调高该值，MySQL同时将增加heap表的大小，可达到提高联接查询速度的效果，建议尽量优化查询，要确保查询过程中生成的临时表在内存中，避免临时表过大导致生成基于硬盘的MyISAM表。理想的配置是：Created_tmp_disk_tables / Created_tmp_tables * 100% <= 25%.默认为16M，可调到64-256最佳，线程独占，太大可能内存不够I/O堵塞
+    - thread_cache_size:可以复用的保存在中的线程的数量。如果有，新的线程从缓存中取得，当断开连接的时候如果有空间，客户的线置在缓存中。如果有很多新的线程，为了提高性能可以这个变量值。通过比较 Connections和Threads_created状态的变量，可以看到这个变量的作用。默认值为110，可调优为80。
+    - thread_concurrency:推荐设置为服务器 CPU核数的2倍，例如双核的CPU, 那么thread_concurrency的应该为4；2个双核的cpu, thread_concurrency的值应为8。默认为8
+* InnoDB的变量
+    - innodb_buffer_pool_size:对于InnoDB表来说，innodb_buffer_pool_size的作用就相当于key_buffer_size对于MyISAM表的作用一样。InnoDB使用该参数指定大小的内存来缓冲数据和索引。对于单独的MySQL数据库服务器，最大可以把该值设置成物理内存的80%。根据MySQL手册，对于2G内存的机器，推荐值是1G（50%）。
+    - innodb_flush_log_at_trx_commit:主要控制了innodb将log buffer中的数据写入日志文件并flush磁盘的时间点，取值分别为0、1、2三个。0，表示当事务提交时，不做日志写入操作，而是每秒钟将log buffer中的数据写入日志文件并flush磁盘一次；1，则在每秒钟或是每次事物的提交都会引起日志文件写入、flush磁盘的操作，确保了事务的ACID；设置为2，每次事务提交引起写入日志文件的动作，但每秒钟完成一次flush磁盘操作。实际测试发现，该值对插入数据的速度影响非常大，设置为2时插入10000条记录只需要2秒，设置为0时只需要1秒，而设置为1时则需要229秒。因此，MySQL手册也建议尽量将插入操作合并成一个事务，这样可以大幅提高速度。根据MySQL手册，在允许丢失最近部分事务的危险的前提下，可以把该值设为0或2。
+    - innodb_log_buffer_size:log缓存大小，一般为1-8M，默认为1M，对于较大的事务，可以增大缓存大小。可设置为4M或8M。
+    - innodb_additional_mem_pool_size:该参数指定InnoDB用来存储数据字典和其他内部数据结构的内存池大小。缺省值是1M。通常不用太大，只要够用就行，应该与表结构的复杂度有关系。如果不够用，MySQL会在错误日志中写入一条警告信息。根据MySQL手册，对于2G内存的机器，推荐值是20M，可适当增加。
+    - innodb_thread_concurrency=8:推荐设置为 2*(NumCPUs+NumDisks)，默认一般为8
 
 ```
 SHOW VARIABLES LIKE "character_%";
@@ -67,74 +122,28 @@ log-queries-not-using-indexes  # 表示记录下没有使用索引的查询
 
 innodb_buffer_pool_size # 如果是单实例且绝大多数是InnoDB引擎表的话，可考虑设置为物理内存的50% ~ 70%左右
 innodb_data_file_path = ibdata1:1G:autoextend # 千万不要用默认的10M，否则在有高并发事务时，会受到不小的影响
-innodb_log_file_size=256M，设置innodb_log_files_in_group=2，基本可满足90%以上的场景
-long_query_time = 1  # 5.5版本已经可以设置为小于1了，建议设置为0.05（50毫秒），记录那些执行较慢的SQL，用于后续的分析排查
-max_connection（最大连接数）、max_connection_error（最大错误数，建议设置为10万以上，而open_files_limit、innodb_open_files、table_open_cache、table_definition_cache这几个参数则可设为约10倍于max_connection的大小
+innodb_log_file_size=256M
+innodb_log_files_in_group=2，基本可满足90%以上的场景
+
+transaction-isolation = REPEATABLE-READ # 全局事物隔离级别
+max_connection_error（最大错误数，建议设置为10万以上，而open_files_limit、innodb_open_files、table_open_cache、table_definition_cache这几个参数则可设为约10倍于max_connection的大小
 ```
-
-## 问题
-
-- SQL注入与XSS攻击
-- memcache内存分配机制
-- 获取按年龄分组的，条数大于1的记录 -- 自我评价与职业规划
-
-## 概念
-
-- SQL，指结构化查询语言，全称是 Structured Query Language.
-- RDBMS 指关系型数据库管理系统，全称 Relational Database Management System。
-- DBMS:关联表公共字段的名字可以不一样，但是数据类型必须一样
-- 索引：存储引擎用于快速查找记录的一种数据结构，通过合理的使用数据库索引可以大大提高系统的访问性能。大大减轻了服务器需要扫描的数据量，从而提高了数据的检索速度；帮助服务器避免排序和临时表；可以将随机 I/O 变为顺序 I/O
-- 数据库操作
-- 表操作：SELECT 、UPDATE、DELETE 、INSERT
-- 数据操作
-- 索引操作
 
 ```sql
-CREATE DATABASE test;  // 创建新数据库
-ALTER DATABASE test; // 修改数据库
+# 出现ERROR 1040: Too many connections错误,修正max_connections的值
+show variables like ‘max_connections’;  # 最大连接数
+show  status like ‘max_used_connections’; # 响应的连接数
 
-CREATE TABLE testTable; // 创建新表
-ALTER TABLE testTable; //变更（改变）数据库表
-DROP TABLE testTable; //删除表
+show full processlist; #
 
-ALTER TABLE 'table_name' ADD PRIMARY KEY'index_name' ('column');
-ALTER TABLE 'table_name' ADD UNIQUE 'index_name' ('column');
-ALTER TABLE 'table_name' ADD INDEX'index_name' ('column');
-ALTER TABLE 'table_name' ADD FULLTEXT 'index_name' ('column');
-ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
-```
+show variables like ‘key_buffer_size‘; 
+show global status like ‘key_read%‘; # 请求在内存中没有找到直接从硬盘读取索引
 
-## 配置
+SHOW STATUS LIKE ‘Qcache%’;
+show global status like ‘qcache%‘;
+show variables like ‘query_cache%‘;
 
-### 主从复制
-
-两台ubnutu
-
-#### notice
-
-- 无法远程连接mysql(报错111)：注释掉my.cnf中的bind-address或绑定本地ip
-- 添加server-id and log_bin=
-- 主从服务器检查show variables like 'server%'
-- 主服务器与从服务器
-
-  ```sql
-  GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' IDENTIFIED BY 'slave_password';
-  FLUSH PRIVILEGES;
-  SHOW MASTER STATUS;
-
-  CHANGE MASTER TO MASTER_HOST='202.167.45.10',MASTER_USER='slave_user', MASTER_PASSWORD='slave_password', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=  107;
-  START slave;
-  show slave status\G;
-
-  Slave_IO_Running = NO：stop slave; reset slave;start slave;
-  ```
-
-### 读写分离
-
-通过mysql-proxy调度：与主服务器在一台服务器上，用源代码安装含有lua脚本
-
-```shell
-sudo apt-get install mysql-proxy
+show global status like ‘created_tmp%‘;
 ```
 
 ### 存储引擎
@@ -164,18 +173,22 @@ sudo apt-get install mysql-proxy
     - 实现的是基于多版本的并发控制协议——MVCC (Multi-Version Concurrency Control) 加上间隙锁（next-key locking）策略在Repeatable Read (RR)隔离级别下不存在幻读。如果测试幻读，在MyISAM下实验。
     - 在聚集索引（主键索引）中，如果有唯一性约束，InnoDB会将默认的next-key lock降级为record lock。
 
-### 操作
+```sql
+show engines; # 显示当前数据库支持的存储引擎情况
+```
+
+### SQL操作
 
 ```sql
-SHOW DATABASES; // 数据库操作
+SHOW DATABASES; # 数据库操作
 USE db_name;
 CREATE DATABASE [IF NOT EXISTS] db_name [CHARSET utf8(gbk)] [COLLATE utf8_unicode_ci];  关键字表名加``
 ALTER DATABASE db_name DEFAULT  CHARACTER SET utf8
 DROP DATABASE [IF EXISTS] db_name;
-显示创建数据库时的语句:SHOW CREATE DATABASE db_name;
+SHOW CREATE DATABASE db_name; # 显示创建数据库时的语句:
 ALTER DATABASE db_name DEFAULT  CHARACTER SET utf8
 
-SHOW TABLES; // 查看 创建 删除数据表
+SHOW TABLES; # 查看 创建 删除数据表
 DROP TABLE [IF EXISTS] db_name;
 CREATE TABLE table_name(col_name  type  attribute , col_name  type  attribute,…… );
 create table news(
@@ -187,10 +200,10 @@ create table news(
   context text null,
   adddate int(16) not null
 )charset=utf8 collate=utf8_bin;
-DESCRIBE|DESC table_name; // 显示表的结构定义
-SHOW CREATE TABELE table_name\G; //  查看创建表的语句
+DESCRIBE|DESC table_name; #显示表的结构定义
+SHOW CREATE TABELE table_name\G; #  查看创建表的语句
 
-ALTER TABLE table_name ADD address varchar(30) first| after name; //  修改数据表
+ALTER TABLE table_name ADD address varchar(30) first| after name; #  修改数据表
 ALTER TABLE table_name DROP address;
 ALTER TABLE table_name MODIFY address varchar(100);  修改属性
 ALTER TABLE table_name CHANGE address add varchar(100) after id; 修改字段名字
@@ -211,6 +224,12 @@ DELETE FROM table_name [WHERE条件];
 
 DELETE FROM table_name; // 清空数据表：数据一条条删除
 TRUNCATE TABLE table_name; // 删除表,重建同结构
+
+ALTER TABLE 'table_name' ADD PRIMARY KEY'index_name' ('column');
+ALTER TABLE 'table_name' ADD UNIQUE 'index_name' ('column');
+ALTER TABLE 'table_name' ADD INDEX'index_name' ('column');
+ALTER TABLE 'table_name' ADD FULLTEXT 'index_name' ('column');
+ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
 ```
 
 ### 用户管理
@@ -264,13 +283,13 @@ CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; // 添加用户
 
 ### 字段属性
 
-  - NOT NULL | NULL，该列在添加数据时，是否可以为空。
-  - DEFAULT value，给该列定一个默认值。value的值只能是整型、字符型。
-  - DEFAULT 1 ，默认值为整型
-  - DEFAULT "男" ，默认值为字符型
-  - PRIMARY KEY，指定该列主键，值是唯一的，不能重复。
-  - AUTO_INCREMENT，指定列的值是自动增长型。 注意：一个数据表，只能有一个主键和一个自动增长型。 提示：数据表的id字段，必须要有 not null primary key auto_incremtn 这三个属性。
-  - where结构：
+* NOT NULL | NULL，该列在添加数据时，是否可以为空。
+* DEFAULT value，给该列定一个默认值。value的值只能是整型、字符型。
+* DEFAULT 1 ，默认值为整型
+* DEFAULT "男" ，默认值为字符型
+* PRIMARY KEY，指定该列主键，值是唯一的，不能重复。
+* AUTO_INCREMENT，指定列的值是自动增长型。 注意：一个数据表，只能有一个主键和一个自动增长型。 提示：数据表的id字段，必须要有 not null primary key auto_incremtn 这三个属性。
+* where结构：
 
     - 运算符：＝ ＜ ＞ ＜＝ ＞＝ !＝ ＜＞ is not null IS NULL
     - BETWEEN 1 AND 20:WHERE date BETWEEN '2016-05-10' AND '2016-05-14';
@@ -286,10 +305,10 @@ CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; // 添加用户
 
   - 别名：涉及超过一个表；在查询中使用了函数；列名称很长或者可读性差；需要把两个列或者多个列结合在一起
 
-    ```sql
-    SELECT column_name AS alias_name FROM table_name;
-    SELECT column_name(s) FROM table_name AS alias_name; SELECT w.name, w.url, a.count, a.date FROM Websites AS w, access_log AS a WHERE a.site_id=w.id and w.name="菜鸟教程";
-    ```
+```sql
+SELECT column_name AS alias_name FROM table_name;
+SELECT column_name(s) FROM table_name AS alias_name; SELECT w.name, w.url, a.count, a.date FROM Websites AS w, access_log AS a WHERE a.site_id=w.id and w.name="菜鸟教程";
+```
 
 - 联表：联表查询降低查询速度
 
@@ -653,18 +672,39 @@ where grank=1;
 ```
 ## 事物
 
+mysql有一个autocommit参数，默认是on，他的作用是每一条单独的查询都是一个事务，并且自动开始，自动提交（执行完以后就自动结束了，如果你要适用select for update，而不手动调用 start transaction，这个for update的行锁机制等于没用，因为行锁在自动提交后就释放了），所以事务隔离级别和锁机制即使你不显式调用start transaction，这种机制在单独的一条查询语句中也是适用的
+
+加锁阶段：在该阶段可以进行加锁操作。在对任何数据进行读操作之前要申请并获得S锁（共享锁，其它事务可以继续加共享锁，但不能加排它锁），在进行写操作之前要申请并获得X锁（排它锁，其它事务不能再获得任何锁）。加锁不成功，则事务进入等待状态，直到加锁成功才继续执行。
+解锁阶段：当事务释放了一个封锁以后，事务进入解锁阶段，在该阶段只能进行解锁操作不能再进行加锁操作。
+
+这种方式虽然无法避免死锁，但是两段锁协议可以保证事务的并发调度是串行化（串行化很重要，尤其是在数据恢复和备份的时候）的。
+
 ### 隔离
 
-四种隔离级别：
+事务的隔离级别其实都是对于读数据的定义。四个级别逐渐增强，每个级别解决一个问题。事务级别越高,性能越差,大多数环境read committed 可以用，四种隔离级别：
 
 * 未提交读(Read Uncommitted)：允许脏读，也就是可能读取到其他会话中未提交事务修改的数据。
-* 提交读(Read Committed)：只能读取到已经提交的数据，Oracle等多数数据库默认都是该级别。后会造成事务一在同一个transaction中两次读取到的数据不同，这就是不可重复读问题。
+    - 事物一可以获取事物二中未提交的修改。
+    - 事物一中未提交的修改事物（添加共享锁），事物二同样数据修改会被挂起，等待事物一commit；
+* 提交读(Read Committed)：只能读取到已经提交的数据，Oracle等多数数据库默认都是该级别。后会造成事务一在同一个transaction中两次读取到的数据不同，这就是不可重复读问题。并且在对表进行修改时，会对表数据行加上行共享锁
+    - 数据的读取都是不加锁的，但是数据的写入、修改和删除是需要加锁的。
 * 可重复读(Repeated Read)：可重复读。在同一个事务内的查询都是事务开始时刻一致的，InnoDB默认级别。在SQL标准中，该隔离级别消除了不可重复读，但是还存在幻读。
+    - 可重读这个概念是一事务的多个实例在并发读取数据时，会看到同样的数据行
+    - 当两个事务同时进行时，其中一个事务修改数据对另一个事务不会造成影响，即使修改的事务已经提交也不会对另一个事务造成影响。
+    - 两个事物：事物二修改提交后，事物一不提交无法获取事物二的更新；事物一的修改未提交，事物二的修改无法成功等待事物一提交或者超时；
+    - 读到的数据可能是历史数据，是不及时的数据，不是数据库当前的数据
+    - 对于这种读取历史数据的方式，我们叫它快照读 (snapshot read)，而读取数据库当前版本数据的方式，叫当前读 (current read)
 * 串行读(Serializable)：完全串行化的读，每次读都需要获得表级共享锁，读写相互都会阻塞。
+    - 读加共享锁，写加排他锁，读写互斥。使用的悲观锁的理论，实现简单，数据更加安全，但是并发能力非常差。如果你的业务并发的特别少或者没有并发，同时又要求数据及时可靠的话，可以使用这种模式。
+    - 不要看到select就说不会加锁了，在Serializable这个级别，还是会加锁的！
 
 脏读：脏读就是指当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交到数据库中，这时，另外一个事务也访问这个数据，然后使用了这个数据。
 不可重复读：是指在一个事务内，多次读同一数据。在这个事务还没有结束时，另外一个事务也访问该同一数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修改，那么第一个事务两次读到的的数据可能是不一样的。这样就发生了在一个事务内两次读到的数据是不一样的，因此称为是不可重复读。（即不能读到相同的数据内容）
 幻读:是指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，这种修改涉及到表中的全部数据行。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入一行新数据。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象发生了幻觉一样。
+
+当隔离级别是可重复读，且禁用innodb_locks_unsafe_for_binlog的情况下，在搜索和扫描index的时候使用的next-key locks可以避免幻读。在默认的可重复读的隔离级别里，可以使用加锁读去查询最新的数据（提交读）。
+- Next-Key锁是行锁和GAP（间隙锁）的合并：行锁可以防止不同事务版本的数据修改提交时造成数据冲突的情况。但如何避免别的事务插入数据就成了问题。
+- 行锁防止别的事务修改或删除，GAP锁防止别的事务新增，行锁和GAP锁结合形成的的Next-Key锁共同解决了RR级别在写数据时的幻读问题。
 
 ```sql
 CREATE TABLE user (
@@ -674,28 +714,41 @@ CREATE TABLE user (
  UNIQUE `uniq_name` USING BTREE (name)
 ) ENGINE=`InnoDB` AUTO_INCREMENT=10 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-# 开两个终端
+set autocommit=0; # 关闭事物自动提交
+# 设置事物隔离级别与查看
 set session transaction isolation level read uncommitted;
+select @@global.tx_isolation;
 select @@session.tx_isolation;
-start transaction; # 终端1 操作1
-insert into user(name) values('ziwenxie'); # 操作3
+select @@tx_isolation;
 
-start transaction; # 操作2
-select * from user; # 操作4 事务二中可能会读取到事务一中没有commit的数据，这就是脏读。
+start transaction; # 事物一
+insert into user(name) values('ziwenxie'); 
 
-# Read Committed
-set session transaction isolation level read committed;
-start transaction;
-select * from user; # 事物二提交后才会影响到事物一
+set session transaction isolation level read uncommitted;
+# Read Uncommitted：事务二中会读取到事务一中没有commit的数据，这就是脏读。
+# Read Committed：事物一提交后影响到事务二的查询结果，前后查询的结果不一致
+# REPEATABLE-READ：事务二中无法读取到事务一中没有commit的数据
+start transaction; # 事物二
+select * from user; 
+
+set session transaction isolation level repeatable read;
+
+# RC级别：
+select id,class_name,teacher_id from class_teacher where teacher_id=30; # 2 初三二班 30
+begin;
+update class_teacher set class_name='初三四班' where teacher_id=30; 
+insert into class_teacher values (null,'初三二班',30);
 commit;
-
-start transaction;
-update user set name='lisi' where id=10;
-commit;
+select id,class_name,teacher_id from class_teacher where teacher_id=30; #  2 初三四班 30   10 初三二班 30
+# RR级别：事务A在update后加锁，事务B无法插入新数据，这样事务A在update前后读的数据保持一致，避免了幻读。这个锁，就是Gap锁。
 ```
-## 乐观锁 悲观锁
+
+## 锁机制
 
 数据库管理系统（DBMS）中的并发控制的任务是确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性以及数据库的统一性。
+
+共享锁：由读表操作加上的锁，加锁后其他用户只能获取该表或行的共享锁，不能获取排它锁，也就是说只能读不能写
+排它锁：由写表操作加上的锁，加锁后其他用户不能获取该表或行的任何锁，典型是mysql事务中
 
 ### 悲观锁
 
@@ -703,6 +756,8 @@ commit;
 
 要使用悲观锁，我们必须关闭mysql数据库的自动提交属性，因为MySQL默认使用autocommit模式，也就是说，当你执行一个更新操作后，MySQL会立刻将结果进行提交。set autocommit=0; 一锁二查三更新，通过常用的select … for update操作来实现悲观锁，在当前事务结束时自动释放，因此必须在事务中使用。
 
+对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）。
+在悲观锁的情况下，为了保证事务的隔离性，就需要一致性锁定读。读取数据时给加锁，其它事务无法修改这些数据。修改删除数据时也要加锁，其它事务无法读取这些数据。
 select for update语句执行中所有扫描过的行都会被锁上，这一点很容易造成问题。因此如果在mysql中用悲观锁务必要确定走了索引，而不是全表扫描。
 
 - 在对任意记录进行修改前，先尝试为该记录加上排他锁（exclusive locking）。
@@ -733,6 +788,11 @@ commit;/commit work; # //4.提交事务
 数据版本,为数据增加的一个版本标识。当读取数据时，将版本标识的值一同读出，数据每更新一次，同时对版本标识进行更新。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的版本标识进行比对，如果数据库表当前版本号与第一次取出来的版本标识值相等，则予以更新，否则认为是过期数据。
 
 * 使用版本号
+    - ELECT时，读取创建版本号<=当前事务版本号，删除版本号为空或>当前事务版本号。
+    - INSERT时，保存当前事务版本号为行的创建版本号
+    - DELETE时，保存当前事务版本号为行的删除版本号
+    - UPDATE时，插入一条新纪录，保存当前事务版本号为行创建版本号，同时保存当前事务版本号到原来删除的行
+    - 通过MVCC，虽然每行记录都需要额外的存储空间，更多的行检查工作以及一些额外的维护工作，但可以减少锁的使用，大多数读操作都不用加锁，读数据操作很简单，性能很好，并且也能保证只会读取到符合标准的行，也只锁住必要行。
 * 是使用时间戳
 
 ```sql
@@ -811,7 +871,7 @@ $stmt->close();
 
 ### 索引
 
-索引：帮助mysql高效获取数据的数据结构，索引(mysql中叫"键(key)") 数据越大越重要。索引好比一本书，为了找到书中特定的话题，查看目录，获得页码。获取物理位置。大多数MySQL索引(PRIMARY KEY、UNIQUE、INDEX和FULLTEXT)使用B树中存储。空间列类型的索引使用R-树，MEMORY表支持hash索引。
+索引：帮助mysql高效获取数据的数据结构，索引(mysql中叫"键(key)") 数据越大越重要。索引好比一本书，为了找到书中特定的话题，查看目录，获得页码。获取物理位置。大多数MySQL索引(PRIMARY KEY、UNIQUE、INDEX和FULLTEXT)使用B树中存储。空间列类型的索引使用R-树，MEMORY表支持hash索引。存储引擎用于快速查找记录的一种数据结构，通过合理的使用数据库索引可以大大提高系统的访问性能。大大减轻了服务器需要扫描的数据量，从而提高了数据的检索速度；帮助服务器避免排序和临时表；可以将随机 I/O 变为顺序 I/O
 
 * 快速找出匹配一个WHERE子句的行。
 * 删除行。当执行联接时，从其它表检索行。
@@ -1036,10 +1096,66 @@ MySQL Proxy的主要作用是用来做负载均衡，数据库读写分离的。
 * 使用pt-online-schema-change来完成大表的ONLINE DDL需求；
 * 定期使用pt-table-checksum、pt-table-sync来检查并修复mysql主从复制的数据差异；
 
+
+## 扩展配置
+
+### 主从复制
+
+两台ubnutu
+
+#### notice
+
+- 无法远程连接mysql(报错111)：注释掉my.cnf中的bind-address或绑定本地ip
+- 添加server-id and log_bin=
+- 主从服务器检查show variables like 'server%'
+- 主服务器与从服务器
+
+  ```sql
+  GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' IDENTIFIED BY 'slave_password';
+  FLUSH PRIVILEGES;
+  SHOW MASTER STATUS;
+
+  CHANGE MASTER TO MASTER_HOST='202.167.45.10',MASTER_USER='slave_user', MASTER_PASSWORD='slave_password', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=  107;
+  START slave;
+  show slave status\G;
+
+  Slave_IO_Running = NO：stop slave; reset slave;start slave;
+  ```
+
+### 读写分离
+
+通过mysql-proxy调度：与主服务器在一台服务器上，用源代码安装含有lua脚本
+
+```shell
+sudo apt-get install mysql-proxy
+```
+
+## 备份
+
+* 在二级复制服务器上进行备份。
+* 备份过程中停止数据的复制，以防止出现数据依赖和外键约束的不一致。
+* 彻底停止MySQL之后，再从数据文件进行备份。
+* 如果使用MySQL dump进行备份，请同时备份二进制日志 — 确保复制过程不被中断。
+* 不要信任 LVM 快照的备份 — 可能会创建不一致的数据，将来会因此产生问题。
+* 为每个表做一个备份，这样更容易实现单表的恢复 — 如果数据与其他表是相互独立的。
+* 使用 mysqldump 时，指定 -opt 参数。
+* 备份前检测和优化表。
+* 临时禁用外键约束，来提高导入的速度。
+* 临时禁用唯一性检查，来提高导入的速度。
+* 每次备份完后，计算数据库/表数据和索引的大小，监控其增长。
+* 使用定时任务（cron）脚本，来监控从库复制的错误和延迟。
+* 定期备份数据。
+* 定期测试备份的数据。
+
 ## 参考
 
 * [HOW TO INSTALL MYSQL NDB CLUSTER ON LINUX](https://clusterengine.me/how-to-install-mysql-ndb-cluster-on-linux/)
 * [索引性能分析](http://draveness.me/sql-index-performance.html) 
 * [MySQL主从同步](http://geek.csdn.net/news/detail/236754)
+* [MySQL数据库事务隔离级别介绍](http://www.jb51.net/article/49596.htm)
 * 高性能mysql
-* 海量数据，高并发的公司
+
+
+海量数据，高并发的公司
+
+不同引擎数据结构的实现
