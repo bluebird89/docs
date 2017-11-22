@@ -736,8 +736,9 @@ set session transaction isolation level repeatable read;
 # RC级别：
 select id,class_name,teacher_id from class_teacher where teacher_id=30; # 2 初三二班 30
 begin;
-update class_teacher set class_name='初三四班' where teacher_id=30; 
-insert into class_teacher values (null,'初三二班',30);
+update class_teacher set class_name='初三四班' where teacher_id=30;  # 事物一更新
+
+insert into class_teacher values (null,'初三二班',30); # 事物二插入
 commit;
 select id,class_name,teacher_id from class_teacher where teacher_id=30; #  2 初三四班 30   10 初三二班 30
 # RR级别：事务A在update后加锁，事务B无法插入新数据，这样事务A在update前后读的数据保持一致，避免了幻读。这个锁，就是Gap锁。
