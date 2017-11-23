@@ -10,15 +10,13 @@ fastcgi_pass unix:/run/php/php7.1-fpm.sock;
 error_log = /usr/local/var/log/php-fpm.log
 /ect/init.d/php7.0-fpm
 
-sudo service php7.0-fpm reload
-
 ### 约定目录
 
 /usr/local/php/sbin/php-fpm
 /usr/local/php/etc/php-fpm.conf
 /usr/local/php/etc/php.ini
 
-```
+```sh
 #测试php-fpm配置
 /usr/local/php/sbin/php-fpm -t
 /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf -t
@@ -33,8 +31,9 @@ kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
 #重启php-fpm
 kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
 
+sudo service php7.0-fpm reload # linux
 ```
-```
+
 [global]
 #pid设置，默认在安装目录中的var/run/php-fpm.pid，建议开启
 pid=run/php-fpm.pid
@@ -116,7 +115,7 @@ chdir =
 catch_workers_output = yes
 #重定向运行过程中的stdout和stderr到主要的错误日志文件中. 如果没有设置, stdout 和 stderr 将会根据FastCGI的规则被重定向到 /dev/null . 默认值: 空.
 
-
+```
 [www]
 user=nobody
 group=nobody

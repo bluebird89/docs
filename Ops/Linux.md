@@ -12,12 +12,19 @@ Linux 是一个可以实现多用户登陆的操作系统，多用户可以同�
 
 每个进程都有其各自的环境变量设置，且默认情况下，当一个进程被创建时，处理创建过程中明确指定的话，它将继承其父进程的绝大部分环境设置。Shell 程序也作为一个进程运行在操作系统之上，而我们在 Shell 中运行的大部分命令都将以 Shell 的子进程的方式运行。
 
-- 永久的：需要修改配置文件，变量永久生效； /etc/bashrc 存放的是 shell 变量 `echo "PATH=$PATH:/home/shiyanlou/mybin" >> .zshrc`
-- .profile（不是/etc/profile） 只对当前用户永久生效，所以如果想要添加一个永久生效的环境变量，只需要打开 /etc/profile
-- 环境变量理解生效 `source .zshrc` `. ./.zshrc`
-- 临时的：使用 export 命令行声明即可，变量在关闭 shell 时失效。`PATH=$PATH:/home/zhangwang/mybin`给 PATH 环境变量追加了一个路径，它也只是在当前 Shell 有效，一旦退出终端，再打开就会发现又失效了。
+* 永久的：需要修改配置文件，变量永久生效； /etc/bashrc 存放的是 shell 变量 `echo "PATH=$PATH:/home/shiyanlou/mybin" >> .zshrc`
+* .profile（不是/etc/profile） 只对当前用户永久生效，所以如果想要添加一个永久生效的环境变量，只需要打开 /etc/profile
+* 环境变量理解生效 `source .zshrc` `. ./.zshrc`
+* 临时的：使用 export 命令行声明即可，变量在关闭 shell 时失效。`PATH=$PATH:/home/zhangwang/mybin`给 PATH 环境变量追加了一个路径，它也只是在当前 Shell 有效，一旦退出终端，再打开就会发现又失效了。
+* 当前 Shell 进程私有用户自定义变量，如上面我们创建的 tmp 变量，只在当前 Shell 中有效。
+* ${变量名#匹配字串}: 从头向后开始匹配，删除符合匹配字串的最短数据
+* ${变量名##匹配字串}: 从头向后开始匹配，删除符合匹配字串的最长数据
+* ${变量名%匹配字串}: 从尾向前开始匹配，删除符合匹配字串的最短数据
+* ${变量名%%匹配字串}: 从尾向前开始匹配，删除符合匹配字串的最长数据
+* ${变量名/旧的字串/新的字串}:将符合旧字串的第一个字串替换为新的字串
+* ${变量名//旧的字串/新的字串}: 将符合旧字串的全部字串替换为新的字串
 
-```
+```sh
 declare tmp // 使用 declare 命令创建一个变量名为 tmp 的变量
 tmp=God // 使用 = 号赋值运算符，将变量 tmp 赋值为 God
 echo $tmp // 读取变量的值：使用 echo 命令和 $ 符号（$ 符号用于表示引用一个变量的值）
@@ -26,14 +33,6 @@ env:显示与当前用户相关的环境变量，还可以让命令在指定环�
 export：显示从 Shell 中导出成环境变量的变量
 unset temp : 删除变量temp
 ```
-
-- 当前 Shell 进程私有用户自定义变量，如上面我们创建的 tmp 变量，只在当前 Shell 中有效。
-- ${变量名#匹配字串}: 从头向后开始匹配，删除符合匹配字串的最短数据
-- ${变量名##匹配字串}: 从头向后开始匹配，删除符合匹配字串的最长数据
-- ${变量名%匹配字串}: 从尾向前开始匹配，删除符合匹配字串的最短数据
-- ${变量名%%匹配字串}: 从尾向前开始匹配，删除符合匹配字串的最长数据
-- ${变量名/旧的字串/新的字串}:将符合旧字串的第一个字串替换为新的字串
-- ${变量名//旧的字串/新的字串}: 将符合旧字串的全部字串替换为新的字串
 
 ## 软件
 
@@ -55,34 +54,34 @@ sudo add-apt-repository --remove ppa:finalterm/daily
 
 ubuntu.16替换apt-get为apt
 
-- install 其后加上软件包名，用于安装一个软件包
-- update 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表
-- upgrade 升级本地可更新的全部软件包，但存在依赖问题时将不会升级，通常会在更新之前执行一次update
-- dist-upgrade 解决依赖关系并升级(存在一定危险性)
-- remove 移除已安装的软件包，包括与被移除软件包有依赖关系的软件包，但不包含软件包的配置文件
-- autoremove 移除之前被其他软件包依赖，但现在不再被使用的软件包
-- purge 与remove相同，但会完全移除软件包，包含其配置文件
-- clean 移除下载到本地的已经安装的软件包，默认保存在/var/cache/apt/archives/
-- autoclean 移除已安装的软件的旧版本软件包
-- -y 自动回应是否安装软件包的选项，在一些自动化安装脚本中使用这个参数将十分有用
-- -q 静默安装方式，指定多个q或者-q=#,#表示数字，用于设定静默级别，这在你不想要在安装软件包时屏幕输出过多时很有用
-- -f 修复损坏的依赖关系
-- -d 只下载不安装
-- --reinstall 重新安装已经安装但可能存在问题的软件包
-- --install-suggests 同时安装APT给出的建议安装的软件包
-- sudo apt-cache search softname1 softname2 softname3...... 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
+* install 其后加上软件包名，用于安装一个软件包
+* update 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表
+* upgrade 升级本地可更新的全部软件包，但存在依赖问题时将不会升级，通常会在更新之前执行一次update
+* dist-upgrade 解决依赖关系并升级(存在一定危险性)
+* remove 移除已安装的软件包，包括与被移除软件包有依赖关系的软件包，但不包含软件包的配置文件
+* autoremove 移除之前被其他软件包依赖，但现在不再被使用的软件包
+* purge 与remove相同，但会完全移除软件包，包含其配置文件
+* clean 移除下载到本地的已经安装的软件包，默认保存在/var/cache/apt/archives/
+* autoclean 移除已安装的软件的旧版本软件包
+* -y 自动回应是否安装软件包的选项，在一些自动化安装脚本中使用这个参数将十分有用
+* -q 静默安装方式，指定多个q或者-q=#,#表示数字，用于设定静默级别，这在你不想要在安装软件包时屏幕输出过多时很有用
+* -f 修复损坏的依赖关系
+* -d 只下载不安装
+* --reinstall 重新安装已经安装但可能存在问题的软件包
+* --install-suggests 同时安装APT给出的建议安装的软件包
+* sudo apt-cache search softname1 softname2 softname3...... 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
 
 #### 从磁盘安装deb安装包
 
 下载相应deb软件包，使用dpkg命令来安装
 
-- -i 安装指定deb包,之后修复依赖关系的安装`sudo apt-get -f install`
-- -R 后面加上目录名，用于安装该目录下的所有deb安装包
-- -r remove，移除某个已安装的软件包
-- -I 显示deb包文件的信息
-- -s 显示已安装软件的信息
-- -S 搜索已安装的软件包
-- -L 显示已安装软件包的目录信息
+* -i 安装指定deb包,之后修复依赖关系的安装`sudo apt-get -f install`
+* -R 后面加上目录名，用于安装该目录下的所有deb安装包
+* -r remove，移除某个已安装的软件包
+* -I 显示deb包文件的信息
+* -s 显示已安装软件的信息
+* -S 搜索已安装的软件包
+* -L 显示已安装软件包的目录信息
 
 #### 从二进制软件包安装
 
@@ -94,12 +93,12 @@ ubuntu.16替换apt-get为apt
 
 ### 列表
 
-- 云笔记:simplenote
-- video: VLC
-- editor: atom
-- oh my zsh 而非 zsh fish
-- KchmViewer:阅读CHM
-- LaTeX
+* 云笔记:simplenote
+* video: VLC
+* editor: atom
+* oh my zsh 而非 zsh fish
+* KchmViewer:阅读CHM
+* LaTeX
 
 ## Usage:
 
@@ -125,43 +124,43 @@ Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能
 
 FHS包含两层规范：
 
-- / 下面的各个目录应该要放什么文件数据，例如 /etc 应该放置设置文件，/bin 与 /sbin 则应该放置可执行文件等等。
-- 针对 /usr 及 /var 这两个目录的子目录来定义。例如 /var/log 放置系统登录文件，/usr/share 放置共享数据等等。
+* / 下面的各个目录应该要放什么文件数据，例如 /etc 应该放置设置文件，/bin 与 /sbin 则应该放置可执行文件等等。
+* 针对 /usr 及 /var 这两个目录的子目录来定义。例如 /var/log 放置系统登录文件，/usr/share 放置共享数据等等。
 
 ### 文件类型
 
-- 普通文件：一般是用一些相关的应用程序创建的（如图像工具、文档工具、归档工具... 或 cp工具等),这类文件的删除方式是用rm 命令,而创建使用touch命令,用符号-表示；
-- 目录：目录在Linux是一个比较特殊的文件，用字符d表示，删除用rm 或rmdir命令；
-- 块设备文件：存在于/dev目录下，如硬盘，光驱等设备，用字符d表示;
-- 设备文件：（ /dev 目录下有各种设备文件，大都跟具体的硬件设备相关），如猫的串口设备，用字符c表示；
-- socket文件;用字符s表示，比如启动MySQL服务器时，产生的mysql.sock的文件;
-- pipe 管道文件：可以实现两个程序（可以从不同机器上telnet）实时交互，用字符p表示；
-- 链接文件:软链接等同于 Windows 上的快捷方式；用字符l表示； 软硬链接文件的共同点和区别：无论是修改软链接，硬链接生成的文件还是直接修改源文件，相应的文件都会改变，但是如果删除了源文件，硬链接生成的文件依旧存在而软链接生成的文件就不再有效了。
+* 普通文件：一般是用一些相关的应用程序创建的（如图像工具、文档工具、归档工具... 或 cp工具等),这类文件的删除方式是用rm 命令,而创建使用touch命令,用符号-表示；
+* 目录：目录在Linux是一个比较特殊的文件，用字符d表示，删除用rm 或rmdir命令；
+* 块设备文件：存在于/dev目录下，如硬盘，光驱等设备，用字符d表示;
+* 设备文件：（ /dev 目录下有各种设备文件，大都跟具体的硬件设备相关），如猫的串口设备，用字符c表示；
+* socket文件;用字符s表示，比如启动MySQL服务器时，产生的mysql.sock的文件;
+* pipe 管道文件：可以实现两个程序（可以从不同机器上telnet）实时交互，用字符p表示；
+* 链接文件:软链接等同于 Windows 上的快捷方式；用字符l表示； 软硬链接文件的共同点和区别：无论是修改软链接，硬链接生成的文件还是直接修改源文件，相应的文件都会改变，但是如果删除了源文件，硬链接生成的文件依旧存在而软链接生成的文件就不再有效了。
 
 ### 文件权限
 
 一个目录同时具有读权限和执行权限才可以打开并查看内部文件，而一个目录要有写权限才允许在其中创建其它文件，这是因为目录文件实际保存着该目录里面的文件的列表等信息。
 
-- 读权限：可以使用 `cat <file name>` 之类的命令来读取某个文件的内容;
-- 写权限，表示你可以编辑和修改某个文件；
-- 执行权限，通常指可以运行的二进制程序文件或者脚本文件(Linux 上不是通过文件后缀名来区分文件的类型);
-- 所有者权限，所属用户组权限，是指你所在的用户组中的所有其它用户对于该文件的权限
-- `chmod 700 iphone6`
-- `sudo chown zhangwang /etc/apt/sources.list`
+* 读权限：可以使用 `cat <file name>` 之类的命令来读取某个文件的内容;
+* 写权限，表示你可以编辑和修改某个文件；
+* 执行权限，通常指可以运行的二进制程序文件或者脚本文件(Linux 上不是通过文件后缀名来区分文件的类型);
+* 所有者权限，所属用户组权限，是指你所在的用户组中的所有其它用户对于该文件的权限
+* `chmod 700 iphone6`
+* `sudo chown zhangwang /etc/apt/sources.list`
 
 #### 文件压缩
 
 ##### 压缩
 
-- -r:表示递归打包包含子目录的全部内容
-- -q:表示为安静模式，即不向屏幕输出信息
-- -o:表示输出文件，需在其后紧跟打包输出文件名
-- -[1-9]:设置压缩等级，1 表示最快压缩但体积大，9 表示体积最小但耗时最久。
-- -x:排除我们上一次创建的 zip 文件，否则又会被打包进这一次的压缩文件中
-- -e：创建加密压缩包
-- -l:将 LF（换行） 转换为 CR+LF(windows 回车加换行)
+* -r:表示递归打包包含子目录的全部内容
+* -q:表示为安静模式，即不向屏幕输出信息
+* -o:表示输出文件，需在其后紧跟打包输出文件名
+* -[1-9]:设置压缩等级，1 表示最快压缩但体积大，9 表示体积最小但耗时最久。
+* -x:排除我们上一次创建的 zip 文件，否则又会被打包进这一次的压缩文件中
+* -e：创建加密压缩包
+* -l:将 LF（换行） 转换为 CR+LF(windows 回车加换行)
 
-```
+```sh
 zip -r -9 -q -o shiyanlou_9.zip /home/shiyanlou -x ~/*.zip // 设置不同压缩等级
 zip -r -e -o shiyanlou_encryption.zip /home/shiyanlou  // 创建加密
 zip -r -l -o shiyanlou.zip /home/shiyanlou   // 解决windows和linux对换行的不同处理问题
@@ -174,66 +173,67 @@ unzip -O GBK 中文压缩文件.zip // 使用 -O（英文字母，大写 o）参
 
 Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。命令解析器
 
-- Tab:点击Tab键可以实现命令补全,目录补全、命令参数补全;
-- Ctrl+c:强行终止当前程序（常用）;
-- Ctrl+d:键盘输入结束或退出终端（常用）;
-- Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
-- Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
-- Ctrl+a:将光标移至输入行头，相当于Home键;
-- Ctrl+e:将光标移至输入行末，相当于End键;
-- Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
-- Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
-- Shift+PgUp:将终端显示向上滚动;
-- Shift+PgDn:将终端显示向下滚动;
+* Tab:点击Tab键可以实现命令补全,目录补全、命令参数补全;
+* Ctrl+c:强行终止当前程序（常用）;
+* Ctrl+d:键盘输入结束或退出终端（常用）;
+* Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
+* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
+* Ctrl+a:将光标移至输入行头，相当于Home键;
+* Ctrl+e:将光标移至输入行末，相当于End键;
+* Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
+* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
+* Shift+PgUp:将终端显示向上滚动;
+* Shift+PgDn:将终端显示向下滚动;
 
 #### 操作文件
 
-- du命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
-- touch:来更改已有文件的时间戳的（比如，最近访问时间，最近修改时间） touch file{1..5}.txt 使用通配符批量创建 5 个文件
-- rename:批量重命名,需要用到正则表达式
-- rename 's/.txt/.c/' *.txt 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件:
-- rename 'y/a-z/A-Z/' *.c 批量将这 5 个文件，文件名改为大写:
-- ls:列出某文件夹下的文件，添加参数可实现更细致的功能，
-- ls -a 列出所有文件，包括隐藏文件
-- ls -l 列出文件及其详细信息(权限)
-- tree:查看文件列表
-- cd切换目录,cd到不存在的目录时会报错
-- pwd打印当前目录
-- cat:读取某一个文件内的内容
-- wc:获取某一个文件的行数和字数`wc package.json`
-- cp:复制某文件 -r
-- mkdir:创建目录
-- rm dir：删除目录
-- rm -rf:r递归删除，f参数表示强制
-- mv 移动文件、文件重命名
-- sort排序
-- diff:比较两个文件的异同
-- mkdir -p father/son/grandson:新建多级目录
-- cat:打印文件内容到标准输出(正序)
-- tac:打印文件内容到标准输出(逆序)
-- more:比较简单，只能向一个方向滚动,查看文件：打开后默认只显示一屏内容，终端底部显示当前阅读的进度。可以使用 Enter 键向下滚动一行，使用 Space 键向下滚动一屏，按下 h 显示帮助，q 退出。
-- file:查看文件类型`file /bin/ls`
-- head:查看文件的头几行（默认10行）
-- tail:查看文件的尾几行（默认10行） `tail -n 1 /etc/passwd`
-- `dd if=/dev/zero of=virtual.img bs=1M count=256` 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
-- `sudo mkfs.ext4 virtual.img` 格式化virtual.img为ext4格式
-- dd默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
-- `dd if=/dev/stdin of=test bs=10 count=1 conv=ucase` 将输出的英文字符转换为大写再写入文件
-- sudo mount 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
+* du命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
+* touch:来更改已有文件的时间戳的（比如，最近访问时间，最近修改时间） touch file{1..5}.txt 使用通配符批量创建 5 个文件
+* rename:批量重命名,需要用到正则表达式
+* rename 's/.txt/.c/' *.txt 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件:
+* rename 'y/a-z/A-Z/' *.c 批量将这 5 个文件，文件名改为大写:
+* ls:列出某文件夹下的文件，添加参数可实现更细致的功能，
+* ls -a 列出所有文件，包括隐藏文件
+* ls -l 列出文件及其详细信息(权限)
+* tree:查看文件列表
+* cd切换目录,cd到不存在的目录时会报错
+* pwd打印当前目录
+* cat:读取某一个文件内的内容
+* wc:获取某一个文件的行数和字数`wc package.json`
+* cp:复制某文件 -r
+* mkdir:创建目录
+* rm dir：删除目录
+* rm -rf:r递归删除，f参数表示强制
+* mv 移动文件、文件重命名
+* sort排序
+* diff:比较两个文件的异同
+* mkdir -p father/son/grandson:新建多级目录
+* cat:打印文件内容到标准输出(正序)
+* tac:打印文件内容到标准输出(逆序)
+* more:比较简单，只能向一个方向滚动,查看文件：打开后默认只显示一屏内容，终端底部显示当前阅读的进度。可以使用 Enter 键向下滚动一行，使用 Space 键向下滚动一屏，按下 h 显示帮助，q 退出。
+* file:查看文件类型`file /bin/ls`
+* head:查看文件的头几行（默认10行）
+* tail:查看文件的尾几行（默认10行） `tail -n 1 /etc/passwd`
+* `dd if=/dev/zero of=virtual.img bs=1M count=256` 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
+* `sudo mkfs.ext4 virtual.img` 格式化virtual.img为ext4格式
+* dd默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
+* `dd if=/dev/stdin of=test bs=10 count=1 conv=ucase` 将输出的英文字符转换为大写再写入文件
+* sudo mount 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
 
 #### 系统相关：
 
-- date:获取当前时间
-- uname:返回系统名称
-- hostname：返回系统的主机名称
-- --version/-V 查看某个程序的版本
-- history 显示历史
-- help 用于显示 shell 内建命令的简要帮助信息 help exit
-- man
-- info ls
+* date:获取当前时间
+* uname:返回系统名称
+* hostname：返回系统的主机名称
+* --version/-V 查看某个程序的版本
+* history 显示历史
+* help 用于显示 shell 内建命令的简要帮助信息 help exit
+* man
+* info ls
 
 #### 修改时区
-```
+
+```sh
 sudo tzselect
 sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
 
@@ -242,15 +242,15 @@ sudo vi /etc/timezone
 ```
 #### 网络相关：
 
-- host xx.xxx.com：显示某域名相关托管服务器/邮件服务器
-- ping 8.8.8.8检测连接
+* host xx.xxx.com：显示某域名相关托管服务器/邮件服务器
+* ping 8.8.8.8检测连接
 
 #### 搜索相关命令
 
-```
-`whereis who`  \\ 只能搜索二进制文件(-b)，man 帮助文件(-m)和源代码文件(-s)。
-`locate /etc/sh`(查找 /etc 下所有以 sh 开头的文件)  \\ 通过/var/lib/mlocate/mlocate.db数据库查找，不过这个数据库也不是实时更新的，系统会使用定时任务每天自动执行 updatedb 命令更新一次，所以有时候你刚添加的文件，它可能会找不到
-`locate /usr/share/\*.jpg` \\ 注意要添加 * 号前面的反斜杠转义，否则会无法找到。
+```sh
+`whereis who`  # 只能搜索二进制文件(-b)，man 帮助文件(-m)和源代码文件(-s)。
+`locate /etc/sh`(查找 /etc 下所有以 sh 开头的文件)  # 通过/var/lib/mlocate/mlocate.db数据库查找，不过这个数据库也不是实时更新的，系统会使用定时任务每天自动执行 updatedb 命令更新一次，所以有时候你刚添加的文件，它可能会找不到
+`locate /usr/share/\*.jpg` # 注意要添加 * 号前面的反斜杠转义，否则会无法找到。
 `which man` 使用 which 来确定是否安装了某个指定的软件，因为它只从 PATH 环境变量指定的路径中去搜索命令
 `sudo find /etc/ -name interfaces/` 格式find [path] [option] [action];  不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索。
 ```
@@ -259,7 +259,7 @@ sudo vi /etc/timezone
 
 每次次新建用户如果不指定用户组的话，默认会自动创建一个与用户名相同的用户组； 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限。
 
-```
+```sh
 who am i:只列出用户名
 who mom likes/who am i:列出用户名，所使用终端的编号和开启时间；
 finger:列出当前用户的详细信息，需使用apt-get提前安装；
@@ -287,7 +287,9 @@ sudo deluser student --remove-home：删除用户及用户相关文件；
 - 注意通配符大小写敏感
 
 ## 操作
+
 ### ssh
+
 基于密钥的验证是最安全的几个身份验证模式使用OpenSSH,如普通密码和Kerberos票据。 基于密钥的验证密码身份验证有几个优点,例如键值更难以蛮力,比普通密码或者猜测,提供充足的密钥长度。 其他身份验证方法仅在非常特殊的情况下使用。
 
 SSH可以使用RSA(Rivest-Shamir-Adleman)或“DSA(数字签名算法)的钥匙。 这两个被认为是最先进的算法,当SSH发明,但DSA已经被视为近年来更不安全。 RSA是唯一推荐选择新钥匙,所以本指南使用RSA密钥”和“SSH密钥”可以互换使用。
@@ -295,9 +297,10 @@ SSH可以使用RSA(Rivest-Shamir-Adleman)或“DSA(数字签名算法)的钥匙�
 基于密钥的验证使用两个密钥,一个“公共”键,任何人都可以看到,和另一个“私人”键,只有老板是允许的。 安全通信使用的基于密钥的认证,需要创建一个密钥对,安全地存储私钥在电脑人想从登录,并存储公钥在电脑上一个想登录。
 
 使用基于密钥登录使用ssh通常被认为是比使用普通安全密码登录。 导的这个部分将解释的过程中生成的一组公共/私有RSA密钥,并将它们用于登录到你的Ubuntu电脑通过OpenSSH(s)。如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端，我们称为
+
 ### 密钥生成
 
-```
+```sh
 ssh-keygen -t rsa -b 4096
 ssh-copy-id <username>@<host>
 chmod 700 ~/.ssh
@@ -308,14 +311,14 @@ chmod 600 ~/.ssh/authorized_keys
   ```
   scp id_rsa.pub git@172.26.186.117:/home/git/
   scp -P 1101 username@servername:/remote_path/filename  ~/local_destination   // 源文件  目标文件
-  ssh -p 2222 user@host   \\ 登陆服务器
+  ssh -p 2222 user@host   # 登陆服务器
   ```
 
 - 文件文件 cat file >> another file
 
 - 服务管理：
 
-  ```
+  ```sh
   sudo systemctl enable nginx
   sudo systemctl start nginx
   sudo systemctl restart nginx
@@ -325,7 +328,7 @@ chmod 600 ~/.ssh/authorized_keys
 
 - 修改hosts
 
-  ```
+  ```sh
   sudo su
   curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
   ```
@@ -338,7 +341,7 @@ chmod 600 ~/.ssh/authorized_keys
   - get package: download sogou_pinyin_linux_1.0.0.0033_amd64.deb
   - install:
 
-```
+```sh
 sudo dpkg  -i   sogou_pinyin_linux_1.0.0.0033_amd64.deb
 ```
 
@@ -349,13 +352,13 @@ sudo dpkg  -i   sogou_pinyin_linux_1.0.0.0033_amd64.deb
 
 ## atom install
 
-```
+```sh
 sudo add-apt-repository ppa:webupd8team/atom
 sudo apt-get update
 sudo apt-get install atom
 
 
-// ervernote
+# ervernote
 sudo add-apt-repository ppa:nixnote/nixnote2-daily
 sudo apt update
 sudo apt install nixnote2
@@ -365,7 +368,7 @@ Tools->Synchronize
 
 ## clean
 
-```
+```sh
 sudo apt-get autoclean
 sudo apt-get autoremove
 sudo apt-get clean
@@ -373,7 +376,7 @@ sudo apt-get clean
 
 ## chrome(firefox 禁用console.log)
 
-```
+```sh
 sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
 sudo apt-get update
@@ -382,7 +385,7 @@ sudo apt-get install google-chrome-stable
 
 ## ufw防火墙
 
-```
+```sh
 sudo ufw allow 'Nginx HTTP' 
 sudo ufw status 
 sudo ufw allow https
@@ -391,8 +394,8 @@ sudo ufw enable/disable
 
 ## 指令
 
-- 实时刷新文件：tail -f file
-- 查看linux系统信息
+* 实时刷新文件：tail -f file
+* 查看linux系统信息
 
   - uname -a：显示电脑以及操作系统的相关信息
   - cat /proc/version:说明正在运行的内核版本
@@ -405,7 +408,7 @@ sudo ufw enable/disable
 
 - 提高电池的寿命并且减少过热
 
-  ```
+  ```sh
   sudo add-apt-repository ppa:linrunner/tlp
   sudo apt-get update
   sudo apt-get install tlp tlp-rdw
@@ -474,23 +477,22 @@ chkconfig --list sshd
 
 ## 终端命令
 
-- ssh:连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。
+* ssh:连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。   
+* grep:用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
+* 使用 alias 这个 bash 内置的命令来为它们创建一个短别名:alias server="python -m SimpleHTTPServer 9000"
+* Curl 是一个命令行工具，用来通过 HTTP（s），FTP 等其它几十种你可能尚未听说过的协议来发起网络请求。
+* Tree 用可视化的效果向你展示一个目录下的文件 tree -P '_.min._'
+* Tmux 是一个终端复用器,它是一个可以将多个终端连接到单个终端会话的工具。可以在一个终端中进行程序之间的切换，添加分屏窗格，还有就是将多个终端连接到同一个会话，使它们保持同步。 当你在远程服务器上工作时，Tmux 特别有用，因为它可以让你创建新的选项卡，然后在选项卡之间切换
+* du 命令会生成相关文件和有关目录的空间使用情况的报告。它很容易使用，也可以递归地运行，会遍历每个子目录并且返回每个文件的单个大小。`du -sh *`
+* tar:用来处理文件压缩的默认 Unix 工具.
+* md5sum:它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
+* Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程。
+* ln:unix 里面的链接同 Windows 中的快捷方式类似，允许你快速地访问到一个特定的文件。`sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
 
-```
+```sh
 ssh username@remote_host
 ssh username@remote_host ls /var/www
 ```
-
-- grep:用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
-- 使用 alias 这个 bash 内置的命令来为它们创建一个短别名:alias server="python -m SimpleHTTPServer 9000"
-- Curl 是一个命令行工具，用来通过 HTTP（s），FTP 等其它几十种你可能尚未听说过的协议来发起网络请求。
-- Tree 用可视化的效果向你展示一个目录下的文件 tree -P '_.min._'
-- Tmux 是一个终端复用器,它是一个可以将多个终端连接到单个终端会话的工具。可以在一个终端中进行程序之间的切换，添加分屏窗格，还有就是将多个终端连接到同一个会话，使它们保持同步。 当你在远程服务器上工作时，Tmux 特别有用，因为它可以让你创建新的选项卡，然后在选项卡之间切换
-- du 命令会生成相关文件和有关目录的空间使用情况的报告。它很容易使用，也可以递归地运行，会遍历每个子目录并且返回每个文件的单个大小。`du -sh *`
-- tar:用来处理文件压缩的默认 Unix 工具.
-- md5sum:它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
-- Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程。
-- ln:unix 里面的链接同 Windows 中的快捷方式类似，允许你快速地访问到一个特定的文件。`sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
 
 ## Hypervisor
 
@@ -504,7 +506,7 @@ Linux的最重要创新之一，引入Hypervisor，运行其他操作系统的�
 
 ### 安装与配置
 
-```
+```sh
 apt-get install samba
 mkdir -p /home／directory
 chmod 777 /home／directory
@@ -556,14 +558,10 @@ smb://192.168.100.106
 
 - 不给地址：对全文进行处理
 - # ：指定的行/pattern/能够被模式匹配到的每一行
-
 - # ,#：从第n行到第m行
-
 - # ,+#：从第n行，加上其后面m行
-
 - /pat1/,/pat2/：符合第一个模式和第二个模式的所有行
 - # ,/pat1/：从第n行到符合 /pat1/ 这个模式的行
-
 - 1~2 ：~ 这个符号表示步进，1~2 表示的是奇数行
 - 2~2：表示的是偶数行
 
@@ -587,10 +585,10 @@ smb://192.168.100.106
 - w /PATH/TO/SOMEFILE：将替换成功的行保存至文件中
 - -e
 
-
 ## 扩展
 
 * [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/index.html):
+
 ## 参考
 
 * [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more

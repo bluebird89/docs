@@ -4,6 +4,7 @@
 
 * 热更新：bottle
 * 测试
+
 ```python
 import hug
 import time
@@ -23,6 +24,7 @@ if __name__ == "__main__":
 def root():
     return {'msg': "欢迎来到 HUG 指南"}
 ```
+
 ## 参考
 
 * [管网](http://www.hug.rest/)

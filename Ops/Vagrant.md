@@ -24,7 +24,7 @@ windows&&linux
 
 解决版本号的问题
 新建
-```
+```json
 {
     "name": "laravel/homestead",            //盒子名称
     "versions": 
@@ -72,6 +72,7 @@ end`
 ## 命令
 
 ### box管理
+
 ```
 vagrant box list 
 vagrant box add ubuntu/trusty64 通过包名先去本地是否存在，没有去仓库下载，下载的版本在上述命令行下加入 --box-version=版本号
@@ -83,6 +84,7 @@ vagrant box list              # 列表
 vagrant box remove name       # 移除镜像
 vagrant box repackage         # 重新打包
 ```
+
 ### 服务管理
 
 ```
@@ -108,6 +110,7 @@ vagrant plugin install vagrant-vbguest
 ```
 
 ### 配置选项
+
 ```
 config.vm.synced_folder “path/on/host”, “/absolute/path/on/vm”
 config.vm.provision :shell, :inline => “ifconfig”  # inline script
@@ -138,6 +141,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ......
 end
 ```
+
 ## 搭建集群:ip中的0与1默认被占用，hostname不能含特殊符号
 
 ```

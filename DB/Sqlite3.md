@@ -2,19 +2,16 @@
 
 - 连接：sqlite3
 - 退出命令行：.exit
+- 用户管理
+- 创建用户
+- 添加权限
 
-- 用户管理：
-
-- 创建用户：
-
-```
+```sql
 insert into mysql.user(Host,User,Password) values("localhost","test",password("1234"));
-```
 
-- 添加权限： grant all privileges on testDB.* to test@localhost identified by '1234';
+grant all privileges on testDB.* to test@localhost identified by '1234';
 
-```
-  grant select,update on testDB.* to test@"%" identified by '1234';
+grant select,update on testDB.* to test@"%" identified by '1234';
 ```
 
 - 删除用户：Delete FROM user Where User='test' and Host='localhost';

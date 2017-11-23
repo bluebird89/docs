@@ -2,17 +2,17 @@
 
 ## Add extension phalcon
 
-```
-`curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash`
-`sudo apt-get install php5.6-phalcon`
-`sudo service php5.6-fpm start`
+```sh
+curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
+sudo apt-get install php5.6-phalcon
+sudo service php5.6-fpm start
 
 sudo apt-get install php7.0-phalcon
 ```
 
 ## Phalcon Developer Tools
 
-```
+```sh
 git clone git://github.com/phalcon/phalcon-devtools.git
 cd phalcon-devtools/
 ./phalcon.sh

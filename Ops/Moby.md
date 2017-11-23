@@ -177,7 +177,7 @@ sudo apt-get upgrade docker-ce
 
 ### 容器使用
 
-```
+```sh
 docker version
 docker search tutorial
 docker pull learn/tutorial  
@@ -210,7 +210,9 @@ sudo docker run -d --volumes-from dbstore --name db1 training/postgres
 
 sudo docker run -d --add-host=SERVER_NAME:127.0.0.1 bat/spark
 ```
+
 ### avoid sudo
+
 ```
 sudo groupadd docker
 sudo gpasswd -a ${USER} docker
@@ -224,46 +226,48 @@ docker-machine start # Start virtual machine for docker
 docker-machine env  # It's helps to get environment variables
 eval "$(docker-machine env default)" # Set environment variables
 ```
+
 ### 容器连接
 
 连接系统允许将多个容器连接在一起，共享连接信息。docker连接会创建一个父子关系，其中父容器可以看到子容器的信息。
 
 ## 运行方式
 
-- 短暂方式：就是刚刚的那个"hello world"，命令执行完后，container就终止了，不过并没有消失，可以用 sudo docker ps -a 看一下所有的container，第一个就是刚刚执行过的container，可以再次执行一遍：`sudo docker start container_id`：不过这次看不到"hello world"了，只能看到ID，用logs命令才能看得到： `sudo docker logs container_id`可以看到两个"hello world"，因为这个container运行了两次。
-- 交互方式：`sudo docker run -i -t image_name /bin/bash` #image_name为docker镜像名称 -t:在新容器内指定一个伪终端或终端。 -i:允许你对容器内的标准输入 (STDIN) 进行交互
-- daemon方式：即让软件作为长时间服务运行，这就是SAAS啊！例如，一个无限循环打印的脚本(替换为memcached、apache等，操作方法仍然不变！)：linjiqin@ubuntu:~$ CONTAINER_ID=$(sudo docker run -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done") --name标识来命名容器 -P:是容器内部端口随机映射到主机的高端口 -p : 是容器内部端口绑定到指定的主机端口。 docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py 查看端口： docker port adoring_stonebraker 5002
+* 短暂方式：就是刚刚的那个"hello world"，命令执行完后，container就终止了，不过并没有消失，可以用 sudo docker ps -a 看一下所有的container，第一个就是刚刚执行过的container，可以再次执行一遍：`sudo docker start container_id`：不过这次看不到"hello world"了，只能看到ID，用logs命令才能看得到： `sudo docker logs container_id`可以看到两个"hello world"，因为这个container运行了两次。
+* 交互方式：`sudo docker run -i -t image_name /bin/bash` #image_name为docker镜像名称 -t:在新容器内指定一个伪终端或终端。 -i:允许你对容器内的标准输入 (STDIN) 进行交互
+* daemon方式：即让软件作为长时间服务运行，这就是SAAS啊！例如，一个无限循环打印的脚本(替换为memcached、apache等，操作方法仍然不变！)：linjiqin@ubuntu:~$ CONTAINER_ID=$(sudo docker run -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done") --name标识来命名容器 -P:是容器内部端口随机映射到主机的高端口 -p : 是容器内部端口绑定到指定的主机端口。 docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py 查看端口： docker port adoring_stonebraker 5002
 
 ### 迁移docker
 
-- 分解：通过设计和部署把这些服务拆分成为它们自己的容器。如果一个应用程序能够被拆分成为越多的分布式组件，那么应用程序扩展的选择则越多。但是，分布式组件越多也意味着管理的复杂性越高。
-- 选择基础映像：搜索Docker注册库找到一个基本的Docker映像并将其作为应用程序的基础来使用。
-- 安全管理：安全性和管理应当是一个高优先级的考虑因素；企业用户不应再把它们当作应用程序迁移至容器的最后一步。反之，企业必须从一开始就做好安全性和管理的规划，把它们的功能纳入应用程序的开发过程中，并在应用程序运行过程中积极主动地关注这些方面。基于容器的应用程序是分布式应用程序。企业应当更新较老的应用程序以支持联合身份管理方法，这将非常有利于确保分布式应用程序的安全性。为了做到这一点，应为每一个应用程序组件和数据提供一个唯一的标识符，这个标识符可允许企业在一个细粒度的级别上进行安全性管理。企业用户还应当增加一个日志记录的方法。
-- 配置Dockerfile，添加到Docker Hub
+* 分解：通过设计和部署把这些服务拆分成为它们自己的容器。如果一个应用程序能够被拆分成为越多的分布式组件，那么应用程序扩展的选择则越多。但是，分布式组件越多也意味着管理的复杂性越高。
+* 选择基础映像：搜索Docker注册库找到一个基本的Docker映像并将其作为应用程序的基础来使用。
+* 安全管理：安全性和管理应当是一个高优先级的考虑因素；企业用户不应再把它们当作应用程序迁移至容器的最后一步。反之，企业必须从一开始就做好安全性和管理的规划，把它们的功能纳入应用程序的开发过程中，并在应用程序运行过程中积极主动地关注这些方面。基于容器的应用程序是分布式应用程序。企业应当更新较老的应用程序以支持联合身份管理方法，这将非常有利于确保分布式应用程序的安全性。为了做到这一点，应为每一个应用程序组件和数据提供一个唯一的标识符，这个标识符可允许企业在一个细粒度的级别上进行安全性管理。企业用户还应当增加一个日志记录的方法。
+* 配置Dockerfile，添加到Docker Hub
 
 ## boot2docker
 
 ## 工具
 
-- [docker/compose](https://github.com/docker/compose):Define and run multi-container applications with Docker https://docs.docker.com/compose/
-- [docker/machine](https://github.com/docker/machine)Machine management for a container-centric world
-- [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
-- Shipyard
-- Potainer
+* [docker/compose](https://github.com/docker/compose):Define and run multi-container applications with Docker https://docs.docker.com/compose/
+* [docker/machine](https://github.com/docker/machine)Machine management for a container-centric world
+* [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
+* Shipyard
+* Potainer
 
 ## 分布式发布部署
 
-- Google的Kubernetes
-- Apache的Mesos
+* Google的Kubernetes
+* Apache的Mesos
 
 ### 引用
 
-- [Docker](http://blog.csdn.net/erixhao/article/details/72762851)
-- [Docker 教程](http://www.runoob.com/docker/docker-tutorial.html)
-- [Docker for Mac](https://docs.docker.com/docker-for-mac/)
-- [Docker mac 入门](https://docs.docker.com/mac/)
-- [Product and tool manuals](https://docs.docker.com/manuals/) https://docs.docker.com/engine/installation/
-- [moby/moby](https://github.com/moby/moby)Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
+* [Docker](http://blog.csdn.net/erixhao/article/details/72762851)
+* [Docker 教程](http://www.runoob.com/docker/docker-tutorial.html)
+* [Docker for Mac](https://docs.docker.com/docker-for-mac/)
+* [Docker mac 入门](https://docs.docker.com/mac/)
+* [Product and tool manuals](https://docs.docker.com/manuals/) https://docs.docker.com/engine/installation/
+* [moby/moby](https://github.com/moby/moby)Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
 
 ## 资源
+
 - [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects 

@@ -1,6 +1,6 @@
-# []入手](http://www.ruanyifeng.com/blog/2017/06/raspberry-pi-tutorial.html)
+# [入手](http://www.ruanyifeng.com/blog/2017/06/raspberry-pi-tutorial.html)
 
-# 准备
+## 准备
 
 型号：Raspberry Pi 3代 B 型 Raspberry Pi zero
 
@@ -16,7 +16,7 @@
 
 程序配置：
 
-```
+```sh
 mkdir led-demo && cd led-demo
 npm init -y
 npm install -S rpio
@@ -25,9 +25,7 @@ node led-on.js
 npm install -S server
 node server.js
 curl http://localhost:8080
-```
 
-```
 // led-on.js
 var rpio = require('rpio');
 
@@ -36,14 +34,10 @@ rpio.open(11, rpio.OUTPUT);
 
 // 指定 11 号针脚输出电流（HIGH）
 rpio.write(11, rpio.HIGH);
-```
 
-```
 // server.js
 var server = require('server');
 var { get } = server.router;
-
-// ...
 
 server({ port: 8080 }, [
   get('/' ,  ctx => {
@@ -52,5 +46,5 @@ server({ port: 8080 }, [
   }),
 ]);
 
-console.log('server starts on 8080 port');
+console.log('server starts on 8080 port');}
 ```

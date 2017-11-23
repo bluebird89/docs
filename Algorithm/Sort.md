@@ -4,12 +4,12 @@
 
 ## 指标
 
-- 稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面；
-- 不稳定：如果a原本在b的前面，而a=b，排序之后a可能会出现在b的后面；
-- 内排序：所有排序操作都在内存中完成；
-- 外排序：由于数据太大，因此把数据放在磁盘中，而排序通过磁盘和内存的数据传输才能进行；
-- 时间复杂度: 一个算法执行所耗费的时间。
-- 空间复杂度: 运行完一个程序所需内存的大小。
+* 稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面；
+* 不稳定：如果a原本在b的前面，而a=b，排序之后a可能会出现在b的后面；
+* 内排序：所有排序操作都在内存中完成；
+* 外排序：由于数据太大，因此把数据放在磁盘中，而排序通过磁盘和内存的数据传输才能进行；
+* 时间复杂度: 一个算法执行所耗费的时间。
+* 空间复杂度: 运行完一个程序所需内存的大小。
 
 ## Javascript实现
 
@@ -29,7 +29,7 @@
 - 重复步骤1~3，直到排序完成。
 - 改进方法：考虑利用在每趟排序中进行正向和反向两遍冒泡的方法一次可以得到两个最终值(最大者和最小者) , 从而使排序趟数几乎减少了一半。
 
-```
+```js
 function bubbleSort3(arr3) {
     var low = 0;
     var high= arr.length-1; //设置变量的初始值
@@ -77,7 +77,7 @@ console.log(bubbleSort2(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47,
 - 第i趟排序(i=1,2,3...n-1)开始时，当前有序区和无序区分别为R[1..i-1]和R(i..n）。该趟排序从当前无序区中-选出关键字最小的记录 R[k]，将它与无序区的第1个记录R交换，使R[1..i]和R[i+1..n)分别变为记录个数增加1个的新有序区和记录个数减少1个的新无序区；
 - n-1趟结束，数组有序化了。
 
-```
+```js
 function selectionSort(arr) {
     var len = arr.length;
     var minIndex, temp;
@@ -122,7 +122,7 @@ console.log(selectionSort(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 4
 - 重复步骤2~5。
 - 查找插入位置时使用二分查找的方式
 
-```
+```js
 function binaryInsertionSort(array) {
     if (Object.prototype.toString.call(array).slice(8, -1) === 'Array') {
         console.time('二分插入排序耗时：');
@@ -149,8 +149,9 @@ function binaryInsertionSort(array) {
         return 'array is not an Array!';
     }
 }
+}
 var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
-console.log(binaryInsertionSort(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
+console.log(binaryInsertionSort(arr));
 ```
 
 动图演示: ![](../_static/insertion.png)
@@ -173,7 +174,7 @@ console.log(binaryInsertionSort(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44,
 - 按增量序列个数k，对序列进行k 趟排序；
 - 每趟排序，根据对应的增量ti，将待排序列分割成若干长度为m 的子序列，分别对各子表进行直接插入排序。仅增量因子为1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。
 
-```
+```js
 function shellSort(arr) {
     var len = arr.length,
         temp,
@@ -218,7 +219,7 @@ console.log(shellSort(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 4
 - 对这两个子序列分别采用归并排序；
 - 将两个排序好的子序列合并成一个最终的排序序列。
 
-```
+```js
 function mergeSort(arr) {  //采用自上而下的递归方法
     var len = arr.length;
     if(len < 2) {
@@ -230,23 +231,25 @@ function mergeSort(arr) {  //采用自上而下的递归方法
     return merge(mergeSort(left), mergeSort(right));
 }
 
-function merge(left, right)
-{
+function merge(left, right){
     var result = [];
     console.time('归并排序耗时');
     while (left.length && right.length) {
         if (left[0] <= right[0]) {
            result.push(left.shift()); 
         }else{
-          result.push(right.shift()); 
-           while (left.length)= (right.length){
+            result.push(right.shift()); 
+            while (left.length)= (right.length){
               console.timeend('归并排序耗时'); 
               return result; 
-              } 
+          } 
               var=""; 
               arr="[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];" 
               console.log(mergesort(arr)); 
               <="" code="">
+              }
+          }
+}
 ```
 
 动图演示：![](../_static/merge.png)
@@ -267,7 +270,7 @@ function merge(left, right)
 - 重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；
 - 递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。
 
-```
+```js
 /*方法说明：快速排序
 @param  array 待排序数组*/
 //方法一
@@ -291,6 +294,8 @@ function quickSort(array, left, right) {
              console.log(quicksort(arr,0,arr.length-1)); 
             [2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50] 
             console.log(quicksort2(arr)); 50]< code>
+        }
+    }
 ```
 
 动图演示：![](../_static/quick.png)
@@ -311,7 +316,7 @@ function quickSort(array, left, right) {
 - 将堆顶元素R[1]与最后一个元素R[n]交换，此时得到新的无序区(R1,R2,......Rn-1)和新的有序区(Rn),且满足R[1,2...n-1]<=R[n]；
 - 由于交换后新的堆顶R[1]可能违反堆的性质，因此需要对当前无序区(R1,R2,......Rn-1)调整为新堆，然后再次将R[1]与无序区最后一个元素交换，得到新的无序区(R1,R2....Rn-2)和新的有序区(Rn-1,Rn)。不断重复此过程直到有序区的元素个数为n-1，则整个排序过程完成。
 
-```
+```js
 /*方法说明：堆排序
 @param  array 待排序数组*/
 function heapSort(array) {
@@ -384,7 +389,7 @@ console.log(heapSort(arr));//[10, 13, 20, 22, 30, 31, 35, 46, 60, 65, 65, 77, 81
 - 对所有的计数累加（从C中的第一个元素开始，每一项和前一项相加）；
 - 反向填充目标数组：将每个元素i放在新数组的第C(i)项，每放一个元素就将C(i)减去1。
 
-```
+```js
 function countingSort(array) {
     var len = array.length,
         B = [],
@@ -430,7 +435,7 @@ console.log(countingSort(arr)); //[1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 6, 
 - 对每个不是空的桶进行排序；
 - 从不是空的桶里把排好序的数据拼接起来。
 
-```
+```js
 /*方法说明：桶排序
 @param  array 数组
 @param  num   桶的数量*/
@@ -485,7 +490,7 @@ var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
 - arr为原始数组，从最低位开始取每个位组成radix数组；
 - 对radix进行计数排序（利用计数排序适用于小范围数的特点）；
 
-```
+```js
 /**
  * 基数排序适用于：
  *  (1)数据范围较小，建议在小于1000

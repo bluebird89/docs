@@ -16,7 +16,7 @@
 
   - 头部添加标签，viewport是网页默认的宽度和高度，上面这行代码的意思是，网页宽度默认等于屏幕宽度（width=device-width），原始缩放比例（initial-scale=1）为1.0，即网页初始大小占屏幕面积的100%。网页会根据屏幕宽度调整布局，所以不能使用绝对宽度的布局，也不能使用具有绝对宽度的元素，使用百分比或auto，字体使用相对大小（em）；
 
-    ```
+    ```html
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     ```
 
@@ -24,7 +24,7 @@
 
   - "自适应网页设计"的核心，就是CSS3引入的Media Query模块。它的意思就是，自动探测屏幕宽度，然后加载相应的CSS文件。
 
-    ```
+    ```html
     <link rel="stylesheet" type="text/css"
     　　　　media="screen and (min-width: 400px) and (max-device-width: 600px)"
     　　　　href="smallScreen.css" />
@@ -33,7 +33,7 @@
 
   - CSS实现
 
-    ```
+    ```css
     @media screen and (max-device-width: 400px) {
     　　　　.column {
     　　　　　　float: none;
@@ -47,7 +47,7 @@
 
   - 图片 视频的自动缩放
 
-    ```
+    ```html
     img, object { max-width: 100%;}
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">

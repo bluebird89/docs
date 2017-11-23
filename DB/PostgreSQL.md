@@ -14,7 +14,7 @@ PostgreSQL是一个功能强大的开源对象关系数据库管理系统(ORDBMS
 
 ## 使用
 
-```
+```sh
 brew services start/stop/restart postgresql
 initdb /usr/local/var/postgres -E utf8 //初始化数据库 ，配置数据存放目录
 
@@ -53,9 +53,7 @@ initdb /usr/local/var/postgres -E utf8 --locale=zh_CN.UTF-8
 pg_upgrade -b /usr/local/Cellar/postgresql/9.2.4/bin/ -B /usr/local/Cellar/postgresql/9.3.1/bin/ -d /usr/local/var/postgres.old -D /usr/local/var/postgres -v
 ```
 
-```
-<?php
-
+```php
 define("HOST", "127.0.0.1");
 define("PORT", 5432);
 define("DBNAME", "dbname");
@@ -134,6 +132,4 @@ class Ext_Pgsql {
     }
 
 }
-
-?>
 ```

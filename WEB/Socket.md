@@ -18,7 +18,7 @@ socket则是对TCP/IP协议的封装和应用。也可以说，TPC/IP协议是�
 
 ## 资源
 
-[Workerman](https://github.com/walkor/Workerman)An asynchronous event driven PHP framework for easily building fast, scalable network applications. Supports HTTP, Websocket, SSL and other custom protocols. Supports libevent, HHVM, ReactPHP.
+* [Workerman](https://github.com/walkor/Workerman)An asynchronous event driven PHP framework for easily building fast, scalable network applications. Supports HTTP, Websocket, SSL and other custom protocols. Supports libevent, HHVM, ReactPHP.
 
 <http://blog.csdn.net/hguisu/article/details/7445768/>
 
