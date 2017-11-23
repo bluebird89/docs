@@ -4,6 +4,7 @@
 
 - `mkdir -p  ~/apache/www ~/apache/logs ~/apache/conf`
 - Dockerfile
+
 ```
 FROM debian:jessie
 

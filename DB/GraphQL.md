@@ -5,17 +5,12 @@
 - [apollographql/apollo-server](https://github.com/apollographql/apollo-server)GraphQL server for Express, Connect, Hapi and Koa
 - [apollographql/apollo-client](https://github.com/apollographql/apollo-client)A fully-featured, production ready caching GraphQL client for every server or UI framework
 - [apollographql/react-apollo](https://github.com/apollographql/react-apollo): React higher-order component for Apollo Client http://dev.apollodata.com/
-- 
 
 ## 学习资料
 
 - [learnapollo/learnapollo](https://github.com/learnapollo/learnapollo)
 - [graphql/express-graphql](https://github.com/graphql/express-graphql):Create a GraphQL HTTP server with Express.
 - [mugli/learning-graphql](https://github.com/mugli/learning-graphql):An attempt to learn GraphQL
-
-## 实例
-
-<https://developer.github.com/v4/>
 
 ## 工具
 
@@ -30,5 +25,8 @@
 
 ## 文档
 
-* [chentsulin/awesome-graphql](https://github.com/chentsulin/awesome-graphql):Awesome list of GraphQL & Relay
-* []()
+* [chentsulin/awesome-graphql](https://github.com/chentsulin/awesome-graphql):Awesome list of GraphQL & Relay## 实例
+
+## 实例
+
+<https://developer.github.com/v4/>

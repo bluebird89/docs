@@ -34,8 +34,6 @@ sudo service mysql stop
 sudo service mysql restart
 
 systemctl unmask mysql.service
-
 ```
-
 
 percona-toolkit

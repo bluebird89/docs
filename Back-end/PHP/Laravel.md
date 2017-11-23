@@ -17,7 +17,7 @@
 
 - 安装virtualbox and vagrant
 
-```
+```shell
 brew install homebrew/php/php71
 # 确保 ~/.composer/vendor/binp
 sudo chown -R $USER .composer/
@@ -41,7 +41,7 @@ valet uninstall
 valet restart
 ```
 
-- parallels vagrant plugin install vagrant-parallels ```
+- parallels `vagrant plugin install vagrant-parallels`
 
 # 下载&&安装
 
@@ -99,37 +99,37 @@ from @golaravel
 
 ## Artisan 命令
 
-- 列出所有可用命令:php artisan list
-- 查看路由：php artisan route:list
-- 显示目前的Laravel版本:php artisan --version
-- 帮助命令：php artisan help migrate
-- 使程序进入维护模式:php artisan down
-- 使程序退出维护模式:php artisan up
-- 显示当前框架环境:php artisan env
-- 生成应用的key(APP_KEY)为一个随机字符串:php artisan key:generate
-- 重新生成框架的自动加载文件:composer dump-autoload
-- 进入tinker环境：php artisan tinker
+* 列出所有可用命令:php artisan list
+* 查看路由：php artisan route:list
+* 显示目前的Laravel版本:php artisan --version
+* 帮助命令：php artisan help migrate
+* 使程序进入维护模式:php artisan down
+* 使程序退出维护模式:php artisan up
+* 显示当前框架环境:php artisan env
+* 生成应用的key(APP_KEY)为一个随机字符串:php artisan key:generate
+* 重新生成框架的自动加载文件:composer dump-autoload
+* 进入tinker环境：php artisan tinker
 
-  ```
-  //生成30条数据
-  factory(App\User::class,30)->create()
-  // tinker的使用
-  E:\opensource\blog>php artisan tinker
-  Psy Shell v0.7.2 (PHP 5.6.19 鈥?cli) by Justin Hileman
-  >>> $user = new App\User;
-  => App\User {#628}
-  >>> $user->name = 'admin'
-  => "admin"
-  >>> $user->email = 'fation@126.com'
-  => "fation@126.com"
-  >>> $user->password = bcrypt('123456');
-  => "$2y$10$kyCuwqSpzGTTZgAPMgCDgung9miGRygyCAIKHJhylYyW9osKKc3lu"
-  >>> $user->save();
-  "insert into `users` (`name`, `email`, `password`, `updated_at`, `created_at`) v
-  alues (?, ?, ?, ?, ?)"
-  => true
-  >>> exit
-  ```
+```php
+//生成30条数据
+factory(App\User::class,30)->create()
+// tinker的使用
+E:\opensource\blog>php artisan tinker
+Psy Shell v0.7.2 (PHP 5.6.19 鈥?cli) by Justin Hileman
+$user = new App\User;
+=> App\User {#628}
+$user->name = 'admin'
+=> "admin"
+$user->email = 'fation@126.com'
+=> "fation@126.com"
+$user->password = bcrypt('123456');
+=> "$2y$10$kyCuwqSpzGTTZgAPMgCDgung9miGRygyCAIKHJhylYyW9osKKc3lu"
+$user->save();
+"insert into `users` (`name`, `email`, `password`, `updated_at`, `created_at`) v
+alues (?, ?, ?, ?, ?)"
+=> true
+exit
+```
 
 ### Cache
 
@@ -140,7 +140,7 @@ from @golaravel
 
 ### Controller && Model
 
-```
+```php
 // 创建一个空控制器
 php artisan make:controller BlogController
 // 创建Rest风格资源控制器
@@ -159,7 +159,7 @@ php artisan make:Model App\\Models\\User(linux or macOs 加上转义符)
 
 ### 迁移与填充 Migration && Seeder
 
-```
+```php
 // 数据迁移
 php artisan migrate
 // 创建迁移
@@ -173,14 +173,13 @@ php artisan make:migration --path=app\providers create_users_table
 // php artisan make:model --migration Post
 // 运行数据库迁移
 php artisan migrate
-- 初始化迁移数据表:php artisan migrate:install
-
-- 重置并重新执行所有的数据迁移:php artisan migrate:refresh
-- 回滚所有的数据迁移:php artisan migrate:reset
-- 回滚最近一次数据迁移:php artisan migrate:rollback
-- 填充种子数据 测试用:php artisan db:seed
-- 创建一个种子数据:php artisan make:seeder
-- 创建一个数据迁移:php artisan make:migration name
+# 初始化迁移数据表:php artisan migrate:install
+# 重置并重新执行所有的数据迁移:php artisan migrate:refresh
+# 回滚所有的数据迁移:php artisan migrate:reset
+# 回滚最近一次数据迁移:php artisan migrate:rollback
+# 填充种子数据 测试用:php artisan db:seed
+# 创建一个种子数据:php artisan make:seeder
+# 创建一个数据迁移:php artisan make:migration name
   // 创建要填充的数据类
 php artisan make:seeder UsersTableSeeder
 // 数据填充（全部表）
@@ -191,7 +190,7 @@ php artisan db:seed --class=UsersTableSeeder
 
 ### Command
 
-```
+```php
 // 生成命令
 php artisan make:command TopicMakeExcerptCommand --command=topics:excerpt
 //在 app/Console/Kernel.php 文件里面, 添加以下
@@ -262,7 +261,7 @@ php artisan topics:excerpt
 
 ### request 主要用于表单验证
 
-```
+```php
 php artisan make:request TagCreateRequest
 \\创建的类存放在 app/Http/Requests 目录下
 <?php
@@ -343,8 +342,6 @@ public function store(TagCreateRequest $request)
 
 flat map
 
-# [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
-
 ## 请求周期
 
 Laravel 采用了单一入口模式，应用的所有请求入口都是 public/index.php 文件。
@@ -359,7 +356,7 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
 
 服务容器是 Laravel 管理类依赖和运行依赖注入的有力工具，在类中可通过 $this->app 来访问容器，在类之外通过 $app 来访问容器；服务提供者是 Laravel 应用程序引导启动的中心，关系到服务提供者自身、事件监听器、路由以及中间件的启动运行。应用程序中注册的路由通过RouteServiceProvider实例来加载；事件监听器在EventServiceProvider类中进行注册；中间件又称路由中间件，在app/Http/Kernel.php类文件中注册，调用时与路由进行绑定。在新创建的应用中，AppServiceProvider 文件中方法实现都是空的，这个提供者是你添加应用专属的引导和服务的最佳位置，当然，对于大型应用你可能希望创建几个服务提供者，每个都具有粒度更精细的引导。服务提供者在 config/app.php 配置文件中的providers数组中进行注册
 
-```
+```php
 namespace App\Providers;
 
 use Riak\Connection;
@@ -387,7 +384,7 @@ Laravel 实现依赖注入方式有两种：自动注入和主动注册。自动
 
 - 绑定服务提供者或类：这种方式对依赖注入的实现可以非常灵活多样
 
-```
+```php
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\VideoController;
@@ -408,7 +405,7 @@ $this->app->when(VideoController::class)
 
 - 参数类型声明：通过对类的构造器参数类型、类的方法参数类型、闭包的参数类型给出提示来实现
 
-```
+```php
 <?php
 
 namespace App\Http\Controllers;
@@ -1311,30 +1308,26 @@ function boot()
 
 $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 
-
-## 框架
-
-- [laravel/lumen-framework](https://github.com/laravel/lumen-framework)
-- [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. 
-- [laravel/framework](https://github.com/laravel/framework):
-* [laravel/laravel](https://github.com/laravel/framework):A PHP Framework For Web Artisans https://laravel.com
-- [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
-- [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks. 
-
 ## 扩展
 
-- [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp. 
-- [laravel/cashier](https://github.com/laravel/cashier)
-- [laravel/passport](https://github.com/laravel/passport):Laravel Passport is an OAuth2 server and API authentication package that is simple and enjoyable to use.
-- [laravel/horizon](https://github.com/laravel/horizon):Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues.
-- [laravel/echo](https://github.com/laravel/echo):provides a more robust, efficient alternative to continually polling your application for websocket changes.
-- [laravel/socialite](https://github.com/laravel/socialite):Laravel Socialite provides an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub and Bitbucket. 
-- [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
-- [laravel/dusk](https://github.com/laravel/dusk):Laravel Dusk provides an expressive, easy-to-use browser automation and testing API. 
-- [laravel/envoy](https://github.com/laravel/envoy):Elegant SSH tasks for PHP.
-- [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
-- [barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf):A DOMPDF Wrapper for Laravel
-- [Zizaco/entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
+* [laravel/lumen-framework](https://github.com/laravel/lumen-framework)
+* [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. 
+* [laravel/framework](https://github.com/laravel/framework):
+* [laravel/laravel](https://github.com/laravel/framework):A PHP Framework For Web Artisans https://laravel.com
+* [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
+* [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks. 
+* [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp. 
+* [laravel/cashier](https://github.com/laravel/cashier)
+* [laravel/passport](https://github.com/laravel/passport):Laravel Passport is an OAuth2 server and API authentication package that is simple and enjoyable to use.
+* [laravel/horizon](https://github.com/laravel/horizon):Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues.
+* [laravel/echo](https://github.com/laravel/echo):provides a more robust, efficient alternative to continually polling your application for websocket changes.
+* [laravel/socialite](https://github.com/laravel/socialite):Laravel Socialite provides an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub and Bitbucket. 
+* [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
+* [laravel/dusk](https://github.com/laravel/dusk):Laravel Dusk provides an expressive, easy-to-use browser automation and testing API. 
+* [laravel/envoy](https://github.com/laravel/envoy):Elegant SSH tasks for PHP.
+* [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
+* [barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf):A DOMPDF Wrapper for Laravel
+* [Zizaco/entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
 
 ## 参考
 
@@ -1376,7 +1369,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 
 项目的搭建，以 [https://github.com/summerblue/larabbs](A forum project base on Laravel 5.5)
 
-```bash
+```shell
 git clone git@github.com:summerblue/larabbs.git
 // 修改 homestead.html,添加配置
 vagrant provision
@@ -1396,3 +1389,7 @@ password: password
 
 // Non-static method Redis::hGet() cannot be called statically
 ```
+
+## 参考
+
+* [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)

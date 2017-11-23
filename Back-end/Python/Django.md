@@ -4,7 +4,7 @@
 
 ## 编译安装
 
-```
+```sh
 git clone https://github.com/django/django.git
 cd django
 sudo python3 setup.py install  //会注册脚本django-admin.py...
@@ -14,7 +14,7 @@ sudo python3 setup.py install  //会注册脚本django-admin.py...
 
 ## 使用
 
-```
+```python
 django-admin.py startproject Django_app //新建项目
 python3 manage.py startapp cmdb  //如果要使用模型，必须要创建一个app
 sudo pip3 install mysqlclient // mysql驱动
@@ -118,7 +118,7 @@ Requested setting INSTALLED_APPS, but settings are not configured. You must eith
 ## 资源
 
 * [rosarior/awesome-django](https://github.com/rosarior/awesome-django):
-* 
+
 ## 工具
 
 * [nioperas06/awesome-django-rest-framework](https://github.com/nioperas06/awesome-django-rest-framework):Tools, processes and resources you need to create an awesome API with Django REST Framework

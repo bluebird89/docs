@@ -4,7 +4,7 @@
 
 ### Nginx
 
-```
+```sh
 wget http://nginx.org/keys/nginx_signing.key
 sudo apt-key add nginx_signing.key
 
@@ -21,7 +21,7 @@ sudo apt-get install nginx
 root目录显示文件列表
 
 ```
-在http添加
+# 在http添加
 autoindex on;
 autoindex_exact_size off;
 autoindex_localtime on;
@@ -29,19 +29,19 @@ autoindex_localtime on;
 
 ### MySQL
 
-```
+```sh
 sudo apt-get install mysql-server(mariadb-server mariadb-client)  mysql-client
 sudo mysql_secure_installation
 
 There are three levels of password validation policy:
-LOW    Length >= 8
-MEDIUM Length >= 8, numeric, mixed case, and special characters
-STRONG Length >= 8, numeric, mixed case, special characters and dictionary
+# LOW    Length >= 8
+# MEDIUM Length >= 8, numeric, mixed case, and special characters
+# STRONG Length >= 8, numeric, mixed case, special characters and dictionary
 ```
 
 ### PHP
 
-```
+```sh
 sudo apt-get install python-software-properties software-properties-common
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
@@ -55,7 +55,7 @@ sudo apt-get install php7.1-fpm php7.1-mysql php7.1-common php7.1-curl php7.1-cl
 
 - Modules:
 
-  ```
+  ```sh
   sudo apt-cache search php7.1*
   sudo apt-get install php7.1-mysql php7.1-curl php7.1-json php7.1-cgi php7.1-mbstring php7.1-xml php7.1-mysql php7.1-common php7.1-gd  php7.1-cli php-pear php7.1-intl
   ```
@@ -132,14 +132,13 @@ sudo apt-get install php7.1-fpm php7.1-mysql php7.1-common php7.1-curl php7.1-cl
 
 - 新建文件：`sudo vi /var/www/html/info.php`，并访问<http://server_domain_or_IP/info.php>
 
-  ```
-  <?php
+  ```php
   phpinfo();
   ```
 
 ### phpunit
 
-```
+```sh
 wget https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
 sudo mv phpunit.phar /usr/local/bin/phpunit
@@ -149,8 +148,7 @@ sudo mv phpunit.phar /usr/local/bin/phpunit
 
   - code : src/Email.php
 
-    ```
-    <?php
+    ```php
     declare(strict_types=1);
 
     final class Email
@@ -185,14 +183,12 @@ sudo mv phpunit.phar /usr/local/bin/phpunit
             );
         }
     }
-    ```
 
     }
-
+    ```
 - Test Code: tests/EmailTest.php
 
-  ```
-  <?php
+  ```php
   declare(strict_types=1);
 
   use PHPUnit\Framework\TestCase;
@@ -258,7 +254,7 @@ sudo mv phpunit.phar /usr/local/bin/phpunit
 
 # Mac环境搭建
 
-```
+```sh
 // 系统默认apache 与php5
 httpd -v
 php -v

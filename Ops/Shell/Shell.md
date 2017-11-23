@@ -8,7 +8,7 @@ Shell是Linux/Unix的一个外壳。它负责外界与Linux内核的交互，接
 
 ### zsh:
 
-```
+```sh
 $ cat /etc/shells
 $ echo $SHELL/bin/bash
 $ sudo apt-get install zsh git wget
@@ -94,7 +94,7 @@ $ sudo reboot
 
 - 安装
 
-  ```
+  ```sh
   sudo apt-get install fish
   brew install fish
 
@@ -166,7 +166,7 @@ $ sudo reboot
 
 - 安装
 
-```
+```sh
   sudo apt-get install xmonad
   sudo apt-get install xmobar dmenu
 ```
@@ -212,7 +212,7 @@ echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.zshrc
 
 ### 写脚本
 
-```
+```sh
 #!/bin/bash
 #
 
@@ -375,9 +375,10 @@ exit 0
 
 # vim:set ts=4 sw=4 ft=sh et:
 ```
+
 ## 参考
 
-- [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager. 
-- [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community. 
-- [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
-- [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
+* [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager. 
+* [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community. 
+* [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
+* [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)

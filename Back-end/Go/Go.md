@@ -11,12 +11,12 @@
 
 GOROOT must be set only when installing to a custom location.install
 
-```
+```sh
 wget  https://redirector.gvt1.com/edgedl/go/go$VERSION.$OS-$ARCH.tar.gz
 sudo tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
-export PATH=$PATH:/usr/local/go/bin // 默认安装路径`/usr/local/go`(c:\Go under Windows)添加到/etc/profile (for a system-wide installation) or $HOME/.profile
+export PATH=$PATH:/usr/local/go/bin # 默认安装路径 /usr/local/go (c:\Go under Windows)添加到/etc/profile (for a system-wide installation) or $HOME/.profile
 
-export GOROOT=$HOME/go1.X  // Installing to a custom location.install the Go tools to a different location. In this case you must set the GOROOT environment variable to point to the directory in which it was installed.
+export GOROOT=$HOME/go1.X  # Installing to a custom location.install the Go tools to a different location. In this case you must set the GOROOT environment variable to point to the directory in which it was installed.
 export PATH=$PATH:$GOROOT/bin
 ```
 
@@ -27,7 +27,7 @@ export PATH=$PATH:$GOROOT/bin
 * 设置GOPATH ,GOBIN
 
 ```shell
-// bash中配置.bash_profile中添加 在zsh配置`.zshrc`添加
+# bash中配置.bash_profile中添加 在zsh配置`.zshrc`添加
 GOROOT="/usr/local/Cellar/go/1.9.2/libexec"  // 已配置好的
 export GOPATH=/usr/local/Cellar/go/1.9.2 // 默认配置
 export GOBIN=$GOPATH/bin
@@ -51,18 +51,18 @@ go get 用来动态获取远程代码包的，目前支持的有BitBucket、GitH
 -fix 在获取源码之后先运行fix，然后再去做其他的事情 
 -t 同时也下载需要为运行测试所需要的包 
 -u 强制使用网络去更新包和它的依赖包 
--v 显示执行的命令 
-```sh
+-v 显示执行的命令
+
+```go
 go get github.com/yudai/gotty  // ok的
 
 go get -u -v github.com/labstack/echo
 package golang.org/x/crypto/acme/autocert: unrecognized import path "golang.org/x/crypto/acme/autocert" (https fetch: Get https://golang.org/x/crypto/acme/autocert?go-get=1: dial tcp 172.217.6.127:443: i/o timeout) // 仓库被屏蔽
-
 ```
 
 ## Build&Run
 
-```
+```go
 go build hello.go
 ./hello
 
@@ -87,13 +87,14 @@ slice reslice
 ### 工具
 
 ### sublime
+
 * 安装gosublime插件
 * 在GoSublime，再往下找到 Settings - Default修改`"env": { "GOPATH":"$HOME/go","PATH": "$HOME/bin:$GOPATH/bin:$PATH" },` `"shell": [“$zsh"],`
 
 ## 文档
 
 * 离线文档：`godoc -http=:6060` 访问`http://localhost:6060/`
-* 
+
 ## 学习
 
 - [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
@@ -107,7 +108,6 @@ slice reslice
 ### [labstack/echo](https://github.com/labstack/echo)
 
 High performance, minimalist Go web framework https://echo.labstack.com
-
 
 ## 扩展
 
@@ -155,6 +155,7 @@ websocketd --port=8080 ./count.sh // 建立server
   };
 </script>
 ```
+
 ## 资源
 
 - [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
@@ -164,7 +165,5 @@ websocketd --port=8080 ./count.sh // 建立server
 
 * [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
 
-
 <https://juejin.im/post/59c384fa5188257e9349707e>
-
 <http://www.infoq.com/cn/articles/history-go-package-management>

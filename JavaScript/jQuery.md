@@ -22,6 +22,7 @@ jQuery.noConflict();
 $; // undefined
 jQuery; // jQuery(selector, context)
 ```
+
 ## 功能
 
 ### 选择器
@@ -51,6 +52,7 @@ jQuery; // jQuery(selector, context)
     - disabled：和:enabled正好相反，选择那些不能输入的。
 * 查找：拿到一个jQuery对象后，还可以以这个对象为基准，进行查找find(),从当前节点开始向上查找，使用parent()方法,对于位于同一层级的节点，可以通过next()和prev()方法
 * 过滤:filter()方法可以过滤掉不符合选择器条件的节点.map()方法把一个jQuery对象包含的若干DOM节点转化为其他对象.一个jQuery对象如果包含了不止一个DOM节点，first()、last()和slice()方法可以返回一个新的jQuery对象，把不需要的DOM节点去掉：
+
 ```html
 <!-- HTML结构 -->
 <ul class="lang">
@@ -417,6 +419,7 @@ $(function () {
 * 动画效果还可以串行执行，通过delay()方法还可以实现暂停，这样，我们可以实现更复杂的动画效果.必须不断返回新的Promise对象才能后续执行操作
 * 有的动画如slideUp()根本没有效果。这是因为jQuery动画的原理是逐渐改变CSS的值，如height从100px逐渐变为0。但是很多不是block性质的DOM元素，对它们设置height根本就不起作用，所以动画也就没有效果
 * jQuery也没有实现对background-color的动画效果，用animate()设置background-color也没有效果。这种情况下可以使用CSS3的transition实现动画效果。
+
 ```js
 var div = $('#test-show-hide');
 div.hide(3000); // 

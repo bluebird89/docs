@@ -42,7 +42,7 @@ Laravel 也支持查询 JSON 类型的字段：仅支持，MySQL 5.7+ 和 Postgr
 
 ### [HVF/franchise](https://github.com/HVF/franchise)
 
-```
+```sh
 git clone git@github.com:HVF/franchise.git
 cd franchise
 yarn install
@@ -58,10 +58,7 @@ browse http://localhost:3000
 
 NoSQL主要用于解决以下几种问题
 
-　　1.少量数据存储，高速读写访问。此类产品通过数据全部in-momery 的方式来保证高速访问，同时提供数据落地的功能，实际这正是Redis最主要的适用场景。
-
-　　2.海量数据存储，分布式系统支持，数据一致性保证，方便的集群节点添加/删除。
-
-　　3.这方面最具代表性的是dynamo和bigtable 2篇论文所阐述的思路。前者是一个完全无中心的设计，节点之间通过gossip方式传递集群信息，数据保证最终一致性，后者是一个中心化的方案设计，通过类似一个分布式锁服务来保证强一致性,数据写入先写内存和redo log，然后定期compat归并到磁盘上，将随机写优化为顺序写，提高写入性能。
-
-　　4.Schema free，auto-sharding等。比如目前常见的一些文档数据库都是支持schema-free的，直接存储json格式数据，并且支持auto-sharding等功能，比如mongodb。
+1.少量数据存储，高速读写访问。此类产品通过数据全部in-momery 的方式来保证高速访问，同时提供数据落地的功能，实际这正是Redis最主要的适用场景。
+2.海量数据存储，分布式系统支持，数据一致性保证，方便的集群节点添加/删除。
+3.这方面最具代表性的是dynamo和bigtable 2篇论文所阐述的思路。前者是一个完全无中心的设计，节点之间通过gossip方式传递集群信息，数据保证最终一致性，后者是一个中心化的方案设计，通过类似一个分布式锁服务来保证强一致性,数据写入先写内存和redo log，然后定期compat归并到磁盘上，将随机写优化为顺序写，提高写入性能。
+4.Schema free，auto-sharding等。比如目前常见的一些文档数据库都是支持schema-free的，直接存储json格式数据，并且支持auto-sharding等功能，比如mongodb。

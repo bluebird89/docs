@@ -11,6 +11,22 @@
 
 # Gulp [王德水]（<http://deshui.wang/）>
 
+## gulp
+
+The streaming build system ,用自动化构建工具增强你的工作流程
+
+```
+# 全局安装
+npm install -g gulp
+# 作为项目依赖安装
+npm install --save-dev gulp
+# 构建配置文件根目录创建gulpfile.js
+var gulp = require('gulp');
+gulp.task('default', function() { // 将你的默认的任务代码放在这 });
+# 运行
+gulp
+```
+
 - 脚本例子：
 
 ```js
