@@ -2,16 +2,21 @@
 
 ## 安装
 
-- linux
+### linux
 
-  ```
-  wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-  echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-  sudo apt-get update
-  sudo apt-get install sublime-text
-  ```
+```shell
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+sudo apt-get update
+sudo apt-get install sublime-text
+```
 
-# lisense
+### Mac
+
+```shell
+brew cask install sublime-text
+```
+### lisense
 
 build 3143后，失效
 
@@ -75,13 +80,19 @@ E585BBA1 2538C270 E2E857C2 194283CA
 
 ## [文档](http://www.sublimetext.com/docs/3/index.html)
 
-## 配置说明(文件以对象.功能命名）:settin分default user package,包配置优先级最高
+配置说明(文件以对象.功能命名）:settin分default user package,包配置优先级最高
 
 - Packages文件目录：Preferences > Browse Packages 打开文件夹 Installed Packages 下看到所安装的各类包,windows中~\AppData\Roaming\Sublime Text 3\Packages\User
 - [配置同步:同步Packages/User文件夹](https://packagecontrol.io/docs/syncing)
+- 用户配置Preferences.sublime-settings： Preferences > setting
+- 包管理文件：Package Control.sublime-settings
+- 插件管理文件：
+- 主题目录识别：在包文件下Theme - Monokai Pro
+- 自定义快捷键Default (Windows).sublime-keymap:Preferences -> Key Bindings - Users
+- 代码片段
 
-```
-通过云端工具git 网盘
+```shell
+# 通过云端工具git 网盘
 # Close Sublime Text
 # Open Terminal
 cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
@@ -94,68 +105,39 @@ rm -r User
 ln -s ~/Dropbox/Sublime/User
 ```
 
-- 用户配置Preferences.sublime-settings： Preferences > setting
-- 包管理文件：Package Control.sublime-settings
-- 插件管理文件：
-- 主题目录识别：在包文件下Theme - Monokai Pro
-- 自定义快捷键Default (Windows).sublime-keymap:Preferences -> Key Bindings - Users
-- 代码片段：
-
 [插件管理工具安装](https://packagecontrol.io/installation)
 
-```
-# Preferences > Browse Packages 在文件夹 Installed Packages 下看到所安装的各类包,windows中~\AppData\Roaming\Sublime Text 3\
+- Preferences > Browse Packages 在文件夹 Installed Packages 下看到所安装的各类包,windows中~\AppData\Roaming\Sublime Text 3\
 ctrl+`
 import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
-# 重启sublime
-# 插件安装
-# open Package Control's Command Palette：Control + Shift + P (Windows)，Command + Shift + P (on Mac)，或者通过菜单 Tools > Command Palette
-#  install package
-# 输入package文件名称，回车安装
-# 设置语法关联：View > Syntax > Open all with current extension as... 或者 View > Syntax 勾选 MarkdownEditing 下的 MultiMarkdown
-```
+- 重启sublime
+- 插件安装
+- open Package Control's Command Palette：Control + Shift + P (Windows)，Command + Shift + P (on Mac)，或者通过菜单 Tools > Command Palette
+- install package
+- 输入package文件名称，回车安装
+- 设置语法关联：View > Syntax > Open all with current extension as... 或者 View > Syntax 勾选 MarkdownEditing 下的 MultiMarkdown
 
 插件配置
 
-```
-# gitHub flavored Markdown 的配置Packages/User/Markdown.sublime-settings
-# MultiMarkdown 的配置Packages/User/MultiMarkdown.sublime-settings
-```
-
+- gitHub flavored Markdown 的配置Packages/User/Markdown.sublime-settings
+- MultiMarkdown 的配置Packages/User/MultiMarkdown.sublime-settings
 - sublime Text SFTP:SublimeText -> Preferences -> Package Settings -> SFTP -> Setting Users
 
-  ```
-  {
-  "email":"Rimke@163.com",s
-  "product_key":"e83eda-38644b-43c828-e3669b-cd8a85",
-  }
-  ```
+```json
+{
+"email":"Rimke@163.com",s
+"product_key":"e83eda-38644b-43c828-e3669b-cd8a85",
+}
+```
 
 ## 插件
 
 - SublimeLinter：前端编码利器用于高亮提示用户编写的代码中存在的不规范和错误的写法、代码跳转
 - HTML-CSS-JS Prettify：格式化（美化）html、css、js三种文件类型的插件
 - SublimeTmpl：文件模板都在插件目录的templates
-
-```
-ctrl+alt+h html
-ctrl+alt+j javascript
-ctrl+alt+c css
-ctrl+alt+p php
-ctrl+alt+r ruby
-ctrl+alt+shift+p python
-```
-
 - Markdown Preview
 - MarkdownEditing
 - SublimeTableEditor:markdown表格插件
-
-```
-表头：|Name|Phone + tab
-删除：Alt + Shift + 左/右/上/下/
-移动：Alt + 左/右/上/下/
-```
-
 - Git:Plugin for some git integration into sublime text
 - Doc​Blockr: Simplifies writing DocBlock comments in Javascript, PHP, CoffeeScript, Actionscript, C & C++
 - sublime-text-git
@@ -164,13 +146,25 @@ ctrl+alt+shift+p python
 - GitGutter:see git diff in gutter
 - GoSublime:A Golang plugin collection for SublimeText 3
 - Bootstrap 3 Snippets:A sublime plugin complete with Bootstrap 3 snippets
-
-  ```
-  # 在Preferences.sublime-settings 添加
-  "auto_complete_triggers": [{"selector": "text.html", "characters": "bs3"}]
-  ```
 - autofilename:自动关联图片,css,js等资源路径插件
-# 自定义配置
+
+```
+ctrl+alt+h html
+ctrl+alt+j javascript
+ctrl+alt+c css
+ctrl+alt+p php
+ctrl+alt+r ruby
+ctrl+alt+shift+p python
+
+表头：|Name|Phone + tab
+删除：Alt + Shift + 左/右/上/下/
+移动：Alt + 左/右/上/下/
+
+# 在Preferences.sublime-settings 添加
+"auto_complete_triggers": [{"selector": "text.html", "characters": "bs3"}]
+```
+
+## 自定义配置
 
 - 包配置：Package Control.sublime-settings
 - 界面配置：Preferences.sublime-settings
@@ -179,7 +173,7 @@ ctrl+alt+shift+p python
 - 自动构建：*.sublime-build
 - 批处理：*.sublime-build 通过shell脚本构建
 
-# 新建模板
+## 新建模板
 
 - html：ctrl+alt+h php注释 html:5
 - javascript：ctrl+alt+j
@@ -193,13 +187,13 @@ ctrl+alt+shift+p python
 - 另存文件:Ctrl+Shift+S
 - 关闭文件:Ctrl+W
 
-# 工具
+## 工具
 
 - 控制台:ctrl+ `
 - 命令面板:ctrl+shift+p
 - 设置高亮语言语法：set syntax php
 
-# 编辑
+## 编辑
 
 - 多行同时编辑：选中行数 ctrl+shift+L
 - 选词： 选中文本 逐个添加：ctrl+d 全部选中 alt+f3
@@ -238,7 +232,7 @@ ctrl+alt+shift+p python
 - 左右选择：alt+shift+left/right
 - 上下选择：shift+up/down
 
-## 查找与跳转
+### 查找与跳转
 
 - ctrl+p：搜索并跳转不同的文件
 - 跳转函数：ctrl+r
@@ -249,20 +243,20 @@ ctrl+alt+shift+p python
 - 查找：ctrl+f
 - 替换：ctrl+h ctrl+shift+f：可选文件夹或过滤器
 
-# 显示
+### 显示
 
 - 分屏：alt+shift+数字 ctl+shift+n:切组
 - 切栏：alt+数字
 - 分割或合并窗口：ctrl+k ctrl+↑ ↓ 左右切换窗口
 - 新建文件到分割窗口：ctrl+k，Ctrl+Shift+↑
 
-# 管理
+### 管理
 
 - 切换标签：ctrl+tab
 - 切换侧栏：ctrl+k ctrl+b
 - 恢复标签：ctrl+shift+t
 
-# html
+### html
 
 - 激发zencoding控制台:ctrl+alt+enter
 - 默认标签为div:.container #container
@@ -279,6 +273,12 @@ ctrl+alt+shift+p python
 - 向上一层：.warp>p>a^p .warp>p>a^^p
 - a[href="<http://www.baidu.com"]{百度}>
 - 递增：
+- 包含多个类：p.class1.class2.class3
+- 自定义属性：p[title='hello'] td[rowspan=2 colspan=3 title]
+- 文本：{}
+- 隐标签：ul>.class table>.row>.col
+- a:link a:mail meta:utf
+- form：get
 
 ```
 ul>li.item${item$$}*5
@@ -288,32 +288,24 @@ ul>li.item$@-*5(逆序)
 ul>li.item$@3_5(定位起始符) div#v$@3_5
 ```
 
-- 包含多个类：p.class1.class2.class3
-- 自定义属性：p[title='hello'] td[rowspan=2 colspan=3 title]
-- 文本：{}
-- 隐标签：ul>.class table>.row>.col
-- a:link a:mail meta:utf
-- form：get
-
-# 检查
+### 检查
 
 - F6: 开启/关闭拼写检查
 - Ctrl+F6: 定位下一个拼错
 - Ctrl+Shift+F6: 定位上一个拼错
 
-# 注释
+### 注释
 
 - 行注释：Ctrl+/
 - 块注释：Ctrl+Shift+/
 
-# 构建build
+### 构建build
 
 - 运行构建：ctrl+b
 
-## 主题theme
+### 主题theme
 
 - material
-
 - Monokai Pro
 
 ```
@@ -329,11 +321,8 @@ Snippet可以存储在任何的文件夹中, 并且以.sublime-snippet为文件�
 - tabTrigger:用来引发代码片段的字符或者字符串, 比如在以上例子上, 在编辑窗口输入hello然后按下tab就会在编辑器输出Type your snippet here这段代码片段
 - scope: 表示你的代码片段会在那种语言环境下激活, 比如上面代码定义了source.python, 意思是这段代码片段会在python语言环境下激活.
 - description :展示代码片段的描述, 如果不写的话, 默认使用代码片段的文件名作为描述
-
 - 环境变量
-
 - fields:通过tab键循环的改变代码片段的一些值
-
 - snippet镜像区域,会使相同编号的位置同时进行编辑:系统$n -snippet Placeholders:添加默认值，占位符设置嵌套
 
 ```
@@ -381,6 +370,7 @@ h1{foo} 和 a[href=#] 为h1和a标签
 ul>li*3
 ul>li.item$*3
 ```
+
 ### 快捷键
 
 #### 选择类
@@ -437,27 +427,24 @@ Ctrl+F2 设置书签，F2切换书签
 Ctrl+T 左右字母互换
 
 #### 搜索类
-Ctrl+F 打开底部搜索框，查找关键字
-Ctrl+shift+F 在文件夹内查找，与普通编辑器不同的地方是sublime允许添加多个文件夹进行查找
-Ctrl+P 打开搜索框。举个栗子
 
+* Ctrl+F 打开底部搜索框，查找关键字
+* Ctrl+shift+F 在文件夹内查找，与普通编辑器不同的地方是sublime允许添加多个文件夹进行查找
+* Ctrl+P 打开搜索框。举个栗子
+    + 输入当前项目中的文件名，快速搜索文件
+    + 输入@和关键字，查找文件中函数名
+    + 输入：和数字，跳转到文件中该行代码
+    + 输入#和关键字，查找变量名
+* Ctrl+G 打开搜索框，自动带：，输入数字跳转到该行代码。举个栗子：在页面代码比较长的文件中快速定位
+* Ctrl+R 打开搜索框，自动带@，输入关键字，查找文件中的函数名。举个栗子：在函数较多的页面快速查找某个函数
+* Ctrl+: 打开搜索框，自动带#，输入关键字，查找文件中的变量名、属性名等
+* Esc 退出光标多行选择，退出搜索框，命令框
+* Ctrl+Shift+P 打开命令框。场景栗子：打开命名框，输入关键字，调用sublime text或插件的功能，例如使用package安装插件
 
-输入当前项目中的文件名，快速搜索文件
-输入@和关键字，查找文件中函数名
-输入：和数字，跳转到文件中该行代码
-输入#和关键字，查找变量名
-
-
-Ctrl+G 打开搜索框，自动带：，输入数字跳转到该行代码。举个栗子：在页面代码比较长的文件中快速定位
-Ctrl+R 打开搜索框，自动带@，输入关键字，查找文件中的函数名。举个栗子：在函数较多的页面快速查找某个函数
-Ctrl+: 打开搜索框，自动带#，输入关键字，查找文件中的变量名、属性名等
-Esc 退出光标多行选择，退出搜索框，命令框
-Ctrl+Shift+P 打开命令框。场景栗子：打开命名框，输入关键字，调用sublime text或插件的功能，例如使用package安装插件
-
-#### 
 ### 配置同步
 
 ### 通过共享文件
+
 - 清除 Packages 目录下User
 - `ln -s ~/baiduyunebooks/sublime3/Packages/User User` // 建立符号链接
 
