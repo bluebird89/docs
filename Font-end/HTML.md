@@ -60,7 +60,7 @@
 
 - 内联样式- 在HTML元素中使用"style" 属性
 - 内部样式表 -在HTML文档头部 区域使用
-
+```html
   <style> 元素 来包含CSS</li>
   <li>外部引用 - 使用外部 CSS 文件</li>
   <li>外部样式表(External style sheet)&lt;内部样式表(Internal style sheet)&lt;内联样式(Inline style)</li>
@@ -90,7 +90,7 @@
   </li>
   </ul>
   </style>
-
+```
 
 a标签不能嵌套
 

@@ -1,12 +1,10 @@
-[文档](https://thinkjs.org/doc/index.html)
-
-# 概念
+# ThinkJS
 
 ThinkJS 是一款拥抱未来的 Node.js Web 框架，致力于集成项目最佳实践，规范项目让企业级团队开发变得更加简单高效。
 
 ![架构图](../_static/_thinkjs-struct.jpeg)
 
-- 特点
+## 特点
 
   - 基于 Koa 重构框架架构，完全兼容 Koa 的中间件
   - 精简核心，支持扩展和适配器
@@ -17,13 +15,17 @@ ThinkJS 是一款拥抱未来的 Node.js Web 框架，致力于集成项目最�
 
 # 初始化构建
 
-```
-安装 ThinkJS
+```sh
+# 安装 ThinkJS
 npm install -g think-cli
-创建项目
+# 创建项目
 thinkjs new demo
-安装依赖
+# 安装依赖
 npm install
-启动服务
+# 启动服务
 npm start
 ```
+
+## 参考
+
+* [文档](https://thinkjs.org/doc/index.html)

@@ -1,4 +1,5 @@
 # WEB服务
+
 收用户请求，然后处理请求，最后将处理结果返回给用户
 
 - Apache拥有丰富的模块组件支持，稳定性强，BUG少，动态内容处理强。
@@ -22,12 +23,17 @@
 
 ##  安装
 
-```
+```sh
 brew install nginx
-brew services start nginx
-// default port 8080  
+brew services start nginx # default port 8080  
 /usr/local/etc/nginx/nginx.conf
 // /usr/local/etc/nginx/servers/
 // Docroot 
 /usr/local/var/www
 ```
+
+域名购买：GoDaddy
+
+"L2TP" 或者 "Shadowsocks" anyconnnect
+
+nginx 提供php python

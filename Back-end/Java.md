@@ -18,7 +18,7 @@ JRE: Java Runtime Environment
 
 ## [安装教程](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-debian-8)类debian系统
 
-```
+```sh
 # using the version packaged with Debian：OpenJDK 8
 sudo apt-get update
 sudo apt-get install default-jre
@@ -39,7 +39,7 @@ sudo update-alternatives --config java | javac // 会获得程序路径
 
 ## JAVA_HOME Environment Variable配置
 
-```
+```sh
 sudo vim /etc/environment 添加 JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 source /etc/environment
 echo $JAVA_HOME
@@ -48,7 +48,7 @@ java -version
 
 ### 例子
 
-```
+```java
 新建文件 HelloWorld.java
 public class HelloWorld {
     /* 第一个Java程序
@@ -68,7 +68,7 @@ java HelloWorld
 
 ### 在线安装
 
-```
+```sh
   sudo apt-get install tomcat8
   sudo vim /etc/default/tomcat8
   JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC" // 修改内存使用
@@ -95,7 +95,7 @@ java HelloWorld
 
 ### 手动安装
 
-```
+```sh
 sudo apt-get update
 sudo apt-get install default-jdk
 sudo groupadd tomcat
@@ -142,8 +142,8 @@ sudo systemctl start tomcat
 
 ## maven
 
-```
-sudo apt-get install maven2··
+```sh
+sudo apt-get install maven2
 ```
 
 ## 客户端
@@ -180,6 +180,7 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 - Spring
 
 ## 线程
+
 ## 工具
 
 - Maven
@@ -195,5 +196,3 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 * [Java 教程](http://www.runoob.com/java/)
 * [Java学习路线图](http://www.jianshu.com/p/d51551b0a8ba) 
 * [史上最精炼JAVA知识点基础总结](http://www.jianshu.com/p/9caf1c755889)
-
-<>

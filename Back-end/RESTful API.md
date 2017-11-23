@@ -98,7 +98,7 @@ DELETE（DELETE）：从服务器删除资源。
 
 RESTful API最好做到Hypermedia，即返回结果中提供链接，连向其他API方法，使得用户不查文档，也知道下一步应该做什么。比如 api.example.com
 
-```
+```json
 { 
   "link": 
     {
@@ -119,7 +119,7 @@ rel表示这个API与当前网址的关系（collection关系，并给出该coll
 
 ### 实例
 
-<https://api.github.com/>
+* <https://api.github.com/>
 * [yahoo天气api](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json)
 
 ### 工具

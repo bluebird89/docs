@@ -8,7 +8,7 @@
 
 查看设备：
 
-```
+```sh
 cd /dev/
 ls -l tty*
 tty.SLAB_USBtoUART
@@ -17,7 +17,7 @@ tty.SLAB_USBtoUART
 
 [SDK](rplidar_sdk_v1.5.7)
 
-```
+```sh
 cd sdk
 make
 cd output/Darwin/Release
