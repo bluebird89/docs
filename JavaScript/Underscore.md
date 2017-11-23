@@ -92,7 +92,6 @@ _.sample([1, 2, 3, 4, 5, 6], 3); // [6, 1, 4]
 * object()函数把名字和分数直接对应成Object
 * range()让你快速生成一个序列
 
-
 ```js
 var arr = [2, 4, 6, 8];
 _.first(arr); // 2
@@ -196,6 +195,7 @@ _.delay(log, 2000, 'Hello,', 'world!');
 ```
 
 ### Objects
+
 * keys()可以非常方便地返回一个object自身所有的key，但不包含从原型链继承下来的
 * allKeys()除了object自身的key，还包含从原型链继承下来的
 * values()返回object自身但不包含原型链继承的所有值

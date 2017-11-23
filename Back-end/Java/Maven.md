@@ -34,7 +34,7 @@ Maven根据项目的pom.xml文件，把它转化成项目对象模型(POM)，这
 
 仓库：得益于坐标机制，任何Maven项目使用任何一个构件的方式都是完全相同的，在此基础上，Maven可以在某个位置统一存储所有Maven项目共享的构件，这个统一的位置就是仓库。
 
-```
+```java
 public class DefaultRepositoryLayout
     implements ArtifactRepositoryLayout
 {

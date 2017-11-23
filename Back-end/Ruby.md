@@ -1,6 +1,6 @@
 # [安装](https://gorails.com/setup/ubuntu/14.04)
 
-```
+```sh
 # Ubuntu
 sudo apt-get update
 sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs
@@ -21,21 +21,21 @@ rvm use 2.3.1
 rvm uninstall 1.9.2
 ```
 
-# config git
+## config git
 
-```
+```sh
 git config --global color.ui true
 git config --global user.name "YOUR NAME"
 git config --global user.email "YOUR@EMAIL.com"
 ssh-keygen -t rsa -b 4096 -C "YOUR@EMAIL.com"
 cat ~/.ssh/id_rsa.pub
 add key to github
-检测：ssh -T git@github.com
+ssh -T git@github.com # 检测
 ```
 
-# install rails
+## install rails
 
-```
+```sh
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get install -y nodejs
 gem install rails -v 5.0.1
@@ -43,13 +43,13 @@ rbenv rehash
 rails -v
 ```
 
-# setup mysql
+### setup mysql
 
 ```
 sudo apt-get install mysql-server mysql-client libmysqlclient-dev
 ```
 
-# setting up postgreSQL
+### setting up postgreSQL
 
 ```
 sudo sh -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
@@ -62,20 +62,20 @@ sudo -u postgres psql
 postgres=# \password chris
 ```
 
-# first step
+#### first step
 
 ```
 #### If you want to use SQLite (not recommended)
 rails new myapp
 ```
 
-## If you want to use MySQL
+#### If you want to use MySQL
 
 ```
 rails new myapp -d mysql
 ```
 
-## If you want to use Postgres
+#### If you want to use Postgres
 
 # Note that this will expect a postgres user with the same username
 

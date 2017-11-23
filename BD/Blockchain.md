@@ -16,17 +16,17 @@ Initial Coin Offering的简称，是一种以出售新的初始数字加密货�
 
 ## 交易
 
-- [localbitcoins](https://localbitcoins.com/)
-- [比特币中国](https://www.btcchina.com/)
-- [OKCoin](https://www.okcoin.com/)
-- [火币网](https://www.huobi.com/)
+* [localbitcoins](https://localbitcoins.com/)
+* [比特币中国](https://www.btcchina.com/)
+* [OKCoin](https://www.okcoin.com/)
+* [火币网](https://www.huobi.com/)
 
 ## 扩展
 
 - [seanseany/blockchain-cli](https://github.com/seanseany/blockchain-cli)
 - [lhartikk/naivechain](https://github.com/lhartikk/naivechain)
 
-```
+```sh
 npm install blockchain-cli -g
 
 termianl1:blockchain

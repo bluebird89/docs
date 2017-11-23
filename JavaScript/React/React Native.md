@@ -7,9 +7,9 @@ RN的原理是将React代码转化为原生API，iOS一套，Android一套。RN�
 
 围绕着React所建立起来的生态系统以及组件化开发思想能有效地分解大规模应用的复杂度、提高资源复用率。简单的说，React拥有以下你想要的特性：
 
-- 同构渲染：服务器端和客户端共用一套代码，一份模板，两端使用。
-- 完全组件化：自动分析加载页面的静态资源依赖。
-- 生态圈：畅享所有 React 组件。
+* 同构渲染：服务器端和客户端共用一套代码，一份模板，两端使用。
+* 完全组件化：自动分析加载页面的静态资源依赖。
+* 生态圈：畅享所有 React 组件。
 
 React是由Facebook开发出来的用于开发用户交互界面的JS库。其源码由Facebook和社区优秀的程序员维护。React带来了很多新的东西，例如组件化、JSX、虚拟DOM等。其提供的虚拟DOM使得我们渲染组件呈现非常之快，让我们从频繁操作DOM的繁重工作之中解脱。它做的工作更多偏重于MVC中的V层，结合其它如Flux等一起，你可以非常容易构建强大的应用。
 
@@ -23,7 +23,7 @@ odeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多�
 
 - Chocolatey（ 基于Nuget的Windows包管理工具）安装与使用
 
-```
+```sh
 // 以管理员身份运行cmd：
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
@@ -54,7 +54,7 @@ choco install jdk8
 
 - 项目构建
 
-```
+```sh
 // 安装react-native-cli
 npm install -g react-native-cli
 // 初始化项目
@@ -105,25 +105,25 @@ react-native run-android
 
 ## 扩展
 
-- [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
-- [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.
-- [zeit/next.js](https://github.com/zeit/next.js):Framework for server-rendered React apps https://zeit.co/blog/next4
+* [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
+* [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.
+* [zeit/next.js](https://github.com/zeit/next.js):Framework for server-rendered React apps https://zeit.co/blog/next4
 
 ## 项目
 
-- [react-pxq](https://github.com/bailicangdu/react-pxq)一个 react + redux 的完整项目 和 个人总结
+* [react-pxq](https://github.com/bailicangdu/react-pxq)一个 react + redux 的完整项目 和 个人总结
 
 ## 参考
 
-- [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
-- [React Native的极简手册](http://www.jianshu.com/p/318342e139c7) 没看懂
-- [xgrommx/awesome-redux](https://github.com/xgrommx/awesome-redux):Awesome list of Redux examples and middlewares
+* [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
+* [React Native的极简手册](http://www.jianshu.com/p/318342e139c7) 没看懂
+* [xgrommx/awesome-redux](https://github.com/xgrommx/awesome-redux):Awesome list of Redux examples and middlewares
 
 ## 教程
 
-- [fangwei716/30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
-- [kdchang/reactjs101](https://github.com/kdchang/reactjs101):從零開始學 ReactJS（ReactJS 101）是一本希望讓初學者一看就懂的 ReactJS 中文入門教學書，由淺入深學習 ReactJS 生態系 (Flux, Redux, React Router, ImmutableJS, React Native, Relay/GraphQL etc.)。 https://www.gitbook.com/book/kdchang/…
-- [Reactjs docs](https://reactjs.org/docs/hello-world.html)
+* [fangwei716/30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
+* [kdchang/reactjs101](https://github.com/kdchang/reactjs101):從零開始學 ReactJS（ReactJS 101）是一本希望讓初學者一看就懂的 ReactJS 中文入門教學書，由淺入深學習 ReactJS 生態系 (Flux, Redux, React Router, ImmutableJS, React Native, Relay/GraphQL etc.)。 https://www.gitbook.com/book/kdchang/…
+* [Reactjs docs](https://reactjs.org/docs/hello-world.html)
 
 ## 工具
 
@@ -147,23 +147,23 @@ react-native run-android
 
 ## 资源
 
-- [facebook/react-native](https://github.com/facebook/react-native):A framework for building native apps with React. http://facebook.github.io/react-native/
-- [网站](http://facebook.github.io/react-native/)
-- [react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit https://react-native-training.github.…
-- [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native):Awesome React Native components, news, tools, and learning material! http://www.awesome-react-native.com
-- [f8app](https://github.com/fbsamples/f8app)<http://makeitopen.com/>
-- [facebook/react](https://github.com/facebook/react):A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
-- [设计含结构](https://github.com/airbnb/react-sketchapp)
-- [文档](http://airbnb.io/react-sketchapp/docs/)
-- [文档](http://reactnative.cn/docs/0.49/getting-started.html)
-- [页面设计](https://github.com/ant-design/ant-design/)
-- [react-native-guide](https://github.com/reactnativecn/react-native-guide)
-- [react-native-macos](https://github.com/ptmt/react-native-macos)
-- [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native)
-- [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
-- [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
-- [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app):Create React apps with no build configuration.
-- [vasanthk/react-bits](https://github.com/vasanthk/react-bits):✨ React patterns, techniques, tips and tricks ✨ https://vasanthk.gitbooks.io/react-bits
+* [facebook/react-native](https://github.com/facebook/react-native):A framework for building native apps with React. http://facebook.github.io/react-native/
+* [网站](http://facebook.github.io/react-native/)
+* [react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit https://react-native-training.github.…
+* [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native):Awesome React Native components, news, tools, and learning material! http://www.awesome-react-native.com
+* [f8app](https://github.com/fbsamples/f8app)<http://makeitopen.com/>
+* [facebook/react](https://github.com/facebook/react):A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
+* [设计含结构](https://github.com/airbnb/react-sketchapp)
+* [文档](http://airbnb.io/react-sketchapp/docs/)
+* [文档](http://reactnative.cn/docs/0.49/getting-started.html)
+* [页面设计](https://github.com/ant-design/ant-design/)
+* [react-native-guide](https://github.com/reactnativecn/react-native-guide)
+* [react-native-macos](https://github.com/ptmt/react-native-macos)
+* [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native)
+* [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
+* [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
+* [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app):Create React apps with no build configuration.
+* [vasanthk/react-bits](https://github.com/vasanthk/react-bits):✨ React patterns, techniques, tips and tricks ✨ https://vasanthk.gitbooks.io/react-bits
 
 ## 文档
 
@@ -188,11 +188,11 @@ react-native run-android
 
 ## create-react-app
 
-```
+```sh
 npm install -g create-react-app
 
 create-react-app my-app
 cd my-app/
 npm start
-npm run eject // 导出配置文件
+npm run eject #  导出配置文件
 ```

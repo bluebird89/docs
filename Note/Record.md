@@ -19,31 +19,31 @@
 
 ## Video
 
-- TED
-- YouTube
-- Spotify
-- Wikipedia
-- Quora
-- Imgur
-- Reddit
-- News:BuzzFeed
-- Pinterest
-- Medium
-- 十三邀
-- 奇葩说
-- [Hashem AL-ghaili](https://youtube.com/user/hashemalghaili)
+* TED
+* YouTube
+* Spotify
+* Wikipedia
+* Quora
+* Imgur
+* Reddit
+* News:BuzzFeed
+* Pinterest
+* Medium
+* 十三邀
+* 奇葩说
+* [Hashem AL-ghaili](https://youtube.com/user/hashemalghaili)
 
 ## 习惯
 
-- 建身
-- 选择 Trello（短期） 和 Google Calendar（长期）用来安排学习上的任务
-- WhatsApp 和 Slack 用来沟通
+* 建身
+* 选择 Trello（短期） 和 Google Calendar（长期）用来安排学习上的任务
+* WhatsApp 和 Slack 用来沟通
 
 ## 资源列表
 
-- [Best-websites-a-programmer-should-visit](https://github.com/sdmg15/Best-websites-a-programmer-should-visit)
-- [how to be a Programmer](https://github.com/braydie/HowToBeAProgrammer) <https://braydie.gitbooks.io/how-to-be-a-programmer/content/zh/>
-- [be-a-professional-programmer](https://github.com/stanzhai/be-a-professional-programmer)
+* [Best-websites-a-programmer-should-visit](https://github.com/sdmg15/Best-websites-a-programmer-should-visit)
+* [how to be a Programmer](https://github.com/braydie/HowToBeAProgrammer) <https://braydie.gitbooks.io/how-to-be-a-programmer/content/zh/>
+* [be-a-professional-programmer](https://github.com/stanzhai/be-a-professional-programmer)
 
 ## todo
 

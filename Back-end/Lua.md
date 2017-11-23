@@ -1,6 +1,6 @@
 # install
 
-```
+```sh
 apt-get install lua5.2
 
 curl -R -O http://www.lua.org/ftp/lua-5.3.4.tar.gz

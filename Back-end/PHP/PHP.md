@@ -2,24 +2,25 @@
 
 所用的程序是要经过两层代理的，即HTTP协议在Nginx等服务器的解析下，然后再传送给相应的Handler（PHP等）来处理。 简单地说，我们有一个非常快速的接线员（Nginx），他负责把问题转交给相应的客服（Handler）。本身接线员基本上速度是足够的，但是每次都卡在客服（Handler）了
 
-# PHPunit install
+## [PHP发展](https://segmentfault.com/a/1190000008888700)
 
-```
-wget https://phar.phpunit.de/phpunit.phar
-chmod +x phpunit.phar
-sudo mv phpunit.phar /usr/local/bin/phpunit
-phpunit --version
-```
+- composer:PHP 的依赖管理可以变得非常简单
+- PHP7:对 Zend 引擎做了大量修改，大幅提升了 PHP 语言的性能.做好 MySQL 优化，使用 Memcache 和 Redis 进行加速
+- PSR: <http://www.php-fig.org/> 组织制定的PHP语言开发规范，约定了很多方面的规则，如命名空间、类名 规范、编码风格标准、Autoload、公共接口等
+- Swoole:Swoole 是一个异步并行的通信引擎，作为 PHP 的扩展来运行。Node.js 的异步回调 Swoole 有，Go语言的协程 Swoole 也有，这完全颠覆了对 PHP 的认知.使用 Swoole PHP 可以实现常驻内存的 Server 程序，可以实现 TCP 、 UDP 异步网络通信的编程开发。比如 WebSocket 即使通信、聊天、推送服务器、RPC 远程调用服务、网关、代理、游戏服务器等。
+- Laravel:社区非常活跃，代码贡献者众多，第三方的插件非常多，生态系统相当繁荣。 Laravel 底层使用了很多 symfony2 组件，通过 composer 实现了依赖管理。Laravel 提供的命令行工具基于 symfony.console 实现，功能强大，集成了各种项目管理、自动生成代码的功能。
+- PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar。用来将多个 PHP 文件打包为一个文件。这个特性使得 PHP 也可以像 Java 一样方便地实现应用程序打包和组件化。一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行。配合 Swoole ，可以在命令行下执行 php server.phar 一键启动服务器。PHP 的代码包可以用 Phar 打包成组件，放到 Swoole 的服务器容器中去加载执行。
+- PHP 作为一门动态脚本语言，优点是开发方便效率高。缺点就是性能差。在密集运算的场景下比 C 、 C++ 相差几十倍甚至上百倍。另外 PHP 不可以直接操作底层，需要依赖扩展库来提供 API 实现。PHP 程序员可以学习一门静态编译语言作为补充实现动静互补，C/C++/Go 都是不错的选择。而且静态语言的编程体验与动态语言完全不同，学习过程可以让你得到更大的提升。 掌握 C/C++ 语言后，还可以阅读 PHP 、 Swoole 、 Nginx 、Redis 、 Linux内核 等开源软件的源码，了解其底层运行原理。 现在最新版本的Swoole提供了C++扩展模块的支持，封装了Zend API，用C++操作PHP变得很简单，可以用C++实现PHP扩展函数和类。
+- HTML5
+- Vue.js 可以非常方便地实现数据和 DOM 元素的绑定。通过 Ajax 请求后台接口返回数据后，更新前端数据自动实现界面渲染。
+- React Native 是一个不错的选择
+- 深度学习/人工智能:自动驾驶、大数据分析、网络游戏、图像识别、语言处理等。当然现在普通的工程师可能还无法参与到人工智能产品中，但至少应该理解深度学习/人工智能的基本概念和原理。
 
 ##  PHPDoc
 
-```
+```sh
 brew isntall php71
 ```
-
-## 代码规范
-
-[jupeter/clean-code-php](https://github.com/jupeter/clean-code-php)
 
 ## OOP
 
@@ -37,9 +38,11 @@ brew isntall php71
 
 ## 功能
 
-trait就是为了避免代码重复而生
+### trait
 
-```
+为了避免代码重复而生
+
+```php
 Trait OwnerTrait{
     public function owner(){
         var_dump('comment owner');
@@ -63,8 +66,7 @@ $comment->owner();
 
 举例,场景：我们在记录日志的时候，有时候可能需要写入文件，有时候可能写入数据库 这时候，我们可以写一个Log接口，定义需要的方法 然后分别写一个FileLog类和一个DatabaseLog类 然后我们写一个UsersController类做一个依赖注入，这样我们需要使用哪种方式写日志，实例化的时候，注入哪种类即可
 
-```
-<?php
+```php
 // 定义接口
 interface  Log{
     public function save($message);
@@ -104,7 +106,7 @@ $controller = new UsersController(new FileLog());
 $controller->register();
 ```
 
-### 扩展
+## 扩展
 
 - intl
 - mcrypt
@@ -121,10 +123,6 @@ $controller->register();
 - apc:op缓存
 - Opcache
 
-TP参考：<https://github.com/ijry/lyadmin>
-
-<https://leanpub.com/phptherightway/read#test_driven_development_title>
-
 ## 框架
 
 - [pinguo/php-msf](https://github.com/pinguo/php-msf)PHP微服务框架即"Micro Service Framework For PHP"，是Camera360社区服务器端团队基于Swoole自主研发现代化的PHP协程服务框架，简称msf或者php-msf，是Swoole的工程级企业应用框架，经受了Camera360亿级用户高并发大流量的考验
@@ -132,16 +130,17 @@ TP参考：<https://github.com/ijry/lyadmin>
 - [tencent-php/tsf](https://github.com/tencent-php/tsf):coroutine and Swoole based php server framework in tencent
 - [slimphp/Slim](https://github.com/slimphp/Slim):Slim Framework source code <http://slimframework.com>
 - [nette/nette](https://github.com/nette/nette):METAPACKAGE for Nette Framework components https://nette.org
+- [Tencent/Biny](https://github.com/Tencent/Biny):Biny is a tiny, high-performance PHP framework for web applications
 
-## 论坛
+### 论坛
 
 - [flarum/flarum](https://github.com/flarum/flarum):Delightfully simple forum software. <http://flarum.org>
 
-## 电商
+### 电商
 
 - [magento/magento2](https://github.com/magento/magento2): a cutting edge, feature-rich eCommerce solution that gets results.
 
-## CMS
+### CMS
 
 * [bolt/bolt](https://github.com/bolt/bolt):Bolt is a simple CMS written in PHP. It is based on Silex and Symfony components, uses Twig and either SQLite, MySQL or PostgreSQL.
 
@@ -157,10 +156,6 @@ TP参考：<https://github.com/ijry/lyadmin>
 
 - [coffeephp](http://coffeephp.com/)
 - [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
-
-<http://www.jianshu.com/p/a5d905778b47>
-
-$GLOBALS['HTTP_RAW_POST_DATA']
 
 ## 扩展
 
@@ -180,20 +175,6 @@ $GLOBALS['HTTP_RAW_POST_DATA']
 - [thephpleague/skeleton](https://github.com/thephpleague/skeleton):A skeleton repository for League Packages http://thephpleague.com
 _ [KnpLabs/php-github-api](https://github.com/KnpLabs/php-github-api):A simple PHP GitHub API client, Object Oriented, tested and documented. For 5.5+.
 
-## [PHP发展](https://segmentfault.com/a/1190000008888700)
-
-- composer:PHP 的依赖管理可以变得非常简单
-- PHP7:对 Zend 引擎做了大量修改，大幅提升了 PHP 语言的性能.做好 MySQL 优化，使用 Memcache 和 Redis 进行加速
-- PSR: <http://www.php-fig.org/> 组织制定的PHP语言开发规范，约定了很多方面的规则，如命名空间、类名 规范、编码风格标准、Autoload、公共接口等
-- Swoole:Swoole 是一个异步并行的通信引擎，作为 PHP 的扩展来运行。Node.js 的异步回调 Swoole 有，Go语言的协程 Swoole 也有，这完全颠覆了对 PHP 的认知.使用 Swoole PHP 可以实现常驻内存的 Server 程序，可以实现 TCP 、 UDP 异步网络通信的编程开发。比如 WebSocket 即使通信、聊天、推送服务器、RPC 远程调用服务、网关、代理、游戏服务器等。
-- Laravel:社区非常活跃，代码贡献者众多，第三方的插件非常多，生态系统相当繁荣。 Laravel 底层使用了很多 symfony2 组件，通过 composer 实现了依赖管理。Laravel 提供的命令行工具基于 symfony.console 实现，功能强大，集成了各种项目管理、自动生成代码的功能。
-- PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar。用来将多个 PHP 文件打包为一个文件。这个特性使得 PHP 也可以像 Java 一样方便地实现应用程序打包和组件化。一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行。配合 Swoole ，可以在命令行下执行 php server.phar 一键启动服务器。PHP 的代码包可以用 Phar 打包成组件，放到 Swoole 的服务器容器中去加载执行。
-- PHP 作为一门动态脚本语言，优点是开发方便效率高。缺点就是性能差。在密集运算的场景下比 C 、 C++ 相差几十倍甚至上百倍。另外 PHP 不可以直接操作底层，需要依赖扩展库来提供 API 实现。PHP 程序员可以学习一门静态编译语言作为补充实现动静互补，C/C++/Go 都是不错的选择。而且静态语言的编程体验与动态语言完全不同，学习过程可以让你得到更大的提升。 掌握 C/C++ 语言后，还可以阅读 PHP 、 Swoole 、 Nginx 、Redis 、 Linux内核 等开源软件的源码，了解其底层运行原理。 现在最新版本的Swoole提供了C++扩展模块的支持，封装了Zend API，用C++操作PHP变得很简单，可以用C++实现PHP扩展函数和类。
-- HTML5
-- Vue.js 可以非常方便地实现数据和 DOM 元素的绑定。通过 Ajax 请求后台接口返回数据后，更新前端数据自动实现界面渲染。
-- React Native 是一个不错的选择
-- 深度学习/人工智能:自动驾驶、大数据分析、网络游戏、图像识别、语言处理等。当然现在普通的工程师可能还无法参与到人工智能产品中，但至少应该理解深度学习/人工智能的基本概念和原理。
-
 ### Traits
 
 既可以实现代码分离又可以不用在逻辑层做任何处理
@@ -201,7 +182,9 @@ _ [KnpLabs/php-github-api](https://github.com/KnpLabs/php-github-api):A simple P
 ## Docker
 
 - mkdir -p ~/php-fpm/logs ~/php-fpm/conf
-- 构建Dockerfile ``` FROM debian:jessie
+- 构建Dockerfile 
+```
+FROM debian:jessie
 
 # persistent / runtime deps
 
@@ -211,8 +194,6 @@ ENV PHP_INI_DIR /usr/local/etc/php RUN mkdir -p $PHP_INI_DIR/conf.d
 
 ## <autogenerated>
 </autogenerated>
-
-
 
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data
 
@@ -226,13 +207,12 @@ RUN set -xe \ && buildDeps=" \ $PHP_EXTRA_BUILD_DEPS \ libcurl4-openssl-dev \ li
 
 # --enable-mysqlnd is included here because it's harder to compile after the fact than extensions are (since it's a plugin for several extensions, not an extension in itself)
 
-```
     --enable-mysqlnd \
-```
+
 
 # --enable-mbstring is included here because otherwise there's no way to get pecl to use it properly (see <https://github.com/docker-library/php/issues/195>)
 
-```
+
     --enable-mbstring \
     --with-curl \
     --with-libedit \
@@ -243,20 +223,18 @@ RUN set -xe \ && buildDeps=" \ $PHP_EXTRA_BUILD_DEPS \ libcurl4-openssl-dev \ li
 && { find /usr/local/bin /usr/local/sbin -type f -executable -exec strip --strip-all '{}' + || true; } \
 && make clean \
 && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps
-```
+
 
 COPY docker-php-ext-* /usr/local/bin/
 
 ## <autogenerated>
 </autogenerated>
 
-
-
 WORKDIR /var/www/html
 
 RUN set -ex \ && cd /usr/local/etc \ && if [ -d php-fpm.d ]; then \
 
-```
+
     # for some reason, upstream's php-fpm.conf.default has "include=NONE/etc/php-fpm.d/*.conf"
     sed 's!=NONE/!=!g' php-fpm.conf.default | tee php-fpm.conf > /dev/null; \
     cp php-fpm.d/www.conf.default php-fpm.d/www.conf; \
@@ -289,14 +267,11 @@ fi \
     echo '[www]'; \
     echo 'listen = [::]:9000'; \
 } | tee php-fpm.d/zz-docker.conf
+EXPOSE 9000 CMD ["php-fpm"]
 ```
-
-EXPOSE 9000 CMD ["php-fpm"] ```
 
 - docker build -t php:5.6-fpm .
 - docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/local/etc/php -v $PWD/logs:/phplogs -d php:5.6-fpm
-
-- <http://phpbestpractices.justjavac.com/>
 
 ## 工具
 
@@ -343,6 +318,7 @@ PHP代码规范与质量检查工具
 
 * [twigphp/Twig](https://github.com/twigphp/Twig):Twig, the flexible, fast, and secure template language for PHP http://twig.sensiolabs.org/
 * smarty
+
 ## 文档
 
 - [codeguy/php-the-right-way](https://github.com/codeguy/php-the-right-way):An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web <http://www.phptherightway.com>
@@ -355,4 +331,12 @@ PHP代码规范与质量检查工具
 * php：the right way
 * Morden php
 
+TP参考：<https://github.com/ijry/lyadmin>
+
+<https://leanpub.com/phptherightway/read#test_driven_development_title>
+
+- <http://phpbestpractices.justjavac.com/>
+<http://www.jianshu.com/p/a5d905778b47>
+
+$GLOBALS['HTTP_RAW_POST_DATA']
 prof

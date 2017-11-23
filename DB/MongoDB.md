@@ -17,17 +17,17 @@ BSON被比作二进制的交换格式，如同Protocol Buffers，但BSON比它�
 
 ### ubnutu
 
-```
+```sh
 sudo apt-get install libssl-dev pkg-config
 pecl install mongodb
 ```
 
 ### Windows
 
-- 下载安装（或通过包工具）
-- 添加系统变量：C:\Program Files\MongoDB\Server\3.4\bin（echo 'export PATH=/usr/local/mongodb/bin:$PATH'>>~/.bash_profile）
-- 创建数据库文件路径:C:\data\db(/data/db)
-- 通过命令行工具启动服务: mongod（本地访问<http://localhost:27017/）MongoDB系统的主要守护进程，用于处理数据请求，数据访问和执行后台管理操作，必须启动，才能访问MongoDB数据库>
+* 下载安装（或通过包工具）
+* 添加系统变量：C:\Program Files\MongoDB\Server\3.4\bin（echo 'export PATH=/usr/local/mongodb/bin:$PATH'>>~/.bash_profile）
+* 创建数据库文件路径:C:\data\db(/data/db)
+* 通过命令行工具启动服务: mongod（本地访问<http://localhost:27017/）MongoDB系统的主要守护进程，用于处理数据请求，数据访问和执行后台管理操作，必须启动，才能访问MongoDB数据库>
 
 ## Mac
 
@@ -161,7 +161,10 @@ db.shutdownServer()
 ## docker
 
 - `mkdir -p ~/mongo ~/mongo/db` // db目录将映射为mongo容器配置的/data/db目录,作为mongo数据的存储目录
-- 创建Dockerfile ``` FROM debian:wheezy
+- 创建Dockerfile
+
+```
+FROM debian:wheezy
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 
@@ -187,7 +190,8 @@ RUN mkdir -p /data/db /data/configdb \ && chown -R mongodb:mongodb /data/db /dat
 
 COPY docker-entrypoint.sh /entrypoint.sh ENTRYPOINT ["/entrypoint.sh"]
 
-EXPOSE 27017 CMD ["mongod"] ```
+EXPOSE 27017 CMD ["mongod"]
+```
 
 - docker build -t mongo:3.2 .
 - docker run -p 27017:27017 -v $PWD/db:/data/db -d mongo:3.2

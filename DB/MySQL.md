@@ -101,7 +101,7 @@ dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  #
     - innodb_additional_mem_pool_size:该参数指定InnoDB用来存储数据字典和其他内部数据结构的内存池大小。缺省值是1M。通常不用太大，只要够用就行，应该与表结构的复杂度有关系。如果不够用，MySQL会在错误日志中写入一条警告信息。根据MySQL手册，对于2G内存的机器，推荐值是20M，可适当增加。
     - innodb_thread_concurrency=8:推荐设置为 2*(NumCPUs+NumDisks)，默认一般为8
 
-```
+```sql
 SHOW VARIABLES LIKE "character_%";
 character_set_client # 接受的客户端编码
 character_set_result # 返回结果集的编码

@@ -4,7 +4,6 @@
 - PyCharm
 - PHPStrom
 - WebStorm
-- 
 
 ## PHPStrom
 

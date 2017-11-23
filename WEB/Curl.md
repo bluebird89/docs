@@ -1,8 +1,8 @@
+# Curl
+
 curl is used in command lines or scripts to transfer data.
 
-[文档](https://ec.haxx.se/) [Gitbook](https://www.gitbook.com/book/bagder/everything-curl/details)
-
-```
+```sh
 curl -X POST \
   http://localhost:8080/ \
   -H 'cache-control: no-cache' \
@@ -24,3 +24,8 @@ curl --header "Content-Type:application/json" http://example.com    // 增加一
 User Agent字段:这个字段是用来表示客户端的设备信息。服务器有时会根据这个字段，针对不同设备，返回不同格式的网页
 curl --user-agent "[User Agent]" [URL] 
 ```
+
+## 参考
+
+* [文档](https://ec.haxx.se/)
+* [Gitbook](https://www.gitbook.com/book/bagder/everything-curl/details)
