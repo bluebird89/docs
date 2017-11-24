@@ -1,4 +1,4 @@
-# Lnmp 环境搭建
+# LNMP 环境搭建
 
 ## Linux
 
