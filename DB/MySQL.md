@@ -11,8 +11,11 @@ Percona分支版本，它是一个相对比较成熟的、优秀的MySQL分支�
 - MySQLWorkbench
 - SQLyog   `ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
 - phpAdmin
+- 命令行
 
 ## 安装
+
+### MAC
 
 ```shell
 brew install mysql
@@ -57,12 +60,14 @@ dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  #
 
 配置文件：/usr/local/etc/my.cnf  或者 my.ini
 
-* 数据库文件路径
-* 字符集: 客户端向MySQL服务器端请求和返加的数据的字符集，在选择数据库后使用:set names gbk;
+* 数据库文件路径 `datadir="F:/wamp/mysql/data"` 
+* 字符集: 客户端向MySQL服务器端请求和返加的数据的字符集，在选择数据库后使用:`set names gbk`;
     + 数据库存储:一个汉字utf8下为两个长度,gbk下为一个长度
     + 正常一个汉字utf8下为三个字节,gbk下为两个字节
 * 保证客户端使用字符集与服务端返回数据字符集编码一致(以适应客户端为主,修改服务器服务器端配置) 查询系统变量:
-* 校对集: _bin：按二进制编码比较 _ci：不区分大小写比较
+* 校对集: 
+    - _bin：按二进制编码比较 
+    - _ci：不区分大小写比较
 * 连接变量
     - max_connection # 最大连接数:增加该值增加mysqld 要求的文件描述符的数量。如果服务器的并发连接请求量比较大，建议调高此值，以增加并行连接数量，当然这建立在机器能支撑的情况下，因为如果连接数越多，介于MySQL会为每个连接提供连接缓冲区，就会开销越多的内存，所以要适当调整该值，不能盲目提高设值。
         + max_used_connections / max_connections * 100% （理想值≈ 85%）
@@ -101,15 +106,11 @@ dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  #
     - innodb_additional_mem_pool_size:该参数指定InnoDB用来存储数据字典和其他内部数据结构的内存池大小。缺省值是1M。通常不用太大，只要够用就行，应该与表结构的复杂度有关系。如果不够用，MySQL会在错误日志中写入一条警告信息。根据MySQL手册，对于2G内存的机器，推荐值是20M，可适当增加。
     - innodb_thread_concurrency=8:推荐设置为 2*(NumCPUs+NumDisks)，默认一般为8
 
-```sql
-SHOW VARIABLES LIKE "character_%";
-character_set_client # 接受的客户端编码
-character_set_result # 返回结果集的编码
-SET character_set_client=GBK; # 不一致的话,修改
-set names # 修改client connection results字符集
-
+```
 [client]
+datadir="F:/wamp/mysql/data"
 default-character-set = utf8
+default-collation=utf8_general_ci
 
 [mysqld]
 default-storage-engine = INNODB
@@ -130,23 +131,42 @@ max_connection_error（最大错误数，建议设置为10万以上，而open_fi
 ```
 
 ```sql
+SHOW VARIABLES LIKE "character_%";
+character_set_client # 接受的客户端编码
+character_set_result # 返回结果集的编码
+SET character_set_client=GBK; # 不一致的话,修改
+set names gbk # 修改client connection results字符集
+
 # 出现ERROR 1040: Too many connections错误,修正max_connections的值
-show variables like ‘max_connections’;  # 最大连接数
-show  status like ‘max_used_connections’; # 响应的连接数
+show variables like 'max_connections';  # 最大连接数
+show  status like 'max_used_connections'; # 响应的连接数
 
 show full processlist; #
 
-show variables like ‘key_buffer_size‘; 
-show global status like ‘key_read%‘; # 请求在内存中没有找到直接从硬盘读取索引
+show variables like 'key_buffer_size'; 
+show global status like 'key_read%'; # 请求在内存中没有找到直接从硬盘读取索引
 
-SHOW STATUS LIKE ‘Qcache%’;
-show global status like ‘qcache%‘;
-show variables like ‘query_cache%‘;
+SHOW STATUS LIKE 'Qcache%';
+show global status like 'qcache%';
+show variables like 'query_cache%';
 
-show global status like ‘created_tmp%‘;
+show global status like 'created_tmp%';
+```
+
+### 用户管理
+
+命令行操作
+
+```sql
+mysql -h localhost  -P 3306 -u root -p  # 生成用户root与空密码登陆
+exit quit \q
+
+CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; // 添加用户
 ```
 
 ### 存储引擎
+
+不同数据引擎数据的存储格式
 
 * Myisam:表结构 数据 索引文件分离。适合于一些需要大量查询的应用，但其对于有大量写操作并不是很好。甚至你只是需要update一个字段，整个表都会被锁起来，而别的进程，就算是读进程都 无法操作直到读操作完成。
 
@@ -158,7 +178,7 @@ show global status like ‘created_tmp%‘;
   - 只有索引缓存在内存中：mysiam只缓存进程内部的索引
   - 紧密存储：行被仅仅保存在一起
 
-* Innodb:综合一个文件,用于在写操作比较多的时候
+* Innodb:综合一个文件,写满后递增文件夹。用于在写操作比较多的时候
     - 数据存储方式是聚簇索引,索引节点存的则是数据的主键，所以需要根据主键二次查找
     - 事务性：Innodb支持事务和四种事务隔离级别
     - 外键：Innodb唯一支持外键的存储引擎 create table 命令接受外键
@@ -177,74 +197,9 @@ show global status like ‘created_tmp%‘;
 show engines; # 显示当前数据库支持的存储引擎情况
 ```
 
-### SQL操作
-
-```sql
-SHOW DATABASES; # 数据库操作
-USE db_name;
-CREATE DATABASE [IF NOT EXISTS] db_name [CHARSET utf8(gbk)] [COLLATE utf8_unicode_ci];  关键字表名加``
-ALTER DATABASE db_name DEFAULT  CHARACTER SET utf8
-DROP DATABASE [IF EXISTS] db_name;
-SHOW CREATE DATABASE db_name; # 显示创建数据库时的语句:
-ALTER DATABASE db_name DEFAULT  CHARACTER SET utf8
-
-SHOW TABLES; # 查看 创建 删除数据表
-DROP TABLE [IF EXISTS] db_name;
-CREATE TABLE table_name(col_name  type  attribute , col_name  type  attribute,…… );
-create table news(
-  id int NOT null AUTO_INCREMENT primary KEY,
-  title varchar(100) not null comment '名称',
-  author varchar(20) not null,
-  source varchar(30) not null,
-  hits int(5) not null DEFAULT 0,
-  context text null,
-  adddate int(16) not null
-)charset=utf8 collate=utf8_bin;
-DESCRIBE|DESC table_name; #显示表的结构定义
-SHOW CREATE TABELE table_name\G; #  查看创建表的语句
-
-ALTER TABLE table_name ADD address varchar(30) first| after name; #  修改数据表
-ALTER TABLE table_name DROP address;
-ALTER TABLE table_name MODIFY address varchar(100);  修改属性
-ALTER TABLE table_name CHANGE address add varchar(100) after id; 修改字段名字
-ALTER TABLE table_name engine=myisam;
-ALTER TABLE table_name rename to new_table_name;
-ALTER TABLE table_name rename to another_DB.new_table_name; 移动表
-
-CREATE TABLE table_name SELECT column1,cloumn2 FROM another_table:// 复制数据不复制主键
-CREATE TABLE table_name like another_table； //  数据不复制，主键复制
- 
-INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…);  // 记录操作：添加 更新与删除数据(新增与修改不用添加TABLE关键字)
-INSERT INTO table_name values (null,值,....);全字段插入，自动增长列用null
-INSERT INTO table_name values (null,值,....),(null,值,....),(null,值,....);插入多条数据
-INSERT INTO table_name set volumn1=value1,volumn3=value3,volumn3=value3;
-UPDATE table_name  SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件];
-SELECT [DISTINCT] 字段列表 |* FROM table_name [WHERE条件][ORDER BY排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
-DELETE FROM table_name [WHERE条件];
-
-DELETE FROM table_name; // 清空数据表：数据一条条删除
-TRUNCATE TABLE table_name; // 删除表,重建同结构
-
-ALTER TABLE 'table_name' ADD PRIMARY KEY'index_name' ('column');
-ALTER TABLE 'table_name' ADD UNIQUE 'index_name' ('column');
-ALTER TABLE 'table_name' ADD INDEX'index_name' ('column');
-ALTER TABLE 'table_name' ADD FULLTEXT 'index_name' ('column');
-ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
-```
-
-### 用户管理
-
-```sql
-mysql -h localhost  -P 3306 -u root -p  # 生成用户root与空密码登陆
-exit;
-
-CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; // 添加用户
-```
-
 ### 数据类型
 
-  - 整型：
-
+* 整型：
     - tinyint 0-255 或 -2^7~2^7-1 1个字节
     - smallint -2^15~2^15-1 2个字节
     - mediumint -2^23~2^23-1 3个字节
@@ -252,18 +207,12 @@ CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; // 添加用户
     - bigint 0-2^64-1 8个字节
     - unsigned:无符号数
     - 显示宽度int(11):最小显示位数(默认不起作用),zerofill会用0填充,不决定数据大小
-
-  - 浮点型(M代表总长度(不含小数点)，D代表小数位数),精度会丢失,不要作比较：
-
+* 浮点型(M代表总长度(不含小数点)，D代表小数位数),精度会丢失,不要作比较：
     - float(M,D) (论上可以保留7位小数) 3.4E+38~3.4E+38 4个字节
     - double(M,D) (理论上保留15位小数) -1.8E+308~1.8E+308 8个字节
-
-  - 定点数:decimal(M,D)，M的最大值是65，D的最大值是30，默认是（10,0）,用于保存精确的小数
-
-  - 注意:定点数的值是正确的，浮点数会失去精度。浮点数的执行效率要高于定点数。浮点数和定点数支持显示宽度，支持无符号
-
-  - **字符** 类型：
-
+* 定点数:decimal(M,D)，M的最大值是65，D的最大值是30，默认是（10,0）,用于保存精确的小数
+    - 注意:定点数的值是正确的，浮点数会失去精度。浮点数的执行效率要高于定点数。浮点数和定点数支持显示宽度，支持无符号
+* **字符** 类型：
     - char(M) 固定长度 0-255个字符 char(11) //最多只能存储11个字节
     - varchar(M) 自动伸缩型:比固定长度类型占用更少的存储空间，只占用需要的空间,使用额外的1到2字节存储长度，列小于255使用1字节保存长度，大于255使用2字节保存，varchar保留字符串末尾的空格 0-65535个字节 M为字符个数，M为最大值
     - blob和text唯一区别就是blob保存二进制数据、没有字符集和排序规则。
@@ -271,15 +220,12 @@ CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; // 添加用户
     - text 2^16-1
     - mediumtext 中型文本型 2^24-1 0－1677个字符
     - longtext 大型文本 2^32-1 0-42亿个字符
-
-  - 日期时间(发布日期"这样的数据时，请用时间戳来存)：
-
+* 日期时间(发布日期"这样的数据时，请用时间戳来存)：
     - date 2015-10-20
     - time 10:09:08
     - datetime 保存是1001年到9999年，精度是秒，存储值为 2016-05-06 22:39:40。
     - timestamp保存自 1970年1月1日午夜以来的秒数，和unix时间戳相同，提供4字节存储 只能表示1970年到2038年。默认timestamp值 为 NOT NULL。
-
-  - ip:通常使用varchar(15)保存IP地址.inet_aton() inet_ntoa()用于转换
+* ip:通常使用varchar(15)保存IP地址.inet_aton() inet_ntoa()用于转换
 
 ### 字段属性
 
@@ -289,28 +235,85 @@ CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; // 添加用户
 * DEFAULT "男" ，默认值为字符型
 * PRIMARY KEY，指定该列主键，值是唯一的，不能重复。
 * AUTO_INCREMENT，指定列的值是自动增长型。 注意：一个数据表，只能有一个主键和一个自动增长型。 提示：数据表的id字段，必须要有 not null primary key auto_incremtn 这三个属性。
-* where结构：
-
+* 查询条件
+    - 字段列表：指要显示指定列的数据，多个字段之间用逗号隔开，各字段之间没有顺序。*：显示所有字段的数据
+    - ORDER BY排序
+    - LIMIT限制返回
     - 运算符：＝ ＜ ＞ ＜＝ ＞＝ !＝ ＜＞ is not null IS NULL
     - BETWEEN 1 AND 20:WHERE date BETWEEN '2016-05-10' AND '2016-05-14';
     - IN NOT IN：
     - LIKE('name%') NOT LIKE('name%')：
-
-      - % 替代 0 个或多个字符
-      - _ 替代一个字符
-      - [charlist] 字符列中的任何单一字符
-      - [^charlist]或[!charlist] 不在字符列中的任何单一字符 WHERE name REGEXP '^[GFs]'；name REGEXP '^[^A-H]';
-
+    - % 替代 0 个或多个字符
+    - _ 替代一个字符
+    - [charlist] 字符列中的任何单一字符
+    - [^charlist]或[!charlist] 不在字符列中的任何单一字符 WHERE name REGEXP '^[GFs]'；name REGEXP '^[^A-H]';
     - 逻辑运算: AND & OR(可以混合使用)
-
-  - 别名：涉及超过一个表；在查询中使用了函数；列名称很长或者可读性差；需要把两个列或者多个列结合在一起
+* 别名：涉及超过一个表；在查询中使用了函数；列名称很长或者可读性差；需要把两个列或者多个列结合在一起
 
 ```sql
+SHOW DATABASES;
+USE db_name; # 可以不切换数据库的情况下操作数据表
+
+CREATE DATABASE IF NOT EXISTS db_name CHARSET utf8 COLLATE utf8_unicode_ci;  # 特殊符号、关键字表名加``
+ALTER DATABASE db_name charset=utf8;
+DROP DATABASE [IF EXISTS] db_name;
+SHOW CREATE DATABASE db_name;
+
+SHOW TABLES;
+# CREATE TABLE table_name(col_name  type  attribute , col_name  type  attribute,…… );
+CREATE TABLE test.news(
+  id int NOT null AUTO_INCREMENT primary KEY,
+  title varchar(100) not null comment '名称',
+  author varchar(20) not null comment '作者',
+  source varchar(30) not null comment '来源',
+  hits int(5) not null DEFAULT 0 comment '点击率',
+  context text null comment '内容',
+  adddate int(16) not null comment '添加时间'
+)charset=utf8 collate=utf8_bin;
+CREATE TABLE table_name SELECT column1,cloumn2 FROM another_table: # 复制数据不复制主键
+CREATE TABLE table_name like another_table；  #  数据不复制，主键复制
+DESCRIBE news;
+DESC news;
+SHOW CREATE TABELE news\G;
+
+ALTER TABLE table_name ADD address varchar(30) first| after name; #  修改数据表
+ALTER TABLE table_name DROP address;
+ALTER TABLE table_name MODIFY address varchar(100);  # 修改属性
+ALTER TABLE table_name CHANGE address add varchar(100) after id; # 修改字段名字
+ALTER TABLE table_name engine=myisam;
+ALTER TABLE table_name rename to new_table_name;
+ALTER TABLE table_name rename to another_DB.new_table_name; # 移动表
+ALTER TABLE 'table_name' ADD PRIMARY KEY'index_name' ('column');
+ALTER TABLE 'table_name' ADD UNIQUE 'index_name' ('column');
+ALTER TABLE 'table_name' ADD INDEX'index_name' ('column');
+ALTER TABLE 'table_name' ADD FULLTEXT 'index_name' ('column');
+ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
+
+SELECT [DISTINCT] 字段列表|* FROM table_name [WHERE条件][ORDER BY排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
+
+select id,title,author,hits,addate from news ORDER BY id DESC LIMIT 10,10;
 SELECT column_name AS alias_name FROM table_name;
 SELECT column_name(s) FROM table_name AS alias_name; SELECT w.name, w.url, a.count, a.date FROM Websites AS w, access_log AS a WHERE a.site_id=w.id and w.name="菜鸟教程";
+
+INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…);   # 记录操作：添加 更新与删除数据(新增与修改不用添加TABLE关键字)
+INSERT INTO table_name values (null,值,....); # 全字段插入，自动增长列用null
+INSERT INTO table_name values (null,值,....),(null,值,....),(null,值,....); # 插入多条数据
+INSERT INTO table_name set volumn1=value1,volumn3=value3,volumn3=value3;
+UPDATE table_name  SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件];
+DELETE FROM table_name [WHERE条件];
+
+DROP TABLE [IF EXISTS] db_name;
+DELETE FROM table_name;  # 清空数据表：数据一条条删除
+TRUNCATE TABLE table_name;  # 删除表,重建同结构
 ```
 
-- 联表：联表查询降低查询速度
+### 联表
+
+表与表之间通过公共字段建立关系
+
+* 公共字段名字可以不一样，但是数据类型必须一样
+* 联表查询降低查询速度。
+* 数据冗余与查询速度的平衡
 
 ## 高性能表设计规范
 

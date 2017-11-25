@@ -1,16 +1,61 @@
-# HTML
+# HTML（HyperText Markup Language，简称：HTML）
 
-- 超文本标记语言（HyperText Markup Language，简称：HTML）,是一种标记语言;
-- 标记语言是一套标记标签 (markup tag);
-- HTML 使用标记标签来描述网页;标签或元素(element);
-- 格式:<开始标签>内容<结束标签>;
-- HTML 文档由嵌套的 HTML 元素构成。
-- 元素属性:属性可以在元素中添加附加信息,属性一般描述于开始标签,属性总是以名称/值对的形式出现，比如：name="value"。
+超文本标记语言,是一种标记语言
 
-  - class(定义一个或多个类名)
-  - id(唯一id)
-  - style(元素的行内样式（inline style）)
-  - title
+* 标记语言是一套标记标签 (markup tag);
+* HTML 使用标记标签来描述网页;标签或元素(element);
+* 格式:<开始标签>内容<结束标签>;
+* HTML 文档由嵌套的 HTML 元素构成。
+* 元素属性:属性可以在元素中添加附加信息,属性一般描述于开始标签,属性总是以名称/值对的形式出现，比如：name="value"。
+
+## 元素
+
+* class(定义一个或多个类名)
+* id(唯一id)
+* style(元素的行内样式（inline style）)
+* title
+
+### table
+
+`<table>`属性
+
+ * width：表格的宽度，默认单位是px(像素)。
+ * height：表格的高度。
+ * border：边框的粗细。
+ * bordercolor：边框颜色。
+ * rules：合并单元格边线。取值：All
+ * cellpadding：单元格边线到内容之间的距离(填充距离)。
+ * cellspacing：两个单元格之间的距离(间距)
+ * background：背景图片
+ * bgColor：表格背景颜色
+ * align：表格水平对齐方式，取值：left、center、right
+
+`<tr>`属性
+
+* height：行高
+* backgroundColor：背景色
+* background：背景图片
+* align：水平对齐
+* valign：垂直对齐，取值：top、middle、bottom
+
+`<td>`或`<th>`属性
+
+* width：单元格宽度
+* height：单元格高度
+* bgColor：背景色
+* background：背景图片
+* align：水平对齐
+* valign：垂直对齐
+* colspan：跨列合并
+* rowspan：跨行合并
+
+```html
+<table>
+    <tr>
+        <td>内容</td>
+    </tr>
+</table>
+```
 
 ```html
 /*声明为 HTML5 文档*/
@@ -54,43 +99,155 @@
 
     <span> 应用样式，那么 <span> 元素中的文本与其他文本不会任何视觉上的差异。标签提供了一种将文本的一部分或者文档的一部分独立出来的方式。</span></span>
 
+## HTML5
+
+# 结构
+
+- 元数据元素
+
+# 元素
+
+- 元素嵌套
+
+  - 父子关系（父元素唯一）
+
+    - 兄弟关系：
+
+  - 祖先-后代关系：
+
+- 表示结构元素 div
+
+# 属性
+
+- id 独一无二
+- class 可以累加
+
+# HTML5
+
+语义与表现分离
+
+# DOM
+
+表示文档中所有元素的JavaScript对象模型
+
+- HTMLElement
+
+  - classname：getElementByClassName
+  - id:
+  - tagName
+  - querySelector
+  - querySelectorAll
+
+# event
+
+- type:事件名 -
+
 # CSS
 
-用 CSS 最大的好处是，如果把 CSS 代码存放到外部样式表中，那么站点会更易于维护 最常用于图片操作、表单验证以及内容动态更新
+- color background-color font-size border
+- 行内样式 内嵌样式 >外部样式> 用户样式（user stylesheets\custom.CSS）>浏览器样式
+- 选择器：
 
-- 内联样式- 在HTML元素中使用"style" 属性
-- 内部样式表 -在HTML文档头部 区域使用
-```html
-  <style> 元素 来包含CSS</li>
-  <li>外部引用 - 使用外部 CSS 文件</li>
-  <li>外部样式表(External style sheet)&lt;内部样式表(Internal style sheet)&lt;内联样式(Inline style)</li>
-  </ul>
-  <h4 id="-">　选择器　</h4>
-  <ul>
-  <li><h1 id="id">id</h1>
-  </li>
-  <li>.class</li>
-  <li><p>tag.class</p>
-  <h3 id="-">清除浮动</h3>
-  <p>浮动产生原因：一个子盒子使用了CSS float浮动属性，导致父级对象盒子不能被撑开
-  解决办法：清楚浮动</p>
-  <p>  <style type="text/css"></p>
-  <pre><code>      .outer{border: 1px solid #ccc;background: #fc9;color: #fff; margin: 50px auto;padding: 50px;}
-        .div1{width: 80px;height: 80px;background: red;float: left;}
-        .div2{width: 80px;height: 80px;background: blue;float: left;}
-        .div3{width: 80px;height: 280px;background: sienna;float: right;}
-        .clear{clear:both; height: 0; line-height: 0; font-size: 0}
-    &lt;/style&gt;
-  </code></pre>  <div class="outer">
-        <div class="div1">1</div>
-        <div class="div2">2</div>
-        <div class="div3">3</div>
-        <div class="clear"></div>
-    </div>
-  </li>
-  </ul>
-  </style>
-```
+  - * \
+
+    <type\> .\<class\> #<id>
+      <type>.<class>
+    </class></type>
+    </id></class\></type\>
+
+  - 复杂度与搜索时间有关 [attr] [attr='val'] [attr$='val'] [attr^='val']
+  - 关系选择器：后代：
+
+    <selector>
+      <selector> 子元素<selector> &gt; <selector> 兄弟元素（之后的的第一个选择器2元素） <selector> + <selector> 之后的所有选择器2的兄弟元素<selector> ~ <selector>
+    </selector></selector></selector></selector></selector></selector></selector>
+    </selector>
+
+  - stylus less sass
+  - 伪元素： ：active ：hover
+  - 联合选择器 ： \
+
+    <selector\> ， <selector> ：not(selector)</selector></selector\>
+
+  - 同级样式会对比专一程度： id>其他属性与伪类个数>元素名字与伪元素名字个数
+
+- 样式层叠器
+- 样式单位
+
+  - 颜色： 颜色white 十六进制#ffffff 十进制255,255,255 rgb（112,128.144,0.4） hsl(h, s, l)
+  - 长度：
+
+    - 绝对 in cm mm pt磅 pc皮卡
+    - 相对(另一个尺寸倍数) em相对元素字号高度 ex rem px像素 %
+
+# JavaScript
+
+脚本语言
+
+- 直接写入 HTML 输出流
+- 对事件的响应
+- 改变 HTML 内容、属性、样式
+- 验证输入
+- 使用
+
+  <script>
+  </script>
+
+ 含在head或者body中
+- 对大小写敏感
+- 使用 Unicode 字符集
+- 分号用于分隔 JavaScript 语句
+- 按照编写顺序依次执行每条语句，通过函数编写代码块：代码块的作用是一并地执行语句序列。
+
+## 输出数据
+
+- window.alert() 弹出警告框。
+- 使用 document.write() 方法将内容写到 HTML 文档中。
+
+  ```
+  折行
+  document.write("你好 \
+  世界!");
+  ```
+
+- 使用 innerHTML 写入到 HTML 元素（操作 HTML 元素）。
+- 使用 console.log() 写入到浏览器的控制台：能看到结构化的东西；不会打断页面的操作
+
+## 语法
+
+- 固定值称为字面量
+- 数据类型：
+
+  - Null:将变量的值设置为 null 来清空变量
+  - Undefined:表示变量不含有值
+  - Number
+  - string
+  - Boolean
+  - array
+  - object：
+
+    - 键值对在 JavaScript 对象通常称为 对象属性
+    - 对象的方法定义了一个函数，并作为对象的属性存储。对象方法通过添加 () 调用 (作为一个函数)。
+
+  - function：函数是由事件驱动的或者当它被调用时执行的可重复使用的代码块。
+
+    - 参数
+    - 返回值
+    - 作用域：
+    - 局部变量：只能在函数内部访问它
+    - 全局变量：网页上的所有脚本和函数都能访问它 -
+
+- 变量，用于存储信息的"容器"：var x = 5, age=30, job="carpenter";
+
+  - 生命周期：在它声明时初始化，局部变量在函数执行完毕后销毁，全局变量在页面关闭后销毁
+
+- 注释：
+
+  - 单行：//
+  - 多行：/** /
+
+- 事件
+
 
 a标签不能嵌套
 
@@ -101,3 +258,5 @@ a标签不能嵌套
 ## 参考
 
 * [joshbuchea/HEAD](https://github.com/joshbuchea/HEAD):A list of everything that *could* go in the head of your document https://gethead.info
+* [Bilibili/flv.js](https://github.com/Bilibili/flv.js)HTML5 FLV Player
+* [h5bp/html5-boilerplate](https://github.com/h5bp/html5-boilerplate):A professional front-end template for building fast, robust, and adaptable web apps or sites. https://html5boilerplate.com/
