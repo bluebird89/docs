@@ -159,6 +159,7 @@ print('hello,', name)
 #### 数据类型与变量
 
 在计算机内部，可以把任何数据都看成一个“对象”，而变量就是在程序中用来指向这些数据对象的，对变量赋值就是把数据和变量给关联起来。对变量赋值x = y是把变量x指向真正的对象，该对象是变量y所指向的。随后对变量y的赋值不影响变量x的指向。
+
 * 基本类型
     - 整数:Python可以处理任意大小的整数，当然包括负整数，在程序中的表示方法和数学上的写法一模一样，例如：1，100，-8080，0，等等。二进制、十六进制表示整数比较方便，十六进制用0x前缀和0-9，a-f表示，例如：0xff00，0xa5b4c3d2，等等。
     - 浮点数:浮点数也就是小数，之所以称为浮点数，是因为按照科学记数法表示时，一个浮点数的小数点位置是可变的，比如，1.23x109和12.3x108是完全相等的。浮点数可以用数学写法，如1.23，3.14，-9.01，等等。或者用科学计数法表示，把10用e替代，1.23x10^9就是1.23e9，或者12.3e8，0.000012可以写成1.2e-5，等等。整数和浮点数在计算机内部存储的方式是不同的，整数运算永远是精确的（除法难道也是精确的？是的！），而浮点数运算则可能会有四舍五入的误差。也没有大小限制，但是超出一定范围就直接表示为inf（无限大）
@@ -197,6 +198,7 @@ print('hello,', name)
     - 对于不变对象来说，调用对象自身的任意方法，也不会改变该对象自身的内容。相反，这些方法会创建新的对象并返回，这样，就保证了不可变对象本身永远是不可变的。
     - 因为不变对象一旦创建，对象内部的数据就不能修改，这样就减少了由于修改数据导致的错误。此外，由于对象不变，多任务环境下同时读取对象不需要加锁，同时读一点问题都没有。我们在编写程序时，如果可以设计一个不变对象，那就尽量设计成不变对象。
 * 常量：用全部大写的变量名表示常量。不能变的变量。事实上PI仍然是一个变量，Python根本没有任何机制保证PI不会被改变，所以，用全部大写的变量名表示常量只是一个习惯上的用法
+
 ```python
 print('I\'m ok.')
 print('I\'m learning\nPython.')
@@ -213,6 +215,8 @@ True and True
 True or False
 5 > 3 or 1 > 3
 not 1 > 2
+int('12345', base=8) # 5349
+int('12345', 16) # 74565
 
 classmates = ['Michael', 'Bob', 'Tracy']
 classmates[0] #  'Michael'  获取元素
@@ -247,7 +251,8 @@ b = a.replace('A', 'a')
 a # 'ABC'
 b # 'aBC'
 ```
-##### 高级特性
+
+#### 高级特性
 
 * 切片（slice）：取一个list或tuple的部分元素.倒数第一个元素的索引是-1 L[begin:end:foot].还支持tuple str
 * 迭代：通过for循环来遍历这个list或tuple，这种遍历我们称为迭代（Iteration）。只要是可迭代对象(list、tuple、dict、set、str)，无论有无下标，都可以迭代.enumerate函数可以把一个list变成索引-元素对，这样就可以在for循环中同时迭代索引和元素本身
@@ -260,6 +265,7 @@ b # 'aBC'
     - Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。
 * 可迭代对象Iterable：可以直接作用于for循环的对象统称为可迭代对象：一类是集合数据类型，如list、tuple、dict、set、str等；一类是generator，包括生成器和带yield的generator function。
     - 生成器都是Iterator对象，但list、dict、str虽然是Iterable，却不是Iterator。把list、dict、str等Iterable变成Iterator可以使用iter()函数
+
 ```python
 s = ['python', 'java', ['asp', 'php'], 'scheme']
 s[0:3] # ['python', 'java', ['asp', 'php']]
@@ -345,6 +351,7 @@ isinstance(iter([]), Iterator) # True
 * /除法计算结果是浮点数，即使是两个整数恰好整除，结果也是浮点数
 * //，称为地板除，两个整数的除法仍然是整数
 * 余数运算，可以得到两个整数相除的余数
+
 ```python
 10 / 3
 10 // 3
@@ -377,6 +384,7 @@ isinstance(iter([]), Iterator) # True
     - 不太确定应该用什么，%s永远起作用，它会把任何数据类型转换为字符串
     - 字符串里面的%是一个普通字符怎么办？这个时候就需要转义，用%%来表示一个%
 * 另一种格式化字符串的方法是使用字符串的format()方法，它会用传入的参数依次替换字符串内的占位符{0}、{1}……
+
 ```python
 ord('A')
 ord('中')
@@ -418,6 +426,7 @@ print('%.2f' % 3.1415926) # 3.14
 * 循环:for while
 * break语句可以提前退出循环
 * continue语句，跳过当前的这次循环，直接开始下一次循环
+
 ```python
 age = 3
 if age >= 18:
@@ -627,7 +636,24 @@ def fact_iter(num, product):
     - reduce把一个函数作用在一个序列[x1, x2, x3, ...]上，这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算
     - filter()把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素.关键在于正确实现一个“筛选”函数
     - 排序算法 sorted（），可以接收一个key函数来实现自定义的排序
-* 返回函数：
+* 返回函数：把函数作为结果值返回
+    - 闭包
+    - 在函数lazy_sum中又定义了函数sum，并且，内部函数sum可以引用外部函数lazy_sum的参数和局部变量，当lazy_sum返回函数sum时，相关参数和变量都保存在返回的函数中，这种称为“闭包（Closure）”
+    - 调用lazy_sum()时，每次调用都会返回一个新的函数，即使传入相同的参数
+* 匿名函数
+    - 关键字lambda表示匿名函数，冒号前面的x表示函数参数
+    - 有个限制，就是只能有一个表达式，不用写return，返回值就是该表达式的结果
+* 装饰器
+    - decorator就是一个返回函数的高阶函数
+    - 接受一个函数作为参数，并返回一个函数。借助Python的@语法，把decorator置于函数的定义处
+    - 将函数包裹重新指向原函数变量名
+    - 装饰器本身需要传入参数
+    - 内置的functools.wraps的使用，不需要编写wrapper.__name__ = func.__name__
+    - 在面向对象（OOP）的设计模式中，decorator被称为装饰模式。OOP的装饰模式需要通过继承和组合来实现，而Python除了能支持OOP的decorator外，直接从语法层次支持decorator。Python的decorator可以用函数实现，也可以用类实现。
+* 偏函数：functools模块提供了很多有用的功能，其中一个就是偏函数（Partial function）
+    - functools.partial的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单。
+    - 创建偏函数时，实际上可以接收函数对象、*args和**kw这3个参数
+    - 将自第二位起的参数作为*args和**kw自动加到函数里面参数的左边
 
 ```python
 def add(x, y, f):
@@ -690,7 +716,318 @@ sorted([36, 5, -12, 9, -21], key=abs)
 sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower)
 sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower, reverse=True)
 
+def lazy_sum(*args):
+    def sum():
+        ax = 0
+        for n in args:
+            ax = ax + n
+        return ax
+    return sum
+f1 = lazy_sum(1, 3, 5, 7, 9)
+f2 = lazy_sum(1, 3, 5, 7, 9)
+f1==f2 # False
+f1 # <function lazy_sum.<locals>.sum at 0x101c6ed90>
+f1() #
+
+def count():
+    fs = []
+    for i in range(1, 4):
+        def f():
+             return i*i
+        fs.append(f)
+    return fs
+
+f1, f2, f3 = count()
+f1() # 9
+f2() # 9
+f3() # 9
+
+def count():
+    def f(j):
+        def g():
+            return j*j
+        return g
+    fs = []
+    for i in range(1, 4):
+        fs.append(f(i)) # f(i)立刻被执行，因此i的当前值被传入f()
+    return fs
+
+list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9])) # [1, 4, 9, 16, 25, 36, 49, 64, 81]
+f = lambda x: x * x
+f(5)
+
+def log(func):
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+@log  # @log放到now()函数的定义处，相当于执行了语句 now = log(now)
+def now():
+    print('2015-3-25')
+
+import functools
+def log(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+
+def log(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+@log('execute') # now = log('execute')(now)
+def now():
+    print('2015-3-25')
+
+import functools
+def log(text):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+import functools
+int2 = functools.partial(int, base=2) 
+int2('100000') # 32 int('100000', **{ 'base':2 })
+
+max2 = functools.partial(max, 10)
+max(*(10, 5, 6, 7))
 ```
+
+##### 模块
+
+* 大大提高了代码的可维护性。
+* 其次，编写代码不必从零开始。当一个模块编写完毕，就可以被其他地方引用。包括Python内置的模块和来自第三方的模块
+* 可以避免函数名和变量名冲突。相同名字的函数和变量完全可以分别存在不同的模块中，尽量不要与内置函数名字冲突
+* 避免模块名冲突，Python又引入了按目录来组织模块的方法，称为包（Package）。
+    - 一个abc.py的文件就是一个名字叫abc的模块
+    - 通过包来组织模块，避免冲突。方法是选择一个顶层包名，比如mycompany文件下的abc.py（mycompany.abc）。只要顶层的包名不与别人冲突，那所有模块都不会与别人冲突
+    - 还可以扩展多级目录mycompany.web.www
+* 命名
+    - 模块名要遵循Python变量命名规范，不要使用中文、特殊字符；
+    - 模块名不要和系统模块名冲突，最好先查看系统是否已存在该模块，检查方法是在Python交互环境执行import abc，若成功则说明系统存在此模块。
+    - 任何模块代码的第一个字符串都被视为模块的文档注释；
+    - __author__变量把作者写进去，这样当你公开源代码后别人就可以瞻仰你的大名；
+    - 当我们在命令行运行hello模块文件时，Python解释器把一个特殊变量__name__置为__main__，而如果在其他地方导入该hello模块时，if判断将失败，因此，这种if测试可以让一个模块通过命令行运行时执行一些额外的代码，最常见的就是运行测试。
+    - 作用域
+        + 函数和变量给外部使用，通过_实现
+        + 正常的函数和变量名是公开的（public），可以被直接引用，比如：abc，x123，PI等
+        + 似__xxx__这样的变量是特殊变量，可以被直接引用，但是有特殊用途，比如上面的__author__，__name__就是特殊变量，hello模块定义的文档注释也可以用特殊变量__doc__访问，我们自己的变量一般不要用这种变量名；
+        + 类似_xxx和__xxx这样的函数或变量就是非公开的（private），不应该被直接引用，比如_abc，__abc等；
+        + 在模块里公开greeting()函数，而把内部逻辑用private函数隐藏起来了，这样，调用greeting()函数不用关心内部的private函数细节，这也是一种非常有用的代码封装和抽象的方法，即：
+        + 外部不需要引用的函数全部定义成private，只有外部需要引用的函数才定义为public。
+    - 第三方模块：通过包管理工具pip完成(windows勾选了pip和Add python.exe to Path)
+        + 直接使用Anaconda，这是一个基于Python的数据处理和科学计算平台，它已经内置了许多非常有用的第三方库，我们装上Anaconda，就相当于把数十个第三方模块自动安装好了，非常简单易用
+        + 从Anaconda官网下载GUI安装包，安装包有500~600M，所以需要耐心等待下载。下载后直接安装，Anaconda会把系统Path中的python指向自己自带的Python，并且，Anaconda安装的第三方模块会安装在Anaconda自己的路径下，不影响系统已安装的Python目录。直接import
+        + 默认情况下，Python解释器会搜索当前目录、所有已安装的内置模块和第三方模块，搜索路径存放在sys模块的path变量中。添加自己的搜索目录
+            * 修改sys.path，添加要搜索的目录
+            * 设置环境变量PYTHONPATH，该环境变量的内容会被自动添加到模块搜索路径中。设置方式与设置Path环境变量类似。注意只需要添加你自己的搜索路径，Python自己本身的搜索路径不受影响。
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+' a test module '
+
+__author__ = 'Michael Liao'
+
+import sys
+
+def test():
+    args = sys.argv
+    if len(args)==1:
+        print('Hello, world!')
+    elif len(args)==2:
+        print('Hello, %s!' % args[1])
+    else:
+        print('Too many arguments!')
+
+if __name__=='__main__':
+    test()
+
+python hello.py
+import hello
+hello.test()
+
+def _private_1(name):
+    return 'Hello, %s' % name
+
+def _private_2(name):
+    return 'Hi, %s' % name
+
+def greeting(name):
+    if len(name) > 3:
+        return _private_1(name)
+    else:
+        return _private_2(name)
+
+pip install Pillow
+
+import sys
+sys.path.append('/Users/michael/my_py_scripts')
+```
+
+#### 面向对象编程
+
+面向对象编程——Object Oriented Programming，简称OOP，是一种程序设计思想。OOP把对象作为程序的基本单元，一个对象包含了数据和操作数据的函数。
+
+面向过程的程序设计把计算机程序视为一系列的命令集合，即一组函数的顺序执行。为了简化程序设计，面向过程把函数继续切分为子函数，即把大块函数通过切割成小块函数来降低系统的复杂度。
+
+而面向对象的程序设计把计算机程序视为一组对象的集合，而每个对象都可以接收其他对象发过来的消息，并处理这些消息，计算机程序的执行就是一系列消息在各个对象之间传递。
+
+所有数据类型都可以视为对象，当然也可以自定义对象。自定义的对象数据类型就是面向对象中的类（Class）的概念。
+
+采用面向对象的程序设计思想:来自自然界中的类与实例概念
+
+* 首选思考的不是程序的执行流程，而是Student这种数据类型应该被视为一个对象，这个对象拥有name和score这两个属性（Property）
+* Class是一种抽象概念，比如我们定义的Class——Student，是指学生这个概念，而实例（Instance）则是一个个具体的Student
+* 抽象出Class，根据Class创建Instance。
+* 类是创建实例的模板
+    - 通过class关键字
+    - 类名通常是大写开头的单词
+    - 紧接着是(object)，表示该类是从哪个类继承下来的，没有合适的继承类，就使用object类，这是所有类最终都会继承的类
+    - 将必须绑定的属性强制填写进去。通过定义一个特殊的__init__方法，在创建实例的时候，就把name，score等属性绑上去
+        + 第一个参数永远是self，表示创建的实例本身，因此，在__init__方法内部，就可以把各种属性绑定到self，因为self就指向创建的实例本身。
+        + 在创建实例的时候，就不能传入空的参数了，必须传入与__init__方法匹配的参数，但self不需要传，Python解释器自己会把实例变量传进去
+    - 允许对实例变量绑定任何数据
+* 封装
+    - 类中定义的函数只有一点不同，就是第一个参数永远是实例变量self，并且，调用时，不用传递该参数。除此之外，类的方法和普通函数没有什么区别，所以，你仍然可以用默认参数、可变参数、关键字参数和命名关键字参数。
+    - 类的方法：在类的内部定义访问数据的函数，这样，就把“数据”给封装起来了。这些封装数据的函数是和类本身是关联起来的，可以直接访问与操作实例的数据；
+    - 从外部看Student类，就只需要知道，创建实例需要给出name和score，而如何打印，都是在Student类的内部定义的，这些数据和逻辑被“封装”起来了，调用就直接操作了对象内部的数据，但无需知道方法内部的实现细节。
+* 实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同，互相独立，互不影响。
+* 访问限制
+    - 让内部属性不被外部访问，可以把属性的名称前加上两个下划线__，实例的变量名如果以__开头，就变成了一个私有变量（private），只有内部可以访问，外部不能访问。解释器对外把__name变量改成了_Student__name，所以，仍然可以通过_Student__name来访问__name变量（不同版本的Python解释器可能会把__name改成不同的变量名）
+    - 外部代码不能随意访问与修改对象内部的状态，这样通过访问限制的保护，代码更加健壮
+    - set方法可以做参数
+    - 特殊变量：以双下划线开头，并且以双下划线结尾的。可以直接访问
+    - _name，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，意思就是，“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”。
+* 继承：定义一个class的时候，可以从某个现有的class继承，新的class称为子类（Subclass），而被继承的class称为基类、父类或超类（Base class、Super class）
+    - 子类获得了父类的全部功能
+    - 对子类增加一些方法
+* 多态：当子类和父类都存在相同的run()方法时，子类的run()覆盖了父类的run()，在代码运行的时候，总是会调用子类的run()
+    - 定义一个class的时候，实际上就定义了一种数据类型，与自带的数据类型一样
+    - 子类也是父类的实例
+    - run_twice()调用方只管调用，不管对象细节（只要确保run()方法编写正确，不用管原来的代码是如何调用的）
+        + 对扩展开放：允许新增Animal子类；
+        + 对修改封闭：不需要修改依赖Animal类型的run_twice()等函数。
+    - 静态语言 vs 动态语言
+        + 对于静态语言（例如Java）来说，如果需要传入Animal类型，则传入的对象必须是Animal类型或者它的子类，否则，将无法调用run()方法。(对象检查)
+        + 对于Python这样的动态语言来说，则不一定需要传入Animal类型。我们只需要保证传入的对象有一个run()方法就可以了（方法检查）。“鸭子类型”，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子
+* 判断对象类型
+    - 使用type()函数
+    - 使用types模块中定义的常量
+    - 判断class的类型，可以使用isinstance()函数,优先使用
+    - 获得一个对象的所有属性和方法，可以使用dir()函数，它返回一个包含字符串的list,可以给对象封装类似的方法
+    - 类属性与方法是否存在、获取与设置
+    - 要判断该对象是否存在read方法，如果存在，则该对象是一个流，如果不存在，则无法读取。hasattr()就派上了用场。
+* 类属性：定义了一个类属性后，这个属性归类所有，类的所有实例都可以访问到
+    - 给实例绑定属性的方法是通过实例变量，或者通过self变量
+    - 不要对实例属性和类属性使用相同的名字，因为相同名称的实例属性将屏蔽掉类属性，但是当你删除实例属性后，再使用相同的名称，访问到的将是类属性。
+
+```python
+std1 = { 'name': 'Michael', 'score': 98 }
+std2 = { 'name': 'Bob', 'score': 81 }
+
+def print_score(std):
+    print('%s: %s' % (std['name'], std['score']))
+
+class Student(object):
+    name = 'Student'
+    def __init__(self, name, score):
+        self.__name = name
+        self.__score = score
+    def print_score(self):
+        print('%s: %s' % (self.name, self.score))
+    def get_name(self):
+        return self.__name
+    def get_score(self):
+        return self.__score
+    def set_score(self, score):
+        if 0 <= score <= 100:
+            self.__score = score
+        else:
+            raise ValueError('bad score')
+bart = Student('Bart Simpson', 59)
+bart.print_score()
+lisa = Student('Lisa Simpson', 87)
+bart.age = 8
+lisa.age # 报错
+
+class Animal(object):
+    def run(self):
+        print('Animal is running...')
+
+class Dog(Animal):
+
+    def run(self):
+        print('Dog is running...')
+
+class Cat(Animal):
+
+    def run(self):
+        print('Cat is running...')
+b = Animal() # b是Animal类型
+c = Dog() # c是Dog类型
+isinstance(c, Animal) # True
+
+def run_twice(animal):
+    animal.run()
+    animal.run()
+
+run_twice(Animal())
+run_twice(Dog())
+
+type(123) # class 'int'>
+type(abs) # <class 'builtin_function_or_method'>
+type(a) # <class '__main__.Animal'>
+type('abc')==str # True
+type('abc')==type(123) # False
+
+import types
+    def fn():
+        pass
+type(fn)==types.FunctionType # True
+type(abs)==types.BuiltinFunctionType # True
+type(lambda x: x)==types.LambdaType # True
+type((x for x in range(10)))==types.GeneratorType # True
+
+isinstance('a', str)
+isinstance(c, Animal)
+isinstance(b'a', bytes) # True
+isinstance((1, 2, 3), (list, tuple)) # True
+
+dir('ABC')
+
+class MyDog(object):
+    def __len__(self):
+        return 100
+dog = MyDog()
+len(dog)
+
+class MyObject(object):
+    def __init__(self):
+        self.x = 9
+    def power(self):
+        return self.x * self.x
+obj = MyObject()
+hasattr(obj, 'x') # 有属性'x'吗？ True
+hasattr(obj, 'y') # 有属性'y'吗？ False
+setattr(obj, 'y', 19) # 设置一个属性'y'
+getattr(obj, 'y') # 获取属性'y'
+getattr(obj, 'z', 404) # 获取属性'z'，如果不存在，返回默认值404 404
+obj.y # 获取属性'y'
+hasattr(obj, 'power') # 有属性'power'吗？ True
+```
+
+##### OOP高级
 
 ## 框架
 
