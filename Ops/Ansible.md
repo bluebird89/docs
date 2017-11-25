@@ -28,6 +28,7 @@ vagrant ssh
 
 ## 参考
 
-[文档](http://docs.ansible.com/ansible/latest/intro_installation.html)
+* [文档](http://docs.ansible.com/ansible/latest/intro_installation.html)
+* [ansible/ansible-examples](https://github.com/ansible/ansible-examples):A few starter examples of ansible playbooks, to show features and how they work together. See http://galaxy.ansible.com for example roles from the Ansible community for deploying many popular applications
 
 https://www.centos.bz/2017/08/ansible-config-playbook-task/

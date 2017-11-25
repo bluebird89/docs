@@ -799,6 +799,7 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 - [从软件工程角度看大前端技术栈](http://blog.csdn.net/gitchat/article/details/77199990)
 - [Web前端开发知识体系精简](www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
 - [前端工程师技能图谱](https://github.com/TeamStuQ/skill-map/blob/master/data/map-FrontEndEngineer.md)
+- [dwqs/blog](https://github.com/dwqs/blog)
 
 ## 工具
 

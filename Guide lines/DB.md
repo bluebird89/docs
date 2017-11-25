@@ -12,13 +12,6 @@
 * 删除默认空密码账号。`delete from mysql.user where user='' and password=''; flush privileges;`
 * 汇总库开启Audit审计日志功能，出现问题时方可追溯。
 
-```sql
- `#pt-online-schema-change  --alter="add index   IX_id_no(id_no)"  \    --no-check-replication-filters  --recursion-method=none  --user=dba    \    --password=123456  D=test,t=t1 --execute`
-
-# 对于MongoDB创建索引要在后台创建，避免锁表,使用范例
-`db.t1.createIndex({idCardNum:1},{background:1})`
-```
-
 ### 行为规范
 
 * 禁止一个MySQL实例存放多个业务数据库，会造成业务耦合性过高，一旦出现问题会殃及池鱼，增加了定位故障问题的难度。通常采用多实例解决，一个实例一个业务库，互不干扰。

@@ -20,3 +20,4 @@
 * [airbnb/airpal](https://github.com/airbnb/airpal):Web UI for PrestoDB. http://airbnb.github.io/airpal
 * [xinthink/react-native-material-kit](https://github.com/xinthink/react-native-material-kit):Bringing Material Design to React Native http://j.mp/rnmdk
 * [didi/cube-ui](https://github.com/didi/cube-ui):A fantastic mobile ui lib implement by Vue https://didi.github.io/cube-ui/
+* [Tencent/weui](https://github.com/Tencent/weui):A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications. https://weui.io
