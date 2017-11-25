@@ -161,7 +161,7 @@ react-native run-android
 * [react-native-macos](https://github.com/ptmt/react-native-macos)
 * [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native)
 * [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
-* [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
+* [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit):Get started with React, Redux, and React-Router.
 * [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app):Create React apps with no build configuration.
 * [vasanthk/react-bits](https://github.com/vasanthk/react-bits):✨ React patterns, techniques, tips and tricks ✨ https://vasanthk.gitbooks.io/react-bits
 

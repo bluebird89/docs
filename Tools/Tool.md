@@ -69,6 +69,8 @@
 
 ## 文档指导
 
+* [tldr-pages/tldr](https://github.com/tldr-pages/tldr):Simplified and community-driven man pages http://tldr-pages.github.io/
+
 - [README](https://www.makeareadme.com/) ```
 
   # Foobar ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)

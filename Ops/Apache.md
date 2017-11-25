@@ -105,6 +105,7 @@ DocumentRoot："E:\www\local"
 php_flag session.auto_start 1 # 指定开关类的配置信息
 php_value date.timezone PRC # 指定字符串形式的配置信息
 ```
+
 #### 虚拟主机
 
 同一个主机上虚拟出来的网站.
@@ -200,6 +201,13 @@ php -m # 可以找到mysql
 * 添加MySQL后台服务于环境变量
 * 用户与密码设置
 * 生成配置文件
+
+#### 命令行服务管理
+
+```
+net start mysql
+net stop mysql
+```
 
 ## Docker配置
 
