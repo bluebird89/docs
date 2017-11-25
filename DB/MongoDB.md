@@ -61,6 +61,11 @@ db.serverCmdLineOpts() // 查看mongod的启动参数
 --db：指定mongo连接的数据库
 --username/-u 和 –password/-p ：指定访问MongoDB数据库的账户和密码，只有当认证通过后，用户才能访问数据库；
 --authenticationDatabase ：指定创建User的数据库，在哪个数据库中创建User时，该数据库就是User的Authentication Database；
+
+`#pt-online-schema-change  --alter="add index   IX_id_no(id_no)"  \    --no-check-replication-filters  --recursion-method=none  --user=dba    \    --password=123456  D=test,t=t1 --execute`
+
+# 对于MongoDB创建索引要在后台创建，避免锁表,使用范例
+db.t1.createIndex({idCardNum:1},{background:1})
 ```
 
 客户端
