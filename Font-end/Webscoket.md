@@ -44,3 +44,4 @@ curl -H "Content-Type: application/json" \
 
 * [websockets/ws](https://github.com/websockets/ws):Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js
 * [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)
+* [细说WebSocket - Node篇](https://juejin.im/entry/5a012eab518825297a0e27f0)

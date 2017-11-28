@@ -11,7 +11,8 @@
 2011年，美国《时代周刊》将马丁评为"全世界最有影响力的一百位人物"之一，肯定了乔治·马丁在幻想文坛上的至尊地位。
 
 故事中的七大王国是以古英格兰七个王国为雏形，其故事整体背景大至也参考玫瑰战争。
-## 卷
+
+## 七卷
 
 * 权力的游戏（1996）
 * 列王的纷争（1998）
@@ -20,7 +21,6 @@
 * 魔龙的狂舞（2011）
 * 凛冬的寒风
 * 春晓的希望
-
 
 ## 地图
 
@@ -383,6 +383,7 @@ https://movie.douban.com/review/7910396/
 https://www.zhihu.com/question/28155840
 https://www.zhihu.com/question/24216286
 
+截止：https://www.douban.com/note/636091760/
 
 https://opensource.guide/
 https://developer.github.com/v3/guides/

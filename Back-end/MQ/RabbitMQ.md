@@ -28,4 +28,5 @@ RabbitMQ 是基于 AMQP 实现的一个开源消息组件，主要用于在分�
 * [文档](http://www.rabbitmq.com/tutorials/tutorial-one-php.html)
 * [rabbitmq/rabbitmq-server](https://github.com/rabbitmq/rabbitmq-server):Open source multi-protocol messaging broker https://www.rabbitmq.com/
 * [rabbitmq/rabbitmq-tutorials](https://github.com/rabbitmq/rabbitmq-tutorials):Tutorials for using RabbitMQ in various ways http://www.rabbitmq.com/getstarted.html
+* [rabbitmq](http://blog.csdn.net/column/details/rabbitmq.html)
 http://www.rabbitmq.com/install-homebrew.html
