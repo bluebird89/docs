@@ -368,9 +368,15 @@ optimize table tbl_name;
     - 在应用端增加cache层
     - 负载均衡 
 
+## 参考
+
+* [SQL语句百万数据量优化方案](https://juejin.im/post/5a01257a6fb9a045211e1bdc) 
+
 索引覆盖
 
 
 存储使用EMC阵列（容量大，数据安全），IBM服务器，即IOE组合，这三个组合很强大（高可用，高性能）
+
+
 
 

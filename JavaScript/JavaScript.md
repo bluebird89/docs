@@ -2258,6 +2258,7 @@ WebAssembly 已得到所有主流浏览器支持
 * [michaelliao/learn-javascript](https://github.com/michaelliao/learn-javascript):JavaScript全栈教程参考源码
 * [JavaScript 标准参考教程](http://javascript.ruanyifeng.com/)
 * [阮一峰ECMAScript 6](http://es6.ruanyifeng.com/)
+* [6周学习计划，攻克JavaScript难关(React/Redux/ES6 etc.)](https://zhuanlan.zhihu.com/p/23412169)
 
 ## 测试
 
@@ -2282,3 +2283,5 @@ WebAssembly 已得到所有主流浏览器支持
 ## 文档
 
 * [loiane/javascript-datastructures-algorithms](https://github.com/loiane/javascript-datastructures-algorithms/tree/second-edition):source code bundle of JavaScript algorithms and data structures book https://goo.gl/hrb00r
+* [ECMAScript 6 扫盲](http://www.cnblogs.com/hustskyking/p/a-kickstarter-guide-to-writing-es6.html)
+* [JavaScript异步编程原理](http://www.cnblogs.com/hustskyking/p/javascript-asynchronous-programming.html)

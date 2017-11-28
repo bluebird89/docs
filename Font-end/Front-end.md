@@ -800,6 +800,8 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 - [Web前端开发知识体系精简](www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
 - [前端工程师技能图谱](https://github.com/TeamStuQ/skill-map/blob/master/data/map-FrontEndEngineer.md)
 - [dwqs/blog](https://github.com/dwqs/blog)
+- [Web前端知识体系精简](http://www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
+- [前端跨域整理](https://juejin.im/post/5815f4abbf22ec006893b431)
 
 ## 工具
 

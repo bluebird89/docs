@@ -1,5 +1,7 @@
 # PHP设计模式
 
+Laravel中实现了一些设计模式
+
 ##  创建性模式
 
 ### 单例模式
@@ -24,4 +26,6 @@
 
 ## 参考
 
+* [kamranahmedse/design-patterns-for-humans](https://github.com/kamranahmedse/design-patterns-for-humans):Design Patterns for Humans™ - An ultra-simplified explanation 
 * [设计模式](http://laravelacademy.org/resources/design-patterns)
+* [Repository 模式](http://laravelacademy.org/post/3063.html)
