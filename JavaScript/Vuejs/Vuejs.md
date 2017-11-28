@@ -6,19 +6,6 @@
 * 运行开发者模式：npm run dev(代码实时更新)
 * 打包文件：npm run build，包含index文件与dist资源包
 
-## 项目：
-
-* [vuejs/vue](A progressive, incrementally-adoptable JavaScript framework for building UI on the web. http://vuejs.org):A progressive, incrementally-adoptable JavaScript framework for building UI on the web. http://vuejs.org
-* [webpack-simple](https://github.com/vuejs-templates/webpack-simple)
-* [pwa](https://github.com/vuejs-templates/pwa) progressive-web-apps
-* [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):通过webpack打包的vuejs模版
-* [vue2-happyfri](https://github.com/bailicangdu/vue2-happyfri)vue2 + vue-router + vuex 入门项目
-* [vue2-elm](https://github.com/bailicangdu/vue2-elm)基于 vue2 + vuex 构建一个具有 45 个页面的大型单页面应用
-* [vuejs/vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
-* [liangxiaojuan/eleme](https://github.com/liangxiaojuan/eleme):vue2 +vue-router2 + es6 +webpack 高仿饿了么app商家详情，demo：http://yangyi1024.com/elem 还有我最新的实战项目,点它=》 http://yangyi1024.com/meizi
-* [ustbhuangyi/vue-sell](https://github.com/ustbhuangyi/vue-sell):Vue.js高仿饿了么外卖App课程源码 http://coding.imooc.com/class/74.html
-* [vuejs/vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
-
 ## 重构
 
 * [tonyfree/youzan](https://github.com/tonyfree/youzan)
@@ -111,6 +98,30 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 * [官方文档](https://cn.vuejs.org/v2/guide/) [文档](https://vuejs.org/v2/guide/)
 * [vuejs/awesome-vueawesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
 
+## 项目：
+
+* [vuejs/vue](A progressive, incrementally-adoptable JavaScript framework for building UI on the web. http://vuejs.org):A progressive, incrementally-adoptable JavaScript framework for building UI on the web. http://vuejs.org
+* [webpack-simple](https://github.com/vuejs-templates/webpack-simple)
+* [pwa](https://github.com/vuejs-templates/pwa) progressive-web-apps
+* [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):通过webpack打包的vuejs模版
+* [vue2-happyfri](https://github.com/bailicangdu/vue2-happyfri)vue2 + vue-router + vuex 入门项目
+* [vue2-elm](https://github.com/bailicangdu/vue2-elm)基于 vue2 + vuex 构建一个具有 45 个页面的大型单页面应用
+* [vuejs/vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
+* [liangxiaojuan/eleme](https://github.com/liangxiaojuan/eleme):vue2 +vue-router2 + es6 +webpack 高仿饿了么app商家详情，demo：http://yangyi1024.com/elem 还有我最新的实战项目,点它=》 http://yangyi1024.com/meizi
+* [ustbhuangyi/vue-sell](https://github.com/ustbhuangyi/vue-sell):Vue.js高仿饿了么外卖App课程源码 http://coding.imooc.com/class/74.html
+* [vuejs/vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
+* [webpack 前后端分离开发接口调试解决方案，proxyTable解决方案](https://www.cnblogs.com/coolslider/p/7076191.html)
+* [vue-cli + webpack 多页面实例配置优化方法](https://segmentfault.com/a/1190000006741478)
+* [bluefox1688/vue-cli-multi-page](https://github.com/bluefox1688/vue-cli-multi-page):vue2-cli-vux2-multe-page，使用了webpack2+vuejs2+vuxUI2的多页面脚手架
+* [codekerala/spa-laravel-vuejs](https://github.com/codekerala/spa-laravel-vuejs):Single Page Application with Laravel 5.3 and Vue.js 2.1.x https://codekerala.com
+* [codecasts/spa-starter-kit](https://github.com/codecasts/spa-starter-kit):A highly opinionated starter kit for building Single Page Applications with Laravel and Vue.js
+* [Plortinus/vue-multiple-pages](https://github.com/Plortinus/vue-multiple-pages):A modern Vue.js multiple pages cli which uses Vue 2, Webpack3, and Element UI （Thanks for your star）(Vue2、ElementUI多页应用脚手架)
+
+## 阅读
+
+* [Vue2+VueRouter2+webpack 构建项目实战](http://blog.csdn.net/fungleo/article/details/53171052)
+* [Vue 脱坑记 - 查漏补缺](https://juejin.im/post/59fa9257f265da43062a1b0e)
+* [Vue.js 2.0 快速上手精华梳理](https://juejin.im/post/59aa1248518825392656a86a)
 
 ## UI
 
@@ -119,6 +130,8 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 * [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin):vue2.0 admin / a management system template http://panjiachen.github.io/vue-element-admin
 * [vue-bulma/vue-admin](https://github.com/vue-bulma/vue-admin):Vue Admin Panel Framework, Powered by Vue 2.0 and Bulma 0.3 https://admin.vuebulma.com
 * [iview/iview](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
+
+
 ## todo
 
 * [JavaScript 进阶之 Vue.js + Node.js 入门实战开发](http://blog.csdn.net/gitchat/article/details/77931664)
@@ -126,7 +139,9 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 
 ## vue-cli
 
+模版化构建项目
+
 ```shell
 npm install -g vue-cli
-vue init <template-name> <project-name> // vue init webpack my-project
+vue init <template-name> <project-name> # vue init webpack my-project vue init Plortinus/vue-multiple-pages new-project
 ```

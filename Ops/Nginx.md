@@ -65,8 +65,8 @@
 ```shell
 brew info nginx
 
-sudo chown root:wheel /usr/local/Cellar/nginx/1.10.0/sbin/nginx
-sudo chmod u+s /usr/local/Cellar/nginx/1.10.0/sbin/nginx
+sudo chown root:wheel /usr/local/Cellar/nginx/1.12.2_1/bin/nginx
+sudo chmod u+s /usr/local/Cellar/nginx/1.12.2_1/bin/nginx
 
 brew services start nginx
 brew edit nginx
@@ -596,3 +596,4 @@ awk -F\" '($2 ~ "xyz"){print $2}' access.log | awk '{print $2}' | sort | uniq -c
 - [nginx documentation](http://nginx.org/en/docs/)
 - [《Nginx官方文档》使用nginx作为HTTP负载均衡](http://ifeve.com/nginx-http/)
 - [xuexb/learn-nginx](https://github.com/xuexb/learn-nginx):学习nginx配置, 包括: 编译安装、反向代理、重定向、url重写、nginx缓存、跨域配置等
+- [Nginx 配置简述](http://www.cnblogs.com/hustskyking/p/nginx-configuration-start.html)

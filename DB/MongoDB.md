@@ -29,81 +29,129 @@ pecl install mongodb
 * 创建数据库文件路径:C:\data\db(/data/db)
 * 通过命令行工具启动服务: mongod（本地访问<http://localhost:27017/）MongoDB系统的主要守护进程，用于处理数据请求，数据访问和执行后台管理操作，必须启动，才能访问MongoDB数据库>
 
-## Mac
+### Mac
 
 ```shell
-brew services mongodb // mac启动服务
+brew services mongodb # mac启动服务
 ```
 
-### 使用
+### Linux
 
-开启服务端
+```sh
+sudo apt install mongodb
+mongo -version
 
+service mongodb start
+service mongodb stop
+pgrep mongo -l # 查看服务状态
+sudo apt-get --purge remove mongodb mongodb-clients mongodb-server # 卸载
 ```
-mongod
 
---dbpath ：存储MongoDB数据文件的目录` mongod --dbpath=C:datadb`
---directoryperdb：指定每个数据库单独存储在一个目录中（directory），该目录位于–dbpath指定的目录下，每一个子目录都对应一个数据库名字。
---logpath ：指定mongod记录日志的文件
---fork：以后台deamon形式运行服务mongod -fork
---journal：开始日志功能，通过保存操作日志来降低单机故障的恢复时间
---config（或-f）：配置文件，用于指定runtime options
---bind_ip ：指定对外服务的绑定IP地址
---port ：指定mongo连接到mongod监听的TCP端口，默认的端口值是27017；
---auth：启用验证，验证用户权限控制
---syncdelay：系统刷新disk的时间，单位是second，默认是60s
---replSet ：以副本集方式启动mongod，副本集的标识是setname
+## 使用
 
-mongod的命令参数写入配置文档，以参数-f 启动 `mongod -f C:datadbmongodb_config.config`
-db.serverCmdLineOpts() // 查看mongod的启动参数
---nodb: 阻止mongo在启动时连接到数据库实例；
---host ：指定mongod运行的server，如果没有指定该参数，那么mongo尝试连接运行在本地（localhost）的mongod实例；
---db：指定mongo连接的数据库
---username/-u 和 –password/-p ：指定访问MongoDB数据库的账户和密码，只有当认证通过后，用户才能访问数据库；
---authenticationDatabase ：指定创建User的数据库，在哪个数据库中创建User时，该数据库就是User的Authentication Database；
+### 服务端配置
+
+开启mongo服务端的命令参数写入配置文档，以参数-f启动 `mongod -f C:datadbmongodb_config.config`
+
+* --dbpath ：存储MongoDB数据文件的目录` mongod * --dbpath=C:datadb`
+* --directoryperdb：指定每个数据库单独存储在一个目录中（directory），该目录位于–dbpath指定的目录下，每一个子目录都对应一个数据库名字。
+* --logpath ：指定mongod记录日志的文件
+* --fork：以后台deamon形式运行服务mongod -fork
+* --journal：开始日志功能，通过保存操作日志来降低单机故障的恢复时间
+* --config（或-f）：配置文件，用于指定runtime options
+* --bind_ip ：指定对外服务的绑定IP地址
+* --port ：指定mongo连接到mongod监听的TCP端口，默认的端口值是27017；
+* --auth：启用验证，验证用户权限控制
+* --syncdelay：系统刷新disk的时间，单位是second，默认是60s
+* --replSet ：以副本集方式启动mongod，副本集的标识是setname
+* --nodb: 阻止mongo在启动时连接到数据库实例；
+* --host ：指定mongod运行的server，如果没有指定该参数，那么mongo尝试连接运行在本地（localhost）的mongod实例；
+* --db：指定mongo连接的数据库
+* --username/-u 和 –password/-p ：指定访问MongoDB数据库的账户和密码，只有当认证通过后，用户才能访问数据库；
+* --authenticationDatabase ：指定创建User的数据库，在哪个数据库中创建User时，该数据库就是User的Authentication Database；
 
 `#pt-online-schema-change  --alter="add index   IX_id_no(id_no)"  \    --no-check-replication-filters  --recursion-method=none  --user=dba    \    --password=123456  D=test,t=t1 --execute`
 
-# 对于MongoDB创建索引要在后台创建，避免锁表,使用范例
+对于MongoDB创建索引要在后台创建，避免锁表,使用范例
 db.t1.createIndex({idCardNum:1},{background:1})
-```
 
-客户端
+### 客户端
 
-```
+* 如果_id已经存在，insert不做操作，save做更新操作；如果不加_id字段，两者作用相同都是插入数据
+* 添加的数据其结构是松散的，只要是bson格式均可，列属性均不固定，根据添加的数据为准。先定义数据再插入，就可以一次性插入多条数据
+* 不需要预先定义 collection ，在第一次插入数据后，collection 会自动的创建
+* 条件操作符 
+    - $gt : > 
+    - $lt : < 
+    - $gte: >= 
+    - $lte: <= 
+    - $ne : !=、<> 
+    - $in : in 
+    - $nin: not in 
+    - $all: all 
+    - $not:
+
+
+```sql
 mongo --help
 
 mongoimport --db test --collection restaurants --drop --file ~/Downloads/primer-dataset.json
 mongo
 help
 
-db.collection.save // 查看该方法
+db.serverCmdLineOpts() # 查看mongod的启动参数
 
-show dbs // 查询dbs
-use foo //使用foo数据库或者切换数据库
-db.getName() // db:获取数据库名称
-db.dropDatabase() //删除数据库
+show dbs # 显示数据库列表
+use yourDB # 切换当前数据库至yourDB 
+db.getName() # db:获取数据库名称
+db.dropDatabase() # 删除数据库
+db.help() # 显示数据库操作命令
 
-show collections // 查询collection
-db.collection.help()
+show collections # 显示当前数据库中的集合（类似关系数据库中的表table） 
+db.yourCollection.help() # 显示集合操作命令
 db.getCollectionNames()
-db.createColletion(‘byc’) //创建集合
-db.test.drop //删除指定集合
+db.printCollectionStats() # 查看各collection的状态
+db.createColletion(‘byc’) # 创建集合
+db.copyDatabase('mail_addr','mail_addr_tmp') # 拷贝数据库
+db.test.drop() # 删除指定集合
 
 db.users.insert({"name":"name 1",age:21})
+db.student.insert({_id:1, sname: 'zhangsan', sage: 20}) #_id可选
+db.student.save({_id:1, sname: 'zhangsan', sage: 22}) #_id可选
 for(var i=1;i<=10;i++){
     db.test.insert({"name":"king"+i,"age":i})
-} //循环插入10条记录
+} # 循环插入10条记录
 
-db.restaurants.find( { "address.zipcode": "10075" } )
+db.restaurants.find()
+db.restaurants.findOne()
+db.restaurants.find( { "address.zipcode": "10075" } ).limit(10)
+db.users.find().skip(3).limit(5);  # 从第3条记录开始，返回5条记录(limit 3, 5) 
 db.restaurants.find( { "grades.score": { $gt: 30 } } )
-db.restaurants.find( { "cuisine": "Italian", "address.zipcode": "10075" } ) // and
-db.restaurants.find(
-   { $or: [ { "cuisine": "Italian" }, { "address.zipcode": "10075" } ] }
-) // or
-db.restaurants.find().sort( { "borough": 1, "address.zipcode": 1 } ) // sort  1 for ascending and -1 for descending.
-db.test.find().pretty() //格式化显示查询结果
-db.test.find().count() //查询数据条数
+db.restaurants.find( { "cuisine": "Italian", "address.zipcode": "10075" } ) # and
+db.restaurants.find( { $or: [ { "cuisine": "Italian" }, { "address.zipcode": "10075" } ] }) # or
+db.restaurants.find().sort( { "borough": 1, "address.zipcode": 1 } ) # sort  1 for ascending and -1 for descending.
+db.users.find({creation_date:{$gt:new Date(2010,0,1), $lte:new Date(2010,11,31)}); # 查询 creation_date > '2010-01-01' and creation_date <= '2010-12-31' 的数据
+db.users.find({name: {$ne: "bruce"}, age: {$gte: 18}});  # 查询 name <> "bruce" and age >= 18 的数据 
+db.users.find({age: {$in: [20,22,24,26]}}); # 查询 age in (20,22,24,26) 的数据  
+db.users.find('this.age % 10 == 0'); # 查询 age取模10等于0 的数据 
+db.users.find({age : {$mod : [10, 0]}});  # 取模10等于0 的数据
+db.users.find({favorite_number : {$all : [6, 8]}});  # 
+db.users.find({name: {$not: /^B.*/}}); # 查询不匹配name=B*带头的记录 
+db.users.find({age : {$not: {$mod : [10, 0]}}}); # 查询 age取模10不等于0 的数据
+
+db.users.find({ name : "bruce" }, {age:1, address:1}); # 选择返回age、address和_id字段
+db.users.find({name: {$exists: true}}); # 查询所有存在name字段的记录  
+db.users.find({name: {$type: 2}}); # 查询所有name字段是字符类型的
+db.users.find({age: {$type: 16}}); # 查询所有age字段是整型的 
+db.users.find({name: /^b.*/i}); # 查询以字母b或者B带头的所有记录 
+
+db.users.find({age: {$gt: 18}});  #  查询 age > 18 的记录
+db.users.find({$where: "this.age > 18"}); 
+db.users.find("this.age > 18");
+
+db.test.find().pretty() # 格式化显示查询结果
+db.test.find().count() # 查询数据条数
+db.test.distinct('msg')
 
 db.restaurants.update(
     { "name" : "Juni" },
@@ -111,7 +159,7 @@ db.restaurants.update(
       $set: { "cuisine": "American (New)" },
       $currentDate: { "lastModified": true }
     }
-)  // update
+)  # update
 
 db.restaurants.update(
   { "address.zipcode": "10016", cuisine: "Other" },
@@ -120,7 +168,7 @@ db.restaurants.update(
     $currentDate: { "lastModified": true }
   },
   { multi: true}
-) // Update Multiple Documents
+) # Update Multiple Documents
 
 db.restaurants.update(
    { "restaurant_id" : "41704620" },
@@ -133,30 +181,38 @@ db.restaurants.update(
               "zipcode" : "10075"
      }
    }
-) // To replace the entire document except for the _id field
+) # To replace the entire document except for the _id field
 
 db.restaurants.aggregate(
    [
      { $group: { "_id": "$borough", "count": { $sum: 1 } } }
    ]
-); // group 格式
+); # group 格式
 
 db.restaurants.aggregate(
    [
      { $match: { "borough": "Queens", "cuisine": "Brazilian" } },
      { $group: { "_id": "$address.zipcode" , "count": { $sum: 1 } } }
    ]
-); // 含有where条件
+); # 含有where条件
 
 db.restaurants.remove( { "borough": "Manhattan" } )
-db.restaurants.remove( { "borough": "Queens" }, { justOne: true } ) // limit the remove operation to only one of the matching documents
-db.restaurants.remove( { } ) // Remove All Documents
+db.restaurants.remove( { "borough": "Queens" }, { justOne: true } ) # limit the remove operation to only one of the matching documents
+db.restaurants.remove( { } ) # Remove All Documents
 
 db.restaurants.createIndex( { "cuisine": 1 } )
 db.restaurants.createIndex( { "cuisine": 1, "address.zipcode": -1 } )
 
-use admin
-db.shutdownServer()
+use admin # 进入数据库admin
+show users # 显示所有用户
+db.addUser('name','pwd')
+db.system.users.find() # 查看用户列表
+show users #查看所有用户
+db.removeUser('name') # 删除用户
+db.auth('name','pwd') # 用户认证
+db.shutdownServer() # 退出命令行
+
+show profile # 查看profiling
 ```
 
 ## GUI工具
@@ -165,7 +221,7 @@ db.shutdownServer()
 
 ## docker
 
-- `mkdir -p ~/mongo ~/mongo/db` // db目录将映射为mongo容器配置的/data/db目录,作为mongo数据的存储目录
+- `mkdir -p ~/mongo ~/mongo/db` #  db目录将映射为mongo容器配置的/data/db目录,作为mongo数据的存储目录
 - 创建Dockerfile
 
 ```
@@ -204,6 +260,7 @@ EXPOSE 27017 CMD ["mongod"]
 ## 参考
 
 - [MongoDB Docs](https://docs.mongodb.com/)
+- [MongoDB的水平扩展，你做对了吗？](https://juejin.im/entry/5a0266a76fb9a0450908ec76)
 
 ### notice
 

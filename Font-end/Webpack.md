@@ -268,3 +268,5 @@ proxyTable: {
 * [Webpack for React](http://www.pro-react.com/materials/appendixA/)
 * [代码](https://github.com/bluebird89/webpack_for_react)
 * [vue-cli](https://vuejs-templates.github.io/webpack/)
+* [基于webpack的前后端分离开发环境实战](https://segmentfault.com/a/1190000009266900)
+* [webpack：从入门到真实项目配置](https://juejin.im/post/59bb37fa6fb9a00a554f89d2)
