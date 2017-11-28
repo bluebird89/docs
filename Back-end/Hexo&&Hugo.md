@@ -79,3 +79,7 @@ hugo server -t themename
 ```
 
 ## deploy 通过Aerobatic[<https://gohugo.io/hosting-and-deployment/hosting-on-bitbucket/>]
+
+## 参考
+
+* [barretlee/hexo-admin](https://github.com/barretlee/hexo-admin)

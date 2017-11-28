@@ -270,7 +270,8 @@ https://github.com/rstacruz/cheatsheets
 https://github.com/RectorPHP/Rector
 https://github.com/weiboad/kafka-php
 https://github.com/wurstmeister/kafka-docker
-
+https://logz.io/blog/elk-stack-ansible/
+https://mp.weixin.qq.com/s?__biz=MzIwMzg1ODcwMw==&mid=2247486760&idx=1&sn=71484bbcb02e49c8ca2e43abdc4f75a6&chksm=96c9bb48a1be325e543a6ff09cfc9445cbbbbf9c372cd34dd717c89c04327b683cf3fec859fd#rd
 
 service php-fpm restart
 

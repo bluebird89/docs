@@ -283,4 +283,6 @@ redis-cli -h localhost -p 6379 monitor // 从库执行该命令会一直ping主�
 
 ## 参考
 
-[redis 数据类型详解 以及 redis适用场景场合](http://www.cnblogs.com/mrhgw/p/6278619.html)
+* [redis 数据类型详解 以及 redis适用场景场合](http://www.cnblogs.com/mrhgw/p/6278619.html)
+* [使用Redis实现分布式锁及其优化](https://juejin.im/entry/5a0280d551882546d71ec42e)
+* [Redis快速入门及应用](https://juejin.im/entry/5a003862f265da430406042c)

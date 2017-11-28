@@ -15,4 +15,5 @@
 
 ## 实例
 
-<https://www.confluent.io/blog/publishing-apache-kafka-new-york-times/>
+* <https://www.confluent.io/blog/publishing-apache-kafka-new-york-times/>
+* [在生产环境使用Kafka构建和部署大规模机器学习](https://juejin.im/entry/5a02660b6fb9a0452a3bbe53)

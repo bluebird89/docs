@@ -18,3 +18,4 @@
 * [python](https://github.com/ssjssh/algorithm)
 * [MIT](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-spring-2008/)
 * [公开课](http://open.163.com/special/opencourse/algorithms.html)
+* [我接触过的前端数据结构与算法](https://juejin.im/post/5958bac35188250d892f5c91)

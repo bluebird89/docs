@@ -1158,6 +1158,7 @@ sudo apt-get install mysql-proxy
 * [MySQL主从同步](http://geek.csdn.net/news/detail/236754)
 * [MySQL数据库事务隔离级别介绍](http://www.jb51.net/article/49596.htm)
 * 高性能mysql
+* [使用 Docker 完成 MySQL 数据库主从配置](https://juejin.im/post/59fd71c25188254dfa1287a9)
 
 
 海量数据，高并发的公司

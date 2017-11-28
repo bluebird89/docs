@@ -9,3 +9,4 @@
 
 - [chrome dev tools](http://www.css88.com/archives/8175)
 - [bgrins/devtools-snippets](https://github.com/bgrins/devtools-snippets):A collection of helpful snippets to use inside of browser devtools
+- [九个Console命令，让js调试更简单 ](https://github.com/dwqs/blog/issues/32)

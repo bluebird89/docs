@@ -232,3 +232,5 @@ header('Access-Control-Allow-Origin:*');
 
 - [HTTP 下午茶](http://book.haoduoshipin.com/tealeaf-http/)
 - [关于 TCP/IP，必知必会的十个问题](https://juejin.im/post/598ba1d06fb9a03c4d6464ab)
+- [面试 -- 网络 HTTP](https://juejin.im/post/5872309261ff4b005c4580d4)
+- [关于 TCP/IP，必知必会的十个问题](https://juejin.im/post/598ba1d06fb9a03c4d6464ab)
