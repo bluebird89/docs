@@ -47,8 +47,10 @@ ln -s ~/Dropbox/Sublime/User
 [插件管理工具安装](https://packagecontrol.io/installation)
 
 - Preferences > Browse Packages 在文件夹 Installed Packages 下看到所安装的各类包,windows中~\AppData\Roaming\Sublime Text 3\
-ctrl+`
+- package 安装，打开控制台console:`ctrl+``,粘贴以下指令。
+```
 import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
+```
 - 重启sublime
 - 插件安装
 - open Package Control's Command Palette：Control + Shift + P (Windows)，Command + Shift + P (on Mac)，或者通过菜单 Tools > Command Palette
