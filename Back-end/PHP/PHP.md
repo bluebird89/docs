@@ -96,7 +96,18 @@ code
 
 #### 运算符
 
-Ω
+### 文件操作
+
+```php
+$fp  = fopen('lock.txt', 'w+');
+if (flock($fp, LOCK_EX)) {
+    fwrite($fp, 'write something');
+    flock($fp, LOCK_UN);
+} else {
+    echo "file is locking...";
+}
+fclose($fp);
+```
 ### trait
 
 为了避免代码重复而生
