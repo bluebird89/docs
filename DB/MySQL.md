@@ -890,18 +890,31 @@ $stmt->close();
 
 索引种类：
 
-* PRIMARY 索引:在主键上自动创建
+* PRIMARY 索引:在主键上自动创建，不允许有空值。一般是在建表的时候同时创建主键索引
 * INDEX 索引:就是普通索引
 * UNIQUE 索引:相当于INDEX + Unique
 * FULLTEXT索引:只在MYISAM 存储引擎支持, 目的是全文索引，在VARCHAR或者TEXT类型的列上创建，在内容系统中用的多， 在全英文网站用多(英文词独立). 中文数据不常用，意义不大 国内全文索引通常 使用 sphinx 来完成.全文索引:fulltext是Myisam表特殊索引，从文本中找关键字不是直接和索引中的值进行比较
-* 多个列创建索引。一个索引可以包括15个列。
+* 组合索引：一个索引可以包括15个列。
+    - 建立多个单列索引，查询时和上述的组合索引效率也会大不一样，远远低于我们的组合索引。虽然此时有了三个索引，但MySQL只能用到其中的那个它认为似乎是最有效率的单列索引。 
     - 最左前缀（Leftmost Prefixing）。假如有一个多列索引为key(firstname lastname age)，当搜索条件是以下各种列的组合和顺序时，MySQL将使用该多列索引：firstname，lastname，age  firstname，lastname firstname
+* 如果是CHAR，VARCHAR类型，length可以小于字段实际长度；如果是BLOB和TEXT类型，必须指定 length
 
 合理的建立索引的建议：
 
-* 越小的数据类型通常更好：越小的数据类型通常在磁盘、内存和CPU缓存中都需要更少的空间，处理起来更快。 
+* 越小的数据类型通常更好：越小的数据类型通常在磁盘、内存和CPU缓存中都需要更少的空间，处理起来更快。
+* 在WHERE和JOIN中出现的列需要建立索引，但也不完全如此，因为MySQL只对<，<=，=，>，>=，BETWEEN，IN，以及某些时候的LIKE才会使用索引 
 * 简单的数据类型更好：整型数据比起字符，处理开销更小，因为字符串的比较更复杂。在MySQL中，应该用内置的日期和时间数据类型，而不是用字符串来存储时间；以及用整型数据类型存储IP地址。
 * 尽量避免NULL：应该指定列为NOT NULL，除非你想存储NULL。在MySQL中，含有空值的列很难进行查询优化，因为它们使得索引、索引的统计信息以及比较运算更加复杂。你应该用0、一个特殊的值或者一个空串代替空值
+* 不使用NOT IN和<>操作 
+* 不要在列上进行运算  select * from users where YEAR(adddate)<2007; 将在每个行上进行运算，这将导致索引失效而进行全表扫描，因此我们可以改成 
+* like语句操作  一般情况下不鼓励使用like操作，如果非使用不可，如何使用也是一个问题。like “%aaa%” 不会使用索引而like “aaa%”可以使用索引。 
+* 索引列排序  MySQL查询只使用一个索引，因此如果where子句中已经使用了索引的话，那么order by中的列是不会使用索引的。因此数据库默认排序可以符合要求的情况下不要使用排序操作；尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引。 
+* 使用短索引  对串列进行索引，如果可能应该指定一个前缀长度。例如，如果有一个CHAR(255)的列，如果在前10个或20个字符内，多数值是惟一的，那么就不要对整个列进行索引。短索引不仅可以提高查询速度而且可以节省磁盘空间和I/O操作。 
+
+#### 索引缺点
+
+* 虽然索引大大提高了查询速度，同时却会降低更新表的速度，如对表进行INSERT、UPDATE和DELETE。因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。
+* 建立索引会占用磁盘空间的索引文件。一般情况这个问题不太严重，但如果你在一个大表上创建了多种组合索引，索引文件的会膨胀很快。 
 
 #### B+Tree树结构的索引规则
 
@@ -920,7 +933,7 @@ B-tree 索引:大多数谈及的索引类型就是B-tree类型, 可以在create 
 * 覆盖索引：索引（如：组合索引）中包含所有要查询的字段的值，查看是否使用了覆盖索引可以通过执行计划中的Extra中的值为Using index。索引支持高效查找行，mysql也能使用索引来接收列的数据。这样不用读取行数据，当发起一个被索引覆盖的查询，explain解释器的extra列看到 using index。
 
 ```sql
-create [UNIQUE|FULLTEXT]  index index_name on tbl_name (col_name [(length)] [ASC | DESC] , …..);
+CREATE [UNIQUE|FULLTEXT]  INDEX index_name on tbl_name (col_name [(length)] [ASC | DESC] , …..);
 alter table table_name ADD INDEX [index_name] (index_col_name,...);
 
 DROP INDEX index_name ON tbl_name;
@@ -936,9 +949,10 @@ CREATE TABLE user_test(
   user_name varchar(30) NOT NULL,
   sex bit(1) NOT NULL DEFAULT b'1', 
   city varchar(50) NOT NULL,  
-  age int NOT NULL
+  age int NOT NULL,
+  PRIMARY KEY(ID)  
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE user_test ADD INDEX idx_user(user_name , city , age);
+ALTER TABLE user_test ADD INDEX idx_user(name(10) , city , age); # 因为一般情况下名字的长度不会超过10，这样会加速索引查询速度，还会减少索引文件的大小，提高INSERT的更新速度。
 
 SELECT COUNT(DISTINCT index_column)/COUNT(*) FROM table_name; -- index_column代表要添加前缀索引的列，前缀索引的选择性比值，比值越高说明索引的效率也就越高效。
 SELECT COUNT(DISTINCT LEFT(index_column,1))/COUNT(*),COUNT(DISTINCT LEFT(index_column,2))/COUNT(*),COUNT(DISTINCT LEFT(index_column,3))/COUNT(*)

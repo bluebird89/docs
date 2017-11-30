@@ -396,6 +396,8 @@ Ctrl+T 左右字母互换
 - 配置文件，主进程download，其它更新
 - 安装 
 
+## 参考
+
 * [总结配置](https://github.com/jikeytang/sublime-text)
 * [](http://laravelacademy.org/post/6711.html)
 * [文档](http://www.sublimetext.com/docs/3/index.html)
