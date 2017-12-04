@@ -13,6 +13,7 @@
 php.exe -v
 php.exe -i # 运行phpinfo()函数
 php.exe -m # 显示已经加载了那些module
+php -a # 进入命令行模式
 ```
 
 ## [PHP发展](https://segmentfault.com/a/1190000008888700)
@@ -71,7 +72,10 @@ brew isntall php71
         + “下划线”命名：$get_user_name、$set_user_pwd
 
 ```php
-code
+#!/usr/bin/env php
+<?php
+print "Hello, Red Hat Developers World from PHP " . PHP_VERSION . "\n";
+?>
 ```
 
 ### 数据类型
@@ -366,10 +370,12 @@ EXPOSE 9000 CMD ["php-fpm"]
 - [Awesome PHP](http://coffeephp.com/resources)
 - [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php):A curated list of amazingly awesome PHP libraries, resources and shiny things.
 - [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
+- [PHP Best Practices](https://phpbestpractices.org)
 
 ## 图书
 
-* php：the right way
+* [PHP: The Right Way](http://www.phptherightway.com/)
+* [reeze/tipi](https://github.com/reeze/tipi):Thinking In PHP Internals, An open book on PHP Internals http://www.php-internals.com/
 * Morden php
 
 ### 对象
