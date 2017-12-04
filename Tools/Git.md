@@ -1,15 +1,21 @@
 # Git
 
-fast, scalable, distributed revision control system.一个分布式的代码管理容器，本地和远端都保有一份相同的代码。 Git 仓库主要是由是三部分组成：本地代码，缓存区，提交历史，这几乎是所有操作的本质
+fast, scalable, distributed revision control system.一个分布式的代码管理容器，本地和远端都保有一份相同的代码。 Git 仓库主要是由是三部分组成：本地代码，缓存区，提交历史
+
+* 分布式
+* 基于时间点的快照：将提交点指向提交时的项目快照
+* 分支模型：SVN等版本控制工具将每个分支都要放在不同的目录中, Git可以在同一个目录中切换不同的分支;
+* 不必将所有的分支都上传到GitHub中去;
+* 用户可以随时 创建 合并 删除分支, 多人实现不同的功能, 可以创建多个分支进行开发, 之后进行分支合并, 这种方式使开发变得快速, 简单, 安全;
 
 ## 托管服务
 
-- [GitHub](https://github.com/)
-- [Bitbucket](https://bitbucket.org/product)
-- [Gitlab](https://github.com/)
-- [开源中国](https://github.com/)
-- [Coding](https://github.com/)
-- sourceforge软件 支持git
+* [GitHub](https://github.com/)
+* [Bitbucket](https://bitbucket.org/product)
+* [Gitlab](https://github.com/)
+* [开源中国](https://github.com/)
+* [Coding](https://github.com/)
+* sourceforge 支持git
 
 ## Install:
 
@@ -17,6 +23,16 @@ fast, scalable, distributed revision control system.一个分布式的代码管�
 sudo apt-get install git
 
 brew install git
+brew install git-flow
+brew install git && brew install bash-completion
+
+# Add bash-completion to your ~/.bash_profile:
+
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
+
+# Add git-flow-completion to ~/.zshrc
 ```
 
 ## 搭建服务
@@ -25,14 +41,14 @@ brew install git
 * [gogits/gogs](https://github.com/gogits/gogs):Gogs is a painless self-hosted Git service. https://gogs.io
 * [git/git](https://github.com/git/git):Git Source Code Mirror - This is a publish-only repository and all pull requests are ignored. Please follow Documentation/SubmittingPatches procedure for any of your improvements.
 
-## Config:
+## Config
 
 git clone有两种方式https与ssh，SSH keys的使用需保证remote的源为git方式
 
-- 全局配置：/etc/gitconfig文件 `git config --system`
-- 用户配置：~/.gitconfig    `git config --global`
-- 项目配置：project/.git/config   `git config`
-- 查看配置:`git config --list --show-origin`
+* 全局配置：/etc/gitconfig文件 `git config --system`
+* 用户配置：~/.gitconfig    `git config --global`
+* 项目配置：project/.git/config   `git config`
+* 查看配置:`git config --list --show-origin`
 
 ```shell
 git config --global user.name "name"
@@ -46,10 +62,14 @@ git config -l                       # 列举所有配置
 
 #### SSH
 
+* 生成路径 `~/.ssh/`
+* 公钥添加到github账户
+
 ```shell
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+ssh -T git@github.com  # 验证
 ```
-公钥添加到github账户
 
 #### GPG
 
@@ -151,14 +171,11 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 - merge
   - ff = only 确保只有在每一个合并都是 fast-forward 的时候，你才会看到报错。否则只要你配置了这个选项，什么合并提交，什么历史记录，通通都不需要，只是两次提交之间的平滑过渡。你可能会想知道如何完成这项工作。答案是用 git rebase，把一个分支的修改合并到当前分支，它非常有用当我 pull 代码与 master 有冲突的时候，我使用这种方式来处理。当你在本地分支上修改后，同时其他人在 master 上 做了修改，我想这样比你直接 merge 到你本地分支时的 commit 更好。这样你可以避免多出一个 merge 的 commit。如果我打算新建一个merge commit，我可以用明确的 git merge -ff 来创建。
 - commit
-
   - gpgSign = true 确保您的所有 commit 都由你的 GPG 密钥签名。这通常是一个好主意，因为 .gitconfig 文件中没有验证您的用户信息，这意味着看起来像您这样的提交可能会轻松显示在其他人的提交 信息中。事实上，我曾经用过别人的凭据，因为帐户和机器配置耗时太长。我的提交请求是通过别人的帐号提交的，但内部的所有提交都是我的真实账号。将你的 GPG key 添加到 Github并尝试一次提交，你可能就会解决你现在的疑问，您提交内容将会有一个"已验证"标记。
   - 如果您有多个 GPG 密钥，可以使用 user.signingKey 选项指定要使用的密钥。
   - 上述的配置在 GUI 工具里不会生效，你需要在工具里的设置里找配置项。
   - gpg-agent可以保存口令，让我们更方便。
-
 - Push
-
   - default = simple可能是你已经设置的配置项。它可以更轻松地将您的本地分支推送到远程，当二者分支名一样的时候。
   - followTags = true很简单。配置它以后，当你 git push 的时候可以直接将本地的 tags 提交到远程，而不用每次都加参数 --follow-tags。不知道你是不是和我一样，我如果创建了一个tag，我就基本上一定会将它推到远程的。
 
@@ -169,39 +186,67 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
 Git维护的就是一个commitID树，分别保存着不同状态下的代码。 所以你对代码的任何修改，最终都会反映到 commit 上面去。
 
-- 工作区（当前文件状态Workspace）进行开发改动的地方，任何对象都是在工作区中诞生和被修改；
-- 暂存区（提交最新的版本Index / Stage）.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；
-- 版本库 本地仓库（所有历史版本Repository）保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；
-- 远程仓库(Remote)
-- 任何对象都是在工作区中诞生和被修改；
-- 任何修改都是从进入index区才开始被版本控制；
-- 只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；
-- 与协作者分享本地的修改，可以把它们push到远程仓库来共享。
+* 工作区（当前文件状态Workspace）进行开发改动的地方，任何对象都是在工作区中诞生和被修改；
+* 暂存区（提交最新的版本Index / Stage）.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；
+* 版本库 本地仓库（所有历史版本Repository）保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；
+* 远程仓库(Remote)
+* 任何对象都是在工作区中诞生和被修改；
+* 任何修改都是从进入index区才开始被版本控制；
+* 只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；
+* 与协作者分享本地的修改，可以把它们push到远程仓库来共享。
 
-### 文件三种状态：modified staged committed:
+### 文件三种状态：
+
+* modified:working directory
+* staged:Stage(Index)
+* committed:History
 
 Git 的工作就是创建和保存项目的快照及与之后的快照进行对比
 
 ### 创建版本库
 
-- git init：在当前目录内新建一个Git代码库，会生成.git文件，用于新建空项目文件或者将项目添加git管理
-- git init [project-name] :# 新建一个目录，将其初始化为Git代码库
-- git clone [url] [project-name]:下载一个项目和它的整个代码历史,支持多种协议
-    + 克隆版本库的时候，所使用的远程主机自动被Git命名为origin。如果想用其他的主机名，需要用git clone命令的-o选项指定。
-    ```shell
-    git clone http[s]://example.com/path/to/repo.git/
-    git clone ssh://example.com/path/to/repo.git/
-    git clone [user@]example.com:path/to/repo.git/
-    git clone git://example.com/path/to/repo.git/
-    git clone /opt/git/project.git 
-    git clone file:///opt/git/project.git
-    git clone ftp[s]://example.com/path/to/repo.git/
-    git clone rsync://example.com/path/to/repo.git/
-    git clone -o jQuery https://github.com/jquery/jquery.git
-    ```
-- git subtree add --prefix=client <https://github.com/example/project-client.git> master // 建立主项目里子树
+* git init：在当前目录内新建一个Git代码库，会生成.git文件，用于新建空项目文件或者将项目添加git管理
+* git init [project-name] # 新建一个目录，将其初始化为Git代码库
+* git clone [url] [project-name]:下载一个项目和它的整个代码历史,支持多种协议
+    - 克隆版本库的时候，所使用的远程主机自动被Git命名为origin。如果想用其他的主机名，需要用git clone命令的-o选项指定。
+* git subtree add --prefix=client <https://github.com/example/project-client.git> master // 建立主项目里子树
 
-### 编辑项目:writing clear commit messages, you can make it easier for other people to follow along and provide feedback.
+```shell
+git clone http[s]://example.com/path/to/repo.git/
+git clone ssh://example.com/path/to/repo.git/
+git clone [user@]example.com:path/to/repo.git/
+git clone git://example.com/path/to/repo.git/
+git clone /opt/git/project.git 
+git clone file:///opt/git/project.git
+git clone ftp[s]://example.com/path/to/repo.git/
+git clone rsync://example.com/path/to/repo.git/
+git clone -o jQuery https://github.com/jquery/jquery.git
+
+# 本地创建项目根目录, 然后与远程GitHub关联
+git init # 初始化git仓库 
+git commit -m 'description' # 提交改变到缓存
+git remote add origin git@github.com:han1202012/TabHost_Test.git # 本地git仓库关联GitHub仓库
+git push -u origin master # 提交到GitHub中
+
+# 从GitHub上克隆项目到本地，注意克隆的时候直接在仓库根目录即可, 不用再创建项目根目录
+git clone git@github.com:han1202012/NDKHelloworld.git , 
+git add ./* # 添加文件，将目录中所有文件添加;
+git commit -m '提交'; # 提交缓存
+git push -u origin master  # 提交到远程GitHub仓库
+# 之后修改提交
+git pull # 与GitHub远程仓库同步
+git status # 查看文件变更
+git commit -m 'description' # 提交代码到本地缓存
+git push # 提交代码到远程GitHub仓库
+```
+
+#### 编辑项目
+
+writing clear commit messages, you can make it easier for other people to follow along and provide feedback.
+
+* git reset -- files 用来撤销最后一次git add files，你也可以用git reset 撤销所有暂存区域文件。
+* git checkout -- files 把文件从暂存区域复制到工作目录，用来丢弃本地修改。
+* git commit -a git checkout HEAD -- files 回滚到复制最后一次提交。跳过暂存区域直接从仓库取出文件或者直接提交代码
 
 ```shell
 git add ./<file1>(<file2> <file3>)/[dir] （所有修改过的文件/单个文件 或通过使用通配符将一组文件添加到暂存区）
@@ -210,10 +255,10 @@ git rm [file1] [file2] ... 删除工作区文件，并且将这次删除放入�
 git rm --cached [file]  停止追踪指定文件，但该文件会保留在工作区
 git mv [file-original] [file-renamed]  改名文件，并且将这个改名放入暂存区
 
-git commit -m "the first commit"：// 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志 
-git commit [file1] [file2] ... -m [message]
-git commit -a:提交工作区自上次commit之后的变化，直接到仓库区,通过编辑器添加message
-git commit -v：提交时显示所有diff信息
+git commit -m "the first commit" # 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志.进行一次包含最后一次提交加上工作目录中文件快照的提交。并且文件被添加到暂存区域。
+git commit [file1] [file2] ... -m [message] 
+git commit -a # 提交工作区自上次commit之后的变化，直接到仓库区,通过编辑器添加message
+git commit -v # 提交时显示所有diff信息
 git commit –-am/--amend -m [message]：使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
 git commit --amend [file1] [file2] ...  重做上一次commit，并包括指定文件的新变化
 
@@ -232,7 +277,7 @@ git checkout ./file:回滚最新版本库文件，抛弃工作区修改
 git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1234567a44341404 / HEAD
 ```
 
-暂存区编辑:
+#### 暂存区编辑
 
 ```shell
 git reset [file] // 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
@@ -267,6 +312,7 @@ git add .
 git rebase --continue
 git rebase --abort
 ```
+
 * git merge 处理冲突更直接
 * git rebase 能够保证清晰的 commit 记录。
     - rebase 先找出共同的祖先节点
@@ -274,7 +320,7 @@ git rebase --abort
     - rebase 之后的 commitID 其实已经发生了变化
 [rebase vs merge](../_staic/mergevsrebase.jpeg "rebase vs merge")
 
-查看：
+#### 查看
 
 ```shell
 git stutus:查看本地的代码状态,工作树与暂存区的文件对比差别,显示有变更的文件
@@ -314,20 +360,22 @@ HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
 
 使用 git reset --hard commitID 把本地开发代码回滚到了一个之前的版本，而且还没有推到远端，怎么才能找回丢失的代码呢？ 你如果使用 git log 查看提交日志，并不能找回丢弃的那些 commitID。 而 git reflog 却详细的记录了你每个操作的 commitID，可以轻易的让你复原当时的操作并且找回丢失的代码。
 
-分支： branch name should be descriptive
+#### 分支
+
+branch name should be descriptive。创建分支后, 分支操作不会影响master分支, 但是master分支改变会影其它分支;
 
 ```shell
 git branch [-r]/[-a] 列出所有远程/所有分支
-git branch [branch-name] [commit] 新建一个分支，指向指定commit,但依然停留在当前分支
-git checkout -b newBrach origin/master // 在origin/master的基础上，创建一个新分支，并切换到new分支
-git checkout -b branch-name origin/branch-name // 从本地创建和远程对应的分支
+git branch [branch-name] [commit] # 新建一个分支，指向指定commit,但依然停留在当前分支
+git checkout -b newBrach origin/master # 在origin/master的基础上，创建一个新分支，并切换到new分支
+git checkout -b branch-name origin/branch-name # 从本地创建和远程对应的分支
 git branch --track [branch] [remote-branch] 新建一个分支，与指定的远程分支建立追踪关系
-git push origin qixiu/feature  // 新建本地分支，然后更新到远端的方式来新增一个远端分支
-git push origin -d qixiu/feaure // 删除远程分支
+git push origin qixiu/feature  # 新建本地分支，然后更新到远端的方式来新增一个远端分支
+git push origin -d qixiu/feaure # 删除远程分支
 git push origin :qixiu/feature
 
-git merge origin/master // 在本地分支上合并远程分支
-git rebase origin/master // 在本地分支上合并远程分支
+git merge origin/master # 在本地分支上合并远程分支
+git rebase origin/master # 在本地分支上合并远程分支
 
 git checkout dev:切换
 git checkout -:切换到上一个分支
@@ -338,51 +386,46 @@ git rebase source destiantion：将source压缩到destiantion
 git rebase master
 git branch --set-upstream-to=origin/master master
 
-git branch --set-upstream master origin/master // 建立追踪关系，在现有分支与指定的远程分支之间
-git branch --set-upstream develop origin/develop 
+git branch --set-upstream master origin/master # 建立追踪关系，在现有分支与指定的远程分支之间
+git branch --set-upstream develop origin/develop
+
+
+git branch # 列出分支
+git checkout master # 切换分支
+git push origin branchName #  提交分支 
+git branch -d branchName , 强制删除分支 git branch -D branchName # 删除分支 
+git merge branchName # 合并分支 
 ```
 
 Pull Request:useful for contributing to open source projects and for managing changes to shared repositories.
 code review:project guidelines,unit tests
-标签
+
+#### 远程分支
 
 ```shell
-git tag:列出所有tag
-git tag [tag] :新建一个tag在指定commit
-git tag -d [tag] 删除本地tag
-git push origin :refs/tags/[tagName] :删除远程tag
-git show [tag]:查看tag信息
-git push [remote] [tag]:提交指定tag
-git push [remote] --tags:提交所有tag
-git checkout -b [branch] [tag]:新建一个分支，指向某个tag
-```
-
-远程分支：
-
-```shell
-git fetch [remote] // 下载远程仓库的所有变动
-git fetch <远程主机名> <分支名>  // 只想取回特定分支的更新,所取回的更新，在本地主机上要用"远程主机名/分支名"的形式读取
-git fetch origin master // 拉取指定分支的变化
-git fetch // 拉取所有分支的变化
-git fetch -p // 拉取所有分支的变化，并且将远端不存在的分支同步移除
+git fetch [remote] # 下载远程仓库的所有变动
+git fetch <远程主机名> <分支名>  # 只想取回特定分支的更新,所取回的更新，在本地主机上要用"远程主机名/分支名"的形式读取
+git fetch origin master # 拉取指定分支的变化
+git fetch # 拉取所有分支的变化
+git fetch -p # 拉取所有分支的变化，并且将远端不存在的分支同步移除
 
 git remote -v 显示所有远程仓库
-git remote show [remote] // 显示某个远程仓库的信息
+git remote show [remote] # 显示某个远程仓库的信息
 git remote add [shortname] [url] 增加一个新的远程仓库，并命名
 git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 设置远程仓库地址(用于修改远程仓库地址)
-git remote rm <主机名> // 用于删除远程主机
-git remote rename <原主机名> <新主机名> // 用于远程主机的改名
+git remote rm <主机名> # 用于删除远程主机
+git remote rename <原主机名> <新主机名> # 用于远程主机的改名
 
-git pull <远程主机名> <远程分支名>:<本地分支名> //  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
+git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
 git pull 执行的是 git merge，
-git pull -r origin master // 执行的是git rebase git pull origin master 
-git push <远程主机名> <本地分支名>:<远程分支名> // 上传本地指定分支到远程仓库. git push origin my:master
+git pull -r origin master # 执行的是git rebase git pull origin master 
+git push <远程主机名> <本地分支名>:<远程分支名> # 上传本地指定分支到远程仓库. git push origin my:master
 git push [remote] --force 强行推送当前分支到远程仓库，即使有冲突
 git push [remote] --all 不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机
-git push origin :master // 省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支
-git push origin --delete master // 表示删除origin主机的master分支
+git push origin :master # 省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支
+git push origin --delete master # 表示删除origin主机的master分支
 git push origin branch-name 从本地推送分支
-git push --force origin  // 如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做git pull合并差异，然后再推送到远程主机。这时，如果你一定要推送，可以使用--force选项
+git push --force origin  # 如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做git pull合并差异，然后再推送到远程主机。这时，如果你一定要推送，可以使用--force选项
 git push <remote repository name> <branch name>（第一次 git push -u：-u 选项设置本地分支去跟踪远程对应的分支）
 git push <remote name> <local branch name:remote branch name>
 git push                         # push所有分支
@@ -398,19 +441,41 @@ git push origin --delete dev :删除远程分支
 
 deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
 
-打包:
+#### 标签
+
+```shell
+git tag # 列出所有tag
+git tag [tag] # 新建一个tag在指定commit
+git tag -a v2.1 -m 'first version'  
+git tag -l v1.* # 限定
+git tag -d [tag] 删除本地tag
+git push origin :refs/tags/[tagName]   # 删除远程tag
+git show [tag]  # 查看tag信息
+git push [remote] [tag]  # 提交指定tag
+git push [remote] --tags  # 提交所有tag
+git checkout -b [branch] [tag]  # 新建一个分支，指向某个tag
+git push origin --tags # 提交标签到GitHub中
+```
+
+#### 打包
 
 ```shell
 git archive
 ```
 
-# 搭建git私有服务器
+## .gitignore
+
+* 过滤目录 : /bin/ 就是将bin目录过滤, 该文件下的所有目录和文件都不被提交;
+* 过滤某个类型文件 : *.zip *.class 就是过滤zip 和 class 后缀的文件, 这些文件不被提交;
+* 过滤指定文件 : /gen/R.java, 过滤该文件, 该文件不被提交;
+
+### 搭建git私有服务器
 
 ```shell
 groupadd git
 adduser git -g git
 
-创建证书 mkdir -p ~/.ssh 
+mkdir -p ~/.ssh  # 创建证书 
 chmod 700 .ssh 
 touch .ssh/authorized_keys 
 chmod 600 .ssh/authorized_keys
@@ -432,6 +497,7 @@ git操作有它自身的生命周期，在不同的生命周期，我们可以�
 
 * pre-commit的时候我们可以做 eslint
 * post-commit的时候，我们可以做利用 jenkins 类似的工具做持续集成
+
 ### 基于功能分支的开发流程
 
 * 分支命名：ownerName/featureName
@@ -442,20 +508,20 @@ git操作有它自身的生命周期，在不同的生命周期，我们可以�
 * 不要在公共的分支上使用 rebase
 * 团队用merge
 * pull request:方便CodeReview
+
 ```shell
 git checkout master
 git pull -r origin master
 git checkout qixiu/newFeature
-git rebase master // 处理冲突
+git rebase master # 处理冲突
 git checkout master
 git merge qixiu/newFeature
 git push origin master// 精简版 合并到 master
 
 git checkout qixiu/newFeature
-git pull -r origin master // 将master的代码更新下来，并且rebase处理冲突
-git push origin master // 将本地代码更新到远端
+git pull -r origin master # 将master的代码更新下来，并且rebase处理冲突
+git push origin master # 将本地代码更新到远端
 ```
-* 
 
 ## 工作流
 
@@ -568,49 +634,42 @@ git push origin master // 将本地代码更新到远端
 ```
 
 - 解析Pull Request：当要发起一个Pull Request，你所要做的就是请求（Request）另一个开发者（比如项目的维护者） 来pull你仓库中一个分支到他的仓库中。这意味着你要提供4个信息以发起Pull Request： 源仓库、源分支、目的仓库、目的分支。
+- Code Review
 
-  - Code Review
-
-# 实际场景
+### 实际场景
 
 使用 Git 作为版本控制软件最看重的还是结合公司自己搭建的 Gitlab，将 Code Review 加入打包部署持续集成的流程中，这样，代码开发完成，提交测试前，便可以对开发人员提交的代码进行 Review，发现潜在的问题，及时指导，对于新人来讲，也能更快更好的学习。
 
-- 能支持日常迭代开发、紧急线上bug修复、多功能并行开发
-- 大概50人左右的团队，平日迭代项目较多，且周期短（1~2周一个迭代）
-- 能够通过tag重建整个系统
-- 支持code review
-- 所有上线的代码必须都是经过测试保证，且能自动同步到下一次的迭代中
-- 能和公司的项目管理/持续集成系统整合
+* 能支持日常迭代开发、紧急线上bug修复、多功能并行开发
+* 大概50人左右的团队，平日迭代项目较多，且周期短（1~2周一个迭代）
+* 能够通过tag重建整个系统
+* 支持code review
+* 所有上线的代码必须都是经过测试保证，且能自动同步到下一次的迭代中
+* 能和公司的项目管理/持续集成系统整合
 
 下面为团队在日常开发中总结出来的适合企业开发的模式，下面进行简单的介绍，方便大家学习了解（本模式适合敏捷开发流程，小迭代上线，传统的瀑布开发模型并没有进行测试）![](https://github.com/xirong/my-git/raw/master/images/branch_module.png)
 
-- 迭代需求会、冲刺会后确定本次迭代的目标后，将迭代内容视为一个项目，在 Gitlab 上创建一个 Repository，初始化工程代码结构，根据上线日期，比如20150730上线，开出分支 release20150730、dev20150730 两个分支，dev 分支作为日常开发主干分支，release 分支作为提测打包、Code Review 的分支。 -
-- 迭代开始，日常开发进行中，开发人员在 dev 分支上进行 Commit、Push 代码，并且解决掉日常协同开发中的冲突等问题，等到达到提测条件的时候，提测者，首先 Merge Master 分支上的最新代码 git merge --no-ff origin/master ，使得 Master 分支上的变更更新到迭代开发分支dev上面，之后，在 Gitlab 上面发起 pull request 请求，并指定 Code Review 人，请求的分支选择本次上线的 release 分支，即 release20150730。
+* 迭代需求会、冲刺会后确定本次迭代的目标后，将迭代内容视为一个项目，在 Gitlab 上创建一个 Repository，初始化工程代码结构，根据上线日期，比如20150730上线，开出分支 release20150730、dev20150730 两个分支，dev 分支作为日常开发主干分支，release 分支作为提测打包、Code Review 的分支。 -
+* 迭代开始，日常开发进行中，开发人员在 dev 分支上进行 Commit、Push 代码，并且解决掉日常协同开发中的冲突等问题，等到达到提测条件的时候，提测者，首先 Merge Master 分支上的最新代码 git merge --no-ff origin/master ，使得 Master 分支上的变更更新到迭代开发分支dev上面，之后，在 Gitlab 上面发起 pull request 请求，并指定 Code Review 人，请求的分支选择本次上线的 release 分支，即 release20150730。
+* 被指定 Code Review 的人，对发起者的代码 Review 后，决定是否可以提交测试，若有问题，评论注释代码后，提交者对代码进行进行修改，重复步骤2，直到代码 Review 者认为 Ok。之后便可以借助自己公司的打包部署，对这些代码发布到测试环境验证。
+* 步骤2-3重复多次后，就会达到一个稳定可发布的版本，即上线版本，上线后，将 release 版本上面最后的提交（图中0.2.4上线对应处）合并到 Master 分支上面，并打 Tag0.3。至此，一次完整的迭代开发完成。
+* 若此次上线后，不久发现生产环境有 Bug 需要修复，则从 Tag 处新开分支 release_bugfix_20150731、dev_bugfix_20150731 ，开发人员从 dev_bugfix_20150731分支上进行开发，提测code review在 release_bugfix_20150731 分支上，具体步骤参考2-3，测试环境验证通过后，发布到线上，验证OK，合并到 Master 分支，并打 Tag0.2.3，此次 Bug 修复完毕，专为解 Bug 而生的这两个分支可以退伍了，删除release_bugfix_20150731、dev_bugfix_20150731两分支即可。（所有的历史 Commit 信息均已经提交到了 Master 分支上，不用担心丢失）
+* master：master永远是线上代码，最稳定的分支，存放的是随时可供在生产环境中部署的代码，当开发活动告一段落，产生了一份新的可供部署的代码时，发布成功之后，代码才会由 aone2 提交到 master，master 分支上的代码会被更新。应用上 aone2 后禁掉所有人的 master的写权限
+* develop：保存当前最新开发成果的分支。通常这个分支上的代码也是可进行每日夜间发布的代码，只对开发负责人开放develop权限。 -
+* feature: 功能特性分支，每个功能特性一个 feature/ 分支，开发完成自测通过后合并入 develop 分支。可以从 master 或者develop 中拉出来。 - hotfix: 紧急bug分支修复分支。修复上线后，可以直接合并入master。
 
-- 被指定 Code Review 的人，对发起者的代码 Review 后，决定是否可以提交测试，若有问题，评论注释代码后，提交者对代码进行进行修改，重复步骤2，直到代码 Review 者认为 Ok。之后便可以借助自己公司的打包部署，对这些代码发布到测试环境验证。
-
-- 步骤2-3重复多次后，就会达到一个稳定可发布的版本，即上线版本，上线后，将 release 版本上面最后的提交（图中0.2.4上线对应处）合并到 Master 分支上面，并打 Tag0.3。至此，一次完整的迭代开发完成。
-
-- 若此次上线后，不久发现生产环境有 Bug 需要修复，则从 Tag 处新开分支 release_bugfix_20150731、dev_bugfix_20150731 ，开发人员从 dev_bugfix_20150731分支上进行开发，提测code review在 release_bugfix_20150731 分支上，具体步骤参考2-3，测试环境验证通过后，发布到线上，验证OK，合并到 Master 分支，并打 Tag0.2.3，此次 Bug 修复完毕，专为解 Bug 而生的这两个分支可以退伍了，删除release_bugfix_20150731、dev_bugfix_20150731两分支即可。（所有的历史 Commit 信息均已经提交到了 Master 分支上，不用担心丢失）
-
-- master：master永远是线上代码，最稳定的分支，存放的是随时可供在生产环境中部署的代码，当开发活动告一段落，产生了一份新的可供部署的代码时，发布成功之后，代码才会由 aone2 提交到 master，master 分支上的代码会被更新。应用上 aone2 后禁掉所有人的 master的写权限
-
-- develop：保存当前最新开发成果的分支。通常这个分支上的代码也是可进行每日夜间发布的代码，只对开发负责人开放develop权限。 -
-
-- feature: 功能特性分支，每个功能特性一个 feature/ 分支，开发完成自测通过后合并入 develop 分支。可以从 master 或者develop 中拉出来。 - hotfix: 紧急bug分支修复分支。修复上线后，可以直接合并入master。
-
-# Git-Develop 分支模式：
+#### Git-Develop 分支模式：
 
 是基于 Git 代码库设计的一种需要严格控制发布质量和发布节奏的开发模式。develop 作为固定的持续集成和发布分支，并且分支上的代码必须经过 CodeReview 后才可以提交到 Develop 分支。它的基本流程如下：
 
 ![](https://github.com/xirong/my-git/raw/master/_image/2016-09-22-20-57-27.jpg)
 
-- 每一个需求/变更都单独从Master上创建一条Branch分支；
-- 用户在这个Branch分支上进行Codeing活动；
-- 代码达到发布准入条件后aone上提交Codereview，Codereview通过后代码自动合并到- Develop分支；
-- 待所有计划发布的变更分支代码都合并到Develop后，系统再 rebase master 代码到Develop 分支，然后自行构建，打包，部署等动作。
-- 应用发布成功后Aone会基于Develop分支的发布版本打一个"当前线上版本Tag"基线；
-- 应用发布成功后Aone会自动把Develop分支的发布版本合并回master；
+* 每一个需求/变更都单独从Master上创建一条Branch分支；
+* 用户在这个Branch分支上进行Codeing活动；
+* 代码达到发布准入条件后aone上提交Codereview，Codereview通过后代码自动合并到- Develop分支；
+* 待所有计划发布的变更分支代码都合并到Develop后，系统再 rebase master 代码到Develop 分支，然后自行构建，打包，部署等动作。
+* 应用发布成功后Aone会基于Develop分支的发布版本打一个"当前线上版本Tag"基线；
+* 应用发布成功后Aone会自动把Develop分支的发布版本合并回master；
 
 # 问题列表Issues
 
@@ -630,8 +689,8 @@ git checkout -b myfeature
 
 # 提交分支commit
 git add --all
-$ git status
-$ git commit --verbose
+git status
+git commit --verbose
 
 commit:第一行是不超过50个字的提要，然后空一行，罗列出改动原因、主要变动、以及需要注意的问题。最后，提供对应的网址（比如Bug ticket）。
 Present-tense summary under 50 characters
@@ -652,38 +711,26 @@ git rebase -i origin/master
 git push --force origin myfeature
 ```
 
-## 合并commit选项
+### 合并commit选项
 
-- pick：正常选中
-- reword：选中，并且修改提交信息；
-- edit：选中，rebase时会暂停，允许你修改这个commit（参考这里）
-- squash：选中，会将当前commit与上一个commit合并，会有多个commit信息
-- fixup：与squash相同，但不会保存当前commit的提交信息，会舍去commit信息
-- exec：执行其他shell命令
+* pick：正常选中
+* reword：选中，并且修改提交信息；
+* edit：选中，rebase时会暂停，允许你修改这个commit（参考这里）
+* squash：选中，会将当前commit与上一个commit合并，会有多个commit信息
+* fixup：与squash相同，但不会保存当前commit的提交信息，会舍去commit信息
+* exec：执行其他shell命令
 
 ## github pages:必须使用master作为分支
 
 - hexo：添加文章后现hexo g（生成） hexo d（部署）
 - jekyll：直接push到master就好
 
-## git-flow
+### git-flow
 
 A collection of Git extensions to provide high-level repository operations for Vincent Driessen's branching model
 
-### 安装
-```
-brew install git-flow
-brew install git && brew install bash-completion
-
-// Add bash-completion to your ~/.bash_profile:
-
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-fi
-
-// Add git-flow-completion to ~/.zshrc
-```
 ### 使用
+
 ```
 init
 feature
@@ -694,42 +741,43 @@ version
 ```
 ![Git 命令清单](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png)
 
-## Version Control Best Practices 
-- Commit Related Changes:A commit should be a wrapper for related changes. For example, fixing two different bugs should produce two separate commits. Small commits make it easier for other team members to understand the changes and roll them back if something went wrong. With tools like the staging area and the ability to stage only parts of a file, Git makes it easy to create very granular commits.
-- Commit Often:Committing often keeps your commits small and, again, helps you commit only related changes. Moreover, it allows you to share your code more frequently with others. That way it’s easier for everyone to integrate changes regularly and avoid having merge conflicts. Having few large commits and sharing them rarely, in contrast, makes it hard both to solve conflicts and to comprehend what happened.
-- Don’t Commit Half-Done Work:You should only commit code when it’s completed. This doesn’t mean you have to complete a whole, large feature before committing. Quite the contrary: split the feature’s implementation into logical chunks and remember to commit early and often. But don’t commit just to have something in the repository before leaving the office at the end of the day. If you’re tempted to commit just because you need a clean working copy (to check out a branch, pull in changes, etc.) consider using Git’s “Stash” feature instead.
-- Test Before You Commit:Resist the temptation to commit something that you “think” is completed. Test it thoroughly to make sure it really is completed and has no side effects (as far as one can tell). While committing half-baked things in your local repository only requires you to forgive yourself, having your code tested is even more important when it comes to pushing / sharing your code with others.
-- Write Good Commit Messages:Begin your message with a short summary of your changes (up to 50 characters as a guideline). Separate it from the following body by including a blank line. The body of your message should provide detailed answers to the following questions: What was the motivation for the change? How does it differ from the previous implementation? Use the imperative, present tense („change“, not „changed“ or „changes“) to be consistent with generated messages from commands like git merge.
-- Version Control is not a Backup System:Having your files backed up on a remote server is a nice side effect of having a version control system. But you should not use your VCS like it was a backup system. When doing version control, you should pay attention to committing semantically (see “related changes”) – you shouldn’t just cram in files.
-- Use Branches:Branching is one of Git’s most powerful features – and this is not by accident: quick and easy branching was a central requirement from day one. Branches are the perfect tool to help you avoid mixing up different lines of development. You should use branches extensively in your development workflows: for new features, bug fixes, experiments, ideas…
-- Agree on a Workflow:Git lets you pick from a lot of different workflows: long-running branches, topic branches, merge or rebase, git-flow… Which one you choose depends on a couple of factors: your project, your overall development and deployment workflows and (maybe most importantly) on your and your teammates’ personal preferences. However you choose to work, just make sure to agree on a common workflow that everyone follows.
+### Version Control Best Practices 
+
+* Commit Related Changes:A commit should be a wrapper for related changes. For example, fixing two different bugs should produce two separate commits. Small commits make it easier for other team members to understand the changes and roll them back if something went wrong. With tools like the staging area and the ability to stage only parts of a file, Git makes it easy to create very granular commits.
+* Commit Often:Committing often keeps your commits small and, again, helps you commit only related changes. Moreover, it allows you to share your code more frequently with others. That way it’s easier for everyone to integrate changes regularly and avoid having merge conflicts. Having few large commits and sharing them rarely, in contrast, makes it hard both to solve conflicts and to comprehend what happened.
+* Don’t Commit Half-Done Work:You should only commit code when it’s completed. This doesn’t mean you have to complete a whole, large feature before committing. Quite the contrary: split the feature’s implementation into logical chunks and remember to commit early and often. But don’t commit just to have something in the repository before leaving the office at the end of the day. If you’re tempted to commit just because you need a clean working copy (to check out a branch, pull in changes, etc.) consider using Git’s “Stash” feature instead.
+* Test Before You Commit:Resist the temptation to commit something that you “think” is completed. Test it thoroughly to make sure it really is completed and has no side effects (as far as one can tell). While committing half-baked things in your local repository only requires you to forgive yourself, having your code tested is even more important when it comes to pushing / sharing your code with others.
+* Write Good Commit Messages:Begin your message with a short summary of your changes (up to 50 characters as a guideline). Separate it from the following body by including a blank line. The body of your message should provide detailed answers to the following questions: What was the motivation for the change? How does it differ from the previous implementation? Use the imperative, present tense („change“, not „changed“ or „changes“) to be consistent with generated messages from commands like git merge.
+* Version Control is not a Backup System:Having your files backed up on a remote server is a nice side effect of having a version control system. But you should not use your VCS like it was a backup system. When doing version control, you should pay attention to committing semantically (see “related changes”) – you shouldn’t just cram in files.
+* Use Branches:Branching is one of Git’s most powerful features – and this is not by accident: quick and easy branching was a central requirement from day one. Branches are the perfect tool to help you avoid mixing up different lines of development. You should use branches extensively in your development workflows: for new features, bug fixes, experiments, ideas…
+* Agree on a Workflow:Git lets you pick from a lot of different workflows: long-running branches, topic branches, merge or rebase, git-flow… Which one you choose depends on a couple of factors: your project, your overall development and deployment workflows and (maybe most importantly) on your and your teammates’ personal preferences. However you choose to work, just make sure to agree on a common workflow that everyone follows.
 
 ## 文档
 
-- Git User Manual：客户端含有的文档
-- [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. http://git.io/sheet
-- [atlassian](https://www.atlassian.com/git)
-- [Pro Git（中文版）](http://git.oschina.net/progit/)
-- [Pro Git2](https://git-scm.com/book/en/v2)
-- [progit/progit](https://github.com/progit/progit)
-- [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
-- [GitHub规范](https://guides.github.com/)
-- [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
-- [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
-- [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
+* Git User Manual：客户端含有的文档
+* [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. http://git.io/sheet
+* [atlassian](https://www.atlassian.com/git)
+* [Pro Git（中文版）](http://git.oschina.net/progit/)
+* [Pro Git2](https://git-scm.com/book/en/v2)
+* [progit/progit](https://github.com/progit/progit)
+* [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
+* [GitHub规范](https://guides.github.com/)
+* [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
+* [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
+* [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
 
 ## 工具
 
-- [github/hub](https://github.com/github/hub)hub helps you win at git. http://hub.github.com/
-- [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
-- [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
-- [nvie/gitflow](https://github.com/nvie/gitflow):Git extensions to provide high-level repository operations for Vincent Driessen's branching model. 
-- [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
-- [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
-- [kennethreitz/legit](https://github.com/kennethreitz/legit):Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
-- [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
-- [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
-- [Git 工作流](https://juejin.im/post/5a014d5f518825295f5d56c7)
+* [github/hub](https://github.com/github/hub)hub helps you win at git. http://hub.github.com/
+* [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
+* [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
+* [nvie/gitflow](https://github.com/nvie/gitflow):Git extensions to provide high-level repository operations for Vincent Driessen's branching model. 
+* [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
+* [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
+* [kennethreitz/legit](https://github.com/kennethreitz/legit):Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
+* [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
+* [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
+* [Git 工作流](https://juejin.im/post/5a014d5f518825295f5d56c7)
 
 ## 语法
 
@@ -793,6 +841,7 @@ git submodule 主要用来管理一些单向更新的公共模块或底层逻辑
 
 它允许你的项目模块化成为每一个 Repository，最终汇聚成一个完整的项目。换句话说，Git Submodule 可以别人的 Repo 挂到你自己的 Repo 中的任何位置，成为的 Repo 的一部分。
 在你的项目 Repository 下产生一个 .gitmodules 文件，来记录你的 Submodule 信息，同时 another_project项目也clone下来.
+
 ```
 git submodule add git@domain.com:another_project.git another_project
 git submodule foreach git pull  // 更新 repo 下所有的 submodules
@@ -808,19 +857,20 @@ git subtree 对于部分需要双向更新的可复用逻辑来说，特别适�
 
 Merge subtrees together and split repository into subtrees
 [文档](https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt)
-```
-$ git clone git@github.com:Ihavee/dotfiles.git
-$ cd dotfiles
 
-$ git remote add bash git@github.com:Ihavee/bash.git        # 可以理解为远程仓库的别名
-$ git subtree add pull -P home/.bash bash master --squash   # 拉取远程仓库 bash 到本地仓库的home/.bash 目录。
+```shell
+git clone git@github.com:Ihavee/dotfiles.git
+cd dotfiles
+
+git remote add bash git@github.com:Ihavee/bash.git        # 可以理解为远程仓库的别名
+git subtree add pull -P home/.bash bash master --squash   # 拉取远程仓库 bash 到本地仓库的home/.bash 目录。
 
 ...... edit home/.bash/file......
-$ git commit -a -m 'update some'
-$ git subtree push -P home/.bash bash master
-$ git push origin master                                    # 顺便主项目也 push 了
+git commit -a -m 'update some'
+git subtree push -P home/.bash bash master
+git push origin master                                    # 顺便主项目也 push 了
 
-$ git subtree pull -P home/.bash bash master --squash
+git subtree pull -P home/.bash bash master --squash
 
 对 git-subtree 下子项目有修改需求的，请先 git subtree pull 
 ```
@@ -828,11 +878,13 @@ $ git subtree pull -P home/.bash bash master --squash
 ## 扩展
 
 ### tig
-[jonas/tig](https://github.com/jonas/tig):text-mode interface for git
+
+* [jonas/tig](https://github.com/jonas/tig):text-mode interface for git
 
 ## 参考
 
 * [文档](https://git-scm.com/docs) 
+* [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
 * attributes   Defining attributes per path
 * everyday     Everyday Git With 20 Commands Or So
 * glossary     A Git glossary
@@ -841,12 +893,9 @@ $ git subtree pull -P home/.bash bash master --squash
 * revisions    Specifying revisions and ranges for Git
 * tutorial     A tutorial introduction to Git (for version 1.5.1 or newer)
 * workflows    An overview of recommended workflows with Git
+* [alias](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git):oh my zsh 中的 alias
 
-## [alias](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git)
-
-oh my zsh 中的 alias
-
-## Aliases
+### Aliases
 
 | Alias                | Command                                                                                                                                 |
 |:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
@@ -969,7 +1018,7 @@ oh my zsh 中的 alias
 | gwch                 | git whatchanged -p --abbrev-commit --pretty = medium                                                                                    |
 | gwip                 | git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"                                                      |
 
-## Deprecated Aliases
+### Deprecated Aliases
 
 These are aliases that have been removed, renamed, or otherwise modified in a way that may, or may not, receive further support.
 
@@ -1008,3 +1057,8 @@ These features allow to pause a branch development and switch to another one (_"
 | work_in_progress | Echoes a warning if the current branch is a wip |
 | gwip             | Commit wip branch                               |
 | gunwip           | Uncommit wip branch                             |
+
+## 客户端
+
+* msysgit
+* sourcetree
