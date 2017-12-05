@@ -1,40 +1,40 @@
-# MAC使用记录
+# MAC
 
 Mac：最大优势是 GUI 和命令行的完美结合
 
 ## 硬件说明
 
-- Apple Magic Trackpad 2：重现Mac pro mul touch功能
-- 耳机 BeoPlay H6
-- iPad Pro：阅读利器
-- 格式化移动硬盘：ExFAT格式
+* Apple Magic Trackpad 2：重现Mac pro mul touch功能
+* 耳机 BeoPlay H6
+* iPad Pro：阅读利器
+* 格式化移动硬盘：ExFAT格式
 
-## 系统配置：
+## 系统配置
 
-- 开启鼠标更多功能
-- 将功能键(F1-F12)的行为设置为标准的功能键
-- dock 停在左边
-- [修改hosts](https://github.com/racaljk/hosts)
-- [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
-- [awesome-osx-command-line](https://github.com/herrbischoff/awesome-osx-command-line)Use your OS X terminal shell to do awesome things.
-- [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
-- [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
-- [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
-- [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
-- [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
-- iphone,只能同步一台设备itunes配置
-- 设置未收录的开发者应用`sudo spctl --master-disable`
-- [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
-- [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
-- [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(推荐)
-- [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
-- [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
-- [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
-- [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
-- [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
-- [rgcr/m-cli](https://github.com/rgcr/m-cli) Swiss Army Knife for macOS
-- [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
-- [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
+* 开启鼠标更多功能
+* 将功能键(F1-F12)的行为设置为标准的功能键
+* dock 停在左边
+* iphone,只能同步一台设备itunes配置
+* 设置未收录的开发者应用`sudo spctl --master-disable`
+* [修改hosts](https://github.com/racaljk/hosts)
+* [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
+* [awesome-osx-command-line](https://github.com/herrbischoff/awesome-osx-command-line)Use your OS X terminal shell to do awesome things.
+* [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
+* [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
+* [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
+* [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
+* [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
+* [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
+* [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
+* [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(推荐)
+* [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
+* [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
+* [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
+* [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
+* [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
+* [rgcr/m-cli](https://github.com/rgcr/m-cli) Swiss Army Knife for macOS
+* [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
+* [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
 
 ### 配置文件
 
@@ -45,14 +45,130 @@ Mac：最大优势是 GUI 和命令行的完美结合
 - [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files. 
 - [使用 dotfiles 和 stow 管理你的 dotfiles](https://github.com/jcouyang/dotfiles)
 
+### 命令行
+
+* [guarinogabriel/Mac-CLI](https://github.com/guarinogabriel/Mac-CLI)  OS X command line tools for developers – The ultimate tool to manage your Mac. It provides a huge set of command line commands that automatize the usage of your OS X system.
+* [0nn0/terminal-mac-cheatsheet](https://github.com/0nn0/terminal-mac-cheatsheet)List of my most used commands and shortcuts in the terminal for Mac
+
+### Spoitlight
+
+- 查词典 Command+L
+- 在浏览器查询 Command+B
+
+## 共享目录
+
+smaba
+```
+windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
+在Mac中， 先打开Finder, command +K  打开共享目录 输入： smb://192.168.0.4/share
+```
+
+## 软件
+
+可以通过plist文件安装软件
+
+### 安装
+
+* app store：自动安装
+* 互联网下载：下载dmg，会打开安装包，需将app图标拖到application中（文件位置/Users/henry/Library/Application Support）
+* 还有文件包直接拖进application：sketch atom
+* brew cask install firefox
+
+### 卸载软件
+
+- launchpad 长按
+- finder 找到移动到垃圾桶
+- 通过appcleaner彻底清除
+
+## 软件列表
+
+- UI:sketch sketch box
+- CheatSheet 长按⌘键可以显示当前程序快捷键
+- markdown: Mou for Mac,Ulysses for Mac,MWeb Lite,[MacDown](https://github.com/MacDownApp/macdown)Open source Markdown editor for macOS.
+- shell：oh my zsh
+- CheatSheet
+- MySql：Sequel Pro
+- [flux](https://justgetflux.com/)
+- [moom](https://manytricks.com/moom/)
+- OmniFocus
+- Latex
+- Xcode
+- [PHPstrom](https://www.jetbrains.com/phpstorm/download/download-thanks.html?pl)
+- atom:通过brew安装
+- dash:语言文档
+- Quiver：文档管理器
+- MindNode 2
+- Cloud Outline
+- 播放器：MPlayerX
+- UML:staruml
+- 清理垃圾：CleanMyMac（需购买解说功能）
+- 开发环境 MAMP:基础版不支持自定义
+- [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro)
+- mysql 使用brew安装
+- git:sourcetree tig
+- RSS：Reeder 3（收费）leaf
+- 修图Snapseed
+- Omnifocus 在践行 GTD
+- 虚拟机：parallels
+- Keyboard Maestro:流程制作工具
+- Alternote(evernote简单客户端)
+- 思维导图：MindNode 2（收费）
+- weibo:WeiboX
+- BTT(BetterTouchTool) 触控板手势增强
+- OmniFocus：GTD思路的应用
+- Fantastical：日程管理应用
+- Axure：原型工具
+- CmapTools：概念图
+- Quiver：笔记软件
+- htop:运行于 Linux 系统监控与进程管理软件，用于取代 Unix 下传统的 top。与 top 只提供最消耗资源的进程列表不同，htop 提供所有进程的列表，并且使用彩色标识出处理器、swap 和内存状态
+- [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
+- [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
+- ibooks：阅读支持pdf与epub，可以通过icloud同步
+- iTunes Movie Trailers
+- manico
+- SwitchHosts
+- [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
+- f.lux 屏幕颜色控制
+- iCHM
+- [typcn/bilibili-mac-client](https://github.com/typcn/bilibili-mac-client)An unofficial bilibili client for mac
+- 文档：[apidoc](http://apidocjs.com/)
+- Reeder 3 RSS订阅（暂时feedly代替）
+- mounty:win的移动硬盘
+- [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
+- [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
+- Fantastical 2:日历工具 收费
+- 苹果铃声制作
+
+  - 音乐文件用itunes打开
+  - getinfo剪辑（长度不变）
+  - 转换acc
+  - 在文件位置移开未见重命名.m4r
+  - 拖进tones
+  - 同步手机
+
+```
+  npm install apidoc -g
+  apidoc -i myapp/ -o apidoc/ -t mytemplate/
+```
+
+#### iTerm2
+
+[maximum-awesome](https://github.com/square/maximum-awesome)Config files for vim and tmux.
+
+iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配置完毕开箱即用的 tmux
+
+- iTerm2 的标签的颜色会变化，以指示该 tPab 当前的状态。当该标签有新输出的时候，标签会变成洋红色；新的输出长时间没有查看，标签会变成红色。可在设置中关掉该功能。
+- 在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等
+
+### 快捷键
 ## 键位
 
-- Command ⌘
-- Shift ⇧
-- Option ⌥
-- Control ⌃
-- Caps Lock ⇪
-- Fn
+* Command ⌘
+* Shift ⇧
+* Option ⌥
+* Control ⌃
+* Caps Lock ⇪
+* Fn
 
 ## 快捷键
 
@@ -109,16 +225,6 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.bash_pro
 curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 [更换主题](https://github.com/tomislav/osx-terminal.app-colors-solarized)中的Solarized Dark.terminal，偏好导入并设置为默认，字体设为Courier New，20
 ```
-
-### Spoitlight
-
-- 查词典 Command+L
-- 在浏览器查询 Command+B
-
-### Cli
-
-* [guarinogabriel/Mac-CLI](https://github.com/guarinogabriel/Mac-CLI)  OS X command line tools for developers – The ultimate tool to manage your Mac. It provides a huge set of command line commands that automatize the usage of your OS X system.
-* [0nn0/terminal-mac-cheatsheet](https://github.com/0nn0/terminal-mac-cheatsheet)List of my most used commands and shortcuts in the terminal for Mac
 
 ### finder
 
@@ -228,127 +334,6 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 - Command+M: 最小化窗口
 - Command+W: 关闭窗口
 - Command+Q: 退出程序
-
-## 共享目录
-smaba
-```
-windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
-在Mac中， 先打开Finder, command +K  打开共享目录 输入： smb://192.168.0.4/share
-```
-
-## 软件
-
-可以通过plist文件安装软件
-
-### 安装
-
-- app store：自动安装
-- 互联网下载：下载dmg，会打开安装包，需将app图标拖到application中（文件位置/Users/henry/Library/Application Support）
-- 还有文件包直接拖进application：sketch atom
-- brew cask install firefox
-
-### 卸载软件
-
-- launchpad 长按
-- finder 找到移动到垃圾桶
-- 通过appcleaner彻底清除
-## 包管理工具
-###  MacPORTS
-[MacPORTS](https://guide.macports.org/)an open-source community initiative to design an easy-to-use system for compiling, installing, and upgrading either command-line, X11 or Aqua based open-source software on the Mac operating system.
-Mac算是BSD的一个变种吧。所以，BSD的包管理软件port被移植到Mac上就显的理所当然了。 macports的工作方式是下载source code然后在本地编译。macport的理念是尽量减少对系统现有库的依赖。 所以，第一次用macport的时候，需要很长时间让macport重新build整个基本库。代价是较长的编译时间，较多的依赖关系下载。好处是不怎么依赖系统，也就是说，更新Mac OS不会破坏你现有的 package。 另外，macports安装所有的package到/opt/local下面。这样不会和系统现有的/usr/local有什么冲突。
-通过rsync维持数据索引一致
-```
-sudo port -v selfupdate // 更新 MacPorts 索引
-port search NAME
-sudo port install NAME
-sudo port uninstall NAME
-port outdated
-sudo port upgrade outdated
-```
-#### 问题
-Failed to initialize MacPorts, OS platform mismatch 重新安装
-
-### 软件列表
-
-- UI:sketch sketch box
-- CheatSheet 长按⌘键可以显示当前程序快捷键
-- markdown: Mou for Mac,Ulysses for Mac,MWeb Lite,[MacDown](https://github.com/MacDownApp/macdown)Open source Markdown editor for macOS.
-- shell：oh my zsh
-- CheatSheet
-- MySql：Sequel Pro
-- [flux](https://justgetflux.com/)
-- [moom](https://manytricks.com/moom/)
-- OmniFocus
-- Latex
-- Xcode
-- [PHPstrom](https://www.jetbrains.com/phpstorm/download/download-thanks.html?pl)
-- atom:通过brew安装
-- dash:语言文档
-- Quiver：文档管理器
-- MindNode 2
-- Cloud Outline
-- 播放器：MPlayerX
-- UML:staruml
-- 清理垃圾：CleanMyMac（需购买解说功能）
-- 开发环境 MAMP:基础版不支持自定义
-- [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro)
-- mysql 使用brew安装
-- git:sourcetree tig
-- RSS：Reeder 3（收费）leaf
-- 修图Snapseed
-- Omnifocus 在践行 GTD
-- 虚拟机：parallels
-- Keyboard Maestro:流程制作工具
-- Alternote(evernote简单客户端)
-- 思维导图：MindNode 2（收费）
-- weibo:WeiboX
-- BTT(BetterTouchTool) 触控板手势增强
-- OmniFocus：GTD思路的应用
-- Fantastical：日程管理应用
-- Axure：原型工具
-- CmapTools：概念图
-- Quiver：笔记软件
-- htop:运行于 Linux 系统监控与进程管理软件，用于取代 Unix 下传统的 top。与 top 只提供最消耗资源的进程列表不同，htop 提供所有进程的列表，并且使用彩色标识出处理器、swap 和内存状态
-- [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
-- [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
-- ibooks：阅读支持pdf与epub，可以通过icloud同步
-- iTunes Movie Trailers
-- manico
-- SwitchHosts
-- [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
-- f.lux 屏幕颜色控制
-- iCHM
-- [typcn/bilibili-mac-client](https://github.com/typcn/bilibili-mac-client)An unofficial bilibili client for mac
-- 文档：[apidoc](http://apidocjs.com/)
-- Reeder 3 RSS订阅（暂时feedly代替）
-- mounty:win的移动硬盘
-- [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
-- [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
-- Fantastical 2:日历工具 收费
-- 苹果铃声制作
-
-  - 音乐文件用itunes打开
-  - getinfo剪辑（长度不变）
-  - 转换acc
-  - 在文件位置移开未见重命名.m4r
-  - 拖进tones
-  - 同步手机
-
-```
-  npm install apidoc -g
-  apidoc -i myapp/ -o apidoc/ -t mytemplate/
-```
-
-#### iTerm2
-
-[maximum-awesome](https://github.com/square/maximum-awesome)Config files for vim and tmux.
-
-iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配置完毕开箱即用的 tmux
-
-- iTerm2 的标签的颜色会变化，以指示该 tPab 当前的状态。当该标签有新输出的时候，标签会变成洋红色；新的输出长时间没有查看，标签会变成红色。可在设置中关掉该功能。
-- 在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等
-
-### 快捷键
 
 - 按住⌘键:
 
@@ -536,20 +521,6 @@ sudo launchctl load -w /System/Library/LaunchDaemons/org.apache.httpd.plist
 ```
 
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-
-#### 指令
-
-- port help selfupdate
-- port list
-- port search --name --glob 'php*'
-- port search --name --line --glob 'php*'
-- port search --name --line --regex '^php\d*$'
-- port info yubico-pam
-- port deps apache2 +openldap
-- sudo port uninstall portname
-- port contents xorg-renderproto
-- port installed
-- sudo port upgrade outdated
 
 ### 网络连接
 

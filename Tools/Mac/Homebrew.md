@@ -41,29 +41,29 @@ brew doctor
 brew install -vd FORMULA
 
 brew tap homebrew/services
-brew update && brew upgrade
-
-brew install name
-# 安装源码 brew info svn
-# 显示软件的各种信息（包括版本、源码地址、依赖等等）
-# brew install tig
-brew uninstall name
-# 卸载软件
-brew search name
-# 搜索brew 支持的软件（支持模糊搜索）
-brew list [FORMULA...]
-# 列出本机通过brew安装的所有软件
-brew update
-# brew自身更新 brew upgrade name
-#更新安装过的软件(如果不加软件名，就更新所有可以更新的软件)
-brew cleanup
-#清除下载的缓存
 
 brew (info|home|options) [FORMULA...]
-brew update
-brew upgrade [FORMULA...]
-brew uninstall FORMULA...
-brew home maven
+brew install name # 安装源码 brew info svn 显示软件的各种信息（包括版本、源码地址、依赖等等）
+brew uninstall name # 卸载软件
+brew search name # 搜索brew 支持的软件（支持模糊搜索
+brew home maven # 用浏览器打开
+brew list [FORMULA...] # 列出本机通过brew安装的所有软件
+brew outdated # 查看哪些程序需要更新  brew update && brew upgrade
+brew update # brew自身更新 
+brew upgrade name  #更新安装过的软件(如果不加软件名，就更新所有可以更新的软件)
+brew cleanup #清除下载的缓存
+brew info * # 显示软件内容信息
+brew deps * # 显示包依赖
+brew server * # 启动web服务器，可以通过浏览器访问http://localhost:4567/ 来同网页来管理包
+
+brew install tig
+
+# 卸载
+cd `brew –prefix`
+rm -rf Cellar
+brew prune
+rm -rf Library .git .gitignore bin/brew README.md share/man/man1/brew
+rm -rf ~/Library/Caches/Homebrew
 
 brew install caskroom/cask/brew-cask
 brew tap caskroom/cask
