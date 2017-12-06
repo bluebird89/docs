@@ -737,6 +737,7 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 3. 《Head First 设计模式》 
 4. 《JavaScript 设计模式》 
 5. 《设计模式 可复用面向对象软件的基础》
+6. Web开发权威指南
 
 6. 《鸟哥的Linux私房菜:基础学习篇(第3版)》 
 2. 《现代操作系统(原书第3版) 》 
