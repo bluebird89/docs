@@ -151,6 +151,9 @@ show global status like 'qcache%';
 show variables like 'query_cache%';
 
 show global status like 'created_tmp%';
+
+show variables like "general_log%";  # 记录操作,pdo执行过程
+set global general_log = on;
 ```
 
 ### 用户管理
