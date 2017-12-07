@@ -5,10 +5,9 @@
 * 模块安装：npm insall
 * 运行开发者模式：npm run dev(代码实时更新)
 * 打包文件：npm run build，包含index文件与dist资源包
-
-## 重构
-
-* [tonyfree/youzan](https://github.com/tonyfree/youzan)
+* 工程化
+* 模块化
+* 组件化
 
 ### App 流程
 
@@ -27,12 +26,6 @@
 - vue-resource
 - vue-router
 - better-scroll
-
-- 工程化
-
-- 模块化
-
-- 组件化
 
 ## 使用
 
@@ -91,6 +84,7 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 * [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
 * [iview/iview-admin](https://github.com/iview/iview-admin):Vue 2.0 admin management system template based on iView https://iview.github.io/iview-admin
 * [nuxt/nuxt.js](https://github.com/nuxt/nuxt.js):Versatile Vue.js Framework https://nuxtjs.org
+* [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
 
 ## 参考
 
@@ -110,6 +104,7 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 * [liangxiaojuan/eleme](https://github.com/liangxiaojuan/eleme):vue2 +vue-router2 + es6 +webpack 高仿饿了么app商家详情，demo：http://yangyi1024.com/elem 还有我最新的实战项目,点它=》 http://yangyi1024.com/meizi
 * [ustbhuangyi/vue-sell](https://github.com/ustbhuangyi/vue-sell):Vue.js高仿饿了么外卖App课程源码 http://coding.imooc.com/class/74.html
 * [vuejs/vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
+* * [tonyfree/youzan](https://github.com/tonyfree/youzan):vue重构有赞商城
 * [webpack 前后端分离开发接口调试解决方案，proxyTable解决方案](https://www.cnblogs.com/coolslider/p/7076191.html)
 * [vue-cli + webpack 多页面实例配置优化方法](https://segmentfault.com/a/1190000006741478)
 * [bluefox1688/vue-cli-multi-page](https://github.com/bluefox1688/vue-cli-multi-page):vue2-cli-vux2-multe-page，使用了webpack2+vuejs2+vuxUI2的多页面脚手架
