@@ -59,6 +59,11 @@ ng serve --host 0.0.0.0 --port 4201 --live-reload-port 49153
 
 ### 模块生成器
 
+* component:组件，生成单独文件以及注册
+* directive:属性型指令用于改变一个 DOM 元素的外观或行为。
+* service:服务，可以封装代码，比如我们可以对数据访问代码单独隔离，封装到一个独立的服务中
+* pipe:管道，可以用于数据的连续处理操作，比如可以把日期在界面端进行格式化
+
 ```shell
 ng generate component my-new-component # 组件Component
 ng generate directive my-new-directive # 指令Directive 
