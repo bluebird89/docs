@@ -525,3 +525,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 ### 网络连接
 
 在局域网mac通过内网地址链接ubuntu，远程ssh登陆mac需要mac开启允许远程登陆
+
+```shell
+lsof -i tcp:8081  # 端口查看
+```

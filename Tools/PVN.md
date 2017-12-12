@@ -15,7 +15,6 @@
 * [StreisandEffect/streisand](https://github.com/StreisandEffect/streisand):Streisand sets up a new server running L2TP/IPsec, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, a Tor bridge, and WireGuard. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.
 * [Nyr/openvpn-install](https://github.com/Nyr/openvpn-install):OpenVPN road warrior installer for Debian, Ubuntu and CentOS
 
-
 ## shadowsocks
 
 [wiki](https://github.com/shadowsocks/shadowsocks/wiki)
@@ -32,9 +31,12 @@ sudo less /var/log/shadowsocks.log // 日志
 ssserver -c /etc/shadowsocks.json
 ssserver -c /etc/shadowsocks.json -d start
 ssserver -c /etc/shadowsocks.json -d stop
+
+brew cask install shadowsocksx
 ```
 
 ### 配置
+
 ```json
 {
     "server":"my_server_ip",  //服务器监听ip the address your server listens
@@ -48,11 +50,96 @@ ssserver -c /etc/shadowsocks.json -d stop
 }
 ```
 
-## 使用
+## OpenVPN
+
+### Ubunutu
+
 
 ```shell
-brew cask install shadowsocksx
+sudo apt install openvpn easy-rsa # 服务端
+mkdir /etc/openvpn/easy-rsa/
+cp -r /usr/share/easy-rsa/* /etc/openvpn/easy-rsa/
+
+export KEY_COUNTRY="US" # 编辑/etc/openvpn/easy-rsa/vars调整到适合您的环境
+export KEY_PROVINCE="NC"
+export KEY_CITY="Winston-Salem"
+export KEY_ORG="Example Company"
+export KEY_EMAIL="steve@example.com"
+export KEY_CN=MyVPN
+export KEY_NAME=MyVPN
+export KEY_OU=MyVPN
+
+cd /etc/openvpn/easy-rsa/
+./clean-all
+./build-ca # generate the master Certificate Authority (CA) certificate and key
+
+./build-key-server myservername # 为服务器生成一个证书和私钥
+cd keys/
+cp myservername.crt myservername.key ca.crt dh2048.pem /etc/openvpn/ # copy them to /etc/openvpn
+
+cd /etc/openvpn/easy-rsa/ # 创建客户端证书
+./build-key client1
+
+/etc/openvpn/ca.crt
+/etc/openvpn/easy-rsa/keys/client1.crt
+/etc/openvpn/easy-rsa/keys/client1.key  # 客户端文件
+
+sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/
+sudo gzip -d /etc/openvpn/server.conf.gz
+
+
+ca ca.crt   # Edit /etc/openvpn/server.conf to make sure the following lines are pointing to the certificates and keys you created in the section above.
+cert myservername.crt
+key myservername.key
+dh dh2048.pem
+net.ipv4.ip_forward=1
+
+sudo sysctl -p /etc/sysctl.conf
+
+sudo systemctl start openvpn@server
+sudo systemctl status openvpn@server
+
+ifconfig tun0
+```
+
+#### 服务端配置
+
+OpenVPN提供了两种认证方法：
+
+* 基于用户名/密码的认证与SSL证书认证。用户名/密码的认证方法无法（或较难）限制一个账号同时连接多个客户端，
+* 采用证书，则可保证同一证书同一时间只能有一个客户端连接。
+
+提供客户端配置文件 client.ovpn
+
+```
+apt-get install openvpn # 客户端
+
+/etc/openvpn/ # 客户端默认配置文件放置服务端配置文件
+sudo cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /etc/openvpn/
+
+openvpn /etc/openvpn/client.ovpn # 连接
+openvpn /etc/openvpn/client.ovpn > /dev/null & # 如果希望开机即自动连接OpenVPN，或者是VPN常年在线，可以加入到/etc/rc.local
+
+client
+dev tap
+proto tcp-client
+remote vpnserver.example.com 1194
+resolv-retry infinite
+nobind
+mute-replay-warnings
+redirect-gateway
+
+ca /etc/openvpn/ca.crt
+cert /etc/openvpn/client.crt
+key /etc/openvpn/client.key
+
+comp-lzo
+verb 4
+
+sudo systemctl start openvpn@client
+sudo systemctl status  openvpn@client
 ```
 
 ## 参考
 * [Shadowsocks (简体中文)](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
+* [openvpn](https://help.ubuntu.com/lts/serverguide/openvpn.html)

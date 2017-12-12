@@ -7,6 +7,7 @@
 
 ## 方法
 
+* 算法设计，算法分析，算法实践
 * 教材：算法导论 数论
 * 当习题做，自己实现最重要；
 
@@ -39,4 +40,5 @@
 * [python](https://github.com/ssjssh/algorithm)
 * [MIT](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-spring-2008/)
 * [公开课](http://open.163.com/special/opencourse/algorithms.html)
+* https://visualgo.net/en:可视化
 * [我接触过的前端数据结构与算法](https://juejin.im/post/5958bac35188250d892f5c91)
