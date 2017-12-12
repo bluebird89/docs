@@ -2237,7 +2237,9 @@ WebAssembly 已得到所有主流浏览器支持
 
 ## style guide
 
-[airbnb/javascript](https://github.com/airbnb/javascript)
+* [airbnb/javascript](https://github.com/airbnb/javascript)
+* JSHint
+* JSLint
 
 ## 资源
 

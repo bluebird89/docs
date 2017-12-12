@@ -40,6 +40,8 @@ brew config
 brew doctor
 brew install -vd FORMULA
 
+brew -v 
+
 brew tap homebrew/services
 
 brew (info|home|options) [FORMULA...]

@@ -16,6 +16,11 @@ echo "deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx" >> /etc/a
 
 sudo apt-get update
 sudo apt-get install nginx
+
+apt-get install python-software-properties
+add-apt-repository ppa:nginx/stable
+apt-get update
+apt-get install nginx
 ```
 
 root目录显示文件列表
@@ -37,6 +42,11 @@ There are three levels of password validation policy:
 # LOW    Length >= 8
 # MEDIUM Length >= 8, numeric, mixed case, and special characters
 # STRONG Length >= 8, numeric, mixed case, special characters and dictionary
+ 
+wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
+dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
+apt-get update
+apt-get install percona-server-server-5.7
 ```
 
 ### PHP
@@ -45,7 +55,7 @@ There are three levels of password validation policy:
 sudo apt-get install python-software-properties software-properties-common
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
-sudo apt-get install php7.1-fpm php7.1-mysql php7.1-common php7.1-curl php7.1-cli php7.1-mcrypt php7.1-mbstring php7.1-dom
+sudo apt-get install php7.1 php7.1-fpm php7.1-mysql php7.1-common php7.1-curl php7.1-cli php7.1-mcrypt php7.1-mbstring php7.1-dom
 ```
 
 - 修改配置文件sudo vim /etc/php/7.1/fpm/php.ini：`cgi.fix_pathinfo=0`

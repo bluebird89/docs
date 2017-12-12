@@ -20,6 +20,7 @@
     - httpd.conf
 * htdocs:默认网站根目录
 * log:日志目录
+    - 通过Analog或Webalizer等实用程序访问日志文件
 * modules:加载的第三方插件
 * Apache2 Service Monitor:监控apache2服务
 
