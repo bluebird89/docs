@@ -1,5 +1,7 @@
 # React Native
 
+React 是一套可以用简洁的语法高效绘制 DOM 的框架
+
 通过 React 来构建 iOS 原生应用和 Android 原生应用。Virtual DOM 保持不变，你仍然可以使用 JSX 来创建它，但实际的 UI 是用原生的组件构建，
 
 RN是在Facebook所提出的核心概念Learn once, write anywhere所诞生的产物，着力于提高多平台开发的开发效率。我们可以同时为android和ios两个平台开发App，只需要根据两个平台不一样的地方去做一些调整即可。RN主要负责UI部分，而原生主要负责交互和数据处理。RN属于hybrid开发，并且与原生无缝连接，相比Web App和Native开发，RN取长补短，集合了两者的优势。RN开发的APP可以跳过App Store审核，远程更新代码，提高迭代频率和效率，既有Native的体验，又保留React的开发效率。 
@@ -10,6 +12,13 @@ RN的原理是将React代码转化为原生API，iOS一套，Android一套。RN�
 * 同构渲染：服务器端和客户端共用一套代码，一份模板，两端使用。
 * 完全组件化：自动分析加载页面的静态资源依赖。
 * 生态圈：畅享所有 React 组件。
+* 比webview 更好的体验，更好的性能，更好的手机交互
+* 未来发展的一种趋势之一，提前了解学习，装13
+* 解决项目中一些痛点，比如更新，ui方面的需求改动，丰富的运营手段。
+* 由于 AppStore 审核周期的限制，如何动态的更改 app 成为了永恒的话题。无论采用何种方式，我们的流程总是可以归结为以下三部曲：“从 Server 获取配置 --> 解析 --> 执行native代码”。
+    - 通过 HTTP 请求获取 JSON 格式的配置文件。
+    - 配置文件中标记了每一个元素的属性，比如位置，颜色，图片 URL 等。
+    - 解析完 JSON 后，我们调用 Objective-C 的代码，完成 UI 控件的渲染。
 
 React是由Facebook开发出来的用于开发用户交互界面的JS库。其源码由Facebook和社区优秀的程序员维护。React带来了很多新的东西，例如组件化、JSX、虚拟DOM等。其提供的虚拟DOM使得我们渲染组件呈现非常之快，让我们从频繁操作DOM的繁重工作之中解脱。它做的工作更多偏重于MVC中的V层，结合其它如Flux等一起，你可以非常容易构建强大的应用。
 
@@ -20,6 +29,8 @@ odeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多�
 总结来说，React Native使用NodeJS来做系统处理，使用React来渲染。
 
 ## [安装](https://facebook.github.io/react-native/docs/getting-started.html)
+
+### windows
 
 - Chocolatey（ 基于Nuget的Windows包管理工具）安装与使用
 
@@ -62,7 +73,74 @@ react-native init AwesomeProject
 //  运行应用
 cd AwesomeProject
 react-native run-android
+react-native run-ios
+
+sudo xcode-select -s /Applications/Xcode8.1.app/Contents/Developer/    # （红色部分是你实际的xcode app的名称）
+
+
+lsof -i tcp:8081
 ```
+
+### Mac
+
+```shell
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew install node
+npm config set registry https://registry.npm.taobao.org --global
+npm config set disturl https://npm.taobao.org/dist --global
+
+npm install -g yarn react-native-cli
+yarn config set registry https://registry.npm.taobao.org --global
+yarn config set disturl https://npm.taobao.org/dist --global
+sudo chown -R `whoami` /usr/local
+
+brew install watchman # 监视文件系统变更的工具。安装此工具可以提高开发时的性能（packager可以快速捕捉文件的变化从而实现实时刷新）
+brew install flow # 静态的JS类型检查工具
+xcode 
+
+apm install nuclide # 由Facebook提供的基于atom的集成开发环境，可用于编写、运行和 调试React Native应用
+
+react-native init AwesomeProject  ＃ 新建一个项目
+cd AwesomeProject
+react-native run-android
+react-native run-ios
+```
+
+
+## 开发基础
+
+### JSX
+
+写 HTML 标签或 React 标签，它们终将被转换成原生的 JavaScript 并创建 DOM。
+
+### 布局
+
+#### Flexbox
+
+Flexbox 是css3 里面引入的布局模型－弹性盒子模型，旨在通过弹性的方式来对齐河分布容器中的内容空间，使其能够适应不同屏幕的宽度。react nativie中 的flexbox 是这个规范的一个子集
+       
+Flexbox解决了什么问题？
+
+* 浮动布局
+* 不同宽度屏幕的适
+* 宽度自动分配
+* 水平垂直居中 
+
+容器属性
+
+* flexDirection ： row,row-reverse,colum,colum-reverse   #类型于linerlayout 里的 orientation 属性    
+* flexWrap       :   wap,nowap,wap-reverse                      #textview 是否换行    
+* alignItems    ： flex-start,flex-end,center,stretch    # item 的 排列对齐方式 ，上对齐，下对齐 上下间距对齐， 以及严苛对其                   
+* justifyContent：flex-start,flex-end,center,space-between,space-roud  # 类似于linerlayout里 layout_gravity 属性
+
+元素属性
+
+* flex          ：number                     #类型于weight 属性
+* alignSelf     ：atuo,flex-start,flex-end,center,stretch  #类似于 gravity 属性
+* flex－flow  flexDirection 和 flexWrap 属性 的简写形式，默认值为 row nowrap
+
+![lifecycle](/path/to/RN-lifecycle.jpg "lifecycle")
 
 
 ## ReactJS
