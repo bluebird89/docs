@@ -30,12 +30,6 @@ php -a # 进入命令行模式
 - React Native 是一个不错的选择
 - 深度学习/人工智能:自动驾驶、大数据分析、网络游戏、图像识别、语言处理等。当然现在普通的工程师可能还无法参与到人工智能产品中，但至少应该理解深度学习/人工智能的基本概念和原理。
 
-##  PHPDoc
-
-```sh
-brew isntall php71
-```
-
 ## OOP
 
 继承：类分层、接口分层 实现：类实现接口 依赖：类作为另一个类方法的参数 关联：类属性 聚合：可以有 组合：必须有
@@ -91,14 +85,129 @@ print "Hello, Red Hat Developers World from PHP " . PHP_VERSION . "\n";
     - 数组
     - 对象
 * 特殊数据类型
-    - NULL
+    - NULL:unset() 与 NULL：删除引用，触发相应变量容器refcount减一，但在函数中的行为会依赖于想要销毁的变量的类型而有所不同，比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值；unset 变量与给变量赋值NULL不同，变量赋值NULL直接对相应变量容器refcount = 0
     - 资源
 
 ```php
-code
+$str = preg_replace_callback(
+    '/([a-z]*)([A-Z]*)/', 
+    function($matchs){
+        return strtoupper($matchs[1]).strtolower($matchs[2]);
+    }, 
+    $str
+);
+
+//示例一：函数内销毁全局变量$foo是无效的
+function destroy_foo() {
+    global $foo;
+    unset($foo);
+    echo $foo;//Notice: Undefined variable: foo
+}
+
+$foo = 'bar';
+destroy_foo();
+echo $foo;//bar
+
+//示例二：要在函数中 unset 一个全局变量，应使用 $GLOBALS 数组来实现
+function foo() 
+{
+    unset($GLOBALS['bar']);
+}
+
+$bar = "something";
+foo();
+echo $bar;//Notice: Undefined variable: bar
 ```
 
 #### 运算符
+
+##### Lambda表达式(匿名函数)与闭包
+
+Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态。闭包在匿名函数的基础上增加了与外部环境的变量交互，通过 use 子句中指定要导入的外部环境变量
+
+```php
+function getClosure($n)
+{
+      $a = 100;
+      return function($m) use ($n, &$a) { 
+            $a += $n + $m;
+            echo $a."\n";
+        };
+}
+$fn = getClosure(1);
+$fn(1);//102
+$fn(2);//105
+$fn(3);//109
+echo $a;//Notice: Undefined variable
+
+class Dog
+{
+    private $_name;
+    protected $_color;
+ 
+    public function __construct($name, $color)
+    {
+         $this->_name = $name;
+         $this->_color = $color;
+    }
+ 
+    public function greet($greeting)
+    {
+         return function() use ($greeting) {
+            //类中闭包可通过 $this 变量导入对象
+            echo "$greeting, I am a {$this->_color} dog named {$this->_name}.\n";
+         };
+    }
+    
+    public function swim()
+     {
+         return static function() { 
+            //类中静态闭包不可通过 $this 变量导入对象，由于无需将对象导入闭包中，
+            //因此可以节省大量内存，尤其是在拥有许多不需要此功能的闭包时。
+            echo "swimming....\n"; 
+         };
+     }
+     
+     private function privateMethod()
+     {
+        echo "You have accessed to {$this->_name}'s privateMethod().\n";
+     }
+     
+     public function __invoke()
+    {
+         //此方法允许对象本身被调用为闭包
+         echo "I am a dog!\n";
+    }
+}
+ 
+$dog = new Dog("Rover","red");
+$dog->greet("Hello")();
+$dog->swim()();
+$dog();
+//通过ReflectionClass、ReflectionMethod来动态创建闭包，并实现直接调用非公开方法。
+$class = new ReflectionClass('Dog');
+$closure = $class->getMethod('privateMethod')->getClosure($dog);
+$closure(); 
+
+$username = $_GET['user'] ?? 'nobody';
+
+$a < $b ($a <=> $b) === -1
+$a <= $b    ($a <=> $b) === -1 || ($a <=> $b) === 0
+$a == $b    ($a <=> $b) === 0
+$a != $b    ($a <=> $b) !== 0
+$a >= $b    ($a <=> $b) === 1 || ($a <=> $b) === 0
+$a > $b ($a <=> $b) === 1
+
+$bytes = random_bytes(5);
+var_dump(bin2hex($bytes));//string(10) "385e33f741"
+var_dump(random_int(100, 999));//int(248)
+
+
+```
+
+
+addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
+2. urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
 
 ### 文件操作
 
@@ -112,7 +221,97 @@ if (flock($fp, LOCK_EX)) {
 }
 fclose($fp);
 ```
-### trait
+
+
+### 面向对象
+
+访问控制(可见性)：
+
+* public表明类成员在任何地方可见
+* protected表明类成员在其自身、子类和父类内可见
+* private表明类成员只对自己可见。
+* 对于private和protected有个特例，同一个类的对象即使不是同一个实例也可以互相访问对方的私有与受保护成员
+
+范围解析符(::)：通常以self::、 parent::、 static:: 和 <classname>::形式来访问静态成员、类常量，另外，static::、self:: 和 parent:: 还可用来调用类中的非静态方法。 
+
+```php
+class Test
+{
+    private $foo;
+
+    public function __construct($foo)
+    {
+        $this->foo = $foo;
+    }
+
+    private function bar()
+    {
+        echo 'Accessed the private method.';
+    }
+
+    public function baz(Test $other)
+    {
+        // We can change the private property:
+        $other->foo = 'hello';
+        var_dump($other->foo);
+
+        // We can also call the private method:
+        $other->bar();
+    }
+}
+
+$test = new Test('test');
+$test->baz(new Test('other'));
+
+class A
+{
+    public static $proPublic = "public of A";
+    
+    public function myMethod()
+    {
+        echo static::$proPublic."\n";
+    }
+    
+    public function test()
+    {
+        echo "Class A:\n";
+        echo self::$proPublic."\n";
+        echo __CLASS__."\n";
+        //echo parent::$proPublic."\n";
+        self::myMethod();
+        static::myMethod();
+    }
+}
+
+class B extends A
+{
+   public static $proPublic = "public of B";
+   
+   public function test()
+    {
+        echo "\n\nClass B:\n";
+        echo self::$proPublic."\n";
+        echo __CLASS__."\n";
+        echo parent::$proPublic."\n";
+        self::myMethod();
+        static::myMethod();
+    }
+}
+
+class C extends B
+{
+    public static $proPublic = "public of C";
+}
+
+$t1 = new A();
+$t1->test();
+$t2 = new B();
+$t2->test();
+$t3 = new C();
+$t3->test();
+```
+
+#### trait
 
 为了避免代码重复而生
 
@@ -134,11 +333,15 @@ $comment->owner();
 
 优先级:从基类继承的成员会被 trait 插入的成员所覆盖。优先顺序是来自当前类的成员覆盖了 trait 的方法，而 trait 则覆盖了被继承的方法。
 
-接口与抽象类：
+#### 接口与抽象类
 
-1.接口中的每个方法，继承类里面都要去实现 2.接口中的方法后面不要跟大口号{},因为接口只是定义需要有这个函数，并不是自己去实现 3.抽象类中 abstract 的方法，继承类里面都要去实现，也可以理解成接口中的每个方法都是 abstract 方法 4.抽象方法中没有abstract 的方法，继承类不必非要写那个方法
+* 接口中的每个方法，继承类里面都要去实现 2.接口中的方法后面不要跟大口号{},因为接口只是定义需要有这个函数，并不是自己去实现 3.抽象类中 abstract 的方法，继承类里面都要去实现，也可以理解成接口中的每个方法都是 abstract 方法 4.抽象方法中没有abstract 的方法，继承类不必非要写那个方法
 
 举例,场景：我们在记录日志的时候，有时候可能需要写入文件，有时候可能写入数据库 这时候，我们可以写一个Log接口，定义需要的方法 然后分别写一个FileLog类和一个DatabaseLog类 然后我们写一个UsersController类做一个依赖注入，这样我们需要使用哪种方式写日志，实例化的时候，注入哪种类即可
+
+* 抽象类定义要使用abstract关键字来声明，凡是用abstract关键字定义了抽象方法的类必须声明为抽象类。另外，子类实现抽象方法时访问控制必须和父类中一样（或者更为宽松），同时调用方式必须匹配，即类型和所需参数数量必须一致；
+* 接口是通过interface关键字来定义的，但其中定义所有的方法都是空的，访问控制必须是public。另外，接口可以如类一样定义常量，可以使用extends来继承其他接口；
+* 抽象类可用于对多个同构类的通用部分定义，用extends关键字继承(父子间存在"is a"关系)，属单继承。接口可用于多个异构类的通用部分定义，用implements关键字继承(父子间存在"like a"关系)，可多继承。如果子类不能实现父类或接口的全部抽象方法，则该子类只能被声明成抽象类。
 
 ```php
 // 定义接口
@@ -187,7 +390,9 @@ $controller->register();
 * memeache
 * memeached
 * mongo
-* opcache
+* Opcache:通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能， 存储预编译字节码的好处就是省去了每次加载和解析 PHP 脚本的开销，但是对于I/O开销如读写磁盘文件、读写数据库等并无影响。
+    - 字节码(Byte Code)：一种包含执行程序比机器码更抽象的中间码，由一序列 op代码/数据对组成的二进制文件。 比如Java源码经编译后生成的字节码在运行时通过JVM(JVM针对不同平台有不同版本，Java程序在JVM中运行而称 为解释性语言Interpreted)再做一次转换生成机器码，才能够跨平台运行；C#也类似，EXE文件的执行依赖.NET Framework；HHVM(HipHop Virtual Machine，Facebook开源的PHP虚拟机)采用了JIT(Just In Time Just Compiling，即时编译)技术，在运行时编译字节码为机器码，让他们的PHP性能测试提升了一个数量级。 唯有C/C++编译生成的二进制文件可直接运行。
+    - 机器码(Machine Code)：也被称为原生码(Native Code)，用二进制代码表示的计算机能直接识别和执行的一种机器指令的集合，它是计算机硬件结构赋予的操作功能。
 * pdo-pgsql
 * phalcon
 * redis
@@ -195,7 +400,7 @@ $controller->register();
 * swoole
 * xdebug
 * apc:op缓存
-* Opcache
+* PHP-FPM进程池：FastCGI Process Manager 的master process是常驻内存的，以static、dynamic、ondemand三种方式来管理进程池中的worker process，可以有效控制内存和进程并平滑重载PHP配置，在发生意外情况的时候能够重新启动并恢复被破坏的 opcode。
 
 
 ### Docker配置
@@ -389,12 +594,15 @@ EXPOSE 9000 CMD ["php-fpm"]
 
 延迟绑定：之类重写父类方法，其它调用该方法时用static而非self
 
-### PHPCS
+## 插件
 
-PHP代码规范与质量检查工具
+* PHPDoc
+* PHPCS PHP代码规范与质量检查工具
 
-`composer global require "squizlabs/php_codesniffer=*"`
-
+```sh
+brew install php71
+composer global require "squizlabs/php_codesniffer=*"
+```
 
 TP参考：<https://github.com/ijry/lyadmin>
 

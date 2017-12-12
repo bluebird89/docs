@@ -798,6 +798,7 @@ version
 * [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
 * [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
 * [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
+* [Git权威指南](http://www.worldhello.net/):GotGitHub
 
 ## 工具
 
