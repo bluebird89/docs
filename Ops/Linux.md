@@ -36,14 +36,89 @@ unset temp : 删除变量temp
 
 ## 虚拟机
 
+* 用WinSCP.exe等工具上传系统镜像文件rhel-server-7.0-x86_64-dvd.iso到/usr/local/src目录
+* 使用Putty.exe工具远程连接到RHEL服务器
+* 挂载系统镜像文件
+
+### 分区
+
+win10 && UBUNTU 双系统
+
+* 磁盘压缩出30G分区，空闲不做盘符与格式化
+* 制作UBUNTU启动U盘
+  - 通过UltraISO打开UBUNUT镜像文件
+  - 启动：写入硬盘映像，写入U盘文件
+* 启动通过U盘
+  - 安装类型：其他选项
+  - 对之前分配的未使用磁盘空间分区： 
+      + /：存储系统文件，建议10GB ~ 15GB； 主分区 挂载点 / 
+      + swap：交换分区，即Linux系统的虚拟内存，建议是物理内存的2倍； 逻辑分区 用于交换空间 
+      + /home：home目录，存放音乐、图片及下载等文件的空间，建议最后分配所有剩下的空间； 逻辑分区 挂载点 /home 
+      + /boot：包含系统内核和系统启动所需的文件，实现双系统的关键所在，建议500M。 逻辑分区 挂载点 /boot 安装启动引导器的设备： 选择/boot对应的盘符
+      + 生产服务器建议单独再划分一个/data分区存放数据
+  - 安装系统
+* 通过EASYCD配置启动
+  - 添加新条目 linux/BSD选项
+  - 选中分区boot分区  
+* 重启运行
+
+### 设置IP地址、网关DNS
+
+```sh
+cd  /etc/sysconfig/network-scripts/ 
+vi  ifcfg-eno16777736  #编辑配置文件，添加修改以下内容
+
+TYPE="Ethernet"
+BOOTPROTO="static"  #启用静态IP地址
+DEFROUTE="yes"
+IPV4_FAILURE_FATAL="no"
+IPV6INIT="yes"
+IPV6_AUTOCONF="yes"
+IPV6_DEFROUTE="yes"
+IPV6_FAILURE_FATAL="no"
+NAME="eno16777736"
+UUID="8071cc7b-d407-4dea-a41e-16f7d2e75ee9"
+ONBOOT="yes"  #开启自动启用网络连接
+IPADDR0="192.168.21.128"  #设置IP地址
+PREFIX0="24"  #设置子网掩码
+GATEWAY0="192.168.21.2"  #设置网关
+DNS1="8.8.8.8"  #设置主DNS
+DNS2="8.8.4.4"  #设置备DNS
+HWADDR="00:0C:29:EB:F2:B3"
+IPV6_PEERDNS="yes"
+IPV6_PEERROUTES="yes"
+
+service network restart   #重启网络
+ping www.baidu.com  #测试网络是否正常
+
+ip addr # 查看IP地址
+```
+
+### 镜像挂载
+
+```sh
+mkdir /media/cdrom  #新建镜像文件挂载目录
+cd /usr/local/src  #进入系统镜像文件存放目录
+ls  #列出目录文件，可以看到刚刚上传的系统镜像文件
+mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom #挂载系统镜像
+cd  /media/cdrom  #进入挂载目录，使用ls命令可以看到已经有文件存在了
+
+umount  /media/cdrom  #卸载系统镜像
+
+vi /etc/fstab   #添加以下代码。实现开机自动挂载
+/usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom   iso9660    defaults,ro,loop  0 0
+```
+
+
+## 硬件
+
+```sh
+df -T 
+```
 
 ## 软件
 
 ### 在线安装
-
-`sudo apt-get install cowsay` `source ~/.zshrc`
-
-sudo add-apt-repository --remove ppa:finalterm/daily
 
 - 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
 - 根据这些信息在相关的服务器上下载软件安装
@@ -51,6 +126,83 @@ sudo add-apt-repository --remove ppa:finalterm/daily
 - 如果本地的数据库不够新，可能就会发生搜索不到的情况，这时候需要我们更新本地的数据库，使用命令sudo apt-get update可执行更新；
 - 软件源镜像服务器可能会有多个，有时候某些特定的软件需要我们添加特定的源；
 
+```sh
+sudo apt-get install cowsay` `source ~/.zshrc
+
+sudo add-apt-repository --remove ppa:finalterm/daily
+
+# 配置本地yum源
+cd /etc/yum.repos.d/   #进入yum配置目录
+touch  rhel-media.repo   #建立yum配置文件
+vi  rhel-media.repo   #编辑配置文件，添加以下内容
+
+[rhel-media]
+name=Red Hat Enterprise Linux 7.0   #自定义名称
+baseurl=file:///media/cdrom #本地光盘挂载路径
+enabled=1   #启用yum源，0为不启用，1为启用
+gpgcheck=1  #检查GPG-KEY，0为不检查，1为检查
+gpgkey=file:///media/cdrom/RPM-GPG-KEY-redhat-release   #GPG-KEY路径
+
+yum clean all   #清除yum缓存
+yum makecache  #缓存本地yum源中的软件包信息
+
+yum install httpd   #安装apache
+rpm -ql httpd  #查询所有安装httpd的目录和文件
+
+systemctl start httpd.service  #启动apache
+systemctl stop httpd.service  #停止apache
+systemctl restart httpd.service  #重启apache
+systemctl enable httpd.service  #设置开机启动
+```
+
+### 防火墙
+
+```sh
+ystemctl stop firewalld.service #停止firewall
+systemctl disable firewalld.service #禁止firewall开机启动
+yum install iptables-services  #安装iptables
+
+vi /etc/sysconfig/iptables  #编辑防火墙配置文件
+# Firewall configuration written by system-config-firewall
+# Manual customization of this file is not recommended.
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+
+systemctl  start  iptables.service  #启动防火墙
+systemctl  stop  iptables.service  #停止防火墙
+systemctl  restart  iptables.service  #重启防火墙
+systemctl  status  iptables.service  #查看防火墙状态
+systemctl  enable  iptables.service  #设置开机启动
+
+vi /etc/selinux/config
+
+#SELINUX=enforcing #注释掉
+#SELINUXTYPE=targeted #注释掉
+SELINUX=disabled #增加
+
+:wq! #保存退出
+
+setenforce 0 #使配置立即生效
+```
+
+### web设置
+
+```sh
+hostname  www  #设置主机名为www
+
+vi /etc/hostname #编辑配置文件
+www   localhost.localdomain  #修改localhost.localdomain为www
+```
 #### apt-get
 
 程序安装有home路径，bin路径
@@ -106,7 +258,7 @@ ubuntu.16替换apt-get为apt
 ## Usage:
 
 ```
-关闭终端:ctrl+d
+ctrl+d # 关闭终端
 
 where||type composer
 ```
@@ -317,8 +469,7 @@ chmod 600 ~/.ssh/authorized_keys
   ssh -p 2222 user@host   # 登陆服务器
   ```
 
-- 文件文件 cat file >> another file
-
+- 复制文件 cat file >> another file
 - 服务管理：
 
   ```sh
