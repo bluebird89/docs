@@ -245,6 +245,7 @@ filesort有两种排序算法，一种是一次扫描算法（较快），二种
 ### 操作
 
 * 拆分大的 DELETE 或 INSERT 语句
+
 ```php
 while (1) { 
     //每次只做1000条 
@@ -313,7 +314,12 @@ while (1) {
     - mysql workbeach会显示执行计划
 * show:查看MySQL状态及变量
 * PROCEDURE ANALYSE() 帮你去分析你的字段和其实际的数据，并会给你一些有用的建议。只有表中有实际的数据，这些建议才会变得有用，因为要做一些大的决定是需要有数据作为基础的。
-* 慢查询:知道哪些SQL语句执行效率低下,mysql支持把慢查询语句记录到日志文件中
+* 慢查询:知道哪些SQL语句执行效率低下,mysql支持把慢查询语句记录到日志文件中.用来记录在MySQL中响应时间超过阀值的语句，具体指运行时间超过long_query_time值的SQL，则会被记录到慢查询日志中。long_query_time的默认值为10，意思是运行10s以上的语句。
+    - 官方自带工具： mysqldumpslow 
+    - 开源工具：mysqlsla  
+    - percona-toolkit：工具包中的pt-query-digest工具可以分析汇总慢查询信息，具体逻辑可以看SlowLogParser这个函数。
+    - 接删除慢日志文件，执行flush logs（必须的）。
+    - 备份：先用mv重命名文件（不要跨分区），然后执行flush logs（必须的）
 * profiling:更准确的SQL执行消耗系统资源的信息
 * DESCRIBE语句可以放在SELECT, INSERT, UPDATE, REPLACE 和 DELETE语句前边使用。是EXPLAIN的同义词
 
