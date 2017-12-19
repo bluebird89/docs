@@ -348,7 +348,28 @@ show profiles\G;
 show profile for query 1; # 采取针对性的优化措施
 set profiling=0
 
-show processlist
+show processlist;
+
+SHOW VARIABLES LIKE 'slow_query%';
+SHOW VARIABLES LIKE 'long_query_time%';
+
+SET GLOABL SLOW_QUERY_LOG=on; # 临时设置
+set long_query_time=1;
+
+# 永久设置 添加到配置文件
+slow_query_log = ON
+slow_query_log_file = /var/log/mysql/slow.log
+long_query_time = 1
+
+1. 下载，可以在官网找最新版本
+wget https://www.percona.com/downloads/percona-toolkit/2.2.20/deb/percona-toolkit_2.2.20-1.tar.gz
+2. 解压
+tar zxvf percona-toolkit_2.2.20-1.tar.gz
+3. 安装
+perl Makefile.PL
+make && make install
+
+./pt-query-digest  slow.log
 ```
 
 #### 慢日志
