@@ -7,13 +7,13 @@ help your devleop APIs faster
 * document:依据你创建的Clollections自动生成API文档,并将其发布成规范的格式
 * collarorate:通过同步连接你的team和你的api，以及权限控制，API库
 
-collections
+## collections
 
 收藏的测试Postman echo用例。官网有整理的api collection可以直接导入。
 允许你运行collection，你可以运行任意的次数。选择collection，选择环境。点击运行按钮。
 最后会给出一个整体运行的结果。会保存每一次运行的结果，提供给你比较每一次运行解雇的不同。
 
-environment
+## environment
 
 - 在不同的环境下跑相同的测试，此时可以通过设置环境变量来动态选择。添加环境变量base_url,使用{{base_url}}
 多数测试参数一致，通过环境区分测试
