@@ -1,7 +1,3 @@
-# 前端
-
-* [thedaviddias/Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist): The perfect Front-End Checklist for modern websites and meticulous developers http://frontendchecklist.com
-
 # 前端工程师技能清单
 
 ## HTML
@@ -13,7 +9,7 @@
 * 内嵌元素： 内嵌元素仅占据由内嵌元素定义标记界定的空间
 * 表格：表格表示文档部分， 其中包含向网络服务器提交信息的交互式控件
 * 输入类型： 输入元素用于为网络表格创建交互式控件， 以便接受用户输入的数据
-* 
+
 ## CSS
 
 层叠样式表（简称 CSS）负责控制网站的外观。颜色、字体，甚至一些动画
@@ -803,6 +799,7 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 - [dwqs/blog](https://github.com/dwqs/blog)
 - [Web前端知识体系精简](http://www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
 - [前端跨域整理](https://juejin.im/post/5815f4abbf22ec006893b431)
+- [front-end-style-guide](http://zhibimo.com/read/Ashu/front-end-style-guide/html/general.html)
 
 ## 工具
 
@@ -815,8 +812,9 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 
 ## 扩展
 
-- http://geek.csdn.net/news/detail/237049
-- [dypsilon/frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
-- [AlloyTeam/Mars](https://github.com/AlloyTeam/Mars)腾讯移动Web前端知识库
-- [fex-team/webuploader](https://github.com/fex-team/webuploader)It's a new file uploader solution!
-- [ECharts](https://github.com/ecomfe/echarts)ECharts is a free, powerful charting and visualization library offering an easy way of adding intuitive, interactive, and highly customizable charts to your commercial products.
+* http://geek.csdn.net/news/detail/237049
+* [dypsilon/frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
+* [AlloyTeam/Mars](https://github.com/AlloyTeam/Mars)腾讯移动Web前端知识库
+* [fex-team/webuploader](https://github.com/fex-team/webuploader)It's a new file uploader solution!
+* [ECharts](https://github.com/ecomfe/echarts)ECharts is a free, powerful charting and visualization library offering an easy way of adding intuitive, interactive, and highly customizable charts to your commercial products.
+* [thedaviddias/Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist):🗂 The perfect Front-End Checklist for modern websites and meticulous developers https://frontendchecklist.io
