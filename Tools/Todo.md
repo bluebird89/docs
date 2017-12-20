@@ -298,3 +298,155 @@ https://laravel-china.org/topics/166/entrust-laravel-user-rights-system-solution
 http://www.chinaz.com/web/2017/1028/821722.shtml
 https://github.com/exakat/php-static-analysis-tools
 http://janephp.blog.51cto.com/
+
+
+用户管理
+http://blog.csdn.net/huaishu/article/details/50540814
+文件导入
+
+window下
+
+1.导出整个数据库
+mysqldump -u 用户名 -p 数据库名 > 导出的文件名
+mysqldump -u dbuser -p dbname > dbname.sql
+
+2.导出一个表
+mysqldump -u 用户名 -p 数据库名 表名> 导出的文件名
+mysqldump -u dbuser -p dbname users> dbname_users.sql
+
+3.导出一个数据库结构
+mysqldump -u dbuser -p -d --add-drop-table dbname >d:/dbname_db.sql
+-d 没有数据 --add-drop-table 在每个create语句之前增加一个drop table
+
+4.导入数据库
+常用source 命令
+进入mysql数据库控制台，如
+mysql -u root -p
+mysql>use 数据库
+然后使用source命令，后面参数为脚本文件(如这里用到的.sql)
+mysql>source d:/dbname.sql
+
+ 
+
+ 
+
+1. 导入数据到数据库
+
+mysql -uroot -D数据库名 
+
+1. 导入数据到数据库中得某个表
+
+mysql -uroot -D数据库名  表名
+
+ 
+
+D:\APMServ5.2.6\MySQL5.1\bin>mysqldump -u root -p  erp lightinthebox_tags > ligh
+tinthebox.sql
+
+ 
+
+linux下
+
+一、导出数据库用mysqldump命令（注意mysql的安装路径，即此命令的路径）：
+1、导出数据和表结构：
+mysqldump -u用户名 -p密码 数据库名 > 数据库名.sql
+#/usr/local/mysql/bin/   mysqldump -uroot -p abc > abc.sql
+敲回车后会提示输入密码
+
+2、只导出表结构
+mysqldump -u用户名 -p密码 -d 数据库名 > 数据库名.sql
+#/usr/local/mysql/bin/   mysqldump -uroot -p -d abc > abc.sql
+
+注：/usr/local/mysql/bin/  --->  mysql的data目录
+
+
+二、导入数据库
+1、首先建空数据库
+mysql>create database abc;
+
+2、导入数据库
+方法一：
+（1）选择数据库
+mysql>use abc;
+（2）设置数据库编码
+mysql>set names utf8;
+（3）导入数据（注意sql文件的路径）
+mysql>source /home/abc/abc.sql;
+方法二：
+mysql -u用户名 -p密码 数据库名 < 数据库名.sql
+#mysql -uabc_f -p abc < abc.sql
+
+
+
+
+
+
+
+function
+
+storage 
+
+trigger
+
+event
+
+database design
+
+
+
+show variables like 'slow_query%';
+
+show variables like 'long_query_%';
+
+
+
+[mysqld]
+slow_query_log = ON
+slow_query_log_file = /usr/local/mysql/data/slow.log
+long_query_time = 1
+
+
+
+ select sleep(2);
+
+
+导入一个200M左右的sql 
+
+MySQL server has gone away
+
+show global variables like 'max_allowed_packet'; 
+
+set global max_allowed_packet=268435456;
+
+
+http://www.mofazhu.com/jiaocheng/xtcz/17505.html
+
+http://blog.csdn.net/lanjianhun/article/details/38391843
+
+http://www.windowszj.com/news/21957.html
+
+http://blog.csdn.net/inter_peng/article/details/50991920
+
+https://www.cnblogs.com/fnight/p/5722016.html
+https://zhaoshuai.me/zs11/
+https://www.v2ex.com/t/9105
+
+https://linux.cn/article-3128-1.html
+
+http://www.jianshu.com/p/34024e830011
+
+https://www.zhihu.com/topic/19557067/top-answers
+
+http://www.jianshu.com/p/c8b79ba7fa69
+
+http://blog.csdn.net/jilijelon/article/details/55013248
+
+http://www.linuxidc.com/Linux/2016-06/132238.htm
+
+http://blog.csdn.net/u012260238/article/details/52716592
+
+http://blog.csdn.net/enjoy5512/article/details/53408213
+
+https://eallion.com/ubuntu1610
+
+http://www.qqtn.com/article/article_134804_1.html
