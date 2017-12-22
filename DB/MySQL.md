@@ -40,6 +40,15 @@ dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  #
 brew cask install mysqlworkbench
 ```
 
+### ubuntu
+
+```sh
+service mysql start
+service mysql stop
+service mysql status
+service mysql restart
+```
+
 ## 概念
 
 - 支持sql语言，指结构化查询语言，全称是 Structured Query Language.
@@ -182,7 +191,9 @@ set global general_log = on;
 mysql -h localhost  -P 3306 -u root -p  # 生成用户root与空密码登陆
 exit quit \q
 
-CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; // 添加用户
+CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; # 添加用户
+GRANT ALL PRIVILEGES ON blog.* TO 'jeff'@'localhost';
+FLUSH PRIVILEGES;
 ```
 
 ### 存储引擎
@@ -291,7 +302,8 @@ CREATE TABLE test.news(
   source varchar(30) not null comment '来源',
   hits int(5) not null DEFAULT 0 comment '点击率',
   context text null comment '内容',
-  adddate int(16) not null comment '添加时间'
+  adddate int(16) not null comment '添加时间',
+  PRIMARY KEY (Id)
 )charset=utf8 collate=utf8_bin;
 CREATE TABLE table_name SELECT column1,cloumn2 FROM another_table: # 复制数据不复制主键
 CREATE TABLE table_name like another_table；  #  数据不复制，主键复制
