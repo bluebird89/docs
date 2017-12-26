@@ -78,7 +78,7 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 * [vuejs/vue-test-utils](https://github.com/vuejs/vue-test-utils):Utilities for testing Vue components https://vue-test-utils.vuejs.org
 * [vuejs/vue-class-component](https://github.com/vuejs/vue-class-component):ES / TypeScript decorator for class-style Vue components.
 * [vuejs/vue-devtools](https://github.com/vuejs/vue-devtools):Chrome devtools extension for debugging Vue.js applications.
-* [vuejs/vue-router](https://github.com/vuejs/vue-router):The official router for Vue.js.
+* [vuejs/vue-router](https://github.com/vuejs/vue-router):The official router for Vue.js.https://router.vuejs.org/zh-cn/
 * [vuejs/vue-cli](https://github.com/vuejs/vue-cli):Simple CLI for scaffolding Vue.js projects
 * [pagekit/vue-resource](https://github.com/pagekit/vue-resource):The HTTP client for Vue.js
 * [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
@@ -104,7 +104,7 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 * [liangxiaojuan/eleme](https://github.com/liangxiaojuan/eleme):vue2 +vue-router2 + es6 +webpack 高仿饿了么app商家详情，demo：http://yangyi1024.com/elem 还有我最新的实战项目,点它=》 http://yangyi1024.com/meizi
 * [ustbhuangyi/vue-sell](https://github.com/ustbhuangyi/vue-sell):Vue.js高仿饿了么外卖App课程源码 http://coding.imooc.com/class/74.html
 * [vuejs/vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
-* * [tonyfree/youzan](https://github.com/tonyfree/youzan):vue重构有赞商城
+* [tonyfree/youzan](https://github.com/tonyfree/youzan):vue重构有赞商城
 * [webpack 前后端分离开发接口调试解决方案，proxyTable解决方案](https://www.cnblogs.com/coolslider/p/7076191.html)
 * [vue-cli + webpack 多页面实例配置优化方法](https://segmentfault.com/a/1190000006741478)
 * [bluefox1688/vue-cli-multi-page](https://github.com/bluefox1688/vue-cli-multi-page):vue2-cli-vux2-multe-page，使用了webpack2+vuejs2+vuxUI2的多页面脚手架
