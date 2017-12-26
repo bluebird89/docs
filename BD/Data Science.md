@@ -10,6 +10,7 @@
 - [apache/incubator-mxnet](https://github.com/apache/incubator-mxnet)Lightweight, Portable, Flexible Distributed/Mobile Deep Learning with Dynamic, Mutation-aware Dataflow Dep Scheduler; for Python, R, Julia, Scala, Go, Javascript and more <http://mxnet.io>
 - [douban/dpark](https://github.com/douban/dpark)Python clone of Spark, a MapReduce alike framework in Python
 - [wepe/MachineLearning](https://github.com/wepe/MachineLearning)Basic Machine Learning and Deep Learning
+- [bulutyazilim/awesome-datascience](https://github.com/bulutyazilim/awesome-datascience):An awesome Data Science repository to learn and apply for real world problems.
 
 ## 扩展
 

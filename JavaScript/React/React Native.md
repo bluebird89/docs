@@ -112,7 +112,43 @@ react-native run-ios
 
 ### JSX
 
+react.js 、react-dom.js 和 Browser.js ，它们必须首先加载。其中，react.js 是 React 的核心库，react-dom.js 是提供与 DOM 相关的功能，Browser.js 的作用是将 JSX 语法转为 JavaScript 语法
 写 HTML 标签或 React 标签，它们终将被转换成原生的 JavaScript 并创建 DOM。
+
+```
+<script type="text/babel">
+  // ** Our code goes here! **
+</script>
+
+ReactDOM.render(
+  <div>
+  {
+    names.map(function (name) {
+      return <div>Hello, {name}!</div>
+    })
+  }
+  </div>,
+  document.getElementById('example')
+);
+
+```
+
+
+### 组件
+
+```
+var HelloMessage = React.createClass({
+  render: function() {
+    return <h1>Hello {this.props.name}</h1>;
+  }
+});
+
+ReactDOM.render(
+  <HelloMessage name="John" />,
+  document.getElementById('example')
+);
+```
+
 
 ### 布局
 
@@ -247,6 +283,7 @@ Flexbox解决了什么问题？
 
 * [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
 * [reactnativecn/react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
+* [styleguidist/react-styleguidist](https://github.com/styleguidist/react-styleguidist):Isolated React component development environment with a living style guide https://react-styleguidist.js.org/
 
 ## 项目
 
