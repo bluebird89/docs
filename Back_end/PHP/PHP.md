@@ -637,7 +637,8 @@ composer global require "squizlabs/php_codesniffer=*"
 phpcs /path/to/code/myfile.php
 phpcs /path/to/code
 
-
+# vscode
+phpcs.enable true
 ```
 
 ### xdebug
