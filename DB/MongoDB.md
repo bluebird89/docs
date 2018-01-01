@@ -257,11 +257,25 @@ EXPOSE 27017 CMD ["mongod"]
 - docker build -t mongo:3.2 .
 - docker run -p 27017:27017 -v $PWD/db:/data/db -d mongo:3.2
 
+## 水平扩展
+
+MongoDB 中的 Sharding 正式为了水平扩展而设计的。MongoDB 中通过 Shard 支持服务器水平扩展，通过 Replication 支持高可用（HA）。
+
+### MongoDB Shard
+
+* 将数据库表中的数据按照一定的边界分成若干组，每一组放到一台 MongoDB 服务器上。以用户年龄age为进行Sharding（切分）的Shard Key。每一个 Shard 服务器存储数据的一个子集，
+* 查询时通过mongos，它可以被称为 Shard 集群中的路由器。处理来自应用服务器的请求，它是在应用服务器和Shard 集群之间的一个接口。
+* config server，它存储 Shard 集群中所有其他成员的配置信息，mongos会到这台config server查看集群中其他服务器的地址，这是一台不需要太高性能的服务器，因为它不会用来做复杂的查询计算，值得注意的是，在 MongoDB3.4 以后，config server必须是一个replica set。存储 shard 集群的配置信息，通常部署在一个 replica set 上。
+* mtools。他是用来创建各种 MongoDB 环境的命令行工具，代码使用python写的，可以通过pip install安装到你的环境上
+
+
 ## 参考
 
-- [MongoDB Docs](https://docs.mongodb.com/)
-- [MongoDB的水平扩展，你做对了吗？](https://juejin.im/entry/5a0266a76fb9a0450908ec76)
+* [MongoDB Docs](https://docs.mongodb.com/)
+* https://github.com/rueckstiess/mtools/wiki/mlaunch
+* https://github.com/zhaoyi0113/mongo-cluster-docker
+* [MongoDB的水平扩展，你做对了吗？](https://juejin.im/entry/5a0266a76fb9a0450908ec76)
 
-### notice
+
 
 PHP不同版本的扩展库使用版本不一样 php5 使用内置方法 php7.1 使用composer扩展mongodb/mongodb
