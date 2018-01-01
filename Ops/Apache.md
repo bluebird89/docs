@@ -3,7 +3,7 @@
 最流行的服务器
 
 * 基于文件配置。
-* 跨平台的。所有操作系统都能安装。
+* 跨平台的,所有操作系统都能安装。
 * 虚拟主机。
 
 ## 本地环境
@@ -24,7 +24,7 @@
 * modules:加载的第三方插件
 * Apache2 Service Monitor:监控apache2服务
 
-## 使用
+## 安装
 
 ### windows
 
@@ -84,8 +84,16 @@ httpd.conf文件为服务器的主配置文件
         + Allow from All 
         + Allow from 192.168.21.89
         + Allow from 192.168.21.89  192.168.21.34
+* 在apache配置中添加PHP模块，PHP模块不用单独启动，也不能单独停止，一般情况下，是Apache启动时，PHP5模块也跟着启动了。
 
 ```
+AddHandler application/x-httpd-php .php #  AddHandler handler_name extension1 extension2 如果你预览的文件是.php后缀，去调用PHP处理器
+AddType application/x-httpd-php .php .html # 添加文件类型和扩展名之间的映射关系
+LoadModule php7_module "C:/php7/php7apache2_4.dll" # LoadModule   module_name   module_path
+PHPiniDir "D:/wamp/bin/php/php7.0.0" # 指定PHP配置路径，不写可能启动不了 Apache 服务
+
+httpd.exe -M # 查看apache加载了哪些模块
+
 DocumentRoot："E:\www\local"
 <Directory E:\www\local>
     Options All
@@ -114,16 +122,15 @@ php_value date.timezone PRC # 指定字符串形式的配置信息
 * 配置了其他的虚拟主机，默认的主机就会改变为第一个虚拟主机。虚拟主机的优先级最高，比全局配置中的虚拟主机优先级要高。将默认主机作为一个虚拟主机放在第一个虚拟主机的位置即可。第1个虚拟主机的优先最高，localhost或127.0.0.1都会指向它。
 * 如果在hosts文件指了域名，但在虚拟主机中并未配置这个域名，此时，将指向第1个虚拟主机。
 * 单独再配置一个localhost的虚拟主机，并指向原来的目录。
-
-步骤
-
-* 配置host文件
-* 修改httpd.conf文件包含extra\httpd-vhosts.conf
-* 添加httpd-vhosts.conf中的配置
+* 步骤
+    - 配置host文件
+    - 修改httpd.conf文件包含extra\httpd-vhosts.conf
+    - 添加httpd-vhosts.conf中的配置
 
 ```
 NameVirtualHost *:80
-#配置localhost虚拟主机
+
+# 配置localhost虚拟主机
 <VirtualHost *:80>
     #指定服务器的域名
     ServerName localhost
@@ -137,7 +144,8 @@ NameVirtualHost *:80
         Allow from All
     </Directory>
 </VirtualHost>
-#配置www.2015.com虚拟主机
+
+# 配置www.2015.com虚拟主机
 <VirtualHost *:80>
     #指定服务器的域名
     ServerName www.2015.com
@@ -163,17 +171,7 @@ NameVirtualHost *:80
 
 ## WAMP
 
-### apache 配置
-
-在apache配置中添加PHP模块，PHP模块不用单独启动，也不能单独停止，一般情况下，是Apache启动时，PHP5模块也跟着启动了。
-
-```
-httpd.exe -M # 查看apache加载了哪些模块
-LoadModule  php5_module  "C:\wamp\PHP5\php5apache2_2.dll" # LoadModule   module_name   module_path
-AddHandler  application/x-httpd-php  .php # AddHandler handler_name extension1 extension2 如果你预览的文件是.php后缀，去调用PHP处理器
-AddType  application/x-httpd-php   .php  .phtml # 添加文件类型和扩展名之间的映射关系
-PHPIniDir "c:/wamp/PHP5" # 指定PHP配置路径
-```
+apache 配置
 
 ### php配置
 
