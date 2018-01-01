@@ -16,6 +16,27 @@ php.exe -m # 显示已经加载了那些module
 php -a # 进入命令行模式
 ```
 
+### Mac
+
+* 程序路径：`/usr/local/Cellar/php71/7.1.12_23`
+* 配置路: `/usr/local/etc/php/7.1/php.ini`
+* control script:/usr/local/opt/php71/sbin/php71-fpm
+
+```sh
+brew install php71
+brew info php71
+```
+
+### 配置
+
+```sh
+mkdir -p ~/Library/LaunchAgents
+cp /usr/local/opt/php71/homebrew.mxcl.php71.plist ~/Library/LaunchAgents/
+launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php71.plist
+
+brew services start homebrew/php/php71
+```
+
 ## [PHP发展](https://segmentfault.com/a/1190000008888700)
 
 - composer:PHP 的依赖管理可以变得非常简单
@@ -599,9 +620,31 @@ EXPOSE 9000 CMD ["php-fpm"]
 * PHPDoc
 * PHPCS PHP代码规范与质量检查工具
 
+### [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
+
+PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards. http://pear.php.net/package/PHP_CodeS…
+
 ```sh
-brew install php71
+curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+php phpcs.phar -h
+curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
+php phpcbf.phar -h
+
+pear install PHP_CodeSniffer
+
 composer global require "squizlabs/php_codesniffer=*"
+
+phpcs /path/to/code/myfile.php
+phpcs /path/to/code
+
+
+```
+
+### xdebug
+
+```sh
+brew install homebrew/php/php71-xdebug
+
 ```
 
 TP参考：<https://github.com/ijry/lyadmin>

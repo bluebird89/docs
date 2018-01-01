@@ -182,3 +182,4 @@ Percentage of the requests served within a certain time (ms)
 
 - [我们是怎样在项目内落地自动化测试体系的](http://blog.csdn.net/gitchat/article/details/78086617)
 - [How We Made Writing Tests Fun and Easy](https://blog.daftcode.pl/how-we-made-writing-tests-fun-and-easy-2d7e1fac6d16)
+- [facebook/jest](https://github.com/facebook/jest):🃏 Delightful JavaScript Testing. http://facebook.github.io/jest/

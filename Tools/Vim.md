@@ -232,6 +232,11 @@ mesg：允许vi显示其他用户用write写到自己终端上的信息
 ndd：将当前行及其下共n行文本删除，并将所删内容放到1号删除寄存器中。
 ```
 
+## neovim
+
+```sh
+brew install neovim
+```
 ## 配置
 
 * [neovim/neovim](https://github.com/neovim/neovim):Vim-fork focused on extensibility and usability https://salt.bountysource.com/teams/n…

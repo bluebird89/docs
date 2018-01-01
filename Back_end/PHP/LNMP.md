@@ -63,16 +63,10 @@ sudo apt-get install php7.1 php7.1-fpm php7.1-mysql php7.1-common php7.1-curl ph
 - sudo service php7.1-fpm restart
 - php -v
 
-- Modules:
+### Modules
 
-  ```sh
-  sudo apt-cache search php7.1*
-  sudo apt-get install php7.1-mysql php7.1-curl php7.1-json php7.1-cgi php7.1-mbstring php7.1-xml php7.1-mysql php7.1-common php7.1-gd  php7.1-cli php-pear php7.1-intl
-  ```
-
-- 默认安装模块
-- 手动安装模块
-
+* 默认安装模块
+* 手动安装模块
   - curl
   - GD
   - pear
@@ -81,7 +75,11 @@ sudo apt-get install php7.1 php7.1-fpm php7.1-mysql php7.1-common php7.1-curl ph
   - intl
   - dom:php7.1-dom
 
-    `sudo apt-get install -y php-pear php5.6-mcrypt php5.6-mbstring php5.6-curl php5.6-cli php5.6-mysql php5.6-gd php5.6-intl php5.6-xsl php5.6-zip`
+```sh
+sudo apt-cache search php7.1*
+sudo apt-get install php7.1-mysql php7.1-curl php7.1-json php7.1-cgi php7.1-mbstring php7.1-xml php7.1-mysql php7.1-common php7.1-gd  php7.1-cli php-pear php7.1-intl
+sudo apt-get install -y php-pear php5.6-mcrypt php5.6-mbstring php5.6-curl php5.6-cli php5.6-mysql php5.6-gd php5.6-intl php5.6-xsl php5.6-zip
+```
 
 - Configure Nginx to Use the PHP Processor
 

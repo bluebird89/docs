@@ -1,5 +1,7 @@
 # GraphQL
 
+GraphQL 是一个由Facebook提出的 应用层查询语言. 使用 GraphQL, 你可以基于图模式定义你的后端. 然后客户端就可以请求所需要的数据集。GraphQL是一个规范.
+
 ## 资源
 
 - [apollographql/apollo-server](https://github.com/apollographql/apollo-server)GraphQL server for Express, Connect, Hapi and Koa
