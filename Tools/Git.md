@@ -17,7 +17,7 @@ fast, scalable, distributed revision control system.一个分布式的代码管�
 * [Coding](https://github.com/)
 * sourceforge 支持git
 
-## Install:
+## Install
 
 ```shell
 sudo apt-get install git
@@ -873,14 +873,15 @@ git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -
 
 git submodule 主要用来管理一些单向更新的公共模块或底层逻辑。
 
-它允许你的项目模块化成为每一个 Repository，最终汇聚成一个完整的项目。换句话说，Git Submodule 可以别人的 Repo 挂到你自己的 Repo 中的任何位置，成为的 Repo 的一部分。
-在你的项目 Repository 下产生一个 .gitmodules 文件，来记录你的 Submodule 信息，同时 another_project项目也clone下来.
+* 它允许你的项目模块化成为每一个 Repository，最终汇聚成一个完整的项目
+* Git Submodule 可以别人的 Repo 挂到你自己的 Repo 中的任何位置，成为的 Repo 的一部分。
+* 在你的项目 Repository 下产生一个 .gitmodules 文件，来记录你的 Submodule 信息，同时 another_project项目也clone下来.
 
-```
-git submodule add git@domain.com:another_project.git another_project
+```sh
+git submodule add git@domain.com:another_project.git file_path/another_project
 git submodule foreach git pull  # 更新 repo 下所有的 submodules
 
-git rm --cached another_project
+git rm --cached another_project # 删除项目
 vim .git/config
 ...remove another_project...
 ```
