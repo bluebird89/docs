@@ -203,28 +203,32 @@ hostname  www  #设置主机名为www
 vi /etc/hostname #编辑配置文件
 www   localhost.localdomain  #修改localhost.localdomain为www
 ```
+
 #### apt-get
 
-程序安装有home路径，bin路径
+* sudo gedit /etc/apt/sources.list
+* 程序安装有home路径
+* bin路径
+* ubuntu.16替换apt-get为apt
 
-ubuntu.16替换apt-get为apt
-
-* install 其后加上软件包名，用于安装一个软件包
-* update 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表
-* upgrade 升级本地可更新的全部软件包，但存在依赖问题时将不会升级，通常会在更新之前执行一次update
-* dist-upgrade 解决依赖关系并升级(存在一定危险性)
-* remove 移除已安装的软件包，包括与被移除软件包有依赖关系的软件包，但不包含软件包的配置文件
-* autoremove 移除之前被其他软件包依赖，但现在不再被使用的软件包
-* purge 与remove相同，但会完全移除软件包，包含其配置文件
-* clean 移除下载到本地的已经安装的软件包，默认保存在/var/cache/apt/archives/
-* autoclean 移除已安装的软件的旧版本软件包
-* -y 自动回应是否安装软件包的选项，在一些自动化安装脚本中使用这个参数将十分有用
-* -q 静默安装方式，指定多个q或者-q=#,#表示数字，用于设定静默级别，这在你不想要在安装软件包时屏幕输出过多时很有用
-* -f 修复损坏的依赖关系
-* -d 只下载不安装
-* --reinstall 重新安装已经安装但可能存在问题的软件包
-* --install-suggests 同时安装APT给出的建议安装的软件包
-* sudo apt-cache search softname1 softname2 softname3...... 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
+```sh
+install 其后加上软件包名，用于安装一个软件包
+update 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表
+upgrade 升级本地可更新的全部软件包，但存在依赖问题时将不会升级，通常会在更新之前执行一次update
+dist-upgrade 解决依赖关系并升级(存在一定危险性)
+remove 移除已安装的软件包，包括与被移除软件包有依赖关系的软件包，但不包含软件包的配置文件
+autoremove 移除之前被其他软件包依赖，但现在不再被使用的软件包
+purge 与remove相同，但会完全移除软件包，包含其配置文件
+clean 移除下载到本地的已经安装的软件包，默认保存在/var/cache/apt/archives/
+autoclean 移除已安装的软件的旧版本软件包
+-y 自动回应是否安装软件包的选项，在一些自动化安装脚本中使用这个参数将十分有用
+-q 静默安装方式，指定多个q或者-q=#,#表示数字，用于设定静默级别，这在你不想要在安装软件包时屏幕输出过多时很有用
+-f 修复损坏的依赖关系
+-d 只下载不安装
+--reinstall 重新安装已经安装但可能存在问题的软件包
+--install-suggests 同时安装APT给出的建议安装的软件包
+sudo apt-cache search softname1 softname2 softname3...... 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
+```
 
 #### 从磁盘安装deb安装包
 
@@ -242,9 +246,9 @@ ubuntu.16替换apt-get为apt
 
 需要做的只是将从网络上下载的二进制包解压后放到合适的目录，然后将包含可执行的主程序文件的目录添加进PATH环境变量即可
 
-#### 从源代码安装
+#### 源代码编译安装
 
-源管理：sudo gedit /etc/apt/sources.list
+* /usr/local 是标准的地方
 
 ### 列表
 
