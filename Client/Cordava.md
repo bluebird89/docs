@@ -1,7 +1,9 @@
-# App
+# Cordava
 
 客户端开发
 
-## 框架
+## 参考
 
-* [cordava](http://cordova.apache.org/) http://cordova.axuer.com/
+* [cordava](http://cordova.apache.org/) 
+* [中文网](http://cordova.axuer.com/)
+* [Guides](http://cordova.apache.org/docs/en/5.0.0/)
