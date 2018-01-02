@@ -80,6 +80,11 @@ bytes 类型提供的操作和 str 一样，支持分片、索引、基本数值
 
 计算机内存中，统一使用Unicode编码，当需要保存到硬盘或者需要传输的时候，就转换为UTF-8编码。从文件读取的UTF-8字符被转换为Unicode字符到内存里，编辑完成后，保存的时候再把Unicode转换为UTF-8保存到文件。
 
+### 分隔符
+
+* CRLF(\r\n)分隔
+* 
+
 ## 参考
 
 - [字符编码的前世今生](http://blog.csdn.net/gitchat/article/details/78021539)
