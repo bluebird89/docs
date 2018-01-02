@@ -8,8 +8,12 @@
 
 ## 本地环境
 
-* xampp
-* WAMP
+* WAMP for Windows
+* LAMP for Linux
+* MAMP for Mac
+* SAMP for Solaris
+* FAMP for FreeBSD
+* XAMPP (Cross, Apache, MySQL, PHP, Perl) 对于跨平台：它还包括一些其他组件，如FileZilla，OpenSSL，Webalizer，OpenSSL，Mercury Mail等。
 * phpstudy
 
 ## 文件结构
