@@ -1,6 +1,14 @@
 # PHP
 
-所用的程序是要经过两层代理的，即HTTP协议在Nginx等服务器的解析下，然后再传送给相应的Handler（PHP等）来处理。服务端脚本程序，只能通过服务器访问，需要配置虚拟主机调试
+所用的程序是要经过两层代理
+
+* PHP代表HyperText预处理器。
+* PHP是一种解释型语言，即不需要编译。
+* PHP是一种服务器端脚本语言。
+* PHP比其他脚本语言更快,如：Python和asp。
+* HTTP协议在Nginx等服务器的解析下
+* 再传送给相应的Handler（PHP等）来处理。后端渲染，默认html处理，模版文件以.php后缀
+* 服务端脚本程序，只能通过服务器访问，需要配置虚拟主机调试
 
 ## 安装
 
@@ -41,7 +49,7 @@ brew services start homebrew/php/php71
 
 - composer:PHP 的依赖管理可以变得非常简单
 - PHP7:对 Zend 引擎做了大量修改，大幅提升了 PHP 语言的性能.做好 MySQL 优化，使用 Memcache 和 Redis 进行加速
-- PSR: <http://www.php-fig.org/> 组织制定的PHP语言开发规范，约定了很多方面的规则，如命名空间、类名 规范、编码风格标准、Autoload、公共接口等
+- [PSR](http://www.php-fig.org/)组织制定的PHP语言开发规范，约定了很多方面的规则，如命名空间、类名 规范、编码风格标准、Autoload、公共接口等
 - Swoole:Swoole 是一个异步并行的通信引擎，作为 PHP 的扩展来运行。Node.js 的异步回调 Swoole 有，Go语言的协程 Swoole 也有，这完全颠覆了对 PHP 的认知.使用 Swoole PHP 可以实现常驻内存的 Server 程序，可以实现 TCP 、 UDP 异步网络通信的编程开发。比如 WebSocket 即使通信、聊天、推送服务器、RPC 远程调用服务、网关、代理、游戏服务器等。
 - Laravel:社区非常活跃，代码贡献者众多，第三方的插件非常多，生态系统相当繁荣。 Laravel 底层使用了很多 symfony2 组件，通过 composer 实现了依赖管理。Laravel 提供的命令行工具基于 symfony.console 实现，功能强大，集成了各种项目管理、自动生成代码的功能。
 - PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar。用来将多个 PHP 文件打包为一个文件。这个特性使得 PHP 也可以像 Java 一样方便地实现应用程序打包和组件化。一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行。配合 Swoole ，可以在命令行下执行 php server.phar 一键启动服务器。PHP 的代码包可以用 Phar 打包成组件，放到 Swoole 的服务器容器中去加载执行。
@@ -51,20 +59,6 @@ brew services start homebrew/php/php71
 - React Native 是一个不错的选择
 - 深度学习/人工智能:自动驾驶、大数据分析、网络游戏、图像识别、语言处理等。当然现在普通的工程师可能还无法参与到人工智能产品中，但至少应该理解深度学习/人工智能的基本概念和原理。
 
-## OOP
-
-继承：类分层、接口分层 实现：类实现接口 依赖：类作为另一个类方法的参数 关联：类属性 聚合：可以有 组合：必须有
-
-- PHP异步调用
-- 正则匹配src标签
-- 处理回文字符
-
-## 模型
-
-数据模型
-
-业务模型
-
 ## 语法
 
 ### 基础
@@ -72,40 +66,132 @@ brew services start homebrew/php/php71
 * PHP代码的标记：<?php …… ?>
 * PHP文件的扩展名：.php
 * PHP中每行程序代码，必须以英文下的分号(;)结束。而JS中分号可以省略。
-* PHP程序也是区分大小写的，但函数名和关键字不区分大小写。如：if、break、switch
+* PHP程序区分大小写的，但函数名和关键字不区分大小写。如：if、break、switch
 * 访问PHP文件，必须要经过服务器，或者以域名开头来访问。如：http://www.2015.com/test.php
 * PHP文件及路径上不能包括中文或空格。
 * 单行注释：//、#
 * 多行注释：/* …… */
-* 变量：临时存储数据的容器，指向值的指针
+* 变量：临时存储数据的容器，指向值的指针。保存数据内存位置的名称。 变量是用于保存临时数据的临时存储
     - 变量的名称，可以包含：字母、数字、下划线。
-    - 变量的名称，不能以数字开头，但可以以字母或下划线开头。如：$_ABC、$abc
+    - 变量的名称，不能以数字和特殊符号开头，但可以以字母或下划线开头。如：$_ABC、$abc
     - 变量名称前必须要带“$”符号。“$”不是变量名称一部分，它只是对变量名称的一个引用或标识符。
     - 变量名称区分大小写。如：$name和$Name是两个变量
     - 对于由几个单词构成的变量名称的命名规则
         + “驼峰式”命名：$getUserName、$getUserPwd
         + “下划线”命名：$get_user_name、$set_user_pwd
+    - 赋值：$variablename指向value存储的地址
+    - `$$var`是一个引用变量，用于存储$var的值
+* 常量
+    - define()函数：define(name, value, case-insensitive = false) 区分大小写
+    - const关键字在编译时定义常量。 它是一个语言构造不是一个函数。比define()快一点，因为它没有返回值。它总是区分大小写的
+    - 魔术常量
+        + __LINE__  表示使用当前行号。
+        + __FILE__    表示文件的完整路径和文件名。 如果它在include中使用，则返回包含文件的名称。
+        + __DIR__ 表示文件的完整目录路径。 等同于dirname(__file__)。 除非它是根目录，否则它没有尾部斜杠。 它还解析符号链接。
+        + __FUNCTION__    表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白。
+        + __CLASS__   表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白。
+        + __TRAIT__   表示使用它的特征名称。 如果它在任何函数之外使用，则它将返回空白。 它包括它被声明的命名空间。
+        + __METHOD__  表示使用它的类方法的名称。方法名称在有声明时返回。
+        + __NAMESPACE__   表示当前命名空间的名称。
+
+```php
+$variablename = value;
+
+define("MESSAGE","Hello YiiBai PHP");
+const MESSAGE="Hello const by YiiBai PHP";
+```
+
+### 控制语句
+
+* echo：是一个语言结构(语句)，不是一个函数，所以不需要使用括号。但是如果要使用多个参数，则需要使用括号。打印字符串，多行字符串，转义字符，变量，数组等。
+* print
+* 嵌套的使用：执行在内还是在外
+* 条件
+    - if
+    - if-else
+    - if-else-if
+    - 嵌套if
+    - switch语句
+* 循环
+    - for语句
+    - foreach循环循环用于遍历数组元素
+    - while
+    - do...while
+* break:中断了当前for，while，do-while，switch和for-each循环的执行。 如果在内循环中使用break，它只中断了内循环的执行。
+* continue:
 
 ```php
 #!/usr/bin/env php
-<?php
 print "Hello, Red Hat Developers World from PHP " . PHP_VERSION . "\n";
-?>
+echo "<h2>Hello First PHP</h2>";
+
+$num=12;  
+if($num<100){  
+    echo "$num is less than 100";  
+}
+
+if($num%2==0){  
+    echo "$num is even number";  
+}else{  
+    echo "$num is odd number";  
+}
+
+switch($num){    
+    case 10:    
+        echo("number is equals to 10");    
+        break;    
+    case 20:    
+        echo("number is equal to 20");    
+        break;    
+    case 30:    
+        echo("number is equal to 30");    
+        break;    
+    default:    
+        echo("number is not equal to 10, 20 or 30");    
+}
+
+for($n=1;$n<=10;$n++){  
+    echo "$n<br/>";  
+}
+
+$season=array("summer","winter","spring","autumn");  
+foreach( $season as $arr ){  
+    echo "Season is: $arr<br />";  
+}
+
+$n=1;  
+while($n<=10){  
+    echo "$n<br/>";  
+    $n++;  
+}
+
+$n=1;  
+do{  
+    echo "$n<br/>";  
+    $n++;  
+}while($n<=10);
+
+for($i=1;$i<=10;$i++){  
+    echo "$i <br/>";  
+    if($i==5){  
+        break;  
+    }  
+}
 ```
 
 ### 数据类型
 
 变量本身没有类型之说，所说的类型是指变量中，存储的数据的类型。
 
-* 基本数据类型
+* 标量类型
+    - 布尔型
     - 字符串型
     - 整型
     - 浮点型
-    - 布尔型
-* 复合数据类型
+* 复合类型
     - 数组
     - 对象
-* 特殊数据类型
+* 特殊类型
     - NULL:unset() 与 NULL：删除引用，触发相应变量容器refcount减一，但在函数中的行为会依赖于想要销毁的变量的类型而有所不同，比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值；unset 变量与给变量赋值NULL不同，变量赋值NULL直接对相应变量容器refcount = 0
     - 资源
 
@@ -141,6 +227,136 @@ echo $bar;//Notice: Undefined variable: bar
 ```
 
 #### 运算符
+
+用于对操作数执行操作
+
+* 算术运算符:`* / % + - `
+* 比较运算符:`< <= > >= == != === !== <>`
+* 按位运算符:`<< >>`
+* 逻辑运算符:`&& || and xor or !`
+* 字符串运算符:`.`
+* 递增/递减运算符
+* 数组运算符
+* 类型运算符:`instanceof (int) (float) (string) (array) (object) (bool)`
+* 执行操作符
+* 错误控制操作符
+* 分配操作符:`= += -= *= **= /= .= %= &= ^= <<= >>= =>`
+* 位运算符：`& ^ |`
+* 三元运算符：`?:`
+
+```php
+clone new
+```
+
+#### 杂项
+
+* 数学函数
+* 表单处理:post get提交请求
+* 包含文件
+    - 用于包含基于给定路径的文件。 可以使用文件的相对路径或绝对路径
+    - 文件丢失时包含的处理方式：include语句允许脚本继续，但require语句暂停脚本产生致命的E_COMPILE_ERROR级别错误。
+* json
+    - json_encode()函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据。
+    - json_decode()函数解码JSON字符串：将JSON字符串转换为PHP变量。
+* 电子邮件
+
+```php
+abs(-7)
+abs(-7.2)
+ceil(-4.8) # -4
+floor(-4.8) # -5
+sqrt(25)
+
+decbin(10) # 1010
+dechex(10) # a
+decoct(22) # 26
+bindec(1011) # 11
+$n1=10;
+echo (base_convert($n1,10,2)."<br/>");// 1010
+
+require("menu.html");
+
+ini_set("sendmail_from", "maxsujaiswal@yiibai.com");  
+$to = "maxsujaiswal1987@gmail.com";//change receiver address  
+$subject = "This is subject";  
+$message = "This is simple text message.";  
+$header = "From:maxsujaiswal@yiibai.com \r\n";  
+
+$result = mail ($to,$subject,$message,$header);  
+
+if( $result == true ){  
+  echo "Message sent successfully...";  
+}else{  
+  echo "Sorry, unable to send mail...";  
+}
+
+$to = "abc@example.com";//发送HTML消息
+$subject = "This is subject";  
+$message = "<h1>This is HTML heading</h1>";  
+
+$header = "From:xyz@example.com \r\n";  
+$header .= "MIME-Version: 1.0 \r\n";  
+$header .= "Content-type: text/html;charset=UTF-8 \r\n";  
+
+$result = mail ($to,$subject,$message,$header);  
+
+if( $result == true ){  
+  echo "Message sent successfully...";  
+}else{  
+  echo "Sorry, unable to send mail...";  
+}
+
+$to = "abc@example.com";  # 使用附件发送邮件
+$subject = "This is subject";  
+$message = "This is a text message.";  
+# Open a file  
+$file = fopen("/tmp/test.txt", "r" );//change your file location  
+if( $file == false )  
+{  
+ echo "Error in opening file";  
+ exit();  
+}  
+# Read the file into a variable  
+$size = filesize("/tmp/test.txt");  
+$content = fread( $file, $size);  
+
+# encode the data for safe transit  
+# and insert \r\n after every 76 chars.  
+$encoded_content = chunk_split( base64_encode($content));  
+
+# Get a random 32 bit number using time() as seed.  
+$num = md5( time() );  
+
+# Define the main headers.  
+$header = "From:xyz@example.com\r\n";  
+$header .= "MIME-Version: 1.0\r\n";  
+$header .= "Content-Type: multipart/mixed; ";  
+$header .= "boundary=$num\r\n";  
+$header .= "--$num\r\n";  
+
+# Define the message section  
+$header .= "Content-Type: text/plain\r\n";  
+$header .= "Content-Transfer-Encoding:8bit\r\n\n";  
+$header .= "$message\r\n";  
+$header .= "--$num\r\n";  
+
+# Define the attachment section  
+$header .= "Content-Type:  multipart/mixed; ";  
+$header .= "name=\"test.txt\"\r\n";  
+$header .= "Content-Transfer-Encoding:base64\r\n";  
+$header .= "Content-Disposition:attachment; ";  
+$header .= "filename=\"test.txt\"\r\n\n";  
+$header .= "$encoded_content\r\n";  
+$header .= "--$num--";  
+
+# Send email now  
+$result = mail ( $to, $subject, "", $header );  
+if( $result == true ){  
+  echo "Message sent successfully...";  
+}else{  
+  echo "Sorry, unable to send mail...";  
+} 
+```
 
 ##### Lambda表达式(匿名函数)与闭包
 
@@ -226,9 +442,40 @@ var_dump(random_int(100, 999));//int(248)
 
 ```
 
+### 函数
+
+一段可以重复使用多次的代码。 它可以接受输入作为参数列表和返回值
+
+* 参数
+    - 引用调用:传递给函数的值默认情况下不会修改实际值(通过值调用)
+    - 传递给函数的值是通过值调用。 要传递值作为参考(引用)，您需要在参数名称前使用＆符号(&)。
+* 返回值
 
 addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
-2. urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
+urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
+
+```php
+function sayHello(){  
+    echo "Hello PHP Function";  
+}  
+sayHello();//calling function
+
+function sayHello($name,$age = 28){  
+echo "Hello $name, you are $age years old<br/>";  
+}  
+sayHello("Maxsu",27);  
+sayHello("Minsu",26);  
+sayHello("John",23);
+sayHello("Henry");
+
+function adder(&$str2)  
+{  
+    $str2 .= 'Call By Reference';  
+}  
+$str = 'Hello ';  
+adder($str);  
+echo $str;
+```
 
 ### 文件操作
 
@@ -243,8 +490,18 @@ if (flock($fp, LOCK_EX)) {
 fclose($fp);
 ```
 
+### 面向对象(OOP)
 
-### 面向对象
+继承：类分层、接口分层 
+实现：类实现接口 
+依赖：类作为另一个类方法的参数 
+关联：类属性 
+聚合：可以有 
+组合：必须有
+
+- PHP异步调用
+- 正则匹配src标签
+- 处理回文字符
 
 访问控制(可见性)：
 
@@ -334,7 +591,7 @@ $t3->test();
 
 #### trait
 
-为了避免代码重复而生
+为了避免代码重复而生,既可以实现代码分离又可以不用在逻辑层做任何处理
 
 ```php
 Trait OwnerTrait{
@@ -423,11 +680,11 @@ $controller->register();
 * apc:op缓存
 * PHP-FPM进程池：FastCGI Process Manager 的master process是常驻内存的，以static、dynamic、ondemand三种方式来管理进程池中的worker process，可以有效控制内存和进程并平滑重载PHP配置，在发生意外情况的时候能够重新启动并恢复被破坏的 opcode。
 
-
-### Docker配置
+## Docker配置
 
 - mkdir -p ~/php-fpm/logs ~/php-fpm/conf
-- 构建Dockerfile 
+- 构建Dockerfile
+
 ```
 FROM debian:jessie
 
@@ -517,10 +774,6 @@ EXPOSE 9000 CMD ["php-fpm"]
 
 - docker build -t php:5.6-fpm .
 - docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/local/etc/php -v $PWD/logs:/phplogs -d php:5.6-fpm
-
-### Traits
-
-既可以实现代码分离又可以不用在逻辑层做任何处理
 
 ## 说明
 
@@ -645,7 +898,6 @@ phpcs.enable true
 
 ```sh
 brew install homebrew/php/php71-xdebug
-
 ```
 
 TP参考：<https://github.com/ijry/lyadmin>
