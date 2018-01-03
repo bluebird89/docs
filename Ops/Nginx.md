@@ -60,7 +60,7 @@
 - 配置文件:The default:/usr/local/etc/nginx/nginx.conf
 - 日志与服务器文件 /usr/local/var/log/nginx/
 - Severs config:/usr/local/etc/nginx/servers/
-- Docroot is: /usr/local/Cellar/nginx/1.12.2_1/html /usr/local/var/www // 软件更新后版本号会发生变化，默认也会失效
+- Docroot is: /usr/local/Cellar/nginx/1.12.2_1/html /usr/local/var/www, 软件更新后版本号会发生变化，默认也会失效
 
 ```shell
 brew info nginx
