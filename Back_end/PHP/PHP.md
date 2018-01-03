@@ -186,22 +186,93 @@ for($i=1;$i<=10;$i++){
 * 标量类型
     - 布尔型
     - 字符串型
+        + 单引号PHP字符串中，大多数转义序列和变量不会被解释。 可以使用单引号\'反斜杠和通过\\在单引号引用PHP字符串。
+        + 双引号的PHP字符串中存储多行文本，特殊字符和转义序列
     - 整型
     - 浮点型
 * 复合类型
     - 数组
+        + 索引数组
+        + 关联数组
+        + 多维数组
     - 对象
 * 特殊类型
     - NULL:unset() 与 NULL：删除引用，触发相应变量容器refcount减一，但在函数中的行为会依赖于想要销毁的变量的类型而有所不同，比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值；unset 变量与给变量赋值NULL不同，变量赋值NULL直接对相应变量容器refcount = 0
     - 资源
 
 ```php
+$season=array("summer","winter","spring","autumn");
+$season[0]="summer";  
+$season[1]="winter";  
+$season[2]="spring";  
+$season[3]="autumn";
+$salary=array("Hema"=>"350000","John"=>"450000","Kartik"=>"200000");
+$salary["Hema"]="350000";    
+$salary["John"]="450000";    
+$salary["Kartik"]="200000";
+echo count($salary);
+foreach($salary as $k => $v) {  
+    echo "Key: ".$k." Value: ".$v."<br/>";  
+} 
+$emp = array  
+  (  
+  array(1,"sonoo",400000),  
+  array(2,"john",450000),  
+  array(3,"rahul",300000)  
+  );
+for ($row = 0; $row < 3; $row++) {
+    for ($col = 0; $col < 3; $col++) {  
+        echo $emp[$row][$col]."  ";  
+    }
+  echo "<br/>"; 
+}
+
+$salary=array("Maxsu"=>"550000","Vimal"=>"250000","Ratan"=>"200000");
+print_r(array_change_key_case($salary,CASE_UPPER)); # Array ( [SONOO] => 550000 [VIMAL] => 250000 [RATAN] => 200000 )
+print_r(array_chunk($salary,2, $preserve_keys = false));
+
+$season=array("summer","winter","spring","autumn");
+
+sort($season);
+foreach( $season as $s )
+{
+    echo "$s<br />";
+}
+
+$reverseseason=array_reverse($season);  
+foreach( $reverseseason as $s )    
+{    
+  echo "$s<br />";    
+}
+
+$key=array_search("spring",$season);  
+echo $key;
+
+$name1=array("maxsu","john","vivek","minsu");    
+$name2=array("umesh","maxsu","kartik","minsu");    
+$name3=array_intersect($name1,$name2);  
+foreach( $name3 as $n )    
+{    
+  echo "$n<br />";    
+}
+
+$str='Hello text within single quote';
+$str2="Using double \"quote\" with backslash inside double quoted string"; 
+
+$str=strtolower("My name is Yiibai"); # strtoupper
+$str=ucwords("My name is Yiibai"); # strtoupper
+$str=ucfirst("My name is Yiibai"); # lcfirst
+$str=strrev("My name is Yiibai"); # lcfirst
+
+$len=strlen("My name is Yiibai");
+
+
 $str = preg_replace_callback(
     '/([a-z]*)([A-Z]*)/', 
     function($matchs){
         return strtoupper($matchs[1]).strtolower($matchs[2]);
     }, 
-    $str
+$str
 );
 
 //示例一：函数内销毁全局变量$foo是无效的
@@ -210,7 +281,6 @@ function destroy_foo() {
     unset($foo);
     echo $foo;//Notice: Undefined variable: foo
 }
-
 $foo = 'bar';
 destroy_foo();
 echo $foo;//bar
@@ -220,7 +290,6 @@ function foo()
 {
     unset($GLOBALS['bar']);
 }
-
 $bar = "something";
 foo();
 echo $bar;//Notice: Undefined variable: bar
@@ -355,10 +424,41 @@ if( $result == true ){
   echo "Message sent successfully...";  
 }else{  
   echo "Sorry, unable to send mail...";  
-} 
+}
+<?
+//add() function with two parameter  
+function add($x,$y)    
+{  
+    $sum=$x+$y;  
+    echo "Sum = $sum <br><br>";  
+}  
+//sub() function with two parameter  
+function sub($x,$y)    
+{  
+    $sub=$x-$y;  
+    echo "Diff = $sub <br><br>";  
+}  
+//call function, get  two argument through input box and click on add or sub button  
+if(isset($_POST['add']))  
+{  
+    //call add() function  
+     add($_POST['first'],$_POST['second']);  
+}     
+if(isset($_POST['sub']))  
+{  
+    //call add() function  
+    sub($_POST['first'],$_POST['second']);  
+}  
+?>  
+<form method="post">  
+    Enter first number: <input type="number" name="first"/><br>
+    Enter second number: <input type="number" name="second"/><br>
+<input type="submit" name="add" value="ADDITION"/>  
+<input type="submit" name="sub" value="SUBTRACTION"/>  
+</form>
 ```
 
-##### Lambda表达式(匿名函数)与闭包
+#### Lambda表达式(匿名函数)与闭包
 
 Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态。闭包在匿名函数的基础上增加了与外部环境的变量交互，通过 use 子句中指定要导入的外部环境变量
 
@@ -438,8 +538,6 @@ $a > $b ($a <=> $b) === 1
 $bytes = random_bytes(5);
 var_dump(bin2hex($bytes));//string(10) "385e33f741"
 var_dump(random_int(100, 999));//int(248)
-
-
 ```
 
 ### 函数
@@ -447,9 +545,12 @@ var_dump(random_int(100, 999));//int(248)
 一段可以重复使用多次的代码。 它可以接受输入作为参数列表和返回值
 
 * 参数
-    - 引用调用:传递给函数的值默认情况下不会修改实际值(通过值调用)
-    - 传递给函数的值是通过值调用。 要传递值作为参考(引用)，您需要在参数名称前使用＆符号(&)。
+    - 引用调用:要传递值作为参考(引用)，您需要在参数名称前使用＆符号(&)。
+    - 值调用:传递给函数的值默认情况下不会修改实际值(通过值调用),传递给函数的值是通过值调用。作用域函数范围内
+    - 默认参数
+    - 可变长度参数函数
 * 返回值
+* 递归函数
 
 addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
 urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
@@ -468,18 +569,172 @@ sayHello("Minsu",26);
 sayHello("John",23);
 sayHello("Henry");
 
-function adder(&$str2)  
+function increment($i)  
 {  
-    $str2 .= 'Call By Reference';  
+    $i++;  
 }  
-$str = 'Hello ';  
-adder($str);  
-echo $str;
+$i = 10;  
+increment($i);  
+echo $i; # 10
+
+function increment(&$i)  
+{  
+    $i++;  
+}  
+$i = 10;  
+increment($i);  
+echo $i;  # 11
+
+function add(...$numbers) {  
+    $sum = 0;  
+    foreach ($numbers as $n) {  
+        $sum += $n;  
+    }  
+    return $sum;  
+}
+echo add(1, 2, 3, 4);
+
+function display($number) {    
+    if($number<=5){    
+     echo "$number <br/>";    
+     display($number+1);    
+    }  
+}
+display(1);
+
+function factorial($n)    
+{    
+    if ($n < 0)    
+        return -1; /*Wrong value*/    
+    if ($n == 0)    
+        return 1; /*Terminating condition*/    
+    return ($n * factorial ($n -1));    
+}
+echo factorial(5);
+```
+
+### 状态管理
+
+服务器端存储技术
+
+* cookie是一个小段信息，存储在客户端浏览器中。它可用于识别用户。cookie在服务器端创建并保存到客户端浏览器。 每当客户端向服务器发送请求时，cookie都会嵌入请求。 这样，cookie数据信息可以在服务器端接收。
+    - 设置
+    - 获取
+    - 删除
+* session:用于临时存储和从一个页面传递信息到另一个页面(直到用户关闭网站).广泛应用于购物网站，我们需要存储和传递购物车信息。 用户名，产品代码，产品名称，产品价格等信息从一个页面传递到另一个页面。
+    - PHP会话为每个浏览器创建唯一的用户ID，以识别用户，并避免多个浏览器之间的冲突。
+    - session_start()函数用于启动会话。 它启动一个新的或恢复现有会话。 如果已创建会话，则返回现有会话。 如果会话不可用，它将创建并返回新会话。
+    - $_SESSION是一个包含所有会话变量的关联数组。 它用于设置和获取会话变量值。
+    - session_destroy()
+
+```php
+setcookie("CookieName", "CookieValue");/* defining name and value only*/  
+setcookie("CookieName", "CookieValue", time()+1*60*60);//using expiry in 1 hour(1*60*60 seconds or 3600 seconds)  
+setcookie("CookieName", "CookieValue", time()+1*60*60, "/mypath/", "yiibai.com", 1);
+
+$value=$_COOKIE["CookieName"];//returns cookie value
+
+<?php  
+setcookie("user", "Maxsu");  
+?>
+<?php  
+if(!isset($_COOKIE["user"])) {  
+    echo "Sorry, cookie is not found!";  
+} else {  
+    echo "<br/>Cookie Value: " . $_COOKIE["user"];  
+}  
+?>
+
+# session1.php
+<?php  
+session_start();  
+?>  
+<html>  
+<body>  
+<?php  
+$_SESSION["user"] = "Maxsu";  
+echo "Session information are set successfully.<br/>";  
+?>  
+<a href="session2.php">Visit next page</a>  
+</body>  
+</html>
+# session2.php
+<?php  
+session_start();  
+?>  
+<html>  
+<body>  
+<?php  
+echo "User is: ".$_SESSION["user"];  
+?>  
+</body>  
+</html>
+
+<?php
+session_start();  
+
+if (!isset($_SESSION['counter'])) {  
+    $_SESSION['counter'] = 1;  
+} else {  
+    $_SESSION['counter']++;
+}  
+echo ("Page Views: ".$_SESSION['counter']);
 ```
 
 ### 文件操作
 
+* 创建文件
+* 打开文件：resource fopen ( string $filename , string $mode [, bool $use_include_path = false [, resource $context ]] )函数用于打开文件或URL并返回资源。 fopen()函数接受两个参数$ filename和$mode。 $filename表示要被打开的文件，$mode表示文件模式
+    - r 以只读模式打开文件。 它将文件指针放在文件的开头。
+    - r+  以读写模式打开文件。 它将文件指针放在文件的开头。
+    - w   以只写模式打开文件。 它将文件指针放在文件的开头，并将文件截断为零长度。 如果找不到文件，则会自动创建一个新文件。
+    - w+  以读写模式打开文件。 它将文件指针放在文件的开头，并将文件截断为零长度。 如果找不到文件，则会自动创建一个新文件。
+    - a   以只写模式打开文件。 它将文件指针放在文件的末尾。 如果找不到文件，则会创建一个新文件。
+    - a+  以读写模式打开文件。 它将文件指针放在文件的末尾。 如果找不到文件，则会创建一个新文件。
+    - x   以只写模式创建和打开文件。 它将文件指针放在文件的开头。 如果找到文件，fopen()函数返回FALSE。
+    - x+  它与x相同，但它以读写模式创建和打开文件。
+    - c   以只写模式打开文件。 如果文件不存在，则会创建它。 如果存在，它不会被截断(与’w‘相反)，也不会调用此函数失败(如’x‘的情况)。 文件指针位于文件的开头
+    - c+  它与c相同，但它以读写模式打开文件。
+* 读取文件：string fread (resource $handle , int $length )函数用于读取文件的数据。 它需要两个参数：文件资源($handle 由fopen()函数创建的文件指针)和文件大小($length 要读取的字节长度)
+    - 逐行读取文件：string fgets ( resource $handle [, int $length ] )函数用于从文件中读取单行数据内容。
+    - 逐个字符读取文件：string fgetc ( resource $handle )函数用于从文件中读取单个字符。 要使用fgetc()函数获取所有数据，请在while循环中使用!feof()函数作为条件。
+* 写入文件：int fwrite ( resource $handle , string $string [, int $length ] )：用于将字符串的内容写入文件。
+    - 如果再次运行上面的代码，它将擦除文件的前一个数据并写入新的数据。
+    - 附加文件
+* 删除文件：bool unlink ( string $filename [, resource $context ] )
+* 关闭文件
+* 上传文件：`bool move_uploaded_file ( string $filename , string $destination )`
+    - $_FILES['filename']['name']   返回文件名称
+    - $_FILES['filename']['type'] 返回文件的MIME类型
+    - $_FILES['filename']['size'] 返回文件的大小(以字节为单位)
+    - $_FILES['filename']['tmp_name'] 返回存储在服务器上的文件的临时文件名。
+    - $_FILES['filename']['error']    返回与此文件相关联的错误代码。
+* 下载文件：int readfile ( string $filename [, bool $use_include_path = false [, resource $context ]] )
+    - $filename：表示文件名
+    - $use_include_path：它是可选参数。它默认为false。可以将其设置为true以搜索included_path中的文件。
+    - $context：表示上下文流资源。
+    - int：它返回从文件读取的字节数。
+
 ```php
+$filename = "c:\\myfile.txt";    
+$handle = fopen($filename, "r");//open file in read mode    
+$contents = fread($handle, filesize($filename));//read file    
+echo $contents;//printing data of file  
+fclose($handle);//close file
+
+$fp = fopen('data.txt', 'w');//open file in write mode  
+fwrite($fp, 'hello ');  
+fwrite($fp, 'php file');  
+fclose($fp);  
+echo "File written successfully";
+
+$status=unlink('data.txt');    
+if($status){  
+echo "File deleted successfully";    
+}else{  
+echo "Sorry!";    
+}
+
 $fp  = fopen('lock.txt', 'w+');
 if (flock($fp, LOCK_EX)) {
     fwrite($fp, 'write something');
@@ -488,6 +743,42 @@ if (flock($fp, LOCK_EX)) {
     echo "file is locking...";
 }
 fclose($fp);
+
+$fp = fopen("c:\\file1.txt", "r");//open file in read mode    
+while(!feof($fp)) {  
+  echo fgetc($fp);  
+}  
+fclose($fp);
+
+$fp = fopen('data.txt', 'a');//opens file in append mode  
+fwrite($fp, ' this is additional text ');  
+fwrite($fp, 'appending data');  
+fclose($fp);
+echo "File appended successfully";
+
+# uploadform.html
+<form action="uploader.php" method="post" enctype="multipart/form-data">  
+    选择上传的文件:  
+    <input type="file" name="fileToUpload"/>  
+    <input type="submit" value="Upload Image" name="submit"/>  
+</form>
+
+<?php  
+$target_path = "D:/";  
+$target_path = $target_path.basename( $_FILES['fileToUpload']['name']);   
+
+if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_path)) {  
+    echo "File uploaded successfully!";  
+} else{  
+    echo "Sorry, file not uploaded, please try again!";  
+}  
+?>
+
+$file_url = 'http://www.myremoteserver.com/file.exe';  
+header('Content-Type: application/octet-stream');  
+header("Content-Transfer-Encoding: Binary");   
+header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");   
+readfile($file_url);
 ```
 
 ### 面向对象(OOP)
@@ -781,13 +1072,13 @@ EXPOSE 9000 CMD ["php-fpm"]
 
 ## 框架
 
-- [php/php-src](https://github.com/php/php-src):The PHP Interpreter <http://www.php.net>
-- [pinguo/php-msf](https://github.com/pinguo/php-msf)PHP微服务框架即"Micro Service Framework For PHP"，是Camera360社区服务器端团队基于Swoole自主研发现代化的PHP协程服务框架，简称msf或者php-msf，是Swoole的工程级企业应用框架，经受了Camera360亿级用户高并发大流量的考验
-- [Youzan Zan Php Installer](https://github.com/youzan/zan-installer)Youzan Zan Php Installer
-- [tencent-php/tsf](https://github.com/tencent-php/tsf):coroutine and Swoole based php server framework in tencent
-- [slimphp/Slim](https://github.com/slimphp/Slim):Slim Framework source code <http://slimframework.com>
-- [nette/nette](https://github.com/nette/nette):METAPACKAGE for Nette Framework components https://nette.org
-- [Tencent/Biny](https://github.com/Tencent/Biny):Biny is a tiny, high-performance PHP framework for web applications
+* [php/php-src](https://github.com/php/php-src):The PHP Interpreter <http://www.php.net>
+* [pinguo/php-msf](https://github.com/pinguo/php-msf)PHP微服务框架即"Micro Service Framework For PHP"，是Camera360社区服务器端团队基于Swoole自主研发现代化的PHP协程服务框架，简称msf或者php-msf，是Swoole的工程级企业应用框架，经受了Camera360亿级用户高并发大流量的考验
+* [Youzan Zan Php Installer](https://github.com/youzan/zan-installer)Youzan Zan Php Installer
+* [tencent-php/tsf](https://github.com/tencent-php/tsf):coroutine and Swoole based php server framework in tencent
+* [slimphp/Slim](https://github.com/slimphp/Slim):Slim Framework source code <http://slimframework.com>
+* [nette/nette](https://github.com/nette/nette):METAPACKAGE for Nette Framework components https://nette.org
+* [Tencent/Biny](https://github.com/Tencent/Biny):Biny is a tiny, high-performance PHP framework for web applications
 
 ### 论坛
 
