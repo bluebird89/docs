@@ -85,6 +85,7 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 * [iview/iview-admin](https://github.com/iview/iview-admin):Vue 2.0 admin management system template based on iView https://iview.github.io/iview-admin
 * [nuxt/nuxt.js](https://github.com/nuxt/nuxt.js):Versatile Vue.js Framework https://nuxtjs.org
 * [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
+* [vuejs/vuex-router-sync](https://github.com/vuejs/vuex-router-sync):Effortlessly keep vue-router and vuex store in sync.
 
 ## 参考
 
