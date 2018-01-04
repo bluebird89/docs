@@ -9,76 +9,72 @@ Shell是Linux/Unix的一个外壳。它负责外界与Linux内核的交互，接
 ### zsh:
 
 ```sh
-$ cat /etc/shells
-$ echo $SHELL/bin/bash
-$ sudo apt-get install zsh git wget
-$ wget --no-check-certificate 。![]https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-$ chsh -s /bin/zsh
-$ sudo reboot
+cat /etc/shells
+
+echo $SHELL/bin/bash
+sudo apt-get install zsh git wget
+wget --no-check-certificate 。![]https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+
+chsh -s /bin/zsh
+source ~/.bashrc # 运行 
 ```
 
 #### oh my zsh
 
-- 查看shell：cat /etc/shells
-- 安装
+```sh
+cat /etc/shells # 查看shell
 
-  - sudo yum install zsh
-  - sudo apt-get install zsh
+sudo yum install zsh
+sudo apt-get install zsh
 
-  - 自动安装：
+# 自动安装
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
 
-    ```
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-    ```
+# 手动
+git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
-    -手动：
-
-    ```
-    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-    ```
-
-  - chsh -s /bin/zsh：修改系统bash
-
-  - 运行 source ~/.bashrc
+chsh -s /bin/zsh # 修改系统bash
+source ~/.bashrc # 运行 
+```
 
 - 配置： home目录的.zshrc(不用单配，插件配置有)
 
-  ```
-    alias cls='clear'
-    alias ll='ls -l'
-    alias la='ls -a'
-    alias vi='vim'
-    alias javac="javac -J-Dfile.encoding=utf8"
-    alias grep="grep --color=auto"
-    alias -s html=mate   # 在命令行直接输入后缀为 html 的文件名，会在 TextMate 中打开
-    alias -s rb=mate     # 在命令行直接输入 ruby 文件，会在 TextMate 中打开
-    alias -s py=vi       # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
-    alias -s js=vi
-    alias -s c=vi
-    alias -s java=vi
-    alias -s txt=vi
-    alias -s gz='tar -xzvf'
-    alias -s tgz='tar -xzvf'
-    alias -s zip='unzip'
-    alias -s bz2='tar -xjvf'
-    alias cdhome='cd ~'
-    alias cdroot='cd /'
-    alias gpull='git pull'
-    alias gci='git commit -a'
-    alias gpush='git push origin HEAD:refs/for/master'
-    alias gst='git status'
-    alias sublime='open -a "Sublime Text"' //加入Sublime Text
-  ```
+```
+alias cls='clear'
+alias ll='ls -l'
+alias la='ls -a'
+alias vi='vim'
+alias javac="javac -J-Dfile.encoding=utf8"
+alias grep="grep --color=auto"
+alias -s html=mate   # 在命令行直接输入后缀为 html 的文件名，会在 TextMate 中打开
+alias -s rb=mate     # 在命令行直接输入 ruby 文件，会在 TextMate 中打开
+alias -s py=vi       # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
+alias -s js=vi
+alias -s c=vi
+alias -s java=vi
+alias -s txt=vi
+alias -s gz='tar -xzvf'
+alias -s tgz='tar -xzvf'
+alias -s zip='unzip'
+alias -s bz2='tar -xjvf'
+alias cdhome='cd ~'
+alias cdroot='cd /'
+alias gpull='git pull'
+alias gci='git commit -a'
+alias gpush='git push origin HEAD:refs/for/master'
+alias gst='git status'
+alias sublime='open -a "Sublime Text"' //加入Sublime Text
+```
 
   - 主题设置：ZSH_THEME="robbyrussell"（文件在~/.oh-my-zsh/themes）
 
-    ```
-      PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}>'
-      #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-    ```
+```
+PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}>'
+#PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+```
 
 - 插件：追加：plugins=(git textmate ruby autojump osx mvn gradle)
 
@@ -90,77 +86,71 @@ $ sudo reboot
 
   - 跳转目录： j + 目录名
 
-### fish(the friendly interactive shell)
+### fish
 
-- 安装
+the friendly interactive shell
 
-  ```sh
-  sudo apt-get install fish
-  brew install fish
+* 彩色显示
+* 有效路径为下划线
+* 光标会给提示:→(选中) 只采纳一部分，可以按下(Alt + →)
+* 补全存在的历史记录或猜测可能性(tab选择)
 
-  // iterm 配置
-  echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
-  chsh -s /usr/local/bin/fish
-  curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher  // 安装fisherman（fish 的插件管理器）
-  fisher omf/theme-default
-  ```
+```sh
+# 安装
+sudo apt-get install fish
+brew install fish
 
-  ```
-  fish:启动
-  help:手册
-  ```
+# iterm 配置
+echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
+chsh -s /usr/local/bin/fish
+curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher  // 安装fisherman（fish 的插件管理器）
+fisher omf/theme-default
+fish # 启动
+help # 手册
+```
 
-- 特点
+配置文件：~/.config/fish/config.fish或者fish_config
 
-  - 彩色显示
-  - 有效路径为下划线
-  - 光标会给提示:→(选中) 只采纳一部分，可以按下(Alt + →)
-  - 补全存在的历史记录或猜测可能性(tab选择)
+```
+if grep fish /etc/shells
+    echo Found fish
+else if grep bash /etc/shells
+    echo Found bash
+else
+    echo Got nothing
+end
 
-- 配置文件:~/.config/fish/config.fish或者fish_config
+switch (uname)
+case Linux
+    echo Hi Tux!
+case Darwin
+    echo Hi Hexley!
+case FreeBSD NetBSD DragonFly
+    echo Hi Beastie!
+case '*'
+    echo Hi, stranger!
+end
 
-- 语法添加到配置文件
+while true
+  echo "Loop forever"
+end
 
-  ```
-      if grep fish /etc/shells
-          echo Found fish
-      else if grep bash /etc/shells
-          echo Found bash
-      else
-          echo Got nothing
-      end
+for file in *.txt
+  cp $file $file.bak
+end
 
-      switch (uname)
-      case Linux
-          echo Hi Tux!
-      case Darwin
-          echo Hi Hexley!
-      case FreeBSD NetBSD DragonFly
-          echo Hi Beastie!
-      case '*'
-          echo Hi, stranger!
-      end
+function ll
+  ls -lhG $argv
+end
 
-      while true
-        echo "Loop forever"
-      end
-
-      for file in *.txt
-        cp $file $file.bak
-      end
-
-      function ll
-        ls -lhG $argv
-      end
-
-      function fish_prompt
-        set_color purple
-        date "+%m/%d/%y"
-        set_color FF0
-        echo (pwd) '>'
-        set_color normal
-      end
-  ```
+function fish_prompt
+  set_color purple
+  date "+%m/%d/%y"
+  set_color FF0
+  echo (pwd) '>'
+  set_color normal
+end
+```
 
 所有操作都通过键盘，只适合命令行的重度用户.用来管理软件窗口的位置和大小，会自动在桌面上平铺（tiling）窗口。桌面环境通常很重，窗口管理器就很轻，不仅体积小，资源占用也少，用户可以配置各种细节，释放出系统的最大性能。
 

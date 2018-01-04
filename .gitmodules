@@ -4,3 +4,6 @@
 [submodule "Back_end/Go/awesome-go"]
 	path = Back_end/Go/awesome-go
 	url = git@github.com:avelino/awesome-go.git
+[submodule "Computer/Computer_science"]
+	path = Computer/Computer_science
+	url = git@github.com:ossu/computer-science.git
