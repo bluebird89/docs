@@ -7,3 +7,6 @@
 [submodule "Computer/Computer_science"]
 	path = Computer/Computer_science
 	url = git@github.com:ossu/computer-science.git
+[submodule "Design/Pattern/design-patterns-for-humans"]
+	path = Design/Pattern/design-patterns-for-humans
+	url = git@github.com:kamranahmedse/design-patterns-for-humans.git
