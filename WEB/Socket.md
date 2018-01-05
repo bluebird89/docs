@@ -18,10 +18,12 @@ socket则是对TCP/IP协议的封装和应用。也可以说，TPC/IP协议是�
 
 ## 资源
 
-* [Workerman](https://github.com/walkor/Workerman)An asynchronous event driven PHP framework for easily building fast, scalable network applications. Supports HTTP, Websocket, SSL and other custom protocols. Supports libevent, HHVM, ReactPHP.
 
 <http://blog.csdn.net/hguisu/article/details/7445768/>
 
 <http://blog.csdn.net/hguisu/article/details/7444092> <http://blog.csdn.net/hguisu/article/details/7448528> <http://blog.csdn.net/tongdoudpj/article/details/1750045> <https://www.zhihu.com/question/20215561> <http://www.cnblogs.com/JohnTsai/p/5197646.html>
 
 http://blog.csdn.net/dragonyangang/article/details/77937042
+
+
+服务在连接前监听，客户端主动发起连接，就着点区别。连接上后，两者对等

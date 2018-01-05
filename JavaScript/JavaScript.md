@@ -2283,6 +2283,9 @@ WebAssembly 已得到所有主流浏览器支持
 * [Microsoft/napajs](https://github.com/Microsoft/napajs):Napa.js: a multi-threaded JavaScript runtime
 * [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 
+## 资源
+
+* [staticfile/static](https://github.com/staticfile/static):开放静态文件 - 为开源库提供稳定、快速的免费 CDN 服务 https://staticfile.org
 ## 文档
 
 * [loiane/javascript-datastructures-algorithms](https://github.com/loiane/javascript-datastructures-algorithms/tree/second-edition):source code bundle of JavaScript algorithms and data structures book https://goo.gl/hrb00r
