@@ -20,7 +20,7 @@ Percona分支版本，它是一个相对比较成熟的、优秀的MySQL分支�
 ```shell
 brew install mysql
 brew services start mysql # /usr/local/Cellar/mysql/5.7.20
-mysql_secure_installation
+mysql_secure_installation 
 
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
@@ -129,8 +129,15 @@ service mysql restart
     - innodb_log_buffer_size:log缓存大小，一般为1-8M，默认为1M，对于较大的事务，可以增大缓存大小。可设置为4M或8M。
     - innodb_additional_mem_pool_size:该参数指定InnoDB用来存储数据字典和其他内部数据结构的内存池大小。缺省值是1M。通常不用太大，只要够用就行，应该与表结构的复杂度有关系。如果不够用，MySQL会在错误日志中写入一条警告信息。根据MySQL手册，对于2G内存的机器，推荐值是20M，可适当增加。
     - innodb_thread_concurrency=8:推荐设置为 2*(NumCPUs+NumDisks)，默认一般为8
+* 不要在命令行中输入密码 `mysql -u root -p`
 
 ```
+chmod 644 /etc/my.cnf # 文件 /etc/my.conf 只能由 root 用户修改
+cat /dev/null > ~/.mysql_history # 删除 MySQL shell 历史
+
+bind-address = 127.0.0.1 # 将限制来自远程机器的访问，它告诉 MySQL 服务器只接受来自本地主机的连接
+local-infile=0 # 使用下面的指令以防止在 [mysqld] 部分从 MySQL 中访问底层文件系统。
+
 [client]
 datadir="F:/wamp/mysql/data"
 default-character-set = utf8
@@ -140,6 +147,8 @@ default-collation=utf8_general_ci
 default-storage-engine = INNODB
 character-set-server = utf8
 collation-server = utf8_general_ci
+Port=5000 # 修改端口号
+log=/var/log/mysql.log # 了解服务运行过程中发生了什么的最好的方法之一
 
 log-slow-queries=/data/mysqldata/slow-query.log # 慢查询日志存放的位置，一般这个目录要有mysql的运行帐号的可写权限，一般都将这个目录设置为mysql的数据存放目录；
 long_query_time=2     # 表示查询超过两秒才记录

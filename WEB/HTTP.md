@@ -29,11 +29,6 @@ HTTP/1.1 200 OK
 - 403、304含义
 - 不缓存cache-control设置
 
-## 扩展
-
-- 图解HTTP
-- HTTP权威指南：需要理解HTTP的本质复杂度，并且避免被作者引入的非本质复杂度的干扰。
-
 ## OSI（Open Systems Interconnection Model）TCP/IP ，从上往下的，越底层越接近硬件，越往上越接近软件，是一个标准
 
 - 应用层：HTTP,解决如何包装数据。各种应用软件，包括 Web 应用。
@@ -70,10 +65,6 @@ TCP/IP协议通信的过程其实就对应着数据入栈与出栈的过程。�
 - 第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。
 
 我们在传输数据时，可以只使用（传输层）TCP/IP协议，但是那样的话，如果没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用到应用层协议，应用层协议有很多，比如HTTP、FTP、TELNET等，也可以自己定义应用层协议。WEB使用HTTP协议作应用层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发到网络上。
-
-## 扩展
-
-- [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie)Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc. <https://httpie.org> <https://twitter.com/clihttp>
 
 ### 网络层
 
@@ -232,9 +223,11 @@ header('Access-Control-Allow-Origin:*');
 
 ![HTTPS签名和验证](../static/https-ac.png "HTTPS签名和验证")
 
-
 ## 参考
 
-- [HTTP 下午茶](http://book.haoduoshipin.com/tealeaf-http/)
-- [关于 TCP/IP，必知必会的十个问题](https://juejin.im/post/598ba1d06fb9a03c4d6464ab)
-- [面试 -- 网络 HTTP](https://juejin.im/post/5872309261ff4b005c4580d4)
+* [HTTP 下午茶](http://book.haoduoshipin.com/tealeaf-http/)
+* [关于 TCP/IP，必知必会的十个问题](https://juejin.im/post/598ba1d06fb9a03c4d6464ab)
+* [面试 -- 网络 HTTP](https://juejin.im/post/5872309261ff4b005c4580d4)
+* [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie)Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc. <https://httpie.org> <https://twitter.com/clihttp>
+* 图解HTTP
+* HTTP权威指南：需要理解HTTP的本质复杂度，并且避免被作者引入的非本质复杂度的干扰。

@@ -146,8 +146,33 @@ ctrl+alt+shift+p python
 
 ### 编辑
 
+Edit(编辑)
+⌘[向左缩进 | Left indent⌘]向右缩进 | Right Indent⌘⌃↑与上一行互换（超实用！）| Swap line up⌘⌃↓与下一￼行互换￼（超实用！）| Swap line down⌘⇧D复制粘贴当前行（减少多余的粘贴）| Duplicate line⌘J拼接行（css格式化时挺有用） | join lines⌘←去往行的开头 | Beginning of line⌘→去往行末尾 | End of line⌘⌃/块注释 | Toggle comment block⌃K从光标开始的地方删除到行尾 | Delete to end⌃⇧K删除一整行 | delete line⌃T相邻单词互换位置，在','前试用，有惊喜（很有趣）| Transpose⌘⇧↩向光标前插入一行|insert line before⌘↩向光标后插入一行|inter line after⌘⌥T插入特殊字符|Special characters⌃D向后删除（很怪异的操作，不过感觉很酷炫）
+
+Selection(光标选中)
+⌘D选中相同的词 | Expand selection to words⌃⌘G多重文本光标选中（再也不用⌘ D一个一个的找啦）| Expand all selection to words⌘L选中一行|Expand selection to lineEsc单选（取消多重选择）|Single selection,Cancel multiple selections⌃⇧↑一行一行向上选中|Add previous line⌃⇧↓一行一行向下选中|Add next line⌘⇧L将选中的区域分割成多行选中状态(多光标操作状态)|Split into lines⌥+拖动鼠标多重光标选中⌘⇧J已缩进层级为依据，一层层向外选中|Expand selection to indentation⌃⇧M将匹配括号中的内容选中|Expand selection to brackets
+
+Find(查找)
+⌘F普通查找|Find⌘G查找下一个|Find next⌘⇧F在文件夹中查找| Find in files⌘⇧E缓存用于替换的内容，方便之后的替换|Use selection for replace⌘E缓存用于查找的内容，方便之后的查找|Use selection for find⌘⌥E一个接一个往下替换|Replace next
+
+View(视图)
+推荐使用Origami插件，可以随意对sublime进行分割
+
+Go to(跳转/定位)
+⌘P跳转文件（很方便）| Go to anything⌘R定位文件中的方法@| Go to symbol⌘G定位文件中的行号:| Go to line⌃M定位匹配的括号 | Jump to matching bracket⌘F2设置/取消定位标记| Toggle bookmarkF2跳转到定位标记处 | Next bookmark⌘⇧F2清除所有定位标记| Clear all bookmarks⌘⌥→下一个打开的文件| Next file
+
+Project(工程)
+⌘⌃P在保存过的工程中切换，随意变换工程环境|Switch project window
+
+General(通用)
+⌘⇧P 打开命令行| Command prompt⌘K, ⌘B隐藏/打开 侧边栏| Toggle side bar
+
+Tabs（标签栏）
+⌘⇧t 打开最后一次关闭的文件|Open last closed tab^Tab 循环遍历tab|Cycle up through tabs^⇧Tab 反方向循环遍历tab|Cycle down through tabs
+
 * 多行同时编辑：选中行数 ctrl+shift+L
-* 选词： 选中文本 逐个添加：ctrl+d 全部选中 alt+f3
+* 选词： 选中文本 逐个添加：ctrl+d 
+* 全部选中 alt+f3 control + commond + G
 * 合并行：Ctrl+J
 * 换行：alt+q
 * 选择整行：Ctrl+L
@@ -251,6 +276,7 @@ ctrl+alt+shift+p python
 * 递增：
 * 包含多个类：p.class1.class2.class3
 * 自定义属性：p[title='hello'] td[rowspan=2 colspan=3 title]
+* section#block$*3>h2.title+p.words*2
 * 文本：{}
 * 隐标签：ul>.class table>.row>.col
 * a:link a:mail meta:utf
@@ -359,7 +385,30 @@ ul>li.item$@3_5(定位起始符) div#v$@3_5
 
 ### 构建build
 
-* 运行构建：ctrl+b
+* 构建：ctrl+b
+* 运行：ctrl+shift+b
+
+```json
+{
+    "shell_cmd": "make",
+    "cmd" : ["gcc $file_name -o ${file_base_name}"],
+    "shell" : true,
+    "working_dir" : "$file_path",
+    "variants" :
+    {
+        "name" : "Run",
+        "cmd" : "./${file_base_name}"
+    }
+}
+
+// 生效有延时,配置php环境变量
+{
+    "cmd": ["php", "$file"],
+    "file_regex": "php$",
+    "selector"  : "source.php"
+}
+
+```
 
 ### 主题theme
 
