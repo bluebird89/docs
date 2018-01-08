@@ -137,6 +137,7 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
 - [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
 - Fantastical 2:日历工具 收费
+- [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
 - 苹果铃声制作
 
   - 音乐文件用itunes打开
@@ -161,6 +162,7 @@ iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配�
 - 在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等
 
 ### 快捷键
+
 ## 键位
 
 * Command ⌘
@@ -512,6 +514,12 @@ Insert Horizontal Rule | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>-</kbd>
 点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
 
 ### XtraFinder 文件管理器，涉及权限，暂停使用
+
+## Xcode
+
+```
+xcode-select --install # 安装 Command Line Tools
+```
 
 ## 自启动的配置
 

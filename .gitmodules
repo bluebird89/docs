@@ -10,3 +10,6 @@
 [submodule "Design/Pattern/design-patterns-for-humans"]
 	path = Design/Pattern/design-patterns-for-humans
 	url = git@github.com:kamranahmedse/design-patterns-for-humans.git
+[submodule "Finance/awesome-portfolios"]
+	path = Finance/awesome-portfolios
+	url = git@github.com:iRaul/awesome-portfolios.git
