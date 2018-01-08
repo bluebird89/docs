@@ -2269,6 +2269,7 @@ WebAssembly 已得到所有主流浏览器支持
 ## 框架
 
 * [ecomfe/echarts](https://github.com/ecomfe/echarts):A powerful, interactive charting and visualization library for browser http://echarts.baidu.com/
+* [hyperapp/hyperapp](https://github.com/hyperapp/hyperapp):1 KB JavaScript library for building web applications. https://hyperapp.js.org
 
 ## 工具
 
@@ -2277,6 +2278,7 @@ WebAssembly 已得到所有主流浏览器支持
 * [mozilla/pdf.js](https://github.com/mozilla/pdf.js):PDF Reader in JavaScript
 * [mozilla-neutrino/neutrino-dev](https://github.com/mozilla-neutrino/neutrino-dev):Create and build modern JavaScript applications with zero initial configuration. https://neutrino.js.org
 * [facebook/immutable-js](https://github.com/facebook/immutable-js):Immutable persistent data collections for Javascript which increase efficiency and simplicity. http://facebook.github.io/immutable-js/
+* [babel/babel](https://github.com/babel/babel):🐠 Babel is a compiler for writing next generation JavaScript. https://babeljs.io/
 
 ## 扩展
 
@@ -2286,6 +2288,7 @@ WebAssembly 已得到所有主流浏览器支持
 ## 资源
 
 * [staticfile/static](https://github.com/staticfile/static):开放静态文件 - 为开源库提供稳定、快速的免费 CDN 服务 https://staticfile.org
+
 ## 文档
 
 * [loiane/javascript-datastructures-algorithms](https://github.com/loiane/javascript-datastructures-algorithms/tree/second-edition):source code bundle of JavaScript algorithms and data structures book https://goo.gl/hrb00r

@@ -25,4 +25,4 @@ Neo4j是一个图形数据库，这也就意味着它的数据并非保存在表
 
 ## 参考
 
-* [](https://neo4j.com/)
+* [neo4j/neo4j](https://github.com/neo4j/neo4j):Graphs for Everyone http://neo4j.com
