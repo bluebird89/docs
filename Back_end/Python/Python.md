@@ -1220,6 +1220,12 @@ CMD ["python3"]
 
 安装 chromedriver
 
+## 问题
+
+```
+/System/Library/Frameworks/Python.framework/Versions/2.7/share': Operation not permitted
+
+```
 ## 参考
 
 - [python/cpython](https://github.com/python/cpython):The Python programming language

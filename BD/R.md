@@ -21,6 +21,13 @@
 * R的极客理想 - 高级开发篇
 * [R的极客理想-量化投资篇]():把R语言的技术和实际的金融量化案例结合起来，让读者能切身的体会把知识变成真正的生产力。
 
+## 记录
+
+```R
+# tar: Failed to set default locale' error?
+system('defaults write org.R-project.R force.LANG en_US.UTF-8')
+Restart R
+```
 ## 参考
 
 * [安装](https://mirrors.tuna.tsinghua.edu.cn/CRAN/) 

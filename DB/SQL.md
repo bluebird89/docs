@@ -98,3 +98,4 @@ NoSQL主要用于解决以下几种问题
 ## 扩展
 
 * [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. https://osquery.io
+    - [Docs](https://osquery.readthedocs.io)
