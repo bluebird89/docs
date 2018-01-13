@@ -133,3 +133,7 @@ class Ext_Pgsql {
 
 }
 ```
+
+## 参考
+
+* [digoal/blog](https://github.com/digoal/blog):Everything about database,bussiness. http://blog.163.com/digoal@126
