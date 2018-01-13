@@ -67,22 +67,20 @@ valet restart
 - git clone <https://github.com/laravel/homestead.git> Homestead
 - bash init.sh
 - 修改.homestread\Homestead.yaml
-
-  ```yaml
-        folders:
-        - map: D:\Code    <!-- 项目地址 -->
-            to: /home/vagrant/Code   <!-- 虚拟机的项目地址 -->
-
-        sites:
-        - map: laravel.app  <!-- 添加的站点名称 -->
-            to: /home/vagrant/Code/Laravel/public <<!-- 站点对应的虚拟机文件 -->
-  ```
 - vagrant provision
 - vagrant init 
 - vagrant up
-
 - 添加ip
 
+```yaml
+      folders:
+      * map: D:\Code    <!-- 项目地址 -->
+          to: /home/vagrant/Code   <!-- 虚拟机的项目地址 -->
+
+      sites:
+      * map: laravel.app  <!-- 添加的站点名称 -->
+          to: /home/vagrant/Code/Laravel/public <<!-- 站点对应的虚拟机文件 -->
+```
 Homestead(vagrant up):The SSH command responded with a non-zero exit status.
 
 Composer代理镜像
@@ -109,6 +107,11 @@ from @golaravel
 * 生成应用的key(APP_KEY)为一个随机字符串:php artisan key:generate
 * 重新生成框架的自动加载文件:composer dump-autoload
 * 进入tinker环境：php artisan tinker
+
+```
+composer create-project laravel/laravel
+php artisan serve
+```
 
 ```php
 //生成30条数据
