@@ -11,7 +11,6 @@ phpunit --version
 
 ## 参考
 
-- [PHPUnit在Windows下的配置及使用](http://www.cnblogs.com/schaepher/p/5011392.html) 
-
-## 仓库
+* [sebastianbergmann/phpunit](https://github.com/sebastianbergmann/phpunit):The PHP Unit Testing framework. https://phpunit.de/
+* [PHPUnit文档](http://www.phpunit.cn)
 
