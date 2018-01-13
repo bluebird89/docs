@@ -1041,6 +1041,7 @@ hasattr(obj, 'power') # 有属性'power'吗？ True
 
 - [python3](http://www.runoob.com/python3)
 - [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
+- [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
 - <http://www.cnblogs.com/linhaifeng/p/7278389.html>
 
 ## basic
@@ -1081,6 +1082,7 @@ hasattr(obj, 'power') # 有属性'power'吗？ True
 - [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
 - [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges)Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
 - [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
+
 ### Anaconda
 
 专注于数据分析的Python发行版本，包含了conda、Python等190多个科学包及其依赖项。适用于企业级大数据分析的Python工具。其包含了720多个数据科学相关的开源包，在数据可视化、机器学习、深度学习等多方面都有涉及。不仅可以做数据分析，甚至可以用在大数据和人工智能领域。
@@ -1113,6 +1115,7 @@ conda list -n python34
 conda  search search_term
 conda update conda
 conda update anaconda
+conda info -e
 
 conda create -n env_name  list of packages // 默认的环境是 root，你也可以创建一个新环境,-n 代表 name，env_name 是需要创建的环境名称，list of packages 则是列出在新环境中需要安装的工具包。
 conda create -n py2 python=2.7 pandas
@@ -1224,8 +1227,8 @@ CMD ["python3"]
 
 ```
 /System/Library/Frameworks/Python.framework/Versions/2.7/share': Operation not permitted
-
 ```
+
 ## 参考
 
 - [python/cpython](https://github.com/python/cpython):The Python programming language
