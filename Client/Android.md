@@ -1,14 +1,26 @@
 # Android
 
+## 安装
+
+```sh
+JAVA -version # JDK
+brew cask install android-studio # IDE
+# SDK
+/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home # project Defaults Project Structure JDK location
+
+Setting->Android SDK:
+```
 ## 课程
 
 * [kesenhoo/android-training-course-in-chinese](https://github.com/kesenhoo/android-training-course-in-chinese)
+
 ## 扩展
 
 - [Tencent/tinker](https://github.com/Tencent/tinker)a hot-fix solution library for Android, it supports dex, library and resources update without reinstall apk.
 - [airbnb/epoxy](https://github.com/airbnb/epoxy):Epoxy is an Android library for building complex screens in a RecyclerView https://goo.gl/eIK82p
 - [bumptech/glide](https://github.com/bumptech/glide):An image loading and caching library for Android focused on smooth scrolling http://bumptech.github.io/glide/
 - [square/okhttp](https://github.com/square/okhttp):An HTTP+HTTP/2 client for Android and Java applications. http://square.github.io/okhttp/
+- [Android Studio](http://www.android-studio.org/)
 
 ## 测试
 
