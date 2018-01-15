@@ -1227,3 +1227,8 @@ sudo dpkg --configure -a # fixing broken dependencies
 udo apt-get install -f
 
 sudo uname --m
+
+## 参考
+
+* [aleksandar-todorovic/awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
+* [LewisVo/Awesome-Linux-Software](https://github.com/LewisVo/Awesome-Linux-Software):🐧 A list of awesome applications, software, tools and other materials for Linux distros.
