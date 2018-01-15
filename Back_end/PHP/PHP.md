@@ -1054,7 +1054,10 @@ $controller->register();
     - 机器码(Machine Code)：也被称为原生码(Native Code)，用二进制代码表示的计算机能直接识别和执行的一种机器指令的集合，它是计算机硬件结构赋予的操作功能。
 * pdo-pgsql
 * phalcon
-* redis
+* redis:
+    - http://pecl.php.net/package/redis
+    - https://github.com/phpredis/phpredis
+    - 使用https://github.com/nrk/predis 
 * sphinx
 * swoole
 * xdebug
@@ -1169,6 +1172,7 @@ EXPOSE 9000 CMD ["php-fpm"]
 * [slimphp/Slim](https://github.com/slimphp/Slim):Slim Framework source code <http://slimframework.com>
 * [nette/nette](https://github.com/nette/nette):METAPACKAGE for Nette Framework components https://nette.org
 * [Tencent/Biny](https://github.com/Tencent/Biny):Biny is a tiny, high-performance PHP framework for web applications
+* [reactphp/react](https://github.com/reactphp/react):Event-driven, non-blocking I/O with PHP. https://reactphp.org
 
 ### 论坛
 
@@ -1232,6 +1236,10 @@ EXPOSE 9000 CMD ["php-fpm"]
 - [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
 - [PHP Best Practices](https://phpbestpractices.org)
 
+## 工具
+
+* [cytopia/docker-php-fpm-7.2](https://github.com/cytopia/docker-php-fpm-7.2):PHP-FPM 7.2 on CentOS 7 http://devilbox.org/
+
 ## 图书
 
 * [PHP: The Right Way](http://www.phptherightway.com/)
@@ -1275,7 +1283,7 @@ phpcs /path/to/code
 phpcs.enable true
 ```
 
-### xdebug
+### [xdebug](https://xdebug.org/)
 
 ```sh
 brew install homebrew/php/php71-xdebug
