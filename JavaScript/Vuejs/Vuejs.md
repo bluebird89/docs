@@ -91,7 +91,7 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 
 * [Vue.js——60分钟快速入门](http://www.cnblogs.com/keepfool/p/5619070.html)
 * [官方文档](https://cn.vuejs.org/v2/guide/) [文档](https://vuejs.org/v2/guide/)
-* [vuejs/awesome-vueawesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
+* [vuejs/awesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
 
 ## 项目：
 
