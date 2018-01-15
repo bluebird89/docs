@@ -99,3 +99,4 @@ NoSQL主要用于解决以下几种问题
 
 * [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. https://osquery.io
     - [Docs](https://osquery.readthedocs.io)
+* [vrana/adminer](https://github.com/vrana/adminer):Database management in a single PHP file https://www.adminer.org/
