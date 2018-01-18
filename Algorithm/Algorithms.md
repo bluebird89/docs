@@ -32,6 +32,71 @@
 需要利用算法进行组合优化，从而找到市场上最优的投资组合。算法本身，才是最能体现价值的部分。在金融市场里，每支基金都配置了不同的资产做组合.从市场上几千支的股票和债券中进行选择，并配置不同的权重，之前都是基金经理干的活，那么我们用算法一样也可以干，说不定用算法模型构建的组合业绩会更好。如果我们用算法模型，取代了年薪几百万的基金经理，那么你就能够获得这个收益。最终实现个人价值，从而用算法改变命运。所以，通过金融变现才是最靠谱的。
 
 
+### 二分查找（Binary Search）
+
+折半查找要求线性表必须采用顺序存储结构，而且表中元素按关键字有序排列。时间复杂度可以表示O(h)=O(log2n)
+
+* 假设表中元素是按升序排列，将表中间位置记录的关键字与查找关键字比较，如果两者相等，则查找成功；
+* 否则利用中间位置记录将表分成前、后两个子表，如果中间位置记录的关键字大于查找关键字，
+* 则进一步查找前一子表，否则进一步查找后一子表。重复以上过程，直到找到满足条件的记录，使查找成功，或直到子表不存在为止，此时查找不成功。
+
+```
+mid-<(max+min)/2
+    while(min<=max)
+        mid=(min+max)/2
+        if mid=des then
+            return mid
+        elseif mid >des then
+            max=mid-1
+        else
+        min=mid+1
+        return max
+
+function binsearch($x,$a){
+    $c=count($a);
+    $lower=0;
+    $high=$c-1;
+    while($lower<=$high){
+        $middle=intval(($lower+$high)/2);
+        if($a[$middle]>$x){
+            $high=$middle-1;
+        } elseif($a[$middle]<$x){
+            $lower=$middle+1;
+        } else{
+            return $middle;
+        }
+    }
+    return -1;
+}
+```
+
+给定一个升序排列的自然数数组，数组中包含重复数字，例如：[1,2,2,3,4,4,4,5,6,7,7]。问题：给定任意自然数，对数组进行二分查找，返回数组正确的位置，给出函数实现。注：连续相同的数字，返回第一个匹配位置还是最后一个匹配位置，由函数传入参数决定。
+
+b字段有一个B+树索引
+```sql
+select * from t1 where b > 4;  # 就需要跳过所有的4，从最后一个4之后开始返回所有记录
+select * from t1 where b >= 4; # 就需要定位到第一个4，然后顺序读取所有记录
+
+select * from t1 where b < 2; # 数据库索引同时支持反向扫描,定位到索引中的第一个2
+select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始反向返回满足查询条件的索引记录。
+```
+
+* 一般是对一个索引页面进行二分查找。索引页面中有可能根本不存在用户的记录(索引页面中的记录全部被删除，又没有与兄弟页面合并时)，此时，low/high均为0，此时如果根据low/high计算出来的mid进行记录的读取，就存在逻辑错误。
+* 中值算法
+    - mid = (low + high) / 2 ： 存在着溢出的风险
+    - mid = low + (high – low)/2 ：一个索引页面(大小一般是8k或者是16k)，能够存储的索引记录是有限的，因此肯定不会出现(low + high)溢出的风险。这也是为什么InnoDB中的中值，采用的就是算法一的实现。
+* 递归降低了效率
+* 如何查找第一个/最后一个等值：用flag来纠正每次比较的最终结果。例如：比较相等(相等用0表示，大于为1，小于为-1)，但是flag = 1，则返回纠正后的比较结果为1，需要移动二分查找的high到mid，继续二分(反之，若flag = 0，则返回纠正后的结果为-1，需要移动二分查找的low到mid，继续二分)。如此一来，等值仍旧可以进行二分查找，最终的对比只需要9次，远远小于200次。
+    - InnoDB针对不同的SQL语句，总结出四种不同的Search Mode
+    - 然后根据这四种不同的Search Mode，在二分查找碰到相同键值时进行调整。例如：若Search Mode为PAGE_CUR_G或者是PAGE_CUR_LE，则移动low至mid，继续进行二分查找；若Search Mode为PAGE_CUR_GE或者是PAGE_CUR_L，则移动high至mid，继续进行二分查找。
+
+```c
+#define    PAGE_CUR_G          1        >查询
+#define    PAGE_CUR_GE         2        >=，=查询
+#define    PAGE_CUR_L          3        <查询
+#define    PAGE_CUR_LE         4        <=查询
+```
+
 ## 资源
 
 * [OpenGenus/cosmos](https://github.com/OpenGenus/cosmos):[Show ❤️ love by 🌟] Your personal library of every algorithm and data structure code that you will ever encounter

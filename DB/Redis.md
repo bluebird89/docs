@@ -30,6 +30,7 @@ vm字段，只有打开了Redis的虚拟内存功能，此字段才会真正的�
 brew install redis
 brew services start/stop/restart redis
 ```
+
 ## 配置
 
 `/etc/redis/redis.conf`
@@ -95,7 +96,6 @@ get counter
 incr counter
 incrby counter 10
 DECR and DECRBY
-
 ```
 
 ### Hash
@@ -118,7 +118,6 @@ hset
 ```
 
 ### List
-
 
 * twitter的关注列表，粉丝列表等都可以用Redis的list结构来实现。
 * 使用Lists结构，我们可以轻松地实现最新消息排行等功能。
@@ -225,14 +224,14 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
 ```
 
 
-###特性
+### 特性
 
 * 管道：Redis管道是指客户端可以将多个命令一次性发送到服务器，然后由服务器一次性返回所有结果。管道技术在批量执行命令的时候可以大大减少网络传输的开销，提高性能。
 * 事务：Redis事务是一组命令的集合。一个事务中的命令要么都执行，要么都不执行。如果命令在运行期间出现错误，不会自动回滚。管道与事务的区别：管道主要是网络上的优化，客户端缓冲一组命令，一次性发送到服务器端执行，但是并不能保证命令是在同一个事务里面执行；而事务是原子性的，可以确保命令执行的时候不会有来自其他客户端的命令插入到命令序列中。
 * 分布式锁：分布式锁是控制分布式系统之间同步访问共享资源的一种方式。在分布式系统中，常常需要协调他们的动作，如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。
 * 地理信息：从Redis 3.2版本开始，新增了地理信息相关的命令，可以将用户给定的地理位置信息（经纬度）存储起来，并对这些信息进行操作。
 
-## install:
+## install
 
 ```
 sudo apt-get install redis-server php-redis
@@ -274,6 +273,11 @@ redis-cli -h localhost -p 6379 info // 功能统计
 * Lua脚本：服务端批量处理及事务能力，有条件逻辑的可扩展脚本。使用它的好处有：减少网络开销、原子操作、可复用。
 * Limit：可滑动时间窗口，如应用于Session，Memcached需每次传Key和Value。
 
+## pipeline vs multi
+
+* pipeline 只是把多个redis指令一起发出去，redis并没有保证这些指定的执行是原子的；
+* multi相当于一个redis的transaction的，保证整个操作的原子性，避免由于中途出错而导致最后产生的数据不一致。
+* pipeline方式执行效率要比其他方式高10倍左右的速度，启用multi写入要比没有开启慢一点。
 
 ## 集群配置
 
@@ -287,10 +291,10 @@ redis-cli -h localhost -p 6379 monitor // 从库执行该命令会一直ping主�
 
 * [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager)
 
-
 ## 参考
 
 * [erikdubbelboer/phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. http://dubbelboer.com/phpRedisAdmin/
+* [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis
 * [redis 数据类型详解 以及 redis适用场景场合](http://www.cnblogs.com/mrhgw/p/6278619.html)
 * [使用Redis实现分布式锁及其优化](https://juejin.im/entry/5a0280d551882546d71ec42e)
 * [Redis快速入门及应用](https://juejin.im/entry/5a003862f265da430406042c)

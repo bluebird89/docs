@@ -269,6 +269,7 @@ show engines; # 显示当前数据库支持的存储引擎情况
     - time 10:09:08
     - datetime 保存是1001年到9999年，精度是秒，存储值为 2016-05-06 22:39:40。
     - timestamp保存自 1970年1月1日午夜以来的秒数，和unix时间戳相同，提供4字节存储 只能表示1970年到2038年。默认timestamp值 为 NOT NULL。
+    - 默认值：字符串为now()，时间戳为Current_timestamp
 * ip:通常使用varchar(15)保存IP地址.inet_aton() inet_ntoa()用于转换
 
 ### 字段属性
@@ -340,6 +341,9 @@ SELECT [DISTINCT] 字段列表|* FROM table_name [WHERE条件][ORDER BY排序(�
 select id,title,author,hits,addate from news ORDER BY id DESC LIMIT 10,10;
 SELECT column_name AS alias_name FROM table_name;
 SELECT column_name(s) FROM table_name AS alias_name; SELECT w.name, w.url, a.count, a.date FROM Websites AS w, access_log AS a WHERE a.site_id=w.id and w.name="菜鸟教程";
+select conact('a', 'b')
+select conact_ws(',', 'a', 'b')
+select group_conact(c_name)
 
 INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…);   # 记录操作：添加 更新与删除数据(新增与修改不用添加TABLE关键字)
 INSERT INTO table_name values (null,值,....); # 全字段插入，自动增长列用null
