@@ -783,6 +783,29 @@ location ~ \.php$ {
 service php-fpm start #启动php-fpm
 ```
 
+前后端分离配置：后端配置代理
+
+```
+server {
+    listen      8082;
+    server_name localhost;
+    root        /Users/henry/Workspace/ShareFolder/Front/dist;
+    index       index.html index.htm
+    charset     utf-8;
+
+    access_log      /usr/local/var/log/nginx/front-test.access.log;
+    error_log       /usr/local/var/log/nginx/front-test.error.log;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location ~ /api/ {
+        proxy_pass  http://tp5.app.local:8080;
+    }
+}
+```
+
 ### 测试
 
 ```
