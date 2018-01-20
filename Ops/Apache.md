@@ -98,13 +98,30 @@ PHPiniDir "D:/wamp/bin/php/php7.0.0" # 指定PHP配置路径，不写可能启�
 
 httpd.exe -M # 查看apache加载了哪些模块
 
-DocumentRoot："E:\www\local"
-<Directory E:\www\local>
-    Options All
-    Order Deny,allow
-    Deny from All
-    Allow from All
+# 文件访问权限的问题
+<Directory />
+    Options FollowSymLinks
+    AllowOverride None
+    Order deny,allow
+    allow from all
 </Directory>
+```
+
+### 重写去除入口文件index.php
+
+* 在APACHE里面去配置mod_rewrite.so模块 `#LoadModule rewrite_module modules/mod_rewrite.so`把前面的警号去掉
+* AllowOverride None都改为AllowOverride All
+* 添加.htaccess文件
+
+```
+<IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L] 
+</IfModule>
 ```
 
 #### 分布式配置文件

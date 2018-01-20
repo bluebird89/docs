@@ -77,7 +77,6 @@ server {
 }
 ```
 
-
 ### 通过pip安装Django
 
 ```shell
