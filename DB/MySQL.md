@@ -20,12 +20,12 @@ Percona分支版本，它是一个相对比较成熟的、优秀的MySQL分支�
 ```shell
 brew install mysql
 brew services start mysql # /usr/local/Cellar/mysql/5.7.20
-mysql_secure_installation 
+mysql_secure_installation # 没有设置 root 帐户的密码，马上设置它;通过删除可从本地主机外部访问的 root 帐户来禁用远程 root 用户登录;删除匿名用户帐户和测试数据库
 
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-mysql.server start  // Mac服务管理
-net start/stop mysql // win平台
+mysql.server start  # Mac服务管理
+net start/stop mysql # win平台
 
 sudo apt remove mysql-server
 sudo apt autoremove mysql-server
@@ -293,7 +293,7 @@ show engines; # 显示当前数据库支持的存储引擎情况
     - LIMIT限制返回
     - 运算符：＝ ＜ ＞ ＜＝ ＞＝ !＝ ＜＞ is not null IS NULL
     - BETWEEN 1 AND 20:WHERE date BETWEEN '2016-05-10' AND '2016-05-14';
-    - IN NOT IN：
+    - IN / NOT IN：
     - LIKE('name%') NOT LIKE('name%')：
     - % 替代 0 个或多个字符
     - _ 替代一个字符
