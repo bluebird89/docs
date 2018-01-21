@@ -111,7 +111,7 @@ $document_uri：同 $uri
 
 ### main（全局设置）
 
-PHP7默认的用户和组是www-data
+PHP7默认的用户和组是www-data。The main configuration file is: /etc/nginx/nginx.conf.
 
 ```
 # nginx.conf
@@ -228,18 +228,33 @@ http {
 
 http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
 
+
+* First, the incoming URI will be normalized even before any of the location matching takes place. For example, First it will decode the “%XX” values in the URL.
+* It will also resolve the appropriate relative path components in the URL, if there are multiple slashes / in the URL, it will compress them into single slash etc. Only after this initial normalization of the URL, the location matching will come into play.
+* When there is no location modifier, it will just be treated as a prefix string to be matched in the URL.
+* Nginx will first check the matching locations that are defined using the prefix strings.
+* If the URL has multiple location prefix string match, then Nginx will use the longest matching prefix location.
+* After the prefix match, nginx will then check for the regular expression location match in the order in which they are defined in the nginx configuration file.
+* So, the order in which you define the regular expression match in your configuration file is important. The moment nginx matches a regular expression location configuration, it will not look any further. So, use your important critical regular expression location match at the top of your configuration.
+* If there is no regular expression matching location is found, then Nginx will use the previously matched prefix location configuration.
+
 匹配优先级：精确匹配=、^~、~或~*、不带符号的URL；
-* =：URI的精确匹配，其后多一个字符都不可以，精确匹配根
-* ~：做正则表达式匹配，区分字符大小写；
+
+* 默认前缀
+* =：URI的精确匹配，其后多一个字符都不可以，精确匹配根。match only the following EXACT URL
+* ~：做正则表达式匹配，区分字符大小写；case sensitive regular expression match modifier
 * ~*：做正则表达式匹配，不区分字符大小写；
-* ^~：URI的左半部分匹配，不区分字符大小写；
+* ^~：URI的左半部分匹配，不区分字符大小写；this configuration will be used as the prefix match, but this will not perform any further regular expression match even if one is available.等同无标志符号，多了不会匹配后面对应规则
 
 URL重写时所用的正则表达式需要使用PCRE格式。PCRE正则表达式元字符：
-字符匹配：.,[ ], [^]
-次数匹配：*,+, ?, {m}, {m,}, {m,n}
-位置锚定：^,$
-或者：|
-分组：(),后向引用, $1, $2, ...
+
+* 字符匹配：.,[ ], [^]
+* 次数匹配：*,+, ?, {m}, {m,}, {m,n}
+* 位置锚定：^,$
+  * $ at the end means that the specified keyword should be at the end of the URL.
+* 或者：|  OR operator
+* 分组：(),后向引用, $1, $2, ...
+* ( ) – all the values inside this regular expression will be considered as keywords in the URL
 
 ```
 # 客户端请求限制
@@ -278,7 +293,7 @@ server {
 
     # 设定本虚拟机的访问日志
     #access_log  logs/host.access.log  main;
-    
+    rewrite_log on; # 开启重写日志
     # location（URL匹配特定位置配置） http服务中，某些特定的URL对应的一系列配置项。
     location / {
         # 定义服务器默认网站根目录，如果locationURL匹配的是子目录或文件，root没什么作用，一般放在server指令里面或/下。
@@ -289,10 +304,12 @@ server {
     }
 
     # 定义q
-    #error_page  404              /404.html;
+    error_page  404              /404.html;
+    location = /404.html {
+        root   /var/www/html/errors;
+    }
 
     # redirect server error pages to the static page /50x.html
-    #
     error_page   500 502 503 504  /50x.html;
     location = /50x.html {
         root   html;
@@ -313,6 +330,10 @@ server {
     #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
     #    include        fastcgi_params;
     #}
+    
+    location /img/ {
+        root /custom/images;
+    }
 
     # deny access to .htaccess files, if Apache"s document root
     # concurs with nginx"s one
@@ -320,6 +341,33 @@ server {
     #location ~ /\.ht {
     #    deny  all;
     #}
+
+    # URL/db – Will look for index.html file under /data/db
+    # URL/db/index.html – Will look for index.html file under /data/db
+    # URL/db/connect/index.html – Will look for index.html file under /data/db/connect
+     location /db {
+        root   /data;
+        ...
+    }
+    
+    # URL/db – Will work.
+    # URL/db/index.html – Will not work.
+    # URL/db/connect/index.html – Will not work.
+    location = /db {
+        root   /data;
+    }
+
+    location ~ .(png|gif|ico|jpg|jpe?g)$ {
+
+    }
+
+    location / {
+      try_files $uri $uri/ @custom;
+    }
+
+    location @custom {
+        rewrite ^/(.+)$ /index.php?_route_=$1 last;
+    }
 }
 
 # another virtual host using mix of IP-, name-, and port-based configuration
@@ -443,10 +491,10 @@ location ~* \.(gif|jpg|jpeg)$ {
 用 rewrite 来实现，通过 Nginx 提供的变量或自己设置的变量，配合正则与标志位来进行 URL 重写。从请求参数中获取全局变量，
 
 标识位
-* last：标志完成
-* break：停止后续 rewrite
-* redirect：302临时重定向
-* permanent：301 永久重定向
+* last：标志完成，This flag will stop the processing of the rewrite directives in the current set, and will start at the new location that matches the changed URL.
+* break：停止后续 rewrite This flag will stop the processing of the rewrite directives in the current set.
+* redirect：302临时重定向 This flag will do a temporary redirection using 302 HTTP code. This is mainly used when the replacement string is not http, or https, or $scheme
+* permanent：301 永久重定向  This flag will do a permanent redirection using 301 HTTP code
 
 ```
 location / {
@@ -484,6 +532,25 @@ location / {
   rewrite ^/(space|network)\.html$ /$1.php last;
   rewrite ^/([0-9]+)$ /space.php?uid=$1 last;
 }
+
+rewrite ^(/data/.*)/geek/(\w+)\.?.*$ $1/linux/$2.html last;
+rewrite ^/linux/(.*)$ /linux.php?distro=$1 last;
+location /data/ {
+    rewrite ^(/data/.*)/geek/(\w+)\.?.*$ $1/linux/$2.html break;
+    return  403;
+}
+
+if ($scheme = "http") {
+  rewrite ^ https://www.thegeekstuff.com$uri permanent;
+}
+if ($http_host = thegeekstuff.com) {
+  rewrite  (.*)  https://www.thegeekstuff.com$1;
+}
+if ($http_user_agent = MSIE) {
+    rewrite ^(.*)$ /pdf/$1 break;
+}
+
+rewrite ^/linux/(.*)$ /linux.php?distro=$1 last;
 ```
 
 ## docker 配置

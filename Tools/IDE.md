@@ -203,3 +203,8 @@ ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/loca
 - F6 移动文件到某个目录
 - Command+delete 安全删除
 - shift+F6 重命名
+
+
+## 参考
+
+* [ChrisRM/material-theme-jetbrains](https://github.com/ChrisRM/material-theme-jetbrains#installation):JetBrains theme of Material Theme
