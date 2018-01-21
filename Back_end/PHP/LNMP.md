@@ -138,7 +138,6 @@ server {
     }
 
 - 语法检测：`sudo nginx -t`
-
 - 服务重启：`sudo nginx -s reload`
 - 添加域名
 - 新建文件：`sudo vi /var/www/html/info.php`，并访问<http://server_domain_or_IP/info.php>
@@ -385,8 +384,6 @@ cd nginx-1.6.0
 make
 make install
 /usr/local/nginx/sbin/nginx  #启动Nginx
-
-
 ```
 
 设置nginx开机启动,`vi /etc/rc.d/init.d/nginx`  #编辑启动文件添加下面内容
