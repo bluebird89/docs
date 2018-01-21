@@ -5,16 +5,12 @@ fastcgi_pass unix:/run/php/php7.1-fpm.sock;
 
 ## Mac
 
-配置文件路径 /private/etc/php-fpm.conf
-32行的 error_log ，改为（正行替换，注意 ‘;' 和空格）：
-error_log = /usr/local/var/log/php-fpm.log
-/ect/init.d/php7.0-fpm
 
 ### 约定目录
 
-/usr/local/php/sbin/php-fpm
-/usr/local/php/etc/php-fpm.conf
-/usr/local/php/etc/php.ini
+* bin: /usr/local/php/sbin/php-fpm
+* 配置文件路径：/private/etc/php-fpm.conf /private/etc/php-fpm.d/www.conf.default
+* php.ini:/usr/local/php/etc/php.ini
 
 ```sh
 #测试php-fpm配置
@@ -83,7 +79,7 @@ pm.max_requests = 1000
 #设置每个子进程重生之前服务的请求数. 对于可能存在内存泄漏的第三方模块来说是非常有用的. 如果设置为 '0' 则一直接受请求. 等同于 PHP_FCGI_MAX_REQUESTS 环境变量. 默认值: 0.
  
 pm.status_path = /status
-#FPM状态页面的网址. 如果没有设置, 则无法访问状态页面. 默认值: none. munin监控会使用到
+# FPM状态页面的网址. 如果没有设置, 则无法访问状态页面. 默认值: none. munin监控会使用到
  
 ping.path = /ping
 #FPM监控页面的ping网址. 如果没有设置, 则无法访问ping页面. 该页面用于外部检测FPM是否存活并且可以响应请求. 请注意必须以斜线开头 (/)。
@@ -116,6 +112,9 @@ catch_workers_output = yes
 #重定向运行过程中的stdout和stderr到主要的错误日志文件中. 如果没有设置, stdout 和 stderr 将会根据FastCGI的规则被重定向到 /dev/null . 默认值: 空.
 
 ```
+# /private/etc/php-fpm.conf
+error_log = /usr/local/var/log/php-fpm.log # 开启日志
+
 [www]
 user=nobody
 group=nobody
@@ -552,3 +551,17 @@ pm.max_spare_servers=32
 
 用到一些 PHP 的第三方库，这些第三方库经常存在内存泄漏问题，如果不定期重启 PHP-CGI 进程，势必造成内存使用量不断增长。因此 PHP-FPM 作为 PHP-CGI 的管理器，提供了这么一项监控功能，对请求达到指定次数的 PHP-CGI 进程进行重启，保证内存使用量不增长。
 
+## php-fpm 状态查看
+
+server添加
+
+```
+location ~ ^/status$ {
+    include fastcgi_params;
+    fastcgi_pass unix:/usr/local/var/run/php-fpm.sock;
+    fastcgi_param SCRIPT_FILENAME $fastcgi_script_name;
+}
+
+pm.status_path = /status # php-fpm.conf里面打开选项
+访问 http://域名/status
+```
