@@ -39,8 +39,6 @@ python3 manage.py migrate TestModel   # 创建表结构
 - Django_app/urls.py: 该 Django 项目的 URL 声明; 一份由 Django 驱动的网站"目录"。
 - Django_app/wsgi.py: 一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目。
 
-<https://github.com/jcalazan/ansible-django-stack>
-
 ## 模版标签
 
 ## 服务器搭建
@@ -127,4 +125,5 @@ Requested setting INSTALLED_APPS, but settings are not configured. You must eith
 * [encode/django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. http://www.django-rest-framework.org
 * [Taiga Documentation](http://taigaio.github.io/taiga-doc/dist/#_installation_guide)
 * [taigaio/taiga-front](https://github.com/taigaio/taiga-front):Project management web application with scrum in mind! Built on top of Django and AngularJS (Front) http://taiga.io
-* [taigaio/taiga-back](https://github.com/taigaio/taiga-back):Project management web application with scrum in mind! Built on top of Django and AngularJS (Backend Code) 
+* [taigaio/taiga-back](https://github.com/taigaio/taiga-back):Project management web application with scrum in mind! Built on top of Django and AngularJS (Backend Code)
+* <https://github.com/jcalazan/ansible-django-stack>

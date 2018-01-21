@@ -8,6 +8,11 @@ vagrant up --provider virtualbox
 vagrant ssh
 ```
 
+### 使用
+
+```sh
+ansible all -m ping --ask-pass # 管理主机测试
+```
 ## mac
 
 * ansible
