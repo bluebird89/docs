@@ -75,7 +75,7 @@ ssh -T git@github.com  # 验证
 
 提交内容将会有一个"已验证"标记
 
-```shell
+```sh
 gpg --gen-key
 gpg --list-secret-keys --keyid-format LONG  //获取GPG key ID  3AA5C34371567BD2
 gpg --list-key
@@ -283,7 +283,7 @@ git commit -v # 提交时显示所有diff信息
 git commit –-am/--amend -m [message]：使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
 git commit --amend [file1] [file2] ...  重做上一次commit，并包括指定文件的新变化
 
-// 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
+# 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
 git log 找到起始 commitID 
 git reset commitID ，切记不要用 --hard 参数 
 git add && git commit 
@@ -334,11 +334,11 @@ git fetch origin     git merge origin/master             # 抓取远程仓库更
 git checkout --track origin/branch     # 跟踪某个远程分支创建相应的本地分支
 git checkout -b <local_branch> origin/<remote_branch>  # 基于远程分支创建本地分支，功能同上
 
-// 合并 commit
+# 合并 commit
 git merge master #  merge是两个分支处理冲突后，新增一个 commit 追加到master上。
 git rebase master # 将someFeature分支上的commit记录追加到主分支上
-rebase:将本次修改起始的远程仓库节点之后的修改内容优先合并到本地修改分支上
-conflict：git rebase出现冲突，修改冲突文件，每次修改,只修改自己添加的内容，每次不需commit，最后git push -f提交到远程仓库
+# rebase:将本次修改起始的远程仓库节点之后的修改内容优先合并到本地修改分支上
+# conflict：git rebase出现冲突，修改冲突文件，每次修改,只修改自己添加的内容，每次不需commit，最后git push -f提交到远程仓库
 git add .
 git rebase --continue
 git rebase --abort
@@ -349,6 +349,7 @@ git rebase --abort
     - rebase 先找出共同的祖先节点
     - 从祖先节点把功能分支的提交记录摘下来，然后 rebase 到 master 分支
     - rebase 之后的 commitID 其实已经发生了变化
+
 [rebase vs merge](../_staic/mergevsrebase.jpeg "rebase vs merge")
 
 #### 查看
@@ -397,7 +398,7 @@ HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
 
 branch name should be descriptive。创建分支后, 分支操作不会影响master分支, 但是master分支改变会影其它分支;
 
-```shell
+```sh
 git branch [-r]/[-a] 列出所有远程/所有分支
 git branch [branch-name] [commit] # 新建一个分支，指向指定commit,但依然停留在当前分支
 git checkout -b newBrach origin/master # 在origin/master的基础上，创建一个新分支，并切换到new分支
@@ -421,7 +422,6 @@ git branch --set-upstream-to=origin/master master
 
 git branch --set-upstream master origin/master # 建立追踪关系，在现有分支与指定的远程分支之间
 git branch --set-upstream develop origin/develop
-
 
 git branch # 列出分支
 git checkout master # 切换分支
@@ -504,7 +504,7 @@ git archive
 
 ### 搭建git私有服务器
 
-```shell
+```sh
 groupadd git
 adduser git -g git
 
@@ -513,15 +513,18 @@ chmod 700 .ssh
 touch .ssh/authorized_keys 
 chmod 600 .ssh/authorized_keys
 
-将客户端的id_rsa.pub文件，把导入到服务器端
+# 将客户端的id_rsa.pub文件，把导入到服务器端
 /home/git/.ssh/authorized_keys
 
-新建仓库 
+# 新建仓库
+mkdir /home/testgit
+cd /home/testgit
 git init --bare /path/to/repo.git 
 sudo chown -R git:git sample.git
-禁止git用户登录shell:修改/etc/passwd 为
+# 禁止git用户登录shell:修改/etc/passwd 为
 git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell //可以正常通过ssh使用git，但无法登录shell
 git clone git@server:/path/to/repo.git
+git clone git@115.159.146.94:/home/testgit/sample.git lsgogit
 ```
 
 ### git hook，Git 的生命周期
@@ -530,6 +533,20 @@ git操作有它自身的生命周期，在不同的生命周期，我们可以�
 
 * pre-commit的时候我们可以做 eslint
 * post-commit的时候，我们可以做利用 jenkins 类似的工具做持续集成
+
+```sh
+cd /home/testgit/sample.git
+cd hooks
+# 这里我们创建post-receive文件
+vim post-receive
+# 在该文件里输入以下内容,自动同步到站点目录（www）
+#!/bin/bash
+git --work-tree=/home/www checkout -f
+# 保存退出后，将该文件用户及用户组都设置成git
+chown git:git post-receive
+# 由于该文件其实就是一个shell文件，我们还应该为其设置可执行权限
+chmod +x post-receive
+```
 
 ### 基于功能分支的开发流程
 
@@ -542,7 +559,7 @@ git操作有它自身的生命周期，在不同的生命周期，我们可以�
 * 团队用merge
 * pull request:方便CodeReview
 
-```shell
+```sh
 git checkout master
 git pull -r origin master
 git checkout qixiu/newFeature
@@ -601,13 +618,13 @@ git push origin master # 将本地代码更新到远端
 
     - 发布分支（release）：清理发布、执行所有测试、更新文档和其它为下个发布做准备操作的地方，像是一个专门用于改善发布的功能分支。只要创建这个分支并push到中央仓库，这个发布就是功能冻结的。任何不在develop分支中的新功能都推到下个发布循环中（自动化脚本执行）。通常对应一个迭代。将一个版本的功能全部合并到 Develop 分支之后，从 Develop 切出一个 Release 分支。这个分支不在追加新需求，可以完成 bug 修复、完善文档等工作。务必记住，代码发布后，需要将其合并到 Master 分支，同时也要合并到 Develop 分支。
 
-      ```
+      ```sh
         git checkout -b release-0.1 develop
       ```
 
     - master分支存储了正式发布的历史：合并修改到master分支和develop分支上，删除发布分支。用于存放线上版本代码，可以方便的给代码打版本号。
 
-      ```shell
+      ```sh
         git checkout master（功能回归分支）
         git merge release-0.1
         git push
@@ -621,7 +638,7 @@ git push origin master # 将本地代码更新到远端
 
     - Hotfix维护分支：生成快速给产品发布版本（production releases）打补丁，这是唯一可以直接从master分支fork出来的分支。 修复完成，修改应该马上合并回master分支和develop分支（当前的发布分支），master分支应该用新的版本号打好Tag。
 
-      ```shell
+      ```sh
         git checkout -b issue-#001 master
         # Fix the bug
         git checkout master
@@ -634,40 +651,46 @@ git push origin master # 将本地代码更新到远端
       ```
 
   - 流程：develop分支上有了做一次发布（或者说快到了既定的发布日）的足够功能，就从develop分支上checkout一个发布分支。 新建的分支用于开始发布循环，所以从这个时间点开始之后新的功能不能再加到这个分支上---- 这个分支只应该做Bug修复、文档生成和其它面向发布任务。 一旦对外发布的工作都完成了，发布分支合并到master分支并分配一个版本号打好Tag。 另外，这些从新建发布分支以来的做的修改要合并回develop分支
-
   - 利用Git有提供各种勾子（hook），即仓库有事件发生时触发执行的脚本。 可以配置一个勾子，在你push中央仓库的master分支时，自动构建好对外发布。
 
 - **4.Forking工作流**
 
 让各个开发者都有一个服务端仓库。这意味着各个代码贡献者有2个Git仓库而不是1个：一个本地私有的（fork，其它开发者不允许push到这个仓库，但可以pull到修改。为了方便和其它的开发者共享分支。 各个开发者应该用分支隔离各个功能，就像在功能分支工作流和Gitflow工作流一样。），另一个服务端公开的（公开的正式仓库存储在服务器上，**让正式仓库之所以正式的唯一原因是它是项目维护者的公开仓库**）
 
-```shell
 - 优点：贡献的代码可以被集成，而不需要所有人都能push代码到仅有的中央仓库中。 开发者push到自己的服务端仓库，而只有项目维护者才能push到正式仓库。 这样项目维护者可以接受任何开发者的提交，但无需给他正式代码库的写权限。
-
 - fork操作基本上就只是一个服务端的克隆，clone到本地
-
 - 需要2个远程别名 —— 一个指向正式仓库，另一个指向开发者自己的服务端仓库。别名的名字可以任意命名，常见的约定是使用origin作为远程克隆的仓库的别名 （这个别名会在运行git clone自动创建），upstream（上游）作为正式仓库的别名。
-
-        git remote add upstream https://user@bitbucket.org/maintainer/repo.git
-
 - 功能修改提交到自己仓库中，跟随正式仓库，pull快进合并
-
-        git checkout -b some-feature
-        # Edit some code
-        git commit -a -m "Add first draft of some feature"
-        git pull upstream master（开发者和正式仓库做同步）
-        git push origin feature-branch
-        # pull requests（简单的通知，而是为讨论提交的功能的一个专门论坛）
 - 项目维护者：第一种,直接在pull request中查看代码；第二种，pull代码到他自己的本地仓库，再手动合并。
-
-        git fetch https://bitbucket.org/user/repo feature-branch
-        # 查看变更
-        git checkout master
-        git merge FETCH_HEAD
-```
-
 - 解析Pull Request：当要发起一个Pull Request，你所要做的就是请求（Request）另一个开发者（比如项目的维护者） 来pull你仓库中一个分支到他的仓库中。这意味着你要提供4个信息以发起Pull Request： 源仓库、源分支、目的仓库、目的分支。
 - Code Review
+
+```shell
+git remote add upstream https://user@bitbucket.org/maintainer/repo.git
+
+git checkout -b some-feature
+# Edit some code
+git commit -a -m "Add first draft of some feature"
+git pull upstream master（开发者和正式仓库做同步）
+git push origin feature-branch
+# pull requests（简单的通知，而是为讨论提交的功能的一个专门论坛)
+
+git fetch https://bitbucket.org/user/repo feature-branch
+# 查看变更
+git checkout master
+git merge FETCH_HEAD
+```
+
+* 测试环境
+  - 开发者的feature分支开发、自测验收通过后，merge到测试环境的develop分支，（QA）部署到测试环境，等待QA验收。
+  - QA提bug issue，开发者从develop切分支修正再次合并、部署、验收。
+* 预发布环境
+  - 测试环境验收通过之后，合并到预发布环境的master，部署预发布环境
+  - QA全面回归，发现问题提bug issue，开发者从master切分支修正再次合并、部署、验收。
+  - 回归完毕打tag，准备上线
+* 生产环境
+  - 上线验收通过的tag
+  - 回归测试，发现问题开发者从master切分支hotfix修正。
 
 ### 实际场景
 
@@ -753,7 +776,7 @@ git push --force origin myfeature
 * fixup：与squash相同，但不会保存当前commit的提交信息，会舍去commit信息
 * exec：执行其他shell命令
 
-## github pages:必须使用master作为分支
+### github pages:必须使用master作为分支
 
 - hexo：添加文章后现hexo g（生成） hexo d（部署）
 - jekyll：直接push到master就好
@@ -761,6 +784,17 @@ git push --force origin myfeature
 ### git-flow
 
 A collection of Git extensions to provide high-level repository operations for Vincent Driessen's branching model
+
+![Git Flow](../_static/git_flow_1.png "Optional title")
+
+* 主分支用于组织与软件开发、部署相关的活动；所有开发活动的核心分支。所有的开发活动产生的输出物最终都会反映到主分支的代码中。主分支分为
+  - master分支:存放的应该是随时可供在生产环境中部署的代码，它承担的责任就是：仅在发布新的可供部署的代码时才更新到master分支上的代码。当开发活动告一段落，产生了一份新的可供部署的代码时，master分支上的代码会被更新。同时，每一次更新，最好添加对应的版本号标签（TAG）。
+  - development分支:保存当前最新开发成果的分支，它承担的责任就是功能开发完毕等待最后QA的验收，通常这个分支上的代码也是可进行每日夜间发布的代码。当代码已经足够稳定时，就可以将所有的开发成果合并回master分支了。
+* 辅助分支组织为了解决特定的问题而进行的各种开发活动。它的生存周期伴随着它的功能完成而消失.完成它的使命之后在merge到主分支之后，也将被删除。
+  - 用于并行开发新功能时所使用的feature分支；
+  - 用于辅助版本发布的release分支；
+  - 用于修正生产代码中的缺陷的hotfix分支。
+* 分支的名字是一种共识，更重要的是它承担的责任。
 
 ### 使用
 
@@ -772,6 +806,7 @@ hotfix
 suport
 version
 ```
+
 ![Git 命令清单](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png)
 
 ### Version Control Best Practices 

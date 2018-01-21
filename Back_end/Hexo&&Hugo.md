@@ -18,7 +18,8 @@ cd your-hexo-site
 git clone https://github.com/iissnan/hexo-theme-next themes/next
 npm install hexo-deployer-git --save
 npm install(hexo 会找不到)
-修改_config.yml,添加仓库
+
+# 修改_config.yml,添加仓库
 type: git
 repo: git@github.com:bluebird89/bluebird89.github.io.git
 branch: hexo

@@ -197,11 +197,17 @@ set global general_log = on;
 命令行操作
 
 ```sql
-mysql -h localhost  -P 3306 -u root -p  # 生成用户root与空密码登陆
+mysql -h localhost  -P 3306 -u root -p  # 生成用户root与空密码登陆,第一次登陆mysql的时候是没有密码的
 exit quit \q
+
+use mysql;
+update user SET Password = PASSWORD('密码') where User = 'root';
+FLUSH PRIVILEGES;
+exit;
 
 CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; # 添加用户
 GRANT ALL PRIVILEGES ON blog.* TO 'jeff'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root密码' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 ```
 
