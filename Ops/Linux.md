@@ -599,6 +599,7 @@ ping 8.8.8.8检测连接
 whereis
 who
 locate
+tree /home -p # 获取项目树形结构
 ```
 
 ## Boot分区不足
@@ -1215,7 +1216,6 @@ sudo apt install aptitude
 sudo aptitude install <packagename>
 sudo aptitude -f install <packagename>
 ```
-
 
 systemctl unmask mysql.service
 service mysql start

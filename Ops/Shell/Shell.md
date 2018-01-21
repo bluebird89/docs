@@ -382,9 +382,7 @@ exit 0
 # vim:set ts=4 sw=4 ft=sh et:
 ```
 
-
 ## 配置
-
 
 * /etc/profile：所有用户的shell都有权使用你配置好的环境变量 添加 export PATH="$PATH:/my_new_path"
 * bash_profile  ~/.bashrc 当用户登录时，该文件仅仅执行一次。用来设置环境变量 功能和/etc/profile 相同只不过 他指针对用户来设定,需要source 生效或者退出后生效
@@ -446,9 +444,77 @@ stty erase ^H        #清除退格 (这个很有必要)
 export PATH=$PATH:/opt/perl/site/bin:/opt/perl/bin
 ```
 
+### 跳板机
+
+```sh
+# 方法一
+ssh 目标机器登录用户@目标机器IP -p 目标机器端口 -o ProxyCommand='ssh -p 跳板机端口 跳板机登录用户@跳板机IP -W %h:%p'
+
+# 在 $HOME/.ssh 目录下建立/修改文件 config
+Host tiaoban   #任意名字，随便使用
+
+    HostName 192.168.1.1   #这个是跳板机的IP，支持域名
+
+    Port 22      #跳板机端口
+
+    User username_tiaoban       #跳板机用户
+
+
+
+Host nginx      #同样，任意名字，随便起
+
+    HostName 192.168.1.2  #真正登陆的服务器，不支持域名必须IP地址
+
+    Port 22   #服务器的端口
+
+    User username   #服务器的用户
+
+    ProxyCommand ssh username_tiaoban@tiaoban -W %h:%p
+
+
+
+Host 10.10.0.*      #可以用*通配符
+
+    Port 22   #服务器的端口
+
+    User username   #服务器的用户
+
+    ProxyCommand ssh username_tiaoban@tiaoban -W %h:%p
+```
 ## 分类
 
 * mosh
+
+## 免密码登录
+
+~/.ssh
+
+* authorized_keys:存放远程免密登录的公钥,主要通过这个文件记录多台机器的公钥
+* id_rsa : 生成的私钥文件
+* id_rsa.pub ： 生成的公钥文件
+* know_hosts : 已知的主机公钥清单　
+* 如果希望ssh公钥生效需满足至少下面两个条件：
+    - .ssh目录的权限必须是700 
+    - .ssh/authorized_keys文件权限必须是600
+
+```sh
+ssh-keygen -t rsa # 生成.ssh文件目录
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub <romte_ip>
+scp -p ~/.ssh/id_rsa.pub root@<remote_ip>:/root/.ssh/authorized_keys
+
+scp ~/.ssh/id_rsa.pub root@<remote_ip>:pub_key //将文件拷贝至远程服务器
+cat ~/pub_key >>~/.ssh/authorized_keys //将内容追加到authorized_keys文件中， 不过要登录远程服务器来执行这条命令
+
+# 通过ansible,将需要做免密操作的机器hosts添加到/etc/ansible/hosts下：
+[Avoid close]
+192.168.91.132
+192.168.91.133
+192.168.91.134
+
+ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root/.ssh/id_rsa.pub') }}'" -k
+```
+
 
 ## 参考
 

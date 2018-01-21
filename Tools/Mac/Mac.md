@@ -537,3 +537,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 ```shell
 lsof -i tcp:8081  # 端口查看
 ```
+
+## 远程登录
+
+开启设置-〉共享-〉远程登录
