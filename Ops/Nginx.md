@@ -62,7 +62,7 @@
 - Severs config:/usr/local/etc/nginx/servers/
 - Docroot is: /usr/local/Cellar/nginx/1.12.2_1/html /usr/local/var/www, 软件更新后版本号会发生变化，默认也会失效
 
-```shell
+```sh
 brew info nginx
 
 sudo chown root:wheel /usr/local/Cellar/nginx/1.12.2_1/bin/nginx
