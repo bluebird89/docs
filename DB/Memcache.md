@@ -1,7 +1,26 @@
 # Memcache
 
+memcached 前，先安装了其所依赖的 libevent 库
 
+## 安装
 
+## Mac
+
+```sh
+brew search memcache
+
+brew install memcached
+brew install libmemcached # 继续安装客户端库
+
+/usr/local/bin/memcached -d
+brew services start memcached -d
+
+./memcached -d -m 2048 -l 10.0.0.40 -p 11211
+
+telnet localhost 11211
+
+brew install php71-memcached
+```
 
 ## 问题
 

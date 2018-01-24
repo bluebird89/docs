@@ -30,6 +30,8 @@ Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编
 brew install python3
 ```
 
+[Using Python on a Macintosh](https://docs.python.org/3/using/mac.html)
+
 ### 版本管理工具pyenv:修改系统环境变量 PATH
 
 多版本python共存的环境工具，可以在不改变系统环境的情况下，可以随意切换不同python版本。基于某个版本开发的工具，在更换了不同python版本之后，就会导致工具中的某个模块、代码错误，而不能正常使用。
