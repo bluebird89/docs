@@ -2,12 +2,20 @@
 
 ## Add extension phalcon
 
+### Ubuntu
+
 ```sh
 curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
 sudo apt-get install php5.6-phalcon
 sudo service php5.6-fpm start
 
 sudo apt-get install php7.0-phalcon
+```
+
+### Mac
+
+```sh
+brew install php71-phalcon
 ```
 
 ## Phalcon Developer Tools
@@ -23,4 +31,5 @@ chmod ugo+x /usr/bin/phalcon
 ## 仓库
 
 - [phalcon/cphalcon](https://github.com/phalcon/cphalcon):High performance, full-stack PHP framework delivered as a C extension. <https://phalconphp.com>
-- [](http://docs.iphalcon.cn/):Phalcon中文文档
+- [Phalcon中文文档](http://docs.iphalcon.cn/)
+- [documentation](https://docs.phalconphp.com/en/3.2)
