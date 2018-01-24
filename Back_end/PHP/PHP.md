@@ -33,16 +33,15 @@ php -a # 进入命令行模式
 ```sh
 brew install php71
 brew info php71
-```
 
-### 配置
+## 配置文件添加扩展
+include=/usr/local/etc/php/7.1/conf.d/*.ini
 
-```sh
 mkdir -p ~/Library/LaunchAgents
 cp /usr/local/opt/php71/homebrew.mxcl.php71.plist ~/Library/LaunchAgents/
 launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php71.plist
 
-brew services start homebrew/php/php71
+sudo brew services start/stop/restart php71
 ```
 
 ## [PHP发展](https://segmentfault.com/a/1190000008888700)
@@ -62,6 +61,19 @@ brew services start homebrew/php/php71
     * 7.1 :2015.12.3 性能提升
     * 7.2 JIT(JUST_IN_TIME)
 
+### 包管理工具
+
+* [PECL](http://pecl.php.net/)：PHP Extension Community Library，管理着最底层的PHP扩展。这些扩展是用 C 写的。
+* [PEAR](http://pear.php.net/)：PHP Extension and Application Repository，管理着项目环境的扩展。用 PHP 写的。
+* Composer：和PEAR都管理着项目环境的依赖，这些依赖也是用 PHP 写的，区别不大。但 composer 却比 PEAR 来的更受欢迎
+
+```sh
+curl -O http://pear.php.net/go-pear.phar
+sudo php -d detect_unicode=0 go-pear.phar
+
+# 4 修改bin路径
+# pear version
+```
 ## 语法
 
 ### 基础
@@ -1126,6 +1138,13 @@ $controller->register();
 * apc:op缓存
 * phpredis
 * PHP-FPM进程池：FastCGI Process Manager 的master process是常驻内存的，以static、dynamic、ondemand三种方式来管理进程池中的worker process，可以有效控制内存和进程并平滑重载PHP配置，在发生意外情况的时候能够重新启动并恢复被破坏的 opcode。
+```sh
+brew tap homebrew/homebrew-php
+brew install php71 --with-pear
+
+brew install mcrypt
+```
+
 
 ## Docker配置
 

@@ -10,8 +10,6 @@ cd django
 sudo python3 setup.py install  //会注册脚本django-admin.py...
 ```
 
-[文档](https://docs.djangoproject.com/en/dev/releases/2.0/)
-
 ## 使用
 
 ```python
@@ -118,6 +116,7 @@ Requested setting INSTALLED_APPS, but settings are not configured. You must eith
 
 ## 工具
 
+* [文档](https://docs.djangoproject.com/en/dev/releases/2.0/)
 * [nioperas06/awesome-django-rest-framework](https://github.com/nioperas06/awesome-django-rest-framework):Tools, processes and resources you need to create an awesome API with Django REST Framework
 * [django-extensions/django-extensions](https://github.com/django-extensions/django-extensions):This is a repository for collecting global custom management extensions for the Django Framework.
 * [jazzband/django-debug-toolbar](https://github.com/jazzband/django-debug-toolbar):A configurable set of panels that display various debug information about the current request/response.
