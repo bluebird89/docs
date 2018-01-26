@@ -85,6 +85,9 @@ pyenv activate v_env_3.5.0
 pyenv deactivate
 pyenv uninstall v_env_3.5.0
 pyenv virtualenv PYTHON_VERSION PROJECT_NAME
+
+virtualenv -p /usr/local/bin/python3.6 ENV3.6
+source ENV3.6/bin/activate
 ```
 
 ## wheel
