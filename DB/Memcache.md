@@ -22,6 +22,12 @@ telnet localhost 11211
 brew install php71-memcached
 ```
 
+```
+telnet 127.0.0.1 11211
+
+
+```
+
 ## 问题
 
 通过Memcached将热点数据加载到cache，加速访问。随着业务数据量的不断增加，和访问量的持续增长
