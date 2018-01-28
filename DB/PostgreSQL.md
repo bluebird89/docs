@@ -16,19 +16,19 @@ PostgreSQL是一个功能强大的开源对象关系数据库管理系统(ORDBMS
 
 ```sh
 brew services start/stop/restart postgresql
-initdb /usr/local/var/postgres -E utf8 //初始化数据库 ，配置数据存放目录
+initdb /usr/local/var/postgres -E utf8 # 初始化数据库 ，配置数据存放目录
 
-ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents //配置自启动
+ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents # 配置自启动
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 
-pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start // 启动 deamon
-pg_ctl -D /usr/local/var/postgres stop -s -m fast // 关闭
+pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start #  启动 deamon
+pg_ctl -D /usr/local/var/postgres stop -s -m fast #  关闭
 
-createuser username -P //创建用户，输入两次密码 passport
-createdb dbname -O username -E UTF8 -e // 创建数据库  owner encoding
+createuser username -P # 创建用户，输入两次密码 passport
+createdb dbname -O username -E UTF8 -e #  创建数据库  owner encoding
 DROP DATABASE dbname;
 
-psql -U username -d dbname -h 127.0.0.1   // 连接数据库
+psql -U username -d dbname -h 127.0.0.1   #  连接数据库
 \l   \\ 显示已创建的数据库 link
 psql \l  \\在不连接进 PostgreSQL 数据库的情况下，也可以在终端上查看显示已创建的列表：
 \c dbname   \\ 连接数据库
@@ -62,7 +62,7 @@ define("PASSWORD", "password");
 
 class Ext_Pgsql {
 
-    //单例
+    # 单例
     private static $instance = null;
 
     private $conn = null;

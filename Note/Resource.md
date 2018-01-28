@@ -10,6 +10,8 @@
 * [ossu/computer-science](https://github.com/ossu/computer-science):Path to a free self-taught education in Computer Science!
 * [bmorelli25/Become-A-Full-Stack-Web-Developer](https://github.com/bmorelli25/Become-A-Full-Stack-Web-Developer):Free resources for learning Full Stack Web Development
 * [gothinkster/realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 https://realworld.io/
+* [CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers):aka "Bayesian Methods for Hackers": An introduction to Bayesian methods + probabilistic programming with a computation/understanding-first, mathematics-second point of view. All in pure Python ;)
+* [jobbole/awesome-machine-learning-cn](https://github.com/jobbole/awesome-machine-learning-cn):机器学习资源大全中文版，包括机器学习领域的框架、库以及软件
 
 ## 工具
 
