@@ -22,7 +22,9 @@ curl -X DELETE www.example.com
 curl --referer http://www.example.com http://www.example.com  表示你是从哪里跳转过来的。
 curl --header "Content-Type:application/json" http://example.com    // 增加一个头信息
 User Agent字段:这个字段是用来表示客户端的设备信息。服务器有时会根据这个字段，针对不同设备，返回不同格式的网页
-curl --user-agent "[User Agent]" [URL] 
+curl --user-agent "[User Agent]" [URL]
+
+curl -i -X POST --url http://localhost:8001/apis/ --data 'upstream_url=http://camp.uats.cc' --data 'request_path=login'  
 ```
 
 ## 参考
