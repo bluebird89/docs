@@ -258,6 +258,7 @@ Flexbox解决了什么问题？
 * [airbnb/react-native-maps](https://github.com/airbnb/react-native-maps):React Native Mapview component for iOS + Android
 * [airbnb/native-navigation](https://github.com/airbnb/native-navigation):Native navigation library for React Native applications http://airbnb.io/native-navigation/
 * [React Studio](https://reactstudio.com/)
+* [maisano/react-router-transition](https://github.com/maisano/react-router-transition):painless transitions built for react-router, powered by react-motion
 
 ## 资源
 

@@ -2086,3 +2086,5 @@ TP参考：<https://github.com/ijry/lyadmin>
 
 $GLOBALS['HTTP_RAW_POST_DATA']
 prof
+
+thrift http://thrift.apache.org/
