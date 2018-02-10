@@ -40,9 +40,32 @@ dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  #
 brew cask install mysqlworkbench
 ```
 
-### ubuntu
+### linux
 
 ```sh
+sudo apt install mysql
+
+# 源码安装
+groupadd mysql 
+useradd -g mysql mysql
+cd /usr/local/mysql-5.5.44-linux2.6-i686/
+chown -R msyql.mysql .
+scripts/mysql_install_db --basedir=/usr/local/mysql chown -R root .
+cp support-files/mysql.server /etc/init.d/mysqld
+chkconfig --add mysqld
+chkconfig mysqld on
+cp support-files/my-medium.cnf /etc/my.cnf
+service mysqld start 
+ps aux | grep mysqld
+# 注意:/usr/local/mysql/bin/mysqld: error while loading shared libraries: libaio.so.1: cannot open shared object fil 134
+# 解决方案:yum install libaio
+sestatus -v
+getenforce
+#修改/etc/selinux/config 文件
+#将SELINUX=enforcing改为SELINUX=disabled
+#重启机器即可
+
+# 服务管理
 service mysql start
 service mysql stop
 service mysql status
@@ -741,6 +764,18 @@ select * from (
     ) d,(SELECT @ggid := 1, @cggid := 1, @grank := 1) as e
 )f
 where grank=1;
+
+# 模糊索引
+SELECT nickname
+FROM customer
+WHERE nickname LIKE '%阳光%'
+ORDER BY
+  CASE
+    WHEN nickname LIKE '阳光' THEN 0
+    WHEN nickname LIKE '阳光%' THEN 1
+    WHEN nickname LIKE '%阳光' THEN 3
+    ELSE 2
+  END
 ```
 
 ## 事物
@@ -1214,17 +1249,17 @@ MySQL 在每个事务更新数据之前，由 Master 将事务串行的写入二
 - 主从服务器检查show variables like 'server%'
 - 主服务器与从服务器
 
-  ```sql
-  GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' IDENTIFIED BY 'slave_password';
-  FLUSH PRIVILEGES;
-  SHOW MASTER STATUS;
+```sql
+GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' IDENTIFIED BY 'slave_password';
+FLUSH PRIVILEGES;
+SHOW MASTER STATUS;
 
-  CHANGE MASTER TO MASTER_HOST='202.167.45.10',MASTER_USER='slave_user', MASTER_PASSWORD='slave_password', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=  107;
-  START slave;
-  show slave status\G;
+CHANGE MASTER TO MASTER_HOST='202.167.45.10',MASTER_USER='slave_user', MASTER_PASSWORD='slave_password', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=  107;
+START slave;
+show slave status\G;
 
-  Slave_IO_Running = NO：stop slave; reset slave;start slave;
-  ```
+Slave_IO_Running = NO：stop slave; reset slave;start slave;
+```
 
 ### 读写分离
 
