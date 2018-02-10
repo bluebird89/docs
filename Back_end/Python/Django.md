@@ -125,4 +125,6 @@ Requested setting INSTALLED_APPS, but settings are not configured. You must eith
 * [Taiga Documentation](http://taigaio.github.io/taiga-doc/dist/#_installation_guide)
 * [taigaio/taiga-front](https://github.com/taigaio/taiga-front):Project management web application with scrum in mind! Built on top of Django and AngularJS (Front) http://taiga.io
 * [taigaio/taiga-back](https://github.com/taigaio/taiga-back):Project management web application with scrum in mind! Built on top of Django and AngularJS (Backend Code)
-* <https://github.com/jcalazan/ansible-django-stack>
+* [](https://github.com/django-guardian/django-guardian)
+* [](https://github.com/viewflow/django-material)
+* [](https://github.com/jcalazan/ansible-django-stack)

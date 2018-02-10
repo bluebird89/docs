@@ -1534,6 +1534,7 @@ spl_autoload_register('autoload');
       - [Smarty](http://www.smarty.net/): 一个模板引擎
       - [Twig](http://twig.sensiolabs.org/): 一个全面的模板语言
       - [Tale Jade](https://github.com/Talesoft/tale-jade): Jade模版语言的PHP实现
+      - [doctrine2](https://github.com/doctrine/doctrine2):http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/index.html
 * 静态站点生成器 Static Site Generators 用来生成web页面的预处理内容的工具
       - [Couscous](http://couscous.io): 一个将Markdown转化为漂亮的网站的工具
       - [Phrozn](https://github.com/Pawka/phrozn): 另一个转换Textile，Markdown和Twig为HTML的工具
@@ -1553,10 +1554,10 @@ spl_autoload_register('autoload');
       - [PHP Spider](https://github.com/mvdbos/php-spider): 一个可配置和可扩展的PHP web爬虫
 * 中间件 Middlewares 使用中间件构建应用程序的库
       - [Expressive](https://zendframework.github.io/zend-expressive/): 基于PSR-7的Zend中间件
-      - (https://github.com/oscarotero/psr7-middlewares)[PSR7-Middlewares]: 灵感来源于方便的中间件
-      - (https://github.com/relayphp/Relay.Relay)[Relay]: 一个PHP 5.5 PSR-7的中间件调度器
-      - (https://github.com/stackphp)[Stack]: 一个用于Silex/Symfony的可堆叠的中间件的库
-      - (https://github.com/zendframework/zend-stratigility)[zend-stratigility]: 基于PHP PSR-7之上的中间件之上
+      - [PSR7-Middlewares](https://github.com/oscarotero/psr7-middlewares): 灵感来源于方便的中间件
+      - [Relay](https://github.com/relayphp/Relay.Relay): 一个PHP 5.5 PSR-7的中间件调度器
+      - [Stack](https://github.com/stackphp): 一个用于Silex/Symfony的可堆叠的中间件的库
+      - [zend-stratigility](https://github.com/zendframework/zend-stratigility): 基于PHP PSR-7之上的中间件之上
 * 网址 URL 解析URL的库
       - (https://github.com/jeremykendall/php-domain-parser)[PHP Domain Parser]: 一个本地前缀解析库
       - (https://github.com/jwage/purl)[Purl]: 一个URL处理库
@@ -1904,7 +1905,7 @@ spl_autoload_register('autoload');
 * 接口 API 开发REST-ful API的库和web工具
       - (https://api-platform.com)[API Platform]: 暴露出REST API的项目，包含JSON-LD, Hydra格式
       - (https://github.com/zfcampus/zf-apigility-skeleton)[Apigility]: 一个使用Zend Framework 2构建的API构建器
-      - (https://github.com/leedavis81/drest)[Drest]: 一个将Doctrine实体暴露为REST资源节点的库
+      - [Drest](https://github.com/leedavis81/drest): 一个将Doctrine实体暴露为REST资源节点的库
       - (https://github.com/blongden/hal)[HAL]: 一个超文本应用语言(HAL)构建库
       - (https://github.com/willdurand/Hateoas)[Hateoas]: 一个HOATEOAS REST web服务库
       - (https://github.com/willdurand/Negotiation)[Negotiation]: 一个内容协商库
@@ -2084,9 +2085,9 @@ spl_autoload_register('autoload');
       - (http://www.headfirstlabs.com/books/hfdp/)[Head First Design Patterns]: 解说软件设计模式的一本书
       - (https://git-scm.com/book/en/v2)[Pro Git]: Scott Chacon和Ben Straub关于Git的一本书
       - (http://linuxcommand.org/tlcl.php)[The Linux Command Line]: William Shotts关于Linux命令行的一本书
-      - (https://www.amazon.com/Tangled-Web-Securing-Modern-Applications/dp/1593273886)[The Tangled Web — Securing Web Applications]: Michal Zalewski关于web应用安全的一本书
-      - (http://computationbook.com)[Understanding Computation]: Tom Stuart关于计算理论的一本书
-      - (https://leanpub.com/vagrantcookbook)[Vagrant Cookbook]: Erika Heidi关于创建 Vagrant环境的一本书
+      - [The Tangled Web — Securing Web Applications](https://www.amazon.com/Tangled-Web-Securing-Modern-Applications/dp/1593273886): Michal Zalewski关于web应用安全的一本书
+      - [Understanding Computation](http://computationbook.com): Tom Stuart关于计算理论的一本书
+      - [Vagrant Cookbook](https://leanpub.com/vagrantcookbook): Erika Heidi关于创建 Vagrant环境的一本书
 * PHP视频 PHP Videos 
       - [Nomad PHP Lightning Talks](https://www.youtube.com/c/nomadphp): PHP社区成员10到15分钟的快速会谈
       - [PHP UK Conference](https://www.youtube.com/user/phpukconference/videos): 一个PHP英国会议的视频集合
@@ -2109,19 +2110,19 @@ spl_autoload_register('autoload');
       - [Seven Ways to Screw Up BCrypt](http://blog.ircmaxell.com/2012/12/seven-ways-to-screw-up-bcrypt.html): 一篇关于纠正BCrypt实现的文章
       - [Use Env](https://seancoates.com/blogs/use-env/): 一篇关于使用unix环境帮助的文章
 * PHP内核阅读 PHP Internals Reading 阅读PHP内核或性能相关的资料
-      - [Disproving the Single Quotes Myth](http://nikic.github.io/2012/01/09/Disproving-the-Single-Quotes-Performance-Myth.html): 一篇关于单，双引号字符串性能的文章
-      - [How Big Are PHP Arrays (And Values) Really?](http://nikic.github.io/2011/12/12/How-big-are-PHP-arrays-really-Hint-BIG.html): 一篇关于数组原理的文章
-      - [How Foreach Works](http://stackoverflow.com/questions/10057671/how-does-php-foreach-actually-work/14854568#14854568): StackOverflow关于foreach回答的详情
-      - [How Long is a Piece of String](http://blog.golemon.com/2006/06/how-long-is-piece-of-string.html): 一篇关于字符串原理的文章
-      - [PHP Evaluation Order](https://gist.github.com/nikic/6699370): 一篇关于PHP评估顺序的文章
-      - [PHP Internals Book](http://www.phpinternalsbook.com): 一本由三名核心开发编写的关于PHP内核的在线书
-      - [PHP RFCs](https://wiki.php.net/rfc): PHP RFCs主页(请求注解)
-      - [Print vs Echo, Which One is Faster?](http://fabien.potencier.org/print-vs-echo-which-one-is-faster.html): 一篇关于打印和echo性能的文章
-      - [The PHP Ternary Operator. Fast or Not?](http://fabien.potencier.org/the-php-ternary-operator-fast-or-not.html): 一篇关于三元操作性能的文章
-      - [Understanding OpCodes](http://blog.golemon.com/2008/01/understanding-opcodes.html): 一篇关于opcodes的文章
-      - [When Does Foreach Copy?](http://nikic.github.io/2011/11/11/PHP-Internals-When-does-foreach-copy.html): 一篇关于foreach原理的文章
-      - [Why Objects (Usually) Use Less Memory Than Arrays](https://gist.github.com/nikic/5015323): 一篇关于对象和数组原理的文章
-      - [You're Being Lied To](http://blog.golemon.com/2007/01/youre-being-lied-to.html): 一篇关于内核ZVALs的文章
+  + [Disproving the Single Quotes Myth](http://nikic.github.io/2012/01/09/Disproving-the-Single-Quotes-Performance-Myth.html): 一篇关于单，双引号字符串性能的文章
+  + [How Big Are PHP Arrays (And Values) Really?](http://nikic.github.io/2011/12/12/How-big-are-PHP-arrays-really-Hint-BIG.html): 一篇关于数组原理的文章
+  + [How Foreach Works](http://stackoverflow.com/questions/10057671/how-does-php-foreach-actually-work/14854568#14854568): StackOverflow关于foreach回答的详情
+  + [How Long is a Piece of String](http://blog.golemon.com/2006/06/how-long-is-piece-of-string.html): 一篇关于字符串原理的文章
+  + [PHP Evaluation Order](https://gist.github.com/nikic/6699370): 一篇关于PHP评估顺序的文章
+  + [PHP Internals Book](http://www.phpinternalsbook.com): 一本由三名核心开发编写的关于PHP内核的在线书
+  + [PHP RFCs](https://wiki.php.net/rfc): PHP RFCs主页(请求注解)
+  + [Print vs Echo, Which One is Faster?](http://fabien.potencier.org/print-vs-echo-which-one-is-faster.html): 一篇关于打印和echo性能的文章
+  + [The PHP Ternary Operator. Fast or Not?](http://fabien.potencier.org/the-php-ternary-operator-fast-or-not.html): 一篇关于三元操作性能的文章
+  + [Understanding OpCodes](http://blog.golemon.com/2008/01/understanding-opcodes.html): 一篇关于opcodes的文章
+  + [When Does Foreach Copy?](http://nikic.github.io/2011/11/11/PHP-Internals-When-does-foreach-copy.html): 一篇关于foreach原理的文章
+  + [Why Objects (Usually) Use Less Memory Than Arrays](https://gist.github.com/nikic/5015323): 一篇关于对象和数组原理的文章
+  + [You're Being Lied To](http://blog.golemon.com/2007/01/youre-being-lied-to.html): 一篇关于内核ZVALs的文章
 
 ## 性能
 
