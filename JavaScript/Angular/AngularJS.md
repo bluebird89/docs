@@ -15,6 +15,8 @@
 
 准备：NPM TypeScript
 
+适合后端的js语言
+
 ## 项目
 
 ```js

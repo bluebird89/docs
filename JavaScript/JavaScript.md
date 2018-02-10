@@ -2244,7 +2244,8 @@ WebAssembly 已得到所有主流浏览器支持
 ## 资源
 
 * [JavaScript深入系列15篇](https://juejin.im/post/59278e312f301e006c2e1510)
-* [sorrycc/awesome-javascript](https://github.com/sorrycc/awesome-javascript)
+* [sorrycc/awesome-javascript](https://github.com/sorrycc/awesome-javascript):🐢 A collection of awesome browser-side JavaScript libraries, resources and shiny things.
+* [jobbole/awesome-javascript-cn](https://github.com/jobbole/awesome-javascript-cn):JavaScript 资源大全中文版，内容包括：包管理器、加载器、测试框架、运行器、QA、MVC框架和库、模板引擎等
 * [avajs/ava](https://github.com/avajs/ava)Futuristic JavaScript test runner
 * [moon](http://moonjs.ga/docs/getting-started.html)
 * [JavaScript文档](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
@@ -2270,6 +2271,11 @@ WebAssembly 已得到所有主流浏览器支持
 
 * [ecomfe/echarts](https://github.com/ecomfe/echarts):A powerful, interactive charting and visualization library for browser http://echarts.baidu.com/
 * [hyperapp/hyperapp](https://github.com/hyperapp/hyperapp):1 KB JavaScript library for building web applications. https://hyperapp.js.org
+
+## 图书
+
+* JS高级程序设计
+* 你不知道的javascript
 
 ## 工具
 

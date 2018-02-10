@@ -196,3 +196,4 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 * [Java 教程](http://www.runoob.com/java/)
 * [Java学习路线图](http://www.jianshu.com/p/d51551b0a8ba) 
 * [史上最精炼JAVA知识点基础总结](http://www.jianshu.com/p/9caf1c755889)
+* [shuzheng/zheng](https://github.com/shuzheng/zheng):基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、支付中心、用户管理（支持第三方登录）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。 http://47.93.195.63/zheng-upms-server

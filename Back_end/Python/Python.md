@@ -26,8 +26,49 @@ Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编
 
 ### MAC
 
+* Mac下的python2.7 默认是安装在／System目录下的。但是～～～Mac有个Rootless机制，默认不允许直接在／System下作修改。所以要先关闭Rootless机制。关闭有风险
+    - 重启电脑, 重启过程中按住command+R, 进入恢复模式 
+    - 打开terminal，键入: csrutil disable 
+    - 重启电脑
+* 自带版本路径：/System/Library/Frameworks/Python.framework/Versions/Current
+* 安装的3.6版本：/usr/local/Cellar/python3/3.6.4_2 
+* Anaconda :/Users/henry/anaconda/bin
+
 ```shell
 brew install python3
+
+# 修改 .bash_profil文件，先搜索尾部，找到后停止搜索
+PATH="/System/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
+export PATH
+
+PATH="/usr/local/Cellar/python3/3.6.4_2/bin:$PATH"
+export PATH
+
+PATH="/Users/henry/anaconda/bin:$PATH" # 优先级最高
+export PATH
+
+sudo rm -R /System/Library/Frameworks/Python.framework/Versions/2.7
+sudo mv /Library/Frameworks/Python.framework/Versions/3.6 /System/Library/Frameworks/Python.framework/Versions
+sudo chown -R root:wheel /System/Library/Frameworks/Python.framework/Versions/3.6
+sudo rm /System/Library/Frameworks/Python.framework/Versions/Current
+sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6 /System/Library/Frameworks/Python.framework/Versions/Current
+sudo rm /usr/bin/pydoc
+sudo rm /usr/bin/python
+sudo rm /usr/bin/pythonw
+sudo rm /usr/bin/python-config
+sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/pydoc3.6 /usr/bin/pydoc
+sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6 /usr/bin/python
+sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/pythonw3.6 /usr/bin/pythonw
+sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6m-config /usr/bin/python-config
+im ~/.bash_profile (只要能编辑就行) 插入新的Python路径
+
+# Setting PATH for Python 3.6
+
+# The orginal version is saved in .bash_profile.pysave
+PATH="/System/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+export PATH
+
+source ~/.bash_profile
 ```
 
 [Using Python on a Macintosh](https://docs.python.org/3/using/mac.html)
@@ -1104,33 +1145,44 @@ conda 是开源包（packages）和虚拟环境（environment）的管理系统�
 - qtconsole ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。
 - spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境。
 
-```shell
-// 更改镜像
+```sh
+#  更改镜像
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ 
 conda config --set show_channel_urls yes
 
-echo 'export PATH="~/User/henry/anaconda/bin:$PATH"' >> ~/.zshrc // 添加环境变量
+echo 'export PATH="~/User/henry/anaconda/bin:$PATH"' >> ~/.zshrc # 添加环境变量
 source ~/.zshrc
-conda upgrade --all   //升级工具包
-conda install numpy scipy pandas
-conda install numpy=1.10   conda install -n python34 numpy
-conda remove package_name
-conda update package_name
-conda list -n python34
-conda  search search_term
-conda update conda
-conda update anaconda
-conda info -e
 
-conda create -n env_name  list of packages // 默认的环境是 root，你也可以创建一个新环境,-n 代表 name，env_name 是需要创建的环境名称，list of packages 则是列出在新环境中需要安装的工具包。
+conda info
+conda search search_term
+conda update conda
+conda upgrade --all   # 升级工具包
+conda install numpy scipy pandas
+conda install numpy=1.10   
+conda update package_name
+conda remove package_name
+
+conda create --name env_name  list of packages # 默认的环境是 root，你也可以创建一个新环境,-n 代表 name，env_name 是需要创建的环境名称，list of packages 则是列出在新环境中需要安装的工具包。
+conda create --name py35 python=3.5
 conda create -n py2 python=2.7 pandas
-source activate env_name // 进入名为 env_name 的环境
-source deactivate  // 退出当前环境
-python --version //查看版本
-conda env remove -n env_name  // 删除名为 env_name 的环境
-conda env list // 显示所有的环境
-conda env export > environment.yaml  // 分享代码的时候，同时也需要将运行环境分享给大家，执行如下命令可以将当前环境下的 package 信息存入名为 environment 的 YAML 文件中
-conda env create -f environment.yaml //  用对方分享的 YAML 文件来创建一摸一样的运行环境。
+source activate env_name # 进入名为 env_name 的环境
+activate py35
+source deactivate  # 退出当前环境
+python --version #查看版本
+which -a python
+conda env remove -n env_name  # 删除名为 env_name 的环境
+
+conda env list # 显示所有的环境
+conda list --revisions 
+conda install -n python34 numpy
+conda list -n python34
+conda env export > environment.yaml  # 分享代码的时候，同时也需要将运行环境分享给大家，执行如下命令可以将当前环境下的 package 信息存入名为 environment 的 YAML 文件中
+conda env create -f environment.yaml #  用对方分享的 YAML 文件来创建一摸一样的运行环境。
+
+conda install --name bio-env toolz
+conda install --channel conda-forge
+boltons
+conda remove --name bio-env toolz boltons
 ```
 
 #### Jupyter Notebook

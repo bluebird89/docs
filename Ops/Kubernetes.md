@@ -222,6 +222,7 @@ kubectl delete deployments hello-minikube1
 * [官方文档](https://kubernetes.io/docs/tutorials/)
 * [网易云原生架构实践之服务治理](https://mp.weixin.qq.com/s/ixkFLfbr3kY8AF_3x-KfSA)
 * [中文文档](https://www.kubernetes.org.cn/doc-11)
+* [rootsongjc/kubernetes-handbook](https://github.com/rootsongjc/kubernetes-handbook):Kubernetes中文指南/实践手册 https://jimmysong.io/kubernetes-handbook https://jimmysong.io/kubernetes-handbook
 * [手动一步步搭建k8s(Kubernetes)高可用集群](https://www.centos.bz/2017/07/k8s-kubernetes-ha-cluster/)
 * [开源容器集群管理系统Kubernetes架构及组件介绍](https://yq.aliyun.com/articles/47308)
 * [Kubernetes总架构图](http://blog.csdn.net/huwh_/article/details/71308171)
@@ -232,4 +233,6 @@ kubectl delete deployments hello-minikube1
 
 https://www.centos.bz/2017/07/kubernetes-pod-schedule-intro/
 
-<http://violetgo.com/blogs/> <http://www.winseliu.com/> <http://blog.csdn.net/qq1010885678/article/details/48832067>
+<http://violetgo.com/blogs/> 
+<http://www.winseliu.com/> 
+<http://blog.csdn.net/qq1010885678/article/details/48832067>
