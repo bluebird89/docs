@@ -165,6 +165,15 @@ Percentage of the requests served within a certain time (ms)
  100%     63 (longest request)
 ```
 
+
+## 能力
+
+测试用例
+测试方法
+缺陷生命周期
+单元测试
+接口测试
+
 ## 性能测试
 
 性能测试的执行是基本功能的重复和并发，需要模拟多用户，在性能测试执行时需要监控指标参数，同时性能测试的结果不是那么显而易见，需要对数据进行分析

@@ -44,6 +44,77 @@ launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php71.plist
 sudo brew services start/stop/restart php71
 ```
 
+### linux源码安装
+
+```sh
+lsb_release -a # 系统环境查看
+
+yum -y install make apr* autoconf automake curl-devel gcc gcc-c++ zlib-devel openssl openssl-devel pcre-devel gd # 编译环境的准备
+
+yum install -y vsftpd # ftp环境的搭建(使用 非root 用户后，在ftp客户端上传相关的源码
+useradd asion
+service vsftpd status
+
+libxml2 # libxml2 安装(xml和html文件相关依赖的库)
+tar -zxvf libxml2-2.6.30
+cd libxml2-2.6.30
+./configure --prefix=/usr/local/libxml2 
+make && make install
+
+cd /lamp/libmcrypt-2.5.8 # libmcrypt-2.5.8 安装(加密库)
+./configure --prefix=/usr/local/libmcrypt/ 
+make && make install
+# 进入libmcrypt-2.5.8文件夹内的 
+libltdl > cd ./libmcrypt-2.5.8/libltdl
+./configure --enable-ltdl-install
+make && make install
+# zlib库安装
+./configure
+make && make install
+# png图片库安装
+./configure --prefix=/usr/local/libpng/ 
+make && make install
+# jpeg图片库安装(需要自己创建jpeg6)
+mkdir /usr/local/jpeg6
+mkdir /usr/local/jpeg6/bin
+mkdir /usr/local/jpeg6/lib
+mkdir /usr/local/jpeg6/include
+mkdir -p /usr/local/jpeg6/man/man1 
+cd /lamp/jpeg-6b
+./configure --prefix=/usr/local/jpeg6/ --enable-shared --enable-static 
+make && make install
+# freetype字体库安装
+./configure --prefix=/usr/local/freetype/
+make && make install
+# autoconfig生成makefile安装(不需要指定安装路径) 
+./configure
+make && make install
+# GD 库 的 安 装
+./configure --prefix=/usr/local/gd2/ --with-jpeg=/usr/local/jpeg6/ --with-freetype=/usr/local/freetype/ --enable
+make && make install
+# 注意:当make的时候，出现以下错误
+configure.ac:64: error: possibly undefined macro: AM_ICONV
+If this token and others are legitimate, please use m4_pattern_allow. See the Autoconf documentation.
+make: *** [configure] Error 1
+# 解决方案:解决办法 ，编译加m4_pattern_allow参数 即:./configure --enable-m4_pattern_allow 便能顺利编译安装
+
+# 安装PHP
+cd /usr/local/src/php-5.3.28
+./configure --prefix=/usr/local/php/ --with-config-file-path=/usr/local/php/etc/ --with-apxs2=/usr/local/apache2/bin/apxs --with-my make
+make install
+cp php.ini-dist /usr/local/php/etc/php.ini
+
+# 打开Apache的配置文件(添加AddType这两行)
+cd /etc/httpd/
+vim httpd.conf
+AddType application/x-httpd-php .php
+AddType application/x-httpd-source .phps
+
+cd /usr/local/php/etc/
+vim php.ini
+date.timezone = Asia/Shanghai
+```
+
 ## [PHP发展](https://segmentfault.com/a/1190000008888700)
 
 * composer:PHP 的依赖管理可以变得非常简单
@@ -60,6 +131,9 @@ sudo brew services start/stop/restart php71
 * PHP
     * 7.1 :2015.12.3 性能提升
     * 7.2 JIT(JUST_IN_TIME)
+
+## CGI vs CLI
+
 
 ### 包管理工具
 
@@ -1324,6 +1398,10 @@ spl_autoload_register('autoload');
 
 * [bolt/bolt](https://github.com/bolt/bolt):Bolt is a simple CMS written in PHP. It is based on Silex and Symfony components, uses Twig and either SQLite, MySQL or PostgreSQL.
 
+### Wiki
+
+* [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki)
+
 ## 扩展
 
 * [PHP 开发者如何做代码审查?](http://blog.csdn.net/gitchat/article/details/78050953)
@@ -1462,19 +1540,19 @@ spl_autoload_register('autoload');
       - [Sculpin](https://sculpin.io): 转换Markdown和Twig为静态HTML的工具
       - [Spress](http://spress.yosymfony.com): 一个能够将Markdown和Twig转化为HTML的可扩展工具
 * 超文本传输协议 HTTP 用于HTTP的库
-      - (https://github.com/kriswallsmith/Buzz)[Buzz]: 另一个HTTP客户端
-      - (https://github.com/guzzle/guzzle)[Guzzle]: 一个全面的HTTP客户端
-      - (https://github.com/nategood/httpful)[HTTPFul]: 一个链式HTTP库
-      - (http://php-vcr.github.io/)[PHP VCR]: 一个录制和重放HTTP请求的库
-      - (https://github.com/rmccue/Requests)[Requests]: 一个简单的HTTP库
-      - (https://github.com/tebru/retrofit-php)[Retrofit]: 一个能轻松创建REST API客户端的库
-      - (https://github.com/zendframework/zend-diactoros)[zend-diactoros]: PSR-7 HTTP消息实现
+      - [Buzz](https://github.com/kriswallsmith/Buzz): 另一个HTTP客户端
+      - [Guzzle](https://github.com/guzzle/guzzle): 一个全面的HTTP客户端
+      - [HTTPFul](https://github.com/nategood/httpful): 一个链式HTTP库
+      - [PHP VCR](http://php-vcr.github.io/): 一个录制和重放HTTP请求的库
+      - [Requests](https://github.com/rmccue/Requests): 一个简单的HTTP库
+      - [Retrofit](https://github.com/tebru/retrofit-php): 一个能轻松创建REST API客户端的库
+      - [zend-diactoros](https://github.com/zendframework/zend-diactoros): PSR-7 HTTP消息实现
 * 爬虫 Scraping 用于网站爬取的库
-      - (https://github.com/oscarotero/Embed)[Embed]:  一个从web服务或网页中提取的信息的工具
-      - (https://github.com/FriendsOfPHP/Goutte)[Goutte]: 一个简单的web爬取器
-      - (https://github.com/mvdbos/php-spider)[PHP Spider]: 一个可配置和可扩展的PHP web爬虫
+      - [Embed](https://github.com/oscarotero/Embed):  一个从web服务或网页中提取的信息的工具
+      - [Goutte](https://github.com/FriendsOfPHP/Goutte): 一个简单的web爬取器
+      - [PHP Spider](https://github.com/mvdbos/php-spider): 一个可配置和可扩展的PHP web爬虫
 * 中间件 Middlewares 使用中间件构建应用程序的库
-      - (https://zendframework.github.io/zend-expressive/)[Expressive]: 基于PSR-7的Zend中间件
+      - [Expressive](https://zendframework.github.io/zend-expressive/): 基于PSR-7的Zend中间件
       - (https://github.com/oscarotero/psr7-middlewares)[PSR7-Middlewares]: 灵感来源于方便的中间件
       - (https://github.com/relayphp/Relay.Relay)[Relay]: 一个PHP 5.5 PSR-7的中间件调度器
       - (https://github.com/stackphp)[Stack]: 一个用于Silex/Symfony的可堆叠的中间件的库
@@ -1811,10 +1889,10 @@ spl_autoload_register('autoload');
       - (https://github.com/giggsey/libphonenumber-for-php)[LibPhoneNumber for PHP]: 一个Google电话号码处理的PHP实现库
       - (https://github.com/moontoast/math)[Math]: 一个处理巨大数字的库
       - (https://github.com/powder96/numbers.php)[Numbers PHP]: 一个处理数字的库
-      - (https://github.com/Crisu83/php-conversion)[PHP Conversion]: 另一个用于度量单位间转换的库
-      - (https://github.com/triplepoint/php-units-of-measure)[PHP Units of Measure]: 一个计量单位转换的库
+      - [PHP Conversion](https://github.com/Crisu83/php-conversion): 另一个用于度量单位间转换的库
+      - [PHP Units of Measure](https://github.com/triplepoint/php-units-of-measure): 一个计量单位转换的库
 * 过滤和验证 Filtering and Validation 过滤和验证数据的库
-      - (https://github.com/cakephp/validation)[Cake Validation]: 另一个验证库 (CP)
+      - [Cake Validation](https://github.com/cakephp/validation): 另一个验证库 (CP)
       - (https://github.com/rdohms/DMS-Filter)[DMS Filter]: 一个注释过滤库
       - (https://github.com/ircmaxell/filterus)[Filterus]: 一个简单的PHP过滤库
       - (https://github.com/ronanguilloux/IsoCodes)[ISO-codes]: 一个验证各种ISO和ZIP编码的库(IBAN, SWIFT/BIC, BBAN, VAT, SSN, UKNIN)
@@ -2045,6 +2123,12 @@ spl_autoload_register('autoload');
       - [Why Objects (Usually) Use Less Memory Than Arrays](https://gist.github.com/nikic/5015323): 一篇关于对象和数组原理的文章
       - [You're Being Lied To](http://blog.golemon.com/2007/01/youre-being-lied-to.html): 一篇关于内核ZVALs的文章
 
+## 性能
+
+```sh 
+time php php-src/Zend/micro_bench.php # 源码自带性能测试
+```
+
 ## 插件
 
 * PHPDoc
@@ -2067,14 +2151,37 @@ composer global require "squizlabs/php_codesniffer=*"
 phpcs /path/to/code/myfile.php
 phpcs /path/to/code
 
+/Users/henry/.composer/vendor/bin/phpcs # phpstrom 开启
+
 # vscode
 phpcs.enable true
 ```
 
+### [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
+
+```sh
+wget http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -O php-cs-fixer
+wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.10.0/php-cs-fixer.phar -O php-cs-fixer
+curl -L http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -o php-cs-fixer
+
+sudo chmod a+x php-cs-fixer
+sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
+
+composer global require friendsofphp/php-cs-fixer
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+brew install homebrew/php/php-cs-fixer
+
+sudo php-cs-fixer self-update
+brew upgrade php-cs-fixer
+
+php php-cs-fixer.phar fix /path/to/dir
+php php-cs-fixer.phar fix /path/to/file
+```
 ### [xdebug](https://xdebug.org/)
 
 ```sh
 brew install homebrew/php/php71-xdebug
+
 ```
 
 TP参考：<https://github.com/ijry/lyadmin>

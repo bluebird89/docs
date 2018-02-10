@@ -94,6 +94,8 @@ ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/loca
 - Command+shift+U 大小写转换
 - Command+w 关闭当前文件选项卡
 - alt+/ 代码补全
+- command + shift + a:
+- command + shift + n:
 
 自定义：
 
@@ -204,6 +206,9 @@ ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/loca
 - Command+delete 安全删除
 - shift+F6 重命名
 
+## 模版
+
+livetemplate
 
 ## 参考
 

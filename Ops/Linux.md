@@ -155,46 +155,6 @@ systemctl restart httpd.service  #重启apache
 systemctl enable httpd.service  #设置开机启动
 ```
 
-### 防火墙
-
-```sh
-ystemctl stop firewalld.service #停止firewall
-systemctl disable firewalld.service #禁止firewall开机启动
-yum install iptables-services  #安装iptables
-
-vi /etc/sysconfig/iptables  #编辑防火墙配置文件
-# Firewall configuration written by system-config-firewall
-# Manual customization of this file is not recommended.
-*filter
-:INPUT ACCEPT [0:0]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
--A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
--A INPUT -p icmp -j ACCEPT
--A INPUT -i lo -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
--A INPUT -j REJECT --reject-with icmp-host-prohibited
--A FORWARD -j REJECT --reject-with icmp-host-prohibited
-COMMIT
-
-systemctl  start  iptables.service  #启动防火墙
-systemctl  stop  iptables.service  #停止防火墙
-systemctl  restart  iptables.service  #重启防火墙
-systemctl  status  iptables.service  #查看防火墙状态
-systemctl  enable  iptables.service  #设置开机启动
-
-vi /etc/selinux/config
-
-#SELINUX=enforcing #注释掉
-#SELINUXTYPE=targeted #注释掉
-SELINUX=disabled #增加
-
-:wq! #保存退出
-
-setenforce 0 #使配置立即生效
-```
-
 ### web设置
 
 ```sh
@@ -248,9 +208,56 @@ sudo apt-cache search softname1 softname2 softname3...... 针对本地数据进�
 
 #### 源代码编译安装
 
-* /usr/local 是标准的地方
+* 源码cp到/usr/local/src/下
 
-### 列表
+```sh
+cd xxx
+./configure --help
+./configure --prefix=/usr/local/libxml2 
+make && make install
+```
+
+### 防火墙
+
+```sh
+ystemctl stop firewalld.service #停止firewall
+systemctl disable firewalld.service #禁止firewall开机启动
+yum install iptables-services  #安装iptables
+
+vi /etc/sysconfig/iptables  #编辑防火墙配置文件
+# Firewall configuration written by system-config-firewall
+# Manual customization of this file is not recommended.
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+
+systemctl  start  iptables.service  #启动防火墙
+systemctl  stop  iptables.service  #停止防火墙
+systemctl  restart  iptables.service  #重启防火墙
+systemctl  status  iptables.service  #查看防火墙状态
+systemctl  enable  iptables.service  #设置开机启动
+
+vi /etc/selinux/config
+
+#SELINUX=enforcing #注释掉
+#SELINUXTYPE=targeted #注释掉
+SELINUX=disabled #增加
+
+:wq! #保存退出
+
+setenforce 0 #使配置立即生效
+```
+
+### 软件列表
 
 * 云笔记:simplenote
 * video: VLC
@@ -378,6 +385,7 @@ Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。命令
 * dd默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
 * `dd if=/dev/stdin of=test bs=10 count=1 conv=ucase` 将输出的英文字符转换为大写再写入文件
 * sudo mount 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
+* reboot/poweroff
 
 #### 系统相关：
 
@@ -412,6 +420,12 @@ sudo vi /etc/timezone
 `locate /usr/share/\*.jpg` # 注意要添加 * 号前面的反斜杠转义，否则会无法找到。
 `which man` 使用 which 来确定是否安装了某个指定的软件，因为它只从 PATH 环境变量指定的路径中去搜索命令
 `sudo find /etc/ -name interfaces/` 格式find [path] [option] [action];  不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索。
+
+find  ./  -size  +50c //在当前目录下查找大小[大于]50个字节的文件
+find  ./  -size  -50c //在当前目录下查找大小[小于]50个字节的文件
+find / -name passwd -mindepth 3 -maxdepth 4 //在3到4个层次的目录里边定位passwd文件
+find  /  -name  passwd[完整名称]     //"递归遍历"系统全部目录查找名字等于passwd的文件
+find  目录 -name  "an*" [部分名称]     //模糊查找文件名字以an开始的
 ```
 
 #### 用户管理
@@ -613,6 +627,39 @@ uname -a
 sudo apt-get purge linux-image-3.5.0-27-generic
 图中因使用remove命令而残留的deinstall的
 sudo dpkg -P linux-image-extra-3.5.0-17-generic
+```
+
+### 用户管理
+
+家目录修改后需要手动创建，不同于创建用户家目录设置
+创建用户时设置家目录，该目录会自动创建
+修改用户家目录时，该目录不会自动创建(需要手动创建)
+
+```sh
+su -
+su - root
+su henry
+
+useradd  username      //创建用户会同时创建同名组
+useradd  -g  组编号   username //创建用户的同时设置组别
+useradd  -g 组编号 -u 用户编号 -d 家目录 username //创建用户同时，指定组别、用户编号、家目录
+
+usermod  -g gid  username     //修改组别是常见操作
+usermod  -g gid -u uid -d 家目录  -l  newname   username //修改组别、用户编号、家目录、名字
+
+userdel username     //删除用户(删除passwd文件对应信息)，此时其家目录需要手动删除
+userdel -r username  //删除用户的同时也删除其“家目录”
+
+groupadd  groupname
+groupmod -g gid  -n newname  groupname
+groupdel 组名
+```
+
+### 界面切换
+
+```sh
+init 3
+init 5
 ```
 
 ## 端口 进程
@@ -832,7 +879,6 @@ smb://192.168.100.106
 31. 通过什么命令指定命令提示符?
 32. 查找命令的可执行文件是去哪查找的? 怎么对其进行设置及添加?
 33. 通过什么命令查找执行命令?34. 怎么对命令进行取别名？
-
 
 ### Linux编程
 
@@ -1211,7 +1257,6 @@ sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 sudo apt-get update
 sudo apt-get install mysql-workbench-community
 
-
 sudo apt install aptitude
 sudo aptitude install <packagename>
 sudo aptitude -f install <packagename>
@@ -1227,6 +1272,57 @@ sudo dpkg --configure -a # fixing broken dependencies
 udo apt-get install -f
 
 sudo uname --m
+
+### 目录操作
+
+```sh
+mkdir  newdir
+mkdir -p newdir/newdir/newdir     //递归方式创建多级目录 newdir新目录多于1个层次(2/3/4等)就设置-p参数，如果就一个新的目录则无需-p参数
+mkdir  dir/newdir
+mkdir  dir/dir/newdir
+mkdir -p dir/newdir/newdir
+
+mv  dir1  dir2                //dir1移动到dir2目录下,并给改名字为"原名"
+mv  dir1  dir2/newdir         //dir1移动到dir2目录下,并给改名字为newdir
+mv  dir1/dir2  dir3/dir4      //dir2移动到dir4目录下,并给改名字为"原名"
+mv  dir1/dir2  dir3/dir4/newdir  //dir2移动到dir4目录下,并给改名字为 newdir
+mv  dir1/dir2  ./             //dir2移动到 当前 目录下,并给改名字为"原名"
+mv  dir1/dir2  ./newdir           //dir2移动到 当前 目录下,并给改名字为newdir
+
+cp  file1  dir1  //file1被复制到dir1目录下一份，并给改名字为“原名”
+cp  file1  dir1/newfile  //file1被复制到dir1目录下一份，并给改名字为newfile
+cp -r dir1  dir2 //dir1被复制到dir2目录下一份，并给改名字为“原名” //recursive递归方式拷贝目录
+cp -r dir1  dir2/newdir  //dir1被复制到dir2目录下一份，并给改名字为newdir
+cp -r dir1/dir2/dir3   dir4/dir5  //dir3被复制到dir5目录下一份，并给改名字为"原名"
+
+rm  filename      //普通文件删除
+rm -r dir         //删除目录[无视层次]需要-r参数
+rm -rf  文件      //recursive force 递归强制删除文件,force 避免删除隐藏文件的提示
+rm -rf /         //递归强制方式删除系统里边的全部内容
+```
+
+### 文件操作
+
+```sh
+cat  filename  //在终端显示文件全部内容
+more filename  //通过"敲回车"方式从第一行逐行查看文件内容,不支持回看,q键退出查看
+less filename  //"上下左右"键方式查看文件各个部分内容,支持回看，q键退出查看
+head  -n  filename//查看文件“前n行”内容
+tail  -n  filename//查看文件“末尾n行”内容
+wc  filename    //计算文件行数
+
+touch  filename
+touch  dir/filename
+
+echo  内容 > filename    //给文件“覆盖写”方式追加内容
+echo  内容 >> filename   //给文件纯追加内容
+
+# 权限管理
+chmod u+/-rwx, g+/-rwx, o+/-rwx 文件
+chmod 000  filename   # 所有用户没有任何权限
+
+du -h 文件/目录 # 查看文件占据磁盘空间大小
+```
 
 ## 参考
 
