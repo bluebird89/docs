@@ -2262,6 +2262,7 @@ WebAssembly 已得到所有主流浏览器支持
 * [JavaScript 标准参考教程](http://javascript.ruanyifeng.com/)
 * [阮一峰ECMAScript 6](http://es6.ruanyifeng.com/)
 * [6周学习计划，攻克JavaScript难关(React/Redux/ES6 etc.)](https://zhuanlan.zhihu.com/p/23412169)
+* [](http://es6.ruanyifeng.com/)
 
 ## 测试
 

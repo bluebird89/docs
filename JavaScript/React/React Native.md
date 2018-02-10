@@ -274,7 +274,6 @@ Flexbox解决了什么问题？
 * [页面设计](https://github.com/ant-design/ant-design/)
 * [react-native-guide](https://github.com/reactnativecn/react-native-guide)
 * [react-native-macos](https://github.com/ptmt/react-native-macos)
-* [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native)
 * [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
 * [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit):Get started with React, Redux, and React-Router.
 * [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app):Create React apps with no build configuration.
