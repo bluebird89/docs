@@ -19,7 +19,7 @@
 
 ## 项目
 
-```js
+```sh
 cd D:\\workspace\js
 git clone https://github.com/angular/quickstart.git quickstart
 cd quickstart
@@ -77,7 +77,6 @@ ng generate enum my-new-enum # 枚举对象Enum
 ng generate module my-module # 模块Module
 ```
 
-
 ## 资源
 
 * [angular/angular.js](https://github.com/angular/angular.js):AngularJS - HTML enhanced for web apps! https://angularjs.org
@@ -86,8 +85,13 @@ ng generate module my-module # 模块Module
 * [angular-ui/angular-google-maps](https://github.com/angular-ui/angular-google-maps):AngularJS directives for the Google Maps Javascript API http://angular-ui.github.io/angular-g…
 * [shyamseshadri/angularjs-book](https://github.com/shyamseshadri/angularjs-book):Examples and Code snippets from the AngularJS O'Reilly book
 * [angular/quickstart](https://github.com/angular/quickstart):Angular 2 QuickStart - source from the documentation
+* [官方教程](https://angular.io)：https://angular.cn/guide/quickstart
 
 ## 参考
 
 * [Top 12 Productivity Tips for WebStorm and Angular – Part 1](https://www.sitepoint.com/productivity-tips-for-webstorm-and-angular-part-1/)
 * [Angular2新的体验](http://blog.fens.me/angular2-init/)
+
+## 教程
+
+http://www.runoob.com/angularjs/angularjs-intro.html

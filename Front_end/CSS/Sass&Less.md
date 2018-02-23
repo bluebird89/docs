@@ -1,4 +1,4 @@
-[Sass 基础教程](http://www.sasschina.com/guide/)
+
 
 # 变量
 
@@ -10,4 +10,7 @@
 
 # 选择器继承来精简CSS
 
-[LESS 语法](http://www.bootcss.com/p/lesscss/)
+## 参考
+
+* [LESS 语法](http://www.bootcss.com/p/lesscss/)
+* [Sass 基础教程](http://www.sasschina.com/guide/)

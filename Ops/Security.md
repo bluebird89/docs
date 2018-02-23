@@ -14,7 +14,6 @@
 * Grabber
 * Golismero
 * OWASP Xenotix XSS
-* 
 * AppScan
 
 
@@ -142,3 +141,7 @@ Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，
 * RemoveXss函数（百度可以查到）
 
 ## cors
+
+## 参考
+
+* [Hacker0x01/hacker101](https://github.com/Hacker0x01/hacker101):Hacker101 https://www.hacker101.com

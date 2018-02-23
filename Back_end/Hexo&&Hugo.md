@@ -84,3 +84,4 @@ hugo server -t themename
 ## 参考
 
 * [barretlee/hexo-admin](https://github.com/barretlee/hexo-admin)
+* https://jimmysong.io/hugo-handbook
