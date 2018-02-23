@@ -131,3 +131,6 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 #### 参考
 
 - [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
+- [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
+- [WEB](https://developer.mozilla.org/en-US/docs/Web)
+- [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning Area. https://developer.mozilla.org/en-US/docs/Learn

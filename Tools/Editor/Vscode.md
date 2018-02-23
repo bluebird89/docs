@@ -185,4 +185,5 @@ code --disable-extensions .
 * [vscode-element-helper](https://github.com/ElemeFE/vscode-element-helper)
 * [keyboard-shortcuts-macos](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
 * https://code.visualstudio.com/
+* [octref/polacode](https://github.com/octref/polacode):camera_flash Polaroid for your code 
 

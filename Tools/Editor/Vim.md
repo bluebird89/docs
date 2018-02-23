@@ -264,6 +264,7 @@ J       合并上下两行
 ```sh
 brew install neovim
 ```
+
 ## 配置
 
 * [neovim/neovim](https://github.com/neovim/neovim):Vim-fork focused on extensibility and usability https://salt.bountysource.com/teams/n…
@@ -272,3 +273,9 @@ brew install neovim
 * [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim):Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [philc/vimium](https://github.com/philc/vimium):The hacker's browser.
 * [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen):pathogen.vim: manage your runtimepath
+
+## 插件
+
+* [cknadler/vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
+* https://github.com/rupa/z
+* https://github.com/rupa/v
