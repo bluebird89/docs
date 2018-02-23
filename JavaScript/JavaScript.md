@@ -2250,6 +2250,7 @@ WebAssembly 已得到所有主流浏览器支持
 * [moon](http://moonjs.ga/docs/getting-started.html)
 * [JavaScript文档](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [mbeaudru/modern-js-cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet):Cheatsheet for the JavaScript knowledge you will frequently encounter in modern projects. https://mbeaudru.github.io/modern-js-…
+* [getify/You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter. 
 
 ## Web APIS
 
@@ -2286,6 +2287,7 @@ WebAssembly 已得到所有主流浏览器支持
 * [mozilla-neutrino/neutrino-dev](https://github.com/mozilla-neutrino/neutrino-dev):Create and build modern JavaScript applications with zero initial configuration. https://neutrino.js.org
 * [facebook/immutable-js](https://github.com/facebook/immutable-js):Immutable persistent data collections for Javascript which increase efficiency and simplicity. http://facebook.github.io/immutable-js/
 * [babel/babel](https://github.com/babel/babel):🐠 Babel is a compiler for writing next generation JavaScript. https://babeljs.io/
+* [GoogleChrome/workbox](https://github.com/GoogleChrome/workbox):package Workbox: JavaScript libraries for Progressive Web Apps https://developers.google.com/web/tools/workbox
 
 ## 扩展
 

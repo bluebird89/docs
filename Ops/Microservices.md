@@ -99,3 +99,7 @@ pattern）；另一种是采用管理服务实例注册的其它系统组件，�
 
 分布式与集群
 - https://www.microservices.com/
+
+## 参考
+
+* [istio/istio](https://github.com/istio/istio):An open platform to connect, manage, and secure microservices. https://istio.io
