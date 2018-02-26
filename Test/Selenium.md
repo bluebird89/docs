@@ -1,7 +1,19 @@
 # Selenium
 
 推荐ruby ,python ,java 任意一门语言来进行学习
-## 产品组成
+
+## 安装
+
+```sh
+pip install -U selenium # mac报错
+
+brew install selenium-server-standalone
+brew install chromedriver
+
+selenium-server -port 4444 # 启动服务
+```
+
+## 组成
 
 ### selenium IDE
 

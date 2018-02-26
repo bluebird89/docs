@@ -9,15 +9,7 @@
 * 下载[开发工具](https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/devtools.html)
 * 创建项目,在网站的「设置」-「开发者设置」中，查看到微信小程序的 AppID 了。
 
-每一个页面需要创建一个文件夹，包含下面四个文件
-
-文件类型
-
-* js：主要负责调用后端接口做数据交互，页面逻辑处理；
-* json：主要用来存储数据内容，一般用的较少；
-* wxml：相当于html，主要用来展示页面信息；
-* wxss：相当于css，跟css语法基本一致；
-
+## 结构
 
 项目文件
 
@@ -26,14 +18,22 @@
 * app.wxss ：公共样式文件，公共样式用于每个视图 View 中。
 * 生命周期：在index.js里面
 
+每一个页面需要创建一个文件夹，包含下面四个文件
+
+* js：主要负责调用后端接口做数据交互，页面逻辑处理
+* json：主要用来存储数据内容，一般用的较少
+* wxml：相当于html，主要用来展示页面信息
+* wxss：相当于css，跟css语法基本一致
+
 ## 部署
 
 * 必须通过HTTPS部署，在后台配置服务器域名：设置合法域名，也就是服务端接口的域名地址
-* 提交审核：
+* 提交审核
 
-## 文档
+## 资源
 
 * [组件文档](https://mp.weixin.qq.com/debug/wxadoc/dev/api/)
+* [Tencent/wepy](https://github.com/Tencent/wepy):小程序组件化开发框架 https://tencent.github.io/wepy/
 
 ## 参考
 

@@ -10,13 +10,12 @@ openJDK版本
 - JavaEE(J2EE)(Java 2 Platform,Enterprise Edition，java平台企业版)
 - JavaME(J2ME)(Java 2 Platform Micro Edition，java平台微型版)。
 
-资源包(<http://www.oracle.com/technetwork/java/javase/downloads/index.html>)
-
 JDK：Java Development Kit
-
 JRE: Java Runtime Environment
 
 ## [安装教程](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-debian-8)类debian系统
+
+### linux
 
 ```sh
 # using the version packaged with Debian：OpenJDK 8
@@ -35,21 +34,39 @@ javac -version
 sudo apt-get install oracle-java9-installer
 # 多版本管理
 sudo update-alternatives --config java | javac // 会获得程序路径
-```
 
 ## JAVA_HOME Environment Variable配置
-
-```sh
 sudo vim /etc/environment 添加 JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 source /etc/environment
 echo $JAVA_HOME
 java -version
 ```
 
+### Mac
+
+* 下载[资源包](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* 安装
+* 配置环境变量
+* 确认shell,修改配置文件,添加环境变量
+
+```sh
+# JAVA
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home
+export PATH=${PATH}:$JAVA_HOME/bin
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+# 或者
+JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+export JAVA_HOME
+
+source .bash_profile 或 source .zshrc
+```
+
 ### 例子
 
 ```java
-新建文件 HelloWorld.java
+// 新建文件 HelloWorld.java
 public class HelloWorld {
     /* 第一个Java程序
      * 它将打印字符串 Hello World
@@ -58,10 +75,9 @@ public class HelloWorld {
         System.out.println("Hello World"); // 打印 Hello World
     }
 }
-# 编译
-javac HelloWorld.java
-# 运行
-java HelloWorld
+
+javac HelloWorld.java // 编译
+java HelloWorld // 运行
 ```
 
 ## Tomcat
@@ -166,13 +182,13 @@ JavaEE/JDBC/Weblogic
 
 Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该平台的另外两大贡献者 ---- IBM 和 Red Hat 共同做出了这个决定
 
-## 扩展
+## 参考
 
 - [zhanglei-workspace/shopping-management-system](https://github.com/zhanglei-workspace/shopping-management-system)
 
 ## IDE:IntelliJ IDEA
 
-[插件库](https://plugins.jetbrains.com/idea):
+[插件库](https://plugins.jetbrains.com/idea)
 
 ## 框架
 
@@ -183,13 +199,13 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 
 ## 工具
 
-- Maven
-- [apache/httpcomponents-core](https://github.com/apache/httpcomponents-core)
-- [apache/tomcat](https://github.com/apache/tomcat)
-- [apache/jmeter](https://github.com/apache/jmeter)a 100% pure Java application designed to test and measure performance. It may be used as a highly portable server benchmark as well as multi-client load generator.
-- [alibaba/fastjson](https://github.com/alibaba/fastjson)A fast JSON parser/generator for Java
-- [Apache Camel](https://github.com/apache/camel) is a powerful open source integration framework based on known Enterprise Integration Patterns with powerful Bean Integration. 
-- [grpc/grpc-java](https://github.com/grpc/grpc-java)The Java gRPC implementation. HTTP/2 based RPC https://grpc.io
+* Maven
+* [apache/httpcomponents-core](https://github.com/apache/httpcomponents-core)
+* [apache/tomcat](https://github.com/apache/tomcat)
+* [apache/jmeter](https://github.com/apache/jmeter)a 100% pure Java application designed to test and measure performance. It may be used as a highly portable server benchmark as well as multi-client load generator.
+* [alibaba/fastjson](https://github.com/alibaba/fastjson)A fast JSON parser/generator for Java
+* [Apache Camel](https://github.com/apache/camel) is a powerful open source integration framework based on known Enterprise Integration Patterns with powerful Bean Integration. 
+* [grpc/grpc-java](https://github.com/grpc/grpc-java)The Java gRPC implementation. HTTP/2 based RPC https://grpc.io
 
 ## 教程
 

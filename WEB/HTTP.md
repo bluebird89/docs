@@ -202,26 +202,40 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 
 ### CORS
 
-```
+```php
 // server 
 $origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';  
   
 $allow_origin = array(  
-    'http://client1.runoob.com',  
-    'http://client2.runoob.com'  
+    'http://client1.runoob.com',
+    'http://client2.runoob.com'
 );  
   
 if(in_array($origin, $allow_origin)){  
-    header('Access-Control-Allow-Origin:'.$origin);       
+    header('Access-Control-Allow-Origin:'.$origin);
 } 
 
-允许所有域名访问则只需在http://server.runoob.com/server.php文件头部添加如下代码：
+# 允许所有域名访问则只需在http://server.runoob.com/server.php文件头部添加如下代码：
 header('Access-Control-Allow-Origin:*'); 
 ```
 
 ## HTTTPS
 
+HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL层，HTTPS的安全基础是SSL(Secure Sockets Layer 安全套接层)，因此加密的详细内容就需要SSL。
+
+* HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息
+* HTTPS在HTTP的基础上加入了SSL协议，SSL依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密。
+    - 需要申请证书
+    - 具有安全性的ssl加密传输协议
+    - 端口也不一样，前者是80，后者是443
+    - http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。
+
 ![HTTPS签名和验证](../static/https-ac.png "HTTPS签名和验证")
+![HTTP vs HTTPS](../static/https.png "HTTP与HTTPS区别")
+
+## Token
+
+访问令牌（Access token）表示访问控制操作主体的系统对象
 
 ## 参考
 
