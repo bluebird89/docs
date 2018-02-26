@@ -2,11 +2,12 @@
 
 ## 使用
 
-```js
+```sh
 npm install -g parcel-bundler
 
 npm init -y
 npm install parcel-bundler -S
+
 "scripts": {
  "dev": "parcel index.html -p 3030",
  "build": "parcel build index.html"
@@ -28,9 +29,8 @@ npm install postcss-modules autoprefixer -S
  }
  }
 }
-
-
 ```
+
 ## 参考
 
 * [parcel-bundler/parcel](https://github.com/parcel-bundler/parcel): 📦🚀 Blazing fast, zero configuration web application bundler https://parceljs.org
