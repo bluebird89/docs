@@ -1296,6 +1296,7 @@ sudo apt-get install mysql-proxy
 * [MySQL数据库事务隔离级别介绍](http://www.jb51.net/article/49596.htm)
 * 高性能mysql
 * [使用 Docker 完成 MySQL 数据库主从配置](https://juejin.im/post/59fd71c25188254dfa1287a9)
+* [alibaba/AliSQL](https://github.com/alibaba/AliSQL/wiki):AliSQL is a MySQL branch originated from Alibaba Group. Fetch document from Release Notes at bottom. 
 
 ## 工具
 

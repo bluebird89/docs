@@ -1,4 +1,4 @@
-# Bitcoin
+# 区块链（blockchain）
 
 A distributed database that is used to maintain a continuously growing list of records, called blocks.设计者署名为中本聪的人创造一种不受政府或其他任何人控制的货币！
 
@@ -106,10 +106,24 @@ Initial Coin Offering的简称，是一种以出售新的初始数字加密货�
 
 ## 交易
 
+* 交易过程
+* 虚拟货币
+
 * [localbitcoins](https://localbitcoins.com/)
 * [比特币中国](https://www.btcchina.com/)
 * [OKCoin](https://www.okcoin.com/)
 * [火币网](https://www.huobi.com/)
+
+## 场景
+
+商业逻辑的重构
+
+* 供应链-票据融资
+* 供应链-应收款融资
+* 供应链-授信融资
+* 资产数字化
+* 商品生命周期跟踪
+* 区块链合同存证
 
 ## 扩展
 
