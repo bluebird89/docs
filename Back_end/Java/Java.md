@@ -206,6 +206,7 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 * [alibaba/fastjson](https://github.com/alibaba/fastjson)A fast JSON parser/generator for Java
 * [Apache Camel](https://github.com/apache/camel) is a powerful open source integration framework based on known Enterprise Integration Patterns with powerful Bean Integration. 
 * [grpc/grpc-java](https://github.com/grpc/grpc-java)The Java gRPC implementation. HTTP/2 based RPC https://grpc.io
+* [alibaba/p3c](https://github.com/alibaba/p3c):Alibaba Java Coding Guidelines pmd implements and IDE plugin https://github.com/alibaba/p3c/wiki
 
 ## 教程
 
