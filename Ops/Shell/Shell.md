@@ -4,9 +4,72 @@ Shell是Linux/Unix的一个外壳。它负责外界与Linux内核的交互，接
 
 ## 资源
 
-- [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)
 
-### zsh:
+## 配置
+
+* /etc/profile：所有用户的shell都有权使用你配置好的环境变量 添加 export PATH="$PATH:/my_new_path"
+* bash_profile  ~/.bashrc 当用户登录时，该文件仅仅执行一次。用来设置环境变量 功能和/etc/profile 相同只不过 他指针对用户来设定,需要source 生效或者退出后生效
+    - 如果ssh方式远程登录Linux时，会自动执行用户家目录下的.bash_profile文件，所有可以在这个文件里面添加一些内容，以便ssh登录Linux时都会执行相应的内容。
+* /etc/vim/.vimrc # vim的root用户配置文件
+* ～/.vimrc # 针对当前用户的配置
+* ~/.zshrc：zsh配置文件
+* PATH="$PATH:/my_new_path":临时添加，关闭后失效
+
+```sh
+echo $SHELL # 查看shell
+
+/* 如果vim还没有语法高亮，那么在/etc/profile 中添加以下语句 */
+export TERM=xterm-color
+// 注: 只对各个用户自己的主目录下的.vimrc修改的话，修改内容只对本用户有效,要想全部有效，可以修改 /etc/vimrc           同样的 /etc/bashrc 是针对所有用户的启动文件
+
+/* 以下是 ~/.vimrc 文件的内容 */
+set nonumber    "不设置行号
+set shell=/bin/bash        "设置shell环境
+syntax on        "开启vim语法高亮
+colorscheme desert        "设置主题色
+set background=dark
+set autoindent        "设置自动缩进
+set nocompatible        "不向下兼容vi
+set showmatch         "开启括号匹配
+"set cursorline        "光标所在行高亮
+set ruler        "设置标尺
+set laststatus=2        "开启状态栏（默认是1）
+set smartindent        "开启新航时使用智能自动缩进
+set hlsearch        "搜索时高亮显示找到的文本    
+set wrap        "设置自动换行
+set tabstop=4        "设置缩进为4个空格
+set softtabstop=4
+set shiftwidth=4
+filetype on        "检测文件类型
+set history=500        "设置历史行数
+set smartindent        "理想添加 依据上面的格式自动对齐
+
+ls /usr/share/vim/vim72/colors/        可以查看vim支持的主题色
+
+/* 目录配色方案（将/etc中的DIR_COLORS文件复制到自己主目录中，并重命名为.dir_colors） */
+cp /etc/DIR_COLORS ~/.dir_colors
+
+/* PS1 用户主提示符配色方案(在 .bashrc 文件中添加) */
+export PS1="\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h: \[\e[0;35m\]\W\[\e[m\] \\$  "
+// 另外种等效写法
+# PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h: \[\033[35m\]\W\[\033[m\] \\$  "
+# export PS1
+
+// 另外种主提示符样式（对CentOS默认的主提示符加颜色标识）
+# export PS1="[\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h \[\e[0;35m\]\W\[\e[m\]]\\$  "
+
+/* .bashrc 文件中个人习惯的别名命令 */
+alias cls='clear'   #DOS风格的清空
+alias h='history | tail'
+alias hg='history | grep'
+alias hl='history | less'
+stty erase ^H        #清除退格 (这个很有必要)
+
+/*  /etc/profile 文件设置 */
+export PATH=$PATH:/opt/perl/site/bin:/opt/perl/bin
+```
+
+### zsh
 
 ```sh
 cat /etc/shells
@@ -382,68 +445,6 @@ exit 0
 # vim:set ts=4 sw=4 ft=sh et:
 ```
 
-## 配置
-
-* /etc/profile：所有用户的shell都有权使用你配置好的环境变量 添加 export PATH="$PATH:/my_new_path"
-* bash_profile  ~/.bashrc 当用户登录时，该文件仅仅执行一次。用来设置环境变量 功能和/etc/profile 相同只不过 他指针对用户来设定,需要source 生效或者退出后生效
-    - 如果ssh方式远程登录Linux时，会自动执行用户家目录下的.bash_profile文件，所有可以在这个文件里面添加一些内容，以便ssh登录Linux时都会执行相应的内容。
-* /etc/vim/.vimrc # vim的root用户配置文件
-* ～/.vimrc # 针对当前用户的配置
-* ~/.zshrc
-* PATH="$PATH:/my_new_path":临时添加，关闭后失效
-
-```
-/* 如果vim还没有语法高亮，那么在/etc/profile 中添加以下语句 */
-export TERM=xterm-color
-// 注: 只对各个用户自己的主目录下的.vimrc修改的话，修改内容只对本用户有效,要想全部有效，可以修改 /etc/vimrc           同样的 /etc/bashrc 是针对所有用户的启动文件
-
-/* 以下是 ~/.vimrc 文件的内容 */
-set nonumber    "不设置行号
-set shell=/bin/bash        "设置shell环境
-syntax on        "开启vim语法高亮
-colorscheme desert        "设置主题色
-set background=dark
-set autoindent        "设置自动缩进
-set nocompatible        "不向下兼容vi
-set showmatch         "开启括号匹配
-"set cursorline        "光标所在行高亮
-set ruler        "设置标尺
-set laststatus=2        "开启状态栏（默认是1）
-set smartindent        "开启新航时使用智能自动缩进
-set hlsearch        "搜索时高亮显示找到的文本    
-set wrap        "设置自动换行
-set tabstop=4        "设置缩进为4个空格
-set softtabstop=4
-set shiftwidth=4
-filetype on        "检测文件类型
-set history=500        "设置历史行数
-set smartindent        "理想添加 依据上面的格式自动对齐
-
-ls /usr/share/vim/vim72/colors/        可以查看vim支持的主题色
-
-/* 目录配色方案（将/etc中的DIR_COLORS文件复制到自己主目录中，并重命名为.dir_colors） */
-cp /etc/DIR_COLORS ~/.dir_colors
-
-/* PS1 用户主提示符配色方案(在 .bashrc 文件中添加) */
-export PS1="\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h: \[\e[0;35m\]\W\[\e[m\] \\$  "
-// 另外种等效写法
-# PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h: \[\033[35m\]\W\[\033[m\] \\$  "
-# export PS1
-
-// 另外种主提示符样式（对CentOS默认的主提示符加颜色标识）
-# export PS1="[\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h \[\e[0;35m\]\W\[\e[m\]]\\$  "
-
-/* .bashrc 文件中个人习惯的别名命令 */
-alias cls='clear'   #DOS风格的清空
-alias h='history | tail'
-alias hg='history | grep'
-alias hl='history | less'
-stty erase ^H        #清除退格 (这个很有必要)
-
-/*  /etc/profile 文件设置 */
-export PATH=$PATH:/opt/perl/site/bin:/opt/perl/bin
-```
-
 ### 跳板机
 
 ```sh
@@ -515,10 +516,10 @@ cat ~/pub_key >>~/.ssh/authorized_keys //将内容追加到authorized_keys文件
 ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root/.ssh/id_rsa.pub') }}'" -k
 ```
 
-
 ## 参考
 
 * [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager. 
 * [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community. 
 * [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
 * [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
+* [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)

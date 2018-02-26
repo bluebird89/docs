@@ -111,3 +111,4 @@ SMP(Symmetric Multi-Processor)系统中有多个处理器(核心)，每个处理
 ## 参考
 
 * [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer):Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.
+* [binhnguyennus/awesome-scalability](https://github.com/binhnguyennus/awesome-scalability):An updated and curated list of selected readings to illustrate Scalability, Availability, and Stability Design Patterns in Back-end Development. 

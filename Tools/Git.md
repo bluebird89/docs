@@ -65,7 +65,7 @@ git config -l                       # 列举所有配置
 * 生成路径 `~/.ssh/`
 * 公钥添加到github账户
 
-```shell
+```sh
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 
 ssh -T git@github.com  # 验证
