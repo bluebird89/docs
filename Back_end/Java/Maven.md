@@ -12,6 +12,17 @@ Maven 是一个项目管理和综合工具。Maven 提供了开发人员构建�
 
 Maven简化和标准化项目建设过程。处理编译，分配，文档，团队协作和其他任务的无缝连接。 Maven 增加可重用性并负责建立相关的任务。
 
+## 安装
+
+```sh
+brew install maven
+
+export MAVEN_HOME=/usr/local/Cellar/maven/3.5.2
+export PATH=$PATH:$MAVEN_HOME/bin
+
+maven -v
+```
+
 ## 原理
 
 ### 更新策略
