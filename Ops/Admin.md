@@ -1,9 +1,5 @@
 # Admin
 
-## 资源
-
-* [kahun/awesome-sysadmin](https://github.com/kahun/awesome-sysadmin)
-* [zuiidea/antd-admin](https://github.com/zuiidea/antd-admin):A admin dashboard application demo built upon Ant Design and Dva.js http://antd-admin.zuiidea.com
 
 ## 扩展
 
@@ -14,3 +10,12 @@
 ## 工具集
 
 Trello->Github->Jira-> Asana
+
+## 参考
+
+* [kahun/awesome-sysadmin](https://github.com/kahun/awesome-sysadmin)
+* [zuiidea/antd-admin](https://github.com/zuiidea/antd-admin):A admin dashboard application demo built upon Ant Design and Dva.js http://antd-admin.zuiidea.com
+* [akveo/blur-admin](https://github.com/akveo/blur-admin):Angular Bootstrap Admin Panel Framework http://akveo.github.io/blur-admin/
+* [ant-design/ant-design-pro](https://github.com/ant-design/ant-design-pro): 👨🏻‍💻👩🏻‍💻 An out-of-box UI solution for enterprise applications http://pro.ant.design/
+* [akveo/ngx-admin](https://github.com/akveo/ngx-admin):Admin dashboard template based on Angular 5+, Bootstrap 4 (previously known as ng2-admin) http://akveo.com/ngx-admin/
+* [PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin): 🎉 A magical vue admin http://panjiachen.github.io/vue-element-admin
