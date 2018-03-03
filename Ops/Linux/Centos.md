@@ -5,6 +5,9 @@
 
 ```sh
 yum install vim
+yum install git
+yum provides ifconfig
+yum install net-tools
 ```
 
 ## nginx

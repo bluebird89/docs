@@ -164,3 +164,8 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 
 <https://medium.freecodecamp.org/how-does-blockchain-really-work-i-built-an-app-to-show-you-6b70cd4caf7d> 
 <https://www.zhihu.com/question/27687960/answer/84583016>
+
+
+## 参考
+
+* [chaozh/awesome-blockchain](https://github.com/chaozh/awesome-blockchain):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料 
