@@ -541,3 +541,7 @@ lsof -i tcp:8081  # 端口查看
 ## 远程登录
 
 开启设置-〉共享-〉远程登录
+
+## 参考
+
+* [hzlzh/Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等 

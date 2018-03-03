@@ -28,7 +28,7 @@
 ### 管理与沟通
 
 * slack
-* trello：以看版为基础任务管理系统
+* trello：以看版为基础任务管理系统 或者Teambition
 * Asana asana.com
 
 ### 设计
