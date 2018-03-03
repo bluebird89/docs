@@ -212,20 +212,20 @@ npm run dev // 构建npm脚本
 
 ### webpack-dashboard
 
-```
-// 安装
+```sh
+# 安装
 npm install webpack-dashboard --save-dev
 yarn add webpack-dashboard
 
-// Import the plugin:
+# Import the plugin:
 var DashboardPlugin = require('webpack-dashboard/plugin'); // const
 
-// If you aren't using express, add it to your webpack configs plugins section:
+# If you aren't using express, add it to your webpack configs plugins section:
 plugins: [
     new DashboardPlugin()
 ]
 
-// 脚本修改
+# 脚本修改
 "scripts": {
     "dev": "webpack-dashboard -- node index.js"
 }
@@ -252,6 +252,20 @@ proxyTable: {
 }
 ```
 
+### webpack-bundle-analyzer
+
+```sh
+npm install --save-dev webpack-bundle-analyzer
+
+# 修改webpack.config.js
+let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+module.exports = {
+    plugins: [new BundleAnalyzerPlugin()]
+}
+
+npm run build --report
+```
 ## 部署
 
 
