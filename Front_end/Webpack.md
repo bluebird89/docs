@@ -239,6 +239,7 @@ plugin 位置正确
 
 * 在config->index.js->dev-->proxyTable
 * webpack-dev-server开启proxy
+* 开发环境用nginx反代理
 
 ```js
 proxyTable: {
