@@ -166,6 +166,11 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 <https://www.zhihu.com/question/27687960/answer/84583016>
 
 
+## 知识
+
+* 常用开发语言外(C++，Java，Go)
+* 密码学、共识算法、超级账本、智能合约
+
 ## 参考
 
 * [chaozh/awesome-blockchain](https://github.com/chaozh/awesome-blockchain):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料 
