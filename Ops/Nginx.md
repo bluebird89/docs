@@ -600,7 +600,7 @@ CMD ["nginx", "-g", "daemon off;"]
 - `docker build -t nginx .`
 - `docker images nginx`
 
-  ### 拉取镜像
+### 拉取镜像
 
 ```
 docker pull nginx
@@ -645,6 +645,26 @@ server {
     # other
     error_page 497 https://$server_name$request_uri;
 }
+```
+
+## [鉴权配置](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/)
+
+http basic auth
+
+```sh
+htpasswd -cb your/path/to/api_project_accounts.db admin password_for_admin  
+htpasswd -b your/path/to/api_project_accounts.db liuxu 123456  
+htpasswd your/path/to/api_project_accounts.db xiaoming
+
+location /dist {
+    deny  192.168.1.2;
+    allow 192.168.1.1/24;
+    allow 127.0.0.1;
+    deny  all;
+
+    auth_basic              "my api project login";  
+    auth_basic_user_file    your/path/to/api_project_accounts.db;  
+}  
 ```
 
 ## 日志分析
