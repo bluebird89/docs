@@ -259,10 +259,22 @@ r       对单词字符进行替换
 J       合并上下两行
 ```
 
-## neovim
+### neovim
 
 ```sh
 brew install neovim
+```
+
+### [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs)
+
+A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! http://spacemacs.org
+
+```sh
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
+brew linkapps emacs-plus
+
+emacs --insecure
 ```
 
 ## 配置

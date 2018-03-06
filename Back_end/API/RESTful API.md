@@ -19,7 +19,7 @@ REST（Representational State Transfer）这个词，是Roy Thomas Fielding在�
 
 表现层："资源"是一种信息实体，它可以有多种外在表现形式。我们把"资源"具体呈现出来的形式，叫做它的"表现层"（Representation）。
 
-状态转化（State Transfer）：访问一个网站，就代表了客户端和服务器的一个互动过程。在这个过程中，势必涉及到数据和状态的变化。 互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。因此，如果客户端想要操作服务器，必须通过某种手段，让服务器端发生"状态转化"（State Transfer）。而这种转化是建立在表现层之上的，所以就是"表现层状态转化"。 客户端用到的手段，只能是HTTP协议。具体来说，就是HTTP协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源。
+状态转化（State Transfer）：访问一个网站，就代表了客户端和服务器的一个互动过程。在这个过程中，势必涉及到数据和状态的变化互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。因此，如果客户端想要操作服务器，必须通过某种手段，让服务器端发生"状态转化"（State Transfer）。而这种转化是建立在表现层之上的，所以就是"表现层状态转化"。 客户端用到的手段，只能是HTTP协议。具体来说，就是HTTP协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源。
 
 - 每一个URI代表一种资源；
 - 客户端和服务器之间，传递这种资源的某种表现层；
@@ -36,19 +36,15 @@ REST（Representational State Transfer）这个词，是Roy Thomas Fielding在�
 
 路径endpoint：每个网址代表一种资源（resource），所以网址中不能有动词，只能有名词，而且所用的名词往往与数据库的表格名对应。一般来说，数据库中的表都是同种记录的"集合"（collection），所以API中的名词也应该使用复数。
 
-HTTp动词：
+HTTP动词：
 
-```
-GET（SELECT）：从服务器取出资源（一项或多项）。
-POST（CREATE）：在服务器新建一个资源。
-PUT（UPDATE）：在服务器更新资源（客户端提供改变后的完整资源）。
-PATCH（UPDATE）：在服务器更新资源（客户端提供改变的属性）。
-DELETE（DELETE）：从服务器删除资源。
-```
-
-还有两个不常用的HTTP动词。 HEAD：获取资源的元数据。 OPTIONS：获取信息，关于资源的哪些属性是客户端可以改变的。
-
-例子：
+* GET（SELECT）：从服务器取出资源（一项或多项）
+* POST（CREATE）：在服务器新建一个资源
+* PUT（UPDATE）：在服务器更新资源（客户端提供改变后的完整资源）
+* PATCH（UPDATE）：在服务器更新资源（客户端提供改变的属性）
+* DELETE（DELETE）：从服务器删除资源
+* HEAD：获取资源的元数据
+* OPTIONS：获取信息
 
 - GET /zoos：列出所有动物园
 - POST /zoos：新建一个动物园
@@ -68,20 +64,18 @@ DELETE（DELETE）：从服务器删除资源。
 
 ### 状态码（Status Codes）
 
-```
-200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。 
-201 CREATED - [POST/PUT/PATCH]：用户新建或修改数据成功。 
-202 Accepted - [_]：表示一个请求已经进入后台排队（异步任务） 
-204 NO CONTENT - [DELETE]：用户删除数据成功。 
-400 INVALID REQUEST - [POST/PUT/PATCH]：用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。 
-401 Unauthorized - [_]：表示用户没有权限（令牌、用户名、密码错误）。 
-403 Forbidden - [_] 表示用户得到授权（与401错误相对），但是访问是被禁止的。 
-404 NOT FOUND - [_]：用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。 
-406 Not Acceptable - [GET]：用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）。 
-410 Gone -[GET]：用户请求的资源被永久删除，且不会再得到的。 
-422 Unprocesable entity - [POST/PUT/PATCH] 当创建一个对象时，发生一个验证错误。 
-500 INTERNAL SERVER ERROR - [*]：服务器发生错误，用户将无法判断发出的请求是否成功。
-```
+* 200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）
+* 201 CREATED - [POST/PUT/PATCH]：用户新建或修改数据成功
+* 202 Accepted - [_]：表示一个请求已经进入后台排队（异步任务） 
+* 204 NO CONTENT - [DELETE]：用户删除数据成功
+* 400 INVALID REQUEST - [POST/PUT/PATCH]：用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的
+* 401 Unauthorized - [_]：表示用户没有权限（令牌、用户名、密码错误）
+* 403 Forbidden - [_] 表示用户得到授权（与401错误相对），但是访问是被禁止的
+* 404 NOT FOUND - [_]：用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的
+* 406 Not Acceptable - [GET]：用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）
+* 410 Gone -[GET]：用户请求的资源被永久删除，且不会再得到的
+* 422 Unprocesable entity - [POST/PUT/PATCH] 当创建一个对象时，发生一个验证错误
+* 500 INTERNAL SERVER ERROR - [*]：服务器发生错误，用户将无法判断发出的请求是否成功
 
 ### 错误处理（Error handling）
 
@@ -89,12 +83,12 @@ DELETE（DELETE）：从服务器删除资源。
 
 ### 返回结果
 
-- GET /collection：返回资源对象的列表（数组）  get list
-- GET /collection/resource：返回单个资源对象
-- POST /collection：返回新生成的资源对象    add
-- PUT /collection/resource：返回完整的资源对象
-- PATCH /collection/resource：返回完整的资源对象
-- DELETE /collection/resource：返回一个空文档
+* GET /collection：返回资源对象的列表（数组）  get list
+* GET /collection/resource：返回单个资源对象
+* POST /collection：返回新生成的资源对象    add
+* PUT /collection/resource：返回完整的资源对象
+* PATCH /collection/resource：返回完整的资源对象
+* DELETE /collection/resource：返回一个空文档
 
 RESTful API最好做到Hypermedia，即返回结果中提供链接，连向其他API方法，使得用户不查文档，也知道下一步应该做什么。比如 api.example.com
 
@@ -136,5 +130,6 @@ rel表示这个API与当前网址的关系（collection关系，并给出该coll
 ## StrongLoop
 
 StrongLoop API Platform构建于开源的LoopBack.io之上，LoopBack是一个高度可扩展的Node.js API框架。借助于LoopBack，我们可以快速创建可扩展的API和数据库映射。
-[StrongLoop](https://mac.aotu.io/docs/dev-rd/strongloop.html)
-[文档](https://docs.strongloop.com/pages/viewpage.action?pageId=10879061)
+
+* [StrongLoop](https://mac.aotu.io/docs/dev-rd/strongloop.html)
+* [文档](https://docs.strongloop.com/pages/viewpage.action?pageId=10879061)
