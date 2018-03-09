@@ -12,6 +12,7 @@ help your devleop APIs faster
 收藏的测试Postman echo用例。官网有整理的api collection可以直接导入。
 允许你运行collection，你可以运行任意的次数。选择collection，选择环境。点击运行按钮。
 最后会给出一个整体运行的结果。会保存每一次运行的结果，提供给你比较每一次运行解雇的不同。
+可以批量测试
 
 ## environment
 
@@ -31,6 +32,10 @@ HTTP请求的4部分:
         + urlencoded：你不能上传文件通过这个编码模式。该模式和表单模式会容易混淆。urlencoded中的key-value会写入URL，form-data模式的key-value不明显写入URL，而是直接提交。
         + raw request可以包含任何东西。所有填写的text都会随着请求发送。
         + binaryimage, audio or video files.text files 。也不能保存历史，每次选择文件，提交。
+    - pre-requset script:对一些环境变量之类的进行设置，相当于数据初始化 。全局变量与环境变量
+```js
+postman.setGlobalVariable("username", "tester");  // 使用时代替 
+```
 
 response
 

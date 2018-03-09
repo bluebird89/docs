@@ -9,6 +9,7 @@ FastCGI 应用速度很快是因为他们持久稳定。不必对每一个请求
 ### 约定目录
 
 * bin: /usr/local/php/sbin/php-fpm
+* /usr/local/php/etc/php-fpm.conf
 * 配置文件路径：/private/etc/php-fpm.conf /private/etc/php-fpm.d/www.conf.default
 * php.ini:/usr/local/php/etc/php.ini
 
@@ -96,6 +97,7 @@ chroot = #启动时的Chroot目录. 所定义的目录需要是绝对路径. 如
 chdir = #设置启动目录，启动时会自动Chdir到该目录. 所定义的目录需要是绝对路径. 默认值: 当前目录，或者/目录（chroot时）
 catch_workers_output = yes #重定向运行过程中的stdout和stderr到主要的错误日志文件中. 如果没有设置, stdout 和 stderr 将会根据FastCGI的规则被重定向到 /dev/null . 默认值: 空.
 ```
+
 ```
 # /private/etc/php-fpm.conf
 error_log = /usr/local/var/log/php-fpm.log # 开启日志
