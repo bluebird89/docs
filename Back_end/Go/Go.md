@@ -170,5 +170,8 @@ websocketd --port=8080 ./count.sh // 建立server
 * [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
 * [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源免费图书(开发中...)https://github.com/chai2010/advanced-go-programming-book
 
+## 参考
+
+[gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph 
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>
