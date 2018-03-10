@@ -296,7 +296,17 @@ end
 
 - `It appears your machine doesn't support NFS, or there is not an adapter to enable NFS on this machine for Vagrant`:`sudo apt-get install nfs-kernel-server`
 - `default: Warning: Authentication failure. Retrying...`;homestead.rb 中加入如下配置`config.ssh.username = 'vagrant'``config.ssh.password = 'vagrant'`
+- Vagrant was unable to mount VirtualBox shared folders. This is usually because the filesystem "vboxsf" is not available
 
+```sh
+sudo apt-get install virtualbox-guest-utils # ubuntu
+
+sudo find / -name VBoxGuestAdditions.iso #  centos  文件位于VirtualBox安装文件夹下
+mount /dev/cdrom /cdrom #( 该cdrom是我在/目录下创建的文件夹)
+cd /cdrom; 
+sh ./VBoxLinuxAdditions.run
+vagrant up
+```
 ## 记录
 
 - v1.9.4 bugs :SSH cann't connect
