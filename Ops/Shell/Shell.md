@@ -267,6 +267,7 @@ dmenu 在桌面顶部提供了一个菜单条，可以快速启动应用程序
 echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.zshrc
 
 ### iterm2
+
 |   功能   | mac         |
 |----------|----------|
 | 切换tab | ⌘+←, ⌘+→, ⌘+{, ⌘+} |
@@ -482,6 +483,7 @@ Host 10.10.0.*      #可以用*通配符
 
     ProxyCommand ssh username_tiaoban@tiaoban -W %h:%p
 ```
+
 ## 分类
 
 * mosh
