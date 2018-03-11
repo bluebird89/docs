@@ -266,3 +266,12 @@ cd swoole-src-2.1.1　　#文件夹名称可能不一样
 make && make install
 ```
 
+### Percona
+
+```sh
+yum install https://www.percona.com/redir/downloads/percona-release/redhat/percona-release-0.1-4.noarch.rpm
+
+yum install Percona-Server-client-57 Percona-Server-server-57
+/usr/bin/mysql_secure_installation
+```
+
