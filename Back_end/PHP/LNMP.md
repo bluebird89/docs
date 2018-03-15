@@ -51,6 +51,8 @@ apt-get install percona-server-server-5.7
 
 ### PHP
 
+把PHP请求都发送到同一个文件上，然后在此文件里通过解析「REQUEST_URI」实现路由
+
 ```sh
 sudo apt-get install python-software-properties software-properties-common
 sudo add-apt-repository ppa:ondrej/php

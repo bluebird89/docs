@@ -1,6 +1,6 @@
 # HTTP
 
-HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网上应用最为广泛的一种基于 TCP/IP 通信协议来传递数据的网络传输应用层协议。
+HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网上应用最为广泛的一种基于 TCP/IP 通信协议来传递数据的网络传输应用层协议。以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规范
 
 * TCP/IP协议是传输层协议，主要解决数据如何在网络中传输
 * HTTP是应用层协议，主要解决如何包装数据。HTTP协议详细规定了浏览器与服务器之间相互通信的规则，是万维网交换信息的基础。
@@ -12,7 +12,43 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
     * 通常的做法是即时不需要获得任何数据，客户端也保持每隔一段固定的时间向服务器发送一次"保持连接"的请求，服务器在收到该请求后对客户端进行回复，表明知道客户端"在线"。
     * 若服务器长时间无法收到客户端的请求，则认为客户端"下线"，若客户端长时间无法收到服务器的回复，则认为网络已经断开。
 
-# TCP/IP模型
+## 说明
+
+服务端通常是根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对主体进行解析。
+
+* 请求
+    - 状态行
+    - 请求头
+    - 消息主体（entity-body）
+
+### 请求方式
+
+#### POST
+
+* application/x-www-form-urlencoded：原生 form 表单，如果不设置 enctype 属性
+* multipart/form-data：用表单上传文件
+    - 生成了一个 boundary 用于分割不同的字段，为了避免与正文内容重复，boundary 很长很复杂
+* application/json:支持比键值对复杂得多的结构化数据:php 就无法通过 $_POST 对象从上面的请求中获得内容,从 php://input 里获得原始输入流，再 json_decode 成对象
+* text/xml:XML 作为编码方式的远程调用规范。
+
+
+```
+POST http://www.example.com HTTP/1.1 
+Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA 
+
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA 
+Content-Disposition: form-data; name="text" 
+
+title 
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA 
+Content-Disposition: form-data; name="file"; filename="chrome.png" 
+Content-Type: image/png 
+
+PNG ... content of chrome.png ... 
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA-- 
+```
+
+## TCP/IP模型
 
 TCP/IP协议模型（Transmission Control Protocol/Internet Protocol），包含了一系列构成互联网基础的网络协议，是Internet的核心协议。
 
@@ -64,7 +100,7 @@ TCP/IP协议通信的过程其实就对应着数据入栈与出栈的过程。�
 - 第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；
 - 第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。
 
-我们在传输数据时，可以只使用（传输层）TCP/IP协议，但是那样的话，如果没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用到应用层协议，应用层协议有很多，比如HTTP、FTP、TELNET等，也可以自己定义应用层协议。WEB使用HTTP协议作应用层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发到网络上。
+在传输数据时，可以只使用（传输层）TCP/IP协议，但是那样的话，如果没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用到应用层协议，应用层协议有很多，比如HTTP、FTP、TELNET等，也可以自己定义应用层协议。WEB使用HTTP协议作应用层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发到网络上。
 
 ### 网络层
 
@@ -175,7 +211,7 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 
 ### Content Type
 
-用来向浏览器和服务器提供信息，表示该 URL 对应的资源类型
+用来向浏览器和服务器提供信息，表示该 URL 对应的资源类型。服务端通常是根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对主体进行解析。
 
 ```
 文件后缀    Content-Type(Mime-Type)

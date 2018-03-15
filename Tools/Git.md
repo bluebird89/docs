@@ -945,6 +945,20 @@ git subtree pull -P home/.bash bash master --squash
 对 git-subtree 下子项目有修改需求的，请先 git subtree pull 
 ```
 
+### [git-lfs/git-lfs](https://github.com/git-lfs/git-lfs)
+
+Git extension for versioning large files https://git-lfs.github.com
+
+```sh
+git lfs install
+git lfs track "*.zip"
+git add .gitattributes
+$ git add my.zip
+$ git commit -m "add zip"
+git lfs ls-files
+git push origin master
+```
+
 ## 扩展
 
 ### tig
