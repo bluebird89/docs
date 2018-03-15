@@ -148,6 +148,7 @@ sudo php -d detect_unicode=0 go-pear.phar
 # 4 修改bin路径
 # pear version
 ```
+
 ## 语法
 
 ### 基础
@@ -1120,7 +1121,7 @@ printworking(new manager());//显示经理的工作
 
 #### trait
 
-为了避免代码重复而生,既可以实现代码分离又可以不用在逻辑层做任何处理
+实现多继承
 
 ```php
 Trait OwnerTrait{
@@ -1138,7 +1139,7 @@ $comment = new Comment();
 $comment->owner();
 ```
 
-优先级:从基类继承的成员会被 trait 插入的成员所覆盖。优先顺序是来自当前类的成员覆盖了 trait 的方法，而 trait 则覆盖了被继承的方法。
+优先级:当前类的成员>trait 的方法>被继承的方法。
 
 #### 接口与抽象类
 

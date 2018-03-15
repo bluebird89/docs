@@ -5,6 +5,23 @@ Event-driven asynchronous & concurrent & coroutine networking engine with high p
 - [swoole/swoole-src](https://github.com/swoole/swoole-src):Event-driven asynchronous & concurrent & coroutine networking engine with high performance for PHP. <http://www.swoole.com/>
 - [官方文档](https://github.com/cloes/swoole-doc)
 
+## 安装
+
+```sh
+wget https://github.com/swoole/swoole-src/archive/v1.10.2.zip
+tar zxvf v1.10.2.zip
+cd swoole
+phpize
+./configure
+make 
+sudo make install # 编译后的模块在 /modules 中，将swoole.so添加到php.ini中
+extension=swoole.so
+
+pecl install swoole
+
+
+```
+
 ## 资料
 
 - [Concise Guide to Swoole文档](https://linkeddestiny.gitbooks.io/easy-swoole/content/)
