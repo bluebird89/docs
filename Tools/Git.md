@@ -919,6 +919,9 @@ git submodule foreach git pull  # 更新 repo 下所有的 submodules
 git rm --cached another_project # 删除项目
 vim .git/config
 ...remove another_project...
+
+git submodule init
+git submodule update
 ```
 
 ### git-subtree
