@@ -132,8 +132,23 @@ date.timezone = Asia/Shanghai
     * 7.1 :2015.12.3 性能提升
     * 7.2 JIT(JUST_IN_TIME)
 
-## CGI vs CLI
+## CGI vs Cli
 
+### Cli
+
+* 用多进程, 子进程结束以后, 内核会负责回收资源
+* 使用多进程,子进程异常退出不会导致整个进程Thread退出. 父进程还有机会重建流程.
+* 一个常驻主进程, 只负责任务分发, 逻辑更清楚.
+* 完全支持多线程
+* 如上，可以实现定时任务
+* 开发桌面应用就是使用PHP-CLI和GTK包
+* linux下用php编写shell脚本
+
+```php
+php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数。这种方法首先要设置php解释器的路径，Windows平台在运行CLI之前，需设置类似path c:\php的命令，也失去了CLI脚本第一行的意义，因此不建议使用该方法。
+
+第二种方法是首先运行chmod+x <要运行的脚本文件名>（UNIX/Linux环境），将该PHP文件置为可执行权限，然后在CLI脚本头部第一行加入声明（类似于#! /usr/bin/php或PHP CLI解释器位置），接着在命令行直接执行。这是CLI首选方法，建议采用
+```
 
 ### 包管理工具
 
