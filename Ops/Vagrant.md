@@ -8,6 +8,9 @@
 
 ### mac
 
+* /usr/local/bin
+* /opt/vagrant/bin/vagrant
+
 ```sh
 brew cask install virtualbox
 brew cask install vagrant
@@ -75,6 +78,7 @@ vagrant box add metadata.json
 ### 服务管理
 
 通常情况下Box只做最基本的设置，因此Vagrant通常使用Chef或者Puppet来做进一步的环境搭建.那么Chef或者Puppet称为provisioning，而该命令就是指定开启相应的provisioning。按照Vagrant作者的说法，所谓的provisioning就是"The problem of installing software on a booted system"的意思。
+
 * Chef
 * Puppet
 * Ansible
@@ -294,6 +298,7 @@ end
 
 ### 记录
 
+- v1.9.4 bugs :SSH cann't connect
 - `It appears your machine doesn't support NFS, or there is not an adapter to enable NFS on this machine for Vagrant`:`sudo apt-get install nfs-kernel-server`
 - `default: Warning: Authentication failure. Retrying...`;homestead.rb 中加入如下配置`config.ssh.username = 'vagrant'``config.ssh.password = 'vagrant'`
 - Vagrant was unable to mount VirtualBox shared folders. This is usually because the filesystem "vboxsf" is not available
@@ -307,9 +312,6 @@ cd /cdrom;
 sh ./VBoxLinuxAdditions.run
 vagrant up
 ```
-## 记录
-
-- v1.9.4 bugs :SSH cann't connect
 
 ## 参考
 
