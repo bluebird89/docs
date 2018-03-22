@@ -109,7 +109,7 @@ MySQL  客户端和服务端通信协议是“半双工”的，这就意味着�
 * 只允许使用内网域名，而不是ip连接数据库.不只是数据库，缓存（memcache、redis）的连接，服务（service）的连接都必须使用内网域名，机器迁移/平滑升级/运维管理…太多太多的好处
 
 
-### Schema 优化
+### Schema(数据库对象集合，概要) 优化
 
 * 保证你的数据库的整洁性。
 * 归档老数据 — 删除查询中检索或返回的多余的行
@@ -237,6 +237,14 @@ MySQL  客户端和服务端通信协议是“半双工”的，这就意味着�
 * 索引并不是越多越好，索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时有可能会重建索引
 * 缓存优化：`$r = mysql_query("SELECT username FROM user WHERE signup_date >= CURDATE()");` CURDATE()、NOW() 和 RAND() 或是其它的诸如此类的SQL函数都不会开启查询缓存
 * 子查询的效率不如连接查询（join），因为MySQL不需要在内存中创建临时表来完成这个在逻辑上需要两个步骤的查询工作。MySQL不需要在内存中创建临时表来完成这个逻辑上的需要两个步骤的查询工作。
+* select * 和select 字段区别：
+    - 如果某些不需要的字段数据量特别大，还是写清楚字段比较好，因为这样可以减少网络传输。
+    - index coverage：有一个常用查询，只需要用到表中的某两列，user_id和post_id，而且有一个多列索引已经覆盖了这两个列，那么这个索引就是这个查询的覆盖索引了。可以不用读data，直接使用index里面的值就返回结果的。但是一旦用了select*，就会有其他列需要读取，这时在读完index以后还需要去读data才会返回结果。
+* Select count(*)和Count（1）:Scount(*)和count(1)的执行效率是完全一样的，根本不存在所谓的单列扫描和多列扫描的问题
+    - 假如表沒有主键(Primary key), 那么count(1)比count(*)快，都包括对NULL的统计，而count(column) 是不包括NULL的统计
+    - 如果有主键的話，那主键作为count的条件时候count(主键)最快
+    - 如果你的表只有一个字段的话那count(*)就是最快的
+    - count(*)只是返回表中行数，因此SQL Server在处理count(*)的时候只需要找到属于表的数据块块头，然后计算一下行数就行了，而不用去读取里面数据列的数据。而对于count(col)就不一样了，为了去除col列中包含的NULL行，SQL Server必须读取该col的每一行的值，然后确认下是否为NULL，然后在进行计数。
 
 #### order by
 
@@ -443,9 +451,6 @@ optimize table tbl_name;
 ## 参考
 
 * [SQL语句百万数据量优化方案](https://juejin.im/post/5a01257a6fb9a045211e1bdc) 
-
-索引覆盖
-
 
 存储使用EMC阵列（容量大，数据安全），IBM服务器，即IOE组合，这三个组合很强大（高可用，高性能）
 
