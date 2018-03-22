@@ -2140,6 +2140,12 @@ spl_autoload_register('autoload');
   + [Why Objects (Usually) Use Less Memory Than Arrays](https://gist.github.com/nikic/5015323): 一篇关于对象和数组原理的文章
   + [You're Being Lied To](http://blog.golemon.com/2007/01/youre-being-lied-to.html): 一篇关于内核ZVALs的文章
 
+### 协程
+
+PHP 最大的优势在于快速开发，劣势在于效率和工程规范。协程、异步这些技术相对学习成本高，优势在于性能提升明显.
+
+PHP5.5中加入了一个新特性—迭代生成器和协程。
+
 ## 性能
 
 ```sh 
@@ -2193,12 +2199,6 @@ brew upgrade php-cs-fixer
 
 php php-cs-fixer.phar fix /path/to/dir
 php php-cs-fixer.phar fix /path/to/file
-```
-### [xdebug](https://xdebug.org/)
-
-```sh
-brew install homebrew/php/php71-xdebug
-
 ```
 
 ## 参考
