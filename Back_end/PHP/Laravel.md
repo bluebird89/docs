@@ -1393,6 +1393,34 @@ password: password
 // Non-static method Redis::hGet() cannot be called statically
 ```
 
+### [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)
+
+Laravel Debugbar (Integrates PHP Debug Bar)
+
+```php
+composer require barryvdh/laravel-debugbar --dev # APP_DEBUG = true
+
+Debugbar::info($object);
+Debugbar::error('Error!');
+Debugbar::warning('Watch out…');
+Debugbar::addMessage('Another message', 'mylabel');
+
+Debugbar::startMeasure('render','Time for rendering');
+Debugbar::stopMeasure('render');
+Debugbar::addMeasure('now', LARAVEL_START, microtime(true));
+Debugbar::measure('My long operation', function() {
+    // Do something…
+});
+```
+
+### [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
+
+🔐 JSON Web Token Authentication for Laravel & Lumen http://jwt-auth.com
+
+```php
+code
+```
+
 ## 参考
 
 * [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
