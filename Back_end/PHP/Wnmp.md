@@ -17,7 +17,7 @@ nginx -t -c /path/to/nginx.conf # 测试nginx配置文件是否正确
 nginx -s stop  #快速停止nginx
 nginx -s quit # 完整有序的停止nginx
 
-tasklist /fi "imagename eq nginx.exe" # 查看进程
+tasklist /fi "imagename eq nginx.exe" # 查看进程，没有查看error.log
 ```
 
 ## 参考
