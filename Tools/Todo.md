@@ -2,7 +2,6 @@
 - apicloud
  electron:npm install failed
 
-
 ## 基金会
 
 - [Symphony Software Foundation](https://github.com/symphonyoss)Fostering an Open Source ecosystem in Financial Services
