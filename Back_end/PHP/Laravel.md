@@ -1418,7 +1418,9 @@ Debugbar::measure('My long operation', function() {
 🔐 JSON Web Token Authentication for Laravel & Lumen http://jwt-auth.com
 
 ```php
-code
+composer require tymon/jwt-auth # 修改app.php 添加到providers
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider" # 生成配置文件
+php artisan jwt:secret # 使用 
 ```
 
 ## 参考

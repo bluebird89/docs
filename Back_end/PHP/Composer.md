@@ -30,6 +30,7 @@ composer install
 composer update
 composer remove
 composer self-update
+composer create-project swoft/swoft swoft
 ```
 
 ```php

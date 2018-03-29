@@ -4,9 +4,9 @@ JavaScript是世界上最流行的脚本语言。运行在浏览器中的解释�
 
 在上个世纪的1995年，当时的网景公司正凭借其Navigator浏览器成为Web时代开启时最著名的第一代互联网公司。由于网景公司希望能在静态HTML页面上添加一些动态效果，于是叫Brendan Eich这哥们在两周之内设计出了JavaScript语言。你没看错，这哥们只用了10天时间。为什么起名叫JavaScript？原因是当时Java语言非常红火，所以网景公司希望借Java的名气来推广，但事实上JavaScript除了语法上有点像Java，其他部分基本上没啥关系。
 
-因为网景开发了JavaScript，一年后微软又模仿JavaScript开发了JScript，为了让JavaScript成为全球标准，几个公司联合ECMA（European Computer Manufacturers Association）组织定制了JavaScript语言的标准，被称为ECMAScript标准。所以简单说来就是，ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标准的一种实现。
+因为网景开发了JavaScript，一年后微软又模仿JavaScript开发了JScript，为了让JavaScript成为全球标准，几个公司联合ECMA（European Computer Manufacturers Association）组织定制了JavaScript语言的标准，被称为ECMAScript标准。
 
-最新版ECMAScript 6标准（简称ES6）已经在2015年6月正式发布了，所以，讲到JavaScript的版本，实际上就是说它实现了ECMAScript标准的哪个版本。
+ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标准的一种实现。ECMAScript 6标准（简称ES6）已经在2015年6月正式发布了，所以，讲到JavaScript的版本，实际上就是说它实现了ECMAScript标准的哪个版本。
 
 [ECMAScript 2015](https://babeljs.io/learn-es2015/)
 
@@ -16,13 +16,20 @@ JavaScript是世界上最流行的脚本语言。运行在浏览器中的解释�
 
 * 由`<script>...</script>`包含的代码就是JavaScript代码，它将直接被浏览器执行。JavaScript代码可以直接嵌在网页的任何地方，不过通常我们都把JavaScript代码放到`<head>`中。
 * 把JavaScript代码放到一个单独的.js文件，然后在HTML中通过`<script src="..."></script>`引入这个文件。更利于维护代码，并且多个页面可以各自引用同一份.js文件。以在同一个页面中引入多个.js文件，还可以在页面中多次编写`<script> js代码... </script>`，浏览器按照顺序依次执行
+
 ```html
 <head>
   <script>
     alert('Hello, world');
   </script>
 </head>
-
+<body>
+// JavaScript 会在页面加载时向 HTML 的 <body> 写文本.如果在文档加载后使用该方法，会覆盖整个文档
+<script>
+document.write("<h1>This is a heading</h1>");
+document.write("<p>This is a paragraph</p>");
+</script>
+</body>
 <script src="/static/js/abc.js"></script>
 ```
 
@@ -30,14 +37,63 @@ JavaScript是世界上最流行的脚本语言。运行在浏览器中的解释�
 
 ### 基础语法
 
-* 每个语句以`;`结束，浏览器中负责执行JavaScript代码的引擎会自动在每个语句的结尾补上;。
+* 每个语句以`;`结束，浏览器中负责执行JavaScript代码的引擎会自动在每个语句的结尾补上;
 * 语句块用{`...}`
 * 以`//`开头直到行末的字符被视为行注释，注释是给开发人员看到，JavaScript引擎会自动忽略
 * 块注释是用`/*...*/`把多行字符包裹起来
+* 区分大小写
 
-### 数据类型和变量
 
-* Number:不区分整数和浮点数，统一用Number表示.有时候用十六进制表示整数比较方便，十六进制用0x前缀和0-9，a-f表示,以及运算符.NaN这个特殊的Number与所有其他值都不相等，包括它自己.唯一能判断NaN的方法是通过isNaN()函数.注意浮点数的相等比较(浮点数在运算过程中会产生误差，因为计算机无法精确表示无限循环小数。要比较两个浮点数是否相等，只能计算它们之差的绝对值，看是否小于某个阈值)
+### 常量
+
+要申明一个常量，在ES6之前是不行的，我们通常用全部大写的变量来表示“这是一个常量，不要修改它的值”
+
+```javascript
+var PI = 3.14;
+
+const PI = 3.14;
+PI = 3; // 某些浏览器不报错，但是无效果！
+PI; // 3.14
+```
+
+### 变量
+
+变量不仅可以是数字，还可以是任意数据类型。
+
+* 变量名是大小写英文、数字、$和_的组合，且不能用数字开头。变量名也不能是JavaScript的关键字，如if、while等。申明一个变量用var语句。变量名也可以用中文，但是，请不要给自己找麻烦。
+* 使用等号=对变量进行赋值。可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量，但是要注意只能用var申明一次。
+* 变量本身类型不固定的语言称之为动态语言，与之对应的是静态语言。静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。例如Java是静态语言
+* ECMA在后续规范中推出了strict模式，在strict模式下运行的JavaScript代码，强制通过var申明变量，未使用var申明变量就使用的，将导致运行错误。在JavaScript代码的第一行写上：`'use strict';`
+* 如果重新声明 JavaScript 变量，该变量的值不会丢失：
+
+```js
+var carname; // 声明变量，值为undefined
+var answer='Yes I am!'; // 声明变量并赋值
+var name="Gates", age=56, job="CEO";
+```
+
+### 数据类型
+
+所有事物都为对象
+
+* Null表示一个“空”的值，它和0以及空字符串`''`不同，0是一个数值，`''`表示长度为0的字符串，而null表示“空”。可以通过将变量的值设置为 null 来清空变量。
+* Undefined表示值未定义:仅仅在判断函数参数是否传递的情况下有用
+* Number:不区分整数和浮点数，统一用Number表示.有时候用十六进制表示整数比较方便，十六进制用0x前缀和0-9，a-f表示,以及运算符.
+    - NaN这个特殊的Number与所有其他值都不相等，包括它自己.唯一能判断NaN的方法是通过isNaN()函数.注意浮点数的相等比较(浮点数在运算过程中会产生误差，因为计算机无法精确表示无限循环小数。要比较两个浮点数是否相等，只能计算它们之差的绝对值，看是否小于某个阈值)
+    - 属性
+        + MAX VALUE
+        + MIN VALUE
+        + NEGATIVE INFINITIVE
+        + POSITIVE INFINITIVE
+        + NaN
+        + prototype
+        + constructor
+    - 方法
+        + toExponential()
+        + toFixed()
+        + toPrecision()
+        + toString()
+        + valueOf()
 * 字符串：以单引号`'`或双引号`"`括起来的任意文本
     - 如果`'`本身也是一个字符，那就可以用""括起来，比如`"I'm OK"`包含的字符是I，`'`，m，空格，O，K这6个字符。
     - `'I\'m \"OK\"!';` 转义字符`\`可以转义很多字符，比如`\n`表示换行，`\t`表示制表符，字符`\`本身也要转义，所以`\\`表示的字符就是`\`
@@ -46,30 +102,26 @@ JavaScript是世界上最流行的脚本语言。运行在浏览器中的解释�
     - 多行字符串,串用`\n`写起来比较费事，所以最新的ES6标准新增了一种多行字符串的表示方法，用反引号 ` ... ` 表示
     - 模板字符串
     - 字符串操作
-* 布尔值和布尔代数的表示完全一致，一个布尔值只有true、false两种值.常用在条件判断中.`&&` 与运算 `||`和运算 `!`非运算.把null、undefined、0、NaN和空字符串''视为false，其他值一概视为true
+    - 属性
+* Boolean:布尔值和布尔代数的表示完全一致，一个布尔值只有true、false两种值.常用在条件判断中
+    - `&&` 与运算 `||`和运算 `!`非运算.把null、undefined、0、NaN和空字符串''视为false，其他值一概视为true
+
 ```js
 123; // 整数123
-0.456; // 浮点数0.456
+0.456; // 浮点数0.
+var y=0377;
+var z=0xFF;
 1.2345e3; // 科学计数法表示1.2345x1000，等同于1234.5
 -99; // 负数
 NaN; // NaN表示Not a Number，当无法计算结果时用NaN表示
 Infinity; // Infinity表示无限大，当数值超过了JavaScript的Number所能表示的最大值时，就表示为Infinity
 
-1 + 2; // 3
-(1 + 2) * 5 / 2; // 7.5
-2 / 0; // Infinity
-0 / 0; // NaN
-10 % 3; // 1
-10.5 % 3; // 1.5
-
-NaN === NaN; // false
-isNaN(NaN); // true
-1 / 3 === (1 - 2 / 3); // false
-Math.abs(1 / 3 - (1 - 2 / 3)) < 0.0000001; // true
-
 `这是一个
 多行
 字符串`;
+
+"Hello \
+World!"
 
 var name = '小明';
 var age = 20;
@@ -92,12 +144,311 @@ s.toUpperCase();
 s.toLowerCase();
 s.indexOf('world'); // 指定字符串出现的第一个字符位置 返回7
 s.indexOf('World'); // 没有找到指定的子串，返回-1
+s.replace()
+s.search()
 
 s.substring(0, 5); // 从索引0开始到5（不包括5），返回'hello'
 s.substring(7); // 从索引7开始到结束，返回'world'
 
 true; // 这是一个true值
 false; // 这是一个false值
+
+var myBoolean=new Boolean(); // 创建初始值为 false 的 Boolean 对象
+var myBoolean=new Boolean(0);
+var myBoolean=new Boolean(null);
+var myBoolean=new Boolean("");
+var myBoolean=new Boolean(false);
+var myBoolean=new Boolean(NaN);
+```
+
+### 数组
+
+一组按顺序排列的集合，集合的每个值称为元素
+
+* 数组下标是基于零的
+* 用`[]`表示，元素之间用`,`分隔
+* 通过索引来访问每个元素。
+* 取得Array的长度，直接访问length属性
+* 改变长度填充undefined或者删除多余元素
+* 通过索引修改值
+* indexOf()来搜索一个指定的元素的位置
+* slice截取Array的部分元素，然后返回一个新的Array. slice()的起止参数包括开始索引，不包括结束索引。如果不给slice()传递任何参数，它就会从头到尾截取所有元素
+* push()向Array的**末尾**添加若干元素，pop()则把Array的最后一个元素删除掉：
+* 往Array的**头部**添加若干元素，使用unshift()方法，shift()方法则把Array的第一个元素删掉
+* sort()可以对当前Array进行排序，它会直接修改当前Array的元素位置，直接调用时，按照默认顺序排序。
+* reverse()把整个Array的元素给掉个个，也就是反转
+* splice()方法是修改Array的“万能方法”，它可以从指定的索引开始删除若干元素，然后再从该位置添加若干元素
+* concat()方法把当前的Array和另一个Array连接起来，并返回一个新的Array。并没有修改当前Array，而是返回了一个新的Array。可以接收任意个元素和Array，并且自动把Array拆开，然后全部添加到新的Array里
+* join()当前Array的每个元素都用指定的字符串连接起来，然后返回连接后的字符串
+
+```js
+var cars=new Array();
+cars[0]="Audi";
+cars[1]="BMW";
+cars[2]="Volvo";
+
+var cars=["Audi","BMW","Volvo"];
+
+var arr = [1, 2, 3.14, 'Hello', null, true];
+arr.length; // 6
+arr[0]; // 返回索引为0的元素，即1
+arr[5]; // 返回索引为5的元素，即true
+arr[6]; // 索引超出了范围，返回undefined
+
+arr.length = 7;
+arr; // arr变为[1, 2, 3.14, 'Hello', null, true, undefined]
+arr.length = 2;
+arr; // arr变为[1, 2]
+
+arr[1] = 99;  // 修改值
+
+arr[5] = 'x';
+arr; // arr变为[1, 2, 3, undefined, undefined, 'x']
+
+arr.indexOf(30); // 元素30没有找到，返回-1
+arr.indexOf('30'); // 元素'30'的索引为2
+
+var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G']; 
+arr.slice(0, 3); // 从索引0开始，到索引3结束，但不包括索引3: ['A', 'B', 'C']
+arr.slice(3); // 从索引3开始到结束: ['D', 'E', 'F', 'G']
+var aCopy = arr.slice();
+
+var arr = [1, 2];
+arr.push('A', 'B'); // 返回Array新的长度: 4
+arr; // [1, 2, 'A', 'B']
+arr.pop(); // pop()返回'B'
+arr; // [1, 2, 'A']
+arr.pop(); arr.pop(); arr.pop(); // 连续pop 3次
+arr; // []
+arr.pop(); // 空数组继续pop不会报错，而是返回undefined
+arr; // []
+
+var arr = [1, 2];
+arr.unshift('A', 'B'); // 返回Array新的长度: 4
+arr; // ['A', 'B', 1, 2]
+arr.shift(); // 'A'
+arr; // ['B', 1, 2]
+arr.shift(); arr.shift(); arr.shift(); // 连续shift 3次
+arr; // []
+arr.shift(); // 空数组继续shift不会报错，而是返回undefined
+arr; // []
+
+ar arr = ['Microsoft', 'Apple', 'Yahoo', 'AOL', 'Excite', 'Oracle'];
+// 从索引2开始删除3个元素,然后再添加两个元素:
+arr.splice(2, 3, 'Google', 'Facebook'); // 返回删除的元素 ['Yahoo', 'AOL', 'Excite']
+arr; // ['Microsoft', 'Apple', 'Google', 'Facebook', 'Oracle']
+// 只删除,不添加:
+arr.splice(2, 2); // ['Google', 'Facebook']
+arr; // ['Microsoft', 'Apple', 'Oracle']
+// 只添加,不删除:
+arr.splice(2, 0, 'Google', 'Facebook'); // 返回[],因为没有删除任何元素
+arr; // ['Microsoft', 'Apple', 'Google', 'Facebook', 'Oracle']
+
+var arr = ['A', 'B', 'C'];
+var added = arr.concat([1, 2, 3]);
+added; // ['A', 'B', 'C', 1, 2, 3]
+arr; // ['A', 'B', 'C']
+var arr = ['A', 'B', 'C'];
+arr.concat(1, 2, [3, 4]); // ['A', 'B', 'C', 1, 2, 3, 4]
+
+var arr = ['A', 'B', 'C', 1, 2, 3];
+arr.join('-'); // 'A-B-C-1-2-3'
+
+var x
+var mycars = new Array()
+mycars[0] = "Saab"
+mycars[1] = "Volvo"
+mycars[2] = "BMW"
+
+for (x in mycars)
+{
+document.write(mycars[x] + "<br />")
+}
+```
+
+### 对象
+
+一组由键-值组成的无序集合.对象的键都是字符串类型，值可以是任意数据类型。用于描述现实世界中的某个对象.视为其他语言中的Map或Dictionary的数据结构
+ 
+* 用一个{...}表示一个对象，键值对以xxx: xxx形式申明，用,隔开。注意，最后一个键值对不需要在末尾加,
+* 属性是与对象相关的值
+    - 访问属性是通过.操作符完成的，但这要求属性名必须是一个有效的变量名。如果属性名包含特殊字符，就必须用''括起来.访问这个属性也无法使用.操作符，必须用['xxx']来访问
+    - 自由地给一个对象添加或删除属性
+    - 检测xiaoming是否拥有某一属性，可以用in操作符(如果in判断一个属性存在，这个属性不一定是xiaoming的，它可能是xiaoming继承得到的)
+    - for...in 语句循环遍历对象的属性
+    - hasOwnProperty()：要判断一个属性是否是xiaoming自身拥有的，而不是继承得到的，可以用方法
+* 方法：在一个对象中绑定函数，称为这个对象的方法。调用方法
+    - 在一个方法内部，this是一个特殊变量，它始终指向当前对象，**要保证this指向正确，必须用obj.xxx()的形式调用**
+    - 这是一个巨大的设计错误，要想纠正可没那么简单。ECMA决定，在strict模式下让函数的this指向undefined，因此，在strict模式下，你会得到一个错误
+    - 修复方法：用一个that变量首先捕获this
+    - 要指定函数的this指向哪个对象，可以用函数本身的apply方法，它接收两个参数，第一个参数就是需要绑定的this变量，第二个参数是Array，表示函数本身的参数
+    - 与apply()类似的方法是call()，普通函数调用，通常把this绑定为null
+    - apply()把参数打包成Array再传入；
+    - call()把参数按顺序传入。
+    - 装饰器：动态改变函数的行为。
+
+```javascript
+var person={firstname:"John",lastname:"Doe",age:50,eyecolor:"blue"};
+
+var person= new Object;
+var person = {
+    name: 'Bob',
+    age: 20,
+    tags: ['js', 'web', 'mobile'],
+    city: 'Beijing',
+    hasCar: true,
+    'middle-school': 'No.1 Middle School',
+    zipcode: null
+};
+
+function person(firstname,lastname,age,eyecolor)
+{
+    this.firstname=firstname;
+    this.lastname=lastname;
+    this.age=age;
+    this.eyecolor=eyecolor;
+
+    this.changeName=changeName;
+    function changeName(name)
+    {
+        this.lastname=name;
+    }
+}
+var myMother=new person("Steve","Jobs",48,"green");
+
+person.name; // 获取
+person.zipcode; // null
+person.address; // undefined
+person['middle-school']; // 另外一种寻址方式
+
+person.address = 'shanghai'
+delete person.address
+
+'name' in person;
+toString in xiaoming; // true  因为toString定义在object对象中，而所有对象最终都会在原型链上指向object
+person.hasOwnProperty('name'); // true
+person.hasOwnProperty('toString'); // false
+
+var xiaoming = {
+    name: '小明',
+    birth: 1990,
+    age: function () {
+        var y = new Date().getFullYear();
+        return y - this.birth;
+    }
+};
+
+xiaoming.age; // function xiaoming.age()
+xiaoming.age(); // 今年调用是25,明年调用就变成26了
+var fn = xiaoming.age; // 先拿到xiaoming的age函数
+fn(); // NaN // strict模式下 Uncaught TypeError: Cannot read property 'birth' of undefined
+
+'use strict';
+
+var xiaoming = {
+    name: '小明',
+    birth: 1990,
+    age: function () {
+        function getAgeFromBirth() {
+            var y = new Date().getFullYear();
+            return y - this.birth;
+        }
+        return getAgeFromBirth();
+    }
+};
+
+xiaoming.age(); // Uncaught TypeError: Cannot read property 'birth' of undefined
+// 报错了！原因是this指针只在age方法的函数内指向xiaoming，在函数内部定义的函数，this又指向undefined了！（在非strict模式下，它重新指向全局对象window！）
+ 
+'use strict';
+
+var xiaoming = {
+    name: '小明',
+    birth: 1990,
+    age: function () {
+        var that = this; // 在方法内部一开始就捕获this
+        function getAgeFromBirth() {
+            var y = new Date().getFullYear();
+            return y - that.birth; // 用that而不是this
+        }
+        return getAgeFromBirth();
+    }
+};
+
+xiaoming.age(); // 25
+
+function getAge() {
+    var y = new Date().getFullYear();
+    return y - this.birth;
+}
+
+var xiaoming = {
+    name: '小明',
+    birth: 1990,
+    age: getAge
+};
+
+for (x in xiaoming)
+  {
+  txt=txt + person[x];
+  }
+
+xiaoming.age(); // 25
+getAge.apply(xiaoming, []); // 25, this指向xiaoming, 参数为空
+
+Math.max.apply(null, [3, 5, 4]); // 5
+Math.max.call(null, 3, 5, 4); // 5
+
+// 想统计一下代码一共调用了多少次parseInt()
+var count = 0;
+var oldParseInt = parseInt; // 保存原函数
+
+window.parseInt = function () {
+    count += 1;
+    return oldParseInt.apply(null, arguments); // 调用原函数
+};
+
+// 测试:
+parseInt('10');
+parseInt('20');
+parseInt('30');
+count; // 3
+```
+
+### strict模式
+
+JavaScript在设计之初，为了方便初学者学习，并不强制要求用var申明变量。这个设计错误带来了严重的后果：如果一个变量没有通过var申明就被使用，那么该变量就自动被申明为全局变量。
+
+* 同一个页面的不同的JavaScript文件中，如果都不用var申明，恰好都使用了变量i，将造成变量i互相影响，产生难以调试的错误结果。
+* 使用var申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内（函数的概念将稍后讲解），同名变量在不同的函数体内互不冲突。
+
+### 运算符
+
+* 赋值运算符：=
+* 计算运算符：+ - * / % += -= *= /= %=
+* 连接运算符：用于字符串连接 +  如果把数字与字符串相加，结果将成为字符串。
+* 比较运算符：> = >= < <= == != 
+    - ===：值与类型比较，它不会自动转换数据类型，如果数据类型不一致，返回false，如果一致，再比较
+    - `==`比较，它会自动转换数据类型再比较
+* 逻辑运算符：布尔值的运算：&& || ！
+* 条件运算符：
+
+```js
+1 + 2; // 3
+(1 + 2) * 5 / 2; // 7.5
+2 / 0; // Infinity
+0 / 0; // NaN
+10 % 3; // 1
+10.5 % 3; // 1.5
+
+++
+--
+
+NaN === NaN; // false
+isNaN(NaN); // true
+1 / 3 === (1 - 2 / 3); // false
+Math.abs(1 / 3 - (1 - 2 / 3)) < 0.0000001; // true
+
 2 > 1; // 这是一个true值
 2 >= 3; // 这是一个false值
 
@@ -112,147 +463,24 @@ false || true || false; // 这个||语句计算结果为true
 ! true; // 结果为false
 ! false; // 结果为true
 ! (2 > 5); // 结果为true
+
+greeting=(visitor=="PRES")?"Dear President ":"Dear ";
 ```
-* 比较运算符：`> = >= == `
-    - `==`比较，它会自动转换数据类型再比较
-    - `===`比较，它不会自动转换数据类型，如果数据类型不一致，返回false，如果一致，再比较
-* null表示一个“空”的值，它和0以及空字符串`''`不同，0是一个数值，`''`表示长度为0的字符串，而null表示“空”。
-* undefined表示值未定义:*仅仅在判断函数参数是否传递的情况下有用*
-* 数组是一组按顺序排列的集合，集合的每个值称为元素.可以包含任意数据类型
-    * 用`[]`表示，元素之间用`,`分隔
-    * 通过索引来访问每个元素。
-    * 取得Array的长度，直接访问length属性
-    * 改变长度填充undefined或者删除多余元素
-    * 通过索引修改值
-    * indexOf()来搜索一个指定的元素的位置
-    * slice截取Array的部分元素，然后返回一个新的Array. slice()的起止参数包括开始索引，不包括结束索引。如果不给slice()传递任何参数，它就会从头到尾截取所有元素
-    * push()向Array的**末尾**添加若干元素，pop()则把Array的最后一个元素删除掉：
-    * 往Array的**头部**添加若干元素，使用unshift()方法，shift()方法则把Array的第一个元素删掉
-    * sort()可以对当前Array进行排序，它会直接修改当前Array的元素位置，直接调用时，按照默认顺序排序。
-    * reverse()把整个Array的元素给掉个个，也就是反转
-    * splice()方法是修改Array的“万能方法”，它可以从指定的索引开始删除若干元素，然后再从该位置添加若干元素
-    * concat()方法把当前的Array和另一个Array连接起来，并返回一个新的Array。并没有修改当前Array，而是返回了一个新的Array。可以接收任意个元素和Array，并且自动把Array拆开，然后全部添加到新的Array里
-    * join()当前Array的每个元素都用指定的字符串连接起来，然后返回连接后的字符串
-    ```javascript
-    var arr = [1, 2, 3.14, 'Hello', null, true];
-    arr.length; // 6
-    arr[0]; // 返回索引为0的元素，即1
-    arr[5]; // 返回索引为5的元素，即true
-    arr[6]; // 索引超出了范围，返回undefined
-
-    arr.length = 7;
-    arr; // arr变为[1, 2, 3.14, 'Hello', null, true, undefined]
-    arr.length = 2;
-    arr; // arr变为[1, 2]
-
-    arr[1] = 99;  // 修改值
-
-    arr[5] = 'x';
-    arr; // arr变为[1, 2, 3, undefined, undefined, 'x']
-
-    arr.indexOf(30); // 元素30没有找到，返回-1
-    arr.indexOf('30'); // 元素'30'的索引为2
-
-    var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G']; 
-    arr.slice(0, 3); // 从索引0开始，到索引3结束，但不包括索引3: ['A', 'B', 'C']
-    arr.slice(3); // 从索引3开始到结束: ['D', 'E', 'F', 'G']
-    var aCopy = arr.slice();
-
-    var arr = [1, 2];
-    arr.push('A', 'B'); // 返回Array新的长度: 4
-    arr; // [1, 2, 'A', 'B']
-    arr.pop(); // pop()返回'B'
-    arr; // [1, 2, 'A']
-    arr.pop(); arr.pop(); arr.pop(); // 连续pop 3次
-    arr; // []
-    arr.pop(); // 空数组继续pop不会报错，而是返回undefined
-    arr; // []
-
-    var arr = [1, 2];
-    arr.unshift('A', 'B'); // 返回Array新的长度: 4
-    arr; // ['A', 'B', 1, 2]
-    arr.shift(); // 'A'
-    arr; // ['B', 1, 2]
-    arr.shift(); arr.shift(); arr.shift(); // 连续shift 3次
-    arr; // []
-    arr.shift(); // 空数组继续shift不会报错，而是返回undefined
-    arr; // []
-
-    ar arr = ['Microsoft', 'Apple', 'Yahoo', 'AOL', 'Excite', 'Oracle'];
-    // 从索引2开始删除3个元素,然后再添加两个元素:
-    arr.splice(2, 3, 'Google', 'Facebook'); // 返回删除的元素 ['Yahoo', 'AOL', 'Excite']
-    arr; // ['Microsoft', 'Apple', 'Google', 'Facebook', 'Oracle']
-    // 只删除,不添加:
-    arr.splice(2, 2); // ['Google', 'Facebook']
-    arr; // ['Microsoft', 'Apple', 'Oracle']
-    // 只添加,不删除:
-    arr.splice(2, 0, 'Google', 'Facebook'); // 返回[],因为没有删除任何元素
-    arr; // ['Microsoft', 'Apple', 'Google', 'Facebook', 'Oracle']
-
-    var arr = ['A', 'B', 'C'];
-    var added = arr.concat([1, 2, 3]);
-    added; // ['A', 'B', 'C', 1, 2, 3]
-    arr; // ['A', 'B', 'C']
-    var arr = ['A', 'B', 'C'];
-    arr.concat(1, 2, [3, 4]); // ['A', 'B', 'C', 1, 2, 3, 4]
-
-    var arr = ['A', 'B', 'C', 1, 2, 3];
-    arr.join('-'); // 'A-B-C-1-2-3'
-    ```
-* 对象是一组由键-值组成的无序集合.对象的键都是字符串类型，值可以是任意数据类型。用于描述现实世界中的某个对象.视为其他语言中的Map或Dictionary的数据结构
-    - 用一个{...}表示一个对象，键值对以xxx: xxx形式申明，用,隔开。注意，最后一个键值对不需要在末尾加,
-    - 访问属性是通过.操作符完成的，但这要求属性名必须是一个有效的变量名。如果属性名包含特殊字符，就必须用''括起来.访问这个属性也无法使用.操作符，必须用['xxx']来访问：
-    - 自由地给一个对象添加或删除属性
-    - 检测xiaoming是否拥有某一属性，可以用in操作符(如果in判断一个属性存在，这个属性不一定是xiaoming的，它可能是xiaoming继承得到的)
-    - 要判断一个属性是否是xiaoming自身拥有的，而不是继承得到的，可以用hasOwnProperty()方法
-```javascript
-var person = {
-    name: 'Bob',
-    age: 20,
-    tags: ['js', 'web', 'mobile'],
-    city: 'Beijing',
-    hasCar: true,
-    'middle-school': 'No.1 Middle School',
-    zipcode: null
-};
-person.name; // 'Bob'
-person.zipcode; // null
-person.address; // undefined
-xiaohong['middle-school'];
-person.address = 'shanghai'
-delete person.address
-'name' in xiaoming;
-toString in xiaoming; // true  因为toString定义在object对象中，而所有对象最终都会在原型链上指向object
-xiaoming.hasOwnProperty('name'); // true
-xiaoming.hasOwnProperty('toString'); // false
-```
-
-### 变量
-
-变量不仅可以是数字，还可以是任意数据类型。
-
-* 变量名是大小写英文、数字、$和_的组合，且不能用数字开头。变量名也不能是JavaScript的关键字，如if、while等。申明一个变量用var语句。变量名也可以用中文，但是，请不要给自己找麻烦。
-* 使用等号=对变量进行赋值。可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量，但是要注意只能用var申明一次。
-* 变量本身类型不固定的语言称之为动态语言，与之对应的是静态语言。静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。例如Java是静态语言
-* ECMA在后续规范中推出了strict模式，在strict模式下运行的JavaScript代码，强制通过var申明变量，未使用var申明变量就使用的，将导致运行错误。在JavaScript代码的第一行写上：`'use strict';`
-
-### strict模式
-
-JavaScript在设计之初，为了方便初学者学习，并不强制要求用var申明变量。这个设计错误带来了严重的后果：如果一个变量没有通过var申明就被使用，那么该变量就自动被申明为全局变量。
-
-* 同一个页面的不同的JavaScript文件中，如果都不用var申明，恰好都使用了变量i，将造成变量i互相影响，产生难以调试的错误结果。
-* 使用var申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内（函数的概念将稍后讲解），同名变量在不同的函数体内互不冲突。
 
 ### 控制语句
 
 * 条件语句：使用`if () { ... } else { ... }`来进行条件判断其中else语句是可选的。如果语句块只包含一条语句，那么可以省略`{}`.在多个if...else...语句中，如果某个条件成立，则后续就不再继续判断了(注意先后顺序)
+* switch 语句来选择要执行的多个代码块之一
 * 循环语句：重复运算.务必小心编写初始条件和判断条件，尤其是边界值。特别注意i < 100和i <= 100是不同的判断逻辑。
     * for循环最常用的地方是利用索引来遍历数组；for循环的3个条件都是可以省略的，如果没有退出循环的判断条件，就必须使用break语句退出循环，否则就是死循环；
     * `for ... in`循环，它可以把一个对象的所有属性依次循环出来
     * while循环只有一个判断条件，条件满足，就不断循环，条件不满足时则退出循环
-    * `do { ... } while()`和while循环的唯一区别在于，不是在每次循环开始的时候判断条件，而是在每次循环完成的时候判断条件：
+    * `do { ... } while()`和while循环的唯一区别在于，不是在每次循环开始的时候判断条件，而是在每次循环完成的时候判断条件
+* break 语句可用于跳出循环
+* continue 语句中断循环中的迭代，如果出现了指定的条件，然后继续循环中的下一个迭代
+* try 语句允许我们定义在执行时进行错误测试的代码块。catch 语句允许我们定义当 try 代码块发生错误时，所执行的代码块。
 
-```javascript
+```js
 var age = 20;
 if (age >= 18) { // 如果age >= 18为true，则执行if语句块
     alert('adult');
@@ -269,6 +497,34 @@ if (age >= 18) {
     alert('kid');
 }
 
+var day=new Date().getDay();
+switch (day)
+{
+case 0:
+  x="Today it's Sunday";
+  break;
+case 1:
+  x="Today it's Monday";
+  break;
+case 2:
+  x="Today it's Tuesday";
+  break;
+case 3:
+  x="Today it's Wednesday";
+  break;
+case 4:
+  x="Today it's Thursday";
+  break;
+case 5:
+  x="Today it's Friday";
+  break;
+case 6:
+  x="Today it's Saturday";
+  break;
+default:
+  x="Looking forward to the Weekend";
+}
+
 var x = 0;
 var i;
 for (i=1; i<=10000; i++) {
@@ -277,10 +533,9 @@ for (i=1; i<=10000; i++) {
 x;
 
 var arr = ['Apple', 'Google', 'Microsoft'];
-var i, x;
-for (i=0; i<arr.length; i++) {
-    x = arr[i];
-    alert(x);
+for (var i=0,len=arr.length; i<len; i++)
+{
+document.write(cars[i] + "<br>");
 }
 
 var x = 0;
@@ -314,13 +569,27 @@ while (n > 0) {
     x = x + n;
     n = n - 2;
 }
-x;
 
 var n = 0;
 do {
     n = n + 1;
 } while (n < 100);
-n;
+
+var txt="";
+function message()
+{
+try
+  {
+  adddlert("Welcome guest!");
+  }
+catch(err)
+  {
+  txt="There was an error on this page.\n\n";
+  txt+="Error description: " + err.message + "\n\n";
+  txt+="Click OK to continue.\n\n";
+  alert(txt);
+  }
+}
 ```
 
 ### Map Set iterable(ES6标准新增的数据类型)
@@ -510,112 +779,6 @@ function foo() {
     }
     i += 1; // SyntaxError
 }
-```
-### 常量
-
-要申明一个常量，在ES6之前是不行的，我们通常用全部大写的变量来表示“这是一个常量，不要修改它的值”
-
-```javascript
-var PI = 3.14;
-
-const PI = 3.14;
-PI = 3; // 某些浏览器不报错，但是无效果！
-PI; // 3.14
-```
-
-### 方法
-
-在一个对象中绑定函数，称为这个对象的方法。调用方法，要确定对象
-
-* 在一个方法内部，this是一个特殊变量，它始终指向当前对象，**要保证this指向正确，必须用obj.xxx()的形式调用**
-* 这是一个巨大的设计错误，要想纠正可没那么简单。ECMA决定，在strict模式下让函数的this指向undefined，因此，在strict模式下，你会得到一个错误
-* 修复方法：用一个that变量首先捕获this
-* 要指定函数的this指向哪个对象，可以用函数本身的apply方法，它接收两个参数，第一个参数就是需要绑定的this变量，第二个参数是Array，表示函数本身的参数
-* 与apply()类似的方法是call()，普通函数调用，通常把this绑定为null
-    - apply()把参数打包成Array再传入；
-    - call()把参数按顺序传入。
-* 装饰器：动态改变函数的行为。
-
-```javascript
-var xiaoming = {
-    name: '小明',
-    birth: 1990,
-    age: function () {
-        var y = new Date().getFullYear();
-        return y - this.birth;
-    }
-};
-
-xiaoming.age; // function xiaoming.age()
-xiaoming.age(); // 今年调用是25,明年调用就变成26了
-var fn = xiaoming.age; // 先拿到xiaoming的age函数
-fn(); // NaN // strict模式下 Uncaught TypeError: Cannot read property 'birth' of undefined
-
-'use strict';
-
-var xiaoming = {
-    name: '小明',
-    birth: 1990,
-    age: function () {
-        function getAgeFromBirth() {
-            var y = new Date().getFullYear();
-            return y - this.birth;
-        }
-        return getAgeFromBirth();
-    }
-};
-
-xiaoming.age(); // Uncaught TypeError: Cannot read property 'birth' of undefined
-// 报错了！原因是this指针只在age方法的函数内指向xiaoming，在函数内部定义的函数，this又指向undefined了！（在非strict模式下，它重新指向全局对象window！）
- 
-'use strict';
-
-var xiaoming = {
-    name: '小明',
-    birth: 1990,
-    age: function () {
-        var that = this; // 在方法内部一开始就捕获this
-        function getAgeFromBirth() {
-            var y = new Date().getFullYear();
-            return y - that.birth; // 用that而不是this
-        }
-        return getAgeFromBirth();
-    }
-};
-
-xiaoming.age(); // 25
-
-function getAge() {
-    var y = new Date().getFullYear();
-    return y - this.birth;
-}
-
-var xiaoming = {
-    name: '小明',
-    birth: 1990,
-    age: getAge
-};
-
-xiaoming.age(); // 25
-getAge.apply(xiaoming, []); // 25, this指向xiaoming, 参数为空
-
-Math.max.apply(null, [3, 5, 4]); // 5
-Math.max.call(null, 3, 5, 4); // 5
-
-// 想统计一下代码一共调用了多少次parseInt()
-var count = 0;
-var oldParseInt = parseInt; // 保存原函数
-
-window.parseInt = function () {
-    count += 1;
-    return oldParseInt.apply(null, arguments); // 调用原函数
-};
-
-// 测试:
-parseInt('10');
-parseInt('20');
-parseInt('30');
-count; // 3
 ```
 
 ## 高阶函数 Higher-order function
@@ -1026,9 +1189,10 @@ new String('str') === 'str'; // false
 * 因为用户可以把当前时间设定为任何值,月份为0-11
 * 既可以显示本地时间，也可以显示调整后的UTC时间，只要我们传递的是一个number类型的时间戳，我们就不用关心时区转换。任何浏览器都可以把一个时间戳正确转换为本地时间。
 * 时间戳是一个自增的整数，它表示从1970年1月1日零时整的GMT时区开始的那一刻，到现在的毫秒数。假设浏览器所在电脑的时间是准确的，那么世界上无论哪个时区的电脑，它们此刻产生的时间戳数字都是一样的，所以，时间戳可以精确地表示一个时刻，并且与时区无关。我们只需要传递时间戳，或者把时间戳从数据库里读出来，再让JavaScript自动转换为当地时间就可以了
+
 ```javascript
-var now = new Date();
-now; // Wed Jun 24 2015 19:49:22 GMT+0800 (CST)
+var now = new Date(); // Wed Jun 24 2015 19:49:22 GMT+0800 (CST)
+now.toUTCString() // Thu, 29 Mar 2018 16:00:21 GMT
 now.getFullYear(); // 2015, 年份
 now.getMonth(); // 5, 月份，注意月份范围是0~11，5表示六月
 now.getDate(); // 24, 表示24号
@@ -1039,21 +1203,21 @@ now.getSeconds(); // 22, 秒
 now.getMilliseconds(); // 875, 毫秒数
 now.getTime(); // 1435146562875, 以number形式表示的时间戳
 
-var d = new Date(2015, 5, 19, 20, 15, 30, 123);
-d; // Fri Jun 19 2015 20:15:30 GMT+0800 (CST)
+var d = new Date(2015, 5, 19, 20, 15, 30, 123);// Fri Jun 19 2015 20:15:30 GMT+0800 (CST)
 
 // 创建一个指定日期和时间的方法是解析一个符合ISO 8601格式的字符串
-var d = Date.parse('2015-06-24T19:49:22.875+08:00');
-d; // 1435146562875
-var d = new Date(1435146562875);
-d; // Wed Jun 24 2015 19:49:22 GMT+0800 (CST)
+var d = Date.parse('2015-06-24T19:49:22.875+08:00');// 1435146562875
+var d = new Date(1435146562875);// Wed Jun 24 2015 19:49:22 GMT+0800 (CST)
 d.toLocaleString(); // '2015/6/24 下午7:49:22'，本地时间（北京时区+8:00），显示的字符串与操作系统设定的格式有关
-d.toUTCString(); // 'Wed, 24 Jun 2015 11:49:22 GMT'，UTC时间，与本地时间相差8小时
+
+var myDate=new Date()
+myDate.setFullYear(2008,7,9) // 1218211323336 2008 年 8 月 9 日
+myDate.setDate(myDate.getDate()+5) // 设置为 5 天后的日期
 ```
 
 ### RegExp
 
-正则表达式是一种用来匹配字符串的强有力的武器。它的设计思想是用一种描述性的语言来给字符串定义一个规则，凡是符合规则的字符串，我们就认为它“匹配”了
+正则表达式是一种用来匹配字符串的强有力的武器。它的设计思想是用一种描述性的语言来给字符串定义一个规则，凡是符合规则的字符串，就认为它“匹配”了。RegExp 对象用于存储检索模式
 
 * `\d`可以匹配一个数字，
 * `\w`可以匹配一个字母或数字
@@ -1071,7 +1235,7 @@ d.toUTCString(); // 'Wed, 24 Jun 2015 11:49:22 GMT'，UTC时间，与本地时�
 * 用正则表达式切分字符串比用固定的字符更灵活
 * 提取子串的强大功能:用()表示的就是要提取的分组（Group）.在RegExp对象上用exec()方法提取出子串来。exec()方法在匹配成功后，会返回一个Array，第一个元素是正则表达式匹配到的整个字符串，后面的字符串表示匹配成功的子串。exec()方法在匹配失败时返回null。
 * 正则匹配默认是贪婪匹配，也就是匹配尽可能多的字符。举例，匹配出数字后面的0：由于\d+采用贪婪匹配，直接把后面的0全部匹配了，结果0*只能匹配空字符串了。必须让\d+采用非贪婪匹配（也就是尽可能少匹配），才能把后面的0匹配出来，加个?就可以让\d+采用非贪婪匹配
-* 全局匹配：`g`:可以多次执行exec()方法来搜索一个匹配的字符串。当我们指定g标志后，每次运行exec()，正则表达式本身会更新lastIndex属性，表示上次匹配到的最后索引.全局匹配类似搜索，因此不能使用/^...$/，那样只会最多匹配一次
+* 全局匹配：RegExp 对象添加第二个参数`g`:可以多次执行exec()方法来搜索一个匹配的字符串。当我们指定g标志后，每次运行exec()，正则表达式本身会更新lastIndex属性，表示上次匹配到的最后索引.全局匹配类似搜索，因此不能使用/^...$/，那样只会最多匹配一次
 * 指定i标志，表示忽略大小写
 * m标志，表示执行多行匹配
 
@@ -1093,9 +1257,9 @@ d.toUTCString(); // 'Wed, 24 Jun 2015 11:49:22 GMT'，UTC时间，与本地时�
 `^js$` // 就变成了整行匹配，就只能匹配'js'了
 
 var re = /^\d{3}\-\d{3,8}$/;
-var re2 = new RegExp('/^\d{3}\-\d{3,8}$/');
+var re = new RegExp('/^\d{3}\-\d{3,8}$/');
 
-re.test('010-12345'); // true
+re.test('010-12345'); // 检索字符串中的指定值 true
 re.test('010-1234x'); // false
 re.test('010 12345'); // false
 
@@ -1103,7 +1267,7 @@ re.test('010 12345'); // false
 'a,b, c  d'.split(/[\s\,]+/); // ['a', 'b', 'c', 'd'
 'a,b;; c  d'.split(/[\s\,\;]+/); // ['a', 'b', 'c', 'd']
 
-var re = /^(\d{3})-(\d{3,8})$/;
+var re = /^(\d{3})-(\d{3,8})$/; // 检索字符串中的指定值。返回值是被找到的值
 re.exec('010-12345'); // ['010-12345', '010', '12345']
 re.exec('010 12345'); // null
 
@@ -1129,6 +1293,31 @@ re.lastIndex; // 29
 re.exec(s); // ['ECMAScript']
 re.lastIndex; // 44
 re.exec(s); // null，直到结束仍没有匹配到
+```
+
+
+### Math
+
+执行常见的算数任务
+
+```js
+Math.round(0.60) // 四舍五入
+Math.random() //返回 0 到 1 之间的随机数
+Math.floor(Math.random()*11) // 返回一个介于 0 和 10 之间的随机数
+Math.ceil(Math.random()*11) // 返回一个介于 1 和 11 之间的随机数
+Math.max(7.25,7.30)
+Math.min(7.25,7.30)
+
+Math.E // 常数
+Math.PI
+Math.SQRT2 // 2 的平方根
+Math.SQRT1_2 // 1/2 的平方根
+Math.LN2 // 2 的自然对数
+
+Math.LN10
+Math.LOG2E
+Math.LOG10E
+
 ```
 
 ### JSON JavaScript Object Notation
@@ -1419,24 +1608,34 @@ class PrimaryStudent extends Student {
 * Safari Webkit内核
 * Firefox自己研制的Gecko内核
 
-### 浏览器对象
+### 浏览器对象模型 (BOM) 
 
 JavaScript可以获取浏览器提供的很多对象，并进行操作。
-* window对象不但充当全局作用域，而且表示浏览器窗口：
-    * `window.innerWidth`
-    * `window.innerHeight`
-    * `window.outerWidth`
-    * `window.outerHeight`
+
+* window对象不但充当全局作用域（所有 JavaScript 全局对象、函数以及变量均自动成为 window 对象的成员），而且表示浏览器窗口：
+    - `window.innerWidth`
+    - `window.innerHeight`
+    - `window.outerWidth`
+    - `window.outerHeight`
+    - window.open() - 打开新窗口
+    - window.close() - 关闭当前窗口
+    - window.moveTo() - 移动当前窗口
+    - window.resizeTo() - 调整当前窗口的尺寸
 * navigator对象表示浏览器的信息.navigator的信息可以很容易地被用户修改，所以JavaScript读取的值不一定是正确的
-    - `navigator.appName`：浏览器名称；
-    - `navigator.appVersion`：浏览器版本；
-    - `navigator.language`：浏览器设置的语言；
-    - `navigator.platfor`m：操作系统类型；
-    - `navigator.userAgent`：浏览器设定的User-Agent字符串。
+    - `navigator.appName`：浏览器名称
+    - `navigator.appVersion`：浏览器版本
+    - `navigator.language`：浏览器设置的语言
+    - `navigator.platform`：操作系统类型
+    - `navigator.userAgent`：浏览器设定的User-Agent字符串
+    - navigator.cookieEnabled
+    - navigator.appCodeName
+    - navigator.systemLanguage 
 * screen对象表示屏幕的信息
-    - screen.width：屏幕宽度，以像素为单位；
-    - screen.height：屏幕高度，以像素为单位；
+    - screen.width：屏幕宽度，以像素为单位
+    - screen.height：屏幕高度，以像素为单位
     - screen.colorDepth：返回颜色位数，如8、16、24
+    - screen.availWidth - 可用的屏幕宽度
+    - screen.availHeight - 可用的屏幕高度
 * location对象表示当前页面的URL信息
     - location.href: http://www.example.com:8080/path/index.html?a=1&b=2#TOP
     - location.protocol; // 'http'
@@ -1445,7 +1644,8 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
     - location.pathname; // '/path/index.html'
     - location.search; // '?a=1&b=2'
     - location.hash; // 'TOP'
-    - 要加载一个新页面，可以调用location.assign('/discuss')。如果要重新加载当前页面，调用location.reload();
+    - location.assign('/discuss'):要加载一个新页面
+    - location.reload():如果要重新加载当前页面
 * document对象表示当前页面。由于HTML在浏览器中以DOM形式表示为树形结构，document对象就是整个DOM树的根节点。
     - title赋值：document.title = '努力学习JavaScript!';
     - 要查找DOM树的某个节点，需要从document对象开始查找。最常用的查找是根据ID和Tag Name
@@ -1454,11 +1654,69 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
     - menu.tagName;
     - Cookie是由服务器发送的key-value标示符。因为HTTP协议是无状态的，但是服务器要区分到底是哪个用户发过来的请求，就可以用Cookie来区分。当一个用户成功登录后，服务器发送一个Cookie给浏览器，例如user=ABC123XYZ(加密的字符串)...，此后，浏览器访问该网站时，会在请求头附上这个Cookie，服务器根据Cookie即可区分出用户。 `document.cookie`
     - `<script src="http://www.foo.com/jquery.js"></script>`  引入的第三方的JavaScript中存在恶意代码，则www.foo.com网站将直接获取到www.example.com网站的用户登录信息.服务器在设置Cookie时可以使用httpOnly，`设定了httpOnly的Cookie将不能被JavaScript读取`
-- history对象保存了浏览器的历史记录，JavaScript可以调用history对象的back()或forward ().
+* history对象保存了浏览器的历史记录
+    - history.back()
+    - history.forward()
+* 消息框
+    - alert("文本")
+    - confirm("文本")
+    - prompt("文本","默认值")
+* timing
+    - var t=setTimeout("alert('5 秒！')",5000)
+    -  clearTimeout(t)
+* cookie
+
+```js
+document.write('Hello Javascript');
+
+var w=window.innerWidth
+|| document.documentElement.clientWidth
+|| document.body.clientWidth;
+
+var h=window.innerHeight
+|| document.documentElement.clientHeight
+|| document.body.clientHeight;
+
+function timedMsg()
+{
+    var t=setTimeout("alert('5 秒！')",5000)
+}
+var c=0 // 无穷循环中的计时事件
+var t
+function timedCount()
+{
+    document.getElementById('txt').value=c
+    c=c+1
+    t=setTimeout("timedCount()",1000)
+}
+
+function stopCount()
+ {
+    clearTimeout(t)
+ }
+```
 
 ### 操作DOM
 
-由于HTML文档被浏览器解析后就是一棵DOM树，要改变HTML的结构，就需要通过JavaScript来操作DOM.DOM节点是指Element，但是DOM节点实际上是Node，在HTML中，Node包括Element、Comment、CDATA_SECTION等很多种，以及根节点Document类型，但是，绝大多数时候我们只关心Element，也就是实际控制页面结构的Node，其他类型的Node忽略即可。根节点Document已经自动绑定为全局变量document。
+由于HTML文档被浏览器解析后就是一棵文档对象模型（Document Object Model），要改变HTML的结构，就需要通过JavaScript来操作DOM.DOM节点是指Element，但是DOM节点实际上是Node，在HTML中，Node包括Element、Comment、CDATA_SECTION等很多种，以及根节点Document类型，但是，绝大多数时候我们只关心Element，也就是实际控制页面结构的Node，其他类型的Node忽略即可。根节点Document已经自动绑定为全局变量document。
+
+* 所有 HTML 元素、属性
+    - 获取
+    - 修改
+    - 新增
+    - 删除
+* CSS 样式
+* 事件做出反应（Event）
+    - 首先当点击鼠标按钮时，会触发 onmousedown 事件
+    - 释放鼠标按钮时，会触发 onmouseup 事件
+    - 当输入字段获得焦点时：onfocus
+    - 当用户点击鼠标时onclick
+    - 当网页已加载时onload:可用于检测访问者的浏览器类型和浏览器版本，并基于这些信息来加载网页的正确版本。可用于处理 cookie。
+    - 离开页面时被触发:onunload
+    - 当图像已加载时
+    - 当鼠标移动到或移出元素上时:onmouseover 和 onmouseout
+    - 当输入字段被改变时onchange:对输入字段的验证来使用
+    - 当提交 HTML 表单时
 
 * document.getElementById() 可以直接定位唯一的一个DOM节点
 * document.getElementsByTagName() 总是返回一组DOM节点
@@ -1489,44 +1747,58 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
     <p>First</p>
     <p>Second</p>
 </div>
+
+<img id="image" src="smiley.gif">
+
+<h1 onclick="this.innerHTML='谢谢!'">请点击该文本</h1>
+<h1 onclick="changetext(this)">请点击该文本</h1>
+
+<script>
+function changetext(id)
+{
+id.innerHTML="谢谢!";
+}
+document.getElementById("myBtn").onclick=function(){displayDate()};
+</script>
+
+// 删除节点
+<div id="div1">
+<p id="p1">这是一个段落。</p>
+<p id="p2">这是另一个段落。</p>
+</div>
+
+<script>
+var parent=document.getElementById("div1");
+var child=document.getElementById("p1");
+parent.removeChild(child);
+</script>
 ```
 
 ```javascript
-// 返回ID为'test'的节点：
 var test = document.getElementById('test');
-
-// 先定位ID为'test-table'的节点，再返回其内部所有tr节点：
 var trs = document.getElementById('test-table').getElementsByTagName('tr');
-
-// 先定位ID为'test-div'的节点，再返回其内部所有class包含red的节点：
 var reds = document.getElementById('test-div').getElementsByClassName('red');
 
-// 获取节点test下的所有直属子节点:
-var cs = test.children;
-
-// 获取节点test下第一个、最后一个子节点：
+var cs = test.children; // 获取节点test下的所有直属子节点
 var first = test.firstElementChild;
 var last = test.lastElementChild;
+var q1 = document.querySelector('#q1'); // 通过querySelector获取ID为q1的节点
+var ps = q1.querySelectorAll('div.highlighted > p'); // 通过querySelectorAll获取q1节点内的符合条件的所有节点
 
-// 通过querySelector获取ID为q1的节点：
-var q1 = document.querySelector('#q1');
+document.getElementById("test").innerHTML="New text!";
+document.getElementById("image").src="landscape.jpg";
+p.innerHTML = 'ABC <span style="color:red">RED</span> XYZ'; // <p>...</p>的内部结构已修改=
+p.innerText = '<script>alert("Hi")</script>';// HTML被自动编码，无法设置一个<script>节点 <p id="p-id">&lt;script&gt;alert("Hi")&lt;/script&gt;</p>
 
-// 通过querySelectorAll获取q1节点内的符合条件的所有节点：
-var ps = q1.querySelectorAll('div.highlighted > p');
-
-// 获取<p id="p-id">...</p>
-var p = document.getElementById('p-id');
-// 设置文本为abc:
-p.innerHTML = 'ABC'; // <p id="p-id">ABC</p>
-// 设置HTML:
-p.innerHTML = 'ABC <span style="color:red">RED</span> XYZ'; // <p>...</p>的内部结构已修改
-
-p.innerText = '<script>alert("Hi")</script>';
-// HTML被自动编码，无法设置一个<script>节点:
-// <p id="p-id">&lt;script&gt;alert("Hi")&lt;/script&gt;</p>
 p.style.color = '#ff0000';
 p.style.fontSize = '20px';
 p.style.paddingTop = '2em';
+
+var para=document.createElement("p");
+var node=document.createTextNode("这是新段落。");
+para.appendChild(node);
+var element=document.getElementById("div1");
+element.appendChild(para);
 
 var
     js = document.getElementById('js'),
