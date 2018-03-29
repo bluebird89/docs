@@ -419,7 +419,17 @@ echo $bar;//Notice: Undefined variable: bar
 * 三元运算符：`?:`
 
 ```php
-clone new
+define("READ", 1);
+define("WRITE", 2);
+define("DELETE", 4);
+define("UPDATE", 8);
+
+$permission = READ|WRITE; // 赋予权限
+$permission = READ & ~WRITE; // 禁止写权限
+
+if( READ & $permission ){ //判断权限
+　　echo "ok";
+}
 ```
 
 #### 杂项
@@ -1228,11 +1238,13 @@ $controller->register();
 * apc:op缓存
 * phpredis
 * PHP-FPM进程池：FastCGI Process Manager 的master process是常驻内存的，以static、dynamic、ondemand三种方式来管理进程池中的worker process，可以有效控制内存和进程并平滑重载PHP配置，在发生意外情况的时候能够重新启动并恢复被破坏的 opcode。
+
 ```sh
 brew tap homebrew/homebrew-php
 brew install php71 --with-pear
 
 brew install mcrypt
+brew install php71-xdebug
 ```
 
 
