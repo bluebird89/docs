@@ -2,7 +2,8 @@
 
 ## 指令
 
-// 左边列表
+### 左边列表
+
 * File explorer:  `command + shift + E`
 * Search across files: `command + shift + F`
 * Source code management `command + shift + G`
@@ -10,9 +11,7 @@
 * Manage extensions `command + shift + x`
 * `shift+cmd+m`
 
-
-进入 welcome->Interactive Editor 
-
+### 快捷键
 
 ```
 // general
@@ -154,7 +153,7 @@ PgUp / PgDn Scroll page up/down
 
 Open the Command Palette (F1) and type "shell command". Hit enter to execute Shell Command: Install 'code' command in PATH.
 
-```shell
+```sh
 # open code with current directory
 code .
 
