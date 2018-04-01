@@ -10,6 +10,29 @@ ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标�
 
 [ECMAScript 2015](https://babeljs.io/learn-es2015/)
 
+* 变量
+* 数据类型
+* 运算符
+* 控制语句
+* 对象
+    - JavaScript 本地对象和内置对象
+        + Array
+        - Boolean
+        - Date
+        - Math
+        - Number
+        - String
+        - RegExp
+        - Global
+    - Browser 对象
+        - Window
+        - Navigator
+        - Screen
+        - History
+        - Location
+    - HTML DOM 对象
+* 函数
+
 ## 基础入门
 
 ### 引入方式
@@ -74,10 +97,18 @@ var name="Gates", age=56, job="CEO";
 
 ### 数据类型
 
-所有事物都为对象
+所有事物都为对象,JavaScript 本地对象和内置对象
 
-* Null表示一个“空”的值，它和0以及空字符串`''`不同，0是一个数值，`''`表示长度为0的字符串，而null表示“空”。可以通过将变量的值设置为 null 来清空变量。
-* Undefined表示值未定义:仅仅在判断函数参数是否传递的情况下有用
+* Boolean:布尔值和布尔代数的表示完全一致，一个布尔值只有true、false两种值.常用在条件判断中
+    - `&&` 与运算 `||`和运算 `!`非运算.把null、undefined、0、NaN和空字符串''视为false，其他值一概视为true
+* String字符串：以单引号`'`或双引号`"`括起来的任意文本
+    - 如果`'`本身也是一个字符，那就可以用""括起来，比如`"I'm OK"`包含的字符是I，`'`，m，空格，O，K这6个字符。
+    - `'I\'m \"OK\"!';` 转义字符`\`可以转义很多字符，比如`\n`表示换行，`\t`表示制表符，字符`\`本身也要转义，所以`\\`表示的字符就是`\`
+    - ASCII字符可以以`\x##`形式的十六进制表示 `'\x41'; // 完全等同于 'A'`
+    - 用`\u####`表示一个Unicode字符:`'\u4e2d\u6587'; // 完全等同于 '中文'`
+    - 多行字符串,串用`\n`写起来比较费事，所以最新的ES6标准新增了一种多行字符串的表示方法，用反引号 ` ... ` 表示
+    - 模板字符串
+    - 字符串操作
 * Number:不区分整数和浮点数，统一用Number表示.有时候用十六进制表示整数比较方便，十六进制用0x前缀和0-9，a-f表示,以及运算符.
     - NaN这个特殊的Number与所有其他值都不相等，包括它自己.唯一能判断NaN的方法是通过isNaN()函数.注意浮点数的相等比较(浮点数在运算过程中会产生误差，因为计算机无法精确表示无限循环小数。要比较两个浮点数是否相等，只能计算它们之差的绝对值，看是否小于某个阈值)
     - 属性
@@ -94,17 +125,8 @@ var name="Gates", age=56, job="CEO";
         + toPrecision()
         + toString()
         + valueOf()
-* 字符串：以单引号`'`或双引号`"`括起来的任意文本
-    - 如果`'`本身也是一个字符，那就可以用""括起来，比如`"I'm OK"`包含的字符是I，`'`，m，空格，O，K这6个字符。
-    - `'I\'m \"OK\"!';` 转义字符`\`可以转义很多字符，比如`\n`表示换行，`\t`表示制表符，字符`\`本身也要转义，所以`\\`表示的字符就是`\`
-    - ASCII字符可以以`\x##`形式的十六进制表示 `'\x41'; // 完全等同于 'A'`
-    - 用`\u####`表示一个Unicode字符:`'\u4e2d\u6587'; // 完全等同于 '中文'`
-    - 多行字符串,串用`\n`写起来比较费事，所以最新的ES6标准新增了一种多行字符串的表示方法，用反引号 ` ... ` 表示
-    - 模板字符串
-    - 字符串操作
-    - 属性
-* Boolean:布尔值和布尔代数的表示完全一致，一个布尔值只有true、false两种值.常用在条件判断中
-    - `&&` 与运算 `||`和运算 `!`非运算.把null、undefined、0、NaN和空字符串''视为false，其他值一概视为true
+* Null表示一个“空”的值，它和0以及空字符串`''`不同，0是一个数值，`''`表示长度为0的字符串，而null表示“空”。可以通过将变量的值设置为 null 来清空变量。
+* Undefined表示值未定义,仅仅在判断函数参数是否传递的情况下有用
 
 ```js
 123; // 整数123
@@ -1295,7 +1317,6 @@ re.lastIndex; // 44
 re.exec(s); // null，直到结束仍没有匹配到
 ```
 
-
 ### Math
 
 执行常见的算数任务
@@ -1602,17 +1623,15 @@ class PrimaryStudent extends Student {
 }
 ```
 
-## 浏览器
+### 浏览器对象模型(BOM)
+
+JavaScript可以获取浏览器提供的很多对象，并进行操作。
 
 * Google基于Webkit
 * Safari Webkit内核
 * Firefox自己研制的Gecko内核
 
-### 浏览器对象模型 (BOM) 
-
-JavaScript可以获取浏览器提供的很多对象，并进行操作。
-
-* window对象不但充当全局作用域（所有 JavaScript 全局对象、函数以及变量均自动成为 window 对象的成员），而且表示浏览器窗口：
+* window：不但充当全局作用域（所有 JavaScript 全局对象、函数以及变量均自动成为 window 对象的成员），而且表示浏览器窗口：
     - `window.innerWidth`
     - `window.innerHeight`
     - `window.outerWidth`
@@ -1621,7 +1640,7 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
     - window.close() - 关闭当前窗口
     - window.moveTo() - 移动当前窗口
     - window.resizeTo() - 调整当前窗口的尺寸
-* navigator对象表示浏览器的信息.navigator的信息可以很容易地被用户修改，所以JavaScript读取的值不一定是正确的
+* navigator：表示浏览器的信息.navigator的信息可以很容易地被用户修改，所以JavaScript读取的值不一定是正确的
     - `navigator.appName`：浏览器名称
     - `navigator.appVersion`：浏览器版本
     - `navigator.language`：浏览器设置的语言
@@ -1630,13 +1649,13 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
     - navigator.cookieEnabled
     - navigator.appCodeName
     - navigator.systemLanguage 
-* screen对象表示屏幕的信息
+* screen：表示屏幕的信息
     - screen.width：屏幕宽度，以像素为单位
     - screen.height：屏幕高度，以像素为单位
     - screen.colorDepth：返回颜色位数，如8、16、24
     - screen.availWidth - 可用的屏幕宽度
     - screen.availHeight - 可用的屏幕高度
-* location对象表示当前页面的URL信息
+* location：表示当前页面的URL信息
     - location.href: http://www.example.com:8080/path/index.html?a=1&b=2#TOP
     - location.protocol; // 'http'
     - location.host; // 'www.example.com'
@@ -1646,7 +1665,7 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
     - location.hash; // 'TOP'
     - location.assign('/discuss'):要加载一个新页面
     - location.reload():如果要重新加载当前页面
-* document对象表示当前页面。由于HTML在浏览器中以DOM形式表示为树形结构，document对象就是整个DOM树的根节点。
+* document：表示当前页面。由于HTML在浏览器中以DOM形式表示为树形结构，document对象就是整个DOM树的根节点。
     - title赋值：document.title = '努力学习JavaScript!';
     - 要查找DOM树的某个节点，需要从document对象开始查找。最常用的查找是根据ID和Tag Name
     - document.getElementById('drink-menu')
@@ -1654,7 +1673,7 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
     - menu.tagName;
     - Cookie是由服务器发送的key-value标示符。因为HTTP协议是无状态的，但是服务器要区分到底是哪个用户发过来的请求，就可以用Cookie来区分。当一个用户成功登录后，服务器发送一个Cookie给浏览器，例如user=ABC123XYZ(加密的字符串)...，此后，浏览器访问该网站时，会在请求头附上这个Cookie，服务器根据Cookie即可区分出用户。 `document.cookie`
     - `<script src="http://www.foo.com/jquery.js"></script>`  引入的第三方的JavaScript中存在恶意代码，则www.foo.com网站将直接获取到www.example.com网站的用户登录信息.服务器在设置Cookie时可以使用httpOnly，`设定了httpOnly的Cookie将不能被JavaScript读取`
-* history对象保存了浏览器的历史记录
+* history：保存了浏览器的历史记录
     - history.back()
     - history.forward()
 * 消息框
@@ -1664,7 +1683,7 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
 * timing
     - var t=setTimeout("alert('5 秒！')",5000)
     -  clearTimeout(t)
-* cookie
+* cookie：cookie 是存储于访问者的计算机中的变量。每当同一台计算机通过浏览器请求某个页面时，就会发送这个 cookie。你可以使用 JavaScript 来创建和取回 cookie 的值。
 
 ```js
 document.write('Hello Javascript');
@@ -1694,6 +1713,49 @@ function stopCount()
  {
     clearTimeout(t)
  }
+
+
+function getCookie(c_name)
+{
+    if (document.cookie.length>0)
+    { 
+        c_start=document.cookie.indexOf(c_name + "=")
+        if (c_start!=-1)
+        { 
+            c_start=c_start + c_name.length+1 
+            c_end=document.cookie.indexOf(";",c_start)
+            if (c_end==-1){
+                c_end=document.cookie.length
+            }
+            return unescape(document.cookie.substring(c_start,c_end))
+        } 
+    }
+    return ""
+}
+
+function setCookie(c_name,value,expiredays)
+{
+    var exdate=new Date()
+    exdate.setDate(exdate.getDate()+expiredays)
+    document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : "; expires="+exdate.toGMTString())
+}
+
+function checkCookie()
+{
+    username=getCookie('username')
+    if (username!=null && username!="")
+    {
+        alert('Welcome again '+username+'!')
+    }else{
+        username=prompt('Please enter your name:',"")
+        if (username!=null && username!="")
+        {
+            setCookie('username',username,365)
+        }
+    }
+}
+
+// <body onLoad="checkCookie()"></body>
 ```
 
 ### 操作DOM
@@ -2438,6 +2500,11 @@ try {
 });
 </script>
 ```
+
+## 场景
+
+* 
+
 
 WebAssembly 已得到所有主流浏览器支持
 

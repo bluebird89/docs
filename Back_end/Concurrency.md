@@ -23,6 +23,7 @@
 * 同步：Java中的同步指的是通过人为的控制和调度，保证共享资源的多线程访问成为线程安全，来保证结果的准确。如上面的代码简单加入@synchronized关键字。在保证结果准确的同时，提高性能，才是优秀的程序。线程安全的优先级高于性能。
 
 ![](../_static/thead-status.png)
+
 * 线程在Running的过程中可能会遇到阻塞(Blocked)情况:对Running状态的线程加同步锁(Synchronized)使其进入(lock blocked pool ),同步锁被释放进入可运行状态(Runnable)。从jdk源码注释来看，blocked指的是对monitor的等待（可以参考下文的图）即该线程位于等待区。
 * 线程在Running的过程中可能会遇到等待（Waiting）情况:线程可以主动调用object.wait或者sleep，或者join（join内部调用的是sleep，所以可看成sleep的一种）进入。从jdk源码注释来看，waiting是等待另一个线程完成某一个操作，如join等待另一个完成执行，object.wait()等待object.notify()方法执行。
 
@@ -191,6 +192,7 @@ N核服务器，通过执行业务的单线程分析出本地计算时间为x，
 
 * [究竟啥才是互联网架构“高并发”](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651959830&idx=1&sn=ce1c5a58caed227d7dfdbc16d6e1cea4&chksm=bd2d07ca8a5a8edc45cc45c4787cc72cf4c8b96fb43d2840c7ccd44978036a7d39a03dd578b5)
 * [工作线程数究竟要设置为多少](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651960260&idx=1&sn=051fd566d43d7fd35724bdf55484ee5f&chksm=bd2d06188a5a8f0e64467381c7b3df5bdcb7f81ba055d5d21ec2f8b888492be15527d23070b0)
+
 并发：<https://www.zhihu.com/question/19683490>
 
 分布式系统：<https://www.zhihu.com/question/37051661>
