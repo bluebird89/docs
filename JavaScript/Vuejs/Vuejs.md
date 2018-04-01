@@ -9,6 +9,45 @@
 * 模块化
 * 组件化
 
+## 原理
+
+
+### 构造器
+
+Vue实例实质上就是MVVM模式（Model-View-ViewModel），每个Vue实例在创建时都会经历一系列实例化步骤，例如，需要设置数据观察、编译模板、以及创建必要的数据绑定。在这个过程中，还会调用生命周期钩子，从而方便我们执行自定义逻辑.该对象含有以下参数：
+
+* 数据:Vue实例都会代理其data对象中的所有属性.代理属性是反应式的，如果在实例创建之后添加一个新的属性到实例上，将不会触发任何视图更新。
+* 模板
+* 要挂载的元素
+* 方法
+* 生命周期回调
+
+![生命周期](./../../_static/lifecycle.png "Optional title")
+
+```js
+var data = { a: 1 }
+var vm = new Vue({
+    el:'#example',
+    data: data,  
+     created: function () {
+        // `this` points to the vm instance
+        console.log('a is: ' + this.a)
+    }
+})
+vm.a === data.a
+vm.$data === data
+vm.$el === document.getElementById('example')
+
+// Vue实例可以通过预定义选项进行扩展，从而创建可复用的组件构造器
+var MyComponent = Vue.extend({
+  // extension options
+})
+
+// all instances of `MyComponent` are created with
+// the pre-defined extension options
+var myComponentInstance = new MyComponent()
+```
+
 ### App 流程
 
 * 需求分析
@@ -126,7 +165,7 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 * [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin):vue2.0 admin / a management system template http://panjiachen.github.io/vue-element-admin
 * [vue-bulma/vue-admin](https://github.com/vue-bulma/vue-admin):Vue Admin Panel Framework, Powered by Vue 2.0 and Bulma 0.3 https://admin.vuebulma.com
 * [iview/iview](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
-
+* [bootstrap-vue/bootstrap-vue](https://github.com/bootstrap-vue/bootstrap-vue/):BootstrapVue provides one of the most comprehensive implementations of Bootstrap 4 components and grid system for Vue.js and with extensive and automated WAI-ARIA accessibility markup. https://bootstrap-vue.js.org
 
 ## todo
 
