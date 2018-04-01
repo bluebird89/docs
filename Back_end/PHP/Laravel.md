@@ -108,8 +108,9 @@ from @golaravel
 * 重新生成框架的自动加载文件:composer dump-autoload
 * 进入tinker环境：php artisan tinker
 
-```
+```sh
 composer create-project laravel/laravel
+composer create-project laravel/laravel=5.2.* blog --prefer-dist    // 可以指定版本和项目名
 php artisan serve
 ```
 
@@ -139,6 +140,8 @@ exit
 - 创建一个路由缓存文件:php artisan routes:cache
 - 清除路由缓存文件:php artisan routes:clear
 - 清除应用程序缓存:php artisan cache:clear
+- php artisan clear-compiled  移除编译过的类文件
+- php artisan optimize 编译过的类文件优化
 - php artisan view:clear
 
 ### Controller && Model
@@ -166,7 +169,7 @@ php artisan make:Model App\\Models\\User(linux or macOs 加上转义符)
 // 数据迁移
 php artisan migrate
 // 创建迁移
-php artisan make:migration create_users_table
+php artisan make:migration create_users_table 
 // 指定路径
 php artisan make:migration --path=app\providers create_users_table
 // 一次性创建
@@ -183,8 +186,30 @@ php artisan migrate
 # 填充种子数据 测试用:php artisan db:seed
 # 创建一个种子数据:php artisan make:seeder
 # 创建一个数据迁移:php artisan make:migration name
+
   // 创建要填充的数据类
 php artisan make:seeder UsersTableSeeder
+
+use Illuminate\Database\Seeder;
+
+class UsersTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        factory(\App\User::class)->times(300)->create();
+    }
+}
+
+// DatabaseSeeder里面调用UserTableSeeder
+public function run()
+    {
+         $this->call(UsersTableSeeder::class);
+    }
 // 数据填充（全部表）
 php artisan db:seed
 // 指定要填充的表
@@ -358,6 +383,8 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
 ## 服务容器和服务提供者
 
 服务容器是 Laravel 管理类依赖和运行依赖注入的有力工具，在类中可通过 $this->app 来访问容器，在类之外通过 $app 来访问容器；服务提供者是 Laravel 应用程序引导启动的中心，关系到服务提供者自身、事件监听器、路由以及中间件的启动运行。应用程序中注册的路由通过RouteServiceProvider实例来加载；事件监听器在EventServiceProvider类中进行注册；中间件又称路由中间件，在app/Http/Kernel.php类文件中注册，调用时与路由进行绑定。在新创建的应用中，AppServiceProvider 文件中方法实现都是空的，这个提供者是你添加应用专属的引导和服务的最佳位置，当然，对于大型应用你可能希望创建几个服务提供者，每个都具有粒度更精细的引导。服务提供者在 config/app.php 配置文件中的providers数组中进行注册
+
+`php artisan make:provider HelperServiceProvider`
 
 ```php
 namespace App\Providers;

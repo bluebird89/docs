@@ -13,3 +13,6 @@
 [submodule "Finance/awesome-portfolios"]
 	path = Finance/awesome-portfolios
 	url = git@github.com:iRaul/awesome-portfolios.git
+[submodule "Note/Interview-Notebook"]
+	path = Note/Interview-Notebook
+	url = git@github.com:CyC2018/Interview-Notebook.git

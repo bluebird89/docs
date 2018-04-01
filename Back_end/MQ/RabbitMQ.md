@@ -13,7 +13,16 @@ RabbitMQ 是基于 AMQP 实现的一个开源消息组件，主要用于在分�
 * 插件系统：支持各种丰富的插件扩展，同时也支持自定义插件，其中最常用的插件是 Web 管理工具 RabbitMQ_Management
 
 ![](../>>?_static/rabbitmq.png)
+## 安装
 
+```sh
+brew install rabbitmq
+brew services start rabbitmq # /usr/local/Cellar/rabbitmq/3.6.6/sbin/rabbitmq-server
+# 访问 http://localhost:15672/  默认账号密码为guest
+
+rabbitmqctl status
+sudo rabbitmqctl list_queues # 查看队列状态
+```
 ## 使用
 
 * 单对单
@@ -29,4 +38,3 @@ RabbitMQ 是基于 AMQP 实现的一个开源消息组件，主要用于在分�
 * [rabbitmq/rabbitmq-server](https://github.com/rabbitmq/rabbitmq-server):Open source multi-protocol messaging broker https://www.rabbitmq.com/
 * [rabbitmq/rabbitmq-tutorials](https://github.com/rabbitmq/rabbitmq-tutorials):Tutorials for using RabbitMQ in various ways http://www.rabbitmq.com/getstarted.html
 * [rabbitmq](http://blog.csdn.net/column/details/rabbitmq.html)
-http://www.rabbitmq.com/install-homebrew.html
