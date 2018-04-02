@@ -1461,8 +1461,9 @@ JavaScript对每个创建的对象都会设置一个原型，指向它的原型�
 * 对象的hello函数实际上只需要共享同一个函数就可以了，这样可以节省很多内存。只要把hello函数移动到xiaoming、xiaohong这些对象共同的原型上就可以了，也就是Student.prototype
 * 调用构造函数千万不要忘记写new。为了区分普通函数和构造函数，按照约定，构造函数首字母应当大写，而普通函数首字母应当小写
 * 一是不需要new来调用，二是参数非常灵活，可以不传，也可以这么传。如果创建的对象有很多属性，我们只需要传递需要的某些属性，剩下的属性可以用默认值。由于参数是一个Object，我们无需记忆参数的顺序。如果恰好从JSON拿到了一个对象，就可以直接创建出xiaoming。
-![原型链](。。/_static/js-link.png "Optional title")
-![通用方法升级到原型中去](。。/_static/js-link-1.png "Optional title")
+
+![原型链](../_static/js-link.png "Optional title")
+![通用方法升级到原型中去](../_static/js-link-1.png "Optional title")
 
 ```javascript
 function Student(name) {
