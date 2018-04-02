@@ -1519,6 +1519,7 @@ xiaoming.grade;
 * 定义新的构造函数，并在内部用call()调用希望“继承”的构造函数，并绑定this； 新的简化方法思路不一样，inherits中的构造与父类一级
 * 借助中间函数F实现原型链继承，最好通过封装的inherits函数完成；
 * 继续在新的构造函数的原型上定义新方法。
+
 ![原型链](../_static/js-link3.png "Optional title")
 
 ```javascript
