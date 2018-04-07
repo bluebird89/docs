@@ -101,8 +101,8 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - Cloud Outline
 - 播放器：MPlayerX
 - UML:staruml
-- 清理垃圾：CleanMyMac（需购买解说功能）
-- 开发环境 MAMP:基础版不支持自定义
+- CleanMyMac（需购买解说功能）
+- MAMP:基础版不支持自定义
 - [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro)
 - mysql 使用brew安装
 - git:sourcetree tig
@@ -138,18 +138,19 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
 - Fantastical 2:日历工具 收费
 - [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
-- 苹果铃声制作
 
-  - 音乐文件用itunes打开
-  - getinfo剪辑（长度不变）
-  - 转换acc
-  - 在文件位置移开未见重命名.m4r
-  - 拖进tones
-  - 同步手机
+### 苹果铃声制作
+
+* 音乐文件用itunes打开
+* getinfo剪辑（长度不变）
+* 转换acc
+* 在文件位置移开未见重命名.m4r
+* 拖进tones
+* 同步手机
 
 ```
-  npm install apidoc -g
-  apidoc -i myapp/ -o apidoc/ -t mytemplate/
+npm install apidoc -g
+apidoc -i myapp/ -o apidoc/ -t mytemplate/
 ```
 
 #### iTerm2
@@ -208,16 +209,17 @@ iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配�
 - 隐藏DOCK -->Command+Option+D
 - 按着Option键 -->如关机时免再确认一次
 - Shift+Control+ 推出键:锁屏键
-- 系统功能
 
-  - 打开我的文档或浏览器主页：shift + command + H
-  - 粘贴文本 -->Shift+Command+Option+V
-  - 将文件放在同新文件夹下 -->Ctrl+Command+N
-  - 全屏截图 -->Command+shift+3
-  - 区域截图 -->Command+Shift+4
-  - 窗口截图 -->Command+Shift+Space+4
-  - control＋command＋f：全屏/还原
-  - 直接新标签打开文件夹 Command+双击
+#### 系统功能
+
+* 打开我的文档或浏览器主页：shift + command + H
+* 粘贴文本 -->Shift+Command+Option+V
+* 将文件放在同新文件夹下 -->Ctrl+Command+N
+* 全屏截图 -->Command+shift+3
+* 区域截图 -->Command+Shift+4
+* 窗口截图 -->Command+Shift+Space+4
+* control＋command＋f：全屏/还原
+* 直接新标签打开文件夹 Command+双击
 
 ```
 cd ~
