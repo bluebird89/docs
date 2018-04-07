@@ -69,6 +69,8 @@ PATH="/System/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
 export PATH
 
 source ~/.bash_profile
+
+pip3 install --upgrade pip setuptools wheel
 ```
 
 [Using Python on a Macintosh](https://docs.python.org/3/using/mac.html)

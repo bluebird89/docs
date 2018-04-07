@@ -45,3 +45,75 @@ curl -H "Content-Type: application/json" \
 * [websockets/ws](https://github.com/websockets/ws):Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js
 * [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)
 * [细说WebSocket - Node篇](https://juejin.im/entry/5a012eab518825297a0e27f0)
+
+# Websocket
+
+websocket通信协议实现的是基于浏览器的原生socket，这样原先只有在c/s模式下的大量开发模式都可以搬到web上来了，基本就是通过浏览器的支持在web上实现了与服务器端的socket通信。
+
+* HTTP1.0：生命周期通过Request来界定
+* HTTP1.1：keep-alive，在一个HTTP连接中，可以发送多个Request，接收多个Response
+    非持久性
+    同步有延迟
+    消耗资源
+    无状态协议。
+    被动性
+* HTML5的新规范
+    * Websocket是一个持久化网络通信的协议
+    * 一次HTTP握手，所以说整个通讯过程是建立在一次连接/状态中.有更加轻量级的头，减少数据传送量
+    * 可以用于绕过大多数防火墙的限制
+    * 服务器主动推送信息
+    * 实现实时信息传递
+    * 双通道
+    * multiplexing
+
+
+
+```
+GET /chat HTTP/1.1
+Host: server.example.com
+Upgrade: websocket  # 协议类型
+Connection: Upgrade
+Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw== # 浏览器随机生成Base64 encode的值
+Sec-WebSocket-Protocol: chat, superchat # 用户定义的字符串，用来区分同URL下，不同的服务所需要的协议
+Sec-WebSocket-Version: 13
+Origin: http://example.com
+```
+
+```
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
+Sec-WebSocket-Protocol: chat
+```
+
+
+```js
+if('WebSocket' in window){ 
+    // 创建websocket实例 
+    var socket = new WebSocket('ws://localhost:8080');
+
+    //打开 
+    socket.onopen = function(event) 
+    { 
+    // 发送
+    socket.send('I am the client and I\'m listening!'); 
+
+    // 监听 
+    socket.onmessage = function(event) {
+    console.log('Client received a message',event); 
+    };
+
+    // 关闭监听 
+    socket.onclose = function(event) {
+    console.log('Client notified socket has closed',event); 
+    };
+
+    // 关闭 
+    //socket.close() };
+}else{
+    alert('本浏览器不支持WebSocket哦~');
+}
+```
+
+* polling :是指从客户端（一般就是浏览器）不断主动的向服务器发 HTTP 请求查询是否有新数据 。

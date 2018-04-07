@@ -113,6 +113,8 @@ brew services start postgresql
 
 brew update && brew upgrade && brew cleanup ; say mission complete
 
+brew link --overwrite docker
+
 echo 'export PATH="/usr/local/opt/sqlite/bin:$PATH"' >> ~/.zshrc
 brew services [-v|--verbose] [list | run | start | stop | restart | cleanup]
 

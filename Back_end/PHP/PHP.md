@@ -6,11 +6,42 @@
 * PHP是一种解释型语言，即不需要编译。
 * PHP是一种服务器端脚本语言。
 * PHP比其他脚本语言更快,如：Python和asp。
-* HTTP协议在Nginx等服务器的解析下
-* 再传送给相应的Handler（PHP等）来处理。后端渲染，默认html处理，模版文件以.php后缀
+* HTTP协议在Nginx等服务器的解析下,传送给相应的Handler（PHP等）来处理。后端渲染，默认html处理，模版文件以.php后缀
 * 服务端脚本程序，只能通过服务器访问，需要配置虚拟主机调试
 
 ## 安装
+
+```sh
+gzip -d httpd-2_x_NN.tar.gz
+tar -xf httpd-2_x_NN.tar
+
+cd httpd-2_x_NN
+./configure --enable-so  //  --with-mpm=worker 替换默认prework
+make
+make install
+
+/usr/local/apache2/bin/apachectl start/stop   service httpd restart
+
+gunzip php-NN.tar.gz
+tar -xf php-NN.tar
+
+cd ../php-NN  
+./configure --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql // 可以根据需要重新编译
+make
+make install
+
+LoadModule php5_module modules/libphp5.so // httpd.conf中添加
+
+./configure --enable-fpm --with-mysql
+sudo make install 
+
+cp php.ini-development /usr/local/php/php.ini
+cp /usr/local/etc/php-fpm.conf.default /usr/local/etc/php-fpm.conf
+cp sapi/fpm/php-fpm /usr/local/bin
+```
+
+ php.ini 文件中的配置项 cgi.fix_pathinfo 设置为 0  // 如果文件不存在，则阻止 Nginx 将请求发送到后端的 PHP-FPM 模块， 以避免遭受恶意脚本注入的攻击
+ 确保 php-fpm 模块使用 www-data 用户和 www-data 用户组的身份运行
 
 ### windows
 
@@ -20,6 +51,7 @@
 ./php.exe -f e:\www\test.php # 不一定非php扩展名文件
 php.exe -v
 php.exe -i # 运行phpinfo()函数
+
 php.exe -m # 显示已经加载了那些module
 php -a # 进入命令行模式
 ```
@@ -27,8 +59,9 @@ php -a # 进入命令行模式
 ### Mac
 
 * 程序路径：`/usr/local/Cellar/php71/7.1.12_23`
-* 配置路: `/usr/local/etc/php/7.1/php.ini`
-* control script:/usr/local/opt/php71/sbin/php71-fpm
+* 配置文件: `/usr/local/etc/php/7.1/php.ini`
+* /usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx 通过php-fpm进程运行
+* php71卸载后php-fpm仍然运行
 
 ```sh
 brew install php71
@@ -42,6 +75,15 @@ cp /usr/local/opt/php71/homebrew.mxcl.php71.plist ~/Library/LaunchAgents/
 launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php71.plist
 
 sudo brew services start/stop/restart php71
+
+PHP Startup: Unable to load dynamic library # 扩展重复加载
+
+php -i | grep php.ini
+php -m
+
+# 默认php-cli为/usr/bin/php，提升优先级
+echo 'export PATH="/usr/local/opt/php@7.1/bin:$PATH"' >> ~/.zshrc
+echo 'export PATH="/usr/local/opt/php@7.1/sbin:$PATH"' >> ~/.zshrc
 ```
 
 ### linux源码安装
@@ -144,7 +186,12 @@ date.timezone = Asia/Shanghai
 * 开发桌面应用就是使用PHP-CLI和GTK包
 * linux下用php编写shell脚本
 
+与PHP不同的配置文件
+由webserver使用的php.ini文件，会配置比较短的max_execution_time，而在命令行中的php.ini文件，会配置比较长的max_execution_time。
+
 ```php
+php --ini
+php -r "echo php_sapi_name();" // 判断当前执行的php是什么模式下 R RUN
 php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数。这种方法首先要设置php解释器的路径，Windows平台在运行CLI之前，需设置类似path c:\php的命令，也失去了CLI脚本第一行的意义，因此不建议使用该方法。
 
 第二种方法是首先运行chmod+x <要运行的脚本文件名>（UNIX/Linux环境），将该PHP文件置为可执行权限，然后在CLI脚本头部第一行加入声明（类似于#! /usr/bin/php或PHP CLI解释器位置），接着在命令行直接执行。这是CLI首选方法，建议采用
