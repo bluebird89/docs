@@ -9,7 +9,9 @@ jQuery把所有功能全部封装在一个全局变量jQuery中，而$也是一�
 
 $_分离出来，如果_$这个变量不幸地被占用了，而且还不能改，那我们就只能让jQuery把$变量交出来，然后就只能使用jQuery这个变量
 
-```javascript
+```html
+<script type="text/javascript" src="jquery.js"></script>
+<script>
 $.fn.jQuery; // 查看版本
 
 window.jQuery; // jQuery(selector, context)
@@ -21,16 +23,33 @@ $; // jQuery(selector, context)
 jQuery.noConflict();
 $; // undefined
 jQuery; // jQuery(selector, context)
+
+// 为了防止文档在完全加载（就绪）之前运行 jQuery 代码:试图隐藏一个不存在的元素   获得未完全加载的图像的大小
+$(document).ready(function(){
+
+--- jQuery functions go here ----
+
+});
+</script>
 ```
 
 ## 功能
 
+* HTML 元素选取
+* HTML 元素操作
+* CSS 操作
+* HTML 事件函数
+* JavaScript 特效和动画
+* HTML DOM 遍历和修改
+* AJAX
+* Utilities
+
 ### 选择器
 
-返回的对象是jQuery对象(类似数组，它的每个元素都是一个引用了DOM节点的对象)
+返回的对象是jQuery对象(类似数组，它的每个元素都是一个引用了DOM节点的对象),不会返回undefined或者null，这样的好处是你不必在下一行判断if (div === undefined)。
+jQuery对象和DOM对象之间可以互相转化:拿到了一个DOM对象，那可以简单地调用$(aDomObject)把它变成jQuery对象
 
-不会返回undefined或者null，这样的好处是你不必在下一行判断if (div === undefined)。jQuery对象和DOM对象之间可以互相转化:拿到了一个DOM对象，那可以简单地调用$(aDomObject)把它变成jQuery对象，这样就可以方便地使用jQuery的API了。
-
+* 按元素查找
 * 按ID查找
 * 按tag查找
 * 按class查找
@@ -65,28 +84,26 @@ jQuery; // jQuery(selector, context)
 ```
 
 ```js
-var div = $('#abc'); 
-
-var div = $('#abc'); // jQuery对象
-var divDom = div.get(0); // 假设存在div，获取第1个DOM元素
-var another = $(divDom); // 重新把DOM包装为jQuery对象
+$(this)
 
 var ps = $('p'); // 返回所有<p>节点
+$("p.intro") // 选取所有 class="intro" 的 <p> 元素。
 ps.length; // 数一数页面有多少个<p>节点
+
+var div = $('#abc'); 
+var divDom = div.get(0); // 假设存在div，获取第1个DOM元素
+var another = $(divDom); // 重新把DOM包装为jQuery对象
 
 var a = $('.red'); // 所有节点包含`class="red"`都将返回
 var a = $('.red.green'); // 同时包含red和green的节点 注意没有空格！
 
+$("[href]") // 选取所有带有 href 属性的元素
 var email = $('[name=email]'); // 找出<??? name="email">
-var passwordInput = $('[type=password]'); // 找出<??? type="password">
 var a = $('[items="A B"]'); // 找出<??? items="A B">
-var icons = $('[name^=icon]'); // 找出所有name属性值以icon开头的DOM
-// 例如: name="icon-1", name="icon-2"
+var icons = $('[name^=icon]'); // 找出所有name属性值以icon开头的DOM name="icon-1", name="icon-2"
 var names = $('[name$=with]'); // 找出所有name属性值以with结尾的DOM
-var icons = $('[class^="icon-"]'); // 找出所有class包含至少一个以`icon-`开头的DOM
 
 var emailInput = $('input[name=email]'); // 不会找出<div name="email">
-var tr = $('tr.red'); // 找出<tr class="red ...">...</tr>
 
 $('p,div'); // 把<p>和<div>都选出来
 $('p.red,p.green'); // 把<p class="red">和<p class="green">都选出来
@@ -139,6 +156,8 @@ var langs = $('ul.lang li'); // 拿到JavaScript, Python, Swift, Scheme和Haskel
 var js = langs.first(); // JavaScript，相当于$('ul.lang li:first-child')
 var haskell = langs.last(); // Haskell, 相当于$('ul.lang li:last-child')
 var sub = langs.slice(2, 4); // Swift, Scheme, 参数和数组的slice()方法一致
+
+$('ul.lang li.lang-javascript'); // 每个 <ul> 的第一个 <li> 元素
 ```
 
 ### 操作DOM
@@ -160,7 +179,6 @@ var sub = langs.slice(2, 4); // Swift, Scheme, 参数和数组的slice()方法�
     <li class="js">JavaScript</li>
     <li name="book">Java &amp; JavaScript</li>
 </ul>
-
 
 <ul id="test-css">
     <li class="lang dy"><span>JavaScript</span></li>
@@ -333,11 +351,13 @@ JavaScript在浏览器中以单线程模式运行，页面加载后，一旦页�
 <a id="test-link" href="#0">点我试试</a>
  
 <script>
-// 获取超链接的jQuery对象:
+
 var a = $('#test-link');
+
 a.on('click', function () {
     alert('Hello!');
 });
+
 a.click(function () {
     alert('Hello!');
 });
@@ -345,7 +365,6 @@ a.click(function () {
 function hello() {
     alert('hello!');
 }
-
 a.click(hello); // 绑定事件
 
 // 10秒钟后解除绑定:
@@ -359,14 +378,9 @@ a.off('click', function () {
     alert('hello!');
 });
 
-a.off('click', function () {
-    alert('hello!');
-});
-
 var input = $('#test-input');  // 通过代码触发事件，直接调用无参数的change()方法来触发该事件
 input.val('change it!');
 input.change(); // 触发change事件
-
 
 // 无法弹出新窗口，将被浏览器屏蔽:
 $(function () {
@@ -411,7 +425,6 @@ $(function () {
 
 ### 动画
 
-只需要以固定的时间间隔（例如，0.1秒），每次把DOM元素的CSS样式修改一点
 * show()和hide()，会显示和隐藏DOM元素从左上角逐渐展开或收缩的.toggle()方法则根据当前状态决定是show()还是hide()
 * slideUp()和slideDown()则是在垂直方向逐渐展开或收缩的。slideToggle()则根据元素是否可见来决定下一步动作
 * fadeIn()和fadeOut()的动画效果是淡入淡出，也就是通过不断设置DOM元素的opacity属性来实现，而fadeToggle()则根据元素是否可见来决定下一步动作
@@ -422,26 +435,21 @@ $(function () {
 
 ```js
 var div = $('#test-show-hide');
+
 div.hide(3000); // 
 div.show('slow');
-div.toggle('slow');
+div.toggle('slow'); // $(selector).toggle(speed,callback); speed 参数规定隐藏/显示的速度，可以取以下值："slow"、"fast" 或毫秒。可选的 callback 参数是 toggle() 方法完成后所执行的函数名称。
 
-div.slideUp(3000); // 在3秒钟内逐渐向上消失
+div.slideUp(3000); // $(selector).slideDown(speed,callback); 在3秒钟内逐渐向上消失
 div.slideDown(3000); 
 div.slideToggle('slow');
 
-div.fadeIn(3000); 
+div.fadeIn(3000);  // $(selector).fadeIn(speed,callback);  speed 参数规定效果的时长。它可以取以下值："slow"、"fast" 或毫秒。 可选的 callback 参数是 fading 完成后所执行的函数名称。
 div.fadeOut(3000); 
 div.fideToggle('slow');
+div.fadeTo("slow",0.15); // $(selector).fadeTo(speed,opacity,callback); 允许渐变为给定的不透明度（值介于 0 与 1 之间）
 
-var div = $('#test-animate');
-div.animate({
-    opacity: 0.25,
-    width: '256px',
-    height: '256px'
-}, 3000); // 在3秒钟内CSS过渡到设定值
-
-var div = $('#test-animate');
+var div = $('#test-animate'); // $(selector).animate({params},speed,callback); 必需的 params 参数定义形成动画的 CSS 属性。 callback 参数是动画完成后所执行的函数名称。在3秒钟内CSS过渡到设定值
 div.animate({
     opacity: 0.25,
     width: '256px',
@@ -450,6 +458,12 @@ div.animate({
     console.log('动画已结束');
     // 恢复至初始状态:
     $(this).css('opacity', '1.0').css('width', '128px').css('height', '128px');
+});
+div.animate({ // 使用相对值
+    left:'250px',
+    height:'+=150px',
+    width:'+=150px'
+  });
 });
 
 var div = $('#test-animates');
@@ -590,6 +604,12 @@ $.fn.external = function () {
 }
 $('#test-external a').external();
 </script>
+```
+
+### 冲突
+
+```js
+var jq=jQuery.noConflict();
 ```
 
 ## 扩展
