@@ -82,7 +82,6 @@ var myComponentInstance = new MyComponent()
 v-for="item in items" // v-for指令基于一个数组渲染一个列表
 v-bind:argument="expression"  // 指令可以在其名称后面带一个参数，中间放一个冒号隔开，这个参数通常是HTML元素的特性（attribute） 简写为 ：
 <a v-on:click="doSomething">   // v-on指令用于给监听DOM事件，它的用语法和v-bind是类似的，例如监听<a>元素的点击事件   简写为@
-
 ```
 
 数据绑定最常见的形式就是使用 "Mustache" 语法：{{}}
