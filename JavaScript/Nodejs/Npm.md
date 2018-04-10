@@ -13,8 +13,8 @@ Node的包描述文件是一个JSON文件，用于描述非代码相关的信息
 
 ```sh
 npm -v
-npm init // 创建一个npm项目,配置项目信息，在package.json文件
-npm install react react-dom --save // 安装依赖
+npm init  # 创建一个npm项目,配置项目信息，在package.json文件
+npm install react react-dom --save # 安装依赖
 npm i -g npm # npm更新
 ```
 
@@ -23,11 +23,10 @@ npm i -g npm # npm更新
 node的包管理工具。配置文件`package.json` scripts：script会安装一定顺序寻找命令对应位置，本地的node_modules/.bin路径就在这个寻找清单中.`npm run {script name}`,将构建命令提到外部指令来
 
 ```sh
-// npm设置镜像加速
+# npm设置镜像加速
 npm config set registry https://registry.npm.taobao.org --global
 npm config set disturl https://npm.taobao.org/dist --global
-// 更新npm 版本
-npm i -g npm
+
 ```
 
 ## 代码
