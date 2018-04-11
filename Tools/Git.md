@@ -86,7 +86,7 @@ sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
 
 gpg --armor --export 3AA5C34371567BD2  # get the key,add to github
 
-git config --global user.signingkey 3AA5C34371567BD2 # git配置
+git config --global user.signingkey 3AA5C34371567BD2 # git配置,commit生效
 ```
 
 ### 个性化配置
