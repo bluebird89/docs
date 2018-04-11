@@ -76,12 +76,17 @@ ssh -T git@github.com  # 验证
 提交内容将会有一个"已验证"标记
 
 ```sh
+brew install gpg
+
 gpg --gen-key
-gpg --list-secret-keys --keyid-format LONG  //获取GPG key ID  3AA5C34371567BD2
+gpg --list-secret-keys --keyid-format LONG  # 获取GPG key ID  3AA5C34371567BD2
 gpg --list-key
+
 sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
+
 gpg --armor --export 3AA5C34371567BD2  # get the key,add to github
-git config --global user.signingkey 35F5FFB2
+
+git config --global user.signingkey 3AA5C34371567BD2
 ```
 
 ### 个性化配置
