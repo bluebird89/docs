@@ -79,9 +79,10 @@ ssh -T git@github.com  # 验证
 brew install gpg
 
 gpg --gen-key
-gpg --list-secret-keys --keyid-format LONG  # 获取GPG key ID  3AA5C34371567BD2
-gpg --list-key
 
+gpg --list-key #公钥
+
+gpg --list-secret-keys --keyid-format LONG  # 获取GPG私钥 key ID  3AA5C34371567BD2
 sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
 
 gpg --armor --export 3AA5C34371567BD2  # get the key,add to github
