@@ -76,11 +76,20 @@ ssh -T git@github.com  # 验证
 提交内容将会有一个"已验证"标记
 
 ```sh
+sudo apt-get install gnupg # Debian / Ubuntu 环境
+yum install gnupg # Fedora 环境
 brew install gpg
+gpg --help
 
 gpg --gen-key
 
 gpg --list-key #公钥
+
+/home/ruanyf/.gnupg/pubring.gpg # 公钥文件名（pubring.gpg
+　　-------------------------------
+　　pub 4096R/EDDD6D76 2013-07-11  # 示公钥特征（4096位，Hash字符串和生成时间）
+　　uid Ruan YiFeng <yifeng.ruan@gmail.com> # 用户ID
+　　sub 4096R/3FA69BE4 2013-07-11 # 显示私钥特征 
 
 gpg --list-secret-keys --keyid-format LONG  # 获取GPG私钥 key ID  3AA5C34371567BD2
 sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
@@ -88,6 +97,8 @@ sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
 gpg --armor --export 3AA5C34371567BD2  # get the key,add to github
 
 git config --global user.signingkey 3AA5C34371567BD2 # git配置,commit生效
+
+git log --show-signature
 ```
 
 ### 个性化配置
