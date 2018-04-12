@@ -498,9 +498,9 @@ deploy your changes to verify them in production.If your branch causes issues, y
 ```shell
 git tag # 列出所有tag
 git tag [tag] # 新建一个tag在指定commit
-git tag -a v2.1 -m 'first version'  
+git tag -a v2.1 -m 'first version'
 git tag -l v1.* # 限定
-git tag -d [tag] 删除本地tag
+git tag -d [tag] # 删除本地tag
 git push origin :refs/tags/[tagName]   # 删除远程tag
 git show [tag]  # 查看tag信息
 git push [remote] [tag]  # 提交指定tag
@@ -514,6 +514,15 @@ git push origin --tags # 提交标签到GitHub中
 ```shell
 git archive
 ```
+
+## cherry-pick
+
+从develop分支新开的分支fromdevelop-01，然后commit两次，这时候develop分支只需要第二次提交的信息，步骤：
+
+* git checkout develop
+* git cherry-pick 第二次commitID
+* resolving the conflicts
+* add ,commit
 
 ## .gitignore
 

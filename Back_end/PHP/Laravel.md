@@ -135,7 +135,7 @@ php artisan db:seed 数据库生成模拟数据
 php artisan event:generate  生成event和listen  需要实现配置eventserviceprivoder
 php artisan make:command #  创建一个新的命令处理程序类 
 php artisan make:console #  生成一个Artisan命令 
-php artisan key:generate  设置程序密钥  
+php artisan key:generate  # 设置程序密钥   No supported encrypter found. The cipher and / or key length are invalid.
 php artisan make:controller # 生成一个资源控制类 
 php artisan make:middleware # 生成一个中间件 
 php artisan make:migration #  生成一个迁移文件  
@@ -147,29 +147,26 @@ php artisan make:migration #  生成一个迁移文件
 php artisan migrate:refresh # 复位并重新运行所有的迁移  
 php artisan migrate:reset # 回滚全部数据库迁移 
 php artisan migrate:rollback #  回滚最后一个数据库迁移 
-php artisan migrate:status  显示列表的迁移 
-php artisan queue:failed  列出全部失败的队列工作 
-php artisan queue:failed-table #  创建一个迁移的失败的队列数据库工作表  
-php artisan queue:flush 清除全部失败的队列工作 
+php artisan migrate:status  # 显示列表的迁移 
+php artisan queue:failed  # 列出全部失败的队列工作 
+php artisan queue:failed-table # 创建一个迁移的失败的队列数据库工作表  
+php artisan queue:flush # 清除全部失败的队列工作 
 php artisan queue:forget #  删除一个失败的队列工作 
 php artisan queue:listen #  监听一个确定的队列工作
-php artisan queue:restart 重启现在正在运行的所有队列工作 
-php artisan queue:retry 重试一个失败的队列工作 
-php artisan queue:subscribe 订阅URL,放到队列上 
-php artisan queue:table 创建一个迁移的队列数据库工作表 
-php artisan queue:work  进行下一个队列任务
+php artisan queue:restart # 重启现在正在运行的所有队列工作 
+php artisan queue:retry # 重试一个失败的队列工作 
+php artisan queue:subscribe # 订阅URL,放到队列上 
+php artisan queue:table # 创建一个迁移的队列数据库工作表 
+php artisan queue:work  # 进行下一个队列任务
 
 php artisan route:cache # 为了更快的路由登记，创建一个路由缓存文件
-| php artisan route:clear # 清除路由缓存文件
-| php artisan route:list # 列出全部的注册路由
-| php artisan schedule:run # 运行预定命令
-| php artisan session:table # 创建一个迁移的SESSION数据库工作表
-| php artisan vendor:publish # 发表一些可以发布的有用的资源来自提供商的插件包
-
-baum包命令
-php artisan baum |Get Baum version notice. 
+php artisan route:clear # 清除路由缓存文件
+php artisan route:list # 列出全部的注册路由
+php artisan schedule:run # 运行预定命令
+php artisan session:table # 创建一个迁移的SESSION数据库工作表
+php artisan vendor:publish # 发表一些可以发布的有用的资源来自提供商的插件包
+php artisan baum # Get Baum version notice. 
 php artisan baum:install # Scaffolds a new migration and model suitable for Baum
-
 ```
 
 ```php
@@ -1419,14 +1416,16 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 
 ## 参考
 
-- [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js. 
-- [快速入门 —— 使用 Laragon 在 Windows 中搭建 Laravel 开发环境](http://laravelacademy.org/post/7754.html)
-- [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
-- [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
-- [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
-- [laravel入门教程](https://d.laravel-china.org/docs/5.5) 
-- [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
-- [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)
+* [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js. 
+* [快速入门 —— 使用 Laragon 在 Windows 中搭建 Laravel 开发环境](http://laravelacademy.org/post/7754.html)
+* [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
+* [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
+* [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
+* [laravel入门教程](https://d.laravel-china.org/docs/5.5) 
+* [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
+* [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)
+* [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
+* [Laravel5.5 + Vue开发单页应用](http://www.laravel-vue.xyz/2018/03/22/laravel_vue_v2/)
 
 ## 文档
 
@@ -1524,7 +1523,6 @@ php artisan jwt:secret # 使用
   - 创建api请求
   - 页面创建
 
-## 参考
+## 问题
 
-* [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
-* [Laravel5.5 + Vue开发单页应用](http://www.laravel-vue.xyz/2018/03/22/laravel_vue_v2/)
+Call to undefined function openssl_encrypt() # 开启OpenSSL扩展
