@@ -40,7 +40,10 @@
 
 ### 阅读分类：概念用文档整理，结构化用思维导图（不宜太详细）
 
-* feedly：博客阅读与整理，导出订阅https://feedly.com/i/opml
+* RSS(Really Simple Syndication)
+  - The Old Reader
+  - Feedly:博客阅读与整理，导出订阅https://feedly.com/i/opml
+  - Inoreader
 * youdaonote ：格式化笔记
 * simplenote：简单笔记（无格式）
 * xmind：结构化整理
