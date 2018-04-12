@@ -24,6 +24,10 @@
 * command + shift + n：打开输入的文件
 * command + e :最近文件
 
+## version control
+
+phpstrom 添加版本信息分组:名词，提交时添加动词
+
 ## 参考
 
 * [](https://confluence.jetbrains.com/display/PhpStorm)
