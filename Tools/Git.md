@@ -94,11 +94,13 @@ gpg --list-key #公钥
 gpg --list-secret-keys --keyid-format LONG  # 获取GPG私钥 key ID  3AA5C34371567BD2
 sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
 
-gpg --armor --export 3AA5C34371567BD2  # get the key,add to github
+gpg --armor --export 3AA5C34371567BD2  # get the public key,add to github
 
 git config --global user.signingkey 3AA5C34371567BD2 # git配置,commit生效
 
 git log --show-signature
+
+gpg --delete-key [用户ID]
 ```
 
 ### 个性化配置
