@@ -84,17 +84,16 @@ gpg --help
 gpg --gen-key
 
 gpg --list-key #公钥
-
 /home/ruanyf/.gnupg/pubring.gpg # 公钥文件名（pubring.gpg
-　　-------------------------------
-　　pub 4096R/EDDD6D76 2013-07-11  # 示公钥特征（4096位，Hash字符串和生成时间）
-　　uid Ruan YiFeng <yifeng.ruan@gmail.com> # 用户ID
-　　sub 4096R/3FA69BE4 2013-07-11 # 显示私钥特征 
+-------------------------------
+pub 4096R/EDDD6D76 2013-07-11  # 公钥特征（4096位，Hash字符串和生成时间）
+uid Ruan YiFeng <yifeng.ruan@gmail.com> # 用户ID
+sub 4096R/3FA69BE4 2013-07-11 # 显示私钥特征 
 
 gpg --list-secret-keys --keyid-format LONG  # 获取GPG私钥 key ID  3AA5C34371567BD2
 sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
 
-gpg --armor --export 3AA5C34371567BD2  # get the public key,add to github
+gpg --armor --export 3AA5C34371567BD2 # get the public key,add to github
 
 git config --global user.signingkey 3AA5C34371567BD2 # git配置,commit生效
 
@@ -975,10 +974,28 @@ Git extension for versioning large files https://git-lfs.github.com
 git lfs install
 git lfs track "*.zip"
 git add .gitattributes
-$ git add my.zip
-$ git commit -m "add zip"
+git add my.zip
+git commit -m "add zip"
 git lfs ls-files
 git push origin master
+```
+
+## [kennethreitz/legit](https://github.com/kennethreitz/legit)
+
+```python
+pip3 install legit
+
+switch <branch>
+Switches to specified branch. Defaults to current branch. Automatically stashes and unstashes any changes. (alias: sw)
+sync [<branch>]
+Synchronizes the given branch. Defaults to current branch. Stash, Fetch, Auto-Merge/Rebase, Push, and Unstash. You can only sync published branches. (alias: sy)
+publish [<branch>]
+Publishes specified branch to the remote. (alias: pub)
+unpublish <branch>
+Removes specified branch from the remote. (alias: unp)
+undo
+Un-does the last commit in git history. (alias: un)
+branches
 ```
 
 ## 扩展
@@ -989,7 +1006,8 @@ git push origin master
 
 ## 参考
 
-* [文档](https://git-scm.com/docs) 
+* [文档](https://git-scm.com/docs)
+* [中文](https://git-scm.com/book/zh/v2)
 * [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
 * attributes   Defining attributes per path
 * everyday     Everyday Git With 20 Commands Or So
