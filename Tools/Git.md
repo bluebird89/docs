@@ -504,7 +504,7 @@ git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录
 git checkout . # 提交过版本库，但未提交至暂存区的文件（未执行 git add) 此类文件的状态为 Changes not staged for commit
 git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be committed
 ```
-
+hello 
 
 #### 标签
 
