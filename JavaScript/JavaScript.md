@@ -2643,3 +2643,4 @@ WebAssembly 已得到所有主流浏览器支持
 * [loiane/javascript-datastructures-algorithms](https://github.com/loiane/javascript-datastructures-algorithms/tree/second-edition):source code bundle of JavaScript algorithms and data structures book https://goo.gl/hrb00r
 * [ECMAScript 6 扫盲](http://www.cnblogs.com/hustskyking/p/a-kickstarter-guide-to-writing-es6.html)
 * [JavaScript异步编程原理](http://www.cnblogs.com/hustskyking/p/javascript-asynchronous-programming.html)
+* [DMQ/mvvm](https://github.com/DMQ/mvvm):剖析vue实现原理，自己动手实现mvvm
