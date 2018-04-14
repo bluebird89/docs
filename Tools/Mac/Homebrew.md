@@ -57,6 +57,7 @@ brew cleanup #清除下载的缓存
 brew info * # 显示软件内容信息
 brew deps * # 显示包依赖
 brew server * # 启动web服务器，可以通过浏览器访问http://localhost:4567/ 来同网页来管理包
+brew link --force openssl # 链接新的openssl到环境变量中
 
 brew install tig
 

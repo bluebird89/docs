@@ -12,15 +12,29 @@ wget https://github.com/swoole/swoole-src/archive/v1.10.2.zip
 tar zxvf v1.10.2.zip
 cd swoole
 phpize
-./configure
+./configure  --enable-openssl --enable-async-redis --with-php-config=/Applications/MAMP/bin/php/php7.1.0/bin/php-config    --prefix=/usr/local   CPPFLAGS="-I/usr/local/opt/openssl/include"  LDFLAGS="-L/usr/local/opt/openssl/lib" --enable-swoole-debug
 make 
 sudo make install # 编译后的模块在 /modules 中，将swoole.so添加到php.ini中
 extension=swoole.so
 
 pecl install swoole
 
+cp -R /usr/local/Cellar/openssl/1.0.2o_1/include/openssl /usr/local/include # fatal error: 'openssl/ssl.h' file not found #include <openssl/ssl.h>
+    # Enable http2 support, require nghttp2 library.
+brew install hiredis # fatal error: 'hiredis/hiredis.h'
 
+brew install swoole
 ```
+
+## 基础
+
+多线程编程
+
+进程间通信
+
+网络协议TCP/UDP的认知
+
+PHP的各项基本技能
 
 ## 资料
 

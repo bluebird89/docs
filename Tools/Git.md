@@ -66,8 +66,9 @@ git config -l                       # 列举所有配置
 * 公钥添加到github账户
 
 ```sh
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/github
+ssh-add -K ~/.ssh/github # 如果不是默认密钥 id_rsa ，则需要以下命令注册密钥文件，-K 参数将密钥存入 Mac Keychain
+cat ~/.ssh/github.pub 
 ssh -T git@github.com  # 验证
 ```
 
@@ -461,11 +462,13 @@ git fetch origin master # 拉取指定分支的变化
 git fetch # 拉取所有分支的变化
 git fetch -p # 拉取所有分支的变化，并且将远端不存在的分支同步移除
 
-git remote -v 显示所有远程仓库
+git config get --remote.origin.url
+git remote -v
+git remote show origin # 显示所有远程仓库
 git remote show [remote] # 显示某个远程仓库的信息
 git remote add [shortname] [url] 增加一个新的远程仓库，并命名
 git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 设置远程仓库地址(用于修改远程仓库地址)
-git remote rm <主机名> # 用于删除远程主机
+git remote rm <主机名> # 删除 origin 仓库信息
 git remote rename <原主机名> <新主机名> # 用于远程主机的改名
 
 git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
@@ -1013,6 +1016,18 @@ branches
 ### tig
 
 * [jonas/tig](https://github.com/jonas/tig):text-mode interface for git
+
+### [arzzen/git-quick-stats](https://github.com/arzzen/git-quick-stats)
+
+Git quick statistics is a simple and efficient way to access various statistics in git repository.
+
+```sh
+brew install git-quick-stats
+
+git quick-stats
+# or 
+git-quick-stats
+```
 
 ## 参考
 
