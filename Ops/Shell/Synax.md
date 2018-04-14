@@ -8,3 +8,10 @@ if ! command; then echo "command failed"; exit 1; fi
 command
 if [ "$?" -ne 0 ]; then echo "command failed"; exit 1; fi
 ```
+
+## 端口占用
+
+```sh
+netstat -an | grep 3306
+lsof -i:80 # -i参数表示网络链接，:80指明端口号
+```

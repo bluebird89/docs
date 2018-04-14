@@ -203,12 +203,13 @@ iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配�
 - 已开应用之间的切换 --> Command+tab / Command+tab 选中后+Option 强制恢复窗口
 - 程序内tab切换：⌃ + tab ⌘+⌥+←, ⌘+⌥+→, ⌘+⌥+{, ⌘+⌥+}。⌘+数字直接定位到该 tab；
 - 新建 tab：⌘+t
-- 强制退出 -->Command+Option+Esc
-- 回到桌面 -->F11
+- Command+Option+Esc:强制退出
+- F11: 回到桌面
 - 设置触发角 -->系统偏好 － Mission Control
 - 隐藏DOCK -->Command+Option+D
 - 按着Option键 -->如关机时免再确认一次
 - Shift+Control+ 推出键:锁屏键
+- command + l 进入地址栏
 
 #### 系统功能
 
