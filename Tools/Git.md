@@ -496,6 +496,16 @@ git push origin --delete dev :删除远程分支
 
 deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
 
+#### 撤销
+
+
+```sh
+git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
+git checkout . # 提交过版本库，但未提交至暂存区的文件（未执行 git add) 此类文件的状态为 Changes not staged for commit
+git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be committed
+```
+
+
 #### 标签
 
 ```shell
