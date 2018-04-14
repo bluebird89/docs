@@ -1532,7 +1532,7 @@ spl_autoload_register('autoload');
 
 ## 图书
 
-* [PHP: The Right Way](http://www.phptherightway.com/)
+* [PHP: The Right Way](http://www.phptherightway.com/) [PHP: The Right Way](https://github.com/codeguy/php-the-right-way)
 * [reeze/tipi](https://github.com/reeze/tipi):Thinking In PHP Internals, An open book on PHP Internals http://www.php-internals.com/
 * Morden php
 * https://www.phparch.com/magazine/
