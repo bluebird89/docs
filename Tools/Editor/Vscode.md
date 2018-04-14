@@ -13,8 +13,9 @@
 
 ### 快捷键
 
-```
-// general
+
+> general
+
 ⇧⌘P, F1 Show Command Palette
 ⌘P Quick Open, Go to File…
 ⇧⌘N New window/instance
@@ -22,7 +23,8 @@
 ⌘, User Settings
 ⌘K ⌘S Keyboard Shortcuts
 
-// Basic editing
+> Basic editing
+
 ⌘X Cut line (empty selection)
 ⌘C Copy line (empty selection)
 ⌥↓ / ⌥↑ Move line down/up
@@ -44,7 +46,8 @@ Home / End Go to beginning/end of line
 ⇧⌥A Toggle block comment
 ⌥Z Toggle word wrap
 
-// Multi-cursor and selection
+> Multi-cursor and selection
+
 ⌥ + click Insert cursor
 ⌥⌘↑ Insert cursor above
 ⌥⌘↓ Insert cursor below
@@ -60,14 +63,17 @@ Home / End Go to beginning/end of line
 ⇧⌥⌘PgUp Column (box) selection page up
 ⇧⌥⌘PgDn Column (box) selection page down
 
-Search and replace
+> Search and replace
+
 ⌘F Find
 ⌥⌘F Replace
 ⌘G / ⇧⌘G Find next/previous
 ⌥Enter Select all occurrences of Find match
 ⌘D Add selection to next Find match
 ⌘K ⌘D Move last selection to next Find match
-Rich languages editing
+
+> Rich languages editing
+
 ⌃Space Trigger suggestion
 ⇧⌘Space Trigger parameter hints
 ⇧⌥F Format document
@@ -80,7 +86,9 @@ F12 Go to Definition
 F2 Rename Symbol
 ⌘K ⌘X Trim trailing whitespace
 ⌘K M Change file language
-Navigation
+
+> Navigation
+
 ⌘T Show all Symbols
 ⌃G Go to Line...
 ⌘P Go to File...
@@ -90,7 +98,9 @@ F8 / ⇧F8 Go to next/previous error or warning
 ⌃⇧Tab Navigate editor group history
 ⌃- / ⌃⇧- Go back/forward
 ⌃⇧M Toggle Tab moves focus
-Editor management
+
+> Editor management
+
 ⌘W Close editor
 ⌘K F Close folder
 ⌘\ Split editor
@@ -99,7 +109,9 @@ st, 2nd, 3rd editor group
 ⌘K ⌘← / ⌘K ⌘→ Focus into previous/next editor group
 ⌘K ⇧⌘← / ⌘K ⇧⌘→ Move editor left/right
 ⌘K ← / ⌘K → Move active editor group
-File management
+
+> File management
+
 ⌘N New File
 ⌘O Open File...
 ⌘S Save
@@ -114,7 +126,9 @@ File management
 ⌘K P Copy path of active file
 ⌘K R Reveal active file in Explorer
 ⌘K O Show active file in new window/instance
-Display
+
+> Display
+
 ⌃⌘F Toggle full screen
 ⌥⌘1 Toggle editor layout (horizontal/vertical)
 ⌘= / ⇧⌘- Zoom in/out
@@ -130,50 +144,39 @@ Display
 ⇧⌘V Open Markdown preview
 ⌘K V Open Markdown preview to the side
 ⌘K Z Zen Mode (Esc Esc to exit)
-Debug
+
+> Debug
+
 F9 Toggle breakpoint
 F5 Start/Continue
 F11 / ⇧F11 Step into/ out
 F10 Step over
 ⇧F5 Stop
 ⌘K ⌘I Show hover
-Integrated terminal
+
+> Integrated terminal
+
 ⌃` Show integrated terminal
 ⌃⇧` Create new terminal
 ⌘C Copy selection
 ⌘↑ / ↓ Scroll up/down
 PgUp / PgDn Scroll page up/down
 ⌘Home / End Scroll to top/bottom
-
-
 ⇧⌥⌘↓, ⇧⌥⌘→, ⇧⌥⌘↑, ⇧⌥⌘←   Box Selection 
-```
 
 ### CLI tool
 
 Open the Command Palette (F1) and type "shell command". Hit enter to execute Shell Command: Install 'code' command in PATH.
 
 ```sh
-# open code with current directory
-code .
-
-# open the current directory in the most recently used code window
-code -r .
-
-# create a new window
-code -n
-
-# change the language
-code --locale=es
-
-# open diff editor
-code --diff <file1> <file2>
-
-# see help options
-code --help
-
-# disable all extensions
-code --disable-extensions .
+code --help # see help options
+code . # open code with current directory
+code pro6.js pro6.scss ../ 
+code -r . # open the current directory in the most recently used code window
+code -n # create a new window
+code --locale=es # change the language
+code --diff <file1> <file2> # open diff editor
+code --disable-extensions . # disable all extensions
 ```
 
 ## 扩展
