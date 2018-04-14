@@ -11,6 +11,33 @@ yum install net-tools
 sudo yum install epel-release # add the CentOS 7 EPEL repository
 ```
 
+## 软件源管理
+
+```sh
+# 配置本地yum源
+cd /etc/yum.repos.d/   #进入yum配置目录
+touch  rhel-media.repo   #建立yum配置文件
+vi  rhel-media.repo   #编辑配置文件，添加以下内容
+
+[rhel-media]
+name=Red Hat Enterprise Linux 7.0   #自定义名称
+baseurl=file:///media/cdrom #本地光盘挂载路径
+enabled=1   #启用yum源，0为不启用，1为启用
+gpgcheck=1  #检查GPG-KEY，0为不检查，1为检查
+gpgkey=file:///media/cdrom/RPM-GPG-KEY-redhat-release   #GPG-KEY路径
+
+yum clean all   #清除yum缓存
+yum makecache  #缓存本地yum源中的软件包信息
+
+yum install httpd   #安装apache
+rpm -ql httpd  #查询所有安装httpd的目录和文件
+
+systemctl start httpd.service  #启动apache
+systemctl stop httpd.service  #停止apache
+systemctl restart httpd.service  #重启apache
+systemctl enable httpd.service  #设置开机启动
+```
+
 ## nginx
 
 ```
