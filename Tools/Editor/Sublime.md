@@ -29,14 +29,14 @@ brew cask install sublime-text
 
 配置说明(文件以对象.功能命名）:settin分default user package,包配置优先级最高
 
-- Packages文件目录：Preferences > Browse Packages 打开文件夹 Installed Packages 下看到所安装的各类包,windows中~\AppData\Roaming\Sublime Text 3\Packages\User
-- [配置同步:同步Packages/User文件夹](https://packagecontrol.io/docs/syncing)
-- 用户配置Preferences.sublime-settings： Preferences > setting
-- 包管理文件：Package Control.sublime-settings
-- 插件管理文件：
-- 主题目录识别：在包文件下Theme - Monokai Pro
-- 自定义快捷键Default (Windows).sublime-keymap:Preferences -> Key Bindings - Users
-- 代码片段
+* Packages文件目录：Preferences > Browse Packages 打开文件夹 Installed Packages 下看到所安装的各类包,windows中~\AppData\Roaming\Sublime Text 3\Packages\User
+* [配置同步:同步Packages/User文件夹](https://packagecontrol.io/docs/syncing)
+* 用户配置Preferences.sublime-settings： Preferences > setting
+* 包管理文件：Package Control.sublime-settings
+* 插件管理文件：
+* 主题目录识别：在包文件下Theme - Monokai Pro
+* 自定义快捷键Default (Windows).sublime-keymap:Preferences -> Key Bindings - Users
+* 代码片段
 
 ```shell
 # 通过云端工具git 网盘
@@ -456,26 +456,6 @@ Test: ${5:Nested ${6:Placeholder}}
     <!-- Optional: Set a scope to limit where the snippet will trigger -->
     <scope>source.python</scope>
 </snippet>
-```
-
-### Emmet
-
-```
-html:5 或!：用于HTML5文档类型
-html:xt：用于XHTML过渡文档类型
-html:4s：用于HTML4严格文档类型
-
-p#foo 补充ID
-p.foo 补充类
-h1{foo} 和 a[href=#] 为h1和a标签
-
->：子元素符号，表示嵌套的元素
-+：同级标签符号
-^：可以使该符号前的标签提升一行
-
-(.foo>h1)+(.bar>h2) 
-ul>li*3
-ul>li.item$*3
 ```
 
 ### 快捷键

@@ -109,6 +109,10 @@ gpg --delete-key [用户ID]
 理解每个指令的原理，从操作流程理解命令`git config --global alias.st status`
 
 ```
+git config --global alias.ls 'log --name-status --oneline --graph'
+git config --global rebase.autoStash true
+git config --global alias.st 'status --porcelain'
+
 [user]
 email = liboming88@yeah.net
 name = Henryli
@@ -340,12 +344,14 @@ git checkout -- files # 将部分代码文件回滚
 git reset --hard b14bb52 # 会将提交记录和代码全部回滚
 git reset --keep [commit] 重置当前HEAD为指定commit，但保持暂存区和工作区不变
 git revert [commit] 新建一个commit，用来撤销指定commit,后者的所有变化都将被前者抵消，并且应用到当前分支
-git reset HEAD:拉回历史版本
-git stash - 将尚未完成需要保存的工作暂存到stash 中
-git stash list - 查看stash中有哪些内容
-git stash apply - 恢复stash内容到工作区，但是并不删除stash中的内容
-git stash drop - 删除stash中的内容
-git stash pop - 恢复stash内容到工作区，并删除stash中的内容
+git reset HEAD #拉回历史版本
+git stash # 将当前工作状态（WIP，work in progress）临时存放在 stash 队列中,注意：未提交到版本库的文件会自动忽略，只要不运行 git clean -fd . 就不会丢失
+git stash list # 查看 stash 队列中已暂存了多少 WIP
+git stash apply # 恢复stash内容到工作区，但是并不删除stash中的内容
+git stash drop # 删除stash中的内容
+git stash pop # 恢复上一次的 WIP 状态，并从队列中移除
+git stash pop stash@{num} # 恢复指定编号的 WIP，同时从队列中移除
+git stash apply stash@{num} # 恢复指定编号的 WIP，但不从队列中移除
 
 git pull                         # 抓取远程仓库所有分支更新并合并到本地
 git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并
@@ -377,13 +383,11 @@ git rebase --abort
 ![diff](../_static/diff.svg "diff")
 
 ```shell
-git stutus:查看本地的代码状态,工作树与暂存区的文件对比差别,显示有变更的文件
-
-git show [$id]:显示某次提交的内容
-
-git diff :查看执行 git status 的结果的详细信息
-git diff --staged:暂存区与最新一次提交之间的差别
-git diff HEAD:本次提交与上次提交之间的区别
+git stutus # 查看本地的代码状态,工作树与暂存区的文件对比差别,显示有变更的文件
+git show [$id] # 显示某次提交的内容
+git diff # 查看执行 git status 的结果的详细信息
+git diff --staged # 暂存区与最新一次提交之间的差别
+git diff HEAD # 本次提交与上次提交之间的区别 HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
 git log --oneline  --graph --reverse  --author=Linus --oneline -5  -before={3.weeks.ago} --after={2010-04-18} --no-merges:显示当前分支的版本历史
 git log --graph --pretty=oneline --abbrev-commit （仅展示commit信息的图形化分支）
 git log --stat 显示commit历史，以及每次commit发生变更的文件
@@ -409,7 +413,7 @@ git reflog # 显示当前分支的最近几次提交,
 git log -3
 git log --since=yesterday
 git blame filename:查看文件中每行的操作时间
-HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
+git log --name-status --oneline 
 ```
 
 使用 git reset --hard commitID 把本地开发代码回滚到了一个之前的版本，而且还没有推到远端，怎么才能找回丢失的代码呢？ 你如果使用 git log 查看提交日志，并不能找回丢弃的那些 commitID。 而 git reflog 却详细的记录了你每个操作的 commitID，可以轻易的让你复原当时的操作并且找回丢失的代码。
@@ -485,7 +489,7 @@ git push <remote repository name> <branch name>（第一次 git push -u：-u 选
 git push <remote name> <local branch name:remote branch name>
 git push                         # push所有分支
 git push origin master           # 将本地主分支推到远程主分支
-git push -u origin master        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)
+git push -u origin master        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库) 设置本地分支与远程分支保持同步，在第一次 git push 的时候带上 -u 参数即可
 git push origin <local_branch>   # 创建远程分支， origin是远程仓库名
 git push origin <local_branch>:<remote_branch>  # 创建远程分支
 git push origin :<remote_branch>  #先删除本地分支(git branch -d <branch>)，然后再push删除远程分支
@@ -502,9 +506,18 @@ deploy your changes to verify them in production.If your branch causes issues, y
 ```sh
 git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
 git checkout . # 提交过版本库，但未提交至暂存区的文件（未执行 git add) 此类文件的状态为 Changes not staged for commit
-git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be committed
+git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be 
+git log
+git reset <版本号>
+git reset head~1
+git reflog # 回滚后再还原
+
+# 冲突
+git checkout --ours <文件名> # 使用当前分支 HEAD 版本
+git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的 >>>>>>> 标记部分
+git add <文件名> # # 标记为解决状态加入暂存区
+git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge 
 ```
-hello 
 
 #### 标签
 
@@ -512,8 +525,10 @@ hello
 git tag # 列出所有tag
 git tag [tag] # 新建一个tag在指定commit
 git tag -a v2.1 -m 'first version'
+git push origin v2.1
 git tag -l v1.* # 限定
 git tag -d [tag] # 删除本地tag
+git push origin --delete v1.0.0 # 
 git push origin :refs/tags/[tagName]   # 删除远程tag
 git show [tag]  # 查看tag信息
 git push [remote] [tag]  # 提交指定tag
@@ -612,6 +627,22 @@ git push origin master// 精简版 合并到 master
 git checkout qixiu/newFeature
 git pull -r origin master # 将master的代码更新下来，并且rebase处理冲突
 git push origin master # 将本地代码更新到远端
+```
+
+
+### 习惯
+
+在开始修改代码前先 git pull 一下；
+将业务代码进行划分，尽量不要多个人在同一时间段修改同一文件；
+通过 Gitflow 工作流 也可以提升 git 流程效率，减少发生冲突的可能性。
+git pull --rebase 可以让分支的代码和 origin 仓库的代码保持兼容，同时还不会破坏线上代码的可靠性。
+
+```sh
+git pull --rebase # 将当前分支的版本追加到从远程 pull 回来的节点之后
+git rebase --continue # 若发生冲突，则按以上其他方法进行解决，解决后继续
+git push origin # 直到所有冲突得以解决，待项目最后上线前再执行
+git rebase --skip # 若多次提交修改了同一文件，可能需要直接跳过后续提交，按提示操作即可
+git pull --rebase --autostash
 ```
 
 ## 工作流
