@@ -23,26 +23,26 @@ export TERM=xterm-color
 // 注: 只对各个用户自己的主目录下的.vimrc修改的话，修改内容只对本用户有效,要想全部有效，可以修改 /etc/vimrc           同样的 /etc/bashrc 是针对所有用户的启动文件
 
 /* 以下是 ~/.vimrc 文件的内容 */
-set nonumber    "不设置行号
-set shell=/bin/bash        "设置shell环境
-syntax on        "开启vim语法高亮
-colorscheme desert        "设置主题色
+set nonumber # 不设置行号
+set shell=/bin/bash     # 设置shell环境
+syntax on     # 开启vim语法高亮
+colorscheme desert     # 设置主题色
 set background=dark
-set autoindent        "设置自动缩进
-set nocompatible        "不向下兼容vi
-set showmatch         "开启括号匹配
-"set cursorline        "光标所在行高亮
-set ruler        "设置标尺
-set laststatus=2        "开启状态栏（默认是1）
-set smartindent        "开启新航时使用智能自动缩进
-set hlsearch        "搜索时高亮显示找到的文本    
-set wrap        "设置自动换行
-set tabstop=4        "设置缩进为4个空格
+set autoindent     # 设置自动缩进
+set nocompatible     # 不向下兼容vi
+set showmatch      # 开启括号匹配
+set cursorline     # 光标所在行高亮
+set ruler     # 设置标尺
+set laststatus=2     # 开启状态栏（默认是1）
+set smartindent     # 开启新航时使用智能自动缩进
+set hlsearch     # 搜索时高亮显示找到的文本    
+set wrap     # 设置自动换行
+set tabstop=4     # 设置缩进为4个空格
 set softtabstop=4
 set shiftwidth=4
-filetype on        "检测文件类型
-set history=500        "设置历史行数
-set smartindent        "理想添加 依据上面的格式自动对齐
+filetype on     # 检测文件类型
+set history=500     # 设置历史行数
+set smartindent     # 理想添加 依据上面的格式自动对齐
 
 ls /usr/share/vim/vim72/colors/        可以查看vim支持的主题色
 
@@ -106,7 +106,7 @@ zsh # 切换zsh
 bash # 切换 bash
 ```
 
-- 配置： home目录的.zshrc(不用单配，插件配置有)
+> 配置： home目录的.zshrc(不用单配，插件配置有)
 
 ```
 alias cls='clear'
@@ -135,19 +135,18 @@ alias gst='git status'
 alias sublime='open -a "Sublime Text"' //加入Sublime Text
 ```
 
-  - 主题设置：ZSH_THEME="robbyrussell"（文件在~/.oh-my-zsh/themes）
+> 主题设置：ZSH_THEME="robbyrussell"（文件在~/.oh-my-zsh/themes）
 
 ```
 PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}>'
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 ```
 
-- 插件：追加：plugins=(git textmate ruby autojump osx mvn gradle)
+> 插件：追加：plugins=(git textmate ruby autojump osx mvn gradle)
 
   - autojump
 
     brew install autojump 或者 git clone git://github.com/joelthelion/autojump.git ./install.py 添加[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh到.zshrc
-
 - 使用：
 
   - 跳转目录： j + 目录名
@@ -175,7 +174,7 @@ fish # 启动
 help # 手册
 ```
 
-配置文件：~/.config/fish/config.fish或者fish_config
+> 配置文件：~/.config/fish/config.fish或者fish_config
 
 ```
 if grep fish /etc/shells
@@ -220,7 +219,7 @@ end
 
 所有操作都通过键盘，只适合命令行的重度用户.用来管理软件窗口的位置和大小，会自动在桌面上平铺（tiling）窗口。桌面环境通常很重，窗口管理器就很轻，不仅体积小，资源占用也少，用户可以配置各种细节，释放出系统的最大性能。
 
-- 安装
+> 安装
 
 ```sh
   sudo apt-get install xmonad
@@ -229,7 +228,7 @@ end
 
 配置文件:～/.xmonad/xmonad.hs。该文件需要用户自己新建 modMask = mod4Mask
 
-使用
+> 使用
 
 - 退出当前会话,通过xmonad 会话重新登录,有默认的功能键mod(alt)
 - 打开终端:mod + shift + return 新窗口总是独占主栏，旧窗口平分副栏
