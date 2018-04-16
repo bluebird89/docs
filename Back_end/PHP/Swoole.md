@@ -36,6 +36,11 @@ brew install swoole
 
 PHP的各项基本技能
 
+
+## 工具
+
+* [eaglewu/swoole-ide-helper](Auto completion, trigger suggest and view docs for Swoole in editor):Put the source code path into Include Path in IDE.
+
 ## 资料
 
 - [Concise Guide to Swoole文档](https://linkeddestiny.gitbooks.io/easy-swoole/content/)

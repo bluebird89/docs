@@ -1001,6 +1001,7 @@ git submodule update
 git subtree 对于部分需要双向更新的可复用逻辑来说，特别适合管理.比如一些需要复用的业务组件代码。在我之前的实践中，我也曾用subtree来管理构建系统逻辑。
 
 Merge subtrees together and split repository into subtrees
+
 [文档](https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt)
 
 ```shell
@@ -1252,3 +1253,7 @@ These features allow to pause a branch development and switch to another one (_"
 
 * msysgit
 * sourcetree
+
+## 学习
+
+* [练习沙盒](https://try.github.io)

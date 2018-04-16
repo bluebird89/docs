@@ -11,7 +11,19 @@ sudo rm ~/.emacs.d/
 git clone https://github.com/purcell/emacs.d.git ~/.emacs.d
 ```
 
-## #
+### [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs)
+
+A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! http://spacemacs.org
+
+```sh
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
+brew linkapps emacs-plus
+
+emacs --insecure
+```
+
+##
 
 C代表Ctrl键，M代表Alt键，RET表示Enter键
 
