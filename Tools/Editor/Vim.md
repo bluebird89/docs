@@ -489,27 +489,18 @@ r       对单词字符进行替换
 J       合并上下两行
 ```
 
-### neovim
+### [neovim/neovim](https://github.com/neovim/neovim)
+
+Vim-fork focused on extensibility and usability https://salt.bountysource.com/teams/n…
 
 ```sh
 brew install neovim
-```
 
-### [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs)
-
-A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! http://spacemacs.org
-
-```sh
-brew tap d12frosted/emacs-plus
-brew install emacs-plus
-brew linkapps emacs-plus
-
-emacs --insecure
+nvim # 启动
 ```
 
 ## 配置
 
-* [neovim/neovim](https://github.com/neovim/neovim):Vim-fork focused on extensibility and usability https://salt.bountysource.com/teams/n…
 * [amix/vimrc](https://github.com/amix/vimrc):The ultimate Vim configuration: vimrc
 * [Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe):A code-completion engine for Vim http://valloric.github.io/YouCompleteMe/
 * [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim):Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
