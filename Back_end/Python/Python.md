@@ -41,11 +41,11 @@ brew install python3
 PATH="/System/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
 export PATH
 
-PATH="/usr/local/Cellar/python3/3.6.4_2/bin:$PATH"
-export PATH
+# 修改系统默认python版本
+export PATH="/usr/local/Cellar/python/3.6.5/bin:$PATH"
+alias python="/usr/local/Cellar/python/3.6.5/bin/python3.6"
 
-PATH="/Users/henry/anaconda/bin:$PATH" # 优先级最高
-export PATH
+export PATH="/Users/henry/anaconda/bin:$PATH" # 优先级最高
 
 sudo rm -R /System/Library/Frameworks/Python.framework/Versions/2.7
 sudo mv /Library/Frameworks/Python.framework/Versions/3.6 /System/Library/Frameworks/Python.framework/Versions
@@ -60,15 +60,7 @@ sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/pydoc3.6
 sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6 /usr/bin/python
 sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/pythonw3.6 /usr/bin/pythonw
 sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6m-config /usr/bin/python-config
-im ~/.bash_profile (只要能编辑就行) 插入新的Python路径
-
-# Setting PATH for Python 3.6
-
-# The orginal version is saved in .bash_profile.pysave
-PATH="/System/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
-export PATH
-
-source ~/.bash_profile
+vim ~/.bash_profile # (只要能编辑就行) 插入新的Python路径
 
 pip3 install --upgrade pip setuptools wheel
 ```
@@ -157,6 +149,7 @@ pip show --files Package        # 查看安装包时安装了哪些文件
 pip uninstall Package           # 卸载软件包
 pip search Package              # 搜索软件包
 pip install --upgrade/-U Package        # 升级软件包
+pip install --upgrade pip
 
 pip freeze > requirements.txt        # 导出 //Requirements文件 一般记录的是依赖软件列表，通过pip可以一次性安装依赖软件包:
 pip install -r requirements.txt         # 安装

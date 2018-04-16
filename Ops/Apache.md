@@ -30,7 +30,7 @@
 
 ## 安装
 
-### windows
+>  windows
 
 * apache2运行于系统服务中。
 * 将bin目录添加到系统变量：Path中添加 apache2/bin(需要重启命令行客户端)
@@ -42,7 +42,7 @@ net start apache2 # 服务管理
 net stop apache2
 ```
 
-### mac
+> mac
 
 系统本身带有apache2
 
@@ -59,6 +59,51 @@ httpd -t
 sudo httpd -k start
 sudo httpd -k stop
 sudo apachectl -k restart
+```
+
+> ubuntu
+
+```sh
+sudo apt-get install apache2
+
+sudo mkdir -p /var/www/unixmen1.local/public_html
+sudo chown -R $USER:$USER /var/www/unixmen1.local/public_html/
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/unixmen1.local.conf
+
+<VirtualHost *:80>
+# The ServerName directive sets the request scheme, hostname and port that
+# the server uses to identify itself. This is used when creating
+# redirection URLs. In the context of virtual hosts, the ServerName
+# specifies what hostname must appear in the request's Host: header to
+# match this virtual host. For the default virtual host (this file) this
+# value is not decisive as it is used as a last resort host regardless.
+# However, you must set it for any further virtual host explicitly.
+#ServerName www.example.com
+ 
+ServerAdmin webmaster@unixmen2.local
+ServerName unixmen2.local
+ServerAlias www.unixmen2.local
+DocumentRoot /var/www/unixmen2.local/public_html
+ 
+# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+# error, crit, alert, emerg.
+# It is also possible to configure the loglevel for particular
+# modules, e.g.
+#LogLevel info ssl:warn
+ 
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+ 
+# For most configuration files from conf-available/, which are
+# enabled or disabled at a global level, it is possible to
+# include a line for only one particular virtual host. For example the
+# following line enables the CGI configuration for this host only
+# after it has been globally disabled with "a2disconf".
+#Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+
+sudo service apache2 restart
+sudo vi /etc/hosts
 ```
 
 ### 配置
