@@ -902,6 +902,7 @@ If you are using _Markdown2_ with the `wiki-tables` extra activated you should s
 
 - MWeb Lite
 - MacDow：MWeb 是专业的 Markdown 写作、记笔记、静态博客生成软件。然后这里**重点说明**一下：MWeb 有**两个模式**，外部模式和文档库模式。外部模式中把本地硬盘或 Dropbox 等网盘的文件夹引入，就可以使用 MWeb 的拖拽、粘贴插入图片、图床等特色功能。文档库模式设计为用于记笔记和静态博客生成。对于有**同步和协作需求**的朋友，请使用外部模式！使用视图菜单或者快捷键 `CMD + E` 可以打开外部模式，`CMD + L` 可以打开文档库。左边的第一第二栏是使用**右键**和底部的几个按钮操作，另外就是右上角有三个按钮了（外部模式是两个），快捷键分别是：`CMD + 7/8/9`。
+- [marktext/marktext](https://github.com/marktext/marktext):📝Next generation markdown editor, running on platforms of MacOS Windows and Linux. https://marktext.github.io/website/ `brew cask install mark-text`
 
 ### writing on MWeb MWeb 写作使用说明
 
@@ -941,11 +942,9 @@ Markdown 语法： **Example:**
 * 快捷键：`CMD + 4` 是在编辑器/预览模式和三栏模式中切换。
 * 快捷键：`CMD + R` 是在编辑器和预览模式中切换。
 
-
 ###  编辑器插件
 
 #### sublime插件
-
 
 - Markdown Preview：预览
 - MarkdownEditing：代码提示

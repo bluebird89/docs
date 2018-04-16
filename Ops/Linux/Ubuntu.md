@@ -114,7 +114,7 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 * oh my zsh 而非 zsh fish
 * KchmViewer:阅读CHM
 * LaTeX
-* chrome
+* Chromium
 * Nylas N1：超好用的跨平台电子邮件客户端  Thunderbird 
 * sougou
 * Spotify for Linux：音乐流媒体服务
@@ -131,6 +131,8 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 * MySQL Workbench
 * vscode
 * shadowshocks
+* Jitsy:通讯工具
+* Synaptic：软件管理
 
 ### 软件安装
 
@@ -329,8 +331,9 @@ groupdel 组名
 
 ```sh
 # 权限管理
-chmod u+/-rwx, g+/-rwx, o+/-rwx 文件
+chmod u+/-/=rwx, g+/-/=rwx, o+/-/=rwx filename
 chmod 000  filename   # 所有用户没有任何权限
+
 sudo chown zhangwang /etc/apt/sources.list
 ```
 
@@ -346,11 +349,15 @@ less filename   # "上下左右"键方式查看文件各个部分内容,支持�
 head  -n  filename # 查看文件“前n行”内容
 tail  -n  filename # 查看文件“末尾n行”内容
 wc  filename     # 计算文件行数
+umask # 档案预设权限
+chattr # 配置文件档案隐藏属性
+lsattr # 显示档案隐藏属性
+file /bin/l # file:查看文件类型
 
 echo  内容 > filename    # 给文件“覆盖写”方式追加内容
 echo  内容 >> filename   # 给文件纯追加内容
 
-touch # 来更改已有文件的时间戳的（比如，最近访问时间，最近修改时间） touch file{1..5}.txt 使用通配符批量创建 5 个文件
+touch # 来更改已有文件的时间戳或新建档案（比如，最近访问时间，最近修改时间） touch file{1..5}.txt 使用通配符批量创建 5 个文件
 rename # 批量重命名,需要用到正则表达式
 rename s/.txt/.c/ *.txt # 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件:
 rename y/a-z/A-Z/ *.c # 批量将这 5 个文件，文件名改为大写
@@ -379,29 +386,34 @@ cd # 切换目录,cd到不存在的目录时会报错
 pwd # 打印当前目录
 wc package.json # 获取某一个文件的行数和字数
 cp # 复制某文件 -r
-
-mkdir # 创建目录
-rm dir # 删除目录
-rm -rf # r递归删除，f参数表示强制
-
-mv # 移动文件、文件重命名
 sort #排序
 diff # 比较两个文件的异同
-mkdir -p father/son/grandson # 新建多级目录
+
 tac # 打印文件内容到标准输出(逆序)
-more # 比较简单，只能向一个方向滚动,查看文件：打开后默认只显示一屏内容，终端底部显示当前阅读的进度。可以使用 Enter 键向下滚动一行，使用 Space 键向下滚动一屏，按下 h 显示帮助，q 退出。
-file /bin/l # file:查看文件类型
+cat
+nl # 显示的时候，顺道输出行号
+more less # 比较简单，只能向一个方向滚动,查看文件：打开后默认只显示一屏内容，终端底部显示当前阅读的进度。可以使用 Enter 键向下滚动一行，使用 Space 键向下滚动一屏，按下 h 显示帮助，q 退出。
+
 head # 查看文件的头几行（默认10行）
 tail # 查看文件的尾几行（默认10行） 
 tail -n 1 /etc/passwd
 Tree 用可视化的效果向你展示一个目录下的文件 tree -P '_.min._'
 
+mkdir # 创建目录
+mkdir -p father/son/grandson # 新建多级目录
 mkdir  newdir
 mkdir -p newdir/newdir/newdir     # 递归方式创建多级目录 newdir新目录多于1个层次(2/3/4等)就设置-p参数，如果就一个新的目录则无需-p参数
 mkdir  dir/newdir
 mkdir  dir/dir/newdir
 mkdir -p dir/newdir/newdir
 
+rm  filename      # 普通文件删除
+rm dir # 删除目录
+rm -r dir         # 删除目录[无视层次]需要-r参数
+rm -rf  文件      # recursive force 递归强制删除文件,force 避免删除隐藏文件的提示
+rm -rf /         # 递归强制方式删除系统里边的全部内容
+
+# 移动文件、文件重命名
 mv  dir1  dir2                # dir1移动到dir2目录下,并给改名字为"原名"
 mv  dir1  dir2/newdir         # dir1移动到dir2目录下,并给改名字为newdir
 mv  dir1/dir2  dir3/dir4      # dir2移动到dir4目录下,并给改名字为"原名"
@@ -415,18 +427,14 @@ cp -r dir1  dir2 # dir1被复制到dir2目录下一份，并给改名字为“�
 cp -r dir1  dir2/newdir  # dir1被复制到dir2目录下一份，并给改名字为newdir
 cp -r dir1/dir2/dir3   dir4/dir5  # dir3被复制到dir5目录下一份，并给改名字为"原名"
 
-rm  filename      # 普通文件删除
-rm -r dir         # 删除目录[无视层次]需要-r参数
-rm -rf  文件      # recursive force 递归强制删除文件,force 避免删除隐藏文件的提示
-rm -rf /         # 递归强制方式删除系统里边的全部内容
+basename，dirname 
+ln  # unix 里面的链接同 Windows 中的快捷方式类似，允许你快速地访问到一个特定的文件。
+`sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
 
-ln  # unix 里面的链接同 Windows 中的快捷方式类似，允许你快速地访问到一个特定的文件。`sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
-
-# dd if=/dev/zero of=virtual.img bs=1M count=256 # 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
-
-# dd # 默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
+dd # 默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
+# dd if=/dev/zero of=virtual.img bs=1M count=256  # 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
 # dd if=/dev/stdin of=test bs=10 count=1 conv=ucase # 将输出的英文字符转换为大写再写入文件
-# sudo mount # 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
+sudo mount # 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
 ```
 
 > 文件压缩
@@ -440,12 +448,15 @@ ln  # unix 里面的链接同 Windows 中的快捷方式类似，允许你快速
 * -l:将 LF（换行） 转换为 CR+LF(windows 回车加换行)
 
 ```sh
-zip -r -9 -q -o shiyanlou_9.zip /home/shiyanlou -x ~/*.zip // 设置不同压缩等级
-zip -r -e -o shiyanlou_encryption.zip /home/shiyanlou  // 创建加密
-zip -r -l -o shiyanlou.zip /home/shiyanlou   // 解决windows和linux对换行的不同处理问题
+zip -r -9 -q -o shiyanlou_9.zip /home/shiyanlou -x ~/*.zip # 设置不同压缩等级
+zip -r -e -o shiyanlou_encryption.zip /home/shiyanlou  # 创建加密
+zip -r -l -o shiyanlou.zip /home/shiyanlou   # 解决windows和linux对换行的不同处理问题
 
-unzip -q shiyanlou.zip -d ziptest   // 静默且指定解压目录，目录不存在会自动创建
-unzip -O GBK 中文压缩文件.zip // 使用 -O（英文字母，大写 o）参数指定编码类型
+unzip -q shiyanlou.zip -d ziptest   # 静默且指定解压目录，目录不存在会自动创建
+unzip -O GBK 中文压缩文件.zip # 使用 -O（英文字母，大写 o）参数指定编码类型
+gzip，zcat
+bzip2，bzcat
+tar
 ```
 
 > 挂载镜像文件
@@ -462,104 +473,6 @@ umount  /media/cdrom  #卸载系统镜像
 
 vi /etc/fstab   #添加以下代码。实现开机自动挂载
 /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom   iso9660    defaults,ro,loop  0 0
-```
-
-### Terminal
-
-Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
-
-Ubuntu具体说来，它默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
-
-* Tab 点击Tab键可以实现命令补全,目录补全、命令参数补全;
-* Ctrl+c:强行终止当前程序（常用）;
-* Ctrl+d:键盘输入结束或退出终端（常用）;
-* Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
-* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
-* Ctrl+a:将光标移至输入行头，相当于Home键;
-* Ctrl+e:将光标移至输入行末，相当于End键;
-* Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
-* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
-* Shift+PgUp:将终端显示向上滚动;
-* Shift+PgDn:将终端显示向下滚动;
-* Ctrl+d:键盘输入结束或退出终端（常用
-
-> 系统相关
-
-```sh
-# 查看linux系统信息
-uname -a # 显示电脑以及操作系统的相关信息
-cat /proc/version # 说明正在运行的内核版本
-cat /etc/issue # 显示的是发行版本信息
-lsb_release -a
-
-df -T 
-reboot/poweroff
-date # 获取当前时间
-uname # 返回系统名称 sudo uname --m
-hostname # 返回系统的主机名称 
---version/-V # 查看某个程序的版本
-history # 显示历史
-help # 用于显示 shell 内建命令的简要帮助信息 help exit
-man #
-info ls
-ssh # 连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。   
-grep  # 用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
-alias server="python -m SimpleHTTPServer 9000" # 使用 alias 这个 bash 内置的命令来为它们创建一个短别名
-
-whereis
-who
-locate
-
-tar # 用来处理文件压缩的默认 Unix 工具.
-md5sum  # 它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
-
-# 界面切换
-init 3
-init 5
-
-chkconfig --list sshd
-```
-
-> 服务管理：
-
-```sh
-sudo systemctl enable nginx
-sudo systemctl start nginx
-sudo systemctl restart nginx
-systemctl status nginx
-sudo systemctl reload nginx
-```
-
-> 启动项
-
-启动目录： /etc/rc.d/rc[0~6].d 命令行脚本文件：/etc/init.d/ 本地文件：/etc/rc.local 添加 /etc/init.d/nginx start
-
-
-> 端口与进程管理
-
-```sh
-# 查看某一端口的占用情况
-[sudo ]lsof -i : (port)
-# 显示tcp，udp的端口和进程等相关
-netstat -tunlp
-# 指定端口号进程情况
-netstat -tunlp|grep (port)
-# 进程查看
-ps -ef | grep nginx
-ps aux | grep nginx
-lsof -Pni4 | grep LISTEN | grep php
-# 关闭进程
-kill -9 pid
-```
-
-> 修改时区
-
-```sh
-sudo tzselect
-sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
-
-sudo vi /etc/timezone
-改为Asia/Shanghai
 ```
 
 > 搜索
@@ -598,14 +511,120 @@ find  目录 -name  "an*" [部分名称]     # 模糊查找文件名字以an开�
 
 #### 匹配符
 
-- `*`：匹配 0 或多个字符，如`ls *.html`将匹配所有以html结尾的文件,`ls b*.png`将匹配所有以b开头，png结尾的文件；
-- `?`：匹配任意一个字符,如`ls abc?.png` 可匹配abcd.png/abce.png
-- `[list]`:匹配 list 中的任意单一字符
-- `[!list]`:匹配 除list 中的任意单一字符以外的字符
-- `[c1-c2]`:匹配 c1-c2 中的任意单一字符 如：[0-9] [a-z]
-- `{string1,string2,...}`:匹配 string1 或 string2 (或更多)其一字符串，如 `{css,html}`， `ls app.{html.css}`将匹配app.css 和app.html;
-- `{c1..c2}`:匹配 c1-c2 中全部字符 如{1..10}
-- 注意通配符大小写敏感
+* `*`：匹配 0 或多个字符，如`ls *.html`将匹配所有以html结尾的文件,`ls b*.png`将匹配所有以b开头，png结尾的文件；
+* `?`：匹配任意一个字符,如`ls abc?.png` 可匹配abcd.png/abce.png
+* `[list]`:匹配 list 中的任意单一字符
+* `[!list]`:匹配 除list 中的任意单一字符以外的字符
+* `[c1-c2]`:匹配 c1-c2 中的任意单一字符 如：[0-9] [a-z]
+* `{string1,string2,...}`:匹配 string1 或 string2 (或更多)其一字符串，如 `{css,html}`， `ls app.{html.css}`将匹配app.css 和app.html;
+* `{c1..c2}`:匹配 c1-c2 中全部字符 如{1..10}
+* 注意通配符大小写敏感
+
+### Terminal
+
+Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
+
+Ubuntu具体说来，它默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
+
+* Tab 点击Tab键可以实现命令补全,目录补全、命令参数补全;
+* Ctrl+c:强行终止当前程序（常用）;
+* Ctrl+d:键盘输入结束或退出终端（常用）;
+* Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
+* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
+* Ctrl+a:将光标移至输入行头，相当于Home键;
+* Ctrl+e:将光标移至输入行末，相当于End键;
+* Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
+* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
+* Shift+PgUp:将终端显示向上滚动;
+* Shift+PgDn:将终端显示向下滚动;
+* Ctrl+d:键盘输入结束或退出终端（常用
+
+> 系统相关
+
+```sh
+# 查看linux系统信息
+uname -a # 显示电脑以及操作系统的相关信息 -r 核心版本
+cat /proc/version # 说明正在运行的内核版本
+cat /etc/issue # 显示的是发行版本信息
+lsb_release -a
+
+df -T 
+reboot/poweroff
+date # 获取当前时间
+cal # 日历
+bc # 计算器
+
+uname # 返回系统名称 sudo uname --m
+hostname # 返回系统的主机名称 
+--version/-V # 查看某个程序的版本
+history # 显示历史
+help # 用于显示 shell 内建命令的简要帮助信息 help exit
+man #
+info ls
+ssh # 连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。   
+grep  # 用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
+alias server="python -m SimpleHTTPServer 9000" # 使用 alias 这个 bash 内置的命令来为它们创建一个短别名
+
+which # 寻找执行文件
+
+whereis # 
+who
+locate # 
+
+tar # 用来处理文件压缩的默认 Unix 工具.
+md5sum  # 它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
+
+# 界面切换
+init 3
+init 5
+--run level 0 :关机
+--run level 3 :纯文本模式
+--run level 5 :含有图形接口模式
+--run level 6 :重新启动
+
+chkconfig --list sshd
+```
+
+> 服务管理：
+
+```sh
+sudo systemctl enable nginx
+sudo systemctl start nginx
+sudo systemctl restart nginx
+systemctl status nginx
+sudo systemctl reload nginx
+```
+
+> 启动项
+
+启动目录： /etc/rc.d/rc[0~6].d 命令行脚本文件：/etc/init.d/ 本地文件：/etc/rc.local 添加 /etc/init.d/nginx start
+
+> 端口与进程管理
+
+```sh
+# 查看某一端口的占用情况
+[sudo ]lsof -i : (port)
+# 显示tcp，udp的端口和进程等相关
+netstat -tunlp
+# 指定端口号进程情况
+netstat -tunlp|grep (port)
+# 进程查看
+ps -ef | grep nginx
+ps aux | grep nginx
+lsof -Pni4 | grep LISTEN | grep php
+# 关闭进程
+kill -9 pid
+```
+
+> 修改时区
+
+```sh
+sudo tzselect
+sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+
+sudo vi /etc/timezone
+# 改为Asia/Shanghai
+```
 
 > ssh
 
@@ -675,7 +694,6 @@ sudo apt-get update
 sudo apt-get install google-chrome-stable
 ```
 
-
 > mysql workbeach
 
 ```sh
@@ -726,7 +744,100 @@ sudo dpkg -P linux-image-extra-3.5.0-17-generic
 
 > top
 
+用来监控Linux系统状况，比如cpu、内存的使用
 
+top [-] [d] [p] [q] [c] [C] [S] [s]  [n]，参数
+
+* d 指定每两次屏幕信息刷新之间的时间间隔。当然用户可以使用s交互命令来改变之。
+* p 通过指定监控进程ID来仅仅监控某个进程的状态。
+* q 该选项将使top没有任何延迟的进行刷新。如果调用程序有超级用户权限，那么top将以尽可能高的优先级运行。
+* S 指定累计模式。
+* s 使top命令在安全模式中运行。这将去除交互命令所带来的潜在危险。
+* i  使top不显示任何闲置或者僵死进程。
+* c 显示整个命令行而不只是显示命令名。
+
+* 多核CPU监控:在top基本视图中，按键盘数字“1”，可监控每个逻辑CPU的状况
+* 统计信息区:前五行是系统整体的统计信息。
+  * 第一行是任务队列信息，同 uptime 命令的执行结果
+    + 10:37:35  当前时间
+    + up 25 days, 17:29 系统运行时间，格式为时:分
+    + 1 user  当前登录用户数
+    + load average: 0.00, 0.02, 0.05  系统负载，即任务队列的平均长度。三个数值分别为 1分钟、5分钟、15分钟前到现在的平均值。
+  - Tasks: 104 total  进程总数
+    _ 1 running 正在运行的进程数
+    _ 103 sleeping  睡眠的进程数
+    _ 0 stopped 停止的进程数
+    _ 0 zombie  僵尸进程数
+  - Cpu(s):  0.1%us 用户空间占用CPU百分比
+    + 0.0%sy  内核空间占用CPU百分比
+    + 0.0%ni  用户进程空间内改变过优先级的进程占用CPU百分比
+    + 99.9%id 空闲CPU百分比
+    + 0.0%wa  等待输入输出的CPU时间百分比
+  - Mem:   2067816k total 物理内存总量
+    + 2007264k used 使用的物理内存总量
+    + 60552k free 空闲内存总量
+    + 73752k buffers  用作内核缓存的内存量
+  - Swap:   524284k total 交换区总量
+    + 315424k used  使用的交换区总量
+    + 208860k free  空闲交换区总量
+    + 625832k cached  缓冲的交换区总量。
+    + 内存中的内容被换出到交换区，而后又被换入到内存，但使用过的交换区尚未被覆盖，
+    + 该数值即为这些内容已存在于内存中的交换区的大小。
+    + 相应的内存再次被换出时可不必再对交换区写入。
+* 进程信息区：显示了各个进程的详细信息
+  -  PID 进程id
+  -  PPID  父进程id
+  -  RUSER Real user name
+  -  UID 进程所有者的用户id
+  -  USER  进程所有者的用户名
+  -  GROUP 进程所有者的组名
+  -  TTY 启动进程的终端名。不是从终端启动的进程则显示为 ?
+  -  PR  优先级
+  -  NI  nice值。负值表示高优先级，正值表示低优先级
+  -  P 最后使用的CPU，仅在多CPU环境下有意义
+  -  %CPU  上次更新到现在的CPU时间占用百分比
+  -  TIME  进程使用的CPU时间总计，单位秒
+  -  TIME+ 进程使用的CPU时间总计，单位1/100秒
+  -  %MEM  进程使用的物理内存百分比
+  -  VIRT  进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES
+  -  SWAP  进程使用的虚拟内存中，被换出的大小，单位kb。
+  -  RES 进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA
+  -  CODE  可执行代码占用的物理内存大小，单位kb
+  -  DATA  可执行代码以外的部分(数据段+栈)占用的物理内存大小，单位kb
+  -  SHR 共享内存大小，单位kb
+  -  nFLT  页面错误次数
+  -  nDRT  最后一次写入到现在，被修改过的页面数。
+  -  S 进程状态。
+    + =不可中断的睡眠状态
+    + =运行
+    + =睡眠
+    + =跟踪/停止
+    + =僵尸进程
+  -  COMMAND 命令名/命令行
+  -  WCHAN 若该进程在睡眠，则显示睡眠中的系统函数名
+  -  Flags 任务标志，参考 sched.h
+
+* f 键可以选择显示的内容。按 f 键之后会显示列的列表，按 a-z 即可显示或隐藏对应的列，最后按回车键确定。
+* 按 o 键可以改变列的显示顺序。按小写的 a-z 可以将相应的列向右移动，而大写的 A-Z可以将相应的列向左移动。最后按回车键确定。
+* 按大写的 F 或 O 键，然后按 a-z 可以将进程按照相应的列进行排序。而大写的 R 键可以将当前的排序倒转。
+* Ctrl+L 擦除并且重写屏幕。
+* h或者? 显示帮助画面，给出一些简短的命令总结说明。
+* k 终止一个进程。系统将提示用户输入需要终止的进程PID，以及需要发送给该进程什么样的信号。一般的终止进程可以使用15信号；如果不能正常结束那就使用信号9强制结束该进程。默认值是信号15。在安全模式中此命令被屏蔽。
+* i 忽略闲置和僵死进程。这是一个开关式命令。
+* q 退出程序。
+* r 重新安排一个进程的优先级别。系统提示用户输入需要改变的进程PID以及需要设置的进程优先级值。输入一个正值将使优先级降低，反之则可以使该进程拥有更高的优先权。默认值是10。
+* s 改变两次刷新之间的延迟时间。系统将提示用户输入新的时间，单位为s。如果有小数，就换算成m s。输入0值则系统将不断刷新，默认值是5 s。需要注意的是如果设置太小的时间，很可能会引起不断刷新，从而根本来不及看清显示的情况，而且系统负载也会大大增加。
+* f或者F 从当前显示中添加或者删除项目。
+* o或者O改变显示项目的顺序。
+* l 切换显示平均负载和启动时间信息。
+* m 切换显示内存信息。
+* t 切换显示进程和CPU状态信息。
+* c 切换显示命令名称和完整命令行。
+* M 根据驻留内存大小进行排序。
+* P 根据CPU使用百分比大小进行排序。
+* T 根据时间/累计时间进行排序。
+* W 将当前设置写入~/.toprc文件中。这是写top配置文件的推荐方法。
+* Shift+M 可按内存占用情况进行排序。
 
 > Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程。
 
