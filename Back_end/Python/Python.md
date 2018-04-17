@@ -67,6 +67,14 @@ pip3 install --upgrade pip setuptools wheel
 
 [Using Python on a Macintosh](https://docs.python.org/3/using/mac.html)
 
+> windows
+ 
+```sh
+pip install scrapy
+C:\Users\Administrator\AppData\Local\Programs\Python\Python36 # 路径
+pip install pywin32 # No module named win32api
+```
+
 ### 版本管理工具pyenv:修改系统环境变量 PATH
 
 多版本python共存的环境工具，可以在不改变系统环境的情况下，可以随意切换不同python版本。基于某个版本开发的工具，在更换了不同python版本之后，就会导致工具中的某个模块、代码错误，而不能正常使用。
