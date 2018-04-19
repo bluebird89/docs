@@ -74,4 +74,9 @@
     - 信用管理师考试教材
 * 行为金融学
     - Thaler,《 Advances in Behavioral Finance I &II 》
-    - 行为金融学：心理的作用 
+    - 行为金融学：心理的作用
+
+## 拓展
+
+* 道德情操论
+* 国富论
