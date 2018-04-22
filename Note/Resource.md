@@ -22,6 +22,7 @@
 
 [TECHNOLOGY RADAR](https://www.thoughtworks.com/radar)
 
-## 论坛资料
+> 参考
 
 * [2017杭州云栖大会](https://github.com/Alimei/hangzhouYunQi2017ppt?files=1)
+* [Google Developer Documentation Style Guide](https://developers.google.com/style/)

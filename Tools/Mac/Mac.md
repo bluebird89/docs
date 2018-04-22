@@ -20,9 +20,6 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
 * [awesome-osx-command-line](https://github.com/herrbischoff/awesome-osx-command-line)Use your OS X terminal shell to do awesome things.
 * [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
-* [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
-* [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
-* [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
 * [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
 * [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
 * [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
@@ -544,6 +541,41 @@ lsof -i tcp:8081  # 端口查看
 ## 远程登录
 
 开启设置-〉共享-〉远程登录
+
+> [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles):🔧 .files, including ~/.macos — sensible hacker defaults for macOS https://mths.be/dotfiless
+
+* [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
+* [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
+* [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
+* [Maximum Awesome](link)
+
+linux下（mac下）有各种app，每个人会根据个人的喜好和习惯来设置一些（快捷键，变量等等），而dotfiles就是保存了这些自定义设置的文件。
+
+在系统中使用一个文件夹，通过ln命令，将不同的app，不同的系统设置文件都指引到这个文件夹
+
+```sh
+brew install mackup # 通过mackup备份 默认放在文件Dropbox/
+
+mackup backup
+mackup restore
+mackup uninstall
+
+# mackup 配置文件 .mackup.cfg 
+[storage]
+engine = file_system
+path = dotfiles # 文件路径
+directory = home
+
+[applications_to_sync]
+atom
+pycharmce
+myvim
+ideaic15
+zsh
+mackup
+dash
+karabiner
+```
 
 ## 参考
 
