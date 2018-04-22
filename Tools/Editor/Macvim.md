@@ -41,3 +41,4 @@ To install from command line: vim +PluginInstall +qall
 ## 参考
 
 * [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim):Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
+* [square/maximum-awesome](git@github.com:square/maximum-awesome.git):Config files for vim and tmux.

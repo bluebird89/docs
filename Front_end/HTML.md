@@ -255,8 +255,9 @@ a标签不能嵌套
 
 * [hakimel/reveal.js](https://github.com/hakimel/reveal.js):The HTML Presentation Framework http://lab.hakim.se/reveal-js/
 
-## 参考
+> 参考
 
 * [joshbuchea/HEAD](https://github.com/joshbuchea/HEAD):A list of everything that *could* go in the head of your document https://gethead.info
 * [Bilibili/flv.js](https://github.com/Bilibili/flv.js)HTML5 FLV Player
 * [h5bp/html5-boilerplate](https://github.com/h5bp/html5-boilerplate):A professional front-end template for building fast, robust, and adaptable web apps or sites. https://html5boilerplate.com/
+* [HTML](https://html.spec.whatwg.org/) [HTML中文](https://whatwg-cn.github.io/html/)
