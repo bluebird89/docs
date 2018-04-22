@@ -12,19 +12,24 @@ Docker的总体架构图: ![](../_static/architect_docker.jpg) Docker与VM对比
 
 ## 原理
 
+支持 Windows/Linux/Mac/AWS/Azure 多种平台的安装，其中 Windows 需要 Win10+，Mac 需要 EI Captain+。
+
 ### 对比
 
-- Hypervisor抽象虚拟化硬件平台
-- VMWare, XEN抽象虚拟化操作系统
-- LXC进程级别虚拟化
+* Hypervisor抽象虚拟化硬件平台
+* VMWare, XEN抽象虚拟化操作系统
+* LXC进程级别虚拟化
 
 ### 优点
 
-- 启动速度快，通常小于1秒
-- 资源利用率高，一个PC可以跑上千个容器
-- 性能开销小
-- 面向软件开发者而非硬件运维
-- 轻便，移植性高
+* 不需要等待虚拟系统启动所以启动快速资源占用低，启动速度快，通常小于1秒
+* 资源利用率高，一个PC可以跑上千个容器。沙箱机制保证不同服务之间环境隔离
+* 性能开销小
+* 面向软件开发者而非硬件运维
+* 轻便，移植性高
+* 不需要打包系统进镜像所以体积非常小
+* Dockerfile 镜像构建机制让镜像打包部署自动化
+* Docker hub 提供镜像平台方便共享镜像
 
 Docker基于LXC的改进
 
@@ -35,12 +40,19 @@ Docker基于LXC的改进
 
 ## 概念
 
-- 镜像（Image）：Docker的镜像即一个只读的模版，用来创建真正Docker容器。有点类似Java的类定义。镜像是一种文件结构，Dockerfile中的命令都会在文件系统中创建一个新的层次结构，镜像则构建与这些文件系统之上。
-- 容器(Container)：容器则是镜像创建的实例，同样用Java类比的话类似Java的运行时对象Object。它可以被启动，开始，停止，删除等操作。容器之间是相互隔离的，保证安全的平台，如上文分析的进程间隔离的，甚至可以把每个容器当作一个精简版的Linux。
-- 仓库（Registry）：镜像的仓库，用来保存images，当我们创建了自己的image后可以用push把它上传到公有或者私有仓库，类似我们git或者svn代码仓库，这样其他开发人员或者Ops可以pull用来开发或者部署。同样，类似代码仓库，每个镜像支持tag标签。
-- 客户端(Client)：通过命令行或者其他工具使用 Docker API (<https://docs.docker.com/reference/api/docker_remote_api>) 与 Docker 的守护进程通信。
-- 主机(Host)：一个物理或者虚拟的机器用于执行 Docker 守护进程和容器。
-- Docker daemon 作为服务端接受来自客户的请求，并处理这些请求（创建、运行、分发容器）。 客户端和服务端既可以运行在一个机器上，也可通过 socket 或者RESTful API 来进行通信。Docker daemon 一般在宿主主机后台运行，等待接收来自客户端的消息。 Docker 客户端则为用户提供一系列可执行命令，用户用这些命令实现跟 Docker daemon 交互。
+* Dockerfile：可以生成 Docker Image(镜像)。自己制作的镜像可以上传到 Docker hub 平台，也可以从平台上拉去我们需要的镜像
+  - 使用#来注释
+  - FROM 指令告诉 Docker 使用哪个镜像作为基础
+  - RUN 开头的指令会在创建中运行，比如安装一个软件包
+  - COPY 指令将文件复制进镜像中
+  - WORKDIR 指定工作目录
+  - CMD/ENTRYPOINT 容器启动执行命令
+* 镜像（Image）：Docker的镜像即一个只读的模版，用来创建真正Docker容器。有点类似Java的类定义。镜像是一种文件结构，Dockerfile中的命令都会在文件系统中创建一个新的层次结构，镜像则构建与这些文件系统之上。
+* 容器(Container)：容器则是镜像创建的实例，同样用Java类比的话类似Java的运行时对象Object。它可以被启动，开始，停止，删除等操作。容器之间是相互隔离的，保证安全的平台，如上文分析的进程间隔离的，甚至可以把每个容器当作一个精简版的Linux。
+* 仓库（Repository）：镜像的仓库，用来保存images，当我们创建了自己的image后可以用push把它上传到公有或者私有仓库，类似我们git或者svn代码仓库，这样其他开发人员或者Ops可以pull用来开发或者部署。同样，类似代码仓库，每个镜像支持tag标签。
+* 客户端(Client)：通过命令行或者其他工具使用 Docker API (<https://docs.docker.com/reference/api/docker_remote_api>) 与 Docker 的守护进程通信。
+* 主机(Host)：一个物理或者虚拟的机器用于执行 Docker 守护进程和容器。
+* Docker daemon 作为服务端接受来自客户的请求，并处理这些请求（创建、运行、分发容器）。 客户端和服务端既可以运行在一个机器上，也可通过 socket 或者RESTful API 来进行通信。Docker daemon 一般在宿主主机后台运行，等待接收来自客户端的消息。 Docker 客户端则为用户提供一系列可执行命令，用户用这些命令实现跟 Docker daemon 交互。
 
 ### 核心技术
 
@@ -77,38 +89,36 @@ Docker基于LXC的改进
 
 - Mac : [docker-ce-desktop-mac](https://store.docker.com/editions/community/docker-ce-desktop-mac)
 
-  ```
-  brew install docker
-  brew install boot2docker
-  ```
+```sh
+# MAC
+brew install docker
+brew install boot2docker
 
-- Ubuntu
-
-sudo apt-get install -y docker.io
-sudo systemctl start docker
-sudo systemctl enable docker
-
-```
-// Install packages to allow apt to use a repository over HTTPS
+# Ubuntu
+# Install packages to allow apt to use a repository over HTTPS
 sudo apt-get install \
 apt-transport-https \
 ca-certificates \
 curl \
 software-properties-common
 
-// Add Docker's official GPG key
+# Add Docker's official GPG key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -   
 sudo apt-key fingerprint 0EBFCD88
 
-// set up the stable repository
+# set up the stable repository
 sudo add-apt-repository \
  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
  $(lsb_release -cs) \
  stable"
 
-// Update the apt package index and install
+# Update the apt package index and install
 sudo apt-get update
 sudo apt-get install docker-ce
+
+sudo apt-get install -y docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
 ```
 
 ## Usage:
@@ -135,7 +145,7 @@ ensure docker daemon runing
 - CREATED：镜像创建时间
 - SIZE：镜像大小
 
-```
+```sh
 docker images // 列出本地主机上的镜像
 docker pull ubuntu:13.10 // 获取镜像
 docker search httpd  // 搜索镜像
@@ -153,18 +163,6 @@ sudo apt-get upgrade docker-ce
   - 使用我们的新镜像 runoob/ubuntu 来启动一个容器`docker run -t -i runoob/ubuntu:v2 /bin/bash`
 
 - 使用 Dockerfile 指令来创建一个新的镜像,`cat Dockerfile`
-
-  ```
-  FROM centos:6.7 MAINTAINER Fisher "fisher@sudops.com"
-  RUN /bin/echo 'root:123456' |chpasswd 
-  RUN useradd runoob 
-  RUN /bin/echo 'runoob:123456' |chpasswd 
-  RUN /bin/echo -e "LANG=\"en_US.UTF-8\"" >/etc/default/local 
-  EXPOSE 22 
-  EXPOSE 80 
-  CMD /usr/sbin/sshd -D
-  ```
-
   - 每一个指令都会在镜像上创建一个新的层，每一个指令的前缀都必须是大写的
   - FROM 和 MAINTAINER 通常出现在文件第一行，用于选择基础镜像和说明维护人信息，
   - RUN:在镜像内执行命令
@@ -175,33 +173,54 @@ sudo apt-get upgrade docker-ce
   - . ：Dockerfile 文件所在目录，可以指定Dockerfile 的绝对路径
   - `docker tag 860c279d2fec runoob/centos:dev` 镜像添加一个新的标签
 
+```
+FROM centos:6.7 MAINTAINER Fisher "fisher@sudops.com"
+RUN /bin/echo 'root:123456' |chpasswd 
+RUN useradd runoob 
+RUN /bin/echo 'runoob:123456' |chpasswd 
+RUN /bin/echo -e "LANG=\"en_US.UTF-8\"" >/etc/default/local 
+EXPOSE 22 
+EXPOSE 80 
+CMD /usr/sbin/sshd -D
+```
+
 ### 容器使用
 
 ```sh
 docker version
 docker search tutorial
 docker pull learn/tutorial  
-docker create ubuntu:14.04 //  create images
-docker run -i -t ubuntu:15.10 /bin/bash // 在新容器内建立一个伪终端或终端。
-docker run -d -P training/webapp python app.py   //  -P :是容器内部端口随机映射到主机的高端口。    
-docker run -d -p 127.0.0.1:5001:5002  --name runoob training/webapp python app.py   // -p : 是容器内部端口绑定到指定的主机端口。  使用--name标识来命名容器
+docker create ubuntu:14.04 #  create images
+
+docker run -i -t ubuntu:15.10 /bin/bash # 在新容器内建立一个伪终端或终端。
+docker run -d -P training/webapp python app.py   #  -P :是容器内部端口随机映射到主机的高端口。    
+docker run -d -p 127.0.0.1:5001:5002  --name runoob training/webapp python app.py   # -p : 是容器内部端口绑定到指定的主机端口。  使用--name标识来命名容器
 docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py  
-docker run learn/tutorial echo "hello word"   // 两个参数，一个是指定镜像名（从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像），一个是要在镜像中运行的命令
-docker run learn/tutorial apt-get install -y ping   // learn/tutorial镜像里面安装ping程序
-docker ps    // 查看运行容器状态
-docker ps -l   // 查看最后一次创建的容器
+docker run learn/tutorial echo "hello word"   # 两个参数，一个是指定镜像名（从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像），一个是要在镜像中运行的命令
+docker run learn/tutorial apt-get install -y ping   # learn/tutorial镜像里面安装ping程序
+docker run [组织名称]/<镜像名称>:[镜像标签] 
+
+docker ps    # 查看运行容器状态
+docker-compose ps #查看当前项目容器
+docker ps -l   # 查看最后一次创建的容器
 docker commit 698 learn/ping：版本号 alias 提交，获取新的版本号
 docker run lean/ping ping www.google.com
-docker logs -f $CONTAINER_ID  | docker attach $CONTAINER_ID  // -f:动态输出
-docker top determined_swanson    // 查看容器内部运行的进程
-docker stop $CONTAINER_ID  
-docker inspect name  ||  docker ps -l(ast)/-a(ll)     // 查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息
+docker logs -f $CONTAINER_ID  | docker attach $CONTAINER_ID  # -f:动态输出
+
+docker top determined_swanson    # 查看容器内部运行的进程
+docker-compose exec {container-name} bash
+
+docker inspect name  ||  docker ps -l(ast)/-a(ll)     # 查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息
 docker start name
-docker rm name // 移除容器
+docker rm name # 移除容器
 docker push learn/ping
 docker port 7a38a1ad55c6  docker port determined_swanson：查看指定 （ID或者名字）容器的某个确定端口映射到宿主机的端口号
 
-如果要为底层主机添加卷（例如对于 DB 持久性数据），则应该在镜像内定义映射卷： RUN
+
+docker stop $CONTAINER_ID
+docker-compose stop # 关闭当前项目容器
+
+# 如果要为底层主机添加卷（例如对于 DB 持久性数据），则应该在镜像内定义映射卷： RUN
 mkdir -p /data VOLUME ["/data"]
 sudo docker run -d -v /data:/data bat/spark
 
@@ -213,7 +232,7 @@ sudo docker run -d --add-host=SERVER_NAME:127.0.0.1 bat/spark
 
 ### avoid sudo
 
-```
+```sh
 sudo groupadd docker
 sudo gpasswd -a ${USER} docker
 sudo service docker restart
@@ -221,7 +240,7 @@ sudo service docker restart
 sudo usermod -aG docker ${USER}
 sudo usermod -aG docker $(whoami)
 
-// mac
+# mac
 docker-machine start # Start virtual machine for docker
 docker-machine env  # It's helps to get environment variables
 eval "$(docker-machine env default)" # Set environment variables
@@ -248,18 +267,54 @@ eval "$(docker-machine env default)" # Set environment variables
 
 ## 工具
 
-* [docker/compose](https://github.com/docker/compose):Define and run multi-container applications with Docker https://docs.docker.com/compose/
 * [docker/machine](https://github.com/docker/machine)Machine management for a container-centric world
 * [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
 * Shipyard
 * Potainer
 
-## 分布式发布部署
+> [docker/compose](https://github.com/docker/compose):Define and run multi-container applications with Docker https://docs.docker.com/compose/
 
-* Google的Kubernetes
-* Apache的Mesos
+Docker Compose 是一款容器编排程序，使用 YAML 配置的形式将你需要启动的容器管理起来.
 
-### 引用
+能够帮我们处理容器的依赖关系，在每个容器中会将容器的 IP 和服务的名称使用 hosts 的方式绑定，这样我们就能在容器中直接使用服务名称来接入对应的容器了
+
+```
+version: "2"
+
+services:
+
+    nginx:
+
+        depends_on:
+
+          - "php"
+
+        image: "nginx:latest"
+
+        volumes:
+
+          - "$PWD/src/docker/conf:/etc/nginx/conf.d"
+
+          - "$PWD:/home/q/system/m_look_360_cn"
+
+        ports:
+
+          - "8082:80"
+
+        container_name: "m.look.360.cn-nginx"
+
+    php:
+
+        image: "lizheming/php-fpm-yaf"
+
+        volumes:
+
+            - "$PWD:/home/q/system/m_look_360_cn"
+
+        container_name: "m.look.360.cn-php"
+```
+
+> 参考
 
 * [Docker](http://blog.csdn.net/erixhao/article/details/72762851)
 * [Docker 教程](http://www.runoob.com/docker/docker-tutorial.html)
@@ -267,7 +322,5 @@ eval "$(docker-machine env default)" # Set environment variables
 * [Docker mac 入门](https://docs.docker.com/mac/)
 * [Product and tool manuals](https://docs.docker.com/manuals/) https://docs.docker.com/engine/installation/
 * [moby/moby](https://github.com/moby/moby)Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
-
-## 资源
-
-- [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects 
+* [Docker — 从入门到实践](https://yeasy.gitbooks.io/docker_practice/)
+* [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects 
