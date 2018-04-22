@@ -2,9 +2,6 @@
 
 Shell是Linux/Unix的一个外壳。它负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序。
 
-## 资源
-
-
 ## 配置
 
 * /etc/profile：所有用户的shell都有权使用你配置好的环境变量 添加 export PATH="$PATH:/my_new_path"
@@ -75,7 +72,11 @@ export PATH=$PATH:/opt/perl/site/bin:/opt/perl/bin
 cat /etc/shells
 
 echo $SHELL/bin/bash
+
+sudo yum install zsh
 sudo apt-get install zsh git wget
+brew install zsh zsh-completions # Mac
+
 wget --no-check-certificate 。![]https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
 
 chsh -s /bin/zsh
@@ -85,11 +86,6 @@ source ~/.bashrc # 运行
 #### oh my zsh
 
 ```sh
-cat /etc/shells # 查看shell
-
-sudo yum install zsh
-sudo apt-get install zsh
-
 # 自动安装
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
@@ -109,6 +105,7 @@ bash # 切换 bash
 > 配置： home目录的.zshrc(不用单配，插件配置有)
 
 ```
+# alias
 alias cls='clear'
 alias ll='ls -l'
 alias la='ls -a'
@@ -132,24 +129,18 @@ alias gpull='git pull'
 alias gci='git commit -a'
 alias gpush='git push origin HEAD:refs/for/master'
 alias gst='git status'
-alias sublime='open -a "Sublime Text"' //加入Sublime Text
-```
+alias sublime='open -a "Sublime Text"' # 加入Sublime Text
 
-> 主题设置：ZSH_THEME="robbyrussell"（文件在~/.oh-my-zsh/themes）
+ZSH_THEME="robbyrussell" # 主题设置（文件在~/.oh-my-zsh/themes）
+
+# 插件
+plugins=(git textmate ruby autojump osx mvn gradle autojump)
+```
 
 ```
 PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}>'
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 ```
-
-> 插件：追加：plugins=(git textmate ruby autojump osx mvn gradle)
-
-  - autojump
-
-    brew install autojump 或者 git clone git://github.com/joelthelion/autojump.git ./install.py 添加[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh到.zshrc
-- 使用：
-
-  - 跳转目录： j + 目录名
 
 ### fish
 

@@ -12,4 +12,7 @@ curl https://sh.rustup.rs -sSf | sh
 
 通过rustup管理
 
-## [文档](https://kaisery.gitbooks.io/rust-book-chinese/content/)
+> 参考
+
+* [文档](https://kaisery.gitbooks.io/rust-book-chinese/content/)
+* [The Rust Programming Language](https://doc.rust-lang.org/book/second-edition/index.html)
