@@ -282,15 +282,12 @@ Docker Compose 是一款容器编排程序，使用 YAML 配置的形式将你�
 version: "2"
 
 services:
-
+ // 服务名称
     nginx:
-
         depends_on:
-
           - "php"
-
+        // 指定服务的镜像名称或镜像 ID
         image: "nginx:latest"
-
         volumes:
 
           - "$PWD/src/docker/conf:/etc/nginx/conf.d"
