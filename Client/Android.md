@@ -15,6 +15,8 @@ export ANDROID_HOME=/Users/henry/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/platforms
 export PATH=${PATH}:$ANDROID_HOME/platform-tools
 export PATH=${PATH}:$ANDROID_HOME/tools
+
+SDK= 
 ```
 
 ## ADB
