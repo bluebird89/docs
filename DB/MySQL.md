@@ -1349,6 +1349,7 @@ sudo apt-get install mysql-proxy
 ## 工具
 
 * [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. http://vitess.io
+* [dbcli/mycli](https://github.com/dbcli/mycli):A Terminal Client for MySQL with AutoCompletion and Syntax Highlighting. http://mycli.net
 
 您可以通过创建数据表来存储许可数据，以及所有许可用户标识和产品标识符来对数据进行非规范化（反规范化）处理，并针对特定客户进行查询。 您需要使用INSERT / UPDATE / DELETE上的MySQL触发器来重建表格（不过这要取决于数据来更改的表格），这会显着提高查询数据的性能。
 
