@@ -43,7 +43,6 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * [使用 dotfiles 和 stow 管理你的 dotfiles](https://github.com/jcouyang/dotfiles)
 * [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
 
-
 ### 命令行
 
 * [guarinogabriel/Mac-CLI](https://github.com/guarinogabriel/Mac-CLI)  OS X command line tools for developers – The ultimate tool to manage your Mac. It provides a huge set of command line commands that automatize the usage of your OS X system.
@@ -80,64 +79,140 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - finder 找到移动到垃圾桶
 - 通过appcleaner彻底清除
 
-## 软件列表
+## 软件
 
-- UI:sketch sketch box
-- CheatSheet 长按⌘键可以显示当前程序快捷键
+> 系统
+
+* [airmail](http://airmailapp.com/):mail client
+* [Hazel](https://www.noodlesoft.com/):Automated Organization for Your Mac.
+* [Gemini](https://macpaw.com/gemini):The intelligent duplicate file finder
+* BTT(BetterTouchTool) 触控板手势增强
+* htop:运行于 Linux 系统监控与进程管理软件，用于取代 Unix 下传统的 top。与 top 只提供最消耗资源的进程列表不同，htop 提供所有进程的列表，并且使用彩色标识出处理器、swap 和内存状态
+* CleanMyMac（需购买解说功能）
+* [Little Snitch 4](https://www.obdev.at/products/littlesnitch/index.html):makes these Internet connections visible and puts you back in control!
+* [Dropzone](https://aptonic.com/):makes it faster and easier to move and copy files, launch applications, upload to many different services, and more.
+* [Time](https://timingapp.com/):automatically tracking how you spend your time.
+* [Fantastical 2](https://flexibits.com/fantastical):The calendar app 收费
+* [Hammerspoon](http://www.hammerspoon.org/): a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
+- SwitchHosts
+- f.lux 屏幕颜色控制
+- manico
+- [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
+
+> 设计
+
+* UI:sketch sketch box
+* Axure：原型工具
+* CmapTools：概念图
+* UML:staruml
+
+> 写作
+
 - markdown: Mou for Mac,Ulysses for Mac,MWeb Lite,[MacDown](https://github.com/MacDownApp/macdown)Open source Markdown editor for macOS.
-- shell：oh my zsh
-- CheatSheet
-- MySql：Sequel Pro
-- [flux](https://justgetflux.com/)
-- [moom](https://manytricks.com/moom/)
-- OmniFocus
 - Latex
-- Xcode
-- [PHPstrom](https://www.jetbrains.com/phpstorm/download/download-thanks.html?pl)
-- atom:通过brew安装
-- dash:语言文档
-- Quiver：文档管理器
-- MindNode 2
-- Cloud Outline
-- 播放器：MPlayerX
-- UML:staruml
-- CleanMyMac（需购买解说功能）
-- MAMP:基础版不支持自定义
-- [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro)
-- mysql 使用brew安装
-- git:sourcetree tig
-- RSS：Reeder 3（收费）leaf
-- 修图Snapseed
-- Omnifocus 在践行 GTD
-- 虚拟机：parallels
-- Keyboard Maestro:流程制作工具
+- [MindNode 2](https://mindnode.com/)
 - Alternote(evernote简单客户端)
 - 思维导图：MindNode 2（收费）
-- weibo:WeiboX
-- BTT(BetterTouchTool) 触控板手势增强
+- Quiver：笔记软件
+- [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
+- [ulysses](https://ulyssesapp.com/)
+- [marked2](http://marked2app.com/)
+
+> 工具
+
+- shell：oh my zsh
+- CheatSheet 长按⌘键可以显示当前程序快捷键
+- [flux](https://justgetflux.com/)
+- [moom](https://manytricks.com/moom/)
+- [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
+- [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):
+- [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
+- [beaker](https://beakerbrowser.com/):Beaker is a peer-to-peer browser with tools to create and host websites.
+
+> Pod
+
+* [insidegui/PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
+
+> Web开发
+
+* MySql：Sequel Pro
+* [Paw](https://paw.cloud/):The most advanced API tool for Mac
+* MAMP:基础版不支持自定义
+- 虚拟机：parallels
+
+> 交流
+
+* [Textual 7](Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.)
+- OmniFocus
+
+> RSS
+
+* [Reeder 3](http://reederapp.com/mac/)
+* feedly
+* leaf
+
+> 管理
+
+- Keyboard Maestro:流程制作工具
 - OmniFocus：GTD思路的应用
 - Fantastical：日程管理应用
-- Axure：原型工具
-- CmapTools：概念图
-- Quiver：笔记软件
-- htop:运行于 Linux 系统监控与进程管理软件，用于取代 Unix 下传统的 top。与 top 只提供最消耗资源的进程列表不同，htop 提供所有进程的列表，并且使用彩色标识出处理器、swap 和内存状态
-- [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
-- [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
+- Omnifocus 在践行 GTD
+- sourcetree 
+- tig
+- [Ship](https://www.realartists.com/index.html):Fast, native, comprehensive issue tracking and code review for GitHub
+- [trello](https://trello.com/home)
+
+> 文档
+
+- dash:语言文档
+- Quiver：文档管理器
+- 文档：[apidoc](http://apidocjs.com/)
+- [jgm/pandoc](https://github.com/jgm/pandoc):Universal markup converter http://johnmacfarlane.net/pandoc
+- [TRANSMIT 5](https://www.panic.com/transmit/):Upload, download, and manage files on tons of servers with an easy, familiar, and powerful UI. It’s quite good.
+- Cloud Outline
+- iCHM
+
+> 音乐
+
+- 播放器：MPlayerX
+- [beardedspice/beardedspice](https://github.com/beardedspice/beardedspice):Mac Media Keys for the Masses http://beardedspice.github.io
+- [Noizio](http://noiz.io/):turn on the sound and allow yourself to become engulfed in the tranquil sounds of nature.
+
+> 图片
+
+- 修图Snapseed
+
+
+
+> 阅读
+
 - ibooks：阅读支持pdf与epub，可以通过icloud同步
 - iTunes Movie Trailers
-- manico
-- SwitchHosts
+
+
 - [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
-- f.lux 屏幕颜色控制
-- iCHM
-- [typcn/bilibili-mac-client](https://github.com/typcn/bilibili-mac-client)An unofficial bilibili client for mac
-- 文档：[apidoc](http://apidocjs.com/)
-- Reeder 3 RSS订阅（暂时feedly代替）
+
+
+
 - mounty:win的移动硬盘
 - [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
-- [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
-- Fantastical 2:日历工具 收费
-- [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
+
+
+
+> 代码
+
+- Xcode
+* [SnippetsLab](https://www.renfei.org/snippets-lab/):SnippetsLab is an easy-to-use code snippets manager
+- [PHPstrom](https://www.jetbrains.com/phpstorm/download/download-thanks.html?pl)
+- atom:通过brew安装
+- [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
+- [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
+
+> 沟通
+
+* slack
+* [telegram](https://telegram.org/)
+- weibo:WeiboX
 
 ### 苹果铃声制作
 
