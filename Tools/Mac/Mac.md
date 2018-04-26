@@ -2,7 +2,7 @@
 
 Mac：最大优势是 GUI 和命令行的完美结合
 
-## 硬件说明
+## 硬件
 
 * Apple Magic Trackpad 2：重现Mac pro mul touch功能
 * 耳机 BeoPlay H6
@@ -16,7 +16,6 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * dock 停在左边
 * iphone,只能同步一台设备itunes配置
 * 设置未收录的开发者应用`sudo spctl --master-disable`
-* [修改hosts](https://github.com/racaljk/hosts)
 * [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
 * [awesome-osx-command-line](https://github.com/herrbischoff/awesome-osx-command-line)Use your OS X terminal shell to do awesome things.
 * [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
@@ -32,6 +31,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
 * [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
 * [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
+* [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
 
 ### 配置文件
 
@@ -94,10 +94,13 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 * [Time](https://timingapp.com/):automatically tracking how you spend your time.
 * [Fantastical 2](https://flexibits.com/fantastical):The calendar app 收费
 * [Hammerspoon](http://www.hammerspoon.org/): a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
-- SwitchHosts
-- f.lux 屏幕颜色控制
-- manico
-- [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
+* SwitchHosts
+* f.lux 屏幕颜色控制
+* manico
+* [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
+* [alfred](https://www.alfredapp.com/):a very powerful launcher that you can program to show you anything you want
+* [MrRio/vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. http://parall.ax/vtop
+* [GPG Suite](https://gpgtools.org/)
 
 > 设计
 
@@ -125,7 +128,7 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - [flux](https://justgetflux.com/)
 - [moom](https://manytricks.com/moom/)
 - [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
-- [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):
+- [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):essentially an IDE for automation
 - [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
 - [beaker](https://beakerbrowser.com/):Beaker is a peer-to-peer browser with tools to create and host websites.
 
@@ -160,7 +163,9 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - sourcetree 
 - tig
 - [Ship](https://www.realartists.com/index.html):Fast, native, comprehensive issue tracking and code review for GitHub
-- [trello](https://trello.com/home)
+- [trello](https://trello.com/home): Project management tool
+- [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
+- Day One - Digital journal
 
 > 文档
 
@@ -181,8 +186,7 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 > 图片
 
 - 修图Snapseed
-
-
+- [Pixave](http://www.littlehj.com/mac/) - Image/GIF/Video organizer
 
 > 阅读
 
@@ -657,4 +661,5 @@ karabiner
 
 ## 参考
 
-* [hzlzh/Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等 
+* [hzlzh/Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
+* [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
