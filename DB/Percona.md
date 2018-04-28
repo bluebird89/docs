@@ -20,9 +20,7 @@ wget https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.
 
 wget https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.18-14/source/tarball/percona-server-5.7.18-14.tar.gz
 tar xfz percona-server-5.7.18-14.tar.gz
-```
 
-```shell
 mysql-common, libjemalloc1, libaio1 and libmecab2
 
 wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
