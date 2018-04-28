@@ -16,11 +16,22 @@ ruby -v
 gem install bundler
 
 # Mac
-\curl -sSL https://get.rvm.io | bash -s stable
+brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
+# echo 'eval "$(rbenv init -)"' >> ~/Projects/config/env.sh
+rbenv install 2.1.1
+rbenv global 2.1.1
+
 # rvm 是 Ruby 的版本管理工具，其作用是在系统中安装若干个不同版本的 Ruby，且不让它们之间发生冲突
+curl -sSL https://get.rvm.io | bash -s stable
 rvm install 2.3.1
 rvm use 2.3.1
 rvm uninstall 1.9.2
+
+# Managing gems in application
+gem install bundler
+echo 'bundler' >> "$(brew --prefix rbenv)/default-gems"
+
+echo 'gem: --no-document' >> ~/.gemrc
 ```
 
 ## install rails

@@ -81,7 +81,7 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 
 ## 软件
 
-> 系统
+### 系统
 
 * [airmail](http://airmailapp.com/):mail client
 * [Hazel](https://www.noodlesoft.com/):Automated Organization for Your Mac.
@@ -102,14 +102,14 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 * [MrRio/vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. http://parall.ax/vtop
 * [GPG Suite](https://gpgtools.org/)
 
-> 设计
+### 设计
 
 * UI:sketch sketch box
 * Axure：原型工具
 * CmapTools：概念图
 * UML:staruml
 
-> 写作
+### 写作
 
 - markdown: Mou for Mac,Ulysses for Mac,MWeb Lite,[MacDown](https://github.com/MacDownApp/macdown)Open source Markdown editor for macOS.
 - Latex
@@ -120,8 +120,9 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
 - [ulysses](https://ulyssesapp.com/)
 - [marked2](http://marked2app.com/)
+- [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
 
-> 工具
+### 工具
 
 - shell：oh my zsh
 - CheatSheet 长按⌘键可以显示当前程序快捷键
@@ -132,29 +133,29 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
 - [beaker](https://beakerbrowser.com/):Beaker is a peer-to-peer browser with tools to create and host websites.
 
-> Pod
+### Pod
 
 * [insidegui/PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
 
-> Web开发
+### Web开发
 
 * MySql：Sequel Pro
 * [Paw](https://paw.cloud/):The most advanced API tool for Mac
 * MAMP:基础版不支持自定义
 - 虚拟机：parallels
 
-> 交流
+### 交流
 
 * [Textual 7](Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.)
 - OmniFocus
 
-> RSS
+### RSS
 
 * [Reeder 3](http://reederapp.com/mac/)
 * feedly
 * leaf
 
-> 管理
+### 管理
 
 - Keyboard Maestro:流程制作工具
 - OmniFocus：GTD思路的应用
@@ -167,7 +168,7 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
 - Day One - Digital journal
 
-> 文档
+### 文档
 
 - dash:语言文档
 - Quiver：文档管理器
@@ -177,33 +178,25 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - Cloud Outline
 - iCHM
 
-> 音乐
+### 音乐
 
 - 播放器：MPlayerX
 - [beardedspice/beardedspice](https://github.com/beardedspice/beardedspice):Mac Media Keys for the Masses http://beardedspice.github.io
 - [Noizio](http://noiz.io/):turn on the sound and allow yourself to become engulfed in the tranquil sounds of nature.
 
-> 图片
+### 图片
 
 - 修图Snapseed
 - [Pixave](http://www.littlehj.com/mac/) - Image/GIF/Video organizer
 
-> 阅读
+### 阅读
 
 - ibooks：阅读支持pdf与epub，可以通过icloud同步
 - iTunes Movie Trailers
-
-
-- [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
-
-
-
 - mounty:win的移动硬盘
 - [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
 
-
-
-> 代码
+### 代码
 
 - Xcode
 * [SnippetsLab](https://www.renfei.org/snippets-lab/):SnippetsLab is an easy-to-use code snippets manager
@@ -212,7 +205,7 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
 - [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
 
-> 沟通
+### 沟通
 
 * slack
 * [telegram](https://telegram.org/)
@@ -263,7 +256,7 @@ iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配�
 - command + d:后台关闭程序
 - command + s/c/x/z/f／g/a/~:保存／复制／剪切／撤销／查找／查找的在一个／切换tab
 - command + option + v 粘贴
-- 预览文件 快速查看 -->Space
+- 预览文件 快速查看 --###Space
 - 文件简介 -->Command+i
 - 打开文件 -->Command+O
 - 剪切文件 -->Command+Option+v
@@ -642,7 +635,7 @@ mackup backup
 mackup restore
 mackup uninstall
 
-# mackup 配置文件 .mackup.cfg 
+# mackup 配置文件 .mackup.cfg
 [storage]
 engine = file_system
 path = dotfiles # 文件路径
@@ -663,3 +656,5 @@ karabiner
 
 * [hzlzh/Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
 * [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
+* [Mac效率神器Alfred以及常用Workflow](https://www.jianshu.com/p/0e78168da7ab)
+* [](http://sourabhbajaj.com/mac-setup/)
