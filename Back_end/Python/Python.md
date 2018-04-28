@@ -38,8 +38,7 @@ Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编
 brew install python3
 
 # 修改 .bash_profil文件，先搜索尾部，找到后停止搜索
-PATH="/System/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
-export PATH
+export PATH="/System/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
 
 # 修改系统默认python版本
 export PATH="/usr/local/Cellar/python/3.6.5/bin:$PATH"
@@ -68,7 +67,7 @@ pip3 install --upgrade pip setuptools wheel
 [Using Python on a Macintosh](https://docs.python.org/3/using/mac.html)
 
 > windows
- 
+
 ```sh
 pip install scrapy
 C:\Users\Administrator\AppData\Local\Programs\Python\Python36 # 路径
@@ -79,16 +78,17 @@ pip install pywin32 # No module named win32api
 
 多版本python共存的环境工具，可以在不改变系统环境的情况下，可以随意切换不同python版本。基于某个版本开发的工具，在更换了不同python版本之后，就会导致工具中的某个模块、代码错误，而不能正常使用。
 
-```shell
+```sh
 brew install pyenv
 
-pyenv versions   // 查看当前系统中所有可用的 Python 版本
+pyenv versions   #  查看当前系统中所有可用的 Python 版本
 pyenv commands
-pyenv install -l  //可使用版本列表
-pyenv install 3.5.1 // 安装
+pyenv install -l  # 可使用版本列表
+pyenv install 3.5.1 #  安装
 pyenv uninstall 3.5.1
-pyenv which python // 显示路径
-pyenv global 3.5.2  // 从三个维度来管理 Python 环境，简称为： 当前系统 、 当前目录 、 当前shell 。这三个维度的优先级从左到右依次升高，即 当前系统 的优先级最低、 当前shell 的优先级最高。
+pyenv which python #  显示路径
+pyenv global 3.5.2  #  从三个维度来管理 Python 环境，简称为： 当前系统 、 当前目录 、 当前shell 。这三个维度的优先级从左到右依次升高，即 当前系统 的优先级最低、 当前shell 的优先级最高。
+pyenv global 2.7.12 3.5.2 # prefer 2.7.12 over 3.5.2
 pyenv local 3.5.2
 pyenv shell 3.5.2
 
@@ -96,26 +96,31 @@ $ curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pye
 export PATH=$HOME/.pyenv/bin:$PATH  //加进系统的环境变量 ～／.zshrc
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+echo 'eval "$(pyenv init -)"' >> ~/Projects/config/env.sh
 
 pyenv -v
 pyenv doctor
 pyenv update
-pyenv install --list
 cat ~/.pyenv/version
 pyenv version
 ```
 
 ### 虚拟沙盒virtualenv
 
-virtualenv为应用提供了隔离的Python运行环境，解决了不同应用间多版本的冲突问题。
+Virtualenv is a tool that creates an isolated Python environment for each of your projects
 
 ```sh
 pip install virtualenv
+
+cd myproject/
+virtualenv venv
 virtualenv --no-site-packages app_env
+virtualenv venv --system-site-packages # also inherit globally installed packages
+
 source app_env/bin/activate
 deactivate
 
-brew install pyenv-virtualenv  // 集成安装
+brew install pyenv-virtualenv  #集成安装
 virtualenv
 virtualenv-delete
 virtualenv-init
@@ -141,39 +146,55 @@ Wheels are the new standard of python distribution and are intended to replace e
 
 Python2.7的安装包中，easy_install.py是默认安装的，而pip需要我们手动安装
 
-```shell
-python get-pip.py   //windows
+```sh
+curl https://bootstrap.pypa.io/get-pip.py > get-pip.py
+
+sudo python get-pip.py
+python get-pip.py   # windows
 
 sudo apt-get install python-pip
 
 sudo easy_install pip
+
+pip search Package              # 搜索软件包
 pip install 'Markdown<2.0'
 pip install 'Markdown>2.0,<2.0.3'
-pip show --files SomePackage
 pip install selenium   # 安装模块包
+
+pip install --upgrade/-U Package        # 升级软件包
+pip install --upgrade pip
+pip show --files SomePackage
+
 pip list                        # 列出已安装的包
 pip list --outdated             # 查看哪些软件需要更新
 pip show --files Package        # 查看安装包时安装了哪些文件
 pip uninstall Package           # 卸载软件包
-pip search Package              # 搜索软件包
-pip install --upgrade/-U Package        # 升级软件包
-pip install --upgrade pip
 
 pip freeze > requirements.txt        # 导出 //Requirements文件 一般记录的是依赖软件列表，通过pip可以一次性安装依赖软件包:
 pip install -r requirements.txt         # 安装
 
-pip completion --bash >> ~/.profile // Bash  pip命令自动补全
+pip completion --bash >> ~/.profile # Bash  pip命令自动补全
 ~/.profile
 
-pip completion --zsh >> ~/.zprofile  //对于zsh
+pip completion --zsh >> ~/.zprofile  # 对于zsh
  ~/.profile
 ```
 
-## 工具
+### [iPython](https://github.com/ipython/ipython)
 
-* [iPython](https://github.com/ipython/ipython) - 更强大的python交互shell，支持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能和函数
-* [Anaconda](https://github.com/DamnWidget/anaconda):有命令行与图形界面两种方式,Anaconda turns your Sublime Text 3 in a full featured Python development IDE including autocompletion, code linting, IDE features, autopep8 formating, McCabe complexity checker Vagrant and Docker support for Sublime Text 3 using Jedi, PyFlakes, pep8, MyPy, PyLint, pep257 and McCabe that will never freeze your Sublime Text 3
-* jupyter
+更强大的python交互shell，支持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能和函数
+
+```sh
+pip install ipython
+
+pip install 'ipython[zmq,qtconsole,notebook,test]'
+```
+
+### [Anaconda](https://github.com/DamnWidget/anacond)
+
+有命令行与图形界面两种方式,Anaconda turns your Sublime Text 3 in a full featured Python development IDE including autocompletion, code linting, IDE features, autopep8 formating, McCabe complexity checker Vagrant and Docker support for Sublime Text 3 using Jedi, PyFlakes, pep8, MyPy, PyLint, pep257 and McCabe that will never freeze your Sublime Text 3
+
+###  jupyter
 
 ## 教程
 
@@ -1374,7 +1395,7 @@ CMD ["python3"]
         - 1、项目环境自动化部署；
         - 2、项目代码自动化发布；
         - 3、项目生命周期理解；
-* 数据结构    
+* 数据结构
     - 时间和空间复杂度、链表、桟和队列、排序、二叉树、python内建数据结构类型；
 
 ## 问题

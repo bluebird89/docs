@@ -59,22 +59,16 @@ Docker基于LXC的改进
 隔离性主要是来自kernel的namespace, 其中pid, net, ipc, mnt, uts 等namespace将container的进程, 网络, 消息, 文件系统和hostname 隔离开。
 
 - 隔离性
-
   - pid namespace：不同用户的进程就是通过pid隔离开的，且不同的namespace中可以有相同pid。所有LXC进程在Docker中的父进程为Docker进程，同时允许嵌套，实现Docker in Docker。
   - net namespace:网络的隔离则通过net namespace实现，每个net namspace有独立的network device， IP, IP routing table， /proc/net目录等。
   - ipc namespace:Container中进程交互采用linux的进程间交互方法， Interprocess Communicaiton - IPC， 包括信号量，消息队列，共享内存等。
   - mnt namespace: mnt namespace允许不同namespace的进程看到的文件结构不同，即隔离文件系统。
   - uts namesapce:UTS - Unix Time-Sharing System namespace允许每个Container拥有独立的hostname和domain name，使其在网络上可以独立的节点。
   - user namespace：每个Container拥有不同user和group id，即隔离用户。
-
 - 可配额/可度量:Linux的cgroups实现了对资源配额和度量。cgroups类似文件的接口，在/cgroups目录下新建一个group，在此文件夹新建task，并将pid写入即可实现对改进程的资源控制。groups可以限制blkio，cpu，devices，memory，net_cls, ns等9大子系统。
-
 - 便携性
-
   - AUFX（Another UnionFS），做到了支持将不同目录挂在到同一个虚拟文件系统下，AUFX支持为每一个成员目录设定权限readonly，readwrite等，同时引入分层概念，对于readonly的权限branch可以逻辑进行增量修改。Docker的初始化是将rootfs以readonly加载，之后利用union mount将一个readwrite文件系统挂载在readonly的rootfs之上，并向上叠加，这一系列的结构构成了container运行时。 ![](../_static/docker_init.jpg)
-
 - 安全性
-
   - 借助linux的kernel namspace和cgroups实现
   - deamon的安全接口
   - linux本身提供的安全方案，apparmor，selinux
@@ -93,6 +87,7 @@ Docker基于LXC的改进
 # MAC
 brew install docker
 brew install boot2docker
+brew cask install docker-toolbox
 
 # Ubuntu
 # Install packages to allow apt to use a repository over HTTPS
@@ -103,7 +98,7 @@ curl \
 software-properties-common
 
 # Add Docker's official GPG key
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -   
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
 
 # set up the stable repository
@@ -115,10 +110,13 @@ sudo add-apt-repository \
 # Update the apt package index and install
 sudo apt-get update
 sudo apt-get install docker-ce
+sudo apt-get upgrade docker-ce
 
 sudo apt-get install -y docker.io
 sudo systemctl start docker
 sudo systemctl enable docker
+
+docker version
 ```
 
 ## Usage:
@@ -145,14 +143,7 @@ ensure docker daemon runing
 - CREATED：镜像创建时间
 - SIZE：镜像大小
 
-```sh
-docker images // 列出本地主机上的镜像
-docker pull ubuntu:13.10 // 获取镜像
-docker search httpd  // 搜索镜像
-sudo apt-get upgrade docker-ce
-```
-
-#### 创建镜像
+创建镜像
 
 - 从已经创建的容器中更新镜像，并且提交这个镜像
 
@@ -184,21 +175,27 @@ EXPOSE 80
 CMD /usr/sbin/sshd -D
 ```
 
-### 容器使用
-
 ```sh
-docker version
-docker search tutorial
-docker pull learn/tutorial  
+# 镜像
+docker images # 列出本地主机上的镜像
+docker pull ubuntu:13.10 # 获取镜像
+docker search httpd  # 搜索镜像
+docker pull learn/tutorial
 docker create ubuntu:14.04 #  create images
+docker rmi [IMAGE ID] # Remove one or more images.
+docker build [DOCKERFILE PATH] # Build an image from a Dockerfile
+docker build -t my-org:my-image -f /tmp/Dockerfile #  Build an image tagged my-org/my-image where the Dockerfile can be found at /tmp/Dockerfile.
+
+# 容器
+
 
 docker run -i -t ubuntu:15.10 /bin/bash # 在新容器内建立一个伪终端或终端。
-docker run -d -P training/webapp python app.py   #  -P :是容器内部端口随机映射到主机的高端口。    
+docker run -d -P training/webapp python app.py   #  -P :是容器内部端口随机映射到主机的高端口。
 docker run -d -p 127.0.0.1:5001:5002  --name runoob training/webapp python app.py   # -p : 是容器内部端口绑定到指定的主机端口。  使用--name标识来命名容器
-docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py  
+docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py
 docker run learn/tutorial echo "hello word"   # 两个参数，一个是指定镜像名（从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像），一个是要在镜像中运行的命令
 docker run learn/tutorial apt-get install -y ping   # learn/tutorial镜像里面安装ping程序
-docker run [组织名称]/<镜像名称>:[镜像标签] 
+docker run [组织名称]/<镜像名称>:[镜像标签]
 
 docker ps    # 查看运行容器状态
 docker-compose ps #查看当前项目容器
@@ -210,15 +207,24 @@ docker logs -f $CONTAINER_ID  | docker attach $CONTAINER_ID  # -f:动态输出
 docker top determined_swanson    # 查看容器内部运行的进程
 docker-compose exec {container-name} bash
 
+docker inspect [CONTAINER ID] # Shows all the info of a container.
+docker exec [CONTAINER ID] touch /tmp/exec_works # Execute a command inside a running container.
+
 docker inspect name  ||  docker ps -l(ast)/-a(ll)     # 查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息
 docker start name
 docker rm name # 移除容器
+docker rm $(docker ps -a -q) # Delete all containers
+docker rmi $(docker images | grep '^<none>' | awk '{print $3}') # Delete all untagged containers
 docker push learn/ping
 docker port 7a38a1ad55c6  docker port determined_swanson：查看指定 （ID或者名字）容器的某个确定端口映射到宿主机的端口号
 
-
 docker stop $CONTAINER_ID
 docker-compose stop # 关闭当前项目容器
+
+docker system df # See all space Docker take up
+docker inspect [CONTAINER ID] | grep -wm1 IPAddress | cut -d '"' -f 4 # Get IP address of running container
+docker kill $(docker ps -q) #Kill all running containers
+docker rmi $(docker images | grep '^<none>' | awk '{print $3}') # Delete all untagged containers
 
 # 如果要为底层主机添加卷（例如对于 DB 持久性数据），则应该在镜像内定义映射卷： RUN
 mkdir -p /data VOLUME ["/data"]

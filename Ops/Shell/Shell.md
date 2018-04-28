@@ -75,6 +75,7 @@ echo $SHELL/bin/bash
 
 sudo yum install zsh
 sudo apt-get install zsh git wget
+
 brew install zsh zsh-completions # Mac
 
 wget --no-check-certificate 。![]https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
@@ -92,7 +93,7 @@ source ~/.bashrc # 运行
 # 自动安装
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
 # 手动
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
@@ -108,6 +109,9 @@ bash # 切换 bash
 > 配置： home目录的.zshrc(不用单配，插件配置有)
 
 ```
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+
 # alias
 alias cls='clear'
 alias ll='ls -l'
@@ -475,6 +479,13 @@ Host 10.10.0.*      #可以用*通配符
     User username   #服务器的用户
 
     ProxyCommand ssh username_tiaoban@tiaoban -W %h:%p
+```
+
+## tac
+
+```sh
+brew install coreutils
+ln -s /usr/local/bin/gtac /usr/local/bin/tac
 ```
 
 ## 分类

@@ -27,11 +27,11 @@ export GOPATH=$HOME/go #默认安装包的路径
 export PATH=$PATH:$GOPATH/bin
 
 ### Mac
-brew install go
+brew install golang
+
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
 mkdir -p $GOPATH $GOPATH/src $GOPATH/pkg $GOPATH/bin
 
@@ -55,7 +55,12 @@ go get 用来动态获取远程代码包的，fetch libraries from remote and pu
 go get github.com/yudai/gotty  // ok的
 
 go get -u -v github.com/labstack/echo
-package golang.org/x/crypto/acme/autocert: unrecognized import path "golang.org/x/crypto/acme/autocert" (https fetch: Get https://golang.org/x/crypto/acme/autocert?go-get=1: dial tcp 172.217.6.127:443: i/o timeout) // 仓库被屏蔽
+// unrecognized import path "golang.org/x/crypto/acme/autocert" (https fetch: Get https://golang.org/x/crypto/acme/autocert?go-get=1: dial tcp 172.217.6.127:443: i/o timeout) // bin配置错误
+
+gofmt -w yourcode.go // Format your code
+godoc fmt                // documentation for package fmt
+godoc fmt Printf         // documentation for fmt.Printf
+godoc -src fmt // fmt package interface in Go source form
 ```
 
 ## Build&Run
@@ -169,6 +174,6 @@ websocketd --port=8080 ./count.sh // 建立server
 - [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
 - [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 - [golang/go](https://github.com/golang/go):The Go programming language https://golang.org
-[gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph 
+- [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph 
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>
