@@ -14,6 +14,7 @@
 ```sh
 brew cask install virtualbox
 brew cask install vagrant
+brew cask install vagrant-manager
 ```
 
 ### windows
@@ -32,8 +33,6 @@ C:\>tasklist|findstr "2448"
 thread.exe  2016 Console    0    16,064 K
 ```
 
-### Linux
-
 ## 使用
 
 ### box管理
@@ -44,6 +43,7 @@ vagrant box list              # 列表
 vagrant box add {title} {url}       # 添加镜像 title ubuntu/trusty64 [laravel/homestead](https://vagrantcloud.com/laravel/boxes/homestead/versions/3.0.0/providers/virtualbox.box)外网不稳定，可以试着换时间下载
 vagrant box add ubuntu/trusty64 # 通过包名先去本地是否存在，没有去仓库下载，下载的版本在上述命令行下加入 --box-version=版本号
 vagrant box add hahaha ~/box/package.box # 加载本地文件(package包) 
+vagrant box add precise64 http://files.vagrantup.com/precise64.box
 
 vagrant box remove name       # 移除镜像
 vagrant box repackage         # 重新打包
@@ -55,8 +55,8 @@ box下载
 * 国外服务器通过wget下载，scp root@192.168.10.10:virtualbox.box virtualbox.box
 * box版本号的问题
 
-```
-# 新建metadata.json
+```json
+// 新建metadata.json
 {
     "name": "laravel/homestead",            //盒子名称
     "versions": 
@@ -85,7 +85,7 @@ vagrant box add metadata.json
 * 使用Shell来编写安装脚本
 
 ```sh
-vagrant -h 
+vagrant -h
 
 vagrant init hashicorp/precise64  # 用 hashicorp/precise64 进行 box 初始化实例，自动帮你生成vagrantfile，默认base
 

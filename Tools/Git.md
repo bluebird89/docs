@@ -19,7 +19,7 @@ fast, scalable, distributed revision control system.一个分布式的代码管�
 
 ## Install
 
-```shell
+```sh
 sudo apt-get install git
 
 brew install git
@@ -50,12 +50,23 @@ git clone有两种方式https与ssh，SSH keys的使用需保证remote的源为g
 * 项目配置：project/.git/config   `git config`
 * 查看配置:`git config --list --show-origin`
 
-```shell
+```sh
+git --version
 git config --global user.name "name"
 git config --global user.email "email"
 git config --global color.ui "auto"
 git config --global core.editor vim # 设置编辑器为 vim
 git config -l                       # 列举所有配置
+
+git config --global credential.helper osxkeychain
+
+git config --global core.excludesfile ~/.gitignore
+echo .DS_Store >> ~/.gitignore
+
+git config --global mergetool.sublime.cmd "subl -w \$MERGED"
+git config --global mergetool.sublime.trustExitCode false
+git config --global merge.tool sublime
+git mergetool -y
 ```
 
 ### key生成
@@ -70,6 +81,15 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/github
 ssh-add -K ~/.ssh/github # 如果不是默认密钥 id_rsa ，则需要以下命令注册密钥文件，-K 参数将密钥存入 Mac Keychain
 cat ~/.ssh/github.pub 
 ssh -T git@github.com  # 验证
+
+eval "$(ssh-agent -s)"
+ssh-add -K ~/.ssh/id_rsa
+
+# ~/.ssh/config:
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
 ```
 
 #### GPG

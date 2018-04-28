@@ -6,24 +6,20 @@
 
 ## 安装
 
+```sh
 ### linux
-
-```shell
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 sudo apt-get update
 sudo apt-get install sublime-text
-```
 
 ### Mac
-
-```shell
 brew cask install sublime-text
+
+ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
+
+### windows 添加到命令行`D:\Program Files\Sublime Text 3`
 ```
-
-### windows
-
-添加到命令行`D:\Program Files\Sublime Text 3`
 
 ## 配置
 
@@ -81,23 +77,32 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
 
 ## 插件
 
-- SublimeLinter：前端编码利器用于高亮提示用户编写的代码中存在的不规范和错误的写法、代码跳转
-- HTML-CSS-JS Prettify：格式化（美化）html、css、js三种文件类型的插件
-- SublimeTmpl：文件模板都在插件目录的templates
-- Markdown Preview
-- MarkdownEditing
-- SublimeTableEditor:markdown表格插件
-- Git:Plugin for some git integration into sublime text
-- Doc​Blockr: Simplifies writing DocBlock comments in Javascript, PHP, CoffeeScript, Actionscript, C & C++
-- sublime-text-git
-- AutoPEP8：格式化Python代码。
-- Alignment：进行智能对齐。
-- SublimeCodeIntel:code intelligence and smart autocomplete engine
-- GitGutter:see git diff in gutter
-- GoSublime:A Golang plugin collection for SublimeText 3
-- Bootstrap 3 Snippets:A sublime plugin complete with Bootstrap 3 snippets
-- autofilename:自动关联图片,css,js等资源路径插件
-- Sublime​REPL:不同语言命令行模式
+* Alignment：进行智能对齐
+* All Autocomplete: Extend Sublime Text 2 auto-completion to find matches in all open files of the current window
+* autofilename:自动关联图片,css,js等资源路径插件
+* AutoFileName: Plugin that auto-completes filenames
+* AutoPEP8：格式化Python代码。
+* Bootstrap 3 Snippets:A sublime plugin complete with Bootstrap 3 snippets
+* BracketHighlighter: Bracket and tag highlighter
+* Doc​Blockr: Simplifies writing DocBlock comments in Javascript, PHP, CoffeeScript, Actionscript, C & C++
+* FileDiffs: Shows diffs between the current file, or selection(s) in the current file, and clipboard, another file, or unsaved changes
+* Git:Plugin for some git integration into sublime text
+* GitGutter: A Sublime Text 2 and 3 plugin to see git diff in gutter
+* HTML-CSS-JS Prettify：格式化（美化）html、css、js三种文件类型的插件
+* Markdown Preview
+* MarkdownEditing
+* Python Auto-Complete: Sublime Text 2 plugin which adds additional auto-completion capability to Python scripts
+* Python Imports Sorter: Sublime Text 2 plugin to organize your imports easily
+* Python PEP8 Autoformat: Python PEP8 auto-format is a plugin to interactively reformat Python source code according to PEP-8
+* PythonTraceback: Easy navigation in your python tracebacks
+* SideBarEnhancements: Enhancements to sidebar. Files and folders.
+* SublimeTableEditor:markdown表格插件
+* SublimeTmpl：文件模板都在插件目录的templates
+* SublimeLinter：前端编码利器用于高亮提示用户编写的代码中存在的不规范和错误的写法、代码跳转* sublime-text-git
+* SublimeCodeIntel:code intelligence and smart autocomplete engine
+* Sublime​REPL:不同语言命令行模式
+* SublimeLinter-pep8: Linter plugin for python using PEP8
+* TrailingSpaces: Highlight trailing spaces and delete them in a flash
 
 ```
 ctrl+alt+h html
@@ -458,16 +463,14 @@ Test: ${5:Nested ${6:Placeholder}}
 </snippet>
 ```
 
-### 快捷键
-
 ### 配置同步
 
-### 通过共享文件
+#### 通过共享文件
 
 - 清除 Packages 目录下User
 - `ln -s ~/baiduyunebooks/sublime3/Packages/User User` // 建立符号链接
 
-### 通过sync-setting配置
+#### 通过sync-setting配置
 
 - 新建github的token
 - 安装syn-setting插件
