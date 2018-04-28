@@ -1,7 +1,13 @@
-# 安装
+# EMACS
 
-```
+## 安装
+
+```sh
+# ubuntu
 sudo apt-get install emacs
+
+brew install emacs-mac
+brew linkapps emacs-mac # 无效
 ```
 
 # 配置(使用 purcell)

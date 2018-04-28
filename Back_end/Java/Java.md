@@ -36,7 +36,7 @@ sudo apt-get install oracle-java9-installer
 sudo update-alternatives --config java | javac // 会获得程序路径
 
 ## JAVA_HOME Environment Variable配置
-sudo vim /etc/environment 添加 JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+sudo vim /etc/environment # 添加 JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 source /etc/environment
 echo $JAVA_HOME
 java -version
@@ -50,7 +50,7 @@ java -version
 * 确认shell,修改配置文件,添加环境变量
 
 ```sh
-# JAVA
+# mac
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home
 export PATH=${PATH}:$JAVA_HOME/bin
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
