@@ -140,6 +140,15 @@ sudo systemctl start openvpn@client
 sudo systemctl status  openvpn@client
 ```
 
+
+## Client
+
+```sh
+sudo add-apt-repository ppa:hzwhuang/ss-qt5
+sudo apt-get update
+sudo apt-get install shadowsocks-qt5
+```
+
 ## 参考
 * [Shadowsocks (简体中文)](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 * [openvpn](https://help.ubuntu.com/lts/serverguide/openvpn.html)

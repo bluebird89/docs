@@ -432,17 +432,6 @@ https://www.v2ex.com/t/9105
 
 https://linux.cn/article-3128-1.html
 
-http://www.jianshu.com/p/34024e830011
-
-https://www.zhihu.com/topic/19557067/top-answers
-
-http://www.jianshu.com/p/c8b79ba7fa69
-
-http://blog.csdn.net/jilijelon/article/details/55013248
-
-http://www.linuxidc.com/Linux/2016-06/132238.htm
-
-http://blog.csdn.net/u012260238/article/details/52716592
 
 
 
@@ -527,7 +516,3 @@ PHP-FPM 的每个进程也只有一个线程，但是一个进程同时只能服
 大多数的 Linux 程序都倾向于使用进程而不是线程，因为 Linux 下相对来说创建进程的开销比较小，而 Linux 的线程功能又不是很强大。
 
 http://blog.csdn.net/enjoy5512/article/details/53408213
-
-https://eallion.com/ubuntu1610
-
-http://www.qqtn.com/article/article_134804_1.html
