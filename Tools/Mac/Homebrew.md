@@ -49,7 +49,7 @@ brew install name # 安装源码 brew info svn 显示软件的各种信息（包
 brew uninstall name # 卸载软件
 brew search name # 搜索brew 支持的软件（支持模糊搜索
 brew home maven # 用浏览器打开
-brew list [FORMULA...] # 列出本机通过brew安装的所有软件
+brew list --versions # 列出本机通过brew安装的所有软件
 brew outdated # 查看哪些程序需要更新  brew update && brew upgrade
 brew update # brew自身更新 
 brew upgrade name  #更新安装过的软件(如果不加软件名，就更新所有可以更新的软件)
@@ -135,3 +135,28 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 source $(brew --prefix)/etc/bash_completion
 fi
 ```
+
+> brew postinstall node  brew postinstall php@7.1 安装权限问题
+
+cd /usr/local && sudo chown -R $(whoami) bin etc include lib sbin share var Frameworks
+
+
+
+_brew cask install \
+    alfred \
+    android-file-transfer \
+    appcleaner \
+    caffeine \
+    cheatsheet \
+    docker \
+    doubletwist \
+    dropbox \
+    google-hangouts \
+    flux \
+    1password \
+    spectacle \
+    sublime-text \
+    superduper \
+    transmission \
+    valentina-studio \
+    vlc
