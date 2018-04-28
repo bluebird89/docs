@@ -22,7 +22,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
 * [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
 * [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
-* [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(推荐)
+* [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(http://sourabhbajaj.com/mac-setup/) 推荐
 * [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
 * [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
 * [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐

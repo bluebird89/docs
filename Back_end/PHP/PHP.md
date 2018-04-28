@@ -59,7 +59,7 @@ php -a # 进入命令行模式
 ### Mac
 
 * 程序路径：`/usr/local/Cellar/php71/7.1.12_23`
-* 配置文件: `/usr/local/etc/php/7.1/php.ini`
+* 配置文件: `/usr/local/etc/php/7.1/` The php.ini and php-fpm.ini file
 * /usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx 通过php-fpm进程运行
 * php71卸载后php-fpm仍然运行
 
