@@ -1,21 +1,21 @@
-# Markdown 语法 Markdown syntax guide 
+# Markdown 语法 Markdown syntax guide
 
 Markdown is a way to style text on the web. You control the display of the document; formatting words as bold or italic, adding images, and creating lists are just a few of the things we can do with Markdown. Mostly, Markdown is just regular text with a few non-alphabetic characters thrown in, like # or *.
 
-GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :smile: 
+GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :smile:
 
 ## 设计哲学 Philosophy
 
 > Markdown 的目標是實現「易讀易寫」。
-> 
+>
 > 不過最需要強調的便是它的可讀性。一份使用 Markdown 格式撰寫的文件應該可以直接以純文字發佈，並且看起來不會像是由許多標籤或是格式指令所構成。
-> 
+>
 > Markdown 的語法有個主要的目的：用來作為一種網路內容的*寫作*用語言。
-> 
+>
 > Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
-> 
+>
 > Readability, however, is emphasized above all else. A Markdown-formatted document should be publishable as-is, as plain text, without looking like it's been marked up with tags or formatting instructions.
-> 
+>
 > Markdown's syntax is intended for one purpose: to be used as a format for *writing* for the web.
 
 <!-- more -->
@@ -26,9 +26,9 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 Markdown 语法：**Example:**
 
 ```
-# 第一级标题 `<h1>` 
-## 第二级标题 `<h2>` 
-###### 第六级标题 `<h6>` 
+# 第一级标题 `<h1>`
+## 第二级标题 `<h2>`
+###### 第六级标题 `<h6>`
 
 # This is an `<h1>` tag
 ## This is an `<h2>` tag
@@ -37,9 +37,9 @@ Markdown 语法：**Example:**
 
 效果如下：**Result:**
 
-# 第一级标题 `<h1>` 
-## 第二级标题 `<h2>` 
-###### 第六级标题 `<h6>` 
+# 第一级标题 `<h1>`
+## 第二级标题 `<h2>`
+###### 第六级标题 `<h6>`
 
 # This is an `<h1>` tag
 ## This is an `<h2>` tag
@@ -128,7 +128,7 @@ Markdown 语法：**Example:**
 
 ```
 1. Item 1 ordered list `Number + . + SPACE`
-2. Item 2 
+2. Item 2
 3. Item 3
     1. Item 3a ordered list `TAB + Number + . + SPACE`
     2. Item 3b
@@ -137,7 +137,7 @@ Markdown 语法：**Example:**
 效果如下：
 
 1. Item 1 ordered list `Number + . + SPACE`
-2. Item 2 
+2. Item 2
 3. Item 3
     1. Item 3a ordered list `TAB + Number + . + SPACE`
     2. Item 3b
@@ -159,8 +159,7 @@ Markdown 语法： **Example:**
 - [x] 任务二 已做任务 `- + 空格 + [x]`
 - [ ] task one not finish `- + SPACE + [ ]`
 - [x] task two finished `- + SPACE + [x]`
- 
- 
+
 ## 图片 Images
 
 Markdown 语法： **Example:**
@@ -173,10 +172,8 @@ Markdown 语法： **Example:**
 
 效果如下：**Result:**
 
-
 ![GitHub set up](https://help.github.com/assets/images/site/set-up-git.gif)
 ![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
-
 
 ## 链接 Links
 
@@ -224,12 +221,12 @@ As Kanye West said:
 
 某某说:
 > 第一行引用
-> 
+>
 > 第二行费用文字
 
 As Kanye West said:
 > We're living the future so
-> 
+>
 > the present is our past.
 
 ## 行内代码 Inline code
@@ -241,7 +238,7 @@ Markdown 语法： **Example:**
 I think you should use an `<addr>` `code` element here instead.
 ```
 
-效果如下： 
+效果如下：
 
 像这样即可：`<addr>` `code`
 
@@ -251,23 +248,21 @@ I think you should use an `<addr>` `code` element here instead.
 
 Markdown 语法： **Example:**
 
-    ```js
-    function fancyAlert(arg) {
-        if(arg) {
+```js
+function fancyAlert(arg) {
+    if(arg) {
         $.facebox({div:'#foo'})
-        }
-    
     }
-    ```
+}
+```
 
 效果如下： **Result:**
 
 ```js
 function fancyAlert(arg) {
     if(arg) {
-    $.facebox({div:'#foo'})
+        $.facebox({div:'#foo'})
     }
-
 }
 ```
 
@@ -386,7 +381,7 @@ Any word wrapped with two tildes (like ~~this~~) will appear crossed out.
 
 
 ## 分隔线 Horizontal Rules
- 
+
 以下三种方式都可以生成分隔线：
 ```
 ***
@@ -772,12 +767,7 @@ Bob-->Alice: I am good thanks!
 
 在您使用 Cmd Markdown 记录，创作，整理，阅读文稿的同时，我们不仅希望它是一个有力的工具，更希望您的思想和知识通过这个平台，连同优质的阅读体验，将他们分享给有相同志趣的人，进而鼓励更多的人来到这里记录分享他们的思想和知识，尝试点击 __ (Ctrl+Alt+P) 发布这份文档给好友吧！
 
---------------------------------------------------------------------------------
 
-再一次感谢您花费时间阅读这份欢迎稿，点击 __ (Ctrl+Alt+N) 开始撰写新的文稿吧！祝您在这里记录、阅读、分享愉快！
-
-作者 [@ghosert][3]<br>
-2015 年 06月 15日
 
 [^LaTeX]: 支持 **LaTeX** 编辑显示支持，例如：$\sum_{i=1}^n a_i=0$， 访问 [MathJax][4] 参考更多使用方法。
 
