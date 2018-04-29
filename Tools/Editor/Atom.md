@@ -83,6 +83,21 @@ prefix 不要用缩写
 
 ## 插件
 
+### apm
+
+`apm` is Atom's package manager, based on Node's `npm` tool.
+
+Command                    | Description
+-------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+`apm upgrade`              | Updates all locally installed packages
+`apm upgrade --no-confirm` | Updates all locally installed packages without asking any questions
+`apm stars --install`      | Installs/updates all packages that you have marked as a favorite (_starred_) in your Atom.io profile
+`apm publish minor`        | If you're developing your own package, run this in the package's directory to publish a new version of the package, increasing the minor version number by one.
+`apm search emmet`         |
+`apm view git-grep`        |
+`apm install emmet@0.1.5`  |
+`apm remove emmet`         |
+
 - advanced-open-file@0.16.6
 - angularjs@0.4.0
 - atom-autocomplete-php@0.25.6
@@ -259,23 +274,6 @@ Open Terminal                  | `ctrl-alt-t`         | `alt-shift-t`  |        
 Open Project                   | `ctrl-cmd-p`         | `alt-shift-p`  | `ctrl-alt-shift-p` | [Project Manager](https://atom.io/packages/project-manager)
 Open In                        | `ctrl-alt-o`         |                |                    | [Open In](https://atom.io/packages/open-in)
 Sublime Style Column Selection | `alt-mouse`          |                |                    | [Sublime Style Column Selection](https://atom.io/packages/Sublime-Style-Column-Selection)
-
-## apm
-
-`apm` is Atom's package manager, based on Node's `npm` tool.
-
-Command                    | Description
--------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-`apm upgrade`              | Updates all locally installed packages
-`apm upgrade --no-confirm` | Updates all locally installed packages without asking any questions
-`apm stars --install`      | Installs/updates all packages that you have marked as a favorite (_starred_) in your Atom.io profile
-`apm publish minor`        | If you're developing your own package, run this in the package's directory to publish a new version of the package, increasing the minor version number by one.
-`apm search emmet`         |
-`apm view git-grep`        |
-`apm install emmet@0.1.5`  |
-`apm remove emmet`         |
-
-
 
 ### atom-beautify
 
