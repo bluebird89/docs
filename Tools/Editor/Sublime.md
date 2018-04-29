@@ -1,8 +1,4 @@
-# sublime
-
-* 编辑器面向无语义的纯文本，不涉及领域逻辑，因此速度快体积小，适合编写单独的配置文件和动态语言脚本（Shell、Python 和 Ruby 等）。
-* IDE 面向有语义的代码，会涉及到大量领域逻辑，因此速度偏慢体积庞大，适合编写静态语言项目（Java、C++ 和 C# 等）。
-* 足够简洁且足够个性
+# Sublime Text 3
 
 ## 安装
 
@@ -18,65 +14,51 @@ brew cask install sublime-text
 
 ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
 
-### windows 添加到命令行`D:\Program Files\Sublime Text 3`
+### windows
+# 下载软件
+# 添加到命令行`D:\Program Files\Sublime Text 3`
+
+----- BEGIN LICENSE -----
+TwitterInc
+200 User License
+EA7E-890007
+1D77F72E 390CDD93 4DCBA022 FAF60790
+61AA12C0 A37081C5 D0316412 4584D136
+94D7F7D4 95BC8C1C 527DA828 560BB037
+D1EDDD8C AE7B379F 50C9D69D B35179EF
+2FE898C4 8E4277A8 555CE714 E1FB0E43
+D5D52613 C3D12E98 BC49967F 7652EED2
+9D2D2E61 67610860 6D338B72 5CF95C69
+E36B85CC 84991F19 7575D828 470A92AB
+------ END LICENSE ----
 ```
 
 ## 配置
 
-配置说明(文件以对象.功能命名）:settin分default user package,包配置优先级最高
+配置文件以对象.功能命名:user重写default
 
-* Packages文件目录：Preferences > Browse Packages 打开文件夹 Installed Packages 下看到所安装的各类包,windows中~\AppData\Roaming\Sublime Text 3\Packages\User
-* [配置同步:同步Packages/User文件夹](https://packagecontrol.io/docs/syncing)
-* 用户配置Preferences.sublime-settings： Preferences > setting
-* 包管理文件：Package Control.sublime-settings
-* 插件管理文件：
-* 主题目录识别：在包文件下Theme - Monokai Pro
-* 自定义快捷键Default (Windows).sublime-keymap:Preferences -> Key Bindings - Users
-* 代码片段
+* 配置:Preferences.sublime-settings
+    + 包配置：Package Control.sublime-settings
+    + 界面配置：Preferences.sublime-settings
+    + 自定义代码片段：*.sublime-snippet
+    + 自动补全：*.sublime-completions
+    + 自动构建：*.sublime-build
+    + 批处理：*.sublime-build 通过shell脚本构建
+* 主题配置：在包文件下Theme - Monokai Pro
+* 快捷键：Default (Windows).sublime-keymap
 
-```shell
-# 通过云端工具git 网盘
-# Close Sublime Text
-# Open Terminal
-cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-mkdir ~/Dropbox/Sublime
-mv User ~/Dropbox/Sublime/
-ln -s ~/Dropbox/Sublime/User
-# other machine
-cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-rm -r User
-ln -s ~/Dropbox/Sublime/User
-```
+包管理工具[Package Control](https://packagecontrol.io/installation)
 
-[插件管理工具安装](https://packagecontrol.io/installation)
-
-- Preferences > Browse Packages 在文件夹 Installed Packages 下看到所安装的各类包,windows中~\AppData\Roaming\Sublime Text 3\
-- package 安装，打开控制台console:`ctrl+``,粘贴以下指令。
-```
-import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
-```
+- Preferences > Browse Packages：Installed Packages； windows中~\AppData\Roaming\Sublime Text 3\
+- 安装package：打开控制台console:`ctrl+``,粘贴`import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)`
+- 如果安装报错，比如连接远程服务器失败之类的，请设置wbond.net的host，相关host如下：50.116.33.29        sublime.wbond.net
 - 重启sublime
-- 插件安装
 - open Package Control's Command Palette：Control + Shift + P (Windows)，Command + Shift + P (on Mac)，或者通过菜单 Tools > Command Palette
-- install package
-- 输入package文件名称，回车安装
-- 设置语法关联：View > Syntax > Open all with current extension as... 或者 View > Syntax 勾选 MarkdownEditing 下的 MultiMarkdown
-
-插件配置
-
-- gitHub flavored Markdown 的配置Packages/User/Markdown.sublime-settings
-- MultiMarkdown 的配置Packages/User/MultiMarkdown.sublime-settings
-- sublime Text SFTP:SublimeText -> Preferences -> Package Settings -> SFTP -> Setting Users
-
-```json
-{
-"email":"Rimke@163.com",s
-"product_key":"e83eda-38644b-43c828-e3669b-cd8a85",
-}
-```
+- install package->输入package文件名称，回车安装
 
 ## 插件
 
+* AlignTab:一个使用正则表达式来帮助对齐的插件
 * Alignment：进行智能对齐
 * All Autocomplete: Extend Sublime Text 2 auto-completion to find matches in all open files of the current window
 * autofilename:自动关联图片,css,js等资源路径插件
@@ -84,25 +66,39 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
 * AutoPEP8：格式化Python代码。
 * Bootstrap 3 Snippets:A sublime plugin complete with Bootstrap 3 snippets
 * BracketHighlighter: Bracket and tag highlighter
+* Ctags:是一个经典的代码跳转插件
+* ConvertToUTF8:支持 GBK, BIG5, EUC-KR, EUC-JP, Shift_JIS 等编码的插件
+* ColorHighlighter:展示你所选择的颜色代码的真正颜色。同时它还包含一个颜色选择器让你可以方便地更改颜色。
 * Doc​Blockr: Simplifies writing DocBlock comments in Javascript, PHP, CoffeeScript, Actionscript, C & C++
+* Emmet:更快更高效地编写HTML和CSS
 * FileDiffs: Shows diffs between the current file, or selection(s) in the current file, and clipboard, another file, or unsaved changes
 * Git:Plugin for some git integration into sublime text
 * GitGutter: A Sublime Text 2 and 3 plugin to see git diff in gutter
 * HTML-CSS-JS Prettify：格式化（美化）html、css、js三种文件类型的插件
+* jQuery
 * Markdown Preview
 * MarkdownEditing
+* Modific:高亮自上次提交后修改过的代码行（支持Git，SVN，Bazaar，Mercurial以及TFS）
+* MultiEditUtils:该插件用于帮助多重选择下的编辑
+* Origami:可以随心所欲地分割窗口！创建新板块，删除板块，在板块之间移动或复制显示内容。
+* Package Control
+* PackageResourceViewer:查看和编辑SublimeText附带的不同的包
+* PHP Code Beautifier:代码美化插件
 * Python Auto-Complete: Sublime Text 2 plugin which adds additional auto-completion capability to Python scripts
 * Python Imports Sorter: Sublime Text 2 plugin to organize your imports easily
 * Python PEP8 Autoformat: Python PEP8 auto-format is a plugin to interactively reformat Python source code according to PEP-8
 * PythonTraceback: Easy navigation in your python tracebacks
 * SideBarEnhancements: Enhancements to sidebar. Files and folders.
+* Sftp:代码实时同步到测试服务器插件
 * SublimeTableEditor:markdown表格插件
-* SublimeTmpl：文件模板都在插件目录的templates
-* SublimeLinter：前端编码利器用于高亮提示用户编写的代码中存在的不规范和错误的写法、代码跳转* sublime-text-git
+* SublimeTmpl：文件模板都在插件目录的SublimeTmpl/templates
+* SublimeLinter：前端编码利器用于高亮提示用户编写的代码中存在的不规范和错误的写法、代码跳转
 * SublimeCodeIntel:code intelligence and smart autocomplete engine
 * Sublime​REPL:不同语言命令行模式
 * SublimeLinter-pep8: Linter plugin for python using PEP8
+* SublimeEnhancements
 * TrailingSpaces: Highlight trailing spaces and delete them in a flash
+* Terminal:Sublime中直接使用终端打开你的项目文件夹
 
 ```
 ctrl+alt+h html
@@ -120,60 +116,89 @@ ctrl+alt+shift+p python
 "auto_complete_triggers": [{"selector": "text.html", "characters": "bs3"}]
 ```
 
-## 自定义配置
+## 通用快捷键
 
-- 包配置：Package Control.sublime-settings
-- 界面配置：Preferences.sublime-settings
-- 自定义代码片段：*.sublime-snippet
-- 自动补全：*.sublime-completions
-- 自动构建：*.sublime-build
-- 批处理：*.sublime-build 通过shell脚本构建
-
-## 新建模板
-
-- html：ctrl+alt+h php注释 html:5
-- javascript：ctrl+alt+j
-- css：ctrl+alt+c
-- php：ctrl+alt+p
-- ruby：ctrl+alt+r
-- python：ctrl+alt+shift+p
-- 新建窗口:Ctrl+Shift+N
-- 打开文件:Ctrl+O
-- 保存文件:Ctrl+S
-- 另存文件:Ctrl+Shift+S
-- 关闭文件:Ctrl+W
-
-### 工具
-
-* 控制台:ctrl+ `
-* 命令面板:ctrl+shift+p
-* 设置高亮语言语法：set syntax php
+* Ctrl+Shift+P|⌘⇧P：打开Package Control:Command prompt
+* Ctrl+p： 会列出当前打开的文件（或者是当前文件夹的文件），输入文件名然后 Enter 跳转至该文件
+    - @ 符号跳转：输入 @symbol 跳转到 symbol 符号所在的位置 Ctrl+R
+    - # 关键字跳转：输入 #keyword 跳转到 keyword 所在的位置
+    - : 行号跳转：输入 :12 跳转到文件的第12行。 Ctrl+G
+- ⌘K, ⌘B 隐藏/打开 侧边栏| Toggle side bar
+* set syntax php：设置高亮语言语法
+* html：ctrl+alt+h php注释 html:5
+* javascript：ctrl+alt+j
+* css：ctrl+alt+c
+* php：ctrl+alt+p
+* ruby：ctrl+alt+r
+* python：ctrl+alt+shift+p
+* 新建窗口:Ctrl+Shift+N
+* 打开文件:Ctrl+O
+* 保存文件:Ctrl+S
+* 另存文件:Ctrl+Shift+S
+* 关闭文件:Ctrl+W
 
 ### 编辑
 
 Edit(编辑)
-⌘[向左缩进 | Left indent⌘]向右缩进 | Right Indent⌘⌃↑与上一行互换（超实用！）| Swap line up⌘⌃↓与下一￼行互换￼（超实用！）| Swap line down⌘⇧D复制粘贴当前行（减少多余的粘贴）| Duplicate line⌘J拼接行（css格式化时挺有用） | join lines⌘←去往行的开头 | Beginning of line⌘→去往行末尾 | End of line⌘⌃/块注释 | Toggle comment block⌃K从光标开始的地方删除到行尾 | Delete to end⌃⇧K删除一整行 | delete line⌃T相邻单词互换位置，在','前试用，有惊喜（很有趣）| Transpose⌘⇧↩向光标前插入一行|insert line before⌘↩向光标后插入一行|inter line after⌘⌥T插入特殊字符|Special characters⌃D向后删除（很怪异的操作，不过感觉很酷炫）
+
+* ⌘[向左缩进 | Left indent
+* ⌘]向右缩进 | Right Indent
+* ⌘⌃↑与上一行互换（超实用！）| Swap line up
+* ⌘⌃↓与下一￼行互换￼（超实用！）| Swap line down
+* ⌘⇧D复制粘贴当前行（减少多余的粘贴）| Duplicate line
+* ⌘J拼接行（css格式化时挺有用） | join lines
+* ⌘←去往行的开头 | Beginning of line
+* ⌘→去往行末尾 | End of line
+* ⌘⌃/块注释 | Toggle comment block
+* ⌃K从光标开始的地方删除到行尾 | Delete to end
+* ⌃⇧K删除一整行 | delete line
+* ⌃T相邻单词互换位置，在','前试用| Transpose
+* ⌘⇧↩向光标前插入一行|insert line before
+* ⌘↩向光标后插入一行|inter line after
+* ⌘⌥T插入特殊字符|Special characters
+* ⌃D向后删除
 
 Selection(光标选中)
-⌘D选中相同的词 | Expand selection to words⌃⌘G多重文本光标选中（再也不用⌘ D一个一个的找啦）| Expand all selection to words⌘L选中一行|Expand selection to lineEsc单选（取消多重选择）|Single selection,Cancel multiple selections⌃⇧↑一行一行向上选中|Add previous line⌃⇧↓一行一行向下选中|Add next line⌘⇧L将选中的区域分割成多行选中状态(多光标操作状态)|Split into lines⌥+拖动鼠标多重光标选中⌘⇧J已缩进层级为依据，一层层向外选中|Expand selection to indentation⌃⇧M将匹配括号中的内容选中|Expand selection to brackets
+
+⌘D选中相同的词 | Expand selection to words
+⌃⌘G多重文本光标选中| Expand all selection to words
+⌘L选中一行|Expand selection to lineEsc单选（取消多重选择）|Single selection,Cancel multiple selections
+⌃⇧↑一行一行向上选中|Add previous line
+⌃⇧↓一行一行向下选中|Add next line
+⌘⇧L将选中的区域分割成多行选中状态(多光标操作状态)|Split into lines
+⌥+拖动鼠标多重光标选中⌘⇧J已缩进层级为依据，一层层向外选中|Expand selection to indentation
+⌃⇧M将匹配括号中的内容选中|Expand selection to brackets
 
 Find(查找)
-⌘F普通查找|Find⌘G查找下一个|Find next⌘⇧F在文件夹中查找| Find in files⌘⇧E缓存用于替换的内容，方便之后的替换|Use selection for replace⌘E缓存用于查找的内容，方便之后的查找|Use selection for find⌘⌥E一个接一个往下替换|Replace next
+⌘F普通查找|Find
+⌘G查找下一个|Find next
+⌘⇧G查找上一个|Find prev
+⌘⇧F在文件夹中查找| Find in files
+⌘⇧E缓存用于替换的内容，方便之后的替换|Use selection for replace
+⌘E缓存用于查找的内容，方便之后的查找|Use selection for find
+⌘⌥E一个接一个往下替换|Replace next
 
 View(视图)
 推荐使用Origami插件，可以随意对sublime进行分割
 
 Go to(跳转/定位)
-⌘P跳转文件（很方便）| Go to anything⌘R定位文件中的方法@| Go to symbol⌘G定位文件中的行号:| Go to line⌃M定位匹配的括号 | Jump to matching bracket⌘F2设置/取消定位标记| Toggle bookmarkF2跳转到定位标记处 | Next bookmark⌘⇧F2清除所有定位标记| Clear all bookmarks⌘⌥→下一个打开的文件| Next file
+⌘P跳转文件（很方便）| Go to anything
+⌘R定位文件中的方法@| Go to symbol
+⌘G定位文件中的行号:| Go to line
+⌃M定位匹配的括号 | Jump to matching bracket
+⌘F2设置/取消定位标记| Toggle bookmark
+F2跳转到定位标记处 | Next bookmark
+⌘⇧F2清除所有定位标记| Clear all bookmarks
+⌘⌥→下一个打开的文件| Next file
+F12:goto_definition
 
 Project(工程)
 ⌘⌃P在保存过的工程中切换，随意变换工程环境|Switch project window
 
-General(通用)
-⌘⇧P 打开命令行| Command prompt⌘K, ⌘B隐藏/打开 侧边栏| Toggle side bar
-
 Tabs（标签栏）
-⌘⇧t 打开最后一次关闭的文件|Open last closed tab^Tab 循环遍历tab|Cycle up through tabs^⇧Tab 反方向循环遍历tab|Cycle down through tabs
+⌘⇧t 打开最后一次关闭的文件|Open last closed tab
+^Tab 循环遍历tab|Cycle up through tabs
+^⇧Tab 反方向循环遍历tab|Cycle down through tabs
 
 * 多行同时编辑：选中行数 ctrl+shift+L
 * 选词： 选中文本 逐个添加：ctrl+d 
@@ -226,10 +251,6 @@ Tabs（标签栏）
 
 使用模糊字符串匹配（Fuzzy String Matching）
 
-* ctrl+p： 会列出当前打开的文件（或者是当前文件夹的文件），输入文件名然后 Enter 跳转至该文件
-    - @ 符号跳转：输入 @symbol 跳转到 symbol 符号所在的位置
-    - # 关键字跳转：输入 #keyword 跳转到 keyword 所在的位置
-    - : 行号跳转：输入 :12 跳转到文件的第12行。
 * Ctrl + R 会列出当前文件中的符号（例如类名和函数名，但无法深入到变量名），输入符号名称 Enter 即可以跳转到该处。
 * 可以使用 F12 快速跳转到当前光标所在符号的定义处（Jump to Definition）。
 * 直接查找文件
@@ -396,14 +417,14 @@ ul>li.item$@3_5(定位起始符) div#v$@3_5
 ```json
 {
     "shell_cmd": "make",
-    "cmd" : ["gcc $file_name -o ${file_base_name}"],
-    "shell" : true,
-    "working_dir" : "$file_path",
-    "variants" :
-    {
-        "name" : "Run",
-        "cmd" : "./${file_base_name}"
-    }
+    "cmd" : ["gcc $file_name -o ${file_base_name}"],
+    "shell" : true,
+    "working_dir" : "$file_path",
+    "variants" :
+    {
+        "name" : "Run",
+        "cmd" : "./${file_base_name}"
+    }
 }
 
 // 生效有延时,配置php环境变量
@@ -412,13 +433,14 @@ ul>li.item$@3_5(定位起始符) div#v$@3_5
     "file_regex": "php$",
     "selector"  : "source.php"
 }
-
 ```
 
 ### 主题theme
 
 - material
 - Monokai Pro
+- [SpaceGray](https://github.com/kkga/spacegray/)
+- [allanhortle/Centurion](https://github.com/allanhortle/Centurion)
 
 ```
 Package Control ‣ Install Package ‣ Theme - Monokai Pro
@@ -465,20 +487,38 @@ Test: ${5:Nested ${6:Placeholder}}
 
 ### 配置同步
 
+[配置同步:同步Packages/User文件夹](https://packagecontrol.io/docs/syncing)
+
 #### 通过共享文件
 
 - 清除 Packages 目录下User
 - `ln -s ~/baiduyunebooks/sublime3/Packages/User User` // 建立符号链接
+
+
+```shell
+# 通过云端工具git 网盘
+# Close Sublime Text
+# Open Terminal
+cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
+mkdir ~/Dropbox/Sublime
+mv User ~/Dropbox/Sublime/
+ln -s ~/Dropbox/Sublime/User
+# other machine
+cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
+rm -r User
+ln -s ~/Dropbox/Sublime/User
+```
 
 #### 通过sync-setting配置
 
 - 新建github的token
 - 安装syn-setting插件
 - 配置文件，主进程download，其它更新
-- 安装 
+- 安装
 
 ## 参考
 
+* [官网](http://www.sublimetext.com/3)
 * [总结配置](https://github.com/jikeytang/sublime-text)
 * [](http://laravelacademy.org/post/6711.html)
 * [文档](http://www.sublimetext.com/docs/3)

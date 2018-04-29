@@ -17,6 +17,8 @@ h1{foo} 和 a[href=#] 为h1和a标签
 ul>li*3
 ul>li.item$*3
 
+((h4>a[rel=external])+p>img[width=500 height=320])*12
+
 ## 参考
 
 * [Emmet Documentation](https://docs.emmet.io/cheat-sheet/)
