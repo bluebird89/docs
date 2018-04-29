@@ -18,45 +18,6 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
 # 下载软件
 # 添加到命令行`D:\Program Files\Sublime Text 3`
 
------ BEGIN LICENSE ------
-Alexander
-Single User License
-EA7E-814345
-51F47F09 4EAB1285 7827EFF0 8B1207DC
-A76A6EA3 E1A1CA7A DC1F2703 14,897,784
-8EDC1C82 3F2A58B9 1C0C8B24 67686432
-281245B3 6233DE5C ADC5C2F9 61FB8A04
-171B63EF 86BA423F 6AC884FD 3273A7AA
-5F50A6DB CE7859AE D62D2B37 AEEDD8C2
-078A8A20 70EEA791 84F48C1E 8ABA7DEB
-0B3907C0 C9A3523B 0091A045 6F67AED8
------- END LICENSE ------
------ BEGIN LICENSE -----
-Andrew Weber
-Single User License
-EA7E-855605
-813A03DD 5E4AD9E6 6C0EEB94 BC99798F
-942194A6 02396E98 E62C9979 4BB979FE
-91424C9D A45400BF F6747D88 2FB88078
-90F5CC94 1CDC92DC 8457107A F151657B
-1D22E383 A997F016 42397640 33F41CFC
-E1D0AE85 A0BBD039 0E9C8D55 E1B89D5D
-5CDB7036 E56DE1C0 EFCC0840 650CD3A6
-B98FC99C 8FAC73EE D2B95564 DF450523
------- END LICENSE ------
------ BEGIN LICENSE -----
-TwitterInc
-200 User License
-EA7E-890007
-1D77F72E 390CDD93 4DCBA022 FAF60790
-61AA12C0 A37081C5 D0316412 4584D136
-94D7F7D4 95BC8C1C 527DA828 560BB037
-D1EDDD8C AE7B379F 50C9D69D B35179EF
-2FE898C4 8E4277A8 555CE714 E1FB0E43
-D5D52613 C3D12E98 BC49967F 7652EED2
-9D2D2E61 67610860 6D338B72 5CF95C69
-E36B85CC 84991F19 7575D828 470A92AB
------- END LICENSE ----
 ```
 
 ## 配置
@@ -80,7 +41,7 @@ E36B85CC 84991F19 7575D828 470A92AB
 - 如果安装报错，比如连接远程服务器失败之类的，请设置wbond.net的host，相关host如下：50.116.33.29        sublime.wbond.net
 - 重启sublime
 - open Package Control's Command Palette：Control + Shift + P (Windows)，Command + Shift + P (on Mac)，或者通过菜单 Tools > Command Palette
-- install package->输入package文件名称，回车安装
+- install package->输入package文件名称
 
 ## 插件
 
@@ -122,7 +83,9 @@ E36B85CC 84991F19 7575D828 470A92AB
 * SublimeTableEditor:markdown表格插件
 * SublimeTmpl：文件模板都在插件目录的SublimeTmpl/templates
     *   command palette 中输入tmpl:
+    *   自定义模板路径: "Data\Packages\User\SublimeTmpl\templates" 目录;默认模版路径: "Data\Packages\SublimeTmpl\templates" 目录
     *   复制默认模版修改
+    *   支持 ${date} 变量
 * SublimeLinter：前端编码利器用于高亮提示用户编写的代码中存在的不规范和错误的写法、代码跳转
 * SublimeCodeIntel:code intelligence and smart autocomplete engine
 * Sublime​REPL:不同语言命令行模式
@@ -138,8 +101,6 @@ ctrl+alt+c css
 ctrl+alt+p php
 ctrl+alt+r ruby
 ctrl+alt+shift+p python
-
-
 
 表头：|Name|Phone + tab
 删除：Alt + Shift + 左/右/上/下/
