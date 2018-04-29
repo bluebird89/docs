@@ -18,6 +18,32 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
 # 下载软件
 # 添加到命令行`D:\Program Files\Sublime Text 3`
 
+----- BEGIN LICENSE ------
+Alexander
+Single User License
+EA7E-814345
+51F47F09 4EAB1285 7827EFF0 8B1207DC
+A76A6EA3 E1A1CA7A DC1F2703 14,897,784
+8EDC1C82 3F2A58B9 1C0C8B24 67686432
+281245B3 6233DE5C ADC5C2F9 61FB8A04
+171B63EF 86BA423F 6AC884FD 3273A7AA
+5F50A6DB CE7859AE D62D2B37 AEEDD8C2
+078A8A20 70EEA791 84F48C1E 8ABA7DEB
+0B3907C0 C9A3523B 0091A045 6F67AED8
+------ END LICENSE ------
+----- BEGIN LICENSE -----
+Andrew Weber
+Single User License
+EA7E-855605
+813A03DD 5E4AD9E6 6C0EEB94 BC99798F
+942194A6 02396E98 E62C9979 4BB979FE
+91424C9D A45400BF F6747D88 2FB88078
+90F5CC94 1CDC92DC 8457107A F151657B
+1D22E383 A997F016 42397640 33F41CFC
+E1D0AE85 A0BBD039 0E9C8D55 E1B89D5D
+5CDB7036 E56DE1C0 EFCC0840 650CD3A6
+B98FC99C 8FAC73EE D2B95564 DF450523
+------ END LICENSE ------
 ----- BEGIN LICENSE -----
 TwitterInc
 200 User License
@@ -63,7 +89,8 @@ E36B85CC 84991F19 7575D828 470A92AB
 * All Autocomplete: Extend Sublime Text 2 auto-completion to find matches in all open files of the current window
 * autofilename:自动关联图片,css,js等资源路径插件
 * AutoFileName: Plugin that auto-completes filenames
-* AutoPEP8：格式化Python代码。
+* AutoPEP8：格式化Python代码
+* Autoprefixer插件：这是一款CSS3私有前缀自动补全插件
 * Bootstrap 3 Snippets:A sublime plugin complete with Bootstrap 3 snippets
 * BracketHighlighter: Bracket and tag highlighter
 * Ctags:是一个经典的代码跳转插件
@@ -75,7 +102,8 @@ E36B85CC 84991F19 7575D828 470A92AB
 * Git:Plugin for some git integration into sublime text
 * GitGutter: A Sublime Text 2 and 3 plugin to see git diff in gutter
 * HTML-CSS-JS Prettify：格式化（美化）html、css、js三种文件类型的插件
-* jQuery
+* JavaScript Patterns
+* jQuery:插件强大
 * Markdown Preview
 * MarkdownEditing
 * Modific:高亮自上次提交后修改过的代码行（支持Git，SVN，Bazaar，Mercurial以及TFS）
@@ -84,6 +112,7 @@ E36B85CC 84991F19 7575D828 470A92AB
 * Package Control
 * PackageResourceViewer:查看和编辑SublimeText附带的不同的包
 * PHP Code Beautifier:代码美化插件
+* Pretty JSON
 * Python Auto-Complete: Sublime Text 2 plugin which adds additional auto-completion capability to Python scripts
 * Python Imports Sorter: Sublime Text 2 plugin to organize your imports easily
 * Python PEP8 Autoformat: Python PEP8 auto-format is a plugin to interactively reformat Python source code according to PEP-8
@@ -92,6 +121,8 @@ E36B85CC 84991F19 7575D828 470A92AB
 * Sftp:代码实时同步到测试服务器插件
 * SublimeTableEditor:markdown表格插件
 * SublimeTmpl：文件模板都在插件目录的SublimeTmpl/templates
+    *   command palette 中输入tmpl:
+    *   复制默认模版修改
 * SublimeLinter：前端编码利器用于高亮提示用户编写的代码中存在的不规范和错误的写法、代码跳转
 * SublimeCodeIntel:code intelligence and smart autocomplete engine
 * Sublime​REPL:不同语言命令行模式
@@ -107,6 +138,8 @@ ctrl+alt+c css
 ctrl+alt+p php
 ctrl+alt+r ruby
 ctrl+alt+shift+p python
+
+
 
 表头：|Name|Phone + tab
 删除：Alt + Shift + 左/右/上/下/
