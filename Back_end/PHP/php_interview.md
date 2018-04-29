@@ -4,8 +4,8 @@
 
 ### 前端篇
 
-> HTML
- 
+#### HTML
+
 HTML 由元素组成，可以被多个属性修饰。元素和属性是 HTML 里最重要的两个概念。
 
 * （基础）HTML 元素的初级划分：[块级元素](https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements)和[行内元素](https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements)，初学者必须非常了解这两则的区别，能够识别常用的元素到底是块级还是行内元素。
@@ -14,7 +14,7 @@ HTML 由元素组成，可以被多个属性修饰。元素和属性是 HTML 里
 * （Code Review）另外可以查缺补漏，看看 [HTML 属性参考](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes) 章节的内容，熟悉常用的属性，并且了解一些冷门的属性的使用技巧。
 * （实战）结合上述参考，需要懂得 HTML 在段落、表格、表单、多媒体（视频、图片等）、SEO 上的应用。
 
-> CSS
+#### CSS
 
 * [选择器](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Selectors)
 * [数据类型](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Types)（单位）
@@ -37,11 +37,11 @@ HTML 由元素组成，可以被多个属性修饰。元素和属性是 HTML 里
     - outline
 * 动画，包括两方面 transition（过渡） 和 animation（时间轴和关键帧）
 
-> JavaScript
+#### JavaScript
 
 与 HTML 和 CSS 相关的 [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) 和 [CSSOM](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model) （重点研究对象）的相关 API 是初级开发需要掌握的。
 
-> 协议篇
+#### 协议篇
 
 WEB 是通过 HTTP 协议进行客户端和服务端间通信的，对于 WEB 应用开发，理解 HTTP 协议非常关键，其次要了解整个 TCP/IP 协议族，如果是游戏开发，理解 TCP 协议也非常关键，这部分建议看书：
 
@@ -50,13 +50,13 @@ WEB 是通过 HTTP 协议进行客户端和服务端间通信的，对于 WEB �
 * 对 SSL、TLS 感兴趣可以捎带看《[HTTPS权威指南 : 在服务器和Web应用上部署SSL/TLS和PKI](https://book.douban.com/subject/26869219/)》
 * 如果想更进一步可以看《[TCP/IP详解](https://book.douban.com/series/12438)》系列。
 
-> HTTP 协议
+#### HTTP 协议
 
 * URL:URL 部分需要了解 URL 的结构组成部分，尤其需要知道如何处理编码的问题。
 * 报文:报文的结构，包括请求报文和响应报文，重点考察的知识点包括：请求方法，响应状态码和首部字段。首部字段，考察重点主要在 Cookie、Authorization 还有 CORS 相关问题。
 * SSL & TLS:HTTP + 加密 + 认证 + 完整性保护 = HTTPS.进阶看《[HTTPS权威指南 : 在服务器和Web应用上部署SSL/TLS和PKI](https://book.douban.com/subject/26869219/)》
 
-> HTTP/2.0
+#### HTTP/2.0
 
 实战的重点在于 [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP) 的实际应用，大致分两点：HTTP Server 和 HTTP Client。
 
@@ -72,7 +72,7 @@ HTTP 客户端，PHP 只提供了 cURL 扩展，基本无敌，能搞定很多�
 
 从编程语言的角度出发，考察更多的是编程语言的硬实力，而并非花哨的各种应用。
 
-> 基础
+#### 基础
 
 基础来说，翻阅 PHP 官方文档，翻两年就差不多了。如果是考察编程语言的硬实力主要体现在三方面：
 
@@ -80,7 +80,7 @@ HTTP 客户端，PHP 只提供了 cURL 扩展，基本无敌，能搞定很多�
 * 算法
 * 设计模式
 
-> 数据结构与算法
+#### 数据结构与算法
 
 数据结构与算法是密不可分的，初级开发熟悉 string 和 array 的各种增删改查排比操作是重点，感兴趣的还可以了解一下 PHP 的数据结构扩展库，除了 SPL 标准库还有个 ext-ds 扩展。
 
@@ -90,7 +90,7 @@ HTTP 客户端，PHP 只提供了 cURL 扩展，基本无敌，能搞定很多�
 
 游戏应用算法会涉及的比较多，WEB 应用数据结构会涉及的比较多，尤其在各种解析器、编译器的实现上。感兴趣的可以自己去写一些模板引擎、编辑器的实现，个人比较推荐大家自己动手实现下 YAML 解析，YAML & JSON 在互联网跨平台上有广泛的应用。
 
-> 设计模式
+#### 设计模式
 
 对于初学者来说，先从面向对象开始着手，致力于写可读性、可维护性代码就行了，设计模式对于初级开发我的建议是忘了它吧。 实际一点，坚持 GitHub 上翻两年代码也差不多了，培养 Code Review 能力。实战可以自己去实现框架的方方面面，从这个过程中去理解设计模式，对于设计模式来说不要为了用而用。
 
@@ -100,7 +100,7 @@ HTTP 客户端，PHP 只提供了 cURL 扩展，基本无敌，能搞定很多�
 * 《[设计模式 : 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)》（自己挑重点看）
 * 代码库方面 [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP) 非常不错，非常值得学习，中级开发必备。
 
-> 进阶
+#### 进阶
 
 多进程、多线程相关，异步思维的培养。
 
@@ -110,7 +110,7 @@ HTTP 客户端，PHP 只提供了 cURL 扩展，基本无敌，能搞定很多�
 
 在这个过程中，势必会不断的了解 C/C++ 编写的扩展库，为以后进军高级开发带来很大帮助。
 
-> 高级
+#### 高级
 
 高级 PHP 开发不懂 C/C++ 是非常吃亏的，个人建议 PHP 开发也有必要学习 C/C++ 编程，不求精通，但是要有一定的理解和阅读 C/C++ 代码的能力。
 
@@ -128,7 +128,7 @@ Laravel 中 Container（illuminate/container）是 DI/SL 的混合体。关于�
 
 [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html) [[译文](http://files.cnblogs.com/files/dongbeifeng/DependencyInjection.pdf)]
 
-> 基础
+#### 基础
 
 说回到框架，核心主要有三部分：HTTP、Routing 和 MVC，推荐看 Slim 框架的底层代码。
 
@@ -136,7 +136,7 @@ Laravel 中 Container（illuminate/container）是 DI/SL 的混合体。关于�
 * Routing 核心其实就是 Event Dispatching 的概念，Lumen 和 Slim 都用的 FastRoute，底层实现写的非常不错。不过，如果想规范化的学习 Routing，建议看 symfony/routing 的实现。
 * MVC 方面：Model 是核心，View 和 Controller 有各种变形。Model 分 Active Record 和 Data Mapper，对于的有 Eloquent（AR）和 Doctrine 2（DM）两大阵营（其他框架的使用者不要喷我）。
 
->进阶
+#### 进阶
 
 * 初步，可以从学习和阅读框架源码开始，symfony 的组件化思路是非常值得推荐和学习的。
 * 其次，可以从 swoole 全套着手了解异步思维。
@@ -144,7 +144,7 @@ Laravel 中 Container（illuminate/container）是 DI/SL 的混合体。关于�
 
 ### MySQL
 
-> 初级
+#### 初级
 
 重点放在 SQL，用好相关 ORM 就可以了，在实践中出问题，面向 Google 编程来解决。另外的重点，表结构设计，从我个人浅薄的经验来总结，大致有：
 
@@ -156,8 +156,7 @@ Laravel 中 Container（illuminate/container）是 DI/SL 的混合体。关于�
 * 订单类，只要有支付就有订单。
 * 用户相关，尤其是涉及权限时的处理。
 
-
-> 进阶
+#### 进阶
 
 进阶的重点在于经验的积累，尤其实战中 MySQL 的配置、调试与优化。
 
@@ -165,7 +164,7 @@ Laravel 中 Container（illuminate/container）是 DI/SL 的混合体。关于�
 * 索引方面还可以挑重点看《[数据库索引设计与优化](https://book.douban.com/subject/26419771/)》
 * 原理以可以看《[数据库系统概念（第6版）](https://book.douban.com/subject/10548379/)》
 
-> 高级
+#### 高级
 
 大型网站还可以从数据库读写分离下功夫，解决数据库高负载的问题。再高级一点把数据库抽象为数据访问的相关服务平台，那内容可以引申出多个方面：
 
@@ -179,11 +178,11 @@ Laravel 中 Container（illuminate/container）是 DI/SL 的混合体。关于�
 
 Docker 的出现实在是太赞了，以前需要通过 VM 来捣鼓的东西，现在 Docker 就可以做了。非常有利于培养 Service 思维。
 
-> 初级
+#### 初级
 
 从实战着手，尤其是了解 Linux CLI 和 shell 编程，重点推荐《[Linux命令行与shell脚本编程大全 第3版](https://book.douban.com/subject/26854226/)》一书，入门首选。原理方面《[现代操作系统（第3版）](https://book.douban.com/subject/3852290/)》可以看看，重点看进程与线程、I/O、死锁三个章节。
 
-> 实战
+#### 实战
 
 英文不错直接上手官方文档就可以了，中文方面可以看书《[Docker — 从入门到实践](https://yeasy.gitbooks.io/docker_practice/content/)》
 
@@ -191,7 +190,7 @@ Docker 初级的重点在于 Dockerfile 镜像，Linux CLI 和 shell 编程在�
 
 如果自己不知道怎么配，可以学习 [LaraDock](https://github.com/laradock/laradock)，不过 LaraDock 有点臃肿，但是用来学习和提高认知是非常有帮助的。
 
-> 高级
+#### 高级
 
 培养大型网站架构思维，了解集群，推荐大家看书一本适合入门的书籍《[大型网站技术架构：核心原理与案例分析](https://book.douban.com/subject/25723064/)》，这方面我的认识也不多，目前正在翻阅 GitHub 上的一些 examples，针对性做一些实践。
 

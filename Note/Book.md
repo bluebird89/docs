@@ -12,7 +12,7 @@
 * 《[Linux系统编程（第2版）](https://www.amazon.cn/gp/product/B00JUM2ML4)》
 * 《[Linux内核设计与实现（第3版）](https://www.amazon.cn/gp/product/B004X3Z3D4)》奠定基础的书籍。
 * 《[深入理解计算机系统（原书第2版）](https://www.amazon.cn/gp/product/B004BJ18KM)》
-* 《[计算机程序的构造和解释（原书第2版）](https://www.amazon.cn/gp/product/B0011AP7RY)》
+* 《[计算机程序的构造和解释（Structure and Interpretation of Computer Programs）](https://www.amazon.cn/gp/product/B0011AP7RY)》
 * 《[编码：隐匿在计算机软硬件背后的语言](https://www.amazon.cn/gp/product/B009RSXIB4)》
 * 《[性能之颠：洞悉系统、企业与云计算](https://www.amazon.cn/gp/product/B0140I5WPK)》
 * 《[UNIX网络编程 卷1：套接字联网API（第3版）](https://www.amazon.cn/gp/product/B011S72JB6)》
@@ -23,52 +23,53 @@
 * 《[UNIX编程环境](https://www.amazon.cn/gp/product/B00IYTQBYS/)》
 * 《[UNIX环境高级编程](https://www.amazon.cn/gp/product/B00KMR129E)》
 * 《UNIX操作系统设计》
+* 《计算机程序设计艺术（The Art of Computer Programming）》
+* 《编译原理》
+* 《编码:隐匿在计算机软硬件背后的语言CODE: The Hidden Language of Computer Hardware and Software》
 
 ## 编程通用
 
 * 《[编程原本](https://www.amazon.cn/gp/product/B006P7V73G)》
-* 《[代码大全2](https://www.amazon.cn/gp/product/B0061XKRXA)》
+* 《[代码大全2(Code Complete)](https://www.amazon.cn/gp/product/B0061XKRXA)》
 * 《[UNIX编程艺术](https://www.amazon.cn/gp/product/B008Z1IEQ8)》
-* 《[代码整洁之道](https://www.amazon.cn/gp/product/B0031M9GHC)》
-* 《[编程珠玑（第2版）](https://www.amazon.cn/gp/product/B00SFZH0DC)》
+* 《[代码整洁之道(Clean Code)](https://www.amazon.cn/gp/product/B0031M9GHC)》
+* 《[编程珠玑（第2版）（Programming Pearls ）](https://www.amazon.cn/gp/product/B00SFZH0DC)》
 * 《[编程珠玑（续）](https://www.amazon.cn/gp/product/B0150BMQDM)》
 * 《[软件调试的艺术](https://www.amazon.cn/gp/product/B00IOAM6VE)》
-* 《[修改代码的艺术](https://www.amazon.cn/gp/product/B00KMJ2Q1U)》
+* 《[修改代码的艺术（Working Effectively with Legacy Code）](https://www.amazon.cn/gp/product/B00KMJ2Q1U)》
 * 《[编程语言实现模式](https://www.amazon.cn/gp/product/B007HYMPBY)》
 * 《[编写可读代码的艺术](https://www.amazon.cn/gp/product/B008B4DTG4)》
 * 《解析极限编程：拥抱变化》
 * 《[精通正则表达式（第3版）](https://www.amazon.cn/gp/product/B008UCHA58)》
 * 《[编译原理（第2版）](https://www.amazon.cn/gp/product/B001NGO85I)》龙书
-* 《[重构：改善既有代码的设计](https://www.amazon.cn/gp/product/B011LPUB42)》
+* 《[重构：改善既有代码的设计（Refactoring）](https://www.amazon.cn/gp/product/B011LPUB42)》
 * 《[七周七语言：理解多种编程范型](https://www.amazon.cn/gp/product/B00ALPRM3M)》
 * 《[调试九法：软硬件错误的排查之道](https://www.amazon.cn/gp/product/B00CBBLUFK)》
 * 《程序设计语言：实践之路（第3版）》
 * 《[计算的本质：深入剖析程序和计算机](https://www.amazon.cn/gp/product/B00PG0MM3C)》
-* 《[设计模式 : 可复用面向对象软件的基础](https://www.amazon.cn/gp/product/B001130JN8)》
+* 《[设计模式 : 可复用面向对象软件的基础（Design Patterns）](https://www.amazon.cn/gp/product/B001130JN8)》
 * 《[程序设计实践](https://www.amazon.cn/gp/product/B0198OPL16)》
-* 面向对象程序设计 ： Head First设计模式
-* 重构 ： 重构
-* 软件测试 ： How to Break Software
-* 项目管理 ： 极客与团队
-* 专业开发 ： 程序员修炼之道：从小工到专家
-* 大师之言 ： 奇思妙想：15 位计算机天才及其重大发现
+* 《Head First设计模式(Head First Design Patterns)》:面向对象程序设计
+* 《深入浅出设计模式》
+* 《The Clean Coder》：专业程序员的行为守则
+* 《Working Effectively With Legacy Code》
 
 ## 设计
 
-* 界面设计 ： 写给大家看的设计书
-* 交互设计 ： 通用设计法则
+* 《写给大家看的设计书》：界面设计
+* 通用设计法则：交互设计 
 * 《[精益设计：设计团队如何改善用户体验](https://book.douban.com/subject/24896848/)》
 * 《[用户体验草图设计](https://book.douban.com/subject/10542579/)》
 * 《[About Face 4: 交互设计精髓](https://book.douban.com/subject/26642302/)》
 * 《[移动优先+响应式Web设计](https://book.douban.com/subject/26291332/)》
 * 《[交互设计指南](https://book.douban.com/subject/4881989/)》
 * 《设计心理学》系列
-* 《交互设计之路：让高科技产品回归人性》s
+* 《交互设计之路：让高科技产品回归人性（The Inmates Are Running The Asylum: Why High Tech Products Drive Us Crazy and How to Restore the Sanity）》
 
 ## 算法与数据结构
 
 * 《[算法（第4版）](https://www.amazon.cn/gp/product/B009OCFQ0O)》
-* 《[算法导论（原书第2版）](https://www.amazon.cn/gp/product/B00AK7BYJY)》
+* 《[算法导论（原书第2版）（Introduction to Algorithms）](https://www.amazon.cn/gp/product/B00AK7BYJY)》
 * 《[Python算法教程](https://www.amazon.cn/gp/product/B019NB0VCI)》
 * 《[算法设计与分析基础（第3版）](https://www.amazon.cn/gp/product/B00S4HCQUI)》
 * 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
@@ -80,12 +81,15 @@
 
 * 《[大教堂与集市](https://www.amazon.cn/gp/product/B00KQDTZ4S)》
 * 《卓有成效的程序员》
-* 《[程序员的职业素养](https://www.amazon.cn/gp/product/B01LZJ8L9J)》
+* 《[程序员的职业素养（Pragmatic Programmer）](https://www.amazon.cn/gp/product/B01LZJ8L9J)》
 * 《[程序员修炼之道：从小工到专家](https://www.amazon.cn/gp/product/B004GV08CY)》
 * 《[软件开发者路线图：从学徒到高手](https://www.amazon.cn/gp/product/B00H6X6LD4)》
 * 《[我编程，我快乐: 程序员职业规划之道](https://www.amazon.cn/gp/product/B00CBBKDGM)》
 * 《[程序员的思维修炼：开发认知潜能的九堂课](https://www.amazon.cn/gp/product/B007VARUIM)》
 * 《[高效程序员的45个习惯：敏捷开发修炼之道(修订版)](https://www.amazon.cn/gp/product/B00OA9L3NU)》
+* 《The Pragmatic Programmer》
+* 《Peopleware: Productive Projects and Teams》
+* 《Soft Skills: The Software Developer’s Life Manual》
 
 ## 大师访谈
 
@@ -94,6 +98,7 @@
 * 《[编程人生 : 15位软件先驱访谈录](https://www.amazon.cn/gp/product/B00QA7GA2Y)》
 * 《[奇思妙想 : 15位计算机天才及其重大发现](https://www.amazon.cn/gp/product/B007ED88CI)》
 * 《[图灵和ACM图灵奖](https://www.amazon.cn/gp/product/B008G80O9K)》
+* 奇思妙想：15 位计算机天才及其重大发现
 
 ## 架构/性能Pemac
 
@@ -195,6 +200,7 @@
 * 《[C语言接口与实现](https://www.amazon.cn/gp/product/B01D10NSCM)》
 * 《[C程序设计语言（第2版）](https://www.amazon.cn/gp/product/B0011425T8)》
 * 《C语言参考手册（第5版）》
+* 《C程序设计语言》：C 编程语言；如何像程序员一样思考；底层计算模型
 
 ## C++
 
@@ -240,10 +246,12 @@
 * 《[探索式软件测试](https://www.amazon.cn/gp/product/B003JBIV0S)》
 * 《[有效的单元测试](https://www.amazon.cn/gp/product/B00PVOND2W)》
 * 《[Google软件测试之道](https://www.amazon.cn/gp/product/B00FH36R6G)》
+*  How to Break Software
+*  《测试驱动开发》
 
 ## 项目与团队
 
-* 《[人月神话](https://www.amazon.cn/gp/product/B00VR8ZO28)》
+* 《[人月神话（The Mythical Man-Month）](https://www.amazon.cn/gp/product/B00VR8ZO28)》
 * 《[快速软件开发](https://www.amazon.cn/gp/product/B001DBRWL0)》
 * 《[人件（原书第3版）](https://www.amazon.cn/gp/product/B00MO7R1SG)》
 * 《[门后的秘密：卓越管理的故事](https://www.amazon.cn/gp/product/B00CBBKRQ8)》
@@ -266,7 +274,7 @@
 * 《[世界是数字的](https://www.amazon.cn/gp/product/B00M2DKZNA)》
 * 《[程序员的数学](https://www.amazon.cn/gp/product/B00A4H3JJS)》
 * 《[程序员健康指南](https://www.amazon.cn/gp/product/B00N4LZ6RO)》
-* 《[禅与摩托车维修艺术](https://www.amazon.cn/gp/product/B005O4PUFC)》
+* 《[禅与摩托车维修艺术（Zen and the Art of Motorcycle Maintenance）](https://www.amazon.cn/gp/product/B005O4PUFC)》
 * 《[关键对话：如何高效能沟通](https://www.amazon.cn/gp/product/B0081M8TZ2)》
 * 《[写作法宝：非虚构写作指南](https://www.amazon.cn/gp/product/B00EY8JUBO)》
 * 《[黑客与画家 : 来自计算机时代的高见](https://www.amazon.cn/gp/product/B00G1ZT2C0)》
@@ -274,6 +282,7 @@
 * 《[如何把事情做到最好：改变全球9800万人的人生指导书](https://www.amazon.cn/gp/product/B00ICWNKT6)》
 * 《[正则表达式经典实例](https://www.amazon.cn/gp/product/B00OGKGSSS)》
 * 《[编程珠玑](https://www.amazon.cn/gp/product/B001GNBZFE)》
+* 《The Mythical Man-month》: 关于软件工程的散文集
 
 * 领域特定语言
 * 敏捷软件开发

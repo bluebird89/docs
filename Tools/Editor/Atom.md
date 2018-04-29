@@ -1,26 +1,25 @@
-# 编辑器对比
+## Atom
 
-- Atom是GitHub推出的一款编辑器,现代, 易用, 可定制,The hackable text editor,只关注最重要的定制，不要在无关紧要的细节上浪费生命。
-- vim其优点是逼格高, 定制性强, 编辑效率高, 资源占用少, 还可以终端操作,缺点是学习曲线陡峭, 经常出一些莫名其妙的错误.自身的现代化特性太少, 过于依赖插件
-- Emacs优点是功能强大, 啥都可以实现, 因为他自己本来就是个操作系统.缺点是入门门槛高,快捷键太反人类.
-- SublimeText
-- VSCodemark
+GitHub推出的一款编辑器,现代, 易用, 可定制,The hackable text editor,只关注最重要的定制，不要在无关紧要的细节上浪费生命。
 
-# 安装
+## 安装
 
-- mac：brew cask install atom
-- Window： choco install atom
+```
+# mac
+brew cask install atom
+# Window
+choco install atom
 
-# 启动
+# 命令行启动
+atom
+```
 
-- 命令行 atom
-
-# 插件安装
+## 插件安装
 
 - 命令面板：Ctrl + Shift + P
 - 设置面板:Edit->Preferences 命令面板 Settings View:Open ctrl + ,
 
-# 初始化配置
+## 初始化配置
 
 ```
 ⇧⌘P 输入init script
@@ -39,7 +38,6 @@ atom.commands.add 'atom-text-editor', 'custom:jump-over-symbol': (event) ->
 ⇧⌘P 输入keymap
 "atom-text-editor:not([mini])":
   "enter": "custom:jump-over-symbol"
-
 
 # for markdown-writer
 ".platform-darwin atom-text-editor:not([mini])":
@@ -67,7 +65,7 @@ atom.commands.add 'atom-text-editor', 'custom:jump-over-symbol': (event) ->
 ⇧⌘P 输入reload:重新加载配置
 ```
 
-# snippets
+## snippets
 
 - \n 表示的是纯文本中默认并不显示的"换行符号"；
 - \t 表示的是 tab（不是 tab 键，而是文本中显示的"缩进" ---- 通常相当于两个空格，或者四个空格）；
@@ -124,10 +122,9 @@ prefix 不要用缩写
 - atom-ide-ui
 - Teletype
 
-# 快捷键
+## 快捷键 Atom Keyboard Shortcuts
 
 - 文件切换
-
   - ctrl + shift + o 打开目录
   - ctrl + t或ctrl + p: 查找文件
   - ctrl + b enter或者ctrl + tab:在打开的文件之间切换
@@ -137,9 +134,7 @@ prefix 不要用缩写
   - Toggle command palette:Ctrl + Shift + P /shift + ⌘ + p
   - Toggle line/selection comment: Show available auto-completions
   - 设置面板:⌘ + ,
-
 - 导航
-
   - Ctrl+G: 呼出光标移动窗口,填入行:列
   - ctrl + r : 在当前文档Symbols(代码中的函数名,变量名)之间跳转
   - ctrl + shift + r:: 在整个项目Symbols(代码中的函数名,变量名)之间跳转
@@ -149,45 +144,24 @@ prefix 不要用缩写
   - ctrl + left移动到一行开始
   - ctrl + up 行上移
   - ctrl + down 行下移
-
 - 目录树操作
-
   - ctrl + \ 或者 ctrl + k ctrl + b 显示(隐藏)目录树并切换焦点
-
     - 目录树下，通过方向键查看切换,使用a，m，delete来增加，修改和删除
-
   - d 复制文件(duplicate)
-
   - i 显示(隐藏)版本控制忽略的文件
-
   - alt-right 和 alt-left 展开(隐藏)所有目录
-
   - ctrl + al-] 和 ctrl + al-[ 同上
-
   - ctrl + [ 和 ctrl + ] 展开(隐藏)当前目录
-
 - 书签
-
   - ctrl + F2 在本行增加书签
   - F2 跳到当前文件的下一条书签
   - shift-F2 跳到当前文件的上一条书签
   - ctrl + F2 列出当前工程所有书签
-
-- 代码片段:~/.atom/snippets.cson <http://blog.csdn.net/u010494080/article/details/50993771>
-
-- git <http://blog.csdn.net/u010494080/article/details/51229211>
-
 - GitHub Alt+G O 在GitHub上打开当前文件
-
 - Alt+G B 在GitHub上用Blame方式打开当前文件
-
 - Alt+G H 在GitHub上用History方式打开当前文件
-
 - Alt+G C 将当前文件在GitHub上的URL复制到剪切板
-
 - Alt+G R 在GitHub上比较分支
-
-# Atom Keyboard Shortcuts
 
 This page lists keyboard shortcuts for the [Atom text editor](https://atom.io) that I find valuable and use a lot. Feel free to fork the page and add your own favorites. Pull Requests welcome!
 
@@ -301,7 +275,7 @@ Command                    | Description
 `apm install emmet@0.1.5`  |
 `apm remove emmet`         |
 
-[awesome-atom](https://github.com/mehcode/awesome-atom)
+
 
 ### atom-beautify
 
@@ -315,4 +289,9 @@ sudo pip install --upgrade autopep8
 
 ## 参考
 
-[Atom Flight Manual](http://flight-manual.atom.io/)
+* [Atom Flight Manual](http://flight-manual.atom.io/)
+* [官网](https://ide.atom.io/)
+* [awesome-atom](https://github.com/mehcode/awesome-atom)
+
+- 代码片段:~/.atom/snippets.cson <http://blog.csdn.net/u010494080/article/details/50993771>
+- git <http://blog.csdn.net/u010494080/article/details/51229211>
