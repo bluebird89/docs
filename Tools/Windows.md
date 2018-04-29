@@ -2,17 +2,22 @@
 
 [Awesome-Windows/Awesome](https://github.com/Awesome-Windows/Awesome):An awesome & curated list of best applications and tools for Windows.
 
+Windows10 LTSB
+
 ## 工具
 
-* launchy Wox Rolan
+* [Chocolatey](https://chocolatey.org/):The package manager for Windows Software Management Automation
+* 快速启动:launchy Wox Rolan
 * markdown编辑器: 作业部落 MarkdownPad(需要浏览器渲染插件awesome) MarkPad
 * 资源管理器: Clover Total Commander
 * 快捷键：AutoHotKey
 * 本地搜索：Listary Everything
+* Notepad++ 文本编辑
 * 编辑器：Atom SublimeText3
 * 工具：ShareX
 * 同步工具：goodsync
 * 词典：GoldenDict
+* VirtualBox 虚拟机
 * vagrant
 * VistaSwitcher：程序切换工具
 * StrokeIt:让鼠标手势无处不在
@@ -30,30 +35,101 @@
 * 命令行：xshell
 * 电子书管理神器：Calibre
 * CCleaner, Defraggler, Recuva & Speccy.
-* [Chocolatey](https://chocolatey.org/):The package manager for Windows Software Management Automation
+* Evernote
+* Foxmail
+* RTX
+* TIM
+* Youdao
+* Firefox 浏览器
+    - AdBlock Plus Firefox扩展
+* Google Chrome 浏览器
+* VLC 媒体播放
+* Dropbox 备份
+* 7-Zip 文件压缩
+* OpenOffice.org 办公
+* μTorrent BT下载
+* Gmail 电子邮件，以及更多
+* GIMP 图像编辑 介绍文章
+* Paint.NET 图像编辑
+* Microsoft Security Essentials 系统安全
+* Revo Uninstaller 系统工具-卸载
+* Evernote 笔记软件
+* Thunderbird 邮件客户端
+* Audacity 音频编辑
+* ImgBurn 镜像软件
+* Picasa 图像管理
+* Skype 语音通信/即时通信
+* Pidgin 即时通信
+* Ubuntu 操作系统
+* iTunes 音乐平台
+* foobar2000 媒体播放
+* Foxit Reader PDF阅读
+* FileZilla FTP软件
+* TrueCrypt 系统安全-加密
+* Avast! 系统安全-杀毒
+* Defraggler 系统优化-碎片整理
+* KeePass 密码管理
+* Opera 浏览器
+* AVG 系统安全
+* Digsby 即时通信/社交网络
+* Google Reader RSS聚合阅读
+* Winamp 媒体播放
+* Google Earth 数字地球
+* TeraCopy 文件复制强化
+* Transmission BT客户端
+* Eclipse IDE 开发环境
+* SpyBot Search & Destroy 系统安全-恶意软件清除
+* Adium Mac下即时通信
+* PuTTY Telnet远程连接
+* Songbird 音乐播放
+* Sumatra PDF PDF阅读
+* XBMC 媒体中心
+* Blender 三维建模
+* CDBurnerXP 镜像刻录
+* Everything NTFS文件名搜索
+* HandBrake 视频转码
+* Rainmeter 桌面增强
+* AutoHotkey 脚本工具
+* Google Calendar 日程管理
+* MediaMonkey 媒体管理
+* Quicksilver Mac下的程序快速启动工具
+* WinSCP FTP客户羰
+* Google Voice 全新的电话沟通/管理方式
+* Boxee 媒体中心
+* Media Player Classic 媒体播放
 
 ```
 // 以管理员运行cmd
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+choco search python php birtualbox jdk8 cclear
+choco uninstall python
+
+choco install mysql.workbench
+
+cinst Atom
 ```
 
 ## 配置
 
 添加自启动：启动文件放在C:\Users\henryli\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 
-* Evernote
-* Foxmail
-* RTX
-* TIM
-* Youdao
 * Sticky Notes
 * 支持bash：在启用或关闭 Windows 功能，开启Windows Subsystem for linux (Beta)，通过bash切换到bash[参考](https://blog.jessfraz.com/post/windows-for-linux-nerds/)
+* 默认图片查看功能
+* 睡眠(Sleep):把当前操作系统的状态保存在内存中，除内存电源外，切断笔记本所有其他电源。启动时，从内存读取上次保存的系统状态，直接恢复使用。
+* 休眠(Hibernate):把当前操作系统的状态保存到硬盘中，然后切断笔记本所有电源。启动时，从硬盘读取上次保存的系统状态，直接恢复使用。
 
 ```
 PowerShell as Administrator and run:
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 restart system
 cmd + r input:bash download ubuntu
+
+# cmd 打开命令提示符，输入以下内容
+FTYPE Paint.Picture=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1 
+FTYPE jpegfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1 
+FTYPE pngfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1
 ```
 
 ## 快捷键
@@ -116,17 +192,6 @@ ipconfig /flushdns：刷新域名
 - CTRL+鼠标左键，拖动文件、文件夹都可以立马生成文件对应的副本
 - Win+T to cycle through the taskbar icons
 - Win + d：删除文件
-
-## 软件安装
-
-```sh
-choco search python php birtualbox jdk8 cclear
-choco uninstall python
-
-choco install mysql.workbench
-
-cinst Atom
-```
 
 ### MarkdownPad
 

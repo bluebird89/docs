@@ -379,7 +379,6 @@ Markdown 语法： **Example:**
 
 Any word wrapped with two tildes (like ~~this~~) will appear crossed out.
 
-
 ## 分隔线 Horizontal Rules
 
 以下三种方式都可以生成分隔线：

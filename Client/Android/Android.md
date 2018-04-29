@@ -15,8 +15,6 @@ export ANDROID_HOME=/Users/henry/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/platforms
 export PATH=${PATH}:$ANDROID_HOME/platform-tools
 export PATH=${PATH}:$ANDROID_HOME/tools
-
-SDK= 
 ```
 
 ## ADB
@@ -29,6 +27,42 @@ adb的全称为Android Debug Bridge，就是调试桥的作用。借助这个工
 * 在设备或手机模拟器上复制或粘贴文件。
 
 采用监听Socket TCP 5554端口的方式让IDE和Qemu通信，默认情况下ADB会daemon相关的网络端口，所以当我们运行Eclipse时ADB进程就会自动运行，在Eclipse中通过DDMS来调试Android程序；
+
+## 刷系统
+
+* ADB工具
+    - 添加环境变量：D:\adb\
+    - adb
+* 刷机包
+* 手机连接，重启同时按下电源键和音量下键重启，进入bootloader模式
+
+```sh
+fastboot devices  # 连接设备
+fastboot oem unlock # 解锁
+cd 刷机包解压文件夹
+
+# 先root：OTA可能会失效
+fastboot flash bootloader bootloader文件名 .img
+fastboot flash radio radio文件名.img
+fastboot reboot
+
+fastboot flash recovery recovery.img # fastboot flash recovery recovery.img  可以刷TWRP
+# 利用TWRP Recovery找到刚才放进设备储存的Super Su zip包刷入
+fastboot flash boot boot.img
+fastboot flash system system.img
+
+fastboot flash cache cache.img
+fastboot flash userdata userdata.img
+
+fastboot reboot
+
+fastboot erase bootfastboot erase cache
+fastboot erase recovery
+fastboot erase system
+fastboot erase userdata
+fastboot flash bootloader bootloader-mako-makoz10o.img（需要根据您自己情况换img名）
+fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根据您自己情况换.zip名）
+```
 
 ## 课程
 
