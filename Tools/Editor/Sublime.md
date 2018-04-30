@@ -441,7 +441,7 @@ Package Control ‣ Install Package ‣ Theme - Monokai Pro
 Command Palette ‣ Monokai Pro: select theme
 ```
 
-## [代码段（Code Snippets）](http://www.jianshu.com/p/356bd7b2ea8e)
+### [代码段（Code Snippets）](http://www.jianshu.com/p/356bd7b2ea8e)
 
 Snippet可以存储在任何的文件夹中, 并且以.sublime-snippet为文件扩展名, 默认是存储在.sublime-snippet文件夹下.snippet四个组成部分:
 
