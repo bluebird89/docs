@@ -134,3 +134,4 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 - [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
 - [WEB](https://developer.mozilla.org/en-US/docs/Web)
 - [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning Area. https://developer.mozilla.org/en-US/docs/Learn
+- [关于大型网站技术演进的思考](http://blog.jobbole.com/84761/)
