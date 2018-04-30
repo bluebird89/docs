@@ -57,7 +57,7 @@
 ## 设计
 
 * 《写给大家看的设计书》：界面设计
-* 通用设计法则：交互设计 
+* 通用设计法则：交互设计
 * 《[精益设计：设计团队如何改善用户体验](https://book.douban.com/subject/24896848/)》
 * 《[用户体验草图设计](https://book.douban.com/subject/10542579/)》
 * 《[About Face 4: 交互设计精髓](https://book.douban.com/subject/26642302/)》
@@ -65,6 +65,9 @@
 * 《[交互设计指南](https://book.douban.com/subject/4881989/)》
 * 《设计心理学》系列
 * 《交互设计之路：让高科技产品回归人性（The Inmates Are Running The Asylum: Why High Tech Products Drive Us Crazy and How to Restore the Sanity）》
+* 《简约至上》
+* 《用户体验的要素》
+* 《人人都是产品经理》
 
 ## 算法与数据结构
 
@@ -240,8 +243,9 @@
 * 《[高性能MySQL（第3版）](https://www.amazon.cn/gp/product/B00C1W58DE)》
 * 《[MySQL技术内幕 : InnoDB存储引擎（第2版）](https://www.amazon.cn/gp/product/B00ETOV48K)》
 * 《[深入浅出MySQL : 数据库开发、优化与管理维护](https://www.amazon.cn/gp/product/B00KR87J8G)》
-* 《SQL必知必会》
+* 《SQL必知必会(第4版)》
 * 《SQL 反模式》
+* 《数据库系统概念》
 
 ## 测试
 
@@ -293,5 +297,58 @@
 * 实现领域驱动设计
 * 浮现式设计 专业软件开发的演进本质
 
-> 参考
+## Javascript
 
+* 《Javascript 权威指南》
+* 《JavaScript 高级程序设计(第3版)》
+* 《ES6 标准入门(第2版)》
+* 《深入理解ES6》
+* 《JavaScript 异步编程:设计快速响应的网络应用》
+* 《JavaScript DOM 编程艺术》
+* 《Head First 设计模式》
+* 《JavaScript 设计模式》
+* 《JavaScript 开发框架权威指南》
+* JavaScript 函数式编程
+
+## WEB
+
+- [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
+- Web开发权威指南
+
+- 《软件工程》
+- 《数据结构与算法 JavaScript 描述》
+
+《设计模式 可复用面向对象软件的基础》
+《鸟哥的Linux私房菜:基础学习篇(第3版)》
+《现代操作系统(原书第3版) 》
+《操作系统:精髓与设计原理(原书第6版)》
+《深入理解计算机系统(原书第3版)》
+《简约至上》
+《用户体验的要素》
+《人人都是产品经理》
+《Head First HTML 与 CSS (第2版)》
+《CSS 禅意花园(修订版)》
+《精通 CSS: 高级 Web 标准解决方案(第2版)》
+《众妙之门: 精通 CSS3》
+《DOM 启蒙》
+《深入 React 技术栈》
+《Vue.js 权威指南》
+《Angular 权威教程》
+《深入浅出 Node.js》
+《Chrome 扩展及应用开发》
+《PHP与MySQL程序设计(第4版)》
+《Python 核心编程(第3版)》
+《Ruby 元编程(第2版)》
+《Java 编程思想(第4版)》
+《Go 语言实战》
+《鸟哥的Linux私房菜:服务器架设篇(第3版)》
+《图解服务器端网络架构》
+《大型网站技术架构:核心原理与案例分析》
+《大型分布式网站架构设计与实践》
+《Linux系统编程(第2版)》
+《UNIX网络编程》
+《Linux多线程服务端编程》
+《用 Python 写网络爬虫》
+《大型网站系统与 Java 中间件实践》
+《刻意练习:如何从新手到大师》 
+《精益思想(白金版)》

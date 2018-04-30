@@ -76,20 +76,9 @@
 
 Git 是一种分布式版本控制系统
 
-* add
-* clone
-* commit
-* push
-* pull
-* branch
-* log
-
 ### GitHub
 
 一种 Git 资源库网络托管服务，提供各种其他功能，使开发者能够相互协作
-
-* forking
-* pull requests
 
 ### 网站性能
 
@@ -729,75 +718,6 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 ## 面试
 
 - [DDFE/DDFE-blog](https://github.com/DDFE/DDFE-blog)
-
-## 文档
-
-- [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
-- JavaScript 函数式编程
-- 《软件工程》
-
-- 《数据结构与算法 JavaScript 描述》 
-2. 《算法导论(原书第3版)》 
-3. 《Head First 设计模式》 
-4. 《JavaScript 设计模式》 
-5. 《设计模式 可复用面向对象软件的基础》
-6. Web开发权威指南
-
-6. 《鸟哥的Linux私房菜:基础学习篇(第3版)》 
-2. 《现代操作系统(原书第3版) 》 
-3. 《操作系统:精髓与设计原理(原书第6版)》 
-4. 《深入理解计算机系统(原书第3版)》
-
-1. 《简约至上》 
-2. 《用户体验的要素》 
-3. 《人人都是产品经理》
-
-1. 《Head First HTML 与 CSS (第2版)》 
-2. 《CSS 禅意花园(修订版)》 
-3. 《Javascript 权威指南》 
-4. 《JavaScript 高级程序设计(第3版)》
-
-1. 《精通 CSS: 高级 Web 标准解决方案(第2版)》 
-2. 《众妙之门: 精通 CSS3》 
-3. 《ES6 标准入门(第2版)》 
-4. 《深入理解ES6》
-
-1. 《JavaScript 异步编程:设计快速响应的网络应用》 
-2. 《JavaScript DOM 编程艺术》 
-3. 《DOM 启蒙》
-
-1. 《JavaScript 开发框架权威指南》 
-1. 《深入 React 技术栈》 
-2. 《Vue.js 权威指南》 
-3. 《Angular 权威教程》
-
-1. 《深入浅出 Node.js》 
-2. 《Chrome 扩展及应用开发》
-
-1. 《PHP与MySQL程序设计(第4版)》 
-2. 《Python 核心编程(第3版)》 
-3. 《Ruby 元编程(第2版)》 
-4. 《Java 编程思想(第4版)》 
-5. 《Go 语言实战》
-
-1. 《鸟哥的Linux私房菜:服务器架设篇(第3版)》 
-2. 《图解服务器端网络架构》
-
-1. 《大型网站技术架构:核心原理与案例分析》 
-2. 《大型分布式网站架构设计与实践》
-
-1. 《Linux系统编程(第2版)》 
-2. 《UNIX网络编程》 
-3. 《Linux多线程服务端编程》 
-4. 《用 Python 写网络爬虫》
-
-1. 《数据库系统概念》 
-2. 《大型网站系统与 Java 中间件实践》
-
-《SQL必知必会(第4版)》
-
-1. 《刻意练习:如何从新手到大师》 
-2. 《精益思想(白金版)》
 
 ## 参考
 

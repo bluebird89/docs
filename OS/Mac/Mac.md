@@ -16,22 +16,6 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * dock 停在左边
 * iphone,只能同步一台设备itunes配置
 * 设置未收录的开发者应用`sudo spctl --master-disable`
-* [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
-* [awesome-osx-command-line](https://github.com/herrbischoff/awesome-osx-command-line)Use your OS X terminal shell to do awesome things.
-* [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
-* [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
-* [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
-* [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
-* [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(http://sourabhbajaj.com/mac-setup/) 推荐
-* [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
-* [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
-* [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
-* [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
-* [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
-* [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
-* [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
-* [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
-* [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
 
 ### 配置文件
 
@@ -653,6 +637,25 @@ karabiner
 ```
 
 ## 参考
+
+* [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
+* [awesome-osx-command-line](https://github.com/herrbischoff/awesome-osx-command-line)Use your OS X terminal shell to do awesome things.
+* [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
+* [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
+* [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
+* [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
+* [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(http://sourabhbajaj.com/mac-setup/) 推荐
+* [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
+* [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
+* [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
+* [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
+* [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
+* [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
+* [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
+* [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
+* [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
+
+### 软件列表
 
 * [hzlzh/Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
 * [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
