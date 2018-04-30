@@ -66,8 +66,6 @@ brew link --overwrite docker
 brew services [-v|--verbose] [list | run | start | stop | restart | cleanup]
 brew services start postgresql
 
-
-
 brew install tig
 brew install bash-completion
 
@@ -143,6 +141,8 @@ fi
 
 cd /usr/local && sudo chown -R $(whoami) bin etc include lib sbin share var Frameworks
 
+> Error: undefined method `core_tap?' for nil:NilClass
 
+brew update --force
 
 
