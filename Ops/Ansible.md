@@ -35,3 +35,4 @@ ansible all -m ping --ask-pass # 管理主机测试
 
 * [文档](http://docs.ansible.com/ansible/latest/intro_installation.html)
 * [ansible/ansible-examples](https://github.com/ansible/ansible-examples):A few starter examples of ansible playbooks, to show features and how they work together. See http://galaxy.ansible.com for example roles from the Ansible community for deploying many popular applications
+* [Ansible中文权威指南](http://www.ansible.com.cn/?wztf_magedu)

@@ -12,3 +12,8 @@
 
 张丹：从程序员开始，到架构师一路走来，经历过太多的系统和应用。做过手机游戏，写过编程工具；做过大型Web应用系统，写过公司内部CRM；做过SOA的系统集成，写过基于Hadoop的大数据工具；做过外包，做过电商，做过团购，做过支付，做过SNS，也做过移动SNS。以前只用Java，然后学了PHP，现在用R和Javascript。最后跳出IT圈，进入金融圈，研发量化交易软件。
 
+# Remote Job
+
+整个 Github 公司有 60% 的员工是在家里远程办公。新员工培训：在公司内的聊天室内，静静地看别人聊天，体会一下别人是如何工作的
+
+- [lukasz-madon/awesome-remote-job](https://github.com/lukasz-madon/awesome-remote-job)
