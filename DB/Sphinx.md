@@ -7,3 +7,7 @@ Full-text search engine
 ```sh
 brew install sphinx
 ```
+
+## 参考
+
+* [reference manual](http://sphinxsearch.com/docs/current.html)

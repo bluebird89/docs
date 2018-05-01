@@ -16,6 +16,3 @@
 [submodule "Note/Interview-Notebook"]
 	path = Note/Interview-Notebook
 	url = git@github.com:CyC2018/Interview-Notebook.git
-[submodule "Architect"]
-	path = Architect
-	url = git@github.com:xingshaocheng/architect-awesome.git

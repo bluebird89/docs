@@ -25,7 +25,7 @@ make install
 gunzip php-NN.tar.gz
 tar -xf php-NN.tar
 
-cd ../php-NN  
+cd ../php-NN
 ./configure --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql // 可以根据需要重新编译
 make
 make install
@@ -33,7 +33,7 @@ make install
 LoadModule php5_module modules/libphp5.so // httpd.conf中添加
 
 ./configure --enable-fpm --with-mysql
-sudo make install 
+sudo make install
 
 cp php.ini-development /usr/local/php/php.ini
 cp /usr/local/etc/php-fpm.conf.default /usr/local/etc/php-fpm.conf
@@ -100,13 +100,13 @@ service vsftpd status
 libxml2 # libxml2 安装(xml和html文件相关依赖的库)
 tar -zxvf libxml2-2.6.30
 cd libxml2-2.6.30
-./configure --prefix=/usr/local/libxml2 
+./configure --prefix=/usr/local/libxml2
 make && make install
 
 cd /lamp/libmcrypt-2.5.8 # libmcrypt-2.5.8 安装(加密库)
-./configure --prefix=/usr/local/libmcrypt/ 
+./configure --prefix=/usr/local/libmcrypt/
 make && make install
-# 进入libmcrypt-2.5.8文件夹内的 
+# 进入libmcrypt-2.5.8文件夹内的
 libltdl > cd ./libmcrypt-2.5.8/libltdl
 ./configure --enable-ltdl-install
 make && make install
@@ -114,21 +114,21 @@ make && make install
 ./configure
 make && make install
 # png图片库安装
-./configure --prefix=/usr/local/libpng/ 
+./configure --prefix=/usr/local/libpng/
 make && make install
 # jpeg图片库安装(需要自己创建jpeg6)
 mkdir /usr/local/jpeg6
 mkdir /usr/local/jpeg6/bin
 mkdir /usr/local/jpeg6/lib
 mkdir /usr/local/jpeg6/include
-mkdir -p /usr/local/jpeg6/man/man1 
+mkdir -p /usr/local/jpeg6/man/man1
 cd /lamp/jpeg-6b
-./configure --prefix=/usr/local/jpeg6/ --enable-shared --enable-static 
+./configure --prefix=/usr/local/jpeg6/ --enable-shared --enable-static
 make && make install
 # freetype字体库安装
 ./configure --prefix=/usr/local/freetype/
 make && make install
-# autoconfig生成makefile安装(不需要指定安装路径) 
+# autoconfig生成makefile安装(不需要指定安装路径)
 ./configure
 make && make install
 # GD 库 的 安 装
@@ -277,57 +277,57 @@ const MESSAGE="Hello const by YiiBai PHP";
 print "Hello, Red Hat Developers World from PHP " . PHP_VERSION . "\n";
 echo "<h2>Hello First PHP</h2>";
 
-$num=12;  
-if($num<100){  
-    echo "$num is less than 100";  
+$num=12;
+if($num<100){
+    echo "$num is less than 100";
 }
 
-if($num%2==0){  
-    echo "$num is even number";  
-}else{  
-    echo "$num is odd number";  
+if($num%2==0){
+    echo "$num is even number";
+}else{
+    echo "$num is odd number";
 }
 
-switch($num){    
-    case 10:    
-        echo("number is equals to 10");    
-        break;    
-    case 20:    
-        echo("number is equal to 20");    
-        break;    
-    case 30:    
-        echo("number is equal to 30");    
-        break;    
-    default:    
-        echo("number is not equal to 10, 20 or 30");    
+switch($num){
+    case 10:
+        echo("number is equals to 10");
+        break;
+    case 20:
+        echo("number is equal to 20");
+        break;
+    case 30:
+        echo("number is equal to 30");
+        break;
+    default:
+        echo("number is not equal to 10, 20 or 30");
 }
 
-for($n=1;$n<=10;$n++){  
-    echo "$n<br/>";  
+for($n=1;$n<=10;$n++){
+    echo "$n<br/>";
 }
 
-$season=array("summer","winter","spring","autumn");  
-foreach( $season as $arr ){  
-    echo "Season is: $arr<br />";  
+$season=array("summer","winter","spring","autumn");
+foreach( $season as $arr ){
+    echo "Season is: $arr<br />";
 }
 
-$n=1;  
-while($n<=10){  
-    echo "$n<br/>";  
-    $n++;  
+$n=1;
+while($n<=10){
+    echo "$n<br/>";
+    $n++;
 }
 
-$n=1;  
-do{  
-    echo "$n<br/>";  
-    $n++;  
+$n=1;
+do{
+    echo "$n<br/>";
+    $n++;
 }while($n<=10);
 
-for($i=1;$i<=10;$i++){  
-    echo "$i <br/>";  
-    if($i==5){  
-        break;  
-    }  
+for($i=1;$i<=10;$i++){
+    echo "$i <br/>";
+    if($i==5){
+        break;
+    }
 }
 ```
 
@@ -354,29 +354,29 @@ for($i=1;$i<=10;$i++){
 
 ```php
 $season=array("summer","winter","spring","autumn");
-$season[0]="summer";  
-$season[1]="winter";  
-$season[2]="spring";  
+$season[0]="summer";
+$season[1]="winter";
+$season[2]="spring";
 $season[3]="autumn";
 $salary=array("Hema"=>"350000","John"=>"450000","Kartik"=>"200000");
-$salary["Hema"]="350000";    
-$salary["John"]="450000";    
+$salary["Hema"]="350000";
+$salary["John"]="450000";
 $salary["Kartik"]="200000";
 echo count($salary);
-foreach($salary as $k => $v) {  
-    echo "Key: ".$k." Value: ".$v."<br/>";  
-} 
-$emp = array  
-  (  
-  array(1,"sonoo",400000),  
-  array(2,"john",450000),  
-  array(3,"rahul",300000)  
+foreach($salary as $k => $v) {
+    echo "Key: ".$k." Value: ".$v."<br/>";
+}
+$emp = array
+  (
+  array(1,"sonoo",400000),
+  array(2,"john",450000),
+  array(3,"rahul",300000)
   );
 for ($row = 0; $row < 3; $row++) {
-    for ($col = 0; $col < 3; $col++) {  
-        echo $emp[$row][$col]."  ";  
+    for ($col = 0; $col < 3; $col++) {
+        echo $emp[$row][$col]."  ";
     }
-  echo "<br/>"; 
+  echo "<br/>";
 }
 
 $salary=array("Maxsu"=>"550000","Vimal"=>"250000","Ratan"=>"200000");
@@ -391,25 +391,25 @@ foreach( $season as $s )
     echo "$s<br />";
 }
 
-$reverseseason=array_reverse($season);  
-foreach( $reverseseason as $s )    
-{    
-  echo "$s<br />";    
+$reverseseason=array_reverse($season);
+foreach( $reverseseason as $s )
+{
+  echo "$s<br />";
 }
 
-$key=array_search("spring",$season);  
+$key=array_search("spring",$season);
 echo $key;
 
-$name1=array("maxsu","john","vivek","minsu");    
-$name2=array("umesh","maxsu","kartik","minsu");    
-$name3=array_intersect($name1,$name2);  
-foreach( $name3 as $n )    
-{    
-  echo "$n<br />";    
+$name1=array("maxsu","john","vivek","minsu");
+$name2=array("umesh","maxsu","kartik","minsu");
+$name3=array_intersect($name1,$name2);
+foreach( $name3 as $n )
+{
+  echo "$n<br />";
 }
 
 $str='Hello text within single quote';
-$str2="Using double \"quote\" with backslash inside double quoted string"; 
+$str2="Using double \"quote\" with backslash inside double quoted string";
 
 $str=strtolower("My name is Yiibai"); # strtoupper
 $str=ucwords("My name is Yiibai"); # strtoupper
@@ -420,10 +420,10 @@ $len=strlen("My name is Yiibai");
 
 
 $str = preg_replace_callback(
-    '/([a-z]*)([A-Z]*)/', 
+    '/([a-z]*)([A-Z]*)/',
     function($matchs){
         return strtoupper($matchs[1]).strtolower($matchs[2]);
-    }, 
+    },
 $str
 );
 
@@ -438,7 +438,7 @@ destroy_foo();
 echo $foo;//bar
 
 //示例二：要在函数中 unset 一个全局变量，应使用 $GLOBALS 数组来实现
-function foo() 
+function foo()
 {
     unset($GLOBALS['bar']);
 }
@@ -507,116 +507,116 @@ echo (base_convert($n1,10,2)."<br/>");// 1010
 
 require("menu.html");
 
-ini_set("sendmail_from", "maxsujaiswal@yiibai.com");  
-$to = "maxsujaiswal1987@gmail.com";//change receiver address  
-$subject = "This is subject";  
-$message = "This is simple text message.";  
-$header = "From:maxsujaiswal@yiibai.com \r\n";  
+ini_set("sendmail_from", "maxsujaiswal@yiibai.com");
+$to = "maxsujaiswal1987@gmail.com";//change receiver address
+$subject = "This is subject";
+$message = "This is simple text message.";
+$header = "From:maxsujaiswal@yiibai.com \r\n";
 
-$result = mail ($to,$subject,$message,$header);  
+$result = mail ($to,$subject,$message,$header);
 
-if( $result == true ){  
-  echo "Message sent successfully...";  
-}else{  
-  echo "Sorry, unable to send mail...";  
+if( $result == true ){
+  echo "Message sent successfully...";
+}else{
+  echo "Sorry, unable to send mail...";
 }
 
 $to = "abc@example.com";//发送HTML消息
-$subject = "This is subject";  
-$message = "<h1>This is HTML heading</h1>";  
+$subject = "This is subject";
+$message = "<h1>This is HTML heading</h1>";
 
-$header = "From:xyz@example.com \r\n";  
-$header .= "MIME-Version: 1.0 \r\n";  
-$header .= "Content-type: text/html;charset=UTF-8 \r\n";  
+$header = "From:xyz@example.com \r\n";
+$header .= "MIME-Version: 1.0 \r\n";
+$header .= "Content-type: text/html;charset=UTF-8 \r\n";
 
-$result = mail ($to,$subject,$message,$header);  
+$result = mail ($to,$subject,$message,$header);
 
-if( $result == true ){  
-  echo "Message sent successfully...";  
-}else{  
-  echo "Sorry, unable to send mail...";  
+if( $result == true ){
+  echo "Message sent successfully...";
+}else{
+  echo "Sorry, unable to send mail...";
 }
 
 $to = "abc@example.com";  # 使用附件发送邮件
-$subject = "This is subject";  
-$message = "This is a text message.";  
-# Open a file  
-$file = fopen("/tmp/test.txt", "r" );//change your file location  
-if( $file == false )  
-{  
- echo "Error in opening file";  
- exit();  
-}  
-# Read the file into a variable  
-$size = filesize("/tmp/test.txt");  
-$content = fread( $file, $size);  
+$subject = "This is subject";
+$message = "This is a text message.";
+# Open a file
+$file = fopen("/tmp/test.txt", "r" );//change your file location
+if( $file == false )
+{
+ echo "Error in opening file";
+ exit();
+}
+# Read the file into a variable
+$size = filesize("/tmp/test.txt");
+$content = fread( $file, $size);
 
-# encode the data for safe transit  
-# and insert \r\n after every 76 chars.  
-$encoded_content = chunk_split( base64_encode($content));  
+# encode the data for safe transit
+# and insert \r\n after every 76 chars.
+$encoded_content = chunk_split( base64_encode($content));
 
-# Get a random 32 bit number using time() as seed.  
-$num = md5( time() );  
+# Get a random 32 bit number using time() as seed.
+$num = md5( time() );
 
-# Define the main headers.  
-$header = "From:xyz@example.com\r\n";  
-$header .= "MIME-Version: 1.0\r\n";  
-$header .= "Content-Type: multipart/mixed; ";  
-$header .= "boundary=$num\r\n";  
-$header .= "--$num\r\n";  
+# Define the main headers.
+$header = "From:xyz@example.com\r\n";
+$header .= "MIME-Version: 1.0\r\n";
+$header .= "Content-Type: multipart/mixed; ";
+$header .= "boundary=$num\r\n";
+$header .= "--$num\r\n";
 
-# Define the message section  
-$header .= "Content-Type: text/plain\r\n";  
-$header .= "Content-Transfer-Encoding:8bit\r\n\n";  
-$header .= "$message\r\n";  
-$header .= "--$num\r\n";  
+# Define the message section
+$header .= "Content-Type: text/plain\r\n";
+$header .= "Content-Transfer-Encoding:8bit\r\n\n";
+$header .= "$message\r\n";
+$header .= "--$num\r\n";
 
-# Define the attachment section  
-$header .= "Content-Type:  multipart/mixed; ";  
-$header .= "name=\"test.txt\"\r\n";  
-$header .= "Content-Transfer-Encoding:base64\r\n";  
-$header .= "Content-Disposition:attachment; ";  
-$header .= "filename=\"test.txt\"\r\n\n";  
-$header .= "$encoded_content\r\n";  
-$header .= "--$num--";  
+# Define the attachment section
+$header .= "Content-Type:  multipart/mixed; ";
+$header .= "name=\"test.txt\"\r\n";
+$header .= "Content-Transfer-Encoding:base64\r\n";
+$header .= "Content-Disposition:attachment; ";
+$header .= "filename=\"test.txt\"\r\n\n";
+$header .= "$encoded_content\r\n";
+$header .= "--$num--";
 
-# Send email now  
-$result = mail ( $to, $subject, "", $header );  
-if( $result == true ){  
-  echo "Message sent successfully...";  
-}else{  
-  echo "Sorry, unable to send mail...";  
+# Send email now
+$result = mail ( $to, $subject, "", $header );
+if( $result == true ){
+  echo "Message sent successfully...";
+}else{
+  echo "Sorry, unable to send mail...";
 }
 <?
-//add() function with two parameter  
-function add($x,$y)    
-{  
-    $sum=$x+$y;  
-    echo "Sum = $sum <br><br>";  
-}  
-//sub() function with two parameter  
-function sub($x,$y)    
-{  
-    $sub=$x-$y;  
-    echo "Diff = $sub <br><br>";  
-}  
-//call function, get  two argument through input box and click on add or sub button  
-if(isset($_POST['add']))  
-{  
-    //call add() function  
-     add($_POST['first'],$_POST['second']);  
-}     
-if(isset($_POST['sub']))  
-{  
-    //call add() function  
-    sub($_POST['first'],$_POST['second']);  
-}  
-?>  
-<form method="post">  
+//add() function with two parameter
+function add($x,$y)
+{
+    $sum=$x+$y;
+    echo "Sum = $sum <br><br>";
+}
+//sub() function with two parameter
+function sub($x,$y)
+{
+    $sub=$x-$y;
+    echo "Diff = $sub <br><br>";
+}
+//call function, get  two argument through input box and click on add or sub button
+if(isset($_POST['add']))
+{
+    //call add() function
+     add($_POST['first'],$_POST['second']);
+}
+if(isset($_POST['sub']))
+{
+    //call add() function
+    sub($_POST['first'],$_POST['second']);
+}
+?>
+<form method="post">
     Enter first number: <input type="number" name="first"/><br>
     Enter second number: <input type="number" name="second"/><br>
-<input type="submit" name="add" value="ADDITION"/>  
-<input type="submit" name="sub" value="SUBTRACTION"/>  
+<input type="submit" name="add" value="ADDITION"/>
+<input type="submit" name="sub" value="SUBTRACTION"/>
 </form>
 ```
 
@@ -628,7 +628,7 @@ Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，
 function getClosure($n)
 {
       $a = 100;
-      return function($m) use ($n, &$a) { 
+      return function($m) use ($n, &$a) {
             $a += $n + $m;
             echo $a."\n";
         };
@@ -643,13 +643,13 @@ class Dog
 {
     private $_name;
     protected $_color;
- 
+
     public function __construct($name, $color)
     {
          $this->_name = $name;
          $this->_color = $color;
     }
- 
+
     public function greet($greeting)
     {
          return function() use ($greeting) {
@@ -657,28 +657,28 @@ class Dog
             echo "$greeting, I am a {$this->_color} dog named {$this->_name}.\n";
          };
     }
-    
+
     public function swim()
      {
-         return static function() { 
+         return static function() {
             //类中静态闭包不可通过 $this 变量导入对象，由于无需将对象导入闭包中，
             //因此可以节省大量内存，尤其是在拥有许多不需要此功能的闭包时。
-            echo "swimming....\n"; 
+            echo "swimming....\n";
          };
      }
-     
+
      private function privateMethod()
      {
         echo "You have accessed to {$this->_name}'s privateMethod().\n";
      }
-     
+
      public function __invoke()
     {
          //此方法允许对象本身被调用为闭包
          echo "I am a dog!\n";
     }
 }
- 
+
 $dog = new Dog("Rover","red");
 $dog->greet("Hello")();
 $dog->swim()();
@@ -686,7 +686,7 @@ $dog();
 //通过ReflectionClass、ReflectionMethod来动态创建闭包，并实现直接调用非公开方法。
 $class = new ReflectionClass('Dog');
 $closure = $class->getMethod('privateMethod')->getClosure($dog);
-$closure(); 
+$closure();
 
 $username = $_GET['user'] ?? 'nobody';
 
@@ -718,59 +718,59 @@ addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转�
 urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
 
 ```php
-function sayHello(){  
-    echo "Hello PHP Function";  
-}  
+function sayHello(){
+    echo "Hello PHP Function";
+}
 sayHello();//calling function
 
-function sayHello($name,$age = 28){  
-echo "Hello $name, you are $age years old<br/>";  
-}  
-sayHello("Maxsu",27);  
-sayHello("Minsu",26);  
+function sayHello($name,$age = 28){
+echo "Hello $name, you are $age years old<br/>";
+}
+sayHello("Maxsu",27);
+sayHello("Minsu",26);
 sayHello("John",23);
 sayHello("Henry");
 
-function increment($i)  
-{  
-    $i++;  
-}  
-$i = 10;  
-increment($i);  
+function increment($i)
+{
+    $i++;
+}
+$i = 10;
+increment($i);
 echo $i; # 10
 
-function increment(&$i)  
-{  
-    $i++;  
-}  
-$i = 10;  
-increment($i);  
+function increment(&$i)
+{
+    $i++;
+}
+$i = 10;
+increment($i);
 echo $i;  # 11
 
-function add(...$numbers) {  
-    $sum = 0;  
-    foreach ($numbers as $n) {  
-        $sum += $n;  
-    }  
-    return $sum;  
+function add(...$numbers) {
+    $sum = 0;
+    foreach ($numbers as $n) {
+        $sum += $n;
+    }
+    return $sum;
 }
 echo add(1, 2, 3, 4);
 
-function display($number) {    
-    if($number<=5){    
-     echo "$number <br/>";    
-     display($number+1);    
-    }  
+function display($number) {
+    if($number<=5){
+     echo "$number <br/>";
+     display($number+1);
+    }
 }
 display(1);
 
-function factorial($n)    
-{    
-    if ($n < 0)    
-        return -1; /*Wrong value*/    
-    if ($n == 0)    
-        return 1; /*Terminating condition*/    
-    return ($n * factorial ($n -1));    
+function factorial($n)
+{
+    if ($n < 0)
+        return -1; /*Wrong value*/
+    if ($n == 0)
+        return 1; /*Terminating condition*/
+    return ($n * factorial ($n -1));
 }
 echo factorial(5);
 ```
@@ -790,56 +790,56 @@ echo factorial(5);
     - session_destroy()
 
 ```php
-setcookie("CookieName", "CookieValue");/* defining name and value only*/  
-setcookie("CookieName", "CookieValue", time()+1*60*60);//using expiry in 1 hour(1*60*60 seconds or 3600 seconds)  
+setcookie("CookieName", "CookieValue");/* defining name and value only*/
+setcookie("CookieName", "CookieValue", time()+1*60*60);//using expiry in 1 hour(1*60*60 seconds or 3600 seconds)
 setcookie("CookieName", "CookieValue", time()+1*60*60, "/mypath/", "yiibai.com", 1);
 
 $value=$_COOKIE["CookieName"];//returns cookie value
 
-<?php  
-setcookie("user", "Maxsu");  
+<?php
+setcookie("user", "Maxsu");
 ?>
-<?php  
-if(!isset($_COOKIE["user"])) {  
-    echo "Sorry, cookie is not found!";  
-} else {  
-    echo "<br/>Cookie Value: " . $_COOKIE["user"];  
-}  
+<?php
+if(!isset($_COOKIE["user"])) {
+    echo "Sorry, cookie is not found!";
+} else {
+    echo "<br/>Cookie Value: " . $_COOKIE["user"];
+}
 ?>
 
 # session1.php
-<?php  
-session_start();  
-?>  
-<html>  
-<body>  
-<?php  
-$_SESSION["user"] = "Maxsu";  
-echo "Session information are set successfully.<br/>";  
-?>  
-<a href="session2.php">Visit next page</a>  
-</body>  
+<?php
+session_start();
+?>
+<html>
+<body>
+<?php
+$_SESSION["user"] = "Maxsu";
+echo "Session information are set successfully.<br/>";
+?>
+<a href="session2.php">Visit next page</a>
+</body>
 </html>
 # session2.php
-<?php  
-session_start();  
-?>  
-<html>  
-<body>  
-<?php  
-echo "User is: ".$_SESSION["user"];  
-?>  
-</body>  
+<?php
+session_start();
+?>
+<html>
+<body>
+<?php
+echo "User is: ".$_SESSION["user"];
+?>
+</body>
 </html>
 
 <?php
-session_start();  
+session_start();
 
-if (!isset($_SESSION['counter'])) {  
-    $_SESSION['counter'] = 1;  
-} else {  
+if (!isset($_SESSION['counter'])) {
+    $_SESSION['counter'] = 1;
+} else {
     $_SESSION['counter']++;
-}  
+}
 echo ("Page Views: ".$_SESSION['counter']);
 ```
 
@@ -878,23 +878,23 @@ echo ("Page Views: ".$_SESSION['counter']);
     - int：它返回从文件读取的字节数。
 
 ```php
-$filename = "c:\\myfile.txt";    
-$handle = fopen($filename, "r");//open file in read mode    
-$contents = fread($handle, filesize($filename));//read file    
-echo $contents;//printing data of file  
+$filename = "c:\\myfile.txt";
+$handle = fopen($filename, "r");//open file in read mode
+$contents = fread($handle, filesize($filename));//read file
+echo $contents;//printing data of file
 fclose($handle);//close file
 
-$fp = fopen('data.txt', 'w');//open file in write mode  
-fwrite($fp, 'hello ');  
-fwrite($fp, 'php file');  
-fclose($fp);  
+$fp = fopen('data.txt', 'w');//open file in write mode
+fwrite($fp, 'hello ');
+fwrite($fp, 'php file');
+fclose($fp);
 echo "File written successfully";
 
-$status=unlink('data.txt');    
-if($status){  
-echo "File deleted successfully";    
-}else{  
-echo "Sorry!";    
+$status=unlink('data.txt');
+if($status){
+echo "File deleted successfully";
+}else{
+echo "Sorry!";
 }
 
 $fp  = fopen('lock.txt', 'w+');
@@ -906,40 +906,40 @@ if (flock($fp, LOCK_EX)) {
 }
 fclose($fp);
 
-$fp = fopen("c:\\file1.txt", "r");//open file in read mode    
-while(!feof($fp)) {  
-  echo fgetc($fp);  
-}  
+$fp = fopen("c:\\file1.txt", "r");//open file in read mode
+while(!feof($fp)) {
+  echo fgetc($fp);
+}
 fclose($fp);
 
-$fp = fopen('data.txt', 'a');//opens file in append mode  
-fwrite($fp, ' this is additional text ');  
-fwrite($fp, 'appending data');  
+$fp = fopen('data.txt', 'a');//opens file in append mode
+fwrite($fp, ' this is additional text ');
+fwrite($fp, 'appending data');
 fclose($fp);
 echo "File appended successfully";
 
 # uploadform.html
-<form action="uploader.php" method="post" enctype="multipart/form-data">  
-    选择上传的文件:  
-    <input type="file" name="fileToUpload"/>  
-    <input type="submit" value="Upload Image" name="submit"/>  
+<form action="uploader.php" method="post" enctype="multipart/form-data">
+    选择上传的文件:
+    <input type="file" name="fileToUpload"/>
+    <input type="submit" value="Upload Image" name="submit"/>
 </form>
 
-<?php  
-$target_path = "D:/";  
-$target_path = $target_path.basename( $_FILES['fileToUpload']['name']);   
+<?php
+$target_path = "D:/";
+$target_path = $target_path.basename( $_FILES['fileToUpload']['name']);
 
-if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_path)) {  
-    echo "File uploaded successfully!";  
-} else{  
-    echo "Sorry, file not uploaded, please try again!";  
-}  
+if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_path)) {
+    echo "File uploaded successfully!";
+} else{
+    echo "Sorry, file not uploaded, please try again!";
+}
 ?>
 
-$file_url = 'http://www.myremoteserver.com/file.exe';  
-header('Content-Type: application/octet-stream');  
-header("Content-Transfer-Encoding: Binary");   
-header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");   
+$file_url = 'http://www.myremoteserver.com/file.exe';
+header('Content-Type: application/octet-stream');
+header("Content-Transfer-Encoding: Binary");
+header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");
 readfile($file_url);
 ```
 
@@ -951,93 +951,93 @@ PHP 5.5以来，mysql_connect()扩展已被弃用。 现在，建议使用以下
 * PDO::__ construct()
 
 ```php
-$host = 'localhost:3306';  
+$host = 'localhost:3306';
 $user = 'root';  // MySQL用户帐号
 $pass = '';  // MySQL用户帐号对应的密码
-$conn = mysqli_connect($host, $user, $pass);  
-if(! $conn )  
-{  
-  die('Could not connect: ' . mysqli_error());  
-}  
+$conn = mysqli_connect($host, $user, $pass);
+if(! $conn )
+{
+  die('Could not connect: ' . mysqli_error());
+}
 echo 'Connected successfully';
 
-$sql = 'CREATE Database mydb';  
-if(mysqli_query( $conn,$sql)){  
-  echo "Database mydb created successfully.";  
-}else{  
-echo "Sorry, database creation failed ".mysqli_error($conn);  
+$sql = 'CREATE Database mydb';
+if(mysqli_query( $conn,$sql)){
+  echo "Database mydb created successfully.";
+}else{
+echo "Sorry, database creation failed ".mysqli_error($conn);
 }
 
-$sql = "create table emp5(id INT AUTO_INCREMENT,name VARCHAR(20) NOT NULL,  
-emp_salary INT NOT NULL,primary key (id))";  
-if(mysqli_query($conn, $sql)){  
- echo "Table emp5 created successfully";  
-}else{  
+$sql = "create table emp5(id INT AUTO_INCREMENT,name VARCHAR(20) NOT NULL,
+emp_salary INT NOT NULL,primary key (id))";
+if(mysqli_query($conn, $sql)){
+ echo "Table emp5 created successfully";
+}else{
 echo "Could not create table: ". mysqli_error($conn);
 
-$sql = 'INSERT INTO emp4(name,salary) VALUES ("maxsu", 9000)';  
-if(mysqli_query($conn, $sql)){  
- echo "Record inserted successfully";  
-}else{  
-echo "Could not insert record: ". mysqli_error($conn);  
+$sql = 'INSERT INTO emp4(name,salary) VALUES ("maxsu", 9000)';
+if(mysqli_query($conn, $sql)){
+ echo "Record inserted successfully";
+}else{
+echo "Could not insert record: ". mysqli_error($conn);
 }
 
-$id=2;  
-$name="Rahul";  
-$salary=80000;  
-$sql = "update emp4 set name="$name", salary=$salary where id=$id";  
-if(mysqli_query($conn, $sql)){  
- echo "Record updated successfully";  
-}else{  
-echo "Could not update record: ". mysqli_error($conn);  
+$id=2;
+$name="Rahul";
+$salary=80000;
+$sql = "update emp4 set name="$name", salary=$salary where id=$id";
+if(mysqli_query($conn, $sql)){
+ echo "Record updated successfully";
+}else{
+echo "Could not update record: ". mysqli_error($conn);
 }
 
-$id=2;  
-$sql = "delete from emp4 where id=$id";  
-if(mysqli_query($conn, $sql)){  
- echo "Record deleted successfully";  
-}else{  
-echo "Could not deleted record: ". mysqli_error($conn);  
+$id=2;
+$sql = "delete from emp4 where id=$id";
+if(mysqli_query($conn, $sql)){
+ echo "Record deleted successfully";
+}else{
+echo "Could not deleted record: ". mysqli_error($conn);
 }
 
-$sql = 'SELECT * FROM emp4';  
-$retval=mysqli_query($conn, $sql);  
+$sql = 'SELECT * FROM emp4';
+$retval=mysqli_query($conn, $sql);
 
-if(mysqli_num_rows($retval) > 0){  
- while($row = mysqli_fetch_assoc($retval)){  
-    echo "EMP ID :{$row['id']}  <br> ".  
-         "EMP NAME : {$row['name']} <br> ".  
-         "EMP SALARY : {$row['salary']} <br> ".  
-         "--------------------------------<br>";  
- } //end of while  
-}else{  
-echo "0 results";  
+if(mysqli_num_rows($retval) > 0){
+ while($row = mysqli_fetch_assoc($retval)){
+    echo "EMP ID :{$row['id']}  <br> ".
+         "EMP NAME : {$row['name']} <br> ".
+         "EMP SALARY : {$row['salary']} <br> ".
+         "--------------------------------<br>";
+ } //end of while
+}else{
+echo "0 results";
 }
 
-$sql = 'SELECT * FROM emp4 order by name';  
-$retval=mysqli_query($conn, $sql);  
+$sql = 'SELECT * FROM emp4 order by name';
+$retval=mysqli_query($conn, $sql);
 
-if(mysqli_num_rows($retval) > 0){  
- while($row = mysqli_fetch_assoc($retval)){  
-    echo "EMP ID :{$row['id']}  <br> ".  
-         "EMP NAME : {$row['name']} <br> ".  
-         "EMP SALARY : {$row['salary']} <br> ".  
-         "--------------------------------<br>";  
- } //end of while  
-}else{  
-echo "0 results";  
+if(mysqli_num_rows($retval) > 0){
+ while($row = mysqli_fetch_assoc($retval)){
+    echo "EMP ID :{$row['id']}  <br> ".
+         "EMP NAME : {$row['name']} <br> ".
+         "EMP SALARY : {$row['salary']} <br> ".
+         "--------------------------------<br>";
+ } //end of while
+}else{
+echo "0 results";
 }
 
-mysqli_close($conn);  
+mysqli_close($conn);
 ```
 
 ### 面向对象(OOP)
 
-继承：类分层、接口分层 
-实现：类实现接口 
-依赖：类作为另一个类方法的参数 
-关联：类属性 
-聚合：可以有 
+继承：类分层、接口分层
+实现：类实现接口
+依赖：类作为另一个类方法的参数
+关联：类属性
+聚合：可以有
 组合：必须有
 
 #### 对象
@@ -1102,12 +1102,12 @@ $test->baz(new Test('other'));
 class A
 {
     public static $proPublic = "public of A";
-    
+
     public function myMethod()
     {
         echo static::$proPublic."\n";
     }
-    
+
     public function test()
     {
         echo "Class A:\n";
@@ -1122,7 +1122,7 @@ class A
 class B extends A
 {
    public static $proPublic = "public of B";
-   
+
    public function test()
     {
         echo "\n\nClass B:\n";
@@ -1314,7 +1314,7 @@ ENV PHP_INI_DIR /usr/local/etc/php RUN mkdir -p $PHP_INI_DIR/conf.d
 
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data
 
-## 
+##
 
 ENV GPG_KEYS 0BD78B5F97500D450838F95DFE857D9A90D90EC1 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3
 
@@ -1410,21 +1410,21 @@ EXPOSE 9000 CMD ["php-fpm"]
 * 自动加载
 
 ```php
-function autoload($className)  
-{  
-    $className = ltrim($className, '\\');  
-    $fileName  = '';  
-    $namespace = '';  
-    if ($lastNsPos = strrpos($className, '\\')) {  
-        $namespace = substr($className, 0, $lastNsPos);  
-        $className = substr($className, $lastNsPos + 1);  
-        $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;  
-    }  
-    $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';  
-  
-    require $fileName;  
-}  
-spl_autoload_register('autoload');  
+function autoload($className)
+{
+    $className = ltrim($className, '\\');
+    $fileName  = '';
+    $namespace = '';
+    if ($lastNsPos = strrpos($className, '\\')) {
+        $namespace = substr($className, 0, $lastNsPos);
+        $className = substr($className, $lastNsPos + 1);
+        $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+    }
+    $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+
+    require $fileName;
+}
+spl_autoload_register('autoload');
 ```
 
 ### PSR4
@@ -1545,7 +1545,7 @@ PHP5.5中加入了一个新特性—迭代生成器和协程。
 
 ## 性能
 
-```sh 
+```sh
 time php php-src/Zend/micro_bench.php # 源码自带性能测试
 ```
 
@@ -1600,6 +1600,7 @@ php php-cs-fixer.phar fix /path/to/file
 
 ## 参考
 
+* [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
 * [PHP优秀学习文章资料汇总整理](http://www.francissoung.com/2016/08/10/%E4%B8%80%E8%A8%80%E4%B8%8D%E5%90%88%E5%B0%B1%E5%AD%A6%E4%B9%A0-PHP%E4%BC%98%E7%A7%80%E5%AD%A6%E4%B9%A0%E6%96%87%E7%AB%A0%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB%E6%95%B4%E7%90%86/)
 TP参考：<https://github.com/ijry/lyadmin>
 

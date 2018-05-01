@@ -4,13 +4,13 @@ Remote Dictionary Server(Redis)是一个基于key-value键值对的持久化数�
 
 * 丰富的数据结构，支持二进制的String，List，Hash，Set及Ordered Set等数据类型操作。
 * 与memchaed缓存服务一样，为了保证效率，数据都是缓存在内存中提供服务。
-* 而memcached不同的是，redis持久化存服务还会周期性的把更新的数据写入到磁盘以及把修改的操作记录追加到文件里记录下来，
-* 比memcached更有优势的是，redis还支持master-slave（主从）同步
-* 支持publish/subscribe，通知，key过期等等特性。，
-* 一定程序上弥补了memcached这类key-value内存缓存服务的不足
-* Redis能支持超过100K+每秒的读写频率。
+    - 而memcached不同的是，redis持久化存服务还会周期性的把更新的数据写入到磁盘以及把修改的操作记录追加到文件里记录下来，
+    - 比memcached更有优势的是，redis还支持master-slave（主从）同步
+    - 支持publish/subscribe，通知，key过期等等特性。，
+    - 一定程序上弥补了memcached这类key-value内存缓存服务的不足
+* 数据存储在内存中,能支持超过100K+每秒的读写频率。
 * 单线程，避免了线程切换和锁的性能消耗
-* 可持久化（RDB与AOF）
+* 可持久化（RDB与AOF）,Redis 重启后数据不丢失
 * 分布式锁
 * 主从复制与高可用（Redis Sentinel）
 * 集群
@@ -22,13 +22,22 @@ vm字段，只有打开了Redis的虚拟内存功能，此字段才会真正的�
 
 ## 安装
 
-### Mac
+* redis-server：redis服务器的daemon启动程序
+* redis-cli：Redis命令操作工具。当然，也可以telnet根据其纯文本协助来操作。
+* redis-benchmark：Redis性能测试工具，测试Redis在你的系统及你的配置下的读写性能。
+* redis-check-aof：更新日志检查
+* redis-check-dump：用于本地数据库检查
 
-默认配置路径：`redis-server /usr/local/etc/redis.conf`
-
-```shell
+```sh
+# Mac
 brew install redis
 brew services start/stop/restart redis
+redis-server /usr/local/etc/redis.conf
+
+# ubuntu
+sudo apt-get install redis-server php-redis
+
+redis-cli -h localhost -p 6379 info # 功能统计
 ```
 
 ## 配置
@@ -38,49 +47,55 @@ brew services start/stop/restart redis
 ```
 <add key="RedisServerIP" value="redis:uuid845tylabc123@139.198.13.12:4125"/>
 <!-- 提供的 Redis 环境是单机版配置。如果 Redis 是主从配置，则还需设置 RedisSlaveServerIP-->
-<!--<add key="RedisSlaveServerIP" value="redis:uuid845tylabc123@139.198.13.13:4125"/>--> 
+<!--<add key="RedisSlaveServerIP" value="redis:uuid845tylabc123@139.198.13.13:4125"/>-->
 
-<!--Redis 数据库。如果不需要指定 Redis 数据库，就配置默认值 0-->     
+<!--Redis 数据库。如果不需要指定 Redis 数据库，就配置默认值 0-->
 <add key="RedisDefaultDb" value="0"/>
 
 // 读取 Redis 主机 IP 配置信息
-string[] redisMasterHosts = ConfigurationManager.ConnectionStrings["RedisServerIP"].ConnectionString.Split(','); 
+string[] redisMasterHosts = ConfigurationManager.ConnectionStrings["RedisServerIP"].ConnectionString.Split(',');
 
 // 如果 Redis 服务器是主从配置，那么还需要读取 Redis Slave 机的 IP 配置信息
 string[] redisSlaveHosts = null;
 var slaveConnection = ConfigurationManager.ConnectionStrings["RedisSlaveServerIP"];
 if (slaveConnection != null && !string.IsNullOrWhiteSpace(slaveConnection.ConnectionString))
-{    
-    string redisSlaveHostConfig = slaveConnection.ConnectionString;    
+{
+    string redisSlaveHostConfig = slaveConnection.ConnectionString;
     redisSlaveHosts = redisSlaveHostConfig.Split(',');
-} 
+}
 
 // 读取 RedisDefaultDb 配置
 int defaultDb = 0;
 string defaultDbSetting = ConfigurationManager.AppSettings["RedisDefaultDb"];
 if (!string.IsNullOrWhiteSpace(defaultDbSetting))
-{    
+{
     int.TryParse(defaultDbSetting, out defaultDb);
-} 
+}
 
 var redisClientManagerConfig = new RedisClientManagerConfig
-{    
-    MaxReadPoolSize = 50,    
-    MaxWritePoolSize = 50,    
+{
+    MaxReadPoolSize = 50,
+    MaxWritePoolSize = 50,
     DefaultDb = defaultDb
 };
 
 // 创建 Redis 连接池
 Manager = new PooledRedisClientManager(redisMasterHosts, redisSlaveHosts, redisClientManagerConfig)
-{    
-    PoolTimeout = 2000,    
-    ConnectTimeout = 500                
+{
+    PoolTimeout = 2000,
+    ConnectTimeout = 500
 };
+
+# 集群配置 配置文件 redis.conf
+slaveof 10.0.0.1 6379
+redis-cli -h localhost -p 6379 monitor // 从库执行该命令会一直ping主库
 ```
 
 ## 数据类型
 
-### String 
+Redis 没有像 MySQL 这类关系型数据库那样强大的查询功能，需要考虑如何把关系型数据库中的数据，合理的对应到缓存的 key-value 数据结构中。
+
+### String
 
 简单的key-value类型，value其实不仅是String，也可以是数字.值可以是任何各种类的字符串（包括二进制数据）例如你可以在一个键下保存一副jpeg图片.即可以完全实现目前 Memcached 的功能，并且效率更高。还可以享受Redis的定时持久化，操作日志及 Replication等功能
 
@@ -206,7 +221,6 @@ zcard
 
 Redis的Transactions提供的并不是严格的ACID的事务（比如一串用EXEC提交执行的命令，在执行中服务器宕机，那么会有一部分命令执行了，剩下的没执行），但是这个Transactions还是提供了基本的命令打包执行的功能（在服务器不出问题的情况下，可以保证一连串的命令是顺序在一起执行的，中间有会有其它客户端命令插进来执行）。Redis还提供了一个Watch功能，你可以对一个key进行Watch，然后再执行Transactions，在这过程中，如果这个Watched的值进行了修改，那么这个Transactions会发现并拒绝执行。
 
-
 ## 应用场景
 
 Redis在很多方面与其他数据库解决方案不同：它使用内存提供主存储支持，而仅使用硬盘做持久性的存储；它的数据模型非常独特，用的是单线程。另一个大区别在于，你可以在开发环境中使用Redis的功能，但却不需要转到Redis。
@@ -226,49 +240,35 @@ Redis在很多方面与其他数据库解决方案不同：它使用内存提供
 * 计数：
 
 ```
-LPUSH latest.comments <ID> 
-LTRIM latest.comments 0 5000 
-FUNCTION get_latest_comments(start, num_items):  
-    id_list = redis.lrange("latest.comments",start,start+num_items - 1)  
-    IF id_list.length < num_items  
-        id_list = SQL_DB("SELECT ... ORDER BY time LIMIT ...")  
-    END  
-    RETURN id_list  
-END  
+LPUSH latest.comments <ID>
+LTRIM latest.comments 0 5000
+FUNCTION get_latest_comments(start, num_items):
+    id_list = redis.lrange("latest.comments",start,start+num_items - 1)
+    IF id_list.length < num_items
+        id_list = SQL_DB("SELECT ... ORDER BY time LIMIT ...")
+    END
+    RETURN id_list
+END
 
-ZADD leaderboard  <score>  <username> 
+ZADD leaderboard  <score>  <username>
 ZREVRANGE leaderboard 0 99。
 ZRANK leaderboard <username>
 
- SADD page:day1:<page_id> <user_id> 
+ SADD page:day1:<page_id> <user_id>
  SCARD page:day1:<page_id>
  SISMEMBER page:day1:<page_id> // 测试某个特定用户是否访问了这个页面
 
-INCR user:<id> EXPIRE 
+INCR user:<id> EXPIRE
 user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面浏览量
 ```
 
-
-### 特性
+## 特性
 
 * 管道：Redis管道是指客户端可以将多个命令一次性发送到服务器，然后由服务器一次性返回所有结果。管道技术在批量执行命令的时候可以大大减少网络传输的开销，提高性能。
 * 事务：Redis事务是一组命令的集合。一个事务中的命令要么都执行，要么都不执行。如果命令在运行期间出现错误，不会自动回滚。管道与事务的区别：管道主要是网络上的优化，客户端缓冲一组命令，一次性发送到服务器端执行，但是并不能保证命令是在同一个事务里面执行；而事务是原子性的，可以确保命令执行的时候不会有来自其他客户端的命令插入到命令序列中。
 * 分布式锁：分布式锁是控制分布式系统之间同步访问共享资源的一种方式。在分布式系统中，常常需要协调他们的动作，如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。
 * 地理信息：从Redis 3.2版本开始，新增了地理信息相关的命令，可以将用户给定的地理位置信息（经纬度）存储起来，并对这些信息进行操作。
 
-## install
-
-```
-sudo apt-get install redis-server php-redis
-```
-
-## 组成
-
-* redis-server：redis服务器的daemon启动程序
-* redis-cli：Redis命令操作工具。当然，也可以telnet根据其纯文本协助来操作。
-* redis-benchmark：Redis性能测试工具，测试Redis在你的系统及你的配置下的读写性能。
-* redis-check-aof：更新日志检查
-* redis-check-dump：用于本地数据库检查
 
 ## 对比memcache
 
@@ -278,12 +278,6 @@ sudo apt-get install redis-server php-redis
 * 支持持久化。
 * 需要负载均衡的场景（redis主从同步）,分布式系统支持，数据一致性保证，方便的集群节点添加/删除
 * Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。
-
-## Usage:
-
-```
-redis-cli -h localhost -p 6379 info // 功能统计
-```
 
 ## 注意
 
@@ -304,14 +298,6 @@ redis-cli -h localhost -p 6379 info // 功能统计
 * pipeline 只是把多个redis指令一起发出去，redis并没有保证这些指定的执行是原子的；
 * multi相当于一个redis的transaction的，保证整个操作的原子性，避免由于中途出错而导致最后产生的数据不一致。
 * pipeline方式执行效率要比其他方式高10倍左右的速度，启用multi写入要比没有开启慢一点。
-
-## 集群配置
-
-```
-// 配置文件 redis.conf
-slaveof 10.0.0.1 6379
-redis-cli -h localhost -p 6379 monitor // 从库执行该命令会一直ping主库
-```
 
 ## 工具
 
