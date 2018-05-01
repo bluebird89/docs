@@ -1412,6 +1412,10 @@ CMD ["python3"]
 - [faif/python-patterns](https://github.com/faif/python-patterns):A collection of design patterns/idioms in Python
 - [kennethreitz/httpbin](https://github.com/kennethreitz/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
 
+## 类库
+
+* [kennethreitz/requests-html](https://github.com/kennethreitz/requests-html):Pythonic HTML Parsing for Humans™ http://html.python-requests.org
+
 ## 工具
 
 * [nteract/nteract](https://github.com/nteract/nteract): 📘 Desktop notebook app + packages https://nteract.io

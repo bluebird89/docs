@@ -5,7 +5,6 @@
 
 Go 编译器支持交叉编译，也就是说你可以在一台机器上构建运行在具有不同操作系统和处理器架构上运行的应用程序，也就是说编写源代码的机器可以和目标机器有完全不同的特性
 
-
 * 设置环境变量
   - GOROOT：(std lib)golang安装路径
   - $GOARCH 表示目标机器的处理器架构，它的值可以是 386、amd64 或 arm。
@@ -102,6 +101,8 @@ slice reslice
 
 - [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
 - [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. https://iris-go.com
+- [https://songjiayang.gitbooks.io](https://songjiayang.gitbooks.io)
+- [Go语言入门](https://www.yiibai.com/go/go_start.html)
 
 ## 框架
 

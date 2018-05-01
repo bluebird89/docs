@@ -246,11 +246,11 @@ set completeopt=longest,menu
 
 ## 使用
 
-vi有3个模式：插入模式、命令模式、低行模式
+Vim有三种模式
 
-* 插入模式：在此模式下可以输入字符，按ESC将回到命令模式。
-* 命令模式：可以移动光标、删除字符等。
-* 低行模式：可以保存文件、退出vi、设置vi、查找等功能(低行模式也可以看作是命令模式里的)。
+* Insert模式：在此模式下可以输入字符，按ESC将回到命令模式
+* Normal模式：可以移动光标、删除字符等
+* Visual模式：可以对选定的文本运行命令操作并该命令仅仅作用于选定文本
 
 Cursor control and position                             | Editing
 ------------------------------------------------------- | ------------------------------------------------------
@@ -302,7 +302,6 @@ Ctrl-G Display line number of cursor                    | "xyy Copy current line
 nG Move cursor to line number n                         | "Xd Delete and append into buffer x
 :n Move cursor to line number n                         | "xp Put contents of buffer x
 G Move to last line in file                             | y]] Copy up to next section heading
-
 ye Copy to end of word
 
 File Handling | null

@@ -37,7 +37,6 @@
 
 * 建身
 * 选择 Trello（短期） 和 Google Calendar（长期）用来安排学习上的任务
-* WhatsApp 和 Slack 用来沟通
 
 ## 资源列表
 
