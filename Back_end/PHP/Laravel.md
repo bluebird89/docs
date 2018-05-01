@@ -1,25 +1,15 @@
 # Laravel
 
-## 扩展
 
-- [code 好事源代码](https://github.com/Ucer/codehaoshi)
-- [Ucer/ucer-admin](https://github.com/Ucer/ucer-admin)
-
-## 测试准备
-
-- homestead
-- PhpStrom
-- terminal
-
-## 环境配置
+## 环境
 
 ### homestead
 
 - 安装virtualbox and vagrant
 
-```shell
+```sh
 brew install homebrew/php/php71
-# 确保 ~/.composer/vendor/binp
+# 确保 ~/.composer/vendor/bin
 sudo chown -R $USER .composer/
 composer global require laravel/valet
 export PATH=$PATH:~/.composer/vendor/bin
@@ -68,19 +58,19 @@ valet restart
 - bash init.sh
 - 修改.homestread\Homestead.yaml
 - vagrant provision
-- vagrant init 
+- vagrant init
 - vagrant up
 - 添加ip
 
 ```yaml
-      folders:
-      * map: D:\Code    <!-- 项目地址 -->
-          to: /home/vagrant/Code   <!-- 虚拟机的项目地址 -->
-
-      sites:
-      * map: laravel.app  <!-- 添加的站点名称 -->
-          to: /home/vagrant/Code/Laravel/public <<!-- 站点对应的虚拟机文件 -->
+folders:
+    * map: D:\Code    <!-- 项目地址 -->
+      to: /home/vagrant/Code   <!-- 虚拟机的项目地址 -->
+sites:
+    * map: laravel.app  <!-- 添加的站点名称 -->
+      to: /home/vagrant/Code/Laravel/public <<!-- 站点对应的虚拟机文件 -->
 ```
+
 Homestead(vagrant up):The SSH command responded with a non-zero exit status.
 
 Composer代理镜像
@@ -95,7 +85,7 @@ from @golaravel
 
 ## [laradock](https://github.com/LaraDock/laradock.git)
 
-## Artisan 命令
+## Artisan
 
 * 列出所有可用命令:php artisan list
 * 查看路由：php artisan route:list
@@ -116,47 +106,47 @@ artisan serve --port=8010 --host=127.0.0.1
 php artisan down
 php artisan up
 php artisan env # 显示当前框架环境
-php artisan fresh 清除包含框架外的支架  
-php artisan help  显示命令行的帮助  
-php artisan list  列出命令  
-php artisan migrate 运行数据库迁移 
-php artisan env 显示当前框架环境  
-php artisan optimize  为了更好的框架去优化性能  
-php artisan serve 在php开发服务器中服务这个应用  
-php artisan tinker  在应用中交互  
+php artisan fresh 清除包含框架外的支架
+php artisan help  显示命令行的帮助
+php artisan list  列出命令
+php artisan migrate 运行数据库迁移
+php artisan env 显示当前框架环境
+php artisan optimize  为了更好的框架去优化性能
+php artisan serve 在php开发服务器中服务这个应用
+php artisan tinker  在应用中交互
 php artisan app:name #  设置应用程序命名空间
 
 php artisan auth:clear-resets 清除过期的密码重置密钥 未使用过
-php artisan cache:clear 清除应用程序缓存  
-php artisan cache:table 创建一个缓存数据库表的迁移 
-php artisan config:cache  创建一个加载配置的缓存文件 
-php artisan config:clear  删除配置的缓存文件 
-php artisan db:seed 数据库生成模拟数据 
+php artisan cache:clear 清除应用程序缓存
+php artisan cache:table 创建一个缓存数据库表的迁移
+php artisan config:cache  创建一个加载配置的缓存文件
+php artisan config:clear  删除配置的缓存文件
+php artisan db:seed 数据库生成模拟数据
 php artisan event:generate  生成event和listen  需要实现配置eventserviceprivoder
-php artisan make:command #  创建一个新的命令处理程序类 
-php artisan make:console #  生成一个Artisan命令 
+php artisan make:command #  创建一个新的命令处理程序类
+php artisan make:console #  生成一个Artisan命令
 php artisan key:generate  # 设置程序密钥   No supported encrypter found. The cipher and / or key length are invalid.
-php artisan make:controller # 生成一个资源控制类 
-php artisan make:middleware # 生成一个中间件 
-php artisan make:migration #  生成一个迁移文件  
-php artisan make:model #  生成一个Eloquent 模型类  
-php artisan make:provider # 生成一个服务提供商的类 
-php artisan make:request #  生成一个表单消息类 
-php artisan migrate:install # 创建一个迁移库文件 
-php artisan make:migration #  生成一个迁移文件  
-php artisan migrate:refresh # 复位并重新运行所有的迁移  
-php artisan migrate:reset # 回滚全部数据库迁移 
-php artisan migrate:rollback #  回滚最后一个数据库迁移 
-php artisan migrate:status  # 显示列表的迁移 
-php artisan queue:failed  # 列出全部失败的队列工作 
-php artisan queue:failed-table # 创建一个迁移的失败的队列数据库工作表  
-php artisan queue:flush # 清除全部失败的队列工作 
-php artisan queue:forget #  删除一个失败的队列工作 
+php artisan make:controller # 生成一个资源控制类
+php artisan make:middleware # 生成一个中间件
+php artisan make:migration #  生成一个迁移文件
+php artisan make:model #  生成一个Eloquent 模型类
+php artisan make:provider # 生成一个服务提供商的类
+php artisan make:request #  生成一个表单消息类
+php artisan migrate:install # 创建一个迁移库文件
+php artisan make:migration #  生成一个迁移文件
+php artisan migrate:refresh # 复位并重新运行所有的迁移
+php artisan migrate:reset # 回滚全部数据库迁移
+php artisan migrate:rollback #  回滚最后一个数据库迁移
+php artisan migrate:status  # 显示列表的迁移
+php artisan queue:failed  # 列出全部失败的队列工作
+php artisan queue:failed-table # 创建一个迁移的失败的队列数据库工作表
+php artisan queue:flush # 清除全部失败的队列工作
+php artisan queue:forget #  删除一个失败的队列工作
 php artisan queue:listen #  监听一个确定的队列工作
-php artisan queue:restart # 重启现在正在运行的所有队列工作 
-php artisan queue:retry # 重试一个失败的队列工作 
-php artisan queue:subscribe # 订阅URL,放到队列上 
-php artisan queue:table # 创建一个迁移的队列数据库工作表 
+php artisan queue:restart # 重启现在正在运行的所有队列工作
+php artisan queue:retry # 重试一个失败的队列工作
+php artisan queue:subscribe # 订阅URL,放到队列上
+php artisan queue:table # 创建一个迁移的队列数据库工作表
 php artisan queue:work  # 进行下一个队列任务
 
 php artisan route:cache # 为了更快的路由登记，创建一个路由缓存文件
@@ -165,7 +155,7 @@ php artisan route:list # 列出全部的注册路由
 php artisan schedule:run # 运行预定命令
 php artisan session:table # 创建一个迁移的SESSION数据库工作表
 php artisan vendor:publish # 发表一些可以发布的有用的资源来自提供商的插件包
-php artisan baum # Get Baum version notice. 
+php artisan baum # Get Baum version notice.
 php artisan baum:install # Scaffolds a new migration and model suitable for Baum
 ```
 
@@ -224,7 +214,7 @@ php artisan make:Model App\\Models\\User(linux or macOs 加上转义符)
 // 数据迁移
 php artisan migrate
 // 创建迁移
-php artisan make:migration create_users_table 
+php artisan make:migration create_users_table
 // 指定路径
 php artisan make:migration --path=app\providers create_users_table
 // 一次性创建
@@ -410,10 +400,6 @@ public function store(TagCreateRequest $request)
 - 广播
 - tinker：所有的 Laravel 应用都提供了 Tinker ---- 一个由 PsySH 扩展包驱动的REPL（Read-Eval-Print Loop，即终端命令行"读取-求值-输出"循环工具）。Tinker 允许你通过命令行与整个 Laravel 应用进行交互，包括 Eloquent ORM、任务、事件等等。
 - Elixir
-
-## 优化
-
-<https://laravel-china.org/articles/2020/ten-laravel-5-program-optimization-techniques> <https://blog.tanteng.me/2016/06/laravel-optimize/>
 
 ## 数据操作
 
@@ -1383,7 +1369,7 @@ function boot()
 
 ### traits
 
-不支持传递参数
+
 
 ## 调试
 
@@ -1396,36 +1382,41 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 ## 扩展
 
 * [laravel/lumen-framework](https://github.com/laravel/lumen-framework)
-* [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. 
+* [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
 * [laravel/framework](https://github.com/laravel/framework):
 * [laravel/laravel](https://github.com/laravel/framework):A PHP Framework For Web Artisans https://laravel.com
 * [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
-* [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks. 
-* [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp. 
+* [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
+* [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp.
 * [laravel/cashier](https://github.com/laravel/cashier)
 * [laravel/passport](https://github.com/laravel/passport):Laravel Passport is an OAuth2 server and API authentication package that is simple and enjoyable to use.
 * [laravel/horizon](https://github.com/laravel/horizon):Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues.
 * [laravel/echo](https://github.com/laravel/echo):provides a more robust, efficient alternative to continually polling your application for websocket changes.
-* [laravel/socialite](https://github.com/laravel/socialite):Laravel Socialite provides an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub and Bitbucket. 
+* [laravel/socialite](https://github.com/laravel/socialite):Laravel Socialite provides an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub and Bitbucket.
 * [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
-* [laravel/dusk](https://github.com/laravel/dusk):Laravel Dusk provides an expressive, easy-to-use browser automation and testing API. 
+* [laravel/dusk](https://github.com/laravel/dusk):Laravel Dusk provides an expressive, easy-to-use browser automation and testing API.
 * [laravel/envoy](https://github.com/laravel/envoy):Elegant SSH tasks for PHP.
 * [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
 * [barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf):A DOMPDF Wrapper for Laravel
 * [Zizaco/entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
+* [bosnadev/repository](https://github.com/bosnadev/repository):Laravel Repositories is a package for Laravel 5 which is used to abstract the database layer. This makes applications much easier to maintain. https://bosnadev.com
+* [LaravelCollective/html](https://github.com/LaravelCollective/html):HTML and Form Builders for the Laravel Framework
+- [code 好事源代码](https://github.com/Ucer/codehaoshi)
+- [Ucer/ucer-admin](https://github.com/Ucer/ucer-admin)
 
 ## 参考
 
-* [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js. 
+* [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js.
 * [快速入门 —— 使用 Laragon 在 Windows 中搭建 Laravel 开发环境](http://laravelacademy.org/post/7754.html)
 * [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
 * [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
 * [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
-* [laravel入门教程](https://d.laravel-china.org/docs/5.5) 
+* [laravel入门教程](https://d.laravel-china.org/docs/5.5)
 * [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
 * [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)
 * [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
 * [Laravel5.5 + Vue开发单页应用](http://www.laravel-vue.xyz/2018/03/22/laravel_vue_v2/)
+<https://laravel-china.org/articles/2020/ten-laravel-5-program-optimization-techniques> <https://blog.tanteng.me/2016/06/laravel-optimize/>
 
 ## 文档
 
@@ -1434,14 +1425,11 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [summerblue/laravel5-cheatsheet](https://github.com/summerblue/laravel5-cheatsheet):A quick reference guide (cheat sheet) for Laravel 5.1 LTS, listing artisan, composer, routes and other useful bits of information. https://cs.laravel-china.org/
 * [Laravel Cheat Sheet](http://cheats.jesse-obrien.ca/)
 
-## 平台
+## 工具
 
 * [laravel/homestead](https://github.com/laravel/homestead)
 * [laravel/valet](https://github.com/laravel/valet):Valet is a Laravel development environment for Mac minimalists.
 * [weprovide/valet-plus](https://github.com/weprovide/valet-plus):Blazing fast macOS PHP development environment https://medium.com/@timneutkens/intro…
-
-## 工具
-
 * [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
 * [laravel-admin](http://laravel-admin.org/docs/#/zh/quick-start)
 * [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
@@ -1460,7 +1448,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 git clone git@github.com:summerblue/larabbs.git
 // 修改 homestead.html,添加配置
 vagrant provision
-composer install 
+composer install
 // 配置.env文件
 
 php artisan migrate --seed
@@ -1504,7 +1492,7 @@ Debugbar::measure('My long operation', function() {
 ```php
 composer require tymon/jwt-auth # 修改app.php 添加到providers
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider" # 生成配置文件
-php artisan jwt:secret # 使用 
+php artisan jwt:secret # 使用
 ```
 
 ## 前后端分离

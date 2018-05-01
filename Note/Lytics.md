@@ -145,7 +145,7 @@
     永永远远地擦亮眼
 
         ？
-            陈粒 
+            陈粒
     你说富贵不求又要金银佐酒
     你说生死契阔却又落笔成说
     低温笼盖我想我远走
@@ -193,9 +193,4 @@
 * 《无心害你》-关菊英
 * 《尽头》-赵方婧
 
-Some of us get dipped in flat, some in satin, some in gloss. But every once in a while you find someone who's iridescent, and when you do, nothing will ever compare.  
-
-## 参考
-
-- [我想推荐九首歌，却又害怕你听懂它](http://www.jianshu.com/p/fe44de398e35)
-- [我想推荐九首歌，却又害怕你听懂它](http://www.jianshu.com/p/4e9480a2769c)
+Some of us get dipped in flat, some in satin, some in gloss. But every once in a while you find someone who's iridescent, and when you do, nothing will ever compare.
