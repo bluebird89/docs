@@ -90,7 +90,7 @@ var ps = $('p'); // 返回所有<p>节点
 $("p.intro") // 选取所有 class="intro" 的 <p> 元素。
 ps.length; // 数一数页面有多少个<p>节点
 
-var div = $('#abc'); 
+var div = $('#abc');
 var divDom = div.get(0); // 假设存在div，获取第1个DOM元素
 var another = $(divDom); // 重新把DOM包装为jQuery对象
 
@@ -108,7 +108,7 @@ var emailInput = $('input[name=email]'); // 不会找出<div name="email">
 $('p,div'); // 把<p>和<div>都选出来
 $('p.red,p.green'); // 把<p class="red">和<p class="green">都选出来
 
-$('ul.lang li.lang-javascript'); 
+$('ul.lang li.lang-javascript');
 $('form.test p input'); // 在form表单选择被<p>包含的<input>
 
 $('ul.lang>li.lang-javascript'); // 可以选出[<li class="lang-javascript">JavaScript</li>]
@@ -282,36 +282,36 @@ $('ul.lang li.lang-javascript'); // 每个 <ul> 的第一个 <li> 元素
     var li = $('#test-div>ul>li');
     li.remove(); // 所有<li>全被删除
 
-    // 获 取一组radio被选中项的值 
-    var item = $('input[name=items][checked]').val(); 
-    // 获 取select被选中项的文本 
-    var item = $("select[name=items] option[selected]").text(); 
-    // select下拉框的第二个元素为当前选中值 
-    $('#select_id')[0].selectedIndex = 1; 
-    // radio单选组的第二个元素为当前选中值 
-    $('input[name=items]').get(1).checked = true; 
-    // 获取值： 
+    // 获 取一组radio被选中项的值
+    var item = $('input[name=items][checked]').val();
+    // 获 取select被选中项的文本
+    var item = $("select[name=items] option[selected]").text();
+    // select下拉框的第二个元素为当前选中值
+    $('#select_id')[0].selectedIndex = 1;
+    // radio单选组的第二个元素为当前选中值
+    $('input[name=items]').get(1).checked = true;
+    // 获取值：
     //文本框，文本区域：
-    $("#txt").attr("value")； 
+    $("#txt").attr("value")；
     // 多选框 checkbox：
-    $("#checkbox_id").attr("value")； 
-    // 单选组radio：   
-    $("input[type=radio][checked]").val(); 
-    // 下拉框select： 
-    $('#sel').val(); 
-    // 控制表单元素： 
+    $("#checkbox_id").attr("value")；
+    // 单选组radio：
+    $("input[type=radio][checked]").val();
+    // 下拉框select：
+    $('#sel').val();
+    // 控制表单元素：
     // 文本框，文本区域：
-    $("#txt").attr("value",'');//清空内容 
-    $("#txt").attr("value",'11');//填充内容 
-    // 多选框checkbox： 
-    $("#chk1").attr("checked",'');//不打勾 
-    $("#chk2").attr("checked",true);//打勾 
-    if($("#chk1").attr('checked')==undefined) //判断是否已经打勾 
-    // 单选组 radio：    
-    $("input[type=radio]").attr("checked",'2');//设置value=2的项目为当前选中项 
-    // 下拉框 select：   
-    $("#sel").attr("value",'-sel3');//设置value=-sel3的项目为当前选中项 
-    $("<option value='1'>1111</option><option value='2'>2222</option>").appendTo("#sel")//添加下拉框的option 
+    $("#txt").attr("value",'');//清空内容
+    $("#txt").attr("value",'11');//填充内容
+    // 多选框checkbox：
+    $("#chk1").attr("checked",'');//不打勾
+    $("#chk2").attr("checked",true);//打勾
+    if($("#chk1").attr('checked')==undefined) //判断是否已经打勾
+    // 单选组 radio：
+    $("input[type=radio]").attr("checked",'2');//设置value=2的项目为当前选中项
+    // 下拉框 select：
+    $("#sel").attr("value",'-sel3');//设置value=-sel3的项目为当前选中项
+    $("<option value='1'>1111</option><option value='2'>2222</option>").appendTo("#sel")//添加下拉框的option
     $("#sel").empty()；//清空下拉框
 </script>
 ```
@@ -324,7 +324,7 @@ JavaScript在浏览器中以单线程模式运行，页面加载后，一旦页�
 
 由于不同的浏览器绑定事件的代码都不太一样，所以用jQuery来写代码，就屏蔽了不同浏览器的差异，我们总是编写相同的代码。
 
-* on方法用来绑定一个事件，我们需要传入事件名称和对应的处理函数. 
+* on方法用来绑定一个事件，我们需要传入事件名称和对应的处理函数.
 * 鼠标事件：
     - click: 鼠标单击时触发；
     - dblclick：鼠标双击时触发；
@@ -349,7 +349,7 @@ JavaScript在浏览器中以单线程模式运行，页面加载后，一旦页�
 
 ```html
 <a id="test-link" href="#0">点我试试</a>
- 
+
 <script>
 
 var a = $('#test-link');
@@ -436,16 +436,16 @@ $(function () {
 ```js
 var div = $('#test-show-hide');
 
-div.hide(3000); // 
+div.hide(3000); //
 div.show('slow');
 div.toggle('slow'); // $(selector).toggle(speed,callback); speed 参数规定隐藏/显示的速度，可以取以下值："slow"、"fast" 或毫秒。可选的 callback 参数是 toggle() 方法完成后所执行的函数名称。
 
 div.slideUp(3000); // $(selector).slideDown(speed,callback); 在3秒钟内逐渐向上消失
-div.slideDown(3000); 
+div.slideDown(3000);
 div.slideToggle('slow');
 
 div.fadeIn(3000);  // $(selector).fadeIn(speed,callback);  speed 参数规定效果的时长。它可以取以下值："slow"、"fast" 或毫秒。 可选的 callback 参数是 fading 完成后所执行的函数名称。
-div.fadeOut(3000); 
+div.fadeOut(3000);
 div.fideToggle('slow');
 div.fadeTo("slow",0.15); // $(selector).fadeTo(speed,opacity,callback); 允许渐变为给定的不透明度（值介于 0 与 1 之间）
 
@@ -491,8 +491,8 @@ div.slideDown(2000)
 * data：发送的数据，可以是字符串、数组或object。如果是GET请求，data将被转换成query附加到URL上，如果是POST请求，根据contentType把data序列化成合适的格式；
 * headers：发送的额外的HTTP头，必须是一个object；
 * dataType：接收的数据格式，可以指定为'html'、'xml'、'json'、'text'等，缺省情况下根据响应的Content-Type猜测。
-    * $.ajax() 
-    * $.get() 
+    * $.ajax()
+    * $.get()
     * $.post():传入的第二个参数默认被序列化为application/x-www-form-urlencoded
     * $.getJSON()
 * 用promise实现链式写法

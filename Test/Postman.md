@@ -46,18 +46,22 @@ HTTP请求的4部分:
         + binaryimage, audio or video files.text files 。也不能保存历史，每次选择文件，提交。
     - pre-requset script:对一些环境变量之类的进行设置，相当于数据初始化 。全局变量与环境变量
 ```js
-postman.setGlobalVariable("username", "tester");  // 使用时代替 
+postman.setGlobalVariable("username", "tester");  // 使用时代替
 ```
 
 response
 
 保证API响应的正确性，就是你需要做的大部分工作。postman的response viewer部分会协助你完成该工作且使其变得简单。一个API的响应包含body,headers,响应状态码。postman将body和headers放在不同的tabs中。响应码和响应时间显示在tabs的旁边。将鼠标悬停在响应码上面可以查看更详细的信息。
+
 * 保存responses
 * 查看response
     - Pretty：格式化了JSON和XML,自动格式化body必须保证返回了正确的Content-Type.如果API没有返回，则可以点击”Force JSON“来设置。
     - Raw:是text。
     - preview:有的浏览器会返回HTML的错误，对于找问题比较方便。由于sandbox的限制，js和图片不会显示在这里的iframe中。你可以maximize该body窗口方便查看结果。
 * cookies:可以显示browser cookies，需要开启Interceptor。
+    - domain不能含有http://
+    - bulk or key-value
+* Headers
 
 身份验证Authentication
 
@@ -116,7 +120,7 @@ tests["Valid Data2"] = tv4.validate(data2, schema);
 - 安装：`npm install newman`
 - npm run -h
 
-## headersnre 
+## headersnre
 
 ## 构建mock
 
