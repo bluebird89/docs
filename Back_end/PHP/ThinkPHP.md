@@ -28,6 +28,18 @@ composer create-project topthink/think tp5
 composer require topthink/think-swoole
 ```
 
+## web配置
+
+```
+# 3.1
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php\/?s=$1 [QSA,PT,L]
+</IfModule>
+```
+
 ## 资源
 
 * [ThinkPHP5.1完全开发手册](https://www.kancloud.cn/manual/thinkphp5_1)
