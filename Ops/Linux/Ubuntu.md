@@ -16,20 +16,20 @@ Linux 是一个可以实现多用户登陆的操作系统，多用户可以同�
 
 * 磁盘压缩出30G分区，空闲不做盘符与格式化
 * 制作UBUNTU启动U盘
-  - 通过UltraISO打开UBUNUT镜像文件
+  - 通过UltraISO打开UBUNUT镜像文件(Mac用[etcher](https://etcher.io/))
   - 启动：写入硬盘映像，写入U盘文件
 * 启动通过U盘
   - 安装类型：其他选项
-  - 对之前分配的未使用磁盘空间分区： 
-      + /：存储系统文件，建议10GB ~ 15GB； 主分区 挂载点 / 
-      + swap：交换分区，即Linux系统的虚拟内存，建议是物理内存的2倍； 逻辑分区 用于交换空间 
-      + /home：home目录，存放音乐、图片及下载等文件的空间，建议最后分配所有剩下的空间； 逻辑分区 挂载点 /home 
+  - 对之前分配的未使用磁盘空间分区：
+      + /：存储系统文件，建议10GB ~ 15GB； 主分区 挂载点 /
+      + swap：交换分区，即Linux系统的虚拟内存，建议是物理内存的2倍； 逻辑分区 用于交换空间
+      + /home：home目录，存放音乐、图片及下载等文件的空间，建议最后分配所有剩下的空间； 逻辑分区 挂载点 /home
       + /boot：包含系统内核和系统启动所需的文件，实现双系统的关键所在，建议500M。 逻辑分区 挂载点 /boot 安装启动引导器的设备： 选择/boot对应的盘符
       + 生产服务器建议单独再划分一个/data分区存放数据
   - 安装系统
 * 通过EASYCD配置启动
   - 添加新条目 linux/BSD选项
-  - 选中分区boot分区  
+  - 选中分区boot分区
 * 重启运行
 
 > 环境变量
@@ -63,7 +63,7 @@ source ~/.zshrc
 ### 网络配置
 
 ```sh
-cd  /etc/sysconfig/network-scripts/ 
+cd  /etc/sysconfig/network-scripts/
 vi  ifcfg-eno16777736  #编辑配置文件，添加修改以下内容
 
 TYPE="Ethernet"
@@ -115,7 +115,7 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 * KchmViewer:阅读CHM
 * LaTeX
 * Chromium
-* Nylas N1：超好用的跨平台电子邮件客户端  Thunderbird 
+* Nylas N1：超好用的跨平台电子邮件客户端  Thunderbird
 * sougou
 * Spotify for Linux：音乐流媒体服务
 * Lightworks Free：专业的非线视频编辑器
@@ -125,7 +125,7 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 * VLC
 * albert
 * 听播客: Vocal
-* PDF 阅读：Foxit Reader 
+* PDF 阅读：Foxit Reader
 * gimp
 * Gtile:分屏工具
 * MySQL Workbench
@@ -209,7 +209,7 @@ sudo apt install albert
 #  源码cp到/usr/local/src/下
 cd xxx
 ./configure --help
-./configure --prefix=/usr/local/libxml2 
+./configure --prefix=/usr/local/libxml2
 make && make install
 ```
 
@@ -254,8 +254,8 @@ SELINUX=disabled #增加
 
 setenforce 0 #使配置立即生效
 
-sudo ufw allow 'Nginx HTTP' 
-sudo ufw status 
+sudo ufw allow 'Nginx HTTP'
+sudo ufw status
 sudo ufw allow https
 sudo ufw enable/disable
 ```
@@ -293,9 +293,9 @@ who mom likes/who am <i>  # </i>列出用户名，所使用终端的编号和开
 
 su <user> # 切换到用户user,执行时需要输入目标用户的密码；
 su - <user> # 切换用户，同时环境变量也会跟着改变成目标用户的环境变量。
-su -l <lilei> # </lilei>切换登录用户; 
+su -l <lilei> # </lilei>切换登录用户;
 sudo adduser <lilei>  # </lilei>新建一个叫做lilei的用户，添加用户到系统，同时也会默认为新用户创建 home目录：
-sudo <useradd>  # </useradd>只创建用户，创建完了需要用 passwd lilei 去设置新用户的密码; 
+sudo <useradd>  # </useradd>只创建用户，创建完了需要用 passwd lilei 去设置新用户的密码;
 groups <zhangwang>  # </zhangwang>查看用户属于那些组（groups）   // 每
 cat /etc/group | sort 命令查看某组包含那些成员  # /etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
 sudo usermod -G sudo <student>  # </student>不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，我们可以使用usermod命令把它加入sudo组用以具备相应的权限。
@@ -395,7 +395,7 @@ nl # 显示的时候，顺道输出行号
 more less # 比较简单，只能向一个方向滚动,查看文件：打开后默认只显示一屏内容，终端底部显示当前阅读的进度。可以使用 Enter 键向下滚动一行，使用 Space 键向下滚动一屏，按下 h 显示帮助，q 退出。
 
 head # 查看文件的头几行（默认10行）
-tail # 查看文件的尾几行（默认10行） 
+tail # 查看文件的尾几行（默认10行）
 tail -n 1 /etc/passwd
 Tree 用可视化的效果向你展示一个目录下的文件 tree -P '_.min._'
 
@@ -427,7 +427,7 @@ cp -r dir1  dir2 # dir1被复制到dir2目录下一份，并给改名字为“�
 cp -r dir1  dir2/newdir  # dir1被复制到dir2目录下一份，并给改名字为newdir
 cp -r dir1/dir2/dir3   dir4/dir5  # dir3被复制到dir5目录下一份，并给改名字为"原名"
 
-basename，dirname 
+basename，dirname
 ln  # unix 里面的链接同 Windows 中的快捷方式类似，允许你快速地访问到一个特定的文件。
 `sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
 
@@ -548,28 +548,28 @@ cat /proc/version # 说明正在运行的内核版本
 cat /etc/issue # 显示的是发行版本信息
 lsb_release -a
 
-df -T 
+df -T
 reboot/poweroff
 date # 获取当前时间
 cal # 日历
 bc # 计算器
 
 uname # 返回系统名称 sudo uname --m
-hostname # 返回系统的主机名称 
+hostname # 返回系统的主机名称
 --version/-V # 查看某个程序的版本
 history # 显示历史
 help # 用于显示 shell 内建命令的简要帮助信息 help exit
 man #
 info ls
-ssh # 连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。   
+ssh # 连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。
 grep  # 用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
 alias server="python -m SimpleHTTPServer 9000" # 使用 alias 这个 bash 内置的命令来为它们创建一个短别名
 
 which # 寻找执行文件
 
-whereis # 
+whereis #
 who
-locate # 
+locate #
 
 tar # 用来处理文件压缩的默认 Unix 工具.
 md5sum  # 它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
@@ -697,7 +697,7 @@ sudo apt-get install google-chrome-stable
 > mysql workbeach
 
 ```sh
-# down 
+# down
 sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 sudo apt-get update
 sudo apt-get install mysql-workbench-community
@@ -843,7 +843,7 @@ top [-] [d] [p] [q] [c] [C] [S] [s]  [n]，参数
 
 
 
-## 虚拟化 
+## 虚拟化
 
 * Hypervisor：Linux的最重要创新之一，引入Hypervisor，运行其他操作系统的操作系统，它们为执行提供独立的虚拟硬件平台，同时硬件虚拟平台可以提供对底层机器的虚拟的完整访问.在解决软件架构设计问题时，通常做法是引入一个抽象层来解决，其实这种做法是有点普世原理，同样适用于硬件封装，Hypervisor正是这样一种虚拟抽象层。 只有5%的时间在全负荷工作，其他时间则处于休眠或者空闲状态，虚拟化技术可以大大提升服务器的利用率，从而间接减少服务器数量，即成本！ ![](../_static/Hypervisor.jpg) Hypervisor作为虚拟技术的核心，抽象虚拟化硬件平台.它支持给每一个虚拟机分配内存，CPU， 网络和磁盘，并加载虚拟机的客户操作系统。当然，在获取到这么优秀功能（对硬件的虚拟化，并搭载操作系统）的代价，自然牺牲了启动速度及在资源利用率，性能的开销等。
 * LXC(Linux Container）：一种内核虚拟化技术，相比上述的Hypervisor技术则提供更轻量级的虚拟化，以隔离进程和资源，且无需提供指令解析机制及全虚拟化的复杂性，LXC或者容器将操作系统层面的资源分到孤立／隔离的组中，用来管理使用资源。LXC为Sourceforge上的开源项目，其实现是借助Linux的内核特性，（cgroups子系统+namespace）, 在OS层次上做整合为进程提供虚拟执行环境，即称之为容器，除了分配绑定cpu，内存，提供独立的namespace（网络，pid，ipc，mnt，uts）
@@ -860,7 +860,7 @@ vim /etc/samba/smb.conf
 # 文件最后添加下列设定
 
 [share]
-path = /home/username/share      
+path = /home/username/share
 available = yes
 browsealbe = yes
 public = yes
@@ -885,7 +885,7 @@ sudo apt install tlp tlp-rdw
 sudo tlp start
 
 # Guake是一个比较酷的终端
-sudo apt install guake 
+sudo apt install guake
 
  # add source  or http://pinyin.sogou.com/linux/
 deb http://archive.ubuntukylin.com:10006/ubuntukylin trusty main
@@ -934,13 +934,14 @@ sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
 sudo apt update
 sudo apt install indicator-sysmonitor
 
-sudo apt-get remove thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku onboard deja-dup 
-sudo apt-get autoremove 
+sudo apt-get remove thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku onboard deja-dup
+sudo apt-get autoremove
 sudo apt-get autoclean
 ```
 
 ## 参考
 
+* [](https://www.ubuntu.com)
 * [torvalds/linux](https://github.com/torvalds/linux): Linux kernel source tree
 * [aleksandar-todorovic/awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
 * [LewisVo/Awesome-Linux-Software](https://github.com/LewisVo/Awesome-Linux-Software):🐧 A list of awesome applications, software, tools and other materials for Linux distros.
