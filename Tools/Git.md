@@ -8,7 +8,7 @@ fast, scalable, distributed revision control system.一个分布式的代码管�
 * 不必将所有的分支都上传到GitHub中去;
 * 用户可以随时 创建 合并 删除分支, 多人实现不同的功能, 可以创建多个分支进行开发, 之后进行分支合并, 这种方式使开发变得快速, 简单, 安全;
 
-## 托管服务
+## 服务
 
 * [GitHub](https://github.com/)
 * [Bitbucket](https://bitbucket.org/product)
@@ -40,6 +40,8 @@ fi
 * [gitlabhq/gitlabhq](https://github.com/gitlabhq/gitlabhq):GitLab CE | Please open new issues in our issue tracker on GitLab.com https://about.gitlab.com/getting-help/
 * [gogits/gogs](https://github.com/gogits/gogs):Gogs is a painless self-hosted Git service. https://gogs.io
 * [git/git](https://github.com/git/git):Git Source Code Mirror - This is a publish-only repository and all pull requests are ignored. Please follow Documentation/SubmittingPatches procedure for any of your improvements.
+* [go-gitea/gitea](https://github.com/go-gitea/gitea):Gitea: Git with a cup of tea http://gitea.io
+* [GitLab](link)
 
 ## Config
 
