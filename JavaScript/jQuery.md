@@ -11,18 +11,18 @@ $_分离出来，如果_$这个变量不幸地被占用了，而且还不能改�
 
 ```html
 <script type="text/javascript" src="jquery.js"></script>
+
 <script>
 $.fn.jQuery; // 查看版本
 
 window.jQuery; // jQuery(selector, context)
 window.$; // jQuery(selector, context)
-$ === jQuery; // true
-typeof($); // 'function'
-
 $; // jQuery(selector, context)
 jQuery.noConflict();
 $; // undefined
 jQuery; // jQuery(selector, context)
+$ === jQuery; // true
+typeof($); // 'function'
 
 // 为了防止文档在完全加载（就绪）之前运行 jQuery 代码:试图隐藏一个不存在的元素   获得未完全加载的图像的大小
 $(document).ready(function(){
@@ -35,14 +35,12 @@ $(document).ready(function(){
 
 ## 功能
 
-* HTML 元素选取
-* HTML 元素操作
-* CSS 操作
-* HTML 事件函数
-* JavaScript 特效和动画
-* HTML DOM 遍历和修改
+* HTML元素选取与操作
+* HTML事件函数
+* CSS操作
+* JavaScript特效和动画
+* HTML DOM遍历和修改
 * AJAX
-* Utilities
 
 ### 选择器
 
