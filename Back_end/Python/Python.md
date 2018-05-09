@@ -1410,7 +1410,8 @@ CMD ["python3"]
 - [donnemartin/data-science-ipython-notebooks](https://github.com/donnemartin/data-science-ipython-notebooks):Data science Python notebooks: Deep learning (TensorFlow, Theano, Caffe, Keras), scikit-learn, Kaggle, big data (Spark, Hadoop MapReduce, HDFS), matplotlib, pandas, NumPy, SciPy, Python essentials, AWS, and various command lines.
 - [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide):Python best practices guidebook, written for Humans. http://docs.python-guide.org
 - [faif/python-patterns](https://github.com/faif/python-patterns):A collection of design patterns/idioms in Python
-- [kennethreitz/httpbin](https://github.com/kennethreitz/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
+- [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
+- [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
 
 ## 类库
 

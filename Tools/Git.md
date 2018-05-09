@@ -81,7 +81,7 @@ git mergetool -y
 ```sh
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/github
 ssh-add -K ~/.ssh/github # 如果不是默认密钥 id_rsa ，则需要以下命令注册密钥文件，-K 参数将密钥存入 Mac Keychain
-cat ~/.ssh/github.pub 
+cat ~/.ssh/github.pub
 ssh -T git@github.com  # 验证
 
 eval "$(ssh-agent -s)"
@@ -111,7 +111,7 @@ gpg --list-key #公钥
 -------------------------------
 pub 4096R/EDDD6D76 2013-07-11  # 公钥特征（4096位，Hash字符串和生成时间）
 uid Ruan YiFeng <yifeng.ruan@gmail.com> # 用户ID
-sub 4096R/3FA69BE4 2013-07-11 # 显示私钥特征 
+sub 4096R/3FA69BE4 2013-07-11 # 显示私钥特征
 
 gpg --list-secret-keys --keyid-format LONG  # 获取GPG私钥 key ID  3AA5C34371567BD2
 sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
@@ -262,20 +262,20 @@ git clone http[s]://example.com/path/to/repo.git/
 git clone ssh://example.com/path/to/repo.git/
 git clone [user@]example.com:path/to/repo.git/
 git clone git://example.com/path/to/repo.git/
-git clone /opt/git/project.git 
+git clone /opt/git/project.git
 git clone file:///opt/git/project.git
 git clone ftp[s]://example.com/path/to/repo.git/
 git clone rsync://example.com/path/to/repo.git/
 git clone -o jQuery https://github.com/jquery/jquery.git
 
 # 本地创建项目根目录, 然后与远程GitHub关联
-git init # 初始化git仓库 
+git init # 初始化git仓库
 git commit -m 'description' # 提交改变到缓存
 git remote add origin git@github.com:han1202012/TabHost_Test.git # 本地git仓库关联GitHub仓库
 git push -u origin master # 提交到GitHub中
 
 # 从GitHub上克隆项目到本地，注意克隆的时候直接在仓库根目录即可, 不用再创建项目根目录
-git clone git@github.com:han1202012/NDKHelloworld.git , 
+git clone git@github.com:han1202012/NDKHelloworld.git ,
 git add ./* # 添加文件，将目录中所有文件添加;
 git commit -m '提交'; # 提交缓存
 git push -u origin master  # 提交到远程GitHub仓库
@@ -301,7 +301,7 @@ writing clear commit messages, you can make it easier for other people to follow
     - 如果既没有指定文件名，也没有指定分支名，而是一个标签、远程分支、SHA-1值或者是像master~3类似的东西，就得到一个匿名分支，称作detached HEAD（被分离的HEAD标识）。这样可以很方便地在历史版本之间互相切换。比如说你想要编译1.6.6.1版本的git，你可以运行git checkout v1.6.6.1（这是一个标签，而非分支名），编译，安装，然后切换回另一个分支，比如说git checkout master。然而，当提交操作涉及到“分离的HEAD”时，其行为会略有不同
         + 当HEAD处于分离状态（不依附于任一分支）时，提交操作可以正常进行，但是不会更新任何已命名的分支.一旦此后你切换到别的分支，比如说master，那么这个提交节点（可能）再也不会被引用到，然后就会被丢弃掉了。注意这个命令之后就不会有东西引用2eecb。如果你想保存这个状态，可以用命令git checkout -b name来创建一个新的分支。
 * reset命令把当前分支指向另一个位置，并且有选择的变动工作目录和索引。也用来在从历史仓库中复制文件到索引，而不动工作目录。
-    - 如果不给选项，那么当前分支指向到那个提交。如果用--hard选项，那么工作目录也更新，如果用--soft选项，那么都不变。 
+    - 如果不给选项，那么当前分支指向到那个提交。如果用--hard选项，那么工作目录也更新，如果用--soft选项，那么都不变。
     - 没有给出提交点的版本号，那么默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交，如果用--hard选项，工作目录也同样。
     - 如果没有给出提交点的版本号，那么默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交，如果用--hard选项，工作目录也同样。
     - 如果给了文件名(或者 -p选项), 那么工作效果和带文件名的checkout差不多，除了索引被更新。
@@ -323,19 +323,19 @@ git rm --cached [file]  停止追踪指定文件，但该文件会保留在工�
 git mv [file-original] [file-renamed]  改名文件，并且将这个改名放入暂存区
 
 git commit -m "the first commit" # 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志.进行一次包含最后一次提交加上工作目录中文件快照的提交。并且文件被添加到暂存区域。
-git commit [file1] [file2] ... -m [message] 
+git commit [file1] [file2] ... -m [message]
 git commit -a # 提交工作区自上次commit之后的变化，直接到仓库区,通过编辑器添加message
 git commit -v # 提交时显示所有diff信息
 git commit –-am/--amend -m [message]：使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
 git commit --amend [file1] [file2] ...  重做上一次commit，并包括指定文件的新变化
 
 # 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
-git log 找到起始 commitID 
-git reset commitID ，切记不要用 --hard 参数 
-git add && git commit 
+git log 找到起始 commitID
+git reset commitID ，切记不要用 --hard 参数
+git add && git commit
 git push -f origin branchName # 合并到master，并推送远端master
 
-git commit --amend # 追加 commit 到上一个 commit 上。 
+git commit --amend # 追加 commit 到上一个 commit 上。
 git rebase -i # 通过交互式的 rebase，提供对分支 commit 的控制，从而可以清理混乱的历史。
 
 git checkout [file]  # 恢复暂存区的指定文件到工作区
@@ -347,7 +347,7 @@ git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1
 #### 暂存区编辑
 
 * merge 命令把不同分支合并起来。合并前，索引必须和当前提交相同。
-    - 如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做。 
+    - 如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做。
     - 如果当前提交是另一个分支的祖父节点，就导致fast-forward合并。指向只是简单的移动，并生成一个新的提交。
     - 一次真正的合并。默认把当前提交(ed489 如下所示)和另一个提交(33104)以及他们的共同祖父节点(b325c)进行一次三方合并。结果是先保存当前目录和索引，然后和父节点33104一起做一次新提交。
 * cherry-pick命令"复制"一个提交节点并在当前分支做一次完全一样的新提交。
@@ -430,12 +430,12 @@ git diff --shortstat "@{0 day ago}" 显示今天你写了多少行代码
 git show [commit] 显示某次提交的元数据和内容变化
 git show --name-only [commit] 显示某次提交发生变化的文件
 git show [commit]:[filename] 显示某次提交时，某个文件的内容
-git reflog # 显示当前分支的最近几次提交, 
+git reflog # 显示当前分支的最近几次提交,
 
 git log -3
 git log --since=yesterday
 git blame filename:查看文件中每行的操作时间
-git log --name-status --oneline 
+git log --name-status --oneline
 ```
 
 使用 git reset --hard commitID 把本地开发代码回滚到了一个之前的版本，而且还没有推到远端，怎么才能找回丢失的代码呢？ 你如果使用 git log 查看提交日志，并不能找回丢弃的那些 commitID。 而 git reflog 却详细的记录了你每个操作的 commitID，可以轻易的让你复原当时的操作并且找回丢失的代码。
@@ -471,9 +471,9 @@ git branch --set-upstream develop origin/develop
 
 git branch # 列出分支
 git checkout master # 切换分支
-git push origin branchName #  提交分支 
-git branch -d branchName , 强制删除分支 git branch -D branchName # 删除分支 
-git merge branchName # 合并分支 
+git push origin branchName #  提交分支
+git branch -d branchName , 强制删除分支 git branch -D branchName # 删除分支
+git merge branchName # 合并分支
 ```
 
 Pull Request:useful for contributing to open source projects and for managing changes to shared repositories.
@@ -499,7 +499,7 @@ git remote rename <原主机名> <新主机名> # 用于远程主机的改名
 
 git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
 git pull 执行的是 git merge，
-git pull -r origin master # 执行的是git rebase git pull origin master 
+git pull -r origin master # 执行的是git rebase git pull origin master
 git push <远程主机名> <本地分支名>:<远程分支名> # 上传本地指定分支到远程仓库. git push origin my:master
 git push [remote] --force 强行推送当前分支到远程仓库，即使有冲突
 git push [remote] --all 不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机
@@ -528,7 +528,7 @@ deploy your changes to verify them in production.If your branch causes issues, y
 ```sh
 git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
 git checkout . # 提交过版本库，但未提交至暂存区的文件（未执行 git add) 此类文件的状态为 Changes not staged for commit
-git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be 
+git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be
 git log
 git reset <版本号>
 git reset head~1
@@ -538,7 +538,7 @@ git reflog # 回滚后再还原
 git checkout --ours <文件名> # 使用当前分支 HEAD 版本
 git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的 >>>>>>> 标记部分
 git add <文件名> # # 标记为解决状态加入暂存区
-git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge 
+git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge
 ```
 
 #### 标签
@@ -550,7 +550,7 @@ git tag -a v2.1 -m 'first version'
 git push origin v2.1
 git tag -l v1.* # 限定
 git tag -d [tag] # 删除本地tag
-git push origin --delete v1.0.0 # 
+git push origin --delete v1.0.0 #
 git push origin :refs/tags/[tagName]   # 删除远程tag
 git show [tag]  # 查看tag信息
 git push [remote] [tag]  # 提交指定tag
@@ -586,9 +586,9 @@ git archive
 groupadd git
 adduser git -g git
 
-mkdir -p ~/.ssh  # 创建证书 
-chmod 700 .ssh 
-touch .ssh/authorized_keys 
+mkdir -p ~/.ssh  # 创建证书
+chmod 700 .ssh
+touch .ssh/authorized_keys
 chmod 600 .ssh/authorized_keys
 
 # 将客户端的id_rsa.pub文件，把导入到服务器端
@@ -597,7 +597,7 @@ chmod 600 .ssh/authorized_keys
 # 新建仓库
 mkdir /home/testgit
 cd /home/testgit
-git init --bare /path/to/repo.git 
+git init --bare /path/to/repo.git
 sudo chown -R git:git sample.git
 # 禁止git用户登录shell:修改/etc/passwd 为
 git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell //可以正常通过ssh使用git，但无法登录shell
@@ -903,7 +903,7 @@ version
 
 ![Git 命令清单](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png)
 
-### Version Control Best Practices 
+### Version Control Best Practices
 
 * Commit Related Changes:A commit should be a wrapper for related changes. For example, fixing two different bugs should produce two separate commits. Small commits make it easier for other team members to understand the changes and roll them back if something went wrong. With tools like the staging area and the ability to stage only parts of a file, Git makes it easy to create very granular commits.
 * Commit Often:Committing often keeps your commits small and, again, helps you commit only related changes. Moreover, it allows you to share your code more frequently with others. That way it’s easier for everyone to integrate changes regularly and avoid having merge conflicts. Having few large commits and sharing them rarely, in contrast, makes it hard both to solve conflicts and to comprehend what happened.
@@ -934,7 +934,7 @@ version
 * [github/hub](https://github.com/github/hub)hub helps you win at git. http://hub.github.com/
 * [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
 * [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
-* [nvie/gitflow](https://github.com/nvie/gitflow):Git extensions to provide high-level repository operations for Vincent Driessen's branching model. 
+* [nvie/gitflow](https://github.com/nvie/gitflow):Git extensions to provide high-level repository operations for Vincent Driessen's branching model.
 * [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
 * [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
 * [kennethreitz/legit](https://github.com/kennethreitz/legit):Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
@@ -994,7 +994,7 @@ git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -
 %w([[,[,]]])    switch line wrapping, like the -w option of git-shortlog(1).
 ```
 
-## 功能 
+## 功能
 
 ### 管理第三方模块
 
@@ -1040,7 +1040,7 @@ git push origin master                                    # 顺便主项目也 p
 
 git subtree pull -P home/.bash bash master --squash
 
-对 git-subtree 下子项目有修改需求的，请先 git subtree pull 
+对 git-subtree 下子项目有修改需求的，请先 git subtree pull
 ```
 
 ### [git-lfs/git-lfs](https://github.com/git-lfs/git-lfs)
@@ -1089,7 +1089,7 @@ Git quick statistics is a simple and efficient way to access various statistics 
 brew install git-quick-stats
 
 git quick-stats
-# or 
+# or
 git-quick-stats
 ```
 
@@ -1279,3 +1279,4 @@ These features allow to pause a branch development and switch to another one (_"
 ## 学习
 
 * [练习沙盒](https://try.github.io)
+* [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)

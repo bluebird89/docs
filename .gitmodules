@@ -16,3 +16,6 @@
 [submodule "Note/Interview-Notebook"]
 	path = Note/Interview-Notebook
 	url = git@github.com:CyC2018/Interview-Notebook.git
+[submodule "Design/system-design-primer"]
+	path = Design/system-design-primer
+	url = git@github.com:donnemartin/system-design-primer.git
