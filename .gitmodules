@@ -1,5 +1,5 @@
 [submodule "Design/Design/awesome-design"]
-	path = Design/Design/awesome-design
+	path = Design/awesome-design
 	url = git@github.com:gztchan/awesome-design.git
 [submodule "Back_end/Go/awesome-go"]
 	path = Back_end/Go/awesome-go
