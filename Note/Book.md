@@ -151,6 +151,7 @@
 * 《[Effective java 中文版（第2版）](https://www.amazon.cn/gp/product/B001PTGR52)》
 * 《[Java核心技术·卷1：基础知识（原书第9版）](https://www.amazon.cn/gp/product/B01M22BGUQ)》
 * 《[Java核心技术·卷2：高级特性（原书第9版）](https://www.amazon.cn/gp/product/B00IK7SM6O)》
+* Spring实战（第4版）
 
 ## .NET
 
@@ -309,6 +310,8 @@
 * 《JavaScript 设计模式》
 * 《JavaScript 开发框架权威指南》
 * JavaScript 函数式编程
+* JS高级程序设计
+* 你不知道的javascript
 
 ## WEB
 

@@ -17,13 +17,13 @@ ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标�
 * 对象
     - JavaScript 本地对象和内置对象
         + Array
-        - Boolean
-        - Date
-        - Math
-        - Number
-        - String
-        - RegExp
-        - Global
+        + Boolean
+        + Date
+        + Math
+        + Number
+        + String
+        + RegExp
+        + Global
     - Browser 对象
         - Window
         - Navigator
@@ -2504,10 +2504,7 @@ try {
 
 ## 场景
 
-*
-
-
-WebAssembly 已得到所有主流浏览器支持
+* WebAssembly 已得到所有主流浏览器支持
 
 ## 调试
 
@@ -2592,6 +2589,7 @@ WebAssembly 已得到所有主流浏览器支持
 * [mbeaudru/modern-js-cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet):Cheatsheet for the JavaScript knowledge you will frequently encounter in modern projects. https://mbeaudru.github.io/modern-js-…
 * [getify/You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter.
 * [kamranahmedse/driver.js](https://github.com/kamranahmedse/driver.js):A light-weight, no-dependency, vanilla JavaScript engine to drive the user's focus across the page http://kamranahmed.info/driver
+
 ## Web APIS
 
 - [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API)
@@ -2613,11 +2611,6 @@ WebAssembly 已得到所有主流浏览器支持
 
 * [ecomfe/echarts](https://github.com/ecomfe/echarts):A powerful, interactive charting and visualization library for browser http://echarts.baidu.com/
 * [hyperapp/hyperapp](https://github.com/hyperapp/hyperapp):1 KB JavaScript library for building web applications. https://hyperapp.js.org
-
-## 图书
-
-* JS高级程序设计
-* 你不知道的javascript
 
 ## 工具
 

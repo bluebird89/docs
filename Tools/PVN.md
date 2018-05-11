@@ -7,7 +7,6 @@
 - [XX-net/XX-Net](https://github.com/XX-net/XX-Net)a web proxy tool
 - [googlehosts/hosts](https://github.com/googlehosts/hosts)
 
-
 ## 搭建服务
 
 ### 服务
@@ -87,7 +86,6 @@ cd /etc/openvpn/easy-rsa/ # 创建客户端证书
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/
 sudo gzip -d /etc/openvpn/server.conf.gz
 
-
 ca ca.crt   # Edit /etc/openvpn/server.conf to make sure the following lines are pointing to the certificates and keys you created in the section above.
 cert myservername.crt
 key myservername.key
@@ -140,7 +138,6 @@ sudo systemctl start openvpn@client
 sudo systemctl status  openvpn@client
 ```
 
-
 ## Client
 
 ```sh
@@ -148,6 +145,11 @@ sudo add-apt-repository ppa:hzwhuang/ss-qt5
 sudo apt-get update
 sudo apt-get install shadowsocks-qt5
 ```
+
+## client
+
+* freevpn
+* [Potatso lite](https://itunes.apple.com/us/app/potatso-lite/id1239860606)
 
 ## 参考
 * [Shadowsocks (简体中文)](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
