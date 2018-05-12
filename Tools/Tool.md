@@ -1,5 +1,7 @@
 # 工具集
 
+工具集合
+
 ## 硬件
 
 - keyward
@@ -25,18 +27,15 @@
 
 ## 软件
 
+### Note
+
+* [Paper](http://www.fiftythree.com/):优雅，美观，做笔记，记录灵感
+
 ### 管理与沟通
 
 * WhatsApp 和 Slack 用来沟通
 * trello：以看版为基础任务管理系统 或者Teambition
 * Asana asana.com
-
-### 设计
-
-* [生成工具](https://www.canva.com/):
-* [dribbble](https://dribbble.com/)
-* [behance](https://www.behance.net/)
-* [](https://uirush.com/)
 
 ### 阅读分类：概念用文档整理，结构化用思维导图（不宜太详细）
 
@@ -50,11 +49,13 @@
 * 记录：豆瓣读书、电影评论
 * github：代码的整理
 
+- 得到app
+
 ### office
 
-- iwork
-- google docs [表单](https://docs.google.com/forms/u/0/)
-- libre
+* google docs [表单](https://docs.google.com/forms/u/0/)
+* libre
+* [Keynote](https://www.apple.com/cn/keynote/)
 
 ### 思维导图
 

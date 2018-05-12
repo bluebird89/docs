@@ -1,6 +1,4 @@
-# [经典编程书籍大全](https://github.com/jobbole/awesome-programming-books)
-
-100+ 经典技术书籍，涵盖：计算机系统与网络、系统架构、算法与数据结构、前端开发、后端开发、移动开发、数据库、测试、项目与团队、程序员职业修炼、求职面试 和 编程相关的经典书籍。
+# Book
 
 ## 计算机系统与网络
 
@@ -26,6 +24,12 @@
 * 《计算机程序设计艺术（The Art of Computer Programming）》
 * 《编译原理》
 * 《编码:隐匿在计算机软硬件背后的语言CODE: The Hidden Language of Computer Hardware and Software》
+* 《Linux多线程服务端编程》
+* 《设计模式 可复用面向对象软件的基础》
+* 《鸟哥的Linux私房菜:基础学习篇(第3版)》
+* 《现代操作系统(原书第3版) 》
+* 《操作系统:精髓与设计原理(原书第6版)》
+* 《鸟哥的Linux私房菜:服务器架设篇(第3版)》
 
 ## 编程通用
 
@@ -54,6 +58,18 @@
 * 《The Clean Coder》：专业程序员的行为守则
 * 《Working Effectively With Legacy Code》
 
+## 算法与数据结构
+
+* 《[算法（第4版）](https://www.amazon.cn/gp/product/B009OCFQ0O)》
+* 《[算法导论（原书第2版）（Introduction to Algorithms）](https://www.amazon.cn/gp/product/B00AK7BYJY)》
+* 《[Python算法教程](https://www.amazon.cn/gp/product/B019NB0VCI)》
+* 《[算法设计与分析基础（第3版）](https://www.amazon.cn/gp/product/B00S4HCQUI)》
+* 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
+* 《[数据结构与算法分析 : C++描述（第4版）](https://www.amazon.cn/gp/product/B01LDG2DSG)》
+* 《[数据结构与算法分析 : C语言描述（第2版）](https://www.amazon.cn/gp/product/B002WC7NGS)》
+* 《[数据结构与算法分析 : Java语言描述（第2版）](https://www.amazon.cn/gp/product/B01CNP0CG6)》
+* 《数据结构与算法 JavaScript 描述》
+
 ## 设计
 
 * 《写给大家看的设计书》：界面设计
@@ -68,56 +84,36 @@
 * 《简约至上》
 * 《用户体验的要素》
 * 《人人都是产品经理》
-
-## 算法与数据结构
-
-* 《[算法（第4版）](https://www.amazon.cn/gp/product/B009OCFQ0O)》
-* 《[算法导论（原书第2版）（Introduction to Algorithms）](https://www.amazon.cn/gp/product/B00AK7BYJY)》
-* 《[Python算法教程](https://www.amazon.cn/gp/product/B019NB0VCI)》
-* 《[算法设计与分析基础（第3版）](https://www.amazon.cn/gp/product/B00S4HCQUI)》
-* 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
-* 《[数据结构与算法分析 : C++描述（第4版）](https://www.amazon.cn/gp/product/B01LDG2DSG)》
-* 《[数据结构与算法分析 : C语言描述（第2版）](https://www.amazon.cn/gp/product/B002WC7NGS)》
-* 《[数据结构与算法分析 : Java语言描述（第2版）](https://www.amazon.cn/gp/product/B01CNP0CG6)》
-
-## 职业修炼与规划
-
-* 《[大教堂与集市](https://www.amazon.cn/gp/product/B00KQDTZ4S)》
-* 《卓有成效的程序员》
-* 《[程序员的职业素养（Pragmatic Programmer）](https://www.amazon.cn/gp/product/B01LZJ8L9J)》
-* 《[程序员修炼之道：从小工到专家](https://www.amazon.cn/gp/product/B004GV08CY)》
-* 《[软件开发者路线图：从学徒到高手](https://www.amazon.cn/gp/product/B00H6X6LD4)》
-* 《[我编程，我快乐: 程序员职业规划之道](https://www.amazon.cn/gp/product/B00CBBKDGM)》
-* 《[程序员的思维修炼：开发认知潜能的九堂课](https://www.amazon.cn/gp/product/B007VARUIM)》
-* 《[高效程序员的45个习惯：敏捷开发修炼之道(修订版)](https://www.amazon.cn/gp/product/B00OA9L3NU)》
-* 《The Pragmatic Programmer》
-* 《Peopleware: Productive Projects and Teams》
-* 《Soft Skills: The Software Developer’s Life Manual》
-
-## 大师访谈
-
-* 《[编程大师智慧](https://www.amazon.cn/gp/product/B00451BP72)》
-* 《[编程大师访谈录](https://www.amazon.cn/gp/product/B00ALPRKMA)》
-* 《[编程人生 : 15位软件先驱访谈录](https://www.amazon.cn/gp/product/B00QA7GA2Y)》
-* 《[奇思妙想 : 15位计算机天才及其重大发现](https://www.amazon.cn/gp/product/B007ED88CI)》
-* 《[图灵和ACM图灵奖](https://www.amazon.cn/gp/product/B008G80O9K)》
-* 奇思妙想：15 位计算机天才及其重大发现
-
-## 架构/性能Pemac
-
-* 《[微服务设计](https://www.amazon.cn/gp/product/B01ER75V6O)》
-* 《[大数据日知录](https://www.amazon.cn/gp/product/B00NGW4EAG)》
-* 《[企业应用架构模式](https://www.amazon.cn/gp/product/B003LBSRDM)》
-* 《[Web性能权威指南](https://www.amazon.cn/gp/product/B00JMKWHFU)》
-* 《[SRE：Google运维解密](https://www.amazon.cn/gp/product/B01M0EHQ43)》
-* 《[发布！软件的设计与部署](https://www.amazon.cn/gp/product/B0153178XM)》
-* 《[高扩展性网站的 50 条原则](https://www.amazon.cn/gp/product/B01HZFHQQI)》
-* 《[大型网站技术架构:核心原理与案例分析](https://www.amazon.cn/gp/product/B00F3Z26G8)》
-* 《[恰如其分的软件架构：风险驱动的设计方法](https://www.amazon.cn/gp/product/B00EP6TGAU)》
-* 《[软件系统架构：使用视点和视角与利益相关者合作（第2版）](https://www.amazon.cn/gp/product/B00CMMUXC4)》
+* 可士和式
 
 ## Web前端
 
+* [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
+* Web开发权威指南
+* 《Web 可用性设计》
+* 《DOM 启蒙》
+
+### HTML
+
+* 《[HTML5 权威指南](https://www.amazon.cn/gp/product/B00H706BIG)》
+* 《[HTML5 秘籍（第2版）](https://www.amazon.cn/gp/product/B015316VJY)》
+* 《[HTML5 与 CSS3 基础教程（第八版）](https://www.amazon.cn/gp/product/B00K58535O)》
+* 《Head First HTML 与 CSS (第2版)》
+
+### Javascript
+
+* 《Javascript 权威指南》
+* 《JavaScript 高级程序设计(第3版)》
+* 《ES6 标准入门(第2版)》
+* 《深入理解ES6》
+* 《JavaScript 异步编程:设计快速响应的网络应用》
+* 《JavaScript DOM 编程艺术》
+* 《Head First 设计模式》
+* 《JavaScript 设计模式》
+* 《JavaScript 开发框架权威指南》
+* JavaScript 函数式编程
+* JS高级程序设计
+* 你不知道的javascript
 * 《[高性能 JavaScript](https://www.amazon.cn/gp/product/B013SGB2AO)》
 * 《[锋利的 jQuery（第2版）](https://www.amazon.cn/gp/product/B0089TDFNS)》
 * 《[JavaScript 忍者秘籍](https://www.amazon.cn/gp/product/B016DWSEWO)》（感谢[@joker-danta](https://github.com/jobbole/awesome-programming-books/issues?q=is%3Aissue+is%3Aopen+author%3Ajoker-danta) 补充推荐）
@@ -129,17 +125,34 @@
 * 《[JavaScript 高级程序设计（第3版）](https://www.amazon.cn/gp/product/B007OQQVMY)》
 * 《[JavaScript 异步编程：设计快速响应的网络应用](https://www.amazon.cn/gp/product/B00JVLEYY2)》
 * 《[Effective JavaScript：编写高质量JavaScript代码的68个有效方法](https://www.amazon.cn/gp/product/B00GMXI1QY)》
-* 《[HTML5 权威指南](https://www.amazon.cn/gp/product/B00H706BIG)》
-* 《[HTML5 秘籍（第2版）](https://www.amazon.cn/gp/product/B015316VJY)》
-* 《[HTML5 与 CSS3 基础教程（第八版）](https://www.amazon.cn/gp/product/B00K58535O)》
+
+### CSS
+
 * 《[CSS 揭秘](https://www.amazon.cn/gp/product/B01ET3FO86)》
 * 《[CSS 设计指南（第3版）](https://www.amazon.cn/gp/product/B00M2DKZ1W)》
 * 《[CSS 权威指南（第3版）](https://www.amazon.cn/gp/product/B0011F5SIC)》
+* 《CSS 禅意花园(修订版)》
+* 《精通 CSS: 高级 Web 标准解决方案(第2版)》
+* 《众妙之门: 精通 CSS3》
 * 《[深入浅出 HTML 与 CSS](https://www.amazon.cn/gp/product/B01LXL42O5)》
 * 《[点石成金 : 访客至上的网页设计秘笈](https://www.amazon.cn/gp/product/B00QGA04RM)》
-* 《Web 可用性设计》
 
-## Java开发
+### 
+
+* 《深入 React 技术栈》
+* 《Vue.js 权威指南》
+* 《Angular 权威教程》
+* 《深入浅出 Node.js》
+
+## 测试
+
+* 《[探索式软件测试](https://www.amazon.cn/gp/product/B003JBIV0S)》
+* 《[有效的单元测试](https://www.amazon.cn/gp/product/B00PVOND2W)》
+* 《[Google软件测试之道](https://www.amazon.cn/gp/product/B00FH36R6G)》
+*  How to Break Software
+*  《测试驱动开发》
+
+## Java
 
 * 《[Java8 实战](https://www.amazon.cn/gp/product/B01ER75QC8)》
 * 《[Java并发编程实战](https://www.amazon.cn/gp/product/B0077K9XHW)》
@@ -152,6 +165,36 @@
 * 《[Java核心技术·卷1：基础知识（原书第9版）](https://www.amazon.cn/gp/product/B01M22BGUQ)》
 * 《[Java核心技术·卷2：高级特性（原书第9版）](https://www.amazon.cn/gp/product/B00IK7SM6O)》
 * Spring实战（第4版）
+* 《大型网站系统与 Java 中间件实践》
+
+## PHP
+
+* 《[Head First PHP & MySQL（中文版）](https://www.amazon.cn/gp/product/B004R1QIJU)》
+* 《[深入PHP：面向对象、模式与实践（第3版）](https://www.amazon.cn/gp/product/B005D6IRRY)》
+* 《PHP与MySQL程序设计(第4版)》
+
+## C语言
+
+* 《[C标准库](https://www.amazon.cn/gp/product/B00IZW4DK8)》
+* 《[C和指针](https://www.amazon.cn/gp/product/B00163LU68)》
+* 《[C专家编程](https://www.amazon.cn/gp/product/B0012NIW9K)》
+* 《[C陷阱与缺陷](https://www.amazon.cn/gp/product/B0012UMPBY)》
+* 《[C语言接口与实现](https://www.amazon.cn/gp/product/B01D10NSCM)》
+* 《[C程序设计语言（第2版）](https://www.amazon.cn/gp/product/B0011425T8)》
+* 《C语言参考手册（第5版）》
+* 《C程序设计语言》：C 编程语言；如何像程序员一样思考；底层计算模型
+
+## C++
+
+* 《[C++标准库](https://www.amazon.cn/gp/product/B00YLZIRHI)》
+* 《[C++编程思想](https://www.amazon.cn/gp/product/B005CFUQR0)》
+* 《C++语言的设计与演化》
+* 《[C++程序设计原理与实践](https://www.amazon.cn/gp/product/B003VPX6YS)》
+* 《[C++ Primer （中文第5版）](https://www.amazon.cn/gp/product/B00ESUIL0O)》
+* 《[C++ Primer习题集(第5版)](https://www.amazon.cn/gp/product/B00S6U4C6E) 》
+* 《[C++程序设计语言(第1-3部分)(原书第4版)](https://www.amazon.cn/gp/product/B01I9BNASA) 》
+* 《[Effective C++:改善程序与设计的55个具体做法(第3版)(中文版)](https://www.amazon.cn/gp/product/B004G72P24) 》
+* 《[More Effective C++:35个改善编程与设计的有效方法(中文版)](https://www.amazon.cn/gp/product/B004IP8BD6) 》
 
 ## .NET
 
@@ -177,46 +220,57 @@
 * 《[Python编程实战:运用设计模式、并发和程序库创建高质量程序](https://www.amazon.cn/gp/product/B00MHDPIJ6)》
 * 《[Python绝技：运用Python成为顶级黑客](https://www.amazon.cn/gp/product/B019ZRGBVU)》
 * 《[Flask Web开发:基于Python的Web应用开发实战](https://www.amazon.cn/gp/product/B0153177A6)》
+* 《用 Python 写网络爬虫》
 
-## Android
+## Go
+
+* 《Go 语言实战》
+
+## Ruby
+
+* 《Ruby 元编程(第2版)》
+
+## 数据库
+
+* 《SQL基础教程》
+* 《[SQL应用重构](https://www.amazon.cn/gp/product/B00H6X6M1A)》
+* 《[SQL Cookbook](https://www.amazon.cn/gp/product/0596009763)》
+* 《[高性能MySQL（第3版）](https://www.amazon.cn/gp/product/B00C1W58DE)》
+* 《[MySQL技术内幕 : InnoDB存储引擎（第2版）](https://www.amazon.cn/gp/product/B00ETOV48K)》
+* 《[深入浅出MySQL : 数据库开发、优化与管理维护](https://www.amazon.cn/gp/product/B00KR87J8G)》
+* 《SQL必知必会(第4版)》
+* 《SQL 反模式》
+* 《数据库系统概念》
+
+## 架构/性能
+
+* 《[微服务设计](https://www.amazon.cn/gp/product/B01ER75V6O)》
+* 《[大数据日知录](https://www.amazon.cn/gp/product/B00NGW4EAG)》
+* 《[企业应用架构模式](https://www.amazon.cn/gp/product/B003LBSRDM)》
+* 《[Web性能权威指南](https://www.amazon.cn/gp/product/B00JMKWHFU)》
+* 《[SRE：Google运维解密](https://www.amazon.cn/gp/product/B01M0EHQ43)》
+* 《[发布！软件的设计与部署](https://www.amazon.cn/gp/product/B0153178XM)》
+* 《[高扩展性网站的 50 条原则](https://www.amazon.cn/gp/product/B01HZFHQQI)》
+* 《[大型网站技术架构:核心原理与案例分析](https://www.amazon.cn/gp/product/B00F3Z26G8)》
+* 《[恰如其分的软件架构：风险驱动的设计方法](https://www.amazon.cn/gp/product/B00EP6TGAU)》
+* 《[软件系统架构：使用视点和视角与利益相关者合作（第2版）](https://www.amazon.cn/gp/product/B00CMMUXC4)》
+* 《图解服务器端网络架构》
+* 《大型网站技术架构:核心原理与案例分析》
+* 《大型分布式网站架构设计与实践》
+
+## 客户端
+
+### Android
 
 * 《[Android编程权威指南（第2版）](https://www.amazon.cn/gp/product/B01FSXCBOQ)》
 * 《[移动应用UI设计模式（第2版）](https://www.amazon.cn/gp/product/B00SFZGX08)》
 
-## iOS
+### iOS
 
 * 《[iOS编程实战](https://www.amazon.cn/gp/product/B00NKZCM3U)》
 * 《[iOS编程（第4版）](https://www.amazon.cn/gp/product/B013UG2ULW)》
 * 《[Objective-C高级编程](https://www.amazon.cn/gp/product/B00DE60G3S)》
 * 《[Effective Objective-C 2.0：编写高质量iOS与OS X代码的52个有效方法](https://www.amazon.cn/gp/product/B00IDSGY06)》
-
-## PHP
-
-* 《[Head First PHP & MySQL（中文版）](https://www.amazon.cn/gp/product/B004R1QIJU)》
-* 《[深入PHP：面向对象、模式与实践（第3版）](https://www.amazon.cn/gp/product/B005D6IRRY)》
-
-## C语言
-
-* 《[C标准库](https://www.amazon.cn/gp/product/B00IZW4DK8)》
-* 《[C和指针](https://www.amazon.cn/gp/product/B00163LU68)》
-* 《[C专家编程](https://www.amazon.cn/gp/product/B0012NIW9K)》
-* 《[C陷阱与缺陷](https://www.amazon.cn/gp/product/B0012UMPBY)》
-* 《[C语言接口与实现](https://www.amazon.cn/gp/product/B01D10NSCM)》
-* 《[C程序设计语言（第2版）](https://www.amazon.cn/gp/product/B0011425T8)》
-* 《C语言参考手册（第5版）》
-* 《C程序设计语言》：C 编程语言；如何像程序员一样思考；底层计算模型
-
-## C++
-
-* 《[C++标准库](https://www.amazon.cn/gp/product/B00YLZIRHI)》
-* 《[C++编程思想](https://www.amazon.cn/gp/product/B005CFUQR0)》
-* 《C++语言的设计与演化》
-* 《[C++程序设计原理与实践](https://www.amazon.cn/gp/product/B003VPX6YS)》
-* 《[C++ Primer （中文第5版）](https://www.amazon.cn/gp/product/B00ESUIL0O)》
-* 《[C++ Primer习题集(第5版)](https://www.amazon.cn/gp/product/B00S6U4C6E) 》
-* 《[C++程序设计语言(第1-3部分)(原书第4版)](https://www.amazon.cn/gp/product/B01I9BNASA) 》
-* 《[Effective C++:改善程序与设计的55个具体做法(第3版)(中文版)](https://www.amazon.cn/gp/product/B004G72P24) 》
-* 《[More Effective C++:35个改善编程与设计的有效方法(中文版)](https://www.amazon.cn/gp/product/B004IP8BD6) 》
 
 ## 机器学习和数据挖掘
 
@@ -236,26 +290,6 @@
 * 《[数据挖掘：实用机器学习工具与技术（原书第3版）](https://www.amazon.cn/gp/product/B00K5I91WK)》
 * 《[大数据：互联网大规模数据挖掘与分布式处理（第2版）](https://www.amazon.cn/gp/product/B011I34CGA)》
 
-## 数据库
-
-* 《SQL基础教程》
-* 《[SQL应用重构](https://www.amazon.cn/gp/product/B00H6X6M1A)》
-* 《[SQL Cookbook](https://www.amazon.cn/gp/product/0596009763)》
-* 《[高性能MySQL（第3版）](https://www.amazon.cn/gp/product/B00C1W58DE)》
-* 《[MySQL技术内幕 : InnoDB存储引擎（第2版）](https://www.amazon.cn/gp/product/B00ETOV48K)》
-* 《[深入浅出MySQL : 数据库开发、优化与管理维护](https://www.amazon.cn/gp/product/B00KR87J8G)》
-* 《SQL必知必会(第4版)》
-* 《SQL 反模式》
-* 《数据库系统概念》
-
-## 测试
-
-* 《[探索式软件测试](https://www.amazon.cn/gp/product/B003JBIV0S)》
-* 《[有效的单元测试](https://www.amazon.cn/gp/product/B00PVOND2W)》
-* 《[Google软件测试之道](https://www.amazon.cn/gp/product/B00FH36R6G)》
-*  How to Break Software
-*  《测试驱动开发》
-
 ## 项目与团队
 
 * 《[人月神话（The Mythical Man-Month）](https://www.amazon.cn/gp/product/B00VR8ZO28)》
@@ -263,6 +297,40 @@
 * 《[人件（原书第3版）](https://www.amazon.cn/gp/product/B00MO7R1SG)》
 * 《[门后的秘密：卓越管理的故事](https://www.amazon.cn/gp/product/B00CBBKRQ8)》
 * 《[极客与团队：软件工程师的团队生存秘笈](https://www.amazon.cn/gp/product/B00BLZMG8W)》
+
+## 项目管理
+
+* 领域特定语言
+* 敏捷软件开发
+* 持续交付 发布可靠软件的系统方法
+* 面向模式的软件架构 卷1：模式系统
+* 实现领域驱动设计
+* 浮现式设计 专业软件开发的演进本质
+* 《软件工程》
+* 《精益思想(白金版)》
+
+## 职业修炼与规划
+
+* 《[大教堂与集市](https://www.amazon.cn/gp/product/B00KQDTZ4S)》
+* 《卓有成效的程序员》
+* 《[程序员的职业素养（Pragmatic Programmer）](https://www.amazon.cn/gp/product/B01LZJ8L9J)》
+* 《[程序员修炼之道：从小工到专家](https://www.amazon.cn/gp/product/B004GV08CY)》
+* 《[软件开发者路线图：从学徒到高手](https://www.amazon.cn/gp/product/B00H6X6LD4)》
+* 《[我编程，我快乐: 程序员职业规划之道](https://www.amazon.cn/gp/product/B00CBBKDGM)》
+* 《[程序员的思维修炼：开发认知潜能的九堂课](https://www.amazon.cn/gp/product/B007VARUIM)》
+* 《[高效程序员的45个习惯：敏捷开发修炼之道(修订版)](https://www.amazon.cn/gp/product/B00OA9L3NU)》
+* 《The Pragmatic Programmer》
+* 《Peopleware: Productive Projects and Teams》
+* 《Soft Skills: The Software Developer’s Life Manual》
+
+## 大师访谈
+
+* 《[编程大师智慧](https://www.amazon.cn/gp/product/B00451BP72)》
+* 《[编程大师访谈录](https://www.amazon.cn/gp/product/B00ALPRKMA)》
+* 《[编程人生 : 15位软件先驱访谈录](https://www.amazon.cn/gp/product/B00QA7GA2Y)》
+* 《[奇思妙想 : 15位计算机天才及其重大发现](https://www.amazon.cn/gp/product/B007ED88CI)》
+* 《[图灵和ACM图灵奖](https://www.amazon.cn/gp/product/B008G80O9K)》
+* 奇思妙想：15 位计算机天才及其重大发现
 
 ## 求职面试
 
@@ -290,68 +358,50 @@
 * 《[正则表达式经典实例](https://www.amazon.cn/gp/product/B00OGKGSSS)》
 * 《[编程珠玑](https://www.amazon.cn/gp/product/B001GNBZFE)》
 * 《The Mythical Man-month》: 关于软件工程的散文集
+* 《刻意练习:如何从新手到大师》
+* [未来世界的幸存者](http://survivor.ruanyifeng.com/)
+* [前方的路](http://road.ruanyifeng.com/)
 
-* 领域特定语言
-* 敏捷软件开发
-* 持续交付 发布可靠软件的系统方法
-* 面向模式的软件架构 卷1：模式系统
-* 实现领域驱动设计
-* 浮现式设计 专业软件开发的演进本质
+## 人文
 
-## Javascript
+* 《白银时代》
+* 《青铜时代》
+* 《我的精神家园》
+* 《沉默的大多数》
+* 《一句顶一万句》
+* 《百年孤独》
+* 《城市发展史》
+* 《美国大城市的死与生》
+* 那些忧伤的年轻人
 
-* 《Javascript 权威指南》
-* 《JavaScript 高级程序设计(第3版)》
-* 《ES6 标准入门(第2版)》
-* 《深入理解ES6》
-* 《JavaScript 异步编程:设计快速响应的网络应用》
-* 《JavaScript DOM 编程艺术》
-* 《Head First 设计模式》
-* 《JavaScript 设计模式》
-* 《JavaScript 开发框架权威指南》
-* JavaScript 函数式编程
-* JS高级程序设计
-* 你不知道的javascript
+## 科幻
 
-## WEB
+* 《基地》
+* 《基地和帝国》
+* 《第二基地》
+* 《基地边缘》
+* 《基地和地球》阿西莫夫
+* 《三体》
 
-- [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
-- Web开发权威指南
+## 玄幻
 
-- 《软件工程》
-- 《数据结构与算法 JavaScript 描述》
+* 搜神记
+* 蛮荒记
+* 不周记 树下野狐
 
-《设计模式 可复用面向对象软件的基础》
-《鸟哥的Linux私房菜:基础学习篇(第3版)》
-《现代操作系统(原书第3版) 》
-《操作系统:精髓与设计原理(原书第6版)》
-《深入理解计算机系统(原书第3版)》
-《简约至上》
-《用户体验的要素》
-《人人都是产品经理》
-《Head First HTML 与 CSS (第2版)》
-《CSS 禅意花园(修订版)》
-《精通 CSS: 高级 Web 标准解决方案(第2版)》
-《众妙之门: 精通 CSS3》
-《DOM 启蒙》
-《深入 React 技术栈》
-《Vue.js 权威指南》
-《Angular 权威教程》
-《深入浅出 Node.js》
-《Chrome 扩展及应用开发》
-《PHP与MySQL程序设计(第4版)》
-《Python 核心编程(第3版)》
-《Ruby 元编程(第2版)》
-《Java 编程思想(第4版)》
-《Go 语言实战》
-《鸟哥的Linux私房菜:服务器架设篇(第3版)》
-《图解服务器端网络架构》
-《大型网站技术架构:核心原理与案例分析》
-《大型分布式网站架构设计与实践》
-《Linux系统编程(第2版)》
-《UNIX网络编程》
-《Linux多线程服务端编程》
-《用 Python 写网络爬虫》
-《大型网站系统与 Java 中间件实践》
-《刻意练习:如何从新手到大师》 
-《精益思想(白金版)》
+## 小说
+
+翻云覆雨
+
+## 沟通
+
+《[洞察：精确观察和有效沟通的艺术](https://book.douban.com/subject/30047160/)》
+
+## 历史
+
+* 康熙王朝
+* 明朝那些事儿
+
+## 参考
+
+* [经典编程书籍大全](https://github.com/jobbole/awesome-programming-books):100+ 经典技术书籍，涵盖：计算机系统与网络、系统架构、算法与数据结构、前端开发、后端开发、移动开发、数据库、测试、项目与团队、程序员职业修炼、求职面试 和 编程相关的经典书籍。

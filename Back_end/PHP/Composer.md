@@ -1,8 +1,8 @@
-## Composer
+# Composer
 
-工程化的思想引入，管理包.在安装依赖后，Composer 将把安装时确切的版本号列表写入 composer.lock 文件
+ PHP 用来管理依赖（dependency）关系的工具。你可以在自己的项目中声明所依赖的外部工具库（libraries），Composer 会帮你安装这些依赖的库文件。
 
-### 安装
+## 安装
 
 ```sh
 sudo apt-get install composer
@@ -11,25 +11,31 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 brew install composer  // Mac
 # file_put_contents(./composer.json): failed to open stream: Permission denied
 sudo chown -R $USER .composer/
+
+### 卸载composer:找到文件删除即可
 ```
 
-### 配置国内镜像
-
-composer config -g repo.packagist composer `https://packagist.phpcomposer.com`
-
-### 使用
+## 使用
 
 global 命令允许你在 COMPOSER_HOME 目录下执行其它命令 sudo chown -R $USER $HOME/.composer
 
-```php
+```sh
+## 全局配置国内镜像
+composer config -g repo.packagist composer https://packagist.phpcomposer.com
+
+composer config repo.packagist composer https://packagist.phpcomposer.com
+
 composer init
+
 composer search monolog
 compsoer show monolog
+
 composer require cocur/slugify
 composer install
 composer update
 composer remove
 composer self-update
+
 composer create-project swoft/swoft swoft
 ```
 
@@ -40,8 +46,8 @@ $slugify = new Slugify();
 echo $slugify->slugify('Hello World, this is a long sentence and I need to make a slug from it!');
 ```
 
-### 卸载composer:找到文件删除即可
+## 参考
 
-## 仓库
-
+* [官网](https://getcomposer.org/)
 * [composer/composer](https://github.com/composer/composer):Dependency Manager for PHP https://getcomposer.org/
+* [中文](https://www.phpcomposer.com/)
