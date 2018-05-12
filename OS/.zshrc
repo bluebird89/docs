@@ -1,15 +1,15 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 # export PATH=/usr/local/Cellar/zsh/5.5.1/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/Users/henry/.oh-my-zsh
+export ZSH=/Users/henry/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="agnoster"
+ZSH_THEME="myagnoster"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -61,22 +61,32 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
+  autojump
+  brew
   bundler
+  colored-man
+  colorize
   dotenv
+  git
+  github
+  gradle
+  history
+  history-substring-search
+  jira
+  mvn
   rake
   rbenv
   textmate
   ruby
-  autojump
   osx
-  mvn
-  gradle
-  history
-  history-substring-search
+  pip
+  python
+  vagrant
+  virtualenv
   wd
   web-search
   zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -116,9 +126,9 @@ alias la='ls -a'
 alias vi='vim'
 alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
-alias -s html=mate   # 在命令行直接输入后缀为 html 的文件名，会在 TextMate 中打开
-alias -s rb=mate     # 在命令行直接输入 ruby 文件，会在 TextMate 中打开
-alias -s py=vi       # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
+alias -s html=mate
+alias -s rb=mate
+alias -s py=vi
 alias -s js=vi
 alias -s c=vi
 alias -s java=vi
@@ -140,3 +150,49 @@ alias -s zip='unzip'
 alias -s bz2='tar -xjvf'
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export PATH="/usr/local/Cellar/python/3.6.5/bin:$PATH"
+alias python="/usr/local/Cellar/python/3.6.5/bin/python3.6"
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home
+export PATH=$PATH:$JAVA_HOME
+
+export SDK_HOME=/Users/henry/Library/Android/sdk
+export PATH=$PATH:$SDK_HOME
+
+export GRADLE_HOME=/usr/local/Cellar/gradle/4.7
+export PATH=$PATH:$GRADLE_HOME/bin
+
+export PATH=/Users/henry/Source/flutter/bin:$PATH
+
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+export PATH="/usr/local/sbin:$PATH"
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+eval $(thefuck --alias)
+
+export PATH="/usr/local/opt/php@7.1/bin:$PATH"
+export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
+
+# ch - browse chrome history
+ch() {
+  local cols sep
+  cols=$(( COLUMNS / 3 ))
+  sep='{::}'
+
+  cp -f ~/Library/Application\ Support/Google/Chrome/Profile\ 1/History /tmp/h
+
+  sqlite3 -separator $sep /tmp/h \
+    "select substr(title, 1, $cols), url
+     from urls order by last_visit_time desc" |
+  awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
+  fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs open
+}
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+export PATH="/usr/local/opt/texinfo/bin:$PATH"
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home
+export PATH=$PATH:$JAVA_HOME/bin
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar

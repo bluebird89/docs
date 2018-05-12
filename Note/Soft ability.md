@@ -149,3 +149,7 @@
 * Build Documentation In, Don’t Bolt It On把文档建在里面, 不要栓在外面
 * Gently Exceed Your User’s Expectations温和地超过用户的期望
 * Sign Your Work在你的作品上签名
+
+## Taste
+
+怎样去培养好的 taste？我的意见是，不要局限于代码，去看那些好的文章，去看那些让你流泪的电影，去听那些让你心潮澎湃的音乐，去学 LaTeX 细究下各种字体的排版细节，去学学 Mathematica 看看什么叫做令人惊艳的交互，去买一个顶尖的降噪耳机体验下什么叫做瞬间安静的世界……跳出你固有的思维舒适区，多体验多尝试多思考，当你的手、眼、脑、耳变得挑剔，当你听到 work around/trade off 这类字眼就本能得反感恶心和不舒服，你就明白，什么叫做“由俭入奢易，由奢入俭难”，你就懂得什么是好，什么是差，什么叫做 taste。
