@@ -1,5 +1,139 @@
 # 资源
 
+资源内容
+
+## 工具
+
+* [代码片段](http://www.phpxs.com/code/)
+* [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
+
+## 技能树
+
+* [TECHNOLOGY RADAR](https://www.thoughtworks.com/radar)
+
+## 知识记录
+
+* [](https://wiki.nikitavoloboev.xyz)
+
+## Podcast
+
+- [ThoughtWorks 洞见](http://www.ximalaya.com/zhubo/81966002/)
+
+## Article
+
+- [How To Ask Questions The Smart Way](http://www.catb.org/esr/faqs/smart-questions.html)
+
+### 设计
+
+* [Canva](https://www.canva.com/):在线设计平台，预置了很多精美的模版，设计个海报什么的，分分钟的事儿，大大提好工作效率。在线设计绝对是个趋势，借助人工智能，设计的技术门槛肯定会越来越低，这时候，你的审美就越发重要
+* [dribbble](https://dribbble.com/)
+* [behance](https://www.behance.net/)：全球最优秀设计师的集中地，涵盖摄影、设计、插画等多个领域
+* [Fwa](https://thefwa.com/):世界上最有创意，最优秀的网站和媒体艺术
+* [Webby Awards](https://www.webbyawards.com/):互联网界的奥斯卡
+* [lapa](http://www.lapa.ninja):优秀网站集合
+* [Siteinspire](https://www.siteinspire.com/):收录了很多设计优秀的网站，种类丰富，有产品、设计、摄影等。不止能提高审美，还能发现很多优秀的产品和创意
+* [Adobe Spark Page]():在极短的时间内做出优雅炫酷的交互式网页
+* [Nounproject](https://thenounproject.com/):非常优质的图标网站
+* [Adobe color cc](https://color.adobe.com/):Aobe 旗下的配色网站，你可以在线配色，选择配色方案。不论是摄影还是设计，你都需要对颜色有足够的了解。
+* [Steller](https://steller.co/):展示自己的作品，比如摄影、绘画或其他创作，用Steller会显得特别优雅有格调
+* [](https://uirush.com/)
+* [Arctime](http://www.arctime.org/):字幕制作神器
+
+## 汉字
+
+* 字解：一款非常优秀的 APP，对于了解汉字，做设计非常有帮助。
+* 日课：简洁精致的诗词 APP
+* Chinagram：关于汉字的 APP
+* [Chineasy](https://www.chineasy.com/):设计很出色，充分利用汉字的优势，将汉字转换为一幅幅精美的图片，让识字变成一种享受。
+* [造字](http://www.myfont.me):用手写来造字
+
+## 写作
+
+* [字里行间](https://zi.com/):中文写作 APP，开发者的设计功力非常强
+* [简书](http://www.jianshu.com/)
+* [Medium]():一个非常优质的写作社区
+* [Bear](http://www.bear-writer.com/)
+* [Byword](https://metaclassy.com/):简洁，优美，专注于文字。非常棒的写作工具。
+
+## 建站工具
+
+* [Sauarespace](https://www.squarespace.com/):建网站变成了像创造艺术品一样的体验
+* [Virb](http://virb.com/)
+* [Webflow](https://webflow.com/)
+
+## 产品
+
+* [Producthunt](https://www.producthunt.com/):收录最新最优秀的产品
+* [Next](http://next.36kr.com/posts)
+* [少数派](https://sspai.com/)
+
+## Blog
+
+[没有了老师，该如何学习？](http://www.cnblogs.com/qianqian-li/p/6028745.html)
+
+## Video
+
+* TED
+* YouTube
+* [Hashem AL-ghaili](https://youtube.com/user/hashemalghaili)
+* [Vimeo](https://vimeo.com/)
+* [iTunes Movie Trailers ](http://trailers.apple.com/):苹果官网里的一个电影预告片页面
+* [Sandwichvideo](https://sandwichvideo.com/):演示短片
+* [Arc](http://thisisarc.com/):集合了超多优秀的短片制作公司，绝对是视频从业者的宝库。
+* Quicktime:切分音视频，可以录屏
+
+## Photo
+
+* [天空之城](https://www.skypixel.com/):一个专注于航拍影像的网站
+* [1x](https://1x.com/):摄影网站，作品质量极高。
+* [LFI](http://lfi-online.de/ceemes/en/gallery/):徕卡旗下的作品廊
+* [500px](https://500px.com/popular)
+* [Pixelmator](http://www.pixelmator.com):图像处理软件
+* [GIPHY](https://giphy.com/):寻找动图好去处。
+
+## music
+
+* Spotify
+* [Soundcloud](http://soundcloud.com)
+* [Musicbed](http://www.musicbed.com/):为视频寻找最优秀的配乐
+* [Lavaradio](http://www.lavaradio.com):环境音乐电台，按场景来选择音乐
+* [Garageband](https://www.apple.com/cn/ios/garageband/):非常强大的音乐软件，经常被忽视，可以自己摆弄着做音乐，做铃声等
+
+## 内容
+
+* Wikipedia
+* Quora
+* Imgur
+* Reddit
+* News:BuzzFeed
+* Pinterest
+
+## Code
+
+* [Java World](http://www.javaworld.com/)
+* [Java SE技术文档](http://docs.oracle.com/javase/)
+* [Github](https://github.com/)
+* [DZone](http://www.dzone.com)
+* [Stackoverflow](http://stackoverflow.com/)
+
+## 学习
+
+* [Coursera](https://www.coursera.org/)
+* [LeetCode](http://leetcode.com/):[中文](https://leetcode-cn.com/)
+* [网易公开课]()
+* [Creativelive](https://www.creativelive.com/)
+* [Masterclass](https://www.masterclass.com/):可以向凯文·史派西学表演，向安妮·莱博维茨学摄影
+* [Treehouse](https://teamtreehouse.com/):学习编程等互联网技能
+* [Playground](https://www.apple.com/swift/playgrounds/):ipad上学习swift的游戏
+
+## 书写规范
+
+* [中英文简历撰写排版指南](http://ppresume.com/notes/guide-zh.html)
+
+## 参考
+
+* [2017杭州云栖大会](https://github.com/Alimei/hangzhouYunQi2017ppt?files=1)
+* [Google Developer Documentation Style Guide](https://developers.google.com/style/)
 * [sindresorhus/awesome](https://github.com/sindresorhus/awesome) Curated list of awesome lists
 * [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books)Freely available programming books
 * [justjavac/free-programming-books-zh_CN](https://github.com/justjavac/free-programming-books-zh_CN)
@@ -12,21 +146,6 @@
 * [gothinkster/realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 https://realworld.io/
 * [CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers):aka "Bayesian Methods for Hackers": An introduction to Bayesian methods + probabilistic programming with a computation/understanding-first, mathematics-second point of view. All in pure Python ;)
 * [jobbole/awesome-machine-learning-cn](https://github.com/jobbole/awesome-machine-learning-cn):机器学习资源大全中文版，包括机器学习领域的框架、库以及软件
-
-## 工具
-
-* [代码片段](http://www.phpxs.com/code/)
-* [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
-
-## 技能树
-
-[TECHNOLOGY RADAR](https://www.thoughtworks.com/radar)
-
-## 知识记录
-
-* [](https://wiki.nikitavoloboev.xyz)
-
-## 参考
-
-* [2017杭州云栖大会](https://github.com/Alimei/hangzhouYunQi2017ppt?files=1)
-* [Google Developer Documentation Style Guide](https://developers.google.com/style/)
+* [Best-websites-a-programmer-should-visit](https://github.com/sdmg15/Best-websites-a-programmer-should-visit)
+* [how to be a Programmer](https://github.com/braydie/HowToBeAProgrammer) <https://braydie.gitbooks.io/how-to-be-a-programmer/content/zh/>
+* [be-a-professional-programmer](https://github.com/stanzhai/be-a-professional-programmer)
