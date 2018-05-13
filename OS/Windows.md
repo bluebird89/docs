@@ -99,11 +99,10 @@ Windows10 LTSB
 * Media Player Classic 媒体播放
 
 ```
-// 以管理员运行cmd
+## 以管理员运行cmd
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
 choco search python php birtualbox jdk8 cclear
-choco uninstall python
 
 choco install mysql.workbench
 
