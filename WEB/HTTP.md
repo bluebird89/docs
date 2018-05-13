@@ -48,6 +48,22 @@ PNG ... content of chrome.png ...
 ------WebKitFormBoundaryrGKCBY7qhFd3TrwA-- 
 ```
 
+#### GET与POST的区别
+
+* GET请求会被浏览器主动cache，而POST不会，除非手动设置。
+* GET请求只能进行url编码，而POST支持多种编码方式。
+* GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。
+* GET请求在URL中传送的参数是有长度限制的，而POST么有。
+* 对参数的数据类型，GET只接受ASCII字符，而POST没有限制。
+* GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。
+* GET参数通过URL传递，POST放在Request body中。
+* HTTP是基于TCP/IP的关于数据如何在万维网中如何通信的协议。HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数
+* HTTP只是个行为准则(GET, POST, PUT, DELETE)，而TCP才是GET和POST怎么实现的基本。
+* 浏览器限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担。GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。
+* GET产生一个TCP数据包；POST产生两个TCP数据包。
+    - 对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；
+    - 对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok
+
 ## TCP/IP模型
 
 TCP/IP 是供已连接因特网的计算机进行通信的通信协议。

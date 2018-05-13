@@ -24,8 +24,8 @@
     贪欢一饷偏教那女儿情长埋葬
 
     In the end
-
        Linkin Park Chester Bennington
+
     It starts with one thing  我从未明白过。
     It doesn't even matter  无论我如何挣扎努力。
     How hard you try  却没有一丝效果。
@@ -116,7 +116,8 @@
     It doesn't even matter  一切都是徒劳。
 
 
-  龙的传人   歌曲原唱：李建复    填    词：侯德健
+        龙的传人
+        歌曲原唱：李建复    填    词：侯德健
     遥远的东方有一条江
     它的名字就叫长江
     遥远的东方有一条河

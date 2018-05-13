@@ -92,6 +92,7 @@
 * Web开发权威指南
 * 《Web 可用性设计》
 * 《DOM 启蒙》
+* Web性能权威指南
 
 ### HTML
 
@@ -171,7 +172,9 @@
 
 * 《[Head First PHP & MySQL（中文版）](https://www.amazon.cn/gp/product/B004R1QIJU)》
 * 《[深入PHP：面向对象、模式与实践（第3版）](https://www.amazon.cn/gp/product/B005D6IRRY)》
-* 《PHP与MySQL程序设计(第4版)》
+* 《PHP and MySQL Web Development PHP与MySQL程序设计(第5版)》
+* Modern PHP(中文版)
+* 深入理解PHP:高级技巧、面向对象与核心技术(原书第3版) 
 
 ## C语言
 
@@ -230,7 +233,7 @@
 
 * 《Ruby 元编程(第2版)》
 
-## 数据库
+## SQL
 
 * 《SQL基础教程》
 * 《[SQL应用重构](https://www.amazon.cn/gp/product/B00H6X6M1A)》

@@ -1,5 +1,11 @@
 # Ruby
 
+Convention over configuration;
+DRY - Don't Repeat You;
+KISS - Keep it simple and stupid;
+Don't reinventing the wheel;
+Optimized for programmer happiness and sustainable productivity
+
 ## [安装](https://gorails.com/setup/ubuntu/14.04)
 
 ```sh
