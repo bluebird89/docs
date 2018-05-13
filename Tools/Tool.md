@@ -10,7 +10,7 @@
   - HHKB Professional ~~2~~
   - Kinesis KB600 Advantage2
   - Das Keyboard Model S Professional for Mac Clicky MX Blue Mechanical Keyboard (DASK3PROMS1MACCLI)
-  - IKBC C87
+  - IKBC C87 F87  红轴最好
   - 腕托
 - Computer（大尺寸屏幕,甚至两块屏幕）
   - MacBook Pro:15寸，16G
