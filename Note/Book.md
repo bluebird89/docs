@@ -365,6 +365,10 @@
 * [未来世界的幸存者](http://survivor.ruanyifeng.com/)
 * [前方的路](http://road.ruanyifeng.com/)
 
+## 投资
+
+* Python与量化投资从基础到实践
+
 ## 人文
 
 * 《白银时代》
