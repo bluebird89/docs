@@ -15,9 +15,8 @@ Percona分支版本，它是一个相对比较成熟的、优秀的MySQL分支�
 
 ## 安装
 
-### MAC
-
 ```shell
+### MAC
 brew install mysql
 brew services start mysql # /usr/local/Cellar/mysql/5.7.20
 mysql.server start/stop  # Mac服务管理
@@ -35,20 +34,17 @@ sudo apt remove mysql-common
 sudo rm /var/lib/mysql/ -R
 sudo rm /etc/mysql/ -R
 
-dpkg -l | grep mysql  # 
-dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  # 
+dpkg -l | grep mysql  #
+dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  #
 
 brew cask install mysqlworkbench
 brew cask install sequel-pro
-```
 
 ### linux
-
-```sh
 sudo apt install mysql
 
 # 源码安装
-groupadd mysql 
+groupadd mysql
 useradd -g mysql mysql
 cd /usr/local/mysql-5.5.44-linux2.6-i686/
 chown -R msyql.mysql .
@@ -57,7 +53,7 @@ cp support-files/mysql.server /etc/init.d/mysqld
 chkconfig --add mysqld
 chkconfig mysqld on
 cp support-files/my-medium.cnf /etc/my.cnf
-service mysqld start 
+service mysqld start
 ps aux | grep mysqld
 # 注意:/usr/local/mysql/bin/mysqld: error while loading shared libraries: libaio.so.1: cannot open shared object fil 134
 # 解决方案:yum install libaio
@@ -96,13 +92,13 @@ service mysql restart
 
 配置文件：/usr/local/etc/my.cnf  或者 my.ini
 
-* 数据库文件路径 `datadir="F:/wamp/mysql/data"` 
+* 数据库文件路径 `datadir="F:/wamp/mysql/data"`
 * 字符集: 客户端向MySQL服务器端请求和返加的数据的字符集，在选择数据库后使用:`set names gbk`;默认使用utf8mb4字符集,utf8mb4是utf8的超集，emoji表情以及部分不常见汉字在utf8下会表现为乱码，故需要升级至utf8mb4。
     + 数据库存储:一个汉字utf8下为两个长度,gbk下为一个长度
     + 正常一个汉字utf8下为三个字节,gbk下为两个字节
 * 保证客户端使用字符集与服务端返回数据字符集编码一致(以适应客户端为主,修改服务器服务器端配置) 查询系统变量:
-* 校对集: 
-    - _bin：按二进制编码比较 
+* 校对集:
+    - _bin：按二进制编码比较
     - _ci：不区分大小写比较
 * 连接变量
     - max_connection # 最大连接数:增加该值增加mysqld 要求的文件描述符的数量。如果服务器的并发连接请求量比较大，建议调高此值，以增加并行连接数量，当然这建立在机器能支撑的情况下，因为如果连接数越多，介于MySQL会为每个连接提供连接缓冲区，就会开销越多的内存，所以要适当调整该值，不能盲目提高设值。
@@ -110,7 +106,7 @@ service mysql restart
         + max_used_connections跟max_connections相同 那么就是max_connections设置过低或者超过服务器负载上限了，低于10%则设置过大。
     - back_log: MySQL能暂存的连接数量。当主要MySQL线程在一个很短时间内得到非常多的连接请求，这就起作用。如果MySQL的连接数据达到max_connections时，新来的请求将会被存在堆栈中，以等待某一连接释放资源，该堆栈的数量即back_log，如果等待连接的数量超过back_log，将不被授予连接资源。
         + back_log值指出在MySQL暂时停止回答新请求之前的短时间内有多少个请求可以被存在堆栈中。只有如果期望在一个短时间内有很多连接，你需要增加它，换句话说，这值对到来的TCP/IP连接的侦听队列的大小。
-        + 默认数值是50，可调优为128，对于Linux系统设置范围为小于512的整数。 
+        + 默认数值是50，可调优为128，对于Linux系统设置范围为小于512的整数。
 * 缓冲区变量
     - key_buffer_size指定索引缓冲区的大小，它决定索引处理的速度，尤其是索引读的速度。通过检查状态值Key_read_requests和Key_reads，可以知道key_buffer_size设置是否合理。比例key_reads / key_read_requests应该尽可能的低，至少是1:100，1:1000更好（上述状态值可以使用SHOW STATUS LIKE ‘key_read%’获得）。
         + key_buffer_size只对MyISAM表起作用。即使你不使用MyISAM表，但是内部的临时磁盘表是MyISAM表，也要使用该值。可以使用检查状态值created_tmp_disk_tables得知详情。
@@ -135,9 +131,9 @@ service mysql restart
         + 临时表用于内部操作如GROUP BY和distinct，还有一些ORDER BY查询以及UNION和FROM子句（派生表）中的子查询。这些都是在内存中创建的内存表。内存中临时表的最大大小由tmp_table_size和max_heap_table_size中较小的值确定。如果临时表的大小超过这个阈值，则将其转换为磁盘上的InnoDB或MyISAM表。此外，如果查询涉及BLOB或TEXT列，而这些列不能存储在内存表中，临时表总是直接指向磁盘。
         + 一定要监视服务器的内存使用情况，因为内存中的临时表可能会增加达到服务器内存容量的风险.一般来说，32M到64M是建议值，从这两个变量开始并根据需要进行调优
         + 允许的最大值：显示tmp_table_size服务器变量的值，它定义了在内存中创建的临时表的最大大小。与max_heap_table_size一起，这个值定义了可以在内存中创建的临时表的最大大小。如果内存临时表大于此大小，则将其存储在磁盘上。
-        + 内存表的最大大小：显示max_heap_table_size服务器变量的值，该值定义了显式创建的MEMORY存储引擎表的最大大小。          
-        + 创建的临时表总数：显示created_tmp_tables服务器变量的值，它定义了在内存中创建的临时表的数量。          
-        + 在磁盘上创建的临时表：显示created_tmp_disk_tables服务器变量的值，该变量定义了在磁盘上创建的临时表的数量。如果这个值很高，则应该考虑增加tmp_table_size和max_heap_table_size的值，以便增加创建内存临时表的数量，从而减少在磁盘上创建临时表的数量。          
+        + 内存表的最大大小：显示max_heap_table_size服务器变量的值，该值定义了显式创建的MEMORY存储引擎表的最大大小。
+        + 创建的临时表总数：显示created_tmp_tables服务器变量的值，它定义了在内存中创建的临时表的数量。
+        + 在磁盘上创建的临时表：显示created_tmp_disk_tables服务器变量的值，该变量定义了在磁盘上创建的临时表的数量。如果这个值很高，则应该考虑增加tmp_table_size和max_heap_table_size的值，以便增加创建内存临时表的数量，从而减少在磁盘上创建临时表的数量。
         + 磁盘：总比率：基于created_tmp_disk_tables除以created_tmp_tables的计算值。由于tmp_table_size或max_heap_table_size不足而在磁盘上创建的临时表的百分比。Monyog将这个数字显示为一个进度条和百分比，以便快速确定有多少磁盘用于临时表，而不是内存。
         + 通过设置tmp_table_size选项来增加一张临时表的大小，例如做高级GROUP BY操作生成的临时表。如果调高该值，MySQL同时将增加heap表的大小，可达到提高联接查询速度的效果，建议尽量优化查询，要确保查询过程中生成的临时表在内存中，避免临时表过大导致生成基于硬盘的MyISAM表。理想的配置是：Created_tmp_disk_tables / Created_tmp_tables * 100% <= 25%.默认为16M，可调到64-256最佳，线程独占，太大可能内存不够I/O堵塞
         + thread_cache_size:可以复用的保存在中的线程的数量。如果有，新的线程从缓存中取得，当断开连接的时候如果有空间，客户的线置在缓存中。如果有很多新的线程，为了提高性能可以这个变量值。通过比较 Connections和Threads_created状态的变量，可以看到这个变量的作用。默认值为110，可调优为80。
@@ -250,7 +246,7 @@ show  status like 'max_used_connections'; # 响应的连接数
 
 show full processlist; #
 
-show variables like 'key_buffer_size'; 
+show variables like 'key_buffer_size';
 show global status like 'key_read%'; # 请求在内存中没有找到直接从硬盘读取索引
 
 SHOW GLOBAL STATUS LIKE '%Threads_connected%';
@@ -382,10 +378,13 @@ USE db_name; # 可以不切换数据库的情况下操作数据表
 
 CREATE DATABASE IF NOT EXISTS db_name CHARSET utf8 COLLATE utf8_unicode_ci;  # 特殊符号、关键字表名加``
 ALTER DATABASE db_name charset=utf8;
+
 DROP DATABASE [IF EXISTS] db_name;
+
 SHOW CREATE DATABASE db_name;
 
 SHOW TABLES;
+
 # CREATE TABLE table_name(col_name  type  attribute , col_name  type  attribute,…… );
 CREATE TABLE test.news(
   id int NOT null AUTO_INCREMENT primary KEY,
@@ -500,7 +499,7 @@ TRUNCATE TABLE table_name;  # 删除表,重建同结构
     - 拆分TEXT/BLOB，TEXT类型处理性能远低于VARCHAR，强制生成硬盘临时表浪费更多空间。
 * 禁止使用外键，如果有外键完整性约束，需要应用程序控制：外键会导致表与表之间耦合，update与delete操作都会涉及相关联的表，十分影响sql 的性能，甚至会造成死锁。高并发情况下容易造成数据库性能，大数据高并发业务场景数据库使用以性能优先
 
-### Schema设计规范及SQL使用建议 
+### Schema设计规范及SQL使用建议
 
 * 所有的InnoDB表都设计一个无业务用途的自增列做主键，对于绝大多数场景都是如此，真正纯只读用InnoDB表的并不多，真如此的话还不如用TokuDB来得划算；
 * 字段长度满足需求前提下，尽可能选择长度小的。此外，字段属性尽量都加上NOT NULL约束，可一定程度提高性能；
@@ -882,14 +881,14 @@ select @@session.tx_isolation;
 select @@tx_isolation;
 
 start transaction; # 事物一
-insert into user(name) values('ziwenxie'); 
+insert into user(name) values('ziwenxie');
 
 set session transaction isolation level read uncommitted;
 # Read Uncommitted：事务二中会读取到事务一中没有commit的数据，这就是脏读。
 # Read Committed：事物一提交后影响到事务二的查询结果，前后查询的结果不一致
 # REPEATABLE-READ：事务二中无法读取到事务一中没有commit的数据
 start transaction; # 事物二
-select * from user; 
+select * from user;
 
 set session transaction isolation level repeatable read;
 
@@ -962,9 +961,9 @@ update t_goods  # 2.根据商品信息生成订单
 set status=2,version=version+1 # 3.修改商品status为2
 where id=#{id} and version=#{version};
 
-SELECT data AS old_data, version AS old_version FROM …; 
+SELECT data AS old_data, version AS old_version FROM …;
 # 根据获取的数据进行业务操作，得到new_data和new_version
-UPDATE SET data = new_data, version = new_version WHERE version = old_version 
+UPDATE SET data = new_data, version = new_version WHERE version = old_version
 if (updated row > 0) {
     // 乐观锁获取成功，操作完成
 } else {
@@ -1047,7 +1046,7 @@ $stmt->close();
 * UNIQUE 索引:相当于INDEX + Unique
 * FULLTEXT索引:只在MYISAM 存储引擎支持, 目的是全文索引，在VARCHAR或者TEXT类型的列上创建，在内容系统中用的多， 在全英文网站用多(英文词独立). 中文数据不常用，意义不大 国内全文索引通常 使用 sphinx 来完成.全文索引:fulltext是Myisam表特殊索引，从文本中找关键字不是直接和索引中的值进行比较
 * 组合索引：一个索引可以包括15个列。
-    - 建立多个单列索引，查询时和上述的组合索引效率也会大不一样，远远低于我们的组合索引。虽然此时有了三个索引，但MySQL只能用到其中的那个它认为似乎是最有效率的单列索引。 
+    - 建立多个单列索引，查询时和上述的组合索引效率也会大不一样，远远低于我们的组合索引。虽然此时有了三个索引，但MySQL只能用到其中的那个它认为似乎是最有效率的单列索引。
     - 最左前缀（Leftmost Prefixing）。假如有一个多列索引为key(firstname lastname age)，当搜索条件是以下各种列的组合和顺序时，MySQL将使用该多列索引：firstname，lastname，age  firstname，lastname firstname
     - (a,b,c)复合索引， ac 可以使用到索引
 * 如果是CHAR，VARCHAR类型，length可以小于字段实际长度；如果是BLOB和TEXT类型，必须指定 length
@@ -1055,14 +1054,14 @@ $stmt->close();
 合理的建立索引的建议：
 
 * 越小的数据类型通常更好：越小的数据类型通常在磁盘、内存和CPU缓存中都需要更少的空间，处理起来更快。
-* 在WHERE和JOIN中出现的列需要建立索引，但也不完全如此，因为MySQL只对<，<=，=，>，>=，BETWEEN，IN，以及某些时候的LIKE才会使用索引 
+* 在WHERE和JOIN中出现的列需要建立索引，但也不完全如此，因为MySQL只对<，<=，=，>，>=，BETWEEN，IN，以及某些时候的LIKE才会使用索引
 * 简单的数据类型更好：整型数据比起字符，处理开销更小，因为字符串的比较更复杂。在MySQL中，应该用内置的日期和时间数据类型，而不是用字符串来存储时间；以及用整型数据类型存储IP地址。
 * 尽量避免NULL：应该指定列为NOT NULL，除非你想存储NULL。在MySQL中，含有空值的列很难进行查询优化，因为它们使得索引、索引的统计信息以及比较运算更加复杂。你应该用0、一个特殊的值或者一个空串代替空值
-* 不使用NOT IN和<>操作 
-* 不要在列上进行运算  select * from users where YEAR(adddate)<2007; 将在每个行上进行运算，这将导致索引失效而进行全表扫描，因此我们可以改成 
-* like语句操作  一般情况下不鼓励使用like操作，如果非使用不可，如何使用也是一个问题。like “%aaa%” 不会使用索引而like “aaa%”可以使用索引。 
-* 索引列排序  MySQL查询只使用一个索引，因此如果where子句中已经使用了索引的话，那么order by中的列是不会使用索引的。因此数据库默认排序可以符合要求的情况下不要使用排序操作；尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引。 
-* 使用短索引  对串列进行索引，如果可能应该指定一个前缀长度。例如，如果有一个CHAR(255)的列，如果在前10个或20个字符内，多数值是惟一的，那么就不要对整个列进行索引。短索引不仅可以提高查询速度而且可以节省磁盘空间和I/O操作。 
+* 不使用NOT IN和<>操作
+* 不要在列上进行运算  select * from users where YEAR(adddate)<2007; 将在每个行上进行运算，这将导致索引失效而进行全表扫描，因此我们可以改成
+* like语句操作  一般情况下不鼓励使用like操作，如果非使用不可，如何使用也是一个问题。like “%aaa%” 不会使用索引而like “aaa%”可以使用索引。
+* 索引列排序  MySQL查询只使用一个索引，因此如果where子句中已经使用了索引的话，那么order by中的列是不会使用索引的。因此数据库默认排序可以符合要求的情况下不要使用排序操作；尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引。
+* 使用短索引  对串列进行索引，如果可能应该指定一个前缀长度。例如，如果有一个CHAR(255)的列，如果在前10个或20个字符内，多数值是惟一的，那么就不要对整个列进行索引。短索引不仅可以提高查询速度而且可以节省磁盘空间和I/O操作。
 * 单表索引建议控制在5个以内
 * 单索引字段数不允许超过5个：字段超过5个时，实际已经起不到有效过滤数据的作用了
 * 禁止在更新十分频繁、区分度不高的属性上建立索引
@@ -1070,12 +1069,12 @@ $stmt->close();
 #### 索引缺点
 
 * 虽然索引大大提高了查询速度，同时却会降低更新表的速度，如对表进行INSERT、UPDATE和DELETE。因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。
-* 建立索引会占用磁盘空间的索引文件。一般情况这个问题不太严重，但如果你在一个大表上创建了多种组合索引，索引文件的会膨胀很快。 
+* 建立索引会占用磁盘空间的索引文件。一般情况这个问题不太严重，但如果你在一个大表上创建了多种组合索引，索引文件的会膨胀很快。
 
 #### B+Tree树结构的索引规则
 
 B-tree 索引:大多数谈及的索引类型就是B-tree类型, 可以在create table 和其他命令使用它 myisam使用前缀压缩以减小索引，Innodb不会压缩索引，myiam索引按照行存储物理位置引用被索引的行，Innodb按照主键值引用行，B-tree数据存储是有序的，按照顺序保存了索引的列，加速了数据访问，存储引擎不会扫描整个表得到需要的数据。
-  
+
 * 使用B-tree索引的查询类型，很好用于全键值、键值范围或键前缀查找，只有在超找使用了索引的最左前缀的时候才有用。只访问索引的查询：B-tree支持只访问索引的查询，不会访问行
 * 查找没有送索引列的最左边开始,没有什么用处;不能跳过索引的列;
 * 前缀索引：索引很长的字符列，这会增加索引的存储空间以及降低索引的效率。选择字符列的前n个字符作为索引，这样可以大大节约索引空间，从而提高索引效率。要选择足够长的前缀以保证高的选择性，同时又不能太长。无法使用前缀索引做ORDER BY 和 GROUP BY以及使用前缀索引做覆盖扫描。
@@ -1104,13 +1103,13 @@ show index from table_name;
 show keys from table_name;
 desc table_Name;
 
-CREATE TABLE user_test( 
-  id int AUTO_INCREMENT PRIMARY KEY, 
+CREATE TABLE user_test(
+  id int AUTO_INCREMENT PRIMARY KEY,
   user_name varchar(30) NOT NULL,
-  sex bit(1) NOT NULL DEFAULT b'1', 
-  city varchar(50) NOT NULL,  
+  sex bit(1) NOT NULL DEFAULT b'1',
+  city varchar(50) NOT NULL,
   age int NOT NULL,
-  PRIMARY KEY(ID)  
+  PRIMARY KEY(ID)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE user_test ADD INDEX idx_user(name(10) , city , age); # 因为一般情况下名字的长度不会超过10，这样会加速索引查询速度，还会减少索引文件的大小，提高INSERT的更新速度。
 
@@ -1232,7 +1231,7 @@ CMD ["mysqld"]
 ### xmysql
 
 ```shell
-npm install -g xmysql 
+npm install -g xmysql
 xmysql -h localhost -u mysqlUsername -p mysqlPassword -d databaseName
 http://localhost:3000
 ```
@@ -1260,11 +1259,11 @@ MySQL Proxy的主要作用是用来做负载均衡，数据库读写分离的。
 
 启动MySQL Proxy的时候，加载一个Lua脚本，对每一个进入的query或者insert之类的语句做一次安全检查，甚至替换查询中的某些内容，这样在程序员的 程序中忘记了过滤参数的情况下，还有最后一道防线可用。而且由于是Lua这样的动态脚本语言，在开发，修正，部署方面都会有极大的灵活性。
 
-* connect_server() — 这个函数每次client连接的时候被调用，可以用这个函数来处理负载均衡，决定当前的请求发给那个后台的服务器，如果没有指定这个函数，那么就会采用简单的轮询机制。 
-* read_handshake() — 这个函数在server返回初始握手信息时被调用，可以调用这个函数在验证信息发给服务器前进行额外的检查。 
-* read_auth() — client发送验证信息给服务器的时候会调用这个函数。 
-* read_auth_result() — 服务器验证信息返回后调用这个函数。 
-* read_query() — 每次client发送查询请求函数的时候被调用，可以用这个函数进行查询语句的预处理，过滤掉非预期的查询等等，这个是最常用的函数。 
+* connect_server() — 这个函数每次client连接的时候被调用，可以用这个函数来处理负载均衡，决定当前的请求发给那个后台的服务器，如果没有指定这个函数，那么就会采用简单的轮询机制。
+* read_handshake() — 这个函数在server返回初始握手信息时被调用，可以调用这个函数在验证信息发给服务器前进行额外的检查。
+* read_auth() — client发送验证信息给服务器的时候会调用这个函数。
+* read_auth_result() — 服务器验证信息返回后调用这个函数。
+* read_query() — 每次client发送查询请求函数的时候被调用，可以用这个函数进行查询语句的预处理，过滤掉非预期的查询等等，这个是最常用的函数。
 * read_query_result() — 查询结果返回是调用的函数，可以进行结果集处理。
 
 ## 维护
@@ -1283,7 +1282,7 @@ MySQL Proxy的主要作用是用来做负载均衡，数据库读写分离的。
 
 ### 主从复制
 
-MySQL 在每个事务更新数据之前，由 Master 将事务串行的写入二进制日志，即使事务中的语句都是交叉执行的，之后通知存储引擎提交事务。MySQL支持三种复制方式，实现了Data Distribution、Load Balancing、Backups、High Availability and Failover等特性。 
+MySQL 在每个事务更新数据之前，由 Master 将事务串行的写入二进制日志，即使事务中的语句都是交叉执行的，之后通知存储引擎提交事务。MySQL支持三种复制方式，实现了Data Distribution、Load Balancing、Backups、High Availability and Failover等特性。
 
 * 基于语句复制：在主服务器上执行的SQL语句，在从服务器上执行同样的语句。MySQL默认采用基于语句的复制，效率比较高。
 * 基于行复制：MySQL5.0开始支持把改变的内容复制过去，而不是把命令在从服务器上执行一遍。
@@ -1341,12 +1340,12 @@ sudo apt-get install mysql-proxy
 ## 参考
 
 * [HOW TO INSTALL MYSQL NDB CLUSTER ON LINUX](https://clusterengine.me/how-to-install-mysql-ndb-cluster-on-linux/)
-* [索引性能分析](http://draveness.me/sql-index-performance.html) 
+* [索引性能分析](http://draveness.me/sql-index-performance.html)
 * [MySQL主从同步](http://geek.csdn.net/news/detail/236754)
 * [MySQL数据库事务隔离级别介绍](http://www.jb51.net/article/49596.htm)
 * 高性能mysql
 * [使用 Docker 完成 MySQL 数据库主从配置](https://juejin.im/post/59fd71c25188254dfa1287a9)
-* [alibaba/AliSQL](https://github.com/alibaba/AliSQL/wiki):AliSQL is a MySQL branch originated from Alibaba Group. Fetch document from Release Notes at bottom. 
+* [alibaba/AliSQL](https://github.com/alibaba/AliSQL/wiki):AliSQL is a MySQL branch originated from Alibaba Group. Fetch document from Release Notes at bottom.
 
 ## 工具
 

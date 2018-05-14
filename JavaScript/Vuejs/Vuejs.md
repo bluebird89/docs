@@ -28,7 +28,7 @@ Vue实例实质上就是MVVM模式（Model-View-ViewModel），每个Vue实例�
 var data = { a: 1 }
 var vm = new Vue({
     el:'#example',
-    data: data,  
+    data: data,
      created: function () {
         // `this` points to the vm instance
         console.log('a is: ' + this.a)
@@ -103,6 +103,12 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 ### 添加插件
 
 - package.json中添加"stylus-loader": "^1.4.0"，npm install安装插件
+
+## 渲染
+
+### 服务器端渲染（Server side rendering SSR）
+
+
 
 ## 组件
 
