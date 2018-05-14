@@ -418,7 +418,6 @@ $str=strrev("My name is Yiibai"); # lcfirst
 
 $len=strlen("My name is Yiibai");
 
-
 $str = preg_replace_callback(
     '/([a-z]*)([A-Z]*)/',
     function($matchs){
@@ -466,6 +465,11 @@ echo $bar;//Notice: Undefined variable: bar
 * 三元运算符：`?:`
 
 ```php
+// 涉及数字比较，优先转化为数字
+var_dump('abcd' == 0);
+var_dump(0 == 'abcd');
+var_dump('0' == 'abcd');
+
 define("READ", 1);
 define("WRITE", 2);
 define("DELETE", 4);
