@@ -17,8 +17,6 @@
   - Acer Chromebook R11
   - 明基爱眼显示器EW2775ZH
 
-- 笔记：带标签功能，并且可以聚合统计
-
 ##  生态
 
 ### apple
@@ -29,15 +27,22 @@
 
 ### Note
 
+笔记：带标签功能，并且可以聚合统计
+
 * [Paper](http://www.fiftythree.com/):优雅，美观，做笔记，记录灵感
+* [语雀](https://yuque.com/)
+* [腾讯文档](https://docs.qq.com/)
 
 ### 管理与沟通
 
 * WhatsApp 和 Slack 用来沟通
-* trello：以看版为基础任务管理系统 或者Teambition
+* trello：以看版为基础任务管理系统
+* Teambition
 * Asana asana.com
 
-### 阅读分类：概念用文档整理，结构化用思维导图（不宜太详细）
+### 阅读分类
+
+概念用文档整理，结构化用思维导图（不宜太详细）
 
 * RSS(Really Simple Syndication)
   - The Old Reader
@@ -63,10 +68,14 @@
 * MindNode mindnode.com
 * 一起写 yiqixie.com
 
+## 编辑器
+
+* [Etherpad](http://etherpad.org/):老牌的多人实时编辑协同工具。
+
 ### 表单
 
-金数据 jinshuju.net
-MailChimp mailchimp.com
+* 金数据 jinshuju.net
+* MailChimp mailchimp.com
 
 ## 技能
 

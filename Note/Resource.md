@@ -69,7 +69,7 @@
 
 ## Blog
 
-[没有了老师，该如何学习？](http://www.cnblogs.com/qianqian-li/p/6028745.html)
+* [没有了老师，该如何学习？](http://www.cnblogs.com/qianqian-li/p/6028745.html)
 
 ## Video
 

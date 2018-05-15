@@ -162,7 +162,7 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 
 区块链有三个重要特征：不可变性，溯源和分布式共识。
 
-<https://medium.freecodecamp.org/how-does-blockchain-really-work-i-built-an-app-to-show-you-6b70cd4caf7d> 
+<https://medium.freecodecamp.org/how-does-blockchain-really-work-i-built-an-app-to-show-you-6b70cd4caf7d>
 <https://www.zhihu.com/question/27687960/answer/84583016>
 
 
@@ -173,4 +173,5 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 
 ## 参考
 
-* [chaozh/awesome-blockchain](https://github.com/chaozh/awesome-blockchain):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料 
+* [chaozh/awesome-blockchain](https://github.com/chaozh/awesome-blockchain):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料
+* [yukimotopress/programming-blockchains-step-by-step](https://github.com/yukimotopress/programming-blockchains-step-by-step):Programming Blockchains Step-by-Step book / guide. Let's build blockchains from scratch (zero) step by step. Let's start with crypto hashes... (Book Edition) by Gerald Bauer, et al
