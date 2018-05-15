@@ -93,7 +93,29 @@
     - ? Show help
 
 ## 配置
+
 chrome://net-internals/#hsts
+
+## 技巧
+
+* Ctrl键或Cmd并点链接：打开一个新的标签页而不离开现有的页面
+* Shift键或Cmd并点链接：在一个全新的窗口中打开一个链接
+* 空格键向下滚动一个完整的页面长度 Shift键和空格键：相反操作
+* Ctrl键或Cmd+Shift+T：重新打开你最近关闭的标签
+* Ctrl+Shift+D：打开一堆选项卡并想把这些页面都保存起来
+* 选中词汇右键搜索或者拖动到地址栏
+* 点击链接拖动到书签栏
+* Chrome://restart 重启浏览器
+* chrome://extensions/shortcuts ： 快捷方式
+* 地址栏中输入文件夹路径：当作文件浏览器
+* Ctrl或Cmd+H或在地址栏中键入Chrome://history:打开你的浏览记录
+* 自定义搜索引擎功能:“cs”作为关键字，将chrome://settings设置为URL
+    - gmail.com”或其他缩写作为关键字，以及将“https://mail.google.com/mail/ca/u/0/#search/%s”设置为URL
+
+```
+# 粘贴到地址栏并保存书签，对文本格式化操作
+data:text/html;charset=utf-8, <title>Scratchpad</title><style>body {padding: 5%; font-size: 1.5em; font-family: Arial; }”></style><link rel=”shortcut icon” href=”https://ssl.gstatic.com/docs/documents/images/kix-favicon6.ico”/><body OnLoad=’document.body.focus();’ contenteditable spellcheck=”true” >
+```
 
 ## Developer Tools
 

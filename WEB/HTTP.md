@@ -5,9 +5,9 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
 * TCP/IP协议是传输层协议，主要解决数据如何在网络中传输
 * HTTP是应用层协议，主要解决如何包装数据。HTTP协议详细规定了浏览器与服务器之间相互通信的规则，是万维网交换信息的基础。
 * 无状态的协议。针对其无状态特性，在实际应用中又需要有状态的形式，因此一般会通过session/cookie技术来解决此问题。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。
-* HTTP 是媒体独立的：只要客户端和服务器知道如何处理的数据内容，任何类型的数据都可以通过 HTTP 发送。客户端以及服务器指定使用适合的 MIME-type 内容类型。 
+* HTTP 是媒体独立的：只要客户端和服务器知道如何处理的数据内容，任何类型的数据都可以通过 HTTP 发送。客户端以及服务器指定使用适合的 MIME-type 内容类型。
 * HTTP是基于请求-响应形式并且是短连接，客户端发送的每次请求都需要服务器回送响应，在请求结束后，会主动释放连接（无连接）
-    * 从建立连接到关闭连接的过程称为"一次连接"。在HTTP 1.1中则可以在一次连接中处理多个请求，并且多个请求可以重叠进行，不需要等待一个请求结束后再发送下一个请求。 
+    * 从建立连接到关闭连接的过程称为"一次连接"。在HTTP 1.1中则可以在一次连接中处理多个请求，并且多个请求可以重叠进行，不需要等待一个请求结束后再发送下一个请求。
     * 由于HTTP在每次请求结束后都会主动释放连接，因此HTTP连接是一种"短连接"，要保持客户端程序的在线状态，需要不断地向服务器发起连接请求。
     * 通常的做法是即时不需要获得任何数据，客户端也保持每隔一段固定的时间向服务器发送一次"保持连接"的请求，服务器在收到该请求后对客户端进行回复，表明知道客户端"在线"。
     * 若服务器长时间无法收到客户端的请求，则认为客户端"下线"，若客户端长时间无法收到服务器的回复，则认为网络已经断开。
@@ -31,21 +31,20 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
 * application/json:支持比键值对复杂得多的结构化数据:php 就无法通过 $_POST 对象从上面的请求中获得内容,从 php://input 里获得原始输入流，再 json_decode 成对象
 * text/xml:XML 作为编码方式的远程调用规范。
 
-
 ```
-POST http://www.example.com HTTP/1.1 
-Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA 
+POST http://www.example.com HTTP/1.1
+Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA
 
-------WebKitFormBoundaryrGKCBY7qhFd3TrwA 
-Content-Disposition: form-data; name="text" 
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA
+Content-Disposition: form-data; name="text"
 
-title 
-------WebKitFormBoundaryrGKCBY7qhFd3TrwA 
-Content-Disposition: form-data; name="file"; filename="chrome.png" 
-Content-Type: image/png 
+title
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA
+Content-Disposition: form-data; name="file"; filename="chrome.png"
+Content-Type: image/png
 
-PNG ... content of chrome.png ... 
-------WebKitFormBoundaryrGKCBY7qhFd3TrwA-- 
+PNG ... content of chrome.png ...
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA--
 ```
 
 #### GET与POST的区别
@@ -286,14 +285,14 @@ dig math.stackexchange.com
 ; <<>> DiG 9.10.6 <<>> math.stackexchange.com # 查询参数和统计
 ;; global options: +cmd
 ;; Got answer:
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 14912
+
 ;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 0
 
 ;; QUESTION SECTION: # 查询内容：域名的A记录
 ;math.stackexchange.com.        IN  A
-
+;; ->>HEADER<< - opcode: QUERY, status: NOERROR, id: 14912
 ;; ANSWER SECTION: # 服务器答复:有四个A记录，即四个IP地址。600是TTL值（Time to live 的缩写），表示缓存时间，即600秒之内不用重新查询。
-math.stackexchange.com. 300 IN  A   151.101.65.69 
+math.stackexchange.com. 300 IN  A   151.101.65.69
 math.stackexchange.com. 300 IN  A   151.101.1.69
 math.stackexchange.com. 300 IN  A   151.101.193.69
 math.stackexchange.com. 300 IN  A   151.101.129.69
@@ -321,20 +320,20 @@ whois github.com # 用来查看域名的注册情况
 ### CORS
 
 ```php
-// server 
-$origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';  
-  
-$allow_origin = array(  
+// server
+$origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';
+
+$allow_origin = array(
     'http://client1.runoob.com',
     'http://client2.runoob.com'
-);  
-  
-if(in_array($origin, $allow_origin)){  
+);
+
+if(in_array($origin, $allow_origin)){
     header('Access-Control-Allow-Origin:'.$origin);
-} 
+}
 
 # 允许所有域名访问则只需在http://server.runoob.com/server.php文件头部添加如下代码：
-header('Access-Control-Allow-Origin:*'); 
+header('Access-Control-Allow-Origin:*');
 ```
 
 ## HTTTPS
@@ -354,6 +353,21 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 ## Token
 
 访问令牌（Access token）表示访问控制操作主体的系统对象
+
+## 工具
+
+[cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest):DNS Performance test
+
+
+```sh
+sudo apt-get install bc dnsutils
+
+git clone --depth=1 https://github.com/cleanbrowsing/dnsperftest/
+cd dnsperftest
+
+bash ./dnstest.sh
+bash ./dnstest.sh |sort -k 22 -n
+```
 
 ## 参考
 
