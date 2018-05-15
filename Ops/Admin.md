@@ -5,7 +5,6 @@
 ### 登录
 
 
-
 ## 扩展
 
 * [apache/mesos](https://github.com/apache/mesos):a cluster manager that provides efficient resource isolation and sharing across distributed applications, or frameworks. It can run Hadoop, Jenkins, Spark, Aurora, and other frameworks on a dynamically shared pool of nodes.
@@ -16,6 +15,24 @@
 
 Trello->Github->Jira-> Asana
 
+
+## [tabler/tabler](https://github.com/tabler/tabler)
+
+Tabler is free and open-source HTML Dashboard UI Kit built on Bootstrap 4 https://tabler.github.io/
+
+```sh
+git clone https://github.com/tabler/tabler.git
+
+cd tabler
+npm install
+
+gem install bundler
+bundle install
+
+npm run serve
+#  http://localhost:4000
+```
+
 ## 参考
 
 * [kahun/awesome-sysadmin](https://github.com/kahun/awesome-sysadmin)
@@ -24,3 +41,4 @@ Trello->Github->Jira-> Asana
 * [ant-design/ant-design-pro](https://github.com/ant-design/ant-design-pro): 👨🏻‍💻👩🏻‍💻 An out-of-box UI solution for enterprise applications http://pro.ant.design/
 * [akveo/ngx-admin](https://github.com/akveo/ngx-admin):Admin dashboard template based on Angular 5+, Bootstrap 4 (previously known as ng2-admin) http://akveo.com/ngx-admin/
 * [PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin): 🎉 A magical vue admin http://panjiachen.github.io/vue-element-admin
+* [withspectrum/spectrum](https://github.com/withspectrum/spectrum):Simple, powerful online communities. https://spectrum.chat

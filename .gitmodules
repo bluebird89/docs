@@ -28,3 +28,6 @@
 [submodule "Architect/architect-awesome"]
 	path = Architect/architect-awesome
 	url = git@github.com:xingshaocheng/architect-awesome.git
+[submodule "Review/coding-interview-university"]
+	path = Review/coding-interview-university
+	url = git@github.com:jwasham/coding-interview-university.git

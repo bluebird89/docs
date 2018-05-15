@@ -2621,6 +2621,7 @@ try {
 * [facebook/immutable-js](https://github.com/facebook/immutable-js):Immutable persistent data collections for Javascript which increase efficiency and simplicity. http://facebook.github.io/immutable-js/
 * [babel/babel](https://github.com/babel/babel):🐠 Babel is a compiler for writing next generation JavaScript. https://babeljs.io/
 * [GoogleChrome/workbox](https://github.com/GoogleChrome/workbox):package Workbox: JavaScript libraries for Progressive Web Apps https://developers.google.com/web/tools/workbox
+* [yaronn/blessed-contrib](https://github.com/yaronn/blessed-contrib):Build terminal dashboards using ascii/ansi art and javascript
 
 ## 扩展
 
