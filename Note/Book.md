@@ -275,6 +275,10 @@
 * 《[Objective-C高级编程](https://www.amazon.cn/gp/product/B00DE60G3S)》
 * 《[Effective Objective-C 2.0：编写高质量iOS与OS X代码的52个有效方法](https://www.amazon.cn/gp/product/B00IDSGY06)》
 
+### React Native
+
+* React Native入门与实战
+
 ## 机器学习和数据挖掘
 
 * 《[数据之巅](https://www.amazon.cn/gp/product/B00JUE9DXW)》
