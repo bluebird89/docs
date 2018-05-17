@@ -213,19 +213,25 @@ Flexbox解决了什么问题？
 - Web端通过ajax调用接口，使用JS把数据渲染到页面上
 - 数据结构和业务逻辑混淆在一起
 
-## 参考
+## [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app)
 
-* [fangwei716/30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
-* [kdchang/reactjs101](https://github.com/kdchang/reactjs101):從零開始學 ReactJS（ReactJS 101）是一本希望讓初學者一看就懂的 ReactJS 中文入門教學書，由淺入深學習 ReactJS 生態系 (Flux, Redux, React Router, ImmutableJS, React Native, Relay/GraphQL etc.)。 https://www.gitbook.com/book/kdchang/…
-* [Reactjs docs](https://reactjs.org/docs/hello-world.html)
-* [reactjs/react-basic](https://github.com/reactjs/react-basic):A description of the conceptual model of React without implementation burden.
-* [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
-* [React Native的极简手册](http://www.jianshu.com/p/318342e139c7) 没看懂
-* [xgrommx/awesome-redux](https://github.com/xgrommx/awesome-redux):Awesome list of Redux examples and middlewares
-* [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
-* [reactnativecn/react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
-* [styleguidist/react-styleguidist](https://github.com/styleguidist/react-styleguidist):Isolated React component development environment with a living style guide https://react-styleguidist.js.org/
-* [wojtekmaj/react-lifecycle-methods-diagram](https://github.com/wojtekmaj/react-lifecycle-methods-diagram):Interactive React lifecycle methods diagram. http://projects.wojtekmaj.pl/react-li…
+Create React apps with no build configuration.
+
+```sh
+npm install -g create-react-app
+
+create-react-app my-app
+cd my-app/
+npm start
+npm run eject #  导出配置文件
+```
+
+
+## 测试
+
+使用Airbnb团队开发的enzyme，它也可以与其他测试工具如Jest、Mocha等配合使用。由于Jest是Facebook开发并且是在Jasmine测试框架上演变而来的，断言格式我们比较熟悉，因此大家可能更容易上手。Jest的目标是减少测试一个项目所要花费的时间和认知负荷，它提供了大部分我们需要的现成工具：快速的命令行接口、Mock工具集以及它的自动模块Mock系统，总的来说就是让测试变得更简单。
+
+- [airbnb/enzyme](https://github.com/airbnb/enzyme):JavaScript Testing utilities for React http://airbnb.io/enzyme/
 
 ## 工具
 
@@ -250,9 +256,28 @@ Flexbox解决了什么问题？
 * [jaredpalmer/formik](https://github.com/jaredpalmer/formik):Build forms in React, without the tears sob https://npm.im/formik
 * [Hacker0x01/react-datepicker](https://github.com/Hacker0x01/react-datepicker):A simple and reusable datepicker component for React https://reactdatepicker.com/
 * [ptmt/react-native-macos](https://github.com/ptmt/react-native-macos):React Native for macOS is an experimental fork for writing desktop apps using Cocoa
+* [GeekyAnts/NativeBase](https://github.com/GeekyAnts/NativeBase):Essential cross-platform UI components for React Native https://nativebase.io/
+* [oblador/react-native-vector-icons](https://github.com/oblador/react-native-vector-icons):Customizable Icons for React Native with support for NavBar/TabBar/ToolbarAndroid, image source and full styling.
+* [rt2zz/redux-persist](https://github.com/rt2zz/redux-persist):persist and rehydrate a redux store
+* [react-navigation/react-navigation](https://github.com/react-navigation/react-navigation):Routing and navigation for your React Native apps https://reactnavigation.org
+* [necolas/react-native-web](https://github.com/necolas/react-native-web):React Native for Web
+* [react-native-training/react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit
+* [markerikson/react-redux-links](https://github.com/markerikson/react-redux-links):Curated tutorial and resource links I've collected on React, Redux, ES6, and more
 
-## 资源
+## 参考
 
+* [facebook/react](https://github.com/facebook/react):A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
+* [fangwei716/30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
+* [kdchang/reactjs101](https://github.com/kdchang/reactjs101):從零開始學 ReactJS（ReactJS 101）是一本希望讓初學者一看就懂的 ReactJS 中文入門教學書，由淺入深學習 ReactJS 生態系 (Flux, Redux, React Router, ImmutableJS, React Native, Relay/GraphQL etc.)。 https://www.gitbook.com/book/kdchang/…
+* [Reactjs docs](https://reactjs.org/docs/hello-world.html)
+* [reactjs/react-basic](https://github.com/reactjs/react-basic):A description of the conceptual model of React without implementation burden.
+* [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
+* [React Native的极简手册](http://www.jianshu.com/p/318342e139c7) 没看懂
+* [xgrommx/awesome-redux](https://github.com/xgrommx/awesome-redux):Awesome list of Redux examples and middlewares
+* [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
+* [reactnativecn/react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
+* [styleguidist/react-styleguidist](https://github.com/styleguidist/react-styleguidist):Isolated React component development environment with a living style guide https://react-styleguidist.js.org/
+* [wojtekmaj/react-lifecycle-methods-diagram](https://github.com/wojtekmaj/react-lifecycle-methods-diagram):Interactive React lifecycle methods diagram. http://projects.wojtekmaj.pl/react-li…
 * [facebook/react-native](https://github.com/facebook/react-native):A framework for building native apps with React. http://facebook.github.io/react-native/
 * [网站](http://facebook.github.io/react-native/)
 * [react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit https://react-native-training.github.…
@@ -267,12 +292,14 @@ Flexbox解决了什么问题？
 * [react-native-macos](https://github.com/ptmt/react-native-macos)
 * [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
 * [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit):Get started with React, Redux, and React-Router.
-* [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app):Create React apps with no build configuration.
 * [vasanthk/react-bits](https://github.com/vasanthk/react-bits):✨ React patterns, techniques, tips and tricks ✨ https://vasanthk.gitbooks.io/react-bits
 * [react-pxq](https://github.com/bailicangdu/react-pxq)一个 react + redux 的完整项目 和 个人总结
 * [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
 * [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.
 * [zeit/next.js](https://github.com/zeit/next.js):Framework for server-rendered React apps https://zeit.co/blog/next4
+* [vhpoet/react-native-styling-cheat-sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet):Most of the React Native styling material in one page
+* [kriasoft/react-starter-kit](https://github.com/kriasoft/react-starter-kit):React Starter Kit — isomorphic web app boilerplate (Node.js, Express, GraphQL, React.js, Babel, PostCSS, Webpack, Browsersync) https://reactstarter.com
+* [erikras/react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example):A starter boilerplate for a universal webapp using express, react, redux, webpack, and react-transform
 
 ## 项目
 
@@ -281,20 +308,3 @@ Flexbox解决了什么问题？
 * [JonJam/yorpw_ui_web](https://github.com/JonJam/yorpw_ui_web):Password manager SPA built using React and Redux
 * [JonJam/react-redux-ts](https://github.com/JonJam/react-redux-ts):React/Redux TypeScript starter project
 * [taikongfeizhu/webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
-
-## 测试
-
-使用Airbnb团队开发的enzyme，它也可以与其他测试工具如Jest、Mocha等配合使用。由于Jest是Facebook开发并且是在Jasmine测试框架上演变而来的，断言格式我们比较熟悉，因此大家可能更容易上手。Jest的目标是减少测试一个项目所要花费的时间和认知负荷，它提供了大部分我们需要的现成工具：快速的命令行接口、Mock工具集以及它的自动模块Mock系统，总的来说就是让测试变得更简单。
-
-- [airbnb/enzyme](https://github.com/airbnb/enzyme):JavaScript Testing utilities for React http://airbnb.io/enzyme/
-
-## create-react-app
-
-```sh
-npm install -g create-react-app
-
-create-react-app my-app
-cd my-app/
-npm start
-npm run eject #  导出配置文件
-```
