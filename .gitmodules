@@ -31,3 +31,12 @@
 [submodule "Review/coding-interview-university"]
 	path = Review/coding-interview-university
 	url = git@github.com:jwasham/coding-interview-university.git
+[submodule "Front_end/front-end-guide"]
+	path = Front_end/front-end-guide
+	url = git@github.com:grab/front-end-guide.git
+[submodule "JavaScript/Vuejs/awesome-vue"]
+	path = JavaScript/Vuejs/awesome-vue
+	url = git@github.com:vuejs/awesome-vue.git
+[submodule "Note/free-programming-books"]
+	path = Note/free-programming-books
+	url = git@github.com:justjavac/free-programming-books-zh_CN.git

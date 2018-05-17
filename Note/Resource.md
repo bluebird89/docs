@@ -69,7 +69,7 @@
 * xmind：结构化整理
 * 记录：豆瓣读书、电影评论
 * github：代码的整理
-* Goole  keep
+* Goole keep
 * notes
 
 ## 阅读
@@ -145,6 +145,7 @@
 * [Masterclass](https://www.masterclass.com/):可以向凯文·史派西学表演，向安妮·莱博维茨学摄影
 * [Treehouse](https://teamtreehouse.com/):学习编程等互联网技能
 * [Playground](https://www.apple.com/swift/playgrounds/):ipad上学习swift的游戏
+* [freecodecamp](https://www.freecodecamp.org/):Learn to code for free.
 
 ## 管理与沟通
 
@@ -160,7 +161,7 @@
 
 ### office
 
-* google docs [表单](https://docs.google.com/forms/u/0/)
+* Google Docs [表单](https://docs.google.com/forms/u/0/)
 * libre
 * [Keynote](https://www.apple.com/cn/keynote/)
 
@@ -172,7 +173,11 @@
 
 ## 编辑器
 
-* [Etherpad](http://etherpad.org/):老牌的多人实时编辑协同工具。
+* [Etherpad](http://etherpad.org/):老牌的多人实时编辑协同工具
+* Sublime Text
+* WebStorm
+* Brackets
+* Atom
 
 ### 表单
 

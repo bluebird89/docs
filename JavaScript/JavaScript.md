@@ -217,15 +217,12 @@ arr[0]; // 返回索引为0的元素，即1
 arr[5]; // 返回索引为5的元素，即true
 arr[6]; // 索引超出了范围，返回undefined
 
-arr.length = 7;
-arr; // arr变为[1, 2, 3.14, 'Hello', null, true, undefined]
-arr.length = 2;
-arr; // arr变为[1, 2]
+arr.length = 7; // arr变为[1, 2, 3.14, 'Hello', null, true, undefined]
+arr.length = 2; // arr变为[1, 2]
 
 arr[1] = 99;  // 修改值
 
-arr[5] = 'x';
-arr; // arr变为[1, 2, 3, undefined, undefined, 'x']
+arr[5] = 'x'; // arr变为[1, 2, 3, undefined, undefined, 'x']
 
 arr.indexOf(30); // 元素30没有找到，返回-1
 arr.indexOf('30'); // 元素'30'的索引为2
@@ -236,24 +233,16 @@ arr.slice(3); // 从索引3开始到结束: ['D', 'E', 'F', 'G']
 var aCopy = arr.slice();
 
 var arr = [1, 2];
-arr.push('A', 'B'); // 返回Array新的长度: 4
-arr; // [1, 2, 'A', 'B']
-arr.pop(); // pop()返回'B'
-arr; // [1, 2, 'A']
-arr.pop(); arr.pop(); arr.pop(); // 连续pop 3次
-arr; // []
+arr.push('A', 'B'); // 返回Array新的长度: 4 [1, 2, 'A', 'B']
+arr.pop(); // pop()返回'B' [1, 2, 'A']
+arr.pop(); arr.pop(); arr.pop(); // 连续pop 3次  []
 arr.pop(); // 空数组继续pop不会报错，而是返回undefined
-arr; // []
 
 var arr = [1, 2];
-arr.unshift('A', 'B'); // 返回Array新的长度: 4
-arr; // ['A', 'B', 1, 2]
-arr.shift(); // 'A'
-arr; // ['B', 1, 2]
-arr.shift(); arr.shift(); arr.shift(); // 连续shift 3次
-arr; // []
-arr.shift(); // 空数组继续shift不会报错，而是返回undefined
-arr; // []
+arr.unshift('A', 'B'); // 返回Array新的长度: 4  ['A', 'B', 1, 2]
+arr.shift(); // 'A' ['B', 1, 2]
+arr.shift(); arr.shift(); arr.shift(); // 连续shift 3次  []
+arr.shift(); // 空数组继续shift不会报错，而是返回undefined []
 
 ar arr = ['Microsoft', 'Apple', 'Yahoo', 'AOL', 'Excite', 'Oracle'];
 // 从索引2开始删除3个元素,然后再添加两个元素:
@@ -284,7 +273,7 @@ mycars[2] = "BMW"
 
 for (x in mycars)
 {
-document.write(mycars[x] + "<br />")
+    document.write(mycars[x] + "<br />")
 }
 ```
 
@@ -599,19 +588,19 @@ do {
 
 var txt="";
 function message()
-{
-try
-  {
-  adddlert("Welcome guest!");
-  }
-catch(err)
-  {
-  txt="There was an error on this page.\n\n";
-  txt+="Error description: " + err.message + "\n\n";
-  txt+="Click OK to continue.\n\n";
-  alert(txt);
-  }
-}
+    {
+    try
+      {
+        adddlert("Welcome guest!");
+      }
+    catch(err)
+      {
+          txt="There was an error on this page.\n\n";
+          txt+="Error description: " + err.message + "\n\n";
+          txt+="Click OK to continue.\n\n";
+          alert(txt);
+      }
+    }
 ```
 
 ### Map Set iterable(ES6标准新增的数据类型)
@@ -1093,8 +1082,7 @@ fib(10); // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 // fib(5)仅仅是创建了一个generator对象，还没有去执行它。
 // 调用generator对象有两个方法，一是不断地调用generator对象的next()方法
 function* fib(max) {
-    var
-        t,
+    var t,
         a = 0,
         b = 1,
         n = 1;
@@ -1338,7 +1326,6 @@ Math.LN2 // 2 的自然对数
 Math.LN10
 Math.LOG2E
 Math.LOG10E
-
 ```
 
 ### JSON JavaScript Object Notation
@@ -1819,7 +1806,7 @@ function checkCookie()
 <script>
 function changetext(id)
 {
-id.innerHTML="谢谢!";
+    id.innerHTML="谢谢!";
 }
 document.getElementById("myBtn").onclick=function(){displayDate()};
 </script>
@@ -1982,6 +1969,7 @@ if (!filename || !(filename.endsWith('.jpg') || filename.endsWith('.png') || fil
     return false;
 }
 ```
+
 ```html
 
 <form method="post" action="http://localhost/test" enctype="multipart/form-data">
@@ -2327,8 +2315,6 @@ then(function( fromLatLng, toLatLng ) {
     getRoute( fromLatLng, toLatLng ).then( doSomethingCoolWithDirections );
 });
 ```
-* [Javascript异步编程的4种方法](http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html)
-* [JavaScript异步编程](http://www.cnblogs.com/hustskyking/p/javascript-asynchronous-programming.html)
 
 ### Canvas
 
@@ -2542,13 +2528,6 @@ try {
 * jQuery
 * [Underscore.js](http://underscorejs.org/)
 
-### IDE：
-
-* Sublime Text
-* WebStorm
-* Brackets
-* Atom
-
 ### 代码整理工具：
 
 * JSLint
@@ -2574,21 +2553,10 @@ try {
 
 ## style guide
 
-* [airbnb/javascript](https://github.com/airbnb/javascript)
+* [airbnb/javascript](https://github.com/airbnb/javascript):JavaScript Style Guide
+* [standard/standard](https://github.com/standard/standard):🌟 JavaScript Style Guide, with linter & automatic code fixer https://standardjs.com
 * JSHint
 * JSLint
-
-## 资源
-
-* [JavaScript深入系列15篇](https://juejin.im/post/59278e312f301e006c2e1510)
-* [sorrycc/awesome-javascript](https://github.com/sorrycc/awesome-javascript):🐢 A collection of awesome browser-side JavaScript libraries, resources and shiny things.
-* [jobbole/awesome-javascript-cn](https://github.com/jobbole/awesome-javascript-cn):JavaScript 资源大全中文版，内容包括：包管理器、加载器、测试框架、运行器、QA、MVC框架和库、模板引擎等
-* [avajs/ava](https://github.com/avajs/ava)Futuristic JavaScript test runner
-* [moon](http://moonjs.ga/docs/getting-started.html)
-* [JavaScript文档](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-* [mbeaudru/modern-js-cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet):Cheatsheet for the JavaScript knowledge you will frequently encounter in modern projects. https://mbeaudru.github.io/modern-js-…
-* [getify/You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter.
-* [kamranahmedse/driver.js](https://github.com/kamranahmedse/driver.js):A light-weight, no-dependency, vanilla JavaScript engine to drive the user's focus across the page http://kamranahmed.info/driver
 
 ## Web APIS
 
@@ -2628,13 +2596,23 @@ try {
 * [Microsoft/napajs](https://github.com/Microsoft/napajs):Napa.js: a multi-threaded JavaScript runtime
 * [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 
-## 资源
-
-* [staticfile/static](https://github.com/staticfile/static):开放静态文件 - 为开源库提供稳定、快速的免费 CDN 服务 https://staticfile.org
-
 ## 文档
 
 * [loiane/javascript-datastructures-algorithms](https://github.com/loiane/javascript-datastructures-algorithms/tree/second-edition):source code bundle of JavaScript algorithms and data structures book https://goo.gl/hrb00r
 * [ECMAScript 6 扫盲](http://www.cnblogs.com/hustskyking/p/a-kickstarter-guide-to-writing-es6.html)
 * [JavaScript异步编程原理](http://www.cnblogs.com/hustskyking/p/javascript-asynchronous-programming.html)
 * [DMQ/mvvm](https://github.com/DMQ/mvvm):剖析vue实现原理，自己动手实现mvvm
+* [Javascript异步编程的4种方法](http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html)
+* [JavaScript异步编程](http://www.cnblogs.com/hustskyking/p/javascript-asynchronous-programming.html)
+* [JavaScript深入系列15篇](https://juejin.im/post/59278e312f301e006c2e1510)
+* [sorrycc/awesome-javascript](https://github.com/sorrycc/awesome-javascript):🐢 A collection of awesome browser-side JavaScript libraries, resources and shiny things.
+* [jobbole/awesome-javascript-cn](https://github.com/jobbole/awesome-javascript-cn):JavaScript 资源大全中文版，内容包括：包管理器、加载器、测试框架、运行器、QA、MVC框架和库、模板引擎等
+* [avajs/ava](https://github.com/avajs/ava)Futuristic JavaScript test runner
+* [moon](http://moonjs.ga/docs/getting-started.html)
+* [JavaScript文档](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+* [mbeaudru/modern-js-cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet):Cheatsheet for the JavaScript knowledge you will frequently encounter in modern projects. https://mbeaudru.github.io/modern-js-…
+* [getify/You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter.
+* [kamranahmedse/driver.js](https://github.com/kamranahmedse/driver.js):A light-weight, no-dependency, vanilla JavaScript engine to drive the user's focus across the page http://kamranahmed.info/driver
+* [staticfile/static](https://github.com/staticfile/static):开放静态文件 - 为开源库提供稳定、快速的免费 CDN 服务 https://staticfile.org
+* [lukehoban/es6features](https://github.com/lukehoban/es6features):Overview of ECMAScript 6 features
+
