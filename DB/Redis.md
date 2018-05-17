@@ -301,8 +301,8 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
 
 ## 工具
 
-* [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager)
-
+* [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager):🔧 Cross-platform GUI management tool for Redis http://redisdesktop.com
+* [sripathikrishnan/redis-rdb-tools](https://github.com/sripathikrishnan/redis-rdb-tools):Parse Redis dump.rdb files, Analyze Memory, and Export Data to JSON
 ## 参考
 
 * [erikdubbelboer/phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. http://dubbelboer.com/phpRedisAdmin/

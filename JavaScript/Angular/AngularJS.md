@@ -68,16 +68,16 @@ ng serve --host 0.0.0.0 --port 4201 --live-reload-port 49153
 
 ```shell
 ng generate component my-new-component # 组件Component
-ng generate directive my-new-directive # 指令Directive 
-ng generate pipe my-new-service # 服务Service   
-ng generate pipe my-new-pipe # 管道Pipe  
-ng generate class my-new-class # 类Class  
-ng generate interface my-new-interface # 接口Interface 
-ng generate enum my-new-enum # 枚举对象Enum    
-ng generate module my-module # 模块Module
+ng generate directive my-new-directive # 指令Directive
+ng generate pipe my-new-service # 服务Service
+ng generate pipe my-new-pipe # 管道Pipe
+ng generate class my-new-class # 类Class
+ng generate interface my-new-interface # 接口Interface
+ng generate enum my-new-enum # 枚举对象Enum
+ng generate module my-module # 模块Modulew
 ```
 
-## 资源
+## 参考
 
 * [angular/angular.js](https://github.com/angular/angular.js):AngularJS - HTML enhanced for web apps! https://angularjs.org
 * [angular/angular-cli](https://github.com/angular/angular-cli):CLI tool for Angular
@@ -86,12 +86,6 @@ ng generate module my-module # 模块Module
 * [shyamseshadri/angularjs-book](https://github.com/shyamseshadri/angularjs-book):Examples and Code snippets from the AngularJS O'Reilly book
 * [angular/quickstart](https://github.com/angular/quickstart):Angular 2 QuickStart - source from the documentation
 * [官方教程](https://angular.io)：https://angular.cn/guide/quickstart
-
-## 参考
-
+* [gdi2290/angular-starter](https://github.com/gdi2290/angular-starter):🎉 An Angular Starter kit featuring Angular (Router, Http, Forms, Services, Tests, E2E, Dev/Prod, HMR, Async/Lazy Routes, AoT via ngc), Karma, Protractor, Jasmine, Istanbul, TypeScript, TsLint, Codelyzer, Hot Module Replacement, @types, and Webpack by @TipeIO https://tipe.io
 * [Top 12 Productivity Tips for WebStorm and Angular – Part 1](https://www.sitepoint.com/productivity-tips-for-webstorm-and-angular-part-1/)
 * [Angular2新的体验](http://blog.fens.me/angular2-init/)
-
-## 教程
-
-http://www.runoob.com/angularjs/angularjs-intro.html

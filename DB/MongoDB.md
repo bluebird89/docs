@@ -215,9 +215,10 @@ db.shutdownServer() # 退出命令行
 show profile # 查看profiling
 ```
 
-## GUI工具
+## 工具
 
 * Robomongo MongoBooster
+* [Automattic/mongoose](https://github.com/Automattic/mongoose):MongoDB object modeling designed to work in an asynchronous environment. http://mongoosejs.com
 
 ## docker
 

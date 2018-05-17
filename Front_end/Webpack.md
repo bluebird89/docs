@@ -36,7 +36,7 @@ Grunt和Gulp的工作方式是：在一个配置文件中，指明对某些文�
 
 ### 安装
 
-```
+```sh
 npm init  // 初始化项目信息
 
 npm install -g webpack //全局安装
@@ -201,16 +201,9 @@ npm run dev // 构建npm脚本
 
 在真实场景中，我们不会直接使用 webpack-dev-server，而采用 express + webpack/webpack-dev-middleware
 
-## 仓库
+### [webpack-dashboard](https://github.com/FormidableLabs/webpack-dashboard)
 
-* [webpack/webpack](https://github.com/webpack/webpack):A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows to load parts for the application on demand. Through "loaders," modules can be CommonJs, AMD, ES6 modules, CSS, Images, JSON, Coffeescript, LESS, ... and your custom stuff. https://webpack.js.org
-
-## 工具
-
-* [webpack-dashboard](https://github.com/FormidableLabs/webpack-dashboard):A CLI dashboard for webpack dev server
-* [webpack/webpack-dev-server](https://github.com/webpack/webpack-dev-server):Serves a webpack app. Updates the browser on changes.
-
-### webpack-dashboard
+A CLI dashboard for webpack dev server
 
 ```sh
 # 安装
@@ -267,17 +260,17 @@ module.exports = {
 
 npm run build --report
 ```
+
 ## 部署
 
 
 
 ## 参考
 
+* [webpack-simple](https://github.com/vuejs-templates/webpack-simple)
 * [webpack 从入门到工程实践](http://gitbook.cn/books/599270d5625e0436309466c7/index.html)
 * [Webpack 工程的 PWA 实战](http://gitbook.cn/books/59957adbebb0e06f9f24c389/index.html)
-
-## 教程
-
+* [webpack/webpack](https://github.com/webpack/webpack):A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows to load parts for the application on demand. Through "loaders," modules can be CommonJs, AMD, ES6 modules, CSS, Images, JSON, Coffeescript, LESS, ... and your custom stuff. https://webpack.js.org
 * [webpack/react-starter](https://github.com/webpack/react-starter):[OUTDATED] Starter template for React with webpack. Doesn't focus on simplicity! NOT FOR BEGINNERS!
 * [入门Webpack](http://www.jianshu.com/p/42e11515c10f)
 * [Webpack for React](http://www.pro-react.com/materials/appendixA/)
@@ -285,3 +278,6 @@ npm run build --report
 * [vue-cli](https://vuejs-templates.github.io/webpack/)
 * [基于webpack的前后端分离开发环境实战](https://segmentfault.com/a/1190000009266900)
 * [webpack：从入门到真实项目配置](https://juejin.im/post/59bb37fa6fb9a00a554f89d2)
+* [petehunt/webpack-howto](https://github.com/petehunt/webpack-howto)
+* [webpack/webpack-dev-server](https://github.com/webpack/webpack-dev-server):Serves a webpack app. Updates the browser on changes.
+
