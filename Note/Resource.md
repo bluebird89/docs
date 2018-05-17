@@ -2,26 +2,27 @@
 
 资源内容
 
+* 软件：apple与google生态
+
 ## 工具
 
 * [代码片段](http://www.phpxs.com/code/)
 * [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
 
-## 技能树
+## 硬件
 
-* [TECHNOLOGY RADAR](https://www.thoughtworks.com/radar)
-
-## 知识记录
-
-* [](https://wiki.nikitavoloboev.xyz)
-
-## Podcast
-
-- [ThoughtWorks 洞见](http://www.ximalaya.com/zhubo/81966002/)
-
-## Article
-
-- [How To Ask Questions The Smart Way](http://www.catb.org/esr/faqs/smart-questions.html)
+- keyward
+  - FILCO斐尔可87圣手忍者 FILCO Majestouch2 87
+  - 斐尔可（FILCO） FKBN87MRL/EB2 Majestouch 2「87圣手二代」
+  - HHKB Professional ~~2~~
+  - Kinesis KB600 Advantage2
+  - Das Keyboard Model S Professional for Mac Clicky MX Blue Mechanical Keyboard (DASK3PROMS1MACCLI)
+  - IKBC C87 F87  红轴最好
+  - 腕托
+- Computer（大尺寸屏幕,甚至两块屏幕）
+  - MacBook Pro:15寸，16G
+  - Acer Chromebook R11
+  - 明基爱眼显示器EW2775ZH
 
 ### 设计
 
@@ -52,8 +53,31 @@
 * [字里行间](https://zi.com/):中文写作 APP，开发者的设计功力非常强
 * [简书](http://www.jianshu.com/)
 * [Medium]():一个非常优质的写作社区
-* [Bear](http://www.bear-writer.com/)
+* [Bear](http://www.bear-writer.com/):
 * [Byword](https://metaclassy.com/):简洁，优美，专注于文字。非常棒的写作工具。
+
+## 笔记
+
+笔记：带标签功能，并且可以聚合统计;概念用文档整理，结构化用思维导图（不宜太详细）
+
+* [Paper](http://www.fiftythree.com/):优雅，美观，做笔记，记录灵感
+* [语雀](https://yuque.com/)
+* [腾讯文档](https://docs.qq.com/)
+* 有道云
+* youdaonote ：格式化笔记
+* simplenote：简单笔记（无格式）
+* xmind：结构化整理
+* 记录：豆瓣读书、电影评论
+* github：代码的整理
+* Goole  keep
+* notes
+
+## 阅读
+
+* RSS(Really Simple Syndication)
+  - The Old Reader
+  - Feedly:博客阅读与整理，导出订阅https://feedly.com/i/opml
+  - Inoreader
 
 ## 建站工具
 
@@ -66,10 +90,6 @@
 * [Producthunt](https://www.producthunt.com/):收录最新最优秀的产品
 * [Next](http://next.36kr.com/posts)
 * [少数派](https://sspai.com/)
-
-## Blog
-
-* [没有了老师，该如何学习？](http://www.cnblogs.com/qianqian-li/p/6028745.html)
 
 ## Video
 
@@ -126,6 +146,48 @@
 * [Treehouse](https://teamtreehouse.com/):学习编程等互联网技能
 * [Playground](https://www.apple.com/swift/playgrounds/):ipad上学习swift的游戏
 
+## 管理与沟通
+
+* WhatsApp 和 Slack 用来沟通
+* trello：以看版为基础任务管理系统
+* Teambition
+* Asana asana.com
+
+## 应用
+
+- 得到
+- 极客时间
+
+### office
+
+* google docs [表单](https://docs.google.com/forms/u/0/)
+* libre
+* [Keynote](https://www.apple.com/cn/keynote/)
+
+## 思维导图
+
+* [百度脑图](https://naotu.baidu.com)
+* MindNode mindnode.com
+* 一起写 yiqixie.com
+
+## 编辑器
+
+* [Etherpad](http://etherpad.org/):老牌的多人实时编辑协同工具。
+
+### 表单
+
+* 金数据 jinshuju.net
+* MailChimp mailchimp.com
+
+## Blog
+
+* [没有了老师，该如何学习？](http://www.cnblogs.com/qianqian-li/p/6028745.html)
+* [How To Ask Questions The Smart Way](http://www.catb.org/esr/faqs/smart-questions.html)
+
+## Podcast
+
+- [ThoughtWorks 洞见](http://www.ximalaya.com/zhubo/81966002/)
+
 ## 书写规范
 
 * [中英文简历撰写排版指南](http://ppresume.com/notes/guide-zh.html)
@@ -149,3 +211,7 @@
 * [Best-websites-a-programmer-should-visit](https://github.com/sdmg15/Best-websites-a-programmer-should-visit)
 * [how to be a Programmer](https://github.com/braydie/HowToBeAProgrammer) <https://braydie.gitbooks.io/how-to-be-a-programmer/content/zh/>
 * [be-a-professional-programmer](https://github.com/stanzhai/be-a-professional-programmer)
+* [TECHNOLOGY RADAR](https://www.thoughtworks.com/radar)
+* [](https://wiki.nikitavoloboev.xyz)
+* [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets)My cheatsheets https://devhints.io
+* [Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等

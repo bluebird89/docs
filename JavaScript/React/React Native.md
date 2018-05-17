@@ -4,7 +4,7 @@ React 是一套可以用简洁的语法高效绘制 DOM 的框架
 
 通过 React 来构建 iOS 原生应用和 Android 原生应用。Virtual DOM 保持不变，你仍然可以使用 JSX 来创建它，但实际的 UI 是用原生的组件构建，
 
-RN是在Facebook所提出的核心概念Learn once, write anywhere所诞生的产物，着力于提高多平台开发的开发效率。我们可以同时为android和ios两个平台开发App，只需要根据两个平台不一样的地方去做一些调整即可。RN主要负责UI部分，而原生主要负责交互和数据处理。RN属于hybrid开发，并且与原生无缝连接，相比Web App和Native开发，RN取长补短，集合了两者的优势。RN开发的APP可以跳过App Store审核，远程更新代码，提高迭代频率和效率，既有Native的体验，又保留React的开发效率。 
+RN是在Facebook所提出的核心概念Learn once, write anywhere所诞生的产物，着力于提高多平台开发的开发效率。我们可以同时为android和ios两个平台开发App，只需要根据两个平台不一样的地方去做一些调整即可。RN主要负责UI部分，而原生主要负责交互和数据处理。RN属于hybrid开发，并且与原生无缝连接，相比Web App和Native开发，RN取长补短，集合了两者的优势。RN开发的APP可以跳过App Store审核，远程更新代码，提高迭代频率和效率，既有Native的体验，又保留React的开发效率。
 RN的原理是将React代码转化为原生API，iOS一套，Android一套。RN在一开始生成OC模块表，然后把这个模块表传入JS中，JS参照模块表，就能间接调用OC的代码。
 
 围绕着React所建立起来的生态系统以及组件化开发思想能有效地分解大规模应用的复杂度、提高资源复用率。简单的说，React拥有以下你想要的特性：
@@ -97,7 +97,7 @@ sudo chown -R `whoami` /usr/local
 
 brew install watchman # 监视文件系统变更的工具。安装此工具可以提高开发时的性能（packager可以快速捕捉文件的变化从而实现实时刷新）
 brew install flow # 静态的JS类型检查工具
-xcode 
+xcode
 
 apm install nuclide # 由Facebook提供的基于atom的集成开发环境，可用于编写、运行和 调试React Native应用
 
@@ -115,7 +115,7 @@ react-native run-ios
 react.js 、react-dom.js 和 Browser.js ，它们必须首先加载。其中，react.js 是 React 的核心库，react-dom.js 是提供与 DOM 相关的功能，Browser.js 的作用是将 JSX 语法转为 JavaScript 语法
 写 HTML 标签或 React 标签，它们终将被转换成原生的 JavaScript 并创建 DOM。
 
-```
+```typescript
 <script type="text/babel">
   // ** Our code goes here! **
 </script>
@@ -136,7 +136,7 @@ ReactDOM.render(
 
 ### 组件
 
-```
+```typescript
 var HelloMessage = React.createClass({
   render: function() {
     return <h1>Hello {this.props.name}</h1>;
@@ -155,19 +155,19 @@ ReactDOM.render(
 #### Flexbox
 
 Flexbox 是css3 里面引入的布局模型－弹性盒子模型，旨在通过弹性的方式来对齐河分布容器中的内容空间，使其能够适应不同屏幕的宽度。react nativie中 的flexbox 是这个规范的一个子集
-       
+
 Flexbox解决了什么问题？
 
 * 浮动布局
 * 不同宽度屏幕的适
 * 宽度自动分配
-* 水平垂直居中 
+* 水平垂直居中
 
 容器属性
 
-* flexDirection ： row,row-reverse,colum,colum-reverse   #类型于linerlayout 里的 orientation 属性    
-* flexWrap       :   wap,nowap,wap-reverse                      #textview 是否换行    
-* alignItems    ： flex-start,flex-end,center,stretch    # item 的 排列对齐方式 ，上对齐，下对齐 上下间距对齐， 以及严苛对其                   
+* flexDirection ： row,row-reverse,colum,colum-reverse   #类型于linerlayout 里的 orientation 属性
+* flexWrap       :   wap,nowap,wap-reverse                      #textview 是否换行
+* alignItems    ： flex-start,flex-end,center,stretch    # item 的 排列对齐方式 ，上对齐，下对齐 上下间距对齐， 以及严苛对其
 * justifyContent：flex-start,flex-end,center,space-between,space-roud  # 类似于linerlayout里 layout_gravity 属性
 
 元素属性
@@ -213,31 +213,19 @@ Flexbox解决了什么问题？
 - Web端通过ajax调用接口，使用JS把数据渲染到页面上
 - 数据结构和业务逻辑混淆在一起
 
-## 测试
-
-使用Airbnb团队开发的enzyme，它也可以与其他测试工具如Jest、Mocha等配合使用。由于Jest是Facebook开发并且是在Jasmine测试框架上演变而来的，断言格式我们比较熟悉，因此大家可能更容易上手。Jest的目标是减少测试一个项目所要花费的时间和认知负荷，它提供了大部分我们需要的现成工具：快速的命令行接口、Mock工具集以及它的自动模块Mock系统，总的来说就是让测试变得更简单。
-
-## 扩展
-
-* [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
-* [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.
-* [zeit/next.js](https://github.com/zeit/next.js):Framework for server-rendered React apps https://zeit.co/blog/next4
-
-## 项目
-
-* [react-pxq](https://github.com/bailicangdu/react-pxq)一个 react + redux 的完整项目 和 个人总结
-
 ## 参考
-
-* [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
-* [React Native的极简手册](http://www.jianshu.com/p/318342e139c7) 没看懂
-* [xgrommx/awesome-redux](https://github.com/xgrommx/awesome-redux):Awesome list of Redux examples and middlewares
-
-## 教程
 
 * [fangwei716/30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
 * [kdchang/reactjs101](https://github.com/kdchang/reactjs101):從零開始學 ReactJS（ReactJS 101）是一本希望讓初學者一看就懂的 ReactJS 中文入門教學書，由淺入深學習 ReactJS 生態系 (Flux, Redux, React Router, ImmutableJS, React Native, Relay/GraphQL etc.)。 https://www.gitbook.com/book/kdchang/…
 * [Reactjs docs](https://reactjs.org/docs/hello-world.html)
+* [reactjs/react-basic](https://github.com/reactjs/react-basic):A description of the conceptual model of React without implementation burden.
+* [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
+* [React Native的极简手册](http://www.jianshu.com/p/318342e139c7) 没看懂
+* [xgrommx/awesome-redux](https://github.com/xgrommx/awesome-redux):Awesome list of Redux examples and middlewares
+* [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
+* [reactnativecn/react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
+* [styleguidist/react-styleguidist](https://github.com/styleguidist/react-styleguidist):Isolated React component development environment with a living style guide https://react-styleguidist.js.org/
+* [wojtekmaj/react-lifecycle-methods-diagram](https://github.com/wojtekmaj/react-lifecycle-methods-diagram):Interactive React lifecycle methods diagram. http://projects.wojtekmaj.pl/react-li…
 
 ## 工具
 
@@ -281,26 +269,22 @@ Flexbox解决了什么问题？
 * [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit):Get started with React, Redux, and React-Router.
 * [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app):Create React apps with no build configuration.
 * [vasanthk/react-bits](https://github.com/vasanthk/react-bits):✨ React patterns, techniques, tips and tricks ✨ https://vasanthk.gitbooks.io/react-bits
-
-## 文档
-
-* [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
-* [reactnativecn/react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
-* [styleguidist/react-styleguidist](https://github.com/styleguidist/react-styleguidist):Isolated React component development environment with a living style guide https://react-styleguidist.js.org/
+* [react-pxq](https://github.com/bailicangdu/react-pxq)一个 react + redux 的完整项目 和 个人总结
+* [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
+* [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.
+* [zeit/next.js](https://github.com/zeit/next.js):Framework for server-rendered React apps https://zeit.co/blog/next4
 
 ## 项目
 
 * [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):这应该是最好的网易云音乐播放器了，没有之一，如果有请打醒 🤘
 * [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐nodejs api https://binaryify.github.io/NeteaseCl…
-* [JonJam/yorpw_ui_web](https://github.com/JonJam/yorpw_ui_web):Password manager SPA built using React and Redux    
+* [JonJam/yorpw_ui_web](https://github.com/JonJam/yorpw_ui_web):Password manager SPA built using React and Redux
 * [JonJam/react-redux-ts](https://github.com/JonJam/react-redux-ts):React/Redux TypeScript starter project
 * [taikongfeizhu/webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
 
-## 图书
-
-- React Native入门与实战
-
 ## 测试
+
+使用Airbnb团队开发的enzyme，它也可以与其他测试工具如Jest、Mocha等配合使用。由于Jest是Facebook开发并且是在Jasmine测试框架上演变而来的，断言格式我们比较熟悉，因此大家可能更容易上手。Jest的目标是减少测试一个项目所要花费的时间和认知负荷，它提供了大部分我们需要的现成工具：快速的命令行接口、Mock工具集以及它的自动模块Mock系统，总的来说就是让测试变得更简单。
 
 - [airbnb/enzyme](https://github.com/airbnb/enzyme):JavaScript Testing utilities for React http://airbnb.io/enzyme/
 
