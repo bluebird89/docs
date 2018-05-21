@@ -1,7 +1,7 @@
 # R
 
 
-## 内容 
+## 内容
 
 * 金融市场，包括了中国的金融二级市场环境的介绍、交易工具的使用、金融产品的交易规则、国内机构投研思路、策略和回测、基金会计等金融行业的基础知识。
 * 统计知识，包括了时间序列、一元线性回归、多元线性回归、自回归等统计和计量的模型算法。
@@ -30,5 +30,5 @@ Restart R
 ```
 ## 参考
 
-* [安装](https://mirrors.tuna.tsinghua.edu.cn/CRAN/) 
+* [安装](https://mirrors.tuna.tsinghua.edu.cn/CRAN/)
 * [rstudio](https://www.rstudio.com/products/rstudio/download/#download)
