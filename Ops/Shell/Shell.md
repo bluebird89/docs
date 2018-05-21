@@ -32,7 +32,7 @@ set cursorline     # 光标所在行高亮
 set ruler     # 设置标尺
 set laststatus=2     # 开启状态栏（默认是1）
 set smartindent     # 开启新航时使用智能自动缩进
-set hlsearch     # 搜索时高亮显示找到的文本    
+set hlsearch     # 搜索时高亮显示找到的文本
 set wrap     # 设置自动换行
 set tabstop=4     # 设置缩进为4个空格
 set softtabstop=4
@@ -81,7 +81,7 @@ brew install zsh zsh-completions # Mac
 wget --no-check-certificate 。![]https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
 
 chsh -s /bin/zsh
-source ~/.bashrc # 运行 
+source ~/.bashrc # 运行
 ```
 
 #### oh my zsh
@@ -501,7 +501,7 @@ ln -s /usr/local/bin/gtac /usr/local/bin/tac
 * id_rsa.pub ： 生成的公钥文件
 * know_hosts : 已知的主机公钥清单　
 * 如果希望ssh公钥生效需满足至少下面两个条件：
-    - .ssh目录的权限必须是700 
+    - .ssh目录的权限必须是700
     - .ssh/authorized_keys文件权限必须是600
 
 ```sh
@@ -524,8 +524,9 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 
 ## 参考
 
-* [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager. 
-* [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community. 
+* [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager.
+* [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
 * [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
 * [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
 * [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)
+* [svenstaro/genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator https://svenstaro.github.io/genact/
