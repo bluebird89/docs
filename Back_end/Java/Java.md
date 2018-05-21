@@ -172,10 +172,6 @@ JavaEE/JDBC/Weblogic
 
 Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该平台的另外两大贡献者 ---- IBM 和 Red Hat 共同做出了这个决定
 
-## 参考
-
-- [zhanglei-workspace/shopping-management-system](https://github.com/zhanglei-workspace/shopping-management-system)
-
 ## IDE:IntelliJ IDEA
 
 [插件库](https://plugins.jetbrains.com/idea)
@@ -186,6 +182,11 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 - Spring
 
 ## 线程
+
+* [Java 教程](http://www.runoob.com/java/)
+* [Java学习路线图](http://www.jianshu.com/p/d51551b0a8ba) 
+* [史上最精炼JAVA知识点基础总结](http://www.jianshu.com/p/9caf1c755889)
+* [shuzheng/zheng](https://github.com/shuzheng/zheng):基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、支付中心、用户管理（支持第三方登录）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。 http://47.93.195.63/zheng-upms-server
 
 ## 工具
 
@@ -198,9 +199,7 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 * [grpc/grpc-java](https://github.com/grpc/grpc-java)The Java gRPC implementation. HTTP/2 based RPC https://grpc.io
 * [alibaba/p3c](https://github.com/alibaba/p3c):Alibaba Java Coding Guidelines pmd implements and IDE plugin https://github.com/alibaba/p3c/wiki
 
-## 教程
+## 参考
 
-* [Java 教程](http://www.runoob.com/java/)
-* [Java学习路线图](http://www.jianshu.com/p/d51551b0a8ba) 
-* [史上最精炼JAVA知识点基础总结](http://www.jianshu.com/p/9caf1c755889)
-* [shuzheng/zheng](https://github.com/shuzheng/zheng):基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、支付中心、用户管理（支持第三方登录）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。 http://47.93.195.63/zheng-upms-server
+- [zhanglei-workspace/shopping-management-system](https://github.com/zhanglei-workspace/shopping-management-system)
+* [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns):Design patterns implemented in Java http://java-design-patterns.com

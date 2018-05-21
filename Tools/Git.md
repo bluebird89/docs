@@ -45,15 +45,29 @@ fi
 
 ## Config
 
-git clone有两种方式https与ssh，SSH keys的使用需保证remote的源为git方式
-
-* 全局配置：/etc/gitconfig文件 `git config --system`
-* 用户配置：~/.gitconfig    `git config --global`
-* 项目配置：project/.git/config   `git config`
 * 查看配置:`git config --list --show-origin`
+* repository配置: `git config --local`
+* 全局配置：/etc/gitconfig文件 `git config --global`
+* 系统配置： `git config --system`
+* 项目配置：project/.git/config   `git config`
+* alias说明
+  + prune = fetch --prune - 当在其他人将分支推送到远程仓库时，我也会得到了大量的本地分支。Prune可以删除远端已经删除的任何本地分支。
+  + undo = reset --soft HEAD ^ - 如果我在做出提交时犯了一个错误，这个命令会把代码恢复到提交之前的样子。通常我只是在这种情况下修改现有的提交，因为它保留了提交信息。
+  + stash-all = stash save --include-untracked - 当你正在开发，有人临时要求你切换分支时，stash 是非常有用的。这个命令确保当你 stash 时，可以记录没有被 git add 的新文件。
+  + merge
+    + ff = only 确保只有在每一个合并都是 fast-forward 的时候，你才会看到报错。否则只要你配置了这个选项，什么合并提交，什么历史记录，通通都不需要，只是两次提交之间的平滑过渡。你可能会想知道如何完成这项工作。答案是用 git rebase，把一个分支的修改合并到当前分支，它非常有用当我 pull 代码与 master 有冲突的时候，我使用这种方式来处理。当你在本地分支上修改后，同时其他人在 master 上 做了修改，我想这样比你直接 merge 到你本地分支时的 commit 更好。这样你可以避免多出一个 merge 的 commit。如果我打算新建一个merge commit，我可以用明确的 git merge -ff 来创建。
+  + commit
+    + gpgSign = true 确保您的所有 commit 都由你的 GPG 密钥签名。这通常是一个好主意，因为 .gitconfig 文件中没有验证您的用户信息，这意味着看起来像您这样的提交可能会轻松显示在其他人的提交 信息中。事实上，我曾经用过别人的凭据，因为帐户和机器配置耗时太长。我的提交请求是通过别人的帐号提交的，但内部的所有提交都是我的真实账号。将你的 GPG key 添加到 Github并尝试一次提交，你可能就会解决你现在的疑问，您提交内容将会有一个"已验证"标记。
+    + 如果您有多个 GPG 密钥，可以使用 user.signingKey 选项指定要使用的密钥。
+    + 上述的配置在 GUI 工具里不会生效，你需要在工具里的设置里找配置项。
+    + gpg-agent可以保存口令，让我们更方便。
+  + Push
+    + default = simple可能是你已经设置的配置项。它可以更轻松地将您的本地分支推送到远程，当二者分支名一样的时候。
+    + followTags = true很简单。配置它以后，当你 git push 的时候可以直接将本地的 tags 提交到远程，而不用每次都加参数 --follow-tags。不知道你是不是和我一样，我如果创建了一个tag，我就基本上一定会将它推到远程的。
 
 ```sh
 git --version
+
 git config --global user.name "name"
 git config --global user.email "email"
 git config --global color.ui "auto"
@@ -67,70 +81,11 @@ echo .DS_Store >> ~/.gitignore
 
 git config --global mergetool.sublime.cmd "subl -w \$MERGED"
 git config --global mergetool.sublime.trustExitCode false
-git config --global merge.tool sublime
+git config --global merge.tool sublime | vimdiff
 git mergetool -y
-```
 
-### key生成
+`git config --global alias.st status`
 
-#### SSH
-
-* 生成路径 `~/.ssh/`
-* 公钥添加到github账户
-
-```sh
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/github
-ssh-add -K ~/.ssh/github # 如果不是默认密钥 id_rsa ，则需要以下命令注册密钥文件，-K 参数将密钥存入 Mac Keychain
-cat ~/.ssh/github.pub
-ssh -T git@github.com  # 验证
-
-eval "$(ssh-agent -s)"
-ssh-add -K ~/.ssh/id_rsa
-
-# ~/.ssh/config:
-Host *
-  AddKeysToAgent yes
-  UseKeychain yes
-  IdentityFile ~/.ssh/id_rsa
-```
-
-#### GPG
-
-提交内容将会有一个"已验证"标记
-
-```sh
-sudo apt-get install gnupg # Debian / Ubuntu 环境
-yum install gnupg # Fedora 环境
-brew install gpg
-gpg --help
-
-gpg --gen-key
-
-gpg --list-key #公钥
-/home/ruanyf/.gnupg/pubring.gpg # 公钥文件名（pubring.gpg
--------------------------------
-pub 4096R/EDDD6D76 2013-07-11  # 公钥特征（4096位，Hash字符串和生成时间）
-uid Ruan YiFeng <yifeng.ruan@gmail.com> # 用户ID
-sub 4096R/3FA69BE4 2013-07-11 # 显示私钥特征
-
-gpg --list-secret-keys --keyid-format LONG  # 获取GPG私钥 key ID  3AA5C34371567BD2
-sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
-
-gpg --armor --export 3AA5C34371567BD2  # get the public key,add to github
-gpg --armor --export Ruan YiFeng  # get the public key,add to github
-
-git config --global user.signingkey 3AA5C34371567BD2 # git配置,commit生效
-
-git log --show-signature
-
-gpg --delete-key [用户ID]
-```
-
-### 个性化配置
-
-理解每个指令的原理，从操作流程理解命令`git config --global alias.st status`
-
-```
 git config --global alias.ls 'log --name-status --oneline --graph'
 git config --global rebase.autoStash true
 git config --global alias.st 'status --porcelain'
@@ -209,37 +164,75 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
  url = kch@homeserver:ccc/ddd.git
 ```
 
-#### alias说明
+### key生成
 
-- prune = fetch --prune - 当在其他人将分支推送到远程仓库时，我也会得到了大量的本地分支。Prune可以删除远端已经删除的任何本地分支。
-- undo = reset --soft HEAD ^ - 如果我在做出提交时犯了一个错误，这个命令会把代码恢复到提交之前的样子。通常我只是在这种情况下修改现有的提交，因为它保留了提交信息。
-- stash-all = stash save --include-untracked - 当你正在开发，有人临时要求你切换分支时，stash 是非常有用的。这个命令确保当你 stash 时，可以记录没有被 git add 的新文件。
-- merge
-  - ff = only 确保只有在每一个合并都是 fast-forward 的时候，你才会看到报错。否则只要你配置了这个选项，什么合并提交，什么历史记录，通通都不需要，只是两次提交之间的平滑过渡。你可能会想知道如何完成这项工作。答案是用 git rebase，把一个分支的修改合并到当前分支，它非常有用当我 pull 代码与 master 有冲突的时候，我使用这种方式来处理。当你在本地分支上修改后，同时其他人在 master 上 做了修改，我想这样比你直接 merge 到你本地分支时的 commit 更好。这样你可以避免多出一个 merge 的 commit。如果我打算新建一个merge commit，我可以用明确的 git merge -ff 来创建。
-- commit
-  - gpgSign = true 确保您的所有 commit 都由你的 GPG 密钥签名。这通常是一个好主意，因为 .gitconfig 文件中没有验证您的用户信息，这意味着看起来像您这样的提交可能会轻松显示在其他人的提交 信息中。事实上，我曾经用过别人的凭据，因为帐户和机器配置耗时太长。我的提交请求是通过别人的帐号提交的，但内部的所有提交都是我的真实账号。将你的 GPG key 添加到 Github并尝试一次提交，你可能就会解决你现在的疑问，您提交内容将会有一个"已验证"标记。
-  - 如果您有多个 GPG 密钥，可以使用 user.signingKey 选项指定要使用的密钥。
-  - 上述的配置在 GUI 工具里不会生效，你需要在工具里的设置里找配置项。
-  - gpg-agent可以保存口令，让我们更方便。
-- Push
-  - default = simple可能是你已经设置的配置项。它可以更轻松地将您的本地分支推送到远程，当二者分支名一样的时候。
-  - followTags = true很简单。配置它以后，当你 git push 的时候可以直接将本地的 tags 提交到远程，而不用每次都加参数 --follow-tags。不知道你是不是和我一样，我如果创建了一个tag，我就基本上一定会将它推到远程的。
+git clone有两种方式https与ssh，SSH keys的使用需保证remote的源为git方式
 
- ![Git 命令清单-1](../_static/bg2015120901.png)
- ![Git 命令清单-2](../_static/git_2.png)
+#### SSH
+
+* 生成路径 `~/.ssh/`
+* 公钥添加到github账户
+
+```sh
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/github
+ssh-add -K ~/.ssh/github # 如果不是默认密钥 id_rsa ，则需要以下命令注册密钥文件，-K 参数将密钥存入 Mac Keychain
+cat ~/.ssh/github.pub
+ssh -T git@github.com  # 验证
+
+eval "$(ssh-agent -s)"
+ssh-add -K ~/.ssh/id_rsa
+
+# ~/.ssh/config:
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+```
+
+#### GPG
+
+提交内容将会有一个"已验证"标记
+
+```sh
+sudo apt-get install gnupg # Debian / Ubuntu 环境
+yum install gnupg # Fedora 环境
+brew install gpg
+gpg --help
+
+gpg --gen-key
+
+gpg --list-key #公钥
+/home/ruanyf/.gnupg/pubring.gpg # 公钥文件名（pubring.gpg
+-------------------------------
+pub 4096R/EDDD6D76 2013-07-11  # 公钥特征（4096位，Hash字符串和生成时间）
+uid Ruan YiFeng <yifeng.ruan@gmail.com> # 用户ID
+sub 4096R/3FA69BE4 2013-07-11 # 显示私钥特征
+
+gpg --list-secret-keys --keyid-format LONG  # 获取GPG私钥 key ID  3AA5C34371567BD2
+sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
+
+gpg --armor --export 3AA5C34371567BD2  # get the public key,add to github
+gpg --armor --export Ruan YiFeng  # get the public key,add to github
+
+git config --global user.signingkey 3AA5C34371567BD2 # git配置,commit生效
+
+git log --show-signature
+
+gpg --delete-key [用户ID]
+```
 
 ## 原理
 
 Git维护的就是一个commitID树，分别保存着不同状态下的代码。 所以你对代码的任何修改，最终都会反映到 commit 上面去。
 
-* 工作区（当前文件状态Workspace）进行开发改动的地方，任何对象都是在工作区中诞生和被修改；
-* 暂存区（提交最新的版本Index / Stage）.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；
-* 版本库 本地仓库（所有历史版本Repository）保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；
-* 远程仓库(Remote)
-* 任何对象都是在工作区中诞生和被修改；
-* 任何修改都是从进入index区才开始被版本控制；
-* 只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；
-* 与协作者分享本地的修改，可以把它们push到远程仓库来共享。
+* 工作区（当前文件状态Workspace）:进行开发改动的地方，任何对象都是在工作区中诞生和被修改；
+* 暂存区（提交最新的版本Index/Stage）:.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；
+* 版本库 本地仓库（所有历史版本Repository）:保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；.git文件夹里还包括git自动创建的master分支，并且将HEAD指针指向master分支。使用commit命令可以将暂存区中的文件添加到本地仓库中；
+* 远程仓库(Remote):通常使用clone命令将远程仓库拷贝到本地仓库中，开发后推送到远程仓库中即可；
+
+![Git原理-1](../_static/bg2015120901.png)
+![Git原理-2](../_static/git_2.png)
+![Git原理-3](../_static/git_3.png)
 
 ### 文件三种状态：
 
@@ -267,6 +260,8 @@ git clone file:///opt/git/project.git
 git clone ftp[s]://example.com/path/to/repo.git/
 git clone rsync://example.com/path/to/repo.git/
 git clone -o jQuery https://github.com/jquery/jquery.git
+
+git init --bare
 
 # 本地创建项目根目录, 然后与远程GitHub关联
 git init # 初始化git仓库
@@ -523,7 +518,6 @@ git push origin --delete dev :删除远程分支
 deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
 
 #### 撤销
-
 
 ```sh
 git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
@@ -901,8 +895,6 @@ suport
 version
 ```
 
-![Git 命令清单](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png)
-
 ### Version Control Best Practices
 
 * Commit Related Changes:A commit should be a wrapper for related changes. For example, fixing two different bugs should produce two separate commits. Small commits make it easier for other team members to understand the changes and roll them back if something went wrong. With tools like the staging area and the ability to stage only parts of a file, Git makes it easy to create very granular commits.
@@ -941,6 +933,7 @@ version
 * [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
 * [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
 * [Git 工作流](https://juejin.im/post/5a014d5f518825295f5d56c7)
+* [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
 
 ## 语法
 
@@ -996,9 +989,7 @@ git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -
 
 ## 功能
 
-### 管理第三方模块
-
-### git-submodule
+### 管理第三方模块 git-submodule
 
 git submodule 主要用来管理一些单向更新的公共模块或底层逻辑。
 
@@ -1057,7 +1048,7 @@ git lfs ls-files
 git push origin master
 ```
 
-## [kennethreitz/legit](https://github.com/kennethreitz/legit)
+### [kennethreitz/legit](https://github.com/kennethreitz/legit)
 
 ```python
 pip3 install legit
@@ -1073,6 +1064,29 @@ Removes specified branch from the remote. (alias: unp)
 undo
 Un-does the last commit in git history. (alias: un)
 branches
+```
+
+### Commit Message
+
+* type: commit 的类型
+  - feat: 新特性
+  - fix: 修改问题
+  - refactor: 代码重构
+  - docs: 文档修改
+  - style: 代码格式修改, 注意不是 css 修改
+  - test: 测试用例修改
+  - chore: 其他修改, 比如构建流程, 依赖管理.
+* scope: commit 影响的范围, 比如: route, component, utils, build...
+* subject: commit 的概述, 建议符合  50/72 formatting
+* body: commit 具体修改内容, 可以分为多行, 建议符合 50/72 formatting
+* footer: 一些备注, 通常是 BREAKING CHANGE 或修复的 bug 的链接.
+
+```
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
 ```
 
 ## 扩展
@@ -1092,21 +1106,6 @@ git quick-stats
 # or
 git-quick-stats
 ```
-
-## 参考
-
-* [文档](https://git-scm.com/docs)
-* [中文](https://git-scm.com/book/zh/v2)
-* [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
-* attributes   Defining attributes per path
-* everyday     Everyday Git With 20 Commands Or So
-* glossary     A Git glossary
-* ignore       Specifies intentionally untracked files to ignore
-* modules      Defining submodule properties
-* revisions    Specifying revisions and ranges for Git
-* tutorial     A tutorial introduction to Git (for version 1.5.1 or newer)
-* workflows    An overview of recommended workflows with Git
-* [alias](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git):oh my zsh 中的 alias
 
 ### Aliases
 
@@ -1231,25 +1230,6 @@ git-quick-stats
 | gwch                 | git whatchanged -p --abbrev-commit --pretty = medium                                                                                    |
 | gwip                 | git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"                                                      |
 
-### Deprecated Aliases
-
-These are aliases that have been removed, renamed, or otherwise modified in a way that may, or may not, receive further support.
-
-| Alias  |                                Command                                             |                                             Modification                                            |
-| :----- | :----------------------------------------------------------------------------------| --------------------------------------------------------------------------------------------------- |
-| gap    | git add --patch                                                                    | new alias `gapa`                                                                                    |
-| gcl    | git config --list                                                                  | new alias `gcf`                                                                                     |
-| gdc    | git diff --cached                                                                  | new alias `gdca`                                                                                    |
-| gdt    | git difftool                                                                       | no replacement                                                                                      |
-| ggpull | git pull origin $(current_branch)                                                  | new alias `ggl` (`ggpull` still exists for now though)                                              |
-| ggpur  | git pull --rebase origin $(current_branch)                                         | new alias `ggu` (`ggpur` still exists for now though)                                               |
-| ggpush | git push origin $(current_branch)                                                  | new alias `ggp` (`ggpush` still exists for now though)                                              |
-| gk     | gitk --all --branches                                                              | now aliased to `\gitk --all --branches`                                                             |
-| glg    | git log --stat --max-count = 10                                                    | now aliased to `git log --stat --color`                                                             |
-| glgg   | git log --graph --max-count = 10                                                   | now aliased to `git log --graph --color`                                                            |
-| gwc    | git whatchanged -p --abbrev-commit --pretty = medium                               | new alias `gwch`                                                                                    |
-| gwip   | git add -A; git ls-files --deleted -z \| xargs -r0 git rm; git commit -m "--wip--" | now aliased to `git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"` |
-
 ## Functions
 
 ### Current
@@ -1280,3 +1260,20 @@ These features allow to pause a branch development and switch to another one (_"
 
 * [练习沙盒](https://try.github.io)
 * [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
+
+## 参考
+
+* [文档](https://git-scm.com/docs)
+* [中文](https://git-scm.com/book/zh/v2)
+* [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
+* attributes   Defining attributes per path
+* everyday     Everyday Git With 20 Commands Or So
+* glossary     A Git glossary
+* ignore       Specifies intentionally untracked files to ignore
+* modules      Defining submodule properties
+* revisions    Specifying revisions and ranges for Git
+* tutorial     A tutorial introduction to Git (for version 1.5.1 or newer)
+* workflows    An overview of recommended workflows with Git
+* [alias](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git):oh my zsh 中的 alias
+* [Conventional Commits](https://conventionalcommits.org/)
+* [git-commit-guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)

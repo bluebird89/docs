@@ -46,6 +46,12 @@ $slugify = new Slugify();
 echo $slugify->slugify('Hello World, this is a long sentence and I need to make a slug from it!');
 ```
 
+## 加载没有制作 Composer，而是还以 require 的方式进行加载
+
+* 建立存放第三方的 SDK 目录
+* 修改composer.json中的autoload>classmap增加文件路径
+* `composer dump-autoload`
+
 ## 参考
 
 * [官网](https://getcomposer.org/)
