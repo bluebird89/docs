@@ -146,6 +146,7 @@
 * [Treehouse](https://teamtreehouse.com/):学习编程等互联网技能
 * [Playground](https://www.apple.com/swift/playgrounds/):ipad上学习swift的游戏
 * [freecodecamp](https://www.freecodecamp.org/):Learn to code for free.
+* [scratch](https://scratch.mit.edu/)
 
 ## 管理与沟通
 
@@ -183,6 +184,27 @@
 
 * 金数据 jinshuju.net
 * MailChimp mailchimp.com
+
+## 游戏
+
+## PC
+
+* PES
+* 战地
+* 使命召唤
+
+### 手游
+
+- [ ] 堡垒之夜
+- [ ] ring
+- [ ] 纪念碑谷
+- [ ] Alliance: Air War by Art of the State LLC
+
+### steam游戏平台
+
+- [ ] PLAYERUNKNOWN'S BATTLEGROUNDS
+- [ ] Counter-Strike: Global Offensive
+- [ ] Frostpunk
 
 ## Blog
 
