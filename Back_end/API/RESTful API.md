@@ -8,6 +8,8 @@
 - 一致接口（Uniform interface） -（无状态）Stateless
 - 资源之间的链接（Links between resources）
 - 缓存（Caching）
+- 使用https传输
+- json作为唯一的交互格式
 
 ## [RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api)
 
@@ -40,9 +42,9 @@ HTTP动词：
 
 * GET（SELECT）：从服务器取出资源（一项或多项）
 * POST（CREATE）：在服务器新建一个资源
-* PUT（UPDATE）：在服务器更新资源（客户端提供改变后的完整资源）
-* PATCH（UPDATE）：在服务器更新资源（客户端提供改变的属性）
-* DELETE（DELETE）：从服务器删除资源
+* PUT（replace）：在服务器更新资源（客户端提供改变后的完整资源）
+* PATCH（update）：在服务器更新资源（客户端提供改变的属性）
+* DELETE（remove）：从服务器删除资源
 * HEAD：获取资源的元数据
 * OPTIONS：获取信息
 
@@ -62,17 +64,26 @@ HTTP动词：
 - ?sortby=nameℴ=asc：指定返回结果按照哪个属性排序，以及排序顺序。
 - ?animal_type_id=1：指定筛选条件
 
+鉴权
+
+restful API是无状态的也就是说用户请求的鉴权和cookie以及session无关，每一次请求都应该包含鉴权证明。统一使用Token或者OAuth2.0认证。
+
 ### 状态码（Status Codes）
 
-* 200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）
+* 200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）,对应，GET,PUT,PATCH,DELETE.
 * 201 CREATED - [POST/PUT/PATCH]：用户新建或修改数据成功
-* 202 Accepted - [_]：表示一个请求已经进入后台排队（异步任务） 
+* 202 Accepted - [_]：表示一个请求已经进入后台排队（异步任务）
 * 204 NO CONTENT - [DELETE]：用户删除数据成功
+* 304 not modified   - HTTP缓存有效
 * 400 INVALID REQUEST - [POST/PUT/PATCH]：用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的
 * 401 Unauthorized - [_]：表示用户没有权限（令牌、用户名、密码错误）
-* 403 Forbidden - [_] 表示用户得到授权（与401错误相对），但是访问是被禁止的
+* 403 Forbidden - [_] 表示用户得到授权（与401错误相对），但是访问是被禁止的,鉴权成功，但是该用户没有权限
 * 404 NOT FOUND - [_]：用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的
+* 405 method not allowed - 该http方法不被允许
 * 406 Not Acceptable - [GET]：用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）
+* 415 unsupported media type - 请求类型错误
+* 422 unprocessable entity - 校验错误时用
+* 429 too many request - 请求过多。
 * 410 Gone -[GET]：用户请求的资源被永久删除，且不会再得到的
 * 422 Unprocesable entity - [POST/PUT/PATCH] 当创建一个对象时，发生一个验证错误
 * 500 INTERNAL SERVER ERROR - [*]：服务器发生错误，用户将无法判断发出的请求是否成功
@@ -93,14 +104,14 @@ HTTP动词：
 RESTful API最好做到Hypermedia，即返回结果中提供链接，连向其他API方法，使得用户不查文档，也知道下一步应该做什么。比如 api.example.com
 
 ```json
-{ 
-  "link": 
+{
+  "link":
     {
-      "rel": "collection <https://www.example.com/zoos>", 
-      "href": "<https://api.example.com/zoos>", 
-      "title": "List of zoos", 
-      "type": "application/vnd.yourformat+json" 
-    } 
+      "rel": "collection <https://www.example.com/zoos>",
+      "href": "<https://api.example.com/zoos>",
+      "title": "List of zoos",
+      "type": "application/vnd.yourformat+json"
+    }
 }
 ```
 
@@ -115,6 +126,7 @@ rel表示这个API与当前网址的关系（collection关系，并给出该coll
 
 * <https://api.github.com/>
 * [yahoo天气api](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json)
+* https://developer.github.com/v3/
 
 ### 工具
 

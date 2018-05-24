@@ -24,6 +24,10 @@
 <http://xue.youdao.com/sw/m/1434323?server=sw&_t=201708281644>
 
 
+## 搞笑
+
+* 听我一句劝：不要养猫！这东西吧，你看看别人养是没问题的，你自己一旦沾上，整个人就彻底废了。你看着猫过着随心所欲的生活，想睡就睡，想吃就吃，想理你就理你不想理你当你不存在，你就会非常羡慕，觉得：哇！那么高级的灵魂！不行！今天不上班了！我得待在它身边，感受这种灵魂的自由，极度的自我！
+* 
 ## 工具
 
 * [hackjutsu/Lepton](https://github.com/hackjutsu/Lepton):💻 Democratizing Snippet Management (macOS/Win/Linux) http://hackjutsu.com/Lepton

@@ -117,6 +117,8 @@ sudo systemctl start docker
 sudo systemctl enable docker
 
 docker version
+
+yum install docker
 ```
 
 ## Usage:
@@ -146,13 +148,12 @@ ensure docker daemon runing
 创建镜像
 
 - 从已经创建的容器中更新镜像，并且提交这个镜像
-
+  - 查看新镜像 docker images
   - 使用镜像来创建一个容器 `docker run -t -i ubuntu:15.10 /bin/bash`
+  - -p 3306:3306   表示在这个容器中使用3306端口(第二个)映射到本机的端口号也为3306(第一个)
   - 在运行的容器内使用 apt-get update 命令进行更新,exit退出容器
   - 提交容器`docker commit -m="has update" -a="runoob" e218edb10161 runoob/ubuntu:v2`
-  - 查看新镜像 docker images
   - 使用我们的新镜像 runoob/ubuntu 来启动一个容器`docker run -t -i runoob/ubuntu:v2 /bin/bash`
-
 - 使用 Dockerfile 指令来创建一个新的镜像,`cat Dockerfile`
   - 每一个指令都会在镜像上创建一个新的层，每一个指令的前缀都必须是大写的
   - FROM 和 MAINTAINER 通常出现在文件第一行，用于选择基础镜像和说明维护人信息，
@@ -166,12 +167,12 @@ ensure docker daemon runing
 
 ```
 FROM centos:6.7 MAINTAINER Fisher "fisher@sudops.com"
-RUN /bin/echo 'root:123456' |chpasswd 
-RUN useradd runoob 
-RUN /bin/echo 'runoob:123456' |chpasswd 
-RUN /bin/echo -e "LANG=\"en_US.UTF-8\"" >/etc/default/local 
-EXPOSE 22 
-EXPOSE 80 
+RUN /bin/echo 'root:123456' |chpasswd
+RUN useradd runoob
+RUN /bin/echo 'runoob:123456' |chpasswd
+RUN /bin/echo -e "LANG=\"en_US.UTF-8\"" >/etc/default/local
+EXPOSE 22
+EXPOSE 80
 CMD /usr/sbin/sshd -D
 ```
 
@@ -187,8 +188,6 @@ docker build [DOCKERFILE PATH] # Build an image from a Dockerfile
 docker build -t my-org:my-image -f /tmp/Dockerfile #  Build an image tagged my-org/my-image where the Dockerfile can be found at /tmp/Dockerfile.
 
 # 容器
-
-
 docker run -i -t ubuntu:15.10 /bin/bash # 在新容器内建立一个伪终端或终端。
 docker run -d -P training/webapp python app.py   #  -P :是容器内部端口随机映射到主机的高端口。
 docker run -d -p 127.0.0.1:5001:5002  --name runoob training/webapp python app.py   # -p : 是容器内部端口绑定到指定的主机端口。  使用--name标识来命名容器
@@ -234,6 +233,8 @@ sudo docker create -v /dbdata --name dbstore training/postgres /bin/true
 sudo docker run -d --volumes-from dbstore --name db1 training/postgres
 
 sudo docker run -d --add-host=SERVER_NAME:127.0.0.1 bat/spark
+
+docker exec -it [id]|[name] /bin/bash  #i是交互式操作，t是一个终端，d指的是在后台运行
 ```
 
 ### avoid sudo
@@ -316,8 +317,7 @@ services:
 
         container_name: "m.look.360.cn-php"
 ```
-
-> 参考
+## 参考
 
 * [Docker](http://blog.csdn.net/erixhao/article/details/72762851)
 * [Docker 教程](http://www.runoob.com/docker/docker-tutorial.html)
@@ -326,4 +326,4 @@ services:
 * [Product and tool manuals](https://docs.docker.com/manuals/) https://docs.docker.com/engine/installation/
 * [moby/moby](https://github.com/moby/moby)Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
 * [Docker — 从入门到实践](https://yeasy.gitbooks.io/docker_practice/)
-* [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects 
+* [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects
