@@ -338,7 +338,7 @@ header('Access-Control-Allow-Origin:*');
 
 ## HTTTPS
 
-HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL层，HTTPS的安全基础是SSL(Secure Sockets Layer 安全套接层)，因此加密的详细内容就需要SSL。
+HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL层，HTTPS的安全基础是SSL(Secure Sockets Layer 安全套接层)，因此加密的详细内容就需要SSL。HTTPS = HTTP 协议(进行通信) + SSL/TLS 协议（加密数据包），增加的 S 代表 Secure
 
 * HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息
 * HTTPS在HTTP的基础上加入了SSL协议，SSL依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密。
@@ -346,9 +346,14 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
     - 具有安全性的ssl加密传输协议
     - 端口也不一样，前者是80，后者是443
     - http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。
+* SSL（Secure Sockets Layer 安全套接字层），它是一项标准技术，用于在客户端与服务器之间进行加密通信，可确保互联网连接安全，防止网络犯罪分子读取和修改任何传输信息，包括个人资料。
+* TSL（Transport Layer Security 传输层安全），是 SSL 的继承协议，它建立在 SSL 3.0 协议规范之上，是更为安全的升级版 SSL。
 
 ![HTTPS签名和验证](../static/https-ac.png "HTTPS签名和验证")
 ![HTTP vs HTTPS](../static/https.png "HTTP与HTTPS区别")
+
+* 购买证书，配置域名信息
+* 获取证书文件，配置nginx,放到cert目录
 
 ## Token
 

@@ -68,6 +68,11 @@ service mysql start
 service mysql stop
 service mysql status
 service mysql restart
+
+
+## docker
+docker pull mysql
+docker run --name master -p 3306:3307 -e MYSQL_ROOT_PASSWORD=root -d mysql
 ```
 
 ## 概念

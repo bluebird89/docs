@@ -23,6 +23,7 @@
   - MacBook Pro:15寸，16G
   - Acer Chromebook R11
   - 明基爱眼显示器EW2775ZH
+  - 明基 PD2710QC
 
 ### 设计
 
@@ -205,6 +206,11 @@
 - [ ] PLAYERUNKNOWN'S BATTLEGROUNDS
 - [ ] Counter-Strike: Global Offensive
 - [ ] Frostpunk
+
+## 生活
+
+* 机票：https://flights.manzhinan.com/
+* 牙医：德真会
 
 ## Blog
 
