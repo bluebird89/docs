@@ -1,6 +1,7 @@
 * 宁可十年不将军，不可一日不拱卒
 * 人生如逆旅，我亦是行人
 * Stay hungry. Stay foolish.
+* 生活是属于每个人自己的感受， 不属于任何别人的看法。
 
 查理·芒格五条 《巴菲特合伙人查理·芒格的思考方法是怎样的？》
 
@@ -27,7 +28,19 @@
 ## 搞笑
 
 * 听我一句劝：不要养猫！这东西吧，你看看别人养是没问题的，你自己一旦沾上，整个人就彻底废了。你看着猫过着随心所欲的生活，想睡就睡，想吃就吃，想理你就理你不想理你当你不存在，你就会非常羡慕，觉得：哇！那么高级的灵魂！不行！今天不上班了！我得待在它身边，感受这种灵魂的自由，极度的自我！
-* 
+
+
+## 誓词
+
+> When love is the way, then no child will go to bed hungry in this world ever again. When love is the way, we will let justice roll down like a mighty stream and righteousness like an everflowing brook. When love is the way, poverty will become history. "
+> “当我们心中有爱，再也不会有孩子忍饥挨饿；当我们心中有爱，我们能让公正似水奔流，正义如泉喷涌；当我们心中有爱，贫穷将会成为历史。”
+
+> I Harry, take you, Meghan, to be my wife, to have and to hold from this day forward; for better, for worse,for richer,for poorer, in sickness and in health, to love and to cherish, till death us do part; according to God's holy law. In the presence of God I make this vow.
+> 在上帝的见证下、神的律法的指引下，我，哈里，愿意娶你，梅根，作为我的妻子。从此刻到永远，无论顺境或逆境、富有或贫穷、健康或疾病，我都将爱着你、珍惜你，直到死亡将我们分开。
+
+> I Meghan, take you, Harry, to be my husband, to have and to hold from this day forward; for better,for worse, for richer, for poorer, in sickness and in health, to love and to cherish, till death us do part; according to God’s holy law. In the presence of God I make this vow.
+> 在上帝的见证下、神的律法的指引下，我，梅根，愿意嫁给你，哈里，作为我的丈夫。从此刻到永远，无论顺境或逆境、富有或贫穷、健康或疾病，我都将爱着你、珍惜你，直到死亡将我们分开。
+
 ## 工具
 
 * [hackjutsu/Lepton](https://github.com/hackjutsu/Lepton):💻 Democratizing Snippet Management (macOS/Win/Linux) http://hackjutsu.com/Lepton
