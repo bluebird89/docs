@@ -14,6 +14,16 @@
 * UCD(User Centered Design):Business Technique User
 * IA(Infomation Architect):网站、App的结构安排以及内容是如何组织的，目的是帮助用户快速找到信息并且完成操作。包括设计网站地图、层次结构、分类、导航和元数据
 
+
+## 验证类型
+
+验证
+后续动作
+边界条件
+
+* 输入
+* 表单
+
 ### 交互
 
 ```html
@@ -33,14 +43,3 @@
     <meta http-equiv="refresh" content="5"> 
 </script>
 ```
-
-## 参考
-
-* 设计中的设计
-* 写给大家看的设计书（第4版）
-* 设计师要懂心理学
-* 移动交互设计精髓：设计完美的移动用户界面
-* 交互设计那些事儿
-* 超越css
-* 禅意花园
-* 无懈可击的web设计

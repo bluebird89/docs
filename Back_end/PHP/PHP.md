@@ -1060,6 +1060,10 @@ mysqli_close($conn);
 - 正则匹配src标签
 - 处理回文字符
 
+#### 继承
+
+默认继承父类构造函数
+
 #### 访问控制(可见性)
 
 * public表明类成员在任何地方可见
@@ -1195,6 +1199,8 @@ printworking(new manager());//显示经理的工作
 ?>
 ```
 
+静态方法只能调静态变量
+
 #### trait
 
 实现多继承,优先级:当前类的成员>trait 的方法>被继承的方法。
@@ -1227,7 +1233,6 @@ $comment->owner();
 * 重写vs重载
     - 重载指多个名字相同，但参数不同的函数在同一作用域并存的现象.参数不同有三种情况：参数个数不同，参数类型不同，参数顺序不同.函数重载多见于强类型语言，编译后函数在函数符号表的名称一般是函数名加参数类型
         + php不支持：function_exists、 method_exists、is_callable、get_defined_functions、ReflectionMethod/ReflectionFunction类的getParameters/getNumberOfParameters/getNumberOfRequiredParameters
-            * 
     - 重写出现在继承中，指子类重定义父类功能的现象，也被称为覆盖,即相同签名的成员函数在子类中重新定义（实现抽象函数或接口不是重写），是实现多态（polymorphism）的一种关键技术
 
 ```php
@@ -1453,6 +1458,11 @@ spl_autoload_register('autoload');
 * 自动载入器的实现不可抛出任何异常，不可引发任何等级的错误；也不应返回值；
 * 自动生成的PSR4配置文件名称为autoload_psr4.php（PSR0的是autoload_namespace.php），配置文件返回一个关联数组，键是名称空间的前缀，值是名称空间前缀对应的路径。
 
+## 框架
+
+spl_autoload
+spl_autoload_register
+
 ## 源码
 
 * [php/php-src](https://github.com/php/php-src):The PHP Interpreter <http://www.php.net>
@@ -1475,6 +1485,7 @@ spl_autoload_register('autoload');
 ### 电商
 
 - [magento/magento2](https://github.com/magento/magento2): a cutting edge, feature-rich eCommerce solution that gets results.
+- [drupal/drupal](https://github.com/drupal/drupal):Verbatim mirror of the git.drupal.org repository for Drupal core. Changes will not be pulled, and merge requests will not be accepted, if you want to contribute, go to Drupal.org: https://drupal.org/project/drupal
 
 ### CMS
 
