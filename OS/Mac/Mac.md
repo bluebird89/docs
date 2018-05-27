@@ -105,6 +105,7 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - [ulysses](https://ulyssesapp.com/)
 - [marked2](http://marked2app.com/)
 - [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
+- Upad
 
 ### 工具
 
@@ -131,7 +132,7 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 ### 交流
 
 * [Textual 7](Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.)
-- OmniFocus
+- OmniFocus，OmniOutliner，OmniPlan，OmniGraffle
 
 ### RSS
 
