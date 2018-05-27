@@ -24,6 +24,7 @@
   - Acer Chromebook R11
   - 明基爱眼显示器EW2775ZH
   - 明基 PD2710QC
+* Nintendo Switch
 
 ### 设计
 
@@ -188,7 +189,7 @@
 
 ## 游戏
 
-## PC
+### PC
 
 * PES
 * 战地
@@ -200,6 +201,7 @@
 - [ ] ring
 - [ ] 纪念碑谷
 - [ ] Alliance: Air War by Art of the State LLC
+- [ ] 王权 Reigns
 
 ### steam游戏平台
 
@@ -224,6 +226,14 @@
 ## 书写规范
 
 * [中英文简历撰写排版指南](http://ppresume.com/notes/guide-zh.html)
+
+## APP
+
+* 36氪
+* quora
+* 知乎
+* Medium
+* Pinterest
 
 ## 参考
 
