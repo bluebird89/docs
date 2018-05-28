@@ -1,4 +1,3 @@
-
 # Percona
 
 数据库审计功能:需要使用MySQL企业版，或者Percona/MariaDB分支版本，MySQL社区版本不支持该功能。
@@ -15,6 +14,7 @@ MariaDB在10.0.9版本起使用XtraDB（名称代号Aria）来代替MySQL的Inno
 安装不要制定版本,会有合适版本安装
 
 下载
+
 ```sh
 wget https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.18-14/binary/tarball/Percona-Server-5.7.18-14-Linux.x86_64.ssl100.tar.gz
 
@@ -30,28 +30,38 @@ sudo apt install percona-server-server-5.7
 
 wget https://www.percona.com/downloads/Percona-Server-5.6/Percona-Server-5.6.25-73.1/binary/debian/jessie/x86_64/Percona-Server-5.6.25-73.1-r07b797f-jessie-x86_64-bundle.tar
 tar xvf Percona-Server-5.6.25-73.1-r07b797f-jessie-x86_64-bundle.tar
+
 sudo dpkg -i *.deb
+
+sudo apt install libfile-fnmatch-perl
+sudo apt install debsums
+sudo dpkg -i percona-server-common-5.7_5.7.21-21-3.bionic_amd64.deb
+sudo apt install zlib1g-dev
+sudo dpkg -i percona-server-server-5.7_5.7.21-21-3.bionic_amd64.deb
+sudo dpkg -i percona-server-client-5.7_5.7.21-21-3.bionic_amd64.deb
+sudo apt intall libaio1 libmecab2
+sudo apt --fix-broken install
 ```
 
 ```sh
-service mysql stop 
+service mysql stop
 apt-get purge -y mysql-*
 
-service mysql stop 
-mkdir /usr/local/src/mysql_backup 
+service mysql stop
+mkdir /usr/local/src/mysql_backup
 cp -R /var/lib/mysql /usr/local/src/mysql_backup
 
-service mysql stop 
+service mysql stop
 apt-get purge -y mysql-*
 
-cd /usr/local/src 
-wget https://repo.percona.com/apt/percona-release_0.1-3.$(lsb_release -sc)_all.deb 
+cd /usr/local/src
+wget https://repo.percona.com/apt/percona-release_0.1-3.$(lsb_release -sc)_all.deb
 `dpkg -i percona-release_0.1-3.$(lsb_release -sc)_all.deb `
 apt-get update
 
 apt-get install -y percona-server-server-5.5
 
-mysql -e "CREATE FUNCTION fnv1a_64 RETURNS INTEGER SONAME 'libfnv1a_udf.so'" 
+mysql -e "CREATE FUNCTION fnv1a_64 RETURNS INTEGER SONAME 'libfnv1a_udf.so'"
 mysql -e "CREATE FUNCTION fnv_64 RETURNS INTEGER SONAME 'libfnv_udf.so'"
 mysql -e "CREATE FUNCTION murmur_hash RETURNS INTEGER SONAME 'libmurm'"
 
@@ -118,3 +128,4 @@ apt-get install percona-server-server
 ## 参考
 
 * [Percona Toolkit Documentation](https://www.percona.com/doc/percona-toolkit/2.1/index.html)
+* [downloads](https://www.percona.com/downloads/Percona-Server-5.7/)

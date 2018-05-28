@@ -1,6 +1,6 @@
 # Apache
 
-最流行的服务器
+WEB服务器
 
 * 基于文件配置。
 * 跨平台的,所有操作系统都能安装。
@@ -79,21 +79,21 @@ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-availab
 # value is not decisive as it is used as a last resort host regardless.
 # However, you must set it for any further virtual host explicitly.
 #ServerName www.example.com
- 
+
 ServerAdmin webmaster@unixmen2.local
 ServerName unixmen2.local
 ServerAlias www.unixmen2.local
 DocumentRoot /var/www/unixmen2.local/public_html
- 
+
 # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
 # error, crit, alert, emerg.
 # It is also possible to configure the loglevel for particular
 # modules, e.g.
 #LogLevel info ssl:warn
- 
+
 ErrorLog ${APACHE_LOG_DIR}/error.log
 CustomLog ${APACHE_LOG_DIR}/access.log combined
- 
+
 # For most configuration files from conf-available/, which are
 # enabled or disabled at a global level, it is possible to
 # include a line for only one particular virtual host. For example the
@@ -123,19 +123,22 @@ httpd.conf文件为服务器的主配置文件
         + FollowSymLinks：表示支持符号链接
     - Order:deny allow同时出现，指定禁止和允许的顺序，后面的重写前面的
         + Order Deny,Allow   先禁止，后允许
-        + Order Allow,Deny   先允许，后禁止 
+        + Order Allow,Deny   先允许，后禁止
     - Deny:禁止哪些外部IP的访问
         + Deny from All    //禁止所有IP的访问
         + Deny from 192.168.21.89   //禁止192.168.21.89的访问
         + Deny from 192.168.21     //禁止了整个网段
         + Deny from 192.168.21.89  192.168.21.34 //同时禁止这个IP访问
     - allow:允许哪些外部IP的访问
-        + Allow from All 
+        + Allow from All
         + Allow from 192.168.21.89
         + Allow from 192.168.21.89  192.168.21.34
 * 在apache配置中添加PHP模块，PHP模块不用单独启动，也不能单独停止，一般情况下，是Apache启动时，PHP5模块也跟着启动了。
 
 ```
+# ubuntu 18.04 don't do this
+sudo apt install libapache2-mod-php
+
 AddHandler application/x-httpd-php .php #  AddHandler handler_name extension1 extension2 如果你预览的文件是.php后缀，去调用PHP处理器
 AddType application/x-httpd-php .php .html # 添加文件类型和扩展名之间的映射关系
 LoadModule php7_module "C:/php7/php7apache2_4.dll" # LoadModule   module_name   module_path
@@ -165,7 +168,7 @@ httpd.exe -M # 查看apache加载了哪些模块
 
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L] 
+    RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
 </IfModule>
 ```
 
@@ -400,10 +403,10 @@ brew install httpd24
 brew install mod_fastcgi --with-brewed-httpd24
 
 // 编辑 /usr/local/etc/apache2/2.4/httpd.conf
-LoadModule fastcgi_module /usr/local/opt/mod_fastcgi/libexec/mod_fastcgi.so 
+LoadModule fastcgi_module /usr/local/opt/mod_fastcgi/libexec/mod_fastcgi.so
 
 <IfModule fastcgi_module>
-    ProxyPassMatch ^/(.*\.php(/.*)?)$ 
+    ProxyPassMatch ^/(.*\.php(/.*)?)$
     unix:/usr/local/var/run/php-fpm.sock|fcgi://127.0.0.1:9000/usr/local/var/www/htdocs
 </IfModule>
 ```
