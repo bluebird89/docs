@@ -98,14 +98,17 @@ Command                    | Description
 `apm install emmet@0.1.5`  |
 `apm remove emmet`         |
 
+- activate-power-mode-master
 - advanced-open-file@0.16.6
 - angularjs@0.4.0
 - atom-autocomplete-php@0.25.6
 - atom-beautify@0.30.5 代码格式化，可以在setting中不同语言设置 保存格式化后置操作Beautify On Save
+- atom-script-master
 - atom-terminal@0.8.0
 - atom-ternjs@0.18.3
 - atom-typescript@11.0.6
 - autocomplete-paths@2.8.0
+- autocomplete-python
 - busy-signal@1.4.3
 - color-picker@2.2.5
 - editorconfig@2.2.2
@@ -119,6 +122,7 @@ Command                    | Description
 - language-babel@2.71.0
 - language-docker@1.1.8
 - language-javascript-jsx@0.3.7
+- language-latex-master + atom-latex-master + atom-pdf-view-master
 - language-markdown@0.25.1
 - language-vue@0.23.1
 - linter@2.2.0
@@ -136,6 +140,7 @@ Command                    | Description
 - activate-power-mode：打字爆炸模式
 - atom-ide-ui
 - Teletype
+- terminal-plus
 
 ## 快捷键 Atom Keyboard Shortcuts
 

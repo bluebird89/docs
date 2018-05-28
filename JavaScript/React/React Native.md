@@ -262,6 +262,7 @@ npm run eject #  导出配置文件
 * [necolas/react-native-web](https://github.com/necolas/react-native-web):React Native for Web
 * [react-native-training/react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit
 * [markerikson/react-redux-links](https://github.com/markerikson/react-redux-links):Curated tutorial and resource links I've collected on React, Redux, ES6, and more
+* [redux-offline/redux-offline](https://github.com/redux-offline/redux-offline):Build Offline-First Apps for Web and React Native
 
 ## 参考
 
