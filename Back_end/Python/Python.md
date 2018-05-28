@@ -27,11 +27,11 @@ Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编
 ### MAC
 
 * Mac下的python2.7 默认是安装在／System目录下的。但是～～～Mac有个Rootless机制，默认不允许直接在／System下作修改。所以要先关闭Rootless机制。关闭有风险
-    - 重启电脑, 重启过程中按住command+R, 进入恢复模式 
-    - 打开terminal，键入: csrutil disable 
+    - 重启电脑, 重启过程中按住command+R, 进入恢复模式
+    - 打开terminal，键入: csrutil disable
     - 重启电脑
 * 自带版本路径：/System/Library/Frameworks/Python.framework/Versions/Current
-* 安装的3.6版本：/usr/local/Cellar/python3/3.6.4_2 
+* 安装的3.6版本：/usr/local/Cellar/python3/3.6.4_2
 * Anaconda :/Users/henry/anaconda/bin
 
 ```shell
@@ -257,7 +257,7 @@ print('hello,', name)
         + 重复元素在set中自动被过滤
         + 数学意义上的无序和无重复元素的集合，因此，两个set可以做数学意义上的交集、并集
         + set和dict的唯一区别仅在于没有存储对应的value，但是，set的原理和dict一样，所以，同样不可以放入可变对象，因为无法判断两个可变对象是否相等，也就无法保证set内部“不会有重复元素”。
-* 变量不仅可以是数字，还可以是任意数据类型 
+* 变量不仅可以是数字，还可以是任意数据类型
     - 必须是大小写英文、数字和_的组合，且不能用数字开头
     - 等号=是赋值语句，可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量
     - 变量本身类型不固定的语言称之为动态语言，与之对应的是静态语言。静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。例如Java是静态语言
@@ -290,7 +290,7 @@ int('12345', 16) # 74565
 
 classmates = ['Michael', 'Bob', 'Tracy']
 classmates[0] #  'Michael'  获取元素
-classmates[-1] # 'Tracy' 
+classmates[-1] # 'Tracy'
 classmates.append('Adam')  # ['Michael', 'Bob', 'Tracy', 'Adam']
 classmates.insert(1, 'Jack') # ['Michael', 'Jack', 'Bob', 'Tracy', 'Adam']
 classmates.pop() # 'Adam'   删除list末尾的元素
@@ -476,7 +476,7 @@ len(b'ABC') # 3
 len(b'\xe4\xb8\xad\xe6\x96\x87') # 6
 len('中文'.encode('utf-8')) # 6
 
-#!/usr/bin/env python3  
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 'Hi, %s, you have $%d.' % ('Michael', 1000000)
@@ -865,7 +865,7 @@ def log(text):
     return decorator
 
 import functools
-int2 = functools.partial(int, base=2) 
+int2 = functools.partial(int, base=2)
 int2('100000') # 32 int('100000', **{ 'base':2 })
 
 max2 = functools.partial(max, 10)
@@ -1172,7 +1172,7 @@ conda 是开源包（packages）和虚拟环境（environment）的管理系统�
 
 ```sh
 #  更改镜像
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ 
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config --set show_channel_urls yes
 
 echo 'export PATH="~/User/henry/anaconda/bin:$PATH"' >> ~/.zshrc # 添加环境变量
@@ -1183,7 +1183,7 @@ conda search search_term
 conda update conda
 conda upgrade --all   # 升级工具包
 conda install numpy scipy pandas
-conda install numpy=1.10   
+conda install numpy=1.10
 conda update package_name
 conda remove package_name
 
@@ -1198,7 +1198,7 @@ which -a python
 conda env remove -n env_name  # 删除名为 env_name 的环境
 
 conda env list # 显示所有的环境
-conda list --revisions 
+conda list --revisions
 conda install -n python34 numpy
 conda list -n python34
 conda env export > environment.yaml  # 分享代码的时候，同时也需要将运行环境分享给大家，执行如下命令可以将当前环境下的 package 信息存入名为 environment 的 YAML 文件中
@@ -1305,99 +1305,6 @@ CMD ["python3"]
 
 安装 chromedriver
 
-## 课程
-
-* Python核心编程
-    - 掌握Python基础编程语法；
-    - 建立起编程思维和面向对象思想；
-    - 可解决的现实问题：字符串排序、切割、逆置，猜数字，对问题的面向对象抽象，飞机大战游戏；
-    - 计算机组成原理和开发环境：认识操作系统、认识python、开发环境pycharm；
-    - 基础语法
-        + 注释、变量以及类型、标识符和关键字、输出/输入、运算符、数据类型转换、if判断语句、比较和关系运算符、if-else语句、if-elif语句、if嵌套、if应用：猜拳游戏、while循环语句、while循环应用、while嵌套、for循环、break和continue、字符串介绍、字符串的输出/输入、下标和切片、字符串常见操作、列表的操作、元组操作、字典操作；
-        + 函数  函数的概念、函数的定义和调用、函数的文档说明、函数参数、函数的返回值、4种函数的类型、函数的嵌套调用、局部变量、全局变量、函数应用案例、引用、递归函数、匿名函数、列表推导式
-        + 文件操作    文件介绍、文件的打开与关闭、文件的读写、应用案例1：文件拷贝、文件重命名、删除、文件夹的相关操作、应用案例2:批量修改文件名、文件综合案例:学生管理系统(文件版)；
-        + 面向对象    面向对象编程介绍、类和对象、类的定义、创建对象、魔法方法 __init__方法、魔法方法 __str__方法、魔法方法 __del__方法、self的作用、对象成员访问控制权限、单继承
-        + 多继承、重写方法以及调用被重写的方法、多态、类属性和实例属性、类方法、实例方法和静态方法、单例模式、__new__()方法；
-        + 异常处理    异常介绍、捕获异常、异常的传递、自定义异常、异常处理中抛出异常；
-        + 模块  模块介绍、模块中的__all__、模块的导入, import语句、模块的导入, from ... import语句、模块的导入, from ... import *语句、包介绍、包的导入和使用；
-        + 项目：飞机大战 pygame介绍、界面搭建、键盘检测、显示、控制飞机、飞机发射子弹、显示敌机、移动敌机、敌机进攻发射子弹、面向对象完成代码的封装；
-* python和Linux高级编程
-    - Linux基本命令：Ubuntu操作系统使用、Ubuntu软件安装与卸载、文件和目录操作命令、文件属性修改命令、查找与检索命令、压缩包管理、其他命令、常用服务器ftp/ssh、编辑器vim/sublime/gedit/pycharm； 
-    - 网络编程    多任务-进程、多任务-线程、多任务-协程、网络-UDP、网络-TCP、正则表达式；
-    - 项目：网络web服务器 mini-web 服务器
-    - 数据库编程   MySQL基本使用、MySQL查询操作、MySQL与Python交互、MySQL高级特性；
-    - 项目：综合web框架  python 高级语法、mini web框架；
-    - 可掌握的核心能力：
-        1、掌握python高级编程，能进行面向对象设计；
-        2、了解Linux系统编程原理，认知程序运行的本质，方便后期开发出高质量的程序；
-        3、掌握网络编程协议，实现网络间点对点通信；
-        4、掌握关系型数据库MySql开发，熟练编写SQL语句；
-        5、掌握正则表达式，进行字符串模糊匹配；
-        6、掌握了web服务器的运行原理；
-        7、MySQL数据库操作和设计；
-        8、掌握元类对数据库封装的设计思想；
-    - 可解决的现实问题：能够面向对象分析和设计程序，进行网络通信开发，实现基于Linux系统高并发异步web服务器；
-* web开发
-    - Flask web框架 Flask入门、模板与表单、数据库使用、单元测试、第三方扩展和部署
-    - 项目：新经资讯网    Redis缓存、GIT版本控制、前后端不分离开发、Flask+Mysql实现、容联云、七牛云、图片验证码；
-    - 项目：运维管理平台   前后端分离开发、Flask+Vue+SaltStack、Celery异步操作、RESTful接口开发、WebSSH
-    - Django 框架   Django入门、Django模型、视图、模板、Django框架ORM使用、Django中间件、Django REST framework；
-    - 项目：美多商城 购物电商平台项目编码、Django高级第三方模块、FastDFS分布式文件存储、MySQL读写分离、在线支付、Nginx配置和uWSGI部署；
-    - 可掌握的核心能力：
-        1、 可根据产品原型图，开发web网站的前端界面；
-        2、 可根据业务流程图，开发web网站的后台业务；
-        3、 可根据web框架设计，开发对应的数据库；
-        4、 缓存服务器的操作和设计；
-        5、 异步任务的实现。
-    - 可解决的现实问题：
-        1、 高并发全功能的web网站开发；
-        2、 提供数据响应速度灵活运用缓存；
-        3、 根据实际问题设计出相应数据库表；
-* 爬虫开发
-    - 可掌握的核心能力
-        1、掌握爬虫的工作原理和设计思想；
-        2、掌握反爬虫机制；
-        3、掌握分布式数据采集；
-    - 可解决的现实问题：
-        1、定向抓取互联网中指定领域的海量信息；
-        2、运用分布式爬虫，实现规模化数据采集；
-        3、能够根据实际开发需求，定制爬虫采集系统；
-    - 爬虫知识体系与相关工具、请求处理urllib/urllib2、Requests模块、数据提取re、lxml、bs4、jsonpath模块、爬虫并发控制和动态页面处理、Selenium+PhantomJS/Chrome；   可掌握的核心能力：
-    - Mongodb应用开发：基本使用增删改查操作、高级查询和分组聚合操作、索引操作、备份和恢复处理、Mongodb和Python交互；
-    - Scrapy框架和scrapy-redis
-    - 分布式组件   scrapy框架、scrapy-redis分布式组件、项目：全国空气质量数据采集爬虫；
-    - 项目：定制化爬虫框架TaskSpider   定制化的爬虫采集系统、处理数据的抓取和解析存储、项目：国内主流职位招聘网站数据采集爬虫；
-* 人工智能
-    - 数据挖掘基础：科学计算numpy、pandas、数据可视化matpalotlib、金融数据的分析和处理
-    - 机器学习：特征工程、监督学习分类算法、监督学习回归算法、非监督学习、Scikit-learn使用、模型选择与调优；
-    - 项目：自动量化交易平台    历史数据、实时数据；股票、期货数据指标；多因子模型；量化交易策略；回测框架；交易框架；
-    - 深度学习：TensorFlow框架开发、Tensorflow IO操作、神经网络基础、全连接神经网络实现、卷积神经网络网络与实现、项目：图像识别、检测；
-    - 可掌握的核心能力：
-        1、掌握数据挖掘基础工具使用；
-        2、掌握数据挖掘处理数据方法；
-        3、了解常见机器学习算法原理；
-        4、根据量化交易规则设计策略；
-        5、掌握深度学习算法和框架；
-        6、图像识别、检测的实现；
-    - 可解决的现实问题：
-        1、从数据支持到策略开发；
-        2、实现自动量化交易平台；
-        3、深度学习模型的训练过程；
-        4、图像识别、检测任务；
-* 自动化运维 
-    - shell基本语法及脚本开发规范、shell变量、表达式、shell脚本常见符号和命令、shell流程控制、shell编程综合演练、项目生命周期、自动化代码发布、django项目生产环境部署、手工代码发布、简单脚本编写流程及提高、大型脚本编写流程及提高； 可掌握的核心能力：
-        + 1、掌握shell编程基础和开发技巧；
-        + 2、掌握shell编程常用表达式和流程控制语句；
-        + 3、掌握项目发布的流程规范；
-        + 4、掌握生产脚本的编写流程规范；
-        + 5、了解项目生命周期及项目常见开发模式；
-    - 可解决的现实问题：
-        - 1、项目环境自动化部署；
-        - 2、项目代码自动化发布；
-        - 3、项目生命周期理解；
-* 数据结构
-    - 时间和空间复杂度、链表、桟和队列、排序、二叉树、python内建数据结构类型；
-
 ## 问题
 
 ```
@@ -1412,6 +1319,7 @@ CMD ["python3"]
 - [faif/python-patterns](https://github.com/faif/python-patterns):A collection of design patterns/idioms in Python
 - [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
 - [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
+- [Python 中文学习大本营](http://www.pythondoc.com/)
 
 ## 类库
 
