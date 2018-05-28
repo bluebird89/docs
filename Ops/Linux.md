@@ -385,6 +385,7 @@ Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。命令
 * help 用于显示 shell 内建命令的简要帮助信息 help exit
 * man
 * info ls
+* lsb_release -a
 
 #### 修改时区
 
@@ -1250,4 +1251,3 @@ Failed to start mysql.service: Unit mysql.service is masked.
 
 systemctl unmask mysql.service
 service mysql start
-
