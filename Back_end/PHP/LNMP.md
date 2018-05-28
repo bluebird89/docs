@@ -4,6 +4,9 @@
 
 ### Nginx
 
+/etc/nginx
+/var/www/html
+
 ```sh
 wget http://nginx.org/keys/nginx_signing.key
 sudo apt-key add nginx_signing.key
@@ -12,7 +15,7 @@ echo "deb http://nginx.org/packages/ubuntu/ trusty nginx" >> /etc/apt/sources.li
 echo "deb-src http://nginx.org/packages/ubuntu/ trusty nginx" >> /etc/apt/sources.list
 
 echo "deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx" >> /etc/apt/sources.list  // Nginx1.9以上的版本可以在packages后添加/mainline，这是主线版本
-echo "deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx" >> /etc/apt/sources.listen 
+echo "deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx" >> /etc/apt/sources.listen
 
 sudo apt-get update
 sudo apt-get install nginx
@@ -21,6 +24,11 @@ apt-get install python-software-properties
 add-apt-repository ppa:nginx/stable
 apt-get update
 apt-get install nginx
+
+sudo systemctl stop nginx.service
+sudo systemctl start nginx.service
+sudo systemctl restart nginx.service
+sudo systemctl reload nginx.service
 ```
 
 root目录显示文件列表
@@ -42,11 +50,15 @@ There are three levels of password validation policy:
 # LOW    Length >= 8
 # MEDIUM Length >= 8, numeric, mixed case, and special characters
 # STRONG Length >= 8, numeric, mixed case, special characters and dictionary
- 
+
 wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
 dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
 apt-get update
 apt-get install percona-server-server-5.7
+
+
+sudo service mysql status
+sudo mysqladmin -p -u root version
 ```
 
 ### PHP
@@ -55,6 +67,7 @@ apt-get install percona-server-server-5.7
 
 ```sh
 sudo apt-get install python-software-properties software-properties-common
+sudo apt-get install software-properties-common # ubuntu 18.04
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
 sudo apt-get install php7.1 php7.1-fpm php7.1-mysql php7.1-common php7.1-curl php7.1-cli php7.1-mcrypt php7.1-mbstring php7.1-dom
@@ -912,4 +925,4 @@ openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=US/ST=State/L
 * [lj2007331/oneinstack](https://github.com/lj2007331/oneinstack):OneinStack - A PHP/JAVA Deployment Tool https://oneinstack.com/
 * [cytopia/devilbox](https://github.com/cytopia/devilbox):A modern dockerized LAMP and MEAN stack alternative to XAMPP http://devilbox.org
 * [lj2007331/lnmp](https://github.com/lj2007331/lnmp):LEMP stack/LAMP stack/LNMP stack installation scripts for CentOS/Redhat Debian and Ubuntu https://blog.linuxeye.cn/31.html
-* 
+*
