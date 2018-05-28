@@ -122,14 +122,13 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 * Viber：跨平台的 Skype 替代品
 * Vivaldi：功能强大的 web 浏览器
 * BleachBit: cleaner(softer center)
-* VLC
 * albert
 * 听播客: Vocal
 * PDF 阅读：Foxit Reader
 * gimp
 * Gtile:分屏工具
 * MySQL Workbench
-* vscode
+* Cloud music
 * shadowshocks
 * Jitsy:通讯工具
 * Synaptic：软件管理
@@ -169,10 +168,16 @@ sudo apt-get autoclean #移除已安装的软件的旧版本软件包
 --reinstall # 重新安装已经安装但可能存在问题的软件包
 --install-suggests # 同时安装APT给出的建议安装的软件包
 sudo apt-cache search softname1 softname2 softname3...... # 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
-sudo add-apt-repository --remove ppa:finalterm/daily
+sudo add-apt-repository --remove ppa:finalterm/daily # remove
+
+sudo dpkg -i netease-cloud-music_1.1.0_amd64_ubuntu.deb # install failed.depency to install
+sudo apt --fix-broken install # continue install
+
+dpkg -l | grep vim
+sudo apt-get remove netease-cloud-music
 ```
 
-> 源管理
+## 源管理
 
 http://mirrors.aliyun.com
 
@@ -185,6 +190,9 @@ add source
 sudo add-apt-repository ppa:nilarimogard/webupd8
 sudo apt update
 sudo apt install albert
+
+sudo apt install -f # fix software database is boken
+sudo apt update --fix-missing
 ```
 
 > 从磁盘安装deb安装包
@@ -654,17 +662,17 @@ ssh username@remote_host ls /var/www
 
 ### 软件安装
 
-> sougou pinyin install
+#### [sougou pinyin](https://pinyin.sogou.com/linux/?r=pinyin)
 
 command line或者package
 
 ```sh
-# download sogou_pinyin_linux_1.0.0.0033_amd64.deb
-sudo dpkg  -i   sogou_pinyin_linux_1.0.0.0033_amd64.deb # 手动安装
+# download sogoupinyin_2.2.0.0108_amd64.deb
+sudo dpkg  -i   sogoupinyin_2.2.0.0108_amd64.deb # 手动安装
 
 # 配置
 system setting->language support
-choose language,key input fcitx
+choose language,key input method system: fcitx
 ```
 
 > atom install
@@ -673,6 +681,8 @@ choose language,key input fcitx
 sudo add-apt-repository ppa:webupd8team/atom
 sudo apt-get update
 sudo apt-get install atom
+
+sudo apt install vlc
 ```
 
 > ervernote

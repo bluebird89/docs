@@ -104,11 +104,18 @@ source ~/.bashrc # 运行
 
 zsh # 切换zsh
 bash # 切换 bash
+
+cd ~/.oh-my-zsh/custom/plugins
+git clone git://github.com/zsh-users/zsh-syntax-highlighting.git # add to .zshrc plugin
 ```
 
 > 配置： home目录的.zshrc(不用单配，插件配置有)
 
+install fonts-powerline:`sudo apt-get install fonts-powerline`
+
 ```
+ZSH_THEME="agnoster"
+
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
@@ -142,11 +149,22 @@ ZSH_THEME="robbyrussell" # 主题设置（文件在~/.oh-my-zsh/themes）
 
 # 插件
 plugins=(git textmate ruby autojump osx mvn gradle autojump)
+
+export DEFAULT_USER="henry" # hide username
 ```
 
 ```
 PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}>'
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+```
+
+
+### shadowsocks-qt5
+
+```sh
+sudo add-apt-repository ppa:hzwhuang/ss-qt5
+sudo apt-get update
+sudo apt-get install shadowsocks-qt5
 ```
 
 ### fish
@@ -522,6 +540,24 @@ cat ~/pub_key >>~/.ssh/authorized_keys //将内容追加到authorized_keys文件
 ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root/.ssh/id_rsa.pub') }}'" -k
 ```
 
+## 18.04
+
+* cgroup v2
+* AMD 安全内存加密
+* 最新 MD 驱动
+* 针对 SATA Link 电源管理的改进
+* 默认采用的 JRE/JDK 是 OpenJDK 10
+
+## config
+
+* install sogou chrome VLC git zsh
+* Ubuntu Software => Add-ons => Shell extensions:NetSpeed  Coverflow Alt-Tab
+* 统一管理主题中的各个部分:`sudo apt install gnome-tweak-tool`
+* sudo vim /etc/default/grub
+    - `add  GRUB_DISABLE_OS_PROBER=true`
+    - 修复grub:sudo update-grub
+
+
 ## 参考
 
 * [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager.
@@ -530,3 +566,4 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 * [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
 * [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)
 * [svenstaro/genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator https://svenstaro.github.io/genact/
+* [](https://www.noobslab.com/)
