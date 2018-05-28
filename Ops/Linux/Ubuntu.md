@@ -173,23 +173,23 @@ sudo add-apt-repository --remove ppa:finalterm/daily # remove
 sudo dpkg -i netease-cloud-music_1.1.0_amd64_ubuntu.deb # install failed.depency to install
 sudo apt --fix-broken install # continue install
 
+sudo apt-get -f install # 解决依赖问题
+
 dpkg -l | grep vim
 sudo apt-get remove netease-cloud-music
 ```
 
 ## 源管理
 
-http://mirrors.aliyun.com
+[Aliyun](http://mirrors.aliyun.com)
 
-```
-sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak #备份系统默认的软件源
+```sh
+sudo mv /etc/apt/sources.list /etc/apt/sources.list.backup #备份系统默认的软件源
 sudo vim /etc/apt/sources.list
 
-add source
-
-sudo add-apt-repository ppa:nilarimogard/webupd8
+sudo add-apt-repository ppa:nilarimogard/webupd8   # add source
+sudo add-apt-repository -r ppa:nilarimogard/webupd8   # add source
 sudo apt update
-sudo apt install albert
 
 sudo apt install -f # fix software database is boken
 sudo apt update --fix-missing
@@ -673,6 +673,7 @@ sudo dpkg  -i   sogoupinyin_2.2.0.0108_amd64.deb # 手动安装
 # 配置
 system setting->language support
 choose language,key input method system: fcitx
+fcitx add sogou pinyin
 ```
 
 > atom install
@@ -685,7 +686,7 @@ sudo apt-get install atom
 sudo apt install vlc
 ```
 
-> ervernote
+> evernote
 
 ```sh
 sudo add-apt-repository ppa:nixnote/nixnote2-daily
@@ -948,6 +949,23 @@ sudo apt-get remove thunderbird totem rhythmbox simple-scan gnome-mahjongg aisle
 sudo apt-get autoremove
 sudo apt-get autoclean
 ```
+
+## 18.04
+
+* cgroup v2
+* AMD 安全内存加密
+* 最新 MD 驱动
+* 针对 SATA Link 电源管理的改进
+* 默认采用的 JRE/JDK 是 OpenJDK 10
+
+## config
+
+* install sogou chrome VLC git zsh
+* Ubuntu Software => Add-ons => Shell extensions:NetSpeed  Coverflow Alt-Tab
+* 统一管理主题中的各个部分:`sudo apt install gnome-tweak-tool`
+* sudo vim /etc/default/grub
+    - `add  GRUB_DISABLE_OS_PROBER=true`
+    - 修复grub:sudo update-grub
 
 ## 参考
 
