@@ -540,24 +540,6 @@ cat ~/pub_key >>~/.ssh/authorized_keys //将内容追加到authorized_keys文件
 ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root/.ssh/id_rsa.pub') }}'" -k
 ```
 
-## 18.04
-
-* cgroup v2
-* AMD 安全内存加密
-* 最新 MD 驱动
-* 针对 SATA Link 电源管理的改进
-* 默认采用的 JRE/JDK 是 OpenJDK 10
-
-## config
-
-* install sogou chrome VLC git zsh
-* Ubuntu Software => Add-ons => Shell extensions:NetSpeed  Coverflow Alt-Tab
-* 统一管理主题中的各个部分:`sudo apt install gnome-tweak-tool`
-* sudo vim /etc/default/grub
-    - `add  GRUB_DISABLE_OS_PROBER=true`
-    - 修复grub:sudo update-grub
-
-
 ## 参考
 
 * [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager.
