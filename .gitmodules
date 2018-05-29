@@ -40,3 +40,6 @@
 [submodule "Note/free-programming-books"]
 	path = Note/free-programming-books
 	url = git@github.com:justjavac/free-programming-books-zh_CN.git
+[submodule "Back_end/Python/awesome-python"]
+	path = Back_end/Python/awesome-python
+	url = git@github.com:vinta/awesome-python.git

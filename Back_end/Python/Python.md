@@ -1313,13 +1313,14 @@ CMD ["python3"]
 
 ## 参考
 
-- [python/cpython](https://github.com/python/cpython):The Python programming language
-- [donnemartin/data-science-ipython-notebooks](https://github.com/donnemartin/data-science-ipython-notebooks):Data science Python notebooks: Deep learning (TensorFlow, Theano, Caffe, Keras), scikit-learn, Kaggle, big data (Spark, Hadoop MapReduce, HDFS), matplotlib, pandas, NumPy, SciPy, Python essentials, AWS, and various command lines.
-- [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide):Python best practices guidebook, written for Humans. http://docs.python-guide.org
-- [faif/python-patterns](https://github.com/faif/python-patterns):A collection of design patterns/idioms in Python
-- [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
-- [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
-- [Python 中文学习大本营](http://www.pythondoc.com/)
+* [python/cpython](https://github.com/python/cpython):The Python programming language
+* [donnemartin/data-science-ipython-notebooks](https://github.com/donnemartin/data-science-ipython-notebooks):Data science Python notebooks: Deep learning (TensorFlow, Theano, Caffe, Keras), scikit-learn, Kaggle, big data (Spark, Hadoop MapReduce, HDFS), matplotlib, pandas, NumPy, SciPy, Python essentials, AWS, and various command lines.
+* [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide):Python best practices guidebook, written for Humans. http://docs.python-guide.org
+* [faif/python-patterns](https://github.com/faif/python-patterns):A collection of design patterns/idioms in Python
+* [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
+* [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
+* [jobbole/awesome-python-cn](https://github.com/jobbole/awesome-python-cn):Python资源大全中文版，包括：Web框架、网络爬虫、模板引擎、数据库、数据可视化、图片处理等，由伯乐在线持续更新。
+* [Python 中文学习大本营](http://www.pythondoc.com/)
 
 ## 类库
 
