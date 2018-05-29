@@ -238,8 +238,8 @@ end
 > 安装
 
 ```sh
-  sudo apt-get install xmonad
-  sudo apt-get install xmobar dmenu
+sudo apt-get install xmonad
+sudo apt-get install xmobar dmenu
 ```
 
 配置文件:～/.xmonad/xmonad.hs。该文件需要用户自己新建 modMask = mod4Mask
