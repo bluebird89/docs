@@ -92,7 +92,19 @@ sudo apt-get install php7.1 php7.1-fpm php7.1-mysql php7.1-common php7.1-curl ph
 
 ```sh
 sudo apt-cache search php7.1*
-sudo apt-get install php7.1-mysql php7.1-curl php7.1-json php7.1-cgi php7.1-mbstring php7.1-xml php7.1-mysql php7.1-common php7.1-gd  php7.1-cli php-pear php7.1-intl
+
+sudo apt-get install php7.1-mysql \
+php7.1-curl \
+php7.1-json \
+php7.1-cgi \
+php7.1-mbstring \
+php7.1-xml \
+php7.1-common \
+php7.1-gd \
+php7.1-cli \
+php-pear \ # to ues pecl
+php7.1-intl
+
 sudo apt-get install -y php-pear php5.6-mcrypt php5.6-mbstring php5.6-curl php5.6-cli php5.6-mysql php5.6-gd php5.6-intl php5.6-xsl php5.6-zip
 ```
 
@@ -103,7 +115,7 @@ sudo apt-get install -y php-pear php5.6-mcrypt php5.6-mbstring php5.6-curl php5.
 ```
 # /etc/php/7.0/fpm/pool.d 修改 www.conf
 listen = [::]:9000
-fastcgi_pass 127.0.0.1:9000;
+fastcgi_pass 127.0.0.1:9000;  # /run/php/php7.2-fpm.sock
 
 server {
   listen 80 default_server;

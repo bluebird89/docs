@@ -56,7 +56,7 @@
 
 ### Mac
 
-- 程序文件 /usr/local/etc/nginx/   /usr/local/Cellar/nginx 
+- 程序文件 /usr/local/etc/nginx/   /usr/local/Cellar/nginx
 - 配置文件:The default:/usr/local/etc/nginx/nginx.conf
 - 日志与服务器文件 /usr/local/var/log/nginx/
 - Severs config:/usr/local/etc/nginx/servers/
@@ -146,14 +146,14 @@ events {
 # 设定http服务器，利用它的反向代理功能实现负载均衡支持
 http {
     # 设定负载均衡的服务器列表 weigth参数表示权值，权值越高被分配到的几率越大
-    upstream phpbackend { 
-      server unix:/var/run/php5-fpm.sock1 weight=100 max_fails=5 fail_timeout=5; 
-      server unix:/var/run/php5-fpm.sock2 weight=100 max_fails=5 fail_timeout=5; 
-      server unix:/var/run/php5-fpm.sock3 weight=100 max_fails=5 fail_timeout=5; 
+    upstream phpbackend {
+      server unix:/var/run/php5-fpm.sock1 weight=100 max_fails=5 fail_timeout=5;
+      server unix:/var/run/php5-fpm.sock2 weight=100 max_fails=5 fail_timeout=5;
+      server unix:/var/run/php5-fpm.sock3 weight=100 max_fails=5 fail_timeout=5;
       server unix:/var/run/php5-fpm.sock4 weight=100 max_fails=5 fail_timeout=5;
        server 192.168.8.3:80  weight=6;
     }
-    
+
     # Stop Displaying Server Version in Configuration
     server_tokens off;
 
@@ -165,16 +165,16 @@ http {
     include mime.types;
     # 设定默认文件类型
     default_type application/octet-stream;
-      
+
     # 为Nginx服务器设置详细的日志格式
     log_format  main   $remote_addr - $remote_user [$time_local] "$request" '
                       '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';  
+                      '"$http_user_agent" "$http_x_forwarded_for"';
 
     access_log      /usr/local/var/log/nginx/access.log main;
     # 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改成off。
     sendfile on;
-   
+
     include /usr/local/etc/nginx/conf.d/*.conf;
 
     # Gzip Settings
@@ -187,34 +187,34 @@ http {
     gzip_min_length 1100;
     gzip_buffers 16 8k;
     gzip_http_version 1.1;
-    gzip_types text/css text/javascript text/xml text/plain text/x-component 
-    application/javascript application/x-javascript application/json 
-    application/xml  application/rss+xml font/truetype application/x-font-ttf 
+    gzip_types text/css text/javascript text/xml text/plain text/x-component
+    application/javascript application/x-javascript application/json
+    application/xml  application/rss+xml font/truetype application/x-font-ttf
     font/opentype application/vnd.ms-fontobject image/svg+xml;
 
     # Cache
-    open_file_cache max=200000 inactive=20s; 
-    open_file_cache_valid 30s; 
-    open_file_cache_min_uses 2; 
+    open_file_cache max=200000 inactive=20s;
+    open_file_cache_valid 30s;
+    open_file_cache_min_uses 2;
     open_file_cache_errors on;
 
     # Client Timeouts 设定请求缓冲
-    client_max_body_size 500M; 
+    client_max_body_size 500M;
     # 缓冲区代理缓冲用户用户端请求的最大字节数
-    client_body_buffer_size 1m; 
-    client_body_timeout 15; 
-    client_header_timeout 15; 
+    client_body_buffer_size 1m;
+    client_body_timeout 15;
+    client_header_timeout 15;
     # 允许客户端请求的最大单文件字节数，一般在上传较大文件时设置限制值
-    client max body_ size 10m 
+    client max body_ size 10m
 
     # 连接超时时间
     # 长连接超时时间，单位是秒，涉及到浏览器的种类、后端服务器的超时设置、操作系统的设置，相对比较敏感
-    keepalive_timeout 2 2; 
+    keepalive_timeout 2 2;
     # 指定相应客户端的超时时间，这个超时仅限于两个连接活动之间的时间，如果超过这个时间，客户端没有任何活动，Nginx将会关系连接。
-    send_timeout 15; 
+    send_timeout 15;
     # sendfile 指令指定 nginx 是否调用 sendfile 函数（zero copy 方式）来输出文件，对于普通应用，必须设为 on,如果用来进行下载等应用磁盘IO重负载应用，可设置为 off，以平衡磁盘与网络I/O处理速度，降低系统的uptime.
-    sendfile on; 
-    tcp_nopush on; 
+    sendfile on;
+    tcp_nopush on;
     tcp_nodelay on;
 
     include servers/*;
@@ -279,7 +279,7 @@ ssl_session_cache # ; # 指明ssl会话缓存机制；off | none | [builtin[:siz
 location /admin/ {
     auth_basic"Admin Area";
     auth_basic_user_file/etc/nginx/.ngxhtpasswd;
-} 
+}
 
 server {
     # nginx监听的端口，Mac下默认为8080，小于1024的要以root启动。可以为listen:*:8080、listen:127.0.0.1:8080等形式
@@ -330,7 +330,7 @@ server {
     #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
     #    include        fastcgi_params;
     #}
-    
+
     location /img/ {
         root /custom/images;
     }
@@ -349,7 +349,7 @@ server {
         root   /data;
         ...
     }
-    
+
     # URL/db – Will work.
     # URL/db/index.html – Will not work.
     # URL/db/connect/index.html – Will not work.
@@ -424,7 +424,7 @@ server {
       index  index.php index.shtml index.html index.htm;
       # 打开目录浏览功能，可以列出整个目录
       autoindex on;
-    }       
+    }
 
     error_page 500 502 503 504 /50x.html;
     location = /50x.html {
@@ -652,8 +652,8 @@ server {
 http basic auth
 
 ```sh
-htpasswd -cb your/path/to/api_project_accounts.db admin password_for_admin  
-htpasswd -b your/path/to/api_project_accounts.db liuxu 123456  
+htpasswd -cb your/path/to/api_project_accounts.db admin password_for_admin
+htpasswd -b your/path/to/api_project_accounts.db liuxu 123456
 htpasswd your/path/to/api_project_accounts.db xiaoming
 
 location /dist {
@@ -662,9 +662,9 @@ location /dist {
     allow 127.0.0.1;
     deny  all;
 
-    auth_basic              "my api project login";  
-    auth_basic_user_file    your/path/to/api_project_accounts.db;  
-}  
+    auth_basic              "my api project login";
+    auth_basic_user_file    your/path/to/api_project_accounts.db;
+}
 ```
 
 ## 日志分析

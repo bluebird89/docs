@@ -50,22 +50,22 @@ win10 && UBUNTU 双系统
   - 启动：写入硬盘映像，写入U盘文件
 * 启动通过U盘
   - 安装类型：其他选项
-  - 对之前分配的未使用磁盘空间分区： 
-      + /：存储系统文件，建议10GB ~ 15GB； 主分区 挂载点 / 
-      + swap：交换分区，即Linux系统的虚拟内存，建议是物理内存的2倍； 逻辑分区 用于交换空间 
-      + /home：home目录，存放音乐、图片及下载等文件的空间，建议最后分配所有剩下的空间； 逻辑分区 挂载点 /home 
+  - 对之前分配的未使用磁盘空间分区：
+      + /：存储系统文件，建议10GB ~ 15GB； 主分区 挂载点 /
+      + swap：交换分区，即Linux系统的虚拟内存，建议是物理内存的2倍； 逻辑分区 用于交换空间
+      + /home：home目录，存放音乐、图片及下载等文件的空间，建议最后分配所有剩下的空间； 逻辑分区 挂载点 /home
       + /boot：包含系统内核和系统启动所需的文件，实现双系统的关键所在，建议500M。 逻辑分区 挂载点 /boot 安装启动引导器的设备： 选择/boot对应的盘符
       + 生产服务器建议单独再划分一个/data分区存放数据
   - 安装系统
 * 通过EASYCD配置启动
   - 添加新条目 linux/BSD选项
-  - 选中分区boot分区  
+  - 选中分区boot分区
 * 重启运行
 
 ### 设置IP地址、网关DNS
 
 ```sh
-cd  /etc/sysconfig/network-scripts/ 
+cd  /etc/sysconfig/network-scripts/
 vi  ifcfg-eno16777736  #编辑配置文件，添加修改以下内容
 
 TYPE="Ethernet"
@@ -113,7 +113,7 @@ vi /etc/fstab   #添加以下代码。实现开机自动挂载
 ## 硬件
 
 ```sh
-df -T 
+df -T
 ```
 
 ## 软件
@@ -422,9 +422,9 @@ finger:列出当前用户的详细信息，需使用apt-get提前安装；
 
 su <user>:切换到用户user,执行时需要输入目标用户的密码；
 su - <user>:切换用户，同时环境变量也会跟着改变成目标用户的环境变量。
-su -l lilei:切换登录用户; 
+su -l lilei:切换登录用户;
 sudo adduser lilei:新建一个叫做lilei的用户，添加用户到系统，同时也会默认为新用户创建 home目录：
-sudo useradd:只创建用户，创建完了需要用 passwd lilei 去设置新用户的密码; 
+sudo useradd:只创建用户，创建完了需要用 passwd lilei 去设置新用户的密码;
 groups zhangwang:查看用户属于那些组（groups）   // 每
 cat /etc/group | sort 命令查看某组包含那些成员:/etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
 sudo usermod -G sudo student:不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，我们可以使用usermod命令把它加入sudo组用以具备相应的权限。
@@ -462,7 +462,7 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 
 # SSH配置文件 uncomment
-authorizedKeyFile 
+authorizedKeyFile
 
 service sshd restart
 ```
@@ -478,7 +478,7 @@ chmod 600 ~/.ssh/authorized_keys
 
 scp ~/.ssh/id_rsa.pub hadoop@192.168.1.134:~/
 cat ~/id_rsa.pub >> ~/.ssh/authorized_keys
-rm ~/id_rsa.pub 
+rm ~/id_rsa.pub
 ```
 
 - 传输文件通过ssh：
@@ -560,8 +560,8 @@ sudo apt-get install google-chrome-stable
 ## ufw防火墙
 
 ```sh
-sudo ufw allow 'Nginx HTTP' 
-sudo ufw status 
+sudo ufw allow 'Nginx HTTP'
+sudo ufw status
 sudo ufw allow https
 sudo ufw enable/disable
 ```
@@ -651,7 +651,7 @@ chkconfig --list sshd
 
 ## 终端命令
 
-* ssh:连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。   
+* ssh:连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。
 * grep:用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
 * 使用 alias 这个 bash 内置的命令来为它们创建一个短别名:alias server="python -m SimpleHTTPServer 9000"
 * Curl 是一个命令行工具，用来通过 HTTP（s），FTP 等其它几十种你可能尚未听说过的协议来发起网络请求。
@@ -682,21 +682,20 @@ Linux的最重要创新之一，引入Hypervisor，运行其他操作系统的�
 
 ```sh
 apt-get install samba
-mkdir -p /home／directory
-chmod 777 /home／directory
-vim /etc/samba/smb.conf
-[global]的地方添加 security = user
-文件最后添加下列设定
+
+vim /etc/samba/smb.conf 文件最后添加下列设定
 
 [share]
-path = /home/username/share      
+comment=This is samba dir
+path = /home/username/share
 available = yes
 browsealbe = yes
+valid users=imac
 public = yes
 writable = yes
 
-useradd username
-sudo smbpasswd -a username
+useradd imac
+sudo smbpasswd -a imac
 /etc/init.d/samba restart
 
 mac 链接
@@ -705,7 +704,17 @@ smb://192.168.100.106
 
 \\172.16.44.175\Ubuntu
 
-# windows access internet \\192.168.1.13 share 
+# windows access internet \\192.168.1.13 share
+```
+
+### [oguzhaninan/Stacer](https://github.com/oguzhaninan/Stacer)
+
+Linux System Optimizer and Monitoring
+
+```sh
+sudo add-apt-repository ppa:oguzhaninan/stacer
+sudo apt-get update
+sudo apt-get install stacer
 ```
 
 ## shell扩展
@@ -902,7 +911,7 @@ sudo apt install tlp tlp-rdw
 sudo tlp start
 
 Guake是一个比较酷的终端
-sudo apt install guake 
+sudo apt install guake
 
  # add source  or http://pinyin.sogou.com/linux/
 deb http://archive.ubuntukylin.com:10006/ubuntukylin trusty main
@@ -932,6 +941,9 @@ sudo apt-get install unity-tweak-tool
 
 ifconfig
 
+sudo apt install net-tools       # ifconfig
+sudo apt install iputils-ping
+
 记录下网卡名字，比如我的，有enp4s0f2、lo、wlp9s0b1三个
 2）、编辑文件：
 
@@ -954,8 +966,8 @@ sudo apt update
 sudo apt install indicator-sysmonitor
 
 
-sudo apt-get remove thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku onboard deja-dup 
-sudo apt-get autoremove 
+sudo apt-get remove thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku onboard deja-dup
+sudo apt-get autoremove
 sudo apt-get autoclean
 ```
 
@@ -973,7 +985,7 @@ sudo apt install albert
 ```
 
 * chrome
-* Nylas N1：超好用的跨平台电子邮件客户端  Thunderbird 
+* Nylas N1：超好用的跨平台电子邮件客户端  Thunderbird
 * sougou
 * Spotify for Linux：音乐流媒体服务
 * Lightworks Free：专业的非线视频编辑器
@@ -983,7 +995,7 @@ sudo apt install albert
 * VLC
 * albert
 * 听播客: Vocal
-* PDF 阅读：Foxit Reader 
+* PDF 阅读：Foxit Reader
 * gimp
 * Gtile:分屏工具
 * MySQL Workbench
@@ -993,30 +1005,30 @@ sudo apt install albert
 vim config
 ```
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 显示相关  
+" 显示相关
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
-winpos 5 5         " 设定窗口位置  
-set lines=30 columns=85    " 设定窗口大小  
-set nu              " 显示行号  
-set go=             " 不要图形按钮  
-"color asmanian2     " 设置背景主题  
-set guifont=Courier_New:h10:cANSI   " 设置字体  
-syntax on           " 语法高亮  
-autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
-autocmd InsertEnter * se cul    " 用浅色高亮当前行  
-set ruler           " 显示标尺  
-set showcmd         " 输入的命令显示出来，看的清楚些  
-set cmdheight=1     " 命令行（在状态行下）的高度，设置为1  
-"set whichwrap+=<,>,h,l   " 允许backspace和光标键跨越行边界(不建议)  
-set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离  
-set novisualbell    " 不要闪烁(不明白)  
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容  
-set laststatus=1    " 启动显示状态行(1),总是显示状态行(2)  
-set foldenable      " 允许折叠  
-set foldmethod=manual   " 手动折叠  
-set background=dark "背景使用黑色 
-set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限  
+set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示
+winpos 5 5         " 设定窗口位置
+set lines=30 columns=85    " 设定窗口大小
+set nu              " 显示行号
+set go=             " 不要图形按钮
+"color asmanian2     " 设置背景主题
+set guifont=Courier_New:h10:cANSI   " 设置字体
+syntax on           " 语法高亮
+autocmd InsertLeave * se nocul  " 用浅色高亮当前行
+autocmd InsertEnter * se cul    " 用浅色高亮当前行
+set ruler           " 显示标尺
+set showcmd         " 输入的命令显示出来，看的清楚些
+set cmdheight=1     " 命令行（在状态行下）的高度，设置为1
+"set whichwrap+=<,>,h,l   " 允许backspace和光标键跨越行边界(不建议)
+set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离
+set novisualbell    " 不要闪烁(不明白)
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容
+set laststatus=1    " 启动显示状态行(1),总是显示状态行(2)
+set foldenable      " 允许折叠
+set foldmethod=manual   " 手动折叠
+set background=dark "背景使用黑色
+set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 " 显示中文帮助
 if version >= 603
     set helplang=cn
@@ -1024,10 +1036,10 @@ if version >= 603
 endif
 " 设置配色方案
 "colorscheme murphy
-"字体 
-"if (has("gui_running")) 
-"   set guifont=Bitstream\ Vera\ Sans\ Mono\ 10 
-"endif 
+"字体
+"if (has("gui_running"))
+"   set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+"endif
 
 
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
@@ -1038,29 +1050,29 @@ set fileencoding=utf-8
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"新建.c,.h,.sh,.java文件，自动插入文件头 
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()" 
-""定义函数SetTitle，自动插入文件头 
-func SetTitle() 
-    "如果文件类型为.sh文件 
-    if &filetype == 'sh' 
-        call setline(1,"\#########################################################################") 
-        call append(line("."), "\# File Name     : ".expand("%")) 
-        call append(line(".")+1, "\# Author        : enjoy5512") 
-        call append(line(".")+2, "\# mail          : enjoy5512@163.com") 
-        call append(line(".")+3, "\# Created Time  : ".strftime("%c")) 
-        call append(line(".")+4, "\#########################################################################") 
-        call append(line(".")+5, "") 
-        call append(line(".")+6, "\#!/bin/bash") 
+"新建.c,.h,.sh,.java文件，自动插入文件头
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
+""定义函数SetTitle，自动插入文件头
+func SetTitle()
+    "如果文件类型为.sh文件
+    if &filetype == 'sh'
+        call setline(1,"\#########################################################################")
+        call append(line("."), "\# File Name     : ".expand("%"))
+        call append(line(".")+1, "\# Author        : enjoy5512")
+        call append(line(".")+2, "\# mail          : enjoy5512@163.com")
+        call append(line(".")+3, "\# Created Time  : ".strftime("%c"))
+        call append(line(".")+4, "\#########################################################################")
+        call append(line(".")+5, "")
+        call append(line(".")+6, "\#!/bin/bash")
     call append(line(".")+7, "")
     call append(line(".")+8, "")
-    else 
-        call setline(1, "/*************************************************************************") 
-        call append(line("."), "    > File Name       : ".expand("%")) 
-        call append(line(".")+1, "    > Author          : enjoy5512") 
-        call append(line(".")+2, "    > Mail            : enjoy5512@163.com ") 
-        call append(line(".")+3, "    > Created Time    : ".strftime("%c")) 
-        call append(line(".")+4, " ************************************************************************/") 
+    else
+        call setline(1, "/*************************************************************************")
+        call append(line("."), "    > File Name       : ".expand("%"))
+        call append(line(".")+1, "    > Author          : enjoy5512")
+        call append(line(".")+2, "    > Mail            : enjoy5512@163.com ")
+        call append(line(".")+3, "    > Created Time    : ".strftime("%c"))
+        call append(line(".")+4, " ************************************************************************/")
         call append(line(".")+5, "")
     endif
     if &filetype == 'cpp'
@@ -1121,13 +1133,13 @@ endfunc
 set autoread
 " quickfix模式
 autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
-"代码补全 
-set completeopt=preview,menu 
-"允许插件  
+"代码补全
+set completeopt=preview,menu
+"允许插件
 filetype plugin on
-"共享剪贴板  
-set clipboard+=unnamed 
-"从不备份  
+"共享剪贴板
+set clipboard+=unnamed
+"从不备份
 set nobackup
 "自动保存
 set autowrite
@@ -1137,8 +1149,8 @@ set magic                   " 设置魔术
 set guioptions-=T           " 隐藏工具栏
 set guioptions-=m           " 隐藏菜单栏
 set foldcolumn=0
-set foldmethod=indent 
-set foldlevel=3 
+set foldmethod=indent
+set foldlevel=3
 set foldenable              " 开始折叠
 " 不要使用vi的键盘模式，而是vim自己的
 set nocompatible
@@ -1216,7 +1228,7 @@ function! ClosePair(char)
         return a:char
     endif
 endfunction
-filetype plugin indent on 
+filetype plugin indent on
 "打开文件类型检测, 加了这句才可以用智能补全
 set completeopt=longest,menu
 ```
@@ -1224,7 +1236,7 @@ set completeopt=longest,menu
 mysql workbeach
 
 ```sh
-# down 
+# down
 sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 sudo apt-get update
 sudo apt-get install mysql-workbench-community
