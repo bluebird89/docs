@@ -738,6 +738,17 @@ sudo apt-get install autoconf build-essential curl libtool \
 ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib # configure: error: Cannot find OpenSSL’s libraries
 ```
 
+
+#### [xflux-gui/fluxgui](https://github.com/xflux-gui/fluxgui)
+
+Better lighting for Linux. Open source GUI for xflux https://justgetflux.com/linux.html
+
+```sh
+sudo add-apt-repository ppa:nathan-renniewaldock/flux
+sudo apt-get update
+sudo apt-get install fluxgui
+```
+
 ### 问题
 
 > Boot分区不足

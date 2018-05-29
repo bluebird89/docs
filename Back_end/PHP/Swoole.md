@@ -13,11 +13,14 @@ tar zxvf v1.10.2.zip
 cd swoole
 phpize
 ./configure  --enable-openssl --enable-async-redis --with-php-config=/Applications/MAMP/bin/php/php7.1.0/bin/php-config    --prefix=/usr/local   CPPFLAGS="-I/usr/local/opt/openssl/include"  LDFLAGS="-L/usr/local/opt/openssl/lib" --enable-swoole-debug
-make 
+make
 sudo make install # 编译后的模块在 /modules 中，将swoole.so添加到php.ini中
 extension=swoole.so
 
-pecl install swoole
+# ubuntu
+sudo apt install php-pear
+sudo pecl channel-update pecl.php.net
+sudo pecl install swoole
 
 cp -R /usr/local/Cellar/openssl/1.0.2o_1/include/openssl /usr/local/include # fatal error: 'openssl/ssl.h' file not found #include <openssl/ssl.h>
     # Enable http2 support, require nghttp2 library.
