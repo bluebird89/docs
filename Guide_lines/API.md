@@ -25,3 +25,4 @@ fee_name  |   Name of fee schedule  |   No
 * [API网关的作用、方案以及如何选择](http://blog.didispace.com/API%E7%BD%91%E5%85%B3%E7%9A%84%E4%BD%9C%E7%94%A8%E3%80%81%E6%96%B9%E6%A1%88%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9/)
 * [Introduction to Microservices](https://www.nginx.com/blog/introduction-to-microservices/)
 * [Pattern: API Gateway / Backend for Front-End](http://microservices.io/patterns/apigateway.html)
+* [json-api/json-api](https://github.com/json-api/json-api):A specification for building JSON APIs http://jsonapi.org

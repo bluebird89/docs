@@ -43,10 +43,10 @@ go env
 
 go get 用来动态获取远程代码包的，fetch libraries from remote and put them in your $GOPATH.目前支持的有BitBucket、GitHub、Google Code和Launchpad。这个命令在内部实际上分成了两步操作：第一步是下载源码包，第二步是执行go install。下载源码包的go工具会自动根据不同的域名调用不同的源码工具,参数说明：
 
--d 只下载不安装 
--f 只有在你包含了-u参数的时候才有效，不让-u去验证import中的每一个都已经获取了，这对于本地fork的包特别有用 
--fix 在获取源码之后先运行fix，然后再去做其他的事情 
--t 同时也下载需要为运行测试所需要的包 
+-d 只下载不安装
+-f 只有在你包含了-u参数的时候才有效，不让-u去验证import中的每一个都已经获取了，这对于本地fork的包特别有用
+-fix 在获取源码之后先运行fix，然后再去做其他的事情
+-t 同时也下载需要为运行测试所需要的包
 -u 强制使用网络去更新包和它的依赖包:存在unrecognized import path "golang.org/x问题，需要添加代理
 -v 显示执行的命令
 
@@ -165,6 +165,7 @@ websocketd --port=8080 ./count.sh // 建立server
 
 * [bettercap/bettercap](https://github.com/bettercap/bettercap):The state of the art network attack and monitoring framework. https://www.bettercap.org/
 * [google/gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
+* [shiyanhui/dht](https://github.com/shiyanhui/dht):BitTorrent DHT Protocol && DHT Spider. http://bthub.io
 
 ## 教程
 
@@ -176,6 +177,6 @@ websocketd --port=8080 ./count.sh // 建立server
 - [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
 - [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 - [golang/go](https://github.com/golang/go):The Go programming language https://golang.org
-- [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph 
+- [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>

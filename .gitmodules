@@ -43,3 +43,9 @@
 [submodule "Back_end/Python/awesome-python"]
 	path = Back_end/Python/awesome-python
 	url = git@github.com:vinta/awesome-python.git
+[submodule "Architect/awesome-scalability"]
+	path = Architect/awesome-scalability
+	url = git@github.com:binhnguyennus/awesome-scalability.git
+[submodule "Ops/Docker/awesome-docker"]
+	path = Ops/Docker/awesome-docker
+	url = git@github.com:veggiemonk/awesome-docker.git
