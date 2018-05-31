@@ -263,6 +263,7 @@ npm run eject #  导出配置文件
 * [react-native-training/react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit
 * [markerikson/react-redux-links](https://github.com/markerikson/react-redux-links):Curated tutorial and resource links I've collected on React, Redux, ES6, and more
 * [redux-offline/redux-offline](https://github.com/redux-offline/redux-offline):Build Offline-First Apps for Web and React Native
+* [invertase/react-native-firebase](https://github.com/invertase/react-native-firebase):A well tested feature rich modular Firebase implementation for React Native, supporting both iOS & Android platforms for 15+ Firebase modules (including a feature rich Notifications implementation) 🔥 https://rnfirebase.io
 
 ## 参考
 

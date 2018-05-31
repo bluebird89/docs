@@ -42,3 +42,4 @@ npm run serve
 * [akveo/ngx-admin](https://github.com/akveo/ngx-admin):Admin dashboard template based on Angular 5+, Bootstrap 4 (previously known as ng2-admin) http://akveo.com/ngx-admin/
 * [PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin): 🎉 A magical vue admin http://panjiachen.github.io/vue-element-admin
 * [withspectrum/spectrum](https://github.com/withspectrum/spectrum):Simple, powerful online communities. https://spectrum.chat
+* [vue-bulma/vue-admin](https://github.com/vue-bulma/vue-admin):Vue Admin Panel Framework, Powered by Vue 2.0 and Bulma 0.3 https://admin.vuebulma.com

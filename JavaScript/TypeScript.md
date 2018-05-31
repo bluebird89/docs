@@ -34,7 +34,12 @@ npm install -g typescript
     }
     ```
 
+## 工具
+
+* [ry/deno](https://github.com/ry/deno):A secure TypeScript runtime on V8
+
 ## 参考
 
 * [](https://tutorialzine.com/2016/07/learn-typescript-in-30-minutes)
-* [](https://github.com/xcatliu/typescript-tutorial)
+* [xcatliu/typescript-tutorial](https://github.com/xcatliu/typescript-tutorial):TypeScript 入门教程 https://ts.xcatliu.com/
+

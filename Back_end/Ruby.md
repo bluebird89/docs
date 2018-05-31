@@ -1,4 +1,6 @@
-# Ruby
+# [rails/rails](https://github.com/rails/rails)
+
+Ruby on Rails http://rubyonrails.org
 
 Convention over configuration;
 DRY - Don't Repeat You;
@@ -105,9 +107,9 @@ rails server
 
 ## Ruby on Rails
 
-## 资源
+## 工具
 
-* [rails/rails](https://github.com/rails/rails):Ruby on Rails http://rubyonrails.org
+* [rbenv/rbenv](https://github.com/rbenv/rbenv):Groom your app’s Ruby environment
 * [activeadmin/activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. https://activeadmin.info
 * [tj/commander](https://github.com/tj/commander):The complete solution for Ruby command-line executables http://visionmedia.github.com/commander
 * [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. https://www.discourse.org
