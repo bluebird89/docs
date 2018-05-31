@@ -272,13 +272,6 @@ eval "$(docker-machine env default)" # Set environment variables
 
 ## boot2docker
 
-## 工具
-
-* [docker/machine](https://github.com/docker/machine)Machine management for a container-centric world
-* [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
-* Shipyard
-* Potainer
-
 > [docker/compose](https://github.com/docker/compose):Define and run multi-container applications with Docker https://docs.docker.com/compose/
 
 Docker Compose 是一款容器编排程序，使用 YAML 配置的形式将你需要启动的容器管理起来.
@@ -317,6 +310,18 @@ services:
 
         container_name: "m.look.360.cn-php"
 ```
+
+## 资源
+
+* [wurstmeister/kafka-docker](https://github.com/wurstmeister/kafka-docker):Dockerfile for Apache Kafka http://wurstmeister.github.io/kafka-d…
+
+## 工具
+
+* [docker/machine](https://github.com/docker/machine)Machine management for a container-centric world
+* [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
+* Shipyard
+* Potainer
+
 ## 参考
 
 * [Docker](http://blog.csdn.net/erixhao/article/details/72762851)
@@ -327,3 +332,5 @@ services:
 * [moby/moby](https://github.com/moby/moby)Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
 * [Docker — 从入门到实践](https://yeasy.gitbooks.io/docker_practice/)
 * [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects
+
+

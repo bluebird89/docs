@@ -548,4 +548,5 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 * [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
 * [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)
 * [svenstaro/genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator https://svenstaro.github.io/genact/
+* [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
 * [](https://www.noobslab.com/)
