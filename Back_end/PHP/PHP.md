@@ -207,7 +207,7 @@ php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数
 curl -O http://pear.php.net/go-pear.phar
 sudo php -d detect_unicode=0 go-pear.phar
 
-# 4 修改bin路径
+# 修改bin路径
 pear version
 
 sudo apt install php7.2-dev # to use phpize  生成编译检测脚本
