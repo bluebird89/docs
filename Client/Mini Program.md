@@ -1,5 +1,7 @@
 # 小程序
 
+微信生态的构建
+
 小程序前段负责内容的展示，如果我们开发的是纯静态页面，那么只需要掌握上面的就可以。但是，如果我们要做动态页面，也就是页面内容是跟数据库交互的，就需要服务端来提供数据的交互。在小程序中，服务端是以接口的方式实现的，结果以json数据格式返回。
 前端通过组件wx.request调用接口，来实现跟服务端的交互
 
@@ -30,13 +32,14 @@
 * 必须通过HTTPS部署，在后台配置服务器域名：设置合法域名，也就是服务端接口的域名地址
 * 提交审核
 
-## 资源
+## 工具
 
-* [组件文档](https://mp.weixin.qq.com/debug/wxadoc/dev/api/)
 * [Tencent/wepy](https://github.com/Tencent/wepy):小程序组件化开发框架 https://tencent.github.io/wepy/
+* [youzan/zanui-weapp](https://github.com/youzan/zanui-weapp):高颜值、好用、易扩展的微信小程序 UI 库，Powered by 有赞
 
 ## 参考
 
+* [组件文档](https://mp.weixin.qq.com/debug/wxadoc/dev/api/)
 * [小程序快速上手：三步完成小程序从无到有的开发](http://blog.csdn.net/gitchat/article/details/77863478)
 * [首个微信小程序开发教程](https://juejin.im/entry/57e34d6bd2030900691e9ad7)
 * http://www.cnblogs.com/luyucheng/p/6274561.html

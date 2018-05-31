@@ -1292,12 +1292,13 @@ MySQL 在每个事务更新数据之前，由 Master 将事务串行的写入二
 * 基于语句复制：在主服务器上执行的SQL语句，在从服务器上执行同样的语句。MySQL默认采用基于语句的复制，效率比较高。
 * 基于行复制：MySQL5.0开始支持把改变的内容复制过去，而不是把命令在从服务器上执行一遍。
 * 混合类型复制：默认采用基于语句的复制，一旦发现基于语句的无法精确的复制时，就会采用基于行的复制。
+
 ![master-slave](../_static/master-slave.gif "master-slave")
 
 * Master binlog输出线程：Master为每一个复制连接请求创建一个binlog输出线程，用于输出日志内容到相应的Slave；
 * Slave I/O线程：在start slave之后，该线程负责从Master上拉取binlog内容放进自己的Relay Log中；
 * Slave SQL线程：负责执行Relay Log中的语句。
-
+* [使用 Docker 完成 MySQL 数据库主从配置](https://juejin.im/post/59fd71c25188254dfa1287a9)
 #### notice
 
 - 无法远程连接mysql(报错111)：注释掉my.cnf中的bind-address或绑定本地ip
