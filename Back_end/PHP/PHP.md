@@ -1,6 +1,6 @@
 # PHP
 
-所用的程序是要经过两层代理
+PHP是一门弱类型的语言，变量在声明的那一刻是不需要确定它的类型的，而在运行时类型也会发生显式或隐式的类型改变.所用的程序是要经过两层代理
 
 * PHP代表HyperText预处理器。
 * PHP是一种解释型语言，即不需要编译。
@@ -173,6 +173,21 @@ date.timezone = Asia/Shanghai
 * PHP
     * 7.1 :2015.12.3 性能提升
     * 7.2 JIT(JUST_IN_TIME)
+
+### 原理
+
+* Zend 引擎:PHP4 以后加入 PHP 的，是对原有PHP解释器的重写，整体使用 C 语言进行开发，也就是说可以把PHP理解成用C写的一个编程语言软件，引擎的作用是将PHP代码翻译为一种叫opcode的中间语言，它类似于JAVA的ByteCode（字节码）。引擎对PHP代码会执行四个步骤：
+    - 词法分析 Scanning（Lexing），将 PHP 代码转换为语言片段（Tokens）。
+    - 解析 Parsing， 将 Tokens 转换成简单而有意义的表达式。
+    - 编译 Compilation，将表达式编译成Opcode。
+    - 执行 Execution，顺序执行Opcode，每次一条，以实现PHP代码所表达的功能。
+    - APC、Opchche 这些扩展可以将Opcode缓存以加速PHP应用的运行速度，使用它们就可以在请求再次来临时省略前三步。
+    - 引擎也实现了基本的数据结构、内存分配及管理，提供了相应的API方法供外部调用。
+* Extensions 扩展:常见的内置函数、标准库都是通过extension来实现的，这些叫做PHP的核心扩展，用户也可以根据自己的要求安装PHP的扩展。
+* SAPI(Server Application Programming Interface)中文为服务端应用编程接口，它通过一系列钩子函数使得PHP可以和外围交换数据，SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性。通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式。
+* 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用都是上层应用，PHP 程序员主要工作就是编写它们。
+
+![PHP 的架构](../../_static/php_construct.jpg "Optional title")
 
 ## CGI vs Cli
 

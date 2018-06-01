@@ -222,6 +222,7 @@ hostname  www  #设置主机名为www
 vi /etc/hostname #编辑配置文件
 www   localhost.localdomain  #修改localhost.localdomain为www
 ```
+
 #### apt-get
 
 程序安装有home路径，bin路径
@@ -301,30 +302,67 @@ FHS包含两层规范：
 * / 下面的各个目录应该要放什么文件数据，例如 /etc 应该放置设置文件，/bin 与 /sbin 则应该放置可执行文件等等。
 * 针对 /usr 及 /var 这两个目录的子目录来定义。例如 /var/log 放置系统登录文件，/usr/share 放置共享数据等等。
 
-### 文件类型
+```
+-r-xr-x---
+```
 
-* 普通文件：一般是用一些相关的应用程序创建的（如图像工具、文档工具、归档工具... 或 cp工具等),这类文件的删除方式是用rm 命令,而创建使用touch命令,用符号-表示；
-* 目录：目录在Linux是一个比较特殊的文件，用字符d表示，删除用rm 或rmdir命令；
+### 身份
+
+owner
+group
+others
+
+```sh
+etc/passwd
+
+chown [-R] [帐号名称] [文件或目录]
+chown [-R] [帐号名称]:[群组名称] [文件或目录]
+
+etc/group
+chgrp [-options] [群组名] [文档路径]
+```
+
+### 类型
+
+* `-` 普通文件：一般是用一些相关的应用程序创建的（如图像工具、文档工具、归档工具... 或 cp工具等),这类文件的删除方式是用rm 命令,而创建使用touch命令,用符号-表示；
+* `d` 目录：目录在Linux是一个比较特殊的文件，用字符d表示，删除用rm 或rmdir命令；
 * 块设备文件：存在于/dev目录下，如硬盘，光驱等设备，用字符d表示;
 * 设备文件：（ /dev 目录下有各种设备文件，大都跟具体的硬件设备相关），如猫的串口设备，用字符c表示；
 * socket文件;用字符s表示，比如启动MySQL服务器时，产生的mysql.sock的文件;
 * pipe 管道文件：可以实现两个程序（可以从不同机器上telnet）实时交互，用字符p表示；
-* 链接文件:软链接等同于 Windows 上的快捷方式；用字符l表示； 软硬链接文件的共同点和区别：无论是修改软链接，硬链接生成的文件还是直接修改源文件，相应的文件都会改变，但是如果删除了源文件，硬链接生成的文件依旧存在而软链接生成的文件就不再有效了。
+* `l` 链接文件:软链接等同于 Windows 上的快捷方式；用字符l表示； 软硬链接文件的共同点和区别：无论是修改软链接，硬链接生成的文件还是直接修改源文件，相应的文件都会改变，但是如果删除了源文件，硬链接生成的文件依旧存在而软链接生成的文件就不再有效了。
 
-### 文件权限
+### 权限
 
 一个目录同时具有读权限和执行权限才可以打开并查看内部文件，而一个目录要有写权限才允许在其中创建其它文件，这是因为目录文件实际保存着该目录里面的文件的列表等信息。
 
-* 读权限：可以使用 `cat <file name>` 之类的命令来读取某个文件的内容;
-* 写权限，表示你可以编辑和修改某个文件；
-* 执行权限，通常指可以运行的二进制程序文件或者脚本文件(Linux 上不是通过文件后缀名来区分文件的类型);
+* readable 读权限：可以使用 `cat <file name>` 之类的命令来读取某个文件的内容
+* writable 写权限，表示你可以编辑和修改某个文件
+* excutable执行权限，通常指可以运行的二进制程序文件或者脚本文件(Linux 上不是通过文件后缀名来区分文件的类型)
 * 所有者权限，所属用户组权限，是指你所在的用户组中的所有其它用户对于该文件的权限
-* `chmod 700 iphone6`
-* `sudo chown zhangwang /etc/apt/sources.list`
 
-#### 文件压缩
+```sh
+chmod 700 iphone6
+sudo chown zhangwang /etc/apt/sources.list
 
-##### 压缩
+chmod | u g o a | +（加入） -（除去） =（设置） | r w x | 文档路径
+
+chmod u=rwx,g=rwx,o=rwx test
+chmod ugo=rwx test
+chmod a=rwx test
+
+chmod u-x,g-x,o-x test
+chmod ugo-x test
+chmod a-x test
+
+chmod u+x,g+x,o+x test
+chmod ugo+x test
+chmod a+x test
+
+chmod 755 test # 赋予一个shell文件test.sh可执行权限，拥有者可读、写、执行，群组账号和其他人可读、执行。
+```
+
+### 压缩
 
 * -r:表示递归打包包含子目录的全部内容
 * -q:表示为安静模式，即不向屏幕输出信息
@@ -343,23 +381,7 @@ unzip -q shiyanlou.zip -d ziptest   // 静默且指定解压目录，目录不�
 unzip -O GBK 中文压缩文件.zip // 使用 -O（英文字母，大写 o）参数指定编码类型
 ```
 
-### shell
-
-Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。命令解析器
-
-* Tab:点击Tab键可以实现命令补全,目录补全、命令参数补全;
-* Ctrl+c:强行终止当前程序（常用）;
-* Ctrl+d:键盘输入结束或退出终端（常用）;
-* Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
-* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
-* Ctrl+a:将光标移至输入行头，相当于Home键;
-* Ctrl+e:将光标移至输入行末，相当于End键;
-* Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
-* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
-* Shift+PgUp:将终端显示向上滚动;
-* Shift+PgDn:将终端显示向下滚动;
-
-#### 操作文件
+#### 操作
 
 * du命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
 * touch:来更改已有文件的时间戳的（比如，最近访问时间，最近修改时间） touch file{1..5}.txt 使用通配符批量创建 5 个文件
@@ -390,7 +412,7 @@ Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。命令
 * tail:查看文件的尾几行（默认10行） `tail -n 1 /etc/passwd`
 * `dd if=/dev/zero of=virtual.img bs=1M count=256` 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
 * `sudo mkfs.ext4 virtual.img` 格式化virtual.img为ext4格式
-* dd默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
+* dd：默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
 * `dd if=/dev/stdin of=test bs=10 count=1 conv=ucase` 将输出的英文字符转换为大写再写入文件
 * sudo mount 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
 
@@ -405,6 +427,7 @@ Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。命令
 * man
 * info ls
 * lsb_release -a
+* cal:日历
 
 #### 修改时区
 
@@ -549,7 +572,6 @@ sudo dpkg  -i   sogou_pinyin_linux_1.0.0.0033_amd64.deb
 sudo add-apt-repository ppa:webupd8team/atom
 sudo apt-get update
 sudo apt-get install atom
-
 
 # ervernote
 sudo add-apt-repository ppa:nixnote/nixnote2-daily
