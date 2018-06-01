@@ -2,6 +2,8 @@
 
 Shell是Linux/Unix的一个外壳。它负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序。
 
+Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。命令解析器
+
 ## 配置
 
 * /etc/profile：所有用户的shell都有权使用你配置好的环境变量 添加 export PATH="$PATH:/my_new_path"
@@ -158,14 +160,19 @@ PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blu
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 ```
 
+### 快捷键
 
-### shadowsocks-qt5
-
-```sh
-sudo add-apt-repository ppa:hzwhuang/ss-qt5
-sudo apt-get update
-sudo apt-get install shadowsocks-qt5
-```
+* Tab:点击Tab键可以实现命令补全,目录补全、命令参数补全;
+* Ctrl+c:强行终止当前程序（常用）;
+* Ctrl+d:键盘输入结束或退出终端（常用）;
+* Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
+* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
+* Ctrl+a:将光标移至输入行头，相当于Home键;
+* Ctrl+e:将光标移至输入行末，相当于End键;
+* Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
+* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
+* Shift+PgUp:将终端显示向上滚动;
+* Shift+PgDn:将终端显示向下滚动;
 
 ### fish
 

@@ -1,6 +1,10 @@
 # php-fpm
 
-FastCGI 应用速度很快是因为他们持久稳定。不必对每一个请求都启动和初始化。好处是 PHP 脚本运行速度提升 3-30 倍；并不需要对现有的PHP代码做任何的更改；PHP 解释程序被载入内存而不用每次需要时从存储器读取，极大的提升了依靠脚本运行的站点的性能；同时速度的提升并不会增加 CPU 的负担。
+FastCGI 应用速度很快是因为他们持久稳定。不必对每一个请求都启动和初始化。好处是 PHP 脚本运行速度提升 3-30 倍；
+并不需要对现有的PHP代码做任何的更改；
+PHP 解释程序被载入内存而不用每次需要时从存储器读取，极大的提升了依靠脚本运行的站点的性能；同时速度的提升并不会增加 CPU 的负担。
+常驻内存启动一些PHP进程待命，当请求进入时分配一个进程进行处理，PHP进程处理完毕后回收进程，但并不销毁进程，这让PHP也能应对高流量的访问请求。
+
 * nginx 一般是把请求发给fastcgi 管理进程处理，fascgi管理进程选择cgi 子进程处理结果，并返回给nginx
 
 ## Mac
@@ -19,14 +23,14 @@ FastCGI 应用速度很快是因为他们持久稳定。不必对每一个请求
 #测试php-fpm配置
 /usr/local/php/sbin/php-fpm -t
 /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf -t
- 
+
 #启动php-fpm
 /usr/local/php/sbin/php-fpm
 /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf
- 
+
 #关闭php-fpm
 kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
- 
+
 #重启php-fpm
 kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
 
@@ -57,9 +61,9 @@ daemonize = yes # 后台执行fpm,默认值为yes，如果为了调试可以改�
 listen = 127.0.0.1:9000
 
 listen.backlog = -1 # backlog数，-1表示无限制，由操作系统决定，此行注释掉就行。backlog含义参考：http://www.3gyou.cc/?p=41
- 
+
 listen.allowed_clients = 127.0.0.1 # 允许访问FastCGI进程的IP，设置any为不限制IP，如果要设置其他主机的nginx也能访问这台FPM进程，listen处要设置成本地可被访问的IP。默认值是any。每个地址是用逗号分隔. 如果没有设置或者为空，则允许任何服务器请求连接
- 
+
 listen.owner =  www-data #启动进程的用户
 listen.group = www-data #启动进程的用户组
 listen.mode = 0666
@@ -76,23 +80,23 @@ pm.max_children = 15#，子进程最大数
 pm.start_servers = 2 #，启动时的进程数
 pm.min_spare_servers =2  #，保证空闲进程数最小值，如果空闲进程小于此值，则创建新的子进程
 pm.max_spare_servers #，保证空闲进程数最大值，如果空闲进程大于此值，此进行清理
- 
+
 pm.max_requests = 500 # 设置每个子进程重生之前服务的请求数. 对于可能存在内存泄漏的第三方模块来说是非常有用的. 如果设置为 '0' 则一直接受请求. 等同于 PHP_FCGI_MAX_REQUESTS 环境变量. 默认值: 0.
- 
+
 pm.status_path = /status # FPM状态页面的网址. 如果没有设置, 则无法访问状态页面. 默认值: none. munin监控会使用到
- 
+
 ping.path = /ping #FPM监控页面的ping网址. 如果没有设置, 则无法访问ping页面. 该页面用于外部检测FPM是否存活并且可以响应请求. 请注意必须以斜线开头 (/)。
- 
+
 ping.response = pong #用于定义ping请求的返回相应. 返回为 HTTP 200 的 text/plain 格式文本. 默认值: pong.
- 
+
 request_terminate_timeout = 0 #设置单个请求的超时中止时间. 该选项可能会对php.ini设置中的'max_execution_time'因为某些特殊原因没有中止运行的脚本有用. 设置为 '0' 表示 'Off'.当经常出现502错误时可以尝试更改此选项。
- 
+
 request_slowlog_timeout = 10s # 当一个请求该设置的超时时间后，就会将对应的PHP调用堆栈信息完整写入到慢日志中. 设置为 '0' 表示 'Off'
 slowlog = log/$pool.log.slow #慢请求的记录日志,配合request_slowlog_timeout使用
- 
+
 rlimit_files = 1024 #设置文件打开描述符的rlimit限制. 默认值: 系统定义值默认可打开句柄是1024，可使用 ulimit -n查看，ulimit -n 2048修改。
 rlimit_core = 0 #设置核心rlimit最大限制值. 可用值: 'unlimited' 、0或者正整数. 默认值: 系统定义值.
- 
+
 chroot = #启动时的Chroot目录. 所定义的目录需要是绝对路径. 如果没有设置, 则chroot不被使用.
 chdir = #设置启动目录，启动时会自动Chdir到该目录. 所定义的目录需要是绝对路径. 默认值: 当前目录，或者/目录（chroot时）
 catch_workers_output = yes #重定向运行过程中的stdout和stderr到主要的错误日志文件中. 如果没有设置, stdout 和 stderr 将会根据FastCGI的规则被重定向到 /dev/null . 默认值: 空.
