@@ -1,6 +1,6 @@
 # 区块链（blockchain）
 
-A distributed database that is used to maintain a continuously growing list of records, called blocks.设计者署名为中本聪的人创造一种不受政府或其他任何人控制的货币！
+A distributed database that is used to maintain a continuously growing list of records, called blocks.所有的记账能迅速同步到所有账本 设计者署名为中本聪的人创造一种不受政府或其他任何人控制的货币！
 
 * 数据库
 * 每个节点平等，保存整个数据库
