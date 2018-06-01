@@ -290,6 +290,10 @@
 ## 领域驱动设计（Domain-Driven Design）
 
 
+## DevOps
+
+* DevOps实践指南
+
 ## 机器学习和数据挖掘
 
 * 《[数据之巅](https://www.amazon.cn/gp/product/B00JUE9DXW)》

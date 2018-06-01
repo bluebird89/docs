@@ -53,7 +53,6 @@ brew cask install shadowsocksx
 
 ### Ubunutu
 
-
 ```shell
 sudo apt install openvpn easy-rsa # 服务端
 mkdir /etc/openvpn/easy-rsa/
