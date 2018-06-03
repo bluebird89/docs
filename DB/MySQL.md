@@ -26,7 +26,6 @@ mysql_secure_installation # 没有设置 root 帐户的密码，马上设置它;
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
 
-
 sudo apt remove mysql-server
 sudo apt autoremove mysql-server
 sudo apt remove mysql-common
@@ -383,7 +382,6 @@ USE db_name; # 可以不切换数据库的情况下操作数据表
 
 CREATE DATABASE IF NOT EXISTS db_name CHARSET utf8 COLLATE utf8_unicode_ci;  # 特殊符号、关键字表名加``
 ALTER DATABASE db_name charset=utf8;
-
 DROP DATABASE [IF EXISTS] db_name;
 
 SHOW CREATE DATABASE db_name;
