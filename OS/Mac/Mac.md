@@ -23,7 +23,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
 * [skwp/dotfiles](https://github.com/skwp/dotfiles) YADR - The best vim,git,zsh plugins and the cleanest vimrc you've ever seen
 * [holman/dotfiles](https://github.com/holman/dotfiles)@holman does dotfiles
-* [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files. 
+* [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files.
 * [使用 dotfiles 和 stow 管理你的 dotfiles](https://github.com/jcouyang/dotfiles)
 * [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
 
@@ -85,6 +85,8 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 * [alfred](https://www.alfredapp.com/):a very powerful launcher that you can program to show you anything you want
 * [MrRio/vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. http://parall.ax/vtop
 * [GPG Suite](https://gpgtools.org/)
+* [dashlane](https://www.dashlane.com/zh):密码管理工具
+* [spectacl](https://www.spectacleapp.com/):Move and resize windows with ease
 
 ### 设计
 
@@ -109,7 +111,6 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 
 ### 工具
 
-- shell：oh my zsh
 - CheatSheet 长按⌘键可以显示当前程序快捷键
 - [flux](https://justgetflux.com/)
 - [moom](https://manytricks.com/moom/)
@@ -117,6 +118,7 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):essentially an IDE for automation
 - [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
 - [beaker](https://beakerbrowser.com/):Beaker is a peer-to-peer browser with tools to create and host websites.
+- [Helium](http://heliumfloats.com/):A floating browser window for OS X
 
 ### Pod
 
@@ -146,7 +148,7 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - OmniFocus：GTD思路的应用
 - Fantastical：日程管理应用
 - Omnifocus 在践行 GTD
-- sourcetree 
+- sourcetree
 - tig
 - [Ship](https://www.realartists.com/index.html):Fast, native, comprehensive issue tracking and code review for GitHub
 - [trello](https://trello.com/home): Project management tool
@@ -509,15 +511,27 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 
 ## handoff:l浏览器设备共享
 
-## Alfred 购买Powerpack
+## Alfred
 
-自定义操作命令：休眠 关机
+免费版虽然功能阉割，但是够用,也可以购买 Powerpack. 快捷键：option + space
 
-- 打开： option + space 输入任何一款应用程序的中文或英文名称
-- 查找文件：键入空格，输入你要查找文件名
-- 复杂操作：通过find、open、in等关键词搜索文件。find是定位文件，open是定位并打开文件，in是在文件中进行全文检索，三种检索方式基本上可以找到任何你想找的文件
-- 当计数器用
-- 操作Shell：输入>即可直接运行shell命令。比如>cat *.py | grep print，可以直接打开终端并查找当前py文件中包含 print 的语句
+### features
+
+* Essentials：可设置搜索“应用程序(默认自动选中)”、“联系人”、“设置”。
+* Extras：可设置搜索“文件夹”、“文本文件”、“压缩”、“文档”、“图片”、“AppleScript”等其他文件。
+* Unintelligent：Search all file types 搜索所有文件类型。使用 Find+空格+文件名 来查询文件或文件夹；使用 Open+空格+文件名 也可以打开文件。键入空格，输入要查找文件名 find是定位文件，open是定位并打开文件，in是在文件中进行全文检索
+* Search Scope：设置 Alfred 查询时会搜索的文件夹范围，可自己添加和删除。
+* Fallbacks：若上面的查询搜索不到结果时，就会调用这里设置的网站或搜索引擎来进行进一步的查询。默认反馈结果为 Google、Amazon、Wikipedia 网页搜索。
+  - 自定义搜索页面
+    + https://www.baidu.com/s?ie=utf-8&f=8&wd={query}
+    + http://www.stackoverflow.com/search?q={query}
+    + http://www.stackoverflow.com/search?q={query}
+  - 当计数器用:直接输入计算
+  - 设置搜索关键字搜索浏览器书签
+  - 自定义关键词搜索单词
+  * 操作Shell：输入>即可直接运行shell命令。比如>cat *.py | grep print，可以直接打开终端并查找当前py文件中包含 print 的语句
+
+### workflows
 
 - 使用 Vagrant 或者 Docker（配合 docker-machine 和 docker-compose）
 
@@ -577,7 +591,7 @@ Insert Horizontal Rule | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>-</kbd>
 
 ## Xcode
 
-```
+```sh
 xcode-select --install # 安装 Command Line Tools
 ```
 

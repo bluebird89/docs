@@ -4,3 +4,4 @@
 
 * [Workerman](https://github.com/walkor/Workerman)An asynchronous event driven PHP framework for easily building fast, scalable network applications. Supports HTTP, Websocket, SSL and other custom protocols. Supports libevent, HHVM, ReactPHP.
 * [workerman手册](http://doc.workerman.net/)
+* [walkor/workerman-manual-zh](https://github.com/walkor/workerman-manual-zh):workerman中文手册
