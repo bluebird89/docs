@@ -10,6 +10,34 @@
 ## API gateway
 
 
+## [encode/apistar](https://github.com/encode/apistar)
+
+A smart Web API framework, for Python 3. 🌟 https://docs.apistar.com
+
+* pip3 install apistar
+* Create a new project in app.py, python app.py
+* Open http://127.0.0.1:5000/docs/ in your browser
+
+```py
+from apistar import App, Route
+
+
+def welcome(name=None):
+    if name is None:
+        return {'message': 'Welcome to API Star!'}
+    return {'message': 'Welcome to API Star, %s!' % name}
+
+
+routes = [
+    Route('/', method='GET', handler=welcome),
+]
+
+app = App(routes=routes)
+
+
+if __name__ == '__main__':
+    app.serve('127.0.0.1', 5000, debug=True)
+```
 
 ## 工具
 
