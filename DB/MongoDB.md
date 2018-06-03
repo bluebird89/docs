@@ -80,15 +80,15 @@ db.t1.createIndex({idCardNum:1},{background:1})
 * 如果_id已经存在，insert不做操作，save做更新操作；如果不加_id字段，两者作用相同都是插入数据
 * 添加的数据其结构是松散的，只要是bson格式均可，列属性均不固定，根据添加的数据为准。先定义数据再插入，就可以一次性插入多条数据
 * 不需要预先定义 collection ，在第一次插入数据后，collection 会自动的创建
-* 条件操作符 
-    - $gt : > 
-    - $lt : < 
-    - $gte: >= 
-    - $lte: <= 
-    - $ne : !=、<> 
-    - $in : in 
-    - $nin: not in 
-    - $all: all 
+* 条件操作符
+    - $gt : >
+    - $lt : <
+    - $gte: >=
+    - $lte: <=
+    - $ne : !=、<>
+    - $in : in
+    - $nin: not in
+    - $all: all
     - $not:
 
 
@@ -102,12 +102,12 @@ help
 db.serverCmdLineOpts() # 查看mongod的启动参数
 
 show dbs # 显示数据库列表
-use yourDB # 切换当前数据库至yourDB 
+use yourDB # 切换当前数据库至yourDB
 db.getName() # db:获取数据库名称
 db.dropDatabase() # 删除数据库
 db.help() # 显示数据库操作命令
 
-show collections # 显示当前数据库中的集合（类似关系数据库中的表table） 
+show collections # 显示当前数据库中的集合（类似关系数据库中的表table）
 db.yourCollection.help() # 显示集合操作命令
 db.getCollectionNames()
 db.printCollectionStats() # 查看各collection的状态
@@ -125,28 +125,28 @@ for(var i=1;i<=10;i++){
 db.restaurants.find()
 db.restaurants.findOne()
 db.restaurants.find( { "address.zipcode": "10075" } ).limit(10)
-db.users.find().skip(3).limit(5);  # 从第3条记录开始，返回5条记录(limit 3, 5) 
+db.users.find().skip(3).limit(5);  # 从第3条记录开始，返回5条记录(limit 3, 5)
 db.restaurants.find( { "grades.score": { $gt: 30 } } )
 db.restaurants.find( { "cuisine": "Italian", "address.zipcode": "10075" } ) # and
 db.restaurants.find( { $or: [ { "cuisine": "Italian" }, { "address.zipcode": "10075" } ] }) # or
 db.restaurants.find().sort( { "borough": 1, "address.zipcode": 1 } ) # sort  1 for ascending and -1 for descending.
 db.users.find({creation_date:{$gt:new Date(2010,0,1), $lte:new Date(2010,11,31)}); # 查询 creation_date > '2010-01-01' and creation_date <= '2010-12-31' 的数据
-db.users.find({name: {$ne: "bruce"}, age: {$gte: 18}});  # 查询 name <> "bruce" and age >= 18 的数据 
-db.users.find({age: {$in: [20,22,24,26]}}); # 查询 age in (20,22,24,26) 的数据  
-db.users.find('this.age % 10 == 0'); # 查询 age取模10等于0 的数据 
+db.users.find({name: {$ne: "bruce"}, age: {$gte: 18}});  # 查询 name <> "bruce" and age >= 18 的数据
+db.users.find({age: {$in: [20,22,24,26]}}); # 查询 age in (20,22,24,26) 的数据
+db.users.find('this.age % 10 == 0'); # 查询 age取模10等于0 的数据
 db.users.find({age : {$mod : [10, 0]}});  # 取模10等于0 的数据
-db.users.find({favorite_number : {$all : [6, 8]}});  # 
-db.users.find({name: {$not: /^B.*/}}); # 查询不匹配name=B*带头的记录 
+db.users.find({favorite_number : {$all : [6, 8]}});  #
+db.users.find({name: {$not: /^B.*/}}); # 查询不匹配name=B*带头的记录
 db.users.find({age : {$not: {$mod : [10, 0]}}}); # 查询 age取模10不等于0 的数据
 
 db.users.find({ name : "bruce" }, {age:1, address:1}); # 选择返回age、address和_id字段
-db.users.find({name: {$exists: true}}); # 查询所有存在name字段的记录  
+db.users.find({name: {$exists: true}}); # 查询所有存在name字段的记录
 db.users.find({name: {$type: 2}}); # 查询所有name字段是字符类型的
-db.users.find({age: {$type: 16}}); # 查询所有age字段是整型的 
-db.users.find({name: /^b.*/i}); # 查询以字母b或者B带头的所有记录 
+db.users.find({age: {$type: 16}}); # 查询所有age字段是整型的
+db.users.find({name: /^b.*/i}); # 查询以字母b或者B带头的所有记录
 
 db.users.find({age: {$gt: 18}});  #  查询 age > 18 的记录
-db.users.find({$where: "this.age > 18"}); 
+db.users.find({$where: "this.age > 18"});
 db.users.find("this.age > 18");
 
 db.test.find().pretty() # 格式化显示查询结果
