@@ -76,7 +76,6 @@ brew prune
 rm -rf Library .git .gitignore bin/brew README.md share/man/man1/brew
 rm -rf ~/Library/Caches/Homebrew
 
-
 brew cask search # 列出所有可以被安装的软件
 brew cask search name # 查找所有和 name相关的应用
 brew cask install name

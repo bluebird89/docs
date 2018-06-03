@@ -51,20 +51,20 @@
 * 尽可能不使用TEXT、BLOB类型:增加存储空间的占用，读取速度慢。
 
 ```sql
-CREATE p t3 (c1 float(10,2),c2 decimal(10,2)); 
-insert into t3 values (999998.02, 999998.02); 
-select * from t3;  
-| c1        | c2        |  
-| 999998.00 | 999998.02 | 
+CREATE p t3 (c1 float(10,2),c2 decimal(10,2));
+insert into t3 values (999998.02, 999998.02);
+select * from t3;
+| c1        | c2        |
+| 999998.00 | 999998.02 |
  1 row in set (0.00 sec)    # 可以看到c1列的值由999998.02变成了999998.00，这就是float浮点数类型的不精确性造成的。因此对货币等对精度敏感的数据，应该用定点数表示或存储。
 
  create p test(id int(10) zerofill,id2 int(1));
-    insert into test values(1,1);  
+    insert into test values(1,1);
     insert into test values(1000000000,1000000000);
-    select * from test;  
-     | id         | id2        |  
-     | 0000000001 |          1 |    
-     | 1000000000 | 1000000000 |  
+    select * from test;
+     | id         | id2        |
+     | 0000000001 |          1 |
+     | 1000000000 | 1000000000 |
       2 rows in set (0.01 sec) # 字段定义为NOT NULL要提供默认值。
 ```
 
@@ -82,8 +82,8 @@ select * from t3;
 SELECT * FROM t WHERE YEAR(d) >= 2016; # 由于MySQL不像Oracle那样支持函数索引，即使d字段有索引，也会直接全表扫描。应改为
 SELECT * FROM t WHERE d >= ‘2016-01-01’;
 
-SELECT * FROM t WHERE name LIKE '%de%'; # 低效查询  
-SELECT * FROM t WHERE name LIKE 'de%'; #     高效查询  
+SELECT * FROM t WHERE name LIKE '%de%'; # 低效查询
+SELECT * FROM t WHERE name LIKE 'de%'; #     高效查询
 ```
 
 #### SQL设计规范
@@ -94,18 +94,25 @@ SELECT * FROM t WHERE name LIKE 'de%'; #     高效查询
 * 减少与数据库的交互次数。
 * 拒绝大SQL，拆分成小SQL。
 * 禁止使用order by rand()
+* 注意存储效率
+    - 减少事务
+    - 减少联表查询
+    - 适当使用索引
+    - 考虑使用缓存
+* 避免依赖于数据库的运算功能(函数、存储器、触发器等)，将负载放在更容易扩展的业务应用端
+* 数据统计场景中，实时性要求较高的数据统计可以用Redis；非实时数据则可以使用单独表，通过队列异步运算或者定时计算更新数据。此外，对于一致性要求较高的统计数据，需要依靠事务或者定时校对机制保证准确性。
 
-```sql 
+```sql
 SELECT FROM t WHERE LOC_ID = 10 OR LOC_ID = 20 OR LOC_ID = 30; # 高效查询 SELECT_ FROM t WHERE LOC_IN IN (10,20,30);
 
 SELECT FROM t WHERE id = '19'; # SELECT_ FROM t WHERE id = 19;
 
-INSERT INTO t (id, name) VALUES(1,'Bea'); INSERT INTO t (id, name) VALUES(2,'Belle'); INSERT INTO t (id, name) VALUES(3,'Bernice'); -----> 
+INSERT INTO t (id, name) VALUES(1,'Bea'); INSERT INTO t (id, name) VALUES(2,'Belle'); INSERT INTO t (id, name) VALUES(3,'Bernice'); ----->
 INSERT INTO t (id, name) VALUES(1,'Bea'), (2,'Belle'),(3,'Bernice'); Update ... where id in (1,2,3,4); Alter p tbl_name add column col1, add column col2;
 
-SELECT FROM tag JOIN tag_post ON tag_post.tag_id = tag.id JOIN post ON tag_post.post_id = post.id WHERE tag.tag = 'mysql'; 
+SELECT FROM tag JOIN tag_post ON tag_post.tag_id = tag.id JOIN post ON tag_post.post_id = post.id WHERE tag.tag = 'mysql';
 SELECT FROM tag WHERE tag = 'mysql' SELECT _FROM tag_post WHERE tag_id = 1234 SELECT_ FROM post WHERE post_id in (123, 456, 567, 9098, 8904);
 
-SELECT * FROM t1 WHERE 1=1 ORDER BY RAND() LIMIT 4; 
+SELECT * FROM t1 WHERE 1=1 ORDER BY RAND() LIMIT 4;
 SELECT * FROM t1 WHERE id >= CEIL(RAND()*1000) LIMIT 4;
 ```
