@@ -13,8 +13,11 @@ Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。命令
 * ～/.vimrc # 针对当前用户的配置
 * ~/.zshrc：zsh配置文件
 * PATH="$PATH:/my_new_path":临时添加，关闭后失效
+* 选项如果单字符选项前使用一个减号-。单词选项前使用两个减号--
 
 ```sh
+cmd [options] [arguments] # options称为选项，arguments称为参数
+
 echo $SHELL # 查看shell
 
 /* 如果vim还没有语法高亮，那么在/etc/profile 中添加以下语句 */

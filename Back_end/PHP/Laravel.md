@@ -1435,6 +1435,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
 * [the-control-group/voyager](https://github.com/the-control-group/voyager):Voyager - The Missing Laravel Admin https://laravelvoyager.com
 * [codex-project/codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! http://codex-project.ninja
+* [spatie/laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
 
 ## 教程
 
@@ -1444,7 +1445,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 
 项目的搭建，以 [https://github.com/summerblue/larabbs](A forum project base on Laravel 5.5)
 
-```shell
+```sh
 git clone git@github.com:summerblue/larabbs.git
 // 修改 homestead.html,添加配置
 vagrant provision
@@ -1489,7 +1490,7 @@ Debugbar::measure('My long operation', function() {
 
 🔐 JSON Web Token Authentication for Laravel & Lumen http://jwt-auth.com
 
-```php
+```sh
 composer require tymon/jwt-auth # 修改app.php 添加到providers
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider" # 生成配置文件
 php artisan jwt:secret # 使用
