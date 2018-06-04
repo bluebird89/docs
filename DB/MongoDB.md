@@ -19,11 +19,12 @@ BSON被比作二进制的交换格式，如同Protocol Buffers，但BSON比它�
 * 添加系统变量：C:\Program Files\MongoDB\Server\3.4\bin（echo 'export PATH=/usr/local/mongodb/bin:$PATH'>>~/.bash_profile）
 * 创建数据库文件路径:C:\data\db(/data/db)
 * 通过命令行工具启动服务: mongod（本地访问<http://localhost:27017/）MongoDB系统的主要守护进程，用于处理数据请求，数据访问和执行后台管理操作，必须启动，才能访问MongoDB数据库>
+* [软件源](ttp://repo.mongodb.org/apt/ubuntu/dists/)
 
 ```sh
 ### ubnutu
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
-echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list  # MongoDB尚未发布Bionic Beaver软件包，但Xenial软件包在Ubuntu 18.04 LTS上运行良好,。 如果您在该网页上看到一个目录“bionic”，则将上述命令中的单词“xenial”替换为“bionic”一词。
 sudo apt-get  update
 sudo apt-get install -y mongodb-org
 
@@ -72,6 +73,25 @@ db.t1.createIndex({idCardNum:1},{background:1})
 
 ```
 bindIp:  127.0.0.1  修改为：bindIp:  0.0.0.0
+
+# 添加超级管理员,客戶端鏈接需要選擇修改類型 basic
+db.createUser(
+  {
+    user: "adminee",
+    pwd: "admin",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+  }
+)
+db.auth("adminee","admin")
+
+# add root
+db.createUser({user:"admin", pwd:"admin123", roles:[{role:"root", db:"admin"}]})
+ExecStart=/usr/bin/mongod –auth –config /etc/mongod.conf # nano /lib/systemd/system/mongod.service add auth
+
+systemctl daemon-reload # 重新加载systemd服务
+sudo service mongod restart
+
+mongo -u admin -p admin123 --authenticationDatabase admin
 ```
 
 ### 客户端
@@ -100,6 +120,7 @@ help
 db.serverCmdLineOpts() # 查看mongod的启动参数
 
 show dbs # 显示数据库列表
+
 use yourDB # 切换当前数据库至yourDB
 db.getName() # db:获取数据库名称
 db.dropDatabase() # 删除数据库
