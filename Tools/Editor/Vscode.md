@@ -1,6 +1,22 @@
 # Vscode
 
-## 指令
+## 安裝
+
+[下載地址](https://code.visualstudio.com/Download)
+
+```sh
+# ubuntu:download file
+sudo dpkg -i <file>.deb
+sudo apt-get install -f # Install dependencies
+
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+sudo apt-get update
+sudo apt-get install code
+```
+
+## 使用
 
 ### 左边列表
 
@@ -162,7 +178,7 @@ F10 Step over
 ⌘↑ / ↓ Scroll up/down
 PgUp / PgDn Scroll page up/down
 ⌘Home / End Scroll to top/bottom
-⇧⌥⌘↓, ⇧⌥⌘→, ⇧⌥⌘↑, ⇧⌥⌘←   Box Selection 
+⇧⌥⌘↓, ⇧⌥⌘→, ⇧⌥⌘↑, ⇧⌥⌘←   Box Selection
 
 ### CLI tool
 
@@ -171,7 +187,7 @@ Open the Command Palette (F1) and type "shell command". Hit enter to execute She
 ```sh
 code --help # see help options
 code . # open code with current directory
-code pro6.js pro6.scss ../ 
+code pro6.js pro6.scss ../
 code -r . # open the current directory in the most recently used code window
 code -n # create a new window
 code --locale=es # change the language
@@ -187,5 +203,9 @@ code --disable-extensions . # disable all extensions
 * [vscode-element-helper](https://github.com/ElemeFE/vscode-element-helper)
 * [keyboard-shortcuts-macos](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
 * https://code.visualstudio.com/
-* [octref/polacode](https://github.com/octref/polacode):camera_flash Polaroid for your code 
+* [octref/polacode](https://github.com/octref/polacode):camera_flash Polaroid for your code
 
+
+## 參考
+
+* [文檔](https://code.visualstudio.com/docs)
