@@ -675,6 +675,8 @@ sudo dpkg  -i   sogoupinyin_2.2.0.0108_amd64.deb # 手动安装
 system setting->language support
 choose language,key input method system: fcitx
 fcitx add sogou pinyin
+
+Ctrl+Shift+F # trantional change simple
 ```
 
 > atom install
