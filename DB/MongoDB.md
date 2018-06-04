@@ -90,7 +90,6 @@ bindIp:  127.0.0.1  修改为：bindIp:  0.0.0.0
     - $all: all
     - $not:
 
-
 ```sql
 mongo --help
 
@@ -214,9 +213,11 @@ db.shutdownServer() # 退出命令行
 show profile # 查看profiling
 ```
 
-## 工具
+## 客户端
 
-* Robomongo MongoBooster
+* [Robo 3T](https://robomongo.org/):Robo 3T (formerly Robomongo) is the free lightweight GUI for MongoDB enthusiasts.
+* [Studio 3T](https://studio3t.com/):Studio 3T is the GUI that makes working with MongoDB easy.Available for Windows, Mac, and Linux.
+* [NoSQLBooster](https://nosqlbooster.com/):NoSQLBooster for MongoDB (formerly MongoBooster) is a shell-centric cross-platform GUI tool for MongoDB v2.6-3.6, which provides fluent query builder, SQL query SQL Query, update-in-place, ES2017 syntax support and true intellisense experience.
 * [Automattic/mongoose](https://github.com/Automattic/mongoose):MongoDB object modeling designed to work in an asynchronous environment. http://mongoosejs.com
 
 ## docker
