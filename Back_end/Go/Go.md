@@ -19,11 +19,15 @@ Go 编译器支持交叉编译，也就是说你可以在一台机器上构建�
 ### linux
 wget  https://redirector.gvt1.com/edgedl/go/go$VERSION.$OS-$ARCH.tar.gz
 sudo tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
+
 export PATH=$PATH:/usr/local/go/bin # 默认安装路径 /usr/local/go (c:\Go under Windows)添加到/etc/profile (for a system-wide installation) or $HOME/.profile
 
+mkdir -p ~/projects/{bin,pkg,src}
 export GOROOT=/usr/local/go # Installing to a custom location.install the Go tools to a different location. In this case you must set the GOROOT environment variable to point to the directory in which it was installed.
-export GOPATH=$HOME/go #默认安装包的路径
+export GOPATH=$HOME/projects #默认安装包的路径
+export GOBIN="$HOME/projects/bin"
 export PATH=$PATH:$GOPATH/bin
+source ~/.zshrc
 
 ### Mac
 brew install golang
@@ -39,7 +43,7 @@ source .bash_profile # 使修改立刻生效
 go env
 ```
 
-### 插件安装
+### 插件
 
 go get 用来动态获取远程代码包的，fetch libraries from remote and put them in your $GOPATH.目前支持的有BitBucket、GitHub、Google Code和Launchpad。这个命令在内部实际上分成了两步操作：第一步是下载源码包，第二步是执行go install。下载源码包的go工具会自动根据不同的域名调用不同的源码工具,参数说明：
 
@@ -65,6 +69,10 @@ godoc -src fmt // fmt package interface in Go source form
 ## Build&Run
 
 ```go
+vi ~/projects/src/hello.go
+go install $GOPATH/hello.go
+$GOBIN/hello
+
 go build hello.go
 ./hello
 
@@ -178,5 +186,6 @@ websocketd --port=8080 ./count.sh // 建立server
 - [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 - [golang/go](https://github.com/golang/go):The Go programming language https://golang.org
 - [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
+- [GO语言中文网](https://studygolang.com/)
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>

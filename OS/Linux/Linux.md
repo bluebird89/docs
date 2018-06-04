@@ -549,7 +549,7 @@ rm ~/id_rsa.pub
   curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
   ```
 
-# sougou pinyin install
+### sougou pinyin
 
 - command line
 - package
@@ -566,7 +566,7 @@ sudo dpkg  -i   sogou_pinyin_linux_1.0.0.0033_amd64.deb
   - system setting->language support
   - choose language,key input fcitx
 
-## atom install
+### atom
 
 ```sh
 sudo add-apt-repository ppa:webupd8team/atom
@@ -673,19 +673,20 @@ sudo dpkg -P linux-image-extra-3.5.0-17-generic
 
 ## 端口 进程
 
-```
-// 查看某一端口的占用情况
-[sudo ]lsof -i : (port)
-// 显示tcp，udp的端口和进程等相关
-netstat -tunlp
-// 指定端口号进程情况
-netstat -tunlp|grep (port)
-// 进程查看
-ps -ef | grep nginx
+```sh
+[sudo ]lsof -i : (port) # 查看某一端口的占用情况
+
+netstat -tunlp # 显示tcp，udp的端口和进程等相关
+netstat -plntu
+
+netstat -tunlp|grep (port)  # // 指定端口号进程情况
+
+ps -ef | grep nginx # 进程查看
 ps aux | grep nginx
+
 lsof -Pni4 | grep LISTEN | grep php
-// 关闭进程
-kill -9 pid
+
+kill -9 pid # 关闭进程
 ```
 
 chkconfig --list sshd

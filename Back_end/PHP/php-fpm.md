@@ -34,7 +34,8 @@ kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
 #重启php-fpm
 kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
 
-sudo service php7.0-fpm reload # linux
+## linux 进程管理
+sudo service php7.0-fpm {start|stop|status|restart|reload|force-reload}
 ```
 
 ```
@@ -554,5 +555,5 @@ location ~ ^/status$ {
 }
 
 pm.status_path = /status # php-fpm.conf里面打开选项
-访问 http://域名/status
+# 访问 http://域名/status
 ```
