@@ -250,6 +250,7 @@ systemctl  start  iptables.service  #启动防火墙
 systemctl  stop  iptables.service  #停止防火墙
 systemctl  restart  iptables.service  #重启防火墙
 systemctl  status  iptables.service  #查看防火墙状态
+
 systemctl  enable  iptables.service  #设置开机启动
 
 vi /etc/selinux/config

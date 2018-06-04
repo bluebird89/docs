@@ -13,44 +13,39 @@ Mongo最大的特点是他支持的查询语言非常强大，其语法有点类
 BSON是Binary JSON 的简称，是一个JSON文档对象的二进制编码格式。BSON同JSON一样支持往其它文档对象和数组中再插入文档对象和数组，同时扩展了JSON的数据类型。如：BSON有Date类型和BinDate类型。
 BSON被比作二进制的交换格式，如同Protocol Buffers，但BSON比它更“schema-less”，非常好的灵活性但空间占用稍微大一点。
 
-## 安装与使用
-
-### ubnutu
-
-```sh
-sudo apt-get install libssl-dev pkg-config
-pecl install mongodb
-```
-
-### Windows
+## 安装
 
 * 下载安装（或通过包工具）
 * 添加系统变量：C:\Program Files\MongoDB\Server\3.4\bin（echo 'export PATH=/usr/local/mongodb/bin:$PATH'>>~/.bash_profile）
 * 创建数据库文件路径:C:\data\db(/data/db)
 * 通过命令行工具启动服务: mongod（本地访问<http://localhost:27017/）MongoDB系统的主要守护进程，用于处理数据请求，数据访问和执行后台管理操作，必须启动，才能访问MongoDB数据库>
 
-### Mac
-
-```shell
-brew services mongodb # mac启动服务
-```
-
-### Linux
-
 ```sh
-sudo apt install mongodb
-mongo -version
+### ubnutu
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+sudo apt-get  update
+sudo apt-get install -y mongodb-org
 
-service mongodb start
-service mongodb stop
+systemctl start mongod # 启动MongoDB
+systemctl enable mongod # 添加为在启动时启动的服务
+s
+sudo service mongodb start | stop | restart
 pgrep mongo -l # 查看服务状态
+
 sudo apt-get --purge remove mongodb mongodb-clients mongodb-server # 卸载
+
+## Mac
+brew services mongodb # 启动服务
+
+mongo -version
 ```
 
 ## 使用
 
 ### 服务端配置
 
+配置文件:/etc/mongod.conf
 开启mongo服务端的命令参数写入配置文档，以参数-f启动 `mongod -f C:datadbmongodb_config.config`
 
 * --dbpath ：存储MongoDB数据文件的目录` mongod * --dbpath=C:datadb`
@@ -74,6 +69,10 @@ sudo apt-get --purge remove mongodb mongodb-clients mongodb-server # 卸载
 
 对于MongoDB创建索引要在后台创建，避免锁表,使用范例
 db.t1.createIndex({idCardNum:1},{background:1})
+
+```
+bindIp:  127.0.0.1  修改为：bindIp:  0.0.0.0
+```
 
 ### 客户端
 
