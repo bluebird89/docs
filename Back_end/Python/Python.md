@@ -72,6 +72,12 @@ pip3 install --upgrade pip setuptools wheel
 pip install scrapy
 C:\Users\Administrator\AppData\Local\Programs\Python\Python36 # 路径
 pip install pywin32 # No module named win32api
+
+## Ubuntu
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 100
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 150
+
+sudo update-alternatives --config python #如果要切换到Python2
 ```
 
 ### 版本管理工具pyenv:修改系统环境变量 PATH

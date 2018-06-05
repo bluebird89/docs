@@ -105,28 +105,6 @@ slice reslice
 
 * 离线文档：`godoc -http=:6060` 访问`http://localhost:6060/`
 
-## 学习
-
-- [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
-- [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. https://iris-go.com
-- [https://songjiayang.gitbooks.io](https://songjiayang.gitbooks.io)
-- [Go语言入门](https://www.yiibai.com/go/go_start.html)
-
-## 框架
-
-- [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
-- [astaxie/beego](https://github.com/astaxie/beego):beego is an open-source, high-performance web framework for the Go programming language. http://beego.me
-
-### [labstack/echo](https://github.com/labstack/echo)
-
-High performance, minimalist Go web framework https://echo.labstack.com
-
-## 扩展
-
-- [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
-- [grafana/grafana](https://github.com/grafana/grafana)The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
-- [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
-- [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
 - [deanishe/awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
 
 ### [joewalnes/websocketd](https://github.com/joewalnes/websocketd)
@@ -169,6 +147,19 @@ websocketd --port=8080 ./count.sh // 建立server
 </script>
 ```
 
+## 框架
+
+- [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
+- [astaxie/beego](https://github.com/astaxie/beego):beego is an open-source, high-performance web framework for the Go programming language. http://beego.me
+- [labstack/echo](https://github.com/labstack/echo):High performance, minimalist Go web framework https://echo.labstack.com
+
+## 扩展
+
+- [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
+- [grafana/grafana](https://github.com/grafana/grafana)The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
+- [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
+- [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
+
 ## 工具
 
 * [bettercap/bettercap](https://github.com/bettercap/bettercap):The state of the art network attack and monitoring framework. https://www.bettercap.org/
@@ -179,6 +170,11 @@ websocketd --port=8080 ./count.sh // 建立server
 
 * [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
 * [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源免费图书(开发中...)https://github.com/chai2010/advanced-go-programming-book
+* [astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
+* [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
+- [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. https://iris-go.com
+- [https://songjiayang.gitbooks.io](https://songjiayang.gitbooks.io)
+- [Go语言入门](https://www.yiibai.com/go/go_start.html)
 
 ## 参考
 
@@ -187,5 +183,6 @@ websocketd --port=8080 ./count.sh // 建立server
 - [golang/go](https://github.com/golang/go):The Go programming language https://golang.org
 - [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
 - [GO语言中文网](https://studygolang.com/)
+
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>
