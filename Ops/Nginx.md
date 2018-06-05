@@ -291,8 +291,8 @@ server {
 
     #charset koi8-r;
 
-    # 设定本虚拟机的访问日志
-    #access_log  logs/host.access.log  main;
+    # 设定本虚拟机的访问日志,使用“main”日志格式
+    access_log  logs/host.access.log  main;
     rewrite_log on; # 开启重写日志
     # location（URL匹配特定位置配置） http服务中，某些特定的URL对应的一系列配置项。
     location / {

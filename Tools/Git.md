@@ -1256,6 +1256,12 @@ These features allow to pause a branch development and switch to another one (_"
 * msysgit
 * sourcetree
 
+## 问题
+
+> error: insufficient permission for adding an object to repository database .git/objects
+
+chown -R henry:henry .git/objects
+
 ## 学习
 
 * [练习沙盒](https://try.github.io)
