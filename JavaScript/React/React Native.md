@@ -35,12 +35,12 @@ odeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多�
 - Chocolatey（ 基于Nuget的Windows包管理工具）安装与使用
 
 ```sh
-// 以管理员身份运行cmd：
+# 以管理员身份运行cmd：
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
-// choco install/uninstall/upgrade package/package
+# choco install | uninstall | upgrade package/package
 choco install python2
-choco install nodejs  // 优化npm镜像
+choco install nodejs  # 优化npm镜像
 choco install jdk8
 ```
 
@@ -66,17 +66,16 @@ choco install jdk8
 - 项目构建
 
 ```sh
-// 安装react-native-cli
+# 安装react-native-cli
 npm install -g react-native-cli
-// 初始化项目
+# 初始化项目
 react-native init AwesomeProject
-//  运行应用
+#  运行应用
 cd AwesomeProject
 react-native run-android
 react-native run-ios
 
 sudo xcode-select -s /Applications/Xcode8.1.app/Contents/Developer/    # （红色部分是你实际的xcode app的名称）
-
 
 lsof -i tcp:8081
 ```
@@ -86,7 +85,7 @@ lsof -i tcp:8081
 ```shell
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-brew install node
+brew install node yarn
 npm config set registry https://registry.npm.taobao.org --global
 npm config set disturl https://npm.taobao.org/dist --global
 
@@ -101,12 +100,11 @@ xcode
 
 apm install nuclide # 由Facebook提供的基于atom的集成开发环境，可用于编写、运行和 调试React Native应用
 
-react-native init AwesomeProject  ＃ 新建一个项目
+react-native init AwesomeProject  # 新建一个项目
 cd AwesomeProject
 react-native run-android
 react-native run-ios
 ```
-
 
 ## 开发基础
 
@@ -133,7 +131,6 @@ ReactDOM.render(
 
 ```
 
-
 ### 组件
 
 ```typescript
@@ -148,7 +145,6 @@ ReactDOM.render(
   document.getElementById('example')
 );
 ```
-
 
 ### 布局
 
@@ -177,7 +173,6 @@ Flexbox解决了什么问题？
 * flex－flow  flexDirection 和 flexWrap 属性 的简写形式，默认值为 row nowrap
 
 ![lifecycle](/path/to/RN-lifecycle.jpg "lifecycle")
-
 
 ## ReactJS
 
