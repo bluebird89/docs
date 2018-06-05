@@ -6,9 +6,10 @@
 
 ```sh
 sudo apt-get install composer
+
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
-brew install composer  // Mac
+brew install composer  # Mac
 # file_put_contents(./composer.json): failed to open stream: Permission denied
 sudo chown -R $USER .composer/
 
@@ -17,26 +18,28 @@ sudo chown -R $USER .composer/
 
 ## 使用
 
-global 命令允许你在 COMPOSER_HOME 目录下执行其它命令 sudo chown -R $USER $HOME/.composer
+global 命令允许你在 COMPOSER_HOME 目录下执行命令
 
 ```sh
 ## 全局配置国内镜像
 composer config -g repo.packagist composer https://packagist.phpcomposer.com
-
 composer config repo.packagist composer https://packagist.phpcomposer.com
 
+composer list  # 列出所有可用的命令
 composer init
 
 composer search monolog
 compsoer show monolog
 
 composer require cocur/slugify
-composer install
+composer install # 使用composer install或者composer update命令将会更新所有的扩展包
 composer update
 composer remove
 composer self-update
-
+sss
 composer create-project swoft/swoft swoft
+
+composer dump-autoload --optimize # 优化一下自动加载
 ```
 
 ```php

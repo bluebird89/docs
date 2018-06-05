@@ -26,11 +26,11 @@ if ($tmpstr==$signature) {
 
 ## 资源
 
-- [littlecodersh/ItChat](https://github.com/littlecodersh/ItChat)
-- [awesome-wechat-weapp](https://github.com/justjavac/awesome-wechat-weapp)
+- [littlecodersh/ItChat](https://github.com/littlecodersh/ItChat):A complete and graceful API for Wechat. 微信个人号接口、微信机器人及命令行微信，三十行即可自定义个人号机器人。 http://itchat.readthedocs.io
+- [awesome-wechat-weapp](https://github.com/justjavac/awesome-wechat-weapp):微信小程序开发资源汇总 100 http://justjavac.com
 - [vux](https://github.com/airyland/vux)
 - [mars](https://github.com/Tencent/mars)
-- [weui](https://github.com/Tencent/weui)
+- [weui](https://github.com/Tencent/weui):A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications. https://weui.io
 - [overtrue/wechat](https://github.com/overtrue/wechat): It is probably the best SDK in the world for developing WeChat App. <http://easywechat.org>
 - [wechat-php-sdk](https://github.com/dodgepudding/wechat-php-sdk)
 - [Eric-Guo/wechat](https://github.com/Eric-Guo/wechat):API, command and message handling for WeChat in Rails
