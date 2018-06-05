@@ -723,22 +723,27 @@ Linux的最重要创新之一，引入Hypervisor，运行其他操作系统的�
 ### 安装与配置
 
 ```sh
-apt-get install samba
+sudo apt-get install samba samba-common
+sudo apt-get autoremove samba
 
-vim /etc/samba/smb.conf 文件最后添加下列设定
+mkdir /home/myshare
+chmod 777 /home/myshare
+
+sudo smbpasswd  -a  henry # add user
+
+vim /etc/samba/smb.conf # 添加下列设定
 
 [share]
 comment=This is samba dir
-path = /home/username/share
-available = yes
-browsealbe = yes
-valid users=imac
-public = yes
-writable = yes
+path=/home/myshare  
+create mask=0755
+directory mask=0755
+writeable=yes
+valid users=henry
+browseable=yes
 
-useradd imac
-sudo smbpasswd -a imac
-/etc/init.d/samba restart
+sudo samba start | stop | restart
+sudo service smbd status
 
 mac 链接
 finder中com＋K
