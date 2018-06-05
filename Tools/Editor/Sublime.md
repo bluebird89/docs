@@ -17,7 +17,6 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
 ### windows
 # 下载软件
 # 添加到命令行`D:\Program Files\Sublime Text 3`
-
 ```
 
 ## 配置
