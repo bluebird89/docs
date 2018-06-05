@@ -132,6 +132,8 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 * shadowshocks
 * Jitsy:通讯工具
 * Synaptic：软件管理
+* xchm:`sudo apt-get install xchm`
+* [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
 
 ### 软件安装
 
@@ -872,7 +874,10 @@ top [-] [d] [p] [q] [c] [C] [S] [s]  [n]，参数
 
 > Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程。
 
-
+```sh
+sudo apt install htop
+htop
+```
 
 ## 虚拟化
 
