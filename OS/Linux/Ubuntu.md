@@ -314,15 +314,15 @@ su -
 su - root
 su henry
 
-useradd  username      //创建用户会同时创建同名组
-useradd  -g  组编号   username //创建用户的同时设置组别
-useradd  -g 组编号 -u 用户编号 -d 家目录 username //创建用户同时，指定组别、用户编号、家目录
+useradd  username      # 创建用户会同时创建同名组
+useradd  -g  组编号   username # 创建用户的同时设置组别
+useradd  -g 组编号 -u 用户编号 -d 家目录 username # 创建用户同时，指定组别、用户编号、家目录
 
-usermod  -g gid  username     //修改组别是常见操作
-usermod  -g gid -u uid -d 家目录  -l  newname   username //修改组别、用户编号、家目录、名字
+usermod  -g gid  username     # 修改组别是常见操作
+usermod  -g gid -u uid -d 家目录  -l  newname   username # 修改组别、用户编号、家目录、名字
 
-userdel username     //删除用户(删除passwd文件对应信息)，此时其家目录需要手动删除
-userdel -r username  //删除用户的同时也删除其“家目录”
+userdel username     # 删除用户(删除passwd文件对应信息)，此时其家目录需要手动删除
+userdel -r username  # 删除用户的同时也删除其“家目录”
 
 groupadd  groupname
 groupmod -g gid  -n newname  groupname
@@ -592,6 +592,12 @@ init 5
 --run level 6 :重新启动
 
 chkconfig --list sshd
+```
+
+###font
+
+```sh
+sudo apt install fonts-firacode
 ```
 
 > 服务管理：

@@ -471,6 +471,12 @@ exit 0
 # vim:set ts=4 sw=4 ft=sh et:
 ```
 
+### terminator
+
+```sh
+sudo apt-get install terminator
+```
+
 ### 跳板机
 
 ```sh
