@@ -28,6 +28,11 @@ npm config set registry https://registry.npm.taobao.org --global
 npm config set disturl https://npm.taobao.org/dist --global
 ```
 
-## 代码
+## Package
 
-- [npm/npm](https://github.com/npm/npm):a package manager for javascript <http://www.npmjs.com/>
+* [request/request](https://github.com/request/request):🏊🏾 Simplified HTTP request client.
+
+## 参考
+
+* [npm/npm](https://github.com/npm/npm):a package manager for javascript <http://www.npmjs.com/>
+* [Site](https://www.npmjs.com/):npm is the package manager for javascript
