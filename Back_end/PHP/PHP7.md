@@ -90,7 +90,7 @@ class Application {
 
    public function setLogger(Logger $logger) {
       $this->logger = $logger;
-   }  
+   }
 }
 $app = new Application;
 $app->setLogger(new class implements Logger {
@@ -108,8 +108,8 @@ $value = function() {
 };
 print($value->call(new A));
 
-class MyClass1 { 
-   public $obj1prop;   
+class MyClass1 {
+   public $obj1prop;
 }
 class MyClass2 {
    public $obj2prop;
@@ -136,7 +136,7 @@ use com\yiibai\{ClassA, ClassB, ClassC as C};
 use function com\yiibai\{fn_a, fn_b, fn_c};
 use const com\yiibai\{ConstA, ConstB, ConstC};
 
-class MathOperations 
+class MathOperations
 {
    protected $n = 10;
 
@@ -155,3 +155,7 @@ $mathOperationsObj = new MathOperations();
 print($mathOperationsObj->doOperation());
 ```
 
+## 禁止
+
+*  不要使用 mysql_ 函数：把它们从核心中全部移除了
+*  
