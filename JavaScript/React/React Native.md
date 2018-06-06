@@ -259,6 +259,7 @@ npm run eject #  导出配置文件
 * [markerikson/react-redux-links](https://github.com/markerikson/react-redux-links):Curated tutorial and resource links I've collected on React, Redux, ES6, and more
 * [redux-offline/redux-offline](https://github.com/redux-offline/redux-offline):Build Offline-First Apps for Web and React Native
 * [invertase/react-native-firebase](https://github.com/invertase/react-native-firebase):A well tested feature rich modular Firebase implementation for React Native, supporting both iOS & Android platforms for 15+ Firebase modules (including a feature rich Notifications implementation) 🔥 https://rnfirebase.io
+* [reach/router](https://github.com/reach/router):Next Generation Routing for React https://reach.tech/router
 
 ## 参考
 
