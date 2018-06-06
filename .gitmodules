@@ -49,3 +49,6 @@
 [submodule "Ops/Docker/awesome-docker"]
 	path = Ops/Docker/awesome-docker
 	url = git@github.com:veggiemonk/awesome-docker.git
+[submodule "Client/Wechat/awesome-wepy"]
+	path = Client/Wechat/awesome-wepy
+	url = git@github.com:aben1188/awesome-wepy.git

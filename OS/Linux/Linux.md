@@ -687,6 +687,7 @@ ps aux | grep nginx
 lsof -Pni4 | grep LISTEN | grep php
 
 kill -9 pid # 关闭进程
+kill pid
 ```
 
 chkconfig --list sshd
