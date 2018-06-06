@@ -35,4 +35,5 @@ if ($tmpstr==$signature) {
 - [wechat-php-sdk](https://github.com/dodgepudding/wechat-php-sdk)
 - [Eric-Guo/wechat](https://github.com/Eric-Guo/wechat):API, command and message handling for WeChat in Rails
 - [官方文档](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list)
+- [thenbsp/WeChat](https://github.com/thenbsp/wechat):微信公众平台第三方 SDK 开发包，优雅、健壮，可扩展，遵循 PSR 开发规范。
 - [Urinx/WeixinBot](https://github.com/Urinx/WeixinBot):网页版微信API，包含终端版微信及微信机器人
