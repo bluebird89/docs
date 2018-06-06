@@ -36,10 +36,20 @@
 
 * [Tencent/wepy](https://github.com/Tencent/wepy):小程序组件化开发框架 https://tencent.github.io/wepy/
 * [youzan/zanui-weapp](https://github.com/youzan/zanui-weapp):高颜值、好用、易扩展的微信小程序 UI 库，Powered by 有赞
+* [ecomfe/echarts-for-weixin](https://github.com/ecomfe/echarts-for-weixin):ECharts 的微信小程序版本
+* [meili/minui](https://github.com/meili/minui):基于规范的小程序 UI 组件库，自定义标签组件，简洁、易用、工具化 https://meili.github.io/min/docs/minui/
+
+## Project
+
+* [skyvow/m-mall-admin](https://github.com/skyvow/m-mall-admin):dog 微信小程序-小商城后台（基于 Node.js、MongoDB、Redis 开发的系统...） 
+* [yesifeng/wechat-weapp-movie](https://github.com/yesifeng/wechat-weapp-movie):电影推荐 - 微信小程序 https://sesine.com/mina/
+* [tencentyun/wafer2-startup](https://github.com/tencentyun/wafer2-startup):Wafer - 腾讯云下一代小程序综合解决方案
+* [tumobi/nideshop-mini-program](https://github.com/tumobi/nideshop-mini-program):NideShop：基于Node.js+MySQL开发的开源微信小程序商城（微信小程序） https://nideshop.com/
 
 ## 参考
 
 * [组件文档](https://mp.weixin.qq.com/debug/wxadoc/dev/api/)
 * [小程序快速上手：三步完成小程序从无到有的开发](http://blog.csdn.net/gitchat/article/details/77863478)
 * [首个微信小程序开发教程](https://juejin.im/entry/57e34d6bd2030900691e9ad7)
+* [小程序文档](https://developers.weixin.qq.com/miniprogram/dev/demo.html)
 * http://www.cnblogs.com/luyucheng/p/6274561.html

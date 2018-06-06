@@ -11,9 +11,7 @@ MariaDB在10.0.9版本起使用XtraDB（名称代号Aria）来代替MySQL的Inno
 
 ## 安装
 
-安装不要制定版本,会有合适版本安装
-
-下载
+安装不要制定版本,会有合适版本安装.下载
 
 ```sh
 wget https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.18-14/binary/tarball/Percona-Server-5.7.18-14-Linux.x86_64.ssl100.tar.gz
@@ -98,6 +96,25 @@ sudo service mysql restart
 systemctl unmask mysql.service
 ```
 
+## 重置root密码
+
+```sh
+sudo service mysql stop
+
+vim /etc/mysql/my.cnf
+skip-grant-tables # 忽略mysql权限问题，直接登录
+
+sudo service mysql start
+
+use mysql;
+update user set password=password("123456") where user="root";  ## 更新密码
+update mysql.user set authentication_string=password('123456') where user='root' ;  # 5.7以后以前的password字段改成了authentication_string
+flush privileges;
+
+ps -ef |grep mysql  ##显示mysql现有的进程
+kill pid  ##删除mysql现有进程
+```
+
 ## problem
 
 Errors were encountered while processing:
@@ -120,7 +137,6 @@ The following packages have unmet dependencies:
  percona-server-server-5.7 : PreDepends: percona-server-common-5.7 (= 5.7.20-18-1.xenial)
                              Depends: percona-server-client-5.7 (= 5.7.20-18-1.xenial) but it is not going to be installed
 E: Unable to correct problems, you have held broken packages.
-
 
 apt-get install percona-server-server
 ```
