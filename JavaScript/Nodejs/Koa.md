@@ -1,4 +1,6 @@
-# Koa
+# [koajs/koa](https://github.com/koajs/koa)
+
+Expressive middleware for node.js using ES2017 async functions <http://koajs.com>
 
 koa是Express的下一代基于Node.js的web框架.新版Node.js开始支持ES6，Express的团队又基于ES6的generator重新编写了下一代web框架koa。和Express相比，koa 1.0使用generator实现异步，代码看起来像同步的
 
@@ -36,9 +38,6 @@ app.use(async (ctx, next) => {
 ```js
 npm install koa
 ```
-## 仓库
-
-- [koajs/koa](https://github.com/koajs/koa):Expressive middleware for node.js using ES2017 async functions <http://koajs.com>
 
 ## 工具
 
