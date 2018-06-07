@@ -2590,6 +2590,7 @@ try {
 * [babel/babel](https://github.com/babel/babel):🐠 Babel is a compiler for writing next generation JavaScript. https://babeljs.io/
 * [GoogleChrome/workbox](https://github.com/GoogleChrome/workbox):package Workbox: JavaScript libraries for Progressive Web Apps https://developers.google.com/web/tools/workbox
 * [yaronn/blessed-contrib](https://github.com/yaronn/blessed-contrib):Build terminal dashboards using ascii/ansi art and javascript
+* [antvis/g6](https://github.com/antvis/g6):A Graph Visualization Framework in JavaScript https://antv.alipay.com/zh-cn/g6/1.x/index.html
 
 ## 扩展
 

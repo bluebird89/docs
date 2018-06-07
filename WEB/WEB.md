@@ -116,3 +116,4 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 - [WEB](https://developer.mozilla.org/en-US/docs/Web)
 - [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning Area. https://developer.mozilla.org/en-US/docs/Learn
 - [关于大型网站技术演进的思考](http://blog.jobbole.com/84761/)
+- [A Beginner’s Guide to Website Speed Optimization](https://kinsta.com/learn/page-speed/)
