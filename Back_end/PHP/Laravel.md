@@ -1401,8 +1401,9 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [Zizaco/entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
 * [bosnadev/repository](https://github.com/bosnadev/repository):Laravel Repositories is a package for Laravel 5 which is used to abstract the database layer. This makes applications much easier to maintain. https://bosnadev.com
 * [LaravelCollective/html](https://github.com/LaravelCollective/html):HTML and Form Builders for the Laravel Framework
-- [code 好事源代码](https://github.com/Ucer/codehaoshi)
-- [Ucer/ucer-admin](https://github.com/Ucer/ucer-admin)
+* [code 好事源代码](https://github.com/Ucer/codehaoshi)
+* [Ucer/ucer-admin](https://github.com/Ucer/ucer-admin)
+* [Algolia](https://www.algolia.com/doc/api-client/laravel/algolia-and-scout/):Algolia is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke
 
 ## 参考
 
