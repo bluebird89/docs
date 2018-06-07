@@ -38,14 +38,17 @@
 * [youzan/zanui-weapp](https://github.com/youzan/zanui-weapp):高颜值、好用、易扩展的微信小程序 UI 库，Powered by 有赞
 * [ecomfe/echarts-for-weixin](https://github.com/ecomfe/echarts-for-weixin):ECharts 的微信小程序版本
 * [meili/minui](https://github.com/meili/minui):基于规范的小程序 UI 组件库，自定义标签组件，简洁、易用、工具化 https://meili.github.io/min/docs/minui/
+* [Meituan-Dianping/mpvue](https://github.com/Meituan-Dianping/mpvue):基于 Vue.js 的小程序开发框架，从底层支持 Vue.js 语法和构建工具体系。 http://mpvue.com
+* [开发工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
 
 ## Project
 
+* [xwartz/wechat-app-demo](https://github.com/xwartz/wechat-app-demo):微信小程序 demo 
 * [skyvow/m-mall-admin](https://github.com/skyvow/m-mall-admin):dog 微信小程序-小商城后台（基于 Node.js、MongoDB、Redis 开发的系统...） 
 * [yesifeng/wechat-weapp-movie](https://github.com/yesifeng/wechat-weapp-movie):电影推荐 - 微信小程序 https://sesine.com/mina/
 * [tencentyun/wafer2-startup](https://github.com/tencentyun/wafer2-startup):Wafer - 腾讯云下一代小程序综合解决方案
 * [tumobi/nideshop-mini-program](https://github.com/tumobi/nideshop-mini-program):NideShop：基于Node.js+MySQL开发的开源微信小程序商城（微信小程序） https://nideshop.com/
-
+* [tumobi/nideshop](https://github.com/tumobi/nideshop):
 ## 参考
 
 * [组件文档](https://mp.weixin.qq.com/debug/wxadoc/dev/api/)
