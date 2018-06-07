@@ -18,3 +18,4 @@ yii migrate:生成数据表
 
 * [yiisoft/yii2](https://github.com/yiisoft/yii2):Yii 2: The Fast, Secure and Professional PHP Framework <http://www.yiiframework.com>
 * [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced):Yii 2.0 Advanced Application Template http://www.yiiframework.com
+* [深入理解Yii2.0](http://www.digpage.com/index.html)

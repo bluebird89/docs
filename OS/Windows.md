@@ -6,7 +6,7 @@ Windows10 LTSB
 
 ## 工具
 
-* [Chocolatey](https://chocolatey.org/):The package manager for Windows Software Management Automation
+* [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation https://chocolatey.org/
 * 快速启动:launchy Wox Rolan
 * markdown编辑器: 作业部落 MarkdownPad(需要浏览器渲染插件awesome) MarkPad
 * 资源管理器: Clover Total Commander
