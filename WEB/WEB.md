@@ -37,8 +37,6 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 
 要想达到要非常少的机器扛住大规模的并发，可能需要抛弃servlet，直接用netty或者nio参考v8，nodejs，tornado等直接构建非阻塞的异步协程socket服务器
 
-《大型网站技术架构》
-
 # 负载均衡
 
 当系统面临大量用户访问，负载过高的时候，通常会使用增加服务器数量来进行横向扩展，使用集群和负载均衡提高整个系统的处理能力。而我们讨论的负载均衡一般分为两种，一种是基于DNS，另一种基于IP报文。利用DNS实现负载均衡，就是在DNS服务器配置多个A记录，不同的DNS请求会解析到不同的IP地址。大型网站一般使用DNS作为第一级负载均衡。缺点是DNS生效时间略长，扩展性差。基于IP的负载均衡，早期比较有代表性并且被大量使用的的就是LVS了。原理是LVS在Linux内核态获取到IP报文后，根据特定的负载均衡算法将IP报文转发到整个集群的某台服务器中去。缺点是LVS的性能依赖Linux内核的网络性能，但Linux内核的网络路径过长导致了大量开销，使得LVS单机性能较低。那么有没有更好的负载均衡技术呢？当然有。Google于2016年3月最新公布的负载均衡Maglev就在此列。Maglev是谷歌为自己的数据中心研发的解决方案，并于2008开始用于生产环境。在第十三届网络系统设计与实现USENIX研讨会（NSDI '16）上， 来自谷歌、加州大学洛杉矶分校、SpaceX公司的工程师们分享了这一商用服务器负载均衡器Maglev的详细信息。Maglev安装后不需要预热5秒内就能应付每秒100万次请求令人惊叹不已。在谷歌的性能基准测试中，Maglev实例运行在一个8核CPU下，网络吞吐率上限为12M PPS(数据包每秒)，如果Maglev使用Linux内核网络堆栈则速度会小于4M PPS。无独有偶，国内云服务商 UCloud 进一步迭代了负载均衡产品----Vortex，成功地提升了单机性能。在技术实现上，UCloud Vortex与Google Maglev颇为相似。以一台普通性价比的x86 1U服务器为例，Vortex可以实现吞吐量达14M PPS(10G, 64字节线速)，新建连接200k CPS以上，并发连接数达到3000万、10G线速的转发。
@@ -111,9 +109,75 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 
 #### 参考
 
-- [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
-- [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
-- [WEB](https://developer.mozilla.org/en-US/docs/Web)
-- [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning Area. https://developer.mozilla.org/en-US/docs/Learn
-- [关于大型网站技术演进的思考](http://blog.jobbole.com/84761/)
-- [A Beginner’s Guide to Website Speed Optimization](https://kinsta.com/learn/page-speed/)
+* [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
+* [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
+* [WEB](https://developer.mozilla.org/en-US/docs/Web)
+* [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning Area. https://developer.mozilla.org/en-US/docs/Learn
+* [关于大型网站技术演进的思考](http://blog.jobbole.com/84761/)
+* [A Beginner’s Guide to Website Speed Optimization](https://kinsta.com/learn/page-speed/)
+* [大型WEB架构设计](https://mp.weixin.qq.com/s?__biz=MzAwNzY4OTgyNA==&mid=2651826002&idx=1&sn=237e6c340626171cf1f4eb6e0f19f182&chksm=8081445db7f6cd4bea29330141ac28228f09c024dd5671cb945171bf41a20d6f1386c455e330)
+
+## 大访问量
+
+* 负载均衡 把众多的访问量分担到其他的服务器上，让每个服务器的压力减少
+    - Cisco 以太网通道 （网络层面的负载均衡设备和技术）
+    - windows NLB技术 （服务器领域）
+    - Linux LVS技术 （服务器领域）
+    - F5等负载均衡器 （网络层面）
+* 冗余技术 数据到达服务器，以防止出现宕机，备份服务器开始运行，防止单点故障，做一个备份。
+* 集群技术：不是多台服务器加在一起形成的集群圈。而是在集群圈中，只有一台服务器在为客户服务即处于激活状态，其他的都处于休眠状态，当出现故障时，休眠状态的自动就会被激活。轮循。单点故障，有一个备份，就是集群
+    - Cisco HSRP 热备份路由 ( hot standby route protel)
+    - Windows集群技术
+    - Linux HA 集群技术
+    - IBM AIX 集群
+* LVS集群采用三层结构，负载调度器、服务器池、共享存储主要组成。
+* 构架师来运营一家公司的网站必须考虑的三个问题
+    *网络构架
+    *服务器构架
+    *应用程序开发
+
+## 大数据存储
+
+* 目前有四种主流的数据库：
+    - Mysql
+    - Oracle
+    - DB2（IBM）
+    - Nosql (非关系型数据库)
+* 淘宝数据存储分为三个阶段：
+    - 主打mysql数据库
+    - IBM AIX小型机 + Oracle数据库【成本】
+    - Mysql主群+集群+分区技术（承担光棍节巨大访问量）
+* 网络界最核心最重要的为数据的积累。这里我们先明确三个概念：
+    + 负载均衡：服务器都是激活的，并且是轮循的。
+    + 冗余技术：一个激活，其它的备份处于休眠状态。
+    + Mysql主从：依赖于Binary Log日志（记载CRUD，作用是恢复数据），主服务器的所有增删改的操作同时会备份复制一份给从服务器，让服务器同时执行，达到和主服务器的数据的同步和完整，它的重点是主服务器和从服务器都可以同时活动，即操作Mysql数据库时，增删改走都是主服务器，而查询走的是从服务器。所以，主从为负载的技术。
+* MySQL相关操作
+    - Mysql 分库分表
+        + 垂直分表（字段不要太多，把一张大表竖切为许多小表）
+        + 水平分表（把一张大表横切为若干小表）
+    - Mysql 分区技术:分区技术将一个表拆成多个表，比较常用的方式是将表中的记录按照某种Hash算法进行拆分，简单的拆分方法如取模方式。在一定的层面表名不变，在真正的磁盘存储时存储在不同的分区
+    - Mysql 集群;单点故障时，冗余备份
+
+## 网站加速技术
+
+* Squid 代理缓存技术（Squid：乌鱼）反向缓存-动静分离:Squid是一款用来做代理服务器的软件。作用是动静分离，将数据保存在缓存池中Squid cache，能够代理服务器执行。代理服务器就如同买火车票，去火车票代理售票点，买票，而不是去火车站，这样就减少了火车站的压力，提高了速度。
+* 页面静态化缓存
+* Memcache,Redis:Memcache 是一个高性能的分布式的内存对象缓存系统，目前全世界不少人使用这个缓存项目来构建自己大负载的网站，来分担数据库的压力，通过在内存里维护一个统一的巨大的hash表，它能够用来存储各种格式的数据，包括图像、视频、文件以及数据库检索的结果等。简单的说就是将数据调用到内存中，然后从内存中读取，从而大大提高读取速度。(注: 摘自百度全科)
+* Sphinx 搜索加速:phinx全文索引,Sphinx 是一个基于SQL的全文检索引擎，可以结合MySQL，PostgreSQL作全文搜索，它可以提供比数据库本身更专业的搜索功能，使得应用程序更容易实现专业化的全文检索。
+
+## 网站服务监控
+
+* 服务监控
+    - apache web 服务监控
+    - mysql 数据库监控
+    - 磁盘空间监控
+* 流量监控:网站流量监控（网卡进入的数据量和网卡流出的数据量成比例）
+    - 监控的好处：只有监控才知道问题，有了问题才能改进
+    - 要监管，先要建立网络管理协议，被监控的服务器全部开放smp，161端口，
+    - 监控者监控被监控者，mrtg监控图。
+    - cacti监控原理
+    - Cacti 监测系统的工作原理
+
+## 参考
+
+
