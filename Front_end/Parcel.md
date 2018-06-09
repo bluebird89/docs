@@ -1,4 +1,6 @@
-# parcel
+# [parcel-bundler/parcel](https://github.com/parcel-bundler/parcel)
+
+📦🚀 Blazing fast, zero configuration web application bundler https://parceljs.org
 
 ## 使用
 
@@ -30,7 +32,3 @@ npm install postcss-modules autoprefixer -S
  }
 }
 ```
-
-## 参考
-
-* [parcel-bundler/parcel](https://github.com/parcel-bundler/parcel): 📦🚀 Blazing fast, zero configuration web application bundler https://parceljs.org

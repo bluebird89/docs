@@ -59,8 +59,9 @@ div > h2{color:red;}
         + 注意：多个参数值之间用空格隔开。
         + 举例：div{border-left:5px solid red;} div{border:2px solid blue;}
 * 内填充属性：边线到内容间的距离
-    - padding-left padding-right padding-top padding-bottom
+  + padding-left padding-right padding-top padding-bottom
 * 外边距属性：边框线往外的距离
+  - 垂直方向上的外边距相遇时将会发生折叠。这意味着如果一个元素的下边距遇到了另一个元素的上边距，那么二者中较大的一个将被留下
 
 ```css
 h1{
@@ -84,8 +85,6 @@ h1{
     - 行内元素有哪些？<span>、<font>、<b>、<i>、<u>、<s>、<a>、<input>、<label>、<img>等
 * <div>和<span>是没有意义的标记，但是又使用最多的
 * <img>和<input>是行内块元素(inline-block)，也有width和height
-
-
 
 ## 样式管理
 
@@ -192,6 +191,29 @@ h1{
       }
     </style>
     ```
+## 盒子模型
+
+* box-sizing：有利于样式化，而且你在也不用做乏味的数学运算
+  - content-box(default) - 当我们为元素设置了宽度和高度，但那只是内容的尺寸。所有的 padding 和 border 都在不包含在内容当中，也就是在内容的外部。
+  - border-box - padding和 border 被包含在 宽度和高度当中。 如果一个 div 的宽度为 100px ，而被设置了 box-sizing: border-box， 那么它的宽度将始终是 100px， 无论你添加多少 padding 和 border 。
+  
+## Flex
+
+## 执行 CSS 重置
+
+各浏览器的默认行为还是存在很多分歧。解决这个问题最好的办法就是使用一个 CSS 重置文件为所有元素重新设置默认样式
+
+```css
+* {
+
+      margin: 0;
+
+      padding: 0;
+
+      box-sizing: border-box;
+
+  }
+```
 
 ## 框架
 
@@ -200,6 +222,11 @@ h1{
 - 方法：
 - 组件：表单 、表格、图标、面包屑、菜单、导航、Modal 窗口
 - 修改源代码
+
+## 优化
+
+* caniuse检测你正在使用的属性是否被广泛支持
+* Validate
 
 ## 参考
 
