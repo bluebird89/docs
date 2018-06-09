@@ -1,4 +1,6 @@
-# Redis
+# [antirez/redis](https://github.com/antirez/redis)
+
+Redis is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. http://redis.io
 
 Remote Dictionary Server(Redis)是一个基于key-value键值对的持久化数据库存储系统。Redis是一个数据结构存储，可用作数据库、缓存和消息中间件。
 
@@ -269,7 +271,6 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
 * 分布式锁：分布式锁是控制分布式系统之间同步访问共享资源的一种方式。在分布式系统中，常常需要协调他们的动作，如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。
 * 地理信息：从Redis 3.2版本开始，新增了地理信息相关的命令，可以将用户给定的地理位置信息（经纬度）存储起来，并对这些信息进行操作。
 
-
 ## 对比memcache
 
 * Redis最佳试用场景是*全部数据in-memory*
@@ -303,6 +304,7 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
 
 * [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager):🔧 Cross-platform GUI management tool for Redis http://redisdesktop.com
 * [sripathikrishnan/redis-rdb-tools](https://github.com/sripathikrishnan/redis-rdb-tools):Parse Redis dump.rdb files, Analyze Memory, and Export Data to JSON
+
 ## 参考
 
 * [erikdubbelboer/phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. http://dubbelboer.com/phpRedisAdmin/
