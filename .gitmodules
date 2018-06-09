@@ -52,3 +52,6 @@
 [submodule "Client/Wechat/awesome-wepy"]
 	path = Client/Wechat/awesome-wepy
 	url = git@github.com:aben1188/awesome-wepy.git
+[submodule "Ops/awesome-sre"]
+	path = Ops/awesome-sre
+	url = git@github.com:dastergon/awesome-sre.git
