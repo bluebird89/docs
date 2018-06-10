@@ -518,8 +518,9 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe):A code-completion engine for Vim http://valloric.github.io/YouCompleteMe/
 * [philc/vimium](https://github.com/philc/vimium):The hacker's browser.
 * [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen):pathogen.vim: manage your runtimepath
+* [square/maximum-awesome](https://github.com/square/maximum-awesome):Config files for vim and tmux.
 
-## 工具doc
+## 工具
 
 * [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs):A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim!
 
