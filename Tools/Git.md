@@ -84,8 +84,7 @@ git config --global mergetool.sublime.trustExitCode false
 git config --global merge.tool sublime | vimdiff
 git mergetool -y
 
-`git config --global alias.st status`
-
+git config --global alias.st status
 git config --global alias.ls 'log --name-status --oneline --graph'
 git config --global rebase.autoStash true
 git config --global alias.st 'status --porcelain'
@@ -1090,8 +1089,6 @@ branches
 ```
 
 ## 扩展
-
-### tig
 
 * [jonas/tig](https://github.com/jonas/tig):text-mode interface for git
 

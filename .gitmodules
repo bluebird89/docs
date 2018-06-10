@@ -55,3 +55,9 @@
 [submodule "Ops/awesome-sre"]
 	path = Ops/awesome-sre
 	url = git@github.com:dastergon/awesome-sre.git
+[submodule "Client/Wechat/awesome-wechat-weapp"]
+	path = Client/Wechat/awesome-wechat-weapp
+	url = git@github.com:justjavac/awesome-wechat-weapp.git
+[submodule "Project/project-based-learning"]
+	path = Project/project-based-learning
+	url = git@github.com:tuvtran/project-based-learning.git

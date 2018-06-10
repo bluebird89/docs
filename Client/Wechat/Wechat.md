@@ -1,9 +1,11 @@
 # wechat
 
+* [开放平台](https://open.weixin.qq.com/)
+* [公众平台](https://mp.weixin.qq.com/):公众号、小程序
 
 ## git 服务器搭建
 
-git密码：git8899
+git：git8899
 
 ## 配置开发者模式
 
@@ -24,7 +26,7 @@ if ($tmpstr==$signature) {
 }
 ```
 
-## 资源
+## 参考
 
 - [littlecodersh/ItChat](https://github.com/littlecodersh/ItChat):A complete and graceful API for Wechat. 微信个人号接口、微信机器人及命令行微信，三十行即可自定义个人号机器人。 http://itchat.readthedocs.io
 - [awesome-wechat-weapp](https://github.com/justjavac/awesome-wechat-weapp):微信小程序开发资源汇总 100 http://justjavac.com
