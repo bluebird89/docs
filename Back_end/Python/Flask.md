@@ -1,3 +1,8 @@
-# Flask
+# [pallets/flask](https://github.com/pallets/flask)
 
-[官网](http://flask.pocoo.org/) Pinterest's API serves 12+ billion requests a day with Flask
+The Python micro framework for building web applications. https://www.palletsprojects.com/p/flask/
+
+## 参考
+
+* [luhuisicnu/The-Flask-Mega-Tutorial-zh](https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh):翻译自Miguel Grinberg的blog https://blog.miguelgrinberg.com 的2017年新版The Flask Mega-Tutorial教程
+* [官网](http://flask.pocoo.org/) Pinterest's API serves 12+ billion requests a day with Flask
