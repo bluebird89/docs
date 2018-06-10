@@ -37,9 +37,6 @@
 [submodule "JavaScript/Vuejs/awesome-vue"]
 	path = JavaScript/Vuejs/awesome-vue
 	url = git@github.com:vuejs/awesome-vue.git
-[submodule "Note/free-programming-books"]
-	path = Note/free-programming-books
-	url = git@github.com:justjavac/free-programming-books-zh_CN.git
 [submodule "Back_end/Python/awesome-python"]
 	path = Back_end/Python/awesome-python
 	url = git@github.com:vinta/awesome-python.git
@@ -61,3 +58,6 @@
 [submodule "Project/project-based-learning"]
 	path = Project/project-based-learning
 	url = git@github.com:tuvtran/project-based-learning.git
+[submodule "Note/Note/free-programming-books"]
+	path = Note/Note/free-programming-books
+	url = git@github.com:EbookFoundation/free-programming-books
