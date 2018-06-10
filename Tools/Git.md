@@ -1000,12 +1000,12 @@ git submodule 主要用来管理一些单向更新的公共模块或底层逻辑
 git submodule add git@domain.com:another_project.git file_path/another_project
 git submodule foreach git pull  # 更新 repo 下所有的 submodules
 
+# 首先删除.gitsubmodule中的项目配置
 git rm --cached another_project # 删除项目
+
 vim .git/config
 ...remove another_project...
 
-git submodule init
-git submodule update
 ```
 
 ### git-subtree
