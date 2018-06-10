@@ -63,140 +63,115 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
 - finder 找到移动到垃圾桶
 - 通过appcleaner彻底清除
 
-## 软件
+### 软件列表
 
-### 系统
+* 系统
+  - [airmail](http://airmailapp.com/):mail client
+  - [Hazel](https://www.noodlesoft.com/):Automated Organization for Your Mac.
+  - [Gemini](https://macpaw.com/gemini):The intelligent duplicate file finder
+  - BTT(BetterTouchTool) 触控板手势增强
+  - htop:运行于 Linux 系统监控与进程管理软件，用于取代 Unix 下传统的 top。与 top 只提供最消耗资源的进程列表不同，htop 提供所有进程的列表，并且使用彩色标识出处理器、swap 和内存状态
+  - CleanMyMac（需购买解说功能）
+  - [Little Snitch 4](https://www.obdev.at/products/littlesnitch/index.html):makes these Internet connections visible and puts you back in control!
+  - [Dropzone](https://aptonic.com/):makes it faster and easier to move and copy files, launch applications, upload to many different services, and more.
+  - [Time](https://timingapp.com/):automatically tracking how you spend your time.
+  - [Fantastical 2](https://flexibits.com/fantastical):The calendar app 收费
+  - [Hammerspoon](http://www.hammerspoon.org/): a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
+  - SwitchHosts
+  - f.lux 屏幕颜色控制
+  - manico
+  - [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
+  - [alfred](https://www.alfredapp.com/):a very powerful launcher that you can program to show you anything you want
+  - [MrRio/vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. http://parall.ax/vtop
+  - [GPG Suite](https://gpgtools.org/)
+  - [dashlane](https://www.dashlane.com/zh):密码管理工具
+  - [spectacl](https://www.spectacleapp.com/):Move and resize windows with ease
+- vpn
+  - Tunnelblick_3.7.2_build_4850：点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
+* 设计
+  - UI:sketch sketch box
+  - Axure：原型工具
+  - CmapTools：概念图
+  - UML:staruml
 
-* [airmail](http://airmailapp.com/):mail client
-* [Hazel](https://www.noodlesoft.com/):Automated Organization for Your Mac.
-* [Gemini](https://macpaw.com/gemini):The intelligent duplicate file finder
-* BTT(BetterTouchTool) 触控板手势增强
-* htop:运行于 Linux 系统监控与进程管理软件，用于取代 Unix 下传统的 top。与 top 只提供最消耗资源的进程列表不同，htop 提供所有进程的列表，并且使用彩色标识出处理器、swap 和内存状态
-* CleanMyMac（需购买解说功能）
-* [Little Snitch 4](https://www.obdev.at/products/littlesnitch/index.html):makes these Internet connections visible and puts you back in control!
-* [Dropzone](https://aptonic.com/):makes it faster and easier to move and copy files, launch applications, upload to many different services, and more.
-* [Time](https://timingapp.com/):automatically tracking how you spend your time.
-* [Fantastical 2](https://flexibits.com/fantastical):The calendar app 收费
-* [Hammerspoon](http://www.hammerspoon.org/): a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
-* SwitchHosts
-* f.lux 屏幕颜色控制
-* manico
-* [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
-* [alfred](https://www.alfredapp.com/):a very powerful launcher that you can program to show you anything you want
-* [MrRio/vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. http://parall.ax/vtop
-* [GPG Suite](https://gpgtools.org/)
-* [dashlane](https://www.dashlane.com/zh):密码管理工具
-* [spectacl](https://www.spectacleapp.com/):Move and resize windows with ease
+* 写作
+  - markdown: Mou for Mac,Ulysses for Mac,MWeb Lite,[MacDown](https://github.com/MacDownApp/macdown)Open source Markdown editor for macOS.
+  - Latex
+  - [MindNode 2](https://mindnode.com/)
+  - Alternote(evernote简单客户端)
+  - 思维导图：MindNode 2（收费）
+  - Quiver：笔记软件
+  - [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
+  - [ulysses](https://ulyssesapp.com/)
+  - [marked2](http://marked2app.com/)
+  - [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
+  - Upad
+* 工具
+  - [CheatSheet] 长按⌘键可以显示当前程序快捷键
+  - [flux](https://justgetflux.com/)
+  - [moom](https://manytricks.com/moom/)
+  - [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
+  - [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):essentially an IDE for automation
+  - [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
+  - [beaker](https://beakerbrowser.com/):Beaker is a peer-to-peer browser with tools to create and host websites.
+  - [Helium](http://heliumfloats.com/):A floating browser window for OS X
+* Pod
+  - [insidegui/PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
+* Web开发
+  - MySql：Sequel Pro
+  - [Paw](https://paw.cloud/):The most advanced API tool for Mac
+  - MAMP:基础版不支持自定义
+  + 虚拟机：parallels
+* 沟通
+  - [Textual 7](Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.)
+  + OmniFocus，OmniOutliner，OmniPlan，OmniGraffle
+  + * slack
+  * [telegram](https://telegram.org/)
+  - weibo:WeiboX
+* RSS
+  - [Reeder 3](http://reederapp.com/mac/)
+  - feedly
+  - leaf
+* 管理
+  + Keyboard Maestro:流程制作工具
+  + OmniFocus：GTD思路的应用
+  + Fantastical：日程管理应用
+  + Omnifocus 在践行 GTD
+  + sourcetree
+  + tig
+  + [Ship](https://www.realartists.com/index.html):Fast, native, comprehensive issue tracking and code review for GitHub
+  + [trello](https://trello.com/home): Project management tool
+  + [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
+  + Day One - Digital journal
+* 文档
+  - dash:语言文档
+  - Quiver：文档管理器
+  - 文档：[apidoc](http://apidocjs.com/)
+  - [jgm/pandoc](https://github.com/jgm/pandoc):Universal markup converter http://johnmacfarlane.net/pandoc
+  - [TRANSMIT 5](https://www.panic.com/transmit/):Upload, download, and manage files on tons of servers with an easy, familiar, and powerful UI. It’s quite good.
+  - Cloud Outline
+  - iCHM
+* 音乐
+  - 播放器：MPlayerX
+  - [beardedspice/beardedspice](https://github.com/beardedspice/beardedspice):Mac Media Keys for the Masses http://beardedspice.github.io
+  - [Noizio](http://noiz.io/):turn on the sound and allow yourself to become engulfed in the tranquil sounds of nature.
 
-### 设计
+* 图片
+  - 修图Snapseed
+  - [Pixave](http://www.littlehj.com/mac/) - Image/GIF/Video organizer
 
-* UI:sketch sketch box
-* Axure：原型工具
-* CmapTools：概念图
-* UML:staruml
-
-### 写作
-
-- markdown: Mou for Mac,Ulysses for Mac,MWeb Lite,[MacDown](https://github.com/MacDownApp/macdown)Open source Markdown editor for macOS.
-- Latex
-- [MindNode 2](https://mindnode.com/)
-- Alternote(evernote简单客户端)
-- 思维导图：MindNode 2（收费）
-- Quiver：笔记软件
-- [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
-- [ulysses](https://ulyssesapp.com/)
-- [marked2](http://marked2app.com/)
-- [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
-- Upad
-
-### 工具
-
-- CheatSheet 长按⌘键可以显示当前程序快捷键
-- [flux](https://justgetflux.com/)
-- [moom](https://manytricks.com/moom/)
-- [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
-- [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):essentially an IDE for automation
-- [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
-- [beaker](https://beakerbrowser.com/):Beaker is a peer-to-peer browser with tools to create and host websites.
-- [Helium](http://heliumfloats.com/):A floating browser window for OS X
-
-### Pod
-
-* [insidegui/PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
-
-### Web开发
-
-* MySql：Sequel Pro
-* [Paw](https://paw.cloud/):The most advanced API tool for Mac
-* MAMP:基础版不支持自定义
-- 虚拟机：parallels
-
-### 交流
-
-* [Textual 7](Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.)
-- OmniFocus，OmniOutliner，OmniPlan，OmniGraffle
-
-### RSS
-
-* [Reeder 3](http://reederapp.com/mac/)
-* feedly
-* leaf
-
-### 管理
-
-- Keyboard Maestro:流程制作工具
-- OmniFocus：GTD思路的应用
-- Fantastical：日程管理应用
-- Omnifocus 在践行 GTD
-- sourcetree
-- tig
-- [Ship](https://www.realartists.com/index.html):Fast, native, comprehensive issue tracking and code review for GitHub
-- [trello](https://trello.com/home): Project management tool
-- [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
-- Day One - Digital journal
-
-### 文档
-
-- dash:语言文档
-- Quiver：文档管理器
-- 文档：[apidoc](http://apidocjs.com/)
-- [jgm/pandoc](https://github.com/jgm/pandoc):Universal markup converter http://johnmacfarlane.net/pandoc
-- [TRANSMIT 5](https://www.panic.com/transmit/):Upload, download, and manage files on tons of servers with an easy, familiar, and powerful UI. It’s quite good.
-- Cloud Outline
-- iCHM
-
-### 音乐
-
-- 播放器：MPlayerX
-- [beardedspice/beardedspice](https://github.com/beardedspice/beardedspice):Mac Media Keys for the Masses http://beardedspice.github.io
-- [Noizio](http://noiz.io/):turn on the sound and allow yourself to become engulfed in the tranquil sounds of nature.
-
-### 图片
-
-- 修图Snapseed
-- [Pixave](http://www.littlehj.com/mac/) - Image/GIF/Video organizer
-
-### 阅读
-
-- ibooks：阅读支持pdf与epub，可以通过icloud同步
-- iTunes Movie Trailers
-- mounty:win的移动硬盘
-- [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
-
-### 代码
-
-- Xcode
-* [SnippetsLab](https://www.renfei.org/snippets-lab/):SnippetsLab is an easy-to-use code snippets manager
-- [PHPstrom](https://www.jetbrains.com/phpstorm/download/download-thanks.html?pl)
-- atom:通过brew安装
-- [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
-- [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
-
-### 沟通
-
-* slack
-* [telegram](https://telegram.org/)
-- weibo:WeiboX
+* 阅读
+  - ibooks：阅读支持pdf与epub，可以通过icloud同步
+  - iTunes Movie Trailers
+  - mounty:win的移动硬盘
+  - [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
+* 代码
+  + Xcode
+  - [SnippetsLab](https://www.renfei.org/snippets-lab/):SnippetsLab is an easy-to-use code snippets manager
+  + [PHPstrom](https://www.jetbrains.com/phpstorm/download/download-thanks.html?pl)
+  + atom:通过brew安装
+  + [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
+  + [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
 
 ### 苹果铃声制作
 
@@ -220,8 +195,6 @@ iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配�
 
 - iTerm2 的标签的颜色会变化，以指示该 tPab 当前的状态。当该标签有新输出的时候，标签会变成洋红色；新的输出长时间没有查看，标签会变成红色。可在设置中关掉该功能。
 - 在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等
-
-### 快捷键
 
 ## 键位
 
@@ -421,13 +394,13 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 
 #### sizeup窗口管理软件（多屏幕、半栏、1/4栏）
 
-- control+option+command + M ： 使当前窗口全屏
-- control+option+command + 方向键上键 ： 使当前窗口占用当前屏幕上半部分
-- control+option+command + 方向键下键 ： 使当前窗口占用当前屏幕下半部分
-- control+option+command + 方向键左键 ： 使当前窗口占用当前屏幕左半部分
-- control+option+command + 方向键右键 ： 使当前窗口占用当前屏幕右半部分
-- control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
-- control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
+* control+option+command + M ： 使当前窗口全屏
+* control+option+command + 方向键上键 ： 使当前窗口占用当前屏幕上半部分
+* control+option+command + 方向键下键 ： 使当前窗口占用当前屏幕下半部分
+* control+option+command + 方向键左键 ： 使当前窗口占用当前屏幕左半部分
+* control+option+command + 方向键右键 ： 使当前窗口占用当前屏幕右半部分
+* control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
+* control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
 
 #### 文稿快捷键
 
@@ -509,7 +482,7 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 
 ## airdrop：苹果设备局域网共享链接，开启后，进行shares
 
-## handoff:l浏览器设备共享
+## handoff:浏览器设备共享
 
 ## Alfred
 
@@ -583,10 +556,6 @@ Superscript Text       | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>[</kbd>
 Insert Horizontal Rule | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>-</kbd>
 ```
 
-- vpn Tunnelblick_3.7.2_build_4850
-
-点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
-
 ### XtraFinder 文件管理器，涉及权限，暂停使用
 
 ## Xcode
@@ -616,16 +585,9 @@ lsof -i tcp:8081  # 端口查看
 
 开启设置-〉共享-〉远程登录
 
-> [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles):🔧 .files, including ~/.macos — sensible hacker defaults for macOS https://mths.be/dotfiless
+## 系统配置备份
 
-* [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
-* [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
-* [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
-* [Maximum Awesome](link)
-
-linux下（mac下）有各种app，每个人会根据个人的喜好和习惯来设置一些（快捷键，变量等等），而dotfiles就是保存了这些自定义设置的文件。
-
-在系统中使用一个文件夹，通过ln命令，将不同的app，不同的系统设置文件都指引到这个文件夹
+linux下（mac下）有各种app，每个人会根据个人的喜好和习惯来设置一些（快捷键，变量等等），而dotfiles就是保存了这些自定义设置的文件。在系统中使用一个文件夹，通过ln命令，将不同的app，不同的系统设置文件都指引到这个文件夹
 
 ```sh
 brew install mackup # 通过mackup备份 默认放在文件Dropbox/
@@ -669,6 +631,10 @@ karabiner
 * [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
 * [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
 * [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
+* [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles):🔧 .files, including ~/.macos — sensible hacker defaults for macOS https://mths.be/dotfiless
+* [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
+* [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
+* [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
 
 ### 软件列表
 

@@ -49,6 +49,7 @@
 ## 参考
 
 * [组件文档](https://mp.weixin.qq.com/debug/wxadoc/dev/api/)
+* [小程序开发文档](https://developers.weixin.qq.com/miniprogram/dev/index.html)
 * [小程序快速上手：三步完成小程序从无到有的开发](http://blog.csdn.net/gitchat/article/details/77863478)
 * [首个微信小程序开发教程](https://juejin.im/entry/57e34d6bd2030900691e9ad7)
 * [小程序文档](https://developers.weixin.qq.com/miniprogram/dev/demo.html)

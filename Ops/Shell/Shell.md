@@ -485,33 +485,19 @@ ssh 目标机器登录用户@目标机器IP -p 目标机器端口 -o ProxyComman
 
 # 在 $HOME/.ssh 目录下建立/修改文件 config
 Host tiaoban   #任意名字，随便使用
-
     HostName 192.168.1.1   #这个是跳板机的IP，支持域名
-
     Port 22      #跳板机端口
-
     User username_tiaoban       #跳板机用户
 
-
-
 Host nginx      #同样，任意名字，随便起
-
     HostName 192.168.1.2  #真正登陆的服务器，不支持域名必须IP地址
-
     Port 22   #服务器的端口
-
     User username   #服务器的用户
-
     ProxyCommand ssh username_tiaoban@tiaoban -W %h:%p
 
-
-
 Host 10.10.0.*      #可以用*通配符
-
     Port 22   #服务器的端口
-
     User username   #服务器的用户
-
     ProxyCommand ssh username_tiaoban@tiaoban -W %h:%p
 ```
 
