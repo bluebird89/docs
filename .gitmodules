@@ -61,3 +61,6 @@
 [submodule "Note/free-programming-books"]
 	path = Note/free-programming-books
 	url = git@github.com:EbookFoundation/free-programming-books
+[submodule "Note/arl"]
+	path = Note/arl
+	url = git@github.com:kaxap/arl.git

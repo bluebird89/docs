@@ -508,8 +508,8 @@ git push origin master           # 将本地主分支推到远程主分支
 git push -u origin master        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库) 设置本地分支与远程分支保持同步，在第一次 git push 的时候带上 -u 参数即可
 git push origin <local_branch>   # 创建远程分支， origin是远程仓库名
 git push origin <local_branch>:<remote_branch>  # 创建远程分支
-git push origin :<remote_branch>  #先删除本地分支(git branch -d <branch>)，然后再push删除远程分支
 
+git push origin :<remote_branch>  #先删除本地分支(git branch -d <branch>)，然后再push删除远程分支
 git branch -dr [remote/branch] :删除远程分支
 git push origin --delete dev :删除远程分支
 ```
@@ -1002,10 +1002,7 @@ git submodule foreach git pull  # 更新 repo 下所有的 submodules
 
 # 首先删除.gitsubmodule中的项目配置
 git rm --cached another_project # 删除项目
-
-vim .git/config
-...remove another_project...
-
+vim .git/config # ...remove another_project...
 ```
 
 ### git-subtree
