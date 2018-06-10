@@ -58,6 +58,6 @@
 [submodule "Project/project-based-learning"]
 	path = Project/project-based-learning
 	url = git@github.com:tuvtran/project-based-learning.git
-[submodule "Note/Note/free-programming-books"]
-	path = Note/Note/free-programming-books
+[submodule "Note/free-programming-books"]
+	path = Note/free-programming-books
 	url = git@github.com:EbookFoundation/free-programming-books
