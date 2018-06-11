@@ -41,12 +41,11 @@ fi
 * [gogits/gogs](https://github.com/gogits/gogs):Gogs is a painless self-hosted Git service. https://gogs.io
 * [git/git](https://github.com/git/git):Git Source Code Mirror - This is a publish-only repository and all pull requests are ignored. Please follow Documentation/SubmittingPatches procedure for any of your improvements.
 * [go-gitea/gitea](https://github.com/go-gitea/gitea):Gitea: Git with a cup of tea http://gitea.io
-* [GitLab](link)
+* [GitLab](https://gitlab.com/)
 
 ## Config
 
-* 查看配置:`git config --list --show-origin`
-* repository配置: `git config --local`
+
 * 全局配置：/etc/gitconfig文件 `git config --global`
 * 系统配置： `git config --system`
 * 项目配置：project/.git/config   `git config`
@@ -68,6 +67,9 @@ fi
 ```sh
 git --version
 
+git config --list --show-origin # 查看配置
+git config --local # repository配置
+
 git config --global user.name "name"
 git config --global user.email "email"
 git config --global color.ui "auto"
@@ -84,7 +86,8 @@ git config --global mergetool.sublime.trustExitCode false
 git config --global merge.tool sublime | vimdiff
 git mergetool -y
 
-git config --global alias.st status
+git config --global alias.st 'status'
+
 git config --global alias.ls 'log --name-status --oneline --graph'
 git config --global rebase.autoStash true
 git config --global alias.st 'status --porcelain'
