@@ -209,6 +209,10 @@
 - [ ] Counter-Strike: Global Offensive
 - [ ] Frostpunk
 
+### browser
+
+* Opera:with vpn
+
 ## 生活
 
 * 机票：https://flights.manzhinan.com/
