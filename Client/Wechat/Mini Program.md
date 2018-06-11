@@ -59,7 +59,6 @@
 * [wxapp-lock](https://github.com/demi520/wxapp-lock) ★12 - 微信小程序手势解锁
 * [meili/minui](https://github.com/meili/minui):基于规范的小程序 UI 组件库，自定义标签组件，简洁、易用、工具化 https://meili.github.io/min/docs/minui/
 
-
 ## 开发框架
 
 * [Tencent/wepy](https://github.com/Tencent/wepy):小程序组件化开发框架 https://tencent.github.io/wepy/
@@ -179,6 +178,7 @@
 - [weapp-LeanCloud](https://github.com/bestony/weapp-LeanCloud) ★12 - LeanCloud 的微信小程序用户登陆Demo
 - [wejoke](https://github.com/zszdevelop/wejoke) ★11 - 微笑话微信小程序
 - [liwushuoapp](https://github.com/chongbenben/liwushuoapp) ★11 - 微信小程序开发的App
+- [tencentyun/wafer-client-sdk](https://github.com/tencentyun/wafer-client-sdk):Wafer - 快速构建具备弹性能力的微信小程序 https://github.com/tencentyun/wafer
 
 ## 服务端
 
@@ -188,12 +188,19 @@
 - [Wafer 服务端 SDK - Java](https://github.com/tencentyun/weapp-java-server-sdk) ★67 - 企业级微信小程序全栈方案
 - [xpmjs](https://github.com/XpmJS/xpmjs) ★67 - 小程序云端增强 SDK
 - [weapp-php-server-sdk](https://github.com/tencentyun/weapp-php-server-sdk) ★42 - 腾讯云微信小程序云端解决方案
+- [tencentyun/wafer-php-server-demo](https://github.com/tencentyun/wafer-php-server-demo) Wafer - 企业级微信小程序全栈方案 https://github.com/tencentyun/wafer
+* [tencentyun/wafer2-quickstart-php](https://github.com/tencentyun/wafer2-quickstart-php):Wafer2 PHP 简化版 Demo
+* [tencentyun/wafer2-quickstart-nodejs](https://github.com/tencentyun/wafer2-quickstart-nodejs):Wafer2 Node.js 简化版 Demo
 
 ## 参考
 
 * [组件文档](https://mp.weixin.qq.com/debug/wxadoc/dev/api/)
+* [tencentyun/wafer](https://github.com/tencentyun/wafer):Wafer - 快速构建具备弹性能力的微信小程序 https://github.com/tencentyun/wafer
+* [tencentyun/weapp-doc](https://github.com/tencentyun/weapp-doc):小程序配置指引、升级方案
+* [tencentyun/wafer2-startup](https://github.com/tencentyun/wafer2-startup):Wafer - 腾讯云下一代小程序综合解决方案
 * [小程序开发文档](https://developers.weixin.qq.com/miniprogram/dev/index.html)
 * [小程序快速上手：三步完成小程序从无到有的开发](http://blog.csdn.net/gitchat/article/details/77863478)
 * [首个微信小程序开发教程](https://juejin.im/entry/57e34d6bd2030900691e9ad7)
 * [小程序文档](https://developers.weixin.qq.com/miniprogram/dev/demo.html)
+
 * http://www.cnblogs.com/luyucheng/p/6274561.html

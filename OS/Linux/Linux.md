@@ -53,6 +53,10 @@ export：显示从 Shell 中导出成环境变量的变量
 unset temp : 删除变量temp
 ```
 
+## version
+
+* [Archlinux](https://www.archlinux.org/)
+
 ## 虚拟机
 
 * 用WinSCP.exe等工具上传系统镜像文件rhel-server-7.0-x86_64-dvd.iso到/usr/local/src目录
@@ -128,7 +132,6 @@ vi /etc/fstab   #添加以下代码。实现开机自动挂载
 /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom   iso9660    defaults,ro,loop  0 0
 ```
 
-
 ## 硬件
 
 ```sh
@@ -146,7 +149,8 @@ df -T
 - 软件源镜像服务器可能会有多个，有时候某些特定的软件需要我们添加特定的源；
 
 ```sh
-sudo apt-get install cowsay` `source ~/.zshrc
+sudo apt-get install cowsay
+source ~/.zshrc
 
 sudo add-apt-repository --remove ppa:finalterm/daily
 
