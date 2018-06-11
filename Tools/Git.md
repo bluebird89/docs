@@ -1,4 +1,4 @@
-# Git
+# [git/git](https://github.com/git/git)
 
 fast, scalable, distributed revision control system.一个分布式的代码管理容器，本地和远端都保有一份相同的代码。 Git 仓库主要是由是三部分组成：本地代码，缓存区，提交历史
 
@@ -908,35 +908,6 @@ version
 * Use Branches:Branching is one of Git’s most powerful features – and this is not by accident: quick and easy branching was a central requirement from day one. Branches are the perfect tool to help you avoid mixing up different lines of development. You should use branches extensively in your development workflows: for new features, bug fixes, experiments, ideas…
 * Agree on a Workflow:Git lets you pick from a lot of different workflows: long-running branches, topic branches, merge or rebase, git-flow… Which one you choose depends on a couple of factors: your project, your overall development and deployment workflows and (maybe most importantly) on your and your teammates’ personal preferences. However you choose to work, just make sure to agree on a common workflow that everyone follows.
 
-## 文档
-
-* Git User Manual：客户端含有的文档
-* [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. http://git.io/sheet
-* [atlassian](https://www.atlassian.com/git)
-* [Pro Git（中文版）](http://git.oschina.net/progit/)
-* [Pro Git2](https://git-scm.com/book/en/v2)
-* [progit/progit](https://github.com/progit/progit)
-* [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
-* [GitHub规范](https://guides.github.com/)
-* [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
-* [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
-* [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
-* [Git权威指南](http://www.worldhello.net/):GotGitHub
-
-## 工具
-
-* [github/hub](https://github.com/github/hub)hub helps you win at git. http://hub.github.com/
-* [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
-* [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
-* [nvie/gitflow](https://github.com/nvie/gitflow):Git extensions to provide high-level repository operations for Vincent Driessen's branching model.
-* [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
-* [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
-* [kennethreitz/legit](https://github.com/kennethreitz/legit):Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
-* [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
-* [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
-* [Git 工作流](https://juejin.im/post/5a014d5f518825295f5d56c7)
-* [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
-
 ## 语法
 
 ### 格式化输出
@@ -1263,6 +1234,35 @@ chown -R henry:henry .git/objects
 
 * [练习沙盒](https://try.github.io)
 * [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
+
+## 文档
+
+* Git User Manual：客户端含有的文档
+* [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. http://git.io/sheet
+* [atlassian](https://www.atlassian.com/git)
+* [Pro Git（中文版）](http://git.oschina.net/progit/)
+* [Pro Git2](https://git-scm.com/book/en/v2)
+* [progit/progit](https://github.com/progit/progit)
+* [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
+* [GitHub规范](https://guides.github.com/)
+* [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
+* [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
+* [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
+* [Git权威指南](http://www.worldhello.net/):GotGitHub
+
+## 工具
+
+* [github/hub](https://github.com/github/hub)hub helps you win at git. http://hub.github.com/
+* [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
+* [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
+* [nvie/gitflow](https://github.com/nvie/gitflow):Git extensions to provide high-level repository operations for Vincent Driessen's branching model.
+* [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
+* [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
+* [kennethreitz/legit](https://github.com/kennethreitz/legit):Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
+* [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
+* [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
+* [Git 工作流](https://juejin.im/post/5a014d5f518825295f5d56c7)
+* [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
 
 ## 参考
 
