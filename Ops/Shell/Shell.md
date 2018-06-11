@@ -474,7 +474,7 @@ exit 0
 ### terminator
 
 ```sh
-sudo apt-get install terminator
+sudo apt-get install terminator #  depend python version too old
 ```
 
 ### 跳板机
@@ -542,10 +542,11 @@ cat ~/pub_key >>~/.ssh/authorized_keys //将内容追加到authorized_keys文件
 ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root/.ssh/id_rsa.pub') }}'" -k
 ```
 
-## 参考
+## Tool
 
 * [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager.
 * [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
+* [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/
 * [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
 * [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
 * [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)
