@@ -38,6 +38,8 @@ composer require topthink/think-swoole
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ index.php\/?s=$1 [QSA,PT,L]
 </IfModule>
+
+php -S localhost:8888 route/route.php
 ```
 
 ## 资源
