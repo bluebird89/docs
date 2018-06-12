@@ -459,6 +459,7 @@ git cherry-pick [commit] 选择一个commit，合并进当前分支
 git branch -d [branch-name] 删除分支
 git rebase source destiantion：将source压缩到destiantion
 git rebase master
+
 git branch --set-upstream-to=origin/master master
 
 git branch --set-upstream master origin/master # 建立追踪关系，在现有分支与指定的远程分支之间
