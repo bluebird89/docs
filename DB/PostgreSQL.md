@@ -2,15 +2,12 @@
 
 PostgreSQL是一个功能强大的开源对象关系数据库管理系统(ORDBMS)。 用于安全地存储数据; 支持最佳做法，并允许在处理请求时检索它们。PostgreSQL(也称为Post-gress-Q-L)全球志愿者团队)开发。 它不受任何公司或其他私人实体控制。 它是开源的，其源代码是免费提供的。 [官网](https://www.postgresql.org/)
 
-## 工具
-
-- psql
-- PgAdmin
-- pgFouine
-
 ## 安装
 
-- mac：`brew install postgres`
+```sh
+# mac：
+`brew install postgres`
+```
 
 ## 使用
 
@@ -134,6 +131,21 @@ class Ext_Pgsql {
 }
 ```
 
+## 工具
+
+* [PostgREST/postgrest](https://github.com/PostgREST/postgrest):REST API for any Postgres database https://postgrest.org
+* [brianc/node-postgres](https://github.com/brianc/node-postgres):PostgreSQL client for node.js. https://node-postgres.com
+* [dbcli/pgcli](https://github.com/dbcli/pgcli):Postgres CLI with autocompletion and syntax highlighting http://pgcli.com
+
+## 客户端
+
+- psql
+- PgAdmin
+- pgFouine
+- [sosedoff/pgweb](https://github.com/sosedoff/pgweb):Cross-platform client for PostgreSQL databases http://sosedoff.github.io/pgweb
+
 ## 参考
 
 * [digoal/blog](https://github.com/digoal/blog):Everything about database,bussiness. http://blog.163.com/digoal@126
+* [bitemyapp/learnhaskell](https://github.com/bitemyapp/learnhaskell):Learn Haskell
+* [dhamaniasad/awesome-postgres](https://github.com/dhamaniasad/awesome-postgres):A curated list of awesome PostgreSQL software, libraries, tools and resources, inspired by awesome-mysql

@@ -77,6 +77,10 @@ ng generate enum my-new-enum # 枚举对象Enum
 ng generate module my-module # 模块Modulew
 ```
 
+## 扩展
+
+* [angular/flex-layout](https://github.com/angular/flex-layout):Provides HTML UI layout for Angular applications; using Flexbox and a Responsive API
+
 ## 参考
 
 * [angular/angular.js](https://github.com/angular/angular.js):AngularJS - HTML enhanced for web apps! https://angularjs.org

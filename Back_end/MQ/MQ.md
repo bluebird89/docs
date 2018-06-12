@@ -16,7 +16,7 @@ AMQP，即Advanced Message Queuing Protocol，高级消息队列协议，是应�
 
 * ConnectionFactory、Connection、Channel都是RabbitMQ对外提供的API中最基本的对象。
 * Connection是RabbitMQ的socket链接，它封装了socket协议相关部分逻辑。
-* ConnectionFactory为Connection的制造工厂。 
+* ConnectionFactory为Connection的制造工厂。
 * Channel是我们与RabbitMQ打交道的最重要的一个接口，我们大部分的业务操作是在Channel这个接口中完成的，包括定义Queue、定义Exchange、绑定Queue与Exchange、发布消息等。
 * Queue（队列）是RabbitMQ的内部对象，用于存储消息。消息都只能存储在Queue中，生产者生产消息并最终投递到Queue中，消费者可以从Queue中获取消息并消费。多个消费者可以订阅同一个Queue，这时Queue中的消息会被平均分摊给多个消费者进行处理，而不是每个消费者都收到所有的消息并处理。
 * Message acknowledgment:要求消费者在消费完消息后发送一个回执给RabbitMQ，RabbitMQ收到消息回执（Message acknowledgment）后才将该消息从Queue中移除；如果RabbitMQ没有收到回执并检测到消费者的RabbitMQ连接断开，则RabbitMQ会将该消息发送给其他消费者（如果存在多个消费者）进行处理
@@ -27,8 +27,8 @@ AMQP，即Advanced Message Queuing Protocol，高级消息队列协议，是应�
 * Binding:RabbitMQ中通过Binding将Exchange与Queue关联起来，这样RabbitMQ就知道如何正确地将消息路由到指定的Queue了
 * Binding key:在绑定（Binding）Exchange与Queue的同时，一般会指定一个binding key；消费者将消息发送给Exchange时，一般会指定一个routing key；*当binding key与routing key相匹配时，消息将会被路由到对应的Queue中*。这个将在Exchange Types章节会列举实际的例子加以说明。 在绑定多个Queue到同一个Exchange的时候，这些Binding允许使用相同的binding key。 binding key 并不是在所有情况下都生效，它依赖于Exchange Type，比如fanout类型的Exchange就会无视binding key，而是将消息路由到所有绑定到该Exchange的Queue。
 * Exchange Types:RabbitMQ常用的Exchange Type有fanout、direct、topic、headers这四种
-    - fanout类型的Exchange路由规则非常简单，它会把所有发送到该Exchange的消息路由到所有与它绑定的Queue中。 
-    - direct类型的Exchange路由规则也很简单，它会把消息路由到那些binding key与routing key完全匹配的Queue中。 
+    - fanout类型的Exchange路由规则非常简单，它会把所有发送到该Exchange的消息路由到所有与它绑定的Queue中。
+    - direct类型的Exchange路由规则也很简单，它会把消息路由到那些binding key与routing key完全匹配的Queue中。
     - topic类型的Exchange在匹配规则上进行了扩展，它与direct类型的Exchage相似，也是将消息路由到binding key与routing key相匹配的Queue中，但这里的匹配规则有些不同，它约定：
         * routing key为一个句点号“. ”分隔的字符串（我们将被句点号“. ”分隔开的每一段独立的字符串称为一个单词），如“stock.usd.nyse”、“nyse.vmw”、“quick.orange.rabbit”
         * binding key与routing key一样也是句点号“. ”分隔的字符串，binding key中可以存在两种特殊字符“*”与“#”，用于做模糊匹配，其中“*”用于匹配一个单词，“#”用于匹配多个单词（可以是零个）
@@ -46,8 +46,9 @@ AMQP，即Advanced Message Queuing Protocol，高级消息队列协议，是应�
 - [apache/incubator-rocketmq](https://github.com/apache/incubator-rocketmq) a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability.
 - [RocketMQ]()
 - [Apache ActiveMQ](link)
+- [kr/beanstalkd](https://github.com/kr/beanstalkd):Beanstalk is a simple, fast work queue. http://kr.github.io/beanstalkd/
 
-* 从社区活跃度：按照目前网络上的资料，RabbitMQ 、activeM 、ZeroMQ 三者中，综合来看，RabbitMQ 是首选。 
+* 从社区活跃度：按照目前网络上的资料，RabbitMQ 、activeM 、ZeroMQ 三者中，综合来看，RabbitMQ 是首选。
 * 持久化消息比较：ZeroMq 不支持，ActiveMq 和RabbitMq 都支持。持久化消息主要是指我们机器在不可抗力因素等情况下挂掉了，消息不会丢失的机制。
 * 综合技术实现：可靠性、灵活的路由、集群、事务、高可用的队列、消息排序、问题追踪、可视化管理工具、插件系统等等。RabbitMq / Kafka 最好，ActiveMq 次之，ZeroMq 最差。当然ZeroMq 也可以做到，不过自己必须手动写代码实现，代码量不小。尤其是可靠性中的：持久性、投递确认、发布者证实和高可用性。
 * 高并发：毋庸置疑，RabbitMQ 最高，原因是它的实现语言是天生具备高并发高可用的erlang 语言。
