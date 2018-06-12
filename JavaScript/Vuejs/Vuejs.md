@@ -1,4 +1,6 @@
-# vue
+# [vuejs/vue](https://github.com/vuejs/vueb)
+
+A progressive, incrementally-adoptable JavaScript framework for building UI on the web. http://vuejs.org
 
 * 全局安装脚手架：sudo npm install -g vue-cli vue-router vuex vue-resource vue-loader webpack
 * 以webpack模板初始化项目： vue init webpack sell：程序文件名称
@@ -149,13 +151,13 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [JavaScript 进阶之 Vue.js + Node.js 入门实战开发](http://blog.csdn.net/gitchat/article/details/77931664)
 * http://www.cnblogs.com/keepfool/
 
-## 项目：
+## 项目
 
-* [vuejs/vue](A progressive, incrementally-adoptable JavaScript framework for building UI on the web. http://vuejs.org):A progressive, incrementally-adoptable JavaScript framework for building UI on the web. http://vuejs.org
 * [pwa](https://github.com/vuejs-templates/pwa) progressive-web-apps
 * [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):通过webpack打包的vuejs模版
 * [vue2-happyfri](https://github.com/bailicangdu/vue2-happyfri)vue2 + vue-router + vuex 入门项目
-* [bailicangdu/node-elm](https://github.com/bailicangdu/vue2-elm)基于 vue2 + vuex 构建一个具有 45 个页面的大型单页面应用
+* [bailicangdu/node-elm](https://github.com/bailicangdu/vue2-elm)：基于 vue2 + vuex 构建一个具有 45 个页面的大型单页面应用，服务端
+* [bailicangdu/vue2-elm](https://github.com/bailicangdu/vue2-elm):客户端
 * [vuejs/vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
 * [liangxiaojuan/eleme](https://github.com/liangxiaojuan/eleme):vue2 +vue-router2 + es6 +webpack 高仿饿了么app商家详情，demo：http://yangyi1024.com/elem 还有我最新的实战项目,点它=》 http://yangyi1024.com/meizi
 * [ustbhuangyi/vue-sell](https://github.com/ustbhuangyi/vue-sell):Vue.js高仿饿了么外卖App课程源码 http://coding.imooc.com/class/74.html
