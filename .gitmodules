@@ -64,3 +64,6 @@
 [submodule "Note/arl"]
 	path = Note/arl
 	url = git@github.com:kaxap/arl.git
+[submodule "Ops/Shell/command-line-text-processing"]
+	path = Ops/Shell/command-line-text-processing
+	url = git@github.com:learnbyexample/Command-line-text-processing.git
