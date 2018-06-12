@@ -625,7 +625,7 @@
       - [The Tangled Web — Securing Web Applications](https://www.amazon.com/Tangled-Web-Securing-Modern-Applications/dp/1593273886): Michal Zalewski关于web应用安全的一本书
       - [Understanding Computation](http://computationbook.com): Tom Stuart关于计算理论的一本书
       - [Vagrant Cookbook](https://leanpub.com/vagrantcookbook): Erika Heidi关于创建 Vagrant环境的一本书
-* PHP视频 PHP Videos 
+* PHP视频 PHP Videos
       - [Nomad PHP Lightning Talks](https://www.youtube.com/c/nomadphp): PHP社区成员10到15分钟的快速会谈
       - [PHP UK Conference](https://www.youtube.com/user/phpukconference/videos): 一个PHP英国会议的视频集合
       - [Programming with Anthony](https://www.youtube.com/playlist?list=PLM-218uGSX3DQ3KsB5NJnuOqPqc5CW2kW): Anthony Ferrara的视频系列

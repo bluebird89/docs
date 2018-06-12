@@ -71,7 +71,6 @@ browse http://localhost:3000
 * 事务（Transaction），我们知道在进行一次数据库写操作的时候，需要定一个事务操作，这样在操作失败的时候可以回滚到原始状态，那当在分布式数据库的情况下，事务需要跨越多个数据库节点以保持数据的完整性，这给开发者带来不少的麻烦。
 * 在关系型数据库中存在大量表关联的情况，分布式的查询操作就会牵扯到大量的数据迁移，显然这必将降低数据库性能。但是，在非关系型数据库中，我们弱化甚至去除了事务和多表关联操作
 
-
 ## 备份
 
 在部署数据库的时候，不用于以前的单体应用，分布式下数据库部署包括多点部署，一套业务应用数据库被分布在多台数据库服务器上，分主从服务器。主服务器处理日常业务请求，从服务器在运行时不断的对主服务器进行备份，当主服务器出现宕机、或者运行不稳定的情况时，从服务器会立刻替换成主服务器，继续对外提供服务。此时，开发运维人员会对出现问题的服务器进行抢修、恢复，之后再把它投入到生产环境中。这样的构架也被称作为高可用构架，它支持了灾难恢复，为业务世界提供了可靠的支持，也是很多企业级应用采用的主流构架之一。
@@ -101,3 +100,9 @@ NoSQL主要用于解决以下几种问题
     - [Docs](https://osquery.readthedocs.io)
 * [vrana/adminer](https://github.com/vrana/adminer):Database management in a single PHP file https://www.adminer.org/
 * [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. http://vitess.io
+* [getredash/redash](https://github.com/getredash/redash):Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. http://redash.io/
+
+## 工具
+
+* [dbeaver/dbeaver](https://github.com/dbeaver/dbeaver):Free universal database tool and SQL client http://dbeaver.jkiss.org
+* [tgriesser/knex](https://github.com/tgriesser/knex):A query builder for PostgreSQL, MySQL and SQLite3, designed to be flexible, portable, and fun to use. http://knexjs.org
