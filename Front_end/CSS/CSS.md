@@ -191,12 +191,13 @@ h1{
       }
     </style>
     ```
+
 ## 盒子模型
 
 * box-sizing：有利于样式化，而且你在也不用做乏味的数学运算
   - content-box(default) - 当我们为元素设置了宽度和高度，但那只是内容的尺寸。所有的 padding 和 border 都在不包含在内容当中，也就是在内容的外部。
   - border-box - padding和 border 被包含在 宽度和高度当中。 如果一个 div 的宽度为 100px ，而被设置了 box-sizing: border-box， 那么它的宽度将始终是 100px， 无论你添加多少 padding 和 border 。
-  
+
 ## Flex
 
 ## 执行 CSS 重置
@@ -228,6 +229,18 @@ h1{
 * caniuse检测你正在使用的属性是否被广泛支持
 * Validate
 
+## framework
+
+* Bootstrap
+* Flat UI
+* Semantic UI
+* BootMetro
+* Pure
+* Metro UI CSS
+* Bootswatch
+* jQuery UI Bootstrap
+* EZ-CSS
+
 ## 参考
 
 * [scottjehl/Respond](https://github.com/scottjehl/Respond):A fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more)
@@ -238,4 +251,3 @@ h1{
 * [bjankord/Style-Guide-Boilerplate](https://github.com/bjankord/Style-Guide-Boilerplate):A starting point for crafting living style guides.
 * [sindresorhus/modern-normalize](https://github.com/sindresorhus/modern-normalize):Normalize browsers' default style
 * [30 Seconds of CSS](https://atomiks.github.io/30-seconds-of-css/#box-sizing-reset)
-* [css zen garden禅意花园](http://www.csszengarden.com/)

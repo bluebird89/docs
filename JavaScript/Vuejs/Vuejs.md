@@ -109,12 +109,14 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 ### [服务器端渲染（Server side rendering SSR）](https://github.com/vuejs/vue-ssr-docs)
 
 
-## vue-cli
+## [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
 
-模版化构建项目
+hammer_and_wrench CLI for rapid Vue.js development https://cli.vuejs.org/
 
-```shell
+```sh
 npm install -g vue-cli
+
+vue list
 vue init <template-name> <project-name> # vue init webpack my-project vue init Plortinus/vue-multiple-pages new-project
 ```
 
@@ -128,7 +130,6 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [vuejs/vue-class-component](https://github.com/vuejs/vue-class-component):ES / TypeScript decorator for class-style Vue components.
 * [vuejs/vue-devtools](https://github.com/vuejs/vue-devtools):Chrome devtools extension for debugging Vue.js applications.
 * [vuejs/vue-router](https://github.com/vuejs/vue-router):The official router for Vue.js.https://router.vuejs.org/zh-cn/
-* [vuejs/vue-cli](https://github.com/vuejs/vue-cli):Simple CLI for scaffolding Vue.js projects
 * [pagekit/vue-resource](https://github.com/pagekit/vue-resource):The HTTP client for Vue.js
 * [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
 * [iview/iview-admin](https://github.com/iview/iview-admin):Vue 2.0 admin management system template based on iView https://iview.github.io/iview-admin
