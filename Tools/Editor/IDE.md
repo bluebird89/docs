@@ -4,6 +4,7 @@
 - PyCharm
 - PHPStrom
 - WebStorm
+- [Komodo IDE](https://www.activestate.com/)
 
 ## PHPStrom
 
