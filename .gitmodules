@@ -67,3 +67,9 @@
 [submodule "Ops/Shell/command-line-text-processing"]
 	path = Ops/Shell/command-line-text-processing
 	url = git@github.com:learnbyexample/Command-line-text-processing.git
+[submodule "Note/awesomo"]
+	path = Note/awesomo
+	url = git@github.com:lk-geimfari/awesomo.git
+[submodule "Note/Qix"]
+	path = Note/Qix
+	url = git@github.com:ty4z2008/Qix.git
