@@ -1066,7 +1066,6 @@ git config --global color.diff.whitespace "red reverse"
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 git config --global alias.dsf '!f() { [ -z "$GIT_PREFIX" ] || cd "$GIT_PREFIX" '\
 '&& git diff --color "$@" | diff-so-fancy  | less --tabs=4 -RFX; }; f'
-
 ```
 
 ### Commit Message
