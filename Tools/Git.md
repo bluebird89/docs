@@ -281,7 +281,7 @@ git commit -m 'description' # 提交代码到本地缓存
 git push # 提交代码到远程GitHub仓库
 ```
 
-#### 编辑项目
+#### working tree
 
 writing clear commit messages, you can make it easier for other people to follow along and provide feedback.
 
@@ -339,7 +339,7 @@ git checkout ./file # 回滚最新版本库文件，抛弃工作区修改
 git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1234567a44341404 / HEAD
 ```
 
-#### 暂存区编辑
+#### 暂存区
 
 * merge 命令把不同分支合并起来。合并前，索引必须和当前提交相同。
     - 如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做。
@@ -1092,10 +1092,6 @@ git config --global alias.dsf '!f() { [ -z "$GIT_PREFIX" ] || cd "$GIT_PREFIX" '
 <footer>
 ```
 
-## 扩展
-
-* [jonas/tig](https://github.com/jonas/tig):text-mode interface for git
-
 ### [arzzen/git-quick-stats](https://github.com/arzzen/git-quick-stats)
 
 Git quick statistics is a simple and efficient way to access various statistics in git repository.
@@ -1291,12 +1287,11 @@ chown -R henry:henry .git/objects
 * [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
 * [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
 * [nvie/gitflow](https://github.com/nvie/gitflow):Git extensions to provide high-level repository operations for Vincent Driessen's branching model.
-
+* [jonas/tig](https://github.com/jonas/tig):text-mode interface for git
 * [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
 * [kennethreitz/legit](https://github.com/kennethreitz/legit):Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
 * [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
 * [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
-* [Git 工作流](https://juejin.im/post/5a014d5f518825295f5d56c7)
 * [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
 
 ## 参考
@@ -1312,3 +1307,4 @@ chown -R henry:henry .git/objects
 * [alias](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git):oh my zsh 中的 alias
 * [Conventional Commits](https://conventionalcommits.org/)
 * [git-commit-guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
+* [Git 工作流](https://juejin.im/post/5a014d5f518825295f5d56c7)
