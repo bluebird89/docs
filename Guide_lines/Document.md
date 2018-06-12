@@ -502,7 +502,7 @@ $1,000 1,000 美元
 
 正确：advanced-usage.md ```
 
-# 参考链接
+## 参考
 
 - [产品手册中文写作规范](http://wenku.baidu.com/view/23cc1a6527d3240c8447efbf.html), by 华为
 - [写作规范和格式规范](http://docs.daocloud.io/write-docs/format), by DaoCloud
