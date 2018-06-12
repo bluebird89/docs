@@ -138,7 +138,7 @@
 * 《[CSS 揭秘](https://www.amazon.cn/gp/product/B01ET3FO86)》
 * 《[CSS 设计指南（第3版）](https://www.amazon.cn/gp/product/B00M2DKZ1W)》
 * 《[CSS 权威指南（第3版）](https://www.amazon.cn/gp/product/B0011F5SIC)》
-* 《CSS 禅意花园(修订版)》
+* 《CSS 禅意花园(修订版)》[css zen garden禅意花园](http://www.csszengarden.com/)
 * 《精通 CSS: 高级 Web 标准解决方案(第2版)》
 * 《众妙之门: 精通 CSS3》
 * 《[深入浅出 HTML 与 CSS](https://www.amazon.cn/gp/product/B01LXL42O5)》
