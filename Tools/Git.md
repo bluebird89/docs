@@ -15,7 +15,13 @@ fast, scalable, distributed revision control system.一个分布式的代码管�
 * [Gitlab](https://github.com/)
 * [开源中国](https://github.com/)
 * [Coding](https://github.com/)
-* sourceforge 支持git
+* sourceforge
+
+## 搭建服务
+
+* [gitlabhq/gitlabhq](https://github.com/gitlabhq/gitlabhq):GitLab CE | Please open new issues in our issue tracker on GitLab.com https://about.gitlab.com/getting-help/
+* [gogits/gogs](https://github.com/gogits/gogs):Gogs is a painless self-hosted Git service. https://gogs.io
+* [go-gitea/gitea](https://github.com/go-gitea/gitea):Gitea: Git with a cup of tea http://gitea.io
 
 ## Install
 
@@ -35,16 +41,7 @@ fi
 # Add git-flow-completion to ~/.zshrc
 ```
 
-## 搭建服务
-
-* [gitlabhq/gitlabhq](https://github.com/gitlabhq/gitlabhq):GitLab CE | Please open new issues in our issue tracker on GitLab.com https://about.gitlab.com/getting-help/
-* [gogits/gogs](https://github.com/gogits/gogs):Gogs is a painless self-hosted Git service. https://gogs.io
-* [git/git](https://github.com/git/git):Git Source Code Mirror - This is a publish-only repository and all pull requests are ignored. Please follow Documentation/SubmittingPatches procedure for any of your improvements.
-* [go-gitea/gitea](https://github.com/go-gitea/gitea):Gitea: Git with a cup of tea http://gitea.io
-* [GitLab](https://gitlab.com/)
-
 ## Config
-
 
 * 全局配置：/etc/gitconfig文件 `git config --global`
 * 系统配置： `git config --system`
@@ -238,13 +235,13 @@ Git维护的就是一个commitID树，分别保存着不同状态下的代码。
 
 ### 文件三种状态：
 
+创建和保存项目的快照及与之后的快照进行对比
+
 * modified:working directory
 * staged:Stage(Index)
 * committed:History
 
-Git 的工作就是创建和保存项目的快照及与之后的快照进行对比
-
-### 创建版本库
+### 创建
 
 * git init：在当前目录内新建一个Git代码库，会生成.git文件，用于新建空项目文件或者将项目添加git管理
 * git init [project-name] # 新建一个目录，将其初始化为Git代码库
@@ -276,6 +273,7 @@ git clone git@github.com:han1202012/NDKHelloworld.git ,
 git add ./* # 添加文件，将目录中所有文件添加;
 git commit -m '提交'; # 提交缓存
 git push -u origin master  # 提交到远程GitHub仓库
+
 # 之后修改提交
 git pull # 与GitHub远程仓库同步
 git status # 查看文件变更
@@ -1020,6 +1018,8 @@ git push origin master
 
 ### [kennethreitz/legit](https://github.com/kennethreitz/legit)
 
+Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
+
 ```python
 pip3 install legit
 
@@ -1034,6 +1034,39 @@ Removes specified branch from the remote. (alias: unp)
 undo
 Un-does the last commit in git history. (alias: un)
 branches
+```
+
+### [so-fancy/diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
+
+Good-lookin' diffs. Actually… nah… The best-lookin' diffs. tada git diff 格式化显示工具
+
+```sh
+#  install
+npm install -g diff-so-fancy
+yarn install -g diff-so-fancy
+
+#Arch Linux下面工作，更简单：
+sudo pacman -S diff-so-fancy
+
+## config
+git config --global color.ui true
+
+git config --global color.diff-highlight.oldNormal    "red bold"
+git config --global color.diff-highlight.oldHighlight "red bold 52"
+git config --global color.diff-highlight.newNormal    "green bold"
+git config --global color.diff-highlight.newHighlight "green bold 22"
+
+git config --global color.diff.meta       "yellow"
+git config --global color.diff.frag       "magenta bold"
+git config --global color.diff.commit     "yellow bold"
+git config --global color.diff.old        "red bold"
+git config --global color.diff.new        "green bold"
+git config --global color.diff.whitespace "red reverse"
+
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+git config --global alias.dsf '!f() { [ -z "$GIT_PREFIX" ] || cd "$GIT_PREFIX" '\
+'&& git diff --color "$@" | diff-so-fancy  | less --tabs=4 -RFX; }; f'
+
 ```
 
 ### Commit Message
@@ -1234,21 +1267,23 @@ chown -R henry:henry .git/objects
 
 * [练习沙盒](https://try.github.io)
 * [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
+* [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
 
 ## 文档
 
-* Git User Manual：客户端含有的文档
+* Git User Manual：`man git`
+* [文档](https://git-scm.com/docs)
 * [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. http://git.io/sheet
 * [atlassian](https://www.atlassian.com/git)
-* [Pro Git（中文版）](http://git.oschina.net/progit/)
-* [Pro Git2](https://git-scm.com/book/en/v2)
-* [progit/progit](https://github.com/progit/progit)
+* [progit/progit](https://github.com/progit/progit):Pro Git Book Content, 1st Edition - This content is deprecated. See 2nd edition at [progit2](https://github.com/progit/progit2) http://git-scm.com/book/
+* [progit/progit](https://github.com/progit/progit):Pro Git 2nd Edition
 * [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
 * [GitHub规范](https://guides.github.com/)
 * [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
 * [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
 * [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
 * [Git权威指南](http://www.worldhello.net/):GotGitHub
+* [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
 
 ## 工具
 
@@ -1256,7 +1291,7 @@ chown -R henry:henry .git/objects
 * [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
 * [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
 * [nvie/gitflow](https://github.com/nvie/gitflow):Git extensions to provide high-level repository operations for Vincent Driessen's branching model.
-* [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
+
 * [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
 * [kennethreitz/legit](https://github.com/kennethreitz/legit):Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
 * [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
@@ -1266,9 +1301,6 @@ chown -R henry:henry .git/objects
 
 ## 参考
 
-* [文档](https://git-scm.com/docs)
-* [中文](https://git-scm.com/book/zh/v2)
-* [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
 * attributes   Defining attributes per path
 * everyday     Everyday Git With 20 Commands Or So
 * glossary     A Git glossary
