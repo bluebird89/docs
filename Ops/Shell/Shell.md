@@ -91,7 +91,7 @@ source ~/.bashrc # 运行
 
 #### oh my zsh
 
-* plugin
+* plugin:
 * themes
 
 ```sh
