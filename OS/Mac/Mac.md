@@ -93,9 +93,13 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
   - Axure：原型工具
   - CmapTools：概念图
   - UML:staruml
-
 * 写作
-  - markdown: Mou for Mac,Ulysses for Mac,MWeb Lite,[MacDown](https://github.com/MacDownApp/macdown)Open source Markdown editor for macOS.
+  - markdown
+    - Mou for Mac
+    - Ulysses for Mac
+    - MWeb Lite
+    - MWeb for Mac
+    - [MacDown](https://github.com/MacDownApp/macdown)Open source Markdown editor for macOS.
   - Latex
   - [MindNode 2](https://mindnode.com/)
   - Alternote(evernote简单客户端)

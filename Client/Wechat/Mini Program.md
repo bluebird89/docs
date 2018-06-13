@@ -1,7 +1,5 @@
 # 小程序
 
-微信生态的构建
-
 小程序前段负责内容的展示，如果我们开发的是纯静态页面，那么只需要掌握上面的就可以。但是，如果我们要做动态页面，也就是页面内容是跟数据库交互的，就需要服务端来提供数据的交互。在小程序中，服务端是以接口的方式实现的，结果以json数据格式返回。
 前端通过组件wx.request调用接口，来实现跟服务端的交互
 
@@ -31,6 +29,30 @@
 
 * 必须通过HTTPS部署，在后台配置服务器域名：设置合法域名，也就是服务端接口的域名地址
 * 提交审核
+
+## [tencentyun/wafer2-quickstart-php](https://github.com/tencentyun/wafer2-quickstart-php)
+
+Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具解决方案一起使用。适用于想要使用 Wafer SDK 开发的开发者，Demo 对 SDK 进行了详细的使用和介绍，降低开发者的学习成本。
+
+### 腾讯云一站式部署开通指引
+
+* 通过微信公众平台授权登录腾讯云，打开[微信公众平台](https://mp.weixin.qq.com)注册并登录小程序，按如下步骤操作：
+    - 单击左侧菜单栏中的【设置】。
+    - 单击右侧 Tab 栏中的【开发者工具】。
+    - 单击【腾讯云】，进入腾讯云工具页面，单击【开通】。
+    - 使用小程序绑定的微信扫码即可将小程序授权给腾讯云，开通之后会自动进去腾讯云微信小程序控制台，显示开发环境已开通，此时可以进行后续操作。
+    - **注意：** 此时通过小程序开发者工具查看腾讯云状态并不会显示已开通，已开通状态会在第一次部署开发环境之后才会同步到微信开发者工具上。
+* 安装开发工具：下载并安装最新版本的[微信开发者工具](https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html)，使用小程序绑定的微信号扫码登录开发者工具。
+* 初始化 Demo
+    - 打开第二步安装的微信开发者工具，点击【小程序项目】按钮。
+    - 输入小程序 AppID，项目目录选择一个**空的目录**，接着选择【建立腾讯云 PHP 启动模板】，点击确定创建小程序项目。
+    - 再次点击【确定】进入开发者工具。
+    - 后端上传：点击界面右上角的【腾讯云】图标，在下拉的菜单栏中选择【上传测试代码】。数据库密码与appId一致
+    - 选择【模块上传】并勾选全部选项，然后勾选【部署后自动安装依赖】，点击【确定】开始上传代码。**不一致**：选择普通上传
+    - 上传代码完成之后，点击右上角的【详情】按钮，接着选择【腾讯云状态】即可看到腾讯云自动分配给你的开发环境域名：
+    - 完整复制（包括 `https://`）开发环境 request 域名，然后在编辑器中打开 `client/config.js` 文件，将复制的域名填入 `host` 中并保存，保存之后编辑器会自动编译小程序，左边的模拟器窗口即可实时显示出客户端的 Demo：
+    - 在模拟器中点击【登录】，看到显示“登录成功”，即为开通完成，可以开始你的其他开发了。
+* 测试
 
 ## UI组件
 
@@ -189,18 +211,13 @@
 - [xpmjs](https://github.com/XpmJS/xpmjs) ★67 - 小程序云端增强 SDK
 - [weapp-php-server-sdk](https://github.com/tencentyun/weapp-php-server-sdk) ★42 - 腾讯云微信小程序云端解决方案
 - [tencentyun/wafer-php-server-demo](https://github.com/tencentyun/wafer-php-server-demo) Wafer - 企业级微信小程序全栈方案 https://github.com/tencentyun/wafer
-* [tencentyun/wafer2-quickstart-php](https://github.com/tencentyun/wafer2-quickstart-php):Wafer2 PHP 简化版 Demo
 * [tencentyun/wafer2-quickstart-nodejs](https://github.com/tencentyun/wafer2-quickstart-nodejs):Wafer2 Node.js 简化版 Demo
 
 ## 参考
 
-* [组件文档](https://mp.weixin.qq.com/debug/wxadoc/dev/api/)
-* [tencentyun/wafer](https://github.com/tencentyun/wafer):Wafer - 快速构建具备弹性能力的微信小程序 https://github.com/tencentyun/wafer
-* [tencentyun/weapp-doc](https://github.com/tencentyun/weapp-doc):小程序配置指引、升级方案
-* [tencentyun/wafer2-startup](https://github.com/tencentyun/wafer2-startup):Wafer - 腾讯云下一代小程序综合解决方案
+* [awesome-wechat-weapp](https://github.com/justjavac/awesome-wechat-weapp):微信小程序开发资源汇总 100 http://justjavac.com
+* [微信小程序开发文档](https://developers.weixin.qq.com/miniprogram/dev/)
 * [小程序开发文档](https://developers.weixin.qq.com/miniprogram/dev/index.html)
 * [小程序快速上手：三步完成小程序从无到有的开发](http://blog.csdn.net/gitchat/article/details/77863478)
 * [首个微信小程序开发教程](https://juejin.im/entry/57e34d6bd2030900691e9ad7)
-* [小程序文档](https://developers.weixin.qq.com/miniprogram/dev/demo.html)
-
 * http://www.cnblogs.com/luyucheng/p/6274561.html

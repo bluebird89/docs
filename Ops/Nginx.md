@@ -482,6 +482,43 @@ location ~* \.(gif|jpg|jpeg)$ {
   # Configuration D.
   [ configuration E ]
 }
+
+# example
+upstream app_weapp {
+    server localhost:5757;
+    keepalive 8;
+}
+
+server {
+    listen      80;
+    server_name wx.ijason.cc;
+
+    rewrite ^(.*)$ https://$server_name$1 permanent;
+}
+
+server {
+    listen      443;
+    server_name wx.ijason.cc;
+
+    ssl on;
+
+    ssl_certificate           /data/release/nginx/1_wx.ijason.cc_bundle.crt;
+    ssl_certificate_key       /data/release/nginx/2_wx.ijason.cc.key;
+    ssl_session_timeout       5m;
+    ssl_protocols             TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers               ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA;
+    ssl_session_cache         shared:SSL:50m;
+    ssl_prefer_server_ciphers on;
+
+    location / {
+        proxy_pass http://app_weapp;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
 ```
 
 文件 B配置会根据url/documents 去 root/doucuments/去匹配文件

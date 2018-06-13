@@ -12,10 +12,10 @@ fast, scalable, distributed revision control system.一个分布式的代码管�
 
 * [GitHub](https://github.com/)
 * [Bitbucket](https://bitbucket.org/product)
-* [Gitlab](https://github.com/)
-* [开源中国](https://github.com/)
+* [Gitlab](https://gitlab.com/
+* [码云](https://gitee.com)
 * [Coding](https://github.com/)
-* sourceforge
+* [sourceforge](https://sourceforge.net/):The Complete Open-Source Software Platform
 
 ## 搭建服务
 
@@ -43,7 +43,9 @@ fi
 
 ## Config
 
-* 全局配置：/etc/gitconfig文件 `git config --global`
+* 全局配置: git config --global -l
+  - /etc/gitconfig文件
+  - ubuntu:~/gitconfig:
 * 系统配置： `git config --system`
 * 项目配置：project/.git/config   `git config`
 * alias说明
@@ -1065,6 +1067,11 @@ git config --global color.diff.new        "green bold"
 git config --global color.diff.whitespace "red reverse"
 
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+git config --bool --global diff-so-fancy.markEmptyLines false
+git config --bool --global diff-so-fancy.changeHunkIndicators false
+git config --bool --global diff-so-fancy.stripLeadingSymbols false
+git config --bool --global diff-so-fancy.useUnicodeRuler false
+
 git config --global alias.dsf '!f() { [ -z "$GIT_PREFIX" ] || cd "$GIT_PREFIX" '\
 '&& git diff --color "$@" | diff-so-fancy  | less --tabs=4 -RFX; }; f'
 ```
