@@ -49,6 +49,7 @@
 * Chinagram：关于汉字的 APP
 * [Chineasy](https://www.chineasy.com/):设计很出色，充分利用汉字的优势，将汉字转换为一幅幅精美的图片，让识字变成一种享受。
 * [造字](http://www.myfont.me):用手写来造字
+* dictionary:[goldendict/goldendict](https://github.com/goldendict/goldendict)
 
 ## 写作
 
@@ -235,6 +236,7 @@
 ## 书写规范
 
 * [中英文简历撰写排版指南](http://ppresume.com/notes/guide-zh.html)
+* [about.me](https://about.me/):Create a page to present who you are and what you do in one link.
 
 ## APP
 

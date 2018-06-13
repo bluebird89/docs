@@ -111,6 +111,9 @@ echo $slugify->slugify('Hello World, this is a long sentence and I need to make 
                           }
                  }
 ```
+
+## Principle
+
 ## 加载没有制作 Composer，而是还以 require 的方式进行加载
 
 * 建立存放第三方的 SDK 目录
@@ -122,3 +125,5 @@ echo $slugify->slugify('Hello World, this is a long sentence and I need to make 
 * [官网](https://getcomposer.org/)
 * [composer/composer](https://github.com/composer/composer):Dependency Manager for PHP https://getcomposer.org/
 * [中文](https://www.phpcomposer.com/)
+
+https://www.robberphex.com/2018/05/858

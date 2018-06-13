@@ -132,8 +132,11 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 * shadowshocks
 * Jitsy:通讯工具
 * Synaptic：软件管理
+* thunderbird mail: can  add addon to manage rss
 * xchm:`sudo apt-get install xchm`
 * [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
+* [cherrytree](www.giuspen.com/cherrytree/):note
+* [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite 
 
 ### 软件安装
 
