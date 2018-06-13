@@ -159,6 +159,7 @@
 ## 管理与沟通
 
 * WhatsApp 和 Slack 用来沟通
+* [stride](https://app.stride.com/):类似slack的软件
 * trello：以看版为基础任务管理系统
 * Teambition
 * Asana asana.com
@@ -245,6 +246,16 @@
 * 知乎
 * Medium
 * Pinterest
+
+## 工具集
+
+* [atlassian](https://www.atlassian.com/)
+  - stride
+  - Jira
+  - bitbucket
+  - confluence
+  - trello
+  - sourcetree
 
 ## 参考
 
