@@ -6,3 +6,4 @@ The Python micro framework for building web applications. https://www.palletspro
 
 * [luhuisicnu/The-Flask-Mega-Tutorial-zh](https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh):翻译自Miguel Grinberg的blog https://blog.miguelgrinberg.com 的2017年新版The Flask Mega-Tutorial教程
 * [官网](http://flask.pocoo.org/) Pinterest's API serves 12+ billion requests a day with Flask
+* [humiaozuzu/awesome-flask](https://github.com/humiaozuzu/awesome-flask):A curated list of awesome Flask resources and plugins
