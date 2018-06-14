@@ -1258,6 +1258,8 @@ http://localhost:3000
 
 ### MySQL Proxy
 
+LVS、HAProxy、Nginx
+
 MySQL Proxy的主要作用是用来做负载均衡，数据库读写分离的。但是需要注意的是，MySQL Proxy还有个强大的扩展功能就是支持Lua语言.
 
 启动MySQL Proxy的时候，加载一个Lua脚本，对每一个进入的query或者insert之类的语句做一次安全检查，甚至替换查询中的某些内容，这样在程序员的 程序中忘记了过滤参数的情况下，还有最后一道防线可用。而且由于是Lua这样的动态脚本语言，在开发，修正，部署方面都会有极大的灵活性。
@@ -1280,6 +1282,26 @@ MySQL Proxy的主要作用是用来做负载均衡，数据库读写分离的。
 * 使用pt-online-schema-change来完成大表的ONLINE DDL需求；
 * 定期使用pt-table-checksum、pt-table-sync来检查并修复mysql主从复制的数据差异；
 
+## performance
+
+QPS（Queries Per Second，每秒查询书）
+TPS（Transactions Per Second）
+
+```sql
+show global status like 'Questions';
+show global status like 'Uptime'; # QPS = Questions / Uptime
+
+mysql> show global status like 'Com_commit';
+mysql> show global status like 'Com_rollback';
+mysql> show global status like 'Uptime'; # TPS = (Com_commit + Com_rollback) / Uptime
+
+vmstat 1 3 #  pay attentin to cpu
+iostat -d -k 1 3
+```
+
+## backup
+
+mysqlcheck
 
 ## 扩展配置
 
@@ -1322,6 +1344,26 @@ Slave_IO_Running = NO：stop slave; reset slave;start slave;
 
 ```shell
 sudo apt-get install mysql-proxy
+```
+## slow log
+
+```
+mysql> set global slow-query-log=on
+# 开启慢查询日志
+mysql> set global slow_query_log_file='/var/log/mysql/mysql-slow.log';
+# 指定慢查询日志文件位置
+mysql> set global log_queries_not_using_indexes=on;
+# 记录没有使用索引的查询
+mysql> set global long_query_time=1;
+# 只记录处理时间1s以上的慢查询
+分析慢查询日志，可以使用MySQL自带的mysqldumpslow工具，分析的日志较为简单。
+mysqldumpslow -t 3 /var/log/mysql/mysql-slow.log
+# 查看最慢的前三个查询
+也可以使用percona公司的pt-query-digest工具，日志分析功能全面，可分析slow log、binlog、general log。
+分析慢查询日志：pt-query-digest /var/log/mysql/mysql-slow.log
+分析binlog日志：mysqlbinlog mysql-bin.000001 >mysql-bin.000001.sql
+pt-query-digest --type=binlog mysql-bin.000001.sql
+分析普通日志：pt-query-digest --type=genlog localhost.log
 ```
 
 ## 备份

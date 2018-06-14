@@ -1,5 +1,6 @@
-## Webpack
+# [webpack/webpack](https://github.com/webpack/webpack)
 
+A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows to load parts for the application on demand. Through "loaders," modules can be CommonJs, AMD, ES6 modules, CSS, Images, JSON, Coffeescript, LESS, ... and your custom stuff. https://webpack.js.org
 module bundler(模块加载器兼打包工具)。所有小文件打包成一个或多个大文件.一种前端模块化打包解决方案，但是更重要的是它又是一个可以融合运用各种前端新技术的平台，明白webpack的使用哲学后，只需要简单的配置,我们就可以随心所欲的在webpack项目中使用jsx/ts,使用babel/postcss等平台提供的众多其它功能，只需通过一条命令由源码构建最终可用文件.
 
 * 直接使用 require(XXX) 的形式来引入各模块，即使它们可能需要经过编译，有着各种健全的加载器（loader）处理
@@ -37,22 +38,22 @@ Grunt和Gulp的工作方式是：在一个配置文件中，指明对某些文�
 ### 安装
 
 ```sh
-npm init  // 初始化项目信息
+npm init  #  初始化项目信息
 
-npm install -g webpack //全局安装
-npm install --save-dev webpack // 本地安装Webpack
+npm install -g webpack # 全局安装
+npm install --save-dev webpack #  本地安装Webpack
 
-webpack hello.js hello.bundle.js  //基本使用
-webpack hello.js hello.bundle.js --module-bind 'css=style-loader!css-loader' --watch  // 单次绑定模块，实时更新
+webpack hello.js hello.bundle.js  # 基本使用
+webpack hello.js hello.bundle.js --module-bind 'css=style-loader!css-loader' --watch  #  单次绑定模块，实时更新
 
---progress  // 显示打包过程的进度
---display-modules  // 显示打包的模块
---display-reasons // 显示打包这些模块的原因
---watch / -w  // 监听变动并自动打包
---display-error-details // 能查阅更详尽的信息
---config XXX.js // //使用另一份配置文件（比如webpack.config2.js）来打包
--p    // 对打包后的文件进行压缩，提供production
--d // 提供source map，方便调试。
+--progress  #  显示打包过程的进度
+--display-modules  #  显示打包的模块
+--display-reasons #  显示打包这些模块的原因
+--watch / -w  #  监听变动并自动打包
+--display-error-details #  能查阅更详尽的信息
+--config XXX.js #  # 使用另一份配置文件（比如webpack.config2.js）来打包
+-p    #  对打包后的文件进行压缩，提供production
+-d #  提供source map，方便调试。
 ```
 
 ### 配置文件
@@ -201,6 +202,16 @@ npm run dev // 构建npm脚本
 
 在真实场景中，我们不会直接使用 webpack-dev-server，而采用 express + webpack/webpack-dev-middleware
 
+## [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
+
+hammer_and_wrench CLI for rapid Vue.js development https://cli.vuejs.org/
+
+```sh
+npm install -g vue-cli
+vue list
+vue init <template-name> <project-name>
+```
+
 ### [webpack-dashboard](https://github.com/FormidableLabs/webpack-dashboard)
 
 A CLI dashboard for webpack dev server
@@ -223,7 +234,7 @@ plugins: [
     "dev": "webpack-dashboard -- node index.js"
 }
 
-// 在vue-cli与create-my-react
+# 在vue-cli与create-my-react
 plugin 位置正确
 脚本配置正确
 ```
@@ -270,12 +281,11 @@ npm run build --report
 * [webpack-simple](https://github.com/vuejs-templates/webpack-simple)
 * [webpack 从入门到工程实践](http://gitbook.cn/books/599270d5625e0436309466c7/index.html)
 * [Webpack 工程的 PWA 实战](http://gitbook.cn/books/59957adbebb0e06f9f24c389/index.html)
-* [webpack/webpack](https://github.com/webpack/webpack):A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows to load parts for the application on demand. Through "loaders," modules can be CommonJs, AMD, ES6 modules, CSS, Images, JSON, Coffeescript, LESS, ... and your custom stuff. https://webpack.js.org
 * [webpack/react-starter](https://github.com/webpack/react-starter):[OUTDATED] Starter template for React with webpack. Doesn't focus on simplicity! NOT FOR BEGINNERS!
 * [入门Webpack](http://www.jianshu.com/p/42e11515c10f)
 * [Webpack for React](http://www.pro-react.com/materials/appendixA/)
 * [代码](https://github.com/bluebird89/webpack_for_react)
-* [vue-cli](https://vuejs-templates.github.io/webpack/)
+* [vue-cli document](https://vuejs-templates.github.io/webpack/)
 * [基于webpack的前后端分离开发环境实战](https://segmentfault.com/a/1190000009266900)
 * [webpack：从入门到真实项目配置](https://juejin.im/post/59bb37fa6fb9a00a554f89d2)
 * [petehunt/webpack-howto](https://github.com/petehunt/webpack-howto)
