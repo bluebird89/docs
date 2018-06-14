@@ -21,3 +21,4 @@ rustc --version
 
 * [文档](https://kaisery.gitbooks.io/rust-book-chinese/content/)
 * [The Rust Programming Language](https://doc.rust-lang.org/book/second-edition/index.html)
+* [rust-gentle-intro](https://stevedonovan.github.io/rust-gentle-intro/)
