@@ -1102,16 +1102,22 @@ getattr(obj, 'z', 404) # 获取属性'z'，如果不存在，返回默认值404 
 obj.y # 获取属性'y'
 hasattr(obj, 'power') # 有属性'power'吗？ True
 ```
+## DB
+
+db API DRIVER即数据库接口驱动:
+
+* [MySQLdb] is a native driver that has been developed and supported for over a decade by Andy Dustman.不支持python3 
+* [mysqlclient] is a fork of MySQLdb which notably supports Python 3 and can be used as a drop-in replacement for MySQLdb. At the time of this writing, this is the recommended choice for using MySQL with Django.
+* [MySQL Connector/Python] is a pure Python driver from Oracle that does not require the MySQL client library or any Python modules outside the standard library.
+
+### MySQL
+
+```sh
+sudo apt-get install libmysqlclient-dev
+pip install mysqlclient
+```
 
 ##### OOP高级
-
-## 框架
-
-* [django/django](https://github.com/django/django)The Web framework for perfectionists with deadlines. <https://www.djangoproject.com/>
-* [pallets/flask](https://github.com/pallets/flask)A microframework based on Werkzeug, Jinja2 and good intentions <http://flask.pocoo.org/>
-* [tornadoweb/tornado](https://github.com/tornadoweb/tornado)Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed. <http://www.tornadoweb.org/>
-
-## 搭建服务器todo
 
 ## 教程
 
@@ -1138,6 +1144,7 @@ hasattr(obj, 'power') # 有属性'power'吗？ True
 - matplotlib
 - scikit-learn
 - pandas
+* [kennethreitz/requests-html](https://github.com/kennethreitz/requests-html):Pythonic HTML Parsing for Humans™ http://html.python-requests.org
 
 ## 扩展
 
@@ -1327,10 +1334,6 @@ CMD ["python3"]
 * [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
 * [jobbole/awesome-python-cn](https://github.com/jobbole/awesome-python-cn):Python资源大全中文版，包括：Web框架、网络爬虫、模板引擎、数据库、数据可视化、图片处理等，由伯乐在线持续更新。
 * [Python 中文学习大本营](http://www.pythondoc.com/)
-
-## 类库
-
-* [kennethreitz/requests-html](https://github.com/kennethreitz/requests-html):Pythonic HTML Parsing for Humans™ http://html.python-requests.org
 
 ## 工具
 
