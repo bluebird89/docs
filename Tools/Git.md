@@ -45,7 +45,7 @@ fi
 
 * 全局配置: git config --global -l
   - /etc/gitconfig文件
-  - ubuntu:~/gitconfig:
+  - ubuntu:~/.gitconfig
 * 系统配置： `git config --system`
 * 项目配置：project/.git/config   `git config`
 * alias说明
@@ -963,7 +963,7 @@ git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -
 
 ## 功能
 
-### 管理第三方模块 git-submodule
+### git-submodule
 
 git submodule 主要用来管理一些单向更新的公共模块或底层逻辑。
 
@@ -972,8 +972,12 @@ git submodule 主要用来管理一些单向更新的公共模块或底层逻辑
 * 在你的项目 Repository 下产生一个 .gitmodules 文件，来记录你的 Submodule 信息，同时 another_project项目也clone下来.
 
 ```sh
-git submodule add git@domain.com:another_project.git file_path/another_project
+git submodule add git@domain.com:another_project.git file_path/another_project # 会添加一个.gitmodules文件在repository的根目录里
 git submodule foreach git pull  # 更新 repo 下所有的 submodules
+
+## clone
+git submodule init
+git submodule update
 
 # 首先删除.gitsubmodule中的项目配置
 git rm --cached another_project # 删除项目
