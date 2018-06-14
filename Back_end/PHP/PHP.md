@@ -1559,6 +1559,7 @@ spl_autoload_register
 - [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php):A curated list of amazingly awesome PHP libraries, resources and shiny things.
 - [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
 - [PHP Best Practices](https://phpbestpractices.org)
+- [php-fig/fig-standards](https://github.com/php-fig/fig-standards):Standards either proposed or approved by the Framework Interop Group http://www.php-fig.org/
 
 ## 工具
 

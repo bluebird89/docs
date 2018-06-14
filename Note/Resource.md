@@ -164,10 +164,14 @@
 * Teambition
 * Asana asana.com
 
-## 应用
+## 内容
 
 - 得到
 - 极客时间
+- 掘金
+- 开发者头条
+- 码农头条
+- 伯乐在线
 
 ### office
 

@@ -29,12 +29,11 @@ Redis是一个Key-Value结构的内存数据库，用它维护User Id和Token的
 code
 ```
 
-
 ## 工具
 
 * [fastlane/fastlane](https://github.com/fastlane/fastlane):🚀 The easiest way to automate building and releasing your iOS and Android apps https://fastlane.tools
 * [NervJS/taro](https://github.com/NervJS/taro):多端统一开发框架，支持用 React 的开发方式编写一次代码，生成能运行在微信小程序、H5、React Native 等的应用。 https://taro.aotu.io
-
+* [facebook/Sonar](https://github.com/facebook/Sonar):A desktop debugging platform for mobile developers. https://fbsonar.com
 ## 参考
 
 - [Tencent/VasSonic](https://github.com/Tencent/VasSonic)a lightweight and high-performance Hybrid framework developed by tencent VAS team, which is intended to speed up the first screen of websites working on Android and iOS platform.
