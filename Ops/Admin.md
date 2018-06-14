@@ -15,7 +15,6 @@
 
 Trello->Github->Jira-> Asana
 
-
 ## [tabler/tabler](https://github.com/tabler/tabler)
 
 Tabler is free and open-source HTML Dashboard UI Kit built on Bootstrap 4 https://tabler.github.io/
@@ -43,3 +42,4 @@ npm run serve
 * [PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin): 🎉 A magical vue admin http://panjiachen.github.io/vue-element-admin
 * [withspectrum/spectrum](https://github.com/withspectrum/spectrum):Simple, powerful online communities. https://spectrum.chat
 * [vue-bulma/vue-admin](https://github.com/vue-bulma/vue-admin):Vue Admin Panel Framework, Powered by Vue 2.0 and Bulma 0.3 https://admin.vuebulma.com
+* [almasaeed2010/AdminLTE](https://github.com/almasaeed2010/AdminLTE):AdminLTE - Free Premium Admin control Panel Theme Based On Bootstrap 3.x https://adminlte.io

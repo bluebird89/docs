@@ -179,7 +179,7 @@ Kubelet是Kubernetes集群中每个Minion和Master API Server的连接点，Kube
 ### minikube
 
 Minikube is a small setup by Kubernetes guys, which will spawn a virtual machine and have a tiny (but fully functional) Kubernetes cluster inside the VM.
-kubectl is the command line client you’ll use to connect to the Kubernetes cluster 
+kubectl is the command line client you’ll use to connect to the Kubernetes cluster
 
 * config file: `~/.kube/`
 * all the virtual machine bits:`~/.minikube/`
@@ -230,9 +230,10 @@ kubectl delete deployments hello-minikube1
 * [Kubernetes核心原理（二）之Controller Manager](http://blog.csdn.net/huwh_/article/details/75675761)
 * [Kubernetes核心原理（三）之Scheduler](http://blog.csdn.net/huwh_/article/details/77017353)
 * [Kubernetes核心原理（四）之Kubelet](http://blog.csdn.net/huwh_/article/details/77922293)
+* [feiskyer/kubernetes-handbook](https://github.com/feiskyer/kubernetes-handbook):Kubernetes Handbook （Kubernetes指南） https://kubernetes.feisky.xyzs
 
 https://www.centos.bz/2017/07/kubernetes-pod-schedule-intro/
 
-<http://violetgo.com/blogs/> 
-<http://www.winseliu.com/> 
+<http://violetgo.com/blogs/>
+<http://www.winseliu.com/>
 <http://blog.csdn.net/qq1010885678/article/details/48832067>
