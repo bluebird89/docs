@@ -94,10 +94,10 @@ java HelloWorld // 运行
   sudo vim /etc/tomcat7/tomcat-users.xml // 配置管理后台
   <tomcat-users>
     <user username="admin" password="password" roles="manager-gui,admin-gui"/>
-  </tomcat-users> 
+  </tomcat-users>
   sudo service tomcat8 restart
   访问 http://localhost:8080/docs/
-  访问 http://localhost:8080/examples/ 
+  访问 http://localhost:8080/examples/
   Virtual Host Manager http://localhost:8080/manager/html/
 ```
 
@@ -115,7 +115,7 @@ java HelloWorld // 运行
 sudo apt-get update
 sudo apt-get install default-jdk
 sudo groupadd tomcat
-sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat   // a home directory of /opt/tomcat (where we will install Tomcat)  with a shell of /bin/false (so nobody can log into the account) 
+sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat   // a home directory of /opt/tomcat (where we will install Tomcat)  with a shell of /bin/false (so nobody can log into the account)
 cd /tmp  // 存放临时文件
 curl -O http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.5/bin/apache-tomcat-8.5.5.tar.gz
 sudo mkdir /opt/tomcat
@@ -123,7 +123,7 @@ sudo tar xzvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
 sudo chgrp -R tomcat /opt/tomcat
 sudo chmod -R g+r conf
 sudo chmod g+x conf
-sudo chown -R tomcat webapps/ work/ temp/ logs/ 
+sudo chown -R tomcat webapps/ work/ temp/ logs/
 
 // /etc/systemd/system/tomcat.service
 [Unit]
@@ -184,7 +184,7 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 ## 线程
 
 * [Java 教程](http://www.runoob.com/java/)
-* [Java学习路线图](http://www.jianshu.com/p/d51551b0a8ba) 
+* [Java学习路线图](http://www.jianshu.com/p/d51551b0a8ba)
 * [史上最精炼JAVA知识点基础总结](http://www.jianshu.com/p/9caf1c755889)
 * [shuzheng/zheng](https://github.com/shuzheng/zheng):基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、支付中心、用户管理（支持第三方登录）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。 http://47.93.195.63/zheng-upms-server
 
@@ -195,9 +195,13 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 * [apache/tomcat](https://github.com/apache/tomcat)
 * [apache/jmeter](https://github.com/apache/jmeter)a 100% pure Java application designed to test and measure performance. It may be used as a highly portable server benchmark as well as multi-client load generator.
 * [alibaba/fastjson](https://github.com/alibaba/fastjson)A fast JSON parser/generator for Java
-* [Apache Camel](https://github.com/apache/camel) is a powerful open source integration framework based on known Enterprise Integration Patterns with powerful Bean Integration. 
+* [Apache Camel](https://github.com/apache/camel) is a powerful open source integration framework based on known Enterprise Integration Patterns with powerful Bean Integration.
 * [grpc/grpc-java](https://github.com/grpc/grpc-java)The Java gRPC implementation. HTTP/2 based RPC https://grpc.io
 * [alibaba/p3c](https://github.com/alibaba/p3c):Alibaba Java Coding Guidelines pmd implements and IDE plugin https://github.com/alibaba/p3c/wiki
+
+## 资源
+
+* [aalansehaiyang/technology-talk](https://github.com/aalansehaiyang/technology-talk)：汇总java生态圈常用技术框架、开源中间件，系统架构、项目管理、经典架构案例、数据库、常用三方库、线上运维等知识
 
 ## 参考
 

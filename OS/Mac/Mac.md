@@ -86,6 +86,7 @@ windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
   - [GPG Suite](https://gpgtools.org/)
   - [dashlane](https://www.dashlane.com/zh):密码管理工具
   - [spectacl](https://www.spectacleapp.com/):Move and resize windows with ease
+  - [wulkano/kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology https://getkap.co
 - vpn
   - Tunnelblick_3.7.2_build_4850：点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
 * 设计
