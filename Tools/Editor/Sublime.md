@@ -62,6 +62,8 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
 * FileDiffs: Shows diffs between the current file, or selection(s) in the current file, and clipboard, another file, or unsaved changes
 * Git:Plugin for some git integration into sublime text
 * GitGutter: A Sublime Text 2 and 3 plugin to see git diff in gutter
+* QuickGotoAnything
+* Go to definition
 * HTML-CSS-JS Prettify：格式化（美化）html、css、js三种文件类型的插件
 * JavaScript Patterns
 * jQuery:插件强大
@@ -513,7 +515,8 @@ ln -s ~/Dropbox/Sublime/User
 
 * [官网](http://www.sublimetext.com/3)
 * [总结配置](https://github.com/jikeytang/sublime-text)
+* [sublime-undocs](http://docs.sublimetext.info/en/latest/index.html#)
 * [](http://laravelacademy.org/post/6711.html)
 * [文档](http://www.sublimetext.com/docs/3)
 * [Sublime Text 全程指南](http://lucida.me/blog/sublime-text-complete-guide/)
-* 非官方文档：http://sublime-text-unofficial-documentation.readthedocs.org/ 甚至比官方文档还要全面！
+* [非官方文档](http://sublime-text-unofficial-documentation.readthedocs.org/)

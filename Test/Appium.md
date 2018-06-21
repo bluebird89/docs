@@ -24,7 +24,7 @@ Appium在Android上基于UIAutomator实现了测试的代理程序（Bootstrap.j
 
 ### 服务端
 
-* 视图安装 [appium/appium-desktop](https://github.com/appium/appium-desktop):Appium Server and Inspector in Desktop GUIs for Mac, Windows, and Linux 
+* 视图安装 [appium/appium-desktop](https://github.com/appium/appium-desktop):Appium Server and Inspector in Desktop GUIs for Mac, Windows, and Linux
 * 指令安装
     - node
     - npm install appium-doctor -g
@@ -35,7 +35,7 @@ Appium在Android上基于UIAutomator实现了测试的代理程序（Bootstrap.j
 # 配置环境变量  ANDROID_HOME JAVA_HOME
 brew install node
 brew install carthage
-install -g grunt-cli 
+install -g grunt-cli
 npm install -g appium # 安装appium-server
 npm install -g appium-doctor # 用于检测appium运行环境
 npm install -g wd # webdriver
@@ -51,4 +51,3 @@ appiumclient是对webdriver原生api的一些扩展和封装。它可以帮助�
 ## 参考
 
 * [appium/appium](https://github.com/appium/appium): 📱 Automation for iOS, Android, and Windows Apps. http://appium.io/
-
