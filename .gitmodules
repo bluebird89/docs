@@ -73,3 +73,6 @@
 [submodule "Note/Qix"]
 	path = Note/Qix
 	url = git@github.com:ty4z2008/Qix.git
+[submodule "WEB/developer-roadmap-chinese"]
+	path = WEB/developer-roadmap-chinese
+	url = git@github.com:goodjack/developer-roadmap-chinese.git
