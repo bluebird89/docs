@@ -1,4 +1,6 @@
-# wordpress
+# [WordPress/WordPress](https://github.com/WordPress/WordPress)
+
+WordPress, Git-ified. Synced via SVN every 15 minutes, including branches and tags! This repository is just a mirror of the WordPress subversion repository. Please do not send pull requests. Submit patches to https://core.trac.wordpress.org/ instead. https://wordpress.org/
 
 * 到 wordpress.com 注册帐户，获取用户的 API-Key，用来启用 Akismet 插件。Akismet 是 WordPress 下非常著名的反垃圾评论插件。
 * 修改永久链接结构：默认情况下，WordPress 的永久链接结构类似于 ../?p=123 ，但我们推荐使用有利于搜索引擎优化的 URL 结构。本文作者建议采用 …/%category%/%postname%
