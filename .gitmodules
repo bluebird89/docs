@@ -76,3 +76,6 @@
 [submodule "WEB/developer-roadmap-chinese"]
 	path = WEB/developer-roadmap-chinese
 	url = git@github.com:goodjack/developer-roadmap-chinese.git
+[submodule "WEB/developer-roadmap"]
+	path = WEB/developer-roadmap
+	url = git@github.com:kamranahmedse/developer-roadmap.git
