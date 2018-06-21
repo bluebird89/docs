@@ -51,7 +51,7 @@ describe('加法函数的测试', function() { it('1 加 1 应该等于 2', func
 
 
 - 使用
-- 
+
 ```
 mocha file1 (file2 file3) mocha --recursive:默认测试test目录里面的测试脚本 --recursive 递归执行 mocha spec/{my,awesome}.js // 支持shell 跟node通配符 mocha test/unit/_.js mocha 'test/**/_.@(js|jsx)' mocha test/{,_*/}_.{js,jsx} mocha --help, -h mocha --reporter, -R 指定测试报告的格式,默认是spec格式,其它tap mocha --reporters 显示所有内置的报告格式 mocha --watch，-w 监视指定的测试脚本。只要测试脚本有变化，就会自动运行Mocha mocha --bail, -b 只要有一个测试用例没有通过，就停止执行后面的测试用例 mocha --grep, -g 用于搜索测试用例的名称（即it块的第一个参数），然后只执行匹配的测试用例
 ```
