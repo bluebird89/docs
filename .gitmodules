@@ -79,3 +79,6 @@
 [submodule "WEB/developer-roadmap"]
 	path = WEB/developer-roadmap
 	url = git@github.com:kamranahmedse/developer-roadmap.git
+[submodule "Guide_lines/chinese-copywriting-guidelines"]
+	path = Guide_lines/chinese-copywriting-guidelines
+	url = git@github.com:sparanoid/chinese-copywriting-guidelines.git
