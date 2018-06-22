@@ -27,8 +27,4 @@
 * [iview/iview](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
 * [bootstrap-vue/bootstrap-vue](https://github.com/bootstrap-vue/bootstrap-vue/):BootstrapVue provides one of the most comprehensive implementations of Bootstrap 4 components and grid system for Vue.js and with extensive and automated WAI-ARIA accessibility markup. https://bootstrap-vue.js.org
 * [mui-org/material-ui](https://github.com/mui-org/material-ui):React components that implement Google's Material Design. https://material-ui.com
-
-## 资源
-
-* [dribbble](https://dribbble.com/)
-* [iconfont](http://iconfont.cn/)
+* [airbnb/Lona](https://github.com/airbnb/Lona):A tool for defining design systems and using them to generate cross-platform UI code, Sketch files, and other artifacts.

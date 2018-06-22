@@ -1270,12 +1270,6 @@ These features allow to pause a branch development and switch to another one (_"
 
 chown -R henry:henry .git/objects
 
-## 学习
-
-* [练习沙盒](https://try.github.io)
-* [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
-* [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
-
 ## 文档
 
 * Git User Manual：`man git`
@@ -1291,6 +1285,9 @@ chown -R henry:henry .git/objects
 * [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
 * [Git权威指南](http://www.worldhello.net/):GotGitHub
 * [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
+* [练习沙盒](https://try.github.io)
+* [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
+* [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub): :octocat:分享 GitHub 上好玩、容易上手的项目，帮你找到编程的乐趣。欢迎推荐、自荐项目，让更多人知道你的项目star
 
 ## 工具
 
