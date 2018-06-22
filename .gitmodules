@@ -82,3 +82,6 @@
 [submodule "Guide_lines/chinese-copywriting-guidelines"]
 	path = Guide_lines/chinese-copywriting-guidelines
 	url = git@github.com:sparanoid/chinese-copywriting-guidelines.git
+[submodule "Front_end/fks"]
+	path = Front_end/fks
+	url = git@github.com:JacksonTian/fks.git

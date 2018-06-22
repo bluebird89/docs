@@ -38,6 +38,7 @@ npm install -g typescript
 ## 工具
 
 * [ry/deno](https://github.com/ry/deno):A secure TypeScript runtime on V8
+* [DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped):The repository for high quality TypeScript type definitions. http://definitelytyped.org/
 
 ## 参考
 
