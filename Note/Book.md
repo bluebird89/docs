@@ -231,6 +231,7 @@
 * 《[Python绝技：运用Python成为顶级黑客](https://www.amazon.cn/gp/product/B019ZRGBVU)》
 * 《[Flask Web开发:基于Python的Web应用开发实战](https://www.amazon.cn/gp/product/B0153177A6)》
 * 《用 Python 写网络爬虫》
+* 《[深度学习:基于Keras的Python实践](https://www.amazon.cn/gp/product/B07D5855F4)》
 
 ## Go
 
