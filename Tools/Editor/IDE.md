@@ -1,10 +1,13 @@
 # IDE
 
-- IntelliJ IDEA
+- IntelliJ IDEA:业界被公认为最好的java开发工具之一
 - PyCharm
 - PHPStrom
-- WebStorm
+- WebStorm:一款JavaScript 开发工具
 - [Komodo IDE](https://www.activestate.com/)
+- CLion:专为C/C++所创建的跨平台IDE
+- AppCode:用于帮助开发 Mac、iPhone 和 iPad 的应用程序
+- RubyMine:供了一个综合的Ruby编码编辑器
 
 ## PHPStrom
 
