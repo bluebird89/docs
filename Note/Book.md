@@ -4,11 +4,8 @@
 
 * 《[图灵的秘密:他的生平、思想及论文解读](https://www.amazon.cn/gp/product/B00AAQXKXS)》
 * 《[计算机系统概论](https://www.amazon.cn/gp/product/B0011F9OQE)》
-* 《[深入理解Linux内核](https://www.amazon.cn/gp/product/B0011F5RYM)》
-* 《[深入Linux内核架构](https://www.amazon.cn/gp/product/B003QN7J7U)》
+
 * 《[TCP/IP详解 卷1：协议](https://www.amazon.cn/gp/product/B00116OTVS)》
-* 《[Linux系统编程（第2版）](https://www.amazon.cn/gp/product/B00JUM2ML4)》
-* 《[Linux内核设计与实现（第3版）](https://www.amazon.cn/gp/product/B004X3Z3D4)》奠定基础的书籍。
 * 《[深入理解计算机系统（原书第2版）](https://www.amazon.cn/gp/product/B004BJ18KM)》
 * 《[计算机程序的构造和解释（Structure and Interpretation of Computer Programs）](https://www.amazon.cn/gp/product/B0011AP7RY)》
 * 《[编码：隐匿在计算机软硬件背后的语言](https://www.amazon.cn/gp/product/B009RSXIB4)》
@@ -24,13 +21,23 @@
 * 《计算机程序设计艺术（The Art of Computer Programming）》
 * 《编译原理》
 * 《编码:隐匿在计算机软硬件背后的语言CODE: The Hidden Language of Computer Hardware and Software》
-* 《Linux多线程服务端编程》
 * 《设计模式 可复用面向对象软件的基础》
-* 《鸟哥的Linux私房菜:基础学习篇(第3版)》
 * 《现代操作系统(原书第3版) 》
 * 《操作系统:精髓与设计原理(原书第6版)》
-* 《鸟哥的Linux私房菜:服务器架设篇(第3版)》
 * 《uinx网络高级编程》
+
+## Linux
+
+* 《[深入理解Linux内核](https://www.amazon.cn/gp/product/B0011F5RYM)》
+* 《[深入Linux内核架构](https://www.amazon.cn/gp/product/B003QN7J7U)》
+* [Linux系统编程（第2版）](https://www.amazon.cn/gp/product/B00JUM2ML4)》
+* 《[Linux内核设计与实现（第3版）](https://www.amazon.cn/gp/product/B004X3Z3D4)》奠定基础的书籍
+* LINUX操作系统(第2版)
+* LINUX指令范例速查手册
+* 《Linux多线程服务端编程》
+* 《鸟哥的Linux私房菜:服务器架设篇(第3版)》
+* 《鸟哥的Linux私房菜:基础学习篇(第3版)》
+* Linux运维之道
 
 ## 编程通用
 
@@ -106,11 +113,13 @@
 * 《[HTML5 权威指南](https://www.amazon.cn/gp/product/B00H706BIG)》
 * 《[HTML5 秘籍（第2版）](https://www.amazon.cn/gp/product/B015316VJY)》
 * 《[HTML5 与 CSS3 基础教程（第八版）](https://www.amazon.cn/gp/product/B00K58535O)》
+* HTML 5从入门到精通
 * 《Head First HTML 与 CSS (第2版)》
 
 ### Javascript
 
 * 《Javascript 权威指南》
+* 《Javascript高级编程》
 * 《JavaScript 高级程序设计(第3版)》
 * 《ES6 标准入门(第2版)》
 * 《深入理解ES6》
@@ -236,6 +245,7 @@
 ## Go
 
 * 《Go 语言实战》
+* Go语言程序设计
 
 ## Ruby
 
@@ -253,6 +263,11 @@
 * 《SQL 反模式》
 * 《数据库系统概念》
 
+## MongoDB
+
+* MongoDB大数据处理权威指南（第2版）
+* NoSQL数据库技术实战
+
 ## 架构/性能
 
 * 《[微服务设计](https://www.amazon.cn/gp/product/B01ER75V6O)》
@@ -266,8 +281,12 @@
 * 《[恰如其分的软件架构：风险驱动的设计方法](https://www.amazon.cn/gp/product/B00EP6TGAU)》
 * 《[软件系统架构：使用视点和视角与利益相关者合作（第2版）](https://www.amazon.cn/gp/product/B00CMMUXC4)》
 * 《图解服务器端网络架构》
-* 《大型网站技术架构:核心原理与案例分析》
 * 《大型分布式网站架构设计与实践》
+* 大型分布式网站架构设计与实践
+
+## Docker
+
+* Docker 容器与容器云
 
 ## 客户端
 
@@ -298,6 +317,7 @@
 ## DevOps
 
 * DevOps实践指南
+* 构建高可用Linux服务器（第3版）
 
 ## 机器学习和数据挖掘
 

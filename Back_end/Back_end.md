@@ -23,11 +23,15 @@
     - solr
 * OOP
 * 前端：Javascript、XHTML、CSS、DIV ，Javascript 框架
+* HTTP协议
 * 数据库：Mysql 优化、能创建高效的索引
+* nosql
+* 消息中间件
+* 模版引擎
+* Linux与应用部署，Shell脚本
 * 缓存：
     * Memcache
     * Redis
-* Linux：Shell脚本
 * 服务化
 
 ## 业务能力
