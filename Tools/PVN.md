@@ -158,3 +158,4 @@ pip install shadowsocks
 ## 参考
 * [Shadowsocks (简体中文)](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 * [openvpn](https://help.ubuntu.com/lts/serverguide/openvpn.html)
+* [gfwlist/gfwlist](https://github.com/gfwlist/gfwlist):The one and only one gfwlist here

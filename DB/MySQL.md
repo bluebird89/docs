@@ -6,6 +6,7 @@ Open source relational database management system
 
 * MariaDB
 * Percona分支版本，它是一个相对比较成熟的、优秀的MySQL分支版本，在性能提升、可靠性、管理型方面做了不少改善。它和官方ORACLE MySQL版本基本完全兼容，并且性能大约有20%以上的提升。
+* Mysql 5.7 这个版本因为增加了些新特性，普通的软件工程师未必能 Hold 住
 * 8.0
     - 更好的性能：读/写工作负载、IO 密集型工作负载、以及高竞争（"hot spot"热点竞争问题）工作负载。
     - 文档存储也为 schema-less 模式的 JSON 文档提供了多文档事务支持和完整的 ACID 合规性

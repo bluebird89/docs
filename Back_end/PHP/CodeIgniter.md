@@ -1,5 +1,9 @@
 # CodeIgniter
 
+## 版本
+
+* CodeIgniter 3 这类不完全兼容 PHP7 的但是轻量级的框架
+
 ## 参考
 
 - [bcit-ci/CodeIgniter](https://github.com/bcit-ci/CodeIgniter):Open Source PHP Framework (originally from EllisLab) <https://codeigniter.com/>
