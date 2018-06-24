@@ -232,7 +232,6 @@ http {
 
 http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
 
-
 * First, the incoming URI will be normalized even before any of the location matching takes place. For example, First it will decode the “%XX” values in the URL.
 * It will also resolve the appropriate relative path components in the URL, if there are multiple slashes / in the URL, it will compress them into single slash etc. Only after this initial normalization of the URL, the location matching will come into play.
 * When there is no location modifier, it will just be treated as a prefix string to be matched in the URL.
@@ -523,6 +522,11 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 }
+
+# 配置跨域请求
+add_header Access-Control-Allow-Origin *;
+add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"; # Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight response.
+add_header Access-Control-Allow-Methods "GET, POST, OPTIONS"; # Content-Type is not allowed by Access-Control-Allow-Headers in preflight response.
 ```
 
 文件 B配置会根据url/documents 去 root/doucuments/去匹配文件
@@ -592,6 +596,44 @@ if ($http_user_agent = MSIE) {
 }
 
 rewrite ^/linux/(.*)$ /linux.php?distro=$1 last;
+```
+
+## 代理
+
+正向代理:正向代理发生在 client 端，用户能感知到的，并且是用户主动发起的代理。
+反向代理:发生在 server端，从用户角度看是不知道发生了代理的
+
+```
+#将请求"http:127.0.0.1:80/helloworld" 转向服务器 "http://127.0.0.1:8081"
+server {
+        listen       80;
+        server_name  127.0.0.1;
+
+        location /helloworld {
+             proxy_pass     http://127.0.0.1:8081; # 表明了所代理的服务器
+}
+
+# websocket的反向代理配置
+server {
+    listen 9000; # 监听9000端口
+    server_name   websocket_server;
+
+    # 允许跨域
+    add_header Access-Control-Allow-Origin *;
+    add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+    add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+    if ($request_method = 'OPTIONS') {
+        return 204;
+    }
+
+    location / {
+        #添加wensocket代理
+        proxy_pass http://127.0.0.1:9093;  # websocket服务器。不用管 ws://
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}
 ```
 
 ## docker 配置
