@@ -136,6 +136,7 @@ vi /etc/fstab   #添加以下代码。实现开机自动挂载
 
 ```sh
 df -T
+grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
 ```
 
 ## 软件
@@ -740,7 +741,7 @@ vim /etc/samba/smb.conf # 添加下列设定
 
 [share]
 comment=This is samba dir
-path=/home/myshare  
+path=/home/myshare
 create mask=0755
 directory mask=0755
 writeable=yes
@@ -1180,6 +1181,7 @@ sudo aptitude -f install <packagename>
 ## 工具
 
 * [backup/backup](https://github.com/backup/backup):Easy full stack backup operations on UNIX-like systems. http://backup.github.io/backup/v4/
+* [gopasspw/gopass](https://github.com/gopasspw/gopass):The slightly more awesome standard unix password manager for teams https://www.gopass.pw/
 
 systemctl unmask mysql.service
 service mysql start

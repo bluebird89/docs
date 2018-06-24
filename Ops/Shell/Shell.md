@@ -554,3 +554,4 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 * [svenstaro/genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator https://svenstaro.github.io/genact/
 * [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
 * [](https://www.noobslab.com/)
+* [kentcdodds/cross-env](https://github.com/kentcdodds/cross-env)

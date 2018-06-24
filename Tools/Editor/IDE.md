@@ -225,6 +225,10 @@ http://idea.lanyus.com
 
 livetemplate
 
+## 工具
+
+* [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/
+
 ## 参考
 
 * [ChrisRM/material-theme-jetbrains](https://github.com/ChrisRM/material-theme-jetbrains#installation):JetBrains theme of Material Theme
