@@ -1,4 +1,6 @@
-# Metor
+# [meteor/meteor](https://github.com/meteor/meteor)
+
+Meteor, the JavaScript App Platform https://www.meteor.com
 
 ## 安装
 
@@ -11,7 +13,6 @@ meteor
 
 ## 参考
 
-* [meteor/meteor](https://github.com/meteor/meteor)：Meteor, the JavaScript App Platform https://www.meteor.com
 * [TUTORIALS](https://www.meteor.com/tutorials)
 * [guide](https://guide.meteor.com/)
 
