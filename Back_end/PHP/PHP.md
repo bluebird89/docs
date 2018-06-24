@@ -189,6 +189,21 @@ date.timezone = Asia/Shanghai
 
 ![PHP 的架构](../../_static/php_construct.jpg "Optional title")
 
+## 配置
+
+* memory_limit 这个用于设定单个 PHP 进程可以使用的系统内存最大值，从系统可用性上来讲建议越大越好。
+    - PHP 操作 Redis Set 集合。修改配置
+    - 如果您的项目中每页页面使用的内存不大，建议改成小一些，这样可以承载更多的并发处理。
+    - PHP 脚本中调用 memory_get_peak_usage()函数多次测试自己项目脚本
+* Zend OPcache 扩展
+* max_execution_time 用于设置单个 PHP 进程在终止之前最长可运行时间
+* Session 会话放在 Redis 或者 Memcached 中，这么做不仅可以减少磁盘的 IO 操作频率，还可以方便业务服务器伸缩。如果想把会话数据保存在 Memcached 中，需要做如下配置：
+
+```
+session.save_handler = 'memcached'
+session.save_path = '127.0.0.1:11211'
+```
+
 ## CGI vs Cli
 
 ### Cli
