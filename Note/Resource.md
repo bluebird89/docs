@@ -148,6 +148,8 @@
 ## 学习
 
 * [Coursera](https://www.coursera.org/)
+* [](https://www.udacity.com/ )
+* [](https://www.edx.org/)
 * [LeetCode](http://leetcode.com/):[中文](https://leetcode-cn.com/)
 * [网易公开课]()
 * [Creativelive](https://www.creativelive.com/)
@@ -234,6 +236,7 @@
 
 * [没有了老师，该如何学习？](http://www.cnblogs.com/qianqian-li/p/6028745.html)
 * [How To Ask Questions The Smart Way](http://www.catb.org/esr/faqs/smart-questions.html)
+* [lifesinger](https://github.com/lifesinger/blog):岁月如歌
 
 ## Podcast
 

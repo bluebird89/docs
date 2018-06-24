@@ -250,6 +250,19 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 * Set-Cookie：设置和页面关联的 Cookie
 * WWW-Authenticate：客户应该在 Authorization 头中提供什么类型的授权信息？在包含401(Unauthorized) 状态行的应答中这个头是必需的
 
+### 预检请求（preflight request）
+
+CROS,全称是跨域资源共享 (Cross-origin resource sharing)，它的提出就是为了解决跨域请求的。
+
+跨域资源共享(CORS)标准新增了一组 HTTP 首部字段，允许服务器声明哪些源站有权限访问哪些资源。
+规范要求，对那些可能对服务器数据产生副作用的HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求），浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求。服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 Cookies 和 HTTP 认证相关数据）。
+
+Content-Type不属于以下MIME类型的，都属于预检请求,"预检"请求会带上头部信息 Access-Control-Request-Headers: Content-Type:
+
+application/x-www-form-urlencoded
+multipart/form-data
+text/plain
+
 ### Content Type
 
 用来向浏览器和服务器提供信息，表示该 URL 对应的资源类型。服务端通常是根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对主体进行解析。
