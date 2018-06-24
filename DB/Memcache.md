@@ -63,7 +63,6 @@ telnet
 * delete key
 * incr|decr key increment_value:数据必须是十进制的32位无符号整数
 * stats 命令用于返回统计信息例如 PID(进程号)、版本号、连接数
-* 
 
 ```
 telnet HOST PORT
