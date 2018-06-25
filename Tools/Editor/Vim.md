@@ -493,16 +493,6 @@ r       对单词字符进行替换
 J       合并上下两行
 ```
 
-### [neovim/neovim](https://github.com/neovim/neovim)
-
-Vim-fork focused on extensibility and usability https://salt.bountysource.com/teams/n…
-
-```sh
-brew install neovim
-
-nvim # 启动
-```
-
 ### Macvim
 
 ## [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim)
