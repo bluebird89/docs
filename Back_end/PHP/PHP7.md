@@ -158,4 +158,3 @@ print($mathOperationsObj->doOperation());
 ## 禁止
 
 *  不要使用 mysql_ 函数：把它们从核心中全部移除了
-*  

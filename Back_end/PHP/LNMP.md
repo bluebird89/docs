@@ -940,4 +940,3 @@ openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=US/ST=State/L
 * [lj2007331/oneinstack](https://github.com/lj2007331/oneinstack):OneinStack - A PHP/JAVA Deployment Tool https://oneinstack.com/
 * [cytopia/devilbox](https://github.com/cytopia/devilbox):A modern dockerized LAMP and MEAN stack alternative to XAMPP http://devilbox.org
 * [lj2007331/lnmp](https://github.com/lj2007331/lnmp):LEMP stack/LAMP stack/LNMP stack installation scripts for CentOS/Redhat Debian and Ubuntu https://blog.linuxeye.cn/31.html
-*

@@ -41,7 +41,7 @@ Selenium Grid是一种自动化的测试辅助工具，Grid通过利用现有的
 
 ### selenium 2.0
 
-　　selenium 2.0 = selenium 1.0 + WebDriver 
+　　selenium 2.0 = selenium 1.0 + WebDriver
 
 　　需要强调的是，在selenium 2.0 中主推的是WebDriver ，WebDriver 是selenium RC 的替代品，因为 selenium 为了向下兼容性，所以selenium RC 并没有彻底抛弃，如果你使用selenium开发一个新自动化测试项目，强列推荐使用WebDriver 。那么selenium RC 与webdriver 主要有什么区别呢？
 
@@ -53,7 +53,7 @@ Selenium Grid是一种自动化的测试辅助工具，Grid通过利用现有的
 
 ## 学习路线
 
-需要熟悉webdriver API 
+需要熟悉webdriver API
 先学习元素的定位，selenium 提供了id、name、class name、 tag name、link text、partial link text、 xpath、css、等定位方法。xpath和css 功能强大语法稍微复杂，在这其间你可能还需要了解更多的前端知识。xml ,javascript 等。
 
 定位元素的目的是为了操作元素，接就要学习各种元素有操作，输入框，下拉框，按钮点击，文件上传、下载，分页，对话框，警告框...等等。
