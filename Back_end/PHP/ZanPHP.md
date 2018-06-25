@@ -1,6 +1,6 @@
-# 框架
+# [Zan PHP Framework](https://github.com/youzan/zanphp)
 
-- [Zan PHP Framework](https://github.com/youzan/zanphp):<http://zanphp.io/> PHP开发面向C10K+的高并发SOA服务和RPC服务首选框架
+<http://zanphp.io/> PHP开发面向C10K+的高并发SOA服务和RPC服务首选框架
 
 ## 核心特性
 
@@ -33,15 +33,10 @@ ZanPHP 和 Golang 的边界是：ZanPHP做业务系统；Golang 做平台系统�
 
 当然对于致力于终身coding的码农来说：Java依然是很难跨过去的坎。
 
-## 官方文档
-
-Zan PHP 的文档仓库地址：[zanphp-doc](https://github.com/youzan/zanphp-doc)。
-
-在线查看文档 [http://zanphpdoc.zanphp.io/ ✈](http://zanphpdoc.zanphp.io/)
-
-## 常用链接
+## 参考
 
 - [zan-doc](https://github.com/youzan/zanphp-doc) - Zan PHP 开发者文档
+- [在线查看文档 ](http://zanphpdoc.zanphp.io/)
 - [zan-installer](https://github.com/youzan/zan-installer) - Zan PHP 脚手架工具
 - [zanhttp](https://github.com/youzan/zanhttpdemo) - Zan PHP HTTP demo
 - [zantcp](https://github.com/youzan/zantcpdemo) - Zan PHP TCP demo

@@ -9,7 +9,7 @@
 * [arialdomartini/Back-End-Developer-Interview-Questions](https://github.com/arialdomartini/Back-End-Developer-Interview-Questions):A list of helpful back-end related questions you can use to interview potential candidates, test yourself or completely ignore.
 * [MaximAbramchuck/awesome-interview-questions](https://github.com/MaximAbramchuck/awesome-interview-questions)::octocat: A curated awesome list of lists of interview questions. Feel free to contribute! 🎓 https://github.com/BotCube/awesome-bots
 * [kdn251/interviews](https://github.com/kdn251/interviews):Everything you need to know to get the job.
-* [ElemeFE/node-interview](https://github.com/ElemeFE/node-interview):How to pass the Node.js interview of ElemeFE. 
+* [ElemeFE/node-interview](https://github.com/ElemeFE/node-interview):How to pass the Node.js interview of ElemeFE.
 * [alex/what-happens-when](https://github.com/alex/what-happens-when):An attempt to answer the age old interview question "What happens when you type google.com into your browser and press enter?"
 
 ## 简历工具
@@ -24,7 +24,6 @@
 
 * 数据结构与算法
 * 大流量与并发
-
 
 ## Job
 
@@ -48,7 +47,7 @@
 * 你的价格是市场决定的，而不是你的能力。
 * 真正让你成为Java大牛的是你懂的不同语言的哲学，懂得不同场景下发挥出Java的优势，规避Java的劣势，深知Java的优缺点。而不是抱着Java是最好的语言，写一辈子Java。
 * 在Web这条线上想走到高P，基本上都是走业务架构这条路，这考验的就是大局观了。你只会一个前端或者一个Java根本不够格。纯粹研究技术上P10的基本上属于蜀道难了——说的清楚点，对于传统的Web开发工程师（前后端）不通过管理走高P基本上只有往架构方向走，这个时候靠的是你全面的能力和良好的大局观,你当初的那些前端技术、后端技术就是个敲门砖。
-* 
+
 ## 资源
 
 - [lukasz-madon/awesome-remote-job](https://github.com/lukasz-madon/awesome-remote-job):A curated list of awesome remote jobs and resources. Inspired by https://github.com/vinta/awesome-python
