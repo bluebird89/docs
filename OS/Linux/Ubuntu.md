@@ -828,7 +828,13 @@ sudo apt-get purge linux-image-3.5.0-27-generic
 sudo dpkg -P linux-image-extra-3.5.0-17-generic
 ```
 
-> top
+> sudo: /usr/lib/sudo/sudoers.so must be owned by uid 0
+> sudo: fatal error, unable to load plugins
+
+pkexec chown root /usr/lib/sudo/sudoers.so
+chown root /usr/lib/sudo/sudoers.so
+
+## top
 
 用来监控Linux系统状况，比如cpu、内存的使用
 
