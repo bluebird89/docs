@@ -13,7 +13,15 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 
 sudo apt-get update && sudo apt-get install yarn
 
+# ubuntu has access problem
+
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+export PATH=~/.npm-global/bin:$PATH  # Open or create a ~/.profile file and add this line
+source ~/.profile
+
 npm install -g yarn
+
 brew install yarn
 ```
 
