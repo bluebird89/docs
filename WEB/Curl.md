@@ -12,7 +12,7 @@ curl -X POST \
   -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
   -F 'html=@/example'
 
-curl http://www.baidu.com 
+curl http://www.baidu.com
 curl http://www.baidu.com > /tmp/baidu.html # save html
 
 curl -o /tmp/baidu.html http://www.baidu.com # 保存文件

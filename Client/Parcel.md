@@ -4,16 +4,16 @@
 
 ## 使用
 
-```sh
+```
 npm install -g parcel-bundler
 
 npm init -y
 npm install parcel-bundler -S
 
 "scripts": {
- "dev": "parcel index.html -p 3030",
- "build": "parcel build index.html"
- }
+    "dev": "parcel index.html -p 3030",
+    "build": "parcel build index.html"
+}
 
 npm install babel-preset-env -S
 # .babelrc 文件，添加以下配置

@@ -7,5 +7,4 @@
 
 ```sh
 brew install homebrew/php/php71-xdebug
-
 ```
