@@ -96,7 +96,6 @@
 * [pagespeed](https://developers.google.com/speed/pagespeed/)
 * [元素加载时间具体耗时](http://www.webpagetest.org/)
 
-
 ## 参考
 
 * [GoogleChrome/lighthouse](https://github.com/GoogleChrome/lighthouse):Auditing, performance metrics, and best practices for Progressive Web Apps

@@ -1,5 +1,6 @@
-# Laravel
+# [laravel/laravel](https://github.com/laravel/framework)
 
+A PHP Framework For Web Artisans https://laravel.com
 
 ## 环境
 
@@ -1384,7 +1385,6 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [laravel/lumen-framework](https://github.com/laravel/lumen-framework)
 * [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
 * [laravel/framework](https://github.com/laravel/framework):
-* [laravel/laravel](https://github.com/laravel/framework):A PHP Framework For Web Artisans https://laravel.com
 * [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
 * [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
 * [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp.

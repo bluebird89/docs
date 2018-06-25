@@ -31,7 +31,7 @@ Windows10 LTSB
 * RSS:深蓝阅读 theoldreader
 * Foxit Reader
 * editor：Visual Studio Code
-* Sumatra PDF:pdf 支持 EPUB、MOBI 格式的电子书，以及 XPS、DjVu、CHM 
+* Sumatra PDF:pdf 支持 EPUB、MOBI 格式的电子书，以及 XPS、DjVu、CHM
 * 命令行：xshell
 * 电子书管理神器：Calibre
 * CCleaner, Defraggler, Recuva & Speccy.
@@ -126,8 +126,8 @@ restart system
 cmd + r input:bash download ubuntu
 
 # cmd 打开命令提示符，输入以下内容
-FTYPE Paint.Picture=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1 
-FTYPE jpegfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1 
+FTYPE Paint.Picture=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1
+FTYPE jpegfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1
 FTYPE pngfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1
 ```
 

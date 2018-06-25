@@ -11,7 +11,6 @@
 > 故说般若波罗蜜多咒，即说咒曰：揭谛揭谛　波罗揭谛　波罗僧揭谛　菩提萨婆诃。
 
 
-
 > New York is 3 hours ahead of California,
 > but it does not make California slow.
 > Someone graduated at the age of 22,
@@ -25,14 +24,14 @@
 > Obama retires at 55,
 > but Trump starts at 70.
 > Absolutely everyone in this world works based on their Time Zone.>
-
+>
 > People around you might seem to go ahead of you,
 > some might seem to be behind you.
 > But everyone is running their own RACE, in their own TIME.
 > Don’t envy them or mock them.
 > They are in their TIME ZONE, and you are in yours!
 > Life is about waiting for the right moment to act.>
-
+>
 > So, RELAX.
 > You’re not LATE.
 > You’re not EARLY.

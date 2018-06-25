@@ -22,9 +22,6 @@
 [submodule "Back_end/PHP/awesome-php"]
 	path = Back_end/PHP/awesome-php
 	url = git@github.com:ziadoz/awesome-php.git
-[submodule "JavaScript/React/awesome-react-native"]
-	path = JavaScript/React/awesome-react-native
-	url = git@github.com:jondot/awesome-react-native.git
 [submodule "Architect/architect-awesome"]
 	path = Architect/architect-awesome
 	url = git@github.com:xingshaocheng/architect-awesome.git

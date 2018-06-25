@@ -9,7 +9,7 @@ Sikka Practice Mobilizer is an integrated suite of tools offering full control o
 This API to optimize fees for your practice.
 
 Parameter |   Description | Required?
-------- | -------- | ------- 
+------- | -------- | -------
 request_key | Valid 32 characters alpha-numeric request key |   Yes
 practice_id|  Practice ID|  Yes
 startdate  |  format: yyyy-mm-dd, start date |  Yes

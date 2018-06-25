@@ -1,6 +1,6 @@
-# Symfony
+# [symfony/symfony](https://github.com/symfony/symfony)
 
-Fabien Potencier
+The Symfony PHP framework http://symfony.com. Fabien Potencier
 
 ## 安装
 
@@ -14,7 +14,6 @@ php bin/console server:start 0.0.0.0:8000
 
 ## 框架
 
-* [symfony/symfony](https://github.com/symfony/symfony):The Symfony PHP framework http://symfony.com
 * [Documentation](https://symfony.com/doc/current/index.html)
 * [官网](https://symfony.com/)
 * [](https://github.com/symfony/symfony-standard)

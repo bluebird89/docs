@@ -42,7 +42,7 @@ vagrant box list              # 列表
 
 vagrant box add {title} {url}       # 添加镜像 title ubuntu/trusty64 [laravel/homestead](https://vagrantcloud.com/laravel/boxes/homestead/versions/3.0.0/providers/virtualbox.box)外网不稳定，可以试着换时间下载
 vagrant box add ubuntu/trusty64 # 通过包名先去本地是否存在，没有去仓库下载，下载的版本在上述命令行下加入 --box-version=版本号
-vagrant box add hahaha ~/box/package.box # 加载本地文件(package包) 
+vagrant box add hahaha ~/box/package.box # 加载本地文件(package包)
 vagrant box add precise64 http://files.vagrantup.com/precise64.box
 
 vagrant box remove name       # 移除镜像
@@ -59,7 +59,7 @@ box下载
 // 新建metadata.json
 {
     "name": "laravel/homestead",            //盒子名称
-    "versions": 
+    "versions":
     [
         {
             "version": "0.4.4",             //版本号
@@ -97,7 +97,7 @@ vagrant halt      # 关闭虚拟机
 
 vagrant ssh      # SSH 至虚拟机
 vagrant ssh web/dbmaster
-vagrant ssh-config 
+vagrant ssh-config
 
 vagrant reload  # 重新启动虚拟机，主要用于重新载入配置文件
 vagrant reload --provision #系统更新配置文件的命令
@@ -207,7 +207,7 @@ Vagrant.configure("2") do |config|
     #   apt-get update
     #   apt-get install -y apache2
     # SHELL
-    # 
+    #
     # config.vm.provision :shell, :path => “initialize.sh”
 end
 
@@ -222,7 +222,7 @@ Vagrant.configure("2") do |config|
         web.vm.provider "virtualbox" do |v|
               v.customize ["modifyvm", :id, "--name", "web", , "--cpuexecutioncap", "40" ]
         # web.vm.customize [ "modifyvm", :id, "--name", "web", "--cpuexecutioncap", "50" ]
-        end 
+        end
     end
 
     config.vm.define :dbmaster do |dbmaster|
@@ -308,7 +308,7 @@ sudo apt-get install virtualbox-guest-utils # ubuntu
 
 sudo find / -name VBoxGuestAdditions.iso #  centos  文件位于VirtualBox安装文件夹下
 mount /dev/cdrom /cdrom #( 该cdrom是我在/目录下创建的文件夹)
-cd /cdrom; 
+cd /cdrom;
 sh ./VBoxLinuxAdditions.run
 vagrant up
 ```
@@ -317,5 +317,5 @@ vagrant up
 
 * [Parallels/vagrant-parallels](https://github.com/Parallels/vagrant-parallels)Vagrant Parallels Provider
 * [Vagrant Documentation](https://www.vagrantup.com/docs/)
-* [官网](https://app.vagrantup.com/boxes/search?provider=virtualbox) 比如：https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.4/providers/virtualbox.boxes 
+* [官网](https://app.vagrantup.com/boxes/search?provider=virtualbox) 比如：https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.4/providers/virtualbox.boxes
 * [资源](http://www.vagrantbox.es/)
