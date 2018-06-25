@@ -1,4 +1,6 @@
-# Zepto
+# [madrobby/zepto](https://github.com/madrobby/zepto)
+
+Zepto.js is a minimalist JavaScript library for modern browsers, with a jQuery-compatible API http://zeptojs.com
 
 Zepto是一个轻量级的针对现代高级浏览器的JavaScript库，只针对移动端浏览器编写，因此体积更小、效率更高，更重要的是，它的 API 完全仿照 jQuery，如果你会用jquery，那么你也会用zepto。
 
