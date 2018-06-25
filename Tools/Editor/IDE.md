@@ -18,8 +18,8 @@ ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/loca
 会在根目录下生成文件夹./php，其中有config and system, 自定义配置：Create the file "idea.properties" and open it in an editor. Set theidea.system.path and/or idea.config.path variables as desired, for example:
 
 ```
- idea.system.path=~/custom/system
- idea.config.path=~/custom/config
+idea.system.path=~/custom/system
+idea.config.path=~/custom/config
 
 ## phpstrom activate server:
 http://idea.iteblog.com/key.php
@@ -228,6 +228,8 @@ livetemplate
 ## 工具
 
 * [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/
+* [cdoco/jetbrains-license-server](https://github.com/cdoco/jetbrains-license-server)
+* [](https://www.jianshu.com/p/133af2e4fe3f)
 
 ## 参考
 
