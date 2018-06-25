@@ -85,3 +85,12 @@
 [submodule "Client/React/awesome-react-native"]
 	path = Client/React/awesome-react-native
 	url = git@github.com:jondot/awesome-react-native.git
+[submodule "Guide_lines/api-guidelines"]
+	path = Guide_lines/api-guidelines
+	url = git@github.com:Microsoft/api-guidelines.git
+[submodule "API/Awesome_APIs"]
+	path = API/Awesome_APIs
+	url = git@github.com:TonnyL/Awesome_APIs.git
+[submodule "API/API-Security-Checklist"]
+	path = API/API-Security-Checklist
+	url = git@github.com:shieldfy/API-Security-Checklist.git
