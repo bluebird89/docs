@@ -972,14 +972,17 @@ git submodule 主要用来管理一些单向更新的公共模块或底层逻辑
 * 在你的项目 Repository 下产生一个 .gitmodules 文件，来记录你的 Submodule 信息，同时 another_project项目也clone下来.
 
 ```sh
-git submodule add git@domain.com:another_project.git file_path/another_project # 会添加一个.gitmodules文件在repository的根目录里
-git submodule foreach git pull  # 更新 repo 下所有的 submodules
+# 会添加一个.gitmodules文件在repository的根目录里
+git submodule add git@domain.com:another_project.git file_path/another_project
 
-## clone
+# 更新 repo 下所有的 submodules
+git submodule foreach git pull
+
+# clone后初始化
 git submodule init
 git submodule update
 
-# 首先删除.gitsubmodule中的项目配置
+# 删除 首先删除.gitsubmodule中的项目配置
 git rm --cached another_project # 删除项目
 vim .git/config # ...remove another_project...
 ```
@@ -992,7 +995,7 @@ Merge subtrees together and split repository into subtrees
 
 [文档](https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt)
 
-```shell
+```sh
 git clone git@github.com:Ihavee/dotfiles.git
 cd dotfiles
 
