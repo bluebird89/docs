@@ -94,3 +94,6 @@
 [submodule "API/API-Security-Checklist"]
 	path = API/API-Security-Checklist
 	url = git@github.com:shieldfy/API-Security-Checklist.git
+[submodule "JavaScript/awesome-javascript"]
+	path = JavaScript/awesome-javascript
+	url = git@github.com:sorrycc/awesome-javascript.git

@@ -1493,6 +1493,7 @@ Debugbar::measure('My long operation', function() {
 
 ```sh
 composer require tymon/jwt-auth # 修改app.php 添加到providers
+
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider" # 生成配置文件
 php artisan jwt:secret # 使用
 ```
@@ -1516,3 +1517,8 @@ php artisan jwt:secret # 使用
 ## 问题
 
 Call to undefined function openssl_encrypt() # 开启OpenSSL扩展
+
+
+## 参考
+
+* [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习

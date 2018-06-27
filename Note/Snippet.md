@@ -26,7 +26,9 @@
 * I used to think the worst thing in life was to end up all alone, it’s not. The worst thing in life is to end up with people that make you feel all alone
 * 人生而有所选择，却无往不在枷锁之中
 * 看淡跟原谅是两码事
-* 成功只有一个——按照自己的方式，去度过人生。
+* 成功只有一个——按照自己的方式，去度过人生
+* 没有真正的换位，就没有什么换位思考，想象都不是真是的。后来我的行为模式，就是实践出真知，一个字干！
+* 什么是金融行业？估计不同人眼中有不同结论，我的目标就是多赚钱，谁给工资高就给谁干活
 
 ## 方法
 
