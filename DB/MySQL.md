@@ -247,7 +247,10 @@ max_allowed_packet = 32M
 
 [mysqld_safe]
 log-error=/data/3306/mysql_oldboy.err
-pid-file=/data/3306/mysqld.pid
+pid-file=/data/3306/mysqld.
+
+# 默认只允许本地服务器访问
+bind-address = 127.0.0.1
 ```
 
 ```sql
@@ -590,48 +593,41 @@ select a.FirstName,a.LastName, b.City, b.State from Person as a inner join addre
 
 ```sql
 # 查询时间
-$sql = "select date_format(create_time, '%Y-%m-%d') as day from table_name";
+select date_format(create_time, '%Y-%m-%d') as day from table_name
 # int 时间戳类型
-$sql = "select from_unixtime(create_time, '%Y-%m-%d') as day from table_name";
+select from_unixtime(create_time, '%Y-%m-%d') as day from table_name
 
 # 一个sql返回多个总数
-$sql = "select count(*) all, " ;
-$sql .= " count(case when status = 1 then status end) status_1_num, ";
-$sql .= " count(case when status = 2 then status end) status_2_num ";
-$sql .= " from table_name";
+select count(*) all
+count(case when status = 1 then status end) status_1_num,
+count(case when status = 2 then status end) status_2_num
+from table_name
 # Update Join / Delete Join
-$sql = "update table_name_1 ";
-$sql .= " inner join table_name_2 on table_name_1.id = table_name_2.uid ";
-$sql .= " inner join table_name_3 on table_name_3.id = table_name_1.tid ";
-$sql .= " set *** = *** ";
-$sql .= " where *** ";
+update table_name_1
+inner join table_name_2 on table_name_1.id = table_name_2.uid
+inner join table_name_3 on table_name_3.id = table_name_1.tid
+set *** = ***
+where ***
 # delete join 同上。
 
 # 替换某字段的内容的语句
-$sql = "update table_name set content = REPLACE(content, 'aaa', 'bbb') ";
-$sql .= " where (content like '%aaa%')";
+update table_name set content = REPLACE(content, 'aaa', 'bbb') where (content like '%aaa%')
 # 获取表中某字段包含某字符串的数据
-$sql = "SELECT * FROM `表名` WHERE LOCATE('关键字', 字段名) ";
+SELECT * FROM `表名` WHERE LOCATE('关键字', 字段名)
 # 获取字段中的前4位
-$sql = "SELECT SUBSTRING(字段名,1,4) FROM 表名 ";
+SELECT SUBSTRING(字段名,1,4) FROM 表名
 # 查找表中多余的重复记录
 # 单个字段
-$sql = "select * from 表名 where 字段名 in ";
-$sql .= "(select 字段名 from 表名 group by 字段名 having count(字段名) > 1 )";
+select * from 表名 where 字段名 in (select 字段名 from 表名 group by 字段名 having count(字段名) > 1 )
 # 多个字段
-$sql = "select * from 表名 别名 where (别名.字段1,别名.字段2) in ";
-$sql .= "(select 字段1,字段2 from 表名 group by 字段1,字段2 having count(*) > 1 )";
+select * from 表名 别名 where (别名.字段1,别名.字段2) in (select 字段1,字段2 from 表名 group by 字段1,字段2 having count(*) > 1 )
 # 删除表中多余的重复记录(留id最小)
 # 单个字段
-$sql = "delete from 表名 where 字段名 in ";
-$sql .= "(select 字段名 from 表名 group by 字段名 having count(字段名) > 1)  ";
-$sql .= "and 主键ID not in ";
-$sql .= "(select min(主键ID) from 表名 group by 字段名 having count(字段名 )>1) ";
+delete from 表名 where 字段名 in (select 字段名 from 表名 group by 字段名 having count(字段名) > 1)
+and 主键ID not in (select min(主键ID) from 表名 group by 字段名 having count(字段名 )>1)
 # 多个字段
-$sql = "delete from 表名 别名 where (别名.字段1,别名.字段2) in ";
-$sql .= "(select 字段1,字段2 from 表名 group by 字段1,字段2 having count(*) > 1) ";
-$sql .= "and 主键ID not in ";
-$sql .= "(select min(主键ID) from 表名 group by 字段1,字段2 having count(*)>1) ";
+delete from 表名 别名 where (别名.字段1,别名.字段2) in (select 字段1,字段2 from 表名 group by 字段1,字段2 having count(*) > 1)
+and 主键ID not in (select min(主键ID) from 表名 group by 字段1,字段2 having count(*)>1)
 ```
 
 - 业务篇
@@ -1014,7 +1010,7 @@ if (updated row > 0) {
 * 如果可以的话使用NOT NULL：问一下你自己在空字符串值和NULL值之间（对应INT字段：0 vs. NULL）是否有任何的不同.如果没有理由一起使用这两个。NULL列需要额外的空间，他们增加了你的比较语句的复杂度。
 * 预处理语句：预处理语句默认情况下会过滤绑定到它的变量，这对于避免SQL注入攻击极为有效。当然你也可以指定要过滤的变量。但这些方法更容易出现人为错误，也更容易被程序员遗忘。
 * 无缓冲查询:通常当你从脚本执行一个查询，在它可以继续后面的任务之前将需要等待查询执行完成。你可以使用无缓冲的查询来改变这一情况。"mysql_unbuffered_query() 发送SQL查询语句到MySQL不会像 mysql_query()那样自动地取并缓冲结果行。这让产生大量结果集的查询节省了大量的内存，在第一行已经被取回时你就可以立即在结果集上继续工 作，而不用等到SQL查询被执行完成。"有一定的局限性。你必须在执行另一个查询之前读取所有的行或调用mysql_free_result() 。另外你不能在结果集上使用mysql_num_rows() 或 mysql_data_seek() 。
-* 使用 UNSIGNED INT 存储IP地址：在查询中可以使用 INET_ATON() 来把一个IP转换为整数，用 INET_NTOA() 来进行相反的操作。在 PHP 也有类似的函数，ip2long() 和 long2ip()。 `$r = "UPDATE users SET ip = INET_ATON('{$_SERVER['REMOTE_ADDR']}') WHERE user_id = $user_id";`
+* 使用 UNSIGNED INT 存储IP地址：在查询中可以使用 INET_ATON() 来把一个IP转换为整数，用 INET_NTOA() 来进行相反的操作。在 PHP 也有类似的函数，ip2long() 和 long2ip()。 `$r = "UPDATE users SET ip = INET_ATON('{$_SERVER['REMOTE_ADDR']}') WHERE user_id = $user_id`
 * 固定长度（静态）的表会更快：所有列都是"固定长度"，那么这个表被认为是"静态"或"固定长度"的。不固定的列类型包括 VARCHAR、TEXT、BLOB等。即使表中只包含一个这些类型的列，这个表就不再是固定长度的，MySQL 引擎会以不同的方式来处理它。固定长度的表会提高性能，因为 MySQL 引擎在记录中检索的时候速度会更快。它们也易于缓存，崩溃后容易重建。不过它们也会占用更多空间
 * 垂直分区是为了优化表结构而对其进行纵向拆分的行为。将低频信息放到另一个表中，这样你的主用户表就会更小。如你所知，表越小越快。例子：last_login" 字段，用户每次登录网站都会更新这个字段，而每次更新都会导致这个表缓存的查询数据被清空。这种情况下你可以将那个字段放到另一张表里，保持用户表更新量最小。
 * 拆分大型DELETE或INSERT语句：执行大型DELETE或INSERT查询，则需要注意不要影响网络流量。当执行大型语句时，它会锁表并使你的Web应用程序停止。Apache运行许多并行进程/线程。 因此它执行脚本效率很高。所以服务器不期望打开过多的连接和进程，这很消耗资源，特别是内存。如果你锁表很长时间（如30秒或更长），在一个高流量的网站，会导致进程和查询堆积，处理这些进程和查询可能需要很长时间，最终甚至使你的网站崩溃。维护脚本需要删除大量的行，只需使用LIMIT子句，以避免阻塞。`while (1) { mysql_query("DELETE FROM logs WHERE log_date`

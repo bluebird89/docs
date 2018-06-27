@@ -376,6 +376,7 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 
 * [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest):DNS Performance test
 * [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie):Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc. https://httpie.org https://twitter.com/clihttp
+* [Netflix/pollyjs](https://github.com/Netflix/pollyjs):Record, Replay, and Stub HTTP Interactions. https://netflix.github.io/pollyjs
 
 ```sh
 sudo apt-get install bc dnsutils
