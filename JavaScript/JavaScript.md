@@ -2591,6 +2591,7 @@ try {
 * [GoogleChrome/workbox](https://github.com/GoogleChrome/workbox):package Workbox: JavaScript libraries for Progressive Web Apps https://developers.google.com/web/tools/workbox
 * [yaronn/blessed-contrib](https://github.com/yaronn/blessed-contrib):Build terminal dashboards using ascii/ansi art and javascript
 * [antvis/g6](https://github.com/antvis/g6):A Graph Visualization Framework in JavaScript https://antv.alipay.com/zh-cn/g6/1.x/index.html
+* [nolanlawson/optimize-js](https://github.com/nolanlawson/optimize-js):Optimize a JavaScript file for faster initial load by wrapping eagerly-invoked functions
 
 ## 扩展
 
@@ -2626,6 +2627,7 @@ try {
 * [Moment](https://github.com/moment/moment): JavaScript 日期和时间操作库，用于解析、验证、操作和格式化日期。
 * [Date-fns](https://github.com/date-fns/date-fns)
 * [DateJS](https://github.com/datejs/Datejs)
+* [iamkun/dayjs](https://github.com/iamkun/dayjs):⏰ Day.js 2KB immutable date library alternative to Moment.js with the same modern API https://github.com/iamkun/dayjs
 * [Sugar](https://github.com/andrewplummer/Sugar):主要用于处理本地对象。这个库支持自定义构建，还提供了模块化的 npm 包，因此可以只使用其中必要的部分模块（也可以与 Bit 结合使用），用户还可以通过自定义方法或使用插件来应对特定的使用场景。
 * [Lazy](https://github.com/dtao/lazy.js)
 * [CollectJS](https://github.com/ecrmnn/collect.js):一个简单的随机对象生成器，用于生成随机的字符串、数字等。在编写自动化测试代码或任何需要随机对象的地方，可以用它来减少单调的工作。
