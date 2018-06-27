@@ -189,6 +189,27 @@ date.timezone = Asia/Shanghai
 
 ![PHP 的架构](../../_static/php_construct.jpg "Optional title")
 
+#### Zend Opcache
+
+PHP是解释型语言，构建在Zend 虚拟机之上，
+
+* PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码（opcode：(http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码。
+* 每次请求PHP文件都是这样，这会消耗很多资源，如果每次HTTP请求都必须不断解析、编译和执行PHP脚本，消耗的资源更多。
+* 如果PHP源码不变，相应的字节码也不会变化，显然没有必要每次都重新生成Opcode，结合在Web应用中无处不在的缓存机制，我们可以把首次生成的Opcode缓存起来,直接从内存中读取预先编译好的字节码
+* 在配置中开启扩展
+
+```
+# 找到PHP扩展所在目录
+php-config --extension-dir
+
+opcache.validate_timestamps=1    //生产环境中配置为0：因为Zend Opcache将不能觉察PHP脚本的变化，必须手动清空Zend OPcache缓存的字节码，才能让它发现PHP文件的变动。这个配置适合在生产环境中设置为0，但在开发环境设置为1
+opcache.revalidate_freq=0    //检查脚本时间戳是否有更新时间
+opcache.memory_consumption=64    //Opcache的共享内存大小，以M为单位
+opcache.interned_strings_buffer=16    //用来存储临时字符串的内存大小，以M为单位
+opcache.max_accelerated_files=4000    //Opcache哈希表可以存储的脚本文件数量上限
+opcache.fast_shutdown=1         //使用快速停止续发事件
+```
+
 ## 配置
 
 * memory_limit 这个用于设定单个 PHP 进程可以使用的系统内存最大值，从系统可用性上来讲建议越大越好。

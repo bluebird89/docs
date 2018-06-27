@@ -319,3 +319,4 @@ for (var i = 0, j = a, loopLen = arr.length; i < loopLen; i++) {
 ## 工具
 
 * [pa7/heatmap.js](https://github.com/pa7/heatmap.js):🔥 JavaScript Library for HTML5 canvas based heatmaps https://www.patrick-wied.at/static/heatmapjs/
+* [pixijs/pixi.js](https://github.com/pixijs/pixi.js):The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer. http://pixijs.com

@@ -203,7 +203,7 @@ kubectl get pods --all-namespaces  // list two pods, one an ‘addon-manager’ 
 ```
 ###  使用
 
-```shell
+```sh
 kubectl delete deployments hello-minikube1
 ```
 
@@ -234,6 +234,9 @@ kubectl delete deployments hello-minikube1
 
 https://www.centos.bz/2017/07/kubernetes-pod-schedule-intro/
 
+## 工具
+
+* [runconduit/conduit](https://github.com/runconduit/conduit):Ultralight service mesh for Kubernetes https://conduit.io
 <http://violetgo.com/blogs/>
 <http://www.winseliu.com/>
 <http://blog.csdn.net/qq1010885678/article/details/48832067>

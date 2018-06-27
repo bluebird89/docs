@@ -1,4 +1,6 @@
-# React Native
+# * [facebook/react-native](https://github.com/facebook/react-native)
+
+A framework for building native apps with React. http://facebook.github.io/react-native/
 
 React 是一套可以用简洁的语法高效绘制 DOM 的框架
 
@@ -27,6 +29,13 @@ React的世界里，一切都是组件。你可以构建任何直接的HTML没�
 odeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多系统级的API，如文件操作、网络编程等. 用事件驱动, 异步编程,主要是为后台网络服务设计.React Native 借助 Node.js，即 JavaScript 运行时来创建 JavaScript 代码。
 
 总结来说，React Native使用NodeJS来做系统处理，使用React来渲染。
+
+## 使用
+
+* 你使用 React Native 从头开始构建一个新应用，并希望使用 JavaScript 开发所有的东西
+* 正在使用 React Native 开发少量的二级页面：不需要与应用程序的其他部分有密切联系，但整体观感却更像是“原生”的。
+* 有一个使用 Swift/Java/Objective-C/Kotlin 开发的应用程序，现在你想要使用 React Native 开发其中的一部分。不适合，数据保存方法的不一致
+* 你的公司里有一个 iOS 团队和一个 Android 团队：要让原生开发和 React Native 开发在企业中大规模并存仍然很困难。
 
 ## [安装](https://facebook.github.io/react-native/docs/getting-started.html)
 
@@ -256,6 +265,9 @@ npm run eject #  导出配置文件
 * [reach/router](https://github.com/reach/router):Next Generation Routing for React https://reach.tech/router
 * [mui-org/material-ui](https://github.com/mui-org/material-ui):React components that implement Google's Material Design. https://material-ui.com
 * [coryhouse/react-slingshot](https://github.com/coryhouse/react-slingshot):React + Redux starter kit / boilerplate with Babel, hot reloading, testing, linting and a working example app built in
+* [reactjs/react-docgen](https://github.com/reactjs/react-docgen):A CLI and toolbox to extract information from React component files for documentation generation purposes.
+* [oney/react-native-webrtc](https://github.com/oney/react-native-webrtc):A WebRTC module for React Native.
+* [react-navigation/react-navigation](https://github.com/react-navigation/react-navigation):Routing and navigation for your React Native apps https://reactnavigation.org
 
 ## 参考
 
@@ -271,7 +283,6 @@ npm run eject #  导出配置文件
 * [reactnativecn/react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
 * [styleguidist/react-styleguidist](https://github.com/styleguidist/react-styleguidist):Isolated React component development environment with a living style guide https://react-styleguidist.js.org/
 * [wojtekmaj/react-lifecycle-methods-diagram](https://github.com/wojtekmaj/react-lifecycle-methods-diagram):Interactive React lifecycle methods diagram. http://projects.wojtekmaj.pl/react-li…
-* [facebook/react-native](https://github.com/facebook/react-native):A framework for building native apps with React. http://facebook.github.io/react-native/
 * [网站](http://facebook.github.io/react-native/)
 * [react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit https://react-native-training.github.…
 * [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native):Awesome React Native components, news, tools, and learning material! http://www.awesome-react-native.com
