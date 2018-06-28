@@ -26,7 +26,7 @@
 ```css
 * {color:red}
 h1 {color:red; font-size:14px;}
-.box{color:red;} 
+.box{color:red;}
 div.box{color:red;}  //给 class = box 的<div>元素加样式
 #box{color:red;}  //给 id=box 元素加样式
 
@@ -68,7 +68,7 @@ h1{
     padding:10px; //四个内填充都是10px
     padding:10px 20px; //上下内填充为10px，左右内填充为20px
     padding:5px 10px 15px; //上填充为5px，左右为10px，下为15px
-    padding:5px 10px 15px 20px;  //顺序一定为：上右下左 
+    padding:5px 10px 15px 20px;  //顺序一定为：上右下左
 }
 ```
 
@@ -251,3 +251,7 @@ h1{
 * [bjankord/Style-Guide-Boilerplate](https://github.com/bjankord/Style-Guide-Boilerplate):A starting point for crafting living style guides.
 * [sindresorhus/modern-normalize](https://github.com/sindresorhus/modern-normalize):Normalize browsers' default style
 * [30 Seconds of CSS](https://atomiks.github.io/30-seconds-of-css/#box-sizing-reset)
+
+## 资源
+
+* [](link)
