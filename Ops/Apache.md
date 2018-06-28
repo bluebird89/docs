@@ -52,6 +52,7 @@ net stop apache2
 * 站点默认目录：`DocumentRoot "/Library/WebServer/Documents"`
 * `DirectoryIndex index.php index.html`
 * 进程管理,用httpd或者aapachectl
+* 模块路径： /usr/libexec/apache2
 
 ```sh
 apachectl -v

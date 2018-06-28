@@ -268,6 +268,7 @@ npm run eject #  导出配置文件
 * [reactjs/react-docgen](https://github.com/reactjs/react-docgen):A CLI and toolbox to extract information from React component files for documentation generation purposes.
 * [oney/react-native-webrtc](https://github.com/oney/react-native-webrtc):A WebRTC module for React Native.
 * [react-navigation/react-navigation](https://github.com/react-navigation/react-navigation):Routing and navigation for your React Native apps https://reactnavigation.org
+* [atlassian/react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd):Beautiful, accessible drag and drop for lists with React.js
 
 ## 参考
 

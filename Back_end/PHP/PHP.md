@@ -1328,6 +1328,12 @@ $controller = new UsersController(new FileLog());
 $controller->register();
 ```
 
+## 引用
+
+```php
+require('./ShopProduct.php'); # 加载文件名称
+```
+
 ## 扩展
 
 * intl
