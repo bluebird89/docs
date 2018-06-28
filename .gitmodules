@@ -97,3 +97,6 @@
 [submodule "JavaScript/awesome-javascript"]
 	path = JavaScript/awesome-javascript
 	url = git@github.com:sorrycc/awesome-javascript.git
+[submodule "Admin/awesome-sysadmin"]
+	path = Admin/awesome-sysadmin
+	url = git@github.com:kahun/awesome-sysadmin.git
