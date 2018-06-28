@@ -2617,6 +2617,7 @@ try {
 * [kamranahmedse/driver.js](https://github.com/kamranahmedse/driver.js):A light-weight, no-dependency, vanilla JavaScript engine to drive the user's focus across the page http://kamranahmed.info/driver
 * [staticfile/static](https://github.com/staticfile/static):开放静态文件 - 为开源库提供稳定、快速的免费 CDN 服务 https://staticfile.org
 * [lukehoban/es6features](https://github.com/lukehoban/es6features):Overview of ECMAScript 6 features
+* [addyosmani/essential-js-design-patterns](https://github.com/addyosmani/essential-js-design-patterns):Repo for my 'Learning JavaScript Design Patterns' book https://addyosmani.com/resources/essentialjsdesignpatterns/book/
 
 ## 类库
 
@@ -2637,3 +2638,5 @@ try {
 * [Bit utils](https://bitsrc.io/bit/utils):一个模块化和高性能的库，已经被用在 Bit 的 web hub 中。这些函数可使用 NPM/Yarn 进行单独安装，用户也可以创建自己的集合，并从不同的库和项目中收集有用的功能。
 * [Voca](https://github.com/panzerdp/voca):一个用于操作字符串的 JavaScript 库。它提供的功能包括大小写转换、trim、pad、slugify、latinise、sprintf、truncate、escape 等。用户可以加载单个函数，以便最小化应用程序的构建。
 * [Licia - ](https://github.com/liriliri/licia):一个简单但有用的 JavaScript 片段集合
+* [SBoudrias/Inquirer.js](https://github.com/SBoudrias/Inquirer.js):A collection of common interactive command line user interfaces.
+* [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
