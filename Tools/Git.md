@@ -165,9 +165,9 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
  url = kch@homeserver:ccc/ddd.git
 ```
 
-### key生成
+### Git 传输协议
 
-git clone有两种方式https与ssh，SSH keys的使用需保证remote的源为git方式
+Git 常见的有三种协议，SSH，HTTP(S)，Git,SSH keys的使用需保证remote的源为git方式
 
 #### SSH
 
