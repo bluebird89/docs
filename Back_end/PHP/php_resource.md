@@ -40,7 +40,8 @@
 - [Ice](https://www.iceframework.org/): 另一个通过C扩展实现的简单快速的PHP框架
 - [CakePHP CRUD](https://github.com/friendsofcake/crud): CakePHP的快速应用程序（RAD）插件
 - [Knp RAD Bundle](http://rad.knplabs.com/): Symfony 2的快速应用程序（RAD）包
-- [Symfony CMF]:(https://github.com/symfony-cmf/symfony-cmf) 一个创建自定义CMS的内容管理框架
+- [Symfony CMF](https://github.com/symfony-cmf/symfony-cmf):一个创建自定义CMS的内容管理框架
+- [lexin-fintech/dubbo-php-framework](https://github.com/lexin-fintech/dubbo-php-framework):dubbo php implementation
 - 框架组件
       + [CakePHP Plugins](https://plugins.cakephp.org/): CakePHP插件的目录
       + [Hoa Project](https://hoa-project.net/En/): 另一个PHP组件包
