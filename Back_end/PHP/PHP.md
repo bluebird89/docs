@@ -1680,6 +1680,7 @@ php php-cs-fixer.phar fix /path/to/file
 
 * [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
 * [PHP优秀学习文章资料汇总整理](http://www.francissoung.com/2016/08/10/%E4%B8%80%E8%A8%80%E4%B8%8D%E5%90%88%E5%B0%B1%E5%AD%A6%E4%B9%A0-PHP%E4%BC%98%E7%A7%80%E5%AD%A6%E4%B9%A0%E6%96%87%E7%AB%A0%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB%E6%95%B4%E7%90%86/)
+
 TP参考：<https://github.com/ijry/lyadmin>
 
 <https://leanpub.com/phptherightway/read#test_driven_development_title>

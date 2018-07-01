@@ -1,60 +1,64 @@
 # PHP resource
 
-* Composer包 Composer Repositories
-      - [Firegento](http://packages.firegento.com):Magento Module Composer Repository.
-      - [Packagist](https://packagist.org):The PHP Package Repository.
-      - [PaketHub](https://pakethub.com):All-in-One PHP Package Repository.
-      - [Private Packagist](https://packagist.com):Composer package archive as a service for PHP.
-      - [WordPress Packagist](https://wpackagist.org):Manage your plugins with Composer.
-* 依赖管理 Dependency Management 依赖和包管理库
-      - [Composer Installers](https://github.com/composer/installers): 一个多框架Composer库安装器
-      - [Composer](https://getcomposer.org/)
-      - [Melody](http://melody.sensiolabs.org/): 一个用于构建Composer脚本文件的工具
-      - [Pickle](https://github.com/FriendsOfPHP/pickle): 一个PHP扩展安装器
-* 其他的依赖管理 Dependency Management Extras
-      - [Composed](https://github.com/joshdifabio/composed): 一个在运行时解析你项目Composer环境的库
-      - [Composer Checker](https://github.com/silpion/composer-checker): 一个校验Composer配置的工具
-      - [Composer Merge Plugin](https://github.com/wikimedia/composer-merge-plugin): 一个用于合并多个composer.json文件的Composer插件
-      - [Composition](https://github.com/bamarni/composition): 一个在运行时检查Composer环境的库
-      - [NameSpacer](https://github.com/ralphschindler/Namespacer): 一个转化下划线到命名空间的库
-      - [Patch Installer](https://github.com/goatherd/patch-installer): 一个使用Composer安装补丁的库
-      - [Prestissimo](https://github.com/hirak/prestissimo): 一个开启并行安装进程的Composer插件
-      - [Satis](https://github.com/composer/satis): 一个静态Composer存储库的生成器
-      - [tooly](https://github.com/tommy-muehle/tooly-composer-script): 一个在项目中使用Composer管理PHAR文件的库
-      - [Toran Proxy](https://toranproxy.com): 一个静态Composer存储库和代理
-* 框架 FrameworksWeb开发框架
-      - [Aura PHP](http://auraphp.com/): 一个独立的组件框架
-      - [CakePHP](https://cakephp.org/): 一个快速应用程序开发框架 (CP)
-      - [Laravel 5](https://laravel.com/): 另一个PHP框架 (L5)
-      - [Nette](https://nette.org): 另一个由个体组件组成的框架
-      - [Phalcon](https://phalconphp.com/en/): 通过C扩展实现的框架
-      - [PPI Framework 2](http://www.ppi.io): 一个互操作性框架
-      - [Symfony](https://symfony.com/): 一个独立组件组成的框架 (SF)
-      - [Yii2](https://github.com/yiisoft/yii2/): 另一个PHP框架
-      - [Zend Framework 2](https://framework.zend.com): 另一个由独立组件组成的框架 (ZF2)
-      - [Radar](https://github.com/radarphp/Radar.Adr): 一个基于PHP的Action-Domain-Responder实现
-      - [Ice](https://www.iceframework.org/): 另一个通过C扩展实现的简单快速的PHP框架
-* 其他框架 Framework Extras 其他Web开发框架
-      - [CakePHP CRUD](https://github.com/friendsofcake/crud): CakePHP的快速应用程序（RAD）插件
-      - [Knp RAD Bundle](http://rad.knplabs.com/): Symfony 2的快速应用程序（RAD）包
-      - [Symfony CMF]:(https://github.com/symfony-cmf/symfony-cmf) 一个创建自定义CMS的内容管理框架
-* 框架组件 Components 来自web开发框架的独立组件
-      - [CakePHP Plugins](https://plugins.cakephp.org/): CakePHP插件的目录
-      - [Hoa Project](https://hoa-project.net/En/): 另一个PHP组件包
-      - [League of Extraordinary Packages](https://thephpleague.com/): 一个PHP软件开发组
-      - [Symfony Components](http://symfony.com/doc/master/components/index.html): Symfony组件
-      - [Zend Framework 2 Components](https://packages.zendframework.com/): Zend Framework 2组件
-* 微型框架 Micro Frameworks 微型框架和路由
-      - [Bullet PHP](http://bulletphp.com/): 用于构建REST APIs的微型框架
-      - [Lumen](https://lumen.laravel.com): 一个Laravel的微型框架
-      - [Proton](https://github.com/alexbilbie/Proton): 一个StackPHP兼容的微型框架
-      - [Silex](http://silex.sensiolabs.org/): 基于Symfony2组件的微型框架
-      - [Slim](https://www.slimframework.com/): 另一个简单的微型框架
-* 其他微型框架 Micro Framework Extras 其他相关的微型框架和路由
-      - [Silex Skeleton](https://github.com/silexphp/Silex-Skeleton): Silex的项目架构
-      - [Silex Web Profiler](https://github.com/silexphp/Silex-WebProfiler): 一个Silex web的调试工具
-      - [Slim Skeleton](https://github.com/slimphp/Slim-Skeleton): Slim架构
-      - [Slim View](https://github.com/slimphp/Slim-Views): Slim自定义视图的集合
+## 包管理
+
+- Composer包 Composer Repositories
+      + [Firegento](http://packages.firegento.com):Magento Module Composer Repository.
+      + [Packagist](https://packagist.org):The PHP Package Repository.
+      + [PaketHub](https://pakethub.com):All-in-One PHP Package Repository.
+      + [Private Packagist](https://packagist.com):Composer package archive as a service for PHP.
+      + [WordPress Packagist](https://wpackagist.org):Manage your plugins with Composer.
+- 依赖管理 Dependency Management 依赖和包管理库
+      + [Composer Installers](https://github.com/composer/installers): 一个多框架Composer库安装器
+      + [Composer](https://getcomposer.org/)
+      + [Melody](http://melody.sensiolabs.org/): 一个用于构建Composer脚本文件的工具
+      + [Pickle](https://github.com/FriendsOfPHP/pickle): 一个PHP扩展安装器
+- 其他的依赖管理 Dependency Management Extras
+      + [Composed](https://github.com/joshdifabio/composed): 一个在运行时解析你项目Composer环境的库
+      + [Composer Checker](https://github.com/silpion/composer-checker): 一个校验Composer配置的工具
+      + [Composer Merge Plugin](https://github.com/wikimedia/composer-merge-plugin): 一个用于合并多个composer.json文件的Composer插件
+      + [Composition](https://github.com/bamarni/composition): 一个在运行时检查Composer环境的库
+      + [NameSpacer](https://github.com/ralphschindler/Namespacer): 一个转化下划线到命名空间的库
+      + [Patch Installer](https://github.com/goatherd/patch-installer): 一个使用Composer安装补丁的库
+      + [Prestissimo](https://github.com/hirak/prestissimo): 一个开启并行安装进程的Composer插件
+      + [Satis](https://github.com/composer/satis): 一个静态Composer存储库的生成器
+      + [tooly](https://github.com/tommy-muehle/tooly-composer-script): 一个在项目中使用Composer管理PHAR文件的库
+      + [Toran Proxy](https://toranproxy.com): 一个静态Composer存储库和代理
+
+## 框架
+
+- [Aura PHP](http://auraphp.com/): 一个独立的组件框架
+- [CakePHP](https://cakephp.org/): 一个快速应用程序开发框架 (CP)
+- [Laravel 5](https://laravel.com/): 另一个PHP框架 (L5)
+- [Nette](https://nette.org): 另一个由个体组件组成的框架
+- [Phalcon](https://phalconphp.com/en/): 通过C扩展实现的框架
+- [PPI Framework 2](http://www.ppi.io): 一个互操作性框架
+- [Symfony](https://symfony.com/): 一个独立组件组成的框架 (SF)
+- [Yii2](https://github.com/yiisoft/yii2/): 另一个PHP框架
+- [Zend Framework 2](https://framework.zend.com): 另一个由独立组件组成的框架 (ZF2)
+- [Radar](https://github.com/radarphp/Radar.Adr): 一个基于PHP的Action-Domain-Responder实现
+- [Ice](https://www.iceframework.org/): 另一个通过C扩展实现的简单快速的PHP框架
+- [CakePHP CRUD](https://github.com/friendsofcake/crud): CakePHP的快速应用程序（RAD）插件
+- [Knp RAD Bundle](http://rad.knplabs.com/): Symfony 2的快速应用程序（RAD）包
+- [Symfony CMF]:(https://github.com/symfony-cmf/symfony-cmf) 一个创建自定义CMS的内容管理框架
+- 框架组件
+      + [CakePHP Plugins](https://plugins.cakephp.org/): CakePHP插件的目录
+      + [Hoa Project](https://hoa-project.net/En/): 另一个PHP组件包
+      + [League of Extraordinary Packages](https://thephpleague.com/): 一个PHP软件开发组
+      + [Symfony Components](http://symfony.com/doc/master/components/index.html): Symfony组件
+      + [Zend Framework 2 Components](https://packages.zendframework.com/): Zend Framework 2组件
+- 微型框架 Micro Frameworks 微型框架和路由
+      + [Bullet PHP](http://bulletphp.com/): 用于构建REST APIs的微型框架
+      + [Lumen](https://lumen.laravel.com): 一个Laravel的微型框架
+      + [Proton](https://github.com/alexbilbie/Proton): 一个StackPHP兼容的微型框架
+      + [Silex](http://silex.sensiolabs.org/): 基于Symfony2组件的微型框架
+      + [Slim](https://www.slimframework.com/): 另一个简单的微型框架
+- 其他微型框架 Micro Framework Extras 其他相关的微型框架和路由
+      + [Silex Skeleton](https://github.com/silexphp/Silex-Skeleton): Silex的项目架构
+      + [Silex Web Profiler](https://github.com/silexphp/Silex-WebProfiler): 一个Silex web的调试工具
+      + [Slim Skeleton](https://github.com/slimphp/Slim-Skeleton): Slim架构
+      + [Slim View](https://github.com/slimphp/Slim-Views): Slim自定义视图的集合
+
 * 路由 Routers 处理应用路由的库
       - [Fast Route](https://github.com/nikic/FastRoute): 一个快速路由的库
       - [Klein](https://github.com/klein/klein.php): 一个灵活的路由的库
@@ -77,7 +81,7 @@
       - [Phrozn](https://github.com/Pawka/phrozn): 另一个转换Textile，Markdown和Twig为HTML的工具
       - [Sculpin](https://sculpin.io): 转换Markdown和Twig为静态HTML的工具
       - [Spress](http://spress.yosymfony.com): 一个能够将Markdown和Twig转化为HTML的可扩展工具
-* 超文本传输协议 HTTP 用于HTTP的库
+* 超文本传输协议 HTTP
       - [Buzz](https://github.com/kriswallsmith/Buzz): 另一个HTTP客户端
       - [Guzzle](https://github.com/guzzle/guzzle): Guzzle, an extensible PHP HTTP client http://guzzlephp.org/
       - [HTTPFul](https://github.com/nategood/httpful): 一个链式HTTP库
@@ -109,6 +113,7 @@
       - (https://github.com/PHPMailer/PHPMailer)[PHPMailer]: 另一个邮件解决方案
       - (https://github.com/henrikbjorn/Stampie)[Stampie]: 一个邮件服务库，类似于[SendGrid](http://sendgrid.com)[PostMark](https://postmarkapp.com),[MailGun](http://www.mailgun.com)[Mandrill](http://www.mandrill.com)
       - (http://swiftmailer.org/)[SwiftMailer]: 一个邮件解决方案
+      - [egulias/EmailValidator](https://github.com/egulias/EmailValidator):PHP Email validator library inspired in @dominicsayers isemail function https://github.com/dominicsayers/isemail
 * 文件 Files 文件处理和MIME类型检测的库
       - (https://github.com/dflydev/dflydev-apache-mime-types)[Apache MIME Types]: 一个解析Apache MIME类型的库
       - (https://github.com/dflydev/dflydev-canal)[Canal]: 一个检测互联网媒体类型的库
@@ -176,12 +181,16 @@
       - (http://sismo.sensiolabs.org/)[Sismo]: 一个持续测试的服务库
       - (https://travis-ci.org/)[Travis CI]: 一个持续集成平台
       - (http://www.wercker.com/)[Wercker]: 一个持续集成平台
-* 文档 Documentation 生成项目文档的库
-      - (https://github.com/apigen/apigen)[APIGen]: 另一个API文档生成器
-      - (https://github.com/justinwalsh/daux.io)[daux.io]: 一个使用Markdown文件的文档生成器
-      - (https://github.com/phpDocumentor/phpDocumentor2)[PHP Documentor 2]: 一个API文档生成器
-      - (http://phpdox.de/)[phpDox]: 一个PHP项目的文档生成器（不限于API文档）
-      - (https://github.com/FriendsOfPHP/Sami)[Sami]: 一个API文档生成器
+## 文档 Documentation 生成项目文档的库
+
+* (https://github.com/apigen/apigen)[APIGen]: 另一个API文档生成器
+* (https://github.com/justinwalsh/daux.io)[daux.io]: 一个使用Markdown文件的文档生成器
+* (https://github.com/phpDocumentor/phpDocumentor2)[PHP Documentor 2]: 一个API文档生成器
+* (http://phpdox.de/)[phpDox]: 一个PHP项目的文档生成器（不限于API文档）
+* (https://github.com/FriendsOfPHP/Sami)[Sami]: 一个API文档生成器
+
+## 安全
+
 * 安全 Security 生成安全的随机数，加密数据，扫描漏洞的库
       - (https://paragonie.com/project/halite)[Halite]: 一个简单的使用[libsodium](https://github.com/jedisct1/libsodium)的加密库
       - (https://github.com/ezyang/htmlpurifier)[HTML Purifier]: 一个兼容标准的HTML过滤器
@@ -207,6 +216,9 @@
       - (https://github.com/ircmaxell/PHP-PasswordLib)[PHP Password Lib]: 一个生成和校验密码的库
       - (http://www.openwall.com/phpass/)[phpass]: 一个便携式的密码哈希框架
       - (https://github.com/bjeavons/zxcvbn-php)[Zxcvbn PHP]: 一个基于Zxcvbn JS的现实的PHP密码强度估计库
+
+## 性能
+
 * 代码分析 Code Analysis 分析，解析和处理代码库的库和工具
       - (https://github.com/polyfractal/athletic)[Athletic]: 一个基于注释的基准检测库
       - (https://github.com/Roave/BetterReflection)[Better Reflection]: 基于AST的反射库，允许分析操作代码
@@ -237,6 +249,7 @@
       - (https://github.com/Qafoo/QualityAnalyzer)[Qafoo Quality Analyzer]: 一个可视化指标和源代码的工具
       - (https://scrutinizer-ci.com/)[Scrutinizer]: 一个审查PHP代码的web工具
       - (https://github.com/devster/ubench)[UBench]: 一个简单的微型基准检测库
+      - [exakat/php-static-analysis-tools](https://github.com/exakat/php-static-analysis-tools):A reviewed list of useful PHP static analysis tools
 * Architectural 相关的设计模式库，组织代码编程的方法和途径
       - (https://github.com/igorw/compose)[Compose]: 一个功能组合库
       - (https://github.com/domnikl/DesignPatternsPHP)[Design Patterns PHP]: 一个使用PHP实现的设计模式存储库
@@ -275,6 +288,7 @@
       - (https://github.com/jobbyphp/jobby)[Jobby]: 一个没有修改crontab的PHP定时任务管理器
       - (https://github.com/consolidation/Robo)[Robo]: 一个面向对象配置的PHP任务运行器
       - (http://taskphp.github.io/)[Task]: 一个灵感来源于Grunt和Gulp的纯PHP任务运行器
+
 * 导航 Navigation 构建导航结构的工具
       - (https://github.com/tackk/cartographer)[Cartographer]: 一个站点地图生成库
       - (https://github.com/KnpLabs/KnpMenu)[KnpMenu]: 一个菜单库
@@ -542,6 +556,9 @@
       - (http://symfony.com/doc/current/components/var_dumper.html)[Symfony VarDumper]: 一个dumper库(SF2)
       - (http://anahkiasen.github.io/underscore-php/)[Underscore]: 一个Undersccore JS库的PHP实现
       - (https://github.com/filp/whoops)[Whoops]: 一个不错的错误处理库
+
+## 安装与环境
+
 * PHP安装 PHP Installation 在你的电脑上帮助安装和管理PHP的工具
       - (https://github.com/Homebrew/homebrew-php)[HomeBrew PHP]: 一个HomeBrew的PHP通道
       - (https://brew.sh/)[HomeBrew]: 一个OSX包管理器
@@ -633,7 +650,7 @@
 * PHP播客 PHP Podcasts 专注于PHP话题的博客
       - [PHP Town Hall](https://phptownhall.com/): 一个随意的Ben Edmunds和Phil Sturgeon的PHP播客
       - [PHP Roundtable](https://www.phproundtable.com/): PHP Roundtable是一个讨论PHP开发者关心话题的临时聚会
-* PHP阅读 PHP Reading PHP相关的阅读资料
+* PHP阅读
       - [Composer Primer](https://daylerees.com/composer-primer/): Composer初级使用
       - [Composer Stability Flags](https://igor.io/2013/02/07/composer-stability-flags.html): 一篇关于Composer稳定性标志的文章
       - [Composer Versioning](https://igor.io/2013/01/07/composer-versioning.html): 一篇关于Composer版本的文章
@@ -646,18 +663,17 @@
       - [Preventing CSRF Attacks](http://blog.ircmaxell.com/2013/02/preventing-csrf-attacks.html): 一篇阻止CSRF攻击的文章
       - [Seven Ways to Screw Up BCrypt](http://blog.ircmaxell.com/2012/12/seven-ways-to-screw-up-bcrypt.html): 一篇关于纠正BCrypt实现的文章
       - [Use Env](https://seancoates.com/blogs/use-env/): 一篇关于使用unix环境帮助的文章
-* PHP内核阅读 PHP Internals Reading 阅读PHP内核或性能相关的资料
-  + [Disproving the Single Quotes Myth](http://nikic.github.io/2012/01/09/Disproving-the-Single-Quotes-Performance-Myth.html): 一篇关于单，双引号字符串性能的文章
-  + [How Big Are PHP Arrays (And Values) Really?](http://nikic.github.io/2011/12/12/How-big-are-PHP-arrays-really-Hint-BIG.html): 一篇关于数组原理的文章
-  + [How Foreach Works](http://stackoverflow.com/questions/10057671/how-does-php-foreach-actually-work/14854568#14854568): StackOverflow关于foreach回答的详情
-  + [How Long is a Piece of String](http://blog.golemon.com/2006/06/how-long-is-piece-of-string.html): 一篇关于字符串原理的文章
-  + [PHP Evaluation Order](https://gist.github.com/nikic/6699370): 一篇关于PHP评估顺序的文章
-  + [PHP Internals Book](http://www.phpinternalsbook.com): 一本由三名核心开发编写的关于PHP内核的在线书
-  + [PHP RFCs](https://wiki.php.net/rfc): PHP RFCs主页(请求注解)
-  + [Print vs Echo, Which One is Faster?](http://fabien.potencier.org/print-vs-echo-which-one-is-faster.html): 一篇关于打印和echo性能的文章
-  + [The PHP Ternary Operator. Fast or Not?](http://fabien.potencier.org/the-php-ternary-operator-fast-or-not.html): 一篇关于三元操作性能的文章
-  + [Understanding OpCodes](http://blog.golemon.com/2008/01/understanding-opcodes.html): 一篇关于opcodes的文章
-  + [When Does Foreach Copy?](http://nikic.github.io/2011/11/11/PHP-Internals-When-does-foreach-copy.html): 一篇关于foreach原理的文章
-  + [Why Objects (Usually) Use Less Memory Than Arrays](https://gist.github.com/nikic/5015323): 一篇关于对象和数组原理的文章
-  + [You're Being Lied To](http://blog.golemon.com/2007/01/youre-being-lied-to.html): 一篇关于内核ZVALs的文章
-* [exakat/php-static-analysis-tools](https://github.com/exakat/php-static-analysis-tools):A reviewed list of useful PHP static analysis tools
+* PHP内核阅读
+      + [Disproving the Single Quotes Myth](http://nikic.github.io/2012/01/09/Disproving-the-Single-Quotes-Performance-Myth.html): 一篇关于单，双引号字符串性能的文章
+      + [How Big Are PHP Arrays (And Values) Really?](http://nikic.github.io/2011/12/12/How-big-are-PHP-arrays-really-Hint-BIG.html): 一篇关于数组原理的文章
+      + [How Foreach Works](http://stackoverflow.com/questions/10057671/how-does-php-foreach-actually-work/14854568#14854568): StackOverflow关于foreach回答的详情
+      + [How Long is a Piece of String](http://blog.golemon.com/2006/06/how-long-is-piece-of-string.html): 一篇关于字符串原理的文章
+      + [PHP Evaluation Order](https://gist.github.com/nikic/6699370): 一篇关于PHP评估顺序的文章
+      + [PHP Internals Book](http://www.phpinternalsbook.com): 一本由三名核心开发编写的关于PHP内核的在线书
+      + [PHP RFCs](https://wiki.php.net/rfc): PHP RFCs主页(请求注解)
+      + [Print vs Echo, Which One is Faster?](http://fabien.potencier.org/print-vs-echo-which-one-is-faster.html): 一篇关于打印和echo性能的文章
+      + [The PHP Ternary Operator. Fast or Not?](http://fabien.potencier.org/the-php-ternary-operator-fast-or-not.html): 一篇关于三元操作性能的文章
+      + [Understanding OpCodes](http://blog.golemon.com/2008/01/understanding-opcodes.html): 一篇关于opcodes的文章
+      + [When Does Foreach Copy?](http://nikic.github.io/2011/11/11/PHP-Internals-When-does-foreach-copy.html): 一篇关于foreach原理的文章
+      + [Why Objects (Usually) Use Less Memory Than Arrays](https://gist.github.com/nikic/5015323): 一篇关于对象和数组原理的文章
+      + [You're Being Lied To](http://blog.golemon.com/2007/01/youre-being-lied-to.html): 一篇关于内核ZVALs的文章
