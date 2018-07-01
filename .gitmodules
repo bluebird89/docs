@@ -106,3 +106,21 @@
 [submodule "Computer/coding-interview-university"]
 	path = Computer/coding-interview-university
 	url = git@github.com:jwasham/coding-interview-university.git
+[submodule "Algorithm/computer-science-in-javascript"]
+	path = Algorithm/computer-science-in-javascript
+	url = git@github.com:nzakas/computer-science-in-javascript.git
+[submodule "CV/awesome-computer-vision"]
+	path = CV/awesome-computer-vision
+	url = git@github.com:jbhuang0604/awesome-computer-vision.git
+[submodule "CV/awesome-deep-vision"]
+	path = CV/awesome-deep-vision
+	url = git@github.com:kjw0612/awesome-deep-vision.git
+[submodule "Computer/cs-video-courses"]
+	path = Computer/cs-video-courses
+	url = git@github.com:Developer-Y/cs-video-courses.git
+[submodule "Computer/awesome-courses"]
+	path = Computer/awesome-courses
+	url = git@github.com:prakhar1989/awesome-courses.git
+[submodule "Resource/papers-we-love"]
+	path = Resource/papers-we-love
+	url = git@github.com:papers-we-love/papers-we-love.git
