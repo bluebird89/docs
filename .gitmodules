@@ -61,9 +61,6 @@
 [submodule "Note/arl"]
 	path = Note/arl
 	url = git@github.com:kaxap/arl.git
-[submodule "Ops/Shell/command-line-text-processing"]
-	path = Ops/Shell/command-line-text-processing
-	url = git@github.com:learnbyexample/Command-line-text-processing.git
 [submodule "Note/awesomo"]
 	path = Note/awesomo
 	url = git@github.com:lk-geimfari/awesomo.git
@@ -100,3 +97,9 @@
 [submodule "Admin/awesome-sysadmin"]
 	path = Admin/awesome-sysadmin
 	url = git@github.com:kahun/awesome-sysadmin.git
+[submodule "shell/awesome-shell"]
+	path = shell/awesome-shell
+	url = git@github.com:alebcay/awesome-shell.git
+[submodule "shell/command-line-text-processing"]
+	path = shell/command-line-text-processing
+	url = git@github.com:learnbyexample/Command-line-text-processing.git
