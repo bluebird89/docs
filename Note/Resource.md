@@ -289,3 +289,4 @@
 * [](https://wiki.nikitavoloboev.xyz)
 * [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets)My cheatsheets https://devhints.io
 * [Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
+* [learnbyexample/curated_resources](https://github.com/learnbyexample/curated_resources):📚 Curated lists for programming, books, movies, music, games, etc
