@@ -25,9 +25,6 @@
 [submodule "Architect/architect-awesome"]
 	path = Architect/architect-awesome
 	url = git@github.com:xingshaocheng/architect-awesome.git
-[submodule "Review/coding-interview-university"]
-	path = Review/coding-interview-university
-	url = git@github.com:jwasham/coding-interview-university.git
 [submodule "Front_end/front-end-guide"]
 	path = Front_end/front-end-guide
 	url = git@github.com:grab/front-end-guide.git
@@ -103,3 +100,9 @@
 [submodule "shell/command-line-text-processing"]
 	path = shell/command-line-text-processing
 	url = git@github.com:learnbyexample/Command-line-text-processing.git
+[submodule "Back_end/Java/awesome-java"]
+	path = Back_end/Java/awesome-java
+	url = git@github.com:akullpp/awesome-java.git
+[submodule "Computer/coding-interview-university"]
+	path = Computer/coding-interview-university
+	url = git@github.com:jwasham/coding-interview-university.git
