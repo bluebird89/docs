@@ -35,7 +35,6 @@ code
 
 * [fastlane/fastlane](https://github.com/fastlane/fastlane):🚀 The easiest way to automate building and releasing your iOS and Android apps https://fastlane.tools
 * [NervJS/taro](https://github.com/NervJS/taro):多端统一开发框架，支持用 React 的开发方式编写一次代码，生成能运行在微信小程序、H5、React Native 等的应用。 https://taro.aotu.io
-* [facebook/Sonar](https://github.com/facebook/Sonar):A desktop debugging platform for mobile developers. https://fbsonar.com
 * [expo/expo](https://github.com/expo/expo):Expo iOS/Android Client https://docs.expo.io/
 * [jiahaog/nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
 
@@ -49,3 +48,7 @@ code
 ## 测试
 
 * [wix/detox](https://github.com/wix/detox):Gray Box End-to-End Testing and Automation Framework for Mobile Apps
+
+# 博客
+
+* [zwwill/blog](https://github.com/zwwill/blog):✏️ stay hungry stay foolish
