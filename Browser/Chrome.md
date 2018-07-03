@@ -23,6 +23,11 @@
 - User-Agent Switcher for Chrome
 - Momentum
 - Octotree:Code tree for GitHub
+- 网站分析工具 Wappalyzer
+- 代码特效图 Marmoset
+- 批量打开多个链接 LinkClump
+- 清除历史记录 Click&Clean
+- 程序调试工具 Firebug Lite
 - Vimium：浏览器vim化
 
   - Navigating the page
