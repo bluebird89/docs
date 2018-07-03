@@ -4,7 +4,6 @@
 
 * 《[图灵的秘密:他的生平、思想及论文解读](https://www.amazon.cn/gp/product/B00AAQXKXS)》
 * 《[计算机系统概论](https://www.amazon.cn/gp/product/B0011F9OQE)》
-
 * 《[TCP/IP详解 卷1：协议](https://www.amazon.cn/gp/product/B00116OTVS)》
 * 《[深入理解计算机系统（原书第2版）](https://www.amazon.cn/gp/product/B004BJ18KM)》
 * 《[计算机程序的构造和解释（Structure and Interpretation of Computer Programs）](https://www.amazon.cn/gp/product/B0011AP7RY)》
@@ -38,6 +37,10 @@
 * 《鸟哥的Linux私房菜:服务器架设篇(第3版)》
 * 《鸟哥的Linux私房菜:基础学习篇(第3版)》
 * Linux运维之道
+* 嵌入式Linux基础教程(第2版)
+* 精通Linux设备驱动程序开发
+* Linux命令行与shell脚本编程大全（第3版）
+
 
 ## 编程通用
 
@@ -77,6 +80,7 @@
 * 《[数据结构与算法分析 : C语言描述（第2版）](https://www.amazon.cn/gp/product/B002WC7NGS)》
 * 《[数据结构与算法分析 : Java语言描述（第2版）](https://www.amazon.cn/gp/product/B01CNP0CG6)》
 * 《数据结构与算法 JavaScript 描述》
+* 图灵程序设计丛书:算法(第4版)
 
 ## 设计
 
@@ -98,6 +102,7 @@
 * 移动交互设计精髓：设计完美的移动用户界面
 * 交互设计那些事儿
 * 无懈可击的web设计
+* 无界面交互
 
 ## Web前端
 
@@ -107,6 +112,8 @@
 * 《DOM 启蒙》
 * Web性能权威指南
 * 《大型网站技术架构》
+* 七周七Web开发框架
+* Web性能权威指南
 
 ### HTML
 
@@ -118,16 +125,16 @@
 
 ### Javascript
 
-* 《Javascript 权威指南》
+* 《Javascript权威指南》
 * 《Javascript高级编程》
-* 《JavaScript 高级程序设计(第3版)》
+* 《JavaScript高级程序设计(第3版)》
 * 《ES6 标准入门(第2版)》
 * 《深入理解ES6》
-* 《JavaScript 异步编程:设计快速响应的网络应用》
-* 《JavaScript DOM 编程艺术》
-* 《JavaScript 设计模式》
-* 《JavaScript 开发框架权威指南》
-* JavaScript 函数式编程
+* 《JavaScript异步编程:设计快速响应的网络应用》
+* 《JavaScriptDOM 编程艺术》
+* 《JavaScript设计模式》
+* 《JavaScript开发框架权威指南》
+* JavaScript函数式编程
 * JS高级程序设计
 * 你不知道的javascript
 * 《[高性能 JavaScript](https://www.amazon.cn/gp/product/B013SGB2AO)》
@@ -183,6 +190,7 @@
 * 《[Java核心技术·卷2：高级特性（原书第9版）](https://www.amazon.cn/gp/product/B00IK7SM6O)》
 * Spring实战（第4版）
 * 《大型网站系统与 Java 中间件实践》
+* Tomcat架构解析
 
 ## PHP
 
@@ -190,7 +198,7 @@
 * 《[深入PHP：面向对象、模式与实践（第3版）](https://www.amazon.cn/gp/product/B005D6IRRY)》
 * 《PHP and MySQL Web Development PHP与MySQL程序设计(第5版)》
 * Modern PHP(中文版)
-* 深入理解PHP:高级技巧、面向对象与核心技术(原书第3版) 
+* 深入理解PHP:高级技巧、面向对象与核心技术(原书第3版)
 
 ## C语言
 
@@ -282,7 +290,6 @@
 * 《[软件系统架构：使用视点和视角与利益相关者合作（第2版）](https://www.amazon.cn/gp/product/B00CMMUXC4)》
 * 《图解服务器端网络架构》
 * 《大型分布式网站架构设计与实践》
-* 大型分布式网站架构设计与实践
 
 ## Docker
 
@@ -305,6 +312,12 @@
 ### React Native
 
 * React Native入门与实战
+* React Native开发指南
+
+## 网站
+
+* 深入分布式缓存：从原理到实践
+
 
 ## 微服务
 
@@ -409,6 +422,36 @@
 * [未来世界的幸存者](http://survivor.ruanyifeng.com/)
 * [前方的路](http://road.ruanyifeng.com/)
 
+## 数据
+
+* 干净的数据：数据清洗入门与实践
+* 数据科学入门
+* Python网络数据采集
+* 洞悉数据：用可视化方法发掘数据真义
+* 决策知识自动化：大数据时代的商业决策分析方法
+* 社会媒体挖掘
+* 云数据中心网络技术
+* 人人都是数据分析师：Tableau应用实战
+* Spark快速大数据分析
+* Spark高级数据分析
+* 数据科学家修炼之道
+* 编程谜题
+
+## 管理
+
+* 如何阅读一本书
+* 精进：如何变成一个厉害的人
+* 这本书能让你睡得好
+
+
+## 经济
+
+* 《经济学》保罗·萨缪尔森（Paul A. Samuelson）
+* 《Essentials of Accounting》 Robert N. Anthony, Leslie K. Breitner
+* 《财务管理分析》Analysis for Financial Management by Robert Higgins
+* 《竞争战略》迈克尔·波特 (Michael Porter)
+* 《自由选择》米尔顿·弗里德曼（Milton Friedman）
+
 ## 投资
 
 * Python与量化投资从基础到实践
@@ -427,8 +470,8 @@
 
 ## 人文
 
-* 《白银时代》
-* 《青铜时代》
+* 黄金时代 白银时代 青铜时代 黑铁时代
+* 一只特立独行的猪
 * 《我的精神家园》
 * 《沉默的大多数》
 * 《一句顶一万句》
@@ -440,6 +483,22 @@
 * 追忆逝水年华
 * 地下室手记
 * 局外人
+* 文学回忆录
+* 没有意义就没有摇摆_（日） 村上春树
+* 玩的就是心跳
+* 看上去很美
+* 动物凶猛
+* 无知者无畏
+* 致女儿书
+* 我的千岁寒
+* 王朔文集
+* 史铁生：《病隙碎笔》《灵魂的事》
+* 周国平：《人与永恒》《守望的距离》《灵魂只能独行》
+* 乔斯坦·贾德：《苏菲的世界》
+* 威尔·杜兰特：《哲学的故事》
+* 柏拉图：《理想国》《苏格拉底之死》
+* 叔本华：《人生的智慧》《叔本华思想随笔》
+
 
 ## 科幻
 
@@ -466,6 +525,10 @@
 * 黑塞的《玻璃球游戏》
 * 坎贝尔的《千面英雄》
 * 五智喇嘛弥伴传奇
+* 天亦有情
+* 纵横四海
+* 我的前半生
+
 
 ## 沟通
 
