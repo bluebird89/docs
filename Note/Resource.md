@@ -80,6 +80,12 @@
 * github：代码的整理
 * Goole keep
 * notes
+* Boostnote
+* MedleyText
+* Quiver
+* OneNote
+* CherryTree
+* TickTick
 
 ## 阅读
 
