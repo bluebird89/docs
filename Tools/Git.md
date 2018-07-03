@@ -16,6 +16,8 @@ fast, scalable, distributed revision control system.一个分布式的代码管�
 * [码云](https://gitee.com)
 * [Coding](https://github.com/)
 * [sourceforge](https://sourceforge.net/):The Complete Open-Source Software Platform
+* [GitKraken](link)
+* [LaunchPad](link)
 
 ## 搭建服务
 

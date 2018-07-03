@@ -10,3 +10,4 @@
 * Mark Shuttleworth：Debian操作系统开发者，
 * FabriceBellard：开发了许多著名的开源软件，其中最著名的是QEMU硬件模拟虚拟平台，FFmpeg多媒体数据处理软件，Tiny C编译器，LZEXE解压缩软件
 * Rasmus Lerdorf：丹麦格陵兰的Rsamus Lerdof 以创建PHP语言闻名，他编写了最初的两个版本，Lerdorf也与Andi Gutmans and和后来创建zend的Zeev Suraski形成的开发小组，完成了PHP最后一个版本的开发。他93年毕业于Wterloo，并获得系统设计工程学士。2002年起，受聘于Yahoo！，职位基础架构师。
+* 李飞飞:谷歌云人工智能与机器学习团队首席科学家,

@@ -1,4 +1,8 @@
-# 安装
+# [astaxie/beego](https://github.com/astaxie/beego)
+
+beego is an open-source, high-performance web framework for the Go programming language. http://beego.me
+
+## 安装
 
 ```go
 go get -u github.com/astaxie/beego
