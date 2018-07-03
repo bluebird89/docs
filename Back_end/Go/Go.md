@@ -1,5 +1,6 @@
-# Go
+# [golang/go](https://github.com/golang/go)
 
+The Go programming language https://golang.org
 
 ## Install
 
@@ -150,8 +151,6 @@ websocketd --port=8080 ./count.sh // 建立server
 ## 框架
 
 - [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
-- [astaxie/beego](https://github.com/astaxie/beego):beego is an open-source, high-performance web framework for the Go programming language. http://beego.me
-- [labstack/echo](https://github.com/labstack/echo):High performance, minimalist Go web framework https://echo.labstack.com
 
 ## 扩展
 
@@ -159,6 +158,7 @@ websocketd --port=8080 ./count.sh // 建立server
 - [grafana/grafana](https://github.com/grafana/grafana)The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
 - [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
 - [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
+* [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
 
 ## 工具
 
@@ -180,7 +180,7 @@ websocketd --port=8080 ./count.sh // 建立server
 
 - [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
 - [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
-- [golang/go](https://github.com/golang/go):The Go programming language https://golang.org
+
 - [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
 - [GO语言中文网](https://studygolang.com/)
 
