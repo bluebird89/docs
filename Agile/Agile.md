@@ -93,4 +93,11 @@
 4:六大原则和设计模式：工厂、策略、代理等用起来会让人感觉很爽，再次来修改代码的时候会比较得心应手。
 5:适当运动。在努力的同时，请保持一个好身体。
 
-[https://mp.weixin.qq.com/s?__biz=MzI1MzcwMDg2MA==∣=2247484027&idx=1&sn=f254604c8a27e885dc3a5a5e70cd5736&chksm=e9d13de8dea6b4fecea5e7ef2d4ecc1f1f995ab24d97416a6247b93a9e7f5e329cdc40deecb5&mpshare=1&scene=1&srcid=0911QpXnVYhrmBAQiH3l13xV&pass_ticket=T61h6XjBkARmtNGuhNVdyhTXYAlGFU%2Brx%2FhZrUNp8OOKx9ul0UwejPXkjaJ%2F3yFI#rd](https://mp.weixin.qq.com/s?__biz=MzI1MzcwMDg2MA==&mid=2247484027&idx=1&sn=f254604c8a27e885dc3a5a5e70cd5736&chksm=e9d13de8dea6b4fecea5e7ef2d4ecc1f1f995ab24d97416a6247b93a9e7f5e329cdc40deecb5&mpshare=1&scene=1&srcid=0911QpXnVYhrmBAQiH3l13xV&pass_ticket=T61h6XjBkARmtNGuhNVdyhTXYAlGFU%2Brx%2FhZrUNp8OOKx9ul0UwejPXkjaJ%2F3yFI#rd)
+## 工具
+
+* MyCollab
+* Odoo
+* OpenProject
+* OrangeScrum
+* Taiga
+* Tuleap
