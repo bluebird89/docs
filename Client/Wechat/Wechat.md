@@ -42,3 +42,7 @@ if ($tmpstr==$signature) {
 * [官方文档](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list)
 * [thenbsp/WeChat](https://github.com/thenbsp/wechat):微信公众平台第三方 SDK 开发包，优雅、健壮，可扩展，遵循 PSR 开发规范。
 * [Urinx/WeixinBot](https://github.com/Urinx/WeixinBot):网页版微信API，包含终端版微信及微信机器人
+
+## 工具
+
+* [15921483570/wechat_spider](https://github.com/15921483570/wechat_spider):微信公众号爬虫 (只需设置代理, 一键可以爬取所有历史文章)

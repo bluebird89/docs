@@ -124,3 +124,9 @@
 [submodule "Resource/papers-we-love"]
 	path = Resource/papers-we-love
 	url = git@github.com:papers-we-love/papers-we-love.git
+[submodule "JavaScript/javascript-algorithms"]
+	path = JavaScript/javascript-algorithms
+	url = git@github.com:trekhleb/javascript-algorithms.git
+[submodule "Back_end/Python/python-guide"]
+	path = Back_end/Python/python-guide
+	url = git@github.com:kennethreitz/python-guide.git

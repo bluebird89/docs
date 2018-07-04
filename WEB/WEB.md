@@ -179,5 +179,3 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
     - Cacti 监测系统的工作原理
 
 ## 参考
-
-

@@ -2640,3 +2640,4 @@ try {
 * [Licia - ](https://github.com/liriliri/licia):一个简单但有用的 JavaScript 片段集合
 * [SBoudrias/Inquirer.js](https://github.com/SBoudrias/Inquirer.js):A collection of common interactive command line user interfaces.
 * [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
+* [kvz/locutus](https://github.com/kvz/locutus):All your standard libraries will be assimilated into our JavaScript collective. Resistance is futile. http://locutus.io

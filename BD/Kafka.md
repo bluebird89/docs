@@ -28,6 +28,7 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic test --from-beg
 
 * [weiboad/kafka-php](https://github.com/weiboad/kafka-php):kafka php client
 * [dpkp/kafka-python](https://github.com/dpkp/kafka-python):Python client for Apache Kafka http://kafka-python.readthedocs.io/
+* [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. https://shopify.github.io/sarama
 
 ## 参考
 

@@ -1,4 +1,4 @@
-# Nginx
+# [nginx/nginx](https://github.com/nginx/nginx)
 
 解决基于进程模型产生的C10k问题，请求时即使无状态连接如web服务都无法达到并发响应量级一万现状。2006年俄罗斯编写。全称为engine X，缩减合并称为nginx。
 
