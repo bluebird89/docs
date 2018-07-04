@@ -1,4 +1,6 @@
-# Walle
+# [walle](https://github.com/meolu/walle-web)
+
+A Web Deployment Tool
 
 Walle 一个web部署系统工具，配置简单、功能完善、界面流畅、开箱即用！支持git、svn版本管理，支持各种web代码发布，PHP，Python，JAVA等代码的发布、回滚，可以通过web来一键完成。
 

@@ -1,4 +1,6 @@
-# Docker
+# [moby/moby](https://github.com/moby/moby)
+
+Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
 
 Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。
 
@@ -329,7 +331,6 @@ services:
 * [Docker for Mac](https://docs.docker.com/docker-for-mac/)
 * [Docker mac 入门](https://docs.docker.com/mac/)
 * [Product and tool manuals](https://docs.docker.com/manuals/) https://docs.docker.com/engine/installation/
-* [moby/moby](https://github.com/moby/moby)Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
 * [Docker — 从入门到实践](https://yeasy.gitbooks.io/docker_practice/)
 * [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects
 

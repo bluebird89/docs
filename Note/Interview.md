@@ -8,6 +8,13 @@
 
 需要有一个承载的产品，而产品研发的过程是非常漫长的。同样地，自动驾驶算法需要汽车生产场商的实验。用户行为分析算法，需要电子商务平台的以用户购买行为进行验证。
 
+* 上级的技术能力
+* 安排合理的流程
+* 平静空间
+* 更多的书面交流
+* 师友关系：职业发展、技术成长
+* 最好的设备
+
 ## 方向
 
 * web：前后端并不是对立的，而是纯粹的一家人。只是被国内外的一些市场强行分成了前后端，归根到底，是需要前后端都懂得
@@ -19,7 +26,6 @@
 
 
 ## 技能点
-
 
 * Python语法以及其他基础部分
     1.可变与不可变类型；
@@ -108,6 +114,7 @@
 * [kdn251/interviews](https://github.com/kdn251/interviews):Everything you need to know to get the job.
 * [ElemeFE/node-interview](https://github.com/ElemeFE/node-interview):How to pass the Node.js interview of ElemeFE.
 * [alex/what-happens-when](https://github.com/alex/what-happens-when):An attempt to answer the age old interview question "What happens when you type google.com into your browser and press enter?"
+* [kamranahmedse/developer-roadmap](https://github.com/kamranahmedse/developer-roadmap):Roadmap to becoming a web developer in 2018
 
 ## 工具
 
