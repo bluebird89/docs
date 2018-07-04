@@ -1,4 +1,6 @@
-# PHPUnit
+# [sebastianbergmann/phpunit](https://github.com/sebastianbergmann/phpunit)
+
+The PHP Unit Testing framework. https://phpunit.de/
 
 ## 安装
 
@@ -23,6 +25,5 @@ phpunit --version
 
 ## 参考
 
-* [sebastianbergmann/phpunit](https://github.com/sebastianbergmann/phpunit):The PHP Unit Testing framework. https://phpunit.de/
-* [PHPUnit文档](http://www.phpunit.cn)
+ [PHPUnit文档](http://www.phpunit.cn)
 

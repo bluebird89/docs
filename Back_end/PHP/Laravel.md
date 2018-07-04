@@ -1432,11 +1432,12 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [laravel/valet](https://github.com/laravel/valet):Valet is a Laravel development environment for Mac minimalists.
 * [weprovide/valet-plus](https://github.com/weprovide/valet-plus):Blazing fast macOS PHP development environment https://medium.com/@timneutkens/intro…
 * [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
-* [laravel-admin](http://laravel-admin.org/docs/#/zh/quick-start)
+* [z-song/laravel-admin](https://github.com/z-song/laravel-admin):Build a full-featured administrative interface in ten minutes http://laravel-admin.org
 * [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
 * [the-control-group/voyager](https://github.com/the-control-group/voyager):Voyager - The Missing Laravel Admin https://laravelvoyager.com
 * [codex-project/codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! http://codex-project.ninja
 * [spatie/laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
+* [FrozenNode/Laravel-Administrator](https://github.com/FrozenNode/Laravel-Administrator):An administrative interface package for Laravel http://administrator.frozennode.com/
 
 ## 教程
 
@@ -1518,6 +1519,9 @@ php artisan jwt:secret # 使用
 
 Call to undefined function openssl_encrypt() # 开启OpenSSL扩展
 
+## 工具
+
+* [laravel/valet](https://github.com/laravel/valet)
 
 ## 参考
 

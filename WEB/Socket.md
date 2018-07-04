@@ -6,7 +6,7 @@ Socket利用网间网通信设施实现进程通信，但它对通信设施的�
 
 应用层通过传输层进行数据通信时，TCP会遇到同时为多个应用程序进程提供并发服务的问题。
 多个TCP连接或多个应用程序进程可能需要通过同一个 TCP协议端口传输数据。
-为了区别不同的应用程序进程和连接，许多计算机操作系统为应用程序与TCP／IP协议交互提供了套接字(Socket)接口。应 用层可以和传输层通过Socket接口，区分来自不同应用程序进程或网络连接的通信，实现数据传输的并发服务。 
+为了区别不同的应用程序进程和连接，许多计算机操作系统为应用程序与TCP／IP协议交互提供了套接字(Socket)接口。应 用层可以和传输层通过Socket接口，区分来自不同应用程序进程或网络连接的通信，实现数据传输的并发服务。
 
 ## 过程
 
@@ -55,7 +55,7 @@ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,
 
 ssize_t sendmsg(int sockfd, const struct msghdr *msg, int flags);
 ssize_t recvmsg(int sockfd, struct msghdr *msg, int flags);
-       
+
 int close(int fd);
 ```
 

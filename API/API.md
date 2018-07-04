@@ -56,21 +56,22 @@ if __name__ == '__main__':
 * [interagent/http-api-design](https://github.com/interagent/http-api-design):HTTP API design guide extracted from work on the Heroku Platform API https://www.gitbook.com/read/book/gee…
 * [GoogleChrome/puppeteer](https://github.com/GoogleChrome/puppeteer):Headless Chrome Node API https://pptr.dev
 * [typicode/json-server](https://github.com/typicode/json-server):Get a full fake REST API with zero coding in less than 30 seconds (seriously)
+* [gongwalker/ApiManager](https://github.com/gongwalker/ApiManager):接口文档管理工具
 
 ## 接口
 
-*  [douban](https://developers.douban.com/wiki/?title=guide)
-*  [jokermonn/-Api](https://github.com/jokermonn/-Api):📖「一个」、「Time 时光」、「开眼」、「一席」、「梨视频」、「微软必应词典」、「金山词典」、「豆瓣电影」、「中央天气」、「魅族天气」、「每日一文」、「12306」、「途牛」、「快递100」、「快递」应用 Api
+* [douban](https://developers.douban.com/wiki/?title=guide)
+* [jokermonn/-Api](https://github.com/jokermonn/-Api):📖「一个」、「Time 时光」、「开眼」、「一席」、「梨视频」、「微软必应词典」、「金山词典」、「豆瓣电影」、「中央天气」、「魅族天气」、「每日一文」、「12306」、「途牛」、「快递100」、「快递」应用 Api
 * [toddmotto/public-apis](https://github.com/toddmotto/public-apis):A collective list of public JSON APIs for use in web development. https://toddmotto.com
 
 ## 流程
 
-*   前后端和产品一起开会讨论项目
-*   后端根据需求，首先定义数据格式和 api
-*   mock api 生成好文档
-*   我们前端才是对接接口的
-*   这里推荐一个文档生成器 swagger
-*   mockjs + rap 或者 easy-mock
+* 前后端和产品一起开会讨论项目
+* 后端根据需求，首先定义数据格式和 api
+* mock api 生成好文档
+* 我们前端才是对接接口的
+* 这里推荐一个文档生成器 swagger
+* mockjs + rap 或者 easy-mock
 
 ## 实例
 

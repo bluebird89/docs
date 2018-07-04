@@ -113,3 +113,7 @@ rails server
 * [activeadmin/activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. https://activeadmin.info
 * [tj/commander](https://github.com/tj/commander):The complete solution for Ruby command-line executables http://visionmedia.github.com/commander
 * [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. https://www.discourse.org
+
+## 参考
+
+* [rubocop-hq/ruby-style-guide](https://github.com/rubocop-hq/ruby-style-guide):A community-driven Ruby coding style guide

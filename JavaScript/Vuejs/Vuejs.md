@@ -13,6 +13,7 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
 
 ## 原理
 
+不要用操作dom的思维去用Vue，用操作数据的思维去用吧
 
 ### 构造器
 

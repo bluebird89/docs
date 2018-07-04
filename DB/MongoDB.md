@@ -30,7 +30,7 @@ sudo apt-get install -y mongodb-org
 
 systemctl start mongod # 启动MongoDB
 systemctl enable mongod # 添加为在启动时启动的服务
-s
+
 sudo service mongodb start | stop | restart
 pgrep mongo -l # 查看服务状态
 

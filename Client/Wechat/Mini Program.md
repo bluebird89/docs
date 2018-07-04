@@ -115,7 +115,7 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 * [Matchmaker](https://github.com/lypeer/Matchmaker) ★107 - 专为微信小程序开发的插件
 * [wecos](https://github.com/tencentyun/wecos) ★64 - 微信小程序 COS 瘦身解决方案
 
-## Project
+## 项目
 
 - [wecqupt](https://github.com/lanshan-studio/wecqupt) ★255 - 在微信内被便捷地获取和传播
 - [豆瓣电影项目](https://github.com/songhaoreact/豆瓣电影项目) ★118 - 微信小程序豆瓣电影项目
@@ -201,6 +201,7 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 - [wejoke](https://github.com/zszdevelop/wejoke) ★11 - 微笑话微信小程序
 - [liwushuoapp](https://github.com/chongbenben/liwushuoapp) ★11 - 微信小程序开发的App
 - [tencentyun/wafer-client-sdk](https://github.com/tencentyun/wafer-client-sdk):Wafer - 快速构建具备弹性能力的微信小程序 https://github.com/tencentyun/wafer
+* [b3log/symphony-weapp](https://github.com/b3log/symphony-weapp):📚 『书单』小程序 https://hacpai.com/tag/book_share
 
 ## 服务端
 
