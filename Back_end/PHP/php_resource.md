@@ -61,7 +61,7 @@
       + [Slim View](https://github.com/slimphp/Slim-Views): Slim自定义视图的集合
 
 * 路由 Routers 处理应用路由的库
-      - [Fast Route](https://github.com/nikic/FastRoute): 一个快速路由的库
+      - [nikic/FastRoute](https://github.com/nikic/FastRoute): 一个快速路由的库
       - [Klein](https://github.com/klein/klein.php): 一个灵活的路由的库
       - [Pux](https://github.com/c9s/Pux): 另一个快速路由的库
       - [Route](https://github.com/thephpleague/route): 一个基于Fast Route的路由的库
@@ -171,18 +171,21 @@
       - (https://github.com/mauris/samsui)[Samsui]: 另一个伪数据生成库
       - (https://github.com/mikey179/vfsStream)[VFS Stream]: 一个用于测试的虚拟文件系统流的包装器
       - (https://github.com/adlawson/php-vfs)[VFS]: 另一个用于测试虚拟的文件系统
-* 持续集成 Continuous Integration 持续集成的库和应用
-      - (https://circleci.com)[CircleCI]: 一个持续集成平台
-      - (https://about.gitlab.com/gitlab-ci/)[GitlabCi]: 使用GitLab CI测试、构建、部署你的代码，像TravisCI
-      - (https://jenkins.io/index.html)[Jenkins]: 一个(http://jenkins-php.org/index.html)[PHP支持]的持续集成平台
-      - (https://github.com/jolicode/JoliCi)[JoliCi]: 一个用PHP编写的由Docker支持的持续集成的客户端
-      - (https://www.phptesting.org/)[PHPCI]: 一个PHP的开源的持续集成平台
-      - (https://semaphoreci.com/)[SemaphoreCI]: 一个开放源码和私人项目的持续集成平台
-      - (https://app.shippable.com/)[Shippable]: 一个基于开源和私人项目持续集成平台的docker
-      - (http://sismo.sensiolabs.org/)[Sismo]: 一个持续测试的服务库
-      - (https://travis-ci.org/)[Travis CI]: 一个持续集成平台
-      - (http://www.wercker.com/)[Wercker]: 一个持续集成平台
-## 文档 Documentation 生成项目文档的库
+
+## 持续集成 Continuous Integration
+
+* (https://circleci.com)[CircleCI]: 一个持续集成平台
+* (https://about.gitlab.com/gitlab-ci/)[GitlabCi]: 使用GitLab CI测试、构建、部署你的代码，像TravisCI
+* (https://jenkins.io/index.html)[Jenkins]: 一个(http://jenkins-php.org/index.html)[PHP支持]的持续集成平台
+* (https://github.com/jolicode/JoliCi)[JoliCi]: 一个用PHP编写的由Docker支持的持续集成的客户端
+* (https://www.phptesting.org/)[PHPCI]: 一个PHP的开源的持续集成平台
+* (https://semaphoreci.com/)[SemaphoreCI]: 一个开放源码和私人项目的持续集成平台
+* (https://app.shippable.com/)[Shippable]: 一个基于开源和私人项目持续集成平台的docker
+* (http://sismo.sensiolabs.org/)[Sismo]: 一个持续测试的服务库
+* (https://travis-ci.org/)[Travis CI]: 一个持续集成平台
+* (http://www.wercker.com/)[Wercker]: 一个持续集成平台
+
+## 文档生成
 
 * (https://github.com/apigen/apigen)[APIGen]: 另一个API文档生成器
 * (https://github.com/justinwalsh/daux.io)[daux.io]: 一个使用Markdown文件的文档生成器
@@ -472,6 +475,7 @@
       - (https://github.com/sobstel/metaphore)[Metaphore]: 一个缓存失效防范的库，使用信号标记阻止dogpile影响
       - (https://github.com/tedious/Stash)[Stash]: 另一个缓存库
       - (https://github.com/zendframework/zend-cache)[Zend Cache]: 另一个缓存库 (ZF2)
+      - [PHPSocialNetwork/phpfastcache](https://github.com/PHPSocialNetwork/phpfastcache):A PHP high-performance backend cache system. PhpFastCache is intended for use in speeding up dynamic web applications by alleviating database load. Well implemented, PhpFastCache can drops the database load to almost nothing, yielding faster page load times for users, better resource utilization. It is simple yet powerful. https://www.phpfastcache.com
 * 数据结构和存储 Data Structure and Storage 实现数据结构和存储技术的库
       - (https://github.com/morrisonlevi/Ardent)[Ardent]: 一个数据结构库
       - (https://github.com/cakephp/collection)[Cake Collection]: 一个简单的集合库 (CP)
@@ -648,33 +652,71 @@
       - [PHP UK Conference](https://www.youtube.com/user/phpukconference/videos): 一个PHP英国会议的视频集合
       - [Programming with Anthony](https://www.youtube.com/playlist?list=PLM-218uGSX3DQ3KsB5NJnuOqPqc5CW2kW): Anthony Ferrara的视频系列
       - [Taking PHP Seriously](https://www.infoq.com/presentations/php-history): 来自Facebook Keith Adams 讲述PHP优势
-* PHP播客 PHP Podcasts 专注于PHP话题的博客
-      - [PHP Town Hall](https://phptownhall.com/): 一个随意的Ben Edmunds和Phil Sturgeon的PHP播客
-      - [PHP Roundtable](https://www.phproundtable.com/): PHP Roundtable是一个讨论PHP开发者关心话题的临时聚会
-* PHP阅读
-      - [Composer Primer](https://daylerees.com/composer-primer/): Composer初级使用
-      - [Composer Stability Flags](https://igor.io/2013/02/07/composer-stability-flags.html): 一篇关于Composer稳定性标志的文章
-      - [Composer Versioning](https://igor.io/2013/01/07/composer-versioning.html): 一篇关于Composer版本的文章
-      - [Create Your Own PHP Framework](http://fabien.potencier.org/create-your-own-framework-on-top-of-the-symfony2-components-part-1.html): 一部Fabien Potencier的关于如何创建你自己的PHP框架的系列文章
-      - [Don't Worry About BREACH](http://blog.ircmaxell.com/2013/08/dont-worry-about-breach.html): 一篇关于BREACH攻击和CSRF令牌的文章
-      - [On PHP 5.3, Lambda Functions and Closures](http://fabien.potencier.org/on-php-5-3-lambda-functions-and-closures.html): 一篇关于lambda函数和闭包的文章
-      - [PHP Is Much Better Than You Think](http://fabien.potencier.org/php-is-much-better-than-you-think.html): 一篇关于PHP语言和生态圈的文章
-      - [PHP Package Checklist](http://phppackagechecklist.com/): 一个成功PHP包开发的清单
-      - [PHP Sucks! But I Like It!](http://blog.ircmaxell.com/2012/04/php-sucks-but-i-like-it.html): 一篇关于PHP利弊的文章
-      - [Preventing CSRF Attacks](http://blog.ircmaxell.com/2013/02/preventing-csrf-attacks.html): 一篇阻止CSRF攻击的文章
-      - [Seven Ways to Screw Up BCrypt](http://blog.ircmaxell.com/2012/12/seven-ways-to-screw-up-bcrypt.html): 一篇关于纠正BCrypt实现的文章
-      - [Use Env](https://seancoates.com/blogs/use-env/): 一篇关于使用unix环境帮助的文章
-* PHP内核阅读
-      + [Disproving the Single Quotes Myth](http://nikic.github.io/2012/01/09/Disproving-the-Single-Quotes-Performance-Myth.html): 一篇关于单，双引号字符串性能的文章
-      + [How Big Are PHP Arrays (And Values) Really?](http://nikic.github.io/2011/12/12/How-big-are-PHP-arrays-really-Hint-BIG.html): 一篇关于数组原理的文章
-      + [How Foreach Works](http://stackoverflow.com/questions/10057671/how-does-php-foreach-actually-work/14854568#14854568): StackOverflow关于foreach回答的详情
-      + [How Long is a Piece of String](http://blog.golemon.com/2006/06/how-long-is-piece-of-string.html): 一篇关于字符串原理的文章
-      + [PHP Evaluation Order](https://gist.github.com/nikic/6699370): 一篇关于PHP评估顺序的文章
-      + [PHP Internals Book](http://www.phpinternalsbook.com): 一本由三名核心开发编写的关于PHP内核的在线书
-      + [PHP RFCs](https://wiki.php.net/rfc): PHP RFCs主页(请求注解)
-      + [Print vs Echo, Which One is Faster?](http://fabien.potencier.org/print-vs-echo-which-one-is-faster.html): 一篇关于打印和echo性能的文章
-      + [The PHP Ternary Operator. Fast or Not?](http://fabien.potencier.org/the-php-ternary-operator-fast-or-not.html): 一篇关于三元操作性能的文章
-      + [Understanding OpCodes](http://blog.golemon.com/2008/01/understanding-opcodes.html): 一篇关于opcodes的文章
-      + [When Does Foreach Copy?](http://nikic.github.io/2011/11/11/PHP-Internals-When-does-foreach-copy.html): 一篇关于foreach原理的文章
-      + [Why Objects (Usually) Use Less Memory Than Arrays](https://gist.github.com/nikic/5015323): 一篇关于对象和数组原理的文章
-      + [You're Being Lied To](http://blog.golemon.com/2007/01/youre-being-lied-to.html): 一篇关于内核ZVALs的文章
+
+## 播客 PHP Podcasts
+
+- [PHP Town Hall](https://phptownhall.com/): 一个随意的Ben Edmunds和Phil Sturgeon的PHP播客
+- [PHP Roundtable](https://www.phproundtable.com/): PHP Roundtable是一个讨论PHP开发者关心话题的临时聚会
+
+## 阅读
+
+* [Composer Primer](https://daylerees.com/composer-primer/): Composer初级使用
+* [Composer Stability Flags](https://igor.io/2013/02/07/composer-stability-flags.html): 一篇关于Composer稳定性标志的文章
+* [Composer Versioning](https://igor.io/2013/01/07/composer-versioning.html): 一篇关于Composer版本的文章
+* [Create Your Own PHP Framework](http://fabien.potencier.org/create-your-own-framework-on-top-of-the-symfony2-components-part-1.html): 一部Fabien Potencier的关于如何创建你自己的PHP框架的系列文章
+* [Don't Worry About BREACH](http://blog.ircmaxell.com/2013/08/dont-worry-about-breach.html): 一篇关于BREACH攻击和CSRF令牌的文章
+* [On PHP 5.3, Lambda Functions and Closures](http://fabien.potencier.org/on-php-5-3-lambda-functions-and-closures.html): 一篇关于lambda函数和闭包的文章
+* [PHP Is Much Better Than You Think](http://fabien.potencier.org/php-is-much-better-than-you-think.html): 一篇关于PHP语言和生态圈的文章
+* [PHP Package Checklist](http://phppackagechecklist.com/): 一个成功PHP包开发的清单
+* [PHP Sucks! But I Like It!](http://blog.ircmaxell.com/2012/04/php-sucks-but-i-like-it.html): 一篇关于PHP利弊的文章
+* [Preventing CSRF Attacks](http://blog.ircmaxell.com/2013/02/preventing-csrf-attacks.html): 一篇阻止CSRF攻击的文章
+* [Seven Ways to Screw Up BCrypt](http://blog.ircmaxell.com/2012/12/seven-ways-to-screw-up-bcrypt.html): 一篇关于纠正BCrypt实现的文章
+* [Use Env](https://seancoates.com/blogs/use-env/): 一篇关于使用unix环境帮助的文章
+
+## PHP内核
+
+* [Disproving the Single Quotes Myth](http://nikic.github.io/2012/01/09/Disproving-the-Single-Quotes-Performance-Myth.html): 一篇关于单，双引号字符串性能的文章
+* [How Big Are PHP Arrays (And Values) Really?](http://nikic.github.io/2011/12/12/How-big-are-PHP-arrays-really-Hint-BIG.html): 一篇关于数组原理的文章
+* [How Foreach Works](http://stackoverflow.com/questions/10057671/how-does-php-foreach-actually-work/14854568#14854568): StackOverflow关于foreach回答的详情
+* [How Long is a Piece of String](http://blog.golemon.com/2006/06/how-long-is-piece-of-string.html): 一篇关于字符串原理的文章
+* [PHP Evaluation Order](https://gist.github.com/nikic/6699370): 一篇关于PHP评估顺序的文章
+* [PHP Internals Book](http://www.phpinternalsbook.com): 一本由三名核心开发编写的关于PHP内核的在线书
+* [PHP RFCs](https://wiki.php.net/rfc): PHP RFCs主页(请求注解)
+* [Print vs Echo, Which One is Faster?](http://fabien.potencier.org/print-vs-echo-which-one-is-faster.html): 一篇关于打印和echo性能的文章
+* [The PHP Ternary Operator. Fast or Not?](http://fabien.potencier.org/the-php-ternary-operator-fast-or-not.html): 一篇关于三元操作性能的文章
+* [Understanding OpCodes](http://blog.golemon.com/2008/01/understanding-opcodes.html): 一篇关于opcodes的文章
+* [When Does Foreach Copy?](http://nikic.github.io/2011/11/11/PHP-Internals-When-does-foreach-copy.html): 一篇关于foreach原理的文章
+* [Why Objects (Usually) Use Less Memory Than Arrays](https://gist.github.com/nikic/5015323): 一篇关于对象和数组原理的文章
+* [You're Being Lied To](http://blog.golemon.com/2007/01/youre-being-lied-to.html): 一篇关于内核ZVALs的文章
+* [codeguy/php-the-right-way](https://github.com/codeguy/php-the-right-way):An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web https://www.phptherightway.com
+* [walu/phpbook](https://github.com/walu/phpbook):PHP扩展开发及内核应用
+* [hoohack/read-php-src](https://github.com/hoohack/read-php-src)
+
+## 扩展
+
+* [phalcon/zephir](https://github.com/phalcon/zephir):Zephir is a compiled high level language aimed to the creation of C-extensions for PHP https://zephir-lang.com/
+
+## Log
+
+* [SeasX/SeasLog](https://github.com/SeasX/SeasLog)：An effective,fast,stable log extension for PHP.http://pecl.php.net/package/SeasLog http://neeke.github.io/SeasLog/
+
+## trace
+
+* [Qihoo360/phptrace](https://github.com/Qihoo360/phptrace):A tracing and troubleshooting tool for PHP scripts.
+
+## Socket
+
+* [walkor/phpsocket.io](https://github.com/walkor/phpsocket.io):A server side alternative implementation of socket.io in PHP based on workerman.
+* [OpenIBC/Ohsce](https://github.com/OpenIBC/Ohsce):PHP HI-REL SOCKET TCP/UDP/ICMP/Serial .高可靠性PHP通信&控制框架SOCKET-TCP/UDP/ICMP/硬件Serial-RS232/RS422/RS485 AND MORE! http://www.ohsce.org
+
+## ML
+
+* [php-ai/php-ml](https://github.com/php-ai/php-ml):PHP-ML - Machine Learning library for PHP
+
+## DI
+
+* [PHP-DI/PHP-DI](https://github.com/PHP-DI/PHP-DI):The dependency injection container for humans http://php-di.org
+
+## SMS
+
+* [overtrue/easy-sms](https://github.com/overtrue/easy-sms):📲 一款满足你的多种发送需求的短信发送组件

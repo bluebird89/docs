@@ -42,7 +42,7 @@
 *
 */
 interface Calculation
-{    
+{
     /**
     * do()方法可扩展到其他二元运算类型
     *
@@ -109,22 +109,22 @@ class DivCalculator implements Calculation
 
 
 class Calculator
-{ 
+{
     /**
     * 当前计算器
     */
     private $calculator;
-    
+
     /**
     * 用于保存当前运算结果，可用作下一次运算的 $operand1
     */
     private $result = NULL;
-    
+
     public function __construct(Calculation $calculator = NULL)
     {
         $this->calculator = $calculator;
     }
-    
+
     /**
     * 更换当前计算器
     *
@@ -134,7 +134,7 @@ class Calculator
     {
         $this->calculator = $calculator;
     }
-    
+
     /**
     * 执行计算
     */
@@ -142,15 +142,15 @@ class Calculator
     {
         //如果$calculator != NULL，则更换当前计算器
         $this->calculator = $calculator ?? $this->calculator;
-        
+
         if ($operand2 === NULL) {//启用前一次运算结果
             $operand2 = $operand1;
             $operand1 = $this->result;
         }
-        
+
         $this->result = $this->calculator->do($operand1, $operand2);
         echo "{$this->result}\n";
-        
+
         return $this->result;
     }
 }
@@ -188,3 +188,5 @@ $cal->do('INF');//Fatal error: Uncaught TypeError: Argument 1 passed to Calculat
 
 - Design Patterns - Elements of Reusable Object-Oriented Software（中文译名：设计模式 - 可复用的面向对象软件元素）
 - [常见设计模式的定义，应用场景和方法](http://www.jianshu.com/p/f3c76b695167)
+- [hoohack/DesignPattern](https://github.com/hoohack/DesignPattern):设计模式：PHP和Go语言实现
+

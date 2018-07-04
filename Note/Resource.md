@@ -272,6 +272,10 @@
   - trello
   - sourcetree
 
+## 词典
+
+* [Flowerowl/ici](https://github.com/Flowerowl/ici):💥A dictionary used by programmers in the command line https://pypi.python.org/pypi/ici/
+
 ## 参考
 
 * [2017杭州云栖大会](https://github.com/Alimei/hangzhouYunQi2017ppt?files=1)
@@ -296,3 +300,5 @@
 * [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets)My cheatsheets https://devhints.io
 * [Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
 * [learnbyexample/curated_resources](https://github.com/learnbyexample/curated_resources):📚 Curated lists for programming, books, movies, music, games, etc
+* [stanzhai/be-a-professional-programmer](https://github.com/stanzhai/be-a-professional-programmer):成为专业程序员路上用到的各种优秀资料、神器及框架 http://tools.stanzhai.site
+* [hedengcheng/tech](https://github.com/hedengcheng/tech):programming, database, distributed systemee

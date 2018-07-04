@@ -614,6 +614,7 @@ var jq=jQuery.noConflict();
 
 - [blueimp/jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload)
 - [Studio-42/elFinder](https://github.com/Studio-42/elFinder):Open-source file manager for web, written in JavaScript using jQuery and jQuery UI https://studio-42.github.io/elFinder/
+- [mumuy/widget](https://github.com/mumuy/widget):A set of widgets based on jQuery&&javascript. 一套基于jquery或javascript的插件库 ：轮播、标签页、滚动条、下拉框、对话框、搜索提示、城市选择(城市三级联动)、日历等 http://jquerywidget.com/
 
 ## 参考
 

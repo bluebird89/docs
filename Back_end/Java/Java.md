@@ -181,7 +181,7 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 - netty
 - Spring
 
-## 线程
+## 教程
 
 * [Java 教程](http://www.runoob.com/java/)
 * [Java学习路线图](http://www.jianshu.com/p/d51551b0a8ba)
@@ -199,11 +199,9 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 * [grpc/grpc-java](https://github.com/grpc/grpc-java)The Java gRPC implementation. HTTP/2 based RPC https://grpc.io
 * [alibaba/p3c](https://github.com/alibaba/p3c):Alibaba Java Coding Guidelines pmd implements and IDE plugin https://github.com/alibaba/p3c/wiki
 
-## 资源
-
-* [aalansehaiyang/technology-talk](https://github.com/aalansehaiyang/technology-talk)：汇总java生态圈常用技术框架、开源中间件，系统架构、项目管理、经典架构案例、数据库、常用三方库、线上运维等知识
-
 ## 参考
 
+* [aalansehaiyang/technology-talk](https://github.com/aalansehaiyang/technology-talk)：汇总java生态圈常用技术框架、开源中间件，系统架构、项目管理、经典架构案例、数据库、常用三方库、线上运维等知识
 - [zhanglei-workspace/shopping-management-system](https://github.com/zhanglei-workspace/shopping-management-system)
 * [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns):Design patterns implemented in Java http://java-design-patterns.com
+* [Java-Interview（Star 19183）](link)

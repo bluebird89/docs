@@ -12,6 +12,10 @@ php bin/console server:run
 php bin/console server:start 0.0.0.0:8000
 ```
 
+## 扩展
+
+* [symfony/thanks](https://github.com/symfony/thanks):Give thanks (in the form of a GitHub ★) to your fellow PHP package maintainers (not limited to Symfony components)!
+
 ## 框架
 
 * [Documentation](https://symfony.com/doc/current/index.html)
