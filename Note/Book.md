@@ -125,6 +125,11 @@
 * 无懈可击的web设计
 * 无界面交互
 
+## HTTP
+
+* 图解HTTP
+* HTTP权威指南：需要理解HTTP的本质复杂度，并且避免被作者引入的非本质复杂度的干扰。
+
 ## Web前端
 
 * [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
