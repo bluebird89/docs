@@ -720,3 +720,11 @@
 ## SMS
 
 * [overtrue/easy-sms](https://github.com/overtrue/easy-sms):📲 一款满足你的多种发送需求的短信发送组件
+
+## 支付
+
+* [yansongda/pay](https://github.com/yansongda/pay):可能是我用过的最优雅的 Alipay 和 WeChat 的支付 SDK 扩展包了
+
+## 写作
+
+* [michelf/php-markdown](https://github.com/michelf/php-markdown):Parser for Markdown and Markdown Extra derived from the original Markdown.pl by John Gruber. http://michelf.ca/projects/php-markdown/
