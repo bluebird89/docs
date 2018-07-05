@@ -1,4 +1,6 @@
-# Python
+# * [python/cpython](https://github.com/python/cpython)
+
+The Python programming language
 
 Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编写的一个编程语言。
 
@@ -1326,7 +1328,6 @@ CMD ["python3"]
 
 ## 参考
 
-* [python/cpython](https://github.com/python/cpython):The Python programming language
 * [donnemartin/data-science-ipython-notebooks](https://github.com/donnemartin/data-science-ipython-notebooks):Data science Python notebooks: Deep learning (TensorFlow, Theano, Caffe, Keras), scikit-learn, Kaggle, big data (Spark, Hadoop MapReduce, HDFS), matplotlib, pandas, NumPy, SciPy, Python essentials, AWS, and various command lines.
 * [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide):Python best practices guidebook, written for Humans. http://docs.python-guide.org
 * [faif/python-patterns](https://github.com/faif/python-patterns):A collection of design patterns/idioms in Python

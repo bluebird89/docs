@@ -6,24 +6,150 @@ UNIX/Linux 本身是没有图形界面的，我们通常在 UNIX/Linux 发行版
 
 Linux 是一个可以实现多用户登陆的操作系统，多用户可以同时登陆同一台主机，共享主机的一些资源，不同的用户也分别有自己的用户空间，可用于存放各自的文件。虽然不同用户的文件是放在同一个物理磁盘上的甚至同一个逻辑分区或者目录里，但是由于 Linux 的用户管理和 文件权限机制，不同用户不可以轻易地查看、修改彼此的文件。
 
+## Linux vs Unix
+
+### Unix
+
+> Unix的历史起始于二十世纪六十年代的AT&T贝尔实验室，在那时，一小组程序员正在为PDP-7编写多任务、多用户操作系统。在贝尔实验室研究机构的这个小组里有两位最知名的人物，ken Thompson和Dennis Ritchie。
+> 尽管Unix的许多概念继承于它的先驱Multics，但在二十世纪八十代早期Unix小组用C语言重写这个小型操作系统的决定使得Unix与其它的系统区别开来。那个时候的操作系统很少是可移植的。相反，由于先天的设计和底层源语言，那些操作系统和所被授权运行的硬件平台紧密地联系在一起。
+> 通过使用C语言重构Unix，现在Unix可以被移植到许多硬件平台。
+
+> 除了这个新的可移植移能力，有几个对于用户和程序员来说很有吸引力的操作系统设计的关键点使得Unix扩张到除贝尔实验室以外的其它领域，如研究、学术甚至商业用途。
+> 关键点一，Ken Thompson的Unix哲学成为了模块化软件设计和计算的强有力的典范。
+> Unix哲学建议使用小规模的为特定目的构建的程序的结合体来处理复杂的总体任务。由于Unix是围绕着文件和管道设计的，这个"piping（管道)“模型至今仍然很流行，它把程序的输入和输出链接在一起作为一系列的线性输入操作。实际上，当今的函数即服务（FaaS）/无服务器计算模型要更多地归功于对Unix哲学的继承。
+
+> 在20世纪70和80年代末，Unix成为了族谱的根，族谱扩展到研究届、学术届和不断增长的商业Unix操作系统业务。Unix不是开源软件，Unix源码可以与它的拥有者AT&T通过协议获得许可证。第一个已知的软件许可证在1975年卖给了伊利诺伊大学。
+>
+> Unix在学术界发展迅速，随着伯克利成为重要的活动中心，在70年代给了Ken Thompson一个学术休假。通过在伯克利的Unix的所有活动，一个新的Unix软件支付诞生了：伯克利软件发行版，或者叫BSD。最初，BSD并不是AT&T的Unix的代替品，而是附加软件和功能附加品。直到1979年的2BSD（第二Berkeley软件发型版），伯克利研究生Bill Joy已经添加了现在知名的程序，例如vi和C shell（/bin/csh）。
+>
+> 除了BSD，它成为了Unix家族中最受欢迎的分支之一，Unix的商业产品在20世纪80年代和90年代激增，包括HP-UX、IBM的AIX、Sun的Solaris、Sequent和Xenix。随着分支从最初的根开始增长，“Unix战争”开始了，标准化成为了社区的一个新焦点。POSIX标准诞生于1988年，以及其他开源工作组的标准化工作一直进行到到20世纪90年代。
+>
+> BSD可能是当今所有现代Unix系统中最大的安装基础。此外，在最近的历史中，每一个苹果Mac硬件单元搭载的系统都可以被称为BSD，因为它的OS X（现在的macOS）操作系统是一个BSD-派生。
+>
+
+### Linux
+
+> Linux操作系统实际上是90年代初期的两个成果的组合。
+>
+> Richard Stallman希望创建一个作为替代私有Unix系统的真正免费的和开源的系统。他正在以GNU的名义开发实用工具和程序，这是一种递归算法，意思是“GNU不是Unix！” 虽然它有一个内核项目正在进行，但结果证实开展起来很困难，这样没有内核，免费并开源操作系统的梦想就无法实现。
+>
+> Linus Torvald的工作 - 编写出一种可工作的和可行的内核，被他称为Linux--整个操作系统因此而诞生。鉴于Linus使用的是多种GNU工具（例如GNU编译器集合或GCC），GNU工具和Linux内核的结合是天生的绝配。
+>
+> Linux发行版使用GNU提供的组件、Linux内核，MIT的X-Windows GUI以及其他可以在开源BSD许可下使用的BSD组件来实现。像Slackware和Red Hat这样的发行版的早期流行给了上世纪90年代的“普通PC用户”使用Linux操作系统的机会，以及他们在工作或学术生活中使用的许多专有的Unix系统功能和实用工具。
+>
+> 在免费和开源组件之上提供支持的商业Linux产品变得可行，因为包括IBM在内的许多企业都从专有的Unix迁移到在Linux上提供中间件和软件解决方案。Red Hat在Red Hat Enterprise Linux周围建立了一个商业支持模型，德国供应商SUSE Linux Enterprise Server（SLES）也是如此。
+
+### 对比
+
+* 相似
+  - 用户体验角度来讲，没有太多区别！Linux的大部分优点包括操作系统可跨多硬件架构（包括现代PC）特性，以及能够让Unix系统的管理员和用户使用他们熟悉的工具的能力。
+  - 在Unix上编写的软件可以在Linux操作系统上编译，而在移植方面不用花费太多的功夫。
+  - 作为把Linux作为主要目标的开发平台，macOS设备和操作系统的普及，可能归功于类BSD的macOS操作系统。很多Linux系统工具和脚本可以简单地在macOS终端运行。很多在Linux上可用的开源软件组件也可以在macOS上使用，如Homebrew。
+* 区别
+  - 开源vs.私有，授权软件
+    + Unix发行版中缺少通用内核对软件和硬件供应商都有影响。由于Unix家族的商业和学术分支，供应商可能不得不为不同版本的Unix开发不同的驱动，而且作为很多不同版本的Unix的二进制设备驱动，对这些软件的SDK或者发行版本的访问，也会让他们有授权和其他方面的担忧。
+    + 对于Linux，供应商可以为特定硬件设备创建设备驱动，并有理由预计，它可以在大多数发行版中运行。
+* Unix树的BSD分支是开源的，而NetBSD、OpenBSD和FreeBSD都有强大的用户群和开源社区
+* Linux 已经显示出超越专有 Unix 的显著优势在于其在大量硬件平台和设备上的可用性。 Raspberry Pi 受到业余爱好者和发烧友的欢迎，它是 Linux 驱动的，为运行 Linux 的各种物联网设备打开了大门。 我们已经提到了 Android 设备，汽车（包括Automotive Grade Linux）和智能电视，其中Linux占有很大的市场份额。 这个星球上的每个云提供商都提供运行Linux的虚拟服务器，而且当今许多最受欢迎的云本地堆栈都是基于 Linux 的，无论您是在谈论容器运行时还是Kubernetes，还是许多无服务器的平台都越来越受欢迎。
+* 最显着的趋势是近年来微软的转变。 如果你十年前告诉软件开发人员，Windows操作系统将在2016年“运行Linux”，他们中的大多数人会歇斯底里地笑了。 但是Windows Linux子系统（WSL）的存在和普及，以及最近宣布的诸如Docker的Windows端口（包括Windows上的Linux容器）支持等功能都证明了Linux具有的影响
+
+### 版本
+
+* [Arch Linux](https://www.archlinux.org/)
+* Fedora
+* Canonical的Ubuntu、Debian
+* Gentoo
+* Red Hat Enterprise Linux
+* SUSE Linux Enterprise Server
+
 ## 目录结构
 
-Linux 文件系统是一个目录树的结构，文件系统结构从一个根目录开始，根目录下可以有任意多个文件和子目录，子目录中又可以有任意多个文件和子目录
+Linux 文件系统是一个目录树的结构，文件系统结构从一个根目录开始，根文件系统所占空间一般应该比较小，因为其中的绝大部分文件都不需要经常改动，而且包括严格的文件和一个小的 不经常改变的文件系统不容易损坏。除了可能的一个叫/vmlinuz标准的系统引导映像之外，根目录一般不含任何文 件
 
-* bin   存放二进制可执行文件(ls,cat,mkdir等)
-* boot  存放用于系统引导时使用的各种文件
-* dev   用于存放设备文件
-* etc    存放系统配置文件
-* home  存放所有用户文件的根目录
-* lib    存放跟文件系统中的程序运行所需要的共享库及内核模块
-* mnt   系统管理员安装临时文件系统的安装点
-* opt    额外安装的可选应用程序包所放置的位置
-* proc   虚拟文件系统，存放当前内存的映射
-* root   超级用户目录
-* sbin   存放二进制可执行文件，只有root才能访问
-* tmp   用于存放各种临时文件
-* usr    用于存放系统应用程序，比较重要的目录/usr/local 本地管理员软件安装目录
-* var    用于存放运行时需要改变数据的文件
+* /：每台机器都有根文件系统，它包含系统引导和使其他文件系统得以mount所必要的文件，根文件系统应该有单用户状态所必须的足够的内容。还应该包括修复损坏 系统、恢复备份等的工具。
+* /bin：包含了引导启动所需的命令或普通用户可能用的命令(可能在引导启动后),都是二进制可执行命令。多是系统中重要的系统文件
+* /boot：目录存放引导加载器(bootstrap loader)使用的文件，如lilo，核心映像也经常放在这里，而不是放在根目录中。但是如果有许多核心映像，这个目录就可能变得很大，这时使用单独的 文件系统会更好一些。还有一点要注意的是，要确保核心映像必须在ide硬盘的前1024柱面内。
+* /dev：存放了设备文件，即设备驱动程序，用户通过这些文件访问外部设备。比如，用户可 以通过访问/dev/mouse来访问鼠标的输入，就像访问其他文件一样。
+  - /dev/console：系统控制台，也就是直接和系统连接的监视器。
+  - /dev/hd：ide硬盘驱动程序接口。如：/dev/hda指的是第一个硬 盘，had1则是指/dev/hda的第一个分区。如系统中有其他的硬盘，则依次为/dev /hdb、/dev/hdc、. . . . . .；如有多个分区则依次为hda1、hda2 . . . . . .
+  - /dev/sd：scsi磁盘驱动程序接口。如系统有scsi硬盘，就不会访问/dev/had， 而会访问/dev/sda。
+  - /dev/fd：软驱设备驱动程序。如：/dev/fd0指 系统的第一个软盘，也就是通常所说的a盘，/dev/fd1指第二个软盘，. . . . . .而/dev/fd1 h1440则表示访问驱动器1中的4.5高密盘。
+  - /dev/st：scsi磁带驱动器驱动程序。
+  - /dev/tty：提供虚拟控制台支持。如：/dev/tty1指 的是系统的第一个虚拟控制台，/dev/tty2则是系统的第二个虚拟控制台。
+  - /dev/pty：提供远程登陆伪终端支持。在进行telnet登录时就要用到/dev/pty设 备。
+  - /dev/ttys：计算机串行接口，对于dos来说就是“com1”口。
+  - /dev/cua：计算机串行接口，与调制解调器一起使用的设备。
+  - /dev/null：“黑洞”，所有写入该设备的信息都将消失。例如：当想要将屏幕 上的输出信息隐藏起来时，只要将输出信息输入到/dev/null中即可。
+* /etc：系统管理和配置文件。
+  * /etc/rc或者/etc/rc.d：启动、或改变运行级时运行的脚本或脚本的目录。系统初始化文件
+  * /etc/passwd：用户数据库，其中的域给出了用户名、真实姓名、用户起始目 录、加密口令和用户的其他信息。
+  - /etc/fdprm：软盘参数表，用以说明不同的软盘格式。可用setfdprm进 行设置。更多的信息见setfdprm的帮助页。
+  - /etc/fstab：指定启动时需要自动安装的文件系统列表。也包括用swapon -a启用的swap区的信息。
+  - /etc/group：类似/etc/passwd ，但说明的不是用户信息而是组的信息。包括组的各种数据。
+  - /etc/inittab：init 的配置文件。
+  - /etc/issue：包括用户在登录提示符前的输出信息。通常包括系统的一段短说明 或欢迎信息。具体内容由系统管理员确定。
+  - /etc/magic：“file”的配置文件。包含不同文件格式的说 明，“file”基于它猜测文件类型。
+  - /etc/motd：motd是message of the day的缩写，用户成功登录后自动输出。内容由系统管理员确定。常用于通告信息，如计划关机时间的警告等。
+  - /etc/mtab：当前安装的文件系统列表。由脚本(scritp)初始化，并由 mount命令自动更新。当需要一个当前安装的文件系统的列表时使用(例如df命令)。
+  - /etc/shadow：在安装了影子(shadow)口令软件的系统上的影子口令 文件。影子口令文件将/etc/passwd文件中的加密口令移动到/etc/shadow中，而后者只对超级用户(root)可读。这使破译口令更困 难，以此增加系统的安全性。
+  - /etc/login.defs：login命令的配置文件。
+  - /etc/printcap：类似/etc/termcap ，但针对打印机。语法不同。
+  - /etc/profile 、/etc/csh.login、/etc/csh.cshrc：登 录或启动时bourne或cshells执行的文件。这允许系统管理员为所有用户建立全局缺省环境。
+  - /etc/securetty：确认安全终端，即哪个终端允许超级用户(root) 登录。一般只列出虚拟控制台，这样就不可能(至少很困难)通过调制解调器(modem)或网络闯入系统并得到超级用户特权。
+  - /etc/shells：列出可以使用的shell。chsh命令允许用户在本文件 指定范围内改变登录的shell。提供一台机器ftp服务的服务进程ftpd检查用户shell是否列在/etc/shells文件 中，如果不是，将不允许该用户登录。
+  - /etc/termcap：终端性能数据库。说明不同的终端用什么“转义序列”控 制。写程序时不直接输出转义序列(这样只能工作于特定品牌的终端)，而是从/etc/termcap中查找要做的工作的 正确序列。这样，多数的程序可以在多数终端上运行。
+  - /etc/apt/sources.list：软件源管理
+* /home：用户主目录的基点
+  * 比如用户user的主目录就是/home/user，可以用~user表示。
+  * /root：系统管理员的主目录。
+* /lib：标准程序设计库，又叫动态链接共享库及内核模块，作用类似windows里的.dll文件。根文件系统上的程序所需的共享库，这些文件包含了可被许多程序共享的代码，以避免每个程序都包含有相同的子程序的副本，故可以使得可执行文件变得更小，节省空间。
+  - /lib/modules目录包含系统核心可加载各种模块，尤其是那些在恢复损坏的系统时重 新引导系统所需的模块(例如网络和文件系统驱动)。
+* /mnt：系统管理员临时安装(mount)文件系统的安装点。程序并不自动支持安装到/mnt 。/mnt下面可以分为许多子目录，例如/mnt/dosa可能是使用 msdos文件系统的软驱，而/mnt/exta可能是使用ext2文件系统的软驱，/mnt/cdrom光 驱等等。
+* opt：额外安装的可选应用程序包所放置的位置，刚才装的测试版firefox，就可以装到/opt/firefox_beta目录下，/opt/firefox_beta目录下面就包含了运 行firefox所需要的所有文件、库、数据等等。要删除firefox的时候，你只需删除/opt/firefox_beta目录即可，非常简单。
+  - /proc：虚拟的目录，是系统内存的映射。可直接访问这个目录来获取系统信息。
+  - /proc/x：关于进程x的信息目录，这x是这一进程的标识号。每个进程在 /proc下有一个名为自己进程号的目录。
+  - /proc/cpuinfo：存放处理器(cpu)的信息，如cpu的类型、制造商、 型号和性能等。
+  - /proc/devices：当前运行的核心配置的设备驱动的列表。
+  - /proc/dma：显示当前使用的dma通道。
+  - /proc/filesystems：核心配置的文件系统信息。
+  - /proc/interrupts：显示被占用的中断信息和占用者的信息，以及被占用 的数量。
+  - /proc/ioports：当前使用的i/o端口。
+  - /proc/kcore：系统物理内存映像。与物理内存大小完全一样，然而实际上没有 占用这么多内存；它仅仅是在程序访问它时才被创建。(注意：除非你把它拷贝到什么地方，否则/proc下没有任何东西占用任何磁盘空间。)
+  - /proc/kmsg：核心输出的消息。也会被送到syslog。
+  -  /proc/ksyms：核心符号表。
+  -  /proc/loadavg：系统“平均负载”；3个没有意义的指示器指出系统当前 的工作量。
+  -  /proc/meminfo：各种存储器使用信息，包括物理内存和交换分区 (swap)。
+  -  /proc/modules：存放当前加载了哪些核心模块信息。
+  -  /proc/net：网络协议状态信息。
+  -  /proc/self：存放到查看/proc的 程序的进程目录的符号连接。当2个进程查看/proc时，这将会是不同的连接。这主要便于程序得到它自己的进程目录。
+  -  /proc/stat：系统的不同状态，例如，系统启动后页面发生错误的次数。
+  -  /proc/uptime：系统启动的时间长度。
+  -  /proc/version：核心版本。
+* /sbin：系统管理命令，也用于存储二进制文件。这里存放的是系统管理员使用的管理程序，只有root才能访问
+* /tmp：存放程序在运行时产生的信息和数据。但在引导启动后，运行的程序最好使用/var/tmp来 代替/tmp，因为前者可能拥有一个更大的磁盘空间。
+* /usr：最庞大的目录，要用到的应用程序和文件几乎都在这个目录，所有命令、库、man页和其他一般操作中所需的不改变的文件（节省了磁盘空间，且易于管理）。
+  * 比较重要的目录/usr/local 本地管理员软件安装目录
+  * /usr/x11r6：存放x window的目录。
+  * /usr/bin：众多的应用程序。
+  * /usr/sbin：超级用户的一些管理程序。
+  * /usr/doc：linux文档。
+  * /usr/include：linux下开发和编译应用程序所需要的头文件。
+  * /usr/lib：常用的动态链接库和软件包的配置文件。
+  * /usr/man：帮助文档。
+  * /usr/src：源代码，linux内核的源代码就放在/usr/src/linux 里。
+  * /usr/local下一般是你安装软件的目录，这个目录就相当于在windows下的programefiles这个目录
+  * /usr/local/bin：本地增加的命令。
+  * /usr/local/lib：本地增加的库根文件系统。
+* /var：某些大文件的溢出区，包含会改变的文件，比如spool目录(mail、news、打印机等用的)， log文件、 formatted manual pages和暂存文件。传统上/var 的所有东西曾在 /usr 下的某个地方，但这样/usr 就不可能只读安装了。
+  - /var/catman：包括了格式化过的帮助(man)页。帮助页的源文件一般存在 /usr/man/catman中；有些man页可能有预格式化的版本，存在/usr/man/cat中。而其他的man页在第一次看时都需要格式化，格 式化完的版本存在/var/man中，这样其他人再看相同的页时就无须等待格式化了。(/var/catman经常被 清除，就像清除临时目录一样。)
+  - /var/lib：存放系统正常运行时要改变的文件。
+  - /var/local：存放/usr/local中 安装的程序的可变数据(即系统管理员安装的程序)。注意，如果必要，即使本地安装的程序也会使用其他/var目录，例如/var/lock 。
+  - /var/lock：锁定文件。许多程序遵循在/var/lock中 产生一个锁定文件的约定，以用来支持他们正在使用某个特定的设备或文件。其他程序注意到这个锁定文件时，就不会再使用这个设备或文件。
+  - /var/log：各种程序的日志(log)文件，尤其是login (/var/log/wtmplog纪 录所有到系统的登录和注销) 和syslog (/var/log/messages 纪录存储所有核心和系统程序信息)。/var/log 里的文件经常不确定地增长，应该定期清除。
+  - /var/run：保存在下一次系统引导前有效的关于系统的信息文件。例如，/var/run/utmp包 含当前登录的用户的信息。
+  - /var/spool：放置“假脱机(spool)”程序的目录，如mail、 news、打印队列和其他队列工作的目录。每个不同的spool在/var/spool下有自己的子目录，例如，用户的邮箱就存放在/var/spool/mail 中。
+  - /var/tmp：比/tmp允许更大的或需要存在较长时间的临时文件。注意系统管理 员可能不允许/var/tmp有很旧的文件。
+* /lost+found：这个 目录平时是空的，系统非正常关机而留下“无家可归”的文件就在这里。
 
 ## 环境变量
 
@@ -42,20 +168,16 @@ Linux 文件系统是一个目录树的结构，文件系统结构从一个根�
 * ${变量名//旧的字串/新的字串}: 将符合旧字串的全部字串替换为新的字串
 
 ```sh
-declare tmp // 使用 declare 命令创建一个变量名为 tmp 的变量
-tmp=God // 使用 = 号赋值运算符，将变量 tmp 赋值为 God
-echo $tmp // 读取变量的值：使用 echo 命令和 $ 符号（$ 符号用于表示引用一个变量的值）
-set:显示当前 Shell 所有变量，包括其内建环境变量（与 Shell 外观等相关），用户自定义变量及导出的环境变量。
-env:显示与当前用户相关的环境变量，还可以让命令在指定环境中运行
-export：显示从 Shell 中导出成环境变量的变量
-unset temp : 删除变量temp
+declare tmp # 使用 declare 命令创建一个变量名为 tmp 的变量
+tmp=God # 使用 = 号赋值运算符，将变量 tmp 赋值为 God
+echo $tmp # 读取变量的值：使用 echo 命令和 $ 符号（$ 符号用于表示引用一个变量的值）
+set # 显示当前 Shell 所有变量，包括其内建环境变量（与 Shell 外观等相关），用户自定义变量及导出的环境变量。
+env # 显示与当前用户相关的环境变量，还可以让命令在指定环境中运行
+export # 显示从 Shell 中导出成环境变量的变量
+unset temp # 删除变量temp
 ```
 
-## version
-
-* [Archlinux](https://www.archlinux.org/)
-
-## 虚拟机
+## 虚拟机安装
 
 * 用WinSCP.exe等工具上传系统镜像文件rhel-server-7.0-x86_64-dvd.iso到/usr/local/src目录
 * 使用Putty.exe工具远程连接到RHEL服务器
@@ -139,13 +261,41 @@ grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
 
 ## 软件
 
-### 在线安装
-
-- 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
-- 根据这些信息在相关的服务器上下载软件安装
-- 安装某个软件时，如果该软件有其它依赖程序，系统会为我们自动安装所以来的程序；
-- 如果本地的数据库不够新，可能就会发生搜索不到的情况，这时候需要我们更新本地的数据库，使用命令sudo apt-get update可执行更新；
-- 软件源镜像服务器可能会有多个，有时候某些特定的软件需要我们添加特定的源；
+* 包管理管理：apt yum
+  - 原理
+    + 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
+    + 根据这些信息在相关的服务器上下载软件安装
+    + 安装某个软件时，如果该软件有其它依赖程序，系统会为我们自动安装所以来的程序；
+    + 如果本地的数据库不够新，可能就会发生搜索不到的情况，这时候需要我们更新本地的数据库，使用命令sudo apt-get update可执行更新；
+    + 软件源镜像服务器可能会有多个，有时候某些特定的软件需要我们添加特定的源；
+  - 参数
+    + install 其后加上软件包名，用于安装一个软件包
+    + update 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表
+    + upgrade 升级本地可更新的全部软件包，但存在依赖问题时将不会升级，通常会在更新之前执行一次update
+    + dist-upgrade 解决依赖关系并升级(存在一定危险性)
+    + remove 移除已安装的软件包，包括与被移除软件包有依赖关系的软件包，但不包含软件包的配置文件
+    + autoremove 移除之前被其他软件包依赖，但现在不再被使用的软件包
+    + purge 与remove相同，但会完全移除软件包，包含其配置文件
+    + clean 移除下载到本地的已经安装的软件包，默认保存在/var/cache/apt/archives/
+    + autoclean 移除已安装的软件的旧版本软件包
+    + -y 自动回应是否安装软件包的选项，在一些自动化安装脚本中使用这个参数将十分有用
+    + -q 静默安装方式，指定多个q或者-q=#,#表示数字，用于设定静默级别，这在你不想要在安装软件包时屏幕输出过多时很有用
+    + -f 修复损坏的依赖关系
+    + -d 只下载不安装
+    + --reinstall 重新安装已经安装但可能存在问题的软件包
+    + --install-suggests 同时安装APT给出的建议安装的软件包
+    + sudo apt-cache search softname1 softname2 softname3...... 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
+* 编译安装
+* 本地文件安装，下载相应deb软件包，使用dpkg命令来安装
+  - 参数
+    + -i 安装指定deb包,之后修复依赖关系的安装`sudo apt-get -f install`
+    + -R 后面加上目录名，用于安装该目录下的所有deb安装包
+    + -r remove，移除某个已安装的软件包
+    + -I 显示deb包文件的信息
+    + -s 显示已安装软件的信息
+    + -S 搜索已安装的软件包
+    + -L 显示已安装软件包的目录信息
+* 从二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到合适的目录，然后将包含可执行的主程序文件的目录添加进PATH环境变量即可
 
 ```sh
 sudo apt-get install cowsay
@@ -171,16 +321,172 @@ yum makecache  #缓存本地yum源中的软件包信息
 yum install httpd   #安装apache
 rpm -ql httpd  #查询所有安装httpd的目录和文件
 
-systemctl start httpd.service  #启动apache
-systemctl stop httpd.service  #停止apache
-systemctl restart httpd.service  #重启apache
-systemctl enable httpd.service  #设置开机启动
+sudo apt-get autoclean
+sudo apt-get autoremove
+sudo apt-get clean
 ```
 
-### 防火墙
+### web设置
 
 ```sh
-ystemctl stop firewalld.service #停止firewall
+hostname  www  #设置主机名为www
+
+vi /etc/hostname #编辑配置文件
+www   localhost.localdomain  #修改localhost.localdomain为www
+```
+
+### 列表
+
+* 云笔记:simplenote
+* video: VLC
+* editor: atom
+* oh my zsh 而非 zsh fish
+* KchmViewer:阅读CHM
+* LaTeX
+* chrome
+* Nylas N1电子邮件客户端
+* Thunderbird
+* sougou
+* Spotify for Linux：音乐流媒体服务
+* Lightworks Free：专业的非线视频编辑器
+* Viber：跨平台的 Skype 替代品
+* Vivaldi：功能强大的 web 浏览器
+* BleachBit: cleaner(softer center)
+* albert
+* 听播客: Vocal
+* PDF 阅读：Foxit Reader
+* gimp
+* Gtile:分屏工具
+* MySQL Workbench
+* vscode
+* shadowshocks
+
+## 指令
+
+```sh
+ctrl+d # 关闭终端
+
+# 查看linux系统信息
+uname -a # 显示电脑以及操作系统的相关信息
+cat /proc/version # 说明正在运行的内核版本
+cat /etc/issue # 显示的是发行版本信息
+lsb_release -a
+
+date # 获取当前时间
+uname # 返回系统名称
+hostname # 返回系统的主机名称
+--version/-V # 查看某个程序的版本
+history # 显示历史
+help # 用于显示 shell 内建命令的简要帮助信息 help exit
+man
+info ls
+
+cal # 日历
+
+# 修改时区
+sudo tzselect
+sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+
+sudo vi /etc/timezone # 改为Asia/Shanghai
+
+# 搜索
+whereis who  # 只能搜索二进制文件(-b)，man 帮助文件(-m)和源代码文件(-s)
+where||type composer
+locate /etc/sh(查找 /etc 下所有以 sh 开头的文件)  # 通过/var/lib/mlocate/mlocate.db数据库查找，不过这个数据库也不是实时更新的，系统会使用定时任务每天自动执行 updatedb 命令更新一次，所以有时候你刚添加的文件，它可能会找不到
+locate /usr/share/\*.jpg # 注意要添加 * 号前面的反斜杠转义，否则会无法找到。
+which man # 使用 which 来确定是否安装了某个指定的软件，因为它只从 PATH 环境变量指定的路径中去搜索命令
+sudo find /etc/ -name interfaces/ 格式find [path] [option] [action] # 不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索。
+```
+
+### 目录
+
+```sh
+du命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
+touch:来更改已有文件的时间戳的（比如，最近访问时间，最近修改时间） touch file{1..5}.txt 使用通配符批量创建 5 个文件
+rename:批量重命名,需要用到正则表达式
+rename 's/.txt/.c/' *.txt 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件:
+rename 'y/a-z/A-Z/' *.c 批量将这 5 个文件，文件名改为大写:
+ls:列出某文件夹下的文件，添加参数可实现更细致的功能，
+ls -a 列出所有文件，包括隐藏文件
+ls -l 列出文件及其详细信息(权限)
+tree:查看文件列表
+cd切换目录,cd到不存在的目录时会报错
+pwd打印当前目录
+mkdir # 创建目录
+rm dir # 删除目录
+rm -rf # r递归删除，f参数表示强制
+mkdir -p father/son/grandson # 新建多级目录
+```
+
+### 文件
+
+Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能使用本地磁盘分区的文件系统，也可以使用网络上的文件系统。Linux的大部分目录结构是依据FHS标准（英文：Filesystem Hierarchy Standard 中文：文件系统层次结构标准）规定好的，多数 Linux 版本采用这种文件组织形式，FHS 定义了系统中每个区域的用途、所需要的最小构成的文件和目录同时还给出了例外处理与矛盾处理。
+
+FHS包含两层规范：
+
+* / 下面的各个目录应该要放什么文件数据，例如 /etc 应该放置设置文件，/bin 与 /sbin 则应该放置可执行文件等等。
+* 针对 /usr 及 /var 这两个目录的子目录来定义。例如 /var/log 放置系统登录文件，/usr/share 放置共享数据等等。
+
+```sh
+# -r-xr-x---
+
+cat # 读取某一个文件内的内容
+wc # 获取某一个文件的行数和字数`wc package.json`
+cp # 复制某文件 -r
+
+mv # 移动文件、文件重命名
+sort # 排序
+diff # 比较两个文件的异同
+
+cat # 打印文件内容到标准输出(正序)
+tac # 打印文件内容到标准输出(逆序)
+more # 比较简单，只能向一个方向滚动,查看文件：打开后默认只显示一屏内容，终端底部显示当前阅读的进度。可以使用 Enter 键向下滚动一行，使用 Space 键向下滚动一屏，按下 h 显示帮助，q 退出。
+file /bin/ls # 查看文件类型
+head # 查看文件的头几行（默认10行）
+tail -n 1 /etc/passwd # 查看文件的尾几行（默认10行）
+tail -f file
+
+cat file >> another file #
+```
+
+* `dd if=/dev/zero of=virtual.img bs=1M count=256` 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
+* `sudo mkfs.ext4 virtual.img` 格式化virtual.img为ext4格式
+* dd：默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
+* `dd if=/dev/stdin of=test bs=10 count=1 conv=ucase` 将输出的英文字符转换为大写再写入文件
+* sudo mount 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
+
+### 服务、进程、端口管理
+
+```sh
+sudo systemctl enable|start|restart|status|reload nginx | httpd.service # enable 设置开机启动 start 启动 stop 停止 restart 重启
+
+[sudo ]lsof -i : (port) # 查看某一端口的占用情况
+
+netstat -tunlp # 显示tcp，udp的端口和进程等相关
+netstat -plntu
+
+netstat -tunlp|grep (port)  # // 指定端口号进程情况
+
+ps -ef | grep nginx # 进程查看
+ps aux | grep nginx
+
+lsof -Pni4 | grep LISTEN | grep php
+
+kill -9 pid # 关闭进程
+kill pid
+```
+
+### Network
+
+```sh
+sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
+
+sudo ufw allow 'Nginx HTTP'
+sudo ufw status
+sudo ufw allow https
+sudo ufw enable/disable
+
+systemctl stop firewalld.service #停止firewall
 systemctl disable firewalld.service #禁止firewall开机启动
 yum install iptables-services  #安装iptables
 
@@ -215,80 +521,14 @@ SELINUX=disabled #增加
 :wq! #保存退出
 
 setenforce 0 #使配置立即生效
+
+host xx.xxx.com # 显示某域名相关托管服务器/邮件服务器
+ping 8.8.8.8 # 检测连接
+
+# 修改host(已无效)
+sudo su
+curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 ```
-
-### web设置
-
-```sh
-hostname  www  #设置主机名为www
-
-vi /etc/hostname #编辑配置文件
-www   localhost.localdomain  #修改localhost.localdomain为www
-```
-
-#### apt-get
-
-程序安装有home路径，bin路径
-
-ubuntu.16替换apt-get为apt
-
-* install 其后加上软件包名，用于安装一个软件包
-* update 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表
-* upgrade 升级本地可更新的全部软件包，但存在依赖问题时将不会升级，通常会在更新之前执行一次update
-* dist-upgrade 解决依赖关系并升级(存在一定危险性)
-* remove 移除已安装的软件包，包括与被移除软件包有依赖关系的软件包，但不包含软件包的配置文件
-* autoremove 移除之前被其他软件包依赖，但现在不再被使用的软件包
-* purge 与remove相同，但会完全移除软件包，包含其配置文件
-* clean 移除下载到本地的已经安装的软件包，默认保存在/var/cache/apt/archives/
-* autoclean 移除已安装的软件的旧版本软件包
-* -y 自动回应是否安装软件包的选项，在一些自动化安装脚本中使用这个参数将十分有用
-* -q 静默安装方式，指定多个q或者-q=#,#表示数字，用于设定静默级别，这在你不想要在安装软件包时屏幕输出过多时很有用
-* -f 修复损坏的依赖关系
-* -d 只下载不安装
-* --reinstall 重新安装已经安装但可能存在问题的软件包
-* --install-suggests 同时安装APT给出的建议安装的软件包
-* sudo apt-cache search softname1 softname2 softname3...... 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
-
-#### 从磁盘安装deb安装包
-
-下载相应deb软件包，使用dpkg命令来安装
-
-* -i 安装指定deb包,之后修复依赖关系的安装`sudo apt-get -f install`
-* -R 后面加上目录名，用于安装该目录下的所有deb安装包
-* -r remove，移除某个已安装的软件包
-* -I 显示deb包文件的信息
-* -s 显示已安装软件的信息
-* -S 搜索已安装的软件包
-* -L 显示已安装软件包的目录信息
-
-#### 从二进制软件包安装
-
-需要做的只是将从网络上下载的二进制包解压后放到合适的目录，然后将包含可执行的主程序文件的目录添加进PATH环境变量即可
-
-#### 从源代码安装
-
-源管理：sudo gedit /etc/apt/sources.list
-
-### 列表
-
-* 云笔记:simplenote
-* video: VLC
-* editor: atom
-* oh my zsh 而非 zsh fish
-* KchmViewer:阅读CHM
-* LaTeX
-
-## Usage:
-
-```
-ctrl+d # 关闭终端
-
-where||type composer
-```
-
-### Network
-
-sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
 
 ### 终端
 
@@ -296,24 +536,12 @@ sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
 
 Ubuntu具体说来，它默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
 
-## 文件
-
-Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能使用本地磁盘分区的文件系统，也可以使用网络上的文件系统。Linux的大部分目录结构是依据FHS标准（英文：Filesystem Hierarchy Standard 中文：文件系统层次结构标准）规定好的，多数 Linux 版本采用这种文件组织形式，FHS 定义了系统中每个区域的用途、所需要的最小构成的文件和目录同时还给出了例外处理与矛盾处理。
-
-FHS包含两层规范：
-
-* / 下面的各个目录应该要放什么文件数据，例如 /etc 应该放置设置文件，/bin 与 /sbin 则应该放置可执行文件等等。
-* 针对 /usr 及 /var 这两个目录的子目录来定义。例如 /var/log 放置系统登录文件，/usr/share 放置共享数据等等。
-
-```
--r-xr-x---
-```
 
 ### 身份
 
-owner
-group
-others
+* owner
+* group
+* others
 
 ```sh
 etc/passwd
@@ -376,118 +604,44 @@ chmod 755 test # 赋予一个shell文件test.sh可执行权限，拥有者可读
 * -l:将 LF（换行） 转换为 CR+LF(windows 回车加换行)
 
 ```sh
-zip -r -9 -q -o shiyanlou_9.zip /home/shiyanlou -x ~/*.zip // 设置不同压缩等级
-zip -r -e -o shiyanlou_encryption.zip /home/shiyanlou  // 创建加密
-zip -r -l -o shiyanlou.zip /home/shiyanlou   // 解决windows和linux对换行的不同处理问题
+zip -r -9 -q -o shiyanlou_9.zip /home/shiyanlou -x ~/*.zip # 设置不同压缩等级
+zip -r -e -o shiyanlou_encryption.zip /home/shiyanlou  # 创建加密
+zip -r -l -o shiyanlou.zip /home/shiyanlou   # 解决windows和linux对换行的不同处理问题
 
-unzip -q shiyanlou.zip -d ziptest   // 静默且指定解压目录，目录不存在会自动创建
-unzip -O GBK 中文压缩文件.zip // 使用 -O（英文字母，大写 o）参数指定编码类型
+unzip -q shiyanlou.zip -d ziptest   # 静默且指定解压目录，目录不存在会自动创建
+unzip -O GBK 中文压缩文件.zip # 使用 -O（英文字母，大写 o）参数指定编码类型
 ```
 
-#### 操作
-
-* du命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
-* touch:来更改已有文件的时间戳的（比如，最近访问时间，最近修改时间） touch file{1..5}.txt 使用通配符批量创建 5 个文件
-* rename:批量重命名,需要用到正则表达式
-* rename 's/.txt/.c/' *.txt 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件:
-* rename 'y/a-z/A-Z/' *.c 批量将这 5 个文件，文件名改为大写:
-* ls:列出某文件夹下的文件，添加参数可实现更细致的功能，
-* ls -a 列出所有文件，包括隐藏文件
-* ls -l 列出文件及其详细信息(权限)
-* tree:查看文件列表
-* cd切换目录,cd到不存在的目录时会报错
-* pwd打印当前目录
-* cat:读取某一个文件内的内容
-* wc:获取某一个文件的行数和字数`wc package.json`
-* cp:复制某文件 -r
-* mkdir:创建目录
-* rm dir：删除目录
-* rm -rf:r递归删除，f参数表示强制
-* mv 移动文件、文件重命名
-* sort排序
-* diff:比较两个文件的异同
-* mkdir -p father/son/grandson:新建多级目录
-* cat:打印文件内容到标准输出(正序)
-* tac:打印文件内容到标准输出(逆序)
-* more:比较简单，只能向一个方向滚动,查看文件：打开后默认只显示一屏内容，终端底部显示当前阅读的进度。可以使用 Enter 键向下滚动一行，使用 Space 键向下滚动一屏，按下 h 显示帮助，q 退出。
-* file:查看文件类型`file /bin/ls`
-* head:查看文件的头几行（默认10行）
-* tail:查看文件的尾几行（默认10行） `tail -n 1 /etc/passwd`
-* `dd if=/dev/zero of=virtual.img bs=1M count=256` 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
-* `sudo mkfs.ext4 virtual.img` 格式化virtual.img为ext4格式
-* dd：默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
-* `dd if=/dev/stdin of=test bs=10 count=1 conv=ucase` 将输出的英文字符转换为大写再写入文件
-* sudo mount 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
-
-#### 系统相关：
-
-* date:获取当前时间
-* uname:返回系统名称
-* hostname：返回系统的主机名称
-* --version/-V 查看某个程序的版本
-* history 显示历史
-* help 用于显示 shell 内建命令的简要帮助信息 help exit
-* man
-* info ls
-* lsb_release -a
-* cal:日历
-
-#### 修改时区
-
-```sh
-sudo tzselect
-sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
-
-sudo vi /etc/timezone
-改为Asia/Shanghai
-```
-#### 网络相关：
-
-* host xx.xxx.com：显示某域名相关托管服务器/邮件服务器
-* ping 8.8.8.8检测连接
-
-#### 搜索相关命令
-
-```sh
-`whereis who`  # 只能搜索二进制文件(-b)，man 帮助文件(-m)和源代码文件(-s)。
-`locate /etc/sh`(查找 /etc 下所有以 sh 开头的文件)  # 通过/var/lib/mlocate/mlocate.db数据库查找，不过这个数据库也不是实时更新的，系统会使用定时任务每天自动执行 updatedb 命令更新一次，所以有时候你刚添加的文件，它可能会找不到
-`locate /usr/share/\*.jpg` # 注意要添加 * 号前面的反斜杠转义，否则会无法找到。
-`which man` 使用 which 来确定是否安装了某个指定的软件，因为它只从 PATH 环境变量指定的路径中去搜索命令
-`sudo find /etc/ -name interfaces/` 格式find [path] [option] [action];  不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索。
-```
-
-#### 用户管理
+### 用户管理
 
 每次次新建用户如果不指定用户组的话，默认会自动创建一个与用户名相同的用户组； 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限。
 
 ```sh
-who am i:只列出用户名
-who mom likes/who am i:列出用户名，所使用终端的编号和开启时间；
-finger:列出当前用户的详细信息，需使用apt-get提前安装；
+who am i # 只列出用户名
+who mom likes/who am i # 列出用户名，所使用终端的编号和开启时间；
+finger # 列出当前用户的详细信息，需使用apt-get提前安装；
 
-su <user>:切换到用户user,执行时需要输入目标用户的密码；
-su - <user>:切换用户，同时环境变量也会跟着改变成目标用户的环境变量。
-su -l lilei:切换登录用户;
-sudo adduser lilei:新建一个叫做lilei的用户，添加用户到系统，同时也会默认为新用户创建 home目录：
-sudo useradd:只创建用户，创建完了需要用 passwd lilei 去设置新用户的密码;
-groups zhangwang:查看用户属于那些组（groups）   // 每
-cat /etc/group | sort 命令查看某组包含那些成员:/etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
-sudo usermod -G sudo student:不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，我们可以使用usermod命令把它加入sudo组用以具备相应的权限。
-sudo deluser student --remove-home：删除用户及用户相关文件；
+su <user> # 切换到用户user,执行时需要输入目标用户的密码；
+su - <user> # 切换用户，同时环境变量也会跟着改变成目标用户的环境变量。
+su -l lilei # 切换登录用户;
+sudo adduser lilei # 新建一个叫做lilei的用户，添加用户到系统，同时也会默认为新用户创建 home目录：
+sudo useradd # 只创建用户，创建完了需要用 passwd lilei 去设置新用户的密码;
+groups zhangwang # 查看用户属于那些组（groups）
+cat /etc/group | sort 命令查看某组包含那些成员 # /etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
+sudo usermod -G sudo student # 不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，我们可以使用usermod命令把它加入sudo组用以具备相应的权限。
+sudo deluser student --remove-home # 删除用户及用户相关文件；
 ```
 
-#### 匹配符
+### 匹配符
 
 - `*`：匹配 0 或多个字符，如`ls *.html`将匹配所有以html结尾的文件,`ls b*.png`将匹配所有以b开头，png结尾的文件；
 - `?`：匹配任意一个字符,如`ls abc?.png` 可匹配abcd.png/abce.png
-- `[list]`:匹配 list 中的任意单一字符
+- `[list]` # 匹配 list 中的任意单一字符
 - `[!list]`:匹配 除list 中的任意单一字符以外的字符
 - `[c1-c2]`:匹配 c1-c2 中的任意单一字符 如：[0-9] [a-z]
 - `{string1,string2,...}`:匹配 string1 或 string2 (或更多)其一字符串，如 `{css,html}`， `ls app.{html.css}`将匹配app.css 和app.html;
 - `{c1..c2}`:匹配 c1-c2 中全部字符 如{1..10}
 - 注意通配符大小写敏感
-
-## 操作
 
 ### ssh
 
@@ -510,11 +664,8 @@ chmod 600 ~/.ssh/authorized_keys
 authorizedKeyFile
 
 service sshd restart
-```
 
 ### 密钥生成
-
-```sh
 ssh-keygen -t rsa -b 4096
 ssh-copy-id <username>@<host>
 
@@ -524,33 +675,16 @@ chmod 600 ~/.ssh/authorized_keys
 scp ~/.ssh/id_rsa.pub hadoop@192.168.1.134:~/
 cat ~/id_rsa.pub >> ~/.ssh/authorized_keys
 rm ~/id_rsa.pub
+
+# 传输文件通过ssh
+scp id_rsa.pub git@172.26.186.117:/home/git/
+scp -P 1101 username@servername:/remote_path/filename  ~/local_destination   // 源文件  目标文件
+ssh -p 2222 user@host   # 登陆服务器
+
+## 服务器登陆
+ssh username@remote_host
+ssh username@remote_host ls /var/www
 ```
-
-- 传输文件通过ssh：
-
-  ```
-  scp id_rsa.pub git@172.26.186.117:/home/git/
-  scp -P 1101 username@servername:/remote_path/filename  ~/local_destination   // 源文件  目标文件
-  ssh -p 2222 user@host   # 登陆服务器
-  ```
-
-- 复制文件 cat file >> another file
-- 服务管理：
-
-  ```sh
-  sudo systemctl enable nginx
-  sudo systemctl start nginx
-  sudo systemctl restart nginx
-  systemctl status nginx
-  sudo systemctl reload nginx
-  ```
-
-- 修改hosts
-
-  ```sh
-  sudo su
-  curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
-  ```
 
 ### sougou pinyin
 
@@ -580,16 +714,8 @@ sudo apt-get install atom
 sudo add-apt-repository ppa:nixnote/nixnote2-daily
 sudo apt update
 sudo apt install nixnote2
-File->Add Another User…
+File->Add Another User
 Tools->Synchronize
-```
-
-## clean
-
-```sh
-sudo apt-get autoclean
-sudo apt-get autoremove
-sudo apt-get clean
 ```
 
 ## chrome(firefox 禁用console.log)
@@ -600,25 +726,6 @@ wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key a
 sudo apt-get update
 sudo apt-get install google-chrome-stable
 ```
-
-## ufw防火墙
-
-```sh
-sudo ufw allow 'Nginx HTTP'
-sudo ufw status
-sudo ufw allow https
-sudo ufw enable/disable
-```
-
-## 指令
-
-* 实时刷新文件：tail -f file
-* 查看linux系统信息
-
-  - uname -a：显示电脑以及操作系统的相关信息
-  - cat /proc/version:说明正在运行的内核版本
-  - cat /etc/issue:显示的是发行版本信息
-  - lsb_release -a
 
 ## 启动项
 
@@ -645,6 +752,7 @@ Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
 Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
 Shift+PgUp:将终端显示向上滚动;
 Shift+PgDn:将终端显示向下滚动;
+
 pwd打印当前目录
 cat:读取某一个文件内的内容
 wc:获取某一个文件的行数和字数
@@ -653,9 +761,6 @@ date:获取当前时间
 uname:返回系统名称
 hostname：返回系统的主机名称
 
-host xx.xxx.com：显示某域名相关托管服务器/邮件服务器
-ping 8.8.8.8检测连接
-
 whereis
 who
 locate
@@ -663,34 +768,15 @@ locate
 
 ## Boot分区不足
 
-```
-\\ 查看已安装的linux-image各版本
-dpkg --get-selections |grep linux-image
-// 查看使用版本
-uname -a
-／／清除旧版本
-sudo apt-get purge linux-image-3.5.0-27-generic
-图中因使用remove命令而残留的deinstall的
-sudo dpkg -P linux-image-extra-3.5.0-17-generic
-```
-
-## 端口 进程
-
 ```sh
-[sudo ]lsof -i : (port) # 查看某一端口的占用情况
-
-netstat -tunlp # 显示tcp，udp的端口和进程等相关
-netstat -plntu
-
-netstat -tunlp|grep (port)  # // 指定端口号进程情况
-
-ps -ef | grep nginx # 进程查看
-ps aux | grep nginx
-
-lsof -Pni4 | grep LISTEN | grep php
-
-kill -9 pid # 关闭进程
-kill pid
+# 查看已安装的linux-image各版本
+dpkg --get-selections |grep linux-image
+# 查看使用版本
+uname -a
+# 清除旧版本
+sudo apt-get purge linux-image-3.5.0-27-generic
+# 图中因使用remove命令而残留的deinstall的
+sudo dpkg -P linux-image-extra-3.5.0-17-generic
 ```
 
 chkconfig --list sshd
@@ -709,11 +795,6 @@ chkconfig --list sshd
 * Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程。
 * ln:unix 里面的链接同 Windows 中的快捷方式类似，允许你快速地访问到一个特定的文件。`sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
 
-```sh
-ssh username@remote_host
-ssh username@remote_host ls /var/www
-```
-
 ## Hypervisor
 
 Linux的最重要创新之一，引入Hypervisor，运行其他操作系统的操作系统，它们为执行提供独立的虚拟硬件平台，同时硬件虚拟平台可以提供对底层机器的虚拟的完整访问.在解决软件架构设计问题时，通常做法是引入一个抽象层来解决，其实这种做法是有点普世原理，同样适用于硬件封装，Hypervisor正是这样一种虚拟抽象层。 只有5%的时间在全负荷工作，其他时间则处于休眠或者空闲状态，虚拟化技术可以大大提升服务器的利用率，从而间接减少服务器数量，即成本！ ![](../_static/Hypervisor.jpg) Hypervisor作为虚拟技术的核心，抽象虚拟化硬件平台.它支持给每一个虚拟机分配内存，CPU， 网络和磁盘，并加载虚拟机的客户操作系统。当然，在获取到这么优秀功能（对硬件的虚拟化，并搭载操作系统）的代价，自然牺牲了启动速度及在资源利用率，性能的开销等。
@@ -722,9 +803,7 @@ Linux的最重要创新之一，引入Hypervisor，运行其他操作系统的�
 
 一种内核虚拟化技术，相比上述的Hypervisor技术则提供更轻量级的虚拟化，以隔离进程和资源，且无需提供指令解析机制及全虚拟化的复杂性，LXC或者容器将操作系统层面的资源分到孤立／隔离的组中，用来管理使用资源。LXC为Sourceforge上的开源项目，其实现是借助Linux的内核特性，（cgroups子系统+namespace）, 在OS层次上做整合为进程提供虚拟执行环境，即称之为容器，除了分配绑定cpu，内存，提供独立的namespace（网络，pid，ipc，mnt，uts）
 
-## Samba服务
-
-### 安装与配置
+## Samba
 
 ```sh
 sudo apt-get install samba samba-common
@@ -768,8 +847,6 @@ sudo apt-get update
 sudo apt-get install stacer
 ```
 
-## shell扩展
-
 ### grep：Global search REgrular expression and Print out the line
 
 - --color=auto：对匹配到的文本着色显示
@@ -787,7 +864,7 @@ sudo apt-get install stacer
 - -E：使用ERE
 - -r或--recursive 此参数的效果和指定"-d recurse"参数相同。
 
-## sed
+### sed
 
 一种流编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓存区中，称为"模式空间"(patternspace)，接着用sed命令处理缓存区中的内容，处理完成后，把缓存区的内容送往屏幕。然后读入下一行，执行下一个循环。如果没有使用诸如'D'的特殊命令，那么会在两个循环之间清空模式空间，但不会清空保留空间。这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出。 sed的功能：主要用来自动编辑一个或多个文件，简化对文件的反复操作，编写转换程序等，且支持正则表达式！
 
@@ -802,7 +879,9 @@ sudo apt-get install stacer
 - 1~2 ：~ 这个符号表示步进，1~2 表示的是奇数行
 - 2~2：表示的是偶数行
 
-### 编辑命令：地址定界后，对范围内的内容进行相关编辑。
+### 编辑命令
+
+地址定界后，对范围内的内容进行相关编辑。
 
 - d：删除模式空间匹配的行，并立即启用下一轮循环 `nl log.txt | sed '2,3d'`
 - p：打印当前模式空间内容，追加到默认输出之后
@@ -822,16 +901,7 @@ sudo apt-get install stacer
 - w /PATH/TO/SOMEFILE：将替换成功的行保存至文件中
 - -e
 
-## 扩展
-
-* [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/index.html):
-
-## 参考
-
-* [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
-* [LVS：跑在Linux内核上的负载均衡器](https://liangshuang.name/2017/11/19/lvs/)
-
-
+### ubunu 优化
 ```sh
 # 提高电池的寿命并且减少过热
 sudo add-apt-repository ppa:linrunner/tlp
@@ -839,10 +909,10 @@ sudo apt update
 sudo apt install tlp tlp-rdw
 sudo tlp start
 
-Guake是一个比较酷的终端
+# Guake是一个比较酷的终端
 sudo apt install guake
 
- # add source  or http://pinyin.sogou.com/linux/
+# add source  or http://pinyin.sogou.com/linux/
 deb http://archive.ubuntukylin.com:10006/ubuntukylin trusty main
 sudo apt install sogoupinyin
 
@@ -900,36 +970,16 @@ sudo apt-get autoremove
 sudo apt-get autoclean
 ```
 
-http://mirrors.aliyun.com
-
-```
+```sh
+# 修改软件源为http://mirrors.aliyun.com
 sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak #备份系统默认的软件源
 sudo vim /etc/apt/sources.list
 
-add source
-
+# add source
 sudo add-apt-repository ppa:nilarimogard/webupd8
 sudo apt update
 sudo apt install albert
 ```
-
-* chrome
-* Nylas N1：超好用的跨平台电子邮件客户端  Thunderbird
-* sougou
-* Spotify for Linux：音乐流媒体服务
-* Lightworks Free：专业的非线视频编辑器
-* Viber：跨平台的 Skype 替代品
-* Vivaldi：功能强大的 web 浏览器
-* BleachBit: cleaner(softer center)
-* VLC
-* albert
-* 听播客: Vocal
-* PDF 阅读：Foxit Reader
-* gimp
-* Gtile:分屏工具
-* MySQL Workbench
-* vscode
-* shadowshocks
 
 vim config
 ```
@@ -1170,7 +1220,6 @@ sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 sudo apt-get update
 sudo apt-get install mysql-workbench-community
 
-
 sudo apt install aptitude
 sudo aptitude install <packagename>
 sudo aptitude -f install <packagename>
@@ -1180,6 +1229,12 @@ sudo aptitude -f install <packagename>
 
 * [backup/backup](https://github.com/backup/backup):Easy full stack backup operations on UNIX-like systems. http://backup.github.io/backup/v4/
 * [gopasspw/gopass](https://github.com/gopasspw/gopass):The slightly more awesome standard unix password manager for teams https://www.gopass.pw/
+
+## 参考
+
+* [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/index.html)
+* [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
+* [LVS：跑在Linux内核上的负载均衡器](https://liangshuang.name/2017/11/19/lvs/)
 
 systemctl unmask mysql.service
 service mysql start

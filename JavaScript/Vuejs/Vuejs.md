@@ -139,6 +139,7 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [nuxt/nuxt.js](https://github.com/nuxt/nuxt.js):Versatile Vue.js Framework https://nuxtjs.org
 * [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
 * [vuejs/vuex-router-sync](https://github.com/vuejs/vuex-router-sync):Effortlessly keep vue-router and vuex store in sync.
+* [shentao/vue-multiselect](https://github.com/shentao/vue-multiselect):Universal select/multiselect/tagging component for Vue.js https://vue-multiselect.js.org/
 
 ## 参考
 

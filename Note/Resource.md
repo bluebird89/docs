@@ -8,6 +8,7 @@
 
 * [代码片段](http://www.phpxs.com/code/)
 * [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
+* [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
 
 ## 硬件
 
@@ -86,6 +87,7 @@
 * OneNote
 * CherryTree
 * TickTick
+* [幕布](https://mubu.com/)
 
 ## 阅读
 
