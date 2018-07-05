@@ -421,7 +421,7 @@ For example this is a Block level $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$ formu
 {1+\frac{e^{-8\pi}} {1+\ldots} } } } \\]
 ```
 
-**Result:** 
+**Result:**
 
 块级公式：
 $$  x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
@@ -484,7 +484,7 @@ This is a footnote:[^sample_footnote]
 
 #### 有序列表
 
-1. 
+1.
 2.
 3.
 
@@ -780,7 +780,7 @@ If you use the fabulous [Sublime Text 2/3 editor][st] along with the [Markdown P
 
 ## Text basics
 
-_italic_ **bold** 
+_italic_ **bold**
 
 `important`
 
@@ -940,6 +940,10 @@ Markdown 语法： **Example:**
 - Markdown Extended：语法高亮
 - MarkdownLivePreview `alt + m`
 - Markdown​TOC
+
+## 工具
+
+* [zhangjikai/online-markdown-reader](https://github.com/zhangjikai/online-markdown-reader):Markdown 在线阅读器 http://markdown.zhangjikai.com/
 
 ## 参考
 
