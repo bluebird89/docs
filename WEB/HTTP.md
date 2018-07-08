@@ -21,9 +21,7 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
     - 请求头
     - 消息主体（entity-body）
 
-### 请求方式
-
-#### POST
+### 请求方式 POST
 
 * application/x-www-form-urlencoded：原生 form 表单，如果不设置 enctype 属性
 * multipart/form-data：用表单上传文件
@@ -63,7 +61,7 @@ PNG ... content of chrome.png ...
     - 对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；
     - 对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok
 
-## TCP/IP模型
+## TCP/IP（Transmission Control Protocol/Internet Protocol）一个实现的应用模型
 
 TCP/IP 是供已连接因特网的计算机进行通信的通信协议。
 TCP/IP 指传输控制协议/网际协议 (Transmission Control Protocol / Internet Protocol)。
@@ -89,8 +87,6 @@ HTTP/1.1 200 OK
 * IP (网际协议) - 计算机之间的通信,无连接的通信协议。它不会占用两个正在通信的计算机之间的通信线路。这样，IP 就降低了对网络线路的需求。每条线可以同时满足许多不同的计算机之间的通信需要。通过 IP，消息（或者其他数据）被分割为小的独立的包，并通过因特网在计算机之间传送。IP 负责将每个包路由至它的目的地.责在因特网上发送和接收数据包。
 * ICMP (因特网消息控制协议) - 针对错误和状态
 * DHCP (动态主机配置协议) - 针对动态寻址
-
-## TCP/IP（Transmission Control Protocol/Internet Protocol）一个实现的应用模型
 
 TCP/IP协议通信的过程其实就对应着数据入栈与出栈的过程。入栈的过程，数据发送方每层不断地封装首部与尾部，添加一些传输的信息，确保能传输到目的地。出栈的过程，数据接收方每层不断地拆除首部与尾部，得到最终传输的数据。
 
@@ -332,6 +328,8 @@ whois github.com # 用来查看域名的注册情况
 
 ### CORS
 
+
+
 ```php
 // server
 $origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';
@@ -374,10 +372,13 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 
 ## 工具
 
-* [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest):DNS Performance test
+
 * [snail007/goproxy](https://github.com/snail007/goproxy):Proxy is a high performance HTTP(S), websocket, TCP, UDP,Secure DNS, Socks5 proxy server implemented by golang. Now, it supports chain-style proxies,nat forwarding in different lan,TCP/UDP port forwarding, SSH forwarding.Proxy是golang实现的高性能http,https,websocket,tcp,防污染DNS,socks5代理服务器,支持内网穿透,链式代理,通讯加密,智能HTTP,SOCKS5代理,域名黑白名单,跨平台,KCP协议支持,集成外部API。
 * [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie):Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc. https://httpie.org https://twitter.com/clihttp
 * [Netflix/pollyjs](https://github.com/Netflix/pollyjs):Record, Replay, and Stub HTTP Interactions. https://netflix.github.io/pollyjs
+* [hazbo/httpu](https://github.com/hazbo/httpu):The terminal-first http client
+
+### [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest):DNS Performance test
 
 ```sh
 sudo apt-get install bc dnsutils
