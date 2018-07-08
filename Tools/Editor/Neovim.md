@@ -12,7 +12,7 @@ nvim # 启动
 
 ## 使用
 
-```
+```sh
 :checkhealth
 ```
 

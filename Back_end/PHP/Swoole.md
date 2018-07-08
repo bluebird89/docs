@@ -58,3 +58,7 @@ PHP的各项基本技能
 - [youzan/yz_swoole](https://github.com/youzan/yz_swoole)youzan swoole branch
 - [matyhtf/webim](https://github.com/matyhtf/webim):使用PHP+Swoole实现的网页即时聊天工具
 - [xcl3721/Dora-RPC](https://github.com/xcl3721/Dora-RPC):DoraRPC is an RPC For the PHP MicroService by The Swoole
+
+## 项目
+
+* [wh469012917/swoole-vue-webim](https://github.com/wh469012917/swoole-vue-webim):一个Web聊天应用，基于Vue和Swoole构建

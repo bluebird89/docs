@@ -36,3 +36,19 @@
 > You’re not LATE.
 > You’re not EARLY.
 > You are very much ON TIME, and in your TIME ZONE Destiny set up for you.
+
+
+《我是一个任性的孩子》 顾城
+
+> 我是一个任性的孩子
+> 我想擦去一切不幸
+> 我想在大地上
+> 画满窗子
+> 让所有习惯黑暗的眼睛都习惯光明
+
+> 记得当时年纪小
+> 你爱谈天我爱笑
+> 有一回并肩坐在桃树下
+> 风在树梢鸟在叫
+> 不知怎么睡着了
+> 梦里花落知多少
