@@ -147,6 +147,7 @@
       - (http://imagine.readthedocs.io/en/latest/index.html)[Imagine]: 一个图像处理库
       - (https://github.com/Intervention/image)[Intervention Image]: 另一个图像处理库
       - (https://github.com/Sybio/ImageWorkshop)[PHP Image Workshop]: 另一个图像处理库
+      - [thephpleague/glide](https://github.com/thephpleague/glide):Wonderfully easy on-demand image manipulation library with an HTTP based API. http://glide.thephpleague.com
 * 测试 Testing 测试代码和生成测试数据的库
       - (https://github.com/nelmio/alice)[Alice]: 富有表现力的一代库
       - (https://github.com/Codeception/AspectMock)[AspectMock]: 一个PHPUnit/Codeception的模拟框架。
@@ -652,6 +653,8 @@
       - [PHP UK Conference](https://www.youtube.com/user/phpukconference/videos): 一个PHP英国会议的视频集合
       - [Programming with Anthony](https://www.youtube.com/playlist?list=PLM-218uGSX3DQ3KsB5NJnuOqPqc5CW2kW): Anthony Ferrara的视频系列
       - [Taking PHP Seriously](https://www.infoq.com/presentations/php-history): 来自Facebook Keith Adams 讲述PHP优势
+* 错误
+      - [filp/whoops](https://github.com/filp/whoops):PHP errors for cool kids http://filp.github.io/whoops/
 
 ## 播客 PHP Podcasts
 

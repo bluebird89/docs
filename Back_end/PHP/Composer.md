@@ -9,6 +9,9 @@ sudo apt-get install composer
 
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
+curl -sS https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+
 brew install composer  # Mac
 # file_put_contents(./composer.json): failed to open stream: Permission denied
 sudo chown -R $USER .composer/

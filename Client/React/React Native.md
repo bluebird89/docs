@@ -230,13 +230,14 @@ npm start
 npm run eject #  导出配置文件
 ```
 
-## 工具
+## 组件
 
 * [storybooks/storybook](https://github.com/storybooks/storybook): Interactive development & testing environment for React, React-Native, Vue UI components https://storybook.js.org
 * [reactjs/redux](https://github.com/reactjs/redux):Predictable state container for JavaScript apps http://redux.js.org
 * [ReactTraining/react-router](https://github.com/ReactTraining/react-router):Declarative routing for React https://reacttraining.com/react-router/
 * [aksonov/react-native-router-flux](https://github.com/aksonov/react-native-router-flux):First Declarative React Native Router
 * [AllenFang/react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-table):A Bootstrap table built with React.js https://allenfang.github.io/react-boo…
+* [React-Bootstrap](https://github.com/react-bootstrap/react-bootstrap)
 * [gaearon/redux-devtools](https://github.com/gaearon/redux-devtools):DevTools for Redux with hot reloading, action replay, and customizable UI http://youtube.com/watch?v=xsSnOQynTHs
 * [akiran/react-slick](https://github.com/akiran/react-slick):React carousel component http://neostack.com/opensource/react-…
 * [acdlite/redux-router](https://github.com/acdlite/redux-router):Redux bindings for React Router – keep your router state inside your Redux store
@@ -248,6 +249,8 @@ npm run eject #  导出配置文件
 * [airbnb/lottie-ios](https://github.com/airbnb/lottie-ios):An iOS library to natively render After Effects vector animations http://airbnb.io/lottie/
 * [airbnb/react-native-maps](https://github.com/airbnb/react-native-maps):React Native Mapview component for iOS + Android
 * [airbnb/native-navigation](https://github.com/airbnb/native-navigation):Native navigation library for React Native applications http://airbnb.io/native-navigation/
+* [apollographql/react-apollo](https://github.com/apollographql/react-apollo):♻️ React integration for Apollo Client https://www.apollographql.com/docs/react/
+
 * [React Studio](https://reactstudio.com/)
 * [maisano/react-router-transition](https://github.com/maisano/react-router-transition):painless transitions built for react-router, powered by react-motion
 * [jaredpalmer/formik](https://github.com/jaredpalmer/formik):Build forms in React, without the tears sob https://npm.im/formik
@@ -271,6 +274,30 @@ npm run eject #  导出配置文件
 * [atlassian/react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd):Beautiful, accessible drag and drop for lists with React.js
 * [drcmda/react-spring](https://github.com/drcmda/react-spring):🙌 Helping react-motion and animated to become best friends http://react-spring.surge.sh/
 * [deepsweet/hocs](https://github.com/deepsweet/hocs):🍱 A collection of Higher-Order Components for React and React Native
+* [React toolbox](https://github.com/react-toolbox/react-toolbox)
+* [React Belle](https://github.com/nikgraf/belle)
+* [React Grommet](http://grommet.io/)
+* [Halogen](http://ww12.madscript.com/):制作酷酷的载入进度条
+* [React UWP](https://github.com/myxvisual/react-uwp):Windows 下的 UI 框架实现了微软的 UWP 和 Fluent，提供了全面的控件库以实现 UI 可视化呈现，以及用于其它控件或内容（如图像和媒体）的容器。
+* [UXCore](link):40 个为企业应用设计的组件，专注于后端应用的性能，主要是表格和表单这些组件（特别是当数据自动与视图绑定时）。
+
+## UI
+
+* [gestalt](https://github.com/pinterest/gestalt):一组支持 Pinterest 设计语言的 React UI 组件，被 Pinterest 内部用来实现统一的 UI 设计和开发
+* [Carbon components](link)
+* [React Foundation](https://github.com/digiaonline/react-foundation):将 Foundation 的所有部分都包装成可复用的 React 组件，它专注于易用性和灵活性，尽可能使用无状态的组件
+* [Fabric UI](https://github.com/OfficeDev/office-ui-fabric-react)
+* [Atlaskit](https://atlaskit.atlassian.com/):Atlassian 的官方 React UI 套件是 [Atlassian 设计指南](https://atlassian.design/)的实现。它提供了一组可复用的组件，均可独立下载到开发者的项目中
+* [Rebass](https://github.com/jxnblk/rebass):是一个 UI 库及 UI 设计系统
+* [Elemental UI](https://github.com/elementalui/elemental)
+* [Prime React](https://github.com/primefaces/primereact)
+* [Reactstrap](https://github.com/reactstrap/reactstrap)
+* [React MD](https://github.com/mlaursen/react-md):提供了用于开发 Web 应用的套件，遵循谷歌 Material Design 设计原则，还有高度定制化的主题和样式
+* [Blueprint](https://github.com/palantir/blueprint):提供了一系列 React UI 组件，这些组件包含常用的元素、模式和 Web 交互
+* [React Virtualized](https://github.com/bvaughn/react-virtualized):可以高效渲染大型列表和表格数据的 React 组件
+* [Semantic UI React](https://react.semantic-ui.com/introduction):官方的 Semantic-UI-React 集成，提供了有趣、灵活的工具，已被 Netflix 和 Amazon 采用。
+* [ant-design/ant-design](https://github.com/ant-design/ant-design/)
+* [Material Components Web](https://github.com/material-components/material-components-web/):组件使用可靠的开发工作流程来构建漂亮而实用的 Web 项目
 
 ## 参考
 
@@ -294,7 +321,6 @@ npm run eject #  导出配置文件
 * [设计含结构](https://github.com/airbnb/react-sketchapp)
 * [文档](http://airbnb.io/react-sketchapp/docs/)
 * [文档](http://reactnative.cn/docs/0.49/getting-started.html)
-* [页面设计](https://github.com/ant-design/ant-design/)
 * [react-native-guide](https://github.com/reactnativecn/react-native-guide)
 * [react-native-macos](https://github.com/ptmt/react-native-macos)
 * [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
@@ -309,6 +335,7 @@ npm run eject #  导出配置文件
 * [erikras/react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example):A starter boilerplate for a universal webapp using express, react, redux, webpack, and react-transform
 * [markerikson/react-redux-links](https://github.com/markerikson/react-redux-links):Curated tutorial and resource links I've collected on React, Redux, ES6, and more
 * [tachyons-css/tachyons](https://github.com/tachyons-css/tachyons/):Functional css for humans https://tachyons.io
+* [adam-golab/react-developer-roadmap](https://github.com/adam-golab/react-developer-roadmap):Roadmap to becoming a React developer in 2018s
 
 ## 项目
 

@@ -30,6 +30,10 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic test --from-beg
 * [dpkp/kafka-python](https://github.com/dpkp/kafka-python):Python client for Apache Kafka http://kafka-python.readthedocs.io/
 * [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. https://shopify.github.io/sarama
 
+## 工具
+
+* [yahoo/kafka-manager](https://github.com/yahoo/kafka-manager):A tool for managing Apache Kafka.
+
 ## 参考
 
 * [Documentation](http://kafka.apache.org/documentation.html)
