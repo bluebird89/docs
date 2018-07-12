@@ -61,13 +61,9 @@ PNG ... content of chrome.png ...
     - 对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；
     - 对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok
 
-## TCP/IP（Transmission Control Protocol/Internet Protocol）一个实现的应用模型
+## TCP/IP传输控制协议/网际协议 (Transmission Control Protocol / Internet Protocol)一个实现的应用模型
 
-TCP/IP 是供已连接因特网的计算机进行通信的通信协议。
-TCP/IP 指传输控制协议/网际协议 (Transmission Control Protocol / Internet Protocol)。
-TCP/IP 定义了电子设备（比如计算机）如何连入因特网，以及数据如何在它们之间传输的标准。
-
-TCP/IP协议模型（Transmission Control Protocol/Internet Protocol），包含了一系列构成互联网基础的网络协议，是Internet的核心协议。TCP 负责将数据分割并装入 IP 包，然后在它们到达的时候重新组合它们。IP 负责将包发送至接受者。
+TCP/IP 是供已连接因特网的计算机进行通信的通信协议,定义了电子设备（比如计算机）如何连入因特网，以及数据如何在它们之间传输的标准。包含了一系列构成互联网基础的网络协议，是Internet的核心协议。TCP 负责将数据分割并装入 IP 包，然后在它们到达的时候重新组合它们。IP 负责将包发送至接受者。
 
 ```
 HTTP/1.1 200 OK
@@ -122,11 +118,6 @@ IP协议头：八位的TTL字段。这个字段规定该数据包在穿过多少
 #### ARP及RARP协议
 
 ARP：是根据IP地址获取MAC地址的一种协议。ARP（地址解析）协议是一种解析协议，本来主机是完全不知道这个IP对应的是哪个主机的哪个接口，当主机要发送一个IP包的时候，会首先查一下自己的ARP高速缓存（就是一个IP-MAC地址对应表缓存）。如果查询的IP－MAC值对不存在，那么主机就向网络发送一个ARP协议广播包，这个广播包里面就有待查询的IP地址，而直接收到这份广播的包的所有主机都会查询自己的IP地址，如果收到广播包的某一个主机发现自己符合条件，那么就准备好一个包含自己的MAC地址的ARP包传送给发送ARP广播的主机。而广播主机拿到ARP包后会更新自己的ARP缓存（就是存放IP-MAC对应表的地方）。发送广播的主机就会用新的ARP缓存数据准备好数据链路层的的数据包发送工作。RARP协议的工作与此相反，不做赘述。
-
-### 工具
-
-- ping：是ICMP的最著名的应用，是TCP/IP协议的一部分。利用"ping"命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。原理是用类型码为0的ICMP发请 求，受到请求的主机则用类型码为8的ICMP回应。
-- Traceroute是用来侦测主机到目的主机之间所经路由情况的重要工具。它收到到目的主机的IP后，首先给目的主机发送一个TTL=1的UDP数据包，而经过的第一个路由器收到这个数据包以后，就自动把TTL减1，而TTL变为0以后，路由器就把这个包给抛弃了，并同时产生 一个主机不可达的ICMP数据报给主机。主机收到这个数据报以后再发一个TTL=2的UDP数据报给目的主机，然后刺激第二个路由器给主机发ICMP数据 报。如此往复直到到达目的主机。这样，traceroute就拿到了所有的路由器IP。 -
 
 ### TCP与UDP区别
 
@@ -326,9 +317,27 @@ host 192.30.252.153
 whois github.com # 用来查看域名的注册情况
 ```
 
+## 缓存
+
+* Expires：响应头，代表该资源的过期时间。服务端返回。时间是 GMT 格式的标准时间，如 Fri, 01 Jan 1990 00:00:00 GMT。单独的过期时间机制，浏览器端可以随意修改时间，导致缓存使用不精准
+* Cache-Control：请求/响应头，缓存控制字段，精确控制缓存策略。对缓存的控制粒度更细，包括缓存代理服务器的缓存控制。
+    - max-age=10秒。意思是在10秒以内，使用缓存到浏览器的 a.js 资源。果没有 Cache-Control，则以 Expires 为准。
+    - public，资源允许被中间服务器缓存。
+    - private，资源不允许被中间代理服务器缓存。
+    - no-cache，浏览器不做缓存检查。
+    - no-store，浏览器和中间代理服务器都不能缓存资源。
+    - must-revalidate，可以缓存，但是使用之前必须先向源服务器确认。
+    - proxy-revalidate，要求缓存服务器针对缓存资源向源服务器进行确认。
+    - s-maxage：缓存服务器对资源缓存的最大时间。
+* Etag：响应头，资源标识，由服务器告诉浏览器。内容变了，Etag 才变。内容不变，Etag 不变，可以理解为 Etag 是文件内容的唯一 ID。
+* If-None-Match：请求头，缓存资源标识，由浏览器告诉服务器。发现有If-None-Match，则比较 If-None-Match 和文件的 Etag 值，忽略If-Modified-Since的比较。
+* Last-Modified：响应头，资源最近修改时间，由服务器告诉浏览器。
+* If-Modified-Since：请求头，资源最近修改时间，由浏览器告诉服务器。过期策略有效后，携带该字段（等于上一次请求的Last-Modified）发起请求，服务器比较请求头里的时间和服务器上文件的 Last-Modified，一致，返回304继续本地缓存，否则重新返回。只能精确到秒（妙极内变动，不会重新发）
+* 主动通知
+    - 添加版本号
+    - 以 MD5hash 值来区分
+
 ### CORS
-
-
 
 ```php
 // server
@@ -372,11 +381,11 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 
 ## 工具
 
-
 * [snail007/goproxy](https://github.com/snail007/goproxy):Proxy is a high performance HTTP(S), websocket, TCP, UDP,Secure DNS, Socks5 proxy server implemented by golang. Now, it supports chain-style proxies,nat forwarding in different lan,TCP/UDP port forwarding, SSH forwarding.Proxy是golang实现的高性能http,https,websocket,tcp,防污染DNS,socks5代理服务器,支持内网穿透,链式代理,通讯加密,智能HTTP,SOCKS5代理,域名黑白名单,跨平台,KCP协议支持,集成外部API。
 * [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie):Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc. https://httpie.org https://twitter.com/clihttp
 * [Netflix/pollyjs](https://github.com/Netflix/pollyjs):Record, Replay, and Stub HTTP Interactions. https://netflix.github.io/pollyjs
 * [hazbo/httpu](https://github.com/hazbo/httpu):The terminal-first http client
+* [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
 
 ### [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest):DNS Performance test
 

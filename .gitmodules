@@ -130,3 +130,9 @@
 [submodule "Back_end/Python/python-guide"]
 	path = Back_end/Python/python-guide
 	url = git@github.com:kennethreitz/python-guide.git
+[submodule "Course/awesome-course"]
+	path = Course/awesome-course
+	url = git@github.com:prakhar1989/awesome-courses.git
+[submodule "Back_end/Rust/awesome-rust"]
+	path = Back_end/Rust/awesome-rust
+	url = git@github.com:rust-unofficial/awesome-rust.git
