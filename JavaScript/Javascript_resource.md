@@ -20,7 +20,12 @@
 * [SBoudrias/Inquirer.js](https://github.com/SBoudrias/Inquirer.js):A collection of common interactive command line user interfaces.
 * [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
 * [kvz/locutus](https://github.com/kvz/locutus):All your standard libraries will be assimilated into our JavaScript collective. Resistance is futile. http://locutus.io
+* [panzerdp/voca](https://github.com/panzerdp/voca):The ultimate JavaScript string library https://vocajs.com
 
+
+## 工具
+
+* [kpdecker/jsdiff](https://github.com/kpdecker/jsdiff):A javascript text differencing implementation.
 
 ## 日期
 
