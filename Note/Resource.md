@@ -64,9 +64,10 @@
 ## Store
 
 * [腾讯微云](https://www.weiyun.com/)
-* [Google Drive](link)
+* [Google Drive](https://drive.google.com/drive/)
   - [harababurel/gcsf](https://github.com/harababurel/gcsf):a FUSE file system based on Google Drive
-* [icloud](link)
+* [icloud](https://www.icloud.com/)
+* [juicefs](https://juicefs.io/):为云端设计的 POSIX 共享文件系统
 
 ## 笔记
 
@@ -97,7 +98,7 @@
   - Feedly:博客阅读与整理，导出订阅https://feedly.com/i/opml
   - Inoreader
 
-## 建站工具
+## 建站
 
 * [Sauarespace](https://www.squarespace.com/):建网站变成了像创造艺术品一样的体验
 * [Virb](http://virb.com/)
@@ -119,6 +120,7 @@
 * [Sandwichvideo](https://sandwichvideo.com/):演示短片
 * [Arc](http://thisisarc.com/):集合了超多优秀的短片制作公司，绝对是视频从业者的宝库。
 * Quicktime:切分音视频，可以录屏
+* [phobal/ivideo](https://github.com/phobal/ivideo):一个可以观看国内主流视频平台所有视频的客户端（Mac、Windows、Linux），包括 VIP 资源
 
 ## Photo
 
@@ -242,6 +244,7 @@
 * trello：以看版为基础任务管理系统
 * Teambition
 * Asana asana.com
+* [meili/TeamTalk](https://github.com/meili/TeamTalk):TeamTalk is a solution for enterprise IM
 
 ## 内容
 
@@ -285,6 +288,8 @@
 * 战地
 * 使命召唤
 * [diasurgical/devilution](https://github.com/diasurgical/devilution):Diablo devolved - magic behind the 1996 computer game
+* Dota
+* 风暴英雄
 
 ### 手游
 
@@ -314,6 +319,7 @@
 * [没有了老师，该如何学习？](http://www.cnblogs.com/qianqian-li/p/6028745.html)
 * [How To Ask Questions The Smart Way](http://www.catb.org/esr/faqs/smart-questions.html)
 * [lifesinger](https://github.com/lifesinger/blog):岁月如歌
+* [oldratlee/translations](https://github.com/oldratlee/translations):🐼 Chinese translations for classic IT resources https://github.com/oldratlee/translations/blob/master/README.md
 
 ## Podcast
 
@@ -350,9 +356,14 @@
 
 * [iawia002/annie](https://github.com/iawia002/annie):👾 Fast, simple and clean video downloader
 
+## cheat sheet
+
+* [chubin/cheat.sh](https://github.com/chubin/cheat.sh)：the only cheat sheet you need https://cheat.sh/ Mac 无法渲染html页面，ubuntu没问题
+
 ## 词典
 
 * [Flowerowl/ici](https://github.com/Flowerowl/ici):💥A dictionary used by programmers in the command line https://pypi.python.org/pypi/ici/
+* [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf):⭐️ 给变量起名的事情上，为你生命省 3s (Save 3 seconds of your life when naming things.)
 
 ## 参考
 

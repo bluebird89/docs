@@ -513,6 +513,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 ## 工具
 
 * [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs):A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim!
+* [coolwanglu/vim.js](https://github.com/coolwanglu/vim.js):JavaScript port of Vim http://coolwanglu.github.io/vim.js/emterpreter/vim.html
 
 ## 插件
 

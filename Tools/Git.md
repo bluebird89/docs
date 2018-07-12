@@ -67,6 +67,7 @@ fi
 
 ```sh
 git --version
+man git # Git User Manual
 
 git config --list --show-origin # 查看配置
 git config --local # repository配置
@@ -1278,7 +1279,6 @@ chown -R henry:henry .git/objects
 
 ## 文档
 
-* Git User Manual：`man git`
 * [文档](https://git-scm.com/docs)
 * [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. http://git.io/sheet
 * [atlassian](https://www.atlassian.com/git)
@@ -1307,6 +1307,7 @@ chown -R henry:henry .git/objects
 * [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
 * [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
 * [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
+* [conventional-changelog/conventional-changelog](https://github.com/conventional-changelog/conventional-changelog):Generate a changelog from git metadata.
 
 ## 参考
 
