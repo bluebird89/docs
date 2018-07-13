@@ -316,11 +316,15 @@ writing clear commit messages, you can make it easier for other people to follow
 
 
 ```shell
-git add ./<file1>(<file2> <file3>)/[dir] （所有修改过的文件/单个文件 或通过使用通配符将一组文件添加到暂存区）
-git add -p 添加每个变化前，都会要求确认,对于同一个文件的多处变化，可以实现分次提交
-git rm [file1] [file2] ... 删除工作区文件，并且将这次删除放入暂存区
-git rm --cached [file]  停止追踪指定文件，但该文件会保留在工作区
-git mv [file-original] [file-renamed]  改名文件，并且将这个改名放入暂存区
+git add .|<file1>(<file2> <file3>)|[dir] #（所有修改过的文件/单个文件 或通过使用通配符将一组文件添加到暂存区）
+git add -p # 添加每个变化前，都会要求确认,对于同一个文件的多处变化，可以实现分次提交
+git add -A # 添加所有变化（新增 new、修改 modified、删除 deleted）到暂存区
+git add -u # 添加修改(modified)和被删除(deleted)文件，不包括新文件(new)也就是不是被追踪文件（untracked）
+git add -p <file> # 添加文件内某些改动到暂存区
+
+git rm [file1] [file2] ... # 删除工作区文件，并且将这次删除放入暂存区
+git rm --cached [file]  # 停止追踪指定文件，但该文件会保留在工作区
+git mv [file-original] [file-renamed]  # 改名文件，并且将这个改名放入暂存区
 
 git commit -m "the first commit" # 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志.进行一次包含最后一次提交加上工作目录中文件快照的提交。并且文件被添加到暂存区域。
 git commit [file1] [file2] ... -m [message]
@@ -408,6 +412,7 @@ git rebase --abort
 git stutus # 查看本地的代码状态,工作树与暂存区的文件对比差别,显示有变更的文件
 git show [$id] # 显示某次提交的内容
 git diff # 查看执行 git status 的结果的详细信息
+git diff <fileName>
 git diff --staged # 暂存区与最新一次提交之间的差别
 git diff HEAD # 本次提交与上次提交之间的区别 HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
 git log --oneline  --graph --reverse  --author=Linus --oneline -5  -before={3.weeks.ago} --after={2010-04-18} --no-merges:显示当前分支的版本历史

@@ -5,7 +5,7 @@ Flutter是一个移动应用程序的软件开发工具包（SDK），用一个�
 Flutter 是 Fuchsia 的开发框架，支持导出 Android iOS 和 Fuchsia 三个平台的安装包
 
 
-> 安装
+## 安装
 
 FLUTTER_STORAGE_BASE_URL: https://mirrors.sjtug.sjtu.edu.cn/
 PUB_HOSTED_URL: https://dart-pub.mirrors.sjtug.sjtu.edu.cn/
@@ -31,7 +31,7 @@ flutter upgrade
 flutter doctor --android-licenses
 ```
 
-> 问题
+## 问题
 
 ```
 [!] Android toolchain - develop for Android devices (Android SDK 27.0.3)
@@ -71,12 +71,16 @@ pod setup
 
 ## 工具
 
-vscode 插件
+* vscode 插件
 
-> 参考
+## 参考
 
 * [Solido/awesome-flutter](https://github.com/Solido/awesome-flutters):A curated list of awesome Flutter components, frameworks, libraries, and softwares
 * [flutter/flutter](https://github.com/flutter/flutter):Flutter makes it easy and fast to build beautiful mobile apps. https://flutter.io
 * [flutter_gallery](https://github.com/flutter/flutter/tree/master/examples/flutter_gallery)
 * [](https://flutter-io.cn/)
 * [官网](https://flutter.io/)
+
+## 项目
+
+* [yubo725/flutter-osc](https://github.com/yubo725/flutter-osc):基于Google Flutter的开源中国客户端，支持Android和iOS。
