@@ -94,6 +94,7 @@
       - [Embed](https://github.com/oscarotero/Embed):  一个从web服务或网页中提取的信息的工具
       - [Goutte](https://github.com/FriendsOfPHP/Goutte): 一个简单的web爬取器
       - [PHP Spider](https://github.com/mvdbos/php-spider): 一个可配置和可扩展的PHP web爬虫
+      - [owner888/phpspider](https://github.com/owner888/phpspider):《我用爬虫一天时间“偷了”知乎一百万用户，只为证明PHP是世界上最好的语言 》所使用的程序
 * 中间件 Middlewares 使用中间件构建应用程序的库
       - [Expressive](https://zendframework.github.io/zend-expressive/): 基于PSR-7的Zend中间件
       - [PSR7-Middlewares](https://github.com/oscarotero/psr7-middlewares): 灵感来源于方便的中间件
@@ -184,7 +185,7 @@
 * (https://app.shippable.com/)[Shippable]: 一个基于开源和私人项目持续集成平台的docker
 * (http://sismo.sensiolabs.org/)[Sismo]: 一个持续测试的服务库
 * (https://travis-ci.org/)[Travis CI]: 一个持续集成平台
-* (http://www.wercker.com/)[Wercker]: 一个持续集成平台
+* [Wercker](http://www.wercker.com/): 一个持续集成平台
 
 ## 文档生成
 
@@ -731,3 +732,16 @@
 ## 写作
 
 * [michelf/php-markdown](https://github.com/michelf/php-markdown):Parser for Markdown and Markdown Extra derived from the original Markdown.pl by John Gruber. http://michelf.ca/projects/php-markdown/
+
+## network
+
+* [slince/spike](https://github.com/slince/spike):📣 A fast reverse proxy written in PHP that helps to expose local services to the internet
+
+
+## API
+
+* [graphql-php](https://webonyx.github.io/graphql-php/)
+
+## interview
+
+* [xianyunyh/PHP-Interview](https://github.com/xianyunyh/PHP-Interview):PHP面试整理的资料。包括PHP、MySQL、Linux、计算机网络等资料
