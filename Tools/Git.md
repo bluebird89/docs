@@ -314,8 +314,7 @@ writing clear commit messages, you can make it easier for other people to follow
 ![reset-commit](../_static/reset-commit.svg "reset-commit")
 ![reset-files](../_static/reset-files.svg "reset-files")
 
-
-```shell
+```sh
 git add .|<file1>(<file2> <file3>)|[dir] #（所有修改过的文件/单个文件 或通过使用通配符将一组文件添加到暂存区）
 git add -p # 添加每个变化前，都会要求确认,对于同一个文件的多处变化，可以实现分次提交
 git add -A # 添加所有变化（新增 new、修改 modified、删除 deleted）到暂存区
@@ -330,12 +329,13 @@ git commit -m "the first commit" # 每个 commit 都是一份完整的代码状�
 git commit [file1] [file2] ... -m [message]
 git commit -a # 提交工作区自上次commit之后的变化，直接到仓库区,通过编辑器添加message
 git commit -v # 提交时显示所有diff信息
-git commit –-am/--amend -m [message]：使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
+git commit –-am/--amend -m [message] # 使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
 git commit --amend [file1] [file2] ... # 修改上一次提交日志
 
 # 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
-git log 找到起始 commitID
-git reset commitID ，切记不要用 --hard 参数
+git log # 找到起始 commitID
+git log -p <file> # 跟踪查看某个文件的历史修改记录
+git reset commitID # 切记不要用 --hard 参数
 git add && git commit
 git push -f origin branchName # 合并到master，并推送远端master
 
@@ -360,16 +360,16 @@ git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1
 ![cherry-pick](../_static/cherry-pick.svg "cherry-pick")
 ![rebase](../_static/rebase.svg "rebase"):上面的命令都在topic分支中进行，而不是master分支，在master分支上重演，并且把分支指向新的节点。注意旧提交没有被引用，将被回收。
 
-```shell
+```sh
 git reset [file] # 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
 git reset --hard # 重置暂存区与工作区，与上一次commit保持一致
-git reset [commit] 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
+git reset [commit] # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
 git reset --hard [commit] # 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
 git reset b14bb52 # 会将提交记录回滚，代码不回滚
 git checkout -- files # 将部分代码文件回滚
 git reset --hard b14bb52 # 会将提交记录和代码全部回滚
-git reset --keep [commit] 重置当前HEAD为指定commit，但保持暂存区和工作区不变
-git revert [commit] 新建一个commit，用来撤销指定commit,后者的所有变化都将被前者抵消，并且应用到当前分支
+git reset --keep [commit] # 重置当前HEAD为指定commit，但保持暂存区和工作区不变
+git revert [commit] # 新建一个commit，用来撤销指定commit,后者的所有变化都将被前者抵消，并且应用到当前分支
 git reset HEAD #拉回历史版本
 git stash # 将当前工作状态（WIP，work in progress）临时存放在 stash 队列中,注意：未提交到版本库的文件会自动忽略，只要不运行 git clean -fd . 就不会丢失
 git stash list # 查看 stash 队列中已暂存了多少 WIP
@@ -426,6 +426,7 @@ git whatchanged [file] 显示某个文件的版本历史，包括文件改名
 git log -p [file] 显示指定文件相关的每一次diff
 git log -5 --pretty --oneline 显示过去5次提交
 git shortlog -sn 显示所有提交过的用户，按提交次数排序
+
 git blame [file] 显示指定文件是什么人在什么时间修改过
 git diff 显示暂存区和工作区的差异
 git diff --cached [file] 显示暂存区和上一个commit的差异
@@ -478,7 +479,7 @@ git branch --set-upstream develop origin/develop
 git branch # 列出分支
 git checkout master # 切换分支
 git push origin branchName #  提交分支
-git branch -d branchName , 强制删除分支 git branch -D branchName # 删除分支
+git branch -d branchName # 强制删除分支 git branch -D branchName # 删除分支
 git merge branchName # 合并分支
 ```
 
@@ -487,7 +488,7 @@ code review:project guidelines,unit tests
 
 #### 远程分支
 
-```shell
+```sh
 git fetch [remote] # 下载远程仓库的所有变动
 git fetch <远程主机名> <分支名>  # 只想取回特定分支的更新,所取回的更新，在本地主机上要用"远程主机名/分支名"的形式读取
 git fetch origin master # 拉取指定分支的变化
@@ -504,16 +505,17 @@ git remote rm <主机名> # 删除 origin 仓库信息
 git remote rename <原主机名> <新主机名> # 用于远程主机的改名
 
 git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
-git pull 执行的是 git merge，
+git pull # 执行的是 git merge
 git pull -r origin master # 执行的是git rebase git pull origin master
+
 git push <远程主机名> <本地分支名>:<远程分支名> # 上传本地指定分支到远程仓库. git push origin my:master
-git push [remote] --force 强行推送当前分支到远程仓库，即使有冲突
-git push [remote] --all 不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机
+git push [remote] --force # 强行推送当前分支到远程仓库，即使有冲突
+git push [remote] --all # 不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机
 git push origin :master # 省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支
 git push origin --delete master # 表示删除origin主机的master分支
-git push origin branch-name 从本地推送分支
+git push origin branch-name # 从本地推送分支
 git push --force origin  # 如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做git pull合并差异，然后再推送到远程主机。这时，如果你一定要推送，可以使用--force选项
-git push <remote repository name> <branch name>（第一次 git push -u：-u 选项设置本地分支去跟踪远程对应的分支）
+git push <remote repository name> <branch name> # （第一次 git push -u：-u 选项设置本地分支去跟踪远程对应的分支）
 git push <remote name> <local branch name:remote branch name>
 git push                         # push所有分支
 git push origin master           # 将本地主分支推到远程主分支
@@ -522,8 +524,8 @@ git push origin <local_branch>   # 创建远程分支， origin是远程仓库�
 git push origin <local_branch>:<remote_branch>  # 创建远程分支
 
 git push origin :<remote_branch>  #先删除本地分支(git branch -d <branch>)，然后再push删除远程分支
-git branch -dr [remote/branch] :删除远程分支
-git push origin --delete dev :删除远程分支
+git branch -dr [remote/branch] # 删除远程分支
+git push origin --delete dev # 删除远程分支
 ```
 
 deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
@@ -546,9 +548,9 @@ git add <文件名> # # 标记为解决状态加入暂存区
 git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge
 ```
 
-#### 标签
+#### Tag
 
-```shell
+```sh
 git tag # 列出所有tag
 git tag [tag] # 新建一个tag在指定commit
 git tag -a v2.1 -m 'first version'
@@ -564,9 +566,9 @@ git checkout -b [branch] [tag]  # 新建一个分支，指向某个tag
 git push origin --tags # 提交标签到GitHub中
 ```
 
-#### 打包
+#### archive
 
-```shell
+```sh
 git archive
 ```
 
@@ -656,13 +658,12 @@ git pull -r origin master # 将master的代码更新下来，并且rebase处理�
 git push origin master # 将本地代码更新到远端
 ```
 
-
 ### 习惯
 
-在开始修改代码前先 git pull 一下；
-将业务代码进行划分，尽量不要多个人在同一时间段修改同一文件；
-通过 Gitflow 工作流 也可以提升 git 流程效率，减少发生冲突的可能性。
-git pull --rebase 可以让分支的代码和 origin 仓库的代码保持兼容，同时还不会破坏线上代码的可靠性。
+* 在开始修改代码前先 git pull 一下；
+* 将业务代码进行划分，尽量不要多个人在同一时间段修改同一文件；
+* 通过 Gitflow 工作流 也可以提升 git 流程效率，减少发生冲突的可能性。
+* git pull --rebase 可以让分支的代码和 origin 仓库的代码保持兼容，同时还不会破坏线上代码的可靠性。
 
 ```sh
 git pull --rebase # 将当前分支的版本追加到从远程 pull 回来的节点之后
