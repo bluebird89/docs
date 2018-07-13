@@ -167,7 +167,11 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
 ## 传输协议
 
-常见的有三种协议，SSH，HTTP(S)，Git,SSH keys的使用需保证remote的源为git方式
+常见的有三种协议
+
+* SSH:SSH keys的使用需保证remote的源为git方式
+* HTTP(S)
+* Git
 
 ### SSH
 
@@ -231,11 +235,11 @@ Git维护的就是一个commitID树，分别保存着不同状态下的代码。
 * 版本库 本地仓库（所有历史版本Repository）:保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；.git文件夹里还包括git自动创建的master分支，并且将HEAD指针指向master分支。使用commit命令可以将暂存区中的文件添加到本地仓库中；文件状态：committed:History
 * 远程仓库(Remote):通常使用clone命令将远程仓库拷贝到本地仓库中，开发后推送到远程仓库中即可；
 
+![Git原理-3](../_static/git_3.png)
 ![Git原理-1](../_static/bg2015120901.png)
 ![Git原理-2](../_static/git_2.png)
-![Git原理-3](../_static/git_3.png)
 
-### 创建
+### 创建工作区 start a working area
 
 ```sh
 git clone [url] [project-name] # 下载一个项目和它的整个代码历史,支持多种协议
@@ -296,6 +300,18 @@ git mv [file-original] [file-renamed]  # 改名文件，并且将这个改名放
 git rm [file1] [file2] ... # 删除工作区文件，并且将这次删除放入暂存区
 git rm --cached [file]  # 停止追踪指定文件，但该文件会保留在工作区
 
+git reset [file] # 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
+git reset --soft # 重置soft
+git reset --hard # 重置暂存区与工作区，与上一次commit保持一致
+git reset [commit] # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
+git reset --hard [commit] # 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
+git reset b14bb52 # 会将提交记录回滚，代码不回滚
+
+git reset --hard b14bb52 # 会将提交记录和代码全部回滚
+git reset --keep [commit] # 重置当前HEAD为指定commit，但保持暂存区和工作区不变
+git revert [commit] # 新建一个commit，用来撤销指定commit,后者的所有变化都将被前者抵消，并且应用到当前分支
+git reset HEAD #拉回历史版本
+
 git diff # 显示暂存区和工作区的差异 查看执行 git status 的结果的详细信息
 git diff <fileName>
 git diff --staged # 暂存区与最新一次提交之间的差别
@@ -354,17 +370,6 @@ git show --name-only [commit] # 显示某次提交发生变化的文件
 git show [commit]:[filename] # 显示某次提交时，某个文件的内容
 
 git blame filename # 查看指定文件是什么人在什么时间修改过
-
-git reset [file] # 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
-git reset --hard # 重置暂存区与工作区，与上一次commit保持一致
-git reset [commit] # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
-git reset --hard [commit] # 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
-git reset b14bb52 # 会将提交记录回滚，代码不回滚
-
-git reset --hard b14bb52 # 会将提交记录和代码全部回滚
-git reset --keep [commit] # 重置当前HEAD为指定commit，但保持暂存区和工作区不变
-git revert [commit] # 新建一个commit，用来撤销指定commit,后者的所有变化都将被前者抵消，并且应用到当前分支
-git reset HEAD #拉回历史版本
 
 git stash # 将当前工作状态（WIP，work in progress）临时存放在 stash 队列中,注意：未提交到版本库的文件会自动忽略，只要不运行 git clean -fd . 就不会丢失
 git stash list # 查看 stash 队列中已暂存了多少 WIP
@@ -536,6 +541,9 @@ git push origin --tags # 提交标签到GitHub中
 ```sh
 git archive
 ```
+## GitHub
+
+
 
 ## cherry-pick
 
