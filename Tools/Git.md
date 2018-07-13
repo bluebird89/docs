@@ -1,18 +1,18 @@
 # [git/git](https://github.com/git/git)
 
-fast, scalable, distributed revision control system.一个分布式的代码管理容器，本地和远端都保有一份相同的代码。 Git 仓库主要是由是三部分组成：本地代码，缓存区，提交历史
+fast, scalable, distributed revision control system.一个分布式的代码管理容器，本地和远端都保有一份相同的代码。
 
 * 分布式
 * 基于时间点的快照：将提交点指向提交时的项目快照
-* 分支模型：SVN等版本控制工具将每个分支都要放在不同的目录中, Git可以在同一个目录中切换不同的分支;
-* 不必将所有的分支都上传到GitHub中去;
-* 用户可以随时 创建 合并 删除分支, 多人实现不同的功能, 可以创建多个分支进行开发, 之后进行分支合并, 这种方式使开发变得快速, 简单, 安全;
+* 分支模型：SVN等版本控制工具将每个分支都要放在不同的目录中, Git可以在同一个目录中切换不同的分支
+* 不必将所有的分支都上传到GitHub中去
+* 用户可以随时创建、合并、删除分支, 多人实现不同的功能, 可以创建多个分支进行开发, 之后进行分支合并, 这种方式使开发变得快速, 简单, 安全
 
 ## 服务
 
 * [GitHub](https://github.com/)
 * [Bitbucket](https://bitbucket.org/product)
-* [Gitlab](https://gitlab.com/
+* [Gitlab](https://gitlab.com/)
 * [码云](https://gitee.com)
 * [Coding](https://github.com/)
 * [sourceforge](https://sourceforge.net/):The Complete Open-Source Software Platform
@@ -25,7 +25,7 @@ fast, scalable, distributed revision control system.一个分布式的代码管�
 * [gogits/gogs](https://github.com/gogits/gogs):Gogs is a painless self-hosted Git service. https://gogs.io
 * [go-gitea/gitea](https://github.com/go-gitea/gitea):Gitea: Git with a cup of tea http://gitea.io
 
-## Install
+## 安装
 
 ```sh
 sudo apt-get install git
@@ -33,17 +33,14 @@ sudo apt-get install git
 brew install git
 brew install git-flow
 brew install git && brew install bash-completion
-
-# Add bash-completion to your ~/.bash_profile:
+# Add bash-completion to your ~/.bash_profile or ~/.zshrc
 
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
-
-# Add git-flow-completion to ~/.zshrc
 ```
 
-## Config
+## 配置
 
 * 全局配置: git config --global -l
   - /etc/gitconfig文件
@@ -168,11 +165,11 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
  url = kch@homeserver:ccc/ddd.git
 ```
 
-### Git 传输协议
+## 传输协议
 
-Git 常见的有三种协议，SSH，HTTP(S)，Git,SSH keys的使用需保证remote的源为git方式
+常见的有三种协议，SSH，HTTP(S)，Git,SSH keys的使用需保证remote的源为git方式
 
-#### SSH
+### SSH
 
 * 生成路径 `~/.ssh/`
 * 公钥添加到github账户
@@ -193,7 +190,7 @@ Host *
   IdentityFile ~/.ssh/id_rsa
 ```
 
-#### GPG
+### GPG
 
 提交内容将会有一个"已验证"标记
 
@@ -227,34 +224,21 @@ gpg --delete-key [用户ID]
 
 ## 原理
 
-Git维护的就是一个commitID树，分别保存着不同状态下的代码。 所以你对代码的任何修改，最终都会反映到 commit 上面去。
+Git维护的就是一个commitID树，分别保存着不同状态下的代码。 所以你对代码的任何修改，最终都会反映到 commit 上面去。创建和保存项目的快照及与之后的快照进行对比
 
-* 工作区（当前文件状态Workspace）:进行开发改动的地方，任何对象都是在工作区中诞生和被修改；
-* 暂存区（提交最新的版本Index/Stage）:.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；
-* 版本库 本地仓库（所有历史版本Repository）:保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；.git文件夹里还包括git自动创建的master分支，并且将HEAD指针指向master分支。使用commit命令可以将暂存区中的文件添加到本地仓库中；
+* 工作区（当前文件状态Workspace）:进行开发改动的地方，任何对象都是在工作区中诞生和被修改；文件状态：modified:working directory
+* 暂存区（提交最新的版本Index/Stage）:.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；文件状态：staged:Stage(Index)
+* 版本库 本地仓库（所有历史版本Repository）:保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；.git文件夹里还包括git自动创建的master分支，并且将HEAD指针指向master分支。使用commit命令可以将暂存区中的文件添加到本地仓库中；文件状态：committed:History
 * 远程仓库(Remote):通常使用clone命令将远程仓库拷贝到本地仓库中，开发后推送到远程仓库中即可；
 
 ![Git原理-1](../_static/bg2015120901.png)
 ![Git原理-2](../_static/git_2.png)
 ![Git原理-3](../_static/git_3.png)
 
-### 文件三种状态：
-
-创建和保存项目的快照及与之后的快照进行对比
-
-* modified:working directory
-* staged:Stage(Index)
-* committed:History
-
 ### 创建
 
-* git init：在当前目录内新建一个Git代码库，会生成.git文件，用于新建空项目文件或者将项目添加git管理
-* git init [project-name] # 新建一个目录，将其初始化为Git代码库
-* git clone [url] [project-name]:下载一个项目和它的整个代码历史,支持多种协议
-    - 克隆版本库的时候，所使用的远程主机自动被Git命名为origin。如果想用其他的主机名，需要用git clone命令的-o选项指定。
-* git subtree add --prefix=client <https://github.com/example/project-client.git> master // 建立主项目里子树
-
-```shell
+```sh
+git clone [url] [project-name] # 下载一个项目和它的整个代码历史,支持多种协议
 git clone http[s]://example.com/path/to/repo.git/
 git clone ssh://example.com/path/to/repo.git/
 git clone [user@]example.com:path/to/repo.git/
@@ -263,27 +247,10 @@ git clone /opt/git/project.git
 git clone file:///opt/git/project.git
 git clone ftp[s]://example.com/path/to/repo.git/
 git clone rsync://example.com/path/to/repo.git/
-git clone -o jQuery https://github.com/jquery/jquery.git
+git clone -o jQuery https://github.com/jquery/jquery.git # 所使用的远程主机自动被Git命名为origin。如果想自定义主机名，需要用git clone命令的-o选项指定
 
-git init --bare
-
-# 本地创建项目根目录, 然后与远程GitHub关联
-git init # 初始化git仓库
-git commit -m 'description' # 提交改变到缓存
-git remote add origin git@github.com:han1202012/TabHost_Test.git # 本地git仓库关联GitHub仓库
-git push -u origin master # 提交到GitHub中
-
-# 从GitHub上克隆项目到本地，注意克隆的时候直接在仓库根目录即可, 不用再创建项目根目录
-git clone git@github.com:han1202012/NDKHelloworld.git ,
-git add ./* # 添加文件，将目录中所有文件添加;
-git commit -m '提交'; # 提交缓存
-git push -u origin master  # 提交到远程GitHub仓库
-
-# 之后修改提交
-git pull # 与GitHub远程仓库同步
-git status # 查看文件变更
-git commit -m 'description' # 提交代码到本地缓存
-git push # 提交代码到远程GitHub仓库
+git init --bare # 远程仓库文件构建
+git init [project-name] # 初始化git仓库 在当前目录内新建一个Git代码库，会生成.git文件，用于新建空项目文件或者将项目添加git管理，默认URL文件名称，也可以自定义project-name
 ```
 
 #### working tree
@@ -313,34 +280,29 @@ writing clear commit messages, you can make it easier for other people to follow
 ![checkout-after-detached](../_static/checkout-after-detached.svg "checkout-after-detached")
 ![reset-commit](../_static/reset-commit.svg "reset-commit")
 ![reset-files](../_static/reset-files.svg "reset-files")
+![diff](../_static/diff.svg "diff")
 
 ```sh
+git stutus # 查看本地的代码状态,工作树与暂存区的文件对比差别,显示有变更的文件
+
 git add .|<file1>(<file2> <file3>)|[dir] #（所有修改过的文件/单个文件 或通过使用通配符将一组文件添加到暂存区）
 git add -p # 添加每个变化前，都会要求确认,对于同一个文件的多处变化，可以实现分次提交
 git add -A # 添加所有变化（新增 new、修改 modified、删除 deleted）到暂存区
 git add -u # 添加修改(modified)和被删除(deleted)文件，不包括新文件(new)也就是不是被追踪文件（untracked）
 git add -p <file> # 添加文件内某些改动到暂存区
 
-git rm [file1] [file2] ... # 删除工作区文件，并且将这次删除放入暂存区
-git rm --cached [file]  # 停止追踪指定文件，但该文件会保留在工作区
 git mv [file-original] [file-renamed]  # 改名文件，并且将这个改名放入暂存区
 
-git commit -m "the first commit" # 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志.进行一次包含最后一次提交加上工作目录中文件快照的提交。并且文件被添加到暂存区域。
-git commit [file1] [file2] ... -m [message]
-git commit -a # 提交工作区自上次commit之后的变化，直接到仓库区,通过编辑器添加message
-git commit -v # 提交时显示所有diff信息
-git commit –-am/--amend -m [message] # 使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
-git commit --amend [file1] [file2] ... # 修改上一次提交日志
+git rm [file1] [file2] ... # 删除工作区文件，并且将这次删除放入暂存区
+git rm --cached [file]  # 停止追踪指定文件，但该文件会保留在工作区
 
-# 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
-git log # 找到起始 commitID
-git log -p <file> # 跟踪查看某个文件的历史修改记录
-git reset commitID # 切记不要用 --hard 参数
-git add && git commit
-git push -f origin branchName # 合并到master，并推送远端master
-
-git commit --amend # 追加 commit 到上一个 commit 上。
-git rebase -i # 通过交互式的 rebase，提供对分支 commit 的控制，从而可以清理混乱的历史。
+git diff # 显示暂存区和工作区的差异 查看执行 git status 的结果的详细信息
+git diff <fileName>
+git diff --staged # 暂存区与最新一次提交之间的差别
+git diff HEAD # 本次提交与上次提交之间的区别 HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
+git diff --cached [file] # 显示暂存区和上一个commit的差异
+git diff [first-branch]...[second-branch] # 显示两次提交之间的差异
+git diff --shortstat "@{0 day ago}" # 显示今天你写了多少行代码
 
 git checkout [file]  # 恢复暂存区的指定文件到工作区
 git checkout [commit] [file] # 恢复某个commit的指定文件到暂存区和工作区
@@ -361,16 +323,49 @@ git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1
 ![rebase](../_static/rebase.svg "rebase"):上面的命令都在topic分支中进行，而不是master分支，在master分支上重演，并且把分支指向新的节点。注意旧提交没有被引用，将被回收。
 
 ```sh
+git commit -m "the first commit" # 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志.进行一次包含最后一次提交加上工作目录中文件快照的提交。并且文件被添加到暂存区域。
+git commit [file1] [file2] ... -m [message]
+git commit -a # 提交工作区自上次commit之后的变化，直接到仓库区,通过编辑器添加message
+git commit -v # 提交时显示所有diff信息
+git commit –-am/--amend -m [message] # 使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
+git commit --amend [file1] [file2] ... # 修改上一次提交日志
+git commit --amend # 追加 commit 到上一个 commit 上。
+
+# 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
+git log # 找到起始 commitID
+git log -p <file> # 跟踪查看某个文件的历史修改记录 每一次diff
+git log --oneline  --graph --reverse  --author=Linus --oneline -5  -before={3.weeks.ago} --after={2010-04-18} --no-merges # 显示当前分支的版本历史
+git log --graph --pretty=oneline --abbrev-commit  # （仅展示commit信息的图形化分支）
+git log --stat # 显示commit历史，以及每次commit发生变更的文件
+git log -S [keyword]  # 搜索提交历史，根据关键词
+git log [tag] HEAD --pretty=format:%s   # 显示某个commit之后的所有变动，每个commit占据一行
+git log [tag] HEAD --grep feature  # 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件
+git log --follow [file]  # 显示某个文件的版本历史，包括文件改名
+git reflog # 显示当前分支的最近几次提交,
+git log -3
+git log --since=yesterday
+git log --name-status --oneline
+git whatchanged [file]  # 显示某个文件的版本历史，包括文件改名
+git log -5 --pretty --oneline  # 显示过去5次提交
+git shortlog -sn  # 显示所有提交过的用户，按提交次数排序
+
+git show [commit] # 显示某次提交的元数据和内容变化
+git show --name-only [commit] # 显示某次提交发生变化的文件
+git show [commit]:[filename] # 显示某次提交时，某个文件的内容
+
+git blame filename # 查看指定文件是什么人在什么时间修改过
+
 git reset [file] # 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
 git reset --hard # 重置暂存区与工作区，与上一次commit保持一致
 git reset [commit] # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
 git reset --hard [commit] # 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
 git reset b14bb52 # 会将提交记录回滚，代码不回滚
-git checkout -- files # 将部分代码文件回滚
+
 git reset --hard b14bb52 # 会将提交记录和代码全部回滚
 git reset --keep [commit] # 重置当前HEAD为指定commit，但保持暂存区和工作区不变
 git revert [commit] # 新建一个commit，用来撤销指定commit,后者的所有变化都将被前者抵消，并且应用到当前分支
 git reset HEAD #拉回历史版本
+
 git stash # 将当前工作状态（WIP，work in progress）临时存放在 stash 队列中,注意：未提交到版本库的文件会自动忽略，只要不运行 git clean -fd . 就不会丢失
 git stash list # 查看 stash 队列中已暂存了多少 WIP
 git stash apply # 恢复stash内容到工作区，但是并不删除stash中的内容
@@ -384,7 +379,7 @@ git pull --no-ff                 # 抓取远程仓库所有分支更新并合并
 git pull --rebase origin master # 取回远程主机某个分支的更新，再与本地的指定分支合并
 git fetch origin     git merge origin/master             # 抓取远程仓库更新   将远程主分支合并到本地当前分支 等同于git pull
 git checkout --track origin/branch     # 跟踪某个远程分支创建相应的本地分支
-git checkout -b <local_branch> origin/<remote_branch>  # 基于远程分支创建本地分支，功能同上
+git checkout -b <local_branch> origin/<remote_branch>  # 基于远程分支创建本地分支
 
 # 合并 commit
 git merge master #  merge是两个分支处理冲突后，新增一个 commit 追加到master上。
@@ -394,6 +389,8 @@ git rebase master # 将someFeature分支上的commit记录追加到主分支上
 git add .
 git rebase --continue
 git rebase --abort
+
+git rebase -i # 通过交互式的 rebase，提供对分支 commit 的控制，从而可以清理混乱的历史。
 ```
 
 * git merge 处理冲突更直接
@@ -404,83 +401,43 @@ git rebase --abort
 
 [rebase vs merge](../_staic/mergevsrebase.jpeg "rebase vs merge")
 
-#### 查看
-
-![diff](../_static/diff.svg "diff")
-
-```shell
-git stutus # 查看本地的代码状态,工作树与暂存区的文件对比差别,显示有变更的文件
-git show [$id] # 显示某次提交的内容
-git diff # 查看执行 git status 的结果的详细信息
-git diff <fileName>
-git diff --staged # 暂存区与最新一次提交之间的差别
-git diff HEAD # 本次提交与上次提交之间的区别 HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
-git log --oneline  --graph --reverse  --author=Linus --oneline -5  -before={3.weeks.ago} --after={2010-04-18} --no-merges:显示当前分支的版本历史
-git log --graph --pretty=oneline --abbrev-commit （仅展示commit信息的图形化分支）
-git log --stat 显示commit历史，以及每次commit发生变更的文件
-git log -S [keyword] 搜索提交历史，根据关键词
-git log [tag] HEAD --pretty=format:%s  显示某个commit之后的所有变动，每个commit占据一行
-git log [tag] HEAD --grep feature 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件
-git log --follow [file] 显示某个文件的版本历史，包括文件改名
-git whatchanged [file] 显示某个文件的版本历史，包括文件改名
-git log -p [file] 显示指定文件相关的每一次diff
-git log -5 --pretty --oneline 显示过去5次提交
-git shortlog -sn 显示所有提交过的用户，按提交次数排序
-
-git blame [file] 显示指定文件是什么人在什么时间修改过
-git diff 显示暂存区和工作区的差异
-git diff --cached [file] 显示暂存区和上一个commit的差异
-git diff HEAD 显示工作区与当前分支最新commit之间的差异
-git diff [first-branch]...[second-branch] 显示两次提交之间的差异
-git diff --shortstat "@{0 day ago}" 显示今天你写了多少行代码
-git show [commit] 显示某次提交的元数据和内容变化
-git show --name-only [commit] 显示某次提交发生变化的文件
-git show [commit]:[filename] 显示某次提交时，某个文件的内容
-git reflog # 显示当前分支的最近几次提交,
-
-git log -3
-git log --since=yesterday
-git blame filename:查看文件中每行的操作时间
-git log --name-status --oneline
-```
-
 使用 git reset --hard commitID 把本地开发代码回滚到了一个之前的版本，而且还没有推到远端，怎么才能找回丢失的代码呢？ 你如果使用 git log 查看提交日志，并不能找回丢弃的那些 commitID。 而 git reflog 却详细的记录了你每个操作的 commitID，可以轻易的让你复原当时的操作并且找回丢失的代码。
 
 #### 分支
 
-branch name should be descriptive。创建分支后, 分支操作不会影响master分支, 但是master分支改变会影其它分支;
+branch name should be descriptive。创建分支后, 分支操作不会影响master分支, 但是master分支改变会影其它分支
 
 ```sh
-git branch [-r]/[-a] 列出所有远程/所有分支
+git branch [-r]|[-a] # 列出所有远程/所有分支
+
 git branch [branch-name] [commit] # 新建一个分支，指向指定commit,但依然停留在当前分支
 git checkout -b newBrach origin/master # 在origin/master的基础上，创建一个新分支，并切换到new分支
 git checkout -b branch-name origin/branch-name # 从本地创建和远程对应的分支
-git branch --track [branch] [remote-branch] 新建一个分支，与指定的远程分支建立追踪关系
-git push origin qixiu/feature  # 新建本地分支，然后更新到远端的方式来新增一个远端分支
-git push origin -d qixiu/feaure # 删除远程分支
-git push origin :qixiu/feature
+git branch --track [branch] [remote-branch] # 新建一个分支，与指定的远程分支建立追踪关系
 
 git merge origin/master # 在本地分支上合并远程分支
-git rebase origin/master # 在本地分支上合并远程分支
+git merge new # 合并指定分支到当前分支
 
-git checkout dev:切换
-git checkout -:切换到上一个分支
-git merge new 合并指定分支到当前分支
-git cherry-pick [commit] 选择一个commit，合并进当前分支
-git branch -d [branch-name] 删除分支
-git rebase source destiantion：将source压缩到destiantion
+git rebase origin/master # 在本地分支上合并远程分支
+git rebase source destiantion # 将source压缩到destiantion
 git rebase master
+
+git checkout dev # 切换
+git checkout - # 切换到上一个分支
+
+git cherry-pick [commit] # 选择一个commit，合并进当前分支
+git branch -d [branch-name] # 删除已合并分支
+git branch -D branchName # 删除分支
 
 git branch --set-upstream-to=origin/master master
 
 git branch --set-upstream master origin/master # 建立追踪关系，在现有分支与指定的远程分支之间
 git branch --set-upstream develop origin/develop
 
-git branch # 列出分支
-git checkout master # 切换分支
 git push origin branchName #  提交分支
-git branch -d branchName # 强制删除分支 git branch -D branchName # 删除分支
-git merge branchName # 合并分支
+git push origin qixiu/feature  # 新建本地分支，然后更新到远端的方式来新增一个远端分支
+git push origin -d qixiu/feaure # 删除远程分支
+git push origin :qixiu/feature
 ```
 
 Pull Request:useful for contributing to open source projects and for managing changes to shared repositories.
@@ -499,7 +456,8 @@ git config get --remote.origin.url
 git remote -v
 git remote show origin # 显示所有远程仓库
 git remote show [remote] # 显示某个远程仓库的信息
-git remote add [shortname] [url] 增加一个新的远程仓库，并命名
+git remote add [shortname] [url] # 增加一个新的远程仓库，并命名
+git remote add origin git@github.com:han1202012/TabHost_Test.git # 本地git仓库关联GitHub仓库
 git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 设置远程仓库地址(用于修改远程仓库地址)
 git remote rm <主机名> # 删除 origin 仓库信息
 git remote rename <原主机名> <新主机名> # 用于远程主机的改名
@@ -508,6 +466,7 @@ git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程�
 git pull # 执行的是 git merge
 git pull -r origin master # 执行的是git rebase git pull origin master
 
+git push                         # push所有分支
 git push <远程主机名> <本地分支名>:<远程分支名> # 上传本地指定分支到远程仓库. git push origin my:master
 git push [remote] --force # 强行推送当前分支到远程仓库，即使有冲突
 git push [remote] --all # 不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机
@@ -517,15 +476,16 @@ git push origin branch-name # 从本地推送分支
 git push --force origin  # 如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做git pull合并差异，然后再推送到远程主机。这时，如果你一定要推送，可以使用--force选项
 git push <remote repository name> <branch name> # （第一次 git push -u：-u 选项设置本地分支去跟踪远程对应的分支）
 git push <remote name> <local branch name:remote branch name>
-git push                         # push所有分支
-git push origin master           # 将本地主分支推到远程主分支
-git push -u origin master        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库) 设置本地分支与远程分支保持同步，在第一次 git push 的时候带上 -u 参数即可
+git push [-u] origin master        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库) 设置本地分支与远程分支保持同步，在第一次 git push 的时候带上 -u 参数即可
 git push origin <local_branch>   # 创建远程分支， origin是远程仓库名
 git push origin <local_branch>:<remote_branch>  # 创建远程分支
 
 git push origin :<remote_branch>  #先删除本地分支(git branch -d <branch>)，然后再push删除远程分支
 git branch -dr [remote/branch] # 删除远程分支
 git push origin --delete dev # 删除远程分支
+
+
+git checkout -- files # 将部分代码文件回滚
 ```
 
 deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
@@ -552,14 +512,19 @@ git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge
 
 ```sh
 git tag # 列出所有tag
+
+
 git tag [tag] # 新建一个tag在指定commit
 git tag -a v2.1 -m 'first version'
 git push origin v2.1
 git tag -l v1.* # 限定
+
+git show [tag]  # 查看tag信息
+
 git tag -d [tag] # 删除本地tag
 git push origin --delete v1.0.0 #
 git push origin :refs/tags/[tagName]   # 删除远程tag
-git show [tag]  # 查看tag信息
+
 git push [remote] [tag]  # 提交指定tag
 git push [remote] --tags  # 提交所有tag
 git checkout -b [branch] [tag]  # 新建一个分支，指向某个tag
@@ -612,7 +577,7 @@ git clone git@server:/path/to/repo.git
 git clone git@115.159.146.94:/home/testgit/sample.git lsgogit
 ```
 
-### git hook，Git 的生命周期
+### git hook
 
 git操作有它自身的生命周期，在不同的生命周期，我们可以做一些自动化的事情。
 
@@ -1015,11 +980,13 @@ git subtree add pull -P home/.bash bash master --squash   # 拉取远程仓库 b
 ...... edit home/.bash/file......
 git commit -a -m 'update some'
 git subtree push -P home/.bash bash master
-git push origin master                                    # 顺便主项目也 push 了
+git push origin master                                    # 顺便主项目也 push
 
 git subtree pull -P home/.bash bash master --squash
 
 对 git-subtree 下子项目有修改需求的，请先 git subtree pull
+
+git subtree add --prefix=client <https://github.com/example/project-client.git> master # 建立主项目里子树
 ```
 
 ### [git-lfs/git-lfs](https://github.com/git-lfs/git-lfs)
