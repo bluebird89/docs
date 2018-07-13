@@ -331,7 +331,7 @@ git commit [file1] [file2] ... -m [message]
 git commit -a # 提交工作区自上次commit之后的变化，直接到仓库区,通过编辑器添加message
 git commit -v # 提交时显示所有diff信息
 git commit –-am/--amend -m [message]：使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
-git commit --amend [file1] [file2] ...  重做上一次commit，并包括指定文件的新变化
+git commit --amend [file1] [file2] ... # 修改上一次提交日志
 
 # 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
 git log 找到起始 commitID
