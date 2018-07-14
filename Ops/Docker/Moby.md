@@ -313,6 +313,20 @@ services:
         container_name: "m.look.360.cn-php"
 ```
 
+## 准则
+
+* 不要在容器（container）中存储数据 容器可能会被中断、被替换或遭到破坏。请存储在卷 (volume) 中。请确保应用程序适用于写入共享的数据存储。
+* 监控容器 Docker：推荐 Cloudinsight
+* 不要依赖 IP 地址：每个容器都有自己的内部 IP 地址，如果启动然后停止容器，内部 IP 地址可能会发生变化。请使用环境变量在容器之间传递相应的主机名和端口。
+* 不要以 root 权限运行进程：应使用 USER 指令来为容器的运行指定非 root 用户
+* 不要在镜像中存储证书及使用环境变量。 不要在镜像中对任何用户名/密码进行硬编码操作。请使用环境变量从容器外部检索信息
+* 不要在单个容器中运行一个以上进程 容器只运行一个进程（HTTP 守护进程、应用程序服务器、数据库）时效果最佳
+* 不要只使用“最新版”标签：因为无法跟踪当前运行的镜像版本。
+* 不要从正在运行的容器中创建镜像 换句话说，不要使用"docker commit"命令来创建镜像。这一镜像创建方法不可复制，因此应完全避免使用。请始终使用 Dockerfile 或其他任何可完全复制的 S21（从源代码到镜像）方法
+* 不要使用单层镜像 为了有效利用多层文件系统，请始终为操作系统创建属于自己的基本镜像层，然后为用户名定义创建一个层，为运行时安装创建一个层，为配置创建一个层，最后再为应用程序创建一个层。这样，重新创建、管理和分配镜像就会容易些。
+* 不要创建大尺寸镜像 大尺寸的镜像难以分配。请确保仅使用必需文件和库来运行应用程序。
+* 不要分两部分传送应用程序 有些人把容器当作虚拟机，所以他们大多会认为，应该将应用程序部署到现有正在运行的容器中。在需要不断部署和调试的开发阶段，可能确实如此；但对于 QA 和生产的持续交付 (CD) 渠道，应用程序应当是镜像的一部分。切记：容器转瞬即逝。
+
 ## 资源
 
 * [wurstmeister/kafka-docker](https://github.com/wurstmeister/kafka-docker):Dockerfile for Apache Kafka http://wurstmeister.github.io/kafka-d…
@@ -333,5 +347,3 @@ services:
 * [Product and tool manuals](https://docs.docker.com/manuals/) https://docs.docker.com/engine/installation/
 * [Docker — 从入门到实践](https://yeasy.gitbooks.io/docker_practice/)
 * [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects
-
-
