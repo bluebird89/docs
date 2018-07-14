@@ -536,7 +536,6 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 
 Ubuntu具体说来，它默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
 
-
 ### 身份
 
 * owner
@@ -766,6 +765,8 @@ who
 locate
 ```
 
+## 日志
+
 ## Boot分区不足
 
 ```sh
@@ -902,6 +903,7 @@ sudo apt-get install stacer
 - -e
 
 ### ubunu 优化
+
 ```sh
 # 提高电池的寿命并且减少过热
 sudo add-apt-repository ppa:linrunner/tlp
