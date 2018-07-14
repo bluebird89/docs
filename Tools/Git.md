@@ -232,7 +232,7 @@ Git维护的就是一个commitID树，分别保存着不同状态下的代码。
 
 * 工作区（当前文件状态Workspace）:进行开发改动的地方，任何对象都是在工作区中诞生和被修改；文件状态：modified:working directory
 * 暂存区（提交最新的版本Index/Stage）:.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；文件状态：staged:Stage(Index)
-* 版本库 本地仓库（所有历史版本Repository）:保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；.git文件夹里还包括git自动创建的master分支，并且将HEAD指针指向master分支。使用commit命令可以将暂存区中的文件添加到本地仓库中；文件状态：committed:History
+* 版本库 本地仓库（所有历史版本Repository）:保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；.git文件夹里还包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History
 * 远程仓库(Remote):通常使用clone命令将远程仓库拷贝到本地仓库中，开发后推送到远程仓库中即可；
 
 ![Git原理-3](../_static/git_3.png)
@@ -300,7 +300,7 @@ git mv [file-original] [file-renamed]  # 改名文件，并且将这个改名放
 git rm [file1] [file2] ... # 删除工作区文件，并且将这次删除放入暂存区
 git rm --cached [file]  # 停止追踪指定文件，但该文件会保留在工作区
 
-git reset [file] # 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
+git reset [HEAD] [file] # 撤销文件跟踪，重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
 git reset --soft # 重置soft
 git reset --hard # 重置暂存区与工作区，与上一次commit保持一致
 git reset [commit] # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
@@ -322,6 +322,7 @@ git diff --shortstat "@{0 day ago}" # 显示今天你写了多少行代码
 
 git checkout [file]  # 恢复暂存区的指定文件到工作区
 git checkout [commit] [file] # 恢复某个commit的指定文件到暂存区和工作区
+git checkout origin/master -- path/to/file
 git checkout ./file # 回滚最新版本库文件，抛弃工作区修改
 git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1234567a44341404 / HEAD
 ```
@@ -351,6 +352,7 @@ git commit --amend # 追加 commit 到上一个 commit 上。
 git log # 找到起始 commitID
 git log -p <file> # 跟踪查看某个文件的历史修改记录 每一次diff
 git log --oneline  --graph --reverse  --author=Linus --oneline -5  -before={3.weeks.ago} --after={2010-04-18} --no-merges # 显示当前分支的版本历史
+git log --oneline --decorate --graph --all
 git log --graph --pretty=oneline --abbrev-commit  # （仅展示commit信息的图形化分支）
 git log --stat # 显示commit历史，以及每次commit发生变更的文件
 git log -S [keyword]  # 搜索提交历史，根据关键词
@@ -382,9 +384,9 @@ git stash apply stash@{num} # 恢复指定编号的 WIP，但不从队列中移�
 git pull                         # 抓取远程仓库所有分支更新并合并到本地
 git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并
 git pull --rebase origin master # 取回远程主机某个分支的更新，再与本地的指定分支合并
-git fetch origin     git merge origin/master             # 抓取远程仓库更新   将远程主分支合并到本地当前分支 等同于git pull
+git fetch origin
+git merge origin/master             # 抓取远程仓库更新   将远程主分支合并到本地当前分支 等同于git pull
 git checkout --track origin/branch     # 跟踪某个远程分支创建相应的本地分支
-git checkout -b <local_branch> origin/<remote_branch>  # 基于远程分支创建本地分支
 
 # 合并 commit
 git merge master #  merge是两个分支处理冲突后，新增一个 commit 追加到master上。
@@ -404,7 +406,7 @@ git rebase -i # 通过交互式的 rebase，提供对分支 commit 的控制，�
     - 从祖先节点把功能分支的提交记录摘下来，然后 rebase 到 master 分支
     - rebase 之后的 commitID 其实已经发生了变化
 
-[rebase vs merge](../_staic/mergevsrebase.jpeg "rebase vs merge")
+![rebase vs merge](../_staic/mergevsrebase.jpeg "rebase vs merge")
 
 使用 git reset --hard commitID 把本地开发代码回滚到了一个之前的版本，而且还没有推到远端，怎么才能找回丢失的代码呢？ 你如果使用 git log 查看提交日志，并不能找回丢弃的那些 commitID。 而 git reflog 却详细的记录了你每个操作的 commitID，可以轻易的让你复原当时的操作并且找回丢失的代码。
 
@@ -426,16 +428,17 @@ git merge new # 合并指定分支到当前分支
 git rebase origin/master # 在本地分支上合并远程分支
 git rebase source destiantion # 将source压缩到destiantion
 git rebase master
+git rebase –continue | –skip | –abort # 如果出错的话
 
 git checkout dev # 切换
 git checkout - # 切换到上一个分支
 
 git cherry-pick [commit] # 选择一个commit，合并进当前分支
+
 git branch -d [branch-name] # 删除已合并分支
 git branch -D branchName # 删除分支
 
 git branch --set-upstream-to=origin/master master
-
 git branch --set-upstream master origin/master # 建立追踪关系，在现有分支与指定的远程分支之间
 git branch --set-upstream develop origin/develop
 
@@ -466,6 +469,8 @@ git remote add origin git@github.com:han1202012/TabHost_Test.git # 本地git仓�
 git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 设置远程仓库地址(用于修改远程仓库地址)
 git remote rm <主机名> # 删除 origin 仓库信息
 git remote rename <原主机名> <新主机名> # 用于远程主机的改名
+
+git remote update wilson # 更新源代码信息
 
 git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
 git pull # 执行的是 git merge

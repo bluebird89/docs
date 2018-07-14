@@ -734,6 +734,12 @@ Python实现的数据库。
 * wxPython：wxPython 是 wxWidgets C++ 类库和 Python 语言混合的产物。[官网](http://wxpython.org/)
 * PyGObject：GLib/GObject/GIO/GTK+ (GTK+3) 的 Python 绑定[官网](https://wiki.gnome.org/Projects/PyGObject)
 * Flexx：Flexx 是一个纯 Python 语言编写的用来创建 GUI 程序的工具集，它使用 web 技术进行界面的展示。[官网](https://github.com/zoofIO/flexx)
+* CEF Python:基于Google Chromium。其主要用于在第三方应用程序中嵌入式浏览器的使用上。
+* Dabo:底层框架是WxPython。这是一个三层框架。总的来说，Dabo是一个跨平台的应用程序开发框架。
+* Pyforms:用于开发GUI应用程序的Python 2.7/ 3.x多运行环境框架
+* PyGUI:尽可能轻松地融入Python生态系统。
+* libavg:以Python语言内置变量类型显示元素,事件处理系统,计时器,支持日志
+* PyGTK | PyGObject
 
 ## 游戏开发
 
