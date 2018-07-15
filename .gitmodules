@@ -103,8 +103,8 @@
 [submodule "Back_end/Java/awesome-java"]
 	path = Back_end/Java/awesome-java
 	url = git@github.com:akullpp/awesome-java.git
-[submodule "Computer/coding-interview-university"]
-	path = Computer/coding-interview-university
+[submodule "Review/coding-interview-university"]
+	path = Review/coding-interview-university
 	url = git@github.com:jwasham/coding-interview-university.git
 [submodule "Algorithm/computer-science-in-javascript"]
 	path = Algorithm/computer-science-in-javascript
