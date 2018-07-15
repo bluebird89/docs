@@ -355,6 +355,7 @@
 ## 工具
 
 * [iawia002/annie](https://github.com/iawia002/annie):👾 Fast, simple and clean video downloader
+* [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
 
 ## cheat sheet
 
