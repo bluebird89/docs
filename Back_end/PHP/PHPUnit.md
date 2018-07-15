@@ -25,5 +25,5 @@ phpunit --version
 
 ## 参考
 
- [PHPUnit文档](http://www.phpunit.cn)
+* [PHPUnit文档](http://www.phpunit.cn)
 

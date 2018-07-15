@@ -54,6 +54,8 @@ composer search monolog
 compsoer show monolog
 
 composer global require "squizlabs/php_codesniffer=*"
+composer global require friendsofphp/php-cs-fixer
+
 composer install # 使用composer install或者composer update命令将会更新所有的扩展包
 composer update [packagename]
 composer remove [packagename]
