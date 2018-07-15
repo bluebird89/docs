@@ -68,12 +68,12 @@ man git # Git User Manual
 
 git config --list --show-origin # 查看配置
 git config --local # repository配置
+git config -l                       # 列举所有配置
 
 git config --global user.name "name"
 git config --global user.email "email"
 git config --global color.ui "auto"
 git config --global core.editor vim # 设置编辑器为 vim
-git config -l                       # 列举所有配置
 
 git config --global credential.helper osxkeychain
 
@@ -84,8 +84,6 @@ git config --global mergetool.sublime.cmd "subl -w \$MERGED"
 git config --global mergetool.sublime.trustExitCode false
 git config --global merge.tool sublime | vimdiff
 git mergetool -y
-
-git config --global alias.st 'status'
 
 git config --global alias.ls 'log --name-status --oneline --graph'
 git config --global rebase.autoStash true
@@ -356,12 +354,12 @@ git log -p <file> # 跟踪查看某个文件的历史修改记录 每一次diff
 --decorate # more information
 --reverse
 --all
---author=Linus
+--author="Linus"
 --oneline
---since=yesterday
---grep=’day of week’
+--since="yesterday"
+--grep="day of week"
 --stat # can give you useful information about what changed.
--G 'chef-client' # Regex on Commits
+-G "chef-client" # Regex on Commits
 -5
 --before={3.weeks.ago}
 --after={2010-04-18}
@@ -1320,6 +1318,9 @@ chown -R henry:henry .git/objects
 * [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
 * [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub): :octocat:分享 GitHub 上好玩、容易上手的项目，帮你找到编程的乐趣。欢迎推荐、自荐项目，让更多人知道你的项目star
 * [susam/gitpr](https://github.com/susam/gitpr#with-merge-commit):A quick reference guide on fork and pull request workflow
+* [git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
+* [Git Immersion](http://gitimmersion.com/):The surest path to mastering Git is to immerse oneself in its utilities and operations, to experience it first-hand
+*
 
 ## 工具
 
