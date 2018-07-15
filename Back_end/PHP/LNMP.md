@@ -107,6 +107,9 @@ php7.1-gd \
 php7.1-cli \
 php-pear \ # to ues pecl
 php7.1-intl
+php7.2-soap
+php7.2-xdebug
+php-xdebug
 
 sudo apt-get install -y php-pear php5.6-mcrypt php5.6-mbstring php5.6-curl php5.6-cli php5.6-mysql php5.6-gd php5.6-intl php5.6-xsl php5.6-zip
 ```
