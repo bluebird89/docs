@@ -23,6 +23,7 @@ Open source relational database management system
     - 对 JSON 的支持，添加了基于路径查询参数从 JSON 字段中抽取数据的 JSON_EXTRACT() 函数，以及用于将数据分别组合到 JSON 数组和对象中的 JSON_ARRAYAGG() 和 JSON_OBJECTAGG() 聚合函数。
     - InnoDB 现在支持表 DDL 的原子性，也就是 InnoDB 表上的 DDL 也可以实现事务完整性，要么失败回滚，要么成功提交，不至于出现 DDL 时部分成功的问题，此外还支持 crash-safe 特性，元数据存储在单个事务数据字典中。
     - InnoDB 集群为您的数据库提供集成的原生 HA 解决方案
+    - validate_password:默认为caching_sha2_password,客户端不支持
 
 ## 客户端
 
@@ -300,20 +301,17 @@ set global general_log = on;
 命令行操作
 
 ```sql
-mysql -h localhost  -P 3306 -u root -p  # 生成用户root与空密码登陆,第一次登陆mysql的时候是没有密码的
-exit quit \q
+mysql -hlocalhost  -P 3306 -u root -p  # 生成用户root与空密码登陆,第一次登陆mysql的时候是没有密码的
+exit|quit| \q
 
 use mysql;
 update user SET Password = PASSWORD('密码') where User = 'root';
 FLUSH PRIVILEGES;
-exit;
 
-CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; # 添加用户
-GRANT ALL PRIVILEGES ON blog.* TO 'jeff'@'localhost';
+CREATE USER 'lee'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456Ac&' # 添加用户
+GRANT ALL PRIVILEGES ON test.* TO lee@'localhost';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root密码' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
-
-# 8.0 mysql_native_password => caching_sha2_password
 ```
 
 ### 存储引擎

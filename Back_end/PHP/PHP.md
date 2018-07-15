@@ -223,6 +223,8 @@ opcache.fast_shutdown=1         //使用快速停止续发事件
 ```
 session.save_handler = 'memcached'
 session.save_path = '127.0.0.1:11211'
+
+expose_php = Off # X-Powered-By的配置
 ```
 
 ## CGI vs Cli
