@@ -17,7 +17,7 @@ PHP 解释程序被载入内存而不用每次需要时从存储器读取，极�
 * 配置文件路径：/private/etc/php-fpm.conf /private/etc/php-fpm.d/www.conf.default
 * php.ini:/usr/local/php/etc/php.ini
 
-## 配置
+## 服务
 
 ```sh
 #测试php-fpm配置
@@ -31,12 +31,17 @@ PHP 解释程序被载入内存而不用每次需要时从存储器读取，极�
 #关闭php-fpm
 kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
 
+## Mac
+killall php-fpm # 关闭进程
+
 #重启php-fpm
 kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
 
 ## linux 进程管理
 sudo service php7.0-fpm {start|stop|status|restart|reload|force-reload}
 ```
+
+## 配置
 
 ```
 [global]
