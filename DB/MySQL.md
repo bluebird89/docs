@@ -36,13 +36,24 @@ Open source relational database management system
 ```shell
 ### MAC
 brew install mysql
-brew services start mysql # /usr/local/Cellar/mysql/5.7.20
-mysql.server start/stop  # Mac服务管理
+/usr/local/Cellar/mysql/8.0.11/bin/mysqld
+--initialize-insecure
+--user=henry
+--basedir=/usr/local/Cellar/mysql/8.0.11
+--datadir=/usr/local/var/mysql
+--tmpdir=/tmp
+
+brew services start mysql
+
+mysql.server start|stop|restart|status  # Mac服务管理
 net start/stop mysql # win平台
+
 mysql_secure_installation # 没有设置 root 帐户的密码，马上设置它;通过删除可从本地主机外部访问的 root 帐户来禁用远程 root 用户登录;删除匿名用户帐户和测试数据库
 
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+
+mysqladminm
 
 sudo apt remove mysql-server
 sudo apt autoremove mysql-server
@@ -86,7 +97,6 @@ service mysql stop
 service mysql status
 service mysql restart
 
-
 ## docker
 docker pull mysql
 docker run --name master -p 3306:3307 -e MYSQL_ROOT_PASSWORD=root -d mysql
@@ -112,7 +122,7 @@ docker run --name master -p 3306:3307 -e MYSQL_ROOT_PASSWORD=root -d mysql
 
 ### 配置
 
-配置文件：/usr/local/etc/my.cnf  或者 my.ini
+配置文件：/usr/local/etc/my.cnf或者 my.ini
 
 * 数据库文件路径 `datadir="F:/wamp/mysql/data"`
 * 字符集: 客户端向MySQL服务器端请求和返加的数据的字符集，在选择数据库后使用:`set names gbk`;默认使用utf8mb4字符集,utf8mb4是utf8的超集，emoji表情以及部分不常见汉字在utf8下会表现为乱码，故需要升级至utf8mb4。
@@ -302,6 +312,8 @@ CREATE USER 'www'@'localhost' IDENTIFIED BY '123456aC$'; # 添加用户
 GRANT ALL PRIVILEGES ON blog.* TO 'jeff'@'localhost';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root密码' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
+
+# 8.0 mysql_native_password => caching_sha2_password
 ```
 
 ### 存储引擎
