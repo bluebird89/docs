@@ -5,12 +5,12 @@ PHP 用来管理依赖（dependency）关系的工具。你可以在自己的项
 ## 安装
 
 ```sh
-sudo apt-get install composer
-
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
-curl -sS https://getcomposer.org/installer | php
-mv composer.phar /usr/local/bin/composer
+php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+sudo mv composer.phar /usr/local/bin/composer
 
 brew install composer  # Mac
 # file_put_contents(./composer.json): failed to open stream: Permission denied
@@ -40,9 +40,8 @@ Github允许你下载某个git引用的压缩包。为了强制使用压缩包�
 考虑修改，源代码优先:--prefer-source
 
 ```sh
-## 全局配置国内镜像
-composer config -g repo.packagist composer https://packagist.phpcomposer.com
-composer config repo.packagist composer https://packagist.phpcomposer.com
+composer config -g repo.packagist composer https://packagist.phpcomposer.com ## 全局配置国内镜像
+composer config repo.packagist composer https://packagist.phpcomposer.com # peroject
 
 composer config -l
 
@@ -54,7 +53,7 @@ composer init --require="twig/twig:1.*" -n --profile # 显示执行时间
 composer search monolog
 compsoer show monolog
 
-composer require  "monolog/monolog:1.2.*"
+composer global require "squizlabs/php_codesniffer=*"
 composer install # 使用composer install或者composer update命令将会更新所有的扩展包
 composer update [packagename]
 composer remove [packagename]
@@ -128,5 +127,6 @@ echo $slugify->slugify('Hello World, this is a long sentence and I need to make 
 * [官网](https://getcomposer.org/)
 * [composer/composer](https://github.com/composer/composer):Dependency Manager for PHP https://getcomposer.org/
 * [中文](https://www.phpcomposer.com/)
+* [Packagist](https://packagist.org):The PHP Package Repository
 
 https://www.robberphex.com/2018/05/858
