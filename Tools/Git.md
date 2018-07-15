@@ -300,17 +300,16 @@ git mv [file-original] [file-renamed]  # 改名文件，并且将这个改名放
 git rm [file1] [file2] ... # 删除工作区文件，并且将这次删除放入暂存区
 git rm --cached [file]  # 停止追踪指定文件，但该文件会保留在工作区
 
+git reset # Reset the index to match the most recent commit
 git reset [HEAD] [file] # 撤销文件跟踪，重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
 git reset --soft # 重置soft
 git reset --hard # 重置暂存区与工作区，与上一次commit保持一致
-git reset [commit] # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
-git reset --hard [commit] # 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
-git reset b14bb52 # 会将提交记录回滚，代码不回滚
+git reset [commit] # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变 会将提交记录回滚，代码不回滚
 
-git reset --hard b14bb52 # 会将提交记录和代码全部回滚
+git reset --hard b14bb52 # 会将提交记录和代码全部回滚 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
 git reset --keep [commit] # 重置当前HEAD为指定commit，但保持暂存区和工作区不变
 git revert [commit] # 新建一个commit，用来撤销指定commit,后者的所有变化都将被前者抵消，并且应用到当前分支
-git reset HEAD #拉回历史版本
+git reset HEAD~1 # Undo last commit
 
 git diff # 显示暂存区和工作区的差异 查看执行 git status 的结果的详细信息
 git diff <fileName>
@@ -351,17 +350,31 @@ git commit --amend # 追加 commit 到上一个 commit 上。
 # 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
 git log # 找到起始 commitID
 git log -p <file> # 跟踪查看某个文件的历史修改记录 每一次diff
-git log --oneline  --graph --reverse  --author=Linus --oneline -5  -before={3.weeks.ago} --after={2010-04-18} --no-merges # 显示当前分支的版本历史
-git log --oneline --decorate --graph --all
-git log --graph --pretty=oneline --abbrev-commit  # （仅展示commit信息的图形化分支）
-git log --stat # 显示commit历史，以及每次commit发生变更的文件
-git log -S [keyword]  # 搜索提交历史，根据关键词
+
+--oneline #  --pretty only show the commit id and comment per-commit
+--graph # gives you that visual representation The * indicates that there is a commit on the line
+--decorate # more information
+--reverse
+--all
+--author=Linus
+--oneline
+--since=yesterday
+--grep=’day of week’
+--stat # can give you useful information about what changed.
+-G 'chef-client' # Regex on Commits
+-5
+--before={3.weeks.ago}
+--after={2010-04-18}
+--no-merges # 显示当前分支的版本历史
+--abbrev-commit  # （仅展示commit信息的图形化分支）
+-S [keyword]  # 搜索提交历史，根据关键词
+
 git log [tag] HEAD --pretty=format:%s   # 显示某个commit之后的所有变动，每个commit占据一行
 git log [tag] HEAD --grep feature  # 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件
 git log --follow [file]  # 显示某个文件的版本历史，包括文件改名
 git reflog # 显示当前分支的最近几次提交,
 git log -3
-git log --since=yesterday
+git log
 git log --name-status --oneline
 git whatchanged [file]  # 显示某个文件的版本历史，包括文件改名
 git log -5 --pretty --oneline  # 显示过去5次提交
@@ -374,6 +387,7 @@ git show [commit]:[filename] # 显示某次提交时，某个文件的内容
 git blame filename # 查看指定文件是什么人在什么时间修改过
 
 git stash # 将当前工作状态（WIP，work in progress）临时存放在 stash 队列中,注意：未提交到版本库的文件会自动忽略，只要不运行 git clean -fd . 就不会丢失
+git stash save "stash name"
 git stash list # 查看 stash 队列中已暂存了多少 WIP
 git stash apply # 恢复stash内容到工作区，但是并不删除stash中的内容
 git stash drop # 删除stash中的内容
@@ -398,6 +412,9 @@ git rebase --continue
 git rebase --abort
 
 git rebase -i # 通过交互式的 rebase，提供对分支 commit 的控制，从而可以清理混乱的历史。
+
+git clean # Remove untracked files
+git reset file # Remove file from index
 ```
 
 * git merge 处理冲突更直接
@@ -417,26 +434,36 @@ branch name should be descriptive。创建分支后, 分支操作不会影响mas
 ```sh
 git branch [-r]|[-a] # 列出所有远程/所有分支
 
-git branch [branch-name] [commit] # 新建一个分支，指向指定commit,但依然停留在当前分支
 git checkout -b newBrach origin/master # 在origin/master的基础上，创建一个新分支，并切换到new分支
 git checkout -b branch-name origin/branch-name # 从本地创建和远程对应的分支
+git branch [branch-name] [commit] # 新建一个分支，指向指定commit,但依然停留在当前分支
 git branch --track [branch] [remote-branch] # 新建一个分支，与指定的远程分支建立追踪关系
+
+git branch -d [branch-name] # 删除已合并分支
+git branch -D branchName # 删除分支
+
+git checkout dev # 切换
+git checkout - # 切换到上一个分支
+
+git branch -m new # Rename current branch
 
 git merge origin/master # 在本地分支上合并远程分支
 git merge new # 合并指定分支到当前分支
+git merge --no-ff master
 
 git rebase origin/master # 在本地分支上合并远程分支
 git rebase source destiantion # 将source压缩到destiantion
 git rebase master
 git rebase –continue | –skip | –abort # 如果出错的话
 
-git checkout dev # 切换
-git checkout - # 切换到上一个分支
+git rebase -i HEAD~5 # Squash last n commits into one commit
+
+git bisect start
+git bisect good
+git bisect bad # Find bug in commit history in a binary search tree style
 
 git cherry-pick [commit] # 选择一个commit，合并进当前分支
-
-git branch -d [branch-name] # 删除已合并分支
-git branch -D branchName # 删除分支
+git cherry-pick hash_commit_A hash_commit_B
 
 git branch --set-upstream-to=origin/master master
 git branch --set-upstream master origin/master # 建立追踪关系，在现有分支与指定的远程分支之间
@@ -462,15 +489,18 @@ git fetch -p # 拉取所有分支的变化，并且将远端不存在的分支�
 
 git config get --remote.origin.url
 git remote -v
-git remote show origin # 显示所有远程仓库
 git remote show [remote] # 显示某个远程仓库的信息
-git remote add [shortname] [url] # 增加一个新的远程仓库，并命名
 git remote add origin git@github.com:han1202012/TabHost_Test.git # 本地git仓库关联GitHub仓库
 git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 设置远程仓库地址(用于修改远程仓库地址)
 git remote rm <主机名> # 删除 origin 仓库信息
 git remote rename <原主机名> <新主机名> # 用于远程主机的改名
+git remote prune origin
 
 git remote update wilson # 更新源代码信息
+
+git branch -m old new               # Rename branch locally
+git push origin :old                 # Delete the old branch
+git push --set-upstream origin new   # Push the new branch, set local branch to track the new remote
 
 git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
 git pull # 执行的是 git merge
@@ -490,7 +520,9 @@ git push [-u] origin master        # 将本地主分支推到远程(如无远程
 git push origin <local_branch>   # 创建远程分支， origin是远程仓库名
 git push origin <local_branch>:<remote_branch>  # 创建远程分支
 
-git push origin :<remote_branch>  #先删除本地分支(git branch -d <branch>)，然后再push删除远程分支
+git branch -d <branch>
+git push origin :<remote_branch>  # 删除远程分支
+
 git branch -dr [remote/branch] # 删除远程分支
 git push origin --delete dev # 删除远程分支
 
@@ -523,19 +555,27 @@ git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge
 ```sh
 git tag # 列出所有tag
 
-
 git tag [tag] # 新建一个tag在指定commit
 git tag -a v2.1 -m 'first version'
 git push origin v2.1
 git tag -l v1.* # 限定
 
+git tag new old
+git tag -d old
+git push origin :refs/tags/old
+git push --tags # Rename tag
+
+git push origin :refs/tags/<tagname> # Move tag from one commit to another commit
+git tag -fa tagname
+git push origin master --tags
+
 git show [tag]  # 查看tag信息
 
 git tag -d [tag] # 删除本地tag
-git push origin --delete v1.0.0 #
+git push origin --delete v1.0.0
 git push origin :refs/tags/[tagName]   # 删除远程tag
 
-git push [remote] [tag]  # 提交指定tag
+git push [remote] [tagname]  # 提交指定tag
 git push [remote] --tags  # 提交所有tag
 git checkout -b [branch] [tag]  # 新建一个分支，指向某个tag
 git push origin --tags # 提交标签到GitHub中
@@ -1268,7 +1308,6 @@ chown -R henry:henry .git/objects
 * [文档](https://git-scm.com/docs)
 * [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. http://git.io/sheet
 * [atlassian](https://www.atlassian.com/git)
-* [progit/progit](https://github.com/progit/progit):Pro Git Book Content, 1st Edition - This content is deprecated. See 2nd edition at [progit2](https://github.com/progit/progit2) http://git-scm.com/book/
 * [progit/progit](https://github.com/progit/progit):Pro Git 2nd Edition
 * [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
 * [GitHub规范](https://guides.github.com/)
@@ -1280,6 +1319,7 @@ chown -R henry:henry .git/objects
 * [练习沙盒](https://try.github.io)
 * [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
 * [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub): :octocat:分享 GitHub 上好玩、容易上手的项目，帮你找到编程的乐趣。欢迎推荐、自荐项目，让更多人知道你的项目star
+* [susam/gitpr](https://github.com/susam/gitpr#with-merge-commit):A quick reference guide on fork and pull request workflow
 
 ## 工具
 
