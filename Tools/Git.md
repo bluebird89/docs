@@ -1320,7 +1320,8 @@ chown -R henry:henry .git/objects
 * [susam/gitpr](https://github.com/susam/gitpr#with-merge-commit):A quick reference guide on fork and pull request workflow
 * [git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
 * [Git Immersion](http://gitimmersion.com/):The surest path to mastering Git is to immerse oneself in its utilities and operations, to experience it first-hand
-*
+* [Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials)
+* [git-tutorial](https://www.learnenough.com/git-tutorial)
 
 ## 工具
 

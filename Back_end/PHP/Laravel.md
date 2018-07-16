@@ -1425,6 +1425,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [laravel/spark-docs](https://github.com/laravel/spark-docs)
 * [summerblue/laravel5-cheatsheet](https://github.com/summerblue/laravel5-cheatsheet):A quick reference guide (cheat sheet) for Laravel 5.1 LTS, listing artisan, composer, routes and other useful bits of information. https://cs.laravel-china.org/
 * [Laravel Cheat Sheet](http://cheats.jesse-obrien.ca/)
+* [laravel-china/laravel-docs](https://github.com/laravel-china/laravel-docs):Laravel 中文文档 https://d.laravel-china.org
 
 ## 工具
 

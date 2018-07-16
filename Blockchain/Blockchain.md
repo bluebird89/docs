@@ -177,3 +177,4 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 * [yukimotopress/programming-blockchains-step-by-step](https://github.com/yukimotopress/programming-blockchains-step-by-step):Programming Blockchains Step-by-Step book / guide. Let's build blockchains from scratch (zero) step by step. Let's start with crypto hashes... (Book Edition) by Gerald Bauer, et al
 * [tyrchen/unchained](https://github.com/tyrchen/unchained):My personal study of blockchain related technology.
 * [bitcoinbook/bitcoinbook](https://github.com/bitcoinbook/bitcoinbook):Mastering Bitcoin 2nd Edition - Programming the Open Blockchain https://bitcoinbook.info/
+* [Jeiwan/blockchain_go](https://github.com/Jeiwan/blockchain_go):A simplified blockchain implementation in Golang

@@ -163,3 +163,4 @@ class Ext_Pgsql {
 * [bitemyapp/learnhaskell](https://github.com/bitemyapp/learnhaskell):Learn Haskell
 * [dhamaniasad/awesome-postgres](https://github.com/dhamaniasad/awesome-postgres):A curated list of awesome PostgreSQL software, libraries, tools and resources, inspired by awesome-mysql
 * [PostgreSQL Tutorial](http://www.postgresqltutorial.com/)
+* [PostgreSQL 10.1 手册](http://www.postgres.cn/docs/10/)
