@@ -13,3 +13,7 @@ sudo apt-get update
 sudo apt-get install esl-erlang
 sudo apt-get install elixir
 ```
+
+## 类库
+
+* [absinthe-graphql/absinthe](https://github.com/absinthe-graphql/absinthe):The GraphQL toolkit for Elixir http://absinthe-graphql.org

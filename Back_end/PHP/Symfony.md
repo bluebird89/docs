@@ -6,8 +6,10 @@ The Symfony PHP framework http://symfony.com. Fabien Potencier
 
 ```sh
 composer create-project symfony/skeleton my-project
+
 cd my-project
 composer require server --dev
+
 php bin/console server:run
 php bin/console server:start 0.0.0.0:8000
 ```
@@ -15,6 +17,7 @@ php bin/console server:start 0.0.0.0:8000
 ## 扩展
 
 * [symfony/thanks](https://github.com/symfony/thanks):Give thanks (in the form of a GitHub ★) to your fellow PHP package maintainers (not limited to Symfony components)!
+* [symfony/console](https://github.com/symfony/console):The Console component eases the creation of beautiful and testable command line interfaces. https://symfony.com/console
 
 ## 框架
 
