@@ -117,7 +117,7 @@ ctrl+alt+shift+p python
 * Ctrl+Shift+P|⌘⇧P：打开Package Control:Command prompt
 * Ctrl+p： 会列出当前打开的文件（或者是当前文件夹的文件），输入文件名然后 Enter 跳转至该文件
     - @ 符号跳转：输入 @symbol 跳转到 symbol 符号所在的位置 Ctrl+R
-    - # 关键字跳转：输入 #keyword 跳转到 keyword 所在的位置
+    - \# 关键字跳转：输入 \#keyword 跳转到 keyword 所在的位置
     - : 行号跳转：输入 :12 跳转到文件的第12行。 Ctrl+G
 - ⌘K, ⌘B 隐藏/打开 侧边栏| Toggle side bar
 * set syntax php：设置高亮语言语法
@@ -197,7 +197,7 @@ Tabs（标签栏）
 ^⇧Tab 反方向循环遍历tab|Cycle down through tabs
 
 * 多行同时编辑：选中行数 ctrl+shift+L
-* 选词： 选中文本 逐个添加：ctrl+d 
+* 选词： 选中文本 逐个添加：ctrl+d
 * 全部选中 alt+f3 control + commond + G
 * 合并行：Ctrl+J
 * 换行：alt+q

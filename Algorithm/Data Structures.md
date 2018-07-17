@@ -103,3 +103,7 @@ https://guptavikas.wordpress.com/2012/12/17/b-tree-index-in-mysql/
 给定 n 个含有权值作为 n 个叶子结点，构造一棵二叉树，若带权路径长度达到最小，称这样的二叉树为最优二叉树，也称为哈夫曼树(Huffman Tree)。
 
 *   哈夫曼树是带权路径长度最短的树，权值较大的结点离根较近。
+
+## 参考
+
+* [grantjenks/python-sortedcontainers](https://github.com/grantjenks/python-sortedcontainers):Python Sorted Container Types: Sorted List, Sorted Dict, and Sorted Set
