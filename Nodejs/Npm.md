@@ -31,6 +31,7 @@ npm config set disturl https://npm.taobao.org/dist --global
 ## Package
 
 * [request/request](https://github.com/request/request):🏊🏾 Simplified HTTP request client.
+* [ksky521/nodeppt](https://github.com/ksky521/nodePPT):This is probably the best web presentation tool so far! http://js8.in/nodeppt
 
 ## 参考
 

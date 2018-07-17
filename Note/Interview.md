@@ -151,6 +151,7 @@
 * [ElemeFE/node-interview](https://github.com/ElemeFE/node-interview):How to pass the Node.js interview of ElemeFE.
 * [alex/what-happens-when](https://github.com/alex/what-happens-when):An attempt to answer the age old interview question "What happens when you type google.com into your browser and press enter?"
 * [kamranahmedse/developer-roadmap](https://github.com/kamranahmedse/developer-roadmap):Roadmap to becoming a web developer in 2018
+* [fejes713/30-seconds-of-interviews](https://github.com/fejes713/30-seconds-of-interviews):A curated collection of common interview questions to help you prepare for your next interview. https://30secondsofinterviews.org
 
 ## 工具
 

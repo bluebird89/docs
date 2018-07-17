@@ -155,6 +155,8 @@
 * [Github](https://github.com/)
 * [DZone](http://www.dzone.com)
 * [Stackoverflow](http://stackoverflow.com/)
+* [adambard/learnxinyminutes-docs](https://github.com/adambard/learnxinyminutes-docs):Code documentation written as code! How novel and totally my idea! http://learnxinyminutes.com/
+* [justjavac/Programming-Alpha-To-Omega](https://github.com/justjavac/Programming-Alpha-To-Omega):从零开始学编程 系列汇总（从α到Ω）
 
 ## 学习
 

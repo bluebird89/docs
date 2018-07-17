@@ -136,3 +136,6 @@
 [submodule "Back_end/Rust/awesome-rust"]
 	path = Back_end/Rust/awesome-rust
 	url = git@github.com:rust-unofficial/awesome-rust.git
+[submodule "Review/InterviewMap"]
+	path = Review/InterviewMap
+	url = git@github.com:KieSun/InterviewMap
