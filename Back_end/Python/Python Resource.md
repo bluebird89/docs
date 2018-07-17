@@ -1249,8 +1249,13 @@ tqdm：交互好工具，显示程序运行进度
         + 4、掌握生产脚本的编写流程规范；
         + 5、了解项目生命周期及项目常见开发模式；
     - 可解决的现实问题：
-        - 1、项目环境自动化部署；
+        - 1、项目环境自动化部署；s
         - 2、项目代码自动化发布；
         - 3、项目生命周期理解；
 * 数据结构
     - 时间和空间复杂度、链表、桟和队列、排序、二叉树、python内建数据结构类型；
+
+## 参考
+
+* [Python 开源库及示例代码](https://github.com/programthink/opensource/blob/master/libs/python.wiki)
+* [kriadmin/30-seconds-of-python-code](https://github.com/kriadmin/30-seconds-of-python-code)

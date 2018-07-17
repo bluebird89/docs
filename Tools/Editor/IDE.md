@@ -229,7 +229,7 @@ livetemplate
 
 * [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/
 * [cdoco/jetbrains-license-server](https://github.com/cdoco/jetbrains-license-server)
-* [](https://www.jianshu.com/p/133af2e4fe3f)
+* [激活](https://www.jianshu.com/p/133af2e4fe3f)
 
 ## 参考
 
