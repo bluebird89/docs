@@ -1,4 +1,8 @@
-# Hotkey
+# Firefox
+
+中文与英文版本为两套数据库
+
+## Hotkey
 
 ### Ubuntu
 
