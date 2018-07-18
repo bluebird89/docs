@@ -13,9 +13,9 @@ composer install
 php init
 php requirements.php
 
-common/config/main-local.php 中的 components['db'] 配置
-yii migrate:生成数据表
-断言测试
+common/config/main-local.php # components['db'] 配置
+yii migrate # 生成数据表
+# 断言测试
 ```
 
 ## 参考
@@ -23,3 +23,4 @@ yii migrate:生成数据表
 * [深入理解Yii2.0](http://www.digpage.com/index.html)
 * [CraryPrimitiveMan/yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
 * [CraryPrimitiveMan/OnlineCourses](https://github.com/CraryPrimitiveMan/OnlineCourses):An online courses website based on yii2
+* [官网](https://www.yiiframework.com/)
