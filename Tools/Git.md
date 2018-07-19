@@ -208,16 +208,25 @@ gpg --full-generate-key # 4096
 
 gpg --list-secret-keys --keyid-format LONG  # list GPG keys for which you have both a public and private key. A private key is required for signing commits or tags.
 sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10] # GPG key ID is 3AA5C34371567BD2
-uid                          Hubot
+uid                          Hubot # 用户ID Henry Lee <liboming88@yeah.net>
 ssb   4096R/42B317FD4BA89E7A 2016-03-10
 
 gpg --armor --export 3AA5C34371567BD2 | Hubot  # get the public key,add to github
 
 git config --global user.signingkey 3AA5C34371567BD2 # git配置,commit生效
+git config --global commit.gpgsign true
 
-git log --show-signature
+git commit -S -m your commit message
+git tag -s -m "GPG-sign tag"
 
-gpg --delete-key [用户ID]
+git log --show-signature # 查看本地commit有签名
+
+gpg --delete-key [用户ID] # 删除密钥
+
+gpg --recipient [用户ID] --output demo.en.txt --encrypt demo.txt
+gpg --decrypt demo.en.txt --output demo.de.txt
+
+gpg --sign demo.txt #签名
 ```
 
 ## 原理
