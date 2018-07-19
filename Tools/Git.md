@@ -211,7 +211,7 @@ sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10] # GPG key ID is 3A
 uid                          Hubot
 ssb   4096R/42B317FD4BA89E7A 2016-03-10
 
-gpg --armor --export 3AA5C34371567BD2 | Ruan YiFeng  # get the public key,add to github
+gpg --armor --export 3AA5C34371567BD2 | Hubot  # get the public key,add to github
 
 git config --global user.signingkey 3AA5C34371567BD2 # git配置,commit生效
 
