@@ -33,8 +33,8 @@ sudo apt-get install git
 brew install git
 brew install git-flow
 brew install git && brew install bash-completion
-# Add bash-completion to your ~/.bash_profile or ~/.zshrc
 
+# Add bash-completion to your ~/.bash_profile or ~/.zshrc
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
@@ -194,28 +194,24 @@ Host *
 
 ### GPG
 
-提交内容将会有一个"已验证"标记
+* 为提交内容添加一个"已验证"标记
+* 与SSH共同使用，
 
 ```sh
 sudo apt-get install gnupg # Debian / Ubuntu 环境
 yum install gnupg # Fedora 环境
 brew install gpg
+
 gpg --help
 
-gpg --gen-key
+gpg --full-generate-key # 4096
 
-gpg --list-key #公钥
-/home/ruanyf/.gnupg/pubring.gpg # 公钥文件名（pubring.gpg
--------------------------------
-pub 4096R/EDDD6D76 2013-07-11  # 公钥特征（4096位，Hash字符串和生成时间）
-uid Ruan YiFeng <yifeng.ruan@gmail.com> # 用户ID
-sub 4096R/3FA69BE4 2013-07-11 # 显示私钥特征
+gpg --list-secret-keys --keyid-format LONG  # list GPG keys for which you have both a public and private key. A private key is required for signing commits or tags.
+sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10] # GPG key ID is 3AA5C34371567BD2
+uid                          Hubot
+ssb   4096R/42B317FD4BA89E7A 2016-03-10
 
-gpg --list-secret-keys --keyid-format LONG  # 获取GPG私钥 key ID  3AA5C34371567BD2
-sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
-
-gpg --armor --export 3AA5C34371567BD2  # get the public key,add to github
-gpg --armor --export Ruan YiFeng  # get the public key,add to github
+gpg --armor --export 3AA5C34371567BD2 | Ruan YiFeng  # get the public key,add to github
 
 git config --global user.signingkey 3AA5C34371567BD2 # git配置,commit生效
 
