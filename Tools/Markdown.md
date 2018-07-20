@@ -947,6 +947,7 @@ Markdown 语法： **Example:**
 * [tamlok/vnote](https://github.com/tamlok/vnote):A Vim-inspired note-taking application that knows programmers and Markdown better. https://tamlok.github.io/vnote
 * [nhnent/tui.editor](https://github.com/nhnent/tui.editor):🍞📝 Markdown WYSIWYG Editor. GFM Standard + Chart & UML Extensible. http://ui.toast.com/tui-editor
 * [gsuitedevs/md2googleslides](https://github.com/gsuitedevs/md2googleslides):Generate Google Slides from markdown
+* [pandao/editor.md](https://github.com/pandao/editor.md):The open source embeddable online markdown editor (component). https://pandao.github.io/editor.md/
 
 ## 参考
 
