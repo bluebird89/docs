@@ -56,7 +56,8 @@
 
 ## 安装
 
-先调试nginx，再看php是否生效
+* 网站能否访问（nginx）
+* 能否解析PHP
 
 ### Mac
 
@@ -75,9 +76,9 @@ sudo chmod u+s /usr/local/Cellar/nginx/1.12.2_1/bin/nginx
 brew services start nginx
 brew edit nginx
 
-sudo nginx // 启动命令
+sudo nginx # 启动命令
 sudo ngixn -c /usr/local/etc/nginx/nginx.conf
-sudo nginx -s reload|reload|reopen|stop|quit // 重新配置后都需要进行重启操作
+sudo nginx -s reload|reload|reopen|stop|quit # 重新配置后都需要进行重启操作
 sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
 ```
 ## 配置
@@ -144,6 +145,9 @@ events {
 
 ### http（服务器设置）
 
+* windows调用php-cgi启动服务
+* linux通过转交服务给php-fpm处理
+
 提供http服务相关的一些配置参数，如：是否使用keepalive，是否使用gzip进行压缩
 
 ```
@@ -155,7 +159,7 @@ http {
       server unix:/var/run/php5-fpm.sock2 weight=100 max_fails=5 fail_timeout=5;
       server unix:/var/run/php5-fpm.sock3 weight=100 max_fails=5 fail_timeout=5;
       server unix:/var/run/php5-fpm.sock4 weight=100 max_fails=5 fail_timeout=5;
-       server 192.168.8.3:80  weight=6;
+      server 192.168.8.3:80  weight=6;
     }
 
     # Stop Displaying Server Version in Configuration
@@ -410,11 +414,13 @@ server {
 
 server {
     listen 8080;  #监听端口号
-    server_name localhost;  #主机名
+    server_name localhost;  # 主机名
+
     root /Users/www/test/; # 该项要修改为你准备存放相关网页的路径
-    # 定义路径下默认访问的文件名
-    index index.php;
+
+    index index.php;     # 定义路径下默认访问的文件名
     charset utf-8;
+
     access_log logs/host.access.log main;
 
     ssl_client_certificate  /etc/ssl/nginx/intermediate.crt;
@@ -425,8 +431,8 @@ server {
     location / {
       root   html;
       index  index.php index.shtml index.html index.htm;
-      # 打开目录浏览功能，可以列出整个目录
-      autoindex on;
+
+      autoindex on;       # 打开目录浏览功能，可以列出整个目录
     }
 
     error_page 500 502 503 504 /50x.html;
@@ -523,6 +529,30 @@ server {
     }
 }
 
+# windows 配置
+server {
+        listen       80;
+        server_name  local.ciie.com;
+        root   "D:/Workspace/ciie/trunk/web";
+
+    access_log logs/ciie_access.log;
+    error_log logs/ciie_error.log;
+
+        location / {
+            index  index.html index.htm index.php;
+            #autoindex  on;
+        }
+
+        location ~ \.php(.*)$ {
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            fastcgi_param  PATH_INFO  $fastcgi_path_info;
+            fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;
+            include        fastcgi_params;
+        }
+}
 # 配置跨域请求
 add_header Access-Control-Allow-Origin *;
 add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"; # Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight response.
