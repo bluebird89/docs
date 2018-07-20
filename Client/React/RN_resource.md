@@ -95,6 +95,7 @@
 * [设计含结构](https://github.com/airbnb/react-sketchapp)
 * [文档](http://airbnb.io/react-sketchapp/docs/)
 * [文档](http://reactnative.cn/docs/0.49/getting-started.html)
+* [sw-yx/react-typescript-cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet)
 * [react-native-guide](https://github.com/reactnativecn/react-native-guide)
 * [react-native-macos](https://github.com/ptmt/react-native-macos)
 * [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.

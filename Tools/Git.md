@@ -1327,6 +1327,7 @@ chown -R henry:henry .git/objects
 * [Git Immersion](http://gitimmersion.com/):The surest path to mastering Git is to immerse oneself in its utilities and operations, to experience it first-hand
 * [Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials)
 * [git-tutorial](https://www.learnenough.com/git-tutorial)
+* [GitHub Helps](https://help.github.com/)
 
 ## 工具
 
