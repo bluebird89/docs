@@ -34,26 +34,37 @@
 # 安装homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# 使用brew的国内镜像
+cd "$(brew --repo)" && git remote set-url origin https://git.coding.net/homebrew/homebrew.git
+cd $home && brew update
+
 echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile(.zshrc)
 brew doctor
-brew -v
+brew -v|version
 brew config
 
 brew tap homebrew/services # brew 服务管理
-brew install caskroom/cask/brew-cask
-brew install brew-cask-completion
 brew tap caskroom/cask
 brew tap caskroom/versions
 
-brew search name # 搜索brew 支持的软件（支持模糊搜索
-brew install -vd FORMULA
-brew (info|home|options) [FORMULA...]
 brew list --versions # 列出本机通过brew安装的所有软件
+
+brew install caskroom/cask/brew-cask
+brew install brew-cask-completion
+brew install -vd FORMULA
+brew install tig
+brew install bash-completion
+
+brew search name # 搜索brew 支持的软件（支持模糊搜索
+
+brew (info|home|options) [FORMULA...]
+
 brew deps * # 显示包依赖
 brew server * # 启动web服务器，可以通过浏览器访问http://localhost:4567/ 来同网页来管理包
 
-brew outdated # 查看哪些程序需要更新  brew update && brew upgrade
 brew update
+brew outdated # 查看哪些程序需要更新  brew update && brew upgrade
+
 brew upgrade name  #更新安装过的软件(如果不加软件名，就更新所有可以更新的软件)
 brew uninstall name # 卸载软件
 
@@ -65,9 +76,6 @@ brew link --overwrite docker
 
 brew services [-v|--verbose] [list | run | start | stop | restart | cleanup] formula|--all
 brew services start postgresql
-
-brew install tig
-brew install bash-completion
 
 # 卸载
 cd `brew –prefix`

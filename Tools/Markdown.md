@@ -931,6 +931,10 @@ Markdown 语法： **Example:**
 * 快捷键：`CMD + 4` 是在编辑器/预览模式和三栏模式中切换。
 * 快捷键：`CMD + R` 是在编辑器和预览模式中切换。
 
+## 编辑器
+
+* [typora](https://www.typora.io/)
+
 ###  编辑器插件
 
 #### sublime插件

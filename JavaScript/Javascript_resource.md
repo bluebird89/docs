@@ -37,6 +37,10 @@
 * [nolanlawson/optimize-js](https://github.com/nolanlawson/optimize-js):Optimize a JavaScript file for faster initial load by wrapping eagerly-invoked functions
 * [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
 
+## 编辑器
+
+* [codemirror/CodeMirror](https://github.com/codemirror/CodeMirror):In-browser code editor http://codemirror.net/
+
 ## 日期
 
 * [date-fns/date-fns](https://github.com/date-fns/date-fns):⏳ Modern JavaScript date utility library ⌛️ https://date-fns.org

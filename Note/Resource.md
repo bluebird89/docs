@@ -40,7 +40,7 @@
 * [Nounproject](https://thenounproject.com/):非常优质的图标网站
 * [Adobe color cc](https://color.adobe.com/):Aobe 旗下的配色网站，你可以在线配色，选择配色方案。不论是摄影还是设计，你都需要对颜色有足够的了解。
 * [Steller](https://steller.co/):展示自己的作品，比如摄影、绘画或其他创作，用Steller会显得特别优雅有格调
-* [](https://uirush.com/)
+* [设计百宝箱](https://uirush.com/)
 * [Arctime](http://www.arctime.org/):字幕制作神器
 * [iconfont](http://iconfont.cn/)
 
@@ -243,7 +243,9 @@
 
 * WhatsApp 和 Slack 用来沟通
 * [stride](https://app.stride.com/):类似slack的软件
-* trello：以看版为基础任务管理系统
+* 看板
+  - [trello](https://trello.com/)
+  - [Leangoo](https://www.leangoo.com/kanban/board_list)
 * Teambition
 * Asana asana.com
 * [meili/TeamTalk](https://github.com/meili/TeamTalk):TeamTalk is a solution for enterprise IM
