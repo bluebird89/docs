@@ -305,14 +305,13 @@ git rm --cached [file]  # 停止追踪指定文件，但该文件会保留在工
 
 git reset # Reset the index to match the most recent commit
 git reset [HEAD] [file] # 撤销文件跟踪，重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
-git reset --soft # 重置soft
+git reset --soft # 重置
 git reset --hard # 重置暂存区与工作区，与上一次commit保持一致
 git reset [commit] # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变 会将提交记录回滚，代码不回滚
-
 git reset --hard b14bb52 # 会将提交记录和代码全部回滚 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
 git reset --keep [commit] # 重置当前HEAD为指定commit，但保持暂存区和工作区不变
-git revert [commit] # 新建一个commit，用来撤销指定commit,后者的所有变化都将被前者抵消，并且应用到当前分支
 git reset HEAD~1 # Undo last commit
+git revert [commit] # 回退到某个提交，但是不删除commit
 
 git diff # 显示暂存区和工作区的差异 查看执行 git status 的结果的详细信息
 git diff <fileName>
@@ -348,7 +347,6 @@ git commit -a # 提交工作区自上次commit之后的变化，直接到仓库�
 git commit -v # 提交时显示所有diff信息
 git commit –-am/--amend -m [message] # 使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
 git commit --amend [file1] [file2] ... # 修改上一次提交日志
-git commit --amend # 追加 commit 到上一个 commit 上。
 
 # 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
 git log # 找到起始 commitID
@@ -398,12 +396,12 @@ git stash pop # 恢复上一次的 WIP 状态，并从队列中移除
 git stash pop stash@{num} # 恢复指定编号的 WIP，同时从队列中移除
 git stash apply stash@{num} # 恢复指定编号的 WIP，但不从队列中移除
 
-git pull                         # 抓取远程仓库所有分支更新并合并到本地
+git pull <remote> <branch>    # 抓取远程仓库所有分支更新并合并到本地
 git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并
 git pull --rebase origin master # 取回远程主机某个分支的更新，再与本地的指定分支合并
-git fetch origin
+git fetch origin # 从远程更新代码到本地但不合并
 git merge origin/master             # 抓取远程仓库更新   将远程主分支合并到本地当前分支 等同于git pull
-git checkout --track origin/branch     # 跟踪某个远程分支创建相应的本地分支
+
 
 # 合并 commit
 git merge master #  merge是两个分支处理冲突后，新增一个 commit 追加到master上。
@@ -436,9 +434,13 @@ branch name should be descriptive。创建分支后, 分支操作不会影响mas
 
 ```sh
 git branch [-r]|[-a] # 列出所有远程/所有分支
+git branch -av # 查看所有分支（包括远程分支）和最后一次提交日志
 
+git branch <new-branch> <old-branch> # 新建分支，不带old-branch为默认在当前分支上建立新分支
 git checkout -b newBrach origin/master # 在origin/master的基础上，创建一个新分支，并切换到new分支
 git checkout -b branch-name origin/branch-name # 从本地创建和远程对应的分支
+git checkout --track origin/branch     # 跟踪某个远程分支创建相应的本地分支
+
 git branch [branch-name] [commit] # 新建一个分支，指向指定commit,但依然停留在当前分支
 git branch --track [branch] [remote-branch] # 新建一个分支，与指定的远程分支建立追踪关系
 
@@ -450,13 +452,15 @@ git checkout - # 切换到上一个分支
 
 git branch -m new # Rename current branch
 
-git merge origin/master # 在本地分支上合并远程分支
 git merge new # 合并指定分支到当前分支
+git merge origin/master # 在本地分支上合并远程分支
 git merge --no-ff master
+git mergetool # 使用配置的合并工具来解决冲突
+git add|rm <resolved-file> # 处理已手动合并的文件
 
+git rebase master # 合并分支，但是不合并提交记录（commit），rebase合并如果有冲突则一个一个文件的去合并解决冲突
 git rebase origin/master # 在本地分支上合并远程分支
 git rebase source destiantion # 将source压缩到destiantion
-git rebase master
 git rebase –continue | –skip | –abort # 如果出错的话
 
 git rebase -i HEAD~5 # Squash last n commits into one commit
@@ -476,6 +480,9 @@ git push origin branchName #  提交分支
 git push origin qixiu/feature  # 新建本地分支，然后更新到远端的方式来新增一个远端分支
 git push origin -d qixiu/feaure # 删除远程分支
 git push origin :qixiu/feature
+
+git push origin --delete <branch> # 删除远程分支
+git branch -dr <remote/branch>
 ```
 
 Pull Request:useful for contributing to open source projects and for managing changes to shared repositories.
@@ -491,7 +498,7 @@ git fetch # 拉取所有分支的变化
 git fetch -p # 拉取所有分支的变化，并且将远端不存在的分支同步移除
 
 git config get --remote.origin.url
-git remote -v
+git remote -v # 列出所有的仓库地址
 git remote show [remote] # 显示某个远程仓库的信息
 git remote add origin git@github.com:han1202012/TabHost_Test.git # 本地git仓库关联GitHub仓库
 git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 设置远程仓库地址(用于修改远程仓库地址)
@@ -508,6 +515,7 @@ git push --set-upstream origin new   # Push the new branch, set local branch to 
 git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
 git pull # 执行的是 git merge
 git pull -r origin master # 执行的是git rebase git pull origin master
+git pull origin master --allow-unrelated-histories # 合并两个不同的项目
 
 git push                         # push所有分支
 git push <远程主机名> <本地分支名>:<远程分支名> # 上传本地指定分支到远程仓库. git push origin my:master
@@ -563,10 +571,10 @@ git tag -a v2.1 -m 'first version'
 git push origin v2.1
 git tag -l v1.* # 限定
 
-git tag new old
+git tag new old # Rename tag
 git tag -d old
 git push origin :refs/tags/old
-git push --tags # Rename tag
+git push --tags # 上传标签
 
 git push origin :refs/tags/<tagname> # Move tag from one commit to another commit
 git tag -fa tagname

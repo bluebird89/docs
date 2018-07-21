@@ -94,7 +94,7 @@ source ~/.bashrc # 运行
 A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
 
 * [plugin](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins)
-* themes
+* themes:agnoster  cloud
 
 ```sh
 # 自动安装
