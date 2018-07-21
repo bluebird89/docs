@@ -131,6 +131,7 @@ rel表示这个API与当前网址的关系（collection关系，并给出该coll
 ### 工具
 
 - [thx/RAP](https://github.com/thx/RAP)Web API management, free and open sourced, mock data generator, auto test, made by Alibaba,
+* [brookshi/Hitchhiker](https://github.com/brookshi/Hitchhiker):a Restful Api test tool http://www.hitchhiker-api.comw
 
 ### 参考
 
