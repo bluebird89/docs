@@ -96,6 +96,17 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 #define    PAGE_CUR_L          3        <查询
 #define    PAGE_CUR_LE         4        <=查询
 ```
+## 排序
+
+* Quicksort
+* Mergesort
+* Heapsort
+* bubble sort
+* Insert Sort
+* Selection Sort
+* Shell Sort
+* Bucket Sort
+* Dadix Sort
 
 ## 资源
 

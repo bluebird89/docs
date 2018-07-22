@@ -399,7 +399,7 @@
       - (https://github.com/hoaproject/Console)[Hoa Console]: 另一个命令行库
       - (https://github.com/CHH/optparse)[OptParse]: 另一个命令行选择解析器
       - (https://github.com/mcrumm/pecan)[Pecan]: 一个事件驱动和非阻塞的shell
-      - (https://github.com/bobthecow/psysh)[PsySH]: 另一个PHP REPL
+      - [PsySH](https://github.com/bobthecow/psysh): A REPL for PHP http://psysh.org
       - (https://github.com/MrRio/shellwrap)[ShellWrap]: -一个简单的命令行包装库
 * 身份验证和授权 Authentication and Authorization 实现身份验证和授权的库
       - (https://github.com/dflydev/dflydev-hawk)[Hawk]: 一个Hawk HTTP身份认证库
@@ -728,6 +728,7 @@
 ## 支付
 
 * [yansongda/pay](https://github.com/yansongda/pay):可能是我用过的最优雅的 Alipay 和 WeChat 的支付 SDK 扩展包了
+* [thephpleague/omnipay](https://github.com/thephpleague/omnipay):A framework agnostic, multi-gateway payment processing library for PHP 5.3+ http://omnipay.thephpleague.com/
 
 ## 写作
 
@@ -744,3 +745,7 @@
 ## interview
 
 * [xianyunyh/PHP-Interview](https://github.com/xianyunyh/PHP-Interview):PHP面试整理的资料。包括PHP、MySQL、Linux、计算机网络等资料
+
+## 存储
+
+* [thephpleague/flysystem](https://github.com/thephpleague/flysystem):Abstraction for local and remote filesystems https://flysystem.thephpleague.com
