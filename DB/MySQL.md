@@ -1,4 +1,4 @@
-# MySQL
+exit# MySQL
 
 Open source relational database management system
 
@@ -312,6 +312,10 @@ CREATE USER 'lee'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456Ac
 GRANT ALL PRIVILEGES ON test.* TO lee@'localhost';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root密码' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
+
+ALTER USER 'root'@'localhost'
+  IDENTIFIED WITH mysql_native_password
+  BY 'password';
 ```
 
 ### 存储引擎

@@ -9,8 +9,9 @@ Yii 2.0 Advanced Application Template http://www.yiiframework.com
 ```sh
 composer global require "fxp/composer-asset-plugin:^1.2.0"
 composer create-project --prefer-dist yiisoft/yii2-app-advanced yii-application
+
+init
 composer install
-php init
 php requirements.php
 
 common/config/main-local.php # components['db'] 配置
