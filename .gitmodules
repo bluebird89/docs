@@ -139,3 +139,9 @@
 [submodule "Review/InterviewMap"]
 	path = Review/InterviewMap
 	url = git@github.com:KieSun/InterviewMap
+[submodule "Resource/awesome-with-star"]
+	path = Resource/awesome-with-star
+	url = git@github.com:CraryPrimitiveMan/awesome-with-star.git
+[submodule "Resource/reading"]
+	path = Resource/reading
+	url = git@github.com:CraryPrimitiveMan/reading.git
