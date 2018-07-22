@@ -14,6 +14,7 @@ GraphQL 是一个由Facebook提出的 应用层查询语言. 使用 GraphQL, 你
 - [learnapollo/learnapollo](https://github.com/learnapollo/learnapollo)
 - [graphql/express-graphql](https://github.com/graphql/express-graphql):Create a GraphQL HTTP server with Express.
 - [mugli/learning-graphql](https://github.com/mugli/learning-graphql):An attempt to learn GraphQL
+- [raphQL PHP 中文文档](https://laravel-china.org/docs/graphql-php)
 
 ## 工具
 

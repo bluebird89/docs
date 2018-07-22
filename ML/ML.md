@@ -20,6 +20,7 @@
 - [airbnb/aerosolve](https://github.com/airbnb/aerosolve):A machine learning package built for humans. http://airbnb.github.io/aerosolve/
 - [scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn):scikit-learn: machine learning in Python http://scikit-learn.org
 - [fchollet/keras](https://github.com/fchollet/keras):Deep Learning library for Python. Runs on TensorFlow, Theano, or CNTK. http://keras.io/
+- [机器学习（Machine Learning）- 吴恩达（Andrew Ng）](https://www.bilibili.com/video/av9912938)
 
 ## 教程
 
