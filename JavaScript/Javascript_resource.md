@@ -37,6 +37,10 @@
 * [nolanlawson/optimize-js](https://github.com/nolanlawson/optimize-js):Optimize a JavaScript file for faster initial load by wrapping eagerly-invoked functions
 * [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
 
+## 校验
+
+* [imbrn/v8n](https://github.com/imbrn/v8n):☑️ JavaScript fluent validation library.
+
 ## 编辑器
 
 * [codemirror/CodeMirror](https://github.com/codemirror/CodeMirror):In-browser code editor http://codemirror.net/
