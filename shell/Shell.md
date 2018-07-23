@@ -89,7 +89,7 @@ chsh -s /bin/zsh
 source ~/.bashrc # 运行
 ```
 
-#### * [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+#### [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
 A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
 
@@ -164,6 +164,10 @@ export DEFAULT_USER="henry" # hide username
 PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}>'
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 ```
+
+#### 扩展
+
+* [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
 
 ### 快捷键
 

@@ -316,3 +316,14 @@
   <li><a href="http://www.linuxidc.com/Linux/2017-10/147270.htm">awk基本用法和工作原理详解</a></li>
   </ul>
   </script>
+
+```
+# test.txt
+
+1.2.3.4
+4.5.6.7
+2.3.4.5
+1.2.3.4
+
+awk '{arr[$1]++;}END{for(i in arr){print i , arr[i] }}'
+```
