@@ -159,6 +159,7 @@ websocketd --port=8080 ./count.sh // 建立server
 - [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
 - [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
 * [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
+* [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
 
 ## 工具
 
@@ -180,7 +181,6 @@ websocketd --port=8080 ./count.sh // 建立server
 
 - [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
 - [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
-
 - [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
 - [GO语言中文网](https://studygolang.com/)
 

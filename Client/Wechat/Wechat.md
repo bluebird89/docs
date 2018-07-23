@@ -47,3 +47,7 @@ if ($tmpstr==$signature) {
 
 * [15921483570/wechat_spider](https://github.com/15921483570/wechat_spider):微信公众号爬虫 (只需设置代理, 一键可以爬取所有历史文章)
 * [aiportal/wechat-proxy](https://github.com/aiportal/wechat-proxy):微信代理服务
+
+## UI
+
+* [wepayui/wepayui](https://github.com/wepayui/wepayui):微信支付场景化组件 https://wepayui.github.io
