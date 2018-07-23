@@ -738,9 +738,9 @@
 
 * [slince/spike](https://github.com/slince/spike):📣 A fast reverse proxy written in PHP that helps to expose local services to the internet
 
-## API
+## graphql
 
-* [graphql-php](https://webonyx.github.io/graphql-php/)
+* [graphql-php](https://webonyx.github.io/graphql-php/):A PHP port of GraphQL reference implementation http://webonyx.github.io/graphql-php/
 
 ## interview
 
