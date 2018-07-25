@@ -66,3 +66,7 @@
 ## 参考
 
 * [技术变化那么快，程序员如何做到不被淘汰？](http://www.sohu.com/a/201528137_629652)
+
+## 工具
+
+* [odoo/odoo](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business. https://www.odoo.com

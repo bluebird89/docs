@@ -36,6 +36,7 @@
 * [antvis/g6](https://github.com/antvis/g6):A Graph Visualization Framework in JavaScript https://antv.alipay.com/zh-cn/g6/1.x/index.html
 * [nolanlawson/optimize-js](https://github.com/nolanlawson/optimize-js):Optimize a JavaScript file for faster initial load by wrapping eagerly-invoked functions
 * [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
+* [ReactiveX/rxjs](https://github.com/ReactiveX/rxjs):A reactive programming library for JavaScript http://reactivex.io/rxjs
 
 ## 校验
 
@@ -75,6 +76,10 @@
 * [lukehoban/es6features](https://github.com/lukehoban/es6features):Overview of ECMAScript 6 features
 * [addyosmani/essential-js-design-patterns](https://github.com/addyosmani/essential-js-design-patterns):Repo for my 'Learning JavaScript Design Patterns' book https://addyosmani.com/resources/essentialjsdesignpatterns/book/
 - [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API)
+
+## 绘图
+
+* [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
 
 ## 教程
 

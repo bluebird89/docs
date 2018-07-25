@@ -81,6 +81,10 @@ ng generate module my-module # 模块Modulew
 
 * [angular/flex-layout](https://github.com/angular/flex-layout):Provides HTML UI layout for Angular applications; using Flexbox and a Responsive API
 
+## 地图
+
+* [SebastianM/angular-google-maps](https://github.com/SebastianM/angular-google-maps):Angular 2+ Google Maps Components https://angular-maps.com/
+
 ## 参考
 
 * [angular/angular.js](https://github.com/angular/angular.js):AngularJS - HTML enhanced for web apps! https://angularjs.org

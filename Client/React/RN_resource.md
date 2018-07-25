@@ -120,6 +120,18 @@
 * [JonJam/react-redux-ts](https://github.com/JonJam/react-redux-ts):React/Redux TypeScript starter project
 * [taikongfeizhu/webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
 
+## 设计模式
+
+* [chantastic/reactpatterns.com](https://github.com/chantastic/reactpatterns.com):Patterns for React Developers http://reactpatterns.com
+
+## 图表
+
+* [hshoff/vx](https://github.com/hshoff/vx):🐯react + d3 = vx | visualization components https://vx-demo.now.sh/
+
+## 文件
+
+* [diegomura/react-pdf](https://github.com/diegomura/react-pdf):📄 Create PDF files using React http://react-pdf.diegomura.com/repl
+
 ## 学习
 
 * [kay-is/react-from-zero](https://github.com/kay-is/react-from-zero):A simple (99% ES2015 less) tutorial for React

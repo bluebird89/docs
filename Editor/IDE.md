@@ -231,6 +231,10 @@ livetemplate
 * [cdoco/jetbrains-license-server](https://github.com/cdoco/jetbrains-license-server)
 * [激活](https://www.jianshu.com/p/133af2e4fe3f)
 
+## 编辑器
+
+* [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
+
 ## 参考
 
 * [ChrisRM/material-theme-jetbrains](https://github.com/ChrisRM/material-theme-jetbrains#installation):JetBrains theme of Material Theme
