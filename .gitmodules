@@ -145,3 +145,6 @@
 [submodule "Resource/reading"]
 	path = Resource/reading
 	url = git@github.com:CraryPrimitiveMan/reading.git
+[submodule "Editor/awesome-vim"]
+	path = Editor/awesome-vim
+	url = git@github.com:akrawchyk/awesome-vim.git

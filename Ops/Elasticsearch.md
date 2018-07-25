@@ -88,4 +88,5 @@ curl localhost:9200
 ## 扩展
 
 * [elastic/beats](https://github.com/elastic/beats):🐠 Beats - Lightweight shippers for Elasticsearch & Logstash https://www.elastic.co/products/beats
-[](http://www.cnblogs.com/raphael5200/p/5335155.html)
+* [](http://www.cnblogs.com/raphael5200/p/5335155.html)
+* [elastic/kibana](https://github.com/elastic/kibana):📊 Kibana analytics and search dashboard for Elasticsearch https://www.elastic.co/products/kibana
