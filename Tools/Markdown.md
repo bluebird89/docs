@@ -952,6 +952,7 @@ Markdown 语法： **Example:**
 * [nhnent/tui.editor](https://github.com/nhnent/tui.editor):🍞📝 Markdown WYSIWYG Editor. GFM Standard + Chart & UML Extensible. http://ui.toast.com/tui-editor
 * [gsuitedevs/md2googleslides](https://github.com/gsuitedevs/md2googleslides):Generate Google Slides from markdown
 * [pandao/editor.md](https://github.com/pandao/editor.md):The open source embeddable online markdown editor (component). https://pandao.github.io/editor.md/
+* [gnab/remark](https://github.com/gnab/remark):A simple, in-browser, markdown-driven slideshow tool. http://remarkjs.com
 
 ## 参考
 

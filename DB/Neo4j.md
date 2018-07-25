@@ -1,4 +1,6 @@
-# Neo4j
+# [neo4j/neo4j](https://github.com/neo4j/neo4j)
+
+Graphs for Everyone http://neo4j.com
 
 Neo4j是一个图形数据库，这也就意味着它的数据并非保存在表或集合中，而是保存为节点以及节点之间的关系。在Neo4j中，节点以及关系都能够包含保存值的属性，此外：
 
@@ -25,4 +27,3 @@ Neo4j是一个图形数据库，这也就意味着它的数据并非保存在表
 
 ## 参考
 
-* [neo4j/neo4j](https://github.com/neo4j/neo4j):Graphs for Everyone http://neo4j.com
