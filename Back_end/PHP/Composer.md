@@ -1,4 +1,6 @@
-# Composer
+# [composer/composer](https://github.com/composer/composer)
+
+Dependency Manager for PHP https://getcomposer.org/
 
 PHP 用来管理依赖（dependency）关系的工具。你可以在自己的项目中声明所依赖的外部工具库（libraries），Composer 会帮你安装这些依赖的库文件。
 
@@ -129,7 +131,6 @@ echo $slugify->slugify('Hello World, this is a long sentence and I need to make 
 ## 参考
 
 * [官网](https://getcomposer.org/)
-* [composer/composer](https://github.com/composer/composer):Dependency Manager for PHP https://getcomposer.org/
 * [中文](https://www.phpcomposer.com/)
 * [Packagist](https://packagist.org):The PHP Package Repository
 
