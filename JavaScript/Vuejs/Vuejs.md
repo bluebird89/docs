@@ -186,8 +186,8 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [Buefy](https://github.com/buefy/buefy)
 * [Bootstrap Vue](https://github.com/bootstrap-vue/bootstrap-vue)
 * [Muse-UI](https://github.com/at-ui/at-ui)
-* [Vux](https://github.com/airyland/vux)
-* [iView](https://github.com/iview/iview)
+* [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
+* [iView](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
 * [Uiv](https://github.com/wxsms/uiv)
 * [Onsen UI+Vue](https://onsen.io/v2/guide/vue/)
 * [Semantic UI+Vue](https://semantic-ui-vue.github.io/)
