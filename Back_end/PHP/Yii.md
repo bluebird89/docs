@@ -14,10 +14,12 @@ init
 composer install
 php requirements.php
 
-common/config/main-local.php # components['db'] 配置
+vim common/config/main-local.php # components['db'] 配置
 yii migrate # 生成数据表
 # 断言测试
 ```
+## Console
+
 
 ## 参考
 
@@ -25,3 +27,21 @@ yii migrate # 生成数据表
 * [CraryPrimitiveMan/yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
 * [CraryPrimitiveMan/OnlineCourses](https://github.com/CraryPrimitiveMan/OnlineCourses):An online courses website based on yii2
 * [官网](https://www.yiiframework.com/)
+* [多语言版本切换](https://blog.csdn.net/u012979009/article/details/51697969)
+
+
+## 扩展
+
+* [](https://www.yiichina.com/code/1695）
+* [](https://github.com/yiisoft/yii2-httpclient）
+* [](https://github.com/yiisoft/yii2-authclient）
+* [](https://github.com/yiisoft/yii2-queue）
+* [](https://github.com/yiisoft/yii2-coding-standards）
+* [](https://github.com/yiisoft/yii2-apidoc）
+* [](https://github.com/yiisoft/yii2-collection）
+* [](https://github.com/yiisoft/yii2-redis）
+* [](https://github.com/yiisoft/yii2-bootstrap）
+* [](https://github.com/yiisoft/yii2-shell）
+* [](https://github.com/yiisoft/yii2-bootstrap4）
+* [](https://github.com/yiisoft/log）
+* [](https://github.com/yiisoft/yii2-elasticsearch）

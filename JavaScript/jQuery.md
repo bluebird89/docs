@@ -1,4 +1,6 @@
-# jQuery
+# [jquery/jquery](https://github.com/jquery/jquery)
+
+jQuery JavaScript Library https://jquery.com/
 
 * 消除浏览器差异：你不需要自己写冗长的代码来针对不同的浏览器来绑定事件，编写AJAX等代码；
 * 简洁的操作DOM的方法：写$('#test')肯定比document.getElementById('test')来得简洁；
@@ -615,6 +617,7 @@ var jq=jQuery.noConflict();
 - [blueimp/jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload)
 - [Studio-42/elFinder](https://github.com/Studio-42/elFinder):Open-source file manager for web, written in JavaScript using jQuery and jQuery UI https://studio-42.github.io/elFinder/
 - [mumuy/widget](https://github.com/mumuy/widget):A set of widgets based on jQuery&&javascript. 一套基于jquery或javascript的插件库 ：轮播、标签页、滚动条、下拉框、对话框、搜索提示、城市选择(城市三级联动)、日历等 http://jquerywidget.com/
+- [js-cookie/js-cookie](https://github.com/js-cookie/js-cookie):A simple, lightweight JavaScript API for handling browser cookies
 
 ## 参考
 
