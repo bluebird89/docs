@@ -1,9 +1,6 @@
-# Swoole
+# [swoole/swoole-src](https://github.com/swoole/swoole-src)
 
-Event-driven asynchronous & concurrent & coroutine networking engine with high performance for PHP.
-
-- [swoole/swoole-src](https://github.com/swoole/swoole-src):Event-driven asynchronous & concurrent & coroutine networking engine with high performance for PHP. <http://www.swoole.com/>
-- [官方文档](https://github.com/cloes/swoole-doc)
+Event-driven asynchronous & concurrent & coroutine networking engine with high performance for PHP. <http://www.swoole.com/>
 
 ## 安装
 
@@ -32,13 +29,9 @@ brew install swoole
 ## 基础
 
 多线程编程
-
 进程间通信
-
 网络协议TCP/UDP的认知
-
 PHP的各项基本技能
-
 
 ## 工具
 
@@ -48,6 +41,7 @@ PHP的各项基本技能
 
 - [Concise Guide to Swoole文档](https://linkeddestiny.gitbooks.io/easy-swoole/content/)
 - [源码分析](https://github.com/LinkedDestiny/swoole-src-analysis)
+- [官方文档](https://github.com/cloes/swoole-doc)
 
 ## 扩展
 
@@ -58,6 +52,7 @@ PHP的各项基本技能
 - [youzan/yz_swoole](https://github.com/youzan/yz_swoole)youzan swoole branch
 - [matyhtf/webim](https://github.com/matyhtf/webim):使用PHP+Swoole实现的网页即时聊天工具
 - [xcl3721/Dora-RPC](https://github.com/xcl3721/Dora-RPC):DoraRPC is an RPC For the PHP MicroService by The Swoole
+- [bingcool/swoolefy](https://github.com/bingcool/swoolefy):swoolefy是一个基于swoole扩展实现的轻量级高性能的API和MVC应用服务框架
 
 ## 项目
 
