@@ -321,3 +321,7 @@ vagrant up
 * [Vagrant Documentation](https://www.vagrantup.com/docs/)
 * [官网](https://app.vagrantup.com/boxes/search?provider=virtualbox) 比如：https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.4/providers/virtualbox.boxes
 * [资源](http://www.vagrantbox.es/)
+
+## 工具
+
+* [dotless-de/vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest):A Vagrant plugin to keep your VirtualBox Guest Additions up to date
