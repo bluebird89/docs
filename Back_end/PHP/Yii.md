@@ -18,8 +18,10 @@ vim common/config/main-local.php # components['db'] 配置
 yii migrate # 生成数据表
 # 断言测试
 ```
+
 ## Console
 
+## REST
 
 ## 参考
 
@@ -27,8 +29,10 @@ yii migrate # 生成数据表
 * [CraryPrimitiveMan/yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
 * [CraryPrimitiveMan/OnlineCourses](https://github.com/CraryPrimitiveMan/OnlineCourses):An online courses website based on yii2
 * [官网](https://www.yiiframework.com/)
-* [多语言版本切换](https://blog.csdn.net/u012979009/article/details/51697969)
 
+* [多语言版本切换](https://blog.csdn.net/u012979009/article/details/51697969)
+* [RESTful API快速搭建教程](https://www.yiichina.com/tutorial/1606)
+* [RESTful API 认证教程](https://www.yiichina.com/tutorial/1770)
 
 ## 扩展
 

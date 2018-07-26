@@ -19,6 +19,7 @@
 * [airbnb/lottie-ios](https://github.com/airbnb/lottie-ios):An iOS library to natively render After Effects vector animations http://airbnb.io/lottie/
 * [airbnb/react-native-maps](https://github.com/airbnb/react-native-maps):React Native Mapview component for iOS + Android
 * [airbnb/native-navigation](https://github.com/airbnb/native-navigation):Native navigation library for React Native applications http://airbnb.io/native-navigation/
+* [react-navigation/react-navigation](https://github.com/react-navigation/react-navigation):Routing and navigation for your React Native apps https://reactnavigation.org
 * [apollographql/react-apollo](https://github.com/apollographql/react-apollo):♻️ React integration for Apollo Client https://www.apollographql.com/docs/react/
 
 * [React Studio](https://reactstudio.com/)
@@ -29,7 +30,6 @@
 * [GeekyAnts/NativeBase](https://github.com/GeekyAnts/NativeBase):Essential cross-platform UI components for React Native https://nativebase.io/
 * [oblador/react-native-vector-icons](https://github.com/oblador/react-native-vector-icons):Customizable Icons for React Native with support for NavBar/TabBar/ToolbarAndroid, image source and full styling.
 * [rt2zz/redux-persist](https://github.com/rt2zz/redux-persist):persist and rehydrate a redux store
-* [react-navigation/react-navigation](https://github.com/react-navigation/react-navigation):Routing and navigation for your React Native apps https://reactnavigation.org
 * [necolas/react-native-web](https://github.com/necolas/react-native-web):React Native for Web
 * [react-native-training/react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit
 * [markerikson/react-redux-links](https://github.com/markerikson/react-redux-links):Curated tutorial and resource links I've collected on React, Redux, ES6, and more
@@ -40,7 +40,6 @@
 * [coryhouse/react-slingshot](https://github.com/coryhouse/react-slingshot):React + Redux starter kit / boilerplate with Babel, hot reloading, testing, linting and a working example app built in
 * [reactjs/react-docgen](https://github.com/reactjs/react-docgen):A CLI and toolbox to extract information from React component files for documentation generation purposes.
 * [oney/react-native-webrtc](https://github.com/oney/react-native-webrtc):A WebRTC module for React Native.
-* [react-navigation/react-navigation](https://github.com/react-navigation/react-navigation):Routing and navigation for your React Native apps https://reactnavigation.org
 * [atlassian/react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd):Beautiful, accessible drag and drop for lists with React.js
 * [drcmda/react-spring](https://github.com/drcmda/react-spring):🙌 Helping react-motion and animated to become best friends http://react-spring.surge.sh/
 * [deepsweet/hocs](https://github.com/deepsweet/hocs):🍱 A collection of Higher-Order Components for React and React Native
