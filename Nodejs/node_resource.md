@@ -59,6 +59,10 @@
 * [systemjs/systemjs](https://github.com/systemjs/systemjs):Dynamic ES module loader
 * [soldair/node-qrcode](https://github.com/soldair/node-qrcode):qr code generator
 
+## Debug
+
+* [GoogleChromeLabs/ndb](https://github.com/GoogleChromeLabs/ndb):ndb is an improved debugging experience for Node.js, enabled by Chrome DevTools
+
 ## NLP
 
 * [NaturalNode/natural](https://github.com/NaturalNode/natural):general natural language facilities for node
