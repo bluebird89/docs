@@ -24,6 +24,8 @@
       + [Satis](https://github.com/composer/satis): 一个静态Composer存储库的生成器
       + [tooly](https://github.com/tommy-muehle/tooly-composer-script): 一个在项目中使用Composer管理PHAR文件的库
       + [Toran Proxy](https://toranproxy.com): 一个静态Composer存储库和代理
+* 安全
+      + [sensiolabs/security-checker](https://github.com/sensiolabs/security-checker):PHP frontend for security.sensiolabs.org https://security.sensiolabs.org
 
 ## 框架
 
@@ -213,6 +215,7 @@
       - (https://github.com/pixeloution/true-random)[True Random]: 使用[www.random.org](https://www.random.org/)生成随机数的库
       - (https://vaddy.net/)[VAddy]: 一个持续安全的web应用测试平台
       - (https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project)[Zed]: 一个集成的web应用渗透测试工具
+      - [phpstan/phpstan](https://github.com/phpstan/phpstan):PHP Static Analysis Tool - discover bugs in your code without running it!
 * 密码 Passwords 处理和存储密码的库和工具
       - (https://github.com/timoh6/GenPhrase)[GenPhrase]: 一个随机生成安全密码哈希的库
       - (https://github.com/ircmaxell/password_compat)[Password Compat]: 一个新的PHP5.5密码函数的兼容库

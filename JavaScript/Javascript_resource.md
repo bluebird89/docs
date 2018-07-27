@@ -37,6 +37,7 @@
 * [nolanlawson/optimize-js](https://github.com/nolanlawson/optimize-js):Optimize a JavaScript file for faster initial load by wrapping eagerly-invoked functions
 * [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
 * [ReactiveX/rxjs](https://github.com/ReactiveX/rxjs):A reactive programming library for JavaScript http://reactivex.io/rxjs
+* [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
 
 ## 校验
 
