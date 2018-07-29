@@ -1,4 +1,4 @@
-# JWT(JSON Web Token)
+# [JWT(JSON Web Token)](https://jwt.io/)
 
 一个非常轻巧的规范。这个规范允许我们使用 JWT 在用户和服务器之间传递安全可靠的信息。
 
