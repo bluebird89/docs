@@ -4,7 +4,7 @@ Yii 2: The Fast, Secure and Professional PHP Framework <http://www.yiiframework.
 
 ## [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced)
 
-Yii 2.0 Advanced Application Template <http://www.yiiframework.com>
+Yii 2.0 Advanced Application Template
 
 ```sh
 composer global require "fxp/composer-asset-plugin:^1.2.0"
@@ -68,7 +68,7 @@ server {
 }
 ```
 
-## 运行生命周期
+## 生命周期
 
 * 用户提交指向 入口脚本 web/index.php 的请求。
 * 入口脚本会加载 配置数组 并创建一个 应用 实例用于处理该请求。
@@ -165,62 +165,61 @@ server {
                 'de',
             ],
         ],
-    ],
 
-    'defaultRoute' => 'main',
-    // 全拦截路由
-    'catchAll' => [
-        'offline/notice',
-        'param1' => 'value1',
-        'param2' => 'value2',
-    ],
-
-    'components' => [
-        // 使用类名注册 "cache" 组件
-        'cache' => [
-            'class' => 'yiicachingFileCache',
-            // 'cache' => 'yiicachingApcCache',
-        ],
-        'user' => [
-            'identityClass' => 'appmodelsUser',
-            'enableAutoLogin' => true,
+        'defaultRoute' => 'main',
+        // 全拦截路由
+        'catchAll' => [
+            'offline/notice',
+            'param1' => 'value1',
+            'param2' => 'value2',
         ],
 
-        // 使用配置数组注册 "db" 组件
-        'db' => [
-            'class' => 'yiidbConnection',
-            'dsn' => 'mysql:host=localhost;dbname=demo',
-            'username' => 'root',
-            'password' => '',
+        'components' => [
+            // 使用类名注册 "cache" 组件
+            'cache' => [
+                'class' => 'yiicachingFileCache',
+                // 'cache' => 'yiicachingApcCache',
+            ],
+            'user' => [
+                'identityClass' => 'appmodelsUser',
+                'enableAutoLogin' => true,
+            ],
+
+            // 使用配置数组注册 "db" 组件
+            'db' => [
+                'class' => 'yiidbConnection',
+                'dsn' => 'mysql:host=localhost;dbname=demo',
+                'username' => 'root',
+                'password' => '',
+            ],
+
+            // 使用函数注册"search" 组件
+            'search' => function () {
+                return new appcomponentsSolrService;
+            },
         ],
 
-        // 使用函数注册"search" 组件
-        'search' => function () {
-            return new appcomponentsSolrService;
-        },
-    ],
-    ],
-
-    'controllerMap' => [
-        [
-            'account' => 'appcontrollersUserController',
-            'article' => [
-                'class' => 'appcontrollersPostController',
-                'enableCsrfValidation' => false,
+        'controllerMap' => [
+            [
+                'account' => 'appcontrollersUserController',
+                'article' => [
+                    'class' => 'appcontrollersPostController',
+                    'enableCsrfValidation' => false,
+                ],
             ],
         ],
-    ],
 
-    'modules' => [
-        // "booking" 模块以及对应的类
-        'booking' => 'appmodulesbookingBookingModule',
+        'modules' => [
+            // "booking" 模块以及对应的类
+            'booking' => 'appmodulesbookingBookingModule',
 
-        // "comment" 模块以及对应的配置数组
-        'comment' => [
-            'class' => 'appmodulescommentCommentModule',
-            'db' => 'db',
+            // "comment" 模块以及对应的配置数组
+            'comment' => [
+                'class' => 'appmodulescommentCommentModule',
+                'db' => 'db',
+            ],
         ],
-    ],
+
         'timeZone' => 'America/Los_Angeles',
         'extensions' => [
         [
@@ -234,33 +233,31 @@ server {
         ],
 
         // ... 更多像上面的扩展 ...
+        'on beforeRequest' => function ($event) {
+            // ...
+        },
+        'on beforeAction' => function ($event) {
+            if (some condition) {
+                $event->isValid = false;
+            } else {
+            }
+        },
+        'on afterAction' => function ($event) {
+            if (some condition) {
+                // 修改 $event->result
+            } else {
+            }
+        },
+    ]
 
-    ],
-    'on beforeRequest' => function ($event) {
-        // ...
-    },
-    'on beforeAction' => function ($event) {
-        if (some condition) {
-            $event->isValid = false;
-        } else {
-        }
-    },
-    'on afterAction' => function ($event) {
-        if (some condition) {
-            // 修改 $event->result
-        } else {
-        }
-    },
-]
+    if (YII_ENV_DEV) {
+        // configuration adjustments for 'dev' environment
+        $config['bootstrap'][] = 'debug';
+        $config['modules']['debug'] = 'yiidebugModule';
 
-if (YII_ENV_DEV) {
-    // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = 'yiidebugModule';
-
-    $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = 'yiigiiModule';
-}
+        $config['bootstrap'][] = 'gii';
+        $config['modules']['gii'] = 'yiigiiModule';
+    }
 ```
 
 ## 模型
@@ -318,20 +315,20 @@ class ContactForm extends Model
             'subject' => Yii::t('app', 'Subject'),
             'body' => Yii::t('app', 'Content'),
         ];
+
+        return [
+            // 字段名和属性名相同
+            'id',
+
+            // 字段名为 "email"，对应属性名为 "email_address"
+            'email' => 'email_address',
+
+            // 字段名为 "name", 值通过PHP代码返回
+            'name' => function () {
+                return $this->first_name . ' ' . $this->last_name;
+            },
+        ];
     }
-
-    return [
-        // 字段名和属性名相同
-        'id',
-
-        // 字段名为 "email"，对应属性名为 "email_address"
-        'email' => 'email_address',
-
-        // 字段名为 "name", 值通过PHP代码返回
-        'name' => function () {
-            return $this->first_name . ' ' . $this->last_name;
-        },
-    ];
 }
 
 $model = new app/models/ContactForm;
@@ -350,18 +347,18 @@ if ($model->validate()) {
 ## component
 
 -   yiiwebAssetManager: 管理资源包和资源发布
--   yiidbConnection: 代表一个可以执行数据库操作的数据库连接， 注意配置该组件时必须指定组件类名和其他相关组件属性，如 yiidbConnection::dsn。 详情请参考 数据访问对象 一节。
--   yiibaseApplication::errorHandler: 处理 PHP 错误和异常， 详情请参考 错误处理 一节。
--   yiii18nFormatter: 格式化输出显示给终端用户的数据，例如数字可能要带分隔符， 日期使用长格式。详情请参考 格式化输出数据 一节。
--   yiii18nI18N: 支持信息翻译和格式化。详情请参考 国际化 一节。
--   yiilogDispatcher: 管理日志对象。详情请参考 日志 一节。
--   yiiswiftmailerMailer: 支持生成邮件结构并发送，详情请参考 邮件 一节。
--   yiibaseApplication::response: 代表发送给用户的响应， 详情请参考 响应 一节。
--   yiibaseApplication::request: 代表从终端用户处接收到的请求， 详情请参考 请求 一节。
--   yiiwebSession: 代表会话信息，仅在 yiiwebApplication 网页应用中可用， 详情请参考 Sessions (会话) and Cookies 一节。
--   yiiwebUrlManager: 支持 URL 地址解析和创建， 详情请参考 URL 解析和生成 一节。
--   yiiwebUser: 代表认证登录用户信息，仅在 yiiwebApplication 网页应用中可用， 详情请参考 认证 一节。
--   yiiwebView: 支持渲染视图，详情请参考 Views 一节。
+-   yiidbConnection: 代表一个可以执行数据库操作的数据库连接， 注意配置该组件时必须指定组件类名和其他相关组件属性，如 yiidbConnection::dsn
+-   yiibaseApplication::errorHandler: 处理 PHP 错误和异常
+-   yiii18nFormatter: 格式化输出显示给终端用户的数据，例如数字可能要带分隔符， 日期使用长格式
+-   yiii18nI18N: 支持信息翻译和格式化
+-   yiilogDispatcher: 管理日志对象
+-   yiiswiftmailerMailer: 支持生成邮件结构并发送
+-   yiibaseApplication::request: 代表从终端用户处接收到的请求
+-   yiibaseApplication::response: 代表发送给用户的响应
+-   yiiwebSession: 代表会话信息，仅在 yiiwebApplication 网页应用中可用
+-   yiiwebUrlManager: 支持 URL 地址解析和创建
+-   yiiwebUser: 代表认证登录用户信息，仅在 yiiwebApplication 网页应用中可用
+-   yiiwebView: 支持渲染视图
 
 ## 控制器
 
@@ -746,16 +743,16 @@ AppAsset::register($this);  // $this 代表视图对象
 
 ## 扩展
 
--   \[](<https://github.com/yiisoft/yii2-httpclient）>
--   \[](<https://github.com/yiisoft/yii2-authclient）>
--   \[](<https://github.com/yiisoft/yii2-queue）>
--   \[](<https://github.com/yiisoft/yii2-coding-standards）>
--   \[](<https://github.com/yiisoft/yii2-apidoc）>
--   \[](<https://github.com/yiisoft/yii2-collection）>
--   \[](<https://github.com/yiisoft/yii2-redis）>
--   \[](<https://github.com/yiisoft/yii2-bootstrap）>
--   \[](<https://github.com/yiisoft/yii2-shell）>
--   \[](<https://github.com/yiisoft/yii2-bootstrap4）>
--   \[](<https://github.com/yiisoft/log）>
--   \[](<https://github.com/yiisoft/yii2-elasticsearch）>
+-   [yii2-httpclient](https://github.com/yiisoft/yii2-httpclient)
+-   [yii2-authclient](https://github.com/yiisoft/yii2-authclient)
+-   [yii2-queue](https://github.com/yiisoft/yii2-queue)
+-   [yii2-coding-standards](https://github.com/yiisoft/yii2-coding-standards)
+-   [yiisoft/yii2-apidoc](https://github.com/yiisoft/yii2-apidoc)
+-   [yii2-collection](https://github.com/yiisoft/yii2-collection)
+-   [yii2-redis](https://github.com/yiisoft/yii2-redis)
+-   [yii2-bootstrap](https://github.com/yiisoft/yii2-bootstrap)
+-   [yii2-shell](https://github.com/yiisoft/yii2-shell)
+-   [yii2-bootstrap4](https://github.com/yiisoft/yii2-bootstrap4)
+-   [yiisoft/log](https://github.com/yiisoft/log)
+-   [yii2-elasticsearch](https://github.com/yiisoft/yii2-elasticsearch)
 -   [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
