@@ -25,8 +25,7 @@
     -   Acer Chromebook R11
     -   明基爱眼显示器 EW2775ZH
     -   明基 PD2710QC
-
-*   Nintendo Switch
+-   Nintendo Switch
 
 ### 设计
 
@@ -72,7 +71,7 @@
 
 ## 笔记
 
-笔记：带标签功能，并且可以聚合统计;概念用文档整理，结构化用思维导图（不宜太详细）
+带标签功能，并且可以聚合统计;概念用文档整理，结构化用思维导图（不宜太详细）
 
 -   [Paper](http://www.fiftythree.com/):优雅，美观，做笔记，记录灵感
 -   [语雀](https://yuque.com/)
@@ -162,8 +161,9 @@
 ## 学习
 
 -   [Coursera](https://www.coursera.org/)
--   [](https://www.udacity.com/)
--   [](https://www.edx.org/)
+    - [coursera-dl/coursera-dl](https://github.com/coursera-dl/coursera-dl):Script for downloading Coursera.org videos and naming them.
+-   [优达](https://www.udacity.com/)
+-   [edX](https://www.edx.org/)
 -   [LeetCode](http://leetcode.com/):[中文](https://leetcode-cn.com/)
 -   [网易公开课]()
 -   [Creativelive](https://www.creativelive.com/)
@@ -173,7 +173,6 @@
 -   [freecodecamp](https://www.freecodecamp.org/):Learn to code for free.
 -   [scratch](https://scratch.mit.edu/)
 -   大学课程
-    -   edX — 免费学习来自全球顶尖大学（包括 MIT 和哈佛大学）的课程，提供付费的认证证书。。
     -   MIT Open Courseware — 创建于 2002 年，免费提供几乎所有 MIT 课程的完整材料。
     -   Open Yale Courses — 提供耶鲁大学的课程，既有传统的网络公开课，也有 MOOC。
     -   Open Learning Initiative — 卡耐基梅隆大学的一个开放学习计划。
