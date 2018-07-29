@@ -13,17 +13,16 @@ phpunit --version
 
 ## 配置使用
 
-在PhpStrom环境下使用
+在 PhpStrom 环境下使用
 
-* 创建代码文件
-* 右键goto->test创建测试文件（指定目录）
-* 测试文件引入源文件
-* 配置文件
-    - 设置：phpunit->user composer autoloader->vender/autoloader.php
-    - 测试文件路径：run->edit configuration->directory
-* run
+-   创建代码文件
+-   右键 goto->test 创建测试文件（指定目录）
+-   测试文件引入源文件
+-   配置文件
+    -   设置：phpunit->user composer autoloader->vender/autoloader.php
+    -   测试文件路径：run->edit configuration->directory
+-   run
 
 ## 参考
 
-* [PHPUnit文档](http://www.phpunit.cn)
-
+-   [PHPUnit 文档](http://www.phpunit.cn)

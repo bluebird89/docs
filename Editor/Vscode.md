@@ -19,15 +19,14 @@ sudo apt-get install code
 
 ### 左边列表
 
-* File explorer:  `command + shift + E`
-* Search across files: `command + shift + F`
-* Source code management `command + shift + G`
-* launch and debug `command + shift + d`
-* Manage extensions `command + shift + x`
-* `shift+cmd+m`
+-   File explorer: `command + shift + E`
+-   Search across files: `command + shift + F`
+-   Source code management `command + shift + G`
+-   launch and debug `command + shift + d`
+-   Manage extensions `command + shift + x`
+-   `shift+cmd+m`
 
 ### 快捷键
-
 
 > general
 
@@ -171,13 +170,12 @@ F10 Step over
 
 > Integrated terminal
 
-⌃` Show integrated terminal
-⌃⇧` Create new terminal
+⌃`Show integrated terminal ⌃⇧` Create new terminal
 ⌘C Copy selection
 ⌘↑ / ↓ Scroll up/down
 PgUp / PgDn Scroll page up/down
 ⌘Home / End Scroll to top/bottom
-⇧⌥⌘↓, ⇧⌥⌘→, ⇧⌥⌘↑, ⇧⌥⌘←   Box Selection
+⇧⌥⌘↓, ⇧⌥⌘→, ⇧⌥⌘↑, ⇧⌥⌘← Box Selection
 
 ### CLI tool
 
@@ -196,15 +194,15 @@ code --disable-extensions . # disable all extensions
 
 ## 扩展
 
-* [Microsoft/vscode](https://github.com/Microsoft/vscode):Visual Studio Code <https://code.visualstudio.com>
-* [viatsko/awesome-vscode](https://github.com/viatsko/awesome-vscode):A curated list of delightful VS Code packages and resources.
-* [Microsoft/vscode-tips-and-tricks](https://github.com/Microsoft/vscode-tips-and-tricks):Collection of helpful tips and tricks for VS Code.
-* [vscode-element-helper](https://github.com/ElemeFE/vscode-element-helper)
-* [keyboard-shortcuts-macos](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
-* https://code.visualstudio.com/
-* [octref/polacode](https://github.com/octref/polacode):📸 Polaroid for your code
-
+-   [Microsoft/vscode](https://github.com/Microsoft/vscode):Visual Studio Code <https://code.visualstudio.com>
+-   [viatsko/awesome-vscode](https://github.com/viatsko/awesome-vscode):A curated list of delightful VS Code packages and resources.
+-   [Microsoft/vscode-tips-and-tricks](https://github.com/Microsoft/vscode-tips-and-tricks):Collection of helpful tips and tricks for VS Code.
+-   [vscode-element-helper](https://github.com/ElemeFE/vscode-element-helper)
+-   [keyboard-shortcuts-macos](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
+-   https://code.visualstudio.com/
+-   [octref/polacode](https://github.com/octref/polacode):📸 Polaroid for your code
+-   vscode-pandoc:文档生成
 
 ## 參考
 
-* [文檔](https://code.visualstudio.com/docs)
+-   [文檔](https://code.visualstudio.com/docs)
