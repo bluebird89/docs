@@ -148,3 +148,12 @@
 [submodule "Editor/awesome-vim"]
 	path = Editor/awesome-vim
 	url = git@github.com:akrawchyk/awesome-vim.git
+[submodule "Back_end/PHP/awesome-yii2"]
+	path = Back_end/PHP/awesome-yii2
+	url = git@github.com:forecho/awesome-yii2.git
+[submodule "Back_end/PHP/awesome-laravel"]
+	path = Back_end/PHP/awesome-laravel
+	url = git@github.com:chiraggude/awesome-laravel.git
+[submodule "Back_end/PHP/awesome-symfony"]
+	path = Back_end/PHP/awesome-symfony
+	url = git@github.com:sitepoint-editors/awesome-symfony.git

@@ -299,17 +299,17 @@ echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.zshrc
 
 ### iterm2
 
-|   功能   | mac         |
-|----------|----------|
-| 切换tab | ⌘+←, ⌘+→, ⌘+{, ⌘+} |
-| 直接定位到该 tab| ⌘+数字 |
-| 弹出自动补齐窗口| ⌘+; |
-| 智能查找，支持正则查找| ⌘+f |
-| 找到当前的鼠标 | ⌘+/ |
-| 弹出历史命令记录窗口 | ⌘+Shift+; |
-|弹出历史粘贴记录窗口 |⌘+Shift+h |
-|可以搜索全屏展示所有的 tab|⌘+Option+e|
-|全屏| command+enter|
+| 功能                       | mac                |
+| -------------------------- | ------------------ |
+| 切换tab                    | ⌘+←, ⌘+→, ⌘+{, ⌘+} |
+| 直接定位到该 tab           | ⌘+数字             |
+| 弹出自动补齐窗口           | ⌘+;                |
+| 智能查找，支持正则查找     | ⌘+f                |
+| 找到当前的鼠标             | ⌘+/                |
+| 弹出历史命令记录窗口       | ⌘+Shift+;          |
+| 弹出历史粘贴记录窗口       | ⌘+Shift+h          |
+| 可以搜索全屏展示所有的 tab | ⌘+Option+e         |
+| 全屏                       | command+enter      |
 
 ### 写脚本
 
@@ -548,7 +548,6 @@ cat ~/pub_key >>~/.ssh/authorized_keys //将内容追加到authorized_keys文件
 ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root/.ssh/id_rsa.pub') }}'" -k
 ```
 
-###
 ## 工具
 
 * [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager.
@@ -563,6 +562,7 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 * [Swordfish90/cool-retro-term](https://github.com/Swordfish90/cool-retro-term):A good looking terminal emulator which mimics the old cathode display...
 * [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
 * [mixn/carbon-now-cli](https://github.com/mixn/carbon-now-cli):🎨 Beautiful images of your code — from right inside your terminal.
+* [faressoft/terminalizer](https://github.com/faressoft/terminalizer):🦄 Record your terminal and generate animated gif images
 
 ## 教程
 
