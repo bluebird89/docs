@@ -66,3 +66,10 @@
 ## NLP
 
 * [NaturalNode/natural](https://github.com/NaturalNode/natural):general natural language facilities for node
+
+
+## 问题
+
+ERROR in Node Sass does not yet support  your current environmen
+
+npm rebuild node-sass

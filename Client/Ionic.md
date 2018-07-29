@@ -6,11 +6,13 @@ Build amazing native and progressive web apps with open web technologies. One ap
 
 ```sh
 npm install -g cordova ionic
-ionic start myApp tabs
-ionic start myApp blank
-ionic start myApp sidemenu
+
+ionic start myApp tabs|blank|sidemenu # 使用不同模版
+
 cd myApp
 ionic serve
+
+ionic login
 ```
 
 ## 参考
