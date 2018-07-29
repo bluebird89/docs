@@ -1163,7 +1163,7 @@ git-quick-stats
 ### Aliases
 
 | Alias                | Command                                                                                                                                 |
-|:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
+| :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
 | g                    | git                                                                                                                                     |
 | ga                   | git add                                                                                                                                 |
 | gaa                  | git add --all                                                                                                                           |
@@ -1207,7 +1207,7 @@ git-quick-stats
 | gfo                  | git fetch origin                                                                                                                        |
 | gg                   | git gui citool                                                                                                                          |
 | gga                  | git gui citool --amend                                                                                                                  |
-| ggf                  | git push --force origin $(current_branch)                                                                                                                  |
+| ggf                  | git push --force origin $(current_branch)                                                                                               |
 | ghh                  | git help                                                                                                                                |
 | ggpull               | ggl                                                                                                                                     |
 | ggpur                | ggu                                                                                                                                     |
@@ -1265,7 +1265,7 @@ git-quick-stats
 | gsr                  | git svn rebase                                                                                                                          |
 | gss                  | git status -s                                                                                                                           |
 | gst                  | git status                                                                                                                              |
-| gsta                 | git stash save                                                                                                                              |
+| gsta                 | git stash save                                                                                                                          |
 | gstaa                | git stash apply                                                                                                                         |
 | gstd                 | git stash drop                                                                                                                          |
 | gstl                 | git stash list                                                                                                                          |
@@ -1288,7 +1288,7 @@ git-quick-stats
 ### Current
 
 | Command                | Description                             |
-|:-----------------------|:----------------------------------------|
+| :--------------------- | :-------------------------------------- |
 | current_branch         | Return the name of the current branch   |
 | current_repository     | Return the names of the current remotes |
 | git_current_user_name  | Returns the `user.name` config value    |
@@ -1299,7 +1299,7 @@ git-quick-stats
 These features allow to pause a branch development and switch to another one (_"Work in Progress"_,  or wip). When you want to go back to work, just unwip it.
 
 | Command          | Description                                     |
-|:-----------------|:------------------------------------------------|
+| :--------------- | :---------------------------------------------- |
 | work_in_progress | Echoes a warning if the current branch is a wip |
 | gwip             | Commit wip branch                               |
 | gunwip           | Uncommit wip branch                             |
@@ -1308,6 +1308,7 @@ These features allow to pause a branch development and switch to another one (_"
 
 * msysgit
 * sourcetree
+* [GitHawkApp/GitHawk](https://github.com/GitHawkApp/GitHawk):A GitHub project manager app for iOS. http://githawk.com
 
 ## 问题
 
@@ -1351,6 +1352,7 @@ chown -R henry:henry .git/objects
 * [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
 * [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
 * [conventional-changelog/conventional-changelog](https://github.com/conventional-changelog/conventional-changelog):Generate a changelog from git metadata.
+* [pstadler/keybase-gpg-github](https://github.com/pstadler/keybase-gpg-github):Step-by-step guide on how to create a GPG key on keybase.io, adding it to a local GPG setup and use it with Git and GitHub.
 
 ## 参考
 
@@ -1366,7 +1368,3 @@ chown -R henry:henry .git/objects
 * [Conventional Commits](https://conventionalcommits.org/)
 * [git-commit-guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
 * [Git 工作流](https://juejin.im/post/5a014d5f518825295f5d56c7)
-
-## 客户端
-
-* [GitHawkApp/GitHawk](https://github.com/GitHawkApp/GitHawk):A GitHub project manager app for iOS. http://githawk.com

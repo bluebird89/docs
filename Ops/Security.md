@@ -163,6 +163,14 @@ Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，
 * 手机号:只能用相对安全的做法，即先对手机号进行对称加密，再将加密结果储存在数据库里；使用时再用密钥解开。
     - 密钥不应该被保存在数据库里。如果数据库被拖库，那么些数据的安全性与明文无异。通常会将密钥以环境变量的形式放在服务器上。这时除非网站在被拖库的情况下同时被拿到服务器权限
 
+## CSRF(Cross-Site Request Forgery)
+
+在用户合法的SESSION内发起的攻击。黑客通过在网页中嵌入Web恶意请求代码，并诱使受害者访问该页面，当页面被访问后，请求在受害者不知情的情况下以受害者的合法身份发起，并执行黑客所期待的动作
+
+```php
+<a href="http://www.shop.com/delProducts.php?id=100" "javascript:return confirm('Are you sure?')">Delete</a>
+```
+
 ## 工具
 
 * [rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework):Metasploit Framework https://www.metasploit.com/
