@@ -68,6 +68,27 @@ server {
 }
 ```
 
+## 运行生命周期
+
+* 用户提交指向 入口脚本 web/index.php 的请求。
+* 入口脚本会加载 配置数组 并创建一个 应用 实例用于处理该请求。
+    - preInit()（预初始化）方法，配置一些高优先级的应用属性
+    - 注册yiibaseApplication::errorHandler。
+    - 通过给定的应用配置初始化应用的各属性。
+    - 通过调用 yiibaseApplication::init()（初始化）方法，它会顺次调用 yiibaseApplication::bootstrap() 从而运行引导组件。
+       - 加载扩展清单文件(extension manifest file) vendor/yiisoft/extensions.php。
+       - 创建并运行各个扩展声明的 引导组件（bootstrap components）。
+       - 创建并运行各个 应用组件 以及在应用的 Bootstrap 属性中声明的各个 模块（modules）组件（如果有）。
+* 应用会通过 request（请求） 应用组件解析被请求的 路由。
+* 应用创建一个 controller（控制器） 实例具体处理请求。
+* 控制器会创建一个 action（动作） 实例并为该动作执行相关的 Filters（访问过滤器）。
+* 如果任何一个过滤器验证失败，该动作会被取消。
+* 如果全部的过滤器都通过，该动作就会被执行。
+* 动作会加载一个数据模型，一般是从数据库中加载。
+* 动作会渲染一个 View（视图），并为其提供所需的数据模型。
+* 渲染得到的结果会返回给 response（响应） 应用组件。
+* 响应组件会把渲染结果发回给用户的浏览器。
+
 ## 原理
 
 -   入口文件
@@ -145,7 +166,9 @@ server {
             ],
         ],
     ],
+
     'defaultRoute' => 'main',
+    // 全拦截路由
     'catchAll' => [
         'offline/notice',
         'param1' => 'value1',

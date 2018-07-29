@@ -195,7 +195,8 @@ Host *
 ### GPG
 
 * 为提交内容添加一个"已验证"标记
-* 与SSH共同使用，
+* 与SSH配合使用，都添加到GitHub中
+* bitbucket不支持gpg添加密钥
 
 ```sh
 sudo apt-get install gnupg # Debian / Ubuntu 环境
@@ -207,6 +208,7 @@ gpg --help
 gpg --full-generate-key # 4096
 
 gpg --list-secret-keys --keyid-format LONG  # list GPG keys for which you have both a public and private key. A private key is required for signing commits or tags.
+
 sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10] # GPG key ID is 3AA5C34371567BD2
 uid                          Hubot # 用户ID Henry Lee <liboming88@yeah.net>
 ssb   4096R/42B317FD4BA89E7A 2016-03-10
