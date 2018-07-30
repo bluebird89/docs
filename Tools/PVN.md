@@ -1,12 +1,5 @@
 # PVN
 
-## 工具
-
-- [Lantern](https://github.com/getlantern/lantern)
-- firefly-proxy
-- [XX-net/XX-Net](https://github.com/XX-net/XX-Net)a web proxy tool
-- [googlehosts/hosts](https://github.com/googlehosts/hosts)
-
 ## 搭建服务
 
 ### 服务
@@ -159,3 +152,10 @@ pip install shadowsocks
 * [Shadowsocks (简体中文)](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 * [openvpn](https://help.ubuntu.com/lts/serverguide/openvpn.html)
 * [gfwlist/gfwlist](https://github.com/gfwlist/gfwlist):The one and only one gfwlist here
+
+## 工具
+
+- [Lantern](https://github.com/getlantern/lantern)
+- [firefly-proxy](https://github.com/yinghuocho/firefly-proxy):A proxy software to help circumventing the Great Firewall.
+- [XX-net/XX-Net](https://github.com/XX-net/XX-Net)a web proxy tool
+- [googlehosts/hosts](https://github.com/googlehosts/hosts)
