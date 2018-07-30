@@ -57,7 +57,7 @@
 * [React Foundation](https://github.com/digiaonline/react-foundation):将 Foundation 的所有部分都包装成可复用的 React 组件，它专注于易用性和灵活性，尽可能使用无状态的组件
 * [Fabric UI](https://github.com/OfficeDev/office-ui-fabric-react)
 * [Atlaskit](https://atlaskit.atlassian.com/):Atlassian 的官方 React UI 套件是 [Atlassian 设计指南](https://atlassian.design/)的实现。它提供了一组可复用的组件，均可独立下载到开发者的项目中
-* [Rebass](https://github.com/jxnblk/rebass):是一个 UI 库及 UI 设计系统
+* [jxnblk/rebass](https://github.com/jxnblk/rebass):⚛️ React UI component library & design system, built with styled-components and styled-system. http://jxnblk.com/rebass
 * [Elemental UI](https://github.com/elementalui/elemental)
 * [Prime React](https://github.com/primefaces/primereact)
 * [Reactstrap](https://github.com/reactstrap/reactstrap)
@@ -67,6 +67,7 @@
 * [Semantic UI React](https://react.semantic-ui.com/introduction):官方的 Semantic-UI-React 集成，提供了有趣、灵活的工具，已被 Netflix 和 Amazon 采用。
 * [ant-design/ant-design](https://github.com/ant-design/ant-design/)
 * [Material Components Web](https://github.com/material-components/material-components-web/):组件使用可靠的开发工作流程来构建漂亮而实用的 Web 项目
+* [jxnblk/grid-styled](https://github.com/jxnblk/grid-styled):Responsive React grid system built with styled-system https://jxnblk.com/grid-styled/
 
 ## 编辑器
 

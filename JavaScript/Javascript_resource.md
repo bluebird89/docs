@@ -38,6 +38,7 @@
 * [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
 * [ReactiveX/rxjs](https://github.com/ReactiveX/rxjs):A reactive programming library for JavaScript http://reactivex.io/rxjs
 * [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
+* [es-analysis/plato](https://github.com/es-analysis/plato):JavaScript source code visualization, static analysis, and complexity tool
 
 ## 校验
 
