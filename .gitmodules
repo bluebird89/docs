@@ -157,3 +157,6 @@
 [submodule "Back_end/PHP/awesome-symfony"]
 	path = Back_end/PHP/awesome-symfony
 	url = git@github.com:sitepoint-editors/awesome-symfony.git
+[submodule "Algorithm/javascript-algorithms"]
+	path = Algorithm/javascript-algorithms
+	url = git@github.com:trekhleb/javascript-algorithms.git
