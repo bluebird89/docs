@@ -160,3 +160,9 @@
 [submodule "Algorithm/javascript-algorithms"]
 	path = Algorithm/javascript-algorithms
 	url = git@github.com:trekhleb/javascript-algorithms.git
+[submodule "Nodejs/awesome-nodejs"]
+	path = Nodejs/awesome-nodejs
+	url = git@github.com:sindresorhus/awesome-nodejs.git
+[submodule "Resource/awesome"]
+	path = Resource/awesome
+	url = git@github.com:sindresorhus/awesome.git

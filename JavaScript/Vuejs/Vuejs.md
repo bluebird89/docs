@@ -117,7 +117,8 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 hammer_and_wrench CLI for rapid Vue.js development https://cli.vuejs.org/
 
 ```sh
-npm install -g vue-cli
+npm install @vue/cli -g
+yarn global add @vue/cli
 
 vue list
 vue init <template-name> <project-name> # vue init webpack my-project vue init Plortinus/vue-multiple-pages new-project
@@ -140,6 +141,7 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
 * [vuejs/vuex-router-sync](https://github.com/vuejs/vuex-router-sync):Effortlessly keep vue-router and vuex store in sync.
 * [shentao/vue-multiselect](https://github.com/shentao/vue-multiselect):Universal select/multiselect/tagging component for Vue.js https://vue-multiselect.js.org/
+* [ElemeFE/vue-amap](https://github.com/ElemeFE/vue-amap):🌍 基于 Vue 2.x 和高德地图的地图组件 https://elemefe.github.io/vue-amap/
 
 ## 参考
 
@@ -193,8 +195,13 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [Onsen UI+Vue](https://onsen.io/v2/guide/vue/)
 * [Semantic UI+Vue](https://semantic-ui-vue.github.io/)
 * [Fish-UI](https://github.com/myliang/fish-ui)
-* [Mint UI](https://github.com/ElemeFE/mint-ui/)
+* [Mint UI](https://github.com/ElemeFE/mint-ui/):Mobile UI elements for Vue.js http://mint-ui.github.io/#!/en
 * [Framework7 Vue](https://framework7.io/vue/)
 * [Cube UI](https://github.com/didi/cube-ui)
 * [Vueblu](https://github.com/chenz24/vue-blu)
 * [Ant Design Vue](https://github.com/okoala/vue-antd)
+
+## 框架
+
+* [vuetifyjs/vuetify](https://github.com/vuetifyjs/vuetify):Material Component Framework for Vue.js 2 https://vuetifyjs.com
+* [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
