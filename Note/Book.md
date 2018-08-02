@@ -62,7 +62,6 @@
 * 精通Linux设备驱动程序开发
 * Linux命令行与shell脚本编程大全（第3版）
 
-
 ## 编程通用
 
 * 《[编程原本](https://www.amazon.cn/gp/product/B006P7V73G)》
@@ -141,6 +140,8 @@
 * 《大型网站技术架构》
 * 七周七Web开发框架
 * Web性能权威指南
+* 《DOM 启蒙》
+* 《JavaScript DOM 编程艺术》
 
 ### HTML
 
@@ -153,8 +154,10 @@
 ### Javascript
 
 * 《Javascript权威指南》
+* 《JavaScript 语言精粹》
 * 《Javascript高级编程》
 * 《JavaScript高级程序设计(第3版)》
+* 《编写可维护的 JavaScript》
 * 《ES6 标准入门(第2版)》
 * 《深入理解ES6》
 * 《JavaScript异步编程:设计快速响应的网络应用》
@@ -163,6 +166,9 @@
 * 《JavaScript开发框架权威指南》
 * JavaScript函数式编程
 * JS高级程序设计
+* 《JavaScript 框架设计》
+* 《单页 Web 应用: JavaScript 从前端到后端》
+* 《基于 MVC 的 JavaScript Web 富应用开发》
 * 你不知道的javascript
 * 《[高性能 JavaScript](https://www.amazon.cn/gp/product/B013SGB2AO)》
 * 《[锋利的 jQuery（第2版）](https://www.amazon.cn/gp/product/B0089TDFNS)》
@@ -179,6 +185,7 @@
 ### CSS
 
 * 《[CSS 揭秘](https://www.amazon.cn/gp/product/B01ET3FO86)》
+* 《CSS 世界》
 * 《[CSS 设计指南（第3版）](https://www.amazon.cn/gp/product/B00M2DKZ1W)》
 * 《[CSS 权威指南（第3版）](https://www.amazon.cn/gp/product/B0011F5SIC)》
 * 《CSS 禅意花园(修订版)》[css zen garden禅意花园](http://www.csszengarden.com/)
@@ -360,7 +367,7 @@
 * DevOps实践指南
 * 构建高可用Linux服务器（第3版）
 
-## 机器学习和数据挖掘
+## 机器学习
 
 * 《[数据之巅](https://www.amazon.cn/gp/product/B00JUE9DXW)》
 * 《[矩阵分析](https://www.amazon.cn/gp/product/B00NTM5GK0)》
@@ -369,14 +376,22 @@
 * 《[机器学习导论](https://www.amazon.cn/gp/product/B01AG3ZV9K)》
 * 《[推荐系统实践](https://www.amazon.cn/gp/product/B008AK5YJO)》
 * 《[机器学习实战](https://www.amazon.cn/gp/product/B00D747PTK)》
+
+## 数据挖掘
+
+* Introduction to Data Mining（数据挖掘导论）
 * 《[Web数据挖掘](https://www.amazon.cn/gp/product/B00AY830HS)》
 * 《[深入浅出统计学](https://www.amazon.cn/gp/product/B006PHIVNA)》
 * 《[模式分类（第2版）](https://www.amazon.cn/gp/product/B00116C3DY)》
 * 《[概率论与数理统计](https://www.amazon.cn/gp/product/B00264GG56)》
 * 《[统计学习基础(第2版)(英文)](https://www.amazon.cn/gp/product/B00PRH2BXA) 》
-* 《[数据挖掘：概念与技术（第3版）](https://www.amazon.cn/gp/product/B007NR0T4A)》
+* 《Data Mining: Concepts and Techniques[数据挖掘：概念与技术（第3版）](https://www.amazon.cn/gp/product/B007NR0T4A)》
 * 《[数据挖掘：实用机器学习工具与技术（原书第3版）](https://www.amazon.cn/gp/product/B00K5I91WK)》
 * 《[大数据：互联网大规模数据挖掘与分布式处理（第2版）](https://www.amazon.cn/gp/product/B011I34CGA)》
+* Recommender Systems: An introduction（推荐系统）
+* Recommender Systems: The Textbook
+* Sentiment Analysis: Mining Opinions, Sentiments,and Emotions
+* 移动数据挖掘
 
 ## 项目与团队
 
