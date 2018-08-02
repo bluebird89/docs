@@ -1,8 +1,6 @@
-# vim
+# [vim/vim](https://github.com/vim/vim)
 
-brew install MacVim
-
-Vim的一个最大用途是批量修改文件，列模式，正则表达式替换，区域替换，
+The official Vim repository http://www.vim.org Vim的一个最大用途是批量修改文件，列模式，正则表达式替换，区域替换，
 
 ## 安装
 
@@ -493,8 +491,6 @@ r       对单词字符进行替换
 J       合并上下两行
 ```
 
-### Macvim
-
 ## [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim)
 
 Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
@@ -512,11 +508,11 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 
 ## 工具
 
-* [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs):A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim!
 * [coolwanglu/vim.js](https://github.com/coolwanglu/vim.js):JavaScript port of Vim http://coolwanglu.github.io/vim.js/emterpreter/vim.html
+* [junegunn/fzf](https://github.com/junegunn/fzf):🌸 A command-line fuzzy finder
 
 ## 插件
 
 * [cknadler/vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
-* https://github.com/rupa/z
-* https://github.com/rupa/v
+* [rupa/z](https://github.com/rupa/z):z - jump around
+* [rupa/v](https://github.com/rupa/v):z for vim

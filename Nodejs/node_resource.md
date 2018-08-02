@@ -67,6 +67,9 @@
 
 * [NaturalNode/natural](https://github.com/NaturalNode/natural):general natural language facilities for node
 
+## cli
+
+* [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
 
 ## 问题
 

@@ -33,7 +33,11 @@ ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标�
     - HTML DOM 对象
 * 函数
 
-## 基础入门
+## 基础
+
+1. 学习JavaScript
+2. 学习Web API
+3. 学习jQuery(或其他框架/库）
 
 ### 引入方式
 

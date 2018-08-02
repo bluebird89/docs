@@ -40,3 +40,4 @@ C代表Ctrl键，M代表Alt键，RET表示Enter键
 ## 框架
 
 * [manateelazycat/emacs-application-framework](https://github.com/manateelazycat/emacs-application-framework):Emacs application framework
+* [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs):A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim!
