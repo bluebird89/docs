@@ -257,6 +257,16 @@ vi /etc/fstab   #添加以下代码。实现开机自动挂载
 ```sh
 df -T
 grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
+
+# 关机（必须用root用户）
+shutdown -h now  ## 立刻关机
+shutdown -h +10  ##  10分钟以后关机
+shutdown -h 12:00:00  ##12点整的时候关机
+halt   #  等于立刻关机
+
+# 重启
+shutdown -r now
+reboot   # 等于立刻重启
 ```
 
 ## 软件
@@ -373,6 +383,10 @@ cat /etc/issue # 显示的是发行版本信息
 lsb_release -a
 
 date # 获取当前时间
+date +%Y-%m-%d
+date +%Y-%m-%d  --date="-1 day" #加减也可以 month | year
+date -s "2016-07-28 16:12:00" ## 修改时间
+
 uname # 返回系统名称
 hostname # 返回系统的主机名称
 --version/-V # 查看某个程序的版本
@@ -396,26 +410,42 @@ locate /etc/sh(查找 /etc 下所有以 sh 开头的文件)  # 通过/var/lib/ml
 locate /usr/share/\*.jpg # 注意要添加 * 号前面的反斜杠转义，否则会无法找到。
 which man # 使用 which 来确定是否安装了某个指定的软件，因为它只从 PATH 环境变量指定的路径中去搜索命令
 sudo find /etc/ -name interfaces/ 格式find [path] [option] [action] # 不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索。
+
+clear # 清屏
 ```
 
 ### 目录
 
 ```sh
-du命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
-touch:来更改已有文件的时间戳的（比如，最近访问时间，最近修改时间） touch file{1..5}.txt 使用通配符批量创建 5 个文件
-rename:批量重命名,需要用到正则表达式
+du # 命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
+
+ls / # 列出某文件夹下的文件，添加参数可实现更细致的功能，
+ls -a # 列出所有文件，包括隐藏文件
+ls -l # 列出文件及其详细信息(权限)
+tree # 查看文件列表
+
+cd /home.henry | ~ # 切换目录,cd到不存在的目录时会报错
+
+touch # 来更改已有文件的时间戳的（比如，最近访问时间，最近修改时间） touch file{1..5}.txt 使用通配符批量创建 5 个文件
+
+touch  somefile.1  ## 创建一个空文件
+
+echo "hi,boy" > somefile.2  ## 利用重定向“>”的功能，将一条指令的输出结果写入到一个文件中，会覆盖原文件内容，如果指定的文件不存在，则会创建出来
+
+echo "hi baby" >> somefile.2  ## 将一条指令的输出结果追加到一个文件中，不会覆盖原文件内容
+
+rename # 批量重命名,需要用到正则表达式
 rename 's/.txt/.c/' *.txt 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件:
-rename 'y/a-z/A-Z/' *.c 批量将这 5 个文件，文件名改为大写:
-ls:列出某文件夹下的文件，添加参数可实现更细致的功能，
-ls -a 列出所有文件，包括隐藏文件
-ls -l 列出文件及其详细信息(权限)
-tree:查看文件列表
-cd切换目录,cd到不存在的目录时会报错
-pwd打印当前目录
+rename 'y/a-z/A-Z/' *.c 批量将这 5 个文件，文件名改为大写
+
+pwd # 打印当前目录
 mkdir # 创建目录
+mkdir -p father/son/grandson # 新建多级目录
+
+mv  install.log  aaa/  # 将当前目录下的install.log 移动到aaa文件夹中去
+
 rm dir # 删除目录
 rm -rf # r递归删除，f参数表示强制
-mkdir -p father/son/grandson # 新建多级目录
 ```
 
 ### 文件
@@ -474,6 +504,12 @@ lsof -Pni4 | grep LISTEN | grep php
 
 kill -9 pid # 关闭进程
 kill pid
+
+ctrl+c   ## 有些程序也可以用q键退出
+
+ctrl+z   ## 进程会挂起到后台
+bg jobid  ## 让进程在后台继续执行
+fg jobid   ## 让进程回到前台
 ```
 
 ### Network
@@ -616,6 +652,8 @@ unzip -O GBK 中文压缩文件.zip # 使用 -O（英文字母，大写 o）参�
 每次次新建用户如果不指定用户组的话，默认会自动创建一个与用户名相同的用户组； 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限。
 
 ```sh
+who # 查看有谁在线
+last # 查看最近的登陆历史记录
 who am i # 只列出用户名
 who mom likes/who am i # 列出用户名，所使用终端的编号和开启时间；
 finger # 列出当前用户的详细信息，需使用apt-get提前安装；

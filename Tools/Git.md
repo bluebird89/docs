@@ -523,12 +523,12 @@ git push                         # push所有分支
 git push <远程主机名> <本地分支名>:<远程分支名> # 上传本地指定分支到远程仓库. git push origin my:master
 git push [remote] --force # 强行推送当前分支到远程仓库，即使有冲突
 git push [remote] --all # 不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机
-git push origin :master # 省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支
+git push origin master # 省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支
 git push origin --delete master # 表示删除origin主机的master分支
 git push origin branch-name # 从本地推送分支
 git push --force origin  # 如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做git pull合并差异，然后再推送到远程主机。这时，如果你一定要推送，可以使用--force选项
 git push <remote repository name> <branch name> # （第一次 git push -u：-u 选项设置本地分支去跟踪远程对应的分支）
-git push <remote name> <local branch name:remote branch name>
+git push <remote name> <local branch name>:<remote branch name>
 git push [-u] origin master        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库) 设置本地分支与远程分支保持同步，在第一次 git push 的时候带上 -u 参数即可
 git push origin <local_branch>   # 创建远程分支， origin是远程仓库名
 git push origin <local_branch>:<remote_branch>  # 创建远程分支
