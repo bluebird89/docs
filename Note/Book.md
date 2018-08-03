@@ -143,6 +143,10 @@
 * 《DOM 启蒙》
 * 《JavaScript DOM 编程艺术》
 
+## PWA
+
+* [PWA实战：面向下一代的Progressive Web APP](https://github.com/SangKa/PWA-Book-CN):第一本 PWA 中文书 https://item.jd.com/12365091.html
+
 ### HTML
 
 * 《[HTML5 权威指南](https://www.amazon.cn/gp/product/B00H706BIG)》
