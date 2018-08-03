@@ -290,4 +290,4 @@ npm run build --report
 * [webpack：从入门到真实项目配置](https://juejin.im/post/59bb37fa6fb9a00a554f89d2)
 * [petehunt/webpack-howto](https://github.com/petehunt/webpack-howto)
 * [webpack/webpack-dev-server](https://github.com/webpack/webpack-dev-server):Serves a webpack app. Updates the browser on changes.
-
+* [KieSun/webpack-demo](https://github.com/KieSun/webpack-demo):从入门到真实项目配置，每个 commit 基本都对应一小节
