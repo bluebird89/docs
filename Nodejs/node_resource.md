@@ -20,6 +20,7 @@
 * [scotch-io/node-todo](https://github.com/scotch-io/node-todo):A simple Node/MongoDB/Angular todo app https://scotch.io/tutorials/creating-…
 * [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list. Curated from the top ranked articles and always updated
 * [nodejs](https://www.runoob.com/nodejs)
+* [alsotang/node-lessons](https://github.com/alsotang/node-lessons):📕《Node.js 包教不包会》 by alsotang
 
 ## 框架
 
@@ -71,8 +72,12 @@
 
 * [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
 
+## HTTP
+
+* [visionmedia/superagent](https://github.com/visionmedia/superagent):Ajax with less suck - (and node.js HTTP client to match) http://visionmedia.github.io/superagent/
+
 ## 问题
 
-ERROR in Node Sass does not yet support  your current environmen
-
-npm rebuild node-sass
+```sh
+npm rebuild node-sass # ERROR in Node Sass does not yet support  your current environmen
+```
