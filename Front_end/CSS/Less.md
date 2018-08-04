@@ -13,4 +13,3 @@
 ## 参考
 
 * [LESS 语法](http://www.bootcss.com/p/lesscss/)
-* [Sass 基础教程](http://www.sasschina.com/guide/)

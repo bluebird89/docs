@@ -26,6 +26,7 @@
     -   明基爱眼显示器 EW2775ZH
     -   明基 PD2710QC
 -   Nintendo Switch
+    - 新世代
 
 ### 设计
 
@@ -61,13 +62,14 @@
 -   [Bear](http://www.bear-writer.com/):
 -   [Byword](https://metaclassy.com/):简洁，优美，专注于文字。非常棒的写作工具。
 
-## Store
+## 存储 Store
 
 -   [腾讯微云](https://www.weiyun.com/)
 -   [Google Drive](https://drive.google.com/drive/)
     -   [harababurel/gcsf](https://github.com/harababurel/gcsf):a FUSE file system based on Google Drive
 -   [icloud](https://www.icloud.com/)
 -   [juicefs](https://juicefs.io/):为云端设计的 POSIX 共享文件系统
+- 百度云
 
 ## 笔记
 
@@ -370,6 +372,10 @@
 
 -   [Flowerowl/ici](https://github.com/Flowerowl/ici):💥A dictionary used by programmers in the command line https://pypi.python.org/pypi/ici/
 -   [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf):⭐️ 给变量起名的事情上，为你生命省 3s (Save 3 seconds of your life when naming things.)
+
+## 代码
+
+* [aosabook/500lines](https://github.com/aosabook/500lines):500 Lines or Less
 
 ## 参考
 
