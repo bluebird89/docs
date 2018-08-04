@@ -53,6 +53,10 @@ npm install -g angular-cli
 
 ng help
 ng version
+
+ng add <package>
+ng update <package> # 使用正确版本的依赖包
+
 ng new conan1      // 新建项目
 cd conan1
 ng serve  # 启动项目
