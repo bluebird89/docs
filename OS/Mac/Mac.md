@@ -104,16 +104,21 @@ smaba
         -   MWeb Lite
         -   MWeb for Mac
         -   [MacDown](https://github.com/MacDownApp/macdown)Open source Markdown editor for macOS.
+        - Mark Text:实时显示的markdown编辑器
+        - 幕布
     -   Latex
-    -   [MindNode 2](https://mindnode.com/)
     -   Alternote(evernote简单客户端)
-    -   思维导图：MindNode 2（收费）
+    -   思维导图
+        - [MindNode 2](https://mindnode.com/)（收费）
+        - XMind
     -   Quiver：笔记软件
     -   [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
     -   [ulysses](https://ulyssesapp.com/)
     -   [marked2](http://marked2app.com/)
     -   [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
     -   Upad
+- 下载
+    - bitlord
 -   工具
     -   [CheatSheet] 长按⌘键可以显示当前程序快捷键
     -   [flux](https://justgetflux.com/)
@@ -123,6 +128,7 @@ smaba
     -   [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
     -   [beaker](https://beakerbrowser.com/):Beaker is a peer-to-peer browser with tools to create and host websites.
     -   [Helium](http://heliumfloats.com/):A floating browser window for OS X
+    - Android file transfer
 -   Pod
     -   [insidegui/PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
 -   Web开发
@@ -133,7 +139,7 @@ smaba
 -   沟通
     -   [Textual 7](<Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.>)
     -   OmniFocus，OmniOutliner，OmniPlan，OmniGraffle
-    -   -   slack
+    -   slack
     -   [telegram](https://telegram.org/)
     -   weibo:WeiboX
 -   RSS
@@ -167,7 +173,8 @@ smaba
 
     -   修图Snapseed
     -   [Pixave](http://www.littlehj.com/mac/) - Image/GIF/Video organizer
-
+- 录屏
+    - Kap
 -   阅读
     -   ibooks：阅读支持pdf与epub，可以通过icloud同步
     -   iTunes Movie Trailers

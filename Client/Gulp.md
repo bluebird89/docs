@@ -1,4 +1,4 @@
-前端开发流程：
+前端开发流程
 
 # 为什么引入前端构建
 
@@ -207,3 +207,7 @@ module.exports = {
         }
 };
 ```
+
+## 参考
+
+* [前端构建大法 Gulp 系列](http://deshui.wang/%E6%8A%80%E6%9C%AF/2016/01/01/why-need-front-end-build)
