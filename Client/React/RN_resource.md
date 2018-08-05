@@ -115,6 +115,7 @@
 ## 框架
 
 * [kusti8/proton-native](https://github.com/kusti8/proton-native):A React environment for cross platform native desktop apps https://proton-native.js.org
+* [ReactiveX/rxjs](https://github.com/ReactiveX/rxjs):A reactive programming library for JavaScript http://reactivex.io/rxjs
 
 ## 项目
 

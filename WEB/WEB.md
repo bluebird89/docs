@@ -191,6 +191,10 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 
 * [wxyyxc1992/Web-Series](https://github.com/wxyyxc1992/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
 
+## 参考
+
+* [Web](https://developers.google.com/web/)
+
 ## 工具
 
 * [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ https://codesandbox.io

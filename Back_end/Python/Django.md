@@ -123,3 +123,8 @@ Requested setting INSTALLED_APPS, but settings are not configured. You must eith
 * [](https://github.com/django-guardian/django-guardian)
 * [](https://github.com/viewflow/django-material)
 * [](https://github.com/jcalazan/ansible-django-stack)
+
+## 框架
+
+* [encode/django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. ⚡️ https://www.django-rest-framework.org
+

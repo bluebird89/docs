@@ -70,6 +70,7 @@
 -   [icloud](https://www.icloud.com/)
 -   [juicefs](https://juicefs.io/):为云端设计的 POSIX 共享文件系统
 - 百度云
+- 坚果云
 
 ## 笔记
 
@@ -85,13 +86,13 @@
 -   github：代码的整理
 -   Goole keep
 -   notes
--   Boostnote
+-   Boostnote:代码片段笔记
 -   MedleyText
 -   Quiver
 -   OneNote
 -   CherryTree
 -   TickTick
--   [幕布](https://mubu.com/)
+-   [幕布](https://mubu.com/):可折叠的markdown
 
 ## 阅读
 
@@ -248,7 +249,7 @@
 -   看板
     -   [trello](https://trello.com/)
     -   [Leangoo](https://www.leangoo.com/kanban/board_list)
--   Teambition
+-   Teambition:项目管理工具，聊天、文件、看板
 -   Asana asana.com
 -   [meili/TeamTalk](https://github.com/meili/TeamTalk):TeamTalk is a solution for enterprise IM
 
