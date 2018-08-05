@@ -79,9 +79,10 @@
 * [addyosmani/essential-js-design-patterns](https://github.com/addyosmani/essential-js-design-patterns):Repo for my 'Learning JavaScript Design Patterns' book https://addyosmani.com/resources/essentialjsdesignpatterns/book/
 - [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API)
 
-## 绘图
+## 图表
 
 * [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
+* [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js):A JavaScript Chart Library
 
 ## Canvas
 

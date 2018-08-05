@@ -8,7 +8,10 @@ Windows10 LTSB
 
 * [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation https://chocolatey.org/
 * 快速启动:launchy Wox Rolan
-* markdown编辑器: 作业部落 MarkdownPad(需要浏览器渲染插件awesome) MarkPad
+* markdown编辑器
+    - 作业部落
+    - MarkdownPad(需要浏览器渲染插件awesome)
+    - MarkPad
 * 资源管理器: Clover Total Commander
 * 快捷键：AutoHotKey
 * 本地搜索：Listary Everything
@@ -17,7 +20,8 @@ Windows10 LTSB
 * 工具：ShareX
 * 同步工具：goodsync
 * 词典：GoldenDict
-* VirtualBox 虚拟机
+* 虚拟机
+    - VirtualBox
 * vagrant
 * VistaSwitcher：程序切换工具
 * StrokeIt:让鼠标手势无处不在
@@ -32,7 +36,13 @@ Windows10 LTSB
 * Foxit Reader
 * editor：Visual Studio Code
 * Sumatra PDF:pdf 支持 EPUB、MOBI 格式的电子书，以及 XPS、DjVu、CHM
-* 命令行：xshell
+* 命令行
+    - xshell
+    - [msys2](http://www.msys2.org/)
+    - powercmd
+    - [cmder + gow](http://bliker.github.io/cmder/)
+    - git bash
+    - [Babun](http://babun.github.io/)
 * 电子书管理神器：Calibre
 * CCleaner, Defraggler, Recuva & Speccy.
 * Evernote
@@ -191,6 +201,31 @@ ipconfig /flushdns：刷新域名
 - CTRL+鼠标左键，拖动文件、文件夹都可以立马生成文件对应的副本
 - Win+T to cycle through the taskbar icons
 - Win + d：删除文件
+
+
+### [cmder + gow](http://bliker.github.io/cmder/)
+
+* 添加到环境变量
+* 快捷键
+  - 双Tab，用于补全
+  - Ctrl+T，建立新页
+  - Ctrl+W，关闭标签页
+  - Ctrl+Tab，切换标签页
+  - Alt+F4，关闭所有标签页
+  - Ctrl+1，切换到第一个页签，Ctrl+2同理
+  - Alt + enter，切换到全屏状态
+
+```
+# 修改配置文件 vendor/init.bat
+@prompt $E[1;32;40m$P$S{git}{hg}$S$_$E[1;30;40m{lamb}$S$E[0m # 修改前
+@prompt $E[1;32;40m$P$S{git}{hg}$S$_$E[1;30;40m $$ $S$E[0m #修改后
+
+# 配置aliases：cmder->config->aliases
+l=ls --show-control-chars
+la=ls -aF --show-control-chars
+ll=ls -alF --show-control-chars
+ls=ls --show-control-chars -F
+```
 
 ### MarkdownPad
 

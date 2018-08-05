@@ -1,5 +1,6 @@
-# Bluma
+# [jgthms/bulma](https://github.com/jgthms/bulma)
 
+Modern CSS framework based on Flexbox https://bulma.io
 
 ##  参考
 

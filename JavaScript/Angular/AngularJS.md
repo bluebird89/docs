@@ -55,6 +55,7 @@ ng help
 ng version
 
 ng add <package>
+ng add @angular/pwa
 ng update <package> # 使用正确版本的依赖包
 
 ng new conan1      // 新建项目

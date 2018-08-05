@@ -1355,6 +1355,7 @@ chown -R henry:henry .git/objects
 * [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
 * [conventional-changelog/conventional-changelog](https://github.com/conventional-changelog/conventional-changelog):Generate a changelog from git metadata.
 * [pstadler/keybase-gpg-github](https://github.com/pstadler/keybase-gpg-github):Step-by-step guide on how to create a GPG key on keybase.io, adding it to a local GPG setup and use it with Git and GitHub.
+* [jesseduffield/lazygit](https://github.com/jesseduffield/lazygit):simple terminal UI for git commands
 
 ## 参考
 
