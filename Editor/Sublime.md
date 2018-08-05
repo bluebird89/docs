@@ -118,11 +118,7 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
     -   @ 符号跳转：输入 @symbol 跳转到 symbol 符号所在的位置 Ctrl+R
     -   \# 关键字跳转：输入 #keyword 跳转到 keyword 所在的位置
     -   : 行号跳转：输入 :12 跳转到文件的第12行。 Ctrl+G
-
-
 -   ⌘K, ⌘B 隐藏/打开 侧边栏| Toggle side bar
-
-
 -   set syntax php：设置高亮语言语法
 -   html：ctrl+alt+h php注释 html:5
 -   javascript：ctrl+alt+j
@@ -456,7 +452,7 @@ Snippet可以存储在任何的文件夹中, 并且以.sublime-snippet为文件�
 -   fields:通过tab键循环的改变代码片段的一些值
 -   snippet镜像区域,会使相同编号的位置同时进行编辑:系统$n -snippet Placeholders:添加默认值，占位符设置嵌套
 
-
+```
     <snippet>
        <content><![CDATA[
     =================================
@@ -480,6 +476,7 @@ Snippet可以存储在任何的文件夹中, 并且以.sublime-snippet为文件�
         <!-- Optional: Set a scope to limit where the snippet will trigger -->
         <scope>source.python</scope>
     </snippet>
+```
 
 ### 配置同步
 
