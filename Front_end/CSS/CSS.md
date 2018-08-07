@@ -257,3 +257,4 @@ h1{
 * [sindresorhus/modern-normalize](https://github.com/sindresorhus/modern-normalize):Normalize browsers' default style
 * [30 Seconds of CSS](https://atomiks.github.io/30-seconds-of-css/#box-sizing-reset)
 * [Jxnblk](https://jxnblk.com/)
+* [五个最新的CSS特性以及如何使用它们](https://zhuanlan.zhihu.com/p/40736286)

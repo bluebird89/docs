@@ -1405,6 +1405,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [Ucer/ucer-admin](https://github.com/Ucer/ucer-admin)
 * [Algolia](https://www.algolia.com/doc/api-client/laravel/algolia-and-scout/):Algolia is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke
 * [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth):🔐 JSON Web Token Authentication for Laravel & Lumen http://jwt-auth.com
+* [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
 
 ## 参考
 
@@ -1418,6 +1419,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)
 * [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
 * [Laravel5.5 + Vue开发单页应用](http://www.laravel-vue.xyz/2018/03/22/laravel_vue_v2/)
+* [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
 <https://laravel-china.org/articles/2020/ten-laravel-5-program-optimization-techniques> <https://blog.tanteng.me/2016/06/laravel-optimize/>
 
 ## 文档
@@ -1440,6 +1442,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [codex-project/codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! http://codex-project.ninja
 * [spatie/laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
 * [FrozenNode/Laravel-Administrator](https://github.com/FrozenNode/Laravel-Administrator):An administrative interface package for Laravel http://administrator.frozennode.com/
+* [laravel/valet](https://github.com/laravel/valet)
 
 ## 教程
 
@@ -1520,11 +1523,3 @@ php artisan jwt:secret # 使用
 ## 问题
 
 Call to undefined function openssl_encrypt() # 开启OpenSSL扩展
-
-## 工具
-
-* [laravel/valet](https://github.com/laravel/valet)
-
-## 参考
-
-* [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
