@@ -274,7 +274,13 @@ npm run build --report
 
 ## 部署
 
+## 问题
 
+Parsing error: The keyword 'import' is reserved
+
+"parserOptions": {
+    "sourceType": "module"
+  }
 
 ## 参考
 

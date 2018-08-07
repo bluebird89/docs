@@ -2366,6 +2366,9 @@ HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘�
     var gl = canvas.getContext("webgl");
 </script>
 ```
+## 事件
+
+* window.onpopstate
 
 ### 错误处理
 
