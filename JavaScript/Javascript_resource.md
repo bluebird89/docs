@@ -114,3 +114,4 @@
 * [standard/standard](https://github.com/standard/standard):🌟 JavaScript Style Guide, with linter & automatic code fixer https://standardjs.com
 * JSHint
 * JSLint
+* [eslint/eslint](https://github.com/eslint/eslint):A fully pluggable tool for identifying and reporting on patterns in JavaScript https://eslint.org
