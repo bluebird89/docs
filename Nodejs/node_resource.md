@@ -35,6 +35,10 @@
 * [swbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
 * [Node.js v8.x 中文文档](https://www.nodeapp.cn/)
 
+## 语法检测
+
+* [eslint/eslint](https://github.com/eslint/eslint):A fully pluggable tool for identifying and reporting on patterns in JavaScript https://eslint.org
+
 ## 项目
 
 * [bailicangdu/node-elm](https://github.com/bailicangdu/node-elm):基于 node.js + Mongodb 构建的后台系统
