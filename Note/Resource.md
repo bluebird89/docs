@@ -189,6 +189,7 @@
     -   UC San Diego Podcast Lectures — 圣地亚哥大学的视频、音频资源。
     -   University of the People — 这是一间免学费的线上大学。
     -   NovoEd — 学习 NovoEd 的课程，成为未来的领袖！
+    - [Parallel & Distributed Operating Systems Group ](https://pdos.csail.mit.edu/)
 -   语言
     -   Duolingo — 中文名「多邻国」，据说学习方式非常有效。我感觉它的 app 设计得不错。主要推荐英语和别的欧洲语言。
     -   Memrise — Memrise 的教程由许多简短的课程组成，比如日语五十音、德语基础、SAT 备考等。用游戏化的概念学习语言。
