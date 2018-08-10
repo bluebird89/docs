@@ -166,3 +166,6 @@
 [submodule "Resource/awesome"]
 	path = Resource/awesome
 	url = git@github.com:sindresorhus/awesome.git
+[submodule "WEB/Web-Series"]
+	path = WEB/Web-Series
+	url = git@github.com:wxyyxc1992/Web-Series.git

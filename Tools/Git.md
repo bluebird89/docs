@@ -1018,7 +1018,7 @@ git submodule 主要用来管理一些单向更新的公共模块或底层逻辑
 git submodule add git@domain.com:another_project.git file_path/another_project
 
 # 更新 repo 下所有的 submodules
-git submodule foreach git pull
+git submodule foreach git pull # 出错后会停止更新后面
 
 # clone后初始化
 git submodule init
