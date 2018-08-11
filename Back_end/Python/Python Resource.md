@@ -22,6 +22,7 @@
 * conda：跨平台，Python 二进制包管理工具。[官网](https://github.com/conda/conda/)
 * Curdling：管理 Python 包的命令行工具。[官网](http://clarete.li/curdling/)
 * wheel：Python 分发的新标准，意在取代 eggs。[官网](http://pythonwheels.com/)
+* Pipenv
 
 ## 包仓库
 
@@ -86,6 +87,7 @@
 * PyTime：一个简单易用的Python模块，用于通过字符串来操作日期/时间。[官网](https://github.com/shinux/PyTime)
 * pytz：现代以及历史版本的世界时区定义。将时区数据库引入Python。[官网](https://launchpad.net/pytz)
 * when.py：提供用户友好的函数来帮助用户进行常用的日期和时间操作。[官网](https://github.com/dirn/When.py)
+* Pendulum：可以轻松地将其与现有代码集成，并且只有在需要时才能使用其功能
 
 ## 文本处理
 
@@ -197,6 +199,7 @@
   - Gooey：一条命令，将命令行程序变成一个 GUI 程序。[官网](https://github.com/chriskiehl/Gooey)
   - python-prompt-toolkit：一个用于构建强大的交互式命令行程序的库。[官网](https://github.com/jonathanslenders/python-prompt-toolkit)
   - [Pythonpy](http://hao.jobbole.com/pythonpy/)：在命令行中直接执行任何Python指令。[官网](https://github.com/Russell91/pythonpy/wiki)
+  - Fire是一个开源的库，可以为任何Python项目自动生成一个CLI
 * 生产力工具
   - aws-cli：Amazon Web Services 的通用命令行界面。[官网](https://github.com/aws/aws-cli)
   - bashplotlib：在终端中进行基本绘图。[官网](https://github.com/glamp/bashplotlib)
@@ -237,6 +240,8 @@
 * scikit-image：一个用于（科学）图像处理的 Python 库。[官网](http://scikit-image.org/)
 * thumbor：一个小型图像服务，具有剪裁，尺寸重设和翻转功能。[官网](https://github.com/thumbor/thumbor)
 * wand：[MagickWand](http://www.imagemagick.org/script/magick-wand.php)的Python 绑定。MagickWand 是 ImageMagick的 C API 。[官网](https://github.com/dahlia/wand)
+* PyVips
+* Luminoth：一个使用TensorFlow和Sonnet构建的用于计算机视觉的开源Python工具包。目前，它可以支持被称为Faster R-CNN的模型的形式进行对象检测。
 
 ## OCR
 
@@ -570,6 +575,7 @@ Python实现的数据库。
 * portia：Scrapy 可视化爬取。[官网](https://github.com/scrapinghub/portia)
 * pyspider：一个强大的爬虫系统。[官网](https://github.com/binux/pyspider)
 * RoboBrowser：一个简单的，Python 风格的库，用来浏览网站，而不需要一个独立安装的浏览器。[官网](https://github.com/jmcarp/robobrowser)
+* Requestium：从请求开始并无缝地切换到使用Selenium，它可以作为一个请求的直接替换
 
 ## 网页内容提取
 
@@ -870,6 +876,7 @@ Python实现的数据库。
 * SymPy：一个用于符号数学的 Python 库。[官网](https://github.com/sympy/sympy)
 * zipline：一个 Python 算法交易库。[官网](https://github.com/quantopian/zipline)
 * [Bayesian-belief-networks](http://hao.jobbole.com/bayesian-belief-networks/)：优雅的贝叶斯信念网络框架。[官网](https://github.com/eBay/bayesian-belief-networks)
+* PyFlux：一个专门为时间序列而开发的 Python开源库
 
 ## 数据可视化
 
@@ -886,6 +893,7 @@ Python实现的数据库。
 * vincent：把 Python 转换为 Vega 语法的转换工具。[官网](https://github.com/wrobstory/vincent)
 * VisPy：基于 OpenGL 的高性能科学可视化工具。[官网](http://vispy.org/)
 * [Seaborn](https://seaborn.pydata.org/):基于 matplotlib 库的高级 API
+* Dash近：一个用于构建Web应用程序的开源库，尤其是在纯Python语言中利用数据可视化的Web应用程序。它建立在Flask，Plotly.js和React 之上，并提供了接口
 
 ## 计算机视觉
 
@@ -916,11 +924,13 @@ Python实现的数据库。
 ## 深度学习
 
 * [TensorFlow](https://www.tensorflow.org/)
-* [PyTorch](https://pytorch.org/)
+* [PyTorch](https://pytorch.org/)：更适合研究
 * 分布式
   - [Dist-keras](http://joerihermans.com/work/distributed-keras/)
   - [elephas](https://pypi.org/project/elephas/)
   - [spark-deep-learnin](https://databricks.github.io/spark-deep-learning/site/index.html)
+* Caffe2：支持分布式训练、部署，支持最新的CPU和CUDA的硬件，适合大规模部署
+* skorch：一个封装，可以通过类似sklearn的接口提供PyTorch编程
 
 ## MapReduce
 

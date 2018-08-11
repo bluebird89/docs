@@ -31,24 +31,26 @@
 * 《[计算机程序的构造和解释（Structure and Interpretation of Computer Programs）](https://www.amazon.cn/gp/product/B0011AP7RY)》
 * 《[编码：隐匿在计算机软硬件背后的语言](https://www.amazon.cn/gp/product/B009RSXIB4)》
 * 《[性能之颠：洞悉系统、企业与云计算](https://www.amazon.cn/gp/product/B0140I5WPK)》
-* 《[UNIX网络编程 卷1：套接字联网API（第3版）](https://www.amazon.cn/gp/product/B011S72JB6)》
-* 《[UNIX网络编程 卷2：进程间通信](https://www.amazon.cn/gp/product/B012R5A29O)》
 * 《[Windows核心编程(第5版)](https://www.amazon.cn/gp/product/B001GS7918)》
 * 《[WireShark网络分析就这么简单](https://www.amazon.cn/gp/product/B00PB5QQ84)》
 * 《[WireShark网络分析的艺术](https://www.amazon.cn/gp/product/B01AS1OS8A)》
-* 《[UNIX编程环境](https://www.amazon.cn/gp/product/B00IYTQBYS/)》
-* 《[UNIX环境高级编程](https://www.amazon.cn/gp/product/B00KMR129E)》
-* 《UNIX操作系统设计》
 * 《计算机程序设计艺术（The Art of Computer Programming）》
 * 《编译原理》
 * 《编码:隐匿在计算机软硬件背后的语言CODE: The Hidden Language of Computer Hardware and Software》
 * 《设计模式 可复用面向对象软件的基础》
 * 《现代操作系统(原书第3版) 》
 * 《操作系统:精髓与设计原理(原书第6版)》
-* 《uinx网络高级编程》
 
-## Linux
+## Linux / Unix
 
+* 《[UNIX网络编程 卷1：套接字联网API（第3版）](https://www.amazon.cn/gp/product/B011S72JB6)》
+* 《[UNIX网络编程 卷2：进程间通信](https://www.amazon.cn/gp/product/B012R5A29O)》
+* 《[UNIX编程环境](https://www.amazon.cn/gp/product/B00IYTQBYS/)》
+* 《[Unix 环境高级编程(第3版)](https://www.amazon.cn/gp/product/B00KMR129E)》
+* Unix/Linux 编程实践教程》
+* 《UNIX操作系统设计》
+* 《unix网络高级编程》
+* 《Linux/Unix 系统编程手册》
 * 《[深入理解Linux内核](https://www.amazon.cn/gp/product/B0011F5RYM)》
 * 《[深入Linux内核架构](https://www.amazon.cn/gp/product/B003QN7J7U)》
 * [Linux系统编程（第2版）](https://www.amazon.cn/gp/product/B00JUM2ML4)》
@@ -61,6 +63,7 @@
 * 嵌入式Linux基础教程(第2版)
 * 精通Linux设备驱动程序开发
 * Linux命令行与shell脚本编程大全（第3版）
+* 《只是为了好玩 : Linux 之父林纳斯自传》
 
 ## 编程通用
 
@@ -100,10 +103,10 @@
 * 《[数据结构与算法分析 : C语言描述（第2版）](https://www.amazon.cn/gp/product/B002WC7NGS)》
 * 《[数据结构与算法分析 : Java语言描述（第2版）](https://www.amazon.cn/gp/product/B01CNP0CG6)》
 * 《数据结构与算法 JavaScript 描述》
-* 图灵程序设计丛书:算法(第4版)
 
 ## 设计
 
+* 《设计原本》
 * 《写给大家看的设计书》：界面设计
 * 通用设计法则：交互设计
 * 《[精益设计：设计团队如何改善用户体验](https://book.douban.com/subject/24896848/)》
@@ -154,18 +157,15 @@
 * 《[HTML5 与 CSS3 基础教程（第八版）](https://www.amazon.cn/gp/product/B00K58535O)》
 * HTML 5从入门到精通
 * 《Head First HTML 与 CSS (第2版)》
+* 《深入浅出 HTML 与 CSS》
 
 ### Javascript
 
-* 《Javascript权威指南》
-* 《JavaScript 语言精粹》
 * 《Javascript高级编程》
 * 《JavaScript高级程序设计(第3版)》
 * 《编写可维护的 JavaScript》
-* 《ES6 标准入门(第2版)》
+* 《ES6 标准入门(第3版)》
 * 《深入理解ES6》
-* 《JavaScript异步编程:设计快速响应的网络应用》
-* 《JavaScriptDOM 编程艺术》
 * 《JavaScript设计模式》
 * 《JavaScript开发框架权威指南》
 * JavaScript函数式编程
@@ -180,11 +180,13 @@
 * 《[编写可维护的 JavaScript](https://www.amazon.cn/gp/product/B00BQ7RMW0)》
 * 《[你不知道的 JavaScript（上）](https://www.amazon.cn/gp/product/B00W34DZ8K)》
 * 《[JavaScript 权威指南（第6版）](https://www.amazon.cn/gp/product/B007VISQ1Y)》
-* 《[JavaScript 语言精粹（修订版）](https://www.amazon.cn/gp/product/B0097CON2S)》
+* 《[JavaScript 语言精粹](https://www.amazon.cn/gp/product/B0097CON2S)》
 * 《[JavaScript DOM编程艺术 （第2版）](https://www.amazon.cn/gp/product/B004VJM5KE)》
 * 《[JavaScript 高级程序设计（第3版）](https://www.amazon.cn/gp/product/B007OQQVMY)》
 * 《[JavaScript 异步编程：设计快速响应的网络应用](https://www.amazon.cn/gp/product/B00JVLEYY2)》
 * 《[Effective JavaScript：编写高质量JavaScript代码的68个有效方法](https://www.amazon.cn/gp/product/B00GMXI1QY)》
+* 《JavaScript设计模式与开发实践》
+* 《Effective JavaScript：编写高质量JavaScript代码的68个有效方法》
 
 ### CSS
 
@@ -300,6 +302,7 @@
 
 ## SQL
 
+* 《数据库系统实现》
 * 《SQL基础教程》
 * 《[SQL应用重构](https://www.amazon.cn/gp/product/B00H6X6M1A)》
 * 《[SQL Cookbook](https://www.amazon.cn/gp/product/0596009763)》
@@ -317,6 +320,7 @@
 
 ## 架构/性能
 
+* 《架构即未来》
 * 《[微服务设计](https://www.amazon.cn/gp/product/B01ER75V6O)》
 * 《[大数据日知录](https://www.amazon.cn/gp/product/B00NGW4EAG)》
 * 《[企业应用架构模式](https://www.amazon.cn/gp/product/B003LBSRDM)》
@@ -340,6 +344,7 @@
 
 * 《[Android编程权威指南（第2版）](https://www.amazon.cn/gp/product/B01FSXCBOQ)》
 * 《[移动应用UI设计模式（第2版）](https://www.amazon.cn/gp/product/B00SFZGX08)》
+* 《Android开发艺术探索》
 
 ### iOS
 
@@ -406,6 +411,7 @@
 * 《[人件（原书第3版）](https://www.amazon.cn/gp/product/B00MO7R1SG)》
 * 《[门后的秘密：卓越管理的故事](https://www.amazon.cn/gp/product/B00CBBKRQ8)》
 * 《[极客与团队：软件工程师的团队生存秘笈](https://www.amazon.cn/gp/product/B00BLZMG8W)》
+* 《硝烟中的 Scrum 和 XP》
 
 ## 项目管理
 
@@ -610,6 +616,8 @@
     - 天亦有情
     - 纵横四海
     - 我的前半生
+* 阿特拉斯耸耸肩
+* 巴浦洛夫的狗
 
 ## 文学
 
