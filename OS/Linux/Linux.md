@@ -239,22 +239,32 @@ ip addr # 查看IP地址
 
 ### 镜像挂载
 
+所有存储设备都必须挂载使用，包括硬盘
+
+* /dev/sda1      第一个scsi硬盘的第一分区
+* /dev/cdrom     光盘
+* /dev/hdc       IDE硬盘   centos 5.5
+* /dev/sr0       光盘      centos 6.x
+
 ```sh
-mkdir /media/cdrom  #新建镜像文件挂载目录
+mkdir /media/cdrom  # 新建镜像文件挂载目录
 cd /usr/local/src  #进入系统镜像文件存放目录
-ls  #列出目录文件，可以看到刚刚上传的系统镜像文件
-mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom #挂载系统镜像
-cd  /media/cdrom  #进入挂载目录，使用ls命令可以看到已经有文件存在了
+ls  # 列出目录文件，可以看到刚刚上传的系统镜像文件
 
-umount  /media/cdrom  #卸载系统镜像
+mount -t 文件系统 设备描述文件 挂载点（已经存在空目录） # 挂载系统镜像
+mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom
+cd  /media/cdrom  # 进入挂载目录，使用ls命令可以看到已经有文件存在了
 
-vi /etc/fstab   #添加以下代码。实现开机自动挂载
+umount  /media/cdrom  # 卸载系统镜像 退出挂载目录，才能卸载
+
+vi /etc/fstab   # 添加以下代码。实现开机自动挂载
 /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom   iso9660    defaults,ro,loop  0 0
 ```
 
 ## 硬件
 
 ```sh
+fdisk -l 查看设备名
 df -T
 grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
 
@@ -265,7 +275,7 @@ shutdown -h 12:00:00  ##12点整的时候关机
 halt   #  等于立刻关机
 
 # 重启
-shutdown -r now
+shutdown -r now  # 关机/重启 -h:关机 -r:重启
 reboot   # 等于立刻重启
 ```
 
@@ -371,12 +381,36 @@ www   localhost.localdomain  #修改localhost.localdomain为www
 * vscode
 * shadowshocks
 
+
+## terminal快捷键
+
+```
+cmmand + d:新开同框分屏
+Ctrl+d:键盘输入结束或退出终端
+Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行
+Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg
+
+Ctrl+a:将光标移至输入行头，相当于Home键
+Ctrl+e:将光标移至输入行末，相当于End键
+
+Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用
+Alt+Backspace:向前删除一个单词，常配合ctrl+e使用
+
+Shift+PgUp:将终端显示向上滚动
+Shift+PgDn:将终端显示向下滚动
+
+clear|ctrl+l # 清屏
+```
+
 ## 指令
 
-```sh
-ctrl+d # 关闭终端
+/usr/bin/
+/bin/
+/sbin/
 
+```sh
 # 查看linux系统信息
+hostname # 返回系统的主机名称
 uname -a # 显示电脑以及操作系统的相关信息
 cat /proc/version # 说明正在运行的内核版本
 cat /etc/issue # 显示的是发行版本信息
@@ -387,12 +421,10 @@ date +%Y-%m-%d
 date +%Y-%m-%d  --date="-1 day" #加减也可以 month | year
 date -s "2016-07-28 16:12:00" ## 修改时间
 
-uname # 返回系统名称
-hostname # 返回系统的主机名称
 --version/-V # 查看某个程序的版本
 history # 显示历史
-help # 用于显示 shell 内建命令的简要帮助信息 help exit
-man
+--help # 用于显示 shell 内建命令的简要帮助信息 help exit
+man # 查看命令的帮助
 info ls
 
 cal # 日历
@@ -400,18 +432,20 @@ cal # 日历
 # 修改时区
 sudo tzselect
 sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
-
 sudo vi /etc/timezone # 改为Asia/Shanghai
 
 # 搜索
-whereis who  # 只能搜索二进制文件(-b)，man 帮助文件(-m)和源代码文件(-s)
+whereis |  who  # 查找命令的命令，同时看到帮助文档位置 只能搜索二进制文件(-b)，man 帮助文件(-m)和源代码文件(-s)
 where||type composer
 locate /etc/sh(查找 /etc 下所有以 sh 开头的文件)  # 通过/var/lib/mlocate/mlocate.db数据库查找，不过这个数据库也不是实时更新的，系统会使用定时任务每天自动执行 updatedb 命令更新一次，所以有时候你刚添加的文件，它可能会找不到
 locate /usr/share/\*.jpg # 注意要添加 * 号前面的反斜杠转义，否则会无法找到。
 which man # 使用 which 来确定是否安装了某个指定的软件，因为它只从 PATH 环境变量指定的路径中去搜索命令
-sudo find /etc/ -name interfaces/ 格式find [path] [option] [action] # 不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索。
 
-clear # 清屏
+sudo find /etc/ -name interfaces/ 格式find [path] [option] [action] # 可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索 -name 文件名:按照文件名查找 -user 用户名:按照属主用户名查找文件 -group 组名:按照属组组名查找文件 -nouser:找没有属主的文件 (除了这三个文件：/proc、/sys、/mnt/cdrom) -size:按照文件大小k M  如：find / -size +50k -type:按照文件类型查找(f=普通  d=目录  l=链接) -perm:按照权限查找  如：find /root -perm 644 -iname:按照文件名查找，不区分大小写
+
+grep -i "root" /etc/passwd # 查找符合条件的字串   -v:反向选择 -i:忽略大小写
+
+命令1 | 命令2   # 管道符:命令1的执行结果，作为命令2的执行条件
 ```
 
 ### 目录
@@ -419,33 +453,30 @@ clear # 清屏
 ```sh
 du # 命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
 
-ls / # 列出某文件夹下的文件，添加参数可实现更细致的功能，
-ls -a # 列出所有文件，包括隐藏文件
-ls -l # 列出文件及其详细信息(权限)
+ls -a|l|h|d directory # list 列出某文件夹下的文件，添加参数可实现更细致的功能  -a:列出所有文件，包括隐藏文件 -l:列出文件及其详细信息 -h:文件大小 -d:显示目录本身
+# -rw-------    1   root    root    1190    08-10 23:37     anaconda-ks.cfg 长格式实例： 权限位 引用计数 属主、组 大小 最后修改时间
 tree # 查看文件列表
 
-cd /home.henry | ~ # 切换目录,cd到不存在的目录时会报错
+cd /home/henry|~|..|../.. # change directory 通过相对路径、绝对路径切换目录,cd到不存在的目录时会报错
 
-touch # 来更改已有文件的时间戳的（比如，最近访问时间，最近修改时间） touch file{1..5}.txt 使用通配符批量创建 5 个文件
-
+touch # 创建空文件 或 修改文件时间 touch file{1..5}.txt 使用通配符批量创建 5 个文件
 touch  somefile.1  ## 创建一个空文件
 
 echo "hi,boy" > somefile.2  ## 利用重定向“>”的功能，将一条指令的输出结果写入到一个文件中，会覆盖原文件内容，如果指定的文件不存在，则会创建出来
-
 echo "hi baby" >> somefile.2  ## 将一条指令的输出结果追加到一个文件中，不会覆盖原文件内容
 
 rename # 批量重命名,需要用到正则表达式
 rename 's/.txt/.c/' *.txt 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件:
 rename 'y/a-z/A-Z/' *.c 批量将这 5 个文件，文件名改为大写
 
-pwd # 打印当前目录
-mkdir # 创建目录
-mkdir -p father/son/grandson # 新建多级目录
+pwd # print working directory 打印当前目录
+mkdir # make directories 创建目录
+mkdir -p father/son/grandson # 递归创建
 
-mv  install.log  aaa/  # 将当前目录下的install.log 移动到aaa文件夹中去
+mv  sourcefile  destinationDirectory|desalinationFile  #  移动文件、文件重命名 将当前目录下的install.log 移动到aaa文件夹中去
 
-rm dir # 删除目录
-rm -rf # r递归删除，f参数表示强制
+rmdir # remove empty directories 删除目录
+rm -rf directory # r递归删除，f参数表示强制
 ```
 
 ### 文件
@@ -458,25 +489,25 @@ FHS包含两层规范：
 * 针对 /usr 及 /var 这两个目录的子目录来定义。例如 /var/log 放置系统登录文件，/usr/share 放置共享数据等等。
 
 ```sh
-# -r-xr-x---
-
-cat # 读取某一个文件内的内容
 wc # 获取某一个文件的行数和字数`wc package.json`
-cp # 复制某文件 -r
+cp -r|p|d|a 源文件 目标位置/目标名称 # 复制文件或目录  r:复制目录 p:连带文件属性一起复制 -d:源文件是链接文件，则复制链接属性 a:相当于pdr
 
-mv # 移动文件、文件重命名
 sort # 排序
 diff # 比较两个文件的异同
 
-cat # 打印文件内容到标准输出(正序)
+cat -n file # 查看文件内容，从头到尾的内容 -n:列出行号
 tac # 打印文件内容到标准输出(逆序)
-more # 比较简单，只能向一个方向滚动,查看文件：打开后默认只显示一屏内容，终端底部显示当前阅读的进度。可以使用 Enter 键向下滚动一行，使用 Space 键向下滚动一屏，按下 h 显示帮助，q 退出。
+more file # 分屏显示文件内容,终端底部显示当前阅读的进度。可以使用 Enter 键向下滚动一行，使用 Space 键向上滚动一屏，按下 h 显示帮助，q 退出。
 file /bin/ls # 查看文件类型
-head # 查看文件的头几行（默认10行）
+head  -n 20|-20 file # 显示文件头几行(默认显示10行)
 tail -n 1 /etc/passwd # 查看文件的尾几行（默认10行）
 tail -f file
 
-cat file >> another file #
+cat file >> another file # 文件追加
+
+ln -s 源文件 目标文件 创建链接文件 (文件名都必须写绝对路径) # 链接文件相当于快捷方式
+
+psketch
 ```
 
 * `dd if=/dev/zero of=virtual.img bs=1M count=256` 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
@@ -515,6 +546,9 @@ fg jobid   ## 让进程回到前台
 ### Network
 
 ```sh
+ping -c 次数 ip # 测试网络畅通性
+ifconfig # 查询本机网络信息
+
 sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
 
 sudo ufw allow 'Nginx HTTP'
@@ -580,9 +614,8 @@ Ubuntu具体说来，它默认提供七个终端，其中第一个到第六个�
 
 ```sh
 etc/passwd
-
-chown [-R] [帐号名称] [文件或目录]
-chown [-R] [帐号名称]:[群组名称] [文件或目录]
+useradd 用户名 # 添加用户
+passwd 用户名  # 设定用户密码
 
 etc/group
 chgrp [-options] [群组名] [文档路径]
@@ -602,30 +635,22 @@ chgrp [-options] [群组名] [文档路径]
 
 一个目录同时具有读权限和执行权限才可以打开并查看内部文件，而一个目录要有写权限才允许在其中创建其它文件，这是因为目录文件实际保存着该目录里面的文件的列表等信息。
 
-* readable 读权限：可以使用 `cat <file name>` 之类的命令来读取某个文件的内容
-* writable 写权限，表示你可以编辑和修改某个文件
-* excutable执行权限，通常指可以运行的二进制程序文件或者脚本文件(Linux 上不是通过文件后缀名来区分文件的类型)
+* readable 读权限4：读取文件内容|查询目录下文件名 如：cat、more、head、tail ls
+* writable 写权限2，编辑、新增、修改文件内容|修改目录结构的权限
+* excutable执行权限1，通常指可以运行的二进制程序文件或者脚本文件(Linux 上不是通过文件后缀名来区分文件的类型)|可以进入目录
 * 所有者权限，所属用户组权限，是指你所在的用户组中的所有其它用户对于该文件的权限
 
 ```sh
-chmod 700 iphone6
-sudo chown zhangwang /etc/apt/sources.list
+# -r-xr-x---
 
-chmod | u g o a | +（加入） -（除去） =（设置） | r w x | 文档路径
+chmod 755 test # change the permissions mode of a file 修改权限  赋予一个shell文件test.sh可执行权限，拥有者可读、写、执行，群组账号和其他人可读、执行。
+chmod  u g o a | +（加入） -（除去） =（设置） | r w x | 文档路径
 
-chmod u=rwx,g=rwx,o=rwx test
-chmod ugo=rwx test
-chmod a=rwx test
+chmod u=rwx,g+rwx,o-rwx test
 
-chmod u-x,g-x,o-x test
-chmod ugo-x test
-chmod a-x test
-
-chmod u+x,g+x,o+x test
-chmod ugo+x test
-chmod a+x test
-
-chmod 755 test # 赋予一个shell文件test.sh可执行权限，拥有者可读、写、执行，群组账号和其他人可读、执行。
+sudo chown user1:user1 /etc/apt/sources.list # 修改文件的属主或属组 change file ownership
+chown [-R] [帐号名称] [文件或目录]
+chown [-R] [帐号名称]:[群组名称] [文件或目录]
 ```
 
 ### 压缩
@@ -645,6 +670,15 @@ zip -r -l -o shiyanlou.zip /home/shiyanlou   # 解决windows和linux对换行的
 
 unzip -q shiyanlou.zip -d ziptest   # 静默且指定解压目录，目录不存在会自动创建
 unzip -O GBK 中文压缩文件.zip # 使用 -O（英文字母，大写 o）参数指定编码类型
+
+tar -zcvf 压缩文件名 源文件 # 压缩/解压 同时打包 -z:识别.gz格式  -c:压缩  -v:显示压缩过程  -f:指定压缩包名
+tar -zxvf  压缩文件名   # 解压缩同时解打包
+
+tar -jcvf 压缩文件名 源文件   # 压缩同时打包
+tar -jxvf aa.tar.bz2  /tmp/ # 解打包同时解压缩
+
+tar -ztvf aa.tar.gz  # 查看不解压
+tar -jtvf aa.tar.bz2 # -t  只查看，不解压
 ```
 
 ### 用户管理
@@ -768,39 +802,13 @@ sudo apt-get install google-chrome-stable
 
 启动目录： /etc/rc.d/rc[0~6].d 命令行脚本文件：/etc/init.d/ 本地文件：/etc/rc.local 添加 /etc/init.d/nginx start
 
-- 提高电池的寿命并且减少过热
 
-  ```sh
-  sudo add-apt-repository ppa:linrunner/tlp
-  sudo apt-get update
-  sudo apt-get install tlp tlp-rdw
-  sudo tlp start
-  ```
-
-## 命令行
-
-```
-Ctrl+d:键盘输入结束或退出终端（常用）;
-Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
-Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
-Ctrl+a:将光标移至输入行头，相当于Home键;
-Ctrl+e:将光标移至输入行末，相当于End键;
-Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
-Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
-Shift+PgUp:将终端显示向上滚动;
-Shift+PgDn:将终端显示向下滚动;
-
-pwd打印当前目录
-cat:读取某一个文件内的内容
-wc:获取某一个文件的行数和字数
-psketch
-date:获取当前时间
-uname:返回系统名称
-hostname：返回系统的主机名称
-
-whereis
-who
-locate
+```sh
+// 提高电池的寿命并且减少过热
+sudo add-apt-repository ppa:linrunner/tlp
+sudo apt-get update
+sudo apt-get install tlp tlp-rdw
+sudo tlp start
 ```
 
 ## 日志

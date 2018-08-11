@@ -14,16 +14,22 @@ pip install --upgrade pip
 pip install Django[==1.11.3]
 ```
 
-### 管理命令 django-admin.py
+## 管理命令 django-admin.py
 
-### 项目结构
+## 项目结构
 
-- Django_app: 项目的容器。
-- manage.py: 一个实用的命令行工具，可让你以各种方式与该 Django 项目进行交互。`python3 manage.py runserver 0.0.0.0:8000` 0.0.0.0 让其它电脑可连接到开发服务器
-- Django_app/__init__.py: 一个空文件，告诉 Python 该目录是一个 Python 包。
-- Django_app/settings.py: 该 Django 项目的设置/配置。
-- Django_app/urls.py: 该 Django 项目的 URL 声明; 一份由 Django 驱动的网站"目录"。
-- Django_app/wsgi.py: 一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目。
+* Django_app: 项目的容器
+* urls.py: 网址入口，关联到对应的views.py中的一个函数（或generic类）
+* views.py：处理用户发出的请求，与urls.py对应, 通过渲染templates中的网页可以将显示内容
+* models.py：与数据库操作相关，存入或读取数据时用到
+* forms.py：表单，用户在浏览器上输入数据提交，对数据的验证工作以及输入框的生成等工作
+* templates文件夹：views.py中的函数渲染templates中的html模板，得到动态内容的网页，可以用缓存来提高速度。
+* admin.py：后台，可以用很少的代码就拥有一个强大的后台
+* settings.py: Django 的配置文件，如 DEBUG 的开关，静态文件的位置
+
+* manage.py: 一个实用的命令行工具，可让你以各种方式与该 Django 项目进行交互
+* __init__.py: 一个空文件，告诉 Python 该目录是一个 Python 包
+* wsgi.py: 一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目
 
 ## 使用
 
@@ -35,7 +41,9 @@ pip install Django[==1.11.3]
 
 ```sh
 django-admin.py startproject Django_app # 新建项目
-python3 manage.py startapp cmdb  # 如果要使用模型，必须要创建一个app
+python manage.py startapp cmdb  # 一般一个项目有多个app, 当然通用的app也可以在多个项目中使用
+django-admin.py startapp app-name
+
 sudo pip3 install mysqlclient #  mysql驱动
 
 cd Django_app
@@ -44,7 +52,9 @@ python3 manage.py migrate   # 创建表结构
 python3 manage.py makemigrations TestModel  # 让 Django 知道我们在我们的模型有一些变更
 python3 manage.py migrate TestModel   # 创建表结构
 
-python3 manage.py runserver
+# 开启服务
+python manage.py runserver 0.0.0.0:8000 # 让其它电脑可连接到服务器，监听机器上所有ip的8000端口，访问时用电脑的ip代替
+python manage.py runserver # 在本电脑访问服务器，访问时ip为127.0.0.1
 ```
 
 ```

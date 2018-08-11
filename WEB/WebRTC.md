@@ -1,1 +1,18 @@
+# WebRTC(Web Real Time Communication)
+
+音视频传输功能
+
+  1. 免费的使用 GIPS 先进的音视频引擎，在此之前都需要付费授权。
+  2. 由于音视频传输是基于点对点传输的，所以实现简单的 1 对 1 通话场景，需要较少的服务器资源，借助免费的 STUN/TURN 服务器可以大大节约成本开销。
+  3. 开发 Web 版本的应用非常方便，使用简单的 JS 接口，无需安装任何插件，即可实现音视频互通。
+
+RTMP(Real Time Messaging Protocol) 实时消息传送协议是 Adobe Systems 公司为 Flash 播放器和服务器之间音频、视频和数据传输开发的开放协议。
+
+可以满足直播产品的需求，但由于其相对延时较高，不能满足视频互通的产品需求。于是大家很自然地将目光投向 UDP、QUIC（基于 UDP）一类延时更低的网络协议。
+
+
+Google WebRTC
+
+ KITE
+ QUIC
 <https://juejin.im/post/59b784c9f265da064e1f26c9>

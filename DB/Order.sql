@@ -1,3 +1,4 @@
+# 订单设计
 # 交易表
 CREATE TABLE `transaction` (
 `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
