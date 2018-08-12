@@ -80,6 +80,24 @@
 
 * [visionmedia/superagent](https://github.com/visionmedia/superagent):Ajax with less suck - (and node.js HTTP client to match) http://visionmedia.github.io/superagent/
 
+## promise
+
+* [petkaantonov/bluebird](https://github.com/petkaantonov/bluebird):🐦 ⚡️ Bluebird is a full featured promise library with unmatched performance. http://bluebirdjs.com
+
+## 服务
+
+* [nodemon](http://nodemon.io/):a utility that will monitor for any changes in your source and automatically restart your server.
+
+## 机器学习
+
+* [junku901/machine_learning](https://github.com/junku901/machine_learning):Machine learning library for Node.js http://joonku.com/project/machine_learning
+* [janhuenermann/neurojs](https://github.com/janhuenermann/neurojs):A javascript deep learning and reinforcement learning library. https://janhuenermann.com/projects/learning-to-drive
+* [dmotz/thing-translator](https://github.com/dmotz/thing-translator):Point your camera at things to hear how to say them in a different language https://thing-translator.appspot.com/
+* [karpathy/convnetjs](https://github.com/karpathy/convnetjs):Deep Learning in Javascript. Train Convolutional Neural Networks (or ordinary ones) in your browser.
+* [cazala/synaptic](https://github.com/cazala/synaptic):architecture-free neural network library for node.js and the browser http://caza.la/synaptic
+* [BrainJS/brain.js](https://github.com/BrainJS/brain.js):🤖 Neural networks in JavaScript http://brain.js.org
+* [xviniette/FlappyLearning](https://github.com/xviniette/FlappyLearning):Program learning to play Flappy Bird by machine learning (Neuroevolution)http://xviniette.github.io/FlappyLearning/
+
 ## 问题
 
 ```sh

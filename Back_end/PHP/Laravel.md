@@ -9,23 +9,18 @@ A PHP Framework For Web Artisans https://laravel.com
 - 安装virtualbox and vagrant
 
 ```sh
-brew install homebrew/php/php71
-# 确保 ~/.composer/vendor/bin
+brew install homebrew/php/php71  # 确保 ~/.composer/vendor/bin
 sudo chown -R $USER .composer/
 composer global require laravel/valet
 export PATH=$PATH:~/.composer/vendor/bin
 
-valet install
-终端ping一下任意 *.dev 域名
-# 修改域名
-valet domain app
+valet install  # 终端ping一下任意 *.dev 域名
+valet domain app # # 修改域名
 
-# 安装MySQL
-brew install mysql
-# 启动服务
-brew services start mysql
-# 升级
-composer global update
+brew install mysql # 安装MySQL
+brew services start mysql # 启动服务
+
+composer global update # 升级
 
 valet stop
 valet uninstall
@@ -34,7 +29,7 @@ valet restart
 
 - parallels `vagrant plugin install vagrant-parallels`
 
-# 下载&&安装
+## 下载&&安装
 
 - vagrant box add laravel/homestead（下不动）
 - 下载软件 <https://atlas.hashicorp.com/laravel/boxes/homestead/versions/2.1.0/providers/virtualbox.box>
@@ -82,6 +77,37 @@ from @golaravel
 
 ## valet
 
+## 源文件安装
+
+```
+cd /var/www
+git clone https://github.com/laravel/laravel.git
+cd /var/www/laravel
+sudo composer install
+
+chown -R www-data.www-data /var/www/laravel
+chmod -R 755 /var/www/laravel
+chmod -R 777 /var/www/laravel/storage
+```
+
+## 框架本地化
+
+```
+cp .env.example .env
+php artisan key:generate
+
+mysql -u root -p
+
+mysql> CREATE DATABASE laravel;
+mysql> GRANT ALL ON laravel.* to 'laravel'@'localhost' IDENTIFIED BY 'secret_password';
+mysql> FLUSH PRIVILEGES;
+mysql> quit
+
+# update the database settings in .env file
+# Configuring Apache for Laravel
+# sudo service apache2 restart
+```
+
 ## Laragon
 
 ## [laradock](https://github.com/LaraDock/laradock.git)
@@ -120,10 +146,12 @@ php artisan app:name #  设置应用程序命名空间
 php artisan auth:clear-resets 清除过期的密码重置密钥 未使用过
 php artisan cache:clear 清除应用程序缓存
 php artisan cache:table 创建一个缓存数据库表的迁移
+
 php artisan config:cache  创建一个加载配置的缓存文件
 php artisan config:clear  删除配置的缓存文件
 php artisan db:seed 数据库生成模拟数据
 php artisan event:generate  生成event和listen  需要实现配置eventserviceprivoder
+
 php artisan make:command #  创建一个新的命令处理程序类
 php artisan make:console #  生成一个Artisan命令
 php artisan key:generate  # 设置程序密钥   No supported encrypter found. The cipher and / or key length are invalid.
@@ -135,10 +163,12 @@ php artisan make:provider # 生成一个服务提供商的类
 php artisan make:request #  生成一个表单消息类
 php artisan migrate:install # 创建一个迁移库文件
 php artisan make:migration #  生成一个迁移文件
+
 php artisan migrate:refresh # 复位并重新运行所有的迁移
 php artisan migrate:reset # 回滚全部数据库迁移
 php artisan migrate:rollback #  回滚最后一个数据库迁移
 php artisan migrate:status  # 显示列表的迁移
+
 php artisan queue:failed  # 列出全部失败的队列工作
 php artisan queue:failed-table # 创建一个迁移的失败的队列数据库工作表
 php artisan queue:flush # 清除全部失败的队列工作
@@ -153,9 +183,13 @@ php artisan queue:work  # 进行下一个队列任务
 php artisan route:cache # 为了更快的路由登记，创建一个路由缓存文件
 php artisan route:clear # 清除路由缓存文件
 php artisan route:list # 列出全部的注册路由
+
 php artisan schedule:run # 运行预定命令
+
 php artisan session:table # 创建一个迁移的SESSION数据库工作表
+
 php artisan vendor:publish # 发表一些可以发布的有用的资源来自提供商的插件包
+
 php artisan baum # Get Baum version notice.
 php artisan baum:install # Scaffolds a new migration and model suitable for Baum
 ```
@@ -1442,7 +1476,8 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [codex-project/codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! http://codex-project.ninja
 * [spatie/laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
 * [FrozenNode/Laravel-Administrator](https://github.com/FrozenNode/Laravel-Administrator):An administrative interface package for Laravel http://administrator.frozennode.com/
-* [laravel/valet](https://github.com/laravel/valet)
+* [stefanzweifel/laravel-stats](https://github.com/stefanzweifel/laravel-stats):📈 Get insights about your Laravel or Lumen Project
+* [andersao/laravel-request-logger](https://github.com/andersao/laravel-request-logger):HTTP request logger middleware for Laravel
 
 ## 教程
 
