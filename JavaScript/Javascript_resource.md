@@ -43,6 +43,7 @@
 * [ReactiveX/rxjs](https://github.com/ReactiveX/rxjs):A reactive programming library for JavaScript http://reactivex.io/rxjs
 * [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
 * [es-analysis/plato](https://github.com/es-analysis/plato):JavaScript source code visualization, static analysis, and complexity tool
+* [dollarshaveclub/shave](https://github.com/dollarshaveclub/shave/):💈 Shave is a 0 dep JS plugin that truncates text to fit within an element based on a set max-height ✁ https://dollarshaveclub.github.io/shave/
 
 ## 校验
 
@@ -89,6 +90,10 @@
 * [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js):A JavaScript Chart Library
 * [clientIO/joint](https://github.com/clientIO/joint):JavaScript diagramming library http://www.jointjs.com
 
+## Animations
+
+* [juliangarnier/anime](https://github.com/juliangarnier/anime):JavaScript Animation Engine http://animejs.com
+
 ## Canvas
 
 * [spritejs/spritejs](https://github.com/spritejs/spritejs):A cross-platform lightweight 2D render object model. http://spritejs.org
@@ -102,12 +107,18 @@
 * [6周学习计划，攻克JavaScript难关(React/Redux/ES6 etc.)](https://zhuanlan.zhihu.com/p/23412169)
 * [mqyqingfeng/Blog](https://github.com/mqyqingfeng/Blog):冴羽写博客的地方，预计写四个系列：JavaScript深入系列、JavaScript专题系列、ES6系列、React系列。
 
-## 其它
+## 机器学习
 
-- [jquery-validation](https://github.com/jquery-validation/jquery-validation)
+* [tensorflow/playground](https://github.com/tensorflow/playground):Play with neural networks! http://playground.tensorflow.org
+* [deepforge-dev/deepforge](https://github.com/deepforge-dev/deepforge):A modern development environment for deep learning http://deepforge.org
 
-  - clone本地，grunt安装，编译
-  - test中的index.html会有测试断言
+## 插件
+
+* [zewish/rmodal.js](https://github.com/zewish/rmodal.js):A simple 1.2 KB modal dialog with no dependencies https://rmodal.js.org/
+
+## 格式化
+
+* [HubSpot/odometer](https://github.com/HubSpot/odometer):Smoothly transitions numbers with ease. #hubspot-open-source
 
 ## style guide
 

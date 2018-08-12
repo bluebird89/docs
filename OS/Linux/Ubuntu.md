@@ -201,6 +201,8 @@ sudo apt update
 
 sudo apt install -f # fix software database is boken
 sudo apt update --fix-missing
+
+sudo apt-get upgrade
 ```
 
 > 从磁盘安装deb安装包
