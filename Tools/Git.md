@@ -644,12 +644,23 @@ git clone git@server:/path/to/repo.git
 git clone git@115.159.146.94:/home/testgit/sample.git lsgogit
 ```
 
-### git hook
+### hook
 
-git操作有它自身的生命周期，在不同的生命周期，我们可以做一些自动化的事情。
+Hook是Git系统的本地机制，用于在诸如代码提交（Commit）和合并(Merge)之类的操作之前或之后触发的定制化脚本，可以把它们看作是Git的插件系统。
 
+* 脚本路径：.git/hooks/
+* 分类
+  - 客户端Hooks
+  - 服务端Hooks:检查代码是否符合某些条件，防止开发人员随意将代码推送到master
+  - Pre-：在某些特定的Git操作之前被调用，检查推送过来的提交是否合法
+  - Post-：
 * pre-commit的时候我们可以做 eslint
 * post-commit的时候，我们可以做利用 jenkins 类似的工具做持续集成
+* 功能
+  - 验证你在提交消息中包含了关联的JIRA密钥
+  - 在代码合并前，确保满足先决条件
+  - 发送通知给你开发团队的聊天室
+  - 在切换到不同的工作分支后，设置你自己的工作区
 
 ```sh
 cd /home/testgit/sample.git
@@ -664,6 +675,8 @@ chown git:git post-receive
 # 由于该文件其实就是一个shell文件，我们还应该为其设置可执行权限
 chmod +x post-receive
 ```
+* [post-checkout-build-status](https://bitbucket.org/tpettersen/post-checkout-build-status/src/master/)
+* [git-ci-hooks](https://bitbucket.org/tpettersen/git-ci-hooks/src/master/)
 
 ### 基于功能分支的开发流程
 

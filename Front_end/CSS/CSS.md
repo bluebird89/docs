@@ -216,6 +216,21 @@ h1{
   }
 ```
 
+## 
+
+字体图标缩小时可能会遇到部分图标存在锯齿现象
+
+```
+//消除锯齿
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+-webkit-text-stroke-width: 0.2px;
+
+// 文字正体显示为背景模样，再配合-webkit-text-stroke描边也是不错的一种体验
+-webkit-text-stroke-width: 0.5px;
+-webkit-text-fill-color: transparent;
+```
+
 ## 框架
 
 自适应
@@ -244,6 +259,11 @@ h1{
 ## 工具
 
 * [basscss/basscss](https://github.com/basscss/basscss):Low-level CSS Toolkit http://basscss.com
+* [Dogfalo/materialize](https://github.com/Dogfalo/materialize):Materialize, a CSS Framework based on Material Design https://materializecss.com
+* [Chalarangelo/mini.css](https://github.com/Chalarangelo/mini.css):A minimal, responsive, style-agnostic CSS framework! https://minicss.org/
+* [Spiderpig86/Cirrus](https://github.com/Spiderpig86/Cirrus):☁️ The CSS framework for the modern web. https://spiderpig86.github.io/Cirrus
+* [szynszyliszys/repaintless](https://github.com/szynszyliszys/repaintless):Library for fast CSS Animations
+* [nzbin/three-dots](https://github.com/nzbin/three-dots):🔮 CSS loading animations made by single element. https://nzbin.github.io/three-dots/
 
 
 ## 参考

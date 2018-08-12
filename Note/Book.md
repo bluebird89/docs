@@ -47,13 +47,13 @@
 * 《[UNIX网络编程 卷2：进程间通信](https://www.amazon.cn/gp/product/B012R5A29O)》
 * 《[UNIX编程环境](https://www.amazon.cn/gp/product/B00IYTQBYS/)》
 * 《[Unix 环境高级编程(第3版)](https://www.amazon.cn/gp/product/B00KMR129E)》
-* Unix/Linux 编程实践教程》
+* 《Unix/Linux 编程实践教程》
 * 《UNIX操作系统设计》
 * 《unix网络高级编程》
 * 《Linux/Unix 系统编程手册》
 * 《[深入理解Linux内核](https://www.amazon.cn/gp/product/B0011F5RYM)》
 * 《[深入Linux内核架构](https://www.amazon.cn/gp/product/B003QN7J7U)》
-* [Linux系统编程（第2版）](https://www.amazon.cn/gp/product/B00JUM2ML4)》
+* 《[Linux系统编程（第2版）](https://www.amazon.cn/gp/product/B00JUM2ML4)》
 * 《[Linux内核设计与实现（第3版）](https://www.amazon.cn/gp/product/B004X3Z3D4)》奠定基础的书籍
 * LINUX操作系统(第2版)
 * 《Linux多线程服务端编程》
@@ -64,6 +64,8 @@
 * 精通Linux设备驱动程序开发
 * Linux命令行与shell脚本编程大全（第3版）
 * 《只是为了好玩 : Linux 之父林纳斯自传》
+* 《Linux Shell 脚本攻略》
+* 《Linux内核设计的艺术》
 
 ## 编程通用
 
@@ -127,6 +129,14 @@
 * 无懈可击的web设计
 * 无界面交互
 * 非设计人员的设计
+
+## OO
+
+* 《Elegant Objects》
+* 《Object Thinking》
+* 《Practical Object-Oriented Design in Ruby》
+* 《Design Patterns Explained》
+* 《Python 3 Object-oriented Programming》
 
 ## HTTP
 
@@ -215,6 +225,7 @@
 * 《[Google软件测试之道](https://www.amazon.cn/gp/product/B00FH36R6G)》
 *  How to Break Software
 *  《测试驱动开发》
+* 《Growing Object-Oriented Software, Guided by Tests》
 
 ## Java
 
@@ -290,6 +301,8 @@
 * 《用 Python 写网络爬虫》
 * 《[深度学习:基于Keras的Python实践](https://www.amazon.cn/gp/product/B07D5855F4)》
 * Python与量化投资从基础到实践
+* Learning Python, 5th Edition
+* Fluent Python
 
 ## Go
 
@@ -317,6 +330,10 @@
 
 * MongoDB大数据处理权威指南（第2版）
 * NoSQL数据库技术实战
+
+### DDD
+
+* 《Patterns, Principles and Practices of Domain-Driven Design》
 
 ## 架构/性能
 

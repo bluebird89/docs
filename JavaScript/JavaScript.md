@@ -2368,9 +2368,83 @@ HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘�
     var gl = canvas.getContext("webgl");
 </script>
 ```
+
 ## 事件
 
 * window.onpopstate
+
+## Class
+
+是原型继承的语法糖，使类声明和继承书写变的容易
+
+* 和对象的写法十分相似，花括号前面只多了 class Name,类方法我们将采用方法名简写的形式。contrustor 是构造函数，可在里面初始化我们想初始化的东西。
+* 类静态方法
+* 继承：当子类想要实现特有的构造函数 constructor 时，首行必须使用 super(...)调用父类的构造函数，先得到父类的this作为自己的 this
+
+```js
+function Car () {
+  this.fuel = 0;
+  this.distance = 0;
+  this.topSpeed = Math.random();
+}
+
+Car.prototype.move = function () {
+  if (this.fuel < 1) {
+    throw new RangeError('Fuel tank is depleted')
+  }
+  this.fuel--
+  this.distance += 2
+}
+
+Car.prototype.addFuel = function () {
+  if (this.fuel >= 60) {
+    throw new RangeError('Fuel tank is full')
+  }
+  this.fuel++
+}
+Car.isFaster = function (left, right) {
+  return left.topSpeed > right.topSpeed
+}
+
+// ES6
+class Car {
+  constructor (speed) {
+    this.speed = speed
+    this.fuel = 0
+    this.distance = 0
+     this.topSpeed = Math.random()
+  }
+  move () {
+    if (this.fuel < 1) {
+      throw new RangeError('Fuel tank is depleted')
+    }
+    this.fuel--
+    this.distance += 2
+  }
+  addFuel () {
+    if (this.fuel >= 60) {
+      throw new RangeError('Fuel tank is full')
+    }
+    this.fuel++
+  }
+  // 静态方法
+  static isFaster (left, right) {
+    return left.topSpeed > right.topSpeed
+  }
+}
+
+class Tesla extends Car {
+  constructor (speed) {
+    // 不调用 super 的话，会报错
+    super(speed * 2)
+    // 做其他初始化工作 。。。
+  }
+  move () {
+    super.move()
+    this.distance += 4
+  }
+}
+```
 
 ### 错误处理
 
