@@ -15,6 +15,32 @@ sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode s
 sudo apt-get install code
 ```
 
+## 插件
+
+* Open-In-Browser
+* Quokka
+* Faker：
+* CSS Peek
+* HTML Boilerplate
+* Prettier
+* Color Info
+* SVG Viewer
+* TODO Highlight
+* Icon Fonts
+* Minify
+* Change Case
+* Regex Previewer
+* Language and Framework Packs
+    - React Native Tools
+    - Vue 2 Snippets
+
+## 主题
+
+* One Monokai
+* Aglia
+* One Dark
+* Material Icon
+
 ## 使用
 
 ### 左边列表

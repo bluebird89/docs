@@ -134,6 +134,10 @@
 
 * [hshoff/vx](https://github.com/hshoff/vx):🐯react + d3 = vx | visualization components https://vx-demo.now.sh/
 
+## 图片
+
+* [ricardo-ch/react-easy-crop](https://github.com/ricardo-ch/react-easy-crop):A React component to crop images with easy interactions https://codesandbox.io/s/q80jom5ql6
+
 ## 文件
 
 * [diegomura/react-pdf](https://github.com/diegomura/react-pdf):📄 Create PDF files using React http://react-pdf.diegomura.com/repl

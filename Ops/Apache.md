@@ -65,7 +65,10 @@ sudo apachectl -k restart
 > ubuntu
 
 ```sh
-sudo apt-get install apache2
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+sudo apt-get install apache2 libapache2-mod-php7.2 mysql-server php7.2 php7.2-xml php7.2-gd php7.2-opcache php7.2-mbstring php7.2-mysql
 
 sudo mkdir -p /var/www/unixmen1.local/public_html
 sudo chown -R $USER:$USER /var/www/unixmen1.local/public_html/
