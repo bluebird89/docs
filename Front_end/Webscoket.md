@@ -27,7 +27,7 @@ Origin: http://example.com
 - long poll 其实原理跟 ajax轮询 差不多，都是采用轮询的方式，不过采取的是阻塞模型。需要有很高的并发，
 
 - 服务端就可以主动推送信息给客户端啦。只需要经过一次HTTP请求，就可以做到源源不断的信息传送了（在程序设计中，这种设计叫做回调，即：你有信息了再来通知我，而不是我傻乎乎的每次跑来问你）。
-- 
+-
 
 ## 扩展框架
 
@@ -89,27 +89,27 @@ Sec-WebSocket-Protocol: chat
 
 
 ```js
-if('WebSocket' in window){ 
-    // 创建websocket实例 
+if('WebSocket' in window){
+    // 创建websocket实例
     var socket = new WebSocket('ws://localhost:8080');
 
-    //打开 
-    socket.onopen = function(event) 
-    { 
+    //打开
+    socket.onopen = function(event)
+    {
     // 发送
-    socket.send('I am the client and I\'m listening!'); 
+    socket.send('I am the client and I\'m listening!');
 
-    // 监听 
+    // 监听
     socket.onmessage = function(event) {
-    console.log('Client received a message',event); 
+    console.log('Client received a message',event);
     };
 
-    // 关闭监听 
+    // 关闭监听
     socket.onclose = function(event) {
-    console.log('Client notified socket has closed',event); 
+    console.log('Client notified socket has closed',event);
     };
 
-    // 关闭 
+    // 关闭
     //socket.close() };
 }else{
     alert('本浏览器不支持WebSocket哦~');
@@ -117,3 +117,8 @@ if('WebSocket' in window){
 ```
 
 * polling :是指从客户端（一般就是浏览器）不断主动的向服务器发 HTTP 请求查询是否有新数据 。
+
+
+## 工具
+
+* [uNetworking/uWebSockets](https://github.com/uNetworking/uWebSockets):Tiny WebSockets
