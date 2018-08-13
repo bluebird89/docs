@@ -39,6 +39,7 @@ kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
 
 ## linux 进程管理
 sudo service php7.0-fpm {start|stop|status|restart|reload|force-reload}
+/etc/init.d/php7.2-fpm start
 ```
 
 ## 配置
