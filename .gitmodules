@@ -169,3 +169,6 @@
 [submodule "WEB/Web-Series"]
 	path = WEB/Web-Series
 	url = git@github.com:wxyyxc1992/Web-Series.git
+[submodule "APP/swift-algorithm-club"]
+	path = APP/swift-algorithm-club
+	url = git@github.com:raywenderlich/swift-algorithm-club.git
