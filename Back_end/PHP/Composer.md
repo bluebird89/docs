@@ -134,4 +134,7 @@ echo $slugify->slugify('Hello World, this is a long sentence and I need to make 
 * [中文](https://www.phpcomposer.com/)
 * [Packagist](https://packagist.org):The PHP Package Repository
 
+## 工具
+
+* [Ocramius/PackageVersions](https://github.com/Ocramius/PackageVersions):📦 Composer addon to efficiently get installed packages' version numbers
 https://www.robberphex.com/2018/05/858
