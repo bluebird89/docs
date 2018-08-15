@@ -172,3 +172,6 @@
 [submodule "APP/swift-algorithm-club"]
 	path = APP/swift-algorithm-club
 	url = git@github.com:raywenderlich/swift-algorithm-club.git
+[submodule "Guide_lines/guides"]
+	path = Guide_lines/guides
+	url = git@github.com:thoughtbot/guides.git

@@ -70,10 +70,10 @@ sudo apt-get install python-software-properties software-properties-common
 sudo apt-get install software-properties-common # ubuntu 18.04
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
-sudo apt-get install php7.1\
-php7.1-fpm\
-php7.1-mysql php7.1-common php7.1-curl php7.1-cli php7.1-mcrypt php7.1-mbstring php7.1-dom
-php7.2-bcmath
+
+sudo apt-get install php7.2  php7.2-fpm php7.2-mysql php7.2-common php7.2-curl php7.2-cli php7.2-mbstring php7.2-xml php7.2-bcmath
+
+php7.2-mcrypt 
 ```
 
 - 修改配置文件sudo vim /etc/php/7.1/fpm/php.ini：`cgi.fix_pathinfo=0`

@@ -127,6 +127,10 @@
 * [taikongfeizhu/webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
 * [duxianwei520/react](https://github.com/duxianwei520/react):一个react+redux+webpack+ES6+antd的SPA的后台管理底层框架
 
+## Angular
+
+* [ngrx/platform](https://github.com/ngrx/platform):Reactive libraries for Angular
+
 ## 设计模式
 
 * [chantastic/reactpatterns.com](https://github.com/chantastic/reactpatterns.com):Patterns for React Developers http://reactpatterns.com

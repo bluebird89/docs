@@ -113,6 +113,9 @@ rails server
 * [activeadmin/activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. https://activeadmin.info
 * [tj/commander](https://github.com/tj/commander):The complete solution for Ruby command-line executables http://visionmedia.github.com/commander
 * [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. https://www.discourse.org
+* [thoughtbot/factory_bot](https://github.com/thoughtbot/factory_bot):A library for setting up Ruby objects as test data. https://thoughtbot.com/open-source
+* [thoughtbot/administrate](https://github.com/thoughtbot/administrate):A Rails engine that helps you put together a super-flexible admin dashboard.
+* [thoughtbot/paperclip](https://github.com/thoughtbot/paperclip):Easy file attachment management for ActiveRecord https://thoughtbot.com/open-source
 
 ## 参考
 
