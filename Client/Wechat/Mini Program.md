@@ -107,7 +107,7 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 ## 开发工具
 
 * [开发工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
-* [wept](https://github.com/chemzqm/wept) ★1097 - 实时微信小程序开发工具
+* [wept](https://github.com/chemzqm/wept):微信小程序 web 端实时运行工具 https://chemzqm.github.io/wept/
 * [weapp-quick](https://github.com/phodal/weapp-quick) ★320 - “微信Web开发者”拷贝工具
 * [Wxapp.vim](https://github.com/chemzqm/wxapp.vim) ★213 - 微信小程序开发 Vim 插件
 * [wechat_web_devtools](https://github.com/yuan1994/wechat_web_devtools) ★179 - 微信开发者工具Linux版  not maintained
