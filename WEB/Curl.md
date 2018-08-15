@@ -4,6 +4,8 @@ curl is used in command lines or scripts to transfer data.发出网络请求，�
 
 ## 使用
 
+* -i:--include Include protocol response headers in the output
+* -v:--verbose       Make the operation more talkative
 
 ```sh
 curl -X POST \
@@ -30,7 +32,6 @@ curl -X POST www.example.com  #  curl默认的HTTP方法是GET，使用-X参数�
 curl -X DELETE www.example.com
 
 # 上传文件
-
 curl --header "Content-Type:application/json" http://example.com    # 增加一个头信息
 curl --user-agent "[User Agent]" [URL] # User Agent字段:这个字段是用来表示客户端的设备信息。服务器有时会根据这个字段，针对不同设备，返回不同格式的网页
 curl -i -X POST --url http://localhost:8001/apis/ --data 'upstream_url=http://camp.uats.cc' --data 'request_path=login' # i:显示http response的头信息，连同网页代码一起
