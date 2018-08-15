@@ -690,17 +690,17 @@ psketch
 ```sh
 sudo systemctl enable|start|restart|status|reload nginx | httpd.service # enable 设置开机启动 start 启动 stop 停止 restart 重启
 
-[sudo ]lsof -i : (port) # 查看某一端口的占用情况
+telnet 10.0.3.69 2020  # 测试端口能否访问
+
+[sudo ]lsof -i: (port) # 查看端口的占用情况
+lsof -Pni4 | grep LISTEN | grep php
 
 netstat -tunlp # 显示tcp，udp的端口和进程等相关
-netstat -plntu
-
+netstat -tln | grep 8000
 netstat -tunlp|grep (port)  # // 指定端口号进程情况
 
 ps -ef | grep nginx # 进程查看
 ps aux | grep nginx
-
-lsof -Pni4 | grep LISTEN | grep php
 
 kill -9 pid # 关闭进程
 kill pid
@@ -713,6 +713,12 @@ fg jobid   ## 让进程回到前台
 ```
 
 ### Network
+
+* 网络分内网与外网
+* 端口提供服务：
+  - 是否暴漏
+  - 修改防火墙规则
+* 端口扫描
 
 ```sh
 ping -c 次数 ip # 测试网络畅通性
