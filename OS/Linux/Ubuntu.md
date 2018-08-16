@@ -1055,10 +1055,11 @@ sudo apt-get autoclean
 
 ## 参考
 
-* [](https://www.ubuntu.com)
+* [官网](https://www.ubuntu.com)
 * [torvalds/linux](https://github.com/torvalds/linux): Linux kernel source tree
 * [aleksandar-todorovic/awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
 * [LewisVo/Awesome-Linux-Software](https://github.com/LewisVo/Awesome-Linux-Software):🐧 A list of awesome applications, software, tools and other materials for Linux distros.
 * [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
 * [LVS：跑在Linux内核上的负载均衡器](https://liangshuang.name/2017/11/19/lvs/)
 * [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/index.html)
+* [kholia/OSX-KVM](https://github.com/kholia/OSX-KVM):Run El Capitan, macOS Sierra, High Sierra and Mojave on QEMU/KVM. No support is provided at the moment.

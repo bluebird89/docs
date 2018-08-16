@@ -154,3 +154,7 @@
 ## 扩展
 
 * [redux-saga/redux-saga](https://github.com/redux-saga/redux-saga):An alternative side effect model for Redux apps https://redux-saga.js.org/
+
+## animations
+
+* [react-tools/react-move](https://github.com/react-tools/react-move):React Move 🌀 Beautiful, data-driven animations for React https://react-move.js.org

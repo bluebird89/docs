@@ -10,6 +10,19 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
 * 工程化
 * 模块化
 * 组件化
+* 数据驱动
+v-text：文本填充
+v-html：更新元素的html
+v-show：根据表达式的值切换displayCSS属性
+v-if：跟据值是否渲染元素
+v-for：根据数据多次渲染数据
+v-on：绑定事件监听器
+v-bind：动态绑定一个或多个特性，或一个组件prop表达式
+v-model:数据动态绑定
+v-pre：模版中跳过vue编译，直接输出原始值
+v-cloak：刷新活着加载出现闪缩
+v-once：自渲染组件一次
+* 组件系统:可扩展HTML元素，封装可重用代码。自定义的元素
 
 ## 原理
 
@@ -192,12 +205,12 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [Bootstrap Vue](https://github.com/bootstrap-vue/bootstrap-vue)
 * [Muse-UI](https://github.com/at-ui/at-ui)
 * [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
-* [iView](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
+* [iview/iview](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
 * [Uiv](https://github.com/wxsms/uiv)
 * [Onsen UI+Vue](https://onsen.io/v2/guide/vue/)
 * [Semantic UI+Vue](https://semantic-ui-vue.github.io/)
 * [Fish-UI](https://github.com/myliang/fish-ui)
-* [Mint UI](https://github.com/ElemeFE/mint-ui/):Mobile UI elements for Vue.js http://mint-ui.github.io/#!/en
+* [ElemeFE/mint-ui](https://github.com/ElemeFE/mint-ui/):Mobile UI elements for Vue.js http://mint-ui.github.io/#!/en
 * [Framework7 Vue](https://framework7.io/vue/)
 * [Cube UI](https://github.com/didi/cube-ui)
 * [Vueblu](https://github.com/chenz24/vue-blu)

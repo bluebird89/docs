@@ -89,6 +89,7 @@
 * [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
 * [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js):A JavaScript Chart Library
 * [clientIO/joint](https://github.com/clientIO/joint):JavaScript diagramming library http://www.jointjs.com
+* [uber/kepler.gl](https://github.com/uber/kepler.gl):https://uber.github.io/kepler.gl
 
 ## Animations
 
