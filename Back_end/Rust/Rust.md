@@ -17,7 +17,12 @@ rustc --version
 
 通过rustup管理
 
-> 参考
+
+## 包资源
+
+* [rayon-rs/rayon](https://github.com/rayon-rs/rayon):Rayon: A data parallelism library for Rust
+
+## 参考
 
 * [文档](https://kaisery.gitbooks.io/rust-book-chinese/content/)
 * [The Rust Programming Language](https://doc.rust-lang.org/book/second-edition/index.html)
