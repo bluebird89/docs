@@ -835,5 +835,11 @@
     - 《有可能的夜晚》
     - 《三的颜色》
 
+## 吉他
+
+* Eric Clapton
+    - Tears In Heaven
+    - Layla
+    - Wonderful Tonight
 
 Some of us get dipped in flat, some in satin, some in gloss. But every once in a while you find someone who's iridescent, and when you do, nothing will ever compare.

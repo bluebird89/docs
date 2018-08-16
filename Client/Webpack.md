@@ -304,3 +304,7 @@ Parsing error: The keyword 'import' is reserved
 ## 工具
 
 * [survivejs/webpack-merge](https://github.com/survivejs/webpack-merge):Merge designed for Webpack (MIT)
+
+## 插件
+
+* [webpack/webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware):A development middleware for webpack
