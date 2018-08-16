@@ -106,11 +106,13 @@ echo $slugify->slugify('Hello World, this is a long sentence and I need to make 
 "autoload":{"classmap": ["path/to/src1","path/to/src2",...]}
 
 # psr-0
-"autoload":{"psr-0":{
-                            "name1\\space\\":["path/",...],
-                            "name2\\space\\":["path2/",...],
-                          }
-     }
+"autoload":{
+  "psr-0":
+    {
+      "name1\\space\\":["path/",...],
+      "name2\\space\\":["path2/",...],
+    }
+  }
 
 # psr-4
 "autoload":{"psr-4":{
