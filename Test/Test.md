@@ -32,6 +32,22 @@
     - 系统测试: 主要的就是功能测试，测试软件《需求规格说明书》中提到的功能是否有遗漏，是否正确的实现。测试方法一般都使用黑盒测试.
     - 验收测试：验收测试的目的是确保软件准备就绪，并且可以让最终用户将其用于执行软件的既定功能和任务
 
+## 单元测试
+
+* 单元测试是“白盒测试”， 应该覆盖各个分支流程、异常条件
+* 单元测试面向的是一个单元("Unit"), 是java中的一个类或者几个类组成的单元。
+* 单元测试运行一定要快！
+* 单元测试一定是可重复执行的
+* 单元测试之间不能有相互依赖，应该是独立的。
+* 单元测试代码和业务代码同等重要， 要一并维护。
+
+### 准则
+
+* 解决依赖过重
+* 不断重构、测试
+* 没有必要特别追求代码覆盖率
+* 测试自动化
+
 ## 分层
 
 ### UI层自动化
@@ -318,3 +334,6 @@ Percentage of the requests served within a certain time (ms)
 
 * redmine
 * [locustio/locust](https://github.com/locustio/locust):Scalable user load testing tool written in Python http://locust.io
+* JUnit
+* EasyMock
+* jmockit
