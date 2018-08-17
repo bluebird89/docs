@@ -92,6 +92,10 @@
 
 * [nodemon](http://nodemon.io/):a utility that will monitor for any changes in your source and automatically restart your server.
 
+## 日志
+
+* [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
+
 ## 机器学习
 
 * [junku901/machine_learning](https://github.com/junku901/machine_learning):Machine learning library for Node.js http://joonku.com/project/machine_learning
