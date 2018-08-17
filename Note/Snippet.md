@@ -250,6 +250,12 @@
 > I Meghan, take you, Harry, to be my husband, to have and to hold from this day forward; for better,for worse, for richer, for poorer, in sickness and in health, to love and to cherish, till death us do part; according to God’s holy law. In the presence of God I make this vow.
 > 在上帝的见证下、神的律法的指引下，我，梅根，愿意嫁给你，哈里，作为我的丈夫。从此刻到永远，无论顺境或逆境、富有或贫穷、健康或疾病，我都将爱着你、珍惜你，直到死亡将我们分开。
 
+## 足球
+
+* 朗尼克表示：“世界杯的结果已经证明，我们可以忘记去控制球权。这也一直是我的战术主题：拉开纵深，通过灵性地传导，以速度取胜。我们必须把速度加到第六档，第七档，否则是进不了球的。”
+同时朗尼克认为法国队夺冠的另一大原因是球队良好的整体性和对年轻球员的正确指导：“八年前的法国队是一群自负的球员，而今年他们成为了世界冠军，尽管他们还是一支由背景各异的白人和黑人球员混合在一起的球队，但现在他们拥有了整体性，球员会得到明确的指导。
+“年轻球员需要时常关心，俗气一点说，你需要给予他们关爱，就这点而言本届世界杯的法国队是一个良好的榜样。
+
 ## 工具
 
 * [hackjutsu/Lepton](https://github.com/hackjutsu/Lepton):💻 Democratizing Snippet Management (macOS/Win/Linux) http://hackjutsu.com/Lepton

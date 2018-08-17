@@ -12,32 +12,9 @@ PHP是一门弱类型的语言，变量在声明的那一刻是不需要确定�
 ## 安装
 
 ```sh
-gzip -d httpd-2_x_NN.tar.gz
-tar -xf httpd-2_x_NN.tar
-
-cd httpd-2_x_NN
-./configure --enable-so  //  --with-mpm=worker 替换默认prework
-make
-make install
-
 /usr/local/apache2/bin/apachectl start/stop   service httpd restart
 
-gunzip php-NN.tar.gz
-tar -xf php-NN.tar
-
-cd ../php-NN
-./configure --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql // 可以根据需要重新编译
-make
-make install
-
 LoadModule php5_module modules/libphp5.so // httpd.conf中添加
-
-./configure --enable-fpm --with-mysql
-sudo make install
-
-cp php.ini-development /usr/local/php/php.ini
-cp /usr/local/etc/php-fpm.conf.default /usr/local/etc/php-fpm.conf
-cp sapi/fpm/php-fpm /usr/local/bin
 ```
 
  php.ini 文件中的配置项 cgi.fix_pathinfo 设置为 0  // 如果文件不存在，则阻止 Nginx 将请求发送到后端的 PHP-FPM 模块， 以避免遭受恶意脚本注入的攻击
@@ -91,62 +68,6 @@ echo 'export PATH="/usr/local/opt/php@7.1/sbin:$PATH"' >> ~/.zshrc
 ```sh
 lsb_release -a # 系统环境查看
 
-yum -y install make apr* autoconf automake curl-devel gcc gcc-c++ zlib-devel openssl openssl-devel pcre-devel gd # 编译环境的准备
-
-yum install -y vsftpd # ftp环境的搭建(使用 非root 用户后，在ftp客户端上传相关的源码
-useradd asion
-service vsftpd status
-
-libxml2 # libxml2 安装(xml和html文件相关依赖的库)
-tar -zxvf libxml2-2.6.30
-cd libxml2-2.6.30
-./configure --prefix=/usr/local/libxml2
-make && make install
-
-cd /lamp/libmcrypt-2.5.8 # libmcrypt-2.5.8 安装(加密库)
-./configure --prefix=/usr/local/libmcrypt/
-make && make install
-# 进入libmcrypt-2.5.8文件夹内的
-libltdl > cd ./libmcrypt-2.5.8/libltdl
-./configure --enable-ltdl-install
-make && make install
-# zlib库安装
-./configure
-make && make install
-# png图片库安装
-./configure --prefix=/usr/local/libpng/
-make && make install
-# jpeg图片库安装(需要自己创建jpeg6)
-mkdir /usr/local/jpeg6
-mkdir /usr/local/jpeg6/bin
-mkdir /usr/local/jpeg6/lib
-mkdir /usr/local/jpeg6/include
-mkdir -p /usr/local/jpeg6/man/man1
-cd /lamp/jpeg-6b
-./configure --prefix=/usr/local/jpeg6/ --enable-shared --enable-static
-make && make install
-# freetype字体库安装
-./configure --prefix=/usr/local/freetype/
-make && make install
-# autoconfig生成makefile安装(不需要指定安装路径)
-./configure
-make && make install
-# GD 库 的 安 装
-./configure --prefix=/usr/local/gd2/ --with-jpeg=/usr/local/jpeg6/ --with-freetype=/usr/local/freetype/ --enable
-make && make install
-# 注意:当make的时候，出现以下错误
-configure.ac:64: error: possibly undefined macro: AM_ICONV
-If this token and others are legitimate, please use m4_pattern_allow. See the Autoconf documentation.
-make: *** [configure] Error 1
-# 解决方案:解决办法 ，编译加m4_pattern_allow参数 即:./configure --enable-m4_pattern_allow 便能顺利编译安装
-
-# 安装PHP
-cd /usr/local/src/php-5.3.28
-./configure --prefix=/usr/local/php/ --with-config-file-path=/usr/local/php/etc/ --with-apxs2=/usr/local/apache2/bin/apxs --with-my make
-make install
-cp php.ini-dist /usr/local/php/etc/php.ini
-
-# 打开Apache的配置文件(添加AddType这两行)
 cd /etc/httpd/
 vim httpd.conf
 AddType application/x-httpd-php .php
@@ -157,7 +78,7 @@ vim php.ini
 date.timezone = Asia/Shanghai
 ```
 
-## [PHP发展](https://segmentfault.com/a/1190000008888700)
+## PHP发展
 
 * composer:PHP 的依赖管理可以变得非常简单
 * PHP7:对 Zend 引擎做了大量修改，大幅提升了 PHP 语言的性能.做好 MySQL 优化，使用 Memcache 和 Redis 进行加速
@@ -333,9 +254,6 @@ print "Hello, Red Hat Developers World from PHP " . PHP_VERSION . "\n";
 echo "<h2>Hello First PHP</h2>";
 
 $num=12;
-if($num<100){
-    echo "$num is less than 100";
-}
 
 if($num%2==0){
     echo "$num is even number";
@@ -377,13 +295,6 @@ do{
     echo "$n<br/>";
     $n++;
 }while($n<=10);
-
-for($i=1;$i<=10;$i++){
-    echo "$i <br/>";
-    if($i==5){
-        break;
-    }
-}
 ```
 
 ### 数据类型
@@ -413,14 +324,17 @@ $season[0]="summer";
 $season[1]="winter";
 $season[2]="spring";
 $season[3]="autumn";
+
 $salary=array("Hema"=>"350000","John"=>"450000","Kartik"=>"200000");
 $salary["Hema"]="350000";
 $salary["John"]="450000";
 $salary["Kartik"]="200000";
+
 echo count($salary);
 foreach($salary as $k => $v) {
     echo "Key: ".$k." Value: ".$v."<br/>";
 }
+
 $emp = array
   (
   array(1,"sonoo",400000),
@@ -435,6 +349,7 @@ for ($row = 0; $row < 3; $row++) {
 }
 
 $salary=array("Maxsu"=>"550000","Vimal"=>"250000","Ratan"=>"200000");
+
 print_r(array_change_key_case($salary,CASE_UPPER)); # Array ( [SONOO] => 550000 [VIMAL] => 250000 [RATAN] => 200000 )
 print_r(array_chunk($salary,2, $preserve_keys = false));
 
@@ -499,6 +414,28 @@ function foo()
 $bar = "something";
 foo();
 echo $bar;//Notice: Undefined variable: bar
+
+$arr = array(
+    array(
+        'name'=>'sadas',
+        'norder'=>1
+    ),
+    array(
+        'name'=>'sadas',
+        'norder'=>11
+    ),
+    array(
+        'name'=>'sadas',
+        'norder'=>123
+    ),
+    array(
+        'name'=>'sadas',
+        'norder'=>11
+    )
+);
+array_multisort(array_column($arr, 'norder'), SORT_ASC, $arr);
+
+array_map(function($element){return strtotime($element['add_time']);}, $datas);
 ```
 
 #### 运算符
