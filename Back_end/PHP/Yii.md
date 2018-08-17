@@ -720,6 +720,12 @@ AppAsset::register($this);  // $this 代表视图对象
 
 ## Console
 
+## 数据库
+
+geterrors
+
+self::find()->select('count(*)')->where(['user_id' => $userId, 'status' => 0])->scalar();
+
 ## REST
 
 ## 安全

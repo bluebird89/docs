@@ -384,11 +384,11 @@
       - (https://github.com/tarantool-php/queue)[Tarantool Queue]: PHP绑定Tarantool队列
       - (https://github.com/php-amqplib/Thumper)[Thumper]: 一个RabbitMQ模式库
 * 搜索 Search 在数据上索引和执行查询的库和软件
-      - (https://github.com/ruflin/Elastica)[Elastica]: ElasticSearch的客户端库
-      - (https://github.com/elastic/elasticsearch-php)[ElasticSearch PHP]: (https://www.elastic.co/)[ElasticSearch]的官方客户端库
-      - (http://www.solarium-project.org/)[Solarium]: (http://lucene.apache.org/solr/)[Solr]的客户端库
-      - (https://github.com/ripaclub/sphinxsearch)[Sphinx Search]: Sphinx搜索库，提供SphinxQL索引和搜索的功能
-      - (http://foolcode.github.io/SphinxQL-Query-Builder/)[SphinxQL query builder]: (http://sphinxsearch.com/)[Sphinx]搜索引擎的的查询库
+      - [Elastica](https://github.com/ruflin/Elastica): ElasticSearch的客户端库
+      - [ElasticSearch PHP](https://github.com/elastic/elasticsearch-php): (https://www.elastic.co/)[ElasticSearch]的官方客户端库
+      - [Solarium](http://www.solarium-project.org/): (http://lucene.apache.org/solr/)[Solr]的客户端库
+      - [Sphinx Search](https://github.com/ripaclub/sphinxsearch): Sphinx搜索库，提供SphinxQL索引和搜索的功能
+      - [SphinxQL query builder](http://foolcode.github.io/SphinxQL-Query-Builder/): (http://sphinxsearch.com/)[Sphinx]搜索引擎的的查询库
 * 命令行 Command Line 关于命令行工具的库
       - (https://github.com/borisrepl/boris)[Boris]: 一个微型PHP REPL
       - (https://github.com/Cilex/Cilex)[Cilex]: 一个构建命令行工具的微型框架

@@ -139,6 +139,10 @@
 
 * [hshoff/vx](https://github.com/hshoff/vx):🐯react + d3 = vx | visualization components https://vx-demo.now.sh/
 
+## 表单
+
+*  [mozilla-services/react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form):A React component for building Web forms from JSON Schema. 
+
 ## 图片
 
 * [ricardo-ch/react-easy-crop](https://github.com/ricardo-ch/react-easy-crop):A React component to crop images with easy interactions https://codesandbox.io/s/q80jom5ql6
