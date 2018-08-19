@@ -64,6 +64,13 @@ fastboot flash bootloader bootloader-mako-makoz10o.img（需要根据您自己�
 fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根据您自己情况换.zip名）
 ```
 
+## 调试
+
+* Android 手机 设置 > 开发者选项 > USB调试。设置里面勾选 开发者选项
+* 数据线连接你的电脑和 Android 手机，安装Chrome
+* 电脑Chrome->more tools->remote devices
+* 选取设备->网页列表->inspect
+
 ## 课程
 
 * [kesenhoo/android-training-course-in-chinese](https://github.com/kesenhoo/android-training-course-in-chinese)

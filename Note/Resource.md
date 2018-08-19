@@ -268,6 +268,7 @@
 -   Google Docs [表单](https://docs.google.com/forms/u/0/)
 -   libre
 -   [Keynote](https://www.apple.com/cn/keynote/)
+- [文档转换](https://smallpdf.com/)
 
 ## 思维导图
 
@@ -366,16 +367,6 @@ ns
 -   知乎
 -   Medium
 -   Pinterest
-
-## 工具集
-
--   [atlassian](https://www.atlassian.com/)
-    -   stride
-    -   Jira
-    -   bitbucket
-    -   confluence
-    -   trello
-    -   sourcetree
 
 ## 新闻
 

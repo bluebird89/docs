@@ -194,6 +194,11 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [halfrost/vue-objccn](https://github.com/halfrost/vue-objccn):🔥 用 Vue.js 开发的跨三端应用 / Use Vue.js to develop a cross-platform full stack application
 * [SimulatedGREG/electron-vue](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack.
 
+### [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
+
+🛠️ Standard Tooling for Vue.js Development https://cli.vuejs.org/
+
+
 ## UI
 
 * [Vuetify](https://github.com/vuetifyjs/vuetify)
