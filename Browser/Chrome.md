@@ -14,7 +14,7 @@
 - Print Friendly & PDF：用户自定义打印内容
 - 眼不见心不烦：屏蔽微博
 - Allow-Control-Allow-Origin: *
-- Octotree：github目录工具
+- Octotree：github目录工具 Code tree for GitHub
 - AdBlock
 - Awesome Screenshot: Screen Video Recorder
 - Axure RP Extension for Chrome

@@ -42,6 +42,7 @@
 ## 项目
 
 * [bailicangdu/node-elm](https://github.com/bailicangdu/node-elm):基于 node.js + Mongodb 构建的后台系统
+* [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 
 ## 工具
 
@@ -87,6 +88,7 @@
 ## promise
 
 * [petkaantonov/bluebird](https://github.com/petkaantonov/bluebird):🐦 ⚡️ Bluebird is a full featured promise library with unmatched performance. http://bluebirdjs.com
+* [JacksonTian/eventproxy](https://github.com/JacksonTian/eventproxy):An implementation of task/event based asynchronous pattern. http://html5ify.com/eventproxy
 
 ## 服务
 
@@ -95,6 +97,10 @@
 ## 日志
 
 * [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
+
+## 网页
+
+* [nativefier]():让网页一键生成桌面应用程序
 
 ## 机器学习
 

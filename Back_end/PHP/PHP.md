@@ -436,6 +436,16 @@ $arr = array(
 array_multisort(array_column($arr, 'norder'), SORT_ASC, $arr);
 
 array_map(function($element){return strtotime($element['add_time']);}, $datas);
+
+## 数组合并：
+# 索引数组 +会保留第一个值，后面同样值舍弃，merge不会覆盖掉原来的值
+# 关联数组：+会保留第一个值，merge会保留保留后者
+$arr1 = ['PHP', 'apache'];
+$arr2 = ['PHP', 'MySQl', 'HTML', 'CSS'];
+$mergeArr = array_merge($arr1, $arr2);
+$plusArr = $arr1 + $arr2;
+var_dump($mergeArr);
+var_dump($plusArr);
 ```
 
 #### 运算符
@@ -1625,6 +1635,13 @@ brew upgrade php-cs-fixer
 php php-cs-fixer.phar fix /path/to/dir
 php php-cs-fixer.phar fix /path/to/file
 ```
+
+## 大数据
+
+* 如果你正在做成千上万条查询，看看你能不能先只做几条查询。我之前曾使用一个PHP函数把70000条查询降为十几条查询，这样它的运行时间就从几分钟降到了几分之一秒。
+* 在你的查询上运行EXPLAIN，看看你是不是缺少什么索引。我曾经做过一个查询，通过增加了一个索引后效率提高了4个数量级，这没有任何夸张的成分。如果你正在使用MySQL，你可以学学这个，这种“黑魔法”技能会让你和你的小伙伴惊呆的。
+* 如果你正在做SQL查询，然后获得结果，并把很多数字弄到一起，看看你能不能使用像SUM（）和AVG（）之类的函数调用GROUP BY语句。跟普遍的情况下，让数据库处理尽量多的计算。我能给你的一点很重要的提示是：（至少在MySQL里是这样）布尔表达式的值为0或1，如果你很有创意的话，你可以使用SUM（）和它的小伙伴们做些很让人惊讶的事情。
+* 看看你是不是把这些同样很耗费时间的数字计算了很多遍。例如，假设1000袋土豆的成本是昂贵的计算，但你并不需要把这个成本计算500次，然后才把1000袋土豆的成本存储在一个数组或其他类似的地方，所以你不必把同样的东西翻来覆去的计算。这个技术叫做记忆术，在像你这样的报告中使用往往会带来奇迹般的效果。
 
 ## 参考
 

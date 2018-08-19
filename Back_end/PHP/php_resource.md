@@ -566,6 +566,9 @@
       - (http://symfony.com/doc/current/components/var_dumper.html)[Symfony VarDumper]: 一个dumper库(SF2)
       - (http://anahkiasen.github.io/underscore-php/)[Underscore]: 一个Undersccore JS库的PHP实现
       - (https://github.com/filp/whoops)[Whoops]: 一个不错的错误处理库
+## RPC
+
+* [datto/php-json-rpc](https://github.com/datto/php-json-rpc):Fully unit-tested JSON-RPC 2.0 for PHP
 
 ## 安装与环境
 
