@@ -1324,6 +1324,10 @@ These features allow to pause a branch development and switch to another one (_"
 * msysgit
 * sourcetree
 * [GitHawkApp/GitHawk](https://github.com/GitHawkApp/GitHawk):A GitHub project manager app for iOS. http://githawk.com
+* Linux
+  - SmartGit
+  - GitKraken
+  - Git Cola
 
 ## 问题
 

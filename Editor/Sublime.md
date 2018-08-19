@@ -421,7 +421,7 @@ Tabs（标签栏）
     }
 }
 
-// 生效有延时,配置php环境变量
+# 生效有延时,配置php环境变量
 {
     "cmd": ["php", "$file"],
     "file_regex": "php$",
@@ -435,10 +435,12 @@ Tabs（标签栏）
 -   Monokai Pro
 -   [SpaceGray](https://github.com/kkga/spacegray/)
 -   [allanhortle/Centurion](https://github.com/allanhortle/Centurion)
+-   [kkga/spacegray](https://github.com/kkga/spacegray):A Hyperminimal UI Theme for Sublime Text <http://kkga.github.io/spacegray>
 
-
-    Package Control ‣ Install Package ‣ Theme - Monokai Pro
-    Command Palette ‣ Monokai Pro: select theme
+```
+Package Control ‣ Install Package ‣ Theme - Monokai Pro
+Command Palette ‣ Monokai Pro: select theme
+```
 
 ### [代码段（Code Snippets）](http://www.jianshu.com/p/356bd7b2ea8e)
 
@@ -509,7 +511,7 @@ ln -s ~/Dropbox/Sublime/User
 
 ## 参考
 
--   [官网](http://www.sublimetext.com/3)
+- [官网](http://www.sublimetext.com/3)
 -   [总结配置](https://github.com/jikeytang/sublime-text)
 -   [sublime-undocs](http://docs.sublimetext.info/en/latest/index.html#)
 -   [](http://laravelacademy.org/post/6711.html)
@@ -517,6 +519,7 @@ ln -s ~/Dropbox/Sublime/User
 -   [Sublime Text 全程指南](http://lucida.me/blog/sublime-text-complete-guide/)
 -   [非官方文档](http://sublime-text-unofficial-documentation.readthedocs.org/)
 
-## 主题
+## 问题
 
--   [kkga/spacegray](https://github.com/kkga/spacegray):A Hyperminimal UI Theme for Sublime Text <http://kkga.github.io/spacegray>
+markdown-editing无法snipeet,语法高亮：移除JavaScriptNext Package
+

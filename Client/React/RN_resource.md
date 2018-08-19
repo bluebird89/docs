@@ -141,7 +141,7 @@
 
 ## 表单
 
-*  [mozilla-services/react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form):A React component for building Web forms from JSON Schema. 
+*  [mozilla-services/react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form):A React component for building Web forms from JSON Schema.
 
 ## 图片
 
@@ -162,3 +162,33 @@
 ## animations
 
 * [react-tools/react-move](https://github.com/react-tools/react-move):React Move 🌀 Beautiful, data-driven animations for React https://react-move.js.org
+
+## 脚手架
+
+* [kriasoft/react-firebase-starter](https://github.com/kriasoft/react-firebase-starter)：Boilerplate (seed) project for creating web apps with React.js, GraphQL.js and Relay https://firebase.reactstarter.com
+
+## firebase
+
+* [invertase/react-native-firebase](https://github.com/invertase/react-native-firebase):🔥 A well tested feature rich modular Firebase implementation for React Native. Supports both iOS & Android platforms for over 15 Firebase services.https://rnfirebase.io/
+
+## 路由router
+
+* [ReactTraining/react-router](https://github.com/ReactTraining/react-router):Declarative routing for React https://reacttraining.com/react-router/
+
+## 渲染
+
+* [stereobooster/react-snap](https://github.com/stereobooster/react-snap):👻 Zero-configuration framework-agnostic static prerendering for SPAs
+
+## Redux
+
+* [reduxjs/react-redux](https://github.com/reduxjs/react-redux):Official React bindings for Redux https://redux.js.org/basics/usagewithreact
+* [reduxjs/redux](https://github.com/reduxjs/redux):Predictable state container for JavaScript apps http://redux.js.org
+* [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
+
+## 命令行
+
+* [maicki/why-did-you-update](https://github.com/maicki/why-did-you-update):💥 Puts your console on blast when React is making unnecessary updates.
+
+## WEB
+
+* [taobaofed/react-web](https://github.com/taobaofed/react-web):A framework for building web apps with React Native compatible API. http://taobaofed.github.io/react-web/
