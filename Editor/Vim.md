@@ -516,3 +516,4 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [cknadler/vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
 * [rupa/z](https://github.com/rupa/z):z - jump around
 * [rupa/v](https://github.com/rupa/v):z for vim
+* [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim.

@@ -171,6 +171,10 @@ Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，
 <a href="http://www.shop.com/delProducts.php?id=100" "javascript:return confirm('Are you sure?')">Delete</a>
 ```
 
+## 两步验证和短信验证码
+
+* 两步验证基于TOTP机制，不需要任何网络连接（包括Wi-Fi），也不需要短信和SIM卡，验证码完全在手机本地生成
+
 ## 工具
 
 * [rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework):Metasploit Framework https://www.metasploit.com/

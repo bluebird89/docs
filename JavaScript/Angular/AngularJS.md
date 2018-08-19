@@ -1,4 +1,6 @@
-# Angular
+# * [angular/angular.js](https://github.com/angular/angular.js)
+
+AngularJS - HTML enhanced for web apps! https://angularjs.org
 
 * 渐进式Web应用：借助现代化Web平台的力量，交付app式体验。高性能、离线化、零安装。
 * 原生：借助来自Ionic、NativeScript和React Native中的技术与思想，构建原生移动应用。
@@ -92,7 +94,6 @@ ng generate module my-module # 模块Modulew
 
 ## 参考
 
-* [angular/angular.js](https://github.com/angular/angular.js):AngularJS - HTML enhanced for web apps! https://angularjs.org
 * [angular/angular-cli](https://github.com/angular/angular-cli):CLI tool for Angular
 * [angular/material](https://github.com/angular/material):Material design for AngularJS https://material.angularjs.org/
 * [angular-ui/angular-google-maps](https://github.com/angular-ui/angular-google-maps):AngularJS directives for the Google Maps Javascript API http://angular-ui.github.io/angular-g…

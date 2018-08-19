@@ -518,6 +518,9 @@ select a.FirstName,a.LastName, b.City, b.State from Person as a inner join addre
 
 ### 表结构设计
 
+* 组织形式
+    * 堆表(所有的记录无序存储)
+    * 聚簇索引表(所有的记录，按照记录主键进行排序存储)
 * 范式和反范式：对千任何给定的数据通常都有很多种表示方法， 从完全的范式化到完全的反范式化， 以及两者的折中。 在范式化的数据库中， 每个事实数据会出现并且只出现一次。 相反， 在反范式化的数据库中， 信息是冗余的， 可能会存储在多个地方。
     - 范式的优点和缺点：为性能提升考虑时，经常会被建议对 schema 进行范式化设计，尤其是写密集的场景。
     - 范式化的更新操作通常比反范式化要快。
@@ -1069,8 +1072,9 @@ $stmt->close();
 * 在一些情况中，可以对一个查询进行优化以便不用查询数据行即可以检索值。如果查询只使用来自某个表的数字型并且构成某些关键字的最左面前缀的列，为了更快，可以从索引树检索出值。`SELECT key_part3 FROM tb WHERE key_part1=1`
 * 有时MySQL不使用索引，即使有可用的索引。一种情形是当优化器估计到使用索引将需要MySQL访问表中的大部分行时。(在这种情况下，表扫描可能会更快些）。然而，如果此类查询使用LIMIT只搜索部分行，MySQL则使用索引，因为它可以更快地找到几行并在结果中返回。
 
-索引种类：
+#### 索引种类
 
+* 存储的是完整记录的一个子集，用于加速记录的查询速度，索引的组织形式，一般均为B+树结构。
 * PRIMARY 索引:在主键上自动创建，不允许有空值。一般是在建表的时候同时创建主键索引
     - 主键递增，数据行写入可以提高插入性能，可以避免page分裂，减少表碎片提升空间和内存的使用
     - 主键要选择较短的数据类型， Innodb引擎普通索引都会保存主键的值，较短的数据类型可以有效的减少索引的磁盘空间，提高索引的缓存效率
@@ -1115,6 +1119,7 @@ B-tree 索引:大多数谈及的索引类型就是B-tree类型, 可以在create 
     - 索引选择性是不重复的索引值和全部行数的比值。高选择性的索引有好处，查找匹配过滤更多的行，唯一索引选择率为1最佳状态。
     - blob列、text列及很长的varchar列，必须定义前缀索引，mysql不允许索引他们的全文。
 * 组合索引：创建索引列的顺序非常重要，正确的索引顺序依赖于使用该索引的查询方式.对于组合索引的索引顺序可以通过经验法则来帮助我们完成：将选择性最高的列放到索引最前列，该法则与前缀索引的选择性方法一致，但并不是说所有的组合索引的顺序都使用该法则就能确定，还需要根据具体的查询场景来确定具体的索引顺序。
+    - index[b,c,d]:idx_t1_bcd索引，首先按照b字段排序，b字段相同，则按照c字段排序，以此类推。记录在索引中按照[b,c,d]排序
 * 聚簇索引(Clustered Index)：决定数据在物理磁盘上的物理排序，一个表只能有一个聚集索引，如果定义了主键，那么 InnoDB 会通过主键来聚集数据，如果没有定义主键，InnoDB 会选择一个唯一的非空索引代替，如果没有唯一的非空索引，InnoDB 会隐式定义一个主键来作为聚集索引。 聚集索引可以很大程度的提高访问速度，因为聚集索引将索引和行数据保存在了同一个 B-Tree 中，所以找到了索引也就相应的找到了对应的行数据，但在使用聚集索引的时候需注意避免随机的聚集索引（一般指主键值不连续，且分布范围不均匀）。如使用 UUID 来作为聚集索引性能会很差，因为 UUID 值的不连续会导致增加很多的索引碎片和随机I/O，最终导致查询的性能急剧下降。聚集索引不是一种单独的索引类型，而是一种存储数据的方式。Innodb 的聚集索引实际上同样的结构保存了B-tree索引和数据行，"聚集" 是指实际的数据行和相关的键值保存在一起，每个表只能有一个聚集索引，因此不能一次把行保存在两个地方。
     - 在叶子页(Leaf Page)中存储了完整的数据行，实际也是表的一种数据存储方式，这样的表也称索引组织表(Index Organized Table, IOT)。一个InnoDB表中通常只能有一个聚簇索引，被定义在主键上。MYISAM 不支持该索引类型，其索引文件(.MYI)和数据文件(.MYD)是相互独立的。
     - INNODB和MYISAM的主键索引与二级索引的对比：可以看出MYISAM的主键索引和二级索引没有任何区别，主键索引仅仅只是一个叫做PRIMARY KEY的唯一非空的索引，因此 MYISAM 可以不设主键。
@@ -1123,6 +1128,14 @@ B-tree 索引:大多数谈及的索引类型就是B-tree类型, 可以在create 
 * 覆盖索引：索引（如：组合索引）中包含所有要查询的字段的值，查看是否使用了覆盖索引可以通过执行计划中的Extra中的值为Using index。索引支持高效查找行，mysql也能使用索引来接收列的数据。这样不用读取行数据，当发起一个被索引覆盖的查询，explain解释器的extra列看到 using index。避免了读取磁盘数据文件中的行，Innodb的辅助索引叶子节点包含的是主键列，所以主键一定是被索引覆盖的。
 ![clustered-index](../_static/clustered-index.jpg "clustered-index")
 ![index](../_static/index.jpg "index")
+
+#### where规则
+
+* Index Key：用于确定SQL查询在索引中的连续范围(起始范围+结束范围)的查询条件，被称之为Index Key。由于一个范围，至少包含一个起始与一个终止，因此Index Key也被拆分为Index First Key和Index Last Key，分别用于定位索引查找的起始，以及索引查询的终止条件。
+    - Index First Key：用于确定索引查询的起始范围。提取规则：从索引的第一个键值开始，检查其在where条件中是否存在，若存在并且条件是=、>=，则将对应的条件加入Index First Key之中，继续读取索引的下一个键值，使用同样的提取规则；若存在并且条件是>，则将对应的条件加入Index First Key中，同时终止Index First Key的提取；若不存在，同样终止Index First Key的提取。
+    - Index Last Key：Index Last Key的功能与Index First Key正好相反，用于确定索引查询的终止范围。提取规则：从索引的第一个键值开始，检查其在where条件中是否存在，若存在并且条件是=、<=，则将对应条件加入到Index Last Key中，继续提取索引的下一个键值，使用同样的提取规则；若存在并且条件是 < ，则将条件加入到Index Last Key中，同时终止提取；若不存在，同样终止Index Last Key的提取。
+* Index Filter：根据where条件固定了索引的查询范围，但是此范围中的项，并不都是满足查询条件的项。提取规则：同样从索引列的第一列开始，检查其在where条件中是否存在：若存在并且where条件仅为 =，则跳过第一列继续检查索引下一列，下一索引列采取与索引第一列同样的提取规则；若where条件为 >=、>、<、<= 其中的几种，则跳过索引第一列，将其余where条件中索引相关列全部加入到Index Filter之中；若索引第一列的where条件包含 =、>=、>、<、<= 之外的条件，则将此条件以及其余where条件中索引相关列全部加入到Index Filter之中；若第一列不包含查询条件，则将所有索引相关条件均加入到Index Filter之中。
+* Table Filter:提取规则：所有不属于索引列的查询条件，均归为Table Filter之中。
 
 ```sql
 CREATE [UNIQUE|FULLTEXT]  INDEX index_name on tbl_name (col_name [(length)] [ASC | DESC] , …..);
@@ -1150,31 +1163,24 @@ SELECT COUNT(DISTINCT index_column)/COUNT(*) FROM table_name; -- index_column代
 SELECT COUNT(DISTINCT LEFT(index_column,1))/COUNT(*),COUNT(DISTINCT LEFT(index_column,2))/COUNT(*),COUNT(DISTINCT LEFT(index_column,3))/COUNT(*)
 ...FROM table_name;
 ALTER TABLE table_name ADD INDEX index_name (index_column(length));
-```
 
 #### 有效索引
-
-- 全值匹配：`SELECT * FROM user_test WHERE user_name = 'feinik' AND age = 26 AND city = '广州';`
-- 匹配最左前缀:可用于查询条件为：（user_name ）、（user_name, city）、（user_name , city , age）,满足最左前缀查询条件的顺序与索引列的顺序无关
-- 匹配范围值:`SELECT * FROM user_test WHERE user_name LIKE 'feinik%';`
+`SELECT * FROM user_test WHERE user_name = 'feinik' AND age = 26 AND city = '广州';` # 全值匹配
+（user_name ）、（user_name, city）、（user_name , city , age）  # 匹配最左前缀 满足最左前缀查询条件的顺序与索引列的顺序无关
+`SELECT * FROM user_test WHERE user_name LIKE 'feinik%';` # 匹配范围值
 
 #### 无效索引
-
-```sql
 SELECT * FROM user_test WHERE city = '广州';
 SELECT * FROM user_test WHERE age= 26;
 SELECT * FROM user_test WHERE user_name like '%feinik';
-SELECT * FROM user_test WHERE user_name ='feinik' AND city LIKE'广州%' AND age = 26;//有某个列的范围查询,则其右边的所有列都无法使用索引优化查询
-SELECT * FROM user_test WHERE user_name = concat(user_name, 'fei'); // 索引列不能是表达式的一部分，也不能作为函数的参数
-SELECT user_name, city, age FROM user_test ORDER BY user_name, sex; // 不在索引列中
-SELECT user_name, city, age FROM user_test ORDER BY user_name ASC, city DESC; //方向不一致
+SELECT * FROM user_test WHERE user_name ='feinik' AND city LIKE'广州%' AND age = 26; # 有某个列的范围查询,则其右边的所有列都无法使用索引优化查询
+SELECT * FROM user_test WHERE user_name = concat(user_name, 'fei');  #  索引列不能是表达式的一部分，也不能作为函数的参数
+SELECT user_name, city, age FROM user_test ORDER BY user_name, sex;  #  不在索引列中
+SELECT user_name, city, age FROM user_test ORDER BY user_name ASC, city DESC;  # 方向不一致
 SELECT user_name, city, age, sex FROM user_test ORDER BY user_name;
 SELECT user_name, city, age FROM user_test WHERE user_name LIKE 'feinik%' ORDER BY city;
-```
 
-使用索引排序：ORDER BY 子句后的列顺序要与组合索引的列顺序一致，且所有排序列的排序方向（正序/倒序）需一致；所查询的字段值需要包含在索引列中，及满足覆盖索引。
-
-```sql
+# 使用索引排序：ORDER BY 子句后的列顺序要与组合索引的列顺序一致，且所有排序列的排序方向（正序/倒序）需一致；所查询的字段值需要包含在索引列中，及满足覆盖索引。
 SELECT user_name, city, age FROM user_test ORDER BY user_name;
 SELECT user_name, city, age FROM user_test ORDER BY user_name, city;
 SELECT user_name, city, age FROM user_test ORDER BY user_name DESC, city DESC;
@@ -1256,12 +1262,9 @@ CMD ["mysqld"]
 - docker build -t mysql .
 - docker run -p 3306:3306 --name mymysql -v $PWD/conf/my.cnf:/etc/mysql/my.cnf -v $PWD/logs:/logs -v $PWD/data:/mysql_data -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
 
-## 扩展
+### [o1lab/xmysql](https://github.com/o1lab/xmysql)
 
-* [mysqljs/mysql](https://github.com/mysqljs/mysql):A pure node.js JavaScript Client implementing the MySql protocol.
-* [o1lab/xmysql](https://github.com/o1lab/xmysql):One command to generate REST APIs for any MySql Database.
-
-### xmysql
+One command to generate REST APIs for any MySql Database.
 
 ```shell
 npm install -g xmysql
@@ -1433,6 +1436,7 @@ pt-query-digest --type=binlog mysql-bin.000001.sql
 * [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. http://vitess.io
 * [dbcli/mycli](https://github.com/dbcli/mycli):A Terminal Client for MySQL with AutoCompletion and Syntax Highlighting. http://mycli.net
 * [github/orchestrator](https://github.com/github/orchestrator):MySQL replication topology management and HA
+* [mysqljs/mysql](https://github.com/mysqljs/mysql):A pure node.js JavaScript Client implementing the MySql protocol.
 
 您可以通过创建数据表来存储许可数据，以及所有许可用户标识和产品标识符来对数据进行非规范化（反规范化）处理，并针对特定客户进行查询。 您需要使用INSERT / UPDATE / DELETE上的MySQL触发器来重建表格（不过这要取决于数据来更改的表格），这会显着提高查询数据的性能。
 

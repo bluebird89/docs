@@ -158,6 +158,10 @@ ZSH_THEME="robbyrussell" # 主题设置（文件在~/.oh-my-zsh/themes）
 plugins=(git textmate ruby autojump osx mvn gradle autojump)
 
 export DEFAULT_USER="henry" # hide username
+
+# 更新
+upgrade_oh_my_zsh
+uninstall_oh_my_zsh
 ```
 
 ```
