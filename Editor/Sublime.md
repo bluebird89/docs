@@ -436,6 +436,7 @@ Tabs（标签栏）
 -   [SpaceGray](https://github.com/kkga/spacegray/)
 -   [allanhortle/Centurion](https://github.com/allanhortle/Centurion)
 -   [kkga/spacegray](https://github.com/kkga/spacegray):A Hyperminimal UI Theme for Sublime Text <http://kkga.github.io/spacegray>
+- [ihodev/sublime-boxy](https://github.com/ihodev/sublime-boxy):It Was the Most Hackable Theme for Sublime Text 3
 
 ```
 Package Control ‣ Install Package ‣ Theme - Monokai Pro
