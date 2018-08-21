@@ -27,6 +27,10 @@
 * [Requarks/wiki](https://github.com/Requarks/wiki):Wiki.js | A modern, lightweight and powerful wiki app built on NodeJS, Git and Markdown https://wiki.js.org
 * [tj/should.js](https://github.com/tj/should.js):BDD style assertions for node.js -- test framework agnostic
 
+## 包管理
+
+* [pnpm/pnpm](https://github.com/pnpm/pnpm):📦🚀 Fast, disk space efficient package manager https://pnpm.js.org
+
 ## 参考
 
 * [Dist](http://nodejs.org/dist/)
