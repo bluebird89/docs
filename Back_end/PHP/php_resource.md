@@ -352,7 +352,7 @@
       - (https://github.com/Wisembly/ExcelAnt)[ExcelAnt]: 一个操作Excel文档的库
       - (https://github.com/PHPOffice/PHPPresentation)[PHPPowerPoint]: 一个处理PPT文档的库
       - (https://github.com/PHPOffice/PHPWord)[PHPWord]: 一个处理Word文档的库
-      - (https://github.com/PHPOffice/PhpSpreadsheet)[PHPSpreadsheet]: 一个纯PHP的读写电子表格的库 (successor of PHPExcel)
+      - [PHPSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet): 一个纯PHP的读写电子表格的库 (successor of PHPExcel)
 * 数据库 Database 使用对象关系映射（ORM）或数据映射技术的数据库交互的库
       - (https://github.com/etrepat/baum)[Baum]: 一个Eloquent的嵌套集实现
       - (https://github.com/cakephp/orm)[Cake ORM]: 对象关系映射工具，利用DataMapper模式实现 (CP)
