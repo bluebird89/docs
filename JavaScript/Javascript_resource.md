@@ -25,6 +25,7 @@
 ## 包管理
 
 * [JedWatson/classnames](https://github.com/JedWatson/classnames):A simple javascript utility for conditionally joining classNames together
+* [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
 
 ## 工具
 

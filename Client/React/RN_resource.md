@@ -112,6 +112,7 @@
 * [markerikson/react-redux-links](https://github.com/markerikson/react-redux-links):Curated tutorial and resource links I've collected on React, Redux, ES6, and more
 * [tachyons-css/tachyons](https://github.com/tachyons-css/tachyons/):Functional css for humans https://tachyons.io
 * [adam-golab/react-developer-roadmap](https://github.com/adam-golab/react-developer-roadmap):Roadmap to becoming a React developer in 2018s
+* [kentcdodds/advanced-react-patterns](https://github.com/kentcdodds/advanced-react-patterns):The course material for my advanced react patterns course on Egghead.io
 
 ## 框架
 
@@ -188,6 +189,10 @@
 ## 命令行
 
 * [maicki/why-did-you-update](https://github.com/maicki/why-did-you-update):💥 Puts your console on blast when React is making unnecessary updates.
+
+## 组件
+
+* [JedWatson/react-select](https://github.com/JedWatson/react-select):The Select for React.js https://react-select.com/
 
 ## WEB
 

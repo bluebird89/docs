@@ -175,3 +175,6 @@
 [submodule "Guide_lines/guides"]
 	path = Guide_lines/guides
 	url = git@github.com:thoughtbot/guides.git
+[submodule "JavaScript/TypeScript/typescript-definition-style-guide"]
+	path = JavaScript/TypeScript/typescript-definition-style-guide
+	url = git@github.com:sindresorhus/typescript-definition-style-guide.git
