@@ -58,10 +58,10 @@ $(document).ready(function(){
 返回的对象是jQuery对象(类似数组，它的每个元素都是一个引用了DOM节点的对象),不会返回undefined或者null，这样的好处是你不必在下一行判断if (div === undefined)。
 jQuery对象和DOM对象之间可以互相转化:拿到了一个DOM对象，那可以简单地调用$(aDomObject)把它变成jQuery对象
 
-* 按元素查找
-* 按ID查找
+* 按元素查找 $("button")、$("h1")
+* 按ID查找 $("#target1")
 * 按tag查找
-* 按class查找
+* 按class查找 $(".target")
 * 按属性查找：除了id和class外还可以有很多属性，很多时候按属性查找会非常方便
     - 当属性的值包含空格等特殊字符时，需要用双引号括起来。
     - 按属性查找还可以使用前缀查找或者后缀查找：
@@ -171,17 +171,33 @@ $('ul.lang li.lang-javascript'); // 每个 <ul> 的第一个 <li> 元素
 
 ### 操作DOM
 
-* 修改Text和HTML.一个jQuery对象可以包含0个或任意个DOM对象，它的方法实际上会作用在对应的每个DOM节点上.可以执行一个操作，作用在对应的一组DOM节点上。即使选择器没有返回任何DOM节点，调用jQuery对象的方法仍然不会报错.免去了许多if语句
-* 修改CSS:css(),addClass()
-* 显示和隐藏DOM:隐藏一个DOM，我们可以设置CSS的display属性为none，利用css()方法就可以实现.恢复原有的display属性，这就得先记下来原有的display属性到底是block还是inline还是别的值。
-* 获取DOM信息:attr()和removeAttr()方法用于操作DOM节点的属性.prop()方法和attr()类似，但是HTML5规定有一种属性在DOM节点中可以没有值，只有出现与不出现两种.prop()返回值更合理一些。不过，用is()方法判断更好(checked selected)
+* 修改Text和HTML：一个jQuery对象可以包含0个或任意个DOM对象，它的方法实际上会作用在对应的每个DOM节点上.可以执行一个操作，作用在对应的一组DOM节点上。即使选择器没有返回任何DOM节点，调用jQuery对象的方法仍然不会报错.免去了许多if语句
+    - 通过html方法添加内容，可以让你在元素中添加HTML标签和文字，而元素中之前的内容都会被方法中的内容所替换掉，示例：$("h3").html("<em>jQuery Playground</em>");
+    - jQuery 还有一个类似的方法叫.text()，它只能改变文本但不能添加标签。换句话说，这个方法只会把任何传进来的HTML标签当成你想替换现有内容的文本；
+* 修改CSS: $("#target1").css("color","red");
+* 显示和隐藏DOM
+    * 隐藏一个DOM，我们可以设置CSS的display属性为none，利用css()方法就可以实现.
+    * 恢复原有的display属性，这就得先记下来原有的display属性到底是block还是inline还是别的值。
+* 获取DOM信息
+    * attr()和removeAttr()方法用于操作DOM节点的属性.
+    * prop()方法和attr()类似，但是HTML5规定有一种属性在DOM节点中可以没有值，只有出现与不出现两种.prop()返回值更合理一些。不过，用is()方法判断更好(checked selected) $("button").prop("disabled",true);
 * 操作表单：对于表单元素，jQuery对象统一提供val()方法获取和设置对应的value属性
 * 修改DOM结构：
     - append（）把DOM添加到最后。可以传入原始的DOM对象，jQuery对象和函数对象。传入函数时，要求返回一个字符串、DOM对象或者jQuery对象。因为jQuery的append()可能作用于一组DOM节点，只有传入函数才能针对每个DOM生成不同的子节点。
     - prepend()则把DOM添加到最前
+    - appendTo()方法，可以让你把选中的HTML元素附加到其他元素中
     - 如果要添加的DOM节点已经存在于HTML文档中，它会首先从文档移除，然后再添加，也就是说，用append()，你可以移动一个DOM节点。
     - 要把新节点插入到指定位置，例如，JavaScript和Python之间，那么，可以先定位到JavaScript，然后用after()方法。同级节点可以用after()或者before()方法
-    - 要删除DOM节点，拿到jQuery对象后直接调用remove()方法就可以了。如果jQuery对象包含若干DOM节点，实际上可以一次删除多个DOM节点：
+    - 要删除DOM节点，拿到jQuery对象后直接调用remove()方法就可以了。如果jQuery对象包含若干DOM节点，实际上可以一次删除多个DOM节点：remove()的方法，可以彻底删除一个HTML元素
+* 类属性操作
+    - 通过addClass("myClass")方法给元素增加类
+    - 通过removeClass("myClass")方法移除相应的类
+* 复制元素：clone()
+* 子元素、父元素、奇偶元素
+    - parent()方法，可以允许你访问选定元素的父元素；
+    - children()方法，可以让你访问选定元素的子元素；
+    - 用CSS选择器来获取元素，target:nth-child(n)CSS选择器允许你通过目标类或元素类型选择目标元素的所有子元素；
+    - jQuery里的索引是从0开始的，也就意味着会与直觉相反：:odd选择的是第2、4、6……个元素，因为索引是1、3、5……
 
 ```html
 <ul id="test-ul">
