@@ -339,6 +339,7 @@ services:
 * Potainer
 * [openfaas/faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple for Docker & Kubernetes https://docs.openfaas.com/
 * [portainer/portainer](https://github.com/portainer/portainer):Simple management UI for Docker http://portainer.io
+* [coreos/clair](https://github.com/coreos/clair):Vulnerability Static Analysis for Containers
 
 ## 参考
 

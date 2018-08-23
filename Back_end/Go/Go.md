@@ -176,6 +176,7 @@ websocketd --port=8080 ./count.sh // 建立server
 - [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. https://iris-go.com
 - [https://songjiayang.gitbooks.io](https://songjiayang.gitbooks.io)
 - [Go语言入门](https://www.yiibai.com/go/go_start.html)
+- [harlow/go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
 
 ## 参考
 

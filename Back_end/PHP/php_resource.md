@@ -755,7 +755,7 @@
 
 ## 后台
 
-* [Nova](https://nova.laravel.com/):
+* [Nova](https://nova.laravel.com/):administration panel for Laravel
 
 ## 存储
 

@@ -407,7 +407,6 @@ class TagCreateRequest extends Request
     }
 }
 
-
 //  应的Controller方法里引入 注意这里使用的是TagCreateRequest
 public function store(TagCreateRequest $request)
 {
@@ -431,10 +430,23 @@ public function store(TagCreateRequest $request)
 - Eloquent事件处理器现在可以被映射到事件对象上，这为我们处理Eloquent事件并让其变得易于测试提供了一种直观的方式
 - Facades
 - 中间件
+- 路由
+- 服务容器
+- 服务提供者
+- Contracts 契约模式
+- CSRF保护
 - guzzle
 - 广播
 - tinker：所有的 Laravel 应用都提供了 Tinker ---- 一个由 PsySH 扩展包驱动的REPL（Read-Eval-Print Loop，即终端命令行"读取-求值-输出"循环工具）。Tinker 允许你通过命令行与整个 Laravel 应用进行交互，包括 Eloquent ORM、任务、事件等等。
 - Elixir
+
+### 设计模式
+
+* Facade模式（又称外观模式，门脸模式）
+* 管道模式
+* 单例模式
+* 依赖注入
+* 反转控制
 
 ## 数据操作
 
