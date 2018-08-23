@@ -12,6 +12,10 @@
 * [mjackson/expect](https://github.com/mjackson/expect):Write better assertions
 * [expressjs/multer](https://github.com/expressjs/multer):Node.js middleware for handling `multipart/form-data`.
 
+## 环境
+
+* [motdotla/dotenv](https://github.com/motdotla/dotenv):Loads environment variables from .env for nodejs projects.
+
 ## 教程
 
 * [N-blog](https://maninboat.gitbooks.io/n-blog/content/):使用 Express + MongoDB 搭建多人博客
