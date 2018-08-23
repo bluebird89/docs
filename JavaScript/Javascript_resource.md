@@ -123,6 +123,10 @@
 
 * [HubSpot/odometer](https://github.com/HubSpot/odometer):Smoothly transitions numbers with ease. #hubspot-open-source
 
+## trace
+
+* [stacktracejs/stacktrace.js](https://github.com/stacktracejs/stacktrace.js):Generate, parse, and enhance JavaScript stack traces in all web browsers https://www.stacktracejs.com/
+
 ## 代码格式化
 
 * [airbnb/javascript](https://github.com/airbnb/javascript):JavaScript Style Guide

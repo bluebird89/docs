@@ -566,7 +566,7 @@ Python实现的数据库。
 
 ## 爬虫
 
-* Scrapy：一个快速高级的屏幕爬取及网页采集框架。[官网](http://scrapy.org/)
+* [Scrapy](http://scrapy.org/)：一个快速高级的屏幕爬取及网页采集框架。
 * cola：一个分布式爬虫框架。[官网](https://github.com/chineking/cola)
 * Demiurge：基于PyQuery 的爬虫微型框架。[官网](https://github.com/matiasb/demiurge)
 * feedparser：通用 feed 解析器。[官网](http://pythonhosted.org/feedparser/)
@@ -576,6 +576,7 @@ Python实现的数据库。
 * pyspider：一个强大的爬虫系统。[官网](https://github.com/binux/pyspider)
 * RoboBrowser：一个简单的，Python 风格的库，用来浏览网站，而不需要一个独立安装的浏览器。[官网](https://github.com/jmcarp/robobrowser)
 * Requestium：从请求开始并无缝地切换到使用Selenium，它可以作为一个请求的直接替换
+* [s0md3v/Photon](https://github.com/s0md3v/Photon):Incredibly fast crawler designed for reconnaissance.
 
 ## 网页内容提取
 
