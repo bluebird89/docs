@@ -26,6 +26,7 @@
 
 * [JedWatson/classnames](https://github.com/JedWatson/classnames):A simple javascript utility for conditionally joining classNames together
 * [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
+* [lerna/lerna](https://github.com/lerna/lerna):🐉 A tool for managing JavaScript projects with multiple packages. https://lernajs.io
 
 ## 工具
 
