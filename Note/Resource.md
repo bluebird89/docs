@@ -71,6 +71,7 @@
 -   [juicefs](https://juicefs.io/):为云端设计的 POSIX 共享文件系统
 - 百度云
 - 坚果云
+- [syncthing/syncthing](https://github.com/syncthing/syncthing):Open Source Continuous File Synchronization https://forum.syncthing.net/
 
 ## 笔记
 
@@ -304,10 +305,11 @@
 
 ## Play station 4
 
-有钱pro没钱slim
+有钱pro
+没钱slim
 
 天蝎
-ns
+
 1080ti
 
 ### PC

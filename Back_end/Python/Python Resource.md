@@ -119,6 +119,7 @@
   - python-user-agents：浏览器 user agent 解析器。[官网](https://github.com/selwin/python-user-agents)
   - sqlparse：一个无验证的 SQL 解析器。[官网](https://sqlparse.readthedocs.org/en/latest/)
   - [aaronsw/html2text](https://github.com/aaronsw/html2text):Convert HTML to Markdown-formatted text. http://www.aaronsw.com/2002/html2text/
+  - [facebookresearch/fastText](https://github.com/facebookresearch/fastText):Library for fast text representation and classification.
 
 ## 特殊文本格式处理
 

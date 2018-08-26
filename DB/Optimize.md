@@ -254,7 +254,7 @@ MySQL  客户端和服务端通信协议是“半双工”的，这就意味着�
 优化目标：尽量通过索引直接返回有序数据，减少额外的排序。MySQL中有两种排序方式：
 
 * 通过有序索引顺序扫描直接返回有效数据，不需要额外的排序，操作效率较高；
-* 对返回的数据进行排序，也就是常说的Filesort排序，所有不是通过索引直接返回排序结果的排序都是filesort排序。 
+* 对返回的数据进行排序，也就是常说的Filesort排序，所有不是通过索引直接返回排序结果的排序都是filesort排序。
 
 filesort有两种排序算法，一种是一次扫描算法（较快），二种是两次扫描算法。适当加大系统变量max_length_for_sort_data的值，能够让MySQL选择更优化的filesort排序算法；适当加大sort_buffer_size排序区，尽量让排序在内存中完成，而不是通过创建临时表放在文件中进行。
 
@@ -273,16 +273,16 @@ filesort有两种排序算法，一种是一次扫描算法（较快），二种
 * 拆分大的 DELETE 或 INSERT 语句
 
 ```php
-while (1) { 
-    //每次只做1000条 
-    mysql_query("DELETE FROM logs WHERE log_date <= '2009-11-01' LIMIT 1000"); 
-    if (mysql_affected_rows() == 0) { 
-        // 没得可删了，退出！ 
-        break; 
-    } 
-    // 每次都要休息一会儿 
-    usleep(50000); 
- } 
+while (1) {
+    //每次只做1000条
+    mysql_query("DELETE FROM logs WHERE log_date <= '2009-11-01' LIMIT 1000");
+    if (mysql_affected_rows() == 0) {
+        // 没得可删了，退出！
+        break;
+    }
+    // 每次都要休息一会儿
+    usleep(50000);
+ }
 ```
 
 ## 查询优化器
@@ -313,7 +313,7 @@ while (1) {
 * UNION的限制：UNION操作不会把UNION外的操作推送到每个子集
     - 为每个子操作单独的添加限制条件，例如  学生表有10000条记录,会员表有10000表记录,如果想按照姓名排序取两个表的前20条记录,如果在各个子查询中添加limit的话,则最外层的limit操作将会从40条记录中取20条,否则是从20000条中取20条
 * Max()/MIN()：当执行 select max(id) from table1 where name=’sun’ 时,如果name没有建立相应的索引,MYSQL会进行全表扫描
-    - 将SQL等同的转化为 select id from table1 use index(PRIMARY) wherename=’sun’ limit 1.  
+    - 将SQL等同的转化为 select id from table1 use index(PRIMARY) wherename=’sun’ limit 1.
 
 ### 检查
 
@@ -342,7 +342,7 @@ while (1) {
     - ref:这个表示显示索引的哪一列被使用了，如果可能的话,是一个常量
     - rows:扫描的行数
     - Extra:执行情况的描述和说明
-        + using index：只用到索引,可以避免访问表. 
+        + using index：只用到索引,可以避免访问表.
         + using where：使用到where来过虑数据. 不是所有的where clause都要显示using where. 如以=方式访问索引.
         + using tmporary：用到临时表
         + using filesort：用到额外的排序. (当使用order by v1,而没用到索引时,就会使用额外的排序)
@@ -351,8 +351,8 @@ while (1) {
 * show:查看MySQL状态及变量
 * PROCEDURE ANALYSE() 帮你去分析你的字段和其实际的数据，并会给你一些有用的建议。只有表中有实际的数据，这些建议才会变得有用，因为要做一些大的决定是需要有数据作为基础的。
 * 慢查询:知道哪些SQL语句执行效率低下,mysql支持把慢查询语句记录到日志文件中.用来记录在MySQL中响应时间超过阀值的语句，具体指运行时间超过long_query_time值的SQL，则会被记录到慢查询日志中。long_query_time的默认值为10，意思是运行10s以上的语句。
-    - 官方自带工具： mysqldumpslow 
-    - 开源工具：mysqlsla  
+    - 官方自带工具： mysqldumpslow
+    - 开源工具：mysqlsla
     - percona-toolkit：工具包中的pt-query-digest工具可以分析汇总慢查询信息，具体逻辑可以看SlowLogParser这个函数。
     - 接删除慢日志文件，执行flush logs（必须的）。
     - 备份：先用mv重命名文件（不要跨分区），然后执行flush logs（必须的）
@@ -410,6 +410,54 @@ make && make install
 ./pt-query-digest  slow.log
 ```
 
+### [优化策略](http://www.techug.com/post/mysql-20-plus-tips.html)
+
+* 优化查询缓存:确定是否会产生缓存
+* EXPLAIN选择查询:帮助了解MySQL是怎样运行你的查询的,索引、扫描范围
+* 获取唯一行时使用LIMIT 1
+* 索引搜索字段：索引不仅仅是为了主键或唯一键。如果会在你的表中按照任何列搜索，你就都应该索引它们。
+* Join表的时候使用相当类型的例，并将其索引：包含许多连接查询, 你需要确保连接的字段在两张表上都建立了索引，使用同样类型，相同的字符类型
+* 不要ORDER BY RAND()：
+* 避免使用SELECT *:从数据表中读取的数据越多，查询操作速度就越慢。它增加了磁盘操作所需的时间。此外，当数据库服务器与Web服务器分开时，由于必须在服务器之间传输数据，将会有更长的网络延迟。指定你需要的列
+* 永远为每张表设置一个ID:每个以id列为PRIMARY KEY的数据表中，优先选择AUTO_INCREMENT或者INT. VARCHAR字段作为主键（检索）速度较慢.一个可能的例外是"关联表"，用于两个表之间的多对多类型的关联。例如，"posts_tags"表中包含两列：post_id，tag_id，用于保存表名为"post"和"tags"的两个表之间的关系。这些表可以具有包含两个id字段的PRIMARY键。
+* 相比VARCHAR优先使用ENUM:ENUM枚举类型是非常快速和紧凑的。在内部它们像TINYINT一样存储，但它们可以包含和显示字符串值。知道这些字段的取值是有限而且固定的，请使用ENUM而不是VARCHAR
+* 通过PROCEDURE ANALYZE()获取建议：使用MySQL分析列结构和表中的实际数据，为你提供一些建议。它只有在数据表中有实际数据时才有用，因为这在分析决策时很重要。
+* 如果可以的话使用NOT NULL：问一下你自己在空字符串值和NULL值之间（对应INT字段：0 vs. NULL）是否有任何的不同.如果没有理由一起使用这两个。NULL列需要额外的空间，他们增加了你的比较语句的复杂度。
+* 预处理语句：预处理语句默认情况下会过滤绑定到它的变量，这对于避免SQL注入攻击极为有效。当然你也可以指定要过滤的变量。但这些方法更容易出现人为错误，也更容易被程序员遗忘。
+* 无缓冲查询:通常当你从脚本执行一个查询，在它可以继续后面的任务之前将需要等待查询执行完成。你可以使用无缓冲的查询来改变这一情况。"mysql_unbuffered_query() 发送SQL查询语句到MySQL不会像 mysql_query()那样自动地取并缓冲结果行。这让产生大量结果集的查询节省了大量的内存，在第一行已经被取回时你就可以立即在结果集上继续工 作，而不用等到SQL查询被执行完成。"有一定的局限性。你必须在执行另一个查询之前读取所有的行或调用mysql_free_result() 。另外你不能在结果集上使用mysql_num_rows() 或 mysql_data_seek() 。
+* 使用 UNSIGNED INT 存储IP地址：定长四个字段，还有查询优势（IP between ip1 and ip2）。在查询中可以使用 INET_ATON() 来把一个IP转换为整数，用 INET_NTOA() 来进行相反的操作。在 PHP 也有类似的函数，ip2long() 和 long2ip()。 `$r = "UPDATE users SET ip = INET_ATON('{$_SERVER['REMOTE_ADDR']}') WHERE user_id = $user_id`
+* 固定长度（静态）的表会更快：所有列都是"固定长度"，那么这个表被认为是"静态"或"固定长度"的。不固定的列类型包括 VARCHAR、TEXT、BLOB等。即使表中只包含一个这些类型的列，这个表就不再是固定长度的，MySQL 引擎会以不同的方式来处理它。固定长度的表会提高性能，因为 MySQL 引擎在记录中检索的时候速度会更快。它们也易于缓存，崩溃后容易重建。不过它们也会占用更多空间
+* 垂直分区是为了优化表结构而对其进行纵向拆分的行为。将低频信息放到另一个表中，这样你的主用户表就会更小。如你所知，表越小越快。例子：last_login" 字段，用户每次登录网站都会更新这个字段，而每次更新都会导致这个表缓存的查询数据被清空。这种情况下你可以将那个字段放到另一张表里，保持用户表更新量最小。
+* 拆分大型DELETE或INSERT语句：执行大型DELETE或INSERT查询，则需要注意不要影响网络流量。当执行大型语句时，它会锁表并使你的Web应用程序停止。Apache运行许多并行进程/线程。 因此它执行脚本效率很高。所以服务器不期望打开过多的连接和进程，这很消耗资源，特别是内存。如果你锁表很长时间（如30秒或更长），在一个高流量的网站，会导致进程和查询堆积，处理这些进程和查询可能需要很长时间，最终甚至使你的网站崩溃。维护脚本需要删除大量的行，只需使用LIMIT子句，以避免阻塞。`while (1) { mysql_query("DELETE FROM logs WHERE log_date`
+* 越少的列越快:对于数据库引擎，磁盘可能是最重要的瓶颈。更小更紧凑的数据、减少磁盘传输量，通常有助于性能提高。如果已知表具有很少的行，则没有理由是主键类型为INT，可以用MEDIUMINT、SMALLINT代替，甚至在某些情况下使用TINYINT。 如果不需要完整时间记录，请使用DATE而不是DATETIME。
+* 选择正确的存储引擎
+    * MyISAM适用于读取繁重的应用程序，但是当有很多写入时它不能很好地扩展。 即使你正在更新一行的一个字段，整个表也被锁定，并且在语句执行完成之前，其他进程甚至无法读取该字段。 MyISAM在计算SELECT COUNT（*）的查询时非常快。
+    * InnoDB是一个更复杂的存储引擎，对于大多数小的应用程序，它比MyISAM慢。 但它支持基于行的锁定，使其更好地扩展。 它还支持一些更高级的功能，比如事务。
+* 使用对象关系映射器（ORM, Object Relational Mapper）:ORM以"延迟加载"著称。这意味着它们仅在需要时获取实际值。但是你需要小心处理他们，否则你可能最终创建了许多微型查询，这会降低数据库性能。ORM还可以将多个查询批处理到事务中，其操作速度比向数据库发送单个查询快得多。Doctrine
+* 小心使用持久连接:持久连接意味着减少重建连接到MySQL的成本。 当持久连接被创建时，它将保持打开状态直到脚本完成运行。 因为Apache重用它的子进程，下一次进程运行一个新的脚本时，它将重用相同的MySQL连接。`mysql_pconnect()`,可能会出现连接数限制问题、内存问题等等。
+
+```php
+// query cache does NOT work 因为功能返回的结果是可变的。MySQL决定禁用查询器的查询缓存
+$r = mysql_query("SELECT username FROM user WHERE signup_date >= CURDATE()");
+// query cache works!
+$today = date("Y-m-d");
+$r = mysql_query("SELECT username FROM user WHERE signup_date >= '$today'");
+
+$r = mysql_query("SELECT count(*) FROM user");
+$d = mysql_fetch_row($r);
+$rand = mt_rand(0,$d[0] - 1);
+$r = mysql_query("SELECT username FROM user LIMIT $rand, 1");
+
+if ($stmt = $mysqli->prepare("SELECT username FROM user WHERE state=?")) {
+$stmt->bind_param("s", $state);
+$stmt->execute();
+$stmt->bind_result($username);
+$stmt->fetch();
+printf("%s is from %sn", $username, $state);
+$stmt->close();
+}
+```
+
 #### 慢日志
 
 使用mysqldumpslow命令可以非常明确的得到各种我们需要的查询语句，对MySQL查询语句的监控、分析、优化是MySQL优化非常重要的一步。开启慢查询日志后，由于日志记录操作，在一定程度上会占用CPU资源影响mysql的性能，但是可以阶段性开启来定位性能瓶颈。
@@ -420,7 +468,7 @@ make && make install
 
 ```sql
 long_query_time = 2 # 设置把日志写在那里，可以为空，系统会给一个缺省的文件
-log-slow-queries = D:/mysql/logs/slow.log 
+log-slow-queries = D:/mysql/logs/slow.log
 
 /path/mysqldumpslow -s r -t 10 /database/mysql/slow-log # 返回记录集最多的10个查询
 /path/mysqldumpslow -s t -t 10 -g “left join” /database/mysql/slow-log # 得到按照时间排序的前10条里面含有左连接的查询语句。
@@ -442,10 +490,10 @@ optimize table tbl_name;
 
 * 使用连接池
 * 减少对MySQL的访问
-    - 理清应用逻辑，能一次取出的数据不用两次； 
-    - 使用查询缓存MySQL的查询缓存（MySQL query cache）是4.1版本之后新增的功能，作用是存储select的查询文本和相应结果。如果随后收到一个相同的查询，服务器会从查询缓存中重新得到查询结果，而不再需要解析和执行查询。 查询缓存适用于更新不频繁的表，当表更改（包括表结构和数据）后，查询缓存会被清空。 
+    - 理清应用逻辑，能一次取出的数据不用两次；
+    - 使用查询缓存MySQL的查询缓存（MySQL query cache）是4.1版本之后新增的功能，作用是存储select的查询文本和相应结果。如果随后收到一个相同的查询，服务器会从查询缓存中重新得到查询结果，而不再需要解析和执行查询。 查询缓存适用于更新不频繁的表，当表更改（包括表结构和数据）后，查询缓存会被清空。
     - 在应用端增加cache层
-    - 负载均衡 
+    - 负载均衡
 
 ## 工具
 
@@ -465,7 +513,7 @@ optimize table tbl_name;
 
 ## 参考
 
-* [SQL语句百万数据量优化方案](https://juejin.im/post/5a01257a6fb9a045211e1bdc) 
+* [SQL语句百万数据量优化方案](https://juejin.im/post/5a01257a6fb9a045211e1bdc)
 
 存储使用EMC阵列（容量大，数据安全），IBM服务器，即IOE组合，这三个组合很强大（高可用，高性能）
 
