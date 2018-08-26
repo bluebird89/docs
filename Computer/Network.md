@@ -78,3 +78,7 @@ ping IP -n 20 # 执行特定次数（此处是20）的ping命令。
 ipconfig # 显示每个已经配置了的接口的IP地址、子网掩码和缺省网关值
 ipconfig /all # 为DNS和WINS服务器显示它已配置且所有使用的附加信息，并且能够显示内置于本地网卡中的物理地址（MAC）
 ```
+
+## 参考
+
+* [SystemsApproach/book](https://github.com/SystemsApproach/book):Meta-data and Makefile needed to build the book. Main starting point.

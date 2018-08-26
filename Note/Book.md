@@ -27,8 +27,8 @@
 * 《[图灵的秘密:他的生平、思想及论文解读](https://www.amazon.cn/gp/product/B00AAQXKXS)》
 * 《[计算机系统概论](https://www.amazon.cn/gp/product/B0011F9OQE)》
 * 《[TCP/IP详解 卷1：协议](https://www.amazon.cn/gp/product/B00116OTVS)》
-* 《[深入理解计算机系统（原书第2版）](https://www.amazon.cn/gp/product/B004BJ18KM)》
-* 《[计算机程序的构造和解释（Structure and Interpretation of Computer Programs）](https://www.amazon.cn/gp/product/B0011AP7RY)》
+* 《[深入理解计算机系统（原书第2版）](https://www.amazon.cn/gp/product/B004BJ18KM)》 todo
+* 《[计算机程序的构造和解释（Structure and Interpretation of Computer Programs）](https://www.amazon.cn/gp/product/B0011AP7RY)》todo
 * 《[编码：隐匿在计算机软硬件背后的语言](https://www.amazon.cn/gp/product/B009RSXIB4)》
 * 《[性能之颠：洞悉系统、企业与云计算](https://www.amazon.cn/gp/product/B0140I5WPK)》
 * 《[Windows核心编程(第5版)](https://www.amazon.cn/gp/product/B001GS7918)》
@@ -96,7 +96,7 @@
 
 ## 算法与数据结构
 
-* 《[算法（第4版）](https://www.amazon.cn/gp/product/B009OCFQ0O)》
+* 《[算法（第4版）](https://www.amazon.cn/gp/product/B009OCFQ0O)》todo
 * 《[算法导论（原书第2版）（Introduction to Algorithms）](https://www.amazon.cn/gp/product/B00AK7BYJY)》
 * 《[Python算法教程](https://www.amazon.cn/gp/product/B019NB0VCI)》
 * 《[算法设计与分析基础（第3版）](https://www.amazon.cn/gp/product/B00S4HCQUI)》
@@ -129,6 +129,8 @@
 * 无懈可击的web设计
 * 无界面交互
 * 非设计人员的设计
+* 产品经理手册
+* 上瘾：让用户养成使用习惯的四大产品逻辑
 
 ## OO
 
@@ -154,7 +156,6 @@
 * 七周七Web开发框架
 * Web性能权威指南
 * 《DOM 启蒙》
-* 《JavaScript DOM 编程艺术》
 
 ## PWA
 
@@ -234,7 +235,7 @@
 * 《[Java性能权威指南](https://www.amazon.cn/gp/product/B01DLB7Z66)》
 * 《[Java程序员修炼之道](https://www.amazon.cn/gp/product/B00E0D2OX4)》
 * 《[实战Java高并发程序设计](https://www.amazon.cn/gp/product/B017MEN094)》
-* 《[Java编程思想 （第4版）](https://www.amazon.cn/gp/product/B0011F7WU4)》
+* 《[Java编程思想 （第4版）](https://www.amazon.cn/gp/product/B0011F7WU4)》：todo
 * 《[深入理解Java虚拟机（第2版）](https://www.amazon.cn/gp/product/B01HI0BUF8)》
 * 《[Effective java 中文版（第2版）](https://www.amazon.cn/gp/product/B001PTGR52)》
 * 《[Java核心技术·卷1：基础知识（原书第9版）](https://www.amazon.cn/gp/product/B01M22BGUQ)》
@@ -242,6 +243,7 @@
 * Spring实战（第4版）
 * 《大型网站系统与 Java 中间件实践》
 * Tomcat架构解析
+* Java虚拟机
 
 ## PHP
 
@@ -271,8 +273,9 @@
 * 《[C++ Primer （中文第5版）](https://www.amazon.cn/gp/product/B00ESUIL0O)》
 * 《[C++ Primer习题集(第5版)](https://www.amazon.cn/gp/product/B00S6U4C6E) 》
 * 《[C++程序设计语言(第1-3部分)(原书第4版)](https://www.amazon.cn/gp/product/B01I9BNASA) 》
-* 《[Effective C++:改善程序与设计的55个具体做法(第3版)(中文版)](https://www.amazon.cn/gp/product/B004G72P24) 》
+* 《[Effective C++:改善程序与设计的55个具体做法(第3版)(中文版)](https://www.amazon.cn/gp/product/B004G72P24) 》 todo
 * 《[More Effective C++:35个改善编程与设计的有效方法(中文版)](https://www.amazon.cn/gp/product/B004IP8BD6) 》
+* C++沉思录
 
 ## .NET
 
@@ -331,10 +334,6 @@
 * MongoDB大数据处理权威指南（第2版）
 * NoSQL数据库技术实战
 
-### DDD
-
-* 《Patterns, Principles and Practices of Domain-Driven Design》
-
 ## 架构/性能
 
 * 《架构即未来》
@@ -379,11 +378,11 @@
 
 * 深入分布式缓存：从原理到实践
 
-
 ## 微服务
 
 ## 领域驱动设计（Domain-Driven Design）
 
+* 《Patterns, Principles and Practices of Domain-Driven Design》
 * 领域驱动设计
 
 ## ML
@@ -404,6 +403,7 @@
 * 《[机器学习导论](https://www.amazon.cn/gp/product/B01AG3ZV9K)》
 * 《[推荐系统实践](https://www.amazon.cn/gp/product/B008AK5YJO)》
 * 《[机器学习实战](https://www.amazon.cn/gp/product/B00D747PTK)》
+* TensorFlow：实战Google深度学习框架
 
 ## 数据挖掘
 
@@ -420,6 +420,10 @@
 * Recommender Systems: The Textbook
 * Sentiment Analysis: Mining Opinions, Sentiments,and Emotions
 * 移动数据挖掘
+
+## 区块链
+
+* 区块链原理，设计和应用
 
 ## 项目与团队
 
@@ -447,6 +451,7 @@
 * 《卓有成效的程序员》
 * 《[程序员的职业素养（Pragmatic Programmer）](https://www.amazon.cn/gp/product/B01LZJ8L9J)》
 * 《[程序员修炼之道：从小工到专家](https://www.amazon.cn/gp/product/B004GV08CY)》
+* 程序员的自我修养
 * 《[软件开发者路线图：从学徒到高手](https://www.amazon.cn/gp/product/B00H6X6LD4)》
 * 《[我编程，我快乐: 程序员职业规划之道](https://www.amazon.cn/gp/product/B00CBBKDGM)》
 * 《[程序员的思维修炼：开发认知潜能的九堂课](https://www.amazon.cn/gp/product/B007VARUIM)》
@@ -493,6 +498,13 @@
 * 《刻意练习:如何从新手到大师》
 * [未来世界的幸存者](http://survivor.ruanyifeng.com/)
 * [前方的路](http://road.ruanyifeng.com/)
+* 编码
+* 码农翻身
+* Borland传奇
+
+## 数学
+
+* 数学分析
 
 ## 数据
 
@@ -514,6 +526,8 @@
 * 如何阅读一本书
 * 精进：如何变成一个厉害的人
 * 这本书能让你睡得好
+* 活法
+* 干法
 
 ## 经济
 
@@ -536,7 +550,6 @@
 * 上帝掷骰子么-量子物理史话
 * 工程系：无尽的前沿
 * 告别失控：软件开发团队管理必读
-
 
 ## 投资
 
@@ -601,6 +614,7 @@
     - 我的职业是小说家
     - 没有意义就没有摇摆_（日） 村上春树
 * 蝇王
+* 遥远的救世主
 
 ## 科幻
 
@@ -610,6 +624,7 @@
 * 《基地边缘》
 * 《基地和地球》阿西莫夫
 * 《三体》
+* 银河帝国
 
 ## 玄幻
 
@@ -671,6 +686,8 @@
 * 自我分析（荣格）
 * 怪诞行为学
 * 安静:内向性格的竞争力
+* 暗时间
+* 心理学与生活
 
 ## 教育
 
@@ -705,6 +722,10 @@
 ## 资源
 
 * 支付宝-》浙江图书馆-〉阅读证（无押金，无外借功能……）->(http://www.zjlib.cn)->数据库文献
+
+## 哲学
+
+* 叔本华哲言录
 
 ## MOBI
 

@@ -124,5 +124,61 @@ data:text/html;charset=utf-8, <title>Scratchpad</title><style>body {padding: 5%;
 
 ## Developer Tools
 
-* console:直接输入JavaScript代码，按回车后执行
+* console
+    - 直接输入JavaScript代码，按回车后执行
+    - console 里 输入:document.designMode = "on"  可以直接修改网页上的内容
+    - buffer 5个你查看过的DOM对象，你可以直接在Console中用 $0, $1, $2, $3, $4来访问。
+    - 像jQuery那样的语法来获得DOM对象，如：$("#mydiv")
+    -  `$$(".class")` 来选择所有满足条件的DOM对象
+    -  使用 getEventListeners($("selector")) 来查看某个DOM对象上的事件
+    -   monitorEvents($("selector")) 来监控相关的事件
+    -   函数
+        + monitor 来监控一函数，传入函数名称
+        + copy 把一个变量的值copy到剪贴板
+        + inspect：可以让你控制台跳到你需要查看的对象
+    - 输出
+        + console.log("%c左耳朵", "font-size:90px;color:#888")
+            * %s    格式化输出一个字符串变量。
+            * %i or %d    格式化输出一个整型变量的值。
+            * %f  格式化输出一个浮点数变量的值。
+            * %o  格式化输出一个DOM对象。
+            * %O  格式化输出一个Javascript对象。
+            * %c  为后面的字符串加上CSS样式
+        + console.debug
+        + console.info
+        + console.warn
+        + console.error
+        + console.table
+        + console.trace() 可以打出js的函数调用栈
+        * console.time() 和 console.timeEnd() 可以帮你计算一段代码间消耗的时间。
+        * console.profile() 和 console.profileEnd() 可以让你查看CPU的消耗。
+        * console.count() 可以让你看到相同的日志当前被打印的次数。
+        * console.assert(expression, object) 可以让你assert一个表达式
+* Sources
+    - 代码格式化
+    - 断点设置
+        + DOM设置断点：选中DOM添加
+        + break points中：给XHR和Event Listener设置断点
+* Elements
+    - 强制DOM状态
+* More Tools
+    - Animations:慢动作播放动画
+* Network
+    - 添加Thtottle:来模拟一个网络很慢情况
+    - Copy => Copy as cURL：获取请求的curl
+* 手机模式
+    - 右上角的more：Capture snapshot
 
+```js
+console.todo = function( msg){
+  console.log( '%c%s %s %s', 'font-size:20px; color:yellow; background-color: blue;', '--', msg, '--');
+}
+console.important = function( msg){
+  console.log( '%c%s %s %s', 'font-size:20px; color:brown; font-weight: bold; text-decoration: underline;', '--', msg, '--');
+}
+```
+
+## 参考
+
+* [ChromeDevTools/awesome-chrome-devtools](https://github.com/ChromeDevTools/awesome-chrome-devtools):Awesome tooling and resources in the Chrome DevTools & DevTools Protocol ecosystem
+* [Chrome 开发者工具](https://developers.google.com/web/tools/chrome-devtools/)

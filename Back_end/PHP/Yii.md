@@ -746,6 +746,7 @@ self::find()->select('count(*)')->where(['user_id' => $userId, 'status' => 0])->
 -   [RESTful API 快速搭建教程](https://www.yiichina.com/tutorial/1606)
 -   [RESTful API 认证教程](https://www.yiichina.com/tutorial/1770)
 -   [csrf 验证原理分析及 token 缓存解决方案](https://www.yiichina.com/code/1695)
+- [Yii Tutorial](https://www.tutorialspoint.com/yii/index.htm)
 
 ## 扩展
 

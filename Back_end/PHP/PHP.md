@@ -1583,6 +1583,7 @@ PHP5.5中加入了一个新特性—迭代生成器和协程。
 
 ## 性能
 
+
 ```sh
 time php php-src/Zend/micro_bench.php # 源码自带性能测试
 ```
