@@ -371,7 +371,9 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 ![HTTP vs HTTPS](../static/https.png "HTTP与HTTPS区别")
 
 * 购买证书，配置域名信息
+    - [Let’s Encrypt](https://letsencrypt.org/)
 * 获取证书文件，配置nginx,放到cert目录
+* 解决方案：[certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx)
 
 ## Token
 

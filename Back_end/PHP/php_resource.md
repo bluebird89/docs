@@ -357,7 +357,7 @@
       - (https://github.com/etrepat/baum)[Baum]: 一个Eloquent的嵌套集实现
       - (https://github.com/cakephp/orm)[Cake ORM]: 对象关系映射工具，利用DataMapper模式实现 (CP)
       - (https://github.com/Atlantic18/DoctrineExtensions)[Doctrine Extensions]: 一个Doctrine行为扩展的集合
-      - (http://www.doctrine-project.org/)[Doctrine]: 一个全面的DBAL和ORM
+      - [Doctrine](http://www.doctrine-project.org/): 一个全面的DBAL和ORM
       - (https://github.com/illuminate/database)[Eloquent]: 一个简单的ORM(L5)
       - (https://github.com/corneltek/LazyRecord)[LazyRecord]: 一个简单、可扩展、高性能的ORM
       - (https://github.com/chanmix51/Pomm)[Pomm]: 一个PostgreSQL对象模型管理器
@@ -365,6 +365,10 @@
       - (https://github.com/Ocramius/ProxyManager)[ProxyManager]: 一个为数据映射生成代理对象的工具集
       - (http://redbeanphp.com/index.php)[RedBean]: 一个轻量级，低配置的ORM
       - (https://github.com/vlucas/spot2)[Spot2]: 一个MySQL的ORM映射器
+      - [doctrine/instantiator](https://github.com/doctrine/instantiator):http://www.doctrine-project.org
+      - [doctrine/lexer](https://github.com/doctrine/lexer):Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.
+      - [doctrine/cache](https://github.com/doctrine/cache):Doctrine Cache component
+      - [doctrine/inflector](https://github.com/doctrine/inflector):Doctrine Inflector is a small library that can perform string manipulations with regard to uppercase/lowercase and singular/plural forms of words. 
 * 迁移 Migrations 帮助管理数据库模式和迁移的库
       - (http://docs.doctrine-project.org/projects/doctrine-migrations/en/latest/toc.html)[Doctrine Migrations]: 一个Doctrine的迁移库
       - (https://github.com/icomefromthenet/Migrations)[Migrations]: 一个迁移管理库
@@ -567,6 +571,7 @@
       - (http://symfony.com/doc/current/components/var_dumper.html)[Symfony VarDumper]: 一个dumper库(SF2)
       - (http://anahkiasen.github.io/underscore-php/)[Underscore]: 一个Undersccore JS库的PHP实现
       - (https://github.com/filp/whoops)[Whoops]: 一个不错的错误处理库
+
 ## RPC
 
 * [datto/php-json-rpc](https://github.com/datto/php-json-rpc):Fully unit-tested JSON-RPC 2.0 for PHP
@@ -702,6 +707,10 @@
 * [codeguy/php-the-right-way](https://github.com/codeguy/php-the-right-way):An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web https://www.phptherightway.com
 * [walu/phpbook](https://github.com/walu/phpbook):PHP扩展开发及内核应用
 * [hoohack/read-php-src](https://github.com/hoohack/read-php-src)
+
+## 工具
+
+* [facebook/hhvm](https://github.com/facebook/hhvm):A virtual machine for executing programs written in Hack. https://hhvm.com
 
 ## 扩展
 

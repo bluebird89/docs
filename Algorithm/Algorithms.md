@@ -121,3 +121,4 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * [LeuisKen/algorithm](https://github.com/LeuisKen/algorithm)
 * [leetcode-cn](https://leetcode-cn.com/)
 * [leetcode](https://leetcode.com/)
+* [Dictionary of Algorithms and Data Structures](https://xlinux.nist.gov/dads/)

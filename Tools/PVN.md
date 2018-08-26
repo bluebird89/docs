@@ -153,7 +153,7 @@ pip install shadowsocks
 - [firefly-proxy](https://github.com/yinghuocho/firefly-proxy):A proxy software to help circumventing the Great Firewall.
 - [XX-net/XX-Net](https://github.com/XX-net/XX-Net)a web proxy tool
 - [googlehosts/hosts](https://github.com/googlehosts/hosts)
-
+- [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
 
 ### 服务
 
