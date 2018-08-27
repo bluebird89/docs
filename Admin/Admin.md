@@ -11,10 +11,6 @@
 * [Airflow](https://github.com/apache/incubator-airflow) is a platform to programmatically author, schedule, and monitor workflows.
 * [open-falcon/falcon-plus](https://github.com/open-falcon/falcon-plus)An open-source and enterprise-level monitoring system
 
-## 工具集
-
-Trello->Github->Jira-> Asana
-
 ## [tabler/tabler](https://github.com/tabler/tabler)
 
 Tabler is free and open-source HTML Dashboard UI Kit built on Bootstrap 4 https://tabler.github.io/
@@ -32,9 +28,9 @@ npm run serve
 #  http://localhost:4000
 ```
 
-## 参考
+## 框架
 
-* [kahun/awesome-sysadmin](https://github.com/kahun/awesome-sysadmin)
+* [kahun/awesome-sysadmin](https://github.com/kahun/awesome-sysadmin)：A curated list of amazingly awesome open source sysadmin resources inspired by Awesome PHP.
 * [zuiidea/antd-admin](https://github.com/zuiidea/antd-admin):A admin dashboard application demo built upon Ant Design and Dva.js http://antd-admin.zuiidea.com
 * [akveo/blur-admin](https://github.com/akveo/blur-admin):Angular Bootstrap Admin Panel Framework http://akveo.github.io/blur-admin/
 * [ant-design/ant-design-pro](https://github.com/ant-design/ant-design-pro): 👨🏻‍💻👩🏻‍💻 An out-of-box UI solution for enterprise applications http://pro.ant.design/

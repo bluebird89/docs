@@ -91,3 +91,4 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 ## 工具
 
 * [iBotPeaches/Apktool](https://github.com/iBotPeaches/Apktool):A tool for reverse engineering Android apk files https://ibotpeaches.github.io/Apktool
+* [tbruyelle/RxPermissions](https://github.com/tbruyelle/RxPermissions):Android runtime permissions powered by RxJava2
