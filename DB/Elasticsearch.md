@@ -1,26 +1,21 @@
 # [elastic/elasticsearch](https://github.com/elastic/elasticsearch)
 
 Open Source, Distributed, RESTful Search Engine
+
 全文搜索属于最常见的需求，开源的 Elasticsearch （以下简称 Elastic）是一个基于Lucene的实时的分布式搜索和分析全文搜索引擎的首选。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。基于RESTful接口。普通请求是...get?a=1；rest请求....get/a/1 它可以快速地储存、搜索和分析海量数据。维基百科、Stack Overflow、Github 都采用它。Elastic 的底层是开源库 Lucene。但是，你没法直接用 Lucene，必须自己写代码去调用它的接口。Elastic 是 Lucene 的封装，提供了 REST API 的操作接口，开箱即用。
 
 ## ES VS Solr
 
-– 接口
-
-- 类似webservice的接口
-- REST风格的访问接口
-
-– 分布式存储
-
-- solrCloud solr4.x才支持
-- es是为分布式而生的
-
-– 支持的格式
-
-- solr xml json
-- es json
-
-– 近实时搜索
+* 接口
+  - 类似webservice的接口
+  - REST风格的访问接口
+* 分布式存储
+  - solrCloud solr4.x才支持
+  - es是为分布式而生的
+* 支持的格式
+  - solr xml json
+  - es json
+* 近实时搜索
 
 ## 安装
 

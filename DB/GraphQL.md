@@ -25,8 +25,8 @@ GraphQL 是一个由Facebook提出的 应用层查询语言. 使用 GraphQL, 你
 
 ## 参考
 
-- [](http://graphql.org/)
-- [](https://www.howtographql.com/)
+- [官网](http://graphql.org/)
+- [教程](https://www.howtographql.com/)
 * [chentsulin/awesome-graphql](https://github.com/chentsulin/awesome-graphql):Awesome list of GraphQL & Relay## 实例
 
 ## 实例
