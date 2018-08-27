@@ -43,7 +43,7 @@ arp -a
 * 应用层：通讯软件，人参与的都是在应用层，其他的都是由软件来完成
 
 ![七层协议](../_static/osi_1.png "Optional title")
-![数据流](../_static/osi2.png "Optional title")
+![数据流](../_static/osi2.jpeg "Optional title")
 
 ```
 10.10.27.115 # ip
