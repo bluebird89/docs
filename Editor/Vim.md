@@ -313,13 +313,15 @@ Ctrl-G Display line number of cursor                    | "xyy Copy current line
 nG Move cursor to line number n                         | "Xd Delete and append into buffer x
 :n Move cursor to line number n                         | "xp Put contents of buffer x
 G Move to last line in file                             | y]] Copy up to next section heading
-ye Copy to end of word
-
-File Handling | null
-------------- | ----------------------------------
-:w Write file | :w! Write file (ignoring warnings) | :w! file Overwrite file (ignoring warnings) | :wq Write file and quit | :q Quit | :q! Quit (even if changes not saved) | :w file Write file as file, leaving original untouched | ZZ Quit, only writing file if changed | 😡 Quit, only writing file if changed | :n1,n2w file Write lines n1 to n2 to file | :n1,n2w >> file Append lines n1 to n2 to file | :e file2 Edit file2 (current file becomes alternate file) | :e! Reload file from disk (revert to previous saved version) | :e# Edit alternate file | % Display current filename |
-
-# Display alternate filename |
+ye Copy to end of word |
+:w Write file | :w! Write file (ignoring warnings)
+:w! file Overwrite file (ignoring warnings) | :wq Write file and quit
+:q Quit | :q! Quit (even if changes not saved)
+:w file Write file as file, leaving original untouched | ZZ Quit, only writing file if changed
+😡 Quit, only writing file if changed | :n1,n2w file Write lines n1 to n2 to file
+:n1,n2w >> file Append lines n1 to n2 to file | :e file2 Edit file2 (current file becomes alternate file)
+:e! Reload file from disk (revert to previous saved version) | :e# Edit alternate file
+% Display current filename |
 
 :n Edit next file | :n! Edit next file (ignoring warnings) | :n files Specify new list of files | :r file Insert file after cursor | :r !command Run command, and insert output after current line |
 
