@@ -957,4 +957,5 @@ Markdown 语法： **Example:**
 ## 参考
 
 - [mastering-markdown](https://guides.github.com/features/mastering-markdown/)
-- <http://bramp.github.io/js-sequence-diagrams/>, <http://adrai.github.io/flowchart.js/>
+- [js-sequence-diagrams](https://bramp.github.io/js-sequence-diagrams/):Turns text into UML sequence diagrams
+- [flowchart.js](http://adrai.github.io/flowchart.js/):Draws simple SVG flow chart diagrams from textual representation of the diagram

@@ -254,7 +254,6 @@ a标签不能嵌套
 ## 扩展
 
 * [hakimel/reveal.js](https://github.com/hakimel/reveal.js):The HTML Presentation Framework http://lab.hakim.se/reveal-js/
-* [coolwanglu/pdf2htmlEX](https://github.com/coolwanglu/pdf2htmlEX):Convert PDF to HTML without losing text or format. http://coolwanglu.github.com/pdf2htmlEX/
 
 ## 参考
 

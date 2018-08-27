@@ -33,6 +33,7 @@ sudo apt-get install code
 * Language and Framework Packs
     - React Native Tools
     - Vue 2 Snippets
+* [prettier/prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. https://prettier.io
 
 ## 主题
 

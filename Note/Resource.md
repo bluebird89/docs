@@ -393,6 +393,10 @@
 
 * [aosabook/500lines](https://github.com/aosabook/500lines):500 Lines or Less
 
+## 论文
+
+* [tpn/pdfs](https://github.com/tpn/pdfs):Technically-oriented PDF Collection (Papers, Specs, Decks, Manuals, etc)
+
 ## 参考
 
 -   [2017 杭州云栖大会](https://github.com/Alimei/hangzhouYunQi2017ppt?files=1)
