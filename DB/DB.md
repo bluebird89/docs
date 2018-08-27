@@ -39,7 +39,7 @@ Laravel 也支持查询 JSON 类型的字段：仅支持，MySQL 5.7+ 和 Postgr
 
 ## 原理
 
-[如果有人问你数据库的原理，叫他看这篇文章](http://blog.jobbole.com/100349/)
+[数据库的原理](http://blog.jobbole.com/100349/)
 
 ## 工具
 
