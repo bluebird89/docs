@@ -393,6 +393,7 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 * [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh):A pure Unix shell script implementing ACME client protocol https://acme.sh
 * [asciimoo/wuzz](https://github.com/asciimoo/wuzz):Interactive cli tool for HTTP inspection
 * [square/okhttp](https://github.com/square/okhttp):An HTTP+HTTP/2 client for Android and Java applications. http://square.github.io/okhttp/
+* [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie)Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc. <https://httpie.org> <https://twitter.com/clihttp>
 
 ### [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest):DNS Performance test
 
@@ -411,5 +412,4 @@ bash ./dnstest.sh |sort -k 22 -n
 * [HTTP 下午茶](http://book.haoduoshipin.com/tealeaf-http/)
 * [关于 TCP/IP，必知必会的十个问题](https://juejin.im/post/598ba1d06fb9a03c4d6464ab)
 * [面试 -- 网络 HTTP](https://juejin.im/post/5872309261ff4b005c4580d4)
-* [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie)Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc. <https://httpie.org> <https://twitter.com/clihttp>
 * [bolasblack/http-api-guide](https://github.com/bolasblack/http-api-guide)
