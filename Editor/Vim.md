@@ -281,7 +281,7 @@ e End of word                                           | Ctrl-I Insert a tab
 0 Start of current line                                 | cc Change line
 $ End of current line                                   | C Change from current position to end of line
 ^ First non-white character of current line             | dd Delete current line
-+ or RETURN First character of next line                | ndd Delete n lines
+\+ or RETURN First character of next line                | ndd Delete n lines
 – First character of previous line                      | D Delete remainer of line
 n character n of current line                           | dw Delete word
 H Top line of current screen                            | d} Delete rest of paragraph

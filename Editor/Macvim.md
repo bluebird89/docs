@@ -18,7 +18,6 @@ To install from command line: vim +PluginInstall +qall
 
 * :version
 
-
 ## Bundle
 
 * NERD_tree : 一个文件管理插件，一些常用命令: 打开一个目录树( :NERDTree <启动目录> | <bookmark>  )  关闭目录树栏(:NERDTreeClose)；切换目录树栏（:NERDTreeToggle）;  　　  定义标签（:Bookmark <name>）；定义Root标签（:BookmarkToRoot <bookmark>)。。。。。。更多命令和用法见 :help NERD_tree。
@@ -28,7 +27,7 @@ To install from command line: vim +PluginInstall +qall
 * ctags : 一个扫描记录代码的语法元素，并记录为tag，方便代码定位跳转等操作，MacVim自带，但是据说有点问题，笔者用Vundle安装的貌似也有问题，推荐用MacPorts安装，然后在　　        　　　~/.gvimrc配置中加入:  let Tlist_Ctags_Cmd="/opt/local/bin/ctags"。用法:在终端 cd 进入到你的项目根目录，输入语句即可将项目所有代码文件打上tag: ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .
 * taglist : 可以用Vundle安装，在编辑代码文件时，输入命令":TlistToggle"在右边就会出现当前类的函数或变量列表。输入命令“:tag <函数名或变量、类>”，如果只有一个文件定义了该函数或变量、类，vim打开该文件并将光标定位到对应的位置；如果多个文件有这个函数名或变量、类的tag，将给提示，并可输入“:tselect” ,显示可选的文件。快捷键跳转Ctrl+],Ctrl-o。
 * Cscope :功能跟ctags差不多，不过更加强大，MacVim默认已经支持，输入“:version”命令查看.
-* OmniCppComplete : 功能跟taglist差不多。 
+* OmniCppComplete : 功能跟taglist差不多。
 * a.vim :在.cpp文件和.h头文件间快速切换的插件。
 * grep.vim : 在工程中查找词汇的插件。
 * minibufexplorerpp : 操作缓存buffer窗口。
