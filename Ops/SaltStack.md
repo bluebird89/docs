@@ -11,5 +11,3 @@ Software to automate the management and configuration of any infrastructure or a
 * salt几乎都能运行在安装有Python的所有设备。对于不支持Python的那些设备，你可以使用minion代理系统。这意味着能够被salt管理的唯一条件是支持任意的网络协议(甚至是你自己写的协议)。salt命令被发送到minion代理服务器，它将salt调用转换为本地协议，然后发送到设备。解析从设备返回的数据，然后放入数据结构并返回。
 * salt的事件驱动基础设施不仅让你能够自动化初始系统配置，也让你能够自动化扩展，修复和完成持续管理。salt用户自动部署和维护复杂的分布式网络应用程序和数据库，自定义应用程序，文件，用户帐户，标准包，云资源等。
 * salt的远程执行能力是CLI命令，状态系统使用YAML来描述系统的所需配置
-
-## 参考

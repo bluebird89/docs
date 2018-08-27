@@ -2,7 +2,6 @@
 
 A fully pluggable tool for identifying and reporting on patterns in JavaScript https://eslint.org
 
-
 ## 参考
 
 * [中国官网](http://eslint.cn/)
