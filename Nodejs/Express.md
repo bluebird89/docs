@@ -1,4 +1,6 @@
-# Express
+# [expressjs/express](https://github.com/expressjs/express)
+
+Fast, unopinionated, minimalist web framework for node. <https://expressjs.com>
 
 Express是第一代最流行的web框架，它对Node.js的http进行了封装.
 
@@ -33,4 +35,4 @@ app.get('/test', function (req, res) {
 
 ## 仓库
 
-- [expressjs/express](https://github.com/expressjs/express):Fast, unopinionated, minimalist web framework for node. <https://expressjs.com>
+- 

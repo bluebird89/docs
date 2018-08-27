@@ -1,4 +1,4 @@
-# ZooKeeper
+# [apache/zookeeper](https://github.com/apache/zookeeper)
 
 ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.
 ZooKeeper 是一个开放源代码的分布式协调服务。它具有高性能、高可用的特点，同时也具有严格的顺序访问控制能力（主要是写操作的严格顺序性）。基于对 ZAB 协议（ZooKeeper Atomic Broadcast，ZooKeeper 原子消息广播协议）的实现，它能够很好地保证分布式环境中数据的一致性。也正是基于这样的特性，使得 ZooKeeper 成为了解决分布式数据一致性问题的利器。
@@ -18,5 +18,4 @@ ZooKeeper 由两部分组成：ZooKeeper 服务端和客户端。
 
 ## 参考
 
-* [apache/zookeeper](https://github.com/apache/zookeeper)
 * [Zookeeper: 分布式过程协同技术详解](http://www.dengshenyu.com/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/2017/11/01/zookeeper.html)
