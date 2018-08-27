@@ -1,3 +1,3 @@
-# Json
+# JSON
 
 JSON.stringify

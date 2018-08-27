@@ -2,36 +2,35 @@
 
 ## 插件
 
-- Tampermonkey
-- ABP
-- crxMouse Chrome Gestures:用鼠标操作Chrome
-- Momentum ：一款清新的新标签页插件，具有待办、天气、搜索功能，最最重要的是，插件的大背景，非常具有创意和艺术气息
-- Infinity New Tab：基于Chrome的云应用服务
-- 网页截图:注释&批注：捕获整个页面或任何部分
-- Vue React AngularJS Devtools
-- Postman：接口调试
-- OneTab：所有标签页转换成一个列表
-- Print Friendly & PDF：用户自定义打印内容
-- 眼不见心不烦：屏蔽微博
-- Allow-Control-Allow-Origin: *
-- Octotree：github目录工具 Code tree for GitHub
-- AdBlock
-- Awesome Screenshot: Screen Video Recorder
-- Axure RP Extension for Chrome
-- JSONView
-- XML Tree
-- User-Agent Switcher for Chrome
-- Momentum
-- Octotree:Code tree for GitHub
-- 网站分析工具 Wappalyzer
-- 代码特效图 Marmoset
-- 批量打开多个链接 LinkClump
-- 清除历史记录 Click&Clean
-- 程序调试工具 Firebug Lite
-- Vimium：浏览器vim化
-
+* Tampermonkey
+* ABP
+* crxMouse Chrome Gestures:用鼠标操作Chrome
+* Momentum ：一款清新的新标签页插件，具有待办、天气、搜索功能，最最重要的是，插件的大背景，非常具有创意和艺术气息
+* Infinity New Tab：基于Chrome的云应用服务
+* 网页截图:注释&批注：捕获整个页面或任何部分
+* Vue React AngularJS Devtools
+* Postman：接口调试
+* OneTab：所有标签页转换成一个列表
+* Print Friendly & PDF：用户自定义打印内容
+* 眼不见心不烦：屏蔽微博
+* Allow-Control-Allow-Origin: *
+* Octotree：github目录工具 Code tree for GitHub
+* AdBlock
+* Awesome Screenshot: Screen Video Recorder
+* Axure RP Extension for Chrome
+* JSONView
+* XML Tree
+* User-Agent Switcher for Chrome
+* Momentum
+* Octotree:Code tree for GitHub
+* 网站分析工具 Wappalyzer
+* 代码特效图 Marmoset
+* 批量打开多个链接 LinkClump
+* 清除历史记录 Click&Clean
+* 程序调试工具 Firebug Lite
+* [deanoemcke/thegreatsuspender](https://github.com/deanoemcke/thegreatsuspender):A chrome extension for suspending all tabs to free up memory
+* Vimium：浏览器vim化
   - Navigating the page
-
     - j,
 
       <c-e>    Scroll down</c-e>
@@ -177,8 +176,12 @@ console.important = function( msg){
   console.log( '%c%s %s %s', 'font-size:20px; color:brown; font-weight: bold; text-decoration: underline;', '--', msg, '--');
 }
 ```
+## 工具
+
+* [andrewdavey/immutable-devtools](https://github.com/andrewdavey/immutable-devtools):Chrome Dev Tools custom formatter for Immutable-js values
 
 ## 参考
 
 * [ChromeDevTools/awesome-chrome-devtools](https://github.com/ChromeDevTools/awesome-chrome-devtools):Awesome tooling and resources in the Chrome DevTools & DevTools Protocol ecosystem
 * [Chrome 开发者工具](https://developers.google.com/web/tools/chrome-devtools/)
+* [ChromeDevTools/devtools-protocol](https://github.com/ChromeDevTools/devtools-protocol):Chrome DevTools Protocol 

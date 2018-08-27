@@ -1,6 +1,7 @@
 # [webpack/webpack](https://github.com/webpack/webpack)
 
 A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows to load parts for the application on demand. Through "loaders," modules can be CommonJs, AMD, ES6 modules, CSS, Images, JSON, Coffeescript, LESS, ... and your custom stuff. https://webpack.js.org
+
 module bundler(模块加载器兼打包工具)。所有小文件打包成一个或多个大文件.一种前端模块化打包解决方案，但是更重要的是它又是一个可以融合运用各种前端新技术的平台，明白webpack的使用哲学后，只需要简单的配置,我们就可以随心所欲的在webpack项目中使用jsx/ts,使用babel/postcss等平台提供的众多其它功能，只需通过一条命令由源码构建最终可用文件.
 
 * 直接使用 require(XXX) 的形式来引入各模块，即使它们可能需要经过编译，有着各种健全的加载器（loader）处理
@@ -299,7 +300,6 @@ Parsing error: The keyword 'import' is reserved
 * [KieSun/webpack-demo](https://github.com/KieSun/webpack-demo):从入门到真实项目配置，每个 commit 基本都对应一小节
 * [wallstreetcn/webpack-and-spa-guide](https://github.com/wallstreetcn/webpack-and-spa-guide):Webpack 4 和单页应用入门
 * [ruanyf/webpack-demos](https://github.com/ruanyf/webpack-demos):a collection of simple demos of Webpack
-
 
 ## 工具
 
