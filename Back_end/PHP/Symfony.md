@@ -18,6 +18,7 @@ php bin/console server:start 0.0.0.0:8000
 
 * [symfony/thanks](https://github.com/symfony/thanks):Give thanks (in the form of a GitHub ★) to your fellow PHP package maintainers (not limited to Symfony components)!
 * [symfony/console](https://github.com/symfony/console):The Console component eases the creation of beautiful and testable command line interfaces. https://symfony.com/console
+* [symfony/http-foundation](https://github.com/symfony/http-foundation):The HttpFoundation component defines an object-oriented layer for the HTTP specification. https://symfony.com/http-foundation
 
 ## 框架
 

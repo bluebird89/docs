@@ -178,3 +178,6 @@
 [submodule "JavaScript/TypeScript/typescript-definition-style-guide"]
 	path = JavaScript/TypeScript/typescript-definition-style-guide
 	url = git@github.com:sindresorhus/typescript-definition-style-guide.git
+[submodule "Client/awesome-quick-app"]
+	path = Client/awesome-quick-app
+	url = git@github.com:yesvods/awesome-quick-app.git
