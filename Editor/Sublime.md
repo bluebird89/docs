@@ -96,20 +96,21 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
 -   TrailingSpaces: Highlight trailing spaces and delete them in a flash
 -   Terminal:Sublime中直接使用终端打开你的项目文件夹
 
+```
+ctrl+alt+h html
+ctrl+alt+j javascript
+ctrl+alt+c css
+ctrl+alt+p php
+ctrl+alt+r ruby
+ctrl+alt+shift+p python
 
-    ctrl+alt+h html
-    ctrl+alt+j javascript
-    ctrl+alt+c css
-    ctrl+alt+p php
-    ctrl+alt+r ruby
-    ctrl+alt+shift+p python
+|Name|Phone + tab   # 表头
+Alt + Shift + 左/右/上/下/ # 删除
+Alt + 左/右/上/下/  # 移动
 
-    表头：|Name|Phone + tab
-    删除：Alt + Shift + 左/右/上/下/
-    移动：Alt + 左/右/上/下/
-
-    # 在Preferences.sublime-settings 添加
-    "auto_complete_triggers": [{"selector": "text.html", "characters": "bs3"}]
+# 在Preferences.sublime-settings 添加
+"auto_complete_triggers": [{"selector": "text.html", "characters": "bs3"}]
+```
 
 ## 通用快捷键
 
@@ -134,66 +135,57 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
 
 ### 编辑
 
-Edit(编辑)
-
--   ⌘\[向左缩进 | Left indent
--   ⌘]向右缩进 | Right Indent
--   ⌘⌃↑与上一行互换（超实用！）| Swap line up
--   ⌘⌃↓与下一￼行互换￼（超实用！）| Swap line down
--   ⌘⇧D复制粘贴当前行（减少多余的粘贴）| Duplicate line
--   ⌘J拼接行（css格式化时挺有用） | join lines
--   ⌘←去往行的开头 | Beginning of line
--   ⌘→去往行末尾 | End of line
--   ⌘⌃/块注释 | Toggle comment block
--   ⌃K从光标开始的地方删除到行尾 | Delete to end
--   ⌃⇧K删除一整行 | delete line
--   ⌃T相邻单词互换位置，在','前试用| Transpose
--   ⌘⇧↩向光标前插入一行|insert line before
--   ⌘↩向光标后插入一行|inter line after
--   ⌘⌥T插入特殊字符|Special characters
--   ⌃D向后删除
-
-Selection(光标选中)
-
-⌘D选中相同的词 | Expand selection to words
-⌃⌘G多重文本光标选中| Expand all selection to words
-⌘L选中一行|Expand selection to lineEsc单选（取消多重选择）|Single selection,Cancel multiple selections
-⌃⇧↑一行一行向上选中|Add previous line
-⌃⇧↓一行一行向下选中|Add next line
-⌘⇧L将选中的区域分割成多行选中状态(多光标操作状态)|Split into lines
-⌥+拖动鼠标多重光标选中⌘⇧J已缩进层级为依据，一层层向外选中|Expand selection to indentation
-⌃⇧M将匹配括号中的内容选中|Expand selection to brackets
-
-Find(查找)
-⌘F普通查找|Find
-⌘G查找下一个|Find next
-⌘⇧G查找上一个|Find prev
-⌘⇧F在文件夹中查找| Find in files
-⌘⇧E缓存用于替换的内容，方便之后的替换|Use selection for replace
-⌘E缓存用于查找的内容，方便之后的查找|Use selection for find
-⌘⌥E一个接一个往下替换|Replace next
-
-View(视图)
-推荐使用Origami插件，可以随意对sublime进行分割
-
-Go to(跳转/定位)
-⌘P跳转文件（很方便）| Go to anything
-⌘R定位文件中的方法@| Go to symbol
-⌘G定位文件中的行号:| Go to line
-⌃M定位匹配的括号 | Jump to matching bracket
-⌘F2设置/取消定位标记| Toggle bookmark
-F2跳转到定位标记处 | Next bookmark
-⌘⇧F2清除所有定位标记| Clear all bookmarks
-⌘⌥→下一个打开的文件| Next file
-F12:goto_definition
-
-Project(工程)
-⌘⌃P在保存过的工程中切换，随意变换工程环境|Switch project window
-
-Tabs（标签栏）
-⌘⇧t 打开最后一次关闭的文件|Open last closed tab
-^Tab 循环遍历tab|Cycle up through tabs
-^⇧Tab 反方向循环遍历tab|Cycle down through tabs
+* Edit(编辑)
+    -   ⌘\[向左缩进 | Left indent
+    -   ⌘]向右缩进 | Right Indent
+    -   ⌘⌃↑与上一行互换（超实用！）| Swap line up
+    -   ⌘⌃↓与下一￼行互换￼（超实用！）| Swap line down
+    -   ⌘⇧D复制粘贴当前行（减少多余的粘贴）| Duplicate line
+    -   ⌘J拼接行（css格式化时挺有用） | join lines
+    -   ⌘←去往行的开头 | Beginning of line
+    -   ⌘→去往行末尾 | End of line
+    -   ⌘⌃/块注释 | Toggle comment block
+    -   ⌃K从光标开始的地方删除到行尾 | Delete to end
+    -   ⌃⇧K删除一整行 | delete line
+    -   ⌃T相邻单词互换位置，在','前试用| Transpose
+    -   ⌘⇧↩向光标前插入一行|insert line before
+    -   ⌘↩向光标后插入一行|inter line after
+    -   ⌘⌥T插入特殊字符|Special characters
+    -   ⌃D向后删除
+* Selection(光标选中)
+    - ⌘D选中相同的词 | Expand selection to words
+    - ⌃⌘G多重文本光标选中| Expand all selection to words
+    - ⌘L选中一行|Expand selection to lineEsc单选（取消多重选择）|Single selection,Cancel multiple selections
+    - ⌃⇧↑一行一行向上选中|Add previous line
+    - ⌃⇧↓一行一行向下选中|Add next line
+    - ⌘⇧L将选中的区域分割成多行选中状态(多光标操作状态)|Split into lines
+    - ⌥+拖动鼠标多重光标选中⌘⇧J已缩进层级为依据，一层层向外选中|Expand selection to indentation
+    - ⌃⇧M将匹配括号中的内容选中|Expand selection to brackets
+* Find(查找)
+    - ⌘F普通查找|Find
+    - ⌘G查找下一个|Find next
+    - ⌘⇧G查找上一个|Find prev
+    - ⌘⇧F在文件夹中查找| Find in files
+    - ⌘⇧E缓存用于替换的内容，方便之后的替换|Use selection for replace
+    - ⌘E缓存用于查找的内容，方便之后的查找|Use selection for find
+    - ⌘⌥E一个接一个往下替换|Replace next
+* View(视图):推荐使用Origami插件，可以随意对sublime进行分割
+* Go to(跳转/定位)
+    - ⌘P跳转文件（很方便）| Go to anything
+    - ⌘R定位文件中的方法@| Go to symbol
+    - ⌘G定位文件中的行号:| Go to line
+    - ⌃M定位匹配的括号 | Jump to matching bracket
+    - ⌘F2设置/取消定位标记| Toggle bookmark
+    - F2跳转到定位标记处 | Next bookmark
+    - ⌘⇧F2清除所有定位标记| Clear all bookmarks
+    - ⌘⌥→下一个打开的文件| Next file
+    - F12:goto_definition
+* Project(工程)
+    - ⌘⌃P在保存过的工程中切换，随意变换工程环境|Switch project window
+* Tabs（标签栏）
+    ⌘⇧t 打开最后一次关闭的文件|Open last closed tab
+    ^Tab 循环遍历tab|Cycle up through tabs
+    ^⇧Tab 反方向循环遍历tab|Cycle down through tabs
 
 -   多行同时编辑：选中行数 ctrl+shift+L
 -   选词： 选中文本 逐个添加：ctrl+d
@@ -513,9 +505,9 @@ ln -s ~/Dropbox/Sublime/User
 ## 参考
 
 - [官网](http://www.sublimetext.com/3)
--   [总结配置](https://github.com/jikeytang/sublime-text)
+- [总结配置](https://github.com/jikeytang/sublime-text)
 -   [sublime-undocs](http://docs.sublimetext.info/en/latest/index.html#)
--   [](http://laravelacademy.org/post/6711.html)
+-   [精通 Sublime Text](http://laravelacademy.org/post/6711.html)
 -   [文档](http://www.sublimetext.com/docs/3)
 -   [Sublime Text 全程指南](http://lucida.me/blog/sublime-text-complete-guide/)
 -   [非官方文档](http://sublime-text-unofficial-documentation.readthedocs.org/)
