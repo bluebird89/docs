@@ -1,4 +1,4 @@
-# HTML（HyperText Markup Language，简称：HTML）
+# HTML（HyperText Markup Language）
 
 超文本标记语言,是一种标记语言
 
@@ -85,10 +85,8 @@
 - 注释: `<!-- 这是一个注释 -->`
 - 文本格式化:
 - 链接 `<a href="http://www.runoob.com">这是一个链接</a>`
-
   - target:_top(到父级框架) _blank
   - herf: url #id
-
 - 表格
 - 表单
 - 列表
@@ -99,88 +97,63 @@
 
     <span> 应用样式，那么 <span> 元素中的文本与其他文本不会任何视觉上的差异。标签提供了一种将文本的一部分或者文档的一部分独立出来的方式。</span></span>
 
-## HTML5
 
-# 结构
+## 结构
 
 - 元数据元素
 
-# 元素
+## 元素
 
 - 元素嵌套
-
   - 父子关系（父元素唯一）
-
-    - 兄弟关系：
-
+  - 兄弟关系：
   - 祖先-后代关系：
-
 - 表示结构元素 div
 
-# 属性
+## 属性
 
 - id 独一无二
 - class 可以累加
 
-# HTML5
+## HTML5
 
 语义与表现分离
 
-# DOM
+## DOM
 
 表示文档中所有元素的JavaScript对象模型
 
 - HTMLElement
-
   - classname：getElementByClassName
   - id:
   - tagName
   - querySelector
   - querySelectorAll
 
-# event
+## event
 
-- type:事件名 -
+- type:事件名
 
-# CSS
+## CSS
 
 - color background-color font-size border
-- 行内样式 内嵌样式 >外部样式> 用户样式（user stylesheets\custom.CSS）>浏览器样式
+- 行内样式>内嵌样式 >外部样式> 用户样式（user stylesheets\custom.CSS）>浏览器样式
 - 选择器：
-
-  - * \
-
-    <type\> .\<class\> #<id>
-      <type>.<class>
-    </class></type>
-    </id></class\></type\>
-
+  - *
   - 复杂度与搜索时间有关 [attr] [attr='val'] [attr$='val'] [attr^='val']
   - 关系选择器：后代：
-
-    <selector>
-      <selector> 子元素<selector> &gt; <selector> 兄弟元素（之后的的第一个选择器2元素） <selector> + <selector> 之后的所有选择器2的兄弟元素<selector> ~ <selector>
-    </selector></selector></selector></selector></selector></selector></selector>
-    </selector>
-
   - stylus less sass
   - 伪元素： ：active ：hover
   - 联合选择器 ： \
-
-    <selector\> ， <selector> ：not(selector)</selector></selector\>
-
   - 同级样式会对比专一程度： id>其他属性与伪类个数>元素名字与伪元素名字个数
-
 - 样式层叠器
 - 样式单位
-
   - 颜色： 颜色white 十六进制#ffffff 十进制255,255,255 rgb（112,128.144,0.4） hsl(h, s, l)
   - 长度：
-
     - 绝对 in cm mm pt磅 pc皮卡
     - 相对(另一个尺寸倍数) em相对元素字号高度 ex rem px像素 %
 
-# JavaScript
+## JavaScript
 
 脚本语言
 
@@ -189,11 +162,6 @@
 - 改变 HTML 内容、属性、样式
 - 验证输入
 - 使用
-
-  <script>
-  </script>
-
- 含在head或者body中
 - 对大小写敏感
 - 使用 Unicode 字符集
 - 分号用于分隔 JavaScript 语句

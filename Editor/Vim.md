@@ -322,44 +322,46 @@ ye Copy to end of word |
 :n1,n2w >> file Append lines n1 to n2 to file | :e file2 Edit file2 (current file becomes alternate file)
 :e! Reload file from disk (revert to previous saved version) | :e# Edit alternate file
 % Display current filename |
-
-:n Edit next file | :n! Edit next file (ignoring warnings) | :n files Specify new list of files | :r file Insert file after cursor | :r !command Run command, and insert output after current line |
+:n Edit next file | :n! Edit next file (ignoring warnings)
+:n files Specify new list of files | :r file Insert file after cursor
+:r !command Run command, and insert output after current line |
 
 ![](../_static/vim.png)
 
 ### 显示
 
-:split → 创建分屏 (:vsplit创建垂直分屏)
-<C-w><dir> : dir就是方向，可以是 hjkl 或是 ←↓↑→ 中的一个，其用来切换分屏。
-<C-w>_ (或 <C-w>|) : 最大化尺寸 (<C-w>| 垂直分屏)
-<C-w>+ (或 <C-w>-) : 增加尺寸
+* :split → 创建分屏 (:vsplit创建垂直分屏)
+* <C-w><dir> : dir就是方向，可以是 hjkl 或是 ←↓↑→ 中的一个，其用来切换分屏。
+* <C-w>_ (或 <C-w>|) : 最大化尺寸 (<C-w>| 垂直分屏)
+* <C-w>+ (或 <C-w>-) : 增加尺寸
 
 ### 文件
 
-vi filename :打开或新建文件，并将光标置于第一行首
-vi +n filename ：打开文件，并将光标置于第n行首
-vi + filename ：打开文件，并将光标置于最后一行首
-vi +/pattern filename：打开文件，并将光标置于第一个与pattern匹配的串处
-vi -r filename ：在上次正用vi编辑时发生系统崩溃，恢复filename
-vi -o/O filename1 filename2 … ：打开多个文件，依次进行编辑
-
-:w ? ? ? //保存文件
-:w vpser.net //保存至vpser.net文件
-:q ? ? ? ? ?//退出编辑器，如果文件已修改请使用下面的命令
-:q! ? ? ? ?//退出编辑器，且不保存
-:wq ? ? ? ? //退出编辑器，且保存文件
-:e <path/to/file> → 打开一个文件
-:saveas <path/to/file> → 另存为 <path/to/file>
-:x， ZZ 或 :wq → 保存并退出 (:x 表示仅在需要时保存，ZZ不需要输入冒号并回车)
-:q! → 退出不保存 :qa! 强行退出所有的正在编辑的文件，就算别的文件有更改。
-:bn 和 :bp → 你可以同时打开很多文件，使用这两个命令来切换下一个或上一个文件。
+* vi filename :打开或新建文件，并将光标置于第一行首
+* vi +n filename ：打开文件，并将光标置于第n行首
+* vi + filename ：打开文件，并将光标置于最后一行首
+* vi +/pattern filename：打开文件，并将光标置于第一个与pattern匹配的串处
+* vi -r filename ：在上次正用vi编辑时发生系统崩溃，恢复filename
+* vi -o/O filename1 filename2 … ：打开多个文件，依次进行编辑
+* :w ? ? ? //保存文件
+* :w vpser.net //保存至vpser.net文件
+* :q ? ? ? ? ?//退出编辑器，如果文件已修改请使用下面的命令
+* :q! ? ? ? ?//退出编辑器，且不保存
+* :wq ? ? ? ? //退出编辑器，且保存文件
+* :e <path/to/file> → 打开一个文件
+* :saveas <path/to/file> → 另存为 <path/to/file>
+* :x， ZZ 或 :wq → 保存并退出 (:x 表示仅在需要时保存，ZZ不需要输入冒号并回车)
+* :q! → 退出不保存 :qa! 强行退出所有的正在编辑的文件，就算别的文件有更改。
+* :bn 和 :bp → 你可以同时打开很多文件，使用这两个命令来切换下一个或上一个文件。
 
 ### 重复
-. → (小数点) 可以重复上一次的命令
-N<command> → 重复某个命令N次
+
+* . → (小数点) 可以重复上一次的命令
+* N<command> → 重复某个命令N次
 
 ### 导航
 
+```
 h ：光标左移一个字符
 l ：光标右移一个字符
 k或Ctrl+p：光标上移一行
@@ -429,9 +431,11 @@ s：从当前光标位置处开始，以输入的文本替代指定数目的字�
 S：删除指定数目的行，并以所输入文本代替之
 ncw或nCW：修改指定数目的字
 nCC：修改指定数目的行
+```
 
 ### 编辑
 
+```
 yy ? ? # 将当前行复制到缓存区，也可以用 “ayy 复制，”a 为缓冲区，a也可以替换为a到z的任意字母，可以完成多个复制任务。
 nyy ?  # 将当前行向下n行复制到缓冲区，也可以用 “anyy 复制，”a 为缓冲区，a也可以替换为a到z的任意字母，可以完成多个复制任务。
 yw ? ? # 复制从光标开始到词尾的字符。
@@ -492,18 +496,25 @@ N：在反方向上重复上一次搜索命令
 :s/cont1/cont2/         //把光标所在行的"第一个"cont1替换为cont2
 :s/cont1/cont2/g        //把光标"所在行"的全部cont1替换为cont2
 :%s/cont1/cont2/g       //把"整个文档"中的全部cont1替换为cont2
+```
 
 ## 块操作
+
+```
 ^ <C-v> <C-d> I-- [ESC]
 ^ → 到行头
 <C-v> → 开始块操作 # windows下是 <C-q>
 <C-d> → 向下移动 (你也可以使用hjkl来移动光标，或是使用%，或是别的)
 I-- [ESC] → I是插入，插入“--”，按ESC键来为每一行生效。
+```
 
 ## 自动提示
+
 输入一个词的开头，然后按 <C-p>或是<C-n>
 
-# 最后行方式命令
+## 最后行方式命令
+
+```
 ：n1,n2 co n3：将n1行到n2行之间的内容拷贝到第n3行下
 ：n1,n2 m n3：将n1行到n2行之间的内容移至到第n3行下
 ：n1,n2 d ：将n1行到n2行之间的内容删除
@@ -511,8 +522,11 @@ I-- [ESC] → I是插入，插入“--”，按ESC键来为每一行生效。
 ：!command：执行shell命令command
 ：n1,n2 w!command：将文件中n1行至n2行的内容作为command的输入并执行之，若不指定n1，n2，则表示将整个文件内容作为command的输入
 ：r!command：将命令command的输出结果放到当前行
+```
 
-# 寄存器操作
+## 寄存器操作
+
+```
 “?nyy：将当前行及其下n行的内容保存到寄存器？中，其中?为一个字母，n为一个数字
 “?nyw：将当前行及其下n个字保存到寄存器？中，其中?为一个字母，n为一个数字
 “?nyl：将当前行及其下n个字符保存到寄存器？中，其中?为一个字母，n为一个数字
@@ -525,23 +539,22 @@ u | <C-r>      undo撤销，从文件打开后的所有操作都可以撤销
 r       对单词字符进行替换
 .       重复执行"最近"的一条指令
 J       合并上下两行
+```
 
 
 ### Visual
 
-可以先按v，然后移动光标.会看到文本被选择
+可以先按v，然后移动光标.会看到文本被选择.命令格式：<action>a<object> 和 <action>i<object>
 
-命令格式：<action>a<object> 和 <action>i<object>
 * action：d (删除), y (拷贝), v (可以视模式选择)
 * object 可能是： w 一个单词， W 一个以空格为分隔的单词， s 一个句字， p 一个段落。也可以是一个特别的字符："、 '、 )、 }、 ]。
-
-d (删除 )
-v (可视化的选择)
-gU (变大写)
-gu (变小写)
-J → 把所有的行连接起来（变成一行）
-< 或 > → 左右缩进
-= → 自动给缩进
+    - d (删除 )
+    - v (可视化的选择)
+    - gU (变大写)
+    - gu (变小写)
+    - J → 把所有的行连接起来（变成一行）
+    - < 或 > → 左右缩进
+    - = → 自动给缩进
 
 ```
 (map (+) ("foo")) # 光标键在第一个 o
@@ -559,12 +572,11 @@ $ 到行最后
 A, 输入字符串，按 ESC。
 ```
 
-
 ### 宏
 
-qa 把你的操作记录在寄存器 a。
-于是 @a 会replay被录制的宏。
-@@ 是一个快捷键用来replay最新录制的宏
+* qa 把你的操作记录在寄存器 a。
+* 于是 @a 会replay被录制的宏。
+* @@ 是一个快捷键用来replay最新录制的宏
 
 ```
 在一个只有一行且这一行只有“1”的文本中，键入如下命令：
