@@ -1,6 +1,4 @@
-# HHVM
+# [facebook/hhvm](https://github.com/facebook/hhvm)
 
-## 参考
+A virtual machine designed for executing programs written in Hack and PHP. <http://hhvm.com>
 
-* [](https://github.com/facebook/hhvm)
-* [](https://hhvm.com/)

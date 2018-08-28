@@ -188,6 +188,7 @@
 ## 渲染
 
 * [stereobooster/react-snap](https://github.com/stereobooster/react-snap):👻 Zero-configuration framework-agnostic static prerendering for SPAs
+* [renatorib/react-powerplug](https://github.com/renatorib/react-powerplug):🔌 Renderless Containers
 
 ## Redux
 
