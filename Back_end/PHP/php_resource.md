@@ -61,7 +61,6 @@
       + [Silex Web Profiler](https://github.com/silexphp/Silex-WebProfiler): 一个Silex web的调试工具
       + [Slim Skeleton](https://github.com/slimphp/Slim-Skeleton): Slim架构
       + [Slim View](https://github.com/slimphp/Slim-Views): Slim自定义视图的集合
-
 * 路由 Routers 处理应用路由的库
       - [nikic/FastRoute](https://github.com/nikic/FastRoute): 一个快速路由的库
       - [Klein](https://github.com/klein/klein.php): 一个灵活的路由的库
@@ -336,6 +335,7 @@
       - [Analog](https://github.com/jbroadway/analog): 一个基于闭包的微型日志包
       - [KLogger](https://github.com/katzgrau/KLogger): 一个易用的兼容PSR-3的日志类
       - [Monolog](https://github.com/Seldaek/monolog): 一个全面的日志工具
+      - [SeasX/SeasLog](https://github.com/SeasX/SeasLog)：An effective,fast,stable log extension for PHP.http://pecl.php.net/package/SeasLog http://neeke.github.io/SeasLog/
 * 电子商务 E-commerce 处理支付和构建在线电子商务商店的库和应用
       - [Money](https://github.com/moneyphp/money): 一个Fowler金钱模式的PHP实现
       - [OmniPay](https://github.com/thephpleague/omnipay): 一个框架混合了多网关支付处理的库
@@ -688,6 +688,10 @@
 * [Preventing CSRF Attacks](http://blog.ircmaxell.com/2013/02/preventing-csrf-attacks.html): 一篇阻止CSRF攻击的文章
 * [Seven Ways to Screw Up BCrypt](http://blog.ircmaxell.com/2012/12/seven-ways-to-screw-up-bcrypt.html): 一篇关于纠正BCrypt实现的文章
 * [Use Env](https://seancoates.com/blogs/use-env/): 一篇关于使用unix环境帮助的文章
+* [PHP: The Right Way](http://www.phptherightway.com/) [PHP: The Right Way](https://github.com/codeguy/php-the-right-way)
+* [reeze/tipi](https://github.com/reeze/tipi):Thinking In PHP Internals, An open book on PHP Internals http://www.php-internals.com/
+* Morden php
+* https://www.phparch.com/magazine/
 
 ## PHP内核
 
@@ -708,17 +712,9 @@
 * [walu/phpbook](https://github.com/walu/phpbook):PHP扩展开发及内核应用
 * [hoohack/read-php-src](https://github.com/hoohack/read-php-src)
 
-## 工具
-
-* [facebook/hhvm](https://github.com/facebook/hhvm):A virtual machine for executing programs written in Hack. https://hhvm.com
-
 ## 扩展
 
 * [phalcon/zephir](https://github.com/phalcon/zephir):Zephir is a compiled high level language aimed to the creation of C-extensions for PHP https://zephir-lang.com/
-
-## Log
-
-* [SeasX/SeasLog](https://github.com/SeasX/SeasLog)：An effective,fast,stable log extension for PHP.http://pecl.php.net/package/SeasLog http://neeke.github.io/SeasLog/
 
 ## trace
 
@@ -766,6 +762,91 @@
 
 * [Nova](https://nova.laravel.com/):administration panel for Laravel
 
+## coding standard
+
+* [Symplify/EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard):[READ-ONLY] Easiest way to start using PHP CS Fixer and PHP_CodeSniffer with 0-knowledge
+
 ## 存储
 
 * [thephpleague/flysystem](https://github.com/thephpleague/flysystem):Abstraction for local and remote filesystems https://flysystem.thephpleague.com
+
+## 框架
+
+* [pinguo/php-msf](https://github.com/pinguo/php-msf)PHP微服务框架即"Micro Service Framework For PHP"，是Camera360社区服务器端团队基于Swoole自主研发现代化的PHP协程服务框架，简称msf或者php-msf，是Swoole的工程级企业应用框架，经受了Camera360亿级用户高并发大流量的考验
+* [Youzan Zan Php Installer](https://github.com/youzan/zan-installer)Youzan Zan Php Installer
+* [tencent-php/tsf](https://github.com/tencent-php/tsf):coroutine and Swoole based php server framework in tencent
+* [slimphp/Slim](https://github.com/slimphp/Slim):Slim Framework source code <http://slimframework.com>
+* [nette/nette](https://github.com/nette/nette):METAPACKAGE for Nette Framework components https://nette.org
+* [Tencent/Biny](https://github.com/Tencent/Biny):Biny is a tiny, high-performance PHP framework for web applications
+* [reactphp/react](https://github.com/reactphp/react):Event-driven, non-blocking I/O with PHP. https://reactphp.org
+
+### 论坛
+
+- [flarum/flarum](https://github.com/flarum/flarum):Delightfully simple forum software. <http://flarum.org>
+
+### 电商
+
+- [magento/magento2](https://github.com/magento/magento2): a cutting edge, feature-rich eCommerce solution that gets results.
+- [drupal/drupal](https://github.com/drupal/drupal):Verbatim mirror of the git.drupal.org repository for Drupal core. Changes will not be pulled, and merge requests will not be accepted, if you want to contribute, go to Drupal.org: https://drupal.org/project/drupal
+
+### CMS
+
+* [bolt/bolt](https://github.com/bolt/bolt):Bolt is a simple CMS written in PHP. It is based on Silex and Symfony components, uses Twig and either SQLite, MySQL or PostgreSQL.
+
+### Wiki
+
+* [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki)
+
+## 扩展
+
+* [PHP 开发者如何做代码审查?](http://blog.csdn.net/gitchat/article/details/78050953)
+* [thephpleague/glide](https://github.com/thephpleague/glide):Wonderfully easy on-demand image manipulation library with an HTTP based API. <http://glide.thephpleague.com>
+* [dompdf/dompdf](https://github.com/dompdf/dompdf):HTML to PDF converter (PHP5) <http://dompdf.github.com/>
+* [PHPOffice/PHPExcel](https://github.com/PHPOffice/PHPExcel):A pure PHP library for reading and writing spreadsheet files
+* [briannesbitt/Carbon](https://github.com/briannesbitt/Carbon):A simple PHP API extension for DateTime. <http://carbon.nesbot.com/>
+* [Intervention/image](https://github.com/Intervention/image):PHP Image Manipulation <http://image.intervention.io>
+* [fzaninotto/Faker](https://github.com/fzaninotto/Faker):Faker is a PHP library that generates fake data for you
+* [guzzle/guzzle](https://github.com/guzzle/guzzle):Guzzle, an extensible PHP HTTP client <http://guzzlephp.org/>
+* [reactphp/react](https://github.com/reactphp/react):Event-driven, non-blocking I/O with PHP. <https://reactphp.org>
+* [CopernicaMarketingSoftware/PHP-CPP](https://github.com/CopernicaMarketingSoftware/PHP-CPP):Library to build PHP extensions with C++ <http://www.php-cpp.com/>
+* [nikic/PHP-Parser](https://github.com/nikic/PHP-Parser):A PHP parser written in PHP
+* [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb#installation):A MongoDB based Eloquent model and Query builder for Laravel (Moloquent) https://jenssegers.com
+* [youzan/php-co-koa](https://github.com/youzan/php-co-koa)PHP异步编程: 手把手教你实现co与Koa
+* [youzan/zan](https://github.com/youzan/zan)高效稳定、安全易用、线上实时验证的全异步高性能网络库，通过PHP扩展方式使用。
+* [HanSon/youzan-sdk](https://github.com/HanSon/youzan-sdk)有赞 SDK
+* [hprose/hprose-php](https://github.com/hprose/hprose-php)Hprose is a cross-language RPC
+* [swoole/php-cp](https://github.com/swoole/php-cp)
+* [thephpleague/omnipay](https://github.com/thephpleague/omnipay):A framework agnostic, multi-gateway payment processing library for PHP 5.3+ http://omnipay.thephpleague.com/
+* [thephpleague/flysystem](https://github.com/thephpleague/flysystem):Abstraction for local and remote filesystems http://flysystem.thephpleague.com
+* [thephpleague/oauth2-server](https://github.com/thephpleague/oauth2-server):A spec compliant, secure by default PHP OAuth 2.0 Server https://oauth2.thephpleague.com
+* [thephpleague/fractal](https://github.com/thephpleague/fractal):Output complex, flexible, AJAX/RESTful data structures. http://fractal.thephpleague.com
+* [thephpleague/oauth2-client](https://github.com/thephpleague/oauth2-client):Easy integration with OAuth 2.0 service providers. http://oauth2-client.thephpleague.com
+* [thephpleague/climate](https://github.com/thephpleague/climate):PHP's best friend for the terminal. http://climate.thephpleague.com
+* [thephpleague/csv](https://github.com/thephpleague/csv):CSV data manipulation made easy in PHP https://csv.thephpleague.com
+* [thephpleague/glide](https://github.com/thephpleague/glide):Wonderfully easy on-demand image manipulation library with an HTTP based API. http://glide.thephpleague.com
+* [thephpleague/skeleton](https://github.com/thephpleague/skeleton):A skeleton repository for League Packages http://thephpleague.com
+* [KnpLabs/php-github-api](https://github.com/KnpLabs/php-github-api):A simple PHP GitHub API client, Object Oriented, tested and documented. For 5.5+.
+* [twigphp/Twig](https://github.com/twigphp/Twig):Twig, the flexible, fast, and secure template language for PHP http://twig.sensiolabs.org/
+* [smarty-php/smarty](https://github.com/smarty-php/smarty)
+
+## 社区
+
+- [coffeephp](http://coffeephp.com/)
+- [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
+
+## 参考
+
+- [codeguy/php-the-right-way](https://github.com/codeguy/php-the-right-way):An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web <http://www.phptherightway.com>
+- [walu/phpbook](https://github.com/walu/phpbook):PHP扩展开发及内核应用
+- [laruence/php7-internal](https://github.com/laruence/php7-internal):Understanding PHP7 Internal articles
+- [PHP 教程](http://www.w3school.com.cn/php/)
+- [Awesome PHP](http://coffeephp.com/resources)
+- [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php):A curated list of amazingly awesome PHP libraries, resources and shiny things.
+- [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
+- [PHP Best Practices](https://phpbestpractices.org)
+- [php-fig/fig-standards](https://github.com/php-fig/fig-standards):Standards either proposed or approved by the Framework Interop Group http://www.php-fig.org/
+
+## 工具
+
+* [cytopia/docker-php-fpm-7.2](https://github.com/cytopia/docker-php-fpm-7.2):PHP-FPM 7.2 on CentOS 7 http://devilbox.org/
+* [travis-ci-examples/php](https://github.com/travis-ci-examples/php):Example PHP project using Travis CI http://travis-ci.org

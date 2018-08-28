@@ -1,9 +1,5 @@
 # Windows
 
-[Awesome-Windows/Awesome](https://github.com/Awesome-Windows/Awesome):An awesome & curated list of best applications and tools for Windows.
-
-Windows10 LTSB
-
 ## 工具
 
 * [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation https://chocolatey.org/
@@ -241,3 +237,5 @@ Windows是最烂的开发平台
 ## 系统
 
 * [felixrieseberg/windows95](https://github.com/felixrieseberg/windows95):💩🚀 Windows 95 in Electron. Runs on macOS, Linux, and Windows.
+* [Awesome-Windows/Awesome](https://github.com/Awesome-Windows/Awesome):An awesome & curated list of best applications and tools for Windows.
+* [Windows10 LTSB]()
