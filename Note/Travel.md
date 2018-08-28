@@ -6,6 +6,11 @@
 * 纽约
 * 贵州
     - 梵净山
+* 芬兰
+    - 芬兰湾
+    - 罗纳岛
+    -  海上要塞Suomenlinna
+    -  Nuuksio国家公园
 
 
 ## Airlines

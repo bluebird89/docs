@@ -92,10 +92,8 @@ ng generate module my-module # 模块Modulew
 
 * [SebastianM/angular-google-maps](https://github.com/SebastianM/angular-google-maps):Angular 2+ Google Maps Components https://angular-maps.com/
 
-## 参考
+## 教程
 
-* [angular/angular-cli](https://github.com/angular/angular-cli):CLI tool for Angular
-* [angular/material](https://github.com/angular/material):Material design for AngularJS https://material.angularjs.org/
 * [angular-ui/angular-google-maps](https://github.com/angular-ui/angular-google-maps):AngularJS directives for the Google Maps Javascript API http://angular-ui.github.io/angular-g…
 * [shyamseshadri/angularjs-book](https://github.com/shyamseshadri/angularjs-book):Examples and Code snippets from the AngularJS O'Reilly book
 * [angular/quickstart](https://github.com/angular/quickstart):Angular 2 QuickStart - source from the documentation
@@ -103,3 +101,16 @@ ng generate module my-module # 模块Modulew
 * [gdi2290/angular-starter](https://github.com/gdi2290/angular-starter):🎉 An Angular Starter kit featuring Angular (Router, Http, Forms, Services, Tests, E2E, Dev/Prod, HMR, Async/Lazy Routes, AoT via ngc), Karma, Protractor, Jasmine, Istanbul, TypeScript, TsLint, Codelyzer, Hot Module Replacement, @types, and Webpack by @TipeIO https://tipe.io
 * [Top 12 Productivity Tips for WebStorm and Angular – Part 1](https://www.sitepoint.com/productivity-tips-for-webstorm-and-angular-part-1/)
 * [Angular2新的体验](http://blog.fens.me/angular2-init/)
+
+## 脚手架
+
+* [angular/angular-cli](https://github.com/angular/angular-cli):CLI tool for Angular
+
+## UI
+
+* [angular/material](https://github.com/angular/material):Material design for AngularJS https://material.angularjs.org/
+
+## 升级
+
+* [ngMigration Assistant](https://github.com/ellamaolson/ngMigration-Assistant):一个命令行工具，用于分析 AngularJS 应用程序，并在此基础上，提出迁移路径建议。同时，它还提供应用程序中代码复杂性、大小、构造等方面的统计信息，告诉你迁移之前必要的准备工作。
+* [ngMigration Forum](https://github.com/angular/ngMigration-Forum/wiki): 是一个社区，聚集了网络上最佳的迁移经验和信息。

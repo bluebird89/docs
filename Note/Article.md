@@ -72,3 +72,10 @@
 > The fifth time when she forbode for weakness, and attributed her patience to strength.
 > The sixth time when she despised the ugliness of a face, and knew not that it was one of her own masks.
 > And the seventh time when she sang a song of praise, and deemed it a virtue.
+
+
+《增广贤文》
+
+> 厌静还思喧，嫌喧又忆山。
+> 自从心定后，无处不安然。
+> 莫将容易得，便作等闲看。

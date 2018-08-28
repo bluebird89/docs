@@ -489,7 +489,6 @@ div.animate({ // 使用相对值
     height:'+=150px',
     width:'+=150px'
   });
-});
 
 var div = $('#test-animates');
 // 动画效果：slideDown - 暂停 - 放大 - 暂停 - 缩小
@@ -504,7 +503,6 @@ div.slideDown(2000)
        width: '128px',
        height: '128px'
    }, 2000);
-}
 ```
 
 ### AJAX
@@ -560,6 +558,42 @@ var jqxhr = $.getJSON('/path/to/resource', {
 }).done(function (data) {
     // data已经被解析为JSON对象了
 });
+```
+
+## 遍历
+
+```js
+var arr = new Array(13.5,3,4,5,6);
+for(var i=0;i<arr.length;i++){
+ arr[i] = arr[i]/2.0;
+}
+
+var x
+var mycars = new Array()
+mycars[0] = "Saab"
+mycars[1] = "Volvo"
+mycars[2] = "BMW"
+for (x in mycars)
+{
+  document.write(mycars[x] + "<br />")
+}
+
+var arr=new Array();
+arr=["aaa","bbb","ccc"];
+$.each(arr,function(index,value){
+     alert(i+"..."+value);
+});
+
+$(function () {
+    $.each([["aaa", "bbb", "ccc"], ["ddd", "eee", "fff"], ["ggg", "hhh", "iii"]], function (index, item) {
+         alert(index + "..." + item);
+         //输出0...aaa,bbb,ccc  1...ddd,eee,fff  2...ggg,hhh,iii   这时的index为数组下标,item相当于取这二维数组中的每一个数组
+         $.each(item, function (index, itemobj) {
+              alert(index + "....." + itemobj);
+         });
+    });
+     //输出0...aaa,bbb,ccc  0...aaa 1...bbb 2...cccc  1...ddd,eee,fff  0...ddd 1...eee 2...fff  2...ggg,hhh,iii 0...ggg 1...hhh 2...iii
+ });
 ```
 
 ### 插件

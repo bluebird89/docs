@@ -379,7 +379,11 @@ show engines; # 显示当前数据库支持的存储引擎情况
     - longtext 大型文本 2^32-1 0-42亿个字符
 * 日期时间(发布日期"这样的数据时，请用时间戳来存)：
     - date 2015-10-20
-    - time 10:09:08
+    - time 10:09:08 100908 9:5:0 CURRENT_TIME()
+        +  ADDTIME(CURRENT_TIME(), 023000),  SUBTIME(CURRENT_TIME(), 023000);
+        +  TIMEDIFF(end_at, start_at)
+        +   TIME_FORMAT(start_at, '%h:%i %p') start_at
+        +   UTC_TIME()
     - datetime 保存是1001年到9999年，精度是秒，存储值为 2016-05-06 22:39:40。
     - timestamp保存自 1970年1月1日午夜以来的秒数，和unix时间戳相同，提供4字节存储 只能表示1970年到2038年。默认timestamp值 为 NOT NULL。
     - 默认值：datetime or timestrap 默认值 CURRENT_TIMESTAMP
