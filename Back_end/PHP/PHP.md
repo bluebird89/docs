@@ -1327,7 +1327,6 @@ brew install mcrypt
 brew install php71-xdebug
 ```
 
-
 ## Docker配置
 
 - mkdir -p ~/php-fpm/logs ~/php-fpm/conf
@@ -1480,6 +1479,11 @@ spl_autoload_register('autoload');
 * 自动生成的PSR4配置文件名称为autoload_psr4.php（PSR0的是autoload_namespace.php），配置文件返回一个关联数组，键是名称空间的前缀，值是名称空间前缀对应的路径。
 
 ## 框架
+
+* 提供了一个用以构建web应用的基本框架，从而简化了用PHP编写web应用程序的流程。
+* 不但节省开发时间，有助于建立更稳定的应用，而且减少了重复编码的开发。
+* 可以帮助初学者建立更稳定的应用服务，这可以让你花更多的时间去创建实际的Web应用程序，而不是花时间写重复的代码。
+* 
 
 spl_autoload
 spl_autoload_register
