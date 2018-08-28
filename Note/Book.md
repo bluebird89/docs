@@ -536,6 +536,7 @@
 * 《财务管理分析》Analysis for Financial Management by Robert Higgins
 * 《竞争战略》迈克尔·波特 (Michael Porter)
 * 《自由选择》米尔顿·弗里德曼（Milton Friedman）
+* 巴菲特致股东的一封信
 
 ## 之外
 

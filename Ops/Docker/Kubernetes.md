@@ -54,6 +54,83 @@ Kubernetes 的 Horizontal Pod Autoscaler （HPA）组件专门设计用于应用
 
 如下图所示，有三个pod都有label为"app=backend"，创建service和replicationController时可以指定同样的label:"app=backend"，再通过label selector机制，就将它们与这三个pod关联起来了。例如，当有其他frontend pod访问该service时，自动会转发到其中的一个backend pod。 ![](../_static/labels.png)
 
+
+## 知识结构
+
+* Kubernetes集群架构
+    - Kubernetes集群架构概述
+    - Master及各组件
+    - Node及相关组件
+    - 核心附件CoreDNS、HeapSter（Prometheus）、Dashboard及Ingress Controller概述
+    - 核心资源类型：Pod、Deployment、Service
+* Kubernetes快速入门
+    - Kubernetes集群的部署方法及部署要点
+    - 部署Kubernetes分布式集群
+    - kubectl使用基础
+    - 命令式应用部署、扩缩容、服务暴露
+* 资源配置清单及Pod资源
+    - Kubernetes API中的资源配置格式
+    - 资源类型 API群组及其版本介绍
+    - Pod资源及其配置格式
+    - 使用配置清单创建自主式Pod资源
+    - 标签及标签选择器
+    - Pod的节点选择器
+    - 容器存活状态探测及就绪状态探测
+* Pod控制器
+    - Pod控制器及其功用
+    - 通过配置清单管理ReplicaSet控制器，包括扩缩容及更新机制
+    - Deployment控制器基础应用及滚动更新：灰度部署、金丝雀部署、蓝绿部署的实现；
+    - DaemonSet控制器基础应用及使用案例
+* Service资源对象
+    - Service及其实现模型
+    - Service的类型及其功用
+    - 各Service类型的创建及应用方式
+    - Headless Service
+    - 基于DNS的服务发现简介
+    - Ingress类型及实现方式
+    - Ingress Controller及部署
+    - Ingress使用案例：发布http及https的tomcat服务
+* K8S-存储卷
+    - 存储卷及其功用
+    - 常见的存储卷类型及应用：emptyDir、hostPath、nfs、glusterfs等
+    - PV及PVC
+    - StorageClass及PV的动态供给
+    - ConfigMap
+    - Secret
+* StatefulSet
+    - 有状态及无状态应用对比
+    - 有状态应用的容器难题
+    - StatefulSet及其应用
+*  网络模型及网络策略
+    - flannel工作原理及host-gw等实现方式
+    - calico及其应用
+    - 网络策略及其工作机制
+    - 基于calico的网络策略的实现
+* 认证、授权及准入控制
+    - Kubernetes的认证、授权及准入控制机制
+    - ServiceAccount
+    - 令牌认证及证书认证
+    - RBAC及其实现机制
+    - Role和RoleBinding
+    - ClusterRole和ClusterRoleBinding
+* 调度器
+    - 资源需求、资源限额及其应用
+    - Pod优选级类别
+    - Pod调度器工作原理
+    - 预选及预选策略
+    - 优选及优选算法
+    - 高级调度方法
+* 资源监控及HPA
+    - HeapSter、InfluxDB及Grafana实现资源监控
+    - HPA v1
+    - Prometheus及Grafana实现资源监控
+    - Metrics-Server
+    - HPA v2
+* helm及日志收集系统
+    - helm工作原理
+    - helm部署及其应用
+    - 部署efk日志收集系统
+
 ## 构件
 
 Kubenetes整体框架如下图，主要包括kubecfg、Master API Server、Kubelet、Minion(Host)以及Proxy。 ![](../_static/constructor.png)
@@ -234,6 +311,7 @@ kubectl delete deployments hello-minikube1
 * [kubernetes/kops](https://github.com/kubernetes/kops):Kubernetes Operations (kops) - Production Grade K8s Installation, Upgrades, and Management
 * [datawire/telepresence](https://github.com/datawire/telepresence):Local development against a remote Kubernetes or OpenShift cluster http://www.telepresence.io
 * [runconduit/conduit](https://github.com/runconduit/conduit):Ultralight service mesh for Kubernetes https://conduit.io
+* [kubernetes-sigs/kustomize](https://github.com/kubernetes-sigs/kustomize):Customization of kubernetes YAML configurations
 <http://violetgo.com/blogs/>
 <http://www.winseliu.com/>
 <http://blog.csdn.net/qq1010885678/article/details/48832067>

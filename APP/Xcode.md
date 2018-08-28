@@ -4,6 +4,7 @@
 
 * [serhii-londar/open-source-mac-os-apps](https://github.com/serhii-londar/open-source-mac-os-apps):🚀 Awesome list of open source applications for macOS.
 * [AFNetworking/AFNetworking](https://github.com/AFNetworking/AFNetworking):A delightful networking framework for iOS, macOS, watchOS, and tvOS. http://afnetworking.com
+* [mattingalls/Soundflower](https://github.com/mattingalls/Soundflower):MacOS system extension that allows applications to pass audio to other applications. https://github.com/Cycling74/Soundflower
 
 ## 工具
 
