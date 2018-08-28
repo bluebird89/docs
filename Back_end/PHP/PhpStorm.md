@@ -14,7 +14,7 @@
     - ?, :variable, @variable, #variable# or $variable$：设置语句参数
     - control+j:查看单条数据
 * vagrant
-    - Init in Project Root 
+    - Init in Project Root
     - Start SSH session
 
 ## key
