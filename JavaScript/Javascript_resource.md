@@ -263,6 +263,16 @@
 * [BrainJS/brain.js](https://github.com/BrainJS/brain.js):🤖 Neural networks in JavaScript http://brain.js.org
 * [xviniette/FlappyLearning](https://github.com/xviniette/FlappyLearning):Program learning to play Flappy Bird by machine learning (Neuroevolution)http://xviniette.github.io/FlappyLearning/
 
+
+## 代码在线分享工具
+
+* JS Fiddle
+* .NET Fiddle
+* SQL Fiddle
+* jdoodle
+* RunJS
+* CodePen
+
 ## 问题
 
 ```sh
