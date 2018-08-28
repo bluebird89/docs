@@ -75,11 +75,45 @@ Docker基于LXC的改进
   - deamon的安全接口
   - linux本身提供的安全方案，apparmor，selinux
 
-## 仓库
+## 知识结构
 
-- [Docker Hub](https://hub.docker.com)
-- [The Docker Store](https://store.docker.com/)
-- [docker cloud](https://cloud.docker.com/)
+* Linux容器技术基础
+  - 容器技术发展史
+  - Namespace和CGroups
+  - LXC和容器技术
+* Docker容器技术基础
+  - Docker技术构架
+  - 安装部署Docker
+  - Docker的镜像及容器的基础应用
+* Docker镜像
+  - Docker镜像工作原理
+  - 基于容器制作Docker镜像
+  - 推送Docker镜像至Registry
+  - 镜像的本地分发
+* Docker网络
+  - Docker网络模型及工作原理
+  - Docker网络模型验正
+  - 暴露容器应用至节点外部
+  - 桥接式网络管理
+  - 配置Docker进程的网络属性
+* 存储卷
+  - 存储卷类型及功能
+  - 存储卷应用
+  - 存储卷共享
+* Dockerfile
+  - Dockerfile文件格式
+  - 各指令详解
+  - 案例：自定义entrypoint脚本，接收变量进行容器化应用配置
+* 私有Registry
+  - Registry的组织格式
+  - 利用docker-registry构建简单的私有Registry
+  - docker-compose简介
+  - 使用VMWare Harbor构建企业级私有Registry
+* 容器资源限制
+  - 资源限制模型
+  - CPU资源限制及三种形式及其应用
+  - 内存及Swap资源限制及其应用
+  - 案例：使用stress-ng镜像验正资源限制效果
 
 ## Install
 
@@ -327,6 +361,12 @@ services:
 * 不要创建大尺寸镜像 大尺寸的镜像难以分配。请确保仅使用必需文件和库来运行应用程序。
 * 不要分两部分传送应用程序 有些人把容器当作虚拟机，所以他们大多会认为，应该将应用程序部署到现有正在运行的容器中。在需要不断部署和调试的开发阶段，可能确实如此；但对于 QA 和生产的持续交付 (CD) 渠道，应用程序应当是镜像的一部分。切记：容器转瞬即逝。
 
+## 仓库
+
+- [Docker Hub](https://hub.docker.com)
+- [The Docker Store](https://store.docker.com/)
+- [docker cloud](https://cloud.docker.com/)
+
 ## 资源
 
 * [wurstmeister/kafka-docker](https://github.com/wurstmeister/kafka-docker):Dockerfile for Apache Kafka http://wurstmeister.github.io/kafka-d…
@@ -340,6 +380,7 @@ services:
 * [openfaas/faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple for Docker & Kubernetes https://docs.openfaas.com/
 * [portainer/portainer](https://github.com/portainer/portainer):Simple management UI for Docker http://portainer.io
 * [coreos/clair](https://github.com/coreos/clair):Vulnerability Static Analysis for Containers
+* [tobegit3hub/seagull](https://github.com/tobegit3hub/seagull):Friendly Web UI to manage and monitor docker
 
 ## 参考
 

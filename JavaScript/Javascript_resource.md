@@ -93,7 +93,8 @@
 * [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js):A JavaScript Chart Library
 * [clientIO/joint](https://github.com/clientIO/joint):JavaScript diagramming library http://www.jointjs.com
 * [uber/kepler.gl](https://github.com/uber/kepler.gl):https://uber.github.io/kepler.gl
-
+* [antvis/f2](https://github.com/antvis/f2):📱📈An elegant, interactive and flexible charting library for mobile. https://antv.alipay.com/zh-cn/f2/3.x/index.html
+https://antv.alipay.com/zh-cn/f2/3.x/index.html
 ## Animations
 
 * [juliangarnier/anime](https://github.com/juliangarnier/anime):JavaScript Animation Engine http://animejs.com

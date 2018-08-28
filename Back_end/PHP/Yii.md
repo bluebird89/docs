@@ -724,7 +724,32 @@ AppAsset::register($this);  // $this 代表视图对象
 
 geterrors
 
-self::find()->select('count(*)')->where(['user_id' => $userId, 'status' => 0])->scalar();
+```php
+User::find()->one();  # 此方法返回一条数据；
+User::find()->all();  # 此方法返回所有数据；
+User::find()->count();  # 此方法返回记录的数量；
+User::find()->average();  # 此方法返回指定列的平均值；
+User::find()->min();  # 此方法返回指定列的最小值 ；
+User::find()->max();  # 此方法返回指定列的最大值 ；
+User::find()->scalar();  # 此方法返回值的第一行第一列的查询结果；
+User::find()->column();  # 此方法返回查询结果中的第一列的值；
+User::find()->exists();  # 此方法返回一个值指示是否包含查询结果的数据行；
+User::find()->batch(10);  # 每次取 10 条数据
+User::find()->each(10);  # 每次取 10 条数据， 迭代查询
+User::findOne($id);  # 此方法返回 主键 id=1 的一条数据(举个例子)；
+
+User::find()->where([‘name‘ => ‘小伙儿‘])->one();  # 此方法返回 [‘name‘ => ‘小伙儿‘] 的一条数据；
+User::find()->where([‘name‘ => ‘小伙儿‘])->all();  # 此方法返回 [‘name‘ => ‘小伙儿‘] 的所有数据；
+User::find()->andWhere([‘sex‘ => ‘男‘, ‘age‘ => ‘24‘])->count(‘id‘);  # 统计符合条件的总条数；
+User::find()->andFilterWhere([‘like‘, ‘name‘, ‘小伙儿‘]);  # 此方法是用 like 查询 name 等于 小伙儿的 数据
+User::find()->andFilterWhere(['>', 'id', 10]);  # 此方法是用 id > 10的 数据
+
+User::find()->orderBy(‘id DESC‘)->all();  # 此方法是排序查询；
+User::find()->select('count(*)')->where(['user_id' => $userId, 'status' => 0])->scalar();
+
+User::findBySql(‘SELECT * FROM user‘)->all();  # 此方法是用 sql 语句查询 user 表里面的所有数据；
+User::findBySql(‘SELECT * FROM user‘)->one();  # 此方法是用 sql 语句查询 user 表里面的一条数据；
+```
 
 ## REST
 
