@@ -37,11 +37,11 @@ request
 
 HTTP请求的4部分:
     - URL：如果在输入参数时，没有自动decode到URL中，则可以选中参数右键后，选择EncodeURIComponent(通过右键)，同样也可以decode，将参数生成dictionary的形式
-    - method:
+    - method:get post
     - headers：通过key-value添加，一些保密的可以解除限制.鼠标悬停在headers标签上，有详细的HTTP说明。
     - body
         + form-data：mutipart/form-data是网页表单用来传输数据的默认格式。可以模拟填写表单，并且提交表单。可以上传一个文件作为key的value提交(如上传文件)。但该文件不会作为历史保存，只能在每次需要发送请求的时候，重新添加文件。
-        + urlencoded：你不能上传文件通过这个编码模式。该模式和表单模式会容易混淆。urlencoded中的key-value会写入URL，form-data模式的key-value不明显写入URL，而是直接提交。
+        + x-www-form-urlencoded：application/x-www-from-urlencoded,会将表单内的数据转换为键值对.不能上传文件通过这个编码模式。该模式和表单模式会容易混淆。urlencoded中的key-value会写入URL，form-data模式的key-value不明显写入URL，而是直接提交。
         + raw request可以包含任何东西。所有填写的text都会随着请求发送。
         + binaryimage, audio or video files.text files 。也不能保存历史，每次选择文件，提交。
     - pre-requset script:对一些环境变量之类的进行设置，相当于数据初始化 。全局变量与环境变量
@@ -114,6 +114,10 @@ console.log(tv4.error);
 tests["Valid Data1"] = tv4.validate(data1, schema);
 tests["Valid Data2"] = tv4.validate(data2, schema);
 ```
+
+## Team
+
+* 团队共享接口实例
 
 ## 扩展
 
