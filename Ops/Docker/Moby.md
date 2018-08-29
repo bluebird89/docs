@@ -375,12 +375,12 @@ services:
 
 * [docker/machine](https://github.com/docker/machine)Machine management for a container-centric world
 * [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
-* Shipyard
 * Potainer
 * [openfaas/faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple for Docker & Kubernetes https://docs.openfaas.com/
 * [portainer/portainer](https://github.com/portainer/portainer):Simple management UI for Docker http://portainer.io
 * [coreos/clair](https://github.com/coreos/clair):Vulnerability Static Analysis for Containers
 * [tobegit3hub/seagull](https://github.com/tobegit3hub/seagull):Friendly Web UI to manage and monitor docker
+* [docker/kitematic](https://github.com/docker/kitematic):Visual Docker Container Management on Mac & Windows https://kitematic.com
 
 ## 参考
 

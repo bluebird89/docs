@@ -24,7 +24,7 @@
 -   Computer（大尺寸屏幕,甚至两块屏幕）
     -   MacBook Pro:15 寸，16G
     -   Acer Chromebook R11
-    -   明基爱眼显示器 EW2775ZH
+    -   明基 EW2775ZH
     -   明基 PD2710QC
 -   Nintendo Switch
     - 新世代
@@ -103,6 +103,7 @@
     -   The Old Reader
     -   Feedly:博客阅读与整理，导出订阅https://feedly.com/i/opml
     -   Inoreader
+    -   [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub):🍰 万物皆可 RSS https://docs.rsshub.app
 
 ## 建站
 

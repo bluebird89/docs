@@ -401,12 +401,12 @@ sudo ln -s /private/tmp/mysql.sock /var/mysql/mysql.sock
 
 ### apache + mod_fastcgi
 
-```
+```sh
 brew tap homebrew/apache
 brew install httpd24
 brew install mod_fastcgi --with-brewed-httpd24
 
-// 编辑 /usr/local/etc/apache2/2.4/httpd.conf
+# 编辑 /usr/local/etc/apache2/2.4/httpd.conf
 LoadModule fastcgi_module /usr/local/opt/mod_fastcgi/libexec/mod_fastcgi.so
 
 <IfModule fastcgi_module>
