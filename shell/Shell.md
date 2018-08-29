@@ -582,6 +582,7 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 * [mixn/carbon-now-cli](https://github.com/mixn/carbon-now-cli):🎨 Beautiful images of your code — from right inside your terminal.
 * [faressoft/terminalizer](https://github.com/faressoft/terminalizer):🦄 Record your terminal and generate animated gif images
 * [niieani/bash-oo-framework](https://github.com/niieani/bash-oo-framework):Bash Infinity is a modern boilerplate / framework / standard library for bash
+* [ericfreese/rat](https://github.com/ericfreese/rat):Compose shell commands to build interactive terminal applications
 
 ## 教程
 

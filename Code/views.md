@@ -32,7 +32,28 @@
 * 说Java好的是因为它跨平台就像好像说肛交好是因为其可以适用于一切性别。Saying that Java is good because it works on all platforms is like saying anal sex is good because it works on all genders – Unknown
 * XML就像是一种强暴——如果它不能解决你的问题，那只能说明你没有用好它。XML is like violence – if it doesn’t solve your problems, you are not using enough of it. – Unknown
 * 爱因期坦说，自然界中的一切一定会有一个简单的解释，因为上帝并不是反复无常和独裁的。当然，不会有什么信仰能程序员像爱因期坦那样感到舒服。Einstein argued that there must be simplified explanations of nature, because God is not capricious or arbitrary. No such faith comforts the software engineer. – Fred Brooks
-
+* 函数不要超过50行。
+* 不要一次性写太多来不及测的代码，而是要写一段调试一段
+* UT和编码要同步做
+* 多写注释方便的往往是自己
+* 碰到一堆问题时，一次只尝试解决一个问题
+* 没把握一眼看出问题症结的时候，老老实实单步调试
+* 设计模式是个好东西，但不要强行使用
+* 没造成可观的损失前不要尝试做性能优化
+* 没事别重复造轮子
+* 大多数情况下Boss不关心技术含量，而且往往简单的解决方案更快更有效果
+* 不要害怕接触新知识，因为害怕也没用，不管你愿意不愿意，你现在会的东西5年后就会过时
+* 重构是程序员的主力技能
+* 工作日志能提升脑容量
+* 先用profiler调查，才有脸谈优化
+* 漫山遍野的注释实际背景噪音
+* 普通程序员+google=超级程序员
+* 写单元测试总是合算的
+* 不要先写框架再写实现。最好反过来，从原型中提炼框架
+* 代码结构清晰，其它问题都不算事儿
+* 管理行不行，就看工作流
+* 编码不要畏惧变化，要拥抱变化
+* 常充电。程序员只有一种死法：土死的。
 
 ## BAD
 

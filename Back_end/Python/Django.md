@@ -137,4 +137,4 @@ Requested setting INSTALLED_APPS, but settings are not configured. You must eith
 ## 框架
 
 * [encode/django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. ⚡️ https://www.django-rest-framework.org
-
+* [geex-arts/django-jet](https://github.com/geex-arts/django-jet):Modern responsive template for the Django admin interface with improved functionality http://jet.geex-arts.com/

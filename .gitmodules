@@ -184,3 +184,9 @@
 [submodule "Linux/test-your-sysadmin-skills"]
 	path = Linux/test-your-sysadmin-skills
 	url = git@github.com:trimstray/test-your-sysadmin-skills.git
+[submodule "Interview/CS-Interview-Knowledge-Map"]
+	path = Interview/CS-Interview-Knowledge-Map
+	url = git@github.com:InterviewMap/CS-Interview-Knowledge-Map.git
+[submodule "Client/React/react-bits"]
+	path = Client/React/react-bits
+	url = git@github.com:vasanthk/react-bits.git
