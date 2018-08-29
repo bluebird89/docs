@@ -56,7 +56,7 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 
 ## UI组件
 
-* [weui-wxss](https://github.com/weui/weui-wxss) ★1873 - 同微信原生视觉体验一致的基础样式库
+* [weui-wxss](https://github.com/weui/weui-wxss):A UI library by WeChat official design team, includes the most useful widgets/modules.
 * [youzan/zanui-weapp](https://github.com/youzan/zanui-weapp):高颜值、好用、易扩展的微信小程序 UI 库，Powered by 有赞
 * [xiaolin3303/wx-charts](https://github.com/xiaolin3303/wx-charts):微信小程序图表charts组件，Charts for WeChat small app
 * [Wa-UI](https://github.com/liujians/Wa-UI) ★164 - 针对微信小程序整合的一套UI库
