@@ -19,6 +19,7 @@
     -   Kinesis KB600 Advantage2
     -   Das Keyboard Model S Professional for Mac Clicky MX Blue Mechanical Keyboard (DASK3PROMS1MACCLI)
     -   IKBC C87 F87 红轴最好
+    -   cherry mx8.0
     -   腕托
 -   Computer（大尺寸屏幕,甚至两块屏幕）
     -   MacBook Pro:15 寸，16G
@@ -79,6 +80,7 @@
 
 -   [Paper](http://www.fiftythree.com/):优雅，美观，做笔记，记录灵感
 -   [语雀](https://yuque.com/)
+-   [Google文档](https://docs.google.com/document/u/0/)
 -   [腾讯文档](https://docs.qq.com/)
 -   youdaonote ：格式化笔记
 -   simplenote：简单笔记（无格式）
