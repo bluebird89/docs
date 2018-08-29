@@ -559,6 +559,14 @@ Shift+PgDn:将终端显示向下滚动
 clear|ctrl+l # 清屏
 ```
 
+### 终端
+
+
+
+```sh
+dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on command-line
+```
+
 ## 指令
 
 /usr/bin/
@@ -658,6 +666,8 @@ FHS包含两层规范：
   * 虚拟文件系统界面是虚拟文件系统所提供的抽象界面，它主要由一组标准的、抽象的操作构成，这些函数(操作)以系统调用的形式供用户调用。
 
 ```sh
+file logo.png # Returns information for given file
+
 wc # 获取某一个文件的行数和字数`wc package.json`
 cp -r|p|d|a 源文件 目标位置/目标名称 # 复制文件或目录  r:复制目录 p:连带文件属性一起复制 -d:源文件是链接文件，则复制链接属性 a:相当于pdr
 
@@ -677,6 +687,14 @@ cat file >> another file # 文件追加
 ln -s 源文件 目标文件 创建链接文件 (文件名都必须写绝对路径) # 链接文件相当于快捷方式
 
 psketch
+
+tee # It splits the output of a program, so we can both print & save it. For example, add a new entry to hosts file;
+echo "127.0.0.1 foobar" | sudo tee -a /etc/hosts
+
+tree -d # Lists contents of a directory in tree-like format
+
+find . -type f -name "*.css"  # List all CSS files (including subdirectories)
+find . -type f \( -name "*.css" -or -name "*.html" \) # List all CSS or HTML files:
 ```
 
 * `dd if=/dev/zero of=virtual.img bs=1M count=256` 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
@@ -699,17 +717,38 @@ netstat -tunlp # 显示tcp，udp的端口和进程等相关
 netstat -tln | grep 8000
 netstat -tunlp|grep (port)  # // 指定端口号进程情况
 
+# pidof prints out the process id of a running program. For example, below command will output the process ID of nginx
+pidof nginx
+
 ps -ef | grep nginx # 进程查看
 ps aux | grep nginx
 
 kill -9 pid # 关闭进程
 kill pid
+kill -USR2 $(pidof nginx)
+pkill -f nginx
 
 ctrl+c   ## 有些程序也可以用q键退出
 
 ctrl+z   ## 进程会挂起到后台
 bg jobid  ## 让进程在后台继续执行
 fg jobid   ## 让进程回到前台
+
+iotop # Sorts processes by disk writes, and show how much and how frequently programs are writing to the disk.
+powertop # Lists processes by their energy consume. It\'s a vital command when you\'re outside, somewhere you can\'t charge your laptop.
+nethogs # Lists processes by their network traffic.
+
+top
+
+htop # Famous process monitor. It has a nice, colorful command-line UI. Some useful keybindings:
+# \ Filter
+# / Search
+# , Choose sorting criteria
+# k Send kill signal
+# u Filter results by user
+# t Open/close tree mode
+# - and + Collabse / uncollapse selected process tree
+# H Turn off displaying threads
 ```
 
 ### Network
@@ -794,6 +833,8 @@ passwd 用户名  # 设定用户密码
 
 etc/group
 chgrp [-options] [群组名] [文档路径]
+
+choot
 ```
 
 ### 权限
@@ -965,11 +1006,13 @@ sudo apt-get install google-chrome-stable
 
 ## 启动项
 
-启动目录： /etc/rc.d/rc[0~6].d 命令行脚本文件：/etc/init.d/ 本地文件：/etc/rc.local 添加 /etc/init.d/nginx start
-
+* 启动目录： /etc/rc.d/rc[0~6].d
+* 命令行脚本文件：/etc/init.d/
+* 本地文件：/etc/rc.local
+* 添加 /etc/init.d/nginx start
 
 ```sh
-// 提高电池的寿命并且减少过热
+# 提高电池的寿命并且减少过热
 sudo add-apt-repository ppa:linrunner/tlp
 sudo apt-get update
 sudo apt-get install tlp tlp-rdw
@@ -1455,6 +1498,7 @@ sudo aptitude -f install <packagename>
 * [Getting Started with Linux](https://www.linux.org/lessons/beginner/index.html) – 来自Linux Online 的20课时的用于新手的教程。
 * [Advanced Linux Programming](http://www.advancedlinuxprogramming.com/) – 这是一本电子书可以免费下载。这本书主要教程序员们怎么在Linux下做软件和编程序。
 * [IBM’s Technical Library](https://www.ibm.com/developerworks/views/linux/libraryview.jsp?type_by=Tutorials) – IBM’s Technical Library 提供的一组给高级Linux用户的教程。
+* [HAPPY HACKING LINUX](https://azer.bike/happy-hacking-linux/)
 
 systemctl unmask mysql.service
 service mysql start

@@ -1,4 +1,8 @@
 # 订单设计
+
+
+```sql
+# 订单设计
 # 交易表
 CREATE TABLE `transaction` (
 `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -122,3 +126,4 @@ CREATE TABLE `order_appraise` (
   PRIMARY KEY (`id`),
   KEY `order_appraise_order_id_index` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```
