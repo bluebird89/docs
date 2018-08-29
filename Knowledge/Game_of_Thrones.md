@@ -1,7 +1,6 @@
 # Game of Thrones 权力的游戏
 
-乔治·雷蒙·理查·马丁（Geoger Raymond Richard Martin）
-1948年出生于美国新泽西州的贝约恩。
+乔治·雷蒙·理查·马丁（Geoger Raymond Richard Martin）:1948年出生于美国新泽西州的贝约恩。
 在1971年取得硕士学位以后，马丁陆续在重要的科幻杂志上，如《类比》杂志，发表了许多短篇作品，并很快以感伤怀旧的浪漫笔触，略带歌特气息的荒凉氛围，以及糅合恐怖小说元素的科幻作品，受到读者瞩目。
 这一时期他的代表作有中短篇小说《莱安娜之歌》（A Song For Lya），《沙王》（Sandkings），《十字架与龙》（The Way Of Cross And Dragon）等，长篇小说《光逝》（Dying Of The Light），《热夜之梦》（Fever Dream），《末日狂歌》（The Armageddon Rag）等。
 而在此后的十年中，马丁转向影剧界发展，担任了多部电视剧集的编剧工作。

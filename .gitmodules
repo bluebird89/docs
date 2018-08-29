@@ -181,3 +181,6 @@
 [submodule "Client/awesome-quick-app"]
 	path = Client/awesome-quick-app
 	url = git@github.com:yesvods/awesome-quick-app.git
+[submodule "Linux/test-your-sysadmin-skills"]
+	path = Linux/test-your-sysadmin-skills
+	url = git@github.com:trimstray/test-your-sysadmin-skills.git
