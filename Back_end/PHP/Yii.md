@@ -762,6 +762,86 @@ User::findBySql(‘SELECT * FROM user‘)->one();  # 此方法是用 sql 语句�
 * 在controller.php里调用request.php里的validateCsrfToken
 * 当页面整体被缓存后，token也被缓存导致验证失败，一种常见的解决思路是每次提交前重新获取token,这样就可以通过验证了。
 
+### Cookie and Session
+
+* Cookie通过\Yii::$app->response->getCookies()->add()添加Cookie，通过\Yii::$app->request->cookies读取Cookie.
+* 通过\Yii::$app->session进行操作
+
+```php
+//第一种方法
+$cookie = new \yii\web\Cookie();
+$cookie -> name = 'smister';        //cookie的名称
+$cookie -> expire = time() + 3600;     //存活的时间
+$cookie -> httpOnly = true;        //无法通过js读取cookie
+$cookie -> value = 'cookieValue';      //cookie的值
+\Yii::$app->response->getCookies()->add($cookie);
+
+//第二种方法
+$cookie = new \yii\web\Cookie([
+    ‘name’ => ‘smister’,
+    ‘expire’ => time() + 3600,
+    ‘httpOnly ’ => true,
+    ‘value’ => ‘cookieValue’
+]);
+\Yii::$app->response->getCookies()->add($cookie);
+
+$cookie = \Yii::$app->request->cookies;
+//返回一个\yii\web\Cookie对象
+$cookie->get(‘smister’);
+//直接返回Cookie的值
+$cookie->getValue(‘smister’); //$cookie[‘smister’] 其实这样也是可以读取的
+//判断一个Cookie是否存在
+$cookie->has(‘smister’);
+//读取Cookie的总数
+$cookie->count();//$cookie->getCount();跟count一样
+//移除一个Cookie对象
+\Yii::$app->response->getCookies()->remove($cookie);
+//移除所有Cookie，目前好像不太好使
+\Yii::$app->response->getCookies()->removeAll();
+
+$session = \Yii::$app->session;
+$session->set('smister_name' , 'myname');
+$session->set('smister_array' ,[1,2,3]);
+
+$session->get('smister_name');
+//删除一个session
+$session->remove(‘smister_name’);
+//删除所有session
+$session->removeAll();
+?>
+```
+
+### Url
+
+* base输出根目录
+* home是输出首页
+* current当前的Url
+* to和toRoute都是生成Url , 后面加true都是生成带域名的Url.to和toRoute之间的区别, 传入string时 , to会直接把string当成url, toRoute则会解析
+
+```php
+// 以http://localhost:8080/yii2-demo/web/index.php?r=article/index为例
+echo \yii\helpers\Url::base(); //输出/yii2-demo/web
+echo \yii\helpers\Url::base(true); // 输出http://localhost:8080/yii2-demo/web
+
+echo \yii\helpers\Url::home();//输出/yii2-demo/web/index.php
+echo \yii\helpers\Url::home(true);//输出http://localhost:8080/yii2-demo/web/index.php
+
+echo \yii\helpers\Url::current();//输出/yii2-demo/web/index.php?r=article/index
+
+echo \yii\helpers\Url::to(['article/add']); //输出/yii2-demo/web/index.php?r=article/add
+echo \yii\helpers\Url::to(['article/edit' , 'id' => 1]); //输出/yii2-demo/web/index.php?r=article/add&id=1
+echo \yii\helpers\Url::to(['article/add'] , true); //输出http://localhost:8080/yii2-demo/web/index.php?r=article/add
+echo \yii\helpers\Url::to(['article/edit' , 'id' => 1] , true); //输出http://localhost:8080/yii2-demo/web/index.php?r=article/add&id=1
+
+echo \yii\helpers\Url::toRoute(['article/add']); //输出/yii2-demo/web/index.php?r=article/add
+echo \yii\helpers\Url::toRoute(['article/edit' , 'id' => 1]); //输出/yii2-demo/web/index.php?r=article/add&id=1
+echo \yii\helpers\Url::toRoute(['article/add'] , true); //输出http://localhost:8080/yii2-demo/web/index.php?r=article/add
+echo \yii\helpers\Url::toRoute(['article/edit' , 'id' => 1] , true); //输出http://localhost:8080/yii2-demo/web/index.php?r=article/add&id=1
+
+echo \yii\helpers\Url::to('article/add'); //输出article/add
+echo \yii\helpers\Url::toRoute('article/add'); //输出/yii2-demo/web/index.php?r=article/add
+```
+
 ## 参考
 
 -   [深入理解 Yii2.0](http://www.digpage.com/index.html)

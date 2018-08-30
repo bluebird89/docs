@@ -190,3 +190,12 @@
 [submodule "Client/React/react-bits"]
 	path = Client/React/react-bits
 	url = git@github.com:vasanthk/react-bits.git
+[submodule "Computer/CS-notes"]
+	path = Computer/CS-notes
+	url = git@github.com:CyC2018/CS-Notes.git
+[submodule "OS/Mac/awesome-mac"]
+	path = OS/Mac/awesome-mac
+	url = git@github.com:jaywcjlove/awesome-mac.git
+[submodule "Guide_lines/spec"]
+	path = Guide_lines/spec
+	url = git@github.com:ecomfe/spec.git

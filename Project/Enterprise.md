@@ -14,6 +14,7 @@
     -   trello：任务面板
     -   sourcetree：git管理
     -   [bamboo](https://www.atlassian.com/software/bamboo):the choice of professional teams for continuous integration, deployment, and delivery
+- Jfrog
 
 ## 企业级应用
 

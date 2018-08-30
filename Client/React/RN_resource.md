@@ -207,11 +207,15 @@
 ## WEB
 
 * [taobaofed/react-web](https://github.com/taobaofed/react-web):A framework for building web apps with React Native compatible API. http://taobaofed.github.io/react-web/
+* [gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby):⚛️📄🚀 Blazing fast site generator for React https://www.gatsbyjs.org
 
 ## i18n
 
 * [lingui/js-lingui](https://github.com/lingui/js-lingui):🌍📖 A readable, automated, and optimized (5 kb) internationalization for JavaScript and React https://lingui.js.org/
 
+## SPA
+
+* [stereobooster/react-snap](https://github.com/stereobooster/react-snap):👻 Zero-configuration framework-agnostic static prerendering for SPAs
 
 ## 代码展示
 
