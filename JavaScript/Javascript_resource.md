@@ -159,17 +159,6 @@ https://antv.alipay.com/zh-cn/f2/3.x/index.html
 
 * [motdotla/dotenv](https://github.com/motdotla/dotenv):Loads environment variables from .env for nodejs projects.
 
-## 教程
-
-* [N-blog](https://maninboat.gitbooks.io/n-blog/content/):使用 Express + MongoDB 搭建多人博客
-* [ElemeFE/node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
-* [Chiara-yen/startLearningNodejs](https://github.com/Chiara-yen/startLearningNodejs):
-* [scotch-io/node-todo](https://github.com/scotch-io/node-todo):A simple Node/MongoDB/Angular todo app https://scotch.io/tutorials/creating-…
-* [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list. Curated from the top ranked articles and always updated
-* [nodejs](https://www.runoob.com/nodejs)
-* [alsotang/node-lessons](https://github.com/alsotang/node-lessons):📕《Node.js 包教不包会》 by alsotang
-* [node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
-
 ## 框架
 
 * [Requarks/wiki](https://github.com/Requarks/wiki):Wiki.js | A modern, lightweight and powerful wiki app built on NodeJS, Git and Markdown https://wiki.js.org
@@ -242,6 +231,10 @@ https://antv.alipay.com/zh-cn/f2/3.x/index.html
 * [petkaantonov/bluebird](https://github.com/petkaantonov/bluebird):🐦 ⚡️ Bluebird is a full featured promise library with unmatched performance. http://bluebirdjs.com
 * [JacksonTian/eventproxy](https://github.com/JacksonTian/eventproxy):An implementation of task/event based asynchronous pattern. http://html5ify.com/eventproxy
 
+## keyboard input
+
+* [jaywcjlove/hotkeys](https://github.com/jaywcjlove/hotkeys):➷ A robust Javascript library for capturing keyboard input. It has no dependencies. https://git.io/hotkeys.js
+
 ## 服务
 
 * [nodemon](http://nodemon.io/):a utility that will monitor for any changes in your source and automatically restart your server.
@@ -249,6 +242,10 @@ https://antv.alipay.com/zh-cn/f2/3.x/index.html
 ## 日志
 
 * [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
+
+## 验证
+
+* [jaywcjlove/validator.js](https://github.com/jaywcjlove/validator.js):⁉️轻量级的JavaScript表单验证，字符串验证。没有依赖，支持UMD，~3kb。 https://git.io/validatorjs
 
 ## 网页
 
@@ -264,7 +261,6 @@ https://antv.alipay.com/zh-cn/f2/3.x/index.html
 * [BrainJS/brain.js](https://github.com/BrainJS/brain.js):🤖 Neural networks in JavaScript http://brain.js.org
 * [xviniette/FlappyLearning](https://github.com/xviniette/FlappyLearning):Program learning to play Flappy Bird by machine learning (Neuroevolution)http://xviniette.github.io/FlappyLearning/
 
-
 ## 代码在线分享工具
 
 * JS Fiddle
@@ -273,6 +269,17 @@ https://antv.alipay.com/zh-cn/f2/3.x/index.html
 * jdoodle
 * RunJS
 * CodePen
+
+## 教程
+
+* [N-blog](https://maninboat.gitbooks.io/n-blog/content/):使用 Express + MongoDB 搭建多人博客
+* [ElemeFE/node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
+* [Chiara-yen/startLearningNodejs](https://github.com/Chiara-yen/startLearningNodejs):
+* [scotch-io/node-todo](https://github.com/scotch-io/node-todo):A simple Node/MongoDB/Angular todo app https://scotch.io/tutorials/creating-…
+* [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list. Curated from the top ranked articles and always updated
+* [nodejs](https://www.runoob.com/nodejs)
+* [alsotang/node-lessons](https://github.com/alsotang/node-lessons):📕《Node.js 包教不包会》 by alsotang
+* [node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
 
 ## 问题
 
