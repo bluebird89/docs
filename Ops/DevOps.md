@@ -26,14 +26,6 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
         + 运维人员的操作行为通过“策略管理”组件的核查之后“应用代理”组件则代替运维人员连接目标设备完成相应操作，并将操作返回结果返回给对应的运维操作人员；同时此次操作过程被提交给堡垒机内部的“审计模块”，然后此次操作过程被记录到审计日志数据库中。
         + 最后当需要调查运维人员的历史操作记录时，由审计员登录堡垒机进行查询，然后“审计模块”从审计日志数据库中读取相应日志记录并展示在审计员交互界面上。
 
-## 工具
-
-- [apex/up](https://github.com/apex/up):Deploy infinitely scalable serverless apps, apis, and sites in seconds. https://apex.github.io/up/
-- [apex/apex](https://github.com/apex/apex):Build, deploy, and manage AWS Lambda functions with ease (with Go support!). http://apex.run
-- [spinnaker/spinnaker](https://github.com/spinnaker/spinnaker):Spinnaker is an open source, multi-cloud continuous delivery platform for releasing software changes with high velocity and confidence. http://www.spinnaker.io/
-* [gaia-pipeline/gaia](https://github.com/gaia-pipeline/gaia):Build powerful pipelines in any programming language.
-* [jumpserver/jumpserver](https://github.com/jumpserver/jumpserver):Jumpserver是全球首款完全开源的堡垒机，是符合 4A 的专业运维审计系统。 http://www.jumpserver.org
-
 ## 开发工具
 
 版本控制&协作开发
@@ -116,6 +108,15 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 * Graphite：Graphite 是一个用于采集网站实时信息并进行统计的开源项目，可用于采集多种网站服务运行状态信息。Graphite服务平均每分钟有4800次更新操作。
 * Kibana：Kibana 是一个为 Logstash 和 ElasticSearch 提供的日志分析的 Web 接口。可使用它对日志进行高效的搜索、可视化、分析等各种操作。
 
+
+## 工具
+
+- [apex/up](https://github.com/apex/up):Deploy infinitely scalable serverless apps, apis, and sites in seconds. https://apex.github.io/up/
+- [apex/apex](https://github.com/apex/apex):Build, deploy, and manage AWS Lambda functions with ease (with Go support!). http://apex.run
+- [spinnaker/spinnaker](https://github.com/spinnaker/spinnaker):Spinnaker is an open source, multi-cloud continuous delivery platform for releasing software changes with high velocity and confidence. http://www.spinnaker.io/
+* [gaia-pipeline/gaia](https://github.com/gaia-pipeline/gaia):Build powerful pipelines in any programming language.
+* [jumpserver/jumpserver](https://github.com/jumpserver/jumpserver):Jumpserver是全球首款完全开源的堡垒机，是符合 4A 的专业运维审计系统。 http://www.jumpserver.org
+* [PERIODIC TABLE OF DEVOPS TOOLS](https://xebialabs.com/periodic-table-of-devops-tools/)
 ## 参考
 
 * [liquanzhou/ops_doc](https://github.com/liquanzhou/ops_doc):运维简洁实用手册
