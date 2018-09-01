@@ -24,8 +24,8 @@ cp -R /usr/local/Cellar/openssl/1.0.2o_1/include/openssl /usr/local/include # fa
 brew install hiredis # fatal error: 'hiredis/hiredis.h'
 
 brew install swoole
-
 pecl install swoole
+
 # add swoole.ini
 sudo ln -s  /etc/php/7.2/mods-available/swoole.ini 20-swoole.ini
 ```

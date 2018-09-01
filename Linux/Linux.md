@@ -541,27 +541,22 @@ www   localhost.localdomain  #修改localhost.localdomain为www
 
 ## terminal快捷键
 
-```
-cmmand + d:新开同框分屏
-Ctrl+d:键盘输入结束或退出终端
-Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行
-Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg
-
-Ctrl+a:将光标移至输入行头，相当于Home键
-Ctrl+e:将光标移至输入行末，相当于End键
-
-Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用
-Alt+Backspace:向前删除一个单词，常配合ctrl+e使用
-
-Shift+PgUp:将终端显示向上滚动
-Shift+PgDn:将终端显示向下滚动
-
-clear|ctrl+l # 清屏
-```
+* cmmand + d:新开同框分屏
+* Ctrl+d:键盘输入结束或退出终端
+* Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行
+* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg
+* Ctrl+a:将光标移至输入行头，相当于Home键
+* Ctrl+e:将光标移至输入行末，相当于End键
+* Ctrl + K :删除从光标所在位置到行末,常配合ctrl+a使用
+* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用
+* Shift+PgUp:将终端显示向上滚动
+* Shift+PgDn:将终端显示向下滚动
+* clear|ctrl+l :清屏
+* Ctrl + U 删除光标之前的全部内容
+* Ctrl + Y 撤销之前的删除操作
+* Ctrl + W 删除之前的一个参数
 
 ### 终端
-
-
 
 ```sh
 dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on command-line
@@ -611,6 +606,8 @@ sudo find /etc/ -name interfaces/ 格式find [path] [option] [action] # 可以�
 grep -i "root" /etc/passwd # 查找符合条件的字串   -v:反向选择 -i:忽略大小写
 
 命令1 | 命令2   # 管道符:命令1的执行结果，作为命令2的执行条件
+
+sudo !! # 将之前的命令加上sudo
 ```
 
 ### 目录

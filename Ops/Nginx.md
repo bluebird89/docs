@@ -61,8 +61,8 @@
 
 ### Mac
 
-- 程序文件 /usr/local/etc/nginx/   /usr/local/Cellar/nginx
-- 配置文件:The default:/usr/local/etc/nginx/nginx.conf
+- 程序文件 /usr/local/Cellar/nginx
+- 配置文件 /usr/local/etc/nginx/nginx.conf
 - 日志与服务器文件 /usr/local/var/log/nginx/
 - Severs config:/usr/local/etc/nginx/servers/
 - Docroot is: /usr/local/Cellar/nginx/1.12.2_1/html /usr/local/var/www, 软件更新后版本号会发生变化，默认也会失效
@@ -146,11 +146,11 @@ events {
 ### http（服务器设置）
 
 * windows调用php-cgi启动服务
-* linux通过转交服务给php-fpm处理
+* linux通过转交服务给php-fpm处理:配置www.conf服务转交TCP socket或Unix Socket
 
 提供http服务相关的一些配置参数，如：是否使用keepalive，是否使用gzip进行压缩
 
-```
+```sh
 # 设定http服务器，利用它的反向代理功能实现负载均衡支持
 http {
     # 设定负载均衡的服务器列表 weigth参数表示权值，权值越高被分配到的几率越大
@@ -232,7 +232,7 @@ http {
 }
 ```
 
-### server（主机设置）
+### server
 
 http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
 

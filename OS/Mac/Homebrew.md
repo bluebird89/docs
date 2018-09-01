@@ -152,4 +152,9 @@ cd /usr/local && sudo chown -R $(whoami) bin etc include lib sbin share var Fram
 
 brew update --force
 
+## 软件
+
+bash_completion
+zsh_completion
+
 

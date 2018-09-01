@@ -29,72 +29,82 @@
 * 清除历史记录 Click&Clean
 * 程序调试工具 Firebug Lite
 * [deanoemcke/thegreatsuspender](https://github.com/deanoemcke/thegreatsuspender):A chrome extension for suspending all tabs to free up memory
-* Vimium：浏览器vim化
-  - Navigating the page
-    - j,
+* [philc/vimium](The hacker's browser.)The hacker's browser.
 
-      <c-e>    Scroll down</c-e>
+```
+Navigating the current page:
 
-    - k,
+?       show the help dialog for a list of all available keys
+h       scroll left
+j       scroll down
+k       scroll up
+l       scroll right
+gg      scroll to top of the page
+G       scroll to bottom of the page
+d       scroll down half a page
+u       scroll up half a page
+f       open a link in the current tab
+F       open a link in a new tab
+r       reload
+gs      view source
+i       enter insert mode -- all commands will be ignored until you hit Esc to exit
+yy      copy the current url to the clipboard
+yf      copy a link url to the clipboard
+gf      cycle forward to the next frame
+gF      focus the main/top frame
+Navigating to new pages:
 
-      <c-y>    Scroll up</c-y>
+o       Open URL, bookmark, or history entry
+O       Open URL, bookmark, history entry in a new tab
+b       Open bookmark
+B       Open bookmark in a new tab
+Using find:
 
-    - gg Scroll to the top of the page
-    - G Scroll to the bottom of the page
-    - d Scroll a half page down
-    - u Scroll a half page up
-    - h Scroll left
-    - l Scroll right
-    - r Reload the page
-    - yy Copy the current URL to the clipboard
-    - p Open the clipboard's URL in the current tab
-    - P Open the clipboard's URL in a new tab
-    - i Enter insert mode
-    - v Enter visual mode
-    - gi Focus the first text input on the page
-    - f Open a link in the current tab
-    - F Open a link in a new tab
-    - gf Select the next frame on the page
-    - gF Select the page's main/top frame
+/       enter find mode
+          -- type your search query and hit enter to search, or Esc to cancel
+n       cycle forward to the next find match
+N       cycle backward to the previous find match
+For advanced usage, see regular expressions on the wiki.
 
-  - Using the vomnibar
+Navigating your history:
 
-    - o Open URL, bookmark or history entry
-    - O Open URL, bookmark or history entry in a new tab
-    - b Open a bookmark
-    - B Open a bookmark in a new tab
-    - T Search through your open tabs
+H       go back in history
+L       go forward in history
+Manipulating tabs:
 
-  - Using find
+J, gT   go one tab left
+K, gt   go one tab right
+g0      go to the first tab
+g$      go to the last tab
+^       visit the previously-visited tab
+t       create tab
+yt      duplicate current tab
+x       close current tab
+X       restore closed tab (i.e. unwind the 'x' command)
+T       search through your open tabs
+W       move current tab to new window
+<a-p>   pin/unpin current tab
+Using marks:
 
-    - / Enter find mode
-    - n Cycle forward to the next find match
-    - N Cycle backward to the previous find match
+ma, mA  set local mark "a" (global mark "A")
+`a, `A  jump to local mark "a" (global mark "A")
+``      jump back to the position before the previous jump
+          -- that is, before the previous gg, G, n, N, / or `a
+Additional advanced browsing commands:
 
-  - Navigating history
-
-    - H Go back in history
-    - L Go forward in history
-
-  - Manipulating tabs
-
-    - t Create new tab
-    - J, gT Go one tab left
-    - K, gt Go one tab right
-    - ^ Go to previously-visited tab
-    - g0 Go to the first tab
-    - g$ Go to the last tab
-    - yt Duplicate current tab
-    - <a-p>        Pin or unpin current tab</a-p>
-
-    - <a-m>        Mute or unmute current tab</a-m>
-
-    - x Close current tab
-    - X Restore closed tab
-
-  - Miscellaneous
-
-    - ? Show help
+]], [[  Follow the link labeled 'next' or '>' ('previous' or '<')
+          - helpful for browsing paginated sites
+<a-f>   open multiple links in a new tab
+gi      focus the first (or n-th) text input box on the page
+gu      go up one level in the URL hierarchy
+gU      go up to root of the URL hierarchy
+ge      edit the current URL
+gE      edit the current URL and open in a new tab
+zH      scroll all the way left
+zL      scroll all the way right
+v       enter visual mode; use p/P to paste-and-go, use y to yank
+V       enter visual line mode
+```
 
 ## 配置
 
