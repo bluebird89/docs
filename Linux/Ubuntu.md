@@ -939,6 +939,11 @@ top [-] [d] [p] [q] [c] [C] [S] [s]  [n]，参数
 sudo apt install htop
 htop
 ```
+## Develop
+
+```sh
+code
+```
 
 ## 虚拟化
 
