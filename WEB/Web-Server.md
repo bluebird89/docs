@@ -110,3 +110,32 @@ www.baidu.com 通过dig +trace
 * 域名购买：GoDaddy
 * "L2TP" 或者 "Shadowsocks" anyconnnect
 * nginx 提供php python
+
+## 生产环境
+
+可用性
+可还原
+性能
+
+* Backup
+    - 备份数据
+    - 备份策略
+    - 数据留存期
+* 恢复计划
+* Load Balancing:应对单点失效
+* Monitoring：Tracking the status of services and the trends of your server resource utilization, thus providing great visibility into your environment.
+* Centralized Logging
+
+![WEB生产环境架构](../_static/production.png "WEB生产环境架构")
+
+## 演化
+
+* Everything On One Server：Web Application Database
+* Separate Database Server:
+* Load Balancer (Reverse Proxy)
+* HTTP Accelerator (Caching Reverse Proxy)
+* Master-Slave Database Replication:database Cache
+
+## 工具
+
+* [sullo/nikto](https://github.com/sullo/nikto):Nikto web server scanner

@@ -9,6 +9,11 @@ PHP 解释程序被载入内存而不用每次需要时从存储器读取，极�
 
 ## Mac
 
+/usr/local/etc/php/7.2
+
+```sh
+ brew services start php
+```
 
 ### 约定目录
 
@@ -42,6 +47,16 @@ sudo service php7.0-fpm {start|stop|status|restart|reload|force-reload}
 /etc/init.d/php7.2-fpm start
 ```
 
+## 监听服务
+
+* Unix sockets
+* TCP sockets
+
+```sh
+listen = 127.0.0.1:9000
+listen = /var/run/php5-fpm.sock
+```
+
 ## 配置
 
 ```
@@ -66,9 +81,7 @@ daemonize = yes # 后台执行fpm,默认值为yes，如果为了调试可以改�
 # fpm监听端口，即nginx中php处理的地址，一般默认值即可。可用格式为: 'ip:port', 'port', '/path/to/unix/socket'. 每个进程池都需要设置.
 # 通过socket监听提高性能，unix:/usr/local/var/run/php-fpm.sock;
 listen = 127.0.0.1:9000
-
 listen.backlog = -1 # backlog数，-1表示无限制，由操作系统决定，此行注释掉就行。backlog含义参考：http://www.3gyou.cc/?p=41
-
 listen.allowed_clients = 127.0.0.1 # 允许访问FastCGI进程的IP，设置any为不限制IP，如果要设置其他主机的nginx也能访问这台FPM进程，listen处要设置成本地可被访问的IP。默认值是any。每个地址是用逗号分隔. 如果没有设置或者为空，则允许任何服务器请求连接
 
 listen.owner =  www-data #启动进程的用户

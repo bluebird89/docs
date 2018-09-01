@@ -16,11 +16,11 @@ PHP是一门弱类型的语言，变量在声明的那一刻是不需要确定�
 ```sh
 /usr/local/apache2/bin/apachectl start/stop   service httpd restart
 
-LoadModule php5_module modules/libphp5.so // httpd.conf中添加
-```
+LoadModule php5_module modules/libphp5.so # httpd.conf中添加
 
- php.ini 文件中的配置项 cgi.fix_pathinfo 设置为 0  // 如果文件不存在，则阻止 Nginx 将请求发送到后端的 PHP-FPM 模块， 以避免遭受恶意脚本注入的攻击
- 确保 php-fpm 模块使用 www-data 用户和 www-data 用户组的身份运行
+cgi.fix_pathinfo 设置为 0  #  php.ini 文件中的配置项  如果文件不存在，则阻止 Nginx 将请求发送到后端的 PHP-FPM 模块， 以避免遭受恶意脚本注入的攻击
+# 确保 php-fpm 模块使用 www-data 用户和 www-data 用户组的身份运行
+```
 
 ### windows
 
@@ -43,8 +43,20 @@ php -a # 进入命令行模式
 * php71卸载后php-fpm仍然运行
 
 ```sh
-brew install php71
-brew info php71
+brew install --without-apache --with-fpm php
+
+/usr/local/Cellar/php/7.2.9_2/bin/pear config-set php_ini /usr/local/etc/php
+/usr/local/Cellar/php/7.2.9_2/bin/pear config-set php_dir /usr/local/share/p
+/usr/local/Cellar/php/7.2.9_2/bin/pear config-set doc_dir /usr/local/share/p
+/usr/local/Cellar/php/7.2.9_2/bin/pear config-set ext_dir /usr/local/lib/php
+/usr/local/Cellar/php/7.2.9_2/bin/pear config-set bin_dir /usr/local/opt/php
+/usr/local/Cellar/php/7.2.9_2/bin/pear config-set data_dir /usr/local/share/
+/usr/local/Cellar/php/7.2.9_2/bin/pear config-set cfg_dir /usr/local/share/p
+/usr/local/Cellar/php/7.2.9_2/bin/pear config-set www_dir /usr/local/share/p
+/usr/local/Cellar/php/7.2.9_2/bin/pear config-set man_dir /usr/local/share/m
+/usr/local/Cellar/php/7.2.9_2/bin/pear config-set test_dir /usr/local/share/
+/usr/local/Cellar/php/7.2.9_2/bin/pear config-set php_bin /usr/local/opt/php
+/usr/local/Cellar/php/7.2.9_2/bin/pear update-channels
 
 ## 配置文件添加扩展
 include=/usr/local/etc/php/7.1/conf.d/*.ini

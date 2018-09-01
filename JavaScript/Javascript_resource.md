@@ -1,3 +1,45 @@
+## [框架](https://envato.com/blog/rising-trends-in-javascript/)
+
+### MVC
+
+* Angular
+* React
+* [Marionette](https://marionettejs.com/)
+
+### MVVM
+
+* Vue
+* [Foundation](http://foundation.zurb.com/)
+* Typescript
+* ES6
+
+### Nodejs
+
+* 框架：Sails.js
+
+### SPA
+
+* [Meteor](https://www.meteor.com/)
+* jQuery Mobile
+
+### Data Visualization
+
+* [D3.js](https://d3js.org/)
+* React Native
+* jQuery
+* [Underscore.js](http://underscorejs.org/)
+
+### 代码整理工具
+
+* JSLint
+* JSHint
+
+### 构建与自动化工具
+
+* NPM
+* Grunt
+* Gulp
+
 ## 类库
 
 * [Lodash ](https://github.com/lodash/lodash):为数组、字符串、object 和 argument 对象提供更一致的跨环境迭代支持，并已成为 Underscore 的超集
@@ -94,7 +136,8 @@
 * [clientIO/joint](https://github.com/clientIO/joint):JavaScript diagramming library http://www.jointjs.com
 * [uber/kepler.gl](https://github.com/uber/kepler.gl):https://uber.github.io/kepler.gl
 * [antvis/f2](https://github.com/antvis/f2):📱📈An elegant, interactive and flexible charting library for mobile. https://antv.alipay.com/zh-cn/f2/3.x/index.html
-https://antv.alipay.com/zh-cn/f2/3.x/index.html
+
+
 ## Animations
 
 * [juliangarnier/anime](https://github.com/juliangarnier/anime):JavaScript Animation Engine http://animejs.com
@@ -249,7 +292,11 @@ https://antv.alipay.com/zh-cn/f2/3.x/index.html
 
 ## 网页
 
-* [nativefier]():让网页一键生成桌面应用程序
+* [jiahaog/nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
+
+## 模拟器
+
+* [bfirsh/jsnes](https://github.com/bfirsh/jsnes):A JavaScript NES emulator. https://jsnes.org
 
 ## 机器学习
 

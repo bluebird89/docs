@@ -167,6 +167,8 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [Vue.js 2.0 快速上手精华梳理](https://juejin.im/post/59aa1248518825392656a86a)
 * [JavaScript 进阶之 Vue.js + Node.js 入门实战开发](http://blog.csdn.net/gitchat/article/details/77931664)
 * [HcySunYang/vue-design](https://github.com/HcySunYang/vue-design):📖逐行级别的源码分析 http://hcysun.me/vue-design/
+* [Vue.js 技术揭秘](https://ustbhuangyi.github.io/vue-analysis/)
+* [](link)
 * http://www.cnblogs.com/keepfool/
 
 ## 项目
@@ -197,7 +199,6 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 ### [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
 
 🛠️ Standard Tooling for Vue.js Development https://cli.vuejs.org/
-
 
 ## UI
 

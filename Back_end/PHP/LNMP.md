@@ -73,7 +73,7 @@ sudo apt-get update
 
 sudo apt-get install php7.2  php7.2-fpm php7.2-mysql php7.2-common php7.2-curl php7.2-cli php7.2-mbstring php7.2-xml php7.2-bcmath
 
-php7.2-mcrypt 
+php7.2-mcrypt
 ```
 
 - 修改配置文件sudo vim /etc/php/7.1/fpm/php.ini：`cgi.fix_pathinfo=0`

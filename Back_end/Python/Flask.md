@@ -2,6 +2,10 @@
 
 The Python micro framework for building web applications. https://www.palletsprojects.com/p/flask/
 
+## 项目
+
+* [flaskbb/flaskbb](https://github.com/flaskbb/flaskbb):A classic Forum Software in Python using Flask. https://flaskbb.org
+
 ## 参考
 
 * [luhuisicnu/The-Flask-Mega-Tutorial-zh](https://github.com/luhuisicnu/The-Flask-Mega-Tutorial-zh):翻译自Miguel Grinberg的blog https://blog.miguelgrinberg.com 的2017年新版The Flask Mega-Tutorial教程
