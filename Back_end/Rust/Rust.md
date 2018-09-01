@@ -26,3 +26,4 @@ rustc --version
 * [文档](https://kaisery.gitbooks.io/rust-book-chinese/content/)
 * [The Rust Programming Language](https://doc.rust-lang.org/book/second-edition/index.html)
 * [rust-gentle-intro](https://stevedonovan.github.io/rust-gentle-intro/)
+* [KaiserY/trpl-zh-cn](https://github.com/KaiserY/trpl-zh-cn):Rust 程序设计语言（第二版） https://kaisery.github.io/trpl-zh-cn/
