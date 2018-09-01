@@ -166,6 +166,7 @@ websocketd --port=8080 ./count.sh // 建立server
 * [bettercap/bettercap](https://github.com/bettercap/bettercap):The state of the art network attack and monitoring framework. https://www.bettercap.org/
 * [google/gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
 * [shiyanhui/dht](https://github.com/shiyanhui/dht):BitTorrent DHT Protocol && DHT Spider. http://bthub.io
+* [variadico/noti](https://github.com/variadico/noti):Monitor a process and trigger a notification.
 
 ## 教程
 
