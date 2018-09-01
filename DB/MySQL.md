@@ -45,16 +45,20 @@ brew install mysql
 --tmpdir=/tmp
 
 brew services start mysql
+brew cask install mysqlworkbench
+brew cask install sequel-pro
 
 mysql.server start|stop|restart|status  # Mac服务管理
-net start/stop mysql # win平台
 
 mysql_secure_installation # 没有设置 root 帐户的密码，马上设置它;通过删除可从本地主机外部访问的 root 帐户来禁用远程 root 用户登录;删除匿名用户帐户和测试数据库
 
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
 
-mysqladminm
+mysqladmin
+
+# ubunut 卸载
+sudo apt install mysql-server
 
 sudo apt remove mysql-server
 sudo apt autoremove mysql-server
@@ -64,13 +68,7 @@ sudo rm /var/lib/mysql/ -R
 sudo rm /etc/mysql/ -R
 
 dpkg -l | grep mysql  #
-dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P  #
-
-brew cask install mysqlworkbench
-brew cask install sequel-pro
-
-### linux
-sudo apt install mysql
+dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P
 
 # 源码安装
 groupadd mysql
@@ -93,14 +91,15 @@ getenforce
 #重启机器即可
 
 # 服务管理
-service mysql start
-service mysql stop
-service mysql status
-service mysql restart
+service mysql start|stop|status|restart
+systemctl status mysql.service
 
 ## docker
 docker pull mysql
 docker run --name master -p 3306:3307 -e MYSQL_ROOT_PASSWORD=root -d mysql
+
+# Windows
+net start/stop mysql # win平台
 ```
 
 ## 概念
@@ -298,24 +297,37 @@ set global general_log = on;
 
 ### 用户管理
 
-命令行操作
+* ALL PRIVILEGES:as we saw previously, this would allow a MySQL user full access to a designated database (or if no database is selected, global access across the system)
+* CREATE:allows them to create new tables or databases
+* DROP:allows them to them to delete tables or databases
+* DELETE:allows them to delete rows from tables
+* INSERT:allows them to insert rows into tables
+* SELECT:allows them to use the SELECT command to read through databases
+* UPDATE:allow them to update table rows
+* GRANT OPTION:allows them to grant or remove other users' privileges
 
 ```sql
+SELECT user,authentication_string,plugin,host FROM mysql.user; # msyql 8.0
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+FLUSH PRIVILEGES;
+
 mysql -hlocalhost  -P 3306 -u root -p  # 生成用户root与空密码登陆,第一次登陆mysql的时候是没有密码的
 exit|quit| \q
-
-use mysql;
-update user SET Password = PASSWORD('密码') where User = 'root';
-FLUSH PRIVILEGES;
 
 CREATE USER 'lee'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456Ac&' # 添加用户
 GRANT ALL PRIVILEGES ON test.* TO lee@'localhost';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root密码' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
+use mysql;
+update user SET Password = PASSWORD('密码') where User = 'root';
+FLUSH PRIVILEGES;
+
 ALTER USER 'root'@'localhost'
   IDENTIFIED WITH mysql_native_password
   BY 'password';
+
+REVOKE type_of_permission ON database_name.table_name FROM ‘username’@‘localhost’;
 ```
 
 ### 存储引擎
@@ -438,8 +450,7 @@ CREATE TABLE test.news(
 )charset=utf8 collate=utf8_bin;
 CREATE TABLE table_name SELECT column1,cloumn2 FROM another_table: # 复制数据不复制主键
 CREATE TABLE table_name like another_table；  #  数据不复制，主键复制
-DESCRIBE news;
-DESC news;
+DESCRIBE|DESC news;
 SHOW CREATE TABELE news\G;
 
 ALTER TABLE table_name ADD address varchar(30) first| after name; #  修改数据表
@@ -470,7 +481,7 @@ INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…)
 INSERT INTO table_name values (null,值,....); # 全字段插入，自动增长列用null
 INSERT INTO table_name values (null,值,....),(null,值,....),(null,值,....); # 插入多条数据
 INSERT INTO table_name set volumn1=value1,volumn3=value3,volumn3=value3;
-UPDATE table_name  SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件];
+UPDATE table_name  SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件]; # 更新记录
 DELETE FROM table_name [WHERE条件];
 
 DROP TABLE [IF EXISTS] db_name;
