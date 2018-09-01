@@ -583,6 +583,7 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 * [faressoft/terminalizer](https://github.com/faressoft/terminalizer):🦄 Record your terminal and generate animated gif images
 * [niieani/bash-oo-framework](https://github.com/niieani/bash-oo-framework):Bash Infinity is a modern boilerplate / framework / standard library for bash
 * [ericfreese/rat](https://github.com/ericfreese/rat):Compose shell commands to build interactive terminal applications
+* [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings.
 
 ## 教程
 
