@@ -2,26 +2,68 @@
 
 Ruby on Rails http://rubyonrails.org
 
-Convention over configuration;
-DRY - Don't Repeat You;
-KISS - Keep it simple and stupid;
-Don't reinventing the wheel;
-Optimized for programmer happiness and sustainable productivity
+* Convention over configuration;
+* DRY - Don't Repeat You;
+* KISS - Keep it simple and stupid;
+* Don't reinventing the wheel;
+* Optimized for programmer happiness and sustainable productivity
 
 ## [安装](https://gorails.com/setup/ubuntu/14.04)
 
 ```sh
-# Ubuntu
+# Ubuntu 依赖nodejs
 sudo apt-get update
-sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs
-sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
+# install ruby depency
+sudo apt install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev
+# install rbenv
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+source ~/.bashrc
+type rbenv
+# install the ruby-build
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+
+## 更新rbenv
+cd ~/.rbenv
+git pull
+
+# 卸载 rbenv,屏蔽~/.bashrc
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+rm -rf `rbenv root`
+
+## list all the available versions of Ruby
+rbenv install -l
+rbenv install 2.5.1
+#  set it asy our default version of Ruby
+rbenv global 2.5.1
+#  卸载
+rbenv uninstall 2.1.3
+
+ruby -v
+# turn off local documentation generation
+echo "gem: --no-document" > ~/.gemrc
+# Bundler is a tool that manages gem dependencies for projects
+gem install bundler
+#  learn more about the environment and configuration of gems
+gem env home
+
+gem install rails
+#  install a specific version of Rails
+gem search '^rails$' --all
+gem install rails -v 4.2.7
+# rbenv works by creating a directory of shims, which point to the files used by the Ruby version that's currently enabled. Through the rehash sub-command, rbenv maintains shims in that directory to match every Ruby command across every installed version of Ruby on your server.
+rbenv rehash
+
+rails -v
+
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 curl -sSL https://get.rvm.io | bash -s stable
 source ~/.rvm/scripts/rvm
 rvm install 2.4.0
 rvm use 2.4.0 --default
-ruby -v
-gem install bundler
 
 # Mac
 brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
@@ -110,6 +152,7 @@ rails server
 ## 工具
 
 * [rbenv/rbenv](https://github.com/rbenv/rbenv):Groom your app’s Ruby environment
+* [Bundler](https://bundler.io/)
 * [activeadmin/activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. https://activeadmin.info
 * [tj/commander](https://github.com/tj/commander):The complete solution for Ruby command-line executables http://visionmedia.github.com/commander
 * [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. https://www.discourse.org

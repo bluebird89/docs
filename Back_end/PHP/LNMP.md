@@ -1,11 +1,19 @@
 # LNMP
 
-## Linux
 
-### Nginx
+## Nginx
 
-/etc/nginx
-/var/www/html
+* Ubuntu
+  - Server Configuration:/etc/nginx
+    + /etc/nginx: The Nginx configuration directory. All of the Nginx configuration files reside here.
+    + /etc/nginx/nginx.conf: The main Nginx configuration file. This can be modified to make changes to the Nginx global configuration.
+    + /etc/nginx/sites-available/: The directory where per-site "server blocks" can be stored. Nginx will not use the configuration files found in this directory unless they are linked to the sites-enabled directory (see below). Typically, all server block configuration is done in this directory, and then enabled by linking to the other directory.
+    + /etc/nginx/sites-enabled/: The directory where enabled per-site "server blocks" are stored. Typically, these are created by linking to configuration files found in the sites-available directory.
+    + /etc/nginx/snippets: This directory contains configuration fragments that can be included elsewhere in the Nginx configuration. Potentially repeatable configuration segments are good candidates for refactoring into snippets.
+  - Content:/var/www/html
+  - Server Logs
+    + /var/log/nginx/access.log: Every request to your web server is recorded in this log file unless Nginx is configured to do otherwise.
+    + /var/log/nginx/error.log: Any Nginx errors will be recorded in this log.
 
 ```sh
 wget http://nginx.org/keys/nginx_signing.key
@@ -25,22 +33,19 @@ add-apt-repository ppa:nginx/stable
 apt-get update
 apt-get install nginx
 
-sudo systemctl stop nginx.service
-sudo systemctl start nginx.service
-sudo systemctl restart nginx.service
-sudo systemctl reload nginx.service
+sudo systemctl stop | start | restart | reload | disable | enable nginx.service
 ```
 
-root目录显示文件列表
+### 配置
 
 ```
-# 在http添加
+# root目录显示文件列表 在http添加
 autoindex on;
 autoindex_exact_size off;
 autoindex_localtime on;
 ```
 
-### MySQL
+## MySQL
 
 ```sh
 sudo apt-get install mysql-server(mariadb-server mariadb-client)  mysql-client
@@ -51,17 +56,11 @@ There are three levels of password validation policy:
 # MEDIUM Length >= 8, numeric, mixed case, and special characters
 # STRONG Length >= 8, numeric, mixed case, special characters and dictionary
 
-wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
-dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
-apt-get update
-apt-get install percona-server-server-5.7
-
-
 sudo service mysql status
 sudo mysqladmin -p -u root version
 ```
 
-### PHP
+## PHP
 
 把PHP请求都发送到同一个文件上，然后在此文件里通过解析「REQUEST_URI」实现路由
 
@@ -105,7 +104,7 @@ php7.1-xml \
 php7.1-common \
 php7.1-gd \
 php7.1-cli \
-php-pear \ # to ues pecl
+php-pear \
 php7.1-intl
 php7.2-soap
 php7.2-xdebug
@@ -114,15 +113,16 @@ php-xdebug
 sudo apt-get install -y php-pear php5.6-mcrypt php5.6-mbstring php5.6-curl php5.6-cli php5.6-mysql php5.6-gd php5.6-intl php5.6-xsl php5.6-zip
 ```
 
-- Configure Nginx to Use the PHP Processor
+### Configure Nginx to Use the PHP Processor
 
-  - default
 
 ```
 # /etc/php/7.0/fpm/pool.d 修改 www.conf
-listen = [::]:9000
-fastcgi_pass 127.0.0.1:9000;  # /run/php/php7.2-fpm.sock
+# listen = [::]:9000
+#fastcgi_pass 127.0.0.1:9000;
+listen = unix:/run/php/php7.2-fpm.sock
 
+# default
 server {
   listen 80 default_server;
   listen [::]:80 default_server;
@@ -145,30 +145,31 @@ server {
 }
 ```
 
-  - 自定义
+```
+# 自定义
+ server {
+  listen   80;
+  root /home/vagrant/www/example.local;
+  index index.php index.html index.htm;
+  server_name example.local;
 
-    ```
-     server {
-      listen   80;
-      root /home/vagrant/www/example.local;
-      index index.php index.html index.htm;
-      server_name example.local;
+  location / {
+      try_files $uri $uri/ /index.php?$args;
+  }
 
-      location / {
-          try_files $uri $uri/ /index.php?$args;
-      }
+  location ~ \.php$ {
+      try_files $uri =404;
+      fastcgi_split_path_info ^(.+\.php)(/.+)$;
+      fastcgi_pass unix:/var/run/php/php5.6-fpm.sock;
+      fastcgi_index index.php;
+      include fastcgi_params;
+      fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+  }
+}
 
-      location ~ \.php$ {
-          try_files $uri =404;
-          fastcgi_split_path_info ^(.+\.php)(/.+)$;
-          fastcgi_pass unix:/var/run/php/php5.6-fpm.sock;
-          fastcgi_index index.php;
-          include fastcgi_params;
-          fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-      }
-    ```
-
-    }
+sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/test.com /etc/nginx/sites-enabled/
+```
 
 - 语法检测：`sudo nginx -t`
 - 服务重启：`sudo nginx -s reload`
@@ -179,121 +180,28 @@ server {
 phpinfo();
 ```
 
-### phpunit
-
-```sh
-wget https://phar.phpunit.de/phpunit.phar
-chmod +x phpunit.phar
-sudo mv phpunit.phar /usr/local/bin/phpunit
-```
-
-- 使用：
-
-  - code : src/Email.php
-
-    ```php
-    declare(strict_types=1);
-
-    final class Email
-    {
-    private $email;
-
-    private function \__construct(string $email)
-    {
-        $this->ensureIsValidEmail($email);
-
-        $this->email = $email;
-    }
-
-    public static function fromString(string $email): self
-    {
-        return new self($email);
-    }
-
-    public function \__toString(): string
-    {
-        return $this->email;
-    }
-
-    private function ensureIsValidEmail(string $email): void
-    {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    '"%s" is not a valid email address',
-                    $email
-                )
-            );
-        }
-    }
-
-    }
-    ```
-- Test Code: tests/EmailTest.php
-
-  ```php
-  declare(strict_types=1);
-
-  use PHPUnit\Framework\TestCase;
-
-  /**
-  * @covers Email
-  */
-  final class EmailTest extends TestCase
-  {
-  public function testCanBeCreatedFromValidEmailAddress(): void
-  {
-    $this->assertInstanceOf(
-        Email::class,
-        Email::fromString('user@example.com')
-    );
-  }
-
-  public function testCannotBeCreatedFromInvalidEmailAddress(): void
-  {
-    $this->expectException(InvalidArgumentException::class);
-
-    Email::fromString('invalid');
-  }
-
-  public function testCanBeUsedAsString(): void
-  {
-    $this->assertEquals(
-        'user@example.com',
-        Email::fromString('user@example.com')
-    );
-  }
-  }
-  ```
-
-- 使用`phpunit --bootstrap src/Email.php tests/EmailTest`
-
 #### 网站搭建
 
-- 域名申请:
-
+- 域名申请
   - 获取一级域名 example.com，
   - 域名认证(身份证)
   - 添加域名解析记录，默认两条记录，自由配置二级域名
   - 修改域名解析服务器，最长需要72个小时
-
 - 购买服务器 : 获取ip，搭建LNMP环境
-
 - https配置
-
   - 申请证书，下载并放到服务器
   - 分配到域名（会添加一条新记录到域名解析）
   - 修改配置文件
 
-    ```
-      ssl on;
-      ssl_certificate conf.d/1_www.example.com_bundle.crt;
-      ssl_certificate_key conf.d/2_www.example.com.key;
-      ssl_session_timeout 5m;
-      ssl_protocols TLSv1 TLSv1.1 TLSv1.2; #按照这个协议配置
-      ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;#按照这个套件配置
-      ssl_prefer_server_ciphers on;
-    ```
+```
+  ssl on;
+  ssl_certificate conf.d/1_www.example.com_bundle.crt;
+  ssl_certificate_key conf.d/2_www.example.com.key;
+  ssl_session_timeout 5m;
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2; #按照这个协议配置
+  ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;#按照这个套件配置
+  ssl_prefer_server_ciphers on;
+```
 
 ## 编译安装
 

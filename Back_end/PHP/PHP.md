@@ -185,9 +185,9 @@ php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数
 第二种方法是首先运行chmod+x <要运行的脚本文件名>（UNIX/Linux环境），将该PHP文件置为可执行权限，然后在CLI脚本头部第一行加入声明（类似于#! /usr/bin/php或PHP CLI解释器位置），接着在命令行直接执行。这是CLI首选方法，建议采用
 ```
 
-### 包管理工具
+### [PECL](http://pecl.php.net/)：
 
-* [PECL](http://pecl.php.net/)：PHP Extension Community Library，管理着最底层的PHP扩展。这些扩展是用 C 写的。
+PHP Extension Community Library，管理着最底层的PHP扩展。用 C 写的。
 * [PEAR](http://pear.php.net/)：PHP Extension and Application Repository，管理着项目环境的扩展。用 PHP 写的。
 * Composer：和PEAR都管理着项目环境的依赖，这些依赖也是用 PHP 写的，区别不大。但 composer 却比 PEAR 来的更受欢迎
 

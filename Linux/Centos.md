@@ -10,7 +10,42 @@ yum provides ifconfig
 yum install net-tools
 sudo yum install epel-release # add the CentOS 7 EPEL repository
 ```
+## 防火墙
 
+```sh
+systemctl stop|disable firewalld.service #禁止firewall开机启动
+
+yum install iptables-services  #安装iptables
+
+systemctl  start|stop|restart|status|enable iptables.service
+
+vi /etc/sysconfig/iptables  #编辑防火墙配置文件
+# Firewall configuration written by system-config-firewall
+# Manual customization of this file is not recommended.
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+
+vi /etc/selinux/config
+
+#SELINUX=enforcing #注释掉
+#SELINUXTYPE=targeted #注释掉
+SELINUX=disabled #增加
+
+:wq! #保存退出
+
+setenforce 0 #使配置立即生效
+
+```
 ## 软件源管理
 
 ```sh
@@ -75,7 +110,7 @@ make install # 将译安装完的软件都会放在/usr/local下面
 whereis nginx
 
 cd /usr/local/nginx/sbin
-./nginx 
+./nginx
 ./nginx -s stop
 ./nginx -s quit
 ./nginx -s reload
@@ -106,14 +141,14 @@ vim /lib/systemd/system/nginx.service
 [Unit]
 Description=nginx
 After=network.target
- 
+
 [Service]
 Type=forking
 ExecStart=/usr/local/nginx/sbin/nginx
 ExecReload=/usr/local/nginx/sbin/nginx -s reload
 ExecStop=/usr/local/nginx/sbin/nginx -s quit
 PrivateTmp=true
- 
+
 [Install]
 WantedBy=multi-user.target
 
@@ -210,7 +245,7 @@ wget https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.
 tar xfz percona-server-5.7.18-14.tar.gz
 
 # CMake 安装
-yum install libaio-devel 
+yum install libaio-devel
 ```
 
 ### php

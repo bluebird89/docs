@@ -114,7 +114,7 @@ tar -cjf /backups/192.168.0.220/archive/home-$(date +'%y-%m-%d').tbz \
 ```
 
 
-```
+```sh
 ## 客户端
 echo “ucweb@file”>/etc/rsyncucweb.password
 chmod 600 /etc/rsyncucweb.password
@@ -215,13 +215,12 @@ rsync [OPTION]... SRC [SRC]... DEST
 rsync [OPTION]... SRC [SRC]... [USER@]HOST:DEST
 rsync [OPTION]... SRC [SRC]... [USER@]HOST::DEST
 rsync [OPTION]... SRC [SRC]... rsync://[USER@]HOST[:PORT]/DEST
-rsync [OPTION]... [USER@]HOST:SRC [DEST]
-rsync [OPTION]... [USER@]HOST::SRC [DEST]
+rsync [OPTION]... [USER@]HOST:SRC [DEST] # ':' usages connect via remote shell
+rsync [OPTION]... [USER@]HOST::SRC [DEST] # '::' & 'rsync://' usages connect to an rsync daemon, and require SRC or DEST to start with a module name.
 rsync [OPTION]... rsync://[USER@]HOST[:PORT]/SRC [DEST]
-':' usages connect via remote shell
-'::' & 'rsync://' usages connect to an rsync daemon, and require SRC or DEST to start with a module name.
 
-rsync -a --delete /home /backups # /home ： 表示将整个 /home 目录复制到目标目录; /home/ ： 表示将 /home 目录中的所有内容复制到目标目录
+rsync -r dir1/ dir2 # sync the contents of dir1 to dir2 on the same system
+rsync -a --delete /home /backups # /home：表示将整个 home 目录复制到目标目录; /home/ ： 表示将 home 目录中的所有内容复制到目标目录
 rsync --rsh=ssh --delete -avz  ~/Backups/ henry@ubuntu:/home/henry/backups/ # 将Backups/文件下面同步到backups下面
 rsync --delete /opt/app/tomcat/webapps/ROOT/* -avSH root@221.130.14.87:/opt/app/apache-tomcat-6.0.29/webapps/ROOT/ # rsync服务器主动同步到别的服务器的命令示例,前提是做好两个服务器之间的无密钥ssh登陆
 
@@ -293,7 +292,6 @@ backup@192.168.0.101:/www/ /backup/www-tree/
 + /home/*/public_html/**
 
 - * # 禁止传输其他
-
 rsync -av --delete --exclude-from=www-rsync-rules / remotehost:/dest/dir
 
 rsync -zvr /var/opt/installation/inventory/ /root/temp # Synchronize Two Directories in a Local Server

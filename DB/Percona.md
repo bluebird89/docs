@@ -39,6 +39,11 @@ sudo dpkg -i percona-server-server-5.7_5.7.21-21-3.bionic_amd64.deb
 sudo dpkg -i percona-server-client-5.7_5.7.21-21-3.bionic_amd64.deb
 sudo apt intall libaio1 libmecab2
 sudo apt --fix-broken install
+
+wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
+dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
+apt-get update
+apt-get install percona-server-server-5.7
 ```
 
 ```sh
