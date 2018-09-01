@@ -136,7 +136,7 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 * xchm:`sudo apt-get install xchm`
 * [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
 * [cherrytree](www.giuspen.com/cherrytree/):note
-* [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite 
+* [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite
 
 ### 软件安装
 
@@ -236,43 +236,6 @@ make && make install
 > 防火墙
 
 ```sh
-ystemctl stop firewalld.service #停止firewall
-systemctl disable firewalld.service #禁止firewall开机启动
-yum install iptables-services  #安装iptables
-
-vi /etc/sysconfig/iptables  #编辑防火墙配置文件
-# Firewall configuration written by system-config-firewall
-# Manual customization of this file is not recommended.
-*filter
-:INPUT ACCEPT [0:0]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
--A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
--A INPUT -p icmp -j ACCEPT
--A INPUT -i lo -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
--A INPUT -j REJECT --reject-with icmp-host-prohibited
--A FORWARD -j REJECT --reject-with icmp-host-prohibited
-COMMIT
-
-systemctl  start  iptables.service  #启动防火墙
-systemctl  stop  iptables.service  #停止防火墙
-systemctl  restart  iptables.service  #重启防火墙
-systemctl  status  iptables.service  #查看防火墙状态
-
-systemctl  enable  iptables.service  #设置开机启动
-
-vi /etc/selinux/config
-
-#SELINUX=enforcing #注释掉
-#SELINUXTYPE=targeted #注释掉
-SELINUX=disabled #增加
-
-:wq! #保存退出
-
-setenforce 0 #使配置立即生效
-
 sudo ufw status
 sudo ufw app list
 sudo ufw allow 'Nginx HTTP'
