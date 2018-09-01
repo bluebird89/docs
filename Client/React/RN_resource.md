@@ -133,7 +133,7 @@
 * [JonJam/react-redux-ts](https://github.com/JonJam/react-redux-ts):React/Redux TypeScript starter project
 * [taikongfeizhu/webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
 * [duxianwei520/react](https://github.com/duxianwei520/react):一个react+redux+webpack+ES6+antd的SPA的后台管理底层框架
-* [f8app](https://github.com/fbsamples/f8app)<http://makeitopen.com/>
+* [fbsamples/f8app](https://github.com/fbsamples/f8app):Source code of the official F8 app of 2017, powered by React Native and other Facebook open source projects. http://makeitopen.com
 
 ## 开发工具
 

@@ -622,6 +622,12 @@ dash
 karabiner
 ```
 
+## 端口查看
+
+```sh
+lsof -Pni4 | grep LISTEN | grep php
+```
+
 ## 参考
 
 -   [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.

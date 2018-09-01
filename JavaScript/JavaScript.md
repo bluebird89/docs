@@ -2024,6 +2024,11 @@ fileInput.addEventListener('change', function () {
 </script>
 ```
 
+## 同步 VS 异步
+
+* 同步：占对象，会降低并发，顺序执行
+* 异步：响应好，并发高，并行
+
 ### AJAX Asynchronous JavaScript and XML
 
 用JavaScript执行异步网络请求。AJAX请求是异步执行的，也就是说，要通过回调函数获得响应。早大规模使用AJAX的就是Gmail，Gmail的页面在首次加载后，剩下的所有数据都依赖于AJAX来更新。
@@ -2044,6 +2049,7 @@ fileInput.addEventListener('change', function () {
     - 对于PUT、DELETE以及其他类型如application/json的POST请求，在发送AJAX请求之前，浏览器会先发送一个OPTIONS请求（称为preflighted请求）到这个URL上，询问目标服务器是否接受
     - 服务器必须响应并明确指出允许的Method：
     - 浏览器确认服务器响应的Access-Control-Allow-Methods头确实包含将要发送的AJAX请求的Method，才会继续发送AJAX，否则，抛出一个错误。由于以POST、PUT方式传送JSON格式的数据在REST中很常见，所以要跨域正确处理POST和PUT请求，服务器端必须正确响应OPTIONS请求。
+
 ![CORS](../_static/cors.png "Optional title")
 
 ```javascript
@@ -2371,6 +2377,9 @@ HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘�
 
 ## 事件
 
+监听事件
+Event对象
+
 * window.onpopstate
 
 ## Class
@@ -2571,58 +2580,14 @@ try {
 </script>
 ```
 
-## 场景
+## 客户端存储
 
-* WebAssembly 已得到所有主流浏览器支持
+* cookie
+* Web存储
+* Web数据库
 
-## 调试
+## indexedDB
 
-* 可以直接在develop中的console中测试代码
-* 根据需求写测试代码
+## localStorage
 
-## [框架](https://envato.com/blog/rising-trends-in-javascript/)
-
-### MVC
-
-* Angular
-* React
-* [Marionette](https://marionettejs.com/)
-
-### MVVM
-
-* Vue
-* [Foundation](http://foundation.zurb.com/)
-* Typescript
-* ES6
-
-### Nodejs
-
-* 框架：Sails.js
-
-### SPA
-
-* [Meteor](https://www.meteor.com/)
-* jQuery Mobile
-
-### Data Visualization
-
-* [D3.js](https://d3js.org/)
-* React Native
-* jQuery
-* [Underscore.js](http://underscorejs.org/)
-
-### 代码整理工具
-
-* JSLint
-* JSHint
-
-### 构建与自动化工具
-
-* NPM
-* Grunt
-* Gulp
-
-### AJAX
-
-同步：占对象，会降低并发，顺序执行
-异步：响应好，并发高，并行
+## sessionStorage
