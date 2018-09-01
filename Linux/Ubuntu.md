@@ -273,8 +273,9 @@ SELINUX=disabled #增加
 
 setenforce 0 #使配置立即生效
 
-sudo ufw allow 'Nginx HTTP'
 sudo ufw status
+sudo ufw app list
+sudo ufw allow 'Nginx HTTP'
 sudo ufw allow https
 sudo ufw enable/disable
 ```
