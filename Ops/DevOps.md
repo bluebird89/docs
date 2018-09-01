@@ -120,3 +120,4 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 ## 参考
 
 * [liquanzhou/ops_doc](https://github.com/liquanzhou/ops_doc):运维简洁实用手册
+* [ digitalocean tutorials](https://www.digitalocean.com/community/tutorials)

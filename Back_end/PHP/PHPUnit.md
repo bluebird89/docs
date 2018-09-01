@@ -11,6 +11,82 @@ sudo mv phpunit.phar /usr/local/bin/phpunit
 phpunit --version
 ```
 
+## 使用
+
+```php
+# 功能代码 src/Email.php
+declare(strict_types=1);
+
+final class Email
+{
+    private $email;
+
+    private function \__construct(string $email)
+    {
+        $this->ensureIsValidEmail($email);
+
+        $this->email = $email;
+    }
+
+    public static function fromString(string $email): self
+    {
+        return new self($email);
+    }
+
+    public function \__toString(): string
+    {
+        return $this->email;
+    }
+
+    private function ensureIsValidEmail(string $email): void
+    {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    '"%s" is not a valid email address',
+                    $email
+                )
+            );
+        }
+    }
+}
+
+# 测试用例 tests/EmailTest.php
+declare(strict_types=1);
+
+use PHPUnit\Framework\TestCase;
+
+/**
+* @covers Email
+*/
+final class EmailTest extends TestCase
+{
+    public function testCanBeCreatedFromValidEmailAddress(): void
+    {
+        $this->assertInstanceOf(
+            Email::class,
+            Email::fromString('user@example.com')
+        );
+    }
+
+    public function testCannotBeCreatedFromInvalidEmailAddress(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        Email::fromString('invalid');
+    }
+
+    public function testCanBeUsedAsString(): void
+    {
+        $this->assertEquals(
+            'user@example.com',
+            Email::fromString('user@example.com')
+        );
+    }
+}
+
+# `phpunit --bootstrap src/Email.php tests/EmailTest`
+```
+
 ## 配置使用
 
 在 PhpStrom 环境下使用

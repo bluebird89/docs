@@ -762,47 +762,6 @@ ifconfig # 查询本机网络信息
 
 sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
 
-sudo ufw allow 'Nginx HTTP'
-sudo ufw status
-sudo ufw allow https
-sudo ufw enable/disable
-
-systemctl stop firewalld.service #停止firewall
-systemctl disable firewalld.service #禁止firewall开机启动
-yum install iptables-services  #安装iptables
-
-vi /etc/sysconfig/iptables  #编辑防火墙配置文件
-# Firewall configuration written by system-config-firewall
-# Manual customization of this file is not recommended.
-*filter
-:INPUT ACCEPT [0:0]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
--A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
--A INPUT -p icmp -j ACCEPT
--A INPUT -i lo -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
--A INPUT -j REJECT --reject-with icmp-host-prohibited
--A FORWARD -j REJECT --reject-with icmp-host-prohibited
-COMMIT
-
-systemctl  start  iptables.service  #启动防火墙
-systemctl  stop  iptables.service  #停止防火墙
-systemctl  restart  iptables.service  #重启防火墙
-systemctl  status  iptables.service  #查看防火墙状态
-systemctl  enable  iptables.service  #设置开机启动
-
-vi /etc/selinux/config
-
-#SELINUX=enforcing #注释掉
-#SELINUXTYPE=targeted #注释掉
-SELINUX=disabled #增加
-
-:wq! #保存退出
-
-setenforce 0 #使配置立即生效
-
 host xx.xxx.com # 显示某域名相关托管服务器/邮件服务器
 ping 8.8.8.8 # 检测连接
 
@@ -941,14 +900,14 @@ service sshd restart
 
 ### 密钥生成
 ssh-keygen -t rsa -b 4096
-ssh-copy-id <username>@<host>
+ssh-copy-id <username>@<host> # install your public key to any user that you have login credentials for.
 
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys
 
 scp ~/.ssh/id_rsa.pub hadoop@192.168.1.134:~/
 cat ~/id_rsa.pub >> ~/.ssh/authorized_keys
-rm ~/id_rsa.pub
+cat ~/.ssh/id_rsa.pub | ssh demo@198.51.100.0 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >>  ~/.ssh/authorized_keys"
 
 # 传输文件通过ssh
 scp id_rsa.pub git@172.26.186.117:/home/git/
@@ -958,6 +917,42 @@ ssh -p 2222 user@host   # 登陆服务器
 ## 服务器登陆
 ssh username@remote_host
 ssh username@remote_host ls /var/www
+
+
+# /etc/ssh/sshd_config
+PasswordAuthentication no  # Disable Password Authentication
+PubkeyAuthentication yes
+ChallengeResponseAuthentication no
+
+PermitRootLogin no|yes|without-password  ## restrict the root login to only be permitted via SSH keys, no:禁止root通过ssh登录
+
+sudo systemctl reload sshd.service
+```
+
+### SFTP
+
+stands for SSH File Transfer Protocol, or Secure File Transfer Protocol, is a separate protocol packaged with SSH that works in a similar way over a secure connection.
+
+```sh
+sftp [-oPort=custom_port] sammy@your_server_ip_or_remote_hostname
+
+help | ?
+
+## 默认指令为远程服务器环境
+
+# Local
+lls
+lcd Desktop
+
+## Transferring Files
+get -[r | P] remoteFile localFile # 下载重新命名 r:递归 P：维护权限与时间
+put localFile # 上传文件
+
+df -h # remote
+! df -h # local
+
+get /etc/group
+!less group # 参看本地文件
 ```
 
 ### sougou pinyin
