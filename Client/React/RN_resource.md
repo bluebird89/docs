@@ -195,6 +195,7 @@
 * [reduxjs/react-redux](https://github.com/reduxjs/react-redux):Official React bindings for Redux https://redux.js.org/basics/usagewithreact
 * [reduxjs/redux](https://github.com/reduxjs/redux):Predictable state container for JavaScript apps http://redux.js.org
 * [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
+* [rt2zz/redux-persist](https://github.com/rt2zz/redux-persist):persist and rehydrate a redux store
 
 ## 命令行
 
