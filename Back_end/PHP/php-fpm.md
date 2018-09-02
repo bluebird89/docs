@@ -12,15 +12,18 @@ PHP 解释程序被载入内存而不用每次需要时从存储器读取，极�
 /usr/local/etc/php/7.2
 
 ```sh
- brew services start php
+brew install php71 --without-apache --with-fpm --with-mysql
+brew services start php
 ```
 
 ### 约定目录
 
 * bin: /usr/local/php/sbin/php-fpm
-* /usr/local/php/etc/php-fpm.conf
-* 配置文件路径：/private/etc/php-fpm.conf /private/etc/php-fpm.d/www.conf.default
-* php.ini:/usr/local/php/etc/php.ini
+* 配置文件路径
+    - /usr/local/php/etc/php.ini
+    - /usr/local/php/etc/php-fpm.conf
+    - /private/etc/php-fpm.conf
+    - /private/etc/php-fpm.d/www.conf.default
 
 ## 服务
 
@@ -30,14 +33,22 @@ PHP 解释程序被载入内存而不用每次需要时从存储器读取，极�
 /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf -t
 
 #启动php-fpm
-/usr/local/php/sbin/php-fpm
 /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf
+`/usr/local/Cellar/php71/7.1.10_21/sbin/php-fpm --daemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf --pid /usr/local/var/run/php-fpm.pid`
+
+1. pkill php-fpm 强制关闭
+2. kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
+3. /usr/local/php/sbin/php-fpm 启动
+4. kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid` 平滑重启
+5. ps aux | grep -c php-fpm 查看php-fpm进程数
+6. ps aux |grep php-fpm 查看php-fpm的master进程号
 
 #关闭php-fpm
 kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
 
 ## Mac
 killall php-fpm # 关闭进程
+php-fpm -D # 启动
 
 #重启php-fpm
 kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
@@ -557,9 +568,6 @@ pm.min_spare_servers=5
 pm.max_spare_servers=32
 ```
 
-`/usr/local/Cellar/php71/7.1.10_21/sbin/php-fpm --daemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf --pid /usr/local/var/run/php-fpm.pid`
-启动 php-fpm -D 关闭 killall php-fpm
-
 用到一些 PHP 的第三方库，这些第三方库经常存在内存泄漏问题，如果不定期重启 PHP-CGI 进程，势必造成内存使用量不断增长。因此 PHP-FPM 作为 PHP-CGI 的管理器，提供了这么一项监控功能，对请求达到指定次数的 PHP-CGI 进程进行重启，保证内存使用量不增长。
 
 ## php-fpm 状态查看
@@ -575,4 +583,15 @@ location ~ ^/status$ {
 
 pm.status_path = /status # php-fpm.conf里面打开选项
 # 访问 http://域名/status
+```
+
+## 问题
+
+* FPM's security.limit_extension setting is used to limit the extensions of the main script it will be allowed to parse. It prevents malicious code from being executed. The default value is simply .php It can be configured in /etc/php5/fpm/pool.d/www.conf
+* 解决：cgi.fix_pathinfo=1
+
+```
+2018/09/02 23:26:10 [error] 37283#0: *69 FastCGI sent in stderr: "Access to the script '/Users/henry/Workspace/Code/PHP' has been denied (see security.limit_extensions)" while reading response header from upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/usr/local/var/run/php-fpm.sock:", host: "localhost:8080"
+#  www.conf
+security.limit_extensions = .php .php3 .php4 .php5
 ```

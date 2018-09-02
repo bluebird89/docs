@@ -117,6 +117,8 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 * [gaia-pipeline/gaia](https://github.com/gaia-pipeline/gaia):Build powerful pipelines in any programming language.
 * [jumpserver/jumpserver](https://github.com/jumpserver/jumpserver):Jumpserver是全球首款完全开源的堡垒机，是符合 4A 的专业运维审计系统。 http://www.jumpserver.org
 * [PERIODIC TABLE OF DEVOPS TOOLS](https://xebialabs.com/periodic-table-of-devops-tools/)
+* [kelseyhightower/confd](https://github.com/kelseyhightower/confd):Manage local application configuration files using templates and data from etcd or consul
+
 ## 参考
 
 * [liquanzhou/ops_doc](https://github.com/liquanzhou/ops_doc):运维简洁实用手册

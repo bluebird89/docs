@@ -757,6 +757,7 @@ htop # Famous process monitor. It has a nice, colorful command-line UI. Some use
 * 端口扫描
 
 ```sh
+curl http://icanhazip.com # 查看本机IP
 ping -c 次数 ip # 测试网络畅通性
 ifconfig # 查询本机网络信息
 
