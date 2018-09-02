@@ -115,7 +115,6 @@ sudo apt-get install -y php-pear php5.6-mcrypt php5.6-mbstring php5.6-curl php5.
 
 ### Configure Nginx to Use the PHP Processor
 
-
 ```
 # /etc/php/7.0/fpm/pool.d 修改 www.conf
 # listen = [::]:9000
