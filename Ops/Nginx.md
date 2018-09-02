@@ -175,9 +175,9 @@ http {
     default_type application/octet-stream;
 
     # 为Nginx服务器设置详细的日志格式
-    log_format  main   $remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';
+    log_format  main   $remote_addr - $remote_user [$time_local] "$request"
+                      $status $body_bytes_sent "$http_referer"
+                      "$http_user_agent" "$http_x_forwarded_for";
 
     access_log      /usr/local/var/log/nginx/access.log main;
     # 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改成off。
@@ -310,7 +310,7 @@ server {
         index  index.html index.htm;
     }
 
-    # 定义q
+    # 定义
     error_page  404              /404.html;
     location = /404.html {
         root   /var/www/html/errors;
