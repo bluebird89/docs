@@ -4,7 +4,7 @@ GitHub推出的一款编辑器,现代, 易用, 可定制,The hackable text edito
 
 ## 安装
 
-```
+```sh
 # mac
 brew cask install atom
 # Window
@@ -141,6 +141,7 @@ Command                    | Description
 - atom-ide-ui
 - Teletype
 - terminal-plus
+- [facebook/nuclide](https://github.com/facebook/nuclide):An open IDE for web and native mobile development, built on top of Atom https://nuclide.io
 
 ## 快捷键 Atom Keyboard Shortcuts
 

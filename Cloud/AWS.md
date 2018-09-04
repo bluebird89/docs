@@ -7,6 +7,7 @@
 ## 工具
 
 * [awslabs/aws-sam-cli](https://github.com/awslabs/aws-sam-cli):AWS SAM CLI 🐿 is a CLI tool for local development and testing of Serverless applications
+* [minio/minio](https://github.com/minio/minio):Minio is an open source object storage server compatible with Amazon S3 APIs https://minio.io/downloads.html#download-server
 
 ## 参考
 
