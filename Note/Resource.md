@@ -304,6 +304,10 @@
 -   [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
 -   [rg3/youtube-dl](https://github.com/rg3/youtube-dl):Command-line program to download videos from YouTube.com and other video sites http://rg3.github.io/youtube-dl/
 
+## 资源
+
+* [facebook/watchman](https://github.com/facebook/watchman):Watches files and records, or triggers actions, when they change. https://facebook.github.io/watchman/
+
 ## cheat sheet
 
 -   [chubin/cheat.sh](https://github.com/chubin/cheat.sh)：the only cheat sheet you need https://cheat.sh/ Mac 无法渲染 html 页面，ubuntu 没问题

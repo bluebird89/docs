@@ -381,6 +381,7 @@ services:
 * [coreos/clair](https://github.com/coreos/clair):Vulnerability Static Analysis for Containers
 * [tobegit3hub/seagull](https://github.com/tobegit3hub/seagull):Friendly Web UI to manage and monitor docker
 * [docker/kitematic](https://github.com/docker/kitematic):Visual Docker Container Management on Mac & Windows https://kitematic.com
+* [v2tec/watchtower](https://github.com/v2tec/watchtower):Automatically update running Docker containers
 
 ## 参考
 
