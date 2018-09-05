@@ -1496,7 +1496,6 @@ spl_autoload_register('autoload');
 * 提供了一个用以构建web应用的基本框架，从而简化了用PHP编写web应用程序的流程。
 * 不但节省开发时间，有助于建立更稳定的应用，而且减少了重复编码的开发。
 * 可以帮助初学者建立更稳定的应用服务，这可以让你花更多的时间去创建实际的Web应用程序，而不是花时间写重复的代码。
-* 
 
 spl_autoload
 spl_autoload_register
@@ -1509,9 +1508,19 @@ PHP5.5中加入了一个新特性—迭代生成器和协程。
 
 ## 性能
 
-
 ```sh
 time php php-src/Zend/micro_bench.php # 源码自带性能测试
+```
+
+## web
+
+* apache
+    - module
+    - CGI
+    - php-fpm
+
+```
+< ?php header("Content-type: text/html; charset=utf-8"); ?>
 ```
 
 ## 插件
@@ -1569,6 +1578,23 @@ php php-cs-fixer.phar fix /path/to/file
 * 在你的查询上运行EXPLAIN，看看你是不是缺少什么索引。我曾经做过一个查询，通过增加了一个索引后效率提高了4个数量级，这没有任何夸张的成分。如果你正在使用MySQL，你可以学学这个，这种“黑魔法”技能会让你和你的小伙伴惊呆的。
 * 如果你正在做SQL查询，然后获得结果，并把很多数字弄到一起，看看你能不能使用像SUM（）和AVG（）之类的函数调用GROUP BY语句。跟普遍的情况下，让数据库处理尽量多的计算。我能给你的一点很重要的提示是：（至少在MySQL里是这样）布尔表达式的值为0或1，如果你很有创意的话，你可以使用SUM（）和它的小伙伴们做些很让人惊讶的事情。
 * 看看你是不是把这些同样很耗费时间的数字计算了很多遍。例如，假设1000袋土豆的成本是昂贵的计算，但你并不需要把这个成本计算500次，然后才把1000袋土豆的成本存储在一个数组或其他类似的地方，所以你不必把同样的东西翻来覆去的计算。这个技术叫做记忆术，在像你这样的报告中使用往往会带来奇迹般的效果。
+
+## 安全
+
+### cgi.fix_pathinfo
+
+值由1改为0
+
+nginx通过 fastcgi_param 指令将参数传递给 FastCGI Server
+
+* 访问URL：http://phpvim.net/foo.jpg/a.php/b.php/c.php
+* 传递给 FastCGI 的 SCRIPT_FILENAME：foo.jpg/a.php/b.php/c.php
+* cgi.fix_pathinfo = 1 时，PHP CGI 以 / 为分隔符号从后向前依次检查根目录下如下路径，直到找个某个存在的文件，如果这个文件是个非法的文件
+    - foo.jpg/a.php/b.php
+    - foo.jpg/a.php
+    - foo.jpg
+* PHP 会把这个文件当成 cgi 脚本执行，并赋值路径给 CGI 环境变量——SCRIPT_FILENAME，也就是 `$_SERVER['SCRIPT_FILENAME']` 的值了。
+    - PHP的cgi SAPI中的参数fix_pathinfo
 
 ## 参考
 

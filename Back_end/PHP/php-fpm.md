@@ -36,26 +36,20 @@ brew services start php
 /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf
 `/usr/local/Cellar/php71/7.1.10_21/sbin/php-fpm --daemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf --pid /usr/local/var/run/php-fpm.pid`
 
-1. pkill php-fpm 强制关闭
-2. kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
-3. /usr/local/php/sbin/php-fpm 启动
-4. kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid` 平滑重启
-5. ps aux | grep -c php-fpm 查看php-fpm进程数
-6. ps aux |grep php-fpm 查看php-fpm的master进程号
-
-#关闭php-fpm
-kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
+ps aux | grep -c php-fpm 查看php-fpm进程数
+ps aux |grep php-fpm 查看php-fpm的master进程号
 
 ## Mac
-killall php-fpm # 关闭进程
 php-fpm -D # 启动
-
-#重启php-fpm
-kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
+kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
+kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid` # 平滑重启
+pkill php-fpm # 强制关闭
+killall php-fpm # 关闭进程
 
 ## linux 进程管理
 sudo service php7.0-fpm {start|stop|status|restart|reload|force-reload}
 /etc/init.d/php7.2-fpm start
+/usr/local/php/sbin/php-fpm # 启动
 ```
 
 ## 监听服务
@@ -69,6 +63,9 @@ listen = /var/run/php5-fpm.sock
 ```
 
 ## 配置
+
+* 静态：直接开启指定数量的php-fpm进程，不再增加或者减少
+* 动态：开始的时候开启一定数量的php-fpm进程，当请求量变大的时候，动态的增加php-fpm进程数到上限，当空闲的时候自动释放空闲的进程数到一个下限。
 
 ```
 [global]
@@ -589,6 +586,7 @@ pm.status_path = /status # php-fpm.conf里面打开选项
 
 * FPM's security.limit_extension setting is used to limit the extensions of the main script it will be allowed to parse. It prevents malicious code from being executed. The default value is simply .php It can be configured in /etc/php5/fpm/pool.d/www.conf
 * 解决：cgi.fix_pathinfo=1
+* 待测试： fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info; 屏蔽掉
 
 ```
 2018/09/02 23:26:10 [error] 37283#0: *69 FastCGI sent in stderr: "Access to the script '/Users/henry/Workspace/Code/PHP' has been denied (see security.limit_extensions)" while reading response header from upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/usr/local/var/run/php-fpm.sock:", host: "localhost:8080"
