@@ -25,7 +25,6 @@
 * Lynis
 * [网站体检工具](https://ziyuan.baidu.com/safe/index)
 
-
 https://blog.zsxsoft.com/post/30
 
 
@@ -53,8 +52,6 @@ mysql> drop database test;
 备份数据还可以用来做数据审计或是用于数据仓库的数据源拉取之用。
 一般来说，备份策略是这样的：每天一次全备，并且定期对binlog做增备，或者直接利用binlog server机制将binlog传输到其他远程主机上。有了全备+binlog，就可以按需恢复到任何时间点。
 特别提醒：当采用xtrabackup的流式备份时，考虑采用加密传输，避免备份数据被恶意截取。
-
-
 
 外网安全策略
 
@@ -184,3 +181,7 @@ Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，
 * [Hacker0x01/hacker101](https://github.com/Hacker0x01/hacker101):Hacker101 https://www.hacker101.com
 * [SecWiki/sec-chart](https://github.com/SecWiki/sec-chart):安全思维导图集合 https://www.sec-wiki.com
 * [phith0n/Mind-Map](https://github.com/phith0n/Mind-Map):各种安全相关思维导图整理收集
+
+## 案例
+
+* [710leo/ZVulDrill](https://github.com/710leo/ZVulDrill):Web漏洞演练平台
