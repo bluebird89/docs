@@ -31,3 +31,7 @@
 ## 参考
 
 * [Model Zoo](https://modelzoo.co/):Discover open source deep learning code and pretrained models.
+
+## 工具
+
+* [floydhub/dl-docker](https://github.com/floydhub/dl-docker):An all-in-one Docker image for deep learning. Contains all the popular DL frameworks (TensorFlow, Theano, Torch, Caffe, etc.) https://www.floydhub.com

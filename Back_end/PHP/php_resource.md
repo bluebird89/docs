@@ -93,6 +93,7 @@
       - [Smarty](http://www.smarty.net/): 一个模板引擎
       - [Twig](http://twig.sensiolabs.org/): 一个全面的模板语言
       - [Tale Jade](https://github.com/Talesoft/tale-jade): Jade模版语言的PHP实现
+      - [Talesoft/tale-jade](https://github.com/Talesoft/tale-jade):A complete and fully-functional implementation of the Jade template language for PHP http://jade.talesoft.codes
       - [doctrine2](https://github.com/doctrine/doctrine2):http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/index.html
 * 静态站点生成器 Static Site Generators 用来生成web页面的预处理内容的工具
       - [Couscous](http://couscous.io): 一个将Markdown转化为漂亮的网站的工具
@@ -778,6 +779,10 @@
 ## 后台
 
 * [Nova](https://nova.laravel.com/):administration panel for Laravel
+
+## utilities
+
+* [nette/utils](https://github.com/nette/utils):🛠 Lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc. https://doc.nette.org/utilspw
 
 ## coding standard
 

@@ -1,4 +1,6 @@
-# install
+# Lua
+
+## install
 
 ```sh
 apt-get install lua5.2
