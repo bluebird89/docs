@@ -169,6 +169,7 @@ websocketd --port=8080 ./count.sh // 建立server
 * [variadico/noti](https://github.com/variadico/noti):Monitor a process and trigger a notification.
 * [fvbock/endless](https://github.com/fvbock/endless):Zero downtime restarts for go servers (Drop in replacement for http.ListenAndServe)
 * [robfig/cron](https://github.com/robfig/cron):a cron library for go
+* [golang/dep](https://github.com/golang/dep):Go dependency management tool https://golang.github.io/dep/
 
 ## 教程
 
