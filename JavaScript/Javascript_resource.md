@@ -89,6 +89,10 @@
 * [es-analysis/plato](https://github.com/es-analysis/plato):JavaScript source code visualization, static analysis, and complexity tool
 * [dollarshaveclub/shave](https://github.com/dollarshaveclub/shave/):💈 Shave is a 0 dep JS plugin that truncates text to fit within an element based on a set max-height ✁ https://dollarshaveclub.github.io/shave/
 
+## 数据库
+
+* [sequelize/sequelize](https://github.com/sequelize/sequelize)An easy-to-use multi SQL dialect ORM for Node.js <http://docs.sequelizejs.com>
+
 ## 校验
 
 * [imbrn/v8n](https://github.com/imbrn/v8n):☑️ JavaScript fluent validation library.
@@ -136,7 +140,6 @@
 * [clientIO/joint](https://github.com/clientIO/joint):JavaScript diagramming library http://www.jointjs.com
 * [uber/kepler.gl](https://github.com/uber/kepler.gl):https://uber.github.io/kepler.gl
 * [antvis/f2](https://github.com/antvis/f2):📱📈An elegant, interactive and flexible charting library for mobile. https://antv.alipay.com/zh-cn/f2/3.x/index.html
-
 
 ## Animations
 
@@ -190,7 +193,6 @@
 * [NodeOS](https://github.com/NodeOS/NodeOS)
 * [sindresorhus/awesome-electron](https://github.com/sindresorhus/awesome-electron)Useful resources for creating apps with Electron
 * [sindresorhus/awesome-nodejs](https://github.com/sindresorhus/awesome-nodejs)Delightful Node.js packages and resources
-* [sequelize/sequelize](https://github.com/sequelize/sequelize)An easy-to-use multi SQL dialect ORM for Node.js <http://docs.sequelizejs.com>
 * [thinkjs/thinkjs](https://github.com/thinkjs/thinkjs)Use full ES2015+ features to develop Node.js applications, Support TypeScript
 * [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications [http://hackathonstarter-sahat.rhcloud...](http://hackathonstarter-sahat.rhcloud…)
 * [nodejitsu/node-http-proxy](https://github.com/nodejitsu/node-http-proxy):A full-featured http proxy for node.js http://github.com/nodejitsu/node-http…

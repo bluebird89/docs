@@ -2,7 +2,6 @@
 
 Node.js JavaScript runtime ✨🐢🚀✨ <https://nodejs.org>
 
-
 因为JavaScript是单线程执行，根本不能进行同步IO操作，所以，JavaScript的这一“缺陷”导致了它只能使用异步IO。
 
 在2009年，Ryan正式推出了基于JavaScript语言和V8引擎的开源Web服务器项目，命名为Node.js。借助JavaScript天生的事件驱动机制加V8高性能引擎，使编写高性能Web服务轻而易举。
@@ -54,6 +53,20 @@ cd node
 sudo ./configure
 sudo make
 sudo make install
+
+# centos
+wget https://nodejs.org/dist/v4.2.3/node-v4.2.3-linux-x64.tar.gz
+mkdir node
+tar xvf node-v*.tar.gz --strip-components=1 -C ./node
+rm -rf node-v*
+mkdir node/etc
+echo 'prefix=/usr/local' > node/etc/npmrc
+sudo mv node /opt/
+sudo chown -R root: /opt/node
+sudo ln -s /opt/node/bin/node /usr/local/bin/node
+sudo ln -s /opt/node/bin/npm /usr/local/bin/npm
+sudo visudo
+Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 
 ## using PPA
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
@@ -371,7 +384,6 @@ Url {
   path: '/path/to/file?query=string',
   href: 'http://user:pass@host.com:8080/path/to/file?query=string#hash' }
 
-
 // 文件服务器
 var
     fs = require('fs'),
@@ -523,36 +535,35 @@ process.on('message', function(socket){
 
 - 自动重启：我们在主进程上要加入一些子进程管理的机制，比如在一个子进程挂掉后，要重新启动一个子进程来继续服务.假设子进程中有未捕获异常发生；
 
-  ```js
-  // worker.js
-  process.on('uncaughtException',function(err){
-  console.error(err);
-  //停止接收新的连接
-  worker.close(function(){
-  //所有已有连接断开后，退出进程
-    process.exit(1)
-  })
-  //如果存在长连接，断开可能需要较久的时间，要强制退出，
-  setTimeout(function(){
-    process.exit(1)
-  }, 5000);
-  })
-  主进程中监听每个子进程的exit事件
-  [javascript] view plain copy
-  // master.js
-  var other_work = {};
-  var createWorker = function() {
-  var worker = fork('./worker.js')
-  // 退出时启动新的进程
-  worker.on('exit',function(){
-    console.log('worker ' +worker.pid +' exited.');
-    delete other_work[worker.pid]
-    createWorker();
-  })
-  other_work[worker.pid] = worker;
-  console.log('create worker pid: ' +worker.pid)
-  }
-  ```
+```js
+// worker.js
+process.on('uncaughtException',function(err){
+console.error(err);
+//停止接收新的连接
+worker.close(function(){
+//所有已有连接断开后，退出进程
+  process.exit(1)
+})
+//如果存在长连接，断开可能需要较久的时间，要强制退出，
+setTimeout(function(){
+  process.exit(1)
+}, 5000);
+})
+// 主进程中监听每个子进程的exit事件
+// master.js
+var other_work = {};
+var createWorker = function() {
+var worker = fork('./worker.js')
+// 退出时启动新的进程
+worker.on('exit',function(){
+  console.log('worker ' +worker.pid +' exited.');
+  delete other_work[worker.pid]
+  createWorker();
+})
+other_work[worker.pid] = worker;
+console.log('create worker pid: ' +worker.pid)
+}
+```
 
 上述代码中存在的问题是要等到已有的所有连接断开后进程才退出，在极端的情况下，所有工作进程都停止接收新链接，全处在等待退出状态。但在等到进程完全退出才重启的过程中，所有新来的请求可能存在没有工作进程为新用户服务的场景，这会丢掉大部分请求。 为此需要改进，在子进程停止接收新链接时，主进程就要fork新的子进程继续服务。为此在工作进程得知要退出时，向主进程主动发送一个自杀信号，然后才停止接收新连接。主进程在收到自杀信号后立即创建新的工作进程。
 
@@ -570,7 +581,7 @@ process.on('uncaughtException',function(err){
   }, 5000);
 })
 主进程将重启工作进程的任务，从exit事件的处理函数中转移到message事件的处理函数中
-[javascript] view plain copy
+
 // master.js
 var other_work = {};
 var createWorker = function() {
@@ -594,8 +605,8 @@ var createWorker = function() {
 工作进程不能无限制的被重启，如果启动的过程中就发生了错误或者启动后接到连接就收到错误，会导致工作进程被频繁重启。所以要加以限制，比如在单位时间内规定只能重启 多少次，超过限制就触发giveup事件，告知放弃重启工作进程这个重要事件。 我们引入一个队列来做标记，在每次重启工作进程之间打点判断重启是否过于频繁。
 
 ```js
-在master.js加入如下代码
-[javascript] view plain copy
+// 在master.js加入如下代码
+
 //重启次数
 var limit =10;
 //时间单位
@@ -612,7 +623,7 @@ var isTooFrequently =function() {
   return restart.length >=limit &&restart[restart.length -1] -restart[0] <during;
 }
 在createWorker方法最开始部分加入判断
-[javascript] view plain copy
+
 // 检查是否太过频繁
 if (isTooFrequently()) {
   //触发giveup事件后，不再重启
@@ -632,11 +643,19 @@ worker.on('disconnect', function(){
   console.log('worker' + worker.pid + 'killed')
   createWorker();
 })
-[javascript] view plain copy
-<pre></pre>
-<pre></pre>
-<pre></pre>
-<pre></pre>
+```
+
+## 代理服务器
+
+```
+location / {
+    proxy_pass http://APP_PRIVATE_IP_ADDRESS:8080;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+}
 ```
 
 ## Web开发
@@ -665,7 +684,14 @@ ORM框架比Web框架要少一些：Sequelize，ORM2，Bookshelf.js，Objection.
 
 ### 实际服务器
 
-nginx就是图中的反向代理服务器，拥有诸多优势，可以做负载均衡和静态资源服务器。后面的两台机器就是我们的nodejs应用服务器集群。 nginx 的负载均衡是用在多机器环境下的，单机的负载均衡还是要靠cluster 这类模块来做。 nginx与node应用服务器的对比：nginx是一个高性能的反向代理服务器，要大量并且快速的转发请求，所以不能采用上面第三种方法，原因是仅有一个进程去accept，然后通过消息队列等同步方式使其他子进程处理这些新建的连接，效率会低一些。nginx采用第二种方法，那就依然可能会产生负载不完全均衡和惊群问题。nginx是怎么解决的呢：nginx中使用mutex互斥锁解决这个问题，具体措施有使用全局互斥锁，每个子进程在epoll_wait()之前先去申请锁，申请到则继续处理，获取不到则等待，并设置了一个负载均衡的算法（当某一个子进程的任务量达到总设置量的7/8时，则不会再尝试去申请锁）来均衡各个进程的任务量。具体的nginx如何解决惊群，看这篇文章: <http://blog.csdn.net/russell_tao/article/details/7204260> 那么，node应用服务器为什么可以采用方案三呢，我的理解是：node作为具体的应该服务器负责实际处理用户的请求，处理可能包含数据库等操作，不是必须快速的接收大量请求，而且转发到某具体的node单台服务器上的请求较之nginx也少了很多。
+nginx作为反向代理服务器，拥有诸多优势，可以做负载均衡和静态资源服务器。
+后面的两台机器就是我们的nodejs应用服务器集群。
+nginx 的负载均衡是用在多机器环境下的，单机的负载均衡还是要靠cluster 这类模块来做。
+nginx与node应用服务器的对比：
+nginx是一个高性能的反向代理服务器，要大量并且快速的转发请求，所以不能采用上面第三种方法，原因是仅有一个进程去accept，然后通过消息队列等同步方式使其他子进程处理这些新建的连接，效率会低一些。
+nginx采用第二种方法，那就依然可能会产生负载不完全均衡和惊群问题。nginx是怎么解决的呢：
+nginx中使用mutex互斥锁解决这个问题，具体措施有使用全局互斥锁，每个子进程在epoll_wait()之前先去申请锁，申请到则继续处理，获取不到则等待，并设置了一个负载均衡的算法（当某一个子进程的任务量达到总设置量的7/8时，则不会再尝试去申请锁）来均衡各个进程的任务量。具体的nginx如何解决惊群，看这篇文章: <http://blog.csdn.net/russell_tao/article/details/7204260>
+node应用服务器为什么可以采用方案三呢，我的理解是：node作为具体的应该服务器负责实际处理用户的请求，处理可能包含数据库等操作，不是必须快速的接收大量请求，而且转发到某具体的node单台服务器上的请求较之nginx也少了很多。
 
 ## 框架
 
