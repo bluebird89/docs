@@ -44,6 +44,22 @@
 - [Knp RAD Bundle](http://rad.knplabs.com/): Symfony 2的快速应用程序（RAD）包
 - [Symfony CMF](https://github.com/symfony-cmf/symfony-cmf):一个创建自定义CMS的内容管理框架
 - [lexin-fintech/dubbo-php-framework](https://github.com/lexin-fintech/dubbo-php-framework):dubbo php implementation
+* [pinguo/php-msf](https://github.com/pinguo/php-msf)PHP微服务框架即"Micro Service Framework For PHP"，是Camera360社区服务器端团队基于Swoole自主研发现代化的PHP协程服务框架，简称msf或者php-msf，是Swoole的工程级企业应用框架，经受了Camera360亿级用户高并发大流量的考验
+* [Youzan Zan Php Installer](https://github.com/youzan/zan-installer)Youzan Zan Php Installer
+* [tencent-php/tsf](https://github.com/tencent-php/tsf):coroutine and Swoole based php server framework in tencent
+* [slimphp/Slim](https://github.com/slimphp/Slim):Slim Framework source code <http://slimframework.com>
+* [nette/nette](https://github.com/nette/nette):METAPACKAGE for Nette Framework components https://nette.org
+* [Tencent/Biny](https://github.com/Tencent/Biny):Biny is a tiny, high-performance PHP framework for web applications
+* [reactphp/react](https://github.com/reactphp/react):Event-driven, non-blocking I/O with PHP. https://reactphp.org
+* 论坛
+      - [flarum/flarum](https://github.com/flarum/flarum):Delightfully simple forum software. <http://flarum.org>
+* 电商
+      + [magento/magento2](https://github.com/magento/magento2): a cutting edge, feature-rich eCommerce solution that gets results.
+      + [drupal/drupal](https://github.com/drupal/drupal):Verbatim mirror of the git.drupal.org repository for Drupal core. Changes will not be pulled, and merge requests will not be accepted, if you want to contribute, go to Drupal.org: https://drupal.org/project/drupal
+* CMS
+      - [bolt/bolt](https://github.com/bolt/bolt):Bolt is a simple CMS written in PHP. It is based on Silex and Symfony components, uses Twig and either SQLite, MySQL or PostgreSQL.
+* Wiki
+      * [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki)
 - 框架组件
       + [CakePHP Plugins](https://plugins.cakephp.org/): CakePHP插件的目录
       + [Hoa Project](https://hoa-project.net/En/): 另一个PHP组件包
@@ -85,7 +101,7 @@
       - [Spress](http://spress.yosymfony.com): 一个能够将Markdown和Twig转化为HTML的可扩展工具
 * 超文本传输协议 HTTP
       - [Buzz](https://github.com/kriswallsmith/Buzz): 另一个HTTP客户端
-      - [Guzzle](https://github.com/guzzle/guzzle): Guzzle, an extensible PHP HTTP client http://guzzlephp.org/
+      - [guzzle/guzzle](https://github.com/guzzle/guzzle):Guzzle, an extensible PHP HTTP client <http://guzzlephp.org/>
       - [HTTPFul](https://github.com/nategood/httpful): 一个链式HTTP库
       - [PHP VCR](http://php-vcr.github.io/): 一个录制和重放HTTP请求的库
       - [Requests](https://github.com/rmccue/Requests): 一个简单的HTTP库
@@ -771,33 +787,6 @@
 
 * [thephpleague/flysystem](https://github.com/thephpleague/flysystem):Abstraction for local and remote filesystems https://flysystem.thephpleague.com
 
-## 框架
-
-* [pinguo/php-msf](https://github.com/pinguo/php-msf)PHP微服务框架即"Micro Service Framework For PHP"，是Camera360社区服务器端团队基于Swoole自主研发现代化的PHP协程服务框架，简称msf或者php-msf，是Swoole的工程级企业应用框架，经受了Camera360亿级用户高并发大流量的考验
-* [Youzan Zan Php Installer](https://github.com/youzan/zan-installer)Youzan Zan Php Installer
-* [tencent-php/tsf](https://github.com/tencent-php/tsf):coroutine and Swoole based php server framework in tencent
-* [slimphp/Slim](https://github.com/slimphp/Slim):Slim Framework source code <http://slimframework.com>
-* [nette/nette](https://github.com/nette/nette):METAPACKAGE for Nette Framework components https://nette.org
-* [Tencent/Biny](https://github.com/Tencent/Biny):Biny is a tiny, high-performance PHP framework for web applications
-* [reactphp/react](https://github.com/reactphp/react):Event-driven, non-blocking I/O with PHP. https://reactphp.org
-
-### 论坛
-
-- [flarum/flarum](https://github.com/flarum/flarum):Delightfully simple forum software. <http://flarum.org>
-
-### 电商
-
-- [magento/magento2](https://github.com/magento/magento2): a cutting edge, feature-rich eCommerce solution that gets results.
-- [drupal/drupal](https://github.com/drupal/drupal):Verbatim mirror of the git.drupal.org repository for Drupal core. Changes will not be pulled, and merge requests will not be accepted, if you want to contribute, go to Drupal.org: https://drupal.org/project/drupal
-
-### CMS
-
-* [bolt/bolt](https://github.com/bolt/bolt):Bolt is a simple CMS written in PHP. It is based on Silex and Symfony components, uses Twig and either SQLite, MySQL or PostgreSQL.
-
-### Wiki
-
-* [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki)
-
 ## 扩展
 
 * [PHP 开发者如何做代码审查?](http://blog.csdn.net/gitchat/article/details/78050953)
@@ -807,7 +796,6 @@
 * [briannesbitt/Carbon](https://github.com/briannesbitt/Carbon):A simple PHP API extension for DateTime. <http://carbon.nesbot.com/>
 * [Intervention/image](https://github.com/Intervention/image):PHP Image Manipulation <http://image.intervention.io>
 * [fzaninotto/Faker](https://github.com/fzaninotto/Faker):Faker is a PHP library that generates fake data for you
-* [guzzle/guzzle](https://github.com/guzzle/guzzle):Guzzle, an extensible PHP HTTP client <http://guzzlephp.org/>
 * [reactphp/react](https://github.com/reactphp/react):Event-driven, non-blocking I/O with PHP. <https://reactphp.org>
 * [CopernicaMarketingSoftware/PHP-CPP](https://github.com/CopernicaMarketingSoftware/PHP-CPP):Library to build PHP extensions with C++ <http://www.php-cpp.com/>
 * [nikic/PHP-Parser](https://github.com/nikic/PHP-Parser):A PHP parser written in PHP

@@ -59,6 +59,9 @@ if __name__ == '__main__':
 * [gongwalker/ApiManager](https://github.com/gongwalker/ApiManager):接口文档管理工具
 * [tobscure/json-api](https://github.com/tobscure/json-api):JSON-API (http://jsonapi.org) responses in PHP.
 
+## 加密
+
+* [google/tink](https://github.com/google/tink):Tink is a multi-language, cross-platform library that provides cryptographic APIs that are secure, easy to use correctly, and hard(er) to misuse.
 
 ## 接口
 

@@ -41,6 +41,8 @@ brew cask install shadowsocksx
 
 ```shell
 sudo apt install openvpn easy-rsa # 服务端
+make-cadir ~/openvpn-ca
+
 mkdir /etc/openvpn/easy-rsa/
 cp -r /usr/share/easy-rsa/* /etc/openvpn/easy-rsa/
 
@@ -142,10 +144,11 @@ pip install shadowsocks
 * [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
 
 ## 参考
+
 * [Shadowsocks (简体中文)](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 * [openvpn](https://help.ubuntu.com/lts/serverguide/openvpn.html)
 * [gfwlist/gfwlist](https://github.com/gfwlist/gfwlist):The one and only one gfwlist here
-* shadowsocksx
+* [How To Set Up an OpenVPN Server on Ubuntu 16.04(https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04)
 
 ## 工具
 
@@ -154,6 +157,7 @@ pip install shadowsocks
 - [XX-net/XX-Net](https://github.com/XX-net/XX-Net)a web proxy tool
 - [googlehosts/hosts](https://github.com/googlehosts/hosts)
 - [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
+- shadowsocksx
 
 ### 服务
 

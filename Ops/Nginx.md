@@ -62,7 +62,7 @@
 ### Mac
 
 - 程序文件 /usr/local/Cellar/nginx
-- 配置文件 /usr/local/etc/nginx/nginx.conf
+- 配置文件 /usr/local/etc/nginx/nginx.conf   /usr/local/nginx/conf/nginx.conf
 - 日志与服务器文件 /usr/local/var/log/nginx/
 - Severs config:/usr/local/etc/nginx/servers/
 - Docroot is: /usr/local/Cellar/nginx/1.12.2_1/html /usr/local/var/www, 软件更新后版本号会发生变化，默认也会失效
@@ -85,33 +85,33 @@ sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
 
 全局变量
 
-```
-$args：请求中的参数
-$content_length：请求 HEAD 中的 Content-length
-$content_type：请求 HEAD 中的 Content_type
-$document_root：当前请求中 root 的值
-$host：主机头
-$http_user_agent：客户端 agent
-$http_cookie：客户端 cookie
-$limit_rate：限制连接速率
-$request_method：客户端请求方式，GET/POST
-$remote_addr：客户端 IP
-$remote_port：客户端端口
-$remote_user：验证的用户名
-$request_filename：请求的文件绝对路径
-$scheme：http/http
-$server_protocol：协议，HTTP/1.0 OR HTTP/1.1
-$server_addr：服务器地址
-$server_name：服务器名称
-$server_port：服务器端口
-$request_uri：包含请求参数的 URI
-$uri：不带请求参数的 URI
-$document_uri：同 $uri
+```sh
+$args # 请求中的参数
+$content_length # 请求 HEAD 中的 Content-length
+$content_type # 请求 HEAD 中的 Content_type
+$document_root # 当前请求中 root 的值
+$host # 主机头
+$http_user_agent # 客户端 agent
+$http_cookie # 客户端 cookie
+$limit_rate # 限制连接速率
+$request_method # 客户端请求方式，GET/POST
+$remote_addr # 客户端 IP
+$remote_port # 客户端端口
+$remote_user # 验证的用户名
+$request_filename # 请求的文件绝对路径
+$scheme # http/http
+$server_protocol # 协议，HTTP/1.0 OR HTTP/1.1
+$server_addr # 服务器地址
+$server_name # 服务器名称
+$server_port # 服务器端口
+$request_uri # 包含请求参数的 URI
+$uri # 不带请求参数的 URI
+$document_uri # 同 $uri
 
--f/!-f：判断文件是否存在
--d/!-d：判断目录是否存在
--e/!-e：判断文件或目录是否存在
--x/!-x：判断文件是否可以执行
+-f/!-f # 判断文件是否存在
+-d/!-d # 判断目录是否存在
+-e/!-e # 判断文件或目录是否存在
+-x/!-x # 判断文件是否可以执行
 ```
 
 ### main（全局设置）
@@ -834,6 +834,10 @@ location /dist {
 }
 ```
 
+## faastcgi
+
+include fastcgi_params;
+
 ## 日志分析
 
 ```
@@ -847,10 +851,11 @@ awk -F\" '($2 ~ "xyz"){print $2}' access.log | awk '{print $2}' | sort | uniq -c
 ## 参考
 
 - [git-mirror/nginx](https://github.com/git-mirror/nginx)：A mirror of the nginx SVN repository. <http://nginx.org/>
-- [nginx documentation](http://nginx.org/en/docs/)
+- [Nginx documentation](http://nginx.org/en/docs/)
 - [《Nginx官方文档》使用nginx作为HTTP负载均衡](http://ifeve.com/nginx-http/)
 - [xuexb/learn-nginx](https://github.com/xuexb/learn-nginx):学习nginx配置, 包括: 编译安装、反向代理、重定向、url重写、nginx缓存、跨域配置等
 - [Nginx 配置简述](http://www.cnblogs.com/hustskyking/p/nginx-configuration-start.html)
+- [Understanding the Nginx Configuration File Structure and Configuration Contexts](https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts)
 
 ## 工具
 
