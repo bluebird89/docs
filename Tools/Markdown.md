@@ -953,6 +953,7 @@ Markdown 语法： **Example:**
 * [gsuitedevs/md2googleslides](https://github.com/gsuitedevs/md2googleslides):Generate Google Slides from markdown
 * [pandao/editor.md](https://github.com/pandao/editor.md):The open source embeddable online markdown editor (component). https://pandao.github.io/editor.md/
 * [gnab/remark](https://github.com/gnab/remark):A simple, in-browser, markdown-driven slideshow tool. http://remarkjs.com
+* [knsv/mermaid](https://github.com/knsv/mermaid):Generation of diagram and flowchart from text in a similar manner as markdown http://knsv.github.io/mermaid/
 
 ## 参考
 
