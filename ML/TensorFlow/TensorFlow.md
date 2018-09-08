@@ -19,8 +19,10 @@ virtualenv my-venv
 source my-venv/bin/activate
 pip install IPython
 ```
-## 仓库
+
+## 参考
 
 * [aymericdamien/TensorFlow-Examples](https://github.com/aymericdamien/TensorFlow-Examples):TensorFlow Tutorial and Examples for Beginners with Latest APIs https://tensorflow.org
 * [TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
 * [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow):Computation using data flow graphs for scalable machine learning http://tensorflow.org
+* [vahidk/EffectiveTensorflow](https://github.com/vahidk/EffectiveTensorflow):TensorFlow tutorials and best practices. https://twitter.com/VahidK

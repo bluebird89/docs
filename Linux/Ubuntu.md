@@ -1005,6 +1005,27 @@ sudo apt-get autoremove
 sudo apt-get autoclean
 ```
 
+## phpMyAdmin
+
+```sh
+sudo apt update
+sudo apt install phpmyadmin php-mbstring php-gettext
+sudo phpenmod mbstring
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+
+## /usr/share/phpmyadmin/.htaccess
+AuthType Basic
+AuthName "Restricted Files"
+AuthUserFile /etc/phpmyadmin/.htpasswd
+Require valid-user
+
+sudo htpasswd -c /etc/phpmyadmin/.htpasswd username
+sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser
+
+# https://domain_name_or_IP/phpmyadmin
+```
+
 ## 18.04
 
 * cgroup v2
