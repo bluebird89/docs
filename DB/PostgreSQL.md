@@ -18,11 +18,23 @@ pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start # 
 pg_ctl -D /usr/local/var/postgres stop -s -m fast #  关闭
 ```
 
-## 用户
+## 使用
 
 数据库跟当前系统管理员对应的数据库
+Postgres uses an authentication scheme called "peer authentication" for local connections. Basically, this means that if the user's operating system username matches a valid Postgres username, that user can login with no further authentication.
 
-```sh
+```sql
+sudo -u postgres psql # 登录
+
+CREATE DATABASE myproject;
+CREATE USER myprojectuser WITH PASSWORD 'password';
+
+ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
+ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
+ALTER ROLE myprojectuser SET timezone TO 'UTC';
+
+GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;
+
 createuser username -P # 创建用户，输入两次密码 passport
 createdb dbname -O username -E UTF8 -e #  创建数据库  owner encoding
 DROP DATABASE dbname;
@@ -30,6 +42,12 @@ DROP DATABASE dbname;
 psql -U username -d dbname -h 127.0.0.1   #  连接数据库
 
 psql -d template1 # 创建属于自己的数据库
+
+\q # exit
+
+sudo systemctl status postgresql
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
 ```
 
 ## 表操作

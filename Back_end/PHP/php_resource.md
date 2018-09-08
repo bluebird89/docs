@@ -355,7 +355,7 @@
       - [SeasX/SeasLog](https://github.com/SeasX/SeasLog)：An effective,fast,stable log extension for PHP.http://pecl.php.net/package/SeasLog http://neeke.github.io/SeasLog/
 * 电子商务 E-commerce 处理支付和构建在线电子商务商店的库和应用
       - [Money](https://github.com/moneyphp/money): 一个Fowler金钱模式的PHP实现
-      - [OmniPay](https://github.com/thephpleague/omnipay): 一个框架混合了多网关支付处理的库
+      - [thephpleague/omnipay](https://github.com/thephpleague/omnipay):A framework agnostic, multi-gateway payment processing library for PHP 5.3+ http://omnipay.thephpleague.com/
       - [Payum](https://github.com/payum/payum): 一个支付抽象库
       - [Shopware](https://github.com/shopware/shopware): 一个可高度定制的电子商务软件
       - [Swap](https://github.com/florianv/swap): 一个汇率库
