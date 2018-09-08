@@ -147,10 +147,20 @@ events {
 
 * windows调用php-cgi启动服务
 * linux通过转交服务给php-fpm处理:配置www.conf服务转交TCP socket或Unix Socket
+    - Unix Sockets
+        + Nginx is run as user/group www-data. PHP-FPM's unix socket therefore needs to be readable/writable by this user.
+        + If we change the Unix socket owner to user/group ubuntu, Nginx will then return a bad gateway error, as it can no longer communicate to the socket file. We would have to change Nginx to run as user "ubuntu" as well, or set the socket file to allow "other" (non user nor group) to be read/written to, which is insecure.
+    - TCP Sockets
+        + This makes PHP-FPM able to be listened to by remote servers
+        + listen.allowed_clients = 127.0.0.1
 
 提供http服务相关的一些配置参数，如：是否使用keepalive，是否使用gzip进行压缩
 
 ```sh
+touch php7.0-fpm.sock
+chown www-data:www-data php7.0-fpm.sock
+chmod 777 php7.0-fpm.sock
+
 # 设定http服务器，利用它的反向代理功能实现负载均衡支持
 http {
     # 设定负载均衡的服务器列表 weigth参数表示权值，权值越高被分配到的几率越大

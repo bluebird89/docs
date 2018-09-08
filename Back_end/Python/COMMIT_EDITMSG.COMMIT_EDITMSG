@@ -1,0 +1,821 @@
+update 0908 add django server with guniron
+
+# update 0907
+# --------------
+# Please enter the commit message for your changes. Everything below
+# this paragraph is ignored, and an empty message aborts the commit.
+# Just close the window to accept your message.
+diff --git a/.gitmodules b/.gitmodules
+index 7b954ae..228b526 100644
+--- a/.gitmodules
++++ b/.gitmodules
+@@ -199,3 +199,9 @@
+ [submodule "Guide_lines/spec"]
+    path = Guide_lines/spec
+    url = git@github.com:ecomfe/spec.git
++[submodule "ML/TensorFlow/EffectiveTensorFlow"]
++   path = ML/TensorFlow/EffectiveTensorFlow
++   url = git@github.com:vahidk/EffectiveTensorflow.git
++[submodule "Back_end/Python/awesome-django"]
++   path = Back_end/Python/awesome-django
++   url = git@github.com:rosarior/awesome-django.git
+diff --git a/Back_end/PHP/php_resource.md b/Back_end/PHP/php_resource.md
+index dfbf506..fb13b21 100644
+--- a/Back_end/PHP/php_resource.md
++++ b/Back_end/PHP/php_resource.md
+@@ -355,7 +355,7 @@
+       - [SeasX/SeasLog](https://github.com/SeasX/SeasLog)：An effective,fast,stable log extension for PHP.http://pecl.php.net/package/SeasLog http://neeke.github.io/SeasLog/
+ * 电子商务 E-commerce 处理支付和构建在线电子商务商店的库和应用
+       - [Money](https://github.com/moneyphp/money): 一个Fowler金钱模式的PHP实现
+-      - [OmniPay](https://github.com/thephpleague/omnipay): 一个框架混合了多网关支付处理的库
++      - [thephpleague/omnipay](https://github.com/thephpleague/omnipay):A framework agnostic, multi-gateway payment processing library for PHP 5.3+ http://omnipay.thephpleague.com/
+       - [Payum](https://github.com/payum/payum): 一个支付抽象库
+       - [Shopware](https://github.com/shopware/shopware): 一个可高度定制的电子商务软件
+       - [Swap](https://github.com/florianv/swap): 一个汇率库
+diff --git a/Back_end/Python/Django.md b/Back_end/Python/Django.md
+index 194b8ea..567f578 100644
+--- a/Back_end/Python/Django.md
++++ b/Back_end/Python/Django.md
+@@ -1,6 +1,7 @@
+ # [django/django](https://github.com/django/django)
+
+-The Web framework for perfectionists with deadlines. <https://www.djangoproject.com/>.自身带有轻量级服务器，部署用 Apache with mod_wsgi，每个django项目中可以包含多个APP，相当于一个大型项目中的分系统、子模块、功能部件等等，相互之间比较独立，但也有联系。
++The Web framework for perfectionists with deadlines. <https://www.djangoproject.com/>.
++自身带有轻量级服务器，部署用 Apache with mod_wsgi，每个django项目中可以包含多个APP，相当于一个大型项目中的分系统、子模块、功能部件等等，相互之间比较独立，但也有联系。
+
+ ## 安装
+
+@@ -12,24 +13,63 @@ sudo python3 setup.py install  # 会注册脚本django-admin.py
+ sudo apt-get install python-pip
+ pip install --upgrade pip
+ pip install Django[==1.11.3]
++
++pip install django gunicorn psycopg2
+ ```
+
+ ## 管理命令 django-admin.py
+
+ ## 项目结构
+
++* django-admin.py:全局脚本
++* manage.py: 一个实用的命令行工具，以各种方式与该 Django 项目进行交互
+ * Django_app: 项目的容器
+-* urls.py: 网址入口，关联到对应的views.py中的一个函数（或generic类）
+-* views.py：处理用户发出的请求，与urls.py对应, 通过渲染templates中的网页可以将显示内容
+-* models.py：与数据库操作相关，存入或读取数据时用到
+-* forms.py：表单，用户在浏览器上输入数据提交，对数据的验证工作以及输入框的生成等工作
+-* templates文件夹：views.py中的函数渲染templates中的html模板，得到动态内容的网页，可以用缓存来提高速度。
+-* admin.py：后台，可以用很少的代码就拥有一个强大的后台
+-* settings.py: Django 的配置文件，如 DEBUG 的开关，静态文件的位置
+-
+-* manage.py: 一个实用的命令行工具，可让你以各种方式与该 Django 项目进行交互
+-* __init__.py: 一个空文件，告诉 Python 该目录是一个 Python 包
+-* wsgi.py: 一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目
++    - urls.py: 网址入口，关联到对应的views.py中的一个函数（或generic类）
++    - views.py：处理用户发出的请求，与urls.py对应, 通过渲染templates中的网页可以将显示内容
++    - models.py：与数据库操作相关，存入或读取数据时用到
++    - forms.py：表单，用户在浏览器上输入数据提交，对数据的验证工作以及输入框的生成等工作
++    - templates文件夹：views.py中的函数渲染templates中的html模板，得到动态内容的网页，可以用缓存来提高速度。
++    - admin.py：后台，可以用很少的代码就拥有一个强大的后台
++    - settings.py: Django 的配置文件，如 DEBUG 的开关，静态文件的位置
++    - __init__.py: 一个空文件，告诉 Python 该目录是一个 Python 包
++    - wsgi.py: 一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目
++
++## 配置
++
++```sh
++# 配置setting.py
++#  list the IP addresses or domain names that are associated with your Django server.
++ALLOWED_HOSTS = ['your_server_domain_or_IP', 'second_domain_or_IP', . . .]
++
++# mysql:
++# sudo apt-get install python-mysqldb
++DATABASES = {
++    'default': {
++        'ENGINE': 'django.db.backends.mysql',
++        'NAME': 数据库名,
++        'USER': '用户名',
++        'PASSWORD': '密码',
++        'HOST': '127.0.0.1',
++        'PORT': '3306',
++    }
++}
++
++# postgresql
++DATABASES = {
++    'default': {
++        'ENGINE': 'django.db.backends.postgresql_psycopg2',
++        'NAME': 'myproject',
++        'USER': 'myprojectuser',
++        'PASSWORD': 'password',
++        'HOST': 'localhost',
++        'PORT': '',
++    }
++}
++
++# add a setting indicating where the static files should be placed. This is necessary so that Nginx can handle requests for these items.
++STATIC_URL = '/static/'
++STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
++```
+
+ ## 使用
+
+@@ -40,7 +80,8 @@ pip install Django[==1.11.3]
+ * 进入管理页面：127.0.0.1：8080/admin
+
+ ```sh
+-django-admin.py startproject Django_app # 新建项目
++django-admin.py startproject Django_app ~/myproject # 新建项目
++
+ python manage.py startapp cmdb  # 一般一个项目有多个app, 当然通用的app也可以在多个项目中使用
+ django-admin.py startapp app-name
+
+@@ -48,29 +89,19 @@ sudo pip3 install mysqlclient #  mysql驱动
+
+ cd Django_app
+
+-python3 manage.py migrate   # 创建表结构
++# migrate the initial database schema to our PostgreSQL database using the management script
++~/myproject/manage.py makemigrations
++~/myproject/manage.py migrate
++
++~/myproject/manage.py createsuperuser # Create an administrative user for the project
++
+ python3 manage.py makemigrations TestModel  # 让 Django 知道我们在我们的模型有一些变更
+ python3 manage.py migrate TestModel   # 创建表结构
+
+ # 开启服务
++sudo ufw allow 8000
+ python manage.py runserver 0.0.0.0:8000 # 让其它电脑可连接到服务器，监听机器上所有ip的8000端口，访问时用电脑的ip代替
+-python manage.py runserver # 在本电脑访问服务器，访问时ip为127.0.0.1
+-```
+-
+-```
+-# 默认sqlite 数据库迁移到mysql:
+-sudo apt-get install python-mysqldb
+-# 修改setting.py
+-DATABASES = {
+-    'default': {
+-        'ENGINE': 'django.db.backends.mysql',
+-        'NAME': 数据库名,
+-        'USER': '用户名',
+-        'PASSWORD': '密码',
+-        'HOST': '127.0.0.1',
+-        'PORT': '3306',
+-    }
+-}
++python manage.py runserver # 在本电脑访问服务器，访问http://server_domain_or_IP:8000
+ ```
+
+ ## 模版标签
+@@ -117,24 +148,30 @@ Requested setting INSTALLED_APPS, but settings are not configured. You must eith
+
+ ## 资源
+
+-* [rosarior/awesome-django](https://github.com/rosarior/awesome-django):
++* [rosarior/awesome-django](https://github.com/rosarior/awesome-django):Repository mirror of GitLab: https://gitlab.com/rosarior/awesome-django http://awesome-django.com
+
+-## 工具
++## 参考
+
+ * [文档](https://docs.djangoproject.com/en/dev/releases/2.0/)
+-* [nioperas06/awesome-django-rest-framework](https://github.com/nioperas06/awesome-django-rest-framework):Tools, processes and resources you need to create an awesome API with Django REST Framework
++* [How To Set Up Django with Postgres, Nginx, and Gunicorn on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04)
++
++## 工具
++
+ * [django-extensions/django-extensions](https://github.com/django-extensions/django-extensions):This is a repository for collecting global custom management extensions for the Django Framework.
+ * [jazzband/django-debug-toolbar](https://github.com/jazzband/django-debug-toolbar):A configurable set of panels that display various debug information about the current request/response.
+-* [divio/django-cms](https://github.com/divio/django-cms):The easy-to-use and developer-friendly CMS http://www.django-cms.org
+-* [encode/django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. http://www.django-rest-framework.org
++* [django-guardian/django-guardian](https://github.com/django-guardian/django-guardian):Per object permissions for Django https://django-guardian.readthedocs.io/
++* [viewflow/django-material](https://github.com/viewflow/django-material):Material Design for Django http://forms.viewflow.io/
++* [jcalazan/ansible-django-stack](https://github.com/jcalazan/ansible-django-stack):Ansible Playbook for setting up a Django app with Nginx, Gunicorn, PostgreSQL, Celery, RabbitMQ, Supervisor, Virtualenv, and Memcached. A Vagrantfile for provisioning a VirtualBox virtual machine is included as well.
++
++## Taiga
++
+ * [Taiga Documentation](http://taigaio.github.io/taiga-doc/dist/#_installation_guide)
+ * [taigaio/taiga-front](https://github.com/taigaio/taiga-front):Project management web application with scrum in mind! Built on top of Django and AngularJS (Front) http://taiga.io
+ * [taigaio/taiga-back](https://github.com/taigaio/taiga-back):Project management web application with scrum in mind! Built on top of Django and AngularJS (Backend Code)
+-* [](https://github.com/django-guardian/django-guardian)
+-* [](https://github.com/viewflow/django-material)
+-* [](https://github.com/jcalazan/ansible-django-stack)
+
+ ## 框架
+
+ * [encode/django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. ⚡️ https://www.django-rest-framework.org
+ * [geex-arts/django-jet](https://github.com/geex-arts/django-jet):Modern responsive template for the Django admin interface with improved functionality http://jet.geex-arts.com/
++* [nioperas06/awesome-django-rest-framework](https://github.com/nioperas06/awesome-django-rest-framework):Tools, processes and resources you need to create an awesome API with Django REST Framework
++* [divio/django-cms](https://github.com/divio/django-cms):The easy-to-use and developer-friendly CMS http://www.django-cms.org
+diff --git a/Back_end/Python/Python.md b/Back_end/Python/Python.md
+index 90a4c32..a1993fd 100644
+--- a/Back_end/Python/Python.md
++++ b/Back_end/Python/Python.md
+@@ -36,7 +36,7 @@ Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编
+ * 安装的3.6版本：/usr/local/Cellar/python3/3.6.4_2
+ * Anaconda :/Users/henry/anaconda/bin
+
+-```shell
++```sh
+ brew install python3
+
+ # 修改 .bash_profil文件，先搜索尾部，找到后停止搜索
+@@ -64,13 +64,16 @@ sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.
+ vim ~/.bash_profile # (只要能编辑就行) 插入新的Python路径
+
+ pip3 install --upgrade pip setuptools wheel
++
++# Ubuntu
++sudo apt-get update
++sudo apt-get install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx
+ ```
+
+ [Using Python on a Macintosh](https://docs.python.org/3/using/mac.html)
+
+-> windows
+-
+ ```sh
++# windows
+ pip install scrapy
+ C:\Users\Administrator\AppData\Local\Programs\Python\Python36 # 路径
+ pip install pywin32 # No module named win32api
+@@ -113,15 +116,16 @@ cat ~/.pyenv/version
+ pyenv version
+ ```
+
+-### 虚拟沙盒virtualenv
++### virtualenv
+
+ Virtualenv is a tool that creates an isolated Python environment for each of your projects
+
+ ```sh
+-pip install virtualenv
++sudo -H pip3 install --upgrade pip
++sudo -H pip3 install virtualenv
+
+ cd myproject/
+-virtualenv venv
++virtualenv venv # create a Python virtual environment
+ virtualenv --no-site-packages app_env
+ virtualenv venv --system-site-packages # also inherit globally installed packages
+
+@@ -1342,3 +1346,4 @@ CMD ["python3"]
+ * [nteract/nteract](https://github.com/nteract/nteract): 📘 Desktop notebook app + packages https://nteract.io
+ * [locustio/locust](https://github.com/locustio/locust):Scalable user load testing tool written in Python http://locust.io
+ * [agronholm/apscheduler](https://github.com/agronholm/apscheduler):Task scheduling library for Python
++* [benfred/py-spy](https://github.com/benfred/py-spy):Sampling profiler for Python programs
+diff --git a/Back_end/Python/awesome-django b/Back_end/Python/awesome-django
+new file mode 160000
+index 0000000..d25bd21
+--- /dev/null
++++ b/Back_end/Python/awesome-django
+@@ -0,0 +1 @@
++Subproject commit d25bd21d6663dce0facc872896a58a39c4dd006b
+diff --git a/Back_end/Python/gunicorn.md b/Back_end/Python/gunicorn.md
+index 24cd5a4..cda19af 100644
+--- a/Back_end/Python/gunicorn.md
++++ b/Back_end/Python/gunicorn.md
+@@ -8,3 +8,66 @@ pre-fork模型中
+
+ * master（gunicorn 中Arbiter）会fork出指定数量的worker进程
+ * worker进程在同样的端口上监听，谁先监听到网络连接请求，谁就提供服务，这也是worker进程之间的负载均衡。
++
++## 使用
++
++```sh
++cd ~/myproject
++gunicorn --bind 0.0.0.0:8000 myproject.wsgi # 不是实体配置文件
++deactivate
++
++sudo nano /etc/systemd/system/gunicorn.service
++
++[Unit]
++Description=gunicorn daemon
++After=network.target
++
++[Service]
++User=sammy
++Group=www-data
++WorkingDirectory=/home/sammy/myproject
++ExecStart=/home/sammy/myproject/myprojectenv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/sammy/myproject/myproject.sock myproject.wsgi:application
++
++[Install]
++WantedBy=multi-user.target
++
++## 服务重启
++sudo systemctl start gunicorn
++sudo systemctl enable gunicorn
++
++## Check for the Gunicorn Socket File
++sudo systemctl status gunicorn
++ls /home/sammy/myproject
++
++sudo journalctl -u gunicorn
++
++sudo systemctl daemon-reload
++sudo systemctl restart gunicorn
++
++# Configure Nginx to Proxy Pass to Gunicorn
++sudo nano /etc/nginx/sites-available/myproject
++
++server {
++    listen 80;
++    server_name server_domain_or_IP;
++
++    location = /favicon.ico { access_log off; log_not_found off; }
++    location /static/ {
++        root /home/sammy/myproject;
++    }
++
++    location / {
++        include proxy_params;
++        proxy_pass http://unix:/home/sammy/myproject/myproject.sock;
++    }
++}
++
++sudo ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled
++
++sudo systemctl restart nginx
++
++sudo ufw delete allow 8000
++sudo ufw allow 'Nginx Full'
++
++sudo tail -F /var/log/nginx/error.log
++```
+diff --git a/Client/React/RN_resource.md b/Client/React/RN_resource.md
+index 113c7ab..8dc0082 100644
+--- a/Client/React/RN_resource.md
++++ b/Client/React/RN_resource.md
+@@ -225,3 +225,7 @@
+ ## Docker
+
+ * [zzswang/docker-nginx-react](https://github.com/zzswang/docker-nginx-react):Run react single page app within a nginx server
++
++## Cookies
++
++* [reactivestack/cookies](https://github.com/reactivestack/cookies):Load and save cookies within your React application
+diff --git a/DB/MySQL.md b/DB/MySQL.md
+index 28f5a8d..2336e9c 100644
+--- a/DB/MySQL.md
++++ b/DB/MySQL.md
+@@ -8,6 +8,7 @@ Open source relational database management system
+ * Percona分支版本，它是一个相对比较成熟的、优秀的MySQL分支版本，在性能提升、可靠性、管理型方面做了不少改善。它和官方ORACLE MySQL版本基本完全兼容，并且性能大约有20%以上的提升。
+ * Mysql 5.7
+     - 对 JSON 的支持
++    - the root MySQL user is set to authenticate using the auth_socket plugin by default rather than with a password.
+ * [8.0](https://www.mysql.com/why-mysql/white-papers/whats-new-mysql-8-0/)
+     - 更好的性能：读/写工作负载、IO 密集型工作负载、以及高竞争（"hot spot"热点竞争问题）工作负载。
+     - 文档存储:为 schema-less 模式的 JSON 文档提供了多文档事务支持和完整的 ACID 合规性
+@@ -30,6 +31,9 @@ Open source relational database management system
+ - MySQLWorkbench
+ - SQLyog   `ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
+ - [phpmyadmin/phpmyadmin](https://github.com/phpmyadmin/phpmyadmin):A web interface for MySQL and MariaDB https://www.phpmyadmin.net/
++    + Communicates directly with your MySQL installation
++    + Handles authentication using MySQL credentials
++    + Executes and returns results for arbitrary SQL queries
+ - 命令行
+
+ ## 安装
+diff --git a/DB/PostgreSQL.md b/DB/PostgreSQL.md
+index c3ee600..06353ad 100644
+--- a/DB/PostgreSQL.md
++++ b/DB/PostgreSQL.md
+@@ -18,11 +18,23 @@ pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start #
+ pg_ctl -D /usr/local/var/postgres stop -s -m fast #  关闭
+ ```
+
+-## 用户
++## 使用
+
+ 数据库跟当前系统管理员对应的数据库
++Postgres uses an authentication scheme called "peer authentication" for local connections. Basically, this means that if the user's operating system username matches a valid Postgres username, that user can login with no further authentication.
++
++```sql
++sudo -u postgres psql # 登录
++
++CREATE DATABASE myproject;
++CREATE USER myprojectuser WITH PASSWORD 'password';
++
++ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
++ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
++ALTER ROLE myprojectuser SET timezone TO 'UTC';
++
++GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;
+
+-```sh
+ createuser username -P # 创建用户，输入两次密码 passport
+ createdb dbname -O username -E UTF8 -e #  创建数据库  owner encoding
+ DROP DATABASE dbname;
+@@ -30,6 +42,12 @@ DROP DATABASE dbname;
+ psql -U username -d dbname -h 127.0.0.1   #  连接数据库
+
+ psql -d template1 # 创建属于自己的数据库
++
++\q # exit
++
++sudo systemctl status postgresql
++sudo systemctl start postgresql
++sudo systemctl enable postgresql
+ ```
+
+ ## 表操作
+diff --git a/Front_end/Plugins.md b/Front_end/Plugins.md
+new file mode 100644
+index 0000000..9796997
+--- /dev/null
++++ b/Front_end/Plugins.md
+@@ -0,0 +1,5 @@
++# Plugin
++
++## 富文本
++
++* [ckeditor/ckeditor5](https://github.com/ckeditor/ckeditor5):Development environment for CKEditor 5 – the best browser-based rich text editor. https://ckeditor.comv
+diff --git a/Linux/Ubuntu.md b/Linux/Ubuntu.md
+index 65c6697..494f28b 100644
+--- a/Linux/Ubuntu.md
++++ b/Linux/Ubuntu.md
+@@ -1005,6 +1005,27 @@ sudo apt-get autoremove
+ sudo apt-get autoclean
+ ```
+
++## phpMyAdmin
++
++```sh
++sudo apt update
++sudo apt install phpmyadmin php-mbstring php-gettext
++sudo phpenmod mbstring
++
++ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
++
++## /usr/share/phpmyadmin/.htaccess
++AuthType Basic
++AuthName "Restricted Files"
++AuthUserFile /etc/phpmyadmin/.htpasswd
++Require valid-user
++
++sudo htpasswd -c /etc/phpmyadmin/.htpasswd username
++sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser
++
++# https://domain_name_or_IP/phpmyadmin
++```
++
+ ## 18.04
+
+ * cgroup v2
+diff --git a/ML/TensorFlow/EffectiveTensorFlow b/ML/TensorFlow/EffectiveTensorFlow
+new file mode 160000
+index 0000000..b5c1939
+--- /dev/null
++++ b/ML/TensorFlow/EffectiveTensorFlow
+@@ -0,0 +1 @@
++Subproject commit b5c1939a931f1a8393e939bb4df8e0a34d69a66c
+diff --git a/ML/TensorFlow.md b/ML/TensorFlow/TensorFlow.md
+similarity index 88%
+rename from ML/TensorFlow.md
+rename to ML/TensorFlow/TensorFlow.md
+index 12f800e..c298025 100644
+--- a/ML/TensorFlow.md
++++ b/ML/TensorFlow/TensorFlow.md
+@@ -19,8 +19,10 @@ virtualenv my-venv
+ source my-venv/bin/activate
+ pip install IPython
+ ```
+-## 仓库
++
++## 参考
+
+ * [aymericdamien/TensorFlow-Examples](https://github.com/aymericdamien/TensorFlow-Examples):TensorFlow Tutorial and Examples for Beginners with Latest APIs https://tensorflow.org
+ * [TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
+ * [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow):Computation using data flow graphs for scalable machine learning http://tensorflow.org
++* [vahidk/EffectiveTensorflow](https://github.com/vahidk/EffectiveTensorflow):TensorFlow tutorials and best practices. https://twitter.com/VahidK
+diff --git a/WEB/Socket.md b/OS/Socket.md
+similarity index 52%
+rename from WEB/Socket.md
+rename to OS/Socket.md
+index c23be1a..54029ed 100644
+--- a/WEB/Socket.md
++++ b/OS/Socket.md
+@@ -8,6 +8,24 @@ Socket利用网间网通信设施实现进程通信，但它对通信设施的
+ 多个TCP连接或多个应用程序进程可能需要通过同一个 TCP协议端口传输数据。
+ 为了区别不同的应用程序进程和连接，许多计算机操作系统为应用程序与TCP／IP协议交互提供了套接字(Socket)接口。应 用层可以和传输层通过Socket接口，区分来自不同应用程序进程或网络连接的通信，实现数据传输的并发服务。
+
++
++## 原理
++
++* 域Socket：“Unix domain socket 或者 IPCsocket 是一种终端，可以使同一台操作系统上的两个或多个进程进行数据通信。
++* 与管道相比，Unix domain sockets 既可以使用字节流数和数据队列，而管道通信则只能通过字节流。
++* Unix domain sockets的接口和Internet socket很像，但它不使用网络底层协议来通信。
++* Unix domain socket 的功能是POSIX操作系统里的一种组件。
++* Unix domain sockets 使用系统文件的地址来作为自己的身份。它可以被系统进程引用。所以两个进程可以同时打开一个Unix domain sockets来进行通信。不过这种通信方式是发生在系统内核里而不会在网络里传播。
++* These are secure in that they are file-based and can't be read by remote servers. We can further use linux permission to set who can read and write to this socket file.
++
++## Unix Socket vs Tcp Socket
++
++* unix socket减少了不必要的tcp开销，而tcp需要经过loopback，还要申请临时端口和tcp相关资源。
++* unix socket高并发时候不稳定，连接数爆发时，会产生大量的长时缓存，在没有面向连接协议的支撑下，大数据包可能会直接出错不返回异常。
++* tcp这样的面向连接的协议，多少可以保证通信的正确性和完整性。
++
++![Unix_Socket_Tcp_Socket](../static/tcp-socket-or-unix-domain-socket1.png "Unix_Socket_Tcp_Socket")
++
+ ## 过程
+
+ 建立Socket连接至少需要一对套接字，其中一个运行于客户端，称为ClientSocket ，另一个运行于服务器端，称为ServerSocket 。
+@@ -67,131 +85,4 @@ int close(int fd);
+
+ http://blog.csdn.net/dragonyangang/article/details/77937042
+
+-
+ 服务在连接前监听，客户端主动发起连接，就着点区别。连接上后，两者对等
+-
+-
+-# WebSocket
+-
+-WebSocket是HTML5出的东西（协议），也就是说HTTP协议没有变化，或者说没关系，但HTTP是不支持持久连接的（长连接，循环连接的不算）首先HTTP有1.1和1.0之说，也就是所谓的keep-alive，把多个HTTP请求合并为一个，但是Websocket其实是一个新协议，跟HTTP协议基本没有关系，只是为了兼容现有浏览器的握手规范而已，也就是说它是HTTP协议上的一种补充
+-
+-Websocket是一个持久化的协议，相对于HTTP这种非持久的协议来说。简单的举个例子吧，用目前应用比较广泛的PHP生命周期来解释。1) HTTP的生命周期通过Request来界定，也就是一个Request 一个Response，那么在HTTP1.0中，这次HTTP请求就结束了。在HTTP1.1中进行了改进，使得有一个keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request，接收多个Response。但是请记住 Request = Response ， 在HTTP中永远是这样，也就是说一个request只能有一个response。而且这个response也是被动的，不能主动发起。
+-
+-首先Websocket是基于HTTP协议的，或者说借用了HTTP的协议来完成一部分握手。
+-
+-```
+-GET /chat HTTP/1.1
+-Host: server.example.com
+-Upgrade: websocket
+-Connection: Upgrade
+-Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
+-Sec-WebSocket-Protocol: chat, superchat
+-Sec-WebSocket-Version: 13
+-Origin: http://example.com
+-```
+-
+-- Sec-WebSocket-Key 是一个Base64 encode的值，这个是浏览器随机生成的，告诉服务器：泥煤，不要忽悠窝，我要验证尼是不是真的是Websocket助理。
+-- Sec_WebSocket-Protocol 是一个用户定义的字符串，用来区分同URL下，不同的服务所需要的协议。
+-- Sec-WebSocket-Version 是告诉服务器所使用的Websocket Draft（协议版本），在最初的时候，Websocket协议还在 Draft 阶段，各种奇奇怪怪的协议都有，而且还有很多期奇奇怪怪不同的东西，现在定为13
+-
+-## 对比
+-
+-- ajax轮询 的原理非常简单，让浏览器隔个几秒就发送一次请求，询问服务器是否有新信息。需要服务器有很快的处理速度和资源。
+-- long poll 其实原理跟 ajax轮询 差不多，都是采用轮询的方式，不过采取的是阻塞模型。需要有很高的并发，
+-
+-- 服务端就可以主动推送信息给客户端啦。只需要经过一次HTTP请求，就可以做到源源不断的信息传送了（在程序设计中，这种设计叫做回调，即：你有信息了再来通知我，而不是我傻乎乎的每次跑来问你）。
+--
+-
+-## 扩展框架
+-
+-### [scaledrone](https://www.scaledrone.com/):实时聊天系统
+-
+-```shell
+-curl -H "Content-Type: application/json" \
+-   -X POST \
+-   -d 'Hello from Scaledrone' \
+-   https://api2.scaledrone.com/KtJ2qzn3CF3svSFe/notifications/publish
+-```
+-
+-## 扩展
+-
+-* [websockets/ws](https://github.com/websockets/ws):Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js
+-* [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)
+-* [细说WebSocket - Node篇](https://juejin.im/entry/5a012eab518825297a0e27f0)
+-
+-# Websocket
+-
+-websocket通信协议实现的是基于浏览器的原生socket，这样原先只有在c/s模式下的大量开发模式都可以搬到web上来了，基本就是通过浏览器的支持在web上实现了与服务器端的socket通信。
+-
+-* HTTP1.0：生命周期通过Request来界定
+-* HTTP1.1：keep-alive，在一个HTTP连接中，可以发送多个Request，接收多个Response
+-    非持久性
+-    同步有延迟
+-    消耗资源
+-    无状态协议。
+-    被动性
+-* HTML5的新规范
+-    * Websocket是一个持久化网络通信的协议
+-    * 一次HTTP握手，所以说整个通讯过程是建立在一次连接/状态中.有更加轻量级的头，减少数据传送量
+-    * 可以用于绕过大多数防火墙的限制
+-    * 服务器主动推送信息
+-    * 实现实时信息传递
+-    * 双通道
+-    * multiplexing
+-
+-
+-
+-```
+-GET /chat HTTP/1.1
+-Host: server.example.com
+-Upgrade: websocket  # 协议类型
+-Connection: Upgrade
+-Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw== # 浏览器随机生成Base64 encode的值
+-Sec-WebSocket-Protocol: chat, superchat # 用户定义的字符串，用来区分同URL下，不同的服务所需要的协议
+-Sec-WebSocket-Version: 13
+-Origin: http://example.com
+-```
+-
+-```
+-HTTP/1.1 101 Switching Protocols
+-Upgrade: websocket
+-Connection: Upgrade
+-Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
+-Sec-WebSocket-Protocol: chat
+-```
+-
+-
+-```js
+-if('WebSocket' in window){
+-    // 创建websocket实例
+-    var socket = new WebSocket('ws://localhost:8080');
+-
+-    //打开
+-    socket.onopen = function(event)
+-    {
+-    // 发送
+-    socket.send('I am the client and I\'m listening!');
+-
+-    // 监听
+-    socket.onmessage = function(event) {
+-    console.log('Client received a message',event);
+-    };
+-
+-    // 关闭监听
+-    socket.onclose = function(event) {
+-    console.log('Client notified socket has closed',event);
+-    };
+-
+-    // 关闭
+-    //socket.close() };
+-}else{
+-    alert('本浏览器不支持WebSocket哦~');
+-}
+-```
+-
+-* polling :是指从客户端（一般就是浏览器）不断主动的向服务器发 HTTP 请求查询是否有新数据 。
+-
+-## 工具
+-
+-* [uNetworking/uWebSockets](https://github.com/uNetworking/uWebSockets):Tiny WebSockets
+-
+diff --git a/Ops/Nginx.md b/Ops/Nginx.md
+index b44d9d7..fb2d652 100644
+--- a/Ops/Nginx.md
++++ b/Ops/Nginx.md
+@@ -147,10 +147,20 @@ events {
+
+ * windows调用php-cgi启动服务
+ * linux通过转交服务给php-fpm处理:配置www.conf服务转交TCP socket或Unix Socket
++    - Unix Sockets
++        + Nginx is run as user/group www-data. PHP-FPM's unix socket therefore needs to be readable/writable by this user.
++        + If we change the Unix socket owner to user/group ubuntu, Nginx will then return a bad gateway error, as it can no longer communicate to the socket file. We would have to change Nginx to run as user "ubuntu" as well, or set the socket file to allow "other" (non user nor group) to be read/written to, which is insecure.
++    - TCP Sockets
++        + This makes PHP-FPM able to be listened to by remote servers
++        + listen.allowed_clients = 127.0.0.1
+
+ 提供http服务相关的一些配置参数，如：是否使用keepalive，是否使用gzip进行压缩
+
+ ```sh
++touch php7.0-fpm.sock
++chown www-data:www-data php7.0-fpm.sock
++chmod 777 php7.0-fpm.sock
++
+ # 设定http服务器，利用它的反向代理功能实现负载均衡支持
+ http {
+     # 设定负载均衡的服务器列表 weigth参数表示权值，权值越高被分配到的几率越大
+diff --git a/WEB/Web Socket.md b/WEB/Web Socket.md
+new file mode 100644
+index 0000000..daba13a
+--- /dev/null
++++ b/WEB/Web Socket.md
+@@ -0,0 +1,122 @@
++# WebSocket
++
++WebSocket是HTML5出的东西（协议），也就是说HTTP协议没有变化，或者说没关系，但HTTP是不支持持久连接的（长连接，循环连接的不算）首先HTTP有1.1和1.0之说，也就是所谓的keep-alive，把多个HTTP请求合并为一个，但是Websocket其实是一个新协议，跟HTTP协议基本没有关系，只是为了兼容现有浏览器的握手规范而已，也就是说它是HTTP协议上的一种补充
++
++Websocket是一个持久化的协议，相对于HTTP这种非持久的协议来说。简单的举个例子吧，用目前应用比较广泛的PHP生命周期来解释。1) HTTP的生命周期通过Request来界定，也就是一个Request 一个Response，那么在HTTP1.0中，这次HTTP请求就结束了。在HTTP1.1中进行了改进，使得有一个keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request，接收多个Response。但是请记住 Request = Response ， 在HTTP中永远是这样，也就是说一个request只能有一个response。而且这个response也是被动的，不能主动发起。
++
++首先Websocket是基于HTTP协议的，或者说借用了HTTP的协议来完成一部分握手。
++
++```
++GET /chat HTTP/1.1
++Host: server.example.com
++Upgrade: websocket
++Connection: Upgrade
++Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
++Sec-WebSocket-Protocol: chat, superchat
++Sec-WebSocket-Version: 13
++Origin: http://example.com
++```
++
++- Sec-WebSocket-Key 是一个Base64 encode的值，这个是浏览器随机生成的，告诉服务器：泥煤，不要忽悠窝，我要验证尼是不是真的是Websocket助理。
++- Sec_WebSocket-Protocol 是一个用户定义的字符串，用来区分同URL下，不同的服务所需要的协议。
++- Sec-WebSocket-Version 是告诉服务器所使用的Websocket Draft（协议版本），在最初的时候，Websocket协议还在 Draft 阶段，各种奇奇怪怪的协议都有，而且还有很多期奇奇怪怪不同的东西，现在定为13
++
++## 对比
++
++- ajax轮询 的原理非常简单，让浏览器隔个几秒就发送一次请求，询问服务器是否有新信息。需要服务器有很快的处理速度和资源。
++- long poll 其实原理跟 ajax轮询 差不多，都是采用轮询的方式，不过采取的是阻塞模型。需要有很高的并发，
++
++- 服务端就可以主动推送信息给客户端啦。只需要经过一次HTTP请求，就可以做到源源不断的信息传送了（在程序设计中，这种设计叫做回调，即：你有信息了再来通知我，而不是我傻乎乎的每次跑来问你）。
++
++## 扩展框架
++
++### [scaledrone](https://www.scaledrone.com/):实时聊天系统
++
++```shell
++curl -H "Content-Type: application/json" \
++   -X POST \
++   -d 'Hello from Scaledrone' \
++   https://api2.scaledrone.com/KtJ2qzn3CF3svSFe/notifications/publish
++```
++
++## 扩展
++
++* [websockets/ws](https://github.com/websockets/ws):Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js
++* [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)
++* [细说WebSocket - Node篇](https://juejin.im/entry/5a012eab518825297a0e27f0)
++
++# Websocket
++
++websocket通信协议实现的是基于浏览器的原生socket，这样原先只有在c/s模式下的大量开发模式都可以搬到web上来了，基本就是通过浏览器的支持在web上实现了与服务器端的socket通信。
++
++* HTTP1.0：生命周期通过Request来界定
++* HTTP1.1：keep-alive，在一个HTTP连接中，可以发送多个Request，接收多个Response
++    非持久性
++    同步有延迟
++    消耗资源
++    无状态协议。
++    被动性
++* HTML5的新规范
++    * Websocket是一个持久化网络通信的协议
++    * 一次HTTP握手，所以说整个通讯过程是建立在一次连接/状态中.有更加轻量级的头，减少数据传送量
++    * 可以用于绕过大多数防火墙的限制
++    * 服务器主动推送信息
++    * 实现实时信息传递
++    * 双通道
++    * multiplexing
++
++
++
++```
++GET /chat HTTP/1.1
++Host: server.example.com
++Upgrade: websocket  # 协议类型
++Connection: Upgrade
++Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw== # 浏览器随机生成Base64 encode的值
++Sec-WebSocket-Protocol: chat, superchat # 用户定义的字符串，用来区分同URL下，不同的服务所需要的协议
++Sec-WebSocket-Version: 13
++Origin: http://example.com
++```
++
++```
++HTTP/1.1 101 Switching Protocols
++Upgrade: websocket
++Connection: Upgrade
++Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
++Sec-WebSocket-Protocol: chat
++```
++
++
++```js
++if('WebSocket' in window){
++    // 创建websocket实例
++    var socket = new WebSocket('ws://localhost:8080');
++
++    //打开
++    socket.onopen = function(event)
++    {
++    // 发送
++    socket.send('I am the client and I\'m listening!');
++
++    // 监听
++    socket.onmessage = function(event) {
++    console.log('Client received a message',event);
++    };
++
++    // 关闭监听
++    socket.onclose = function(event) {
++    console.log('Client notified socket has closed',event);
++    };
++
++    // 关闭
++    //socket.close() };
++}else{
++    alert('本浏览器不支持WebSocket哦~');
++}
++```
++
++* polling :是指从客户端（一般就是浏览器）不断主动的向服务器发 HTTP 请求查询是否有新数据 。
++
++## 工具
++
++* [uNetworking/uWebSockets](https://github.com/uNetworking/uWebSockets):Tiny WebSockets
+diff --git a/WEB/Web-Server.md b/WEB/Web-Server.md
+index 26a4d63..a17da01 100644
+--- a/WEB/Web-Server.md
++++ b/WEB/Web-Server.md
+@@ -139,3 +139,5 @@ www.baidu.com 通过dig +trace
+ ## 工具
+
+ * [sullo/nikto](https://github.com/sullo/nikto):Nikto web server scanner
++* [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh):A pure Unix shell script implementing ACME client protocol https://acme.sh
++* [snail007/goproxy](https://github.com/snail007/goproxy):Proxy is a high performance HTTP(S), websocket, TCP, UDP,Secure DNS, Socks5 proxy server implemented by golang. Now, it supports chain-style proxies,nat forwarding in different lan,TCP/UDP port forwarding, SSH forwarding.Proxy是golang实现的高性能http,https,websocket,tcp,防污染DNS,socks5代理服务器,支持内网穿透,链式代理,通讯加密,智能HTTP,SOCKS5代理,域名黑白名单,跨平台,KCP协议支持,集成外部API。
+diff --git a/_static/tcp-socket-or-unix-domain-socket1.png b/_static/tcp-socket-or-unix-domain-socket1.png
+new file mode 100644
+index 0000000..55e86e1
+Binary files /dev/null and b/_static/tcp-socket-or-unix-domain-socket1.png differ

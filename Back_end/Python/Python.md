@@ -36,7 +36,7 @@ Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编
 * 安装的3.6版本：/usr/local/Cellar/python3/3.6.4_2
 * Anaconda :/Users/henry/anaconda/bin
 
-```shell
+```sh
 brew install python3
 
 # 修改 .bash_profil文件，先搜索尾部，找到后停止搜索
@@ -64,13 +64,16 @@ sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.
 vim ~/.bash_profile # (只要能编辑就行) 插入新的Python路径
 
 pip3 install --upgrade pip setuptools wheel
+
+# Ubuntu
+sudo apt-get update
+sudo apt-get install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx
 ```
 
 [Using Python on a Macintosh](https://docs.python.org/3/using/mac.html)
 
-> windows
-
 ```sh
+# windows
 pip install scrapy
 C:\Users\Administrator\AppData\Local\Programs\Python\Python36 # 路径
 pip install pywin32 # No module named win32api
@@ -113,15 +116,16 @@ cat ~/.pyenv/version
 pyenv version
 ```
 
-### 虚拟沙盒virtualenv
+### virtualenv
 
 Virtualenv is a tool that creates an isolated Python environment for each of your projects
 
 ```sh
-pip install virtualenv
+sudo -H pip3 install --upgrade pip
+sudo -H pip3 install virtualenv
 
 cd myproject/
-virtualenv venv
+virtualenv venv # create a Python virtual environment
 virtualenv --no-site-packages app_env
 virtualenv venv --system-site-packages # also inherit globally installed packages
 
@@ -1342,3 +1346,4 @@ CMD ["python3"]
 * [nteract/nteract](https://github.com/nteract/nteract): 📘 Desktop notebook app + packages https://nteract.io
 * [locustio/locust](https://github.com/locustio/locust):Scalable user load testing tool written in Python http://locust.io
 * [agronholm/apscheduler](https://github.com/agronholm/apscheduler):Task scheduling library for Python
+* [benfred/py-spy](https://github.com/benfred/py-spy):Sampling profiler for Python programs

@@ -225,3 +225,7 @@
 ## Docker
 
 * [zzswang/docker-nginx-react](https://github.com/zzswang/docker-nginx-react):Run react single page app within a nginx server
+
+## Cookies
+
+* [reactivestack/cookies](https://github.com/reactivestack/cookies):Load and save cookies within your React application
