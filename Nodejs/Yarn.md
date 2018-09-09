@@ -44,3 +44,9 @@ yarn config set disturl https://npm.taobao.org/dist --global
 ## 參考
 
 * [中文文档](https://yarnpkg.com/zh-Hans/)
+
+## 问题
+
+> The engine "node" is incompatible with this module. Expected version ">=4 <=9".
+
+ yarn config set ignore-engines true

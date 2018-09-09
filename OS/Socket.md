@@ -7,7 +7,7 @@ Socket利用网间网通信设施实现进程通信，但它对通信设施的�
 应用层通过传输层进行数据通信时，TCP会遇到同时为多个应用程序进程提供并发服务的问题。
 多个TCP连接或多个应用程序进程可能需要通过同一个 TCP协议端口传输数据。
 为了区别不同的应用程序进程和连接，许多计算机操作系统为应用程序与TCP／IP协议交互提供了套接字(Socket)接口。应 用层可以和传输层通过Socket接口，区分来自不同应用程序进程或网络连接的通信，实现数据传输的并发服务。
-
+Socket 可以被定义描述为两个应用通信通道的端点。一个 Socket 端点可以用 Socket 地址来描述， Socket 地址结构由 IP 地址，端口和使用协议组成（ TCP or UDP ）。http协议可以通过socket实现，socket在传输层上实现。从这个角度来说，socket介于应用层和传输层之间。但是socket作为一种进程通信机制，操作系统分配唯一一个socket号，是依赖于通信协议的，但是这个通信协议不仅仅是 tcp或udp，也可以是其它协议。
 
 ## 原理
 
@@ -20,11 +20,14 @@ Socket利用网间网通信设施实现进程通信，但它对通信设施的�
 
 ## Unix Socket vs Tcp Socket
 
+* 不会走到TCP 那层，直接以文件形式，以stream socket通讯。
 * unix socket减少了不必要的tcp开销，而tcp需要经过loopback，还要申请临时端口和tcp相关资源。
 * unix socket高并发时候不稳定，连接数爆发时，会产生大量的长时缓存，在没有面向连接协议的支撑下，大数据包可能会直接出错不返回异常。
 * tcp这样的面向连接的协议，多少可以保证通信的正确性和完整性。
+* TCP socket,则需要走到IP层
 
 ![Unix_Socket_Tcp_Socket](../static/tcp-socket-or-unix-domain-socket1.png "Unix_Socket_Tcp_Socket")
+![socket2](../static/socket2.png "socket2")
 
 ## 过程
 

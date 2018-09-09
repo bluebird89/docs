@@ -42,14 +42,6 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 
 看带宽，一般来说nginx做负载比较简单，但单台服务器的带宽毕竟有限，1g了不起了，如果超过这个，就得用dns了，分片解析到一堆nginx，然后后面再挂负载均衡。在nginx流行之前，dns解析用的较多，主要是apache太弱了，以前相当于1级负载，现在中间加了一层nginx，2层结构，扩展更方便。另外业务也可以横向区分的，比如淘宝的图片服务器，除了负载均衡，还有cdn。
 
-<https://zhuanlan.zhihu.com/p/22360384>
-
-《构建高性能Web站点》第12章 web负载均衡
-
-《大型网站技术架构：核心原理与案例分析》 6.2 应用服务器集群的伸缩性设计
-
-<http://tips.codekiller.cn/2017/05/17/maglev_describe/>
-
 - HTTP重定向
 - DNS负载均衡：NS服务器便充当负载均衡调度器。DNS节省了所谓的主站点，DNS服务器已经充当了主站点的职能。常见的策略是对多个A记录进行RR(轮询)
 - 反向代理负载均衡：核心工作是转发HTTP，它工作在HTTP层面，因此，基于反向代理的负载均衡也称为七层负载均衡。任何对于实际服务器的HTTP请求都必须经过调度器；调度器必须等待实际服务器的HTTP响应，并将它反馈给用户。
@@ -210,3 +202,11 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 
 ## 统计
 * [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
+
+<https://zhuanlan.zhihu.com/p/22360384>
+
+《构建高性能Web站点》第12章 web负载均衡
+
+《大型网站技术架构：核心原理与案例分析》 6.2 应用服务器集群的伸缩性设计
+
+<http://tips.codekiller.cn/2017/05/17/maglev_describe/>

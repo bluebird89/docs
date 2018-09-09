@@ -160,7 +160,8 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 
 * [Vue.js——60分钟快速入门](http://www.cnblogs.com/keepfool/p/5619070.html)
 * [vuejs/vue-docs-zh-cn](https://github.com/vuejs/vue-docs-zh-cn)
-* [官方文档](https://cn.vuejs.org/v2/guide/) [文档](https://vuejs.org/v2/guide/)
+* [官方文档](https://cn.vuejs.org/v2/guide/)
+* [文档](https://vuejs.org/v2/guide/)
 * [vuejs/awesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
 * [Vue2+VueRouter2+webpack 构建项目实战](http://blog.csdn.net/fungleo/article/details/53171052)
 * [Vue 脱坑记 - 查漏补缺](https://juejin.im/post/59fa9257f265da43062a1b0e)
@@ -168,7 +169,6 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [JavaScript 进阶之 Vue.js + Node.js 入门实战开发](http://blog.csdn.net/gitchat/article/details/77931664)
 * [HcySunYang/vue-design](https://github.com/HcySunYang/vue-design):📖逐行级别的源码分析 http://hcysun.me/vue-design/
 * [Vue.js 技术揭秘](https://ustbhuangyi.github.io/vue-analysis/)
-* [](link)
 * http://www.cnblogs.com/keepfool/
 
 ## 项目
@@ -189,6 +189,8 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [codecasts/spa-starter-kit](https://github.com/codecasts/spa-starter-kit):A highly opinionated starter kit for building Single Page Applications with Laravel and Vue.js
 * [Plortinus/vue-multiple-pages](https://github.com/Plortinus/vue-multiple-pages):A modern Vue.js multiple pages cli which uses Vue 2, Webpack3, and Element UI （Thanks for your star）(Vue2、ElementUI多页应用脚手架)
 * [KieSun/Vue-StudyMaps](https://github.com/KieSun/Vue-StudyMaps):使用 Vue.js 开发的聚合应用。通过爬虫抓取平时浏览的网站，省去逐个点开网页的时间。
+* [vue-storefront](https://github.com/DivanteLtd/vue-storefront)
+* [Eagle.js](https://github.com/Zulko/eagle.js)
 
 ## 工具
 
@@ -199,6 +201,10 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 ### [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
 
 🛠️ Standard Tooling for Vue.js Development https://cli.vuejs.org/
+
+```sh
+npm install -g @vue/cli
+```
 
 ## UI
 

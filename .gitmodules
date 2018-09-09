@@ -205,3 +205,6 @@
 [submodule "Back_end/Python/awesome-django"]
 	path = Back_end/Python/awesome-django
 	url = git@github.com:rosarior/awesome-django.git
+[submodule "Ops/Docker/awesome-kubernates"]
+	path = Ops/Docker/awesome-kubernates
+	url = git@github.com:ramitsurana/awesome-kubernetes.git

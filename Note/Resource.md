@@ -276,6 +276,7 @@
 -   [lifesinger](https://github.com/lifesinger/blog):岁月如歌
 -   [oldratlee/translations](https://github.com/oldratlee/translations):🐼 Chinese translations for classic IT resources https://github.com/oldratlee/translations/blob/master/README.md
 * [ProtoTeam/blog](https://github.com/ProtoTeam/blog):蚂蚁数据体验技术团队的文章仓库
+* [zenany/weekly](https://github.com/zenany/weekly):汇总平时看到的好文章，技术、产品、管理均有，尽量保证一周汇总一篇
 
 ## Podcast
 
