@@ -46,7 +46,7 @@ export PATH="/System/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
 export PATH="/usr/local/Cellar/python/3.6.5/bin:$PATH"
 alias python="/usr/local/Cellar/python/3.6.5/bin/python3.6"
 
-export PATH="/Users/henry/anaconda/bin:$PATH" # 优先级最高
+export PATH="/Users/henry/anaconda/bin:$PATH"  # 优先级最高
 
 sudo rm -R /System/Library/Frameworks/Python.framework/Versions/2.7
 sudo mv /Library/Frameworks/Python.framework/Versions/3.6 /System/Library/Frameworks/Python.framework/Versions
@@ -300,6 +300,10 @@ not 1 > 2
 int('12345', base=8) # 5349
 int('12345', 16) # 74565
 
+# a = 4
+a = 2 ** 2
+
+# list
 classmates = ['Michael', 'Bob', 'Tracy']
 classmates[0] #  'Michael'  获取元素
 classmates[-1] # 'Tracy'

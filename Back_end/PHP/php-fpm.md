@@ -567,6 +567,37 @@ pm.max_spare_servers=32
 
 用到一些 PHP 的第三方库，这些第三方库经常存在内存泄漏问题，如果不定期重启 PHP-CGI 进程，势必造成内存使用量不断增长。因此 PHP-FPM 作为 PHP-CGI 的管理器，提供了这么一项监控功能，对请求达到指定次数的 PHP-CGI 进程进行重启，保证内存使用量不增长。
 
+
+## 连接方式
+
+与CPU 频率缩放问题一样？（CPUFreq governor）这些设置在类 Unix 系统和 Windows 上是有效的，可以通过修改 CPU governor，将其从 ondemand 修改为 performance 来提高性能并加快系统的响应。
+
+* Governor = ondemand：根据当前负荷动态调整 CPU 频率。先将 CPU 频率调整至最大，然后随着空闲时间的增加而缩小频率。
+* Governor = conservative：根据当前负荷动态调整频率。比设置成 ondemand 更加缓慢。
+* Governor = performance：始终以最大频率运行 CPU。
+
+CPU Governor 的 performance 设置是一个非常安全的性能提升方式，因为它能完美的使用你服务器 CPU 的全部性能。唯一需要考虑的因素就是一些诸如散热、电池寿命（笔记本电脑）和一些由 CPU 始终保持 100% 所带来的一些副作用。一旦设置为 performance，那么它确实是你 CPU 最快的设置。
+
+static 设置取决于你服务器有多少闲置内存。大多数情况下，如果你服务器的内存不足，那么 PM 设置成 ondemand 或 dynamic 将是更好的选择。
+但是，一旦你有可用的闲置内存，那么把 PM 设置成 static 的最大值将减少许多 PHP 进程管理器（PM）所带来的开销。
+换句话说，你应该在没有内存不足和缓存压力的情况下使用 pm.static 来设置 PHP-FPM 进程的最大数量。此外，也不能影响到 CUP 的使用和其他待处理的 PHP-FPM 操作。
+
+当流量波动比较大的时候，，PHP-FPM 的 ondemand 和 dynamic 会因为固有开销而限制吞吐量。 您需要了解您的系统并设置 PHP-FPM 进程数，以匹配服务器的最大容量。
+
+从 pm.max_children 开始，根据 pm dynamic 或 ondemand 的最大使用情况去设置
+
+在 pm static 模式下，因为您将所有内容都保存在内存中，所以随着时间的推移，流量峰值会对 CPU 造成比较小的峰值，并且您的服务器负载和 CPU 平均值将变得更加平滑。 每个需要手动调整的 PHP-FPM 进程数的平均大小会有所不同
+
+* pm = dynamic
+    - 子进程的数量是根据以下指令来动态生成的：pm.max_children, pm.start_servers, pm.min_spare_servers, pm.max_spare_servers.
+    - dynamic模式，可能会出现mysql连接数被占满的情况，这也跟mysql服务的连接超时时间有关
+* pm = ondemand：在服务启动的时候根据 pm.start_servers 指令生成进程，而非动态生成。
+* pm = static：子进程的数量是由 pm.max_children 指令来确定的。
+    - static 设置取决于你服务器有多少闲置内存
+* 短连接：应对并发消耗过多的资源开销
+* 长连接：不同请求会使用同一个连接句柄
+
+
 ## php-fpm 状态查看
 
 server添加
@@ -574,6 +605,7 @@ server添加
 ```
 location ~ ^/status$ {
     include fastcgi_params;
+     fastcgi_split_path_info ^(.+\.php)(/.+)$; # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
     fastcgi_pass unix:/usr/local/var/run/php-fpm.sock;
     fastcgi_param SCRIPT_FILENAME $fastcgi_script_name;
 }

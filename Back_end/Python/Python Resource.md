@@ -23,6 +23,7 @@
 * Curdling：管理 Python 包的命令行工具。[官网](http://clarete.li/curdling/)
 * wheel：Python 分发的新标准，意在取代 eggs。[官网](http://pythonwheels.com/)
 * Pipenv
+* PBR（https://docs.openstack.org/pbr/latest/）, Python Build Reasonableness 的缩写，是以一致的方式用于管理 Setuptools 包的库。
 
 ## 包仓库
 
@@ -1015,7 +1016,7 @@ MapReduce 框架和库。
 
 * Cython：优化的 Python 静态编译器。使用类型混合使 Python 编译成 C 或 C++ 模块来获得性能的极大提升。[官网](http://cython.org/)
 * PeachPy：嵌入 Python 的 x86-64 汇编器。可以被用作 Python 内联的汇编器或者是独立的汇编器，用于 Windows, Linux, OS X, Native Client 或者 Go 。[官网](https://github.com/Maratyszcza/PeachPy)
-* PyPy：使用 Python 实现的 Python。解释器使用黑魔法加快 Python 运行速度且不需要加入额外的类型信息。[官网](http://pypy.org/)
+* [PyPy](https://pypy.org)：使用 Python 实现的 Python。解释器使用黑魔法加快 Python 运行速度且不需要加入额外的类型信息。[官网](http://pypy.org/)
 * [Pyston](http://hao.jobbole.com/pyston-llvm-jit/)：使用 LLVM 和现代 JIT 技术构建的 Python 实现，目标是为了获得很好的性能。[官网](https://github.com/dropbox/pyston)
 * Stackless Python：一个强化版的 Python。[官网](https://bitbucket.org/stackless-dev/stackless/overview)
 

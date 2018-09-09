@@ -54,11 +54,12 @@ composer init --require="twig/twig:1.*" -n --profile # 显示执行时间
 
 composer search monolog
 compsoer show monolog
+composer clear-cache
 
 composer global require "squizlabs/php_codesniffer=*"
 composer global require friendsofphp/php-cs-fixer
 
-composer install # 使用composer install或者composer update命令将会更新所有的扩展包
+composer install -vvv # 使用composer install或者composer update命令将会更新所有的扩展包
 composer update [packagename]
 composer remove [packagename]
 composer self-update
