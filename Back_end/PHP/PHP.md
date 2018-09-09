@@ -461,6 +461,41 @@ $mergeArr = array_merge($arr1, $arr2);
 $plusArr = $arr1 + $arr2;
 var_dump($mergeArr);
 var_dump($plusArr);
+
+$items = array(
+    [
+        "uid"=>1,
+        "pid"=>0,
+        "views"=>100
+    ],
+    [
+        "uid"=>2,
+        "pid"=>1,
+        "views"=>200
+    ],
+    [
+        "uid"=>3,
+        "pid"=>0,
+        "views"=>300
+    ],
+    [
+        "uid"=>4,
+        "pid"=>0,
+        "views"=>400
+    ],
+    [
+        "uid"=>5,
+        "pid"=>3,
+        "views"=>500
+    ]
+);
+
+array_column($items,'uid'); # [1,2,3,4,5];
+array_column($items,'uid','view'); # [100=>1,200=>2,300=>3,400=>4,500=>5];
+
+array_combine
+
+array_walk(array, funcname)
 ```
 
 #### 运算符

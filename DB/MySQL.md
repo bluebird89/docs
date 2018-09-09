@@ -273,6 +273,7 @@ bind-address = 127.0.0.1
 ```
 
 ```sql
+status # 查看连接信息
 SHOW VARIABLES LIKE "character_set%"; # character_set_client  接受的客户端编码  character_set_result # 返回结果集的编码
 SET character_set_client=GBK; # 不一致的话,修改
 set names gbk # 修改client connection results字符集

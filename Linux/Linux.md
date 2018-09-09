@@ -736,6 +736,7 @@ powertop # Lists processes by their energy consume. It\'s a vital command when y
 nethogs # Lists processes by their network traffic.
 
 top
+top -bn1 | grep php-fpm
 
 htop # Famous process monitor. It has a nice, colorful command-line UI. Some useful keybindings:
 # \ Filter

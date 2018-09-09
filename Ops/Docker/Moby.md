@@ -382,6 +382,8 @@ services:
 * [tobegit3hub/seagull](https://github.com/tobegit3hub/seagull):Friendly Web UI to manage and monitor docker
 * [docker/kitematic](https://github.com/docker/kitematic):Visual Docker Container Management on Mac & Windows https://kitematic.com
 * [v2tec/watchtower](https://github.com/v2tec/watchtower):Automatically update running Docker containers
+* [Docker Machine(https://docs.docker.com/machine/)
+* [docker/cli](https://github.com/docker/cli):The Docker CLI
 
 ## 参考
 
