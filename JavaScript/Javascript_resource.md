@@ -140,6 +140,7 @@
 * [clientIO/joint](https://github.com/clientIO/joint):JavaScript diagramming library http://www.jointjs.com
 * [uber/kepler.gl](https://github.com/uber/kepler.gl):https://uber.github.io/kepler.gl
 * [antvis/f2](https://github.com/antvis/f2):📱📈An elegant, interactive and flexible charting library for mobile. https://antv.alipay.com/zh-cn/f2/3.x/index.html
+* [shzlw/zeu](https://github.com/shzlw/zeu):A JavaScript library for real-time visualization
 
 ## fingerprinting
 
@@ -321,6 +322,7 @@
 ## Markdown
 
 * [hinesboy/mavonEditor](https://github.com/hinesboy/mavonEditor):mavonEditor - A markdown editor based on Vue that supports a variety of personalized features https://md.zhystar.com/
+* [sofish/pen](https://github.com/sofish/pen):enjoy live editing (+markdown) https://sofish.github.io/pen
 
 ## 代码在线分享工具
 
