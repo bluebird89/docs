@@ -1493,6 +1493,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [andersao/laravel-request-logger](https://github.com/andersao/laravel-request-logger):HTTP request logger middleware for Laravel
 * [laravelshift](https://laravelshift.com/):laravel upgrade
 * [Laravel Analyzer](link)
+* [vyuldashev/laravel-queue-rabbitmq](https://github.com/vyuldashev/laravel-queue-rabbitmq):RabbitMQ driver for Laravel Queue
 
 ## 教程
 

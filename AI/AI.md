@@ -33,3 +33,7 @@ TensorFlow 还支持异构设备分布式计算，这意味着它能够在各个
 * 《机器学习实战》  Peter Harrington
 * 《TensorFlow 技术解析与实战》  李嘉璇
 * 《统计学习方法》  李航
+
+## 工具
+
+* [Microsoft/ailab](https://github.com/Microsoft/ailab):Experience, Learn and Code the latest breakthrough innovations with Microsoft AI
