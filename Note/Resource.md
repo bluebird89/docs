@@ -82,11 +82,11 @@
 -   [Paper](http://www.fiftythree.com/):优雅，美观，做笔记，记录灵感
 -   [语雀](https://yuque.com/)
 -   [Google文档](https://docs.google.com/document/u/0/)
--   [腾讯文档](https://docs.qq.com/)
+-   [腾讯文档](https://docs.qq.com/)：对表Google docs
 -   youdaonote ：格式化笔记
 -   simplenote：简单笔记（无格式）
 -   xmind：结构化整理
--   记录：豆瓣读书、电影评论
+-   豆瓣读：书、电影评论
 -   github：代码的整理
 -   Goole keep
 -   notes
@@ -178,6 +178,7 @@
 -   Teambition:项目管理工具，聊天、文件、看板
 -   Asana asana.com
 -   [meili/TeamTalk](https://github.com/meili/TeamTalk):TeamTalk is a solution for enterprise IM
+- [klauscfhq/taskbook](https://github.com/klauscfhq/taskbook):📓 Tasks, boards & notes for the command-line habitat
 
 ## 语言
 
@@ -281,6 +282,7 @@
 -   [oldratlee/translations](https://github.com/oldratlee/translations):🐼 Chinese translations for classic IT resources https://github.com/oldratlee/translations/blob/master/README.md
 * [ProtoTeam/blog](https://github.com/ProtoTeam/blog):蚂蚁数据体验技术团队的文章仓库
 * [zenany/weekly](https://github.com/zenany/weekly):汇总平时看到的好文章，技术、产品、管理均有，尽量保证一周汇总一篇
+* [thepracticaldev/dev.to](https://github.com/thepracticaldev/dev.to):Where programmers share ideas and help each other grow https://dev.to
 
 ## Podcast
 
