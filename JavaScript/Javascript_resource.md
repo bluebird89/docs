@@ -16,6 +16,7 @@
 ### Nodejs
 
 * 框架：Sails.js
+* [fastify/fastify](https://github.com/fastify/fastify):Fast and low overhead web framework, for Node.js https://www.fastify.io
 
 ### SPA
 
