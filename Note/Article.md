@@ -53,6 +53,7 @@
 > 不知怎么睡着了
 > 梦里花落知多少
 
+
 舒婷 《致橡树》（1977年)
 
 > 我如果爱你，绝不像攀援的凌霄花，借你的高枝炫耀自己；
@@ -72,6 +73,7 @@
 > 仿佛永远分离，却又终身相依。
 > 这才是伟大的爱情，坚贞就在这里：
 > 爱，不仅爱你伟岸的身躯，也爱你坚持的位置，足下的土地。
+
 
 面朝大海，春暖花开
 
@@ -111,6 +113,24 @@
 > The sixth time when she despised the ugliness of a face, and knew not that it was one of her own masks.
 > And the seventh time when she sang a song of praise, and deemed it a virtue.
 
+
+    “孤”“独”二字 拆字新解 林语堂
+> 稚儿擎瓜柳棚下，细犬逐蝶窄巷中。
+> 人间繁华多笑语，唯我空余两鬓风。
+
+> 风起黄叶落，岸尽秋水长；
+> 孤客马嘶嘶，回望亦枉然。
+
+
+    誓词
+> When love is the way, then no child will go to bed hungry in this world ever again. When love is the way, we will let justice roll down like a mighty stream and righteousness like an everflowing brook. When love is the way, poverty will become history. "
+> “当我们心中有爱，再也不会有孩子忍饥挨饿；当我们心中有爱，我们能让公正似水奔流，正义如泉喷涌；当我们心中有爱，贫穷将会成为历史。”
+
+> I Harry, take you, Meghan, to be my wife, to have and to hold from this day forward; for better, for worse,for richer,for poorer, in sickness and in health, to love and to cherish, till death us do part; according to God's holy law. In the presence of God I make this vow.
+> 在上帝的见证下、神的律法的指引下，我，哈里，愿意娶你，梅根，作为我的妻子。从此刻到永远，无论顺境或逆境、富有或贫穷、健康或疾病，我都将爱着你、珍惜你，直到死亡将我们分开。
+
+> I Meghan, take you, Harry, to be my husband, to have and to hold from this day forward; for better,for worse, for richer, for poorer, in sickness and in health, to love and to cherish, till death us do part; according to God’s holy law. In the presence of God I make this vow.
+> 在上帝的见证下、神的律法的指引下，我，梅根，愿意嫁给你，哈里，作为我的丈夫。从此刻到永远，无论顺境或逆境、富有或贫穷、健康或疾病，我都将爱着你、珍惜你，直到死亡将我们分开。
 
 《增广贤文》
 

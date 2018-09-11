@@ -223,3 +223,6 @@
 [submodule "Browser/awesome-chrome-devtools"]
 	path = Browser/awesome-chrome-devtools
 	url = git@github.com:ChromeDevTools/awesome-chrome-devtools.git
+[submodule "Architect/system-design-primer"]
+	path = Architect/system-design-primer
+	url = git@github.com:donnemartin/system-design-primer.git
