@@ -205,4 +205,5 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 * [aalansehaiyang/technology-talk](https://github.com/aalansehaiyang/technology-talk)：汇总java生态圈常用技术框架、开源中间件，系统架构、项目管理、经典架构案例、数据库、常用三方库、线上运维等知识
 - [zhanglei-workspace/shopping-management-system](https://github.com/zhanglei-workspace/shopping-management-system)
 * [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns):Design patterns implemented in Java http://java-design-patterns.com
-* [Java-Interview（Star 19183）](link)
+* [Java-Interview](link)
+* [Java Algorithm And Data Structure Interview Questions and Programs](http://www.codespaghetti.com/java-algorithms-questions/)

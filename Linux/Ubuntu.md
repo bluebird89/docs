@@ -137,6 +137,7 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 * [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
 * [cherrytree](www.giuspen.com/cherrytree/):note
 * [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite
+* [Sayonara Player](https://sayonara-player.com/index.php)
 
 ### 软件安装
 

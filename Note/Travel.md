@@ -11,6 +11,7 @@
     - 罗纳岛
     -  海上要塞Suomenlinna
     -  Nuuksio国家公园
+*  国王花园站（Kungsträdgården）是瑞典首都斯德哥尔摩最深的地铁站
 
 
 ## Airlines

@@ -214,3 +214,12 @@
 [submodule "Interview/Algorithm_Interview_Notes-Chinese"]
 	path = Interview/Algorithm_Interview_Notes-Chinese
 	url = git@github.com:imhuay/Algorithm_Interview_Notes-Chinese.git
+[submodule "Nodejs/node-in-debugging"]
+	path = Nodejs/node-in-debugging
+	url = git@github.com:nswbmw/node-in-debugging.git
+[submodule "Back_end/Go/advanced-go-programming-book"]
+	path = Back_end/Go/advanced-go-programming-book
+	url = git@github.com:chai2010/advanced-go-programming-book.git
+[submodule "Browser/awesome-chrome-devtools"]
+	path = Browser/awesome-chrome-devtools
+	url = git@github.com:ChromeDevTools/awesome-chrome-devtools.git
