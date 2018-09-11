@@ -202,6 +202,7 @@
   - python-prompt-toolkit：一个用于构建强大的交互式命令行程序的库。[官网](https://github.com/jonathanslenders/python-prompt-toolkit)
   - [Pythonpy](http://hao.jobbole.com/pythonpy/)：在命令行中直接执行任何Python指令。[官网](https://github.com/Russell91/pythonpy/wiki)
   - Fire是一个开源的库，可以为任何Python项目自动生成一个CLI
+  - [mkaz/termgraph](https://github.com/mkaz/termgraph):a python command-line tool which draws basic graphs in the terminal
 * 生产力工具
   - aws-cli：Amazon Web Services 的通用命令行界面。[官网](https://github.com/aws/aws-cli)
   - bashplotlib：在终端中进行基本绘图。[官网](https://github.com/glamp/bashplotlib)
@@ -545,11 +546,12 @@ Python实现的数据库。
 
 解析URLs的库
 
-* furl：一个让处理 URL 更简单小型 Python 库。[官网](https://github.com/gruns/furl)
-* purl：一个简单的，不可变的URL类，具有简洁的 API 来进行询问和处理。[官网](https://github.com/codeinthehole/purl)
-* pyshorteners：一个纯 Python URL 缩短库。[官网](https://github.com/ellisonleao/pyshorteners)
-* shorturl：生成短小 URL 和类似 bit.ly 短链的Python 实现。[官网](https://github.com/Alir3z4/python-shorturl)
-* webargs：一个解析 HTTP 请求参数的库，内置对流行 web 框架的支持，包括 Flask, Django, Bottle, Tornado和 Pyramid。[官网](https://github.com/sloria/webargs)
+* [furl](https://github.com/gruns/furl)：一个让处理 URL 更简单小型 Python 库。
+* [purl](https://github.com/codeinthehole/purl)：一个简单的，不可变的URL类，具有简洁的 API 来进行询问和处理。
+* [pyshorteners](https://github.com/ellisonleao/pyshorteners)：一个纯 Python URL 缩短库。
+* [shorturl](https://github.com/Alir3z4/python-shorturl)：生成短小 URL 和类似 bit.ly 短链的Python 实现。
+* [webargs](https://github.com/sloria/webargs)：一个解析 HTTP 请求参数的库，内置对流行 web 框架的支持，包括 Flask, Django, Bottle, Tornado和 Pyramid。
+* [amitt001/pygmy](https://github.com/amitt001/pygmy):An open-source, feature rich & extensible url shortener + analytics written in Python 🍪 https://pygy.co/pygmy
 
 ## HTML处理
 

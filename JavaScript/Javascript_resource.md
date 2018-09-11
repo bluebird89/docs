@@ -263,6 +263,8 @@
 ## Debug
 
 * [GoogleChromeLabs/ndb](https://github.com/GoogleChromeLabs/ndb):ndb is an improved debugging experience for Node.js, enabled by Chrome DevTools
+* [nswbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
+* [zeeshanu/dumper.js](https://github.com/zeeshanu/dumper.js):A better and pretty variable inspector for your Node.js applications
 
 ## NLP
 
@@ -315,6 +317,10 @@
 * [BrainJS/brain.js](https://github.com/BrainJS/brain.js):🤖 Neural networks in JavaScript http://brain.js.org
 * [xviniette/FlappyLearning](https://github.com/xviniette/FlappyLearning):Program learning to play Flappy Bird by machine learning (Neuroevolution)http://xviniette.github.io/FlappyLearning/
 
+## 播放器
+
+* [jwplayer/jwplayer](https://github.com/jwplayer/jwplayer):JW Player is the world's most popular embeddable media player. https://developer.jwplayer.com/
+
 ## css
 
 * [webpack-contrib/mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin):Lightweight CSS extraction plugin
@@ -323,6 +329,10 @@
 
 * [hinesboy/mavonEditor](https://github.com/hinesboy/mavonEditor):mavonEditor - A markdown editor based on Vue that supports a variety of personalized features https://md.zhystar.com/
 * [sofish/pen](https://github.com/sofish/pen):enjoy live editing (+markdown) https://sofish.github.io/pen
+
+## 颜色
+
+* [gka/chroma.js](https://github.com/gka/chroma.js):JavaScript library for all kinds of color manipulations http://gka.github.io/chroma.js
 
 ## 代码在线分享工具
 

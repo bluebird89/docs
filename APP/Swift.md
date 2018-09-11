@@ -10,3 +10,4 @@ The Swift Programming Language https://swift.org/
 ## 参考
 
 * [ipader/SwiftGuide](https://github.com/ipader/SwiftGuide):这份指南汇集了Swift语言主流学习资源，并以开发者的视角整理编排。http://dev.swiftguide.cn
+* [LEARN SWIFT TODAY](https://www.hackingwithswift.com/)
