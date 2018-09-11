@@ -22,3 +22,4 @@ pandoc WEB.md -o web.docx
 ## PPT
 
 * [slideshare](https://www.slideshare.net/):Share what you know and love through presentations, infographics, documents and more
+* [jxnblk/mdx-deck](https://github.com/jxnblk/mdx-deck):MDX-based presentation decks

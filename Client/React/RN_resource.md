@@ -165,7 +165,6 @@
 ## 文件
 
 * [diegomura/react-pdf](https://github.com/diegomura/react-pdf):📄 Create PDF files using React http://react-pdf.diegomura.com/repl
-* [jxnblk/mdx-deck](https://github.com/jxnblk/mdx-deck):MDX-based presentation decks
 
 ## 扩展
 

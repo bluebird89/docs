@@ -208,3 +208,9 @@
 [submodule "Ops/Docker/awesome-kubernates"]
 	path = Ops/Docker/awesome-kubernates
 	url = git@github.com:ramitsurana/awesome-kubernetes.git
+[submodule "Resource/English-level-up-tips-for-Chinese"]
+	path = Resource/English-level-up-tips-for-Chinese
+	url = git@github.com:byoungd/English-level-up-tips-for-Chinese.git
+[submodule "Interview/Algorithm_Interview_Notes-Chinese"]
+	path = Interview/Algorithm_Interview_Notes-Chinese
+	url = git@github.com:imhuay/Algorithm_Interview_Notes-Chinese.git
