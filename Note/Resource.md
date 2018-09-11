@@ -176,7 +176,7 @@
     -   [trello](https://trello.com/)
     -   [Leangoo](https://www.leangoo.com/kanban/board_list)
 -   Teambition:项目管理工具，聊天、文件、看板
--   Asana asana.com
+-   [Asana](asana.com)
 -   [meili/TeamTalk](https://github.com/meili/TeamTalk):TeamTalk is a solution for enterprise IM
 - [klauscfhq/taskbook](https://github.com/klauscfhq/taskbook):📓 Tasks, boards & notes for the command-line habitat
 
@@ -214,10 +214,14 @@
 -   Brackets
 -   Atom
 
-### 表单
+## 表单
 
 -   金数据 jinshuju.net
 -   MailChimp mailchimp.com
+
+## 社交
+
+* [sindresorhus/caprine](https://github.com/sindresorhus/caprine):Elegant Facebook Messenger desktop app https://sindresorhus.com/caprine
 
 ## 游戏
 
