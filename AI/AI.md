@@ -37,3 +37,4 @@ TensorFlow 还支持异构设备分布式计算，这意味着它能够在各个
 ## 工具
 
 * [Microsoft/ailab](https://github.com/Microsoft/ailab):Experience, Learn and Code the latest breakthrough innovations with Microsoft AI
+* [apachecn/AiLearning](https://github.com/apachecn/AiLearning):AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - DL、自然语言处理 NLP http://ailearning.apachecn.org/

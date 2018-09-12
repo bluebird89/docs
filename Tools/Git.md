@@ -602,7 +602,6 @@ git archive
 ## GitHub
 
 
-
 ## cherry-pick
 
 从develop分支新开的分支fromdevelop-01，然后commit两次，这时候develop分支只需要第二次提交的信息，步骤：
@@ -1375,6 +1374,8 @@ chown -R henry:henry .git/objects
 * [jesseduffield/lazygit](https://github.com/jesseduffield/lazygit):simple terminal UI for git commands
 * [isomorphic-git/isomorphic-git](https://github.com/isomorphic-git/isomorphic-git):A pure JavaScript implementation of git for node and browsers! https://isomorphic-git.org/
 * [Fakerr/git-recall](https://github.com/Fakerr/git-recall):An interactive way to peruse your git history from the terminal
+* [rgburke/grv](https://github.com/rgburke/grv):GRV is a terminal interface for viewing git repositories
+* [magit/magit](https://github.com/magit/magit):It's Magit! A Git porcelain inside Emacs. https://magit.vc
 
 ## 参考
 

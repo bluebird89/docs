@@ -53,3 +53,7 @@ if ($tmpstr==$signature) {
 ## UI
 
 * [wepayui/wepayui](https://github.com/wepayui/wepayui):微信支付场景化组件 https://wepayui.github.io
+
+## 客户端
+
+* [trazyn/weweChat](https://github.com/trazyn/weweChat):💬 Unofficial WeChat client built with React, MobX and Electron.
