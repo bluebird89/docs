@@ -356,6 +356,10 @@
 * [alsotang/node-lessons](https://github.com/alsotang/node-lessons):📕《Node.js 包教不包会》 by alsotang
 * [node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
 
+## highlighter
+
+* [highlightjs/highlight.js](https://github.com/highlightjs/highlight.js):Javascript syntax highlighter https://highlightjs.org/
+
 ## 安全
 
 * [leizongmin/js-xss](https://github.com/leizongmin/js-xss):Sanitize untrusted HTML (to prevent XSS) with a configuration specified by a Whitelist http://jsxss.com
