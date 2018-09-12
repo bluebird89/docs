@@ -41,6 +41,7 @@ npm run serve
 * [almasaeed2010/AdminLTE](https://github.com/almasaeed2010/AdminLTE):AdminLTE - Free Premium Admin control Panel Theme Based On Bootstrap 3.x https://adminlte.io
 * [creativetimofficial/material-dashboard](https://github.com/creativetimofficial/material-dashboard):Material Dashboard - Open Source Bootstrap 4 Material Design Admin https://demos.creative-tim.com/material-dashboard/examples/dashboard.html
 * [mgbq/nx-admin](https://github.com/mgbq/nx-admin):👍 A magical 🐮 ⚔ vue admin，
+* [misterGF/CoPilot](https://github.com/misterGF/CoPilot):Responsive Bootstrap 3 Admin Template based on AdminLTE with vue.js https://copilot.misterGF.io
 
 ## UI
 
