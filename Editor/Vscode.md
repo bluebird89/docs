@@ -207,6 +207,7 @@ code --disable-extensions . # disable all extensions
 -   https://code.visualstudio.com/
 -   [octref/polacode](https://github.com/octref/polacode):📸 Polaroid for your code
 -   vscode-pandoc:文档生成
+-   [shanalikhan/code-settings-sync](https://github.com/shanalikhan/code-settings-sync):🌴💪 Synchronize your Visual Studio Code Settings Across Multiple Machines using Github GIST 💪🌴
 
 ## 參考
 

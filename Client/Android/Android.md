@@ -87,6 +87,7 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 
 * [square/retrofit](https://github.com/square/retrofit):Type-safe HTTP client for Android and Java by Square, Inc. http://square.github.io/retrofit/
 * [JakeWharton/butterknife](https://github.com/JakeWharton/butterknife):Bind Android views and callbacks to fields and methods. http://jakewharton.github.io/butterkn…
+* [robolectric/robolectric](https://github.com/robolectric/robolectric):Android Unit Testing Framework http://robolectric.org
 
 ## 工具
 

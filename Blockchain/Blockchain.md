@@ -178,3 +178,4 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 * [tyrchen/unchained](https://github.com/tyrchen/unchained):My personal study of blockchain related technology.
 * [bitcoinbook/bitcoinbook](https://github.com/bitcoinbook/bitcoinbook):Mastering Bitcoin 2nd Edition - Programming the Open Blockchain https://bitcoinbook.info/
 * [Jeiwan/blockchain_go](https://github.com/Jeiwan/blockchain_go):A simplified blockchain implementation in Golang
+* [liuchengxu/blockchain-tutorial](https://github.com/liuchengxu/blockchain-tutorial):🌾 A step-by-step blockchain tutorial in simplified Chinese https://liuchengxu.gitbook.io/blockchain

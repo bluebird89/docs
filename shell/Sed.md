@@ -441,3 +441,8 @@ sed ‘/foo/ s//bar/g’ filename # 简写形式
 sed -n ‘45,50p’ filename # 显示第45到50行
 sed -n ’51q;45,50p’ filename # 一样，但快得多
 ```
+
+## 工具
+
+* [p-gen/smenu](https://github.com/p-gen/smenu):Terminal utility that allows you to use words coming from the standard input to create a nice selection window just below the cursor. Once done, your selection will be sent to standard output. More in the Wiki
+
