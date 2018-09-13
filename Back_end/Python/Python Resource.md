@@ -1167,7 +1167,7 @@ Python 实现的算法和设计模式。
 - [The Hitchhiker's Guide to Python](http://hao.jobbole.com/the-hitchhikers-guide-to-python/)：旅行者的Python学习指南。[官网](http://docs.python-guide.org/en/latest/)
 - [Code Like a Pythonista: Idiomatic Python](http://top.jobbole.com/18767/)：如何像Python高手(Pythonista)一样编程。[官网](http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html)
 
-# 包
+## 包
 
 requests：用来简单请求数据
 lxml：比Beautiful Soup更快更强的解析库
@@ -1178,6 +1178,9 @@ tqdm：交互好工具，显示程序运行进度
 [Requests-Html](https://github.com/kennethreitz/requests-html):下载完网页之后,内置了html网页的解析
 [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
 
+## Algorithmic Trading
+
+* [quantopian/zipline](https://github.com/quantopian/zipline):Zipline, a Pythonic Algorithmic Trading Library http://www.zipline.io/
 
 ## 课程
 

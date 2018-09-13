@@ -336,6 +336,10 @@
 
 * [gka/chroma.js](https://github.com/gka/chroma.js):JavaScript library for all kinds of color manipulations http://gka.github.io/chroma.js
 
+## layout
+
+* [dagrejs/dagre](https://github.com/dagrejs/dagre):Directed graph layout for JavaScript
+
 ## 代码在线分享工具
 
 * JS Fiddle
