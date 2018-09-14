@@ -1108,7 +1108,7 @@ Python 实现的算法和设计模式。
 
 * Errbot：最简单和最流行的聊天机器人用来实现自动聊天工具。[官网](http://errbot.io/en/latest/)
 
-# 服务
+## 服务
 
 在线工具和简化开发的 API 。
 
@@ -1166,6 +1166,7 @@ Python 实现的算法和设计模式。
 - [Projects](http://hao.jobbole.com/python-projects/)：Python项目大集合。[官网](https://github.com/karan/Projects)
 - [The Hitchhiker's Guide to Python](http://hao.jobbole.com/the-hitchhikers-guide-to-python/)：旅行者的Python学习指南。[官网](http://docs.python-guide.org/en/latest/)
 - [Code Like a Pythonista: Idiomatic Python](http://top.jobbole.com/18767/)：如何像Python高手(Pythonista)一样编程。[官网](http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html)
+- [Prodesire/Python-Guide-CN](https://github.com/Prodesire/Python-Guide-CN):Python最佳实践指南
 
 ## 包
 
