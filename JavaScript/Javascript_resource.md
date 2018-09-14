@@ -300,6 +300,7 @@
 ## 验证
 
 * [jaywcjlove/validator.js](https://github.com/jaywcjlove/validator.js):⁉️轻量级的JavaScript表单验证，字符串验证。没有依赖，支持UMD，~3kb。 https://git.io/validatorjs
+* [yiminghe/async-validator](https://github.com/yiminghe/async-validator):validate form asynchronous
 
 ## 网页
 

@@ -105,7 +105,7 @@
       - [guzzle/guzzle](https://github.com/guzzle/guzzle):Guzzle, an extensible PHP HTTP client <http://guzzlephp.org/>
       - [HTTPFul](https://github.com/nategood/httpful): 一个链式HTTP库
       - [PHP VCR](http://php-vcr.github.io/): 一个录制和重放HTTP请求的库
-      - [Requests](https://github.com/rmccue/Requests): 一个简单的HTTP库
+      - [rmccue/Requests](https://github.com/rmccue/Requests):Requests for PHP is a humble HTTP request library. It simplifies how you interact with other sites and takes away all your worries. http://requests.ryanmccue.info/
       - [Retrofit](https://github.com/tebru/retrofit-php): 一个能轻松创建REST API客户端的库
       - [zend-diactoros](https://github.com/zendframework/zend-diactoros): PSR-7 HTTP消息实现
 * 爬虫 Scraping 用于网站爬取的库

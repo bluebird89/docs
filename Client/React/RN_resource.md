@@ -188,6 +188,7 @@
 ## 路由router
 
 * [ReactTraining/react-router](https://github.com/ReactTraining/react-router):Declarative routing for React https://reacttraining.com/react-router/
+* [maicki/react-native-router-bridge](https://github.com/maicki/react-native-router-bridge):Small module which bridges the navigation world between native and React Native.
 
 ## 渲染
 
