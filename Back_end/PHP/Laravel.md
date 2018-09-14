@@ -1452,6 +1452,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [Algolia](https://www.algolia.com/doc/api-client/laravel/algolia-and-scout/):Algolia is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke
 * [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth):🔐 JSON Web Token Authentication for Laravel & Lumen http://jwt-auth.com
 * [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
+* [](link)
 
 ## 参考
 
@@ -1484,7 +1485,6 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [weprovide/valet-plus](https://github.com/weprovide/valet-plus):Blazing fast macOS PHP development environment https://medium.com/@timneutkens/intro…
 * [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
 * [z-song/laravel-admin](https://github.com/z-song/laravel-admin):Build a full-featured administrative interface in ten minutes http://laravel-admin.org
-* [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
 * [the-control-group/voyager](https://github.com/the-control-group/voyager):Voyager - The Missing Laravel Admin https://laravelvoyager.com
 * [codex-project/codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! http://codex-project.ninja
 * [spatie/laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
@@ -1496,6 +1496,11 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [vyuldashev/laravel-queue-rabbitmq](https://github.com/vyuldashev/laravel-queue-rabbitmq):RabbitMQ driver for Laravel Queue
 * [InfyOmLabs/laravel-generator](https://github.com/InfyOmLabs/laravel-generator):InfyOm Laravel Generator - API, Scaffold, CRUD Laravel Generator http://labs.infyom.com/laravelgenerator/
 * [spatie/laravel-fractal](https://github.com/spatie/laravel-fractal):An easy to use Fractal wrapper built for Laravel and Lumen applications
+* [barryvdh/laravel-snappy](https://github.com/barryvdh/laravel-snappy):Laravel Snappy PDF
+
+## IDE
+
+* [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
 
 ## 教程
 
