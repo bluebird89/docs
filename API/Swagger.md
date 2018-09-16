@@ -110,3 +110,4 @@ public function myWebPageAction(){
 
 * [swagger-api/swagger-ui](https://github.com/swagger-api/swagger-ui)：Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. http://swagger.io.以将扫描工具生成的 swagger.json 文件内容展示在网页上.
 * [Swagger从入门到精通](https://www.gitbook.com/book/huangwenchao/swagger/details)
+* [swagger-api/swagger-codegen](https://github.com/swagger-api/swagger-codegen):swagger-codegen contains a template-driven engine to generate documentation, API clients and server stubs in different languages by parsing your OpenAPI / Swagger definition. http://swagger.io

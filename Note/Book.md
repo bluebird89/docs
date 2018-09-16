@@ -287,7 +287,7 @@
 
 * 《[集体智慧编程](https://www.amazon.cn/gp/product/B00UI93JD8)》
 * 《[笨办法学Python](https://www.amazon.cn/gp/product/B00P6OJ0TC)》
-* 《[Python基础教程](https://www.amazon.cn/gp/product/B00KAFX65Q)》
+* 《[Python基础教程(第3版)](https://www.amazon.cn/Python基础教程-Magnus-Lie-Hetland/dp/B079BJPVFL/ref=dp_ob_title_bk)》
 * 《Python源码剖析》
 * 《[Head First Python](https://www.amazon.cn/gp/product/B007NB2B4M)》
 * 《[与孩子一起学编程](https://www.amazon.cn/gp/product/B00HECW20S)》
@@ -305,7 +305,7 @@
 * 《[深度学习:基于Keras的Python实践](https://www.amazon.cn/gp/product/B07D5855F4)》
 * Python与量化投资从基础到实践
 * Learning Python, 5th Edition
-* Fluent Python
+* 流畅的Python Fluent Python
 
 ## Go
 
@@ -445,6 +445,10 @@
 * 《软件工程》
 * 《精益思想(白金版)》
 
+## TDD
+
+* Grow Object-Oriented Software Guided by Tests
+
 ## 职业修炼与规划
 
 * 《[大教堂与集市](https://www.amazon.cn/gp/product/B00KQDTZ4S)》
@@ -521,6 +525,10 @@
 * 数据科学家修炼之道
 * 编程谜题
 
+## 逻辑
+
+* Engines of Logic
+
 ## 管理
 
 * 如何阅读一本书
@@ -553,6 +561,7 @@
 * 告别失控：软件开发团队管理必读
 * 万物简史
 * 人类简史
+* Fermat’s Enigma
 
 ## 投资
 

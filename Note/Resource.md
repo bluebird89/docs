@@ -223,51 +223,6 @@
 
 * [sindresorhus/caprine](https://github.com/sindresorhus/caprine):Elegant Facebook Messenger desktop app https://sindresorhus.com/caprine
 
-## 游戏
-
-* PS4游戏多，给人感觉就是一件艺术品，需要我们这些玩家细细品味方能发现其中的精髓。主机
-* NS游戏少，完美的4399，4399王称起来不为过吧。掌机
-* 之前以为有个ps4就别无他求了……然而两年内我啪啪打脸，相信我，买什么都一样，你会慢慢凑齐的
-
-## 任天堂 switch
-
-* 奥德赛
-* 马车
-* 塞尔达
-* 乌贼2
-
-## Play station 4
-
-有钱pro
-没钱slim
-
-天蝎
-
-1080ti
-
-### PC
-
--   PES
--   战地
--   使命召唤
--   [diasurgical/devilution](https://github.com/diasurgical/devilution):Diablo devolved - magic behind the 1996 computer game
--   Dota
--   风暴英雄
-
-### 手游
-
--   [ ] 堡垒之夜
--   [ ] ring
--   [ ] 纪念碑谷
--   [ ] Alliance: Air War by Art of the State LLC
--   [ ] 王权 Reigns
-
-### steam 游戏平台
-
--   [ ] PLAYERUNKNOWN'S BATTLEGROUNDS
--   [ ] Counter-Strike: Global Offensive
--   [ ] Frostpunk
-
 ### browser
 
 -   Opera:with vpn
