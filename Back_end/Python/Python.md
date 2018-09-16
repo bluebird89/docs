@@ -208,7 +208,7 @@ pip install 'ipython[zmq,qtconsole,notebook,test]'
 
 ###  jupyter
 
-## 教程
+* jupyter notebook:anaconda
 
 ### 执行环境
 
@@ -1194,6 +1194,8 @@ conda 是开源包（packages）和虚拟环境（environment）的管理系统�
 - spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境。
 
 ```sh
+
+bash Anaconda2-5.0.0.1-Linux-x86_64.sh
 #  更改镜像
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config --set show_channel_urls yes
