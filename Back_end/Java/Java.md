@@ -40,6 +40,11 @@ sudo vim /etc/environment # 添加 JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 source /etc/environment
 echo $JAVA_HOME
 java -version
+
+sudo add-apt-repository ppa:linuxuprising/java
+sudo apt update
+sudo apt install oracle-java10-installer
+sudo apt install oracle-java10-set-default
 ```
 
 ### Mac

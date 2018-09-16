@@ -1183,6 +1183,10 @@ tqdm：交互好工具，显示程序运行进度
 
 * [quantopian/zipline](https://github.com/quantopian/zipline):Zipline, a Pythonic Algorithmic Trading Library http://www.zipline.io/
 
+## Font
+
+* [fonttools/fonttools](https://github.com/fonttools/fonttools):A library to manipulate font files from Python.
+
 ## 课程
 
 * Python核心编程
