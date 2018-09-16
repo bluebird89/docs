@@ -1205,34 +1205,35 @@ source ~/.zshrc
 
 conda info
 conda search search_term
+
 conda update conda
 conda upgrade --all   # 升级工具包
-conda install numpy scipy pandas
-conda install numpy=1.10
-conda update package_name
-conda remove package_name
-
-conda create --name env_name  list of packages # 默认的环境是 root，你也可以创建一个新环境,-n 代表 name，env_name 是需要创建的环境名称，list of packages 则是列出在新环境中需要安装的工具包。
-conda create --name py35 python=3.5
-conda create -n py2 python=2.7 pandas
-source activate env_name # 进入名为 env_name 的环境
-activate py35
-source deactivate  # 退出当前环境
-python --version #查看版本
-which -a python
-conda env remove -n env_name  # 删除名为 env_name 的环境
 
 conda env list # 显示所有的环境
 conda list --revisions
+
+conda create --name env_name  list of packages # 默认的环境是 root，你也可以创建一个新环境,-n 代表 name，env_name 是需要创建的环境名称，list of packages 则是列出在新环境中需要安装的工具包。
+conda create --name | -n  py35 python=3.5 pandas
+
+conda install numpy scipy pandas
+conda install numpy=1.10
 conda install -n python34 numpy
+conda update | remove package_name
+conda install --name bio-env toolz
+conda install --channel conda-forge
+
+source activate env_name # 进入名为 env_name 的环境
+source deactivate  # 退出当前环境
+
+python --version #查看版本
+which -a python
+
+conda env remove -n env_name  # 删除名为 env_name 的环境
+conda remove --name bio-env toolz
+
 conda list -n python34
 conda env export > environment.yaml  # 分享代码的时候，同时也需要将运行环境分享给大家，执行如下命令可以将当前环境下的 package 信息存入名为 environment 的 YAML 文件中
 conda env create -f environment.yaml #  用对方分享的 YAML 文件来创建一摸一样的运行环境。
-
-conda install --name bio-env toolz
-conda install --channel conda-forge
-boltons
-conda remove --name bio-env toolz boltons
 ```
 
 #### Jupyter Notebook
