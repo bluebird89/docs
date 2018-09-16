@@ -223,3 +223,6 @@
 [submodule "Architect/system-design-primer"]
 	path = Architect/system-design-primer
 	url = git@github.com:donnemartin/system-design-primer.git
+[submodule "JavaScript/TypeScript/typescript-definition-style-guide"]
+	path = JavaScript/TypeScript/typescript-definition-style-guide
+	url = git@github.com:sindresorhus/typescript-definition-style-guide.git
