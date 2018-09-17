@@ -224,9 +224,10 @@ npm install -g @vue/cli
 * [Fish-UI](https://github.com/myliang/fish-ui)
 * [ElemeFE/mint-ui](https://github.com/ElemeFE/mint-ui/):Mobile UI elements for Vue.js http://mint-ui.github.io/#!/en
 * [Framework7 Vue](https://framework7.io/vue/)
-* [Cube UI](https://github.com/didi/cube-ui)
+* [didi/cube-ui](https://github.com/didi/cube-ui):🔶 A fantastic mobile ui lib implement by Vue https://didi.github.io/cube-ui/
 * [Vueblu](https://github.com/chenz24/vue-blu)
 * [Ant Design Vue](https://github.com/okoala/vue-antd)
+* [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
 
 ## 框架
 

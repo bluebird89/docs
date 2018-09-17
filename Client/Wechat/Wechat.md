@@ -1,5 +1,7 @@
 # wechat
 
+* 浏览器为单窗口
+
 ## git 服务器搭建
 
 git：git8899
@@ -33,9 +35,7 @@ if ($tmpstr==$signature) {
 ## 参考
 
 * [littlecodersh/ItChat](https://github.com/littlecodersh/ItChat):A complete and graceful API for Wechat. 微信个人号接口、微信机器人及命令行微信，三十行即可自定义个人号机器人。 http://itchat.readthedocs.io
-* [vux](https://github.com/airyland/vux)
 * [mars](https://github.com/Tencent/mars)
-* [weui](https://github.com/Tencent/weui):A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications. https://weui.io
 * [overtrue/wechat](https://github.com/overtrue/wechat): It is probably the best SDK in the world for developing WeChat App. <http://easywechat.org>
 * [wechat-php-sdk](https://github.com/dodgepudding/wechat-php-sdk)
 * [Eric-Guo/wechat](https://github.com/Eric-Guo/wechat):API, command and message handling for WeChat in Rails
@@ -53,6 +53,8 @@ if ($tmpstr==$signature) {
 ## UI
 
 * [wepayui/wepayui](https://github.com/wepayui/wepayui):微信支付场景化组件 https://wepayui.github.io
+* [wux-weapp/wux-weapp](https://github.com/wux-weapp/wux-weapp):🐶 微信小程序自定义 UI 组件 https://wux-weapp.github.io/wux-weapp
+* [weui](https://github.com/Tencent/weui):A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications. https://weui.io
 
 ## 客户端
 
