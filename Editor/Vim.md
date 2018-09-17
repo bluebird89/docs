@@ -10,7 +10,8 @@ brew install vim
 
 ## 配置文件
 
-～/.vimrc
+* 全局配置：/etc/vim/vimrc或者/etc/vimrc
+* 用户个人的配置在~/.vimrc
 
 选项设置
 all：列出所有选项设置情况
@@ -32,7 +33,12 @@ mesg：允许vi显示其他用户用write写到自己终端上的信息
 set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示
 winpos 5 5         " 设定窗口位置
 set lines=30 columns=85    " 设定窗口大小
+
 set nu              " 显示行号
+set number
+set relativenumber " 显示光标所在的当前行的行号，其他行都为相对于该行的相对行号
+set cursorline " 光标所在的当前行高亮
+
 set go=             " 不要图形按钮
 "color asmanian2     " 设置背景主题
 set guifont=Courier_New:h10:cANSI   " 设置字体
@@ -41,6 +47,8 @@ autocmd InsertLeave * se nocul  " 用浅色高亮当前行
 autocmd InsertEnter * se cul    " 用浅色高亮当前行
 set ruler           " 显示标尺
 set showcmd         " 输入的命令显示出来，看的清楚些
+set mouse=a   " 支持使用鼠标
+set showmode " 在底部显示，当前处于命令模式还是插入模式。
 set cmdheight=1     " 命令行（在状态行下）的高度，设置为1
 "set whichwrap+=<,>,h,l   " 允许backspace和光标键跨越行边界(不建议)
 set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离
@@ -50,11 +58,11 @@ set laststatus=1    " 启动显示状态行(1),总是显示状态行(2)
 set foldenable      " 允许折叠
 set foldmethod=manual   " 手动折叠
 set background=dark "背景使用黑色
-set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
+
 " 显示中文帮助
 if version >= 603
     set helplang=cn
-    set encoding=utf-8
+    set encoding=utf-8 " 使用 utf-8 编码
 endif
 " 设置配色方案
 "colorscheme murphy
@@ -62,7 +70,6 @@ endif
 "if (has("gui_running"))
 "   set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
 "endif
-
 
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
@@ -174,29 +181,25 @@ set foldcolumn=0
 set foldmethod=indent
 set foldlevel=3
 set foldenable              " 开始折叠
-" 不要使用vi的键盘模式，而是vim自己的
-set nocompatible
-" 语法高亮
-set syntax=on
-" 去掉输入错误的提示声音
-set noeb
-" 在处理未保存或只读文件的时候，弹出确认
-set confirm
-" 自动缩进
-set autoindent
+
+set nocompatible " 不与 Vi 兼容（采用 Vim 自己的操作命令）
+set syntax=on " 语法高亮
+set noeb " 去掉输入错误的提示声音
+set confirm " 在处理未保存或只读文件的时候，弹出确认
+
+set autoindent " 自动缩进
 set cindent
-" Tab键的宽度
-set tabstop=4
-" 统一缩进为4
-set softtabstop=4
-set shiftwidth=4
-"禁止生成临时文件
+set tabstop=4 " Tab键的宽度
+set expandtab " 由于 Tab 键在不同的编辑器缩进不一致，该设置自动将 Tab 转为空格
+set softtabstop=4 " Tab 转为多少个空格\
+set shiftwidth=4 " 在文本上按下>>（增加一级缩进）、<<（取消一级缩进）或者==（取消全部缩进）时，每一级的字符数。
+
 set nobackup
-set noswapfile
-"搜索忽略大小写
-set ignorecase
-"搜索逐字符高亮
-set hlsearch
+set noswapfile "禁止生成临时文件
+
+set ignorecase "搜索忽略大小写
+
+set hlsearch "搜索逐字符高亮
 set incsearch
 "行内替换
 set gdefault
@@ -215,11 +218,9 @@ set laststatus=2
 " 命令行（在状态行下）的高度，默认为1，这里是2
 set cmdheight=2
 " 侦测文件类型
-filetype on
-" 载入文件类型插件
-filetype plugin on
-" 为特定文件类型载入相关缩进文件
-filetype indent on
+filetype on " 载入文件类型插件
+filetype plugin on " 为特定文件类型载入相关缩进文件
+filetype indent on " 开启文件类型检查，并且载入与该类型对应的缩进规则。
 " 保存全局变量
 set viminfo+=!
 " 在被分割的窗口间显示空白，便于阅读
@@ -534,7 +535,7 @@ I-- [ESC] → I是插入，插入“--”，按ESC键来为每一行生效。
 ndd：将当前行及其下共n行文本删除，并将所删内容放到1号删除寄存器中。
 
 :set number | nu | nonumber | nonu       # 取消行号设置
-
+::set number? # 查询某个配置项是打开还是关闭
 u | <C-r>      undo撤销，从文件打开后的所有操作都可以撤销
 r       对单词字符进行替换
 .       重复执行"最近"的一条指令
