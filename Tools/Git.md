@@ -1377,6 +1377,7 @@ chown -R henry:henry .git/objects
 * [rgburke/grv](https://github.com/rgburke/grv):GRV is a terminal interface for viewing git repositories
 * [magit/magit](https://github.com/magit/magit):It's Magit! A Git porcelain inside Emacs. https://magit.vc
 * [carloscuesta/gitmoji](https://github.com/carloscuesta/gitmoji):An emoji guide for your commit messages. 😜 https://gitmoji.carloscuesta.me
+* [magit/magit](https://github.com/magit/magit):It's Magit! A Git porcelain inside Emacs. https://magit.vc
 
 ## 参考
 
