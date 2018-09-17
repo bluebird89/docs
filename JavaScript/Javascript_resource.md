@@ -341,6 +341,10 @@
 
 * [dagrejs/dagre](https://github.com/dagrejs/dagre):Directed graph layout for JavaScript
 
+## HTML compressor
+
+* [kangax/html-minifier](https://github.com/kangax/html-minifier):Javascript-based HTML compressor/minifier (with Node.js support) http://kangax.github.com/html-minifier/
+
 ## 代码在线分享工具
 
 * JS Fiddle
