@@ -407,7 +407,7 @@
 
 ## 数据挖掘
 
-* Introduction to Data Mining（数据挖掘导论）
+* [Introduction to Data Mining（数据挖掘导论）](https://www-users.cs.umn.edu/~kumar001/dmbook/index.php)
 * 《[Web数据挖掘](https://www.amazon.cn/gp/product/B00AY830HS)》
 * 《[深入浅出统计学](https://www.amazon.cn/gp/product/B006PHIVNA)》
 * 《[模式分类（第2版）](https://www.amazon.cn/gp/product/B00116C3DY)》
@@ -562,6 +562,7 @@
 * 万物简史
 * 人类简史
 * Fermat’s Enigma
+* X的奇幻之旅
 
 ## 投资
 

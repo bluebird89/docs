@@ -954,6 +954,7 @@ Markdown 语法： **Example:**
 * [pandao/editor.md](https://github.com/pandao/editor.md):The open source embeddable online markdown editor (component). https://pandao.github.io/editor.md/
 * [gnab/remark](https://github.com/gnab/remark):A simple, in-browser, markdown-driven slideshow tool. http://remarkjs.com
 * [knsv/mermaid](https://github.com/knsv/mermaid):Generation of diagram and flowchart from text in a similar manner as markdown http://knsv.github.io/mermaid/
+* [aaronsw/html2text](https://github.com/aaronsw/html2text):Convert HTML to Markdown-formatted text. http://www.aaronsw.com/2002/html2text/
 
 ## 参考
 

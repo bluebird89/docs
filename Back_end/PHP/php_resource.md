@@ -385,7 +385,6 @@
       - (https://github.com/vlucas/spot2)[Spot2]: 一个MySQL的ORM映射器
       - [doctrine/instantiator](https://github.com/doctrine/instantiator):http://www.doctrine-project.org
       - [doctrine/lexer](https://github.com/doctrine/lexer):Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.
-      - [doctrine/cache](https://github.com/doctrine/cache):Doctrine Cache component
       - [doctrine/inflector](https://github.com/doctrine/inflector):Doctrine Inflector is a small library that can perform string manipulations with regard to uppercase/lowercase and singular/plural forms of words.
       - [Atlantic18/DoctrineExtensions](https://github.com/Atlantic18/DoctrineExtensions):Doctrine2 behavioral extensions, Translatable, Sluggable, Tree-NestedSet, Timestampable, Loggable, Sortable
 * 迁移 Migrations 帮助管理数据库模式和迁移的库
