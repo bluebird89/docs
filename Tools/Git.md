@@ -257,6 +257,7 @@ git clone file:///opt/git/project.git
 git clone ftp[s]://example.com/path/to/repo.git/
 git clone rsync://example.com/path/to/repo.git/
 git clone -o jQuery https://github.com/jquery/jquery.git # 所使用的远程主机自动被Git命名为origin。如果想自定义主机名，需要用git clone命令的-o选项指定
+git clone --depth=1 https://github.com/rwv/chinese-dos-games.git # 
 
 git init --bare # 远程仓库文件构建
 git init [project-name] # 初始化git仓库 在当前目录内新建一个Git代码库，会生成.git文件，用于新建空项目文件或者将项目添加git管理，默认URL文件名称，也可以自定义project-name
@@ -555,6 +556,11 @@ git log
 git reset <版本号>
 git reset head~1
 git reflog # 回滚后再还原
+
+git reset –hard HEAD^ (回退到上一个版本)
+git reset –hard HEAD^ ^(回退到上上个版本)
+git reset –hard HEAD~100（回退到上100个版本）
+git reset –hard dc5f1d1(只要记得版本号就可以穿梭回到现代)
 
 # 冲突
 git checkout --ours <文件名> # 使用当前分支 HEAD 版本

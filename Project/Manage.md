@@ -70,3 +70,7 @@
 ## 图书
 
 - 有限与无限的游戏
+
+## 参考
+
+* [tron1991/open-product-management](https://github.com/tron1991/open-product-management):A curated list of product management advice for technical people.
