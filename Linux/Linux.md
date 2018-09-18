@@ -1480,6 +1480,7 @@ sudo aptitude -f install <packagename>
 * [backup/backup](https://github.com/backup/backup):Easy full stack backup operations on UNIX-like systems. http://backup.github.io/backup/v4/
 * [gopasspw/gopass](https://github.com/gopasspw/gopass):The slightly more awesome standard unix password manager for teams https://www.gopass.pw/
 * [trimstray/iptables-essentials](https://github.com/trimstray/iptables-essentials):Iptables Essentials: Common Firewall Rules and Commands.
+* [bat](link):A Cat Clone With Syntax Highlighting And Git Integration https://www.ostechnix.com/bat-a-cat-clone-with-syntax-highlighting-and-git-integration/
 
 ## 参考
 

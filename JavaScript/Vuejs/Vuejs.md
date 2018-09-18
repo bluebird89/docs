@@ -191,6 +191,7 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [KieSun/Vue-StudyMaps](https://github.com/KieSun/Vue-StudyMaps):使用 Vue.js 开发的聚合应用。通过爬虫抓取平时浏览的网站，省去逐个点开网页的时间。
 * [vue-storefront](https://github.com/DivanteLtd/vue-storefront)
 * [Eagle.js](https://github.com/Zulko/eagle.js)
+* [Coffcer/vue-chat](https://github.com/Coffcer/vue-chat):chat example by vue.js + vuex + webpack http://coffcer.github.io/vue-chat/
 
 ## 工具
 
