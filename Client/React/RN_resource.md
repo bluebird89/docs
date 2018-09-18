@@ -52,6 +52,7 @@
 * [Halogen](http://ww12.madscript.com/):制作酷酷的载入进度条
 * [React UWP](https://github.com/myxvisual/react-uwp):Windows 下的 UI 框架实现了微软的 UWP 和 Fluent，提供了全面的控件库以实现 UI 可视化呈现，以及用于其它控件或内容（如图像和媒体）的容器。
 * [UXCore](link):40 个为企业应用设计的组件，专注于后端应用的性能，主要是表格和表单这些组件（特别是当数据自动与视图绑定时）。
+* [reasonml/reason-react](https://github.com/reasonml/reason-react):Reason bindings for ReactJS https://reasonml.github.io/reason-react/
 
 ## UI
 
@@ -241,4 +242,8 @@
 
 ## 地图
 
-* [mariusandra/pigeon-maps](https://github.com/mariusandra/pigeon-maps):ReactJS Maps without external dependencies 
+* [mariusandra/pigeon-maps](https://github.com/mariusandra/pigeon-maps):ReactJS Maps without external dependencies
+
+## 代码检测
+
+* [facebook/prop-types](https://github.com/facebook/prop-types):Runtime type checking for React props and similar objects
