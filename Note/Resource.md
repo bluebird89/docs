@@ -64,40 +64,6 @@
 -   [Bear](http://www.bear-writer.com/):
 -   [Byword](https://metaclassy.com/):简洁，优美，专注于文字。非常棒的写作工具。
 
-## 存储 Store
-
--   [腾讯微云](https://www.weiyun.com/)
--   [Google Drive](https://drive.google.com/drive/)
-    -   [harababurel/gcsf](https://github.com/harababurel/gcsf):a FUSE file system based on Google Drive
--   [icloud](https://www.icloud.com/)
--   [juicefs](https://juicefs.io/):为云端设计的 POSIX 共享文件系统
-- 百度云
-- 坚果云
-- [syncthing/syncthing](https://github.com/syncthing/syncthing):Open Source Continuous File Synchronization https://forum.syncthing.net/
-
-## 笔记
-
-带标签功能，并且可以聚合统计;概念用文档整理，结构化用思维导图（不宜太详细）
-
--   [Paper](http://www.fiftythree.com/):优雅，美观，做笔记，记录灵感
--   [语雀](https://yuque.com/)
--   [Google文档](https://docs.google.com/document/u/0/)
--   [腾讯文档](https://docs.qq.com/)：对表Google docs
--   youdaonote ：格式化笔记
--   simplenote：简单笔记（无格式）
--   xmind：结构化整理
--   豆瓣读：书、电影评论
--   github：代码的整理
--   Goole keep
--   notes
--   Boostnote:代码片段笔记
--   MedleyText
--   Quiver
--   OneNote
--   CherryTree
--   TickTick
--   [幕布](https://mubu.com/):可折叠的markdown
-
 ## 阅读
 
 -   RSS(Really Simple Syndication)
@@ -138,14 +104,6 @@
 -   [500px](https://500px.com/popular)
 -   [Pixelmator](http://www.pixelmator.com):图像处理软件
 -   [GIPHY](https://giphy.com/):寻找动图好去处。
-
-## music
-
--   Spotify
--   [Soundcloud](http://soundcloud.com)
--   [Musicbed](http://www.musicbed.com/):为视频寻找最优秀的配乐
--   [Lavaradio](http://www.lavaradio.com):环境音乐电台，按场景来选择音乐
--   [Garageband](https://www.apple.com/cn/ios/garageband/):非常强大的音乐软件，经常被忽视，可以自己摆弄着做音乐，做铃声等
 
 ## 内容
 
@@ -206,14 +164,6 @@
 -   MindNode mindnode.com
 -   一起写 yiqixie.com
 
-## 编辑器
-
--   [Etherpad](http://etherpad.org/):老牌的多人实时编辑协同工具
--   Sublime Text
--   WebStorm
--   Brackets
--   Atom
-
 ## 表单
 
 -   金数据 jinshuju.net
@@ -222,10 +172,6 @@
 ## 社交
 
 * [sindresorhus/caprine](https://github.com/sindresorhus/caprine):Elegant Facebook Messenger desktop app https://sindresorhus.com/caprine
-
-### browser
-
--   Opera:with vpn
 
 ## 生活
 
