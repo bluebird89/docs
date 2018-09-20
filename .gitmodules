@@ -226,3 +226,12 @@
 [submodule "JavaScript/TypeScript/typescript-definition-style-guide"]
 	path = JavaScript/TypeScript/typescript-definition-style-guide
 	url = git@github.com:sindresorhus/typescript-definition-style-guide.git
+[submodule "Architect/architecture.of.internet-product"]
+	path = Architect/architecture.of.internet-product
+	url = https://github.com/davideuler/architecture.of.internet-product.git
+[submodule "Back_end/C/CppCoreGuidelines"]
+	path = Back_end/C/CppCoreGuidelines
+	url = git@github.com:isocpp/CppCoreGuidelines.git
+[submodule "Back_end/C/awesome-cpp"]
+	path = Back_end/C/awesome-cpp
+	url = git@github.com:fffaraz/awesome-cpp.git

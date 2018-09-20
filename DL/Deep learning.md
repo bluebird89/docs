@@ -37,3 +37,8 @@
 ## 工具
 
 * [floydhub/dl-docker](https://github.com/floydhub/dl-docker):An all-in-one Docker image for deep learning. Contains all the popular DL frameworks (TensorFlow, Theano, Torch, Caffe, etc.) https://www.floydhub.com
+
+## 课程
+
+* [深度学习](https://mooc.study.163.com/university/deeplearning_ai#/c)
+    - [fengdu78/deeplearning_ai_books](https://github.com/fengdu78/deeplearning_ai_books):deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）
