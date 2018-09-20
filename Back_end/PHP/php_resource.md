@@ -176,7 +176,8 @@
       - (http://docs.behat.org/en/v2.5/)[Behat]: 一个行为驱动开发（BDD）测试框架
       - (https://github.com/Codeception/Codeception)[Codeception]: 一个全栈测试框架
       - (https://github.com/sebastianbergmann/dbunit)[DBUnit]: 一个PHPUnit的数据库测试库
-      - (https://github.com/fzaninotto/Faker)[Faker]: 一个伪数据生成库
+      * [fzaninotto/Faker](https://github.com/fzaninotto/Faker):Faker is a PHP library that generates fake data for you
+      * [nelmio/alice](https://github.com/nelmio/alice):Expressive fixtures generator
       - (https://github.com/InterNations/http-mock)[HTTP Mock]: 一个在单元测试模拟HTTP请求的库
       - (https://github.com/kahlan/kahlan)[Kahlan]: 全栈Unit/BDD测试框架，内置stub，mock和代码覆盖率的支持
       - (http://mink.behat.org/en/latest/)[Mink]: Web验收测试
@@ -315,7 +316,6 @@
       - (https://github.com/jobbyphp/jobby)[Jobby]: 一个没有修改crontab的PHP定时任务管理器
       - (https://github.com/consolidation/Robo)[Robo]: 一个面向对象配置的PHP任务运行器
       - (http://taskphp.github.io/)[Task]: 一个灵感来源于Grunt和Gulp的纯PHP任务运行器
-
 * 导航 Navigation 构建导航结构的工具
       - (https://github.com/tackk/cartographer)[Cartographer]: 一个站点地图生成库
       - (https://github.com/KnpLabs/KnpMenu)[KnpMenu]: 一个菜单库
@@ -494,6 +494,7 @@
       - (https://github.com/willdurand/Negotiation)[Negotiation]: 一个内容协商库
       - (https://github.com/Luracast/Restler)[Restler]: 一个将PHP方法暴露为RESTful web API的轻量级框架
       - (https://github.com/wsdl2phpgenerator/wsdl2phpgenerator)[wsdl2phpgenerator]: 一个从SOAP WSDL文件生成PHP类的工具
+      - [thephpleague/fractal](https://github.com/thephpleague/fractal):Output complex, flexible, AJAX/RESTful data structures. http://fractal.thephpleague.com
 * 缓存 Caching 缓存数据的库
       - [Alternative PHP Cache (APC)](http://php.net/manual/en/book.apc.php): 打开PHP操作码缓存
       - [APIx Cache](https://github.com/frqnck/apix-cache):  一个轻量级的PSR-6缓存
@@ -801,7 +802,6 @@
 * [PHPOffice/PHPExcel](https://github.com/PHPOffice/PHPExcel):A pure PHP library for reading and writing spreadsheet files
 * [briannesbitt/Carbon](https://github.com/briannesbitt/Carbon):A simple PHP API extension for DateTime. <http://carbon.nesbot.com/>
 * [Intervention/image](https://github.com/Intervention/image):PHP Image Manipulation <http://image.intervention.io>
-* [fzaninotto/Faker](https://github.com/fzaninotto/Faker):Faker is a PHP library that generates fake data for you
 * [reactphp/react](https://github.com/reactphp/react):Event-driven, non-blocking I/O with PHP. <https://reactphp.org>
 * [CopernicaMarketingSoftware/PHP-CPP](https://github.com/CopernicaMarketingSoftware/PHP-CPP):Library to build PHP extensions with C++ <http://www.php-cpp.com/>
 * [nikic/PHP-Parser](https://github.com/nikic/PHP-Parser):A PHP parser written in PHP

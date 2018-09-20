@@ -842,6 +842,9 @@ echo \yii\helpers\Url::to('article/add'); //输出article/add
 echo \yii\helpers\Url::toRoute('article/add'); //输出/yii2-demo/web/index.php?r=article/add
 ```
 
+UploadForm UploadedFile
+
+
 ## 参考
 
 -   [深入理解 Yii2.0](http://www.digpage.com/index.html)

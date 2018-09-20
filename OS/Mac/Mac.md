@@ -628,6 +628,15 @@ karabiner
 lsof -Pni4 | grep LISTEN | grep php
 ```
 
+## 配置
+
+-   [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
+-   [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles):🔧 .files, including ~/.macos — sensible hacker defaults for macOS <https://mths.be/dotfiless>
+- [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files. https://thoughtbot.com
+-   [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
+-   [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
+-   [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
+
 ## 参考
 
 -   [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
@@ -645,12 +654,6 @@ lsof -Pni4 | grep LISTEN | grep php
 -   [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
 -   [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
 -   [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
--   [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
--   [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles):🔧 .files, including ~/.macos — sensible hacker defaults for macOS <https://mths.be/dotfiless>
-- [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files. https://thoughtbot.com
--   [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
--   [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
--   [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
 
 ### 软件列表
 

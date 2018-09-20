@@ -190,6 +190,29 @@ Host *
   AddKeysToAgent yes
   UseKeychain yes
   IdentityFile ~/.ssh/id_rsa
+
+# 多个ssh
+
+git:http://01810661@gitlab.smgtech.net
+
+# 配置github.com
+Host github.com
+    HostName github.com
+    IdentityFile C:\Users\Administrator\.ssh\id_rsa
+    PreferredAuthentications publickey
+    User git
+
+# 配置gitlab.smgtech.net
+Host gitlab.smgtech.net
+    HostName gitlab.smgtech.net
+    IdentityFile C:\Users\Administrator\.ssh\smt
+    PreferredAuthentications publickey
+    #User 01810661
+
+用cmder无效
+
+github
+ Couldn't agree a key exchange algorithm (available: curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521)
 ```
 
 ### GPG
@@ -257,7 +280,7 @@ git clone file:///opt/git/project.git
 git clone ftp[s]://example.com/path/to/repo.git/
 git clone rsync://example.com/path/to/repo.git/
 git clone -o jQuery https://github.com/jquery/jquery.git # 所使用的远程主机自动被Git命名为origin。如果想自定义主机名，需要用git clone命令的-o选项指定
-git clone --depth=1 https://github.com/rwv/chinese-dos-games.git # 
+git clone --depth=1 https://github.com/rwv/chinese-dos-games.git #
 
 git init --bare # 远程仓库文件构建
 git init [project-name] # 初始化git仓库 在当前目录内新建一个Git代码库，会生成.git文件，用于新建空项目文件或者将项目添加git管理，默认URL文件名称，也可以自定义project-name
@@ -877,9 +900,7 @@ git merge FETCH_HEAD
 * 应用发布成功后Aone会基于Develop分支的发布版本打一个"当前线上版本Tag"基线；
 * 应用发布成功后Aone会自动把Develop分支的发布版本合并回master；
 
-# 问题列表Issues
-
-# GitHub
+## GitHub
 
 GitHub集成其他功能：`repository > Settings > Integrations & services`
 
@@ -916,6 +937,8 @@ git rebase -i origin/master
 # 推送到远程仓库，因为rebase以后，分支历史改变了，跟远程分支不一定兼容，有可能要强行推送
 git push --force origin myfeature
 ```
+
+* [zenhub](https://app.zenhub.com)：Agile project management integrated with GitHub
 
 ### 合并commit选项
 
