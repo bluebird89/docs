@@ -54,6 +54,10 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
     - 在模拟器中点击【登录】，看到显示“登录成功”，即为开通完成，可以开始你的其他开发了。
 * 测试
 
+## 状态
+
+* [SBDavid/wxappStore](https://github.com/SBDavid/wxappStore):微信小程序全局状态管理，并提供Vuex的开发体验
+
 ## UI组件
 
 * [weui-wxss](https://github.com/weui/weui-wxss):A UI library by WeChat official design team, includes the most useful widgets/modules.

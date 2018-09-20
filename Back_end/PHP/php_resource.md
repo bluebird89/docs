@@ -26,6 +26,7 @@
       + [Toran Proxy](https://toranproxy.com): 一个静态Composer存储库和代理
 * 安全
       + [sensiolabs/security-checker](https://github.com/sensiolabs/security-checker):PHP frontend for security.sensiolabs.org https://security.sensiolabs.org
+      + [phpseclib/phpseclib](https://github.com/phpseclib/phpseclib):PHP Secure Communications Library http://phpseclib.sourceforge.net
 
 ## 框架
 
