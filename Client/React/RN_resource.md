@@ -120,6 +120,7 @@
 
 * [kusti8/proton-native](https://github.com/kusti8/proton-native):A React environment for cross platform native desktop apps https://proton-native.js.org
 * [ReactiveX/rxjs](https://github.com/ReactiveX/rxjs):A reactive programming library for JavaScript http://reactivex.io/rxjs
+* [umijs/umi](https://github.com/umijs/umi):🌋 Pluggable enterprise-level react application framework. https://umijs.org/
 
 ## 学习
 
@@ -164,6 +165,7 @@
 ## 图片
 
 * [ricardo-ch/react-easy-crop](https://github.com/ricardo-ch/react-easy-crop):A React component to crop images with easy interactions https://codesandbox.io/s/q80jom5ql6
+* [xiaolin/react-image-gallery](https://github.com/xiaolin/react-image-gallery):React carousel image gallery component with thumbnail and mobile support
 
 ## 文件
 
@@ -172,10 +174,12 @@
 ## 扩展
 
 * [redux-saga/redux-saga](https://github.com/redux-saga/redux-saga):An alternative side effect model for Redux apps https://redux-saga.js.org/
+* [acdlite/recompose](https://github.com/acdlite/recompose):A React utility belt for function components and higher-order components.
 
 ## animations
 
 * [react-tools/react-move](https://github.com/react-tools/react-move):React Move 🌀 Beautiful, data-driven animations for React https://react-move.js.org
+* [react-dnd/react-dnd](https://github.com/react-dnd/react-dnd):Drag and Drop for React http://react-dnd.github.io/react-dnd
 
 ## 脚手架
 
@@ -247,3 +251,7 @@
 ## 代码检测
 
 * [facebook/prop-types](https://github.com/facebook/prop-types):Runtime type checking for React props and similar objects
+
+## 测试
+
+* [kentcdodds/react-testing-library](https://github.com/kentcdodds/react-testing-library):🐐 Simple and complete React DOM testing utilities that encourage good testing practices. http://npm.im/react-testing-library

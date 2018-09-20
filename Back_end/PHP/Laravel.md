@@ -1505,6 +1505,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 ## 教程
 
 * [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart
+* [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
 
 ## 工程
 

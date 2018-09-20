@@ -118,6 +118,7 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 * [jumpserver/jumpserver](https://github.com/jumpserver/jumpserver):Jumpserver是全球首款完全开源的堡垒机，是符合 4A 的专业运维审计系统。 http://www.jumpserver.org
 * [PERIODIC TABLE OF DEVOPS TOOLS](https://xebialabs.com/periodic-table-of-devops-tools/)
 * [kelseyhightower/confd](https://github.com/kelseyhightower/confd):Manage local application configuration files using templates and data from etcd or consul
+* [waylybaye/HyperApp-Guide](https://github.com/waylybaye/HyperApp-Guide):HyperApp user's manual
 
 ## 参考
 

@@ -192,6 +192,7 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [vue-storefront](https://github.com/DivanteLtd/vue-storefront)
 * [Eagle.js](https://github.com/Zulko/eagle.js)
 * [Coffcer/vue-chat](https://github.com/Coffcer/vue-chat):chat example by vue.js + vuex + webpack http://coffcer.github.io/vue-chat/
+* [lin-xin/vue-manage-system](https://github.com/lin-xin/vue-manage-system):The web management system solution based on Vue2 and Element UI. http://blog.gdfengshuo.com/example/work/
 
 ## 工具
 
@@ -209,7 +210,7 @@ npm install -g @vue/cli
 
 ## UI
 
-* [Vuetify](https://github.com/vuetifyjs/vuetify)
+* [vuetifyjs/vuetify](https://github.com/vuetifyjs/vuetify):Material Component Framework for Vue.js 2 https://vuetifyjs.com
 * [Quasar](https://github.com/quasarframework/quasar)
 * [Element](https://github.com/ElemeFE/element)
 * [Vue Material](https://github.com/vuematerial/vue-material)

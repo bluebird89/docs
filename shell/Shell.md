@@ -585,6 +585,7 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 * [ericfreese/rat](https://github.com/ericfreese/rat):Compose shell commands to build interactive terminal applications
 * [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings.
 * [kovidgoyal/kitty](https://github.com/kovidgoyal/kitty):A cross-platform, fast, feature full, GPU based terminal emulator
+* [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
 
 ## 教程
 

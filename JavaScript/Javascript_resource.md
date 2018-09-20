@@ -358,6 +358,18 @@
 
 * [dawnlabs/carbon](https://github.com/dawnlabs/carbon):🎨 Create and share beautiful images of your source code https://dawnlabs.io/carbon
 
+## 数据库
+
+* [facebook/dataloader](https://github.com/facebook/dataloader):DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching.
+
+## 调试
+
+* [GoogleChromeLabs/ndb](https://github.com/GoogleChromeLabs/ndb):ndb is an improved debugging experience for Node.js, enabled by Chrome DevTools
+
+## SVG
+
+* [svgdotjs/svg.js](https://github.com/svgdotjs/svg.js):The lightweight library for manipulating and animating SVG http://svgjs.com/
+
 ## 代码在线分享工具
 
 * JS Fiddle
