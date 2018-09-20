@@ -93,3 +93,10 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 
 * [iBotPeaches/Apktool](https://github.com/iBotPeaches/Apktool):A tool for reverse engineering Android apk files https://ibotpeaches.github.io/Apktool
 * [tbruyelle/RxPermissions](https://github.com/tbruyelle/RxPermissions):Android runtime permissions powered by RxJava2
+* [mzlogin/awesome-adb](https://github.com/mzlogin/awesome-adb):🍭 ADB Usage Complete / ADB 用法大全 https://mazhuang.org/awesome-adb/
+
+## 模拟
+
+* [asLody/VirtualApp](https://github.com/asLody/VirtualApp):Virtual Engine for Android(Support 9.0 in business version)
+* [android-hacker/VirtualXposed](https://github.com/android-hacker/VirtualXposed):A simple app to use Xposed without root, unlock the bootloader or modify system image, etc. https://vxp.app
+* [rovo89/Xposed](https://github.com/rovo89/Xposed):The native part of the Xposed framework (mainly the modified app_process binary).

@@ -110,6 +110,10 @@ ng generate module my-module # 模块Modulew
 
 * [angular/material](https://github.com/angular/material):Material design for AngularJS https://material.angularjs.org/
 
+## 测试
+
+* [rangle/augury](https://github.com/rangle/augury):Angular Debugging and Visualization Tools https://augury.angular.io/
+
 ## 升级
 
 * [ngMigration Assistant](https://github.com/ellamaolson/ngMigration-Assistant):一个命令行工具，用于分析 AngularJS 应用程序，并在此基础上，提出迁移路径建议。同时，它还提供应用程序中代码复杂性、大小、构造等方面的统计信息，告诉你迁移之前必要的准备工作。

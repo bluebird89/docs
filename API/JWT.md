@@ -48,3 +48,4 @@
 
 * [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth):🔐 JSON Web Token Authentication for Laravel & Lumen http://jwt-auth.com
 * [lcobucci/jwt](https://github.com/lcobucci/jwt):A simple library to work with JSON Web Token and JSON Web Signature
+* [dwyl/learn-json-web-tokens](https://github.com/dwyl/learn-json-web-tokens):🔐 Learn how to use JSON Web Token (JWT) to secure your next Web App! (Tutorial/Example with Tests!!)
