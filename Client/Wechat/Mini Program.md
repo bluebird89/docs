@@ -123,6 +123,7 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 
 ## 项目
 
+- [wechat-miniprogram/miniprogram-demo](https://github.com/wechat-miniprogram/miniprogram-demo):微信小程序示例 
 - [wecqupt](https://github.com/lanshan-studio/wecqupt) ★255 - 在微信内被便捷地获取和传播
 - [豆瓣电影项目](https://github.com/songhaoreact/豆瓣电影项目) ★118 - 微信小程序豆瓣电影项目
 * [xwartz/wechat-app-demo](https://github.com/xwartz/wechat-app-demo):微信小程序 demo
@@ -223,7 +224,6 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 ## 参考
 
 * [微信小程序开发文档](https://developers.weixin.qq.com/miniprogram/dev/)
-* [小程序开发文档](https://developers.weixin.qq.com/miniprogram/dev/index.html)
 * [小程序快速上手：三步完成小程序从无到有的开发](http://blog.csdn.net/gitchat/article/details/77863478)
 * [首个微信小程序开发教程](https://juejin.im/entry/57e34d6bd2030900691e9ad7)
 * http://www.infoq.com/cn/articles/5-steps-build-your-first-mini-program

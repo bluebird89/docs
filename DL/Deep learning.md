@@ -1,5 +1,6 @@
 # 深度学习
 
+只会机器学习肯定不行  肯定要会深度学习
 
 ## 分类
 
@@ -31,6 +32,7 @@
 ## 参考
 
 * [Model Zoo](https://modelzoo.co/):Discover open source deep learning code and pretrained models.
+* [deep-learning-ai](https://www.nvidia.com/en-us/deep-learning-ai/developer/)
 
 ## 工具
 
