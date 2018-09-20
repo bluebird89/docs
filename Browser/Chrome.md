@@ -30,6 +30,7 @@
 * 程序调试工具 Firebug Lite
 * [deanoemcke/thegreatsuspender](https://github.com/deanoemcke/thegreatsuspender):A chrome extension for suspending all tabs to free up memory
 * [philc/vimium](The hacker's browser.)The hacker's browser.
+* User-Agent Switcher for Chrome
 
 ```
 Navigating the current page:

@@ -5,7 +5,7 @@
 -   [优达](https://www.udacity.com/)
 -   [edX](https://www.edx.org/)
 -   [LeetCode](http://leetcode.com/):[中文](https://leetcode-cn.com/)
--   [网易公开课]()
+-   [网易公开课](https://study.163.com)
 -   [Creativelive](https://www.creativelive.com/)
 -   [Masterclass](https://www.masterclass.com/):可以向凯文·史派西学表演，向安妮·莱博维茨学摄影
 -   [Treehouse](https://teamtreehouse.com/):学习编程等互联网技能
@@ -112,3 +112,7 @@
 
 * [Game Theory](https://www.coursera.org/learn/game-theory-1)
 * [Game Theory II: Advanced Applications](https://www.coursera.org/learn/game-theory-2)
+
+## 机器学习
+
+* [吴恩达机器学习](https://study.163.com/course/courseMain.htm?courseId=1004570029)
