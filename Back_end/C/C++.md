@@ -10,14 +10,35 @@
 
 ```sh
 gcc file.c # 编译
+
+## sublime  C++.sublime-build
+{
+    "shell_cmd": "g++ \"${file}\" -o \"${file_path}/${file_base_name}\"",
+    "file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
+    "working_dir": "${file_path}",
+    "selector": "source.c, source.c++",
+
+    "variants":
+    [
+        {
+            "name": "Run",
+            "shell_cmd": "g++ \"${file}\" -o \"${file_path}/${file_base_name}\" && \"${file_path}/${file_base_name}\""
+        }
+    ]
+}
 ```
 
 ## 工具
 
 - [Tencent/libco](https://github.com/Tencent/libco)libco is a coroutine library which is widely used in wechat back-end service.
 * [envoyproxy/envoy](https://github.com/envoyproxy/envoy):C++ front/service proxy https://www.envoyproxy.io
+* [在线编译器](https://c.runoob.com/compile/12)
 
+## 教程
+
+* [runoob](http://www.runoob.com/cplusplus/cpp-tutorial.html)
 
 ## 资源
 
 * [C/C++ 开源库及示例代码](https://github.com/programthink/opensource/blob/master/libs/cpp.wiki)
+* [isocpp/CppCoreGuidelines](https://github.com/isocpp/CppCoreGuidelines):The C++ Core Guidelines are a set of tried-and-true guidelines, rules, and best practices about coding in C++http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines
