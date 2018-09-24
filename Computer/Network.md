@@ -87,3 +87,4 @@ ipconfig /all # 为DNS和WINS服务器显示它已配置且所有使用的附加
 ## 参考
 
 * [SystemsApproach/book](https://github.com/SystemsApproach/book):Meta-data and Makefile needed to build the book. Main starting point.
+* [TCP/IP 视频讲解 计算机网络](https://www.bilibili.com/video/av10610680)

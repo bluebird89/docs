@@ -42,3 +42,8 @@
 
 * [深度学习](https://mooc.study.163.com/university/deeplearning_ai#/c)
     - [fengdu78/deeplearning_ai_books](https://github.com/fengdu78/deeplearning_ai_books):deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）
+* [深度学习（小象学院）](https://www.bilibili.com/video/av10324235)
+* [李宏毅深度学习(2017)](https://www.bilibili.com/video/av9770302/)
+* [斯坦福2017季CS224n深度学习自然语言处理课程](https://www.bilibili.com/video/av13383754)
+* [斯坦福深度学习课程CS231N](https://www.bilibili.com/video/av17204303)
+* [【公开课】深度学习与计算机视觉](https://www.bilibili.com/video/av17741845)

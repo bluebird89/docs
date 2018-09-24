@@ -39,6 +39,7 @@
     - [cmder + gow](http://bliker.github.io/cmder/)
     - git bash
     - [Babun](http://babun.github.io/)
+    - [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
 * 电子书管理神器：Calibre
 * CCleaner, Defraggler, Recuva & Speccy.
 * Evernote
@@ -104,7 +105,8 @@
 * Boxee 媒体中心
 * Media Player Classic 媒体播放
 
-```
+```sh
+## 安装 choco
 ## 以管理员运行cmd
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
