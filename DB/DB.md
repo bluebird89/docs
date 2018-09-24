@@ -31,33 +31,7 @@ Laravel 也支持查询 JSON 类型的字段：仅支持，MySQL 5.7+ 和 Postgr
 
 - 主键不可修改:主键的第二个作用是让其他表的外键引用自己，从而实现关系结构
 - 业务字段不可用于主键:主键必须使用单独的，完全没有业务含义的字段，也就是主键本身除了唯一标识和不可修改这两个责任外，主键没有任何业务含义。
-- 主键应该使用字符串:自增主键最大的问题是把公司业务的关键运营数据完全暴露给了竞争对手和VC -
-
-## 扩展
-
-- [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)
-
-## 原理
-
-[数据库的原理](http://blog.jobbole.com/100349/)
-
-## 工具
-
-- [getredash/redash](https://github.com/getredash/redash) Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. <http://redash.io/>
-- [pingcap/tidb](https://github.com/pingcap/tidb)TiDB is a distributed NewSQL database compatible with MySQL protocol
-- [alibaba/druid](https://github.com/alibaba/druid) Druid是一个JDBC组件库，包括数据库连接池、SQL Parser等组件 为监控而生的数据库连接池！阿里云DRDS(<https://www.aliyun.com/product/drds> )、阿里巴巴TDDL 连接池powered by Druid <https://github.com/alibaba/druid/wiki>
-- [apache/incubator-superset](https://github.com/apache/incubator-superset): a modern, enterprise-ready business intelligence web application. a data exploration and visualization web application.
-- [Meituan-Dianping/SQLAdvisor](https://github.com/Meituan-Dianping/SQLAdvisor)输入SQL，输出索引优化建议
-
-### [HVF/franchise](https://github.com/HVF/franchise)
-
-```sh
-git clone git@github.com:HVF/franchise.git
-cd franchise
-yarn install
-yarn start
-browse http://localhost:3000
-```
+- 主键应该使用字符串:自增主键最大的问题是把公司业务的关键运营数据完全暴露给了竞争对手和VC
 
 ## Sharding
 
@@ -109,3 +83,16 @@ NoSQL主要用于解决以下几种问题
 * [alibaba/otter](https://github.com/alibaba/otter)：阿里巴巴分布式数据库同步系统(解决中美异地机房)
 * [Nozbe/WatermelonDB](https://github.com/Nozbe/WatermelonDB):🍉 Next-gen database for powerful React and React Native apps that scales to 10,000s of records and remains fast ⚡️
 * [grafana/grafana](https://github.com/grafana/grafana):The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More https://grafana.com
+- [getredash/redash](https://github.com/getredash/redash) Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. <http://redash.io/>
+- [pingcap/tidb](https://github.com/pingcap/tidb)TiDB is a distributed NewSQL database compatible with MySQL protocol
+- [alibaba/druid](https://github.com/alibaba/druid) Druid是一个JDBC组件库，包括数据库连接池、SQL Parser等组件 为监控而生的数据库连接池！阿里云DRDS(<https://www.aliyun.com/product/drds> )、阿里巴巴TDDL 连接池powered by Druid <https://github.com/alibaba/druid/wiki>
+- [apache/incubator-superset](https://github.com/apache/incubator-superset): a modern, enterprise-ready business intelligence web application. a data exploration and visualization web application.
+- [Meituan-Dianping/SQLAdvisor](https://github.com/Meituan-Dianping/SQLAdvisor)输入SQL，输出索引优化建议
+- [HVF/franchise](https://github.com/HVF/franchise)：🍟 a notebook sql client. what you get when have a lot of sequels. https://franchise.cloud
+- [greenplum-db/gpdb](https://github.com/greenplum-db/gpdb):Greenplum Database http://greenplum.org
+
+## 参考
+
+* [数据库的原理](http://blog.jobbole.com/100349/)
+- [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)
+

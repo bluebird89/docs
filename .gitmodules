@@ -118,9 +118,6 @@
 [submodule "Computer/cs-video-courses"]
 	path = Computer/cs-video-courses
 	url = git@github.com:Developer-Y/cs-video-courses.git
-[submodule "Computer/awesome-courses"]
-	path = Computer/awesome-courses
-	url = git@github.com:prakhar1989/awesome-courses.git
 [submodule "Resource/papers-we-love"]
 	path = Resource/papers-we-love
 	url = git@github.com:papers-we-love/papers-we-love.git

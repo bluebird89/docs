@@ -29,3 +29,4 @@
 ## 参考
 
 * [DeathKing/Learning-SICP](https://github.com/DeathKing/Learning-SICP):MIT视频公开课《计算机程序的构造和解释》中文化项目及课程学习资料搜集。 https://learningsicp.github.io
+* [【计算机-合集】哈佛大学计算机核心课程](https://www.bilibili.com/video/av19302731)

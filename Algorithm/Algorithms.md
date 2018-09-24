@@ -31,7 +31,6 @@
 
 需要利用算法进行组合优化，从而找到市场上最优的投资组合。算法本身，才是最能体现价值的部分。在金融市场里，每支基金都配置了不同的资产做组合.从市场上几千支的股票和债券中进行选择，并配置不同的权重，之前都是基金经理干的活，那么我们用算法一样也可以干，说不定用算法模型构建的组合业绩会更好。如果我们用算法模型，取代了年薪几百万的基金经理，那么你就能够获得这个收益。最终实现个人价值，从而用算法改变命运。所以，通过金融变现才是最靠谱的。
 
-
 ### 二分查找（Binary Search）
 
 折半查找要求线性表必须采用顺序存储结构，而且表中元素按关键字有序排列。时间复杂度可以表示O(h)=O(log2n)
@@ -122,6 +121,9 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * [leetcode-cn](https://leetcode-cn.com/)
 * [leetcode](https://leetcode.com/)
 * [Dictionary of Algorithms and Data Structures](https://xlinux.nist.gov/dads/)
+* [【公开课】十大算法精讲](https://www.bilibili.com/video/av18109226/)
+* [麻省理工学院公开课：算法导论](https://www.bilibili.com/video/av1149902)
+* [frowhy/Algorithm](https://github.com/frowhy/Algorithm)
 
 ## 工具
 

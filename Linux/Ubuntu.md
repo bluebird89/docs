@@ -944,6 +944,9 @@ smb://192.168.100.106
 
 ### 优化
 
+
+### ubunu 优化
+
 ```sh
 # 提高电池的寿命并且减少过热
 sudo add-apt-repository ppa:linrunner/tlp
@@ -954,7 +957,7 @@ sudo tlp start
 # Guake是一个比较酷的终端
 sudo apt install guake
 
- # add source  or http://pinyin.sogou.com/linux/
+# add source  or http://pinyin.sogou.com/linux/
 deb http://archive.ubuntukylin.com:10006/ubuntukylin trusty main
 sudo apt install sogoupinyin
 
@@ -982,16 +985,21 @@ sudo apt-get install unity-tweak-tool
 
 ifconfig
 
-# 记录下网卡名字，比如我的，有enp4s0f2、lo、wlp9s0b1三个
+sudo apt install net-tools       # ifconfig
+sudo apt install iputils-ping
 
-sudo vim /etc/sysctl.conf # 在末尾添加
+记录下网卡名字，比如我的，有enp4s0f2、lo、wlp9s0b1三个
+2）、编辑文件：
 
-net.ipv6.conf.all.disable_ipv6 = 1
-net.ipv6.conf.default.disable_ipv6 = 1
-net.ipv6.conf.lo.disable_ipv6 = 1 #需跟网卡信息对应
-net.ipv6.conf.enp4s0f2.disable_ipv6 = 1 #需跟网卡信息对应
-net.ipv6.conf.wlp9s0b1.disable_ipv6 = 1 #需跟网卡信息对应
+sudo vim /etc/sysctl.conf
 
+在末尾添加：
+
+    net.ipv6.conf.all.disable_ipv6 = 1
+    net.ipv6.conf.default.disable_ipv6 = 1
+    net.ipv6.conf.lo.disable_ipv6 = 1 #需跟网卡信息对应
+    net.ipv6.conf.enp4s0f2.disable_ipv6 = 1 #需跟网卡信息对应
+    net.ipv6.conf.wlp9s0b1.disable_ipv6 = 1 #需跟网卡信息对应
 sudo sysctl -p
 
 xset m 0 0 # 设置鼠标加速度
@@ -1001,12 +1009,13 @@ sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
 sudo apt update
 sudo apt install indicator-sysmonitor
 
+
 sudo apt-get remove thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku onboard deja-dup
 sudo apt-get autoremove
 sudo apt-get autoclean
 ```
 
-## phpMyAdmin
+### phpMyAdmin
 
 ```sh
 sudo apt update
@@ -1025,6 +1034,19 @@ sudo htpasswd -c /etc/phpmyadmin/.htpasswd username
 sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser
 
 # https://domain_name_or_IP/phpmyadmin
+```
+
+### mysql workbeach
+
+```sh
+# down
+sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
+sudo apt-get update
+sudo apt-get install mysql-workbench-community
+
+sudo apt install aptitude
+sudo aptitude install <packagename>
+sudo aptitude -f install <packagename>
 ```
 
 ## 18.04
