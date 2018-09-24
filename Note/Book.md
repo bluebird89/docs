@@ -306,6 +306,7 @@
 * Python与量化投资从基础到实践
 * Learning Python, 5th Edition
 * 流畅的Python Fluent Python
+* [Flask Web开发实战：入门、进阶与原理解析](https://item.jd.com/12430774.html)
 
 ## Go
 
@@ -483,7 +484,9 @@
 ## 编程之外
 
 * 《[暗时间](https://www.amazon.cn/gp/product/B005DSK4W8)》
-* 《[数学之美](https://www.amazon.cn/gp/product/B00P6OJ09C)》
+* 吴军
+    - 《[数学之美](https://www.amazon.cn/gp/product/B00P6OJ09C)》
+    - 《浪潮之巅》
 * 《[赢得朋友](https://www.amazon.cn/gp/product/B00ANY9KZE)》
 * 《[精益创业](https://www.amazon.cn/gp/product/B008MIFWJG)》
 * 《[批判性思维](https://www.amazon.cn/gp/product/B00QPZARMA)》
@@ -669,6 +672,11 @@
     - 帝凰
 * 丁丁张
     - 人生需要揭穿
+* 冯唐
+    - 《欢喜》
+    - 《十八岁给我一个姑娘》
+    - 《万物生长》
+    - 《北京，北京》
 
 ## 文学
 

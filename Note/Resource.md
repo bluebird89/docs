@@ -112,8 +112,6 @@
 -   [adambard/learnxinyminutes-docs](https://github.com/adambard/learnxinyminutes-docs):Code documentation written as code! How novel and totally my idea! http://learnxinyminutes.com/
 -   [justjavac/Programming-Alpha-To-Omega](https://github.com/justjavac/Programming-Alpha-To-Omega):从零开始学编程 系列汇总（从 α 到 Ω）
 
-## 学习
-
 ## 管理与沟通
 
 -   WhatsApp 和 Slack 用来沟通

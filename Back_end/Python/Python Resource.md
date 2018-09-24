@@ -22,8 +22,13 @@
 * conda：跨平台，Python 二进制包管理工具。[官网](https://github.com/conda/conda/)
 * Curdling：管理 Python 包的命令行工具。[官网](http://clarete.li/curdling/)
 * wheel：Python 分发的新标准，意在取代 eggs。[官网](http://pythonwheels.com/)
-* Pipenv
+* [Pipenv](https://github.com/pypa/pipenv):Python Development Workflow for Humans. https://docs.pipenv.org/
 * PBR（https://docs.openstack.org/pbr/latest/）, Python Build Reasonableness 的缩写，是以一致的方式用于管理 Setuptools 包的库。
+
+```sh
+pip install pipenv
+brew install pipenv
+```
 
 ## 包仓库
 
@@ -338,6 +343,7 @@ Python实现的数据库。
   - redis-py：Redis 的 Python 客户端。[官网](https://github.com/andymccurdy/redis-py)
   - telephus：基于 Twisted 的 Cassandra 客户端。[官网](https://github.com/driftx/Telephus)
   - txRedis：基于 Twisted 的 Redis 客户端。[官网](https://github.com/deldotdr/txRedis)
+* [graphql-python/graphene](https://github.com/graphql-python/graphene):GraphQL framework for Python http://graphene-python.org/
 
 ## ORM
 
@@ -1167,6 +1173,7 @@ Python 实现的算法和设计模式。
 - [The Hitchhiker's Guide to Python](http://hao.jobbole.com/the-hitchhikers-guide-to-python/)：旅行者的Python学习指南。[官网](http://docs.python-guide.org/en/latest/)
 - [Code Like a Pythonista: Idiomatic Python](http://top.jobbole.com/18767/)：如何像Python高手(Pythonista)一样编程。[官网](http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html)
 - [Prodesire/Python-Guide-CN](https://github.com/Prodesire/Python-Guide-CN):Python最佳实践指南
+* [pgbovine/OnlinePythonTutor](https://github.com/pgbovine/OnlinePythonTutor):Visualize Python, Java, JavaScript, TypeScript, Ruby, C, and C++ code execution in your Web browser http://pythontutor.com/
 
 ## 包
 

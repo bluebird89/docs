@@ -539,7 +539,15 @@ www   localhost.localdomain  #修改localhost.localdomain为www
 * vscode
 * shadowshocks
 
-## terminal快捷键
+## terminal终端
+
+终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
+
+Ubuntu具体说来，它默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
+
+```sh
+dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on command-line
+```
 
 * cmmand + d:新开同框分屏
 * Ctrl+d:键盘输入结束或退出终端
@@ -555,12 +563,6 @@ www   localhost.localdomain  #修改localhost.localdomain为www
 * Ctrl + U 删除光标之前的全部内容
 * Ctrl + Y 撤销之前的删除操作
 * Ctrl + W 删除之前的一个参数
-
-### 终端
-
-```sh
-dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on command-line
-```
 
 ## 指令
 
@@ -771,12 +773,6 @@ ping 8.8.8.8 # 检测连接
 sudo su
 curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 ```
-
-### 终端
-
-终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
-
-Ubuntu具体说来，它默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
 
 ### 身份
 
@@ -1000,12 +996,32 @@ sudo apt-get install google-chrome-stable
 
 ## 启动项
 
+* /etc/init.d：查看系统引导时启动的服务项
 * 启动目录： /etc/rc.d/rc[0~6].d
 * 命令行脚本文件：/etc/init.d/
 * 本地文件：/etc/rc.local
 * 添加 /etc/init.d/nginx start
 
 ```sh
+systemctl list-unit-files --type=service | grep enabled # 展示开机启动时的进程项
+
+sudo systemctl stop bluetooth.service
+sudo systemctl disable bluetooth.service
+systemctl status bluetooth.service
+
+sudo systemctl mask bluetooth.service # 完全阻止开机启动 把它掩盖起来
+
+## 禁用服务列表
+accounts-daemon.service # AccountsService 的一部分，AccountsService 允许程序获得或操作用户账户信息
+avahi-daemon.service # 用于零配置网络发现，使电脑超容易发现网络中打印机或其他的主机
+brltty.service # 提供布莱叶盲文设备支持，例如布莱叶盲文显示器。
+debug-shell.service # 开放了一个巨大的安全漏洞（该服务提供了一个无密码的 root shell ，用于帮助 调试 systemd 问题），除非你正在使用该服务，否则永远不要启动服务。
+ModemManager.service # 该服务是一个被 dbus 激活的守护进程，用于提供移动
+pppd-dns.service # 是一个计算机发展的遗物，如果你使用拨号接入互联网的话，保留它，否则你不需要它。
+rtkit-daemon.service # 一个 实时内核调度器real-time kernel scheduler
+whoopsie.service # 是 Ubuntu 错误报告服务。它用于收集 Ubuntu 系统崩溃报告，并发送报告到 https://daisy.ubuntu.com 。 你可以放心地禁止其启动，或者永久的卸载它。
+wpa_supplicant.service # 仅在你使用 Wi-Fi 连接时需要。
+
 # 提高电池的寿命并且减少过热
 sudo add-apt-repository ppa:linrunner/tlp
 sudo apt-get update
@@ -1014,6 +1030,12 @@ sudo tlp start
 ```
 
 ## 日志
+
+```sh
+journalctl -b -1 # 命令可以重现上一次启动时候的信息
+journalctl -b -2 # 可以重现倒数第 2 次启动
+systemd-analyze blame # 这个命令可以显示进程耗时
+```
 
 ## Boot分区不足
 
@@ -1150,86 +1172,6 @@ sudo apt-get install stacer
 - w /PATH/TO/SOMEFILE：将替换成功的行保存至文件中
 - -e
 
-### ubunu 优化
-
-```sh
-# 提高电池的寿命并且减少过热
-sudo add-apt-repository ppa:linrunner/tlp
-sudo apt update
-sudo apt install tlp tlp-rdw
-sudo tlp start
-
-# Guake是一个比较酷的终端
-sudo apt install guake
-
-# add source  or http://pinyin.sogou.com/linux/
-deb http://archive.ubuntukylin.com:10006/ubuntukylin trusty main
-sudo apt install sogoupinyin
-
-# remove libre
-sudo apt remove libreoffice-common
-
-# remove Amazon
-sudo apt-get remove unity-webapps-common
-
-# 不要选择显示星期或者年份
-gsettings set com.canonical.indicator.datetime time-format 'custom'
-# 手动设置显示格式
-gsettings set com.canonical.indicator.datetime custom-time-format '%Y年%m月%d日 %A%H:%M:%S'
-
-# unity Unity显示的位置
-gsettings set com.canonical.Unity.Launcher launcher-position Bottom
-gsettings set com.canonical.Unity.Launcher launcher-position Left
-
-# 点击图标最小化
-gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
-
-# Tweak tool优化工具    Unity Tweak Tool  gnome-tweak-tool
-sudo apt-get install gnome-tweak-tool
-sudo apt-get install unity-tweak-tool
-
-ifconfig
-
-sudo apt install net-tools       # ifconfig
-sudo apt install iputils-ping
-
-记录下网卡名字，比如我的，有enp4s0f2、lo、wlp9s0b1三个
-2）、编辑文件：
-
-sudo vim /etc/sysctl.conf
-
-在末尾添加：
-
-    net.ipv6.conf.all.disable_ipv6 = 1
-    net.ipv6.conf.default.disable_ipv6 = 1
-    net.ipv6.conf.lo.disable_ipv6 = 1 #需跟网卡信息对应
-    net.ipv6.conf.enp4s0f2.disable_ipv6 = 1 #需跟网卡信息对应
-    net.ipv6.conf.wlp9s0b1.disable_ipv6 = 1 #需跟网卡信息对应
-sudo sysctl -p
-
-xset m 0 0 # 设置鼠标加速度
-
-# 安装状态栏指示器
-sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
-sudo apt update
-sudo apt install indicator-sysmonitor
-
-
-sudo apt-get remove thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku onboard deja-dup
-sudo apt-get autoremove
-sudo apt-get autoclean
-```
-
-```sh
-# 修改软件源为http://mirrors.aliyun.com
-sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak #备份系统默认的软件源
-sudo vim /etc/apt/sources.list
-
-# add source
-sudo add-apt-repository ppa:nilarimogard/webupd8
-sudo apt update
-sudo apt install albert
-```
 
 vim config
 ```
@@ -1460,19 +1402,6 @@ endfunction
 filetype plugin indent on
 "打开文件类型检测, 加了这句才可以用智能补全
 set completeopt=longest,menu
-```
-
-mysql workbeach
-
-```sh
-# down
-sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
-sudo apt-get update
-sudo apt-get install mysql-workbench-community
-
-sudo apt install aptitude
-sudo aptitude install <packagename>
-sudo aptitude -f install <packagename>
 ```
 
 ## 工具
