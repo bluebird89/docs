@@ -120,6 +120,7 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 * [Matchmaker](https://github.com/lypeer/Matchmaker) ★107 - 专为微信小程序开发的插件
 * [wecos](https://github.com/tencentyun/wecos) ★64 - 微信小程序 COS 瘦身解决方案
 * [Meituan-Dianping/mpvue](https://github.com/Meituan-Dianping/mpvue):基于 Vue.js 的小程序开发框架，从底层支持 Vue.js 语法和构建工具体系。 http://mpvue.com
+* [qiu8310/minapp](https://github.com/qiu8310/minapp):重新定义微信小程序的开发 https://qiu8310.github.io/minapp/
 
 ## 项目
 

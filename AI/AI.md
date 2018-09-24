@@ -24,7 +24,6 @@ TensorFlow 还支持异构设备分布式计算，这意味着它能够在各个
 - 框架：TensorFlow等。
 - 实战：在工作中找到一个应用场景，把学到的知识运用进去。
 
-
 ## 图书
 
 * 《数学之美》吴军
@@ -38,3 +37,7 @@ TensorFlow 还支持异构设备分布式计算，这意味着它能够在各个
 
 * [Microsoft/ailab](https://github.com/Microsoft/ailab):Experience, Learn and Code the latest breakthrough innovations with Microsoft AI
 * [apachecn/AiLearning](https://github.com/apachecn/AiLearning):AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - DL、自然语言处理 NLP http://ailearning.apachecn.org/
+
+## 课程
+
+* [麻省理工学院公开课：人工智能](https://www.bilibili.com/video/av17963543)
