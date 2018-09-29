@@ -28,3 +28,4 @@ eter Deutsch 提出的分布式系统八大谬论概括了程序员新手可能�
 * [dmlc/xgboost](https://github.com/dmlc/xgboost):Scalable, Portable and Distributed Gradient Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and more. Runs on single machine, Hadoop, Spark, Flink and DataFlow https://xgboost.ai/
 * [firehol/netdata](https://github.com/firehol/netdata):Get control of your servers. Simple. Effective. Awesome! https://my-netdata.io/
 * [facebookincubator/LogDevice](https://github.com/facebookincubator/LogDevice):Distributed storage for sequential data https://logdevice.io
+* [meshbird/meshbird](https://github.com/meshbird/meshbird):Distributed private networking http://meshbird.com

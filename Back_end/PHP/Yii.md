@@ -871,3 +871,7 @@ UploadForm UploadedFile
 -   [yiisoft/log](https://github.com/yiisoft/log)
 -   [yii2-elasticsearch](https://github.com/yiisoft/yii2-elasticsearch)
 -   [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
+
+## 项目
+
+* [fecshop/yii2_fecshop](https://github.com/fecshop/yii2_fecshop):yii2 ( PHP ) fecshop core code used for ecommerce shop 多语言多货币多入口的开源电商 B2C 商城，支持移动端vue, app, html5 http://www.fecshop.com

@@ -102,6 +102,10 @@ ng generate module my-module # 模块Modulew
 * [Top 12 Productivity Tips for WebStorm and Angular – Part 1](https://www.sitepoint.com/productivity-tips-for-webstorm-and-angular-part-1/)
 * [Angular2新的体验](http://blog.fens.me/angular2-init/)
 
+## styleguide
+
+* [toddmotto/angularjs-styleguide](https://github.com/toddmotto/angularjs-styleguide):AngularJS styleguide for teams https://ultimateangular.com
+
 ## 脚手架
 
 * [angular/angular-cli](https://github.com/angular/angular-cli):CLI tool for Angular
@@ -109,6 +113,7 @@ ng generate module my-module # 模块Modulew
 ## UI
 
 * [angular/material](https://github.com/angular/material):Material design for AngularJS https://material.angularjs.org/
+* [angular/material2](https://github.com/angular/material2):Material Design components for Angular https://material.angular.io
 
 ## 测试
 

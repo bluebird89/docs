@@ -28,7 +28,7 @@
 * 《[计算机系统概论](https://www.amazon.cn/gp/product/B0011F9OQE)》
 * 《[TCP/IP详解 卷1：协议](https://www.amazon.cn/gp/product/B00116OTVS)》
 * 《[深入理解计算机系统（原书第2版）](https://www.amazon.cn/gp/product/B004BJ18KM)》 todo
-* 《[计算机程序的构造和解释（Structure and Interpretation of Computer Programs）](https://www.amazon.cn/gp/product/B0011AP7RY)》todo
+* 《[计算机程序的构造和解释（Structure and Interpretation of Computer Programs）](https://www.amazon.cn/gp/product/B0011AP7RY)》:<https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html>
 * 《[编码：隐匿在计算机软硬件背后的语言](https://www.amazon.cn/gp/product/B009RSXIB4)》
 * 《[性能之颠：洞悉系统、企业与云计算](https://www.amazon.cn/gp/product/B0140I5WPK)》
 * 《[Windows核心编程(第5版)](https://www.amazon.cn/gp/product/B001GS7918)》
