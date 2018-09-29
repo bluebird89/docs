@@ -145,7 +145,6 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [vuejs/vue-loader](https://github.com/vuejs/vue-loader):Webpack loader for Vue.js components
 * [vuejs/vue-test-utils](https://github.com/vuejs/vue-test-utils):Utilities for testing Vue components https://vue-test-utils.vuejs.org
 * [vuejs/vue-class-component](https://github.com/vuejs/vue-class-component):ES / TypeScript decorator for class-style Vue components.
-* [vuejs/vue-devtools](https://github.com/vuejs/vue-devtools):Chrome devtools extension for debugging Vue.js applications.
 * [vuejs/vue-router](https://github.com/vuejs/vue-router):The official router for Vue.js.https://router.vuejs.org/zh-cn/
 * [pagekit/vue-resource](https://github.com/pagekit/vue-resource):The HTTP client for Vue.js
 * [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
@@ -199,6 +198,7 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [mimecorg/vuido](https://github.com/mimecorg/vuido):Native desktop applications using Vue.js.
 * [halfrost/vue-objccn](https://github.com/halfrost/vue-objccn):🔥 用 Vue.js 开发的跨三端应用 / Use Vue.js to develop a cross-platform full stack application
 * [SimulatedGREG/electron-vue](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack.
+* [vuejs/vue-devtools](https://github.com/vuejs/vue-devtools):Chrome devtools extension for debugging Vue.js applications.
 
 ### [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
 

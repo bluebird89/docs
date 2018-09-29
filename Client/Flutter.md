@@ -7,6 +7,11 @@ Flutter是一个移动应用程序的软件开发工具包（SDK），用一个�
 Flutter 是 Fuchsia 的开发框架，支持导出 Android iOS 和 Fuchsia 三个平台的安装包
 
 
+* Flutter 自建了一个绘制引擎，底层是由 C++ 编写的引擎，负责渲染，文本处理，Dart VM 等；上层的 Dart Framework 直接调用引擎。避免了以往 JS 解决方案的 JS Bridge、线程跳跃等问题。
+* 引擎基于 Skia 绘制，操作 OpenGL、GPU，不需要依赖原生的组件渲染框架。
+* Dart 的引入，Dart 有 AOT 和 JIT 两种模式，线上使用时以 AOT 的方式编译成机器代码，保证了线上运行时的效率；而在开发期，Dart 代码以 JIT 的方式运行，支持代码的即时生效（HotReload)，提高开发效率。
+* Flutter 的页面和布局是基于 Widget 树的方式，看似不习惯，但这种树状结构解析简单，布局、绘制都可以单次遍历完成计算，而原生布局往往要往复多次计算，“simple is fast”的设计效果。
+
 ## 安装
 
 FLUTTER_STORAGE_BASE_URL: https://mirrors.sjtug.sjtu.edu.cn/
@@ -79,7 +84,7 @@ pod setup
 
 * [Solido/awesome-flutter](https://github.com/Solido/awesome-flutters):A curated list of awesome Flutter components, frameworks, libraries, and softwares
 * [flutter_gallery](https://github.com/flutter/flutter/tree/master/examples/flutter_gallery)
-* [](https://flutter-io.cn/)
+* [文档](https://flutter-io.cn/)
 * [官网](https://flutter.io/)
 * [AweiLoveAndroid/Flutter-learning](https://github.com/AweiLoveAndroid/Flutter-learning)::octocat:🔥 👍 🌟 ⭐️ ⭐️⭐️ Flutter从配置安装到填坑指南详解，Flutter相关Demo解读，项目实例，Dart语法详解
 

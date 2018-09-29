@@ -119,7 +119,6 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 * [miniapps](https://github.com/DDFE/miniapps) ★131 - 小程序项目脚手架工具
 * [Matchmaker](https://github.com/lypeer/Matchmaker) ★107 - 专为微信小程序开发的插件
 * [wecos](https://github.com/tencentyun/wecos) ★64 - 微信小程序 COS 瘦身解决方案
-* [Meituan-Dianping/mpvue](https://github.com/Meituan-Dianping/mpvue):基于 Vue.js 的小程序开发框架，从底层支持 Vue.js 语法和构建工具体系。 http://mpvue.com
 * [qiu8310/minapp](https://github.com/qiu8310/minapp):重新定义微信小程序的开发 https://qiu8310.github.io/minapp/
 
 ## 项目
@@ -221,6 +220,10 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 - [weapp-php-server-sdk](https://github.com/tencentyun/weapp-php-server-sdk) ★42 - 腾讯云微信小程序云端解决方案
 - [tencentyun/wafer-php-server-demo](https://github.com/tencentyun/wafer-php-server-demo) Wafer - 企业级微信小程序全栈方案 https://github.com/tencentyun/wafer
 * [tencentyun/wafer2-quickstart-nodejs](https://github.com/tencentyun/wafer2-quickstart-nodejs):Wafer2 Node.js 简化版 Demo
+
+## 状态管理
+
+* [dntzhang/westore](https://github.com/dntzhang/westore):世界上最小却强大的小程序框架 - 100多行代码搞定全局状态管理和跨页通讯
 
 ## 参考
 

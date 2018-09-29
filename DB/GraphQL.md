@@ -22,6 +22,7 @@ GraphQL 是一个由Facebook提出的 应用层查询语言. 使用 GraphQL, 你
 - [graphql/graphql-js](https://github.com/graphql/graphql-js):A reference implementation of GraphQL for JavaScript http://graphql.org/graphql-js/
 - [graphcool/framework](https://github.com/graphcool/framework):Framework to develop & deploy serverless GraphQL backends https://www.graph.cool
 * [hasura/graphql-engine](https://github.com/hasura/graphql-engine):Blazing fast, instant GraphQL APIs on Postgres with fine grained access control https://hasura.io
+* [prisma/graphcool-framework](https://github.com/prisma/graphcool-framework)
 
 ## 参考
 

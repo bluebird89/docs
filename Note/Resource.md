@@ -201,6 +201,7 @@
 -   [iawia002/annie](https://github.com/iawia002/annie):👾 Fast, simple and clean video downloader
 -   [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
 -   [rg3/youtube-dl](https://github.com/rg3/youtube-dl):Command-line program to download videos from YouTube.com and other video sites http://rg3.github.io/youtube-dl/
+- [asdf-vm/asdf](https://github.com/asdf-vm/asdf):Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more
 
 ## 资源
 
