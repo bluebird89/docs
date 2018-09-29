@@ -28,7 +28,9 @@ fast, scalable, distributed revision control system.一个分布式的代码管�
 ## 安装
 
 ```sh
-sudo apt-get install git
+sudo apt-get install git # Ubuntu 18.04 or Debian 9
+sudo yum install git # CentOS
+sudo dnf install git # Fedora
 
 brew install git
 brew install git-flow
@@ -73,7 +75,7 @@ git config -l                       # 列举所有配置
 git config --global user.name "name"
 git config --global user.email "email"
 git config --global color.ui "auto"
-git config --global core.editor vim # 设置编辑器为 vim
+git config --global core.editor "vim" # 设置编辑器为 vim
 
 git config --global credential.helper osxkeychain
 
@@ -563,7 +565,6 @@ git push origin :<remote_branch>  # 删除远程分支
 git branch -dr [remote/branch] # 删除远程分支
 git push origin --delete dev # 删除远程分支
 
-
 git checkout -- files # 将部分代码文件回滚
 ```
 
@@ -590,6 +591,34 @@ git checkout --ours <文件名> # 使用当前分支 HEAD 版本
 git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的 >>>>>>> 标记部分
 git add <文件名> # # 标记为解决状态加入暂存区
 git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge
+```
+
+### Pull Request
+
+A common best practice is to consider anything on the master branch as being deployable for others to use at any time.
+
+```sh
+Fork repository to remote-user
+clone local repository
+git checkout -b new-branch
+new-branch develop and commit
+Update Local Repository
+  - git remote add upstream https://github.com/original-owner-username/original-repository.git
+  - git fetch upstream
+  - git merge upstream/master
+Rebase and Update a Pull Request
+  - git rebase -i HEAD~x # -i refers to the rebase being interactive, and HEAD refers to the latest commit from the master branch. The x will be the number of commits you have made to your branch since you initially fetched it.
+  - git merge-base new-branch master # out key
+  - git rebase -i 66e506853b0366c87f4834bb6b39d341cd094fe9 # pick commit
+  - git rebase upstream/master
+git push --set-upstream origin new-branch
+Create Pull Request # why you are making the pull request through your commit messages, so it is best to be as precise and clear as possible.
+
+git checkout master
+git pull --rebase upstream master
+git push -f origin master
+git branch -d new-branch
+git push origin --delete new-branch
 ```
 
 #### Tag
@@ -628,6 +657,7 @@ git push origin --tags # 提交标签到GitHub中
 ```sh
 git archive
 ```
+
 ## GitHub
 
 

@@ -35,3 +35,7 @@ Electron 的架构包括 Node.js runtime 和嵌套的微型 Chromium 浏览器�
 ## 教程
 
 * [electron/electron-quick-start](https://github.com/electron/electron-quick-start):Clone to try a simple Electron app https://electron.atom.io/docs/tutoria…
+
+## 框架
+
+* [mherrmann/fbs](https://github.com/mherrmann/fbs):Electron alternative based on Python and Qt https://build-system.fman.io

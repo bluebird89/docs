@@ -132,7 +132,7 @@
       - (https://github.com/nojacko/email-validator)[Email Validator]: 一个较小的电子邮件验证库
       - (https://github.com/tedious/Fetch)[Fetch]: 一个IMAP库
       - (https://github.com/mautic/mautic)[Mautic]: 邮件营销自动化
-      - (https://github.com/PHPMailer/PHPMailer)[PHPMailer]: 另一个邮件解决方案
+      - [PHPMailer/PHPMailer](https://github.com/PHPMailer/PHPMailer): The classic email sending library for PHP
       - (https://github.com/henrikbjorn/Stampie)[Stampie]: 一个邮件服务库，类似于[SendGrid](http://sendgrid.com)[PostMark](https://postmarkapp.com),[MailGun](http://www.mailgun.com)[Mandrill](http://www.mandrill.com)
       - (http://swiftmailer.org/)[SwiftMailer]: 一个邮件解决方案
       - [egulias/EmailValidator](https://github.com/egulias/EmailValidator):PHP Email validator library inspired in @dominicsayers isemail function https://github.com/dominicsayers/isemail
@@ -194,6 +194,7 @@
       - (https://github.com/mauris/samsui)[Samsui]: 另一个伪数据生成库
       - (https://github.com/mikey179/vfsStream)[VFS Stream]: 一个用于测试的虚拟文件系统流的包装器
       - (https://github.com/adlawson/php-vfs)[VFS]: 另一个用于测试虚拟的文件系统
+      - [vimeo/psalm](https://github.com/vimeo/psalm):A static analysis tool for finding errors in PHP applications https://getpsalm.org
 
 ## 持续集成 Continuous Integration
 

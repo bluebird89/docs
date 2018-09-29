@@ -17,23 +17,45 @@ sudo apt-get install code
 
 ## 插件
 
-* Open-In-Browser
-* Quokka
-* Faker：
+* Auto Import:自动去查找、分析、然后提供代码补全。对于TypeScript和TSX
+* Bracket Pair Colorizer
 * CSS Peek
-* HTML Boilerplate
-* Prettier
-* Color Info
-* SVG Viewer
-* TODO Highlight
-* Icon Fonts
-* Minify
 * Change Case
-* Regex Previewer
+* Code Runner
+* Color Highlight
+* Color Info
+* Debugger for Chrome
+* Faker：
+* File Utils
+* Git History
+* GitLens
+* Git Project Manager
+* HTML Boilerplate
+* Import Cost
+* Icon Fonts
 * Language and Framework Packs
     - React Native Tools
     - Vue 2 Snippets
+* Indent-Rainbow:使得对齐更加具有可读性
+* IntelliSense for CSS class names in HTML
+* Jest
+* Minify
+* npm Intellisense
+* Open-In-Browser
+* PHP IntelliSense
 * [prettier/prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. https://prettier.io
+* Quokka.js
+* React Native Tools
+* React.js code snippets
+* Regex Previewer
+* Sublime Text Keymap and Settings Importer
+* SVG Viewer
+* TODO Highlight
+* Trailing Spaces
+* TypeScript Hero
+* WakaTime
+* Vetur:Vue工具
+* vscode-icons
 
 ## 主题
 
@@ -41,6 +63,7 @@ sudo apt-get install code
 * Aglia
 * One Dark
 * Material Icon
+* Material Theme
 
 ## 使用
 

@@ -232,3 +232,6 @@
 [submodule "Back_end/C/awesome-cpp"]
 	path = Back_end/C/awesome-cpp
 	url = git@github.com:fffaraz/awesome-cpp.git
+[submodule "JavaScript/Angular/awesome-angular"]
+	path = JavaScript/Angular/awesome-angular
+	url = git@github.com:gdi2290/awesome-angular.git

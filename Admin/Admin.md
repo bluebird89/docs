@@ -42,6 +42,7 @@ npm run serve
 * [creativetimofficial/material-dashboard](https://github.com/creativetimofficial/material-dashboard):Material Dashboard - Open Source Bootstrap 4 Material Design Admin https://demos.creative-tim.com/material-dashboard/examples/dashboard.html
 * [mgbq/nx-admin](https://github.com/mgbq/nx-admin):👍 A magical 🐮 ⚔ vue admin，
 * [misterGF/CoPilot](https://github.com/misterGF/CoPilot):Responsive Bootstrap 3 Admin Template based on AdminLTE with vue.js https://copilot.misterGF.io
+* [coreui/coreui-free-bootstrap-admin-template](https://github.com/coreui/coreui-free-bootstrap-admin-template):CoreUI is free bootstrap admin template http://coreui.io
 
 ## UI
 

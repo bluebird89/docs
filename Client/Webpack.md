@@ -305,6 +305,7 @@ Parsing error: The keyword 'import' is reserved
 
 * [survivejs/webpack-merge](https://github.com/survivejs/webpack-merge):Merge designed for Webpack (MIT)
 * [babel/babel-loader](https://github.com/babel/babel-loader):📦 Webpack plugin for Babel
+* [shama/webpack-stream](https://github.com/shama/webpack-stream):🍹 Run webpack through a stream interface
 
 ## 插件
 

@@ -11,3 +11,7 @@
 -   [codemirror/CodeMirror](https://github.com/codemirror/CodeMirror):In-browser code editor <http://codemirror.net/>
 -   [xtermjs/xterm.js](https://github.com/xtermjs/xterm.js):A terminal for the web <https://xtermjs.org/>
 -   [OctoLinker/OctoLinker](OctoLinker/OctoLinker):OctoLinker – Available on Chrome, Firefox and Opera <https://octolinker.github.io>
+
+## 参考
+
+* [浏览器的工作原理：新式网络浏览器幕后揭秘](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/)

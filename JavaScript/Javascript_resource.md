@@ -228,10 +228,6 @@
 * [swbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
 * [Node.js v8.x 中文文档](https://www.nodeapp.cn/)
 
-## 语法检测
-
-* [eslint/eslint](https://github.com/eslint/eslint):A fully pluggable tool for identifying and reporting on patterns in JavaScript https://eslint.org
-
 ## 项目
 
 * [bailicangdu/node-elm](https://github.com/bailicangdu/node-elm):基于 node.js + Mongodb 构建的后台系统
@@ -349,6 +345,7 @@
 ## highlighter
 
 * [highlightjs/highlight.js](https://github.com/highlightjs/highlight.js):Javascript syntax highlighter https://highlightjs.org/
+* [PrismJS/prism](https://github.com/PrismJS/prism):Lightweight, robust, elegant syntax highlighting. http://prismjs.com
 
 ## 安全
 
@@ -374,6 +371,10 @@
 ## 3D
 
 * [mrdoob/three.js](https://github.com/mrdoob/three.js)：JavaScript 3D library. https://threejs.org/
+
+## xml
+
+* [Leonidas-from-XIV/node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js):XML to JavaScript object converter.
 
 ## 代码在线分享工具
 
