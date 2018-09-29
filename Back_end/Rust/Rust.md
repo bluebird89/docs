@@ -28,3 +28,7 @@ rustc --version
 * [The Rust Programming Language](https://doc.rust-lang.org/book/second-edition/index.html)
 * [rust-gentle-intro](https://stevedonovan.github.io/rust-gentle-intro/)
 * [KaiserY/trpl-zh-cn](https://github.com/KaiserY/trpl-zh-cn):Rust 程序设计语言（第二版） https://kaisery.github.io/trpl-zh-cn/
+
+# 工具
+
+* [rustwasm/wasm-pack](https://github.com/rustwasm/wasm-pack):📦✨ your favorite rust -> wasm workflow tool! https://rustwasm.github.io/wasm-pack/

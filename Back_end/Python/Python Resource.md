@@ -1174,6 +1174,7 @@ Python 实现的算法和设计模式。
 - [Code Like a Pythonista: Idiomatic Python](http://top.jobbole.com/18767/)：如何像Python高手(Pythonista)一样编程。[官网](http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html)
 - [Prodesire/Python-Guide-CN](https://github.com/Prodesire/Python-Guide-CN):Python最佳实践指南
 * [pgbovine/OnlinePythonTutor](https://github.com/pgbovine/OnlinePythonTutor):Visualize Python, Java, JavaScript, TypeScript, Ruby, C, and C++ code execution in your Web browser http://pythontutor.com/
+* [Python fundamentals](https://www.python-tutorial.net/)
 
 ## 包
 

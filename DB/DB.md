@@ -76,7 +76,7 @@ NoSQL主要用于解决以下几种问题
 * [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. http://vitess.io
 * [getredash/redash](https://github.com/getredash/redash):Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. http://redash.io/
 
-## 工具
+## 数据库
 
 * [dbeaver/dbeaver](https://github.com/dbeaver/dbeaver):Free universal database tool and SQL client http://dbeaver.jkiss.org
 * [tgriesser/knex](https://github.com/tgriesser/knex):A query builder for PostgreSQL, MySQL and SQLite3, designed to be flexible, portable, and fun to use. http://knexjs.org

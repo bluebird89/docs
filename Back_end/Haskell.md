@@ -1,4 +1,4 @@
-# [Haske](link)
+# [Haskell](link)
 
 ## 参考
 

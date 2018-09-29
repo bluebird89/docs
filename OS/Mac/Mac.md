@@ -170,11 +170,10 @@ smaba
     -   [beardedspice/beardedspice](https://github.com/beardedspice/beardedspice):Mac Media Keys for the Masses <http://beardedspice.github.io>
     -   [Noizio](http://noiz.io/):turn on the sound and allow yourself to become engulfed in the tranquil sounds of nature.
 -   图片
-
     -   修图Snapseed
     -   [Pixave](http://www.littlehj.com/mac/) - Image/GIF/Video organizer
 - 录屏
-    - Kap
+    - [wulkano/kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology https://getkap.co
 -   阅读
     -   ibooks：阅读支持pdf与epub，可以通过icloud同步
     -   iTunes Movie Trailers
@@ -577,8 +576,10 @@ xcode-select --install # 安装 Command Line Tools
 
 ## 自启动的配置
 
+```
     sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist
     sudo launchctl load -w /System/Library/LaunchDaemons/org.apache.httpd.plist
+```
 
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
@@ -640,7 +641,6 @@ lsof -Pni4 | grep LISTEN | grep php
 ## 参考
 
 -   [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
--   [awesome-osx-command-line](https://github.com/herrbischoff/awesome-osx-command-line)Use your OS X terminal shell to do awesome things.
 -   [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
 -   [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
 -   [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X

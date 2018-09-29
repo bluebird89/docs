@@ -955,6 +955,7 @@ Markdown 语法： **Example:**
 * [gnab/remark](https://github.com/gnab/remark):A simple, in-browser, markdown-driven slideshow tool. http://remarkjs.com
 * [knsv/mermaid](https://github.com/knsv/mermaid):Generation of diagram and flowchart from text in a similar manner as markdown http://knsv.github.io/mermaid/
 * [aaronsw/html2text](https://github.com/aaronsw/html2text):Convert HTML to Markdown-formatted text. http://www.aaronsw.com/2002/html2text/
+* [benweet/stackedit](https://github.com/benweet/stackedit):In-browser Markdown editor https://stackedit.io/
 
 ## 参考
 

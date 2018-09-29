@@ -67,15 +67,20 @@ SWITCH能够不锁区，香港能够成为首发地区，而且首发还有中�
 -   [ ] Alliance: Air War by Art of the State LLC
 -   [ ] 王权 Reigns
 
-### steam 游戏平台
+### [steam](https://store.steampowered.com/)
 
--   [ ] PLAYERUNKNOWN'S BATTLEGROUNDS
+-   [ ] PLAYERUNKNOWN'S BATTLEGROUNDS 绝地求生
 -   [ ] Counter-Strike: Global Offensive
 -   [ ] Frostpunk
+-   [ ] 
 
 ## 参考
 
 * [miloyip/game-programmer](https://github.com/miloyip/game-programmer):A Study Path for Game Programmer
+
+## 直播
+
+* [twitch](https://www.twitch.tv)
 
 ## 工具
 
