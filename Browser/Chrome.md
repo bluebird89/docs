@@ -190,6 +190,7 @@ console.important = function( msg){
 ## 工具
 
 * [andrewdavey/immutable-devtools](https://github.com/andrewdavey/immutable-devtools):Chrome Dev Tools custom formatter for Immutable-js values
+* [extfans](https://extfans.com/)三方扩展商店
 
 ## 参考
 

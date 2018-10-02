@@ -19,6 +19,8 @@ pandoc WEB.md -o web.docx
 * [peachdocs/peach](https://github.com/peachdocs/peach):Peach is a web server for multi-language, real-time synchronization and searchable documentation. https://peachdocs.org
 * [Kozea/WeasyPrint](https://github.com/Kozea/WeasyPrint):WeasyPrint converts web documents (HTML with CSS, SVG, …) to PDF. https://weasyprint.org/
 * [basecamp/trix](https://github.com/basecamp/trix):A rich text editor for everyday writing https://trix-editor.org/
+* [leptosia/docute](https://github.com/leptosia/docute):📜 Effortlessly documentation done right. https://docute.org
+* [acebook/Docusaurus](https://github.com/facebook/Docusaurus):Easy to maintain open source documentation websites. https://docusaurus.io
 
 ## PPT
 

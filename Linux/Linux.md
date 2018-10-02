@@ -126,6 +126,7 @@ Linux内核处于用户进程和硬件之间，包括系统调用接口和Linux�
 * 请求调页
   - 如果被访问的页不在内存，也就是说，这个页还没有被存放在任何一个物理页面中，那么，内核分配一个新的页面并将其适当地初始化，这种技术称为“请求调页”；
   - “请求调页”是一种动态内存分配技术，它将页面的分配推迟到不能再推迟为止，也就是说，一直推迟到进程要访问的页不在物理内存时为止，由此引起一个缺页异常；该技术的引入主要是因为进程开始运行时并不访问其地址空间中的全部地址。
+* `free -m`: 可用的memory=free memory+buffers+cached
 
 ## 进程
 
@@ -916,7 +917,6 @@ ssh -p 2222 user@host   # 登陆服务器
 ssh username@remote_host
 ssh username@remote_host ls /var/www
 
-
 # /etc/ssh/sshd_config
 PasswordAuthentication no  # Disable Password Authentication
 PubkeyAuthentication yes
@@ -1423,6 +1423,7 @@ set completeopt=longest,menu
 * [Advanced Linux Programming](http://www.advancedlinuxprogramming.com/) – 这是一本电子书可以免费下载。这本书主要教程序员们怎么在Linux下做软件和编程序。
 * [IBM’s Technical Library](https://www.ibm.com/developerworks/views/linux/libraryview.jsp?type_by=Tutorials) – IBM’s Technical Library 提供的一组给高级Linux用户的教程。
 * [HAPPY HACKING LINUX](https://azer.bike/happy-hacking-linux/)
+* [linuxkit/linuxkit](https://github.com/linuxkit/linuxkit):A toolkit for building secure, portable and lean operating systems for containers
 
 systemctl unmask mysql.service
 service mysql start

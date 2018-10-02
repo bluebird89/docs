@@ -105,6 +105,9 @@
 * 《[数据结构与算法分析 : C语言描述（第2版）](https://www.amazon.cn/gp/product/B002WC7NGS)》
 * 《[数据结构与算法分析 : Java语言描述（第2版）](https://www.amazon.cn/gp/product/B01CNP0CG6)》
 * 《数据结构与算法 JavaScript 描述》
+* 算法图解
+* 大话数据结构
+* 剑指 offer
 
 ## 设计
 
@@ -144,6 +147,7 @@
 
 * 图解HTTP
 * HTTP权威指南：需要理解HTTP的本质复杂度，并且避免被作者引入的非本质复杂度的干扰。
+* 计算机网络
 
 ## Web前端
 
@@ -374,6 +378,7 @@
 
 * React Native入门与实战
 * React Native开发指南
+* React Native精解与实战
 
 ## 网站
 
@@ -501,6 +506,7 @@
 * 《[如何把事情做到最好：改变全球9800万人的人生指导书](https://www.amazon.cn/gp/product/B00ICWNKT6)》
 * 《[正则表达式经典实例](https://www.amazon.cn/gp/product/B00OGKGSSS)》
 * 《[编程珠玑](https://www.amazon.cn/gp/product/B001GNBZFE)》
+* 《编程之美》
 * 《The Mythical Man-month》: 关于软件工程的散文集
 * 《刻意练习:如何从新手到大师》
 * [未来世界的幸存者](http://survivor.ruanyifeng.com/)
@@ -631,6 +637,8 @@
     - 没有意义就没有摇摆_（日） 村上春树
 * 蝇王
 * 遥远的救世主
+* 张嘉佳
+    * 从你的全世界路过
 
 ## 科幻
 

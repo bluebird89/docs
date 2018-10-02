@@ -595,7 +595,9 @@ lsof -i tcp:8081  # 端口查看
 
 开启设置-〉共享-〉远程登录
 
-## 系统配置备份
+## [lra/mackup](https://github.com/lra/mackup)
+
+Keep your application settings in sync (OS X/Linux)系统配置备份
 
 linux下（mac下）有各种app，每个人会根据个人的喜好和习惯来设置一些（快捷键，变量等等），而dotfiles就是保存了这些自定义设置的文件。在系统中使用一个文件夹，通过ln命令，将不同的app，不同的系统设置文件都指引到这个文件夹
 

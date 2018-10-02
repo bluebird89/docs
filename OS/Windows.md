@@ -241,3 +241,4 @@ Windows是最烂的开发平台
 * [felixrieseberg/windows95](https://github.com/felixrieseberg/windows95):💩🚀 Windows 95 in Electron. Runs on macOS, Linux, and Windows.
 * [Awesome-Windows/Awesome](https://github.com/Awesome-Windows/Awesome):An awesome & curated list of best applications and tools for Windows.
 * [Windows10 LTSB]()
+* [Microsoft/MS-DOS](https://github.com/Microsoft/MS-DOS):The original sources of MS-DOS 1.25 and 2.0, for reference purposes

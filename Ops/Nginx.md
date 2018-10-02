@@ -885,6 +885,7 @@ awk -F\" '($2 ~ "xyz"){print $2}' access.log | awk '{print $2}' | sort | uniq -c
 - [xuexb/learn-nginx](https://github.com/xuexb/learn-nginx):学习nginx配置, 包括: 编译安装、反向代理、重定向、url重写、nginx缓存、跨域配置等
 - [Nginx 配置简述](http://www.cnblogs.com/hustskyking/p/nginx-configuration-start.html)
 - [Understanding the Nginx Configuration File Structure and Configuration Contexts](https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts)
+* [jaywcjlove/nginx-tutorial](https://github.com/jaywcjlove/nginx-tutorial):Nginx安装维护入门学习笔记，以及各种实例。
 
 ## 工具
 

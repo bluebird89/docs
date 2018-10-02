@@ -80,6 +80,7 @@
 * [reakit/reakit](https://github.com/reakit/reakit):Toolkit for building interactive UIs with React https://reakit.io
 * [pinterest/gestalt](https://github.com/pinterest/gestalt):A set of React UI components that supports Pinterest’s design language https://pinterest.github.io/gestalt
 * [segmentio/evergreen](https://github.com/segmentio/evergreen):🌲 Evergreen React UI Framework by Segment https://evergreen.surge.sh/
+* [JetBrains/ring-ui](https://github.com/JetBrains/ring-ui):A collection of JetBrains Web UI components https://jetbrains.github.io/ring-ui
 
 ## 编辑器
 
@@ -157,6 +158,7 @@
 ## 图表
 
 * [hshoff/vx](https://github.com/hshoff/vx):🐯react + d3 = vx | visualization components https://vx-demo.now.sh/
+* [react-native-community/react-native-linear-gradient](https://github.com/react-native-community/react-native-linear-gradient):A <LinearGradient /> component for react-native 
 
 ## 表单
 
@@ -251,6 +253,14 @@
 ## 代码检测
 
 * [facebook/prop-types](https://github.com/facebook/prop-types):Runtime type checking for React props and similar objects
+
+## 搜索
+
+* [searchkit/searchkit](https://github.com/searchkit/searchkit):React UI components / widgets. The easiest way to build a great search experience with Elasticsearch. http://www.searchkit.co
+
+## 文档
+
+* [nfl/react-helmet](https://github.com/nfl/react-helmet):A document head manager for React
 
 ## 测试
 
