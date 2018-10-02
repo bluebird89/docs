@@ -25,3 +25,7 @@ A web worker is a JavaScript program running on a different thread, in parallel 
 ```js
 worker.postMessage(payload, transferableObjects)
 ```
+
+## 参考
+
+* [Web Worker 使用教程](linhttp://www.ruanyifeng.com/blog/2018/07/web-worker.htmlk)

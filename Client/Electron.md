@@ -27,6 +27,7 @@ Electron 的架构包括 Node.js runtime 和嵌套的微型 Chromium 浏览器�
 
 * [electronic-wechat](https://github.com/geeeeeeeeek/electronic-wechat):A better WeChat on macOS and Linux. Built with Electron by Zhongyi Tong.
 * [electron/electron](https://github.com/electron/electron):Build cross platform desktop apps with JavaScript, HTML, and CSS https://electron.atom.io
+* [electron/electron-api-demos](https://github.com/electron/electron-api-demos):Explore the Electron APIs http://electronjs.org/#get-started
 
 ## 资源
 

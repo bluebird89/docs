@@ -221,3 +221,5 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 * [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns):Design patterns implemented in Java http://java-design-patterns.com
 * [Java-Interview](link)
 * [Java Algorithm And Data Structure Interview Questions and Programs](http://www.codespaghetti.com/java-algorithms-questions/)
+* [Snailclimb/JavaGuide](https://github.com/Snailclimb/JavaGuide):A core knowledge that most Java programmers need to master https://github.com/Snailclimb/JavaGuide
+* [可能是一份最适合你的后端面试指南](https://juejin.im/post/5ba591386fb9a05cd31eb85f)
