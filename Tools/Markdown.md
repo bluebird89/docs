@@ -956,6 +956,7 @@ Markdown 语法： **Example:**
 * [knsv/mermaid](https://github.com/knsv/mermaid):Generation of diagram and flowchart from text in a similar manner as markdown http://knsv.github.io/mermaid/
 * [aaronsw/html2text](https://github.com/aaronsw/html2text):Convert HTML to Markdown-formatted text. http://www.aaronsw.com/2002/html2text/
 * [benweet/stackedit](https://github.com/benweet/stackedit):In-browser Markdown editor https://stackedit.io/
+* [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
 
 ## 参考
 

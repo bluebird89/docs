@@ -157,4 +157,6 @@ brew update --force
 bash_completion
 zsh_completion
 
+## 工具
 
+* [Homebrew/homebrew-core](https://github.com/Homebrew/homebrew-core):🍻 Default formulae for the missing package manager for macOS https://brew.sh

@@ -324,3 +324,4 @@ for (var i = 0, j = a, loopLen = arr.length; i < loopLen; i++) {
 * [pa7/heatmap.js](https://github.com/pa7/heatmap.js):🔥 JavaScript Library for HTML5 canvas based heatmaps https://www.patrick-wied.at/static/heatmapjs/
 * [pixijs/pixi.js](https://github.com/pixijs/pixi.js):The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer. http://pixijs.com
 * [mozilla/BrowserQuest](https://github.com/mozilla/BrowserQuest):A HTML5/JavaScript multiplayer game experiment http://browserquest.mozilla.org/
+* [flowjs/flow.js](https://github.com/flowjs/flow.js):A JavaScript library providing multiple simultaneous, stable, fault-tolerant and resumable/restartable file uploads via the HTML5 File API.

@@ -58,6 +58,7 @@ if __name__ == '__main__':
 * [typicode/json-server](https://github.com/typicode/json-server):Get a full fake REST API with zero coding in less than 30 seconds (seriously)
 * [gongwalker/ApiManager](https://github.com/gongwalker/ApiManager):接口文档管理工具
 * [tobscure/json-api](https://github.com/tobscure/json-api):JSON-API (http://jsonapi.org) responses in PHP.
+* [hashicorp/vault](https://github.com/hashicorp/vault)：A tool for secrets management, encryption as a service, and privileged access management https://www.vaultproject.io/
 
 ## 加密
 

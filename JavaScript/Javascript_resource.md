@@ -30,11 +30,6 @@
 * jQuery
 * [Underscore.js](http://underscorejs.org/)
 
-### 代码整理工具
-
-* JSLint
-* JSHint
-
 ### 构建与自动化工具
 
 * NPM
@@ -90,6 +85,7 @@
 * [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
 * [es-analysis/plato](https://github.com/es-analysis/plato):JavaScript source code visualization, static analysis, and complexity tool
 * [dollarshaveclub/shave](https://github.com/dollarshaveclub/shave/):💈 Shave is a 0 dep JS plugin that truncates text to fit within an element based on a set max-height ✁ https://dollarshaveclub.github.io/shave/
+* [usablica/intro.js](https://github.com/usablica/intro.js):A better way for new feature introduction and step-by-step users guide for your website and project. http://introjs.com
 
 ## 数据库
 
@@ -102,6 +98,8 @@
 ## 编辑器
 
 * [codemirror/CodeMirror](https://github.com/codemirror/CodeMirror):In-browser code editor http://codemirror.net/
+* [ajaxorg/ace](https://github.com/ajaxorg/ace):Ace (Ajax.org Cloud9 Editor) https://ace.c9.io
+* [ianstormtaylor/slate](https://github.com/ianstormtaylor/slate):A completely customizable framework for building rich text editors. http://slatejs.org
 
 ## 日期
 
@@ -253,16 +251,20 @@
 * [nodejs/docker-node](https://github.com/nodejs/docker-node):Official Docker Image for Node.js 🐳 🐢 🚀 https://hub.docker.com/_/node/
 * [systemjs/systemjs](https://github.com/systemjs/systemjs):Dynamic ES module loader
 * [soldair/node-qrcode](https://github.com/soldair/node-qrcode):qr code generator
+* [github/fetch](https://github.com/github/fetch):A window.fetch JavaScript polyfill. http://github.github.io/fetch/
+* [FezVrasta/popper.js](https://github.com/FezVrasta/popper.js):A kickass library to manage your poppers https://popper.js.org
 
 ## 压缩
 
 * [mishoo/UglifyJS2](https://github.com/mishoo/UglifyJS2):JavaScript parser / mangler / compressor / beautifier toolkit http://lisperator.net/uglifyjs/
+* [kangax/html-minifier](https://github.com/kangax/html-minifier):Javascript-based HTML compressor/minifier (with Node.js support) http://kangax.github.com/html-minifier/
 
-## Debug
+## 调试Debug
 
 * [GoogleChromeLabs/ndb](https://github.com/GoogleChromeLabs/ndb):ndb is an improved debugging experience for Node.js, enabled by Chrome DevTools
 * [nswbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
 * [zeeshanu/dumper.js](https://github.com/zeeshanu/dumper.js):A better and pretty variable inspector for your Node.js applications
+* [chancejs/chancejs](https://github.com/chancejs/chancejs):Chance - Random generator helper for JavaScript http://chancejs.com
 
 ## NLP
 
@@ -280,6 +282,10 @@
 
 * [petkaantonov/bluebird](https://github.com/petkaantonov/bluebird):🐦 ⚡️ Bluebird is a full featured promise library with unmatched performance. http://bluebirdjs.com
 * [JacksonTian/eventproxy](https://github.com/JacksonTian/eventproxy):An implementation of task/event based asynchronous pattern. http://html5ify.com/eventproxy
+
+## 状态
+
+* [mweststrate/immer](https://github.com/mweststrate/immer):Create the next immutable state by mutating the current one
 
 ## keyboard input
 
@@ -324,6 +330,10 @@
 
 * [webpack-contrib/mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin):Lightweight CSS extraction plugin
 
+## 写作
+
+* [get-alex/alex](https://github.com/get-alex/alex):Catch insensitive, inconsiderate writing https://alexjs.com
+
 ## Markdown
 
 * [hinesboy/mavonEditor](https://github.com/hinesboy/mavonEditor):mavonEditor - A markdown editor based on Vue that supports a variety of personalized features https://md.zhystar.com/
@@ -337,10 +347,6 @@
 ## layout
 
 * [dagrejs/dagre](https://github.com/dagrejs/dagre):Directed graph layout for JavaScript
-
-## HTML compressor
-
-* [kangax/html-minifier](https://github.com/kangax/html-minifier):Javascript-based HTML compressor/minifier (with Node.js support) http://kangax.github.com/html-minifier/
 
 ## highlighter
 
@@ -360,10 +366,6 @@
 * [facebook/dataloader](https://github.com/facebook/dataloader):DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching.
 * [sidorares/node-mysql2](https://github.com/sidorares/node-mysql2):⚡️ fast node-mysql compatible mysql driver for node.js
 
-## 调试
-
-* [GoogleChromeLabs/ndb](https://github.com/GoogleChromeLabs/ndb):ndb is an improved debugging experience for Node.js, enabled by Chrome DevTools
-
 ## SVG
 
 * [svgdotjs/svg.js](https://github.com/svgdotjs/svg.js):The lightweight library for manipulating and animating SVG http://svgjs.com/
@@ -375,6 +377,10 @@
 ## xml
 
 * [Leonidas-from-XIV/node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js):XML to JavaScript object converter.
+
+## DOM
+
+* [jsdom/jsdom](https://github.com/jsdom/jsdom):A JavaScript implementation of the WHATWG DOM and HTML standards, for use with node.js
 
 ## 代码在线分享工具
 

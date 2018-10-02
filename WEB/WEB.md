@@ -201,6 +201,11 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 * [pod4g/hiper](https://github.com/pod4g/hiper):🚀 A statistical analysis tool for performance testing
 * [raviqqe/muffet](https://github.com/raviqqe/muffet):Fast website link checker in Go
 * [coturn/coturn](https://github.com/coturn/coturn):coturn TURN server project
+* [codesandbox](https://codesandbox.io):The online code editor for Preact
+
+## 参考
+
+* [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) https://solid.mit.edu/
 
 ## 统计
 * [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
