@@ -151,6 +151,7 @@ websocketd --port=8080 ./count.sh // 建立server
 ## 框架
 
 - [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
+* [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang http://go-colly.org/
 
 ## 扩展
 
@@ -173,10 +174,15 @@ websocketd --port=8080 ./count.sh // 建立server
 * [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
 * [murlokswarm/app](https://github.com/murlokswarm/app):Package to build GUI apps with Go, HTML and CSS.
 * [justinas/alice](https://github.com/justinas/alice):Painless middleware chaining for Go https://godoc.org/github.com/justinas/alice
+* [spf13/viper](https://github.com/spf13/viper):Go configuration with fangs
 
 ## ORM
 
 * [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io
+
+## 路由
+
+* [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
 
 ## 教程
 

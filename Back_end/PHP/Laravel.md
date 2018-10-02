@@ -1499,6 +1499,8 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [spatie/laravel-fractal](https://github.com/spatie/laravel-fractal):An easy to use Fractal wrapper built for Laravel and Lumen applications
 * [barryvdh/laravel-snappy](https://github.com/barryvdh/laravel-snappy):Laravel Snappy PDF
 * [antonioribeiro/health](https://github.com/antonioribeiro/health):Laravel Health Panel
+* [spatie/laravel-backup](https://github.com/spatie/laravel-backup):A package to backup your Laravel app
+* [elasticquent/Elasticquent](https://github.com/elasticquent/Elasticquent):Maps Laravel Eloquent models to Elasticsearch types
 
 ## IDE
 

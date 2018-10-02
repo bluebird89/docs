@@ -315,8 +315,9 @@
 * 任务运行器 Task Runners 自动运行任务的库
       - (http://bldr.io/)[Bldr]: 一个构建在Symfony组件上的PHP任务运行器
       - (https://github.com/jobbyphp/jobby)[Jobby]: 一个没有修改crontab的PHP定时任务管理器
-      - (https://github.com/consolidation/Robo)[Robo]: 一个面向对象配置的PHP任务运行器
+      - [consolidation/Robo](https://github.com/consolidation/Robo):Modern task runner for PHP http://robo.li 一个面向对象配置的PHP任务运行器
       - (http://taskphp.github.io/)[Task]: 一个灵感来源于Grunt和Gulp的纯PHP任务运行器
+      - [spiral/roadrunner](https://github.com/spiral/roadrunner):High-performance PHP application server, load-balancer and process manager written in Golang
 * 导航 Navigation 构建导航结构的工具
       - (https://github.com/tackk/cartographer)[Cartographer]: 一个站点地图生成库
       - (https://github.com/KnpLabs/KnpMenu)[KnpMenu]: 一个菜单库
@@ -659,7 +660,7 @@
       - (https://serversforhackers.com/)[Servers for Hackers]: 一个关于服务器管理的新闻通讯
       - (https://www.owasp.org/index.php/Main_Page)[The Open Web Application Security Project (OWASP)]: 一个开放软件安全社区
       - (https://websec.io/)[WebSec IO]: 一个web安全社区资源
-* PHP书籍 PHP Books PHP相关的非常好的书籍
+* PHP书籍 PHP Books
       - (https://www.functionalphp.com/)[Functional Programming in PHP]: 这本书将告诉你如何利用PHP5.3+的新功能的认识函数式编程的原则
       - (https://leanpub.com/grumpy-phpunit)[Grumpy PHPUnit]: 一本Chris Hartjes关于使用PHPUnit进行单元测试的书
       - (http://www.brandonsavage.net)[Mastering Object-Orientated PHP]: 一本Brandon Savage关于PHP面向对象的书
@@ -672,7 +673,7 @@
       - (https://leanpub.com/signalingphp)[Signaling PHP]: 一本Cal Evans关于在CLI脚本捕获PCNTL信号的书
       - (https://leanpub.com/grumpy-testing)[The Grumpy Programmer's Guide to Building Testable PHP Applications]: 一本Chris Hartjes关于构建PHP应用程序测试的书
       - (https://www.phparch.com/books/xml-parsing-with-php/)[XML Parsing with PHP]: 这本书涵盖的解析和验证XML文档，利用XPath表达式，使用命名空间，以及如何创建和修改XML文件的编程
-      - (https://leanpub.com/ddd-in-php)[Domain-Driven Design in PHP]: 展示PHP DDD风格的实例
+      - [Domain-Driven Design in PHP](https://leanpub.com/ddd-in-php): 展示PHP DDD风格的实例
 * 其他书籍 Other Books 与一般计算和web开发相关的书
       - (https://www.elastic.co/guide/index.html)[Elasticsearch: The Definitive Guide]: Clinton Cormley和Zachary Tong编写的与Elasticsearch工作的一本指南
       - (http://eloquentjavascript.net/)[Eloquent JavaScript]: Marijin Haverbeke关于JavaScript编程的一本书
@@ -736,6 +737,10 @@
 ## 扩展
 
 * [phalcon/zephir](https://github.com/phalcon/zephir):Zephir is a compiled high level language aimed to the creation of C-extensions for PHP https://zephir-lang.com/
+
+## 课程
+
+* [fabwu/dddinaction](https://github.com/fabwu/dddinaction):PHP implementation of the DDD in Practice Pluralsight course https://www.pluralsight.com/courses/domain-driven-design-in-practice
 
 ## trace
 
@@ -841,6 +846,7 @@
 - [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
 - [PHP Best Practices](https://phpbestpractices.org)
 - [php-fig/fig-standards](https://github.com/php-fig/fig-standards):Standards either proposed or approved by the Framework Interop Group http://www.php-fig.org/
+- [appzcoder/30-seconds-of-php-code](https://github.com/appzcoder/30-seconds-of-php-code):A curated collection of useful PHP snippets that you can understand in 30 seconds or less.
 
 ## 工具
 

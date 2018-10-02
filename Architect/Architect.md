@@ -114,3 +114,4 @@
 * [《微服务架构实战 160 讲》](https://time.geekbang.org/course/intro/84)
 * [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer):Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.
 * [davideuler/architecture.of.internet-product](https://github.com/davideuler/architecture.of.internet-product):互联网公司技术架构，微信/淘宝/微博/腾讯/阿里/美团点评/百度/Google/Facebook/Amazon/eBay的架构
+* [aosabook/500lines](https://github.com/aosabook/500lines):source for the book 500 Lines or Less
