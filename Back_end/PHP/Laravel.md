@@ -1501,6 +1501,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [antonioribeiro/health](https://github.com/antonioribeiro/health):Laravel Health Panel
 * [spatie/laravel-backup](https://github.com/spatie/laravel-backup):A package to backup your Laravel app
 * [elasticquent/Elasticquent](https://github.com/elasticquent/Elasticquent):Maps Laravel Eloquent models to Elasticsearch types
+* [saleem-hadad/larecipe](https://github.com/saleem-hadad/larecipe):🍪 Write gorgeous documentations for your products using Markdown inside your Laravel app. https://larecipe.binarytorch.com.my/
 
 ## IDE
 
