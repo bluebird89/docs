@@ -346,6 +346,7 @@ git diff <fileName>
 git diff --staged # 暂存区与最新一次提交之间的差别
 git diff HEAD # 本次提交与上次提交之间的区别 HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
 git diff --cached [file] # 显示暂存区和上一个commit的差异
+git diff HEAD # 显示已缓存与未缓存差异
 git diff [first-branch]...[second-branch] # 显示两次提交之间的差异
 git diff --shortstat "@{0 day ago}" # 显示今天你写了多少行代码
 
