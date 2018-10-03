@@ -119,6 +119,7 @@ smaba
     -   Upad
 - 下载
     - bitlord
+    - Folx
 -   工具
     -   [CheatSheet] 长按⌘键可以显示当前程序快捷键
     -   [flux](https://justgetflux.com/)
@@ -186,6 +187,8 @@ smaba
     -   atom:通过brew安装
     -   [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
     -   [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
+* 虚拟机
+    - Parallels Desktop
 
 ### 苹果铃声制作
 

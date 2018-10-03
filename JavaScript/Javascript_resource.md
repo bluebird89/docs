@@ -382,6 +382,10 @@
 
 * [jsdom/jsdom](https://github.com/jsdom/jsdom):A JavaScript implementation of the WHATWG DOM and HTML standards, for use with node.js
 
+## 视频
+
+* [videojs/video.js](https://github.com/videojs/video.js):Video.js - open source HTML5 & Flash video player http://www.videojs.com
+
 ## 代码在线分享工具
 
 * JS Fiddle

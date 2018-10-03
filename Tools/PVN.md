@@ -144,6 +144,8 @@ pip install shadowsocks
 * freevpn
 * [Potatso lite](https://itunes.apple.com/us/app/potatso-lite/id1239860606)
 * [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
+* [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu https://shadowsocks.be
+
 
 ## 参考
 

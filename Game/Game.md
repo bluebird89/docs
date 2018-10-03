@@ -43,8 +43,8 @@ SWITCH能够不锁区，香港能够成为首发地区，而且首发还有中�
 
 ## Play station 4
 
-有钱pro
-没钱slim
+pro
+slim
 
 天蝎
 
@@ -58,6 +58,8 @@ SWITCH能够不锁区，香港能够成为首发地区，而且首发还有中�
 -   [diasurgical/devilution](https://github.com/diasurgical/devilution):Diablo devolved - magic behind the 1996 computer game
 -   Dota
 -   风暴英雄
+-   星际争霸
+-   魔兽世界
 
 ### 手游
 
