@@ -260,9 +260,9 @@ gpg --sign demo.txt #签名
 
 Git维护的就是一个commitID树，分别保存着不同状态下的代码。 所以你对代码的任何修改，最终都会反映到 commit 上面去。创建和保存项目的快照及与之后的快照进行对比
 
-* 工作区（当前文件状态Workspace）:进行开发改动的地方，任何对象都是在工作区中诞生和被修改；文件状态：modified:working directory
-* 暂存区（提交最新的版本Index/Stage）:.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；文件状态：staged:Stage(Index)
-* 版本库 本地仓库（所有历史版本Repository）:保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；.git文件夹里还包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History
+* 工作区（Workspace）:进行开发改动的地方，任何对象都是在工作区中诞生和被修改；文件状态：modified:working directory
+* 暂存区（Index/Stage）:.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；文件状态：staged:Stage(Index)
+* 版本库|本地仓库（Repository）:保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；.git文件夹里还包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History
 * 远程仓库(Remote):通常使用clone命令将远程仓库拷贝到本地仓库中，开发后推送到远程仓库中即可；
 
 ![Git原理-3](../_static/git_3.png)
@@ -318,9 +318,9 @@ writing clear commit messages, you can make it easier for other people to follow
 ![diff](../_static/diff.svg "diff")
 
 ```sh
-git stutus # 查看本地的代码状态,工作树与暂存区的文件对比差别,显示有变更的文件
+git stutus -s(short) # 查看本地的代码状态,上次提交更新后的更改或者写入缓存的改动
 
-git add .|<file1>(<file2> <file3>)|[dir] #（所有修改过的文件/单个文件 或通过使用通配符将一组文件添加到暂存区）
+git add .|<file1>(<file2> <file3>)|[dir] #（所有文件/单个文件 或通过使用通配符）写入缓存区
 git add -p # 添加每个变化前，都会要求确认,对于同一个文件的多处变化，可以实现分次提交
 git add -A # 添加所有变化（新增 new、修改 modified、删除 deleted）到暂存区
 git add -u # 添加修改(modified)和被删除(deleted)文件，不包括新文件(new)也就是不是被追踪文件（untracked）
@@ -341,12 +341,11 @@ git reset --keep [commit] # 重置当前HEAD为指定commit，但保持暂存区
 git reset HEAD~1 # Undo last commit
 git revert [commit] # 回退到某个提交，但是不删除commit
 
-git diff # 显示暂存区和工作区的差异 查看执行 git status 的结果的详细信息
-git diff <fileName>
+git diff <fileName> # 未缓存的改动或者单个文件
+git diff --cached <fileName> # 已缓存的改动
 git diff --staged # 暂存区与最新一次提交之间的差别
-git diff HEAD # 本次提交与上次提交之间的区别 HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
-git diff --cached [file] # 显示暂存区和上一个commit的差异
-git diff HEAD # 显示已缓存与未缓存差异
+git diff HEAD # 已缓存的与未缓存的所有改动 HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
+git diff --stat # 显示摘要而非整个
 git diff [first-branch]...[second-branch] # 显示两次提交之间的差异
 git diff --shortstat "@{0 day ago}" # 显示今天你写了多少行代码
 
@@ -370,12 +369,13 @@ git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1
 ![rebase](../_static/rebase.svg "rebase"):上面的命令都在topic分支中进行，而不是master分支，在master分支上重演，并且把分支指向新的节点。注意旧提交没有被引用，将被回收。
 
 ```sh
-git commit -m "the first commit" # 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志.进行一次包含最后一次提交加上工作目录中文件快照的提交。并且文件被添加到暂存区域。
+# 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志.进行一次包含最后一次提交加上工作目录中文件快照的提交
+git commit -m "commit message" # 将缓存区内容添加到仓库中,在命令行中添加提交注释
 git commit [file1] [file2] ... -m [message]
-git commit -a # 提交工作区自上次commit之后的变化，直接到仓库区,通过编辑器添加message
+git commit -a # 把unstaged文件变成staged(不包括新建文件)，然后commit
+git commit –am[-a -m] "message" # git add . + git c-mmit -m 'message' 合并使用
 git commit -v # 提交时显示所有diff信息
-git commit –-am/--amend -m [message] # 使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
-git commit --amend [file1] [file2] ... # 修改上一次提交日志
+git commit --amend [file1] [file2] ... # 修改上一次提交日志 使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
 
 # 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
 git log # 找到起始 commitID

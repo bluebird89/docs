@@ -235,3 +235,6 @@
 [submodule "JavaScript/Angular/awesome-angular"]
 	path = JavaScript/Angular/awesome-angular
 	url = git@github.com:gdi2290/awesome-angular.git
+[submodule "Design/Design_Blocks"]
+	path = Design/Design_Blocks
+	url = git@github.com:froala/design-blocks.git
