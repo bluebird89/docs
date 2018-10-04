@@ -519,14 +519,14 @@ code review:project guidelines,unit tests
 
 ```sh
 git config get --remote.origin.url
-git remote -v # 列出所有的仓库地址
+git remote [-v] # 列出所有的仓库地址
 git remote show [remote] # 显示某个远程仓库的信息
 
 git remote add origin git@github.com:han1202012/TabHost_Test.git # 本地git仓库关联GitHub仓库
-git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 设置远程仓库地址(用于修改远程仓库地址)
+git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 修改远程仓库地址
 git remote rm <主机名> # 删除 origin 仓库信息
 git remote rename <原主机名> <新主机名> # 用于远程主机的改名
-git remote prune origin
+git remote prune origin # 待测  移除
 
 git fetch # 拉取所有分支的变化到本地但不合并
 git fetch -p # 拉取所有分支的变化，并且将远端不存在的分支同步移除
@@ -534,9 +534,6 @@ git fetch [remote] # 下载远程仓库的所有变动
 git fetch <远程主机名> <分支名>  # 只想取回特定分支的更新,所取回的更新，在本地主机上要用"远程主机名/分支名"的形式读取
 
 git remote update wilson # 更新源代码信息
-
-git push origin :old                 # Delete the old branch
-git push --set-upstream origin new   # Push the new branch, set local branch to track the new remote
 
 git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
 git pull # 执行的是 git merge
@@ -548,7 +545,8 @@ git pull --no-ff                 # 抓取远程仓库所有分支更新并合并
 git pull --rebase origin master # 取回远程主机某个分支的更新，再与本地的指定分支合并
 git merge origin/master             # 抓取远程仓库更新   将远程主分支合并到本地当前分支 等同于git pull
 
-git push                         # push所有分支
+# Git会首先在你试图push的分支上运行git log,检查它的历史中是否能看到server上的branch现在的tip,如果本地历史中不能看到server的tip,说明本地的代码不是最新的,Git会拒绝你的push
+git push   # push所有分支
 git push <远程主机名> <本地分支名>:<远程分支名> # 上传本地指定分支到远程仓库. git push origin my:master
 git push [remote] --force # 强行推送当前分支到远程仓库，即使有冲突
 git push [remote] --all # 不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机
@@ -561,6 +559,9 @@ git push <remote name> <local branch name>:<remote branch name>
 git push [-u] origin master        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库) 设置本地分支与远程分支保持同步，在第一次 git push 的时候带上 -u 参数即可
 git push origin <local_branch>   # 创建远程分支， origin是远程仓库名
 git push origin <local_branch>:<remote_branch>  # 创建远程分支
+git push origin :old                 # Delete the old branch
+git push --set-upstream origin new   # Push the new branch, set local branch to track the new remote
+
 git branch --set-upstream-to=origin/master master
 git branch --set-upstream master origin/master # 建立追踪关系，在现有分支与指定的远程分支之间
 git branch --set-upstream develop origin/develop
@@ -627,18 +628,14 @@ git tag new old # Rename tag
 git tag -d [tag] # 删除本地tag
 
 git push [remote] [tagname]  # 提交指定tag
-git push [remote] --tags  # 提交所有tag
-
-git push origin master --tags
 git push origin v2.1
-git push origin :refs/tags/old
-git push origin :refs/tags/<tagname> # Move tag from one commit to another commit
-git tag -fa tagname
+git push [remote] --tags  # 提交所有tag
+git push origin --tags
 
 git push origin --delete v1.0.0
-git push origin :refs/tags/[tagName]   # 删除远程tag
+git push origin :refs/tags/old # 删除远程指定tag
 
-git push origin --tags # 提交标签到GitHub中
+git tag -fa tagname
 ```
 
 #### archive
