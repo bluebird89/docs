@@ -332,7 +332,7 @@ git mv [file-original] [file-renamed]  # 改名文件，并且将这个改名放
 git rm [file1] [file2] ... # 删除工作区文件，并且将这次删除放入暂存区
 git rm --cached [file]  # 停止追踪指定文件，但该文件会保留在工作区
 
-git diff <fileName> # 未缓存的改动或者单个文件
+git diff <fileName> # 未缓存的所有或者单个文件的改动
 git diff --cached <fileName> # 已缓存的改动
 git diff --staged # 暂存区与最新一次提交之间的差别
 git diff HEAD # 已缓存的与未缓存的所有改动 HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
@@ -347,6 +347,25 @@ git reset --hard <b14bb52> # 重置暂存区与工作区，与上一次commit保
 git reset --keep [commit] # 重置当前HEAD为指定commit，但保持暂存区和工作区不变
 git reset HEAD~1 # Undo last commit
 git revert [commit] # 回退到某个提交，但是不删除commit
+
+git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
+git checkout . # 提交过版本库，但未提交至暂存区的文件（未执行 git add) 此类文件的状态为 Changes not staged for commit
+git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be
+git log
+git reset <版本号>
+git reset head~1
+git reflog # 回滚后再还原
+
+git reset –hard HEAD^ (回退到上一个版本)
+git reset –hard HEAD^ ^(回退到上上个版本)
+git reset –hard HEAD~100（回退到上100个版本）
+git reset –hard dc5f1d1(只要记得版本号就可以穿梭回到现代)
+
+# 冲突
+git checkout --ours <文件名> # 使用当前分支 HEAD 版本
+git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的 >>>>>>> 标记部分
+git add <文件名> # # 标记为解决状态加入暂存区
+git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge
 
 git checkout [file]  # 恢复暂存区的指定文件到工作区
 git checkout [commit] [file] # 恢复某个commit的指定文件到暂存区和工作区
@@ -430,7 +449,6 @@ git pull --rebase origin master # 取回远程主机某个分支的更新，再�
 git fetch origin # 从远程更新代码到本地但不合并
 git merge origin/master             # 抓取远程仓库更新   将远程主分支合并到本地当前分支 等同于git pull
 
-
 # 合并 commit
 git merge master #  merge是两个分支处理冲突后，新增一个 commit 追加到master上。
 git rebase master # 将someFeature分支上的commit记录追加到主分支上
@@ -461,7 +479,7 @@ git reset file # Remove file from index
 branch name should be descriptive。创建分支后, 分支操作不会影响master分支, 但是master分支改变会影其它分支
 
 ```sh
-git branch [-r]|[-a] # 列出所有远程/所有分支
+git branch [-r]|[-a] # 列出所有远程/所有分支，不带参数时列出本地分支
 git branch -av # 查看所有分支（包括远程分支）和最后一次提交日志
 
 git branch <new-branch> <old-branch> # 新建分支，不带old-branch为默认在当前分支上建立新分支
@@ -569,29 +587,6 @@ git checkout -- files # 将部分代码文件回滚
 ```
 
 deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
-
-#### 撤销
-
-```sh
-git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
-git checkout . # 提交过版本库，但未提交至暂存区的文件（未执行 git add) 此类文件的状态为 Changes not staged for commit
-git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be
-git log
-git reset <版本号>
-git reset head~1
-git reflog # 回滚后再还原
-
-git reset –hard HEAD^ (回退到上一个版本)
-git reset –hard HEAD^ ^(回退到上上个版本)
-git reset –hard HEAD~100（回退到上100个版本）
-git reset –hard dc5f1d1(只要记得版本号就可以穿梭回到现代)
-
-# 冲突
-git checkout --ours <文件名> # 使用当前分支 HEAD 版本
-git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的 >>>>>>> 标记部分
-git add <文件名> # # 标记为解决状态加入暂存区
-git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge
-```
 
 ### Pull Request
 
