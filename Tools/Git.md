@@ -330,12 +330,12 @@ git add -p <file> # 添加文件内某些改动到暂存区
 git mv [file-original] [file-renamed]  # 改名文件，并且将这个改名放入暂存区
 
 git rm [file1] [file2] ... # 从已跟踪文件清单中移除某个文件 删除工作区文件，并且将这次删除提交暂存区
-git rm --cached [file]  # 停止追踪指定文件，但该文件会保留在工作区
+git rm --cached [file]  # 停止追踪指定文件，但该文件会保留在工作区 从跟踪清单删除，把文件从暂存区移除并保留当前目录
 git rm -f <file> # 如果已修改并提交到暂存区
-git rm --caches <file> # 从跟踪清单删除，把文件从暂存区移除并保留当前目录
 
+git diff # 显示暂存区和工作区的差异
 git diff <fileName> # 未缓存的所有或者单个文件的改动
-git diff --cached <fileName> # 已缓存的改动
+git diff --cached <fileName> # 显示暂存区和上一个commit的差异
 git diff --staged # 暂存区与最新一次提交之间的差别
 git diff HEAD # 已缓存的与未缓存的所有改动 HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
 git diff --stat # 显示摘要而非整个
@@ -363,7 +363,7 @@ git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录
 
 # 冲突
 git checkout --ours <文件名> # 使用当前分支 HEAD 版本
-git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的 >>>>>>> 标记部分
+git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的
 git add <文件名> # # 标记为解决状态加入暂存区
 git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge
 
@@ -372,6 +372,7 @@ git checkout [file]  # 使用HEAD中的最新内容替换工作区中的文件�
 git checkout [commit] [file] # 恢复某个commit的指定文件到暂存区和工作区
 git checkout origin/master -- path/to/file
 git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1234567a44341404 / HEAD
+git checkout -- files # 将部分代码文件回滚
 ```
 
 #### 暂存区
@@ -396,7 +397,6 @@ git commit -v # 提交时显示所有diff信息
 git commit --amend [file1] [file2] ... # 修改上一次提交日志 使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
 
 # 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
-
 git log -p <file> # 跟踪查看某个文件的历史修改记录 每一次提交是一个快照，会计算每次提交的diff，作为一个patch显示
 git log [branchname]
 --oneline #  --pretty only show the commit id and comment per-commit
@@ -422,6 +422,7 @@ git log branch1 ^branch2 # 查看在分支1不在分支2的log
 git log [tag] HEAD --pretty=format:%s   # 显示某个commit之后的所有变动，每个commit占据一行
 git log [tag] HEAD --grep feature  # 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件
 git log --follow [file]  # 显示某个文件的版本历史，包括文件改名
+git log --name-status --oneline
 
 git reflog # 用来记录引用变化的一种机制,比如记录分支的变化或者是HEAD引用的变化，git会将变化记录到HEAD对应的reflog文件中，其路径为 .git/logs/HEAD， 分支的reflog文件都放在 .git/logs/refs 目录下的子目录中
 
@@ -444,28 +445,10 @@ git stash pop # 恢复上一次的 WIP 状态，并从队列中移除
 git stash pop stash@{num} # 恢复指定编号的 WIP，同时从队列中移除
 git stash clear # 删除所有
 
-# 合并 commit
-git merge master #  merge是两个分支处理冲突后，新增一个 commit 追加到master上。
-git rebase master # 将someFeature分支上的commit记录追加到主分支上
-# rebase:将本次修改起始的远程仓库节点之后的修改内容优先合并到本地修改分支上
-# conflict：git rebase出现冲突，修改冲突文件，每次修改,只修改自己添加的内容，每次不需commit，最后git push -f提交到远程仓库
-git add .
-git rebase --continue
-git rebase --abort
-
-git rebase -i # 通过交互式的 rebase，提供对分支 commit 的控制，从而可以清理混乱的历史。
-
 git clean # Remove untracked files
 git reset file # Remove file from index
 ```
 
-* git merge 处理冲突更直接
-* git rebase 能够保证清晰的 commit 记录。
-    - rebase 先找出共同的祖先节点
-    - 从祖先节点把功能分支的提交记录摘下来，然后 rebase 到 master 分支
-    - rebase 之后的 commitID 其实已经发生了变化
-
-![rebase vs merge](../_staic/mergevsrebase.jpeg "rebase vs merge")
 
 使用 git reset --hard commitID 把本地开发代码回滚到了一个之前的版本，而且还没有推到远端，怎么才能找回丢失的代码呢？ 你如果使用 git log 查看提交日志，并不能找回丢弃的那些 commitID。 而 git reflog 却详细的记录了你每个操作的 commitID，可以轻易的让你复原当时的操作并且找回丢失的代码。
 
@@ -477,32 +460,17 @@ branch name should be descriptive。创建分支后, 分支操作不会影响mas
 git branch [-r]|[-a] # 列出所有远程/所有分支，不带参数时列出本地分支
 git branch -av # 查看所有分支（包括远程分支）和最后一次提交日志
 
-git branch <new-branch> <old-branch> # 新建分支，不带old-branch为默认在当前分支上建立新分支
-git branch [branch-name] [commit] # 新建一个分支，指向指定commit,但依然停留在当前分支
+git branch <new-branch> <old-branch>|[commit] # 新建分支，不带old-branch为默认在当前分支上建立新分支 但依然停留在当前分支
 git branch --track [branch] [remote-branch] # 新建一个分支，与指定的远程分支建立追踪关系
+git checkout -b newBrach origin/master|[tag] # 在origin/master的基础上，创建一个新分支，并切换到new分支
 git checkout dev # 切换
 git checkout - # 切换到上一个分支
-git checkout -b newBrach origin/master # 在origin/master的基础上，创建一个新分支，并切换到new分支
-git checkout --track origin/branch     # 跟踪某个远程分支创建相应的本地分支
-git checkout -b [branch] [tag]  # 新建一个分支，指向某个tag
 
 git branch -m new # Rename current branch
+git branch -m old new  # Rename branch locally
 
 git branch -d [branch-name] # 删除已合并分支
 git branch -D branchName # 删除分支
-
-git merge new # 合并指定分支到当前分支
-git fetch origin master
-git merge origin/master # 在本地分支上合并拉取到本地的远程分支更新
-git merge --no-ff master
-git mergetool # 使用配置的合并工具来解决冲突
-
-git rebase master # 合并分支，但是不合并提交记录（commit），rebase合并如果有冲突则一个一个文件的去合并解决冲突
-git rebase origin/master # 在本地分支上合并远程分支
-git rebase source destiantion # 将source压缩到destiantion
-git rebase –continue | –skip | –abort # 如果出错的话
-
-git rebase -i HEAD~5 # Squash last n commits into one commit
 
 git bisect start
 git bisect good
@@ -517,6 +485,14 @@ code review:project guidelines,unit tests
 
 #### 远程分支
 
+* git merge 处理冲突更直接
+* git rebase 合并分支，但是不合并提交记录（commit），rebase合并如果有冲突则一个一个文件的去合并解决冲突,能够保证清晰的 commit 记录。
+    - rebase 先找出共同的祖先节点
+    - 从祖先节点把功能分支的提交记录摘下来，然后 rebase 到 master 分支
+    - rebase 之后的 commitID 其实已经发生了变化
+
+![rebase vs merge](../_staic/mergevsrebase.jpeg "rebase vs merge")
+
 ```sh
 git config get --remote.origin.url
 git remote [-v] # 列出所有的仓库地址
@@ -526,64 +502,75 @@ git remote add origin git@github.com:han1202012/TabHost_Test.git # 本地git仓�
 git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 修改远程仓库地址
 git remote rm <主机名> # 删除 origin 仓库信息
 git remote rename <原主机名> <新主机名> # 用于远程主机的改名
-git remote prune origin # 待测  移除
-
-git fetch # 拉取所有分支的变化到本地但不合并
-git fetch -p # 拉取所有分支的变化，并且将远端不存在的分支同步移除
-git fetch [remote] # 下载远程仓库的所有变动
-git fetch <远程主机名> <分支名>  # 只想取回特定分支的更新,所取回的更新，在本地主机上要用"远程主机名/分支名"的形式读取
+git remote prune origin # removes tracking branches whose remote branches are removed
 
 git remote update wilson # 更新源代码信息
 
+git branch --set-upstream-to|track v1.0 origin/v1.0
+git branch --set-upstream-to=origin/master master # 建立追踪关系，在现有分支与指定的远程分支之间 --set-upstream 已废弃
+
+git fetch # 拉取所有分支的变化
+git fetch origin master # 从远程更新代码到本地但不合并 拉取指定分支的变化 只想取回特定分支的更新,所取回的更新，在本地主机上要用"远程主机名/分支名"的形式读取
+git fetch -p # 拉取所有分支的变化，并且将远端不存在的分支同步移除
+
+# 合并 commit
+git merge origin/master  # 抓取远程仓库更新  将远程主分支合并到本地当前分支 等同于git pull
+git merge new # 合并指定分支到当前分支，新增一个 commit 追加
+git merge --no-ff master
+git mergetool # 使用配置的合并工具来解决冲突
+
+# rebase:将本次修改起始的远程仓库节点之后的修改内容优先合并到本地修改分支上
+# conflict：git rebase出现冲突，修改冲突文件，每次修改,只修改自己添加的内容，git add .每次不需commit，git rebase --continue 最后git push -f提交到远程仓库
+git rebase someFeature # 将someFeature分支上的commit记录追加到主分支上 合并分支，但是不合并提交记录（commit），rebase合并如果有冲突则一个一个文件的去合并解决冲突
+git rebase origin/master # 在本地分支上合并远程分支
+git rebase source destiantion # 将source压缩到destiantion
+git rebase -–continue|skip|abort # 如果出错的话
+git rebase -i HEAD~5 # Squash last n commits into one commit
+git rebase -i # 通过交互式的 rebase，提供对分支 commit 的控制，从而可以清理混乱的历史。
+
 git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
 git pull # 执行的是 git merge
-git pull -r origin master # 执行的是git rebase git pull origin master
+git pull -r origin master # 执行的是git rebase git pull origin master 取回远程主机某个分支的更新，再与本地的指定分支合并
 git pull origin master --allow-unrelated-histories # 合并两个不同的项目
-
+git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并
+git pull --rebase origin master # 取回远程主机某个分支的更新，再与本地的指定分支合并
 git pull <remote> <branch>    # 抓取远程仓库所有分支更新并合并到本地
 git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并
 git pull --rebase origin master # 取回远程主机某个分支的更新，再与本地的指定分支合并
-git merge origin/master             # 抓取远程仓库更新   将远程主分支合并到本地当前分支 等同于git pull
 
-# Git会首先在你试图push的分支上运行git log,检查它的历史中是否能看到server上的branch现在的tip,如果本地历史中不能看到server的tip,说明本地的代码不是最新的,Git会拒绝你的push
+# Git会首先在你试图push的分支上运行git log,检查它的历史中是否能看到server上的branch现在的tip,如果本地历史中不能看到server的tip,说明本地的代码不是最新的,Git会拒绝你的push.要求先在本地做git pull合并差异，然后再推送到远程主机
 git push   # push所有分支
-git push <远程主机名> <本地分支名>:<远程分支名> # 上传本地指定分支到远程仓库. git push origin my:master
-git push [remote] --force # 强行推送当前分支到远程仓库，即使有冲突
+git push <remote name> <local branch name>:<remote branch name> # 上传本地指定分支到远程仓库. git push origin my:master
+git push [-u] origin branch-name        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库) 设置本地分支与远程分支保持同步，在第一次 git push 的时候带上 -u 参数即可  上传本地指定分支到远程仓库. git push origin my:master,远程存在则更新，不存在则新建
+git push origin qixiu/feature  # 新建本地分支，然后更新到远端的方式来新增一个远端分支
 git push [remote] --all # 不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机
-git push origin master # 省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支
-git push origin --delete master # 表示删除origin主机的master分支
-git push origin branch-name # 从本地推送分支
-git push --force origin  # 如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做git pull合并差异，然后再推送到远程主机。这时，如果你一定要推送，可以使用--force选项
-git push <remote repository name> <branch name> # （第一次 git push -u：-u 选项设置本地分支去跟踪远程对应的分支）
-git push <remote name> <local branch name>:<remote branch name>
-git push [-u] origin master        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库) 设置本地分支与远程分支保持同步，在第一次 git push 的时候带上 -u 参数即可
-git push origin <local_branch>   # 创建远程分支， origin是远程仓库名
-git push origin <local_branch>:<remote_branch>  # 创建远程分支
-git push origin :old                 # Delete the old branch
+git push --force origin  # 如果远程主机的版本比本地版本更新，推送时Git会报错，。强行推送当前分支到远程仓库，即使有冲突
 git push --set-upstream origin new   # Push the new branch, set local branch to track the new remote
 
-git branch --set-upstream-to=origin/master master
-git branch --set-upstream master origin/master # 建立追踪关系，在现有分支与指定的远程分支之间
-git branch --set-upstream develop origin/develop
-
-git push origin branchName #  提交分支
-git push origin qixiu/feature  # 新建本地分支，然后更新到远端的方式来新增一个远端分支
 git push origin -d qixiu/feaure # 删除远程分支
-git push origin :qixiu/feature
-
-git push origin --delete <branch> # 删除远程分支
-git branch -dr <remote/branch>
-
-git branch -d <branch>
-git push origin :<remote_branch>  # 删除远程分支
-
+git push origin :<remote_branch>  # 省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支
 git branch -dr [remote/branch] # 删除远程分支
-git push origin --delete dev # 删除远程分支
-
-git checkout -- files # 将部分代码文件回滚
+git push origin --delete dev # 删除远程分支\
 ```
 
 deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
+
+#### 撤销
+
+```sh
+git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
+git checkout . # 提交过版本库，但未提交至暂存区的文件（未执行 git add) 此类文件的状态为 Changes not staged for commit
+git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be
+git log
+git reset <版本号>
+git reset head~1
+
+# 冲突
+git checkout --ours <文件名> # 使用当前分支 HEAD 版本
+git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的 >>>>>>> 标记部分
+git add <文件名> # # 标记为解决状态加入暂存区
+git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge
+```
 
 ### Pull Request
 
@@ -643,9 +630,6 @@ git tag -fa tagname
 ```sh
 git archive
 ```
-
-## GitHub
-
 
 ## cherry-pick
 
