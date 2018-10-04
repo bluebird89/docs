@@ -147,7 +147,7 @@
 
 * 图解HTTP
 * HTTP权威指南：需要理解HTTP的本质复杂度，并且避免被作者引入的非本质复杂度的干扰。
-* 计算机网络
+* 计算机网络 自顶向下方法
 
 ## Web前端
 
@@ -309,6 +309,7 @@
 * 《[深度学习:基于Keras的Python实践](https://www.amazon.cn/gp/product/B07D5855F4)》
 * Python与量化投资从基础到实践
 * Learning Python, 5th Edition
+* Python编程 从入门到实践
 * 流畅的Python Fluent Python
 * [Flask Web开发实战：入门、进阶与原理解析](https://item.jd.com/12430774.html)
 
