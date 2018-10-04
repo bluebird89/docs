@@ -357,6 +357,7 @@ git reset –hard dc5f1d1 # 只要记得版本号就可以穿梭回到现代
 git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be
 
 git revert [commit] # 回退到某个提交，但是不删除commit
+git clean # Remove untracked files
 
 # 移除没有track文件
 git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
@@ -424,6 +425,9 @@ git log [tag] HEAD --grep feature  # 显示某个commit之后的所有变动，�
 git log --follow [file]  # 显示某个文件的版本历史，包括文件改名
 git log --name-status --oneline
 
+#  使用 git reset --hard commitID 把本地开发代码回滚到了一个之前的版本，而且还没有推到远端，怎么才能找回丢失的代码呢？
+#  你如果使用 git log 查看提交日志，并不能找回丢弃的那些 commitID。
+#  git reflog 却详细的记录了你每个操作的 commitID，可以轻易的让你复原当时的操作并且找回丢失的代码。
 git reflog # 用来记录引用变化的一种机制,比如记录分支的变化或者是HEAD引用的变化，git会将变化记录到HEAD对应的reflog文件中，其路径为 .git/logs/HEAD， 分支的reflog文件都放在 .git/logs/refs 目录下的子目录中
 
 git whatchanged [file]  # 显示某个文件的版本历史，包括文件改名
@@ -444,13 +448,7 @@ git stash drop # 删除stash中上一个
 git stash pop # 恢复上一次的 WIP 状态，并从队列中移除
 git stash pop stash@{num} # 恢复指定编号的 WIP，同时从队列中移除
 git stash clear # 删除所有
-
-git clean # Remove untracked files
-git reset file # Remove file from index
 ```
-
-
-使用 git reset --hard commitID 把本地开发代码回滚到了一个之前的版本，而且还没有推到远端，怎么才能找回丢失的代码呢？ 你如果使用 git log 查看提交日志，并不能找回丢弃的那些 commitID。 而 git reflog 却详细的记录了你每个操作的 commitID，可以轻易的让你复原当时的操作并且找回丢失的代码。
 
 #### 分支
 
@@ -479,9 +477,6 @@ git bisect bad # Find bug in commit history in a binary search tree style
 git cherry-pick [commit] # 选择一个commit，合并进当前分支
 git cherry-pick hash_commit_A hash_commit_B
 ```
-
-Pull Request:useful for contributing to open source projects and for managing changes to shared repositories.
-code review:project guidelines,unit tests
 
 #### 远程分支
 
@@ -513,11 +508,14 @@ git fetch # 拉取所有分支的变化
 git fetch origin master # 从远程更新代码到本地但不合并 拉取指定分支的变化 只想取回特定分支的更新,所取回的更新，在本地主机上要用"远程主机名/分支名"的形式读取
 git fetch -p # 拉取所有分支的变化，并且将远端不存在的分支同步移除
 
-# 合并 commit
+# 合并 commit 冲突 记为解决状态加入暂存区
 git merge origin/master  # 抓取远程仓库更新  将远程主分支合并到本地当前分支 等同于git pull
 git merge new # 合并指定分支到当前分支，新增一个 commit 追加
 git merge --no-ff master
 git mergetool # 使用配置的合并工具来解决冲突
+
+git checkout --ours <文件名> # 使用当前分支 HEAD 版本
+git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的
 
 # rebase:将本次修改起始的远程仓库节点之后的修改内容优先合并到本地修改分支上
 # conflict：git rebase出现冲突，修改冲突文件，每次修改,只修改自己添加的内容，git add .每次不需commit，git rebase --continue 最后git push -f提交到远程仓库
@@ -530,13 +528,10 @@ git rebase -i # 通过交互式的 rebase，提供对分支 commit 的控制，�
 
 git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
 git pull # 执行的是 git merge
-git pull -r origin master # 执行的是git rebase git pull origin master 取回远程主机某个分支的更新，再与本地的指定分支合并
+git pull <remote> <branch>    # 抓取远程仓库所有分支更新并合并到本地
+git pull -r[--rebase] origin master # 执行的是git pull origin master git rebase 取回远程主机某个分支的更新，再与本地的指定分支合并
 git pull origin master --allow-unrelated-histories # 合并两个不同的项目
 git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并
-git pull --rebase origin master # 取回远程主机某个分支的更新，再与本地的指定分支合并
-git pull <remote> <branch>    # 抓取远程仓库所有分支更新并合并到本地
-git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并
-git pull --rebase origin master # 取回远程主机某个分支的更新，再与本地的指定分支合并
 
 # Git会首先在你试图push的分支上运行git log,检查它的历史中是否能看到server上的branch现在的tip,如果本地历史中不能看到server的tip,说明本地的代码不是最新的,Git会拒绝你的push.要求先在本地做git pull合并差异，然后再推送到远程主机
 git push   # push所有分支
@@ -555,26 +550,12 @@ git push origin --delete dev # 删除远程分支\
 
 deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
 
-#### 撤销
-
-```sh
-git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
-git checkout . # 提交过版本库，但未提交至暂存区的文件（未执行 git add) 此类文件的状态为 Changes not staged for commit
-git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be
-git log
-git reset <版本号>
-git reset head~1
-
-# 冲突
-git checkout --ours <文件名> # 使用当前分支 HEAD 版本
-git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的 >>>>>>> 标记部分
-git add <文件名> # # 标记为解决状态加入暂存区
-git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge
-```
-
 ### Pull Request
 
 A common best practice is to consider anything on the master branch as being deployable for others to use at any time.
+
+Pull Request:useful for contributing to open source projects and for managing changes to shared repositories.
+code review:project guidelines,unit tests
 
 ```sh
 Fork repository to remote-user
