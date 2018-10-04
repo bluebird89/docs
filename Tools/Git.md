@@ -341,11 +341,18 @@ git diff [first-branch]...[second-branch] # 显示两次提交之间的差异
 git diff --shortstat "@{0 day ago}" # 显示今天你写了多少行代码
 
 # Reset the index to match the most recent commit
-git reset [HEAD|commit] [file] # 撤销文件跟踪，重置暂存区的指定文件，与上一次commit保持一致，但工作区不变, 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变 会将提交记录回滚，代码不回滚git reset --mixed HEAD # 缺省参数，将HEAD变了，文件目录没有变，取消了commit和add的内容
-git reset --soft # 重置
+git reset HEAD [file] # 撤销文件跟踪，重置暂存区的指定文件，与上一次commit保持一致，但工作区不变,
+git reset commit # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变 会将提交记录回滚，代码不回滚
+git reset --mixed HEAD # 缺省参数，将HEAD变了，文件目录没有变，取消了commit和add的内容
+git reset --soft # 取消commit的内容
 git reset --hard <b14bb52> # 重置暂存区与工作区，与上一次commit保持一致 会将提交记录和代码全部回滚 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
 git reset --keep [commit] # 重置当前HEAD为指定commit，但保持暂存区和工作区不变
 git reset HEAD~1 # Undo last commit
+git reset –hard HEAD^  # 回退到上一个版本
+git reset –hard HEAD^ ^ # 回退到上上个版本
+git reset –hard HEAD~100 # 回退到上100个版本
+git reset –hard dc5f1d1 # 只要记得版本号就可以穿梭回到现代
+
 git revert [commit] # 回退到某个提交，但是不删除commit
 
 git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
@@ -355,11 +362,6 @@ git log
 git reset <版本号>
 git reset head~1
 git reflog # 回滚后再还原
-
-git reset –hard HEAD^ (回退到上一个版本)
-git reset –hard HEAD^ ^(回退到上上个版本)
-git reset –hard HEAD~100（回退到上100个版本）
-git reset –hard dc5f1d1(只要记得版本号就可以穿梭回到现代)
 
 # 冲突
 git checkout --ours <文件名> # 使用当前分支 HEAD 版本
