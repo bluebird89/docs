@@ -292,6 +292,7 @@ git init [project-name] # 初始化git仓库 在当前目录内新建一个Git�
 
 writing clear commit messages, you can make it easier for other people to follow along and provide feedback.
 
+* HEAD关键字指的是当前分支最末梢最新的一个提交，也就是版本库中该分支上的最新版本
 * git reset -- files 用来撤销最后一次git add files，你也可以用git reset 撤销所有暂存区域文件。
 * git checkout -- files 把文件从暂存区域复制到工作目录，用来丢弃本地修改。
 * git commit -a git commit files git checkout HEAD -- files 回滚到复制最后一次提交。跳过暂存区域直接从仓库取出文件或者直接提交代码
@@ -339,12 +340,10 @@ git diff --stat # 显示摘要而非整个
 git diff [first-branch]...[second-branch] # 显示两次提交之间的差异
 git diff --shortstat "@{0 day ago}" # 显示今天你写了多少行代码
 
-git reset # Reset the index to match the most recent commit
-git reset [HEAD] [file] # 撤销文件跟踪，重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
-git reset --mixed HEAD # 缺省参数，将HEAD变了，文件目录没有变，取消了commit和add的内容
+# Reset the index to match the most recent commit
+git reset [HEAD|commit] [file] # 撤销文件跟踪，重置暂存区的指定文件，与上一次commit保持一致，但工作区不变, 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变 会将提交记录回滚，代码不回滚git reset --mixed HEAD # 缺省参数，将HEAD变了，文件目录没有变，取消了commit和add的内容
 git reset --soft # 重置
 git reset --hard <b14bb52> # 重置暂存区与工作区，与上一次commit保持一致 会将提交记录和代码全部回滚 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
-git reset [commit] # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变 会将提交记录回滚，代码不回滚
 git reset --keep [commit] # 重置当前HEAD为指定commit，但保持暂存区和工作区不变
 git reset HEAD~1 # Undo last commit
 git revert [commit] # 回退到某个提交，但是不删除commit
