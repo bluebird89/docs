@@ -70,15 +70,13 @@ man git # Git User Manual
 
 git config --list --show-origin # 查看配置
 git config --local # repository配置
-git config -l                       # 列举所有配置
+git config -l  # 列举所有配置
 
 git config --global user.name "name"
 git config --global user.email "email"
 git config --global color.ui "auto"
 git config --global core.editor "vim" # 设置编辑器为 vim
-
 git config --global credential.helper osxkeychain
-
 git config --global core.excludesfile ~/.gitignore
 echo .DS_Store >> ~/.gitignore
 
@@ -91,6 +89,7 @@ git config --global alias.ls 'log --name-status --oneline --graph'
 git config --global rebase.autoStash true
 git config --global alias.st 'status --porcelain'
 
+# 配置文件
 [user]
 email = liboming88@yeah.net
 name = Henryli
@@ -153,10 +152,13 @@ fsckobjects = true
 
 # A nice little github-like colorful, split diff right in the console.
 # via http://owen.cymru/github-style-diff-in-terminal-with-icdiff/
+
 [diff]
 tool = icdiff
+
 [difftool]
 prompt = false
+
 [difftool "icdiff"]
 cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
@@ -171,7 +173,6 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
 * SSH:SSH keys的使用需保证remote的源为git方式
 * HTTP(S)
-* Git
 
 ### SSH
 
@@ -194,7 +195,6 @@ Host *
   IdentityFile ~/.ssh/id_rsa
 
 # 多个ssh
-
 git:http://01810661@gitlab.smgtech.net
 
 # 配置github.com
@@ -211,10 +211,9 @@ Host gitlab.smgtech.net
     PreferredAuthentications publickey
     #User 01810661
 
-用cmder无效
-
+# 用cmder无效
 github
- Couldn't agree a key exchange algorithm (available: curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521)
+# Couldn't agree a key exchange algorithm (available: curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521)
 ```
 
 ### GPG
@@ -256,6 +255,13 @@ gpg --decrypt demo.en.txt --output demo.de.txt
 gpg --sign demo.txt #签名
 ```
 
+## Git VS SVN
+
+所有的版本控制系统，只能跟踪文本文件的改动，比如txt文件，网页，所有程序的代码等，Git也不列外，版本控制系统可以告诉你每次的改动，但是图片，视频这些二进制文件，虽能也能由版本控制系统管理，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是知道图片从1kb变成2kb，但是到底改了啥，版本控制也不知道。
+
+* SVN是集中式版本控制系统，版本库是集中放在中央服务器的，而干活的时候，用的都是自己的电脑，所以首先要从中央服务器哪里得到最新的版本，然后干活，干完后，需要把自己做完的活推送到中央服务器。集中式版本控制系统是必须联网才能工作
+* Git是分布式版本控制系统，那么它就没有中央服务器的，每个人的电脑就是一个完整的版本库
+
 ## 原理
 
 Git维护的就是一个commitID树，分别保存着不同状态下的代码。 所以你对代码的任何修改，最终都会反映到 commit 上面去。创建和保存项目的快照及与之后的快照进行对比
@@ -265,9 +271,9 @@ Git维护的就是一个commitID树，分别保存着不同状态下的代码。
 * 版本库|本地仓库（Repository）:保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；.git文件夹里还包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History
 * 远程仓库(Remote):通常使用clone命令将远程仓库拷贝到本地仓库中，开发后推送到远程仓库中即可；
 
-![Git原理-3](../_static/git_3.png)
 ![Git原理-1](../_static/bg2015120901.png)
 ![Git原理-2](../_static/git_2.png)
+![Git原理-3](../_static/git_3.jpg)
 
 ### 创建工作区 start a working area
 
@@ -329,8 +335,8 @@ git add -p <file> # 添加文件内某些改动到暂存区
 
 git mv [file-original] [file-renamed]  # 改名文件，并且将这个改名放入暂存区
 
-git rm [file1] [file2] ... # 从已跟踪文件清单中移除某个文件 删除工作区文件，并且将这次删除提交暂存区
-git rm --cached [file]  # 停止追踪指定文件，但该文件会保留在工作区 从跟踪清单删除，把文件从暂存区移除并保留当前目录
+git rm [file1] [file2] ... # 从已跟踪文件和工作区中移除某个文件 并且将这次删除提交暂存区
+git rm --cached [file]  # 把文件从暂存区移除但工作区保留
 git rm -f <file> # 如果已修改并提交到暂存区
 
 git diff # 显示暂存区和工作区的差异

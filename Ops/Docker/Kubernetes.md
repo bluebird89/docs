@@ -312,6 +312,7 @@ kubectl delete deployments hello-minikube1
 * [datawire/telepresence](https://github.com/datawire/telepresence):Local development against a remote Kubernetes or OpenShift cluster http://www.telepresence.io
 * [runconduit/conduit](https://github.com/runconduit/conduit):Ultralight service mesh for Kubernetes https://conduit.io
 * [kubernetes-sigs/kustomize](https://github.com/kubernetes-sigs/kustomize):Customization of kubernetes YAML configurations
+* [weaveworks/flux](https://github.com/weaveworks/flux):The GitOps Kubernetes operator
 <http://violetgo.com/blogs/>
 <http://www.winseliu.com/>
 <http://blog.csdn.net/qq1010885678/article/details/48832067>

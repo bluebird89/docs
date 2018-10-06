@@ -16,6 +16,7 @@ DPI 是一种将图像的面积和理论打印尺寸进行关联的文件属性�
 * [IMageMagick](https://imagemagick.cn/)
     - convert:转换图像格式，调整图像大小、模糊、裁剪、去斑、抖动、绘图、翻转、加入、重新采样等等
     - mogrify：批量缩放大小
+* [nagadomi/waifu2x](https://github.com/nagadomi/waifu2x):Image Super-Resolution for Anime-Style Art
 
 ## 资源
 

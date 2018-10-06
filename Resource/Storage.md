@@ -12,3 +12,4 @@
 
 - [syncthing/syncthing](https://github.com/syncthing/syncthing):Open Source Continuous File Synchronization https://forum.syncthing.net/
 * [chrislusf/seaweedfs](https://github.com/chrislusf/seaweedfs):SeaweedFS is a simple and highly scalable distributed file system. There are two objectives: to store billions of files! to serve the files fast! SeaweedFS implements an object store with O(1) disk seek, and an optional Filer with POSIX interface.
+* [ncw/rclone](https://github.com/ncw/rclone):"rsync for cloud storage" - Google Drive, Amazon Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Cloudfiles, Google Cloud Storage, Yandex Files https://rclone.org

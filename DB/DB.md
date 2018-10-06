@@ -95,4 +95,4 @@ NoSQL主要用于解决以下几种问题
 
 * [数据库的原理](http://blog.jobbole.com/100349/)
 - [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)
-
+* [enochtangg/quick-SQL-cheatsheet](https://github.com/enochtangg/quick-SQL-cheatsheet):A quick reminder of all SQL queries and examples on how to use them.
