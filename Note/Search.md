@@ -8,3 +8,7 @@
 * 替代词 理想*义
 * 关键词不打散 “keyword”
 * 文件类型 keyword filetype:pdf
+
+## 工具
+
+* [sourcegraph/sourcegraph](https://github.com/sourcegraph/sourcegraph):Code search and intelligence, self-hosted and scalable https://sourcegraph.com
