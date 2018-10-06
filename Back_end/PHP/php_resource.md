@@ -712,6 +712,7 @@
 * [Use Env](https://seancoates.com/blogs/use-env/): 一篇关于使用unix环境帮助的文章
 * [PHP: The Right Way](http://www.phptherightway.com/) [PHP: The Right Way](https://github.com/codeguy/php-the-right-way)
 * [reeze/tipi](https://github.com/reeze/tipi):Thinking In PHP Internals, An open book on PHP Internals http://www.php-internals.com/
+* [elarity/advanced-php](https://github.com/elarity/advanced-php):最近打算写一些php一些偏微妙的教程，比如关于多进程、socket等相关，都是自己的一些感悟心得
 * Morden php
 * https://www.phparch.com/magazine/
 

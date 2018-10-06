@@ -189,10 +189,8 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 ## 参考
 
 * [wxyyxc1992/Web-Series](https://github.com/wxyyxc1992/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
-
-## 参考
-
 * [Web](https://developers.google.com/web/)
+* [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) https://solid.mit.edu/
 
 ## 工具
 
@@ -204,11 +202,8 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 * [codesandbox](https://codesandbox.io):The online code editor for Preact
 * [acaudwell/Logstalgia](https://github.com/acaudwell/Logstalgia):replay or stream website access logs as a retro arcade game https://logstalgia.io
 
-## 参考
-
-* [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) https://solid.mit.edu/
-
 ## 统计
+
 * [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
 
 <https://zhuanlan.zhihu.com/p/22360384>
