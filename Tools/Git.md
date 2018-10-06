@@ -268,12 +268,12 @@ Git维护的就是一个commitID树，分别保存着不同状态下的代码。
 
 * 工作区（Workspace）:进行开发改动的地方，任何对象都是在工作区中诞生和被修改；文件状态：modified:working directory
 * 暂存区（Index/Stage）:.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；文件状态：staged:Stage(Index)
-* 版本库|本地仓库（Repository）:保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；.git文件夹里还包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History
+* 版本库|本地仓库（Repository）:.git文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；里还包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History
 * 远程仓库(Remote):通常使用clone命令将远程仓库拷贝到本地仓库中，开发后推送到远程仓库中即可；
 
 ![Git原理-1](../_static/bg2015120901.png)
 ![Git原理-2](../_static/git_2.png)
-![Git原理-3](../_static/git_3.jpg)
+<!-- ![Git原理-3](../_static/git_3.jpg) 图片待修复-->
 
 ### 创建工作区 start a working area
 
@@ -356,9 +356,7 @@ git reset --soft # 取消commit的内容
 git reset --hard <b14bb52> # 重置暂存区与工作区，与上一次commit保持一致 会将提交记录和代码全部回滚 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
 git reset --keep [commit] # 重置当前HEAD为指定commit，但保持暂存区和工作区不变
 git reset HEAD~1 # Undo last commit
-git reset –hard HEAD^  # 回退到上一个版本
-git reset –hard HEAD^ ^ # 回退到上上个版本
-git reset –hard HEAD~100 # 回退到上100个版本
+git reset –hard HEAD^ | HEAD^^ | HEAD~100 # 回退版本
 git reset –hard dc5f1d1 # 只要记得版本号就可以穿梭回到现代
 git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be
 
@@ -367,6 +365,8 @@ git clean # Remove untracked files
 
 # 移除没有track文件
 git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
+
+git checkout -- files # 丢弃工作区的修改
 
 # 冲突
 git checkout --ours <文件名> # 使用当前分支 HEAD 版本
@@ -379,7 +379,6 @@ git checkout [file]  # 使用HEAD中的最新内容替换工作区中的文件�
 git checkout [commit] [file] # 恢复某个commit的指定文件到暂存区和工作区
 git checkout origin/master -- path/to/file
 git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1234567a44341404 / HEAD
-git checkout -- files # 将部分代码文件回滚
 ```
 
 #### 暂存区
