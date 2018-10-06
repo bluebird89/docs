@@ -1155,70 +1155,61 @@ Eloquent 会假设对应关联的外键名称是基于模型名称的。在这�
 
 如果你在一个给定的模型中监听许多事件，也可使用观察者将所有监听器变成一个类，类的一个方法就是一个事件监听器
 
-```
- 1 定义观察者：
- 2 <?php
- 3
- 4 namespace App\Observers;
- 5
- 6 use App\User;
- 7
- 8 class UserObserver
- 9 {
-10     /**
-11      * 监听用户创建的事件。
-12      *
-13      * @param  User  $user
-14      * @return void
-15      */
-16     public function created(User $user)
-17     {
-18         //
-19     }
-20
-21     /**
-22      * 监听用户删除事件。
-23      *
-24      * @param  User  $user
-25      * @return void
-26      */
-27     public function deleting(User $user)
-28     {
-29         //
-30     }
-31 }
-32
-// 注册观察者：
-34 <?php
-35
-36 namespace App\Providers;
-37
-38 use App\User;
-39 use App\Observers\UserObserver;
-40 use Illuminate\Support\ServiceProvider;
-41
-42 class AppServiceProvider extends ServiceProvider
-43 {
-44     /**
-45      * 运行所有应用.
-46      *
-47      * @return void
-48      */
-49     public function boot()
-50     {
-51         User::observe(UserObserver::class);
-52     }
-53
-54     /**
-55      * 注册服务提供.
-56      *
-57      * @return void
-58      */
-59     public function register()
-60     {
-61         //
-62     }
-63 }
+```php
+# 定义观察者：
+<?php
+namespace App\Observers;
+use App\User;
+class UserObserver
+{
+    /**
+     * 监听用户创建的事件。
+     *
+     * @param  User  $user
+     * @return void
+     */
+    public function created(User $user)
+    {
+        //
+    }
+    /**
+     * 监听用户删除事件。
+     *
+     * @param  User  $user
+     * @return void
+     */
+    public function deleting(User $user)
+    {
+        //
+    }
+}
+注册观察者：
+<?php
+namespace App\Providers;
+use App\User;
+use App\Observers\UserObserver;
+use Illuminate\Support\ServiceProvider;
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * 运行所有应用.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        User::observe(UserObserver::class);
+    }
+    /**
+     * 注册服务提供.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}
 ```
 
 ## Laravel的Restful风格
@@ -1280,38 +1271,37 @@ Eloquent 会假设对应关联的外键名称是基于模型名称的。在这�
 
 - 数据库迁移：如果你的扩展包包含数据库迁移，需要使用 loadMigrationsFrom 方法告知 Laravel 如何去加载它们。在运行 php artisan migrate 命令时，它们就会自动被执行，不需要把它们导出到应用程序的 database/migrations 目录
 
-  ```
-  1 /**
-  2  * 在注册后进行服务的启动。
-  3  *
-  4  * @return void
-  5  */
-  6 public function boot()
-  7 {
-  8     $this->loadMigrationsFrom(__DIR__.'/path/to/migrations');
-  9 }
-  ```
+```php
+/**
+ * 在注册后进行服务的启动。
+ *
+ * @return void
+ */
+public function boot()
+{
+    $this->loadMigrationsFrom(__DIR__.'/path/to/migrations');
+}
+```
 
 - 语言包：如果你的扩展包里面包含了本地化，则可以使用 loadTranslationsFrom 方法来告知 Laravel 该如何加载它们。下例假设你的包名称为courier
 
-  ```
-  1 /**
-  2  * 在注册后进行服务的启动。
-  3  *
-  4  * @return void
-  5  */
-  6 public function boot()
-  7 {
-  8     $this->loadTranslationsFrom(__DIR__.'/path/to/translations', 'courier');
-  9
-  10     //如果不想发布语言包至应用程序的 resources/lang/vendor 目录，请注销对$this->publishes()调用。运行 Laravel 的 vendor:publish Artisan 命令可将扩展包的语言包复制到指定的位置上
-  11     $this->publishes([
-  12         __DIR__.'/path/to/translations' => resource_path('lang/vendor/courier'),
-  13     ]);
-  14 }
-  15
-  16 echo trans('courier::messages.welcome');//扩展包翻译参照使用了双分号 package::file.line 语法
-  ```
+```php
+/**
+ * 在注册后进行服务的启动。
+ *
+ * @return void
+ */
+public function boot()
+{
+    $this->loadTranslationsFrom(__DIR__.'/path/to/translations', 'courier');
+     //如果不想发布语言包至应用程序的 resources/lang/vendor 目录，请注销对$this->publishes()调用。运行 Laravel 的 vendor:publish Artisan 命令可将扩展包的语言包复制到指定的位置上
+     $this->publishes([
+         __DIR__.'/path/to/translations' => resource_path('lang/vendor/courier'),
+     ]);
+ }
+
+echo trans('courier::messages.welcome');//扩展包翻译参照使用了双分号 package::file.line 语法
+```
 
 - 视图：若要在 Laravel 中注册扩展包 视图，则必须告诉 Laravel 你的视图位置，loadViewsFrom 方法允许传递视图模板路径与扩展包名称两个参数。需要特别指出的是，当你使用 loadViewsFrom 方法时，Laravel 实际上为你的视图注册了两个位置：一个是应用程序的 resources/views/vendor 目录，另一个是你所指定的目录。Laravel会先检查 resources/views/vendor 目录是否存在待加载视图，如果不存在，才会从指定的目录去加载，这个方法可以让用户很方便的自定义或重写扩展包视图。
 
@@ -1374,38 +1364,40 @@ Eloquent 会假设对应关联的外键名称是基于模型名称的。在这�
 
 - 发布群组文件：你可能想让用户不用发布扩展包的所有资源文件，只需要单独发布扩展包的配置文件即可，通过在调用 publishes 方法时使用标签来实现
 
-```
- 1 /**
- 2  * 在注册后进行服务的启动。
- 3  *
- 4  * @return void
- 5  */
- 6 public function boot()
- 7 {
- 8     $this->publishes([
- 9         __DIR__.'/../config/package.php' => config_path('package.php')
-10     ], 'config');
-11
-12     $this->publishes([
-13         __DIR__.'/../database/migrations/' => database_path('migrations')
-14     ], 'migrations');
-15 }
+```php
+ /**
+  * 在注册后进行服务的启动。
+  *
+  * @return void
+  */
+ public function boot()
+ {
+     $this->publishes([
+         __DIR__.'/../config/package.php' => config_path('package.php')
+     ], 'config');
+
+     $this->publishes([
+         __DIR__.'/../database/migrations/' => database_path('migrations')
+     ], 'migrations');
+ }
 ```
 
 对于上例运行命令 php artisan vendor:publish --tag=config 时将忽略掉migrations部分
 
 <http://laravelacademy.org/post/6718.html>
-
-<https://d.laravel-china.org/docs/5.3/facades#how-facades-work> <https://d.laravel-china.org/docs/5.5/container> <http://www.jb51.net/article/73462.htm> <http://blog.csdn.net/u013474436/article/details/52847326> <http://www.cnblogs.com/lyzg/p/6181055.html>
-
+<https://d.laravel-china.org/docs/5.3/facades#how-facades-work>
+<https://d.laravel-china.org/docs/5.5/container>
+<http://www.jb51.net/article/73462.htm> <
+http://blog.csdn.net/u013474436/article/details/52847326>
+<http://www.cnblogs.com/lyzg/p/6181055.html>
 <http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html>
+<http://laravel-china.github.io/php-the-right-way/>
+<http://laravelacademy.org/post/6842.html>
 
-<http://laravel-china.github.io/php-the-right-way/> <http://laravelacademy.org/post/6842.html>
+```php
+// Laravel Migration Error: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes
 
-```
-//Laravel Migration Error: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes
-
-\\ /app/Providers/AppServiceProvider.php
+# /app/Providers/AppServiceProvider.php
 use Illuminate\Support\Facades\Schema; //Import Schema
 
 function boot()
@@ -1452,7 +1444,6 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [Algolia](https://www.algolia.com/doc/api-client/laravel/algolia-and-scout/):Algolia is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke
 * [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth):🔐 JSON Web Token Authentication for Laravel & Lumen http://jwt-auth.com
 * [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
-* [](link)
 
 ## 参考
 
@@ -1467,7 +1458,11 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
 * [Laravel5.5 + Vue开发单页应用](http://www.laravel-vue.xyz/2018/03/22/laravel_vue_v2/)
 * [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
-<https://laravel-china.org/articles/2020/ten-laravel-5-program-optimization-techniques> <https://blog.tanteng.me/2016/06/laravel-optimize/>
+* [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart
+* [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
+* [LeoYang90/laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis):详解 laravel 源码
+<https://laravel-china.org/articles/2020/ten-laravel-5-program-optimization-techniques>
+<https://blog.tanteng.me/2016/06/laravel-optimize/>
 
 ## 文档
 
@@ -1502,15 +1497,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [spatie/laravel-backup](https://github.com/spatie/laravel-backup):A package to backup your Laravel app
 * [elasticquent/Elasticquent](https://github.com/elasticquent/Elasticquent):Maps Laravel Eloquent models to Elasticsearch types
 * [saleem-hadad/larecipe](https://github.com/saleem-hadad/larecipe):🍪 Write gorgeous documentations for your products using Markdown inside your Laravel app. https://larecipe.binarytorch.com.my/
-
-## IDE
-
 * [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
-
-## 教程
-
-* [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart
-* [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
 
 ## 工程
 
@@ -1518,23 +1505,23 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 
 ```sh
 git clone git@github.com:summerblue/larabbs.git
-// 修改 homestead.html,添加配置
+# 修改 homestead.html,添加配置
 vagrant provision
 composer install
-// 配置.env文件
+# 配置.env文件
 
 php artisan migrate --seed
 php artisan key:generate
 
 yarn install
 
-首页地址：http://larabbs.app/
-管理后台：http://larabbs.app/admin
+# 首页地址：http://larabbs.app/
+# 管理后台：http://larabbs.app/admin
 
 username: summer@yousails.com
 password: password
 
-// Non-static method Redis::hGet() cannot be called statically
+# Non-static method Redis::hGet() cannot be called statically
 ```
 
 ### [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)

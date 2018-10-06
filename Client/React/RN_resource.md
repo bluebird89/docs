@@ -86,6 +86,7 @@
 ## 编辑器
 
 * [facebook/draft-js](https://github.com/facebook/draft-js):A React framework for building text editors. https://draftjs.org/
+* [nikgraf/awesome-draft-js](https://github.com/nikgraf/awesome-draft-js):Awesome list of Draft.js resources
 * [React Studio](https://reactstudio.com/)
 
 ## 参考
