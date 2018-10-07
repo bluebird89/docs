@@ -182,7 +182,7 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 ```sh
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/github
 ssh-add -K ~/.ssh/github # 如果不是默认密钥 id_rsa ，则需要以下命令注册密钥文件，-K 参数将密钥存入 Mac Keychain
-cat ~/.ssh/github.pub
+cat ~/.ssh/github.pub 添加公钥到服务器
 ssh -T git@github.com  # 验证
 
 eval "$(ssh-agent -s)"
@@ -366,11 +366,9 @@ git clean # Remove untracked files
 # 移除没有track文件
 git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
 
-git checkout -- files # 丢弃工作区的修改
+git checkout -- files # 丢弃 1.工作区中未提交暂存区修改（与版本库一致） 2.已提交暂存区新的修改（与暂存区一致）
 
 # 冲突
-git checkout --ours <文件名> # 使用当前分支 HEAD 版本
-git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的
 git add <文件名> # # 标记为解决状态加入暂存区
 git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge
 
@@ -398,7 +396,7 @@ git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1
 git commit -m "commit message" # 将缓存区内容添加到仓库中,在命令行中添加提交注释
 git commit [file1] [file2] ... -m [message]
 git commit -a # 把unstaged文件变成staged(不包括新建文件)，然后commit
-git commit –am[-a -m] "message" # git add . + git c-mmit -m 'message' 合并使用
+git commit –am[-a -m] "message" # git add . + git commit -m 'message' 合并使用,只提交修改
 git commit -v # 提交时显示所有diff信息
 git commit --amend [file1] [file2] ... # 修改上一次提交日志 使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
 
@@ -447,11 +445,14 @@ git blame filename # 查看指定文件是什么人在什么时间修改过
 git stash # 将当前目录和index中的所有改动(但不包括未track的文件)临时存放在 stash 队列中,注意：未提交到版本库的文件会自动忽略，只要不运行 git clean -fd . 就不会丢失
 git stash save "stash name"
 git stash list # 查看 stash 队列中已暂存了多少 WIP
+
 git stash apply # 恢复stash中上一个（stash@{0}）内容到工作区，但是并不删除stash中的内容
 git stash apply stash@{num} # 恢复指定编号的 WIP，但不从队列中移除
 git stash drop # 删除stash中上一个
+
 git stash pop # 恢复上一次的 WIP 状态，并从队列中移除
 git stash pop stash@{num} # 恢复指定编号的 WIP，同时从队列中移除
+
 git stash clear # 删除所有
 ```
 
@@ -506,6 +507,7 @@ git remote prune origin # removes tracking branches whose remote branches are re
 
 git remote update wilson # 更新源代码信息
 
+git branch --set-upstream  v1.0 origin/v1.0
 git branch --set-upstream-to|track v1.0 origin/v1.0
 git branch --set-upstream-to=origin/master master # 建立追踪关系，在现有分支与指定的远程分支之间 --set-upstream 已废弃
 
@@ -514,6 +516,8 @@ git fetch origin master # 从远程更新代码到本地但不合并 拉取指�
 git fetch -p # 拉取所有分支的变化，并且将远端不存在的分支同步移除
 
 # 合并 commit 冲突 记为解决状态加入暂存区
+# <<<HEAD是指主分支修改的内容，>>>>>fenzhi1 是指fenzhi1上修改的内容
+# 合并分支时，git一般使用”Fast forward”模式，在这种模式下，删除分支后，会丢掉分支信息，现在我们来使用带参数 –no-ff来禁用”Fast forward”模式。
 git merge origin/master  # 抓取远程仓库更新  将远程主分支合并到本地当前分支 等同于git pull
 git merge new # 合并指定分支到当前分支，新增一个 commit 追加
 git merge --no-ff master
