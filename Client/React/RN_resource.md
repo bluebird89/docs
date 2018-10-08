@@ -54,6 +54,7 @@
 * [UXCore](link):40 个为企业应用设计的组件，专注于后端应用的性能，主要是表格和表单这些组件（特别是当数据自动与视图绑定时）。
 * [reasonml/reason-react](https://github.com/reasonml/reason-react):Reason bindings for ReactJS https://reasonml.github.io/reason-react/
 * [reactjs/react-transition-group](https://github.com/reactjs/react-transition-group):An easy way to perform animations when a React component enters or leaves the DOM 
+* [clauderic/react-sortable-hoc](https://github.com/clauderic/react-sortable-hoc):A set of higher-order components to turn any list into an animated, touch-friendly, sortable list ✌️
 
 ## UI
 
