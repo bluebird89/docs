@@ -17,6 +17,7 @@
 
 * 框架：Sails.js
 * [fastify/fastify](https://github.com/fastify/fastify):Fast and low overhead web framework, for Node.js https://www.fastify.io
+* [retejs/rete](https://github.com/retejs/rete):JavaScript framework for visual programming and creating node editor https://rete.js.org
 
 ### SPA
 
