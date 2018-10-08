@@ -7,4 +7,5 @@
 -   Sublime Text
 -   WebStorm
 -   Brackets
--   Atom
+-   [Atom](./Atom.md)
+-   [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
