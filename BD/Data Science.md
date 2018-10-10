@@ -16,7 +16,8 @@
 * [douban/dpark](https://github.com/douban/dpark)Python clone of Spark, a MapReduce alike framework in Python
 * [wepe/MachineLearning](https://github.com/wepe/MachineLearning)Basic Machine Learning and Deep Learning
 * [bulutyazilim/awesome-datascience](https://github.com/bulutyazilim/awesome-datascience):An awesome Data Science repository to learn and apply for real world problems.
-* [jakevdp/PythonDataScienceHandbook](https://github.com/jakevdp/PythonDataScienceHandbook):Python Data Science Handbook: full text in Jupyter Notebooks 
+* [jakevdp/PythonDataScienceHandbook](https://github.com/jakevdp/PythonDataScienceHandbook):Python Data Science Handbook: full text in Jupyter Notebooks
+* [jaystone776/python-data-science-cheatsheet](https://github.com/jaystone776/python-data-science-cheatsheet):Python数据科学速查表
 
 ## 扩展
 

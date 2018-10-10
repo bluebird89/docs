@@ -1404,6 +1404,10 @@ filetype plugin indent on
 set completeopt=longest,menu
 ```
 
+## Cron
+
+
+
 ## 工具
 
 * [backup/backup](https://github.com/backup/backup):Easy full stack backup operations on UNIX-like systems. http://backup.github.io/backup/v4/
@@ -1424,6 +1428,7 @@ set completeopt=longest,menu
 * [IBM’s Technical Library](https://www.ibm.com/developerworks/views/linux/libraryview.jsp?type_by=Tutorials) – IBM’s Technical Library 提供的一组给高级Linux用户的教程。
 * [HAPPY HACKING LINUX](https://azer.bike/happy-hacking-linux/)
 * [linuxkit/linuxkit](https://github.com/linuxkit/linuxkit):A toolkit for building secure, portable and lean operating systems for containers
+* [jaywcjlove/linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
 
 systemctl unmask mysql.service
 service mysql start
