@@ -877,6 +877,92 @@ awk -F\" '{print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r /
 awk -F\" '($2 ~ "xyz"){print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r // Most Requested URL containing xyz
 ```
 
+## 日志
+
+```sh
+cp /var/log/nginx/access.log /var/log/nginx/test.log
+cat /var/log/nginx/test.log
+192.168.232.1 - - [14/Mar/2015:01:12:59 -0700] "GET / HTTP/1.1" 200 2230 "-" "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)" "-"
+
+cat /var/log/nginx/test.log | awk ‘{print $1,$4,$7}’ # $1是ip地址 ，$4是时间 , $7是被访问地址
+
+create database test;
+use test;
+CREATE TABLE log (
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `ip` varchar(15) NOT NULL DEFAULT '127.0.0.1' COMMENT '//客户端ip',
+    `url` varchar(255) NOT NULL DEFAULT '' COMMENT '访问的url',
+    `time` char(20) NOT NULL DEFAULT '' COMMENT '详细时间',
+    `date` int(8) unsigned NOT NULL DEFAULT '0' COMMENT '年月日',
+     PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+vim nginx_log_to_mysql.sh
+
+#!/bin/bash
+      #
+
+      #处理时间[14/Mar/2015:01:12:59成2015-Mar-14 01:12:59
+      function unixtime()
+      {
+            if [ -n "$!"] ;
+            then
+                TIME=`echo ${1:1} | awk -F'[:\b/]' '{print $3"-"$2"-"$1" "$4":"$5":"$6}'`
+                echo $TIME
+            fi
+      }
+
+      #存放日志的路径
+      LOG_PATH='/var/log/nginx/'
+
+      #有那些日志
+      LOGS=('test')
+
+      #处理昨天的日志
+      YESTERDAY=`date -d "yesterday" +"%Y-%m-%d"`
+
+      #连接数据库的账号密码及其数据库
+      SQLCNT='/usr/local/mysql/bin/mysql -uroot -p123456 test'
+      SQL="INSERT INTO log(ip,url,time,date)VALUES"
+
+      #获取当前的时间
+      DATE=`date -d "yesterday" +"%Y%m%d"`
+
+      #循环读取所有的日志 ， 并进行读取
+      for LOG in ${LOGS[@]} ;
+      do
+            #读取后缀为/ .或者.html 或php的访问文件
+            DATA=`/bin/cat "$LOG_PATH$LOG-$YESTERDAY.log" | awk '$7 ~ /(\/$|\.html.*|\.php.*)/ {print $1"--"$4"--"$7}'  `
+            #计算器 , 插入的数据超过1000条先提前插入
+            I=1
+            QRYSQL=''
+            for D in ${DATA[@]} ;
+            do
+                  #将上面时间获取ip—时间—访问的url进行转化为数组
+                  DD=(`echo ${D//--/ }`)
+                  QRYSQL=$QRYSQL"('${DD[0]}','${DD[2]}','`unixtime ${DD[1]}`','$DATE'),"
+                  #超过1000条先插入
+                  if [ $I == 1000 ] ;
+                  then
+                        QRYSQL=$SQL${QRYSQL%%,}";"
+                        echo $QRYSQL | $SQLCNT &> /dev/null
+                        I=0
+                        QRYSQL=''
+                  fi
+                  I=`expr $I+1`
+            done
+            if [ -n $WRYSQL ] ; then
+                  QRYSQL=$SQL${QRYSQL%%,}";"
+                  echo $QRYSQL | $SQLCNT &> /dev/null
+            fi
+      done
+
+chmod +x /root/shell/nginx_log_to_mysql.sh
+crontab –e
+# 凌晨0时15分执行
+15 0 * * * /root/shell/nginx_log_to_mysql.sh &> /var/log/nginx_sh.log 
+```
+
 ## 参考
 
 - [git-mirror/nginx](https://github.com/git-mirror/nginx)：A mirror of the nginx SVN repository. <http://nginx.org/>

@@ -1404,6 +1404,7 @@ pt-query-digest --type=binlog mysql-bin.000001.sql
 ## 文档
 
 * [MySQL 学习笔记](https://notes.diguage.com/mysql/)
+* [jaywcjlove/mysql-tutorial](https://github.com/jaywcjlove/mysql-tutorial):MySQL入门教程（MySQL tutorial book）
 
 ## 工具
 
