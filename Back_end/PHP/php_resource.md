@@ -849,6 +849,7 @@
 - [PHP Best Practices](https://phpbestpractices.org)
 - [php-fig/fig-standards](https://github.com/php-fig/fig-standards):Standards either proposed or approved by the Framework Interop Group http://www.php-fig.org/
 - [appzcoder/30-seconds-of-php-code](https://github.com/appzcoder/30-seconds-of-php-code):A curated collection of useful PHP snippets that you can understand in 30 seconds or less.
+- [elarity/data-structure-php](https://github.com/elarity/data-structure-php):对于数据结构和算法类的东西
 
 ## 工具
 
