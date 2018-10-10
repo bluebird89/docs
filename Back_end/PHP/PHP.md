@@ -676,6 +676,17 @@ if(isset($_POST['sub']))
 </form>
 ```
 
+### php-mcrypt
+
+```sh
+yum install php-mcrypt|php5-mcrypt
+apt-get install php-mcrypt|php5-mcrypt
+pecl install mcrypt-snapshot|mcrypt-1.0.1
+brew install php71-mcrypt
+```
+* [defuse/php-encryption](https://github.com/defuse/php-encryption):Simple Encryption in PHP.
+* [jedisct1/libsodium](https://github.com/jedisct1/libsodium):A modern, portable, easy to use crypto library https://libsodium.org
+
 #### Lambda表达式(匿名函数)与闭包
 
 Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态。闭包在匿名函数的基础上增加了与外部环境的变量交互，通过 use 子句中指定要导入的外部环境变量

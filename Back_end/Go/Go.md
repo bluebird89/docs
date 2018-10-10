@@ -176,6 +176,9 @@ websocketd --port=8080 ./count.sh // 建立server
 * [justinas/alice](https://github.com/justinas/alice):Painless middleware chaining for Go https://godoc.org/github.com/justinas/alice
 * [spf13/viper](https://github.com/spf13/viper):Go configuration with fangs
 * [derekparker/delve](https://github.com/derekparker/delve):Delve is a debugger for the Go programming language.
+* [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
+* [goreleaser/goreleaser](https://github.com/goreleaser/goreleaser)：Deliver Go binaries as fast and easily as possible https://goreleaser.com
+
 ## ORM
 
 * [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io

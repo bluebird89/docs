@@ -279,6 +279,7 @@
       - (https://scrutinizer-ci.com/)[Scrutinizer]: 一个审查PHP代码的web工具
       - (https://github.com/devster/ubench)[UBench]: 一个简单的微型基准检测库
       - [exakat/php-static-analysis-tools](https://github.com/exakat/php-static-analysis-tools):A reviewed list of useful PHP static analysis tools
+      - [dreamans/phpAnalysis](https://github.com/dreamans/phpAnalysis):phpAnalysis - PHP应用性能分析系统
 * Architectural 相关的设计模式库，组织代码编程的方法和途径
       - (https://github.com/igorw/compose)[Compose]: 一个功能组合库
       - (https://github.com/domnikl/DesignPatternsPHP)[Design Patterns PHP]: 一个使用PHP实现的设计模式存储库
