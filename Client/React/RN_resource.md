@@ -55,6 +55,7 @@
 * [reasonml/reason-react](https://github.com/reasonml/reason-react):Reason bindings for ReactJS https://reasonml.github.io/reason-react/
 * [reactjs/react-transition-group](https://github.com/reactjs/react-transition-group):An easy way to perform animations when a React component enters or leaves the DOM 
 * [clauderic/react-sortable-hoc](https://github.com/clauderic/react-sortable-hoc):A set of higher-order components to turn any list into an animated, touch-friendly, sortable list ✌️
+* [streamich/libreact](https://github.com/streamich/libreact):Collection of useful React components
 
 ## UI
 

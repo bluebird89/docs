@@ -160,6 +160,7 @@ rails server
 * [thoughtbot/administrate](https://github.com/thoughtbot/administrate):A Rails engine that helps you put together a super-flexible admin dashboard.
 * [thoughtbot/paperclip](https://github.com/thoughtbot/paperclip):Easy file attachment management for ActiveRecord https://thoughtbot.com/open-source
 * [plataformatec/devise](https://github.com/plataformatec/devise):Flexible authentication solution for Rails with Warden. http://blog.plataformatec.com.br/tag/devise/
+* [sferik/rails_admin](https://github.com/sferik/rails_admin):RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data
 
 ## 参考
 
