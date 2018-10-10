@@ -488,7 +488,7 @@ Python实现的数据库。
 
 * django-haystack：Django 模块化搜索。[官网](https://github.com/django-haystack/django-haystack)
 * elasticsearch-py：Elasticsearch 的官方底层 Python 客户端。[官网](https://www.elastic.co/guide/en/elasticsearch/client/python-api/current/index.html)
-* elasticsearch-dsl-py：Elasticsearch 的官方高级 Python 客户端。[官网](https://github.com/elastic/elasticsearch-dsl-py)
+* [elasticsearch-dsl-py](https://github.com/elastic/elasticsearch-dsl-py)：Elasticsearch 的官方高级 Python 客户端。
 * solrpy：[solr](http://lucene.apache.org/solr/)的 Python 客户端。[官网](https://github.com/edsu/solrpy)
 * Whoosh：一个快速的纯 Python 搜索引擎库。[官网](http://whoosh.readthedocs.org/en/latest/)
 
