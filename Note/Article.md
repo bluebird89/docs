@@ -1,4 +1,3 @@
-
 般若波罗蜜多心经  (玄奘译本)
 
 > 观自在菩萨，行深般若波罗蜜多时，照见五蕴皆空，度一切苦厄。
@@ -115,6 +114,7 @@
 
 
     “孤”“独”二字 拆字新解 林语堂
+
 > 稚儿擎瓜柳棚下，细犬逐蝶窄巷中。
 > 人间繁华多笑语，唯我空余两鬓风。
 
@@ -123,6 +123,7 @@
 
 
     誓词
+
 > When love is the way, then no child will go to bed hungry in this world ever again. When love is the way, we will let justice roll down like a mighty stream and righteousness like an everflowing brook. When love is the way, poverty will become history. "
 > “当我们心中有爱，再也不会有孩子忍饥挨饿；当我们心中有爱，我们能让公正似水奔流，正义如泉喷涌；当我们心中有爱，贫穷将会成为历史。”
 
@@ -131,6 +132,7 @@
 
 > I Meghan, take you, Harry, to be my husband, to have and to hold from this day forward; for better,for worse, for richer, for poorer, in sickness and in health, to love and to cherish, till death us do part; according to God’s holy law. In the presence of God I make this vow.
 > 在上帝的见证下、神的律法的指引下，我，梅根，愿意嫁给你，哈里，作为我的丈夫。从此刻到永远，无论顺境或逆境、富有或贫穷、健康或疾病，我都将爱着你、珍惜你，直到死亡将我们分开。
+
 
 《增广贤文》
 

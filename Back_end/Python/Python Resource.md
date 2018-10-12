@@ -1175,6 +1175,7 @@ Python 实现的算法和设计模式。
 - [Prodesire/Python-Guide-CN](https://github.com/Prodesire/Python-Guide-CN):Python最佳实践指南
 * [pgbovine/OnlinePythonTutor](https://github.com/pgbovine/OnlinePythonTutor):Visualize Python, Java, JavaScript, TypeScript, Ruby, C, and C++ code execution in your Web browser http://pythontutor.com/
 * [Python fundamentals](https://www.python-tutorial.net/)
+* [sfermigier/awesome-functional-python](https://github.com/sfermigier/awesome-functional-python)
 
 ## 包
 

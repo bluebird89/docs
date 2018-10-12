@@ -143,6 +143,17 @@
 * 核心竞争力建立的基础，是市场的稀缺。做高管，操大盘。
 * 精力是有限的，深度和广度如何平衡是个问题，有了广度要不要转型是个问题，深度的积累在转型时价值会骤降，敢不敢，舍不舍得
 
+## 前端
+
+* 精通各种 Web 前端技术和标准，熟练掌握 ES2015 语法；
+* 至少掌握React、Vue等一种主流框架，能独立开发高质量组件；
+* 熟悉SVG、Canvas等前端绘图技术，有大数据可视化开发经验优先考虑；
+
+## 软技能
+
+* 主动、皮实、聪明、担当，有良好的沟通和团队协作能力，持续推动拿结果；
+* 喜欢钻研技术，能够快速掌握和应用新技术，有开源项目贡献经验优先考虑。
+
 ## 案例
 
 张丹：从程序员开始，到架构师一路走来，经历过太多的系统和应用。做过手机游戏，写过编程工具；做过大型Web应用系统，写过公司内部CRM；做过SOA的系统集成，写过基于Hadoop的大数据工具；做过外包，做过电商，做过团购，做过支付，做过SNS，也做过移动SNS。以前只用Java，然后学了PHP，现在用R和Javascript。最后跳出IT圈，进入金融圈，研发量化交易软件。
@@ -164,6 +175,7 @@
 * [alex/what-happens-when](https://github.com/alex/what-happens-when):An attempt to answer the age old interview question "What happens when you type google.com into your browser and press enter?"
 * [kamranahmedse/developer-roadmap](https://github.com/kamranahmedse/developer-roadmap):Roadmap to becoming a web developer in 2018
 * [fejes713/30-seconds-of-interviews](https://github.com/fejes713/30-seconds-of-interviews):A curated collection of common interview questions to help you prepare for your next interview. https://30secondsofinterviews.org
+* [30-seconds/30-seconds-of-interviews](https://github.com/30-seconds/30-seconds-of-interviews):A curated collection of common interview questions to help you prepare for your next interview. https://30secondsofinterviews.org
 * [imhuay/Algorithm_Interview_Notes-Chinese](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese):2018/2019/校招/春招/秋招/算法/机器学习(Machine Learning)/深度学习(Deep Learning)/自然语言处理(NLP)/C/C++/Python/面试笔记
 
 ## 工具
