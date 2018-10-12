@@ -168,6 +168,7 @@ pip install shadowsocks
 - 私人互联网接入
 - PureVPN
 - 完美隐私
+- [txthinking/brook](https://github.com/txthinking/brook):Brook is a cross-platform(Linux/MacOS/Windows/Android/iOS) proxy/vpn software
 
 ### 服务
 

@@ -88,7 +88,7 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
     -   自定义模板路径: "Data\\Packages\\User\\SublimeTmpl\\templates" 目录;默认模版路径: "Data\\Packages\\SublimeTmpl\\templates" 目录
     -   复制默认模版修改
     -   支持 ${date} 变量
--   SublimeLinter：前端编码利器用于高亮提示用户编写的代码中存在的不规范和错误的写法、代码跳转
+-   [SublimeLinter](https://github.com/SublimeLinter/SublimeLinter)：The code linting framework for Sublime Text 3 http://sublimelinter.com
 -   SublimeCodeIntel:code intelligence and smart autocomplete engine
 -   Sublime​REPL:不同语言命令行模式
 -   SublimeLinter-pep8: Linter plugin for python using PEP8
