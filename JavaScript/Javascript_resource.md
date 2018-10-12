@@ -87,6 +87,8 @@
 * [es-analysis/plato](https://github.com/es-analysis/plato):JavaScript source code visualization, static analysis, and complexity tool
 * [dollarshaveclub/shave](https://github.com/dollarshaveclub/shave/):💈 Shave is a 0 dep JS plugin that truncates text to fit within an element based on a set max-height ✁ https://dollarshaveclub.github.io/shave/
 * [usablica/intro.js](https://github.com/usablica/intro.js):A better way for new feature introduction and step-by-step users guide for your website and project. http://introjs.com
+* [feimosi/baguetteBox.js](https://github.com/feimosi/baguetteBox.js):⚡️ Simple and easy to use lightbox script written in pure JavaScript
+* [sachinchoolur/lightgallery.js](https://github.com/sachinchoolur/lightgallery.js):Full featured JavaScript image & video gallery. No dependencies
 
 ## 数据库
 
@@ -293,6 +295,10 @@
 ## 状态
 
 * [mweststrate/immer](https://github.com/mweststrate/immer):Create the next immutable state by mutating the current one
+
+## History
+
+* [browserstate/history.js](https://github.com/browserstate/history.js):History.js gracefully supports the HTML5 History/State APIs (pushState, replaceState, onPopState) in all browsers. Including continued support for data, titles, replaceState. Supports jQuery, MooTools and Prototype. For HTML5 browsers this means that you can modify the URL directly, without needing to use hashes anymore
 
 ## keyboard input
 

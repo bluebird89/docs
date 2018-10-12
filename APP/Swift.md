@@ -7,6 +7,7 @@ The Swift Programming Language https://swift.org/
 * [jpsim/SourceKitten](https://github.com/jpsim/SourceKitten):An adorable little framework and command line tool for interacting with SourceKit.
 * [thoughtbot/Argo](https://github.com/thoughtbot/Argo):Functional JSON parsing library for Swift https://thoughtbot.com/open-source
 * [vapor/vapor](https://github.com/vapor/vapor):💧 A server-side Swift web framework. https://vapor.codes
+* [mxcl/PromiseKit](https://github.com/mxcl/PromiseKit):Promises for Swift & ObjC
 
 ## 参考
 

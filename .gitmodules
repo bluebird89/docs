@@ -241,3 +241,6 @@
 [submodule "Editor/awesome-emacs"]
 	path = Editor/awesome-emacs
 	url = git@github.com:emacs-tw/awesome-emacs.git
+[submodule "Interview/interviews"]
+	path = Interview/interviews
+	url = git@github.com:kdn251/interviews.git

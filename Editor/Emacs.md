@@ -315,3 +315,4 @@ M-g                    设置字体
 
 * [purcell/emacs.d](https://github.com/purcell/emacs.d):An Emacs configuration bundle with batteries included
 * [emacs-tw/awesome-emacs](https://github.com/emacs-tw/awesome-emacs):A community driven list of useful Emacs packages, libraries and others.
+* [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust ❤️ Emacs

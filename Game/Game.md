@@ -88,3 +88,4 @@ slim
 * [photonstorm/phaser](https://github.com/photonstorm/phaser):Phaser is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering. http://phaser.io
 * [OpenEmu/OpenEmu](https://github.com/OpenEmu/OpenEmu):🕹 Retro video game emulation for macOS http://openemu.org
 * [EpicGames/UnrealEngine](https://github.com/EpicGames/UnrealEngine):Unreal Engine source code http://www.unrealengine.com/
+* [godotengine/godot](https://github.com/godotengine/godot):Godot Engine – Multi-platform 2D and 3D game engine https://godotengine.org
