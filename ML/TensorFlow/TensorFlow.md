@@ -1,6 +1,6 @@
 # [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow)
 
-Computation using data flow graphs for scalable machine learning
+An Open Source Machine Learning Framework for Everyone https://tensorflow.org
 
 ## 参考
 
@@ -24,8 +24,8 @@ pip install IPython
 
 * [aymericdamien/TensorFlow-Examples](https://github.com/aymericdamien/TensorFlow-Examples):TensorFlow Tutorial and Examples for Beginners with Latest APIs https://tensorflow.org
 * [TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
-* [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow):Computation using data flow graphs for scalable machine learning http://tensorflow.org
 * [vahidk/EffectiveTensorflow](https://github.com/vahidk/EffectiveTensorflow):TensorFlow tutorials and best practices. https://twitter.com/VahidK
+* [xitu/tensorflow-docs](https://github.com/xitu/tensorflow-docs):TensorFlow 最新官方文档中文版 V1.10 https://tensorflow.juejin.im
 
 ## 课程
 

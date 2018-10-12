@@ -178,6 +178,8 @@ websocketd --port=8080 ./count.sh // 建立server
 * [derekparker/delve](https://github.com/derekparker/delve):Delve is a debugger for the Go programming language.
 * [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
 * [goreleaser/goreleaser](https://github.com/goreleaser/goreleaser)：Deliver Go binaries as fast and easily as possible https://goreleaser.com
+* [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin):Golang plugin system over RPC.
+* [dominikh/go-tools](https://github.com/dominikh/go-tools):A collection of tools and libraries for working with Go code, including linters and static analysis https://staticcheck.iop
 
 ## ORM
 
@@ -186,6 +188,14 @@ websocketd --port=8080 ./count.sh // 建立server
 ## 路由
 
 * [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
+
+## 微服务
+
+* [go-kit/kit](https://github.com/go-kit/kit):A standard library for microservices. https://gokit.io
+
+## 测试
+
+* [stretchr/testify](https://github.com/stretchr/testify):A toolkit with common assertions and mocks that plays nicely with the standard library
 
 ## 教程
 
@@ -197,6 +207,7 @@ websocketd --port=8080 ./count.sh // 建立server
 - [https://songjiayang.gitbooks.io](https://songjiayang.gitbooks.io)
 - [Go语言入门](https://www.yiibai.com/go/go_start.html)
 - [harlow/go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
+- [astaxie/gopkg](https://github.com/astaxie/gopkg):example for the go pkg's function
 
 ## 参考
 
@@ -204,6 +215,7 @@ websocketd --port=8080 ./count.sh // 建立server
 - [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 - [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
 - [GO语言中文网](https://studygolang.com/)
+- [changkun/go-under-the-hood](https://github.com/changkun/go-under-the-hood):Go 源码研究 (1.11.1, WIP)
 
 ## 图书
 

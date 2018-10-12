@@ -134,3 +134,4 @@
 * [【计算机-合集】哈佛大学计算机核心课程](https://www.bilibili.com/video/av19302731)
 * [Teach Yourself Computer Science](https://teachyourselfcs.com/)
 * [Composing Programs](http://www.composingprograms.com/): a free online introduction to programming and computer science.
+* [CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes):📚 Computer Science Learning Notes

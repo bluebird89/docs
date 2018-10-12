@@ -132,7 +132,7 @@
 ## 内容
 
 -   得到
--   极客时间
+-   [极客时间](https://github.com/shawjia/geektime-desktop):极客时间桌面版 for macOS/Windows/Debain
 -   掘金
 -   开发者头条
 -   码农头条
@@ -224,6 +224,10 @@
 ## 论文
 
 * [tpn/pdfs](https://github.com/tpn/pdfs):Technically-oriented PDF Collection (Papers, Specs, Decks, Manuals, etc)
+
+## 文章
+
+* [xitu/gold-miner](https://github.com/xitu/gold-miner):🥇掘金翻译计划，可能是世界最大最好的英译中技术社区，最懂读者和译者的翻译平台： https://juejin.im/tag/掘金翻译计划
 
 ## 参考
 

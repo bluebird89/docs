@@ -21,6 +21,7 @@ pandoc WEB.md -o web.docx
 * [basecamp/trix](https://github.com/basecamp/trix):A rich text editor for everyday writing https://trix-editor.org/
 * [leptosia/docute](https://github.com/leptosia/docute):📜 Effortlessly documentation done right. https://docute.org
 * [acebook/Docusaurus](https://github.com/facebook/Docusaurus):Easy to maintain open source documentation websites. https://docusaurus.io
+* [open-xml-templating/docxtemplater](https://github.com/open-xml-templating/docxtemplater):Generate docx and pptx (microsoft word documents) from templates, from Node.js, the Browser and the command line / Demo: https://docxtemplater.com/demo https://docxtemplater.com
 
 ## PPT
 
