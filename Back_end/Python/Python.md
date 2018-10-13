@@ -1,21 +1,14 @@
 # * [python/cpython](https://github.com/python/cpython)
 
-The Python programming language
+The Python programming language,Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编写的一个编程语言。编译器首先会进行语法检查，代码检查.为了不带入过多的累赘，Python 3.0在设计的时候没有考虑向下兼容。不同版本的python.exe使用不同的命名，命令行中可以调用的到`python` `python3`.virtualenv 和 virtualenvwrapper 来管理不同项目的依赖环境，通过 workon 、 mkvirtualenv 等命令进行虚拟环境切换
 
-Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编写的一个编程语言。
-
-编译器首先会进行语法检查，代码检查
-
-为了不带入过多的累赘，Python 3.0在设计的时候没有考虑向下兼容。不同版本的python.exe使用不同的命名，命令行中可以调用的到`python` `python3`.virtualenv 和 virtualenvwrapper 来管理不同项目的依赖环境，通过 workon 、 mkvirtualenv 等命令进行虚拟环境切换
-
-* 网络应用，包括网站、后台服务等等；
-* 许多日常需要的小工具，包括系统管理员需要的脚本任务等等；
-* 把其他语言开发的程序再包装起来，方便使用。
-* 1行代码能实现的功能，决不写5行代码。请始终牢记，代码越少，开发效率越高。
-
-缺点
-
-* 代码少的代价是运行速度慢，C程序运行1秒钟，Java程序可能需要2秒，而Python程序可能就需要10秒。Python是解释型语言，你的代码在执行时会一行一行地翻译成CPU能理解的机器码，这个翻译过程非常耗时，所以很慢。而C程序是运行前直接编译成CPU能执行的机器码，所以非常快。
+* 优点
+    - 网络应用，包括网站、后台服务等等；
+    - 许多日常需要的小工具，包括系统管理员需要的脚本任务等等；
+    - 把其他语言开发的程序再包装起来，方便使用。
+    - 1行代码能实现的功能，决不写5行代码。请始终牢记，代码越少，开发效率越高。
+* 缺点
+    - 代码少的代价是运行速度慢，C程序运行1秒钟，Java程序可能需要2秒，而Python程序可能就需要10秒。Python是解释型语言，你的代码在执行时会一行一行地翻译成CPU能理解的机器码，这个翻译过程非常耗时，所以很慢。而C程序是运行前直接编译成CPU能执行的机器码，所以非常快。
 
 ## 解释器
 
@@ -85,9 +78,9 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 150
 sudo update-alternatives --config python #如果要切换到Python2
 ```
 
-### 版本管理工具pyenv:修改系统环境变量 PATH
+### 版本管理工具pyenv
 
-多版本python共存的环境工具，可以在不改变系统环境的情况下，可以随意切换不同python版本。基于某个版本开发的工具，在更换了不同python版本之后，就会导致工具中的某个模块、代码错误，而不能正常使用。
+修改系统环境变量 PATH。多版本python共存的环境工具，可以在不改变系统环境的情况下，可以随意切换不同python版本。基于某个版本开发的工具，在更换了不同python版本之后，就会导致工具中的某个模块、代码错误，而不能正常使用。
 
 ```sh
 brew install pyenv
@@ -205,10 +198,6 @@ pip install 'ipython[zmq,qtconsole,notebook,test]'
 ### [Anaconda](https://github.com/DamnWidget/anacond)
 
 有命令行与图形界面两种方式,Anaconda turns your Sublime Text 3 in a full featured Python development IDE including autocompletion, code linting, IDE features, autopep8 formating, McCabe complexity checker Vagrant and Docker support for Sublime Text 3 using Jedi, PyFlakes, pep8, MyPy, PyLint, pep257 and McCabe that will never freeze your Sublime Text 3
-
-###  jupyter
-
-* jupyter notebook:anaconda
 
 ### 执行环境
 
@@ -1116,7 +1105,7 @@ hasattr(obj, 'power') # 有属性'power'吗？ True
 
 db API DRIVER即数据库接口驱动:
 
-* [MySQLdb] is a native driver that has been developed and supported for over a decade by Andy Dustman.不支持python3 
+* [MySQLdb] is a native driver that has been developed and supported for over a decade by Andy Dustman.不支持python3
 * [mysqlclient] is a fork of MySQLdb which notably supports Python 3 and can be used as a drop-in replacement for MySQLdb. At the time of this writing, this is the recommended choice for using MySQL with Django.
 * [MySQL Connector/Python] is a pure Python driver from Oracle that does not require the MySQL client library or any Python modules outside the standard library.
 
@@ -1236,15 +1225,13 @@ conda env export > environment.yaml  # 分享代码的时候，同时也需要�
 conda env create -f environment.yaml #  用对方分享的 YAML 文件来创建一摸一样的运行环境。
 ```
 
-#### Jupyter Notebook
+#### [Jupyter Notebook](http://jupyter.org/)
 
-[官网](http://jupyter.org/)
-
-```shell
+```sh
 conda install jupyter notebook
 pip install jupyter notebook
 
-Anaconda，可以在其 Navigator 图形界面中点击打开 Notebook。
+# Anaconda，可以在其 Navigator 图形界面中点击打开 Notebook。
 jupyter notebook
 ```
 
@@ -1257,14 +1244,13 @@ Markdown 单元：在这里对文本进行编辑，采用 markdown 的语法规�
 - 编辑数学公式：LaTeX `$$ z = \frac{x}{y} $$`
 - 幻灯片
 
-#### IPython
-
-[官网](https://ipython.org/)
+#### [IPython](https://ipython.org/)
 
 ### [pypy](http://pypy.org/)
 
 
 ### docker
+
 - mkdir -p ~/python ~/python/myapp  myapp目录将映射为python容器配置的应用目录
 - 创建Dockerfile
 

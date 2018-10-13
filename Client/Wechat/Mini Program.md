@@ -211,6 +211,7 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 - [liwushuoapp](https://github.com/chongbenben/liwushuoapp) ★11 - 微信小程序开发的App
 - [tencentyun/wafer-client-sdk](https://github.com/tencentyun/wafer-client-sdk):Wafer - 快速构建具备弹性能力的微信小程序 https://github.com/tencentyun/wafer
 * [b3log/symphony-weapp](https://github.com/b3log/symphony-weapp):📚 『书单』小程序 https://hacpai.com/tag/book_share
+* [Tencent/Face2FaceTranslator](https://github.com/Tencent/Face2FaceTranslator):面对面翻译小程序是微信团队针对面对面沟通的场景开发的流式语音翻译小程序，通过微信同声传译插件提供了语音识别，文本翻译等功能。
 
 ## 服务端
 

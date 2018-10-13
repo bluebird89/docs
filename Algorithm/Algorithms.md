@@ -124,6 +124,8 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * [【公开课】十大算法精讲](https://www.bilibili.com/video/av18109226/)
 * [麻省理工学院公开课：算法导论](https://www.bilibili.com/video/av1149902)
 * [frowhy/Algorithm](https://github.com/frowhy/Algorithm)
+* [TheAlgorithms/Python](https://github.com/TheAlgorithms/Python):All Algorithms implemented in Python
+* [TheAlgorithms/Java](https://github.com/TheAlgorithms/Java):All Algorithms implemented in Java
 
 ## 工具
 

@@ -4,6 +4,142 @@
 
 * [facebook/react](https://github.com/facebook/react):A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
 
+## 状态
+
+*  [jamiebuilds/unstated](https://github.com/jamiebuilds/unstated):State so simple, it goes without saying https://unstated.io
+
+## 编辑器
+
+* [facebook/draft-js](https://github.com/facebook/draft-js):A React framework for building text editors. https://draftjs.org/
+* [nikgraf/awesome-draft-js](https://github.com/nikgraf/awesome-draft-js):Awesome list of Draft.js resources
+* [React Studio](https://reactstudio.com/)
+
+## 框架
+
+* [kusti8/proton-native](https://github.com/kusti8/proton-native):A React environment for cross platform native desktop apps https://proton-native.js.org
+* [ReactiveX/rxjs](https://github.com/ReactiveX/rxjs):A reactive programming library for JavaScript http://reactivex.io/rxjs
+* [umijs/umi](https://github.com/umijs/umi):🌋 Pluggable enterprise-level react application framework. https://umijs.org/
+* [Microsoft/reactxp](https://github.com/microsoft/reactxp):Library for cross-platform app development. https://microsoft.github.io/reactxp/
+
+## 开发工具
+
+* [facebook/react-devtools](https://github.com/facebook/react-devtools):An extension that allows inspection of React component hierarchy in the Chrome and Firefox Developer Tools.
+* [gaearon/redux-devtools](https://github.com/gaearon/redux-devtools):DevTools for Redux with hot reloading, action replay, and customizable UI http://youtube.com/watch?v=xsSnOQynTHs
+* [gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby):Build blazing fast, modern apps and websites with React https://www.gatsbyjs.org
+
+## Angular
+
+* [ngrx/platform](https://github.com/ngrx/platform):Reactive libraries for Angular
+
+## 设计模式
+
+* [chantastic/reactpatterns.com](https://github.com/chantastic/reactpatterns.com):Patterns for React Developers http://reactpatterns.com
+
+## 图表
+
+* [hshoff/vx](https://github.com/hshoff/vx):🐯react + d3 = vx | visualization components https://vx-demo.now.sh/
+* [react-native-community/react-native-linear-gradient](https://github.com/react-native-community/react-native-linear-gradient):A <LinearGradient /> component for react-native 
+
+## 表单
+
+*  [mozilla-services/react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form):A React component for building Web forms from JSON Schema.
+
+## 图片
+
+* [ricardo-ch/react-easy-crop](https://github.com/ricardo-ch/react-easy-crop):A React component to crop images with easy interactions https://codesandbox.io/s/q80jom5ql6
+* [xiaolin/react-image-gallery](https://github.com/xiaolin/react-image-gallery):React carousel image gallery component with thumbnail and mobile support
+
+## 文件
+
+* [diegomura/react-pdf](https://github.com/diegomura/react-pdf):📄 Create PDF files using React http://react-pdf.diegomura.com/repl
+
+## 扩展
+
+* [redux-saga/redux-saga](https://github.com/redux-saga/redux-saga):An alternative side effect model for Redux apps https://redux-saga.js.org/
+* [acdlite/recompose](https://github.com/acdlite/recompose):A React utility belt for function components and higher-order components.
+
+## animations
+
+* [react-tools/react-move](https://github.com/react-tools/react-move):React Move 🌀 Beautiful, data-driven animations for React https://react-move.js.org
+* [react-dnd/react-dnd](https://github.com/react-dnd/react-dnd):Drag and Drop for React http://react-dnd.github.io/react-dnd
+
+## 脚手架
+
+* [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
+
+## firebase
+
+* [invertase/react-native-firebase](https://github.com/invertase/react-native-firebase):🔥 A well tested feature rich modular Firebase implementation for React Native. Supports both iOS & Android platforms for over 15 Firebase services.https://rnfirebase.io/
+* [kriasoft/react-firebase-starter](https://github.com/kriasoft/react-firebase-starter)：Boilerplate (seed) project for creating web apps with React.js, GraphQL.js and Relay https://firebase.reactstarter.com
+
+## 渲染
+
+* [stereobooster/react-snap](https://github.com/stereobooster/react-snap):👻 Zero-configuration framework-agnostic static prerendering for SPAs
+* [renatorib/react-powerplug](https://github.com/renatorib/react-powerplug):🔌 Renderless Containers
+
+## Redux
+
+* [reduxjs/react-redux](https://github.com/reduxjs/react-redux):Official React bindings for Redux https://redux.js.org/basics/usagewithreact
+* [reduxjs/redux](https://github.com/reduxjs/redux):Predictable state container for JavaScript apps http://redux.js.org
+* [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
+* [rt2zz/redux-persist](https://github.com/rt2zz/redux-persist):persist and rehydrate a redux store
+
+## 命令行
+
+* [maicki/why-did-you-update](https://github.com/maicki/why-did-you-update):💥 Puts your console on blast when React is making unnecessary updates.
+
+## 组件
+
+* [JedWatson/react-select](https://github.com/JedWatson/react-select):The Select for React.js https://react-select.com/
+
+## 按钮
+
+* [transitive-bullshit/react-particle-effect-button](https://github.com/transitive-bullshit/react-particle-effect-button):Bursting particle effect buttons for React 🎉
+
+## WEB
+
+* [taobaofed/react-web](https://github.com/taobaofed/react-web):A framework for building web apps with React Native compatible API. http://taobaofed.github.io/react-web/
+
+## i18n
+
+* [lingui/js-lingui](https://github.com/lingui/js-lingui):🌍📖 A readable, automated, and optimized (5 kb) internationalization for JavaScript and React https://lingui.js.org/
+
+## SPA
+
+* [stereobooster/react-snap](https://github.com/stereobooster/react-snap):👻 Zero-configuration framework-agnostic static prerendering for SPAs
+
+## 代码展示
+
+* [pomber/code-surfer](https://github.com/pomber/code-surfer):React component for scrolling, zooming and highlighting code <🏄/>
+
+## Docker
+
+* [zzswang/docker-nginx-react](https://github.com/zzswang/docker-nginx-react):Run react single page app within a nginx server
+
+## Cookies
+
+* [reactivestack/cookies](https://github.com/reactivestack/cookies):Load and save cookies within your React application
+
+## 地图
+
+* [mariusandra/pigeon-maps](https://github.com/mariusandra/pigeon-maps):ReactJS Maps without external dependencies
+
+## 代码检测
+
+* [facebook/prop-types](https://github.com/facebook/prop-types):Runtime type checking for React props and similar objects
+
+## 搜索
+
+* [searchkit/searchkit](https://github.com/searchkit/searchkit):React UI components / widgets. The easiest way to build a great search experience with Elasticsearch. http://www.searchkit.co
+
+## 文档
+
+* [nfl/react-helmet](https://github.com/nfl/react-helmet):A document head manager for React
+
+## 测试
+
+* [kentcdodds/react-testing-library](https://github.com/kentcdodds/react-testing-library):🐐 Simple and complete React DOM testing utilities that encourage good testing practices. http://npm.im/react-testing-library
+
 ## 路由
 
 * [reactjs/redux](https://github.com/reactjs/redux):Predictable state container for JavaScript apps http://redux.js.org
@@ -15,6 +151,7 @@
 * [redux-offline/redux-offline](https://github.com/redux-offline/redux-offline):Build Offline-First Apps for Web and React Native
 * [acdlite/redux-router](https://github.com/acdlite/redux-router):Redux bindings for React Router – keep your router state inside your Redux store
 * [erikras/react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example):A starter boilerplate for a universal webapp using express, react, redux, webpack, and react-transform
+* [maicki/react-native-router-bridge](https://github.com/maicki/react-native-router-bridge):Small module which bridges the navigation world between native and React Native.
 
 ## 组件
 
@@ -86,11 +223,24 @@
 * [segmentio/evergreen](https://github.com/segmentio/evergreen):🌲 Evergreen React UI Framework by Segment https://evergreen.surge.sh/
 * [JetBrains/ring-ui](https://github.com/JetBrains/ring-ui):A collection of JetBrains Web UI components https://jetbrains.github.io/ring-ui
 
-## 编辑器
+## 学习
 
-* [facebook/draft-js](https://github.com/facebook/draft-js):A React framework for building text editors. https://draftjs.org/
-* [nikgraf/awesome-draft-js](https://github.com/nikgraf/awesome-draft-js):Awesome list of Draft.js resources
-* [React Studio](https://reactstudio.com/)
+* [kay-is/react-from-zero](https://github.com/kay-is/react-from-zero):A simple (99% ES2015 less) tutorial for React
+* [fangwei716/30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
+* [kdchang/reactjs101](https://github.com/kdchang/reactjs101):從零開始學 ReactJS（ReactJS 101）是一本希望讓初學者一看就懂的 ReactJS 中文入門教學書，由淺入深學習 ReactJS 生態系 (Flux, Redux, React Router, ImmutableJS, React Native, Relay/GraphQL etc.)。 https://www.gitbook.com/book/kdchang/…
+* [reactjs/react-basic](https://github.com/reactjs/react-basic):A description of the conceptual model of React without implementation burden.
+* [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
+* [piotrwitek/react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide):The complete guide to static typing in "React & Redux" apps using TypeScript https://piotrwitek.github.io/react-redux-typescript-guide/
+
+## 项目
+
+* [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):这应该是最好的网易云音乐播放器了，没有之一，如果有请打醒 🤘
+* [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐nodejs api https://binaryify.github.io/NeteaseCl…
+* [JonJam/yorpw_ui_web](https://github.com/JonJam/yorpw_ui_web):Password manager SPA built using React and Redux
+* [JonJam/react-redux-ts](https://github.com/JonJam/react-redux-ts):React/Redux TypeScript starter project
+* [taikongfeizhu/webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
+* [duxianwei520/react](https://github.com/duxianwei520/react):一个react+redux+webpack+ES6+antd的SPA的后台管理底层框架
+* [fbsamples/f8app](https://github.com/fbsamples/f8app):Source code of the official F8 app of 2017, powered by React Native and other Facebook open source projects. http://makeitopen.com
 
 ## 参考
 
@@ -121,152 +271,3 @@
 * [tachyons-css/tachyons](https://github.com/tachyons-css/tachyons/):Functional css for humans https://tachyons.io
 * [adam-golab/react-developer-roadmap](https://github.com/adam-golab/react-developer-roadmap):Roadmap to becoming a React developer in 2018s
 * [kentcdodds/advanced-react-patterns](https://github.com/kentcdodds/advanced-react-patterns):The course material for my advanced react patterns course on Egghead.io
-
-## 框架
-
-* [kusti8/proton-native](https://github.com/kusti8/proton-native):A React environment for cross platform native desktop apps https://proton-native.js.org
-* [ReactiveX/rxjs](https://github.com/ReactiveX/rxjs):A reactive programming library for JavaScript http://reactivex.io/rxjs
-* [umijs/umi](https://github.com/umijs/umi):🌋 Pluggable enterprise-level react application framework. https://umijs.org/
-
-## 学习
-
-* [kay-is/react-from-zero](https://github.com/kay-is/react-from-zero):A simple (99% ES2015 less) tutorial for React
-* [fangwei716/30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
-* [kdchang/reactjs101](https://github.com/kdchang/reactjs101):從零開始學 ReactJS（ReactJS 101）是一本希望讓初學者一看就懂的 ReactJS 中文入門教學書，由淺入深學習 ReactJS 生態系 (Flux, Redux, React Router, ImmutableJS, React Native, Relay/GraphQL etc.)。 https://www.gitbook.com/book/kdchang/…
-* [reactjs/react-basic](https://github.com/reactjs/react-basic):A description of the conceptual model of React without implementation burden.
-* [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
-* [piotrwitek/react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide):The complete guide to static typing in "React & Redux" apps using TypeScript https://piotrwitek.github.io/react-redux-typescript-guide/
-
-## 项目
-
-* [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):这应该是最好的网易云音乐播放器了，没有之一，如果有请打醒 🤘
-* [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐nodejs api https://binaryify.github.io/NeteaseCl…
-* [JonJam/yorpw_ui_web](https://github.com/JonJam/yorpw_ui_web):Password manager SPA built using React and Redux
-* [JonJam/react-redux-ts](https://github.com/JonJam/react-redux-ts):React/Redux TypeScript starter project
-* [taikongfeizhu/webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
-* [duxianwei520/react](https://github.com/duxianwei520/react):一个react+redux+webpack+ES6+antd的SPA的后台管理底层框架
-* [fbsamples/f8app](https://github.com/fbsamples/f8app):Source code of the official F8 app of 2017, powered by React Native and other Facebook open source projects. http://makeitopen.com
-
-## 开发工具
-
-* [facebook/react-devtools](https://github.com/facebook/react-devtools):An extension that allows inspection of React component hierarchy in the Chrome and Firefox Developer Tools.
-* [gaearon/redux-devtools](https://github.com/gaearon/redux-devtools):DevTools for Redux with hot reloading, action replay, and customizable UI http://youtube.com/watch?v=xsSnOQynTHs
-
-## Angular
-
-* [ngrx/platform](https://github.com/ngrx/platform):Reactive libraries for Angular
-
-## 设计模式
-
-* [chantastic/reactpatterns.com](https://github.com/chantastic/reactpatterns.com):Patterns for React Developers http://reactpatterns.com
-
-## 图表
-
-* [hshoff/vx](https://github.com/hshoff/vx):🐯react + d3 = vx | visualization components https://vx-demo.now.sh/
-* [react-native-community/react-native-linear-gradient](https://github.com/react-native-community/react-native-linear-gradient):A <LinearGradient /> component for react-native 
-
-## 表单
-
-*  [mozilla-services/react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form):A React component for building Web forms from JSON Schema.
-
-## 图片
-
-* [ricardo-ch/react-easy-crop](https://github.com/ricardo-ch/react-easy-crop):A React component to crop images with easy interactions https://codesandbox.io/s/q80jom5ql6
-* [xiaolin/react-image-gallery](https://github.com/xiaolin/react-image-gallery):React carousel image gallery component with thumbnail and mobile support
-
-## 文件
-
-* [diegomura/react-pdf](https://github.com/diegomura/react-pdf):📄 Create PDF files using React http://react-pdf.diegomura.com/repl
-
-## 扩展
-
-* [redux-saga/redux-saga](https://github.com/redux-saga/redux-saga):An alternative side effect model for Redux apps https://redux-saga.js.org/
-* [acdlite/recompose](https://github.com/acdlite/recompose):A React utility belt for function components and higher-order components.
-
-## animations
-
-* [react-tools/react-move](https://github.com/react-tools/react-move):React Move 🌀 Beautiful, data-driven animations for React https://react-move.js.org
-* [react-dnd/react-dnd](https://github.com/react-dnd/react-dnd):Drag and Drop for React http://react-dnd.github.io/react-dnd
-
-## 脚手架
-
-* [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
-
-## firebase
-
-* [invertase/react-native-firebase](https://github.com/invertase/react-native-firebase):🔥 A well tested feature rich modular Firebase implementation for React Native. Supports both iOS & Android platforms for over 15 Firebase services.https://rnfirebase.io/
-* [kriasoft/react-firebase-starter](https://github.com/kriasoft/react-firebase-starter)：Boilerplate (seed) project for creating web apps with React.js, GraphQL.js and Relay https://firebase.reactstarter.com
-
-## 路由router
-
-* [ReactTraining/react-router](https://github.com/ReactTraining/react-router):Declarative routing for React https://reacttraining.com/react-router/
-* [maicki/react-native-router-bridge](https://github.com/maicki/react-native-router-bridge):Small module which bridges the navigation world between native and React Native.
-
-## 渲染
-
-* [stereobooster/react-snap](https://github.com/stereobooster/react-snap):👻 Zero-configuration framework-agnostic static prerendering for SPAs
-* [renatorib/react-powerplug](https://github.com/renatorib/react-powerplug):🔌 Renderless Containers
-
-## Redux
-
-* [reduxjs/react-redux](https://github.com/reduxjs/react-redux):Official React bindings for Redux https://redux.js.org/basics/usagewithreact
-* [reduxjs/redux](https://github.com/reduxjs/redux):Predictable state container for JavaScript apps http://redux.js.org
-* [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
-* [rt2zz/redux-persist](https://github.com/rt2zz/redux-persist):persist and rehydrate a redux store
-
-## 命令行
-
-* [maicki/why-did-you-update](https://github.com/maicki/why-did-you-update):💥 Puts your console on blast when React is making unnecessary updates.
-
-## 组件
-
-* [JedWatson/react-select](https://github.com/JedWatson/react-select):The Select for React.js https://react-select.com/
-
-## 按钮
-
-* [transitive-bullshit/react-particle-effect-button](https://github.com/transitive-bullshit/react-particle-effect-button):Bursting particle effect buttons for React 🎉
-
-## WEB
-
-* [taobaofed/react-web](https://github.com/taobaofed/react-web):A framework for building web apps with React Native compatible API. http://taobaofed.github.io/react-web/
-* [gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby):⚛️📄🚀 Blazing fast site generator for React https://www.gatsbyjs.org
-
-## i18n
-
-* [lingui/js-lingui](https://github.com/lingui/js-lingui):🌍📖 A readable, automated, and optimized (5 kb) internationalization for JavaScript and React https://lingui.js.org/
-
-## SPA
-
-* [stereobooster/react-snap](https://github.com/stereobooster/react-snap):👻 Zero-configuration framework-agnostic static prerendering for SPAs
-
-## 代码展示
-
-* [pomber/code-surfer](https://github.com/pomber/code-surfer):React component for scrolling, zooming and highlighting code <🏄/>
-
-## Docker
-
-* [zzswang/docker-nginx-react](https://github.com/zzswang/docker-nginx-react):Run react single page app within a nginx server
-
-## Cookies
-
-* [reactivestack/cookies](https://github.com/reactivestack/cookies):Load and save cookies within your React application
-
-## 地图
-
-* [mariusandra/pigeon-maps](https://github.com/mariusandra/pigeon-maps):ReactJS Maps without external dependencies
-
-## 代码检测
-
-* [facebook/prop-types](https://github.com/facebook/prop-types):Runtime type checking for React props and similar objects
-
-## 搜索
-
-* [searchkit/searchkit](https://github.com/searchkit/searchkit):React UI components / widgets. The easiest way to build a great search experience with Elasticsearch. http://www.searchkit.co
-
-## 文档
-
-* [nfl/react-helmet](https://github.com/nfl/react-helmet):A document head manager for React
-
-## 测试
-
-* [kentcdodds/react-testing-library](https://github.com/kentcdodds/react-testing-library):🐐 Simple and complete React DOM testing utilities that encourage good testing practices. http://npm.im/react-testing-library

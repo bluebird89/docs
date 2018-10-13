@@ -116,12 +116,17 @@ echo $slugify->slugify('Hello World, this is a long sentence and I need to make 
   }
 
 # psr-4
-"autoload":{"psr-4":{
-                            "name1\\space\\":["path/",...],
-                            "name2\\space\\":["path2/",...],
-                          }
-                 }
+"autoload":{
+  "psr-4":{
+    "name1\\space\\":["path/",...],
+    "name2\\space\\":["path2/",...],
+  }
+}
 ```
+
+http://packagist.phpcomposer.com/  Authentication required
+
+需要
 
 ## Principle
 
