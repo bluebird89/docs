@@ -135,6 +135,11 @@
 * 产品经理手册
 * 上瘾：让用户养成使用习惯的四大产品逻辑
 
+## 产品
+
+* 《客户驱动的产品开发》
+* 《数据驱动设计：A/B测试提升用户体验》
+
 ## OO
 
 * 《Elegant Objects》
@@ -160,6 +165,8 @@
 * 七周七Web开发框架
 * Web性能权威指南
 * 《DOM 启蒙》
+* 《Web风格：用户体验设计基本原则及实践(原书第4版)》
+* 《RESTful Web Clients：基于超媒体的可复用客户端》
 
 ## PWA
 
@@ -391,10 +398,11 @@
 
 * 《Patterns, Principles and Practices of Domain-Driven Design》
 * 领域驱动设计
+* 《领域驱动设计精粹》
 
-## ML
+## Serverless
 
-* 深入理解Tensor Flow：架构
+* 《Serverless架构：无服务器应用与AWS Lambda》
 
 ## DevOps
 
@@ -411,6 +419,7 @@
 * 《[推荐系统实践](https://www.amazon.cn/gp/product/B008AK5YJO)》
 * 《[机器学习实战](https://www.amazon.cn/gp/product/B00D747PTK)》
 * TensorFlow：实战Google深度学习框架
+* 《机器学习实战：基于Scikit-Learn和TensorFlow》
 
 ## 数据挖掘
 
@@ -428,6 +437,16 @@
 * Sentiment Analysis: Mining Opinions, Sentiments,and Emotions
 * 移动数据挖掘
 
+## 数据分析
+
+* 《Spark高级数据分析（第2版）》 Sandy Ryza、Uri Laserson、Sean Owen、Josh Wills
+* 《Hadoop深度学习》 Dipayan Dev
+* 《R数据科学》 哈德利•威克姆、加勒特•格罗勒芒德
+
+## ML
+
+* 深入理解Tensor Flow：架构
+
 ## 区块链
 
 * 区块链原理，设计和应用
@@ -440,6 +459,10 @@
 * 《[门后的秘密：卓越管理的故事](https://www.amazon.cn/gp/product/B00CBBKRQ8)》
 * 《[极客与团队：软件工程师的团队生存秘笈](https://www.amazon.cn/gp/product/B00BLZMG8W)》
 * 《硝烟中的 Scrum 和 XP》
+* 《Rework》
+* 《Getting Real》
+* 《Remote》
+* 《It Doesn't Have to Be Crazy at Work》
 
 ## 项目管理
 
@@ -709,6 +732,7 @@
 * 故事
 * 中有声闻教授解脱密法
 * 《离开前请叫醒我》 卢思浩
+* 最好的告别
 
 ## 心理
 
@@ -720,6 +744,8 @@
 * 安静:内向性格的竞争力
 * 暗时间
 * 心理学与生活
+* 自私的基因
+* 进化心理学
 
 ## 教育
 

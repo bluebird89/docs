@@ -278,6 +278,9 @@ Git维护的就是一个commitID树，分别保存着不同状态下的代码。
 ### 创建工作区 start a working area
 
 ```sh
+git init --bare # 远程仓库文件构建
+git init [project-name] # 初始化git仓库 在当前目录内新建一个Git代码库，会生成.git文件，用于新建空项目文件或者将项目添加git管理，默认URL文件名称，也可以自定义project-name
+
 git clone [url] [project-name] # 下载一个项目和它的整个代码历史,支持多种协议
 git clone http[s]://example.com/path/to/repo.git/
 git clone ssh://example.com/path/to/repo.git/
@@ -288,10 +291,12 @@ git clone file:///opt/git/project.git
 git clone ftp[s]://example.com/path/to/repo.git/
 git clone rsync://example.com/path/to/repo.git/
 git clone -o jQuery https://github.com/jquery/jquery.git # 所使用的远程主机自动被Git命名为origin。如果想自定义主机名，需要用git clone命令的-o选项指定
-git clone --depth=1 https://github.com/rwv/chinese-dos-games.git #
+git clone --depth=1 https://github.com/rwv/chinese-dos-games.git
 
-git init --bare # 远程仓库文件构建
-git init [project-name] # 初始化git仓库 在当前目录内新建一个Git代码库，会生成.git文件，用于新建空项目文件或者将项目添加git管理，默认URL文件名称，也可以自定义project-name
+# 从远程仓库中克隆一个特定的分支
+git init
+git remote add -t  -f origin
+git checkout
 ```
 
 #### working tree
@@ -361,21 +366,21 @@ git reset –hard dc5f1d1 # 只要记得版本号就可以穿梭回到现代
 git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be
 
 git revert [commit] # 回退到某个提交，但是不删除commit
-git clean # Remove untracked files
 
 # 移除没有track文件
-git clean -fd . # 此类文件的状态为 Untracked files. . 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径
-
-git checkout -- files # 丢弃 1.工作区中未提交暂存区修改（与版本库一致） 2.已提交暂存区新的修改（与暂存区一致）
+git clean -f     # remove untracked files
+git clean -fd    # remove untracked files/directories
+git clean -nfd   # list all files/directories that would be removed
 
 # 冲突
 git add <文件名> # # 标记为解决状态加入暂存区
 git mergetool <文件名>  # Mac 系统下，运行 默认的是 FileMerge
 
 git checkout . # 提交过版本库，但未提交至暂存区的文件（未执行 git add) 此类文件的状态为 Changes not staged for commit
+git checkout -- files # 丢弃 1.工作区中未提交暂存区修改（与版本库一致） 2.已提交暂存区新的修改（与暂存区一致）
 git checkout [file]  # 使用HEAD中的最新内容替换工作区中的文件，以添加到暂存区改动与新文件不受到影响，会删除该文件没有暂存和提交的改动，不可逆
 git checkout [commit] [file] # 恢复某个commit的指定文件到暂存区和工作区
-git checkout origin/master -- path/to/file
+git checkout origin/master -- path/to/file # 丢弃工作区的修改
 git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1234567a44341404 / HEAD
 ```
 
@@ -444,6 +449,7 @@ git blame filename # 查看指定文件是什么人在什么时间修改过
 
 git stash # 将当前目录和index中的所有改动(但不包括未track的文件)临时存放在 stash 队列中,注意：未提交到版本库的文件会自动忽略，只要不运行 git clean -fd . 就不会丢失
 git stash save "stash name"
+git stash save --keep-index    # stash only unstaged files
 git stash list # 查看 stash 队列中已暂存了多少 WIP
 
 git stash apply # 恢复stash中上一个（stash@{0}）内容到工作区，但是并不删除stash中的内容
@@ -482,15 +488,20 @@ git bisect bad # Find bug in commit history in a binary search tree style
 
 git cherry-pick [commit] # 选择一个commit，合并进当前分支
 git cherry-pick hash_commit_A hash_commit_B
+
+git --git-dir=/.git format-patch -k -1 --stdout  | git am -3 -k # 将另一个不相关的本地仓库的提交补丁应用到当前仓库
+
+git filter-branch --prune-empty --subdirectory-filter  master # 将Git仓库中某个特定的目录转换为一个全新的仓库
 ```
 
 #### 远程分支
 
 * git merge 处理冲突更直接
 * git rebase 合并分支，但是不合并提交记录（commit），rebase合并如果有冲突则一个一个文件的去合并解决冲突,能够保证清晰的 commit 记录。
-    - rebase 先找出共同的祖先节点
-    - 从祖先节点把功能分支的提交记录摘下来，然后 rebase 到 master 分支
-    - rebase 之后的 commitID 其实已经发生了变化
+  - 变基会通过在原来的分支中为每次提交创建全新提交来重写项目历史。变基的主要好处在于你会得到一个更加整洁的项目历史
+  - rebase 先找出共同的祖先节点
+  - 从祖先节点把功能分支的提交记录摘下来，然后 rebase 到 master 分支
+  - rebase 之后的 commitID 其实已经发生了变化
 
 ![rebase vs merge](../_staic/mergevsrebase.jpeg "rebase vs merge")
 
@@ -541,6 +552,7 @@ git pull <remote> <branch>    # 抓取远程仓库所有分支更新并合并到
 git pull -r[--rebase] origin master # 执行的是git pull origin master git rebase 取回远程主机某个分支的更新，再与本地的指定分支合并
 git pull origin master --allow-unrelated-histories # 合并两个不同的项目
 git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并
+for((i=1;i<=10000;i+=1)); do sleep X && git pull; done # 每隔X秒运行一次git pull
 
 # Git会首先在你试图push的分支上运行git log,检查它的历史中是否能看到server上的branch现在的tip,如果本地历史中不能看到server的tip,说明本地的代码不是最新的,Git会拒绝你的push.要求先在本地做git pull合并差异，然后再推送到远程主机
 git push   # push所有分支
@@ -619,6 +631,8 @@ git tag -fa tagname
 
 ```sh
 git archive
+
+tar cJf .tar.xz / --exclude-vcs
 ```
 
 ## cherry-pick
@@ -636,6 +650,10 @@ git archive
 * 过滤某个类型文件 : *.zip *.class 就是过滤zip 和 class 后缀的文件, 这些文件不被提交;
 * 过滤指定文件 : /gen/R.java, 过滤该文件, 该文件不被提交;
 * 可以递归忽略.gitignore文件内容
+
+```sh
+git update-index --assume-unchanged # 永久性地告诉Git不要管某个本地文件
+```
 
 ### 搭建git私有服务器
 
@@ -693,6 +711,7 @@ chown git:git post-receive
 # 由于该文件其实就是一个shell文件，我们还应该为其设置可执行权限
 chmod +x post-receive
 ```
+
 * [post-checkout-build-status](https://bitbucket.org/tpettersen/post-checkout-build-status/src/master/)
 * [git-ci-hooks](https://bitbucket.org/tpettersen/git-ci-hooks/src/master/)
 
@@ -734,6 +753,63 @@ git rebase --continue # 若发生冲突，则按以上其他方法进行解决�
 git push origin # 直到所有冲突得以解决，待项目最后上线前再执行
 git rebase --skip # 若多次提交修改了同一文件，可能需要直接跳过后续提交，按提示操作即可
 git pull --rebase --autostash
+```
+
+### [nvie/gitflow](https://github.com/nvie/gitflow)
+
+Git extensions to provide high-level repository operations for Vincent Driessen's branching model.
+
+* 版本号使用x.x.x进行定义，第一个x代表大版本只有在项目有重大变更时更新 第二个x代表常规版本有新需求会更新 第三个x代表紧急BUG修正 一个常见的版本号类似于：0.11.10
+* 分支的名字是一种共识，更重要的是它承担的责任。
+* 主分支用于组织与软件开发、部署相关的活动；所有开发活动的核心分支。所有的开发活动产生的输出物最终都会反映到主分支的代码中。主分支分为
+  - master分支:存放的应该是随时可供在生产环境中部署的代码，它承担的责任就是：仅在发布新的可供部署的代码时才更新到master分支上的代码。当开发活动告一段落，产生了一份新的可供部署的代码时，master分支上的代码会被更新。同时，每一次更新，最好添加对应的版本号标签（TAG）。
+  - development分支:保存当前最新开发成果的分支，它承担的责任就是功能开发完毕等待最后QA的验收，通常这个分支上的代码也是可进行每日夜间发布的代码。当代码已经足够稳定时，就可以将所有的开发成果合并回master分支了。用于生成提测分支release，始终保持最新；
+* 辅助分支组织为了解决特定的问题而进行的各种开发活动。它的生存周期伴随着它的功能完成而消失.完成它的使命之后在merge到主分支之后，也将被删除。
+  - hotfix是紧急分支，从master生成，bug修正后自动合并到master和develop并且生成tag；
+  - feature是私有分支，用于开发新需求和需要较长时间的BUG修改
+  - release是提测分支也即常规分支，测试并且bug修改结束后生成该版本tag，后续可以使用git show tagname来查看版本信息或者回滚
+
+![Git Flow](../_static/git_flow_1.png "Optional title")
+
+```sh
+# 开发工作流程
+git flow feature start xxxxx # （开始新需求） 在feature/xxxxx分支下进行开发
+git flow feature finish xxxxx # （开发完成后等待研发经理确认可以完成时执行）
+git push origin develop #（发布develop分支） 每天工程师都需要git pull origin develop来更新develop分支，然后将develop分支合并到你正在开发得feature/xxxxx分支上来保持代码最新
+# 切记不能直接在develop上进行开发
+
+# 常规分支debug流程 由研发经理通知相关工程师release版本x.x
+git fetch
+git checkout -b release/x.x origin/release/x.x #（拉回release版本）
+git pull release/x.x #（更新该分支） 修改测试中发现的BUG
+git push origin release/vx.x #（修改完后提交分支）
+
+# 紧急debug流程 由研发经理通知相关工程师hotfix分支名称x.x.x
+git fetch
+git checkout -b hotfix/x.x.x origin/hotfix/x.x.x #（拉回hotfix分支）
+git pull hfx.x #（更新hotfix分支）在热修复分支下修改bug
+git push origin hfx.x # （修改完成，提交分支） 在日常工作中不能修改master分支下得代码
+
+# 开发和DEBUG流程同工程师流程 常规分支debug流程
+git pull origin develop # 更新develop分支为最新）
+git checkout develop # 切换到develop分支）
+git flow release start x.x # 生成一个release分支）通知测试和相关得工程师分支名称
+git pull origin release/x.x # 最终测试完成后拉回分支最新代码）
+git flow release finish x.x # 最终修改和测试完成后，结束release版本以供发布）
+git push origin develo # (发布最新的develop)
+git push origin master # 发布最终得master分支）
+
+# 紧急debug流程：
+git pull origin master # 更新master分支为最新）
+git checkout master # 切换到master分支）
+git flow hotfix start x.x.x # 生成一个hotfix分支）通知相关得工程师和测试人员hotfix分支名称
+git pull origin hotfix/x.x.x # 最终测试完成后拉回分支最新代码）
+git flow hot fix finish x.x.x # 最终修改和测试完成后，结束hot fix以供发布）
+git push origin master # 发布最终得master分支）
+
+# 工程师必须维护自己的feature分支保证代码最新，减少合并时的冲突。
+# 研发经理必须维护release分支，将最新的hotfix都合并进去，保证代码最新，减少合并时的冲突。
+# 在提交代码时还要注意判断对代码的修改是否是自己的，多用diff工具，多查看log，防止代码回溯。
 ```
 
 ## 工作流
@@ -877,7 +953,7 @@ git merge FETCH_HEAD
 * develop：保存当前最新开发成果的分支。通常这个分支上的代码也是可进行每日夜间发布的代码，只对开发负责人开放develop权限。 -
 * feature: 功能特性分支，每个功能特性一个 feature/ 分支，开发完成自测通过后合并入 develop 分支。可以从 master 或者develop 中拉出来。 - hotfix: 紧急bug分支修复分支。修复上线后，可以直接合并入master。
 
-#### Git-Develop 分支模式：
+#### Git-Develop 分支模式
 
 是基于 Git 代码库设计的一种需要严格控制发布质量和发布节奏的开发模式。develop 作为固定的持续集成和发布分支，并且分支上的代码必须经过 CodeReview 后才可以提交到 Develop 分支。它的基本流程如下：
 
@@ -909,7 +985,7 @@ git add --all
 git status
 git commit --verbose
 
-commit:第一行是不超过50个字的提要，然后空一行，罗列出改动原因、主要变动、以及需要注意的问题。最后，提供对应的网址（比如Bug ticket）。
+commit # 第一行是不超过50个字的提要，然后空一行，罗列出改动原因、主要变动、以及需要注意的问题。最后，提供对应的网址（比如Bug ticket）。
 Present-tense summary under 50 characters
 
 * More information about commit (under 72 characters).
@@ -928,8 +1004,6 @@ git rebase -i origin/master
 git push --force origin myfeature
 ```
 
-* [zenhub](https://app.zenhub.com)：Agile project management integrated with GitHub
-
 ### 合并commit选项
 
 * pick：正常选中
@@ -943,21 +1017,6 @@ git push --force origin myfeature
 
 - hexo：添加文章后现hexo g（生成） hexo d（部署）
 - jekyll：直接push到master就好
-
-### git-flow
-
-A collection of Git extensions to provide high-level repository operations for Vincent Driessen's branching model
-
-![Git Flow](../_static/git_flow_1.png "Optional title")
-
-* 主分支用于组织与软件开发、部署相关的活动；所有开发活动的核心分支。所有的开发活动产生的输出物最终都会反映到主分支的代码中。主分支分为
-  - master分支:存放的应该是随时可供在生产环境中部署的代码，它承担的责任就是：仅在发布新的可供部署的代码时才更新到master分支上的代码。当开发活动告一段落，产生了一份新的可供部署的代码时，master分支上的代码会被更新。同时，每一次更新，最好添加对应的版本号标签（TAG）。
-  - development分支:保存当前最新开发成果的分支，它承担的责任就是功能开发完毕等待最后QA的验收，通常这个分支上的代码也是可进行每日夜间发布的代码。当代码已经足够稳定时，就可以将所有的开发成果合并回master分支了。
-* 辅助分支组织为了解决特定的问题而进行的各种开发活动。它的生存周期伴随着它的功能完成而消失.完成它的使命之后在merge到主分支之后，也将被删除。
-  - 用于并行开发新功能时所使用的feature分支；
-  - 用于辅助版本发布的release分支；
-  - 用于修正生产代码中的缺陷的hotfix分支。
-* 分支的名字是一种共识，更重要的是它承担的责任。
 
 ### 使用
 
@@ -1032,8 +1091,6 @@ git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -
 %x00    print a byte from a hex code
 %w([[,[,]]])    switch line wrapping, like the -w option of git-shortlog(1).
 ```
-
-## 功能
 
 ### git-submodule
 
@@ -1381,7 +1438,6 @@ chown -R henry:henry .git/objects
 * [github/hub](https://github.com/github/hub)hub helps you win at git. http://hub.github.com/
 * [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
 * [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
-* [nvie/gitflow](https://github.com/nvie/gitflow):Git extensions to provide high-level repository operations for Vincent Driessen's branching model.
 * [jonas/tig](https://github.com/jonas/tig):text-mode interface for git
 * [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
 * [kennethreitz/legit](https://github.com/kennethreitz/legit):Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
@@ -1397,6 +1453,7 @@ chown -R henry:henry .git/objects
 * [magit/magit](https://github.com/magit/magit):It's Magit! A Git porcelain inside Emacs. https://magit.vc
 * [carloscuesta/gitmoji](https://github.com/carloscuesta/gitmoji):An emoji guide for your commit messages. 😜 https://gitmoji.carloscuesta.me
 * [magit/magit](https://github.com/magit/magit):It's Magit! A Git porcelain inside Emacs. https://magit.vc
+* [zenhub](https://app.zenhub.com)：Agile project management integrated with GitHub
 
 ## 参考
 
