@@ -15,3 +15,4 @@
 
 * [obsproject/obs-studio](https://github.com/obsproject/obs-studio):OBS Studio - Free and open source software for live streaming and screen recording https://obsproject.com/
 * [FFmpeg/FFmpeg](https://github.com/FFmpeg/FFmpeg)
+* [ossrs/srs](https://github.com/ossrs/srs):SRS's a simplest, conceptual integrated, industrial-strength live streaming origin cluster.

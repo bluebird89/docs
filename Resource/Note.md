@@ -10,13 +10,13 @@
 -   simplenote：简单笔记（无格式）
 -   xmind：结构化整理
 -   豆瓣读：书、电影评论
--   github：代码的整理
 -   Goole keep
 -   notes
 -   Boostnote:代码片段笔记
 -   MedleyText
 -   Quiver
--   OneNote
+-   [OneNote](https://products.office.com/zh-CN/onenote)
 -   CherryTree
 -   TickTick
 -   [幕布](https://mubu.com/):可折叠的markdown
+- [石墨文档](https://shimo.im)

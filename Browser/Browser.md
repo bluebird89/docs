@@ -1,8 +1,9 @@
 # Brower
 
--   [brave/browser-laptop](https://github.com/brave/browser-laptop):Brave browser for Desktop and Laptop computers running Windows, OSX, and Linux <https://www.brave.com>
+- [brave/browser-laptop](https://github.com/brave/browser-laptop):Brave browser for Desktop and Laptop computers running Windows, OSX, and Linux <https://www.brave.com>
 - beaker
--    Opera:with vpn
+- Opera:with vpn
+* [qutebrowser](https://www.qutebrowser.org)
 
 ## 工具
 

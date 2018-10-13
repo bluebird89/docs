@@ -80,6 +80,7 @@ brew install pipenv
 * python-magic：文件类型检测的第三方库 libmagic 的 Python 接口。[官网](https://github.com/ahupp/python-magic)
 * Unipath：用面向对象的方式操作文件和目录。[官网](https://github.com/mikeorr/Unipath)
 * watchdog：管理文件系统事件的 API 和 shell 工具[官网](https://github.com/gorakhargosh/watchdog)
+* [socialcopsdev/camelot](https://github.com/socialcopsdev/camelot):Camelot: PDF Table Extraction for Humans https://camelot-py.readthedocs.io
 
 ## 日期和时间
 
@@ -1179,14 +1180,15 @@ Python 实现的算法和设计模式。
 
 ## 包
 
-requests：用来简单请求数据
-lxml：比Beautiful Soup更快更强的解析库
-pandas：数据处理神器
-time：设置爬虫访问间隔防止被抓
-random：随机数生成工具，配合time使用
-tqdm：交互好工具，显示程序运行进度
-[Requests-Html](https://github.com/kennethreitz/requests-html):下载完网页之后,内置了html网页的解析
-[requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
+* requests：用来简单请求数据
+* lxml：比Beautiful Soup更快更强的解析库
+* pandas：数据处理神器
+* time：设置爬虫访问间隔防止被抓
+* random：随机数生成工具，配合time使用
+* tqdm：交互好工具，显示程序运行进度
+* [Requests-Html](https://github.com/kennethreitz/requests-html):下载完网页之后,内置了html网页的解析
+* [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
+* [mahmoud/boltons](https://github.com/mahmoud/boltons):🔩 Like builtins, but boltons. Constructs/recipes/snippets that would be handy in the standard library. Nothing like Michael Bolton. https://boltons.readthedocs.org
 
 ## Algorithmic Trading
 

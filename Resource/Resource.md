@@ -4,13 +4,6 @@
 
 -   软件：apple 与 google 生态
 
-## 工具
-
--   [代码片段](http://www.phpxs.com/code/)
--   [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
--   [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
-- [chubin/cheat.sh](https://github.com/chubin/cheat.sh):the only cheat sheet you need https://cheat.sh/
-
 ## 硬件
 
 -   keyward
@@ -73,6 +66,7 @@
     -   Reeder
     -   [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub):🍰 万物皆可 RSS https://docs.rsshub.app
     - [FreshRSS/FreshRSS](https://github.com/FreshRSS/FreshRSS):A free, self-hostable aggregator… http://freshrss.org
+
 ## 建站
 
 -   [Sauarespace](https://www.squarespace.com/):建网站变成了像创造艺术品一样的体验
@@ -102,25 +96,17 @@
 -   Reddit
 -   News:BuzzFeed
 -   Pinterest
-
-## Code
-
--   [Java World](http://www.javaworld.com/)
--   [Java SE 技术文档](http://docs.oracle.com/javase/)
--   [Github](https://github.com/)
--   [DZone](http://www.dzone.com)
--   [Stackoverflow](http://stackoverflow.com/)
--   [adambard/learnxinyminutes-docs](https://github.com/adambard/learnxinyminutes-docs):Code documentation written as code! How novel and totally my idea! http://learnxinyminutes.com/
--   [justjavac/Programming-Alpha-To-Omega](https://github.com/justjavac/Programming-Alpha-To-Omega):从零开始学编程 系列汇总（从 α 到 Ω）
+-   得到
+-   [极客时间](https://github.com/shawjia/geektime-desktop):极客时间桌面版 for macOS/Windows/Debain
+-   掘金
+-   开发者头条
+-   码农头条
+-   伯乐在线
 
 ## 管理与沟通
 
 -   WhatsApp 和 Slack 用来沟通
 -   [stride](https://app.stride.com/):类似 slack 的软件
--   看板
-    -   [trello](https://trello.com/)
-    -   [Leangoo](https://www.leangoo.com/kanban/board_list)
--   Teambition:项目管理工具，聊天、文件、看板
 -   [Asana](asana.com)
 -   [meili/TeamTalk](https://github.com/meili/TeamTalk):TeamTalk is a solution for enterprise IM
 - [klauscfhq/taskbook](https://github.com/klauscfhq/taskbook):📓 Tasks, boards & notes for the command-line habitat
@@ -128,15 +114,6 @@
 ## 语言
 
 * [byoungd/English-level-up-tips-for-Chinese](https://github.com/byoungd/English-level-up-tips-for-Chinese):可能是让你受益匪浅的英语进阶指南
-
-## 内容
-
--   得到
--   [极客时间](https://github.com/shawjia/geektime-desktop):极客时间桌面版 for macOS/Windows/Debain
--   掘金
--   开发者头条
--   码农头条
--   伯乐在线
 
 ### office
 
@@ -202,24 +179,21 @@
 -   [iawia002/annie](https://github.com/iawia002/annie):👾 Fast, simple and clean video downloader
 -   [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
 -   [rg3/youtube-dl](https://github.com/rg3/youtube-dl):Command-line program to download videos from YouTube.com and other video sites http://rg3.github.io/youtube-dl/
+-   [aria2/aria2](https://github.com/aria2/aria2):aria2 is a lightweight multi-protocol & multi-source, cross platform download utility operated in command-line. It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink. https://aria2.github.io/
 - [asdf-vm/asdf](https://github.com/asdf-vm/asdf):Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more
+-   [代码片段](http://www.phpxs.com/code/)
+-   [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
+-   [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
+- [chubin/cheat.sh](https://github.com/chubin/cheat.sh):the only cheat sheet you need https://cheat.sh/
 
 ## 资源
 
 * [facebook/watchman](https://github.com/facebook/watchman):Watches files and records, or triggers actions, when they change. https://facebook.github.io/watchman/
 
-## cheat sheet
-
--   [chubin/cheat.sh](https://github.com/chubin/cheat.sh)：the only cheat sheet you need https://cheat.sh/ Mac 无法渲染 html 页面，ubuntu 没问题
-
 ## 词典
 
 -   [Flowerowl/ici](https://github.com/Flowerowl/ici):💥A dictionary used by programmers in the command line https://pypi.python.org/pypi/ici/
 -   [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf):⭐️ 给变量起名的事情上，为你生命省 3s (Save 3 seconds of your life when naming things.)
-
-## 代码
-
-* [aosabook/500lines](https://github.com/aosabook/500lines):500 Lines or Less
 
 ## 论文
 
