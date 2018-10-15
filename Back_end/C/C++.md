@@ -33,6 +33,8 @@ gcc file.c # 编译
 - [Tencent/libco](https://github.com/Tencent/libco)libco is a coroutine library which is widely used in wechat back-end service.
 * [envoyproxy/envoy](https://github.com/envoyproxy/envoy):C++ front/service proxy https://www.envoyproxy.io
 * [在线编译器](https://c.runoob.com/compile/12)
+* [lupoDharkael/flameshot](https://github.com/lupoDharkael/flameshot):Powerful yet simple to use screenshot software
+* [Tencent/rapidjson](https://github.com/Tencent/rapidjson):A fast JSON parser/generator for C++ with both SAX/DOM style API http://rapidjson.org/
 
 ## 教程
 

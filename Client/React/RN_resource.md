@@ -180,6 +180,7 @@
 * [coryhouse/react-slingshot](https://github.com/coryhouse/react-slingshot):React + Redux starter kit / boilerplate with Babel, hot reloading, testing, linting and a working example app built in
 * [reactjs/react-docgen](https://github.com/reactjs/react-docgen):A CLI and toolbox to extract information from React component files for documentation generation purposes.
 * [oney/react-native-webrtc](https://github.com/oney/react-native-webrtc):A WebRTC module for React Native.
+* [react-dnd/react-dnd](https://github.com/react-dnd/react-dnd):Drag and Drop for React http://react-dnd.github.io/react-dnd
 * [atlassian/react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd):Beautiful, accessible drag and drop for lists with React.js
 * [drcmda/react-spring](https://github.com/drcmda/react-spring):🙌 Helping react-motion and animated to become best friends http://react-spring.surge.sh/
 * [deepsweet/hocs](https://github.com/deepsweet/hocs):🍱 A collection of Higher-Order Components for React and React Native

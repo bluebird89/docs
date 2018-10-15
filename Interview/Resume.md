@@ -210,3 +210,7 @@
 # 致谢
 
 感谢您花时间阅读我的简历，期待能有机会和您共事。
+
+##  参考
+
+* [resume/resume.github.com](https://github.com/resume/resume.github.com):Resumes generated using the GitHub informations https://resume.github.com

@@ -161,6 +161,7 @@ rails server
 * [thoughtbot/paperclip](https://github.com/thoughtbot/paperclip):Easy file attachment management for ActiveRecord https://thoughtbot.com/open-source
 * [plataformatec/devise](https://github.com/plataformatec/devise):Flexible authentication solution for Rails with Warden. http://blog.plataformatec.com.br/tag/devise/
 * [sferik/rails_admin](https://github.com/sferik/rails_admin):RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data
+* [capistrano/capistrano](https://github.com/capistrano/capistrano):Remote multi-server automation tool http://www.capistranorb.com
 
 ## 参考
 

@@ -52,6 +52,8 @@ if ($tmpstr==$signature) {
 * [TKkk-iOSer/WeChatPlugin-MacOS](https://github.com/TKkk-iOSer/WeChatPlugin-MacOS):一款功能强大的 macOS 版微信小助手 v1.7.1 / A powerful assistant for wechat macOS
 * [TKkk-iOSer/WeChatPlugin-iOS](https://github.com/TKkk-iOSer/WeChatPlugin-iOS):iOS 版微信小助手(防撤回、修改微信运动、游戏作弊、群管理、好友请求管理)
 * [Tencent/MMKV](https://github.com/Tencent/MMKV):An efficient, small mobile key-value storage framework developed by WeChat. Works on iOS and Android.
+* [chanxuehong/wechat](https://github.com/chanxuehong/wechat):weixin/wechat/微信公众平台/微信企业号/微信商户平台/微信支付 go/golang sdk https://gopkg.in/chanxuehong/wechat.v2
+* [jxtech/wechatpy](https://github.com/jxtech/wechatpy):WeChat SDK for Python http://docs.wechatpy.org
 
 ## UI
 
