@@ -153,34 +153,6 @@ websocketd --port=8080 ./count.sh // 建立server
 - [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
 * [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang http://go-colly.org/
 
-## 扩展
-
-- [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
-- [grafana/grafana](https://github.com/grafana/grafana)The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
-- [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
-- [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
-* [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
-* [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
-
-## 工具
-
-* [bettercap/bettercap](https://github.com/bettercap/bettercap):The state of the art network attack and monitoring framework. https://www.bettercap.org/
-* [google/gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
-* [shiyanhui/dht](https://github.com/shiyanhui/dht):BitTorrent DHT Protocol && DHT Spider. http://bthub.io
-* [variadico/noti](https://github.com/variadico/noti):Monitor a process and trigger a notification.
-* [fvbock/endless](https://github.com/fvbock/endless):Zero downtime restarts for go servers (Drop in replacement for http.ListenAndServe)
-* [robfig/cron](https://github.com/robfig/cron):a cron library for go
-* [golang/dep](https://github.com/golang/dep):Go dependency management tool https://golang.github.io/dep/
-* [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
-* [murlokswarm/app](https://github.com/murlokswarm/app):Package to build GUI apps with Go, HTML and CSS.
-* [justinas/alice](https://github.com/justinas/alice):Painless middleware chaining for Go https://godoc.org/github.com/justinas/alice
-* [spf13/viper](https://github.com/spf13/viper):Go configuration with fangs
-* [derekparker/delve](https://github.com/derekparker/delve):Delve is a debugger for the Go programming language.
-* [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
-* [goreleaser/goreleaser](https://github.com/goreleaser/goreleaser)：Deliver Go binaries as fast and easily as possible https://goreleaser.com
-* [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin):Golang plugin system over RPC.
-* [dominikh/go-tools](https://github.com/dominikh/go-tools):A collection of tools and libraries for working with Go code, including linters and static analysis https://staticcheck.iop
-
 ## ORM
 
 * [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io
@@ -208,6 +180,35 @@ websocketd --port=8080 ./count.sh // 建立server
 - [Go语言入门](https://www.yiibai.com/go/go_start.html)
 - [harlow/go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
 - [astaxie/gopkg](https://github.com/astaxie/gopkg):example for the go pkg's function
+
+## 扩展
+
+- [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
+- [grafana/grafana](https://github.com/grafana/grafana)The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
+- [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
+- [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
+* [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
+* [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
+
+## 工具
+
+* [bettercap/bettercap](https://github.com/bettercap/bettercap):The state of the art network attack and monitoring framework. https://www.bettercap.org/
+* [google/gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
+* [shiyanhui/dht](https://github.com/shiyanhui/dht):BitTorrent DHT Protocol && DHT Spider. http://bthub.io
+* [variadico/noti](https://github.com/variadico/noti):Monitor a process and trigger a notification.
+* [fvbock/endless](https://github.com/fvbock/endless):Zero downtime restarts for go servers (Drop in replacement for http.ListenAndServe)
+* [robfig/cron](https://github.com/robfig/cron):a cron library for go
+* [golang/dep](https://github.com/golang/dep):Go dependency management tool https://golang.github.io/dep/
+* [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
+* [murlokswarm/app](https://github.com/murlokswarm/app):Package to build GUI apps with Go, HTML and CSS.
+* [justinas/alice](https://github.com/justinas/alice):Painless middleware chaining for Go https://godoc.org/github.com/justinas/alice
+* [spf13/viper](https://github.com/spf13/viper):Go configuration with fangs
+* [derekparker/delve](https://github.com/derekparker/delve):Delve is a debugger for the Go programming language.
+* [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
+* [goreleaser/goreleaser](https://github.com/goreleaser/goreleaser)：Deliver Go binaries as fast and easily as possible https://goreleaser.com
+* [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin):Golang plugin system over RPC.
+* [dominikh/go-tools](https://github.com/dominikh/go-tools):A collection of tools and libraries for working with Go code, including linters and static analysis https://staticcheck.iop
+* [dgrijalva/jwt-go](https://github.com/dgrijalva/jwt-go):Golang implementation of JSON Web Tokens (JWT)
 
 ## 参考
 
