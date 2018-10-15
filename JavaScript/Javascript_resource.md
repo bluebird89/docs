@@ -81,6 +81,8 @@
 
 * [oliver-moran/jimp](https://github.com/oliver-moran/jimp):An image processing library written entirely in JavaScript for Node, with zero external or native dependencies.
 * [Foliotek/Croppie](https://github.com/Foliotek/Croppie):A Javascript Image Cropper http://foliotek.github.io/Croppie
+* [pshihn/rough](https://github.com/pshihn/rough):Create graphics with a hand-drawn, sketchy, appearance http://roughjs.com
+* [DmitryBaranovskiy/raphael](https://github.com/DmitryBaranovskiy/raphael):JavaScript Vector Library http://www.raphaeljs.com/
 
 ## 校验
 
@@ -108,6 +110,7 @@
 * [uber/kepler.gl](https://github.com/uber/kepler.gl):https://uber.github.io/kepler.gl
 * [antvis/f2](https://github.com/antvis/f2):📱📈An elegant, interactive and flexible charting library for mobile. https://antv.alipay.com/zh-cn/f2/3.x/index.html
 * [shzlw/zeu](https://github.com/shzlw/zeu):A JavaScript library for real-time visualization
+* [antvis/g2](https://github.com/antvis/g2):The Grammar of Graphics in JavaScript https://antv.alipay.com/zh-cn/g2/3.x/index.html
 
 ## fingerprinting
 

@@ -642,9 +642,6 @@ lsof -Pni4 | grep LISTEN | grep php
 -   [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
 -   [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
 -   [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
-
-## 参考
-
 -   [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
 -   [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
 -   [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
@@ -666,7 +663,8 @@ lsof -Pni4 | grep LISTEN | grep php
 -   [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
 -   [Mac效率神器Alfred以及常用Workflow](https://www.jianshu.com/p/0e78168da7ab)
 -   [mac-setup/](http://sourabhbajaj.com/mac-setup/)
+- [JadenGeller/Helium](https://github.com/JadenGeller/Helium):A floating browser window for OS X <http://heliumfloats.com>
 
-## 浏览器工具
+## 工具
 
--   [JadenGeller/Helium](https://github.com/JadenGeller/Helium):A floating browser window for OS X <http://heliumfloats.com>
+* [basecamp/pow](https://github.com/basecamp/pow):Zero-configuration Rack server for Mac OS X http://pow.cx/v

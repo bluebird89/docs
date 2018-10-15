@@ -455,6 +455,7 @@
       - (https://github.com/Masterminds/html5-php)[HTML5 PHP]: 一个HTML5解析和序列化库
       - (https://github.com/erusev/parsedown)[Parsedown]: 另一个Markdown解析器
       - (https://github.com/michelf/php-markdown)[PHP Markdown]: 一个Markdown解析器
+      - [SegmentFault/HyperDown](https://github.com/SegmentFault/HyperDown):一个结构清晰的，易于维护的，现代的PHP Markdown解析器
 * 字符串 Strings 解析和处理字符串的库
       - (https://github.com/jenssegers/agent)[Agent]: 一个基于Mobiledetect的桌面／手机端user agent解析库
       - (https://github.com/sensiolabs/ansi-to-html)[ANSI to HTML5]: 一个将ANSI转化为HTML5的库
