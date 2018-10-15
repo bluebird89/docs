@@ -146,7 +146,6 @@ pip install shadowsocks
 * [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
 * [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu https://shadowsocks.be
 
-
 ## 参考
 
 * [Shadowsocks (简体中文)](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
@@ -169,6 +168,7 @@ pip install shadowsocks
 - PureVPN
 - 完美隐私
 - [txthinking/brook](https://github.com/txthinking/brook):Brook is a cross-platform(Linux/MacOS/Windows/Android/iOS) proxy/vpn software
+* [Alvin9999/new-pac](https://github.com/Alvin9999/new-pac)
 
 ### 服务
 
