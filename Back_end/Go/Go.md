@@ -209,6 +209,7 @@ websocketd --port=8080 ./count.sh // 建立server
 * [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin):Golang plugin system over RPC.
 * [dominikh/go-tools](https://github.com/dominikh/go-tools):A collection of tools and libraries for working with Go code, including linters and static analysis https://staticcheck.iop
 * [dgrijalva/jwt-go](https://github.com/dgrijalva/jwt-go):Golang implementation of JSON Web Tokens (JWT)
+* [gomodule/redigo](https://github.com/gomodule/redigo):Go client for Redis
 
 ## 参考
 

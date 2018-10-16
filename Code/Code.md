@@ -5,6 +5,11 @@
 
 * [斯坦福大学公开课：编程方法学28集全](https://www.bilibili.com/video/av8048664)
 
+
+## 语言
+
+* [skiplang/skip](https://github.com/skiplang/skip):A programming language to skip the things you have already computed http://www.skiplang.com
+
 ## 资源
 
 * [30-seconds/30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code)：Curated collection of useful Javascript snippets that you can understand in 30 seconds or less. https://30secondsofcode.org/

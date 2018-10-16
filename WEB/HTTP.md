@@ -387,6 +387,7 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 
 * [tenta-browser/tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS https://tenta.com/test
 * [googlehosts/hosts](https://github.com/googlehosts/hosts)
+* [Cloudflare](https://www.cloudflare.com):域名注册服务
 
 ## 工具
 

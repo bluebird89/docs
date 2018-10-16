@@ -370,6 +370,7 @@ services:
 ## 资源
 
 * [wurstmeister/kafka-docker](https://github.com/wurstmeister/kafka-docker):Dockerfile for Apache Kafka http://wurstmeister.github.io/kafka-d…
+* [vmware/photon](https://github.com/vmware/photon):Minimal Linux container host https://vmware.github.io/photon
 
 ## 工具
 

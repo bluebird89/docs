@@ -430,6 +430,7 @@
       - (https://github.com/mcrumm/pecan)[Pecan]: 一个事件驱动和非阻塞的shell
       - [PsySH](https://github.com/bobthecow/psysh): A REPL for PHP http://psysh.org
       - (https://github.com/MrRio/shellwrap)[ShellWrap]: -一个简单的命令行包装库
+      - [php-pm/php-pm](https://github.com/php-pm/php-pm):PPM is a process manager, supercharger and load balancer for modern PHP applications.
 * 身份验证和授权 Authentication and Authorization 实现身份验证和授权的库
       - (https://github.com/dflydev/dflydev-hawk)[Hawk]: 一个Hawk HTTP身份认证库
       - (https://github.com/socialConnect/auth)[SocialConnect Auth]: 一个开源的social sign (OAuth1\OAuth2\OpenID\OpenIDConnect)

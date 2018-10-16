@@ -9,3 +9,4 @@
 ## 工具
 
 * [lhc70000/iina](https://github.com/lhc70000/iina):The modern video player for macOS. https://lhc70000.github.io/iina/
+* [waylybaye/XcodeCleaner](https://github.com/waylybaye/XcodeCleaner):Cleaner for Xcode.app built with react-native-macos
