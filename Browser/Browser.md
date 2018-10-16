@@ -4,6 +4,7 @@
 - beaker
 - Opera:with vpn
 * [qutebrowser](https://www.qutebrowser.org)
+* Tor
 
 ## 工具
 

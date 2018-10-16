@@ -1,6 +1,7 @@
 # Firefox
 
 中文与英文版本为两套数据库
+Servo 引擎。这个引擎是用 Rust 编程语言开发的
 
 ## Hotkey
 

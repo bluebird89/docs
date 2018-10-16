@@ -169,6 +169,7 @@ pip install shadowsocks
 - 完美隐私
 - [txthinking/brook](https://github.com/txthinking/brook):Brook is a cross-platform(Linux/MacOS/Windows/Android/iOS) proxy/vpn software
 * [Alvin9999/new-pac](https://github.com/Alvin9999/new-pac)
+* BT sync
 
 ### 服务
 

@@ -19,12 +19,16 @@ sudo apt-get install code
 
 * Auto Import:自动去查找、分析、然后提供代码补全。对于TypeScript和TSX
 * Bracket Pair Colorizer
+* Beautify
 * CSS Peek
 * Change Case
 * Code Runner
 * Color Highlight
 * Color Info
+* Code Spell Checker
 * Debugger for Chrome
+* Document This
+* ESLint
 * Faker：
 * File Utils
 * Git History
@@ -33,6 +37,7 @@ sudo apt-get install code
 * HTML Boilerplate
 * Import Cost
 * Icon Fonts
+* IntelliSense for CSS class names in HTML
 * Language and Framework Packs
     - React Native Tools
     - Vue 2 Snippets
@@ -61,7 +66,7 @@ sudo apt-get install code
 
 * One Monokai
 * Aglia
-* One Dark
+* One Dark Pro
 * Material Icon
 * Material Theme
 

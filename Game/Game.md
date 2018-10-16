@@ -60,6 +60,8 @@ slim
 -   风暴英雄
 -   星际争霸
 -   魔兽世界
+-   Minecraft
+    +   [Mojang/brigadier](https://github.com/Mojang/brigadier):Brigadier is a command parser & dispatcher, designed and developed for Minecraft: Java Edition.
 
 ### 手游
 
@@ -74,6 +76,7 @@ slim
 -   [ ] PLAYERUNKNOWN'S BATTLEGROUNDS 绝地求生
 -   [ ] Counter-Strike: Global Offensive
 -   [ ] Frostpunk
+-   [ ] 双点医生
 
 ## 参考
 
