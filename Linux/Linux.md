@@ -408,7 +408,7 @@ vi /etc/fstab   # 添加以下代码。实现开机自动挂载
 ## 硬件
 
 ```sh
-fdisk -l 查看设备名
+fdisk -l # 查看设备名
 df -T
 grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
 
@@ -613,6 +613,8 @@ grep -i "root" /etc/passwd # 查找符合条件的字串   -v:反向选择 -i:�
 sudo !! # 将之前的命令加上sudo
 
 screen # 固定屏
+
+diff -Naur sources-orig/ sources-fixed/ >myfixes.patch # 参数 -N 代表如果比较的文件不存在，则认为是个空文件， -a 代表将所有文件都作为文本文件对待，-u 代表使用合并格式并输出上下文，-r 代表递归比较目录
 ```
 
 ### 目录

@@ -322,7 +322,6 @@
 
 ## 工具
 
-* [koajs/koa](https://github.com/koajs/koa):Expressive middleware for node.js using ES2017 async functions <http://koajs.com>
 * [tj/n](https://github.com/tj/n):Node version management
 * [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
 * [sequelize/sequelize](https://github.com/sequelize/sequelize):An easy-to-use multi SQL dialect ORM for Node.js <http://docs.sequelizejs.com>
@@ -342,6 +341,7 @@
 * [soldair/node-qrcode](https://github.com/soldair/node-qrcode):qr code generator
 * [github/fetch](https://github.com/github/fetch):A window.fetch JavaScript polyfill. http://github.github.io/fetch/
 * [FezVrasta/popper.js](https://github.com/FezVrasta/popper.js):A kickass library to manage your poppers https://popper.js.org
+* [zeit/pkg](https://github.com/zeit/pkg):Package your Node.js project into an executable https://npmjs.com/pkg
 
 ## 扩展
 
