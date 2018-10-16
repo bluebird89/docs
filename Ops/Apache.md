@@ -414,3 +414,17 @@ LoadModule fastcgi_module /usr/local/opt/mod_fastcgi/libexec/mod_fastcgi.so
     unix:/usr/local/var/run/php-fpm.sock|fcgi://127.0.0.1:9000/usr/local/var/www/htdocs
 </IfModule>
 ```
+
+## .htaccess
+
+```
+codeRewriteEngine On
+RewriteBase /
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteEngine on
+RewriteBase /
+RewriteCond %{SERVER_PORT} !^443$
+RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
+```
