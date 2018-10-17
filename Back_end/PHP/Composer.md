@@ -10,8 +10,9 @@ PHP 用来管理依赖（dependency）关系的工具。你可以在自己的项
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
 php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
+php composer-setup.php #安装
+php -r "unlink('composer-setup.php');" # 删除
+
 sudo mv composer.phar /usr/local/bin/composer
 
 brew install composer  # Mac
@@ -36,6 +37,7 @@ global 命令允许你在 COMPOSER_HOME 目录下执行命令
 * 可以使用通配符去定义版本: 1.0.*
 * 下一个重要版本操作符：使用波浪号~ : ~1.2
 * 折音号^：例如，^1.2.3相当于>=1.2.3 <2.0.0
+* 镜像：安装包的数据（主要是 zip 文件）一般是从 github.com 上下载的，安装包的元数据是从 packagist.org 上下载的。
 
 考虑缓存，dist包优先:Composer会自动存档你下载的dist包(~/.composer/cache/files/)。默认设置下，dist包用于加了tag的版本，例如"symfony/symfony": "v2.1.4"，或者是通配符或版本区间，"2.1.*"或">=2.2,<2.3-dev"
 Github允许你下载某个git引用的压缩包。为了强制使用压缩包，而不是克隆源代码，你可以使用install和update的--prefer-dist选项。
@@ -43,7 +45,7 @@ Github允许你下载某个git引用的压缩包。为了强制使用压缩包�
 
 ```sh
 composer config -g repo.packagist composer https://packagist.phpcomposer.com ## 全局配置国内镜像
-composer config repo.packagist composer https://packagist.phpcomposer.com # peroject
+composer config repo.packagist composer https://packagist.phpcomposer.com # project composer末尾添加
 
 composer config -l
 

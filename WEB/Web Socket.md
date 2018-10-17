@@ -65,8 +65,6 @@ websocket通信协议实现的是基于浏览器的原生socket，这样原先�
     * 双通道
     * multiplexing
 
-
-
 ```
 GET /chat HTTP/1.1
 Host: server.example.com
@@ -120,3 +118,4 @@ if('WebSocket' in window){
 ## 工具
 
 * [uNetworking/uWebSockets](https://github.com/uNetworking/uWebSockets):Tiny WebSockets
+* [gorilla/websocket](https://github.com/gorilla/websocket):A WebSocket implementation for Go.

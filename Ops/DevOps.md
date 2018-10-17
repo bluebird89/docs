@@ -120,6 +120,7 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 * [kelseyhightower/confd](https://github.com/kelseyhightower/confd):Manage local application configuration files using templates and data from etcd or consul
 * [waylybaye/HyperApp-Guide](https://github.com/waylybaye/HyperApp-Guide):HyperApp user's manual
 * [snipe/snipe-it](https://github.com/snipe/snipe-it):A free open source IT asset/license management system https://snipeitapp.com
+* [pinterest/teletraan](https://github.com/pinterest/teletraan):Teletraan is Pinterest's deploy system.
 
 ## 参考
 
