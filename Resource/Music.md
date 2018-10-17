@@ -1,4 +1,3 @@
-
 ## music
 
 -   Spotify
@@ -11,3 +10,6 @@
 - QQ音乐
 - [last.fm](https://www.last.fm/)
 
+## 工具
+
+* [YongHaoWu/NeteaseCloudMusicFlac](https://github.com/YongHaoWu/NeteaseCloudMusicFlac):根据网易云音乐的歌单, 下载flac无损音乐到本地. Download the FLAC music from Internet according to your NeteaseCloudMusic playlist.

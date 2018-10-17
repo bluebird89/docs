@@ -804,6 +804,80 @@
 
 * [thephpleague/flysystem](https://github.com/thephpleague/flysystem):Abstraction for local and remote filesystems https://flysystem.thephpleague.com
 
+##
+
+```sh
+安装phpcs，phpcbf
+
+    1.使用composer安装： composer global require "squizlabs/php_codesniffer=*"
+
+    2.安装后可执行文件位置：~/.composer/vendor/bin/phpcs
+
+2.安装phpmd
+
+    1.使用composer安装： composer global require phpmd/phpmd
+
+    2.安装后可执行文件位置：~/.composer/vendor/bin/phpmd
+
+3.编写git pre-commit钩子
+
+    1.vim .git/hooks/pre-commit，加入脚本内容：https://github.com/tangjun1990/php_tools/blob/master/pre-commit （注意修改脚本中的目录哟！）
+
+    2.chmod +x .git/hooks/pre-commit
+
+4.那么，在你每次进行git commit操作的时候，pre-commit钩子中的shell就会自动帮你检查代码啦！相应的错误信息就会输出到终端
+
+5.当然，如果你不喜欢用hook这种方式，也可以在你每次提交代码之前，手动执行命令来检查
+
+    1.~/.composer/vendor/bin/phpcs dirOrFile --standard=PSR2
+
+    2.~/.composer/vendor/bin/phpmd dirOrFile text codesize,unusedcode,naming
+```
+
+```sh
+# pre-commit
+#!/usr/bin/env bash
+
+PHP_CS="/Users/tangjun1/.composer/vendor/bin/phpcs"
+PHP_MD="/Users/tangjun1/.composer/vendor/bin/phpmd"
+HAS_PHP_CS=false
+HAS_PHP_MD=false
+
+if [ -x /Users/tangjun1/.composer/vendor/bin/phpcs ]; then
+    HAS_PHP_CS=true
+fi
+
+if [ -x /Users/tangjun1/.composer/vendor/bin/phpmd ]; then
+    HAS_PHP_MD=true
+fi
+
+if $HAS_PHP_CS; then
+    git status --porcelain | grep -e '^[AM]\(.*\).php$' | cut -c 3- | while read line; do
+        $PHP_CS "$line" --standard=PSR2;
+        git add "$line";
+    done
+else
+    echo ""
+    echo "php-cs was not found, please run:"
+    echo ""
+    echo "  composer global require squizlabs/php_codesniffer=*"
+    echo ""
+fi
+
+if $HAS_PHP_MD; then
+    git status --porcelain | grep -e '^[AM]\(.*\).php$' | cut -c 3- | while read line; do
+        $PHP_MD "$line" text codesize,unusedcode,naming;
+        git add "$line";
+    done
+else
+    echo ""
+    echo "php-md was not found, please run:"
+    echo ""
+    echo "  composer global require phpmd/phpmd"
+    echo ""
+fi
+```
+
 ## 扩展
 
 * [PHP 开发者如何做代码审查?](http://blog.csdn.net/gitchat/article/details/78050953)

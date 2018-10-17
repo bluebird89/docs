@@ -147,6 +147,9 @@ websocketd --port=8080 ./count.sh // 建立server
   };
 </script>
 ```
+## 包管理
+
+* [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
 
 ## 框架
 
@@ -210,6 +213,8 @@ websocketd --port=8080 ./count.sh // 建立server
 * [dominikh/go-tools](https://github.com/dominikh/go-tools):A collection of tools and libraries for working with Go code, including linters and static analysis https://staticcheck.iop
 * [dgrijalva/jwt-go](https://github.com/dgrijalva/jwt-go):Golang implementation of JSON Web Tokens (JWT)
 * [gomodule/redigo](https://github.com/gomodule/redigo):Go client for Redis
+* [golang-standards/project-layout](https://github.com/golang-standards/project-layout):Standard Go Project Layout
+* [go-yaml/yaml](https://github.com/go-yaml/yaml):YAML support for the Go language.
 
 ## 参考
 

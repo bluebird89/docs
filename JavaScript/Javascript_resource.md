@@ -311,6 +311,10 @@
 
 * [videojs/video.js](https://github.com/videojs/video.js):Video.js - open source HTML5 & Flash video player http://www.videojs.com
 
+## 文件
+
+* [mholt/PapaParse](https://github.com/mholt/PapaParse):Fast and powerful CSV (delimited text) parser that gracefully handles large files and malformed input http://PapaParse.com
+
 ## 代码在线分享工具
 
 * JS Fiddle
@@ -401,6 +405,7 @@
 * [NodeJS的代码调试和性能调优](http://www.cnblogs.com/hustskyking/p/how-to-build-a-https-server.html)
 * [swbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
 * [Node.js v8.x 中文文档](https://www.nodeapp.cn/)
+* [leonardomso/33-js-concepts](https://github.com/leonardomso/33-js-concepts):📜 33 concepts every JavaScript developer should know.
 
 ## 问题
 

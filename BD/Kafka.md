@@ -41,3 +41,4 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic test --from-beg
 - [Cruise Control](http://www.infoq.com/cn/news/2017/09/LinkedIn-open-Cruise-Control-Kaf):一个Kafka集群自动化运维新利器
 * <https://www.confluent.io/blog/publishing-apache-kafka-new-york-times/>
 * [在生产环境使用Kafka构建和部署大规模机器学习](https://juejin.im/entry/5a02660b6fb9a0452a3bbe53)
+* [apachecn/kafka-doc-zh](https://github.com/apachecn/kafka-doc-zh):Kafka 中文文档 http://kafka.apachecn.org
