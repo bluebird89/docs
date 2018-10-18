@@ -30,6 +30,7 @@
 * [llSourcell/Learn_Machine_Learning_in_3_Months](https://github.com/llSourcell/Learn_Machine_Learning_in_3_Months):This is the code for "Learn Machine Learning in 3 Months" by Siraj Raval on Youtube
 * [机器学习（Machine Learning）- 吴恩达（Andrew Ng）](https://www.bilibili.com/video/av9912938)
     - [fengdu78/Coursera-ML-AndrewNg-Notes](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes):吴恩达老师的机器学习课程个人笔记
+    - [fengdu78/deeplearning_ai_books](https://github.com/fengdu78/deeplearning_ai_books):deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）
 * [李宏毅Machine Learning ](https://www.bilibili.com/video/av15889450)
 * [李宏毅机器学习(2017)](https://www.bilibili.com/video/av10590361/)
 * [机器学习中的数学基础](https://www.bilibili.com/video/av15673238/)

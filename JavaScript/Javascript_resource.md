@@ -24,6 +24,7 @@
 * React Native
 * jQuery
 * [Underscore.js](http://underscorejs.org/)
+* [frappe/charts](https://github.com/frappe/charts):Simple, responsive, modern SVG Charts with zero dependencies https://frappe.io/charts
 
 ## 类库
 

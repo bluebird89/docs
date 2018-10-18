@@ -29,6 +29,7 @@ Electron 的架构包括 Node.js runtime 和嵌套的微型 Chromium 浏览器�
 * [connors/photon](https://github.com/connors/photon):The fastest way to build beautiful Electron apps using simple HTML and CSS http://photonkit.com
 * [electron/fiddle](https://github.com/electron/fiddle):🚀 The easiest way to get started with Electron
 * [maxogden/menubar](https://github.com/maxogden/menubar):➖ high level way to create menubar desktop applications with electron
+* [zeit/hazel](https://github.com/zeit/hazel):Lightweight update server for Electron apps
 
 ## 资源
 
