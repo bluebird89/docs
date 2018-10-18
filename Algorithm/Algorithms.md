@@ -126,6 +126,7 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * [frowhy/Algorithm](https://github.com/frowhy/Algorithm)
 * [TheAlgorithms/Python](https://github.com/TheAlgorithms/Python):All Algorithms implemented in Python
 * [TheAlgorithms/Java](https://github.com/TheAlgorithms/Java):All Algorithms implemented in Java
+* [apachecn/awesome-algorithm](https://github.com/apachecn/awesome-algorithm):Leetcode 题解 (跟随思路一步一步撸出代码) 及经典算法实现
 
 ## 工具
 

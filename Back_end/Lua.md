@@ -18,3 +18,4 @@ make linux test
 ## 参考
 
 * [cloudwu/lua53doc](https://github.com/cloudwu/lua53doc):The Chinese Translation of Lua 5.3 document
+* [Tinywan/lua-nginx-redis](https://github.com/Tinywan/lua-nginx-redis):🌺 Redis、Lua、Nginx、OpenResty笔记

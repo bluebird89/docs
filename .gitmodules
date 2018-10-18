@@ -244,3 +244,6 @@
 [submodule "Interview/interviews"]
 	path = Interview/interviews
 	url = git@github.com:kdn251/interviews.git
+[submodule "Algorithm/awesome-algorithm"]
+	path = Algorithm/awesome-algorithm
+	url = git@github.com:apachecn/awesome-algorithm.git
