@@ -183,6 +183,7 @@ websocketd --port=8080 ./count.sh // 建立server
 - [Go语言入门](https://www.yiibai.com/go/go_start.html)
 - [harlow/go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
 - [astaxie/gopkg](https://github.com/astaxie/gopkg):example for the go pkg's function
+* [astaxie/go-best-practice](https://github.com/astaxie/go-best-practice):Trying to complete over 100 projects in various categories in golang.
 
 ## 扩展
 

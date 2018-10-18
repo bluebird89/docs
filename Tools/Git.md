@@ -1432,6 +1432,7 @@ chown -R henry:henry .git/objects
 * [Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials)
 * [git-tutorial](https://www.learnenough.com/git-tutorial)
 * [GitHub Helps](https://help.github.com/)
+* [k88hudson/git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
 
 ## 工具
 
