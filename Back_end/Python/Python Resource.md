@@ -604,6 +604,8 @@ Python实现的数据库。
 * sanitize：为杂乱的数据世界带来调理性。[官网](https://github.com/Alir3z4/python-sanitize)
 * sumy：一个为文本文件和 HTML 页面进行自动摘要的模块。[官网](https://github.com/miso-belica/sumy)
 * textract：从任何格式的文档中提取文本，Word，PowerPoint，PDFs 等等。[官网](https://github.com/deanmalmgren/textract)
+* [socialcopsdev/camelot](https://github.com/socialcopsdev/camelot):Camelot: PDF Table Extraction for Humans https://camelot-py.readthedocs.io
+* [danburzo/percollate](https://github.com/danburzo/percollate):🌐 → 📖 A command-line tool to turn web pages into beautifully formatted PDFs
 
 ## 表单
 

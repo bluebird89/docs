@@ -27,6 +27,7 @@ pip install IPython
 * [vahidk/EffectiveTensorflow](https://github.com/vahidk/EffectiveTensorflow):TensorFlow tutorials and best practices. https://twitter.com/VahidK
 * [xitu/tensorflow-docs](https://github.com/xitu/tensorflow-docs):TensorFlow 最新官方文档中文版 V1.10 https://tensorflow.juejin.im
 * [open-source-for-science/TensorFlow-Course](https://github.com/open-source-for-science/TensorFlow-Course):Simple and ready-to-use tutorials for TensorFlow
+* [apachecn/learning-tf-zh](https://github.com/apachecn/learning-tf-zh):📖 [译] TensorFlow 学习指南 https://legacy.gitbook.com/book/wizardforcel/learning-tf/details
 
 ## 课程
 
