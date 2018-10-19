@@ -1,5 +1,6 @@
+# [gohugoio/hugo](https://github.com/gohugoio/hugo)
 
-# [hugo](https://gohugo.io)Hugo is a fast and modern static site generator written in Go,
+The world’s fastest framework for building websites. https://gohugo.io
 
 ## install && use
 
