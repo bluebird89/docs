@@ -2,6 +2,8 @@
 
 The leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project. 集成GitLab, Jenkins, Docker and Slack
 
+* 对项目进行进程守护：私自覆盖文件会进还原
+
 ## install
 
 war包自带Jetty服务器 `java -jar jenkins.war`访问<http://localhost:8080>，

@@ -420,6 +420,11 @@
 * 《[机器学习实战](https://www.amazon.cn/gp/product/B00D747PTK)》
 * TensorFlow：实战Google深度学习框架
 * 《机器学习实战：基于Scikit-Learn和TensorFlow》
+* 《机器学习》  周志华
+* 《漫谈人工智能》 集智俱乐部
+* 《机器学习实战》  Peter Harrington
+* 《TensorFlow 技术解析与实战》  李嘉璇
+* 《统计学习方法》  李航
 
 ## 数据挖掘
 
