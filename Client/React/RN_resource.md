@@ -194,6 +194,7 @@
 * [streamich/libreact](https://github.com/streamich/libreact):Collection of useful React components
 * [jaredpalmer/formik](https://github.com/jaredpalmer/formik):Build forms in React, without the tears 😭 https://jaredpalmer.com/formik
 * [JedWatson/react-select](https://github.com/JedWatson/react-select):The Select for React.js https://react-select.com/
+* [styled-components/styled-components](https://github.com/styled-components/styled-components):Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
 
 ## UI
 

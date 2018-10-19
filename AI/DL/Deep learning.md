@@ -20,15 +20,6 @@
     - [MUSE: Multilingual Unsupervised and Supervised Embeddings](link)
     - [Domain Transfer Network (DTN)](link)
 
-## 框架
-
-* Tensorflow
-* Caffe
-* Caffe2
-* PyTorch
-* MXNet
-* Keras
-
 ## 参考
 
 * [Model Zoo](https://modelzoo.co/):Discover open source deep learning code and pretrained models.
@@ -42,6 +33,9 @@
 
 * [深度学习](https://mooc.study.163.com/university/deeplearning_ai#/c)
     - [fengdu78/deeplearning_ai_books](https://github.com/fengdu78/deeplearning_ai_books):deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）
+    - [Deep Learning Specialization](http://www.deeplearning.ai)
+    - [coursera](https://www.coursera.org/specializations/deep-learning)
+    - [神经网络和深度学习](https://mooc.study.163.com/)
 * [深度学习（小象学院）](https://www.bilibili.com/video/av10324235)
 * [李宏毅深度学习(2017)](https://www.bilibili.com/video/av9770302/)
 * [斯坦福2017季CS224n深度学习自然语言处理课程](https://www.bilibili.com/video/av13383754)

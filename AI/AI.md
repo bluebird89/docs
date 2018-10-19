@@ -19,21 +19,12 @@ TensorFlow 还支持异构设备分布式计算，这意味着它能够在各个
 - 框架：TensorFlow等。
 - 实战：在工作中找到一个应用场景，把学到的知识运用进去。
 
-## 图书
-
-* 《数学之美》吴军
-* 《机器学习》  周志华
-* 《漫谈人工智能》 集智俱乐部
-* 《机器学习实战》  Peter Harrington
-* 《TensorFlow 技术解析与实战》  李嘉璇
-* 《统计学习方法》  李航
-
-## 工具
+## 资源
 
 * [Microsoft/ailab](https://github.com/Microsoft/ailab):Experience, Learn and Code the latest breakthrough innovations with Microsoft AI
 * [apachecn/AiLearning](https://github.com/apachecn/AiLearning):AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - DL、自然语言处理 NLP http://ailearning.apachecn.org/
+* [donnemartin/data-science-ipython-notebooks](https://github.com/donnemartin/data-science-ipython-notebooks#deep-learning):Data science Python notebooks: Deep learning (TensorFlow, Theano, Caffe, Keras), scikit-learn, Kaggle, big data (Spark, Hadoop MapReduce, HDFS), matplotlib, pandas, NumPy, SciPy, Python essentials, AWS, and various command lines.
 
 ## 课程
 
 * [麻省理工学院公开课：人工智能](https://www.bilibili.com/video/av17963543)
-* 吴恩达
