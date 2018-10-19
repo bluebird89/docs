@@ -22,6 +22,7 @@ DPI 是一种将图像的面积和理论打印尺寸进行关联的文件属性�
     - mogrify：批量缩放大小
 * [nagadomi/waifu2x](https://github.com/nagadomi/waifu2x):Image Super-Resolution for Anime-Style Art
 * [photoprism/photoprism](https://github.com/photoprism/photoprism):Personal photo management powered by Go and Google TensorFlow https://photoprism.org/
+* [google/filament](https://github.com/google/filament):Filament is a real-time physically based rendering engine for Android, Windows, Linux, macOS and WASM/WebGL
 
 ## 资源
 
