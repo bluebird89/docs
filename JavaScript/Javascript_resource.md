@@ -18,60 +18,12 @@
 * [Meteor](https://www.meteor.com/)
 * jQuery Mobile
 
-### Data Visualization
-
-* [D3.js](https://d3js.org/)
-* React Native
-* jQuery
-* [Underscore.js](http://underscorejs.org/)
-* [frappe/charts](https://github.com/frappe/charts):Simple, responsive, modern SVG Charts with zero dependencies https://frappe.io/charts
-
-## 类库
-
-* [Lodash](https://github.com/lodash/lodash):为数组、字符串、object 和 argument 对象提供更一致的跨环境迭代支持，并已成为 Underscore 的超集
-* [Underscore](https://github.com/jashkenas/underscore):为 JavaScript 中的常见任务提供实用的函数
-* [Ramda](https://github.com/ramda/ramda):为函数式编程而设计，可以轻松创建不改变用户数据状态的函数式管道。Ramda 的核心设计理念是创建具有不变性和无副作用的函数。所有的函数会被自动柯里化，并根据易用性安排参数的顺序。
-* [MathJS](https://github.com/josdejong/mathjs):JavaScript 和 Node.js 的数学扩展库，与 JavaScript 内置的 Math 库兼容。该库包含一个灵活的表达式解析器，能够运行符号计算，并提供了一系列内置函数和常量。
-* [Moment](https://github.com/moment/moment): JavaScript 日期和时间操作库，用于解析、验证、操作和格式化日期。
-* [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs#string--date-format):List of date-fns or native functions which you can use to replace moment.js + ESLint Plugin
-* [Sugar](https://github.com/andrewplummer/Sugar):主要用于处理本地对象。这个库支持自定义构建，还提供了模块化的 npm 包，因此可以只使用其中必要的部分模块（也可以与 Bit 结合使用），用户还可以通过自定义方法或使用插件来应对特定的使用场景。
-* [Lazy](https://github.com/dtao/lazy.js):Like Underscore, but lazier http://danieltao.com/lazy.js/
-* [CollectJS](https://github.com/ecrmnn/collect.js):一个简单的随机对象生成器，用于生成随机的字符串、数字等。在编写自动化测试代码或任何需要随机对象的地方，可以用它来减少单调的工作。
-* [ChartJS](https://github.com/chartjs/Chart.js):提供了 8 种不同类型的数据可视化，每种类型都支持动画和定制。借助 Chart.js，我们可以使用canvas 标签创建简单的 HTML5 图表，而且在所有现代浏览器中都具有出色的渲染性能。
-* [Polished](https://github.com/styled-components/polishedBit ):支持使用 JavaScript 编写具有 SASS 风格辅助函数和 mixin 的样式。该库与 styled-components、Aphrodite、Radium 或简单的内联样式兼容。
-* [Mout](https://github.com/mout/mout):Modular JavaScript Utilities http://moutjs.com/
-* [Bit utils](https://bitsrc.io/bit/utils):一个模块化和高性能的库，已经被用在 Bit 的 web hub 中。这些函数可使用 NPM/Yarn 进行单独安装，用户也可以创建自己的集合，并从不同的库和项目中收集有用的功能。
-* [Voca](https://github.com/panzerdp/voca):一个用于操作字符串的 JavaScript 库。它提供的功能包括大小写转换、trim、pad、slugify、latinise、sprintf、truncate、escape 等。用户可以加载单个函数，以便最小化应用程序的构建。
-* [liriliri/licia](https://github.com/liriliri/licia):Useful utility collection with zero dependencies https://eustia.liriliri.io/module.html
-* [SBoudrias/Inquirer.js](https://github.com/SBoudrias/Inquirer.js):A collection of common interactive command line user interfaces.
-* [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
-* [kvz/locutus](https://github.com/kvz/locutus):All your standard libraries will be assimilated into our JavaScript collective. Resistance is futile. http://locutus.io
-* [panzerdp/voca](https://github.com/panzerdp/voca):The ultimate JavaScript string library https://vocajs.com
-
 ## 包管理
 
 * [JedWatson/classnames](https://github.com/JedWatson/classnames):A simple javascript utility for conditionally joining classNames together
 * [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
 * [lerna/lerna](https://github.com/lerna/lerna):🐉 A tool for managing JavaScript projects with multiple packages. https://lernajs.io
 * [pnpm/pnpm](https://github.com/pnpm/pnpm):📦🚀 Fast, disk space efficient package manager https://pnpm.js.org
-
-## 工具
-
-* [kpdecker/jsdiff](https://github.com/kpdecker/jsdiff):A javascript text differencing implementation.
-* [t4t5/sweetalert](https://github.com/t4t5/sweetalert):A beautiful replacement for JavaScript's "alert" https://sweetalert.js.org
-* [Modernizr/Modernizr](https://github.com/Modernizr/Modernizr):Modernizr is a JavaScript library that detects HTML5 and CSS3 features in the user’s browser. https://modernizr.com
-
-* [mozilla-neutrino/neutrino-dev](https://github.com/mozilla-neutrino/neutrino-dev):Create and build modern JavaScript applications with zero initial configuration. https://neutrino.js.org
-* [facebook/immutable-js](https://github.com/facebook/immutable-js):Immutable persistent data collections for Javascript which increase efficiency and simplicity. http://facebook.github.io/immutable-js/
-* [babel/babel](https://github.com/babel/babel):🐠 Babel is a compiler for writing next generation JavaScript. https://babeljs.io/
-* [yaronn/blessed-contrib](https://github.com/yaronn/blessed-contrib):Build terminal dashboards using ascii/ansi art and javascript
-* [antvis/g6](https://github.com/antvis/g6):A Graph Visualization Framework in JavaScript https://antv.alipay.com/zh-cn/g6/1.x/index.html
-* [nolanlawson/optimize-js](https://github.com/nolanlawson/optimize-js):Optimize a JavaScript file for faster initial load by wrapping eagerly-invoked functions
-* [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
-* [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
-* [es-analysis/plato](https://github.com/es-analysis/plato):JavaScript source code visualization, static analysis, and complexity tool
-* [dollarshaveclub/shave](https://github.com/dollarshaveclub/shave/):💈 Shave is a 0 dep JS plugin that truncates text to fit within an element based on a set max-height ✁ https://dollarshaveclub.github.io/shave/
-* [usablica/intro.js](https://github.com/usablica/intro.js):A better way for new feature introduction and step-by-step users guide for your website and project. http://introjs.com
 
 ## lightbox
 
@@ -84,10 +36,6 @@
 * [Foliotek/Croppie](https://github.com/Foliotek/Croppie):A Javascript Image Cropper http://foliotek.github.io/Croppie
 * [pshihn/rough](https://github.com/pshihn/rough):Create graphics with a hand-drawn, sketchy, appearance http://roughjs.com
 * [DmitryBaranovskiy/raphael](https://github.com/DmitryBaranovskiy/raphael):JavaScript Vector Library http://www.raphaeljs.com/
-
-## 校验
-
-* [imbrn/v8n](https://github.com/imbrn/v8n):☑️ JavaScript fluent validation library.
 
 ## 编辑器
 
@@ -103,7 +51,7 @@
 * [DateJS](https://github.com/datejs/Datejs)
 * [iamkun/dayjs](https://github.com/iamkun/dayjs):⏰ Day.js 2KB immutable date library alternative to Moment.js with the same modern API https://github.com/iamkun/dayjs
 
-## 图表
+## 图表 Data Visualization
 
 * [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
 * [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js):A JavaScript Chart Library
@@ -112,6 +60,11 @@
 * [antvis/f2](https://github.com/antvis/f2):📱📈An elegant, interactive and flexible charting library for mobile. https://antv.alipay.com/zh-cn/f2/3.x/index.html
 * [shzlw/zeu](https://github.com/shzlw/zeu):A JavaScript library for real-time visualization
 * [antvis/g2](https://github.com/antvis/g2):The Grammar of Graphics in JavaScript https://antv.alipay.com/zh-cn/g2/3.x/index.html
+* [frappe/charts](https://github.com/frappe/charts):Simple, responsive, modern SVG Charts with zero dependencies https://frappe.io/charts
+* [D3.js](https://d3js.org/)
+* React Native
+* jQuery
+* [Underscore.js](http://underscorejs.org/)
 
 ## fingerprinting
 
@@ -124,11 +77,6 @@
 ## Canvas
 
 * [spritejs/spritejs](https://github.com/spritejs/spritejs):A cross-platform lightweight 2D render object model. http://spritejs.org
-
-## 机器学习
-
-* [tensorflow/playground](https://github.com/tensorflow/playground):Play with neural networks! http://playground.tensorflow.org
-* [deepforge-dev/deepforge](https://github.com/deepforge-dev/deepforge):A modern development environment for deep learning http://deepforge.org
 
 ## 插件
 
@@ -154,19 +102,6 @@
 ## 环境
 
 * [motdotla/dotenv](https://github.com/motdotla/dotenv):Loads environment variables from .env for nodejs projects.
-
-## 框架
-
-* [Requarks/wiki](https://github.com/Requarks/wiki):Wiki.js | A modern, lightweight and powerful wiki app built on NodeJS, Git and Markdown https://wiki.js.org
-* [tj/should.js](https://github.com/tj/should.js):BDD style assertions for node.js -- test framework agnostic
-* 框架：Sails.js
-* [fastify/fastify](https://github.com/fastify/fastify):Fast and low overhead web framework, for Node.js https://www.fastify.io
-* [retejs/rete](https://github.com/retejs/rete):JavaScript framework for visual programming and creating node editor https://rete.js.org
-
-## 项目
-
-* [bailicangdu/node-elm](https://github.com/bailicangdu/node-elm):基于 node.js + Mongodb 构建的后台系统
-* [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 
 ## 压缩
 
@@ -223,7 +158,7 @@
 
 * [jaywcjlove/validator.js](https://github.com/jaywcjlove/validator.js):⁉️轻量级的JavaScript表单验证，字符串验证。没有依赖，支持UMD，~3kb。 https://git.io/validatorjs
 * [yiminghe/async-validator](https://github.com/yiminghe/async-validator):validate form asynchronous
-
+* [imbrn/v8n](https://github.com/imbrn/v8n):☑️ JavaScript fluent validation library.
 ## 网页
 
 * [jiahaog/nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
@@ -241,6 +176,8 @@
 * [cazala/synaptic](https://github.com/cazala/synaptic):architecture-free neural network library for node.js and the browser http://caza.la/synaptic
 * [BrainJS/brain.js](https://github.com/BrainJS/brain.js):🤖 Neural networks in JavaScript http://brain.js.org
 * [xviniette/FlappyLearning](https://github.com/xviniette/FlappyLearning):Program learning to play Flappy Bird by machine learning (Neuroevolution)http://xviniette.github.io/FlappyLearning/
+* [tensorflow/playground](https://github.com/tensorflow/playground):Play with neural networks! http://playground.tensorflow.org
+* [deepforge-dev/deepforge](https://github.com/deepforge-dev/deepforge):A modern development environment for deep learning http://deepforge.org
 
 ## 播放器
 
@@ -315,6 +252,11 @@
 ## 文件
 
 * [mholt/PapaParse](https://github.com/mholt/PapaParse):Fast and powerful CSV (delimited text) parser that gracefully handles large files and malformed input http://PapaParse.com
+* [jprichardson/node-fs-extra](https://github.com/jprichardson/node-fs-extra):Node.js: extra methods for the fs object like copy(), remove(), mkdirs()
+
+## 正则
+
+* [gskinner/regexr](https://github.com/gskinner/regexr):RegExr is a HTML/JS based tool for creating, testing, and learning about Regular Expressions. http://regexr.com/
 
 ## 代码在线分享工具
 
@@ -324,6 +266,20 @@
 * jdoodle
 * RunJS
 * CodePen
+
+## 框架
+
+* [Requarks/wiki](https://github.com/Requarks/wiki):Wiki.js | A modern, lightweight and powerful wiki app built on NodeJS, Git and Markdown https://wiki.js.org
+* [tj/should.js](https://github.com/tj/should.js):BDD style assertions for node.js -- test framework agnostic
+* 框架：Sails.js
+* [fastify/fastify](https://github.com/fastify/fastify):Fast and low overhead web framework, for Node.js https://www.fastify.io
+* [retejs/rete](https://github.com/retejs/rete):JavaScript framework for visual programming and creating node editor https://rete.js.org
+* [Tencent/omi](https://github.com/Tencent/omi):Next generation web framework in 4KB javascript(Web Components + JSX + Proxy + Path Updating) http://omijs.org
+
+## 项目
+
+* [bailicangdu/node-elm](https://github.com/bailicangdu/node-elm):基于 node.js + Mongodb 构建的后台系统
+* [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 
 ## 工具
 
@@ -347,6 +303,20 @@
 * [github/fetch](https://github.com/github/fetch):A window.fetch JavaScript polyfill. http://github.github.io/fetch/
 * [FezVrasta/popper.js](https://github.com/FezVrasta/popper.js):A kickass library to manage your poppers https://popper.js.org
 * [zeit/pkg](https://github.com/zeit/pkg):Package your Node.js project into an executable https://npmjs.com/pkg
+* [kpdecker/jsdiff](https://github.com/kpdecker/jsdiff):A javascript text differencing implementation.
+* [t4t5/sweetalert](https://github.com/t4t5/sweetalert):A beautiful replacement for JavaScript's "alert" https://sweetalert.js.org
+* [Modernizr/Modernizr](https://github.com/Modernizr/Modernizr):Modernizr is a JavaScript library that detects HTML5 and CSS3 features in the user’s browser. https://modernizr.com
+* [mozilla-neutrino/neutrino-dev](https://github.com/mozilla-neutrino/neutrino-dev):Create and build modern JavaScript applications with zero initial configuration. https://neutrino.js.org
+* [facebook/immutable-js](https://github.com/facebook/immutable-js):Immutable persistent data collections for Javascript which increase efficiency and simplicity. http://facebook.github.io/immutable-js/
+* [babel/babel](https://github.com/babel/babel):🐠 Babel is a compiler for writing next generation JavaScript. https://babeljs.io/
+* [yaronn/blessed-contrib](https://github.com/yaronn/blessed-contrib):Build terminal dashboards using ascii/ansi art and javascript
+* [antvis/g6](https://github.com/antvis/g6):A Graph Visualization Framework in JavaScript https://antv.alipay.com/zh-cn/g6/1.x/index.html
+* [nolanlawson/optimize-js](https://github.com/nolanlawson/optimize-js):Optimize a JavaScript file for faster initial load by wrapping eagerly-invoked functions
+* [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
+* [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
+* [es-analysis/plato](https://github.com/es-analysis/plato):JavaScript source code visualization, static analysis, and complexity tool
+* [dollarshaveclub/shave](https://github.com/dollarshaveclub/shave/):💈 Shave is a 0 dep JS plugin that truncates text to fit within an element based on a set max-height ✁ https://dollarshaveclub.github.io/shave/
+* [usablica/intro.js](https://github.com/usablica/intro.js):A better way for new feature introduction and step-by-step users guide for your website and project. http://introjs.com
 
 ## 扩展
 
@@ -362,6 +332,28 @@
 * [expressjs/multer](https://github.com/expressjs/multer):Node.js middleware for handling `multipart/form-data`.
 * [Microsoft/napajs](https://github.com/Microsoft/napajs):Napa.js: a multi-threaded JavaScript runtime
 * [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
+
+## 类库
+
+* [Lodash](https://github.com/lodash/lodash):为数组、字符串、object 和 argument 对象提供更一致的跨环境迭代支持，并已成为 Underscore 的超集
+* [Underscore](https://github.com/jashkenas/underscore):为 JavaScript 中的常见任务提供实用的函数
+* [Ramda](https://github.com/ramda/ramda):为函数式编程而设计，可以轻松创建不改变用户数据状态的函数式管道。Ramda 的核心设计理念是创建具有不变性和无副作用的函数。所有的函数会被自动柯里化，并根据易用性安排参数的顺序。
+* [MathJS](https://github.com/josdejong/mathjs):JavaScript 和 Node.js 的数学扩展库，与 JavaScript 内置的 Math 库兼容。该库包含一个灵活的表达式解析器，能够运行符号计算，并提供了一系列内置函数和常量。
+* [Moment](https://github.com/moment/moment): JavaScript 日期和时间操作库，用于解析、验证、操作和格式化日期。
+* [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs#string--date-format):List of date-fns or native functions which you can use to replace moment.js + ESLint Plugin
+* [Sugar](https://github.com/andrewplummer/Sugar):主要用于处理本地对象。这个库支持自定义构建，还提供了模块化的 npm 包，因此可以只使用其中必要的部分模块（也可以与 Bit 结合使用），用户还可以通过自定义方法或使用插件来应对特定的使用场景。
+* [Lazy](https://github.com/dtao/lazy.js):Like Underscore, but lazier http://danieltao.com/lazy.js/
+* [CollectJS](https://github.com/ecrmnn/collect.js):一个简单的随机对象生成器，用于生成随机的字符串、数字等。在编写自动化测试代码或任何需要随机对象的地方，可以用它来减少单调的工作。
+* [ChartJS](https://github.com/chartjs/Chart.js):提供了 8 种不同类型的数据可视化，每种类型都支持动画和定制。借助 Chart.js，我们可以使用canvas 标签创建简单的 HTML5 图表，而且在所有现代浏览器中都具有出色的渲染性能。
+* [Polished](https://github.com/styled-components/polishedBit ):支持使用 JavaScript 编写具有 SASS 风格辅助函数和 mixin 的样式。该库与 styled-components、Aphrodite、Radium 或简单的内联样式兼容。
+* [Mout](https://github.com/mout/mout):Modular JavaScript Utilities http://moutjs.com/
+* [Bit utils](https://bitsrc.io/bit/utils):一个模块化和高性能的库，已经被用在 Bit 的 web hub 中。这些函数可使用 NPM/Yarn 进行单独安装，用户也可以创建自己的集合，并从不同的库和项目中收集有用的功能。
+* [Voca](https://github.com/panzerdp/voca):一个用于操作字符串的 JavaScript 库。它提供的功能包括大小写转换、trim、pad、slugify、latinise、sprintf、truncate、escape 等。用户可以加载单个函数，以便最小化应用程序的构建。
+* [liriliri/licia](https://github.com/liriliri/licia):Useful utility collection with zero dependencies https://eustia.liriliri.io/module.html
+* [SBoudrias/Inquirer.js](https://github.com/SBoudrias/Inquirer.js):A collection of common interactive command line user interfaces.
+* [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
+* [kvz/locutus](https://github.com/kvz/locutus):All your standard libraries will be assimilated into our JavaScript collective. Resistance is futile. http://locutus.io
+* [panzerdp/voca](https://github.com/panzerdp/voca):The ultimate JavaScript string library https://vocajs.com
 
 ## 文档
 

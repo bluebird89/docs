@@ -71,7 +71,7 @@ stty erase ^H        #清除退格 (这个很有必要)
 export PATH=$PATH:/opt/perl/site/bin:/opt/perl/bin
 ```
 
-### zsh
+### [zsh-users/zsh](https://github.com/zsh-users/zsh)
 
 ```sh
 cat /etc/shells
@@ -172,6 +172,8 @@ PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blu
 ### 组件
 
 * [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
+* [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
+* [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
 
 #### 扩展
 

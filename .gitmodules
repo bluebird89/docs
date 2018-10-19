@@ -247,3 +247,6 @@
 [submodule "Algorithm/awesome-algorithm"]
 	path = Algorithm/awesome-algorithm
 	url = git@github.com:apachecn/awesome-algorithm.git
+[submodule "AI/AiLearning"]
+	path = AI/AiLearning
+	url = git@github.com:apachecn/AiLearning.git

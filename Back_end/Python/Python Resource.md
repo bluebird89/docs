@@ -1179,6 +1179,7 @@ Python 实现的算法和设计模式。
 * [pgbovine/OnlinePythonTutor](https://github.com/pgbovine/OnlinePythonTutor):Visualize Python, Java, JavaScript, TypeScript, Ruby, C, and C++ code execution in your Web browser http://pythontutor.com/
 * [Python fundamentals](https://www.python-tutorial.net/)
 * [sfermigier/awesome-functional-python](https://github.com/sfermigier/awesome-functional-python)
+* [apachecn/python_data_analysis_and_mining_action](https://github.com/apachecn/python_data_analysis_and_mining_action):《python数据分析与挖掘实战》的代码笔记
 
 ## 包
 
