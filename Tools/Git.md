@@ -1455,6 +1455,7 @@ chown -R henry:henry .git/objects
 * [carloscuesta/gitmoji](https://github.com/carloscuesta/gitmoji):An emoji guide for your commit messages. 😜 https://gitmoji.carloscuesta.me
 * [magit/magit](https://github.com/magit/magit):It's Magit! A Git porcelain inside Emacs. https://magit.vc
 * [zenhub](https://app.zenhub.com)：Agile project management integrated with GitHub
+* [commitizen/cz-cli](https://github.com/commitizen/cz-cli):The commitizen command line utility. http://commitizen.github.io/cz-cli/
 
 ## 参考
 
