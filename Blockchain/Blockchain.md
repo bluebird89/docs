@@ -184,6 +184,10 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 
 ![框架选择](../_static/block_framework.jpg "框架选择")
 
+## 工具
+
+* [bigchaindb/bigchaindb](https://github.com/bigchaindb/bigchaindb):Meet BigchainDB. The blockchain database. https://www.bigchaindb.com/
+
 ## 参考
 
 * [chaozh/awesome-blockchain](https://github.com/chaozh/awesome-blockchain):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料
