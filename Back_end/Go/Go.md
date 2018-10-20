@@ -218,6 +218,7 @@ websocketd --port=8080 ./count.sh // 建立server
 * [go-yaml/yaml](https://github.com/go-yaml/yaml):YAML support for the Go language.
 * [fsnotify/fsnotify](https://github.com/fsnotify/fsnotify):Cross-platform file system notifications for Go. https://fsnotify.org
 * [deckarep/golang-set](https://github.com/deckarep/golang-set)：A simple set type for the Go language. Also used in Docker, Kubernetes, Ethereum.
+* [fvbock/endless](https://github.com/fvbock/endless):Zero downtime restarts for go servers (Drop in replacement for http.ListenAndServe)
 
 ## 参考
 

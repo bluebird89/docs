@@ -21,6 +21,10 @@ php bin/console server:start 0.0.0.0:8000
 * [symfony/http-foundation](https://github.com/symfony/http-foundation):The HttpFoundation component defines an object-oriented layer for the HTTP specification. https://symfony.com/http-foundation
 * [jonaswouters/XhprofBundle](https://github.com/jonaswouters/XhprofBundle):XHProf bundle for Symfony 2
 
+## 工具
+
+* [symfony/dotenv](https://github.com/symfony/dotenv):Symfony Dotenv parses .env files to make environment variables stored in them accessible via getenv(), $_ENV, or $_SERVER. https://symfony.com/dotenv
+
 ## 框架
 
 * [Documentation](https://symfony.com/doc/current/index.html)

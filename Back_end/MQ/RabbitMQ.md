@@ -1,4 +1,6 @@
-# RabbitMQ
+# [rabbitmq/rabbitmq-server](https://github.com/rabbitmq/rabbitmq-server)
+
+Open source multi-protocol messaging broker https://www.rabbitmq.com/
 
 RabbitMQ 是基于 AMQP 实现的一个开源消息组件，主要用于在分布式系统中存储转发消息，由因高性能、高可用以及高扩展而出名的 Erlang 语言写成。
 其中，AMQP（Advanced Message Queuing Protocol，即高级消息队列协议），是一个异步消息传递所使用的应用层协议规范，为面向消息的中间件设计。

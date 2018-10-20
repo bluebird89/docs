@@ -654,6 +654,7 @@ tar cJf .tar.xz / --exclude-vcs
 ```sh
 git update-index --assume-unchanged # 永久性地告诉Git不要管某个本地文件
 ```
+* [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
 
 ### 搭建git私有服务器
 
