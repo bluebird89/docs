@@ -61,10 +61,9 @@
 * [shzlw/zeu](https://github.com/shzlw/zeu):A JavaScript library for real-time visualization
 * [antvis/g2](https://github.com/antvis/g2):The Grammar of Graphics in JavaScript https://antv.alipay.com/zh-cn/g2/3.x/index.html
 * [frappe/charts](https://github.com/frappe/charts):Simple, responsive, modern SVG Charts with zero dependencies https://frappe.io/charts
-* [D3.js](https://d3js.org/)
-* React Native
-* jQuery
-* [Underscore.js](http://underscorejs.org/)
+* [d3/d3](https://github.com/d3/d3):Bring data to life with SVG, Canvas and HTML. 📊📈🎉 https://d3js.org
+* [jashkenas/underscore](https://github.com/jashkenas/underscore):JavaScript's utility _ belt http://underscorejs.org
+* [handsontable/handsontable](https://github.com/handsontable/handsontable):handsontable/handsontable
 
 ## fingerprinting
 
