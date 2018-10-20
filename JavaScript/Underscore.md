@@ -1,4 +1,6 @@
-# underscore
+# [jashkenas/underscore](https://github.com/jashkenas/underscore)
+
+JavaScript's utility _ belt http://underscorejs.org
 
 JavaScript是函数式编程语言，支持高阶函数和闭包.可是Object实现map()和filter()方法，underscore则提供了一套完善的函数式编程的接口，让我们更方便地在JavaScript中实现函数式编程。
 

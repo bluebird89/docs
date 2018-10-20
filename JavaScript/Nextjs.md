@@ -1,5 +1,6 @@
-# Next.js
+# [zeit/next.js](https://github.com/zeit/next.js)
 
+The React Framework https://nextjs.org
 
 ## 工具
 
