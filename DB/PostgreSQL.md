@@ -167,6 +167,7 @@ class Ext_Pgsql {
 * [PostgREST/postgrest](https://github.com/PostgREST/postgrest):REST API for any Postgres database https://postgrest.org
 * [brianc/node-postgres](https://github.com/brianc/node-postgres):PostgreSQL client for node.js. https://node-postgres.com
 * [dbcli/pgcli](https://github.com/dbcli/pgcli):Postgres CLI with autocompletion and syntax highlighting http://pgcli.com
+* [timescale/timescaledb](https://github.com/timescale/timescaledb):An open-source time-series database optimized for fast ingest and complex queries. Engineered up from PostgreSQL, packaged as an extension. http://www.timescale.com/
 
 ## 客户端
 

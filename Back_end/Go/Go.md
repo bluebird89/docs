@@ -184,6 +184,7 @@ websocketd --port=8080 ./count.sh // 建立server
 - [harlow/go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
 - [astaxie/gopkg](https://github.com/astaxie/gopkg):example for the go pkg's function
 * [astaxie/go-best-practice](https://github.com/astaxie/go-best-practice):Trying to complete over 100 projects in various categories in golang.
+* [Unknwon/go-fundamental-programming](https://github.com/Unknwon/go-fundamental-programming):《Go 编程基础》是一套针对 Google 出品的 Go 语言的视频语音教程，主要面向新手级别的学习者。
 
 ## 扩展
 
