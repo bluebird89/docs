@@ -137,6 +137,10 @@
 
 * [kentcdodds/react-testing-library](https://github.com/kentcdodds/react-testing-library):🐐 Simple and complete React DOM testing utilities that encourage good testing practices. http://npm.im/react-testing-library
 
+## 编辑器
+
+* [jpuri/react-draft-wysiwyg](https://github.com/jpuri/react-draft-wysiwyg):A Wysiwyg editor build on top of ReactJS and DraftJS. https://jpuri.github.io/react-draft-wysiwyg
+
 ## 路由
 
 * [reactjs/redux](https://github.com/reactjs/redux):Predictable state container for JavaScript apps http://redux.js.org
