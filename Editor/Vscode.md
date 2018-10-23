@@ -31,6 +31,7 @@ sudo apt-get install code
 * ESLint
 * Faker：
 * File Utils
+* gi
 * Git History
 * GitLens
 * Git Project Manager
@@ -46,6 +47,7 @@ sudo apt-get install code
 * Jest
 * Minify
 * npm Intellisense
+* Prettier
 * Open-In-Browser
 * PHP IntelliSense
 * [prettier/prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. https://prettier.io
@@ -67,8 +69,29 @@ sudo apt-get install code
 * One Monokai
 * Aglia
 * One Dark Pro
-* Material Icon
-* Material Theme
+* Material Icon Theme
+
+## 配置
+
+```
+{
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.formatOnPaste": false,
+    "workbench.activityBar.visible": false,
+    "workbench.iconTheme": "eq-material-theme-icons-darker",
+    "workbench.colorCustomizations": {},
+    "materialTheme.cache.workbench.settings": {
+        "themeColours": "Darker",
+        "accentPrevious": "Acid Lime"
+    },
+    "workbench.colorTheme": "Material Theme Darker",
+    "material-icon-theme.angular.iconsEnabled": true,
+    "material-icon-theme.folders.icons": "specific",
+    "editor.lineHeight": 24,
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "FiraCode-Medium"
+}
+```
 
 ## 使用
 

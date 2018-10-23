@@ -33,3 +33,4 @@ eter Deutsch 提出的分布式系统八大谬论概括了程序员新手可能�
 ## 课程
 
 * [6.824: Distributed Systems](http://nil.csail.mit.edu/6.824/2018/)
+* [brendandburns/designing-distributed-systems](https://github.com/brendandburns/designing-distributed-systems):Sample code and configuration files from the Designing Distributed Systems book.
