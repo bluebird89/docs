@@ -122,6 +122,7 @@
 ## Cli
 
 * [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
+* [nexe/nexe](https://github.com/nexe/nexe):🎉 create a single executable out of your node.js apps
 
 ## HTTP
 
@@ -223,6 +224,7 @@
 * [facebook/dataloader](https://github.com/facebook/dataloader):DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching.
 * [sidorares/node-mysql2](https://github.com/sidorares/node-mysql2):⚡️ fast node-mysql compatible mysql driver for node.js
 * [sequelize/sequelize](https://github.com/sequelize/sequelize)An easy-to-use multi SQL dialect ORM for Node.js <http://docs.sequelizejs.com>
+* [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis):redis client for node http://redis.js.org/
 
 ## SVG
 
