@@ -10,3 +10,4 @@
 
 * [lhc70000/iina](https://github.com/lhc70000/iina):The modern video player for macOS. https://lhc70000.github.io/iina/
 * [waylybaye/XcodeCleaner](https://github.com/waylybaye/XcodeCleaner):Cleaner for Xcode.app built with react-native-macos
+* [sindresorhus/create-dmg](https://github.com/sindresorhus/create-dmg):Create a good-looking DMG for your macOS app in seconds

@@ -39,7 +39,7 @@ Amazons：由众神创造，为的给人类带来美好与和平。亚马逊族�
 
 真言套索，护盾，以及羽翼战靴 神力手镯
 
-* 神奇女侠 Wonder Woman (2017)
+* 神奇女侠 Wonder Woman (2017):初入社会
 * 神奇女侠 Wonder Woman (2009)
 * 马斯顿教授与神奇女侠 Professor Marston and the Wonder Women (2017)
 

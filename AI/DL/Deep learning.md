@@ -24,6 +24,8 @@
 
 * [Model Zoo](https://modelzoo.co/):Discover open source deep learning code and pretrained models.
 * [deep-learning-ai](https://www.nvidia.com/en-us/deep-learning-ai/developer/)
+* [karpathy/char-rnn](https://github.com/karpathy/char-rnn):Multi-layer Recurrent Neural Networks (LSTM, GRU, RNN) for character-level language models in Torch
+* [scutan90/DeepLearning-500-questions](https://github.com/scutan90/DeepLearning-500-questions):深度学习500问，以问答形式对常用的概率知识、线性代数、机器学习、深度学习、计算机视觉等热点问题进行阐述
 
 ## 工具
 
@@ -40,6 +42,6 @@
 * [李宏毅深度学习(2017)](https://www.bilibili.com/video/av9770302/)
 * [斯坦福2017季CS224n深度学习自然语言处理课程](https://www.bilibili.com/video/av13383754)
 * [斯坦福深度学习课程CS231N](https://www.bilibili.com/video/av17204303)
-* [【公开课】深度学习与计算机视觉](https://www.bilibili.com/video/av17741845)
+* [深度学习与计算机视觉](https://www.bilibili.com/video/av17741845)
 * [apachecn/fastai-ml-dl-notes-zh](https://github.com/apachecn/fastai-ml-dl-notes-zh):📖 [译] fast.ai 机器学习和深度学习中文笔记
 * [fchollet/deep-learning-with-python-notebooks](https://github.com/fchollet/deep-learning-with-python-notebooks):Jupyter notebooks for the code samples of the book "Deep Learning with Python"

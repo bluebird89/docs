@@ -12,25 +12,25 @@
 
 ## Iron man
 
-* 钢铁侠1》，2008
+* 钢铁侠1 2008
 
 ## Amearcia Caption
 
-美国队长 Captain America: The First Avenger (2011)
-美国队长2 Captain America: The Winter Soldier (2014)
-美国队长3 Captain America: Civil War (2016)
+* 美国队长 Captain America: The First Avenger (2011)
+* 美国队长2 Captain America: The Winter Soldier (2014)
+* 美国队长3 Captain America: Civil War (2016)
 
 ## Thor
 
-雷神1》，2011
-《雷神2》
-《雷神3》
+* 雷神1》，2011
+* 《雷神2》
+* 《雷神3》
 
 ## 银河护卫队
 
 ## 复仇者联盟1 2012
 
-## 复仇者联盟2》，2015
+## 复仇者联盟22015
 
 ## 复仇者联盟3：无限战争 Avengers: Infinity War (2018)
 
@@ -44,6 +44,14 @@ The idea was to bring together a group of remarkable people to see if they could
 打完一次响指后，由于威力太大，无限手套已经烧毁了。 不假，但别忘了还有矮人。
 
 * Thanos：泰坦族人
+
+## 蚁人
+
+黄蜂女
+
+## 黑豹
+
+Black Panther）是对非洲国家瓦坎达守护者的的传统称呼，每代瓦坎达守护者几乎都是王室成员。特查拉（T'Challa）是目前的守护者，也是复仇者联盟成员之一。每一代守护者都要进食一块心形药草以得到超乎凡人的速度、力量、体能、耐力以及敏锐度。之前曾有陨石落在瓦坎达，并带来大量稀有的吸音钢（Vibranium），这种极具军事意义的矿产资源引来各方人士争夺，特查拉的父亲正是死于抵御外敌的过程中，“特查拉”临危受命，成为新一代守护者。
 
 ## 惊奇队长 Captain Marvel
 
