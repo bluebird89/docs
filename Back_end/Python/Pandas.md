@@ -86,3 +86,4 @@ s：任意的Pandas Series对象
 * [jvns/pandas-cookbook](https://github.com/jvns/pandas-cookbook):Recipes for using Python's pandas library
 * [BrambleXu/pydata-notebook](https://github.com/BrambleXu/pydata-notebook):利用Python进行数据分析 第二版 (2017) 中文翻译笔记
 * [apachecn/pandas-doc-zh](https://github.com/apachecn/pandas-doc-zh):📖 [译] Pandas 中文文档（待校对） 
+* [apachecn/pandas-cookbook-code-notes](https://github.com/apachecn/pandas-cookbook-code-notes):📖 Pandas Cookbook 带注释源码

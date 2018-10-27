@@ -49,6 +49,7 @@
 
 * [ricardo-ch/react-easy-crop](https://github.com/ricardo-ch/react-easy-crop):A React component to crop images with easy interactions https://codesandbox.io/s/q80jom5ql6
 * [xiaolin/react-image-gallery](https://github.com/xiaolin/react-image-gallery):React carousel image gallery component with thumbnail and mobile support
+* [smooth-code/svgr](https://github.com/smooth-code/svgr):Transform SVGs into React components 🦁 https://svgr.now.sh/
 
 ## 文件
 
@@ -92,6 +93,7 @@
 ## 按钮
 
 * [transitive-bullshit/react-particle-effect-button](https://github.com/transitive-bullshit/react-particle-effect-button):Bursting particle effect buttons for React 🎉
+* [greena13/react-hotkeys](https://github.com/greena13/react-hotkeys):Declarative hotkey and focus area management for React 
 
 ## WEB
 
@@ -157,7 +159,6 @@
 ## 组件
 
 * [brillout/awesome-react-components](https://github.com/brillout/awesome-react-components):Catalog of React Components & Libraries https://devarchy.com/react
-* [storybooks/storybook](https://github.com/storybooks/storybook): Interactive development & testing environment for React, React-Native, Vue UI components https://storybook.js.org
 * [AllenFang/react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-table):A Bootstrap table built with React.js https://allenfang.github.io/react-boo…
 * [React-Bootstrap](https://github.com/react-bootstrap/react-bootstrap)
 * [akiran/react-slick](https://github.com/akiran/react-slick):React carousel component http://neostack.com/opensource/react-…
@@ -227,6 +228,7 @@
 * [pinterest/gestalt](https://github.com/pinterest/gestalt):A set of React UI components that supports Pinterest’s design language https://pinterest.github.io/gestalt
 * [segmentio/evergreen](https://github.com/segmentio/evergreen):🌲 Evergreen React UI Framework by Segment https://evergreen.surge.sh/
 * [JetBrains/ring-ui](https://github.com/JetBrains/ring-ui):A collection of JetBrains Web UI components https://jetbrains.github.io/ring-ui
+* [xotahal/react-native-material-ui](https://github.com/xotahal/react-native-material-ui):Highly customizable material design components for React Native
 
 ## 学习
 

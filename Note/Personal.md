@@ -9,3 +9,8 @@
 ## 买房
 
 * 炒房，不要去搞，如果你要自住，现金流没有问题，那就买，短期可能有起伏，但几年以后，通货膨胀就会降低你的债务强度。
+
+
+## 资源
+
+* [it-ebooks/the-way-to-wealth-freedom-notes](https://github.com/it-ebooks/the-way-to-wealth-freedom-notes):📖 通往财富自由之路精细笔记

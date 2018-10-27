@@ -21,6 +21,7 @@ script: phpunit -v
 ## 工具
 
 * [TeamCity](https://www.jetbrains.com/teamcity/)
+* [danger/danger-js](https://github.com/danger/danger-js):⚠️ Stop saying "you forgot to …" in code review http://danger.systems/js/
 
 ## 教程
 

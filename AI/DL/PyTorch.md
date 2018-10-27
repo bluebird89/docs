@@ -2,6 +2,10 @@
 
 Tensors and Dynamic neural networks in Python with strong GPU acceleration http://pytorch.org
 
+## 项目
+
+* [facebookresearch/maskrcnn-benchmark](https://github.com/facebookresearch/maskrcnn-benchmark):Fast, modular reference implementation of Instance Segmentation and Object Detection algorithms in PyTorch.
+
 ## 参考
 
 * [apachecn/pytorch-doc-zh](https://github.com/apachecn/pytorch-doc-zh):PyTorch 中文文档 http://pytorch.apachecn.org

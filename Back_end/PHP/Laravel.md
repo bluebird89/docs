@@ -1446,6 +1446,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [laravel/socialite](https://github.com/laravel/socialite):an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub, GitLab and Bitbucket
 * [overtrue/socialite](https://github.com/overtrue/socialite)::octocat: Socialite is an OAuth2 Authentication tool. It is inspired by laravel/socialite, you can easily use it without Laravel.
 * [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
+* [laravel/telescope](https://github.com/laravel/telescope):provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more
 
 ## 参考
 
@@ -1502,6 +1503,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [saleem-hadad/larecipe](https://github.com/saleem-hadad/larecipe):🍪 Write gorgeous documentations for your products using Markdown inside your Laravel app. https://larecipe.binarytorch.com.my/
 * [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
 * [wujunze/laravel-debug-helper](https://github.com/wujunze/laravel-debug-helper):Laravel package to help debug
+* [laravel-zero/laravel-zero](https://github.com/laravel-zero/laravel-zero):A PHP framework for console artisans https://laravel-zero.com
 
 ## 工程
 

@@ -92,3 +92,4 @@ slim
 * [OpenEmu/OpenEmu](https://github.com/OpenEmu/OpenEmu):🕹 Retro video game emulation for macOS http://openemu.org
 * [EpicGames/UnrealEngine](https://github.com/EpicGames/UnrealEngine):Unreal Engine source code http://www.unrealengine.com/
 * [godotengine/godot](https://github.com/godotengine/godot):Godot Engine – Multi-platform 2D and 3D game engine https://godotengine.org
+* [EsotericSoftware/spine-runtimes](https://github.com/EsotericSoftware/spine-runtimes):2D skeletal animation runtimes for Spine. http://esotericsoftware.com/

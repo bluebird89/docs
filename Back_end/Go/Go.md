@@ -147,6 +147,7 @@ websocketd --port=8080 ./count.sh // 建立server
   };
 </script>
 ```
+
 ## 包管理
 
 * [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
@@ -220,6 +221,7 @@ websocketd --port=8080 ./count.sh // 建立server
 * [fsnotify/fsnotify](https://github.com/fsnotify/fsnotify):Cross-platform file system notifications for Go. https://fsnotify.org
 * [deckarep/golang-set](https://github.com/deckarep/golang-set)：A simple set type for the Go language. Also used in Docker, Kubernetes, Ethereum.
 * [fvbock/endless](https://github.com/fvbock/endless):Zero downtime restarts for go servers (Drop in replacement for http.ListenAndServe)
+* [gonum/gonum](https://github.com/gonum/gonum):Gonum is a set of numeric libraries for the Go programming language. It contains libraries for matrices, statistics, optimization, and more https://www.gonum.org/
 
 ## 参考
 
