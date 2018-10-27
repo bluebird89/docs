@@ -808,3 +808,4 @@ kindle
 * [经典编程书籍大全](https://github.com/jobbole/awesome-programming-books):100+ 经典技术书籍，涵盖：计算机系统与网络、系统架构、算法与数据结构、前端开发、后端开发、移动开发、数据库、测试、项目与团队、程序员职业修炼、求职面试 和 编程相关的经典书籍。
 * [programthink/books](https://github.com/programthink/books):【编程随想】收藏的电子书清单
 * [threerocks/studyFiles](https://github.com/threerocks/studyFiles):一些经典且高质量的电子书分享
+* [it-ebooks](https://github.com/it-ebooks)

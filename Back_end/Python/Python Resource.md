@@ -277,8 +277,8 @@ brew install pipenv
 * pyechonest：[Echo Nest](http://developer.echonest.com/) API 的 Python 客户端[官网](https://github.com/echonest/pyechonest)
 * talkbox：一个用来处理演讲/信号的 Python 库[官网](http://scikits.appspot.com/talkbox)
 * TimeSide：开源 web 音频处理框架。[官网](https://github.com/Parisson/TimeSide)
-* tinytag：一个用来读取MP3, OGG, FLAC 以及 Wave 文件音乐元数据的库。[官网](https://github.com/devsnd/tinytag)
-* mingus：一个高级音乐理论和曲谱包，支持 MIDI 文件和回放功能。[官网](http://bspaans.github.io/python-mingus/)
+* [tinytag](https://github.com/devsnd/tinytag)：一个用来读取MP3, OGG, FLAC 以及 Wave 文件音乐元数据的库。
+* [mingus](http://bspaans.github.io/python-mingus/)：一个高级音乐理论和曲谱包，支持 MIDI 文件和回放功能。
 
 ## Video
 
@@ -286,6 +286,7 @@ brew install pipenv
 
 * moviepy：一个用来进行基于脚本的视频编辑模块，适用于多种格式，包括动图 GIFs。[官网](http://zulko.github.io/moviepy/)
 * scikit-video：SciPy 视频处理常用程序。[官网](https://github.com/aizvorski/scikit-video)
+* [streamlink/streamlink](https://github.com/streamlink/streamlink):CLI for extracting streams from various websites to a video player of your choosing https://streamlink.github.io/
 
 ## 地理位置
 

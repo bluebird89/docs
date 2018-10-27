@@ -2,10 +2,6 @@
 
 An Open Source Machine Learning Framework for Everyone https://tensorflow.org
 
-## 参考
-
-* [aymericdamien/TensorFlow-Examples](https://github.com/aymericdamien/TensorFlow-Examples):TensorFlow Tutorial and Examples for Beginners with Latest APIs https://tensorflow.org
-
 ## 安装
 
 ```python
@@ -27,8 +23,9 @@ pip install IPython
 * [vahidk/EffectiveTensorflow](https://github.com/vahidk/EffectiveTensorflow):TensorFlow tutorials and best practices. https://twitter.com/VahidK
 * [xitu/tensorflow-docs](https://github.com/xitu/tensorflow-docs):TensorFlow 最新官方文档中文版 V1.10 https://tensorflow.juejin.im
 * [apachecn/learning-tf-zh](https://github.com/apachecn/learning-tf-zh):📖 [译] TensorFlow 学习指南 https://legacy.gitbook.com/book/wizardforcel/learning-tf/details
-* [tensorflow/tensor2tensor](https://github.com/tensorflow/tensor2tensor)：
+* [tensorflow/tensor2tensor](https://github.com/tensorflow/tensor2tensor)：Library of deep learning models and datasets designed to make deep learning more accessible and accelerate ML research.
 * [TensorFlow R1.2 中文文档](http://cwiki.apachecn.org/pages/viewpage.action?pageId=10030122)
+* [MrGemy95/Tensorflow-Project-Template](https://github.com/MrGemy95/Tensorflow-Project-Template)：A best practice for tensorflow project template architecture.
 
 ## 课程
 
