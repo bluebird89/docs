@@ -159,25 +159,15 @@
 * [jaywcjlove/validator.js](https://github.com/jaywcjlove/validator.js):⁉️轻量级的JavaScript表单验证，字符串验证。没有依赖，支持UMD，~3kb。 https://git.io/validatorjs
 * [yiminghe/async-validator](https://github.com/yiminghe/async-validator):validate form asynchronous
 * [imbrn/v8n](https://github.com/imbrn/v8n):☑️ JavaScript fluent validation library.
+
 ## 网页
 
 * [jiahaog/nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
+* [palmerhq/the-platform](https://github.com/palmerhq/the-platform):Web. Components.
 
 ## 模拟器
 
 * [bfirsh/jsnes](https://github.com/bfirsh/jsnes):A JavaScript NES emulator. https://jsnes.org
-
-## 机器学习
-
-* [junku901/machine_learning](https://github.com/junku901/machine_learning):Machine learning library for Node.js http://joonku.com/project/machine_learning
-* [janhuenermann/neurojs](https://github.com/janhuenermann/neurojs):A javascript deep learning and reinforcement learning library. https://janhuenermann.com/projects/learning-to-drive
-* [dmotz/thing-translator](https://github.com/dmotz/thing-translator):Point your camera at things to hear how to say them in a different language https://thing-translator.appspot.com/
-* [karpathy/convnetjs](https://github.com/karpathy/convnetjs):Deep Learning in Javascript. Train Convolutional Neural Networks (or ordinary ones) in your browser.
-* [cazala/synaptic](https://github.com/cazala/synaptic):architecture-free neural network library for node.js and the browser http://caza.la/synaptic
-* [BrainJS/brain.js](https://github.com/BrainJS/brain.js):🤖 Neural networks in JavaScript http://brain.js.org
-* [xviniette/FlappyLearning](https://github.com/xviniette/FlappyLearning):Program learning to play Flappy Bird by machine learning (Neuroevolution)http://xviniette.github.io/FlappyLearning/
-* [tensorflow/playground](https://github.com/tensorflow/playground):Play with neural networks! http://playground.tensorflow.org
-* [deepforge-dev/deepforge](https://github.com/deepforge-dev/deepforge):A modern development environment for deep learning http://deepforge.org
 
 ## 播放器
 
@@ -229,6 +219,7 @@
 ## SVG
 
 * [svgdotjs/svg.js](https://github.com/svgdotjs/svg.js):The lightweight library for manipulating and animating SVG http://svgjs.com/
+* [riccardoscalco/textures](https://github.com/riccardoscalco/textures):Textures.js is a JavaScript library for creating SVG patterns 
 
 ## 2D
 
@@ -259,6 +250,10 @@
 
 * [gskinner/regexr](https://github.com/gskinner/regexr):RegExr is a HTML/JS based tool for creating, testing, and learning about Regular Expressions. http://regexr.com/
 
+## logger
+
+* [klauscfhq/signale](https://github.com/klauscfhq/signale):👋 Hackable console logger
+
 ## 代码在线分享工具
 
 * JS Fiddle
@@ -267,6 +262,18 @@
 * jdoodle
 * RunJS
 * CodePen
+
+## 机器学习
+
+* [junku901/machine_learning](https://github.com/junku901/machine_learning):Machine learning library for Node.js http://joonku.com/project/machine_learning
+* [janhuenermann/neurojs](https://github.com/janhuenermann/neurojs):A javascript deep learning and reinforcement learning library. https://janhuenermann.com/projects/learning-to-drive
+* [dmotz/thing-translator](https://github.com/dmotz/thing-translator):Point your camera at things to hear how to say them in a different language https://thing-translator.appspot.com/
+* [karpathy/convnetjs](https://github.com/karpathy/convnetjs):Deep Learning in Javascript. Train Convolutional Neural Networks (or ordinary ones) in your browser.
+* [cazala/synaptic](https://github.com/cazala/synaptic):architecture-free neural network library for node.js and the browser http://caza.la/synaptic
+* [BrainJS/brain.js](https://github.com/BrainJS/brain.js):🤖 Neural networks in JavaScript http://brain.js.org
+* [xviniette/FlappyLearning](https://github.com/xviniette/FlappyLearning):Program learning to play Flappy Bird by machine learning (Neuroevolution)http://xviniette.github.io/FlappyLearning/
+* [tensorflow/playground](https://github.com/tensorflow/playground):Play with neural networks! http://playground.tensorflow.org
+* [deepforge-dev/deepforge](https://github.com/deepforge-dev/deepforge):A modern development environment for deep learning http://deepforge.org
 
 ## 框架
 
@@ -297,7 +304,6 @@
 * [hapijs/hapi](https://github.com/hapijs/hapi):Server Framework for Node.js http://hapijs.com
 * [fgnass/spin.js](https://github.com/fgnass/spin.js):A spinning activity indicator http://spin.js.org
 * [tj/co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)
-* [klauscfhq/signale](https://github.com/klauscfhq/signale):👋 Hackable console logger
 * [nodejs/docker-node](https://github.com/nodejs/docker-node):Official Docker Image for Node.js 🐳 🐢 🚀 https://hub.docker.com/_/node/
 * [systemjs/systemjs](https://github.com/systemjs/systemjs):Dynamic ES module loader
 * [soldair/node-qrcode](https://github.com/soldair/node-qrcode):qr code generator
@@ -318,6 +324,7 @@
 * [es-analysis/plato](https://github.com/es-analysis/plato):JavaScript source code visualization, static analysis, and complexity tool
 * [dollarshaveclub/shave](https://github.com/dollarshaveclub/shave/):💈 Shave is a 0 dep JS plugin that truncates text to fit within an element based on a set max-height ✁ https://dollarshaveclub.github.io/shave/
 * [usablica/intro.js](https://github.com/usablica/intro.js):A better way for new feature introduction and step-by-step users guide for your website and project. http://introjs.com
+* [rndme/download](https://github.com/rndme/download):file downloading using client-side javascript
 
 ## 扩展
 

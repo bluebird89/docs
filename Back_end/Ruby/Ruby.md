@@ -1,6 +1,6 @@
-# [rails/rails](https://github.com/rails/rails)
+# [ruby/ruby](https://github.com/ruby/ruby)
 
-Ruby on Rails http://rubyonrails.org
+The Ruby Programming Language https://www.ruby-lang.org/
 
 * Convention over configuration;
 * DRY - Don't Repeat You;
@@ -147,7 +147,7 @@ rake db:create
 rails server
 ```
 
-## Ruby on Rails
+## [rails/rails](https://github.com/rails/rails):Ruby on Rails http://rubyonrails.org
 
 ## 工具
 

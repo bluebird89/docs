@@ -207,7 +207,6 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 
 ## 工具
 
-* Maven
 * [apache/httpcomponents-core](https://github.com/apache/httpcomponents-core)
 * [apache/tomcat](https://github.com/apache/tomcat)
 * [apache/jmeter](https://github.com/apache/jmeter)a 100% pure Java application designed to test and measure performance. It may be used as a highly portable server benchmark as well as multi-client load generator.
@@ -219,6 +218,7 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 * [oracle/opengrok](https://github.com/oracle/opengrok):OpenGrok is a fast and usable source code search and cross reference engine, written in Java http://oracle.github.io/opengrok/
 * [kevinsawicki/http-request](https://github.com/kevinsawicki/http-request):Java HTTP Request Library
 * [ReactiveX/RxJava](https://github.com/ReactiveX/RxJava):RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.
+* [qiujiayu/AutoLoadCache](https://github.com/qiujiayu/AutoLoadCache):AutoLoadCache 是基于AOP+Annotation等技术实现的高效的缓存管理解决方案，实现缓存与业务逻辑的解耦，并增加异步刷新及“拿来主义机制”，以适应高并发环境下的使用。
 
 ## 框架
 

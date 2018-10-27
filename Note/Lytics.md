@@ -813,7 +813,6 @@
     想得却不可得 情爱里无智者
 ```
 
-
 ## 鬼迷心窍
 
 ```
@@ -842,6 +841,128 @@
     晓寒深处
     相对浴红衣
 ```
+
+## 历历万乡 陈粒
+
+```
+她住在七月的洪流上
+天台倾倒理想一万丈
+她午睡在北风仓皇途经的芦苇荡
+她梦中的草原白茫茫
+列车搭上悲欢去辗转
+她尝遍了每个异乡限时赠送的糖
+若我站在朝阳上 能否脱去昨日的惆怅
+单薄语言能否传达我所有的牵挂
+若有天我不复勇往 能否坚持走完这一场
+踏遍万水千山总有一地故乡
+城市慷慨亮整夜光
+如同少年不惧岁月长
+她想要的不多只是和别人的不一样
+烛光倒影为我添茶
+相逢太短不等茶水凉
+你扔下的习惯还顽强活在我身上
+如果我站在朝阳上 能否脱去昨日的惆怅
+单薄语言能否传达我所有的牵挂
+若有天我不复勇往 能否坚持走完这一场
+踏遍万水千山总有一地故乡
+如果我站在朝阳上 能否脱去昨日的惆怅
+单薄语言能否传达我所有的牵挂
+若有天我不复勇往 能否坚持走完这一场
+踏遍万水千山总有一地故乡
+她走在马蹄的余声中
+夕阳燃烧离别多少场
+她向陌生人们解说陌生人的风光
+等她归来坐下对我讲
+故人旧时容颜未沧桑
+我们仍旧想要当初想要的不一样
+```
+
+## 性空山
+
+```
+送君千里直至峻岭变平川
+　　惜别伤离临请饮清酒三两三
+　　一两祝你手边多银财
+　　二两祝你方寸永不乱
+　　半醒半醉日复日
+　　无风无雨年复年
+　　花枝还招酒一盏
+　　祝你娇妻佳婿配良缘
+
+半醒半醉日复日
+　　无风无雨年复年
+　　花枝还招酒一盏
+　　祝你娇妻佳婿配良缘
+
+风流子弟曾少年
+　　多少老死江湖前
+　　老我重来重石烂
+　　杳无音信
+　　我性空山
+```
+
+## Set Fire to the Rain  Adele Adkins
+
+```
+I let it fall, my heart,
+And as it fell you rose to claim it
+It was dark and I was over
+Until you kissed my lips and you saved me
+My hands, they're strong
+But my knees were far too weak,
+To stand in your arms
+Without falling to your feet
+But there's a side to you
+That I never knew, never knew.
+All the things you'd say
+They were never true, never true,
+And the games you play
+You would always win, always win.
+[Chorus:]
+But I set fire to the rain,
+Watched it pour as I touched your face,
+Well, it burned while I cried
+'Cause I heard it screaming out your name, your name!
+When I lay with you
+I could stay there
+Close my eyes
+Feel you here forever
+You and me together
+Nothing gets better
+'Cause there's a side to you
+That I never knew, never knew,
+All the things you'd say,
+They were never true, never true,
+And the games you'd play
+You would always win, always win.
+[Chorus:]
+But I set fire to the rain,
+Watched it pour as I touched your face,
+Well, it burned while I cried
+'Cause I heard it screaming out your name, your name!
+I set fire to the rain
+And I threw us into the flames
+When it fell, something died
+'Cause I knew that that was the last time, the last time!
+Sometimes I wake up by the door,
+That heart you caught must be waiting for you
+Even now when we're already over
+I can't help myself from looking for you.
+[Chorus:]
+I set fire to the rain,
+Watched it pour as I touched your face,
+Well, it burned while I cried
+'Cause I heard it screaming out your name, your name
+I set fire to the rain,
+And I threw us into the flames
+When it fell, something died
+'Cause I knew that that was the last time, the last time, ohhhh!
+Oh noooo
+Let it burn, oh
+Let it burn
+Let it burn
+```
+
 
 * 《What are words》-Chris Medina﻿﻿
 * 《Communication》-The Cardigans﻿﻿﻿﻿﻿﻿

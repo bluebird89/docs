@@ -151,3 +151,5 @@ ETL(Extraction-Transformation-Loading)：负责将分布的、异构数据源中
 * [airbnb/knowledge-repo](https://github.com/airbnb/knowledge-repo):A next-generation curated knowledge sharing platform for data scientists and other technical professions.
 * [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. https://osquery.io
 * [protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf):Protocol Buffers - Google's data interchange format https://developers.google.com/protocol-buffers/
+* [ha/doozerd](https://github.com/ha/doozerd):A consistent distributed data store.
+* [hashicorp/consul](https://github.com/hashicorp/consul):Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure. https://www.consul.io/

@@ -26,6 +26,7 @@
 
 * [mailpile/Mailpile](https://github.com/mailpile/Mailpile):A free & open modern, fast email client with user-friendly encryption and privacy features https://mailpile.is
 * [Foundry376/Mailspring](https://github.com/Foundry376/Mailspring):💌 A beautiful, fast and maintained fork of @nylas Mail by one of the original authors. https://getmailspring.com/
+* [nylas/nylas-mail](https://github.com/nylas/nylas-mail):💌 An extensible desktop mail app built on the modern web. Forks welcome! https://nylas.com/nylas-mail/
 
 ## 看板
 
