@@ -19,7 +19,6 @@
 * [jaystone776/python-data-science-cheatsheet](https://github.com/jaystone776/python-data-science-cheatsheet):Python数据科学速查表
 * [apachecn/python_data_analysis_and_mining_action](https://github.com/apachecn/python_data_analysis_and_mining_action):《python数据分析与挖掘实战》的代码笔记
 
-
 ## 扩展
 
 <https://mp.weixin.qq.com/s/3jJ4w3fGeW56U15Vdl2xEw>

@@ -159,7 +159,7 @@ smaba
     -   [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
     -   Day One - Digital journal
 -   文档
-    -   dash:语言文档
+    -   [dash](https://kapeli.com/dash):语言文档
     -   Quiver：文档管理器
     -   文档：[apidoc](http://apidocjs.com/)
     -   [jgm/pandoc](https://github.com/jgm/pandoc):Universal markup converter <http://johnmacfarlane.net/pandoc>

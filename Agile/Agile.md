@@ -93,6 +93,17 @@
 4:六大原则和设计模式：工厂、策略、代理等用起来会让人感觉很爽，再次来修改代码的时候会比较得心应手。
 5:适当运动。在努力的同时，请保持一个好身体。
 
+## 经验
+
+* Upgrade early and upgrade often. The closer you are to a new version of Rails, the easier upgrades will be. This encourages your team to fix bugs in Rails instead of monkey-patching the application or reinventing features that exist upstream.
+* Keep upgrade infrastructure in place. There will always be a new version to upgrade to, so once you’re on a modern version of Rails add a build to run against the master branch. This will catch bugs in Rails and your application early, make upgrades easier, and increase your upstream contributions.
+* Upstream your tooling instead of rolling your own. The more you push upstream to gems or Rails, the less logic you need in your application. Save your application code for what truly makes your company special (i.e. Pull Requests), instead of tools to make your application run smoothly (i.e. concurrent testing libraries)
+* Avoid using private API’s in your frameworks. Rails has a lot of code that’s not private but isn’t documented on purpose. That code is subject to change without notice, so writing code that relies on private code can easily break in an upgrade.
+* Address technical debt often. It’s easy to think “this is working, why mess with it”, but if no one knows how that code works, it can quickly become a bottleneck for upgrades. Try to prevent coupling your application logic too closely to your framework. Ensure that the line where your application ends and your framework begins is clear. You can do this by addressing technical debt before it becomes difficult to remove.
+* Do incremental upgrades. Each minor version of Rails provides the deprecation warnings for the next version. By upgrading from 3.2 to 4.0, 4.0 to 4.1, etc we were able to identify problems in the next version early and define clear milestones.
+* Keep up the momentum. Rails upgrades can seem daunting. Create ways in which your team can have quick wins to keep momentum going. Share the responsibility across teams so that everyone is familiar with the new version of the framework and prevent burnout. Once you’re on the newest version add a build to your app that periodically runs your suite against edge Rails so you can catch bugs in your code or your framework early.
+* Expect things to break. Upgrades are hard and in an application as large as GitHub things are bound to break. While we didn’t take the site down during the upgrade we had issues with CI, local development, slow queries, and other problems that didn’t show up in our CI builds or click testing.
+
 ## 工具
 
 * MyCollab
