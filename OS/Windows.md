@@ -104,6 +104,7 @@
 * Google Voice 全新的电话沟通/管理方式
 * Boxee 媒体中心
 * Media Player Classic 媒体播放
+* [Zeal](https://zealdocs.org/):Zeal is an offline documentation browser for software developers.
 
 ```sh
 ## 安装 choco
