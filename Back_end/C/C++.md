@@ -28,6 +28,10 @@ gcc file.c # 编译
 }
 ```
 
+## IDE
+
+* [Code::Blocks](http://www.codeblocks.org)
+
 ## 工具
 
 - [Tencent/libco](https://github.com/Tencent/libco)libco is a coroutine library which is widely used in wechat back-end service.

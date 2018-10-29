@@ -187,6 +187,7 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 ## 工具
 
 * [bigchaindb/bigchaindb](https://github.com/bigchaindb/bigchaindb):Meet BigchainDB. The blockchain database. https://www.bigchaindb.com/
+* [MetaMask/metamask-extension](https://github.com/MetaMask/metamask-extension):🌐 🔌 The MetaMask browser extension, enables browsing Ethereum blockchain enabled websites. https://metamask.io/
 
 ## 参考
 

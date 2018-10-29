@@ -135,3 +135,4 @@
 * [Teach Yourself Computer Science](https://teachyourselfcs.com/)
 * [Composing Programs](http://www.composingprograms.com/): a free online introduction to programming and computer science.
 * [CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes):📚 Computer Science Learning Notes
+* [sjtu-se-courseware/sjtu-se-courseware](https://github.com/sjtu-se-courseware/sjtu-se-courseware):上海交大软件学院课件

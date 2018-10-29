@@ -107,7 +107,7 @@ class Dummy {
 - Umlet
 - ArgoUML
 - PlantUML
-- staruml
+- [staruml](https://sourceforge.net/projects/staruml/)
 
 ## 参考
 
