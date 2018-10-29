@@ -17,6 +17,13 @@ export PATH=${PATH}:$ANDROID_HOME/platform-tools
 export PATH=${PATH}:$ANDROID_HOME/tools
 ```
 
+## [Android Studio](http://www.android-studio.org/)
+
+```
+203.208.46.146 dl.google.com
+203.208.46.200 dl-ssl.google.com
+```
+
 ## ADB
 
 adb的全称为Android Debug Bridge，就是调试桥的作用。借助这个工具，我们可以管理设备或手机模拟器的状态 ，还可以进行以下的操作：

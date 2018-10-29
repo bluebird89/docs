@@ -13,8 +13,6 @@ openJDK版本
 JDK：Java Development Kit
 JRE: Java Runtime Environment
 
-## [安装教程](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-debian-8)类debian系统
-
 ### linux
 
 ```sh
@@ -200,6 +198,7 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 * [Java学习路线图](http://www.jianshu.com/p/d51551b0a8ba)
 * [史上最精炼JAVA知识点基础总结](http://www.jianshu.com/p/9caf1c755889)
 * [shuzheng/zheng](https://github.com/shuzheng/zheng):基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、支付中心、用户管理（支持第三方登录）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。 http://47.93.195.63/zheng-upms-server
+* [apachecn/thinking-in-java-zh](https://github.com/apachecn/thinking-in-java-zh):📖 Java 编程思想 
 
 ## 资源
 
@@ -207,6 +206,7 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 
 ## 工具
 
+* [Java SE](https://www.oracle.com/technetwork/java/javase)
 * [apache/httpcomponents-core](https://github.com/apache/httpcomponents-core)
 * [apache/tomcat](https://github.com/apache/tomcat)
 * [apache/jmeter](https://github.com/apache/jmeter)a 100% pure Java application designed to test and measure performance. It may be used as a highly portable server benchmark as well as multi-client load generator.
@@ -234,3 +234,4 @@ Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。甲骨文与该�
 * [可能是一份最适合你的后端面试指南](https://juejin.im/post/5ba591386fb9a05cd31eb85f)
 * [google/guava](https://github.com/google/guava):Google core libraries for Java
 * [crossoverJie/JCSprout](https://github.com/crossoverJie/JCSprout):👨‍🎓 Java Core Sprout : basic, concurrent, algorithm
+* [安装教程](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-debian-8)类debian系统
