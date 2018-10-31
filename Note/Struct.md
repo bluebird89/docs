@@ -74,4 +74,4 @@
 
 * [技术雷达](https://www.thoughtworks.com/radar)
 * [learn-anything/learn-anything](https://github.com/learn-anything/learn-anything):Search Interactive Maps to Learn Anything https://learn-anything.xyz
-
+* [ruanyf/weekly](https://github.com/ruanyf/weekly):技术分享周刊，每周五发布

@@ -27,6 +27,7 @@ pip install IPython
 * [TensorFlow R1.2 中文文档](http://cwiki.apachecn.org/pages/viewpage.action?pageId=10030122)
 * [MrGemy95/Tensorflow-Project-Template](https://github.com/MrGemy95/Tensorflow-Project-Template)：A best practice for tensorflow project template architecture.
 * [fendouai/Awesome-TensorFlow-Chinese](https://github.com/fendouai/Awesome-TensorFlow-Chinese):Awesome-TensorFlow-Chinese，TensorFlow 中文资源精选，官方网站，安装教程，入门教程，视频教程，实战项目，学习路径。QQ群：167122861，微信群二维码：http://www.tensorflownews.com/ http://www.tensorflownews.com/
+* [tensorflow/nmt](https://github.com/tensorflow/nmt):TensorFlow Neural Machine Translation Tutorial
 
 ## 课程
 

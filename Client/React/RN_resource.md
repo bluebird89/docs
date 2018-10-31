@@ -7,6 +7,7 @@
 ## 状态
 
 *  [jamiebuilds/unstated](https://github.com/jamiebuilds/unstated):State so simple, it goes without saying https://unstated.io
+* [mweststrate/immer](https://github.com/mweststrate/immer):Create the next immutable state by mutating the current one
 
 ## 编辑器
 
