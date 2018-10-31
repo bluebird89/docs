@@ -24,6 +24,7 @@ pandoc WEB.md -o web.docx
 * [open-xml-templating/docxtemplater](https://github.com/open-xml-templating/docxtemplater):Generate docx and pptx (microsoft word documents) from templates, from Node.js, the Browser and the command line / Demo: https://docxtemplater.com/demo https://docxtemplater.com
 * [mdx-js/mdx](https://github.com/mdx-js/mdx):JSX in Markdown for ambitious projects https://mdxjs.com
 * [prezi](https://prezi.com/pricing/edu/)
+* [linkedin/hopscotch](https://github.com/linkedin/hopscotch):A framework to make it easy for developers to add product tours to their pages.
 
 ## PPT
 

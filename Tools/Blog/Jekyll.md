@@ -22,3 +22,7 @@ bundle exec jekyll serve：本地查看效果
 - github新仓库 开启Github pages
 - 将代码推送到仓库
 - [访问页面](https://bluebird89.github.io/)
+
+## 主题
+
+* [mmistakes/so-simple-theme](https://github.com/mmistakes/so-simple-theme):A simple Jekyll theme for words and pictures. 

@@ -10,10 +10,8 @@ Mac：Safari浏览器 > 偏好设置 > 高级 > 在菜单栏中显示“开发�
 
 * [phoboslab/Ejecta](https://github.com/phoboslab/Ejecta):A Fast, Open Source JavaScript, Canvas & Audio Implementation for iOS
 * [Apple Developer Documentation](https://developer.apple.com/documentation)
-
-## 资源
-
 * [nikitavoloboev/my-ios](https://github.com/nikitavoloboev/my-ios):List of applications and tools that make my iOS experience even more amazing
+* [SwiftOldDriver/iOS-Weekly](https://github.com/SwiftOldDriver/iOS-Weekly):🇨🇳 老司机 iOS 周报
 
 ## 工具
 

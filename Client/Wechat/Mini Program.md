@@ -118,6 +118,7 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 * [weapp-quick](https://github.com/phodal/weapp-quick) ★320 - “微信Web开发者”拷贝工具
 * [Wxapp.vim](https://github.com/chemzqm/wxapp.vim) ★213 - 微信小程序开发 Vim 插件
 * [wechat_web_devtools](https://github.com/yuan1994/wechat_web_devtools) ★179 - 微信开发者工具Linux版  not maintained
+* [cytle/wechat_web_devtools](https://github.com/cytle/wechat_web_devtools):微信开发者工具(微信小程序)linux完美支持
 * [miniapps](https://github.com/DDFE/miniapps) ★131 - 小程序项目脚手架工具
 * [Matchmaker](https://github.com/lypeer/Matchmaker) ★107 - 专为微信小程序开发的插件
 * [wecos](https://github.com/tencentyun/wecos) ★64 - 微信小程序 COS 瘦身解决方案

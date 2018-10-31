@@ -1375,7 +1375,7 @@ require('./ShopProduct.php'); # 加载文件名称
 * swoole
 * xdebug
 * apc:op缓存
-* phpredis
+* [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis
 * PHP-FPM进程池：FastCGI Process Manager 的master process是常驻内存的，以static、dynamic、ondemand三种方式来管理进程池中的worker process，可以有效控制内存和进程并平滑重载PHP配置，在发生意外情况的时候能够重新启动并恢复被破坏的 opcode。
 
 ```sh
