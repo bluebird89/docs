@@ -1,10 +1,11 @@
-# [Mocha 实例教程](http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html)
+# [mochajs/mocha](https://github.com/mochajs/mocha)
 
+☕️ simple, flexible, fun javascript test framework for node.js & the browser https://mochajs.org
 Mocha（发音"摩卡"）诞生于2011年，是现在最流行的JavaScript测试框架之一.[代码仓库](git clone https://github.com/ruanyf/mocha-demos.git)
 
 ## 安装
 
-```
+```sh
 npm install -g mocha
 devDependencies
     "babel-core": "~6.2.1",
@@ -90,3 +91,7 @@ it('异步请求应该返回一个对象', function() { return fetch('<https://a
 ```
 
 - 钩子
+
+## 参考
+
+* [Mocha 实例教程](http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html)

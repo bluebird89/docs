@@ -9,6 +9,7 @@
 
 * 读者权利十条：不读的权利和跳读的权利
 * 笔记
+* 带着问题读书，旁观的方式读书，批判的角度读书。让我们读到的信息能与自己的认识产生碰撞和验证，这才是读书的意义之一。
 
 ## 流程
 
@@ -37,7 +38,6 @@
 * 《计算机程序设计艺术（The Art of Computer Programming）》
 * 《编译原理》
 * 《编码:隐匿在计算机软硬件背后的语言CODE: The Hidden Language of Computer Hardware and Software》
-* 《设计模式 可复用面向对象软件的基础》
 * 《现代操作系统(原书第3版) 》
 * 《操作系统:精髓与设计原理(原书第6版)》
 
@@ -238,6 +238,7 @@
 *  How to Break Software
 *  《测试驱动开发》
 * 《Growing Object-Oriented Software, Guided by Tests》
+* 《Python测试驱动开发（第2版）》 Harry J.W.Percival
 
 ## Java
 
@@ -245,7 +246,7 @@
 * 《[Java并发编程实战](https://www.amazon.cn/gp/product/B0077K9XHW)》
 * 《[Java性能权威指南](https://www.amazon.cn/gp/product/B01DLB7Z66)》
 * 《[Java程序员修炼之道](https://www.amazon.cn/gp/product/B00E0D2OX4)》
-* 《[实战Java高并发程序设计](https://www.amazon.cn/gp/product/B017MEN094)》
+* 《[实战Java高并发程序设计 Java concurrency in practice](https://www.amazon.cn/gp/product/B017MEN094)》
 * 《[Java编程思想 （第4版）](https://www.amazon.cn/gp/product/B0011F7WU4)》：todo
 * 《[深入理解Java虚拟机（第2版）](https://www.amazon.cn/gp/product/B01HI0BUF8)》
 * 《[Effective java 中文版（第2版）](https://www.amazon.cn/gp/product/B001PTGR52)》
@@ -352,7 +353,7 @@
 * 《架构即未来》
 * 《[微服务设计](https://www.amazon.cn/gp/product/B01ER75V6O)》
 * 《[大数据日知录](https://www.amazon.cn/gp/product/B00NGW4EAG)》
-* 《[企业应用架构模式](https://www.amazon.cn/gp/product/B003LBSRDM)》
+* 《[企业应用架构模式 Patterns of Enterprise Application Architecture](https://www.amazon.cn/gp/product/B003LBSRDM)》
 * 《[Web性能权威指南](https://www.amazon.cn/gp/product/B00JMKWHFU)》
 * 《[SRE：Google运维解密](https://www.amazon.cn/gp/product/B01M0EHQ43)》
 * 《[发布！软件的设计与部署](https://www.amazon.cn/gp/product/B0153178XM)》
@@ -399,6 +400,7 @@
 * 《Patterns, Principles and Practices of Domain-Driven Design》
 * 领域驱动设计
 * 《领域驱动设计精粹》
+* Domain-driven Design
 
 ## Serverless
 
@@ -425,6 +427,8 @@
 * 《机器学习实战》  Peter Harrington
 * 《TensorFlow 技术解析与实战》  李嘉璇
 * 《统计学习方法》  李航
+* 《Python深度学习（Keras）》
+* 《深度学习入门：基于Python的理论与实现》
 
 ## 数据挖掘
 

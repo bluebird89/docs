@@ -388,6 +388,7 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 * [tenta-browser/tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS https://tenta.com/test
 * [googlehosts/hosts](https://github.com/googlehosts/hosts)
 * [Cloudflare](https://www.cloudflare.com):域名注册服务
+* [coredns/coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins https://coredns.io
 
 ## 工具
 
@@ -412,6 +413,7 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 * [JoeDog/siege](https://github.com/JoeDog/siege):Siege is an http load tester and benchmarking utility
 * [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
 * [dannagle/PacketSender](https://github.com/dannagle/PacketSender):Network utility for sending / receiving TCP, UDP, SSL https://packetsender.com/
+
 
 ### [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest)
 

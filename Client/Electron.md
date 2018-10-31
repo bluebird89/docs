@@ -31,6 +31,7 @@ Electron 的架构包括 Node.js runtime 和嵌套的微型 Chromium 浏览器�
 * [maxogden/menubar](https://github.com/maxogden/menubar):➖ high level way to create menubar desktop applications with electron
 * [zeit/hazel](https://github.com/zeit/hazel):Lightweight update server for Electron apps
 * [electron-userland/electron-packager](https://github.com/electron-userland/electron-packager):Customize and package your Electron app with OS-specific bundles (.app, .exe, etc.) via JS or CLI http://npm.im/electron-packager
+* [electron/spectron](https://github.com/electron/spectron):🔎 Test Electron apps using ChromeDriver http://electronjs.org/spectron
 
 ## 资源
 
