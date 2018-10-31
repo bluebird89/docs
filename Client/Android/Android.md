@@ -105,6 +105,7 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 * [scottyab/secure-preferences](https://github.com/scottyab/secure-preferences):Android Shared preference wrapper than encrypts the values of Shared Preferences. It's not bullet proof security but rather a quick win for incrementally making your android app more secure.
 * [hyb1996/Auto.js](https://github.com/hyb1996/Auto.js):A UiAutomator on android, does not need root access
 * [linkedin/qark](https://github.com/linkedin/qark):Tool to look for several security related Android application vulnerabilities
+* [android-hacker/VirtualXposed](https://github.com/android-hacker/VirtualXposed):A simple app to use Xposed without root, unlock the bootloader or modify system image, etc. https://vxp.app
 
 ## 模拟
 

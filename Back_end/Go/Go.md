@@ -173,6 +173,10 @@ websocketd --port=8080 ./count.sh // 建立server
 
 * [stretchr/testify](https://github.com/stretchr/testify):A toolkit with common assertions and mocks that plays nicely with the standard library
 
+## 数据库
+
+* [dgraph-io/badger](https://github.com/dgraph-io/badger):Fast key-value DB in Go. https://open.dgraph.io/post/badger/
+
 ## 教程
 
 * [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
@@ -222,6 +226,9 @@ websocketd --port=8080 ./count.sh // 建立server
 * [deckarep/golang-set](https://github.com/deckarep/golang-set)：A simple set type for the Go language. Also used in Docker, Kubernetes, Ethereum.
 * [fvbock/endless](https://github.com/fvbock/endless):Zero downtime restarts for go servers (Drop in replacement for http.ListenAndServe)
 * [gonum/gonum](https://github.com/gonum/gonum):Gonum is a set of numeric libraries for the Go programming language. It contains libraries for matrices, statistics, optimization, and more https://www.gonum.org/
+* [bitly/go-simplejson](https://github.com/bitly/go-simplejson):a Go package to interact with arbitrary JSON
+* [golang/crypto](https://github.com/golang/crypto):Go supplementary cryptography libraries https://godoc.org/golang.org/x/crypto
+* [takama/daemon](https://github.com/takama/daemon):A daemon package for use with Go (golang) services with no dependencies
 
 ## 参考
 
@@ -230,6 +237,10 @@ websocketd --port=8080 ./count.sh // 建立server
 - [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
 - [GO语言中文网](https://studygolang.com/)
 - [changkun/go-under-the-hood](https://github.com/changkun/go-under-the-hood):Go 源码研究 (1.11.1, WIP)
+
+## 项目
+
+* [hajimehoshi/ebiten](https://github.com/hajimehoshi/ebiten):A dead simple 2D game library in Go https://hajimehoshi.github.io/ebiten/
 
 ## 图书
 

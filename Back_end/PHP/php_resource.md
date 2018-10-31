@@ -737,6 +737,7 @@
 * [codeguy/php-the-right-way](https://github.com/codeguy/php-the-right-way):An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web https://www.phptherightway.com
 * [walu/phpbook](https://github.com/walu/phpbook):PHP扩展开发及内核应用
 * [hoohack/read-php-src](https://github.com/hoohack/read-php-src)
+* [php/php-langspec](https://github.com/php/php-langspec):PHP Language Specification http://www.php.net
 
 ## 扩展
 

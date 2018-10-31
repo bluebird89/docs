@@ -139,8 +139,6 @@ rel表示这个API与当前网址的关系（collection关系，并给出该coll
 - [RESTful Web 服务：教程](https://zhuanlan.zhihu.com/p/21644769)
 - [Kerberos](http://danlebrero.com/2017/03/26/Kerberos-explained-in-pictures/)
 
-## GraphQL
-
 ## StrongLoop
 
 StrongLoop API Platform构建于开源的LoopBack.io之上，LoopBack是一个高度可扩展的Node.js API框架。借助于LoopBack，我们可以快速创建可扩展的API和数据库映射。

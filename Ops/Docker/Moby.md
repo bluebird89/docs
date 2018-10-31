@@ -386,6 +386,7 @@ services:
 * [Docker Machine(https://docs.docker.com/machine/)
 * [docker/cli](https://github.com/docker/cli):The Docker CLI
 * [wagoodman/dive](https://github.com/wagoodman/dive):A tool for exploring each layer in a docker image
+* [spotify/docker-gc](https://github.com/spotify/docker-gc):Docker garbage collection of containers and images
 
 ## 参考
 
