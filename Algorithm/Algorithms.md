@@ -128,6 +128,7 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * [TheAlgorithms/Java](https://github.com/TheAlgorithms/Java):All Algorithms implemented in Java
 * [apachecn/awesome-algorithm](https://github.com/apachecn/awesome-algorithm):Leetcode 题解 (跟随思路一步一步撸出代码) 及经典算法实现
 * [skybebe/Algorithms-Learning-With-Go](https://github.com/skybebe/Algorithms-Learning-With-Go):算法学习 Golang 版，参考 raywenderlich/swift-algorithm-club
+* [ChrisKnott/Algojammer](https://github.com/ChrisKnott/Algojammer):An experimental code editor for writing algorithms
 
 ## 工具
 

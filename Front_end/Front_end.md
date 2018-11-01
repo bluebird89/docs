@@ -725,8 +725,8 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 - [dwqs/blog](https://github.com/dwqs/blog)
 - [Web前端知识体系精简](http://www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
 - [前端跨域整理](https://juejin.im/post/5815f4abbf22ec006893b431)
-- [front-end-style-guide](http://zhibimo.com/read/Ashu/front-end-style-guide/html/general.html)
 - [KieSun/Front-end-knowledge](https://github.com/KieSun/Front-end-knowledge):前端知识集锦
+* [jawil/blog](https://github.com/jawil/blog):Too young, too simple. Sometimes, naive & stupid 🐌
 
 ## 工具
 
@@ -739,10 +739,6 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 
 * [twbs/ratchet](https://github.com/twbs/ratchet):Build mobile apps with simple HTML, CSS, and JavaScript components. http://goratchet.com
 * [zurb/foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. http://foundation.zurb.com
-
-## 资源
-
-* [atisawd/boxicons](https://github.com/atisawd/boxicons):High Quality web friendly icons https://boxicons.com
 
 ## 扩展
 
