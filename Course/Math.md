@@ -19,7 +19,6 @@
 * [apachecn/prob140-textbook-zh](https://github.com/apachecn/prob140-textbook-zh):📖 [译] 面向数据科学的概率论
 * [apachecn/math](https://github.com/apachecn/math):MIT-18.06-线性代数-完整笔记
 
-
 ## 课程
 
 * [麻省理工公开课：线性代数](http://open.163.com/special/opencourse/daishu.html)
