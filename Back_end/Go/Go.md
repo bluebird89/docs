@@ -176,6 +176,7 @@ websocketd --port=8080 ./count.sh // 建立server
 ## 数据库
 
 * [dgraph-io/badger](https://github.com/dgraph-io/badger):Fast key-value DB in Go. https://open.dgraph.io/post/badger/
+* [DATA-DOG/go-sqlmock](https://github.com/DATA-DOG/go-sqlmock):Sql mock driver for golang to test database interactions
 
 ## 教程
 
@@ -229,6 +230,7 @@ websocketd --port=8080 ./count.sh // 建立server
 * [bitly/go-simplejson](https://github.com/bitly/go-simplejson):a Go package to interact with arbitrary JSON
 * [golang/crypto](https://github.com/golang/crypto):Go supplementary cryptography libraries https://godoc.org/golang.org/x/crypto
 * [takama/daemon](https://github.com/takama/daemon):A daemon package for use with Go (golang) services with no dependencies
+* [golang/protobuf](https://github.com/golang/protobuf):Go support for Google's protocol buffers
 
 ## 参考
 

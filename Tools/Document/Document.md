@@ -25,6 +25,7 @@ pandoc WEB.md -o web.docx
 * [mdx-js/mdx](https://github.com/mdx-js/mdx):JSX in Markdown for ambitious projects https://mdxjs.com
 * [prezi](https://prezi.com/pricing/edu/)
 * [linkedin/hopscotch](https://github.com/linkedin/hopscotch):A framework to make it easy for developers to add product tours to their pages.
+* [gitpitch/gitpitch](https://github.com/gitpitch/gitpitch):The Markdown Presentation Service For Everyone on GitHub, GitLab, Bitbucket, GitBucket, Gitea, and Gogs. https://gitpitch.com
 
 ## PPT
 

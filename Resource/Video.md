@@ -1,5 +1,15 @@
 ## Video
 
+## 技术
+
+ampg4
+
+h.264  acc
+
+hls
+
+## 资源
+
 -   TED
 -   YouTube
 -   [Hashem AL-ghaili](https://youtube.com/user/hashemalghaili)
