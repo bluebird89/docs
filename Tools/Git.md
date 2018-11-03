@@ -1,6 +1,6 @@
 # [git/git](https://github.com/git/git)
 
-fast, scalable, distributed revision control system.一个分布式的代码管理容器，本地和远端都保有一份相同的代码。
+fast, scalable, distributed revision control system. https://git-scm.com/  一个分布式的代码管理容器，本地和远端都保有一份相同的代码。
 
 * 分布式
 * 基于时间点的快照：将提交点指向提交时的项目快照
@@ -1004,6 +1004,9 @@ git rebase -i origin/master
 # 推送到远程仓库，因为rebase以后，分支历史改变了，跟远程分支不一定兼容，有可能要强行推送
 git push --force origin myfeature
 ```
+
+* [awesome-actions](https://github.com/sdras/awesome-actions):A curated list of awesome actions to use on GitHub
+* [gitalk/gitalk](https://github.com/gitalk/gitalk):Gitalk is a modern comment component based on Github Issue and Preact. https://gitalk.github.io
 
 ### 合并commit选项
 

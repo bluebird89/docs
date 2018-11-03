@@ -2591,3 +2591,8 @@ try {
 ## localStorage
 
 ## sessionStorage
+
+
+## 参考
+
+* [stephentian/33-js-concepts](https://github.com/stephentian/33-js-concepts):📜 每个 JavaScript 工程师都应懂的33个概念 @leonardomso

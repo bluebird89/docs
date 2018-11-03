@@ -13,6 +13,15 @@ John MacFarlane开发的标记语言转换工具，可实现不同标记语言�
 pandoc WEB.md -o web.docx
 ```
 
+## PPT
+
+* [slideshare](https://www.slideshare.net/):Share what you know and love through presentations, infographics, documents and more
+* [jxnblk/mdx-deck](https://github.com/jxnblk/mdx-deck):MDX-based presentation decks
+
+## Posters
+
+* [corkami/pics](https://github.com/corkami/pics):Posters, drawings...
+
 ## 工具
 
 * [coolwanglu/pdf2htmlEX](https://github.com/coolwanglu/pdf2htmlEX):Convert PDF to HTML without losing text or format. http://coolwanglu.github.com/pdf2htmlEX/
@@ -27,11 +36,6 @@ pandoc WEB.md -o web.docx
 * [linkedin/hopscotch](https://github.com/linkedin/hopscotch):A framework to make it easy for developers to add product tours to their pages.
 * [gitpitch/gitpitch](https://github.com/gitpitch/gitpitch):The Markdown Presentation Service For Everyone on GitHub, GitLab, Bitbucket, GitBucket, Gitea, and Gogs. https://gitpitch.com
 
-## PPT
+## 参考
 
-* [slideshare](https://www.slideshare.net/):Share what you know and love through presentations, infographics, documents and more
-* [jxnblk/mdx-deck](https://github.com/jxnblk/mdx-deck):MDX-based presentation decks
-
-## Posters
-
-* [corkami/pics](https://github.com/corkami/pics):Posters, drawings...
+* [What nobody tells you about documentation](https://www.divio.com/blog/documentation/)

@@ -331,6 +331,7 @@ Python实现的数据库。
 * psycopg2：Python 中最流行的 PostgreSQL 适配器。[官网](http://initd.org/psycopg/)
 * queries：psycopg2 库的封装，用来和 PostgreSQL 进行交互。[官网](https://github.com/gmr/queries)
 * txpostgres：基于 Twisted 的异步 PostgreSQL 驱动。[官网](http://txpostgres.readthedocs.org/en/latest/)
+* [influxdata/influxdb-python](https://github.com/influxdata/influxdb-python):Python client for InfluxDB
 - 其他关系型数据库
   - apsw：另一个 Python SQLite封装。[官网](http://rogerbinns.github.io/apsw/)
   - dataset：在数据库中存储Python字典

@@ -1,4 +1,6 @@
-# Ansible
+# [Ansible](https://www.ansible.com)
+
+Ansible是一种配置和管理工具，面向客户端的软件部署和配置，支持Unix、Linux和Windows。它使 用JSON和YAML，而不是IAC，根本不需要节点代理就可以安装。它可以通过OpenStack在内部系统上使用，也可以在亚马逊EC2上使用。
 
 ## Install
 

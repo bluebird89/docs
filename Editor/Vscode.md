@@ -1,8 +1,8 @@
-# Vscode
+# [Microsoft/vscode](https://github.com/Microsoft/vscode)
+
+Visual Studio Code <https://code.visualstudio.com>
 
 ## 安裝
-
-[下載地址](https://code.visualstudio.com/Download)
 
 ```sh
 # ubuntu:download file
@@ -250,7 +250,7 @@ code --disable-extensions . # disable all extensions
 
 ## 扩展
 
--   [Microsoft/vscode](https://github.com/Microsoft/vscode):Visual Studio Code <https://code.visualstudio.com>
+-   [VSCodium/vscodium](https://github.com/VSCodium/vscodium):binary releases of VS Code without MS branding/telemetry/licensing
 -   [viatsko/awesome-vscode](https://github.com/viatsko/awesome-vscode):A curated list of delightful VS Code packages and resources.
 -   [Microsoft/vscode-tips-and-tricks](https://github.com/Microsoft/vscode-tips-and-tricks):Collection of helpful tips and tricks for VS Code.
 -   [vscode-element-helper](https://github.com/ElemeFE/vscode-element-helper)

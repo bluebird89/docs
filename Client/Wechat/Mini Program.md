@@ -91,6 +91,7 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 * [Tencent/wepy](https://github.com/Tencent/wepy):小程序组件化开发框架 https://tencent.github.io/wepy/
 * [Labrador](https://github.com/maichong/labrador) ★785 - 微信小程序模块化开发框架
 * [Meituan-Dianping/mpvue](https://github.com/Meituan-Dianping/mpvue):基于 Vue.js 的小程序开发框架，从底层支持 Vue.js 语法和构建工具体系。 http://mpvue.com
+* [kaola-fed/megalo](https://github.com/kaola-fed/megalo):基于 Vue 的小程序开发框架
 
 ### 实用库
 

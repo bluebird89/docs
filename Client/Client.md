@@ -36,16 +36,6 @@ code
 * React则可以在所有的前端领域中盛行。
     - GraphQL在未来将有很大可能替代 REST
 
-## 工具
-
-* [fastlane/fastlane](https://github.com/fastlane/fastlane):🚀 The easiest way to automate building and releasing your iOS and Android apps https://fastlane.tools
-* [NervJS/taro](https://github.com/NervJS/taro):多端统一开发框架，支持用 React 的开发方式编写一次代码，生成能运行在微信小程序、H5、React Native 等的应用。 https://taro.aotu.io
-* [expo/expo](https://github.com/expo/expo):Expo iOS/Android Client https://docs.expo.io/
-* [jiahaog/nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
-* [appium/appium](https://github.com/appium/appium):📱 Automation for iOS, Android, and Windows Apps. http://appium.io/
-* [visionmedia/page.js](https://github.com/visionmedia/page.js):Micro client-side router inspired by the Express router http://visionmedia.github.com/page.js
-* [boxwarehq/cli](https://github.com/boxwarehq/cli):Try and use desktop software in your browser without downloading/installing anything. https://boxware.io
-
 ## 参考
 
 - [Tencent/VasSonic](https://github.com/Tencent/VasSonic)a lightweight and high-performance Hybrid framework developed by tencent VAS team, which is intended to speed up the first screen of websites working on Android and iOS platform.
@@ -64,3 +54,14 @@ code
 # 博客
 
 * [zwwill/blog](https://github.com/zwwill/blog):✏️ stay hungry stay foolish
+
+
+## 工具
+
+* [fastlane/fastlane](https://github.com/fastlane/fastlane):🚀 The easiest way to automate building and releasing your iOS and Android apps https://fastlane.tools
+* [NervJS/taro](https://github.com/NervJS/taro):多端统一开发框架，支持用 React 的开发方式编写一次代码，生成能运行在微信小程序、H5、React Native 等的应用。 https://taro.aotu.io
+* [expo/expo](https://github.com/expo/expo):Expo iOS/Android Client https://docs.expo.io/
+* [jiahaog/nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
+* [appium/appium](https://github.com/appium/appium):📱 Automation for iOS, Android, and Windows Apps. http://appium.io/
+* [visionmedia/page.js](https://github.com/visionmedia/page.js):Micro client-side router inspired by the Express router http://visionmedia.github.com/page.js
+* [boxwarehq/cli](https://github.com/boxwarehq/cli):Try and use desktop software in your browser without downloading/installing anything. https://boxware.io
