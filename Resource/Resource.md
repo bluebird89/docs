@@ -106,7 +106,8 @@
 
 ## 管理与沟通
 
--   WhatsApp 和 Slack 用来沟通
+-   WhatsApp
+-   [Slack](https://slack.com/)
 -   [stride](https://app.stride.com/):类似 slack 的软件
 -   [Asana](asana.com)
 -   [meili/TeamTalk](https://github.com/meili/TeamTalk):TeamTalk is a solution for enterprise IM
@@ -186,6 +187,7 @@
 -   [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
 -   [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
 - [chubin/cheat.sh](https://github.com/chubin/cheat.sh):the only cheat sheet you need https://cheat.sh/
+* [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 
 ## 资源
 

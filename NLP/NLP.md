@@ -11,3 +11,5 @@
 ## 资源
 
 * [我爱自然语言处理](http://www.52nlp.cn/)
+* [google-research/bert](https://github.com/google-research/bert):TensorFlow code and pre-trained models for BERT https://arxiv.org/abs/1810.04805
+* [基于深度学习的自然语言处理]()：图书

@@ -3,6 +3,7 @@
 ## 工具
 
 * [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! http://pachyderm.io
+* [golemfactory/golem](https://github.com/golemfactory/golem):Golem is creating a global market for computing power. https://golem.network
 
 ## 参考
 

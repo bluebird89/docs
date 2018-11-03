@@ -188,6 +188,7 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 
 * [bigchaindb/bigchaindb](https://github.com/bigchaindb/bigchaindb):Meet BigchainDB. The blockchain database. https://www.bigchaindb.com/
 * [MetaMask/metamask-extension](https://github.com/MetaMask/metamask-extension):🌐 🔌 The MetaMask browser extension, enables browsing Ethereum blockchain enabled websites. https://metamask.io/
+* [iov-one/weave](https://github.com/iov-one/weave):Easy-to-use framework to build Tendermint ABCI applications
 
 ## 参考
 
@@ -197,6 +198,7 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 * [bitcoinbook/bitcoinbook](https://github.com/bitcoinbook/bitcoinbook):Mastering Bitcoin 2nd Edition - Programming the Open Blockchain https://bitcoinbook.info/
 * [Jeiwan/blockchain_go](https://github.com/Jeiwan/blockchain_go):A simplified blockchain implementation in Golang
 * [liuchengxu/blockchain-tutorial](https://github.com/liuchengxu/blockchain-tutorial):🌾 A step-by-step blockchain tutorial in simplified Chinese https://liuchengxu.gitbook.io/blockchain
+* [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料
 
 ## 教程
 
