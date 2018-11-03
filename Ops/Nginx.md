@@ -586,6 +586,37 @@ server {
 add_header Access-Control-Allow-Origin *;
 add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"; # Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight response.
 add_header Access-Control-Allow-Methods "GET, POST, OPTIONS"; # Content-Type is not allowed by Access-Control-Allow-Headers in preflight response.
+
+# Nginx 反向代理 Https 实际的后端服务器直接 http 启动，证书配置在 Nginx 上。
+server
+    {
+        listen 80;
+        server_name domain.com;
+        rewrite ^(.*)$ https://domain.com$1 permanent;
+    }
+
+server
+    {
+        listen 443 ssl http2;
+        server_name domain.com ;
+
+        ssl on;
+        ssl_certificate path;
+        ssl_certificate_key path;
+        ssl_session_timeout 5m;
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+        ssl_prefer_server_ciphers on;
+        ssl_ciphers "YOUR";
+        ssl_session_cache builtin:1000 shared:SSL:10m;
+        ssl_dhparam path;
+        location /
+        {
+            # 注意这里是http
+            proxy_pass http://127.0.0.1:8081;
+            proxy_set_header Host domain.com;
+            proxy_set_header X-Forwarded-Proto https;
+        }
+    }
 ```
 
 文件 B配置会根据url/documents 去 root/doucuments/去匹配文件

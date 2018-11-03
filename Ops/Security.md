@@ -14,7 +14,7 @@
 * Grabber
 * Golismero
 * OWASP Xenotix XSS
-* AppScan
+* [IBM Security AppScan](http://www-03.ibm.com/software/products/en/appscan)
 * Messus
 * Snort
 * Nagios

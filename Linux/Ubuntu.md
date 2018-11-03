@@ -138,6 +138,7 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 * [cherrytree](www.giuspen.com/cherrytree/):note
 * [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite
 * [Sayonara Player](https://sayonara-player.com/index.php)
+* Disk Usage Analyzer
 
 ### 软件安装
 

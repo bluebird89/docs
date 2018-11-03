@@ -56,11 +56,6 @@
 
 * [diegomura/react-pdf](https://github.com/diegomura/react-pdf):📄 Create PDF files using React http://react-pdf.diegomura.com/repl
 
-## 扩展
-
-* [redux-saga/redux-saga](https://github.com/redux-saga/redux-saga):An alternative side effect model for Redux apps https://redux-saga.js.org/
-* [acdlite/recompose](https://github.com/acdlite/recompose):A React utility belt for function components and higher-order components.
-
 ## animations
 
 * [react-tools/react-move](https://github.com/react-tools/react-move):React Move 🌀 Beautiful, data-driven animations for React https://react-move.js.org
@@ -144,6 +139,10 @@
 
 * [jpuri/react-draft-wysiwyg](https://github.com/jpuri/react-draft-wysiwyg):A Wysiwyg editor build on top of ReactJS and DraftJS. https://jpuri.github.io/react-draft-wysiwyg
 
+## Bundler
+
+* [facebook/metro](https://github.com/facebook/metro):🚇 The JavaScript bundler for React Native. https://facebook.github.io/metro
+
 ## 路由
 
 * [reactjs/redux](https://github.com/reactjs/redux):Predictable state container for JavaScript apps http://redux.js.org
@@ -201,6 +200,13 @@
 * [jaredpalmer/formik](https://github.com/jaredpalmer/formik):Build forms in React, without the tears 😭 https://jaredpalmer.com/formik
 * [JedWatson/react-select](https://github.com/JedWatson/react-select):The Select for React.js https://react-select.com/
 * [styled-components/styled-components](https://github.com/styled-components/styled-components):Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
+* [paypal/downshift](https://github.com/paypal/downshift):🏎 Primitive to build simple, flexible, WAI-ARIA compliant enhanced input React components http://downshift.netlify.com/
+
+## 扩展
+
+* [redux-saga/redux-saga](https://github.com/redux-saga/redux-saga):An alternative side effect model for Redux apps https://redux-saga.js.org/
+* [acdlite/recompose](https://github.com/acdlite/recompose):A React utility belt for function components and higher-order components.
+* [jamiebuilds/react-loadable](https://github.com/jamiebuilds/react-loadable):⏳ A higher order component for loading components with promises.
 
 ## UI
 
@@ -239,6 +245,7 @@
 * [reactjs/react-basic](https://github.com/reactjs/react-basic):A description of the conceptual model of React without implementation burden.
 * [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
 * [piotrwitek/react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide):The complete guide to static typing in "React & Redux" apps using TypeScript https://piotrwitek.github.io/react-redux-typescript-guide/
+* [streamich/react-use](https://github.com/streamich/react-use):React Hooks — future of React 👍 react-use http://streamich.github.io/react-use
 
 ## 项目
 
@@ -249,6 +256,7 @@
 * [taikongfeizhu/webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
 * [duxianwei520/react](https://github.com/duxianwei520/react):一个react+redux+webpack+ES6+antd的SPA的后台管理底层框架
 * [fbsamples/f8app](https://github.com/fbsamples/f8app):Source code of the official F8 app of 2017, powered by React Native and other Facebook open source projects. http://makeitopen.com
+* [EleTeam/Shop-React-Native](https://github.com/EleTeam/Shop-React-Native):EleTeam开源项目 - 电商全套解决方案之 React Native 版 - Shop-React-Native。一个类似京东/天猫/淘宝的商城，有对应的服务端支持，由EleTeam团队维护！
 
 ## 参考
 

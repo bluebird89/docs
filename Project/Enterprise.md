@@ -7,7 +7,7 @@
 
 - [atlassian](https://www.atlassian.com/)
     -   stride
-    -   Jira：项目管理
+    -   [Jira](https://www.atlassian.com/software/jira)：敏捷开发，处理项目中的多个步骤,用于规划和跟踪工作，并确定优先级，处理产品发布，产品交付后监控性能
     -   bitbucket：git仓库
     -   confluence
     -   trello：任务面板
@@ -16,6 +16,7 @@
 - [Jfrog](https://jfrog.com)
 - [jgraph/drawio](https://github.com/jgraph/drawio):Source to www.draw.io
 * [apereo/cas](https://github.com/apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
+* [ZenHub](https://www.zenhub.com):Easier than Jira. More powerful than Trello. Built for developers.
 
 ## 企业级应用
 
