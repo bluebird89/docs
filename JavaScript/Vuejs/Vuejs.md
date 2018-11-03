@@ -156,6 +156,43 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [ElemeFE/vue-amap](https://github.com/ElemeFE/vue-amap):🌍 基于 Vue 2.x 和高德地图的地图组件 https://elemefe.github.io/vue-amap/
 * [kazupon/vue-i18n](https://github.com/kazupon/vue-i18n):🌐 Internationalization plugin for Vue.js https://kazupon.github.io/vue-i18n/
 
+## 框架
+
+* [vuetifyjs/vuetify](https://github.com/vuetifyjs/vuetify):Material Component Framework for Vue.js 2 https://vuetifyjs.com
+* [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
+
+### [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
+
+🛠️ Standard Tooling for Vue.js Development https://cli.vuejs.org/
+
+```sh
+npm install -g @vue/cli
+```
+
+## UI
+
+* [vuetifyjs/vuetify](https://github.com/vuetifyjs/vuetify):Material Component Framework for Vue.js 2 https://vuetifyjs.com
+* [Quasar](https://github.com/quasarframework/quasar)
+* [Element](https://github.com/ElemeFE/element)
+* [Vue Material](https://github.com/vuematerial/vue-material)
+* [Keen-UI](https://github.com/JosephusPaye/Keen-UI)
+* [Buefy](https://github.com/buefy/buefy)
+* [Bootstrap Vue](https://github.com/bootstrap-vue/bootstrap-vue):BootstrapVue provides one of the most comprehensive implementations of Bootstrap 4 components and grid system for Vue.js and with extensive and automated WAI-ARIA accessibility markup. https://bootstrap-vue.js.org
+* [Muse-UI](https://github.com/at-ui/at-ui)
+* [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
+* [iview/iview](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
+* [Uiv](https://github.com/wxsms/uiv)
+* [Onsen UI+Vue](https://onsen.io/v2/guide/vue/)
+* [Semantic UI+Vue](https://semantic-ui-vue.github.io/)
+* [Fish-UI](https://github.com/myliang/fish-ui)
+* [ElemeFE/mint-ui](https://github.com/ElemeFE/mint-ui/):Mobile UI elements for Vue.js http://mint-ui.github.io/#!/en
+* [Framework7 Vue](https://framework7.io/vue/)
+* [didi/cube-ui](https://github.com/didi/cube-ui):🔶 A fantastic mobile ui lib implement by Vue https://didi.github.io/cube-ui/
+* [Vueblu](https://github.com/chenz24/vue-blu)
+* [Ant Design Vue](https://github.com/okoala/vue-antd)
+* [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
+* [youzan/vant](https://github.com/youzan/vant):Lightweight Mobile UI Components built on Vue https://youzan.github.io/vant
+
 ## 参考
 
 * [Vue.js——60分钟快速入门](http://www.cnblogs.com/keepfool/p/5619070.html)
@@ -200,40 +237,4 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [halfrost/vue-objccn](https://github.com/halfrost/vue-objccn):🔥 用 Vue.js 开发的跨三端应用 / Use Vue.js to develop a cross-platform full stack application
 * [SimulatedGREG/electron-vue](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack.
 * [vuejs/vue-devtools](https://github.com/vuejs/vue-devtools):Chrome devtools extension for debugging Vue.js applications.
-
-### [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
-
-🛠️ Standard Tooling for Vue.js Development https://cli.vuejs.org/
-
-```sh
-npm install -g @vue/cli
-```
-
-## UI
-
-* [vuetifyjs/vuetify](https://github.com/vuetifyjs/vuetify):Material Component Framework for Vue.js 2 https://vuetifyjs.com
-* [Quasar](https://github.com/quasarframework/quasar)
-* [Element](https://github.com/ElemeFE/element)
-* [Vue Material](https://github.com/vuematerial/vue-material)
-* [Keen-UI](https://github.com/JosephusPaye/Keen-UI)
-* [Buefy](https://github.com/buefy/buefy)
-* [Bootstrap Vue](https://github.com/bootstrap-vue/bootstrap-vue)
-* [Muse-UI](https://github.com/at-ui/at-ui)
-* [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
-* [iview/iview](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
-* [Uiv](https://github.com/wxsms/uiv)
-* [Onsen UI+Vue](https://onsen.io/v2/guide/vue/)
-* [Semantic UI+Vue](https://semantic-ui-vue.github.io/)
-* [Fish-UI](https://github.com/myliang/fish-ui)
-* [ElemeFE/mint-ui](https://github.com/ElemeFE/mint-ui/):Mobile UI elements for Vue.js http://mint-ui.github.io/#!/en
-* [Framework7 Vue](https://framework7.io/vue/)
-* [didi/cube-ui](https://github.com/didi/cube-ui):🔶 A fantastic mobile ui lib implement by Vue https://didi.github.io/cube-ui/
-* [Vueblu](https://github.com/chenz24/vue-blu)
-* [Ant Design Vue](https://github.com/okoala/vue-antd)
-* [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
-* [youzan/vant](https://github.com/youzan/vant):Lightweight Mobile UI Components built on Vue https://youzan.github.io/vant
-
-## 框架
-
-* [vuetifyjs/vuetify](https://github.com/vuetifyjs/vuetify):Material Component Framework for Vue.js 2 https://vuetifyjs.com
-* [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
+* [vuejs/vue-class-component](https://github.com/vuejs/vue-class-component):ES / TypeScript decorator for class-style Vue components.

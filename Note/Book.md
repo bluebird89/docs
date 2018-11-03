@@ -815,3 +815,4 @@ kindle
 * [threerocks/studyFiles](https://github.com/threerocks/studyFiles):一些经典且高质量的电子书分享
 * [it-ebooks](https://github.com/it-ebooks)
 * [it-ebooks/kindle114-rsrc-gathering](https://github.com/it-ebooks/kindle114-rsrc-gathering):📚 Kindle114 资源集结计划 http://kindle115.com
+* [waylau/books-collection](https://github.com/waylau/books-collection):To the programmer's open source and free books collection 给程序员的开源、免费书籍收集，图书集合。

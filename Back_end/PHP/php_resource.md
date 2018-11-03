@@ -110,6 +110,7 @@
       - [rmccue/Requests](https://github.com/rmccue/Requests):Requests for PHP is a humble HTTP request library. It simplifies how you interact with other sites and takes away all your worries. http://requests.ryanmccue.info/
       - [Retrofit](https://github.com/tebru/retrofit-php): 一个能轻松创建REST API客户端的库
       - [zend-diactoros](https://github.com/zendframework/zend-diactoros): PSR-7 HTTP消息实现
+      - [kitetail/zttp](https://github.com/kitetail/zttp):A developer-experience focused HTTP client, optimized for most common use cases.
 * 爬虫 Scraping 用于网站爬取的库
       - [Embed](https://github.com/oscarotero/Embed):  一个从web服务或网页中提取的信息的工具
       - [Goutte](https://github.com/FriendsOfPHP/Goutte): 一个简单的web爬取器
@@ -198,15 +199,15 @@
 
 ## 持续集成 Continuous Integration
 
-* (https://circleci.com)[CircleCI]: 一个持续集成平台
-* (https://about.gitlab.com/gitlab-ci/)[GitlabCi]: 使用GitLab CI测试、构建、部署你的代码，像TravisCI
-* (https://jenkins.io/index.html)[Jenkins]: 一个(http://jenkins-php.org/index.html)[PHP支持]的持续集成平台
-* (https://github.com/jolicode/JoliCi)[JoliCi]: 一个用PHP编写的由Docker支持的持续集成的客户端
-* (https://www.phptesting.org/)[PHPCI]: 一个PHP的开源的持续集成平台
-* (https://semaphoreci.com/)[SemaphoreCI]: 一个开放源码和私人项目的持续集成平台
-* (https://app.shippable.com/)[Shippable]: 一个基于开源和私人项目持续集成平台的docker
-* (http://sismo.sensiolabs.org/)[Sismo]: 一个持续测试的服务库
-* (https://travis-ci.org/)[Travis CI]: 一个持续集成平台
+* CircleCI](https://circleci.com)[: 一个持续集成平台
+* [GitlabCi](https://about.gitlab.com/gitlab-ci/): 使用GitLab CI测试、构建、部署你的代码，像TravisCI
+* [Jenkins](https://jenkins.io/index.html): 一个(http://jenkins-php.org/index.html)[PHP支持]的持续集成平台
+* [JoliCi](https://github.com/jolicode/JoliCi): 一个用PHP编写的由Docker支持的持续集成的客户端
+* [PHPCI](https://www.phptesting.org/): 一个PHP的开源的持续集成平台
+* [SemaphoreCI](https://semaphoreci.com/): 一个开放源码和私人项目的持续集成平台
+* [Shippable](https://app.shippable.com/): 一个基于开源和私人项目持续集成平台的docker
+* [Sismo](http://sismo.sensiolabs.org/): 一个持续测试的服务库
+* [Travis CI](https://travis-ci.org/): 一个持续集成平台
 * [Wercker](http://www.wercker.com/): 一个持续集成平台
 
 ## 文档生成
@@ -646,7 +647,7 @@
 * PHP网站 PHP Websites PHP相关的有用的网站
       - (https://nomadphp.com/)[Nomad PHP]: 一个在线PHP学习资源
       - (https://phpbestpractices.org/)[PHP Best Practices]: 一个PHP最佳实践指南
-      - (http://www.php-fig.org/)[PHP FIG]: PHP框架交互组
+      - [PHP FIG](http://www.php-fig.org/): PHP框架交互组
       - (https://php-mentoring.org/)[PHP Mentoring]: 点对点PHP导师组织
       - (http://phpsecurity.readthedocs.io/en/latest/index.html)[PHP Security]: 一个PHP安全指南
       - (http://www.phptherightway.com/)[PHP The Right Way]: 一个PHP最佳实践的快速指引手册

@@ -13,3 +13,12 @@ WordPress, Git-ified. Synced via SVN every 15 minutes, including branches and ta
 * 设计：博客网站给读者的第一印象就是它的设计。注意好的设计应该包括重要的元素，比如搜索功能，Feed 订阅图标，导航菜单，并且便于阅读。你可以从这里挑选一些精选的 WordPress 主题。
 * 开始写博客：告诉世界你要开始写博客了，说说你要写的内容，介绍一下你自己。要和访问者进行交流，你可以使用 Wp-contact form 插件来建立一个联系页面。
 * 同时，别忘了创建 about 页面，因为访问者想了解你更多一些。
+
+## 参考
+
+* [kinsta](https://kinsta.com/):https://kinsta.com/resources/
+
+## 工具
+
+* [Varying-Vagrant-Vagrants/VVV](https://github.com/Varying-Vagrant-Vagrants/VVV):An open source Vagrant configuration for developing with WordPress https://varyingvagrantvagrants.org
+* [WordPress/gutenberg](https://github.com/WordPress/gutenberg):Printing since 1440. Development hub for the editor focus in core. Plugin is available from the official WordPress repository. https://wordpress.org/plugins/gutenberg/

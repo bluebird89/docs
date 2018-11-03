@@ -90,6 +90,8 @@ NoSQL主要用于解决以下几种问题
 - [Meituan-Dianping/SQLAdvisor](https://github.com/Meituan-Dianping/SQLAdvisor)输入SQL，输出索引优化建议
 - [HVF/franchise](https://github.com/HVF/franchise)：🍟 a notebook sql client. what you get when have a lot of sequels. https://franchise.cloud
 - [greenplum-db/gpdb](https://github.com/greenplum-db/gpdb):Greenplum Database http://greenplum.org
+* [realm/realm-js](https://github.com/realm/realm-js):Realm is a mobile database: an alternative to SQLite & key-value stores https://realm.io
+* [orbitdb/orbit-db](https://github.com/orbitdb/orbit-db):Peer-to-Peer Databases for the Decentralized Web
 
 ## 参考
 

@@ -31,6 +31,7 @@
 * [deanoemcke/thegreatsuspender](https://github.com/deanoemcke/thegreatsuspender):A chrome extension for suspending all tabs to free up memory
 * [philc/vimium](The hacker's browser.)The hacker's browser.
 * User-Agent Switcher for Chrome
+* [gongjunhao/seckill](https://github.com/gongjunhao/seckill):Chrome浏览器 抢购、秒杀插件，秒杀助手，定时自动点击
 
 ```
 Navigating the current page:
