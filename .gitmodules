@@ -97,6 +97,8 @@
 [submodule "shell/awesome-shell"]
 	path = shell/awesome-shell
 	url = git@github.com:alebcay/awesome-shell.git
+	path = Shell/awesome-shell
+	url = git@github.com:alebcay/awesome-shell.git
 [submodule "shell/command-line-text-processing"]
 	path = shell/command-line-text-processing
 	url = git@github.com:learnbyexample/Command-line-text-processing.git
