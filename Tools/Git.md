@@ -1007,6 +1007,7 @@ git push --force origin myfeature
 
 * [awesome-actions](https://github.com/sdras/awesome-actions):A curated list of awesome actions to use on GitHub
 * [gitalk/gitalk](https://github.com/gitalk/gitalk):Gitalk is a modern comment component based on Github Issue and Preact. https://gitalk.github.io
+* [desktop/desktop](https://github.com/desktop/desktop):Simple collaboration from your desktop https://desktop.github.com
 
 ### 合并commit选项
 

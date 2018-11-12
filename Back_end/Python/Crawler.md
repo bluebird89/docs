@@ -42,6 +42,8 @@ http://www.runoob.com/xpath/xpath-tutorial.html
 ## 工具
 
 * [bupt1987/html-parser](https://github.com/bupt1987/html-parser):php html parser，类似与PHP Simple HTML DOM Parser，但是比它快好几倍
+* [IonicaBizau/scrape-it](https://github.com/IonicaBizau/scrape-it):🔮 A Node.js scraper for humans.  https://ionicabizau.net/blog/30-how-to-write-a-web-scraper-in-nodejs
+* [PuerkitoBio/gocrawl](https://github.com/PuerkitoBio/gocrawl):Polite, slim and concurrent web crawler.
 
 ## 实例
 

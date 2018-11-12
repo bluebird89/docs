@@ -98,6 +98,7 @@
 ## i18n
 
 * [lingui/js-lingui](https://github.com/lingui/js-lingui):🌍📖 A readable, automated, and optimized (5 kb) internationalization for JavaScript and React https://lingui.js.org/
+* [i18next/react-i18next](https://github.com/i18next/react-i18next):Internationalization for react done right. Using the i18next i18n ecosystem. https://react.i18next.com/
 
 ## SPA
 

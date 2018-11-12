@@ -186,6 +186,7 @@
 * [fejes713/30-seconds-of-interviews](https://github.com/fejes713/30-seconds-of-interviews):A curated collection of common interview questions to help you prepare for your next interview. https://30secondsofinterviews.org
 * [30-seconds/30-seconds-of-interviews](https://github.com/30-seconds/30-seconds-of-interviews):A curated collection of common interview questions to help you prepare for your next interview. https://30secondsofinterviews.org
 * [imhuay/Algorithm_Interview_Notes-Chinese](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese):2018/2019/校招/春招/秋招/算法/机器学习(Machine Learning)/深度学习(Deep Learning)/自然语言处理(NLP)/C/C++/Python/面试笔记
+* [frank-lam/2019_campus_apply](https://github.com/frank-lam/2019_campus_apply):🚀 Full Stack Developer Tutorial，后台技术栈/全栈开发/架构师之路，秋招/春招/校招/面试。 from zero to hero.
 
 ## 工具
 

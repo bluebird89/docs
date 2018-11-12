@@ -177,29 +177,7 @@ websocketd --port=8080 ./count.sh // 建立server
 
 * [dgraph-io/badger](https://github.com/dgraph-io/badger):Fast key-value DB in Go. https://open.dgraph.io/post/badger/
 * [DATA-DOG/go-sqlmock](https://github.com/DATA-DOG/go-sqlmock):Sql mock driver for golang to test database interactions
-
-## 教程
-
-* [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
-* [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源免费图书(开发中...)https://github.com/chai2010/advanced-go-programming-book
-* [astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
-* [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
-- [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. https://iris-go.com
-- [https://songjiayang.gitbooks.io](https://songjiayang.gitbooks.io)
-- [Go语言入门](https://www.yiibai.com/go/go_start.html)
-- [harlow/go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
-- [astaxie/gopkg](https://github.com/astaxie/gopkg):example for the go pkg's function
-* [astaxie/go-best-practice](https://github.com/astaxie/go-best-practice):Trying to complete over 100 projects in various categories in golang.
-* [Unknwon/go-fundamental-programming](https://github.com/Unknwon/go-fundamental-programming):《Go 编程基础》是一套针对 Google 出品的 Go 语言的视频语音教程，主要面向新手级别的学习者。
-
-## 扩展
-
-- [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
-- [grafana/grafana](https://github.com/grafana/grafana)The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
-- [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
-- [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
-* [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
-* [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
+* [mongodb/mongo-go-driver](https://github.com/mongodb/mongo-go-driver):The Go driver for MongoDB
 
 ## 工具
 
@@ -232,6 +210,7 @@ websocketd --port=8080 ./count.sh // 建立server
 * [takama/daemon](https://github.com/takama/daemon):A daemon package for use with Go (golang) services with no dependencies
 * [golang/protobuf](https://github.com/golang/protobuf):Go support for Google's protocol buffers
 * [TrueFurby/go-callvis](https://github.com/TrueFurby/go-callvis):Visualize call graph of a Go program using dot format. https://truefurby.github.io/go-callvis
+* [dgryski/go-perfbook](https://github.com/dgryski/go-perfbook):Thoughts on Go performance optimization
 
 ## 参考
 
@@ -244,6 +223,29 @@ websocketd --port=8080 ./count.sh // 建立server
 ## 项目
 
 * [hajimehoshi/ebiten](https://github.com/hajimehoshi/ebiten):A dead simple 2D game library in Go https://hajimehoshi.github.io/ebiten/
+
+## 教程
+
+* [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
+* [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源免费图书(开发中...)https://github.com/chai2010/advanced-go-programming-book
+* [astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
+* [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
+- [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. https://iris-go.com
+- [https://songjiayang.gitbooks.io](https://songjiayang.gitbooks.io)
+- [Go语言入门](https://www.yiibai.com/go/go_start.html)
+- [harlow/go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
+- [astaxie/gopkg](https://github.com/astaxie/gopkg):example for the go pkg's function
+* [astaxie/go-best-practice](https://github.com/astaxie/go-best-practice):Trying to complete over 100 projects in various categories in golang.
+* [Unknwon/go-fundamental-programming](https://github.com/Unknwon/go-fundamental-programming):《Go 编程基础》是一套针对 Google 出品的 Go 语言的视频语音教程，主要面向新手级别的学习者。
+
+## 扩展
+
+- [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
+- [grafana/grafana](https://github.com/grafana/grafana)The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
+- [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
+- [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
+* [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
+* [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
 
 ## 图书
 
