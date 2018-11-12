@@ -35,3 +35,7 @@ pip install IPython
 * [深度学习框架Tensorflow学习与应用](https://www.bilibili.com/video/av20542427)
 * [open-source-for-science/TensorFlow-Course](https://github.com/open-source-for-science/TensorFlow-Course):Simple and ready-to-use tutorials for TensorFlow
 * [sjchoi86/Tensorflow-101](https://github.com/sjchoi86/Tensorflow-101):TensorFlow Tutorials
+
+## 工具
+
+* [tensorflow/tfjs-models](https://github.com/tensorflow/tfjs-models):Pretrained models for TensorFlow.js https://js.tensorflow.org

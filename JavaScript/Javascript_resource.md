@@ -43,6 +43,7 @@
 * [ajaxorg/ace](https://github.com/ajaxorg/ace):Ace (Ajax.org Cloud9 Editor) https://ace.c9.io
 * [ianstormtaylor/slate](https://github.com/ianstormtaylor/slate):A completely customizable framework for building rich text editors. http://slatejs.org
 * [basecamp/trix](https://github.com/basecamp/trix):A rich text editor for everyday writing https://trix-editor.org/
+* [fex-team/ueditor](https://github.com/fex-team/ueditor):rich text 富文本编辑器 http://ueditor.baidu.com
 
 ## 日期
 
@@ -253,6 +254,10 @@
 ## logger
 
 * [klauscfhq/signale](https://github.com/klauscfhq/signale):👋 Hackable console logger
+
+## 测试
+
+* [intuit/karate](https://github.com/intuit/karate):Web-Services Testing Made Simple
 
 ## 代码在线分享工具
 

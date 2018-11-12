@@ -698,14 +698,22 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 * [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 
+## Proxy
+
+* [OptimalBits/redbird](https://github.com/OptimalBits/redbird):A modern reverse proxy for node
+
 ## 框架
 
 * [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications
 
-## 面试
-
-* [jimuyouyou/node-interview-questions](https://github.com/jimuyouyou/node-interview-questions)
-
 ## 数据库
 
 * [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis):redis client for node http://redis.js.org/
+
+## HTTP
+
+* [expressjs/morgan](https://github.com/expressjs/morgan):HTTP request logger middleware for node.js
+
+## 面试
+
+* [jimuyouyou/node-interview-questions](https://github.com/jimuyouyou/node-interview-questions)

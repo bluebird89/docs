@@ -160,3 +160,4 @@ zsh_completion
 ## 工具
 
 * [Homebrew/homebrew-core](https://github.com/Homebrew/homebrew-core):🍻 Default formulae for the missing package manager for macOS https://brew.sh
+* [Homebrew/homebrew-cask](https://github.com/Homebrew/homebrew-cask):🍻 A CLI workflow for the administration of macOS applications distributed as binaries https://brew.sh

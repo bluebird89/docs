@@ -8,6 +8,7 @@ The Swift Programming Language https://swift.org/
 * [thoughtbot/Argo](https://github.com/thoughtbot/Argo):Functional JSON parsing library for Swift https://thoughtbot.com/open-source
 * [vapor/vapor](https://github.com/vapor/vapor):💧 A server-side Swift web framework. https://vapor.codes
 * [mxcl/PromiseKit](https://github.com/mxcl/PromiseKit):Promises for Swift & ObjC
+* [bizz84/SwiftyStoreKit](https://github.com/bizz84/SwiftyStoreKit):Lightweight In App Purchases Swift framework for iOS 8.0+, tvOS 9.0+ and macOS 10.10+
 
 ## 参考
 

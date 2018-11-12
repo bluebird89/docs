@@ -315,13 +315,13 @@ kubectl delete deployments hello-minikube1
 * [kubernetes-sigs/kustomize](https://github.com/kubernetes-sigs/kustomize):Customization of kubernetes YAML configurations
 * [weaveworks/flux](https://github.com/weaveworks/flux):The GitOps Kubernetes operator
 * [kubernetes-client/javascript](https://github.com/kubernetes-client/javascript):Javascript client
-[coreos/flannel](https://github.com/coreos/flannel):flannel is a network fabric for containers, designed for Kubernetes
+* [coreos/flannel](https://github.com/coreos/flannel):flannel is a network fabric for containers, designed for Kubernetes
 
 ## 资源
 
 * [ramitsurana/awesome-kubernetes](https://github.com/ramitsurana/awesome-kubernetes):A curated list for awesome kubernetes sources 🚢🎉 https://ramitsurana.github.io/awesome-kubernetes/
 * [gjmzj/kubeasz](https://github.com/gjmzj/kubeasz):使用Ansible脚本安装K8S集群，介绍组件交互原理，方便直接，不受国内网络环境影响 https://github.com/gjmzj/kubeasz
-
+* [kubeflow/kubeflow](https://github.com/kubeflow/kubeflow):Machine Learning Toolkit for Kubernetes
 <http://violetgo.com/blogs/>
 <http://www.winseliu.com/>
 <http://blog.csdn.net/qq1010885678/article/details/48832067>
