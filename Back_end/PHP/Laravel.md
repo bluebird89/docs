@@ -1,6 +1,6 @@
-# [laravel/laravel](https://github.com/laravel/framework)
+# [laravel/laravel](https://github.com/laravel/laravel)
 
-A PHP Framework For Web Artisans https://laravel.com
+A PHP Framework For Web Artisans https://laravel.com  [laravel/framework](https://github.com/laravel/framework)
 
 ## 环境
 
@@ -1447,6 +1447,7 @@ $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 * [overtrue/socialite](https://github.com/overtrue/socialite)::octocat: Socialite is an OAuth2 Authentication tool. It is inspired by laravel/socialite, you can easily use it without Laravel.
 * [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
 * [laravel/telescope](https://github.com/laravel/telescope):provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more
+* [overtrue/laravel-query-logger](https://github.com/overtrue/laravel-query-logger):📝 A dev tool to log all queries for laravel application.
 
 ## 参考
 
