@@ -33,5 +33,5 @@ php bin/console server:start 0.0.0.0:8000
 * [](https://github.com/javiereguiluz/EasyAdminBundle)
 * [](http://symfony.com/legacy/doc/jobeet/1_2/zh_CN/01?orm=Propel)
 * [](http://www.newlifeclan.com/symfony/)
-* [](https://github.com/symfony/symfony-docs)
+* [symfony/symfony-docs](https://github.com/symfony/symfony-docs):The Symfony documentation https://symfony.com/doc
 * [](https://symfony.com/doc/current/setup.html)

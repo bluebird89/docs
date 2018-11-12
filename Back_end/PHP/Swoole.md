@@ -60,6 +60,7 @@ PHP的各项基本技能
 
 * [Tencent/tsf](https://github.com/Tencent/tsf):coroutine and Swoole based php server framework in tencent
 * [bixuehujin/blink](https://github.com/bixuehujin/blink):A high performance web framework and application server in PHP. https://docs.rethinkphp.com/blink-framework/v0.4/zh-CN/
+* [SwooleDistributed/SwooleDistributed](https://github.com/SwooleDistributed/SwooleDistributed):swoole 分布式全栈框架
 
 ## 项目
 

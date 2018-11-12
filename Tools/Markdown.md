@@ -957,6 +957,7 @@ Markdown 语法： **Example:**
 * [aaronsw/html2text](https://github.com/aaronsw/html2text):Convert HTML to Markdown-formatted text. http://www.aaronsw.com/2002/html2text/
 * [benweet/stackedit](https://github.com/benweet/stackedit):In-browser Markdown editor https://stackedit.io/
 * [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
+* [showdownjs/showdown](https://github.com/showdownjs/showdown):A bidirectional Markdown to HTML to Markdown converter written in Javascript http://www.showdownjs.com/
 
 ## 参考
 
