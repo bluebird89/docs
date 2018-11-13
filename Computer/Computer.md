@@ -128,7 +128,7 @@
 
 * 清华信息科学技术学院
 
-## 参考
+## 课程
 
 * [DeathKing/Learning-SICP](https://github.com/DeathKing/Learning-SICP):MIT视频公开课《计算机程序的构造和解释》中文化项目及课程学习资料搜集。 https://learningsicp.github.io
 * [【计算机-合集】哈佛大学计算机核心课程](https://www.bilibili.com/video/av19302731)
@@ -136,3 +136,4 @@
 * [Composing Programs](http://www.composingprograms.com/): a free online introduction to programming and computer science.
 * [CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes):📚 Computer Science Learning Notes
 * [sjtu-se-courseware/sjtu-se-courseware](https://github.com/sjtu-se-courseware/sjtu-se-courseware):上海交大软件学院课件
+* [mbinary/USTC-CS-Courses-Resource](https://github.com/mbinary/USTC-CS-Courses-Resource):❤️中国科学技术大学计算机学院课程资源 https://mbinary.coding.me/ustc-cs/

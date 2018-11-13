@@ -17,3 +17,4 @@ Mac：Safari浏览器 > 偏好设置 > 高级 > 在菜单栏中显示“开发�
 
 * [CocoaDebug/CocoaDebug](https://github.com/CocoaDebug/CocoaDebug):🚀 iOS Debugging Tool
 * [tumtumtum/StreamingKit](https://github.com/tumtumtum/StreamingKit):A fast and extensible gapless AudioPlayer/AudioStreamer for OSX and iOS (iPhone, iPad)
+* [tbodt/ish](https://github.com/tbodt/ish):Linux shell for iOS https://ish.app

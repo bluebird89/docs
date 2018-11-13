@@ -1,6 +1,6 @@
-# 说明
+# [jekyll/jekyll](https://github.com/jekyll/jekyll)
 
-static website generator，搭建静态博客，通过markdown文件自动生成html文件。Github Pages即靠Jekyll实现的。[官网](https://jekyllrb.com)
+🌐 Jekyll is a blog-aware static site generator in Ruby https://jekyllrb.com static website generator，搭建静态博客，通过markdown文件自动生成html文件。Github Pages即靠Jekyll实现的。[官网](https://jekyllrb.com)
 
 # install:
 

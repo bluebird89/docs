@@ -698,6 +698,10 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 * [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 
+## Error
+
+* [AriaMinaei/pretty-error](https://github.com/AriaMinaei/pretty-error):See node.js errors with less clutter
+
 ## Proxy
 
 * [OptimalBits/redbird](https://github.com/OptimalBits/redbird):A modern reverse proxy for node
@@ -713,6 +717,11 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 ## HTTP
 
 * [expressjs/morgan](https://github.com/expressjs/morgan):HTTP request logger middleware for node.js
+
+## Logger
+
+* [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
+
 
 ## 面试
 

@@ -75,6 +75,7 @@ NoSQL主要用于解决以下几种问题
 * [vrana/adminer](https://github.com/vrana/adminer):Database management in a single PHP file https://www.adminer.org/
 * [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. http://vitess.io
 * [getredash/redash](https://github.com/getredash/redash):Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. http://redash.io/
+* [XiaoMi/soar](https://github.com/XiaoMi/soar):SQL Optimizer And Rewriter
 
 ## 数据库
 
