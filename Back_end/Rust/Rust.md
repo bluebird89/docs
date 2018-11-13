@@ -33,3 +33,4 @@ rustc --version
 
 * [rustwasm/wasm-pack](https://github.com/rustwasm/wasm-pack):📦✨ your favorite rust -> wasm workflow tool! https://rustwasm.github.io/wasm-pack/
 * [clap-rs/clap](https://github.com/clap-rs/clap):A full featured, fast Command Line Argument Parser for Rust https://clap.rs
+* [nickel-org/nickel.rs](https://github.com/nickel-org/nickel.rs):An expressjs inspired web framework for Rust http://nickel-org.github.io/

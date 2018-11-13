@@ -173,11 +173,19 @@ websocketd --port=8080 ./count.sh // 建立server
 
 * [stretchr/testify](https://github.com/stretchr/testify):A toolkit with common assertions and mocks that plays nicely with the standard library
 
+## logger
+
+* [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
+
 ## 数据库
 
 * [dgraph-io/badger](https://github.com/dgraph-io/badger):Fast key-value DB in Go. https://open.dgraph.io/post/badger/
 * [DATA-DOG/go-sqlmock](https://github.com/DATA-DOG/go-sqlmock):Sql mock driver for golang to test database interactions
 * [mongodb/mongo-go-driver](https://github.com/mongodb/mongo-go-driver):The Go driver for MongoDB
+
+## Http
+
+* [xtaci/kcp-go](https://github.com/xtaci/kcp-go):A Production-Grade Reliable-UDP Library for golang
 
 ## 工具
 
@@ -211,6 +219,7 @@ websocketd --port=8080 ./count.sh // 建立server
 * [golang/protobuf](https://github.com/golang/protobuf):Go support for Google's protocol buffers
 * [TrueFurby/go-callvis](https://github.com/TrueFurby/go-callvis):Visualize call graph of a Go program using dot format. https://truefurby.github.io/go-callvis
 * [dgryski/go-perfbook](https://github.com/dgryski/go-perfbook):Thoughts on Go performance optimization
+* [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. https://shopify.github.io/sarama
 
 ## 参考
 

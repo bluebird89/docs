@@ -176,6 +176,7 @@ Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，
 
 * [rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework):Metasploit Framework https://www.metasploit.com/
 * [sqlmapproject/sqlmap](https://github.com/sqlmapproject/sqlmap):Automatic SQL injection and database takeover tool http://sqlmap.org
+* [s0md3v/XSStrike](https://github.com/s0md3v/XSStrike):Most advanced XSS detection suite. https://somdev.me/XSStrike/
 
 ## 参考
 

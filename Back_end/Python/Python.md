@@ -1430,7 +1430,6 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 4.参加培训辅导（仔细听课、跟上课堂学习，有问题做记录，课后查阅资料或请求他人）
 5.善于记录笔记，不断总结，查漏补缺。
 
-
 ## 教程
 
 * [jackfrued/Python-100-Days](https://github.com/jackfrued/Python-100-Days):Python - 100天从新手到大师

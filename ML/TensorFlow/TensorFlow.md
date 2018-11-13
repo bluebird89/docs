@@ -16,6 +16,10 @@ source my-venv/bin/activate
 pip install IPython
 ```
 
+## 项目
+
+* [google-research/bert](https://github.com/google-research/bert):TensorFlow code and pre-trained models for BERT https://arxiv.org/abs/1810.04805
+
 ## 参考
 
 * [aymericdamien/TensorFlow-Examples](https://github.com/aymericdamien/TensorFlow-Examples):TensorFlow Tutorial and Examples for Beginners with Latest APIs https://tensorflow.org
