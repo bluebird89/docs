@@ -12,6 +12,7 @@
 * Vex：可以在虚拟环境中执行命令。[官网](https://github.com/sashahart/vex)
 * virtualenv：创建独立 Python 环境的工具。[官网](https://pypi.python.org/pypi/virtualenv)
 * virtualenvwrapper：virtualenv 的一组扩展。[官网](https://pypi.python.org/pypi/virtualenvwrapper)
+* [pypa/pipenv](https://github.com/pypa/pipenv):Python Development Workflow for Humans. https://docs.pipenv.org/
 
 ## 包管理
 

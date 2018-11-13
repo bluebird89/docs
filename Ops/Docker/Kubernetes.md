@@ -316,6 +316,7 @@ kubectl delete deployments hello-minikube1
 * [weaveworks/flux](https://github.com/weaveworks/flux):The GitOps Kubernetes operator
 * [kubernetes-client/javascript](https://github.com/kubernetes-client/javascript):Javascript client
 * [coreos/flannel](https://github.com/coreos/flannel):flannel is a network fabric for containers, designed for Kubernetes
+* [argoproj/argo](https://github.com/argoproj/argo):Container-native workflows for Kubernetes. https://argoproj.github.io
 
 ## 资源
 

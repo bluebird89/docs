@@ -40,6 +40,7 @@ superShout() {
 * [quicktype/quicktype](https://github.com/quicktype/quicktype):Generate types and converters from JSON, Schema, and GraphQL https://quicktype.io
 * [TypeStrong/ts-loader](https://github.com/TypeStrong/ts-loader):TypeScript loader for webpack
 * [palantir/tslint](https://github.com/palantir/tslint):🚦 An extensible linter for the TypeScript language http://palantir.github.io/tslint/
+* [AssemblyScript/assemblyscript](https://github.com/AssemblyScript/assemblyscript):A TypeScript to WebAssembly compiler 🚀 https://assemblyscript.org
 
 ## 参考
 
