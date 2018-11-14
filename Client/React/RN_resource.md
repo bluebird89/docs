@@ -145,6 +145,10 @@
 
 * [facebook/metro](https://github.com/facebook/metro):🚇 The JavaScript bundler for React Native. https://facebook.github.io/metro
 
+## 地图
+
+* [yezihaohao/react-qmap](https://github.com/yezihaohao/react-qmap):💡react腾讯地图开源组件 https://cheng_haohao.gitee.io/reactqmap
+
 ## 路由
 
 * [reactjs/redux](https://github.com/reactjs/redux):Predictable state container for JavaScript apps http://redux.js.org

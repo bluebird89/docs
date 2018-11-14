@@ -1,7 +1,5 @@
 # 文档工具
 
-* [腾讯文档](https://docs.qq.com)
-
 ## [jgm/pandoc](https://github.com/jgm/pandoc)
 
 Universal markup converter http://johnmacfarlane.net/pandoc
@@ -12,6 +10,88 @@ John MacFarlane开发的标记语言转换工具，可实现不同标记语言�
 ```
 pandoc WEB.md -o web.docx
 ```
+
+##  GitBook安装
+
+npm install gitbook-cli -g
+
+- gitbook --version：查看当前使用的版本
+- gitbook ls：系统存在的 gitbook 版本
+- gitbook ls-remote：所有 gitbook 版本
+- gitbook fetch：下载对应的 gitbook 版本
+- gitbook current：当前目录使用的 gitbook 版本
+- 配置文件book.json：
+
+# 使用
+
+- gitbook init
+
+  <folder> 创建项目，生成：</folder>
+
+  - README.md
+  - SUMMARY.md:定义书籍的章节的，用来生成目录
+
+    ```
+      # Summary
+      * [Introduction](README.md)
+      # 一级分类，不显示，会以横线分隔，相当于注释
+      * [Introduction](part1/README.md)
+      * [Part1 Section 1](part1/section-1.md)
+      * [Part1 Section 2](part1/subsection-x/README.md)
+          * [Part1 Section 2-1](part1/subsection-x/subsection-x-1.md)
+          * [Part1 Section 2-2](part1/subsection-x/subsection-x-2.md)
+      # 一级分类，不显示，会以横线分隔，相当于注释
+      * [Introduction](part2/README.md)
+      * [part2 Section 1](part2/section-1.md)
+      * 未完成的时候
+          * [part2 Section 2-1](part2/subsection-x/subsection-x-1.md)
+          * [part2 Section 2-2](part2/subsection-x/subsection-x-2.md)
+      ## 二级分类，显示，不可点
+      * An article in part 2
+      ### 三级分类，显示，不可点，和二级效果一致
+      * An article in part 3
+      # 一级分类，不显示，会以横线分隔
+      * An article in an untitled part
+    ```
+
+    如果展示章节硬编码,修改配置文件
+
+    "pluginsConfig": {
+
+    ```
+     "theme-default": {
+         "showLevel": true
+     }
+    ```
+
+    }
+
+- gitbook serve 运行
+- gitbook build 编译书籍
+
+
+## 笔记
+
+带标签功能，并且可以聚合统计;概念用文档整理，结构化用思维导图（不宜太详细）
+
+-   [Paper](http://www.fiftythree.com/):优雅，美观，做笔记，记录灵感
+-   [语雀](https://www.yuque.com)
+-   [Google文档](https://docs.google.com/document/u/0/)
+-   [腾讯文档](https://docs.qq.com/)：对表Google docs
+-   youdaonote ：格式化笔记
+-   simplenote：简单笔记（无格式）
+-   xmind：结构化整理
+-   豆瓣：书、电影评论
+-   Goole keep
+-   notes
+-   Boostnote:代码片段笔记
+-   MedleyText
+-   Quiver
+-   [OneNote](https://products.office.com/zh-CN/onenote)
+-   CherryTree
+-   TickTick
+- [石墨文档](https://shimo.im)
+- [GitbookIO/gitbook](https://github.com/GitbookIO/gitbook):📝 Modern documentation format and toolchain using Git and Markdown https://www.gitbook.com
 
 ## PPT
 
@@ -37,6 +117,19 @@ pandoc WEB.md -o web.docx
 * [gitpitch/gitpitch](https://github.com/gitpitch/gitpitch):The Markdown Presentation Service For Everyone on GitHub, GitLab, Bitbucket, GitBucket, Gitea, and Gogs. https://gitpitch.com
 * [tldr-pages/tldr](https://github.com/tldr-pages/tldr):📚 Simplified and community-driven man pages http://tldr-pages.github.io/
 * [enquirer/enquirer](https://github.com/enquirer/enquirer):Stylish, intuitive and user-friendly prompt system.
+
+## [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor)
+
+💎 A fast, open source text processor and publishing toolchain, written in Ruby, for converting AsciiDoc content to HTML5, DocBook 5 (or 4.5) and other formats. https://asciidoctor.org
+
+```sh
+gem install asciidoctor
+
+gem install asciidoctor-diagram
+sudo apt-get intall openjdk-8-jre-headless  install graphviz
+
+asciidoctor -r asciidoctor-diagram xxx.adoc
+```
 
 ## 参考
 
