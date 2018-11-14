@@ -149,6 +149,11 @@ rails server
 
 ## [rails/rails](https://github.com/rails/rails):Ruby on Rails http://rubyonrails.org
 
+
+## 包管理
+
+* [Gems](https://rubygems.org):Find, install, and publish RubyGems.
+
 ## 工具
 
 * [rbenv/rbenv](https://github.com/rbenv/rbenv):Groom your app’s Ruby environment
