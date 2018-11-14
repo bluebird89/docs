@@ -24,3 +24,4 @@ make linux test
 * [cloudwu/lua53doc](https://github.com/cloudwu/lua53doc):The Chinese Translation of Lua 5.3 document
 * [Tinywan/lua-nginx-redis](https://github.com/Tinywan/lua-nginx-redis):🌺 Redis、Lua、Nginx、OpenResty笔记
 * [torch/nn](https://github.com/torch/nn)
+* [openresty/lua-nginx-module](https://github.com/openresty/lua-nginx-module):Embed the Power of Lua into NGINX HTTP servers https://openresty.org/
