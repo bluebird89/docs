@@ -19,6 +19,7 @@ pip install IPython
 ## 项目
 
 * [google-research/bert](https://github.com/google-research/bert):TensorFlow code and pre-trained models for BERT https://arxiv.org/abs/1810.04805
+* [guillaume-chevalier/LSTM-Human-Activity-Recognition](https://github.com/guillaume-chevalier/LSTM-Human-Activity-Recognition):Human Activity Recognition example using TensorFlow on smartphone sensors dataset and an LSTM RNN (Deep Learning algo). Classifying the type of movement amongst six activity categories - Guillaume Chevalier http://www.neuraxio.com/en/
 
 ## 参考
 
