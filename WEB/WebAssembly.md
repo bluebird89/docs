@@ -14,3 +14,4 @@
 ## 参考
 
 * [mbasso/awesome-wasm](https://github.com/mbasso/awesome-wasm):😎 Curated list of awesome things regarding WebAssembly (wasm) ecosystem.
+* [WebAssembly/spec](https://github.com/WebAssembly/spec):WebAssembly specification, reference interpreter, and test suite. http://webassembly.github.io/spec/

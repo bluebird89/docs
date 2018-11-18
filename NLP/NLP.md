@@ -13,3 +13,32 @@
 * [我爱自然语言处理](http://www.52nlp.cn/)
 * [google-research/bert](https://github.com/google-research/bert):TensorFlow code and pre-trained models for BERT https://arxiv.org/abs/1810.04805
 * [基于深度学习的自然语言处理]()：图书
+
+## 课程
+
+* [stanfordnlp/python-stanford-corenlp](https://github.com/stanfordnlp/python-stanford-corenlp):Official Python interface to CoreNLP using a bidirectional server-client interface.
+* [stanfordnlp/CoreNLP](https://github.com/stanfordnlp/CoreNLP):Stanford CoreNLP: A Java suite of core NLP tools. http://stanfordnlp.github.io/CoreNLP/
+
+### [斯坦福CS224n深度学习与自然语言处理](http://web.stanford.edu/class/cs224n/)
+
+- [项目地址](https://github.com/DSKSD/DeepNLP-models-Pytorch)
+- [stanfordnlp/cs224n-winter17-notes](https://github.com/stanfordnlp/cs224n-winter17-notes):Course notes for CS224N Winter17
+- [PPT](http://web.stanford.edu/class/cs224n/syllabus.html)
+- 视频
+    + [youtube](https://www.youtube.com/watch?v=OQQ-W_63UgQ&list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6)
+    * [云盘资源](https://blog.csdn.net/NeighborhoodGuo/article/details/46868143)
+
+```sh
+git clone https://github.com/DSKSD/cs-224n-Pytorch.git
+
+# 准备数据集
+cd script
+chmod u+x prepare_dataset.sh
+./prepare_dataset.sh
+
+# docker env
+docker pull dsksd/deepstudy:0.2
+pip3 install docker-compose
+cd script
+docker-compose up -d
+```

@@ -697,6 +697,7 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 
 * [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
+* [noble/bleno](https://github.com/noble/bleno):A Node.js module for implementing BLE (Bluetooth Low Energy) peripherals
 
 ## Error
 
@@ -709,6 +710,7 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 ## 框架
 
 * [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications
+* [balderdashy/sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js https://sailsjs.com
 
 ## 数据库
 
@@ -721,7 +723,15 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 ## Logger
 
 * [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
+* [expressjs/morgan](https://github.com/expressjs/morgan):HTTP request logger middleware for node.js
 
+## authenticate
+
+* [jaredhanson/passport](https://github.com/jaredhanson/passport)：Simple, unobtrusive authentication for Node.js. http://www.passportjs.org
+
+## 监控
+
+* [lloyd/node-memwatch](https://github.com/lloyd/node-memwatch):A NodeJS library to keep an eye on your memory usage, and discover and isolate leaks.
 
 ## 面试
 

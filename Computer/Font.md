@@ -6,6 +6,7 @@
 * [tonsky/FiraCode](https://github.com/tonsky/FiraCode):Monospaced font with programming ligatures
 * [powerline/fonts](https://github.com/powerline/fonts):Patched fonts for Powerline users.
 * [kiliman/operator-mono-lig](https://github.com/kiliman/operator-mono-lig):Add ligatures to Operator Mono similar to Fira Code
+* [google/fonts](https://github.com/google/fonts):Font files available from Google Fonts https://fonts.google.com
 
 ## theme
 
