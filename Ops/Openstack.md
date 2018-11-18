@@ -1,3 +1,7 @@
-[官方](https://www.openstack.org/)
+*  [openstack/openstack](https://github.com/openstack/openstack)
 
-[仓库](https://github.com/openstack/openstack-ansible)
+Repository containing OpenStack repositories http://openstack.org
+
+## 工具
+
+* [openstack/openstack-ansible](https://github.com/openstack/openstack-ansible):Ansible playbooks for deploying OpenStack. http://openstack.org

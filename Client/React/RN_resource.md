@@ -140,6 +140,7 @@
 ## 编辑器
 
 * [jpuri/react-draft-wysiwyg](https://github.com/jpuri/react-draft-wysiwyg):A Wysiwyg editor build on top of ReactJS and DraftJS. https://jpuri.github.io/react-draft-wysiwyg
+* [rexxars/react-markdown](https://github.com/rexxars/react-markdown):Render Markdown as React components 
 
 ## Bundler
 

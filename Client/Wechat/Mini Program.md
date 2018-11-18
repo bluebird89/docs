@@ -111,6 +111,7 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 * [wxParse](https://github.com/icindy/wxParse) ★1107 - 微信小程序富文本解析自定义组件
 * [yingye/weapp-qrcode](https://github.com/yingye/weapp-qrcode):weapp.qrcode.js 在 微信小程序 中，快速生成二维码
 * [icindy/wxParse](https://github.com/icindy/wxParse):wxParse-微信小程序富文本解析自定义组件，支持HTML及markdown解析 http://weappdev.com/
+* [jasondu/wxa-plugin-canvas](https://github.com/jasondu/wxa-plugin-canvas):小程序海报组件-生成朋友圈分享海报并生成图片
 
 ## 开发工具
 

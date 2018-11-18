@@ -53,8 +53,8 @@
       - [Tencent/Biny](https://github.com/Tencent/Biny):Biny is a tiny, high-performance PHP framework for web applications
       - [reactphp/react](https://github.com/reactphp/react):Event-driven, non-blocking I/O with PHP. https://reactphp.org
       - [amphp/amp](https://github.com/amphp/amp):A non-blocking concurrency framework for PHP applications. https://amphp.org/amp
-      - [kakserpom/phpdaemon](https://github.com/kakserpom/phpdaemon):
-Asynchronous server-side framework for network applications implemented in PHP using libevent http://daemon.io/
+      - [kakserpom/phpdaemon](https://github.com/kakserpom/phpdaemon):Asynchronous server-side framework for network applications implemented in PHP using libevent http://daemon.io/
+      - [mnapoli/bref](https://github.com/mnapoli/bref):Serverless framework for PHP
 * 论坛
       - [flarum/flarum](https://github.com/flarum/flarum):Delightfully simple forum software. <http://flarum.org>
 * 电商
@@ -277,12 +277,12 @@ Asynchronous server-side framework for network applications implemented in PHP u
       - (https://github.com/EdgedesignCZ/phpqa)[PHPQA]: 一个用于运行质量保证工具的工具(phploc, phpcpd, phpcs, pdepend, phpmd, phpmetrics).
       - (https://github.com/ircmaxell/PHPPHP)[PHPPHP]: 一个PHP实现的PHP虚拟机
       - (https://github.com/Corveda/PHPSandbox)[PHPSandbox]: 一个PHP沙盒环境
-      - (https://github.com/phpstan/phpstan)[PHPStan]: 一个PHP静态分析工具
       - (https://github.com/Qafoo/QualityAnalyzer)[Qafoo Quality Analyzer]: 一个可视化指标和源代码的工具
       - (https://scrutinizer-ci.com/)[Scrutinizer]: 一个审查PHP代码的web工具
       - (https://github.com/devster/ubench)[UBench]: 一个简单的微型基准检测库
       - [exakat/php-static-analysis-tools](https://github.com/exakat/php-static-analysis-tools):A reviewed list of useful PHP static analysis tools
       - [dreamans/phpAnalysis](https://github.com/dreamans/phpAnalysis):phpAnalysis - PHP应用性能分析系统
+      - [phpstan/phpstan](https://github.com/phpstan/phpstan):PHP Static Analysis Tool - discover bugs in your code without running it!
 * Architectural 相关的设计模式库，组织代码编程的方法和途径
       - (https://github.com/igorw/compose)[Compose]: 一个功能组合库
       - (https://github.com/domnikl/DesignPatternsPHP)[Design Patterns PHP]: 一个使用PHP实现的设计模式存储库
@@ -513,6 +513,7 @@ Asynchronous server-side framework for network applications implemented in PHP u
       - [Stash](https://github.com/tedious/Stash): 另一个缓存库
       - [Zend Cache](https://github.com/zendframework/zend-cache): 另一个缓存库 (ZF2)
       - [symfony/cache](https://github.com/symfony/cache):The Cache component provides an extended PSR-6 implementation for adding cache to your applications. https://symfony.com/cache
+      - [PeeHaa/OpCacheGUI](https://github.com/PeeHaa/OpCacheGUI):GUI for PHP's OpCache
       - [PHPSocialNetwork/phpfastcache](https://github.com/PHPSocialNetwork/phpfastcache):A PHP high-performance backend cache system. PhpFastCache is intended for use in speeding up dynamic web applications by alleviating database load. Well implemented, PhpFastCache can drops the database load to almost nothing, yielding faster page load times for users, better resource utilization. It is simple yet powerful. https://www.phpfastcache.com
 * 数据结构和存储 Data Structure and Storage 实现数据结构和存储技术的库
       - (https://github.com/morrisonlevi/Ardent)[Ardent]: 一个数据结构库
@@ -559,6 +560,10 @@ Asynchronous server-side framework for network applications implemented in PHP u
 * 扩展 Extensions 帮助构建PHP扩展的库
       - [PHP CPP](http://www.php-cpp.com/): 一个开发PHP扩展的C++库
       - [Zephir](https://github.com/phalcon/zephir): 用于开发PHP扩展，且介于PHP和C++之间的编译语言
+* GEO
+      - [mjaschen/phpgeo](https://github.com/mjaschen/phpgeo):Simple Geo Library for PHP
+* 搜索
+      - [elastic/elasticsearch-php](https://github.com/elastic/elasticsearch-php):Official PHP low-level client for Elasticsearch. 
 * 杂项 Miscellaneous 创建一个开发环境的软件
       - (https://github.com/doctrine/annotations)[Annotations]: 一个注释库(Doctrine的一部分)
       - (https://github.com/cakephp/utility)[Cake Utility]: 工具类如Inflector，字符串，哈希，安全和XML (CP)
@@ -779,6 +784,7 @@ Asynchronous server-side framework for network applications implemented in PHP u
 ## 写作
 
 * [michelf/php-markdown](https://github.com/michelf/php-markdown):Parser for Markdown and Markdown Extra derived from the original Markdown.pl by John Gruber. http://michelf.ca/projects/php-markdown/
+* [erusev/parsedown](https://github.com/erusev/parsedown):Markdown Parser in PHP http://parsedown.org
 
 ## network
 

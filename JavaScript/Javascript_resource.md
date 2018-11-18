@@ -36,6 +36,7 @@
 * [Foliotek/Croppie](https://github.com/Foliotek/Croppie):A Javascript Image Cropper http://foliotek.github.io/Croppie
 * [pshihn/rough](https://github.com/pshihn/rough):Create graphics with a hand-drawn, sketchy, appearance http://roughjs.com
 * [DmitryBaranovskiy/raphael](https://github.com/DmitryBaranovskiy/raphael):JavaScript Vector Library http://www.raphaeljs.com/
+* [fengyuanchen/cropperjs](https://github.com/fengyuanchen/cropperjs):JavaScript image cropper. https://fengyuanchen.github.io/cropperjs
 
 ## 编辑器
 
@@ -51,6 +52,7 @@
 * [dangrossman/daterangepicker](https://github.com/dangrossman/daterangepicker):JavaScript Date Range, Date and Time Picker Component http://www.daterangepicker.com
 * [DateJS](https://github.com/datejs/Datejs)
 * [iamkun/dayjs](https://github.com/iamkun/dayjs):⏰ Day.js 2KB immutable date library alternative to Moment.js with the same modern API https://github.com/iamkun/dayjs
+* [moment/moment](https://github.com/moment/moment):Parse, validate, manipulate, and display dates in javascript. http://momentjs.com
 
 ## 图表 Data Visualization
 
@@ -65,6 +67,7 @@
 * [d3/d3](https://github.com/d3/d3):Bring data to life with SVG, Canvas and HTML. 📊📈🎉 https://d3js.org
 * [jashkenas/underscore](https://github.com/jashkenas/underscore):JavaScript's utility _ belt http://underscorejs.org
 * [handsontable/handsontable](https://github.com/handsontable/handsontable):handsontable/handsontable
+* [NorthwoodsSoftware/GoJS](https://github.com/NorthwoodsSoftware/GoJS):JavaScript diagramming library for interactive flowcharts, org charts, design tools, planning tools, visual languages. http://gojs.net
 
 ## fingerprinting
 
@@ -150,10 +153,6 @@
 ## 服务
 
 * [nodemon](http://nodemon.io/):a utility that will monitor for any changes in your source and automatically restart your server.
-
-## 日志
-
-* [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
 
 ## 验证
 
@@ -254,10 +253,12 @@
 ## logger
 
 * [klauscfhq/signale](https://github.com/klauscfhq/signale):👋 Hackable console logger
+* [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
 
 ## 测试
 
 * [intuit/karate](https://github.com/intuit/karate):Web-Services Testing Made Simple
+* [minimaxir/big-list-of-naughty-strings](https://github.com/minimaxir/big-list-of-naughty-strings):The Big List of Naughty Strings is a list of strings which have a high probability of causing issues when used as user-input data.
 
 ## 代码在线分享工具
 
@@ -284,7 +285,6 @@
 
 * [Requarks/wiki](https://github.com/Requarks/wiki):Wiki.js | A modern, lightweight and powerful wiki app built on NodeJS, Git and Markdown https://wiki.js.org
 * [tj/should.js](https://github.com/tj/should.js):BDD style assertions for node.js -- test framework agnostic
-* 框架：Sails.js
 * [fastify/fastify](https://github.com/fastify/fastify):Fast and low overhead web framework, for Node.js https://www.fastify.io
 * [retejs/rete](https://github.com/retejs/rete):JavaScript framework for visual programming and creating node editor https://rete.js.org
 * [Tencent/omi](https://github.com/Tencent/omi):Next generation web framework in 4KB javascript(Web Components + JSX + Proxy + Path Updating) http://omijs.org

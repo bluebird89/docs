@@ -95,8 +95,6 @@ LABLE标签 goto break continue
 
 slice reslice
 
-### 工具
-
 ### sublime
 
 * 安装gosublime插件
@@ -148,6 +146,10 @@ websocketd --port=8080 ./count.sh // 建立server
 </script>
 ```
 
+## 配置
+
+* [kelseyhightower/envconfig](https://github.com/kelseyhightower/envconfig):Golang library for managing configuration data from environment variables
+
 ## 包管理
 
 * [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
@@ -161,13 +163,27 @@ websocketd --port=8080 ./count.sh // 建立server
 - [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
 * [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang http://go-colly.org/
 
+## 语法检测
+
+* [mgechev/revive](https://github.com/mgechev/revive):🔥 ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint. https://revive.run
+
+## HTTP
+
+* [valyala/fasthttp](https://github.com/valyala/fasthttp):Fast HTTP package for Go. Tuned for high performance. Zero memory allocations in hot paths. Up to 10x faster than net/http
+
 ## ORM
 
 * [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io
+* [gomods/athens](https://github.com/gomods/athens):A Go module datastore and proxy https://docs.gomods.io
 
 ## 路由
 
 * [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
+
+## error
+
+* [pkg/errors](https://github.com/pkg/errors):Simple error handling primitives https://godoc.org/github.com/pkg/errors
+
 
 ## 微服务
 
@@ -225,6 +241,7 @@ websocketd --port=8080 ./count.sh // 建立server
 * [TrueFurby/go-callvis](https://github.com/TrueFurby/go-callvis):Visualize call graph of a Go program using dot format. https://truefurby.github.io/go-callvis
 * [dgryski/go-perfbook](https://github.com/dgryski/go-perfbook):Thoughts on Go performance optimization
 * [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. https://shopify.github.io/sarama
+* [alecthomas/participle](https://github.com/alecthomas/participle):A parser library for Go
 
 ## 参考
 
