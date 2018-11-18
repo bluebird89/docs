@@ -24,6 +24,7 @@ TensorFlow 还支持异构设备分布式计算，这意味着它能够在各个
 * [Microsoft/ailab](https://github.com/Microsoft/ailab):Experience, Learn and Code the latest breakthrough innovations with Microsoft AI
 * [apachecn/AiLearning](https://github.com/apachecn/AiLearning):AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - DL、自然语言处理 NLP http://ailearning.apachecn.org/
 * [donnemartin/data-science-ipython-notebooks](https://github.com/donnemartin/data-science-ipython-notebooks#deep-learning):Data science Python notebooks: Deep learning (TensorFlow, Theano, Caffe, Keras), scikit-learn, Kaggle, big data (Spark, Hadoop MapReduce, HDFS), matplotlib, pandas, NumPy, SciPy, Python essentials, AWS, and various command lines.
+* [daviddao/awful-ai](https://github.com/daviddao/awful-ai):😈Awful AI is a curated list to track current scary usages of AI - hoping to raise awareness
 
 ## 课程
 

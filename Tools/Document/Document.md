@@ -11,7 +11,9 @@ John MacFarlane开发的标记语言转换工具，可实现不同标记语言�
 pandoc WEB.md -o web.docx
 ```
 
-##  GitBook安装
+##  [GitbookIO/gitbook](https://github.com/GitbookIO/gitbook)
+
+📝 Modern documentation format and toolchain using Git and Markdown https://www.gitbook.com
 
 npm install gitbook-cli -g
 
@@ -117,6 +119,8 @@ npm install gitbook-cli -g
 * [gitpitch/gitpitch](https://github.com/gitpitch/gitpitch):The Markdown Presentation Service For Everyone on GitHub, GitLab, Bitbucket, GitBucket, Gitea, and Gogs. https://gitpitch.com
 * [tldr-pages/tldr](https://github.com/tldr-pages/tldr):📚 Simplified and community-driven man pages http://tldr-pages.github.io/
 * [enquirer/enquirer](https://github.com/enquirer/enquirer):Stylish, intuitive and user-friendly prompt system.
+* [sofish/typo.css](https://github.com/sofish/typo.css):中文网页重设与排版：一致化浏览器排版效果，构建最适合中文阅读的网页排版 http://typo.sofi.sh
+* [unifiedjs/unified](https://github.com/unifiedjs/unified):☔ friendly interface backed by an ecosystem of plugins built for creating and manipulating content https://unified.js.org
 
 ## [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor)
 

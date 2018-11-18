@@ -65,3 +65,7 @@ AMQP，即Advanced Message Queuing Protocol，高级消息队列协议，是应�
 ## 使用
 
 - 弹幕
+
+## 工具
+
+* [apache/pulsar](https://github.com/apache/pulsar):Apache Pulsar - distributed pub-sub messaging system https://pulsar.apache.org

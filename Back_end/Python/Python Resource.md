@@ -309,6 +309,7 @@ brew install pipenv
 * httplib2：全面的 HTTP 客户端库。[官网](https://github.com/jcgregorio/httplib2)
 * treq：类似 requests 的Python API 构建于 Twisted HTTP 客户端之上。[官网](https://github.com/twisted/treq)
 * urllib3：一个具有线程安全连接池，支持文件 post，清晰友好的 HTTP 库。[官网](https://github.com/shazow/urllib3)
+* [kennethreitz/responder](https://github.com/kennethreitz/responder):a familiar HTTP Service Framework for Python https://python-responder.org
 
 ## 数据库
 

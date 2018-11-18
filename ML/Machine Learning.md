@@ -201,6 +201,7 @@
 * [李宏毅Machine Learning ](https://www.bilibili.com/video/av15889450)
 * [李宏毅机器学习(2017)](https://www.bilibili.com/video/av10590361/)
 * [机器学习中的数学基础](https://www.bilibili.com/video/av15673238/)
+* [afshinea/stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning):VIP cheatsheets for Stanford's CS 229 Machine Learning
 
 ## 工具
 

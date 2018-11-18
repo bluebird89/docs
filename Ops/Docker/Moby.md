@@ -371,6 +371,7 @@ services:
 
 * [wurstmeister/kafka-docker](https://github.com/wurstmeister/kafka-docker):Dockerfile for Apache Kafka http://wurstmeister.github.io/kafka-d…
 * [vmware/photon](https://github.com/vmware/photon):Minimal Linux container host https://vmware.github.io/photon
+* [vagrant-libvirt/vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt):Vagrant provider for libvirt.
 
 ## 工具
 
@@ -388,6 +389,7 @@ services:
 * [wagoodman/dive](https://github.com/wagoodman/dive):A tool for exploring each layer in a docker image
 * [spotify/docker-gc](https://github.com/spotify/docker-gc):Docker garbage collection of containers and images
 * [google/gvisor](https://github.com/google/gvisor):Container Runtime Sandbox
+* [doctrine/annotations](https://github.com/doctrine/annotations):Annotations Docblock Parser
 
 ## 参考
 
