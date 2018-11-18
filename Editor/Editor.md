@@ -10,6 +10,10 @@
 -   [Atom](./Atom.md)
 -   [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
 
+## 富文本编辑器
+
+* [ianstormtaylor/slate](https://github.com/ianstormtaylor/slate):A completely customizable framework for building rich text editors. http://slatejs.org
+* [fex-team/ueditor](https://github.com/fex-team/ueditor):rich text 富文本编辑器 http://ueditor.baidu.com
 
 ## 在线
 
