@@ -16,7 +16,7 @@
 由于微服务尽量都是通过HTTP API的方式暴露出去的，因此这种服务管理平台不需要像传统企业内部的ESB服务总线这么重。<b>但是最基本的服务注册，服务代理，服务发布，服务简单的路由，安全访问和授权，服务调用消息和日志记录这些功能还是需要具备</b>。类似淘宝的Dubbo架构，即可以做为微服务架构下的服务管控平台。
 对于这种服务管控平台，核心需要讨论的就是服务每次调用本身的消息传递，输入和输出日志是否需要记录，当前就有两种做法，一种是不记录，管理平台只负责服务注册和目录发布，安全授权，实际的服务访问仍然是两个组件之间的点对点连接完成，这种方式下整个架构下获取更高的性能，同时服务管理平台也不容易成为大并发服务访问下的单点瓶颈；另外一种方式就是完全记录，在这种方式下就需要考虑服务管理平台本身的集群化不是，高并发下的性能问题。而个人建议最好的方式还是SOA服务管理平台应该提供两种管理能力，同时仅仅对核心的需要Log日志的服务进行日志记录，而其它服务只提供服务目录和访问控制即可。
 ===========2016.6.8日更新，增加Chris Richardson微服务系列读书笔记
-本文为阅读《Chris Richardson 微服务系列》的阅读笔记，具体原文参考：<a href="https://link.zhihu.com/?target=http%3A//blog.daocloud.io/microservices-4/" class=" wrap external" target="_blank" rel="nofollow noreferrer">「Chris Richardson 微服务系列」服务发现的可行方案以及实践案例<i class="icon-external"></i></a> 
+本文为阅读《Chris Richardson 微服务系列》的阅读笔记，具体原文参考：<a href="https://link.zhihu.com/?target=http%3A//blog.daocloud.io/microservices-4/" class=" wrap external" target="_blank" rel="nofollow noreferrer">「Chris Richardson 微服务系列」服务发现的可行方案以及实践案例<i class="icon-external"></i></a>
 ， 里面有另外四篇的链接，当前daocloud已经更新到第5篇事件驱动架构。
 <b>第一篇 微服务架构的优势和不足</b>
 
@@ -326,6 +326,55 @@ API GW需要包含以下功能：
 面向业务场景或合作伙伴的自助API开通
 对外接口性能与线上环境故障定位自助平台
 
+## 技术支撑
+
+* Kubernetes
+* Mesos+Docker
+* OpenShift V3
+* Machine + Swarm + Compose
+* OpenStack + Docker
+* Cloud Foundry Lattice
+
+## 有符合微服务平台规范的APP
+
+APP要符合12因子（Twelve-Factor）的规范：
+
+* 基准代码（Codebase）：代码必须纳入配置库统一管理。
+* 依赖（Dependencies）：显式的声明对其他服务的依赖，比如通过Maven、Bundler、NPM等。
+* 配置（Config）：对于不同环境（开发/staging/生产等）的参数配置，是通过环境变量的方式进行注入。
+* 后台服务（Backing services）：对于DB、缓存等后台服务，是作为附加资源，可以独立的Bind/Unbind。
+* 编译/发布/运行（Build、Release、Run）：Build、Release、Run这三个阶段要清晰的定义和分开。
+* 无状态进程（Processes）：App的进程是无状态的，任何状态信息都存储到Backing services（DB，缓存等）。
+* 端口绑定（Port binding）：App是自包含的，所有对外服务通过Port Binding暴露，比如通过Http。
+* 并发（Concurrency）：App可以水平的Scaling。
+* 快速启动终止（Disposability）：App进程可以被安全的、快速的关闭和重启。
+* 环境一致性（Dev/prod parity）：尽可能的保持开发、staging、线上环境的一致性。
+* 日志（Logs）：把日志作为事件流，不管理日志文件，通过一个集中的服务，由执行环境去收集、聚合、索引、分析日志事件。
+
+## 特点
+
+* 版本控制的分布式配置中心
+* 服务注册和发现
+* 路由与LB：每个客户端游单独LB服务
+* 容错
+    - 电路熔断器（Circuit Breaker）： 该模式的原理类似于电路熔断器，如果电路发生短路，熔断器能够主动熔断电路，以避免灾难性损失
+    - 正常状态下，电路处于关闭状态（Closed），调用是直接传递给依赖服务的；
+        * 如果调用出错，则进入失败计数状态；
+        * 失败计数达到一定阈值后，进入熔断状态（Open），这时的调用总是返回失败；
+        * 累计一段时间以后，保护器会尝试进入半熔断状态（Half-Open）；
+        * 处于Harf-Open状态时，调用先被传递给依赖的服务，如果成功，则重置电路状态为“Closed”，否则把电路状态置为“Open”；
+    - 舱壁（Bulkheads）：该模式像舱壁一样对资源或失败单元进行隔离，如果一个船舱破了进水，只损失一个船舱，其它船舱可以不受影响 。
+* API网关/边缘服务
+
+## 旧系统改造
+
+![原有系统进行微服务改造](../_static/upgrade.png "Optional title")
+
+The Anti-Corruption Layer：反腐层，这层完成对老系统的桥接，并阻止老系统的腐烂蔓延。它包含三部分：
+* Facade：简化对老系统接口的对接。
+* Adapter：Request，Response 请求协议适配
+* Translator：领域模型适配，转换微服务模型和老系统模型。
+
 ## 问题
 
 后端API粒度：能和原子业务能力找到映射最好，一定要避免「万能接口」的出现。
@@ -339,7 +388,4 @@ API GW需要包含以下功能：
 * [amio/awesome-micro](https://github.com/amio/awesome-micro) :A collection of awesome things regarding zeit's micro.
 * [微服务与API网关（上）: 为什么需要API网关？](http://blog.didispace.com/hzf-ms-apigateway-1/)
 * [罗辑思维Go语言微服务改造实践](http://www.techug.com/post/luo-ji-si-wei-go-service-upgrade.html)
-
-## 参考
-
-* [istio/istio](https://github.com/istio/istio):An open platform to connect, manage, and secure microservices. https://istio.io
+* [一篇文章带你了解Cloud Native](https://blog.csdn.net/u011537073/article/details/72360966)

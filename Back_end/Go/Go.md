@@ -242,6 +242,7 @@ websocketd --port=8080 ./count.sh // 建立server
 * [dgryski/go-perfbook](https://github.com/dgryski/go-perfbook):Thoughts on Go performance optimization
 * [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. https://shopify.github.io/sarama
 * [alecthomas/participle](https://github.com/alecthomas/participle):A parser library for Go
+* [zserge/lorca](https://github.com/zserge/lorca):Build cross-platform modern desktop apps in Go + HTML5
 
 ## 参考
 

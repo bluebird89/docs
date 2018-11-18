@@ -314,6 +314,7 @@ set global general_log = on;
 ```sql
 SELECT user,authentication_string,plugin,host FROM mysql.user; # msyql 8.0
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+ALTER USER `root`@`localhost` IDENTIFIED WITH caching_sha2_password BY 'password';
 FLUSH PRIVILEGES;
 
 mysql -hlocalhost  -P 3306 -u root -p  # 生成用户root与空密码登陆,第一次登陆mysql的时候是没有密码的
