@@ -80,15 +80,6 @@
 -   [Next](http://next.36kr.com/posts)
 -   [少数派](https://sspai.com/)
 
-## Photo
-
--   [天空之城](https://www.skypixel.com/):一个专注于航拍影像的网站
--   [1x](https://1x.com/):摄影网站，作品质量极高。
--   [LFI](http://lfi-online.de/ceemes/en/gallery/):徕卡旗下的作品廊
--   [500px](https://500px.com/popular)
--   [Pixelmator](http://www.pixelmator.com):图像处理软件
--   [GIPHY](https://giphy.com/):寻找动图好去处。
-
 ## 内容
 
 -   Wikipedia
@@ -188,6 +179,7 @@
 -   [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
 - [chubin/cheat.sh](https://github.com/chubin/cheat.sh):the only cheat sheet you need https://cheat.sh/
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
+* [DaveDavenport/rofi](https://github.com/DaveDavenport/rofi):Rofi: A window switcher, application launcher and dmenu replacement
 
 ## 资源
 

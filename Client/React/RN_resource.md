@@ -21,6 +21,7 @@
 * [ReactiveX/rxjs](https://github.com/ReactiveX/rxjs):A reactive programming library for JavaScript http://reactivex.io/rxjs
 * [umijs/umi](https://github.com/umijs/umi):🌋 Pluggable enterprise-level react application framework. https://umijs.org/
 * [Microsoft/reactxp](https://github.com/microsoft/reactxp):Library for cross-platform app development. https://microsoft.github.io/reactxp/
+* [alibaba/ice](https://github.com/alibaba/ice/):🚀 飞冰 - 让前端开发简单而友好，海量可复用物料，配套桌面工具极速构建前端应用，效率提升 100% https://alibaba.github.io/ice/
 
 ## 开发工具
 
@@ -254,6 +255,11 @@
 * [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
 * [piotrwitek/react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide):The complete guide to static typing in "React & Redux" apps using TypeScript https://piotrwitek.github.io/react-redux-typescript-guide/
 * [streamich/react-use](https://github.com/streamich/react-use):React Hooks — future of React 👍 react-use http://streamich.github.io/react-use
+* [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit):Get started with React, Redux, and React-Router.
+* [kriasoft/react-starter-kit](https://github.com/kriasoft/react-starter-kit):React Starter Kit — isomorphic web app boilerplate (Node.js, Express, GraphQL, React.js, Babel, PostCSS, Webpack, Browsersync) https://reactstarter.com
+* [adam-golab/react-developer-roadmap](https://github.com/adam-golab/react-developer-roadmap):Roadmap to becoming a React developer in 2018s
+* [kentcdodds/advanced-react-patterns](https://github.com/kentcdodds/advanced-react-patterns):The course material for my advanced react patterns course on Egghead.io
+* [huzidaha/react-naive-book](https://github.com/huzidaha/react-naive-book):开源、免费、专业、简单的 React.js 在线教程 http://huziketang.com/books/react
 
 ## 项目
 
@@ -284,14 +290,10 @@
 * [文档](http://reactnative.cn/docs/0.49/getting-started.html)
 * [sw-yx/react-typescript-cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet)
 
-* [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit):Get started with React, Redux, and React-Router.
 * [vasanthk/react-bits](https://github.com/vasanthk/react-bits):✨ React patterns, techniques, tips and tricks ✨ https://vasanthk.gitbooks.io/react-bits
 * [react-pxq](https://github.com/bailicangdu/react-pxq)一个 react + redux 的完整项目 和 个人总结
 
 * [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.
 * [zeit/next.js](https://github.com/zeit/next.js):Framework for server-rendered React apps https://zeit.co/blog/next4
 * [vhpoet/react-native-styling-cheat-sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet):Most of the React Native styling material in one page
-* [kriasoft/react-starter-kit](https://github.com/kriasoft/react-starter-kit):React Starter Kit — isomorphic web app boilerplate (Node.js, Express, GraphQL, React.js, Babel, PostCSS, Webpack, Browsersync) https://reactstarter.com
 * [tachyons-css/tachyons](https://github.com/tachyons-css/tachyons/):Functional css for humans https://tachyons.io
-* [adam-golab/react-developer-roadmap](https://github.com/adam-golab/react-developer-roadmap):Roadmap to becoming a React developer in 2018s
-* [kentcdodds/advanced-react-patterns](https://github.com/kentcdodds/advanced-react-patterns):The course material for my advanced react patterns course on Egghead.io
