@@ -330,6 +330,7 @@
 * [dollarshaveclub/shave](https://github.com/dollarshaveclub/shave/):💈 Shave is a 0 dep JS plugin that truncates text to fit within an element based on a set max-height ✁ https://dollarshaveclub.github.io/shave/
 * [usablica/intro.js](https://github.com/usablica/intro.js):A better way for new feature introduction and step-by-step users guide for your website and project. http://introjs.com
 * [rndme/download](https://github.com/rndme/download):file downloading using client-side javascript
+* [Shopify/draggable](https://github.com/Shopify/draggable)：The JavaScript Drag & Drop library your grandparents warned you about. https://shopify.github.io/draggable
 
 ## 扩展
 

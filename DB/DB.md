@@ -93,6 +93,7 @@ NoSQL主要用于解决以下几种问题
 - [greenplum-db/gpdb](https://github.com/greenplum-db/gpdb):Greenplum Database http://greenplum.org
 * [realm/realm-js](https://github.com/realm/realm-js):Realm is a mobile database: an alternative to SQLite & key-value stores https://realm.io
 * [orbitdb/orbit-db](https://github.com/orbitdb/orbit-db):Peer-to-Peer Databases for the Decentralized Web
+* [prometheus/prometheus](https://github.com/prometheus/prometheus)：The Prometheus monitoring system and time series database. https://prometheus.io/
 
 ## 参考
 
