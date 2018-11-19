@@ -605,7 +605,6 @@ gii
 * 模块中控制器的路由必须以模块ID开始，接下来为控制器ID和操作ID
 * 特性可分组，每个组包含一些强相关的特性， 每个特性组可以做成一个模块由特定的开发人员和开发组来开发和维护。
 
-
 ```php
 // 配置
 'modules' => [
@@ -843,6 +842,11 @@ echo \yii\helpers\Url::toRoute('article/add'); //输出/yii2-demo/web/index.php?
 
 UploadForm UploadedFile
 
+## User login
+## User role control
+## session stay
+
+browser reopen generate new cookie
 
 ## 参考
 
