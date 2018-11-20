@@ -207,4 +207,4 @@
 
 * [guess-js/guess](https://github.com/guess-js/guess):Libraries & tools for enabling Machine Learning driven user-experiences on the web
 * [gorgonia/gorgonia](https://github.com/gorgonia/gorgonia):Gorgonia is a library that helps facilitate machine learning in Go.
-
+* [ray-project/ray](https://github.com/ray-project/ray):A system for parallel and distributed Python that unifies the ML ecosystem. https://ray.readthedocs.io/en/latest/

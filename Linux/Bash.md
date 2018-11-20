@@ -14,3 +14,7 @@ alias ipe='curl ipinfo.io/ip' # 需要知道你的外部 IP 地址
 alias ipi='ipconfig getifaddr en0' # 知道你的本地 IP 地址
 alias c='clear'
 ```
+
+## 工具
+
+* [tartley/colorama](https://github.com/tartley/colorama):Simple cross-platform colored terminal text in Python

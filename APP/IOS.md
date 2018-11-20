@@ -19,3 +19,4 @@ Mac：Safari浏览器 > 偏好设置 > 高级 > 在菜单栏中显示“开发�
 * [tumtumtum/StreamingKit](https://github.com/tumtumtum/StreamingKit):A fast and extensible gapless AudioPlayer/AudioStreamer for OSX and iOS (iPhone, iPad)
 * [tbodt/ish](https://github.com/tbodt/ish):Linux shell for iOS https://ish.app
 * [xmartlabs/XLPagerTabStrip](https://github.com/xmartlabs/XLPagerTabStrip):Android PagerTabStrip for iOS.
+* [haxpor/Potatso](https://github.com/haxpor/Potatso):Potatso is an iOS client that implements Shadowsocks proxy with the leverage of NetworkExtension framework.
