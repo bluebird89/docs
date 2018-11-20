@@ -189,6 +189,7 @@ php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数
 ### [PECL](http://pecl.php.net/)：
 
 PHP Extension Community Library，管理着最底层的PHP扩展。用 C 写的。
+
 * [PEAR](http://pear.php.net/)：PHP Extension and Application Repository，管理着项目环境的扩展。用 PHP 写的。
 * Composer：和PEAR都管理着项目环境的依赖，这些依赖也是用 PHP 写的，区别不大。但 composer 却比 PEAR 来的更受欢迎
 
@@ -215,6 +216,7 @@ sudo apt install php7.2-dev # to use phpize  生成编译检测脚本
 * 单行注释：//、#
 * 多行注释：/* …… */
 * 变量：临时存储数据的容器，指向值的指针。保存数据内存位置的名称。 变量是用于保存临时数据的临时存储
+    - 变量本身没有类型之说，所说的类型是指变量中，存储的数据的类型。
     - 变量的名称，可以包含：字母、数字、下划线。
     - 变量的名称，不能以数字和特殊符号开头，但可以以字母或下划线开头。如：$_ABC、$abc
     - 变量名称前必须要带“$”符号。“$”不是变量名称一部分，它只是对变量名称的一个引用或标识符。
@@ -238,83 +240,15 @@ sudo apt install php7.2-dev # to use phpize  生成编译检测脚本
         + __NAMESPACE__   表示当前命名空间的名称。
 
 ```php
+# 变量
 $variablename = value;
 
-define("MESSAGE","Hello YiiBai PHP");
-const MESSAGE="Hello const by YiiBai PHP";
-```
-
-### 控制语句
-
-* echo：是一个语言结构(语句)，不是一个函数，所以不需要使用括号。但是如果要使用多个参数，则需要使用括号。打印字符串，多行字符串，转义字符，变量，数组等。
-* print
-* 嵌套的使用：执行在内还是在外
-* 条件
-    - if
-    - if-else
-    - if-else-if
-    - 嵌套if
-    - switch语句
-* 循环
-    - for语句
-    - foreach循环循环用于遍历数组元素
-    - while
-    - do...while
-* break:中断了当前for，while，do-while，switch和for-each循环的执行。 如果在内循环中使用break，它只中断了内循环的执行。
-* continue:
-
-```php
-#!/usr/bin/env php
-print "Hello, Red Hat Developers World from PHP " . PHP_VERSION . "\n";
-echo "<h2>Hello First PHP</h2>";
-
-$num=12;
-
-if($num%2==0){
-    echo "$num is even number";
-}else{
-    echo "$num is odd number";
-}
-
-switch($num){
-    case 10:
-        echo("number is equals to 10");
-        break;
-    case 20:
-        echo("number is equal to 20");
-        break;
-    case 30:
-        echo("number is equal to 30");
-        break;
-    default:
-        echo("number is not equal to 10, 20 or 30");
-}
-
-for($n=1;$n<=10;$n++){
-    echo "$n<br/>";
-}
-
-$season=array("summer","winter","spring","autumn");
-foreach( $season as $arr ){
-    echo "Season is: $arr<br />";
-}
-
-$n=1;
-while($n<=10){
-    echo "$n<br/>";
-    $n++;
-}
-
-$n=1;
-do{
-    echo "$n<br/>";
-    $n++;
-}while($n<=10);
+# 常量
+define("MESSAGE", "Hello YiiBai PHP");
+const MESSAGE = "Hello const by YiiBai PHP";
 ```
 
 ### 数据类型
-
-变量本身没有类型之说，所说的类型是指变量中，存储的数据的类型。
 
 #### 标量类型
 
@@ -322,11 +256,31 @@ do{
 - 字符串型
     + 单引号PHP字符串中，大多数转义序列和变量不会被解释。 可以使用单引号\'反斜杠和通过\\在单引号引用PHP字符串。
     + 双引号的PHP字符串中存储多行文本，特殊字符和转义序列
+    + addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
+    + urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
 - 整型
 - 浮点型
 
 ```php
-substr
+$str='Hello text within single quote';
+$str2="Using double \"quote\" with backslash inside double quoted string";
+
+$str=strtolower("My name is Yiibai"); # strtoupper
+$str=ucwords("My name is Yiibai"); # strtoupper
+$str=ucfirst("My name is Yiibai"); # lcfirst
+$str=strrev("My name is Yiibai"); # lcfirst
+
+$len=strlen("My name is Yiibai");
+
+$str = preg_replace_callback(
+    '/([a-z]*)([A-Z]*)/',
+    function($matchs){
+        return strtoupper($matchs[1]).strtolower($matchs[2]);
+    },
+$str
+);
+
+substr()
 htmlentities(string)
 addslashes(str)
 html_entity_decode(string)
@@ -372,7 +326,6 @@ for ($row = 0; $row < 3; $row++) {
 }
 
 $salary=array("Maxsu"=>"550000","Vimal"=>"250000","Ratan"=>"200000");
-
 print_r(array_change_key_case($salary,CASE_UPPER)); # Array ( [SONOO] => 550000 [VIMAL] => 250000 [RATAN] => 200000 )
 print_r(array_chunk($salary,2, $preserve_keys = false));
 
@@ -400,24 +353,6 @@ foreach( $name3 as $n )
 {
   echo "$n<br />";
 }
-
-$str='Hello text within single quote';
-$str2="Using double \"quote\" with backslash inside double quoted string";
-
-$str=strtolower("My name is Yiibai"); # strtoupper
-$str=ucwords("My name is Yiibai"); # strtoupper
-$str=ucfirst("My name is Yiibai"); # lcfirst
-$str=strrev("My name is Yiibai"); # lcfirst
-
-$len=strlen("My name is Yiibai");
-
-$str = preg_replace_callback(
-    '/([a-z]*)([A-Z]*)/',
-    function($matchs){
-        return strtoupper($matchs[1]).strtolower($matchs[2]);
-    },
-$str
-);
 
 //示例一：函数内销毁全局变量$foo是无效的
 function destroy_foo() {
@@ -511,6 +446,73 @@ array_walk(array, funcname)
 - NULL:unset() 与 NULL：删除引用，触发相应变量容器refcount减一，但在函数中的行为会依赖于想要销毁的变量的类型而有所不同，比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值；unset 变量与给变量赋值NULL不同，变量赋值NULL直接对相应变量容器refcount = 0
 - 资源
 
+### 控制语句
+
+* echo：是一个语言结构(语句)，不是一个函数，所以不需要使用括号。但是如果要使用多个参数，则需要使用括号。打印字符串，多行字符串，转义字符，变量，数组等。
+* print
+* 嵌套的使用：执行在内还是在外
+* 条件
+    - if
+    - if-else
+    - if-else-if
+    - 嵌套if
+    - switch语句
+* 循环
+    - for语句
+    - foreach循环循环用于遍历数组元素
+    - while
+    - do...while
+* break:中断了当前for，while，do-while，switch和for-each循环的执行。 如果在内循环中使用break，它只中断了内循环的执行。
+* continue:
+
+```php
+#!/usr/bin/env php
+print "Hello, Red Hat Developers World from PHP " . PHP_VERSION . "\n";
+echo "<h2>Hello First PHP</h2>";
+
+$num=12;
+if ($num % 2 == 0) {
+    echo "$num is even number";
+} else {
+    echo "$num is odd number";
+}
+
+switch($num){
+    case 10:
+        echo("number is equals to 10");
+        break;
+    case 20:
+        echo("number is equal to 20");
+        break;
+    case 30:
+        echo("number is equal to 30");
+        break;
+    default:
+        echo("number is not equal to 10, 20 or 30");
+}
+
+for($n=1;$n<=10;$n++){
+    echo "$n<br/>";
+}
+
+$season=array("summer","winter","spring","autumn");
+foreach( $season as $arr ){
+    echo "Season is: $arr<br />";
+}
+
+$n=1;
+while($n<=10){
+    echo "$n<br/>";
+    $n++;
+}
+
+$n = 1;
+do{
+    echo "$n<br/>";
+    $n++;
+}while($n<=10);
+```
+
 #### 运算符
 
 用于对操作数执行操作
@@ -527,7 +529,7 @@ array_walk(array, funcname)
 * 错误控制操作符
 * 分配操作符:`= += -= *= **= /= .= %= &= ^= <<= >>= =>`
 * 位运算符：`&(位与) ^（异或） | ~ << >>`
-* 三元运算符：`?:`
+* 三元运算符：`? :`
 
 ```php
 // 涉及数字比较，优先转化为数字
@@ -707,11 +709,11 @@ Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，
 ```php
 function getClosure($n)
 {
-      $a = 100;
-      return function($m) use ($n, &$a) {
-            $a += $n + $m;
-            echo $a."\n";
-        };
+  $a = 100;
+  return function($m) use ($n, &$a) {
+        $a += $n + $m;
+        echo $a."\n";
+    };
 }
 $fn = getClosure(1);
 $fn(1);//102
@@ -794,9 +796,6 @@ var_dump(random_int(100, 999));//int(248)
 * 返回值
 * 递归函数
 
-addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
-urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
-
 ```php
 function sayHello(){
     echo "Hello PHP Function";
@@ -807,8 +806,6 @@ function sayHello($name,$age = 28){
 echo "Hello $name, you are $age years old<br/>";
 }
 sayHello("Maxsu",27);
-sayHello("Minsu",26);
-sayHello("John",23);
 sayHello("Henry");
 
 function increment($i)
