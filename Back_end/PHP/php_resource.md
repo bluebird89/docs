@@ -219,6 +219,7 @@
 * (https://github.com/phpDocumentor/phpDocumentor2)[PHP Documentor 2]: 一个API文档生成器
 * (http://phpdox.de/)[phpDox]: 一个PHP项目的文档生成器（不限于API文档）
 * (https://github.com/FriendsOfPHP/Sami)[Sami]: 一个API文档生成器
+* [zircote/swagger-php](https://github.com/zircote/swagger-php):A php swagger annotation and parsing library http://zircote.com/swagger-php/
 
 ## 安全
 

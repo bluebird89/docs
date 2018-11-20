@@ -127,6 +127,7 @@
 
 * [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
 * [nexe/nexe](https://github.com/nexe/nexe):🎉 create a single executable out of your node.js apps
+* [chalk/chalk](https://github.com/chalk/chalk):🖍 Terminal string styling done right
 
 ## HTTP
 
@@ -232,6 +233,7 @@
 ## xml
 
 * [Leonidas-from-XIV/node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js):XML to JavaScript object converter.
+* [nodeca/js-yaml](https://github.com/nodeca/js-yaml):JavaScript YAML parser and dumper. Very fast. http://nodeca.github.com/js-yaml/
 
 ## DOM
 
@@ -246,6 +248,10 @@
 * [mholt/PapaParse](https://github.com/mholt/PapaParse):Fast and powerful CSV (delimited text) parser that gracefully handles large files and malformed input http://PapaParse.com
 * [jprichardson/node-fs-extra](https://github.com/jprichardson/node-fs-extra):Node.js: extra methods for the fs object like copy(), remove(), mkdirs()
 
+## qrcode
+
+* [kciter/qart.js](https://github.com/kciter/qart.js):Generate artistic QR code. 🎨 https://kciter.github.io/qart.js/
+
 ## 正则
 
 * [gskinner/regexr](https://github.com/gskinner/regexr):RegExr is a HTML/JS based tool for creating, testing, and learning about Regular Expressions. http://regexr.com/
@@ -259,6 +265,10 @@
 
 * [intuit/karate](https://github.com/intuit/karate):Web-Services Testing Made Simple
 * [minimaxir/big-list-of-naughty-strings](https://github.com/minimaxir/big-list-of-naughty-strings):The Big List of Naughty Strings is a list of strings which have a high probability of causing issues when used as user-input data.
+
+## i18n
+
+* [lingui/js-lingui](https://github.com/lingui/js-lingui):🌍📖 A readable, automated, and optimized (5 kb) internationalization for JavaScript https://lingui.js.org/
 
 ## 代码在线分享工具
 
