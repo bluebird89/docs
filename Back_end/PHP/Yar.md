@@ -1,5 +1,4 @@
-# Yar
+# [laruence/yar](https://github.com/laruence/yar)
 
-## 仓库
+Light, concurrent RPC framework for PHP & C
 
-- [laruence/yar](https://github.com/laruence/yar):Light, concurrent RPC framework for PHP & C

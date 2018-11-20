@@ -17,3 +17,7 @@
 * [ncw/rclone](https://github.com/ncw/rclone):"rsync for cloud storage" - Google Drive, Amazon Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Cloudfiles, Google Cloud Storage, Yandex Files https://rclone.org
 * [cytopia/linux-timemachine](https://github.com/cytopia/linux-timemachine):Rsync-based OSX-like time machine for Linux and BSD (and even OSX)
 * [mmastrac/iterm2-zmodem](https://github.com/mmastrac/iterm2-zmodem):Automatic ZModem support for iTerm 2
+
+## 下载
+
+* [proxyee-down-org/proxyee-down](https://github.com/proxyee-down-org/proxyee-down):http下载工具，基于http代理，支持多连接分块下载

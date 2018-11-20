@@ -1463,6 +1463,7 @@ chown -R henry:henry .git/objects
 * [zenhub](https://app.zenhub.com)：Agile project management integrated with GitHub
 * [commitizen/cz-cli](https://github.com/commitizen/cz-cli):The commitizen command line utility. http://commitizen.github.io/cz-cli/
 * [imsun/gitment](https://github.com/imsun/gitment):A comment system based on GitHub Issues. https://imsun.github.io/gitment/
+* [rtyley/bfg-repo-cleaner](https://github.com/rtyley/bfg-repo-cleaner):Removes large or troublesome blobs like git-filter-branch does, but faster. And written in Scala
 
 ## 参考
 
