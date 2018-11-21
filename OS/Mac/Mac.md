@@ -33,6 +33,16 @@ Mac：最大优势是 GUI 和命令行的完美结合
 -   [0nn0/terminal-mac-cheatsheet](https://github.com/0nn0/terminal-mac-cheatsheet)List of my most used commands and shortcuts in the terminal for Mac
 -   [rgcr/m-cli](https://github.com/rgcr/m-cli): Swiss Army Knife for macOS
 
+```sh
+# mac专有的pbcopy/pbpaste 把命令行输出拷贝到系统粘贴板：
+cat test.sh| pbcopy
+
+# 把系统粘贴板内容拷到终端:
+pbpaste
+
+for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World';done
+```
+
 ### Spoitlight
 
 -   查词典 Command+L
