@@ -28,8 +28,9 @@
       + [sensiolabs/security-checker](https://github.com/sensiolabs/security-checker):PHP frontend for security.sensiolabs.org https://security.sensiolabs.org
       + [phpseclib/phpseclib](https://github.com/phpseclib/phpseclib):PHP Secure Communications Library http://phpseclib.sourceforge.net
 
+##  框架
 
-* 框架
+* 通用
       + [Aura PHP](http://auraphp.com/): 一个独立的组件框架
       + [CakePHP](https://cakephp.org/): 一个快速应用程序开发框架 (CP)
       + [Laravel 5](https://laravel.com/): 另一个PHP框架 (L5)
@@ -56,7 +57,7 @@
       - [kakserpom/phpdaemon](https://github.com/kakserpom/phpdaemon):Asynchronous server-side framework for network applications implemented in PHP using libevent http://daemon.io/
       - [mnapoli/bref](https://github.com/mnapoli/bref):Serverless framework for PHP
 * 论坛
-      - [flarum/flarum](https://github.com/flarum/flarum):Delightfully simple forum software. <http://flarum.org>
+      - [flarum/flarum](https://github.com/flarum/flarum):Composer starter project for Flarum https://flarum.org
 * 电商
       + [magento/magento2](https://github.com/magento/magento2): a cutting edge, feature-rich eCommerce solution that gets results.
       + [drupal/drupal](https://github.com/drupal/drupal):Verbatim mirror of the git.drupal.org repository for Drupal core. Changes will not be pulled, and merge requests will not be accepted, if you want to contribute, go to Drupal.org: https://drupal.org/project/drupal
@@ -564,7 +565,9 @@
 * GEO
       - [mjaschen/phpgeo](https://github.com/mjaschen/phpgeo):Simple Geo Library for PHP
 * 搜索
-      - [elastic/elasticsearch-php](https://github.com/elastic/elasticsearch-php):Official PHP low-level client for Elasticsearch. 
+      - [elastic/elasticsearch-php](https://github.com/elastic/elasticsearch-php):Official PHP low-level client for Elasticsearch.
+* 机器学习
+      - [PHP-ML](https://github.com/php-ai/php-ml): 一个机器学习的PHP库
 * 杂项 Miscellaneous 创建一个开发环境的软件
       - (https://github.com/doctrine/annotations)[Annotations]: 一个注释库(Doctrine的一部分)
       - (https://github.com/cakephp/utility)[Cake Utility]: 工具类如Inflector，字符串，哈希，安全和XML (CP)
@@ -590,7 +593,6 @@
       - (https://github.com/Kitano/php-expression)[PHP Expression]: 一个PHP表达式语言
       - (https://github.com/eymengunay/php-passbook)[PHP PassBook]: 一个iOS PassBook PHP库
       - (https://github.com/ronanguilloux/php-gpio)[PHP-GPIO]: 一个用于Raspberry PI的GPIO pin的库
-      - (https://github.com/php-ai/php-ml)[PHP-ML]: 一个机器学习的PHP库
       - (https://github.com/phpcr/phpcr)[PHPCR]: 一个Java内容存储库(JCR)的PHP实现
       - (http://dunkels.com/adam/phpstack/)[PHPStack]: 一个PHP编写的TCP/IP栈概念
       - (https://github.com/koriym/print_o)[print_o]: 一个对象图的可视化器
