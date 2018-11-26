@@ -23,6 +23,7 @@
 * [apache/incubator-superset](https://github.com/apache/incubator-superset):Apache Superset (incubating) is a modern, enterprise-ready business intelligence web application
 * [vitorfs/bootcamp](https://github.com/vitorfs/bootcamp):An enterprise social network http://trybootcamp.vitorfs.com
 * [reviewboard/reviewboard](https://github.com/reviewboard/reviewboard):An extensible and friendly code review tool for projects and companies of all sizes. https://www.reviewboard.org/
+* [apereo/cas](https://github.com/apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
 
 ## 邮件
 

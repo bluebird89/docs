@@ -54,6 +54,7 @@
 * [dropbox/lepton](https://github.com/dropbox/lepton):Lepton is a tool and file format for losslessly compressing JPEGs by an average of 22%.
 * [Figma](https://www.figma.com/):在线工具
 * [botui/botui](https://github.com/botui/botui):🤖 A JavaScript framework to create conversational UIs https://botui.org
+* [wiredjs/wired-elements](https://github.com/wiredjs/wired-elements):Collection of elements that appear hand drawn. Great for wireframes. https://wiredjs.com
 
 ### [storybooks/storybook](https://github.com/storybooks/storybook)
 
