@@ -151,6 +151,10 @@
 
 * [yezihaohao/react-qmap](https://github.com/yezihaohao/react-qmap):💡react腾讯地图开源组件 https://cheng_haohao.gitee.io/reactqmap
 
+## 测试
+
+* [kentcdodds/react-testing-library](https://github.com/kentcdodds/react-testing-library):🐐 Simple and complete React DOM testing utilities that encourage good testing practices. http://npm.im/react-testing-library
+
 ## 路由
 
 * [reactjs/redux](https://github.com/reactjs/redux):Predictable state container for JavaScript apps http://redux.js.org
@@ -209,6 +213,7 @@
 * [JedWatson/react-select](https://github.com/JedWatson/react-select):The Select for React.js https://react-select.com/
 * [styled-components/styled-components](https://github.com/styled-components/styled-components):Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
 * [paypal/downshift](https://github.com/paypal/downshift):🏎 Primitive to build simple, flexible, WAI-ARIA compliant enhanced input React components http://downshift.netlify.com/
+* [tajo/react-portal](https://github.com/tajo/react-portal):React component for transportation of modals, lightboxes, loading bars... to document.body or else.
 
 ## 扩展
 

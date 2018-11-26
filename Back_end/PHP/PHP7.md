@@ -159,6 +159,10 @@ print($mathOperationsObj->doOperation());
 
 -   不要使用 mysql\_ 函数：把它们从核心中全部移除了
 
+## 工具
+
+* [swisnl/php7-upgrade-tools](https://github.com/swisnl/php7-upgrade-tools):A set of tools for upgrading applications to PHP 7
+
 ## 参考
 
 -   [tpunt/PHP7-Reference](tpunt/PHP7-Reference):An overview of the features, changes, and backward compatibility breakages in PHP 7

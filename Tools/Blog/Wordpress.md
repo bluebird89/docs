@@ -14,6 +14,10 @@ WordPress, Git-ified. Synced via SVN every 15 minutes, including branches and ta
 * 开始写博客：告诉世界你要开始写博客了，说说你要写的内容，介绍一下你自己。要和访问者进行交流，你可以使用 Wp-contact form 插件来建立一个联系页面。
 * 同时，别忘了创建 about 页面，因为访问者想了解你更多一些。
 
+## 安装
+
+* [安装地址](http://example.com/wp-admin/install.php)
+
 ## 参考
 
 * [kinsta](https://kinsta.com/):https://kinsta.com/resources/

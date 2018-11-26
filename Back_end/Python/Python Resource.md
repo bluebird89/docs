@@ -816,7 +816,7 @@ Python实现的数据库。
   - freezegun：通过伪造日期模块来生成不同的时间。[官网](https://github.com/spulec/freezegun)
   - httmock：针对 Python 2.6+ 和 3.2+ 生成 伪造请求的库。[官网](https://github.com/patrys/httmock)
   - httpretty：Python 的 HTTP 请求 mock 工具。[官网](http://falcao.it/HTTPretty/)
-  - responses：伪造 Python 中的 requests 库的一个通用库。[官网](https://github.com/getsentry/responses)
+  - [getsentry/responses](https://github.com/getsentry/responses)：utility for mocking out the Python Requests library.
   - VCR.py：在你的测试中记录和重放 HTTP 交互。[官网](https://github.com/kevin1024/vcrpy)
 * 对象工厂
   - factoryboy：一个 Python 用的测试固件 (test fixtures) 替代库。[官网](https://github.com/rbarrois/factoryboy)

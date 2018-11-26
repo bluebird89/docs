@@ -324,6 +324,7 @@ kubectl delete deployments hello-minikube1
 * [argoproj/argo](https://github.com/argoproj/argo):Container-native workflows for Kubernetes. https://argoproj.github.io
 * [datawire/ambassador](https://github.com/datawire/ambassador):open source Kubernetes-native API gateway for microservices built on the Envoy Proxy https://www.getambassador.ios
 * [helm/charts](https://github.com/helm/charts):Curated applications for Kubernetes
+* [virtual-kubelet/virtual-kubelet](https://github.com/virtual-kubelet/virtual-kubelet):Virtual Kubelet is an open source Kubernetes kubelet implementation.
 
 ## 部署
 
