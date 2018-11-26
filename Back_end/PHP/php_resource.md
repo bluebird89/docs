@@ -414,6 +414,7 @@
       - (https://github.com/php-amqplib/php-amqplib)[PHP AMQP]: 一个纯PHP AMQP库
       - (https://github.com/tarantool-php/queue)[Tarantool Queue]: PHP绑定Tarantool队列
       - (https://github.com/php-amqplib/Thumper)[Thumper]: 一个RabbitMQ模式库
+      - [chenlinzhong/php-delayqueue](https://github.com/chenlinzhong/php-delayqueue):基于redis实现高可用，易拓展，接入方便，生产环境稳定运行的延迟队列
 * 搜索 Search 在数据上索引和执行查询的库和软件
       - [Elastica](https://github.com/ruflin/Elastica): ElasticSearch的客户端库
       - [ElasticSearch PHP](https://github.com/elastic/elasticsearch-php): (https://www.elastic.co/)[ElasticSearch]的官方客户端库

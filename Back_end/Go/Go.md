@@ -192,6 +192,7 @@ websocketd --port=8080 ./count.sh // 建立server
 ## 测试
 
 * [stretchr/testify](https://github.com/stretchr/testify):A toolkit with common assertions and mocks that plays nicely with the standard library
+* [codegangsta/gin](https://github.com/codegangsta/gin):Live reload utility for Go web servers
 
 ## logger
 

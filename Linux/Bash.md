@@ -48,3 +48,5 @@ alias c='clear'
 ## 工具
 
 * [tartley/colorama](https://github.com/tartley/colorama):Simple cross-platform colored terminal text in Python
+* [dylanaraps/fff](https://github.com/dylanaraps/fff):🚀 fucking fast file-manager
+* [jmacdonald/amp](https://github.com/jmacdonald/amp):A complete text editor for your terminal. https://amp.rs

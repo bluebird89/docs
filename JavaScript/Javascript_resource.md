@@ -37,6 +37,7 @@
 * [pshihn/rough](https://github.com/pshihn/rough):Create graphics with a hand-drawn, sketchy, appearance http://roughjs.com
 * [DmitryBaranovskiy/raphael](https://github.com/DmitryBaranovskiy/raphael):JavaScript Vector Library http://www.raphaeljs.com/
 * [fengyuanchen/cropperjs](https://github.com/fengyuanchen/cropperjs):JavaScript image cropper. https://fengyuanchen.github.io/cropperjs
+* [Paul-Browne/lazyestload.js](https://github.com/Paul-Browne/lazyestload.js):load images only when they are in (and remain in) the viewport
 
 ## 编辑器
 
@@ -341,6 +342,7 @@
 * [usablica/intro.js](https://github.com/usablica/intro.js):A better way for new feature introduction and step-by-step users guide for your website and project. http://introjs.com
 * [rndme/download](https://github.com/rndme/download):file downloading using client-side javascript
 * [Shopify/draggable](https://github.com/Shopify/draggable)：The JavaScript Drag & Drop library your grandparents warned you about. https://shopify.github.io/draggable
+* [cferdinandi/smooth-scroll](https://github.com/cferdinandi/smooth-scroll):A lightweight script to animate scrolling to anchor links.
 
 ## 扩展
 
