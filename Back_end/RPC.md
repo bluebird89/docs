@@ -25,3 +25,4 @@ braft 是基于 brpc 的 Raft 协议工业级 C++ 实现，设计之初就考虑
 ## 工具
 
 * [uber/prototool](https://github.com/uber/prototool):Your Swiss Army Knife for Protocol Buffers
+* [grpc/grpc-web](https://github.com/grpc/grpc-web):gRPC for Web Clients https://grpc.io
