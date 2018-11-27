@@ -372,6 +372,7 @@ services:
 * [wurstmeister/kafka-docker](https://github.com/wurstmeister/kafka-docker):Dockerfile for Apache Kafka http://wurstmeister.github.io/kafka-d…
 * [vmware/photon](https://github.com/vmware/photon):Minimal Linux container host https://vmware.github.io/photon
 * [vagrant-libvirt/vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt):Vagrant provider for libvirt.
+* [deviantony/docker-elk](https://github.com/deviantony/docker-elk):The ELK stack powered by Docker and Compose.
 
 ## 工具
 

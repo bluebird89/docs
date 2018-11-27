@@ -165,6 +165,70 @@ sudo systemctl start tomcat
 sudo apt-get install maven2
 ```
 
+
+* 基础知识：
+  - Java反射：Field、Type
+  - Java代理：proxy、cglib
+  - Java线程：Thread、Runnable、ExecutorService、Callable、Future、ThreadPoolExecutor
+  - Java数据结构：HashMap ArrayList LinkedList HashSet BlockingQueue ConcurrentHashMap TreeMap
+  - JVM：运行时数据区、堆设置、收集器设置、回收日志分析
+  - Lambda表达式：stream、filter、collect、map、forEach、
+  - 并发与锁：synchronized、ReentrantLock、ReadWriteLock、Atomic；
+  - 通讯协议：HTTP、TCP/IP、NIO、BIO、WebSocket
+  - 数据结构：表、栈、队列、二叉树、AVL树、BTree、黑红数、散列、图。
+  - 常用算法：冒泡排序，选择排序，插入排序、堆排序，归并排序、快速排序；二分查找；布隆过滤器；
+  - 设计模式：工厂模式、观察者模式、单例模式、代理模式、命令模式、策略模式
+  - Web容器：tomcat、jboss、jetty
+  - HTTP服务：httpd、nginx、openResty、kong
+  - 工具包：common、poi、gson、guava
+  - 构建工具：maven、gradle
+  - 通讯框架：netty、mina
+  - 序列化：hessian、protostuff、json
+  - 服务发现：zookeeper、etcd、eureka、consul
+  - 数据库：mysql、mongoDB、redis、mycat、berkeleyDB
+  - 连接池：dbcp、c3o0、druid、jdbc、http
+  - 大数据：spark、storm、hadoop、hdfs
+  - 容器：docker、k8s
+  - 监控：zabbix、prometheus
+* 开源框架：
+  - Spring：IOC、AOP、事务处理
+  - SpringMVC：DispatcherServlet、HandlerMapping、HandlerAdapter、Controller、Intercepter、View
+  - SpringBoot：集成web、hibernate、mybatis、redis、docker下使用
+  - SpringCloud：Netfix、Config、Bus、Eureka、Consul、Stream、Task、Gateway
+  - Hibernate：Configuration、SessionFactory、乐观锁、二级缓存、高并发、多数据源
+  - Mybatis：Configuration、SqlSession、Executor 、TypeHandler、动态sql、二级缓存
+  - Netty：nio、拆念包、future、pipeline
+  - Guava：限流算法、布隆过滤器、JVM缓存
+  - Hystrix：隔离、熔断、降级
+  - 消息队列：rabbitMQ、rocketMQ、kafka
+  - RPC框架：dubbo、motan、thrift、grpc
+  - 搜索隐形：Lucene、Elasticsearch、Solr
+* 数据库：
+  - Mysql：主备、读写分、横向纵向拆分、调优、语法、索引、优化
+  - Redis：主备、读写分离、持久化、命中和过期
+  - MogoDB：集合、文档、文件、索引、聚合函数、分片
+* 消息队列：
+  - 概念：topic、message、queue、producer、consumer、broker
+  - 消息类型：顺序消息、定时消息、延迟消息、事务消息
+  - 消息回溯、消息堆积、消息拉取、消息签收
+* 高并发：
+  - 服务拆分：微服务化、分布式事务、数据库水平垂直拆分
+  - 服务治理：zookeeper、rpc
+  - 消息队列：异步处理、最终一致性
+  - 缓存技术：JVM缓存、redis缓存、nginx缓存、CDN缓存、浏览器缓存。缓存击穿、缓存雪崩、缓存淘汰
+* 高可用：
+  - 负载均衡：算法、动静分离、切换、检测
+  - 超时重试：超时时间、重试机制和策略
+  - 限流：算法、容器、nginx、防止抖动
+  - 隔离：线程隔离、进程隔离、机房隔离、读写隔离、动静隔离，采用hystrix、servlet3做隔离熔断
+  - 降级：自动降级、人工降级，控制中心，采用hystrix手段
+  - 监控：进程监控、线程监控、机器监控，报警
+* 问题解决
+  1.如何解决单点故障；(lvs、F5、A10、Zookeep、MQ)
+  2.如何保证数据安全性；(热备、冷备、异地多活)
+  3.如何解决检索难题；(数据库代理中间件：mysql-proxy、Cobar、MaxScale等;)
+  4.如何解决统计分析问题；(离线、近实时)
+
 ## 客户端
 
 - JavaFX
