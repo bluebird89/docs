@@ -45,9 +45,7 @@ SWITCH能够不锁区，香港能够成为首发地区，而且首发还有中�
 
 pro
 slim
-
 天蝎
-
 1080ti
 
 ### PC
@@ -77,6 +75,13 @@ slim
 -   [ ] Counter-Strike: Global Offensive
 -   [ ] Frostpunk
 -   [ ] 双点医生
+
+## 游戏
+
+* Capcom《街头霸王》
+* SEGA旗下的招牌明星索尼克
+* 《最终幻想7》
+* 王国之心
 
 ## 参考
 

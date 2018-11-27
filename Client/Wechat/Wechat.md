@@ -27,12 +27,17 @@ if ($tmpstr==$signature) {
 }
 ```
 
+## 网页授权
+
+
+
 ## platform
 
 微信生态的构建
 
 * [开放平台](https://open.weixin.qq.com/)
 * [公众平台](https://mp.weixin.qq.com/):公众号、小程序
+* [测试号](https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login)
 
 ## 参考
 

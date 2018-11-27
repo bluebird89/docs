@@ -6,6 +6,10 @@ Websocket是一个持久化的协议，相对于HTTP这种非持久的协议来�
 
 首先Websocket是基于HTTP协议的，或者说借用了HTTP的协议来完成一部分握手。
 
+Websocket是一个持久化的协议.Websocket只需要一次HTTP握手，所以说整个通讯过程是建立在一次连接/状态中，也就避免了HTTP的非状态性，服务端会一直知道你的信息，直到你关闭请求，这样就解决了接线员要反复解析HTTP协议，还要查看identity info的信息。
+
+keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request，接收多个Response。但是请记住 Request = Response ， 在HTTP中永远是这样，也就是说一个request只能有一个response。而且这个response也是被动的，不能主动发起。
+
 ```
 GET /chat HTTP/1.1
 Host: server.example.com
