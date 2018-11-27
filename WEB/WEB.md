@@ -18,11 +18,6 @@
 - 遇到大的压力测试，使用erlang开发的tsung会比较好，可以分布式测试，他们都是open source的
 - 压力测试的目标，是搞死服务器，从而找到瓶颈点，如果搞不死，意义就不大
 
-- apache AB
-- webbench
-
-<http://developer.51cto.com/art/200807/83518.htm><https://help.aliyun.com/document_detail/29322.html>
-
 ## 大流量
 
 - 对常用功能建立缓存模块
@@ -37,36 +32,10 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 
 要想达到要非常少的机器扛住大规模的并发，可能需要抛弃servlet，直接用netty或者nio参考v8，nodejs，tornado等直接构建非阻塞的异步协程socket服务器
 
-# 负载均衡
-
-当系统面临大量用户访问，负载过高的时候，通常会使用增加服务器数量来进行横向扩展，使用集群和负载均衡提高整个系统的处理能力。而我们讨论的负载均衡一般分为两种，一种是基于DNS，另一种基于IP报文。利用DNS实现负载均衡，就是在DNS服务器配置多个A记录，不同的DNS请求会解析到不同的IP地址。大型网站一般使用DNS作为第一级负载均衡。缺点是DNS生效时间略长，扩展性差。基于IP的负载均衡，早期比较有代表性并且被大量使用的的就是LVS了。原理是LVS在Linux内核态获取到IP报文后，根据特定的负载均衡算法将IP报文转发到整个集群的某台服务器中去。缺点是LVS的性能依赖Linux内核的网络性能，但Linux内核的网络路径过长导致了大量开销，使得LVS单机性能较低。那么有没有更好的负载均衡技术呢？当然有。Google于2016年3月最新公布的负载均衡Maglev就在此列。Maglev是谷歌为自己的数据中心研发的解决方案，并于2008开始用于生产环境。在第十三届网络系统设计与实现USENIX研讨会（NSDI '16）上， 来自谷歌、加州大学洛杉矶分校、SpaceX公司的工程师们分享了这一商用服务器负载均衡器Maglev的详细信息。Maglev安装后不需要预热5秒内就能应付每秒100万次请求令人惊叹不已。在谷歌的性能基准测试中，Maglev实例运行在一个8核CPU下，网络吞吐率上限为12M PPS(数据包每秒)，如果Maglev使用Linux内核网络堆栈则速度会小于4M PPS。无独有偶，国内云服务商 UCloud 进一步迭代了负载均衡产品----Vortex，成功地提升了单机性能。在技术实现上，UCloud Vortex与Google Maglev颇为相似。以一台普通性价比的x86 1U服务器为例，Vortex可以实现吞吐量达14M PPS(10G, 64字节线速)，新建连接200k CPS以上，并发连接数达到3000万、10G线速的转发。
-
-看带宽，一般来说nginx做负载比较简单，但单台服务器的带宽毕竟有限，1g了不起了，如果超过这个，就得用dns了，分片解析到一堆nginx，然后后面再挂负载均衡。在nginx流行之前，dns解析用的较多，主要是apache太弱了，以前相当于1级负载，现在中间加了一层nginx，2层结构，扩展更方便。另外业务也可以横向区分的，比如淘宝的图片服务器，除了负载均衡，还有cdn。
-
-- HTTP重定向
-- DNS负载均衡：NS服务器便充当负载均衡调度器。DNS节省了所谓的主站点，DNS服务器已经充当了主站点的职能。常见的策略是对多个A记录进行RR(轮询)
-- 反向代理负载均衡：核心工作是转发HTTP，它工作在HTTP层面，因此，基于反向代理的负载均衡也称为七层负载均衡。任何对于实际服务器的HTTP请求都必须经过调度器；调度器必须等待实际服务器的HTTP响应，并将它反馈给用户。
-- iP负载均衡：网络地址转换(NAT)负载均衡工作在传输层，对数据包中的IP地址和端口进行修改，从而达到转发的目的，称为四层负载均衡。NAT服务器（前端服务器）必须作为实际服务器（后端服务器）的网关，否则数据包被转发后将一去不返。
-
-## websocket
-
-Websocket是一个持久化的协议.Websocket只需要一次HTTP握手，所以说整个通讯过程是建立在一次连接/状态中，也就避免了HTTP的非状态性，服务端会一直知道你的信息，直到你关闭请求，这样就解决了接线员要反复解析HTTP协议，还要查看identity info的信息。
-
-keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request，接收多个Response。但是请记住 Request = Response ， 在HTTP中永远是这样，也就是说一个request只能有一个response。而且这个response也是被动的，不能主动发起。
-
 ## 性能
 
-一是网页中代码真实的运行速度
-
-二是用户在使用时感受到的速度
-
-
-## 实例
-
-- [PHP 进阶之路 - 亿级 pv 网站架构实战之性能压榨](https://segmentfault.com/a/1190000010455076)
-- [全站缓存](https://segmentfault.com/a/1190000005808789)
-
-<http://geek.csdn.net/news/detail/237188>
+* 一是网页中代码真实的运行速度
+* 二是用户在使用时感受到的速度
 
 ### 秒杀系统
 
@@ -97,17 +66,6 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 - 一些业务逻辑的异步：例如下单业务与 支付业务的分离
 
 给我们抢票的启示是，开动秒杀后，45分钟之后再试试看，说不定又有票哟~ [秒杀系统架构优化思路](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651959391&idx=1&sn=fb28fd5e5f0895ddb167406d8a735548)
-
-
-#### 参考
-
-* [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
-* [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
-* [WEB](https://developer.mozilla.org/en-US/docs/Web)
-* [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning Area. https://developer.mozilla.org/en-US/docs/Learn
-* [关于大型网站技术演进的思考](http://blog.jobbole.com/84761/)
-* [A Beginner’s Guide to Website Speed Optimization](https://kinsta.com/learn/page-speed/)
-* [大型WEB架构设计](https://mp.weixin.qq.com/s?__biz=MzAwNzY4OTgyNA==&mid=2651826002&idx=1&sn=237e6c340626171cf1f4eb6e0f19f182&chksm=8081445db7f6cd4bea29330141ac28228f09c024dd5671cb945171bf41a20d6f1386c455e330)
 
 ## 大访问量
 
@@ -192,6 +150,15 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 * [wxyyxc1992/Web-Series](https://github.com/wxyyxc1992/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
 * [Web](https://developers.google.com/web/)
 * [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) https://solid.mit.edu/
+* [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
+* [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
+* [WEB](https://developer.mozilla.org/en-US/docs/Web)
+* [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning Area. https://developer.mozilla.org/en-US/docs/Learn
+* [关于大型网站技术演进的思考](http://blog.jobbole.com/84761/)
+* [A Beginner’s Guide to Website Speed Optimization](https://kinsta.com/learn/page-speed/)
+* [大型WEB架构设计](https://mp.weixin.qq.com/s?__biz=MzAwNzY4OTgyNA==&mid=2651826002&idx=1&sn=237e6c340626171cf1f4eb6e0f19f182&chksm=8081445db7f6cd4bea29330141ac28228f09c024dd5671cb945171bf41a20d6f1386c455e330)
+- [PHP 进阶之路 - 亿级 pv 网站架构实战之性能压榨](https://segmentfault.com/a/1190000010455076)
+- [全站缓存](https://segmentfault.com/a/1190000005808789)
 
 ## 工具
 
@@ -202,13 +169,13 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 * [coturn/coturn](https://github.com/coturn/coturn):coturn TURN server project
 * [codesandbox](https://codesandbox.io):The online code editor for Preact
 * [acaudwell/Logstalgia](https://github.com/acaudwell/Logstalgia):replay or stream website access logs as a retro arcade game https://logstalgia.io
+* 压力测试
+    - apache AB
+    + webbench
 
 ## 监控
 
 * [davidkpiano/xstate](https://github.com/davidkpiano/xstate):State machines and statecharts for the modern web. https://xstate.js.org/docs
-
-## 统计
-
 * [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
 
 <https://zhuanlan.zhihu.com/p/22360384>
@@ -218,3 +185,7 @@ keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request�
 《大型网站技术架构：核心原理与案例分析》 6.2 应用服务器集群的伸缩性设计
 
 <http://tips.codekiller.cn/2017/05/17/maglev_describe/>
+
+<http://developer.51cto.com/art/200807/83518.htm><https://help.aliyun.com/document_detail/29322.html>
+
+<http://geek.csdn.net/news/detail/237188>
