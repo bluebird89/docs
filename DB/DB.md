@@ -72,6 +72,12 @@ NoSQL主要用于解决以下几种问题
 3.这方面最具代表性的是dynamo和bigtable 2篇论文所阐述的思路。前者是一个完全无中心的设计，节点之间通过gossip方式传递集群信息，数据保证最终一致性，后者是一个中心化的方案设计，通过类似一个分布式锁服务来保证强一致性,数据写入先写内存和redo log，然后定期compat归并到磁盘上，将随机写优化为顺序写，提高写入性能。
 4.Schema free，auto-sharding等。比如目前常见的一些文档数据库都是支持schema-free的，直接存储json格式数据，并且支持auto-sharding等功能，比如mongodb。
 
+## 分层数据库
+
+* IMS基于层次模型工作。将数据视为树。 以第一次构建数据库时预期的方式访问数据（先访问Customer，再访问Account），就可以非常快速地进行数据访问。但由于缺少灵活性。
+* E. F. Codd（埃德加·弗兰克·科德）在1970年的论文“大型共享数据库的数据关系模型”中提出了关系模型
+* 分层模型是一种自下而上的模型，是对具体现实的表示。而关系模型是基于关系代数的抽象模型，并且是自上而下的
+
 ## 扩展
 
 * [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. https://osquery.io
