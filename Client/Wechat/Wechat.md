@@ -29,7 +29,9 @@ if ($tmpstr==$signature) {
 
 ## 网页授权
 
-
+* code:redirect
+* accessToken openId:
+* userInfo
 
 ## platform
 
