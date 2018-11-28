@@ -848,6 +848,12 @@ UploadForm UploadedFile
 
 browser reopen generate new cookie
 
+## Yii1.1
+
+* route
+* cookie pass parameters
+* front get back parameters
+
 ## 参考
 
 -   [深入理解 Yii2.0](http://www.digpage.com/index.html)
