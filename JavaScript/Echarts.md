@@ -5,3 +5,4 @@ A powerful, interactive charting and visualization library for browser http://ec
 ## 参考
 
 * [官网](http://echarts.baidu.com/)
+* [ECharts](https://github.com/ecomfe/echarts)ECharts is a free, powerful charting and visualization library offering an easy way of adding intuitive, interactive, and highly customizable charts to your commercial products.

@@ -121,6 +121,7 @@ npm install gitbook-cli -g
 * [enquirer/enquirer](https://github.com/enquirer/enquirer):Stylish, intuitive and user-friendly prompt system.
 * [sofish/typo.css](https://github.com/sofish/typo.css):中文网页重设与排版：一致化浏览器排版效果，构建最适合中文阅读的网页排版 http://typo.sofi.sh
 * [unifiedjs/unified](https://github.com/unifiedjs/unified):☔ friendly interface backed by an ecosystem of plugins built for creating and manipulating content https://unified.js.org
+* [docsifyjs/docsify](https://github.com/docsifyjs/docsify):🃏 A magical documentation site generator. https://docsify.js.org
 
 ## [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor)
 
