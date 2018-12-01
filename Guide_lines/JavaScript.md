@@ -78,3 +78,4 @@ npm install -g eslint-plugin-html
 * [airbnb/javascript](https://github.com/airbnb/javascript):JavaScript Style Guide
 * [standard/standard](https://github.com/standard/standard):JavaScript Style Guide, with linter & automatic code fixer <https://standardjs.com>
 * [rwaldron/idiomatic.js](https://github.com/rwaldron/idiomatic.js):Principles of Writing Consistent, Idiomatic JavaScript
+* [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript):🛁 Clean Code concepts adapted for JavaScript
