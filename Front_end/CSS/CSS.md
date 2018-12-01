@@ -216,7 +216,7 @@ h1{
   }
 ```
 
-## 
+##
 
 字体图标缩小时可能会遇到部分图标存在锯齿现象
 
@@ -255,6 +255,8 @@ h1{
 * Bootswatch
 * jQuery UI Bootstrap
 * EZ-CSS
+* [Dogfalo/materialize](https://github.com/Dogfalo/materialize):Materialize, a CSS Framework based on Material Design https://materializecss.com
+* [BcRikko/NES.css](https://github.com/BcRikko/NES.css):NES-style CSS Framework | ファミコン風CSSフレームワーク https://bcrikko.github.io/NES.css
 
 ## 工具
 
@@ -265,6 +267,7 @@ h1{
 * [szynszyliszys/repaintless](https://github.com/szynszyliszys/repaintless):Library for fast CSS Animations
 * [nzbin/three-dots](https://github.com/nzbin/three-dots):🔮 CSS loading animations made by single element. https://nzbin.github.io/three-dots/
 * [ConnorAtherton/loaders.css](https://github.com/ConnorAtherton/loaders.css):Delightful, performance-focused pure css loading animations. https://connoratherton.com/loaders
+* [matthiasmullie/minify](https://github.com/matthiasmullie/minify):CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns. https://www.minifier.org
 
 ## 参考
 
@@ -276,7 +279,8 @@ h1{
 * [bjankord/Style-Guide-Boilerplate](https://github.com/bjankord/Style-Guide-Boilerplate):A starting point for crafting living style guides.
 * [sindresorhus/modern-normalize](https://github.com/sindresorhus/modern-normalize):Normalize browsers' default style
 * [30 Seconds of CSS](https://atomiks.github.io/30-seconds-of-css/)
-* [30-seconds/30-seconds-of-css](https://github.com/30-seconds/30-seconds-of-css):A curated collection of useful CSS snippets you can understand in 30 seconds or less. 
+* [30-seconds/30-seconds-of-css](https://github.com/30-seconds/30-seconds-of-css):A curated collection of useful CSS snippets you can understand in 30 seconds or less.
 * [Jxnblk](https://jxnblk.com/)
+* [l-hammer/You-need-to-know-css](https://github.com/l-hammer/You-need-to-know-css):🖖CSS tricks web developers need to know~ https://lhammer.cn/You-need-to-know-css/
 * [五个最新的CSS特性以及如何使用它们](https://zhuanlan.zhihu.com/p/40736286)
 * [chokcoco/iCSS](https://github.com/chokcoco/iCSS):谈谈一些有趣的 CSS 话题

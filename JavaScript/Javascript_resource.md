@@ -217,11 +217,12 @@
 * [sidorares/node-mysql2](https://github.com/sidorares/node-mysql2):⚡️ fast node-mysql compatible mysql driver for node.js
 * [sequelize/sequelize](https://github.com/sequelize/sequelize)An easy-to-use multi SQL dialect ORM for Node.js <http://docs.sequelizejs.com>
 * [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis):redis client for node http://redis.js.org/
+* [tgriesser/knex](https://github.com/tgriesser/knex):A query builder for PostgreSQL, MySQL and SQLite3, designed to be flexible, portable, and fun to use. http://knexjs.org
 
 ## SVG
 
 * [svgdotjs/svg.js](https://github.com/svgdotjs/svg.js):The lightweight library for manipulating and animating SVG http://svgjs.com/
-* [riccardoscalco/textures](https://github.com/riccardoscalco/textures):Textures.js is a JavaScript library for creating SVG patterns 
+* [riccardoscalco/textures](https://github.com/riccardoscalco/textures):Textures.js is a JavaScript library for creating SVG patterns
 
 ## 2D
 

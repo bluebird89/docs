@@ -8,9 +8,7 @@
 - [atlassian](https://www.atlassian.com/)
     -   stride
     -   [Jira](https://www.atlassian.com/software/jira)：敏捷开发，处理项目中的多个步骤,用于规划和跟踪工作，并确定优先级，处理产品发布，产品交付后监控性能
-    -   bitbucket：git仓库
     -   confluence
-    -   trello：任务面板
     -   sourcetree：git管理
     -   [bamboo](https://www.atlassian.com/software/bamboo):the choice of professional teams for continuous integration, deployment, and delivery
 - [Jfrog](https://jfrog.com)

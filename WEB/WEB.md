@@ -177,6 +177,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 
 * [davidkpiano/xstate](https://github.com/davidkpiano/xstate):State machines and statecharts for the modern web. https://xstate.js.org/docs
 * [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
+* [davidkpiano/xstate](https://github.com/davidkpiano/xstate):State machines and statecharts for the modern web. https://xstate.js.org/docs
 
 <https://zhuanlan.zhihu.com/p/22360384>
 
