@@ -1008,6 +1008,7 @@ git push --force origin myfeature
 * [awesome-actions](https://github.com/sdras/awesome-actions):A curated list of awesome actions to use on GitHub
 * [gitalk/gitalk](https://github.com/gitalk/gitalk):Gitalk is a modern comment component based on Github Issue and Preact. https://gitalk.github.io
 * [desktop/desktop](https://github.com/desktop/desktop):Simple collaboration from your desktop https://desktop.github.com
+* [OctoLinker/OctoLinker](https://github.com/OctoLinker/OctoLinker):OctoLinker – Available on Chrome, Firefox and Opera https://octolinker.github.iow
 
 ### 合并commit选项
 
@@ -1398,6 +1399,10 @@ These features allow to pause a branch development and switch to another one (_"
 | work_in_progress | Echoes a warning if the current branch is a wip |
 | gwip             | Commit wip branch                               |
 | gunwip           | Uncommit wip branch                             |
+
+## contributions
+
+* [firstcontributions/first-contributions](https://github.com/firstcontributions/first-contributions):🚀✨ Help beginners to contribute to open source projects https://firstcontributions.github.io
 
 ## 客户端
 

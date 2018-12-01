@@ -105,6 +105,10 @@ NoSQL主要用于解决以下几种问题
 * [orbitdb/orbit-db](https://github.com/orbitdb/orbit-db):Peer-to-Peer Databases for the Decentralized Web
 * [prometheus/prometheus](https://github.com/prometheus/prometheus)：The Prometheus monitoring system and time series database. https://prometheus.io/
 
+## 工具
+
+* [harelba/q](https://github.com/harelba/q):q - Run SQL directly on CSV or TSV files http://harelba.github.io/q/
+
 ## 参考
 
 * [数据库的原理](http://blog.jobbole.com/100349/)

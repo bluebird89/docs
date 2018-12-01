@@ -6,7 +6,7 @@
 
 ## 框架
 
-* [lavas](https://lavas.baidu.com/)
+* [lavas-project/lavas](https://github.com/lavas-project/lavas):基于 Vue 的 PWA 解决方案，帮助开发者快速搭建 PWA 应用，解决接入 PWA 的各种问题 https://lavas.baidu.com
 
 ## 项目
 

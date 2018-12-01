@@ -737,6 +737,7 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 * [chinchang/web-maker](https://github.com/chinchang/web-maker):A blazing fast & offline frontend playground https://webmakerapp.com/
 * [Staticfile CDN](https://www.staticfile.org/):收录优秀的开源库，并免费为之提供 CDN 加速服务，使之有更好的访问速度和稳定的环境
 * [alibaba/ice](https://github.com/alibaba/ice):🚀 飞冰 - 让前端开发简单而友好，海量可复用物料，配套桌面工具极速构建前端应用，效率提升 100% https://alibaba.github.io/ice/
+* [google/material-design-lite](https://github.com/google/material-design-lite):Material Design Components in HTML/CSS/JS https://getmdl.io
 
 ## 框架
 
@@ -749,5 +750,4 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 * [dypsilon/frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
 * [AlloyTeam/Mars](https://github.com/AlloyTeam/Mars)腾讯移动Web前端知识库
 * [fex-team/webuploader](https://github.com/fex-team/webuploader)It's a new file uploader solution!
-* [ECharts](https://github.com/ecomfe/echarts)ECharts is a free, powerful charting and visualization library offering an easy way of adding intuitive, interactive, and highly customizable charts to your commercial products.
 * [thedaviddias/Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist):🗂 The perfect Front-End Checklist for modern websites and meticulous developers https://frontendchecklist.io

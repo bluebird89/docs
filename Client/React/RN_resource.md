@@ -6,7 +6,7 @@
 
 ## 状态
 
-*  [jamiebuilds/unstated](https://github.com/jamiebuilds/unstated):State so simple, it goes without saying https://unstated.io
+* [jamiebuilds/unstated](https://github.com/jamiebuilds/unstated):State so simple, it goes without saying https://unstated.io
 * [mweststrate/immer](https://github.com/mweststrate/immer):Create the next immutable state by mutating the current one
 
 ## 编辑器
@@ -214,6 +214,8 @@
 * [styled-components/styled-components](https://github.com/styled-components/styled-components):Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
 * [paypal/downshift](https://github.com/paypal/downshift):🏎 Primitive to build simple, flexible, WAI-ARIA compliant enhanced input React components http://downshift.netlify.com/
 * [tajo/react-portal](https://github.com/tajo/react-portal):React component for transportation of modals, lightboxes, loading bars... to document.body or else.
+* [jasonslyvia/react-lazyload](https://github.com/jasonslyvia/react-lazyload):Lazy load your component, image or anything matters the performance.
+* [react-component/upload](https://github.com/react-component/upload):React Upload http://react-component.github.io/upload/
 
 ## 扩展
 

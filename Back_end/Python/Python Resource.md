@@ -592,6 +592,7 @@ Python实现的数据库。
 * RoboBrowser：一个简单的，Python 风格的库，用来浏览网站，而不需要一个独立安装的浏览器。[官网](https://github.com/jmcarp/robobrowser)
 * Requestium：从请求开始并无缝地切换到使用Selenium，它可以作为一个请求的直接替换
 * [s0md3v/Photon](https://github.com/s0md3v/Photon):Incredibly fast crawler designed for reconnaissance.
+* [Anorov/cloudflare-scrape](https://github.com/Anorov/cloudflare-scrape):A Python module to bypass Cloudflare's anti-bot page.
 
 ## 网页内容提取
 

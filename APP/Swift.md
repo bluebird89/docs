@@ -9,6 +9,7 @@ The Swift Programming Language https://swift.org/
 * [vapor/vapor](https://github.com/vapor/vapor):💧 A server-side Swift web framework. https://vapor.codes
 * [mxcl/PromiseKit](https://github.com/mxcl/PromiseKit):Promises for Swift & ObjC
 * [bizz84/SwiftyStoreKit](https://github.com/bizz84/SwiftyStoreKit):Lightweight In App Purchases Swift framework for iOS 8.0+, tvOS 9.0+ and macOS 10.10+
+* [Daltron/NotificationBanner](https://github.com/Daltron/NotificationBanner):The easiest way to display highly customizable in app notification banners in iOS
 
 ## 参考
 
