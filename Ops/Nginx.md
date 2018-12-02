@@ -726,6 +726,51 @@ server {
 }
 ```
 
+## 缓存
+
+* 利用客户访问的时间局部性原理，对客户已经访问过的内容在Nginx服务器本地建立副本，这样在一段时间内再次访问该数据，就不需要通过Ｎginx服务器再次向后端服务器发出请求，所以能够减少Ｎginx服务器与后端服务器之间的网络流量，减轻网络拥塞，同时还能减小数据传输延迟，提高用户访问速度。
+* 当后端服务器宕机时，Nginx服务器上的副本资源还能够回应相关的用户请求
+* 基于Proxy Store:只能缓存200状态下的响应数据，同时不支持动态链接请求。比如:getsource?id=1和getsource?id=2这两个请求，返回的是相同的资源。所以实际上，一般是采用Nginx搭配Squid服务器架构实现方案。
+    - 404错误驱动：服务器能够捕捉404错误，进一步转向后端服务器请求相关数据，最后将后端请求到的数据传回客户端，并在服务器本地缓存
+    - 资源不存在驱动:通过location块的location if条件判断直接驱动Nginx服务器和后端服务器的通信和Ｗeb缓存，而不对资源不存在产生404错误
+* 基于memcached的缓存机制:memcached在内存中开辟一块空间，然后建立一个Ｈash表，将缓存数据通过键/值存储在Hash表中进行管理。memcached由服务端和客户端两个核心模块组成，服务端通过计算“键”的Hash值来确定键/值对在服务端所处的位置。当位置确定后，客户端就会向对应的服务端发送一个查询请求，让服务端查找并返回所需数据。
+
+```
+location /{
+    root /web/server/;
+    #将404错误定向到/error_page目录下
+    error_page 404 =200 /error_page$request_uri;
+}
+
+// 捕获404错误的重定向
+location /error_page/{
+    internal;
+    alias /home/html;
+    proxy_pass http://backend/;  #后端upstream地址或者源地址
+    proxy_store on;   #指定Ｎginx将后端服务器返回的文件保存
+    proxy_store_access user:rw group:rw all:r;
+    #配置临时目录，目录需要和/web/server/在同一个硬盘分区内
+    proxy_temp_path /web/server/tmp;
+}
+
+location /{
+    root /web/server/;
+    internal;
+    alias /home/html;
+    proxy_store on;   #指定Ｎginx将后端服务器返回的文件保存
+    proxy_store_access user:rw group:rw all:r;
+    #配置临时目录，目录需要和/web/server/在同一个硬盘分区内
+    proxy_temp_path /web/server/tmp;
+
+    #判断请求文件是否存在，不存在则执行代理，向后端服务器发出请求
+    if( !-f $request_filename)
+    {
+    proxy_pass http://backend/;  #后端upstream地址或者源地址
+    }
+}
+
+```
+
 ## docker 配置
 
 ### 构建镜像
@@ -992,7 +1037,7 @@ vim nginx_log_to_mysql.sh
 chmod +x /root/shell/nginx_log_to_mysql.sh
 crontab –e
 # 凌晨0时15分执行
-15 0 * * * /root/shell/nginx_log_to_mysql.sh &> /var/log/nginx_sh.log 
+15 0 * * * /root/shell/nginx_log_to_mysql.sh &> /var/log/nginx_sh.log
 ```
 
 ## 模块
