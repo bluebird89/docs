@@ -20,6 +20,9 @@ brew install maven
 export MAVEN_HOME=/usr/local/Cellar/maven/3.5.2
 export PATH=$PATH:$MAVEN_HOME/bin
 
+# linux
+sudo apt-get install maven2
+
 maven -v
 ```
 
@@ -88,7 +91,7 @@ public class DefaultRepositoryLayout
 }
 ```
 
-比如：groupId=com.feiyue、artifactId=demo、version=1.0、artifactId=jdk7、packaging=jar 
+比如：groupId=com.feiyue、artifactId=demo、version=1.0、artifactId=jdk7、packaging=jar
 
 其对应的路径生成如下：
 
@@ -143,12 +146,12 @@ Maven仓库分为两类：本地仓库和远程仓库。当Maven根据坐标寻�
 
 maven 提供了开发人员的方式来管理：
 
-* Documentation 
-* Reporting 
-* Dependencies 
-* SCMs 
-* Releases 
-* Distribution 
+* Documentation
+* Reporting
+* Dependencies
+* SCMs
+* Releases
+* Distribution
 * mailing list
 
 ### 依赖管理
@@ -195,7 +198,7 @@ Linux
 
 Mac
 
-* `vi ~/.bash_profile ` 
+* `vi ~/.bash_profile `
 * 添加 `export M2_HOME=/usr/local/apache-maven-3.3.9` `export PATH=$PATH:$M2_HOME/bin`
 * `source ~/.bash_profile`
 * `mvn --version`
@@ -229,7 +232,7 @@ mvn deploy部署，在构建环境中完成，复制最终的包到远程库。
 
 * 手动创建:Maven项目由一个自己默认的配置，使用者不需要修改那些约定的内容，这就是“约定优于配置”，按照Maven项目目录约定，手动创建各个文件夹即可，一般不会使用这种方式。动态web的Maven项目的目录约定如下图所示：![](../../_static/maven-manual.png)
 * 命令行:在项目目录 `mvn archetype:generate -DgroupId=com.cloud.hellomaven -DartifactId=hellomaven-service -Dversion=1.0.0-SNAPSHOT -Dpackage=com.cloud.service`
-* Eclipse提供了一个很好的插件m2eclipse无缝将Maven和Eclipse集成在一起，配置插件选择本地maven目录和配置文件setting.xml即可。 
+* Eclipse提供了一个很好的插件m2eclipse无缝将Maven和Eclipse集成在一起，配置插件选择本地maven目录和配置文件setting.xml即可。
 * Idea IDE 创建一个maven web项目
 
 ## Setting文件配置
@@ -242,18 +245,18 @@ mvn deploy部署，在构建环境中完成，复制最终的包到远程库。
 ### 代理
 公司网络需要通过安全认证的代理访问因特网，这种情况下需要为Maven配置HTTP代理，才能正常访问外部仓库下载所需要的资源。在settings.xml文件中添加代理配置。proxies下可以添加多个proxy节点，默认第一个active为true的会生效。nonProxyHost表示不需要代理访问的地址。中间的竖线分隔多个地址，此处可以使用星号作为通配符号。
 ```
-<proxies>    
-   <proxy>    
-     <id>myproxy</id>    
-     <active>true</active>    
-     <protocol>http</protocol>    
-     <host>192.0.0.100</host>    
-     <port>1234</port>    
-     <username>xxxxx</username>    
-     <password>xxxxx</password>    
-     <nonProxyHosts>*.xxx.com|xxx.org</nonProxyHosts>    
-   </proxy>    
-</proxies>  
+<proxies>
+   <proxy>
+     <id>myproxy</id>
+     <active>true</active>
+     <protocol>http</protocol>
+     <host>192.0.0.100</host>
+     <port>1234</port>
+     <username>xxxxx</username>
+     <password>xxxxx</password>
+     <nonProxyHosts>*.xxx.com|xxx.org</nonProxyHosts>
+   </proxy>
+</proxies>
 ```
 
 ###  远程仓库的认证
