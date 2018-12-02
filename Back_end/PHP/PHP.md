@@ -542,8 +542,8 @@ define("WRITE", 2);
 define("DELETE", 4);
 define("UPDATE", 8);
 
-$permission = READ|WRITE; // 赋予权限
-$permission = READ & ~WRITE; // 禁止写权限
+$permission = READ|WRITE; // 赋予权限 加法
+$permission = READ & ~WRITE; // 禁止写权限 反向全量的选法
 
 if( READ & $permission ){ //判断权限
 　　echo "ok";
