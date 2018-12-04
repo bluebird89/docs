@@ -27,6 +27,8 @@
 * 安全
       + [sensiolabs/security-checker](https://github.com/sensiolabs/security-checker):PHP frontend for security.sensiolabs.org https://security.sensiolabs.org
       + [phpseclib/phpseclib](https://github.com/phpseclib/phpseclib):PHP Secure Communications Library http://phpseclib.sourceforge.net
+* 配置
+      - [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv):Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.
 
 ##  框架
 
@@ -705,6 +707,8 @@
       - [Taking PHP Seriously](https://www.infoq.com/presentations/php-history): 来自Facebook Keith Adams 讲述PHP优势
 * 错误
       - [filp/whoops](https://github.com/filp/whoops):PHP errors for cool kids http://filp.github.io/whoops/
+* https
+      - [composer/ca-bundle](https://github.com/composer/ca-bundle):Lets you find a path to the system CA bundle, and includes a fallback to the Mozilla CA bundle.
 
 ## 播客 PHP Podcasts
 
@@ -892,6 +896,37 @@ else
 fi
 ```
 
+## 学习路线
+
+* 熟悉HTML/CSS/JS等网页基本元素，完成阶段可自行制作简单的网页，对元素属性相对熟悉。
+* 理解动态语言的概念和运做机制，熟悉基本的PHP语法。
+* 学习如何将PHP与HTML结合起来，完成简单的动态页面。
+* 接触学习MySQL，开始设计数据库。
+* 不断巩固PHP语法，熟悉大部分的PHP常用函数，理解面向对象编程，MySQL优化，以及一些模板和框架。
+* 最终完成一个功能齐全的动态站点。
+
+### 经验
+
+新手不要看到上面的概括就以为PHP学习是很简单的，编程是需要你认真的思考和不断的实践。
+
+* 任何网站都是由网页组成的，也就是说想完成一个网站，必须先学会做网页，掌握静态网页的制作技术是学习开发网站的先决条件。因此我们要学习HTML，为今后制作网站打下基础。学习HTML应该边学边做，HTML中的任何元素都要亲自实践，只有明白了什么元素会起到什么效果之后，才能深刻记忆，一味的看书是不行的。
+
+假设你已经可以完成一个静态页面了，那么就该开始了解动态语言，刚一接触动态语言，可能很多人都会有很多不解，代码不是作为直接输出的，而是要经过处理的，HTML是经过HTML解析器，而PHP也要通过PHP解析器，跟学习HTML一样的道理，想让任何的解析器工作，就必须使用它专用的语法结构。
+
+学习PHP，你应该感到幸运，因为如果你学过其他语言，你就会发现PHP还是相对简单的，这一阶段，你要搞清楚HTML和PHP的概念，你现在完全可以让PHP给你算算一加一等于几，然后在浏览器输出。不要觉得幼稚，这虽然是很小的一段代码，但是对于你的编程之路，可是迈出了一大步。不过现在，你还是一个菜鸟。
+
+* 接下来就要学习数据库了，MySQL可以说是PHP的黄金搭档，我们要征服这个数据库，在你理解了数据库的概念之后，就要尝试通过PHP来连接数据库，进而会用PHP成功的插入，删除和更新数据。
+
+这个时候，你可能会处于这种状态：你会HTML吗？会，我能编好几个表格排板的网页呢！你会PHP吗？会，我会把一加一的运算写在函数里，然后调用！你会MySQL吗？会，我可以把数据库里的数据插入删除啦！
+
+那接下来该做什么呢？尝试着做个小的留言本吧，这同样是新手面临的一道关卡。花了一段时间，你终于学会把表单的数据插入数据库，然后显示出来了，应该说一个程序的雏形已经诞生了。但是，你可能会看人家这个编论坛，那个开发CMS，我什么时候可以写一个呢？不要急，再巩固一下知识，熟悉了PHP和MySQL开发的要领后，再回头看你写的那个留言本，你也许会怀疑那真的是你写的吗？这个时候，你可以完善一下你写的留言本。留言本应该加入注册以及分页的功能，可以的话，UI也可以加强。
+
+这就算学会了吗？NO，NO，NO，还早呢，你到现在还没碰过OOP呢吧？那模板和框架呢？还要继续学习呀！PHP框架提供了一个用以构建web应用的基本框架，从而简化了用PHP编写web应用程序的流程。可以节省开发时间、有助于建立更稳定的应用。所以说，PHP框架是一个可以用来节省时间并强化自己代码的工具。当你第一次选择PHP框架时，建议多尝试几个，每个框架都有自己的长处和短处，例如Zend框架由于多样的功能、并且有一个广泛的支持系统，流行了很长时间。而CakePHP是一个晚于Zend的PHP框架，相应的支持系统也比较少，但是更为方便和易于使用。
+
+了解了面向对象和框架后，你应该接触一下XML了，总而言之，你绝对不会发现你全部都学会了，学无止境！学东西，永远不要妄想有速成这一说，技巧再多，但是缺少努力，那也是白搭。有一点可以保证，就是你学会了PHP，那么再学其它语言，肯定速成，反过来也一样，如果你之前学过其它的语言，那么学PHP肯定快。
+
+多借鉴别人成功的代码，绝对是有益无害，所以要多看那些经过千锤百炼凝出来的经典代码，是进步的最好方法。另外，要强调的是，学习一项技术过程中可能会遇到困难，可能会迷茫，你也许学了一半的PHP，又开始打C#的主意，或者有人说Java很好，这个时候你绝对不能动摇，要坚持到底，彻底学会。祝你顺利学成PHP，开发自己想要的网站。
+
 ## 扩展
 
 * [PHP 开发者如何做代码审查?](http://blog.csdn.net/gitchat/article/details/78050953)
@@ -922,10 +957,9 @@ fi
 * [twigphp/Twig](https://github.com/twigphp/Twig):Twig, the flexible, fast, and secure template language for PHP http://twig.sensiolabs.org/
 * [smarty-php/smarty](https://github.com/smarty-php/smarty)
 
-## 社区
+## 项目
 
-- [coffeephp](http://coffeephp.com/)
-- [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
+* [a54552239/projectManageApi](https://github.com/a54552239/projectManageApi):项目管理系统接口
 
 ## 参考
 
@@ -940,6 +974,7 @@ fi
 - [php-fig/fig-standards](https://github.com/php-fig/fig-standards):Standards either proposed or approved by the Framework Interop Group http://www.php-fig.org/
 - [appzcoder/30-seconds-of-php-code](https://github.com/appzcoder/30-seconds-of-php-code):A curated collection of useful PHP snippets that you can understand in 30 seconds or less.
 - [elarity/data-structure-php](https://github.com/elarity/data-structure-php):对于数据结构和算法类的东西
+- [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
 
 ## 工具
 
