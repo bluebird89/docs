@@ -144,6 +144,7 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 ## 框架
 
 * [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
+* [dcloudio/uni-app](https://github.com/dcloudio/uni-app):使用 Vue.js 开发跨平台应用的前端框架 http://uniapp.dcloud.io
 
 ### [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
 

@@ -47,6 +47,10 @@
 * [basecamp/trix](https://github.com/basecamp/trix):A rich text editor for everyday writing https://trix-editor.org/
 * [fex-team/ueditor](https://github.com/fex-team/ueditor):rich text 富文本编辑器 http://ueditor.baidu.com
 
+## Highlight
+
+* [julmot/mark.js](https://github.com/julmot/mark.js):JavaScript keyword highlighting. Mark text with with options that fit every application. Also available as jQuery plugin. https://markjs.io/
+
 ## 日期
 
 * [date-fns/date-fns](https://github.com/date-fns/date-fns):⏳ Modern JavaScript date utility library ⌛️ https://date-fns.org
@@ -381,6 +385,7 @@
 * [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
 * [kvz/locutus](https://github.com/kvz/locutus):All your standard libraries will be assimilated into our JavaScript collective. Resistance is futile. http://locutus.io
 * [panzerdp/voca](https://github.com/panzerdp/voca):The ultimate JavaScript string library https://vocajs.com
+* [kripken/emscripten](https://github.com/kripken/emscripten):Emscripten: An LLVM-to-JavaScript Compiler
 
 ## 文档
 

@@ -644,6 +644,7 @@ ccache gcc foo.c
 * [dylanaraps/fff](https://github.com/dylanaraps/fff):🚀 fucking fast file-manager
 * [jmacdonald/amp](https://github.com/jmacdonald/amp):A complete text editor for your terminal. https://amp.rs
 * [liamg/aminal](https://github.com/liamg/aminal):Golang terminal emulator from scratch
+* [amanusk/s-tui](https://github.com/amanusk/s-tui):Terminal based CPU stress and monitoring utility https://amanusk.github.io/s-tui/
 
 ## 插件
 

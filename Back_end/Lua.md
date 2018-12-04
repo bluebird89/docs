@@ -23,6 +23,7 @@ make linux test
 
 * [Azure/golua](https://github.com/Azure/golua):A Lua 5.3 engine implemented in Go
 * [tboox/ltui](https://github.com/tboox/ltui):🍯A cross-platform terminal ui library based on Lua https://tboox.org
+* [tboox/xmake](https://github.com/tboox/xmake):🔥 A cross-platform build utility based on Lua https://xmake.io
 
 ## 参考
 

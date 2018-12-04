@@ -261,6 +261,7 @@
 * [hangtwenty/dive-into-machine-learning](https://github.com/hangtwenty/dive-into-machine-learning):Dive into Machine Learning with Python Jupyter notebook and scikit-learn! http://hangtwenty.github.io/dive-into-machine-learning/
 * [wizardforcel/nyu-mlif-notes](https://github.com/wizardforcel/nyu-mlif-notes):📖 NYU 金融机器学习 中文笔记
 * [mlflow/mlflow](https://github.com/mlflow/mlflow):Open source platform for the machine learning lifecycle https://mlflow.org
+* [zhaozhengcoder/Machine-Learning](https://github.com/zhaozhengcoder/Machine-Learning)：关于机器学习的内容
 
 ## 教程
 
