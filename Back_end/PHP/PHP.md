@@ -4,9 +4,9 @@ The PHP Interpreter <http://www.php.net>
 
 PHP是一门弱类型的语言，变量在声明的那一刻是不需要确定它的类型的，而在运行时类型也会发生显式或隐式的类型改变.所用的程序是要经过两层代理
 
-* PHP代表HyperText预处理器。
+* PHP(Hypertext Preprocessor)
 * PHP是一种解释型语言，即不需要编译。
-* PHP是一种服务器端脚本语言。
+* PHP是一种服务器端脚本语言，结果以纯 HTML 形式返回给浏览器
 * PHP比其他脚本语言更快,如：Python和asp。
 * HTTP协议在Nginx等服务器的解析下,传送给相应的Handler（PHP等）来处理。后端渲染，默认html处理，模版文件以.php后缀
 * 服务端脚本程序，只能通过服务器访问，需要配置虚拟主机调试
@@ -209,13 +209,21 @@ sudo apt install php7.2-dev # to use phpize  生成编译检测脚本
 
 * PHP代码的标记：<?php …… ?>
 * PHP文件的扩展名：.php
-* PHP中每行程序代码，必须以英文下的分号(;)结束。而JS中分号可以省略。
+* PHP中每行程序代码，必须以英文下的分号(;)结束。
 * PHP程序区分大小写的，但函数名和关键字不区分大小写。如：if、break、switch
 * 访问PHP文件，必须要经过服务器，或者以域名开头来访问。如：http://www.2015.com/test.php
 * PHP文件及路径上不能包括中文或空格。
 * 单行注释：//、#
 * 多行注释：/* …… */
 * 变量：临时存储数据的容器，指向值的指针。保存数据内存位置的名称。 变量是用于保存临时数据的临时存储
+    - 作用域
+        + local：函数内部声明的变量是局部变量，仅能在函数内部访问
+        + global：在所有函数外部定义的变量，拥有全局作用域。
+            + 除了函数外，全局变量可以被脚本中的任何部分访问
+            + 要在一个函数中访问一个全局变量，需要使用 global 关键字。
+            + 所有全局变量存储在一个名为 $GLOBALS[index] 的数组中。index 保存变量的名称。这个数组可以在函数内部访问，也可以直接用来更新全局变量。
+        + static：当一个函数完成时，它的所有变量通常都会被删除。希望某个局部变量不要被删除。
+        + parameter：通过调用代码将值传递给函数的局部变量
     - 变量本身没有类型之说，所说的类型是指变量中，存储的数据的类型。
     - 变量的名称，可以包含：字母、数字、下划线。
     - 变量的名称，不能以数字和特殊符号开头，但可以以字母或下划线开头。如：$_ABC、$abc
@@ -243,6 +251,32 @@ sudo apt install php7.2-dev # to use phpize  生成编译检测脚本
 # 变量
 $variablename = value;
 
+$x=5;
+$y=10;
+function myTest()
+{
+    global $x,$y;
+    $y=$x+$y;
+}
+myTest();
+echo $y; // 输出 15
+
+function myTest()
+{
+    static $x=0;
+    echo $x;
+    $x++;
+}
+myTest(); // 0
+myTest(); // 1
+myTest(); // 2
+
+function myTest($x)
+{
+    echo $x;
+}
+myTest(5);
+
 # 常量
 define("MESSAGE", "Hello YiiBai PHP");
 const MESSAGE = "Hello const by YiiBai PHP";
@@ -252,14 +286,15 @@ const MESSAGE = "Hello const by YiiBai PHP";
 
 #### 标量类型
 
-- 布尔型
-- 字符串型
+- Boolean（布尔型）
+- String（字符串）
     + 单引号PHP字符串中，大多数转义序列和变量不会被解释。 可以使用单引号\'反斜杠和通过\\在单引号引用PHP字符串。
     + 双引号的PHP字符串中存储多行文本，特殊字符和转义序列
     + addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
     + urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
-- 整型
-- 浮点型
+- Integer（整型）
+- Float（浮点型）
+- NULL（空值）
 
 ```php
 $str='Hello text within single quote';
@@ -288,11 +323,11 @@ html_entity_decode(string)
 
 #### 复合类型
 
-- 数组
+- Array（数组）
     + 索引数组
     + 关联数组
     + 多维数组
-- 对象
+- Object（对象）
 
 ```php
 # array

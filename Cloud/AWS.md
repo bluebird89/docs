@@ -14,6 +14,7 @@
 * [minio/minio](https://github.com/minio/minio):Minio is an open source object storage server compatible with Amazon S3 APIs https://minio.io/downloads.html#download-server
 * [aws/opsworks-cookbooks](https://github.com/aws/opsworks-cookbooks):Chef Cookbooks for the AWS OpsWorks Service
 * [minio/minio](https://github.com/minio/minio):Minio is an open source object storage server compatible with Amazon S3 APIs https://minio.io/downloads.html#download-server
+* [aws/aws-cli](https://github.com/aws/aws-cli):Universal Command Line Interface for Amazon Web Services
 
 ## 参考
 

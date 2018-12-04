@@ -938,6 +938,7 @@ JavaEE/JDBC/Weblogic
 ## 测试
 
 * [alibaba/arthas](https://github.com/alibaba/arthas):Alibaba Java Diagnostic Tool Arthas/Alibaba Java诊断利器Arthas https://alibaba.github.io/arthas/
+* [mockito/mockito](https://github.com/mockito/mockito):Most popular Mocking framework for unit tests written in Java http://mockito.org
 
 ## datetime
 
@@ -946,6 +947,10 @@ JavaEE/JDBC/Weblogic
 ## 资源
 
 * [OpenJDK](http://openjdk.java.net)
+
+## 框架
+
+* [lets-blade/blade](https://github.com/lets-blade/blade):🚀 Lightning fast and elegant mvc framework for Java8 https://lets-blade.com
 
 ## 工具
 
@@ -962,6 +967,7 @@ JavaEE/JDBC/Weblogic
 * [kevinsawicki/http-request](https://github.com/kevinsawicki/http-request):Java HTTP Request Library
 * [ReactiveX/RxJava](https://github.com/ReactiveX/RxJava):RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.
 * [qiujiayu/AutoLoadCache](https://github.com/qiujiayu/AutoLoadCache):AutoLoadCache 是基于AOP+Annotation等技术实现的高效的缓存管理解决方案，实现缓存与业务逻辑的解耦，并增加异步刷新及“拿来主义机制”，以适应高并发环境下的使用。
+* [eclipse-vertx/vert.x](https://github.com/eclipse-vertx/vert.x):Vert.x is a tool-kit for building reactive applications on the JVM http://vertx.io
 
 ## 教程
 

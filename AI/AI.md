@@ -22,3 +22,8 @@
 
 * [麻省理工学院公开课：人工智能](https://www.bilibili.com/video/av17963543)
 * [AI For Everyone](https://www.coursera.org/learn/ai-for-everyone/)
+
+
+## 工具
+
+* [rlabbe/Kalman-and-Bayesian-Filters-in-Python](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python):Kalman Filter book using Jupyter Notebook. Focuses on building intuition and experience, not formal proofs. Includes Kalman filters,extended Kalman filters, unscented Kalman filters, particle filters, and more. All exercises include solutions.

@@ -7,6 +7,7 @@
 -   [juicefs](https://juicefs.io/):为云端设计的 POSIX 共享文件系统
 - 百度云
     + [acgotaku/BaiduExporter](https://github.com/acgotaku/BaiduExporter):Assistant for Baidu to export download links to aria2/aria2-rpc
+    + [b3log/baidu-netdisk-downloaderx](https://github.com/b3log/baidu-netdisk-downloaderx):⚡️ 百度网盘不限速下载器 BND，支持 Windows、Mac 和 Linux。 https://hacpai.com/tag/bnd
 - [坚果云](https://www.jianguoyun.com/)
 - [数蚁](https://teamyi.com)
 
