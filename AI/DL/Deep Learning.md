@@ -36,6 +36,7 @@
 * [斯坦福2017季CS224n深度学习自然语言处理课程](https://www.bilibili.com/video/av13383754)
 * [斯坦福深度学习课程CS231N](https://www.bilibili.com/video/av17204303)
 * [深度学习与计算机视觉](https://www.bilibili.com/video/av17741845)
+* [Andrew Ng (吴恩达) 深度学习专项课程](http://coursegraph.com/coursera-specializations-deep-learning)
 * [apachecn/fastai-ml-dl-notes-zh](https://github.com/apachecn/fastai-ml-dl-notes-zh):📖 [译] fast.ai 机器学习和深度学习中文笔记
 * [fchollet/deep-learning-with-python-notebooks](https://github.com/fchollet/deep-learning-with-python-notebooks):Jupyter notebooks for the code samples of the book "Deep Learning with Python"
 

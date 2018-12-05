@@ -38,6 +38,10 @@ Matt Stine提出的一个概念，它是一个思想的集合，包括DevOps、�
 
 * [jaegertracing/jaeger](https://github.com/jaegertracing/jaeger):CNCF Jaeger, a Distributed Tracing System https://jaegertracing.io/
 
+## Monitor
+
+* [netdata/netdata](https://github.com/netdata/netdata):Real-time performance monitoring, done right! https://my-netdata.io/
+
 ## 参考
 
 * [Cloud Native Computing foundation](https://www.cncf.io/):Sustaining and Integrating Open Source Technologies

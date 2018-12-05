@@ -121,6 +121,7 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 * [waylybaye/HyperApp-Guide](https://github.com/waylybaye/HyperApp-Guide):HyperApp user's manual
 * [snipe/snipe-it](https://github.com/snipe/snipe-it):A free open source IT asset/license management system https://snipeitapp.com
 * [pinterest/teletraan](https://github.com/pinterest/teletraan):Teletraan is Pinterest's deploy system.
+* [NullArray/AutoSploit](https://github.com/NullArray/AutoSploit):Automated Mass Exploiter
 
 ## 参考
 

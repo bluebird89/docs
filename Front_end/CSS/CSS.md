@@ -284,3 +284,4 @@ h1{
 * [l-hammer/You-need-to-know-css](https://github.com/l-hammer/You-need-to-know-css):🖖CSS tricks web developers need to know~ https://lhammer.cn/You-need-to-know-css/
 * [五个最新的CSS特性以及如何使用它们](https://zhuanlan.zhihu.com/p/40736286)
 * [chokcoco/iCSS](https://github.com/chokcoco/iCSS):谈谈一些有趣的 CSS 话题
+* [danielcrisp/hot-new-css-features](https://github.com/danielcrisp/hot-new-css-features):A step-by-step demonstration of five new hot CSS features
