@@ -243,13 +243,6 @@ db.shutdownServer() # 退出命令行
 show profile # 查看profiling
 ```
 
-## 客户端
-
-* [Robo 3T](https://robomongo.org/):Robo 3T (formerly Robomongo) is the free lightweight GUI for MongoDB enthusiasts.
-* [Studio 3T](https://studio3t.com/):Studio 3T is the GUI that makes working with MongoDB easy.Available for Windows, Mac, and Linux.
-* [NoSQLBooster](https://nosqlbooster.com/):NoSQLBooster for MongoDB (formerly MongoBooster) is a shell-centric cross-platform GUI tool for MongoDB v2.6-3.6, which provides fluent query builder, SQL query SQL Query, update-in-place, ES2017 syntax support and true intellisense experience.
-* [Automattic/mongoose](https://github.com/Automattic/mongoose):MongoDB object modeling designed to work in an asynchronous environment. http://mongoosejs.com
-
 ## docker
 
 - `mkdir -p ~/mongo ~/mongo/db` #  db目录将映射为mongo容器配置的/data/db目录,作为mongo数据的存储目录
@@ -299,6 +292,13 @@ MongoDB 中的 Sharding 正式为了水平扩展而设计的。MongoDB 中通过
 * config server，它存储 Shard 集群中所有其他成员的配置信息，mongos会到这台config server查看集群中其他服务器的地址，这是一台不需要太高性能的服务器，因为它不会用来做复杂的查询计算，值得注意的是，在 MongoDB3.4 以后，config server必须是一个replica set。存储 shard 集群的配置信息，通常部署在一个 replica set 上。
 * mtools。他是用来创建各种 MongoDB 环境的命令行工具，代码使用python写的，可以通过pip install安装到你的环境上
 
+## 客户端
+
+* [Robo 3T](https://robomongo.org/):Robo 3T (formerly Robomongo) is the free lightweight GUI for MongoDB enthusiasts.
+* [Studio3T/robomongo](https://github.com/Studio3T/robomongo):Native cross-platform MongoDB management tool http://robomongo.org
+* [Studio 3T](https://studio3t.com/):Studio 3T is the GUI that makes working with MongoDB easy.Available for Windows, Mac, and Linux.
+* [NoSQLBooster](https://nosqlbooster.com/):NoSQLBooster for MongoDB (formerly MongoBooster) is a shell-centric cross-platform GUI tool for MongoDB v2.6-3.6, which provides fluent query builder, SQL query SQL Query, update-in-place, ES2017 syntax support and true intellisense experience.
+* [Automattic/mongoose](https://github.com/Automattic/mongoose):MongoDB object modeling designed to work in an asynchronous environment. http://mongoosejs.com
 
 ## 参考
 
@@ -307,7 +307,6 @@ MongoDB 中的 Sharding 正式为了水平扩展而设计的。MongoDB 中通过
 * https://github.com/zhaoyi0113/mongo-cluster-docker
 * [MongoDB的水平扩展，你做对了吗？](https://juejin.im/entry/5a0266a76fb9a0450908ec76)
 * [rueckstiess/mtools](https://github.com/rueckstiess/mtools):A collection of scripts to set up MongoDB test environments and parse and visualize MongoDB log files.
-
 
 
 PHP不同版本的扩展库使用版本不一样 php5 使用内置方法 php7.1 使用composer扩展mongodb/mongodb

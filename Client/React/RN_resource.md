@@ -267,6 +267,7 @@
 * [adam-golab/react-developer-roadmap](https://github.com/adam-golab/react-developer-roadmap):Roadmap to becoming a React developer in 2018s
 * [kentcdodds/advanced-react-patterns](https://github.com/kentcdodds/advanced-react-patterns):The course material for my advanced react patterns course on Egghead.io
 * [huzidaha/react-naive-book](https://github.com/huzidaha/react-naive-book):开源、免费、专业、简单的 React.js 在线教程 http://huziketang.com/books/react
+* [ruanyf/react-demos](https://github.com/ruanyf/react-demos):a collection of simple demos of React.js
 
 ## 项目
 

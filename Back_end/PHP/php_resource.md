@@ -754,6 +754,7 @@
 * [walu/phpbook](https://github.com/walu/phpbook):PHP扩展开发及内核应用
 * [hoohack/read-php-src](https://github.com/hoohack/read-php-src)
 * [php/php-langspec](https://github.com/php/php-langspec):PHP Language Specification http://www.php.net
+* [dstogov/php-ffi](https://github.com/dstogov/php-ffi):PHP Foreign Function Interface
 
 ## 扩展
 
