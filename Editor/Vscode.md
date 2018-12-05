@@ -63,6 +63,7 @@ sudo apt-get install code
 * WakaTime
 * Vetur:Vue工具
 * vscode-icons
+- vscode-pandoc:文档生成
 
 ## 主题
 
@@ -257,8 +258,11 @@ code --disable-extensions . # disable all extensions
 -   [keyboard-shortcuts-macos](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
 -   https://code.visualstudio.com/
 -   [octref/polacode](https://github.com/octref/polacode):📸 Polaroid for your code
--   vscode-pandoc:文档生成
 -   [shanalikhan/code-settings-sync](https://github.com/shanalikhan/code-settings-sync):🌴💪 Synchronize your Visual Studio Code Settings Across Multiple Machines using Github GIST 💪🌴
+
+## 工具
+
+* [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/
 
 ## 參考
 

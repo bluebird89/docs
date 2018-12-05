@@ -1,20 +1,8 @@
 ## JavaScript Resource
 
-### MVC
-
-* Angular
-* React
 * [Marionette](https://marionettejs.com/)
-
-### MVVM
-
-* Vue
 * [Foundation](http://foundation.zurb.com/)
-* Typescript
 * ES6
-
-### SPA
-
 * [Meteor](https://www.meteor.com/)
 * jQuery Mobile
 
@@ -24,6 +12,7 @@
 * [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
 * [lerna/lerna](https://github.com/lerna/lerna):🐉 A tool for managing JavaScript projects with multiple packages. https://lernajs.io
 * [pnpm/pnpm](https://github.com/pnpm/pnpm):📦🚀 Fast, disk space efficient package manager https://pnpm.js.org
+* [zloirock/core-js](https://github.com/zloirock/core-js):Standard Library
 
 ## lightbox
 
@@ -50,6 +39,10 @@
 ## Highlight
 
 * [julmot/mark.js](https://github.com/julmot/mark.js):JavaScript keyword highlighting. Mark text with with options that fit every application. Also available as jQuery plugin. https://markjs.io/
+
+## fuzzy-search
+
+* [krisk/Fuse](https://github.com/krisk/Fuse):Lightweight fuzzy-search, in JavaScript http://fusejs.io/
 
 ## 日期
 
@@ -81,6 +74,7 @@
 ## Animations
 
 * [juliangarnier/anime](https://github.com/juliangarnier/anime):JavaScript Animation Engine http://animejs.com
+* [Popmotion/popmotion](https://github.com/Popmotion/popmotion):Simple animation libraries for delightful user interfaces https://popmotion.io
 
 ## Canvas
 
@@ -285,6 +279,10 @@
 * RunJS
 * CodePen
 
+## Parser
+
+* [acornjs/acorn](https://github.com/acornjs/acorn):A small, fast, JavaScript-based JavaScript parser
+
 ## 机器学习
 
 * [junku901/machine_learning](https://github.com/junku901/machine_learning):Machine learning library for Node.js http://joonku.com/project/machine_learning
@@ -399,7 +397,6 @@
 * [sorrycc/awesome-javascript](https://github.com/sorrycc/awesome-javascript):🐢 A collection of awesome browser-side JavaScript libraries, resources and shiny things.
 * [jobbole/awesome-javascript-cn](https://github.com/jobbole/awesome-javascript-cn):JavaScript 资源大全中文版，内容包括：包管理器、加载器、测试框架、运行器、QA、MVC框架和库、模板引擎等
 * [avajs/ava](https://github.com/avajs/ava)Futuristic JavaScript test runner
-* [moon](http://moonjs.ga/docs/getting-started.html)
 * [JavaScript文档](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [mbeaudru/modern-js-cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet):Cheatsheet for the JavaScript knowledge you will frequently encounter in modern projects. https://mbeaudru.github.io/modern-js-…
 * [getify/You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter.
@@ -431,6 +428,9 @@
 * [swbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
 * [Node.js v8.x 中文文档](https://www.nodeapp.cn/)
 * [leonardomso/33-js-concepts](https://github.com/leonardomso/33-js-concepts):📜 33 concepts every JavaScript developer should know.
+* [iliakan/javascript-tutorial-en](https://github.com/iliakan/javascript-tutorial-en):Modern JavaScript Tutorial https://javascript.info
+* [llh911001/mostly-adequate-guide-chinese](https://github.com/llh911001/mostly-adequate-guide-chinese):JS 函数式编程指南中文版 https://legacy.gitbook.com/book/llh911001/mostly-adequate-guide-chinese/details
+* [getify/You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter. https://www.kickstarter.com/projects/getify/you-dont-know-js-book-series
 
 ## 问题
 

@@ -1098,7 +1098,7 @@ git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -
 %w([[,[,]]])    switch line wrapping, like the -w option of git-shortlog(1).
 ```
 
-### git-submodule
+### submodule
 
 git submodule 主要用来管理一些单向更新的公共模块或底层逻辑。
 
@@ -1123,7 +1123,7 @@ git rm --cached another_project # 删除项目
 vim .git/config # ...remove another_project...
 ```
 
-### git-subtree
+### subtree
 
 git subtree 对于部分需要双向更新的可复用逻辑来说，特别适合管理.比如一些需要复用的业务组件代码。在我之前的实践中，我也曾用subtree来管理构建系统逻辑。
 
