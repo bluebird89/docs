@@ -272,6 +272,9 @@
 * [llSourcell/Learn_Machine_Learning_in_3_Months](https://github.com/llSourcell/Learn_Machine_Learning_in_3_Months):This is the code for "Learn Machine Learning in 3 Months" by Siraj Raval on Youtube
 * [机器学习（Machine Learning）- 吴恩达（Andrew Ng）](https://www.bilibili.com/video/av9912938)
   - [斯坦福大学2014（吴恩达）机器学习教程中文笔记](https://www.coursera.org/course/ml)
+  - [斯坦福大学机器学习课程](http://open.163.com/special/opencourse/machinelearning.html)
+  - [Andrew Ng 老师的 机器学习课程](http://coursegraph.com/coursera-machine-learning) http://coursegraph.com/coursera_ml
+  - Machine Learning Yearning
   - [fengdu78/Coursera-ML-AndrewNg-Notes](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes):吴恩达老师的机器学习课程个人笔记
 * [李宏毅Machine Learning ](https://www.bilibili.com/video/av15889450)
 * [李宏毅机器学习(2017)](https://www.bilibili.com/video/av10590361/)

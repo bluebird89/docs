@@ -6,7 +6,6 @@ Flutter是一个移动应用程序的软件开发工具包（SDK），用一个�
 
 Flutter 是 Fuchsia 的开发框架，支持导出 Android iOS 和 Fuchsia 三个平台的安装包
 
-
 * Flutter 自建了一个绘制引擎，底层是由 C++ 编写的引擎，负责渲染，文本处理，Dart VM 等；上层的 Dart Framework 直接调用引擎。避免了以往 JS 解决方案的 JS Bridge、线程跳跃等问题。
 * 引擎基于 Skia 绘制，操作 OpenGL、GPU，不需要依赖原生的组件渲染框架。
 * Dart 的引入，Dart 有 AOT 和 JIT 两种模式，线上使用时以 AOT 的方式编译成机器代码，保证了线上运行时的效率；而在开发期，Dart 代码以 JIT 的方式运行，支持代码的即时生效（HotReload)，提高开发效率。
@@ -76,9 +75,15 @@ pod setup
 
 > Failed to create provisioning profile. The app ID "com.example.helloWorld" cannot be registered to your development team. Change your bundle identifier to a unique string to try again
 
+## 项目
+
+* [yubo725/flutter-osc](https://github.com/yubo725/flutter-osc):基于Google Flutter的开源中国客户端，支持Android和iOS。
+* [pszklarska/FlutterShoppingCart](https://github.com/pszklarska/FlutterShoppingCart):Flutter example of shopping app using Redux architecture https://hackernoon.com/flutter-redux-how-to-make-shopping-list-app-1cd315e79b65
+
 ## 工具
 
 * vscode 插件
+* [google/flutter-desktop-embedding](https://github.com/google/flutter-desktop-embedding):Desktop implementations of the Flutter embedding API
 
 ## 参考
 
@@ -87,8 +92,3 @@ pod setup
 * [文档](https://flutter-io.cn/)
 * [官网](https://flutter.io/)
 * [AweiLoveAndroid/Flutter-learning](https://github.com/AweiLoveAndroid/Flutter-learning)::octocat:🔥 👍 🌟 ⭐️ ⭐️⭐️ Flutter从配置安装到填坑指南详解，Flutter相关Demo解读，项目实例，Dart语法详解
-
-## 项目
-
-* [yubo725/flutter-osc](https://github.com/yubo725/flutter-osc):基于Google Flutter的开源中国客户端，支持Android和iOS。
-* [pszklarska/FlutterShoppingCart](https://github.com/pszklarska/FlutterShoppingCart):Flutter example of shopping app using Redux architecture https://hackernoon.com/flutter-redux-how-to-make-shopping-list-app-1cd315e79b65
