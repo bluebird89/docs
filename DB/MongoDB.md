@@ -20,6 +20,7 @@ BSON被比作二进制的交换格式，如同Protocol Buffers，但BSON比它�
 * 创建数据库文件路径:C:\data\db(/data/db)
 * 通过命令行工具启动服务: mongod（本地访问<http://localhost:27017/）MongoDB系统的主要守护进程，用于处理数据请求，数据访问和执行后台管理操作，必须启动，才能访问MongoDB数据库>
 * [软件源](ttp://repo.mongodb.org/apt/ubuntu/dists/)
+* PHP不同版本的扩展库使用版本不一样 php5 使用内置方法 php7.1 使用composer扩展mongodb/mongodb
 
 ```sh
 ### ubnutu
@@ -80,7 +81,7 @@ mongo -version
 对于MongoDB创建索引要在后台创建，避免锁表,使用范例
 db.t1.createIndex({idCardNum:1},{background:1})
 
-```
+```mongodb
 bindIp:  127.0.0.1  修改为：bindIp:  0.0.0.0
 
 # 添加超级管理员,客戶端鏈接需要選擇修改類型 basic
@@ -126,15 +127,26 @@ mongoimport --db test --collection restaurants --drop --file ~/Downloads/primer-
 mongo
 help
 
-db.serverCmdLineOpts() # 查看mongod的启动参数
+# 查看mongod的启动参数
+db.serverCmdLineOpts()
 
-show dbs # 显示数据库列表
+```
+
+## 库操作
+
+```sql
+# 显示数据库列表
+show dbs
 
 use yourDB # 切换当前数据库至yourDB
-db.getName() # db:获取数据库名称
+db.getName() # 获取数据库名称
 db.dropDatabase() # 删除数据库
 db.help() # 显示数据库操作命令
+```
 
+## 集合操作
+
+```sql
 show collections # 显示当前数据库中的集合（类似关系数据库中的表table）
 db.yourCollection.help() # 显示集合操作命令
 db.getCollectionNames()
@@ -142,43 +154,62 @@ db.printCollectionStats() # 查看各collection的状态
 db.createColletion(‘byc’) # 创建集合
 db.copyDatabase('mail_addr','mail_addr_tmp') # 拷贝数据库
 db.test.drop() # 删除指定集合
+# 删除一个集合
+db.collection.deleteOne()
+# 删除多个集合
+db.collection.deletMany()
+```
 
+## 数据操作
+
+```sql
 db.users.insert({"name":"name 1",age:21})
 db.student.insert({_id:1, sname: 'zhangsan', sage: 20}) #_id可选
 db.student.save({_id:1, sname: 'zhangsan', sage: 22}) #_id可选
+# 循环插入10条记录
 for(var i=1;i<=10;i++){
     db.test.insert({"name":"king"+i,"age":i})
-} # 循环插入10条记录
+}
+
+var arr= [];
+for(var i=0;i<10000;i++){
+   arr.push({counter:i});
+}
+db.restaurants.insert(arr);
 
 db.restaurants.find()
 db.restaurants.findOne()
+db.restaurants.find().pretty() # 格式化显示查询结果
+db.restaurants.find().count() # 查询数据条数
+
 db.restaurants.find( { "address.zipcode": "10075" } ).limit(10)
-db.users.find().skip(3).limit(5);  # 从第3条记录开始，返回5条记录(limit 3, 5)
+db.restaurants.find().skip(3).limit(5);  # 从第3条记录开始，返回5条记录(limit 3, 5)
+
 db.restaurants.find( { "grades.score": { $gt: 30 } } )
+db.users.find({$where: "this.age > 18"});
+db.users.find("this.age > 18");
+db.restaurants.find({counter:{$gt:66, $lt:666}});
 db.restaurants.find( { "cuisine": "Italian", "address.zipcode": "10075" } ) # and
 db.restaurants.find( { $or: [ { "cuisine": "Italian" }, { "address.zipcode": "10075" } ] }) # or
-db.restaurants.find().sort( { "borough": 1, "address.zipcode": 1 } ) # sort  1 for ascending and -1 for descending.
 db.users.find({creation_date:{$gt:new Date(2010,0,1), $lte:new Date(2010,11,31)}); # 查询 creation_date > '2010-01-01' and creation_date <= '2010-12-31' 的数据
 db.users.find({name: {$ne: "bruce"}, age: {$gte: 18}});  # 查询 name <> "bruce" and age >= 18 的数据
 db.users.find({age: {$in: [20,22,24,26]}}); # 查询 age in (20,22,24,26) 的数据
 db.users.find('this.age % 10 == 0'); # 查询 age取模10等于0 的数据
 db.users.find({age : {$mod : [10, 0]}});  # 取模10等于0 的数据
-db.users.find({favorite_number : {$all : [6, 8]}});  #
+db.users.find({favorite_number : {$all : [6, 8]}});
 db.users.find({name: {$not: /^B.*/}}); # 查询不匹配name=B*带头的记录
 db.users.find({age : {$not: {$mod : [10, 0]}}}); # 查询 age取模10不等于0 的数据
 
+# 设置第二个参数：字段中部分内容或者提取这个字段内的部分内容，1显示 0隐藏 _id如果不设置默认是1
 db.users.find({ name : "bruce" }, {age:1, address:1}); # 选择返回age、address和_id字段
 db.users.find({name: {$exists: true}}); # 查询所有存在name字段的记录
 db.users.find({name: {$type: 2}}); # 查询所有name字段是字符类型的
 db.users.find({age: {$type: 16}}); # 查询所有age字段是整型的
 db.users.find({name: /^b.*/i}); # 查询以字母b或者B带头的所有记录
 
-db.users.find({age: {$gt: 18}});  #  查询 age > 18 的记录
-db.users.find({$where: "this.age > 18"});
-db.users.find("this.age > 18");
+## 排序
+db.restaurants.find().sort( { "borough": 1, "address.zipcode": 1 } ) # sort  1 for ascending and -1 for descending.
 
-db.test.find().pretty() # 格式化显示查询结果
-db.test.find().count() # 查询数据条数
 db.test.distinct('msg')
 
 db.restaurants.update(
@@ -187,17 +218,18 @@ db.restaurants.update(
       $set: { "cuisine": "American (New)" },
       $currentDate: { "lastModified": true }
     }
-)  # update
-
+)
+# Update Multiple Documents
 db.restaurants.update(
   { "address.zipcode": "10016", cuisine: "Other" },
   {
-    $set: { cuisine: "Category To Be Determined" },
+    $set: {
+    cuisine: "Category To Be Determined" },
     $currentDate: { "lastModified": true }
   },
   { multi: true}
-) # Update Multiple Documents
-
+)
+# To replace the entire document except for the _id field
 db.restaurants.update(
    { "restaurant_id" : "41704620" },
    {
@@ -209,38 +241,167 @@ db.restaurants.update(
               "zipcode" : "10075"
      }
    }
-) # To replace the entire document except for the _id field
-
+)
+db.student.update(
+  {"_id" : ObjectId("5bd6a46f1eb7a22fa07cb382")},
+    {
+      $set:{
+        isDel:1
+      }
+    }
+);
+# group 格式
 db.restaurants.aggregate(
    [
      { $group: { "_id": "$borough", "count": { $sum: 1 } } }
    ]
-); # group 格式
-
+);
+# 含有where条件
 db.restaurants.aggregate(
    [
      { $match: { "borough": "Queens", "cuisine": "Brazilian" } },
      { $group: { "_id": "$address.zipcode" , "count": { $sum: 1 } } }
    ]
-); # 含有where条件
+);
 
 db.restaurants.remove( { "borough": "Manhattan" } )
 db.restaurants.remove( { "borough": "Queens" }, { justOne: true } ) # limit the remove operation to only one of the matching documents
+db.restaurants.remove( { "borough": "Queens" },  true) # limit the remove operation to only one of the matching documents
 db.restaurants.remove( { } ) # Remove All Documents
 
+# 索引管理
 db.restaurants.createIndex( { "cuisine": 1 } )
 db.restaurants.createIndex( { "cuisine": 1, "address.zipcode": -1 } )
 
+show profile # 查看profiling
+```
+
+## 用户管理
+
+```sql
 use admin # 进入数据库admin
 show users # 显示所有用户
+
 db.addUser('name','pwd')
 db.system.users.find() # 查看用户列表
-show users #查看所有用户
+
 db.removeUser('name') # 删除用户
 db.auth('name','pwd') # 用户认证
-db.shutdownServer() # 退出命令行
 
-show profile # 查看profiling
+db.shutdownServer() # 退出命令行
+```
+
+## 数据关系
+
+* 一对一
+* 一对多
+* 多对多
+
+```sql
+//一对一
+db.aAndb.insert([
+ {name:"杨过",wife:{name:"小龙女",sex:"女"},sex:"男"},
+  {name:"杨过",wife:{name:"小龙女",sex:"女"},sex:"男"}
+])
+
+
+// 一对多  比如  微博 和 微博评论
+db.weibo.insert([
+  {weibo:"世界这么大，我想去看看"},
+  {weibo:"我要做一名web开发者！！！"}
+])
+db.weibo.find();
+db.comments.insert([
+{
+weibo_id: ObjectId("5bdd89e06a5e78f4cfc2b9c8"),
+list:[
+   "那你有钱吗",
+    "一个人吗？？去呢啊？？",
+    "加油！！"
+]
+},
+{
+weibo_id: ObjectId("5bdd89e06a5e78f4cfc2b9c9"),
+list:[
+   "那你要学习HTML",
+   "那还要你要学习css",
+    "加油！！"
+]
+}
+]);
+db.comments.find();
+# 查询一对多
+var weibo_id= db.weibo.findOne({"weibo" : "世界这么大，我想去看看"})._id;
+db.comments.find({weibo_id: weibo_id});
+
+# 多对多 老师《------》学生
+//插入老师集合
+db.teachers.insert([
+{
+  name:"语文老师",
+  teacher_id: 1,
+  student_id:[
+     1001,
+     1002,
+     1003
+  ]
+  },
+{
+  name:"数学老师",
+  teacher_id: 2,
+  student_id:[
+     1001,
+     1002,
+     1003
+  ]
+  },
+{
+  name:"英语老师",
+  teacher_id: 3,
+  student_id:[
+     1001,
+     1002,
+     1003
+  ]
+ }
+])
+
+db.teachers.find();
+
+
+//插入学生集合
+db.students.insert([
+{
+  name:"小明",
+  student_id: 1001,
+  teacher_id:[
+     1,
+     2,
+     3
+  ]
+  },
+{
+  name:"小红",
+  student_id: 1002,
+  teacher_id:[
+     1,
+     2,
+     3
+  ]
+  },
+{
+  name:"小刚",
+  student_id: 1003,
+  teacher_id:[
+     1,
+     2,
+     3
+  ]
+ }
+])
+
+db.students.find();
+db.teachers.find();
 ```
 
 ## docker
@@ -300,6 +461,10 @@ MongoDB 中的 Sharding 正式为了水平扩展而设计的。MongoDB 中通过
 * [NoSQLBooster](https://nosqlbooster.com/):NoSQLBooster for MongoDB (formerly MongoBooster) is a shell-centric cross-platform GUI tool for MongoDB v2.6-3.6, which provides fluent query builder, SQL query SQL Query, update-in-place, ES2017 syntax support and true intellisense experience.
 * [Automattic/mongoose](https://github.com/Automattic/mongoose):MongoDB object modeling designed to work in an asynchronous environment. http://mongoosejs.com
 
+## 工具
+
+* [dylang/shortid](https://github.com/dylang/shortid):Short id generator. Url-friendly. Non-predictable. Cluster-compatible. https://www.npmjs.org/package/shortid
+
 ## 参考
 
 * [MongoDB Docs](https://docs.mongodb.com/)
@@ -307,6 +472,3 @@ MongoDB 中的 Sharding 正式为了水平扩展而设计的。MongoDB 中通过
 * https://github.com/zhaoyi0113/mongo-cluster-docker
 * [MongoDB的水平扩展，你做对了吗？](https://juejin.im/entry/5a0266a76fb9a0450908ec76)
 * [rueckstiess/mtools](https://github.com/rueckstiess/mtools):A collection of scripts to set up MongoDB test environments and parse and visualize MongoDB log files.
-
-
-PHP不同版本的扩展库使用版本不一样 php5 使用内置方法 php7.1 使用composer扩展mongodb/mongodb
