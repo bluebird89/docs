@@ -6,47 +6,50 @@
 
 ## 任天堂 switch
 
-触屏和体感，是最符合人类直觉的操控方式，任何人都能最快上手，是游戏人群扩大化的关键。而Joy-Con的绝妙之处在于，它分开来是两个功能完整的经典手柄，又是拥有HD震动和IR摄像头的升级体感棒；它合在一起是按键繁多的专业手柄，又是双手体感控制器；它插在主体上变成掌机的按键，拔下来变成手柄的两半，允许玩家在任何地点用任何姿势来玩游戏，既满足了最沉迷游戏的玩家的需求，又可以分享一个Joy-Con给任何会玩或者不会玩游戏的人一起享受游戏的乐趣。
-
-SWITCH能够不锁区，香港能够成为首发地区，而且首发还有中文游戏（虽然是炸弹人）
-
-北京时间2016年10月20日晚10时，任天堂正式公布了它的第八代家用主机——Nintendo Switch
-
-* 超级马里奥：奥德赛
-* 塞尔达传说：荒野之息
-* 乌贼2
-* 马里奥赛车8
-* 精灵宝可梦
-* 怪物猎人
-* DQ
-* 雪之刹那
-* 魔界战记
-* 上古卷轴V：天际
-* NBA 2K
-* 喷射2
-* 异度神剑2
-* 异度之刃2（Xenoblade 2）
-* 死喷乱涂2
-* Just Danc
-* 星之卡比
-* １＋２
-* 喷射战士2
-* 超级炸弹人R
-* Switch版《FIFA 18》中的球员运球没法和PlayStation/Xbox版本那样子灵敏。球员带来的感觉更加沉重，转向越变越慢，而游戏的迟钝感更加明显。
-
-
-买单机标配，不要买套餐
-保护包
-买个钢化膜
-买个128g的内存卡
-多人玩可买多一副joy手柄，自己玩买多副pro手柄，当然不买也行
+* 触屏和体感，是最符合人类直觉的操控方式，任何人都能最快上手，是游戏人群扩大化的关键。而Joy-Con的绝妙之处在于，它分开来是两个功能完整的经典手柄，又是拥有HD震动和IR摄像头的升级体感棒；它合在一起是按键繁多的专业手柄，又是双手体感控制器；它插在主体上变成掌机的按键，拔下来变成手柄的两半，允许玩家在任何地点用任何姿势来玩游戏，既满足了最沉迷游戏的玩家的需求，又可以分享一个Joy-Con给任何会玩或者不会玩游戏的人一起享受游戏的乐趣。
+* SWITCH能够不锁区，香港能够成为首发地区，而且首发还有中文游戏（虽然是炸弹人）
+* 北京时间2016年10月20日晚10时，任天堂正式公布了它的第八代家用主机——Nintendo Switch
+* 游戏
+    - 超级马里奥：奥德赛
+    - 塞尔达传说：荒野之息
+    - 乌贼2
+    - 马里奥赛车8
+    - 精灵宝可梦
+    - 怪物猎人
+    - DQ
+    - 雪之刹那
+    - 魔界战记
+    - 上古卷轴V：天际
+    - NBA 2K
+    - 喷射战士2 splatoon2
+    - 异度神剑2
+    - 异度之刃2（Xenoblade 2）
+    - 死喷乱涂2
+    - Just Danc
+    - 星之卡比
+    - １＋２
+    - 超级炸弹人R
+    - FIFA 18
+    - 《上古卷轴5：天际》：PC、PS4、Xbox One，2017年11月18日登陆Nintendo Switch
+    - 任天堂明星大乱斗：特别版
+* 配件
+    - 买单机标配，不要买套餐
+    - 保护包
+    - 买个钢化膜
+    - 买个128g的内存卡
+    - 多人玩可买多一副joy手柄，自己玩买多副pro手柄
 
 ## Play station 4
 
-pro
-slim
-天蝎
-1080ti
+* 配置
+    - pro
+    - slim
+    - 天蝎
+    - 1080ti
+* 游戏
+    - 刺客信条
+    - 荒野大镖客 救赎2
+    - 战神
 
 ### PC
 
@@ -83,13 +86,17 @@ slim
 * 《最终幻想7》
 * 王国之心
 
-## 参考
-
-* [miloyip/game-programmer](https://github.com/miloyip/game-programmer):A Study Path for Game Programmer
-
 ## 直播
 
 * [twitch](https://www.twitch.tv)
+
+## 测试
+
+* [AirtestProject/Airtest](https://github.com/AirtestProject/Airtest):UI Test Automation Framework for Games and Apps http://airtest.netease.com/
+
+## 参考
+
+* [miloyip/game-programmer](https://github.com/miloyip/game-programmer):A Study Path for Game Programmer
 
 ## 工具
 

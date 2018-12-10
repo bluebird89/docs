@@ -21,6 +21,14 @@ rustc --version
 
 * [rayon-rs/rayon](https://github.com/rayon-rs/rayon):Rayon: A data parallelism library for Rust
 
+# 工具
+
+* [rustwasm/wasm-pack](https://github.com/rustwasm/wasm-pack):📦✨ your favorite rust -> wasm workflow tool! https://rustwasm.github.io/wasm-pack/
+* [clap-rs/clap](https://github.com/clap-rs/clap):A full featured, fast Command Line Argument Parser for Rust https://clap.rs
+* [nickel-org/nickel.rs](https://github.com/nickel-org/nickel.rs):An expressjs inspired web framework for Rust http://nickel-org.github.io/
+* [racer-rust/racer](https://github.com/racer-rust/racer):Rust Code Completion utility
+* [crossbeam-rs/crossbeam](https://github.com/crossbeam-rs/crossbeam):Tools for concurrent programming in Rust
+
 ## 参考
 
 * [文档](https://kaisery.gitbooks.io/rust-book-chinese/content/)
@@ -28,9 +36,3 @@ rustc --version
 * [The Rust Programming Language](https://doc.rust-lang.org/book/second-edition/index.html)
 * [rust-gentle-intro](https://stevedonovan.github.io/rust-gentle-intro/)
 * [KaiserY/trpl-zh-cn](https://github.com/KaiserY/trpl-zh-cn):Rust 程序设计语言（第二版） https://kaisery.github.io/trpl-zh-cn/
-
-# 工具
-
-* [rustwasm/wasm-pack](https://github.com/rustwasm/wasm-pack):📦✨ your favorite rust -> wasm workflow tool! https://rustwasm.github.io/wasm-pack/
-* [clap-rs/clap](https://github.com/clap-rs/clap):A full featured, fast Command Line Argument Parser for Rust https://clap.rs
-* [nickel-org/nickel.rs](https://github.com/nickel-org/nickel.rs):An expressjs inspired web framework for Rust http://nickel-org.github.io/
