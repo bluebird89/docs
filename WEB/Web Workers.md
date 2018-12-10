@@ -29,3 +29,7 @@ worker.postMessage(payload, transferableObjects)
 ## 参考
 
 * [Web Worker 使用教程](linhttp://www.ruanyifeng.com/blog/2018/07/web-worker.htmlk)
+
+## 工具
+
+* [developit/stockroom](https://github.com/developit/stockroom):🗃 Offload your store management to a worker easily. https://stockroom.surge.sh

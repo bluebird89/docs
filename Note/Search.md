@@ -9,6 +9,11 @@
 * 关键词不打散 “keyword”
 * 文件类型 keyword filetype:pdf
 
+## 引擎
+
+* [startpage](https://www.startpage.com/)
+* [Bing](link)
+
 ## 工具
 
 * [sourcegraph/sourcegraph](https://github.com/sourcegraph/sourcegraph):Code search and intelligence, self-hosted and scalable https://sourcegraph.com

@@ -969,6 +969,8 @@ git merge FETCH_HEAD
 
 ## GitHub
 
+围绕Git 构建 SaaS 服务
+
 GitHub集成其他功能：`repository > Settings > Integrations & services`
 
 ![Git 使用规范流程](..\_static\bg2015080501.png)
@@ -1470,6 +1472,7 @@ chown -R henry:henry .git/objects
 * [imsun/gitment](https://github.com/imsun/gitment):A comment system based on GitHub Issues. https://imsun.github.io/gitment/
 * [rtyley/bfg-repo-cleaner](https://github.com/rtyley/bfg-repo-cleaner):Removes large or troublesome blobs like git-filter-branch does, but faster. And written in Scala
 * [sdg-mit/gitless](https://github.com/sdg-mit/gitless):A version control system built on top of Git http://gitless.com
+* [sobolevn/git-secret](https://github.com/sobolevn/git-secret):👥 A bash-tool to store your private data inside a git repository. http://git-secret.io
 
 ## 参考
 

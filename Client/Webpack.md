@@ -283,6 +283,10 @@ Parsing error: The keyword 'import' is reserved
     "sourceType": "module"
   }
 
+## 插件
+
+* [webpack/webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware):A development middleware for webpack
+
 ## 参考
 
 * [webpack-simple](https://github.com/vuejs-templates/webpack-simple)
@@ -302,6 +306,7 @@ Parsing error: The keyword 'import' is reserved
 * [ruanyf/webpack-demos](https://github.com/ruanyf/webpack-demos):a collection of simple demos of Webpack
 * [webpack-contrib/awesome-webpack](https://github.com/webpack-contrib/awesome-webpack):A curated list of awesome Webpack resources, libraries and tools
 * [webpack-china/awesome-webpack-cn](https://github.com/webpack-china/awesome-webpack-cn):[印记中文](https://docschina.org/) - webpack 优秀中文文章 https://webpack.docschina.org/
+* [gwuhaolin/dive-into-webpack](https://github.com/gwuhaolin/dive-into-webpack):全面的Webpack教程《深入浅出Webpack》电子书 http://webpack.wuhaolin.cn
 
 ## 工具
 
@@ -309,7 +314,3 @@ Parsing error: The keyword 'import' is reserved
 * [babel/babel-loader](https://github.com/babel/babel-loader):📦 Webpack plugin for Babel
 * [shama/webpack-stream](https://github.com/shama/webpack-stream):🍹 Run webpack through a stream interface
 * [webpackmonitor/webpackmonitor](https://github.com/webpackmonitor/webpackmonitor):A tool for monitoring webpack optimization metrics through the development process http://webpackmonitor.com
-
-## 插件
-
-* [webpack/webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware):A development middleware for webpack

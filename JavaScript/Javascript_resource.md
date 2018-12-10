@@ -39,6 +39,8 @@
 ## Highlight
 
 * [julmot/mark.js](https://github.com/julmot/mark.js):JavaScript keyword highlighting. Mark text with with options that fit every application. Also available as jQuery plugin. https://markjs.io/
+* [highlightjs/highlight.js](https://github.com/highlightjs/highlight.js):Javascript syntax highlighter https://highlightjs.org/
+* [PrismJS/prism](https://github.com/PrismJS/prism):Lightweight, robust, elegant syntax highlighting. http://prismjs.com
 
 ## fuzzy-search
 
@@ -196,11 +198,6 @@
 
 * [dagrejs/dagre](https://github.com/dagrejs/dagre):Directed graph layout for JavaScript
 
-## highlighter
-
-* [highlightjs/highlight.js](https://github.com/highlightjs/highlight.js):Javascript syntax highlighter https://highlightjs.org/
-* [PrismJS/prism](https://github.com/PrismJS/prism):Lightweight, robust, elegant syntax highlighting. http://prismjs.com
-
 ## 安全
 
 * [leizongmin/js-xss](https://github.com/leizongmin/js-xss):Sanitize untrusted HTML (to prevent XSS) with a configuration specified by a Whitelist http://jsxss.com
@@ -216,6 +213,7 @@
 * [sequelize/sequelize](https://github.com/sequelize/sequelize)An easy-to-use multi SQL dialect ORM for Node.js <http://docs.sequelizejs.com>
 * [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis):redis client for node http://redis.js.org/
 * [tgriesser/knex](https://github.com/tgriesser/knex):A query builder for PostgreSQL, MySQL and SQLite3, designed to be flexible, portable, and fun to use. http://knexjs.org
+* [typeorm/typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. http://typeorm.io
 
 ## SVG
 
@@ -270,6 +268,14 @@
 
 * [lingui/js-lingui](https://github.com/lingui/js-lingui):🌍📖 A readable, automated, and optimized (5 kb) internationalization for JavaScript https://lingui.js.org/
 
+## Parser
+
+* [acornjs/acorn](https://github.com/acornjs/acorn):A small, fast, JavaScript-based JavaScript parser
+
+## debounce
+
+* [niksy/throttle-debounce](https://github.com/niksy/throttle-debounce)：Throttle and debounce functions.
+
 ## 代码在线分享工具
 
 * JS Fiddle
@@ -277,11 +283,7 @@
 * SQL Fiddle
 * jdoodle
 * RunJS
-* CodePen
-
-## Parser
-
-* [acornjs/acorn](https://github.com/acornjs/acorn):A small, fast, JavaScript-based JavaScript parser
+* [CodePen](https://codepen.io)
 
 ## 机器学习
 

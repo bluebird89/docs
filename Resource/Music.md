@@ -14,3 +14,4 @@
 
 * [YongHaoWu/NeteaseCloudMusicFlac](https://github.com/YongHaoWu/NeteaseCloudMusicFlac):根据网易云音乐的歌单, 下载flac无损音乐到本地. Download the FLAC music from Internet according to your NeteaseCloudMusic playlist.
 * [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):网易云音乐第三方
+* [hnarayanan/shpotify](https://github.com/hnarayanan/shpotify):A command-line interface to Spotify. https://harishnarayanan.org/projects/
