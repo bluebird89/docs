@@ -149,6 +149,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 
 * [wxyyxc1992/Web-Series](https://github.com/wxyyxc1992/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
 * [Web](https://developers.google.com/web/)
+* [Design Issues](https://www.w3.org/DesignIssues/)
 * [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) https://solid.mit.edu/
 * [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
 * [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
@@ -172,6 +173,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 * 压力测试
     - apache AB
     + webbench
+- [缩短网址](http://suo.im/)
 
 ## 监控
 
@@ -180,13 +182,9 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 * [davidkpiano/xstate](https://github.com/davidkpiano/xstate):State machines and statecharts for the modern web. https://xstate.js.org/docs
 
 <https://zhuanlan.zhihu.com/p/22360384>
-
 《构建高性能Web站点》第12章 web负载均衡
-
 《大型网站技术架构：核心原理与案例分析》 6.2 应用服务器集群的伸缩性设计
-
 <http://tips.codekiller.cn/2017/05/17/maglev_describe/>
-
-<http://developer.51cto.com/art/200807/83518.htm><https://help.aliyun.com/document_detail/29322.html>
-
+<http://developer.51cto.com/art/200807/83518.htm>
+<https://help.aliyun.com/document_detail/29322.html>
 <http://geek.csdn.net/news/detail/237188>

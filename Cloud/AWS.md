@@ -15,6 +15,7 @@
 * [aws/opsworks-cookbooks](https://github.com/aws/opsworks-cookbooks):Chef Cookbooks for the AWS OpsWorks Service
 * [minio/minio](https://github.com/minio/minio):Minio is an open source object storage server compatible with Amazon S3 APIs https://minio.io/downloads.html#download-server
 * [aws/aws-cli](https://github.com/aws/aws-cli):Universal Command Line Interface for Amazon Web Services
+* [awslabs/aws-devops-essential](https://github.com/awslabs/aws-devops-essential):In few hours, quickly learn how to effectively leverage various AWS services to improve developer productivity and reduce the overall time to market for new product capabilities.
 
 ## 参考
 

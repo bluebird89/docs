@@ -29,6 +29,12 @@ pip install IPython
 * [guillaume-chevalier/LSTM-Human-Activity-Recognition](https://github.com/guillaume-chevalier/LSTM-Human-Activity-Recognition):Human Activity Recognition example using TensorFlow on smartphone sensors dataset and an LSTM RNN (Deep Learning algo). Classifying the type of movement amongst six activity categories - Guillaume Chevalier http://www.neuraxio.com/en/
 * [aymericdamien/TensorFlow-Examples](https://github.com/aymericdamien/TensorFlow-Examples):TensorFlow Tutorial and Examples for Beginners with Latest APIs https://tensorflow.org
 
+## 课程
+
+* [深度学习框架Tensorflow学习与应用](https://www.bilibili.com/video/av20542427)
+* [open-source-for-science/TensorFlow-Course](https://github.com/open-source-for-science/TensorFlow-Course):Simple and ready-to-use tutorials for TensorFlow
+* [sjchoi86/Tensorflow-101](https://github.com/sjchoi86/Tensorflow-101):TensorFlow Tutorials
+
 ## 参考
 
 * [TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
@@ -41,12 +47,6 @@ pip install IPython
 * [fendouai/Awesome-TensorFlow-Chinese](https://github.com/fendouai/Awesome-TensorFlow-Chinese):Awesome-TensorFlow-Chinese，TensorFlow 中文资源精选，官方网站，安装教程，入门教程，视频教程，实战项目，学习路径。QQ群：167122861，微信群二维码：http://www.tensorflownews.com/ http://www.tensorflownews.com/
 * [tensorflow/nmt](https://github.com/tensorflow/nmt):TensorFlow Neural Machine Translation Tutorial
 * [nfmcclure/tensorflow_cookbook](https://github.com/nfmcclure/tensorflow_cookbook):Code for Tensorflow Machine Learning Cookbook
-
-## 课程
-
-* [深度学习框架Tensorflow学习与应用](https://www.bilibili.com/video/av20542427)
-* [open-source-for-science/TensorFlow-Course](https://github.com/open-source-for-science/TensorFlow-Course):Simple and ready-to-use tutorials for TensorFlow
-* [sjchoi86/Tensorflow-101](https://github.com/sjchoi86/Tensorflow-101):TensorFlow Tutorials
 
 ## 工具
 

@@ -215,6 +215,10 @@ websocketd --port=8080 ./count.sh // 建立server
 
 * [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
 
+## 缓存
+
+* [patrickmn/go-cache](https://github.com/patrickmn/go-cache):An in-memory key:value store/cache (similar to Memcached) library for Go, suitable for single-machine applications. https://patrickmn.com/projects/go-cache/
+
 ## 数据库
 
 * [dgraph-io/badger](https://github.com/dgraph-io/badger):Fast key-value DB in Go. https://open.dgraph.io/post/badger/
@@ -235,6 +239,10 @@ package golang.org/x/crypto/acme/autocert: unrecognized import path "golang.org/
 
 git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 ```
+
+## 编辑器
+
+* [visualfc/liteide](https://github.com/visualfc/liteide)：LiteIDE is a simple, open source, cross-platform Go IDE.
 
 ## 项目
 

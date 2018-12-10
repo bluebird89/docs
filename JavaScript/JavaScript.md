@@ -8,8 +8,6 @@ JavaScript是世界上最流行的脚本语言。运行在浏览器中的解释�
 
 ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标准的一种实现。ECMAScript 6标准（简称ES6）已经在2015年6月正式发布了，所以，讲到JavaScript的版本，实际上就是说它实现了ECMAScript标准的哪个版本。
 
-[ECMAScript 2015](https://babeljs.io/learn-es2015/)
-
 * 变量
 * 数据类型
 * 运算符
@@ -37,7 +35,6 @@ ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标�
 
 1. 学习JavaScript
 2. 学习Web API
-3. 学习jQuery(或其他框架/库）
 
 ### 引入方式
 
@@ -69,7 +66,6 @@ document.write("<p>This is a paragraph</p>");
 * 以`//`开头直到行末的字符被视为行注释，注释是给开发人员看到，JavaScript引擎会自动忽略
 * 块注释是用`/*...*/`把多行字符包裹起来
 * 区分大小写
-
 
 ### 常量
 
@@ -2455,6 +2451,10 @@ class Tesla extends Car {
 }
 ```
 
+## callback
+
+* [callbag/callbag](https://github.com/callbag/callbag):👜 A standard for JS callbacks that enables lightweight observables and iterables
+
 ### 错误处理
 
 遇见异常情况给用户反馈或者通过错误代码
@@ -2592,7 +2592,12 @@ try {
 
 ## sessionStorage
 
+## 工具
+
+* [developit/greenlet](https://github.com/developit/greenlet):🦎 Move an async function into its own thread. https://npm.im/greenlet
+* [blueimp/JavaScript-Canvas-to-Blob](https://github.com/blueimp/JavaScript-Canvas-to-Blob):JavaScript Canvas to Blob is a function to convert canvas elements into Blob objects. 
 
 ## 参考
 
 * [stephentian/33-js-concepts](https://github.com/stephentian/33-js-concepts):📜 每个 JavaScript 工程师都应懂的33个概念 @leonardomso
+* [ECMAScript 2015](https://babeljs.io/learn-es2015/)

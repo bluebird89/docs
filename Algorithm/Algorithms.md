@@ -95,6 +95,9 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 #define    PAGE_CUR_L          3        <查询
 #define    PAGE_CUR_LE         4        <=查询
 ```
+
+* LRU（Least Recently Used，最近最少使用）
+
 ## 排序
 
 * Quicksort
@@ -107,7 +110,7 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * Bucket Sort
 * Dadix Sort
 
-## 资源
+## 参考
 
 * [OpenGenus/cosmos](https://github.com/OpenGenus/cosmos):[Show ❤️ love by 🌟] Your personal library of every algorithm and data structure code that you will ever encounter
 * [keon/algorithms](https://github.com/keon/algorithms):Minimal examples of data structures and algorithms in Python\
@@ -129,6 +132,8 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * [apachecn/awesome-algorithm](https://github.com/apachecn/awesome-algorithm):Leetcode 题解 (跟随思路一步一步撸出代码) 及经典算法实现
 * [skybebe/Algorithms-Learning-With-Go](https://github.com/skybebe/Algorithms-Learning-With-Go):算法学习 Golang 版，参考 raywenderlich/swift-algorithm-club
 * [ChrisKnott/Algojammer](https://github.com/ChrisKnott/Algojammer):An experimental code editor for writing algorithms
+* [algorithm-visualizer/algorithm-visualizer](https://github.com/algorithm-visualizer/algorithm-visualizer):🎆Interactive Online Platform that Visualizes Algorithms from Code https://algorithm-visualizer.org/
+* [MisterBooo/LeetCodeAnimation](https://github.com/MisterBooo/LeetCodeAnimation):Demonstrate all the questions on LeetCode in the form of animation.（用动画的形式呈现解LeetCode题目的思路）
 
 ## 工具
 
