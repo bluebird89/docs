@@ -392,6 +392,7 @@ services:
 * [google/gvisor](https://github.com/google/gvisor):Container Runtime Sandbox
 * [doctrine/annotations](https://github.com/doctrine/annotations):Annotations Docblock Parser
 * [jwilder/dockerize](https://github.com/jwilder/dockerize):Utility to simplify running applications in docker containers
+* [GoogleContainerTools/distroless](https://github.com/GoogleContainerTools/distroless):🥑 Language focused docker images, minus the operating system.
 
 ## 参考
 

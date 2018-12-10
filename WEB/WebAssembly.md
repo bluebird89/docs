@@ -10,6 +10,7 @@
 * [ballercat/walt](https://github.com/ballercat/walt):⚡️ Walt is a JavaScript-like syntax for WebAssembly text format ⚡️ https://ballercat.github.io/walt/
 * [nebulet/nebulet](https://github.com/nebulet/nebulet):(Going to be) A microkernel that implements a WebAssembly "usermode" that runs in Ring 0.
 * [WebAssembly/wabt](https://github.com/WebAssembly/wabt):The WebAssembly Binary Toolkit
+* [wasmerio/wasmer](https://github.com/wasmerio/wasmer):High-Performance WebAssembly runtime https://wasmer.io
 
 ## 参考
 

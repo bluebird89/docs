@@ -1,5 +1,6 @@
 # IOS
 
+
 ## 调试
 
 苹果手机：设置 > Safari浏览器 > 高级 > 开启Web检查器
@@ -17,6 +18,7 @@ Mac：Safari浏览器 > 偏好设置 > 高级 > 在菜单栏中显示“开发�
 * [tbodt/ish](https://github.com/tbodt/ish):Linux shell for iOS https://ish.app
 * [xmartlabs/XLPagerTabStrip](https://github.com/xmartlabs/XLPagerTabStrip):Android PagerTabStrip for iOS.
 * [haxpor/Potatso](https://github.com/haxpor/Potatso):Potatso is an iOS client that implements Shadowsocks proxy with the leverage of NetworkExtension framework.
+* [forkingdog/FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture):A UINavigationController's category to enable fullscreen pop gesture with iOS7+ system style.
 
 ## 参考
 

@@ -14,6 +14,7 @@
 * [facebook/draft-js](https://github.com/facebook/draft-js):A React framework for building text editors. https://draftjs.org/
 * [nikgraf/awesome-draft-js](https://github.com/nikgraf/awesome-draft-js):Awesome list of Draft.js resources
 * [React Studio](https://reactstudio.com/)
+* [margox/braft-editor](https://github.com/margox/braft-editor):美观易用的React富文本编辑器，基于draft-js开发 https://braft.margox.cn/
 
 ## 框架
 
@@ -216,6 +217,8 @@
 * [tajo/react-portal](https://github.com/tajo/react-portal):React component for transportation of modals, lightboxes, loading bars... to document.body or else.
 * [jasonslyvia/react-lazyload](https://github.com/jasonslyvia/react-lazyload):Lazy load your component, image or anything matters the performance.
 * [react-component/upload](https://github.com/react-component/upload):React Upload http://react-component.github.io/upload/
+* [zenoamaro/react-quill](https://github.com/zenoamaro/react-quill):A Quill component for React. https://zenoamaro.github.io/react-quill
+* [aholachek/react-flip-toolkit](https://github.com/aholachek/react-flip-toolkit):An animation utility library for highly configurable layout transitions
 
 ## 扩展
 

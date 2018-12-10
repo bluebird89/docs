@@ -79,6 +79,7 @@
       + [Proton](https://github.com/alexbilbie/Proton): 一个StackPHP兼容的微型框架
       + [Silex](http://silex.sensiolabs.org/): 基于Symfony2组件的微型框架
       + [Slim](https://www.slimframework.com/): 另一个简单的微型框架
+      + [mikecao/flight](https://github.com/mikecao/flight):An extensible micro-framework for PHP http://flightphp.com
 - 其他微型框架 Micro Framework Extras 其他相关的微型框架和路由
       + [Silex Skeleton](https://github.com/silexphp/Silex-Skeleton): Silex的项目架构
       + [Silex Web Profiler](https://github.com/silexphp/Silex-WebProfiler): 一个Silex web的调试工具
@@ -204,7 +205,7 @@
 
 ## 持续集成 Continuous Integration
 
-* CircleCI](https://circleci.com)[: 一个持续集成平台
+* [CircleCI](https://circleci.com)[: 一个持续集成平台
 * [GitlabCi](https://about.gitlab.com/gitlab-ci/): 使用GitLab CI测试、构建、部署你的代码，像TravisCI
 * [Jenkins](https://jenkins.io/index.html): 一个(http://jenkins-php.org/index.html)[PHP支持]的持续集成平台
 * [JoliCi](https://github.com/jolicode/JoliCi): 一个用PHP编写的由Docker支持的持续集成的客户端
@@ -364,6 +365,7 @@
       - [Analog](https://github.com/jbroadway/analog): 一个基于闭包的微型日志包
       - [KLogger](https://github.com/katzgrau/KLogger): 一个易用的兼容PSR-3的日志类
       - [Monolog](https://github.com/Seldaek/monolog): 一个全面的日志工具
+      - [EasyCorp/easy-log-handler](https://github.com/EasyCorp/easy-log-handler):Human-friendly log files that make you more productive https://easycorp.io/EasyLog
       - [SeasX/SeasLog](https://github.com/SeasX/SeasLog)：An effective,fast,stable log extension for PHP.http://pecl.php.net/package/SeasLog http://neeke.github.io/SeasLog/
 * 电子商务 E-commerce 处理支付和构建在线电子商务商店的库和应用
       - [Money](https://github.com/moneyphp/money): 一个Fowler金钱模式的PHP实现
@@ -394,6 +396,7 @@
       - (https://github.com/Ocramius/ProxyManager)[ProxyManager]: 一个为数据映射生成代理对象的工具集
       - (http://redbeanphp.com/index.php)[RedBean]: 一个轻量级，低配置的ORM
       - (https://github.com/vlucas/spot2)[Spot2]: 一个MySQL的ORM映射器
+      - [propelorm/Propel3](https://github.com/propelorm/Propel3):High performance data-mapper ORM with optional active-record traits for RAD and modern PHP 7.1+
       - [doctrine/instantiator](https://github.com/doctrine/instantiator):http://www.doctrine-project.org
       - [doctrine/lexer](https://github.com/doctrine/lexer):Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.
       - [doctrine/inflector](https://github.com/doctrine/inflector):Doctrine Inflector is a small library that can perform string manipulations with regard to uppercase/lowercase and singular/plural forms of words.
