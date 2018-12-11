@@ -252,3 +252,4 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
 ## 工具
 
 * [duilib/duilib](https://github.com/duilib/duilib)
+* [xiazaiba](https://www.xiazaiba.com/)

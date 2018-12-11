@@ -473,21 +473,22 @@ ALTER TABLE 'table_name' ADD FULLTEXT 'index_name' ('column');
 ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
 
 SELECT [DISTINCT] 字段列表|* FROM table_name [WHERE条件][ORDER BY排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
-
-select id,title,author,hits,addate from news ORDER BY id DESC LIMIT 10,10; # limit [offset,]rowcount:offset 为偏移量，而非主键id
+SELECT id,title,author,hits,addate from news ORDER BY id DESC LIMIT 10,10; # limit [offset,]rowcount:offset 为偏移量，而非主键id
 SELECT * FROM rp_evaluate LIMIT 500 *$i,500
 SELECT `rp_e_id`,`evaluate` FROM `rp_evaluate` WHERE `rp_e_id` > 0 LIMIT 500
 SELECT column_name AS alias_name FROM table_name;
 SELECT column_name(s) FROM table_name AS alias_name; SELECT w.name, w.url, a.count, a.date FROM Websites AS w, access_log AS a WHERE a.site_id=w.id and w.name="菜鸟教程";
-select conact('a', 'b')
-select conact_ws(',', 'a', 'b')
+SELECT conact('a', 'b')
+SELECT conact_ws(',', 'a', 'b')
 SELECT GROUP_CONCAT(c_name) FROM categories WHERE school_id =1 # 字符拼接
 
 INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…);   # 记录操作：添加 更新与删除数据(新增与修改不用添加TABLE关键字)
 INSERT INTO table_name values (null,值,....); # 全字段插入，自动增长列用null
 INSERT INTO table_name values (null,值,....),(null,值,....),(null,值,....); # 插入多条数据
 INSERT INTO table_name set volumn1=value1,volumn3=value3,volumn3=value3;
+
 UPDATE table_name  SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件]; # 更新记录
+UPDATE base SET `count` = `count` + 1
 DELETE FROM table_name [WHERE条件];
 
 DROP TABLE [IF EXISTS] db_name;
