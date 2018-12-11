@@ -78,15 +78,6 @@ NoSQL主要用于解决以下几种问题
 * E. F. Codd（埃德加·弗兰克·科德）在1970年的论文“大型共享数据库的数据关系模型”中提出了关系模型
 * 分层模型是一种自下而上的模型，是对具体现实的表示。而关系模型是基于关系代数的抽象模型，并且是自上而下的
 
-## 扩展
-
-* [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. https://osquery.io
-    - [Docs](https://osquery.readthedocs.io)
-* [vrana/adminer](https://github.com/vrana/adminer):Database management in a single PHP file https://www.adminer.org/
-* [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. http://vitess.io
-* [getredash/redash](https://github.com/getredash/redash):Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. http://redash.io/
-* [XiaoMi/soar](https://github.com/XiaoMi/soar):SQL Optimizer And Rewriter
-
 ## 数据库
 
 * [dbeaver/dbeaver](https://github.com/dbeaver/dbeaver):Free universal database tool and SQL client http://dbeaver.jkiss.org
@@ -105,12 +96,20 @@ NoSQL主要用于解决以下几种问题
 * [orbitdb/orbit-db](https://github.com/orbitdb/orbit-db):Peer-to-Peer Databases for the Decentralized Web
 * [prometheus/prometheus](https://github.com/prometheus/prometheus)：The Prometheus monitoring system and time series database. https://prometheus.io/
 
-## 工具
-
-* [harelba/q](https://github.com/harelba/q):q - Run SQL directly on CSV or TSV files http://harelba.github.io/q/
-
 ## 参考
 
 * [数据库的原理](http://blog.jobbole.com/100349/)
 - [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)
 * [enochtangg/quick-SQL-cheatsheet](https://github.com/enochtangg/quick-SQL-cheatsheet):A quick reminder of all SQL queries and examples on how to use them.
+
+## 工具
+
+* [harelba/q](https://github.com/harelba/q):q - Run SQL directly on CSV or TSV files http://harelba.github.io/q/
+* [yandex/ClickHouse](https://github.com/yandex/ClickHouse):ClickHouse is a free analytic DBMS for big data. https://clickhouse.yandex
+* [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. https://osquery.io
+    - [Docs](https://osquery.readthedocs.io)
+* [vrana/adminer](https://github.com/vrana/adminer):Database management in a single PHP file https://www.adminer.org/
+* [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. http://vitess.io
+* [getredash/redash](https://github.com/getredash/redash):Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. http://redash.io/
+* [XiaoMi/soar](https://github.com/XiaoMi/soar):SQL Optimizer And Rewriter
+* [prisma/prisma](https://github.com/prisma/prisma):⚡️ Prisma makes working with databases easy https://www.prisma.io
