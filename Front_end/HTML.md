@@ -80,6 +80,12 @@
           <td>内容</td>
       </tr>
     </table>
+
+    <a href="javascript:void(0)"
+   onclick="(function() {
+           window.open(<?= "'" . Yii::app()->createUrl('disclosure/disclosure/users', array('model_id' => $value->id)) . "'" ?>, '_blank');
+           location.reload();
+           })()">click</a>
 </body>
 </html>
 ```
