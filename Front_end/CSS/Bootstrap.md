@@ -45,4 +45,4 @@ the browser’s default styles, styles from frameworks such as Bootstrap and you
 
 A CDN is short for Content Delivery Network.:Anazon decides which warehouse is closest to your house in Antartica, and delivers your pair of shorts from that warehouse. Also, the next time you place an order, Anazon will check the same warehouse and deliver your goods in under 24hours.
 
-Bootstrap 4 embraces the idea of native font stacks. 
+Bootstrap 4 embraces the idea of native font stacks.

@@ -1,7 +1,5 @@
 # Code
 
-
-
 ## 资深
 
 * 当你遇到一个棘手的问题，而有一个资深的程序员，快速地帮你解决了问题，说明他/她也走过这个坑。
@@ -34,3 +32,5 @@
 - [Stackoverflow](http://stackoverflow.com/)
 - [adambard/learnxinyminutes-docs](https://github.com/adambard/learnxinyminutes-docs):Code documentation written as code! How novel and totally my idea! http://learnxinyminutes.com/
 - [justjavac/Programming-Alpha-To-Omega](https://github.com/justjavac/Programming-Alpha-To-Omega):从零开始学编程 系列汇总（从 α 到 Ω）
+* [unbug/codelf](https://github.com/unbug/codelf):Best GitHub stars, repositories tagger and organizer. Search over projects from Github, Bitbucket, Google Code, Codeplex, Sourceforge, Fedora Project, GitLab to find real-world usage variable names https://unbug.github.io/codelf/
+* [prettier/prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. https://prettier.io
