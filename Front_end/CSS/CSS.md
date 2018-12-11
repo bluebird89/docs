@@ -216,7 +216,26 @@ h1{
   }
 ```
 
-##
+## CSS
+
+- color background-color font-size border
+- 行内样式>内嵌样式 >外部样式> 用户样式（user stylesheets\custom.CSS）>浏览器样式
+- 选择器：
+  - *
+  - 复杂度与搜索时间有关 [attr] [attr='val'] [attr$='val'] [attr^='val']
+  - 关系选择器：后代：
+  - stylus less sass
+  - 伪元素： ：active ：hover
+  - 联合选择器 ： \
+  - 同级样式会对比专一程度： id>其他属性与伪类个数>元素名字与伪元素名字个数
+- 样式层叠器
+- 样式单位
+  - 颜色： 颜色white 十六进制#ffffff 十进制255,255,255 rgb（112,128.144,0.4） hsl(h, s, l)
+  - 长度：
+    - 绝对 in cm mm pt磅 pc皮卡
+    - 相对(另一个尺寸倍数) em相对元素字号高度 ex rem px像素 %
+
+## Font
 
 字体图标缩小时可能会遇到部分图标存在锯齿现象
 
