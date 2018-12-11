@@ -1,12 +1,9 @@
 # JavaScript
 
-JavaScript是世界上最流行的脚本语言。运行在浏览器中的解释型的编程语言。
-
-在上个世纪的1995年，当时的网景公司正凭借其Navigator浏览器成为Web时代开启时最著名的第一代互联网公司。由于网景公司希望能在静态HTML页面上添加一些动态效果，于是叫Brendan Eich这哥们在两周之内设计出了JavaScript语言。你没看错，这哥们只用了10天时间。为什么起名叫JavaScript？原因是当时Java语言非常红火，所以网景公司希望借Java的名气来推广，但事实上JavaScript除了语法上有点像Java，其他部分基本上没啥关系。
-
-因为网景开发了JavaScript，一年后微软又模仿JavaScript开发了JScript，为了让JavaScript成为全球标准，几个公司联合ECMA（European Computer Manufacturers Association）组织定制了JavaScript语言的标准，被称为ECMAScript标准。
-
-ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标准的一种实现。ECMAScript 6标准（简称ES6）已经在2015年6月正式发布了，所以，讲到JavaScript的版本，实际上就是说它实现了ECMAScript标准的哪个版本。
+* JavaScript是世界上最流行的脚本语言。运行在浏览器中的解释型的编程语言。
+* 在上个世纪的1995年，当时的网景公司正凭借其Navigator浏览器成为Web时代开启时最著名的第一代互联网公司。由于网景公司希望能在静态HTML页面上添加一些动态效果，于是叫Brendan Eich这哥们在两周之内设计出了JavaScript语言。你没看错，这哥们只用了10天时间。为什么起名叫JavaScript？原因是当时Java语言非常红火，所以网景公司希望借Java的名气来推广，但事实上JavaScript除了语法上有点像Java，其他部分基本上没啥关系。
+* 因为网景开发了JavaScript，一年后微软又模仿JavaScript开发了JScript，为了让JavaScript成为全球标准，几个公司联合ECMA（European Computer Manufacturers Association）组织定制了JavaScript语言的标准，被称为ECMAScript标准。
+* ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标准的一种实现。ECMAScript 6标准（简称ES6）已经在2015年6月正式发布了，所以，讲到JavaScript的版本，实际上就是说它实现了ECMAScript标准的哪个版本。
 
 * 变量
 * 数据类型
@@ -30,6 +27,69 @@ ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标�
         - Location
     - HTML DOM 对象
 * 函数
+
+脚本语言
+
+- 直接写入 HTML 输出流
+- 对事件的响应
+- 改变 HTML 内容、属性、样式
+- 验证输入
+- 使用
+- 对大小写敏感
+- 使用 Unicode 字符集
+- 分号用于分隔 JavaScript 语句
+- 按照编写顺序依次执行每条语句，通过函数编写代码块：代码块的作用是一并地执行语句序列。
+
+## 输出数据
+
+- window.alert() 弹出警告框。
+- 使用 document.write() 方法将内容写到 HTML 文档中。
+
+  ```
+  折行
+  document.write("你好 \
+  世界!");
+  ```
+
+- 使用 innerHTML 写入到 HTML 元素（操作 HTML 元素）。
+- 使用 console.log() 写入到浏览器的控制台：能看到结构化的东西；不会打断页面的操作
+
+## 语法
+
+- 固定值称为字面量
+- 数据类型：
+
+  - Null:将变量的值设置为 null 来清空变量
+  - Undefined:表示变量不含有值
+  - Number
+  - string
+  - Boolean
+  - array
+  - object：
+
+    - 键值对在 JavaScript 对象通常称为 对象属性
+    - 对象的方法定义了一个函数，并作为对象的属性存储。对象方法通过添加 () 调用 (作为一个函数)。
+
+  - function：函数是由事件驱动的或者当它被调用时执行的可重复使用的代码块。
+
+    - 参数
+    - 返回值
+    - 作用域：
+    - 局部变量：只能在函数内部访问它
+    - 全局变量：网页上的所有脚本和函数都能访问它 -
+
+- 变量，用于存储信息的"容器"：var x = 5, age=30, job="carpenter";
+
+  - 生命周期：在它声明时初始化，局部变量在函数执行完毕后销毁，全局变量在页面关闭后销毁
+
+- 注释：
+
+  - 单行：//
+  - 多行：/** /
+
+- 事件
+
+a标签不能嵌套
 
 ## 基础
 
@@ -1617,10 +1677,6 @@ class PrimaryStudent extends Student {
 
 JavaScript可以获取浏览器提供的很多对象，并进行操作。
 
-* Google基于Webkit
-* Safari Webkit内核
-* Firefox自己研制的Gecko内核
-
 * window：不但充当全局作用域（所有 JavaScript 全局对象、函数以及变量均自动成为 window 对象的成员），而且表示浏览器窗口：
     - `window.innerWidth`
     - `window.innerHeight`
@@ -1647,12 +1703,12 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
     - screen.availHeight - 可用的屏幕高度
 * location：表示当前页面的URL信息
     - location.href: http://www.example.com:8080/path/index.html?a=1&b=2#TOP
-    - location.protocol; // 'http'
-    - location.host; // 'www.example.com'
-    - location.port; // '8080'
-    - location.pathname; // '/path/index.html'
-    - location.search; // '?a=1&b=2'
-    - location.hash; // 'TOP'
+    - location.protocol: 'http'
+    - location.host:'www.example.com'
+    - location.port:'8080'
+    - location.pathname:'/path/index.html'
+    - location.search:'?a=1&b=2'
+    - location.hash:'TOP'
     - location.assign('/discuss'):要加载一个新页面
     - location.reload():如果要重新加载当前页面
 * document：表示当前页面。由于HTML在浏览器中以DOM形式表示为树形结构，document对象就是整个DOM树的根节点。
@@ -1672,7 +1728,7 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
     - prompt("文本","默认值")
 * timing
     - var t=setTimeout("alert('5 秒！')",5000)
-    -  clearTimeout(t)
+    - clearTimeout(t)
 * cookie：cookie 是存储于访问者的计算机中的变量。每当同一台计算机通过浏览器请求某个页面时，就会发送这个 cookie。你可以使用 JavaScript 来创建和取回 cookie 的值。
 
 ```js
@@ -1703,7 +1759,6 @@ function stopCount()
  {
     clearTimeout(t)
  }
-
 
 function getCookie(c_name)
 {
