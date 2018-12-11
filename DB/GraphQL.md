@@ -1,6 +1,6 @@
-# GraphQL
+# [facebook/graphql](https://github.com/facebook/graphql)
 
-GraphQL 是一个由Facebook提出的 应用层查询语言. 使用 GraphQL, 你可以基于图模式定义你的后端. 然后客户端就可以请求所需要的数据集。GraphQL是一个规范.
+GraphQL is a query language and execution engine tied to any backend service. https://graphql.org/
 
 ## 资源
 
@@ -9,12 +9,26 @@ GraphQL 是一个由Facebook提出的 应用层查询语言. 使用 GraphQL, 你
 - [apollographql/react-apollo](https://github.com/apollographql/react-apollo): React higher-order component for Apollo Client http://dev.apollodata.com/
 * [apollographql/apollo-ios](https://github.com/apollographql/apollo-ios):📱 A strongly-typed, caching GraphQL client for iOS, written in Swift https://www.apollographql.com/docs/ios/
 
+## 测试
+
+* [intuit/karate](https://github.com/intuit/karate):Web-Services Testing Made Simple
+
+## 实例
+
+* <https://developer.github.com/v4/>
+
 ## 学习资料
 
 - [learnapollo/learnapollo](https://github.com/learnapollo/learnapollo)
 - [graphql/express-graphql](https://github.com/graphql/express-graphql):Create a GraphQL HTTP server with Express.
 - [mugli/learning-graphql](https://github.com/mugli/learning-graphql):An attempt to learn GraphQL
 - [raphQL PHP 中文文档](https://laravel-china.org/docs/graphql-php)
+
+## 参考
+
+- [官网](http://graphql.org/)
+- [教程](https://www.howtographql.com/)
+* [chentsulin/awesome-graphql](https://github.com/chentsulin/awesome-graphql):Awesome list of GraphQL & Relay## 实例
 
 ## 工具
 
@@ -26,16 +40,3 @@ GraphQL 是一个由Facebook提出的 应用层查询语言. 使用 GraphQL, 你
 * [slothking-online/graphql-editor](https://github.com/slothking-online/graphql-editor):GraphQL Visual Node Editor
 * [apollographql/react-apollo](https://github.com/apollographql/react-apollo)♻️ React integration for Apollo Client
 
-## 测试
-
-* [intuit/karate](https://github.com/intuit/karate):Web-Services Testing Made Simple
-
-## 参考
-
-- [官网](http://graphql.org/)
-- [教程](https://www.howtographql.com/)
-* [chentsulin/awesome-graphql](https://github.com/chentsulin/awesome-graphql):Awesome list of GraphQL & Relay## 实例
-
-## 实例
-
-* <https://developer.github.com/v4/>

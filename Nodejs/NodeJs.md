@@ -757,6 +757,24 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 
 * [SOHU-Co/kafka-node](https://github.com/SOHU-Co/kafka-node):Node.js client for Apache Kafka 0.8 and later.
 
+## 三方库
+
+* [Dist](http://nodejs.org/dist/)
+
+## 教程
+
+* [ElemeFE/node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
+* [Chiara-yen/startLearningNodejs](https://github.com/Chiara-yen/startLearningNodejs):
+* [scotch-io/node-todo](https://github.com/scotch-io/node-todo):A simple Node/MongoDB/Angular todo app https://scotch.io/tutorials/creating-…
+* [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list. Curated from the top ranked articles and always updated
+* [nodejs](https://www.runoob.com/nodejs)
+* [alsotang/node-lessons](https://github.com/alsotang/node-lessons):📕《Node.js 包教不包会》 by alsotang
+* [node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
+* [nodejs入门](https://leanpub.com/nodebeginner-chinese)
+* [NodeJS的代码调试和性能调优](http://www.cnblogs.com/hustskyking/p/how-to-build-a-https-server.html)
+* [swbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
+* [Node.js v8.x 中文文档](https://www.nodeapp.cn/)
+
 ## 工具
 
 * [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
