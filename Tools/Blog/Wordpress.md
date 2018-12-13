@@ -18,6 +18,10 @@ WordPress, Git-ified. Synced via SVN every 15 minutes, including branches and ta
 
 * [安装地址](http://example.com/wp-admin/install.php)
 
+## 插件
+
+* [WordPress/gutenberg](https://github.com/WordPress/gutenberg):Printing since 1440. Development hub for the editor focus in core. Plugin is available from the official WordPress repository. https://wordpress.org/plugins/gutenberg/
+
 ## 参考
 
 * [kinsta](https://kinsta.com/):https://kinsta.com/resources/
@@ -25,4 +29,3 @@ WordPress, Git-ified. Synced via SVN every 15 minutes, including branches and ta
 ## 工具
 
 * [Varying-Vagrant-Vagrants/VVV](https://github.com/Varying-Vagrant-Vagrants/VVV):An open source Vagrant configuration for developing with WordPress https://varyingvagrantvagrants.org
-* [WordPress/gutenberg](https://github.com/WordPress/gutenberg):Printing since 1440. Development hub for the editor focus in core. Plugin is available from the official WordPress repository. https://wordpress.org/plugins/gutenberg/

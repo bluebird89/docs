@@ -45,15 +45,18 @@ php -S localhost:8888 route/route.php
 
 ## 扩展
 
-* [top-think/think-swoole](https://github.com/top-think/think-swoole):Swoole extend for thinkphp5
-
-## 资源
-
-* [ThinkPHP5.1完全开发手册](https://www.kancloud.cn/manual/thinkphp5_1)
-* [top-think/framework](https://github.com/top-think/framework):ThinkPHP5 Framework http://www.thinkphp.cn
-* [top-think/thinkng](https://github.com/top-think/thinkng):基于 ThinkPHP 5 框架核心重写的下一代 ThinkPHP
+* swoole
+    * [top-think/think-swoole](https://github.com/top-think/think-swoole):Swoole extend for thinkphp5
+* admin
+    * [Ucer/ucer-admin](https://github.com/Ucer/ucer-admin):ucer admin system based Thinkphp5.0.10 http://codehaoshi.com
 
 ## 项目
 
 * [thinkcmf/thinkcmf](https://github.com/thinkcmf/thinkcmf):ThinkCMF5 is a content manage framework ,based on ThinkPHP5
 * [baijunyao/thinkphp-bjyadmin](https://github.com/baijunyao/thinkphp-bjyadmin):thinkphp整合Auth权限管理、支付宝、微信支付、阿里oss、友盟推送、融云即时通讯、云通讯短信、Email、Excel、PDF等等；基于thinkphp扩展了大量的功能；而不改动thinkphp核心；非常方便的升级、移植和使用； http://baijunyao.comw
+
+## 参考
+
+* [ThinkPHP5.1完全开发手册](https://www.kancloud.cn/manual/thinkphp5_1)
+* [top-think/framework](https://github.com/top-think/framework):ThinkPHP5 Framework http://www.thinkphp.cn
+* [top-think/thinkng](https://github.com/top-think/thinkng):基于 ThinkPHP 5 框架核心重写的下一代 ThinkPHP

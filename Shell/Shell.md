@@ -619,6 +619,10 @@ axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minima
 ccache gcc foo.c
 ```
 
+## 配置
+
+* [direnv/direnv](https://github.com/direnv/direnv):Unclutter your .profile http://direnv.net
+
 ## 教程
 
 * [learnbyexample/command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):⚡️ From finding text to search and replace, from sorting to beautifying text and more 🎨

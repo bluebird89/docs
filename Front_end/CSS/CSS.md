@@ -265,7 +265,6 @@ h1{
 
 ## framework
 
-* Bootstrap
 * Flat UI
 * Semantic UI
 * BootMetro

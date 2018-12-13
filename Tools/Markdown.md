@@ -956,12 +956,12 @@ Markdown 语法： **Example:**
 * [knsv/mermaid](https://github.com/knsv/mermaid):Generation of diagram and flowchart from text in a similar manner as markdown http://knsv.github.io/mermaid/
 * [aaronsw/html2text](https://github.com/aaronsw/html2text):Convert HTML to Markdown-formatted text. http://www.aaronsw.com/2002/html2text/
 * [benweet/stackedit](https://github.com/benweet/stackedit):In-browser Markdown editor https://stackedit.io/
-* [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
 * [showdownjs/showdown](https://github.com/showdownjs/showdown):A bidirectional Markdown to HTML to Markdown converter written in Javascript http://www.showdownjs.com/
 -  [幕布](https://mubu.com/):可折叠的markdown
 * [adam-p/markdown-here](https://github.com/adam-p/markdown-here):Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. http://markdown-here.com
 * [benweet/stackedit](https://github.com/benweet/stackedit):In-browser Markdown editor https://stackedit.io/
 * [markedjs/marked](https://github.com/markedjs/marked):A markdown parser and compiler. Built for speed. https://marked.js.org/
+* [mdx-js/mdx](https://github.com/mdx-js/mdx):JSX in Markdown for ambitious projects https://mdxjs.com
 
 ## 参考
 

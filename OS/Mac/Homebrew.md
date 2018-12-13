@@ -1,6 +1,6 @@
-# Homebrew
+# [Homebrew/homebrew-cask](https://github.com/Homebrew/homebrew-cask)
 
-包管理工具
+🍻 A CLI workflow for the administration of macOS applications distributed as binaries https://brew.sh
 
 * brew（意为酿酒）的命名很有意思，全部都使用了酿酒过程中采用的材料/器具，名词对应以下的概念：
 * Formula（配方） 程序包定义，本质上是一个rb文件
@@ -160,4 +160,3 @@ zsh_completion
 ## 工具
 
 * [Homebrew/homebrew-core](https://github.com/Homebrew/homebrew-core):🍻 Default formulae for the missing package manager for macOS https://brew.sh
-* [Homebrew/homebrew-cask](https://github.com/Homebrew/homebrew-cask):🍻 A CLI workflow for the administration of macOS applications distributed as binaries https://brew.sh

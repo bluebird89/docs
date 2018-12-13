@@ -693,73 +693,45 @@ nginx采用第二种方法，那就依然可能会产生负载不完全均衡和
 nginx中使用mutex互斥锁解决这个问题，具体措施有使用全局互斥锁，每个子进程在epoll_wait()之前先去申请锁，申请到则继续处理，获取不到则等待，并设置了一个负载均衡的算法（当某一个子进程的任务量达到总设置量的7/8时，则不会再尝试去申请锁）来均衡各个进程的任务量。具体的nginx如何解决惊群，看这篇文章: <http://blog.csdn.net/russell_tao/article/details/7204260>
 node应用服务器为什么可以采用方案三呢，我的理解是：node作为具体的应该服务器负责实际处理用户的请求，处理可能包含数据库等操作，不是必须快速的接收大量请求，而且转发到某具体的node单台服务器上的请求较之nginx也少了很多。
 
-## Compiler
+## 扩展
 
-* [zeit/ncc](https://github.com/zeit/ncc):Node.js Compiler Collection
-
-## Weibo
-
-* [node-modules/weibo](https://github.com/node-modules/weibo):weibo nodejs sdk http://github.com/fengmk2/node-weibo
-
-## 输入
-
-* [sindresorhus/ow](https://github.com/sindresorhus/ow):Function argument validation for humans
-
-## 缓存
-
-* [isaacs/node-lru-cache](https://github.com/isaacs/node-lru-cache)
-
-## Error
-
-* [AriaMinaei/pretty-error](https://github.com/AriaMinaei/pretty-error):See node.js errors with less clutter
-
-## Proxy
-
-* [OptimalBits/redbird](https://github.com/OptimalBits/redbird):A modern reverse proxy for node
-
-## 框架
-
-* [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications
-* [balderdashy/sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js https://sailsjs.com
-
-## 数据库
-
-* [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis):redis client for node http://redis.js.org/
-* [luin/ioredis](https://github.com/luin/ioredis):🚀A robust, performance-focused and full-featured Redis client for Node.js.
-
-## HTTP
-
-* [expressjs/morgan](https://github.com/expressjs/morgan):HTTP request logger middleware for node.js
-
-## Logger
-
-* [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
-* [expressjs/morgan](https://github.com/expressjs/morgan):HTTP request logger middleware for node.js
-
-## authenticate
-
-* [jaredhanson/passport](https://github.com/jaredhanson/passport)：Simple, unobtrusive authentication for Node.js. http://www.passportjs.org
-
-## 监控
-
-* [lloyd/node-memwatch](https://github.com/lloyd/node-memwatch):A NodeJS library to keep an eye on your memory usage, and discover and isolate leaks.
-
-## cli
-
-* [yargs/yargs](https://github.com/yargs/yargs):yargs the modern, pirate-themed successor to optimist. http://yargs.js.org/
-* [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
-
-## render
-
-* [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
-
-## Kafka
-
-* [SOHU-Co/kafka-node](https://github.com/SOHU-Co/kafka-node):Node.js client for Apache Kafka 0.8 and later.
-
-## 三方库
-
-* [Dist](http://nodejs.org/dist/)
+* 三方库
+  - [Dist](http://nodejs.org/dist/)
+* Compiler
+  - [zeit/ncc](https://github.com/zeit/ncc):Node.js Compiler Collection
+* Weibo
+  - [node-modules/weibo](https://github.com/node-modules/weibo):weibo nodejs sdk http://github.com/fengmk2/node-weibo
+* 输入
+  - [sindresorhus/ow](https://github.com/sindresorhus/ow):Function argument validation for humans
+* 缓存
+  - [isaacs/node-lru-cache](https://github.com/isaacs/node-lru-cache)
+* Error
+  - [AriaMinaei/pretty-error](https://github.com/AriaMinaei/pretty-error):See node.js errors with less clutter
+* Proxy
+  - [OptimalBits/redbird](https://github.com/OptimalBits/redbird):A modern reverse proxy for node
+* 框架
+  - [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications
+  - [balderdashy/sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js https://sailsjs.com
+  - [NodeBB/NodeBB](https://github.com/NodeBB/NodeBB):Node.js based forum software built for the modern web https://nodebb.org
+* 数据库
+  - [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis):redis client for node http://redis.js.org/
+  - [luin/ioredis](https://github.com/luin/ioredis):🚀A robust, performance-focused and full-featured Redis client for Node.js.
+* HTTP
+  - [expressjs/morgan](https://github.com/expressjs/morgan):HTTP request logger middleware for node.js
+* Logger
+  - [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
+  - [expressjs/morgan](https://github.com/expressjs/morgan):HTTP request logger middleware for node.js
+* authenticate
+  - [jaredhanson/passport](https://github.com/jaredhanson/passport)：Simple, unobtrusive authentication for Node.js. http://www.passportjs.org
+* 监控
+  - [lloyd/node-memwatch](https://github.com/lloyd/node-memwatch):A NodeJS library to keep an eye on your memory usage, and discover and isolate leaks.
+* cli
+  - [yargs/yargs](https://github.com/yargs/yargs):yargs the modern, pirate-themed successor to optimist. http://yargs.js.org/
+  - [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
+* render
+  - [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
+* Kafka
+  - [SOHU-Co/kafka-node](https://github.com/SOHU-Co/kafka-node):Node.js client for Apache Kafka 0.8 and later.
 
 ## 教程
 
