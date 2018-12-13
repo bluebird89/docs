@@ -127,6 +127,7 @@ smaba
     -   [marked2](http://marked2app.com/)
     -   [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
     -   Upad
+    - [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
 - 下载
     - bitlord
     - Folx

@@ -1416,130 +1416,6 @@ function boot()
 
 $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 
-
-## 扩展
-
-* 权限
-    * [Adldap2/Adldap2-Laravel](https://github.com/Adldap2/Adldap2-Laravel):LDAP Authentication & Management for Laravel
-* lumen
-    - [laravel/lumen-framework](https://github.com/laravel/lumen-framework)
-    - [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
-* [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
-* API
-    * [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
-    * [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp.
-* Swoole
-    * [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
-* logger
-    * [overtrue/laravel-query-logger](https://github.com/overtrue/laravel-query-logger):📝 A dev tool to log all queries for laravel application.
-* Oauth
-    * [laravel/socialite](https://github.com/laravel/socialite):an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub, GitLab and Bitbucket
-    * [overtrue/socialite](https://github.com/overtrue/socialite)::octocat: Socialite is an OAuth2 Authentication tool. It is inspired by laravel/socialite, you can easily use it without Laravel.
-* websocket
-    - [beyondcode/laravel-websockets](https://github.com/beyondcode/laravel-websockets):Websockets for Laravel. Done right.https://docs.beyondco.de/laravel-websockets/
-* [laravel/cashier](https://github.com/laravel/cashier)
-* [laravel/passport](https://github.com/laravel/passport):Laravel Passport is an OAuth2 server and API authentication package that is simple and enjoyable to use.
-* [laravel/horizon](https://github.com/laravel/horizon):Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues.
-* [laravel/echo](https://github.com/laravel/echo):provides a more robust, efficient alternative to continually polling your application for websocket changes.
-* [laravel/socialite](https://github.com/laravel/socialite):Laravel Socialite provides an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub and Bitbucket.
-* [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
-* [laravel/dusk](https://github.com/laravel/dusk):Laravel Dusk provides an expressive, easy-to-use browser automation and testing API.
-* [laravel/envoy](https://github.com/laravel/envoy):Elegant SSH tasks for PHP.
-* [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
-* [barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf):A DOMPDF Wrapper for Laravel
-* [Zizaco/entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
-* [bosnadev/repository](https://github.com/bosnadev/repository):Laravel Repositories is a package for Laravel 5 which is used to abstract the database layer. This makes applications much easier to maintain. https://bosnadev.com
-* [LaravelCollective/html](https://github.com/LaravelCollective/html):HTML and Form Builders for the Laravel Framework
-* [Ucer/ucer-admin](https://github.com/Ucer/ucer-admin)
-* [Algolia](https://www.algolia.com/doc/api-client/laravel/algolia-and-scout/):Algolia is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke
-* [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth):🔐 JSON Web Token Authentication for Laravel & Lumen http://jwt-auth.com
-* [laravel/telescope](https://github.com/laravel/telescope):provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more
-* [launcher-host/mercurius](https://github.com/launcher-host/mercurius):Real-time Messenger for Laravel http://mercurius.launcher.host/
-* [Laravel-Backpack/CRUD](https://github.com/Laravel-Backpack/CRUD):Build a custom admin interface for your Eloquent models, using Laravel 5.2 to 5.7 http://backpackforlaravel.com
-* [code 好事源代码](https://github.com/Ucer/codehaoshi)
-
-## 参考
-
-* [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js.
-* [快速入门 —— 使用 Laragon 在 Windows 中搭建 Laravel 开发环境](http://laravelacademy.org/post/7754.html)
-* [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
-* [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
-* [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
-* [laravel入门教程](https://d.laravel-china.org/docs/5.5)
-* [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
-* [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)
-* [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
-* [Laravel5.5 + Vue开发单页应用](http://www.laravel-vue.xyz/2018/03/22/laravel_vue_v2/)
-* [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
-* [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart
-* [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
-* [LeoYang90/laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis):详解 laravel 源码
-<https://laravel-china.org/articles/2020/ten-laravel-5-program-optimization-techniques>
-<https://blog.tanteng.me/2016/06/laravel-optimize/>
-
-## 文档
-
-* [laravel/docs](https://github.com/laravel/docs)
-* [laravel/spark-docs](https://github.com/laravel/spark-docs)
-* [summerblue/laravel5-cheatsheet](https://github.com/summerblue/laravel5-cheatsheet):A quick reference guide (cheat sheet) for Laravel 5.1 LTS, listing artisan, composer, routes and other useful bits of information. https://cs.laravel-china.org/
-* [Laravel Cheat Sheet](http://cheats.jesse-obrien.ca/)
-* [laravel-china/laravel-docs](https://github.com/laravel-china/laravel-docs):Laravel 中文文档 https://d.laravel-china.org
-* [samedreams/artisan-road](https://github.com/samedreams/artisan-road):Programmers are artisans （This book is a guide for artisans）
-* [xiaohuilam/laravel](https://github.com/xiaohuilam/laravel/wiki):Laravel 深入浅出指南 —— Laravel 5.7 源代码解析，新手进阶指南。
-
-## 工具
-
-* [laravel/homestead](https://github.com/laravel/homestead)
-* [laravel/valet](https://github.com/laravel/valet):Valet is a Laravel development environment for Mac minimalists.
-* [weprovide/valet-plus](https://github.com/weprovide/valet-plus):Blazing fast macOS PHP development environment https://medium.com/@timneutkens/intro…
-* [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
-* [z-song/laravel-admin](https://github.com/z-song/laravel-admin):Build a full-featured administrative interface in ten minutes http://laravel-admin.org
-* [the-control-group/voyager](https://github.com/the-control-group/voyager):Voyager - The Missing Laravel Admin https://laravelvoyager.com
-* [codex-project/codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! http://codex-project.ninja
-* [spatie/laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
-* [FrozenNode/Laravel-Administrator](https://github.com/FrozenNode/Laravel-Administrator):An administrative interface package for Laravel http://administrator.frozennode.com/
-* [stefanzweifel/laravel-stats](https://github.com/stefanzweifel/laravel-stats):📈 Get insights about your Laravel or Lumen Project
-* [antonioribeiro/tracker](https://github.com/antonioribeiro/tracker):Laravel Stats Tracker
-* [andersao/laravel-request-logger](https://github.com/andersao/laravel-request-logger):HTTP request logger middleware for Laravel
-* [laravelshift](https://laravelshift.com/):laravel upgrade
-* [Laravel Analyzer](link)
-* [vyuldashev/laravel-queue-rabbitmq](https://github.com/vyuldashev/laravel-queue-rabbitmq):RabbitMQ driver for Laravel Queue
-* [InfyOmLabs/laravel-generator](https://github.com/InfyOmLabs/laravel-generator):InfyOm Laravel Generator - API, Scaffold, CRUD Laravel Generator http://labs.infyom.com/laravelgenerator/
-* [spatie/laravel-fractal](https://github.com/spatie/laravel-fractal):An easy to use Fractal wrapper built for Laravel and Lumen applications
-* [barryvdh/laravel-snappy](https://github.com/barryvdh/laravel-snappy):Laravel Snappy PDF
-* [antonioribeiro/health](https://github.com/antonioribeiro/health):Laravel Health Panel
-* [spatie/laravel-backup](https://github.com/spatie/laravel-backup):A package to backup your Laravel app
-* [elasticquent/Elasticquent](https://github.com/elasticquent/Elasticquent):Maps Laravel Eloquent models to Elasticsearch types
-* [saleem-hadad/larecipe](https://github.com/saleem-hadad/larecipe):🍪 Write gorgeous documentations for your products using Markdown inside your Laravel app. https://larecipe.binarytorch.com.my/
-* [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
-* [wujunze/laravel-debug-helper](https://github.com/wujunze/laravel-debug-helper):Laravel package to help debug
-* [laravel-zero/laravel-zero](https://github.com/laravel-zero/laravel-zero):A PHP framework for console artisans https://laravel-zero.com
-
-## 工程
-
-项目的搭建，以 [https://github.com/summerblue/larabbs](A forum project base on Laravel 5.5)
-
-```sh
-git clone git@github.com:summerblue/larabbs.git
-# 修改 homestead.html,添加配置
-vagrant provision
-composer install
-# 配置.env文件
-
-php artisan migrate --seed
-php artisan key:generate
-
-yarn install
-
-# 首页地址：http://larabbs.app/
-# 管理后台：http://larabbs.app/admin
-
-username: summer@yousails.com
-password: password
-
-# Non-static method Redis::hGet() cannot be called statically
-```
-
 ### [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)
 
 Laravel Debugbar (Integrates PHP Debug Bar)
@@ -1571,6 +1447,129 @@ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServicePro
 php artisan jwt:secret # 使用
 ```
 
+## 扩展
+
+* 权限
+    * [Adldap2/Adldap2-Laravel](https://github.com/Adldap2/Adldap2-Laravel):LDAP Authentication & Management for Laravel
+* lumen
+    - [laravel/lumen-framework](https://github.com/laravel/lumen-framework)
+    - [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
+* [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
+* API
+    * [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
+    * [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp.
+* Swoole
+    * [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
+* logger
+    * [overtrue/laravel-query-logger](https://github.com/overtrue/laravel-query-logger):📝 A dev tool to log all queries for laravel application.
+* Oauth
+    * [laravel/socialite](https://github.com/laravel/socialite):an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub, GitLab and Bitbucket
+    * [overtrue/socialite](https://github.com/overtrue/socialite)::octocat: Socialite is an OAuth2 Authentication tool. It is inspired by laravel/socialite, you can easily use it without Laravel.
+* websocket
+    - [beyondcode/laravel-websockets](https://github.com/beyondcode/laravel-websockets):Websockets for Laravel. Done right.https://docs.beyondco.de/laravel-websockets/
+* admin
+    - [z-song/laravel-admin](https://github.com/z-song/laravel-admin):Build a full-featured administrative interface in ten minutes http://laravel-admin.org
+    - [the-control-group/voyager](https://github.com/the-control-group/voyager):Voyager - The Missing Laravel Admin https://laravelvoyager.com
+* MongoDB
+    - [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb#installation):A MongoDB based Eloquent model and Query builder for Laravel (Moloquent) https://jenssegers.com
+* [laravel/cashier](https://github.com/laravel/cashier)
+* [laravel/passport](https://github.com/laravel/passport):Laravel Passport is an OAuth2 server and API authentication package that is simple and enjoyable to use.
+* [laravel/horizon](https://github.com/laravel/horizon):Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues.
+* [laravel/echo](https://github.com/laravel/echo):provides a more robust, efficient alternative to continually polling your application for websocket changes.
+* [laravel/socialite](https://github.com/laravel/socialite):Laravel Socialite provides an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub and Bitbucket.
+* [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
+* [laravel/dusk](https://github.com/laravel/dusk):Laravel Dusk provides an expressive, easy-to-use browser automation and testing API.
+* [laravel/envoy](https://github.com/laravel/envoy):Elegant SSH tasks for PHP.
+* [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
+* [barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf):A DOMPDF Wrapper for Laravel
+* [Zizaco/entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
+* [bosnadev/repository](https://github.com/bosnadev/repository):Laravel Repositories is a package for Laravel 5 which is used to abstract the database layer. This makes applications much easier to maintain. https://bosnadev.com
+* [LaravelCollective/html](https://github.com/LaravelCollective/html):HTML and Form Builders for the Laravel Framework
+* [Algolia](https://www.algolia.com/doc/api-client/laravel/algolia-and-scout/):Algolia is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke
+* [laravel/telescope](https://github.com/laravel/telescope):provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more
+* [launcher-host/mercurius](https://github.com/launcher-host/mercurius):Real-time Messenger for Laravel http://mercurius.launcher.host/
+* [Laravel-Backpack/CRUD](https://github.com/Laravel-Backpack/CRUD):Build a custom admin interface for your Eloquent models, using Laravel 5.2 to 5.7 http://backpackforlaravel.com
+* [code 好事源代码](https://github.com/Ucer/codehaoshi)
+
+## 文档
+
+* [laravel/docs](https://github.com/laravel/docs)
+* [laravel/spark-docs](https://github.com/laravel/spark-docs)
+* [summerblue/laravel5-cheatsheet](https://github.com/summerblue/laravel5-cheatsheet):A quick reference guide (cheat sheet) for Laravel 5.1 LTS, listing artisan, composer, routes and other useful bits of information. https://cs.laravel-china.org/
+* [Laravel Cheat Sheet](http://cheats.jesse-obrien.ca/)
+* [laravel-china/laravel-docs](https://github.com/laravel-china/laravel-docs):Laravel 中文文档 https://d.laravel-china.org
+* [samedreams/artisan-road](https://github.com/samedreams/artisan-road):Programmers are artisans （This book is a guide for artisans）
+* [xiaohuilam/laravel](https://github.com/xiaohuilam/laravel/wiki):Laravel 深入浅出指南 —— Laravel 5.7 源代码解析，新手进阶指南。
+
+## 工具
+
+* [laravel/homestead](https://github.com/laravel/homestead)
+* [laravel/valet](https://github.com/laravel/valet):Valet is a Laravel development environment for Mac minimalists.
+* [weprovide/valet-plus](https://github.com/weprovide/valet-plus):Blazing fast macOS PHP development environment https://medium.com/@timneutkens/intro…
+* [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
+* [codex-project/codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! http://codex-project.ninja
+* [spatie/laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
+* [FrozenNode/Laravel-Administrator](https://github.com/FrozenNode/Laravel-Administrator):An administrative interface package for Laravel http://administrator.frozennode.com/
+* [stefanzweifel/laravel-stats](https://github.com/stefanzweifel/laravel-stats):📈 Get insights about your Laravel or Lumen Project
+* [antonioribeiro/tracker](https://github.com/antonioribeiro/tracker):Laravel Stats Tracker
+* [andersao/laravel-request-logger](https://github.com/andersao/laravel-request-logger):HTTP request logger middleware for Laravel
+* [laravelshift](https://laravelshift.com/):laravel upgrade
+* [Laravel Analyzer](link)
+* [vyuldashev/laravel-queue-rabbitmq](https://github.com/vyuldashev/laravel-queue-rabbitmq):RabbitMQ driver for Laravel Queue
+* [InfyOmLabs/laravel-generator](https://github.com/InfyOmLabs/laravel-generator):InfyOm Laravel Generator - API, Scaffold, CRUD Laravel Generator http://labs.infyom.com/laravelgenerator/
+* [spatie/laravel-fractal](https://github.com/spatie/laravel-fractal):An easy to use Fractal wrapper built for Laravel and Lumen applications
+* [barryvdh/laravel-snappy](https://github.com/barryvdh/laravel-snappy):Laravel Snappy PDF
+* [antonioribeiro/health](https://github.com/antonioribeiro/health):Laravel Health Panel
+* [spatie/laravel-backup](https://github.com/spatie/laravel-backup):A package to backup your Laravel app
+* [elasticquent/Elasticquent](https://github.com/elasticquent/Elasticquent):Maps Laravel Eloquent models to Elasticsearch types
+* [saleem-hadad/larecipe](https://github.com/saleem-hadad/larecipe):🍪 Write gorgeous documentations for your products using Markdown inside your Laravel app. https://larecipe.binarytorch.com.my/
+* [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
+* [wujunze/laravel-debug-helper](https://github.com/wujunze/laravel-debug-helper):Laravel package to help debug
+* [laravel-zero/laravel-zero](https://github.com/laravel-zero/laravel-zero):A PHP framework for console artisans https://laravel-zero.com
+
+## 参考
+
+* [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js.
+* [快速入门 —— 使用 Laragon 在 Windows 中搭建 Laravel 开发环境](http://laravelacademy.org/post/7754.html)
+* [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
+* [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
+* [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
+* [laravel入门教程](https://d.laravel-china.org/docs/5.5)
+* [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
+* [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)
+* [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
+* [Laravel5.5 + Vue开发单页应用](http://www.laravel-vue.xyz/2018/03/22/laravel_vue_v2/)
+* [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
+* [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart
+* [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
+* [LeoYang90/laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis):详解 laravel 源码
+
+
+## 工程
+
+项目的搭建，以 [https://github.com/summerblue/larabbs](A forum project base on Laravel 5.5)
+
+```sh
+git clone git@github.com:summerblue/larabbs.git
+# 修改 homestead.html,添加配置
+vagrant provision
+composer install
+# 配置.env文件
+
+php artisan migrate --seed
+php artisan key:generate
+
+yarn install
+
+# 首页地址：http://larabbs.app/
+# 管理后台：http://larabbs.app/admin
+
+username: summer@yousails.com
+password: password
+
+# Non-static method Redis::hGet() cannot be called statically
+```
+
 ## 前后端分离
 
 * npm install
@@ -1590,3 +1589,6 @@ php artisan jwt:secret # 使用
 ## 问题
 
 Call to undefined function openssl_encrypt() # 开启OpenSSL扩展
+
+<https://laravel-china.org/articles/2020/ten-laravel-5-program-optimization-techniques>
+<https://blog.tanteng.me/2016/06/laravel-optimize/>
