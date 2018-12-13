@@ -174,12 +174,12 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
     - apache AB
     + webbench
 - [缩短网址](http://suo.im/)
+- [google/pprof](https://github.com/google/pprof):pprof is a tool for visualization and analysis of profiling data
 
 ## 监控
 
 * [davidkpiano/xstate](https://github.com/davidkpiano/xstate):State machines and statecharts for the modern web. https://xstate.js.org/docs
 * [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
-* [davidkpiano/xstate](https://github.com/davidkpiano/xstate):State machines and statecharts for the modern web. https://xstate.js.org/docs
 
 <https://zhuanlan.zhihu.com/p/22360384>
 《构建高性能Web站点》第12章 web负载均衡
