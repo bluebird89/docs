@@ -98,8 +98,9 @@
       - [Phly Mustache](https://github.com/phly/phly_mustache): 另一个Mustache模板语言的PHP实现
       - [PHPTAL](http://phptal.org/): 一个模板语言的PHP实现
       - [Plates](http://platesphp.com/): 一个原生PHP模板库
-      - [Smarty](http://www.smarty.net/): 一个模板引擎
+      - [smarty-php/smarty](https://github.com/smarty-php/smarty):http://www.smarty.net/
       - [Twig](http://twig.sensiolabs.org/): 一个全面的模板语言
+      - [twigphp/Twig](https://github.com/twigphp/Twig):Twig, the flexible, fast, and secure template language for PHP http://twig.sensiolabs.org/
       - [Tale Jade](https://github.com/Talesoft/tale-jade): Jade模版语言的PHP实现
       - [Talesoft/tale-jade](https://github.com/Talesoft/tale-jade):A complete and fully-functional implementation of the Jade template language for PHP http://jade.talesoft.codes
       - [doctrine2](https://github.com/doctrine/doctrine2):http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/index.html
@@ -758,6 +759,8 @@
 * [hoohack/read-php-src](https://github.com/hoohack/read-php-src)
 * [php/php-langspec](https://github.com/php/php-langspec):PHP Language Specification http://www.php.net
 * [dstogov/php-ffi](https://github.com/dstogov/php-ffi):PHP Foreign Function Interface
+- [laruence/php7-internal](https://github.com/laruence/php7-internal):Understanding PHP7 Internal articles
+* [pangudashu/php7-internal](https://github.com/pangudashu/php7-internal):PHP7内核剖析
 
 ## 扩展
 
@@ -942,7 +945,6 @@ fi
 * [reactphp/react](https://github.com/reactphp/react):Event-driven, non-blocking I/O with PHP. <https://reactphp.org>
 * [CopernicaMarketingSoftware/PHP-CPP](https://github.com/CopernicaMarketingSoftware/PHP-CPP):Library to build PHP extensions with C++ <http://www.php-cpp.com/>
 * [nikic/PHP-Parser](https://github.com/nikic/PHP-Parser):A PHP parser written in PHP
-* [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb#installation):A MongoDB based Eloquent model and Query builder for Laravel (Moloquent) https://jenssegers.com
 * [youzan/php-co-koa](https://github.com/youzan/php-co-koa)PHP异步编程: 手把手教你实现co与Koa
 * [youzan/zan](https://github.com/youzan/zan)高效稳定、安全易用、线上实时验证的全异步高性能网络库，通过PHP扩展方式使用。
 * [HanSon/youzan-sdk](https://github.com/HanSon/youzan-sdk)有赞 SDK
@@ -958,8 +960,7 @@ fi
 * [thephpleague/glide](https://github.com/thephpleague/glide):Wonderfully easy on-demand image manipulation library with an HTTP based API. http://glide.thephpleague.com
 * [thephpleague/skeleton](https://github.com/thephpleague/skeleton):A skeleton repository for League Packages http://thephpleague.com
 * [KnpLabs/php-github-api](https://github.com/KnpLabs/php-github-api):A simple PHP GitHub API client, Object Oriented, tested and documented. For 5.5+.
-* [twigphp/Twig](https://github.com/twigphp/Twig):Twig, the flexible, fast, and secure template language for PHP http://twig.sensiolabs.org/
-* [smarty-php/smarty](https://github.com/smarty-php/smarty)
+
 
 ## 项目
 
@@ -969,7 +970,6 @@ fi
 
 - [codeguy/php-the-right-way](https://github.com/codeguy/php-the-right-way):An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web <http://www.phptherightway.com>
 - [walu/phpbook](https://github.com/walu/phpbook):PHP扩展开发及内核应用
-- [laruence/php7-internal](https://github.com/laruence/php7-internal):Understanding PHP7 Internal articles
 - [PHP 教程](http://www.w3school.com.cn/php/)
 - [Awesome PHP](http://coffeephp.com/resources)
 - [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php):A curated list of amazingly awesome PHP libraries, resources and shiny things.
