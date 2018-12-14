@@ -39,3 +39,4 @@ eter Deutsch 提出的分布式系统八大谬论概括了程序员新手可能�
 ## 参考
 
 * [rShetty/awesome-distributed-systems](https://github.com/rShetty/awesome-distributed-systems):Awesome list of distributed systems resources http://rajeevnb.com
+* [gdamdam/awesome-decentralized-web](https://github.com/gdamdam/awesome-decentralized-web):an awesome list of decentralized services 
