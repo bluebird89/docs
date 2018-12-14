@@ -185,6 +185,18 @@ ssh-add -K ~/.ssh/github # 如果不是默认密钥 id_rsa ，则需要以下命
 cat ~/.ssh/github.pub 添加公钥到服务器
 ssh -T git@github.com  # 验证
 
+ssh-copy-id demo@198.51.100.0
+ssh-copy-id -i ~/.ssh/tatu-key-ecdsa user@host
+
+brew install ssh-copy-id
+
+cat ~/.ssh/id_rsa.pub | ssh demo@198.51.100.0 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >>  ~/.ssh/authorized_keys"
+
+sudo nano /etc/ssh/sshd_config
+
+PermitRootLogin without-password
+sudo systemctl reload sshd.service
+
 eval "$(ssh-agent -s)"
 ssh-add -K ~/.ssh/id_rsa
 
