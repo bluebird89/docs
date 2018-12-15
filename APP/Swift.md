@@ -10,6 +10,7 @@ The Swift Programming Language https://swift.org/
 * [mxcl/PromiseKit](https://github.com/mxcl/PromiseKit):Promises for Swift & ObjC
 * [bizz84/SwiftyStoreKit](https://github.com/bizz84/SwiftyStoreKit):Lightweight In App Purchases Swift framework for iOS 8.0+, tvOS 9.0+ and macOS 10.10+
 * [Daltron/NotificationBanner](https://github.com/Daltron/NotificationBanner):The easiest way to display highly customizable in app notification banners in iOS
+* [nicklockwood/SwiftFormat](https://github.com/nicklockwood/SwiftFormat):A code library and command-line formatting tool for reformatting Swift code 
 
 ## 参考
 

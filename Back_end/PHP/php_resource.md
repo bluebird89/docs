@@ -417,7 +417,7 @@
       - (https://github.com/bernardphp/bernard)[Bernard]: 一个多后端抽象库
       - (https://github.com/jakubkulhan/bunny)[BunnyPHP]: 一个高性能的纯PHP AMQP(RabbitMQ)同步和异步(ReactPHP)库
       - (https://github.com/pda/pheanstalk)[Pheanstalk]: 一个Beanstalkd客户端库
-      - (https://github.com/php-amqplib/php-amqplib)[PHP AMQP]: 一个纯PHP AMQP库
+      - [php-amqplib/php-amqplib](https://github.com/php-amqplib/php-amqplib):The most widely used PHP client for RabbitMQ http://www.rabbitmq.com/getstarted.html
       - (https://github.com/tarantool-php/queue)[Tarantool Queue]: PHP绑定Tarantool队列
       - (https://github.com/php-amqplib/Thumper)[Thumper]: 一个RabbitMQ模式库
       - [chenlinzhong/php-delayqueue](https://github.com/chenlinzhong/php-delayqueue):基于redis实现高可用，易拓展，接入方便，生产环境稳定运行的延迟队列

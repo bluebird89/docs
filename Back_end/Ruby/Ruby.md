@@ -147,12 +147,14 @@ rake db:create
 rails server
 ```
 
-## [rails/rails](https://github.com/rails/rails):Ruby on Rails http://rubyonrails.org
-
-
 ## 包管理
 
 * [Gems](https://rubygems.org):Find, install, and publish RubyGems.
+
+##  项目
+
+* [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. https://www.discourse.org
+* [mame/quine-relay](https://github.com/mame/quine-relay):An uroboros program with 100+ programming languages 
 
 ## 工具
 
@@ -171,7 +173,3 @@ rails server
 ## 参考
 
 * [rubocop-hq/ruby-style-guide](https://github.com/rubocop-hq/ruby-style-guide):A community-driven Ruby coding style guide
-
-##  项目
-
-* [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. https://www.discourse.org

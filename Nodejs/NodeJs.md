@@ -732,6 +732,8 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
   - [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
 * Kafka
   - [SOHU-Co/kafka-node](https://github.com/SOHU-Co/kafka-node):Node.js client for Apache Kafka 0.8 and later.
+* cli
+  * [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
 
 ## 教程
 

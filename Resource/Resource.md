@@ -98,8 +98,6 @@
 ## 管理与沟通
 
 -   WhatsApp
--   [Slack](https://slack.com/)
--   [stride](https://app.stride.com/):类似 slack 的软件
 -   [Asana](asana.com)
 -   [meili/TeamTalk](https://github.com/meili/TeamTalk):TeamTalk is a solution for enterprise IM
 - [klauscfhq/taskbook](https://github.com/klauscfhq/taskbook):📓 Tasks, boards & notes for the command-line habitat
