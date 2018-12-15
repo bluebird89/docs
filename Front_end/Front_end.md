@@ -366,14 +366,20 @@
 
 ### 项目构建工具
 
+包括JS转码（使用 Babel转 ES6或 TypeScript自转等）、CSS转码（ Less或 Sass转 Css）、代码或资源的合并与压缩，基础检查和各类测试等等
+
+* 模块化打包类:
+* 任务流构建类
+* 集合型工具类（脚手架)
+
 * make/Ant
 * GYP
 * Grunt
-* Gulp
+* Gulp 用于任务流构建
 * Yeoman
 * FIS
 * Mod
-* Webpack
+* Webpack 用于模块化打包
 
 ## 代码组织
 

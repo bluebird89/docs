@@ -47,3 +47,4 @@
 * [karpathy/char-rnn](https://github.com/karpathy/char-rnn):Multi-layer Recurrent Neural Networks (LSTM, GRU, RNN) for character-level language models in Torch
 * [scutan90/DeepLearning-500-questions](https://github.com/scutan90/DeepLearning-500-questions):深度学习500问，以问答形式对常用的概率知识、线性代数、机器学习、深度学习、计算机视觉等热点问题进行阐述
 * [mbadry1/DeepLearning.ai-Summary](https://github.com/mbadry1/DeepLearning.ai-Summary):This repository contains my personal notes and summaries on DeepLearning.ai specialization courses. I've enjoyed every little bit of the course hope you enjoy my notes too.
+* [guillaume-chevalier/Awesome-Deep-Learning-Resources](https://github.com/guillaume-chevalier/Awesome-Deep-Learning-Resources):Rough list of my favorite deep learning resources, useful for revisiting topics or for reference. I have got through all of the content listed there, carefully. - Guillaume Chevalier http://www.neuraxio.com/en/

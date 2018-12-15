@@ -136,6 +136,7 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 * [Matchmaker](https://github.com/lypeer/Matchmaker) ★107 - 专为微信小程序开发的插件
 * [wecos](https://github.com/tencentyun/wecos) ★64 - 微信小程序 COS 瘦身解决方案
 * [qiu8310/minapp](https://github.com/qiu8310/minapp):重新定义微信小程序的开发 https://qiu8310.github.io/minapp/
+* [bigmeow/minapp-api-promise](https://github.com/bigmeow/minapp-api-promise):🔨微信小程序所有API promise化，支持await、支持请求列队、支持拦截小程序所有API 
 
 ## 项目
 

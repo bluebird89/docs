@@ -13,6 +13,7 @@ fast, scalable, distributed revision control system. https://git-scm.com/  一�
 * [GitHub](https://github.com/)
 * [Bitbucket](https://bitbucket.org/product)
 * [Gitlab](https://gitlab.com/)
+  - [gitlabhq/gitlabhq](https://github.com/gitlabhq/gitlabhq):GitLab CE Mirror | Please open new issues in our issue tracker on GitLab.com https://about.gitlab.com/getting-help/
 * [码云](https://gitee.com)
 * [Coding](https://github.com/)
 * [sourceforge](https://sourceforge.net/):The Complete Open-Source Software Platform
@@ -1023,6 +1024,7 @@ git push --force origin myfeature
 * [gitalk/gitalk](https://github.com/gitalk/gitalk):Gitalk is a modern comment component based on Github Issue and Preact. https://gitalk.github.io
 * [desktop/desktop](https://github.com/desktop/desktop):Simple collaboration from your desktop https://desktop.github.com
 * [OctoLinker/OctoLinker](https://github.com/OctoLinker/OctoLinker):OctoLinker – Available on Chrome, Firefox and Opera https://octolinker.github.iow
+* [devhubapp/devhub](https://github.com/devhubapp/devhub):DevHub: TweetDeck for GitHub - Android, iOS and Web 👉 https://devhubapp.com/
 
 ### 合并commit选项
 
