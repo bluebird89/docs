@@ -10,6 +10,7 @@
     + [b3log/baidu-netdisk-downloaderx](https://github.com/b3log/baidu-netdisk-downloaderx):⚡️ 百度网盘不限速下载器 BND，支持 Windows、Mac 和 Linux。 https://hacpai.com/tag/bnd
 - [坚果云](https://www.jianguoyun.com/)
 - [数蚁](https://teamyi.com)
+- [nextcloud/server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data https://nextcloud.com
 
 ## 工具
 

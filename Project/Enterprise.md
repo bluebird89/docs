@@ -22,6 +22,13 @@
 * [vitorfs/bootcamp](https://github.com/vitorfs/bootcamp):An enterprise social network http://trybootcamp.vitorfs.com
 * [reviewboard/reviewboard](https://github.com/reviewboard/reviewboard):An extensible and friendly code review tool for projects and companies of all sizes. https://www.reviewboard.org/
 * [apereo/cas](https://github.com/apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
+* [odoo/odoo](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business. https://www.odoo.com
+
+## 沟通
+
+-   [Slack](https://slack.com/)
+-   [stride](https://app.stride.com/):类似 slack 的软件
+* [mattermost/mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost https://mattermost.com
 
 ## 邮件
 
@@ -30,7 +37,6 @@
 * [nylas/nylas-mail](https://github.com/nylas/nylas-mail):💌 An extensible desktop mail app built on the modern web. Forks welcome! https://nylas.com/nylas-mail/
 
 ## 看板
-
 
 * 列表用来表示卡片在进度上所处的状态，与大多数看板类工具类似，例如可将创建的任务卡片分配到待开发、待测试、已发布等不同列表中；
 * 加入了泳道，子任务不再是卡片内的检查项，而是一张完整的卡片；
@@ -82,6 +88,7 @@ Apache Incubator是旨在成为完全成熟的Apache软件基金会项目的开�
 * 寒武纪
 * 阿里巴巴:软银持有28.8%股权，为最大股东；Altaba持股为14.8%，副董事长蔡崇信持股为2.3%。阿里巴巴管理层一共持股为9.5%
 * 达观数据
+* 竹间智能
 
 ## 参考
 

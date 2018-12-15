@@ -14,6 +14,9 @@
 
 * [ianstormtaylor/slate](https://github.com/ianstormtaylor/slate):A completely customizable framework for building rich text editors. http://slatejs.org
 * [fex-team/ueditor](https://github.com/fex-team/ueditor):rich text 富文本编辑器 http://ueditor.baidu.com
+* [wangfupeng1988/wangEditor](https://github.com/wangfupeng1988/wangEditor/):wangEditor —— 轻量级web富文本框 http://wangEditor.github.io/
+* tinymce https://www.tinymce.com/
+* CKEditor http://ckeditor.com/
 
 ## 在线
 

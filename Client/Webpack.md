@@ -75,7 +75,7 @@ module.exports = {
   //页面入口文件配置 支持数组形式，将加载数组中的所有模块，但以最后一个模块作为输出
   entry: {
       index : './src/js/page/index.js'
-      // page2: ["./entry1", "./entry2"] 
+      // page2: ["./entry1", "./entry2"]
       // p1: "./page1",
     // p2: "./page2",
     // p3: "./page3",
@@ -86,7 +86,7 @@ module.exports = {
      //   subp2: "./sp2"
     //}
   },
-  //入口文件输出配置 
+  //入口文件输出配置
   output: {
       path: 'dist/js/page',
       filename: '[name].js'
@@ -109,7 +109,7 @@ module.exports = {
       //查找module的话从这里开始查找
     root: 'E:/github/flux-example/src', //绝对路径
     //自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名,自行补全文件后缀
-    extensions: ['', '.js', '.json', '.scss'], 
+    extensions: ['', '.js', '.json', '.scss'],
     //模块别名定义，方便后续直接引用别名，无须多写长长的地址
     alias: {
         AppStore : 'js/stores/AppStores.js',//后续直接 require('AppStore') 即可
@@ -314,3 +314,4 @@ Parsing error: The keyword 'import' is reserved
 * [babel/babel-loader](https://github.com/babel/babel-loader):📦 Webpack plugin for Babel
 * [shama/webpack-stream](https://github.com/shama/webpack-stream):🍹 Run webpack through a stream interface
 * [webpackmonitor/webpackmonitor](https://github.com/webpackmonitor/webpackmonitor):A tool for monitoring webpack optimization metrics through the development process http://webpackmonitor.com
+* [GoogleChromeLabs/webpack-libs-optimizations](https://github.com/GoogleChromeLabs/webpack-libs-optimizations):Using a library in your webpack project? Here’s how to optimize it

@@ -677,7 +677,7 @@ Python实现的数据库。
 
 * envoy：比 Python [subprocess](https://docs.python.org/2/library/subprocess.html) 模块更人性化。[官网](https://github.com/kennethreitz/envoy)
 * sarge：另一 种 subprocess 模块的封装。[官网](http://sarge.readthedocs.org/en/latest/)
-* sh：一个完备的 subprocess 替代库。[官网](https://github.com/amoffat/sh)
+* [amoffat/sh](https://github.com/amoffat/sh)：一个完备的 subprocess 替代库。Python process launching http://amoffat.github.com/sh
 
 ## 并发和并行
 
@@ -686,7 +686,7 @@ Python实现的数据库。
 * multiprocessing：(Python 标准库) 基于进程的"线程"接口。[官网](https://docs.python.org/2/library/multiprocessing.html)
 * threading：(Python 标准库)更高层的线程接口。[官网](https://docs.python.org/2/library/threading.html)
 * eventlet：支持 WSGI 的异步框架。[官网](http://eventlet.net/)
-* gevent：一个基于协程的 Python 网络库，使用[greenlet](https://github.com/python-greenlet/greenlet)。[官网](http://www.gevent.org/)
+* [gevent/gevent](https://github.com/python-greenlet/greenlet)：Coroutine-based concurrency library for Python http://gevent.org
 * Tomorrow：用于产生异步代码的神奇的装饰器语法实现。[官网](https://github.com/madisonmay/Tomorrow)
 * uvloop：在libuv之上超快速实现asyncio事件循环。[官网](https://github.com/MagicStack/uvloop)
 * [ray-project/ray](https://github.com/ray-project/ray):A high-performance distributed execution engine
@@ -1205,6 +1205,10 @@ Python 实现的算法和设计模式。
 ## Font
 
 * [fonttools/fonttools](https://github.com/fonttools/fonttools):A library to manipulate font files from Python.
+
+## 源码
+
+* [flaggo/python3-source-code-analysis](https://github.com/flaggo/python3-source-code-analysis):《Python 3 源码剖析》
 
 ## 课程
 

@@ -22,3 +22,7 @@
 ## 课程
 
 * [麻省理工公开课：线性代数](http://open.163.com/special/opencourse/daishu.html)
+
+## 工具
+
+* [dmlc/xgboost](https://github.com/dmlc/xgboost):Scalable, Portable and Distributed Gradient Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and more. Runs on single machine, Hadoop, Spark, Flink and DataFlow https://xgboost.ai/

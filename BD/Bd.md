@@ -122,7 +122,7 @@ ETL(Extraction-Transformation-Loading)：负责将分布的、异构数据源中
 * Visualize Free是一个建立在高阶商业后台集游InetScoft开发的视觉化软体免费的视觉分析工具，可从多元变量资料筛选并看其趋势，或是利用简单地点及方法来切割资料或是小范围的资料。
 * GeoCommons可以使用户构建富交互可视化应用来解决问题，即使他们没有任何传统地图使用经验
 
-## 工具
+## 方向
 
 * 传统分析/商业统计
     - Excel 作为电子表格软件，适合简单统计（分组/求和等）需求，由于其方便好用，功能也能满足很多场景需要，所以实际成为研究人员最常用的软件工具
@@ -153,3 +153,4 @@ ETL(Extraction-Transformation-Loading)：负责将分布的、异构数据源中
 * [protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf):Protocol Buffers - Google's data interchange format https://developers.google.com/protocol-buffers/
 * [ha/doozerd](https://github.com/ha/doozerd):A consistent distributed data store.
 * [hashicorp/consul](https://github.com/hashicorp/consul):Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure. https://www.consul.io/
+* [ag-grid/ag-grid](https://github.com/ag-grid/ag-grid):Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components http://www.ag-grid.com

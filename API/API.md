@@ -51,17 +51,15 @@ if __name__ == '__main__':
 * 这里推荐一个文档生成器 swagger
 * mockjs + rap 或者 easy-mock
 
-## 实例
-
-* [雅虎天气](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json)
-* [价格](http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice)
-
 ## 测试
 
 * [apiaryio/dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool https://dredd.org
 
 ## 接口
 
+* [雅虎天气](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json)
+* [价格](http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice)
+* [Vespa314/bilibili-api](https://github.com/Vespa314/bilibili-api):B站API收集整理及开发，测试【开发中】 
 * [douban](https://developers.douban.com/wiki/?title=guide)
 * [jokermonn/-Api](https://github.com/jokermonn/-Api):📖「一个」、「Time 时光」、「开眼」、「一席」、「梨视频」、「微软必应词典」、「金山词典」、「豆瓣电影」、「中央天气」、「魅族天气」、「每日一文」、「12306」、「途牛」、「快递100」、「快递」应用 Api
 * [toddmotto/public-apis](https://github.com/toddmotto/public-apis):A collective list of public JSON APIs for use in web development. https://toddmotto.com

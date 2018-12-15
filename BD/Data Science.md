@@ -1,5 +1,9 @@
 # data Science
 
+## 资源
+
+* [iphysresearch/DataSciComp](https://github.com/iphysresearch/DataSciComp):A collection of popular Data Science Competitions
+
 ## 工具
 
 * [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! http://pachyderm.io
@@ -7,6 +11,7 @@
 * [facebook/dataloader](https://github.com/facebook/dataloader):DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching.
 * [apache/incubator-superset](https://github.com/apache/incubator-superset):Apache Superset (incubating) is a modern, enterprise-ready business intelligence web application
 * [TuiQiao/CBoard](https://github.com/TuiQiao/CBoard):An easy to use, self-service open BI reporting and BI dashboard platform. https://tuiqiao.github.io/CBoardDoc/#/
+* [apache/arrow](https://github.com/apache/arrow):Apache Arrow is a cross-language development platform for in-memory data. It specifies a standardized language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. It also provides computational libraries and zero-copy streaming messaging and interprocess communication… https://arrow.apache.org
 
 ## 参考
 
@@ -23,10 +28,6 @@
 * [jakevdp/PythonDataScienceHandbook](https://github.com/jakevdp/PythonDataScienceHandbook):Python Data Science Handbook: full text in Jupyter Notebooks
 * [jaystone776/python-data-science-cheatsheet](https://github.com/jaystone776/python-data-science-cheatsheet):Python数据科学速查表
 * [apachecn/python_data_analysis_and_mining_action](https://github.com/apachecn/python_data_analysis_and_mining_action):《python数据分析与挖掘实战》的代码笔记
-
-## 资源
-
-* [iphysresearch/DataSciComp](https://github.com/iphysresearch/DataSciComp):A collection of popular Data Science Competitions
 
 ## 扩展
 

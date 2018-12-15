@@ -123,6 +123,7 @@ npm install gitbook-cli -g
 * [unifiedjs/unified](https://github.com/unifiedjs/unified):☔ friendly interface backed by an ecosystem of plugins built for creating and manipulating content https://unified.js.org
 * [docsifyjs/docsify](https://github.com/docsifyjs/docsify):🃏 A magical documentation site generator. https://docsify.js.org
 * [mkdocs/mkdocs](https://github.com/mkdocs/mkdocs):Project documentation with Markdown. http://www.mkdocs.org
+* [pedronauck/docz](https://github.com/pedronauck/docz):✍🏻It has never been so easy to document your things! https://docz.site
 
 ## [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor)
 
