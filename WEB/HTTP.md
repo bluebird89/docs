@@ -383,6 +383,10 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 
 访问令牌（Access token）表示访问控制操作主体的系统对象
 
+## hosts
+
+* [googlehosts/hosts](https://github.com/googlehosts/hosts):镜像：https://coding.net/u/scaffrey/p/hosts/git
+
 ## DNS
 
 * [tenta-browser/tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS https://tenta.com/test

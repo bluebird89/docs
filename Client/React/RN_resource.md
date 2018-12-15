@@ -44,10 +44,13 @@
 * [hshoff/vx](https://github.com/hshoff/vx):🐯react + d3 = vx | visualization components https://vx-demo.now.sh/
 * [react-native-community/react-native-linear-gradient](https://github.com/react-native-community/react-native-linear-gradient):A <LinearGradient /> component for react-native 
 * [nadbm/react-datasheet](https://github.com/nadbm/react-datasheet):Excel-like data grid component for react https://nadbm.github.io/react-datasheet/
+* [hustcc/echarts-for-react
+](https://github.com/hustcc/echarts-for-react):📈 baidu Echarts(v3.0 & v4.0) components for React wrapper. 一个简单的 echarts(v3.0 & v4.0) 的 react 封装。 https://git.hust.cc/echarts-for-react
 
 ## 表单
 
 *  [mozilla-services/react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form):A React component for building Web forms from JSON Schema.
+* [jaredpalmer/formik](https://github.com/jaredpalmer/formik):Build forms in React, without the tears 😭 https://jaredpalmer.com/formik
 
 ## 图片
 
@@ -138,6 +141,7 @@
 ## 测试
 
 * [kentcdodds/react-testing-library](https://github.com/kentcdodds/react-testing-library):🐐 Simple and complete React DOM testing utilities that encourage good testing practices. http://npm.im/react-testing-library
+* [airbnb/enzyme](https://github.com/airbnb/enzyme):JavaScript Testing utilities for React https://airbnb.io/enzyme/
 
 ## 编辑器
 
@@ -271,6 +275,7 @@
 * [kentcdodds/advanced-react-patterns](https://github.com/kentcdodds/advanced-react-patterns):The course material for my advanced react patterns course on Egghead.io
 * [huzidaha/react-naive-book](https://github.com/huzidaha/react-naive-book):开源、免费、专业、简单的 React.js 在线教程 http://huziketang.com/books/react
 * [ruanyf/react-demos](https://github.com/ruanyf/react-demos):a collection of simple demos of React.js
+* [30-seconds/30-seconds-of-react](https://github.com/30-seconds/30-seconds-of-react):Curated collection of useful React snippets that you can understand in 30 seconds or less. 
 
 ## 项目
 

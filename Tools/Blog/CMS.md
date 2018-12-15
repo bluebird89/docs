@@ -6,6 +6,7 @@
 * [GetPublii/Publii](https://github.com/GetPublii/Publii):Publii is a desktop-based CMS for Windows and Mac that makes creating static websites fast and hassle-free, even for beginners. https://getpublii.com
 * [strapi/strapi](https://github.com/strapi/strapi):🚀 Node.js Content Management Framework (headless-CMS) to build powerful API with no effort. https://strapi.io
 * [getgrav/grav](https://github.com/getgrav/grav):Modern, Crazy Fast, Ridiculously Easy and Amazingly Powerful Flat-File CMS https://getgrav.org
+* [facebook/Docusaurus](https://github.com/facebook/Docusaurus):Easy to maintain open source documentation websites. https://docusaurus.io
 
 ## [Canner/canner](https://github.com/Canner/canner)
 

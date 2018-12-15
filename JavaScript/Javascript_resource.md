@@ -126,7 +126,6 @@
 
 ## Cli
 
-* [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
 * [nexe/nexe](https://github.com/nexe/nexe):🎉 create a single executable out of your node.js apps
 * [chalk/chalk](https://github.com/chalk/chalk):🖍 Terminal string styling done right
 
