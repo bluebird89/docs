@@ -223,6 +223,7 @@
 * [react-component/upload](https://github.com/react-component/upload):React Upload http://react-component.github.io/upload/
 * [zenoamaro/react-quill](https://github.com/zenoamaro/react-quill):A Quill component for React. https://zenoamaro.github.io/react-quill
 * [aholachek/react-flip-toolkit](https://github.com/aholachek/react-flip-toolkit):An animation utility library for highly configurable layout transitions
+* [sokra/rawact](https://github.com/sokra/rawact):[POC] A babel plugin which compiles React.js components into native DOM instructions to eliminate the need for the react library at runtime.
 
 ## 扩展
 
