@@ -734,6 +734,8 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
   - [SOHU-Co/kafka-node](https://github.com/SOHU-Co/kafka-node):Node.js client for Apache Kafka 0.8 and later.
 * cli
   * [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
+* compression
+  - [expressjs/compression](https://github.com/expressjs/compression):Node.js compression middleware
 
 ## 教程
 

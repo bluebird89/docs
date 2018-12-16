@@ -1435,6 +1435,8 @@ set completeopt=longest,menu
 * [trimstray/iptables-essentials](https://github.com/trimstray/iptables-essentials):Iptables Essentials: Common Firewall Rules and Commands.
 * [bat](link):A Cat Clone With Syntax Highlighting And Git Integration https://www.ostechnix.com/bat-a-cat-clone-with-syntax-highlighting-and-git-integration/
 * [akavel/up](https://github.com/akavel/up):Ultimate Plumber is a tool for writing Linux pipes with instant live preview
+* [iovisor/bcc](https://github.com/iovisor/bcc):BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
+
 
 systemctl unmask mysql.service
 service mysql start
