@@ -826,7 +826,7 @@ Python实现的数据库。
 * 代码覆盖率
   - coverage：代码覆盖率测量。[官网](https://pypi.python.org/pypi/coverage)
 * 伪数据
-  - faker：一个 Python 库，用来生成伪数据。[官网](http://www.joke2k.net/faker/)
+  - [joke2k/faker](http://www.joke2k.net/faker/):Faker is a Python package that generates fake data for you. http://faker.rtfd.org
   - fake2db：伪数据库生成器。[官网](https://github.com/emirozer/fake2db)
   - radar：生成随机的日期/时间。[官网](https://pypi.python.org/pypi/radar)
 * 错误处理
@@ -1195,6 +1195,7 @@ Python 实现的算法和设计模式。
 * random：随机数生成工具，配合time使用
 * tqdm：交互好工具，显示程序运行进度
 * [Requests-Html](https://github.com/kennethreitz/requests-html):下载完网页之后,内置了html网页的解析
+* [request/request-promise](https://github.com/request/request-promise):The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.
 * [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
 * [mahmoud/boltons](https://github.com/mahmoud/boltons):🔩 Like builtins, but boltons. Constructs/recipes/snippets that would be handy in the standard library. Nothing like Michael Bolton. https://boltons.readthedocs.org
 

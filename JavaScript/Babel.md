@@ -7,6 +7,12 @@
 * 7.0
     - 引入了 babel.config.js
 
+## 安装
+
+```sh
+npm install --save-dev babel-cli
+```
+
 ## 参考
 
 * [jamiebuilds/babel-handbook](https://github.com/jamiebuilds/babel-handbook):📘 A guided handbook on how to use Babel and how to create plugins for Babel. https://git.io/babel-handbooks

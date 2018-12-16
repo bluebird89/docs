@@ -28,6 +28,7 @@
 * [jakevdp/PythonDataScienceHandbook](https://github.com/jakevdp/PythonDataScienceHandbook):Python Data Science Handbook: full text in Jupyter Notebooks
 * [jaystone776/python-data-science-cheatsheet](https://github.com/jaystone776/python-data-science-cheatsheet):Python数据科学速查表
 * [apachecn/python_data_analysis_and_mining_action](https://github.com/apachecn/python_data_analysis_and_mining_action):《python数据分析与挖掘实战》的代码笔记
+* [iphysresearch/DataSciComp](https://github.com/iphysresearch/DataSciComp):A collection of popular Data Science Competitions
 
 ## 扩展
 
