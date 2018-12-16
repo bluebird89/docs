@@ -2635,6 +2635,8 @@ try {
 </script>
 ```
 
+replaceWith
+
 ## 客户端存储
 
 * cookie

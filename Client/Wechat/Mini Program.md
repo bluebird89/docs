@@ -96,6 +96,7 @@ Wafer2 PHP 简化版 Demo，建议配合腾讯云微信小程序开发者工具�
 * [wxTabs](https://github.com/hss01248/wxTabs) ★13 - 微信小程序的多tab实现
 * [wxapp-lock](https://github.com/demi520/wxapp-lock) ★12 - 微信小程序手势解锁
 * [meili/minui](https://github.com/meili/minui):基于规范的小程序 UI 组件库，自定义标签组件，简洁、易用、工具化 https://meili.github.io/min/docs/minui/
+* [TalkingData/iview-weapp](https://github.com/TalkingData/iview-weapp):一套高质量的微信小程序 UI 组件库 https://weapp.iviewui.com
 
 ## 开发框架
 
