@@ -112,7 +112,7 @@
       - [Spress](http://spress.yosymfony.com): 一个能够将Markdown和Twig转化为HTML的可扩展工具
 * 超文本传输协议 HTTP
       - [Buzz](https://github.com/kriswallsmith/Buzz): 另一个HTTP客户端
-      - [guzzle/guzzle](https://github.com/guzzle/guzzle):Guzzle, an extensible PHP HTTP client <http://guzzlephp.org/>
+      - [guzzle/guzzle](https://github.com/guzzle/guzzle):Guzzle, an extensible PHP HTTP client <http://guzzlephp.org/> http://docs.guzzlephp.org/en/stable/index.html
       - [HTTPFul](https://github.com/nategood/httpful): 一个链式HTTP库
       - [PHP VCR](http://php-vcr.github.io/): 一个录制和重放HTTP请求的库
       - [rmccue/Requests](https://github.com/rmccue/Requests):Requests for PHP is a humble HTTP request library. It simplifies how you interact with other sites and takes away all your worries. http://requests.ryanmccue.info/
