@@ -49,3 +49,7 @@
 ## 开发
 
 * [easychen/howto-make-more-money](https://github.com/easychen/howto-make-more-money):程序员如何优雅的挣零花钱
+
+## 项目
+
+* [1c7/chinese-independent-developer](1c7/chinese-independent-developer):👩🏿‍💻👨🏾‍💻👩🏼‍💻👨🏽‍💻👩🏻‍💻中国独立开发者项目列表 -- 分享大家都在做什么
