@@ -12,3 +12,4 @@ The Python micro framework for building web applications. https://www.palletspro
 * [官网](http://flask.pocoo.org/) Pinterest's API serves 12+ billion requests a day with Flask
 * [humiaozuzu/awesome-flask](https://github.com/humiaozuzu/awesome-flask):A curated list of awesome Flask resources and plugins
 * [Flask大型教程项目](https://flask-mega-tutorial.readthedocs.io/zh_CN/latest/)
+* [greyli/flask-tutorial](https://github.com/greyli/flask-tutorial):Flask 入门教程：使用 Python 和 Flask 开发你的第一个 Web 程序 http://helloflask.com/tutorial
