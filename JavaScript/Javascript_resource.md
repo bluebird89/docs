@@ -275,6 +275,10 @@
 
 * [niksy/throttle-debounce](https://github.com/niksy/throttle-debounce)：Throttle and debounce functions.
 
+## 算法
+
+* [trekhleb/javascript-algorithms](https://github.com/trekhleb/javascript-algorithms):📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings
+
 ## 代码在线分享工具
 
 * JS Fiddle

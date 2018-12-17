@@ -42,7 +42,7 @@
 ## 图表
 
 * [hshoff/vx](https://github.com/hshoff/vx):🐯react + d3 = vx | visualization components https://vx-demo.now.sh/
-* [react-native-community/react-native-linear-gradient](https://github.com/react-native-community/react-native-linear-gradient):A <LinearGradient /> component for react-native 
+* [react-native-community/react-native-linear-gradient](https://github.com/react-native-community/react-native-linear-gradient):A <LinearGradient /> component for react-native
 * [nadbm/react-datasheet](https://github.com/nadbm/react-datasheet):Excel-like data grid component for react https://nadbm.github.io/react-datasheet/
 * [hustcc/echarts-for-react
 ](https://github.com/hustcc/echarts-for-react):📈 baidu Echarts(v3.0 & v4.0) components for React wrapper. 一个简单的 echarts(v3.0 & v4.0) 的 react 封装。 https://git.hust.cc/echarts-for-react
@@ -95,7 +95,7 @@
 ## 按钮
 
 * [transitive-bullshit/react-particle-effect-button](https://github.com/transitive-bullshit/react-particle-effect-button):Bursting particle effect buttons for React 🎉
-* [greena13/react-hotkeys](https://github.com/greena13/react-hotkeys):Declarative hotkey and focus area management for React 
+* [greena13/react-hotkeys](https://github.com/greena13/react-hotkeys):Declarative hotkey and focus area management for React
 
 ## WEB
 
@@ -146,7 +146,7 @@
 ## 编辑器
 
 * [jpuri/react-draft-wysiwyg](https://github.com/jpuri/react-draft-wysiwyg):A Wysiwyg editor build on top of ReactJS and DraftJS. https://jpuri.github.io/react-draft-wysiwyg
-* [rexxars/react-markdown](https://github.com/rexxars/react-markdown):Render Markdown as React components 
+* [rexxars/react-markdown](https://github.com/rexxars/react-markdown):Render Markdown as React components
 
 ## Bundler
 
@@ -211,7 +211,7 @@
 * [React UWP](https://github.com/myxvisual/react-uwp):Windows 下的 UI 框架实现了微软的 UWP 和 Fluent，提供了全面的控件库以实现 UI 可视化呈现，以及用于其它控件或内容（如图像和媒体）的容器。
 * [UXCore](link):40 个为企业应用设计的组件，专注于后端应用的性能，主要是表格和表单这些组件（特别是当数据自动与视图绑定时）。
 * [reasonml/reason-react](https://github.com/reasonml/reason-react):Reason bindings for ReactJS https://reasonml.github.io/reason-react/
-* [reactjs/react-transition-group](https://github.com/reactjs/react-transition-group):An easy way to perform animations when a React component enters or leaves the DOM 
+* [reactjs/react-transition-group](https://github.com/reactjs/react-transition-group):An easy way to perform animations when a React component enters or leaves the DOM
 * [clauderic/react-sortable-hoc](https://github.com/clauderic/react-sortable-hoc):A set of higher-order components to turn any list into an animated, touch-friendly, sortable list ✌️
 * [streamich/libreact](https://github.com/streamich/libreact):Collection of useful React components
 * [jaredpalmer/formik](https://github.com/jaredpalmer/formik):Build forms in React, without the tears 😭 https://jaredpalmer.com/formik
@@ -224,6 +224,7 @@
 * [zenoamaro/react-quill](https://github.com/zenoamaro/react-quill):A Quill component for React. https://zenoamaro.github.io/react-quill
 * [aholachek/react-flip-toolkit](https://github.com/aholachek/react-flip-toolkit):An animation utility library for highly configurable layout transitions
 * [sokra/rawact](https://github.com/sokra/rawact):[POC] A babel plugin which compiles React.js components into native DOM instructions to eliminate the need for the react library at runtime.
+* [Bogdan-Lyashenko/Under-the-hood-ReactJS](https://github.com/Bogdan-Lyashenko/Under-the-hood-ReactJS):Entire React code base explanation by visual block schemes (Stack version)
 
 ## 扩展
 
@@ -276,7 +277,7 @@
 * [kentcdodds/advanced-react-patterns](https://github.com/kentcdodds/advanced-react-patterns):The course material for my advanced react patterns course on Egghead.io
 * [huzidaha/react-naive-book](https://github.com/huzidaha/react-naive-book):开源、免费、专业、简单的 React.js 在线教程 http://huziketang.com/books/react
 * [ruanyf/react-demos](https://github.com/ruanyf/react-demos):a collection of simple demos of React.js
-* [30-seconds/30-seconds-of-react](https://github.com/30-seconds/30-seconds-of-react):Curated collection of useful React snippets that you can understand in 30 seconds or less. 
+* [30-seconds/30-seconds-of-react](https://github.com/30-seconds/30-seconds-of-react):Curated collection of useful React snippets that you can understand in 30 seconds or less.
 
 ## 项目
 

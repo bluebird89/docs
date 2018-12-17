@@ -192,6 +192,7 @@ console.important = function( msg){
 
 * [andrewdavey/immutable-devtools](https://github.com/andrewdavey/immutable-devtools):Chrome Dev Tools custom formatter for Immutable-js values
 * [extfans](https://extfans.com/)三方扩展商店
+* [chromedp/chromedp](https://github.com/chromedp/chromedp):A faster, simpler way to drive browsers supporting the Chrome DevTools Protocol.
 
 ## 参考
 
