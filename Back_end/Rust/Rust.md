@@ -32,6 +32,7 @@ rustc --version
 * [nickel-org/nickel.rs](https://github.com/nickel-org/nickel.rs):An expressjs inspired web framework for Rust http://nickel-org.github.io/
 * [racer-rust/racer](https://github.com/racer-rust/racer):Rust Code Completion utility
 * [crossbeam-rs/crossbeam](https://github.com/crossbeam-rs/crossbeam):Tools for concurrent programming in Rust
+* [rust-lang/rustup.rs](https://github.com/rust-lang/rustup.rs):The Rust toolchain installer
 
 ## 参考
 

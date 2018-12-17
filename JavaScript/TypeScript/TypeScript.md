@@ -54,3 +54,4 @@ superShout() {
 * [palantir/tslint](https://github.com/palantir/tslint):🚦 An extensible linter for the TypeScript language http://palantir.github.io/tslint/
 * [AssemblyScript/assemblyscript](https://github.com/AssemblyScript/assemblyscript):A TypeScript to WebAssembly compiler 🚀 https://assemblyscript.org
 * [typestack/routing-controllers](https://github.com/typestack/routing-controllers):Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage in Express / Koa using TypeScript and Routing Controllers Framework.
+* [rpgeeganage/async-ray](https://github.com/rpgeeganage/async-ray):Provide async/await callbacks for every, find, findIndex, filter, forEach, map, reduce, reduceRight and some methods in Array. https://rpgeeganage.github.io/async-ray

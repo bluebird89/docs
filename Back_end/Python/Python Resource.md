@@ -167,6 +167,7 @@ brew install pipenv
 * jieba：中文分词工具。[官网](https://github.com/fxsjy/jieba)
 * langid.py：独立的语言识别系统。[官网](https://github.com/saffsd/langid.py)
 * Pattern：Python 网络信息挖掘模块。[官网](http://www.clips.ua.ac.be/pattern)
+* [santinic/pampy](https://github.com/santinic/pampy):Pampy: The Pattern Matching for Python you always dreamed of.
 * SnowNLP：一个用来处理中文文本的库。[官网](https://github.com/isnowfy/snownlp)
 * TextBlob：为进行普通自然语言处理任务提供一致的 API。[官网](http://textblob.readthedocs.org/en/latest/)
 * TextGrocery：一简单高效的短文本分类工具，基于 LibLinear 和 Jieba。[官网](https://github.com/2shou/TextGrocery)

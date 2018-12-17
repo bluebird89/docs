@@ -1,5 +1,9 @@
 # Computer Vision
 
+## 项目
+
+* [deeppomf/DeepCreamPy](https://github.com/deeppomf/DeepCreamPy):Decensoring Hentai with Deep Neural Networks
+
 ## 参考
 
 * [opencv/opencv](https://github.com/opencv/opencv):Open Source Computer Vision Library http://opencv.org
