@@ -897,6 +897,7 @@ Python实现的数据库。
 * zipline：一个 Python 算法交易库。[官网](https://github.com/quantopian/zipline)
 * [Bayesian-belief-networks](http://hao.jobbole.com/bayesian-belief-networks/)：优雅的贝叶斯信念网络框架。[官网](https://github.com/eBay/bayesian-belief-networks)
 * PyFlux：一个专门为时间序列而开发的 Python开源库
+* [sympy/sympy](https://github.com/sympy/sympy):A computer algebra system written in pure Python https://sympy.org/
 
 ## 数据可视化
 
