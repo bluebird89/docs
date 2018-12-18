@@ -255,13 +255,11 @@ http服务上支持若干虚拟主机，每个虚拟主机对应一个server配�
 * So, the order in which you define the regular expression match in your configuration file is important. The moment nginx matches a regular expression location configuration, it will not look any further. So, use your important critical regular expression location match at the top of your configuration.
 * If there is no regular expression matching location is found, then Nginx will use the previously matched prefix location configuration.
 
-匹配优先级：精确匹配=、^~、~或~*、不带符号的URL；
-
-* 默认前缀
-* =：URI的精确匹配，其后多一个字符都不可以，精确匹配根。match only the following EXACT URL
-* ~：做正则表达式匹配，区分字符大小写；case sensitive regular expression match modifier
-* ~*：做正则表达式匹配，不区分字符大小写；
-* ^~：URI的左半部分匹配，不区分字符大小写；this configuration will be used as the prefix match, but this will not perform any further regular expression match even if one is available.等同无标志符号，多了不会匹配后面对应规则
+* 匹配优先级:一次请求只能匹配一个location，一旦匹配成功后，便不再继续匹配其余location;
+    - =：URI的精确匹配，其后多一个字符都不可以，精确匹配。match only the following EXACT URL
+    - ^~：URI的左半部分匹配，不区分字符大小写；this configuration will be used as the prefix match, but this will not perform any further regular expression match even if one is available.等同无标志符号，多了不会匹配后面对应规则
+    - ~：做正则表达式匹配，区分字符大小写；case sensitive regular expression match modifier
+    - ~*：做正则表达式匹配，不区分字符大小写；
 
 URL重写时所用的正则表达式需要使用PCRE格式。PCRE正则表达式元字符：
 
@@ -385,6 +383,23 @@ server {
     location @custom {
         rewrite ^/(.+)$ /index.php?_route_=$1 last;
     }
+
+    location ~ .*\.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm)$
+    {
+        expires      7d;
+    }
+
+    location ~ .*\.(?:js|css)$
+    {
+        expires      7d;
+    }
+
+// html 不缓存
+    location ~ .*\.(?:htm|html)$
+    {
+        add_header Cache-Control "private, no-store, no-cache, must-revalidate, proxy-revalidate";
+    }
+
 }
 
 # another virtual host using mix of IP-, name-, and port-based configuration
@@ -399,7 +414,6 @@ server {
 #        index  index.html index.htm;
 #    }
 #}
-
 
 server {
         listen       80;

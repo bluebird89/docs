@@ -263,23 +263,18 @@
 * [intuit/karate](https://github.com/intuit/karate):Web-Services Testing Made Simple
 * [minimaxir/big-list-of-naughty-strings](https://github.com/minimaxir/big-list-of-naughty-strings):The Big List of Naughty Strings is a list of strings which have a high probability of causing issues when used as user-input data.
 
-## i18n
+* i18n
+    - [lingui/js-lingui](https://github.com/lingui/js-lingui):🌍📖 A readable, automated, and optimized (5 kb) internationalization for JavaScript https://lingui.js.org/
+* Parser
+    - [acornjs/acorn](https://github.com/acornjs/acorn):A small, fast, JavaScript-based JavaScript parser
+* debounce
+    - [niksy/throttle-debounce](https://github.com/niksy/throttle-debounce)：Throttle and debounce functions.
+* 算法
+    - [trekhleb/javascript-algorithms](https://github.com/trekhleb/javascript-algorithms):📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings
+* jwt
+    - [themikenicholson/passport-jwt](https://github.com/themikenicholson/passport-jwt):Passport authentication using JSON Web Tokens
 
-* [lingui/js-lingui](https://github.com/lingui/js-lingui):🌍📖 A readable, automated, and optimized (5 kb) internationalization for JavaScript https://lingui.js.org/
-
-## Parser
-
-* [acornjs/acorn](https://github.com/acornjs/acorn):A small, fast, JavaScript-based JavaScript parser
-
-## debounce
-
-* [niksy/throttle-debounce](https://github.com/niksy/throttle-debounce)：Throttle and debounce functions.
-
-## 算法
-
-* [trekhleb/javascript-algorithms](https://github.com/trekhleb/javascript-algorithms):📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings
-
-## 代码在线分享工具
+* 代码在线分享工具
 
 * JS Fiddle
 * .NET Fiddle

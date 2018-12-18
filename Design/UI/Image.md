@@ -27,6 +27,10 @@ DPI 是一种将图像的面积和理论打印尺寸进行关联的文件属性�
 * [muukii/Pixel](https://github.com/muukii/Pixel):🎨🖼 An image editor and engine using CoreImage
 * [GoogleChromeLabs/squoosh](https://github.com/GoogleChromeLabs/squoosh):Make images smaller using best-in-class codecs, right in the browser. https://squoosh.app
 * [fengyuanchen/compressorjs](https://github.com/fengyuanchen/compressorjs):JavaScript image compressor.
+* 看图
+    - FastStone Image Viewer
+* 截图
+    - Snipaste
 
 ## 资源
 
