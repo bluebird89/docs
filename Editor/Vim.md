@@ -637,6 +637,18 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 > Not an editor command: ^M
 :set fileformat=unix :w
 
+## 插件
+
+* [cknadler/vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
+* [rupa/z](https://github.com/rupa/z):z - jump around
+* [rupa/v](https://github.com/rupa/v):z for vim
+* [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim.
+* [fatih/vim-go](https://github.com/fatih/vim-go):Go development plugin for Vim
+
+## 教程
+
+* [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)
+
 ## 配置
 
 * [amix/vimrc](https://github.com/amix/vimrc):The ultimate Vim configuration: vimrc
@@ -649,15 +661,4 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 
 * [coolwanglu/vim.js](https://github.com/coolwanglu/vim.js):JavaScript port of Vim http://coolwanglu.github.io/vim.js/emterpreter/vim.html
 * [junegunn/fzf](https://github.com/junegunn/fzf):🌸 A command-line fuzzy finder
-
-## 插件
-
-* [cknadler/vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
-* [rupa/z](https://github.com/rupa/z):z - jump around
-* [rupa/v](https://github.com/rupa/v):z for vim
-* [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim.
-* [fatih/vim-go](https://github.com/fatih/vim-go):Go development plugin for Vim
-
-## 教程
-
-* [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)
+* [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar):vinegar.vim: Combine with netrw to create a delicious salad dressing https://www.vim.org/scripts/script.php?script_id=5671
