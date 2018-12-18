@@ -6,13 +6,30 @@
 * Java不同于一般的编译语言或直译语言。它首先将源代码编译成字节码，然后依赖各种不同平台上的虚拟机来解释执行字节码，从而实现了"一次编写，到处运行"的跨平台特性。在早期JVM中，这在一定程度上降低了Java程序的运行效率。但在J2SE1.4.2发布后，Java的运行速度有了大幅提升。执行Java应用程序必须安装爪哇运行环境（Java Runtime Environment，JRE），JRE内部有一个Java虚拟机（Java Virtual Machine，JVM）以及一些标准的类库（Class Library）。通过JVM才能在电脑系统执行Java应用程序（Java Application），这与.Net Framework的情况一样，所以电脑上没有安装JVM，那么这些程序将不能够执行。 实现跨平台性的方法是大多数编译器在进行Java语言程序的编码时候会生成一个用字节码写成的"半成品"，这个"半成品"会在Java虚拟机（解释层）的帮助下运行，虚拟机会把它转换成当前所处硬件平台的原始代码。之后，Java虚拟机会打开标准库，进行数据（图片、线程和网络）的访问工作。主要注意的是，尽管已经存在一个进行代码翻译的解释层，有些时候Java的字节码代码还是会被JIT编译器进行二次编译。 C++语言被用户诟病的原因之一是大多数C++编译器不支持垃圾收集机制。通常使用C++编程的时候，程序员于程序中初始化对象时，会在主机内存堆栈上分配一块内存与地址，当不需要此对象时，进行析构或者删除的时候再释放分配的内存地址。如果对象是在堆栈上分配的，而程序员又忘记进行删除，那么就会造成内存泄漏（Memory Leak）。长此以往，程序运行的时候可能会生成很多不清除的垃圾，浪费了不必要的内存空间。而且如果同一内存地址被删除两次的话，程序会变得不稳定，甚至崩溃。因此有经验的C++程序员都会在删除之后将指针重置为NULL，然后在删除之前先判断指针是否为NULL。 C++中也可以使用"智能指针"（Smart Pointer）或者使用C++托管扩展编译器的方法来实现自动化内存释放，智能指针可以在标准类库中找到，而C++托管扩展被微软的Visual C++ 7.0及以上版本所支持。智能指针的优点是不需引入缓慢的垃圾收集机制，而且可以不考虑线程安全的问题，但是缺点是如果不善使用智能指针的话，性能有可能不如垃圾收集机制，而且不断地分配和释放内存可能造成内存碎片，需要手动对堆进行压缩。除此之外，由于智能指针是一个基于模板的功能，所以没有经验的程序员在需要使用多态特性进行自动清理时也可能束手无策。 Java语言则不同，上述的情况被自动垃圾收集功能自动处理。对象的创建和放置都是在内存堆栈上面进行的。当一个对象没有任何引用的时候，Java的自动垃圾收集机制就发挥作用，自动删除这个对象所占用的空间，释放内存以避免内存泄漏。
 * 甲骨文与该平台的另外两大贡献者IBM 和 Red Hat 共同做出了这个决定:Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。
 
-## openJDK版本
+## JDK(Java Development Kit)版本
 
-- JavaSE(J2SE)(Java2 Platform Standard Edition，java平台标准版）
-- JavaEE(J2EE)(Java 2 Platform,Enterprise Edition，java平台企业版)
-- JavaME(J2ME)(Java 2 Platform Micro Edition，java平台微型版)。
+JVM->JRE:(Java Runtime Environment)->JDK_
 
-JRE: Java Runtime Environment
+- Open JDK:免费的开源实现,GPL License发布，很多Linux发行版中都会包含这个Open JDK 。
+- Oracle JDK
+  + JavaSE(J2SE)(Java2 Platform Standard Edition，java平台标准版）:从JDK 5.0开始，改名为Java SE
+    * Java SE 5.0 (1.5.0)
+    * Java SE 8.0 (1.8.0):从2019年1月 后续的update 开始就要收费 8u191, 8u192这样的东西，191,192就是update 的编号。
+    * Java SE 9
+    * Java SE 10
+  + JavaEE(J2EE)(Java 2 Platform,Enterprise Edition，java平台企业版):从2018年2月26日开始，J2EE改名为Jakarta EE
+  + JavaME(J2ME)(Java 2 Platform Micro Edition，java平台微型版)。
+  - 组件
+    + javac – 编译器，将源程序转成字节码
+    + jar – 打包工具，将相关的类文件打包成一个文件
+    + javadoc – 文档生成器，从源码注释中提取文档
+    + jdb – debugger，查错工具
+    + java – 运行编译后的java程序（.class后缀的）
+    + appletviewer：小程序浏览器，一种执行HTML文件上的Java小程序的Java浏览器。
+    + Javah：产生可以调用Java过程的C过程，或建立能被Java程序调用的C过程的头文件。
+    + Javap：Java反汇编器，显示编译类文件中的可访问功能和数据，同时显示字节代码含义。
+    + Jconsole: Java进行系统调试和监控的工具
+* Oracle Java SE Advanced, Java  SE Advanced Desktop, Java SE Suite:为企业级用户提供的高级工具和功能，可以监控、部署、管理企业级的Java程序
 
 ### 安装
 
@@ -981,6 +998,8 @@ JavaEE/JDBC/Weblogic
 * [ReactiveX/RxJava](https://github.com/ReactiveX/RxJava):RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.
 * [qiujiayu/AutoLoadCache](https://github.com/qiujiayu/AutoLoadCache):AutoLoadCache 是基于AOP+Annotation等技术实现的高效的缓存管理解决方案，实现缓存与业务逻辑的解耦，并增加异步刷新及“拿来主义机制”，以适应高并发环境下的使用。
 * [eclipse-vertx/vert.x](https://github.com/eclipse-vertx/vert.x):Vert.x is a tool-kit for building reactive applications on the JVM http://vertx.io
+* flow-control
+  - [alibaba/Sentinel](https://github.com/alibaba/Sentinel):A lightweight flow-control library providing high-available protection and monitoring (高可用防护的流量管理框架)
 
 ## 参考
 

@@ -23,6 +23,7 @@
 ## 工具
 
 * [floydhub/dl-docker](https://github.com/floydhub/dl-docker):An all-in-one Docker image for deep learning. Contains all the popular DL frameworks (TensorFlow, Theano, Torch, Caffe, etc.) https://www.floydhub.com
+* [deepfakes/faceswap](https://github.com/deepfakes/faceswap):Non official project based on original /r/Deepfakes thread. Many thanks to him! https://www.reddit.com/r/deepfakes/
 
 ## 课程
 
@@ -48,3 +49,4 @@
 * [scutan90/DeepLearning-500-questions](https://github.com/scutan90/DeepLearning-500-questions):深度学习500问，以问答形式对常用的概率知识、线性代数、机器学习、深度学习、计算机视觉等热点问题进行阐述
 * [mbadry1/DeepLearning.ai-Summary](https://github.com/mbadry1/DeepLearning.ai-Summary):This repository contains my personal notes and summaries on DeepLearning.ai specialization courses. I've enjoyed every little bit of the course hope you enjoy my notes too.
 * [guillaume-chevalier/Awesome-Deep-Learning-Resources](https://github.com/guillaume-chevalier/Awesome-Deep-Learning-Resources):Rough list of my favorite deep learning resources, useful for revisiting topics or for reference. I have got through all of the content listed there, carefully. - Guillaume Chevalier http://www.neuraxio.com/en/
+* [Microsoft/MMdnn](https://github.com/Microsoft/MMdnn):MMdnn is a set of tools to help users inter-operate among different deep learning frameworks. E.g. model conversion and visualization. Convert models between Caffe, Keras, MXNet, Tensorflow, CNTK, PyTorch Onnx and CoreML.
