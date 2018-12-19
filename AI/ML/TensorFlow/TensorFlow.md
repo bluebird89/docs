@@ -25,9 +25,7 @@ pip install IPython
 
 ## 项目
 
-* [google-research/bert](https://github.com/google-research/bert):TensorFlow code and pre-trained models for BERT https://arxiv.org/abs/1810.04805
 * [guillaume-chevalier/LSTM-Human-Activity-Recognition](https://github.com/guillaume-chevalier/LSTM-Human-Activity-Recognition):Human Activity Recognition example using TensorFlow on smartphone sensors dataset and an LSTM RNN (Deep Learning algo). Classifying the type of movement amongst six activity categories - Guillaume Chevalier http://www.neuraxio.com/en/
-* [aymericdamien/TensorFlow-Examples](https://github.com/aymericdamien/TensorFlow-Examples):TensorFlow Tutorial and Examples for Beginners with Latest APIs https://tensorflow.org
 
 ## 课程
 
@@ -35,6 +33,7 @@ pip install IPython
 * [open-source-for-science/TensorFlow-Course](https://github.com/open-source-for-science/TensorFlow-Course):Simple and ready-to-use tutorials for TensorFlow
 * [sjchoi86/Tensorflow-101](https://github.com/sjchoi86/Tensorflow-101):TensorFlow Tutorials
 * [Kyubyong/transformer](https://github.com/Kyubyong/transformer):A TensorFlow Implementation of the Transformer: Attention Is All You Need
+* [aymericdamien/TensorFlow-Examples](https://github.com/aymericdamien/TensorFlow-Examples):TensorFlow Tutorial and Examples for Beginners with Latest APIs https://tensorflow.org
 
 ## 参考
 
