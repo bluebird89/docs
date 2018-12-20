@@ -514,3 +514,4 @@ $1,000 1,000 美元
 - [中文排版需求](http://w3c.github.io/clreq/), by W3C
 - [为什么文件名要小写？](http://www.ruanyifeng.com/blog/2017/02/filename-should-be-lowercase.html), by 阮一峰
 * [egoist/docute](https://github.com/egoist/docute):📜 Effortlessly documentation done right. https://v3.docute.org
+* [sparanoid/chinese-copywriting-guidelines](https://github.com/sparanoid/chinese-copywriting-guidelines):Chinese copywriting guidelines for better written communication／中文文案排版指北https://sparanoid.com/note/chinese-copywriting-guidelines/
