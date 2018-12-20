@@ -44,6 +44,12 @@ curl -c cookies http://example.com # 可以保存服务器返回的cookie到文�
 curl -b cookies http://example.com # 使用这个文件作为cookie信息，进行后续的请求
 ```
 
+## Notice
+
+* network
+    - ping
+    - network timeout
+
 ## 参考
 
 * [文档](https://ec.haxx.se/)
