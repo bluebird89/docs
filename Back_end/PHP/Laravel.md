@@ -1544,6 +1544,7 @@ php artisan jwt:secret # 使用
 * [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
 * [LeoYang90/laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis):详解 laravel 源码
 * [illuminate/database](https://github.com/illuminate/database):[READ ONLY] Subtree split of the Illuminate Database component (see laravel/framework)
+* [learning laravel](https://learninglaravel.net)
 
 ## 工程
 

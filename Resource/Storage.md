@@ -11,6 +11,7 @@
 - [坚果云](https://www.jianguoyun.com/)
 - [数蚁](https://teamyi.com)
 - [nextcloud/server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data https://nextcloud.com
+* [Resilio](link)
 
 ## 工具
 

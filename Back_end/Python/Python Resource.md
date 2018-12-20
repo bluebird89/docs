@@ -82,6 +82,7 @@ brew install pipenv
 * Unipath：用面向对象的方式操作文件和目录。[官网](https://github.com/mikeorr/Unipath)
 * watchdog：管理文件系统事件的 API 和 shell 工具[官网](https://github.com/gorakhargosh/watchdog)
 * [socialcopsdev/camelot](https://github.com/socialcopsdev/camelot):Camelot: PDF Table Extraction for Humans https://camelot-py.readthedocs.io
+* filecmp:系统自带，可以实现文件，目录，遍历子目录的差异，对比功能
 
 ## 日期和时间
 
@@ -103,7 +104,7 @@ brew install pipenv
 
 * 通用
   - [chardet](http://hao.jobbole.com/chardet/)：字符编码检测器，兼容 Python2 和 Python3。[官网](https://github.com/chardet/chardet)
-  - difflib：(Python 标准库)帮助我们进行差异化比较。[官网](https://docs.python.org/2/library/difflib.html)
+  - [difflib](https://docs.python.org/2/library/difflib.html)(Python 标准库)帮助我们进行差异化比较。
   - ftfy：让Unicode文本更完整更连贯。[官网](https://github.com/LuminosoInsight/python-ftfy)
   - fuzzywuzzy：模糊字符串匹配。[官网](https://github.com/seatgeek/fuzzywuzzy)
   - Levenshtein：快速计算编辑距离以及字符串的相似度。[官网](https://github.com/ztane/python-Levenshtein/)
@@ -140,10 +141,11 @@ brew install pipenv
   + openpyxl：一个用来读写 Excel 2010 xlsx/xlsm/xltx/xltm 文件的库。[官网](https://openpyxl.readthedocs.org/en/latest/)
   + python-docx：读取，查询以及修改 Microsoft Word 2007/2008 docx 文件。[官网](https://github.com/python-openxml/python-docx)
   + unoconv：在 LibreOffice/OpenOffice 支持的任意文件格式之间进行转换。[官网](https://github.com/dagwieers/unoconv)
-  + XlsxWriter：一个用于创建 Excel .xlsx 文件的 Python 模块。[官网](https://xlsxwriter.readthedocs.org/en/latest/)
+  + [XlsxWriter](https://xlsxwriter.readthedocs.org/en/latest/)：一个用于创建 Excel .xlsx 文件的 Python 模块。
   + xlwings：一个使得在 Excel 中方便调用 Python 的库（反之亦然），基于 BSD 协议。[官网](http://xlwings.org/)
   + [xlwt](http://hao.jobbole.com/xlwt/)：读写 Excel 文件的数据和格式信息。[官网](https://github.com/python-excel/xlwt) / [xlrd](https://github.com/python-excel/xlrd)
   + relatorio：模板化OpenDocument 文件。[官网](http://relatorio.tryton.org/)
+  + rrdtool:用于跟踪对象的变化，生成这些变化的走走势图
 - PDF
   + PDFMiner：一个用于从PDF文档中抽取信息的工具。[官网](https://github.com/euske/pdfminer)
   + PyPDF2：一个可以分割，合并和转换 PDF 页面的库。[官网](https://github.com/mstamy2/PyPDF2)
@@ -311,6 +313,8 @@ brew install pipenv
 * treq：类似 requests 的Python API 构建于 Twisted HTTP 客户端之上。[官网](https://github.com/twisted/treq)
 * urllib3：一个具有线程安全连接池，支持文件 post，清晰友好的 HTTP 库。[官网](https://github.com/shazow/urllib3)
 * [kennethreitz/responder](https://github.com/kennethreitz/responder):a familiar HTTP Service Framework for Python https://python-responder.org
+*  [pycurl](http://pycurl.sourceforge.net)是一个用C语言写的libcurl Python实现，功能强大，支持的协议有：FTP,HTTP,HTTPS,TELNET等，可以理解为Linux下curl命令功能的Python封装
+* scapy(http://www.wecdev.org/projects/scapy/)是一个强大的交互式数据包处理程序，它能够对数据包进行伪造或解包，包括发送数据包，包嗅探，应答和反馈等功能。
 
 ## 数据库
 
@@ -546,6 +550,7 @@ Python实现的数据库。
 * modoboa：一个邮件托管和管理平台，具有现代的、简约的 Web UI。[官网](https://github.com/tonioo/modoboa)
 * pyzmail：创建，发送和解析电子邮件。[官网](http://www.magiksys.net/pyzmail/)
 * Talon：Mailgun 库，用来抽取信息和签名。[官网](https://github.com/mailgun/talon)
+* smtplib：发送电子邮件模块
 
 ## 国际化
 
@@ -1002,7 +1007,7 @@ MapReduce 框架和库。
 * hgapi：Mercurial 的纯 Python API。[官网](https://bitbucket.org/haard/hgapi)
 * honcho：[Foreman](https://github.com/ddollar/foreman)的 Python 克隆版，用来管理基于[Procfile](https://devcenter.heroku.com/articles/procfile)的应用。[官网](https://github.com/nickstenning/honcho)
 * pexpect：Controlling interactive programs in a pseudo-terminal like 在一个伪终端中控制交互程序，就像 GNU expect 一样。[官网](https://github.com/pexpect/pexpect)
-* psutil：一个跨平台进程和系统工具模块。[官网](https://github.com/giampaolo/psutil)
+* [giampaolo/psutil](https://github.com/giampaolo/psutil)：一个跨平台进程和系统工具模块。
 * supervisor：UNIX 的进程控制系统。[官网](https://github.com/Supervisor/supervisor)
 
 ## 任务调度
@@ -1056,6 +1061,8 @@ MapReduce 框架和库。
 * POX：一个针对基于 Python 的软件定义网络应用（例如 OpenFlow SDN 控制器）的开源开发平台。[官网](https://github.com/noxrepo/pox)
 * Pyretic：火热的 SDN 编程语言中的一员，为网络交换机和模拟器提供强大的抽象能力。[官网](http://frenetic-lang.org/pyretic/)
 * SDX Platform：基于 SDN 的 IXP 实现，影响了 Mininet, POX 和 Pyretic。[官网](https://github.com/sdn-ixp/internet2award)
+* [IPy](http://github.com/haypo/python-ipy):辅助IP规划
+* [dnspython](http://dnspython.org):Python实现的一个DNS工具包
 
 ## 硬件
 
@@ -1064,7 +1071,7 @@ MapReduce 框架和库。
 * ino：操作[Arduino](https://www.arduino.cc/)的命令行工具。[官网](http://inotool.org/)
 * Pyro：Python 机器人编程库。[官网](http://pyrorobotics.com/)
 * PyUserInput：跨平台的，控制鼠标和键盘的模块。[官网](https://github.com/SavinaRoja/PyUserInput)
-* scapy：一个非常棒的操作数据包的库。[官网](https://github.com/secdev/scapy)
+* [secdev/scapy](https://github.com/secdev/scapy)：Scapy: the Python-based interactive packet manipulation program & library. Supports Python 2 & Python 3. https://scapy.net
 * wifi：一个 Python 库和命令行工具用来在 Linux 平台上操作WiFi。[官网](https://wifi.readthedocs.org/en/latest/)
 * Pingo：Pingo 为类似Raspberry Pi，pcDuino， Intel Galileo等设备提供统一的API用以编程。[官网](http://www.pingo.io/)
 
