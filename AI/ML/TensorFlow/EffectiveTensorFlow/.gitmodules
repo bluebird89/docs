@@ -1,3 +1,0 @@
-[submodule "code/framework"]
-	path = code/framework
-	url = https://github.com/vahidk/TensorflowFramework

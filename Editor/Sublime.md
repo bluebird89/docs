@@ -48,6 +48,7 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
 -   AlignTab:一个使用正则表达式来帮助对齐的插件
 -   Alignment：进行智能对齐
 -   All Autocomplete: Extend Sublime Text 2 auto-completion to find matches in all open files of the current window
+- Anaconda
 -   autofilename:自动关联图片,css,js等资源路径插件
 -   AutoFileName: Plugin that auto-completes filenames
 -   AutoPEP8：格式化Python代码
