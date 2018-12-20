@@ -22,6 +22,23 @@ yii migrate # 生成数据表
 ## 搭建服务
 
 ```sh
+DocumentRoot "path/to/basic/web"
+
+<Directory "path/to/basic/web">
+    # 开启 mod_rewrite 用于美化 URL 功能的支持（译注：对应 pretty URL 选项）
+    RewriteEngine on
+    # 如果请求的是真实存在的文件或目录，直接访问
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # 如果请求的不是真实文件或目录，分发请求至 index.php
+    RewriteRule . index.php
+
+    # if $showScriptName is false in UrlManager, do not allow accessing URLs with script name
+    RewriteRule ^index.php/ - [L,R=404]
+
+    # ...其它设置...
+</Directory>
+
 server {
     charset utf-8;
     client_max_body_size 128M;
@@ -716,6 +733,54 @@ use app/assets/AppAsset;
 AppAsset::register($this);  // $this 代表视图对象
 ```
 
+## RESTful
+
+* GET /users: 逐页列出所有用户
+* HEAD /users: 显示用户列表的概要信息
+* POST /users: 创建一个新用户
+* GET /users/123: 返回用户 123 的详细信息
+* HEAD /users/123: 显示用户 123 的概述信息
+* PATCH /users/123 and PUT /users/123: 更新用户123
+* DELETE /users/123: 删除用户123
+* OPTIONS /users: 显示关于末端 /users 支持的动词
+* OPTIONS /users/123: 显示有关末端 /users/123 支持的动词
+
+```php
+// app\controllers\UserController
+namespace app\controllers;
+
+use yii\rest\ActiveController;
+
+class UserController extends ActiveController
+{
+    public $modelClass = 'app\models\User';
+}
+
+// config/main.php
+'urlManager' => [
+    'enablePrettyUrl' => true,
+    'enableStrictParsing' => true,
+    'showScriptName' => false,
+    'rules' => [
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+    ],
+]
+'request' => [
+    'parsers' => [
+        'application/json' => 'yii\web\JsonParser',
+    ]
+]
+
+curl -i -H "Accept:application/json" "http://api.yii.com/users"
+curl -i -H "Accept:application/xml" "http://api.yii.com/users"
+
+curl -i -H "Accept:application/json" -H "Content-Type:application/json" -XPOST "http://api.yii.com/users" -d '{"username": "henry", "email": "user@example.com"}'
+
+users?page=2
+users?fields=id,email // 指定默认包含到展现数组的字段集合
+users?expand=profile // 指定由于终端用户的请求包含 expand 参数哪些额外的字段应被包含到展现数组
+```
+
 ## Console
 
 ## 数据库
@@ -856,15 +921,15 @@ browser reopen generate new cookie
 
 ## 参考
 
--   [深入理解 Yii2.0](http://www.digpage.com/index.html)
--   [CraryPrimitiveMan/yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
--   [CraryPrimitiveMan/OnlineCourses](https://github.com/CraryPrimitiveMan/OnlineCourses):An online courses website based on yii2
--   [多语言版本切换](https://blog.csdn.net/u012979009/article/details/51697969)
--   [RESTful API 快速搭建教程](https://www.yiichina.com/tutorial/1606)
--   [RESTful API 认证教程](https://www.yiichina.com/tutorial/1770)
--   [csrf 验证原理分析及 token 缓存解决方案](https://www.yiichina.com/code/1695)
-- [Yii Tutorial](https://www.tutorialspoint.com/yii/index.htm)
-- [Yii框架](https://blog.csdn.net/u012979009/article/category/6202463/2)
+* [深入理解 Yii2.0](http://www.digpage.com/index.html)
+* [CraryPrimitiveMan/yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
+* [CraryPrimitiveMan/OnlineCourses](https://github.com/CraryPrimitiveMan/OnlineCourses):An online courses website based on yii2
+* [多语言版本切换](https://blog.csdn.net/u012979009/article/details/51697969)
+* [RESTful API 快速搭建教程](https://www.yiichina.com/tutorial/1606)
+* [RESTful API 认证教程](https://www.yiichina.com/tutorial/1770)
+* [csrf 验证原理分析及 token 缓存解决方案](https://www.yiichina.com/code/1695)
+* [Yii Tutorial](https://www.tutorialspoint.com/yii/index.htm)
+* [Yii框架](https://blog.csdn.net/u012979009/article/category/6202463/2)
 
 ## 扩展
 
