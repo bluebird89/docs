@@ -193,31 +193,31 @@
 ## 一生所爱
 
 ```
-从前 现在 过去了 再不来
-红红 落叶 长埋 尘土内
-开始终结总是 没变改
-天边的你飘泊 白云外
+    从前 现在 过去了 再不来
+    红红 落叶 长埋 尘土内
+    开始终结总是 没变改
+    天边的你飘泊 白云外
 
-苦海 翻起爱恨
-在世间 难逃避命运
-相亲 竟不可 接近
-或我应该 相信 是缘份
+    苦海 翻起爱恨
+    在世间 难逃避命运
+    相亲 竟不可 接近
+    或我应该 相信 是缘份
 
-情人 别后 永远 再不来
-无言 独坐 放眼 尘世外
+    情人 别后 永远 再不来
+    无言 独坐 放眼 尘世外
 
-鲜花虽会凋谢 但会再开
-一生所爱隐约 在白云外
+    鲜花虽会凋谢 但会再开
+    一生所爱隐约 在白云外
 
-苦海翻起爱恨
-在世间难逃避命运
-相亲竟不可接近
-或我应该相信是缘份
+    苦海翻起爱恨
+    在世间难逃避命运
+    相亲竟不可接近
+    或我应该相信是缘份
 
-苦海翻起爱
-恨在世间难逃避命运
-相亲竟不可接近
-或我应该相信是缘份
+    苦海翻起爱
+    恨在世间难逃避命运
+    相亲竟不可接近
+    或我应该相信是缘份
 ```
 
 ## 送别
@@ -237,38 +237,38 @@
 ## 历史的天空
         作词：王健 　　作曲：谷建芬 　　原唱：毛阿敏
 ```
-暗淡了刀光剑影
-远去了鼓角铮鸣
-眼前飞扬着一个个鲜活的面容 　　
-湮没了黄尘古道
-荒芜了烽火边城
-岁月啊你带不走那一串串熟悉的姓名 　　
-兴亡谁人定啊
-盛衰岂无凭啊
-一夜风云散啊
-变幻了时空 　　
-聚散皆是缘啊
-离合总关情啊
-担当生前事啊
-何计身后评 　　
-长江有意化作泪
-长江有情起歌声
-历史的天空闪烁几颗星
-人间一股英雄气在驰骋纵横
+    暗淡了刀光剑影
+    远去了鼓角铮鸣
+    眼前飞扬着一个个鲜活的面容 　　
+    湮没了黄尘古道
+    荒芜了烽火边城
+    岁月啊你带不走那一串串熟悉的姓名 　　
+    兴亡谁人定啊
+    盛衰岂无凭啊
+    一夜风云散啊
+    变幻了时空 　　
+    聚散皆是缘啊
+    离合总关情啊
+    担当生前事啊
+    何计身后评 　　
+    长江有意化作泪
+    长江有情起歌声
+    历史的天空闪烁几颗星
+    人间一股英雄气在驰骋纵横
 ```
 
 ## 临江仙·滚滚长江东逝水
 
 ```
-浪花淘尽英雄
-是非成败转头空
-青山依旧在
-几度夕阳红
-白发渔樵江渚上
-惯看秋月春风
-一壶浊酒喜相逢
-古今多少事
-都付笑谈中
+    浪花淘尽英雄
+    是非成败转头空
+    青山依旧在
+    几度夕阳红
+    白发渔樵江渚上
+    惯看秋月春风
+    一壶浊酒喜相逢
+    古今多少事
+    都付笑谈中
 ```
 
 ##        天梯
@@ -549,9 +549,7 @@
 ```
 　　　
 ## 温柔
-
     作词：阿信 作曲：阿信 演唱：五月天
-
 ```
     走在风中 今天阳光 突然好温柔
     天的温柔 地的温柔 像你抱着我
@@ -827,7 +825,6 @@
 ## 四张机
 
 ```
-    四张机
     鸳鸯织就欲双飞
     可怜未老头先白
     春波碧草
@@ -839,122 +836,122 @@
     陈粒
 
 ```
-她住在七月的洪流上
-天台倾倒理想一万丈
-她午睡在北风仓皇途经的芦苇荡
-她梦中的草原白茫茫
-列车搭上悲欢去辗转
-她尝遍了每个异乡限时赠送的糖
-若我站在朝阳上 能否脱去昨日的惆怅
-单薄语言能否传达我所有的牵挂
-若有天我不复勇往 能否坚持走完这一场
-踏遍万水千山总有一地故乡
-城市慷慨亮整夜光
-如同少年不惧岁月长
-她想要的不多只是和别人的不一样
-烛光倒影为我添茶
-相逢太短不等茶水凉
-你扔下的习惯还顽强活在我身上
-如果我站在朝阳上 能否脱去昨日的惆怅
-单薄语言能否传达我所有的牵挂
-若有天我不复勇往 能否坚持走完这一场
-踏遍万水千山总有一地故乡
-如果我站在朝阳上 能否脱去昨日的惆怅
-单薄语言能否传达我所有的牵挂
-若有天我不复勇往 能否坚持走完这一场
-踏遍万水千山总有一地故乡
-她走在马蹄的余声中
-夕阳燃烧离别多少场
-她向陌生人们解说陌生人的风光
-等她归来坐下对我讲
-故人旧时容颜未沧桑
-我们仍旧想要当初想要的不一样
+        她住在七月的洪流上
+        天台倾倒理想一万丈
+        她午睡在北风仓皇途经的芦苇荡
+        她梦中的草原白茫茫
+        列车搭上悲欢去辗转
+        她尝遍了每个异乡限时赠送的糖
+        若我站在朝阳上 能否脱去昨日的惆怅
+        单薄语言能否传达我所有的牵挂
+        若有天我不复勇往 能否坚持走完这一场
+        踏遍万水千山总有一地故乡
+        城市慷慨亮整夜光
+        如同少年不惧岁月长
+        她想要的不多只是和别人的不一样
+        烛光倒影为我添茶
+        相逢太短不等茶水凉
+        你扔下的习惯还顽强活在我身上
+        如果我站在朝阳上 能否脱去昨日的惆怅
+        单薄语言能否传达我所有的牵挂
+        若有天我不复勇往 能否坚持走完这一场
+        踏遍万水千山总有一地故乡
+        如果我站在朝阳上 能否脱去昨日的惆怅
+        单薄语言能否传达我所有的牵挂
+        若有天我不复勇往 能否坚持走完这一场
+        踏遍万水千山总有一地故乡
+        她走在马蹄的余声中
+        夕阳燃烧离别多少场
+        她向陌生人们解说陌生人的风光
+        等她归来坐下对我讲
+        故人旧时容颜未沧桑
+        我们仍旧想要当初想要的不一样
 ```
 
 ## 性空山
 
 ```
-送君千里直至峻岭变平川
-　　惜别伤离临请饮清酒三两三
-　　一两祝你手边多银财
-　　二两祝你方寸永不乱
-　　半醒半醉日复日
-　　无风无雨年复年
-　　花枝还招酒一盏
-　　祝你娇妻佳婿配良缘
+    送君千里直至峻岭变平川
+    惜别伤离临请饮清酒三两三
+    一两祝你手边多银财
+    二两祝你方寸永不乱
+    半醒半醉日复日
+    无风无雨年复年
+    花枝还招酒一盏
+    祝你娇妻佳婿配良缘
 
-半醒半醉日复日
-　　无风无雨年复年
-　　花枝还招酒一盏
-　　祝你娇妻佳婿配良缘
+    半醒半醉日复日
+    无风无雨年复年
+    花枝还招酒一盏
+    祝你娇妻佳婿配良缘
 
-风流子弟曾少年
-　　多少老死江湖前
-　　老我重来重石烂
-　　杳无音信
-　　我性空山
+    风流子弟曾少年
+    多少老死江湖前
+    老我重来重石烂
+    杳无音信
+    我性空山
 ```
 
 ## Set Fire to the Rain
     Adele Adkins
 ```
-I let it fall, my heart,
-And as it fell you rose to claim it
-It was dark and I was over
-Until you kissed my lips and you saved me
-My hands, they're strong
-But my knees were far too weak,
-To stand in your arms
-Without falling to your feet
-But there's a side to you
-That I never knew, never knew.
-All the things you'd say
-They were never true, never true,
-And the games you play
-You would always win, always win.
-[Chorus:]
-But I set fire to the rain,
-Watched it pour as I touched your face,
-Well, it burned while I cried
-'Cause I heard it screaming out your name, your name!
-When I lay with you
-I could stay there
-Close my eyes
-Feel you here forever
-You and me together
-Nothing gets better
-'Cause there's a side to you
-That I never knew, never knew,
-All the things you'd say,
-They were never true, never true,
-And the games you'd play
-You would always win, always win.
-[Chorus:]
-But I set fire to the rain,
-Watched it pour as I touched your face,
-Well, it burned while I cried
-'Cause I heard it screaming out your name, your name!
-I set fire to the rain
-And I threw us into the flames
-When it fell, something died
-'Cause I knew that that was the last time, the last time!
-Sometimes I wake up by the door,
-That heart you caught must be waiting for you
-Even now when we're already over
-I can't help myself from looking for you.
-[Chorus:]
-I set fire to the rain,
-Watched it pour as I touched your face,
-Well, it burned while I cried
-'Cause I heard it screaming out your name, your name
-I set fire to the rain,
-And I threw us into the flames
-When it fell, something died
-'Cause I knew that that was the last time, the last time, ohhhh!
-Oh noooo
-Let it burn, oh
-Let it burn
-Let it burn
+        I let it fall, my heart,
+        And as it fell you rose to claim it
+        It was dark and I was over
+        Until you kissed my lips and you saved me
+        My hands, they're strong
+        But my knees were far too weak,
+        To stand in your arms
+        Without falling to your feet
+        But there's a side to you
+        That I never knew, never knew.
+        All the things you'd say
+        They were never true, never true,
+        And the games you play
+        You would always win, always win.
+        [Chorus:]
+        But I set fire to the rain,
+        Watched it pour as I touched your face,
+        Well, it burned while I cried
+        'Cause I heard it screaming out your name, your name!
+        When I lay with you
+        I could stay there
+        Close my eyes
+        Feel you here forever
+        You and me together
+        Nothing gets better
+        'Cause there's a side to you
+        That I never knew, never knew,
+        All the things you'd say,
+        They were never true, never true,
+        And the games you'd play
+        You would always win, always win.
+        [Chorus:]
+        But I set fire to the rain,
+        Watched it pour as I touched your face,
+        Well, it burned while I cried
+        'Cause I heard it screaming out your name, your name!
+        I set fire to the rain
+        And I threw us into the flames
+        When it fell, something died
+        'Cause I knew that that was the last time, the last time!
+        Sometimes I wake up by the door,
+        That heart you caught must be waiting for you
+        Even now when we're already over
+        I can't help myself from looking for you.
+        [Chorus:]
+        I set fire to the rain,
+        Watched it pour as I touched your face,
+        Well, it burned while I cried
+        'Cause I heard it screaming out your name, your name
+        I set fire to the rain,
+        And I threw us into the flames
+        When it fell, something died
+        'Cause I knew that that was the last time, the last time, ohhhh!
+        Oh noooo
+        Let it burn, oh
+        Let it burn
+        Let it burn
 ```
 
 
