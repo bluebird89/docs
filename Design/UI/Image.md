@@ -31,6 +31,7 @@ DPI 是一种将图像的面积和理论打印尺寸进行关联的文件属性�
     - FastStone Image Viewer
 * 截图
     - Snipaste
+* [libvips/libvips](https://github.com/libvips/libvips):A fast image processing library with low memory needs. https://libvips.github.io/libvips/
 
 ## 资源
 

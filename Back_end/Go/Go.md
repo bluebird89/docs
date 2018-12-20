@@ -246,6 +246,9 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
   - [tidwall/evio](https://github.com/tidwall/evio):Fast event-loop networking for Go
 * mobile
   - [golang/mobile](https://github.com/golang/mobile):[mirror] Go on Mobile https://godoc.org/golang.org/x/mobile
+* redis
+  * [gomodule/redigo](https://github.com/gomodule/redigo):Go client for Redis
+  * [go-redis/redis](https://github.com/go-redis/redis):Type-safe Redis client for Golang
 
 ## 工具
 
@@ -266,7 +269,6 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin):Golang plugin system over RPC.
 * [dominikh/go-tools](https://github.com/dominikh/go-tools):A collection of tools and libraries for working with Go code, including linters and static analysis https://staticcheck.iop
 * [dgrijalva/jwt-go](https://github.com/dgrijalva/jwt-go):Golang implementation of JSON Web Tokens (JWT)
-* [gomodule/redigo](https://github.com/gomodule/redigo):Go client for Redis
 * [golang-standards/project-layout](https://github.com/golang-standards/project-layout):Standard Go Project Layout
 * [go-yaml/yaml](https://github.com/go-yaml/yaml):YAML support for the Go language.
 * [fsnotify/fsnotify](https://github.com/fsnotify/fsnotify):Cross-platform file system notifications for Go. https://fsnotify.org

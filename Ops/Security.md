@@ -188,6 +188,8 @@ Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，
 * [Hacker0x01/hacker101](https://github.com/Hacker0x01/hacker101):Hacker101 https://www.hacker101.com
 * [SecWiki/sec-chart](https://github.com/SecWiki/sec-chart):安全思维导图集合 https://www.sec-wiki.com
 * [phith0n/Mind-Map](https://github.com/phith0n/Mind-Map):各种安全相关思维导图整理收集
+* [trimstray/the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge):💫 A collection of awesome lists, manuals, blogs, hacks, one-liners, cli/web tools and more. Especially for System and Network Administrators, DevOps, Pentesters or Security Researchers.
+
 
 ## 案例
 

@@ -200,6 +200,7 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 * [Jeiwan/blockchain_go](https://github.com/Jeiwan/blockchain_go):A simplified blockchain implementation in Golang
 * [liuchengxu/blockchain-tutorial](https://github.com/liuchengxu/blockchain-tutorial):🌾 A step-by-step blockchain tutorial in simplified Chinese https://liuchengxu.gitbook.io/blockchain
 * [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料
+* [myeoskit](https://www.myeoskit.com)
 
 ## 教程
 

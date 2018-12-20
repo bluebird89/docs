@@ -186,9 +186,6 @@
 [submodule "Guide_lines/spec"]
 	path = Guide_lines/spec
 	url = git@github.com:ecomfe/spec.git
-[submodule "AI/ML/TensorFlow/EffectiveTensorFlow"]
-	path = AI/ML/TensorFlow/EffectiveTensorFlow
-	url = git@github.com:vahidk/EffectiveTensorflow.git
 [submodule "Ops/Docker/awesome-kubernates"]
 	path = Ops/Docker/awesome-kubernates
 	url = git@github.com:ramitsurana/awesome-kubernetes.git
@@ -237,3 +234,6 @@
 [submodule "AI/AiLearning"]
 	path = AI/AiLearning
 	url = git@github.com:apachecn/AiLearning.git
+[submodule "AI/ML/EffectiveTensorflow"]
+	path = AI/ML/EffectiveTensorflow
+	url = git@github.com:vahidk/EffectiveTensorflow.git
