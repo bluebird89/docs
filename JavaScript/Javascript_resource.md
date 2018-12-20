@@ -102,6 +102,7 @@
 * JSLint
 * [eslint/eslint](https://github.com/eslint/eslint):A fully pluggable tool for identifying and reporting on patterns in JavaScript https://eslint.org
 * [HubSpot/odometer](https://github.com/HubSpot/odometer):Smoothly transitions numbers with ease. #hubspot-open-source
+* [standard/eslint-config-standard](https://github.com/standard/eslint-config-standard):ESLint Config for JavaScript Standard Style https://standardjs.com
 
 ## 环境
 
@@ -222,6 +223,7 @@
 ## 2D
 
 * [liabru/matter-js](https://github.com/liabru/matter-js):a 2D rigid body physics engine for the web ▲● ■
+* [CreateJS/EaselJS](https://github.com/CreateJS/EaselJS):The Easel Javascript library provides a full, hierarchical display list, a core interaction model, and helper classes to make working with the HTML5 Canvas element much easier. http://createjs.com/
 
 ## 3D
 
@@ -273,15 +275,15 @@
     - [trekhleb/javascript-algorithms](https://github.com/trekhleb/javascript-algorithms):📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings
 * jwt
     - [themikenicholson/passport-jwt](https://github.com/themikenicholson/passport-jwt):Passport authentication using JSON Web Tokens
-
 * 代码在线分享工具
-
-* JS Fiddle
-* .NET Fiddle
-* SQL Fiddle
-* jdoodle
-* RunJS
-* [CodePen](https://codepen.io)
+    - JS Fiddle
+    - .NET Fiddle
+    - SQL Fiddle
+    - jdoodle
+    - RunJS
+    - [CodePen](https://codepen.io)
+* functional programming
+    - [origamitower/folktale](https://github.com/origamitower/folktale):A standard library for functional programming in JavaScript https://folktale.origamitower.com/
 
 ## 机器学习
 

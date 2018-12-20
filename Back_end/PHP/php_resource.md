@@ -386,7 +386,7 @@
       - (https://github.com/Wisembly/ExcelAnt)[ExcelAnt]: 一个操作Excel文档的库
       - (https://github.com/PHPOffice/PHPPresentation)[PHPPowerPoint]: 一个处理PPT文档的库
       - (https://github.com/PHPOffice/PHPWord)[PHPWord]: 一个处理Word文档的库
-      - [PHPSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet): 一个纯PHP的读写电子表格的库 (successor of PHPExcel)
+      - [PHPSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet): A pure PHP library for reading and writing spreadsheet files https://phpspreadsheet.readthedocs.io
 * 数据库 Database 使用对象关系映射（ORM）或数据映射技术的数据库交互的库
       - (https://github.com/etrepat/baum)[Baum]: 一个Eloquent的嵌套集实现
       - (https://github.com/cakephp/orm)[Cake ORM]: 对象关系映射工具，利用DataMapper模式实现 (CP)
@@ -477,7 +477,7 @@
       - (https://github.com/mikeemoo/ColorJizz-PHP)[Color Jizz]: 处理和转换颜色的库
       - (https://github.com/piwik/device-detector)[Device Detector]: 另一个解析user agent字符串的库
       - (https://github.com/hoaproject/Ustring)[Hoa String]: 另一个UTF-8字符串库
-      - (https://github.com/fukuball/jieba-php)[Jieba-PHP]: Python的jieba的PHP端口，自然语言处理的中文文本分词
+      - [fukuball/jieba-php](https://github.com/fukuball/jieba-php): "結巴"中文分詞：做最好的 PHP 中文分詞、中文斷詞組件。 / "Jieba" (Chinese for "to stutter") Chinese text segmentation: built to be the best PHP Chinese word segmentation module. http://jieba-php.fukuball.com
       - (https://github.com/serbanghita/Mobile-Detect)[Mobile-Detect]: 一个用于检测移动设备的轻量级PHP类(包括平板电脑)
       - (https://github.com/nicolas-grekas/Patchwork-UTF8)[Patchwork UTF-8]: 一个处理UTF-8字符串的便携库
       - (https://github.com/cocur/slugify)[Slugify]: 转换字符串到slug的库

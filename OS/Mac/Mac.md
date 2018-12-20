@@ -667,6 +667,7 @@ lsof -Pni4 | grep LISTEN | grep php
 -   [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
 -   [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
 -   [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
+* [Mac OS X 配置指南](https://wild-flame.github.io/guides/)
 
 ### 软件列表
 

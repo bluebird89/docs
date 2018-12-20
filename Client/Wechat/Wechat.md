@@ -68,6 +68,7 @@ if ($tmpstr==$signature) {
 * [Eric-Guo/wechat](https://github.com/Eric-Guo/wechat):API, command and message handling for WeChat in Rails
 * [thenbsp/WeChat](https://github.com/thenbsp/wechat):微信公众平台第三方 SDK 开发包，优雅、健壮，可扩展，遵循 PSR 开发规范。
 * [Urinx/WeixinBot](https://github.com/Urinx/WeixinBot):网页版微信API，包含终端版微信及微信机器人
+* [littlecodersh/itchatmp](https://github.com/littlecodersh/itchatmp):A complete and graceful API for wechat mp. 完备优雅的微信公众号接口，原生支持同步、协程使用。 http://itchatmp.readthedocs.io
 
 ## 参考
 
