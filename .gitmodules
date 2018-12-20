@@ -195,12 +195,9 @@
 [submodule "Guide_lines/spec"]
 	path = Guide_lines/spec
 	url = git@github.com:ecomfe/spec.git
-[submodule "ML/TensorFlow/EffectiveTensorFlow"]
-	path = ML/TensorFlow/EffectiveTensorFlow
+[submodule "AI/ML/TensorFlow/EffectiveTensorFlow"]
+	path = AI/ML/TensorFlow/EffectiveTensorFlow
 	url = git@github.com:vahidk/EffectiveTensorflow.git
-[submodule "Back_end/Python/awesome-django"]
-	path = Back_end/Python/awesome-django
-	url = git@github.com:rosarior/awesome-django.git
 [submodule "Ops/Docker/awesome-kubernates"]
 	path = Ops/Docker/awesome-kubernates
 	url = git@github.com:ramitsurana/awesome-kubernetes.git
