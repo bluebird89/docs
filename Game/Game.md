@@ -61,8 +61,10 @@
 -   [diasurgical/devilution](https://github.com/diasurgical/devilution):Diablo devolved - magic behind the 1996 computer game
 -   Dota
 -   风暴英雄
--   星际争霸
+-   星际争霸3
+-   暗黑破坏神2
 -   魔兽世界
+-   守望先锋
 -   Minecraft
     +   [Mojang/brigadier](https://github.com/Mojang/brigadier):Brigadier is a command parser & dispatcher, designed and developed for Minecraft: Java Edition.
 
