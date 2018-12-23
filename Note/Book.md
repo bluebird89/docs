@@ -28,7 +28,7 @@
 * 《[图灵的秘密:他的生平、思想及论文解读](https://www.amazon.cn/gp/product/B00AAQXKXS)》
 * 《[计算机系统概论](https://www.amazon.cn/gp/product/B0011F9OQE)》
 * 《[TCP/IP详解 卷1：协议](https://www.amazon.cn/gp/product/B00116OTVS)》
-* 《[深入理解计算机系统（原书第2版）](https://www.amazon.cn/gp/product/B004BJ18KM)》 todo
+* 《[深入理解计算机系统（原书第2版）](https://www.amazon.cn/gp/product/B004BJ18KM)》(CSAPP) Computer Systems: A Programmer's Perspective, 3/E (CS:APP3e) Randal E. Bryant and David R. O'Hallaron, Carnegie Mellon University
 * 《[计算机程序的构造和解释（Structure and Interpretation of Computer Programs）](https://www.amazon.cn/gp/product/B0011AP7RY)》
     * <https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html>
     * [SICP 解题集](https://sicp.readthedocs.io/en/latest/#)
@@ -38,9 +38,9 @@
 * 《[Windows核心编程(第5版)](https://www.amazon.cn/gp/product/B001GS7918)》
 * 《[WireShark网络分析就这么简单](https://www.amazon.cn/gp/product/B00PB5QQ84)》
 * 《[WireShark网络分析的艺术](https://www.amazon.cn/gp/product/B01AS1OS8A)》
-* 《计算机程序设计艺术（The Art of Computer Programming）》
-* 《编译原理》
-* 《编码:隐匿在计算机软硬件背后的语言CODE: The Hidden Language of Computer Hardware and Software》
+* 《计算机程序设计艺术(The Art of Computer Programming)》
+* 《编译原理技术与工具》（龙书）（Compilers: Principles, Techniques, and Tools (the Dragon Book)）
+* 《编码:隐匿在计算机软硬件背后的语言(CODE: The Hidden Language of Computer Hardware and Software)》
 * 《现代操作系统(原书第3版) 》
 * 《操作系统:精髓与设计原理(原书第6版)》
 
@@ -85,7 +85,7 @@
 * 《解析极限编程：拥抱变化》
 * 《[精通正则表达式（第3版）](https://www.amazon.cn/gp/product/B008UCHA58)》
 * 《[编译原理（第2版）](https://www.amazon.cn/gp/product/B001NGO85I)》龙书
-* 《[重构：改善既有代码的设计（Refactoring）](https://www.amazon.cn/gp/product/B011LPUB42)》
+* 《[重构：改善既有代码的设计(Refactoring: Improving the Design of Existing Code)](https://www.amazon.cn/gp/product/B011LPUB42)》
 * 《[七周七语言：理解多种编程范型](https://www.amazon.cn/gp/product/B00ALPRM3M)》
 * 《[调试九法：软硬件错误的排查之道](https://www.amazon.cn/gp/product/B00CBBLUFK)》
 * 《程序设计语言：实践之路（第3版）》
@@ -100,7 +100,7 @@
 ## 算法与数据结构
 
 * 《[算法（第4版）](https://www.amazon.cn/gp/product/B009OCFQ0O)》todo
-* 《[算法导论（原书第2版）（Introduction to Algorithms）](https://www.amazon.cn/gp/product/B00AK7BYJY)》
+* 《[算法导论（原书第2版)(Introduction to Algorithms）](https://www.amazon.cn/gp/product/B00AK7BYJY)》
 * 《[Python算法教程](https://www.amazon.cn/gp/product/B019NB0VCI)》
 * 《[算法设计与分析基础（第3版）](https://www.amazon.cn/gp/product/B00S4HCQUI)》
 * 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
@@ -239,7 +239,8 @@
 * 《[有效的单元测试](https://www.amazon.cn/gp/product/B00PVOND2W)》
 * 《[Google软件测试之道](https://www.amazon.cn/gp/product/B00FH36R6G)》
 *  How to Break Software
-*  《测试驱动开发》
+* 《测试驱动开发》
+*  测试驱动的面向对象软件开发
 * 《Growing Object-Oriented Software, Guided by Tests》
 * 《Python测试驱动开发（第2版）》 Harry J.W.Percival
 
@@ -275,7 +276,7 @@
 * 《[C专家编程](https://www.amazon.cn/gp/product/B0012NIW9K)》
 * 《[C陷阱与缺陷](https://www.amazon.cn/gp/product/B0012UMPBY)》
 * 《[C语言接口与实现](https://www.amazon.cn/gp/product/B01D10NSCM)》
-* 《[C程序设计语言（第2版）](https://www.amazon.cn/gp/product/B0011425T8)》
+* 《[C程序设计语言（第2版）](https://www.amazon.cn/gp/product/B0011425T8)》C Programming Language (2nd Edition)
 * 《C语言参考手册（第5版）》
 * 《C程序设计语言》：C 编程语言；如何像程序员一样思考；底层计算模型
 
@@ -287,7 +288,7 @@
 * 《[C++程序设计原理与实践](https://www.amazon.cn/gp/product/B003VPX6YS)》
 * 《[C++ Primer （中文第5版）](https://www.amazon.cn/gp/product/B00ESUIL0O)》
 * 《[C++ Primer习题集(第5版)](https://www.amazon.cn/gp/product/B00S6U4C6E) 》
-* 《[C++程序设计语言(第1-3部分)(原书第4版)](https://www.amazon.cn/gp/product/B01I9BNASA) 》
+* 《[C++程序设计语言(The C++ Programming Language)(原书第4版)](https://www.amazon.cn/gp/product/B01I9BNASA) 》
 * 《[Effective C++:改善程序与设计的55个具体做法(第3版)(中文版)](https://www.amazon.cn/gp/product/B004G72P24) 》 todo
 * 《[More Effective C++:35个改善编程与设计的有效方法(中文版)](https://www.amazon.cn/gp/product/B004IP8BD6) 》
 * C++沉思录
@@ -497,12 +498,12 @@
 * 《卓有成效的程序员》
 * 《[程序员的职业素养（Pragmatic Programmer）](https://www.amazon.cn/gp/product/B01LZJ8L9J)》
 * 《[程序员修炼之道：从小工到专家](https://www.amazon.cn/gp/product/B004GV08CY)》
+* 程序员的修炼之道《The Pragmatic Programmer》
 * 程序员的自我修养
 * 《[软件开发者路线图：从学徒到高手](https://www.amazon.cn/gp/product/B00H6X6LD4)》
 * 《[我编程，我快乐: 程序员职业规划之道](https://www.amazon.cn/gp/product/B00CBBKDGM)》
 * 《[程序员的思维修炼：开发认知潜能的九堂课](https://www.amazon.cn/gp/product/B007VARUIM)》
 * 《[高效程序员的45个习惯：敏捷开发修炼之道(修订版)](https://www.amazon.cn/gp/product/B00OA9L3NU)》
-* 《The Pragmatic Programmer》
 * 《Peopleware: Productive Projects and Teams》
 * 《Soft Skills: The Software Developer’s Life Manual》
 
@@ -541,7 +542,7 @@
 * 《[软件随想录（卷1）](https://www.amazon.cn/gp/product/B00WDTQU8M)》《[软件随想录（卷2）](https://www.amazon.cn/gp/product/B00WFT32FY)》
 * 《[如何把事情做到最好：改变全球9800万人的人生指导书](https://www.amazon.cn/gp/product/B00ICWNKT6)》
 * 《[正则表达式经典实例](https://www.amazon.cn/gp/product/B00OGKGSSS)》
-* 《[编程珠玑](https://www.amazon.cn/gp/product/B001GNBZFE)》
+* 《[编程珠玑(Programming Pearls)](https://www.amazon.cn/gp/product/B001GNBZFE)》
 * 《编程之美》
 * 《The Mythical Man-month》: 关于软件工程的散文集
 * 《刻意练习:如何从新手到大师》
@@ -552,6 +553,13 @@
 * Borland传奇
 * 《自私的基因》Richard Dawkins
 * 全栈应用开发：精益实践
+
+Evolutionary Architecture
+Clean Code, Design Patterns, DDD
+Lean manufacturing principles
+Fault Tolerance Patterns
+Continuous Delivery
+HTTP and REST
 
 ## 数学
 
@@ -681,6 +689,9 @@
     - 致女儿书
     - 我的千岁寒
 * 卡夫卡
+* 沈从文
+    - 边城
+    - 春风沉醉的晚上
 
 ## 科幻
 
@@ -729,6 +740,8 @@
     - 《北京，北京》
 * 《圣殿春秋》
 * 无尽世界 World Without End
+* 1984
+    - 纳粹 苏联大清洗 文革
 
 ## 文学
 

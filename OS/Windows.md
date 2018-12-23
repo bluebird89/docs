@@ -5,7 +5,10 @@ Windows是最烂的开发平台
 ## 工具
 
 * [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation https://chocolatey.org/
-* 快速启动:launchy Wox Rolan
+* 快速启动
+  - launchy
+  - [Wox](http://www.wox.one)
+  - Rolan
 * markdown编辑器
     - 作业部落
     - MarkdownPad(需要浏览器渲染插件awesome)

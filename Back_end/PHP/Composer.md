@@ -71,7 +71,7 @@ composer create-project doctrine/orm path 2.2.0
 
 export PATH="/usr/local/bin:/Users/username/.composer/vendor/bin":$PATH # 添加到全局文件
 
-composer dump-autoload --optimize # 优化自动加载
+composer dump-autoload --optimize|-o # 优化自动加载
 
 >=1.0
 >=1.0 <2.0

@@ -88,3 +88,7 @@ Firefox 键盘快捷键
     - 刷新 (覆盖缓存)： Shift+Reload button
     - 保存页面为：  Alt+Left-click
     - 逐行滚动：  Alt+Scroll
+
+## 插件
+
+* RESTClient

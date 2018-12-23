@@ -76,9 +76,11 @@ Apache Incubator是旨在成为完全成熟的Apache软件基金会项目的开�
     - 天猫超市事业群将整合原有天猫超市和淘鲜达业务，推进线上线下一体化的超市新零售模式；
     - 天猫进出口事业部将负责履行阿里在进口博览会上做出的未来5年2000亿美元进口额的承诺。
 
-## 开源
+## Google
 
-* [阿里开源](http://1024.yuque.com/)
+* 2014年的时候，时任谷歌高级副总裁的“安卓之父”安迪·鲁宾（Andy Rubin）被女员工指控性骚扰。 报道称，谷歌进行了调查之后，得到了切实的证据。而且谷歌本可以严肃处理，辞退鲁宾，秉公处理。但是，谷歌的高层却选择了掩盖丑闻，还拿出了9000万美元补偿金，保全了鲁宾，让鲁宾主动离职。
+
+##  [Basecamp](https://basecamp.com)
 
 ## 人工智能
 
@@ -90,10 +92,19 @@ Apache Incubator是旨在成为完全成熟的Apache软件基金会项目的开�
 * 达观数据
 * 竹间智能
 
+## 公司文化
+
+雇主品牌，一家企业在它的员工及社会最广泛大众心目中的品牌形象。
+
+* 看它是否重视明星员工；
+* 看它的晋升机制是否合理；
+* 看它如何应对外界的变化
+
 ## 参考
 
 * [A Brief History of Alibaba Founders](https://iprice.sg/trends/insights/history-jack-ma-alibaba-18-founders/)
 
-## 公司
+## 工具
 
-* [Basecamp](https://basecamp.com)
+* [阿里开源](http://1024.yuque.com/)
+

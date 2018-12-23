@@ -17,6 +17,12 @@ enddate | format: yyyy-mm-dd, end date  |   Yes
 zipcode|  Zipcode|  No
 fee_name  |   Name of fee schedule  |   No
 
+## 开发
+
+* 想清楚逻辑原理
+* 考虑全面
+* 文档清楚
+* 测试稳定
 
 ## 参考
 
