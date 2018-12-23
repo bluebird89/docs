@@ -704,7 +704,7 @@ rewrite ^/linux/(.*)$ /linux.php?distro=$1 last;
 
 ## 代理
 
-正向代理:正向代理发生在 client 端，用户能感知到的，并且是用户主动发起的代理。
+正向代理:正向代理发生在 client 端，用户能感知到的，并且是用户主动发起的代理。vpn
 反向代理:发生在 server端，从用户角度看是不知道发生了代理的
 
 ```
@@ -733,6 +733,7 @@ server {
     location / {
         #添加wensocket代理
         proxy_pass http://127.0.0.1:9093;  # websocket服务器。不用管 ws://
+        // proxy_pass https://www.baidu.com;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";

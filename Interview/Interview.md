@@ -3,31 +3,6 @@
 * 掌握好基础
 * 仔细阅读需求文档
 
-## Job
-
-个人价值最大化。那么，你要选择一个自己能够接触到的、完全竞争的、短流程的渠道，利用你的算法技术和对业务的理解实现变现的过程。
-
-需要有一个承载的产品，而产品研发的过程是非常漫长的。同样地，自动驾驶算法需要汽车生产场商的实验。用户行为分析算法，需要电子商务平台的以用户购买行为进行验证。
-
-* 上级的技术能力:能不能与上级长期相处
-* 安排合理的流程:工作流程的管理
-* 平静空间：一部分是工作环境，另一部分是公司背面的人事关系（太耗心神）
-* 更多的书面交流
-* 师友关系：职业发展、技术成长
-* 最好的设备
-* 不看三年两跳
-
-## 工作意愿
-
-* 工作，是为了证明自己的价值
-* 我可以自己决定想成为谁，这就是我。
-* 工作是为了让人生充实起来，而不是变得更焦虑。
-    - 每天无用的重复，是每天被否认的心酸，是看不到希望的那种焦虑。
-    - 一稿改了几百遍后说还是第一遍好，经常被老板和甲方骂废柴、没有效率，所以我每天都在自我怀疑中度过，一起床就开始焦虑。
-    - 不好的工作消耗人，好的工作可以养人
-* 努力工作，是因为要赚更多的钱
-* 梦想什么的，用不着那么夸张的东西吧，有个目标就行了，比如，发了工资要买什么，或者下次休假去哪玩。又或者为了谁而工作。吃苦受累我们不怕的  怕的是 心累 消耗你的人要赶紧离开 工作也是
-
 ## 方向
 
 * web：前后端并不是对立的，而是纯粹的一家人。只是被国内外的一些市场强行分成了前后端，归根到底，是需要前后端都懂得
@@ -56,7 +31,6 @@
     14.介绍下协程，为何比线程还快；
     15.range和xrange的区别（他妹的我学的py3…）；
     16.由于我有C/C++背景，因此要求用C来手写：将IP地址字符串（比如“172.0.0.1”）转为32位二进制数的函数。
-
 * 数据结构与算法
     1.手写快排；堆排；几种常用排序的算法复杂度是多少；快排平均复杂度多少，最坏情况如何优化；
     2.手写：已知一个长度n的无序列表，元素均是数字，要求把所有间隔为d的组合找出来，你写的解法算法复杂度多少；
@@ -67,7 +41,6 @@
     7.单向链表如何使用快速排序算法进行排序；
     8.手写：一个长度n的无序数字元素列表，如何求中位数，如何尽快的估算中位数，你的算法复杂度是多少；
     9.如何遍历一个内部未知的文件夹（两种树的优先遍历方式）
-
 * 网络基础部分
     1.TCP/IP分别在模型的哪一层；
     2.socket长连接是什么意思；
@@ -78,7 +51,6 @@
     7.http连接方式。get和post的区别，你还了解其他的方式么；
     8.restful你知道么；
     9.状态码你知道多少，比如200/403/404/504等等；
-
 * 数据库部分：
     - MySQL索引优化、查询优化和存储优化
     - MySQL数据库设计、管理和优化，具备数据库规划能力
@@ -91,12 +63,10 @@
     - NoSQL了解么，和关系数据库的区别；
     - redis有几种常用存储类型；
     - 非关系型数据库（Redis，Memcached）
-
 * Linux部分
     1.讲一下你常用的Linux/git命令和作用；
     2.查看当前进程是用什么命令，除了文件相关的操作外，你平时还有什么操作命令；（因为我本人Linux本身就很水，只会基本的操作，所以这部分面试官也基本没怎么问。。反正问了就大眼瞪小眼呗）
     - Shell编程
-
 * django项目部分
     1.都是让简单的介绍下你在公司的项目，不管是不是后端相关的，主要是要体现出你干了什么；
     2.你在项目中遇到最难的部分是什么，你是怎么解决的；
@@ -108,7 +78,6 @@
     8.如果你来设计login，简单的说一下思路；
     9.session和cookie的联系与区别；session为什么说是安全的；
     10.uWSGI和Nginx的作用；
-
 * 大流量与并发
 * 分布式、集群
 * 高并发、高负载、高可用系统
@@ -133,6 +102,247 @@
 ## C++
 
 * 熟悉分布式系统原理和C++
+
+## Linux
+
+```sh
+# Linux如何挂载windows下的共享目录？
+mount.cifs //IP地址/server /mnt/server -o user=administrator,password=123456 # linux 下的server需要自己手动建一个 后面的user与pass 是windows主机的账号和密码 注意空格 和逗号
+
+# 如何查看http的并发请求数与其TCP连接状态？
+netstat -n | awk ‘/^tcp/ {++b[$NF]}’ END {for(a in b) print a,b[a]}’
+# 还有ulimit -n 查看linux系统打开最大的文件描述符，这里默认1024，不修改这里web服务器修改再大也没用。若要用就修改很几个办法，这里说其中一个： 修改/etc/security/limits.conf
+* soft nofile 10240
+* hard nofile 10240 # 重启后生效
+
+# 如何用tcpdump嗅探80端口的访问看看谁最高
+tcpdump -i eth0 -tnn dst port 80 -c 1000 | awk -F”.” ‘{print $1″.”$2″.”$3″.”$4″.”}’ | sort |uniq -c | sort -nr | head-5
+
+# 如何查看/var/log目录下的文件数？
+ls /var/log/ -1R | grep “-” | wc -l
+
+# 如何查看Linux系统每个ip的连接数？
+netstat -n | awk ‘/^tcp/ {print $5}’ | awk -F: ‘{print $1}’ | sort | uniq -c | sort -rn
+
+# shell下生成32位随机密码
+cat /dev/urandom | head -1 | md5sum | head -c 32 >> /pass
+
+# 统计出apache的access.log中访问量最多的5个ip
+cat access.log | awk ‘{print $1}’ | sort | uniq -c | sort -n -r | head -5
+
+# 如何查看二进制文件的内容？
+我们一般通过hexdump命令 来查看二进制文件的内容。
+hexdump -C XXX(文件名) -C是参数 不同的参数有不同的意义
+-C 是比较规范的 十六进制和ASCII码显示
+-c 是单字节字符显示
+-b 单字节八进制显示
+-o 是双字节八进制显示
+-d 是双字节十进制显示
+-x 是双字节十六进制显示
+
+# ps aux 中的VSZ代表什么意思，RSS代表什么意思？
+VSZ:虚拟内存集,进程占用的虚拟内存空间
+RSS:物理内存集,进程战用实际物理内存空间
+
+# 如何检测并修复/dev/hda5？
+fsck用来检查和维护不一致的文件系统。若系统掉电或磁盘发生问题，可利用fsck命令对文件系统进行检查
+
+# 介绍下Linux系统的开机启动顺序
+加载BIOS–>读取MBR–>Boot Loader–>加载内核–>用户层init一句inittab文件来设定系统运行的等级(一般3或者
+5，3是多用户命令行，5是界面)–>init进程执行rc.syninit–>启动内核模块–>执行不同级别运行的脚本程序–>执行/etc/rc.d/rc.local(本地运行服务)–>执行/bin/login,就可以登录了。
+
+# 符号链接与硬链接的区别
+我们可以把符号链接，也就是软连接 当做是 windows系统里的 快捷方式。
+硬链接 就好像是 又复制了一份，举例说明：
+ln 3.txt 4.txt 这是硬链接，相当于复制，不可以跨分区，但修改3,4会跟着变，若删除3,4不受任何影响。
+ln -s 3.txt 4.txt 这是软连接，相当于快捷方式。修改4,3也会跟着变，若删除3,4就坏掉了。不可以用了。
+
+# 保存当前磁盘分区的分区表
+dd 命令是以个强大的命令，在复制的同时进行转换
+dd if=/dev/sda of=./mbr.txt bs=1 count=512
+
+# 如何在文本里面进行复制、粘贴，删除行，删除全部，按行查找和按字母查找？
+以下操作全部在命令行状态操作，不要在编辑状态操作。
+在文本里 移动到想要复制的行 按yy 想复制到哪就移动到哪，然后按P 就黏贴了
+删除行 移动到改行 按dd
+删除全部 dG 这里注意G一定要大写
+按行查找 :90 这样就是找到第90行
+按字母查找 /path 这样就是 找到path这个单词所在的位置，文本里可能存在多个,多次查找会显示在不同的位置。
+
+# 手动安装grub
+grub-install /dev/sda
+
+# 修改内核参数
+vi /etc/sysctl.conf 这里修改参数
+sysctl -p 刷新后可用
+
+# 在1-39内取随机数
+expr $[RANDOM%39] +1
+RANDOM随机数
+%39取余数范围0-38
+
+# 限制apache每秒新建连接数为1，峰值为3
+每秒新建连接数 一般都是由防火墙来做，apache本身好像无法设置每秒新建连接数，只能设置最大连接：
+iptables -A INPUT -d 172.16.100.1 -p tcp –dport 80 -m limit –limit 1/second -j ACCEPT
+
+# FTP的主动模式和被动模式
+FTP协议有两种工作方式：PORT方式和PASV方式，中文意思为主动式和被动式。
+
+PORT（主动）方式的连接过程是：客户端向服务器的FTP端口（默认是21）发送连接请 求，服务器接受连接，建立一条命令链路。当需要传送数据时，客户端在命令链路上用PORT 命令告诉服务器：“我打开了XX端口，你过来连接我”。于是服务器从20端口向客户端的 XX端口发送连接请求，建立一条数据链路来传送数据。
+
+PASV（被动）方式的连接过程是：客户端向服务器的FTP端口（默认是21）发送连接请 求，服务器接受连接，建立一条命令链路。当需要传送数据时，服务器在命令链路上用PASV 命令告诉客户端：“我打开了XX端口，你过来连接我”。于是客户端向服务器的XX端口 发送连接请求，建立一条数据链路来传送数据。
+从上面可以看出，两种方式的命令链路连接方法是一样的，而数据链路的建立方法就完 全不同。
+
+# 显示/etc/inittab中以#开头，且后面跟了一个或者多个空白字符，而后又跟了任意非空白字符的行
+grep “^#\{1,\}[^]” /etc/inittab
+
+# 显示/etc/inittab中包含了:一个数字:(即两个冒号中间一个数字)的行
+grep “\:[0-9]\{1\}:” /etc/inittab
+
+# 怎么把脚本添加到系统服务里，即用service来调用？
+在脚本里加入
+#!/bin/bash
+# chkconfig: 345 85 15
+# description: httpd
+然后保存
+chkconfig httpd –add 创建系统服务
+现在就可以使用service 来 start or restart
+
+# 写一个脚本，实现批量添加20个用户，用户名为user01-20，密码为user后面跟5个随机字符
+#!/bin/bash
+#description: useradd
+for i in `seq -f”%02g” 1 20`;do
+useradd user$i
+echo “user$i-`echo $RANDOM|md5sum|cut -c 1-5`”|passwd –stdinuser$i >/dev/null 2>&1
+done
+
+# 写一个脚本，实现判断192.168.1.0/24网络里，当前在线的IP有哪些，能ping通则认为在线
+#!/bin/bash
+for ip in `seq 1 255`
+do
+ping -c 1 192.168.1.$ip > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+echo 192.168.1.$ip UP
+else
+echo 192.168.1.$ip DOWN
+fi
+}&
+done
+wait
+
+# 写一个脚本，判断一个指定的脚本是否是语法错误；如果有错误，则提醒用户键入Q或者q无视错误并退出其它任何键可以通过vim打开这个指定的脚本
+#!/bin/bash
+read -p “please input check script-> ” file
+if [ -f $file ]; then
+sh -n $file > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+read -p “You input $file syntax error,[Type q to exit or Type vim to edit]” answer
+case $answer in
+q | Q)
+exit 0
+;;
+vim )
+vim $file
+;;
+*）
+exit 0
+;;
+esac
+fi
+else
+echo “$file not exist”
+exit 1
+fi
+
+# 写一个脚本，要求如何：
+创建一个函数，能接受两个参数：
+1)第一个参数为URL，即可下载的文件；第二个参数为目录，即下载后保存的位置；
+2)如果用户给的目录不存在，则提示用户是否创建；如果创建就继续执行，否则，函数返回一个51的错误值给调用脚本；
+3)如果给的目录存在，则下载文件；下载命令执行结束后测试文件下载成功与否；如果成功，则返回0给调用脚本，否则，返回52给调用脚本；
+
+[root@localhost tmp]# cat downfile.sh
+#!/bin/bash
+url=$1
+dir=$2
+download()
+{
+cd $dir >> /dev/null 2>&1
+if [ $? -ne 0 ];then
+read -p “$dir No such file or directory,create?(y/n)” answer
+if [ “$answer” == “y” ];then
+mkdir -p $dir
+cd $dir
+wget $url 1> /dev/null 2>&1
+else
+return “51”
+fi
+fi
+if [ $? -ne 0 ]; then
+return “52”
+fi
+}
+download $url $dir
+echo $?
+
+# 写一个脚本，详细需求如下：
+
+1、创建一个函数，可以接受一个磁盘设备路径（如/dev/sdb）作为参数;在真正开始后面步骤之前提醒用户有危险，并让用户选择是否继续；而后将此磁盘设备上的所有分区清空（提示，使用命令dd if=/dev/zero of=/dev/sdb bs=512 count=1实现，注意其中的设备路径不要写错了；
+如果此步骤失败，返回67给主程序；
+接着在此磁盘设备上创建两个主分区，一个大小为100M，一个大小为1G；如果此步骤失败，返回68给主程序；
+格式化此两分区，文件系统类型为ext3；如果此步骤失败，返回69给主程序；
+如果上述过程都正常，返回0给主程序；
+
+2、调用此函数；并通过接收函数执行的返回值来判断其执行情况，并将信息显示出来；
+
+local Darray=(`ls /dev/sd[a-z]`)
+for i in ${Darray};do
+[[ “$i” == “$1” ]] && Sd=$i &&break
+done
+else
+return66
+fi
+
+#当匹配成功，进入选择，告诉用户，是否继续，输错的话进入无限循环，当用户选择Y,则清空目标分区，且跳出while循环
+
+while :;do
+read -p “Warning!!!This operation will clean $Sd data.Next=y,Quit=n [y|n]:” Choice
+case $Choice in
+y)
+dd if=/dev/zero of=$Sd bs=512 count=1 &> /dev/null &&break || return 67 ;;
+n)
+exit 88 ;;
+*)
+echo “Invalid choice,please choice again.” ;;
+esac
+done
+
+#使用echo传递给fdisk进行分区，如果此命令失败，则跳转出去，错误值68，需要注意的是，有时候这个返回值很诡异，笔者之前成功与否都是返回的1，后来重启之后，就好了，如果慎重的话，可以对创建的分区，进行判断，不过就需要使用其他工具截取相关字段了，虽有些小麻烦，但无大碍
+
+echo-e “n\np\n1\n\n+100M\nn\np\n2\n\n+1024M\nw\n”|fdisk /dev/sdb&> /dev/null || || return 68
+
+#格式化之前，让内核重新读取磁盘分区表，值得注意的是，有的系统版本，使用partprobe无效，譬如笔者的环境是rhel5.8，而rhel6.0以后，这个命令就很危险了，而使用partx -a /dev/sdb则效果更好…此项需慎重，如果格式化失败，则告知把失败的分区定义成变量，且跳出函数，并带出错误值69
+
+`partprobe`
+Part=`fdisk -l /dev/$Sd|tail -2|cut -d” ” -f1`
+for M in ${Part};do
+mke2fs -j $M &> /dev/null && ErrorPart=$M &&return 69
+done
+return 0
+}
+
+#下面代码，调用函数，接收函数返回值，根据返回值进行判断哪里出错。
+
+Disk_Mod $1
+Res=$?
+[ $Res-eq 0 ] && exit 0
+[ $Res-eq 66 ] && echo “Error! Invalid input.”
+[ $Res-eq 67 ] && echo “Error! Command -> dd fdisk mke2fs
+
+28、如何让history命令显示具体时间？
+HISTTIMEFORMAT=”%Y-%m-%d %H:%M:%S”
+export HISTTIMEFORMAT
+重新开机后会还原，可以写/etc/profile
+```
 
 ## 算法
 
