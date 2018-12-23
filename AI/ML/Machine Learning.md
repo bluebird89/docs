@@ -292,3 +292,4 @@
 * [ray-project/ray](https://github.com/ray-project/ray):A system for parallel and distributed Python that unifies the ML ecosystem. https://ray.readthedocs.io/en/latest/
 * [google/jax](https://github.com/google/jax):GPU- and TPU-backed NumPy with differentiation and JIT compilation.
 * [guess-js/guess](https://github.com/guess-js/guess):Libraries & tools for enabling Machine Learning driven user-experiences on the web https://guess-js.github.io/
+* [Core ML](link)

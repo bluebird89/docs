@@ -777,6 +777,13 @@ ping 8.8.8.8 # 检测连接
 # 修改host(已无效)
 sudo su
 curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
+
+# iptables
+iptables -F # 删除所有现有规则
+
+iptables -P INPUT DROP # 设置默认的 chain 策略
+iptables -P FORWORD DROP
+iptables -P OUTPUT DROP
 ```
 
 ### 身份
@@ -1437,7 +1444,7 @@ set completeopt=longest,menu
 * [bat](link):A Cat Clone With Syntax Highlighting And Git Integration https://www.ostechnix.com/bat-a-cat-clone-with-syntax-highlighting-and-git-integration/
 * [akavel/up](https://github.com/akavel/up):Ultimate Plumber is a tool for writing Linux pipes with instant live preview
 * [iovisor/bcc](https://github.com/iovisor/bcc):BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
-
+* [Monit](https://mmonit.com/monit/):功能异常强大的进程、文件、设备、系统监控软件，适用于Linux/Unix系统
 
 systemctl unmask mysql.service
 service mysql start

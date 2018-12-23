@@ -14,7 +14,7 @@
     - 罗纳岛
     -  海上要塞Suomenlinna
     -  Nuuksio国家公园
-*  国王花园站（Kungsträdgården）是瑞典首都斯德哥尔摩最深的地铁站
+    *  国王花园站（Kungsträdgården）是瑞典首都斯德哥尔摩最深的地铁站
 *  敦煌莫高窟
     -  青藏高原与蒙古高原中间形成河西走廊
     -  汉武帝：西域都护府-》玉门关 + 阳关-〉河西四郡,最西边敦煌
@@ -34,6 +34,13 @@
 * 清真寺：大穹顶到洋葱头
     - 俄罗斯的圣瓦西里大教堂
     - 哈尔滨的圣索菲亚大教堂
+* 英格兰
+    - Cotswolds：Ellenborough Park Hotel
+    -Longdolo Pole Club
+* 苏格兰
+    - Winton Castle
+    - Prestonfield House
+    - 爱丁堡参加Hogmanay庆典
 
 ## Airlines
 

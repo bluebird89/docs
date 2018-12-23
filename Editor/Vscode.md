@@ -17,6 +17,7 @@ sudo apt-get install code
 
 ## 插件
 
+* Auto Close Tag
 * Auto Import:自动去查找、分析、然后提供代码补全。对于TypeScript和TSX
 * Bracket Pair Colorizer
 * Beautify
@@ -25,13 +26,15 @@ sudo apt-get install code
 * Code Runner
 * Color Highlight
 * Color Info
+* Color Picker
 * Code Spell Checker
 * Debugger for Chrome
 * Document This
+* Emmet
 * ESLint
 * Faker：
 * File Utils
-* gi
+* gi:给 .gitignore 文件添加各种语言忽略文件配置
 * Git History
 * GitLens
 * Git Project Manager
@@ -46,8 +49,11 @@ sudo apt-get install code
 * IntelliSense for CSS class names in HTML
 * Jest
 * Minify
+* Markdownlint
 * npm Intellisense
+* Path Intellisense
 * Prettier
+* Polacode 可以把代码生成图片
 * Open-In-Browser
 * PHP IntelliSense
 * [prettier/prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. https://prettier.io
@@ -55,22 +61,28 @@ sudo apt-get install code
 * React Native Tools
 * React.js code snippets
 * Regex Previewer
+* Settings Sync
+* snippets
+* Stylelint
 * Sublime Text Keymap and Settings Importer
 * SVG Viewer
 * TODO Highlight
 * Trailing Spaces
+* TSLint
 * TypeScript Hero
-* WakaTime
 * Vetur:Vue工具
 * vscode-icons
 - vscode-pandoc:文档生成
+* WakaTime
 
 ## 主题
 
 * One Monokai
 * Aglia
 * One Dark Pro
+* Material Theme
 * Material Icon Theme
+* An Old Hope Theme
 
 ## 配置
 
@@ -90,7 +102,8 @@ sudo apt-get install code
     "material-icon-theme.folders.icons": "specific",
     "editor.lineHeight": 24,
     "editor.fontLigatures": true,
-    "editor.fontFamily": "FiraCode-Medium"
+    "editor.fontFamily": "FiraCode-Medium",
+    "editor.multiCursorModifier": "ctrlCmd",
 }
 ```
 
