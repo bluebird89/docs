@@ -735,15 +735,20 @@ AppAsset::register($this);  // $this 代表视图对象
 
 ## RESTful
 
-* GET /users: 逐页列出所有用户
-* HEAD /users: 显示用户列表的概要信息
-* POST /users: 创建一个新用户
-* GET /users/123: 返回用户 123 的详细信息
-* HEAD /users/123: 显示用户 123 的概述信息
-* PATCH /users/123 and PUT /users/123: 更新用户123
-* DELETE /users/123: 删除用户123
-* OPTIONS /users: 显示关于末端 /users 支持的动词
-* OPTIONS /users/123: 显示有关末端 /users/123 支持的动词
+* route
+    - GET /users: 逐页列出所有用户
+    - HEAD /users: 显示用户列表的概要信息
+    - POST /users: 创建一个新用户
+    - GET /users/123: 返回用户 123 的详细信息
+    - HEAD /users/123: 显示用户 123 的概述信息
+    - PATCH /users/123 and PUT /users/123: 更新用户123
+    - DELETE /users/123: 删除用户123
+    - OPTIONS /users: 显示关于末端 /users 支持的动词
+    - OPTIONS /users/123: 显示有关末端 /users/123 支持的动词
+* Authentication:无状态的， 因此这意味着不能使用 sessions && cookies
+    - HTTP Basic Auth:access token 作为一个用户名被传递。这种情况只适合“当access token可以安全的存储在API 接收端”的情况， 比如 调用 API 的是一个在服务器上运行的程序
+    - Query parameter:access token 在 API URL 中作为一个查询参数被传递，比如 https://example.com/users?access-token=123456789 因为多数的 Web 服务器会保存 query 参数在服务器日志中， 这个方法应该主要是用于响应无法使用 HTTP 头部信息来发送 access token 的 JSONP 请求的。
+    - OAuth 2:遵照 OAth2.0 协议， 调用者从一个 授权服务器 上获取 access token， 再通过 HTTP Bearer Tokens 发送给 Api 服务器
 
 ```php
 // app\controllers\UserController
@@ -783,6 +788,23 @@ users?expand=profile // 指定由于终端用户的请求包含 expand 参数哪
 
 ## Console
 
+创建网站后台处理的任务
+
+```sh
+yii <route> [--option1=value1 --option2=value2 ... argument1 argument2 ...]
+
+curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii -o /etc/bash_completion.d/yii
+
+mkdir -p ~/.zsh/completion
+curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/zsh/_yii -o ~/.zsh/completion/_yii
+
+# config
+fpath=(~/.zsh/completion $fpath)
+
+autoload -Uz compinit && compinit -i
+exec $SHELL -l
+```
+
 ## 数据库
 
 geterrors
@@ -813,8 +835,6 @@ User::find()->select('count(*)')->where(['user_id' => $userId, 'status' => 0])->
 User::findBySql(‘SELECT * FROM user‘)->all();  # 此方法是用 sql 语句查询 user 表里面的所有数据；
 User::findBySql(‘SELECT * FROM user‘)->one();  # 此方法是用 sql 语句查询 user 表里面的一条数据；
 ```
-
-## REST
 
 ## 安全
 
@@ -919,18 +939,6 @@ browser reopen generate new cookie
 * cookie pass parameters
 * front get back parameters
 
-## 参考
-
-* [深入理解 Yii2.0](http://www.digpage.com/index.html)
-* [CraryPrimitiveMan/yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
-* [CraryPrimitiveMan/OnlineCourses](https://github.com/CraryPrimitiveMan/OnlineCourses):An online courses website based on yii2
-* [多语言版本切换](https://blog.csdn.net/u012979009/article/details/51697969)
-* [RESTful API 快速搭建教程](https://www.yiichina.com/tutorial/1606)
-* [RESTful API 认证教程](https://www.yiichina.com/tutorial/1770)
-* [csrf 验证原理分析及 token 缓存解决方案](https://www.yiichina.com/code/1695)
-* [Yii Tutorial](https://www.tutorialspoint.com/yii/index.htm)
-* [Yii框架](https://blog.csdn.net/u012979009/article/category/6202463/2)
-
 ## 扩展
 
 -   [yii2-httpclient](https://github.com/yiisoft/yii2-httpclient)
@@ -947,6 +955,18 @@ browser reopen generate new cookie
 -   [yii2-elasticsearch](https://github.com/yiisoft/yii2-elasticsearch)
 -   [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
 -   [2amigos/yii2-file-upload-widget](https://github.com/2amigos/yii2-file-upload-widget):BlueImp File Upload Widget for Yii2
+
+## 参考
+
+* [深入理解 Yii2.0](http://www.digpage.com/index.html)
+* [CraryPrimitiveMan/yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
+* [CraryPrimitiveMan/OnlineCourses](https://github.com/CraryPrimitiveMan/OnlineCourses):An online courses website based on yii2
+* [多语言版本切换](https://blog.csdn.net/u012979009/article/details/51697969)
+* [RESTful API 快速搭建教程](https://www.yiichina.com/tutorial/1606)
+* [RESTful API 认证教程](https://www.yiichina.com/tutorial/1770)
+* [csrf 验证原理分析及 token 缓存解决方案](https://www.yiichina.com/code/1695)
+* [Yii Tutorial](https://www.tutorialspoint.com/yii/index.htm)
+* [Yii框架](https://blog.csdn.net/u012979009/article/category/6202463/2)
 
 ## 项目
 
