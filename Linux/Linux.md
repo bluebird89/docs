@@ -376,9 +376,6 @@ IPV6_PEERDNS="yes"
 IPV6_PEERROUTES="yes"
 
 service network restart   #重启网络
-ping www.baidu.com  #测试网络是否正常
-
-ip addr # 查看IP地址
 ```
 
 ### 镜像挂载
@@ -567,13 +564,10 @@ dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on com
 
 ## 指令
 
-/usr/bin/
-/bin/
-/sbin/
+/usr/bin/  /bin/ /sbin/
 
 ```sh
 # 查看linux系统信息
-hostname # 返回系统的主机名称
 uname -a # 显示电脑以及操作系统的相关信息
 cat /proc/version # 说明正在运行的内核版本
 cat /etc/issue # 显示的是发行版本信息
@@ -616,6 +610,110 @@ screen # 固定屏
 
 diff -Naur sources-orig/ sources-fixed/ >myfixes.patch # 参数 -N 代表如果比较的文件不存在，则认为是个空文件， -a 代表将所有文件都作为文本文件对待，-u 代表使用合并格式并输出上下文，-r 代表递归比较目录
 ```
+
+### 服务、进程、端口管理
+
+```sh
+sudo systemctl enable|start|restart|status|reload nginx | httpd.service # enable 设置开机启动 start 启动 stop 停止 restart 重启
+
+# pidof prints out the process id of a running program. For example, below command will output the process ID of nginx
+pidof nginx
+
+ps -ef | grep nginx # 进程查看
+ps aux | grep nginx
+
+kill -9 pid # 关闭进程
+kill pid
+kill -USR2 $(pidof nginx)
+pkill -f nginx
+
+ctrl+c   ## 有些程序也可以用q键退出
+
+ctrl+z   ## 进程会挂起到后台
+bg jobid  ## 让进程在后台继续执行
+fg jobid   ## 让进程回到前台
+
+iotop # Sorts processes by disk writes, and show how much and how frequently programs are writing to the disk.
+powertop # Lists processes by their energy consume. It\'s a vital command when you\'re outside, somewhere you can\'t charge your laptop.
+nethogs # Lists processes by their network traffic.
+
+top
+top -bn1 | grep php-fpm
+
+htop # Famous process monitor. It has a nice, colorful command-line UI. Some useful keybindings:
+# \ Filter
+# / Search
+# , Choose sorting criteria
+# k Send kill signal
+# u Filter results by user
+# t Open/close tree mode
+# - and + Collabse / uncollapse selected process tree
+# H Turn off displaying threads
+```
+
+### Network
+
+* 网络分内网与外网
+* 端口提供服务：
+  - 是否暴漏
+  - 修改防火墙规则
+* 端口扫描
+
+```sh
+hostname # 返回系统的主机名称
+host xx.xxx.com # 显示某域名相关托管服务器/邮件服务器
+
+curl http://icanhazip.com # 查看本机IP
+curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
+
+ping -c 次数 ip # 测试网络畅通性
+ping 8.8.8.8 # 检测连接
+ip addr # 查看IP地址
+
+ifconfig # 查询本机网络信息
+
+sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
+
+# iptables
+service iptables status
+service iptables stop # tempory
+chkconfig optables off # always
+
+# firewall as default
+firewall-cmd --state
+firewall-cmd --reload # restart
+systemctl status firewalld.service
+systemctl stop firewalld.service # stop
+systemctl disable firewalld.service # cancle start with system
+
+/etc/init.d/iptables status|save
+chkconfig iptables on|off # forever
+chkconfig iptables start|stop # recover with restart
+iptables -F # 删除所有现有规则
+
+iptables -P INPUT DROP # 设置默认的 chain 策略
+iptables -P FORWORD DROP
+iptables -P OUTPUT DROP
+iptables -I INPUT -p tcp --dport 80 -j ACCEPT # open port
+
+
+## port test
+yum install telnet.x86_64
+telnet 10.0.3.69 2020  # 测试端口能否访问
+
+lsof -i: (port) # 查看端口的占用情况
+lsof -Pni4 | grep LISTEN | grep php
+
+netstat -tunlp # 显示tcp，udp的端口和进程等相关
+netstat -tln | grep 8000
+netstat -tunlp|grep (port)  # // 指定端口号进程情况
+```
+
+### 身份
+
+* owner
+* group
+* others
 
 ### 目录
 
@@ -707,102 +805,6 @@ find . -type f \( -name "*.css" -or -name "*.html" \) # List all CSS or HTML fil
 * `dd if=/dev/stdin of=test bs=10 count=1 conv=ucase` 将输出的英文字符转换为大写再写入文件
 * sudo mount 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
 
-### 服务、进程、端口管理
-
-```sh
-sudo systemctl enable|start|restart|status|reload nginx | httpd.service # enable 设置开机启动 start 启动 stop 停止 restart 重启
-
-telnet 10.0.3.69 2020  # 测试端口能否访问
-
-[sudo ]lsof -i: (port) # 查看端口的占用情况
-lsof -Pni4 | grep LISTEN | grep php
-
-netstat -tunlp # 显示tcp，udp的端口和进程等相关
-netstat -tln | grep 8000
-netstat -tunlp|grep (port)  # // 指定端口号进程情况
-
-# pidof prints out the process id of a running program. For example, below command will output the process ID of nginx
-pidof nginx
-
-ps -ef | grep nginx # 进程查看
-ps aux | grep nginx
-
-kill -9 pid # 关闭进程
-kill pid
-kill -USR2 $(pidof nginx)
-pkill -f nginx
-
-ctrl+c   ## 有些程序也可以用q键退出
-
-ctrl+z   ## 进程会挂起到后台
-bg jobid  ## 让进程在后台继续执行
-fg jobid   ## 让进程回到前台
-
-iotop # Sorts processes by disk writes, and show how much and how frequently programs are writing to the disk.
-powertop # Lists processes by their energy consume. It\'s a vital command when you\'re outside, somewhere you can\'t charge your laptop.
-nethogs # Lists processes by their network traffic.
-
-top
-top -bn1 | grep php-fpm
-
-htop # Famous process monitor. It has a nice, colorful command-line UI. Some useful keybindings:
-# \ Filter
-# / Search
-# , Choose sorting criteria
-# k Send kill signal
-# u Filter results by user
-# t Open/close tree mode
-# - and + Collabse / uncollapse selected process tree
-# H Turn off displaying threads
-```
-
-### Network
-
-* 网络分内网与外网
-* 端口提供服务：
-  - 是否暴漏
-  - 修改防火墙规则
-* 端口扫描
-
-```sh
-curl http://icanhazip.com # 查看本机IP
-ping -c 次数 ip # 测试网络畅通性
-ifconfig # 查询本机网络信息
-
-sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
-
-host xx.xxx.com # 显示某域名相关托管服务器/邮件服务器
-ping 8.8.8.8 # 检测连接
-
-# 修改host(已无效)
-sudo su
-curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
-
-# iptables
-iptables -F # 删除所有现有规则
-
-iptables -P INPUT DROP # 设置默认的 chain 策略
-iptables -P FORWORD DROP
-iptables -P OUTPUT DROP
-```
-
-### 身份
-
-* owner
-* group
-* others
-
-```sh
-etc/passwd
-useradd 用户名 # 添加用户
-passwd 用户名  # 设定用户密码
-
-etc/group
-chgrp [-options] [群组名] [文档路径]
-
-choot
-```
-
 ### 权限
 
 一个目录同时具有读权限和执行权限才可以打开并查看内部文件，而一个目录要有写权限才允许在其中创建其它文件，这是因为目录文件实际保存着该目录里面的文件的列表等信息。
@@ -814,7 +816,6 @@ choot
 
 ```sh
 # -r-xr-x---
-
 chmod 755 test # change the permissions mode of a file 修改权限  赋予一个shell文件test.sh可执行权限，拥有者可读、写、执行，群组账号和其他人可读、执行。
 chmod  u g o a | +（加入） -（除去） =（设置） | r w x | 文档路径
 
@@ -873,6 +874,15 @@ groups zhangwang # 查看用户属于那些组（groups）
 cat /etc/group | sort 命令查看某组包含那些成员 # /etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
 sudo usermod -G sudo student # 不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，我们可以使用usermod命令把它加入sudo组用以具备相应的权限。
 sudo deluser student --remove-home # 删除用户及用户相关文件；
+
+etc/passwd
+useradd 用户名 # 添加用户
+passwd 用户名  # 设定用户密码
+
+etc/group
+chgrp [-options] [群组名] [文档路径]
+
+choot
 ```
 
 ### 匹配符
@@ -946,8 +956,6 @@ stands for SSH File Transfer Protocol, or Secure File Transfer Protocol, is a se
 sftp [-oPort=custom_port] sammy@your_server_ip_or_remote_hostname
 
 help | ?
-
-## 默认指令为远程服务器环境
 
 # Local
 lls
