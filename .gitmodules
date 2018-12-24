@@ -235,3 +235,6 @@
 [submodule "Shell/Command-line-text-processing"]
 	path = Shell/Command-line-text-processing
 	url = git@github.com:learnbyexample/Command-line-text-processing.git
+[submodule "Linux/test-your-sysadmin-skills"]
+	path = Linux/test-your-sysadmin-skills
+	url = git@github.com:trimstray/test-your-sysadmin-skills.git
