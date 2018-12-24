@@ -1178,7 +1178,6 @@ conda 是开源包（packages）和虚拟环境（environment）的管理系统�
 #### 使用
 
 - Anaconda Navigator ：用于管理工具包和环境的图形用户界面，后续涉及的众多管理命令也可以在 Navigator 中手工实现。
-- Jupyter notebook ：基于web的交互式计算环境，可以编辑易于人们阅读的文档，用于展示数据分析的过程。
 - qtconsole ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。
 - spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境。
 
@@ -1224,25 +1223,6 @@ conda list -n python34
 conda env export > environment.yaml  # 分享代码的时候，同时也需要将运行环境分享给大家，执行如下命令可以将当前环境下的 package 信息存入名为 environment 的 YAML 文件中
 conda env create -f environment.yaml #  用对方分享的 YAML 文件来创建一摸一样的运行环境。
 ```
-
-#### [Jupyter Notebook](http://jupyter.org/)
-
-```sh
-conda install jupyter notebook
-pip install jupyter notebook
-
-# Anaconda，可以在其 Navigator 图形界面中点击打开 Notebook。
-jupyter notebook
-```
-
-Notebook 文档是由一系列单元（Cell）构成，主要有两种形式的单元：
-
-代码单元：这里是你编写代码的地方，通过按 Shift + Enter 运行代码，其结果显示在本单元下方。代码单元左边有 In [1]: 这样的序列标记，方便人们查看代码的执行次序。
-
-Markdown 单元：在这里对文本进行编辑，采用 markdown 的语法规范，可以设置文本格式、插入链接、图片甚至数学公式。同样使用 Shift + Enter 运行 markdown 单元来显示格式化的文本。
-
-- 编辑数学公式：LaTeX `$$ z = \frac{x}{y} $$`
-- 幻灯片
 
 #### [IPython](https://ipython.org/)
 
