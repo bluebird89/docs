@@ -946,12 +946,6 @@ JavaEE/JDBC/Weblogic
 
 * [插件库](https://plugins.jetbrains.com/idea)
 
-## 框架
-
-- netty
-- Spring
-* [b3log/symphony](https://github.com/b3log/symphony):🎶 一款用 Java 实现的现代化社区（论坛/BBS/社交网络/博客）平台。https://hacpai.com https://sym.b3log.org
-
 ## 测试
 
 * [alibaba/arthas](https://github.com/alibaba/arthas):Alibaba Java Diagnostic Tool Arthas/Alibaba Java诊断利器Arthas https://alibaba.github.io/arthas/
@@ -968,6 +962,11 @@ JavaEE/JDBC/Weblogic
 ## 框架
 
 * [lets-blade/blade](https://github.com/lets-blade/blade):🚀 Lightning fast and elegant mvc framework for Java8 https://lets-blade.com
+
+## project
+
+* [b3log/symphony](https://github.com/b3log/symphony):🎶 一款用 Java 实现的现代化社区（论坛/BBS/社交网络/博客）平台。https://hacpai.com https://sym.b3log.org
+* [macrozheng/mall](https://github.com/macrozheng/mall):mall项目是一套电商系统，包括前台商城系统及后台管理系统，基于SpringBoot+MyBatis实现。 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、设置等模块。 http://39.98.69.210/index.html
 
 ## 面试
 

@@ -335,6 +335,8 @@ kubectl delete deployments hello-minikube1
 * [virtual-kubelet/virtual-kubelet](https://github.com/virtual-kubelet/virtual-kubelet):Virtual Kubelet is an open source Kubernetes kubelet implementation.
 * [operator-framework/operator-sdk](https://github.com/operator-framework/operator-sdk):SDK for building Kubernetes applications. Provides high level APIs, useful abstractions, and project scaffolding. https://coreos.com/operators
 * [kubeflow/kubeflow](https://github.com/kubeflow/kubeflow):Machine Learning Toolkit for Kubernetes
+* [kubernetes/dashboard](https://github.com/kubernetes/dashboard):General-purpose web UI for Kubernetes clusters
+* [genuinetools/binctr](https://github.com/genuinetools/binctr):Fully static, unprivileged, self-contained, containers as executable binaries. https://blog.jessfraz.com/post/getting-towards-real-sandbox-containers/
 
 <http://violetgo.com/blogs/>
 <http://www.winseliu.com/>

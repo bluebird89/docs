@@ -1023,6 +1023,7 @@ MapReduce 框架和库。
 * schedule：人性化的 Python 任务调度库。[官网](https://github.com/dbader/schedule)
 * Spiff：使用纯 Python 实现的强大的工作流引擎。[官网](https://github.com/knipknap/SpiffWorkflow)
 * TaskFlow：一个可以让你方便执行任务的 Python 库，一致并且可靠。[官网](http://docs.openstack.org/developer/taskflow/)
+* [pyinvoke/invoke](https://github.com/pyinvoke/invoke):Pythonic task management & command execution. http://pyinvoke.org
 
 ## 外来函数接口
 
@@ -1312,8 +1313,3 @@ Python 实现的算法和设计模式。
         - 3、项目生命周期理解；
 * 数据结构
     - 时间和空间复杂度、链表、桟和队列、排序、二叉树、python内建数据结构类型；
-
-## 参考
-
-* [Python 开源库及示例代码](https://github.com/programthink/opensource/blob/master/libs/python.wiki)
-* [kriadmin/30-seconds-of-python-code](https://github.com/kriadmin/30-seconds-of-python-code)

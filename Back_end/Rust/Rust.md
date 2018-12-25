@@ -13,6 +13,8 @@ rustc --version
 
 所有工具都安装到 ~/.cargo/bin 目录， 并且您能够在这里找到 Rust 工具链，包括 rustc、cargo 及 rustup。
 
+* [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust heart Emacs
+
 ## 管理
 
 通过rustup管理
@@ -33,6 +35,8 @@ rustc --version
 * [racer-rust/racer](https://github.com/racer-rust/racer):Rust Code Completion utility
 * [crossbeam-rs/crossbeam](https://github.com/crossbeam-rs/crossbeam):Tools for concurrent programming in Rust
 * [rust-lang/rustup.rs](https://github.com/rust-lang/rustup.rs):The Rust toolchain installer
+* search
+    - [tantivy-search/tantivy](https://github.com/tantivy-search/tantivy):Tantivy is a full-text search engine library inspired by Apache Lucene and written in Rust
 
 ## 参考
 
@@ -41,3 +45,4 @@ rustc --version
 * [The Rust Programming Language](https://doc.rust-lang.org/book/second-edition/index.html)
 * [rust-gentle-intro](https://stevedonovan.github.io/rust-gentle-intro/)
 * [KaiserY/trpl-zh-cn](https://github.com/KaiserY/trpl-zh-cn):Rust 程序设计语言（第二版） https://kaisery.github.io/trpl-zh-cn/
+* [rust-unofficial/patterns](https://github.com/rust-unofficial/patterns):A catalogue of Rust design patterns

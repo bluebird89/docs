@@ -498,8 +498,9 @@ optimize table tbl_name;
 ## 工具
 
 * Query Monitor，而且这个插件的数据库查询特性使其成为定位慢SQL查询的宝贵工具。该插件会报告所有页面请求过程中的数据库请求，并且可以通过调用这些查询代码或者原件
+* [Meituan-Dianping/SQLAdvisor](https://github.com/Meituan-Dianping/SQLAdvisor):输入SQL，输出索引优化建议
 
-# 行为规范
+## 行为规范
 
 * 禁止使用应用程序配置文件内的帐号手工访问线上数据库
 * 禁止非DBA对线上数据库进行写操作，修改线上数据需要提交工单，由DBA执行，提交的SQL语句必须经过测试
