@@ -20,12 +20,6 @@
     - [MUSE: Multilingual Unsupervised and Supervised Embeddings](link)
     - [Domain Transfer Network (DTN)](link)
 
-## 工具
-
-* [floydhub/dl-docker](https://github.com/floydhub/dl-docker):An all-in-one Docker image for deep learning. Contains all the popular DL frameworks (TensorFlow, Theano, Torch, Caffe, etc.) https://www.floydhub.com
-* [deepfakes/faceswap](https://github.com/deepfakes/faceswap):Non official project based on original /r/Deepfakes thread. Many thanks to him! https://www.reddit.com/r/deepfakes/
-* [MACE](link)
-
 ## 课程
 
 * [深度学习](https://mooc.study.163.com/university/deeplearning_ai#/c)
@@ -41,6 +35,14 @@
 * [Andrew Ng (吴恩达) 深度学习专项课程](http://coursegraph.com/coursera-specializations-deep-learning)
 * [apachecn/fastai-ml-dl-notes-zh](https://github.com/apachecn/fastai-ml-dl-notes-zh):📖 [译] fast.ai 机器学习和深度学习中文笔记
 * [fchollet/deep-learning-with-python-notebooks](https://github.com/fchollet/deep-learning-with-python-notebooks):Jupyter notebooks for the code samples of the book "Deep Learning with Python"
+* [PaddlePaddle/book](https://github.com/PaddlePaddle/book):Deep Learning 101 with PaddlePaddle （深度学习框架入门教程）
+
+## 工具
+
+* [floydhub/dl-docker](https://github.com/floydhub/dl-docker):An all-in-one Docker image for deep learning. Contains all the popular DL frameworks (TensorFlow, Theano, Torch, Caffe, etc.) https://www.floydhub.com
+* [deepfakes/faceswap](https://github.com/deepfakes/faceswap):Non official project based on original /r/Deepfakes thread. Many thanks to him! https://www.reddit.com/r/deepfakes/
+* [XiaoMi/mace](https://github.com/XiaoMi/mace):MACE is a deep learning inference framework optimized for mobile heterogeneous computing platforms. 
+* [jhfjhfj1/autokeras](https://github.com/jhfjhfj1/autokeras):accessible AutoML for deep learning. http://autokeras.com/
 
 ## 参考
 

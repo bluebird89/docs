@@ -190,7 +190,6 @@ Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，
 * [phith0n/Mind-Map](https://github.com/phith0n/Mind-Map):各种安全相关思维导图整理收集
 * [trimstray/the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge):💫 A collection of awesome lists, manuals, blogs, hacks, one-liners, cli/web tools and more. Especially for System and Network Administrators, DevOps, Pentesters or Security Researchers.
 
-
 ## 案例
 
 * [710leo/ZVulDrill](https://github.com/710leo/ZVulDrill):Web漏洞演练平台

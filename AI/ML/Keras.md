@@ -10,3 +10,4 @@ Deep Learning for humans http://keras.io/
 ## 工具
 
 * [fchollet/keras](https://github.com/fchollet/keras):Deep Learning library for Python. Runs on TensorFlow, Theano, or CNTK. http://keras.io/
+* [philipperemy/keras-attention-mechanism](https://github.com/philipperemy/keras-attention-mechanism):Attention mechanism Implementation for Keras.

@@ -5,6 +5,7 @@ Status, process, and documents for ECMA262 https://tc39.github.io/ecma262/
 ## 参考
 
 * [standard-things/esm](https://github.com/standard-things/esm)：Tomorrow's ECMAScript modules today!
+* [tc39/proposals](https://github.com/tc39/proposals):Tracking ECMAScript Proposals https://tc39.github.io/process-document/
 
 ## 工具
 

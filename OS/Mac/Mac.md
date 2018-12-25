@@ -131,6 +131,7 @@ smaba
 - 下载
     - bitlord
     - Folx
+    - [CodeTips/BaiduNetdiskPlugin-macOS](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~ 
 -   工具
     -   [CheatSheet] 长按⌘键可以显示当前程序快捷键
     -   [flux](https://justgetflux.com/)
@@ -158,7 +159,7 @@ smaba
     -   [Reeder 3](http://reederapp.com/mac/)
     -   feedly
     -   leaf
--   管理
+- 管理
     -   Keyboard Maestro:流程制作工具
     -   OmniFocus：GTD思路的应用
     -   Fantastical：日程管理应用
@@ -169,7 +170,7 @@ smaba
     -   [trello](https://trello.com/home): Project management tool
     -   [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
     -   Day One - Digital journal
--   文档
+- 文档
     -   [dash](https://kapeli.com/dash):语言文档
     -   Quiver：文档管理器
     -   文档：[apidoc](http://apidocjs.com/)
