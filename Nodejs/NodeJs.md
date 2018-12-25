@@ -750,6 +750,7 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 * [NodeJS的代码调试和性能调优](http://www.cnblogs.com/hustskyking/p/how-to-build-a-https-server.html)
 * [swbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
 * [Node.js v8.x 中文文档](https://www.nodeapp.cn/)
+* [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list (November 2018) https://twitter.com/nodepractices/
 
 ## 工具
 

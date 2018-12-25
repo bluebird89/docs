@@ -1383,7 +1383,6 @@ $controller = new UsersController(new FileLog());
 $controller->register();
 ```
 
-
 ## 时间
 
 ```
@@ -1393,6 +1392,8 @@ var_dump(date("Y-m-d", strtotime("last day of -1 month", strtotime("2017-03-31")
 var_dump(date("Y-m-d", strtotime("first day of +1 month", strtotime("2017-08-31"))));
 ////输出2017-09-01
 ```
+
+## JSON
 
 ## 引用
 

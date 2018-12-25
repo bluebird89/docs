@@ -31,6 +31,13 @@
 
 * [gothinkster/realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 https://realworld.io/
 
+## resource
+
+- [Java World](http://www.javaworld.com/)
+- [Java SE 技术文档](http://docs.oracle.com/javase/)
+- [DZone](http://www.dzone.com)
+- [Stackoverflow](http://stackoverflow.com/)
+
 ## 参考
 
 * [30-seconds/30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code)：Curated collection of useful Javascript snippets that you can understand in 30 seconds or less. https://30secondsofcode.org/
@@ -41,10 +48,6 @@
 ## 工具
 
 * [dawnlabs/carbon](https://github.com/dawnlabs/carbon):🎨 Create and share beautiful images of your source code https://dawnlabs.io/carbon
-- [Java World](http://www.javaworld.com/)
-- [Java SE 技术文档](http://docs.oracle.com/javase/)
-- [DZone](http://www.dzone.com)
-- [Stackoverflow](http://stackoverflow.com/)
 - [adambard/learnxinyminutes-docs](https://github.com/adambard/learnxinyminutes-docs):Code documentation written as code! How novel and totally my idea! http://learnxinyminutes.com/
 - [justjavac/Programming-Alpha-To-Omega](https://github.com/justjavac/Programming-Alpha-To-Omega):从零开始学编程 系列汇总（从 α 到 Ω）
 * [unbug/codelf](https://github.com/unbug/codelf):Best GitHub stars, repositories tagger and organizer. Search over projects from Github, Bitbucket, Google Code, Codeplex, Sourceforge, Fedora Project, GitLab to find real-world usage variable names https://unbug.github.io/codelf/

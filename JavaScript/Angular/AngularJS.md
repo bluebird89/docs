@@ -87,6 +87,7 @@ ng generate module my-module # 模块Modulew
 ## 工具
 
 * [chieffancypants/angular-loading-bar](https://github.com/chieffancypants/angular-loading-bar):A fully automatic loading / progress bar for your angular apps. 
+* [akveo/nebular](https://github.com/akveo/nebular):Angular 7 Components, Auth and Security https://akveo.github.io/nebular
 
 ## 地图
 
