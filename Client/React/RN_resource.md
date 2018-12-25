@@ -81,6 +81,7 @@
     - [searchkit/searchkit](https://github.com/searchkit/searchkit):React UI components / widgets. The easiest way to build a great search experience with Elasticsearch. http://www.searchkit.co
 * 文档
     - [nfl/react-helmet](https://github.com/nfl/react-helmet):A document head manager for React
+    - [reactjs/react-docgen](https://github.com/reactjs/react-docgen):A CLI and toolbox to extract information from React component files for documentation generation purposes. 
 * 测试
     - [kentcdodds/react-testing-library](https://github.com/kentcdodds/react-testing-library):🐐 Simple and complete React DOM testing utilities that encourage good testing practices. http://npm.im/react-testing-library
     - [airbnb/enzyme](https://github.com/airbnb/enzyme):JavaScript Testing utilities for React https://airbnb.io/enzyme/
@@ -156,6 +157,7 @@
 * [aholachek/react-flip-toolkit](https://github.com/aholachek/react-flip-toolkit):An animation utility library for highly configurable layout transitions
 * [sokra/rawact](https://github.com/sokra/rawact):[POC] A babel plugin which compiles React.js components into native DOM instructions to eliminate the need for the react library at runtime.
 * [Bogdan-Lyashenko/Under-the-hood-ReactJS](https://github.com/Bogdan-Lyashenko/Under-the-hood-ReactJS):Entire React code base explanation by visual block schemes (Stack version)
+* [FormidableLabs/react-live](https://github.com/FormidableLabs/react-live):A production-focused playground for live editing React components https://react-live.kitten.sh/
 
 ## 扩展
 

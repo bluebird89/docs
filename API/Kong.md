@@ -1,7 +1,6 @@
 # [Kong/kong](https://github.com/Kong/kong)
 
-🐒 The Microservice API Gateway https://konghq.com/install
-
+gorilla The Cloud-Native API Gateway & Service Mesh https://konghq.com/install
 
 ## 工具
 

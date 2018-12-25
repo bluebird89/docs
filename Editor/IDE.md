@@ -2,7 +2,6 @@
 
 - IntelliJ IDEA:业界被公认为最好的java开发工具之一
 - PyCharm
-- PHPStrom
 - WebStorm:一款JavaScript 开发工具
 - [Komodo IDE](https://www.activestate.com/)
 - CLion:专为C/C++所创建的跨平台IDE
@@ -11,6 +10,7 @@
 - [visualfc/liteide](https://github.com/visualfc/liteide):LiteIDE is a simple, open source, cross-platform Go IDE.
 * [CodeSandbox](https://codesandbox.io/)
   - [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ https://codesandbox.io
+- [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
 
 ## PHPStrom
 
