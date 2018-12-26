@@ -980,6 +980,7 @@ JavaEE/JDBC/Weblogic
 * [史上最精炼JAVA知识点基础总结](http://www.jianshu.com/p/9caf1c755889)
 * [shuzheng/zheng](https://github.com/shuzheng/zheng):基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、支付中心、用户管理（支持第三方登录）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。 http://47.93.195.63/zheng-upms-server
 * [apachecn/thinking-in-java-zh](https://github.com/apachecn/thinking-in-java-zh):📖 Java 编程思想
+* [doocs/advanced-java](https://github.com/doocs/advanced-java):😮 互联网 Java 工程师进阶知识完全扫盲 https://doocs.github.io/advanced-java
 
 ## 工具
 
@@ -999,6 +1000,7 @@ JavaEE/JDBC/Weblogic
 * [eclipse-vertx/vert.x](https://github.com/eclipse-vertx/vert.x):Vert.x is a tool-kit for building reactive applications on the JVM http://vertx.io
 * flow-control
   - [alibaba/Sentinel](https://github.com/alibaba/Sentinel):A lightweight flow-control library providing high-available protection and monitoring (高可用防护的流量管理框架)
+* [google/guava](https://github.com/google/guava):Google core libraries for Java
 
 ## 参考
 

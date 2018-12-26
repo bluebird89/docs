@@ -410,6 +410,10 @@
 * [addyosmani/essential-js-design-patterns](https://github.com/addyosmani/essential-js-design-patterns):Repo for my 'Learning JavaScript Design Patterns' book https://addyosmani.com/resources/essentialjsdesignpatterns/book/
 - [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API)
 
+## JSX
+
+* [developit/htm](https://github.com/developit/htm):Hyperscript Tagged Markup: JSX alternative using standard tagged templates, with compiler support.
+
 ## 教程
 
 * [JavaScript全栈教程](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000)
