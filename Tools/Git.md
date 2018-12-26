@@ -1138,6 +1138,12 @@ git submodule update
 # 删除 首先删除.gitsubmodule中的项目配置
 git rm --cached another_project # 删除项目
 vim .git/config # ...remove another_project...
+
+# git status contain commit-dirty: regarded as dirty if they have any modified files or untracked files
+git status --ignore-submodules=dirty
+
+git reset HEAD .
+git checkout --  .
 ```
 
 ### subtree
