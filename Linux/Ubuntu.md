@@ -58,6 +58,16 @@ export：显示从 Shell 中导出成环境变量的变量
 unset temp : 删除变量temp
 
 source ~/.zshrc
+
+sudo update-alternatives --config editor # 修改默认编辑器
+```
+
+## screen
+
+* tweak
+
+```sh
+sudo apt install gnome-tweak-tool
 ```
 
 ### 网络配置
@@ -102,43 +112,9 @@ host xx.xxx.com：显示某域名相关托管服务器/邮件服务器
 ping 8.8.8.8检测连接
 
 # host  文件修改 以Ubuntu为主要使用系统，不用修改hosts can access google
-sudo su
+sudo su # switch root
 curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 ```
-
-## 软件
-
-* 云笔记:simplenote
-* video: VLC
-* editor: atom
-* oh my zsh 而非 zsh fish
-* KchmViewer:阅读CHM
-* LaTeX
-* Chromium
-* Nylas N1：超好用的跨平台电子邮件客户端  Thunderbird
-* sougou
-* Spotify for Linux：音乐流媒体服务
-* Lightworks Free：专业的非线视频编辑器
-* Viber：跨平台的 Skype 替代品
-* Vivaldi：功能强大的 web 浏览器
-* BleachBit: cleaner(softer center)
-* albert
-* 听播客: Vocal
-* PDF 阅读：Foxit Reader
-* gimp
-* Gtile:分屏工具
-* MySQL Workbench
-* Cloud music
-* shadowshocks
-* Jitsy:通讯工具
-* Synaptic：软件管理
-* thunderbird mail: can  add addon to manage rss
-* xchm:`sudo apt-get install xchm`
-* [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
-* [cherrytree](www.giuspen.com/cherrytree/):note
-* [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite
-* [Sayonara Player](https://sayonara-player.com/index.php)
-* Disk Usage Analyzer
 
 ### 软件安装
 
@@ -156,25 +132,63 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 * 安装某个软件时，如果该软件有其它依赖程序，系统会为我们自动安装所以来的程序；
 * 如果本地的数据库不够新，可能就会发生搜索不到的情况，这时候需要我们更新本地的数据库，使用命令sudo apt-get update可执行更新；
 * 软件源镜像服务器可能会有多个，有时候某些特定的软件需要我们添加特定的源；
+* deb包是Debian，Ubuntu等Linux发行版的软件安装包，扩展名为.deb，是类似于rpm的软件包，Debian，Ubuntu系统不推荐使用deb软件包，因为要解决软件包依赖问题，安装也比较麻烦。下载相应deb软件包，使用dpkg命令来安装
 
 ```sh
+# fix ubuntu
+sudo rm/var/lib/apt/lists/lock
+sudo rm/var/lib/dpkg/lock
+sudo rm/var/lib/dpkg/lock-frontend
+
+sudo dpkg --configure -a
+sudo apt clean
+sudo apt update --fix-missing
+sudo apt install -f
+
+sudo dpkg --configure -a
+sudo apt upgrade
+sudo apt dist-upgrade
+
+sudo apt-cache search softname1 softname2 softname3...... # 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
 sudo apt-get install [packagename] # 其后加上软件包名，用于安装一个软件包
 sudo apt-get update # 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表
+sudo apt-get dist-upgrade
 sudo apt-get upgrade # 升级本地可更新的全部软件包，但存在依赖问题时将不会升级，通常会在更新之前执行一次update
 dist-upgrade # 解决依赖关系并升级(存在一定危险性)
+
 sudo apt-get remove # 移除已安装的软件包，包括与被移除软件包有依赖关系的软件包，但不包含软件包的配置文件
+sudo apt-get remove netease-cloud-music
 sudo apt-get autoremove # 移除之前被其他软件包依赖，但现在不再被使用的软件包  purge 与remove相同，但会完全移除软件包，包含其配置文件
 sudo apt-get clean # 移除下载到本地的已经安装的软件包，默认保存在/var/cache/apt/archives/
 sudo apt-get autoclean #移除已安装的软件的旧版本软件包
 
+dpkg
 ## 参数
+-i|--install
+-l|--list #简明地列出软件包的状态。
+-r|--remove # 只是删掉数据和可执行文件
+-P|--purge # 还删除所有的配制文件
+-V|--verify  # 检查包的完整性
+-s|--status # 软件包的详细信息
+-S|--search
+-C|--audit  # 检查是否有软件包残损
+-c|--contents # 包含的文件结构
+-L|--listfiles # 所有文件清单
+-i 安装指定deb包,之后修复依赖关系的安装`sudo apt-get -f install`
+-R 后面加上目录名，用于安装该目录下的所有deb安装包
+-r remove，移除某个已安装的软件包
+-I 显示deb包文件的信息
+-s 显示已安装软件的信息
+-S 搜索已安装的软件包
+-L 显示已安装软件包的目录信息
+
 -y # 自动回应是否安装软件包的选项，在一些自动化安装脚本中使用这个参数将十分有用
 -q # 静默安装方式，指定多个q或者-q=#,#表示数字，用于设定静默级别，这在你不想要在安装软件包时屏幕输出过多时很有用
 -f # 修复损坏的依赖关系
 -d # 只下载不安装git aa
 --reinstall # 重新安装已经安装但可能存在问题的软件包
 --install-suggests # 同时安装APT给出的建议安装的软件包
-sudo apt-cache search softname1 softname2 softname3...... # 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
+
 sudo add-apt-repository --remove ppa:finalterm/daily # remove
 
 sudo dpkg -i netease-cloud-music_1.1.0_amd64_ubuntu.deb # install failed.depency to install
@@ -183,8 +197,19 @@ sudo apt --fix-broken install # continue install
 sudo apt-get -f install # 解决依赖问题
 
 dpkg -l | grep vim
-sudo apt-get remove netease-cloud-music
 ```
+
+## VM
+
+```sh
+codesudo apt install open-vm-tools open-vm-tools-desktop # 重启
+```
+
+## keywordmap
+
+* 工作区
+  * Win 键，进入活动概览视图模式
+  * Ctrl + Alt + 方向箭头
 
 ## 源管理
 
@@ -194,6 +219,7 @@ sudo apt-get remove netease-cloud-music
 [Aliyun](http://mirrors.aliyun.com)
 
 ```sh
+# /etc/apt/sources.list.d
 sudo mv /etc/apt/sources.list /etc/apt/sources.list.backup #备份系统默认的软件源
 sudo vim /etc/apt/sources.list
 
@@ -206,18 +232,6 @@ sudo apt update --fix-missing
 
 sudo apt-get upgrade
 ```
-
-> 从磁盘安装deb安装包
-
-下载相应deb软件包，使用dpkg命令来安装
-
-* -i 安装指定deb包,之后修复依赖关系的安装`sudo apt-get -f install`
-* -R 后面加上目录名，用于安装该目录下的所有deb安装包
-* -r remove，移除某个已安装的软件包
-* -I 显示deb包文件的信息
-* -s 显示已安装软件的信息
-* -S 搜索已安装的软件包
-* -L 显示已安装软件包的目录信息
 
 > 从二进制软件包安装
 
@@ -245,31 +259,12 @@ sudo ufw allow https
 sudo ufw enable/disable
 ```
 
-### 文件管理
+## 用户管理
 
-Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能使用本地磁盘分区的文件系统，也可以使用网络上的文件系统。Linux的大部分目录结构是依据FHS标准（英文：Filesystem Hierarchy Standard 中文：文件系统层次结构标准）规定好的，多数 Linux 版本采用这种文件组织形式，FHS 定义了系统中每个区域的用途、所需要的最小构成的文件和目录同时还给出了例外处理与矛盾处理。
-
-FHS包含两层规范：
-
-* / 下面的各个目录应该要放什么文件数据，例如 /etc 应该放置设置文件，/bin 与 /sbin 则应该放置可执行文件等等。
-* 针对 /usr 及 /var 这两个目录的子目录来定义。例如 /var/log 放置系统登录文件，/usr/share 放置共享数据等等。
-
-> 文件类型
-
-* 普通文件：一般是用一些相关的应用程序创建的（如图像工具、文档工具、归档工具... 或 cp工具等),这类文件的删除方式是用rm 命令,而创建使用touch命令,用符号-表示；
-* 目录：目录在Linux是一个比较特殊的文件，用字符d表示，删除用rm 或rmdir命令；
-* 块设备文件：存在于/dev目录下，如硬盘，光驱等设备，用字符d表示;
-* 设备文件：（ /dev 目录下有各种设备文件，大都跟具体的硬件设备相关），如猫的串口设备，用字符c表示；
-* socket文件;用字符s表示，比如启动MySQL服务器时，产生的mysql.sock的文件;
-* pipe 管道文件：可以实现两个程序（可以从不同机器上telnet）实时交互，用字符p表示；
-* 链接文件:软链接等同于 Windows 上的快捷方式；用字符l表示； 软硬链接文件的共同点和区别：无论是修改软链接，硬链接生成的文件还是直接修改源文件，相应的文件都会改变，但是如果删除了源文件，硬链接生成的文件依旧存在而软链接生成的文件就不再有效了。
-
-> 用户管理
-
-每次次新建用户如果不指定用户组的话，默认会自动创建一个与用户名相同的用户组； 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限。
-家目录修改后需要手动创建，不同于创建用户家目录设置
-创建用户时设置家目录，该目录会自动创建
-修改用户家目录时，该目录不会自动创建(需要手动创建)
+* 每次次新建用户如果不指定用户组的话，默认会自动创建一个与用户名相同的用户组； 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限。
+* 家目录修改后需要手动创建，不同于创建用户家目录设置
+* 创建用户时设置家目录，该目录会自动创建
+* 修改用户家目录时，该目录不会自动创建(需要手动创建)
 
 ```sh
 who am <i>  # </i>只列出用户名
@@ -296,6 +291,7 @@ useradd  -g 组编号 -u 用户编号 -d 家目录 username # 创建用户同时
 
 usermod  -g gid  username     # 修改组别是常见操作
 usermod  -g gid -u uid -d 家目录  -l  newname   username # 修改组别、用户编号、家目录、名字
+usermod techmoe -G sudo # 用户添加进sudo组
 
 userdel username     # 删除用户(删除passwd文件对应信息)，此时其家目录需要手动删除
 userdel -r username  # 删除用户的同时也删除其“家目录”
@@ -303,7 +299,38 @@ userdel -r username  # 删除用户的同时也删除其“家目录”
 groupadd  groupname
 groupmod -g gid  -n newname  groupname
 groupdel 组名
+
+# 关掉sudo的密码:所有sudo组内的用户使用sudo时就不需要密码
+sudo visudo
+
+%sudo   ALL=(ALL:ALL) ALL # change
+%sudo   ALL=(ALL:ALL) NOPASSWD:ALL
+
+# 关闭root账号登陆和使用密码登陆
+# /etc/ssh/sshd_config
+PermitRootLogin no # 关闭root账号登陆
+PasswordAuthentication yes # 关闭密码登陆
+systemctl reload ssh.service
 ```
+
+### 文件管理
+
+Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能使用本地磁盘分区的文件系统，也可以使用网络上的文件系统。Linux的大部分目录结构是依据FHS标准（英文：Filesystem Hierarchy Standard 中文：文件系统层次结构标准）规定好的，多数 Linux 版本采用这种文件组织形式，FHS 定义了系统中每个区域的用途、所需要的最小构成的文件和目录同时还给出了例外处理与矛盾处理。
+
+FHS包含两层规范：
+
+* / 下面的各个目录应该要放什么文件数据，例如 /etc 应该放置设置文件，/bin 与 /sbin 则应该放置可执行文件等等。
+* 针对 /usr 及 /var 这两个目录的子目录来定义。例如 /var/log 放置系统登录文件，/usr/share 放置共享数据等等。
+
+> 文件类型
+
+* 普通文件：一般是用一些相关的应用程序创建的（如图像工具、文档工具、归档工具... 或 cp工具等),这类文件的删除方式是用rm 命令,而创建使用touch命令,用符号-表示；
+* 目录：目录在Linux是一个比较特殊的文件，用字符d表示，删除用rm 或rmdir命令；
+* 块设备文件：存在于/dev目录下，如硬盘，光驱等设备，用字符d表示;
+* 设备文件：（ /dev 目录下有各种设备文件，大都跟具体的硬件设备相关），如猫的串口设备，用字符c表示；
+* socket文件;用字符s表示，比如启动MySQL服务器时，产生的mysql.sock的文件;
+* pipe 管道文件：可以实现两个程序（可以从不同机器上telnet）实时交互，用字符p表示；
+* 链接文件:软链接等同于 Windows 上的快捷方式；用字符l表示； 软硬链接文件的共同点和区别：无论是修改软链接，硬链接生成的文件还是直接修改源文件，相应的文件都会改变，但是如果删除了源文件，硬链接生成的文件依旧存在而软链接生成的文件就不再有效了。
 
 > 文件权限
 
@@ -524,52 +551,52 @@ Ubuntu具体说来，它默认提供七个终端，其中第一个到第六个�
 * Shift+PgDn:将终端显示向下滚动;
 * Ctrl+d:键盘输入结束或退出终端
 * Tab 自动补全
-Ctrl+a 光标移动到开始位置
-Ctrl+e 光标移动到最末尾
-Ctrl+k 删除此处至末尾的所有内容
-Ctrl+u 删除此处至开始的所有内容
-Ctrl+d 删除当前字符
-Ctrl+h 删除当前字符前一个字符
-Ctrl+w 删除此处到左边的单词
-Ctrl+y 粘贴由 Ctrl+u ， Ctrl+d ， Ctrl+w 删除的单词
-Ctrl+l 相当于clear，即清屏
-Ctrl+r 查找历史命令
-Ctrl+b 向回移动光标
-Ctrl+f 向前移动光标
-Ctrl+t 将光标位置的字符和前一个字符进行位置交换
-Ctrl+& 恢复 ctrl+h 或者 ctrl+d 或者 ctrl+w 删除的内容
-Ctrl+S 暂停屏幕输出
-Ctrl+Q 继续屏幕输出
-Ctrl+Left-Arrow 光标移动到上一个单词的词首
-Ctrl+Right-Arrow 光标移动到下一个单词的词尾
-Ctrl+p 向上显示缓存命令
-Ctrl+n 向下显示缓存命令
-Ctrl+d 关闭终端
-Ctrl+xx 在EOL和当前光标位置移动
-Ctrl+x@ 显示可能hostname补全
-Ctrl+c 终止进程/命令
-Shift +上或下 终端上下滚动
-Shift+PgUp/PgDn 终端上下翻页滚动
-Ctrl+Shift+n 新终端
-alt+F2 输入gnome-terminal打开终端
-Shift+Ctrl+T 打开新的标签页
-Shift+Ctrl+W 关闭标签页
-Shift+Ctrl+C 复制
-Shift+Ctrl+V 粘贴
-Alt+数字 切换至对应的标签页
-Shift+Ctrl+N 打开新的终端窗口
-Shift+Ctrl+Q 管壁终端窗口
-Shift+Ctrl+PgUp/PgDn 左移右移标签页
-Ctrl+PgUp/PgDn 切换标签页
-F1 打开帮助指南
-F10 激活菜单栏
-F11 全屏切换
-Alt+F 打开 “文件” 菜单（file）
-Alt+E 打开 “编辑” 菜单（edit）
-Alt+V 打开 “查看” 菜单（view）
-Alt+S 打开 “搜索” 菜单（search）
-Alt+T 打开 “终端” 菜单（terminal）
-Alt+H 打开 “帮助” 菜单（help）
+* Ctrl+a 光标移动到开始位置
+* Ctrl+e 光标移动到最末尾
+* Ctrl+k 删除此处至末尾的所有内容
+* Ctrl+u 删除此处至开始的所有内容
+* Ctrl+d 删除当前字符
+* Ctrl+h 删除当前字符前一个字符
+* Ctrl+w 删除此处到左边的单词
+* Ctrl+y 粘贴由 Ctrl+u ， Ctrl+d ， Ctrl+w 删除的单词
+* Ctrl+l 相当于clear，即清屏
+* Ctrl+r 查找历史命令
+* Ctrl+b 向回移动光标
+* Ctrl+f 向前移动光标
+* Ctrl+t 将光标位置的字符和前一个字符进行位置交换
+* Ctrl+& 恢复 ctrl+h 或者 ctrl+d 或者 ctrl+w 删除的内容
+* Ctrl+S 暂停屏幕输出
+* Ctrl+Q 继续屏幕输出
+* Ctrl+Left-Arrow 光标移动到上一个单词的词首
+* Ctrl+Right-Arrow 光标移动到下一个单词的词尾
+* Ctrl+p 向上显示缓存命令
+* Ctrl+n 向下显示缓存命令
+* Ctrl+d 关闭终端
+* Ctrl+xx 在EOL和当前光标位置移动
+* Ctrl+x@ 显示可能hostname补全
+* Ctrl+c 终止进程/命令
+* Shift +上或下 终端上下滚动
+* Shift+PgUp/PgDn 终端上下翻页滚动
+* Ctrl+Shift+n 新终端
+* alt+F2 输入gnome-terminal打开终端
+* Shift+Ctrl+T 打开新的标签页
+* Shift+Ctrl+W 关闭标签页
+* Shift+Ctrl+C 复制
+* Shift+Ctrl+V 粘贴
+* Alt+数字 切换至对应的标签页
+* Shift+Ctrl+N 打开新的终端窗口
+* Shift+Ctrl+Q 管壁终端窗口
+* Shift+Ctrl+PgUp/PgDn 左移右移标签页
+* Ctrl+PgUp/PgDn 切换标签页
+* F1 打开帮助指南
+* F10 激活菜单栏
+* F11 全屏切换
+* Alt+F 打开 “文件” 菜单（file）
+* Alt+E 打开 “编辑” 菜单（edit）
+* Alt+V 打开 “查看” 菜单（view）
+* Alt+S 打开 “搜索” 菜单（search）
+* Alt+T 打开 “终端” 菜单（terminal）
+* Alt+H 打开 “帮助” 菜单（help）
 
 > 系统相关
 
@@ -617,7 +644,7 @@ init 5
 chkconfig --list sshd
 ```
 
-###font
+### font
 
 ```sh
 sudo apt install fonts-firacode
@@ -697,6 +724,9 @@ ssh username@remote_host ls /var/www
 command line或者package
 
 ```sh
+sudo apt install fcitx fcitx-googlepinyin im-config
+im-config
+
 # download sogoupinyin_2.2.0.0108_amd64.deb
 sudo dpkg  -i   sogoupinyin_2.2.0.0108_amd64.deb # 手动安装
 
@@ -990,17 +1020,13 @@ sudo apt install net-tools       # ifconfig
 sudo apt install iputils-ping
 
 记录下网卡名字，比如我的，有enp4s0f2、lo、wlp9s0b1三个
-2）、编辑文件：
 
-sudo vim /etc/sysctl.conf
-
-在末尾添加：
-
-    net.ipv6.conf.all.disable_ipv6 = 1
-    net.ipv6.conf.default.disable_ipv6 = 1
-    net.ipv6.conf.lo.disable_ipv6 = 1 #需跟网卡信息对应
-    net.ipv6.conf.enp4s0f2.disable_ipv6 = 1 #需跟网卡信息对应
-    net.ipv6.conf.wlp9s0b1.disable_ipv6 = 1 #需跟网卡信息对应
+# 编辑文件sudo vim /etc/sysctl.conf 在末尾添加
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1 #需跟网卡信息对应
+net.ipv6.conf.enp4s0f2.disable_ipv6 = 1 #需跟网卡信息对应
+net.ipv6.conf.wlp9s0b1.disable_ipv6 = 1 #需跟网卡信息对应
 sudo sysctl -p
 
 xset m 0 0 # 设置鼠标加速度
@@ -1009,7 +1035,6 @@ xset m 0 0 # 设置鼠标加速度
 sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
 sudo apt update
 sudo apt install indicator-sysmonitor
-
 
 sudo apt-get remove thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku onboard deja-dup
 sudo apt-get autoremove
@@ -1070,10 +1095,5 @@ sudo aptitude -f install <packagename>
 ## 参考
 
 * [官网](https://www.ubuntu.com)
-* [torvalds/linux](https://github.com/torvalds/linux): Linux kernel source tree
-* [aleksandar-todorovic/awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
 * [LewisVo/Awesome-Linux-Software](https://github.com/LewisVo/Awesome-Linux-Software):🐧 A list of awesome applications, software, tools and other materials for Linux distros.
-* [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
-* [LVS：跑在Linux内核上的负载均衡器](https://liangshuang.name/2017/11/19/lvs/)
-* [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/index.html)
 * [kholia/OSX-KVM](https://github.com/kholia/OSX-KVM):Run El Capitan, macOS Sierra, High Sierra and Mojave on QEMU/KVM. No support is provided at the moment.

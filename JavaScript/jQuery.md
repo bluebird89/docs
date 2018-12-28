@@ -687,3 +687,4 @@ var jq=jQuery.noConflict();
 ## 参考
 
 * [oneuijs/You-Dont-Need-jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery):Examples of how to do query, style, dom, ajax, event etc like jQuery with plain javascript.
+* [plugin](http://www.jq22.com/)
