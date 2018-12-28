@@ -695,6 +695,8 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 
 ## 扩展
 
+* main
+  - [nodesource/distributions](https://github.com/nodesource/distributions):NodeSource Node.js Binary Distributions
 * 三方库
   - [Dist](http://nodejs.org/dist/)
 * Compiler
@@ -737,6 +739,10 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 * compression
   - [expressjs/compression](https://github.com/expressjs/compression):Node.js compression middleware
 
+## 面试
+
+* [jimuyouyou/node-interview-questions](https://github.com/jimuyouyou/node-interview-questions)
+
 ## 教程
 
 * [ElemeFE/node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
@@ -758,6 +764,7 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 * [noble/bleno](https://github.com/noble/bleno):A Node.js module for implementing BLE (Bluetooth Low Energy) peripherals
 
-## 面试
+##  reference
 
-* [jimuyouyou/node-interview-questions](https://github.com/jimuyouyou/node-interview-questions)
+* [Guides](https://nodejs.org/en/docs/guides/)
+* [Node.js v11.6.0 Documentation](https://nodejs.org/api/)

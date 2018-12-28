@@ -113,12 +113,6 @@
 -   [Keynote](https://www.apple.com/cn/keynote/)
 - [文档转换](https://smallpdf.com/)
 
-## 思维导图
-
--   [百度脑图](https://naotu.baidu.com)
--   MindNode mindnode.com
--   一起写 yiqixie.com
-
 ## 表单
 
 -   金数据 jinshuju.net
@@ -188,10 +182,6 @@
 -   [Flowerowl/ici](https://github.com/Flowerowl/ici):💥A dictionary used by programmers in the command line https://pypi.python.org/pypi/ici/
 -   [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf):⭐️ 给变量起名的事情上，为你生命省 3s (Save 3 seconds of your life when naming things.)
 
-## 论文
-
-* [tpn/pdfs](https://github.com/tpn/pdfs):Technically-oriented PDF Collection (Papers, Specs, Decks, Manuals, etc)
-
 ## 文章
 
 * [xitu/gold-miner](https://github.com/xitu/gold-miner):🥇掘金翻译计划，可能是世界最大最好的英译中技术社区，最懂读者和译者的翻译平台： https://juejin.im/tag/掘金翻译计划
@@ -222,3 +212,4 @@
 -   [learnbyexample/curated_resources](https://github.com/learnbyexample/curated_resources):📚 Curated lists for programming, books, movies, music, games, etc
 -   [stanzhai/be-a-professional-programmer](https://github.com/stanzhai/be-a-professional-programmer):成为专业程序员路上用到的各种优秀资料、神器及框架 http://tools.stanzhai.site
 -   [hedengcheng/tech](https://github.com/hedengcheng/tech):programming, database, distributed systemee
+* [Tutorials & training to grow your development skills](https://www.ibm.com/developerworks/learn/)

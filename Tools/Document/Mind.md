@@ -6,6 +6,8 @@
 
 * FreeMind
 * XMind
-* 百度脑图
 * MindMaster
+* [百度脑图](https://naotu.baidu.com)
+- MindNode mindnode.com
+- 一起写 yiqixie.com
 
