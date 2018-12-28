@@ -100,6 +100,30 @@ class Dummy {
 ![Alt text](http://g.gravizo.com/g?
     Human *-- Brain)
 
+## [Graphviz - Graph Visualization Software](http://www.graphviz.org/gallery/)
+
+https://graphviz.gitlab.io/
+
+* install and add  graphviz/bin to environment
+* dot --help
+
+```sh
+# first.dot
+digraph first2{
+a;
+b;
+c;
+d;
+a->b;
+b->d;
+c->d;
+}
+
+dot -Tpng first.dot -o first.png # 用的是dot布局 -T表示格式，即画成png格式，-o表示output
+```
+
+* [使用graphviz绘制流程图](http://icodeit.org/2012/01/%E4%BD%BF%E7%94%A8graphviz%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/)
+
 ## 软件
 
 - ProcessOn

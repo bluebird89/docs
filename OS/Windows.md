@@ -252,7 +252,12 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
 * Windows Forms
 * Windows UI XAML Library（WinUI）
 
-## 工具
+## resource
 
-* [duilib/duilib](https://github.com/duilib/duilib)
 * [xiazaiba](https://www.xiazaiba.com/)
+* [AlternativeTo](https://alternativeto.net/):Crowdsourced software recommendations
+* [Slant](https://www.slant.co/):Trustworthy product rankings for all your shopping needs
+
+## UI
+
+* [duilib/duilib](https://github.com/duilib/duilib):Duilib是一个Windows下免费开源的DirectUI界面库

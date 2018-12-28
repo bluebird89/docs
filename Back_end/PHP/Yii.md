@@ -834,6 +834,27 @@ User::find()->select('count(*)')->where(['user_id' => $userId, 'status' => 0])->
 
 User::findBySql(‘SELECT * FROM user‘)->all();  # 此方法是用 sql 语句查询 user 表里面的所有数据；
 User::findBySql(‘SELECT * FROM user‘)->one();  # 此方法是用 sql 语句查询 user 表里面的一条数据；
+
+save() # return bool
+```
+
+### transaction
+
+```php
+$transaction = $connection->beginTransaction();
+try {
+    $connection->createCommand($sql1)->execute();
+    $connection->createCommand($sql2)->execute();
+    //.... other SQL executions
+    $transaction->commit();
+} catch (\Exception $e) {
+    $transaction->rollBack();
+    throw $e;
+} catch (\Throwable $e) {
+    $transaction->rollBack();
+    throw $e;
+}
+# rollback 会占id
 ```
 
 ## 安全
@@ -956,6 +977,15 @@ browser reopen generate new cookie
 -   [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
 -   [2amigos/yii2-file-upload-widget](https://github.com/2amigos/yii2-file-upload-widget):BlueImp File Upload Widget for Yii2
 
+## 项目
+
+* [yiisoft/yii2-app-basic](https://github.com/yiisoft/yii2-app-basic):Yii 2.0 Basic Application Template http://www.yiiframework.com
+* [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced):Yii 2.0 Advanced Application Template http://www.yiiframework.com
+* [fecshop/yii2_fecshop](https://github.com/fecshop/yii2_fecshop):yii2 ( PHP ) fecshop core code used for ecommerce shop 多语言多货币多入口的开源电商 B2C 商城，支持移动端vue, app, html5 http://www.fecshop.com
+* [EleTeam/Shop-PHP-Yii2](https://github.com/EleTeam/Shop-PHP-Yii2):EleTeam开源项目-电商全套解决方案之PHP版-Shop-for-PHP-Yii2。一个类似京东/天猫/淘宝的商城，有对应的APP支持，由EleTeam团队维护！
+* [changchang700/yii2cms](https://github.com/changchang700/yii2cms):一款和layui搭配的后台管理cms，集成了权限、用户、配置等常用功能，你可以在这些基础上修改。
+* [yii2-starter-kit/yii2-starter-kit](https://github.com/yii2-starter-kit/yii2-starter-kit):Yii2 Starter Kit http://yii2-starter-kit.terentev.net
+
 ## 参考
 
 * [深入理解 Yii2.0](http://www.digpage.com/index.html)
@@ -967,10 +997,3 @@ browser reopen generate new cookie
 * [csrf 验证原理分析及 token 缓存解决方案](https://www.yiichina.com/code/1695)
 * [Yii Tutorial](https://www.tutorialspoint.com/yii/index.htm)
 * [Yii框架](https://blog.csdn.net/u012979009/article/category/6202463/2)
-
-## 项目
-
-* [fecshop/yii2_fecshop](https://github.com/fecshop/yii2_fecshop):yii2 ( PHP ) fecshop core code used for ecommerce shop 多语言多货币多入口的开源电商 B2C 商城，支持移动端vue, app, html5 http://www.fecshop.com
-* [EleTeam/Shop-PHP-Yii2](https://github.com/EleTeam/Shop-PHP-Yii2):EleTeam开源项目-电商全套解决方案之PHP版-Shop-for-PHP-Yii2。一个类似京东/天猫/淘宝的商城，有对应的APP支持，由EleTeam团队维护！
-* [changchang700/yii2cms](https://github.com/changchang700/yii2cms):一款和layui搭配的后台管理cms，集成了权限、用户、配置等常用功能，你可以在这些基础上修改。
-* [yii2-starter-kit/yii2-starter-kit](https://github.com/yii2-starter-kit/yii2-starter-kit):Yii2 Starter Kit http://yii2-starter-kit.terentev.net

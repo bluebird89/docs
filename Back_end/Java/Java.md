@@ -59,7 +59,10 @@ sudo apt-get update
 sudo apt-get install oracle-java8-installer
 javac -version
 
-sudo apt-get install oracle-java9-installer
+sudo add-apt-repository ppa:linuxuprising/java
+sudo apt-get install oracle-java11-installer
+sudo apt-get install oracle-java11-set-default
+
 # 多版本管理
 sudo update-alternatives --config java | javac # 会获得程序路径
 
