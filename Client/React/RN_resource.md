@@ -158,6 +158,7 @@
 * [sokra/rawact](https://github.com/sokra/rawact):[POC] A babel plugin which compiles React.js components into native DOM instructions to eliminate the need for the react library at runtime.
 * [Bogdan-Lyashenko/Under-the-hood-ReactJS](https://github.com/Bogdan-Lyashenko/Under-the-hood-ReactJS):Entire React code base explanation by visual block schemes (Stack version)
 * [FormidableLabs/react-live](https://github.com/FormidableLabs/react-live):A production-focused playground for live editing React components https://react-live.kitten.sh/
+* [RubyLouvre/anu](https://github.com/RubyLouvre/anu):the React16-compat mini library https://rubylouvre.github.io/nanachi/ https://rubylouvre.github.io/anu/
 
 ## 扩展
 

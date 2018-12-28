@@ -665,12 +665,12 @@
       - [appserver.io](http://appserver.io/): 一个用PHP写的多线程的PHP应用服务器
       - [php-pm](https://github.com/php-pm/php-pm): 一个PHP应用的进程管理器、修改器和负载平衡器
 * PHP网站 PHP Websites PHP相关的有用的网站
-      - (https://nomadphp.com/)[Nomad PHP]: 一个在线PHP学习资源
-      - (https://phpbestpractices.org/)[PHP Best Practices]: 一个PHP最佳实践指南
+      - [Nomad PHP](https://nomadphp.com/): 一个在线PHP学习资源
+      - [PHP Best Practices](https://phpbestpractices.org/): 一个PHP最佳实践指南
       - [PHP FIG](http://www.php-fig.org/): PHP框架交互组
-      - (https://php-mentoring.org/)[PHP Mentoring]: 点对点PHP导师组织
-      - (http://phpsecurity.readthedocs.io/en/latest/index.html)[PHP Security]: 一个PHP安全指南
-      - (http://www.phptherightway.com/)[PHP The Right Way]: 一个PHP最佳实践的快速指引手册
+      - [PHP Mentoring](https://php-mentoring.org/): 点对点PHP导师组织
+      - [PHP Security](http://phpsecurity.readthedocs.io/en/latest/index.html): 一个PHP安全指南
+      - [PHP The Right Way](http://www.phptherightway.com/): 一个PHP最佳实践的快速指引手册
       - (http://php.ug)[PHP UG]: 一个帮助用户定位最近的PHP用户组(UG)的网站
       - (http://phpversions.info/)[PHP Versions]: 哪些版本的PHP可以用在哪几种流行的Web主机上的列表
       - (http://www.phpweekly.com/archive.html)[PHP Weekly]: 一个PHP新闻周刊

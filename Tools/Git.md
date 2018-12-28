@@ -177,6 +177,7 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
 ### SSH
 
+* 支持使用RSA密钥来鉴权,RSA是一种非对称的加密算法。ssh使用RSA鉴权需要两个部分，一个是公钥，保存在你的环境中，一个是私钥，保存在你的电脑中。公钥负责加密，私钥负责解密
 * 生成路径 `~/.ssh/`
 * 公钥添加到github账户
 
@@ -228,6 +229,7 @@ Host gitlab.smgtech.net
 github
 # Couldn't agree a key exchange algorithm (available: curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521)
 ```
+* [图解SSH原理](https://www.jianshu.com/p/33461b619d53)
 
 ### GPG
 
@@ -650,6 +652,7 @@ tar cJf .tar.xz / --exclude-vcs
 
 ## cherry-pick
 
+可以选择某一个分支中的一个或几个commit(s)来进行操作,当执行完 cherry-pick 以后，将会 生成一个新的提交；这个新的提交的哈希值和原来的不同，但标识名 一样
 从develop分支新开的分支fromdevelop-01，然后commit两次，这时候develop分支只需要第二次提交的信息，步骤：
 
 * git checkout develop
@@ -1494,6 +1497,7 @@ chown -R henry:henry .git/objects
 * [rtyley/bfg-repo-cleaner](https://github.com/rtyley/bfg-repo-cleaner):Removes large or troublesome blobs like git-filter-branch does, but faster. And written in Scala
 * [sdg-mit/gitless](https://github.com/sdg-mit/gitless):A version control system built on top of Git http://gitless.com
 * [sobolevn/git-secret](https://github.com/sobolevn/git-secret):👥 A bash-tool to store your private data inside a git repository. http://git-secret.io
+* [scmmanager](https://www.scm-manager.org/):The easiest way to share and manage your Git, Mercurial and Subversion repositories over http
 
 ## 参考
 

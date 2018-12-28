@@ -406,17 +406,27 @@ vi /etc/fstab   # 添加以下代码。实现开机自动挂载
 
 ```sh
 fdisk -l # 查看设备名
-df -T
+
+# 统计数据块使用情况
+df -T # 可以用来查看分区的文件系统
+df -h # Human-readable 显示目前所有文件系统的可用空间及使用情形
+df -k
+
+du -h --max-depth=1 /home  # 文件大小相加
+du -h --max-depth=1 /home/*
+du -sm * | sort -n //统计当前目录大小 并安大小 排序
+du -sk * | sort -n
+du -sk * | grep guojf //看一个人的大小
+
 grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
 
 # 关机（必须用root用户）
 shutdown -h now  ## 立刻关机
-shutdown -h +10  ##  10分钟以后关机
+shutdown -h 10  ##  10分钟以后关机
 shutdown -h 12:00:00  ##12点整的时候关机
-halt   #  等于立刻关机
-
-# 重启
+shutdown -h # 关机后关闭电源
 shutdown -r now  # 关机/重启 -h:关机 -r:重启
+halt   #  等于立刻关机
 reboot   # 等于立刻重启
 ```
 
@@ -519,9 +529,8 @@ www   localhost.localdomain  #修改localhost.localdomain为www
 * oh my zsh 而非 zsh fish
 * KchmViewer:阅读CHM
 * LaTeX
-* chrome
-* Nylas N1电子邮件客户端
-* Thunderbird
+* Chromium
+* Nylas N1：超好用的跨平台电子邮件客户端  Thunderbird
 * sougou
 * Spotify for Linux：音乐流媒体服务
 * Lightworks Free：专业的非线视频编辑器
@@ -534,8 +543,17 @@ www   localhost.localdomain  #修改localhost.localdomain为www
 * gimp
 * Gtile:分屏工具
 * MySQL Workbench
-* vscode
+* Cloud music
 * shadowshocks
+* Jitsy:通讯工具
+* Synaptic：软件管理
+* thunderbird mail: can  add addon to manage rss
+* xchm:`sudo apt-get install xchm`
+* [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
+* [cherrytree](www.giuspen.com/cherrytree/):note
+* [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite
+* [Sayonara Player](https://sayonara-player.com/index.php)
+* Disk Usage Analyzer
 
 ## terminal终端
 
@@ -585,6 +603,7 @@ man # 查看命令的帮助
 info ls
 
 cal # 日历
+bc # 支持任意精度的交互执行的计算器语言
 
 # 修改时区
 sudo tzselect
@@ -696,7 +715,6 @@ iptables -P FORWORD DROP
 iptables -P OUTPUT DROP
 iptables -I INPUT -p tcp --dport 80 -j ACCEPT # open port
 
-
 ## port test
 yum install telnet.x86_64
 telnet 10.0.3.69 2020  # 测试端口能否访问
@@ -714,6 +732,7 @@ netstat -tunlp|grep (port)  # // 指定端口号进程情况
 * owner
 * group
 * others
+* nobody:nogroup
 
 ### 目录
 
@@ -725,6 +744,8 @@ ls -a|l|h|d directory # list 列出某文件夹下的文件，添加参数可实
 tree # 查看文件列表
 
 cd /home/henry|~|..|../.. # change directory 通过相对路径、绝对路径切换目录,cd到不存在的目录时会报错
+cd   # 进入用户主目录
+cd -  # 返回进入此目录之前所在的目录
 
 touch # 创建空文件 或 修改文件时间 touch file{1..5}.txt 使用通配符批量创建 5 个文件
 touch  somefile.1  ## 创建一个空文件
@@ -744,6 +765,7 @@ mv  sourcefile  destinationDirectory|desalinationFile  #  移动文件、文件�
 
 rmdir # remove empty directories 删除目录
 rm -rf directory # r递归删除，f参数表示强制
+rm -rf log/* # 方法二：删除logs文件夹下的所有文件，而不删除文件夹本身
 ```
 
 ### 文件
@@ -770,7 +792,7 @@ FHS包含两层规范：
 ```sh
 file logo.png # Returns information for given file
 
-wc # 获取某一个文件的行数和字数`wc package.json`
+wc  -l|-m|-w # 行 字符 字 获取某一个文件的行数和字数`wc package.json`
 cp -r|p|d|a 源文件 目标位置/目标名称 # 复制文件或目录  r:复制目录 p:连带文件属性一起复制 -d:源文件是链接文件，则复制链接属性 a:相当于pdr
 
 sort # 排序
@@ -786,7 +808,8 @@ tail -f file
 
 cat file >> another file # 文件追加
 
-ln -s 源文件 目标文件 创建链接文件 (文件名都必须写绝对路径) # 链接文件相当于快捷方式
+ln -s 源文件 目标文件 创建链接文件 # 链接文件相当于快捷方式 (文件名都必须写绝对路径)
+ln -l /user/bin/java #  show link info
 
 psketch
 
@@ -1105,24 +1128,25 @@ chmod 777 /home/myshare
 sudo smbpasswd  -a  henry # add user
 
 vim /etc/samba/smb.conf # 添加下列设定
-
 [share]
 comment=This is samba dir
+browseable = yes
 path=/home/myshare
 create mask=0755
 directory mask=0755
 writeable=yes
 valid users=henry
 browseable=yes
+public = yes
+available = yes
+writable = yes
 
-sudo samba start | stop | restart
-sudo service smbd status
+sudo service samba status | start | stop | restart
 
-mac 链接
-finder中com＋K
+# mac 链接 finder中com＋K
 smb://192.168.100.106
-
-\\172.16.44.175\Ubuntu
+# windows cmd
+\\192.168.182.188
 
 # windows access internet \\192.168.1.13 share
 ```
@@ -1430,7 +1454,6 @@ set completeopt=longest,menu
 ## 参考
 
 * [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/index.html)
-* [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
 * [LVS：跑在Linux内核上的负载均衡器](https://liangshuang.name/2017/11/19/lvs/)
 * [Introduction to Linux](https://www.ibm.com/developerworks/linux/newto/) – 这是来自IBM的教程，用于给那些想学习Linux的人。
 * [Linux Desktop 101](https://www.lifewire.com/learn-how-linux-4102755) – 这是一个 14周 课时的教程，主要用于学校里教学生如何在一个PC上运行一个Linux操作系统。
@@ -1443,6 +1466,9 @@ set completeopt=longest,menu
 * [jaywcjlove/linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
 * [feiskyer/linux-perf-examples](https://github.com/feiskyer/linux-perf-examples):《Linux 性能优化实战》案例
 * [trimstray/test-your-sysadmin-skills](https://github.com/trimstray/test-your-sysadmin-skills):A collection of *nix Sysadmin Test Questions and Answers. Test your knowledge and skills in different fields with these Q/A.
+* [aleksandar-todorovic/awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
+* [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
+* [面向 Linux 程序员和系统管理员的技术资源](https://www.ibm.com/developerworks/cn/linux/)
 
 ## 工具
 

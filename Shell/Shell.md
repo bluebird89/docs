@@ -179,6 +179,18 @@ PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blu
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 ```
 
+## grep
+
+全局搜索正则表达式并打印出匹配的行
+
+```sh
+grep “string” filename
+grep “string” filenameKeyword*
+grep 'Ubuntu' *.txt
+grep “startingKeyword.*endingKeyword” filename
+ grep -i “string” filename # 不会考虑搜索字符串是大写还是小写
+```
+
 ### 组件
 
 * [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
@@ -1206,6 +1218,21 @@ done
 
 * [direnv/direnv](https://github.com/direnv/direnv):Unclutter your .profile http://direnv.net
 
+## terminal
+
+- putty
+- xshell6
+- [FinalShell](http://www.hostbuf.com/)
+- WinSSHTerm
+- KiTTY
+- ZOC Terminal
+- MobaXterm
+- Terminus
+- Console2
+- cmder
+- ConEmu
+- [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
+
 ## 教程
 
 * [learnbyexample/command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):⚡️ From finding text to search and replace, from sorting to beautifying text and more 🎨
@@ -1239,6 +1266,7 @@ done
 * [liamg/aminal](https://github.com/liamg/aminal):Golang terminal emulator from scratch
 * [amanusk/s-tui](https://github.com/amanusk/s-tui):Terminal based CPU stress and monitoring utility https://amanusk.github.io/s-tui/
 * [GitSquared/edex-ui](https://github.com/GitSquared/edex-ui):A science fiction terminal emulator designed for large touchscreens that runs on all major OSs.
+* [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
 
 ## 参考
 
