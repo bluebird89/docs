@@ -683,6 +683,7 @@ var jq=jQuery.noConflict();
 - [js-cookie/js-cookie](https://github.com/js-cookie/js-cookie):A simple, lightweight JavaScript API for handling browser cookies
 - [DataTables/DataTables](https://github.com/DataTables/DataTables):Tables plug-in for jQuery http://www.datatables.net/
 - [jquery-validation](https://github.com/jquery-validation/jquery-validation):clone本地，grunt安装，编译;test中的index.html会有测试断言
+* [flesler/jquery.scrollTo](https://github.com/flesler/jquery.scrollTo):Lightweight, cross-browser and highly customizable animated scrolling with jQuery http://demos.flesler.com/jquery/scrollTo/
 
 ## 参考
 

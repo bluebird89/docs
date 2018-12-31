@@ -263,7 +263,6 @@ kubectl is the command line client you’ll use to connect to the Kubernetes clu
 * config file: `~/.kube/`
 * all the virtual machine bits:`~/.minikube/`
 
-
 ```shell
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew cask install virtualbox
@@ -299,7 +298,7 @@ kubectl delete deployments hello-minikube1
 * [hobby-kube/guide](https://github.com/hobby-kube/guide):Kubernetes clusters for the hobbyist.
 *[kelseyhightower/kubernetes-the-hard-way](https://github.com/kelseyhightower/kubernetes-the-hard-way):Bootstrap Kubernetes the hard way on Google Cloud Platform. No scripts.
 * [官方文档](https://kubernetes.io/docs/tutorials/)
-* [网易云原生架构实践之服务治理](https://mp.weixin.qq.com/s/ixkFLfbr3kY8AF_3x-KfSA)
+* [网易云原生架构实践w之服务治理](https://mp.weixin.qq.com/s/ixkFLfbr3kY8AF_3x-KfSA)
 * [中文文档](https://www.kubernetes.org.cn/doc-11)
 * [rootsongjc/kubernetes-handbook](https://github.com/rootsongjc/kubernetes-handbook):Kubernetes中文指南/实践手册 https://jimmysong.io/kubernetes-handbook https://jimmysong.io/kubernetes-handbook
 * [手动一步步搭建k8s(Kubernetes)高可用集群](https://www.centos.bz/2017/07/k8s-kubernetes-ha-cluster/)
@@ -317,6 +316,10 @@ kubectl delete deployments hello-minikube1
 * [ramitsurana/awesome-kubernetes](https://github.com/ramitsurana/awesome-kubernetes):A curated list for awesome kubernetes sources 🚢🎉 https://ramitsurana.github.io/awesome-kubernetes/
 * [gjmzj/kubeasz](https://github.com/gjmzj/kubeasz):使用Ansible脚本安装K8S集群，介绍组件交互原理，方便直接，不受国内网络环境影响 https://github.com/gjmzj/kubeasz
 * [kubernetes/community](https://github.com/kubernetes/community):Kubernetes community content
+
+## UI
+
+* [Qihoo360/wayne](https://github.com/Qihoo360/wayne):Web UI for Kubernetes multi-clusters
 
 ## 工具
 

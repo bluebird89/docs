@@ -28,3 +28,4 @@
 ## 工具
 
 * [rlabbe/Kalman-and-Bayesian-Filters-in-Python](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python):Kalman Filter book using Jupyter Notebook. Focuses on building intuition and experience, not formal proofs. Includes Kalman filters,extended Kalman filters, unscented Kalman filters, particle filters, and more. All exercises include solutions.
+* [facebookresearch/fastText](https://github.com/facebookresearch/fastText):Library for fast text representation and classification.

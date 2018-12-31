@@ -316,7 +316,7 @@ brew install pipenv
 * [pycurl](http://pycurl.sourceforge.net)是一个用C语言写的libcurl Python实现，功能强大，支持的协议有：FTP,HTTP,HTTPS,TELNET等，可以理解为Linux下curl命令功能的Python封装
 * scapy(http://www.wecdev.org/projects/scapy/)是一个强大的交互式数据包处理程序，它能够对数据包进行伪造或解包，包括发送数据包，包嗅探，应答和反馈等功能。
 * [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
-* [Requests-Html](https://github.com/kennethreitz/requests-html):下载完网页之后,内置了html网页的解析
+* [kennethreitz/requests-html](https://github.com/kennethreitz/requests-html):下载完网页之后,内置了html网页的解析
 * [request/request-promise](https://github.com/request/request-promise):The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.
 
 ## 数据库

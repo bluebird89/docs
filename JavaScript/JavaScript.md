@@ -2651,10 +2651,17 @@ replaceWith
 
 ## 工具
 
+* [github/fetch](https://github.com/github/fetch):A window.fetch JavaScript polyfill. http://github.github.io/fetch/
 * [developit/greenlet](https://github.com/developit/greenlet):🦎 Move an async function into its own thread. https://npm.im/greenlet
 * [blueimp/JavaScript-Canvas-to-Blob](https://github.com/blueimp/JavaScript-Canvas-to-Blob):JavaScript Canvas to Blob is a function to convert canvas elements into Blob objects.
 * object
   - [oussamahamdaoui/forgJs](https://github.com/oussamahamdaoui/forgJs):ForgJs is a javascript lightweight object validator. Go check the Quick start section and start coding with love
+* validate
+  - [chriso/validator.js](https://github.com/chriso/validator.js):String validation
+* Grid
+  - [e-oj/Magic-Grid](https://github.com/e-oj/Magic-Grid):A simple, lightweight Javascript library for dynamic grid layouts. https://www.npmjs.com/package/magic-grid
+* bundler
+  - [rollup/rollup](https://github.com/rollup/rollup):Next-generation ES module bundler https://rollupjs.org
 
 ## 参考
 

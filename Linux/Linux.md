@@ -766,6 +766,11 @@ mv  sourcefile  destinationDirectory|desalinationFile  #  移动文件、文件�
 rmdir # remove empty directories 删除目录
 rm -rf directory # r递归删除，f参数表示强制
 rm -rf log/* # 方法二：删除logs文件夹下的所有文件，而不删除文件夹本身
+
+# 生产环境把rm -rf 命令替换为mv，再写个定时shell定期清理
+# 帐号权限的分离，线上分配work帐号，只能够删除/home/work/logs/目录，无法删除根目录。
+# cd ${log_path} && rm -rf *
+# 制定编码规范，对目录进行操作之前，要先判断目录是否存在。
 ```
 
 ### 文件

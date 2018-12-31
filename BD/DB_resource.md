@@ -12,6 +12,7 @@
 * [Kaggle](https://www.kaggle.com/)：爱竞赛的盆友们应该很熟悉了，Kaggle上有各种有趣的数据集，拉面评级、篮球数据、甚至西雅图的宠物许可证。
 * [UCI机器学习库](http://mlr.cs.umass.edu/ml/)：最古老的数据集源之一，是寻找有趣数据集的第一站。虽然数据集是用户贡献的，因此具有不同的清洁度，但绝大多数都是干净的，可以直接从UCI机器学习库下载，无需注册。
 * [VisualData](https://www.visualdata.io/)：分好类的计算机视觉数据集，可以搜索~
+* [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/index.php):
 
 ## 资源
 
