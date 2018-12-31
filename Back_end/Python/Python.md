@@ -1041,12 +1041,10 @@ class Animal(object):
         print('Animal is running...')
 
 class Dog(Animal):
-
     def run(self):
         print('Dog is running...')
 
 class Cat(Animal):
-
     def run(self):
         print('Cat is running...')
 b = Animal() # b是Animal类型
@@ -1101,6 +1099,7 @@ getattr(obj, 'z', 404) # 获取属性'z'，如果不存在，返回默认值404 
 obj.y # 获取属性'y'
 hasattr(obj, 'power') # 有属性'power'吗？ True
 ```
+
 ## DB
 
 db API DRIVER即数据库接口驱动:
@@ -1116,115 +1115,16 @@ sudo apt-get install libmysqlclient-dev
 pip install mysqlclient
 ```
 
-##### OOP高级
+## OOP高级
 
-## 教程
-
-- [python3](http://www.runoob.com/python3)
-- [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
-- [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
-- <http://www.cnblogs.com/linhaifeng/p/7278389.html>
-
-## basic
+### basic
 
 - map:函数接收两个参数，一个是函数，一个是Iterable，map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回
-
 - reduce:把一个函数作用在一个序列[x1, x2, x3, ...]上，这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算 `reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)`
 
-## 插件
-
-- [xadmin](https://github.com/sshwsfc/xadmin) [文档](https://xadmin.readthedocs.io/en/latest/index.html)
-- [django-bootstrap-toolkit](https://github.com/dyve/django-bootstrap-toolkit)
-
-## 库
-
-- numpy
-- scipy
-- matplotlib
-- scikit-learn
-- pandas
-* [kennethreitz/requests-html](https://github.com/kennethreitz/requests-html):Pythonic HTML Parsing for Humans™ http://html.python-requests.org
-
-## 扩展
-
-- [faif/python-patterns](https://github.com/faif/python-patterns)A collection of design patterns/idioms in Python
-- [requests/requests](https://github.com/requests/requests)Python HTTP Requests for Humans™ ✨🍰✨ <http://python-requests.org>
-- [scrapy/scrapy](https://github.com/scrapy/scrapy)Scrapy, a fast high-level web crawling & scraping framework for Python. <https://scrapy.org>
-- [fchollet/keras](https://github.com/fchollet/keras)
-- [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide)
-- [ipython/ipython](https://github.com/ipython/ipython)
-- [binux/pyspider](https://github.com/binux/pyspider)A Powerful Spider(Web Crawler) System in Python. <http://docs.pyspider.org/>
-- [fabric/fabric](https://github.com/fabric/fabric)Simple, Pythonic remote execution and deployment. <http://fabfile.org>
-- [vinta/awesome-python](https://github.com/vinta/awesome-python):A curated list of awesome Python frameworks, libraries, software and resources https://awesome-python.com/
-- [keon/algorithms](https://github.com/keon/algorithms)Minimal examples of data structures and algorithms in Python
-
-## 工具
-
-- ipython:`pip3 install ipython`
-- [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
-- [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges)Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
-- [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
-- [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs#macos):A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! http://spacemacs.org
-
-### Anaconda
-
-专注于数据分析的Python发行版本，包含了conda、Python等190多个科学包及其依赖项。适用于企业级大数据分析的Python工具。其包含了720多个数据科学相关的开源包，在数据可视化、机器学习、深度学习等多方面都有涉及。不仅可以做数据分析，甚至可以用在大数据和人工智能领域。
-
-conda 是开源包（packages）和虚拟环境（environment）的管理系统。
-
-- packages 管理： 可以使用 conda 来安装、更新 、卸载工具包 ，并且它更关注于数据科学相关的工具包。在安装 anaconda 时就预先集成了像 Numpy、Scipy、 pandas、Scikit-learn 这些在数据分析中常用的包。另外值得一提的是，conda 并不仅仅管理Python的工具包，它也能安装非python的包。比如在新版的 Anaconda 中就可以安装R语言的集成开发环境 Rstudio。
-- 虚拟环境管理： 在conda中可以建立多个虚拟环境，用于隔离不同项目所需的不同版本的工具包，以防止版本上的冲突。
-
-#### 使用
-
-- Anaconda Navigator ：用于管理工具包和环境的图形用户界面，后续涉及的众多管理命令也可以在 Navigator 中手工实现。
-- qtconsole ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。
-- spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境。
-
-```sh
-
-bash Anaconda2-5.0.0.1-Linux-x86_64.sh
-#  更改镜像
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --set show_channel_urls yes
-
-echo 'export PATH="~/User/henry/anaconda/bin:$PATH"' >> ~/.zshrc # 添加环境变量
-source ~/.zshrc
-
-conda info
-conda search search_term
-
-conda update conda
-conda upgrade --all   # 升级工具包
-
-conda env list # 显示所有的环境
-conda list --revisions
-
-conda create --name env_name  list of packages # 默认的环境是 root，你也可以创建一个新环境,-n 代表 name，env_name 是需要创建的环境名称，list of packages 则是列出在新环境中需要安装的工具包。
-conda create --name | -n  py35 python=3.5 pandas
-
-conda install numpy scipy pandas
-conda install numpy=1.10
-conda install -n python34 numpy
-conda update | remove package_name
-conda install --name bio-env toolz
-conda install --channel conda-forge
-
-source activate env_name # 进入名为 env_name 的环境
-source deactivate  # 退出当前环境
-
-python --version #查看版本
-which -a python
-
-conda env remove -n env_name  # 删除名为 env_name 的环境
-conda remove --name bio-env toolz
-
-conda list -n python34
-conda env export > environment.yaml  # 分享代码的时候，同时也需要将运行环境分享给大家，执行如下命令可以将当前环境下的 package 信息存入名为 environment 的 YAML 文件中
-conda env create -f environment.yaml #  用对方分享的 YAML 文件来创建一摸一样的运行环境。
-```
-
 #### [IPython](https://ipython.org/)
+
+ipython:`pip3 install ipython`
 
 ### [pypy](http://pypy.org/)
 
@@ -1417,6 +1317,36 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 * [Yixiaohan/codeparkshare](https://github.com/Yixiaohan/codeparkshare):Python初学者（零基础学习Python、Python入门）书籍、视频、资料、社区推荐
 * [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide):Python best practices guidebook, written for Humans. http://docs.python-guide.org
 * [michaelliao/learn-python3](https://github.com/michaelliao/learn-python3): Learn Python 3 Sample Code
+- [python3](http://www.runoob.com/python3)
+- [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
+- [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
+- <http://www.cnblogs.com/linhaifeng/p/7278389.html>
+
+## 扩展
+
+- [faif/python-patterns](https://github.com/faif/python-patterns)A collection of design patterns/idioms in Python
+- [requests/requests](https://github.com/requests/requests)Python HTTP Requests for Humans™ ✨🍰✨ <http://python-requests.org>
+- [scrapy/scrapy](https://github.com/scrapy/scrapy)Scrapy, a fast high-level web crawling & scraping framework for Python. <https://scrapy.org>
+- [fchollet/keras](https://github.com/fchollet/keras)
+- [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide)
+- [ipython/ipython](https://github.com/ipython/ipython)
+- [binux/pyspider](https://github.com/binux/pyspider)A Powerful Spider(Web Crawler) System in Python. <http://docs.pyspider.org/>
+- [fabric/fabric](https://github.com/fabric/fabric)Simple, Pythonic remote execution and deployment. <http://fabfile.org>
+- [vinta/awesome-python](https://github.com/vinta/awesome-python):A curated list of awesome Python frameworks, libraries, software and resources https://awesome-python.com/
+- [keon/algorithms](https://github.com/keon/algorithms)Minimal examples of data structures and algorithms in Python
+
+## 工具
+
+* 插件
+    - [xadmin](https://github.com/sshwsfc/xadmin) [文档](https://xadmin.readthedocs.io/en/latest/index.html)
+    - [django-bootstrap-toolkit](https://github.com/dyve/django-bootstrap-toolkit)
+* [nteract/nteract](https://github.com/nteract/nteract): 📘 Desktop notebook app + packages https://nteract.io
+* [locustio/locust](https://github.com/locustio/locust):Scalable user load testing tool written in Python http://locust.io
+* [agronholm/apscheduler](https://github.com/agronholm/apscheduler):Task scheduling library for Python
+* [benfred/py-spy](https://github.com/benfred/py-spy):Sampling profiler for Python programs
+- [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges)Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
+- [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
+- [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs#macos):A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! http://spacemacs.org
 
 ## 参考
 
@@ -1425,12 +1355,4 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 * [jobbole/awesome-python-cn](https://github.com/jobbole/awesome-python-cn):Python资源大全中文版，包括：Web框架、网络爬虫、模板引擎、数据库、数据可视化、图片处理等，由伯乐在线持续更新。
 * [Python 开源库及示例代码](https://github.com/programthink/opensource/blob/master/libs/python.wiki)
 * [kriadmin/30-seconds-of-python-code](https://github.com/kriadmin/30-seconds-of-python-code)
-* [mahmoud/awesome-python-applications
-](https://github.com/mahmoud/awesome-python-applications):cd Free software that works great, and also happens to be open-source Python. ftp://you:relookin@it.example.com#readme
-
-## 工具
-
-* [nteract/nteract](https://github.com/nteract/nteract): 📘 Desktop notebook app + packages https://nteract.io
-* [locustio/locust](https://github.com/locustio/locust):Scalable user load testing tool written in Python http://locust.io
-* [agronholm/apscheduler](https://github.com/agronholm/apscheduler):Task scheduling library for Python
-* [benfred/py-spy](https://github.com/benfred/py-spy):Sampling profiler for Python programs
+* [mahmoud/awesome-python-applications](https://github.com/mahmoud/awesome-python-applications):cd Free software that works great, and also happens to be open-source Python. ftp://you:relookin@it.example.com#readme

@@ -2,7 +2,11 @@
 
 Dependency Manager for PHP https://getcomposer.org/
 
-PHP 用来管理依赖（dependency）关系的工具。你可以在自己的项目中声明所依赖的外部工具库（libraries），Composer 会帮你安装这些依赖的库文件。
+PHP 用来管理依赖（dependency）关系的工具。可以在自己的项目中声明所依赖的外部工具库（libraries），Composer 会帮你安装这些依赖的库文件。
+
+## 原理
+
+
 
 ## 安装
 
@@ -10,7 +14,7 @@ PHP 用来管理依赖（dependency）关系的工具。你可以在自己的项
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
 php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
-php composer-setup.php #安装
+php composer-setup.php # 安装
 php -r "unlink('composer-setup.php');" # 删除
 
 sudo mv composer.phar /usr/local/bin/composer
@@ -62,8 +66,7 @@ composer global require "squizlabs/php_codesniffer=*"
 composer global require friendsofphp/php-cs-fixer
 
 composer install -vvv # 使用composer install或者composer update命令将会更新所有的扩展包
-composer update [packagename]
-composer remove [packagename]
+composer update|remove [packagename]
 composer self-update
 
 composer create-project swoft/swoft swoft
@@ -73,14 +76,13 @@ export PATH="/usr/local/bin:/Users/username/.composer/vendor/bin":$PATH # 添加
 
 composer dump-autoload --optimize|-o # 优化自动加载
 
->=1.0
->=1.0 <2.0
->=1.0 <1.1 || >=1.2
-
-require 'vendor/autoload.php'; # 自动加载
+# >=1.0
+#>=1.0 <2.0
+# >=1.0 <1.1 || >=1.2
 ```
 
 ```php
+require 'vendor/autoload.php' # 自动加载
 require **DIR** . '/vendor/autoload.php';
 
 use Cocur\Slugify\Slugify;
@@ -90,45 +92,83 @@ echo $slugify->slugify('Hello World, this is a long sentence and I need to make 
 
 ## package
 
-* 如果你编辑了composer.json,如果你增加或更新了细节信息，比如库的描述、作者、更多参数，甚至仅仅增加了一个空格，都会改变文件的md5sum。然后Composer就会警告你哈希值和composer.lock中记载的不同:composer update nothing
-* require:"require":{"vendor-name/package-name":"version", ...} 名字部分会作为vendor下的路径进行创建
-* autoload:composer支持PSR-0,PSR-4,classmap及files包含以支持文件自动加载。PSR-4为推荐方式。
-    * Files类型格式：支持将数组中的文件进行自动加载，文件的路径相对于项目的根目录
+* 如果编辑了composer.json,增加或更新了细节信息，比如库的描述、作者、更多参数，甚至仅仅增加了一个空格，都会改变文件的md5sum。然后Composer就会警告你哈希值和composer.lock中记载的不同:composer update nothing
+* autoload:PHP autoloader 的自动加载映射
+    * Files类型格式：支持将数组中的文件进行自动加载，文件的路径相对于项目的根目录.需要在任何请求中都加载某些文件，可以使用 files 自动加载机制
     * classmap类型格式：支持将数组中的路径下的文件进行自动加载。其很方便，但缺点是一旦增加了新文件，需要执行dump-autoload命令重新生成映射文件vendor/composer/autoload_classmap.php。
     * psr-0类型:支持将命名空间映射到路径。命名空间结尾的\\不可省略。当执行install或update时，加载信息会写入vendor/composer/autoload_namespace.php文件。如果希望解析指定路径下的所有命名空间，则将命名空间置为空串即可。需要注意的是对应name2\space\Foo类的类文件的路径为path2/name2/space/Foo.php
     * psr-4类型:支持将命名空间映射到路径。命名空间结尾的\\不可省略。当执行install或update时，加载信息会写入vendor/composer/autoload_psr4.php文件。如果希望解析指定路径下的所有命名空间，则将命名空间置为空串即可。需要注意的是对应name2\space\Foo类的类文件的路径为path2/space/Foo.php，name2不出现在路径中。
     * PSR-4和PSR-0最大的区别是对下划线（underscore)的定义不同。PSR-4中，在类名中使用下划线没有任何特殊含义。而PSR-0则规定类名中的下划线_会被转化成目录分隔符。
 * name格式："name":"vendor/package"
 * version格式："version":"1.0.2"
+* 定制包的仓库地址:默认的，Composer 只使用 Packagist 仓库。通过指定仓库地址，可以从任何地方获取包
+  - composer:仓库通过网络提供 packages.json 文件，它包含一个 composer.json 对象的列表，还有额外的 dist 或 source 信息。packages.json 文件通过 PHP 流加载
+  - vcs:版本控制系统仓库，如：git、svn、hg
+  - pear:可以导入任何 pear 仓库到你的项目中
 
 ```
-# file
-"autoload":{"files":["path/to/1.php","path/to/2.php",...]}
-
-# classmap
-"autoload":{"classmap": ["path/to/src1","path/to/src2",...]}
-
-# psr-0
 "autoload":{
+  "files":["src/MyLibrary/functions.php","path/to/2.php"],
+  "classmap": ["path/to/src1","path/to/src2",...]
   "psr-0":
     {
-      "name1\\space\\":["path/",...],
-      "name2\\space\\":["path2/",...],
-    }
-  }
-
-# psr-4
-"autoload":{
+      "Monolog\\": "src/",
+      "Vendor\\Namespace\\": "src/",
+      "Vendor_Namespace_": "src/",
+      "Monolog\\": ["src/", "lib/"],
+      # PHP 源文件放在项目的根目录
+      "UniqueGlobalClass": "",
+      # 有个目录下全是用命名空间组织的，你可以用空前缀
+      "": "src/"
+    },
   "psr-4":{
     "name1\\space\\":["path/",...],
     "name2\\space\\":["path2/",...],
   }
-}
+},
+
+"repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.example.com"
+        },
+        {
+            "type": "composer",
+            "url": "https://packages.example.com",
+            "options": {
+                "ssl": {
+                    "verify_peer": "true"
+                }
+            }
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Seldaek/monolog"
+        },
+        {
+            "type": "pear",
+            "url": "http://pear2.php.net"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "smarty/smarty",
+                "version": "3.1.7",
+                "dist": {
+                    "url": "http://www.smarty.net/files/Smarty-3.1.7.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "http://smarty-php.googlecode.com/svn/",
+                    "type": "svn",
+                    "reference": "tags/Smarty_3_1_7/distribution/"
+                }
+            }
+        }
+    ]
 ```
 
 http://packagist.phpcomposer.com/  Authentication required
-
-需要
 
 ## Principle
 
@@ -147,4 +187,4 @@ http://packagist.phpcomposer.com/  Authentication required
 ## 工具
 
 * [Ocramius/PackageVersions](https://github.com/Ocramius/PackageVersions):📦 Composer addon to efficiently get installed packages' version numbers
-https://www.robberphex.com/2018/05/858
+

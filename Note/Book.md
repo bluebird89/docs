@@ -592,6 +592,7 @@ HTTP and REST
 * 这本书能让你睡得好
 * 活法
 * 干法
+* 直觉泵与其它思考工具
 
 ## 经济
 
@@ -749,6 +750,13 @@ HTTP and REST
 * 《中国现代文学三十年》
 * 夏志清
     - 《中国现代小说史》
+
+## 侦探
+
+* 阿加莎·克里斯蒂 Agatha Christie
+    - Hercule Poirot：侦探小说中的主角
+        + 《东方快车谋杀案》（Murder on the Orient Express）
+        + 尼罗河谋杀案
 
 ## 沟通
 
