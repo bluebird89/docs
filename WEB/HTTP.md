@@ -148,26 +148,6 @@ TCP/UDP都是是传输层协议，但是两者具有不同的特性，同时也�
 
 计算机与网络传输：每层进行层层解包和附加自己所要传递的信息，术语叫做报头。
 
-### DNS（Domain Name System，域名系统）
-
-因特网上作为域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过主机名，最终得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）。DNS协议运行在UDP协议之上，使用端口号53。
-
-* 本机一定要知道DNS服务器的IP地址，否则上不了网。通过DNS服务器，才能知道某个域名的IP地址到底是什么。
-    - DNS服务器的IP地址，有可能是动态的，每次上网时由网关分配，这叫做DHCP机制；也有可能是事先指定的固定地址。Linux系统里面，DNS服务器的IP地址保存在/etc/resolv.conf文件。
-* 分级查询：每个域名的IP地址：math.stackexchange.com.。这不是疏忽，而是所有域名的尾部，实际上都有一个根域名。DNS服务器根据域名的层级，进行分级查询。
-    - 根域名.root。从"根域名服务器"查到"顶级域名服务器"的NS记录和A记录（IP地址）。根域名服务器"的NS记录和IP地址一般是不会变化的，所以内置在DNS服务器里面。
-    - 顶级域名"（top-level domain，缩写为TLD），比如.com、.net。从"根域名服务器"查到"顶级域名服务器"的NS记录和A记录（IP地址）
-    - 次级域名"（second-level domain，缩写为SLD），比如www.example.com里面的.example，这一级域名是用户可以注册的。从"次级域名服务器"查出"主机名"的IP地址
-    - 再下一级是主机名（host），比如www.example.com里面的www。用户在自己的域里面为服务器分配的名称，是用户可以任意分配的
-
-域名与IP之间的对应关系，称为"记录"（record）。根据使用场景，"记录"可以分成不同的类型（type）
-
-* A：地址记录（Address），返回域名指向的IP地址。
-* NS：域名服务器记录（Name Server），返回保存下一级域名信息的服务器地址。该记录只能设置为域名，不能设置为IP地址。为了服务的安全可靠，至少应该有两条NS记录
-* MX：邮件记录（Mail eXchange），返回接收电子邮件的服务器地址。
-* CNAME：规范名称记录（Canonical Name），返回另一个域名，即当前查询的域名是另一个域名的跳转。用于域名的内部跳转，为服务器配置提供灵活性，用户感知不到。一旦设置CNAME记录以后，就不能再设置其他记录了（比如A记录和MX记录），这是为了防止产生冲突
-* PTR：逆向查询记录（Pointer Record），只用于从IP地址查询域名
-
 ### 状态码 Status Code
 
 HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是编号
@@ -277,46 +257,6 @@ text/plain
 .torrent    application/x-bittorrent
 .wav    audio/wav
 .xhtml  text/html
-```
-
-dig可以显示整个查询过程
-
-```sh
-dig math.stackexchange.com
-
-; <<>> DiG 9.10.6 <<>> math.stackexchange.com # 查询参数和统计
-;; global options: +cmd
-;; Got answer:
-
-;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 0
-
-;; QUESTION SECTION: # 查询内容：域名的A记录
-;math.stackexchange.com.        IN  A
-;; ->>HEADER<< - opcode: QUERY, status: NOERROR, id: 14912
-;; ANSWER SECTION: # 服务器答复:有四个A记录，即四个IP地址。600是TTL值（Time to live 的缩写），表示缓存时间，即600秒之内不用重新查询。
-math.stackexchange.com. 300 IN  A   151.101.65.69
-math.stackexchange.com. 300 IN  A   151.101.1.69
-math.stackexchange.com. 300 IN  A   151.101.193.69
-math.stackexchange.com. 300 IN  A   151.101.129.69
-
-# NS记录（Name Server的缩写），即哪些服务器负责管理stackexchange.com的DNS记录。
-# 四个域名服务器的IP地址，这是随着前一段一起返回的。
-;; Query time: 119 msec
-;; SERVER: 223.5.5.5#53(223.5.5.5) # 本机的DNS服务器是223.5.5.5，查询端口是53
-;; WHEN: Sun Apr 08 23:54:53 CST 2018
-;; MSG SIZE  rcvd: 104
-
-dig @4.2.2.2 math.stackexchange.com # 显示向其他DNS服务器查询的结果
-dig +trace math.stackexchange.com # 显示DNS的整个分级查询过程
-dig ns com # 单独查看每一级域名的NS记录
-dig ns stackexchange.com
-dig +short ns stackexchange.com # 显示简化的结果
-dig -x 192.30.252.153 # 查询PTR记录
-
-host github.com # host命令可以看作dig命令的简化版本。返回当前请求域名的各种记录
-host 192.30.252.153
- # nslookup命令用于互动式地查询域名记录
-whois github.com # 用来查看域名的注册情况
 ```
 
 ## 缓存

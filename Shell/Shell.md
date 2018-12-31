@@ -222,9 +222,9 @@ grep “startingKeyword.*endingKeyword” filename
 * Shift+PgUp:将终端显示向上滚动;
 * Shift+PgDn:将终端显示向下滚动;
 
-### fish
+### [fish-shell/fish-shell](https://github.com/fish-shell/fish-shell)
 
-the friendly interactive shell
+The user-friendly command line shell. http://fishshell.com
 
 * 彩色显示
 * 有效路径为下划线

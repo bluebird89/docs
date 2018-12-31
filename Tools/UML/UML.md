@@ -140,3 +140,4 @@ dot -Tpng first.dot -o first.png # 用的是dot布局 -T表示格式，即画成
 ## 工具
 
 * [bpmn-io/bpmn-js](https://github.com/bpmn-io/bpmn-js):A BPMN 2.0 rendering toolkit and web modeler. https://bpmn.io/toolkit/bpmn-js/
+* [knsv/mermaid](https://github.com/knsv/mermaid):Generation of diagram and flowchart from text in a similar manner as markdown http://knsv.github.io/mermaid/

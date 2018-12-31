@@ -36,6 +36,7 @@
 * [apachecn/fastai-ml-dl-notes-zh](https://github.com/apachecn/fastai-ml-dl-notes-zh):📖 [译] fast.ai 机器学习和深度学习中文笔记
 * [fchollet/deep-learning-with-python-notebooks](https://github.com/fchollet/deep-learning-with-python-notebooks):Jupyter notebooks for the code samples of the book "Deep Learning with Python"
 * [PaddlePaddle/book](https://github.com/PaddlePaddle/book):Deep Learning 101 with PaddlePaddle （深度学习框架入门教程）
+* [d2l-ai/d2l-zh](https://github.com/d2l-ai/d2l-zh):《动手学深度学习》，英文版即伯克利深度学习（STAT 157，2019春）教材。面向中文读者、能运行、可讨论。 https://zh.d2l.ai
 
 ## 工具
 
