@@ -10,6 +10,7 @@
 * [Sketch Plugin Manager](https://mludowise.github.io/Sketch-Plugin-Manager/)
 * [Sketch Toolbox](http://sketchtoolbox.com/)helps you manage, install, and update all of your Sketch plugins.
 * [airbnb/react-sketchapp](https://github.com/airbnb/react-sketchapp):render React components to Sketch ⚛️💎 http://airbnb.io/react-sketchapp/
+* FusionCool
 
 ## Collaboration Sketch Plugins
 

@@ -45,7 +45,7 @@ JAVA_HOME C:\Program Files (x86)\Java\jdk1.8.0_91        # 要根据自己的实
 CLASSPATH .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar\;         # 记得前面有个"."
 Path %JAVA_HOME%\bin;%JAVA_HOME%\jre\bin\; # win10 path 分条添加
 
-# linux
+# ubuntu
 # using the version packaged with Debian：OpenJDK 8
 sudo apt-get update
 sudo apt-get install default-jre

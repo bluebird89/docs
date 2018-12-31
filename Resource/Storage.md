@@ -25,3 +25,4 @@
 
 * [proxyee-down-org/proxyee-down](https://github.com/proxyee-down-org/proxyee-down):http下载工具，基于http代理，支持多连接分块下载
 * [yangshun1029/aria2gui](https://github.com/yangshun1029/aria2gui):Aria2GUI for macOS
+* [webtorrent/webtorrent-desktop](https://github.com/webtorrent/webtorrent-desktop):❤️ Streaming torrent app for Mac, Windows, and Linux https://webtorrent.io/desktop
