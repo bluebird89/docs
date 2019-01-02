@@ -1,4 +1,10 @@
-# Numpy
+# [numpy/numpy](https://github.com/numpy/numpy)
+
+The fundamental package for scientific computing with Python. https://www.numpy.org/
+
+## 工具
+
+* [mars-project/mars](https://github.com/mars-project/mars):Mars is a tensor-based unified framework for large-scale data computation. https://mars-project.readthedocs.io
 
 ## 参考
 

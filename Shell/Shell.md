@@ -93,8 +93,6 @@ source ~/.bashrc # 运行
 
 A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
 
-* [plugin](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins)
-
 ```sh
 # 自动安装
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -113,13 +111,17 @@ bash # 切换 bash
 
 cd ~/.oh-my-zsh/custom/plugins
 git clone git://github.com/zsh-users/zsh-syntax-highlighting.git # add to .zshrc plugin
+
+echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.zshrc
 ```
 
 > 配置： home目录的.zshrc(不用单配，插件配置有)
 
-install fonts-powerline:`sudo apt-get install fonts-powerline`
+```sh
+# install fonts-powerline
+`sudo apt-get install fonts-powerline`
 
-```
+# config
 ZSH_THEME="agnoster"
 
 export PATH="/usr/local/bin:$PATH"
@@ -169,15 +171,26 @@ plugins=(git textmate ruby autojump osx mvn gradle autojump)
 
 export DEFAULT_USER="henry" # hide username
 
+PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}>'
+#PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+
 # 更新
 upgrade_oh_my_zsh
 uninstall_oh_my_zsh
 ```
 
-```
-PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}>'
-#PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-```
+* 组件
+    - [plugin](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins)
+    - [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
+    - [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
+    - [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
+    - [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
+* Theme
+    - agnoster
+    - cloud
+    - [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
+* 工具
+    - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
 
 ## grep
 
@@ -188,39 +201,8 @@ grep “string” filename
 grep “string” filenameKeyword*
 grep 'Ubuntu' *.txt
 grep “startingKeyword.*endingKeyword” filename
- grep -i “string” filename # 不会考虑搜索字符串是大写还是小写
+grep -i “string” filename # 不会考虑搜索字符串是大写还是小写
 ```
-
-### 组件
-
-* [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
-* [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
-* [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
-* [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
-
-### Theme
-
-* agnoster
-* cloud
-* [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
-
-#### 扩展
-
-* [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
-
-### 快捷键
-
-* Tab:点击Tab键可以实现命令补全,目录补全、命令参数补全;
-* Ctrl+c:强行终止当前程序（常用）;
-* Ctrl+d:键盘输入结束或退出终端（常用）;
-* Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
-* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
-* Ctrl+a:将光标移至输入行头，相当于Home键;
-* Ctrl+e:将光标移至输入行末，相当于End键;
-* Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
-* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
-* Shift+PgUp:将终端显示向上滚动;
-* Shift+PgDn:将终端显示向下滚动;
 
 ### [fish-shell/fish-shell](https://github.com/fish-shell/fish-shell)
 
@@ -247,7 +229,7 @@ help # 手册
 
 > 配置文件：~/.config/fish/config.fish或者fish_config
 
-```
+```sh
 if grep fish /etc/shells
     echo Found fish
 else if grep bash /etc/shells
@@ -287,6 +269,8 @@ function fish_prompt
   set_color normal
 end
 ```
+
+* [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager.
 
 ### xmonad
 
@@ -339,10 +323,6 @@ dmenu 在桌面顶部提供了一个菜单条，可以快速启动应用程序
 - 方向键用来选择应用程序
 - return键用来启动
 
-### 添加变量
-
-echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.zshrc
-
 ### iterm2
 
 | 功能                       | mac                |
@@ -356,6 +336,20 @@ echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.zshrc
 | 弹出历史粘贴记录窗口       | ⌘+Shift+h          |
 | 可以搜索全屏展示所有的 tab | ⌘+Option+e         |
 | 全屏                       | command+enter      |
+
+### 快捷键
+
+* Tab:点击Tab键可以实现命令补全,目录补全、命令参数补全;
+* Ctrl+c:强行终止当前程序（常用）;
+* Ctrl+d:键盘输入结束或退出终端（常用）;
+* Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
+* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
+* Ctrl+a:将光标移至输入行头，相当于Home键;
+* Ctrl+e:将光标移至输入行末，相当于End键;
+* Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
+* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
+* Shift+PgUp:将终端显示向上滚动;
+* Shift+PgDn:将终端显示向下滚动;
 
 ### 写脚本
 
@@ -603,36 +597,6 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 * 简单选择屏幕滚动，使用CTRL + SHIFT + K清理缓冲区。
 * 可自定义隐藏大部分不必要的细节（标签栏、菜单），默认提供许多颜色主题
 
-## 扩展
-
-* ag：比grep、ack更快的递归搜索文件内容。
-* tig：字符模式下交互查看git项目，可以替代git命令。
-* mycli：mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令。
-* jq: json文件处理以及格式化显示，支持高亮，可以替换python -m json.tool。
-* shellcheck：shell脚本静态检查工具，能够识别语法错误以及不规范的写法。
-* yapf：Google开发的python代码格式规范化工具，支持pep8以及Google代码风格。
-* mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连。
-* fzf：命令行下模糊搜索工具，能够交互式智能搜索并选取文件或者内容，配合终端ctrl-r历史命令搜索简直完美。
-* PathPicker(fpp):在命令行输出中自动识别目录和文件，支持交互式，配合git非常有用
-* htop: 提供更美观、更方便的进程监控工具，替代top命令。
-* axel：多线程下载工具，下载文件时可以替代curl、wget。
-* sz/rz：交互式文件传输，在多重跳板机下传输文件非常好用，不用一级一级传输。
-* cloc：代码统计工具，能够统计代码的空行数、注释行、编程语言。
-* ccache：高速C/C++编译缓存工具，反复编译内核非常有用。使用起来也非常方便
-* tmux：终端复用工具，替代screen、nohup
-* neovim: 替代vim。
-* script/scriptreplay: 终端会话录制。
-* you-get: 非常强大的媒体下载工具，支持youtube、google+、优酷、芒果TV、腾讯视频、秒拍等视频下载。
-* thefuck：用途是每次命令行打错了以后，打一句fuck就会自动更正命令。比如apt-get打成了aptget。fuck以后自动变成apt-get。但还是没加sudo。再fuck，成功！
-* tldr: 如果你经常不想详读man文档，那么你应该试试这个小工具。
-
-```sh
-cat demo.json | jq '.id,.name,.status,.attachments'
-
-axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso
-ccache gcc foo.c
-```
-
 ## 实例
 
 * 开头加解释器：#!/bin/bash
@@ -656,8 +620,7 @@ ccache gcc foo.c
 
 # 定义一个颜色输出字符串函数
 
-方法1：
-
+#方法1：
 function echo_color() {
 
     if [ $1 == "green" ]; then
@@ -672,8 +635,7 @@ function echo_color() {
 
 }
 
-方法2：
-
+# 方法2：
 function echo_color() {
 
     case $1 in
@@ -1014,10 +976,7 @@ for i in $PART_USE; do
 
 done
 
-# 批量主机磁盘利用率监控
-
-前提监控端和被监控端SSH免交互登录或者密钥登录。写一个配置文件保存被监控主机SSH连接信息，文件内容格式：IP User Port
-
+# 批量主机磁盘利用率监控:前提监控端和被监控端SSH免交互登录或者密钥登录。写一个配置文件保存被监控主机SSH连接信息，文件内容格式：IP User Port
 #!/bin/bash
 
 HOST_INFO=host.info
@@ -1239,15 +1198,77 @@ done
 * [learnbyexample/Linux_command_line](https://github.com/learnbyexample/Linux_command_line):💻 Introduction to Linux commands and Shell scripting
 * [learnbyexample/scripting_course](https://github.com/learnbyexample/scripting_course):📓 A reference guide to Linux command line, Vim and Scripting https://learnbyexample.github.io/scripting_course/
 
+## 扩展
+
+* shellcheck：shell脚本静态检查工具，能够识别语法错误以及不规范的写法。
+* yapf：Google开发的python代码格式规范化工具，支持pep8以及Google代码风格。
+* mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连。
+* PathPicker(fpp):在命令行输出中自动识别目录和文件，支持交互式，配合git非常有用
+* sz/rz：交互式文件传输，在多重跳板机下传输文件非常好用，不用一级一级传输。
+* ccache：高速C/C++编译缓存工具，反复编译内核非常有用。使用起来也非常方便
+* tmux：终端复用工具，替代screen、nohup
+* neovim: 替代vim。
+* script/scriptreplay: 终端会话录制。
+
+```sh
+cat demo.json | jq '.id,.name,.status,.attachments'
+
+axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso
+ccache gcc foo.c
+```
+
 ## 工具
 
-* [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager.
-* [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/
-* [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
-* [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
-* [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)：A curated list of awesome command-line frameworks, toolkits, guides and gizmos. Inspired by awesome-php.
+* 查看
+    * [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings.
+* 搜索
+    - ag：比grep、ack更快的递归搜索文件内容
+    - fzf：命令行下模糊搜索工具，能够交互式智能搜索并选取文件或者内容，配合终端ctrl-r历史命令搜索简直完美。
+* monitor
+    - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序的
+    - [htop](http://hisham.hm/htop/): 提供更美观、更方便的进程监控工具
+    - [atop](http://www.atoptool.nl/):按日记录进程的日志供以后分析。它也能显示所有进程的资源消耗。它还会高亮显示已经达到临界负载的资源。
+    - [apachetop](https://github.com/JeremyJones/Apachetop) 会监控 apache 网络服务器的整体性能。它主要是基于 mytop。它会显示当前的读取进程、写入进程的数量以及请求进程的总数。
+    - [ftptop](http://www.proftpd.org/docs/howto/Scoreboard.html) 给你提供了当前所有连接到 ftp 服务器的基本信息，如会话总数，正在上传和下载的客户端数量以及客户端是谁。
+    - [mytop](http://jeremy.zawodny.com/mysql/mytop/) 是一个很简洁的工具，用于监控 mysql 的线程和性能。它能让你实时查看数据库以及正在处理哪些查询。
+    - [powertop](https://01.org/powertop) 可以帮助你诊断与电量消耗和电源管理相关的问题。它也可以帮你进行电源管理设置，以实现对你服务器最有效的配置。你可以使用 tab 键切换选项卡
+    - [iotop](http://guichaz.free.fr/iotop/) 用于检查 I/O 的使用情况，并为你提供了一个类似 top 的界面来显示。它按列显示读和写的速率，每行代表一个进程。当发生交换或 I/O 等待时，它会显示进程消耗时间的百分比。
+    - [ntopng]( http://www.ntop.org/products/ntop/) 是 ntop 的升级版，它提供了一个能通过浏览器进行网络监控的图形用户界面。它还有其他用途，如：地理定位主机，显示网络流量和 ip 流量分布并能进行分析。
+    - [iftop](http://www.ex-parrot.com/pdw/iftop/) 类似于 top，但它主要不是检查 cpu 的使用率而是监听所选择网络接口的流量，并以表格的形式显示当前的使用量。像“为什么我的网速这么慢呢？！”这样的问题它可以直接回答。
+    - [jnettop](http://jnettop.kubs.info/wiki/) 以相同的方式来监测网络流量但比 iftop 更形象。它还支持自定义的文本输出，并能以友好的交互方式来深度分析日志。
+    - [BandwidthD](http://bandwidthd.sourceforge.net/) 可以跟踪 TCP/IP 网络子网的使用情况，并能在浏览器中通过 png 图片形象化地构建一个 HTML 页面。它有一个数据库系统，支持搜索、过滤，多传感器和自定义报表。
+    - [EtherApe](http://etherape.sourceforge.net/) 以图形化显示网络流量，可以支持更多的节点。它可以捕获实时流量信息，也可以从 tcpdump 进行读取。也可以使用 pcap 格式的网络过滤器来显示特定信息。
+    - [ethtool](https://www.kernel.org/pub/software/network/ethtool/) 用于显示和修改网络接口控制器的一些参数。它也可以用来诊断以太网设备，并获得更多的统计数据。
+    - [NetHogs]( http://nethogs.sourceforge.net/) 打破了网络流量按协议或子网进行统计的惯例，它以进程来分组。所以，当网络流量猛增时，你可以使用 NetHogs 查看是由哪个进程造成的。
+    - [iptraf](http://iptraf.seul.org/) 收集的各种指标，如 TCP 连接数据包和字节数，端口统计和活动指标，TCP/UDP 通信故障，站内数据包和字节数。
+    - [ngrep](http://ngrep.sourceforge.net/) 就是网络层的 grep。它使用 pcap ，允许通过指定扩展正则表达式或十六进制表达式来匹配数据包。
+    - [MRTG](http://oss.oetiker.ch/mrtg/) 最初被开发来监控路由器的流量，但现在它也能够监控网络相关的东西。它每五分钟收集一次，然后产生一个 HTML 页面。它还具有发送邮件报警的能力。
+    - [bmon](https://github.com/tgraf/bmon/) 能监控并帮助你调试网络。它能捕获网络相关的统计数据，并以友好的方式进行展示。你还可以与 bmon 通过脚本进行交互。
+    - traceroute是一个内置工具，能显示路由和测量数据包在网络中的延迟。
+    - [IPTState](http://www.phildev.net/iptstate/index.shtml) 可以让你观察流量是如何通过 iptables，并通过你指定的条件来进行排序。该工具还允许你从 iptables 的表中删除状态信息。
+    - [darkstat](https://unix4lyfe.org/darkstat/) 能捕获网络流量并计算使用情况的统计数据。该报告保存在一个简单的 HTTP 服务器中，它为你提供了一个非常棒的图形用户界面。
+    - [vnStat]( http://humdi.net/vnstat/) 是一个网络流量监控工具，它的数据统计是由内核进行提供的，其消耗的系统资源非常少。系统重新启动后，它收集的数据仍然存在。有艺术感的系统管理员可以使用它的颜色选项。
+    - netstat 是一个内置的工具，它能显示 TCP 网络连接，路由表和网络接口数量，被用来在网络中查找问题。
+    - ss 命令能够显示的信息比 netstat 更多，也更快。如果你想查看统计结果的总信息，你可以使用命令 ss -s
+    - [Nmap](http://nmap.org/) 可以扫描你服务器开放的端口并且可以检测正在使用哪个操作系统。但你也可以将其用于 SQL 注入漏洞、网络发现和渗透测试相关的其他用途。
+    - [MTR](http://www.bitwizard.nl/mtr/) 将 traceroute 和 ping 的功能结合到了一个网络诊断工具上。当使用该工具时，它会限制单个数据包的跳数，然后监视它们的到期时到达的位置。然后每秒进行重复。
+    - [Tcpdump](http://www.tcpdump.org/) 将按照你在命令行中指定的表达式输出匹配捕获到的数据包的信息。你还可以将此数据保存并进一步分析。
+    - [Justniffer](http://justniffer.sourceforge.net/) 是 tcp 数据包嗅探器。使用此嗅探器你可以选择收集低级别的数据还是高级别的数据。它也可以让你以自定义方式生成日志。比如模仿 Apache 的访问日志。
+* man
+    * [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/
+* git
+    * [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
+    * tig：字符模式下交互查看git项目，可以替代git命令。
+* download
+    - you-get: 非常强大的媒体下载工具，支持youtube、google+、优酷、芒果TV、腾讯视频、秒拍等视频下载。
+    - axel：多线程下载工具，下载文件时可以替代curl、wget。
+* sql
+    - mycli：mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令。
+* json
+    - jq: json文件处理以及格式化显示，支持高亮，可以替换python -m json.tool。
+* 代码统计
+    - cloc：代码统计工具，能够统计代码的空行数、注释行、编程语言。
 * [svenstaro/genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator https://svenstaro.github.io/genact/
-* [](https://www.noobslab.com/)
 * [kentcdodds/cross-env](https://github.com/kentcdodds/cross-env):🔀 Cross platform setting of environment scripts https://www.npmjs.com/package/cross-env
 * [Swordfish90/cool-retro-term](https://github.com/Swordfish90/cool-retro-term):A good looking terminal emulator which mimics the old cathode display...
 * [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
@@ -1255,9 +1276,9 @@ done
 * [faressoft/terminalizer](https://github.com/faressoft/terminalizer):🦄 Record your terminal and generate animated gif images
 * [niieani/bash-oo-framework](https://github.com/niieani/bash-oo-framework):Bash Infinity is a modern boilerplate / framework / standard library for bash
 * [ericfreese/rat](https://github.com/ericfreese/rat):Compose shell commands to build interactive terminal applications
-* [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings.
 * [kovidgoyal/kitty](https://github.com/kovidgoyal/kitty):A cross-platform, fast, feature full, GPU based terminal emulator
-* [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
+* 自动更正命令
+    - [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
 * [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
 * [sindresorhus/fkill-cli](https://github.com/sindresorhus/fkill-cli):Fabulously kill processes. Cross-platform.
 * [tartley/colorama](https://github.com/tartley/colorama):Simple cross-platform colored terminal text in Python
@@ -1266,8 +1287,9 @@ done
 * [liamg/aminal](https://github.com/liamg/aminal):Golang terminal emulator from scratch
 * [amanusk/s-tui](https://github.com/amanusk/s-tui):Terminal based CPU stress and monitoring utility https://amanusk.github.io/s-tui/
 * [GitSquared/edex-ui](https://github.com/GitSquared/edex-ui):A science fiction terminal emulator designed for large touchscreens that runs on all major OSs.
-* [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
 
 ## 参考
 
 * [dylanaraps/pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):📖 A collection of pure bash alternatives to external processes.
+* [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)：A curated list of awesome command-line frameworks, toolkits, guides and gizmos. Inspired by awesome-php.
+* [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)

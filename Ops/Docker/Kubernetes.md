@@ -340,6 +340,7 @@ kubectl delete deployments hello-minikube1
 * [kubeflow/kubeflow](https://github.com/kubeflow/kubeflow):Machine Learning Toolkit for Kubernetes
 * [kubernetes/dashboard](https://github.com/kubernetes/dashboard):General-purpose web UI for Kubernetes clusters
 * [genuinetools/binctr](https://github.com/genuinetools/binctr):Fully static, unprivileged, self-contained, containers as executable binaries. https://blog.jessfraz.com/post/getting-towards-real-sandbox-containers/
+* [kubernetes/kompose](https://github.com/kubernetes/kompose):Go from Docker Compose to Kubernetes http://kompose.io
 
 <http://violetgo.com/blogs/>
 <http://www.winseliu.com/>
