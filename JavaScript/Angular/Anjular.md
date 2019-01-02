@@ -14,3 +14,4 @@ One framework. Mobile & desktop. https://angular.io
 
 * [rintoj/ngx-virtual-scroller](https://github.com/rintoj/ngx-virtual-scroller):Virtual Scroll displays a virtual, "infinite" list. 
 * [angular/angular-cli](https://github.com/angular/angular-cli):CLI tool for Angular https://cli.angular.io/
+* [akveo/nebular](https://github.com/akveo/nebular):Angular 7 Components, Auth and Security https://akveo.github.io/nebular

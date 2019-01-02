@@ -613,13 +613,6 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 [revolunet-logo]: http://www.revolunet.com/static/parisjs8/img/logo-revolunet-carre.jpg "revolunet logo"
 [st]: http://sublimetext.com
 
-## 编辑器
-
-* [typora](https://www.typora.io/)
-- MWeb Lite
-- MacDow：MWeb 是专业的 Markdown 写作、记笔记、静态博客生成软件。然后这里**重点说明**一下：MWeb 有**两个模式**，外部模式和文档库模式。外部模式中把本地硬盘或 Dropbox 等网盘的文件夹引入，就可以使用 MWeb 的拖拽、粘贴插入图片、图床等特色功能。文档库模式设计为用于记笔记和静态博客生成。对于有**同步和协作需求**的朋友，请使用外部模式！使用视图菜单或者快捷键 `CMD + E` 可以打开外部模式，`CMD + L` 可以打开文档库。左边的第一第二栏是使用**右键**和底部的几个按钮操作，另外就是右上角有三个按钮了（外部模式是两个），快捷键分别是：`CMD + 7/8/9`。
-- [marktext/marktext](https://github.com/marktext/marktext):📝Next generation markdown editor, running on platforms of MacOS Windows and Linux. https://marktext.github.io/website/ `brew cask install mark-text`
-
 ### writing on MWeb MWeb 写作使用说明
 
 如果不想打这么多空格，只要回车就为换行，请勾选：`Preferences` - `Themes` - `Translate newlines to <br> tags`
@@ -655,11 +648,17 @@ Actions->Insert Read More Comment *或者* `Command + .`
     + MarkdownLivePreview `alt + m`
     + Markdown​TOC
 
+## 编辑器
+
+* [typora](https://www.typora.io/)
+- MWeb Lite
+- MacDow：MWeb 是专业的 Markdown 写作、记笔记、静态博客生成软件。然后这里**重点说明**一下：MWeb 有**两个模式**，外部模式和文档库模式。外部模式中把本地硬盘或 Dropbox 等网盘的文件夹引入，就可以使用 MWeb 的拖拽、粘贴插入图片、图床等特色功能。文档库模式设计为用于记笔记和静态博客生成。对于有**同步和协作需求**的朋友，请使用外部模式！使用视图菜单或者快捷键 `CMD + E` 可以打开外部模式，`CMD + L` 可以打开文档库。左边的第一第二栏是使用**右键**和底部的几个按钮操作，另外就是右上角有三个按钮了（外部模式是两个），快捷键分别是：`CMD + 7/8/9`。
+- [marktext/marktext](https://github.com/marktext/marktext):📝Next generation markdown editor, running on platforms of MacOS Windows and Linux. https://marktext.github.io/website/ `brew cask install mark-text`
+* [fabiospampinato/notable](https://github.com/fabiospampinato/notable):The markdown-based note-taking app that doesn't suck.
+
 ## 工具
 
-* [
-
-ikatyang/emoji-cheat-sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md):A markdown version emoji cheat sheet
+* [ikatyang/emoji-cheat-sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md):A markdown version emoji cheat sheet
 * [zhangjikai/online-markdown-reader](https://github.com/zhangjikai/online-markdown-reader):Markdown 在线阅读器 http://markdown.zhangjikai.com/
 * [tamlok/vnote](https://github.com/tamlok/vnote):A Vim-inspired note-taking application that knows programmers and Markdown better. https://tamlok.github.io/vnote
 * [nhnent/tui.editor](https://github.com/nhnent/tui.editor):🍞📝 Markdown WYSIWYG Editor. GFM Standard + Chart & UML Extensible. http://ui.toast.com/tui-editor

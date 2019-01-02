@@ -273,6 +273,15 @@
 * [DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python](https://github.com/DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python):这是一个完整的，端到端的机器学习项目，非常适合有一定基础后拿来练习，以提高对完整机器学习项目的认识
 * [Doraemonzzz/Learning-from-data](https://github.com/Doraemonzzz/Learning-from-data):记录Learning from data一书中的习题解答 http://amlbook.com/
 
+## 工具
+
+* [guess-js/guess](https://github.com/guess-js/guess):Libraries & tools for enabling Machine Learning driven user-experiences on the web
+* [gorgonia/gorgonia](https://github.com/gorgonia/gorgonia):Gorgonia is a library that helps facilitate machine learning in Go.
+* [ray-project/ray](https://github.com/ray-project/ray):A system for parallel and distributed Python that unifies the ML ecosystem. https://ray.readthedocs.io/en/latest/
+* [google/jax](https://github.com/google/jax):GPU- and TPU-backed NumPy with differentiation and JIT compilation.
+* [Core ML](link)
+* [tirthajyoti/UCI-ML-API](https://github.com/tirthajyoti/UCI-ML-API):UCI ML网站引入一个简单直观的API，用户可以轻松查找数据集描述，搜索他们感兴趣的特定数据集，甚至可以按大小或机器学习任务分类下载数据集。
+
 ## 参考
 
 * [josephmisiti/awesome-machine-learning](https://github.com/josephmisiti/awesome-machine-learning)A curated list of awesome Machine Learning frameworks, libraries and software.
@@ -284,13 +293,4 @@
 * [mlflow/mlflow](https://github.com/mlflow/mlflow):Open source platform for the machine learning lifecycle https://mlflow.org
 * [zhaozhengcoder/Machine-Learning](https://github.com/zhaozhengcoder/Machine-Learning)：关于机器学习的内容
 * [GokuMohandas/practicalAI](https://github.com/GokuMohandas/practicalAI):A practical approach to learning machine learning.
-
-## 工具
-
-* [guess-js/guess](https://github.com/guess-js/guess):Libraries & tools for enabling Machine Learning driven user-experiences on the web
-* [gorgonia/gorgonia](https://github.com/gorgonia/gorgonia):Gorgonia is a library that helps facilitate machine learning in Go.
-* [ray-project/ray](https://github.com/ray-project/ray):A system for parallel and distributed Python that unifies the ML ecosystem. https://ray.readthedocs.io/en/latest/
-* [google/jax](https://github.com/google/jax):GPU- and TPU-backed NumPy with differentiation and JIT compilation.
-* [guess-js/guess](https://github.com/guess-js/guess):Libraries & tools for enabling Machine Learning driven user-experiences on the web https://guess-js.github.io/
-* [Core ML](link)
-* [tirthajyoti/UCI-ML-API](https://github.com/tirthajyoti/UCI-ML-API):UCI ML网站引入一个简单直观的API，用户可以轻松查找数据集描述，搜索他们感兴趣的特定数据集，甚至可以按大小或机器学习任务分类下载数据集。
+* [sea-boat/MachineLearning_Lab](https://github.com/sea-boat/MachineLearning_Lab):Code lab for machine learning. Including Least Square Method,Gradient Descent,Newton's Method,Hierarchy Cluster,KNN,Markov,Adaboost,Random Number Generation(all kinds of distributions),N Sigma outlier detection,outlier detection based on median,FFT outlier detection,DBSCAN,Kmeans,Naive Bayes,perceptron,reinforcement learning.

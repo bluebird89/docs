@@ -553,6 +553,10 @@
 * Borland传奇
 * 《自私的基因》Richard Dawkins
 * 全栈应用开发：精益实践
+* 奈飞文化手册:只招成年人。
+* 《发挥你的优势》
+* 《一万小时理论》
+* 《反脆弱》
 
 Evolutionary Architecture
 Clean Code, Design Patterns, DDD
