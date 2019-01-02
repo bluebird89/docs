@@ -123,7 +123,6 @@ Markdown 语法： **Example:**
   - And this
 ```
 
-
 效果如下： **Result:**
 
 * Item 1 unordered list `* + SPACE`
@@ -574,6 +573,32 @@ Note right of Bob: Bob thinks
 Bob-->Alice: I am good thanks!
 ```
 
+### Mentioning people and teams
+
+```
+@github/support What do you think about these updates?
+```
+
+### Referencing issues and pull requests
+
+bring up a list of suggested issues and pull requests within the repository by typing #
+
+### Paragraphs and line breaks
+
+You can create a new paragraph by leaving a blank line between lines of text
+
+### Using emoji
+
+You can add emoji to your writing by typing :EMOJICODE:.
+
+@octocat :+1: This PR looks great - it's ready to merge! :shipit:
+
+### Ignoring Markdown formatting
+
+You can tell GitHub to ignore (or escape) Markdown formatting by using \ before the Markdown character.
+
+Let's rename \*our-new-project\* to \*our-old-project\*.
+
 [1]: https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown
 [2]: https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#cmd-markdown-高阶语法手册
 [3]: http://weibo.com/ghosert
@@ -632,6 +657,9 @@ Actions->Insert Read More Comment *或者* `Command + .`
 
 ## 工具
 
+* [
+
+ikatyang/emoji-cheat-sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md):A markdown version emoji cheat sheet
 * [zhangjikai/online-markdown-reader](https://github.com/zhangjikai/online-markdown-reader):Markdown 在线阅读器 http://markdown.zhangjikai.com/
 * [tamlok/vnote](https://github.com/tamlok/vnote):A Vim-inspired note-taking application that knows programmers and Markdown better. https://tamlok.github.io/vnote
 * [nhnent/tui.editor](https://github.com/nhnent/tui.editor):🍞📝 Markdown WYSIWYG Editor. GFM Standard + Chart & UML Extensible. http://ui.toast.com/tui-editor

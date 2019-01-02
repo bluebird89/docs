@@ -129,6 +129,8 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 
 hammer_and_wrench CLI for rapid Vue.js development https://cli.vuejs.org/
 
+* 3.0:图形化界面
+
 ```sh
 npm install @vue/cli -g
 yarn global add @vue/cli
