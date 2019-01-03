@@ -108,26 +108,14 @@ smaba
     -   CmapTools：概念图
     -   UML:staruml
 -   写作
-    -   markdown
-        -   Mou for Mac
-        -   Ulysses for Mac
-        -   MWeb Lite
-        -   MWeb for Mac
-        -   [MacDown](https://github.com/MacDownApp/macdown)Open source Markdown editor for macOS.
-        - Mark Text:实时显示的markdown编辑器
-        - 幕布
     -   Latex
     -   Alternote(evernote简单客户端)
-    -   思维导图
-        - [MindNode 2](https://mindnode.com/)（收费）
-        - XMind
     -   Quiver：笔记软件
     -   [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
     -   [ulysses](https://ulyssesapp.com/)
     -   [marked2](http://marked2app.com/)
     -   [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
     -   Upad
-    - [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
 - 下载
     - bitlord
     - Folx
@@ -145,7 +133,6 @@ smaba
 -   Pod
     -   [insidegui/PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
 -   Web开发
-    -   MySql：Sequel Pro
     -   [Paw](https://paw.cloud/):The most advanced API tool for Mac
     -   MAMP:基础版不支持自定义
     -   虚拟机：parallels
@@ -165,15 +152,13 @@ smaba
     -   Fantastical：日程管理应用
     -   Omnifocus 在践行 GTD
     -   sourcetree
-    -   tig
     -   [Ship](https://www.realartists.com/index.html):Fast, native, comprehensive issue tracking and code review for GitHub
     -   [trello](https://trello.com/home): Project management tool
     -   [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
     -   Day One - Digital journal
 - 文档
     -   [dash](https://kapeli.com/dash):语言文档
-    -   Quiver：文档管理器
-    -   文档：[apidoc](http://apidocjs.com/)
+    -   [apidoc](http://apidocjs.com/)
     -   [jgm/pandoc](https://github.com/jgm/pandoc):Universal markup converter <http://johnmacfarlane.net/pandoc>
     -   [TRANSMIT 5](https://www.panic.com/transmit/):Upload, download, and manage files on tons of servers with an easy, familiar, and powerful UI. It’s quite good.
     -   Cloud Outline
@@ -210,7 +195,6 @@ smaba
 -   在文件位置移开未见重命名.m4r
 -   拖进tones
 -   同步手机
-
 
     npm install apidoc -g
     apidoc -i myapp/ -o apidoc/ -t mytemplate/
