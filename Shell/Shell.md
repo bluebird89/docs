@@ -1191,6 +1191,12 @@ done
 - cmder
 - ConEmu
 - [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
+* [msys2](http://www.msys2.org/)
+* powercmd
+* [cmder + gow](http://bliker.github.io/cmder/)
+* git bash
+* [Babun](http://babun.github.io/)
+* [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
 
 ## 教程
 
