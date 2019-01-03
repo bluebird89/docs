@@ -47,7 +47,7 @@ conda create --name <new_env_name> --clone <copied_env_name> # 复制环境
 source activate env_name # 进入名为 env_name 的环境
 activate env_name # for Windows
 source deactivate [env_name] # 退出当前环境
-deactivate python34 [env_name] # for Windows
+deactivate [env_name] # for Windows
 
 conda env remove -n env_name --all # 删除名为 env_name 的环境
 
