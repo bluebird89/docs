@@ -173,6 +173,8 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 * 压力测试
     - apache AB
     + webbench
+- record and replay
+    + [rrweb-io/rrweb](https://github.com/rrweb-io/rrweb):record and replay the web https://www.rrweb.io/
 - [缩短网址](http://suo.im/)
 - [google/pprof](https://github.com/google/pprof):pprof is a tool for visualization and analysis of profiling data
 * [GoogleChromeLabs/quicklink](https://github.com/GoogleChromeLabs/quicklink):⚡️Faster subsequent page-loads by prefetching in-viewport links during idle time 
