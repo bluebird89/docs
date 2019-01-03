@@ -214,8 +214,11 @@ Linux 文件系统是一个目录树的结构，文件系统结构从一个根�
   - /dev/ttys：计算机串行接口，对于dos来说就是“com1”口。
   - /dev/cua：计算机串行接口，与调制解调器一起使用的设备。
   - /dev/null：“黑洞”，所有写入该设备的信息都将消失。例如：当想要将屏幕 上的输出信息隐藏起来时，只要将输出信息输入到/dev/null中即可。
-* /etc：系统管理和配置文件。
-  * /etc/rc或者/etc/rc.d：启动、或改变运行级时运行的脚本或脚本的目录。系统初始化文件
+* /etc：系统管理和配置文件
+  - /etc/hostname:系统的hostname
+  - /etc/network/interfaces：网络接口
+  - /etc/resolv.conf:系统的dns服务
+  * /etc/rc或者/etc/rc.d或者/etc/init.d：启动、或改变运行级时运行的脚本或脚本的目录。系统初始化文件
   * /etc/passwd：用户数据库，其中的域给出了用户名、真实姓名、用户起始目 录、加密口令和用户的其他信息。
   - /etc/fdprm：软盘参数表，用以说明不同的软盘格式。可用setfdprm进 行设置。更多的信息见setfdprm的帮助页。
   - /etc/fstab：指定启动时需要自动安装的文件系统列表。也包括用swapon -a启用的swap区的信息。
@@ -228,7 +231,7 @@ Linux 文件系统是一个目录树的结构，文件系统结构从一个根�
   - /etc/shadow：在安装了影子(shadow)口令软件的系统上的影子口令 文件。影子口令文件将/etc/passwd文件中的加密口令移动到/etc/shadow中，而后者只对超级用户(root)可读。这使破译口令更困 难，以此增加系统的安全性。
   - /etc/login.defs：login命令的配置文件。
   - /etc/printcap：类似/etc/termcap ，但针对打印机。语法不同。
-  - /etc/profile 、/etc/csh.login、/etc/csh.cshrc：登 录或启动时bourne或cshells执行的文件。这允许系统管理员为所有用户建立全局缺省环境。
+  - /etc/profile 、/etc/csh.login、/etc/csh.cshrc：登录或启动时bourne或cshells执行的文件。这允许系统管理员为所有用户建立全局缺省环境。
   - /etc/securetty：确认安全终端，即哪个终端允许超级用户(root) 登录。一般只列出虚拟控制台，这样就不可能(至少很困难)通过调制解调器(modem)或网络闯入系统并得到超级用户特权。
   - /etc/shells：列出可以使用的shell。chsh命令允许用户在本文件 指定范围内改变登录的shell。提供一台机器ftp服务的服务进程ftpd检查用户shell是否列在/etc/shells文件 中，如果不是，将不允许该用户登录。
   - /etc/termcap：终端性能数据库。说明不同的终端用什么“转义序列”控 制。写程序时不直接输出转义序列(这样只能工作于特定品牌的终端)，而是从/etc/termcap中查找要做的工作的 正确序列。这样，多数的程序可以在多数终端上运行。
