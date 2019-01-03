@@ -9,10 +9,6 @@ Windows是最烂的开发平台
   - launchy
   - [Wox-launcher/Wox](https://github.com/Wox-launcher/Wox):Launcher for Windows, an alternative to Alfred and Launchy. http://wox.one
   - Rolan
-* markdown编辑器
-    - 作业部落
-    - MarkdownPad(需要浏览器渲染插件awesome)
-    - MarkPad
 * 资源管理器: Clover Total Commander
 * 快捷键：AutoHotKey
 * 本地搜索：Listary Everything
@@ -37,14 +33,6 @@ Windows是最烂的开发平台
 * Foxit Reader
 * editor：Visual Studio Code
 * Sumatra PDF:pdf 支持 EPUB、MOBI 格式的电子书，以及 XPS、DjVu、CHM
-* 命令行
-    - xshell
-    - [msys2](http://www.msys2.org/)
-    - powercmd
-    - [cmder + gow](http://bliker.github.io/cmder/)
-    - git bash
-    - [Babun](http://babun.github.io/)
-    - [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
 * 电子书管理神器：Calibre
 * CCleaner, Defraggler, Recuva & Speccy.
 * Evernote
@@ -72,7 +60,6 @@ Windows是最烂的开发平台
 * Picasa 图像管理
 * Skype 语音通信/即时通信
 * Pidgin 即时通信
-* Ubuntu 操作系统
 * iTunes 音乐平台
 * foobar2000 媒体播放
 * Foxit Reader PDF阅读
@@ -194,8 +181,8 @@ FTYPE pngfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo V
   - 输入"mip"，启动数学公式手写板；
   - cmd进入命令行
 
-```
-ipconfig /flushdns：刷新域名
+```sh
+ipconfig /flushdns # 刷新域名
 ```
 
 快捷方式可以设置快捷键
@@ -237,7 +224,6 @@ Soar360@live.com
 
 GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==
 ```
-
 
 ## 系统
 

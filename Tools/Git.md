@@ -297,6 +297,7 @@ git init --bare # 远程仓库文件构建
 git init [project-name] # 初始化git仓库 在当前目录内新建一个Git代码库，会生成.git文件，用于新建空项目文件或者将项目添加git管理，默认URL文件名称，也可以自定义project-name
 
 git clone [url] [project-name] # 下载一个项目和它的整个代码历史,支持多种协议
+--recrusive-submodules # init submodule
 git clone http[s]://example.com/path/to/repo.git/
 git clone ssh://example.com/path/to/repo.git/
 git clone [user@]example.com:path/to/repo.git/
@@ -310,7 +311,7 @@ git clone --depth=1 https://github.com/rwv/chinese-dos-games.git
 
 # 从远程仓库中克隆一个特定的分支
 git init
-git remote add -t  -f origin
+git remote add url origin
 git checkout
 ```
 
@@ -511,8 +512,10 @@ git filter-branch --prune-empty --subdirectory-filter  master # 将Git仓库中�
 
 #### 远程分支
 
-* git merge 处理冲突更直接
-* git rebase 合并分支，但是不合并提交记录（commit），rebase合并如果有冲突则一个一个文件的去合并解决冲突,能够保证清晰的 commit 记录。
+* merge 处理冲突更直接
+* rebase 合并分支，重写历史
+  * 合并分支，但是不合并提交记录（commit）
+  * rebase合并如果有冲突则一个一个文件的去合并解决冲突,能够保证清晰的 commit 记录。
   - 变基会通过在原来的分支中为每次提交创建全新提交来重写项目历史。变基的主要好处在于你会得到一个更加整洁的项目历史
   - rebase 先找出共同的祖先节点
   - 从祖先节点把功能分支的提交记录摘下来，然后 rebase 到 master 分支
@@ -558,6 +561,8 @@ git rebase someFeature # 将someFeature分支上的commit记录追加到主分�
 git rebase origin/master # 在本地分支上合并远程分支
 git rebase source destiantion # 将source压缩到destiantion
 git rebase -–continue|skip|abort # 如果出错的话
+
+git rebase -i start_commit_hash end_commit_hash # combine to one commit
 git rebase -i HEAD~5 # Squash last n commits into one commit
 git rebase -i # 通过交互式的 rebase，提供对分支 commit 的控制，从而可以清理混乱的历史。
 
@@ -789,9 +794,11 @@ Git extensions to provide high-level repository operations for Vincent Driessen'
 ![Git Flow](../_static/git_flow_1.png "Optional title")
 
 ```sh
+git flow init
+
 # 开发工作流程
 git flow feature start xxxxx # （开始新需求） 在feature/xxxxx分支下进行开发
-git flow feature finish xxxxx # （开发完成后等待研发经理确认可以完成时执行）
+git flow feature finish xxxxx # （开发完成后等待研发经理确认可以完成时执行） merge to branch develop, delete branch feature/xxxxx, checkout to develop
 git push origin develop #（发布develop分支） 每天工程师都需要git pull origin develop来更新develop分支，然后将develop分支合并到你正在开发得feature/xxxxx分支上来保持代码最新
 # 切记不能直接在develop上进行开发
 
@@ -806,17 +813,18 @@ git fetch
 git checkout -b hotfix/x.x.x origin/hotfix/x.x.x #（拉回hotfix分支）
 git pull hfx.x #（更新hotfix分支）在热修复分支下修改bug
 git push origin hfx.x # （修改完成，提交分支） 在日常工作中不能修改master分支下得代码
-
 # 开发和DEBUG流程同工程师流程 常规分支debug流程
 git pull origin develop # 更新develop分支为最新）
 git checkout develop # 切换到develop分支）
+
+# release
 git flow release start x.x # 生成一个release分支）通知测试和相关得工程师分支名称
 git pull origin release/x.x # 最终测试完成后拉回分支最新代码）
 git flow release finish x.x # 最终修改和测试完成后，结束release版本以供发布）
-git push origin develo # (发布最新的develop)
+git push origin develop # (发布最新的develop)
 git push origin master # 发布最终得master分支）
 
-# 紧急debug流程：
+# hotfix
 git pull origin master # 更新master分支为最新）
 git checkout master # 切换到master分支）
 git flow hotfix start x.x.x # 生成一个hotfix分支）通知相关得工程师和测试人员hotfix分支名称
@@ -1136,7 +1144,9 @@ git submodule foreach git pull origin master # 出错后会停止更新后面
 
 # clone后初始化
 git submodule init
-git submodule update
+git submodule update submodule
+git submodule update --recrusive --init
+git submodule deinit submodule # delete config
 
 # 删除 首先删除.gitsubmodule中的项目配置
 git rm --cached another_project # 删除项目
