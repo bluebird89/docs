@@ -740,6 +740,8 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
   - [expressjs/compression](https://github.com/expressjs/compression):Node.js compression middleware
 * hooks
   - [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
+* i18n
+  - [i18next/i18next](https://github.com/i18next/i18next):i18next: learn once - translate everywhere http://i18next.com/
 
 ## 面试
 
