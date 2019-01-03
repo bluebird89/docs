@@ -94,8 +94,9 @@ __This will also be bold__
 
 ## 换行 Newlines
 
-四个及以上空格加回车。
-End a line with two or more spaces + enter.
+* End a line with two or more spaces + enter
+* add new line between two section
+* first line add <br> </br>
 
 ## 列表 Lists
 
@@ -650,8 +651,21 @@ Actions->Insert Read More Comment *或者* `Command + .`
 
 ## 编辑器
 
+* mac
+    - Mou for Mac
+    - Ulysses for Mac
+    - MWeb Lite
+    - MWeb for Mac
+    - [MacDown](https://github.com/MacDownApp/macdown)Open source Markdown editor for macOS.
+    - Mark Text:实时显示的markdown编辑器
+    * [幕布](https://mubu.com/):可折叠的markdown
+    - [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
 * [typora](https://www.typora.io/)
-- MWeb Lite
+* windows
+    - MarkdownPad(需要浏览器渲染插件awesome)
+    - MarkPad
+    - Cmd Markdown
+    - [zybuluo](https://www.zybuluo.com/cmd/)
 - MacDow：MWeb 是专业的 Markdown 写作、记笔记、静态博客生成软件。然后这里**重点说明**一下：MWeb 有**两个模式**，外部模式和文档库模式。外部模式中把本地硬盘或 Dropbox 等网盘的文件夹引入，就可以使用 MWeb 的拖拽、粘贴插入图片、图床等特色功能。文档库模式设计为用于记笔记和静态博客生成。对于有**同步和协作需求**的朋友，请使用外部模式！使用视图菜单或者快捷键 `CMD + E` 可以打开外部模式，`CMD + L` 可以打开文档库。左边的第一第二栏是使用**右键**和底部的几个按钮操作，另外就是右上角有三个按钮了（外部模式是两个），快捷键分别是：`CMD + 7/8/9`。
 - [marktext/marktext](https://github.com/marktext/marktext):📝Next generation markdown editor, running on platforms of MacOS Windows and Linux. https://marktext.github.io/website/ `brew cask install mark-text`
 * [fabiospampinato/notable](https://github.com/fabiospampinato/notable):The markdown-based note-taking app that doesn't suck.
@@ -669,7 +683,6 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * [aaronsw/html2text](https://github.com/aaronsw/html2text):Convert HTML to Markdown-formatted text. http://www.aaronsw.com/2002/html2text/
 * [benweet/stackedit](https://github.com/benweet/stackedit):In-browser Markdown editor https://stackedit.io/
 * [showdownjs/showdown](https://github.com/showdownjs/showdown):A bidirectional Markdown to HTML to Markdown converter written in Javascript http://www.showdownjs.com/
-* [幕布](https://mubu.com/):可折叠的markdown
 * [adam-p/markdown-here](https://github.com/adam-p/markdown-here):Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. http://markdown-here.com
 * [benweet/stackedit](https://github.com/benweet/stackedit):In-browser Markdown editor https://stackedit.io/
 * [markedjs/marked](https://github.com/markedjs/marked):A markdown parser and compiler. Built for speed. https://marked.js.org/
@@ -677,8 +690,6 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * [nhnent/tui.editor](https://github.com/nhnent/tui.editor):🍞📝 Markdown WYSIWYG Editor. GFM Standard + Chart & UML Extensible. http://ui.toast.com/tui-editor
 * [Mark Text](https://github.com/marktext/marktext/)
 * [evilstreak/markdown-js](https://github.com/evilstreak/markdown-js):A Markdown parser for javascript
-* Cmd Markdown
-* [zybuluo](https://www.zybuluo.com/cmd/)
 
 ## 参考
 

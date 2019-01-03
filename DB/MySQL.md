@@ -35,6 +35,7 @@ Open source relational database management system
     + Handles authentication using MySQL credentials
     + Executes and returns results for arbitrary SQL queries
 - 命令行
+- Sequel Pro
 
 ## 安装
 

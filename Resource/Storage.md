@@ -1,4 +1,4 @@
-## 存储 Store
+# 存储 Store
 
 -   [腾讯微云](https://www.weiyun.com/)
 -   [Google Drive](https://drive.google.com/drive/)
@@ -13,6 +13,13 @@
 - [nextcloud/server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data https://nextcloud.com
 * [Resilio](link)
 
+## md5 verdify
+
+```sh
+md5sum /path/filename
+sha256sum /path/filename
+```
+
 ## 工具
 
 - [syncthing/syncthing](https://github.com/syncthing/syncthing):Open Source Continuous File Synchronization https://forum.syncthing.net/
@@ -26,3 +33,4 @@
 * [proxyee-down-org/proxyee-down](https://github.com/proxyee-down-org/proxyee-down):http下载工具，基于http代理，支持多连接分块下载
 * [yangshun1029/aria2gui](https://github.com/yangshun1029/aria2gui):Aria2GUI for macOS
 * [webtorrent/webtorrent-desktop](https://github.com/webtorrent/webtorrent-desktop):❤️ Streaming torrent app for Mac, Windows, and Linux https://webtorrent.io/desktop
+* [agalwood/Motrix](https://github.com/agalwood/Motrix):A full-featured download manger. https://motrix.app/
