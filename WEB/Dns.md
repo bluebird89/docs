@@ -82,6 +82,13 @@ nslookup #  命令用于互动式地查询域名记录
 whois github.com # 用来查看域名的注册情况
 ```
 
+### 列表
+
+```
+8.8.8.8
+8.8.4.4
+```
+
 ## 工具
 
 * [jedisct1/dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. https://dnscrypt.info
