@@ -88,33 +88,23 @@ ng generate module my-module # 模块Modulew
 
 * [chieffancypants/angular-loading-bar](https://github.com/chieffancypants/angular-loading-bar):A fully automatic loading / progress bar for your angular apps. 
 * [akveo/nebular](https://github.com/akveo/nebular):Angular 7 Components, Auth and Security https://akveo.github.io/nebular
+* [ngrx/platform](https://github.com/ngrx/platform):Reactive libraries for Angular https://ngrx.io
 
-## 地图
-
-* [SebastianM/angular-google-maps](https://github.com/SebastianM/angular-google-maps):Angular 2+ Google Maps Components https://angular-maps.com/
-
-## styleguide
-
-* [toddmotto/angularjs-styleguide](https://github.com/toddmotto/angularjs-styleguide):AngularJS styleguide for teams https://ultimateangular.com
-
-## 脚手架
-
-* [angular/angular-cli](https://github.com/angular/angular-cli):CLI tool for Angular
-
-## UI
-
-* [angular/material](https://github.com/angular/material):Material design for AngularJS https://material.angularjs.org/
-* [angular/material2](https://github.com/angular/material2):Material Design components for Angular https://material.angular.io
-* [angular/flex-layout](https://github.com/angular/flex-layout):Provides HTML UI layout for Angular applications; using Flexbox and a Responsive API
-
-## 测试
-
-* [rangle/augury](https://github.com/rangle/augury):Angular Debugging and Visualization Tools https://augury.angular.io/
-
-## 升级
-
-* [ngMigration Assistant](https://github.com/ellamaolson/ngMigration-Assistant):一个命令行工具，用于分析 AngularJS 应用程序，并在此基础上，提出迁移路径建议。同时，它还提供应用程序中代码复杂性、大小、构造等方面的统计信息，告诉你迁移之前必要的准备工作。
-* [ngMigration Forum](https://github.com/angular/ngMigration-Forum/wiki): 是一个社区，聚集了网络上最佳的迁移经验和信息。
+* 地图
+    - [SebastianM/angular-google-maps](https://github.com/SebastianM/angular-google-maps):Angular 2+ Google Maps Components https://angular-maps.com/
+* styleguide
+    - [toddmotto/angularjs-styleguide](https://github.com/toddmotto/angularjs-styleguide):AngularJS styleguide for teams https://ultimateangular.com
+* 脚手架
+    - [angular/angular-cli](https://github.com/angular/angular-cli):CLI tool for Angular
+* UI
+    - [angular/material](https://github.com/angular/material):Material design for AngularJS https://material.angularjs.org/
+    - [angular/material2](https://github.com/angular/material2):Material Design components for Angular https://material.angular.io
+    - [angular/flex-layout](https://github.com/angular/flex-layout):Provides HTML UI layout for Angular applications; using Flexbox and a Responsive API
+* 测试
+    - [rangle/augury](https://github.com/rangle/augury):Angular Debugging and Visualization Tools https://augury.angular.io/
+* 升级
+    - [ngMigration Assistant](https://github.com/ellamaolson/ngMigration-Assistant):一个命令行工具，用于分析 AngularJS 应用程序，并在此基础上，提出迁移路径建议。同时，它还提供应用程序中代码复杂性、大小、构造等方面的统计信息，告诉你迁移之前必要的准备工作。
+    - [ngMigration Forum](https://github.com/angular/ngMigration-Forum/wiki): 是一个社区，聚集了网络上最佳的迁移经验和信息。
 
 ## 教程
 

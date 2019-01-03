@@ -110,22 +110,31 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * Bucket Sort
 * Dadix Sort
 
+# 资源
+
+* [leetcode-cn](https://leetcode-cn.com/)
+* [leetcode](https://leetcode.com/)
+
+## 课程
+
+* [MIT](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-spring-2008/)
+* [十大算法精讲](https://www.bilibili.com/video/av18109226/)
+* [麻省理工学院公开课：算法导论](https://www.bilibili.com/video/av1149902)
+* [公开课](http://open.163.com/special/opencourse/algorithms.html)
+* [Erickson 算法](http://jeffe.cs.illinois.edu/teaching/algorithms/)
+    - [jeffgerickson/algorithms](https://github.com/jeffgerickson/algorithms):Bug-tracking for Jeff's algorithms book, notes, etc.
+    - [作业](http://jeffe.cs.illinois.edu/teaching/algorithms/hwex.html)
+
 ## 参考
 
 * [OpenGenus/cosmos](https://github.com/OpenGenus/cosmos):[Show ❤️ love by 🌟] Your personal library of every algorithm and data structure code that you will ever encounter
 * [keon/algorithms](https://github.com/keon/algorithms):Minimal examples of data structures and algorithms in Python\
 * [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges):Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
 * [python](https://github.com/ssjssh/algorithm)
-* [MIT](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-spring-2008/)
-* [公开课](http://open.163.com/special/opencourse/algorithms.html)
 * https://visualgo.net/en:可视化
 * [我接触过的前端数据结构与算法](https://juejin.im/post/5958bac35188250d892f5c91)
 * [LeuisKen/algorithm](https://github.com/LeuisKen/algorithm)
-* [leetcode-cn](https://leetcode-cn.com/)
-* [leetcode](https://leetcode.com/)
 * [Dictionary of Algorithms and Data Structures](https://xlinux.nist.gov/dads/)
-* [【公开课】十大算法精讲](https://www.bilibili.com/video/av18109226/)
-* [麻省理工学院公开课：算法导论](https://www.bilibili.com/video/av1149902)
 * [frowhy/Algorithm](https://github.com/frowhy/Algorithm)
 * [TheAlgorithms/Python](https://github.com/TheAlgorithms/Python):All Algorithms implemented in Python
 * [TheAlgorithms/Java](https://github.com/TheAlgorithms/Java):All Algorithms implemented in Java
