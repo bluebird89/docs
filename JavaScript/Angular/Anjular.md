@@ -4,6 +4,7 @@ One framework. Mobile & desktop. https://angular.io
 
 ## UI
 
+* [angular/material](https://github.com/angular/material):Material design for AngularJS https://material.angularjs.org/
 * [angular/material2](https://github.com/angular/material2):Material Design components for Angular https://material.angular.io
 
 ## 参考

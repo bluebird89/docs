@@ -23,7 +23,6 @@ npm install bootstrap@3
 ## 扩展
 
 * [FezVrasta/bootstrap-material-design](https://github.com/FezVrasta/bootstrap-material-design)
-* [easysoft/zui](https://github.com/easysoft/zui):ZUI is an HTML5 front UI framework. http://zui.sexy
 
 ## 参考
 

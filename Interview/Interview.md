@@ -381,6 +381,11 @@ export HISTTIMEFORMAT
 
 整个 Github 公司有 60% 的员工是在家里远程办公。新员工培训：在公司内的聊天室内，静静地看别人聊天，体会一下别人是如何工作的
 
+## 工具
+
+* [salomonelli/best-resume-ever](https://github.com/salomonelli/best-resume-ever):Build fast 🚀 and easy multiple beautiful resumes and create your best CV ever! Made with Vue and LESS.
+- [lukasz-madon/awesome-remote-job](https://github.com/lukasz-madon/awesome-remote-job)
+
 ## 资源
 
 * [yangshun/tech-interview-handbook](https://github.com/yangshun/tech-interview-handbook):💯 Algorithms, front end and behavioral content for rocking your coding interview 🆕 Interview Cheatsheet! 🆕
@@ -398,13 +403,4 @@ export HISTTIMEFORMAT
 * [imhuay/Algorithm_Interview_Notes-Chinese](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese):2018/2019/校招/春招/秋招/算法/机器学习(Machine Learning)/深度学习(Deep Learning)/自然语言处理(NLP)/C/C++/Python/面试笔记
 * [frank-lam/2019_campus_apply](https://github.com/frank-lam/2019_campus_apply):🚀 Full Stack Developer Tutorial，后台技术栈/全栈开发/架构师之路，秋招/春招/校招/面试。 from zero to hero.
 * [basecamp/handbook](https://github.com/basecamp/handbook):Basecamp Employee Handbook https://basecamp.com/about
-
-## 工具
-
-* [salomonelli/best-resume-ever](https://github.com/salomonelli/best-resume-ever):Build fast 🚀 and easy multiple beautiful resumes and create your best CV ever! Made with Vue and LESS.
-- [lukasz-madon/awesome-remote-job](https://github.com/lukasz-madon/awesome-remote-job)
-
-## 面试
-
-* [WsmDyj/Interview](https://github.com/WsmDyj/Interview)
-
+* [WsmDyj/Interview](https://github.com/WsmDyj/Interview):Some interview experience
