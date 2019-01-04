@@ -24,6 +24,22 @@ getstorybook
 
 * [花瓣](http://huaban.com/)
 
+## 硬件
+
+* Wacom Folio
+
+## web
+
+* [frozenui/frozenui](https://github.com/frozenui/frozenui)FrozenUI的CSS组件库,基于腾讯手Q样式规范 http://frozenui.github.io/
+* [zurb/foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. http://foundation.zurb.com
+* [froala/design-blocks](https://github.com/froala/design-blocks):A set of 170+ Bootstrap based design blocks ready to be used to create clean modern websites. https://www.froala.com/design-blocks 
+* [designmodo/Flat-UI](https://github.com/designmodo/Flat-UI):Flat UI Free - Design Framework (html/css3/less/js). Flat UI is based on Bootstrap, a comfortable, responsive, and functional framework that simplifies the development of websites. https://designmodo.com/flat-free/
+* [airbnb/airpal](https://github.com/airbnb/airpal):Web UI for PrestoDB. http://airbnb.github.io/airpal
+* [iview/iview](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
+* [airbnb/Lona](https://github.com/airbnb/Lona):A tool for defining design systems and using them to generate cross-platform UI code, Sketch files, and other artifacts.
+* [google/material-design-lite](https://github.com/google/material-design-lite):Material Design Components in HTML/CSS/JS https://getmdl.io
+* [material-components/material-components-web](https://github.com/material-components/material-components-web):Modular and customizable Material Design UI components for the web https://material.io/develop/
+
 ## Client
 
 * [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
@@ -31,14 +47,10 @@ getstorybook
 * [ElemeFE/mint-ui](https://github.com/ElemeFE/mint-ui)Mobile UI elements for Vue.js
 * [youzan/vant](https://github.com/youzan/vant)A Vue.js 2.0 Mobile UI From YouZan
 * [didi/cube-ui](https://github.com/didi/cube-ui):A fantastic mobile ui lib implement by Vue https://didi.github.io/cube-ui/
-
-## 框架
-
-* [designmodo/Flat-UI](https://github.com/designmodo/Flat-UI):Flat UI Free - Design Framework (html/css3/less/js). Flat UI is based on Bootstrap, a comfortable, responsive, and functional framework that simplifies the development of websites. https://designmodo.com/flat-free/
-
-## 硬件
-
-* Wacom Folio
+* [OnsenUI/OnsenUI](https://github.com/OnsenUI/OnsenUI):Mobile app development framework and SDK using HTML5 and JavaScript. Create beautiful and performant cross-platform mobile apps. Based on Web Components, and provides bindings for Angular 1, 2, React and Vue.js. https://onsen.io/
+* [easysoft/zui](https://github.com/easysoft/zui):ZUI is an HTML5 front UI framework. http://zui.sexy
+* [Tencent/weui](https://github.com/Tencent/weui):A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications. https://weui.io
+* [imochen/hotcss](https://github.com/imochen/hotcss):移动端布局终极解决方案 --- 让移动端布局开发更加容易 http://imochen.github.io/hotcss/
 
 ## 工具
 
@@ -46,26 +58,5 @@ getstorybook
 * [Figma](https://www.figma.com/):在线工具
 * [botui/botui](https://github.com/botui/botui):🤖 A JavaScript framework to create conversational UIs https://botui.org
 * [wiredjs/wired-elements](https://github.com/wiredjs/wired-elements):Collection of elements that appear hand drawn. Great for wireframes. https://wiredjs.com
-
-## 参考
-
-* [ElemeFE/element](https://github.com/ElemeFE/element)A Vue.js 2.0 UI Toolkit for Web
-* [apache/incubator-weex](https://github.com/apache/incubator-weex)A framework for building Mobile cross-platform UI.
-* [frozenui/frozenui](https://github.com/frozenui/frozenui)FrozenUI的CSS组件库,基于腾讯手Q样式规范 http://frozenui.github.io/
-* [AlloyImage](https://github.com/AlloyTeam/AlloyImage)基于HTML5技术的专业图像处理库
-* [ant-design/ant-design-pro](https://github.com/ant-design/ant-design-pro):👨🏻‍💻👩🏻‍💻 An out-of-box UI solution for enterprise applications http://pro.ant.design/
-    - [Doc](https://pro.ant.design/docs/getting-started)
-* [easysoft/zui](https://github.com/easysoft/zui):ZUI is an HTML5 front UI framework. http://zui.sexy
-* [museui/muse-ui](https://github.com/museui/muse-ui):Material Design UI library for Vuejs 2.0 https://museui.github.io
-* [zurb/foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. http://foundation.zurb.com
 * [alibaba/ice](https://github.com/alibaba/ice/): 🚀 （邀请公测）赋能中后台建设 - 海量可复用物料，通过 GUI 工具极速构建中后台应用 https://alibaba.github.io/ice/
-* [froala/design-blocks](https://github.com/froala/design-blocks):A set of 170+ Bootstrap based design blocks ready to be used to create clean modern websites. https://www.froala.com/design-blocks 
-* [designmodo/Flat-UI](https://github.com/designmodo/Flat-UI):Flat UI Free - Design Framework (html/css3/less/js). Flat UI is based on Bootstrap, a comfortable, responsive, and functional framework that simplifies the development of websites. https://designmodo.com/flat-free/
-* [ionic-team/ionicons](https://github.com/ionic-team/ionicons):The premium icon font for Ionic http://ionicons.com/
-* [airbnb/airpal](https://github.com/airbnb/airpal):Web UI for PrestoDB. http://airbnb.github.io/airpal
-* [xinthink/react-native-material-kit](https://github.com/xinthink/react-native-material-kit):Bringing Material Design to React Native http://j.mp/rnmdk
-* [Tencent/weui](https://github.com/Tencent/weui):A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications. https://weui.io
-* [iview/iview](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
-* [bootstrap-vue/bootstrap-vue](https://github.com/bootstrap-vue/bootstrap-vue/):BootstrapVue provides one of the most comprehensive implementations of Bootstrap 4 components and grid system for Vue.js and with extensive and automated WAI-ARIA accessibility markup. https://bootstrap-vue.js.org
-* [mui-org/material-ui](https://github.com/mui-org/material-ui):React components that implement Google's Material Design. https://material-ui.com
-* [airbnb/Lona](https://github.com/airbnb/Lona):A tool for defining design systems and using them to generate cross-platform UI code, Sketch files, and other artifacts.
+* [CosmicMind/Material](https://github.com/CosmicMind/Material):A UI/UX framework for creating beautiful applications. http://cosmicmind.com

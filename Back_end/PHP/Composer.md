@@ -11,19 +11,37 @@ PHP 用来管理依赖（dependency）关系的工具。可以在自己的项目
 ## 安装
 
 ```sh
+# method 1
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
+# method 2
 php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
 php composer-setup.php # 安装
 php -r "unlink('composer-setup.php');" # 删除
-
 sudo mv composer.phar /usr/local/bin/composer
 
-brew install composer  # Mac
+# method 3
+wget https://getcomposer.org/composer.phar
+chmod +x composer.phar
+mv composer.phar /usr/local/bin/composer
+
+# Mac
+brew install composer
+# ubuntu
+apt install composer
+# centos
+yum install epel-release -y
+yum install composer
+
 # file_put_contents(./composer.json): failed to open stream: Permission denied
 sudo chown -R $USER .composer/
 
 ### 卸载composer:找到文件删除即可
+
+# config
+composer config -l
+composer config -g repo.packagist composer https://packagist.phpcomposer.com ## 全局配置国内镜像
+composer config repo.packagist composer https://packagist.phpcomposer.com # project composer末尾添加
 ```
 
 ## 配置
@@ -48,10 +66,6 @@ Github允许你下载某个git引用的压缩包。为了强制使用压缩包�
 考虑修改，源代码优先:--prefer-source
 
 ```sh
-composer config -g repo.packagist composer https://packagist.phpcomposer.com ## 全局配置国内镜像
-composer config repo.packagist composer https://packagist.phpcomposer.com # project composer末尾添加
-
-composer config -l
 
 composer list  # 列出所有可用的命令
 composer init  # 新建文件 composer.json
@@ -90,6 +104,8 @@ $slugify = new Slugify();
 echo $slugify->slugify('Hello World, this is a long sentence and I need to make a slug from it!');
 ```
 
+## PSR(PHP Standards Recommendations)
+
 ## package
 
 * 如果编辑了composer.json,增加或更新了细节信息，比如库的描述、作者、更多参数，甚至仅仅增加了一个空格，都会改变文件的md5sum。然后Composer就会警告你哈希值和composer.lock中记载的不同:composer update nothing
@@ -98,7 +114,11 @@ echo $slugify->slugify('Hello World, this is a long sentence and I need to make 
     * classmap类型格式：支持将数组中的路径下的文件进行自动加载。其很方便，但缺点是一旦增加了新文件，需要执行dump-autoload命令重新生成映射文件vendor/composer/autoload_classmap.php。
     * psr-0类型:支持将命名空间映射到路径。命名空间结尾的\\不可省略。当执行install或update时，加载信息会写入vendor/composer/autoload_namespace.php文件。如果希望解析指定路径下的所有命名空间，则将命名空间置为空串即可。需要注意的是对应name2\space\Foo类的类文件的路径为path2/name2/space/Foo.php
     * psr-4类型:支持将命名空间映射到路径。命名空间结尾的\\不可省略。当执行install或update时，加载信息会写入vendor/composer/autoload_psr4.php文件。如果希望解析指定路径下的所有命名空间，则将命名空间置为空串即可。需要注意的是对应name2\space\Foo类的类文件的路径为path2/space/Foo.php，name2不出现在路径中。
-    * PSR-4和PSR-0最大的区别是对下划线（underscore)的定义不同。PSR-4中，在类名中使用下划线没有任何特殊含义。而PSR-0则规定类名中的下划线_会被转化成目录分隔符。
+      * PSR-4和PSR-0
+        - PSR-4指定的就当作当前命名空间的目录
+        - PSR-0 指定的是当前命名空间的父目录
+        * 最大的区别是对下划线（underscore)的定义不同。PSR-4中，在类名中使用下划线没有任何特殊含义。而PSR-0则规定类名中的下划线_会被转化成目录分隔符。
+        * 按需加载
 * name格式："name":"vendor/package"
 * version格式："version":"1.0.2"
 * 定制包的仓库地址:默认的，Composer 只使用 Packagist 仓库。通过指定仓库地址，可以从任何地方获取包
@@ -177,6 +197,13 @@ http://packagist.phpcomposer.com/  Authentication required
 * 建立存放第三方的 SDK 目录
 * 修改composer.json中的autoload>classmap增加文件路径
 * `composer dump-autoload`
+
+## question
+
+```
+# centos: Do not run Composer as root/super user
+composer install --no-plugins --no-scripts
+```
 
 ## 参考
 
