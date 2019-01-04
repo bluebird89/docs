@@ -1,5 +1,7 @@
 # RN resource
 
+* admin
+    - [marmelab/react-admin](https://github.com/marmelab/react-admin):A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, React and Material Design http://marmelab.com/react-admin
 * react
     - [facebook/react](https://github.com/facebook/react):A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
 * 状态
@@ -81,7 +83,7 @@
     - [searchkit/searchkit](https://github.com/searchkit/searchkit):React UI components / widgets. The easiest way to build a great search experience with Elasticsearch. http://www.searchkit.co
 * 文档
     - [nfl/react-helmet](https://github.com/nfl/react-helmet):A document head manager for React
-    - [reactjs/react-docgen](https://github.com/reactjs/react-docgen):A CLI and toolbox to extract information from React component files for documentation generation purposes. 
+    - [reactjs/react-docgen](https://github.com/reactjs/react-docgen):A CLI and toolbox to extract information from React component files for documentation generation purposes.
 * 测试
     - [kentcdodds/react-testing-library](https://github.com/kentcdodds/react-testing-library):🐐 Simple and complete React DOM testing utilities that encourage good testing practices. http://npm.im/react-testing-library
     - [airbnb/enzyme](https://github.com/airbnb/enzyme):JavaScript Testing utilities for React https://airbnb.io/enzyme/
@@ -168,16 +170,15 @@
 
 ## UI
 
-* [ant-design/ant-design](https://github.com/ant-design/ant-design):🐜 A UI Design Language http://ant.design
 * [gestalt](https://github.com/pinterest/gestalt):一组支持 Pinterest 设计语言的 React UI 组件，被 Pinterest 内部用来实现统一的 UI 设计和开发
-* [Carbon components](link)
+* [IBM/carbon-components](https://github.com/IBM/carbon-components):The component library behind the Carbon Design System https://www.carbondesignsystem.com
 * [React Foundation](https://github.com/digiaonline/react-foundation):将 Foundation 的所有部分都包装成可复用的 React 组件，它专注于易用性和灵活性，尽可能使用无状态的组件
-* [Fabric UI](https://github.com/OfficeDev/office-ui-fabric-react)
+* [OfficeDev/office-ui-fabric-react](https://github.com/OfficeDev/office-ui-fabric-react):React components for building experiences for Office and Office 365. https://developer.microsoft.com/en-us/fabric#/components
 * [Atlaskit](https://atlaskit.atlassian.com/):Atlassian 的官方 React UI 套件是 [Atlassian 设计指南](https://atlassian.design/)的实现。它提供了一组可复用的组件，均可独立下载到开发者的项目中
 * [jxnblk/rebass](https://github.com/jxnblk/rebass):⚛️ React UI component library & design system, built with styled-components and styled-system. http://jxnblk.com/rebass
-* [Elemental UI](https://github.com/elementalui/elemental)
-* [Prime React](https://github.com/primefaces/primereact)
-* [Reactstrap](https://github.com/reactstrap/reactstrap)
+* [elementalui/elemental](https://github.com/elementalui/elemental):A flexible and beautiful UI framework for React.js http://elemental-ui.com
+* [primefaces/primereact](https://github.com/primefaces/primereact):UI Components for React
+* [reactstrap/reactstrap](https://github.com/reactstrap/reactstrap):Simple React Bootstrap 4 components https://reactstrap.github.io
 * [React MD](https://github.com/mlaursen/react-md):提供了用于开发 Web 应用的套件，遵循谷歌 Material Design 设计原则，还有高度定制化的主题和样式
 * [Blueprint](https://github.com/palantir/blueprint):提供了一系列 React UI 组件，这些组件包含常用的元素、模式和 Web 交互
 * [React Virtualized](https://github.com/bvaughn/react-virtualized):可以高效渲染大型列表和表格数据的 React 组件
@@ -195,6 +196,8 @@
 * [JetBrains/ring-ui](https://github.com/JetBrains/ring-ui):A collection of JetBrains Web UI components https://jetbrains.github.io/ring-ui
 * [xotahal/react-native-material-ui](https://github.com/xotahal/react-native-material-ui):Highly customizable material design components for React Native
 * [miukimiu/react-kawaii](https://github.com/miukimiu/react-kawaii):Cute React UI Components https://react-kawaii.now.sh/
+* [mui-org/material-ui](https://github.com/mui-org/material-ui):React components that implement Google's Material Design. https://material-ui.com/
+* [xinthink/react-native-material-kit](https://github.com/xinthink/react-native-material-kit):Bringing Material Design to React Native http://j.mp/rnmdk
 
 ## 学习
 
