@@ -1461,6 +1461,7 @@ set completeopt=longest,menu
 
 ## 参考
 
+* [luongvo209/Awesome-Linux-Software](https://github.com/luongvo209/Awesome-Linux-Software): A list of awesome applications, software, tools and other materials for Linux distros
 * [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/index.html)
 * [LVS：跑在Linux内核上的负载均衡器](https://liangshuang.name/2017/11/19/lvs/)
 * [Introduction to Linux](https://www.ibm.com/developerworks/linux/newto/) – 这是来自IBM的教程，用于给那些想学习Linux的人。

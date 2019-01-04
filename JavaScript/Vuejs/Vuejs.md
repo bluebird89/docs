@@ -160,12 +160,12 @@ npm install -g @vue/cli
 
 * [vuetifyjs/vuetify](https://github.com/vuetifyjs/vuetify):Material Component Framework for Vue.js 2 https://vuetifyjs.com
 * [Quasar](https://github.com/quasarframework/quasar)
-* [Element](https://github.com/ElemeFE/element)
-* [Vue Material](https://github.com/vuematerial/vue-material)
+* [ElemeFE/element](https://github.com/ElemeFE/element)A Vue.js 2.0 UI Toolkit for Web
+* [vuematerial/vue-material](https://github.com/vuematerial/vue-material):Material design for Vue.js http://vuematerial.io
 * [Keen-UI](https://github.com/JosephusPaye/Keen-UI)
 * [Buefy](https://github.com/buefy/buefy)
-* [Bootstrap Vue](https://github.com/bootstrap-vue/bootstrap-vue):BootstrapVue provides one of the most comprehensive implementations of Bootstrap 4 components and grid system for Vue.js and with extensive and automated WAI-ARIA accessibility markup. https://bootstrap-vue.js.org
-* [Muse-UI](https://github.com/at-ui/at-ui)
+* [AT-UI/at-ui](https://github.com/at-ui/at-ui):A fresh and flat UI-Kit specially for desktop application, made with ♥ by Vue.js 2.0 https://at.aotu.io
+* [museui/muse-ui](https://github.com/museui/muse-ui):Material Design UI library for Vuejs 2.0 https://museui.github.io
 * [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
 * [iview/iview](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
 * [Uiv](https://github.com/wxsms/uiv)
@@ -179,6 +179,7 @@ npm install -g @vue/cli
 * [Ant Design Vue](https://github.com/okoala/vue-antd)
 * [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
 * [youzan/vant](https://github.com/youzan/vant):Lightweight Mobile UI Components built on Vue https://youzan.github.io/vant
+* [bootstrap-vue/bootstrap-vue](https://github.com/bootstrap-vue/bootstrap-vue/):BootstrapVue provides one of the most comprehensive implementations of Bootstrap 4 components and grid system for Vue.js and with extensive and automated WAI-ARIA accessibility markup. https://bootstrap-vue.js.org
 
 ## 组件
 

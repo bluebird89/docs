@@ -4,4 +4,5 @@
 
 ## 参考
 
-* [ant-design/ant-design-pro](https://github.com/ant-design/ant-design-pro):👨🏻‍💻👩🏻‍💻 Use Ant Design like a Pro! http://pro.ant.design/
+* [ant-design/ant-design-pro](https://github.com/ant-design/ant-design-pro):👨🏻‍💻👩🏻‍💻 An out-of-box UI solution for enterprise applications http://pro.ant.design/
+    - [Doc](https://pro.ant.design/docs/getting-started)
