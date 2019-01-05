@@ -1225,6 +1225,8 @@ ccache gcc foo.c
 
 ## 工具
 
+* help
+    - [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
 * 查看
     * [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings.
 * 搜索

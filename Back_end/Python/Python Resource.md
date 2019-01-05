@@ -318,6 +318,7 @@ brew install pipenv
 * [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
 * [kennethreitz/requests-html](https://github.com/kennethreitz/requests-html):下载完网页之后,内置了html网页的解析
 * [request/request-promise](https://github.com/request/request-promise):The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.
+* httpstat
 
 ## 数据库
 
@@ -1201,7 +1202,7 @@ Python 实现的算法和设计模式。
 
 ## 包
 
-* lxml：比Beautiful Soup更快更强的解析库  
+* lxml：比Beautiful Soup更快更强的解析库
 * pandas：数据处理神器
 * time：设置爬虫访问间隔防止被抓
 * random：随机数生成工具，配合time使用
@@ -1220,7 +1221,12 @@ Python 实现的算法和设计模式。
 
 * [flaggo/python3-source-code-analysis](https://github.com/flaggo/python3-source-code-analysis):《Python 3 源码剖析》
 
-## 课程
+* functional programming
+  * [evhub/coconut](https://github.com/evhub/coconut):Simple, elegant, Pythonic functional programming. http://coconut-lang.org
+* qrcode
+  - [MyQR](link)
+
+## 知识点
 
 * Python核心编程
     - 掌握Python基础编程语法；
