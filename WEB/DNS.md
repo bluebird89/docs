@@ -89,6 +89,20 @@ whois github.com # 用来查看域名的注册情况
 8.8.4.4
 ```
 
+### [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest)
+
+DNS Performance test
+
+```sh
+sudo apt-get install bc dnsutils
+
+git clone --depth=1 https://github.com/cleanbrowsing/dnsperftest/
+cd dnsperftest
+
+bash ./dnstest.sh
+bash ./dnstest.sh |sort -k 22 -n
+```
+
 ## 工具
 
 * [jedisct1/dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. https://dnscrypt.info

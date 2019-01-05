@@ -5,97 +5,6 @@
 * 因为网景开发了JavaScript，一年后微软又模仿JavaScript开发了JScript，为了让JavaScript成为全球标准，几个公司联合ECMA（European Computer Manufacturers Association）组织定制了JavaScript语言的标准，被称为ECMAScript标准。
 * ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标准的一种实现。ECMAScript 6标准（简称ES6）已经在2015年6月正式发布了，所以，讲到JavaScript的版本，实际上就是说它实现了ECMAScript标准的哪个版本。
 
-* 变量
-* 数据类型
-* 运算符
-* 控制语句
-* 对象
-    - JavaScript 本地对象和内置对象
-        + Array
-        + Boolean
-        + Date
-        + Math
-        + Number
-        + String
-        + RegExp
-        + Global
-    - Browser 对象
-        - Window
-        - Navigator
-        - Screen
-        - History
-        - Location
-    - HTML DOM 对象
-* 函数
-
-脚本语言
-
-- 直接写入 HTML 输出流
-- 对事件的响应
-- 改变 HTML 内容、属性、样式
-- 验证输入
-- 使用
-- 对大小写敏感
-- 使用 Unicode 字符集
-- 分号用于分隔 JavaScript 语句
-- 按照编写顺序依次执行每条语句，通过函数编写代码块：代码块的作用是一并地执行语句序列。
-
-## 输出数据
-
-- window.alert() 弹出警告框。
-- 使用 document.write() 方法将内容写到 HTML 文档中。
-
-  ```
-  折行
-  document.write("你好 \
-  世界!");
-  ```
-
-- 使用 innerHTML 写入到 HTML 元素（操作 HTML 元素）。
-- 使用 console.log() 写入到浏览器的控制台：能看到结构化的东西；不会打断页面的操作
-
-## 语法
-
-- 固定值称为字面量
-- 数据类型：
-
-  - Null:将变量的值设置为 null 来清空变量
-  - Undefined:表示变量不含有值
-  - Number
-  - string
-  - Boolean
-  - array
-  - object：
-
-    - 键值对在 JavaScript 对象通常称为 对象属性
-    - 对象的方法定义了一个函数，并作为对象的属性存储。对象方法通过添加 () 调用 (作为一个函数)。
-
-  - function：函数是由事件驱动的或者当它被调用时执行的可重复使用的代码块。
-
-    - 参数
-    - 返回值
-    - 作用域：
-    - 局部变量：只能在函数内部访问它
-    - 全局变量：网页上的所有脚本和函数都能访问它 -
-
-- 变量，用于存储信息的"容器"：var x = 5, age=30, job="carpenter";
-
-  - 生命周期：在它声明时初始化，局部变量在函数执行完毕后销毁，全局变量在页面关闭后销毁
-
-- 注释：
-
-  - 单行：//
-  - 多行：/** /
-
-- 事件
-
-a标签不能嵌套
-
-## 基础
-
-1. 学习JavaScript
-2. 学习Web API
-
 ### 引入方式
 
 * 由`<script>...</script>`包含的代码就是JavaScript代码，它将直接被浏览器执行。JavaScript代码可以直接嵌在网页的任何地方，不过通常我们都把JavaScript代码放到`<head>`中。
@@ -108,7 +17,7 @@ a标签不能嵌套
   </script>
 </head>
 <body>
-// JavaScript 会在页面加载时向 HTML 的 <body> 写文本.如果在文档加载后使用该方法，会覆盖整个文档
+ <!-- JavaScript 会在页面加载时向 HTML 的 <body> 写文本.如果在文档加载后使用该方法，会覆盖整个文档 -->
 <script>
 document.write("<h1>This is a heading</h1>");
 document.write("<p>This is a paragraph</p>");
@@ -123,13 +32,13 @@ document.write("<p>This is a paragraph</p>");
 
 * 每个语句以`;`结束，浏览器中负责执行JavaScript代码的引擎会自动在每个语句的结尾补上;
 * 语句块用{`...}`
-* 以`//`开头直到行末的字符被视为行注释，注释是给开发人员看到，JavaScript引擎会自动忽略
+* 以`//`开头直到行末的字符被视为行注释
 * 块注释是用`/*...*/`把多行字符包裹起来
 * 区分大小写
 
 ### 常量
 
-要申明一个常量，在ES6之前是不行的，我们通常用全部大写的变量来表示“这是一个常量，不要修改它的值”
+要申明一个常量，在ES6之前是不行的，我们通常用全部大写的变量来表示“这是一个常量，不要修改它的值”。固定值称为字面量
 
 ```javascript
 var PI = 3.14;
@@ -141,13 +50,14 @@ PI; // 3.14
 
 ### 变量
 
-变量不仅可以是数字，还可以是任意数据类型。
+用于存储信息的"容器"，变量不仅可以是数字，还可以是任意数据类型。
 
 * 变量名是大小写英文、数字、$和_的组合，且不能用数字开头。变量名也不能是JavaScript的关键字，如if、while等。申明一个变量用var语句。变量名也可以用中文，但是，请不要给自己找麻烦。
 * 使用等号=对变量进行赋值。可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量，但是要注意只能用var申明一次。
 * 变量本身类型不固定的语言称之为动态语言，与之对应的是静态语言。静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。例如Java是静态语言
 * ECMA在后续规范中推出了strict模式，在strict模式下运行的JavaScript代码，强制通过var申明变量，未使用var申明变量就使用的，将导致运行错误。在JavaScript代码的第一行写上：`'use strict';`
 * 如果重新声明 JavaScript 变量，该变量的值不会丢失：
+* 生命周期：在它声明时初始化，局部变量在函数执行完毕后销毁，全局变量在页面关闭后销毁
 
 ```js
 var carname; // 声明变量，值为undefined
@@ -339,6 +249,13 @@ for (x in mycars)
 }
 ```
 
+### strict模式
+
+JavaScript在设计之初，为了方便初学者学习，并不强制要求用var申明变量。这个设计错误带来了严重的后果：如果一个变量没有通过var申明就被使用，那么该变量就自动被申明为全局变量。
+
+* 同一个页面的不同的JavaScript文件中，如果都不用var申明，恰好都使用了变量i，将造成变量i互相影响，产生难以调试的错误结果。
+* 使用var申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内（函数的概念将稍后讲解），同名变量在不同的函数体内互不冲突。
+
 ### 对象
 
 一组由键-值组成的无序集合.对象的键都是字符串类型，值可以是任意数据类型。用于描述现实世界中的某个对象.视为其他语言中的Map或Dictionary的数据结构
@@ -417,7 +334,6 @@ var fn = xiaoming.age; // 先拿到xiaoming的age函数
 fn(); // NaN // strict模式下 Uncaught TypeError: Cannot read property 'birth' of undefined
 
 'use strict';
-
 var xiaoming = {
     name: '小明',
     birth: 1990,
@@ -434,7 +350,6 @@ xiaoming.age(); // Uncaught TypeError: Cannot read property 'birth' of undefined
 // 报错了！原因是this指针只在age方法的函数内指向xiaoming，在函数内部定义的函数，this又指向undefined了！（在非strict模式下，它重新指向全局对象window！）
 
 'use strict';
-
 var xiaoming = {
     name: '小明',
     birth: 1990,
@@ -488,13 +403,6 @@ parseInt('30');
 count; // 3
 ```
 
-### strict模式
-
-JavaScript在设计之初，为了方便初学者学习，并不强制要求用var申明变量。这个设计错误带来了严重的后果：如果一个变量没有通过var申明就被使用，那么该变量就自动被申明为全局变量。
-
-* 同一个页面的不同的JavaScript文件中，如果都不用var申明，恰好都使用了变量i，将造成变量i互相影响，产生难以调试的错误结果。
-* 使用var申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内（函数的概念将稍后讲解），同名变量在不同的函数体内互不冲突。
-
 ### 运算符
 
 * 赋值运算符：=
@@ -542,7 +450,9 @@ greeting=(visitor=="PRES")?"Dear President ":"Dear ";
 
 ### 控制语句
 
-* 条件语句：使用`if () { ... } else { ... }`来进行条件判断其中else语句是可选的。如果语句块只包含一条语句，那么可以省略`{}`.在多个if...else...语句中，如果某个条件成立，则后续就不再继续判断了(注意先后顺序)
+* 条件语句：使用`if () { ... } else { ... }`来进行条件判断 其中else语句是可选的。
+  - 如果语句块只包含一条语句，那么可以省略`{}`.
+  - 在多个if...else...语句中，如果某个条件成立，则后续就不再继续判断了(注意先后顺序)
 * switch 语句来选择要执行的多个代码块之一
 * 循环语句：重复运算.务必小心编写初始条件和判断条件，尤其是边界值。特别注意i < 100和i <= 100是不同的判断逻辑。
     * for循环最常用的地方是利用索引来遍历数组；for循环的3个条件都是可以省略的，如果没有退出循环的判断条件，就必须使用break语句退出循环，否则就是死循环；
@@ -568,6 +478,95 @@ if (age >= 18) {
     alert('teenager');
 } else {
     alert('kid');
+}
+
+// 多重判断时使用 Array.includes
+function test(fruit) {
+  const redFruits = ['apple', 'strawberry', 'cherry', 'cranberries'];
+
+  if (redFruits.includes(fruit)) {
+    console.log('red');
+  }
+}
+
+//_ 当发现无效语句时，尽早Return
+function test(fruit, quantity) {
+  const redFruits = ['apple', 'strawberry', 'cherry', 'cranberries'];
+
+  // 条件 1: 尽早抛出错误
+  if (!fruit) throw new Error('No fruit!');
+  // 条件 2: 当水果不是红色时停止继续执行
+  if (!redFruits.includes(fruit)) return;
+
+  console.log('red');
+
+  // 条件 3: 必须是大质量的
+  if (quantity > 10) {
+    console.log('big quantity');
+  }
+}
+
+// 使用默认参数和解构
+function test(fruit, quantity = 1) {
+  // 如果 quantity 参数没有传入，设置默认值为 1
+  if (!fruit) return;
+  console.log(`We have ${quantity} ${fruit}!`);
+}
+test('banana'); // We have 1 banana!
+test('apple', 2); // We have 2 apple!
+
+function test(fruit) {
+  // 当值存在时打印 fruit 的值
+  if (fruit && fruit.name)  {
+    console.log (fruit.name);
+  } else {
+    console.log('unknown');
+  }
+}
+test(undefined); // unknown
+test({ }); // unknown
+test({ name: 'apple', color: 'red' }); // apple
+
+// 解构 - 仅仅获取 name 属性 为其赋默认值为空对象
+function test({name} = {}) {
+  console.log (name || 'unknown');
+}
+test(undefined); // unknown
+test({ }); // unknown
+test({ name: 'apple', color: 'red' }); // apple
+
+function test(fruit) {
+  // 获取属性名，如果属性名不可用，赋默认值为 unknown
+  console.log(__.get(fruit, 'name', 'unknown');
+}
+test(undefined); // unknown
+test({ }); // unknown
+test({ name: 'apple', color: 'red' }); // apple
+
+// 倾向于对象遍历而不是Switch语句
+const fruitColor = {
+  red: ['apple', 'strawberry'],
+  yellow: ['banana', 'pineapple'],
+  purple: ['grape', 'plum']
+};
+
+function test(color) {
+  //return fruitColor[color] || [];
+  // return fruitColor.get(color) || [];
+  return fruits.filter(f => f.color == color);
+}
+// 对 所有/部分 判断使用Array.every & Array.some
+const fruits = [
+    { name: 'apple', color: 'red' },
+    { name: 'banana', color: 'yellow' },
+    { name: 'grape', color: 'purple' }
+];
+
+function test() {
+  // 条件：任何一个水果是红色
+  const isAnyRed = fruits.some(f => f.color == 'red');
+
+  console.log(isAnyRed); // true
 }
 
 var day=new Date().getDay();
@@ -608,7 +607,7 @@ x;
 var arr = ['Apple', 'Google', 'Microsoft'];
 for (var i=0,len=arr.length; i<len; i++)
 {
-document.write(cars[i] + "<br>");
+  document.write(cars[i] + "<br>");
 }
 
 var x = 0;
@@ -720,7 +719,7 @@ m.forEach(function (value, key, map) {
 
 ## 函数
 
-函数是“头等公民”，而且可以像变量一样使用，具有非常强大的抽象能力。函数就是最基本的一种代码抽象的方式。能不关心底层的具体计算过程，而直接在更高的层次上思考问题。
+函数是由事件驱动的或者当它被调用时执行的可重复使用的代码块。函数是“头等公民”，而且可以像变量一样使用，具有非常强大的抽象能力。函数就是最基本的一种代码抽象的方式。能不关心底层的具体计算过程，而直接在更高的层次上思考问题。
 
 * function指出这是一个函数定义；
 * abs是函数的名称；
@@ -733,6 +732,9 @@ m.forEach(function (value, key, map) {
 * 参数检测：类型判断
 * 关键字arguments，它只在函数内部起作用，并且永远指向当前函数的调用者传入的所有参数。arguments类似Array但它不是一个Array。利用arguments，你可以获得调用者传入的所有参数。也就是说，即使函数不定义任何参数，还是可以拿到参数的值。实际上arguments最常用于判断传入参数的个数
 * ES6标准引入了rest参数:rest参数只能写在最后，前面用...标识，从运行结果可知，传入的参数先绑定已声明参数，多余的参数以数组形式交给变量rest，所以，不再需要arguments我们就获取了全部参数。
+- 作用域：
+    - 局部变量：只能在函数内部访问它
+    - 全局变量：网页上的所有脚本和函数都能访问它
 
 ```javascript
 function abs(x) {
@@ -1675,6 +1677,11 @@ class PrimaryStudent extends Student {
 
 ### 浏览器对象模型(BOM)
 
+```javascript
+// 折行
+document.write("你好 \
+世界!");
+```
 JavaScript可以获取浏览器提供的很多对象，并进行操作。
 
 * window：不但充当全局作用域（所有 JavaScript 全局对象、函数以及变量均自动成为 window 对象的成员），而且表示浏览器窗口：
@@ -1686,6 +1693,7 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
     - window.close() - 关闭当前窗口
     - window.moveTo() - 移动当前窗口
     - window.resizeTo() - 调整当前窗口的尺寸
+    - window.alert() 弹出警告框
 * navigator：表示浏览器的信息.navigator的信息可以很容易地被用户修改，所以JavaScript读取的值不一定是正确的
     - `navigator.appName`：浏览器名称
     - `navigator.appVersion`：浏览器版本
@@ -1712,13 +1720,13 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
     - location.assign('/discuss'):要加载一个新页面
     - location.reload():如果要重新加载当前页面
 * document：表示当前页面。由于HTML在浏览器中以DOM形式表示为树形结构，document对象就是整个DOM树的根节点。
-    - title赋值：document.title = '努力学习JavaScript!';
-    - 要查找DOM树的某个节点，需要从document对象开始查找。最常用的查找是根据ID和Tag Name
-    - document.getElementById('drink-menu')
-    - document.getElementsByTagName('dt')
-    - menu.tagName;
-    - Cookie是由服务器发送的key-value标示符。因为HTTP协议是无状态的，但是服务器要区分到底是哪个用户发过来的请求，就可以用Cookie来区分。当一个用户成功登录后，服务器发送一个Cookie给浏览器，例如user=ABC123XYZ(加密的字符串)...，此后，浏览器访问该网站时，会在请求头附上这个Cookie，服务器根据Cookie即可区分出用户。 `document.cookie`
-    - `<script src="http://www.foo.com/jquery.js"></script>`  引入的第三方的JavaScript中存在恶意代码，则www.foo.com网站将直接获取到www.example.com网站的用户登录信息.服务器在设置Cookie时可以使用httpOnly，`设定了httpOnly的Cookie将不能被JavaScript读取`
+  - document.write() 方法将内容写到 HTML 文档中
+  - title赋值：document.title = '努力学习JavaScript!';
+  - 要查找DOM树的某个节点，需要从document对象开始查找。最常用的查找是根据ID和Tag Name
+  - document.getElementById('drink-menu')
+  - document.getElementsByTagName('dt')
+  - menu.tagName;
+  - `<script src="http://www.foo.com/jquery.js"></script>`  引入的第三方的JavaScript中存在恶意代码，则www.foo.com网站将直接获取到www.example.com网站的用户登录信息.服务器在设置Cookie时可以使用httpOnly，`设定了httpOnly的Cookie将不能被JavaScript读取`
 * history：保存了浏览器的历史记录
     - history.back()
     - history.forward()
@@ -1729,7 +1737,6 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
 * timing
     - var t=setTimeout("alert('5 秒！')",5000)
     - clearTimeout(t)
-* cookie：cookie 是存储于访问者的计算机中的变量。每当同一台计算机通过浏览器请求某个页面时，就会发送这个 cookie。你可以使用 JavaScript 来创建和取回 cookie 的值。
 
 ```js
 document.write('Hello Javascript');
@@ -1759,51 +1766,9 @@ function stopCount()
  {
     clearTimeout(t)
  }
-
-function getCookie(c_name)
-{
-    if (document.cookie.length>0)
-    {
-        c_start=document.cookie.indexOf(c_name + "=")
-        if (c_start!=-1)
-        {
-            c_start=c_start + c_name.length+1
-            c_end=document.cookie.indexOf(";",c_start)
-            if (c_end==-1){
-                c_end=document.cookie.length
-            }
-            return unescape(document.cookie.substring(c_start,c_end))
-        }
-    }
-    return ""
-}
-
-function setCookie(c_name,value,expiredays)
-{
-    var exdate=new Date()
-    exdate.setDate(exdate.getDate()+expiredays)
-    document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : "; expires="+exdate.toGMTString())
-}
-
-function checkCookie()
-{
-    username=getCookie('username')
-    if (username!=null && username!="")
-    {
-        alert('Welcome again '+username+'!')
-    }else{
-        username=prompt('Please enter your name:',"")
-        if (username!=null && username!="")
-        {
-            setCookie('username',username,365)
-        }
-    }
-}
-
-// <body onLoad="checkCookie()"></body>
 ```
 
-### 操作DOM
+### HTML DOM
 
 由于HTML文档被浏览器解析后就是一棵文档对象模型（Document Object Model），要改变HTML的结构，就需要通过JavaScript来操作DOM.DOM节点是指Element，但是DOM节点实际上是Node，在HTML中，Node包括Element、Comment、CDATA_SECTION等很多种，以及根节点Document类型，但是，绝大多数时候我们只关心Element，也就是实际控制页面结构的Node，其他类型的Node忽略即可。根节点Document已经自动绑定为全局变量document。
 
@@ -1824,12 +1789,10 @@ function checkCookie()
     - 当鼠标移动到或移出元素上时:onmouseover 和 onmouseout
     - 当输入字段被改变时onchange:对输入字段的验证来使用
     - 当提交 HTML 表单时
-
 * document.getElementById() 可以直接定位唯一的一个DOM节点
 * document.getElementsByTagName() 总是返回一组DOM节点
 * CSS选择器document.getElementsByClassName() 返回一组DOM节点
 * 使用querySelector()和querySelectorAll()
-
 - 更新：更新该DOM节点的内容，相当于更新了该DOM节点表示的HTML的内容
     + innerText不返回隐藏元素的文本，而textContent返回所有文本
     + 如果这个DOM节点是空的，例如，<div></div>，那么，直接使用innerHTML = '<span>child</span>'就可以修改DOM节点的内容，相当于“插入”了新的DOM节点。如果这个DOM节点不是空的，那就不能这么做，因为innerHTML会直接替换掉原来的所有子节点。
@@ -2379,53 +2342,6 @@ then(function( fromLatLng, toLatLng ) {
 });
 ```
 
-### Canvas
-
-HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘制各种图表、动画等。没有Canvas的年代，绘图只能借助Flash插件实现，页面不得不用JavaScript和Flash进行交互。有了Canvas，我们就再也不需要Flash了，直接使用JavaScript完成绘制。
-在使用Canvas前，用canvas.getContext来测试浏览器是否支持Canvas。
-
-```html
-<canvas id="test-canvas" width="200" heigth="100">
-    <p>你的浏览器不支持Canvas</p>
-</canvas>
-
-<script>
-    var canvas = document.getElementById('test-canvas'), ctx = canvas.getContext('2d');
-    // 绘制笑脸
-    ctx.clearRect(0, 0, 200, 200); // 擦除(0,0)位置大小为200x200的矩形，擦除的意思是把该区域变为透明
-    ctx.fillStyle = '#dddddd'; // 设置颜色
-    ctx.fillRect(10, 10, 130, 130); // 把(10,10)位置大小为130x130的矩形涂色
-    // 利用Path绘制复杂路径:
-    var path=new Path2D();
-    path.arc(75, 75, 50, 0, Math.PI*2, true);
-    path.moveTo(110,75);
-    path.arc(75, 75, 35, 0, Math.PI, false);
-    path.moveTo(65, 65);
-    path.arc(60, 65, 5, 0, Math.PI*2, true);
-    path.moveTo(95, 65);
-    path.arc(90, 65, 5, 0, Math.PI*2, true);
-    ctx.strokeStyle = '#0000ff';
-    ctx.stroke(path);
-
-    // 文字
-    ctx.clearRect(0, 0, 200, 200); // 擦除(0,0)位置大小为200x200的矩形，擦除的意思是把该区域变为透明
-    ctx.fillStyle = '#dddddd'; // 设置颜色
-    ctx.fillRect(10, 10, 130, 130); // 把(10,10)位置大小为130x130的矩形涂色
-    // 利用Path绘制复杂路径:
-    var path=new Path2D();
-    path.arc(75, 75, 50, 0, Math.PI*2, true);
-    path.moveTo(110,75);
-    path.arc(75, 75, 35, 0, Math.PI, false);
-    path.moveTo(65, 65);
-    path.arc(60, 65, 5, 0, Math.PI*2, true);
-    path.moveTo(95, 65);
-    path.arc(90, 65, 5, 0, Math.PI*2, true);
-    ctx.strokeStyle = '#0000ff';
-    ctx.stroke(path);
-    var gl = canvas.getContext("webgl");
-</script>
-```
-
 ## 事件
 
 监听事件
@@ -2639,9 +2555,58 @@ replaceWith
 
 ## 客户端存储
 
-* cookie
+* cookie:Cookie是由服务器发送的key-value标示符。因为HTTP协议是无状态的，但是服务器要区分到底是哪个用户发过来的请求，就可以用Cookie来区分。当一个用户成功登录后，服务器发送一个Cookie给浏览器，例如user=ABC123XYZ(加密的字符串)...，此后，浏览器访问该网站时，会在请求头附上这个Cookie，服务器根据Cookie即可区分出用户。 `document.cookie`
+  * cookie：cookie 是存储于访问者的计算机中的变量。每当同一台计算机通过浏览器请求某个页面时，就会发送这个 cookie。你可以使用 JavaScript 来创建和取回 cookie 的值。
 * Web存储
 * Web数据库
+
+```javascript
+function getCookie(c_name)
+{
+    if (document.cookie.length>0)
+    {
+        c_start=document.cookie.indexOf(c_name + "=")
+        if (c_start!=-1)
+        {
+            c_start=c_start + c_name.length+1
+            c_end=document.cookie.indexOf(";",c_start)
+            if (c_end==-1){
+                c_end=document.cookie.length
+            }
+            return unescape(document.cookie.substring(c_start,c_end))
+        }
+    }
+    return ""
+}
+
+function setCookie(c_name,value,expiredays)
+{
+    var exdate=new Date()
+    exdate.setDate(exdate.getDate()+expiredays)
+    document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : "; expires="+exdate.toGMTString())
+}
+
+function checkCookie()
+{
+    username=getCookie('username')
+    if (username!=null && username!="")
+    {
+        alert('Welcome again '+username+'!')
+    }else{
+        username=prompt('Please enter your name:',"")
+        if (username!=null && username!="")
+        {
+            setCookie('username',username,365)
+        }
+    }
+}
+
+// <body onLoad="checkCookie()"></body>
+```
+
+## console
+
+console.log() 写入到浏览器的控制台：能看到结构化的东西；不会打断页面的操作
 
 ## indexedDB
 
@@ -2662,8 +2627,11 @@ replaceWith
   - [e-oj/Magic-Grid](https://github.com/e-oj/Magic-Grid):A simple, lightweight Javascript library for dynamic grid layouts. https://www.npmjs.com/package/magic-grid
 * bundler
   - [rollup/rollup](https://github.com/rollup/rollup):Next-generation ES module bundler https://rollupjs.org
+* i18n
+  - [facebookincubator/fbt](https://github.com/facebookincubator/fbt):A JavaScript Internationalization Framework https://facebookincubator.github.io/fbt
 
 ## 参考
 
 * [stephentian/33-js-concepts](https://github.com/stephentian/33-js-concepts):📜 每个 JavaScript 工程师都应懂的33个概念 @leonardomso
 * [ECMAScript 2015](https://babeljs.io/learn-es2015/)
+* 学习Web API

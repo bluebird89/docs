@@ -1,5 +1,7 @@
 # RN resource
 
+* IDE
+    - [REACTIDE](http://reactide.io)
 * admin
     - [marmelab/react-admin](https://github.com/marmelab/react-admin):A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, React and Material Design http://marmelab.com/react-admin
 * react

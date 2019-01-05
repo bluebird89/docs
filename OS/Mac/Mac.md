@@ -100,6 +100,7 @@ smaba
     -   [LICEcap](link):gif录制
     -   [sizeup](link)
     -   [Spectacle](link):控制窗口
+    -   [onmyway133/FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
 -   vpn
     -   Tunnelblick_3.7.2_build_4850：点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
 -   设计
