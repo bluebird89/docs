@@ -588,6 +588,7 @@ HTTP and REST
 ## 逻辑
 
 * Engines of Logic
+* The Elements of Style
 
 ## 管理
 

@@ -14,17 +14,17 @@ brew install vim
 * 用户个人的配置在~/.vimrc
 
 选项设置
-all：列出所有选项设置情况
-term：设置终端类型
-ignorance：在搜索中忽略大小写
-list：显示制表位(Ctrl+I)和行尾标志（$)
-number：显示行号
-report：显示由面向行的命令修改过的数目
-terse：显示简短的警告信息
-warn：在转到别的文件时若没保存当前文件则显示NO write信息
-nomagic：允许在搜索模式中，使用前面不带“/”的特殊字符
-nowrapscan：禁止vi在搜索到达文件两端时，又从另一端开始
-mesg：允许vi显示其他用户用write写到自己终端上的信息
+* all：列出所有选项设置情况
+* term：设置终端类型
+* ignorance：在搜索中忽略大小写
+* list：显示制表位(Ctrl+I)和行尾标志（$)
+* number：显示行号
+* report：显示由面向行的命令修改过的数目
+* terse：显示简短的警告信息
+* warn：在转到别的文件时若没保存当前文件则显示NO write信息
+* nomagic：允许在搜索模式中，使用前面不带“/”的特殊字符
+* nowrapscan：禁止vi在搜索到达文件两端时，又从另一端开始
+* mesg：允许vi显示其他用户用write写到自己终端上的信息
 
 ```
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -637,14 +637,6 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 > Not an editor command: ^M
 :set fileformat=unix :w
 
-## 插件
-
-* [cknadler/vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
-* [rupa/z](https://github.com/rupa/z):z - jump around
-* [rupa/v](https://github.com/rupa/v):z for vim
-* [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim.
-* [fatih/vim-go](https://github.com/fatih/vim-go):Go development plugin for Vim
-
 ## 教程
 
 * [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)
@@ -656,6 +648,14 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [philc/vimium](https://github.com/philc/vimium):The hacker's browser.
 * [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen):pathogen.vim: manage your runtimepath
 * [square/maximum-awesome](https://github.com/square/maximum-awesome):Config files for vim and tmux.
+
+## 插件
+
+* [cknadler/vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
+* [rupa/z](https://github.com/rupa/z):z - jump around
+* [rupa/v](https://github.com/rupa/v):z for vim
+* [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim.
+* [fatih/vim-go](https://github.com/fatih/vim-go):Go development plugin for Vim
 
 ## 工具
 

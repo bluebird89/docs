@@ -371,20 +371,8 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 * [tsenart/vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. https://godoc.org/github.com/tsenart/vegeta/lib
 * Performance Measurement
     * [Microsoft/Ethr](https://github.com/Microsoft/Ethr):Ethr is a Network Performance Measurement Tool for TCP, UDP & HTTP.
-
-### [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest)
-
-DNS Performance test
-
-```sh
-sudo apt-get install bc dnsutils
-
-git clone --depth=1 https://github.com/cleanbrowsing/dnsperftest/
-cd dnsperftest
-
-bash ./dnstest.sh
-bash ./dnstest.sh |sort -k 22 -n
-```
+* proxy
+    - [avwo/whistle](https://github.com/avwo/whistle):HTTP, HTTPS, WebSocket debugging proxy https://wproxy.org/
 
 ## 参考
 

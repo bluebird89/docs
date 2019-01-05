@@ -11,8 +11,11 @@ Linux 是一个可以实现多用户登陆的操作系统，多用户可以同�
 * 用WinSCP.exe等工具上传系统镜像文件rhel-server-7.0-x86_64-dvd.iso到/usr/local/src目录
 * 使用Putty.exe工具远程连接到RHEL服务器
 * 挂载系统镜像文件
+* 内存一定不能低于4g，因为你给虚拟机分配的内存在虚拟机启动之后会1:1的从你的物理内存中划走
 
-### win10 && UBUNTU 双系统
+### 分区
+
+win10 && UBUNTU 双系统
 
 * 磁盘压缩出30G分区，空闲不做盘符与格式化
 * 制作UBUNTU启动U盘
@@ -31,36 +34,6 @@ Linux 是一个可以实现多用户登陆的操作系统，多用户可以同�
   - 添加新条目 linux/BSD选项
   - 选中分区boot分区
 * 重启运行
-
-> 环境变量
-
-每个进程都有其各自的环境变量设置，且默认情况下，当一个进程被创建时，处理创建过程中明确指定的话，它将继承其父进程的绝大部分环境设置。Shell 程序也作为一个进程运行在操作系统之上，而我们在 Shell 中运行的大部分命令都将以 Shell 的子进程的方式运行。
-
-* 永久的：需要修改配置文件，变量永久生效； /etc/bashrc 存放的是 shell 变量 `echo "PATH=$PATH:/home/shiyanlou/mybin" >> .zshrc`
-* .profile（不是/etc/profile） 只对当前用户永久生效，所以如果想要添加一个永久生效的环境变量，只需要打开 /etc/profile
-* 环境变量理解生效 `source .zshrc` `. ./.zshrc`
-* 临时的：使用 export 命令行声明即可，变量在关闭 shell 时失效。`PATH=$PATH:/home/zhangwang/mybin`给 PATH 环境变量追加了一个路径，它也只是在当前 Shell 有效，一旦退出终端，再打开就会发现又失效了。
-* 当前 Shell 进程私有用户自定义变量，如上面我们创建的 tmp 变量，只在当前 Shell 中有效。
-* ${变量名#匹配字串}: 从头向后开始匹配，删除符合匹配字串的最短数据
-* ${变量名##匹配字串}: 从头向后开始匹配，删除符合匹配字串的最长数据
-* ${变量名%匹配字串}: 从尾向前开始匹配，删除符合匹配字串的最短数据
-* ${变量名%%匹配字串}: 从尾向前开始匹配，删除符合匹配字串的最长数据
-* ${变量名/旧的字串/新的字串}:将符合旧字串的第一个字串替换为新的字串
-* ${变量名//旧的字串/新的字串}: 将符合旧字串的全部字串替换为新的字串
-
-```sh
-declare tmp // 使用 declare 命令创建一个变量名为 tmp 的变量
-tmp=God // 使用 = 号赋值运算符，将变量 tmp 赋值为 God
-echo $tmp // 读取变量的值：使用 echo 命令和 $ 符号（$ 符号用于表示引用一个变量的值）
-set:显示当前 Shell 所有变量，包括其内建环境变量（与 Shell 外观等相关），用户自定义变量及导出的环境变量。
-env:显示与当前用户相关的环境变量，还可以让命令在指定环境中运行
-export：显示从 Shell 中导出成环境变量的变量
-unset temp : 删除变量temp
-
-source ~/.zshrc
-
-sudo update-alternatives --config editor # 修改默认编辑器
-```
 
 ## screen
 
@@ -118,21 +91,25 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 
 ### 软件安装
 
-> 在线安装:通过软件包管理工具
-
-* sudo gedit /etc/apt/sources.list
-* 程序安装有home路径
-* bin路径
-* ubuntu.16替换apt-get为apt
-
-软件源管理
-
-* 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
-* 根据这些信息在相关的服务器上下载软件安装
-* 安装某个软件时，如果该软件有其它依赖程序，系统会为我们自动安装所以来的程序；
-* 如果本地的数据库不够新，可能就会发生搜索不到的情况，这时候需要我们更新本地的数据库，使用命令sudo apt-get update可执行更新；
-* 软件源镜像服务器可能会有多个，有时候某些特定的软件需要我们添加特定的源；
-* deb包是Debian，Ubuntu等Linux发行版的软件安装包，扩展名为.deb，是类似于rpm的软件包，Debian，Ubuntu系统不推荐使用deb软件包，因为要解决软件包依赖问题，安装也比较麻烦。下载相应deb软件包，使用dpkg命令来安装
+* 在线安装:通过软件包管理工具
+  - sudo gedit /etc/apt/sources.list
+  - 程序安装有home路径
+  - bin路径
+  - ubuntu.16替换apt-get为apt
+* 软件源管理
+  - 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
+  - 根据这些信息在相关的服务器上下载软件安装
+  - 安装某个软件时，如果该软件有其它依赖程序，系统会为我们自动安装所以来的程序；
+  - 如果本地的数据库不够新，可能就会发生搜索不到的情况，这时候需要我们更新本地的数据库，使用命令sudo apt-get update可执行更新；
+  - 软件源镜像服务器可能会有多个，有时候某些特定的软件需要我们添加特定的源；
+  - deb包是Debian，Ubuntu等Linux发行版的软件安装包，扩展名为.deb，是类似于rpm的软件包，Debian，Ubuntu系统不推荐使用deb软件包，因为要解决软件包依赖问题，安装也比较麻烦。下载相应deb软件包，使用dpkg命令来安装
+  - 源管理
+    + 配置路径
+      * /etc/apt/sources.list
+      * /etc/apt/sources.list.d
+    - [Aliyun](http://mirrors.aliyun.com)
+* 从二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到合适的目录，然后将包含可执行的主程序文件的目录添加进PATH环境变量即可
+* 源码编译安装
 
 ```sh
 # fix ubuntu
@@ -140,28 +117,20 @@ sudo rm/var/lib/apt/lists/lock
 sudo rm/var/lib/dpkg/lock
 sudo rm/var/lib/dpkg/lock-frontend
 
-sudo dpkg --configure -a
-sudo apt clean
-sudo apt update --fix-missing
-sudo apt install -f
-
-sudo dpkg --configure -a
-sudo apt upgrade
-sudo apt dist-upgrade
-
 sudo apt-cache search softname1 softname2 softname3...... # 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
-sudo apt-get install [packagename] # 其后加上软件包名，用于安装一个软件包
-sudo apt-get update # 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表
-sudo apt-get dist-upgrade
-sudo apt-get upgrade # 升级本地可更新的全部软件包，但存在依赖问题时将不会升级，通常会在更新之前执行一次update
-dist-upgrade # 解决依赖关系并升级(存在一定危险性)
+sudo apt[-get] install [packagename] # 其后加上软件包名，用于安装一个软件包
+sudo apt[-get] -f install # 解决依赖问题
+sudo apt update --fix-missing
+sudo apt[-get] upgrade # 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表 升级本地可更新的全部软件包，但存在依赖问题时将不会升级，通常会在更新之前执行一次update
+sudo apt[-get] dist-upgrade # 解决依赖关系并升级(存在一定危险性)
+sudo apt --fix-broken install # continue install
 
-sudo apt-get remove # 移除已安装的软件包，包括与被移除软件包有依赖关系的软件包，但不包含软件包的配置文件
-sudo apt-get remove netease-cloud-music
+sudo apt-get remove netease-cloud-music # 移除已安装的软件包，包括与被移除软件包有依赖关系的软件包，但不包含软件包的配置文件
 sudo apt-get autoremove # 移除之前被其他软件包依赖，但现在不再被使用的软件包  purge 与remove相同，但会完全移除软件包，包含其配置文件
 sudo apt-get clean # 移除下载到本地的已经安装的软件包，默认保存在/var/cache/apt/archives/
 sudo apt-get autoclean #移除已安装的软件的旧版本软件包
 
+sudo dpkg --configure -a # fixing broken dependencies
 dpkg
 ## 参数
 -i|--install
@@ -174,30 +143,81 @@ dpkg
 -C|--audit  # 检查是否有软件包残损
 -c|--contents # 包含的文件结构
 -L|--listfiles # 所有文件清单
--i 安装指定deb包,之后修复依赖关系的安装`sudo apt-get -f install`
--R 后面加上目录名，用于安装该目录下的所有deb安装包
--r remove，移除某个已安装的软件包
--I 显示deb包文件的信息
--s 显示已安装软件的信息
--S 搜索已安装的软件包
--L 显示已安装软件包的目录信息
-
+-i # 安装指定deb包,之后修复依赖关系的安装`sudo apt-get -f install`
+-R # 后面加上目录名，用于安装该目录下的所有deb安装包
+-r # remove，移除某个已安装的软件包
+-I # 显示deb包文件的信息
+-s # 显示已安装软件的信息
+-S # 搜索已安装的软件包
+-L # 显示已安装软件包的目录信息
 -y # 自动回应是否安装软件包的选项，在一些自动化安装脚本中使用这个参数将十分有用
 -q # 静默安装方式，指定多个q或者-q=#,#表示数字，用于设定静默级别，这在你不想要在安装软件包时屏幕输出过多时很有用
 -f # 修复损坏的依赖关系
 -d # 只下载不安装git aa
+sudo dpkg -i netease-cloud-music_1.1.0_amd64_ubuntu.deb # install failed.depency to install
+
+dpkg --get-selections | grep hold
 --reinstall # 重新安装已经安装但可能存在问题的软件包
 --install-suggests # 同时安装APT给出的建议安装的软件包
 
+sudo aptitude install <packagename>
+
 sudo add-apt-repository --remove ppa:finalterm/daily # remove
 
-sudo dpkg -i netease-cloud-music_1.1.0_amd64_ubuntu.deb # install failed.depency to install
-sudo apt --fix-broken install # continue install
+## 替换源
+# /etc/apt/sources.list.d
+sudo mv /etc/apt/sources.list /etc/apt/sources.list.backup #备份系统默认的软件源
+sudo vim /etc/apt/sources.list
 
-sudo apt-get -f install # 解决依赖问题
+sudo add-apt-repository ppa:nilarimogard/webupd8   # add source
+sudo add-apt-repository -r ppa:nilarimogard/webupd8   # add source
+sudo apt update
 
-dpkg -l | grep vim
+sudo apt install -f # fix software database is boken
+sudo apt update --fix-missing
+
+sudo apt-get upgrade
+
+## 源码编译 源码cp到/usr/local/src/下
+cd xxx
+./configure --help
+./configure --prefix=/usr/local/libxml2
+make && make install
 ```
+
+### 列表
+
+* 云笔记:simplenote
+* video: VLC
+* editor: atom
+* oh my zsh 而非 zsh fish
+* KchmViewer:阅读CHM
+* LaTeX
+* Chromium
+* Nylas N1：超好用的跨平台电子邮件客户端  Thunderbird
+* sougou
+* Spotify for Linux：音乐流媒体服务
+* Lightworks Free：专业的非线视频编辑器
+* Viber：跨平台的 Skype 替代品
+* Vivaldi：功能强大的 web 浏览器
+* BleachBit: cleaner(softer center)
+* albert
+* 听播客: Vocal
+* PDF 阅读：Foxit Reader
+* gimp
+* Gtile:分屏工具
+* MySQL Workbench
+* Cloud music
+* shadowshocks
+* Jitsy:通讯工具
+* Synaptic：软件管理
+* thunderbird mail: can  add addon to manage rss
+* xchm:`sudo apt-get install xchm`
+* [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
+* [cherrytree](www.giuspen.com/cherrytree/):note
+* [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite
+* [Sayonara Player](https://sayonara-player.com/index.php)
+* Disk Usage Analyzer
 
 ## VM
 
@@ -211,52 +231,28 @@ codesudo apt install open-vm-tools open-vm-tools-desktop # 重启
   * Win 键，进入活动概览视图模式
   * Ctrl + Alt + 方向箭头
 
-## 源管理
-
-* /etc/apt/sources.list
-* /etc/apt/sources.list.d
-
-[Aliyun](http://mirrors.aliyun.com)
+## 端口与进程管理
 
 ```sh
-# /etc/apt/sources.list.d
-sudo mv /etc/apt/sources.list /etc/apt/sources.list.backup #备份系统默认的软件源
-sudo vim /etc/apt/sources.list
-
-sudo add-apt-repository ppa:nilarimogard/webupd8   # add source
-sudo add-apt-repository -r ppa:nilarimogard/webupd8   # add source
-sudo apt update
-
-sudo apt install -f # fix software database is boken
-sudo apt update --fix-missing
-
-sudo apt-get upgrade
-```
-
-> 从二进制软件包安装
-
-需要做的只是将从网络上下载的二进制包解压后放到合适的目录，然后将包含可执行的主程序文件的目录添加进PATH环境变量即可
-
-> 源码编译安装
-
-```sh
-#  源码cp到/usr/local/src/下
-cd xxx
-./configure --help
-./configure --prefix=/usr/local/libxml2
-make && make install
-```
-
-## 管理
-
-> 防火墙
-
-```sh
+# 防火墙
 sudo ufw status
 sudo ufw app list
 sudo ufw allow 'Nginx HTTP'
 sudo ufw allow https
 sudo ufw enable/disable
+
+# 查看某一端口的占用情况
+[sudo ]lsof -i : (port)
+# 显示tcp，udp的端口和进程等相关
+netstat -tunlp
+# 指定端口号进程情况
+netstat -tunlp|grep (port)
+# 进程查看
+ps -ef | grep nginx
+ps aux | grep nginx
+lsof -Pni4 | grep LISTEN | grep php
+# 关闭进程
+kill -9 pid
 ```
 
 ## 用户管理
@@ -598,7 +594,7 @@ Ubuntu具体说来，它默认提供七个终端，其中第一个到第六个�
 * Alt+T 打开 “终端” 菜单（terminal）
 * Alt+H 打开 “帮助” 菜单（help）
 
-> 系统相关
+## 系统相关
 
 ```sh
 # 查看linux系统信息
@@ -650,36 +646,22 @@ chkconfig --list sshd
 sudo apt install fonts-firacode
 ```
 
-> 服务管理：
+## 服务管理
 
 ```sh
-sudo systemctl enable nginx
-sudo systemctl start nginx
-sudo systemctl restart nginx
 systemctl status nginx
-sudo systemctl reload nginx
+sudo systemctl enable|start|restart|reload nginx
+
+sudo uname --m
+
+Failed to start mysql.service: Unit mysql.service is masked.
+systemctl unmask mysql.service
+service mysql start
 ```
 
-> 启动项
+## 启动项
 
 启动目录： /etc/rc.d/rc[0~6].d 命令行脚本文件：/etc/init.d/ 本地文件：/etc/rc.local 添加 /etc/init.d/nginx start
-
-> 端口与进程管理
-
-```sh
-# 查看某一端口的占用情况
-[sudo ]lsof -i : (port)
-# 显示tcp，udp的端口和进程等相关
-netstat -tunlp
-# 指定端口号进程情况
-netstat -tunlp|grep (port)
-# 进程查看
-ps -ef | grep nginx
-ps aux | grep nginx
-lsof -Pni4 | grep LISTEN | grep php
-# 关闭进程
-kill -9 pid
-```
 
 > 修改时区
 
@@ -736,40 +718,28 @@ choose language,key input method system: fcitx
 fcitx add sogou pinyin
 
 Ctrl+Shift+F # trantional change simple
-```
 
-> atom install
-
-```sh
+# atom install
 sudo add-apt-repository ppa:webupd8team/atom
 sudo apt-get update
 sudo apt-get install atom
 
 sudo apt install vlc
-```
-
-> evernote
-
-```sh
+# evernote
 sudo add-apt-repository ppa:nixnote/nixnote2-daily
 sudo apt update
 sudo apt install nixnote2
 File->Add Another User…
 Tools->Synchronize
-```
 
-> chrome(firefox 禁用console.log)
-
-```sh
+# chrome(firefox 禁用console.log)
 sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install google-chrome-stable
-```
 
-> mysql workbeach
+# mysql workbeach
 
-```sh
 # down
 sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 sudo apt-get update
@@ -799,7 +769,6 @@ sudo apt-get install autoconf build-essential curl libtool \
 
 ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib # configure: error: Cannot find OpenSSL’s libraries
 ```
-
 
 #### [xflux-gui/fluxgui](https://github.com/xflux-gui/fluxgui)
 
@@ -845,7 +814,6 @@ top [-] [d] [p] [q] [c] [C] [S] [s]  [n]，参数
 * s 使top命令在安全模式中运行。这将去除交互命令所带来的潜在危险。
 * i  使top不显示任何闲置或者僵死进程。
 * c 显示整个命令行而不只是显示命令名。
-
 * 多核CPU监控:在top基本视图中，按键盘数字“1”，可监控每个逻辑CPU的状况
 * 统计信息区:前五行是系统整体的统计信息。
   * 第一行是任务队列信息，同 uptime 命令的执行结果
@@ -935,11 +903,6 @@ top [-] [d] [p] [q] [c] [C] [S] [s]  [n]，参数
 sudo apt install htop
 htop
 ```
-## Develop
-
-```sh
-code
-```
 
 ## 虚拟化
 
@@ -972,9 +935,6 @@ sudo smbpasswd -a username
 smb://192.168.100.106
 \\172.16.44.175\Ubuntu
 ```
-
-### 优化
-
 
 ### ubunu 优化
 
