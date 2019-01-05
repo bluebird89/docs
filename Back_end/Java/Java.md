@@ -48,8 +48,7 @@ Path %JAVA_HOME%\bin;%JAVA_HOME%\jre\bin\; # win10 path 分条添加
 # ubuntu
 # using the version packaged with Debian：OpenJDK 8
 sudo apt-get update
-sudo apt-get install default-jre
-# JDK 包含JRE(**推荐**)
+sudo apt-get install default-jre # JDK 包含JRE(**推荐**)
 sudo apt-get install default-jdk
 
 # Installing the Oracle JDK
@@ -63,33 +62,10 @@ sudo add-apt-repository ppa:linuxuprising/java
 sudo apt-get install oracle-java11-installer
 sudo apt-get install oracle-java11-set-default
 
-# 多版本管理
-sudo update-alternatives --config java | javac # 会获得程序路径
-
 ## JAVA_HOME Environment Variable配置
 sudo vim /etc/environment # 添加 JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 source /etc/environment
 echo $JAVA_HOME
-
-# Mac
-sudo add-apt-repository ppa:linuxuprising/java
-sudo apt update
-sudo apt install oracle-java10-installer
-sudo apt install oracle-java10-set-default
-
-sudo apt-get update
-sudo apt-get install default-jdk
-sudo groupadd tomcat
-sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat   # a home directory of /opt/tomcat (where we will install Tomcat)  with a shell of /bin/false (so nobody can log into the account)
-
-cd /tmp  #  存放临时文件
-curl -O http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.5/bin/apache-tomcat-8.5.5.tar.gz
-sudo mkdir /opt/tomcat
-sudo tar xzvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
-sudo chgrp -R tomcat /opt/tomcat
-sudo chmod -R g+r conf
-sudo chmod g+x conf
-sudo chown -R tomcat webapps/ work/ temp/ logs/
 
 # mac
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home
@@ -99,7 +75,14 @@ export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 # 或者
 JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 export JAVA_HOME
-source .bash_profile 或 source .zshrc
+source .bash_profile | source .zshrc
+
+## centos
+sudo yum install java-1.8.0-openjdk
+sudo yum install java-1.8.0-openjdk-devel
+
+# 多版本管理
+sudo update-alternatives --config java | javac # 会获得程序路径
 
 java -version
 ```

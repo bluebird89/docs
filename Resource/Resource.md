@@ -121,6 +121,7 @@
 ## 社交
 
 * [sindresorhus/caprine](https://github.com/sindresorhus/caprine):Elegant Facebook Messenger desktop app https://sindresorhus.com/caprine
+* [TheYahya/sherlock](https://github.com/TheYahya/sherlock):🔎 Find usernames across social networks
 
 ## 生活
 

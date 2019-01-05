@@ -6,6 +6,9 @@ UNIX/Linux 本身是没有图形界面的，我们通常在 UNIX/Linux 发行版
 
 Linux 是一个可以实现多用户登陆的操作系统，多用户可以同时登陆同一台主机，共享主机的一些资源，不同的用户也分别有自己的用户空间，可用于存放各自的文件。虽然不同用户的文件是放在同一个物理磁盘上的甚至同一个逻辑分区或者目录里，但是由于 Linux 的用户管理和 文件权限机制，不同用户不可以轻易地查看、修改彼此的文件。
 
+Linux系统默认的字符编码是 UTF-8。Windows 是 GBK 编码，不支持UTF8. 所以 Linux下 的中文文件名到 Windwos下就成了乱码。
+
+
 ## Linux vs Unix
 
 ### Unix
@@ -288,11 +291,6 @@ Linux 文件系统是一个目录树的结构，文件系统结构从一个根�
   - /var/tmp：比/tmp允许更大的或需要存在较长时间的临时文件。注意系统管理 员可能不允许/var/tmp有很旧的文件。
 * /lost+found：这个 目录平时是空的，系统非正常关机而留下“无家可归”的文件就在这里。
 
-## GNU
-
-* GNU是GNU is Not Unix的递归缩写，是自由软件基金会(Free Software Foundation，FSF)的一个项目，该项目已经开发了许多高质量的编程工具，包括emacs编辑器、著名的GNU C和C++编译器(gcc和g++)；
-* Linux的开发使用了许多GNU工具，Linux系统上用于实现POSIX.2标准的工具几乎都是由GNU项目开发的；Linux内核、GNU工具以及其它一些自由软件组成了人们常说的Linux系统或Linux发布版。
-
 ## 环境变量
 
 每个进程都有其各自的环境变量设置，且默认情况下，当一个进程被创建时，处理创建过程中明确指定的话，它将继承其父进程的绝大部分环境设置。Shell 程序也作为一个进程运行在操作系统之上，而我们在 Shell 中运行的大部分命令都将以 Shell 的子进程的方式运行。
@@ -310,47 +308,18 @@ Linux 文件系统是一个目录树的结构，文件系统结构从一个根�
 * ${变量名//旧的字串/新的字串}: 将符合旧字串的全部字串替换为新的字串
 
 ```sh
-declare tmp # 使用 declare 命令创建一个变量名为 tmp 的变量
-tmp=God # 使用 = 号赋值运算符，将变量 tmp 赋值为 God
-echo $tmp # 读取变量的值：使用 echo 命令和 $ 符号（$ 符号用于表示引用一个变量的值）
-set # 显示当前 Shell 所有变量，包括其内建环境变量（与 Shell 外观等相关），用户自定义变量及导出的环境变量。
-env # 显示与当前用户相关的环境变量，还可以让命令在指定环境中运行
-export # 显示从 Shell 中导出成环境变量的变量
-unset temp # 删除变量temp
+declare tmp // 使用 declare 命令创建一个变量名为 tmp 的变量
+tmp=God // 使用 = 号赋值运算符，将变量 tmp 赋值为 God
+echo $tmp // 读取变量的值：使用 echo 命令和 $ 符号（$ 符号用于表示引用一个变量的值）
+set:显示当前 Shell 所有变量，包括其内建环境变量（与 Shell 外观等相关），用户自定义变量及导出的环境变量。
+env:显示与当前用户相关的环境变量，还可以让命令在指定环境中运行
+export：显示从 Shell 中导出成环境变量的变量
+unset temp : 删除变量temp
+
+source ~/.zshrc
+
+sudo update-alternatives --config editor # 修改默认编辑器
 ```
-
-## 概念
-
-* Linux系统默认的字符编码是 UTF-8。Windows 是 GBK 编码，不支持UTF8. 所以 Linux下 的中文文件名到 Windwos下就成了乱码。
-
-## 虚拟机安装
-
-* 用WinSCP.exe等工具上传系统镜像文件rhel-server-7.0-x86_64-dvd.iso到/usr/local/src目录
-* 使用Putty.exe工具远程连接到RHEL服务器
-* 挂载系统镜像文件
-* 内存一定不能低于4g，因为你给虚拟机分配的内存在虚拟机启动之后会1:1的从你的物理内存中划走
-
-### 分区
-
-win10 && UBUNTU 双系统
-
-* 磁盘压缩出30G分区，空闲不做盘符与格式化
-* 制作UBUNTU启动U盘
-  - 通过UltraISO打开UBUNUT镜像文件
-  - 启动：写入硬盘映像，写入U盘文件
-* 启动通过U盘
-  - 安装类型：其他选项
-  - 对之前分配的未使用磁盘空间分区：
-      + /：存储系统文件，建议10GB ~ 15GB； 主分区 挂载点 /
-      + swap：交换分区，即Linux系统的虚拟内存，建议是物理内存的2倍； 逻辑分区 用于交换空间
-      + /home：home目录，存放音乐、图片及下载等文件的空间，建议最后分配所有剩下的空间； 逻辑分区 挂载点 /home
-      + /boot：包含系统内核和系统启动所需的文件，实现双系统的关键所在，建议500M。 逻辑分区 挂载点 /boot 安装启动引导器的设备： 选择/boot对应的盘符
-      + 生产服务器建议单独再划分一个/data分区存放数据
-  - 安装系统
-* 通过EASYCD配置启动
-  - 添加新条目 linux/BSD选项
-  - 选中分区boot分区
-* 重启运行
 
 ### 设置IP地址、网关DNS
 
@@ -523,40 +492,6 @@ hostname  www  #设置主机名为www
 vi /etc/hostname #编辑配置文件
 www   localhost.localdomain  #修改localhost.localdomain为www
 ```
-
-### 列表
-
-* 云笔记:simplenote
-* video: VLC
-* editor: atom
-* oh my zsh 而非 zsh fish
-* KchmViewer:阅读CHM
-* LaTeX
-* Chromium
-* Nylas N1：超好用的跨平台电子邮件客户端  Thunderbird
-* sougou
-* Spotify for Linux：音乐流媒体服务
-* Lightworks Free：专业的非线视频编辑器
-* Viber：跨平台的 Skype 替代品
-* Vivaldi：功能强大的 web 浏览器
-* BleachBit: cleaner(softer center)
-* albert
-* 听播客: Vocal
-* PDF 阅读：Foxit Reader
-* gimp
-* Gtile:分屏工具
-* MySQL Workbench
-* Cloud music
-* shadowshocks
-* Jitsy:通讯工具
-* Synaptic：软件管理
-* thunderbird mail: can  add addon to manage rss
-* xchm:`sudo apt-get install xchm`
-* [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
-* [cherrytree](www.giuspen.com/cherrytree/):note
-* [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite
-* [Sayonara Player](https://sayonara-player.com/index.php)
-* Disk Usage Analyzer
 
 ## terminal终端
 
@@ -905,10 +840,12 @@ groups zhangwang # 查看用户属于那些组（groups）
 cat /etc/group | sort 命令查看某组包含那些成员 # /etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
 sudo usermod -G sudo student # 不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，我们可以使用usermod命令把它加入sudo组用以具备相应的权限。
 sudo deluser student --remove-home # 删除用户及用户相关文件；
+userdel -r username
 
 etc/passwd
 useradd 用户名 # 添加用户
 passwd 用户名  # 设定用户密码
+usermod -aG wheel username
 
 etc/group
 chgrp [-options] [群组名] [文档路径]
@@ -1478,6 +1415,7 @@ set completeopt=longest,menu
 * [aleksandar-todorovic/awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
 * [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
 * [面向 Linux 程序员和系统管理员的技术资源](https://www.ibm.com/developerworks/cn/linux/)
+* [Linux 内核揭密](https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html)
 
 ## 工具
 
@@ -1488,19 +1426,3 @@ set completeopt=longest,menu
 * [akavel/up](https://github.com/akavel/up):Ultimate Plumber is a tool for writing Linux pipes with instant live preview
 * [iovisor/bcc](https://github.com/iovisor/bcc):BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
 * [Monit](https://mmonit.com/monit/):功能异常强大的进程、文件、设备、系统监控软件，适用于Linux/Unix系统
-
-systemctl unmask mysql.service
-service mysql start
-
-dpkg --get-selections | grep hold
-sudo aptitude install <packagename>
-
-sudo dpkg --configure -a # fixing broken dependencies
-sudo apt-get install -f
-
-sudo uname --m
-
-Failed to start mysql.service: Unit mysql.service is masked.
-
-systemctl unmask mysql.service
-service mysql start

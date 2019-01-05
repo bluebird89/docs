@@ -38,6 +38,10 @@
 * [PaddlePaddle/book](https://github.com/PaddlePaddle/book):Deep Learning 101 with PaddlePaddle （深度学习框架入门教程）
 * [d2l-ai/d2l-zh](https://github.com/d2l-ai/d2l-zh):《动手学深度学习》，英文版即伯克利深度学习（STAT 157，2019春）教材。面向中文读者、能运行、可讨论。 https://zh.d2l.ai
 
+## 图书
+
+* [因果推理](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/)
+
 ## 工具
 
 * [floydhub/dl-docker](https://github.com/floydhub/dl-docker):An all-in-one Docker image for deep learning. Contains all the popular DL frameworks (TensorFlow, Theano, Torch, Caffe, etc.) https://www.floydhub.com
