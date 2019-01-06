@@ -6,7 +6,14 @@ PHP 用来管理依赖（dependency）关系的工具。可以在自己的项目
 
 ## 原理
 
-
+* zend_lookup_class_ex
+    * EG(class_table)
+    * spl_autoload_call  spl_autoload_register:将用户的autoload函数放到SPL_G(autoload_functions)中，且将spl_autoload_call注册到PHP中。
+        * Composer\Autoload\ClassLoader::loadClass
+            * findFile
+                * class map lookup
+                * PSR-4 lookup
+                * PSR-0 :autoload_namespaces.php
 
 ## 安装
 
