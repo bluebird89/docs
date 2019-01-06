@@ -1,5 +1,15 @@
 # Computer Vision
 
+## 过滤器
+
+不同的卷积核将突出原始图像的不同特征属性
+
+Identity
+Laplacian
+Left Sobel
+Upper Sobel
+Blur
+
 ## 项目
 
 * [deeppomf/DeepCreamPy](https://github.com/deeppomf/DeepCreamPy):Decensoring Hentai with Deep Neural Networks
