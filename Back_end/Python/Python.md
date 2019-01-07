@@ -210,7 +210,7 @@ pip install 'ipython[zmq,qtconsole,notebook,test]'
 * 交互模式：`python` `exit()`
 *  (代码助手)[https://raw.githubusercontent.com/michaelliao/learn-python3/master/teach/learning.py]
 
-### 基础
+### 基础 Basic Syntax
 
 计算机要根据编程语言执行任务，就必须保证编程语言写出的程序决不能有歧义，所以，任何一种编程语言都有自己的一套语法，编译器或者解释器就是负责把符合语法的程序代码转换成CPU能够执行的机器码，然后执行
 
@@ -230,24 +230,24 @@ name = input('please enter your name: ') // 有提示框
 print('hello,', name)
 ```
 
-#### 数据类型与变量
+#### 数据类型与变量 Native Datatypes
 
 在计算机内部，可以把任何数据都看成一个“对象”，而变量就是在程序中用来指向这些数据对象的，对变量赋值就是把数据和变量给关联起来。对变量赋值x = y是把变量x指向真正的对象，该对象是变量y所指向的。随后对变量y的赋值不影响变量x的指向。
 
 * 基本类型
-    - 整数:Python可以处理任意大小的整数，当然包括负整数，在程序中的表示方法和数学上的写法一模一样，例如：1，100，-8080，0，等等。二进制、十六进制表示整数比较方便，十六进制用0x前缀和0-9，a-f表示，例如：0xff00，0xa5b4c3d2，等等。
+    - 整数 Number:Python可以处理任意大小的整数，当然包括负整数，在程序中的表示方法和数学上的写法一模一样，例如：1，100，-8080，0，等等。二进制、十六进制表示整数比较方便，十六进制用0x前缀和0-9，a-f表示，例如：0xff00，0xa5b4c3d2，等等。
     - 浮点数:浮点数也就是小数，之所以称为浮点数，是因为按照科学记数法表示时，一个浮点数的小数点位置是可变的，比如，1.23x109和12.3x108是完全相等的。浮点数可以用数学写法，如1.23，3.14，-9.01，等等。或者用科学计数法表示，把10用e替代，1.23x10^9就是1.23e9，或者12.3e8，0.000012可以写成1.2e-5，等等。整数和浮点数在计算机内部存储的方式是不同的，整数运算永远是精确的（除法难道也是精确的？是的！），而浮点数运算则可能会有四舍五入的误差。也没有大小限制，但是超出一定范围就直接表示为inf（无限大）
-    - 字符串:以单引号'或双引号"括起来的任意文本，比如'abc'，"xyz"等等。请注意，''或""本身只是一种表示方式，不是字符串的一部分，因此，字符串'abc'只有a，b，c这3个字符。如果'本身也是一个字符，那就可以用""括起来，比如"I'm OK"包含的字符是I，'，m，空格，O，K这6个字符。
+    - 字符串 String:以单引号'或双引号"括起来的任意文本，比如'abc'，"xyz"等等。请注意，''或""本身只是一种表示方式，不是字符串的一部分，因此，字符串'abc'只有a，b，c这3个字符。如果'本身也是一个字符，那就可以用""括起来，比如"I'm OK"包含的字符是I，'，m，空格，O，K这6个字符。
         + 字符串内部既包含'又包含"怎么办？可以用转义字符\来标识.
             + \n表示换行
             + \t表示制表符，字符\本身也要转义，所以\\表示的字符就是\
         + 用r''表示''内部的字符串默认不转义
         + 用'''...'''的格式表示多行内容,输入时换行时添加空格
-    - 布尔值:只有True、False两种值,可以直接用True、False表示布尔值（请注意大小写）
-    - 空值:Python里一个特殊的值，用None表示。None不能理解为0，因为0是有意义的，而None是一个特殊的空值。
+    - 布尔值 Boolean:只有True、False两种值,可以直接用True、False表示布尔值（请注意大小写）
+    - 空值 None:Python里一个特殊的值，用None表示。None不能理解为0，因为0是有意义的，而None是一个特殊的空值。
 * 复合元素
-    - 列表：list是一种有序的集合，可以随时添加和删除其中的元素。元素的数据类型也可以不同。可以嵌套(多维数组).查找元素，全表遍历。list越大，查找越慢。
-    - 有序列表叫元组：tuple。tuple和list非常类似，但是tuple一旦初始化就不能修改.
+    - 列表 List：list是一种有序的集合，可以随时添加和删除其中的元素。元素的数据类型也可以不同。可以嵌套(多维数组).查找元素，全表遍历。list越大，查找越慢。
+    - 有序列表叫元组 Tuple tuple和list非常类似，但是tuple一旦初始化就不能修改.
         + 当定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来
         + 可以嵌套list：可以修改
     - dict全称dictionary，在其他语言中也称为map，使用键-值（key-value）存储，具有极快的查找速度.无论这个表有多大，查找速度都不会变慢.先在字典的索引表里（比如部首表）查这个字对应的页码（索引遍历）。通过key计算位置的算法称为哈希算法（Hash），要保证hash的正确性，作为key的对象就不能变。字符串、整数等都是不可变的，因此，可以放心地作为key。而list是可变的，就不能作为key
@@ -500,7 +500,7 @@ print('%.2f' % 3.1415926) # 3.14
 'Hello, {0}, 成绩提升了 {1:.1f}%'.format('小明', 17.125)  # 'Hello, 小明, 成绩提升了 17.1%'
 ```
 
-##### 控制语句
+##### 控制语句 Flow Control
 
 * 判断语句
 * 循环:for while
@@ -561,13 +561,13 @@ while n < 10:
     - abs(-10)是函数调用，而abs是函数本身
     - 函数名其实就是指向函数的变量
 * 内置函数：调用一个函数，需要知道函数的名称和参数（个数与数据类型），数据类型转换
-* 定义一个函数要使用def语句，依次写出函数名、括号、括号中的参数和冒号:，然后，在缩进块中编写函数体，函数的返回值用return语句返回。
+* Definition 定义一个函数要使用def语句，依次写出函数名、括号、括号中的参数和冒号:，然后，在缩进块中编写函数体，函数的返回值用return语句返回。
     - 一旦执行到return时，函数就执行完毕，并将结果返回
     - 如果没有return语句，函数执行完毕后也会返回结果，只是结果为None。return None可以简写为return
     - 函数引用：把my_abs()的函数定义保存为abstest.py文件了，用from abstest import my_abs来导入my_abs()函数，注意abstest是文件名（不含.py扩展名）
     - pass语句什么都不做，实际上pass可以用来作为占位符，比如现在还没想好怎么写函数的代码，就可以先放一个pass，让代码能运行起来。
     - 多值返回：返回值是一个tuple！但是，在语法上，返回一个tuple可以省略括号，而多个变量可以同时接收一个tuple，按位置赋给对应的值
-* 参数
+* 参数 Arguments
     - 位置参数：power(x, n)函数有两个参数：x和n，这两个参数都是位置参数，调用函数时，传入的两个值按照位置顺序依次赋给参数x和n
     - 默认参数：含有默认值，调用时可以省略赋值。能降低调用函数的难度（减少对默认参数的顾虑）
         + 必选参数在前，默认参数在后。
@@ -587,6 +587,8 @@ while n < 10:
     - 解决栈溢出：尾递归优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。
         + 尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。(算法优化)
         + 大多数编程语言没有针对尾递归做优化，Python解释器也没有做优化，所以，即使把上面的fact(n)函数改成尾递归方式，也会导致栈溢出。
+Documentation
+@decorator
 
 ```python
 abs(-10) # 函数调用
@@ -706,7 +708,7 @@ def fact_iter(num, product):
     return fact_iter(num - 1, num * product)
 ```
 
-##### 函数是式编程 Functional Programming
+##### 函数是式编程 Functional Programming Lambda
 
 函数式编程就是一种抽象程度很高的编程范式，纯粹的函数式编程语言编写的函数没有变量，因此，任意一个函数，只要输入是确定的，输出就是确定的，这种纯函数我们称之为没有副作用
 一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数！Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。
@@ -882,7 +884,7 @@ max2 = functools.partial(max, 10)
 max(*(10, 5, 6, 7))
 ```
 
-##### 模块
+##### 模块 Module
 
 * 大大提高了代码的可维护性。
 * 其次，编写代码不必从零开始。当一个模块编写完毕，就可以被其他地方引用。包括Python内置的模块和来自第三方的模块
@@ -989,10 +991,10 @@ sys.path.append('/Users/michael/my_py_scripts')
     - set方法可以做参数
     - 特殊变量：以双下划线开头，并且以双下划线结尾的。可以直接访问
     - _name，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，意思就是，“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”。
-* 继承：定义一个class的时候，可以从某个现有的class继承，新的class称为子类（Subclass），而被继承的class称为基类、父类或超类（Base class、Super class）
+* 继承Inheritance：定义一个class的时候，可以从某个现有的class继承，新的class称为子类（Subclass），而被继承的class称为基类、父类或超类（Base class、Super class）
     - 子类获得了父类的全部功能
     - 对子类增加一些方法
-* 多态：当子类和父类都存在相同的run()方法时，子类的run()覆盖了父类的run()，在代码运行的时候，总是会调用子类的run()
+* 多态Override：当子类和父类都存在相同的run()方法时，子类的run()覆盖了父类的run()，在代码运行的时候，总是会调用子类的run()
     - 定义一个class的时候，实际上就定义了一种数据类型，与自带的数据类型一样
     - 子类也是父类的实例
     - run_twice()调用方只管调用，不管对象细节（只要确保run()方法编写正确，不用管原来的代码是如何调用的）
@@ -1314,6 +1316,14 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 3.加入开源社区（多看、多分享、多交流）
 4.参加培训辅导（仔细听课、跟上课堂学习，有问题做记录，课后查阅资料或请求他人）
 5.善于记录笔记，不断总结，查漏补缺。
+阅读文档：这是迄今为止最被低估的事情，阅读文档能大大增强你对。
+了解最受欢迎的代码库：它们的设计原理，工作原理（如：Flask，Django，requests）
+尝试编写并发代码：了解线程、进程，它们如何运行，以及它们在Python中的弱点。
+了解Sockets，Network库，异步功能。了解一下scipy和numpy。
+了解解释器的设计和运行原理：为什么有这么多不同的Python实现。（Python是用英语编写的，不是C语言），这个概念非常重要。
+了解Python生态系统：请不要在记事本中写Python，至少到现在还不要。学习使用PyCharm、了解一下PEP8、了解PIP、setuptools、virtualenv。
+了解Python的其他工具：Docker containers、UWSGI、GunicornNGINX这些东西。
+了解Google介绍的小技巧：Lambda函数、装饰器、描述符、迭代器生成器、元类。类似于：“python -m http.server”。
 
 ## 教程
 
@@ -1322,9 +1332,9 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 * [Yixiaohan/codeparkshare](https://github.com/Yixiaohan/codeparkshare):Python初学者（零基础学习Python、Python入门）书籍、视频、资料、社区推荐
 * [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide):Python best practices guidebook, written for Humans. http://docs.python-guide.org
 * [michaelliao/learn-python3](https://github.com/michaelliao/learn-python3): Learn Python 3 Sample Code
-- [python3](http://www.runoob.com/python3)
 - [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
 - [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
+- [python3](http://www.runoob.com/python3)
 - <http://www.cnblogs.com/linhaifeng/p/7278389.html>
 
 ## 扩展
@@ -1361,3 +1371,4 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 * [Python 开源库及示例代码](https://github.com/programthink/opensource/blob/master/libs/python.wiki)
 * [kriadmin/30-seconds-of-python-code](https://github.com/kriadmin/30-seconds-of-python-code)
 * [mahmoud/awesome-python-applications](https://github.com/mahmoud/awesome-python-applications):cd Free software that works great, and also happens to be open-source Python. ftp://you:relookin@it.example.com#readme
+* [coodict/python3-in-one-pic](https://github.com/coodict/python3-in-one-pic):Learn python3 in one picture. https://git.io/Coo-py3
