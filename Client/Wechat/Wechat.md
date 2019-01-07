@@ -69,6 +69,7 @@ if ($tmpstr==$signature) {
 * [thenbsp/WeChat](https://github.com/thenbsp/wechat):微信公众平台第三方 SDK 开发包，优雅、健壮，可扩展，遵循 PSR 开发规范。
 * [Urinx/WeixinBot](https://github.com/Urinx/WeixinBot):网页版微信API，包含终端版微信及微信机器人
 * [littlecodersh/itchatmp](https://github.com/littlecodersh/itchatmp):A complete and graceful API for wechat mp. 完备优雅的微信公众号接口，原生支持同步、协程使用。 http://itchatmp.readthedocs.io
+* [RememBerBer / WePush](https://gitee.com/zhoubochina/WePush):专注批量推送的小而美的工具，目前支持的类型：模板消息-公众号、模板消息-小程序、微信客服消息、阿里云短信、阿里大于模板短信 、腾讯云短信、云片网短信。https://gitee.com/zhoubochina/WePush
 
 ## 参考
 

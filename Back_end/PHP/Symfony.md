@@ -12,6 +12,15 @@ composer require server --dev
 
 php bin/console server:run
 php bin/console server:start 0.0.0.0:8000
+
+## symfony client
+curl -sS https://get.symfony.com/cli/installer | bash
+
+## demo
+symfony new --demo my_project
+composer create-project symfony/symfony-demo my_project
+
+./bin/phpunit
 ```
 
 ## 扩展
