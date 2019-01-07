@@ -744,6 +744,8 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
   - [i18next/i18next](https://github.com/i18next/i18next):i18next: learn once - translate everywhere http://i18next.com/
 * REST
   - [restify/node-restify](https://github.com/restify/node-restify):The future of Node.js REST development http://restify.com
+* package
+  - [zeit/pkg](https://github.com/zeit/pkg):Package your Node.js project into an executable https://npmjs.com/pkg
 
 ## 面试
 

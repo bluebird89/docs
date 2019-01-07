@@ -2629,6 +2629,8 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
   - [rollup/rollup](https://github.com/rollup/rollup):Next-generation ES module bundler https://rollupjs.org
 * i18n
   - [facebookincubator/fbt](https://github.com/facebookincubator/fbt):A JavaScript Internationalization Framework https://facebookincubator.github.io/fbt
+* html
+  - [Polymer/lit-html](https://github.com/Polymer/lit-html):An efficient, expressive, extensible HTML templating library for JavaScript. https://lit-html.polymer-project.org/
 
 ## 参考
 
