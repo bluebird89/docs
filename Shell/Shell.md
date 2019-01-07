@@ -1197,6 +1197,7 @@ done
 * git bash
 * [Babun](http://babun.github.io/)
 * [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
+* [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
 
 ## 教程
 

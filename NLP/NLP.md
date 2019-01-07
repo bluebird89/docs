@@ -33,6 +33,12 @@ cd script
 docker-compose up -d
 ```
 
+## 课程
+
+* [CS224N 2019](http://web.stanford.edu/class/cs224n/)
+    - 目前仅提供 2017 年春季课程：https://www.youtube.com/playlist?list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6
+
+
 ## 工具
 
 * [facebookresearch/pytext](https://github.com/facebookresearch/pytext):A natural language modeling framework based on PyTorch https://fb.me/pytextdocs

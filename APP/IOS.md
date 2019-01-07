@@ -48,3 +48,4 @@
 * [xmartlabs/XLPagerTabStrip](https://github.com/xmartlabs/XLPagerTabStrip):Android PagerTabStrip for iOS.
 * [haxpor/Potatso](https://github.com/haxpor/Potatso):Potatso is an iOS client that implements Shadowsocks proxy with the leverage of NetworkExtension framework.
 * [forkingdog/FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture):A UINavigationController's category to enable fullscreen pop gesture with iOS7+ system style.
+* [tbodt/ish](https://github.com/tbodt/ish):Linux shell for iOS https://ish.app
