@@ -7,7 +7,7 @@
 * 数据越干净越好，清理大型数据集可能非常耗时。
 * 应该预设一个有趣的问题，而这个问题又可以用数据来回答。
 
-## 来源
+## 数据集网站
 
 * [Kaggle](https://www.kaggle.com/)：爱竞赛的盆友们应该很熟悉了，Kaggle上有各种有趣的数据集，拉面评级、篮球数据、甚至西雅图的宠物许可证。
 * [UCI机器学习库](http://mlr.cs.umass.edu/ml/)：最古老的数据集源之一，是寻找有趣数据集的第一站。虽然数据集是用户贡献的，因此具有不同的清洁度，但绝大多数都是干净的，可以直接从UCI机器学习库下载，无需注册。
@@ -16,6 +16,21 @@
 
 ## 资源
 
+* 公共政府数据集
+    - [Data.gov](https://www.data.gov/)：该网站可以从多个美国政府机构下载数据。数据可以从政府预算到学校绩效分数。但要警告：大部分数据需要额外的研究。
+    - [食物环境地图集](https://catalog.data.gov/dataset/food-environment-atlas-f4a22)：包含当地食物选择如何影响美国饮食的数据。
+    - [学校系统财务状况](https://catalog.data.gov/dataset/annual-survey-of-school-system-finances)：美国学校系统财务状况调查。
+    - [慢性病数据](https://catalog.data.gov/dataset/u-s-chronic-disease-indicators-cdi-e50c9)：美国各地慢性病指标数据。
+    - [美国国家教育统计中心](https://nces.ed.gov/)：美国和世界各地的教育机构和教育人口统计数据。
+    - [英国数据中心](https://www.ukdataservice.ac.uk/)：英国最大的社会，经济和人口数据收集。
+    - [美国数据](http://datausa.io/)：美国公共数据的全面可视化。
+* 财经
+    - [Quandl](https%3A//www.quandl.com/)：经济和金融数据的良好来源 - 可用于建立预测经济指标或股票价格的模型。
+    - [世界银行开放数据](https%3A//data.worldbank.org/)：数据集涵盖来自世界各地的人口统计数据和大量的经济和发展指标。
+    - [国际货币基金组织数据](https%3A//www.imf.org/en/Data)：国际货币基金组织公布关于国际财务状况，债务率，外汇储备，商品价格和投资的数据。
+    - [金融时报市场数据](https%3A//markets.ft.com/data/)：关于全球金融市场的最新信息，包括股票价格指数，商品和外汇。
+    - [Google趋势](http%3A//www.google.com/trends%3Fq%3Dgoogle%26ctab%3D0%26geo%3Dall%26date%3Dall%26sort%3D0)：检查和分析全球互联网搜索活动和趋势新闻报道的数据。
+    - [美国经济协会（AEA）](https%3A//www.aeaweb.org/resources/data/us-macro-regional)：寻找美国宏观经济数据的好来源。
 * 图片
     - [Labelme](http://labelme.csail.mit.edu/Release3.0/browserTools/php/dataset.php)：带注释的大型图像数据集。
     - [ImageNet](http://image-net.org/)：大家熟悉的ImageNet，女神李飞飞参与创建，同名比赛影响整个计算机视觉界。
@@ -84,7 +99,6 @@
     - [lionsoul2014/ip2region](https://github.com/lionsoul2014/ip2region):准确率99.9%的ip地址定位库，0.0x毫秒级查询，数据库文件大小只有1.5M，提供了java,php,c,python,nodejs,golang,c#查询绑定和Binary,B树,内存三种查询算法，妈妈再也不用担心我的ip地址定位！ http://gitee.com/lionsoul/ip2region
 * 房产
     - [XuefengHuang/lianjia-scrawler](https://github.com/XuefengHuang/lianjia-scrawler):链家二手房租房在线数据，存量房交易服务平台数据，详细数据分析教程 http://www.ershoufangdata.com
-
 
 ## 工具
 
