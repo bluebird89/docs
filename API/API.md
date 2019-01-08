@@ -98,3 +98,4 @@ if __name__ == '__main__':
 * [swagger](https://app.swaggerhub.com/home)Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. http://swagger.io
 * [freeCodeCamp/devdocs](https://github.com/freeCodeCamp/devdocs):API Documentation Browser https://devdocs.io
 * [lord/slate](https://github.com/lord/slate):Beautiful static documentation for your API https://spectrum.chat/slate
+* YUI doc

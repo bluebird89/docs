@@ -2610,7 +2610,11 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 
 ## indexedDB
 
-## localStorage
+## [localForage/localForage](https://github.com/localForage/localForage)
+
+💾 Offline storage, improved. Wraps IndexedDB, WebSQL, or localStorage using a simple but powerful API.https://localforage.github.io/localForage/
+
+
 
 ## sessionStorage
 
