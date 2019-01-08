@@ -17,6 +17,15 @@ wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add
 sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 sudo apt-get update
 sudo apt-get install jenkins
+
+systemctl status|start jenkins
+
+ufw status
+ufw allow 8080
+
+sudo ufw allow OpenSSH
+sudo ufw enable
+
 # 访问ip：8080，进行安装以及配置用户
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```

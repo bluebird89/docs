@@ -995,7 +995,8 @@ git merge FETCH_HEAD
 
 围绕Git 构建 SaaS 服务
 
-GitHub集成其他功能：`repository > Settings > Integrations & services`
+* GitHub集成其他功能：`repository > Settings > Integrations & services`
+* give user private repositories
 
 ![Git 使用规范流程](..\_static\bg2015080501.png)
 
