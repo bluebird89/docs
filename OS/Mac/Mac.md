@@ -137,6 +137,7 @@ smaba
     -   [Paw](https://paw.cloud/):The most advanced API tool for Mac
     -   MAMP:基础版不支持自定义
     -   虚拟机：parallels
+    -   [yichengchen/clashX](https://github.com/yichengchen/clashX):A rule based custom proxy with GUI for Mac base on clash.
 -   沟通
     -   [Textual 7](<Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.>)
     -   OmniFocus，OmniOutliner，OmniPlan，OmniGraffle
