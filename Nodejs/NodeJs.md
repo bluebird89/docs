@@ -746,6 +746,8 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
   - [restify/node-restify](https://github.com/restify/node-restify):The future of Node.js REST development http://restify.com
 * package
   - [zeit/pkg](https://github.com/zeit/pkg):Package your Node.js project into an executable https://npmjs.com/pkg
+* test
+  - [GoogleChromeLabs/ndb](https://github.com/GoogleChromeLabs/ndb):ndb is an improved debugging experience for Node.js, enabled by Chrome DevTools
 
 ## 面试
 
