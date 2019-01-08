@@ -966,7 +966,6 @@ browser reopen generate new cookie
 -   [yii2-authclient](https://github.com/yiisoft/yii2-authclient)
 -   [yii2-queue](https://github.com/yiisoft/yii2-queue)
 -   [yii2-coding-standards](https://github.com/yiisoft/yii2-coding-standards)
--   [yiisoft/yii2-apidoc](https://github.com/yiisoft/yii2-apidoc)
 -   [yii2-collection](https://github.com/yiisoft/yii2-collection)
 -   [yii2-redis](https://github.com/yiisoft/yii2-redis)
 -   [yii2-bootstrap](https://github.com/yiisoft/yii2-bootstrap)
@@ -976,6 +975,8 @@ browser reopen generate new cookie
 -   [yii2-elasticsearch](https://github.com/yiisoft/yii2-elasticsearch)
 -   [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
 -   [2amigos/yii2-file-upload-widget](https://github.com/2amigos/yii2-file-upload-widget):BlueImp File Upload Widget for Yii2
+* doc
+    - [yiisoft/yii2-apidoc](https://github.com/yiisoft/yii2-apidoc)
 
 ## 项目
 
