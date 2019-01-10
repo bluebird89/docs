@@ -201,6 +201,8 @@ sudo php -d detect_unicode=0 go-pear.phar
 pear version
 
 sudo apt install php7.2-dev # to use phpize  生成编译检测脚本
+
+pecl channel-update pecl.php.net
 ```
 
 ## 语法

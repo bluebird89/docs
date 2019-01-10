@@ -87,7 +87,6 @@ NoSQL主要用于解决以下几种问题
 * [grafana/grafana](https://github.com/grafana/grafana):The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More https://grafana.com
 - [getredash/redash](https://github.com/getredash/redash) Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. <http://redash.io/>
 - [pingcap/tidb](https://github.com/pingcap/tidb)TiDB is a distributed NewSQL database compatible with MySQL protocol
-- [alibaba/druid](https://github.com/alibaba/druid) Druid是一个JDBC组件库，包括数据库连接池、SQL Parser等组件 为监控而生的数据库连接池！阿里云DRDS(<https://www.aliyun.com/product/drds> )、阿里巴巴TDDL 连接池powered by Druid <https://github.com/alibaba/druid/wiki>
 - [apache/incubator-superset](https://github.com/apache/incubator-superset): a modern, enterprise-ready business intelligence web application. a data exploration and visualization web application.
 - [Meituan-Dianping/SQLAdvisor](https://github.com/Meituan-Dianping/SQLAdvisor)输入SQL，输出索引优化建议
 - [HVF/franchise](https://github.com/HVF/franchise)：🍟 a notebook sql client. what you get when have a lot of sequels. https://franchise.cloud
@@ -98,12 +97,20 @@ NoSQL主要用于解决以下几种问题
 * [arangodb/arangodb](https://github.com/arangodb/arangodb):🥑 ArangoDB is a native multi-model database with flexible data models for documents, graphs, and key-values. Build high performance applications using a convenient SQL-like query language or JavaScript extensions. https://www.arangodb.com
 * [amark/gun](https://github.com/amark/gun):A realtime, decentralized, offline-first, graph database engine. https://gun.eco/docs
 * [vasilakisfil/Introspected-REST](https://github.com/vasilakisfil/Introspected-REST):An alternative to REST and GraphQL https://introspected.rest
+* [alibaba/tair](https://github.com/alibaba/tair):A distributed key-value storage system developed by Alibaba Group 
 
-## 参考
+## SQL
 
-* [数据库的原理](http://blog.jobbole.com/100349/)
-- [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)
-* [enochtangg/quick-SQL-cheatsheet](https://github.com/enochtangg/quick-SQL-cheatsheet):A quick reminder of all SQL queries and examples on how to use them.
+* 《数据库系统实现》
+* 《SQL基础教程》
+* 《[SQL应用重构](https://www.amazon.cn/gp/product/B00H6X6M1A)》
+* 《[SQL Cookbook](https://www.amazon.cn/gp/product/0596009763)》
+* 《[高性能MySQL（第3版）](https://www.amazon.cn/gp/product/B00C1W58DE)》
+* 《[MySQL技术内幕 : InnoDB存储引擎（第2版）](https://www.amazon.cn/gp/product/B00ETOV48K)》
+* 《[深入浅出MySQL : 数据库开发、优化与管理维护](https://www.amazon.cn/gp/product/B00KR87J8G)》
+* 《SQL必知必会(第4版)》
+* 《SQL 反模式》
+* 《数据库系统概念》
 
 ## 工具
 
@@ -116,4 +123,11 @@ NoSQL主要用于解决以下几种问题
 * [getredash/redash](https://github.com/getredash/redash):Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. http://redash.io/
 * [XiaoMi/soar](https://github.com/XiaoMi/soar):SQL Optimizer And Rewriter
 * [prisma/prisma](https://github.com/prisma/prisma):⚡️ Prisma makes working with databases easy https://www.prisma.io
-* [twitter/twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis 
+* [twitter/twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
+* [alibaba/druid](https://github.com/alibaba/druid):阿里巴巴数据库事业部出品，为监控而生的数据库连接池。阿里云Data Lake Analytics(https://www.aliyun.com/product/datalakeanalytics )、DRDS、TDDL 连接池powered by Druid https://github.com/alibaba/druid/wiki
+
+## 参考
+
+* [数据库的原理](http://blog.jobbole.com/100349/)
+- [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)
+* [enochtangg/quick-SQL-cheatsheet](https://github.com/enochtangg/quick-SQL-cheatsheet):A quick reminder of all SQL queries and examples on how to use them.
