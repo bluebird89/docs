@@ -168,6 +168,7 @@ npm install -g @vue/cli
 * [museui/muse-ui](https://github.com/museui/muse-ui):Material Design UI library for Vuejs 2.0 https://museui.github.io
 * [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
 * [iview/iview](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
+* [iview/iview-admin](https://github.com/iview/iview-admin):Vue 2.0 admin management system template based on iView https://admin.iviewui.com/
 * [Uiv](https://github.com/wxsms/uiv)
 * [Onsen UI+Vue](https://onsen.io/v2/guide/vue/)
 * [Semantic UI+Vue](https://semantic-ui-vue.github.io/)

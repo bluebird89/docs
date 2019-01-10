@@ -33,6 +33,7 @@ DPI 是一种将图像的面积和理论打印尺寸进行关联的文件属性�
     - Snipaste
 * [libvips/libvips](https://github.com/libvips/libvips):A fast image processing library with low memory needs. https://libvips.github.io/libvips/
 * [AlloyImage](https://github.com/AlloyTeam/AlloyImage)基于HTML5技术的专业图像处理库
+* [DmitryUlyanov/deep-image-prior](https://github.com/DmitryUlyanov/deep-image-prior):Image restoration with neural networks but without learning. https://dmitryulyanov.github.io/deep_image_prior
 
 ## 资源
 
