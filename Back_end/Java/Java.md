@@ -931,6 +931,7 @@ JavaEE/JDBC/Weblogic
 ## IDE:IntelliJ IDEA
 
 * [插件库](https://plugins.jetbrains.com/idea)
+  - Alibaba Java Code Guidelines
 
 ## 测试
 

@@ -334,19 +334,6 @@
 
 * 《Ruby 元编程(第2版)》
 
-## SQL
-
-* 《数据库系统实现》
-* 《SQL基础教程》
-* 《[SQL应用重构](https://www.amazon.cn/gp/product/B00H6X6M1A)》
-* 《[SQL Cookbook](https://www.amazon.cn/gp/product/0596009763)》
-* 《[高性能MySQL（第3版）](https://www.amazon.cn/gp/product/B00C1W58DE)》
-* 《[MySQL技术内幕 : InnoDB存储引擎（第2版）](https://www.amazon.cn/gp/product/B00ETOV48K)》
-* 《[深入浅出MySQL : 数据库开发、优化与管理维护](https://www.amazon.cn/gp/product/B00KR87J8G)》
-* 《SQL必知必会(第4版)》
-* 《SQL 反模式》
-* 《数据库系统概念》
-
 ## MongoDB
 
 * MongoDB大数据处理权威指南（第2版）

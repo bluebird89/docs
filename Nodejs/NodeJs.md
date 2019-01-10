@@ -711,6 +711,7 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
   - [AriaMinaei/pretty-error](https://github.com/AriaMinaei/pretty-error):See node.js errors with less clutter
 * Proxy
   - [OptimalBits/redbird](https://github.com/OptimalBits/redbird):A modern reverse proxy for node
+  - [alibaba/anyproxy](https://github.com/alibaba/anyproxy):A fully configurable http/https proxy in NodeJS http://anyproxy.io
 * 框架
   - [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications
   - [balderdashy/sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js https://sailsjs.com

@@ -113,5 +113,6 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 * [linkedin/qark](https://github.com/linkedin/qark):Tool to look for several security related Android application vulnerabilities
 * [android-hacker/VirtualXposed](https://github.com/android-hacker/VirtualXposed):A simple app to use Xposed without root, unlock the bootloader or modify system image, etc. https://vxp.app
 * [stephentuso/welcome-android](https://github.com/stephentuso/welcome-android):A customizable welcome screen https://stephentuso.com/welcome-android/
-* [alibaba/UltraViewPager](https://github.com/alibaba/UltraViewPager):UltraViewPager is an extension for ViewPager to provide multiple features in a single ViewPager. 
+* [alibaba/UltraViewPager](https://github.com/alibaba/UltraViewPager):UltraViewPager is an extension for ViewPager to provide multiple features in a single ViewPager.
 * [Genymobile/scrcpy](https://github.com/Genymobile/scrcpy):Display and control your Android device
+* [alibaba/atlas](https://github.com/alibaba/atlas):A powerful Android Dynamic Component Framework.
