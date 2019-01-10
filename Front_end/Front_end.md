@@ -756,3 +756,4 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 * [dypsilon/frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
 * [司徒正美](link)
 * [张鑫旭](https://www.zhangxinxu.com/)
+* [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)

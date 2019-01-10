@@ -1341,6 +1341,11 @@ MySQL 在每个事务更新数据之前，由 Master 将事务串行的写入二
 * Slave I/O线程：在start slave之后，该线程负责从Master上拉取binlog内容放进自己的Relay Log中；
 * Slave SQL线程：负责执行Relay Log中的语句。
 * [使用 Docker 完成 MySQL 数据库主从配置](https://juejin.im/post/59fd71c25188254dfa1287a9)
+
+* master将改变记录到二进制日志(binary log)中（这些记录叫做二进制日志事件，binary log events，可以通过show binlog events进行查看）；
+* slave将master的binary log events拷贝到它的中继日志(relay log)；
+* slave重做中继日志中的事件，将改变反映它自己的数据。
+
 #### notice
 
 - 无法远程连接mysql(报错111)：注释掉my.cnf中的bind-address或绑定本地ip
@@ -1411,13 +1416,8 @@ pt-query-digest --type=binlog mysql-bin.000001.sql
 * [索引性能分析](http://draveness.me/sql-index-performance.html)
 * [MySQL主从同步](http://geek.csdn.net/news/detail/236754)
 * [MySQL数据库事务隔离级别介绍](http://www.jb51.net/article/49596.htm)
-* 高性能mysql
 * [使用 Docker 完成 MySQL 数据库主从配置](https://juejin.im/post/59fd71c25188254dfa1287a9)
-* [alibaba/AliSQL](https://github.com/alibaba/AliSQL/wiki):AliSQL is a MySQL branch originated from Alibaba Group. Fetch document from Release Notes at bottom.
 * [shlomi-noach/awesome-mysql](https://github.com/shlomi-noach/awesome-mysql):A curated list of awesome MySQL software, libraries, tools and resources
-
-## 文档
-
 * [MySQL 学习笔记](https://notes.diguage.com/mysql/)
 * [jaywcjlove/mysql-tutorial](https://github.com/jaywcjlove/mysql-tutorial):MySQL入门教程（MySQL tutorial book）
 
@@ -1429,6 +1429,8 @@ pt-query-digest --type=binlog mysql-bin.000001.sql
 * [mysqljs/mysql](https://github.com/mysqljs/mysql):A pure node.js JavaScript Client implementing the MySql protocol.
 * [alibaba/canal](https://github.com/alibaba/canal):阿里巴巴mysql数据库binlog的增量订阅&消费组件 。阿里云DRDS( https://www.aliyun.com/product/drds )、阿里巴巴TDDL 二级索引、小表复制powerd by canal.
 * [DBDiff/DBDiff](https://github.com/DBDiff/DBDiff):Compare MySQL databases & automatically create schema & data change scripts/migrations rapidly (up & down SQL supported) for database version control. Supports *some* migration tools. https://dbdiff.github.io/DBDiff/
+* [alibaba/AliSQL](https://github.com/alibaba/AliSQL/wiki):AliSQL is a MySQL branch originated from Alibaba Group. Fetch document from Release Notes at bottom.
+* [alibaba/cobar](https://github.com/alibaba/cobar):a proxy for sharding databases and tables
 
 您可以通过创建数据表来存储许可数据，以及所有许可用户标识和产品标识符来对数据进行非规范化（反规范化）处理，并针对特定客户进行查询。 您需要使用INSERT / UPDATE / DELETE上的MySQL触发器来重建表格（不过这要取决于数据来更改的表格），这会显着提高查询数据的性能。
 
