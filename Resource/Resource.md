@@ -105,6 +105,7 @@
 ## 语言
 
 * [byoungd/English-level-up-tips-for-Chinese](https://github.com/byoungd/English-level-up-tips-for-Chinese):可能是让你受益匪浅的英语进阶指南
+* [yujiangshui/An-English-Guide-for-Programmers](https://github.com/yujiangshui/An-English-Guide-for-Programmers):专为程序员编写的英语学习指南。v1.0
 
 ### office
 
