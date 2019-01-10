@@ -235,6 +235,55 @@ h1{
     - 绝对 in cm mm pt磅 pc皮卡
     - 相对(另一个尺寸倍数) em相对元素字号高度 ex rem px像素 %
 
+## image
+
+* 概念
+  * 固有尺寸：是固有宽度、固有高度和固有宽高比的集合。对于特定对象，这三个尺寸可能都存在，也可能都不存在。比如光栅图像同时拥有这三个，SVG 图像只有固有宽高比，CSS 渐变就没有任何固有尺寸
+  * 指定大小：是通过width  height  background-size中的一个或多个指定的。
+  * 默认对象大小：是一个具有确定宽高的矩形。在既没有固有尺寸，也没有指定大小时生效。
+  * 具体对象大小：是对象最终显示的大小，即有明确宽度和高度值的矩形。
++ 显示效果:算它最终的“具体对象大小”
+  * 优先使用指定大小，得到要显示的宽和高
+  - 如果只指定了一个宽度，或只指定了一个高度，那么
+    + 如果有固有宽高比，则用它和给出的那个，计算出来另一个
+    + 否则，就取固有尺寸里的
+    + 如果也没有固有尺寸，那就取默认对象大小的
+  - 如果没有指定大小
+    + 先用固有尺寸里的
+    + 如果没有固有尺寸，那就取默认对象大小的
+  - 指定大小 > 固有尺寸 > 默认对象大小
+  - 图像超出背景区域的部分，会被裁剪掉；覆盖不全的部分，会用背景色来填充
+  - 当是<img>时，也有个相应的属性可以调整图像大小，即 object-fit
+  - 调整图像大小的属性background-size
+* image
+  * width height
+* background-image
+  - background-size属性提供指定大小
+    + 包含约束（contain constraint ）遵循固有宽高比，宽高都小于等于背景区域，然后尽可能的大。
+    + 覆盖约束（cover constraint）遵循固有宽高比，宽高都大于等于背景区域，然后尽可能的小。
+
+```html
+<img src="https://p1.ssl.qhimg.com/t01068da1826ad05875.png"> <!-- 宽 54px，高 49px -->
+<img src="https://p1.ssl.qhimg.com/t01068da1826ad05875.png" width="30" height="30"> <!-- 宽 30px，高 30px -->
+<img src="https://p1.ssl.qhimg.com/t01068da1826ad05875.png" width="30"> <!--  宽 30px，高 30/(54/49)=27.22px -->
+<img src="https://p1.ssl.qhimg.com/t01068da1826ad05875.png" height="30">  <!-- 宽 30*(54/49)=33.06px，高 30px -->
+
+<style>
+.img {
+ display: inline-block;
+ background-color: #eee;
+ background-image: url('https://p1.ssl.qhimg.com/t01068da1826ad05875.png');
+ background-repeat: no-repeat;
+ background-size: auto; /*auto 是默认值*/
+}
+</style>
+<span class="img" style="width: 100px; height: 100px;"></span> <!-- 宽 54px，高 49px -->
+<span class="img" style="width: 30px; height: 30px;"></span> <!-- 宽 54px，高 49px -->
+<span class="img" style="width: 30px; height: 30px; background-size: 10px 10px;"></span> <!-- 宽 10px，高 10px -->
+<span class="img" style="width: 30px; height: 30px; background-size: contain;"></span> <!-- 宽 30px，高 27.22px -->
+<span class="img" style="width: 100px; height: 100px; background-size: cover;"></span> <!-- 宽 100px，高 100px -->
+```
+
 ## Font
 
 字体图标缩小时可能会遇到部分图标存在锯齿现象
