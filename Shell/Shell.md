@@ -4,6 +4,89 @@ Shell是Linux/Unix的一个外壳。它负责外界与Linux内核的交互，接
 
 Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。命令解析器
 
+```sh
+# 命令失败，往往需要脚本停止执行，防止错误累积
+set -e
+command || { echo "command failed"; exit 1; }
+if ! command; then echo "command failed"; exit 1; fi
+command
+if [ "$?" -ne 0 ]; then echo "command failed"; exit 1; fi
+```
+
+## 端口占用
+
+```sh
+netstat -an | grep 3306
+netstat -tunlp |grep 端口号 # 查看指定的端口号的进程情况 -t 显示tcp -u udp -n:拒绝显示别名，能数字数字 -l 列出在listen 服务状态 -p 显示相关程序名
+lsof -i:80 # -i参数表示网络链接，:80指明端口号
+```
+
+## 查找
+
+```sh
+find / -name *.conf -type f -print | xargs file
+
+find / -name *.conf -type f -print | xargs tar cjf test.tar.gz
+
+ssh -p 22 -C -f -N -g -L 9200:192.168.1.19:9200 ihavecar@192.168.1.19
+
+netstat -anlp|grep 80|grep tcp|awk '{print $5}'|awk -F: '{print $1}'|sort|uniq -c|sort -nr|head -n20
+
+netstat -nat |awk ‘{print $6}’|sort|uniq -c|sort -rn
+
+ping api.jpush.cn | awk ‘{ print $0”    “ strftime(“%Y-%m-%d %H:%M:%S”,systime()) } ‘ >> /tmp/jiguang.log &
+
+wget ftp://ftp.is.co.za/mirror/ftp.rpmforge.net/redhat/el6/en/x86_64/dag/RPMS/multitail-5.2.9-1.el6.rf.x86_64.rpm
+yum -y localinstall multitail-5.2.9-1.el6.rf.x86_64.rpm
+multitail -e "Accepted" /var/log/secure -l "ping baidu.com"
+
+ps -aux | sort -rnk 3 | head -20
+
+ps -aux | sort -rnk 4 | head -20
+```
+
+## 磁盘管理
+
+```sh
+fdisk  -l # 所有硬盘的分区信息,包括没有挂上的分区和USB设备
+ls -l /dev/sda* # 查看第一块硬盘的分区信息
+df -a|-h|-T #-a或-all：显示全部的文件系统 -h或--human-readable：以可读性较高的方式来显示信息 -T或--print-type：显示文件系统的类型
+
+du [option] 目录名或文件名 # [option]主要参数  -a或-all：显示目录中个别文件的大小 -h或--human-readable：以K，M，G为单位显示，提高信息可读性 -S或--separate-dirs：省略指定目录下的子目录，只显示该目录的总和（注意：该命令是大写S） ncdu
+
+tin-summer
+curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git vmchale/tin-summer
+cargo install tin-summer
+
+sn f
+sn sort /home/sk/ -n5
+sn ar -t100M
+
+cargo install du-dust
+wget https://github.com/bootandy/dust/releases/download/v0.3.1/dust-v0.3.1-x86_64-unknown-linux-gnu.tar.gz
+tar -xvf dust-v0.3.1-x86_64-unknown-linux-gnu.tar.gz
+sudo mv dust /usr/local/bin/
+dust -p
+dust <dir1> <dir2>
+dust -s
+dust -n 10
+dust -d 3
+dust -h
+
+yay -S diskus
+wget "https://github.com/sharkdp/diskus/releases/download/v0.3.1/diskus_0.3.1_amd64.deb"
+sudo dpkg -i diskus_0.3.1_amd64.deb
+cargo install diskus
+
+du -sh dir
+diskus -h
+
+# duu
+wget https://github.com/jftuga/duu/releases/download/2.20/duu.py
+python3 duu.py
+python3 duu.py /home/sk/Downloads/
+```
+
 ## 配置
 
 * /etc/profile：所有用户的shell都有权使用你配置好的环境变量 添加 export PATH="$PATH:/my_new_path"
@@ -1265,6 +1348,8 @@ ccache gcc foo.c
     - [Justniffer](http://justniffer.sourceforge.net/) 是 tcp 数据包嗅探器。使用此嗅探器你可以选择收集低级别的数据还是高级别的数据。它也可以让你以自定义方式生成日志。比如模仿 Apache 的访问日志。
 * man
     * [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/
+* hex
+    - [sharkdp/hexyl](https://github.com/sharkdp/hexyl):A command-line hex viewer
 * git
     * [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
     * tig：字符模式下交互查看git项目，可以替代git命令。
@@ -1298,6 +1383,7 @@ ccache gcc foo.c
 * [liamg/aminal](https://github.com/liamg/aminal):Golang terminal emulator from scratch
 * [amanusk/s-tui](https://github.com/amanusk/s-tui):Terminal based CPU stress and monitoring utility https://amanusk.github.io/s-tui/
 * [GitSquared/edex-ui](https://github.com/GitSquared/edex-ui):A science fiction terminal emulator designed for large touchscreens that runs on all major OSs.
+* [rupa/z](https://github.com/rupa/z):z - jump around
 
 ## 参考
 

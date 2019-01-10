@@ -116,3 +116,4 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 * [alibaba/UltraViewPager](https://github.com/alibaba/UltraViewPager):UltraViewPager is an extension for ViewPager to provide multiple features in a single ViewPager.
 * [Genymobile/scrcpy](https://github.com/Genymobile/scrcpy):Display and control your Android device
 * [alibaba/atlas](https://github.com/alibaba/atlas):A powerful Android Dynamic Component Framework.
+* [romannurik/AndroidAssetStudio](https://github.com/romannurik/AndroidAssetStudio):A set of web-based tools for generating graphics and other assets that would eventually be in an Android application's res/ directory.
