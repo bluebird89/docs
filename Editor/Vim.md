@@ -656,6 +656,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [rupa/v](https://github.com/rupa/v):z for vim
 * [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim.
 * [fatih/vim-go](https://github.com/fatih/vim-go):Go development plugin for Vim
+* [powerline/powerline](https://github.com/powerline/powerline):Powerline is a statusline plugin for vim, and provides statuslines and prompts for several other applications, including zsh, bash, tmux, IPython, Awesome and Qtile. https://powerline.readthedocs.io/en/latest/
 
 ## 工具
 

@@ -87,9 +87,10 @@ pod setup
 
 ## 参考
 
-* [Solido/awesome-flutter](https://github.com/Solido/awesome-flutters):A curated list of awesome Flutter components, frameworks, libraries, and softwares
-* [flutter_gallery](https://github.com/flutter/flutter/tree/master/examples/flutter_gallery)
 * [文档](https://flutter-io.cn/)
 * [官网](https://flutter.io/)
+* [Solido/awesome-flutter](https://github.com/Solido/awesome-flutters):A curated list of awesome Flutter components, frameworks, libraries, and softwares
+* [flutter_gallery](https://github.com/flutter/flutter/tree/master/examples/flutter_gallery)
 * [AweiLoveAndroid/Flutter-learning](https://github.com/AweiLoveAndroid/Flutter-learning)::octocat:🔥 👍 🌟 ⭐️ ⭐️⭐️ Flutter从配置安装到填坑指南详解，Flutter相关Demo解读，项目实例，Dart语法详解
 * [alibaba/flutter-common-widgets-app](https://github.com/alibaba/flutter-common-widgets-app):flutter 菜鸟 APP，包含常用 flutter 组件的中文文档与 demo 演示 
+* [alibaba/flutter-go](https://github.com/alibaba/flutter-go):flutter 开发者帮助 APP，包含 flutter 常用 130+ 组件的中文文档与 demo 演示

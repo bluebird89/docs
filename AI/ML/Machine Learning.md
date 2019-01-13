@@ -273,6 +273,7 @@
 * [DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python](https://github.com/DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python):这是一个完整的，端到端的机器学习项目，非常适合有一定基础后拿来练习，以提高对完整机器学习项目的认识
 * [Doraemonzzz/Learning-from-data](https://github.com/Doraemonzzz/Learning-from-data):记录Learning from data一书中的习题解答 http://amlbook.com/
 * [Built on the AWS Cloud. Developed for Amazon developers and engineers.](https://aws.amazon.com/training/learning-paths/machine-learning/)
+* [吴恩达机器学习](https://study.163.com/course/courseMain.htm?courseId=1004570029)
 
 ## 工具
 

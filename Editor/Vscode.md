@@ -17,10 +17,12 @@ sudo apt-get install code
 
 ## 插件
 
+* Apollo GraphQL
 * Auto Close Tag
 * Auto Import:自动去查找、分析、然后提供代码补全。对于TypeScript和TSX
 * Bracket Pair Colorizer
 * Beautify
+* C/C++
 * CSS Peek
 * Change Case
 * Code Runner
@@ -30,14 +32,19 @@ sudo apt-get install code
 * Code Spell Checker
 * Debugger for Chrome
 * Document This
+* EditorConfig for VS Code
 * Emmet
 * ESLint
+* Eva Theme
 * Faker：
 * File Utils
+* Flutter
 * gi:给 .gitignore 文件添加各种语言忽略文件配置
+* Git Blame
 * Git History
 * GitLens
 * Git Project Manager
+* Go
 * HTML Boilerplate
 * Import Cost
 * Icon Fonts
@@ -47,6 +54,7 @@ sudo apt-get install code
     - Vue 2 Snippets
 * Indent-Rainbow:使得对齐更加具有可读性
 * IntelliSense for CSS class names in HTML
+* JavaScript (ES6) code snippets
 * Jest
 * Minify
 * Markdownlint
@@ -59,7 +67,7 @@ sudo apt-get install code
 * [prettier/prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. https://prettier.io
 * Quokka.js
 * React Native Tools
-* React.js code snippets
+* Reactjs code snippets
 * Regex Previewer
 * Settings Sync
 * snippets
@@ -72,6 +80,7 @@ sudo apt-get install code
 * TypeScript Hero
 * Vetur:Vue工具
 * vscode-icons
+* VS Live Share
 - vscode-pandoc:文档生成
 * WakaTime
 
