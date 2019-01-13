@@ -749,7 +749,8 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
   - [zeit/pkg](https://github.com/zeit/pkg):Package your Node.js project into an executable https://npmjs.com/pkg
 * test
   - [GoogleChromeLabs/ndb](https://github.com/GoogleChromeLabs/ndb):ndb is an improved debugging experience for Node.js, enabled by Chrome DevTools
-
+  - [DevExpress/testcafe](https://github.com/DevExpress/testcafe):A Node.js tool to automate end-to-end web testing. https://devexpress.github.io/testcafe/
+  
 ## 面试
 
 * [jimuyouyou/node-interview-questions](https://github.com/jimuyouyou/node-interview-questions)

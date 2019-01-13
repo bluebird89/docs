@@ -77,39 +77,3 @@
 
 * [微服务架构实战160讲]()
 * [分布式系统架构]():陈皓（左耳朵耗子）
-
-## 计算机
-
-* [CS50's Introduction to Computer Science](https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x)
-* [数据结构(上)(自主模式)](http://www.xuetangx.com/courses/course-v1:TsinghuaX+30240184+sp/about)
-* [数据结构(下)](http://www.xuetangx.com/courses/course-v1:TsinghuaX+30240184_2X+sp)
-* [1c7/crash-course-computer-science-chinese](https://github.com/1c7/crash-course-computer-science-chinese):💻 计算机速成课 | Crash Course 字幕组 (全40集 2018-5-1 精校完成) https://www.bilibili.com/video/av21376839/
-* [Berkeley CS61B](http://datastructur.es/sp17/)
-* [Yorgey's cis194](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
-* [Udacity](https://www.udacity.com/)
-* [edX](https://www.edx.org/)
-* [LeetCode](http://leetcode.com/):[中文](https://leetcode-cn.com/)
-* [ossu/computer-science](https://github.com/ossu/computer-science):Path to a free self-taught education in Computer Science!
-* [卡梅隆大学CS课件](http://www.cs.cmu.edu/~aada/courses/15251f16/www/schedule.html)
-*   Apple Developer Site — 学习开发 IOS、Mac OS、Safari 环境下的 app。
-*   Google Code — 学习开发安卓 app。
-*   Code.org — 编程一小时活动的大本营。想学编程？就从这里起步吧。
-*   Mozilla Developer Network — 不要被名字骗了，不是教你开发火狐插件。你可以学习 HTML, CSS 和 JavaScript。
-*   Learnable — 也是学编程，超过 5000 个视频。
-*   Pluralsight — 学编程。
-*   CodeHS — 在学校、在家学编程！
-*   Aquent Gymnasium — 学编程。
-* [Parallel & Distributed Operating Systems Group ](https://pdos.csail.mit.edu/)
-*   [Treehouse](https://teamtreehouse.com/):学习编程等互联网技能
-*   [Playground](https://www.apple.com/swift/playgrounds/):ipad 上学习 swift 的游戏
-*   [freecodecamp](https://www.freecodecamp.org/):Learn to code for free.
-*   [scratch](https://scratch.mit.edu/)
-
-## 经济
-
-* [Game Theory](https://www.coursera.org/learn/game-theory-1)
-* [Game Theory II: Advanced Applications](https://www.coursera.org/learn/game-theory-2)
-
-## 机器学习
-
-* [吴恩达机器学习](https://study.163.com/course/courseMain.htm?courseId=1004570029)

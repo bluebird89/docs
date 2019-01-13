@@ -36,6 +36,7 @@ superShout() {
 * [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter):A starter template for TypeScript and Node with a detailed README describing how to use the two together.
 * [xcatliu/typescript-tutorial](https://github.com/xcatliu/typescript-tutorial):TypeScript 入门教程 https://ts.xcatliu.com/
 * [alexjoverm/typescript-library-starter](https://github.com/alexjoverm/typescript-library-starter):Starter kit with zero-config for building a library in TypeScript, featuring RollupJS, Jest, Prettier, TSLint, Semantic Release, and more! 
+* [Microsoft/TypeScript-React-Native-Starter](https://github.com/Microsoft/TypeScript-React-Native-Starter):A starter template for TypeScript and React Native with a detailed README describing how to use the two together.
 
 ## 参考
 
