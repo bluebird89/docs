@@ -1,16 +1,17 @@
 # IDE
 
 - IntelliJ IDEA:业界被公认为最好的java开发工具之一
-- PyCharm
-- WebStorm:一款JavaScript 开发工具
+  + PyCharm
+  + WebStorm:一款JavaScript 开发工具
+  + CLion:专为C/C++所创建的跨平台IDE
+  + AppCode:用于帮助开发 Mac、iPhone 和 iPad 的应用程序
+  + RubyMine:供了一个综合的Ruby编码编辑器
 - [Komodo IDE](https://www.activestate.com/)
-- CLion:专为C/C++所创建的跨平台IDE
-- AppCode:用于帮助开发 Mac、iPhone 和 iPad 的应用程序
-- RubyMine:供了一个综合的Ruby编码编辑器
 - [visualfc/liteide](https://github.com/visualfc/liteide):LiteIDE is a simple, open source, cross-platform Go IDE.
 * [CodeSandbox](https://codesandbox.io/)
   - [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ https://codesandbox.io
 - [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
+* [theia-ide/theia](https://github.com/theia-ide/theia):Theia is a cloud & desktop IDE framework implemented in TypeScript. http://theia-ide.org
 
 ## PHPStrom
 

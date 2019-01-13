@@ -45,6 +45,7 @@
 * [daviddao/awful-ai](https://github.com/daviddao/awful-ai):😈Awful AI is a curated list to track current scary usages of AI - hoping to raise awareness
 * [apachecn/statsmodels_doc_zh](https://github.com/apachecn/statsmodels_doc_zh):Statsmodels: Python中的统计建模与计量统计学类库
 * [腾讯AI开发平台](https://ai.qq.com)
+* [GokuMohandas/practicalAI](https://github.com/GokuMohandas/practicalAI):📚A practical approach to learning machine learning.
 
 ## 工具
 
