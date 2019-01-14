@@ -37,7 +37,7 @@ rustc --version
 * [rust-lang/rustup.rs](https://github.com/rust-lang/rustup.rs):The Rust toolchain installer
 * search
     - [tantivy-search/tantivy](https://github.com/tantivy-search/tantivy):Tantivy is a full-text search engine library inspired by Apache Lucene and written in Rust
-
+    - [toshi-search/Toshi](https://github.com/toshi-search/Toshi):A full-text search engine in rust
 ## 参考
 
 * [文档](https://kaisery.gitbooks.io/rust-book-chinese/content/)

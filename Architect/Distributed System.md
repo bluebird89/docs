@@ -30,6 +30,7 @@ eter Deutsch 提出的分布式系统八大谬论概括了程序员新手可能�
 * [facebookincubator/LogDevice](https://github.com/facebookincubator/LogDevice):Distributed storage for sequential data https://logdevice.io
 * [meshbird/meshbird](https://github.com/meshbird/meshbird):Distributed private networking http://meshbird.com
 * [dragonflyoss/Dragonfly](https://github.com/dragonflyoss/Dragonfly):Dragonfly is an intelligent P2P based image and file distribution system. https://d7y.io
+* [etcd-io/etcd](https://github.com/etcd-io/etcd):Distributed reliable key-value store for the most critical data of a distributed system https://etcd.readthedocs.io/en/latest
 
 ## 课程
 
