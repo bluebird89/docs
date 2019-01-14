@@ -203,6 +203,23 @@ websocketd --port=8080 ./count.sh // 建立server
   * [valyala/fasthttp](https://github.com/valyala/fasthttp):Fast HTTP package for Go. Tuned for high performance. Zero memory allocations in hot paths. Up to 10x faster than net/http
 * excel
   - [360EntSecGroup-Skylar/excelizes](https://github.com/360EntSecGroup-Skylar/excelize):Golang library for reading and writing Microsoft Excel™ (XLSX) files.
+* event-loop
+  - [tidwall/evio](https://github.com/tidwall/evio):Fast event-loop networking for Go
+* mobile
+  - [golang/mobile](https://github.com/golang/mobile):[mirror] Go on Mobile https://godoc.org/golang.org/x/mobile
+* redis
+  * [gomodule/redigo](https://github.com/gomodule/redigo):Go client for Redis
+  * [go-redis/redis](https://github.com/go-redis/redis):Type-safe Redis client for Golang
+* UI
+  * [google/gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
+* WEB
+  - [go-martini/martini](https://github.com/go-martini/martini):Classy web framework for Go http://martini.codegangsta.io
+* numeric
+  * [gonum/gonum](https://github.com/gonum/gonum):Gonum is a set of numeric libraries for the Go programming language. It contains libraries for matrices, statistics, optimization, and more https://www.gonum.org/
+* compiler
+  - [aykevl/tinygo](https://github.com/aykevl/tinygo):Go compiler for small devices, based on LLVM.
+* transfer
+  - [divan/txqr](https://github.com/divan/txqr):Transfer data via animated QR codes
 
 ## 问题
 
@@ -228,23 +245,6 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 - [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
 * [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
 * [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
-* event-loop
-  - [tidwall/evio](https://github.com/tidwall/evio):Fast event-loop networking for Go
-* mobile
-  - [golang/mobile](https://github.com/golang/mobile):[mirror] Go on Mobile https://godoc.org/golang.org/x/mobile
-* redis
-  * [gomodule/redigo](https://github.com/gomodule/redigo):Go client for Redis
-  * [go-redis/redis](https://github.com/go-redis/redis):Type-safe Redis client for Golang
-* UI
-  * [google/gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
-* WEB
-  - [go-martini/martini](https://github.com/go-martini/martini):Classy web framework for Go http://martini.codegangsta.io
-* numeric
-  * [gonum/gonum](https://github.com/gonum/gonum):Gonum is a set of numeric libraries for the Go programming language. It contains libraries for matrices, statistics, optimization, and more https://www.gonum.org/
-* compiler
-  - [aykevl/tinygo](https://github.com/aykevl/tinygo):Go compiler for small devices, based on LLVM.
-* transfer
-  - [divan/txqr](https://github.com/divan/txqr):Transfer data via animated QR codes
 
 ## 教程
 
