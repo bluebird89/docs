@@ -90,6 +90,7 @@ curl localhost:9200
 ## 工具
 
 * [Yelp/elastalert](https://github.com/Yelp/elastalert):Easy & Flexible Alerting With ElasticSearch https://elastalert.readthedocs.org
+* [elastic/elasticsearch-js](https://github.com/elastic/elasticsearch-js):Official Elasticsearch client library for Node.js and the browser
 
 ## 参考
 

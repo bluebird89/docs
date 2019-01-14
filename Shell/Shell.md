@@ -1356,6 +1356,8 @@ ccache gcc foo.c
 * download
     - you-get: 非常强大的媒体下载工具，支持youtube、google+、优酷、芒果TV、腾讯视频、秒拍等视频下载。
     - axel：多线程下载工具，下载文件时可以替代curl、wget。
+* prompt
+    - [b-ryan/powerline-shell](https://github.com/b-ryan/powerline-shell):A beautiful and useful prompt for your shell
 * sql
     - mycli：mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令。
 * json

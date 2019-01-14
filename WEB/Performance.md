@@ -4,6 +4,8 @@
 
 ## 定义
 
+调优性需要找到程序中的Hotspot，也就是被调用最多的地方。只要你能优化一点点，你的性能就会有质的提高
+
 * 指标
     - Throughput ，吞吐量。也就是每秒钟可以处理的请求数，任务数。
     - Latency， 系统延迟。也就是系统在处理一个请求或一个任务时的延迟。
@@ -110,6 +112,9 @@
                 - 不要用Having，因为其要遍历所有的记录。性能差得不能再差。
                 - 尽可能地使用UNION ALL  取代  UNION。
                 - 索引过多，insert和delete就会越慢。而update如果update多数索引，也会慢，但是如果只update一个，则只会影响一个索引表。
+* PHP中Getter和Setter的效率：性能要比直接读写成员变量要差一倍以上
+* Python程序在函数内执行得更快：本地变量是存在一个数组中（直到），用一个整型常量去访问，而全局变量存在一个dictionary中，查询很慢。
+* 为什么排好序的数据在遍历时会更快：
 
 ```sh
 net.ipv4.tcp_keepalive_probes = 5
@@ -224,6 +229,7 @@ numactl --membind 1 --cpunodebind 1 --localalloc myapplication
 
 * [pagespeed](https://developers.google.com/speed/pagespeed/)
 * [元素加载时间具体耗时](http://www.webpagetest.org/)
+* [Speed](https://developers.google.com/speed/):Analyze and optimize your website with PageSpeed tools
 
 ## 参考
 
