@@ -12,6 +12,8 @@
     - [VincentSit/ChinaMobilePhoneNumberRegex](https://github.com/VincentSit/ChinaMobilePhoneNumberRegex):Regular expressions that match the mobile phone number in mainland China. / 一组匹配中国大陆手机号码的正则表达式。
 * window
     - [DaveDavenport/rofi](https://github.com/DaveDavenport/rofi):Rofi: A window switcher, application launcher and dmenu replacement
+* instant Messaging
+    - [processone/ejabberd](https://github.com/processone/ejabberd):Robust, ubiquitous and massively scalable Jabber / XMPP Instant Messaging platform https://www.process-one.net/en/ejabberd/
 
 ## 专注
 

@@ -874,7 +874,7 @@ Python实现的数据库。
 * 性能分析器
   - lineprofiler：逐行性能分析。[官网](https://github.com/rkern/lineprofiler)
   - [Memory Profiler](http://hao.jobbole.com/memory_profiler/)：监控 Python 代码的内存使用。[官网](http://pypi.python.org/pypi/memory_profiler)、[内存](https://github.com/fabianp/memoryprofiler)
-  - profiling：一个交互式 Python 性能分析工具。[官网](https://github.com/what-studio/profiling)
+  - [what-studio/profiling](https://github.com/what-studio/profiling)：一个交互式 Python 性能分析工具。
 * 其他
   - pyelftools：解析和分析 ELF 文件以及 DWARF 调试信息。[官网](https://github.com/eliben/pyelftools)
   - python-statsd：[statsd](https://github.com/etsy/statsd/) 服务器的 Python 客户端。[官网](https://github.com/WoLpH/python-statsd)
