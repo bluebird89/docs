@@ -5,11 +5,15 @@
 
 ## 技术
 
-ampg4
+H.264、FLV、WMV、MPEG-1、MPEG-2以及MPEG-4
+
 
 h.264  acc
 
 hls
+webm
+
+![视频播放器的原理](../_static/video_play.png "视频播放器的原理")
 
 ## 资源
 
@@ -27,7 +31,6 @@ hls
 ## 工具
 
 * [obsproject/obs-studio](https://github.com/obsproject/obs-studio):OBS Studio - Free and open source software for live streaming and screen recording https://obsproject.com/
-* [FFmpeg/FFmpeg](https://github.com/FFmpeg/FFmpeg):Mirror of git://source.ffmpeg.org/ffmpeg.git https://ffmpeg.org
 * [ossrs/srs](https://github.com/ossrs/srs):SRS's a simplest, conceptual integrated, industrial-strength live streaming origin cluster.
 * [video-dev/hls.js](https://github.com/video-dev/hls.js):JavaScript HLS client using Media Source Extension http://video-dev.github.io/hls.js/stable/demo
 * [xbmc/xbmc](https://github.com/xbmc/xbmc):Kodi is an award-winning free and open source home theater/media center software and entertainment hub for digital media. With its beautiful interface and powerful skinning engine, it's available for Android, BSD, Linux, macOS, iOS and Windows. https://kodi.tv/
