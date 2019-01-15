@@ -10,3 +10,7 @@
 ## 工具
 
 * [jmschrei/pomegranate](https://github.com/jmschrei/pomegranate):Fast, flexible and easy to use probabilistic modelling in Python.https://pomegranate.readthedocs.io/en/latest/
+
+## 参考
+
+* [看见统计](https://seeing-theory.brown.edu/cn.html)

@@ -274,7 +274,7 @@
       - (https://phpmd.org/)[PHP Mess Detector]: 一个扫描代码缺陷，次优代码，未使用的参数等等的库。
       - (https://github.com/phpmetrics/PhpMetrics)[PHP Metrics]: 一个静态测量库
       - (https://github.com/monque/PHP-Migration)[PHP Migration]: 一个PHP版本升级的静态分析库
-      - (https://github.com/nikic/PHP-Parser)[PHP Parser]: 一个PHP编写的PHP解析器
+      - [PHP Parser](https://github.com/nikic/PHP-Parser): 一个PHP编写的PHP解析器
       - (https://github.com/QafooLabs/php-refactoring-browser)[PHP Refactoring Browser]: 一个重构PHP代码的命令行工具集
       - (https://github.com/tomzx/php-semver-checker)[PHP Semantic Versioning Checker]: 一个比较两个源集和确定适当的应用语义版本的命令行实用程序
       - (https://github.com/etsy/phan)[phan]: 一个基于PHP 7+和php-ast扩展的静态分析器
