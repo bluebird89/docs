@@ -27,28 +27,25 @@ sudo chmod -R g+r conf
 sudo chmod g+x conf
 sudo chown -R tomcat webapps/ work/ temp/ logs/
 
-# 软件源安装
-sudo apt-get install tomcat8
-sudo vim /etc/default/tomcat8
-JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC" // 修改内存使用
-sudo service tomcat8 restart
-
-## centos
+# ubuntu
+sudo apt-get install tomcat8 tomcat8-docs tomcat8-admin tomcat8-examples
+# centos
 sudo yum install tomcat
 
-# 访问 http://localhost:8080
-sudo apt-get install tomcat8-docs tomcat8-admin tomcat8-examples
+sudo vim /etc/default/tomcat8
+JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC" // 修改内存使用
+
 sudo vim /etc/tomcat7/tomcat-users.xml # 配置管理后台
 
 <tomcat-users>
   <user username="admin" password="password" roles="manager-gui,admin-gui"/>
 </tomcat-users>
-sudo service tomcat8 restart
-# 访问 http://localhost:8080/docs/
-# 访问 http://localhost:8080/examples/
-Virtual Host Manager http://localhost:8080/manager/html/
 
-# /etc/systemd/system/tomcat.service
+sudo service tomcat8 restart
+
+# 访问 http://localhost:8080 http://localhost:8080/docs/ http://localhost:8080/examples/ http://localhost:8080/manager/html/
+
+# create /etc/systemd/system/tomcat.service
 [Unit]
 Description=Apache Tomcat Web Application Container
 After=network.target
@@ -76,13 +73,20 @@ Restart=always
 WantedBy=multi-user.target
 
 sudo systemctl daemon-reload
-sudo systemctl start tomcat
+sudo systemctl start|enable tomcat
+sudo /etc/init.d/tomcat8 start
+sudo ufw allow 8080/tcp
 ```
 
-- /usr/share/tomcat8/：安装程序路径
-- /var/lib/tomcat8/：应用程序、配置与日志
-- /etc/tomcat8/：服务器配置server.xml 用户配置：tomcat-users.xml
-- 命令行脚本：sudo /etc/init.d/tomcat8 start
-- Tomcat 配置文件路径:Tomcat home directory : /usr/share/tomcat8 Tomcat base directory : /var/lib/tomcat8或/etc/tomcat8
-- Tomcat的用户帐号信息都保存在 /var/lib/tomcat6/conf/tomcat-users.xml 的文件中
-- 默认根目录：/usr/share/tomcat8-root
+- Tomcat 配置文件
+    - CATALINA_HOME:/usr/share/tomcat8
+        + 默认根目录：/usr/share/tomcat8-root/default_root
+        + Manager app:/usr/share/tomcat8-admin/manager/META-INF/context.xml
+        + Host Manager app:/usr/share/tomcat8-admin/host-manager/META-INF/context.xml
+    - CATALINA_BASE:/var/lib/tomcat8, 应用程序、配置与日志
+        + 用户帐号信息都保存在 /var/lib/tomcat8/conf/tomcat-users.xml 的文件中
+    - /etc/tomcat8/
+        - 服务器配置server.xml
+        - 用户配置：tomcat-users.xml
+
+## Catalina
