@@ -20,6 +20,12 @@ cd my-react-app
 getstorybook
 ```
 
+## 颜色
+
+* 蓝色用于科技
+* 红色用于生活
+* 绿色用于生态
+
 ## 资源
 
 * [花瓣](http://huaban.com/)

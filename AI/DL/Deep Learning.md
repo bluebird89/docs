@@ -42,6 +42,10 @@
 
 * [因果推理](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/)
 
+## 实例
+
+* [alexkimxyz/nsfw_data_scrapper](https://github.com/alexkimxyz/nsfw_data_scrapper):Collection of scripts to aggregate image data for the purposes of training an NSFW Image Classifier
+
 ## 工具
 
 * [floydhub/dl-docker](https://github.com/floydhub/dl-docker):An all-in-one Docker image for deep learning. Contains all the popular DL frameworks (TensorFlow, Theano, Torch, Caffe, etc.) https://www.floydhub.com
@@ -59,3 +63,4 @@
 * [guillaume-chevalier/Awesome-Deep-Learning-Resources](https://github.com/guillaume-chevalier/Awesome-Deep-Learning-Resources):Rough list of my favorite deep learning resources, useful for revisiting topics or for reference. I have got through all of the content listed there, carefully. - Guillaume Chevalier http://www.neuraxio.com/en/
 * [Microsoft/MMdnn](https://github.com/Microsoft/MMdnn):MMdnn is a set of tools to help users inter-operate among different deep learning frameworks. E.g. model conversion and visualization. Convert models between Caffe, Keras, MXNet, Tensorflow, CNTK, PyTorch Onnx and CoreML.
 * [nndl/nndl.github.io](https://github.com/nndl/nndl.github.io):《神经网络与深度学习》 Neural Network and Deep Learning https://nndl.github.io
+* [osforscience/deep-learning-ocean](https://github.com/osforscience/deep-learning-ocean):📡 All You Need to Know About Deep Learning - A kick-starter

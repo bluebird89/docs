@@ -20,6 +20,7 @@
     -   Acer Chromebook R11
     -   明基 EW2775ZH
     -   明基 PD2710QC
+    -   Chromebook
 
 ### 设计
 

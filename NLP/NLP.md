@@ -42,6 +42,7 @@ docker-compose up -d
 ## 工具
 
 * [facebookresearch/pytext](https://github.com/facebookresearch/pytext):A natural language modeling framework based on PyTorch https://fb.me/pytextdocs
+* [fighting41love/funNLP](https://github.com/fighting41love/funNLP):文本中抽取结构化信息
 
 ## 参考
 
