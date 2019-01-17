@@ -9,6 +9,7 @@
 - 虾米
 - QQ音乐
 - [last.fm](https://www.last.fm/)
+- [nukeop/nuclear](https://github.com/nukeop/nuclear):Popcorn Time for music http://nuclear.gumblert.tech/
 
 ## 人物
 

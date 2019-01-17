@@ -151,7 +151,7 @@ brew install pipenv
   + PyPDF2：一个可以分割，合并和转换 PDF 页面的库。[官网](https://github.com/mstamy2/PyPDF2)
   + ReportLab：快速创建富文本 PDF 文档。[官网](http://www.reportlab.com/opensource/)
 - Markdown
-  + Mistune：快速并且功能齐全的纯 Python 实现的 Markdown 解析器。[官网](https://github.com/lepture/mistune)
+  + [lepture/mistune](https://github.com/lepture/mistune)：快速并且功能齐全的纯 Python 实现的 Markdown 解析器。
   + Python-Markdown：John Gruber's Markdown 的 Python 版实现。[官网](https://github.com/waylan/Python-Markdown)
   + Python-Markdiwn2：纯 Python 实现的 Markdown 解析器，比 Python-Markdown 更快，更准确，可扩展。[官网](https://github.com/trentm/python-markdown2)
 - YAML

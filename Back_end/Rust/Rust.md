@@ -38,6 +38,7 @@ rustc --version
 * search
     - [tantivy-search/tantivy](https://github.com/tantivy-search/tantivy):Tantivy is a full-text search engine library inspired by Apache Lucene and written in Rust
     - [toshi-search/Toshi](https://github.com/toshi-search/Toshi):A full-text search engine in rust
+
 ## 参考
 
 * [文档](https://kaisery.gitbooks.io/rust-book-chinese/content/)
@@ -46,3 +47,4 @@ rustc --version
 * [rust-gentle-intro](https://stevedonovan.github.io/rust-gentle-intro/)
 * [KaiserY/trpl-zh-cn](https://github.com/KaiserY/trpl-zh-cn):Rust 程序设计语言（第二版） https://kaisery.github.io/trpl-zh-cn/
 * [rust-unofficial/patterns](https://github.com/rust-unofficial/patterns):A catalogue of Rust design patterns
+* [rust-unofficial/awesome-rust](https://github.com/rust-unofficial/awesome-rust):A curated list of Rust code and resources.
