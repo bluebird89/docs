@@ -164,6 +164,7 @@
 * [Bogdan-Lyashenko/Under-the-hood-ReactJS](https://github.com/Bogdan-Lyashenko/Under-the-hood-ReactJS):Entire React code base explanation by visual block schemes (Stack version)
 * [FormidableLabs/react-live](https://github.com/FormidableLabs/react-live):A production-focused playground for live editing React components https://react-live.kitten.sh/
 * [RubyLouvre/anu](https://github.com/RubyLouvre/anu):the React16-compat mini library https://rubylouvre.github.io/nanachi/ https://rubylouvre.github.io/anu/
+* [wix/react-native-interactable](https://github.com/wix/react-native-interactable):Experimental implementation of high performance interactable views in React Native
 
 ## 扩展
 

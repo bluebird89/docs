@@ -225,6 +225,7 @@
 
 * [liabru/matter-js](https://github.com/liabru/matter-js):a 2D rigid body physics engine for the web ▲● ■
 * [CreateJS/EaselJS](https://github.com/CreateJS/EaselJS):The Easel Javascript library provides a full, hierarchical display list, a core interaction model, and helper classes to make working with the HTML5 Canvas element much easier. http://createjs.com/
+* [konvajs/konva](https://github.com/konvajs/konva):Konva.js is an HTML5 Canvas JavaScript framework that extends the 2d context by enabling canvas interactivity for desktop and mobile applications. http://konvajs.github.io/
 
 ## 3D
 
