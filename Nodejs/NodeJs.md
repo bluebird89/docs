@@ -728,6 +728,7 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
   - [jaredhanson/passport](https://github.com/jaredhanson/passport)：Simple, unobtrusive authentication for Node.js. http://www.passportjs.org
 * 监控
   - [lloyd/node-memwatch](https://github.com/lloyd/node-memwatch):A NodeJS library to keep an eye on your memory usage, and discover and isolate leaks.
+  - [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
 * cli
   - [yargs/yargs](https://github.com/yargs/yargs):yargs the modern, pirate-themed successor to optimist. http://yargs.js.org/
   - [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
@@ -750,7 +751,8 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 * test
   - [GoogleChromeLabs/ndb](https://github.com/GoogleChromeLabs/ndb):ndb is an improved debugging experience for Node.js, enabled by Chrome DevTools
   - [DevExpress/testcafe](https://github.com/DevExpress/testcafe):A Node.js tool to automate end-to-end web testing. https://devexpress.github.io/testcafe/
-  
+  - [visionmedia/supertest](https://github.com/visionmedia/supertest):🕷Super-agent driven library for testing node.js HTTP servers using a fluent API
+
 ## 面试
 
 * [jimuyouyou/node-interview-questions](https://github.com/jimuyouyou/node-interview-questions)

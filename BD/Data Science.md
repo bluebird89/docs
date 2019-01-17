@@ -45,6 +45,7 @@ SAS网站的Eight levels of analytics
 
 * [iphysresearch/DataSciComp](https://github.com/iphysresearch/DataSciComp):A collection of popular Data Science Competitions
 * [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! http://pachyderm.io
+* [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):最全中华古诗词数据库, 唐宋两朝近一万四千古诗人, 接近5.5万首唐诗加26万宋诗. 两宋时期1564位词人，21050首词。 http://shici.store
 
 ## 工具
 
@@ -55,6 +56,7 @@ SAS网站的Eight levels of analytics
 * [TuiQiao/CBoard](https://github.com/TuiQiao/CBoard):An easy to use, self-service open BI reporting and BI dashboard platform. https://tuiqiao.github.io/CBoardDoc/#/
 * [apache/arrow](https://github.com/apache/arrow):Apache Arrow is a cross-language development platform for in-memory data. It specifies a standardized language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. It also provides computational libraries and zero-copy streaming messaging and interprocess communication… https://arrow.apache.org
 * [jeroenjanssens/data-science-at-the-command-line](https://github.com/jeroenjanssens/data-science-at-the-command-line):Data Science at the Command Line https://datascienceatthecommandline.com
+* [metabase/metabase](https://github.com/metabase/metabase):The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 https://metabase.com
 
 ## 参考
 
