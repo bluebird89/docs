@@ -11,6 +11,7 @@
 ## 项目
 
 * [PWA Workshop](https://pwa-workshop.js.org/)
+* [tastejs/hacker-news-pwas](https://github.com/tastejs/hacker-news-pwas):HNPWA - Hacker News readers as Progressive Web Apps 📱 https://hnpwa.com
 
 ## 参考
 

@@ -9,3 +9,7 @@
     - 不做俗人，哪儿会知道这般乐趣？家破人亡，平了头每日荷锄，却自有真人生在里面，识到了，即是幸，即是福。
     - 王一生孤身一人坐在大屋子中央，瞪眼看着我们，双手支在膝上，铁铸一个细树椿，似无所见，似无所闻。高高的一盏电灯，暗暗地照在他脸上，眼睛深陷进去，黑黑的似俯视大千世界，茫茫宇宙。那生命像聚在一头乱发中，久久不散，又慢慢弥漫开来，灼得人脸热。
     - 理想没有了，只剩下目的。倪斌，不能怪你。你没有什么不得了的要求。我这两年，也常常犯糊涂，生活太具体了。
+
+## 工具
+
+* [koreader/koreader](https://github.com/koreader/koreader):An ebook reader application supporting PDF, DjVu, EPUB, FB2 and many more formats, running on Kindle, Kobo, PocketBook, Ubuntu Touch and Android devices http://koreader.rocks/

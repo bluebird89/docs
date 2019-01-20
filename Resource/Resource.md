@@ -21,6 +21,12 @@
     -   明基 EW2775ZH
     -   明基 PD2710QC
     -   Chromebook
+*   耳机
+    -   Libratone小鸟音响
+        +   TRACK+无线智能降噪耳机：1498
+        +   TRACK入耳式无线耳机：698元
+        +   1098元的TRACK Air无线耳机
+        +   1698元的TRACK Air+无线降噪耳机
 
 ### 设计
 
@@ -168,6 +174,7 @@
 * [chubin/cheat.sh](https://github.com/chubin/cheat.sh):the only cheat sheet you need https://cheat.sh/
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 * [DaveDavenport/rofi](https://github.com/DaveDavenport/rofi):Rofi: A window switcher, application launcher and dmenu replacement
+* [keeweb/keeweb](https://github.com/keeweb/keeweb):Free cross-platform password manager compatible with KeePass https://keeweb.info
 
 ## 资源
 

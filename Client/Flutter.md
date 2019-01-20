@@ -79,11 +79,13 @@ pod setup
 
 * [yubo725/flutter-osc](https://github.com/yubo725/flutter-osc):基于Google Flutter的开源中国客户端，支持Android和iOS。
 * [pszklarska/FlutterShoppingCart](https://github.com/pszklarska/FlutterShoppingCart):Flutter example of shopping app using Redux architecture https://hackernoon.com/flutter-redux-how-to-make-shopping-list-app-1cd315e79b65
+* [2d-inc/HistoryOfEverything](https://github.com/2d-inc/HistoryOfEverything):Flutter Launch Timeline Demo
 
 ## 工具
 
 * vscode 插件
 * [google/flutter-desktop-embedding](https://github.com/google/flutter-desktop-embedding):Desktop implementations of the Flutter embedding API
+* [Drakirus/go-flutter-desktop-embedder](https://github.com/Drakirus/go-flutter-desktop-embedder):A Go (golang) Custom Flutter Engine Embedder for desktop
 
 ## 参考
 
