@@ -112,3 +112,10 @@
 * OrangeScrum
 * Taiga
 * Tuleap
+
+## 图书
+
+* 解析极限编程
+* 精益思想
+* 《持续交付》Jez Humble
+* 持续交付2.0：业务引领的DevOps精要 乔梁

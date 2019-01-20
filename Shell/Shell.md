@@ -1366,6 +1366,8 @@ ccache gcc foo.c
     - cloc：代码统计工具，能够统计代码的空行数、注释行、编程语言。
 * benchmark
     - [sharkdp/hyperfine](https://github.com/sharkdp/hyperfine):A command-line benchmarking tool
+* bash
+    - [Bash-it/bash-it](https://github.com/Bash-it/bash-it):A community Bash framework.
 * [svenstaro/genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator https://svenstaro.github.io/genact/
 * [kentcdodds/cross-env](https://github.com/kentcdodds/cross-env):🔀 Cross platform setting of environment scripts https://www.npmjs.com/package/cross-env
 * [Swordfish90/cool-retro-term](https://github.com/Swordfish90/cool-retro-term):A good looking terminal emulator which mimics the old cathode display...

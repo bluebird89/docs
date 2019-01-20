@@ -34,13 +34,15 @@ DPI 是一种将图像的面积和理论打印尺寸进行关联的文件属性�
 * [libvips/libvips](https://github.com/libvips/libvips):A fast image processing library with low memory needs. https://libvips.github.io/libvips/
 * [AlloyImage](https://github.com/AlloyTeam/AlloyImage)基于HTML5技术的专业图像处理库
 * [DmitryUlyanov/deep-image-prior](https://github.com/DmitryUlyanov/deep-image-prior):Image restoration with neural networks but without learning. https://dmitryulyanov.github.io/deep_image_prior
+* [esimov/caire](https://github.com/esimov/caire):Content aware image resize library
+* [jantic/DeOldify](https://github.com/jantic/DeOldify):A Deep Learning based project for colorizing and restoring old images
 
 ## 资源
 
 * [unsplash](https://unsplash.com/):Photos for everyone
--   [天空之城](https://www.skypixel.com/):一个专注于航拍影像的网站
--   [1x](https://1x.com/):摄影网站，作品质量极高。
--   [LFI](http://lfi-online.de/ceemes/en/gallery/):徕卡旗下的作品廊
--   [500px](https://500px.com/popular)
--   [Pixelmator](http://www.pixelmator.com):图像处理软件
--   [GIPHY](https://giphy.com/):寻找动图好去处。
+*   [天空之城](https://www.skypixel.com/):一个专注于航拍影像的网站
+*   [1x](https://1x.com/):摄影网站，作品质量极高。
+*   [LFI](http://lfi-online.de/ceemes/en/gallery/):徕卡旗下的作品廊
+*   [500px](https://500px.com/popular)
+*   [Pixelmator](http://www.pixelmator.com):图像处理软件
+*   [GIPHY](https://giphy.com/):寻找动图好去处。
