@@ -38,6 +38,7 @@ rustc --version
 * search
     - [tantivy-search/tantivy](https://github.com/tantivy-search/tantivy):Tantivy is a full-text search engine library inspired by Apache Lucene and written in Rust
     - [toshi-search/Toshi](https://github.com/toshi-search/Toshi):A full-text search engine in rust
+* [rust-lang-nursery/futures-rs](https://github.com/rust-lang-nursery/futures-rs):Zero-cost asynchronous programming in Rust http://rust-lang-nursery.github.io/futures-rs
 
 ## 参考
 

@@ -136,6 +136,7 @@
       - (https://github.com/jwage/purl)[Purl]: 一个URL处理库
       - (https://github.com/fruux/sabre-uri)[sabre/uri]: 一个URI操作库
       - (https://github.com/thephpleague/uri)[Uri]: 另一个URL处理库
+      - [leocavalcante/siler](https://github.com/leocavalcante/siler):⚡️ Flat-files and plain-old PHP functions rockin'on https://siler.leocavalcante.com
 * 电子邮件 Email 发送和解析邮件的库
       - (https://github.com/tijsverkoyen/CssToInlineStyles)[CssToInlineStyles]: 一个在邮件模板中的内联CSS库
       - (https://github.com/willdurand/EmailReplyParser)[Email Reply Parser]: 一个邮件回复解析的库
@@ -444,6 +445,7 @@
       - (https://github.com/hoaproject/Console)[Hoa Console]: 另一个命令行库
       - (https://github.com/CHH/optparse)[OptParse]: 另一个命令行选择解析器
       - (https://github.com/mcrumm/pecan)[Pecan]: 一个事件驱动和非阻塞的shell
+      - [symfony/console](https://github.com/symfony/console):The Console component eases the creation of beautiful and testable command line interfaces. https://symfony.com/console
       - [PsySH](https://github.com/bobthecow/psysh): A REPL for PHP http://psysh.org
       - (https://github.com/MrRio/shellwrap)[ShellWrap]: -一个简单的命令行包装库
       - [php-pm/php-pm](https://github.com/php-pm/php-pm):PPM is a process manager, supercharger and load balancer for modern PHP applications.

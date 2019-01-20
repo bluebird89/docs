@@ -235,10 +235,7 @@ livetemplate
 * [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/
 * [cdoco/jetbrains-license-server](https://github.com/cdoco/jetbrains-license-server):已废弃
 * [激活](https://www.jianshu.com/p/133af2e4fe3f):修改host 0.0.0.0 account.jetbrains.com  去http://idea.lanyus.com/生存激活码
-
-## 编辑器
-
-* [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
+* [LightTable/LightTable](https://github.com/LightTable/LightTable):The Light Table IDE ⛺ http://www.lighttable.com
 
 ## 参考
 

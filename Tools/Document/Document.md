@@ -125,6 +125,7 @@ npm install gitbook-cli -g
 * [pedronauck/docz](https://github.com/pedronauck/docz):✍🏻It has never been so easy to document your things! https://docz.site
 * [TryGhost/Ghost](https://github.com/TryGhost/Ghost):The platform for professional publishers https://ghost.org
 * [gsuitedevs/md2googleslides](https://github.com/gsuitedevs/md2googleslides):Generate Google Slides from markdown
+* [mailcow/mailcow-dockerized](https://github.com/mailcow/mailcow-dockerized):mailcow: dockerized - 🐮 + 🐋 = 💕 https://mailcow.email
 
 ## [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor)
 

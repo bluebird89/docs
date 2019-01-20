@@ -648,6 +648,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [philc/vimium](https://github.com/philc/vimium):The hacker's browser.
 * [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen):pathogen.vim: manage your runtimepath
 * [square/maximum-awesome](https://github.com/square/maximum-awesome):Config files for vim and tmux.
+* [SpaceVim/SpaceVim](https://github.com/SpaceVim/SpaceVim):A community-driven modular vim distribution - The ultimate vim configuration https://spacevim.org
 
 ## 插件
 
