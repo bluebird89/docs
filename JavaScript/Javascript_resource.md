@@ -286,6 +286,8 @@
     - [CodePen](https://codepen.io)
 * functional programming
     - [origamitower/folktale](https://github.com/origamitower/folktale):A standard library for functional programming in JavaScript https://folktale.origamitower.com/
+* git
+    - [isomorphic-git/isomorphic-git](https://github.com/isomorphic-git/isomorphic-git):A pure JavaScript implementation of git for node and browsers! https://isomorphic-git.org/
 
 ## 机器学习
 
@@ -410,11 +412,7 @@
 * [staticfile/static](https://github.com/staticfile/static):开放静态文件 - 为开源库提供稳定、快速的免费 CDN 服务 https://staticfile.org
 * [lukehoban/es6features](https://github.com/lukehoban/es6features):Overview of ECMAScript 6 features
 * [addyosmani/essential-js-design-patterns](https://github.com/addyosmani/essential-js-design-patterns):Repo for my 'Learning JavaScript Design Patterns' book https://addyosmani.com/resources/essentialjsdesignpatterns/book/
-- [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API)
-
-## JSX
-
-* [developit/htm](https://github.com/developit/htm):Hyperscript Tagged Markup: JSX alternative using standard tagged templates, with compiler support.
+* [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API)
 
 ## 教程
 

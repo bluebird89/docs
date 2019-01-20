@@ -634,27 +634,28 @@ lsof -Pni4 | grep LISTEN | grep php
 
 ## 配置
 
--   [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
--   [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles):🔧 .files, including ~/.macos — sensible hacker defaults for macOS <https://mths.be/dotfiless>
-- [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files. https://thoughtbot.com
--   [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
--   [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
--   [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
--   [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
--   [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
--   [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
--   [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
--   [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
--   [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(<http://sourabhbajaj.com/mac-setup/>) 推荐
--   [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
--   [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
--   [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
--   [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
--   [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
--   [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
--   [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
--   [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
+*   [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
+*   [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles):🔧 .files, including ~/.macos — sensible hacker defaults for macOS <https://mths.be/dotfiless>
+* [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files. https://thoughtbot.com
+*   [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
+*   [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
+*   [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
+*   [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
+*   [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
+*   [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
+*   [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
+*   [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
+*   [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(<http://sourabhbajaj.com/mac-setup/>) 推荐
+*   [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
+*   [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
+*   [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
+*   [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
+*   [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
+*   [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
+*   [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
+*   [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
 * [Mac OS X 配置指南](https://wild-flame.github.io/guides/)
+* [phodal/setup.guide](https://github.com/phodal/setup.guide)
 
 ### 软件列表
 

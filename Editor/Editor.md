@@ -8,6 +8,7 @@
 -  Brackets
 - [Atom](./Atom.md)
 * [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor):gem A fast, open source text processor and publishing toolchain, written in Ruby, for converting AsciiDoc content to HTML5, DocBook 5 (or 4.5) and other formats. https://asciidoctor.org
+* [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
 
 ## 富文本编辑器
 

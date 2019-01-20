@@ -1,5 +1,8 @@
 # Courses
 
+* [prakhar1989/awesome-courses](https://github.com/prakhar1989/awesome-courses):List of awesome university courses for learning Computer Science!
+* [课程图谱](http://coursegraph.com/navigation/)
+
 ## 综合
 
 -   [Coursera](https://www.coursera.org/)
@@ -47,8 +50,6 @@
     -   Do It Yourself — 教你成为家居改造达人。
     -   Adafruit Learning System — 提供免费电子设备 DIY 教程。
     -   Grovo — 学习如何使用上百种网站应用，提高自己的工作效率。
-* [prakhar1989/awesome-courses](https://github.com/prakhar1989/awesome-courses):List of awesome university courses for learning Computer Science!
-* [30dayMakeOS](git@github.com:yourtion/30dayMakeOS.git)
 
 ## 前端
 
