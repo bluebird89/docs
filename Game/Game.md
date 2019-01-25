@@ -22,7 +22,6 @@
     - 上古卷轴V：天际
     - NBA 2K
     - 喷射战士2 splatoon2
-    - 异度神剑2
     - 异度之刃2（Xenoblade 2）
     - 死喷乱涂2
     - Just Danc
