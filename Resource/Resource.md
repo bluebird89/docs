@@ -134,6 +134,7 @@
 -   机票：https://flights.manzhinan.com/
 -   牙医：德真会
 - 大吉岭玫瑰红茶Darjeeling Rose Camélia
+- IKEA
 
 ## Blog
 
