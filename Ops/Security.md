@@ -25,7 +25,6 @@
 * Lynis
 * [网站体检工具](https://ziyuan.baidu.com/safe/index)
 
-https://blog.zsxsoft.com/post/30
 
 
 MySQL层安全策略
@@ -182,6 +181,7 @@ Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，
 * [sqlmapproject/sqlmap](https://github.com/sqlmapproject/sqlmap):Automatic SQL injection and database takeover tool http://sqlmap.org
 * [s0md3v/XSStrike](https://github.com/s0md3v/XSStrike):Most advanced XSS detection suite. https://somdev.me/XSStrike/
 * [netxfly/sec_check](https://github.com/netxfly/sec_check):Cross platform security detection tool
+* [用户信息监控](https://monitor.firefox.com/ )
 
 ## 参考
 
@@ -193,3 +193,5 @@ Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，
 ## 案例
 
 * [710leo/ZVulDrill](https://github.com/710leo/ZVulDrill):Web漏洞演练平台
+
+https://blog.zsxsoft.com/post/30

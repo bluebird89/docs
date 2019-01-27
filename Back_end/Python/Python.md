@@ -285,6 +285,16 @@ line2
 line3''')
 print(r'''hello,\n
 world''')
+# 字符串拼接
+a, b = 'hello', ' world'
+a + b
+print(a, b)
+print('hello''world')
+print('%s %s' % ('hello', 'world'))
+print('-'.join(['aa', 'bb', 'cc']))
+f'{a} {b}'
+a * 3
+
 True
 3 > 2
 True and True
