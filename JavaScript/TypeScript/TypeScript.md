@@ -31,6 +31,10 @@ superShout() {
 }
 ```
 
+## 测试
+
+* [kulshekhar/ts-jest](https://github.com/kulshekhar/ts-jest):TypeScript preprocessor with sourcemap support for Jest https://kulshekhar.github.io/ts-jest
+
 ## 教程
 
 * [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter):A starter template for TypeScript and Node with a detailed README describing how to use the two together.

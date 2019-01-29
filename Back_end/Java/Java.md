@@ -1000,3 +1000,4 @@ JavaEE/JDBC/Weblogic
 * [crossoverJie/JCSprout](https://github.com/crossoverJie/JCSprout):👨‍🎓 Java Core Sprout : basic, concurrent, algorithm
 * [安装教程](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-debian-8)类debian系统
 * [Java并发](https://mp.weixin.qq.com/s?__biz=MjM5MzA1Mzc3Nw==&mid=2247484908&idx=1&sn=fe9004cd8369cabf448c9f43466bad0f&chksm=a69da8d291ea21c493d82e63705604055e2bd4d09f42c5e835051e3187a9cfefa317e6484b65)
+* [ruibaby/halo](https://github.com/ruibaby/halo):Halo可能是最好的Java博客系统😉 https://docs.halo.run
