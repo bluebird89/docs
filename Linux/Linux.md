@@ -1444,6 +1444,7 @@ set completeopt=longest,menu
 * [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
 * [面向 Linux 程序员和系统管理员的技术资源](https://www.ibm.com/developerworks/cn/linux/)
 * [Linux 内核揭密](https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html)
+* [trimstray/the-practical-linux-hardening-guide](https://github.com/trimstray/the-practical-linux-hardening-guide):🔥 This guide details the planning and the tools involved in creating a secure Linux production systems - work in progress.
 
 ## 工具
 

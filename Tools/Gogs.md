@@ -1,8 +1,10 @@
-# Gogs
+# [gogs/gogs](https://github.com/gogs/gogs)
+
+Gogs is a painless self-hosted Git service. https://gogs.io
 
 ## 搭建服务
 
-- Go lang 安装配置
+- Golang 安装配置
 - git安装配置
 - mysql安装配置
 - nginx安装配置

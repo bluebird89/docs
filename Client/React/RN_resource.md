@@ -62,6 +62,7 @@
     - [rt2zz/redux-persist](https://github.com/rt2zz/redux-persist):persist and rehydrate a redux store
 * 命令行
     - [maicki/why-did-you-update](https://github.com/maicki/why-did-you-update):💥 Puts your console on blast when React is making unnecessary updates.
+    - [vadimdemedes/ink](https://github.com/vadimdemedes/ink):🌈 React for interactive command-line apps
 * 按钮
     - [transitive-bullshit/react-particle-effect-button](https://github.com/transitive-bullshit/react-particle-effect-button):Bursting particle effect buttons for React 🎉
     - [greena13/react-hotkeys](https://github.com/greena13/react-hotkeys):Declarative hotkey and focus area management for React
@@ -110,6 +111,8 @@
     - [acdlite/redux-router](https://github.com/acdlite/redux-router):Redux bindings for React Router – keep your router state inside your Redux store
     - [erikras/react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example):A starter boilerplate for a universal webapp using express, react, redux, webpack, and react-transform
     - [maicki/react-native-router-bridge](https://github.com/maicki/react-native-router-bridge):Small module which bridges the navigation world between native and React Native.
+* gesture
+    - [kmagiera/react-native-gesture-handler](https://github.com/kmagiera/react-native-gesture-handler):Declarative API exposing platform native touch and gesture system to React Native.
 * 组件
 
 * [brillout/awesome-react-components](https://github.com/brillout/awesome-react-components):Catalog of React Components & Libraries https://devarchy.com/react
@@ -165,6 +168,7 @@
 * [FormidableLabs/react-live](https://github.com/FormidableLabs/react-live):A production-focused playground for live editing React components https://react-live.kitten.sh/
 * [RubyLouvre/anu](https://github.com/RubyLouvre/anu):the React16-compat mini library https://rubylouvre.github.io/nanachi/ https://rubylouvre.github.io/anu/
 * [wix/react-native-interactable](https://github.com/wix/react-native-interactable):Experimental implementation of high performance interactable views in React Native
+* [alibaba-fusion/next](https://github.com/alibaba-fusion/next):A configurable component library for web built on React. https://fusion.design
 
 ## 扩展
 
@@ -255,6 +259,5 @@
 * [react-pxq](https://github.com/bailicangdu/react-pxq)一个 react + redux 的完整项目 和 个人总结
 
 * [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.
-* [zeit/next.js](https://github.com/zeit/next.js):Framework for server-rendered React apps https://zeit.co/blog/next4
 * [vhpoet/react-native-styling-cheat-sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet):Most of the React Native styling material in one page
 * [tachyons-css/tachyons](https://github.com/tachyons-css/tachyons/):Functional css for humans https://tachyons.io

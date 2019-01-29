@@ -38,6 +38,7 @@ docker-compose up -d
 * [CS224N 2019](http://web.stanford.edu/class/cs224n/)
     - 目前仅提供 2017 年春季课程：https://www.youtube.com/playlist?list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6
 * [facebookresearch/StarSpace](https://github.com/facebookresearch/StarSpace):Learning embeddings for classification, retrieval and ranking.
+* [jacobeisenstein/gt-nlp-class](https://github.com/jacobeisenstein/gt-nlp-class):Course materials for Georgia Tech CS 4650 and 7650, "Natural Language"
 
 ## 工具
 
