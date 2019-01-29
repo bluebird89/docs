@@ -2635,6 +2635,14 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
   - [facebookincubator/fbt](https://github.com/facebookincubator/fbt):A JavaScript Internationalization Framework https://facebookincubator.github.io/fbt
 * html
   - [Polymer/lit-html](https://github.com/Polymer/lit-html):An efficient, expressive, extensible HTML templating library for JavaScript. https://lit-html.polymer-project.org/
+* cookie
+  - [js-cookie/js-cookie](https://github.com/js-cookie/js-cookie):A simple, lightweight JavaScript API for handling browser cookies
+* spreadsheet
+  - [myliang/x-spreadsheet](https://github.com/myliang/x-spreadsheet):a javascript spreadsheet for web
+* money
+  - [sarahdayan/dinero.js](https://github.com/sarahdayan/dinero.js):💸 An immutable library to create, calculate and format money. https://sarahdayan.github.io/dinero.js
+* clipboard
+  - [zenorocha/clipboard.js](https://github.com/zenorocha/clipboard.js):✂️ Modern copy to clipboard. No Flash. Just 3kb gzipped 📋 https://clipboardjs.com
 
 ## 参考
 

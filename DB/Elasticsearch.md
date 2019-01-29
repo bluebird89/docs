@@ -75,6 +75,8 @@ curl localhost:9200
 
 ### 中文分词设置
 
+* [medcl/elasticsearch-analysis-ik](https://github.com/medcl/elasticsearch-analysis-ik):The IK Analysis plugin integrates Lucene IK analyzer into elasticsearch, support customized dictionary.
+
 ```
 # 使用ik插件
 ./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v5.5.1/elasticsearch-analysis-ik-5.5.1.zip
