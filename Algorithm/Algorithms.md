@@ -131,7 +131,7 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * [keon/algorithms](https://github.com/keon/algorithms):Minimal examples of data structures and algorithms in Python\
 * [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges):Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
 * [python](https://github.com/ssjssh/algorithm)
-* https://visualgo.net/en:可视化
+* [](https://visualgo.net/en):可视化
 * [我接触过的前端数据结构与算法](https://juejin.im/post/5958bac35188250d892f5c91)
 * [LeuisKen/algorithm](https://github.com/LeuisKen/algorithm)
 * [Dictionary of Algorithms and Data Structures](https://xlinux.nist.gov/dads/)

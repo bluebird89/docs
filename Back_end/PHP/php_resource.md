@@ -991,3 +991,4 @@ fi
 
 * [cytopia/docker-php-fpm-7.2](https://github.com/cytopia/docker-php-fpm-7.2):PHP-FPM 7.2 on CentOS 7 http://devilbox.org/
 * [travis-ci-examples/php](https://github.com/travis-ci-examples/php):Example PHP project using Travis CI http://travis-ci.org
+* [shlinkio/shlink](https://github.com/shlinkio/shlink):A self-hosted and PHP-based URL shortener with CLI and REST interfaces https://shlink.io
