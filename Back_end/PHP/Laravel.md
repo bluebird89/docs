@@ -1526,6 +1526,7 @@ php artisan jwt:secret # 使用
 * [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
 * [wujunze/laravel-debug-helper](https://github.com/wujunze/laravel-debug-helper):Laravel package to help debug
 * [laravel-zero/laravel-zero](https://github.com/laravel-zero/laravel-zero):A PHP framework for console artisans https://laravel-zero.com
+* [nWidart/laravel-modules](https://github.com/nWidart/laravel-modules):Module Management In Laravel https://nwidart.com/laravel-modules/
 
 ## 参考
 
