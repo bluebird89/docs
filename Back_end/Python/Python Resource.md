@@ -1226,6 +1226,10 @@ Python 实现的算法和设计模式。
 * qrcode
   - [MyQR](link)
 
+## reference
+
+* [gto76/python-cheatsheet](https://github.com/gto76/python-cheatsheet):Comprehensive Python Cheatsheet https://gto76.github.io/python-cheatsheet/
+
 ## 知识点
 
 * Python核心编程
