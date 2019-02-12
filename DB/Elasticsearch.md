@@ -95,3 +95,5 @@ curl localhost:9200
 ## 参考
 
 * [Elasticsearch 5.4 中文文档](http://cwiki.apachecn.org/pages/viewpage.action?pageId=4260364)
+* [ elastic/elasticsearch-definitive-guide
+](https://github.com/elastic/elasticsearch-definitive-guide):The Definitive Guide to Elasticsearch https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html
