@@ -358,6 +358,10 @@ if ($model->validate()) {
     // 验证失败：$errors 是一个包含错误信息的数组
     $errors = $model->errors;
 }
+
+# Data Transformation
+1. model add function getNewAttribute()
+2. use:$instance->newAttribute
 ```
 
 ## component
@@ -426,7 +430,7 @@ class ActionTimeFilter extends ActionFilter
                     $q = new yiidbQuery();
                     return $q->from('user')->max('updated_at');
                 },
-                rules' => [
+                'rules' => [
                     // 允许认证用户
                     [
                         'allow' => true,
@@ -481,8 +485,15 @@ class ActionTimeFilter extends ActionFilter
         Yii::trace("Action '{$action->uniqueId}' spent $time second.");
         return parent::afterAction($action, $result);
     }
+}
 
-
+$model = new Post;
+if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    return $this->redirect([’view’, ’id’ => $model->id]);
+} else {
+    return $this->render(’create’, [
+        ’model’ => $model,
+    ]);
 }
 ```
 

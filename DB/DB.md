@@ -127,6 +127,7 @@ Cetus 的整体工作流程分为:
 * [apple/foundationdb](https://github.com/apple/foundationdb):FoundationDB - the open source, distributed, transactional key-value store https://www.foundationdb.org
 * [msiemens/tinydb](https://github.com/msiemens/tinydb):TinyDB is a lightweight document oriented database optimized for your happiness :) https://tinydb.readthedocs.org
 * [gruns/ImmortalDB](https://github.com/gruns/ImmortalDB):🔩 A relentless key-value store for the browser.
+* [cockroachdb/cockroach](https://github.com/cockroachdb/cockroach):CockroachDB - the open source, cloud-native SQL database. https://www.cockroachlabs.com
 
 ## SQL
 
