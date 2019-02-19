@@ -59,6 +59,10 @@
 * 网站能否访问（nginx）
 * 能否解析PHP
 
+### ubunutu
+
+* `/usr/share/doc/nginx-doc/examples/`
+
 ### Mac
 
 - 程序文件 /usr/local/Cellar/nginx

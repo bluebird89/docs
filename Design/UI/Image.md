@@ -36,6 +36,7 @@ DPI 是一种将图像的面积和理论打印尺寸进行关联的文件属性�
 * [DmitryUlyanov/deep-image-prior](https://github.com/DmitryUlyanov/deep-image-prior):Image restoration with neural networks but without learning. https://dmitryulyanov.github.io/deep_image_prior
 * [esimov/caire](https://github.com/esimov/caire):Content aware image resize library
 * [jantic/DeOldify](https://github.com/jantic/DeOldify):A Deep Learning based project for colorizing and restoring old images
+* [hackerb9/lsix](https://github.com/hackerb9/lsix):Like "ls", but for images. Shows thumbnails in terminal using sixel graphics. 
 
 ## 资源
 

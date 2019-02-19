@@ -178,6 +178,12 @@ sudo apt update --fix-missing
 
 sudo apt-get upgrade
 
+## error
+E: Could not get lock /var/lib/dpkg/lock – open (11: Resource temporarily unavailable)
+E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
+
+sudo killall apt apt-get
+
 ## 源码编译 源码cp到/usr/local/src/下
 cd xxx
 ./configure --help
