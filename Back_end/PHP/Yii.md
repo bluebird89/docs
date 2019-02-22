@@ -971,6 +971,27 @@ browser reopen generate new cookie
 * cookie pass parameters
 * front get back parameters
 
+## RBAC
+
+* add authManager
+* `./yii migrate --migrationPath=@yii/rbac/migrations/`
+
+```php
+// console->config->main.php->compontent
+// backend->config->main.php->compontent
+'authManager' => [
+    'class' => 'yii\rbac\DbManager',
+    'itemTable' => '{{%auth_item}}',
+    'itemChildTable' => '{{%auth_item_child}}',
+    'assignmentTable' => '{{%auth_assignment}}',
+    'ruleTable' => '{{%auth_rule}}'
+],
+```
+
+## Admin
+
+* `composer require dmstr/yii2-adminlte-asset`
+
 ## 扩展
 
 -   [yii2-httpclient](https://github.com/yiisoft/yii2-httpclient)
