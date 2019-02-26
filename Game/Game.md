@@ -23,6 +23,7 @@
     - 我的世界
     - 喷射战士2 splatoon2
     - 异度之刃2（Xenoblade 2）
+    - 异度神剑
     - Just Danc
     - 星之卡比
     - １＋２
@@ -34,6 +35,9 @@
     - 超级马力欧 聚会
     - 马力欧网球 ACE
     - Atelier Lydie & Suelle - The Alchemists and the Mysterious Paintings
+    - 王国之心3
+    - Fitness Boxing
+    - 薄暮传说：终极版
 * 配件
     - 买单机标配，不要买套餐
     - 保护包
@@ -80,6 +84,9 @@
 -   守望先锋
 -   Minecraft
     +   [Mojang/brigadier](https://github.com/Mojang/brigadier):Brigadier is a command parser & dispatcher, designed and developed for Minecraft: Java Edition.
+* WeGame
+    - 程序员升职记
+    - 机械工厂
 
 ### 手游
 
