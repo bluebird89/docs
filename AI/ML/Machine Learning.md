@@ -252,6 +252,10 @@
         + 反向传播（Back-propagation）
    - 自动编码器（Auto-Encoder）
 
+## 图书
+
+* 百面机器学习
+
 ## 教程
 
 * [learnml/machine-learning-specialization](https://github.com/learnml/machine-learning-specialization)
