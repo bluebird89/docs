@@ -4,9 +4,12 @@
 
 ## 美国
 
-* 蓝色起源
+* 蓝色起源(Blue Origin):亚马逊CEO贝索斯
+* 维珍(Virgin)创始人理查德·布兰森(Richard Branson)拥有“维珍银河”(Virgin Galactic)
 
 ### SpaceX
+
+马斯克
 
 * 2018的整体发射次数也增长到了21次
     - “重型猎鹰”的首飞应该是SpaceX全年最大的里程碑，其LEO轨道运载能力高达63.9吨
