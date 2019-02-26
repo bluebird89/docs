@@ -10,6 +10,10 @@
 * [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor):gem A fast, open source text processor and publishing toolchain, written in Ruby, for converting AsciiDoc content to HTML5, DocBook 5 (or 4.5) and other formats. https://asciidoctor.org
 * [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
 
+### EditPlus
+
+* ctrl + E
+
 ## 富文本编辑器
 
 * [ianstormtaylor/slate](https://github.com/ianstormtaylor/slate):A completely customizable framework for building rich text editors. http://slatejs.org

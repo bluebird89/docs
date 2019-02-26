@@ -83,6 +83,7 @@ sudo apt-get install code
 * VS Live Share
 - vscode-pandoc:文档生成
 * WakaTime
+* vscode-leetcode
 
 ## 主题
 
