@@ -5,6 +5,7 @@ Windows是最烂的开发平台
 ## 工具
 
 * [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation https://chocolatey.org/
+* [Scoop](https://scoop.sh)
 * 快速启动
   - launchy
   - [Wox-launcher/Wox](https://github.com/Wox-launcher/Wox):Launcher for Windows, an alternative to Alfred and Launchy. http://wox.one

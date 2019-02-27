@@ -24,6 +24,8 @@ export PATH=$PATH:$MAVEN_HOME/bin
 sudo apt-get install maven2
 
 maven -v
+
+choco install marven
 ```
 
 ## 原理

@@ -988,6 +988,9 @@ JavaEE/JDBC/Weblogic
 * flow-control
   - [alibaba/Sentinel](https://github.com/alibaba/Sentinel):A lightweight flow-control library providing high-available protection and monitoring (高可用防护的流量管理框架)
 * [google/guava](https://github.com/google/guava):Google core libraries for Java
+* [SDKMAN](https://sdkman.io):The Software Development Kit Manager
+  - `curl -s "https://get.sdkman.io" | bash`
+  - `source "$HOME/.sdkman/bin/sdkman-init.sh"`
 
 ## 参考
 
