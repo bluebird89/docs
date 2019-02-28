@@ -1,13 +1,13 @@
-# Percona
+# [percona/percona-server](https://github.com/percona/percona-server)
 
-数据库审计功能:需要使用MySQL企业版，或者Percona/MariaDB分支版本，MySQL社区版本不支持该功能。
+Percona Server https://www.percona.com/software/mysql-database/percona-server
 
-启用thread pool特性，可使得在高并发的情况下，性能不会发生大幅下降
-extra_port功能，非常实用， 关键时刻能救命的。
-QUERY_RESPONSE_TIME 功能，也能使我们对整体的SQL响应时间分布有直观感受
-
-percona提供了高性能XtraDB引擎，还提供了PXC高可用解决方案，并且附带了percona-toolkit等DBA管理工具箱
-MariaDB在10.0.9版本起使用XtraDB（名称代号Aria）来代替MySQL的InnoDB.
+* 数据库审计功能:需要使用MySQL企业版，或者Percona/MariaDB分支版本，MySQL社区版本不支持该功能。
+* 启用thread pool特性，可使得在高并发的情况下，性能不会发生大幅下降
+* extra_port功能，非常实用， 关键时刻能救命的。
+* QUERY_RESPONSE_TIME 功能，也能使我们对整体的SQL响应时间分布有直观感受
+* percona提供了高性能XtraDB引擎，还提供了PXC高可用解决方案，并且附带了percona-toolkit等DBA管理工具箱
+* MariaDB在10.0.9版本起使用XtraDB（名称代号Aria）来代替MySQL的InnoDB.
 
 ## 安装
 
@@ -150,3 +150,7 @@ apt-get install percona-server-server
 
 * [Percona Toolkit Documentation](https://www.percona.com/doc/percona-toolkit/2.1/index.html)
 * [downloads](https://www.percona.com/downloads/Percona-Server-5.7/)
+
+## 扩展
+
+* [xelabs/tokudb](https://github.com/XeLabs/tokudb):Next Generation DBMS TokuDB, based on Percona Server 5.7 with more features https://github.com/xelabs/tokudb/wiki

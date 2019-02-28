@@ -40,7 +40,10 @@ if __name__ == '__main__':
 
 ## 加密
 
+* 安全
+* 不能直接调用：校验机制
 * [google/tink](https://github.com/google/tink):Tink is a multi-language, cross-platform library that provides cryptographic APIs that are secure, easy to use correctly, and hard(er) to misuse.
+* 内容加密
 
 ## 流程
 

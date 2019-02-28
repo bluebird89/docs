@@ -78,3 +78,6 @@
 
 * [微服务架构实战160讲]()
 * [分布式系统架构]():陈皓（左耳朵耗子）
+* [mbinary/USTC-CS-Courses-Resource](https://github.com/mbinary/USTC-CS-Courses-Resource):❤️中国科学技术大学计算机学院课程资源(https://mbinary.xyz/ustc-cs/) https://mbinary.xyz/ustc-cs/
+    - ftp.ustclug.org； /ebook/USTC-CS-Courses-Resource； ftp@ftp
+    - afp://ftp.ustclug.org/； /ebook/USTC-CS-Courses-Resource； Connect As Guest
