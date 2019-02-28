@@ -348,7 +348,8 @@ writing clear commit messages, you can make it easier for other people to follow
 ```sh
 git stutus -s(short) # 查看本地的代码状态,上次提交更新后的更改或者写入缓存的改动
 
-git add .|<file1>(<file2> <file3>)|[dir] #（所有文件/单个文件 或通过使用通配符）写入缓存区
+git add . # add all new and edit file, not include delete file
+git add <file1>(<file2> <file3>)|[dir] #（所有文件/单个文件 或通过使用通配符）写入缓存区
 git add -p # 添加每个变化前，都会要求确认,对于同一个文件的多处变化，可以实现分次提交
 git add -A # 添加所有变化（新增 new、修改 modified、删除 deleted）到暂存区
 git add -u # 添加修改(modified)和被删除(deleted)文件，不包括新文件(new)也就是不是被追踪文件（untracked）
