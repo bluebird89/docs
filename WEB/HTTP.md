@@ -325,16 +325,10 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 
 访问令牌（Access token）表示访问控制操作主体的系统对象
 
-## hosts
+## session
 
-* [googlehosts/hosts](https://github.com/googlehosts/hosts):镜像：https://coding.net/u/scaffrey/p/hosts/git
-
-## DNS
-
-* [tenta-browser/tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS https://tenta.com/test
-* [googlehosts/hosts](https://github.com/googlehosts/hosts)
-* [Cloudflare](https://www.cloudflare.com):域名注册服务
-* [coredns/coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins https://coredns.io
+* session  创建  维护
+* session  每次登陆  id  会变
 
 ## QUIC
 
