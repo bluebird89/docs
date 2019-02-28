@@ -43,13 +43,7 @@ curl -H "Content-Type: application/json" \
    https://api2.scaledrone.com/KtJ2qzn3CF3svSFe/notifications/publish
 ```
 
-## 扩展
-
-* [websockets/ws](https://github.com/websockets/ws):Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js
-* [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)
-* [细说WebSocket - Node篇](https://juejin.im/entry/5a012eab518825297a0e27f0)
-
-# Websocket
+## Websocket
 
 websocket通信协议实现的是基于浏览器的原生socket，这样原先只有在c/s模式下的大量开发模式都可以搬到web上来了，基本就是通过浏览器的支持在web上实现了与服务器端的socket通信。
 
@@ -123,3 +117,9 @@ if('WebSocket' in window){
 
 * [uNetworking/uWebSockets](https://github.com/uNetworking/uWebSockets):Tiny WebSockets
 * [gorilla/websocket](https://github.com/gorilla/websocket):A WebSocket implementation for Go.
+
+## 扩展
+
+* [websockets/ws](https://github.com/websockets/ws):Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js
+* [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)
+* [细说WebSocket - Node篇](https://juejin.im/entry/5a012eab518825297a0e27f0)
