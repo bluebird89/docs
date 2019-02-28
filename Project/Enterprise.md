@@ -26,8 +26,8 @@
 
 ## 沟通
 
--   [Slack](https://slack.com/)
--   [stride](https://app.stride.com/):类似 slack 的软件
+-  [Slack](https://slack.com/)
+-  [stride](https://app.stride.com/):类似 slack 的软件
 * [mattermost/mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost https://mattermost.com
 
 ## 邮件
@@ -93,6 +93,7 @@ Apache Incubator是旨在成为完全成熟的Apache软件基金会项目的开�
 * 达观数据
 * 竹间智能
 * 盛大创新院
+* [地平线](https://horizon.ai/)
 
 ## 公司文化
 
@@ -101,6 +102,14 @@ Apache Incubator是旨在成为完全成熟的Apache软件基金会项目的开�
 * 看它是否重视明星员工；
 * 看它的晋升机制是否合理；
 * 看它如何应对外界的变化
+
+## 转型
+
+* 传统企业 市场化  商品化
+
+## 华为
+
+* 华为不会让CFO接班，干部选拔以李云龙、赵刚为标杆；
 
 ## 参考
 

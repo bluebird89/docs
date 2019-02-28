@@ -106,3 +106,8 @@ bash ./dnstest.sh |sort -k 22 -n
 ## 工具
 
 * [jedisct1/dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. https://dnscrypt.info
+* [googlehosts/hosts](https://github.com/googlehosts/hosts):镜像：https://coding.net/u/scaffrey/p/hosts/git
+* [tenta-browser/tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS https://tenta.com/test
+* [googlehosts/hosts](https://github.com/googlehosts/hosts)
+* [Cloudflare](https://www.cloudflare.com):域名注册服务
+* [coredns/coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins https://coredns.io
