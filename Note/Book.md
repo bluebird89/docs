@@ -142,6 +142,7 @@
 
 * 《客户驱动的产品开发》
 * 《数据驱动设计：A/B测试提升用户体验》
+* 启示录 Marty Cagan
 
 ## OO
 
@@ -442,6 +443,7 @@
 * 《Spark高级数据分析（第2版）》 Sandy Ryza、Uri Laserson、Sean Owen、Josh Wills
 * 《Hadoop深度学习》 Dipayan Dev
 * 《R数据科学》 哈德利•威克姆、加勒特•格罗勒芒德
+* 深入浅出数据分析 Michael Milton
 
 ## ML
 
@@ -560,6 +562,8 @@
 * Fermat’s Enigma
 * X的奇幻之旅
 * 《伊卡洛斯之陨》——彼得·勃鲁盖尔
+* 奇点临近 雷·库兹韦尔
+* 失控 凯文·凯利
 
 Evolutionary Architecture
 Clean Code, Design Patterns, DDD
@@ -601,6 +605,10 @@ HTTP and REST
 * 活法
 * 干法
 * 直觉泵与其它思考工具
+* 金字塔原理 巴巴拉·明托
+* 精力管理
+* 拖延心理学
+* 先发影响力 罗伯特·西奥迪尼
 
 ## 经济
 

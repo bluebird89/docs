@@ -345,8 +345,7 @@ REVOKE type_of_permission ON database_name.table_name FROM ‘username’@‘loc
 * Myisam:表结构 数据 索引文件分离。适合于一些需要大量查询的应用，但其对于有大量写操作并不是很好。甚至你只是需要update一个字段，整个表都会被锁起来，而别的进程，就算是读进程都 无法操作直到读操作完成。
   - 表锁：myisam 表级锁 表锁，只有读读之间是并发的，写写之间和读写之间（读和插入之间是可以并发的，去设置concurrent_insert参数，定期执行表优化操作，更新操作就没有办法了）是串行的，所以写起来慢，并且默认的写优先级比读优先级高，高到写操作来了后，可以马上插入到读操作前面去，如果批量写，会导致读请求饿死，所以要设置读写优先级或设置多少写操作后执行读操作的策略;myisam不要使用查询时间太长的sql，如果策略使用不当，也会导致写饿死，所以尽量去拆分查询效率低的sql,
   - 读的效果好，写的效率差，这和它数据存储格式，索引的指针和锁的策略有关的，它的数据是顺序存储的.索引btree上的节点是一个指向数据物理位置的指针，所以查找起来很快
-  - 对于 SELECT COUNT(*) 这类的计算是超快无比的(不含where条件)
-  - 不支持自动恢复数据：断电之后 使用之前检查和执行可能的修复
+    - 不支持自动恢复数据：断电之后 使用之前检查和执行可能的修复
   - 不支持事务：不保证单个命令会完成, 多行update 有错误 只有一些行会被更新
   - 只有索引缓存在内存中：mysiam只缓存进程内部的索引
   - 紧密存储：行被仅仅保存在一起
@@ -362,7 +361,7 @@ REVOKE type_of_permission ON database_name.table_name FROM ‘username’@‘loc
     - 所有的索引包含主键列：索引按照主键引用行 如果不把主键维持很短 索引就增长很大
     - 优化的缓存：Innodb把数据和内存缓存到缓冲池 自动构建哈希索引
     - 未压缩的索引：索引没有使用前缀压缩，阻塞auto_increment:Innodb使用表级锁产生新的auto_increment
-    - 没有缓存的count():myisam 会把行数保存在表中 Innodb中的count()会全表或索引扫描
+    - 没有缓存的count():
     - 实现的是基于多版本的并发控制协议——MVCC (Multi-Version Concurrency Control) 加上间隙锁（next-key locking）策略在Repeatable Read (RR)隔离级别下不存在幻读。如果测试幻读，在MyISAM下实验。
     - 在聚集索引（主键索引）中，如果有唯一性约束，InnoDB会将默认的next-key lock降级为record lock。
     - Innodb在做任何操作时，会做一个日志操作，便于恢复。
@@ -613,11 +612,20 @@ select a.FirstName,a.LastName, b.City, b.State from Person as a inner join addre
 ## 方法
 
 - 字符串方法
-
   - left()
   - right()
   - substr()
   - instr()
+
+### count
+
+* myisam 数据行数都会存储在存储引擎 Innodb中的count()会全表或索引扫描
+* SELECT COUNT(country)统计某个列的数据的数量：如果有NULL值，在返回的结果中会被过滤掉
+* SELECT COUNT(*)的处理是有点不同的，它会返回所有数据的数量，但是不会过滤其中的NULL值
+* explain select * from table explain // 用并不真正执行查询，而是查询优化器【估算】的行数，返回值新的行数
+* count(distinct …)会返回彼此不同但是非NULL的数据的行数。
+* 优化
+    - 
 
 ## 问题处理
 
