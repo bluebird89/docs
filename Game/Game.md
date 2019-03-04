@@ -58,7 +58,7 @@
 
 * 耐热服密码：GSC◆
 
-![全境地图](__/_static/zelda.jpg "Optional title")
+![全境地图](../_static/zelda.jpg "Optional title")
 
 ## Play station 4
 
