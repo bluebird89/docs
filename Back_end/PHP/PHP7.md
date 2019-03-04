@@ -19,7 +19,7 @@ PHP是以多进程模型设计的，这样的好处是请求之间互不干涉�
 
 ## 语法
 
--   标量类型：标量类型声明与返回类型声明
+-   变量标量类型声明：标量类型声明与返回类型声明
     -   int
     -   float
     -   bool
@@ -66,7 +66,7 @@ function returnIntValue(int $value): int
 }
 print(returnIntValue(5));
 
-$username = $_GET['username'] ?? $_POST['username'] ?? 'not passed';
+$username = $_GET['username'] ?? $_POST['username'] ?? 'not passed'; # null合并运算符
 
 print( 1 <=> 1);print("<br/>");
 print( 1 <=> 2);print("<br/>");
