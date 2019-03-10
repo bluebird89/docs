@@ -404,3 +404,4 @@ export HISTTIMEFORMAT
 * [frank-lam/2019_campus_apply](https://github.com/frank-lam/2019_campus_apply):🚀 Full Stack Developer Tutorial，后台技术栈/全栈开发/架构师之路，秋招/春招/校招/面试。 from zero to hero.
 * [basecamp/handbook](https://github.com/basecamp/handbook):Basecamp Employee Handbook https://basecamp.com/about
 * [WsmDyj/Interview](https://github.com/WsmDyj/Interview):Some interview experience
+* [CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes):😋 技术面试必备基础知识 https://cyc2018.github.io/CS-Notes
