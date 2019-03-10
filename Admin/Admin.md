@@ -71,6 +71,7 @@ npm run serve
 * [misterGF/CoPilot](https://github.com/misterGF/CoPilot):Responsive Bootstrap 3 Admin Template based on AdminLTE with vue.js https://copilot.misterGF.io
 * [coreui/coreui-free-bootstrap-admin-template](https://github.com/coreui/coreui-free-bootstrap-admin-template):CoreUI is free bootstrap admin template http://coreui.io
 * [EasyCorp/EasyAdminBundle](https://github.com/EasyCorp/EasyAdminBundle):The new (and simple) admin generator for Symfony applications.
+* [BlackrockDigital/startbootstrap-sb-admin-2](https://github.com/BlackrockDigital/startbootstrap-sb-admin-2):A free, open source, Bootstrap admin theme created by Start Bootstrap https://startbootstrap.com/themes/sb-admin-2/
 
 ## UI
 

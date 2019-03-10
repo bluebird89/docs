@@ -47,6 +47,10 @@ xpath('//div[contains(@id,"ma") and contains(@id,"in")]') # 选取id值包含ma�
 xpath('//div[contains(text(),"ma")]') # 选取节点文本包含ma的div节点
 ```
 
+## admin UI
+
+* [DormyMo/SpiderKeeper](https://github.com/DormyMo/SpiderKeeper)：admin ui for scrapy/open source scrapinghub http://sk.7mdm.com:5000/
+
 ## 工具
 
 * [scrapy/quotesbot](https://github.com/scrapy/quotesbot):This is a sample Scrapy project for educational purposes 

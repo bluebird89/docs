@@ -37,6 +37,7 @@ DPI 是一种将图像的面积和理论打印尺寸进行关联的文件属性�
 * [esimov/caire](https://github.com/esimov/caire):Content aware image resize library
 * [jantic/DeOldify](https://github.com/jantic/DeOldify):A Deep Learning based project for colorizing and restoring old images
 * [hackerb9/lsix](https://github.com/hackerb9/lsix):Like "ls", but for images. Shows thumbnails in terminal using sixel graphics. 
+* [nagadomi/waifu2x](https://github.com/nagadomi/waifu2x):Image Super-Resolution for Anime-Style Art
 
 ## 资源
 
