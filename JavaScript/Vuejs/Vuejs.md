@@ -142,6 +142,8 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 ## Editor
 
 * [heyscrumpy/tiptap](https://github.com/heyscrumpy/tiptap):A rich-text editor for Vue.js https://tiptap.scrumpy.io
+* [hinesboy/mavonEditor](https://github.com/hinesboy/mavonEditor):mavonEditor - A markdown editor based on Vue that supports a variety of personalized features https://md.zhystar.com/
+
 
 ## 框架
 

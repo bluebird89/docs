@@ -39,6 +39,7 @@ docker-compose up -d
     - 目前仅提供 2017 年春季课程：https://www.youtube.com/playlist?list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6
 * [facebookresearch/StarSpace](https://github.com/facebookresearch/StarSpace):Learning embeddings for classification, retrieval and ranking.
 * [jacobeisenstein/gt-nlp-class](https://github.com/jacobeisenstein/gt-nlp-class):Course materials for Georgia Tech CS 4650 and 7650, "Natural Language"
+* [yandexdataschool/nlp_course](https://github.com/yandexdataschool/nlp_course):YSDA course in Natural Language Processing
 
 ## 工具
 

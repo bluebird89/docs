@@ -189,6 +189,7 @@ Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，
 * [SecWiki/sec-chart](https://github.com/SecWiki/sec-chart):安全思维导图集合 https://www.sec-wiki.com
 * [phith0n/Mind-Map](https://github.com/phith0n/Mind-Map):各种安全相关思维导图整理收集
 * [trimstray/the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge):💫 A collection of awesome lists, manuals, blogs, hacks, one-liners, cli/web tools and more. Especially for System and Network Administrators, DevOps, Pentesters or Security Researchers.
+* [Micropoor/Micro8](https://github.com/Micropoor/Micro8):Gitbook https://micro8.gitbook.io/micro8/
 
 ## 案例
 
