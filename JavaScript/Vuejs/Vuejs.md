@@ -185,6 +185,7 @@ npm install -g @vue/cli
 * [bootstrap-vue/bootstrap-vue](https://github.com/bootstrap-vue/bootstrap-vue/):BootstrapVue provides one of the most comprehensive implementations of Bootstrap 4 components and grid system for Vue.js and with extensive and automated WAI-ARIA accessibility markup. https://bootstrap-vue.js.org
 * [Weex-ui](https://github.com/alibaba/weex-ui)
 * [Eagle.js](https://github.com/Zulko/eagle.js)
+* [jdf2e/nutui](https://github.com/jdf2e/nutui):京东风格的轻量级移动端Vue组件库 (A Vue.js 2.0 UI Toolkit for Mobile Web) https://nutui.jd.com
 
 ## 组件
 
