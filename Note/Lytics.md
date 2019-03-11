@@ -1033,6 +1033,7 @@ AH 因你今晚共我唱
 * Shape of You  Ed Sheeran
 * wildest dreams
 * 肥宅群侠传 彩虹合唱团
+* 坚强的理由
 
 ## 作词
 

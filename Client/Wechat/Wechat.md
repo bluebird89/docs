@@ -73,7 +73,7 @@ if ($tmpstr==$signature) {
 * [Chatie/wechaty](https://github.com/Chatie/wechaty):WeChat Bot SDK for Personal Account, Powered by TypeScript, Docker, and 💖 https://blog.chatie.io
 * 机器人
     - [youfou/wxpy](https://github.com/youfou/wxpy):微信机器人 / 可能是最优雅的微信个人号 API ✨✨ http://wxpy.readthedocs.io
-
+* [offu/WeRoBot](https://github.com/offu/WeRoBot):WeRoBot 是一个微信公众号开发框架 https://werobot.readthedocs.io/zh_CN/latest/
 ## 参考
 
 * [官方文档](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list)
