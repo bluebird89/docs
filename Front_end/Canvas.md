@@ -49,6 +49,7 @@ HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘�
 
 * [fabricjs/fabric.js](https://github.com/fabricjs/fabric.js):Javascript Canvas Library, SVG-to-Canvas (& canvas-to-SVG) Parser http://fabricjs.com
 * [Mikhus/canvas-gauges](https://github.com/Mikhus/canvas-gauges):HTML5 Canvas Gauge. Tiny implementation of highly configurable gauge using pure JavaScript and HTML5 canvas. No dependencies. Suitable for IoT devices because of minimum code base. http://canvas-gauges.com/
+* [paperjs/paper.js](https://github.com/paperjs/paper.js):The Swiss Army Knife of Vector Graphics Scripting – Scriptographer ported to JavaScript and the browser, using HTML5 Canvas. Created by @lehni & @puckey http://paperjs.org
 
 ## 项目
 
