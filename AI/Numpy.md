@@ -2,6 +2,10 @@
 
 The fundamental package for scientific computing with Python. https://www.numpy.org/
 
+## 练习
+
+* [rougier/numpy-100](https://github.com/rougier/numpy-100):100 numpy exercises (100% complete)
+
 ## 工具
 
 * [mars-project/mars](https://github.com/mars-project/mars):Mars is a tensor-based unified framework for large-scale data computation. https://mars-project.readthedocs.io
