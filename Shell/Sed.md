@@ -82,7 +82,7 @@ sed ‘s/\x0D$//’ # ssed、gsed 3.02.80，及更高版本
 
 # Unix环境：转换Unix的新行符（LF）为DOS格式。
 sed “s/$/`echo -e \\\r`/” # 在ksh下所使用的命令
-sed ‘s/$'”/`echo \\\r`/” # 在bash下所使用的命令
+sed "s/$'"/`echo \\\r`/” # 在bash下所使用的命令
 sed “s/$/`echo \\\r`/” # 在zsh下所使用的命令
 sed ‘s/$/\r/’ # gsed 3.02.80 及更高版本
 
@@ -369,8 +369,6 @@ gsed ‘/./{H;d};x;y/\n/\v/’ file | sort | sed ‘1s/\v//;y/\v/\n/’
 echo @echo off >zipup.bat
 dir /b *.txt | sed “s/^\(.*\)\.TXT/pkzip -mo \1 \1.TXT/” >>zipup.bat
 
- 
-
 使用SED：Sed接受一个或多个编辑命令，并且每读入一行后就依次应用这些命令。
 当读入第一行输入后，sed对其应用所有的命令，然后将结果输出。接着再读入第二
 行输入，对其应用所有的命令……并重复这个过程。上一个例子中sed由标准输入设
@@ -446,3 +444,52 @@ sed -n ’51q;45,50p’ filename # 一样，但快得多
 
 * [p-gen/smenu](https://github.com/p-gen/smenu):Terminal utility that allows you to use words coming from the standard input to create a nice selection window just below the cursor. Once done, your selection will be sent to standard output. More in the Wiki
 
+
+  或--expression=<script> 以选项中指定的script来处理输入的文本文件。
+  -f<script文件>或--file=<script文件> 以选项中指定的script文件来处理输入的文本文件。
+  -n或--quiet或--silent 仅显示script处理后的结果。
+  sed 可以直接修改文件的内容，不必使用管道命令或数据流重导向！ 不过，由於这个动作会直接修改到原始的文件，所以请你千万不要随便拿系统配置来测试！ 添加一行
+
+sed -i &#39;$aHow are you today&#39; log.txt
+
+  P：打印模式空间开端至\n 内容，并追加到默认输出之前
+  h：把模式空间中的内容覆盖至保持空间中；m &gt; b
+  H：把模式空间中的内容追加至保持空间中; m&gt;&gt;b
+  g：从保持空间取出数据覆盖至模式空间; b&gt;m
+  G：从保持空间取出内容追加至模式空间; b&gt;&gt;m
+  x：把模式空间中的内容与保持空间中的内容进行互换; m &lt;-&gt;b
+  n：读取匹配到的行的下一行覆盖至模式空间; n&gt;m
+  N：读取匹配到的行的下一行追加至模式空间; n&gt;&gt;m
+  d：删除模式空间中的行; delete m
+  D：如果模式空间包含换行符，则删除直到第一个换行符的模式空间中的文本，并不会读取新的 输入行，而使用合成的模式空间重新启动循环。如果模式空间不包含换行符，则会像发出d 命令那样启动正常的新循环
+
+  <p>看着有点有，这里写几个用法示例：</p>
+  sed ‘2p’ /etc/passwd
+  sed –n ‘2p’ /etc/passwd
+  sed –n ‘1,4p’ /etc/passwd
+  sed –n ‘/root/p’ /etc/passwd
+  sed –n ‘2,/root/p’ /etc/passwd
+  sed -n ‘/^$/=’ file
+  sed –n –e ‘/^$/p’ –e ‘/^$/=’ file
+  sed ‘/root/a\superman’ /etc/passwd
+  sed ‘/root/i\superman’ /etc/passwd
+  sed ‘/root/c\superman’ /etc/passwd
+  sed ‘/^$/d’ file
+  sed ‘1,10d’ file
+  nl /etc/passwd | sed ‘2,5d’
+  nl /etc/passwd | sed ‘2a tea’
+  sed &#39;s/test/mytest/g&#39; example
+  sed –n ‘s/root/&amp;superman/p’ /etc/passwd
+  sed –n ‘s/root/superman&amp;/p’ /etc/passwd
+  sed -e ‘s/dog/cat/’ -e ‘s/hi/lo/’ pets
+  sed –i.bak ‘s/dog/cat/g’ pets
+  sed -n &#39;n;p&#39; FILE
+  sed &#39;1!G;h;$!d&#39; FILE
+  sed &#39;N;D‘ FILE
+  sed &#39;$!N;$!D&#39; FILE
+  sed &#39;$!d&#39; FILE
+  sed ‘G’ FILE
+  sed ‘g’ FILE
+  sed ‘/^$/d;G’ FILE
+  sed &#39;n;d&#39; FILE
+  sed -n &#39;1!G;h;$p&#39; FILE
