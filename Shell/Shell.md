@@ -1,8 +1,6 @@
 # Shell
 
-Shell是Linux/Unix的一个外壳。它负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序。
-
-Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。命令解析器
+Shell是Linux/Unix的一个外壳。隐藏了操作系统底层的细节,作为命令解析器负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序。
 
 ```sh
 # 命令失败，往往需要脚本停止执行，防止错误累积
@@ -11,80 +9,6 @@ command || { echo "command failed"; exit 1; }
 if ! command; then echo "command failed"; exit 1; fi
 command
 if [ "$?" -ne 0 ]; then echo "command failed"; exit 1; fi
-```
-
-## 端口占用
-
-```sh
-netstat -an | grep 3306
-netstat -tunlp |grep 端口号 # 查看指定的端口号的进程情况 -t 显示tcp -u udp -n:拒绝显示别名，能数字数字 -l 列出在listen 服务状态 -p 显示相关程序名
-lsof -i:80 # -i参数表示网络链接，:80指明端口号
-```
-
-## 查找
-
-```sh
-find / -name *.conf -type f -print | xargs file
-
-find / -name *.conf -type f -print | xargs tar cjf test.tar.gz
-
-ssh -p 22 -C -f -N -g -L 9200:192.168.1.19:9200 ihavecar@192.168.1.19
-
-netstat -anlp|grep 80|grep tcp|awk '{print $5}'|awk -F: '{print $1}'|sort|uniq -c|sort -nr|head -n20
-
-netstat -nat |awk ‘{print $6}’|sort|uniq -c|sort -rn
-
-ping api.jpush.cn | awk ‘{ print $0”    “ strftime(“%Y-%m-%d %H:%M:%S”,systime()) } ‘ >> /tmp/jiguang.log &
-
-wget ftp://ftp.is.co.za/mirror/ftp.rpmforge.net/redhat/el6/en/x86_64/dag/RPMS/multitail-5.2.9-1.el6.rf.x86_64.rpm
-yum -y localinstall multitail-5.2.9-1.el6.rf.x86_64.rpm
-multitail -e "Accepted" /var/log/secure -l "ping baidu.com"
-
-ps -aux | sort -rnk 3 | head -20
-
-ps -aux | sort -rnk 4 | head -20
-```
-
-## 磁盘管理
-
-```sh
-fdisk  -l # 所有硬盘的分区信息,包括没有挂上的分区和USB设备
-ls -l /dev/sda* # 查看第一块硬盘的分区信息
-df -a|-h|-T #-a或-all：显示全部的文件系统 -h或--human-readable：以可读性较高的方式来显示信息 -T或--print-type：显示文件系统的类型
-
-du [option] 目录名或文件名 # [option]主要参数  -a或-all：显示目录中个别文件的大小 -h或--human-readable：以K，M，G为单位显示，提高信息可读性 -S或--separate-dirs：省略指定目录下的子目录，只显示该目录的总和（注意：该命令是大写S） ncdu
-
-tin-summer
-curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git vmchale/tin-summer
-cargo install tin-summer
-
-sn f
-sn sort /home/sk/ -n5
-sn ar -t100M
-
-cargo install du-dust
-wget https://github.com/bootandy/dust/releases/download/v0.3.1/dust-v0.3.1-x86_64-unknown-linux-gnu.tar.gz
-tar -xvf dust-v0.3.1-x86_64-unknown-linux-gnu.tar.gz
-sudo mv dust /usr/local/bin/
-dust -p
-dust <dir1> <dir2>
-dust -s
-dust -n 10
-dust -d 3
-dust -h
-
-yay -S diskus
-wget "https://github.com/sharkdp/diskus/releases/download/v0.3.1/diskus_0.3.1_amd64.deb"
-sudo dpkg -i diskus_0.3.1_amd64.deb
-cargo install diskus
-
-du -sh dir
-diskus -h
-
-# duu
-wget https://github.com/jftuga/duu/releases/download/2.20/duu.py
-python3 duu.py
-python3 duu.py /home/sk/Downloads/
 ```
 
 ## 配置
@@ -148,10 +72,145 @@ alias cls='clear'   #DOS风格的清空
 alias h='history | tail'
 alias hg='history | grep'
 alias hl='history | less'
+alias nis="npm install --save "
+alias svim='sudo vim'
+alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
+alias install='sudo apt get install'
+alias update='sudo apt-get update && sudo apt-get upgrade'
+alias ..="cd .."
+alias ...="cd ..; cd .."
+alias www='python -m SimpleHTTPServer 8000'
+
 stty erase ^H        #清除退格 (这个很有必要)
 
 /*  /etc/profile 文件设置 */
 export PATH=$PATH:/opt/perl/site/bin:/opt/perl/bin
+```
+
+* alias参考
+    - https://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html
+    - https://www.digitalocean.com/community/questions/what-are-your-favorite-bash-aliases
+    - https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/
+    - https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/
+* 原生增强命令
+    - fasd 增强了 cd 命令 （https://github.com/clvv/fasd ）。
+    - bat 增强了 cat 命令 （https://github.com/sharkdp/bat ）。
+    - exa 增强了 ls 命令（https://github.com/ogham/exa ），如果你需要在很多目录上浏览各种文件 ，ranger 命令可以比 cd 和 cat 更有效率（https://github.com/ranger/ranger ），甚至可以在你的终端预览图片。
+    - fd 是一个比 find 更简单更快的命令（https://github.com/sharkdp/fd ），他还会自动地忽略掉一些你配置在 .gitignore 中的文件，以及 .git 下的文件。
+    - grep 是一个上古神器，然而，ack（https://beyondgrep.com/ ）、ag （https://github.com/ggreer/the_silver_searcher ）和 rg（https://github.com/BurntSushi/ripgrep ）是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到你配置在 .gitignore 中的规则。另外，我们会经常玩  command | grep “pattern” 这样的命令，fzf（https://github.com/junegunn/fzf ）会是一个很好用的命令，神器。
+    - rm 是一个危险的命令，尤其是各种 rm -rf …，所以，trash（https://github.com/andreafrancia/trash-cli/ ）是一个更好的删除命令。
+    - man 命令是好读文档的命令，但是man的文档有时候太长了，所以，你可以试式 tldr（https://github.com/tldr-pages/tldr ）命令，把文档上的一些示例整出来给你看。
+    - 如果你想要一个图示化的ping，你可以试试 prettyping （https://github.com/denilsonsa/prettyping ）。
+    - 如果你想搜索以前打过的命令，不要再用 Ctrl +R 了，你可以使用 fzf （https://github.com/junegunn/fzf ）你用过就知道有多强了。
+    - htop （Installation directions） 是 top 的一个加强版。
+    - ncdu （Installation directions） 比 du 好用多了用。另一个选择是 nnn（https://github.com/jarun/nnn ）。
+    - 如果你想把你的命令行操作建录制成一个 SVG 动图，那么你可以尝试使用 asciinema （https://asciinema.org/ ）和 svg-trem （https://github.com/marionebl/svg-term-cli ）。
+    - httpie(https://github.com/jakubroztocil/httpie) 是一个可以用来替代 curl 和 wget 的 http 客户端，httpie 支持 json 和语法高亮，可以使用简单的语法进行 http 访问: http -v github.com。
+    - tmux 在需要经常登录远程服务器工作的时候会很有用，可以保持远程登录的会话，还可以在一个窗口中查看多个 shell 的状态。
+    - Taskbook(https://github.com/klaussinani/taskbook) 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级。
+    - sshrc (sshrc：https://github.com/Russell91/sshrc ) 是个神器，在你登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置。
+    - 参考
+        + https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4
+        + https://dev.to/_darrenburns/tools-to-power-up-your-command-line-part-2-2737
+        + https://dev.to/_darrenburns/power-up-your-command-line-part-3-4o53
+        + https://darrenburns.net/posts/tools/
+        + https://hacker-tools.github.io/
+
+## 文件管理
+
+新建文件夹（mkdir）
+新建文件（touch）
+移动（mv）
+复制（cp）
+删除（rm）
+
+## 端口占用
+
+```sh
+netstat -an | grep 3306
+netstat -tunlp |grep 端口号 # 查看指定的端口号的进程情况 -t 显示tcp -u udp -n:拒绝显示别名，能数字数字 -l 列出在listen 服务状态 -p 显示相关程序名
+lsof -i:80 # -i参数表示网络链接，:80指明端口号
+```
+
+## 查找
+
+```sh
+find / -name *.conf -type f -print | xargs file
+
+find / -name *.conf -type f -print | xargs tar cjf test.tar.gz
+
+ssh -p 22 -C -f -N -g -L 9200:192.168.1.19:9200 ihavecar@192.168.1.19
+
+netstat -anlp|grep 80|grep tcp|awk '{print $5}'|awk -F: '{print $1}'|sort|uniq -c|sort -nr|head -n20
+
+netstat -nat |awk ‘{print $6}’|sort|uniq -c|sort -rn
+
+ping api.jpush.cn | awk ‘{ print $0”    “ strftime(“%Y-%m-%d %H:%M:%S”,systime()) } ‘ >> /tmp/jiguang.log &
+
+wget ftp://ftp.is.co.za/mirror/ftp.rpmforge.net/redhat/el6/en/x86_64/dag/RPMS/multitail-5.2.9-1.el6.rf.x86_64.rpm
+yum -y localinstall multitail-5.2.9-1.el6.rf.x86_64.rpm
+multitail -e "Accepted" /var/log/secure -l "ping baidu.com"
+
+ps -aux | sort -rnk 3 | head -20
+
+ps -aux | sort -rnk 4 | head -20
+
+netstat -nat | awk  '{print  $5}' | awk -F ':' '{print $1}' | sort | uniq -c | sort -rn | head -n 10 # 查看连接你服务器 top10 用户端的 IP 地址
+cat .bash_history | sort | uniq -c | sort -rn | head -n 10 (or cat .zhistory | sort | uniq -c | sort -rn | head -n 10 # 查看一下你最常用的10个命令
+```
+
+## 磁盘管理
+
+```sh
+fdisk  -l # 所有硬盘的分区信息,包括没有挂上的分区和USB设备
+ls -l /dev/sda* # 查看第一块硬盘的分区信息
+df -a|-h|-T #-a或-all：显示全部的文件系统 -h或--human-readable：以可读性较高的方式来显示信息 -T或--print-type：显示文件系统的类型
+
+du [option] 目录名或文件名 # [option]主要参数  -a或-all：显示目录中个别文件的大小 -h或--human-readable：以K，M，G为单位显示，提高信息可读性 -S或--separate-dirs：省略指定目录下的子目录，只显示该目录的总和（注意：该命令是大写S） ncdu
+
+tin-summer
+curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git vmchale/tin-summer
+cargo install tin-summer
+
+sn f
+sn sort /home/sk/ -n5
+sn ar -t100M
+
+cargo install du-dust
+wget https://github.com/bootandy/dust/releases/download/v0.3.1/dust-v0.3.1-x86_64-unknown-linux-gnu.tar.gz
+tar -xvf dust-v0.3.1-x86_64-unknown-linux-gnu.tar.gz
+sudo mv dust /usr/local/bin/
+dust -p
+dust <dir1> <dir2>
+dust -s
+dust -n 10
+dust -d 3
+dust -h
+
+yay -S diskus
+wget "https://github.com/sharkdp/diskus/releases/download/v0.3.1/diskus_0.3.1_amd64.deb"
+sudo dpkg -i diskus_0.3.1_amd64.deb
+cargo install diskus
+
+du -sh dir
+diskus -h
+
+# duu
+wget https://github.com/jftuga/duu/releases/download/2.20/duu.py
+python3 duu.py
+python3 duu.py /home/sk/Downloads/
+```
+
+## grep
+
+全局搜索正则表达式并打印出匹配的行
+
+```sh
+grep “string” filename
+grep “string” filenameKeyword*
+grep 'Ubuntu' *.txt
+grep “startingKeyword.*endingKeyword” filename
+grep -i “string” filename # 不会考虑搜索字符串是大写还是小写
 ```
 
 ### [zsh-users/zsh](https://github.com/zsh-users/zsh)
@@ -274,18 +333,6 @@ uninstall_oh_my_zsh
     - [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
 * 工具
     - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
-
-## grep
-
-全局搜索正则表达式并打印出匹配的行
-
-```sh
-grep “string” filename
-grep “string” filenameKeyword*
-grep 'Ubuntu' *.txt
-grep “startingKeyword.*endingKeyword” filename
-grep -i “string” filename # 不会考虑搜索字符串是大写还是小写
-```
 
 ### [fish-shell/fish-shell](https://github.com/fish-shell/fish-shell)
 
@@ -434,9 +481,66 @@ dmenu 在桌面顶部提供了一个菜单条，可以快速启动应用程序
 * Shift+PgUp:将终端显示向上滚动;
 * Shift+PgDn:将终端显示向下滚动;
 
-### 写脚本
+### 脚本
+
+shell 是可以与计算机进行高效交互的文本接口。shell 提供了一套交互式的编程语言（脚本），shell的种类很多，比如 sh、bash、zsh 等。shell 的生命力很强，在各种高级编程语言大行其道的今天，很多的任务依然离不开 shell。比如可以使用 shell 来执行一些编译任务，或者做一些批处理任务，初始化数据、打包程序等等。
+
 
 ```sh
+touch zsh-script.sh
+
+#!/bin/zsh
+echo Hello shell
+
+# 给脚本执行的权限
+chmod +x zsh-script.sh
+# 执行脚本
+./zsh-script.sh
+# 后台运行
+./zsh-script.sh &
+
+# 处理命令行参数的一个样例：
+while [ "$1" != "" ]; do
+    case $1 in
+        -s  )   shift
+    SERVER=$1 ;;
+        -d  )   shift
+    DATE=$1 ;;
+  --paramter|p ) shift
+    PARAMETER=$1;;
+        -h|help  )   usage # function call
+                exit ;;
+        * )     usage # All other parameters
+                exit 1
+    esac
+    shift
+done
+
+# 命令行菜单的一个样例：
+#!/bin/bash
+# Bash Menu Script Example
+
+PS3='Please enter your choice: '
+options=("Option 1" "Option 2" "Option 3" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Option 1")
+            echo "you chose choice 1"
+            ;;
+        "Option 2")
+            echo "you chose choice 2"
+            ;;
+        "Option 3")
+            echo "you chose choice $REPLY which is $opt"
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
+
 #!/bin/bash
 #
 
@@ -1262,17 +1366,23 @@ done
 
 ## terminal
 
-- putty
-- xshell6
-- [FinalShell](http://www.hostbuf.com/)
-- WinSSHTerm
-- KiTTY
-- ZOC Terminal
-- MobaXterm
-- Terminus
-- Console2
-- cmder
-- ConEmu
+* Mac
+    - Iterm2
+* Linux
+    - 下的原生命令行
+* Windows
+    - WSL:提供了一个由微软开发的Linux兼容的内核接口（不包含Linux内核代码），然后可以在其上运行GNU用户空间
+    + putty
+    + xshell6
+    + [FinalShell](http://www.hostbuf.com/)
+    + WinSSHTerm
+    + KiTTY
+    + ZOC Terminal
+    + MobaXterm
+    + Terminus
+    + Console2
+    + cmder
+    + ConEmu
 - [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
 * [msys2](http://www.msys2.org/)
 * powercmd
@@ -1394,3 +1504,22 @@ ccache gcc foo.c
 * [dylanaraps/pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):📖 A collection of pure bash alternatives to external processes.
 * [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)：A curated list of awesome command-line frameworks, toolkits, guides and gizmos. Inspired by awesome-php.
 * [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
+
+## 脚本参考
+
+* http://www.bashoneliners.com/
+* http://www.shell-fu.org/
+* http://www.commandlinefu.com/
+* http://www.shelldorado.com/scripts/
+* https://snippets.siftie.com/public/tag/bash/
+* https://bash.cyberciti.biz/
+* https://github.com/alexanderepstein/Bash-Snippets
+* https://github.com/miguelgfierro/scripts
+* https://github.com/epety/100-shell-script-examples
+* https://github.com/ruanyf/simple-bash-scripts
+* 框架:
+    * 写bash脚本的框架 https://github.com/Bash-it/bash-it
+* 和shell有关的索引资源：
+    - https://github.com/alebcay/awesome-shell
+    - https://github.com/awesome-lists/awesome-bash
+    - https://terminalsare.sexy/

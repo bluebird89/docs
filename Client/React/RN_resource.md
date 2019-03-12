@@ -263,3 +263,4 @@
 * [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.
 * [vhpoet/react-native-styling-cheat-sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet):Most of the React Native styling material in one page
 * [tachyons-css/tachyons](https://github.com/tachyons-css/tachyons/):Functional css for humans https://tachyons.io
+* [React Native精解与实践](link)

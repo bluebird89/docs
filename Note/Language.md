@@ -37,6 +37,13 @@
 * 掌握编译或解释的过程，及编译器/解释器性能，调试方法、工具
 * 配合算法，实现业务逻辑
 
+## 排名
+
+* go
+* Scala
+* Ruby
+* TypeScript
+
 ## 参考
 
 * programinglanguange

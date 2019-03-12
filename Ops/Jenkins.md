@@ -47,9 +47,11 @@ docker run -d -p 49001:8080 -v$PWD/jenkins:/var/jenkins_home -t jenkins/jenkins
 
 ## usage
 
-<https://www.centos.bz/2017/07/jenkins-ansible-docker-swarm/>
+* <https://www.centos.bz/2017/07/jenkins-ansible-docker-swarm/>
+- https://www.digitalocean.com/community/tutorials/how-to-set-up-continuous-integration-pipelines-in-jenkins-on-ubuntu-16-04：构建出错，docker权限不足
 
 ## 参考
 
-- https://www.digitalocean.com/community/tutorials/how-to-set-up-continuous-integration-pipelines-in-jenkins-on-ubuntu-16-04：构建出错，docker权限不足
 - [官网](https://jenkins.io/)
+- [插件](https://plugins.jenkins.io/)
+- [Jenkins文档](https://jenkins.io/doc/book/pipeline/)

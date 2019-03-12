@@ -10,7 +10,8 @@
     -   [Jira](https://www.atlassian.com/software/jira)：敏捷开发，处理项目中的多个步骤,用于规划和跟踪工作，并确定优先级，处理产品发布，产品交付后监控性能
     -   confluence
     -   sourcetree：git管理
-    -   [bamboo](https://www.atlassian.com/software/bamboo):the choice of professional teams for continuous integration, deployment, and delivery
+    -   [bamboo](https://www.atlassian.com/software/bamboo):the choice of professional teams for continuous integration, deployment, and delivery Atlassian的CI/CD服务器解决方案，很多特性和Jenkins类似。它们都是流行的DevOps工具，帮助用户自动化发布流水线，从build到部署。但是，Jenkins是开源的，Bamboo是收费的。
+        +   
 - [Jfrog](https://jfrog.com)
 - [jgraph/drawio](https://github.com/jgraph/drawio):Source to www.draw.io
 * [apereo/cas](https://github.com/apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
