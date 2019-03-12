@@ -29,12 +29,15 @@
 
 ## 线性代数
 
-* [线性代数的本质](https://www.bilibili.com/video/av6540378/)
 * [李宏毅(国语)线性代数课程](https://www.bilibili.com/video/av31780632/)
-* [可汗学院：线性代数](https://www.bilibili.com/video/av9504432)
-* [麻省理工公开课：线性代数](http://open.163.com/special/opencourse/daishu.html)
+* [可汗学院：线性代数](https://www.bilibili.com/video/av9504432): http://open.163.com/special/Khan/linearalgebra.html
 * [apachecn/math](https://github.com/apachecn/math):MIT-18.06-线性代数-完整笔记
 * [apachecn/fastai-num-linalg-v2-zh](https://github.com/apachecn/fastai-num-linalg-v2-zh):📖 [译] fast.ai 数值线性代数讲义 v2
+* [Linear Algebra 麻省理工公开课：线性代数](https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/):Introduction to Linear Algebra (3rd Ed.) by Gilbert Strang http://open.163.com/special/opencourse/daishu.html
+* [3Blue1Brown: Essence of linear algebra 线性代数的本质](https://www.bilibili.com/video/av5987715/)  https://www.bilibili.com/video/av6540378/
+* [Immersive Linear Algebra](http://immersivemath.com/ila/index.html)
+* [Matrix Algebra for Engineers](http://coursegraph.com/coursera-matrix-algebra-engineers)
+* [Mathematics for Machine Learning: Linear Algebra](http://coursegraph.com/coursera-linear-algebra-machine-learning)
 
 ## 数据科学
 

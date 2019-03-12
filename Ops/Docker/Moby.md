@@ -396,6 +396,7 @@ services:
 
 ## 参考
 
+* [官网](https://www.docker.com/)
 * [Docker](http://blog.csdn.net/erixhao/article/details/72762851)
 * [Docker 教程](http://www.runoob.com/docker/docker-tutorial.html)
 * [Docker for Mac](https://docs.docker.com/docker-for-mac/)
@@ -404,3 +405,4 @@ services:
 * [Docker — 从入门到实践](https://yeasy.gitbooks.io/docker_practice/)
 * [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects
 * [yeasy/docker_practice](https://github.com/yeasy/docker_practice):Learn and understand Docker technologies, with real DevOps practice! https://legacy.gitbook.com/book/yeasy/docker_practice/details
+* https://confluence.atlassian.com/bamboo/getting-started-with-docker-and-bamboo-687213473.html
