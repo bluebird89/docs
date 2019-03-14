@@ -255,6 +255,12 @@
 ## 图书
 
 * 百面机器学习
+* 李航老师的《统计学习方法》
+* 周志华老师的《机器学习》,又称之为西瓜书。基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等。
+* 《推荐系统实战》：项亮，很适合对于想了解推荐系统
+* 《概率论与数理统计》
+* 《Pattern Recognition and Machine Learning》
+* 《Reinforcement Learning: An Introduction》：强化学习入门
 
 ## 教程
 
@@ -270,7 +276,7 @@
   - Machine Learning Yearning
   - [fengdu78/Coursera-ML-AndrewNg-Notes](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes):吴恩达老师的机器学习课程个人笔记
 * [李宏毅Machine Learning ](https://www.bilibili.com/video/av15889450)
-* [李宏毅机器学习(2017)](https://www.bilibili.com/video/av10590361/)
+* [李宏毅机器学习(2017)](https://www.bilibili.com/video/av10590361/) https://blog.csdn.net/soulmeetliang/article/details/77461607
 * [机器学习中的数学基础](https://www.bilibili.com/video/av15673238/)
 * [afshinea/stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning):VIP cheatsheets for Stanford's CS 229 Machine Learning
 * [Doraemonzzz/ML-Foundation-and-ML-Techniques](https://github.com/Doraemonzzz/ML-Foundation-and-ML-Techniques):台大机器学习课程作业详解
@@ -278,6 +284,23 @@
 * [Doraemonzzz/Learning-from-data](https://github.com/Doraemonzzz/Learning-from-data):记录Learning from data一书中的习题解答 http://amlbook.com/
 * [Built on the AWS Cloud. Developed for Amazon developers and engineers.](https://aws.amazon.com/training/learning-paths/machine-learning/)
 * [吴恩达机器学习](https://study.163.com/course/courseMain.htm?courseId=1004570029)
+  - http://open.163.com/special/opencourse/machinelearning.html
+  - https://www.coursera.org/learn/machine-learning
+* 火光摇曳：腾讯技术大牛们的博客 http://www.flickering.cn/
+* 美团技术团队的博客：里面也有很多干货： https://tech.meituan.com/
+* 苏剑林的博客里面也全是干货 https://spaces.ac.cn/
+* Netflix：Netflix技术博客，很多干货。 https://medium.com/netflix-techblog
+* Towards Data Science：主要分享些概念、idea和代码。 https://towardsdatascience.com/
+
+## 比赛
+
+* 天池大数据： https://tianchi.aliyun.com/home/
+* datacastle： http://www.pkbigdata.com/
+* datafountain： https://www.datafountain.cn/
+* biendata： https://biendata.com/
+* kesci： https://www.kesci.com/
+* Jdata: https://jdata.jd.com/
+* kaggle： https://www.kaggle.com/
 
 ## 工具
 

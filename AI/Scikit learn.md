@@ -8,3 +8,4 @@ scikit-learn: machine learning in Python http://scikit-learn.org
 * [apachecn/hands_on_Ml_with_Sklearn_and_TF](https://github.com/apachecn/hands_on_Ml_with_Sklearn_and_TF):📖 [译] Sklearn 与 TensorFlow 机器学习实用指南 https://legacy.gitbook.com/book/wizardforcel/hands-on-ml-with-sklearn-and-tf/details
 * [scikit-learn 0.18 中文文档](http://cwiki.apachecn.org/display/sklearn)
 * [glemaitre/pyparis-2018-sklearn](https://github.com/glemaitre/pyparis-2018-sklearn):PyParis tutorial on machine learning using scikit-learn
+* scikit-multilearn：multi-label的算法库。 http://scikit.ml/
