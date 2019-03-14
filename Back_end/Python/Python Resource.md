@@ -1230,6 +1230,10 @@ Python 实现的算法和设计模式。
 
 * [gto76/python-cheatsheet](https://github.com/gto76/python-cheatsheet):Comprehensive Python Cheatsheet https://gto76.github.io/python-cheatsheet/
 
+## 面试
+
+* [kenwoodjw/python_interview_question](https://github.com/kenwoodjw/python_interview_question):关于python的面试题
+
 ## 知识点
 
 * Python核心编程
