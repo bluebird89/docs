@@ -90,6 +90,8 @@ git config --global alias.ls 'log --name-status --oneline --graph'
 git config --global rebase.autoStash true
 git config --global alias.st 'status --porcelain'
 
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+
 # 配置文件
 [user]
 email = liboming88@yeah.net
@@ -167,6 +169,10 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
  url = git@github.com:aaa/bbb.git
  url = kch@homeserver:ccc/ddd.git
 ```
+
+* https://github.com/momeni/gittify
+* https://github.com/GitAlias/gitalias
+* https://gist.github.com/mwhite/6887990
 
 ## 传输协议
 
@@ -369,6 +375,9 @@ git diff HEAD # 已缓存的与未缓存的所有改动 HEAD：最后一次提�
 git diff --stat # 显示摘要而非整个
 git diff [first-branch]...[second-branch] # 显示两次提交之间的差异
 git diff --shortstat "@{0 day ago}" # 显示今天你写了多少行代码
+git diff HEAD@{'2 months ago'}
+git diff HEAD@{yesterday}
+git diff HEAD@{'2010-01-01 12:00:00'}
 
 # Reset the index to match the most recent commit soft(commit)< mixed<(commit + add)< hard(commit+add + local working)
 git reset HEAD [file] # 撤销文件跟踪，重置暂存区的指定文件，与上一次commit保持一致，但工作区不变,
@@ -453,6 +462,7 @@ git log --name-status --oneline
 #  使用 git reset --hard commitID 把本地开发代码回滚到了一个之前的版本，而且还没有推到远端，怎么才能找回丢失的代码呢？
 #  你如果使用 git log 查看提交日志，并不能找回丢弃的那些 commitID。
 #  git reflog 却详细的记录了你每个操作的 commitID，可以轻易的让你复原当时的操作并且找回丢失的代码。
+#   git relog 在你将变化提交之前，可以帮助你回到任何修改之前，包括 git reset。但是 reflog 只是保存在本地，而且不是永久保存，有一个可以配置的过期时间。
 git reflog # 用来记录引用变化的一种机制,比如记录分支的变化或者是HEAD引用的变化，git会将变化记录到HEAD对应的reflog文件中，其路径为 .git/logs/HEAD， 分支的reflog文件都放在 .git/logs/refs 目录下的子目录中
 
 git whatchanged [file]  # 显示某个文件的版本历史，包括文件改名
@@ -462,7 +472,7 @@ git show [commit] # 显示某次提交的元数据和内容变化
 git show --name-only [commit] # 显示某次提交发生变化的文件
 git show [commit]:[filename] # 显示某次提交时，某个文件的内容
 
-git blame filename # 查看指定文件是什么人在什么时间修改过
+git blame filename # 可以给你文件的每行信息都进行注释，然后就可以看到关于该行修改的每一次 commit 的哈希标签、作者和提交日期。
 
 git stash # 将当前目录和index中的所有改动(但不包括未track的文件)临时存放在 stash 队列中,注意：未提交到版本库的文件会自动忽略，只要不运行 git clean -fd . 就不会丢失
 git stash save "stash name"
@@ -499,6 +509,7 @@ git branch -m old new  # Rename branch locally
 git branch -d [branch-name] # 删除已合并分支
 git branch -D branchName # 删除分支
 
+# 通过二分搜索的方式来帮助你定位到引入 bug 的 commit。
 git bisect start
 git bisect good
 git bisect bad # Find bug in commit history in a binary search tree style
@@ -587,7 +598,7 @@ git push --set-upstream origin new   # Push the new branch, set local branch to 
 git push origin -d qixiu/feaure # 删除远程分支
 git push origin :<remote_branch>  # 省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支
 git branch -dr [remote/branch] # 删除远程分支
-git push origin --delete dev # 删除远程分支\
+git push origin --delete dev # 删除远程分支
 ```
 
 deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
@@ -1482,6 +1493,10 @@ chown -R henry:henry .git/objects
 * [GitHub Helps](https://help.github.com/)
 * [k88hudson/git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
 * [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate! 
+* Progit2，最好的深入学习 Git 的教材，而且是开源的https://github.com/progit/progit2
+* Magit，Git 在 Emacs 上的打开方式：https://magit.vc/
+* Vim-fugitive，Git 在 Vim 上的打开方式：https://github.com/tpope/vim-fugitive
+* Git 相关的 shell 提示： https://github.com/magicmonty/bash-git-prompt
 
 ## 工具
 

@@ -637,10 +637,6 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 > Not an editor command: ^M
 :set fileformat=unix :w
 
-## 教程
-
-* [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)
-
 ## 配置
 
 * [amix/vimrc](https://github.com/amix/vimrc):The ultimate Vim configuration: vimrc
@@ -664,3 +660,11 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [coolwanglu/vim.js](https://github.com/coolwanglu/vim.js):JavaScript port of Vim http://coolwanglu.github.io/vim.js/emterpreter/vim.html
 * [junegunn/fzf](https://github.com/junegunn/fzf):🌸 A command-line fuzzy finder
 * [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar):vinegar.vim: Combine with netrw to create a delicious salad dressing https://www.vim.org/scripts/script.php?script_id=5671
+
+## 教程
+
+* [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)
+* Doist 创业公司 CEO amix 的 Vim 配置，被称之为最强 vimrc：https://github.com/amix
+* junegunn 是韩国的一个大牛，擅长写 Vim 插件，他的 Vim 插件看起来总是令人赏心悦目：https://github.com/junegunn/vim-plug
+* SpaceVim，一个开箱即用的 Vim 配置，对新手很友好，和 Spacemacs 一样，有着很完善的文档：https://github.com/SpaceVim/SpaceVim
+* reddit 的 Vim 频道，有很多最前沿的 Vim 技巧:https://www.reddit.com/r/vim/
