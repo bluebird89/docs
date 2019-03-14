@@ -56,3 +56,4 @@ docker-compose up -d
 * [facebookresearch/pytext](https://github.com/facebookresearch/pytext):A natural language modeling framework based on PyTorch https://fb.me/pytextdocs
 * [salesforce/decaNLP](https://github.com/salesforce/decaNLP):The Natural Language Decathlon: A Multitask Challenge for NLP 
 * [Separius/awesome-sentence-embedding](https://github.com/Separius/awesome-sentence-embedding):A curated list of pretrained sentence(and word) embedding models
+* [crownpku/Awesome-Chinese-NLP](https://github.com/crownpku/Awesome-Chinese-NLP):A curated list of resources for Chinese NLP 中文自然语言处理相关资料

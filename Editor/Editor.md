@@ -1,5 +1,9 @@
 # Editor
 
+* 使用高效编辑器的终极目标是抛弃鼠标，让手编辑的速度可以跟的上大脑思考的速度。
+
+## 列表
+
 * [umpox/TinyEditor](https://github.com/umpox/TinyEditor):A functional HTML/CSS/JS editor in less than 400 bytes
 * [zyedidia/micro](https://github.com/zyedidia/micro):A modern and intuitive terminal-based text editor https://micro-editor.github.io
 * [Ghost 2.0](https://blog.ghost.org/2-0/):A powerful new editor, multi-language support, custom homepages, dynamic routes, custom structures and much more
