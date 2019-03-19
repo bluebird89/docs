@@ -88,6 +88,7 @@ curl localhost:9200
 * [](http://www.cnblogs.com/raphael5200/p/5335155.html)
 * [elastic/kibana](https://github.com/elastic/kibana):📊 Kibana analytics and search dashboard for Elasticsearch https://www.elastic.co/products/kibana
 * [siddontang/go-mysql-elasticsearch](https://github.com/siddontang/go-mysql-elasticsearch):Sync MySQL data into elasticsearch
+* [Elasticsearch的开源分发包](https://opendistro.github.io/for-elasticsearch/)
 
 ## 工具
 

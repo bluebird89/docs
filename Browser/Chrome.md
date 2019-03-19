@@ -4,36 +4,43 @@ The official GitHub mirror of the Chromium source https://chromium.googlesource.
 
 ## 插件
 
-* Tampermonkey
-* ABP
-* crxMouse Chrome Gestures:用鼠标操作Chrome
-* Momentum ：一款清新的新标签页插件，具有待办、天气、搜索功能，最最重要的是，插件的大背景，非常具有创意和艺术气息
-* Infinity New Tab：基于Chrome的云应用服务
-* 网页截图:注释&批注：捕获整个页面或任何部分
-* Vue React AngularJS Devtools
-* Postman：接口调试
-* OneTab：所有标签页转换成一个列表
-* Print Friendly & PDF：用户自定义打印内容
-* 眼不见心不烦：屏蔽微博
-* Allow-Control-Allow-Origin: *
-* [Octotree](https://github.com/ovity/octotree)：GitHub code tree on steroids  github目录工具 Code tree for GitHub
 * AdBlock
+* Allow-Control-Allow-Origin: *
 * Awesome Screenshot: Screen Video Recorder
 * Axure RP Extension for Chrome
+* ABP
+* Chrome Cleaner Pro:为 Chrome 加速
+* chrono:让Chrome下载资源更容易
+* Secure Shell App:Chrome中开启ssh一种什么体验
+* Click&Clean:清除历史记录
+* crxMouse Chrome Gestures:用鼠标操作Chrome
+* Enhanced Github:下载Github单个文件
+* Firebug Lite 程序调试工具
+* [gongjunhao/seckill](https://github.com/gongjunhao/seckill):Chrome浏览器 抢购、秒杀插件，秒杀助手，定时自动点击
+* Infinity New Tab：基于Chrome的云应用服务
 * JSONView
+* [markdown-here](https://github.com/adam-p/markdown-here) Markdown一键转换到"富文本格式"
+* Marmoset代码特效图
+* Momentum ：一款清新的新标签页插件，具有待办、天气、搜索功能，最最重要的是，插件的大背景，非常具有创意和艺术气息
+* OneTab：所有标签页转换成一个列表
+* [Octotree](https://github.com/ovity/octotree)：GitHub code tree on steroids  github目录工具 Code tree for GitHub
+* OurStickys:Chrome特色网页便签纸
+* Print Friendly & PDF：用户自定义打印内容
+* Postman：接口调试
+* Octotree:Code tree for GitHub
+* SimilarSites:一键查找姊妹网站
+* speedtest:网络测速插件
+* [deanoemcke/thegreatsuspender](https://github.com/deanoemcke/thegreatsuspender):A chrome extension for suspending all tabs to free up memory
+* Tampermonkey
+* 批量打开多个链接 LinkClump
 * XML Tree
 * User-Agent Switcher for Chrome
-* Momentum
-* Octotree:Code tree for GitHub
-* 网站分析工具 Wappalyzer
-* 代码特效图 Marmoset
-* 批量打开多个链接 LinkClump
-* 清除历史记录 Click&Clean
-* 程序调试工具 Firebug Lite
-* [deanoemcke/thegreatsuspender](https://github.com/deanoemcke/thegreatsuspender):A chrome extension for suspending all tabs to free up memory
+* Video Speed Controller:刷课（刷剧）神器！给网页视频加个速
 * [philc/vimium](The hacker's browser.)The hacker's browser.
-* User-Agent Switcher for Chrome
-* [gongjunhao/seckill](https://github.com/gongjunhao/seckill):Chrome浏览器 抢购、秒杀插件，秒杀助手，定时自动点击
+* Vue React AngularJS Devtools
+* Wappalyzer:网站分析工具
+* 眼不见心不烦：屏蔽微博
+* 网页截图:注释&批注：捕获整个页面或任何部分
 
 ```
 Navigating the current page:
