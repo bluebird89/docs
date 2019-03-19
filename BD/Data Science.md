@@ -37,6 +37,19 @@
 
 SAS网站的Eight levels of analytics
 
+## 图书
+
+* 《深入浅出数据分析》
+* 《深入浅出统计学》
+* 《R语言实战》
+* 《赤裸裸的统计学》
+* 《利用Python进行数据分析》
+* 《精益数据分析》
+* 《The Wall Street Journal Guide to Information Graphics》
+* 《ggplot2：数据分析与图形艺术》
+* 《数据科学实战》
+* 《决战大数据》
+
 ## 教程
 
 * [数据可视化入门教程](https://www.yuque.com/mo-college/beginner-tutorial)

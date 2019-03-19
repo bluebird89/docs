@@ -321,6 +321,8 @@ substr()
 htmlentities(string)
 addslashes(str)
 html_entity_decode(string)
+
+print # 一个语法结构(language constructs), 他并不是一个函数, 参数的list并不要求有括号
 ```
 
 #### 复合类型
