@@ -39,6 +39,7 @@ DPI 是一种将图像的面积和理论打印尺寸进行关联的文件属性�
 * [hackerb9/lsix](https://github.com/hackerb9/lsix):Like "ls", but for images. Shows thumbnails in terminal using sixel graphics. 
 * [nagadomi/waifu2x](https://github.com/nagadomi/waifu2x):Image Super-Resolution for Anime-Style Art
 * [remove](http://remove.bg):Remove Image Background
+* [Find The Best Free Stock Photos For Your Project](https://www.mailomix.com/products/stock-photo-search/)
 
 ## 资源
 
@@ -49,3 +50,4 @@ DPI 是一种将图像的面积和理论打印尺寸进行关联的文件属性�
 *   [500px](https://500px.com/popular)
 *   [Pixelmator](http://www.pixelmator.com):图像处理软件
 *   [GIPHY](https://giphy.com/):寻找动图好去处。
+*   [Beautiful Royalty-Free Photos Sorted By AI](https://www.pickpik.com)
