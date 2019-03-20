@@ -129,7 +129,7 @@ incrby counter 10
 DECR and DECRBY
 ```
 
-一般做一些复杂的计数功能的缓存。
+一般做一些复杂的计数功能的缓存。计数器
 
 ### Hash
 
@@ -213,6 +213,8 @@ zrange
 zrem
 zcard
 ```
+
+#### 场景
 
 当你需要一个有序的并且不重复的集合列表，那么可以选择sorted set数据结构，比如twitter 的public timeline可以以发表时间作为score来存储，这样获取时就是自动按时间排好序的。
 另外还可以用Sorted Sets来做带权重的队列，比如普通消息的score为1，重要消息的score为2，然后工作线程可以选择按score的倒序来获取工作任务。让重要的任务优先执行。
@@ -345,6 +347,18 @@ maxmemory-policy volatile-lru
     - 对这个Key操作不要求顺序：这种情况下，准备一个分布式锁，大家去抢锁，抢到锁就做Set操作即可
     - 对这个Key操作要求顺序：数据写入数据库的时候，需要保存一个时间戳
 
+## 锁
+
+* 悲观锁(Pessimistic Lock)：每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁。
+    - 场景：如果项目中使用了缓存且对缓存设置了超时时间。
+    - 当并发量比较大的时候，如果没有锁机制，那么缓存过期的瞬间，大量并发请求会穿透缓存直接查询数据库，造成雪崩效应。
+
+* 乐观锁(Optimistic Lock), 每次去拿数据的时候都认为别人不会修改，所以不会上锁。
+    - watch命令会监视给定的key，当exec时候如果监视的key从调用watch后发生过变化，则整个事务会失败。
+    - 也可以调用watch多次监视多个key。这样就可以对指定的key加乐观锁了。
+    - 注意watch的key是对整个连接有效的，事务也一样。
+    - 如果连接断开，监视和事务都会被自动清除。当然了exec，discard，unwatch命令都会清除连接中的所有监视。
+
 ## pipeline vs multi
 
 * pipeline 只是把多个redis指令一起发出去，redis并没有保证这些指定的执行是原子的；
@@ -357,11 +371,11 @@ maxmemory-policy volatile-lru
 * [sripathikrishnan/redis-rdb-tools](https://github.com/sripathikrishnan/redis-rdb-tools):Parse Redis dump.rdb files, Analyze Memory, and Export Data to JSON
 * [twitter/twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
 * [CodisLabs/codis](https://github.com/CodisLabs/codis):Proxy based Redis cluster solution supporting pipeline and scaling dynamically
+* [erikdubbelboer/phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. http://dubbelboer.com/phpRedisAdmin/
+* [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis
 
 ## 参考
 
-* [erikdubbelboer/phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. http://dubbelboer.com/phpRedisAdmin/
-* [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis
 * [redis 数据类型详解 以及 redis适用场景场合](http://www.cnblogs.com/mrhgw/p/6278619.html)
 * [使用Redis实现分布式锁及其优化](https://juejin.im/entry/5a0280d551882546d71ec42e)
 * [Redis快速入门及应用](https://juejin.im/entry/5a003862f265da430406042c)
