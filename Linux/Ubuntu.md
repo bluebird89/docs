@@ -161,6 +161,7 @@ dpkg --get-selections | grep hold
 --install-suggests # 同时安装APT给出的建议安装的软件包
 
 sudo aptitude install <packagename>
+sudo apt-get install apt-transport-https
 
 sudo add-apt-repository --remove ppa:finalterm/daily # remove
 
