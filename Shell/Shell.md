@@ -1372,7 +1372,7 @@ done
     - 下的原生命令行
 * Windows
     - WSL:提供了一个由微软开发的Linux兼容的内核接口（不包含Linux内核代码），然后可以在其上运行GNU用户空间
-    + putty
+    + [putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
     + xshell6
     + [FinalShell](http://www.hostbuf.com/)
     + WinSSHTerm
