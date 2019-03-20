@@ -903,6 +903,37 @@ ORDER BY
     WHEN nickname LIKE '%阳光' THEN 3
     ELSE 2
   END
+
+select date_format(create_time, '%Y-%m-%d') as day from table_name # timestamp 日期类型
+select from_unixtime(create_time, '%Y-%m-%d') as day from table_name # int 时间戳类型
+
+# 返回多个总数
+select count(*) all,
+    count(case when status = 1 then status end) status_1_num,
+    count(case when status = 2 then status end) status_2_num
+    from table_name;
+
+# Update Join / Delete Join
+update table_name_1
+    inner join table_name_2 on table_name_1.id = table_name_2.uid
+    inner join table_name_3 on table_name_3.id = table_name_1.tid
+    set *** = ***  where ***;
+
+update table_name set content = REPLACE(content, 'aaa', 'bbb')  where (content like '%aaa%')
+
+SELECT * FROM `表名` WHERE LOCATE('关键字', 字段名) # 表中某字段包含某字符串的数据
+
+# 表中多余的重复记录
+# 单个字段
+select * from 表名 where 字段名 in  (select 字段名 from 表名 group by 字段名 having count(字段名) > 1 )
+# 多个字段
+select * from 表名 别名 where (别名.字段1,别名.字段2) in  (select 字段1,字段2 from 表名 group by 字段1,字段2 having count(*) > 1 )
+
+# 删除表中多余的重复记录(留id最小)
+# 单个字段
+delete from 表名 where 字段名 in  (select 字段名 from 表名 group by 字段名 having count(字段名) > 1)   and 主键ID not in  (select min(主键ID) from 表名 group by 字段名 having count(字段名 )>1)
+#多个字段
+delete from 表名 别名 where (别名.字段1,别名.字段2) in  (select 字段1,字段2 from 表名 group by 字段1,字段2 having count(*) > 1) and 主键ID not in (select min(主键ID) from 表名 group by 字段1,字段2 having count(*)>1)
 ```
 
 ## 事物
