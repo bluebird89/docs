@@ -30,8 +30,52 @@
     - 服务发现
     - 服务路由
 
-### 登录
+## 登录
 
+## 模块
+
+* 模板(Bootstrap+Js)
+    - 页面布局
+        + 头部
+        + 尾部
+        + 侧边栏
+    - 页面插件
+        + 日历：Datetimepicker
+        + 弹窗：bootstrap 的 Modal
+        + 分页：拖拽 Draggable 排序 Sortable
+        + 图表：Echarts
+    - 适配
+        + PC
+        + M
+        + Pad
+* 常用逻辑操作
+    - 登录、登出
+    - 增、删、改
+    - 查询 + 批量操作
+    - 导入、导出
+        + Excel、csv
+    - 上传文件
+        + 图片
+        + 附件
+    - 权限控制
+    - 操作日志
+* 公共代码
+    - 异常处理
+        + Ajax Json
+        + 错误page
+    - 表单验证
+        + 数据不合法提示：BootstrapValidator
+        + 富文本：Summernote
+    - 安全过滤
+        + xss过滤
+        + sql攻击
+    - 参数加密
+        + hashids
+
+## 图标
+
+* [FontAwesome](http://fontawesome.io/)
+* [矢量图标库](http://www.iconfont.cn/)
 
 ## 扩展
 
