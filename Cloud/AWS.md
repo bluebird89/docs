@@ -2,7 +2,8 @@
 
 ## lambda
 
-* [中国官网](https://amazonaws-china.com/cn/)
+通过 AWS Lambda，无需预置或管理服务器即可运行代码。您只需按使用的计算时间付费 – 代码未运行时不产生费用。
+借助 Lambda，您几乎可以为任何类型的应用程序或后端服务运行代码，而且完全无需管理。只需上传您的代码，Lambda 会处理运行和扩展高可用性代码所需的一切工作。您可以将您的代码设置为自动从其他 AWS 产品触发，或者直接从任何 Web 或移动应用程序调用。
 
 ## 新闻
 
@@ -22,3 +23,4 @@
 ## 参考
 
 * [open-guides/og-aws](https://github.com/open-guides/og-aws):📙 Amazon Web Services — a practical guide
+* [中国官网](https://amazonaws-china.com/cn/)
