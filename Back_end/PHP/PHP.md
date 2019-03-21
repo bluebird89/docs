@@ -728,10 +728,29 @@ if(isset($_POST['sub']))
 <input type="submit" name="add" value="ADDITION"/>
 <input type="submit" name="sub" value="SUBTRACTION"/>
 </form>
-```
 
-```php
 string http_build_query ( mixed $query_data [, string $numeric_prefix [, string $arg_separator [, int $enc_type = PHP_QUERY_RFC1738 ]]] )
+
+header('Location:'.$url);  // 跳转页面 Location和":"之间无空格。
+header('content-type:text/html;charset=utf-8'); // 声明content-type
+header('HTTP/1.1 404 Not Found'); // 返回response状态码
+header('Refresh: 10; url=http://www.baidu.com/');  //10s后跳转。
+
+// 控制浏览器缓存
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . "GMT");
+header("Cache-Control: no-cache, must-revalidate");
+header("Pragma: no-cache");
+
+// 执行http验证
+header('HTTP/1.1 401 Unauthorized');
+header('WWW-Authenticate: Basic realm="Top Secret"');
+
+// 执行下载操作
+header('Content-Type: application/octet-stream'); //设置内容类型
+header('Content-Disposition: attachment; filename="example.zip"'); //设置MIME用户作为附件
+header('Content-Transfer-Encoding: binary'); //设置传输方式
+header('Content-Length: '.filesize('example.zip')); //设置内容长度
 ```
 
 ### php-mcrypt

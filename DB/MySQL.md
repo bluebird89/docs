@@ -415,6 +415,12 @@ show engines; # 显示当前数据库支持的存储引擎情况
     - 默认值：datetime or timestrap 默认值 CURRENT_TIMESTAMP
 * ip:通常使用varchar(15)保存IP地址.inet_aton() inet_ntoa()用于转换
 
+```sql
+`last_opt_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后操作时间', # 创建、修改记录的时候都刷新
+`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间', # 创建的时候把这个字段设置为当前时间，但以后修改时，不再刷新
+`update_time` TIMESTAMP DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间', # 创建的时候把这个字段设置为空或定值，以后修改时刷新
+```
+
 ### 字段属性
 
 * NOT NULL | NULL，该列在添加数据时，是否可以为空。
