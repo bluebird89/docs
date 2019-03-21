@@ -51,6 +51,10 @@ xpath('//div[contains(text(),"ma")]') # 选取节点文本包含ma的div节点
 
 * [DormyMo/SpiderKeeper](https://github.com/DormyMo/SpiderKeeper)：admin ui for scrapy/open source scrapinghub http://sk.7mdm.com:5000/
 
+## 资源
+
+* [CriseLYJ/awesome-python-login-model](https://github.com/CriseLYJ/awesome-python-login-model):😮python模拟登陆一些大型网站，还有一些简单的爬虫
+
 ## 工具
 
 * [scrapy/quotesbot](https://github.com/scrapy/quotesbot):This is a sample Scrapy project for educational purposes 
