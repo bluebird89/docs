@@ -1,7 +1,9 @@
 # Canvas
 
-HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘制各种图表、动画等。没有Canvas的年代，绘图只能借助Flash插件实现，页面不得不用JavaScript和Flash进行交互。有了Canvas，我们就再也不需要Flash了，直接使用JavaScript完成绘制。
-在使用Canvas前，用canvas.getContext来测试浏览器是否支持Canvas。
+* HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘制各种图表、动画等。
+* 没有Canvas的年代，绘图只能借助Flash插件实现，页面不得不用JavaScript和Flash进行交互。
+* 有了Canvas，我们就再也不需要Flash了，直接使用JavaScript完成绘制。
+* 在使用Canvas前，用canvas.getContext来测试浏览器是否支持Canvas。
 
 ```html
 <canvas id="test-canvas" width="200" heigth="100">

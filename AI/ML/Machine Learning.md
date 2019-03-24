@@ -291,6 +291,7 @@
 * 苏剑林的博客里面也全是干货 https://spaces.ac.cn/
 * Netflix：Netflix技术博客，很多干货。 https://medium.com/netflix-techblog
 * Towards Data Science：主要分享些概念、idea和代码。 https://towardsdatascience.com/
+* [fengdu78/machine_learning_beginner](https://github.com/fengdu78/machine_learning_beginner)
 
 ## 比赛
 

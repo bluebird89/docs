@@ -1,8 +1,7 @@
 # 前端工程师技能清单
 
-涉及交互，有产品的感念
-
-后端不提供页面，只是纯粹的通过 Web API 来提供数据和业务交互能力之后，Web 前端就成了纯粹的客户端角色，与 WinForm、移动终端应用属于同样的角色，可以把它们合在一起，统称为前端
+* 涉及交互，有产品的感念
+* 后端不提供页面，只是纯粹的通过 Web API 来提供数据和业务交互能力之后，Web 前端就成了纯粹的客户端角色，与 WinForm、移动终端应用属于同样的角色，可以把它们合在一起，统称为前端
 
 ## HTML
 
@@ -30,6 +29,14 @@
 * 背景：背景使我们能够定义用作容器背景的颜色或图片
 * 伪选择器器：伪选择器使我们能够选择出现在HTML中定义的元素周围的假定元素
 * 动画和过渡：动画和过渡使我们能够对元素设定动画效果或在元素的两个状态之间定义过渡
+* Flexbox & Grid
+* CSS变量
+* SASS预处理器
+    - 结构化CSS
+    - 变量
+    - 嵌套样式表
+    - Minxins & 函数
+    - 继承
 
 ### CSS框架
 
@@ -37,11 +44,20 @@
 
 - Bootstrap
 - Foundation
+- Materialize
+- Bulma
 
 ## JavaScript
 
 负责控制网站的交互操作。
 
+原生的JS语法
+
+* 数据类型, 函数, 条件判断, 循环, 凑总府
+    - DOM操作和事件
+    - JSON
+    - Fetch
+    - ES6+(箭头函数, Promise, async/await, 解构)
 * 基础语法
     - 数据类型：该语言支持的不同变量类型（例如字符串和整型）。
     - 有string,number,boolean,null,undefined,object等。其中，string,number和boolean是基础类型,null和undefined是JS中的两个特殊类型,object是引用类型
@@ -352,7 +368,7 @@
 * 设计模式
 * Javascript Tips
 
-## 部署流程
+## 基础的部署工作
 
 * 注册一个域名(NameCheap, Google Domains)
 * 管理共享主机或虚拟机(Inmotion, Hostgator, Bluehost)

@@ -63,3 +63,4 @@
 ## 参考
 
 - [零基础小白如何入门 Python 编程](http://blog.csdn.net/gitchat/article/details/77506814)
+- [selfteaching/the-craft-of-selfteaching](https://github.com/selfteaching/the-craft-of-selfteaching):One has no future if one couldn't teach themself.

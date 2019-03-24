@@ -2645,6 +2645,8 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
   - [zenorocha/clipboard.js](https://github.com/zenorocha/clipboard.js):✂️ Modern copy to clipboard. No Flash. Just 3kb gzipped 📋 https://clipboardjs.com
 * upload
   - [transloadit/uppy](https://github.com/transloadit/uppy):The next open source file uploader for web browsers 🐶 https://uppy.io
+* pdf
+  - [alvarcarto/url-to-pdf-api](https://github.com/alvarcarto/url-to-pdf-api):Web page PDF/PNG rendering done right. Self-hosted service for rendering receipts, invoices, or any content.
 
 ## 参考
 
