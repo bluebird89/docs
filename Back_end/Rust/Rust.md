@@ -40,6 +40,7 @@ rustc --version
     - [toshi-search/Toshi](https://github.com/toshi-search/Toshi):A full-text search engine in rust
 * [rust-lang-nursery/futures-rs](https://github.com/rust-lang-nursery/futures-rs):Zero-cost asynchronous programming in Rust http://rust-lang-nursery.github.io/futures-rs
 * [flosse/rust-web-framework-comparison](https://github.com/flosse/rust-web-framework-comparison):A comparison of some web frameworks and libs written in Rust
+* [pest-parser/pest](https://github.com/pest-parser/pest):The Elegant Parser https://pest.rs
 
 ## 参考
 

@@ -318,7 +318,7 @@ brew install pipenv
 * [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
 * [kennethreitz/requests-html](https://github.com/kennethreitz/requests-html):下载完网页之后,内置了html网页的解析
 * [request/request-promise](https://github.com/request/request-promise):The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.
-* httpstat
+* [httpstat](https://github.com/reorx/httpstat):curl statistics made simple
 
 ## 数据库
 
@@ -1135,6 +1135,8 @@ Python 实现的算法和设计模式。
 用于开发聊天机器人的库
 
 * Errbot：最简单和最流行的聊天机器人用来实现自动聊天工具。[官网](http://errbot.io/en/latest/)
+* [Lector](https://github.com/BasioMeusPuga/Lector):基于 Qt 的电子书阅读器
+* [Asciinema](https://github.com/asciinema/asciinema):Python 编写的终端会话录制器
 
 ## 服务
 

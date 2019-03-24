@@ -113,6 +113,16 @@ if('WebSocket' in window){
 
 * polling :是指从客户端（一般就是浏览器）不断主动的向服务器发 HTTP 请求查询是否有新数据 。
 
+## 安全
+
+* 在建立websocket连接的时候，一定要去检查 HTTP请求中的Origin,确保这个Origin在自己的白名单中。
+    - 这个Origin是在HTTP Header中， 是由浏览器自动加上的，不能通过编程的方式（如JavaScript）来改变它。
+    - 通过抓包的方式，来修改Origin，需要用Https，和wss来防范了。
+* 通过token
+    - 服务器端给每个websocket客户端分配一个随机的，唯一的token
+    - 浏览器在建立websocket连接的时候，把token也发过来。
+    - 服务器端验证token， 如果有效，才建立连接，并且废弃掉这个token。
+
 ## 工具
 
 * [uNetworking/uWebSockets](https://github.com/uNetworking/uWebSockets):Tiny WebSockets

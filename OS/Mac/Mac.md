@@ -121,7 +121,7 @@ smaba
     - bitlord
     - Folx
     - [CodeTips/BaiduNetdiskPlugin-macOS](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~ 
--   工具
+- 工具
     -   [CheatSheet] 长按⌘键可以显示当前程序快捷键
     -   [flux](https://justgetflux.com/)
     -   [moom](https://manytricks.com/moom/)
@@ -158,6 +158,7 @@ smaba
     -   [trello](https://trello.com/home): Project management tool
     -   [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
     -   Day One - Digital journal
+    -   Just Focus
 - 文档
     -   [dash](https://kapeli.com/dash):语言文档
     -   [apidoc](http://apidocjs.com/)
@@ -630,6 +631,16 @@ karabiner
 
 ```sh
 lsof -Pni4 | grep LISTEN | grep php
+```
+
+## 问题
+
+```
+dyld: Library not loaded: /usr/local/opt/icu4c/lib/libicui18n.62.dylib
+
+icu4c was upgraded to version 63 but my locally installed postgres image still referenced icu4c 62.1
+
+brew switch icu4c 62.1
 ```
 
 ## 配置

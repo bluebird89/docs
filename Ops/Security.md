@@ -182,6 +182,7 @@ Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，
 * [s0md3v/XSStrike](https://github.com/s0md3v/XSStrike):Most advanced XSS detection suite. https://somdev.me/XSStrike/
 * [netxfly/sec_check](https://github.com/netxfly/sec_check):Cross platform security detection tool
 * [用户信息监控](https://monitor.firefox.com/ )
+* [minimaxir/big-list-of-naughty-strings](https://github.com/minimaxir/big-list-of-naughty-strings):The Big List of Naughty Strings is a list of strings which have a high probability of causing issues when used as user-input data.
 
 ## 参考
 

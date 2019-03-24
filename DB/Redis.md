@@ -2,16 +2,7 @@
 
 Redis is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. http://redis.ioRedis是一个数据结构存储，可用作数据库、缓存和消息中间件。
 
-* 丰富的数据结构，支持二进制的String，List，Hash，Set及Ordered Set等数据类型操作。
-* 数据存储在内存中,能支持超过100K+每秒的读写频率。
-* 单线程，避免了线程切换和锁的性能消耗
-* 可持久化（RDB与AOF）,Redis 重启后数据不丢失
-* 分布式锁
-* 主从复制与高可用（Redis Sentinel）
-* 集群
-* 支持lua脚本
-
-## 为什么使用
+## 优点
 
 * 性能：在碰到需要执行耗时特别久、且结果不频繁变动的SQL时，就特别适合将运行结果放入缓存。这样，后面的请求就去缓存中读取，使得请求能够迅速响应。良好的用户体验
 * 并发：使用Redis做一个缓冲操作，让请求先访问到Redis，而不是直接访问数据库。
@@ -31,6 +22,14 @@ vm字段，只有打开了Redis的虚拟内存功能，此字段才会真正的�
 
 ## 特性
 
+* 丰富的数据结构，支持二进制的String，List，Hash，Set及Ordered Set等数据类型操作。
+* 数据存储在内存中,能支持超过100K+每秒的读写频率。提高了读写速度,实现网站高并发
+* 单线程，避免了线程切换和锁的性能消耗
+* 可持久化（RDB与AOF）,Redis 重启后数据不丢失
+* 分布式锁
+* 主从复制与高可用（Redis Sentinel）
+* 集群
+* 支持lua脚本
 * 管道：Redis管道是指客户端可以将多个命令一次性发送到服务器，然后由服务器一次性返回所有结果。管道技术在批量执行命令的时候可以大大减少网络传输的开销，提高性能。
 * 事务：Redis事务是一组命令的集合。一个事务中的命令要么都执行，要么都不执行。如果命令在运行期间出现错误，不会自动回滚。管道与事务的区别：管道主要是网络上的优化，客户端缓冲一组命令，一次性发送到服务器端执行，但是并不能保证命令是在同一个事务里面执行；而事务是原子性的，可以确保命令执行的时候不会有来自其他客户端的命令插入到命令序列中。
 * 分布式锁：分布式锁是控制分布式系统之间同步访问共享资源的一种方式。在分布式系统中，常常需要协调他们的动作，如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。
@@ -52,8 +51,6 @@ redis-server /usr/local/etc/redis.conf
 
 # ubuntu
 sudo apt-get install redis-server php-redis
-
-redis-cli -h localhost -p 6379 info # 功能统计
 ```
 
 ## 配置
@@ -106,6 +103,82 @@ Manager = new PooledRedisClientManager(redisMasterHosts, redisSlaveHosts, redisC
 slaveof 10.0.0.1 6379
 redis-cli -h localhost -p 6379 monitor // 从库执行该命令会一直ping主库
 ```
+
+## 客户端
+
+```sh
+# 客户端使用
+redis-cli -h localhost -p 6379
+info # 功能统计
+info memory|server|clients|Persistence|Stats|Replication|CPU|cluster|keyspace
+
+type key # 获取类型
+object encoding key # 查看编码
+object idletime key # 查看空转时间
+object refcount key # 查看引用次数
+```
+
+## 内存
+
+* info memeory
+    - used_memory：Redis分配器分配的内存总量（单位是字节），包括使用的虚拟内存（即swap）
+    - used_memory_rss：Redis进程占据操作系统的内存（单位是字节），与top及ps命令看到的值是一致的；除了分配器分配的内存之外，used_memory_rss还包括进程运行本身需要的内存、内存碎片等，但是不包括虚拟内存。
+    - 二者之所以有所不同，一方面是因为内存碎片和Redis进程运行需要占用内存，使得前者可能比后者小，另一方面虚拟内存的存在，使得前者可能比后者大。
+    - 内存碎片比率 mem_fragmentation_ratio:used_memory_rss / used_memory，衡量Redis内存碎片率的参数.一般大于1，且该值越大，内存碎片比例越大. <1，说明Redis使用了虚拟内存，由于虚拟内存的媒介是磁盘，比内存速度要慢很多，当这种情况出现时，应该及时排查，如果内存不足应该及时处理，如增加Redis节点、增加Redis服务器的内存、优化应用等
+        + 在1.03左右是比较健康的状态
+    - mem_allocator：Redis使用的内存分配器，在编译时指定；可以是 libc 、jemalloc或者tcmalloc，默认是jemalloc
+* 内存划分
+    - 数据：对外提供5种数据类型。在内部，每种类型可能有2种或更多的内部编码实现；在存储对象时，并不是直接将数据扔进内存，而是会对对象进行各种包装
+    - 进程本身运行需要：除了主进程外，Redis创建的子进程运行也会占用内存，如Redis执行AOF、RDB重写时创建的子进程。当然，这部分内存不属于Redis进程，也不会统计在used_memory和used_memory_rss中。
+    - 缓冲内存
+        + 客户端缓冲存储客户端连接的输入输出缓冲
+        + 复制积压缓冲用于部分复制功能
+        + AOF缓冲区用于在进行AOF重写时，保存最近的写入命令
+    - 内存碎片：在分配、回收物理内存过程中产生。与对数据进行的操作、数据的特点等都有关；此外，与使用的内存分配器也有关系，jemalloc便在控制内存碎片方面做的很好。
+        -  可以通过安全重启的方式减小内存碎片：因为重启之后，Redis重新从备份文件中读取数据，在内存中进行重排，为每个数据重新选择合适的内存单元，减小内存碎片。
+* 数据存储
+    - 概念
+        + dictEntry：Redis是Key-Value数据库，因此对每个键值对都会有一个dictEntry，里面存储了指向Key和Value的指针；next指向下一个dictEntry，与本Key-Value无关。
+        + Key：Key（”hello”）并不是直接以字符串存储，而是存储在SDS结构中。
+        + redisObject：Value(“world”)既不是直接以字符串存储，也不是像Key一样直接存储在SDS中，而是存储在redisObject中。实际上，不论Value是5种类型的哪一种，都是通过redisObject来存储的；而redisObject中的type字段指明了Value对象的类型，ptr字段则指向对象所在的地址。不过可以看出，字符串对象虽然经过了redisObject的包装，但仍然需要通过SDS存储。
+            * type字段表示对象的类型;目前包括REDIS_STRING(字符串)、REDIS_LIST (列表)、REDIS_HASH(哈希)、REDIS_SET(集合)、REDIS_ZSET(有序集合)
+            * encoding表示对象的内部编码:每种类型，都有至少两种内部编码，例如对于字符串，有int、embstr、raw三种编码。通过encoding属性，Redis可以根据不同的使用场景来为对象设置不同的编码，大大提高了Redis的灵活性和效率。
+                - 以对象为例，有压缩列表和双端链表两种编码方式；如果列表中的元素较少，倾向于使用压缩列表进行存储，因为压缩列表占用内存更少，而且比双端链表可以更快载入；当列表对象元素较多时，压缩列表就会转化为更适合存储大量元素的双端链表。
+            * lru记录的是对象最后一次被命令程序访问的时间，占据的比特数不同的版本有所不同。通过对比lru时间与当前时间，可以计算某个对象的空转时间(单位是秒),一个特殊之处在于它不改变对象的lru值. 还与Redis的内存回收有关系：如果Redis打开了maxmemory选项，且内存回收算法选择的是volatile-lru或allkeys—lru，那么当Redis内存占用超过maxmemory指定的值时，Redis会优先选择空转时间最长的对象进行释放。
+            * refcount记录的是该对象被引用的次数，类型为整型。refcount的作用，主要在于对象的引用计数和内存回收。当创建新对象时，refcount初始化为1；当有新程序使用该对象时，refcount加1；当对象不再被一个新程序使用时，refcount减1；当refcount变为0时，对象占用的内存会被释放。
+                - 被多次使用的对象(refcount>1)，称为共享对象。Redis为了节省内存，当有一些对象重复出现时，新的程序不会创建新的对象，而是仍然使用原来的对象。这个被重复使用的对象，就是共享对象。目前共享对象仅支持整数值的字符串对象
+                    + 只支持整数值的字符串对象。之所以如此，实际上是对内存和CPU（时间）的平衡：共享对象虽然会降低内存消耗，但是判断两个对象是否相等却需要消耗额外的时间。对于整数值，判断操作复杂度为O(1)；对于普通字符串，判断复杂度为O(n)；而对于哈希、列表、集合和有序集合，判断的复杂度为O(n^2)。
+                - 享对象只能是整数值的字符串对象，但是5种类型都可能使用共享对象。Redis服务器在初始化时，会创建10000个字符串对象，值分别是0~9999的整数值；当Redis需要使用值为0~9999的字符串对象时，可以直接使用这些共享对象。10000这个数字可以通过调整参数REDIS_SHARED_INTEGERS（4.0中是OBJ_SHARED_INTEGERS）的值进行改变。
+            * ptr指针指向具体的数据
+            * 一个redisObject对象的大小为16字节
+        + jemalloc：无论是DictEntry对象，还是redisObject、SDS对象，都需要内存分配器（如jemalloc）分配内存进行存储。以DictEntry对象为例，有3个指针组成，在64位机器下占24个字节，jemalloc会为它分配32字节大小的内存单元。
+            * jemalloc在64位系统中，将内存空间划分为小、大、巨大三个范围；每个范围内又划分了许多小的内存块单位；当Redis存储数据时，会选择大小最合适的内存块进行存储。
+        + SDS(Simple Dynamic String)
+            * Redis没有直接使用C字符串(即以空字符’\0’结尾的字符数组)作为默认的字符串表示，而是使用了SDS
+            * buf表示字节数组，用来存储字符串； buf数组的长度=free+len+1 buf数组的长度=free+len+1,长度为9
+            * len表示buf已使用的长度，
+            * free表示buf未使用的长度。
+
+
+```c
+// redisObject的定义
+typedef struct redisObject {
+　　unsigned type:4;
+　　unsigned encoding:4;
+　　unsigned lru:REDIS_LRU_BITS; /* lru time (relative to server.lruclock) */
+　　int refcount;
+　　void *ptr;
+} robj;
+
+// sds
+struct sdshdr {
+    int len;
+    int free;
+    char buf[];
+};
+```
+
+![Alt text](../_static/ "Optional title")
 
 ## 数据类型
 
@@ -364,6 +437,12 @@ maxmemory-policy volatile-lru
 * pipeline 只是把多个redis指令一起发出去，redis并没有保证这些指定的执行是原子的；
 * multi相当于一个redis的transaction的，保证整个操作的原子性，避免由于中途出错而导致最后产生的数据不一致。
 * pipeline方式执行效率要比其他方式高10倍左右的速度，启用multi写入要比没有开启慢一点。
+
+## 注意
+
+* 估算Redis内存使用量。目前为止，内存的使用成本仍然相对较高，使用内存不能无所顾忌；根据需求合理的评估Redis的内存使用量，选择合适的机器配置，可以在满足需求的情况下节约成本。
+* 优化内存占用。了解Redis内存模型可以选择更合适的数据类型和编码，更好的利用Redis内存。
+* 分析解决问题。当Redis出现阻塞、内存占用等问题时，尽快发现导致问题的原因，便于分析解决问题。
 
 ## 工具
 
