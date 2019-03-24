@@ -281,6 +281,19 @@ text/plain
     - 添加版本号
     - 以 MD5hash 值来区分
 
+### 安全
+
+* 限制获取cookie，用iframe的方式放置了一个淘宝网页到真实页面中，获取淘宝密码信息
+* 同源策略：除非两个网页是来自于统一‘源头’， 否则不允许一个网页的JavaScript访问另外一个网页的内容，像Cookie，DOM，LocalStorage统统禁止访问
+    - 协议(http/https) 相同
+    - 域名相同
+    - 端口相同
+    - 开个口子，对于使用<script src='//static.store.com/jquery.js'> 加载的JavaScript，我们认为它的源属于www.store.com， 而不属于static.store.com，这样就可以操作www.store.com的页面了
+    - 两个网页的一级域名是相同的，可以共享cookie, 不过cookie的domain一定要设置为那个一级域名才可以，例如：”document.cookie = 'test=true;path=/;domain=store.com'
+    - 对XMLHttpReqeust对象施加同源策略
+        - 代理模式：通过服务器端中转，例如你是来自book.com的， 现在想访问movie.com，那可以让那个book.com把请求转发给movie.com嘛！人类好像给这种方式起了个名字
+        - 服务器(domain)可以设置一个白名单，里边列出它允许哪些服务器(domain)的AJAX请求
+
 ### CORS
 
 ```php
@@ -299,6 +312,8 @@ if(in_array($origin, $allow_origin)){
 # 允许所有域名访问则只需在http://server.runoob.com/server.php文件头部添加如下代码：
 header('Access-Control-Allow-Origin:*');
 ```
+
+### CSRF
 
 ## HTTTPS
 

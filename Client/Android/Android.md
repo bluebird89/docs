@@ -88,6 +88,10 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 
 * [kesenhoo/android-training-course-in-chinese](https://github.com/kesenhoo/android-training-course-in-chinese)
 
+## 面试
+
+* [stormzhang/android-interview-questions-cn](https://github.com/stormzhang/android-interview-questions-cn):最全面的高质量 Android 面试指南。
+
 ## 扩展
 
 - [Tencent/tinker](https://github.com/Tencent/tinker)a hot-fix solution library for Android, it supports dex, library and resources update without reinstall apk.

@@ -777,6 +777,7 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 * [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 * [noble/bleno](https://github.com/noble/bleno):A Node.js module for implementing BLE (Bluetooth Low Energy) peripherals
+* [octalmage/robotjs](https://github.com/octalmage/robotjs):Node.js Desktop Automation. http://robotjs.io
 
 ##  reference
 
