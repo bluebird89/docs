@@ -28,6 +28,10 @@
 * Jeff Dean：谷歌搜索索引技术的幕后大脑，谷歌大规模分布式计算系统的设计师 如：站点爬行，索引与搜索，在线广告，MapReduce，BigTable以及Spanner(分布式数据库)。如：站点爬行，索引与搜索，在线广告，MapReduce，BigTable以及Spanner(分布式数据库)
 * John Carmack 第一人称射击游戏经典师祖《Doom》(毁灭战士)之父，id Software公司联合创始人，制作了很多脍炙人口的游戏，如：《德军司令部》（Wolfenstein 3D，又名《刺杀希特勒》）、《Doom》(毁灭战士)、《Quake》(雷神之锤)。
 *  Richard Stallman：Emacs文本编辑器，多种语言编译器GCC的创造者。GNU项目发起人，开发出很多核心工具，例如：Emacs，GCC,GDB和GU Make Free Software公司创始人。
+* Bill Joy
+    - 20岁出头，在加州大学柏克利分校读研究生，是 Unix 系统 BSD 版本的主要作者之一。因为找不到合适的编辑器，他用一个周末，在 ex 命令的基础上创造了 Vi 编辑器。Unix 系统的 TCP/IP 协议也是他实现的。
+    - 28岁时，他与其他人一起创建 Sun 系统公司，担任首席科学家，参与发明了 Java 语言。
+    - 2003年，49岁时，他从 Sun 公司离职，改为从事风险投资。但是，他不投互联网公司，只投绿色能源，尤其是新型电池。
 
 ## 人文
 

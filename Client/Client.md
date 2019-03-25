@@ -56,6 +56,7 @@ code
 * [akxcv/vuera](https://github.com/akxcv/vuera):👀 Vue in React, React in Vue. Seamless integration of the two. 👯
 * [alibaba/rax](https://github.com/alibaba/rax):[ constructionWork In Progress v1.0] The fastest way to build cross-container application. https://developers.taobao.com/
 * [airbnb/lottie-web](https://github.com/airbnb/lottie-web):Render After Effects animations natively on Web, Android and iOS, and React Native. http://airbnb.io/lottie/
+* [patr0nus/DeskGap](https://github.com/patr0nus/DeskGap):A cross-platform desktop app framework based on Node.js and the system webview https://deskgap.com/
 
 ## 参考
 
