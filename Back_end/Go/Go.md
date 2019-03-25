@@ -246,6 +246,10 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
 * [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
 
+## 代码规范
+
+* [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
+
 ## 教程
 
 * [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example

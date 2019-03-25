@@ -687,7 +687,9 @@ tar cJf .tar.xz / --exclude-vcs
 ```sh
 git update-index --assume-unchanged # 永久性地告诉Git不要管某个本地文件
 ```
+
 * [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
+* [gitignore.io](Create useful .gitignore files for your project)
 
 ### 搭建git私有服务器
 
@@ -1050,6 +1052,7 @@ git push --force origin myfeature
 * [OctoLinker/OctoLinker](https://github.com/OctoLinker/OctoLinker):OctoLinker – Available on Chrome, Firefox and Opera https://octolinker.github.iow
 * [devhubapp/devhub](https://github.com/devhubapp/devhub):DevHub: TweetDeck for GitHub - Android, iOS and Web 👉 https://devhubapp.com/
 * [unbug/codelf](https://github.com/unbug/codelf):Best GitHub stars, repositories tagger and organizer. Search over projects from Github, Bitbucket, Google Code, Codeplex, Sourceforge, Fedora Project, GitLab to find real-world usage variable names https://unbug.github.io/codelf/
+* [pomber/git-history](https://github.com/pomber/git-history):Quickly browse the history of a file from any git repository https://githistory.xyz/
 
 ### 合并commit选项
 
