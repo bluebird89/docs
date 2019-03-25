@@ -354,6 +354,7 @@
 * [cferdinandi/smooth-scroll](https://github.com/cferdinandi/smooth-scroll):A lightweight script to animate scrolling to anchor links.
 * [space10-community/conversational-form](https://github.com/space10-community/conversational-form):Turning web forms into conversations https://space10-community.github.io/conversational-form/landingpage/
 * [benjamn/recast](https://github.com/benjamn/recast):JavaScript syntax tree transformer, nondestructive pretty-printer, and automatic source map generator
+* [swc-project/swc](https://github.com/swc-project/swc):Super-fast javascript to javascript compiler written in rust https://swc-project.github.io
 
 ## 扩展
 

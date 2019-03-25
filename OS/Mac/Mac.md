@@ -101,6 +101,7 @@ smaba
     -   [sizeup](link)
     -   [Spectacle](link):控制窗口
     -   [onmyway133/FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
+    - [sveinbjornt/Sloth](https://github.com/sveinbjornt/Sloth):Mac app that shows all open files and sockets in use by all running processes. Nice GUI for lsof. https://sveinbjorn.org/sloth
 -   vpn
     -   Tunnelblick_3.7.2_build_4850：点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
 -   设计
@@ -189,6 +190,8 @@ smaba
     -   [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
 * 虚拟机
     - Parallels Desktop
+* 安全
+    - WireGuard for macOS
 
 ### 苹果铃声制作
 

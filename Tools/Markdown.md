@@ -692,6 +692,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * [nhnent/tui.editor](https://github.com/nhnent/tui.editor):🍞📝 Markdown WYSIWYG Editor. GFM Standard + Chart & UML Extensible. http://ui.toast.com/tui-editor
 * [Mark Text](https://github.com/marktext/marktext/)
 * [evilstreak/markdown-js](https://github.com/evilstreak/markdown-js):A Markdown parser for javascript
+* [Marp](https://yhatt.github.io/marp/):Markdown Presentation Writer
 
 ## 参考
 

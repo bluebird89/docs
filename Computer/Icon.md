@@ -9,3 +9,4 @@
 * [google/material-design-icons](https://github.com/google/material-design-icons):Material Design icons by Google http://google.github.io/material-design-icons/
 * [iconfont](https://www.iconfont.cn/)
 * [unDraw](https://undraw.co/)
+* [Search Icons Visually](http://compute.vision/nouns/index.html)
