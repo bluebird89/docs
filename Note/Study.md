@@ -64,3 +64,5 @@
 
 - [零基础小白如何入门 Python 编程](http://blog.csdn.net/gitchat/article/details/77506814)
 - [selfteaching/the-craft-of-selfteaching](https://github.com/selfteaching/the-craft-of-selfteaching):One has no future if one couldn't teach themself.
+* [dipakkr/A-to-Z-Resources-for-Students](https://github.com/dipakkr/A-to-Z-Resources-for-Students):Curated list of resources for college students :octocat: Show your ❤️ by giving a ⭐️ https://gitter.im/a2z-resources
+* [sdmg15/Best-websites-a-programmer-should-visit](https://github.com/sdmg15/Best-websites-a-programmer-should-visit):🔗 Some useful websites for programmers.

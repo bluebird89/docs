@@ -50,7 +50,8 @@ if __name__ == '__main__':
 * 前后端和产品一起开会讨论项目
 * 后端根据需求，首先定义数据格式和 api
 * mock api 生成好文档
-* 我们前端才是对接接口的
+* 前端才是对接接口的
+* postman测接口
 * 这里推荐一个文档生成器 swagger
 * mockjs + rap 或者 easy-mock
 

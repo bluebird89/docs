@@ -261,6 +261,9 @@
 * 《概率论与数理统计》
 * 《Pattern Recognition and Machine Learning》
 * 《Reinforcement Learning: An Introduction》：强化学习入门
+* 《机器学习实战：基于Scikit-Learn和TensorFlow》
+  - [源代码](https://github.com/ageron/handson-ml)
+  - [翻译](https://github.com/apachecn/hands-on-ml-zh)
 
 ## 教程
 

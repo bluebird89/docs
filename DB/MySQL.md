@@ -444,6 +444,7 @@ show engines; # 显示当前数据库支持的存储引擎情况
     - 逻辑运算: AND & OR(可以混合使用)
 * 别名：涉及超过一个表；在查询中使用了函数；列名称很长或者可读性差；需要把两个列或者多个列结合在一起
 * 添加注释
+* 取到的值为int为字符串
 
 ```sql
 SHOW DATABASES;
@@ -631,7 +632,6 @@ select a.FirstName,a.LastName, b.City, b.State from Person as a inner join addre
 * explain select * from table explain // 用并不真正执行查询，而是查询优化器【估算】的行数，返回值新的行数
 * count(distinct …)会返回彼此不同但是非NULL的数据的行数。
 * 优化
-    - 
 
 ## 问题处理
 
