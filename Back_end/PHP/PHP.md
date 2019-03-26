@@ -76,7 +76,12 @@ php -m
 # 默认php-cli为/usr/bin/php，提升优先级
 echo 'export PATH="/usr/local/opt/php@7.1/bin:$PATH"' >> ~/.zshrc
 echo 'export PATH="/usr/local/opt/php@7.1/sbin:$PATH"' >> ~/.zshrc
+
+brew install brew-php-switcher
+brew-php-switcher 5.6
 ```
+
+* [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only.
 
 ### linux源码安装
 

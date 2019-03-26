@@ -990,6 +990,8 @@ browser reopen generate new cookie
 
 ## Admin
 
+* [yii2-ace-admin](https://github.com/myloveGy/yii2-ace-admin)
+
 * `composer require dmstr/yii2-adminlte-asset`
 
 ## 扩展

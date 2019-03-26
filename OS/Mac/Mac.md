@@ -8,6 +8,8 @@ Mac：最大优势是 GUI 和命令行的完美结合
 -   耳机 BeoPlay H6
 -   iPad Pro：阅读利器
 -   格式化移动硬盘：ExFAT格式
+- imac Radeon Pro 580
+    + (2019)Radeon Pro 580X 图形处理器 (配备 8GB 显存) 可选配 Radeon Pro Vega 48
 
 ## 系统配置
 
@@ -145,6 +147,7 @@ smaba
     -   slack
     -   [telegram](https://telegram.org/)
     -   weibo:WeiboX
+    -   IM+
 -   RSS
     -   [Reeder 3](http://reederapp.com/mac/)
     -   feedly
@@ -180,6 +183,7 @@ smaba
     -   ibooks：阅读支持pdf与epub，可以通过icloud同步
     -   iTunes Movie Trailers
     -   mounty:win的移动硬盘
+    -   [irreader](http://irreader.fatecore.com)
     -   [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
 -   代码
     -   Xcode
@@ -192,6 +196,10 @@ smaba
     - Parallels Desktop
 * 安全
     - WireGuard for macOS
+* Screensaver
+    - Apple TV Aerial
+* 软件订阅
+    - [setapp](https://setapp.com)The first subscription service for Mac apps. 
 
 ### 苹果铃声制作
 
