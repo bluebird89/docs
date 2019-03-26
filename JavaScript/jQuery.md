@@ -675,6 +675,8 @@ File Upload widget with multiple file selection, drag&drop support, progress bar
 var jq=jQuery.noConflict();
 ```
 
+## jQuery UI
+
 ## 扩展
 
 - [blueimp/jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload)
