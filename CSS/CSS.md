@@ -305,7 +305,6 @@ outline-width:thin;
 * border-box - padding和 border 被包含在 宽度和高度当中。 如果一个 div 的宽度为 100px ，而被设置了 box-sizing: border-box， 那么它的宽度将始终是 100px， 无论你添加多少 padding 和 border 。
 
 ```css
-
 * {
   margin: 0;
   padding: 0;
@@ -344,16 +343,16 @@ a:hover {border-color: gray;}
     - 块元素单独占一行。
     - 块元素左右都有换行符。
     - 块元素可以设置width和height属性。
-    - 常用的块元素：<div>、<p>、<h1>、<table>、<form>、<ul>、<ol>、<li>、<pre>等
+    - 常用的块元素：`<div>、<p>、<h1>、<table>、<form>、<ul>、<ol>、<li>、<pre>`等
 * 行内元素
     - 行内元素不会单独占一行，多个行内元素会排在同一行。
     - 行内元素没有width和height属性。
-    - 行内元素：<span>、<font>、<b>、<i>、<u>、<s>、<a>、<input>、<label>、<img>等
-* <div>和<span>是没有意义的标记，但是又使用最多的
-* <img>和<input>是行内块元素(inline-block)，也有width和height
+    - 行内元素：`<span>、<font>、<b>、<i>、<u>、<s>、<a>、<input>、<label>、<img>`等
+* `<div>`和`<span>`是没有意义的标记，但是又使用最多的
+* `<img>`和`<input>`是行内块元素(inline-block)，也有width和height
 * 以使用 display 属性改变生成的框的类型： block none
 
-不可以在内联元素 <span> 中嵌入 <p>
+不可以在内联元素 `<span>` 中嵌入`<p>`
 
 ## 样式管理
 
