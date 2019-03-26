@@ -9,7 +9,10 @@ John MacFarlane开发的标记语言转换工具，可实现不同标记语言�
 
 ```
 pandoc WEB.md -o web.docx
+pandoc API.md -o api.docx -c Github.css
 ```
+
+* [文档](http://pandoc.org/getting-started.html )
 
 ##  [GitbookIO/gitbook](https://github.com/GitbookIO/gitbook)
 

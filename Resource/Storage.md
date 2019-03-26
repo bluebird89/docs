@@ -36,3 +36,5 @@ sha256sum /path/filename
 * [yangshun1029/aria2gui](https://github.com/yangshun1029/aria2gui):Aria2GUI for macOS
 * [webtorrent/webtorrent-desktop](https://github.com/webtorrent/webtorrent-desktop):❤️ Streaming torrent app for Mac, Windows, and Linux https://webtorrent.io/desktop
 * [agalwood/Motrix](https://github.com/agalwood/Motrix):A full-featured download manger. https://motrix.app/
+* [Downie](https://software.charliemonroe.net/downie/):YouTube Video Downloader for macOS - Charlie
+* [bundlehunt](https://bundlehunt.com/?)

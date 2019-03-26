@@ -347,6 +347,8 @@
 * 《最终幻想7》
 * 王国之心
 
+## Google stadia
+
 ## 直播
 
 * [twitch](https://www.twitch.tv)
