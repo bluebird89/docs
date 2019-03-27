@@ -1433,6 +1433,13 @@ var_dump(date("Y-m-d", strtotime("first day of +1 month", strtotime("2017-08-31"
 require('./ShopProduct.php'); # 加载文件名称
 ```
 
+##  密码散列算法函数
+
+password_​get_​info
+password_​hash
+password_​needs_​rehash
+password_​verify
+
 ## 扩展
 
 * intl
