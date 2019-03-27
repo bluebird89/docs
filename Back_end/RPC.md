@@ -1,6 +1,23 @@
 # RPC
 
 
+## HTTP 与 RPC 的区别
+
+* 传输协议：
+    - HTTP 基于 HTTP 协议。
+    - RPC 即可以 HTTP 协议，也可以 TCP 协议。
+    - HTTP 也是 RPC 实现的一种方式。
+* 性能消耗：
+    - HTTP 大部分基于 JSON 实现的，序列化需要时间和性能。
+    - RPC 可以基于二进制进行传输，消耗性能少一点。
+    - 推荐一个像 JSON ，但比 JSON 传输更快占用更少的新型序列化类库 [MessagePack](https://msgpack.org/)
+    - 还有一些服务治理、负载均衡配置的区别。
+* 使用场景：
+    - 比如浏览器接口、APP接口、第三方接口，推荐使用 HTTP。
+    - 比如集团内部的服务调用，推荐使用 RPC。
+    - RPC 比 HTTP 性能消耗低，传输效率高，服务治理也方便。
+* 推荐使用的 RPC 框架：Thrift。
+
 ##  [brpc/brpc](https://github.com/brpc/brpc)
 
 Brpc 是百度开源的一个基于 protobuf 接口的 RPC 框架，它囊括了百度内部所有 RPC 协议，并支持多种第三方协议，到现在为止，brpc 在 GitHub 上已经拥有 6000 多个关注、17 个代码贡献者。
