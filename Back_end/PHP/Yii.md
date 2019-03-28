@@ -744,6 +744,21 @@ use app/assets/AppAsset;
 AppAsset::register($this);  // $this 代表视图对象
 ```
 
+## DB
+
+```php
+self::find()
+    ->select([
+    'title',
+    "DATE_FORMAT(raw_add_time,'%Y-%m-%d') as raw_add_time"
+])
+    ->where(['type' => '0'])
+    ->orderBy('`sort` asc, `raw_update_time` DESC')
+    ->limit(6)
+    ->asArray()
+    ->all();
+```
+
 ## RESTful
 
 * route
@@ -987,6 +1002,11 @@ browser reopen generate new cookie
     'ruleTable' => '{{%auth_rule}}'
 ],
 ```
+
+## faker
+
+* config
+* use
 
 ## Admin
 
