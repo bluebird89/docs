@@ -398,3 +398,4 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 * [面试 -- 网络 HTTP](https://juejin.im/post/5872309261ff4b005c4580d4)
 * [bolasblack/http-api-guide](https://github.com/bolasblack/http-api-guide)
 * [HTTPS explained with carrier pigeons](https://medium.freecodecamp.org/https-explained-with-carrier-pigeons-7029d2193351)
+* [HTTP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)

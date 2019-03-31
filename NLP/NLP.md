@@ -17,6 +17,7 @@
     + 视频
         * [youtube](https://www.youtube.com/watch?v=OQQ-W_63UgQ&list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6)
         - [云盘资源](https://blog.csdn.net/NeighborhoodGuo/article/details/46868143)
+* [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 ```sh
 git clone https://github.com/DSKSD/cs-224n-Pytorch.git
