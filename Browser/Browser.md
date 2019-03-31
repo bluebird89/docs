@@ -12,6 +12,7 @@
     - adds unlimited VPN service to its
 * [qutebrowser](https://www.qutebrowser.org)
 * Tor
+* vivaldi
 
 ## 工具
 
