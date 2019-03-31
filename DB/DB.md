@@ -33,6 +33,40 @@ Laravel 也支持查询 JSON 类型的字段：仅支持，MySQL 5.7+ 和 Postgr
 - 业务字段不可用于主键:主键必须使用单独的，完全没有业务含义的字段，也就是主键本身除了唯一标识和不可修改这两个责任外，主键没有任何业务含义。
 - 主键应该使用字符串:自增主键最大的问题是把公司业务的关键运营数据完全暴露给了竞争对手和VC
 
+## 连接
+
+左边表A与右边表B
+
+* 内连接（inner join）:只返回两张表匹配的记录
+* 外连接（outer join）:还包含不匹配的记录
+    - 左连接（left join）:返回匹配的记录，以及表 A 多余的记录
+    - 右连接（right join）:返回匹配的记录，以及表 B 多余的记录
+    - 全连接（full join）:返回匹配的记录，以及表 A 和表 B 各自的多余记录
+
+```sql
+SELECT * FROM A
+INNER JOIN B ON A.book_id=B.book_id;
+
+SELECT * FROM A
+LEFT JOIN B ON A.book_id=B.book_id;
+SELECT * FROM A
+RIGHT JOIN B ON A.book_id=B.book_id;
+SELECT * FROM A
+FULL JOIN B ON A.book_id=B.book_id;
+
+# 只返回表 A 里面不匹配表 B 的记录
+SELECT * FROM A
+LEFT JOIN B
+ON A.book_id=B.book_id
+WHERE B.id IS null;
+
+# 返回表 A 或表 B 所有不匹配的记录
+SELECT * FROM A
+FULL JOIN B
+ON A.book_id=B.book_id
+WHERE A.id IS null OR B.id IS null;
+```
+
 ## 读写分离
 
 
@@ -82,8 +116,6 @@ NoSQL主要用于解决以下几种问题
 
 在电商系统中，随着业务量的增大，读写 QPS 越来越高，单节点 MySQL 实例压力也变得越来越大，单纯的对服务器硬件升级已经无法满足生产环境的需要。对数据分片增加多个节点，降低单节点 MySQL 实例的压力成了必然选择。
 
-## 工具
-
 * [Qihoo360/Atlas](https://github.com/Qihoo360/Atlas):A high-performance and stable proxy for MySQL, it is developed by Qihoo's DBA and infrastructure team
 * [Mycat](link)
 * [TDDL](link)
@@ -130,7 +162,7 @@ Cetus 的整体工作流程分为:
 * [cockroachdb/cockroach](https://github.com/cockroachdb/cockroach):CockroachDB - the open source, cloud-native SQL database. https://www.cockroachlabs.com
 * [dgraph-io/dgraph](https://github.com/dgraph-io/dgraph):Fast, Distributed Graph DB https://dgraph.io
 
-## SQL
+## 图书
 
 * 《数据库系统实现》
 * 《SQL基础教程》

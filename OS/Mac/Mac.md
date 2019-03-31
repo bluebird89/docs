@@ -199,7 +199,18 @@ smaba
 * Screensaver
     - Apple TV Aerial
 * 软件订阅
-    - [setapp](https://setapp.com)The first subscription service for Mac apps. 
+    - [setapp](https://setapp.com)The first subscription service for Mac apps.
+
+### screensavers
+
+* 安装
+    - /Library/Screen Savers/ 或者 ~/Library/Screen Savers/
+* 资源
+    - Fliqlo
+    - [JohnCoates/Aerial](https://github.com/JohnCoates/Aerial):Apple TV Aerial Screensaver for Mac
+        + 航拍横跨了中国、拉斯维加斯、旧金山、夏威夷、迪拜等等地方的白天和夜晚的精美景象。因为每一个航拍体积都很大
+        + brew cask install aerial
+        + 下载点击安装，重新进入系统偏好设置
 
 ### 苹果铃声制作
 
@@ -209,9 +220,6 @@ smaba
 -   在文件位置移开未见重命名.m4r
 -   拖进tones
 -   同步手机
-
-    npm install apidoc -g
-    apidoc -i myapp/ -o apidoc/ -t mytemplate/
 
 #### iTerm2
 

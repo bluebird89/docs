@@ -31,12 +31,16 @@ braft 是基于 brpc 的 Raft 协议工业级 C++ 实现，设计之初就考虑
 ## 框架
 
 * [grpc/grpc](https://github.com/grpc/grpc)The C based gRPC (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)
+    - [gRpc docs](https://grpc.io/docs/guides/)
+    - [grpc/grpc-java](https://github.com/grpc/grpc-java):The Java gRPC implementation. HTTP/2 based RPC https://grpc.io
 * [apache/thrift](https://github.com/apache/thrift)a lightweight, language-independent software stack with an associated code generation mechanism for RPC
 * [alibaba/dubbo](https://github.com/alibaba/dubbo)Dubbo is a high-performance, java based, open source RPC framework
 * [weibocom/motan](https://github.com/weibocom/motan)A remote procedure call(RPC) framework for rapid development of high performance distributed services.
 * [dangdangdotcom/dubbox](https://github.com/dangdangdotcom/dubbox)Dubbox now means Dubbo eXtensions, and it adds features like RESTful remoting, Kyro/FST serialization, etc to the Dubbo service framework.
-* [gRpc docs](https://grpc.io/docs/guides/)
-* [grpc/grpc-java](https://github.com/grpc/grpc-java):The Java gRPC implementation. HTTP/2 based RPC https://grpc.io
+* phprpc
+* yar
+* swoole
+* hprose
 
 ## 工具
 
