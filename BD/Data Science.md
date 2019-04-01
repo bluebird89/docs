@@ -50,6 +50,10 @@ SAS网站的Eight levels of analytics
 * 《数据科学实战》
 * 《决战大数据》
 
+## 公司
+
+* 达观数据
+
 ## 教程
 
 * [数据可视化入门教程](https://www.yuque.com/mo-college/beginner-tutorial)

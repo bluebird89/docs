@@ -276,19 +276,22 @@
   - [斯坦福大学2014（吴恩达）机器学习教程中文笔记](https://www.coursera.org/course/ml)
   - [斯坦福大学机器学习课程](http://open.163.com/special/opencourse/machinelearning.html)
   - [Andrew Ng 老师的 机器学习课程](http://coursegraph.com/coursera-machine-learning) http://coursegraph.com/coursera_ml
-  - Machine Learning Yearning
+  - [吴恩达机器学习](https://study.163.com/course/courseMain.htm?courseId=1004570029)
+  - http://open.163.com/special/opencourse/machinelearning.html
+  - https://www.coursera.org/learn/machine-learning
   - [fengdu78/Coursera-ML-AndrewNg-Notes](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes):吴恩达老师的机器学习课程个人笔记
 * [李宏毅Machine Learning ](https://www.bilibili.com/video/av15889450)
-* [李宏毅机器学习(2017)](https://www.bilibili.com/video/av10590361/) https://blog.csdn.net/soulmeetliang/article/details/77461607
+  * 资料：http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML19.html
+  * 课程视频：https://www.bilibili.com/video/av46561029/
+  * https://www.youtube.com/playlist?list=PLJV_el3uVTsOK_ZK5L0Iv_EQoL1JefRL4
+  * [李宏毅机器学习(2017)](https://www.bilibili.com/video/av10590361/)
+  * https://blog.csdn.net/soulmeetliang/article/details/77461607
+  * [Doraemonzzz/ML-Foundation-and-ML-Techniques](https://github.com/Doraemonzzz/ML-Foundation-and-ML-Techniques):台大机器学习课程作业详解
 * [机器学习中的数学基础](https://www.bilibili.com/video/av15673238/)
 * [afshinea/stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning):VIP cheatsheets for Stanford's CS 229 Machine Learning
-* [Doraemonzzz/ML-Foundation-and-ML-Techniques](https://github.com/Doraemonzzz/ML-Foundation-and-ML-Techniques):台大机器学习课程作业详解
 * [DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python](https://github.com/DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python):这是一个完整的，端到端的机器学习项目，非常适合有一定基础后拿来练习，以提高对完整机器学习项目的认识
 * [Doraemonzzz/Learning-from-data](https://github.com/Doraemonzzz/Learning-from-data):记录Learning from data一书中的习题解答 http://amlbook.com/
 * [Built on the AWS Cloud. Developed for Amazon developers and engineers.](https://aws.amazon.com/training/learning-paths/machine-learning/)
-* [吴恩达机器学习](https://study.163.com/course/courseMain.htm?courseId=1004570029)
-  - http://open.163.com/special/opencourse/machinelearning.html
-  - https://www.coursera.org/learn/machine-learning
 * 火光摇曳：腾讯技术大牛们的博客 http://www.flickering.cn/
 * 美团技术团队的博客：里面也有很多干货： https://tech.meituan.com/
 * 苏剑林的博客里面也全是干货 https://spaces.ac.cn/
@@ -296,6 +299,7 @@
 * Towards Data Science：主要分享些概念、idea和代码。 https://towardsdatascience.com/
 * [fengdu78/machine_learning_beginner](https://github.com/fengdu78/machine_learning_beginner)
 * [A Course in Machine Learning](http://ciml.info/)
+* [Machine-Learning-Study-Path-March-2019](https://github.com/clone95/Machine-Learning-Study-Path-March-2019)
 
 ## 比赛
 
@@ -329,3 +333,4 @@
 * [GokuMohandas/practicalAI](https://github.com/GokuMohandas/practicalAI):A practical approach to learning machine learning.
 * [sea-boat/MachineLearning_Lab](https://github.com/sea-boat/MachineLearning_Lab):Code lab for machine learning. Including Least Square Method,Gradient Descent,Newton's Method,Hierarchy Cluster,KNN,Markov,Adaboost,Random Number Generation(all kinds of distributions),N Sigma outlier detection,outlier detection based on median,FFT outlier detection,DBSCAN,Kmeans,Naive Bayes,perceptron,reinforcement learning.
 * [roboticcam/machine-learning-notes](https://github.com/roboticcam/machine-learning-notes):My continuously updated Machine Learning, Probabilistic Models and Deep Learning notes and demos (1000+ slides) 我不间断更新的机器学习，概率模型和深度学习的讲义(1000+页)和视频链接
+* [](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)
