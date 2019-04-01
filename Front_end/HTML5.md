@@ -1,6 +1,208 @@
 # HTML5
 
+HTML5 是 W3C(World Wide Web Consortium) 与 WHATWG(Web Hypertext Application Technology Working Group) 合作的结果
 
+## 视频
+
+* 格式
+    - Ogg = 带有 Theora 视频编码和 Vorbis 音频编码的 Ogg 文件
+    - MPEG4 = 带有 H.264 视频编码和 AAC 音频编码的 MPEG 4 文件
+    - WebM = 带有 VP8 视频编码和 Vorbis 音频编码的 WebM 文件
+* 属性
+    - autoplay：视频在就绪后马上播放
+    - controls ：则向用户显示控件，比如播放按钮
+    - height：设置视频播放器的高度
+    - width ：设置视频播放器的宽度
+    - loop：当媒介文件完成播放后再次开始播放
+    - preload：视频在页面加载时进行加载，并预备播放 如果使用 "autoplay"，则忽略该属性
+    - src：要播放的视频的 URL
+    - duration
+    - paused
+    - volume
+* 事件
+    - play()
+    - pause()
+    - load()
+
+```html
+<video src="movie.ogg" width="320" height="240" controls="controls">
+  <source src="movie.ogg" type="video/ogg">
+  <source src="movie.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+```
+
+## 音频
+
+* 格式
+    - ogg
+    - mp3
+    - wav
+* 属性
+    - autoplay：视频在就绪后马上播放
+    - controls ：则向用户显示控件，比如播放按钮
+    - height：设置视频播放器的高度
+    - width ：设置视频播放器的宽度
+    - loop：当媒介文件完成播放后再次开始播放
+    - preload：视频在页面加载时进行加载，并预备播放 如果使用 "autoplay"，则忽略该属性
+
+```html
+<audio controls="controls">
+  <source src="song.ogg" type="audio/ogg">
+  <source src="song.mp3" type="audio/mpeg">
+Your browser does not support the audio tag.
+</audio>
+```
+
+## 拖放
+
+抓取对象以后拖到另一个位置
+
+* 使元素可拖动，把 draggable 属性设置为 true
+* ondragstart 属性调用了一个函数，drag(event)，它规定了被拖动的数据
+* dataTransfer.setData() 方法设置被拖数据的数据类型和值
+* ondragover 事件规定在何处放置被拖动的数据,默认地，无法将数据/元素放置到其他元素中。如果需要设置允许放置，我们必须阻止对元素的默认处理方式。
+* 当放置被拖数据时，会发生 drop 事件
+
+```html
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script type="text/javascript">
+    function allowDrop(ev)
+    {
+        ev.preventDefault();
+    }
+
+    function drag(ev)
+    {
+        ev.dataTransfer.setData("Text",ev.target.id);
+    }
+
+    function drop(ev)
+    {
+        ev.preventDefault();
+        var data=ev.dataTransfer.getData("Text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+    </script>
+</head>
+<body>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<img id="drag1" src="img_logo.gif" draggable="true" ondragstart="drag(event)" width="336" height="69" />
+<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</body>
+</html>
+```
+
+## Canvas
+
+* HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘制各种图表、动画等。
+* 没有Canvas的年代，绘图只能借助Flash插件实现，页面不得不用JavaScript和Flash进行交互。 有了Canvas，我们就再也不需要Flash了，直接使用JavaScript完成绘制。
+* 在使用Canvas前，用canvas.getContext来测试浏览器是否支持Canvas,JavaScript代码放在元素下面
+
+```html
+<canvas id="test-canvas" width="200" heigth="100">
+    <p>你的浏览器不支持Canvas</p>
+</canvas>
+
+<script>
+    var canvas = document.getElementById('test-canvas'), ctx = canvas.getContext('2d');
+    // 绘制笑脸
+    ctx.clearRect(0, 0, 200, 200); // 擦除(0,0)位置大小为200x200的矩形，擦除的意思是把该区域变为透明
+    ctx.fillStyle = '#dddddd'; // 设置颜色
+    ctx.fillRect(10, 10, 130, 130); // 把(10,10)位置大小为130x130的矩形涂色
+    // 利用Path绘制复杂路径:
+    var path=new Path2D();
+    path.arc(75, 75, 50, 0, Math.PI*2, true);
+    path.moveTo(110,75);
+    path.arc(75, 75, 35, 0, Math.PI, false);
+    path.moveTo(65, 65);
+    path.arc(60, 65, 5, 0, Math.PI*2, true);
+    path.moveTo(95, 65);
+    path.arc(90, 65, 5, 0, Math.PI*2, true);
+    ctx.strokeStyle = '#0000ff';
+    ctx.stroke(path);
+
+    // 文字
+    ctx.clearRect(0, 0, 200, 200); // 擦除(0,0)位置大小为200x200的矩形，擦除的意思是把该区域变为透明
+    ctx.fillStyle = '#dddddd'; // 设置颜色
+    ctx.fillRect(10, 10, 130, 130); // 把(10,10)位置大小为130x130的矩形涂色
+    // 利用Path绘制复杂路径:
+    var path=new Path2D();
+    path.arc(75, 75, 50, 0, Math.PI*2, true);
+    path.moveTo(110,75);
+    path.arc(75, 75, 35, 0, Math.PI, false);
+    path.moveTo(65, 65);
+    path.arc(60, 65, 5, 0, Math.PI*2, true);
+    path.moveTo(95, 65);
+    path.arc(90, 65, 5, 0, Math.PI*2, true);
+    ctx.strokeStyle = '#0000ff';
+    ctx.stroke(path);
+    var gl = canvas.getContext("webgl");
+</script>
+```
+
+### 工具
+
+* [fabricjs/fabric.js](https://github.com/fabricjs/fabric.js):Javascript Canvas Library, SVG-to-Canvas (& canvas-to-SVG) Parser http://fabricjs.com
+* [Mikhus/canvas-gauges](https://github.com/Mikhus/canvas-gauges):HTML5 Canvas Gauge. Tiny implementation of highly configurable gauge using pure JavaScript and HTML5 canvas. No dependencies. Suitable for IoT devices because of minimum code base. http://canvas-gauges.com/
+* [paperjs/paper.js](https://github.com/paperjs/paper.js):The Swiss Army Knife of Vector Graphics Scripting – Scriptographer ported to JavaScript and the browser, using HTML5 Canvas. Created by @lehni & @puckey http://paperjs.org
+
+### 项目
+
+* [dli/paint](https://github.com/dli/paint):Fluid Paint - http://david.li/paint
+
+## SVG(Scalable Vector Graphics)
+
+* SVG 用于定义用于网络的基于矢量的图形
+* SVG 使用 XML 格式定义图形
+* SVG 图像在放大或改变尺寸的情况下其图形质量不会有损失
+* SVG 是万维网联盟的标准
+* 与其他图像格式相比（比如 JPEG 和 GIF）的优势
+    - SVG 图像可通过文本编辑器来创建和修改
+    - SVG 图像可被搜索、索引、脚本化或压缩
+    - SVG 是可伸缩的
+    - SVG 图像可在任何的分辨率下被高质量地打印
+    - SVG 可在图像质量不下降的情况下被放大
+
+### Canvas vs SVG
+
+* SVG
+    - 一种使用 XML 描述 2D 图形的语言。
+    - 意味着 SVG DOM 中的每个元素都是可用的。您可以为某个元素附加 JavaScript 事件处理器。
+    - 每个被绘制的图形均被视为对象。如果 SVG 对象的属性发生变化，那么浏览器能够自动重现图形。
+    - 依赖分辨率
+    - 不支持事件处理器
+    - 弱的文本渲染能力
+    - 能够以 .png 或 .jpg 格式保存结果图像
+    - 最适合图像密集型的游戏，其中的许多对象会被频繁重绘
+* Canvas
+    + Canvas 通过 JavaScript 来绘制 2D 图形。
+    + Canvas 是逐像素进行渲染的。
+    + 在 canvas 中，一旦图形被绘制完成，它就不会继续得到浏览器的关注。如果其位置发生变化，那么整个场景也需要重新绘制，包括任何或许已被图形覆盖的对象。
+    - 不依赖分辨率
+    - 支持事件处理器
+    - 最适合带有大型渲染区域的应用程序（比如谷歌地图）
+    - 复杂度高会减慢渲染速度（任何过度使用 DOM 的应用都不快）
+    - 不适合游戏应用
+
+## Geolocation
+
+定位用户的位置
+
+* 属性
+    - coords.latitude 十进制数的纬度
+    - coords.longitude    十进制数的经度
+    - coords.accuracy 位置精度
+    - coords.altitude 海拔，海平面以上以米计
+    - coords.altitudeAccuracy 位置的海拔精度
+    - coords.heading  方向，从正北开始以度计
+    - coords.speed    速度，以米/每秒计
+    - timestamp   响应的日期/时间
+
+## Web存储
 
 ## fetch
 

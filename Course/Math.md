@@ -3,6 +3,7 @@
 ## 基础
 
 * [数学思维导论 Introduction to Mathematical Thinking]( Introduction to Mathematical Thinking):Learn how to think the way mathematicians do – a powerful cognitive process developed over thousands of years. Mathematical thinking is not the same as doing mathematics – at least not as mathematics is typically presented in our school system. School math typically focuses on learning procedures to solve highly stereotyped problems. Professional mathematicians think a certain way to solve real problems, problems that can arise from the everyday world, or from science, or from within mathematics itself. The key to success in school math is to learn to think inside-the-box. In contrast, a key feature of mathematical thinking is thinking outside-the-box – a valuable ability in today’s world. This course helps to develop that crucial way of thinking.
+* [matrix-calculus](https://explained.ai/matrix-calculus/index.html#sec4.5)
 
 ## 微积分
 
@@ -20,6 +21,7 @@
 ## 概率论和数理统计
 
 * [看得见的统计概率入门](https://seeing-theory.brown.edu/cn.html)
+* [基本概率和统计学概念](https://www.edx.org/course/introduction-to-probability-0)
 
 ## 数值分析与算法
 
