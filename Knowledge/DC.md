@@ -71,4 +71,44 @@
 ## 雷霆沙赞！ Shazam! (2019)
 
 * 从小在孤儿院长大的少年比利·巴特森（Billy Batson）在一次机缘巧合下，被巫师沙赞选中成为人类道德的捍卫者，从而被赋予集合六神能力的沙赞之力。
-* 只要喊出巫师的名字"Shazam!"，比利便会在电光之中瞬间变成成年超级英雄“沙赞”（又称“神奇队长”）。
+* 只要喊出巫师的名字"Shazam!"，比利便会在电光之中瞬间变成成年超级英雄“沙赞”（又称“神奇队长”）
+
+## 资源
+
+* [蝙蝠侠音乐剧Holy Musical B@man!](https://www.bilibili.com/video/av622801/)
+* [平行宇宙:超人：红色之子 ](https://www.bilibili.com/video/av1721906/)
+* [平行宇宙:不义联盟游戏CG1,2合集]
+    - https://www.bilibili.com/video/av5382115/
+    - https://www.bilibili.com/video/av10685178/
+* [DC展台原创短篇动画合集](https://www.bilibili.com/video/av813303/)
+* [平行宇宙：罪犯辛迪加](https://www.bilibili.com/video/av288975/)
+* [机器鸡:DC特辑]
+    - https://www.bilibili.com/video/av401510/
+    - https://www.bilibili.com/video/av1079514/
+    - https://www.bilibili.com/video/av3103606/
+* [DC super friends超级朋友第一季](https://www.bilibili.com/video/av3028066/)
+* [当心蝙蝠侠 第一季](https://www.bilibili.com/video/av2483348/)
+* 哥谭妹子S1-S3
+    - https://www.bilibili.com/video/av1863584/
+    - https://www.bilibili.com/video/av2811409/
+    - https://www.bilibili.com/video/av4971037/
+* 蝙蝠侠TAS 第一季-第五季
+    - https://www.bilibili.com/video/av2677796/
+    - https://www.bilibili.com/video/av3013408/
+    - https://www.bilibili.com/video/av3015731/
+    - https://www.bilibili.com/video/av2216893/
+    - https://www.bilibili.com/video/av607295/
+* [剧场版蝙蝠侠与超人：世界最佳拍档World's Finest 1998](https://www.bilibili.com/video/av2323010/)
+* [超人1988.Superman1988 ](https://www.bilibili.com/video/av2878584/)
+* [超人TAS 第一季&第二季 [1996]](https://www.bilibili.com/video/av669030/)
+* [超人TAS第三季](https://www.bilibili.com/video/av9098314/)
+* [绿灯侠TAS 26【JBA】](https://www.bilibili.com/video/av513327/)
+* [超级英雄军团第一季](https://www.bilibili.com/video/av582338/)
+* [超级英雄军团第二季](https://www.bilibili.com/video/av851843/)
+* [蝙蝠侠之子](https://www.bilibili.com/video/av1069161/)
+* [蝙蝠侠: 麻烦重重](https://www.bilibili.com/video/av1663737/)
+* [【正义联盟: 银河守护者1985】](https://www.bilibili.com/video/av2855935/)
+* [美国正义联盟:时间困境](https://www.bilibili.com/video/av934507/)
+* [塑胶人/橡胶人/塑料人](https://www.bilibili.com/video/av12216488/)
+* [蝙蝠侠：哥谭骑士](https://www.bilibili.com/video/av16860121/)
+* [绿灯侠:初次飞行 [2009]](https://www.bilibili.com/video/av286055/)

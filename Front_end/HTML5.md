@@ -9,20 +9,64 @@ HTML5 是 W3C(World Wide Web Consortium) 与 WHATWG(Web Hypertext Application Te
     - MPEG4 = 带有 H.264 视频编码和 AAC 音频编码的 MPEG 4 文件
     - WebM = 带有 VP8 视频编码和 Vorbis 音频编码的 WebM 文件
 * 属性
-    - autoplay：视频在就绪后马上播放
-    - controls ：则向用户显示控件，比如播放按钮
-    - height：设置视频播放器的高度
-    - width ：设置视频播放器的宽度
-    - loop：当媒介文件完成播放后再次开始播放
-    - preload：视频在页面加载时进行加载，并预备播放 如果使用 "autoplay"，则忽略该属性
-    - src：要播放的视频的 URL
-    - duration
-    - paused
-    - volume
+    - audioTracks 返回表示可用音轨的 AudioTrackList 对象
+    - autoplay    设置或返回是否在加载完成后随即播放音频/视频
+    - buffered    返回表示音频/视频已缓冲部分的 TimeRanges 对象
+    - controller  返回表示音频/视频当前媒体控制器的 MediaController 对象
+    - controls    设置或返回音频/视频是否显示控件（比如播放/暂停等）
+    - crossOrigin 设置或返回音频/视频的 CORS 设置
+    - currentSrc  返回当前音频/视频的 URL
+    - currentTime 设置或返回音频/视频中的当前播放位置（以秒计）
+    - defaultMuted    设置或返回音频/视频默认是否静音
+    - defaultPlaybackRate 设置或返回音频/视频的默认播放速度
+    - duration    返回当前音频/视频的长度（以秒计）
+    - ended   返回音频/视频的播放是否已结束
+    - error   返回表示音频/视频错误状态的 MediaError 对象
+    - loop    设置或返回音频/视频是否应在结束时重新播放
+    - mediaGroup  设置或返回音频/视频所属的组合（用于连接多个音频/视频元素）
+    - muted   设置或返回音频/视频是否静音
+    - networkState    返回音频/视频的当前网络状态
+    - paused  设置或返回音频/视频是否暂停
+    - playbackRate    设置或返回音频/视频播放的速度
+    - played  返回表示音频/视频已播放部分的 TimeRanges 对象
+    - preload 设置或返回音频/视频是否应该在页面加载后进行加载
+    - readyState  返回音频/视频当前的就绪状态
+    - seekable    返回表示音频/视频可寻址部分的 TimeRanges 对象
+    - seeking 返回用户是否正在音频/视频中进行查找
+    - src 设置或返回音频/视频元素的当前来源
+    - startDate   返回表示当前时间偏移的 Date 对象
+    - textTracks  返回表示可用文本轨道的 TextTrackList 对象
+    - videoTracks 返回表示可用视频轨道的 VideoTrackList 对象
+    - volume  设置或返回音频/视频的音量
+* 方法
+    - addTextTrack()    向音频/视频添加新的文本轨道
+    - canPlayType()   检测浏览器是否能播放指定的音频/视频类型
+    - load()  重新加载音频/视频元素
+    - play()  开始播放音频/视频
+    - pause() 暂停当前播放的音频/视频
 * 事件
-    - play()
-    - pause()
-    - load()
+    - abort   当音频/视频的加载已放弃时
+    - canplay 当浏览器可以播放音频/视频时
+    - canplaythrough  当浏览器可在不因缓冲而停顿的情况下进行播放时
+    - durationchange  当音频/视频的时长已更改时
+    - emptied 当目前的播放列表为空时
+    - ended   当目前的播放列表已结束时
+    - error   当在音频/视频加载期间发生错误时
+    - loadeddata  当浏览器已加载音频/视频的当前帧时
+    - loadedmetadata  当浏览器已加载音频/视频的元数据时
+    - loadstart   当浏览器开始查找音频/视频时
+    - pause   当音频/视频已暂停时
+    - play    当音频/视频已开始或不再暂停时
+    - playing 当音频/视频在已因缓冲而暂停或停止后已就绪时
+    - progress    当浏览器正在下载音频/视频时
+    - ratechange  当音频/视频的播放速度已更改时
+    - seeked  当用户已移动/跳跃到音频/视频中的新位置时
+    - seeking 当用户开始移动/跳跃到音频/视频中的新位置时
+    - stalled 当浏览器尝试获取媒体数据，但数据不可用时
+    - suspend 当浏览器刻意不获取媒体数据时
+    - timeupdate  当目前的播放位置已更改时
+    - volumechange    当音量已更改时
+    - waiting 当视频由于需要缓冲下一帧而停止
 
 ```html
 <video src="movie.ogg" width="320" height="240" controls="controls">
@@ -39,12 +83,64 @@ Your browser does not support the video tag.
     - mp3
     - wav
 * 属性
-    - autoplay：视频在就绪后马上播放
-    - controls ：则向用户显示控件，比如播放按钮
-    - height：设置视频播放器的高度
-    - width ：设置视频播放器的宽度
-    - loop：当媒介文件完成播放后再次开始播放
-    - preload：视频在页面加载时进行加载，并预备播放 如果使用 "autoplay"，则忽略该属性
+    - audioTracks 返回表示可用音轨的 AudioTrackList 对象
+    - autoplay    设置或返回是否在加载完成后随即播放音频/视频
+    - buffered    返回表示音频/视频已缓冲部分的 TimeRanges 对象
+    - controller  返回表示音频/视频当前媒体控制器的 MediaController 对象
+    - controls    设置或返回音频/视频是否显示控件（比如播放/暂停等）
+    - crossOrigin 设置或返回音频/视频的 CORS 设置
+    - currentSrc  返回当前音频/视频的 URL
+    - currentTime 设置或返回音频/视频中的当前播放位置（以秒计）
+    - defaultMuted    设置或返回音频/视频默认是否静音
+    - defaultPlaybackRate 设置或返回音频/视频的默认播放速度
+    - duration    返回当前音频/视频的长度（以秒计）
+    - ended   返回音频/视频的播放是否已结束
+    - error   返回表示音频/视频错误状态的 MediaError 对象
+    - loop    设置或返回音频/视频是否应在结束时重新播放
+    - mediaGroup  设置或返回音频/视频所属的组合（用于连接多个音频/视频元素）
+    - muted   设置或返回音频/视频是否静音
+    - networkState    返回音频/视频的当前网络状态
+    - paused  设置或返回音频/视频是否暂停
+    - playbackRate    设置或返回音频/视频播放的速度
+    - played  返回表示音频/视频已播放部分的 TimeRanges 对象
+    - preload 设置或返回音频/视频是否应该在页面加载后进行加载
+    - readyState  返回音频/视频当前的就绪状态
+    - seekable    返回表示音频/视频可寻址部分的 TimeRanges 对象
+    - seeking 返回用户是否正在音频/视频中进行查找
+    - src 设置或返回音频/视频元素的当前来源
+    - startDate   返回表示当前时间偏移的 Date 对象
+    - textTracks  返回表示可用文本轨道的 TextTrackList 对象
+    - videoTracks 返回表示可用视频轨道的 VideoTrackList 对象
+    - volume  设置或返回音频/视频的音量
+* 方法
+    - addTextTrack()  向音频/视频添加新的文本轨道
+    - canPlayType()   检测浏览器是否能播放指定的音频/视频类型
+    - load()  重新加载音频/视频元素
+    - play()  开始播放音频/视频
+    - pause() 暂停当前播放的音频/视频
+* 事件
+    - abort   当音频/视频的加载已放弃时
+    - canplay 当浏览器可以播放音频/视频时
+    - canplaythrough  当浏览器可在不因缓冲而停顿的情况下进行播放时
+    - durationchange  当音频/视频的时长已更改时
+    - emptied 当目前的播放列表为空时
+    - ended   当目前的播放列表已结束时
+    - error   当在音频/视频加载期间发生错误时
+    - loadeddata  当浏览器已加载音频/视频的当前帧时
+    - loadedmetadata  当浏览器已加载音频/视频的元数据时
+    - loadstart   当浏览器开始查找音频/视频时
+    - pause   当音频/视频已暂停时
+    - play    当音频/视频已开始或不再暂停时
+    - playing 当音频/视频在已因缓冲而暂停或停止后已就绪时
+    - progress    当浏览器正在下载音频/视频时
+    - ratechange  当音频/视频的播放速度已更改时
+    - seeked  当用户已移动/跳跃到音频/视频中的新位置时
+    - seeking 当用户开始移动/跳跃到音频/视频中的新位置时
+    - stalled 当浏览器尝试获取媒体数据，但数据不可用时
+    - suspend 当浏览器刻意不获取媒体数据时
+    - timeupdate  当目前的播放位置已更改时
+    - volumechange    当音量已更改时
+    - waiting 当视频由于需要缓冲下一帧而停止
 
 ```html
 <audio controls="controls">
@@ -101,6 +197,82 @@ Your browser does not support the audio tag.
 * HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘制各种图表、动画等。
 * 没有Canvas的年代，绘图只能借助Flash插件实现，页面不得不用JavaScript和Flash进行交互。 有了Canvas，我们就再也不需要Flash了，直接使用JavaScript完成绘制。
 * 在使用Canvas前，用canvas.getContext来测试浏览器是否支持Canvas,JavaScript代码放在元素下面
+* 功能
+    - 颜色、样式和阴影
+        + 属性
+            * fillStyle   设置或返回用于填充绘画的颜色、渐变或模式
+            * strokeStyle 设置或返回用于笔触的颜色、渐变或模式
+            * shadowColor 设置或返回用于阴影的颜色
+            * shadowBlur  设置或返回用于阴影的模糊级别
+            * shadowOffsetX   设置或返回阴影距形状的水平距离
+            * shadowOffsetY   设置或返回阴影距形状的垂直距离
+        + 方法
+            * createLinearGradient()  创建线性渐变（用在画布内容上）
+            * createPattern() 在指定的方向上重复指定的元素
+            * createRadialGradient()  创建放射状/环形的渐变（用在画布内容上）
+            * addColorStop()  规定渐变对象中的颜色和停止位置
+    - 线条样式
+        + 属性
+            * lineCap 设置或返回线条的结束端点样式
+            * lineJoin    设置或返回两条线相交时，所创建的拐角类型
+            * lineWidth   设置或返回当前的线条宽度
+            * miterLimit  设置或返回最大斜接长度
+    - 矩形
+        + 方法
+            * rect()  创建矩形
+            * fillRect()  绘制“被填充”的矩形
+            * strokeRect()    绘制矩形（无填充）
+            * clearRect() 在给定的矩形内清除指定的像素
+    - 路径
+        + 方法
+            * fill()  填充当前绘图（路径）
+            * stroke()    绘制已定义的路径
+            * beginPath() 起始一条路径，或重置当前路径
+            * moveTo()    把路径移动到画布中的指定点，不创建线条
+            * closePath() 创建从当前点回到起始点的路径
+            * lineTo()    添加一个新点，然后在画布中创建从该点到最后指定点的线条
+            * clip()  从原始画布剪切任意形状和尺寸的区域
+            * quadraticCurveTo()  创建二次贝塞尔曲线
+            * bezierCurveTo() 创建三次方贝塞尔曲线
+            * arc()   创建弧/曲线（用于创建圆形或部分圆）
+            * arcTo() 创建两切线之间的弧/曲线
+            * isPointInPath() 如果指定的点位于当前路径中，则返回 true，否则返回 false
+    - 转换
+        + 方法
+            * scale() 缩放当前绘图至更大或更小
+            * rotate()    旋转当前绘图
+            * translate() 重新映射画布上的 (0,0) 位置
+            * transform() 替换绘图的当前转换矩阵
+            * setTransform()  将当前转换重置为单位矩阵。然后运行 transform()
+    - 文本
+        + 属性
+            * font    设置或返回文本内容的当前字体属性
+            * textAlign   设置或返回文本内容的当前对齐方式
+            * textBaseline    设置或返回在绘制文本时使用的当前文本基线
+        + 方法
+            * fillText()  在画布上绘制“被填充的”文本
+            * strokeText()    在画布上绘制文本（无填充）
+            * measureText()   返回包含指定文本宽度的对象
+    - 图像绘制
+        + 方法
+            * drawImage() 向画布上绘制图像、画布或视频
+    - 像素操作
+        + 属性
+            * width   返回 ImageData 对象的宽度
+            * height  返回 ImageData 对象的高度
+            * data    返回一个对象，其包含指定的 ImageData 对象的图像数据
+        + 方法
+            * createImageData()   创建新的、空白的 ImageData 对象
+            * getImageData()  返回 ImageData 对象，该对象为画布上指定的矩形复制像素数据
+            * putImageData()  把图像数据（从指定的 ImageData 对象）放回画布上
+    - 合成
+        + 属性
+            * globalAlpha 设置或返回绘图的当前 alpha 或透明值
+            * globalCompositeOperation    设置或返回新图像如何绘制到已有的图像上
+    - 其他
+        + 方法
+            * save()  保存当前环境的状态
+            * restore()   返回之前保存过的路径状态和属性
 
 ```html
 <canvas id="test-canvas" width="200" heigth="100">
@@ -167,6 +339,10 @@ Your browser does not support the audio tag.
     - SVG 图像可在任何的分辨率下被高质量地打印
     - SVG 可在图像质量不下降的情况下被放大
 
+### 工具
+
+* [duopixel/Method-Draw](https://github.com/duopixel/Method-Draw):Method Draw, the SVG Editor for Method of Action http://editor.method.ac
+
 ### Canvas vs SVG
 
 * SVG
@@ -203,6 +379,225 @@ Your browser does not support the audio tag.
     - timestamp   响应的日期/时间
 
 ## Web存储
+
+* localStorage:没有时间限制的数据存储
+    - cookie 不适合大量数据的存储，因为它们由每个对服务器的请求来传递
+    - 存储的数据没有时间限制
+* sessionStorage - 针对一个 session 的数据存储
+    - 当用户关闭浏览器窗口后，数据会被删除
+
+## Application Cache
+
+* 优势
+    - 离线浏览 - 用户可在应用离线时使用它们
+    - 速度 - 已缓存资源加载得更快
+    - 减少服务器负载 - 浏览器将只从服务器下载更新过或更改过的资源
+* 使用
+    - 指定缓存文件 manifest，扩展名是：".appcache"
+    - 配置
+        + manifest 文件需要配置正确的 MIME-type，即 "text/cache-manifest"。必须在 web 服务器上进行配置
+        + 以 "#" 开头的是注释行
+        + manifest 文件可分为三个部分
+            * CACHE MANIFEST：必须：列出的文件将在首次下载后进行缓存
+                - 当 manifest 文件加载后，浏览器会从网站的根目录下载这三个文件。然后，无论用户何时与因特网断开连接，这些资源依然是可用的
+            * NETWORK：列出的文件需要与服务器的连接，且不会被缓存
+                - 用星号来指示所有其他其他资源/文件都需要因特网连接
+            * FALLBACK：列出的文件规定当页面无法访问时的回退页面
+                - 可以列多个，依次替补
+    - 更新
+        + 一旦文件被缓存，则浏览器会继续展示已缓存的版本，即使您修改了服务器上的文件。为了确保浏览器更新缓存，您需要更新 manifest 文件
+        + 用户清空浏览器缓存
+        + manifest 文件被修改:更新注释行中的日期和版本号是一种使浏览器重新缓存文件的办法。
+        + 由程序来更新应用缓存
+
+```html
+<!DOCTYPE HTML>
+<html manifest="demo.appcache">
+...
+</html>
+
+// demo.appcache 配置
+CACHE MANIFEST
+# 2012-02-21 v1.0.0
+/theme.css
+/logo.gif
+/main.js
+
+NETWORK:
+login.asp
+
+FALLBACK:
+/html5/ /404.html
+```
+
+## Web Workers
+
+* 当在 HTML 页面中执行脚本时，页面的状态是不可响应的，直到脚本已完成。 web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能
+
+## 服务器发送事件（server-sent event）
+
+允许网页获得来自服务器的更新
+
+* 使用
+    - 创建一个新的 EventSource 对象，然后规定发送更新的页面的 URL
+    - 每接收到一次更新，就会发生 onmessage 事件
+    - 当 onmessage 事件发生时，把已接收的数据推入 id 为 "result" 的元素中
+* 方法
+    - onopen    当通往服务器的连接被打开
+    - onmessage   当接收到消息
+    - onerror 当错误发生
+
+```js
+if(typeof(EventSource)!=="undefined")
+  {
+  var source=new EventSource("../example/html5/demo_sse.php");
+  source.onmessage=function(event)
+    {
+    document.getElementById("result").innerHTML+=event.data + "<br />";
+    };
+  }
+else
+  {
+  document.getElementById("result").innerHTML="Sorry, your browser does not support server-sent events...";
+  }
+```
+
+## 表单
+
+* 类型
+    - email
+    - url
+    - number
+        + max   number  规定允许的最大值
+        + min number  规定允许的最小值
+        + step    number  规定合法的数字间隔（如果 step="3"，则合法的数是 -3,0,3,6 等）
+        + value   number  规定默认值
+    - range
+        + max   number  规定允许的最大值
+        + min number  规定允许的最小值
+        + step    number  规定合法的数字间隔（如果 step="3"，则合法的数是 -3,0,3,6 等）
+        + value   number  规定默认值
+    - Date pickers (date, month, week, time, datetime, datetime-local)
+    - search
+    - color
+    - datalist 元素规定输入域的选项列表
+        + 列表是通过 datalist 内的 option 元素创建的。
+        + 如需把 datalist 绑定到输入域，请用输入域的 list 属性引用 datalist 的 id
+        + option 元素永远都要设置 value 属性
+    - keygen 元素的作用是提供一种验证用户的可靠方法。
+        + keygen 元素是密钥对生成器（key-pair generator）。当提交表单时，会生成两个键，一个是私钥，一个公钥。
+        + 私钥（private key）存储于客户端，公钥（public key）则被发送到服务器。公钥可用于之后验证用户的客户端证书（client certificate）。
+    - output 元素用于不同类型的输出
+* 属性
+    - 表单
+        + autocomplete:form 应该拥有自动完成功能
+        + novalidate:提交表单时不应该验证 form 或 input 域
+    - inut
+        + autocomplete:input 域应该拥有自动完成功能
+        + autofocus:在页面加载时，域自动地获得焦点
+        + form:规定输入域所属的一个或多个表单,必须引用所属表单的 id
+        + form overrides:重写 form 元素的某些属性设定
+            + formaction
+            + formenctype
+            + formmethod
+            + formnovalidate
+            + formtarget
+        + height 和 width:只适用于 image 类型的 <input> 标签
+        + list:规定输入域的 datalist。datalist 是输入域的选项列表
+        + min, max 和 step
+        + multiple:可选择多个值,用于 email 和 file
+        + pattern (regexp):用于验证 input 域的模式
+        + placeholder:提供一种提示（hint），描述输入域所期待的值
+        + required:必须在提交之前填写输入域（不能为空）
+
+```html
+Webpage: <input type="url" list="url_list" name="link" />
+<datalist id="url_list">
+<option label="W3School" value="http://www.W3School.com.cn" />
+<option label="Google" value="http://www.google.com" />
+<option label="Microsoft" value="http://www.microsoft.com" />
+</datalist>
+```
+
+## 事件
+
+* window
+    - onafterprint：在打印文档之后运行脚本
+    - onbeforeprint：在文档打印之前运行脚本
+    - onbeforeonload：在文档加载之前运行脚本
+    - onblur：当窗口失去焦点时运行脚本
+    - onerror：当错误发生时运行脚本
+    - onfocus：当窗口获得焦点时运行脚本
+    - onhaschange：当文档改变时运行脚本
+    - onload：当文档加载时运行脚本
+    - onunload   ：当用户离开文档时运行脚本
+    - onmessage ：当触发消息时运行脚本
+    - onoffline  ：当文档离线时运行脚本
+    - ononline   ：当文档上线时运行脚本
+    - onpagehide ：当窗口隐藏时运行脚本
+    - onpageshow ：当窗口可见时运行脚本
+    - onpopstate ：当窗口历史记录改变时运行脚本
+    - onredo ：当文档执行再执行操作（redo）时运行脚本
+    - onresize   ：当调整窗口大小时运行脚本
+    - onstorage  ：当文档加载加载时运行脚本
+    - onundo ：当 Web Storage 区域更新时（存储空间中的数据发生变化时）
+* form
+    - onfocus:当元素获得焦点时运行脚本
+    - onblur :当元素失去焦点时运行脚本
+    - onchange   :当元素改变时运行脚本
+    - oncontextmenu  :当触发上下文菜单时运行脚本
+    - onformchange   :当表单改变时运行脚本
+    - onforminput:当表单获得用户输入时运行脚本
+    - oninput:当元素获得用户输入时运行脚本
+    - oninvalid  :当元素无效时运行脚本
+    - onreset:当表单重置时运行脚本。HTML 5 不支持。
+    - onselect   :当选取元素时运行脚本
+    - onsubmit   :当提交表单时运行脚本
+* 键盘
+    - onkeydown：当按下按键时运行脚本
+    - onkeypress：当按下并松开按键时运行脚本
+    - onkeyup：当松开按键时运行脚本
+* 鼠标
+    - onclick：当单击鼠标时运行脚本
+    - ondblclick ：当双击鼠标时运行脚本
+    - ondrag ：当拖动元素时运行脚本
+    - ondragend  ：当拖动操作结束时运行脚本
+    - ondragenter：当元素被拖动至有效的拖放目标时运行脚本
+    - ondragleave：当元素离开有效拖放目标时运行脚本
+    - ondragover ：当元素被拖动至有效拖放目标上方时运行脚本
+    - ondragstart：当拖动操作开始时运行脚本
+    - ondrop ：当被拖动元素正在被拖放时运行脚本
+    - onmousedown：当按下鼠标按钮时运行脚本
+    - onmousemove：当鼠标指针移动时运行脚本
+    - onmouseout ：当鼠标指针移出元素时运行脚本
+    - onmouseover：当鼠标指针移至元素之上时运行脚本
+    - onmouseup  ：当松开鼠标按钮时运行脚本
+    - onmousewheel   ：当转动鼠标滚轮时运行脚本
+    - onscroll   ：当滚动元素滚动元素的滚动条时运行脚本
+* 媒体
+    - onabort：当发生中止事件时运行脚本
+    - oncanplay  ：当媒介能够开始播放但可能因缓冲而需要停止时运行脚本
+    - oncanplaythrough   ：当媒介能够无需因缓冲而停止即可播放至结尾时运行脚本
+    - ondurationchange   ：当媒介长度改变时运行脚本
+    - onemptied  ：当媒介资源元素突然为空时（网络错误、加载错误等）运行脚本
+    - onended：当媒介已抵达结尾时运行脚本
+    - onerror：当在元素加载期间发生错误时运行脚本
+    - onloadeddata   ：当加载媒介数据时运行脚本
+    - onloadedmetadata   ：当媒介元素的持续时间以及其他媒介数据已加载时运行脚本
+    - onloadstart：当浏览器开始加载媒介数据时运行脚本
+    - onpause：当媒介数据暂停时运行脚本
+    - onplay ：当媒介数据将要开始播放时运行脚本
+    - onplaying  ：当媒介数据已开始播放时运行脚本
+    - onprogress ：当浏览器正在取媒介数据时运行脚本
+    - onratechange   ：当媒介数据的播放速率改变时运行脚本
+    - onreadystatechange ：当就绪状态（ready-state）改变时运行脚本
+    - onseeked   ：当媒介元素的定位属性 [1] 不再为真且定位已结束时运行脚本
+    - onseeking  ：当媒介元素的定位属性为真且定位已开始时运行脚本
+    - onstalled  ：当取回媒介数据过程中（延迟）存在错误时运行脚本
+    - onsuspend  ：当浏览器已在取媒介数据但在取回整个媒介文件之前停止时运行脚本
+    - ontimeupdate   ：当媒介改变其播放位置时运行脚本
+    - onvolumechange ：当媒介改变音量亦或当音量被设置为静音时运行脚本
+    - onwaiting  ：当媒介已停止播放但打算继续播放时运行脚本
 
 ## fetch
 
