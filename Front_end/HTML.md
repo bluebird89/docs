@@ -158,6 +158,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
   - reset
   - password
   - hidden
+  - file
 * 列表
   - 支持嵌套
   - ul:type:disc circle square
@@ -427,7 +428,7 @@ City<br>
 - iframe:网页内显示网页
   + height
   + width
-  + Iframe:0 删除边框
+  + iframe:0 删除边框
   + 可用作链接的目标（target）。链接的 target 属性必须引用 iframe 的 name 属性
 
 ```html
