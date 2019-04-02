@@ -169,3 +169,28 @@ Black Panther:是对非洲国家瓦坎达守护者的的传统称呼，每代瓦
 ## 资源
 
 * [The Marvel Comics API](https://developer.marvel.com/)
+* 1999 复仇者联盟 https://www.bilibili.com/video/av20874719/
+* 1992年《X战警》动画第四季14集全 https://www.bilibili.com/video/av8997735/
+* 复仇者战队第一季 https://www.bilibili.com/video/av275225/
+* 银河护卫队（动画） https://www.bilibili.com/video/av19013043/
+* 《雷神奇侠》 动画 https://www.bilibili.com/video/av1081551/
+* 国语蜘蛛女侠1979 https://www.bilibili.com/video/av11867547/
+* 终极蜘蛛侠
+    - https://www.bilibili.com/video/av31397004/
+    - https://www.bilibili.com/video/av41111970/
+* 复仇者：世上最强英雄组合 https://www.bilibili.com/bangumi/play/ep33259
+* X战警：进化 第二季 https://www.bilibili.com/video/av9618330/
+    - 蜘蛛侠 SpiderManTA】【1995年】（五星推荐）
+    - https://www.bilibili.com/video/av5181929/
+    - https://www.bilibili.com/video/av6224255/
+    - https://www.bilibili.com/video/av6235769/
+    - https://www.bilibili.com/video/av6253899/
+    - https://www.bilibili.com/video/av6276375/
+*  [超级蜘蛛侠(Spider-Man Unlimited) 1999](https://www.bilibili.com/video/av8384930/)
+*  [蜘蛛侠](https://www.bilibili.com/video/av14331109/)
+*  [蜘蛛侠：起源 EP01-EP06](https://www.bilibili.com/video/av12797017/)
+*  [少年钢铁侠](https://www.bilibili.com/video/av7202212/)
+*  [黑豹Black Panther](https://www.bilibili.com/video/av4928765/)
+*  [蜘蛛侠2003 动画版](https://www.bilibili.com/video/av30944048/)
+*  [最后的复仇者1+2](https://www.bilibili.com/video/av3471403/)
+*  [复仇者：凝聚力量](https://www.bilibili.com/video/av2874585/)
