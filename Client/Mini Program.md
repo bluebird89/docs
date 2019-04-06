@@ -3,11 +3,13 @@
 小程序前段负责内容的展示，如果我们开发的是纯静态页面，那么只需要掌握上面的就可以。但是，如果我们要做动态页面，也就是页面内容是跟数据库交互的，就需要服务端来提供数据的交互。在小程序中，服务端是以接口的方式实现的，结果以json数据格式返回。
 前端通过组件wx.request调用接口，来实现跟服务端的交互
 
-## 搭建
+## 平台
 
-* 登陆[微信公众号平台](http://mp.weixin.qq.com)注册账号
-* 下载[开发工具](https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/devtools.html)
-* 创建项目,在网站的「设置」-「开发者设置」中，查看到微信小程序的 AppID 了。
+* 微信
+    - [开发工具](https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/devtools.html)
+* 支付宝
+* 百度
+* 头条
 
 ## 结构
 

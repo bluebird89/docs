@@ -257,6 +257,8 @@
 * 百面机器学习
 * 李航老师的《统计学习方法》
 * 周志华老师的《机器学习》,又称之为西瓜书。基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等。
+  - [](https://github.com/datawhalechina/pumpkin-book)
+  - [在线阅读](https://datawhalechina.github.io/pumpkin-book/)
 * 《推荐系统实战》：项亮，很适合对于想了解推荐系统
 * 《概率论与数理统计》
 * 《Pattern Recognition and Machine Learning》
