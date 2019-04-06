@@ -143,7 +143,7 @@ smaba
     -   [yichengchen/clashX](https://github.com/yichengchen/clashX):A rule based custom proxy with GUI for Mac base on clash.
 -   沟通
     -   [Textual 7](<Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.>)
-    -   OmniFocus，OmniOutliner，OmniPlan，OmniGraffle
+    -   [OmniGraffle](https://www.omnigroup.com/omnigraffle)
     -   slack
     -   [telegram](https://telegram.org/)
     -   weibo:WeiboX
@@ -154,9 +154,10 @@ smaba
     -   leaf
 - 管理
     -   Keyboard Maestro:流程制作工具
+    -   OmniOutliner
+    -   OmniPlan
     -   OmniFocus：GTD思路的应用
     -   Fantastical：日程管理应用
-    -   Omnifocus 在践行 GTD
     -   sourcetree
     -   [Ship](https://www.realartists.com/index.html):Fast, native, comprehensive issue tracking and code review for GitHub
     -   [trello](https://trello.com/home): Project management tool

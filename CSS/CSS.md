@@ -276,7 +276,7 @@ outline-width:thin;
 
 ## 盒子模型 Box Model
 
-规定了元素框处理元素内容、内边距、边框 和 外边距 的方式
+依赖 display 属性 + position属性 + float属性.规定了元素框处理元素内容、内边距、边框 和 外边距 的方式
 
 * 由内到外：element(height width)->padding(内边距呈现了元素的背景)->border->margin(默认是透明)
 * 背景应用于由内容和内边距、边框组成的区域
