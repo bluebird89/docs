@@ -19,6 +19,14 @@
 * The Amazing Spider-Man 2 (2014)
 * Spider-Man: Homecoming (2017)
 * Spider-Man: Into the Spider-Verse (2018)
+    - 蜘蛛 Gwen
+    - 超凡蜘蛛侠
+    - 蜘猪侠
+    - 潘尼帕客
+    - 暗影蜘蛛侠
+    - 失去亲人
+    - 什么时候准备好：一种信念
+    - 孩子的自信与支持
 * Spider-Man: Far From Home (2019)
 
 ## 奇异博士 Doctor Strange

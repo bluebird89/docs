@@ -38,12 +38,10 @@
 * 家春秋
 * 《东京爱情故事￼》
     * 现代人不缺爱情，或者说不缺貌似爱情的东西，但是寂寞的感觉依然挥之不去。我们可以找个人来谈情说爱，但是，却始终无法缓解一股股涌上心头的落寞荒芜。爱情不是便当，它们依然需要你的郑重其事。——《东京爱情故事￼》
-* The Bourne Identity
-* The Bourne Supremacy (2004)
-* The Bourne Ultimatum (2007)
-* The Bourne Legacy (2012)
-* 渴望》里的张凯丽
-* 《牵手》里的蒋雯丽
+* 《渴望》
+    - 张凯丽
+* 《牵手》
+    - 蒋雯丽
 * 倚天屠龙记(马景涛)
     - 爱江山更爱美人
     - 谢逊恨天:老天不公
@@ -77,6 +75,17 @@
     - The Matrix (1999)
     - The Matrix Reloaded (2003)
     - The Matrix Revolutions (2003)
+* The Bourne Identity
+    - The Bourne Identity
+    - The Bourne Supremacy (2004)
+    - The Bourne Ultimatum (2007)
+    - The Bourne Legacy (2012)
+* 银翼杀手 Blade Runner (1982)
+* 大都会 Metropolis (1927)
+* 一江春水向东流 (1947)
+    - 原配自尽
+* 美丽新世界
+    - 上海人现实，见过大世面，不愿自己拼搏。感情最终找个对自己好的
 
 ## 综艺
 

@@ -1,6 +1,8 @@
 # Film
 华纳、索尼、环球、派拉蒙
+
 * 同样的电影，不同的年纪看完全不一样，教父 千与千寻
+* 看历史，知原文，看国外，知不是第一次遇到
 
 ## 李安
 
@@ -17,7 +19,6 @@
 * 侠影之谜：重装出发 Batman: The Journey Begins (2005)
 * 侠影之谜：未来之路 Batman Begins: Path to Discovery (2005)
 * 烈焰升腾：黑暗骑士三部曲诞生及影响 The Fire Rises: The Creation and Impact of the Dark Knight Trilogy (2013)
-
 
 ## 赛博朋克
 
