@@ -135,7 +135,7 @@ virtualenv-init
 virtualenv-prefix
 virtualenvs
 
-pyenv virtualenvs // 看到本地所有的项目环境
+pyenv virtualenvs # 看到本地所有的项目环境
 pyenv virtualenv 3.5.0 v_env_3.5.0
 pyenv activate v_env_3.5.0
 pyenv deactivate

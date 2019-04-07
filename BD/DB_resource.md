@@ -11,19 +11,28 @@
 
 * [Kaggle](https://www.kaggle.com/)：爱竞赛的盆友们应该很熟悉了，Kaggle上有各种有趣的数据集，拉面评级、篮球数据、甚至西雅图的宠物许可证。
 * [UCI机器学习库](http://mlr.cs.umass.edu/ml/)：最古老的数据集源之一，是寻找有趣数据集的第一站。虽然数据集是用户贡献的，因此具有不同的清洁度，但绝大多数都是干净的，可以直接从UCI机器学习库下载，无需注册。
-* [VisualData](https://www.visualdata.io/)：分好类的计算机视觉数据集，可以搜索~
-* [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/index.php):
+* [VisualData](https://www.visualdata.io/)：分好类的计算机视觉数据集，可以搜索
+* [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/index.php)
+* [AWS开放数据](https://registry.opendata.aws/)
+* [Google数据集搜索引擎](https://toolbox.google.com/datasetsearch)
+* [微软数据集](https://msropendata.com/)
+* [Awesom Public Datasets](https://github.com/awesomedata/awesome-public-datasets):按主题整理了大量的数据集内容，例如：生物学、经济学、教育等。其中列出的大多数数据集都是免费的，但在使用任何数据集之前，均需检查数据集的许可要求。
+* [VisualData数据集](https://www.visualdata.io/https://www.visualdata.io/)
 
 ## 资源
 
 * 公共政府数据集
-    - [Data.gov](https://www.data.gov/)：该网站可以从多个美国政府机构下载数据。数据可以从政府预算到学校绩效分数。但要警告：大部分数据需要额外的研究。
+    - [美国政府数据集](https://www.data.gov/)：该网站可以从多个美国政府机构下载数据。数据可以从政府预算到学校绩效分数。但要警告：大部分数据需要额外的研究。
     - [食物环境地图集](https://catalog.data.gov/dataset/food-environment-atlas-f4a22)：包含当地食物选择如何影响美国饮食的数据。
     - [学校系统财务状况](https://catalog.data.gov/dataset/annual-survey-of-school-system-finances)：美国学校系统财务状况调查。
     - [慢性病数据](https://catalog.data.gov/dataset/u-s-chronic-disease-indicators-cdi-e50c9)：美国各地慢性病指标数据。
     - [美国国家教育统计中心](https://nces.ed.gov/)：美国和世界各地的教育机构和教育人口统计数据。
     - [英国数据中心](https://www.ukdataservice.ac.uk/)：英国最大的社会，经济和人口数据收集。
-    - [美国数据](http://datausa.io/)：美国公共数据的全面可视化。
+    - [美国数据](http://datausa.io/)：美国公共数据的全面可视化
+    - [欧洲政府数据集](https://data.europa.eu/euodp/data/dataset)
+    - [新西兰政府数据集](https://catalogue.data.govt.nz/dataset)
+    - [印度政府数据集](https://data.gov.in/)
+    - [北爱尔兰公共数据集](https://www.opendatani.gov.uk/)
     - [Our World in Data](https://ourworldindata.org):Research and interactive data visualizations to understand the world’s largest problems.
 * 财经
     - [Quandl](https%3A//www.quandl.com/)：经济和金融数据的良好来源 - 可用于建立预测经济指标或股票价格的模型。

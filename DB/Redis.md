@@ -388,7 +388,7 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
 * 定时删除：用一个定时器来负责监视Key，过期则自动删除。虽然内存及时释放，但是十分消耗CPU资源。在大并发请求下，CPU要将时间应用在处理请求，而不是删除Key，因此没有采用这一策略。Redis默认每个100ms检查是否有过期的Key，有过期Key则删除。需要说明的是，Redis不是每个100ms将所有的Key检查一次，而是随机抽取进行检查（如果每隔100ms，全部Key进行检查，Redis岂不是卡死）。因此，如果只采用定期删除策略，会导致很多Key到时间没有删除。
 * 惰性删除：在你获取某个Key的时候，Redis会检查一下，这个Key如果设置了过期时间，那么是否过期了？如果过期了此时就会删除。
 * 内存淘汰机制：通过配置文件
-    - Noeviction：当内存不足以容纳新写入数据时，新写入操作会报错。应该没人使用吧；
+    - Noeviction：当内存不足以容纳新写入数据时，新写入操作会报错。
     - Allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的Key。推荐使用，目前项目在用这种；
     - Allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个key，应该也没人使用吧；
     - Volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的Key。这种情况一般是把Redis既当缓存又做持久化存储的时候才用。不推荐；
@@ -444,6 +444,146 @@ maxmemory-policy volatile-lru
 * 优化内存占用。了解Redis内存模型可以选择更合适的数据类型和编码，更好的利用Redis内存。
 * 分析解决问题。当Redis出现阻塞、内存占用等问题时，尽快发现导致问题的原因，便于分析解决问题。
 
+## 开发规范
+
+* 键值设计
+    - key 名设计
+        + 可读性和可管理性：业务名 (或数据库名) 为前缀 (防止 key 冲突)，用冒号分隔
+        + 业务名 (或数据库名) 为前缀 (防止 key 冲突)，用冒号分隔，简化单词
+        + 不要包含特殊字符
+    - value 设计
+        + 拒绝 bigkey(防止网卡流量、慢查询)：string 类型控制在 10KB 以内，hash、list、set、zset 元素个数不要超过 5000。
+        + 非字符串的 bigkey，不要使用 del 删除，使用 hscan、sscan、zscan 方式渐进式删除，同时要注意防止 bigkey 过期时间自动删除问题 (例如一个 200 万的 zset 设置 1 小时过期，会触发 del 操作，造成阻塞，而且该操作不会不出现在慢查询中 (latency 可查))
+        + 选择适合的数据类型。合理控制和使用数据结构内存编码优化配置，也要注意节省内存和性能之间的平衡
+        + 控制 key 的生命周期：设置过期时间 (条件允许可以打散过期时间，防止集中过期)，不过期的数据重点关注 idletime。
+* 命令使用
+    - O(N) 命令关注 N 的数量：例如 hgetall、lrange、smembers、zrange、sinter 等并非不能使用，但是需要明确 N 的值。有遍历的需求可以使用 hscan、sscan、zscan 代替。
+    - 禁用命令：禁止线上使用 keys、flushall、flushdb 等，通过 redis 的 rename 机制禁掉命令，或者使用 scan 的方式渐进式处理。
+    - 合理使用 select：redis 的多数据库较弱，使用数字进行区分，很多客户端支持较差，同时多业务用多数据库实际还是单线程处理，会有干扰。
+    - 使用批量操作（pipeline）提高效率：控制一次批量操作的元素个数(例如 500 以内，实际也和元素字节数有关)
+        + 原生是原子操作，pipeline 是非原子操作。
+        + pipeline 可以打包不同的命令，原生做不到
+        + pipeline 需要客户端和服务端同时支持。
+    - Redis 事务功能较弱(不支持回滚)，不建议过多使用。集群版本 (自研和官方) 要求一次事务操作的 key 必须在一个 slot 上 (可以使用 hashtag 功能解决)
+    - Redis 集群版本在使用 Lua 上有特殊要求：
+        + 所有 key 都应该由 KEYS 数组来传递，redis.call/pcall 里面调用的 redis 命令，key 的位置，必须是 KEYS array, 否则直接返回 error，"-ERR bad lua script for redis cluster, all the keys that the script uses should be passed using the KEYS array"
+        + 所有 key，必须在 1 个 slot 上，否则直接返回 error, “-ERR eval/evalsha command keys must in same slot”
+    - 必要情况下使用 monitor 命令时，要注意不要长时间使用。
+* 客户端使用
+    - 避免多个应用使用一个 Redis 实例：不相干的业务拆分，公共数据做服务化。
+    - 使用带有连接池的数据库，可以有效控制连接，同时提高效率
+    - 高并发下建议客户端添加熔断功能 (例如 netflix hystrix)
+    - 设置合理的密码，如有必要可以使用 SSL 加密访问
+    - 根据自身业务类型，选好 maxmemory-policy(最大内存淘汰策略)，设置好过期时间。
+
+
+```sh
+# big key 搜索
+import sys
+import redis
+
+def check_big_key(r, k):
+  bigKey = False
+  length = 0 
+  try:
+    type = r.type(k)
+    if type == "string":
+      length = r.strlen(k)
+    elif type == "hash":
+      length = r.hlen(k)
+    elif type == "list":
+      length = r.llen(k)
+    elif type == "set":
+      length = r.scard(k)
+    elif type == "zset":
+      length = r.zcard(k)
+  except:
+    return
+  if length > 10240:
+    bigKey = True
+  if bigKey :
+    print db,k,type,length
+
+def find_big_key_normal(db_host, db_port, db_password, db_num):
+  r = redis.StrictRedis(host=db_host, port=db_port, password=db_password, db=db_num)
+  for k in r.scan_iter(count=1000):
+    check_big_key(r, k)
+
+def find_big_key_sharding(db_host, db_port, db_password, db_num, nodecount):
+  r = redis.StrictRedis(host=db_host, port=db_port, password=db_password, db=db_num)
+  cursor = 0
+  for node in range(0, nodecount) :
+    while True:
+      iscan = r.execute_command("iscan",str(node), str(cursor), "count", "1000")
+      for k in iscan[1]:
+        check_big_key(r, k)
+      cursor = iscan[0]
+      print cursor, db, node, len(iscan[1])
+      if cursor == "0":
+        break;
+  
+if \__name__\ == '__main__':
+  if len(sys.argv) != 4:
+     print 'Usage: python ', sys.argv[0], ' host port password '
+     exit(1)
+  db_host = sys.argv[1]
+  db_port = sys.argv[2]
+  db_password = sys.argv[3]
+  r = redis.StrictRedis(host=db_host, port=int(db_port), password=db_password)
+  nodecount = r.info()['nodecount']
+  keyspace_info = r.info("keyspace")
+  for db in keyspace_info:
+    print 'check ', db, ' ', keyspace_info[db]
+    if nodecount > 1:
+      find_big_key_sharding(db_host, db_port, db_password, db.replace("db",""), nodecount)
+    else:
+      find_big_key_normal(db_host, db_port, db_password, db.replace("db", ""))
+```
+
+```java
+// 删除 bigkey
+// Hash 删除: hscan + hdel
+public void delBigHash(String host, int port, String password, String bigHashKey) {
+    Jedis jedis = new Jedis(host, port);
+    if (password != null && !"".equals(password)) {
+        jedis.auth(password);
+    }
+    ScanParams scanParams = new ScanParams().count(100);
+    String cursor = "0";
+    do {
+        ScanResult<Entry<String, String>> scanResult = jedis.hscan(bigHashKey, cursor, scanParams);
+        List<Entry<String, String>> entryList = scanResult.getResult();
+        if (entryList != null && !entryList.isEmpty()) {
+            for (Entry<String, String> entry : entryList) {
+                jedis.hdel(bigHashKey, entry.getKey());
+            }
+        }
+        cursor = scanResult.getStringCursor();
+    } while (!"0".equals(cursor));
+
+    // 删除 bigkey
+    jedis.del(bigHashKey);
+}
+
+// List 删除: ltrim
+public void delBigList(String host, int port, String password, String bigListKey) {
+    Jedis jedis = new Jedis(host, port);
+    if (password != null && !"".equals(password)) {
+        jedis.auth(password);
+    }
+    long llen = jedis.llen(bigListKey);
+    int counter = 0;
+    int left = 100;
+    while (counter < llen) {
+        // 每次从左侧截掉 100 个
+        jedis.ltrim(bigListKey, left, llen);
+        counter += left;
+    }
+    // 最终删除 key
+    jedis.del(bigListKey);
+}
+```
+
 ## 工具
 
 * [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager):🔧 Cross-platform GUI management tool for Redis http://redisdesktop.com
@@ -452,6 +592,12 @@ maxmemory-policy volatile-lru
 * [CodisLabs/codis](https://github.com/CodisLabs/codis):Proxy based Redis cluster solution supporting pipeline and scaling dynamically
 * [erikdubbelboer/phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. http://dubbelboer.com/phpRedisAdmin/
 * [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis
+* [redis-port](link):redis 间数据同步
+* big key 搜索:参考上面
+* [redis-faina](https://github.com/facebookarchive/redis-faina):热点 key 寻找 (内部实现使用 monitor，所以建议短时间使用)
+* Jedis
+    - [Jedis 常见异常汇总](https://yq.aliyun.com/articles/236384)
+    - [JedisPool 资源池优化](https://yq.aliyun.com/articles/236383)
 
 ## 参考
 

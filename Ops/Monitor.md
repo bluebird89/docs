@@ -18,8 +18,15 @@ Raygun是领先的错误监控以及崩溃报告的平台。应用程序性能�
 * Nagios Log Server
 * Nagios Fusion
 
+## datadog
+
 ### 参考
 
 * Nagios： https://www.nagios.org/
 * 插件生态： https://exchange.nagios.org/
 * 功能的比对： https://www.nagios.org/downloads/nagios-core/
+
+## 工具
+
+* [pyflame](https://github.com/uber/pyflame):非侵入式得对运行中的 python 进程做 snapshot, 输出成 svg
+    - `pyflame -s 60 -r 0.01 ${pid} | flamegraph.pl > myprofile.svg`

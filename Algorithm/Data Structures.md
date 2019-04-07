@@ -115,3 +115,4 @@ https://guptavikas.wordpress.com/2012/12/17/b-tree-index-in-mysql/
 ## 参考
 
 * [grantjenks/python-sortedcontainers](https://github.com/grantjenks/python-sortedcontainers):Python Sorted Container Types: Sorted List, Sorted Dict, and Sorted Set
+* [Data Structure Visualizations](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
