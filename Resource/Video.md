@@ -21,6 +21,10 @@ webm
 
 ![视频播放器的原理](../_static/video_play.png "视频播放器的原理")
 
+## 录像
+
+* [asdjgfr/operationRecord](https://github.com/asdjgfr/operationRecord):记录产品，测试的沙雕操作，方便debugger
+
 ## 资源
 
 - TED

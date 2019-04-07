@@ -89,6 +89,8 @@ sudo pip3 install mysqlclient #  mysql驱动
 
 cd Django_app
 
+python manage.py collectstatic
+
 # migrate the initial database schema to our PostgreSQL database using the management script
 ~/myproject/manage.py makemigrations
 ~/myproject/manage.py migrate
@@ -97,6 +99,8 @@ cd Django_app
 
 python3 manage.py makemigrations TestModel  # 让 Django 知道我们在我们的模型有一些变更
 python3 manage.py migrate TestModel   # 创建表结构
+
+python manage.py createsuperuser
 
 # 开启服务
 sudo ufw allow 8000
@@ -108,11 +112,21 @@ python manage.py runserver # 在本电脑访问服务器，访问http://server_d
 
 ## 服务器搭建
 
+* 静态文件的处理都直接由nginx完成
 搭建uwsgi
 
 ```
+pip install uwsgi
+
+# test.py
+def application(env, start_response):
+    start_response('200 OK', [('Content-Type','text/html')])
+    return b"Hello World"
+# 测试 uwsgi
+uwsgi --http :8000 --wsgi-file test.py
+
 [uwsgi]
-socket = 127.0.0.1:9090
+socket = 127.0.0.1:9090 # /tmp/www.wangzhy.com.socket
 master = true         # 主进程
 vhost = true          # 多站模式
 no-site = true        # 多站模式时不设置入口模块和文件
@@ -125,13 +139,15 @@ buffer-size = 30000
 pidfile = /var/run/uwsgi9090.pid    //pid文件，用于下面的脚本启动、停止该进程
 daemonize = /website/uwsgi9090.log
 
+uwsgi --ini uwsgi.ini
+
 server {
     listen       80;
     server_name  localhost;
 
     location / {
         include  uwsgi_params;
-        uwsgi_pass  127.0.0.1:9090;              //必须和uwsgi中的设置一致
+        uwsgi_pass  127.0.0.1:9090;              //必须和uwsgi中的设置一致 unix:/tmp/www.wangzhy.com.socket;
         uwsgi_param UWSGI_SCRIPT demosite.wsgi;  //入口文件，即wsgi.py相对于项目根目录的位置，“.”相当于一层目录
         uwsgi_param UWSGI_CHDIR /demosite;       //项目根目录
         index  index.html index.htm;
@@ -145,15 +161,6 @@ server {
 ```
 Requested setting INSTALLED_APPS, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.
 ```
-
-## 资源
-
-* [rosarior/awesome-django](https://github.com/rosarior/awesome-django):Repository mirror of GitLab: https://gitlab.com/rosarior/awesome-django http://awesome-django.com
-
-## 参考
-
-* [文档](https://docs.djangoproject.com/en/dev/releases/2.0/)
-* [How To Set Up Django with Postgres, Nginx, and Gunicorn on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04)
 
 ## 工具
 
@@ -175,3 +182,11 @@ Requested setting INSTALLED_APPS, but settings are not configured. You must eith
 * [geex-arts/django-jet](https://github.com/geex-arts/django-jet):Modern responsive template for the Django admin interface with improved functionality http://jet.geex-arts.com/
 * [nioperas06/awesome-django-rest-framework](https://github.com/nioperas06/awesome-django-rest-framework):Tools, processes and resources you need to create an awesome API with Django REST Framework
 * [divio/django-cms](https://github.com/divio/django-cms):The easy-to-use and developer-friendly CMS http://www.django-cms.org
+
+
+## 参考
+
+* [rosarior/awesome-django](https://github.com/rosarior/awesome-django):Repository mirror of GitLab: https://gitlab.com/rosarior/awesome-django http://awesome-django.com
+* [文档](https://docs.djangoproject.com/en/dev/releases/2.0/)
+* [How To Set Up Django with Postgres, Nginx, and Gunicorn on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04)
+* [Python/WSGI 应用快速入门](https://uwsgi-docs-cn.readthedocs.io/zh_CN/latest/WSGIquickstart.html)
