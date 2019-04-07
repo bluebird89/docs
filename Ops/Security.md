@@ -25,8 +25,6 @@
 * Lynis
 * [网站体检工具](https://ziyuan.baidu.com/safe/index)
 
-
-
 ## MySQL层安全策略
 
 业务帐号最多只可以通过内网远程登录，而不能通过公网远程连接。
@@ -191,6 +189,7 @@ Cross SiteScript，跨站脚本攻击.在页面执行你想要的js.理论上，
 * [phith0n/Mind-Map](https://github.com/phith0n/Mind-Map):各种安全相关思维导图整理收集
 * [trimstray/the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge):💫 A collection of awesome lists, manuals, blogs, hacks, one-liners, cli/web tools and more. Especially for System and Network Administrators, DevOps, Pentesters or Security Researchers.
 * [Micropoor/Micro8](https://github.com/Micropoor/Micro8):Gitbook https://micro8.gitbook.io/micro8/
+* [hacker-tools](https://hacker-tools.github.io/lectures/)
 
 ## 案例
 

@@ -43,6 +43,7 @@
 
 * [因果推理](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/)
 * [Grokking Deep Learning](https://livebook.manning.com/#!/book/grokking-deep-learning/about-this-book/)
+* [Deep Learning](http://www.deeplearningbook.org/)
 
 ## 实例
 

@@ -119,7 +119,8 @@ V       enter visual line mode
 
 ## 配置
 
-chrome://net-internals/#hsts
+* chrome://net-internals/#hsts
+* 查看内置插件 `chrome://system/`
 
 ## 技巧
 

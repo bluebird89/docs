@@ -8,3 +8,7 @@
 * 图形学相关的算法
 * 3d引擎的开发
 * 图形学在浏览器端的应用，之后发展肯定是需要借鉴传统图形学的方案，所以c/c++少不了，同时，3d/2d在浏览器端吃性能，需要webassembly加持，native语言是更少不了了。
+
+## 课程
+
+* [Computer Graphics](http://www.scratchapixel.com)

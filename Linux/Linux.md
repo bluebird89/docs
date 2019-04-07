@@ -807,6 +807,7 @@ chmod  u g o a | +（加入） -（除去） =（设置） | r w x | 文档路�
 chmod u=rwx,g+rwx,o-rwx test
 
 sudo chown user1:user1 /etc/apt/sources.list # 修改文件的属主或属组 change file ownership
+usermod -a -G sudo username
 chown [-R] [帐号名称] [文件或目录]
 chown [-R] [帐号名称]:[群组名称] [文件或目录]
 ```
