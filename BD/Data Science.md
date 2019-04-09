@@ -64,6 +64,30 @@ SAS网站的Eight levels of analytics
 * [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! http://pachyderm.io
 * [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):最全中华古诗词数据库, 唐宋两朝近一万四千古诗人, 接近5.5万首唐诗加26万宋诗. 两宋时期1564位词人，21050首词。 http://shici.store
 
+## 实例
+
+* [](https://www.kaggle.com/startupsci/titanic-data-science-solutions)
+* 线性回归
+    - 例 1：https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html#sphx-glr-auto-examples-linear-model-plot-ols-py
+    - 例 2：https://bigdata-madesimple.com/how-to-run-linear-regression-in-python-scikit-learn/
+    - 例 3：https://www.geeksforgeeks.org/linear-regression-python-implementation/
+* 分类:当想要从不同的可能性中预测结果时，分类是最重要的机器学习任务之一。
+    - 二分类：https://machinelearningmastery.com/make-predictions-scikit-learn/
+    - logistic 回归：https://towardsdatascience.com/building-a-logistic-regression-in-python-301d27367c24
+    - 分类器度量标准：https://medium.com/thalus-ai/performance-metrics-for-classification-problems-in-machine-learning-part-i-b085d432082b
+* 支持向量机（SVM）:一种非常经典的 ML 模型，它的目的是寻找一个超平面来对样本进行分割，分割的原则是类别间隔最大化，最终转化为一个凸二次规划问题来求解。
+    - 理论解释：https://www.bilibili.com/video/av28186618
+    - 实战指南：https://www.bilibili.com/video/av38543231
+    - 实战指南：http://dataaspirant.com/2017/02/01/decision-tree-algorithm-python-with-scikit-learn/
+* 决策树:决策树预测结果背后最简单但最有效的方法之一，它们被用于很多方面（如随机森林）。
+    - 理论解释：https://www.bilibili.com/video/av26086646
+    - 实战指南：https://www.bilibili.com/video/av35523476
+    - 实战指南：http://dataaspirant.com/2017/02/01/decision-tree-algorithm-python-with-scikit-learn/
+* 集成学习和随机森林:集成学习是利用所有不同特征、一些机器学习模型的优缺点来获得一组「投票者」，这些投票者在每次预测时都会给你最有可能的结果，这些投票由不同的分类器给出（SVM、ID3 算法、logistic 回归）。
+* 无监督学习
+    - explains Unsupervised Learning really well：https://towardsdatascience.com/unsupervised-learning-with-python-173c51dc7f03
+    - 无监督学习、有监督学习和强化学习的区别：https://blogs.nvidia.com/blog/2018/08/02/supervised-unsupervised-learning/
+
 ## 工具
 
 * [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! http://pachyderm.io
