@@ -40,6 +40,7 @@
 * [Immersive Linear Algebra](http://immersivemath.com/ila/index.html)
 * [Matrix Algebra for Engineers](http://coursegraph.com/coursera-matrix-algebra-engineers)
 * [Mathematics for Machine Learning: Linear Algebra](http://coursegraph.com/coursera-linear-algebra-machine-learning)
+* https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/
 
 ## 数据科学
 
