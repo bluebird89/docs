@@ -297,6 +297,10 @@
 ![野怪](../_static/zelda_boss.jpg "Optional title")
 ![小游戏](../_static/zelda_game.jpg "Optional title")
 
+#### 攻略
+
+* [游击网](http://www.i7gg.com/game/detail?id=40827)
+
 ## Play station 4
 
 * 配置
