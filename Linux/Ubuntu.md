@@ -159,7 +159,8 @@ sudo dpkg -i netease-cloud-music_1.1.0_amd64_ubuntu.deb # install failed.depency
 dpkg --get-selections | grep hold
 --reinstall # 重新安装已经安装但可能存在问题的软件包
 --install-suggests # 同时安装APT给出的建议安装的软件包
-
+# 显示包的具体信息
+dpkg -p package-name
 sudo aptitude install <packagename>
 sudo apt-get install apt-transport-https
 

@@ -695,6 +695,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * [Marp](https://yhatt.github.io/marp/):Markdown Presentation Writer
 * [GitNote](https://www.gitnoteapp.com)
 * [Twig](https://github.com/lukakerr/Pine):A modern, native macOS markdown editor https://lukakerr.github.io/Pine
+* [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
 
 ## 参考
 

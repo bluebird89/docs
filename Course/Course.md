@@ -24,6 +24,11 @@
     -   UC San Diego Podcast Lectures — 圣地亚哥大学的视频、音频资源。
     -   University of the People — 这是一间免学费的线上大学。
     -   NovoEd — 学习 NovoEd 的课程，成为未来的领袖！
+    - [北大图书馆](https://github.com/lib-pku/libpku):https://lib-pku.github.io/
+    - 浙大：https://github.com/QSCTech
+    - 清华大学：https://github.com/PKUanonym
+    - 中科大：https://github.com/mbinary
+    - 上海交大：https://github.com/CoolPhilChen
 -   艺术与音乐
     -   Dave Conservatoire — 一个完全免费的音乐学习网站，口号是“让每一个人都可以接受世界级的音乐教育”，有视频，有练习。
     -   Drawspace — 如果你想学习绘画，或者提高自己的绘画技能，就来 Drawspace 吧。
@@ -50,6 +55,7 @@
     -   Do It Yourself — 教你成为家居改造达人。
     -   Adafruit Learning System — 提供免费电子设备 DIY 教程。
     -   Grovo — 学习如何使用上百种网站应用，提高自己的工作效率。
+
 
 ## 前端
 

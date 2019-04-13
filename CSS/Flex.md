@@ -41,6 +41,7 @@
         + space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
         + stretch（默认值）：轴线占满整个交叉轴。
     - 对称的思想
+    - display:inline-flex解决display:inline-block空格问题
 
 ## item
 

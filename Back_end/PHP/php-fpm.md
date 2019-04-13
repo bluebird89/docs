@@ -12,7 +12,7 @@ PHP 解释程序被载入内存而不用每次需要时从存储器读取，极�
 /usr/local/etc/php/7.2
 
 ```sh
-brew install php71 --without-apache --with-fpm --with-mysql
+brew install php --without-apache --with-fpm --with-mysql
 brew services start php
 ```
 
@@ -24,6 +24,7 @@ brew services start php
     - /usr/local/php/etc/php-fpm.conf
     - /private/etc/php-fpm.conf
     - /private/etc/php-fpm.d/www.conf.default
+    - /usr/local/etc/php/7.3/php-fpm.d/www.conf
 
 ## 服务
 
@@ -36,7 +37,7 @@ brew services start php
 /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf
 `/usr/local/Cellar/php71/7.1.10_21/sbin/php-fpm --daemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf --pid /usr/local/var/run/php-fpm.pid`
 
-ps aux | grep -c php-fpm 查看php-fpm进程数
+ps aux | grep -c php-fpm # 查看php-fpm进程数
 ps aux |grep php-fpm 查看php-fpm的master进程号
 
 ## Mac
@@ -624,4 +625,10 @@ pm.status_path = /status # php-fpm.conf里面打开选项
 2018/09/02 23:26:10 [error] 37283#0: *69 FastCGI sent in stderr: "Access to the script '/Users/henry/Workspace/Code/PHP' has been denied (see security.limit_extensions)" while reading response header from upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/usr/local/var/run/php-fpm.sock:", host: "localhost:8080"
 #  www.conf
 security.limit_extensions = .php .php3 .php4 .php5
+
+ERROR: failed to open error_log (/usr/var/log/php-fpm.log): No such file or directory
+
+vim /usr/local/etc/php-fpm.conf
+error_log = /usr/local/var/log/php-fpm.log
+pid = /usr/local/var/run/php-fpm.pid
 ```
