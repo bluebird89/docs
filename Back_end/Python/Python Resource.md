@@ -1236,6 +1236,10 @@ Python 实现的算法和设计模式。
 
 * [kenwoodjw/python_interview_question](https://github.com/kenwoodjw/python_interview_question):关于python的面试题
 
+## 图书
+
+* [Test-Driven Web Development with Python](https://www.obeythetestinggoat.com/pages/book.html#toc)
+
 ## 知识点
 
 * Python核心编程
