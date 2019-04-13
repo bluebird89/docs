@@ -1,14 +1,21 @@
+# LESS
 
+## 安装
 
-# 变量
+```sh
+npm install -g less
+lessc style.less style.css
+```
 
-# 嵌套引用
+## 变量
 
-# 导入SASS文件
+## 嵌套引用
 
-# 混合器
+## 导入SASS文件
 
-# 选择器继承来精简CSS
+## 混合器
+
+## 选择器继承来精简CSS
 
 ## 参考
 

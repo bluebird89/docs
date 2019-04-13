@@ -53,7 +53,7 @@ This is a paragraph
     + Pseudo-Elements
       * :after
       * :before
-  - :nth-child(n):于其父元素的第n个子元素
+  - :nth-child(n):于其父元素的第n个子元素 .item:nth-child(2)
   + Selector : first-child
 * 属性名:属性值构成
 
@@ -170,6 +170,7 @@ a:link { font-size: 14pt; text-decoration: underline; color: blue; }
         + 线型：none(无线)、solid(实线)、dotted(点状线)、dashed(虚线)、double(双线)
         + 注意：多个参数值之间用空格隔开。
         + 举例：div{border-left:5px solid red;} div{border:2px solid blue;}
+        + border-radius
 * 内填充属性：边线到内容间的距离
   + padding-left padding-right padding-top padding-bottom
 * 外边距属性：边框线往外的距离
@@ -339,6 +340,9 @@ h1 {margin : 10px 0px 15px 5px;}
 
 a:hover {border-color: gray;}
 ```
+
+position属性
+  flxed
 
 ## 定位
 

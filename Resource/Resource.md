@@ -217,3 +217,4 @@
 * [stanzhai/be-a-professional-programmer](https://github.com/stanzhai/be-a-professional-programmer):成为专业程序员路上用到的各种优秀资料、神器及框架 http://tools.stanzhai.site
 * [hedengcheng/tech](https://github.com/hedengcheng/tech):programming, database, distributed systemee
 * [Tutorials & training to grow your development skills](https://www.ibm.com/developerworks/learn/)
+* [Open source](https://www.ibm.com/developerworks/cn/opensource)

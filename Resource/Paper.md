@@ -1,5 +1,7 @@
 # 论文
 
+* MapReduce: Simplified Data Processing on Large Clusters
+
 ## Google BigTable
 
 一个分布式，结构化数据的存储系统，它用来存储海量数据。该系统用来满足“大数据量、高吞吐量、快速响应”等不同应用场景下的存储需求。稀疏的、分布式的、持久化的、多维度排序的、大数据量存储系统
