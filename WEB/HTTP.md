@@ -289,14 +289,14 @@ text/plain
     - 域名相同
     - 端口相同
     - 开个口子，对于使用<script src='//static.store.com/jquery.js'> 加载的JavaScript，我们认为它的源属于www.store.com， 而不属于static.store.com，这样就可以操作www.store.com的页面了
-    - 两个网页的一级域名是相同的，可以共享cookie, 不过cookie的domain一定要设置为那个一级域名才可以，例如：”document.cookie = 'test=true;path=/;domain=store.com'
+    - 两个网页的一级域名是相同的，可以共享cookie, 不过cookie的domain一定要设置为那个一级域名才可以，例如：`document.cookie = 'test=true;path=/;domain=store.com'`
     - 对XMLHttpReqeust对象施加同源策略
         - 代理模式：通过服务器端中转，例如你是来自book.com的， 现在想访问movie.com，那可以让那个book.com把请求转发给movie.com嘛！人类好像给这种方式起了个名字
         - 服务器(domain)可以设置一个白名单，里边列出它允许哪些服务器(domain)的AJAX请求
 
 ### CORS
 
-```php
+````
 // server
 $origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';
 
@@ -311,7 +311,7 @@ if(in_array($origin, $allow_origin)){
 
 # 允许所有域名访问则只需在http://server.runoob.com/server.php文件头部添加如下代码：
 header('Access-Control-Allow-Origin:*');
-```
+````
 
 ### CSRF
 
@@ -334,7 +334,10 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 * 购买证书，配置域名信息
     - [Let’s Encrypt](https://letsencrypt.org/)
 * 获取证书文件，配置nginx,放到cert目录
-* 解决方案：[certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx)
+* 解决方案
+    - [certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx)
+    - [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
+
 
 ## Token
 
@@ -347,9 +350,7 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 
 ## QUIC
 
-## HTTPS
-
-* [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
+HTTP-over-QUIC 实验协议将被重命名为 HTTP/3，并成为 HTTP 协议的第三个正式版本。
 
 ## 测试
 

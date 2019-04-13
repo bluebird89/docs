@@ -79,6 +79,7 @@ var name="Gates", age=56, job="CEO";
     - 多行字符串,串用`\n`写起来比较费事，所以最新的ES6标准新增了一种多行字符串的表示方法，用反引号 ` ... ` 表示
     - 模板字符串
     - 字符串操作
+      + trim
 * Number:不区分整数和浮点数，统一用Number表示.有时候用十六进制表示整数比较方便，十六进制用0x前缀和0-9，a-f表示,以及运算符.
     - NaN这个特殊的Number与所有其他值都不相等，包括它自己.唯一能判断NaN的方法是通过isNaN()函数.注意浮点数的相等比较(浮点数在运算过程中会产生误差，因为计算机无法精确表示无限循环小数。要比较两个浮点数是否相等，只能计算它们之差的绝对值，看是否小于某个阈值)
     - 属性
@@ -860,10 +861,24 @@ function foo() {
 
 函数其实都指向某个变量。既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数。
 
-* map()方法定义在JavaScript的Array中，调用Array的map()方法，传入自己的函数，就得到了一个新的Array作为结果
-* Array的reduce()把一个函数作用在这个Array的[x1, x2, x3...]上，这个函数必须接收两个参数，reduce()把结果继续和序列的下一个元素做累积计算
-* filter()用于把Array的某些元素过滤掉，然后返回剩下的元素,接收一个函数.把传入的函数依次作用于每个元素，然后根据返回值是true还是false决定保留还是丢弃该元素。
-* sort():不同数据类型比较的过程必须通过函数抽象出来。Array的sort()方法：默认把所有元素先转换为String再排序. 默认算法：根据比较大小换位或者不换位
+* arr.map(functionName):传入函数名字，array每一个元素经过函数处理
+  - 返回一个新Array
+* arr.reduce(function(x,y){})
+  - 必须接收两个参数
+  - 把当前结果继续第一个参数和序列的下一个元素传入方法
+  - [x1, x2, x3, x4].reduce(f) = f(f(f(x1, x2), x3), x4)
+* arr.filter(function (element, index, self){}):根据规则过滤元素，然后返回剩下的元素
+  - element:值
+  - index:索引
+  - self:数据本身
+  - 接收一个函数.把传入的函数依次作用于每个元素
+  - 然后根据返回值是true（保留）还是false（丢弃）
+  - 返回一个新数组
+* sort(function(x){}):排序
+  - 1 换位 -1 不换位
+  * 默认把所有元素先转换为String再排序
+  * 数字要自定义方法
+  * 返回当前array
 
 ```javascript
 function pow(x) {
@@ -877,7 +892,7 @@ arr.map(String); // ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 var arr = [1, 3, 5, 7, 9];
 arr.reduce(function (x, y) {
     return x * 10 + y;
-}); // 25
+}); // 13579
 
 var arr = ['A', '', 'B', null, undefined, 'C', '  '];
 var r = arr.filter(function (s) {
@@ -894,6 +909,10 @@ var r = arr.filter(function (element, index, self) {
 });
 
 ['Google', 'apple', 'Microsoft'].sort(); // ['Google', 'Microsoft", 'apple']
+
+// 去重
+arr.filter(function (element, index, self) {
+    return self.indexOf(element) === index;
 
 var arr = [10, 20, 1, 2];
 arr.sort(function (x, y) {

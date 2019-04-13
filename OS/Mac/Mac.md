@@ -102,6 +102,7 @@ smaba
     -   [LICEcap](link):gif录制
     -   [sizeup](link)
     -   [Spectacle](link):控制窗口
+    -   [chunkwm](https://koekeishiya.github.io/chunkwm/index.html):a tiling window manager for macOS 
     -   [onmyway133/FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
     - [sveinbjornt/Sloth](https://github.com/sveinbjornt/Sloth):Mac app that shows all open files and sockets in use by all running processes. Nice GUI for lsof. https://sveinbjorn.org/sloth
 -   vpn
