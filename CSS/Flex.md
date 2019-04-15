@@ -27,7 +27,7 @@
         + center： 居中
         + space-between：两端对齐，项目之间的间隔都相等。
         + space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。
-    - align-items：定义项目在交叉轴上如何对齐
+    - align-items：定义项目在交叉轴（单行）上如何对齐
         + flex-start：交叉轴的起点对齐。
         + flex-end：交叉轴的终点对齐。
         + center：交叉轴的中点对齐。
@@ -46,8 +46,8 @@
 ## item
 
 * order:定义项目的排列顺序。数值越小，排列越靠前，默认为0
-* flex-grow:定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大
-* flex-shrink:定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小
+* flex-grow:定义空间剩余项目的放大比例，默认为0，即如果存在剩余空间，也不放大
+* flex-shrink:定义空间不足项目的缩小比例，默认为1，当不够分配时，元素都将等比例缩小，占满整个宽度
     - 所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。
     - 如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小
 * flex-basis:定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小.可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间
@@ -60,3 +60,4 @@
 * [CSS Flexible Box Layout Module Level 1](https://www.w3.org/TR/css-flexbox-1/)
 * [Flex 布局教程：语法篇](https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
 * [CSS Flexible Box Layout Module Level 1](https://www.w3.org/TR/css-flexbox-1)
+* [30分钟彻底弄懂flex布局](https://cloud.tencent.com/developer/article/1354252)
