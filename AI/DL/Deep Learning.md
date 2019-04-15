@@ -67,3 +67,4 @@
 * [Microsoft/MMdnn](https://github.com/Microsoft/MMdnn):MMdnn is a set of tools to help users inter-operate among different deep learning frameworks. E.g. model conversion and visualization. Convert models between Caffe, Keras, MXNet, Tensorflow, CNTK, PyTorch Onnx and CoreML.
 * [nndl/nndl.github.io](https://github.com/nndl/nndl.github.io):《神经网络与深度学习》 Neural Network and Deep Learning https://nndl.github.io
 * [osforscience/deep-learning-ocean](https://github.com/osforscience/deep-learning-ocean):📡 All You Need to Know About Deep Learning - A kick-starter
+* [The Matrix Calculus You Need For Deep Learning](https://explained.ai/matrix-calculus/index.html)

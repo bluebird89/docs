@@ -46,6 +46,7 @@
 * [apachecn/statsmodels_doc_zh](https://github.com/apachecn/statsmodels_doc_zh):Statsmodels: Python中的统计建模与计量统计学类库
 * [腾讯AI开发平台](https://ai.qq.com)
 * [GokuMohandas/practicalAI](https://github.com/GokuMohandas/practicalAI):📚A practical approach to learning machine learning.
+* [makelove/True_Artificial_Intelligence](https://github.com/makelove/True_Artificial_Intelligence):真AI人工智能
 
 ## 工具
 
