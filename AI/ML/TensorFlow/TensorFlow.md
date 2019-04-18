@@ -49,10 +49,15 @@ pip install IPython
 * [tensorflow/nmt](https://github.com/tensorflow/nmt):TensorFlow Neural Machine Translation Tutorial
 * [nfmcclure/tensorflow_cookbook](https://github.com/nfmcclure/tensorflow_cookbook):Code for Tensorflow Machine Learning Cookbook
 * [tutorials](https://tensorflow.google.cn/tutorials/)
+* [初始教程](https://www.datacamp.com/community/tutorials/tensorflow-tutorial)
 * [tensorflow/models](https://github.com/tensorflow/models):Models and examples built with TensorFlow
+* [TensorFlow 官方 YouTube 频道](https://www.youtube.com/channel/UC0rqucBdTuFTjJiefW5t-IQ)
+* [博客](https://medium.com/tensorflow)
 
 ## 工具
 
 * [tensorflow/tfjs-models](https://github.com/tensorflow/tfjs-models):Pretrained models for TensorFlow.js https://js.tensorflow.org
 * [TensorFlow Lite](link)
+* [TensorFlow Hub](link)
+* [](https://js.tensorflow.org/)
 * [deepmind/graph_nets](https://github.com/deepmind/graph_nets):Build Graph Nets in Tensorflow https://arxiv.org/abs/1806.01261

@@ -103,6 +103,7 @@ $remote_addr # 客户端 IP
 $remote_port # 客户端端口
 $remote_user # 验证的用户名
 $request_filename # 请求的文件绝对路径
+$request_body_file  # 做反向代理时发给后端服务器的本地资源的名称
 $scheme # http/http
 $server_protocol # 协议，HTTP/1.0 OR HTTP/1.1
 $server_addr # 服务器地址
@@ -144,7 +145,16 @@ events {
     use epoll;
     #单个后台worker process进程的最大并发链接数 每一个worker进程能并发处理（发起）的最大连接数。Nginx作为反向代理服务器，计算公式最大连接数 = worker_processes * worker_connections / 4，所以这里客户端最大连接数是1024，这个可以增到8192，但不能超过worker_rlimit_nofile。当Nginx作为http服务器时，计算公式里面是除以2.
     worker_connections  1024;
+    # 使每个worker进程可以同时处理多个客户端请求
+    multi_accept on
+    # 使用内核的FD文件传输功能，可以减少user mode和kernel mode的切换，从而提升服务器性能
+    sendfile on
+    # 当tcp_nopush设置为on时，会调用tcp_cork方法进行数据传输。 使用该方法会产生这样的效果：当应用程序产生数据时， 内核不会立马封装包，而是当数据量积累到一定量时才会封装，然后传输。 
+    tcp_nopush on
+
 }
+
+
 ```
 
 ### http（服务器设置）
@@ -202,10 +212,10 @@ http {
     # Gzip Settings
     gzip on;
     gzip_static on;
-    gzip_disable "msie6";
+    gzip_disable "msie6"; //IE6浏览器不启用压缩
     gzip_vary on;
     gzip_proxied any;
-    gzip_comp_level 6;
+    gzip_comp_level 6; //设置压缩级别，范围1-9,9压缩级别最高，也最耗费CPU资源
     gzip_min_length 1100;
     gzip_buffers 16 8k;
     gzip_http_version 1.1;
@@ -261,9 +271,11 @@ http服务上支持若干虚拟主机，每个虚拟主机对应一个server配�
 
 * 匹配优先级:一次请求只能匹配一个location，一旦匹配成功后，便不再继续匹配其余location;
     - =：URI的精确匹配，其后多一个字符都不可以，精确匹配。match only the following EXACT URL
-    - ^~：URI的左半部分匹配，不区分字符大小写；this configuration will be used as the prefix match, but this will not perform any further regular expression match even if one is available.等同无标志符号，多了不会匹配后面对应规则
-    - ~：做正则表达式匹配，区分字符大小写；case sensitive regular expression match modifier
-    - ~*：做正则表达式匹配，不区分字符大小写；
+    - ~：区分大小写的正则匹配；case sensitive regular expression match modifier
+    - ~*：不区分字符大小写正则表达式匹配
+    - ^~：uri以指定字符或字符串开头；this configuration will be used as the prefix match, but this will not perform any further regular expression match even if one is available.等同无标志符号，多了不会匹配后面对应规则
+    - /： 通用匹配，任何请求都会匹配到
+    - 优先级：= 高于 ^~ 高于 ~* 等于 ~ 高于 /
 
 URL重写时所用的正则表达式需要使用PCRE格式。PCRE正则表达式元字符：
 
@@ -295,6 +307,13 @@ ssl_protocols  # ; # 指明支持的ssl协议版本，[SSLv2]  [SSLv3] [TLSv1] [
 ssl_session_timeout  #; # ssl会话超时时长；即ssl  session cache中的缓存有效时长
 ssl_session_cache # ; # 指明ssl会话缓存机制；off | none | [builtin[:size]] [shared:name:size]，默认使用shared
 
+location /
+{
+    allow 192.168.0.0/24;
+    allow 127.0.0.1;
+    deny all;
+}
+
 location /admin/ {
     auth_basic"Admin Area";
     auth_basic_user_file/etc/nginx/.ngxhtpasswd;
@@ -322,10 +341,19 @@ server {
         index  index.html index.htm;
     }
 
+    if ($request_uri ~ "gid=\d{9,12}")
+    {
+        return 403;
+    }
     # 定义
     error_page  404              /404.html;
     location = /404.html {
         root   /var/www/html/errors;
+    }
+    # 反爬虫
+    if ($user_agent ~ 'YisouSpider|MJ12bot/v1.4.2|YoudaoBot|Tomato')
+    {
+        return 403;
     }
 
     # redirect server error pages to the static page /50x.html
@@ -377,7 +405,7 @@ server {
     }
 
     location ~ .(png|gif|ico|jpg|jpe?g)$ {
-
+        expires 1d; //1d表示1天，也可以用24h表示一天。
     }
 
     location / {
