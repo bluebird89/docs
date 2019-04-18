@@ -165,6 +165,11 @@ smaba
     -   [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
     -   Day One - Digital journal
     -   Just Focus
+    -   Any.do
+    -   Todoist
+    -   TickTick
+    -   Lucidchart
+    -   Kanban
 - 文档
     -   [dash](https://kapeli.com/dash):语言文档
     -   [apidoc](http://apidocjs.com/)

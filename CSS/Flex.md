@@ -1,6 +1,6 @@
 # Flexbox
 
-2009年，W3C 提出了一种新的方案----Flex 布局，可以简便、完整、响应式地实现各种页面布局.是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性。设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效
+2009年，W3C 提出了一种新的方案----Flex 布局，可以简便、完整、响应式地实现各种页面布局.是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性。设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效.支持嵌套
 
 ## container
 
@@ -33,7 +33,7 @@
         + center：交叉轴的中点对齐。
         + baseline: 项目的第一行文字的基线对齐。
         + stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
-    - align-content：定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用
+    - align-content：定义了多根轴线的对齐方式。元素在一行放不下时进行换行。如果项目只有一根轴线，该属性不起作用，以多行作为整体进行对齐
         + flex-start：与交叉轴的起点对齐。
         + flex-end：与交叉轴的终点对齐。
         + center：与交叉轴的中点对齐。
@@ -59,5 +59,6 @@
 * [philipwalton/solved-by-flexbox](https://github.com/philipwalton/solved-by-flexbox):A showcase of problems once hard or impossible to solve with CSS alone, now made trivially easy with Flexbox. https://philipwalton.github.io/solved-by-flexbox/
 * [CSS Flexible Box Layout Module Level 1](https://www.w3.org/TR/css-flexbox-1/)
 * [Flex 布局教程：语法篇](https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+* [Flex 布局教程：实例篇](https://www.ruanyifeng.com/blog/2015/07/flex-examples.html)
 * [CSS Flexible Box Layout Module Level 1](https://www.w3.org/TR/css-flexbox-1)
 * [30分钟彻底弄懂flex布局](https://cloud.tencent.com/developer/article/1354252)
