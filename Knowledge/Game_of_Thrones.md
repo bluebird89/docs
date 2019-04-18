@@ -16,6 +16,7 @@
 * 魔龙的狂舞（2011）
 * 凛冬的寒风
 * 春晓的希望
+* 中文翻译 屈畅
 
 ## 地图
 
@@ -373,6 +374,7 @@ I am the fire that burns against the cold, the light that brings the dawn, the h
 I pledge my life and honor to the Night’s Watch, for this night and all the nights to come.
 ```
 
+在上一个英雄纪元，夜王带领的异鬼大军被赶回长城以北，史塔克家的布兰登带领众人筑造了绝境长城（他又被称为“筑城者”布兰登）。因此，可以预见，即便在冰火大战结束后，黑暗力量也不可能彻底被消灭，维斯特洛的人们还是需要继续防范北方的异动。而镇守北境是史塔克家世代相传的责任，那么，瑞肯·史塔克也许会作为另一种形式的守夜人首领而行使责任。
 
 ## 思考
 

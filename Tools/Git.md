@@ -677,6 +677,17 @@ tar cJf .tar.xz / --exclude-vcs
 * resolving the conflicts
 * add ,commit
 
+## 仓库元数据
+
+* config* 配置文件
+* description 描述，仅供 Git Web 程序使用
+* HEAD  当前被检出的分支
+* index 暂存区信息
+* hooks/  客户端或服务端的钩子脚本（hook scripts）
+* info/ 全局性排除（global exclude）文件，不希望被记录在 .gitignore 文件中的忽略模式（ignored patterns）
+* objects/  所有数据内容
+* refs/ 数据（分支）的提交对象的指针
+
 ## .gitignore
 
 * 过滤目录 : /bin/ 就是将bin目录过滤, 该文件下的所有目录和文件都不被提交;
@@ -1496,7 +1507,7 @@ chown -R henry:henry .git/objects
 * [git-tutorial](https://www.learnenough.com/git-tutorial)
 * [GitHub Helps](https://help.github.com/)
 * [k88hudson/git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
-* [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate! 
+* [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate!
 * Progit2，最好的深入学习 Git 的教材，而且是开源的https://github.com/progit/progit2
 * Magit，Git 在 Emacs 上的打开方式：https://magit.vc/
 * Vim-fugitive，Git 在 Vim 上的打开方式：https://github.com/tpope/vim-fugitive
