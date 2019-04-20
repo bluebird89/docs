@@ -7,6 +7,7 @@
 * [strapi/strapi](https://github.com/strapi/strapi):🚀 Node.js Content Management Framework (headless-CMS) to build powerful API with no effort. https://strapi.io
 * [getgrav/grav](https://github.com/getgrav/grav):Modern, Crazy Fast, Ridiculously Easy and Amazingly Powerful Flat-File CMS https://getgrav.org
 * [facebook/Docusaurus](https://github.com/facebook/Docusaurus):Easy to maintain open source documentation websites. https://docusaurus.io
+* [tipeio/tipe](https://github.com/tipeio/tipe):🎉 Next Generation API-first CMS for developers. Generate an API-first CMS from a GraphQL schema with offline prototyping and an inline editor https://tipe.io?ref=github
 
 ## [Canner/canner](https://github.com/Canner/canner)
 

@@ -2635,6 +2635,12 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 
 ## sessionStorage
 
+## Web API
+
+## 面试
+
+* [原生JS(上)](https://juejin.im/post/5cab0c45f265da2513734390)
+
 ## 工具
 
 * [github/fetch](https://github.com/github/fetch):A window.fetch JavaScript polyfill. http://github.github.io/fetch/
@@ -2670,4 +2676,4 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 * [stephentian/33-js-concepts](https://github.com/stephentian/33-js-concepts):📜 每个 JavaScript 工程师都应懂的33个概念 @leonardomso
 * [ECMAScript 2015](https://babeljs.io/learn-es2015/)
 * [BonsaiDen/JavaScript-Garden](https://github.com/BonsaiDen/JavaScript-Garden):A collection of documentation about the most quirky parts of the JavaScript language. http://bonsaiden.github.io/JavaScript-Garden
-* 学习Web API
+* [verekia/js-stack-from-scratch](https://github.com/verekia/js-stack-from-scratch):🛠️⚡ Step-by-step tutorial to build a modern JavaScript stack.
