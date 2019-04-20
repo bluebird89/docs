@@ -21,9 +21,11 @@ webm
 
 ![视频播放器的原理](../_static/video_play.png "视频播放器的原理")
 
-## 录像
 
-* [asdjgfr/operationRecord](https://github.com/asdjgfr/operationRecord):记录产品，测试的沙雕操作，方便debugger
+## 分辨率
+
+* 8K分辨率是7680*4320，这个画面是4块4K屏幕的所有像素加一起才能满足的，换句话说也就是大约16块1080P画面所能承载的画面信息。它对显卡的要求我们暂且不提，仅仅是“实时传输这个画面到电视上”这个需求就已经突破了当今HDMI和DP线缆的带宽极限（通常要四根或者八根叠加使用，或者像苹果一样研制专属线缆），就更不要提主机渲染这些信息时所需要的硬件能力了。
+
 
 ## 资源
 
@@ -47,3 +49,4 @@ webm
 * [MoePlayer/DPlayer](https://github.com/MoePlayer/DPlayer):🍭 Wow, such a lovely HTML5 danmaku video player http://dplayer.js.org
 * [iina/iina](https://github.com/iina/iina):The modern video player for macOS. https://iina.io
 * [mifi/lossless-cut](https://github.com/mifi/lossless-cut):Save space by quickly and losslessly trimming video and audio files
+* [asdjgfr/operationRecord](https://github.com/asdjgfr/operationRecord):记录产品，测试的沙雕操作，方便debugger

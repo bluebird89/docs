@@ -593,6 +593,7 @@ ps -ef | grep nginx # 进程查看
 ps aux | grep nginx
 
 kill -9 pid # 关闭进程
+kill -s 9 processId
 kill pid
 kill -USR2 $(pidof nginx)
 pkill -f nginx
@@ -672,6 +673,17 @@ telnet 10.0.3.69 2020  # 测试端口能否访问
 
 lsof -i: (port) # 查看端口的占用情况
 lsof -Pni4 | grep LISTEN | grep php
+
+netstat -a|all # show listening, non-listening. Sockets. For tcp sockets it shows listening ,established and waiting connections.
+  netstat -at # show all tcp connection detail
+  netstat -au # u option along with -a and it will show all udp connection detail
+netstat -l|listening # hows just the listening ports, very useful when debugging connectivity issues and you wants to check
+  netstat -lt # Display tcp sockets information only
+  netstat -lx # Display Unix sockets information only
+  netstat -au # Display udp sockets information only
+netstat  -s|statistics # display summary statistics for each protocol.
+netstat  -p|program # show the PID and name of the program to which each socket belongs Superuser can see all the processes and others can see only the processes they own
+–numeric , -n # show numerical addresses instead of trying to determine symbolic host, port or user names
 
 netstat -tunlp # 显示tcp，udp的端口和进程等相关
 netstat -tln | grep 8000
@@ -1425,6 +1437,19 @@ set completeopt=longest,menu
 
 * [openwrt/openwrt](https://github.com/openwrt/openwrt)：This repository is a mirror of https://git.openwrt.org/openwrt/openwrt.git It is for reference only and is not active for check-ins or for reporting issues. We will continue to accept Pull Requests here. They will be merged via staging trees then into openwrt.git. All issues should be reported at: https://bugs.openwrt.org
 
+## 图书
+
+* Essential System Administration: Tools and Techniques for Linux and Unix Administration by Æleen Frisch
+* Learning the UNIX Operating System, Fifth Edition by Jerry Peek , Grace Todino-Gonguet , John Strang
+* Linux in a Nutshell: A Desktop Quick Reference by Ellen Siever and Stephen Figgins
+* Classic Shell Scripting  by Arnold Robbins and Nelson H.F. Beebe
+* Sed & Awk  by Dale Dougherty
+* Learning the vi and Vim Editors: Text Processing at Maximum Speed and power  Arnold Robbins
+* bash Cookbook : Solutions and Examples for bash Users by Carl Albing
+* Bash Pocket Reference: Help for Power Users and Sys Admins  By Armold Robbins
+* TCP/IP Network Administration (3rd Edition; O’Reilly Networking) by Craig Hunt
+* DNS and BIND byCricket Liu
+
 ## 参考
 
 * [luongvo209/Awesome-Linux-Software](https://github.com/luongvo209/Awesome-Linux-Software): A list of awesome applications, software, tools and other materials for Linux distros
@@ -1449,6 +1474,7 @@ set completeopt=longest,menu
 
 ## 工具
 
+* [GNU](http://ftp.gnu.org/gnu/)
 * [backup/backup](https://github.com/backup/backup):Easy full stack backup operations on UNIX-like systems. http://backup.github.io/backup/v4/
 * [gopasspw/gopass](https://github.com/gopasspw/gopass):The slightly more awesome standard unix password manager for teams https://www.gopass.pw/
 * [trimstray/iptables-essentials](https://github.com/trimstray/iptables-essentials):Iptables Essentials: Common Firewall Rules and Commands.

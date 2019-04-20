@@ -125,6 +125,10 @@ Apache Incubator是旨在成为完全成熟的Apache软件基金会项目的开�
 
 * 华为不会让CFO接班，干部选拔以李云龙、赵刚为标杆；
 
+## 优必选
+
+* 自研的伺服舵机和 ROSA 机器人系统
+
 ## 参考
 
 * [A Brief History of Alibaba Founders](https://iprice.sg/trends/insights/history-jack-ma-alibaba-18-founders/)

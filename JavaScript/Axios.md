@@ -208,3 +208,4 @@ axios.interceptors.response.use(function (response) {
 ## 参考
 
 - [教程](https://segmentfault.com/a/1190000008470355?utm_source=tuicool&utm_medium=referral)
+- [Axios 源码解读](https://juejin.im/post/5cb5d9bde51d456e62545abcpfront)

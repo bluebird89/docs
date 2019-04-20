@@ -1479,6 +1479,7 @@ ccache gcc foo.c
     - [sharkdp/hyperfine](https://github.com/sharkdp/hyperfine):A command-line benchmarking tool
 * bash
     - [Bash-it/bash-it](https://github.com/Bash-it/bash-it):A community Bash framework.
+    - [下载](http://ftp.gnu.org/gnu/bash/)
 * [svenstaro/genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator https://svenstaro.github.io/genact/
 * [kentcdodds/cross-env](https://github.com/kentcdodds/cross-env):🔀 Cross platform setting of environment scripts https://www.npmjs.com/package/cross-env
 * [Swordfish90/cool-retro-term](https://github.com/Swordfish90/cool-retro-term):A good looking terminal emulator which mimics the old cathode display...
@@ -1505,6 +1506,12 @@ ccache gcc foo.c
 * [dylanaraps/pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):📖 A collection of pure bash alternatives to external processes.
 * [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)：A curated list of awesome command-line frameworks, toolkits, guides and gizmos. Inspired by awesome-php.
 * [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
+* [Bash Guide for Beginners](https://www.tldp.org/LDP/Bash-Beginners-Guide/html/)
+* [Bash Reference Manual](https://tiswww.case.edu/php/chet/bash/bashref.html)
+* [Bash scripting cheat sheet](https://devhints.io/bash)
+* [bash(1) – Linux man page](https://linux.die.net/man/1/bash)
+* [An A-Z Index of the Bash command line for Linux.](https://ss64.com/bash/)
+* [Google’s Shell Style Guide](https://google.github.io/styleguide/shell.xml)
 
 ## 脚本参考
 

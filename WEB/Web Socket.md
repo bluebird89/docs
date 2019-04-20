@@ -133,3 +133,7 @@ if('WebSocket' in window){
 * [websockets/ws](https://github.com/websockets/ws):Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js
 * [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)
 * [细说WebSocket - Node篇](https://juejin.im/entry/5a012eab518825297a0e27f0)
+
+## 参考
+
+* [Web 实时推送技术的总结](https://juejin.im/post/5c20e5766fb9a049b13e387b)
