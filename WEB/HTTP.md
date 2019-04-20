@@ -3,8 +3,12 @@
 HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网上应用最为广泛的一种基于 TCP/IP 通信协议来传递数据的网络传输应用层协议。以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规范
 
 * TCP/IP协议是传输层协议，主要解决数据如何在网络中传输
-* HTTP是应用层协议，主要解决如何包装数据。HTTP协议详细规定了浏览器与服务器之间相互通信的规则，是万维网交换信息的基础。
-* 无状态的协议。针对其无状态特性，在实际应用中又需要有状态的形式，因此一般会通过session/cookie技术来解决此问题。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。
+* HTTP是应用层协议，主要解决如何包装数据。详细规定了浏览器与服务器之间相互通信的规则，是万维网交换信息的基础。
+* 无状态的协议
+    - 无状态是指协议对于事务处理没有记忆能力。
+    - 缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。
+    - 在服务器不需要先前信息时它的应答就较快。
+    - 在实际应用中又需要有状态的形式，因此一般会通过session/cookie技术来解决此问题。
 * HTTP 是媒体独立的：只要客户端和服务器知道如何处理的数据内容，任何类型的数据都可以通过 HTTP 发送。客户端以及服务器指定使用适合的 MIME-type 内容类型。
 * HTTP是基于请求-响应形式并且是短连接，客户端发送的每次请求都需要服务器回送响应，在请求结束后，会主动释放连接（无连接）
     * 从建立连接到关闭连接的过程称为"一次连接"。在HTTP 1.1中则可以在一次连接中处理多个请求，并且多个请求可以重叠进行，不需要等待一个请求结束后再发送下一个请求。
@@ -12,18 +16,144 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
     * 通常的做法是即时不需要获得任何数据，客户端也保持每隔一段固定的时间向服务器发送一次"保持连接"的请求，服务器在收到该请求后对客户端进行回复，表明知道客户端"在线"。
     * 若服务器长时间无法收到客户端的请求，则认为客户端"下线"，若客户端长时间无法收到服务器的回复，则认为网络已经断开。
 
-## URI
+## URL vs URI
 
-URL（Uniform Resource Locator，统一资源定位符）也就是俗称的网址，它表示某一网络资源存在于所在计算机网络上的位置，同时也是用于检索该资源的机制。
+* URL（Uniform Resource Locator，统一资源定位符）也就是俗称的网址，它表示某一网络资源存在于所在计算机网络上的位置，同时也是用于检索该资源的机制。
+* 格式:router+search+hash `https://www.baidu.com?key1=vvalue1&key2=value2#test`
+    - hash，哈希值或者称为锚，是#后面的字符串，一般作为单页应用的路由地址，或者文档的锚
 
-## 说明
+### 预检请求（preflight request）
 
-服务端通常是根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对主体进行解析。
+* 跨域资源共享|CROS (Cross-origin resource sharing)，解决跨域请求的
+* 新增了一组 HTTP 首部字段，允许服务器声明哪些源站有权限访问哪些资源。
+* 规范要求，对那些可能对服务器数据产生副作用的HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求）
+* 浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求
+* 服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 Cookies 和 HTTP 认证相关数据）
+* Content-Type不属于简单请求（MIME类型），都属于预检请求
+    - 使用下列方法之一：
+        + GET
+        + HEAD
+        + POST
+    - Fetch 规范定义了对 CORS 安全的首部字段集合，不得人为设置该集合之外的其他首部字段。该集合为：
+        + Accept
+        + Accept-Language
+        + Content-Language
+        + Content-Type （需要注意额外的限制）
+        + DPR
+        + Downlink
+        + Save-Data
+        + Viewport-Width
+        + Width
+    - Content-Type 的值仅限于下列三者之一：
+        + text/plain
+        + multipart/form-data
+        + application/x-www-form-urlencoded
+    - 请求中的任意XMLHttpRequestUpload 对象均没有注册任何事件监听器；XMLHttpRequestUpload 对象可以使用 XMLHttpRequest.upload 属性访问。
+    - 请求中没有使用 ReadableStream 对象。
+* 满足下述任一条件时，即应首先发送预检请求,"预检"请求会带上头部信息 Access-Control-Request-Headers: Content-Type
+    - 使用了下面任一 HTTP 方法：
+        + PUT
+        + DELETE
+        + CONNECT
+        + OPTIONS
+        + TRACE
+        + PATCH
+    - 人为设置了对 CORS 安全的首部字段集合之外的其他首部字段。该集合为：
+        + Accept
+        + Accept-Language
+        + Content-Language
+        + Content-Type (需要注意额外的限制)
+        + DPR
+        + Downlink
+        + Save-Data
+        + Viewport-Width
+        + Width
+    - Content-Type 的值不属于下列之一:
+        + application/x-www-form-urlencoded
+        + multipart/form-data
+        + text/plain
+    - 请求中的XMLHttpRequestUpload 对象注册了任意多个事件监听器。
+    - 请求中使用了ReadableStream对象
 
+## 流程
+
+* 请求端和响应端建立TCP连接，完成三次握手，开始进行数据传输
+    - 第一次握手：客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；
+    - 第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；
+    - 第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。
+    - 握手完毕后，客户端与服务器才正式开始传送数据。
+    - 理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去。
+    - 断开连接时服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过"四次握手"
 * 请求
     - 状态行
-    - 请求头
+    - 请求头 HTTP Request Header
+        + Allow：服务器支持哪些请求方法（如GET、POST等）。
+        + Content-Encoding：
+            * 文档的编码(Encode)方法。只有在解码之后才可以得到 Content-Type 头指定的内容类型
+            * 利用gzip压缩文档能够显著地减少HTML文档的下载时间
+        + Content-Length：表示内容长度。只有当浏览器使用持久 HTTP 连接时才需要这个数据
+        + Content-Type： 用来向浏览器和服务器提供信息，表示该 URL 对应的资源类型。服务端通常是根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对主体进行解析。表示后面的文档属于什么 MIME 类型
+            * application/x-www-form-urlencoded：以键值对的字符串传输，但不能传输文件
+            * multipart/form-data：以键值对的形式通过分隔符链接，以字符串给后台，可以传输文件，也可以传输普通数据
+            * text/plain：普通文本，可以是任意数据，除了文件。
+            * binary：二进制流，仅限一个文件
+            * Data-Type：希望返回什么类型的数据
+            * 类型
+                - .css    text/css
+                - .gif    image/gif
+                - .htm|.html   text/html
+                - .jpeg|.jpg    image/jpeg
+                - .js application/x-javascript
+                - .ico    image/x-icon
+                - .mp3    audio/mp3
+                - .mp4    video/mpeg4
+                - .mpeg|.mpg    video/mpg
+                - .pdf    application/pdf
+                - .png    image/png
+                - .tif|.tiff   image/tiff
+                - .torrent    application/x-bittorrent
+                - .wav    audio/wav
+                - .xhtml  text/html
+        + Date：当前的 GMT 时间
+        + Expires：应该在什么时候认为文档已经过期，从而不再缓存它.
+        + Last-Modified：文档的最后改动时间。客户可以通过 If-Modified-Since 请求头提供一个日期，该请求将被视为一个条件 GET，服务器端的资源没有变化,只有改动时间迟于指定时间的文档才会返回，否则返回一个 304(Not Modified) 状态
+        + Location：表示客户应当到哪里去提取文档
+        + Refresh：表示浏览器应该在多少时间之后刷新文档，以秒计
+            * 注意：这种功能通常是通过设置 HTML 页面 HEAD 区的 ＜META HTTP-EQUIV=”Refresh” CONTENT=”5;URL=http://host/path"＞实现
+            * 注意：Refresh 的意义是”N秒之后刷新本页面或访问指定页面”，而不是”每隔N秒刷新本页面或访问指定页面”。因此，连续刷新要求每次都发送一个Refresh头，而发送204状态代码则可以阻止浏览器继续刷新，不管是使用Refresh头还是＜META HTTP-EQUIV=”Refresh” …＞。
+            * 注意 Refresh 头不属于 HTTP 1.1 正式规范的一部分，而是一个扩展
+        + Server：服务器名字
+        + Set-Cookie：设置和页面关联的 Cookie
+        + WWW-Authenticate：客户应该在 Authorization 头中提供什么类型的授权信息？在包含401(Unauthorized) 状态行的应答中这个头是必需的
     - 消息主体（entity-body）
+
+```
+// 源生的form提交可设置enctype="multipart/form-data"，一般表单中有文件会自动设为该值
+<form action="post" enctype="multipart/form-data"></form>
+
+// ajax请求,通过formdata对象来达成此目的
+const formdata = new new FormData();
+formdata.append("key","value")
+$.ajax({
+...
+data: formdata,
+processData: false,    // 取消对数据的预处理，因为formdata不需要预处理
+headers: {
+   "Content-Type": undefined    // 客户端会自动给它设置正确的值，不要设为multipart/form-data，这样设的后果会导致分隔符不正确
+},
+...
+})
+
+POST http://www.example.com HTTP/1.1
+Content-Type: application/x-www-form-urlencoded;charset=utf-8
+
+title=test&sub%5B%5D=1&sub%5B%5D=2&sub%5B%5D=3
+
+POST http://www.example.com HTTP/1.1
+Content-Type: application/json;charset=utf-8
+
+{"title":"test","sub":[1,2,3]}
+```
 
 ### 请求方式 POST
 
@@ -49,7 +179,7 @@ PNG ... content of chrome.png ...
 ------WebKitFormBoundaryrGKCBY7qhFd3TrwA--
 ```
 
-#### GET与POST的区别
+### GET与POST的区别
 
 * GET请求会被浏览器主动cache，而POST不会，除非手动设置。
 * GET请求只能进行url编码，而POST支持多种编码方式。
@@ -67,20 +197,10 @@ PNG ... content of chrome.png ...
 
 ## TCP/IP传输控制协议/网际协议 (Transmission Control Protocol / Internet Protocol)一个实现的应用模型
 
-TCP/IP 是供已连接因特网的计算机进行通信的通信协议,定义了电子设备（比如计算机）如何连入因特网，以及数据如何在它们之间传输的标准。包含了一系列构成互联网基础的网络协议，是Internet的核心协议。TCP 负责将数据分割并装入 IP 包，然后在它们到达的时候重新组合它们。IP 负责将包发送至接受者。
-
-```
-HTTP/1.1 200 OK
-    Content-Type: application/json;charset=UTF-8
-    Cache-Control: no-store
-    Pragma: no-cache
-```
-
-- 实现跨域
-- 线程与进程区别
-- session共享
-- 403、304含义
-- 不缓存cache-control设置
+* TCP/IP 是供已连接因特网的计算机进行通信的通信协议,定义了电子设备（比如计算机）如何连入因特网，以及数据如何在它们之间传输的标准。包含了一系列构成互联网基础的网络协议，是Internet的核心协议。
+    - TCP 负责将数据分割并装入 IP 包，然后在它们到达的时候重新组合它们。
+    - IP 负责将包发送至接受者。
+* TCP/IP协议通信的过程其实就对应着数据入栈与出栈的过程。入栈的过程，数据发送方每层不断地封装首部与尾部，添加一些传输的信息，确保能传输到目的地。出栈的过程，数据接收方每层不断地拆除首部与尾部，得到最终传输的数据。
 
 * TCP (传输控制协议):应用程序之间通信,当应用程序希望通过 TCP 与另一个应用程序通信时，它会发送一个通信请求。这个请求必须被送到一个确切的地址。在双方“握手”之后，TCP 将在两个应用程序之间建立一个全双工 (full-duplex) 的通信。在数据传送之前将它们分割为 IP 包，然后在它们到达的时候将它们重组。
 * UDP (用户数据包协议) - 应用程序之间的简单通信
@@ -88,24 +208,12 @@ HTTP/1.1 200 OK
 * ICMP (因特网消息控制协议) - 针对错误和状态
 * DHCP (动态主机配置协议) - 针对动态寻址
 
-TCP/IP协议通信的过程其实就对应着数据入栈与出栈的过程。入栈的过程，数据发送方每层不断地封装首部与尾部，添加一些传输的信息，确保能传输到目的地。出栈的过程，数据接收方每层不断地拆除首部与尾部，得到最终传输的数据。
 
 * 应用层：应用层 表示层 会话层
+    - 在传输数据时，可以只使用（传输层）TCP/IP协议，但是那样的话，如果没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用到应用层协议，应用层协议有很多，比如HTTP、FTP、TELNET等，也可以自己定义应用层协议。WEB使用HTTP协议作应用层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发到网络上。
 * 传输层
 * 互联网层：网络层
 * 网络访问层：数据链路层 物理层
-
-握手过程中传送的包里不包含数据，三次握手完毕后，客户端与服务器才正式开始传送数据。理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去。断开连接时服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过"四次握手"
-
-### 建立连接
-
-请求端和响应端建立TCP连接，完成三次握手，开始进行数据传输
-
-* 第一次握手：客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；
-* 第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；
-* 第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。
-
-在传输数据时，可以只使用（传输层）TCP/IP协议，但是那样的话，如果没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用到应用层协议，应用层协议有很多，比如HTTP、FTP、TELNET等，也可以自己定义应用层协议。WEB使用HTTP协议作应用层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发到网络上。
 
 ### 网络层
 
@@ -201,66 +309,6 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     - 504 Gateway Time-out：充当网关或代理的服务器，未及时从远端服务器获取请求
     - 505 HTTP Version not supported：服务器不支持请求的HTTP协议的版本，无法完成处理
 
-### HTTP Request Header
-
-* Allow：服务器支持哪些请求方法（如GET、POST等）。
-* Content-Encoding：
-    - 文档的编码(Encode)方法。只有在解码之后才可以得到 Content-Type 头指定的内容类型
-    - 利用gzip压缩文档能够显著地减少HTML文档的下载时间
-* Content-Length：表示内容长度。只有当浏览器使用持久 HTTP 连接时才需要这个数据
-* Content-Type：表示后面的文档属于什么 MIME 类型
-* Date：当前的 GMT 时间
-* Expires：应该在什么时候认为文档已经过期，从而不再缓存它.
-* Last-Modified：文档的最后改动时间。客户可以通过 If-Modified-Since 请求头提供一个日期，该请求将被视为一个条件 GET，服务器端的资源没有变化,只有改动时间迟于指定时间的文档才会返回，否则返回一个 304(Not Modified) 状态
-* Location：表示客户应当到哪里去提取文档
-* Refresh：表示浏览器应该在多少时间之后刷新文档，以秒计
-    - 注意：这种功能通常是通过设置 HTML 页面 HEAD 区的 ＜META HTTP-EQUIV=”Refresh” CONTENT=”5;URL=http://host/path"＞实现
-    - 注意：Refresh 的意义是”N秒之后刷新本页面或访问指定页面”，而不是”每隔N秒刷新本页面或访问指定页面”。因此，连续刷新要求每次都发送一个Refresh头，而发送204状态代码则可以阻止浏览器继续刷新，不管是使用Refresh头还是＜META HTTP-EQUIV=”Refresh” …＞。
-    - 注意 Refresh 头不属于 HTTP 1.1 正式规范的一部分，而是一个扩展
-* Server：服务器名字
-* Set-Cookie：设置和页面关联的 Cookie
-* WWW-Authenticate：客户应该在 Authorization 头中提供什么类型的授权信息？在包含401(Unauthorized) 状态行的应答中这个头是必需的
-
-### 预检请求（preflight request）
-
-CROS,全称是跨域资源共享 (Cross-origin resource sharing)，它的提出就是为了解决跨域请求的。
-
-跨域资源共享(CORS)标准新增了一组 HTTP 首部字段，允许服务器声明哪些源站有权限访问哪些资源。
-规范要求，对那些可能对服务器数据产生副作用的HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求），浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求。服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 Cookies 和 HTTP 认证相关数据）。
-
-Content-Type不属于以下MIME类型的，都属于预检请求,"预检"请求会带上头部信息 Access-Control-Request-Headers: Content-Type:
-
-application/x-www-form-urlencoded
-multipart/form-data
-text/plain
-
-### Content Type
-
-用来向浏览器和服务器提供信息，表示该 URL 对应的资源类型。服务端通常是根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对主体进行解析。
-
-```
-文件后缀    Content-Type(Mime-Type)
-.css    text/css
-.gif    image/gif
-.htm    text/html
-.html   text/html
-.jpeg   image/jpeg
-.jpg    image/jpeg
-.js application/x-javascript
-.ico    image/x-icon
-.mp3    audio/mp3
-.mp4    video/mpeg4
-.mpeg   video/mpg
-.mpg    video/mpg
-.pdf    application/pdf
-.png    image/png
-.tif    image/tiff
-.tiff   image/tiff
-.torrent    application/x-bittorrent
-.wav    audio/wav
-.xhtml  text/html
-```
-
 ## 缓存
 
 * Expires：响应头，代表该资源的过期时间。服务端返回。时间是 GMT 格式的标准时间，如 Fri, 01 Jan 1990 00:00:00 GMT。单独的过期时间机制，浏览器端可以随意修改时间，导致缓存使用不精准
@@ -281,7 +329,7 @@ text/plain
     - 添加版本号
     - 以 MD5hash 值来区分
 
-### 安全
+## 跨域
 
 * 限制获取cookie，用iframe的方式放置了一个淘宝网页到真实页面中，获取淘宝密码信息
 * 同源策略：除非两个网页是来自于统一‘源头’， 否则不允许一个网页的JavaScript访问另外一个网页的内容，像Cookie，DOM，LocalStorage统统禁止访问
@@ -294,24 +342,107 @@ text/plain
         - 代理模式：通过服务器端中转，例如你是来自book.com的， 现在想访问movie.com，那可以让那个book.com把请求转发给movie.com嘛！人类好像给这种方式起了个名字
         - 服务器(domain)可以设置一个白名单，里边列出它允许哪些服务器(domain)的AJAX请求
 
-### CORS
+* 同源策略/SOP（Same origin policy）：从一个域上加载的脚本不允许访问另外一个域的文档属性，只要协议、域名、端口有任何一个不同，都被当作是不同的域
+    - <script>、<img>、<iframe>、<link>等标签都>可以加载跨域资源，而不受同源限制，
+    - 浏览器会限制脚本中发起的跨域请求。比如，使用 XMLHttpRequest 对象和Fetch发起 HTTP 请求就必须遵守同源策略。
+* 解决
+    - JSONP （无状态连接，不能获悉连接状态和错误事件，而且只能走GET的形式）
+    - iframe形式
+    - 服务器代理：页面直接向同域的服务端发请求，服务端进行跨域处理或爬虫后，再把数据返回给客户端页
+    - CORS(Cross-Origin Resource Sharing)：定义了必须在访问跨域资源时，自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功还是失败
+        + 响应首部的字段是需要设置
+            * Access-Control-Allow-Origin:<origin> | *
+            * 如果想跨域传输cookies
+                - 需要Access-Control-Allow-Credentials与XMLHttpRequest.withCredentials 或Fetch API中的Request() 构造器中的credentials 选项结合使用。
+                - Credentials必须在前后端都被配置（即the Access-Control-Allow-Credentials header 和 XHR 或Fetch request中都要配置）才能使带credentials的CORS请求成功。
+            * Access-Control-Allow-Methods 首部字段用于预检请求的响应。其指明了实际请求所允许使用的 HTTP 方法。 Access-Control-Allow-Methods: <method>[, <method>]*
+            * Access-Control-Allow-Headers 用于 preflight request （即会在实际请求发送之前先发送一个option请求）中，列出了将会在正式请求的 Access-Control-Expose-Headers 字段中出现的首部信息
+            * Access-Control-Expose-Headers 头让服务器把允许浏览器访问的头放入白名单，例如：Access-Control-Expose-Headers: X-My-Custom-Header, X-Another-Custom-Header
+            * Access-Control-Max-Age 头指定了preflight请求的结果能够被缓存多久 Access-Control-Max-Age: <delta-seconds>
+            * Access-Control-Allow-Credentials 头指定了当浏览器的credentials设置为true时是否允许浏览器读取response的内容。当用在对preflight预检测请求的响应中时，它指定了实际的请求是否可以使用credentials。请注意：简单 GET 请求不会被预检；如果对此类请求的响应中不包含该字段，这个响应将被忽略掉，并且浏览器也不会将相应内容返回给网页 Access-Control-Allow-Credentials: true
+        + 请求首部字段
+        + Origin 首部字段表明预检请求或实际请求的源站 Origin: <origin>
+        + Access-Control-Request-Method 首部字段用于预检请求。其作用是，将实际请求所使用的 HTTP 方法告诉服务器。 Access-Control-Request-Method: <method>
+        + Access-Control-Request-Headers 首部字段用于预检请求。其作用是，将实际请求所携带的首部字段告诉服务器。Access-Control-Request-Headers: <field-name>[, <field-name>]*
 
 ````
+// 后端返回代码中增加三个字段
+header(“Access-Control-Allow-Origin”:“”);           // 必选 允许所有来源访问
+header(“Access-Control-Allow-Credentials”:“true”);  //可选 是否允许发送cookie
+header(“Access-Control-Allow-Method”:“POST,GET”);   //可选 允许访问的方式
+
 // server
 $origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';
-
-$allow_origin = array(
+if(in_array($origin, [
     'http://client1.runoob.com',
     'http://client2.runoob.com'
-);
-
-if(in_array($origin, $allow_origin)){
-    header('Access-Control-Allow-Origin:'.$origin);
+])){
+    header('Access-Control-Allow-Origin:' . $origin);
 }
 
 # 允许所有域名访问则只需在http://server.runoob.com/server.php文件头部添加如下代码：
 header('Access-Control-Allow-Origin:*');
+
+if($_SERVER['REQUEST_METHOD'] == "GET")
+{
+    header('Content-Type: text/plain');
+    echo "This HTTP resource is designed to handle POSTed XML input from arunranga.com and not be retrieved with GET";
+
+}
+elseif($_SERVER['REQUEST_METHOD'] == "OPTIONS")
+{
+    // 告诉客户端我们支持来自 arunranga.com 的请求并且预请求有效期将仅有20天
+    if($_SERVER['HTTP_ORIGIN'] == "http://arunranga.com")
+    {
+    header('Access-Control-Allow-Origin: http://arunranga.com');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Headers: X-PINGARUNER');
+    header('Access-Control-Max-Age: 1728000');
+    header("Content-Length: 0");
+    header("Content-Type: text/plain");
+    //exit(0);
+    }
+    else
+    {
+    header("HTTP/1.1 403 Access Forbidden");
+    header("Content-Type: text/plain");
+    echo "You cannot repeat this request";
+
+    }
+}
+elseif($_SERVER['REQUEST_METHOD'] == "POST")
+{
+    /* 通过首先获得XML传送过来的blob来处理POST请求，然后做一些处理, 最后将结果返回客户端
+    */
+    if($_SERVER['HTTP_ORIGIN'] == "http://arunranga.com")
+    {
+            $postData = file_get_contents('php://input');
+            $document = simplexml_load_string($postData);
+
+            // 对POST过来的数据进行一些处理
+            $ping = $_SERVER['HTTP_X_PINGARUNER'];
+
+            header('Access-Control-Allow-Origin: http://arunranga.com');
+            header('Content-Type: text/plain');
+            echo // 处理之后的一些响应
+    }
+    else
+        die("POSTing Only Allowed from arunranga.com");
+}
+else
+    die("No Other Methods Allowed");
+
 ````
+
+## 附带身份凭证的请求
+
+需要设置 XMLHttpRequest 的某个特殊标志位。
+
+* 请求配置需添加 withCredentials 标志设置为 true
+* 服务器端的响应中设置响应头 Access-Control-Allow-Credentials: true
+* 服务器不得设置 Access-Control-Allow-Origin 的值为“*”。
+    * 因为请求的首部中携带了 Cookie 信息，如果 Access-Control-Allow-Origin 的值为“*”，请求将会失败。而将 Access-Control-Allow-Origin 的值设置为 foo.example，则请求将成功执行
+    * 响应首部中也携带了 Set-Cookie 字段，尝试对 Cookie 进行修改。如果操作失败，将会抛出异常。
 
 ### CSRF
 
@@ -338,15 +469,11 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
     - [certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx)
     - [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
 
-
-## Token
-
-访问令牌（Access token）表示访问控制操作主体的系统对象
-
 ## session
 
 * session  创建  维护
 * session  每次登陆  id  会变
+* session共享
 
 ## QUIC
 
@@ -400,3 +527,4 @@ HTTP-over-QUIC 实验协议将被重命名为 HTTP/3，并成为 HTTP 协议的�
 * [bolasblack/http-api-guide](https://github.com/bolasblack/http-api-guide)
 * [HTTPS explained with carrier pigeons](https://medium.freecodecamp.org/https-explained-with-carrier-pigeons-7029d2193351)
 * [HTTP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)
+* [HTTP访问控制（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)

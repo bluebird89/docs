@@ -51,6 +51,7 @@ CDMA
 * 频段
     - 4G网络常用的中低频段（sub-6）
     - 美国运营商还与高通等技术公司合作，成功地实现了在毫米波（mmWave）频段的5G网络试验
+* eMBB、URLLC、mMTC
 
 ![5G组网方式](../_static/net_contact.jpg "Optional title")
 

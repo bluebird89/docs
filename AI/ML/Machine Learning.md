@@ -321,6 +321,7 @@
 * [google/jax](https://github.com/google/jax):GPU- and TPU-backed NumPy with differentiation and JIT compilation.
 * [Core ML](link)
 * [tirthajyoti/UCI-ML-API](https://github.com/tirthajyoti/UCI-ML-API):UCI ML网站引入一个简单直观的API，用户可以轻松查找数据集描述，搜索他们感兴趣的特定数据集，甚至可以按大小或机器学习任务分类下载数据集。
+* [guess-js/guess](https://github.com/guess-js/guess):Libraries & tools for enabling Machine Learning driven user-experiences on the web https://guess-js.github.io/
 
 ## 参考
 

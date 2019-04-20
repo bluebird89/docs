@@ -335,6 +335,15 @@ Percentage of the requests served within a certain time (ms)
 * redmine
 * [locustio/locust](https://github.com/locustio/locust):Scalable user load testing tool written in Python http://locust.io
 * JUnit
+* Mocha
+* Selenium
+* Soap UI
+* Cucumber
+* Katalon Studio
+* Calabash
+* Appium
+* Apache JMeter
+* Meissa
 * EasyMock
 * jmockit
 * [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev):A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev

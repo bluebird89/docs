@@ -171,6 +171,7 @@
     - [RubyLouvre/anu](https://github.com/RubyLouvre/anu):the React16-compat mini library https://rubylouvre.github.io/nanachi/ https://rubylouvre.github.io/anu/
     - [wix/react-native-interactable](https://github.com/wix/react-native-interactable):Experimental implementation of high performance interactable views in React Native
     - [alibaba-fusion/next](https://github.com/alibaba-fusion/next):A configurable component library for web built on React. https://fusion.design
+    - [react-native-debugger](https://github.com/jhen0409/react-native-debugger)
 
 ## 扩展
 
