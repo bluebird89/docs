@@ -410,7 +410,7 @@ show engines; # 显示当前数据库支持的存储引擎情况
         +  TIMEDIFF(end_at, start_at)
         +   TIME_FORMAT(start_at, '%h:%i %p') start_at
         +   UTC_TIME()
-    - datetime 保存是1001年到9999年，精度是秒，存储值为 2016-05-06 22:39:40。
+    - datetime '1000-01-01 00:00:00' to '9999-12-31 23:59:59'，精度是秒，存储值为 2016-05-06 22:39:40。
     - timestamp保存自 1970年1月1日午夜以来的秒数，和unix时间戳相同，提供4字节存储 只能表示1970年到2038年。默认timestamp值 为 NOT NULL。
     - 默认值：datetime or timestrap 默认值 CURRENT_TIMESTAMP
 * ip:通常使用varchar(15)保存IP地址.inet_aton() inet_ntoa()用于转换

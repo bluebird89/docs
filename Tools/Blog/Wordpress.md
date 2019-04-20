@@ -22,6 +22,10 @@ WordPress, Git-ified. Synced via SVN every 15 minutes, including branches and ta
 
 * [WordPress/gutenberg](https://github.com/WordPress/gutenberg):Printing since 1440. Development hub for the editor focus in core. Plugin is available from the official WordPress repository. https://wordpress.org/plugins/gutenberg/
 
+## 主题
+
+* [roots/sage](https://github.com/roots/sage):WordPress starter theme with a modern development workflow https://roots.io/sage/
+
 ## 参考
 
 * [kinsta](https://kinsta.com/):https://kinsta.com/resources/

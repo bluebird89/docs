@@ -109,6 +109,10 @@
 
 * 榜样的力量
 
+## 德甲
+
+* 09年德甲第26轮。马加特率狼堡血洗拜仁。伤停补时换下门将。[视频](http://tieba.baidu.com/mo/q/videomiddle?vid=XODI1MTI0OTI=&tid=4606670690&fid=173802)
+
 ## UFC
 
 ##  NFL

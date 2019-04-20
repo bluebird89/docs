@@ -1,6 +1,6 @@
 # [botpress/botpress](https://github.com/botpress/botpress)
 
-The 🤖 platform that ⚡ thousands of bots worldwide https://botpress.io
+🤖 The ultimate open-source conversational platform with built-in natural language processing (NLU), easy-to-use graphical interface and dialog manager ⚡ https://botpress.io
 
 ## 企业
 

@@ -15,6 +15,10 @@
 * instant Messaging
     - [processone/ejabberd](https://github.com/processone/ejabberd):Robust, ubiquitous and massively scalable Jabber / XMPP Instant Messaging platform https://www.process-one.net/en/ejabberd/
 
+## cheatsheets
+
+* [Rico's cheatsheets](https://devhints.io/)
+
 ## 专注
 
 * [Cold Turky](https://getcoldturkey.com/):Meet your match, Zuckerberg. Reclaim your free time and boost your productivity by blocking time-wasting websites and applications.

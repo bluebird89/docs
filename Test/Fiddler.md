@@ -10,6 +10,10 @@
 
 > HTTPS请求
 
- 手机访问PC的IP8888端口下载并安装证书
+* Tools->Telerik Fiddler Options
+* 选中"Decrpt HTTPS traffic"，Fiddler就可以截获HTTPS请求
+* 选中"Allow remote computers to connect"，是允许别的机器把HTTP/HTTPS请求发送到Fiddler上来
+* 手机修改代理地址与端口
+* 手机访问PC的IP：8888端口下载并安装证书
 
 ### 模仿请求

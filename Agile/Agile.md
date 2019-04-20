@@ -166,6 +166,16 @@
 * OrangeScrum
 * Taiga
 * Tuleap
+* Jira Software from Atlassian
+* VivifyScrum
+* Binfire
+* VersionOne
+* Wrike
+*  Zoho Sprints
+*  PivotalTracker
+*  Assembla
+*  Planbox
+*  2. Axosoft
 
 ## 图书
 

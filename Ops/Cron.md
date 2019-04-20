@@ -16,6 +16,9 @@ sudo yum install vixie-cron crontabs
 # runs in the background
 sudo /sbin/chkconfig crond on
 sudo /sbin/service crond start
+
+# Mac OS X
+/usr/lib/cron/tabs/
 ```
 
 ## use
@@ -29,12 +32,22 @@ sudo /sbin/service crond start
 * action
     - 星号:表示任意值，比如在小时部分填写 * 代表任意小时（每小时）
     - 逗号:可以允许在一个部分中填写多个值，比如在分钟部分填写 1,3 表示一分钟或三分钟 and
-    - 斜线:一般配合 * 使用，代表每隔多长时间，比如在小时部分填写 */2 代表每隔两分钟。所以 */1 和 * 没有区别 */2 可以看成是能被2整除的任意值。 cycle
+    - 斜线:一般配合 * 使用，代表每隔多长时间，比如在小时部分填写 */2 代表每隔两分钟。所以 */1 和 * 没有区别 */2 可以看成是能被2整除的任意值。0-23/2 cycle
+    - 8-11 for an "hours" entry specifies execution at hours 8, 9, 10 and 11.
+* Cron jobs can be allowed or disallowed for individual users, as defined in the files /etc/cron.allow and /etc/cron.deny
+* cron invokes the command from the user’s HOME directory with the shell, (/usr/bin/sh).cron supplies a default environment for every shell, defining:
+    - HOME=user’s-home-directory
+    - LOGNAME=user’s-login-id
+    - PATH=/usr/bin:/usr/sbin:.
+    - SHELL=/usr/bin/sh
 
 ```sh
-crontab -l
-crontab -e
+crontab -l # Display the current crontab.
+crontab -r # Remove the current crontab
+crontab -e # Edit the current crontab, using the editor specified in the environment variable VISUAL or EDITOR
+sudo crontab -u charles -e
 crontab -u <user> -e # edit another user’s by specifying
+
 m h  dom mon dow   command
 
 * * * * *                  # 每隔一分钟执行一次任务
@@ -84,6 +97,7 @@ jobs
 * [ouqiang/gocron](https://github.com/ouqiang/gocron):定时任务管理系统
 * [bruceye777/cronmon](https://github.com/bruceye777/cronmon):定时任务执行状态监控
 * [Linux Crontab Generator](https://helloacm.com/crontab-generator/)
+* [crontab guru](https://crontab.guru):The quick and simple editor for cron schedule expressions by Cronitor
 
 ## reference
 
