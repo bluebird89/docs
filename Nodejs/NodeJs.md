@@ -716,11 +716,11 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
   - [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications
   - [balderdashy/sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js https://sailsjs.com
   - [NodeBB/NodeBB](https://github.com/NodeBB/NodeBB):Node.js based forum software built for the modern web https://nodebb.org
-* 数据库
+* db
   - [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis):redis client for node http://redis.js.org/
   - [luin/ioredis](https://github.com/luin/ioredis):🚀A robust, performance-focused and full-featured Redis client for Node.js.
+  - [typeorm/typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. http://typeorm.io
 * HTTP
-  - [expressjs/morgan](https://github.com/expressjs/morgan):HTTP request logger middleware for node.js
 * Logger
   - [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
   - [expressjs/morgan](https://github.com/expressjs/morgan):HTTP request logger middleware for node.js
