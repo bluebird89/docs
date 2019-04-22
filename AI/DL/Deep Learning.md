@@ -38,6 +38,10 @@
 * [PaddlePaddle/book](https://github.com/PaddlePaddle/book):Deep Learning 101 with PaddlePaddle （深度学习框架入门教程）
 * [d2l-ai/d2l-zh](https://github.com/d2l-ai/d2l-zh):《动手学深度学习》，英文版即伯克利深度学习（STAT 157，2019春）教材。面向中文读者、能运行、可讨论。 https://zh.d2l.ai
 * [aamini/introtodeeplearning_labs](https://github.com/aamini/introtodeeplearning_labs/):Lab Materials for MIT 6.S191: Introduction to Deep Learning  https://youtu.be/5v1JnYv_yWs?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI
+* [神经网络与深度学习](https://nndl.github.io/):复旦邱锡鹏 《神经网络与深度学习》
+    - 图书：https://nndl.github.io/nndl-book.pdf
+    - 示例代码：https://github.com/nndl/nndl-codes
+    - 课程练习：https://github.com/nndl/exercise
 
 ## 图书
 
