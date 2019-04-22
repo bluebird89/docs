@@ -684,6 +684,10 @@ netstat -l|listening # hows just the listening ports, very useful when debugging
 netstat  -s|statistics # display summary statistics for each protocol.
 netstat  -p|program # show the PID and name of the program to which each socket belongs Superuser can see all the processes and others can see only the processes they own
 –numeric , -n # show numerical addresses instead of trying to determine symbolic host, port or user names
+-I ,  –interfaces=iface , -I=iface # display a table of all network interfaces and connections, or the specified interface .
+-r,  –route # display the kernel routing tables.  netstat -r and route -e produce the same output.
+-v , –verbose # shows Active Internet connections and Active UNIX domain sockets without server information.
+
 
 netstat -tunlp # 显示tcp，udp的端口和进程等相关
 netstat -tln | grep 8000

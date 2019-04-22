@@ -245,10 +245,10 @@ http {
     # 设定默认文件类型
     default_type application/octet-stream;
 
-    # 为Nginx服务器设置详细的日志格式
+    # 为Nginx服务器设置详细的日志格式 request_time 后端所花
     log_format  main   $remote_addr - $remote_user [$time_local] "$request"
-                      $status $body_bytes_sent "$http_referer"
-                      "$http_user_agent" "$http_x_forwarded_for";
+                      $status $body_bytes_sent $request_body "$http_referer"
+                      "$http_user_agent" "$http_x_forwarded_for" "$request_time";
 
     access_log  /usr/local/var/log/nginx/access.log main;
     # 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，
@@ -1017,12 +1017,33 @@ sticky learn
 
 ## 日志
 
-```
-awk '{print $11}' access.log | sort | uniq -c | sort -rn // Processing log file group by HTTP Status Code
-awk '($11 ~ /502/)' access.log | awk '{print $4, $9}' | sort | uniq -c | sort -rn // Getting All URL's in log file of specific Status Code, below example 502
-awk '($11 ~ /502/)' access.log | awk '{print $9}' | sed '/^$/d' | sed 's/\?.*//g' | sort | uniq -c | sort -rn  // To group by request_uri's excluding query string params below is the command
-awk -F\" '{print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r // Most Requested URL
-awk -F\" '($2 ~ "xyz"){print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r // Most Requested URL containing xyz
+* gnuplot:生成png
+* go-access:直接输出html
+* ngxtop 统计实时数据
+    - `pip install ngxtop`
+    - `ngxtop -c conf/nginx.conf -t 1` -c 指定配置文件，-t 刷新频率，单位为秒
+* lua-nginx-module，nginx/tengine
+* 直接安装openresty的话，就方便了，内嵌了lua，不需要重新编译nginx了
+
+```sh
+awk '{print $11}' access.log | sort | uniq -c | sort -rn # Processing log file group by HTTP Status Code
+awk '($11 ~ /502/)' access.log | awk '{print $4, $9}' | sort | uniq -c | sort -rn # Getting All URL's in log file of specific Status Code, below example 502
+awk '($11 ~ /502/)' access.log | awk '{print $9}' | sed '/^$/d' | sed 's/\?.*//g' | sort | uniq -c | sort -rn  #  To group by request_uri's excluding query string params below is the command
+awk -F\" '{print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r #  Most Requested URL
+awk -F\" '($2 ~ "xyz"){print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r # Most Requested URL containing xyz
+
+# 获取pv数
+cat /usr/local/nginx/logs/access.log | wc -l
+# 获取ip数
+cat /usr/local/nginx/logs/access.log | awk '{print $1}' | sort -k1 -r | uniq | wc -l
+# 获取最耗时的请求时间、url、耗时，前10名, 可以修改后面的数字获取更多，不加则获取全部
+cat /usr/local/class/logs/access.log | awk '{print $4,$7,$NF}' | awk -F '"' '{print $1,$2,$3}' | sort -k3 -rn | head -10
+# 获取某一时刻的请求数量，可以把秒去掉得到分钟的数据，把分钟去掉得到小时的数据，以此类推
+cat /usr/local/class/logs/access.log | grep 2017:13:28:55 | wc -l
+# 获取每分钟的请求数量，输出成csv文件，然后用excel打开，可以生成柱状图
+cat /usr/local/class/logs/access.log  | awk '{print substr($4,14,5)}' | uniq -c | awk '{print $2","$1}' > access.csv
+# 
+cat /usr/local/nginx/logs/access.log | docker run --rm -i diyan/goaccess   --time-format='%H:%M:%S'   --date-format='%d/%b/%Y'   --log-format='%h %^[%d:%t %^] "%r" %s %b "%R" "%u"' > index.html
 
 cp /var/log/nginx/access.log /var/log/nginx/test.log
 cat /var/log/nginx/test.log
