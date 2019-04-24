@@ -12,7 +12,11 @@ TensorFlow 还支持异构设备分布式计算，这意味着它能够在各个
 ## 安装
 
 ```python
+# 对于CPU
 pip install tensorflow
+
+# 对于启用CUDA的GPU卡
+pip install tensorflow-gpu
 
 docker run -it b.gcr.io/tensorflow/tensorflow
 
@@ -22,6 +26,19 @@ virtualenv my-venv
 source my-venv/bin/activate
 pip install IPython
 ```
+
+## 组件
+
+* Tensorboard：帮助使用数据流图进行有效的数据可视化
+* TensorFlow：用于快速部署新算法/试验
+
+## 应用
+
+* 基于文本的应用：语言检测、文本摘要
+* 图像识别：图像字幕、人脸识别、目标检测
+* 声音识别
+* 时间序列分析
+* 视频分析
 
 ## 项目
 
@@ -53,6 +70,7 @@ pip install IPython
 * [tensorflow/models](https://github.com/tensorflow/models):Models and examples built with TensorFlow
 * [TensorFlow 官方 YouTube 频道](https://www.youtube.com/channel/UC0rqucBdTuFTjJiefW5t-IQ)
 * [博客](https://medium.com/tensorflow)
+* [TensorFlow教程](https://www.tensorflow.org/tutorials)
 
 ## 工具
 

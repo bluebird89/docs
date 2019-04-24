@@ -379,6 +379,10 @@ git diff HEAD@{'2 months ago'}
 git diff HEAD@{yesterday}
 git diff HEAD@{'2010-01-01 12:00:00'}
 
+git diff branch_1..branch_2 # Find the diff between the tips of the two branches
+git diff branch_1...branch_2 # Produce the diff between two branches from common ancestor
+git diff branch1:file branch2:file # Comparing files between branches
+
 # Reset the index to match the most recent commit soft(commit)< mixed<(commit + add)< hard(commit+add + local working)
 git reset HEAD [file] # 撤销文件跟踪，重置暂存区的指定文件，与上一次commit保持一致，但工作区不变,
 git reset commit # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变 会将提交记录回滚，代码不回滚

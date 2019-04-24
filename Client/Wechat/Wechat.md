@@ -39,6 +39,7 @@ if ($tmpstr==$signature) {
 
 * [开放平台](https://open.weixin.qq.com/)
 * [公众平台](https://mp.weixin.qq.com/):公众号、小程序
+    - [微信公众平台技术文档](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1472017492_58YV5)
 * [测试号](https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login)
 * [有赞](https://www.youzan.com/)
 
