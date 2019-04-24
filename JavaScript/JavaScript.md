@@ -413,6 +413,7 @@ count; // 3
     - ===：值与类型比较，它不会自动转换数据类型，如果数据类型不一致，返回false，如果一致，再比较
     - `==`比较，它会自动转换数据类型再比较
 * 逻辑运算符：布尔值的运算：&& || ！
+  - ||:或赋值
 * 条件运算符：
 
 ```js
@@ -2670,6 +2671,7 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
   - [transloadit/uppy](https://github.com/transloadit/uppy):The next open source file uploader for web browsers 🐶 https://uppy.io
 * pdf
   - [alvarcarto/url-to-pdf-api](https://github.com/alvarcarto/url-to-pdf-api):Web page PDF/PNG rendering done right. Self-hosted service for rendering receipts, invoices, or any content.
+* [zhangkaitao/es](https://github.com/zhangkaitao/es):JavaEE项目开发脚手架 https://github.com/zhangkaitao/es
 
 ## 参考
 

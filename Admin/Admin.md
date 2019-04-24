@@ -122,3 +122,4 @@ npm run serve
 
 * [bopoda/ace](https://github.com/bopoda/ace):Twitter bootstrap 3 admin template http://ace.jeka.by
 * [almasaeed2010/AdminLTE](https://github.com/almasaeed2010/AdminLTE):AdminLTE - Free Premium Admin control Panel Theme Based On Bootstrap 3.x https://adminlte.io
+* [ColorlibHQ/AdminLTE](https://github.com/ColorlibHQ/AdminLTE):AdminLTE - Free Premium Admin control Panel Theme Based On Bootstrap 3.x https://adminlte.io

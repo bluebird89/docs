@@ -171,6 +171,7 @@ a:link { font-size: 14pt; text-decoration: underline; color: blue; }
         + 注意：多个参数值之间用空格隔开。
         + 举例：div{border-left:5px solid red;} div{border:2px solid blue;}
         + border-radius
+          * oval(椭圆形):border-radius: 100px / 50px;
 * 内填充属性：边线到内容间的距离
   + padding-left padding-right padding-top padding-bottom
 * 外边距属性：边框线往外的距离
@@ -342,7 +343,14 @@ a:hover {border-color: gray;}
 ```
 
 position属性
-  flxed
+  fixed
+  relative
+  absolute
+
+* transform
+  - skew(20deg)
+  - rotate(45deg)
+*  transform-origin: 100% 100%;
 
 ## 定位
 

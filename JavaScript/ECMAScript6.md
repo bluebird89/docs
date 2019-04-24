@@ -144,6 +144,9 @@ console.log(myOptions); // { style: { color: 'green', fontSize: 14 } }
 myOptions.style.color = "red";
 ```
 
+### async await
+
+
 ## ECMAScript 2016
 
 * Array.prototype.includes
@@ -216,8 +219,13 @@ code
 
 * [standard-things/esm](https://github.com/standard-things/esm)：Tomorrow's ECMAScript modules today!
 * [tc39/proposals](https://github.com/tc39/proposals):Tracking ECMAScript Proposals https://tc39.github.io/process-document/
+* [bevacqua/es6](https://github.com/bevacqua/es6):🌟 ES6 Overview in 350 Bullet Points https://ponyfoo.com/articles/es6
+* [ericdouglas/ES6-Learning](https://github.com/ericdouglas/ES6-Learning):📋 List of resources to learn ECMAScript 6!
+* [metagrover/ES6-for-humans](https://github.com/metagrover/ES6-for-humans):A kickstarter guide to writing ES6
+* [DrkSephy/es6-cheatsheet](https://github.com/DrkSephy/es6-cheatsheet):ES2015 [ES6] cheatsheet containing tips, tricks, best practices and code snippets http://slides.com/drksephy/ecmascript-2015
 
 ## 工具
 
 * code generator
     - [estools/escodegen](https://github.com/estools/escodegen):ECMAScript code generator
+* [addyosmani/es6-tools](https://github.com/addyosmani/es6-tools):An aggregation of tooling for using ES6 today
