@@ -57,6 +57,10 @@
 ## 图论
 
 
+## 概念
+
+* 收敛
+
 ## 机器学习
 
 * [Mathematics for Machine Learning Specialization（面向机器学习的数学专项课程系列）](http://coursegraph.com/coursera-specializations-mathematics-machine-learning):For a lot of higher level courses in Machine Learning and Data Science, you find you need to freshen up on the basics in maths – stuff you may have studied before in school or university, but which was taught in another context, or not very intuitively, such that you struggle to relate it to how it’s used in Computer Science. This specialisation aims to bridge that gap, getting you up to speed in the underlying maths, building an intuitive understanding, and relating it to Machine Learning and Data Science. In the first course on Linear Algebra we look at what linear algebra is and how it relates to data. Then we look through what vectors and matrices are and how to work with them. The second course, Multivariate Calculus, builds on this to look at how to optimise fitting functions to get good fits to data. It starts from introductory calculus and then uses the matrices and vectors from the first course to look at data fitting. The third course, Dimensionality Reduction with Principal Components Analysis, uses the maths from the first two courses to do simple optimisation for the situation where you don’t have an understanding of how the data variables relate to each other. At the end of this specialisation you will have gained the prerequisite mathematical knowledge to continue your journey and take more advanced courses in machine learning.

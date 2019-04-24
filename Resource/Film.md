@@ -34,3 +34,5 @@
 ## 资源
 
 * [](http://www.fjisu.com/mov/)
+* [rarbg](http://www.rarbg.to/)
+* [疯狂影视](http://ifkdy.com/)

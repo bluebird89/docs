@@ -39,6 +39,33 @@ app.use(async (ctx, next) => {
 npm install koa
 ```
 
+## ctx
+
+Context 对象，表示一次对话的上下文（包括 HTTP 请求和 HTTP 回复）。通过加工这个对象，就可以控制返回给用户的内容。
+
+ctx.request.path
+ctx.response.type
+ctx.response.body
+ctx.throw
+
+## middleware
+
+```js
+const logger = (ctx, next) => {
+  console.log(`${Date.now()} ${ctx.request.method} ${ctx.request.url}`);
+  next();
+}
+app.use(logger);
+```
+
+## koa-static
+
+serve
+
+## koa-router
+
+## koa-compose
+
 ## 工具
 
 - [chentsulin/koa-graphql](https://github.com/chentsulin/koa-graphql):Create a GraphQL HTTP server with Koa.
@@ -48,5 +75,3 @@ npm install koa
 - [17koa/koa-generator-examples](https://github.com/17koa/koa-generator-examples):
 - [koajs/workshop](https://github.com/koajs/workshop):Koa Training Workshop
 - [koajs/examples](https://github.com/koajs/examples):Example Koa apps
-
-koa console.log 在命令行中打印

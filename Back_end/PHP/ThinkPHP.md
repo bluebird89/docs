@@ -49,6 +49,8 @@ php -S localhost:8888 route/route.php
     * [top-think/think-swoole](https://github.com/top-think/think-swoole):Swoole extend for thinkphp5
 * admin
     * [Ucer/ucer-admin](https://github.com/Ucer/ucer-admin):ucer admin system based Thinkphp5.0.10 http://codehaoshi.com
+    * [yuan1994/tpAdmin](https://github.com/yuan1994/tpAdmin):一个基于ThinkPHP5的管理后台，支持代码自动生成，RBAC权限管理，无限级节点权限管理，一个智能化的管理后台
+    * [Astonep/tp-admin](https://github.com/Astonep/tp-admin):基于ThinkPHP5拿来即用高性能后台管理系统 http://tpadmin.shijinrong.cn/admin/login
 
 ## 项目
 

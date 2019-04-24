@@ -108,6 +108,12 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 * Graphite：Graphite 是一个用于采集网站实时信息并进行统计的开源项目，可用于采集多种网站服务运行状态信息。Graphite服务平均每分钟有4800次更新操作。
 * Kibana：Kibana 是一个为 Logstash 和 ElasticSearch 提供的日志分析的 Web 接口。可使用它对日志进行高效的搜索、可视化、分析等各种操作。
 
+## 管理
+
+* [Vault](link):Manage Secrets and Protect Sensitive Data
+    - [Get started](https://learn.hashicorp.com/vault)
+* [AWS Secrets Manager](link)
+
 ## 工具
 
 - [apex/up](https://github.com/apex/up):Deploy infinitely scalable serverless apps, apis, and sites in seconds. https://apex.github.io/up/
@@ -122,6 +128,7 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 * [pinterest/teletraan](https://github.com/pinterest/teletraan):Teletraan is Pinterest's deploy system.
 * [NullArray/AutoSploit](https://github.com/NullArray/AutoSploit):Automated Mass Exploiter
 * [TeaWeb/build](https://github.com/TeaWeb/build):TeaWeb是集静态资源、缓存、代理、统计、监控于一体的可视化智能WebServer。
+
 
 ## 参考
 
