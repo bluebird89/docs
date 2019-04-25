@@ -226,7 +226,8 @@ pecl channel-update pecl.php.net
         + static：当一个函数完成时，它的所有变量通常都会被删除。希望某个局部变量不要被删除。
         + parameter：通过调用代码将值传递给函数的局部变量
     - 变量本身没有类型之说，所说的类型是指变量中，存储的数据的类型。
-    - 变量的名称，可以包含：字母、数字、下划线。
+    - 引用调用:新的变量简单的引用（换言之，"成为其别名" 或者 "指向"）了原始变量，只有有名字的变量才可以引用赋值
+    - 变量的名称，可以包含：字母、数字、下划线，可以用中文。
     - 变量的名称，不能以数字和特殊符号开头，但可以以字母或下划线开头。如：$_ABC、$abc
     - 变量名称前必须要带“$”符号。“$”不是变量名称一部分，它只是对变量名称的一个引用或标识符。
     - 变量名称区分大小写。如：$name和$Name是两个变量
@@ -288,18 +289,54 @@ const MESSAGE = "Hello const by YiiBai PHP";
 #### 标量类型
 
 - Boolean（布尔型）
+    - 布尔值 FALSE 本身
+    - 整型值 0（零）
+    - 浮点型值 0.0（零）
+    - 空字符串，以及字符串 "0"
+    - 不包括任何元素的数组
+    - 特殊类型 NULL（包括尚未赋值的变量）
+    - 从空标记生成的 SimpleXML 对象
 - String（字符串）
     + 单引号PHP字符串中，大多数转义序列和变量不会被解释。 可以使用单引号\'反斜杠和通过\\在单引号引用PHP字符串。
-    + 双引号的PHP字符串中存储多行文本，特殊字符和转义序列
+    + 双引号的PHP字符串中存储多行文本，特殊字符和转义序列,对一些特殊的字符进行解析
+        + \n  换行（ASCII 字符集中的 LF 或 0x0A (10)）
+        + \r  回车（ASCII 字符集中的 CR 或 0x0D (13)）
+        + \t  水平制表符（ASCII 字符集中的 HT 或 0x09 (9)）
+        + \v  垂直制表符（ASCII 字符集中的 VT 或 0x0B (11)）（自 PHP 5.2.5 起）
+        + \e  Escape（ASCII 字符集中的 ESC 或 0x1B (27)）（自 PHP 5.4.0 起）
+        + \f  换页（ASCII 字符集中的 FF 或 0x0C (12)）（自 PHP 5.2.5 起）
+        + \\  反斜线
+        + \$  美元标记
+        + \"  双引号
+    - heredoc 结构就象是没有使用双引号的双引号字符串，这就是说在 heredoc 结构中单引号不用被转义，但是上文中列出的转义序列还可以使用
+    - Nowdoc 结构是类似于单引号字符串的。Nowdoc 结构很象 heredoc 结构，但是 nowdoc 中不进行解析操作。这种结构很适合用于嵌入 PHP 代码或其它大段文本而无需对其中的特殊字符进行转义
     + addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
     + urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
 - Integer（整型）
 - Float（浮点型）
+    + NaN:代表着任何不同值，不应拿 NAN 去和其它值进行比较，包括其自身，应该用 is_nan() 来检查
 - NULL（空值）
+    + 被赋值为 NULL。
+    + 尚未被赋值。
+    + 被 unset():删除引用，触发相应变量容器refcount减一，但在函数中的行为会依赖于想要销毁的变量的类型而有所不同，比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值；unset 变量与给变量赋值NULL不同，变量赋值NULL直接对相应变量容器refcount = 0
 
 ```php
+$a = 1234; // 十进制数
+$a = -123; // 负数
+$a = 0123; // 八进制数 (等于十进制 83)
+$a = 0x1A; // 十六进制数 (等于十进制 26)
+$a = 0b11111111; // 二进制数字 (等于十进制 255)
+
 $str='Hello text within single quote';
 $str2="Using double \"quote\" with backslash inside double quoted string";
+echo 'You can also have embedded newlines in 
+strings this way as it is
+okay to do';
+
+ $bar = <<<EOT
+bar
+    EOT;
+define('fruit', 'veggie');
 
 $str=strtolower("My name is Yiibai"); # strtoupper
 $str=ucwords("My name is Yiibai"); # strtoupper
@@ -326,11 +363,27 @@ print # 一个语法结构(language constructs), 他并不是一个函数, 参�
 
 #### 复合类型
 
-- Array（数组）
+- Array（数组）:一个有序映射。映射是一种把 values 关联到 keys 的类型。因此可以把它当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性
+    + key 会有如下的强制转换：
+        + 包含有合法整型值的字符串会被转换为整型。例如键名 "8" 实际会被储存为 8。但是 "08" 则不会强制转换，因为其不是一个合法的十进制数值。
+        + 浮点数也会被转换为整型，意味着其小数部分会被舍去。例如键名 8.7 实际会被储存为 8。
+        + 布尔值也会被转换成整型。即键名 true 实际会被储存为 1 而键名 false 会被储存为 0。
+        + Null 会被转换为空字符串，即键名 null 实际会被储存为 ""。
+        + 数组和对象不能被用为键名。坚持这么做会导致警告：Illegal offset type。
     + 索引数组
     + 关联数组
     + 多维数组
 - Object（对象）
+- callback:接受用户自定义的回调函数作为参数。回调函数不止可以是简单函数，还可以是对象的方法，包括静态类方法。
+* 资源
+* 类型转换
+    - 乘法运算符"*"。如果任何一个操作数是float，则所有的操作数都被当成float，结果也是float。否则操作数会被解释为integer，结果也是integer。并没有改变这些操作数本身的类型；改变的仅是这些操作数如何被求值以及表达式本身的类型
+* 类型判断
+    - gettype()
+    - empty()
+    - is_null()
+    - isset()
+    - boolean
 
 ```php
 # array
@@ -477,12 +530,18 @@ array_column($items,'uid','view'); # [100=>1,200=>2,300=>3,400=>4,500=>5];
 array_combine
 
 array_walk(array, funcname)
+
+function my_callback_function() {
+    echo 'hello world!';
+}
+
+// Type 1: Simple callback
+call_user_func('my_callback_function');
+
+$foo = $foo * 1.3;  // $foo 现在是一个浮点数 (2.6)
+$foo = 5 * "10 Little Piggies"; // $foo 是整数 (50)
+$foo = 5 * "10 Small Pigs";     // $foo 是整数 (50)
 ```
-
-#### 特殊类型
-
-- NULL:unset() 与 NULL：删除引用，触发相应变量容器refcount减一，但在函数中的行为会依赖于想要销毁的变量的类型而有所不同，比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值；unset 变量与给变量赋值NULL不同，变量赋值NULL直接对相应变量容器refcount = 0
-- 资源
 
 ### 控制语句
 
