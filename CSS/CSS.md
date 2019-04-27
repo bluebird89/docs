@@ -7,6 +7,7 @@
   - 外部样式表
   - 内部样式表
   - 内联样式
+* 
 
 ```html
 <link rel="stylesheet" type="text/css" href="mystyle.css" />

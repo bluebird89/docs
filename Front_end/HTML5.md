@@ -325,6 +325,7 @@ Your browser does not support the audio tag.
 ### 项目
 
 * [dli/paint](https://github.com/dli/paint):Fluid Paint - http://david.li/paint
+* [canvas粒子时钟](https://www.cnblogs.com/xiaohuochai/p/6368039.html)
 
 ## SVG(Scalable Vector Graphics)
 

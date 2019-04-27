@@ -387,7 +387,8 @@ git diff branch1:file branch2:file # Comparing files between branches
 git reset HEAD [file] # 撤销文件跟踪，重置暂存区的指定文件，与上一次commit保持一致，但工作区不变,
 git reset commit # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变 会将提交记录回滚，代码不回滚
 git reset --mixed HEAD # 缺省参数，将HEAD变了，文件目录没有变，取消了commit和add的内容
-git reset --soft # 取消commit的内容
+git reset --soft "HEAD~n"  # 取消commit的内容
+git commit --amend # 合并 commit
 git reset --hard <b14bb52> # 重置暂存区与工作区，与上一次commit保持一致 会将提交记录和代码全部回滚 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
 git reset --keep [commit] # 重置当前HEAD为指定commit，但保持暂存区和工作区不变
 git reset HEAD~1 # Undo last commit
@@ -590,6 +591,10 @@ git pull origin master --allow-unrelated-histories # 合并两个不同的项目
 git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并
 for((i=1;i<=10000;i+=1)); do sleep X && git pull; done # 每隔X秒运行一次git pull
 
+# merge 其它的 分支或文件
+git pull -X theirs
+git checkout --theirs path/to/file
+
 # Git会首先在你试图push的分支上运行git log,检查它的历史中是否能看到server上的branch现在的tip,如果本地历史中不能看到server的tip,说明本地的代码不是最新的,Git会拒绝你的push.要求先在本地做git pull合并差异，然后再推送到远程主机
 git push   # push所有分支
 git push <remote name> <local branch name>:<remote branch name> # 上传本地指定分支到远程仓库. git push origin my:master
@@ -614,12 +619,13 @@ A common best practice is to consider anything on the master branch as being dep
 Pull Request:useful for contributing to open source projects and for managing changes to shared repositories.
 code review:project guidelines,unit tests
 
+* Fork repository to remote-user
+* clone local repository
+* git checkout -b new-branch
+* new-branch develop and commit
+
 ```sh
-Fork repository to remote-user
-clone local repository
-git checkout -b new-branch
-new-branch develop and commit
-Update Local Repository
+Update Local Repository update with origin
   - git remote add upstream https://github.com/original-owner-username/original-repository.git
   - git fetch upstream
   - git merge upstream/master
@@ -629,7 +635,8 @@ Rebase and Update a Pull Request
   - git rebase -i 66e506853b0366c87f4834bb6b39d341cd094fe9 # pick commit
   - git rebase upstream/master
 git push --set-upstream origin new-branch
-Create Pull Request # why you are making the pull request through your commit messages, so it is best to be as precise and clear as possible.
+
+# Create Pull Request # why you are making the pull request through your commit messages, so it is best to be as precise and clear as possible.
 
 git checkout master
 git pull --rebase upstream master
@@ -650,7 +657,7 @@ git tag -a tagName commitId # 追加tag在指定commit
 git tag -s tagname -m "messsage" # PGP签名标签
 
 git tag new old # Rename tag
-git tag -d [tag] # 删除本地tag
+git tag -d TAG1 TAG2 TAG3 # 删除本地tag
 
 git push [remote] [tagname]  # 提交指定tag
 git push origin v2.1
@@ -659,6 +666,8 @@ git push origin --tags
 
 git push origin --delete v1.0.0
 git push origin :refs/tags/old # 删除远程指定tag
+# delete remove tag
+git push REMOTE --delete TAG1 TAG2 TAG3
 
 git tag -fa tagname
 ```
