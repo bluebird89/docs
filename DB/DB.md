@@ -162,6 +162,8 @@ Cetus 的整体工作流程分为:
 * [cockroachdb/cockroach](https://github.com/cockroachdb/cockroach):CockroachDB - the open source, cloud-native SQL database. https://www.cockroachlabs.com
 * [dgraph-io/dgraph](https://github.com/dgraph-io/dgraph):Fast, Distributed Graph DB https://dgraph.io
 * [DCache](link):分布式 NoSQL 存储系统,基于 TARS 微服务治理方案，它支持 k-v、k-k-row、list、set 与 zset 多种数据结构，数据基于内存存储，同时支持后接 DB 实现数据持久化。DCache 具备快速水平扩展能力，同时配套有 Web 运维平台实现高效的运维操作。
+    - 对外提供服务的粒度是 group，一个 group 负责一部分的数据分片，至于每个 group 服务哪些数据，是根据数据的 key 做 hash 映射后所处的范围来确定的。
+    - 自身会处理缓存与DB之间的数据一致性问题
 * [MemSQL](link)
 
 ## 图书

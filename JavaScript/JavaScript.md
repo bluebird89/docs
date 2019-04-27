@@ -5,10 +5,24 @@
 * 因为网景开发了JavaScript，一年后微软又模仿JavaScript开发了JScript，为了让JavaScript成为全球标准，几个公司联合ECMA（European Computer Manufacturers Association）组织定制了JavaScript语言的标准，被称为ECMAScript标准。
 * ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标准的一种实现。ECMAScript 6标准（简称ES6）已经在2015年6月正式发布了，所以，讲到JavaScript的版本，实际上就是说它实现了ECMAScript标准的哪个版本。
 
-### 引入方式
+## 功能
 
-* 由`<script>...</script>`包含的代码就是JavaScript代码，它将直接被浏览器执行。JavaScript代码可以直接嵌在网页的任何地方，不过通常我们都把JavaScript代码放到`<head>`中。
-* 把JavaScript代码放到一个单独的.js文件，然后在HTML中通过`<script src="..."></script>`引入这个文件。更利于维护代码，并且多个页面可以各自引用同一份.js文件。以在同一个页面中引入多个.js文件，还可以在页面中多次编写`<script> js代码... </script>`，浏览器按照顺序依次执行
+* 写入 HTML 输出流
+  - document.write
+* 事件响应
+  - onclick
+* 改变 HTML 内容
+  - document.getElementById("demo").innerHTML
+* 改变属性
+  - document.getElementById('myimage').src
+  - document.getElementById('myimage').style.color
+
+## 引入方式
+
+* 默认的type就是JavaScript，所以不必显式地把type指定为JavaScript
+* 由`<script>...</script>`包含的代码就是JavaScript代码，它将直接被浏览器执行。JavaScript代码可以直接嵌在网页的任何地方，不过通常我们都把JavaScript代码放到`<body>`后。
+* 把JavaScript代码放到一个单独的.js文件，然后在HTML中通过`<script src="..."></script>`引入这个文件。
+  - 更利于维护代码，并且多个页面可以各自引用同一份.js文件。以在同一个页面中引入多个.js文件，还可以在页面中多次编写`<script> js代码... </script>`，浏览器按照顺序依次执行
 
 ```html
 <head>
@@ -26,9 +40,14 @@ document.write("<p>This is a paragraph</p>");
 <script src="/static/js/abc.js"></script>
 ```
 
-默认的type就是JavaScript，所以不必显式地把type指定为JavaScript
+## 输出
 
-### 基础语法
+* window.alert() 弹出警告框。
+* 使用 document.write() 方法将内容写到 HTML 文档中。
+* 使用 innerHTML 写入到 HTML 元素。
+* 使用 console.log() 写入到浏览器的控制台。
+
+## 基础语法
 
 * 每个语句以`;`结束，浏览器中负责执行JavaScript代码的引擎会自动在每个语句的结尾补上;
 * 语句块用{`...}`
@@ -36,9 +55,9 @@ document.write("<p>This is a paragraph</p>");
 * 块注释是用`/*...*/`把多行字符包裹起来
 * 区分大小写
 
-### 常量
+## 常量
 
-要申明一个常量，在ES6之前是不行的，我们通常用全部大写的变量来表示“这是一个常量，不要修改它的值”。固定值称为字面量
+要申明一个常量，在ES6之前是不行的，我们通常用全部大写的变量来表示“这是一个常量，不要修改它的值”。
 
 ```javascript
 var PI = 3.14;
@@ -52,11 +71,19 @@ PI; // 3.14
 
 用于存储信息的"容器"，变量不仅可以是数字，还可以是任意数据类型。
 
-* 变量名是大小写英文、数字、$和_的组合，且不能用数字开头。变量名也不能是JavaScript的关键字，如if、while等。申明一个变量用var语句。变量名也可以用中文，但是，请不要给自己找麻烦。
-* 使用等号=对变量进行赋值。可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量，但是要注意只能用var申明一次。
-* 变量本身类型不固定的语言称之为动态语言，与之对应的是静态语言。静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。例如Java是静态语言
-* ECMA在后续规范中推出了strict模式，在strict模式下运行的JavaScript代码，强制通过var申明变量，未使用var申明变量就使用的，将导致运行错误。在JavaScript代码的第一行写上：`'use strict';`
-* 如果重新声明 JavaScript 变量，该变量的值不会丢失：
+* 变量名是大小写英文、数字、$和_的组合
+  - 不能用数字开头
+  - 变量名也不能是JavaScript的关键字，如if、while等
+  - 申明一个变量用var语句。变量名也可以用中文，但是，请不要给自己找麻烦。
+* 使用等号=对变量进行赋值。
+  - 可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量，但是要注意只能用var声明一次
+* 变量本身类型不固定的语言称之为动态语言
+  - 静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。例如Java是静态语言
+* ECMA在后续规范中推出了strict模式，
+  - 强制通过var申明变量，未使用var申明变量就使用的，将导致运行错误。在JavaScript代码的第一行写上：`'use strict';`
+  - 同一个页面的不同的JavaScript文件中，如果都不用var申明，恰好都使用了变量i，将造成变量i互相影响，产生难以调试的错误结果。
+  - 使用var申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内（函数的概念将稍后讲解），同名变量在不同的函数体内互不冲突。
+* 如果重新声明 JavaScript 变量，该变量的值不会丢失
 * 生命周期：在它声明时初始化，局部变量在函数执行完毕后销毁，全局变量在页面关闭后销毁
 
 ```js
@@ -67,19 +94,48 @@ var name="Gates", age=56, job="CEO";
 
 ### 数据类型
 
-所有事物都为对象,JavaScript 本地对象和内置对象
-
+* 固定值称为字面量
+* 所有事物都为对象,JavaScript 本地对象和内置对象
+* 类型
+  - 值类型(基本类型)：字符串（String）、数字(Number)、布尔(Boolean)、空（Null）、未定义（Undefined）、Symbol
+  - 引用数据类型：对象(Object)、数组(Array)、函数(Function)
 * Boolean:布尔值和布尔代数的表示完全一致，一个布尔值只有true、false两种值.常用在条件判断中
     - `&&` 与运算 `||`和运算 `!`非运算.把null、undefined、0、NaN和空字符串''视为false，其他值一概视为true
 * String字符串：以单引号`'`或双引号`"`括起来的任意文本
     - 如果`'`本身也是一个字符，那就可以用""括起来，比如`"I'm OK"`包含的字符是I，`'`，m，空格，O，K这6个字符。
-    - `'I\'m \"OK\"!';` 转义字符`\`可以转义很多字符，比如`\n`表示换行，`\t`表示制表符，字符`\`本身也要转义，所以`\\`表示的字符就是`\`
+    - `'I\'m \"OK\"!';` 转义字符`\`可以转义很多字符
+      - `\n`表示换行
+      - `\t`表示制表符
+      - 字符`\`本身也要转义，所以`\\`表示的字符就是`\`
     - ASCII字符可以以`\x##`形式的十六进制表示 `'\x41'; // 完全等同于 'A'`
     - 用`\u####`表示一个Unicode字符:`'\u4e2d\u6587'; // 完全等同于 '中文'`
     - 多行字符串,串用`\n`写起来比较费事，所以最新的ES6标准新增了一种多行字符串的表示方法，用反引号 ` ... ` 表示
-    - 模板字符串
+    - String 对象属性
+      + constructor 对创建该对象的函数的引用
+      + length  字符串的长度
+      + prototype 允许您向对象添加属性和方法
     - 字符串操作
-      + trim
+      + charAt()  返回指定索引位置的字符
+      * charCodeAt()  返回指定索引位置字符的 Unicode 值
+      * concat()  连接两个或多个字符串，返回连接后的字符串 string.concat(string1, string2, ..., stringX)
+      * fromCharCode()  将 Unicode 转换为字符串
+      * indexOf() 返回字符串中检索指定字符第一次出现的位置
+      * lastIndexOf() 返回字符串中检索指定字符最后一次出现的位置
+      * localeCompare() 用本地特定的顺序来比较两个字符串
+      * match() 找到一个或多个正则表达式的匹配
+      * replace() 替换与正则表达式匹配的子串
+      * search()  检索与正则表达式相匹配的值
+      * slice() 提取字符串的片断，并在新的字符串中返回被提取的部分
+      * split() 把字符串分割为子字符串数组
+      * substr()  从起始索引号提取字符串中指定数目的字符
+      * substring() 提取字符串中两个指定的索引号之间的字符
+      * toLocaleLowerCase() 根据主机的语言环境把字符串转换为小写，只有几种语言（如土耳其语）具有地方特有的大小写映射
+      * toLocaleUpperCase() 根据主机的语言环境把字符串转换为大写，只有几种语言（如土耳其语）具有地方特有的大小写映射
+      * toLowerCase() 把字符串转换为小写
+      * toString()  返回字符串对象值
+      * toUpperCase() 把字符串转换为大写
+      * trim()  移除字符串首尾空白
+      * valueOf() 返回某个字符串对象的原始值
 * Number:不区分整数和浮点数，统一用Number表示.有时候用十六进制表示整数比较方便，十六进制用0x前缀和0-9，a-f表示,以及运算符.
     - NaN这个特殊的Number与所有其他值都不相等，包括它自己.唯一能判断NaN的方法是通过isNaN()函数.注意浮点数的相等比较(浮点数在运算过程中会产生误差，因为计算机无法精确表示无限循环小数。要比较两个浮点数是否相等，只能计算它们之差的绝对值，看是否小于某个阈值)
     - 属性
@@ -96,7 +152,11 @@ var name="Gates", age=56, job="CEO";
         + toPrecision()
         + toString()
         + valueOf()
-* Null表示一个“空”的值，它和0以及空字符串`''`不同，0是一个数值，`''`表示长度为0的字符串，而null表示“空”。可以通过将变量的值设置为 null 来清空变量。
+* Null表示一个“空”的值，它和0以及空字符串`''`不同
+  - 0是一个数值
+  - `''`表示长度为0的字符串
+  - null表示“空”
+  - 可以通过将变量的值设置为 null 来清空变量。
 * Undefined表示值未定义,仅仅在判断函数参数是否传递的情况下有用
 
 ```js
@@ -121,12 +181,12 @@ var age = 20;
 var message = '你好, ' + name + ', 你今年' + age + '岁了!';
 var message = `你好, ${name}, 你今年${age}岁了!`;
 
+typeof new String("John"); // 返回 Object
+
 var s = 'Hello, world!';
 s.length; // 13
 
 s[0]; // 'H'
-s[6]; // ' '
-s[7]; // 'w'
 s[12]; // '!'
 s[13]; // undefined 超出范围的索引不会报错，但一律返回undefined
 
@@ -139,9 +199,23 @@ s.indexOf('world'); // 指定字符串出现的第一个字符位置 返回7
 s.indexOf('World'); // 没有找到指定的子串，返回-1
 s.replace()
 s.search()
+s.match()
 
 s.substring(0, 5); // 从索引0开始到5（不包括5），返回'hello'
 s.substring(7); // 从索引7开始到结束，返回'world'
+
+var str = "HELLO WORLD";
+str.charAt(str.length-1);
+
+function employee(name,jobtitle,born){
+    this.name=name;
+    this.jobtitle=jobtitle;
+    this.born=born;
+}
+var fred=new employee("Fred Flintstone","Caveman",1970);
+employee.prototype.salary=null;
+fred.salary=20000;
+document.write(fred.salary);
 
 true; // 这是一个true值
 false; // 这是一个false值
@@ -181,8 +255,8 @@ var cars=new Array();
 cars[0]="Audi";
 cars[1]="BMW";
 cars[2]="Volvo";
-
-var cars=["Audi","BMW","Volvo"];
+var cars=new Array("Saab","Volvo","BMW"); // condensed array
+var cars=["Audi","BMW","Volvo"]; // literal array
 
 var arr = [1, 2, 3.14, 'Hello', null, true];
 arr.length; // 6
@@ -250,13 +324,6 @@ for (x in mycars)
 }
 ```
 
-### strict模式
-
-JavaScript在设计之初，为了方便初学者学习，并不强制要求用var申明变量。这个设计错误带来了严重的后果：如果一个变量没有通过var申明就被使用，那么该变量就自动被申明为全局变量。
-
-* 同一个页面的不同的JavaScript文件中，如果都不用var申明，恰好都使用了变量i，将造成变量i互相影响，产生难以调试的错误结果。
-* 使用var申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内（函数的概念将稍后讲解），同名变量在不同的函数体内互不冲突。
-
 ### 对象
 
 一组由键-值组成的无序集合.对象的键都是字符串类型，值可以是任意数据类型。用于描述现实世界中的某个对象.视为其他语言中的Map或Dictionary的数据结构
@@ -268,7 +335,7 @@ JavaScript在设计之初，为了方便初学者学习，并不强制要求用v
     - 检测xiaoming是否拥有某一属性，可以用in操作符(如果in判断一个属性存在，这个属性不一定是xiaoming的，它可能是xiaoming继承得到的)
     - for...in 语句循环遍历对象的属性
     - hasOwnProperty()：要判断一个属性是否是xiaoming自身拥有的，而不是继承得到的，可以用方法
-* 方法：在一个对象中绑定函数，称为这个对象的方法。调用方法
+* 方法：在一个对象中绑定函数，称为这个对象的方法
     - 在一个方法内部，this是一个特殊变量，它始终指向当前对象，**要保证this指向正确，必须用obj.xxx()的形式调用**
     - 这是一个巨大的设计错误，要想纠正可没那么简单。ECMA决定，在strict模式下让函数的this指向undefined，因此，在strict模式下，你会得到一个错误
     - 修复方法：用一个that变量首先捕获this
@@ -279,7 +346,10 @@ JavaScript在设计之初，为了方便初学者学习，并不强制要求用v
     - 装饰器：动态改变函数的行为。
 
 ```javascript
+//
 var person={firstname:"John",lastname:"Doe",age:50,eyecolor:"blue"};
+name=person.lastname;
+name=person["lastname"];
 
 var person= new Object;
 var person = {
@@ -289,7 +359,7 @@ var person = {
     city: 'Beijing',
     hasCar: true,
     'middle-school': 'No.1 Middle School',
-    zipcode: null
+    zipcode: null,
 };
 
 function person(firstname,lastname,age,eyecolor)
@@ -303,6 +373,10 @@ function person(firstname,lastname,age,eyecolor)
     function changeName(name)
     {
         this.lastname=name;
+    }
+    fullName : function()
+    {
+       return this.firstName + " " + this.lastName;
     }
 }
 var myMother=new person("Steve","Jobs",48,"green");
@@ -404,17 +478,90 @@ parseInt('30');
 count; // 3
 ```
 
+## 函数
+
+函数是由事件驱动的或者当它被调用时执行的可重复使用的代码块。函数是“头等公民”，而且可以像变量一样使用，具有非常强大的抽象能力。函数就是最基本的一种代码抽象的方式。能不关心底层的具体计算过程，而直接在更高的层次上思考问题。
+
+* function指出这是一个函数定义；
+* abs是函数的名称；
+* (x)括号内列出函数的参数，多个参数以,分隔；
+* { ... }之间的代码是函数体，可以包含若干语句，甚至可以没有任何语句
+* 会先扫描整个函数体的语句，把所有申明的变量（而非赋值）“提升”到函数顶部.严格遵守“在函数内部首先申明所有变量”这一规则
+* 一旦执行到return时，函数就执行完毕，并将结果返回,如果没有return语句，函数执行完毕后也会返回结果，只是结果为undefined.
+* 由于JavaScript的函数也是一个对象，定义的abs()函数实际上是一个函数对象，而函数名abs可以视为指向该函数的变量。
+* 调用函数：顺序传入参数即可；允许传入任意个参数而不影响调用，因此传入的参数比定义的参数多也没有问题；
+* 参数检测：类型判断
+* 关键字arguments，它只在函数内部起作用，并且永远指向当前函数的调用者传入的所有参数。arguments类似Array但它不是一个Array。利用arguments，你可以获得调用者传入的所有参数。也就是说，即使函数不定义任何参数，还是可以拿到参数的值。实际上arguments最常用于判断传入参数的个数
+* ES6标准引入了rest参数:rest参数只能写在最后，前面用...标识，从运行结果可知，传入的参数先绑定已声明参数，多余的参数以数组形式交给变量rest，所以，不再需要arguments我们就获取了全部参数。
+- 作用域：
+    - 局部变量：只能在函数内部访问它
+    - 全局变量：网页上的所有脚本和函数都能访问它
+
+```javascript
+function abs(x) {
+    if (x >= 0) {
+        return x;
+    } else {
+        return -x;
+    }
+}
+
+function foo() {
+    var x = 'Hello, ' + y;
+    alert(x);
+    var y = 'Bob';
+}
+foo(); //  Hello, undefined
+
+function foo() {
+    var
+        x = 1, // x初始化为1
+        y = x + 1, // y初始化为2
+        z, i; // z和i为undefined
+    // 其他语句:
+    for (i=0; i<100; i++) {
+        ...
+    }
+}
+
+var abs = function (x) {
+    if (x >= 0) {
+        return x;
+    } else {
+        return -x;
+    }
+};
+
+function foo() {
+    if (arguments.length === 0) {
+        return 0;
+    }
+    var x = arguments[0];
+    return x >= 0 ? x : -x;
+}
+foo(-9);
+
+function foo(a, b, ...rest) {
+    console.log('a = ' + a);
+    console.log('b = ' + b);
+    console.log(rest);
+}
+
+foo(1, 2, 3, 4, 5);
+```
+
 ### 运算符
 
-* 赋值运算符：=
-* 计算运算符：+ - * / % += -= *= /= %=
-* 连接运算符：用于字符串连接 +  如果把数字与字符串相加，结果将成为字符串。
+* 赋值运算符：= += -= *= /= %=
+* 计算运算符：+ - * / %
+* 连接运算符：用于字符串连接 +
+  - 如果把数字与字符串相加，结果将成为字符串
 * 比较运算符：> = >= < <= == !=
     - ===：值与类型比较，它不会自动转换数据类型，如果数据类型不一致，返回false，如果一致，再比较
     - `==`比较，它会自动转换数据类型再比较
 * 逻辑运算符：布尔值的运算：&& || ！
   - ||:或赋值
-* 条件运算符：
+* 条件运算符：variablename=(condition)?value1:value2
 
 ```js
 1 + 2; // 3
@@ -452,12 +599,16 @@ greeting=(visitor=="PRES")?"Dear President ":"Dear ";
 
 ### 控制语句
 
-* 条件语句：使用`if () { ... } else { ... }`来进行条件判断 其中else语句是可选的。
+* 条件语句
+  - 使用`if () { ... } else { ... }`来进行条件判断 其中else语句是可选的。
   - 如果语句块只包含一条语句，那么可以省略`{}`.
   - 在多个if...else...语句中，如果某个条件成立，则后续就不再继续判断了(注意先后顺序)
-* switch 语句来选择要执行的多个代码块之一
+  - switch 语句来选择要执行的多个代码块之一
 * 循环语句：重复运算.务必小心编写初始条件和判断条件，尤其是边界值。特别注意i < 100和i <= 100是不同的判断逻辑。
     * for循环最常用的地方是利用索引来遍历数组；for循环的3个条件都是可以省略的，如果没有退出循环的判断条件，就必须使用break语句退出循环，否则就是死循环；
+      - 初始化循环中所用的变量
+      - 评估初始变量的条件:返回 true，则循环再次开始，如果返回 false，则循环将结束
+      - 增加初始变量的值
     * `for ... in`循环，它可以把一个对象的所有属性依次循环出来
     * while循环只有一个判断条件，条件满足，就不断循环，条件不满足时则退出循环
     * `do { ... } while()`和while循环的唯一区别在于，不是在每次循环开始的时候判断条件，而是在每次循环完成的时候判断条件
@@ -717,78 +868,6 @@ var m = new Map([[1, 'x'], [2, 'y'], [3, 'z']]);
 m.forEach(function (value, key, map) {
     alert(value);
 });
-```
-
-## 函数
-
-函数是由事件驱动的或者当它被调用时执行的可重复使用的代码块。函数是“头等公民”，而且可以像变量一样使用，具有非常强大的抽象能力。函数就是最基本的一种代码抽象的方式。能不关心底层的具体计算过程，而直接在更高的层次上思考问题。
-
-* function指出这是一个函数定义；
-* abs是函数的名称；
-* (x)括号内列出函数的参数，多个参数以,分隔；
-* { ... }之间的代码是函数体，可以包含若干语句，甚至可以没有任何语句
-* 会先扫描整个函数体的语句，把所有申明的变量（而非赋值）“提升”到函数顶部.严格遵守“在函数内部首先申明所有变量”这一规则
-* 一旦执行到return时，函数就执行完毕，并将结果返回,如果没有return语句，函数执行完毕后也会返回结果，只是结果为undefined.
-* 由于JavaScript的函数也是一个对象，定义的abs()函数实际上是一个函数对象，而函数名abs可以视为指向该函数的变量。
-* 调用函数：顺序传入参数即可；允许传入任意个参数而不影响调用，因此传入的参数比定义的参数多也没有问题；
-* 参数检测：类型判断
-* 关键字arguments，它只在函数内部起作用，并且永远指向当前函数的调用者传入的所有参数。arguments类似Array但它不是一个Array。利用arguments，你可以获得调用者传入的所有参数。也就是说，即使函数不定义任何参数，还是可以拿到参数的值。实际上arguments最常用于判断传入参数的个数
-* ES6标准引入了rest参数:rest参数只能写在最后，前面用...标识，从运行结果可知，传入的参数先绑定已声明参数，多余的参数以数组形式交给变量rest，所以，不再需要arguments我们就获取了全部参数。
-- 作用域：
-    - 局部变量：只能在函数内部访问它
-    - 全局变量：网页上的所有脚本和函数都能访问它
-
-```javascript
-function abs(x) {
-    if (x >= 0) {
-        return x;
-    } else {
-        return -x;
-    }
-}
-
-function foo() {
-    var x = 'Hello, ' + y;
-    alert(x);
-    var y = 'Bob';
-}
-foo(); //  Hello, undefined
-
-function foo() {
-    var
-        x = 1, // x初始化为1
-        y = x + 1, // y初始化为2
-        z, i; // z和i为undefined
-    // 其他语句:
-    for (i=0; i<100; i++) {
-        ...
-    }
-}
-
-var abs = function (x) {
-    if (x >= 0) {
-        return x;
-    } else {
-        return -x;
-    }
-};
-
-function foo() {
-    if (arguments.length === 0) {
-        return 0;
-    }
-    var x = arguments[0];
-    return x >= 0 ? x : -x;
-}
-foo(-9);
-
-function foo(a, b, ...rest) {
-    console.log('a = ' + a);
-    console.log('b = ' + b);
-    console.log(rest);
-}
-
-foo(1, 2, 3, 4, 5);
 ```
 
 ### 变量作用域
@@ -1761,13 +1840,8 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
 ```js
 document.write('Hello Javascript');
 
-var w=window.innerWidth
-|| document.documentElement.clientWidth
-|| document.body.clientWidth;
-
-var h=window.innerHeight
-|| document.documentElement.clientHeight
-|| document.body.clientHeight;
+var w=window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+var h=window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
 function timedMsg()
 {
@@ -1798,17 +1872,20 @@ function stopCount()
     - 新增
     - 删除
 * CSS 样式
-* 事件做出反应（Event）
-    - 首先当点击鼠标按钮时，会触发 onmousedown 事件
-    - 释放鼠标按钮时，会触发 onmouseup 事件
-    - 当输入字段获得焦点时：onfocus
-    - 当用户点击鼠标时onclick
-    - 当网页已加载时onload:可用于检测访问者的浏览器类型和浏览器版本，并基于这些信息来加载网页的正确版本。可用于处理 cookie。
-    - 离开页面时被触发:onunload
+* 事件
+    - onmousedown:点击鼠标按钮时
+    - onmouseup: 释放鼠标按钮时
+    - onfocus:当输入字段获得焦点时
+    - onclick:当用户点击鼠标时
+    - onload当网页已加载时
+      + 可用于检测访问者的浏览器类型和浏览器版本，并基于这些信息来加载网页的正确版本。可用于处理 cookie。
+    - onunload 离开页面时被触发
     - 当图像已加载时
-    - 当鼠标移动到或移出元素上时:onmouseover 和 onmouseout
-    - 当输入字段被改变时onchange:对输入字段的验证来使用
-    - 当提交 HTML 表单时
+    - onmouseover 和 onmouseout当鼠标移动到或移出元素上时
+    - onchange当输入字段被改变时
+      + 对输入字段的验证来使用
+    - onsubmit:当提交 HTML 表单时
+    - onkeydown:按下键盘按键
 * document.getElementById() 可以直接定位唯一的一个DOM节点
 * document.getElementsByTagName() 总是返回一组DOM节点
 * CSS选择器document.getElementsByClassName() 返回一组DOM节点
@@ -1840,8 +1917,11 @@ function stopCount()
 
 <img id="image" src="smiley.gif">
 
+<some-HTML-element some-event="JavaScript 代码">
+
 <h1 onclick="this.innerHTML='谢谢!'">请点击该文本</h1>
 <h1 onclick="changetext(this)">请点击该文本</h1>
+<button onclick="getElementById('demo').innerHTML=Date()">现在的时间是?</button>
 
 <script>
 function changetext(id)
