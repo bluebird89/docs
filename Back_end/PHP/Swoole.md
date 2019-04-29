@@ -2,6 +2,10 @@
 
 Event-driven asynchronous & concurrent & coroutine networking engine with high performance for PHP. <http://www.swoole.com/>
 
+* 常驻内存，避免重复加载带来的性能损耗，提升海量性能，
+* 协程异步，提高对 I/O 密集型场景并发处理能力
+* 方便地开发Http、WebSocket、TCP、UDP 等应用，可以与硬件通信
+
 ## 安装
 
 ```sh
@@ -32,16 +36,17 @@ sudo ln -s  /etc/php/7.2/mods-available/swoole.ini 20-swoole.ini
 
 ## 基础
 
-多线程编程
-进程间通信
-网络协议TCP/UDP的认知
-PHP的各项基本技能
+* 多线程编程
+* 进程间通信
+* 网络协议TCP/UDP的认知
+* PHP的各项基本技能
 
 ## 资料
 
 - [Concise Guide to Swoole文档](https://linkeddestiny.gitbooks.io/easy-swoole/content/)
 - [源码分析](https://github.com/LinkedDestiny/swoole-src-analysis)
 - [官方文档](https://github.com/cloes/swoole-doc)
+- [官方Wiki](https://wiki.swoole.com/)
 
 ## 扩展
 
@@ -61,6 +66,9 @@ PHP的各项基本技能
 * [Tencent/tsf](https://github.com/Tencent/tsf):coroutine and Swoole based php server framework in tencent
 * [bixuehujin/blink](https://github.com/bixuehujin/blink):A high performance web framework and application server in PHP. https://docs.rethinkphp.com/blink-framework/v0.4/zh-CN/
 * [SwooleDistributed/SwooleDistributed](https://github.com/SwooleDistributed/SwooleDistributed):swoole 分布式全栈框架
+* [EasySwoole](https://www.easyswoole.com/Manual/3.x/Cn/_book/)
+* [Swoft](https://doc.swoft.org/)
+* [One](https://www.kancloud.cn/vic-one/php-one/826876)
 
 ## 项目
 

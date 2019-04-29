@@ -64,3 +64,4 @@ docker-compose up -d
 * [Separius/awesome-sentence-embedding](https://github.com/Separius/awesome-sentence-embedding):A curated list of pretrained sentence(and word) embedding models
 * [crownpku/Awesome-Chinese-NLP](https://github.com/crownpku/Awesome-Chinese-NLP):A curated list of resources for Chinese NLP 中文自然语言处理相关资料
 * [lyeoni/nlp-tutorial](https://github.com/lyeoni/nlp-tutorial)
+* [Understanding LSTM Networks](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)

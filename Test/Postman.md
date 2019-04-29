@@ -49,7 +49,7 @@ HTTP请求的4部分:
 postman.setGlobalVariable("username", "tester");  // 使用时代替
 ```
 
-response
+## response
 
 保证API响应的正确性，就是你需要做的大部分工作。postman的response viewer部分会协助你完成该工作且使其变得简单。一个API的响应包含body,headers,响应状态码。postman将body和headers放在不同的tabs中。响应码和响应时间显示在tabs的旁边。将鼠标悬停在响应码上面可以查看更详细的信息。
 
@@ -63,7 +63,7 @@ response
     - bulk or key-value
 * Headers
 
-身份验证Authentication
+## 身份验证Authentication
 
 * Basic Auth：填写用户名和密码，点击Refresh headers
 * Digest Auth：要比Basic Auth复杂的多。使用当前填写的值生成authorization header。所以在生成header之前要确保设置的正确性。如果当前的header已经存在，postman会移除之前的header。
@@ -101,7 +101,7 @@ tests["Response time is less than 200ms"] = responseTime < 200; // 验证Respons
 tests["Status code name has string"] = responseCode.name.has("Created"); // name是否包含某个值
 tests["Successful POST request"] = responseCode.code === 201 || responseCode.code === 202; //POST 请求的状态响应码是否是某个值
 
-12.很小的JSON数据验证器
+# 很小的JSON数据验证器
 
 var schema = {
  "items": {
@@ -114,6 +114,16 @@ console.log(tv4.error);
 tests["Valid Data1"] = tv4.validate(data1, schema);
 tests["Valid Data2"] = tv4.validate(data2, schema);
 ```
+
+## mock
+
+* 发送请求（R1）
+* 将请求（R1）保存到集合里面（C1）
+* 将请求结果（P1）保存到集合里面（C1）
+* 为集合 C1 创建一个 Mock（M1）
+* 使用 Mock 服务（M1）发送一个请求
+    - 带上路由
+* 使用查询参数进行匹配
 
 ## Team
 
