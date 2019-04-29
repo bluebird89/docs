@@ -614,6 +614,16 @@ pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0">
   - onmouseover:当鼠标指针悬停于某元素之上时执行脚本
   - onmouseup:当鼠标按钮被松开时执行脚本
 
+## 图文不可复制
+
+```
+-webkit-user-select: none;
+-ms-user-select: none;
+-moz-user-select: none;
+-khtml-user-select: none;
+user-select: none;
+```
+
 ## 扩展
 
 * [hakimel/reveal.js](https://github.com/hakimel/reveal.js):The HTML Presentation Framework http://lab.hakim.se/reveal-js/

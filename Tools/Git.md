@@ -368,12 +368,12 @@ git rm --cached [file]  # 把文件从暂存区移除但工作区保留
 git rm -f <file> # 如果已修改并提交到暂存区
 
 git diff # 显示暂存区和工作区的差异
-git diff <fileName> # 未缓存的所有或者单个文件的改动
-git diff --cached <fileName> # 显示暂存区和上一个commit的差异
+git diff -- <fileName> # 未缓存的所有或者单个文件的改动
+git diff --cached <fileName> # 暂存区和 HEAD 的文件差异
 git diff --staged # 暂存区与最新一次提交之间的差别
 git diff HEAD # 已缓存的与未缓存的所有改动 HEAD：最后一次提交,HEAD^^:前两次提交 HEAD~3：前三次提交
 git diff --stat # 显示摘要而非整个
-git diff [first-branch]...[second-branch] # 显示两次提交之间的差异
+git diff [first-branch]...[second-branch]  -- fileName # 显示两次提交之间的差异
 git diff --shortstat "@{0 day ago}" # 显示今天你写了多少行代码
 git diff HEAD@{'2 months ago'}
 git diff HEAD@{yesterday}
@@ -384,7 +384,7 @@ git diff branch_1...branch_2 # Produce the diff between two branches from common
 git diff branch1:file branch2:file # Comparing files between branches
 
 # Reset the index to match the most recent commit soft(commit)< mixed<(commit + add)< hard(commit+add + local working)
-git reset HEAD [file] # 撤销文件跟踪，重置暂存区的指定文件，与上一次commit保持一致，但工作区不变,
+git reset HEAD -- [file] # 撤销文件跟踪，重置暂存区的指定文件，与上一次commit保持一致，但工作区不变,
 git reset commit # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变 会将提交记录回滚，代码不回滚
 git reset --mixed HEAD # 缺省参数，将HEAD变了，文件目录没有变，取消了commit和add的内容
 git reset --soft "HEAD~n"  # 取消commit的内容
@@ -525,6 +525,8 @@ git cherry-pick hash_commit_A hash_commit_B
 git --git-dir=/.git format-patch -k -1 --stdout  | git am -3 -k # 将另一个不相关的本地仓库的提交补丁应用到当前仓库
 
 git filter-branch --prune-empty --subdirectory-filter  master # 将Git仓库中某个特定的目录转换为一个全新的仓库
+
+git rm filename # 从 HEAD 中删除文件
 ```
 
 #### 远程分支
@@ -582,7 +584,7 @@ git rebase -–continue|skip|abort # 如果出错的话
 git rebase -i start_commit_hash end_commit_hash # combine to one commit
 git rebase -i HEAD~5 # Squash last n commits into one commit
 git rebase -i # 通过交互式的 rebase，提供对分支 commit 的控制，从而可以清理混乱的历史。
-
+git rebase -i parantCommitId  # 修改旧的 commit 的 message 入交互式界面后修改 pick 为 reward，然后修改 commit 的 message。
 git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
 git pull # 执行的是 git merge
 git pull <remote> <branch>    # 抓取远程仓库所有分支更新并合并到本地
