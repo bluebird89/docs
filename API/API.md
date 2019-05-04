@@ -156,3 +156,7 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
 * Yapi
 * [RAP2](http://rap2.taobao.org)
 * DOClever
+
+## 参考
+
+* [jsonapi](https://jsonapi.org/format/)

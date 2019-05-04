@@ -235,6 +235,12 @@ source ~/.bashrc # 运行
 
 A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
 
+* 首先兼容bash
+* 自动cd：只需输入目录的名称即可
+* 命令选项补齐，比如输入 git，然后按 Tab，即可显示出 git都有哪些命令
+* 目录一次性补全：比如输入 Doc/doc按 Tab键会自动变成 Documents/document/
+* 插件和主题支持
+
 ```sh
 # 自动安装
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -327,9 +333,11 @@ uninstall_oh_my_zsh
     - [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
     - [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
     - [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
+    - incr是一款自动提示插件
 * Theme
     - agnoster
     - cloud
+    - wedisagree
     - [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
 * 工具
     - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
