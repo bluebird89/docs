@@ -13,6 +13,12 @@
 npm install --save-dev babel-cli
 ```
 
+## 过程
+
+解析（parse）
+转换（transform）
+生成（generate）
+
 ## 参考
 
 * [jamiebuilds/babel-handbook](https://github.com/jamiebuilds/babel-handbook):📘 A guided handbook on how to use Babel and how to create plugins for Babel. https://git.io/babel-handbooks

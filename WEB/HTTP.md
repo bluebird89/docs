@@ -24,7 +24,8 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
 
 ### 预检请求（preflight request）
 
-* 跨域资源共享|CROS (Cross-origin resource sharing)，解决跨域请求的
+* 跨域资源共享 CROS (Cross-origin resource sharing)
+* 请求会先用 HTTP 的 OPTION 方法去另外一个域敲门，确认没问题后才会送出真正的请求
 * 新增了一组 HTTP 首部字段，允许服务器声明哪些源站有权限访问哪些资源。
 * 规范要求，对那些可能对服务器数据产生副作用的HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求）
 * 浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求
@@ -208,6 +209,7 @@ PNG ... content of chrome.png ...
 * ICMP (因特网消息控制协议) - 针对错误和状态
 * DHCP (动态主机配置协议) - 针对动态寻址
 
+## 分层
 
 * 应用层：应用层 表示层 会话层
     - 在传输数据时，可以只使用（传输层）TCP/IP协议，但是那样的话，如果没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用到应用层协议，应用层协议有很多，比如HTTP、FTP、TELNET等，也可以自己定义应用层协议。WEB使用HTTP协议作应用层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发到网络上。
@@ -235,12 +237,22 @@ ARP：是根据IP地址获取MAC地址的一种协议。ARP（地址解析）协
 
 ### TCP与UDP区别
 
-TCP/UDP都是是传输层协议，但是两者具有不同的特性，同时也具有不同的应用场景， ![TCP与UDP对比](../_static/TCPvsUDP.png)
+TCP/UDP都是是传输层协议，但是两者具有不同的特性，同时也具有不同的应用场景
 
 - 面向报文：面向报文的传输方式是应用层交给UDP多长的报文，UDP就照样发送，即一次发送一个报文。因此，应用程序必须选择合适大小的报文。若报文太长，则IP层需要分片，降低效率。若太短，会是IP太小。
 - 面向字节流的话，虽然应用程序和TCP的交互是一次一个数据块（大小不等），但TCP把应用程序看成是一连串的无结构的字节流。TCP有一个缓冲，当应用程序传送的数据块太长，TCP就可以把它划分短一些再传送。
 - TCP：当对网络通讯质量有要求的时候，传输过程中都有一个ack，接收方通过ack告诉发送方收到那些包了。这样发送方能知道有没有丢包，进而确定重传.比如：整个数据要准确无误的传递给对方，这往往用于一些要求可靠的应用，比如HTTP、HTTPS、FTP等传输文件的协议，POP、SMTP等邮件传输的协议。 TELENT：远程终端接入
+    + TCP提供IP环境下的数据可靠传输，它提供的服务包括数据流传送、可靠性、有效流控、全双工操作和多路复用。通过面向连接、端到端和可靠的数据包发送。通俗说，它是事先       为所发送的数据开辟出连接好的通道，然后再进行数据发送；
+    + TCP（Transmission Control Protocol，传输控制协议）是基于连接的协议，也就是说，在正式收发数据前，必须和对方建立可靠的连接。
+    + TCP协议能为应用程序提供可靠的通信连接，使一台计算机发出的字节流无差错地发往网络上的其他计算机，对可靠性要求高的数据通信系统往往使用TCP协议传输数据。
+    + TCP支持的应用协议主要有：Telnet、FTP、SMTP等；
 - UDP：当对网络通讯质量要求不高的时候，要求网络通讯速度能尽量的快，这时就可以使用UDP。DNS（域名转换）TFTP SNMP NFS（远程文件服务器）
+    + UDP则不为IP提供可靠性、流控或差错恢复功能。一般来说，TCP对应的是可靠性要求高的应用，而UDP对应的则是可靠性要求低、传输经济的应用。
+    + UDP支持的应用层协议主要有：NFS（网络文件系统）、SNMP（简单网络管理协议）、DNS（主域名称系统）、TFTP（通用文件传输协议）等。
+    + UDP（User Data Protocol，用户数据报协议）是与TCP相对应的协议。它是面向非连接的协议，它不与对方建立连接，而是直接就把数据包发送过去！
+    + UDP适用于一次只传送少量数据、对可靠性要求不高的应用环境。
+
+![TCP与UDP对比](../_static/TCPvsUDP.png)
 
 ## OSI（Open Systems Interconnection Model）TCP/IP ，从上往下的，越底层越接近硬件，越往上越接近软件，是一个标准
 
@@ -332,19 +344,15 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 ## 跨域
 
 * 限制获取cookie，用iframe的方式放置了一个淘宝网页到真实页面中，获取淘宝密码信息
-* 同源策略：除非两个网页是来自于统一‘源头’， 否则不允许一个网页的JavaScript访问另外一个网页的内容，像Cookie，DOM，LocalStorage统统禁止访问
-    - 协议(http/https) 相同
-    - 域名相同
-    - 端口相同
+* 同源策略/SOP（Same origin policy）：从一个域上加载的脚本不允许访问另外一个域的文档属性，只要协议、域名、端口有任何一个不同，都被当作是不同的域.除非两个网页是来自于统一‘源头’， 否则不允许一个网页的JavaScript访问另外一个网页的内容，像Cookie，DOM，LocalStorage统统禁止访问
+    - <script>、<img>、<iframe>、<link>、<script>等标签都可以加载跨域资源，而不受同源限制，
+    - 浏览器会限制脚本中发起的跨域请求。比如，使用 XMLHttpRequest 对象和Fetch发起 HTTP 请求就必须遵守同源策略。
+    - 协议(http/https) 相同 域名相同 端口相同
     - 开个口子，对于使用<script src='//static.store.com/jquery.js'> 加载的JavaScript，我们认为它的源属于www.store.com， 而不属于static.store.com，这样就可以操作www.store.com的页面了
     - 两个网页的一级域名是相同的，可以共享cookie, 不过cookie的domain一定要设置为那个一级域名才可以，例如：`document.cookie = 'test=true;path=/;domain=store.com'`
     - 对XMLHttpReqeust对象施加同源策略
         - 代理模式：通过服务器端中转，例如你是来自book.com的， 现在想访问movie.com，那可以让那个book.com把请求转发给movie.com嘛！人类好像给这种方式起了个名字
         - 服务器(domain)可以设置一个白名单，里边列出它允许哪些服务器(domain)的AJAX请求
-
-* 同源策略/SOP（Same origin policy）：从一个域上加载的脚本不允许访问另外一个域的文档属性，只要协议、域名、端口有任何一个不同，都被当作是不同的域
-    - <script>、<img>、<iframe>、<link>等标签都>可以加载跨域资源，而不受同源限制，
-    - 浏览器会限制脚本中发起的跨域请求。比如，使用 XMLHttpRequest 对象和Fetch发起 HTTP 请求就必须遵守同源策略。
 * 解决
     - JSONP （无状态连接，不能获悉连接状态和错误事件，而且只能走GET的形式）
     - iframe形式
@@ -359,7 +367,9 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
             * Access-Control-Allow-Headers 用于 preflight request （即会在实际请求发送之前先发送一个option请求）中，列出了将会在正式请求的 Access-Control-Expose-Headers 字段中出现的首部信息
             * Access-Control-Expose-Headers 头让服务器把允许浏览器访问的头放入白名单，例如：Access-Control-Expose-Headers: X-My-Custom-Header, X-Another-Custom-Header
             * Access-Control-Max-Age 头指定了preflight请求的结果能够被缓存多久 Access-Control-Max-Age: <delta-seconds>
-            * Access-Control-Allow-Credentials 头指定了当浏览器的credentials设置为true时是否允许浏览器读取response的内容。当用在对preflight预检测请求的响应中时，它指定了实际的请求是否可以使用credentials。请注意：简单 GET 请求不会被预检；如果对此类请求的响应中不包含该字段，这个响应将被忽略掉，并且浏览器也不会将相应内容返回给网页 Access-Control-Allow-Credentials: true
+            * Access-Control-Allow-Credentials 头指定了当浏览器的credentials设置为true时是否允许浏览器读取response的内容。
+                - 当用在对preflight预检测请求的响应中时，它指定了实际的请求是否可以使用credentials。
+                - 简单 GET 请求不会被预检；如果对此类请求的响应中不包含该字段，这个响应将被忽略掉，并且浏览器也不会将相应内容返回给网页 Access-Control-Allow-Credentials: true
         + 请求首部字段
         + Origin 首部字段表明预检请求或实际请求的源站 Origin: <origin>
         + Access-Control-Request-Method 首部字段用于预检请求。其作用是，将实际请求所使用的 HTTP 方法告诉服务器。 Access-Control-Request-Method: <method>
@@ -431,7 +441,6 @@ elseif($_SERVER['REQUEST_METHOD'] == "POST")
 }
 else
     die("No Other Methods Allowed");
-
 ````
 
 ## 附带身份凭证的请求
@@ -479,13 +488,17 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer):HTTP下加入SSL�
 
 HTTP-over-QUIC 实验协议将被重命名为 HTTP/3，并成为 HTTP 协议的第三个正式版本。
 
+### 扩展
+
+* [lucas-clemente/quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
+
 ## 测试
 
 * [tsenart/vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. https://godoc.org/github.com/tsenart/vegeta/lib
 
-### 扩展
+## 实例
 
-* [lucas-clemente/quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
+* [kjj6198/cors_example](https://github.com/kjj6198/cors_example)
 
 ## 工具
 

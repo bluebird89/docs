@@ -344,7 +344,7 @@ http服务上支持若干虚拟主机，每个虚拟主机对应一个server配�
 ```
 server {
     # nginx监听的端口，Mac下默认为8080，小于1024的要以root启动。listen:*:8080
-    listen       [127.0.0.1]:80;
+    listen       [127.0.0.1]:80 [default];
     # 基于名称和IP的虚拟主机配置, 可以通过正则匹配
     server_name  www.exam.com .... ~^www\d+\.myserver\.com$;
     client_max_body_size 1024M;
@@ -361,6 +361,20 @@ server {
         root   html;
         # 定义首页索引文件的名称，默认访问的文件名
         index  index.html index.htm;
+    }
+    # 开启nginx列目录
+    location download {
+        autoindex on;
+        # on(默认)时显示文件的确切大小，单位是byte；改为off显示文件大概大小，单位KB或MB或GB
+        autoindex_exact_size off;
+        # autoindex_localtime： 为off(默认)时显示的文件时间为GMT时间；改为on后，显示的文件时间为服务器时间
+        autoindex_localtime on;
+    }
+
+    #直接返回验证文件
+    location = /XDFyle6tNA.txt {
+        default_type text/plain;
+        return 200 'd6296a84657eb275c05c31b10924f6ea';
     }
 
     if ($request_uri ~ "gid=\d{9,12}")
@@ -904,6 +918,7 @@ server {
     upstream bakend {
         server 192.168.1.10;
         server 192.168.1.11;
+        keepalive 1024;
     }
 
     upstream bakend {
