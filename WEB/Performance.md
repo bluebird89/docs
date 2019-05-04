@@ -225,11 +225,18 @@ numactl --membind 1 --cpunodebind 1 --localalloc myapplication
     - 算法优化
 * 性能调优是一个循序渐进的过程，不可能一蹴而就，重在平时的点滴积累。
 
+## 性能测试
+
+
+
 ## 工具
 
 * [pagespeed](https://developers.google.com/speed/pagespeed/)
 * [元素加载时间具体耗时](http://www.webpagetest.org/)
 * [Speed](https://developers.google.com/speed/):Analyze and optimize your website with PageSpeed tools
+* Apache ab
+* Apache JMeter
+* LoadRunner
 
 ## 参考
 

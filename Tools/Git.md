@@ -457,6 +457,7 @@ git log [branchname]
 -S[keyword]  # 搜索提交历史，根据关键词 git log -Smethodname
 --name-status
 
+git log -n3 # 查看最近的三次提交
 git log branch1 ^branch2 # 查看在分支1不在分支2的log
 
 git log [tag] HEAD --pretty=format:%s   # 显示某个commit之后的所有变动，每个commit占据一行
@@ -776,6 +777,8 @@ chmod +x post-receive
 
 * [post-checkout-build-status](https://bitbucket.org/tpettersen/post-checkout-build-status/src/master/)
 * [git-ci-hooks](https://bitbucket.org/tpettersen/git-ci-hooks/src/master/)
+* [templates](https://github.com/git/git/tree/master/templates)
+* [Git hooks](https://githooks.com)
 
 ### 基于功能分支的开发流程
 
