@@ -21,3 +21,7 @@ ember install ember-cli-mirage
 
 * [ember-cli-deploy](http://ember-cli-deploy.com/)
 * [embero bserver](https://emberobserver.com/)
+
+## 参考
+
+* [docs](https://guides.emberjs.com/)

@@ -2,16 +2,63 @@
 
 The PHP Interpreter <http://www.php.net>
 
-PHP是一门弱类型的语言，变量在声明的那一刻是不需要确定它的类型的，而在运行时类型也会发生显式或隐式的类型改变.所用的程序是要经过两层代理
-
+* 一门弱类型的语言，变量在声明的那一刻是不需要确定它的类型的，而在运行时类型也会发生显式或隐式的类型改变
 * PHP(Hypertext Preprocessor)
-* PHP是一种解释型语言，即不需要编译。
+* PHP是一种解释型语言，即不需要编译。构建在Zend 虚拟机之上
 * PHP是一种服务器端脚本语言，结果以纯 HTML 形式返回给浏览器
 * PHP比其他脚本语言更快,如：Python和asp。
 * HTTP协议在Nginx等服务器的解析下,传送给相应的Handler（PHP等）来处理。后端渲染，默认html处理，模版文件以.php后缀
 * 服务端脚本程序，只能通过服务器访问，需要配置虚拟主机调试
 
+## 发展
+
+* [PSR](http://www.php-fig.org/)组织制定的PHP语言开发规范，约定了很多方面的规则，如命名空间、类名 规范、编码风格标准、Autoload、公共接口等
+* Swoole:Swoole 是一个异步并行的通信引擎，作为 PHP 的扩展来运行。Node.js 的异步回调 Swoole 有，Go语言的协程 Swoole 也有，这完全颠覆了对 PHP 的认知.使用 Swoole PHP 可以实现常驻内存的 Server 程序，可以实现 TCP 、 UDP 异步网络通信的编程开发。比如 WebSocket 即使通信、聊天、推送服务器、RPC 远程调用服务、网关、代理、游戏服务器等。
+* Phar:PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar。用来将多个 PHP 文件打包为一个文件。这个特性使得 PHP 也可以像 Java 一样方便地实现应用程序打包和组件化。一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行。配合 Swoole ，可以在命令行下执行 php server.phar 一键启动服务器。PHP 的代码包可以用 Phar 打包成组件，放到 Swoole 的服务器容器中去加载执行。
+* PHP 作为一门动态脚本语言，优点是开发方便效率高。缺点就是性能差。在密集运算的场景下比 C 、 C++ 相差几十倍甚至上百倍。另外 PHP 不可以直接操作底层，需要依赖扩展库来提供 API 实现。PHP 程序员可以学习一门静态编译语言作为补充实现动静互补，C/C++/Go 都是不错的选择。而且静态语言的编程体验与动态语言完全不同，学习过程可以让你得到更大的提升。 掌握 C/C++ 语言后，还可以阅读 PHP 、 Swoole 、 Nginx 、Redis 、 Linux内核 等开源软件的源码，了解其底层运行原理。 现在最新版本的Swoole提供了C++扩展模块的支持，封装了Zend API，用C++操作PHP变得很简单，可以用C++实现PHP扩展函数和类。
+* PHP
+    * 7.1 :2015.12.3 性能提升
+    * 7.2 JIT(JUST_IN_TIME)
+    * 8:实现了一个虚拟机 Zend VM，它会将人类可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
+
+## 原理
+
+* Zend 引擎:PHP4 以后加入 PHP 的，是对原有PHP解释器的重写，整体使用 C 语言进行开发，也就是说可以把PHP理解成用C写的一个编程语言软件，引擎的作用是将PHP代码翻译为一种叫opcode的中间语言，它类似于JAVA的ByteCode（字节码）。引擎对PHP代码会执行四个步骤：
+    - 词法分析 Scanning（Lexing），将 PHP 代码转换为语言片段（Tokens）。
+    - 解析 Parsing， 将 Tokens 转换成简单而有意义的表达式。
+    - 编译 Compilation，将表达式编译成Opcode。
+    - 执行 Execution，顺序执行Opcode，每次一条，以实现PHP代码所表达的功能。
+    - APC、Opchche 这些扩展可以将Opcode缓存以加速PHP应用的运行速度，使用它们就可以在请求再次来临时省略前三步。
+    - 引擎也实现了基本的数据结构、内存分配及管理，提供了相应的API方法供外部调用。
+* Extensions 扩展:常见的内置函数、标准库都是通过extension来实现的，这些叫做PHP的核心扩展，用户也可以根据自己的要求安装PHP的扩展。
+* SAPI(Server Application Programming Interface)中文为服务端应用编程接口，它通过一系列钩子函数使得PHP可以和外围交换数据，SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性。通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式。
+* 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用都是上层应用，PHP 程序员主要工作就是编写它们。
+* Zend Opcache
+    - PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码（opcode：(http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码。
+    - 每次请求PHP文件都是这样，这会消耗很多资源，如果每次HTTP请求都必须不断解析、编译和执行PHP脚本，消耗的资源更多。
+    - 如果PHP源码不变，相应的字节码也不会变化，显然没有必要每次都重新生成Opcode，结合在Web应用中无处不在的缓存机制，我们可以把首次生成的Opcode缓存起来,直接从内存中读取预先编译好的字节码
+    - 在配置中开启扩展
+
+```
+# 找到PHP扩展所在目录
+php-config --extension-dir
+
+opcache.validate_timestamps=1    # 生产环境中配置为0：因为Zend Opcache将不能觉察PHP脚本的变化，必须手动清空Zend OPcache缓存的字节码，才能让它发现PHP文件的变动。这个配置适合在生产环境中设置为0，但在开发环境设置为1
+opcache.revalidate_freq=0    # 检查脚本时间戳是否有更新时间
+opcache.memory_consumption=64    # Opcache的共享内存大小，以M为单位
+opcache.interned_strings_buffer=16    # 用来存储临时字符串的内存大小，以M为单位
+opcache.max_accelerated_files=4000    # Opcache哈希表可以存储的脚本文件数量上限
+opcache.fast_shutdown=1         # 使用快速停止续发事件
+```
+
+![PHP 的架构](../../_static/php_construct.jpg "Optional title")
+
 ## 安装
+
+* 程序路径：`/usr/local/Cellar/php71/7.1.12_23`
+* 配置文件: `/usr/local/etc/php/7.1/` The php.ini and php-fpm.ini file
+* /usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx 通过php-fpm进程运行
+* php71卸载后php-fpm仍然运行
 
 ```sh
 /usr/local/apache2/bin/apachectl start/stop   service httpd restart
@@ -21,29 +68,16 @@ LoadModule php5_module modules/libphp5.so # httpd.conf中添加
 cgi.fix_pathinfo 设置为 0  #  php.ini 文件中的配置项  如果文件不存在，则阻止 Nginx 将请求发送到后端的 PHP-FPM 模块， 以避免遭受恶意脚本注入的攻击
 # 确保 php-fpm 模块使用 www-data 用户和 www-data 用户组的身份运行
 # This is an extremely insecure setting because it tells PHP to attempt to execute the closest file it can find if a PHP file does not match exactly. This basically would allow users to craft PHP requests in a way that would allow them to execute scripts that they shouldn't be allowed to execute.
-```
 
-### windows
-
-下载PHP安装包，解压即可
-
-```bash
+### windows 下载PHP安装包，解压即可
 ./php.exe -f e:\www\test.php # 不一定非php扩展名文件
 php.exe -v
 php.exe -i # 运行phpinfo()函数
 
 php.exe -m # 显示已经加载了那些module
 php -a # 进入命令行模式
-```
 
 ### Mac
-
-* 程序路径：`/usr/local/Cellar/php71/7.1.12_23`
-* 配置文件: `/usr/local/etc/php/7.1/` The php.ini and php-fpm.ini file
-* /usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx 通过php-fpm进程运行
-* php71卸载后php-fpm仍然运行
-
-```sh
 brew install --without-apache --with-fpm php
 
 /usr/local/Cellar/php/7.2.9_2/bin/pear config-set php_ini /usr/local/etc/php
@@ -77,15 +111,7 @@ php -m
 echo 'export PATH="/usr/local/opt/php@7.1/bin:$PATH"' >> ~/.zshrc
 echo 'export PATH="/usr/local/opt/php@7.1/sbin:$PATH"' >> ~/.zshrc
 
-brew install brew-php-switcher
-brew-php-switcher 5.6
-```
-
-* [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only.
-
 ### linux源码安装
-
-```sh
 lsb_release -a # 系统环境查看
 
 cd /etc/httpd/
@@ -96,54 +122,12 @@ AddType application/x-httpd-source .phps
 cd /usr/local/php/etc/
 vim php.ini
 date.timezone = Asia/Shanghai
+
+brew install brew-php-switcher
+brew-php-switcher 5.6
 ```
 
-## PHP发展
-
-* [PSR](http://www.php-fig.org/)组织制定的PHP语言开发规范，约定了很多方面的规则，如命名空间、类名 规范、编码风格标准、Autoload、公共接口等
-* Swoole:Swoole 是一个异步并行的通信引擎，作为 PHP 的扩展来运行。Node.js 的异步回调 Swoole 有，Go语言的协程 Swoole 也有，这完全颠覆了对 PHP 的认知.使用 Swoole PHP 可以实现常驻内存的 Server 程序，可以实现 TCP 、 UDP 异步网络通信的编程开发。比如 WebSocket 即使通信、聊天、推送服务器、RPC 远程调用服务、网关、代理、游戏服务器等。
-* Phar:PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar。用来将多个 PHP 文件打包为一个文件。这个特性使得 PHP 也可以像 Java 一样方便地实现应用程序打包和组件化。一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行。配合 Swoole ，可以在命令行下执行 php server.phar 一键启动服务器。PHP 的代码包可以用 Phar 打包成组件，放到 Swoole 的服务器容器中去加载执行。
-* PHP 作为一门动态脚本语言，优点是开发方便效率高。缺点就是性能差。在密集运算的场景下比 C 、 C++ 相差几十倍甚至上百倍。另外 PHP 不可以直接操作底层，需要依赖扩展库来提供 API 实现。PHP 程序员可以学习一门静态编译语言作为补充实现动静互补，C/C++/Go 都是不错的选择。而且静态语言的编程体验与动态语言完全不同，学习过程可以让你得到更大的提升。 掌握 C/C++ 语言后，还可以阅读 PHP 、 Swoole 、 Nginx 、Redis 、 Linux内核 等开源软件的源码，了解其底层运行原理。 现在最新版本的Swoole提供了C++扩展模块的支持，封装了Zend API，用C++操作PHP变得很简单，可以用C++实现PHP扩展函数和类。
-* PHP
-    * 7.1 :2015.12.3 性能提升
-    * 7.2 JIT(JUST_IN_TIME)
-    * 8:实现了一个虚拟机 Zend VM，它会将人类可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
-
-### 原理
-
-* Zend 引擎:PHP4 以后加入 PHP 的，是对原有PHP解释器的重写，整体使用 C 语言进行开发，也就是说可以把PHP理解成用C写的一个编程语言软件，引擎的作用是将PHP代码翻译为一种叫opcode的中间语言，它类似于JAVA的ByteCode（字节码）。引擎对PHP代码会执行四个步骤：
-    - 词法分析 Scanning（Lexing），将 PHP 代码转换为语言片段（Tokens）。
-    - 解析 Parsing， 将 Tokens 转换成简单而有意义的表达式。
-    - 编译 Compilation，将表达式编译成Opcode。
-    - 执行 Execution，顺序执行Opcode，每次一条，以实现PHP代码所表达的功能。
-    - APC、Opchche 这些扩展可以将Opcode缓存以加速PHP应用的运行速度，使用它们就可以在请求再次来临时省略前三步。
-    - 引擎也实现了基本的数据结构、内存分配及管理，提供了相应的API方法供外部调用。
-* Extensions 扩展:常见的内置函数、标准库都是通过extension来实现的，这些叫做PHP的核心扩展，用户也可以根据自己的要求安装PHP的扩展。
-* SAPI(Server Application Programming Interface)中文为服务端应用编程接口，它通过一系列钩子函数使得PHP可以和外围交换数据，SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性。通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式。
-* 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用都是上层应用，PHP 程序员主要工作就是编写它们。
-
-![PHP 的架构](../../_static/php_construct.jpg "Optional title")
-
-#### Zend Opcache
-
-PHP是解释型语言，构建在Zend 虚拟机之上，
-
-* PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码（opcode：(http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码。
-* 每次请求PHP文件都是这样，这会消耗很多资源，如果每次HTTP请求都必须不断解析、编译和执行PHP脚本，消耗的资源更多。
-* 如果PHP源码不变，相应的字节码也不会变化，显然没有必要每次都重新生成Opcode，结合在Web应用中无处不在的缓存机制，我们可以把首次生成的Opcode缓存起来,直接从内存中读取预先编译好的字节码
-* 在配置中开启扩展
-
-```
-# 找到PHP扩展所在目录
-php-config --extension-dir
-
-opcache.validate_timestamps=1    //生产环境中配置为0：因为Zend Opcache将不能觉察PHP脚本的变化，必须手动清空Zend OPcache缓存的字节码，才能让它发现PHP文件的变动。这个配置适合在生产环境中设置为0，但在开发环境设置为1
-opcache.revalidate_freq=0    //检查脚本时间戳是否有更新时间
-opcache.memory_consumption=64    //Opcache的共享内存大小，以M为单位
-opcache.interned_strings_buffer=16    //用来存储临时字符串的内存大小，以M为单位
-opcache.max_accelerated_files=4000    //Opcache哈希表可以存储的脚本文件数量上限
-opcache.fast_shutdown=1         //使用快速停止续发事件
-```
+* [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only.
 
 ## 配置
 
@@ -217,16 +201,16 @@ pecl channel-update pecl.php.net
 * 单行注释：//、#
 * 多行注释：/* …… */
 * 变量：临时存储数据的容器，指向值的指针。保存数据内存位置的名称。 变量是用于保存临时数据的临时存储
-    - 作用域
-        + local：函数内部声明的变量是局部变量，仅能在函数内部访问
-        + global：在所有函数外部定义的变量，拥有全局作用域。
+    - 作用域：变量范围
+        + 包含了 include 和 require 引入的文件
+        + 局部变量local：函数内部声明的变量，仅能在函数内部访问
+        + 全局作用域global：在所有函数外部定义的变量
             + 除了函数外，全局变量可以被脚本中的任何部分访问
             + 要在一个函数中访问一个全局变量，需要使用 global 关键字。
             + 所有全局变量存储在一个名为 $GLOBALS[index] 的数组中。index 保存变量的名称。这个数组可以在函数内部访问，也可以直接用来更新全局变量。
-        + static：当一个函数完成时，它的所有变量通常都会被删除。希望某个局部变量不要被删除。
+        + 静态变量（static variable）：仅在局部函数域中存在，但当程序执行离开此作用域时，其值并不丢失
         + parameter：通过调用代码将值传递给函数的局部变量
-    - 变量本身没有类型之说，所说的类型是指变量中，存储的数据的类型。
-    - 引用调用:新的变量简单的引用（换言之，"成为其别名" 或者 "指向"）了原始变量，只有有名字的变量才可以引用赋值
+    - 变量本身没有类型之说，所说的类型是指变量中存储的数据的类型。
     - 变量的名称，可以包含：字母、数字、下划线，可以用中文。
     - 变量的名称，不能以数字和特殊符号开头，但可以以字母或下划线开头。如：$_ABC、$abc
     - 变量名称前必须要带“$”符号。“$”不是变量名称一部分，它只是对变量名称的一个引用或标识符。
@@ -234,9 +218,21 @@ pecl channel-update pecl.php.net
     - 对于由几个单词构成的变量名称的命名规则
         + “驼峰式”命名：$getUserName、$getUserPwd
         + “下划线”命名：$get_user_name、$set_user_pwd
-    - 赋值：$variablename指向value存储的地址
-    - `$$var`是一个引用变量，用于存储$var的值
+    - 赋值
+        - 传值赋值:$variablename指向value存储的地址
+        - 引用赋值:新的变量简单的引用了原始变量,只有有名字的变量才可以引用赋值:$foo = 'Bob'; $bar = &$foo;
+    - 可变变量：`$$var`是一个引用变量，用于存储$var的值
+* PHP 之外的变量
+    - `$_GET $_POST $_REQUEST`
+    - `$_SERVER`
+    - `$_COOKIE`
 * 常量
+    - 定义
+        + 常量前面没有美元符号（$）；
+        + 常量只能用 define() 函数定义，而不能通过赋值语句；
+        + 常量可以不用理会变量的作用域而在任何地方定义和访问；
+        + 常量一旦定义就不能被重新定义或者取消定义；
+        + 常量的值只能是标量
     - define()函数：define(name, value, case-insensitive = false) 区分大小写
     - const关键字在编译时定义常量。 它是一个语言构造不是一个函数。比define()快一点，因为它没有返回值。它总是区分大小写的
     - 魔术常量
@@ -278,43 +274,49 @@ function myTest($x)
     echo $x;
 }
 myTest(5);
+function test()
+{
+    static $a = 0;
+    echo $a;
+    $a++;
+}
 
 # 常量
 define("MESSAGE", "Hello YiiBai PHP");
 const MESSAGE = "Hello const by YiiBai PHP";
+
+require('./ShopProduct.php'); # 加载文件名称
 ```
 
 ### 数据类型
 
-#### 标量类型
-
-- Boolean（布尔型）
-    - 布尔值 FALSE 本身
-    - 整型值 0（零）
-    - 浮点型值 0.0（零）
-    - 空字符串，以及字符串 "0"
-    - 不包括任何元素的数组
-    - 特殊类型 NULL（包括尚未赋值的变量）
-    - 从空标记生成的 SimpleXML 对象
-- String（字符串）
-    + 单引号PHP字符串中，大多数转义序列和变量不会被解释。 可以使用单引号\'反斜杠和通过\\在单引号引用PHP字符串。
-    + 双引号的PHP字符串中存储多行文本，特殊字符和转义序列,对一些特殊的字符进行解析
-        + \n  换行（ASCII 字符集中的 LF 或 0x0A (10)）
-        + \r  回车（ASCII 字符集中的 CR 或 0x0D (13)）
-        + \t  水平制表符（ASCII 字符集中的 HT 或 0x09 (9)）
-        + \v  垂直制表符（ASCII 字符集中的 VT 或 0x0B (11)）（自 PHP 5.2.5 起）
-        + \e  Escape（ASCII 字符集中的 ESC 或 0x1B (27)）（自 PHP 5.4.0 起）
-        + \f  换页（ASCII 字符集中的 FF 或 0x0C (12)）（自 PHP 5.2.5 起）
-        + \\  反斜线
-        + \$  美元标记
-        + \"  双引号
-    - heredoc 结构就象是没有使用双引号的双引号字符串，这就是说在 heredoc 结构中单引号不用被转义，但是上文中列出的转义序列还可以使用
-    - Nowdoc 结构是类似于单引号字符串的。Nowdoc 结构很象 heredoc 结构，但是 nowdoc 中不进行解析操作。这种结构很适合用于嵌入 PHP 代码或其它大段文本而无需对其中的特殊字符进行转义
-    + addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
-    + urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
-- Integer（整型）
-- Float（浮点型）
-    + NaN:代表着任何不同值，不应拿 NAN 去和其它值进行比较，包括其自身，应该用 is_nan() 来检查
+* 标量类型
+    + Boolean（布尔型）
+        + 布尔值 FALSE 本身
+        + 整型值 0（零）
+        + 浮点型值 0.0（零）
+        + 空字符串，以及字符串 "0"
+        + 不包括任何元素的数组
+        + 从空标记生成的 SimpleXML 对象
+    + String（字符串）
+        * 单引号PHP字符串中，大多数转义序列和变量不会被解释。 可以使用单引号\'反斜杠和通过\\在单引号引用PHP字符串。
+        * 双引号的PHP字符串中存储多行文本，特殊字符和转义序列,对一些特殊的字符进行解析
+            * \n  换行（ASCII 字符集中的 LF 或 0x0A (10)）
+            * \r  回车（ASCII 字符集中的 CR 或 0x0D (13)）
+            * \t  水平制表符（ASCII 字符集中的 HT 或 0x09 (9)）
+            * \v  垂直制表符（ASCII 字符集中的 VT 或 0x0B (11)）（自 PHP 5.2.5 起）
+            * \e  Escape（ASCII 字符集中的 ESC 或 0x1B (27)）（自 PHP 5.4.0 起）
+            * \f  换页（ASCII 字符集中的 FF 或 0x0C (12)）（自 PHP 5.2.5 起）
+            * \\  反斜线
+            * \$  美元标记
+            * \"  双引号
+        + heredoc 结构就象是没有使用双引号的双引号字符串，这就是说在 heredoc 结构中单引号不用被转义，但是上文中列出的转义序列还可以使用
+        + Nowdoc 结构是类似于单引号字符串的。Nowdoc 结构很象 heredoc 结构，但是 nowdoc 中不进行解析操作。这种结构很适合用于嵌入 PHP 代码或其它大段文本而无需对其中的特殊字符进行转义
+        * addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
+        * urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
+    + Integer（整型）
+    + Float（浮点型）
+        * NaN:代表着任何不同值，不应拿 NAN 去和其它值进行比较，包括其自身，应该用 is_nan() 来检查
 - NULL（空值）
     + 被赋值为 NULL。
     + 尚未被赋值。
@@ -527,7 +529,7 @@ $items = array(
 array_column($items,'uid'); # [1,2,3,4,5];
 array_column($items,'uid','view'); # [100=>1,200=>2,300=>3,400=>4,500=>5];
 
-array_combine
+array_combine();
 
 array_walk(array, funcname)
 
@@ -545,13 +547,14 @@ $foo = 5 * "10 Small Pigs";     // $foo 是整数 (50)
 
 ### 控制语句
 
+* 表达式：任何有值的东西
 * echo：是一个语言结构(语句)，不是一个函数，所以不需要使用括号。但是如果要使用多个参数，则需要使用括号。打印字符串，多行字符串，转义字符，变量，数组等。
 * print
-* 嵌套的使用：执行在内还是在外
+* printf()
 * 条件
     - if
     - if-else
-    - if-else-if
+    - elseif/else if
     - 嵌套if
     - switch语句
 * 循环
@@ -559,13 +562,26 @@ $foo = 5 * "10 Small Pigs";     // $foo 是整数 (50)
     - foreach循环循环用于遍历数组元素
     - while
     - do...while
-* break:中断了当前for，while，do-while，switch和for-each循环的执行。 如果在内循环中使用break，它只中断了内循环的执行。
-* continue:
+* break:中断了当前for，while，do-while，switch和for-each循环的执行。 如果在内循环中使用break，它只中断了内循环的执行。接受一个可选的数字参数来决定跳出几重循环
+* continue：跳过本次循环中剩余的代码并在条件求值为真时开始执行下一次循环。接受一个可选的数字参数来决定跳过几重循环到循环结尾
+* return
+* include
+    - 被包含文件先按参数给出的路径寻找，
+    - 如果没有给出目录（只有文件名）时则按照 include_path 指定的目录寻找。
+    - 如果在 include_path 下没找到该文件则 include 最后才在调用脚本文件所在的目录和当前工作目录下寻找。
+    - 如果最后仍未找到文件则 include 结构会发出一条警告；
+    - include_once 语句在脚本执行期间包含并运行指定文件。此行为和 include 语句类似，唯一区别是如果该文件中已经被包含过，则不会再次包含。如同此语句名字暗示的那样，只会包含一次。
+* require 在出错时产生 E_COMPILE_ERROR 级别的错误
+    - require_once 语句和 require 语句完全相同，唯一区别是 PHP 会检查该文件是否已经被包含过，如果是则不会再次包含。
+* goto:跳转到程序中的另一位置。该目标位置可以用目标名称加上冒号来标记，而跳转指令是 goto 之后接上目标位置的标记
+* 替代语法
+* 嵌套的使用
 
 ```php
 #!/usr/bin/env php
 print "Hello, Red Hat Developers World from PHP " . PHP_VERSION . "\n";
 echo "<h2>Hello First PHP</h2>";
+printf('(%1$2d = %1$04b) = (%2$2d = %2$04b)' . ' %3$s (%4$2d = %4$04b)' . "\n", $result, $value, '&', $test);
 
 $num=12;
 if ($num % 2 == 0) {
@@ -573,6 +589,14 @@ if ($num % 2 == 0) {
 } else {
     echo "$num is odd number";
 }
+
+if($a > $b):
+    echo $a." is greater than ".$b;
+elseif($a == $b): // 注意使用了一个单词的 elseif
+    echo $a." equals ".$b;
+else:
+    echo $a." is neither greater than or equal to ".$b;
+endif;
 
 switch($num){
     case 10:
@@ -593,8 +617,8 @@ for($n=1;$n<=10;$n++){
 }
 
 $season=array("summer","winter","spring","autumn");
-foreach( $season as $arr ){
-    echo "Season is: $arr<br />";
+foreach( $season as $key => $value ){
+    echo "Season is: $value<br />";
 }
 
 $n=1;
@@ -608,25 +632,47 @@ do{
     echo "$n<br/>";
     $n++;
 }while($n<=10);
+
+<?php
+goto a;
+echo 'Foo';
+ 
+a:
+echo 'Bar';
+?>
 ```
 
 #### 运算符
 
 用于对操作数执行操作
 
-* 算术运算符:`* / % + - `
+* 算术运算符:`* / % + - **`
+* 赋值运算符:`= += -= *= **= /= .= %= &= ^= <<= >>= =>`
+* 位运算符：`&(位与) ^（异或） | ~ << >> `
 * 比较运算符:`< <= > >= == != === !== <>`
-* 按位运算符:`<< >>`
-* 逻辑运算符:`&& || and xor or !`
-* 字符串运算符:`.`
+    - $a <=> $b:太空船运算符 当$a小于、等于、大于$b时 分别返回一个小于、等于、大于0的integer 值
+    - $a ?? $b ?? $c:NULL 合并操作符  从左往右第一个存在且不为 NULL 的操作数。如果都没有定义且不为 NULL，则返回 NULL
+* 逻辑运算符:`&& and ||or xor  !`,有优先级
+* 字符串运算符
+    - 连接运算符（"."）：返回其左右参数连接后的字符串
+    - 连接赋值运算符（".="）：将右边参数附加到左边的参数之后
 * 递增/递减运算符
+    - ++$a    前加  $a 的值加一，然后返回 $a
+    - $a++    后加  返回 $a，然后将 $a 的值加一
+    - --$a    前减  $a 的值减一， 然后返回 $a
+    - $a--    后减  返回 $a，然后将 $a 的值减一
 * 数组运算符
+    - $a + $b：相同key保留前面
+    - $a == $b： 如果 $a 和 $b 具有相同的键／值对则为 TRUE。
+    - $a === $b：如果 $a 和 $b 具有相同的键／值对并且顺序和类型都相同则为 TRUE。
+    - $a != $b    不等  如果 $a 不等于 $b 则为 TRUE。
+    - $a <> $b    不等  如果 $a 不等于 $b 则为 TRUE。
+    - $a !== $b   不全等 如果 $a 不全等于 $b 则为 TRUE。
 * 类型运算符:`instanceof (int) (float) (string) (array) (object) (bool)`
-* 执行操作符
-* 错误控制操作符
-* 分配操作符:`= += -= *= **= /= .= %= &= ^= <<= >>= =>`
-* 位运算符：`&(位与) ^（异或） | ~ << >>`
-* 三元运算符：`? :`
+* 执行操作符:反引号（``）,尝试将反引号中的内容作为 shell 命令来执行，并将其输出信息返回
+    - 激活了安全模式或者关闭了 shell_exec() 时是无效的
+* 错误控制操作符:@。当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉
+* 三元运算符：`$first ? $second : $third`
 
 ```php
 // 涉及数字比较，优先转化为数字
@@ -645,18 +691,36 @@ $permission = READ & ~WRITE; // 禁止写权限 反向全量的选法
 if( READ & $permission ){ //判断权限
 　　echo "ok";
 }
+
+E_ALL & ~E_NOTICE # 除了提示级别
+E_ALL ^ E_NOTICE #
+E_ERROR | E_RECOVERABLE_ERROR # 只显示错误和可恢复
+
+echo 1 <=> 1; // 0
+echo 1 <=> 2; // -1
+echo 2 <=> 1; // 1
+
+$my_file = @file ('non_existent_file') or die ("Failed opening file: error was '$php_errormsg'");
+
+$output = `ls -al`;
+echo "<pre>$output</pre>";
+
+$a = array("a" => "apple", "b" => "banana");
+$b = array("a" => "pear", "b" => "strawberry", "c" => "cherry");
+$c = $a + $b; // Union of $a and $b
+
+class MyClass
+{
+}
+
+$a = new MyClass;
+var_dump(!($a instanceof stdClass)); # true
 ```
 
 #### 杂项
 
 * 数学函数
-* 表单处理:post get提交请求
-* 包含文件
-    - 用于包含基于给定路径的文件。 可以使用文件的相对路径或绝对路径
-    - 文件丢失时包含的处理方式：include语句允许脚本继续，但require语句暂停脚本产生致命的E_COMPILE_ERROR级别错误。
-* json
-    - json_encode()函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据。
-    - json_decode()函数解码JSON字符串：将JSON字符串转换为PHP变量。
+
 * 电子邮件
 
 ```php
@@ -811,17 +875,6 @@ header('Content-Transfer-Encoding: binary'); //设置传输方式
 header('Content-Length: '.filesize('example.zip')); //设置内容长度
 ```
 
-### php-mcrypt
-
-```sh
-yum install php-mcrypt|php5-mcrypt
-apt-get install php-mcrypt|php5-mcrypt
-pecl install mcrypt-snapshot|mcrypt-1.0.1
-brew install php71-mcrypt
-```
-* [defuse/php-encryption](https://github.com/defuse/php-encryption):Simple Encryption in PHP.
-* [jedisct1/libsodium](https://github.com/jedisct1/libsodium):A modern, portable, easy to use crypto library https://libsodium.org
-
 #### Lambda表达式(匿名函数)与闭包
 
 Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态。闭包在匿名函数的基础上增加了与外部环境的变量交互，通过 use 子句中指定要导入的外部环境变量
@@ -909,10 +962,13 @@ var_dump(random_int(100, 999));//int(248)
 一段可以重复使用多次的代码。 它可以接受输入作为参数列表和返回值
 
 * 参数
-    - 引用调用:要传递值作为参考(引用)，您需要在参数名称前使用＆符号(&)。
-    - 值调用:传递给函数的值默认情况下不会修改实际值(通过值调用),传递给函数的值是通过值调用。作用域函数范围内
+    - 值传递:传递给函数的值默认情况下不会修改实际值(通过值调用),传递给函数的值是通过值调用。作用域函数范围内
+    - 引用调用:要传递值作为参考(引用)，您需要在参数名称前使用＆符号(&)
+    - 允许使用数组 array 和特殊类型 NULL 作为默认参数
     - 默认参数
     - 可变长度参数函数
+* 可变函数：一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数
+* 匿名函数（Anonymous functions），也叫闭包函数（closures），允许 临时创建一个没有指定名称的函数。最经常用作回调函数（callback）参数的值
 * 返回值
 * 递归函数
 
@@ -927,6 +983,22 @@ echo "Hello $name, you are $age years old<br/>";
 }
 sayHello("Maxsu",27);
 sayHello("Henry");
+
+function add_some_extra(&$string)
+{
+    $string .= 'and something extra.';
+}
+$str = 'This is a string, ';
+add_some_extra($str);
+echo $str; # This is a string, and something extra.
+
+function makecoffee($types = array("cappuccino"), $coffeeMaker = NULL)
+{
+    $device = is_null($coffeeMaker) ? "hands" : $coffeeMaker;
+    return "Making a cup of ".join(", ", $types)." with $device.\n";
+}
+echo makecoffee();
+echo makecoffee(array("cappuccino", "lavazza"), "teapot");
 
 function increment($i)
 {
@@ -943,6 +1015,12 @@ function increment(&$i)
 $i = 10;
 increment($i);
 echo $i;  # 11
+
+function small_numbers()
+{
+    return array (0, 1, 2);
+}
+list ($zero, $one, $two) = small_numbers();
 
 function add(...$numbers) {
     $sum = 0;
@@ -970,6 +1048,29 @@ function factorial($n)
     return ($n * factorial ($n -1));
 }
 echo factorial(5);
+
+function foo() {
+    echo "In foo()<br />\n";
+}
+
+function bar($arg = '') {
+    echo "In bar(); argument was '$arg'.<br />\n";
+}
+
+// 使用 echo 的包装函数
+function echoit($string)
+{
+    echo $string;
+}
+
+$func = 'foo';
+$func();        // This calls foo()
+
+$func = 'bar';
+$func('test');  // This calls bar()
+
+$func = 'echoit';
+$func('test');  // This calls echoit()
 ```
 
 ### 状态管理
@@ -1186,7 +1287,7 @@ window.location = “http:/example.com/”
 
 ### MySQL
 
-PHP 5.5以来，mysql_connect()扩展已被弃用。 现在，建议使用以下2种替代方法之一。
+PHP 5.5以来，mysql_connect()扩展已被弃用。 现在，建议使用以下2种替代方法之一
 
 * mysqli_connection()
 * PDO::__ construct()
@@ -1274,12 +1375,12 @@ mysqli_close($conn);
 
 ### 面向对象(OOP)
 
-继承：类分层、接口分层
-实现：类实现接口
-依赖：类作为另一个类方法的参数
-关联：类属性
-聚合：可以有
-组合：必须有
+* 继承：类分层、接口分层
+* 实现：类实现接口
+* 依赖：类作为另一个类方法的参数
+* 关联：类属性
+* 聚合：可以有
+* 组合：必须有
 
 #### 对象
 
@@ -1514,28 +1615,23 @@ $controller->register();
 
 ## 时间
 
-```
-var_dump(date("Y-m-d", strtotime("-1 month", strtotime("2017-03-31")))); //输出2017-03-03
-var_dump(date("Y-m-d", strtotime("last day of -1 month", strtotime("2017-03-31"))));
-//输出2017-02-28
-var_dump(date("Y-m-d", strtotime("first day of +1 month", strtotime("2017-08-31"))));
-////输出2017-09-01
+```php
+var_dump(date("Y-m-d", strtotime("-1 month", strtotime("2017-03-31")))); # 输出2017-03-03
+var_dump(date("Y-m-d", strtotime("last day of -1 month", strtotime("2017-03-31")))); # 输出2017-02-28
+var_dump(date("Y-m-d", strtotime("first day of +1 month", strtotime("2017-08-31")))); # 输出2017-09-01
 ```
 
 ## JSON
 
-## 引用
-
-```php
-require('./ShopProduct.php'); # 加载文件名称
-```
+* json_encode()函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据。
+* json_decode()函数解码JSON字符串：将JSON字符串转换为PHP变量。
 
 ##  密码散列算法函数
 
-password_​get_​info
-password_​hash
-password_​needs_​rehash
-password_​verify
+* password_​get_​info
+* password_​hash
+* password_​needs_​rehash
+* password_​verify
 
 ## 扩展
 
@@ -1566,7 +1662,15 @@ brew install php71 --with-pear
 
 brew install mcrypt
 brew install php71-xdebug
+
+yum install php-mcrypt|php5-mcrypt
+apt-get install php-mcrypt|php5-mcrypt
+pecl install mcrypt-snapshot|mcrypt-1.0.1
+brew install php71-mcrypt
 ```
+
+* [defuse/php-encryption](https://github.com/defuse/php-encryption):Simple Encryption in PHP.
+* [jedisct1/libsodium](https://github.com/jedisct1/libsodium):A modern, portable, easy to use crypto library https://libsodium.org
 
 ## Docker配置
 
@@ -1662,10 +1766,6 @@ EXPOSE 9000 CMD ["php-fpm"]
 
 - docker build -t php:5.6-fpm .
 - docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/local/etc/php -v $PWD/logs:/phplogs -d php:5.6-fpm
-
-## 说明
-
-* PHP5.5之后废弃mysql扩展
 
 ## 规范
 
