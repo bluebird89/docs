@@ -2,7 +2,7 @@
 
 The PHP Interpreter <http://www.php.net>
 
-* 一门弱类型的语言，变量在声明的那一刻是不需要确定它的类型的，而在运行时类型也会发生显式或隐式的类型改变
+* 一门弱类型的语言，变量在声明的那一刻不需要确定它的类型，而在运行时类型也会发生显式或隐式的类型改变
 * PHP(Hypertext Preprocessor)
 * PHP是一种解释型语言，即不需要编译。构建在Zend 虚拟机之上
 * PHP是一种服务器端脚本语言，结果以纯 HTML 形式返回给浏览器
@@ -19,7 +19,7 @@ The PHP Interpreter <http://www.php.net>
 * PHP
     * 7.1 :2015.12.3 性能提升
     * 7.2 JIT(JUST_IN_TIME)
-    * 8:实现了一个虚拟机 Zend VM，它会将人类可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
+    * 8:实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
 
 ## 原理
 
@@ -32,24 +32,7 @@ The PHP Interpreter <http://www.php.net>
     - 引擎也实现了基本的数据结构、内存分配及管理，提供了相应的API方法供外部调用。
 * Extensions 扩展:常见的内置函数、标准库都是通过extension来实现的，这些叫做PHP的核心扩展，用户也可以根据自己的要求安装PHP的扩展。
 * SAPI(Server Application Programming Interface)中文为服务端应用编程接口，它通过一系列钩子函数使得PHP可以和外围交换数据，SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性。通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式。
-* 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用都是上层应用，PHP 程序员主要工作就是编写它们。
-* Zend Opcache
-    - PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码（opcode：(http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码。
-    - 每次请求PHP文件都是这样，这会消耗很多资源，如果每次HTTP请求都必须不断解析、编译和执行PHP脚本，消耗的资源更多。
-    - 如果PHP源码不变，相应的字节码也不会变化，显然没有必要每次都重新生成Opcode，结合在Web应用中无处不在的缓存机制，我们可以把首次生成的Opcode缓存起来,直接从内存中读取预先编译好的字节码
-    - 在配置中开启扩展
-
-```
-# 找到PHP扩展所在目录
-php-config --extension-dir
-
-opcache.validate_timestamps=1    # 生产环境中配置为0：因为Zend Opcache将不能觉察PHP脚本的变化，必须手动清空Zend OPcache缓存的字节码，才能让它发现PHP文件的变动。这个配置适合在生产环境中设置为0，但在开发环境设置为1
-opcache.revalidate_freq=0    # 检查脚本时间戳是否有更新时间
-opcache.memory_consumption=64    # Opcache的共享内存大小，以M为单位
-opcache.interned_strings_buffer=16    # 用来存储临时字符串的内存大小，以M为单位
-opcache.max_accelerated_files=4000    # Opcache哈希表可以存储的脚本文件数量上限
-opcache.fast_shutdown=1         # 使用快速停止续发事件
-```
+* 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用都是上层应用，PHP 程序员主要工作就是编写它们
 
 ![PHP 的架构](../../_static/php_construct.jpg "Optional title")
 
@@ -131,11 +114,15 @@ brew-php-switcher 5.6
 
 ## 配置
 
-* memory_limit 这个用于设定单个 PHP 进程可以使用的系统内存最大值，从系统可用性上来讲建议越大越好。
+* memory_limit:设定单个 PHP 进程可以使用的系统内存最大值，从系统可用性上来讲建议越大越好
     - PHP 操作 Redis Set 集合。修改配置
     - 如果您的项目中每页页面使用的内存不大，建议改成小一些，这样可以承载更多的并发处理。
     - PHP 脚本中调用 memory_get_peak_usage()函数多次测试自己项目脚本
 * Zend OPcache 扩展
+    - PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码（opcode：(http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码。
+    - 每次请求PHP文件都是这样，这会消耗很多资源，如果每次HTTP请求都必须不断解析、编译和执行PHP脚本，消耗的资源更多。
+    - 如果PHP源码不变，相应的字节码也不会变化，显然没有必要每次都重新生成Opcode，结合在Web应用中无处不在的缓存机制，我们可以把首次生成的Opcode缓存起来,直接从内存中读取预先编译好的字节码
+    - 在配置中开启扩展
 * max_execution_time 用于设置单个 PHP 进程在终止之前最长可运行时间
 * Session 会话放在 Redis 或者 Memcached 中，这么做不仅可以减少磁盘的 IO 操作频率，还可以方便业务服务器伸缩。如果想把会话数据保存在 Memcached 中，需要做如下配置：
 
@@ -144,6 +131,16 @@ session.save_handler = 'memcached'
 session.save_path = '127.0.0.1:11211'
 
 expose_php = Off # X-Powered-By的配置
+
+# 找到PHP扩展所在目录
+php-config --extension-dir
+
+opcache.validate_timestamps=1    # 生产环境中配置为0：因为Zend Opcache将不能觉察PHP脚本的变化，必须手动清空Zend OPcache缓存的字节码，才能让它发现PHP文件的变动。这个配置适合在生产环境中设置为0，但在开发环境设置为1
+opcache.revalidate_freq=0    # 检查脚本时间戳是否有更新时间
+opcache.memory_consumption=64    # Opcache的共享内存大小，以M为单位
+opcache.interned_strings_buffer=16    # 用来存储临时字符串的内存大小，以M为单位
+opcache.max_accelerated_files=4000    # Opcache哈希表可以存储的脚本文件数量上限
+opcache.fast_shutdown=1         # 使用快速停止续发事件
 ```
 
 ## CGI vs Cli
