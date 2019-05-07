@@ -1380,6 +1380,7 @@ done
     - 下的原生命令行
 * Windows
     - WSL:提供了一个由微软开发的Linux兼容的内核接口（不包含Linux内核代码），然后可以在其上运行GNU用户空间
+        + WSL2
     + [putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
     + xshell6
     + [FinalShell](http://www.hostbuf.com/)
@@ -1391,6 +1392,7 @@ done
     + Console2
     + cmder
     + ConEmu
+    + [Terminal](https://github.com/microsoft/terminal):The new Windows Terminal, and the original Windows console host -- all in the same place!
 - [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
 * [msys2](http://www.msys2.org/)
 * powercmd
