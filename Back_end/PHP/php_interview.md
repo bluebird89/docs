@@ -1,7 +1,5 @@
 # 面试
 
-## 技能点
-
 ### 前端篇
 
 #### HTML
@@ -96,8 +94,8 @@ HTTP 客户端，PHP 只提供了 cURL 扩展，基本无敌，能搞定很多�
 
 如果你已经写了足够多的代码，那接下来可以看几本设计模式的书扫盲，虽然不是 PHP 版的，但是也非常推荐。
 
-* 《[Head First 设计模式（中文版）](https://book.douban.com/subject/2243615/)》（较啰嗦，初学者可以略看）
-* 《[设计模式 : 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)》（自己挑重点看）
+* 《[Head First 设计模式（中文版）](https://book.douban.com/subject/2243615/)》
+* 《[设计模式 : 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)》
 * 代码库方面 [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP) 非常不错，非常值得学习，中级开发必备。
 
 #### 进阶
@@ -203,4 +201,4 @@ Docker 初级的重点在于 Dockerfile 镜像，Linux CLI 和 shell 编程在�
 
 * [Web 开发进阶指南](https://laravel-china.org/articles/9059/web-development-guide)
 * [todayqq/PHPerInterviewGuide](https://github.com/todayqq/PHPerInterviewGuide)
-* [sushengbuhuo/php-interview-2018](https://github.com/sushengbuhuo/php-interview-2018):面试总结
+* [sushengbuhuo/php-interview-2018](https://github.com/sushengbuhuo/php-interview-2018)

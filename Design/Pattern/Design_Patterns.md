@@ -217,7 +217,11 @@ $cal->do('INF');//Fatal error: Uncaught TypeError: Argument 1 passed to Calculat
 
 ## 参考
 
-- Design Patterns - Elements of Reusable Object-Oriented Software（中文译名：设计模式 - 可复用的面向对象软件元素）
-- [常见设计模式的定义，应用场景和方法](http://www.jianshu.com/p/f3c76b695167)
-- [hoohack/DesignPattern](https://github.com/hoohack/DesignPattern):设计模式：PHP和Go语言实现
-
+* Design Patterns - Elements of Reusable Object-Oriented Software（中文译名：设计模式 - 可复用的面向对象软件元素）
+* [常见设计模式的定义，应用场景和方法](http://www.jianshu.com/p/f3c76b695167)
+* [hoohack/DesignPattern](https://github.com/hoohack/DesignPattern):设计模式：PHP和Go语言实现
+* [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns)
+* [设计模式](http://www.runoob.com/design-pattern/design-pattern-tutorial.html)
+* [kamranahmedse/design-patterns-for-humans](https://github.com/kamranahmedse/design-patterns-for-humans):Design Patterns for Humans™ - An ultra-simplified explanation 
+* [设计模式](http://laravelacademy.org/resources/design-patterns)
+* [Repository 模式](http://laravelacademy.org/post/3063.html)
