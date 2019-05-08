@@ -2,12 +2,12 @@
 
 ## 包管理
 
-- Composer包 Composer Repositories
-      + [Firegento](http://packages.firegento.com):Magento Module Composer Repository.
-      + [Packagist](https://packagist.org):The PHP Package Repository.
-      + [PaketHub](https://pakethub.com):All-in-One PHP Package Repository.
-      + [Private Packagist](https://packagist.com):Composer package archive as a service for PHP.
-      + [WordPress Packagist](https://wpackagist.org):Manage your plugins with Composer.
+* Composer包 Composer Repositories
+      - [Firegento](http://packages.firegento.com):Magento Module Composer Repository.
+      - [Packagist](https://packagist.org):The PHP Package Repository.
+      - [PaketHub](https://pakethub.com):All-in-One PHP Package Repository.
+      - [Private Packagist](https://packagist.com):Composer package archive as a service for PHP.
+      - [WordPress Packagist](https://wpackagist.org):Manage your plugins with Composer.
 - 依赖管理 Dependency Management 依赖和包管理库
       + [Composer Installers](https://github.com/composer/installers): 一个多框架Composer库安装器
       + [Composer](https://getcomposer.org/)
