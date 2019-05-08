@@ -966,6 +966,7 @@ var_dump(random_int(100, 999));//int(248)
     - 可变长度参数函数
 * 可变函数：一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数
 * 匿名函数（Anonymous functions），也叫闭包函数（closures），允许 临时创建一个没有指定名称的函数。最经常用作回调函数（callback）参数的值
+    - 从父作用域继承变量:use
 * 返回值
 * 递归函数
 
@@ -1068,6 +1069,23 @@ $func('test');  // This calls bar()
 
 $func = 'echoit';
 $func('test');  // This calls echoit()
+
+echo preg_replace_callback('~-([a-z])~', function ($match) {
+    return strtoupper($match[1]);
+}, 'hello-world');// 输出 helloWorld
+$greet = function($name)
+{
+    printf("Hello %s\r\n", $name);
+};
+
+$greet('World');
+$greet('PHP');
+
+$message = 'hello';
+$example = function () use ($message) {
+    var_dump($message);
+};
+echo $example();
 ```
 
 ### 状态管理
