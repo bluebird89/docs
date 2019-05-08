@@ -119,7 +119,7 @@ brew-php-switcher 5.6
     - 如果您的项目中每页页面使用的内存不大，建议改成小一些，这样可以承载更多的并发处理。
     - PHP 脚本中调用 memory_get_peak_usage()函数多次测试自己项目脚本
 * Zend OPcache 扩展
-    - PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码（opcode：(http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码。
+    - PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码(http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码。
     - 每次请求PHP文件都是这样，这会消耗很多资源，如果每次HTTP请求都必须不断解析、编译和执行PHP脚本，消耗的资源更多。
     - 如果PHP源码不变，相应的字节码也不会变化，显然没有必要每次都重新生成Opcode，结合在Web应用中无处不在的缓存机制，我们可以把首次生成的Opcode缓存起来,直接从内存中读取预先编译好的字节码
     - 在配置中开启扩展
@@ -233,14 +233,14 @@ pecl channel-update pecl.php.net
     - define()函数：define(name, value, case-insensitive = false) 区分大小写
     - const关键字在编译时定义常量。 它是一个语言构造不是一个函数。比define()快一点，因为它没有返回值。它总是区分大小写的
     - 魔术常量
-        + __LINE__  表示使用当前行号。
-        + __FILE__    表示文件的完整路径和文件名。 如果它在include中使用，则返回包含文件的名称。
-        + __DIR__ 表示文件的完整目录路径。 等同于dirname(__file__)。 除非它是根目录，否则它没有尾部斜杠。 它还解析符号链接。
-        + __FUNCTION__    表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白。
-        + __CLASS__   表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白。
-        + __TRAIT__   表示使用它的特征名称。 如果它在任何函数之外使用，则它将返回空白。 它包括它被声明的命名空间。
-        + __METHOD__  表示使用它的类方法的名称。方法名称在有声明时返回。
-        + __NAMESPACE__   表示当前命名空间的名称。
+        + `__LINE__`  表示使用当前行号。
+        + `__FILE__`    表示文件的完整路径和文件名。 如果它在include中使用，则返回包含文件的名称。
+        + `__DIR__`表示文件的完整目录路径。 等同于dirname(__file__)。 除非它是根目录，否则它没有尾部斜杠。 它还解析符号链接。
+        + `__FUNCTION__`    表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白。
+        + `__CLASS__`   表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白。
+        + `__TRAIT__`   表示使用它的特征名称。 如果它在任何函数之外使用，则它将返回空白。 它包括它被声明的命名空间。
+        + `__METHOD__`  表示使用它的类方法的名称。方法名称在有声明时返回。
+        + `__NAMESPACE__`   表示当前命名空间的名称。
 
 ```php
 # 变量
@@ -1558,10 +1558,11 @@ $comment->owner();
 
 #### 接口与抽象类
 
-* 接口中的每个方法，继承类里面都要去实现 2.接口中的方法后面不要跟大口号{},因为接口只是定义需要有这个函数，并不是自己去实现 3.抽象类中 abstract 的方法，继承类里面都要去实现，也可以理解成接口中的每个方法都是 abstract 方法 4.抽象方法中没有abstract 的方法，继承类不必非要写那个方法
-
-举例,场景：我们在记录日志的时候，有时候可能需要写入文件，有时候可能写入数据库 这时候，我们可以写一个Log接口，定义需要的方法 然后分别写一个FileLog类和一个DatabaseLog类 然后我们写一个UsersController类做一个依赖注入，这样我们需要使用哪种方式写日志，实例化的时候，注入哪种类即可
-
+* 接口中的每个方法，继承类里面都要去实现
+* 接口中的方法后面不要跟大口号{},因为接口只是定义需要有这个函数，并不是自己去实现
+* 抽象类中 abstract 的方法，继承类里面都要去实现，也可以理解成接口中的每个方法都是 abstract 方法
+* 抽象方法中没有abstract 的方法，继承类不必非要写那个方法
+* 举例,场景：我们在记录日志的时候，有时候可能需要写入文件，有时候可能写入数据库 这时候，我们可以写一个Log接口，定义需要的方法 然后分别写一个FileLog类和一个DatabaseLog类 然后我们写一个UsersController类做一个依赖注入，这样我们需要使用哪种方式写日志，实例化的时候，注入哪种类即可
 * 抽象类定义要使用abstract关键字来声明，凡是用abstract关键字定义了抽象方法的类必须声明为抽象类。另外，子类实现抽象方法时访问控制必须和父类中一样（或者更为宽松），同时调用方式必须匹配，即类型和所需参数数量必须一致；
 * 接口是通过interface关键字来定义的，但其中定义所有的方法都是空的，访问控制必须是public。另外，接口可以如类一样定义常量，可以使用extends来继承其他接口；
 * 抽象类可用于对多个同构类的通用部分定义，用extends关键字继承(父子间存在"is a"关系)，属单继承。接口可用于多个异构类的通用部分定义，用implements关键字继承(父子间存在"like a"关系)，可多继承。如果子类不能实现父类或接口的全部抽象方法，则该子类只能被声明成抽象类。
@@ -1924,16 +1925,6 @@ nginx通过 fastcgi_param 指令将参数传递给 FastCGI Server
 ## 参考
 
 * [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
-* [PHP优秀学习文章资料汇总整理](http://www.francissoung.com/2016/08/10/%E4%B8%80%E8%A8%80%E4%B8%8D%E5%90%88%E5%B0%B1%E5%AD%A6%E4%B9%A0-PHP%E4%BC%98%E7%A7%80%E5%AD%A6%E4%B9%A0%E6%96%87%E7%AB%A0%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB%E6%95%B4%E7%90%86/)
-
-TP参考：<https://github.com/ijry/lyadmin>
-
-<https://leanpub.com/phptherightway/read#test_driven_development_title>
-
-- <http://phpbestpractices.justjavac.com/>
-<http://www.jianshu.com/p/a5d905778b47>
 
 $GLOBALS['HTTP_RAW_POST_DATA']
 prof
-
-thrift http://thrift.apache.org/
