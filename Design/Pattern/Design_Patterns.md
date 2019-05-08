@@ -9,8 +9,10 @@
 在 1994 年，由 Erich Gamma、Richard Helm、Ralph Johnson 和 John Vlissides 四人合著出版了一本名为 Design Patterns - Elements of Reusable Object-Oriented Software（中文译名：设计模式 - 可复用的面向对象软件元素） 的书，该书首次提到了软件开发中设计模式的概念。
 四位作者合称 GOF（四人帮，全拼 Gang of Four）。他们所提出的设计模式主要是基于以下的面向对象设计原则。
 
-- 对接口编程而不是对实现编程。
-- 优先使用对象组合而不是继承。
+- 对接口编程而不是对实现编程
+- 优先使用对象组合而不是继承
+
+模式是对某情景下，针对某种问题的某种解决方案。而一个设计模式是用来解决一个经常出现的设计问题的经验方法。这么说来，每个模式都可能有着自己的意图，应用场景，使用方法和使用后果。
 
 ## 设计模式的一些原则
 
@@ -225,3 +227,8 @@ $cal->do('INF');//Fatal error: Uncaught TypeError: Argument 1 passed to Calculat
 * [kamranahmedse/design-patterns-for-humans](https://github.com/kamranahmedse/design-patterns-for-humans):Design Patterns for Humans™ - An ultra-simplified explanation 
 * [设计模式](http://laravelacademy.org/resources/design-patterns)
 * [Repository 模式](http://laravelacademy.org/post/3063.html)
+* 《[Head First 设计模式（中文版）](https://book.douban.com/subject/2243615/)》
+* 《[设计模式 : 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)》
+* [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
+* [常见设计模式的定义，应用场景和方法](http://www.jianshu.com/p/f3c76b695167)
+* [教程](http://www.runoob.com/design-pattern/design-pattern-tutorial.html)
