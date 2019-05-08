@@ -65,7 +65,7 @@ pip install IPython
 * [fendouai/Awesome-TensorFlow-Chinese](https://github.com/fendouai/Awesome-TensorFlow-Chinese):Awesome-TensorFlow-Chinese，TensorFlow 中文资源精选，官方网站，安装教程，入门教程，视频教程，实战项目，学习路径。QQ群：167122861，微信群二维码：http://www.tensorflownews.com/ http://www.tensorflownews.com/
 * [tensorflow/nmt](https://github.com/tensorflow/nmt):TensorFlow Neural Machine Translation Tutorial
 * [nfmcclure/tensorflow_cookbook](https://github.com/nfmcclure/tensorflow_cookbook):Code for Tensorflow Machine Learning Cookbook
-* [tutorials](https://tensorflow.google.cn/tutorials/)
+* [tutorials](https://tensorflow.google.cn/tutorials/): <https://github.com/czy36mengfei/tensorflow2_tutorials_chinese>
 * [初始教程](https://www.datacamp.com/community/tutorials/tensorflow-tutorial)
 * [tensorflow/models](https://github.com/tensorflow/models):Models and examples built with TensorFlow
 * [TensorFlow 官方 YouTube 频道](https://www.youtube.com/channel/UC0rqucBdTuFTjJiefW5t-IQ)
