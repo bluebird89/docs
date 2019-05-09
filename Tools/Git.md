@@ -236,6 +236,7 @@ Host gitlab.smgtech.net
 github
 # Couldn't agree a key exchange algorithm (available: curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521)
 ```
+
 * [图解SSH原理](https://www.jianshu.com/p/33461b619d53)
 
 ### GPG
@@ -249,20 +250,23 @@ sudo apt-get install gnupg # Debian / Ubuntu 环境
 yum install gnupg # Fedora 环境
 brew install gpg
 
-gpg --help
+gpg --help|version
 
 gpg --full-generate-key # 4096
+gpg --gen-key # 2048
 
+gpg -K
+gpg --list-keys
 gpg --list-secret-keys --keyid-format LONG  # list GPG keys for which you have both a public and private key. A private key is required for signing commits or tags.
 
 sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10] # GPG key ID is 3AA5C34371567BD2
 uid                          Hubot # 用户ID Henry Lee <liboming88@yeah.net>
 ssb   4096R/42B317FD4BA89E7A 2016-03-10
 
-gpg --armor --export 3AA5C34371567BD2 | Hubot  # get the public key,add to github
-
 git config --global user.signingkey 3AA5C34371567BD2 # git配置,commit生效
 git config --global commit.gpgsign true
+
+gpg --armor --export 3AA5C34371567BD2 | Hubot  # get the public key,add to github
 
 git commit -S -m your commit message
 git tag -s -m "GPG-sign tag"
