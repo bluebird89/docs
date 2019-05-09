@@ -192,6 +192,7 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/github
 ssh-add -K ~/.ssh/github # 如果不是默认密钥 id_rsa ，则需要以下命令注册密钥文件，-K 参数将密钥存入 Mac Keychain
 cat ~/.ssh/github.pub 添加公钥到服务器
 ssh -T git@github.com  # 验证
+ssh -v bluebird89@github.com
 
 ssh-copy-id demo@198.51.100.0
 ssh-copy-id -i ~/.ssh/tatu-key-ecdsa user@host
