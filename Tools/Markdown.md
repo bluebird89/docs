@@ -37,8 +37,7 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 
 **Result:**
 
-# 第一级标题 
-<h1>第一级标题</h1>
+# 第一级标题  `</h1>`
 ## 第二级标题 `<h2>`
 ###### 第六级标题 `<h6>`
 
@@ -99,14 +98,32 @@ __This will also be bold__
 * add new line between two section
 * first line add <br> </br>
 
-## 列表 Lists
+## 分隔线 Horizontal Rules
 
-无序列表在文字前面加上 -
-有序列表，在文字前面加上 1\. 2\. 3\.
+以下三种方式都可以生成分隔线：
+```
+***
+
+*****
+
+- - -
+```
+
+**Result:**
+
+***
+
+*****
+
+- - -
+
+## 列表 Lists
 
 ### 无序列表 Unordered
 
-Markdown **Example:**
+无序列表在文字前面加上 -
+
+**Example:**
 
 ```
 * 项目一 无序列表 `* + 空格键`
@@ -125,7 +142,7 @@ Markdown **Example:**
   - And this
 ```
 
-效果如下： **Result:**
+**Result:**
 
 * Item 1 unordered list `* + SPACE`
 * Item 2
@@ -139,7 +156,9 @@ Markdown **Example:**
 
 ### 有序列表 Ordered
 
-Markdown 语法：**Example:**
+有序列表，在文字前面加上 1\. 2\. 3\.
+
+**Example:**
 
 ```
 1. Item 1 ordered list `Number + . + SPACE`
@@ -149,7 +168,7 @@ Markdown 语法：**Example:**
     2. Item 3b
 ```
 
-效果如下：
+**Result:**
 
 1. Item 1 ordered list `Number + . + SPACE`
 2. Item 2
@@ -159,7 +178,7 @@ Markdown 语法：**Example:**
 
 ### 任务列表 Task lists
 
-Markdown **Example:**
+**Example:**
 
 ```
 - [ ] 任务一 未做任务 `- + 空格 + [ ]`
@@ -177,7 +196,8 @@ Markdown **Example:**
 
 ## 图片 Images
 
-Markdown **Example:**
+**Example:**
+
 格式: Format: ![Alt Text](url)
 ```
 ![GitHub set up](http://zh.mweb.im/asset/img/set-up-git.gif)
@@ -193,7 +213,7 @@ Markdown **Example:**
 
 ## 链接 Links
 
-Markdown **Example:**
+**Example:**
 
 ```
 email <example@example.com>
@@ -204,7 +224,7 @@ autolink  <http://www.github.com/>
 [GitHub](http://github.com)
 ```
 
-效果如下： **Result:**
+**Result:**
 
 * Email 连接： <example@example.com>  
 * 自动生成连接像： <http://www.github.com/> 这样  
@@ -229,7 +249,7 @@ You can link directly to a section in a rendered file by hovering over the secti
 
 ## 区块引用 Blockquotes/Quoting text
 
-Markdown **Example:**
+**Example:**
 
 ```
 某某说:
@@ -258,7 +278,7 @@ As Kanye West said:
 
 ## 行内代码 Inline code/Quoting code
 
-Markdown **Example:**
+**Example:**
 
 ```
 像这样即可：`<addr>` `code`
@@ -273,7 +293,7 @@ I think you should use an `<addr>` `code` element here instead.
 
 ## 多行或者一段代码 Multi-line code
 
-Markdown **Example:**
+**Example:**
 
 ```js
 function fancyAlert(arg) {
@@ -283,7 +303,7 @@ function fancyAlert(arg) {
 }
 ```
 
-效果如下： **Result:**
+**Result:**
 
 ```js
 function fancyAlert(arg) {
@@ -295,7 +315,8 @@ function fancyAlert(arg) {
 
 ## 顺序图或流程图 Sequence and Flow chart github不支持
 
-Markdown **Example:**
+
+**Example:**
 
     ```sequence
     张三->李四: 嘿，小四儿, 写博客了没?
@@ -376,7 +397,7 @@ cond(no)->sub1(right)->op1
 
 ## 表格 Tables
 
-Markdown **Example:**
+**Example:**
 
 ```
 First Header | Second Header
@@ -385,7 +406,7 @@ Content from cell 1 | Content from cell 2
 Content in the first column | Content in the second column
 ```
 
-效果如下： **Result:**
+**Result:**
 
 First Header | Second Header
 ------------ | -------------
@@ -409,25 +430,6 @@ Year | Temperature (low) | Temperature (high)
 1900 | -10               | 25
 1910 | -15               | 30
 1920 | -10               | 32
-
-## 分隔线 Horizontal Rules
-
-以下三种方式都可以生成分隔线：
-```
-***
-
-*****
-
-- - -
-```
-
-效果如下： **Result:**
-
-***
-
-*****
-
-- - -
 
 ## MathJax LaTex github不支持
 
@@ -498,7 +500,7 @@ This is a footnote:[^sample_footnote]
 
 Insert `[ TOC ]` without spaces to generate a table of contents (builtin parsers only).
 
-Markdown **Example:**
+**Example:**
 
 ```
 [TOC]
