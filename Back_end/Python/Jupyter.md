@@ -10,10 +10,12 @@ Jupyter metapackage for installation, docs and chat https://jupyter.readthedocs.
 conda install jupyter notebook
 pip install jupyter
 
-# Anaconda，可以在其 Navigator 图形界面中点击打开 Notebook。
+# Anaconda，可以在其 Navigator 图形界面中点击打开 Notebook
 jupyter notebook
 --port <port_number> # set port
 --no-browser # 启动Jupyter Notebook的服务器但不打算立刻进入到主页面
+
+conda install -c conda-forge jupyter_contrib_nbextensions
 ```
 
 ## config
@@ -63,7 +65,8 @@ Notebook 文档是由一系列单元（Cell）构成，主要有两种形式的�
 
 * %lsmagic
 * %env:设置环境变量
-* %run file:运行.py格式的python代码.使用%run 与导入一个python模块是不同的
+* %run file 运行.py格式的python代码.使用%run 与导入一个python模块是不同的
+    * `ln [*]`: 正在运行状态
 * %load file：从外部脚本中插入代码 用外部脚本替换当前cell.也可以使用URL
 * %store: 在notebook文件之间传递变量
 * %who: 列出所有的全局变量
@@ -75,6 +78,9 @@ Notebook 文档是由一系列单元（Cell）构成，主要有两种形式的�
 * %prun: 告诉程序中每个函数消耗的时间
 * %pdb:调试程序.调试界面The Python Debugger (pdb)，使得进入函数内部检查错误
 * %pwd || !pwd
+* 查看python版本：!python --version
+* 运行python文件：!python myfile.py
+* current_path = %pwd
 
 ```py
 # one file
@@ -94,6 +100,46 @@ for _ in range(1000):
 import numpy
 %timeit numpy.random.normal(size=100)
 ```
+
+## shortcut
+
+* 修改之前的单元格，对其重新计算，这样就可以更新整个文档
+* Shift-Enter run cell,自动跳到下一个cell
+* Ctrl-Enter  run cell in-place 不自动调转到下一个cell
+* Enter: 当前cell进入编辑模式
+* ESC: 退出当前cell的编辑模式
+* dd:删除当前的cell
+* z: 撤销对某个cell的删除
+* l:为当前的cell加入line number
+* 单1|2|3:当前的cell转化为具有一|二｜三级标题的maskdown
+* Alt-Enter   run cell, insert below
+* Ctrl-m x    cut cell
+* Ctrl-m c    copy cell
+* Ctrl-m v    paste cell
+* Ctrl-m d    delete cell
+* Ctrl-m z    undo last cell deletion
+* Ctrl-m –    split cell
+* Ctrl-m a    insert cell above
+* Ctrl-m b    insert cell below
+* Ctrl-m o    toggle output
+* Ctrl-m O    toggle output scroll
+* Ctrl-m l    toggle line numbers
+* Ctrl-m s    save notebook
+* Ctrl-m j    move cell down
+* Ctrl-m k    move cell up
+* Ctrl-m y    code cell
+* Ctrl-m m    markdown cell
+* Ctrl-m t    raw cell
+* Ctrl-m 1-6  heading 1-6 cell
+* Ctrl-m p    select previous
+* Ctrl-m n    select next
+* Ctrl-m i    interrupt kernel
+* Ctrl-m .    restart kernel
+* Ctrl-m h    show keyboard shortcuts
+* Ctrl + /  为一行或者多行添加/取消注释
+* Crtl PgUp和Crtl PgDn 浏览器的各个Tab之间切换
+* Crtl Home: 快速跳转到首个cell
+* Crtl End: 快速跳转到最后一个cell
 
 ## terminal
 
@@ -237,4 +283,3 @@ Help > Keyboard Shortcuts
 ## 工具
 
 * [jupyter/notebook](https://github.com/jupyter/notebook):Jupyter Interactive Notebook https://jupyter-notebook.readthedocs.io/
-conda install -c conda-forge jupyter_contrib_nbextensions
