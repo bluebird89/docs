@@ -4,7 +4,20 @@ Jupyter metapackage for installation, docs and chat https://jupyter.readthedocs.
 
 以网页的形式打开，可以在网页页面中直接编写代码和运行代码，代码的运行结果也会直接在代码块下显示。如在编程过程中需要编写说明文档，可在同一个页面中直接编写，便于作及时的说明和解释
 
+## 说明
+
+* 保存为后缀名为.ipynb的JSON格式文件，不仅便于版本控制，也方便与他人共享。
+* 可以导出为：HTML、LaTeX、PDF等格式
+* 编程时具有语法高亮、缩进、tab补全的功能。
+* 可直接通过浏览器运行代码，同时在代码块下方展示运行结果。
+* 以富媒体格式展示计算结果。富媒体格式包括：HTML，LaTeX，PNG，SVG等。
+* 对代码编写说明文档或语句时，支持Markdown语法。
+* 支持使用LaTeX编写数学性说明
+
 ## Install
+
+* windows: `C:\Users\<user_name>\.jupyter\jupyter_notebook_config.py`
+* Linux/macOS：`/Users/<user_name>/.jupyter/jupyter_notebook_config.py` 或 ` ~/.jupyter/jupyter_notebook_config.py`
 
 ```sh
 conda install jupyter notebook
@@ -15,7 +28,8 @@ jupyter notebook
 --port <port_number> # set port
 --no-browser # 启动Jupyter Notebook的服务器但不打算立刻进入到主页面
 
-conda install -c conda-forge jupyter_contrib_nbextensions
+# 命令虽然可以用于查看配置文件所在的路径，但主要用途是是否将这个路径下的配置文件替换为默认配置文件
+jupyter notebook --generate-config
 ```
 
 ## config
@@ -77,7 +91,7 @@ Notebook 文档是由一系列单元（Cell）构成，主要有两种形式的�
 * %pycat file:显示外部脚本的内容
 * %prun: 告诉程序中每个函数消耗的时间
 * %pdb:调试程序.调试界面The Python Debugger (pdb)，使得进入函数内部检查错误
-* %pwd || !pwd
+* %pwd 或者 !pwd：获取当前所在位置的绝对路径
 * 查看python版本：!python --version
 * 运行python文件：!python myfile.py
 * current_path = %pwd
@@ -101,6 +115,8 @@ import numpy
 ```
 
 ## shortcut
+
+Help > Keyboard Shortcuts
 
 * 修改之前的单元格，对其重新计算，这样就可以更新整个文档
 * Shift-Enter run cell,自动跳到下一个cell
@@ -139,6 +155,29 @@ import numpy
 * Crtl PgUp和Crtl PgDn 浏览器的各个Tab之间切换
 * Crtl Home: 快速跳转到首个cell
 * Crtl End: 快速跳转到最后一个cell
+* Esc R Y  will discard the output
+* Esc + F 在代码中查找、替换，忽略输出。
+* Esc + O 在cell和输出结果间切换。
+* 选择多个cell:一旦选定cell，可以批量删除/拷贝/剪切/粘贴/运行
+    - Shift + J 或 Shift + Down 选择下一个cell。
+    - Shift + K 或 Shift + Up 选择上一个cell。
+* Shift + M 合并cell
+* 执行当前cell，并自动跳到下一个cell：Shift Enter
+* 执行当前cell，执行后不自动调转到下一个cell：Ctrl-Enter
+* 当前的cell进入编辑模式：Enter
+* 退出当前cell的编辑模式：Esc
+* 删除当前的cell：双D
+* 为当前的cell加入line number：单L
+* 将当前的cell转化为具有一级标题的maskdown：单1
+* 将当前的cell转化为具有二级标题的maskdown：单2
+* 将当前的cell转化为具有三级标题的maskdown：单3
+* 为一行或者多行添加/取消注释：Crtl /
+* 撤销对某个cell的删除：z
+* 浏览器的各个Tab之间切换：Crtl PgUp和Crtl PgDn
+* 快速跳转到首个cell：Crtl Home
+* 快速跳转到最后一个cell：Crtl End
+* Help 菜单下，可以找到常见库的在线文档链接，包括Numpy，Pandas，Scipy和Matplotlib
+* 库、方法或变量的前面打上?，即可打开相关语法的帮助文档
 
 ## terminal
 
@@ -178,7 +217,7 @@ names[:5]
 * 用其他语言写函数
     - 在cython或fortran里写函数，然后在python代码里直接调用
 
-```sh
+```python
 !python myfile.py  # 在Jupyter Notebook中执行shell命令的语法
 !python3
 
@@ -203,14 +242,18 @@ In [ ]: %%cython
         def myltiply_by_2(float x):
             return 2.0 * x
 In [ ]: myltiply_by_2(23.)
+
+$$\int_0^{+\infty} x^2 dx$$ # 公式
 ```
 
 ## [damianavila/RISE](https://github.com/damianavila/RISE)
 
 RISE: "Live" Reveal.js Jupyter/IPython Slideshow Extension
 
+
 ```
 # install
+
 conda install -c damianavila82 rise
 pip install RISE  # install
 
@@ -236,9 +279,12 @@ jupyter-nbextension enable rise --py --sys-prefix
 
 ## Jupyter-contrib extensions
 
-* Table of Contents(2)
+* Table of Contents(2):目录生成
+    - 安装
+    - 页面中Nbextensions标签下勾选“Table of Contents(2)” 
 
 ```
+# 添加
 conda install -c conda-forge jupyter_contrib_nbextensions
 
 !pip install https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master
@@ -248,36 +294,10 @@ conda install -c conda-forge jupyter_contrib_nbextensions
 !jupyter nbextensions_configurator enable --user
 ```
 
-## Shortcuts
-
-Help > Keyboard Shortcuts
-
-* Esc + F 在代码中查找、替换，忽略输出。
-* Esc + O 在cell和输出结果间切换。
-* 选择多个cell:一旦选定cell，可以批量删除/拷贝/剪切/粘贴/运行
-    - Shift + J 或 Shift + Down 选择下一个cell。
-    - Shift + K 或 Shift + Up 选择上一个cell。
-* Shift + M 合并cell
-* 执行当前cell，并自动跳到下一个cell：Shift Enter
-* 执行当前cell，执行后不自动调转到下一个cell：Ctrl-Enter
-* 当前的cell进入编辑模式：Enter
-* 退出当前cell的编辑模式：Esc
-* 删除当前的cell：双D
-* 为当前的cell加入line number：单L
-* 将当前的cell转化为具有一级标题的maskdown：单1
-* 将当前的cell转化为具有二级标题的maskdown：单2
-* 将当前的cell转化为具有三级标题的maskdown：单3
-* 为一行或者多行添加/取消注释：Crtl /
-* 撤销对某个cell的删除：z
-* 浏览器的各个Tab之间切换：Crtl PgUp和Crtl PgDn
-* 快速跳转到首个cell：Crtl Home
-* 快速跳转到最后一个cell：Crtl End
-* Help 菜单下，可以找到常见库的在线文档链接，包括Numpy，Pandas，Scipy和Matplotlib
-* 库、方法或变量的前面打上?，即可打开相关语法的帮助文档
-
 ## 参考
 
 * [markusschanta/awesome-jupyter](https://github.com/markusschanta/awesome-jupyter):A curated list of awesome Jupyter projects, libraries and resources
+* [The IPython notebook](http://ipython.org/ipython-doc/dev/notebook/index.html)
 
 ## 工具
 
