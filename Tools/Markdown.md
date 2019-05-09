@@ -205,19 +205,18 @@ autolink  <http://www.github.com/>
 
 效果如下： **Result:**
 
-Email 连接： <example@example.com>  
-自动生成连接像： <http://www.github.com/> 这样  
-An email <example@example.com> link.  
-Automatic linking for URLs  
-Any URL (like <http://www.github.com/>) will be automatically converted into a clickable link.  
+* Email 连接： <example@example.com>  
+* 自动生成连接像： <http://www.github.com/> 这样  
+* An email <example@example.com> link.  
+* Automatic linking for URLs  
+* Any URL (like <http://www.github.com/>) will be automatically converted into a clickable link.  
+* [连接标题Github网站](http://github.com)  
+* [another one with a title](http://lmgtfy.com/ "Hello, world").  
 
-[连接标题Github网站](http://github.com)  
-[another one with a title](http://lmgtfy.com/ "Hello, world").  
-
-插入超链接 [直播吧](http://www.zhibo8.com)
-[本地链接](../Document/Document.md#使用)
-插入图片![有道云笔记logo](http://note.youdao.com/favicon.ico)  
-![爱情](http://i.imgur.com/zjwDS9u.jpg)  
+* 插入超链接 [直播吧](http://www.zhibo8.com)
+* [本地链接](../Tools/Document/Document.md#使用)
+* 插入图片![有道云笔记logo](http://note.youdao.com/favicon.ico)  
+* ![爱情](http://i.imgur.com/zjwDS9u.jpg)  
 
 ## Section links
 
