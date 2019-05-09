@@ -1,4 +1,4 @@
-# Markdown 语法 Markdown syntax guide
+# Markdown syntax guide
 
 Markdown is a way to style text on the web. You control the display of the document; formatting words as bold or italic, adding images, and creating lists are just a few of the things we can do with Markdown. Mostly, Markdown is just regular text with a few non-alphabetic characters thrown in, like `#` or `*`.
 
@@ -11,6 +11,7 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 > 不過最需要強調的便是它的可讀性。一份使用 Markdown 格式撰寫的文件應該可以直接以純文字發佈，並且看起來不會像是由許多標籤或是格式指令所構成。
 >
 > Markdown 的語法有個主要的目的：用來作為一種網路內容的*寫作*用語言。
+>
 >
 > Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
 >
@@ -199,17 +200,26 @@ __This will also be bold__
 **Example:**
 
 格式: Format: ![Alt Text](url)
+
 ```
 ![GitHub set up](http://zh.mweb.im/asset/img/set-up-git.gif)
 
 ![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+
+* ![tully](../_static/tully.jpg)
+
+* 插入图片![有道云笔记logo](http://note.youdao.com/favicon.ico)
+
+* ![爱情](http://i.imgur.com/zjwDS9u.jpg)
 ```
 
 效果如下：**Result:**
 
-![GitHub set up](https://help.github.com/assets/images/site/set-up-git.gif)
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
-![revolunet logo][revolunet-logo]
+* ![GitHub set up](https://help.github.com/assets/images/site/set-up-git.gif)
+* ![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+* ![tully](../_static/tully.jpg)
+* 插入图片![有道云笔记logo](http://note.youdao.com/favicon.ico)  
+* ![爱情](http://i.imgur.com/zjwDS9u.jpg)
 
 ## 链接 Links
 
@@ -227,17 +237,15 @@ autolink  <http://www.github.com/>
 **Result:**
 
 * Email 连接： <example@example.com>  
-* 自动生成连接像： <http://www.github.com/> 这样  
+* 自动生成连接像： <http://www.github.com/>  
 * An email <example@example.com> link.  
 * Automatic linking for URLs  
 * Any URL (like <http://www.github.com/>) will be automatically converted into a clickable link.  
 * [连接标题Github网站](http://github.com)  
-* [another one with a title](http://lmgtfy.com/ "Hello, world").  
-
+* [another one with a title](http://lmgtfy.com/ "Hello, world")
 * 插入超链接 [直播吧](http://www.zhibo8.com)
 * [本地链接](../Tools/Document/Document.md#使用)
-* 插入图片![有道云笔记logo](http://note.youdao.com/favicon.ico)  
-* ![爱情](http://i.imgur.com/zjwDS9u.jpg)  
+
 
 ## Section links
 
@@ -318,42 +326,42 @@ function fancyAlert(arg) {
 
 **Example:**
 
-    ```sequence
-    张三->李四: 嘿，小四儿, 写博客了没?
-    Note right of 李四: 李四愣了一下，说：
-    李四-->张三: 忙得吐血，哪有时间写。
-    ```
+```sequence
+张三->李四: 嘿，小四儿, 写博客了没?
+Note right of 李四: 李四愣了一下，说：
+李四-->张三: 忙得吐血，哪有时间写。
+```
 
-    ```flow
-    st=>start: 开始
-    e=>end: 结束
-    op=>operation: 我的操作
-    cond=>condition: 确认？
+```flow
+st=>start: 开始
+e=>end: 结束
+op=>operation: 我的操作
+cond=>condition: 确认？
 
-    st->op->cond
-    cond(yes)->e
-    cond(no)->op
-    ```
-    ```sequence
-    Andrew->China: Says Hello
-    Note right of China: China thinks about it
-    China-->Andrew: How are you?
-    Andrew->>China: I am good thanks!
-    ```
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+```sequence
+Andrew->China: Says Hello
+Note right of China: China thinks about it
+China-->Andrew: How are you?
+Andrew->>China: I am good thanks!
+```
 
-    ```flow
-    st=>start: Start:>http://www.google.com[blank]
-    e=>end:>http://www.google.com
-    op1=>operation: My Operation
-    sub1=>subroutine: My Subroutine
-    cond=>condition: Yes
-    or No?:>http://www.google.com
-    io=>inputoutput: catch something...
+```flow
+st=>start: Start:>http://www.google.com[blank]
+e=>end:>http://www.google.com
+op1=>operation: My Operation
+sub1=>subroutine: My Subroutine
+cond=>condition: Yes
+or No?:>http://www.google.com
+io=>inputoutput: catch something...
 
-    st->op1->cond
-    cond(yes)->io->e
-    cond(no)->sub1(right)->op1
-    ```
+st->op1->cond
+cond(yes)->io->e
+cond(no)->sub1(right)->op1
+```
 
 **Result:**
 
