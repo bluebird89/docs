@@ -346,7 +346,13 @@ writing clear commit messages, you can make it easier for other people to follow
     - 如果不给选项，那么当前分支指向到那个提交。如果用--hard选项，那么工作目录也更新，如果用--soft选项，那么都不变。
     - 没有给出提交点的版本号，那么默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交，如果用--hard选项，工作目录也同样。
     - 如果没有给出提交点的版本号，那么默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交，如果用--hard选项，工作目录也同样。
-    - 如果给了文件名(或者 -p选项), 那么工作效果和带文件名的checkout差不多，除了索引被更新。
+    - 如果给了文件名(或者 -p选项), 那么工作效果和带文件名的checkout差不多，除了索引被更新
+
+|   名称   | HEAD位置 | 索引  | 工作树 |
+|----------|----------|----------|----------|
+| soft | 修改 |不修改 | 不修改 |
+| mixed | 修改 |修改 | 不修改 |
+| hard | 修改 |修改 | 修改 |
 
 ![Alt text](../_static/conventions.svg "Optional title")
 绿色的5位字符表示提交的ID，分别指向父节点。分支用橘色显示，分别指向特定的提交。当前分支由附在其上的HEAD标识。 这张图片里显示最后5次提交，ed489是最新提交。 master分支指向此次提交，另一个maint分支指向祖父提交节点。
@@ -402,7 +408,7 @@ git reset –hard HEAD^ | HEAD^^ | HEAD~100 # 回退版本
 git reset –hard dc5f1d1 # 只要记得版本号就可以穿梭回到现代
 git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be
 
-git revert [commit] # 回退到某个提交，但是不删除commit
+git revert [commit]|HEAD # 回退到某个提交，但是不删除commit
 
 # 移除没有track文件
 git clean -f     # remove untracked files
@@ -429,9 +435,11 @@ git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1
     - 如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做。
     - 如果当前提交是另一个分支的祖父节点，就导致fast-forward合并。指向只是简单的移动，并生成一个新的提交。
     - 一次真正的合并。默认把当前提交(ed489 如下所示)和另一个提交(33104)以及他们的共同祖父节点(b325c)进行一次三方合并。结果是先保存当前目录和索引，然后和父节点33104一起做一次新提交。
-* cherry-pick命令"复制"一个提交节点并在当前分支做一次完全一样的新提交。
+    - merge的特殊选项squash：选项指定分支的合并，就可以把所有汇合的提交添加到分支上
+* cherry-pick：从其他分支复制指定的提交，然后导入到现在的分支
 * 衍合是合并命令的另一种选择。合并把两个父分支合并进行一次提交，提交历史不是线性的。衍合在当前分支上重演另一个分支的历史，提交历史是线性的。 本质上，这是线性化的自动的 cherry-pick
 * 上面的命令都在topic分支中进行，而不是master分支，在master分支上重演，并且把分支指向新的节点。注意旧提交没有被引用，将被回收。
+
 
 ```sh
 # 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志.进行一次包含最后一次提交加上工作目录中文件快照的提交
@@ -679,7 +687,7 @@ git push origin --delete new-branch
 
 ```sh
 git tag # 列出所有tag
-git tag -l
+git tag -l|-n
 git show [tag]  # 查看tag信息
 
 git tag -a v2.1 -m 'first version' # -a 创建一个带注释的标签，不带-a的话，不会记录时间 作者 以及注释
