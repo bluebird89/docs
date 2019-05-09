@@ -616,6 +616,7 @@ git rebase someFeature # 将someFeature分支上的commit记录追加到主分�
 git rebase origin/master # 在本地分支上合并远程分支
 git rebase source destiantion # 将source压缩到destiantion
 git rebase -–continue|skip|abort # 如果出错的话
+git rebase --onto master server client # 取出 client 分支，找出处于 client 分支和 server 分支的共同祖先之后的修改，然后把它们在 master 分支上重放一遍
 
 git rebase -i start_commit_hash end_commit_hash # combine to one commit
 git rebase -i HEAD~5 # Squash last n commits into one commit
