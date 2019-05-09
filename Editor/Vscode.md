@@ -53,7 +53,7 @@ sudo apt-get install code
     - React Native Tools
     - Vue 2 Snippets
 * Indent-Rainbow:使得对齐更加具有可读性
-* IntelliSense for CSS class names in HTML
+* IntelliCode, Microsoft’s tool for AI-assisted coding
 * JavaScript (ES6) code snippets
 * Jest
 * Minify
