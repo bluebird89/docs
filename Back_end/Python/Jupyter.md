@@ -82,7 +82,6 @@ Notebook 文档是由一系列单元（Cell）构成，主要有两种形式的�
 * 运行python文件：!python myfile.py
 * current_path = %pwd
 
-```py
 # one file
 data = 'this is the string I want to pass to different notebook'
 %store data
