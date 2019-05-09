@@ -860,10 +860,11 @@ HTTP and REST
 
 kindle
 
-* http://kindle115.com/
+* <http://kindle115.com/>
 * [鸠摩搜书](https://www.jiumodiary.com/)
 * Calibre
-* http://kmate.me/cn/
+* <http://kmate.me/cn/>
+* <https://readfree.me/>
 
 ## 工具
 

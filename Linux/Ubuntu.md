@@ -927,6 +927,12 @@ chmod 777 /home／directory
 vim /etc/samba/smb.conf
 #[global]的地方添加 security = user
 # 文件最后添加下列设定
+[global]
+workgroup = WORKGROUP           #设置工作组
+server string = Samba Server        #设置描述字符串
+log file = /var/log/samba/log.%m    #日志文件路径
+max log size = 50                         #日志文件大小限制（单位：K）
+security = share
 
 [share]
 path = /home/username/share
@@ -934,6 +940,7 @@ available = yes
 browsealbe = yes
 public = yes
 writable = yes
+guest ok = yes
 
 useradd username
 sudo smbpasswd -a username
@@ -941,6 +948,7 @@ sudo smbpasswd -a username
 
 # mac 链接 finder中com＋K
 smb://192.168.100.106
+# windows
 \\172.16.44.175\Ubuntu
 ```
 

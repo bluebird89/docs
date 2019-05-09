@@ -1639,8 +1639,50 @@ var_dump(date("Y-m-d", strtotime("first day of +1 month", strtotime("2017-08-31"
 
 ## JSON
 
-* json_encode()函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据。
-* json_decode()函数解码JSON字符串：将JSON字符串转换为PHP变量。
+* json_encode( mixed $value [, int $options = 0 [, int $depth = 512 ]] )函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据
+    - 1:JSON_HEX_TAG:所有的 < 和 > 转换成 \u003C 和 \u003E
+    - 2:JSON_HEX_AMP:所有的 & 转换成 \u0026
+    - 4:JSON_HEX_APOS:所有的 ' 转换成 \u0027
+    - 8:JSON_HEX_QUOT:所有的 " 转换成 \u0022
+    - 16:JSON_FORCE_OBJECT:使一个非关联数组输出一个类（Object）而非数组。 在数组为空而接受者需要一个类（Object）的时候尤其有用
+    - 32:JSON_NUMERIC_CHECK:将所有数字字符串编码成数字（numbers）
+    - 64:JSON_UNESCAPED_SLASHES:不要编码 /
+    - 128:JSON_PRETTY_PRINT:用空白字符格式化返回的数据
+    - 256:JSON_UNESCAPED_UNICODE:以字面编码多字节 Unicode 字符（默认是编码成 \uXXXX）
+    - 512:JSON_PARTIAL_OUTPUT_ON_ERROR:Substitute some unencodable values instead of failing
+    - 1024:JSON_PRESERVE_ZERO_FRACTION:Ensures that float values are always encoded as a float value
+* json_decode()函数解码JSON字符串：将JSON字符串转换为PHP变量
+* json_last_error_msg — Returns the error string of the last json_encode() or json_decode() call
+* json_last_error — 返回最后发生的错误
+
+```php
+<?php
+$a = array('<foo>',"'bar'",'"baz"','&blong&', "\xc3\xa9");
+
+echo "Normal: ",  json_encode($a), "\n"; # Normal: ["<foo>","'bar'","\"baz\"","&blong&","\u00e9"]
+echo "Tags: ",    json_encode($a, JSON_HEX_TAG), "\n"; # Tags: ["\u003Cfoo\u003E","'bar'","\"baz\"","&blong&","\u00e9"]
+echo "Apos: ",    json_encode($a, JSON_HEX_APOS), "\n"; # Apos: ["<foo>","\u0027bar\u0027","\"baz\"","&blong&","\u00e9"]
+echo "Quot: ",    json_encode($a, JSON_HEX_QUOT), "\n"; # Quot: ["<foo>","'bar'","\u0022baz\u0022","&blong&","\u00e9"]
+echo "Amp: ",     json_encode($a, JSON_HEX_AMP), "\n"; # Amp: ["<foo>","'bar'","\"baz\"","\u0026blong\u0026","\u00e9"]
+echo "Unicode: ", json_encode($a, JSON_UNESCAPED_UNICODE), "\n"; # Unicode: ["<foo>","'bar'","\"baz\"","&blong&","é"]
+echo "All: ",     json_encode($a, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE), "\n\n"; # All: ["\u003Cfoo\u003E","\u0027bar\u0027","\u0022baz\u0022","\u0026blong\u0026","é"]
+
+$b = array();
+
+echo "Empty array output as array: ", json_encode($b), "\n"; # Empty array output as array: []
+echo "Empty array output as object: ", json_encode($b, JSON_FORCE_OBJECT), "\n\n"; # Empty array output as object: {}
+
+$c = array(array(1,2,3));
+
+echo "Non-associative array output as array: ", json_encode($c), "\n"; # Non-associative array output as array: [[1,2,3]]
+echo "Non-associative array output as object: ", json_encode($c, JSON_FORCE_OBJECT), "\n\n"; # Non-associative array output as object: {"0":{"0":1,"1":2,"2":3}}
+
+$d = array('foo' => 'bar', 'baz' => 'long');
+
+echo "Associative array always output as object: ", json_encode($d), "\n"; # Associative array always output as object: {"foo":"bar","baz":"long"}
+echo "Associative array always output as object: ", json_encode($d, JSON_FORCE_OBJECT), "\n\n"; # Associative array always output as object: {"foo":"bar","baz":"long"}
+?>
+```
 
 ##  密码散列算法函数
 
