@@ -670,6 +670,12 @@ icu4c was upgraded to version 63 but my locally installed postgres image still r
 brew switch icu4c 62.1
 ```
 
+## 重置密码
+
+* 重新启动时,按住CMD + R、直到苹果标志出现。然后你就可以进入恢复模式
+* Utilities > Terminal打开一个终端。在终端,输入resetpassword并按Enter键
+* 选择你的OS X驱动。从下拉下“:选择用户帐户”,选择你想要的用户帐户重置密码
+
 ## 配置
 
 *   [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing

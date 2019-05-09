@@ -62,6 +62,7 @@
 * 电商
     - [magento/magento2](https://github.com/magento/magento2): a cutting edge, feature-rich eCommerce solution that gets results.
     - [drupal/drupal](https://github.com/drupal/drupal):Verbatim mirror of the git.drupal.org repository for Drupal core. Changes will not be pulled, and merge requests will not be accepted, if you want to contribute, go to Drupal.org: https://drupal.org/project/drupal
+    - [sylius](https://sylius.com):
 * CMS
     - [bolt/bolt](https://github.com/bolt/bolt):Bolt is a simple CMS written in PHP. It is based on Silex and Symfony components, uses Twig and either SQLite, MySQL or PostgreSQL.
 * Wiki
@@ -205,6 +206,16 @@
     - (https://github.com/mikey179/vfsStream)[VFS Stream]: 一个用于测试的虚拟文件系统流的包装器
     - (https://github.com/adlawson/php-vfs)[VFS]: 另一个用于测试虚拟的文件系统
     - [vimeo/psalm](https://github.com/vimeo/psalm):A static analysis tool for finding errors in PHP applications https://getpsalm.org
+
+```sh
+composer create-project sylius/sylius-standard acme
+cd acme
+php bin/console sylius:install
+yarn install
+yarn run gulp
+php bin/console server:start
+open http://127.0.0.1:8000
+```
 
 ## 持续集成 Continuous Integration
 

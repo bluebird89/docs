@@ -2,13 +2,12 @@
 
 Yii 2: The Fast, Secure and Professional PHP Framework <http://www.yiiframework.com>
 
-## [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced)
-
-Yii 2.0 Advanced Application Template
+* [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced):Yii 2.0 Advanced Application Template
 
 ```sh
 composer global require "fxp/composer-asset-plugin:^1.2.0"
-composer create-project --prefer-dist yiisoft/yii2-app-basic basic
+
+composer create-project --prefer-dist yiisoft/yii2-app-basic yii2-basic
 composer create-project --prefer-dist yiisoft/yii2-app-advanced yii2-advanced
 
 composer install
@@ -624,8 +623,8 @@ use appcomponentsHelloWidget;
 
 ## Module
 
-debug
-gii
+* debug
+* gii
 
 * 模块是独立的软件单元，由模型, 视图, 控制器和其他支持组件组成，
 * 终端用户可以访问在应用主体中已安装的模块的控制器，

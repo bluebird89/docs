@@ -19,6 +19,7 @@ fast, scalable, distributed revision control system. https://git-scm.com/  一�
 * [sourceforge](https://sourceforge.net/):The Complete Open-Source Software Platform
 * [GitKraken](link)
 * [LaunchPad](link)
+* [backlog](https://backlog.com/):Online project management tool for developers
 
 ## 搭建服务
 
@@ -293,7 +294,7 @@ gpg --sign demo.txt #签名
 Git维护的就是一个commitID树，分别保存着不同状态下的代码。 所以你对代码的任何修改，最终都会反映到 commit 上面去。创建和保存项目的快照及与之后的快照进行对比
 
 * 工作区（Workspace）:进行开发改动的地方，任何对象都是在工作区中诞生和被修改；文件状态：modified:working directory
-* 暂存区（Index/Stage）:.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；文件状态：staged:Stage(Index)
+* 暂存区（Index/Stage）:.git目录下的index文件, 暂存区会索引git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；文件状态：staged:Stage(Index)
 * 版本库|本地仓库（Repository）:.git文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；里还包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History
 * 远程仓库(Remote):通常使用clone命令将远程仓库拷贝到本地仓库中，开发后推送到远程仓库中即可；
 
@@ -422,15 +423,15 @@ git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1
 
 #### 暂存区
 
+* commit:生成上次提交的状态与当前状态的差异记录（也被称为revision）,系统会根据修改的内容计算出没有重复的40位英文及数字来给提交命名
+* stash:还未提交的修改内容以及新添加的文件，留在索引区域或工作树的情况下切换到其他的分支时，修改内容会从原来的分支移动到目标分支.如果在checkout的目标分支中相同的文件也有修改，checkout会失败的。这时要么先提交修改内容，要么用stash暂时保存修改内容后再checkout
 * merge 命令把不同分支合并起来。合并前，索引必须和当前提交相同。
     - 如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做。
     - 如果当前提交是另一个分支的祖父节点，就导致fast-forward合并。指向只是简单的移动，并生成一个新的提交。
     - 一次真正的合并。默认把当前提交(ed489 如下所示)和另一个提交(33104)以及他们的共同祖父节点(b325c)进行一次三方合并。结果是先保存当前目录和索引，然后和父节点33104一起做一次新提交。
 * cherry-pick命令"复制"一个提交节点并在当前分支做一次完全一样的新提交。
 * 衍合是合并命令的另一种选择。合并把两个父分支合并进行一次提交，提交历史不是线性的。衍合在当前分支上重演另一个分支的历史，提交历史是线性的。 本质上，这是线性化的自动的 cherry-pick
-![merge](../_static/merge.svg "merge")
-![cherry-pick](../_static/cherry-pick.svg "cherry-pick")
-![rebase](../_static/rebase.svg "rebase"):上面的命令都在topic分支中进行，而不是master分支，在master分支上重演，并且把分支指向新的节点。注意旧提交没有被引用，将被回收。
+* 上面的命令都在topic分支中进行，而不是master分支，在master分支上重演，并且把分支指向新的节点。注意旧提交没有被引用，将被回收。
 
 ```sh
 # 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志.进行一次包含最后一次提交加上工作目录中文件快照的提交
@@ -440,6 +441,11 @@ git commit -a # 把unstaged文件变成staged(不包括新建文件)，然后com
 git commit –am[-a -m] "message" # git add . + git commit -m 'message' 合并使用,只提交修改
 git commit -v # 提交时显示所有diff信息
 git commit --amend [file1] [file2] ... # 修改上一次提交日志 使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
+
+# message 格式
+# 第1行：提交修改内容的摘要
+# 第2行：空行
+# 第3行以后：修改的理由
 
 # 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
 git log -p <file> # 跟踪查看某个文件的历史修改记录 每一次提交是一个快照，会计算每次提交的diff，作为一个patch显示
@@ -500,9 +506,23 @@ git stash pop stash@{num} # 恢复指定编号的 WIP，同时从队列中移除
 git stash clear # 删除所有
 ```
 
+![merge](../_static/merge.svg "merge")
+![cherry-pick](../_static/cherry-pick.svg "cherry-pick")
+![rebase](../_static/rebase.svg "rebase"):
+
 #### 分支
 
-branch name should be descriptive。创建分支后, 分支操作不会影响master分支, 但是master分支改变会影其它分支
+* 远程：多人共享而建立
+* 本地：
+* merge:保持修改内容的历史记录，但是历史记录会很复杂
+  - fast-forward:bugfix分支的历史记录包含master分支所有的历史记录，所以通过把master分支的位置移动到bugfix的最新分支上，Git 就会合并
+* rebase:历史记录简单，是在原有提交的基础上将差异内容反映进去。因此，可能导致原本的提交内容无法正常运行
+  - 待合并分支rebase主分支
+  - 主分钟merge待合并分支
+* 流程
+  - 在topic分支中更新merge分支的最新代码，请使用rebase。
+  - 向merge分支导入topic分支的话，先使用rebase，再使用merge
+* branch name should be descriptive
 
 ```sh
 git branch [-r]|[-a] # 列出所有远程/所有分支，不带参数时列出本地分支
@@ -537,6 +557,8 @@ git rm filename # 从 HEAD 中删除文件
 
 #### 远程分支
 
+* pull:远程数据库的内容就会自动合并，=fetch+merge
+* fetch:取得远程数据库的最新历史记录到本地
 * merge 处理冲突更直接
 * rebase 合并分支，重写历史
   * 合并分支，但是不合并提交记录（commit）
