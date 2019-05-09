@@ -1,6 +1,6 @@
 # Markdown 语法 Markdown syntax guide
 
-Markdown is a way to style text on the web. You control the display of the document; formatting words as bold or italic, adding images, and creating lists are just a few of the things we can do with Markdown. Mostly, Markdown is just regular text with a few non-alphabetic characters thrown in, like # or *.
+Markdown is a way to style text on the web. You control the display of the document; formatting words as bold or italic, adding images, and creating lists are just a few of the things we can do with Markdown. Mostly, Markdown is just regular text with a few non-alphabetic characters thrown in, like `#` or `*`.
 
 GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :smile:
 
@@ -21,9 +21,9 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 <!-- more -->
 --------------------------------------------------------------------------------
 
-## 标题  Headers
+## 标题 Headers
 
-Markdown 语法：**Example:**
+**Example:**
 
 ```
 # 第一级标题 `<h1>`
@@ -35,9 +35,10 @@ Markdown 语法：**Example:**
 ###### This is an `<h6>` tag
 ```
 
-效果如下：**Result:**
+**Result:**
 
-# 第一级标题 `<h1>`
+# 第一级标题 
+<h1>第一级标题</h1>
 ## 第二级标题 `<h2>`
 ###### 第六级标题 `<h6>`
 
@@ -47,7 +48,7 @@ Markdown 语法：**Example:**
 
 ## 强调 Emphasis
 
-Markdown 语法： **Example:**
+**Example:**
 
 * Bold:command/control + b
 * Italic:command/control + i
@@ -73,7 +74,7 @@ __This will also be bold__
 ~~This was mistaken text~~
 ```
 
-效果如下：**Result:**
+**Result:**
 
 *这些文字会生成`<em>`*
 _这些文字会生成`<u>`_
@@ -105,7 +106,7 @@ __This will also be bold__
 
 ### 无序列表 Unordered
 
-Markdown 语法： **Example:**
+Markdown **Example:**
 
 ```
 * 项目一 无序列表 `* + 空格键`
@@ -158,7 +159,7 @@ Markdown 语法：**Example:**
 
 ### 任务列表 Task lists
 
-Markdown 语法： **Example:**
+Markdown **Example:**
 
 ```
 - [ ] 任务一 未做任务 `- + 空格 + [ ]`
@@ -176,7 +177,7 @@ Markdown 语法： **Example:**
 
 ## 图片 Images
 
-Markdown 语法： **Example:**
+Markdown **Example:**
 格式: Format: ![Alt Text](url)
 ```
 ![GitHub set up](http://zh.mweb.im/asset/img/set-up-git.gif)
@@ -192,7 +193,7 @@ Markdown 语法： **Example:**
 
 ## 链接 Links
 
-Markdown 语法： **Example:**
+Markdown **Example:**
 
 ```
 email <example@example.com>
@@ -228,7 +229,7 @@ You can link directly to a section in a rendered file by hovering over the secti
 
 ## 区块引用 Blockquotes/Quoting text
 
-Markdown 语法： **Example:**
+Markdown **Example:**
 
 ```
 某某说:
@@ -257,7 +258,7 @@ As Kanye West said:
 
 ## 行内代码 Inline code/Quoting code
 
-Markdown 语法： **Example:**
+Markdown **Example:**
 
 ```
 像这样即可：`<addr>` `code`
@@ -272,7 +273,7 @@ I think you should use an `<addr>` `code` element here instead.
 
 ## 多行或者一段代码 Multi-line code
 
-Markdown 语法： **Example:**
+Markdown **Example:**
 
 ```js
 function fancyAlert(arg) {
@@ -294,7 +295,7 @@ function fancyAlert(arg) {
 
 ## 顺序图或流程图 Sequence and Flow chart github不支持
 
-Markdown 语法： **Example:**
+Markdown **Example:**
 
     ```sequence
     张三->李四: 嘿，小四儿, 写博客了没?
@@ -375,7 +376,7 @@ cond(no)->sub1(right)->op1
 
 ## 表格 Tables
 
-Markdown 语法： **Example:**
+Markdown **Example:**
 
 ```
 First Header | Second Header
@@ -497,7 +498,7 @@ This is a footnote:[^sample_footnote]
 
 Insert `[ TOC ]` without spaces to generate a table of contents (builtin parsers only).
 
-Markdown 语法： **Example:**
+Markdown **Example:**
 
 ```
 [TOC]
