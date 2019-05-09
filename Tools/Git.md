@@ -683,6 +683,7 @@ git tag -l
 git show [tag]  # 查看tag信息
 
 git tag -a v2.1 -m 'first version' # -a 创建一个带注释的标签，不带-a的话，不会记录时间 作者 以及注释
+git tag -am v2.2 "连猴子都懂的Git"
 git tag -a tagName commitId # 追加tag在指定commit
 git tag -s tagname -m "messsage" # PGP签名标签
 
