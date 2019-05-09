@@ -677,6 +677,10 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 > Not an editor command: ^M
 :set fileformat=unix :w
 
+## 问题
+
+> .git/rebase-merge/git-rebase-todo" E509: Cannot create backup file (add ! to override)
+
 ## 配置
 
 * [amix/vimrc](https://github.com/amix/vimrc):The ultimate Vim configuration: vimrc
@@ -704,7 +708,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 ## 教程
 
 * [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)
-* Doist 创业公司 CEO amix 的 Vim 配置，被称之为最强 vimrc：https://github.com/amix
-* junegunn 是韩国的一个大牛，擅长写 Vim 插件，他的 Vim 插件看起来总是令人赏心悦目：https://github.com/junegunn/vim-plug
-* SpaceVim，一个开箱即用的 Vim 配置，对新手很友好，和 Spacemacs 一样，有着很完善的文档：https://github.com/SpaceVim/SpaceVim
-* reddit 的 Vim 频道，有很多最前沿的 Vim 技巧:https://www.reddit.com/r/vim/
+* [vimrc](https://github.com/amix) :Doist 创业公司 CEO amix 的 Vim 配置，被称之为最强
+* <https://github.com/junegunn/vim-plug>: junegunn 是韩国的一个大牛，擅长写 Vim 插件，看起来总是令人赏心悦目
+* [SpaceVim](https://github.com/SpaceVim/SpaceVim):一个开箱即用的 Vim 配置，对新手很友好，和 Spacemacs 一样
+* [reddit 的 Vim 频道](https://www.reddit.com/r/vim/):有很多最前沿的 Vim 技巧
