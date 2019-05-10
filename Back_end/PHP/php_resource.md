@@ -215,6 +215,8 @@ yarn install
 yarn run gulp
 php bin/console server:start
 open http://127.0.0.1:8000
+
+
 ```
 
 ## 持续集成 Continuous Integration
