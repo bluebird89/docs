@@ -50,7 +50,7 @@ fi
   - /etc/gitconfig文件
   - ubuntu:~/.gitconfig
 * 系统配置： `git config --system`
-* 项目配置：project/.git/config   `git config`
+* 项目配置：`git local --system` project/.git/config   `git config`
 * alias说明
   + prune = fetch --prune - 当在其他人将分支推送到远程仓库时，我也会得到了大量的本地分支。Prune可以删除远端已经删除的任何本地分支。
   + undo = reset --soft HEAD ^ - 如果我在做出提交时犯了一个错误，这个命令会把代码恢复到提交之前的样子。通常我只是在这种情况下修改现有的提交，因为它保留了提交信息。
@@ -133,7 +133,7 @@ gpgSign = true
 # https://git-scm.com/docs/git-config#git-config-commitgpgSign
 
 [push]
-default = simple
+default = current
 # "push the current branch back to the branch whose changes are usually integrated into the current branch"
 # "refuse to push if the upstream branch’s name is different from the local one"
 # https://git-scm.com/docs/git-config#git-config-pushdefault
@@ -408,7 +408,7 @@ git reset –hard HEAD^ | HEAD^^ | HEAD~100 # 回退版本
 git reset –hard dc5f1d1 # 只要记得版本号就可以穿梭回到现代
 git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be
 
-git revert [commit]|HEAD # 回退到某个提交，但是不删除commit
+git revert [commit]|HEAD # 回退到某个提交，但是不删除commit,会产生新提交
 
 # 移除没有track文件
 git clean -f     # remove untracked files
@@ -497,7 +497,7 @@ git show [commit] # 显示某次提交的元数据和内容变化
 git show --name-only [commit] # 显示某次提交发生变化的文件
 git show [commit]:[filename] # 显示某次提交时，某个文件的内容
 
-git blame filename # 可以给你文件的每行信息都进行注释，然后就可以看到关于该行修改的每一次 commit 的哈希标签、作者和提交日期。
+git blame filename # 文件每行修改的 commit 的哈希标签、作者和提交日期
 
 git stash # 将当前目录和index中的所有改动(但不包括未track的文件)临时存放在 stash 队列中,注意：未提交到版本库的文件会自动忽略，只要不运行 git clean -fd . 就不会丢失
 git stash save "stash name"
@@ -538,6 +538,7 @@ git branch -av # 查看所有分支（包括远程分支）和最后一次提交
 
 git branch <new-branch> <old-branch>|[commit] # 新建分支，不带old-branch为默认在当前分支上建立新分支 但依然停留在当前分支
 git branch --track [branch] [remote-branch] # 新建一个分支，与指定的远程分支建立追踪关系
+git branch repair remotes/origin/master
 git checkout -b newBrach origin/master|[tag] # 在origin/master的基础上，创建一个新分支，并切换到new分支
 git checkout dev # 切换
 git checkout - # 切换到上一个分支
@@ -602,9 +603,10 @@ git fetch -p # 拉取所有分支的变化，并且将远端不存在的分支�
 # 合并 commit 冲突 记为解决状态加入暂存区
 # <<<HEAD是指主分支修改的内容，>>>>>fenzhi1 是指fenzhi1上修改的内容
 # 合并分支时，git一般使用”Fast forward”模式，在这种模式下，删除分支后，会丢掉分支信息，现在我们来使用带参数 –no-ff来禁用”Fast forward”模式。
-git merge origin/master  # 抓取远程仓库更新  将远程主分支合并到本地当前分支 等同于git pull
+git merge 　--squash origin/master  # 抓取远程仓库更新  将远程主分支合并到本地当前分支 等同于git pull
 git merge new # 合并指定分支到当前分支，新增一个 commit 追加
 git merge --no-ff master
+git merge 　--squash  # 压缩分支的提交
 git mergetool # 使用配置的合并工具来解决冲突
 
 git checkout --ours <文件名> # 使用当前分支 HEAD 版本
@@ -618,13 +620,16 @@ git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲
 git rebase someFeature # 将someFeature分支上的commit记录追加到主分支上 合并分支，但是不合并提交记录（commit），rebase合并如果有冲突则一个一个文件的去合并解决冲突
 git rebase origin/master # 在本地分支上合并远程分支
 git rebase source destiantion # 将source压缩到destiantion
-git rebase -–continue|skip|abort # 如果出错的话
+git rebase --continue|skip|abort # 如果出错的话
 git rebase --onto master server client # 取出 client 分支，找出处于 client 分支和 server 分支的共同祖先之后的修改，然后把它们在 master 分支上重放一遍
 
+git rebase -i parantCommitId  #　通过交互式的 rebase 调到修改信息开始的地方
+# pick:保留
+# reword:修改消息
+# edit: 修改提交
+# squash: 合并之前的提交 
 git rebase -i start_commit_hash end_commit_hash # combine to one commit
-git rebase -i HEAD~5 # Squash last n commits into one commit
-git rebase -i # 通过交互式的 rebase，提供对分支 commit 的控制，从而可以清理混乱的历史。
-git rebase -i parantCommitId  # 修改旧的 commit 的 message 入交互式界面后修改 pick 为 reward，然后修改 commit 的 message。
+
 git pull <远程主机名> <远程分支名>:<本地分支名> #  取回远程仓库的变化，并与本地分支合并;远程分支是与当前分支合并，则冒号后面的部分可以省略;等同于先做git fetch，再做git merge.如果当前分支与远程分支存在追踪关系，`git pull`就可以省略远程分支名
 git pull # 执行的是 git merge
 git pull <remote> <branch>    # 抓取远程仓库所有分支更新并合并到本地
