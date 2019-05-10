@@ -611,7 +611,10 @@ git checkout --ours <文件名> # 使用当前分支 HEAD 版本
 git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的
 
 # rebase:将本次修改起始的远程仓库节点之后的修改内容优先合并到本地修改分支上
-# conflict：git rebase出现冲突，修改冲突文件，每次修改,只修改自己添加的内容，git add .每次不需commit，git rebase --continue 最后git push -f提交到远程仓库
+# conflict：git rebase出现冲突，
+#   修改冲突文件，每次修改,只修改自己添加的内容，git add . 不需commit
+#   git rebase --continue 
+#   git push 提交到远程仓库
 git rebase someFeature # 将someFeature分支上的commit记录追加到主分支上 合并分支，但是不合并提交记录（commit），rebase合并如果有冲突则一个一个文件的去合并解决冲突
 git rebase origin/master # 在本地分支上合并远程分支
 git rebase source destiantion # 将source压缩到destiantion
