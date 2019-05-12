@@ -40,3 +40,4 @@
 * [hnarayanan/shpotify](https://github.com/hnarayanan/shpotify):A command-line interface to Spotify. https://harishnarayanan.org/projects/
 * [musicforprogramming](https://musicforprogramming.net/)
 * [MusicTools](http://tool.yijingying.com/musictools/)
+* <http://www.qqyewu.com/>

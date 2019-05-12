@@ -97,13 +97,6 @@ npm install gitbook-cli -g
 - [石墨文档](https://shimo.im)
 - [GitbookIO/gitbook](https://github.com/GitbookIO/gitbook):📝 Modern documentation format and toolchain using Git and Markdown https://www.gitbook.com
 
-### apidoc
-
-```sh
-npm install apidoc -g
-apidoc -i myapp/ -o apidoc/ -t mytemplate/
-```
-
 ## PPT
 
 * [slideshare](https://www.slideshare.net/):Share what you know and love through presentations, infographics, documents and more

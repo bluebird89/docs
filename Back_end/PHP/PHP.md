@@ -1684,6 +1684,12 @@ echo "Associative array always output as object: ", json_encode($d, JSON_FORCE_O
 ?>
 ```
 
+## XML
+
+* simplexml_load_file
+
+gethostbyaddr
+
 ##  密码散列算法函数
 
 * password_​get_​info
@@ -1905,8 +1911,8 @@ time php php-src/Zend/micro_bench.php # 源码自带性能测试
     - CGI
     - php-fpm
 
-```
-< ?php header("Content-type: text/html; charset=utf-8"); ?>
+```php
+<?php header("Content-type: text/html; charset=utf-8"); ?>
 ```
 
 ## 插件
