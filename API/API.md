@@ -101,6 +101,168 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
 * HOTP：HMAC-based One-Time Password 基于HMAC算法加密的一次性密码。
 * TOTP：Time-based One-Time Password 基于时间戳算法的一次性密码。
 
+### apidoc
+
+* 配置
+    - 每次导出接口文档都必须要让apidoc读取到apidoc.json文件(如果未添加配置文件，导出报错)，可以在项目的根目录下添加apidoc.json文件
+    - 项目中使用了package.json文件(例如:node.js工程)，可以将apidoc.json文件中的所有配置信息放到package.json文件中的apidoc参数中
+    - 参数
+        + name
+        + version
+        + description
+        + title
+        + url
+        + header.title
+        + header.filename   页眉文件名(markdown)
+        + footer.title    页脚导航标题
+        + footer.filename     页脚文件名(markdown)
+        + order   接口名称或接口组名称的排序列表,如果未定义，那么所有名称会自动排序 "Error", "Define", "PostTitleAndError", "PostError"
+
+```
+# 安装
+npm install apidoc -g
+apidoc -i myapp/ -o apidoc/ -t mytemplate/
+
+# 支持中文title
+
+# apidoc.json
+{
+  "name": "example",
+  "version": "0.1.0",
+  "description": "apiDoc basic example",
+  "title": "Custom apiDoc browser title",
+  "url" : "https://api.github.com/v1"
+}
+
+# package.json
+{
+  "name": "example",
+  "version": "0.1.0",
+  "description": "apiDoc basic example",
+  "apidoc": {
+    "title": "Custom apiDoc browser title",
+    "url" : "https://api.github.com/v1"
+  }
+}
+```
+
+## 语法
+
+```
+# 注释模块: 通用可复用的注释模块(例如:接口错误响应模块),只需要在源代码中定义一次，便可以在其他注释模块中随便引用，最后在文档导出时会自动替换所引用的注释模块，定义之后您可以通过@apiUse来引入所定义的注释模块
+/**
+ * @apiDefine name [title]
+                     [description]
+ */
+/**
+ * @apiDefine MyError
+ * @apiError [(group)] [{type}] field [description]
+  * @apiError UserNotFound The <code>id</code> of the User was not found.
+ */
+/**
+ * @apiDefine admin User access only
+ * This optional description belong to to the group admin.
+ */
+/**
+ * @apiDefine MySuccess
+ * @apiSuccess {string} firstname The users firstname.
+ * @apiSuccess {number} age The users age.
+ */
+
+# 标注一个接口已经被弃用
+/**
+ * @apiDeprecated use now (#Group:Name).
+ *
+ * Example: to set a link to the GetDetails method of your group User
+ * write (#User:GetDetails)
+ */
+
+/**
+ * @apiIgnore [hint]
+ * @apiIgnore Not finished Method
+
+ * @api {method} path [title]
+ * @api {get} /user/:id
+
+ * @apiVersion 1.6.2
+
+ * @apiName name
+ *
+ * @apiDescription This is the Description.
+ * It is multiline capable.
+ *
+ * Last line of Description.
+
+ * @apiGroup User
+
+ * @appUse MyError
+ * @apiPermission admin|none
+ * @apiUse MySuccess
+
+ * # 定义为私有的接口，可以在生成接口文档的时候，通过在命令行中设置参数 --private false|true来决定导出的文档中是否包含私有接口
+ * @apiPrivate
+ *
+ * 导出的html接口文档中会包含模拟接口请求的form表单；如果在配置文件apidoc.json中设置了参数sampleUrl,那么导出的文档中每一个接口都会包含模拟接口请求的form表单，如果既设置了sampleUrl参数，同时也不希望当前这个接口不包含模拟接口请求的form表单
+ * @apiSampleRequest url
+ * @apiSampleRequest off
+
+ * @apiHeader [(group)] [{type}] [field=defaultValue] [description]
+ * @apiHeader {String} access-key Users unique access-key.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Accept-Encoding": "Accept-Encoding: gzip, deflate"
+ *     }
+ *
+ * @apiParam [(group)] [{type}] [field=defaultValue] [description]
+ * @apiParam {Number} id Users unique ID.
+ * @api {post} /user/
+ * @apiParam {String} [firstname]  Optional Firstname of the User.
+ * @apiParam {String} lastname     Mandatory Lastname.
+ * @apiParam {String} country="DE" Mandatory with default value "DE".
+ * @apiParam {Number} [age=18]     Optional Age with default 18.
+ *
+ * @apiParam (Login) {String} pass Only logged in users can post this.
+ *                                 In generated documentation a separate
+ *                                 "Login" Block will be generated.
+
+ * @apiParamExample [{type}] [title]
+                   example
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "id": 4711
+ *     }
+ *
+ * @apiError UserNotFound The <code>id</code> of the User was not found.
+ * @apiErrorExample [{type}] [title]
+ *               example
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "UserNotFound"
+ *     }
+
+ * @apiExample [{type}] title
+            example
+ * @apiExample {curl} Example usage:
+ *     curl -i http://localhost/user/4711
+ *
+ * @apiSuccess [(group)] [{type}] field [description]
+ * @apiSuccess (200) {String} lastname  Lastname of the User.
+ * @apiSuccess {Boolean} active        Specify if the account is active.
+ * @apiSuccess {Object}  profile       User profile information.
+ * @apiSuccess {Number}  profile.age   Users age.
+ * @apiSuccess {String}  profile.image Avatar-Image.
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "firstname": "John",
+ *       "lastname": "Doe"
+ *     }
+ */
+
+```
+
 ## 测试
 
 * [apiaryio/dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool https://dredd.org

@@ -15,11 +15,15 @@ DPI 是一种将图像的面积和理论打印尺寸进行关联的文件属性�
 
 * WebP：出于减少数据量、加速网络传输的目的而开发的。这是Google旧款VP8编码(已在2010五月开源)的衍生分支，在质量等同于JPEG的情况下压缩文件尺寸。Edge、Firefox。Google声称从PNG格式转换至WebP格式后文件尺寸能够减少28%至45%，其中压缩比例具体取决于原始PNG格
 
+## 原理
+
+* 图片编辑软件
+
 ## 工具
 
 * [IMageMagick](https://imagemagick.cn/)
     - convert:转换图像格式，调整图像大小、模糊、裁剪、去斑、抖动、绘图、翻转、加入、重新采样等等
-    - mogrify：批量缩放大小
+    - mogrify:批量缩放大小
 * [nagadomi/waifu2x](https://github.com/nagadomi/waifu2x):Image Super-Resolution for Anime-Style Art
 * [photoprism/photoprism](https://github.com/photoprism/photoprism):Personal photo management powered by Go and Google TensorFlow https://photoprism.org/
 * [google/filament](https://github.com/google/filament):Filament is a real-time physically based rendering engine for Android, Windows, Linux, macOS and WASM/WebGL

@@ -46,6 +46,7 @@ brew config
 brew tap homebrew/services # brew 服务管理
 brew tap caskroom/cask
 brew tap caskroom/versions
+brew untap Homebrew/homebrew-versions # Remove a tapped repository
 
 brew list --versions # 列出本机通过brew安装的所有软件
 
@@ -55,18 +56,19 @@ brew install -vd FORMULA
 brew install tig
 brew install bash-completion
 
-brew search name # 搜索brew 支持的软件（支持模糊搜索
+brew search name| /wget*/ # 搜索brew 支持的软件（支持模糊搜索
 
 brew (info|home|options) [FORMULA...]
 
-brew deps * # 显示包依赖
+brew deps name * # 显示包依赖
 brew server * # 启动web服务器，可以通过浏览器访问http://localhost:4567/ 来同网页来管理包
 
 brew update
 brew outdated # 查看哪些程序需要更新  brew update && brew upgrade
 
 brew upgrade name  #更新安装过的软件(如果不加软件名，就更新所有可以更新的软件)
-brew uninstall name # 卸载软件
+brew uninstall --force name # 卸载软件
+brew remove  name # 卸载软件
 
 brew cleanup #清除下载的缓存
 brew update && brew upgrade && brew cleanup ; say mission complete
