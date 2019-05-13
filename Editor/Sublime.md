@@ -85,6 +85,9 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
 -   HTML-CSS-JS Prettify：格式化（美化）html、css、js三种文件类型的插件
 -   JavaScript Patterns
 -   jQuery:插件强大
+-   La​Te​XTools:LaTeX 环境配置以及编译
+-   LaTeX-cwl LaTeX 命令的自动补全
+-   LaTeXYZ 提供更加智能的数学环境下的自动补全以及快捷键
 -   Markdown Preview
 -   MarkdownEditing
 -   Modific:高亮自上次提交后修改过的代码行（支持Git，SVN，Bazaar，Mercurial以及TFS）

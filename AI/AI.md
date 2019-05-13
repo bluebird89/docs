@@ -68,6 +68,9 @@
         + 林轩田《机器学习技法》
             * [中文视频](https://www.bilibili.com/video/av36760800)
             * [中文笔记](https://redstonewill.com/category/ai-notes/lin-ml-techniques/)
+        + [机器学习-李宏毅(2019) Machine Learning](https://www.bilibili.com/video/av35932863)
+            * [李宏毅《机器学习》大纲](https://datawhalechina.github.io/Leeml-Book/#/)
+            * [site](http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17.html)
     - 书籍
         + 《机器学习》:周志华的《机器学习》被大家亲切地称为西瓜书
             * [读书笔记](https://www.cnblogs.com/limitlessun/p/8505647.html#_label0)
