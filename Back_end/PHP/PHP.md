@@ -229,8 +229,9 @@ pecl channel-update pecl.php.net
         + 常量只能用 define() 函数定义，而不能通过赋值语句；
         + 常量可以不用理会变量的作用域而在任何地方定义和访问；
         + 常量一旦定义就不能被重新定义或者取消定义；
-        + 常量的值只能是标量
-    - define()函数：define(name, value, case-insensitive = false) 区分大小写
+        + 常量的值只能是标量, PHP 7 中还允许是个 array
+    - define()函数：define(name, value, case-insensitive = false) 区分大小写,成功时返回 TRUE， 或者在失败时返回 FALSE
+    - defined — 检查某个名称的常量是否存在
     - const关键字在编译时定义常量。 它是一个语言构造不是一个函数。比define()快一点，因为它没有返回值。它总是区分大小写的
     - 魔术常量
         + `__LINE__`  表示使用当前行号。
@@ -556,7 +557,7 @@ $foo = 5 * "10 Small Pigs";     // $foo 是整数 (50)
     - switch语句
 * 循环
     - for语句
-    - foreach循环循环用于遍历数组元素
+    - foreach循环循环用于遍历数组元素、对象属性
     - while
     - do...while
 * break:中断了当前for，while，do-while，switch和for-each循环的执行。 如果在内循环中使用break，它只中断了内循环的执行。接受一个可选的数字参数来决定跳出几重循环
@@ -693,6 +694,15 @@ E_ALL & ~E_NOTICE # 除了提示级别
 E_ALL ^ E_NOTICE #
 E_ERROR | E_RECOVERABLE_ERROR # 只显示错误和可恢复
 
+# 异或运算同样的值两次能还原为原理的值
+$arr=[6,8];
+$arr[0] = $arr[0] ^ $arr[1];
+var_dump($arr); # array(2) { [0]=> int(14) [1]=> int(8) }
+$arr[1] = $arr[0] ^ $arr[1];
+var_dump($arr); # array(2) { [0]=> int(14) [1]=> int(6) }
+$arr[0] = $arr[0] ^ $arr[1];
+var_dump($arr); # array(2) { [0]=> int(8) [1]=> int(6) }
+
 echo 1 <=> 1; // 0
 echo 1 <=> 2; // -1
 echo 2 <=> 1; // 1
@@ -717,7 +727,6 @@ var_dump(!($a instanceof stdClass)); # true
 #### 杂项
 
 * 数学函数
-
 * 电子邮件
 
 ```php
@@ -1159,6 +1168,10 @@ echo ("Page Views: ".$_SESSION['counter']);
 ### 文件操作
 
 * 创建文件
+* 访问一个文件有三种方式
+    - 相对文件名形式如foo.txt，它会被解析为 currentdirectory/foo.txt
+    - 相对路径名形式如subdirectory/foo.txt。它会被解析为 currentdirectory/subdirectory/foo.txt
+    - 绝对路径名形式如/main/foo.txt。它会被解析为/main/foo.txt
 * 打开文件：resource fopen ( string $filename , string $mode [, bool $use_include_path = false [, resource $context ]] )函数用于打开文件或URL并返回资源。 fopen()函数接受两个参数$ filename和$mode。 $filename表示要被打开的文件，$mode表示文件模式
     - r 以只读模式打开文件。 它将文件指针放在文件的开头。
     - r+  以读写模式打开文件。 它将文件指针放在文件的开头。
@@ -1320,9 +1333,9 @@ echo 'Connected successfully';
 
 $sql = 'CREATE Database mydb';
 if(mysqli_query( $conn,$sql)){
-  echo "Database mydb created successfully.";
+    echo "Database mydb created successfully.";
 }else{
-echo "Sorry, database creation failed ".mysqli_error($conn);
+    echo "Sorry, database creation failed ".mysqli_error($conn);
 }
 
 $sql = "create table emp5(id INT AUTO_INCREMENT,name VARCHAR(20) NOT NULL,
@@ -1388,7 +1401,7 @@ echo "0 results";
 mysqli_close($conn);
 ```
 
-### 面向对象(OOP)
+## 面向对象(OOP)
 
 * 继承：类分层、接口分层
 * 实现：类实现接口
@@ -1397,25 +1410,53 @@ mysqli_close($conn);
 * 聚合：可以有
 * 组合：必须有
 
-#### 对象
+### 类
 
-对象是一堆属性组成。对象在底层的实现。采取属性数组+方法数组来实现的。对象在zend中的定义是使用了一种zend_object_value结构体来存储的，这个结构体包含：
+* spl_autoload：__autoload()函数的默认实现
+* spl_autoload_register:  注册给定的函数作为 __autoload（7.2之后废弃） 的实现，替代spl_autoload（）
+* 构造函数：创建新对象时先调用此方法，适合在使用对象之前做一些初始化工作
+    - 子类中定义了构造函数则不会隐式调用其父类的构造函数
+    - 要执行父类的构造函数，需要在子类的构造函数中调用 parent::__construct()
+    - 如果子类没有定义构造函数则会如同一个普通的类方法一样从父类继
+* 析构函数
+* 父类中的方法被声明为 final，则子类无法覆盖该方法。如果一个类被声明为 final，则不能被继承
 
-* 一个指针，也就是说明这个对象由哪个类实现出来的，这个类在哪里。
-* 这个对象的属性。
-* guards,阻止递归调用的。
+### 对象
 
-对象的方法不会存在对象里面，要使用对象的方法，实际上是通过指针找到这个类，再用这个类里面的方法来执行的。（通过类序列化检测）
+* 对象是一堆属性组成。在底层的实现,采取属性数组+方法数组来实现的。对象在zend中的定义是使用了一种zend_object_value结构体来存储的，这个结构体包含：
+    - 一个指针，也就是说明这个对象由哪个类实现出来的，这个类在哪里
+    - 这个对象的属性。
+    - guards,阻止递归调用的。
+    - 对象的方法不会存在对象里面，要使用对象的方法，实际上是通过指针找到这个类，再用这个类里面的方法来执行的。（通过类序列化检测）
+* 延迟绑定：子类重写父类方法，其它调用该方法时用static而非self
+    - static:: 不再被解析为定义当前方法所在的类，而是在实际运行时计算的。也可以称之为"静态绑定"，因为它可以用于（但不限于）静态方法的调用
+    - 当进行静态方法调用时，该类名即为明确指定的那个（通常在 :: 运算符左侧部分）
+    - 当进行非静态方法调用时，即为该对象所属的类。
+* 对象复制：对对象的所有属性执行一个浅复制（shallow copy）。所有的引用属性 仍然会是一个指向原来的变量的引用
+* 默认情况下对象是通过引用传递的:对象作为参数传递、作为结果返回或者赋值给另外一个变量，另外一个变量跟原来的不是引用的关系，只是他们都保存着同一个标识符的拷贝，这个标识符指向同一个对象的真正内容
+* 场景
+    + PHP异步调用
+    + 正则匹配src标签
+    + 处理回文字符
 
-延迟绑定：之类重写父类方法，其它调用该方法时用static而非self
+```php
+class A {
+    public static function who() {
+        echo __CLASS__;
+    }
+    public static function test() {
+        self::who();
+    }
+}
 
-- PHP异步调用
-- 正则匹配src标签
-- 处理回文字符
+class B extends A {
+    public static function who() {
+        echo __CLASS__;
+    }
+}
 
-#### 继承
-
-默认继承父类构造函数
+B::test(); # A
+```
 
 #### 访问控制(可见性)
 
@@ -1428,7 +1469,7 @@ mysqli_close($conn);
 
 * self
 * parent
-* static:调用类里面的方法
+* static:调用类里面的静态属性与静态方法
 
 ```php
 class Test
@@ -1552,38 +1593,18 @@ printworking(new manager());//显示经理的工作
 ?>
 ```
 
-静态方法只能调静态变量
-
-#### trait
-
-实现多继承,优先级:当前类的成员>trait 的方法>被继承的方法。
-
-```php
-Trait OwnerTrait{
-    public function owner(){
-        var_dump('comment owner');
-    }
-}
-
-class Comment{
-    use OwnerTrait;
-}
-//(new Comment())->owner();
-// 或者以下两行代码是一样的效果
-$comment = new Comment();
-$comment->owner();
-```
-
 #### 接口与抽象类
 
+* 接口是通过interface关键字来定义的，但其中定义所有的方法都是空的，访问控制必须是public。
+* 接口可以如类一样定义常量，可以使用extends来继承其他接口
 * 接口中的每个方法，继承类里面都要去实现
 * 接口中的方法后面不要跟大口号{},因为接口只是定义需要有这个函数，并不是自己去实现
-* 抽象类中 abstract 的方法，继承类里面都要去实现，也可以理解成接口中的每个方法都是 abstract 方法
+* 不能实例化，抽象类中 abstract 的方法，强制要求子类定义这些方法，也可以理解成接口中的每个方法都是 abstract 方法
 * 抽象方法中没有abstract 的方法，继承类不必非要写那个方法
-* 举例,场景：我们在记录日志的时候，有时候可能需要写入文件，有时候可能写入数据库 这时候，我们可以写一个Log接口，定义需要的方法 然后分别写一个FileLog类和一个DatabaseLog类 然后我们写一个UsersController类做一个依赖注入，这样我们需要使用哪种方式写日志，实例化的时候，注入哪种类即可
-* 抽象类定义要使用abstract关键字来声明，凡是用abstract关键字定义了抽象方法的类必须声明为抽象类。另外，子类实现抽象方法时访问控制必须和父类中一样（或者更为宽松），同时调用方式必须匹配，即类型和所需参数数量必须一致；
-* 接口是通过interface关键字来定义的，但其中定义所有的方法都是空的，访问控制必须是public。另外，接口可以如类一样定义常量，可以使用extends来继承其他接口；
+* 抽象类定义要使用abstract关键字来声明，凡是用abstract关键字定义了抽象方法的类必须声明为抽象类。
+* 子类实现抽象方法时访问控制必须和父类中一样（或者更为宽松），同时调用方式必须匹配，即类型和所需参数数量必须一致；
 * 抽象类可用于对多个同构类的通用部分定义，用extends关键字继承(父子间存在"is a"关系)，属单继承。接口可用于多个异构类的通用部分定义，用implements关键字继承(父子间存在"like a"关系)，可多继承。如果子类不能实现父类或接口的全部抽象方法，则该子类只能被声明成抽象类。
+* 接口比抽象更严格，
 * 重写vs重载
     - 重载指多个名字相同，但参数不同的函数在同一作用域并存的现象.参数不同有三种情况：参数个数不同，参数类型不同，参数顺序不同.函数重载多见于强类型语言，编译后函数在函数符号表的名称一般是函数名加参数类型
         + php不支持：function_exists、 method_exists、is_callable、get_defined_functions、ReflectionMethod/ReflectionFunction类的getParameters/getNumberOfParameters/getNumberOfRequiredParameters
@@ -1629,12 +1650,284 @@ $controller = new UsersController(new FileLog());
 $controller->register();
 ```
 
+#### trait
+
+* 减少单继承语言的限制，自由地在不同层次结构内独立的类中复用 method
+* 优先级:当前类的成员>trait 的方法>被继承的方法
+* Trait 和 Class 相似，但仅仅旨在用细粒度和一致的方式来组合功能。它为传统继承增加了水平特性的组合；也就是说，应用的几个 Class 之间不需要继承。
+* 无法通过 trait 自身来实例化
+
+```php
+class Base {
+    public function sayHi() {
+        echo 'Hello ';
+    }
+}
+
+trait SayWorld {
+    public function sayHello() {
+        parent::sayHello();
+        echo 'World!';
+    }
+}
+
+trait World {
+    public function sayWorld() {
+        echo ' I am coming';
+    }
+}
+
+class MyHelloWorld extends Base {
+    use SayHello, SayWorld;
+}
+
+$o = new MyHelloWorld();
+$o->sayHi();
+$o->sayHello();
+$o->SayWorld();
+```
+
+### 匿名类
+
+* 匿名类被嵌套进普通 Class 后，不能访问这个外部类（Outer class）的 private（私有）、protected（受保护）方法或者属性。 为了访问外部类（Outer class）protected 属性或方法，匿名类可以 extend（扩展）此外部类。 为了使用外部类（Outer class）的 private 属性，必须通过构造器传进来：
+
+```php
+$util->setLogger(new class {
+    public function log($msg)
+    {
+        echo $msg;
+    }
+});
+
+class Outer
+{
+    private $prop = 1;
+    protected $prop2 = 2;
+
+    protected function func1()
+    {
+        return 3;
+    }
+
+    public function func2()
+    {
+        return new class($this->prop) extends Outer {
+            private $prop3;
+
+            public function __construct($prop)
+            {
+                $this->prop3 = $prop;
+            }
+
+            public function func3()
+            {
+                return $this->prop2 + $this->prop3 + $this->func1();
+            }
+        };
+    }
+}
+
+echo (new Outer)->func2()->func3(); # 6
+```
+
+## 魔术方法
+
+* `__construct()`
+* `__destruct()`
+* `__call()`
+* `__callStatic()`
+* `__get()`
+* `__set()`
+* `__isset()`
+* `__unset()`
+* `__sleep()`:serialize() 函数会检查类中是否存在一个魔术方法 __sleep()。如果存在，该方法会先被调用，然后才执行序列化操作,可以用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组,不能返回父类的私有成员的名字。这样做会产生一个 E_NOTICE 级别的错误.
+* `__wakeup()`:unserialize() 会检查是否存在一个 __wakeup() 方法。如果存在，则会先调用 __wakeup 方法，预先准备对象需要的资源
+* `__toString()`:用于一个类被当成字符串时应怎样回应
+* `__invoke()`:当尝试以调用函数的方式调用一个对象时
+* `__set_state()`
+* `__clone()`
+
+```php
+class CallableClass
+{
+    function __invoke($x) {
+        var_dump($x);
+    }
+}
+$obj = new CallableClass;
+$obj(5);
+var_dump(is_callable($obj));
+```
+
+## 命名空间
+
+* 用户编写的代码与PHP内部的类/函数/常量或第三方类/函数/常量之间的名字冲突
+* 为很长的标识符名称(通常是为了缓解第一类问题而定义的)创建一个别名（或简短）的名称，提高源代码的可读性
+* 以下类型的代码受命名空间的影响，它们是：类（包括抽象类和traits）、接口、函数和常量
+* 可以在同一个文件中定义多个命名空间
+* 类名可以通过三种方式引用
+    - 非限定名称，或不包含前缀的类名称，例如 $a=new foo(); 或 foo::staticmethod();。如果当前命名空间是 currentnamespace，foo 将被解析为 currentnamespace\foo。如果使用 foo 的代码是全局的，不包含在任何命名空间中的代码，则 foo 会被解析为foo。
+    - 限定名称,或包含前缀的名称，例如 $a = new subnamespace\foo(); 或 subnamespace\foo::staticmethod();。如果当前的命名空间是 currentnamespace，则 foo 会被解析为 currentnamespace\subnamespace\foo。如果使用 foo 的代码是全局的，不包含在任何命名空间中的代码，foo 会被解析为subnamespace\foo。
+    - 完全限定名称，或包含了全局前缀操作符的名称，例如， $a = new \currentnamespace\foo(); 或 \currentnamespace\foo::staticmethod();。
+* 两种抽象的访问当前命名空间内部元素的方法，__NAMESPACE__ 魔术常量和namespace关键字
+    - 常量__NAMESPACE__的值是包含当前命名空间名称的字符串。在全局的，不包括在任何命名空间中的代码，它包含一个空的字符串
+* 导入：允许通过别名引用或导入外部的完全限定名称
+    - 为类名称使用别名
+    - 为接口使用别名
+    - 为命名空间名称使用别名
+
+```php
+namespace my\name;
+
+class MyClass {}
+function myfunction() {}
+const MYCONST = 1;
+
+$a = new MyClass;
+$c = new \my\name\MyClass;
+
+$d = namespace\MYCONST;
+
+$d = __NAMESPACE__ . '\MYCONST';
+echo constant($d);
+
+# 同一个文件中定义多个命名空间,两种方式
+namespace MyProject;
+
+const CONNECT_OK = 1;
+class Connection { /* ... */ }
+function connect() { /* ... */  }
+
+namespace AnotherProject;
+
+const CONNECT_OK = 1;
+class Connection { /* ... */ }
+function connect() { /* ... */  }
+
+## 方式2
+namespace MyProject {
+
+const CONNECT_OK = 1;
+class Connection { /* ... */ }
+function connect() { /* ... */  }
+}
+
+namespace AnotherProject {
+
+const CONNECT_OK = 1;
+class Connection { /* ... */ }
+function connect() { /* ... */  }
+}
+
+## 引用方式
+namespace Foo\Bar;
+include 'file1.php';
+
+const FOO = 2;
+function foo() {}
+class foo
+{
+    static function staticmethod() {}
+}
+
+/* 非限定名称 */
+foo(); // 解析为 Foo\Bar\foo resolves to function Foo\Bar\foo
+foo::staticmethod(); // 解析为类 Foo\Bar\foo的静态方法staticmethod。resolves to class Foo\Bar\foo, method staticmethod
+echo FOO; // resolves to constant Foo\Bar\FOO
+
+/* 限定名称 */
+subnamespace\foo(); // 解析为函数 Foo\Bar\subnamespace\foo
+subnamespace\foo::staticmethod(); // 解析为类 Foo\Bar\subnamespace\foo,
+                                  // 以及类的方法 staticmethod
+echo subnamespace\FOO; // 解析为常量 Foo\Bar\subnamespace\FOO
+
+/* 完全限定名称 */
+\Foo\Bar\foo(); // 解析为函数 Foo\Bar\foo
+\Foo\Bar\foo::staticmethod(); // 解析为类 Foo\Bar\foo, 以及类的方法 staticmethod
+echo \Foo\Bar\FOO; // 解析为常量 Foo\Bar\FOO
+
+## __NAMESPACE__
+namespace MyProject;
+echo '"', __NAMESPACE__, '"'; // 输出 "MyProject"
+function get($classname)
+{
+    $a = __NAMESPACE__ . '\\' . $classname;
+    return new $a;
+}
+
+## 全局代码
+echo '"', __NAMESPACE__, '"'; // 输出 ""
+
+## namespace
+namespace MyProject;
+
+use blah\blah as mine; // see "Using namespaces: importing/aliasing"
+
+blah\mine(); // calls function MyProject\blah\mine()
+namespace\blah\mine(); // calls function MyProject\blah\mine()
+
+namespace\func(); // calls function MyProject\func()
+namespace\sub\func(); // calls function MyProject\sub\func()
+namespace\cname::method(); // calls static method "method" of class MyProject\cname
+$a = new namespace\sub\cname(); // instantiates object of class MyProject\sub\cname
+$b = namespace\CONSTANT; // assigns value of constant MyProject\CONSTANT to $b
+
+## 全局
+namespace\func(); // calls function func()
+namespace\sub\func(); // calls function sub\func()
+namespace\cname::method(); // calls static method "method" of class cname
+$a = new namespace\sub\cname(); // instantiates object of class sub\cname
+$b = namespace\CONSTANT; // assigns value of constant CONSTANT to $b
+
+## 使用use操作符导入/使用别名
+namespace foo;
+use My\Full\Classname as Another;
+
+// 下面的例子与 use My\Full\NSname as NSname 相同
+use My\Full\NSname;
+// 导入一个全局类
+use ArrayObject;
+// importing a function (PHP 5.6+)
+use function My\Full\functionName;
+// aliasing a function (PHP 5.6+)
+use function My\Full\functionName as func;
+// importing a constant (PHP 5.6+)
+use const My\Full\CONSTANT;
+
+$obj = new namespace\Another; // 实例化 foo\Another 对象
+$obj = new Another; // 实例化 My\Full\Classname　对象
+NSname\subns\func(); // 调用函数 My\Full\NSname\subns\func
+$a = new ArrayObject(array(1)); // 实例化 ArrayObject 对象
+// 如果不使用 "use \ArrayObject" ，则实例化一个 foo\ArrayObject 对象
+func(); // calls function My\Full\functionName
+echo CONSTANT; // echoes the value of My\Full\CONSTANT
+
+# 通过use操作符导入/使用别名，一行中包含多个use语句
+use My\Full\Classname as Another, My\Full\NSname;
+$obj = new Another; // 实例化 My\Full\Classname 对象
+NSname\subns\func(); // 调用函数 My\Full\NSname\subns\func
+
+# 导入和动态名称
+use My\Full\Classname as Another, My\Full\NSname;
+$obj = new Another; // 实例化一个 My\Full\Classname 对象
+$a = 'Another';
+$obj = new $a;      // 实际化一个 Another 对象
+
+# 导入和完全限定名称
+use My\Full\Classname as Another, My\Full\NSname;
+$obj = new Another; // instantiates object of class My\Full\Classname
+$obj = new \Another; // instantiates object of class Another
+$obj = new Another\thing; // instantiates object of class My\Full\Classname\thing
+$obj = new \Another\thing; // instantiates object of class Another\thing
+```
+
 ## 时间
 
 ```php
 var_dump(date("Y-m-d", strtotime("-1 month", strtotime("2017-03-31")))); # 输出2017-03-03
 var_dump(date("Y-m-d", strtotime("last day of -1 month", strtotime("2017-03-31")))); # 输出2017-02-28
 var_dump(date("Y-m-d", strtotime("first day of +1 month", strtotime("2017-08-31")))); # 输出2017-09-01
+
 ```
 
 ## JSON
@@ -1889,9 +2182,6 @@ spl_autoload_register('autoload');
 * 不但节省开发时间，有助于建立更稳定的应用，而且减少了重复编码的开发。
 * 可以帮助初学者建立更稳定的应用服务，这可以让你花更多的时间去创建实际的Web应用程序，而不是花时间写重复的代码。
 
-spl_autoload
-spl_autoload_register
-
 ### 协程
 
 PHP 最大的优势在于快速开发，劣势在于效率和工程规范。协程、异步这些技术相对学习成本高，优势在于性能提升明显.
@@ -1945,6 +2235,8 @@ phpcs.enable true
 
 ### [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
 
+* PHP Code Beautifier and Fixer(phpcbf)
+
 ```sh
 wget http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -O php-cs-fixer
 wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.10.0/php-cs-fixer.phar -O php-cs-fixer
@@ -1962,6 +2254,9 @@ brew upgrade php-cs-fixer
 
 php php-cs-fixer.phar fix /path/to/dir
 php php-cs-fixer.phar fix /path/to/file
+
+phpcs --config-show
+phpcs --config-set
 ```
 
 ## 大数据

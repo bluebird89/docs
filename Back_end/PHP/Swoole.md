@@ -30,8 +30,13 @@ brew install hiredis # fatal error: 'hiredis/hiredis.h'
 brew install swoole
 pecl install swoole
 
+pecl install swoole
+
 # add swoole.ini
 sudo ln -s  /etc/php/7.2/mods-available/swoole.ini 20-swoole.ini
+
+# check
+php -m | grep swoole
 ```
 
 ## 基础
