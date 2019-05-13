@@ -198,10 +198,6 @@ pip install ipython
 pip install 'ipython[zmq,qtconsole,notebook,test]'
 ```
 
-### [Anaconda](https://github.com/DamnWidget/anacond)
-
-有命令行与图形界面两种方式,Anaconda turns your Sublime Text 3 in a full featured Python development IDE including autocompletion, code linting, IDE features, autopep8 formating, McCabe complexity checker Vagrant and Docker support for Sublime Text 3 using Jedi, PyFlakes, pep8, MyPy, PyLint, pep257 and McCabe that will never freeze your Sublime Text 3
-
 ### 执行环境
 
 * 命令行模式下
