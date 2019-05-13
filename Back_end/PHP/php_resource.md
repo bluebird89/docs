@@ -56,7 +56,9 @@
     - [kakserpom/phpdaemon](https://github.com/kakserpom/phpdaemon):Asynchronous server-side framework for network applications implemented in PHP using libevent http://daemon.io/
     - [mnapoli/bref](https://github.com/mnapoli/bref):Serverless framework for PHP
     - [manaphp/manaphp](https://github.com/manaphp/manaphp):ManaPHP Framework
-    - [Elgg](https://github.com/Elgg/Elgg ):http://learn.elgg.org/en/stable/guides
+    - [Elgg](https://github.com/Elgg/Elgg )
+        + <http://learn.elgg.org/en/stable/guides>
+    - [Kohana](http://kohanaframework.org/):Deprecated PHP Framework last stable release: 3.3.6 / 25. July 2016.
 * 论坛
     - [flarum/flarum](https://github.com/flarum/flarum):Composer starter project for Flarum https://flarum.org
 * 电商
