@@ -159,7 +159,6 @@ object refcount key # 查看引用次数
             * len表示buf已使用的长度，
             * free表示buf未使用的长度。
 
-
 ```c
 // redisObject的定义
 typedef struct redisObject {
@@ -484,7 +483,7 @@ import redis
 
 def check_big_key(r, k):
   bigKey = False
-  length = 0 
+  length = 0
   try:
     type = r.type(k)
     if type == "string":
@@ -521,7 +520,7 @@ def find_big_key_sharding(db_host, db_port, db_password, db_num, nodecount):
       print cursor, db, node, len(iscan[1])
       if cursor == "0":
         break;
-  
+
 if \__name__\ == '__main__':
   if len(sys.argv) != 4:
      print 'Usage: python ', sys.argv[0], ' host port password '

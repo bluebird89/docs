@@ -47,8 +47,11 @@ vagrant box add ubuntu/trusty64 # 通过包名先去本地是否存在，没有�
 vagrant box add hahaha ~/box/package.box # 加载本地文件(package包)
 vagrant box add precise64 http://files.vagrantup.com/precise64.box
 
-vagrant box remove name       # 移除镜像
+vagrant box remove ubuntu/trusty64  --box-version=20170810.0.0  # 移除镜像,指定版本
 vagrant box repackage         # 重新打包
+
+vagrant plugin repair|update
+vagrant plugin expunge --reinstall
 ```
 
 box下载
