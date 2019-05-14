@@ -46,12 +46,41 @@ php -m | grep swoole
 * 网络协议TCP/UDP的认知
 * PHP的各项基本技能
 
-## 资料
+## Timer
 
-- [Concise Guide to Swoole文档](https://linkeddestiny.gitbooks.io/easy-swoole/content/)
-- [源码分析](https://github.com/LinkedDestiny/swoole-src-analysis)
-- [官方文档](https://github.com/cloes/swoole-doc)
-- [官方Wiki](https://wiki.swoole.com/)
+* swoole_timer_tick 间隔的时钟控制器
+* swoole_timer_after 指定的时间后执行
+* swoole_timer_clear 删除定时器
+
+## 异步task
+
+进程结构
+
+* master
+* manager
+* task
+	- 运行多进程
+* worker
+
+## HTTP
+
+* Swoole 与 Nginx 结合使用
+
+```
+# enable-swoole-php.conf
+
+location ~ [^ /]\.php(/ | $ ) {
+	proxy_http_version 1.1 ;
+    proxy_set_header Connection "keep-alive";
+    proxy_set_header X - Real - IP $remote_addr ;
+    proxy_pass http : //127.0.0.1:9501;
+}
+
+# list
+ps - ef | grep 'swoole_process_server'| grep - v 'grep'
+# worker reload
+ps aux | grep swoole_process_server_master | awk '{print $2}'| xargs kill - USR1 
+```
 
 ## 扩展
 
@@ -78,3 +107,10 @@ php -m | grep swoole
 ## 项目
 
 * [wh469012917/swoole-vue-webim](https://github.com/wh469012917/swoole-vue-webim):一个Web聊天应用，基于Vue和Swoole构建
+
+## 参考
+
+- [Concise Guide to Swoole文档](https://linkeddestiny.gitbooks.io/easy-swoole/content/)
+- [源码分析](https://github.com/LinkedDestiny/swoole-src-analysis)
+- [官方文档](https://github.com/cloes/swoole-doc)
+- [官方Wiki](https://wiki.swoole.com/)
