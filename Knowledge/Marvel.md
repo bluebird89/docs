@@ -4,7 +4,7 @@
 * 2009年迪士尼爸爸40.2亿美元收购了漫威
 * 2018年11月12日，斯坦·李在洛杉矶的一家医疗中心去世，享年95岁
 
-![The Companies Disney Owns](../_staic/disney.jpg "The Companies Disney Owns")
+![The Companies Disney Owns](../_static/disney.jpg "The Companies Disney Owns")
 
 ## 神奇四侠
 
