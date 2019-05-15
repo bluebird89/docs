@@ -210,6 +210,9 @@ http://packagist.phpcomposer.com/  Authentication required
 ```
 # centos: Do not run Composer as root/super user
 composer install --no-plugins --no-scripts
+
+# PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 4096 bytes) in phar:///usr/local/Cellar/composer/1.7.2/bin/composer/src/Composer/DependencyResolver/RuleSetGenerator.php on line 126
+调整PHP memory_limit 大小
 ```
 
 ## 参考

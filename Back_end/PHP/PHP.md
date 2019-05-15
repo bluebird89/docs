@@ -125,6 +125,7 @@ brew-php-switcher 5.6
     - 在配置中开启扩展
 * max_execution_time 用于设置单个 PHP 进程在终止之前最长可运行时间
 * Session 会话放在 Redis 或者 Memcached 中，这么做不仅可以减少磁盘的 IO 操作频率，还可以方便业务服务器伸缩。如果想把会话数据保存在 Memcached 中，需要做如下配置：
+* error_reporting
 
 ```
 session.save_handler = 'memcached'
@@ -141,6 +142,8 @@ opcache.memory_consumption=64    # Opcache的共享内存大小，以M为单位
 opcache.interned_strings_buffer=16    # 用来存储临时字符串的内存大小，以M为单位
 opcache.max_accelerated_files=4000    # Opcache哈希表可以存储的脚本文件数量上限
 opcache.fast_shutdown=1         # 使用快速停止续发事件
+
+php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 ```
 
 ## CGI vs Cli
@@ -2282,6 +2285,10 @@ nginx通过 fastcgi_param 指令将参数传递给 FastCGI Server
     - foo.jpg
 * PHP 会把这个文件当成 cgi 脚本执行，并赋值路径给 CGI 环境变量——SCRIPT_FILENAME，也就是 `$_SERVER['SCRIPT_FILENAME']` 的值了。
     - PHP的cgi SAPI中的参数fix_pathinfo
+
+## 问题
+
+>  5096 segmentation fault (core dumped)  php http_server.php
 
 ## 参考
 

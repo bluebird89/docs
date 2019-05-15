@@ -79,7 +79,7 @@ location ~ [^ /]\.php(/ | $ ) {
 # list
 ps - ef | grep 'swoole_process_server'| grep - v 'grep'
 # worker reload
-ps aux | grep swoole_process_server_master | awk '{print $2}'| xargs kill - USR1 
+ps aux | grep swoole_process_server_master | awk '{print $2}'| xargs kill - USR1
 ```
 
 ## 扩展
