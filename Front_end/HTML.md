@@ -632,6 +632,10 @@ user-select: none;
 
 * [tabler/tabler](https://github.com/tabler/tabler):Tabler is free and open-source HTML Dashboard UI Kit built on Bootstrap 4 https://tabler.github.io/
 
+## 项目
+
+* [使用canvas实现和HTML5 video交互的弹幕效果](https://www.zhangxinxu.com/wordpress/2017/09/html5-canvas-video-barrage/)
+
 ## 参考
 
 * [joshbuchea/HEAD](https://github.com/joshbuchea/HEAD):A list of everything that *could* go in the head of your document https://gethead.info
