@@ -1604,6 +1604,7 @@ chown -R henry:henry .git/objects
 * [sobolevn/git-secret](https://github.com/sobolevn/git-secret):👥 A bash-tool to store your private data inside a git repository. http://git-secret.io
 * [scmmanager](https://www.scm-manager.org/):The easiest way to share and manage your Git, Mercurial and Subversion repositories over http
 * [marionebl/commitlint](https://github.com/marionebl/commitlint):📓 Lint commit messages https://marionebl.github.io/commitlint/
+* [pomber/git-history](https://github.com/pomber/git-history)：Quickly browse the history of a file from any git repository https://githistory.xyz/
 
 ## 参考
 
