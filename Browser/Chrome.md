@@ -121,6 +121,7 @@ V       enter visual line mode
 
 * chrome://net-internals/#hsts
 * 查看内置插件 `chrome://system/`
+* 新版chrome会阻止自定义的域名
 
 ## 技巧
 

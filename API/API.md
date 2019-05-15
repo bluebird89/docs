@@ -322,3 +322,4 @@ apidoc -i myapp/ -o apidoc/ -t mytemplate/
 ## 参考
 
 * [jsonapi](https://jsonapi.org/format/)
+* [shieldfy/API-Security-Checklist](https://github.com/shieldfy/API-Security-Checklist):Checklist of the most important security countermeasures when designing, testing, and releasing your API
