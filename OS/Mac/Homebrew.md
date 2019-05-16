@@ -76,7 +76,7 @@ brew update && brew upgrade && brew cleanup ; say mission complete
 brew link --force openssl # 链接新的openssl到环境变量中
 brew link --overwrite docker
 
-brew services [-v|--verbose] [list | run | start | stop | restart | cleanup] formula|--all
+brew services [-v|--verbose] [list | run | start | stop | restart| reload | cleanup] formula|--all
 brew services start postgresql
 
 # 卸载
