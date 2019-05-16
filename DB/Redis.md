@@ -51,6 +51,8 @@ redis-server /usr/local/etc/redis.conf
 
 # ubuntu
 sudo apt-get install redis-server php-redis
+
+systemctl enable|status|stop redis-server
 ```
 
 ## 配置
