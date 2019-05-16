@@ -592,12 +592,16 @@ sudo systemctl enable|disable nginx | httpd.service # enable 设置开机启动 
 sudo systemctl status|start|restart|reload nginx | httpd.service # start 启动 stop 停止 restart 重启
 systemctl list-units --type=service # 查看服务
 
-
 # pidof prints out the process id of a running program. For example, below command will output the process ID of nginx
 pidof nginx
 
 ps -ef | grep nginx # 进程查看
 ps aux | grep nginx
+
+netstat -an | grep LISTEN
+
+## 端口查看
+lsof -i:3000
 
 kill -9 pid # 关闭进程
 kill -s 9 processId

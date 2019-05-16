@@ -29,6 +29,7 @@
 * 数学
     - [线性代数](https://zhuanlan.zhihu.com/p/36311622)
         + 麻省理工的《线性代数及其应用》
+        + [Linear Algebra and Learning from Data](http://math.mit.edu/~gs/learningfromdata/)
     - [微积分和统计学](https://zhuanlan.zhihu.com/p/36584206)
         + 《普林斯顿微积分读本》
         + 入门教材: 深入浅出统计学
@@ -55,7 +56,9 @@
     - [数据挖掘项目](https://blog.csdn.net/datawhale/article/details/80847662)
 * 机器学习
     - 公开课
-        + [吴恩达《Machine Learning》](https://www.coursera.org/learn/machine-learning):中文笔记及作业代码：https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes
+        + [吴恩达《Machine Learning》](https://www.coursera.org/learn/machine-learning)
+            * [deeplearning-ai/machine-learning-yearning-cn](https://github.com/deeplearning-ai/machine-learning-yearning-cn):Machine Learning Yearning 中文版 - 《机器学习训练秘籍》 - Andrew Ng 著 https://deeplearning-ai.github.io/machine-learning-yearning-cn/
+            * [中文笔记及作业代码](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes)
         + [吴恩达 CS229](http://cs229.stanford.edu/)
             * [中文视频](http://open.163.com/special/opencourse/machinelearning.html)
             * [中文笔记](https://kivy-cn.github.io/Stanford-CS-229-CN/#/)
