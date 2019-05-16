@@ -106,6 +106,7 @@ smaba
     -   [onmyway133/FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
     - [sveinbjornt/Sloth](https://github.com/sveinbjornt/Sloth):Mac app that shows all open files and sockets in use by all running processes. Nice GUI for lsof. https://sveinbjorn.org/sloth
     - Luna Display:Turn your iPad into a second display
+    - 实用工具：/System/Library/CoreServices/Applications
 -   vpn
     -   Tunnelblick_3.7.2_build_4850：点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
 -   设计
@@ -654,6 +655,28 @@ dash
 karabiner
 ```
 
+## 开机启动
+
+* System -> Accounts，选择Login Items
+* ~/Library/LaunchAgents 由用户自己定义的任务项
+* /Library/LaunchAgents 由管理员为用户定义的任务项
+* /Library/LaunchDaemons 由管理员定义的守护进程任务项
+* /System/Library/LaunchAgents 由Mac OS X为用户定义的任务项
+* /System/Library/LaunchDaemons 由Mac OS X定义的守护进程任务项
+* /System/Library/StartupItems: 系统相关的StartupItems
+* /Library/StartupItems
+
+```sh
+# 检查plist语法
+plutil ~/Library/LaunchAgents/example.plist
+# 载入配置, 使配置生效
+launchctl load ~/Library/LaunchAgents/example.plist
+# 卸载配置
+launchctl unload ~/Library/LaunchAgents/example.plist
+# 查看服务运行状态
+launchctl list
+```
+
 ## 端口查看
 
 ```sh
@@ -668,6 +691,11 @@ dyld: Library not loaded: /usr/local/opt/icu4c/lib/libicui18n.62.dylib
 icu4c was upgraded to version 63 but my locally installed postgres image still referenced icu4c 62.1
 
 brew switch icu4c 62.1
+
+127.0.0.1 无法连接
+
+/privte/etc/hosts
+::1 localhost那一行注释掉或者删掉
 ```
 
 ## 重置密码

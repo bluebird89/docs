@@ -13,6 +13,20 @@
 - `pip install supervisor`
 - `sudo apt-get install supervisor`
 
+```sh
+# mac
+brew install supervisor
+brew install services
+
+brew services start supervisor
+
+# /usr/local/etc/supervisord.ini
+[inet_http_server]         ; inet (TCP) server disabled by default
+port=127.0.0.1:9001        ; ip_address:port specifier, *:port for all iface
+username=user              ; default is no username (open server)
+password=123               ; default is no password (open server)
+```
+
 ## 配置
 
 生成配置文件`echo_supervisord_conf > supervisord.conf`，其中参数
@@ -70,4 +84,12 @@ autostart=true
 autorestart=true
 startsecs=30
 startretries=5
+```
+
+
+## 问题
+
+```
+INFO Increased RLIMIT_NOFILE limit to 1024
+INFO RPC interface 'supervisor' initialized
 ```
