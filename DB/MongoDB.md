@@ -76,12 +76,15 @@ mongo -version
 * --username/-u 和 –password/-p ：指定访问MongoDB数据库的账户和密码，只有当认证通过后，用户才能访问数据库；
 * --authenticationDatabase ：指定创建User的数据库，在哪个数据库中创建User时，该数据库就是User的Authentication Database；
 
+```mongodb
+# 服务启动
+/usr/bin/mongod -auth --config /etc/mongod.conf
+
 `#pt-online-schema-change  --alter="add index   IX_id_no(id_no)"  \    --no-check-replication-filters  --recursion-method=none  --user=dba    \    --password=123456  D=test,t=t1 --execute`
 
-对于MongoDB创建索引要在后台创建，避免锁表,使用范例
+＃　对于MongoDB创建索引要在后台创建，避免锁表,使用范例
 db.t1.createIndex({idCardNum:1},{background:1})
 
-```mongodb
 bindIp:  127.0.0.1  修改为：bindIp:  0.0.0.0
 
 # 添加超级管理员,客戶端鏈接需要選擇修改類型 basic
