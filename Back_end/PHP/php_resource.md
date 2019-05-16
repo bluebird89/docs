@@ -67,7 +67,6 @@
     - [https://github.com/Sylius/Sylius](https://github.com/Sylius/Sylius): Open Source eCommerce Framework on top of Symfony https://sylius.com
         + [Documentation](https://sylius.readthedocs.io/en/latest/)
         + [Sylius/Sylius-Standard](https://github.com/Sylius/Sylius-Standard)
-        + 
 * CMS
     - [bolt/bolt](https://github.com/bolt/bolt):Bolt is a simple CMS written in PHP. It is based on Silex and Symfony components, uses Twig and either SQLite, MySQL or PostgreSQL.
 * Wiki
@@ -220,8 +219,6 @@ yarn install
 yarn run gulp
 php bin/console server:start
 open http://127.0.0.1:8000
-
-
 ```
 
 ## 持续集成 Continuous Integration
@@ -342,6 +339,7 @@ open http://127.0.0.1:8000
     - (https://github.com/xdebug/xdebug)[xDebug]: 一个调试和分析PHP的工具
     - (https://github.com/phacility/xhprof)[XHProf]: 一个最初由Facebook开发的分析工具
     - (http://www.zend.com/en/products/server/z-ray)[Z-Ray]: 一个调试和配置Zend服务器的工具
+    - [didi/rdebug](https://github.com/didi/rdebug):Rdebug — Real Debugger
 * 构建工具 Build Tools 项目构建和自动化工具
     - (https://github.com/CHH/bob)[Bob]: 一个简单的项目自动化工具
     - (https://github.com/box-project/box2)[Box]: 一个构建PHAR文件的工具

@@ -1764,15 +1764,16 @@ var_dump(is_callable($obj));
 
 ## 命名空间
 
+* 如果一个文件中包含命名空间，它必须在其它所有代码之前声明命名空间
 * 用户编写的代码与PHP内部的类/函数/常量或第三方类/函数/常量之间的名字冲突
 * 为很长的标识符名称(通常是为了缓解第一类问题而定义的)创建一个别名（或简短）的名称，提高源代码的可读性
 * 以下类型的代码受命名空间的影响，它们是：类（包括抽象类和traits）、接口、函数和常量
-* 可以在同一个文件中定义多个命名空间
+* 可以在同一个文件中定义多个命名空间,建议使用下面的大括号形式的语法
 * 类名可以通过三种方式引用
     - 非限定名称，或不包含前缀的类名称，例如 $a=new foo(); 或 foo::staticmethod();。如果当前命名空间是 currentnamespace，foo 将被解析为 currentnamespace\foo。如果使用 foo 的代码是全局的，不包含在任何命名空间中的代码，则 foo 会被解析为foo。
     - 限定名称,或包含前缀的名称，例如 $a = new subnamespace\foo(); 或 subnamespace\foo::staticmethod();。如果当前的命名空间是 currentnamespace，则 foo 会被解析为 currentnamespace\subnamespace\foo。如果使用 foo 的代码是全局的，不包含在任何命名空间中的代码，foo 会被解析为subnamespace\foo。
     - 完全限定名称，或包含了全局前缀操作符的名称，例如， $a = new \currentnamespace\foo(); 或 \currentnamespace\foo::staticmethod();。
-* 两种抽象的访问当前命名空间内部元素的方法，__NAMESPACE__ 魔术常量和namespace关键字
+* 两种抽象的访问当前命名空间内部元素的方法，`__NAMESPACE__` 魔术常量和namespace关键字
     - 常量__NAMESPACE__的值是包含当前命名空间名称的字符串。在全局的，不包括在任何命名空间中的代码，它包含一个空的字符串
 * 导入：允许通过别名引用或导入外部的完全限定名称
     - 为类名称使用别名
@@ -1933,6 +1934,54 @@ var_dump(date("Y-m-d", strtotime("first day of +1 month", strtotime("2017-08-31"
 
 ```
 
+### 生成器
+
+提供了一种更容易的方法来实现简单的对象迭代，性能开销和复杂性大大降低。
+
+* 一个生成器函数看起来像一个普通的函数，不同的是普通函数返回一个值，而一个生成器可以yield生成许多它所需要的值
+* 一个简单的例子就是使用生成器来重新实现 range() 函数。 标准的 range() 函数需要在内存中生成一个数组包含每一个在它范围内的值，然后返回该数组, 结果就是会产生多个很大的数组。 比如，调用 range(0, 1000000) 将导致内存占用超过 100 MB。
+* 当一个生成器被调用的时候，它返回一个可以被遍历的对象.当你遍历这个对象的时候(例如通过一个foreach循环)，PHP 将会在每次需要值的时候调用生成器函数，并在产生一个值之后保存生成器的状态，这样它就可以在需要产生下一个值的时候恢复调用状态。
+* 一旦不再需要产生更多的值，生成器函数可以简单退出，而调用生成器的代码还可以继续执行，就像一个数组已经被遍历完了
+* 生成器函数的核心是yield关键字。它最简单的调用形式看起来像一个return申明，不同之处在于普通return会返回值并终止函数的执行，而yield会返回一个值给循环调用此生成器的代码并且只是暂停执行生成器函数。
+* 在一个表达式上下文(例如在一个赋值表达式的右侧)中使用yield，你必须使用圆括号把yield申明包围起来
+* 使用，函数yield返回，遍历获取值
+* 支持关联键值对,制定键名
+* 在没有参数传入的情况下被调用来生成一个 NULL值并配对一个自动的键名
+* 方法
+    - array iterator_to_array ( Traversable $iterator [, bool $use_keys = true ] )
+
+```php
+function xrange($start, $limit, $step = 1) {
+    if ($start < $limit) {
+        if ($step <= 0) {
+            throw new LogicException('Step must be +ve');
+        }
+
+        for ($i = $start; $i <= $limit; $i += $step) {
+            yield $i;
+        }
+    } else {
+        if ($step >= 0) {
+            throw new LogicException('Step must be -ve');
+        }
+
+        for ($i = $start; $i >= $limit; $i += $step) {
+            yield $i;
+        }
+    }
+}
+
+foreach (xrange(1, 9, 2) as $number) {
+    echo "$number ";
+}
+
+$data = (yield $value);
+
+$iterator = new ArrayIterator(array('recipe'=>'pancakes', 'egg', 'milk', 'flour'));
+var_dump(iterator_to_array($iterator, true));
+var_dump(iterator_to_array($iterator, false));
+```
+
 ## JSON
 
 * json_encode( mixed $value [, int $options = 0 [, int $depth = 512 ]] )函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据
@@ -1984,7 +2033,14 @@ echo "Associative array always output as object: ", json_encode($d, JSON_FORCE_O
 
 * simplexml_load_file
 
-gethostbyaddr
+## 网络
+
+* gethostbyaddr()：获取指定的IP地址对应的主机名
+* gethostbynamel():获取互联网主机名对应的 IPv4 地址列表
+
+```php
+$hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+```
 
 ##  密码散列算法函数
 
@@ -1992,6 +2048,11 @@ gethostbyaddr
 * password_​hash
 * password_​needs_​rehash
 * password_​verify
+
+## 性能
+
+* memory_get_usage()
+* microtime()
 
 ## 扩展
 
@@ -2188,8 +2249,6 @@ spl_autoload_register('autoload');
 ### 协程
 
 PHP 最大的优势在于快速开发，劣势在于效率和工程规范。协程、异步这些技术相对学习成本高，优势在于性能提升明显.
-
-PHP5.5中加入了一个新特性—迭代生成器和协程。
 
 ## 性能
 
