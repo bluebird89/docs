@@ -35,7 +35,7 @@ brew services start php
 
 #启动php-fpm
 /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf
-`/usr/local/Cellar/php71/7.1.10_21/sbin/php-fpm --daemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf --pid /usr/local/var/run/php-fpm.pid`
+/usr/local/Cellar/php71/7.1.10_21/sbin/php-fpm --daemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf --pid /usr/local/var/run/php-fpm.pid`
 
 ps aux | grep -c php-fpm # 查看php-fpm进程数
 ps aux |grep php-fpm 查看php-fpm的master进程号
@@ -55,8 +55,8 @@ sudo service php7.0-fpm {start|stop|status|restart|reload|force-reload}
 
 ## 监听服务
 
-* Unix sockets
-* TCP sockets
+* Unix domain socket:同一台操作系统上的两个或多个进程进行数据通信。与管道相比，Unix domain sockets 既可以使用字节流和数据队列，而管道通信则只能通过字节流。Unix domain sockets的接口和Internet socket很像，但它不使用网络底层协议来通信。Unix domain socket 的功能是POSIX操作系统里的一种组件。Unix domain sockets 使用系统文件的地址来作为自己的身份。它可以被系统进程引用。所以两个进程可以同时打开一个Unix domain sockets来进行通信。不过这种通信方式是发生在系统内核里而不会在网络里传播。压力比较满的时候，用套接字方式，效果确实比较好
+* TCP sockets:使用TCP端口连接127.0.0.1:9000
 
 ```sh
 listen = 127.0.0.1:9000
