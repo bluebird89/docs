@@ -1221,6 +1221,8 @@ SELECT user_name, city, age FROM user_test ORDER BY user_name DESC, city DESC;
 SELECT user_name, city, age FROM user_test WHERE user_name = 'feinik' ORDER BY city;
 ```
 
+### mysqladmin
+
 ## Docker
 
 - mkdir -p ~/mysql/data ~/mysql/logs ~/mysql/conf
@@ -1371,10 +1373,6 @@ vmstat 1 3 #  pay attentin to cpu
 iostat -d -k 1 3
 ```
 
-## backup
-
-mysqlcheck
-
 ## 扩展配置
 
 ### 主从复制
@@ -1458,7 +1456,17 @@ pt-query-digest --type=binlog mysql-bin.000001.sql
 * 每次备份完后，计算数据库/表数据和索引的大小，监控其增长。
 * 使用定时任务（cron）脚本，来监控从库复制的错误和延迟。
 * 定期备份数据。
-* 定期测试备份的数据。
+* 定期测试备份的数据
+* mysqlcheck
+
+```
+mysqldump -h 主机名 -u 用户名 -p --all-databases > dump.sql
+mysqldump -h 主机名 -u 用户名 -p --databases 库名1 [库名2 ...] > dump.sql
+mysqldump -h 主机名 -u 用户名 -p 库名 表名1 [表名2 ...] > dump.sql
+
+shell> mysql -uroot -p < dump.sql
+mysql> source  dump.sql
+```
 
 ## 参考
 

@@ -296,7 +296,7 @@ kubectl delete deployments hello-minikube1
 ## 文档
 
 * [hobby-kube/guide](https://github.com/hobby-kube/guide):Kubernetes clusters for the hobbyist.
-*[kelseyhightower/kubernetes-the-hard-way](https://github.com/kelseyhightower/kubernetes-the-hard-way):Bootstrap Kubernetes the hard way on Google Cloud Platform. No scripts.
+* [kelseyhightower/kubernetes-the-hard-way](https://github.com/kelseyhightower/kubernetes-the-hard-way):Bootstrap Kubernetes the hard way on Google Cloud Platform. No scripts.
 * [官方文档](https://kubernetes.io/docs/tutorials/)
 * [网易云原生架构实践w之服务治理](https://mp.weixin.qq.com/s/ixkFLfbr3kY8AF_3x-KfSA)
 * [中文文档](https://www.kubernetes.org.cn/doc-11)
@@ -316,6 +316,7 @@ kubectl delete deployments hello-minikube1
 * [ramitsurana/awesome-kubernetes](https://github.com/ramitsurana/awesome-kubernetes):A curated list for awesome kubernetes sources 🚢🎉 https://ramitsurana.github.io/awesome-kubernetes/
 * [gjmzj/kubeasz](https://github.com/gjmzj/kubeasz):使用Ansible脚本安装K8S集群，介绍组件交互原理，方便直接，不受国内网络环境影响 https://github.com/gjmzj/kubeasz
 * [kubernetes/community](https://github.com/kubernetes/community):Kubernetes community content
+* [](https://www.kubernetes.org.cn)
 
 ## UI
 
