@@ -609,7 +609,9 @@ kill pid
 kill -USR2 $(pidof nginx)
 pkill -f nginx
 
-ctrl+c   ## 有些程序也可以用q键退出
+ctrl+c   ## 有些程序也可以用q键
+
+退出
 
 ctrl+z   ## 进程会挂起到后台
 bg jobid  ## 让进程在后台继续执行
