@@ -27,7 +27,9 @@ rabbitmqctl status
 sudo rabbitmqctl list_queues # 查看队列状态
 ```
 
-## 使用
+## 模式
+
+简单模式、工作队列模式、发布/订阅模式、路由模式、主题模式 和 RPC 模式
 
 * 单对单
 * 单对多
