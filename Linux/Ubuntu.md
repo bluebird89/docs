@@ -1017,6 +1017,12 @@ sudo apt-get autoremove
 sudo apt-get autoclean
 ```
 
+## Screenshots
+
+* ctrl+Print：复制截图到窗口
+* ctrl+alt+Print：窗口截取并添加到粘贴板
+* shift+alt+Print:区域截取并添加到粘贴板
+
 ### phpMyAdmin
 
 ```sh

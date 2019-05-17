@@ -11,6 +11,17 @@ cd lua-5.3.4
 make linux test
 ```
 
+## 数据
+
+* nil	表示无效值，在条件表达式中表示 false
+* boolean	布尔值，包含 true 和 false 两个值
+* number	表示双精度类型的实浮点数
+* string	表示字符串，通过双引号或单引号括住
+* userdata	表示任意存储在变量中的 C 数据结
+* function	表示 C 或 Lua 编写的函
+* thread	表示执行的独立线程，用于执行协同程序
+* table	表示一个关联数组，数组索引可以是数字或字符串
+
 ## 编辑器
 
 * hammerspoon

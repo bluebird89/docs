@@ -689,6 +689,9 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen):pathogen.vim: manage your runtimepath
 * [square/maximum-awesome](https://github.com/square/maximum-awesome):Config files for vim and tmux.
 * [SpaceVim/SpaceVim](https://github.com/SpaceVim/SpaceVim):A community-driven modular vim distribution - The ultimate vim configuration https://spacevim.org
+* [ericzhang-cn/maximum-awesome-linux](https://github.com/ericzhang-cn/maximum-awesome-linux):Config files for vim and tmux.
+    - ,d brings up NERDTree, a sidebar buffer for navigating and manipulating files
+    - ,t brings up ctrlp.vim, a project file filter for easily opening specific files
 
 ## 插件
 
@@ -698,6 +701,10 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim.
 * [fatih/vim-go](https://github.com/fatih/vim-go):Go development plugin for Vim
 * [powerline/powerline](https://github.com/powerline/powerline):Powerline is a statusline plugin for vim, and provides statuslines and prompts for several other applications, including zsh, bash, tmux, IPython, Awesome and Qtile. https://powerline.readthedocs.io/en/latest/
+* NERDTree：可以在单独的window中浏览目录和文件，方便打开的选取文件。
+* taglist：可以通过ctags生成的tag文件索引定位代码中的常量、函数、类等结构，阅读代码和写代码必备。
+* powerline：在底部显示一个非常漂亮的状态条，还可以通过不同的颜色提醒用户当前处于什么状态（如normal、insert或visual）。
+* vim-colors-solarized：vim的solarized配色插件
 
 ## 工具
 
