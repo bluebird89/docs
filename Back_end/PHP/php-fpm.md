@@ -1,7 +1,6 @@
 # php-fpm
 
 FastCGI 应用速度很快是因为他们持久稳定。不必对每一个请求都启动和初始化。好处是 PHP 脚本运行速度提升 3-30 倍；
-并不需要对现有的PHP代码做任何的更改；
 PHP 解释程序被载入内存而不用每次需要时从存储器读取，极大的提升了依靠脚本运行的站点的性能；同时速度的提升并不会增加 CPU 的负担。
 常驻内存启动一些PHP进程待命，当请求进入时分配一个进程进行处理，PHP进程处理完毕后回收进程，但并不销毁进程，这让PHP也能应对高流量的访问请求。
 
@@ -12,7 +11,7 @@ PHP 解释程序被载入内存而不用每次需要时从存储器读取，极�
 /usr/local/etc/php/7.2
 
 ```sh
-brew install php --without-apache --with-fpm --with-mysql
+brew install php --without-apache --with-fpm
 brew services start php
 ```
 
@@ -51,6 +50,7 @@ killall php-fpm # 关闭进程
 sudo service php7.0-fpm {start|stop|status|restart|reload|force-reload}
 /etc/init.d/php7.2-fpm start
 /usr/local/php/sbin/php-fpm # 启动
+killall php-fpm
 ```
 
 ## 监听服务
@@ -167,8 +167,8 @@ pm.max_spare_servers=32
 ; Unix user/group of processes
 ; Note: The user is mandatory. If the group is not set, the default user's group
 ;       will be used.
-user = nobody
-group = nobody
+user = www-data
+group = www-data
 
 ; The address on which to accept FastCGI requests.
 ; Valid syntaxes are:
@@ -180,7 +180,8 @@ group = nobody
 ;                            (IPv6 and IPv4-mapped) on a specific port;
 ;   '/path/to/unix/socket' - to listen on a unix socket.
 ; Note: This value is mandatory.
-listen = 127.0.0.1:9001
+; listen = 127.0.0.1:9001
+listen = /run/php/php7.0-fpm.sock
 
 ; Set listen(2) backlog.
 ; Default Value: 511 (-1 on FreeBSD and OpenBSD)
@@ -191,9 +192,10 @@ listen = 127.0.0.1:9001
 ; BSD-derived systems allow connections regardless of permissions.
 ; Default Values: user and group are set as the running user
 ;                 mode is set to 0660
-;listen.owner = nobody
-;listen.group = nobody
-;listen.mode = 0660
+# nginx error connect to php5-fpm.sock failed (13: Permission denied) 写入权限问题
+listen.owner = www-data
+listen.group = www-data
+listen.mode = 0660
 ; When POSIX Access Control Lists are supported you can set them using
 ; these options, value is a comma separated list of user/group names.
 ; When set, listen.owner and listen.group are ignored
@@ -606,10 +608,18 @@ server添加
 ```
 location ~ ^/status$ {
     include fastcgi_params;
-     fastcgi_split_path_info ^(.+\.php)(/.+)$; # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+    fastcgi_split_path_info ^(.+\.php)(/.+)$; # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
     fastcgi_pass unix:/usr/local/var/run/php-fpm.sock;
     fastcgi_param SCRIPT_FILENAME $fastcgi_script_name;
 }
+
+location ~ \.php$ {
+    root           /home/gittest;
+    fastcgi_pass   unix:/var/run/php/php7.0-fpm.sock;
+    fastcgi_index  index.php;
+    fastcgi_intercept_errors        on;
+    include        fastcgi_params;
+    }
 
 pm.status_path = /status # php-fpm.conf里面打开选项
 # 访问 http://域名/status

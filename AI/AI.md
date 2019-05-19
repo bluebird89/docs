@@ -85,6 +85,7 @@
             * [参考笔记](https://zhuanlan.zhihu.com/p/36378498)
             * [代码实现](https://github.com/fengdu78/lihang-code)
         + [《Scikit-Learn 与 TensorFlow 机器学习实用指南》](https://github.com/ageron/handson-ml)
+        + 机器学习：算法视角（原书第2版）
     - 实战
         + [Kaggle 主页](https://www.kaggle.com/)
         + [Kaggle 路线](https://github.com/apachecn/kaggle)
@@ -113,6 +114,7 @@
             * [课程练习](https://github.com/nndl/exercise)
         + [《深度学习》](https://github.com/exacity/deeplearningbook-chinese):花书
         + [《深度学习 500 问》](https://github.com/scutan90/DeepLearning-500-questions)
+        + 《深度学习实战》 [美] 杜威·奥辛格（DouweOsinga）
     - 工具
         + [TensorFlow 官方文档](https://www.tensorflow.org/api_docs/python/tf): <https://github.com/jikexueyuanwiki/tensorflow-zh>
         + [PyTorch官方文档](https://pytorch.org/docs/stable/index.html) <https://github.com/apachecn/pytorch-doc-zh>

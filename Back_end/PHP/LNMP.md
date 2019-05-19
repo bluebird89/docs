@@ -34,6 +34,25 @@ apt-get update
 apt-get install nginx
 
 sudo systemctl stop | start | restart | reload | disable | enable nginx.service
+
+wegt https://www.php.net/distributions/php-7.3.5.tar.gz
+tar zxf php-x.x.x
+cd ../php-x.x.x
+./configure --enable-fpm
+make
+sudo make install
+
+cp php.ini-development /usr/local/php/php.ini
+cp /usr/local/etc/php-fpm.conf.default /usr/local/etc/php-fpm.conf
+cp sapi/fpm/php-fpm /usr/local/bin
+## /usr/local/php/php.ini
+# 如果文件不存在，则阻止 Nginx 将请求发送到后端的 PHP-FPM 模块， 以避免遭受恶意脚本注入的攻击
+cgi.fix_pathinfo=0
+vim /usr/local/etc/php-fpm.conf
+user = www-data
+group = www-data
+
+/usr/local/bin/php-fpm
 ```
 
 ### 配置
@@ -135,12 +154,15 @@ server {
       try_files $uri $uri/ =404;
   }
 
-  location ~ \.php$ {
-    fastcgi_pass unix:/run/php/php7.1-fpm.sock;
-    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    include fastcgi_params;
-    include snippets/fastcgi-php.conf;
-  }
+  location ~* \.php$ {
+    fastcgi_index   index.php;
+    # fastcgi_pass    127.0.0.1:9000;
+    fastcgi_pass unix:/var/run/php-fpm.sock;
+
+    include         fastcgi_params;
+    fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+    fastcgi_param   SCRIPT_NAME        $fastcgi_script_name;
+}
 }
 ```
 
