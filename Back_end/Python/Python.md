@@ -1141,6 +1141,13 @@ ipython:`pip3 install ipython`
 
 ### [pypy](http://pypy.org/)
 
+## Server
+
+* SimpleHTTPServer
+
+```sh
+python2 -m SimpleHTTPServer 8080
+```
 
 ### docker
 

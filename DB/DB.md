@@ -165,6 +165,44 @@ Cetus 的整体工作流程分为:
     - 对外提供服务的粒度是 group，一个 group 负责一部分的数据分片，至于每个 group 服务哪些数据，是根据数据的 key 做 hash 映射后所处的范围来确定的。
     - 自身会处理缓存与DB之间的数据一致性问题
 * [MemSQL](link)
+* 时间序列数据库 Time Series Database (TSDB)：一系列数据点按照时间顺序排列，具有不变性,、唯一性、时间排序性。需要展现其历史趋势、周期规律、异常性的，进一步对未来做出预测分析的，都是时序数据库适合的场景。
+    - 原理
+        + 时序数据的写入：如何支持每秒钟上千万上亿数据点的写入。
+        + 时序数据的读取：又如何支持在秒级对上亿数据的分组聚合运算。
+        + 成本敏感：由海量数据存储带来的是成本问题。如何更低成本的存储这些数据，将成为时序数据库需要解决的重中之重。
+        + 处理带时间标签（按照时间的顺序变化，即时间序列化）的数据
+        + 特性分为两类
+            * 高频率低保留期（数据采集，实时展示）
+            * 低频率高保留期（数据展现、分析）
+        + 按频度
+            * 规则间隔（数据采集）
+            * 不规则间隔（事件驱动）
+        +  时间序列数据的几个前提
+            * 单条数据并不重要
+            * 数据几乎不被更新，或者删除（只有删除过期数据时），新增数据是按时间来说最近的数据
+            * 同样的数据出现多次，则认为是同一条数据
+        + 使用
+            * Influxdb与ES都是REST API风格接口
+            * 通常ES搭配Logstash使用，Influxdb搭配telegraf使用
+    - 概念
+        + metric: 度量，相当于关系型数据库中的table。
+        + data point: 数据点，相当于关系型数据库中的row。
+        + timestamp：时间戳，代表数据点产生的时间。
+        + field: 度量下的不同字段。比如位置这个度量具有经度和纬度两个field。一般情况下存放的是会随着时间戳的变化而变化的数据。
+        + tag: 标签，或者附加信息。一般存放的是并不随着时间戳变化的属性信息。timestamp加上所有的tags可以认为是table的primary key。
+    - 数据
+        + 行存：一个数组包含多个点，如 [{t: 2017-09-03-21:24:44, v: 0.1002}, {t: 2017-09-03-21:24:45, v: 0.1012}]
+        + 列存：两个数组，一个存时间戳，一个存数值，如[ 2017-09-03-21:24:44, 2017-09-03-21:24:45], [0.1002,  0.1012]，一般情况下：列存能有更好的压缩率和查询性能
+    - beringei：Facebook
+    - TimeScaleDB：PostgreSQL
+    - [VividCortex](https://www.vividcortex.com)：MySQL
+    -  [Graphite](https://graphiteapp.org/)
+        +  [文档](https://graphite.readthedocs.io/en/latest/index.html)
+    -  [InfluxDB](https://github.com/influxdata/influxdb)：高频度低保留期用Influxdb，低频度高保留期用ES
+        +  Time Structured Merge Tree
+    -  [DolphinDB](https://www.dolphindb.cn/):自带金融基因，内置并优化了很多与金融分析相关的函数，譬如各种sliding window function, correlation/covariance/beta/percentile, 处理panel data的分组计算功能 context by， 用于数据透视的pivot by、用于数据聚合的group by， 用于时间序列数据分段处理的segment by， 以及时间序列数据特有的asof join和window join， 也包括常用的分类和拟合算法
+        +  [文档](dolphindb/Tutorials_CN)
+    -  Informix TimeSeries
 
 ## 图书
 

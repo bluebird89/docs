@@ -11,18 +11,6 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
 * 模块化
 * 组件化
 * 数据驱动
-v-text：文本填充
-v-html：更新元素的html
-v-show：根据表达式的值切换displayCSS属性
-v-if：跟据值是否渲染元素
-v-for：根据数据多次渲染数据
-v-on：绑定事件监听器
-v-bind：动态绑定一个或多个特性，或一个组件prop表达式
-v-model:数据动态绑定
-v-pre：模版中跳过vue编译，直接输出原始值
-v-cloak：刷新活着加载出现闪缩
-v-once：自渲染组件一次
-* 组件系统:可扩展HTML元素，封装可重用代码。自定义的元素
 
 ## 原理
 
@@ -64,6 +52,20 @@ var MyComponent = Vue.extend({
 var myComponentInstance = new MyComponent()
 ```
 
+## 语法
+
+* v-text：文本填充
+* v-html：更新元素的html
+* v-show：根据表达式的值切换displayCSS属性
+* v-if：跟据值是否渲染元素
+* v-for：根据数据多次渲染数据
+* v-on：绑定事件监听器
+* v-bind：动态绑定一个或多个特性，或一个组件prop表达式
+* v-model:数据动态绑定
+* v-pre：模版中跳过vue编译，直接输出原始值
+* v-cloak：刷新活着加载出现闪缩
+* v-once：自渲染组件一次
+
 ### App 流程
 
 * 需求分析
@@ -75,12 +77,6 @@ var myComponentInstance = new MyComponent()
 * 代码编写
 * 自测
 * 编译打包
-
-### 组件
-
-- vue-resource
-- vue-router
-- better-scroll
 
 ## 使用
 
@@ -144,7 +140,6 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 * [heyscrumpy/tiptap](https://github.com/heyscrumpy/tiptap):A rich-text editor for Vue.js https://tiptap.scrumpy.io
 * [hinesboy/mavonEditor](https://github.com/hinesboy/mavonEditor):mavonEditor - A markdown editor based on Vue that supports a variety of personalized features https://md.zhystar.com/
 
-
 ## 框架
 
 * [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
@@ -189,6 +184,11 @@ npm install -g @vue/cli
 
 ## 组件
 
+组件系统:可扩展HTML元素，封装可重用代码。自定义的元素
+
+
+- vue-resource
+- better-scroll
 * [vuejs/vuex](https://vuex.vuejs.org/zh-cn/):Centralized State Management for Vue.js.
 * [ElemeFE/vue-amap](https://github.com/ElemeFE/vue-amap):vue-amap - 基于 Vue 2.x 和高德地图的地图组件 https://elemefe.github.io/vue-amap/
 * [vuejs/vetur](https://github.com/vuejs/vetur)：Vue tooling for VSCode.
@@ -209,6 +209,10 @@ npm install -g @vue/cli
 * [kaorun343/vue-property-decorator](https://github.com/kaorun343/vue-property-decorator):Vue.js and Property Decorator
 * chart
     - [ElemeFE/v-charts](https://github.com/ElemeFE/v-charts):基于 Vue2.0 和 ECharts 封装的图表组件📈📊 https://v-charts.js.org
+
+## 教程
+
+* https://learnku.com/docs/learn-vue2
 
 ## 项目
 
