@@ -73,7 +73,6 @@ Github允许你下载某个git引用的压缩包。为了强制使用压缩包�
 考虑修改，源代码优先:--prefer-source
 
 ```sh
-
 composer list  # 列出所有可用的命令
 composer init  # 新建文件 composer.json
 composer init --require=foo/bar:1.0.0 -n
@@ -87,7 +86,7 @@ composer global require "squizlabs/php_codesniffer=*"
 composer global require friendsofphp/php-cs-fixer
 
 composer install -vvv # 使用composer install或者composer update命令将会更新所有的扩展包
-composer update|remove [packagename]
+composer update|remove [packagename] -vvv # 更新的话，先删除composer.lock文件
 composer self-update
 
 composer create-project swoft/swoft swoft
@@ -95,11 +94,14 @@ composer create-project doctrine/orm path 2.2.0
 
 export PATH="/usr/local/bin:/Users/username/.composer/vendor/bin":$PATH # 添加到全局文件
 
-composer dump-autoload --optimize|-o # 优化自动加载
-
+composer dump-autoload --optimize|-o # 优化自动加载,将 PSR-4/PSR-0 的规则转化为了 classmap 的规则
+composer dump-autoload --classmap-authoritative|-a  # 同样也是生成了 classmap，区别在于当加载器在 classmap 中找不到目标类时，不会再去文件系统中查找
+composer dump-autoload --apcu # 要安装 apcu 扩展。apcu 可以理解为一块内存，并且可以在多进程中共享,文件系统中找到的结果存储到共享内存
 # >=1.0
 #>=1.0 <2.0
 # >=1.0 <1.1 || >=1.2
+
+"repositories": [ {"type": "composer", "url": "<http://packagist.phpcomposer.com"}>, {"packagist": false} ],
 ```
 
 ```php

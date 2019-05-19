@@ -4,20 +4,50 @@
 ## 配置
 
 ```sh
+yum-config-manager
+
 yum install vim
 yum install git
 yum provides ifconfig
 yum install net-tools
 sudo yum install epel-release # add the CentOS 7 EPEL repository
 ```
+
 ## 防火墙
 
+* CentOS 7默认使用的是firewall作为防火墙，使用iptables必须重新设置一下
+
 ```sh
-systemctl stop|disable firewalld.service #禁止firewall开机启动
+# Centos 7 firewall 命令
+systemctl stop|disable firewalld.service # 停止|禁止firewall开机启动
 
-yum install iptables-services  #安装iptables
+firewall-cmd --list-ports # 查看端口
+firewall-cmd --zone=public --add-port=80/tcp --permanent # 开启端口
+–zone #作用域
+–add-port=80/tcp #添加端口，格式为：端口/通讯协议
+–permanent #永久生效，没有此参数重启后失效
 
+firewall-cmd --reload #重启firewall
+
+# CentOS 7 以下版本 iptables 命令
+yum -y install iptables-services  #安装iptables
 systemctl  start|stop|restart|status|enable iptables.service
+
+# 开放80，22，8080 端口
+/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+/sbin/iptables -I INPUT -p tcp --dport 22 -j ACCEPT
+/sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
+# 保存
+/etc/rc.d/init.d/iptables save
+# 查看打开的端口
+/etc/init.d/iptables status|restart|stop
+## 永久性生效，重启后不会复原
+# 开启
+chkconfig iptables on| off
+
+## 即时生效，重启后复原
+# 查看|开启|关闭防火墙状态
+service iptables status|start|stop
 
 vi /etc/sysconfig/iptables  #编辑防火墙配置文件
 # Firewall configuration written by system-config-firewall
@@ -31,9 +61,12 @@ vi /etc/sysconfig/iptables  #编辑防火墙配置文件
 -A INPUT -i lo -j ACCEPT
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
 -A INPUT -j REJECT --reject-with icmp-host-prohibited
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
+
+systemctl restart|enbale|start|stop iptables.service
 
 vi /etc/selinux/config
 
@@ -44,7 +77,6 @@ SELINUX=disabled #增加
 :wq! #保存退出
 
 setenforce 0 #使配置立即生效
-
 ```
 
 ## 软件源管理

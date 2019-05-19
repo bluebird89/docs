@@ -797,33 +797,45 @@ Hook是Git系统的本地机制，用于在诸如代码提交（Commit）和合�
   - 客户端Hooks
   - 服务端Hooks:检查代码是否符合某些条件，防止开发人员随意将代码推送到master
   - Pre-：在某些特定的Git操作之前被调用，检查推送过来的提交是否合法
+    + applypatch-msg：由'git am'脚本触发. 它将接受一个参数,即将提交的commit msg的临时文件路径
+    + pre-commit的时候我们可以做 eslint
   - Post-：
-* pre-commit的时候我们可以做 eslint
-* post-commit的时候，我们可以做利用 jenkins 类似的工具做持续集成
+    + post-commit的时候，我们可以做利用 jenkins 类似的工具做持续集成
 * 功能
   - 验证你在提交消息中包含了关联的JIRA密钥
   - 在代码合并前，确保满足先决条件
   - 发送通知给你开发团队的聊天室
   - 在切换到不同的工作分支后，设置你自己的工作区
 
-```sh
-cd /home/testgit/sample.git
-cd hooks
-# 这里我们创建post-receive文件
-vim post-receive
-# 在该文件里输入以下内容,自动同步到站点目录（www）
-#!/bin/bash
-git --work-tree=/home/www checkout -f
-# 保存退出后，将该文件用户及用户组都设置成git
-chown git:git post-receive
-# 由于该文件其实就是一个shell文件，我们还应该为其设置可执行权限
-chmod +x post-receive
-```
-
 * [post-checkout-build-status](https://bitbucket.org/tpettersen/post-checkout-build-status/src/master/)
 * [git-ci-hooks](https://bitbucket.org/tpettersen/git-ci-hooks/src/master/)
 * [templates](https://github.com/git/git/tree/master/templates)
 * [Git hooks](https://githooks.com)
+
+#### 使用git hook实现代码的自动布署
+
+* 服务器键仓库
+* 本地clone仓库
+* 部署区clone仓库:必须与服务器键仓库在一台服务器
+
+```sh
+git init --bare /opt/html.git
+git clone root@host:/opt/html.git
+git clone /opt/test.git  /usr/share/nginx/html
+
+# 添加脚本 post-update 或者 post-receive到 远程仓库hooks
+#!/bin/sh
+#
+DEPLOY_DIR=/usr/share/nginx/html/
+echo "start git pull /usr/share/nginx/html/"
+cd $DEPLOY_DIR
+env -i git reset --hard
+env -i git pull
+echo "end"
+
+#!/bin/bash
+git --work-tree=/home/www checkout -f
+```
 
 ### 基于功能分支的开发流程
 
