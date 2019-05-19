@@ -53,7 +53,7 @@ filetype on     # 检测文件类型
 set history=500     # 设置历史行数
 set smartindent     # 理想添加 依据上面的格式自动对齐
 
-ls /usr/share/vim/vim72/colors/        可以查看vim支持的主题色
+ls /usr/share/vim/vim72/colors/  #可以查看vim支持的主题色
 
 /* 目录配色方案（将/etc中的DIR_COLORS文件复制到自己主目录中，并重命名为.dir_colors） */
 cp /etc/DIR_COLORS ~/.dir_colors

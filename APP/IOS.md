@@ -24,6 +24,17 @@
 * 浏览器
     - 网页制作PDF
     - 左上角url前面点击切换阅读模式
+* notes中打开拍照与扫描文档手机自动进入照相机页面
+* AirDrop
+* HandOff：双方都打开
+* 手机解锁MAc：Near Lock
+* Phone 变身Mac遥控器：无线鼠标、Rowmote Pro
+* 多屏幕显示:让iPad或者iphone（虽然有点小，但如果你愿意也可以啦）化身外接显示器
+    - Splashtop Wired XDisplay
+* MAC投影手机
+    - 手机线连MAC
+    - Mac打开QuickTime Player,新建影片录制
+    - 点击红点旁边那个箭头, 选择 iPhone.
 
 ## UI
 

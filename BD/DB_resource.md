@@ -9,12 +9,13 @@
 
 ## 数据集网站
 
-* [Kaggle](https://www.kaggle.com/)：爱竞赛的盆友们应该很熟悉了，Kaggle上有各种有趣的数据集，拉面评级、篮球数据、甚至西雅图的宠物许可证。
+* [Kaggle](https://www.kaggle.com/datasets)：爱竞赛的盆友们应该很熟悉了，Kaggle上有各种有趣的数据集，拉面评级、篮球数据、甚至西雅图的宠物许可证。
 * [UCI机器学习库](http://mlr.cs.umass.edu/ml/)：最古老的数据集源之一，是寻找有趣数据集的第一站。虽然数据集是用户贡献的，因此具有不同的清洁度，但绝大多数都是干净的，可以直接从UCI机器学习库下载，无需注册。
 * [VisualData](https://www.visualdata.io/)：分好类的计算机视觉数据集，可以搜索
 * [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/index.php)
 * [AWS开放数据](https://registry.opendata.aws/)
 * [Google数据集搜索引擎](https://toolbox.google.com/datasetsearch)
+* [Google Trends](https://trends.google.com/trends/explore):按照时间的搜索热度,按照地区的搜索热度 相关主题 相关搜索 
 * [微软数据集](https://msropendata.com/)
 * [Awesom Public Datasets](https://github.com/awesomedata/awesome-public-datasets):按主题整理了大量的数据集内容，例如：生物学、经济学、教育等。其中列出的大多数数据集都是免费的，但在使用任何数据集之前，均需检查数据集的许可要求。
 * [VisualData数据集](https://www.visualdata.io/https://www.visualdata.io/)
@@ -27,13 +28,20 @@
     - [学校系统财务状况](https://catalog.data.gov/dataset/annual-survey-of-school-system-finances)：美国学校系统财务状况调查。
     - [慢性病数据](https://catalog.data.gov/dataset/u-s-chronic-disease-indicators-cdi-e50c9)：美国各地慢性病指标数据。
     - [美国国家教育统计中心](https://nces.ed.gov/)：美国和世界各地的教育机构和教育人口统计数据。
+    - [U.S. Census Bureau](https://www.census.gov/):获得与人口、经济和地理相关的信息，也可以按主题或搜索进行浏览
     - [英国数据中心](https://www.ukdataservice.ac.uk/)：英国最大的社会，经济和人口数据收集。
     - [美国数据](http://datausa.io/)：美国公共数据的全面可视化
-    - [欧洲政府数据集](https://data.europa.eu/euodp/data/dataset)
+    - [英国 Data.gov](https://data.gov.uk/)
+    - [欧洲政府数据集](https://data.europa.eu/euodp/data/dataset):地理 金融 统计学 选举结果 法案 有关犯罪、交通、健康、环境和科学研究的信息
     - [新西兰政府数据集](https://catalogue.data.govt.nz/dataset)
     - [印度政府数据集](https://data.gov.in/)
     - [北爱尔兰公共数据集](https://www.opendatani.gov.uk/)
+    - [Altmetric](https://www.altmetric.com/top100/2018/):每年发布的最具热度的前 100 篇文章
+    - [Open Corporates](https://opencorporates.com/):超过 1 亿家公司的信息。可以按公司或高级职员进行搜索，并在需要的时候限制你的搜索范围。
+    - [Health Data](https://healthdata.gov/):可搜索的主题包括医疗设备、环境卫生、药物滥用、精神健康等
+    - [The World Factbook](https://www.cia.gov/library/publications/the-world-factbook/)
     - [Our World in Data](https://ourworldindata.org):Research and interactive data visualizations to understand the world’s largest problems.
+    - [Reddit](https://www.reddit.com/r/datasets):可以搜索数据集并查找提供信息和请求信息的人
 * 财经
     - [Quandl](https%3A//www.quandl.com/)：经济和金融数据的良好来源 - 可用于建立预测经济指标或股票价格的模型。
     - [世界银行开放数据](https%3A//data.worldbank.org/)：数据集涵盖来自世界各地的人口统计数据和大量的经济和发展指标。
@@ -88,7 +96,8 @@
 * 交通
     - [uber/kepler.gl](https://github.com/uber/kepler.gl):https://uber.github.io/kepler.gl  http://kepler.gl/
 * 临床
-    - [MIMIC-III](https://mimic.physionet.org/)：MIT计算生理学实验室的公开数据集，标记了约40000名重症监护患者的健康数据，包括人口统计学、生命体征、实验室测试、药物等维度。
+    - [MIMIC-III](https://mimic.physionet.org/)：MIT计算生理学实验室的公开数据集，标记了约40000名重症监护患者的健康数据，包括人口统计学、生命体征、实验室测试、药物等维度
+    - [Centers for Disease Control and Prevention](https://www.cdc.gov/datastatistics/index.html):包括各种健康主题，可让你访问大量可浏览和可搜索的数据。甚至可以通过各种与主题相关的网站创建自己过滤的数据集。
 * 公共政府数据集
     - [Data.gov](https://www.data.gov/)：该网站可以从多个美国政府机构下载数据，包括各种奇怪的数据，从政府预算到考试分数都有。不过，其中大部分数据需要进一步研究。
     - [食物环境地图集](https://catalog.data.gov/dataset/food-environment-atlas-f4a22)：本地食材如何影响美国饮食的数据。
@@ -109,8 +118,22 @@
     - [lionsoul2014/ip2region](https://github.com/lionsoul2014/ip2region):准确率99.9%的ip地址定位库，0.0x毫秒级查询，数据库文件大小只有1.5M，提供了java,php,c,python,nodejs,golang,c#查询绑定和Binary,B树,内存三种查询算法，妈妈再也不用担心我的ip地址定位！ http://gitee.com/lionsoul/ip2region
 * 房产
     - [XuefengHuang/lianjia-scrawler](https://github.com/XuefengHuang/lianjia-scrawler):链家二手房租房在线数据，存量房交易服务平台数据，详细数据分析教程 http://www.ershoufangdata.com
+* 环境
+    - [National Center for Environmental Informatio](https://www.ncdc.noaa.gov/data-access):涵盖地球物理学、大气和海洋数据。他们目前是世界上最大的气候和天气信息提供商。
+* 地理
+    - [NASA 的 Earth Data](https://earthdata.nasa.gov/):包含了美国宇航局的地球观测数据，其中包含如 NC 地表温度和碳通量等信息。
+* 社会
+    - [Pew Internet](https://www.pewinternet.org/datasets/)
+    - [Bureau of Labor Statistics](https://www.bls.gov/data/):美国劳动力市场活跃度、工作条件和价格变化的数据
+    - [Group Lens](https://grouplens.org/datasets/):关于书籍和电影的信息
+* 新闻
+    - [GitHub 上的 BuzzFeed News](https://www.searchenginejournal.com/twitter-is-still-verifying-users-despite-pausing-the-application-process/303589/):来自 Buzzfeed 的数据 <https://github.com/BuzzFeedNews/everything>
 
 ## 工具
 
 * [prestodb/presto](https://github.com/prestodb/presto):Distributed SQL query engine for big data https://prestodb.io
 * [Google Dataset Search](https://toolbox.google.com/datasetsearch)
+
+## 参考
+
+* [41 Places to Find Free Images Online That You Will Actually Want to Use](https://www.searchenginejournal.com/find-free-images-online/298887/)

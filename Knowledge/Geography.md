@@ -17,3 +17,51 @@
 
 
 ## 安纳普尔纳峰
+
+
+## Geohash
+
+* 将地球理解为一个二维平面，将平面递归分解成更小的子块，每个子块在一定经纬度范围内拥有相同的编码，
+* 纬度范围 (-90, 90) 平分成两个区间 (-90,0)、(0, 90)。如果目标纬度位于前一个区间，则编码为0，否则编码为1。
+* 将 (0, 90) 分成 (0, 45), (45, 90)两个区间
+    - 经度每隔0.00001度，距离相差约1米；
+    - 每隔0.0001度，距离相差约10米；
+    - 每隔0.001度，距离相差约100米；
+    - 每隔0.01度，距离相差约1000米；
+    - 每隔0.1度，距离相差约10000米。
+* 经度也用同样的算法，对 (-180, 180) 依次细分
+* 将经度和纬度的编码合并，奇数位是纬度，偶数位是经度。用0-9、b-z（去掉a, i, l, o）这32个字母进行 base32 编码,数据库新增一个字段 geohash，记录此点的geohash值
+* 查询附近的时候，利用SQL中 like 'wx4g0e%' 进行查询
+* 获取附近点距离
+
+```php
+/**
+ * [PHP Code] 根据经纬度计算两点之间的记录
+ * @param $lat1 纬度1
+ * @param $lng1 经度1
+ * @param $lat2 纬度2
+ * @param $lng2 经度2
+ * @return float 单位(米)
+ */
+function getDistance($lat1, $lng1, $lat2, $lng2)
+{
+    //地球半径
+    $R = 6378137;
+
+    //将角度转为弧度
+    $radLat1 = deg2rad($lat1);
+    $radLat2 = deg2rad($lat2);
+    $radLng1 = deg2rad($lng1);
+    $radLng2 = deg2rad($lng2);
+
+    //结果
+    $s = acos(cos($radLat1) * cos($radLat2) * cos($radLng1 - $radLng2) + sin($radLat1) * sin($radLat2)) * $R;
+
+    //精度
+    $s = round($s * 10000)/10000;
+
+    return  round($s);
+}
+```
+
+* [helei112g/laravel_geohash](https://github.com/helei112g/laravel_geohash):在laravel中使用geohash实现附近的功能

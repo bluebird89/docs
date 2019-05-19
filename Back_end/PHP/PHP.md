@@ -108,6 +108,9 @@ date.timezone = Asia/Shanghai
 
 brew install brew-php-switcher
 brew-php-switcher 5.6
+
+# virtual memory exhausted: Cannot allocate memory
+# 编译调整虚拟机内存大小
 ```
 
 * [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only.
@@ -136,11 +139,12 @@ expose_php = Off # X-Powered-By的配置
 # 找到PHP扩展所在目录
 php-config --extension-dir
 
+opcache.enable=1 # 开关打开
 opcache.validate_timestamps=1    # 生产环境中配置为0：因为Zend Opcache将不能觉察PHP脚本的变化，必须手动清空Zend OPcache缓存的字节码，才能让它发现PHP文件的变动。这个配置适合在生产环境中设置为0，但在开发环境设置为1
-opcache.revalidate_freq=0    # 检查脚本时间戳是否有更新时间
+opcache.revalidate_freq=240   # 检查脚本时间戳是否有更新时间
 opcache.memory_consumption=64    # Opcache的共享内存大小，以M为单位
 opcache.interned_strings_buffer=16    # 用来存储临时字符串的内存大小，以M为单位
-opcache.max_accelerated_files=4000    # Opcache哈希表可以存储的脚本文件数量上限
+opcache.max_accelerated_files=4000    # Opcache哈希表可以存储的脚本文件数量上限 对多缓存文件限制, 命中率不到 100% 的话, 可以试着提高这个值
 opcache.fast_shutdown=1         # 使用快速停止续发事件
 
 php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小

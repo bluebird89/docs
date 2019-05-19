@@ -120,7 +120,7 @@ $document_uri # 同 $uri
 -x/!-x # 判断文件是否可以执行
 ```
 
-### 设置
+### 配置
 
 * 全局块：主要影响Nginx全局，通常包括下面几个部分：
     - 配置运行Nginx服务器用户（组）
@@ -265,11 +265,11 @@ http {
     # Gzip Settings
     gzip on;
     gzip_static on;
-    gzip_disable "msie6"; //IE6浏览器不启用压缩
+    gzip_disable "msie6"; # IE6浏览器不启用压缩
     gzip_vary on;
     gzip_proxied any;
-    gzip_comp_level 6; //设置压缩级别，范围1-9,9压缩级别最高，也最耗费CPU资源
-    gzip_min_length 1100;
+    gzip_comp_level 6; # 设置压缩级别，范围1-9,9压缩级别最高，也最耗费CPU资源
+    gzip_min_length 1100; # 允许压缩的页面最小字节数，页面字节数从header头中的Content-Length中进行获取。默认值是0，不管页面多大都压缩。建议设置成大于1k的字节数，小于1k可能会越压越大
     gzip_buffers 16 8k;
     gzip_http_version 1.1;
     gzip_types text/css text/javascript text/xml text/plain text/x-component

@@ -88,8 +88,8 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
 -   La​Te​XTools:LaTeX 环境配置以及编译
 -   LaTeX-cwl LaTeX 命令的自动补全
 -   LaTeXYZ 提供更加智能的数学环境下的自动补全以及快捷键
--   Markdown Preview
 -   MarkdownEditing
+-   Markdown Preview
 -   Modific:高亮自上次提交后修改过的代码行（支持Git，SVN，Bazaar，Mercurial以及TFS）
 -   MultiEditUtils:该插件用于帮助多重选择下的编辑
 -   Origami:可以随心所欲地分割窗口！创建新板块，删除板块，在板块之间移动或复制显示内容。

@@ -32,6 +32,8 @@ The official GitHub mirror of the Chromium source https://chromium.googlesource.
 * speedtest:网络测速插件
 * [deanoemcke/thegreatsuspender](https://github.com/deanoemcke/thegreatsuspender):A chrome extension for suspending all tabs to free up memory
 * Tampermonkey
+    - https://greasyfork.org/zh-CN/scripts
+    - https://openuserjs.org
 * 批量打开多个链接 LinkClump
 * XML Tree
 * User-Agent Switcher for Chrome

@@ -60,8 +60,6 @@ mysql_secure_installation # 没有设置 root 帐户的密码，马上设置它;
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
 
-mysqladmin
-
 # ubunut 卸载
 sudo apt install mysql-server
 
@@ -103,8 +101,12 @@ systemctl status mysql.service
 docker pull mysql
 docker run --name master -p 3306:3307 -e MYSQL_ROOT_PASSWORD=root -d mysql
 
-# Windows
+# Windows,管理员权限执行
 net start/stop mysql # win平台
+
+## MariaDB
+yum -y install mariadb-server mariadb
+systemctl start mariadb && systemctl enable mariadb
 ```
 
 ## 概念
@@ -302,6 +304,12 @@ show variables like "general_log%";  # 记录操作,pdo执行过程
 set global general_log = on;
 ```
 
+```sh
+# mysqladmin
+
+mysqld --initialize
+```
+
 ### 用户管理
 
 * ALL PRIVILEGES:as we saw previously, this would allow a MySQL user full access to a designated database (or if no database is selected, global access across the system)
@@ -336,6 +344,10 @@ ALTER USER 'root'@'localhost'
   BY 'password';
 
 REVOKE type_of_permission ON database_name.table_name FROM ‘username’@‘localhost’;
+
+## 重置root密码
+# 获取临时密码
+grep 'temporary password' /var/log/mysqld.log
 ```
 
 ### 存储引擎
@@ -1222,6 +1234,8 @@ SELECT user_name, city, age FROM user_test WHERE user_name = 'feinik' ORDER BY c
 ```
 
 ### mysqladmin
+
+### sysbench
 
 ## Docker
 
