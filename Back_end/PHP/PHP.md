@@ -30,6 +30,7 @@ The PHP Interpreter <http://www.php.net>
     - 执行 Execution，顺序执行Opcode，每次一条，以实现PHP代码所表达的功能。
     - APC、Opchche 这些扩展可以将Opcode缓存以加速PHP应用的运行速度，使用它们就可以在请求再次来临时省略前三步。
     - 引擎也实现了基本的数据结构、内存分配及管理，提供了相应的API方法供外部调用。
+* 由虚拟机来执行这些OPCODE
 * Extensions 扩展:常见的内置函数、标准库都是通过extension来实现的，这些叫做PHP的核心扩展，用户也可以根据自己的要求安装PHP的扩展。
 * SAPI(Server Application Programming Interface)中文为服务端应用编程接口，它通过一系列钩子函数使得PHP可以和外围交换数据，SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性。通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式。
 * 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用都是上层应用，PHP 程序员主要工作就是编写它们
@@ -1987,6 +1988,51 @@ var_dump(iterator_to_array($iterator, true));
 var_dump(iterator_to_array($iterator, false));
 ```
 
+## 自动加载
+
+PHP在需要类定义的时候调用它
+
+* include 或require
+* `__autoload`:调用不存在的类时会被自动调用,现在基本废弃
+    - 一个文件中不允许有多个 `__autoload()`方法，引入文件中也存在`__autoload()`
+    - 一个文件中引入多个文件目录
+* bool spl_autoload_register ([ callable $autoload_function [, bool $throw = true [, bool $prepend = false ]]] ) :注册给定的函数作为 `__autoload` 的实现
+    - 函数名称
+    - 闭包函数
+* 获取所有已注册的 `__autoload()` 函数:spl_autoload_functions ( void ) 
+* spl_classes — 返回所有可用的SPL类
+* spl_autoload_unregister — 注销已注册的`__autoload()`函数 
+
+
+```php
+<?php
+function __autoload($class){
+    if(file_exists($class.".php")){
+        require_once($class.".php");
+    }else{
+        die("文件不存在！");
+    }
+}
+
+Test1::test();
+Test2::test();
+
+// 注册
+spl_autoload_register(function ($class_name) {
+    $class_name = str_replace('\\','/', $class_name); /*将 use语句中的’\’替换成’/‘，避免造成转移字符导致require_once时会报错*/
+    $file_name  = $class_name . '.class.php';
+    if (file_exists($file_name)) {
+        require_once $file_name;
+    }
+
+});
+
+use Animal\Dog;
+
+$dog = new Dog();
+$cat = new \Animal\Cat();
+```
+
 ## JSON
 
 * json_encode( mixed $value [, int $options = 0 [, int $depth = 512 ]] )函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据
@@ -2068,7 +2114,7 @@ $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
     - memcache完全在PHP框架内开发的，提供了memcached的接口，memecached扩展是使用了libmemcached库提供的api与memcached服务端进行交互。 libmemcached 是 memcache 的 C 客户端，它具有低内存，线程安全等优点
     - memcache提供了面向过程及面向对象的接口，memached只支持面向对象的接口。 memcached 实现了更多的 memcached 协议。
     - memcached 支持 Binary Protocol，而 memcache 不支持，意味着 memcached 会有更高的性能。不过，还需要注意的是，memcached 目前还不支持长连接。
-* mongo
+* mongodb
 * Opcache:通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能， 存储预编译字节码的好处就是省去了每次加载和解析 PHP 脚本的开销，但是对于I/O开销如读写磁盘文件、读写数据库等并无影响。
     - 字节码(Byte Code)：一种包含执行程序比机器码更抽象的中间码，由一序列 op代码/数据对组成的二进制文件。 比如Java源码经编译后生成的字节码在运行时通过JVM(JVM针对不同平台有不同版本，Java程序在JVM中运行而称 为解释性语言Interpreted)再做一次转换生成机器码，才能够跨平台运行；C#也类似，EXE文件的执行依赖.NET Framework；HHVM(HipHop Virtual Machine，Facebook开源的PHP虚拟机)采用了JIT(Just In Time Just Compiling，即时编译)技术，在运行时编译字节码为机器码，让他们的PHP性能测试提升了一个数量级。 唯有C/C++编译生成的二进制文件可直接运行。
     - 机器码(Machine Code)：也被称为原生码(Native Code)，用二进制代码表示的计算机能直接识别和执行的一种机器指令的集合，它是计算机硬件结构赋予的操作功能。
