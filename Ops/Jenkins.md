@@ -10,9 +10,10 @@ war包自带Jetty服务器 `java -jar jenkins.war`访问<http://localhost:8080>�
 
 将jenkins.war放到tomcat/webapps目录下，重启tomcat服务，<http://localhost:8080/jenkins>
 
-### ubuntu安装
+### 安装
 
 ```sh
+# ubuntu
 wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
 sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 sudo apt-get update
@@ -25,6 +26,24 @@ ufw allow 8080
 
 sudo ufw allow OpenSSH
 sudo ufw enable
+
+# centos
+yum install -y java
+# 安装jenkins
+# 添加Jenkins库到yum库，Jenkins将从这里下载安装。
+wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+yum install -y jenkins
+# 如果不能安装就到官网下载jenkis的rmp包，官网地址（http://pkg.jenkins-ci.org/redhat-stable/）
+wget http://pkg.jenkins-ci.org/redhat-stable/jenkins-2.7.3-1.1.noarch.rpm
+wget https://mirrors.tuna.tsinghua.edu.cn/jenkins/redhat/jenkins-2.173-1.1.noarch.rpm
+rpm -ivh jenkins-2.7.3-1.1.noarch.rpm
+
+# 配置jenkis的端口
+vi /etc/sysconfig/jenkins
+JENKINS_PORT="8080"
+
+service jenkins start/stop/restart
 
 # 访问ip：8080，进行安装以及配置用户
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
@@ -52,6 +71,6 @@ docker run -d -p 49001:8080 -v$PWD/jenkins:/var/jenkins_home -t jenkins/jenkins
 
 ## 参考
 
-- [官网](https://jenkins.io/)
+- [官网](https://jenkins.io/) 中文网 <http://www.jenkins.org.cn>
 - [插件](https://plugins.jenkins.io/)
 - [Jenkins文档](https://jenkins.io/doc/book/pipeline/)

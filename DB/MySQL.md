@@ -1457,6 +1457,7 @@ pt-query-digest --type=binlog mysql-bin.000001.sql
 
 ## 备份
 
+* 备份策略：每天做一次增量备份，每周做一次全量备份，通过定时任务做
 * 在二级复制服务器上进行备份。
 * 备份过程中停止数据的复制，以防止出现数据依赖和外键约束的不一致。
 * 彻底停止MySQL之后，再从数据文件进行备份。
@@ -1478,8 +1479,99 @@ mysqldump -h 主机名 -u 用户名 -p --all-databases > dump.sql
 mysqldump -h 主机名 -u 用户名 -p --databases 库名1 [库名2 ...] > dump.sql
 mysqldump -h 主机名 -u 用户名 -p 库名 表名1 [表名2 ...] > dump.sql
 
-shell> mysql -uroot -p < dump.sql
-mysql> source  dump.sql
+# 全量备份
+/usr/bin/mysqldump -uroot -p123456  --lock-all-tables --flush-logs test > /home/backup.sql # 参数 —flush-logs：使用一个新的日志文件来记录接下来的日志； —lock-all-tables：锁定所有数据库;
+
+## 脚本
+#!/bin/bash
+#在使用之前，请提前创建以下各个目录
+#获取当前时间
+date_now=$(date "+%Y%m%d-%H%M%S")
+backUpFolder=/home/db/backup/mysql
+username="root"
+password="123456"
+db_name="zone"
+#定义备份文件名
+fileName="${db_name}_${date_now}.sql"
+#定义备份文件目录
+backUpFileName="${backUpFolder}/${fileName}"
+echo "starting backup mysql ${db_name} at ${date_now}."
+/usr/bin/mysqldump -u${username} -p${password}  --lock-all-tables --flush-logs ${db_name} > ${backUpFileName}
+#进入到备份文件目录
+cd ${backUpFolder}
+#压缩备份文件
+tar zcvf ${fileName}.tar.gz ${fileName}
+​
+# use nodejs to upload backup file other place
+#NODE_ENV=$backUpFolder@$backUpFileName node /home/tasks/upload.js
+date_end=$(date "+%Y%m%d-%H%M%S")
+echo "finish backup mysql database ${db_name} at ${date_end}."
+
+# 恢复全量备份
+mysql -uroot -p < dump.sql
+source  dump.sql
+
+## 增量备份
+# 查看 log_bin 是否开启，因为要做增量备份要开启 log_bin
+show variables like '%log_bin%';
+# 修改配置文件，重启mysql服务，查看sql_log_bin 开启
+#/etc/mysql/mysql.conf.d/mysqld.cnf
+log-bin=/var/lib/mysql/mysql-bin
+server-id=123454
+
+# 查看当前使用的 mysql_bin.000*** 日志文件
+show master status;
+# 添加数据
+insert into `zone`.`users` ( `name`, `sex`, `id`) values ( 'zone3', '0', '4');
+
+# 使用新的日志文件
+mysqladmin -uroot -123456 flush-logs
+# 将刚刚插入的数据删除
+# 恢复
+mysqlbinlog /var/lib/mysql/mysql-bin.000015 | mysql -uroot -p123456 zone;
+
+## 增量备份脚本
+#!/bin/bash
+#在使用之前，请提前创建以下各个目录
+BakDir=/usr/local/work/backup/daily
+#增量备份时复制mysql-bin.00000*的目标目录，提前手动创建这个目录
+BinDir=/var/lib/mysql
+#mysql的数据目录
+LogFile=/usr/local/work/backup/bak.log
+BinFile=/var/lib/mysql/mysql-bin.index
+#mysql的index文件路径，放在数据目录下的
+​
+mysqladmin -uroot -p123456 flush-logs
+#这个是用于产生新的mysql-bin.00000*文件
+# wc -l 统计行数
+# awk 简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。
+Counter=`wc -l $BinFile |awk '{print $1}'`
+NextNum=0
+#这个for循环用于比对$Counter,$NextNum这两个值来确定文件是不是存在或最新的
+for file in `cat $BinFile`
+do
+    base=`basename $file`
+    echo $base
+    #basename用于截取mysql-bin.00000*文件名，去掉./mysql-bin.000005前面的./
+    NextNum=`expr $NextNum + 1`
+    if [ $NextNum -eq $Counter ]
+    then
+        echo $base skip! >> $LogFile
+    else
+        dest=$BakDir/$base
+        if(test -e $dest)
+        #test -e用于检测目标文件是否存在，存在就写exist!到$LogFile去
+        then
+            echo $base exist! >> $LogFile
+        else
+            cp $BinDir/$base $BakDir
+            echo $base copying >> $LogFile
+         fi
+     fi
+done
+echo `date +"%Y年%m月%d日 %H:%M:%S"` $Next Bakup succ! >> $LogFile
+​
+#NODE_ENV=$backUpFolder@$backUpFileName /root/.nvm/versions/node/v8.11.3/bin/node /usr/local/work/script/upload.js
 ```
 
 ## 参考

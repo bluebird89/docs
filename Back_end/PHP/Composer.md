@@ -14,6 +14,10 @@ PHP 用来管理依赖（dependency）关系的工具。可以在自己的项目
                 * class map lookup
                 * PSR-4 lookup
                 * PSR-0 :autoload_namespaces.php
+* $prefix不为空的PSR-4加载规则:比如类A\B\C，先找A\B\对应目录下面的C.php；再找A\对应目录下面的B\C.php；以此类推
+* $prefix为空的PSR-4加载规则:如果找不到，那就在fallbackDirsPsr4下找A\B\C.php文件
+* $prefix不为空的PSR-0加载规则:PSR-0支持namespace和下划线分隔的类（PEAR-like class name）；这点对一些需要向namespace迁移的旧仓库很有用 对于类A\B\C或者A_B_C，先找A\B\对应目录下面的C.php；再找A\对应目录下面的B\C.php；以此类推
+* $prefix为空的PSR-0加载规则:如果找不到，直接在prefixesPsr0中找A\B\C.php文件 如果还没有找到，在条件允许的状态下，可以到include path中找A\B\C.php文件
 
 ## 安装
 

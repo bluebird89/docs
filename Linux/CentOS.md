@@ -16,6 +16,7 @@ sudo yum install epel-release # add the CentOS 7 EPEL repository
 ## 防火墙
 
 * CentOS 7默认使用的是firewall作为防火墙，使用iptables必须重新设置一下
+* iptables 设置端口暴露
 
 ```sh
 # Centos 7 firewall 命令
@@ -77,6 +78,11 @@ SELINUX=disabled #增加
 :wq! #保存退出
 
 setenforce 0 #使配置立即生效
+
+# 查看端口是否正常开启
+netstat -antlp | grep 8080
+# 查看是否有iptables策略
+iptables -L
 ```
 
 ## 软件源管理
