@@ -39,3 +39,7 @@ php不知为什么用分层与框架
 * Norvig’s Law：任何超过 50％渗透率的技术都不会再次翻倍
 * 边际收益递减:发展到比较成熟的阶段以后，以后每一步的进展会越来越小
 * 太牛逼的人往往机会成本很高，导致他的人生选择其实是很艰难的，这是人生的几大悖论之一。一定会选择那个时候最好的决定，但是世界往前走的过程一般都是牛逼的衰败，不牛逼的起来，这个时候，能力越强的人，反而会赶不上当初不如他们牛逼的人。
+
+## 参考
+
+* [nusr/hacker-laws-zh](https://github.com/nusr/hacker-laws-zh):computerbook Laws, Theories, Principles and Patterns that developers will find useful. (对开发人员有用的定律、理论、原则和模式。)
