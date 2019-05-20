@@ -327,3 +327,4 @@
 ## 参考
 
 * [完备的 AI 学习路线，最详细的资源整理](https://mp.weixin.qq.com/s?__biz=Mzg5NzAxMDgwNg==&mid=2247484212&idx=1&sn=18de3f24ff47ff0e096c38ce90a8d95d&chksm=c0791e2df70e973b03a0496ac045974f581bade3a05aa1416104b5556a515acf0ee07a1c3554)
+* [OpenAI](https://openai.com)
