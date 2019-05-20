@@ -161,6 +161,7 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 * 如上，可以实现定时任务
 * 开发桌面应用就是使用PHP-CLI和GTK包
 * linux下用php编写shell脚本
+* [ircmaxell/phpvm](https://github.com/ircmaxell/phpvm):A PHP version manager for CLI PHP
 
 与PHP不同的配置文件
 由webserver使用的php.ini文件，会配置比较短的max_execution_time，而在命令行中的php.ini文件，会配置比较长的max_execution_time。

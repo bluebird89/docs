@@ -50,6 +50,9 @@
 - [Teambition](https://www.teambition.com):项目管理工具，聊天、文件、看板
 - [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software):
 
+
+## [Y-Combinator](https://www.ycombinator.com/)
+
 ## Netflix
 
 * 分析、算法和数字流媒体创新改变了用户观看电影和电视节目的方式。但这项技术一直都是为一种独到的观点服务的——构建一个塑造观看内容的平台，而不仅仅是观看方式
