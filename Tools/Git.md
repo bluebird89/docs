@@ -46,7 +46,7 @@ fi
 
 ## 配置
 
-* 全局配置: git config --global -l
+* 全局配置: git config --global|-l
   - /etc/gitconfig文件
   - ubuntu:~/.gitconfig
 * 系统配置： `git config --system`
@@ -90,6 +90,9 @@ git mergetool -y
 git config --global alias.ls 'log --name-status --oneline --graph'
 git config --global rebase.autoStash true
 git config --global alias.st 'status --porcelain'
+
+git config --global diff.submodule log
+git config status.submodulesummary 1　# show you a short summary of changes to your submodules
 
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 
@@ -308,8 +311,7 @@ Git维护的就是一个commitID树，分别保存着不同状态下的代码。
 git init --bare # 远程仓库文件构建
 git init [project-name] # 初始化git仓库 在当前目录内新建一个Git代码库，会生成.git文件，用于新建空项目文件或者将项目添加git管理，默认URL文件名称，也可以自定义project-name
 
-git clone [url] [project-name] # 下载一个项目和它的整个代码历史,支持多种协议
---recrusive-submodules # init submodule
+git clone [--recurse-submodules]  [url] [project-name] # 下载一个项目和它的整个代码历史,支持多种协议
 git clone http[s]://example.com/path/to/repo.git/
 git clone ssh://example.com/path/to/repo.git/
 git clone [user@]example.com:path/to/repo.git/
@@ -446,7 +448,7 @@ git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1
 git commit -m "commit message" # 将缓存区内容添加到仓库中,在命令行中添加提交注释
 git commit [file1] [file2] ... -m [message]
 git commit -a # 把unstaged文件变成staged(不包括新建文件)，然后commit
-git commit –am[-a -m] "message" # git add . + git commit -m 'message' 合并使用,只提交修改
+git commit –am "message" # git add . + git commit -m 'message' 合并使用,只提交修改
 git commit -v # 提交时显示所有diff信息
 git commit --amend [file1] [file2] ... # 修改上一次提交日志 使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
 
@@ -456,7 +458,7 @@ git commit --amend [file1] [file2] ... # 修改上一次提交日志 使用一�
 # 第3行以后：修改的理由
 
 # 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
-git log -p <file> # 跟踪查看某个文件的历史修改记录 每一次提交是一个快照，会计算每次提交的diff，作为一个patch显示
+git log -p --submodule <file> # 跟踪查看某个文件的历史修改记录 每一次提交是一个快照，会计算每次提交的diff，作为一个patch显示
 git log [branchname]
 --oneline #  --pretty only show the commit id and comment per-commit
 --graph # gives you that visual representation The * indicates that there is a commit on the line
@@ -1231,29 +1233,34 @@ git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -
 
 ### submodule
 
-git submodule 主要用来管理一些单向更新的公共模块或底层逻辑。
+git submodule 主要用来管理一些单向更新的公共模块或底层逻辑
 
-* 它允许你的项目模块化成为每一个 Repository，最终汇聚成一个完整的项目
-* Git Submodule 可以别人的 Repo 挂到你自己的 Repo 中的任何位置，成为的 Repo 的一部分。
-* 在你的项目 Repository 下产生一个 .gitmodules 文件，来记录你的 Submodule 信息，同时 another_project项目也clone下来.
-* 远程库更新后，本地还要重复删除、更新操作
+* 允许你的项目模块化成为每一个 Repository，最终汇聚成一个完整的项目
+* Git Submodule 可以别人的 Repo 挂到你自己的 Repo 中的任何位置，成为的 Repo 的一部分
+* 在项目 Repository 下产生一个 .gitmodules 文件，记录 Submodule 信息，同时 another_project项目也clone下来
+* Git doesn't update submodules automatically when the SHA in them has changed.need to git submodule update  put the submodule back to the expected SHA
 
 ```sh
 # 会添加一个.gitmodules文件在repository的根目录里
 git submodule add git@domain.com:another_project.git file_path/another_project
 
-# 更新 repo 下所有的 submodules
+git config -f .gitmodules submodule.Note/Interview-Notebook.branch master # 指定分支
+git diff --cached --submodule
+
+# 更新 repo 下所有的 submodules,
 git submodule foreach git pull origin master # 出错后会停止更新后面
 
 # clone后初始化
 git submodule init
-git submodule update submodule
+git submodule update [submoduleName] # 只更新ｃｏｍｍｉｔID,不更新代码
+git submodule update [--remote] [submoduleName] # 同步代码
 git submodule update --recrusive --init
 git submodule deinit submodule # delete config
 
-# 删除 首先删除.gitsubmodule中的项目配置
+# 删除 submodule
+# 1.删除.gitsubmodule中的项目配置
+# 2.remove .git/config another_project...　
 git rm --cached another_project # 删除项目
-vim .git/config # ...remove another_project...
 
 # git status contain commit-dirty: regarded as dirty if they have any modified files or untracked files
 git status --ignore-submodules=dirty

@@ -1522,6 +1522,7 @@ ccache gcc foo.c
 * [bash(1) – Linux man page](https://linux.die.net/man/1/bash)
 * [An A-Z Index of the Bash command line for Linux.](https://ss64.com/bash/)
 * [Google’s Shell Style Guide](https://google.github.io/styleguide/shell.xml)
+* [jlevy/the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
 
 ## 脚本参考
 
