@@ -10,6 +10,10 @@
 
 * 存储使用EMC阵列（容量大，数据安全），IBM服务器，即IOE组合，这三个组合很强大（高可用，高性能）
 
+## SSD
+
+* 固态硬盘在乱序写时，性能表现比机械硬盘会好很多，特别是多线程同时进行写操作时，性能也会比单线程顺序写强
+
 ## 工具
 
 * [](https://xod.io/):A VISUAL PROGRAMMING LANGUAGE FOR MICROCONTROLLERS

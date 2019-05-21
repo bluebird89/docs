@@ -22,8 +22,16 @@ brew install rabbitmq
 brew services start rabbitmq # /usr/local/Cellar/rabbitmq/3.6.6/sbin/rabbitmq-server
 # 访问 http://localhost:15672/  默认账号密码为guest
 
-rabbitmqctl status
-sudo rabbitmqctl list_queues # 查看队列状态
+# 普通方式启动
+./rabbitmq-server
+# 守护线程方式启动
+./rabbitmq-server –detached
+
+rabbitmqctl status|stop
+./rabbitmqctl start_app|stop_app # 起停节点
+
+# 查看队列状态
+sudo rabbitmqctl list_queues
 ```
 
 ## 原理
