@@ -125,6 +125,9 @@ brew install docker
 brew install boot2docker
 brew cask install docker-toolbox
 
+## centos
+yum install docker
+
 # Ubuntu
 # Install packages to allow apt to use a repository over HTTPS
 sudo apt-get install \
@@ -152,9 +155,7 @@ sudo apt-get install -y docker.io
 sudo systemctl start docker
 sudo systemctl enable docker
 
-docker version
-
-yum install docker
+docker version|info
 ```
 
 ## Usage:
@@ -215,11 +216,15 @@ CMD /usr/sbin/sshd -D
 ```sh
 # 镜像
 docker images # 列出本地主机上的镜像
-docker pull ubuntu:13.10 # 获取镜像
+
 docker search httpd  # 搜索镜像
+docker pull ubuntu:13.10 # 获取镜像
 docker pull learn/tutorial
+
 docker create ubuntu:14.04 #  create images
+
 docker rmi [IMAGE ID] # Remove one or more images.
+
 docker build [DOCKERFILE PATH] # Build an image from a Dockerfile
 docker build -t my-org:my-image -f /tmp/Dockerfile #  Build an image tagged my-org/my-image where the Dockerfile can be found at /tmp/Dockerfile.
 
