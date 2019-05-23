@@ -799,10 +799,70 @@ Hook是Git系统的本地机制，用于在诸如代码提交（Commit）和合�
   - 客户端Hooks
   - 服务端Hooks:检查代码是否符合某些条件，防止开发人员随意将代码推送到master
   - Pre-：在某些特定的Git操作之前被调用，检查推送过来的提交是否合法
-    + applypatch-msg：由'git am'脚本触发. 它将接受一个参数,即将提交的commit msg的临时文件路径
+    + applypatch-msg：由'git am'脚本触发. 它将接受一个参数,即将提交的commit msg的临时文件路径.以非0状态退出,那么'git am'将在patch(补丁)应用之前取消
+      * 修改message(信息)文件, 用来匹配项目的规范格式
+      * 用于校验commit msg,并在必要时拒绝提交
+    + pre-applypatch:由'git am'脚本触发. 它并不接受参数, 当patch(补丁信息)已经应用,且commit尚未执行之前被调用,如果以非0状态退出, 那么working tree(工作树)将不会被提交,但patch已经被应用
+      * 用于检查当前的working tree(工作树),当其无法通过某个特定测试时,拒绝进行提交
     + pre-commit的时候我们可以做 eslint
-  - Post-：
-    + post-commit的时候，我们可以做利用 jenkins 类似的工具做持续集成
+    + pre-receive：由远程资源库的'git-receive-pack'触发,此时,'git push'已经在本地资源库执行完毕.此时,正准备update远程资源库的refs,且pre-receive hook已经被触发并执行完毕.它的退出状态,决定了全部ref的update是否可以进行.
+      * 这个hook,每个接收操作,仅执行一次. 它不接受参数,但可以从标准输入读取以下格式的文本(每个ref一行):`<old-value> SP <new-value> SP <ref-name> LF` (译者注: SP=空格, LF=\n)
+        + 这里的 `<old-value>` 是ref中原本的Object名,
+        + `<new-value>` 是ref中老的Object名 and
+        + `<ref-name>` 是ref的全名.
+        + 当创建一个新ref,`<old-value>` 将是 40, 即字符`0`.
+
+      * 如果这个hook以非0状态退出,则所有ref都不会被更新(update).
+      * 如果以0退出, 仍可以通过<<update,'update'>> hook 来拒绝特定的ref的更新.
+      * hook的标准输入/标准输出,均导向'git send-pack',所以,你可以简单地使用`echo`来为用户打印信息.
+    + pre-auto-gc:由'git gc --auto'触发. 它不接受参数, 非0状态退出,将导致'git gc --auto'被取消.
+  - Post-
+    + post-applypatch:由'git am'脚本触发. 它并不接受参数, 在patch已经应用且commit已经完成后执行
+      * 用于通知, 而且对'git am'的输出无影响
+    + post-commit:由'git commit'触发, 且可以通过`--no-verify` 来略过. 它并不接受参数, 在commit msg被创建之前执行.如果以非0状态退出,将导致'git commit'被取消.当启用时, 将捕捉以空白字符结尾的行,如果找到这样的行,则取消提交
+      * 做利用 jenkins 类似的工具做持续集成
+    + prepare-commit-msg:由'git commit',在准备好默认log信息后触发,但此时,编辑器尚未启动.它可能接受1到3个参数.如果以非0状态退出, 'git commit' 将会被取消.
+      * 第一个参数是包含commit msg的文件路径.
+      * 第二个参数是commit msg的来源, 可能的值有:
+        - `message` (当使用`-m` 或`-F` 选项);
+        - `template` (当使用`-t` 选项,或`commit.template`配置项已经被设置);
+        - `merge` (当commit是一个merge或者`.git/MERGE_MSG`存在);
+        - `squash`(当`.git/SQUASH_MSG`文件存在);
+        - `commit`, 且附带该commit的SHA1 (当使用`-c`, `-C` 或 `--amend`).
+      * 这个hook的目的是修改message文件,且不受`--no-verify`的影响.
+        - 本hook以非0状态退出,则代表当前hook失败,并取消提交.它不应该取代`pre-commit` hook.
+        - 示例`prepare-commit-msg` hook是准备一个merge的冲突列表.
+      * commit-msg：这个hook由'git commit'触发, 且可以通过`--no-verify` 来略过.它接受一个参数, 包含commit msg的文件的路径.如果以非0状态退出, 'git commit' 将会被取消.
+        - 这个hook可以用于修改message(信息)文件, 用来匹配项目的规范格式(如果有的话).
+        - 也可以用于校验commit msg,并在必要时拒绝提交.
+        - 缺省的'commit-msg' hook, 当启用时,将检查重复的"Signed-off-by"行, 如果找到,则取消commit.
+      * post-commit：这个hook由'git commit'触发. 它不接受参数, 当commit完成后执行.
+        - 这个钩子主要用于通知,对'git commit'的输出无影响.
+      * pre-rebase
+        - 第一个参数, the upstream the series was forked from.
+        - 第二个参数(可选), the branch being rebased (or empty when rebasing the current branch)
+      * post-checkout：由'git checkout'触发, 此时,worktree已经被更新.不会影响'git checkout'的输出，也可以被'git clone'触发, 仅当没有使用'--no-checkout (-n)'.
+        - 这个hook接受3个参数: 之前HEAD的ref,新HEAD的ref,一个标记(1-改变分支,0-恢复文件)
+          - 第一个参数是null-ref
+          - 第二个参数新的HEAD的ref
+          - 第三个参数(flag)永远为1
+        - 用于进行校验检查, 自动显示前后差异, 或者设置工作目录的meta属性.
+      * post-merge：由'git merge'触发,当'git pull'在本地资源库执行完毕.
+        - 接受一个参数, 一个状态标记(当前merge顺利squash -- 不知道啥意思~_~).
+        - 如果合并失败(冲突),那么这个hook不会影响'git merge'的输出,且不会被执行.
+        - 这个hook用于与pre-commit hook共同使用,以保存并恢复working tree的metadata.
+      * post-receive:由远程资源库的'git-receive-pack'触发,此时,本地资源库的'git push'已经完成,且所有ref已经更新.这个hook仅执行一次. 它不接受参数,但跟<<pre-receive,'pre-receive'>> hook获取相同的标准输入格式.
+        - 不影响'git-receive-pack'的输出,因为它在实际工作完成之后执行.跟<<post-update,'post-update'>> hook不一样的是,这个hook可以拿到ref在update前后的值.
+      * post-update:由远程资源库的'git-receive-pack'触发,此时,本地资源库的'git push'已经完成,且所有ref已经更新.它接受可变数量的参数, 每一个参数都是已经实际update的ref的名字.
+      * post-rewrite:由改写commit的命令所触发(`git commit --amend`, 'git-rebase'; 当前 'git-filter-branch' 并'不'触发它!!).它的第一个参数,表示当前是什么命令所触发:`amend` 或 `rebase`.
+  - update:由远程资源库的'git-receive-pack'触发,此时,'git push'已经在本地资源库执行完毕. 此时,正准备update远程资源库的ref. 它的退出状态,决定了当前ref的update是否可以进行
+    + 接受3个参数:
+      * 将要被update的ref的名字,
+      * ref中老object的名字,
+      * 将要存储的ref的新名字.
+    + 以0状态退出,将允许当前ref被update.以非0状态退出,将防止'git-receive-pack'更新当前ref.
+    + 用于防止特定的ref被'force'更新 就是说,可以确保"fast-forward only"这一安全准则.
+    + 使用这个hook实现访问控制, 而不仅仅通过文件系统的权限控制.
 * 功能
   - 验证你在提交消息中包含了关联的JIRA密钥
   - 在代码合并前，确保满足先决条件

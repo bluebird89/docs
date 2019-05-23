@@ -201,8 +201,9 @@ $slugify = new Slugify();
 echo $slugify->slugify('Hello World, this is a long sentence and I need to make a slug from it!');
 ```
 
-## PSR(PHP Standards Recommendations)
+## [PSR(PHP Standards Recommendations)](http://www.php-fig.org/)
 
+组织制定的PHP语言开发规范，约定了很多方面的规则，如命名空间、类名 规范、编码风格标准、Autoload、公共接口等
 
 ## question
 
