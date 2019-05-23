@@ -12,14 +12,18 @@ The PHP Interpreter <http://www.php.net>
 
 ## 发展
 
-* [PSR](http://www.php-fig.org/)组织制定的PHP语言开发规范，约定了很多方面的规则，如命名空间、类名 规范、编码风格标准、Autoload、公共接口等
 * Swoole:Swoole 是一个异步并行的通信引擎，作为 PHP 的扩展来运行。Node.js 的异步回调 Swoole 有，Go语言的协程 Swoole 也有，这完全颠覆了对 PHP 的认知.使用 Swoole PHP 可以实现常驻内存的 Server 程序，可以实现 TCP 、 UDP 异步网络通信的编程开发。比如 WebSocket 即使通信、聊天、推送服务器、RPC 远程调用服务、网关、代理、游戏服务器等。
 * Phar:PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar。用来将多个 PHP 文件打包为一个文件。这个特性使得 PHP 也可以像 Java 一样方便地实现应用程序打包和组件化。一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行。配合 Swoole ，可以在命令行下执行 php server.phar 一键启动服务器。PHP 的代码包可以用 Phar 打包成组件，放到 Swoole 的服务器容器中去加载执行。
 * PHP 作为一门动态脚本语言，优点是开发方便效率高。缺点就是性能差。在密集运算的场景下比 C 、 C++ 相差几十倍甚至上百倍。另外 PHP 不可以直接操作底层，需要依赖扩展库来提供 API 实现。PHP 程序员可以学习一门静态编译语言作为补充实现动静互补，C/C++/Go 都是不错的选择。而且静态语言的编程体验与动态语言完全不同，学习过程可以让你得到更大的提升。 掌握 C/C++ 语言后，还可以阅读 PHP 、 Swoole 、 Nginx 、Redis 、 Linux内核 等开源软件的源码，了解其底层运行原理。 现在最新版本的Swoole提供了C++扩展模块的支持，封装了Zend API，用C++操作PHP变得很简单，可以用C++实现PHP扩展函数和类。
 * PHP
-    * 7.1 :2015.12.3 性能提升
-    * 7.2 JIT(JUST_IN_TIME)
-    * 8:实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
+    - 7.1 :2015.12.3 PHP 核心部分完全重写，带来了最新的 Zend 引擎
+    - 7.2
+    - 7.3
+    - 7.4
+    - 8
+        + 实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
+        +  JIT(JUST_IN_TIME):编译器策略，它将代码表述为一种中间状态，在运行时将其转换为依赖于体系结构的机器码，并即时执行。在 PHP 中，这意味着 JIT 将为 Zend VM 生成的指令视为中间表述，并以依赖于体系结构的机器码执行，也就是说托管代码的不再是 Zend VM，而是更为底层的 CPU。
+        + FFI(Foreign Function Interface)，外部函数接口，它允许从纯脚本语言调用 C 函数、使用 C 数据类型，从而更有效地开发“系统代码”。对于 PHP，FFI 开辟了一种使用纯 PHP 编写 PHP 扩展和绑定到 C 库的方法。
 
 ## 原理
 
@@ -546,6 +550,8 @@ function my_callback_function() {
 
 // Type 1: Simple callback
 call_user_func('my_callback_function');
+
+call_user_func_array([$db, 'query'], array_merge(array($query), $params));
 
 $foo = $foo * 1.3;  // $foo 现在是一个浮点数 (2.6)
 $foo = 5 * "10 Little Piggies"; // $foo 是整数 (50)
@@ -1661,6 +1667,8 @@ $controller->register();
 
 #### trait
 
+* 一种重用代码的机制，它可以减少单继承的某些限制。Traits 与类组合的语义定义了降低复杂性的方式，并避免了与多重继承和 Mixins 相关的典型问题。
+* 类似于类，但仅用于以细粒度和一致的方式对函数进行分组，它是对传统继承的补充，可以实现行为的横向组合，类成员应用不需要继承。
 * 减少单继承语言的限制，自由地在不同层次结构内独立的类中复用 method
 * 优先级:当前类的成员>trait 的方法>被继承的方法
 * Trait 和 Class 相似，但仅仅旨在用细粒度和一致的方式来组合功能。它为传统继承增加了水平特性的组合；也就是说，应用的几个 Class 之间不需要继承。
@@ -1694,6 +1702,14 @@ $o = new MyHelloWorld();
 $o->sayHi();
 $o->sayHello();
 $o->SayWorld();
+
+trait ezcReflectionReturnInfo {
+
+ function getReturnType() { /*1*/ }
+
+ function getReturnDescription() { /*2*/ }
+
+}
 ```
 
 ### 匿名类
