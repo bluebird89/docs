@@ -193,6 +193,10 @@ ipconfig /flushdns # 刷新域名
 - Win+T to cycle through the taskbar icons
 - Win + d：删除文件
 
+## 服务管理
+
+* `sc delete jenkins`
+
 ### [cmder + gow](http://bliker.github.io/cmder/)
 
 * 添加到环境变量
