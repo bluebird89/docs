@@ -48,6 +48,8 @@ killall php-fpm # 关闭进程
 
 ## linux 进程管理
 sudo service php7.0-fpm {start|stop|status|restart|reload|force-reload}
+sudo systemctl status php7.3-fpm
+
 /etc/init.d/php7.2-fpm start
 /usr/local/php/sbin/php-fpm # 启动
 killall php-fpm
