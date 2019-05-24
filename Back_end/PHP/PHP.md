@@ -47,6 +47,7 @@ The PHP Interpreter <http://www.php.net>
 * 配置文件: `/usr/local/etc/php/7.1/` The php.ini and php-fpm.ini file
 * /usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx 通过php-fpm进程运行
 * php71卸载后php-fpm仍然运行
+* phpize pecl 需要php7.*-dev 支持
 
 ```sh
 /usr/local/apache2/bin/apachectl start/stop   service httpd restart
@@ -116,46 +117,24 @@ brew-php-switcher 5.6
 
 # virtual memory exhausted: Cannot allocate memory
 # 编译调整虚拟机内存大小
+
+## ubuntu 安装
+apt-get update && apt-get upgrade
+apt-get install software-properties-common
+sudo add-apt-repository ppa:ondrej/php
+apt-get install php
 ```
 
 * [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only.
 
-## 配置
+### 扩展安装
 
-* memory_limit:设定单个 PHP 进程可以使用的系统内存最大值，从系统可用性上来讲建议越大越好
-    - PHP 操作 Redis Set 集合。修改配置
-    - 如果您的项目中每页页面使用的内存不大，建议改成小一些，这样可以承载更多的并发处理。
-    - PHP 脚本中调用 memory_get_peak_usage()函数多次测试自己项目脚本
-* Zend OPcache 扩展
-    - PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码(http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码。
-    - 每次请求PHP文件都是这样，这会消耗很多资源，如果每次HTTP请求都必须不断解析、编译和执行PHP脚本，消耗的资源更多。
-    - 如果PHP源码不变，相应的字节码也不会变化，显然没有必要每次都重新生成Opcode，结合在Web应用中无处不在的缓存机制，我们可以把首次生成的Opcode缓存起来,直接从内存中读取预先编译好的字节码
-    - 在配置中开启扩展
-* max_execution_time 用于设置单个 PHP 进程在终止之前最长可运行时间
-* Session 会话放在 Redis 或者 Memcached 中，这么做不仅可以减少磁盘的 IO 操作频率，还可以方便业务服务器伸缩。如果想把会话数据保存在 Memcached 中，需要做如下配置：
-* error_reporting
+* 
 
 ```
-session.save_handler = 'memcached'
-session.save_path = '127.0.0.1:11211'
-
-expose_php = Off # X-Powered-By的配置
-
-# 找到PHP扩展所在目录
-php-config --extension-dir
-
-opcache.enable=1 # 开关打开
-opcache.validate_timestamps=1    # 生产环境中配置为0：因为Zend Opcache将不能觉察PHP脚本的变化，必须手动清空Zend OPcache缓存的字节码，才能让它发现PHP文件的变动。这个配置适合在生产环境中设置为0，但在开发环境设置为1
-opcache.revalidate_freq=240   # 检查脚本时间戳是否有更新时间
-opcache.memory_consumption=64    # Opcache的共享内存大小，以M为单位
-opcache.interned_strings_buffer=16    # 用来存储临时字符串的内存大小，以M为单位
-opcache.max_accelerated_files=4000    # Opcache哈希表可以存储的脚本文件数量上限 对多缓存文件限制, 命中率不到 100% 的话, 可以试着提高这个值
-opcache.fast_shutdown=1         # 使用快速停止续发事件
-
-php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
+php -m # 查看添加扩展
+php --ini　＃　查找PHP CLI的ini文件位置
 ```
-
-## CGI vs Cli
 
 ### Cli
 
@@ -181,21 +160,83 @@ php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数
 
 ### [PECL](http://pecl.php.net/)：
 
-PHP Extension Community Library，管理着最底层的PHP扩展。用 C 写的。
+PHP Extension Community Library，管理着最底层的PHP扩展。用 C 写的
 
-* [PEAR](http://pear.php.net/)：PHP Extension and Application Repository，管理着项目环境的扩展。用 PHP 写的。
+* [PEAR](http://pear.php.net/)：PHP Extension and Application Repository，管理着项目环境的扩展。用 PHP 写的
+    - 编译好的依赖：/usr/lib/php
 * Composer：和PEAR都管理着项目环境的依赖，这些依赖也是用 PHP 写的，区别不大。但 composer 却比 PEAR 来的更受欢迎
 
 ```sh
-curl -O http://pear.php.net/go-pear.phar
-sudo php -d detect_unicode=0 go-pear.phar
+phpize -v
+
+sudo apt-get install php-xml php7.3-xml php-dev php7.3-dev
+sudo apt install php-pear
+
+wget http://pear.php.net/go-pear.phar
+php go-pear.phar
+
 
 # 修改bin路径
 pear version
-
-sudo apt install php7.2-dev # to use phpize  生成编译检测脚本
+sudo apt install php7.3-dev # to use phpize  生成编译检测脚本
 
 pecl channel-update pecl.php.net
+
+HP Warning:  PHP Startup: redis: Unable to initialize module
+Module compiled with module API=20170718
+PHP    compiled with module API=20180731
+
+pear.php.net is using a unsupported protocol - This should never happen.
+
+pear update-channels
+pecl update-channels
+pear upgrade
+pecl upgrade
+
+Setting up php7.3-fpm (7.3.5-1+ubuntu18.04.1+deb.sury.org+1) ...
+Error: The new file /usr/lib/php/7.3/php.ini-production does not exist!
+dpkg: error processing package php7.3-fpm (--configure):
+ installed php7.3-fpm package post-installation script subprocess returned error exit status 1
+Errors were encountered while processing:
+ php7.3-fpm
+```
+
+## 配置
+
+* memory_limit:设定单个 PHP 进程可以使用的系统内存最大值，从系统可用性上来讲建议越大越好
+    - PHP 操作 Redis Set 集合。修改配置
+    - 如果您的项目中每页页面使用的内存不大，建议改成小一些，这样可以承载更多的并发处理。
+    - PHP 脚本中调用 memory_get_peak_usage()函数多次测试自己项目脚本
+* Zend OPcache 扩展
+    - PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码(http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码。
+    - 每次请求PHP文件都是这样，这会消耗很多资源，如果每次HTTP请求都必须不断解析、编译和执行PHP脚本，消耗的资源更多。
+    - 如果PHP源码不变，相应的字节码也不会变化，显然没有必要每次都重新生成Opcode，结合在Web应用中无处不在的缓存机制，我们可以把首次生成的Opcode缓存起来,直接从内存中读取预先编译好的字节码
+    - 在配置中开启扩展
+* max_execution_time 用于设置单个 PHP 进程在终止之前最长可运行时间
+* Session 会话放在 Redis 或者 Memcached 中，这么做不仅可以减少磁盘的 IO 操作频率，还可以方便业务服务器伸缩。如果想把会话数据保存在 Memcached 中，需要做如下配置：
+* error_reporting
+
+```
+# 查看配置
+php-config
+
+session.save_handler = 'memcached'
+session.save_path = '127.0.0.1:11211'
+
+expose_php = Off # X-Powered-By的配置
+
+# 找到PHP扩展所在目录
+php-config --extension-dir
+
+opcache.enable=1 # 开关打开
+opcache.validate_timestamps=1    # 生产环境中配置为0：因为Zend Opcache将不能觉察PHP脚本的变化，必须手动清空Zend OPcache缓存的字节码，才能让它发现PHP文件的变动。这个配置适合在生产环境中设置为0，但在开发环境设置为1
+opcache.revalidate_freq=240   # 检查脚本时间戳是否有更新时间
+opcache.memory_consumption=64    # Opcache的共享内存大小，以M为单位
+opcache.interned_strings_buffer=16    # 用来存储临时字符串的内存大小，以M为单位
+opcache.max_accelerated_files=4000    # Opcache哈希表可以存储的脚本文件数量上限 对多缓存文件限制, 命中率不到 100% 的话, 可以试着提高这个值
+opcache.fast_shutdown=1         # 使用快速停止续发事件
+
+php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 ```
 
 ## 语法

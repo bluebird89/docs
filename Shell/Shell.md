@@ -1510,6 +1510,7 @@ ccache gcc foo.c
 * [amanusk/s-tui](https://github.com/amanusk/s-tui):Terminal based CPU stress and monitoring utility https://amanusk.github.io/s-tui/
 * [GitSquared/edex-ui](https://github.com/GitSquared/edex-ui):A science fiction terminal emulator designed for large touchscreens that runs on all major OSs.
 * [rupa/z](https://github.com/rupa/z):z - jump around
+* [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
 
 ## 参考
 
