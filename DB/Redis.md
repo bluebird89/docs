@@ -187,80 +187,228 @@ Redis 没有像 MySQL 这类关系型数据库那样强大的查询功能，需�
 
 ### String
 
-简单的key-value类型，value可以是String或者数字.值可以是任何各种类的字符串（包括二进制数据）例如你可以在一个键下保存一副jpeg图片.即可以完全实现目前 Memcached 的功能，并且效率更高。还可以享受Redis的定时持久化，操作日志及 Replication等功能
+* 简单的key-value类型，value可以是String或者数字。其它数据结构也是在字符串的基础上设计的
+* 值可以是任何各种类的字符串（包括二进制数据），如：简单的字符串、JSON、XML、二进制等，但有一点要特别注意：在 Redis 中字符串类型的值最大只能保存 512 MB。
+* 例如你可以在一个键下保存一副jpeg图片.即可以完全实现目前 Memcached 的功能，并且效率更高。还可以享受Redis的定时持久化，操作日志及 Replication等功能
+* 方法
+    - 是否存在： `exists key`
+    - 设置值:`set key value [EX seconds] [PX milliseconds] [NX|XX]`,有几个非必须的选项
+        + EX seconds：为键设置秒级过期时间
+        + PX milliseconds：为键设置毫秒级过期时间
+        + NX：键必须不存在，才可以设置成功，用于添加
+            * 同一个 key 在执行 setnx 命令时，只能成功一次，并且由于 Redis 的单线程命令处理机制，即使多个客户端同时执行 setnx 命令，也只有一个客户端执行成功。
+            * 基于 setnx 这种特性，setnx 命令可以作为分布式锁的一种解决方案
+        + XX：键必须存在，才可以设置成功，用于更新
+            * 多次更新，跟原来值一样？
+    - 获取值 `get key`
+    - 批量设置值: `mset key value [key value]`
+    - 批量获取值:`mget key [key1 key2]`,键不存在，那么它的值将为 nil,并且返回结果的顺序与传入时相同
+    - incr 命令用于对值做自增操作，返回的结果分为 3 种情况:
+        + 如果值不是整数，那么返回的一定是错误
+        + 如果值是整数，那么返回自增后的结果
+        + 如果键不存在，那么就会创建此键，然后按照值为 0 自增， 就是返回 1
+    - decr key 自减
+    - incrby kek increment 自增指定数字
+    - decrby key decrement 自减指定数字
+    - incrbyfloat key increment 自增浮点数
+    - 获取字符串长度 `strlen key`
+        + 每个中文占用 3 个字节
+    - 往字符串append内容: `append key value`
+    - 设置并返回原值 `getset key value`
+    - 设置和获取字符串的某一段内容 `getrange key start end` O(n) n是字符长度
+    - 设置及获取字符串的某一位（bit）`setrange key offeset values`
+    - 批量设置一系列字符串的内容
+    - DEL key 该命令用于在 key 存在时删除 key。
+    - DUMP key 序列化给定 key ，并返回被序列化的值。
+    - EXISTS key 检查给定 key 是否存在。
+    - EXPIRE key seconds 为给定 key 设置过期时间。
+    - EXPIREAT key timestamp EXPIREAT 的作用和 EXPIRE 类似，都用于为 key 设置过期时间。 不同在于 EXPIREAT 命令接受的时间参数是 UNIX 时间戳(unix timestamp)。
+    - PEXPIRE key milliseconds 设置 key 的过期时间以毫秒计。
+    - PEXPIREAT key milliseconds-timestamp 设置 key 过期时间的时间戳(unix timestamp) 以毫秒计
+    - KEYS pattern 查找所有符合给定模式( pattern)的 key 。
+    - MOVE key db 将当前数据库的 key 移动到给定的数据库 db 当中。
+    - PERSIST key 移除 key 的过期时间，key 将持久保持。
+    - PTTL key 以毫秒为单位返回 key 的剩余的过期时间。
+    - TTL key 以秒为单位，返回给定 key 的剩余生存时间(TTL, time to live)。
+    - RANDOMKEY 从当前数据库中随机返回一个 key 。
+    - RENAME key newkey 修改 key 的名称
+    - RENAMENX key newkey 仅当 newkey 不存在时，将 key 改名为 newkey 。
+    - TYPE key 返回 key 所储存的值的类型。
+* 编码
+    - int：8 个字节的长整型
+    - embstr：小于等于 39 个字节的字符串
+    - raw：大于 39 个字节的字符串
 
-* 获取字符串长度
-* 往字符串append内容
-* 设置和获取字符串的某一段内容
-* 设置及获取字符串的某一位（bit）
-* 批量设置一系列字符串的内容
+```sh
+exists name # 0
+set name henry # OK
+setnx name henry # (interger) 0,已存在，无法添加
+setnx henry_lee henry # (interger) 1
 
-```
+set name henry_lee xx # OK 更新
+set name2 henry_lee xx # (nil) 不存在，无法更新
+
 set counter 100
-get counter
-incr counter
-incrby counter 10
-DECR and DECRBY
+INCR counter
+DECRBY counter 10
+
+# Beijing
+setrange city 3 h # Beihing
+getrange city 3 4 # hi
+object encoding city
 ```
 
 一般做一些复杂的计数功能的缓存。计数器
 
 ### Hash
 
-在Memcached中，我们经常将一些结构化的信息打包成HashMap，在客户端序列化后存储为一个字符串的值，比如用户的昵称、年龄、性别、积分等，这时候在需要修改其中某一项时，通常需要将所有值取出反序列化后，修改某一项的值，再序列化存储回去。这样不仅增大了开销，也不适用于一些可能并发操作的场合（比如两个并发的操作都需要修改积分）。而Redis的Hash结构可以使你像在数据库中Update一个属性一样只修改某一项属性值。
+* 在Memcached中，将一些结构化的信息打包成HashMap
+    - 在客户端序列化后存储为一个字符串的值，比如用户的昵称、年龄、性别、积分等，需要修改其中某一项时，通常需要将所有值取出反序列化后，修改某一项的值，再序列化存储回去。这样不仅增大了开销，也不适用于一些可能并发操作的场合（比如两个并发的操作都需要修改积分）,引入CAS等复杂问题。而Redis的Hash结构可以使你像在数据库中Update一个属性一样只修改某一项属性值。要存储一个用户信息对象数据:
+    - 这个用户信息对象有多少成员就存成多少个key-value对儿，用用户ID+对应属性的名称作为唯一标识来取得对应属性的值，虽然省去了序列化开销和并发问题，但是用户ID为重复存储，如果存在大量这样的数据，内存浪费还是非常可观的。
+* Redis的Hash实际是内部存储的Value为一个HashMap，并提供了直接存取这个Map成员的接口
+    - Key仍然是用户ID, value是一个Map，这个Map的key是成员的属性名，value是属性值，这样对数据的修改和存取都可以直接通过其内部Map的Key(Redis里称内部Map的key为field), 也就是通过 key(用户ID) + field(属性标签) 就可以操作对应属性数据了，既不需要重复存储数据，也不会带来序列化和并发修改控制的问题。
+    - Redis提供了接口(hgetall)可以直接取到全部的属性数据,但是如果内部Map的成员很多，那么涉及到遍历整个内部Map的操作，由于Redis单线程模型的缘故，这个遍历操作可能会比较耗时，而另其它客户端的请求完全不响应
+* HashMap，实际这里会有2种不同实现
+    - 这个Hash的成员比较少时Redis为了节省内存会采用类似一维数组的方式来紧凑存储，而不会采用真正的HashMap结构，对应的value redisObject的encoding为zipmap
+    - 当成员数量增大时会自动转成真正的HashMap,此时encoding为ht
+* 方法
+    - 判断 field 是否存在 `hexists key field`
+    - 设置值 `hset key field value` 有返回值的。如果 hset 命令设置成功，则返回 1，否则返回 0
+    - hsetnx:在 field 不存在的时候，才能设置成功
+    - 获取值:`hget key field`
+    - 删除 field `hdel key field [field ...]`,返回就是成功删除 field 的个数,field 不存在时，并不会报错，而是直接返回 0
+    - 计算 field 个数 `hlen key`
+    - 批量设置或获取 field-value
+        + `hmget key field [field ...]`
+        + `hmset key field value [field value ...]` 不存在返回 nil
+    - 获取所有 field `hkeys key`
+    - 获取所有 value `hvals key`
+    - 获取所有的 field-value `hgetall key`
+    - 计数:返回操作后结果，step 没有默认值
+        + `hincrby key field step`
+        + `hincrbyfloat key field step`
+    - 计算 value 的字符串长度 `hstrlen key field`,没有 field 则返回 0
+    - hdel key field1 field2
+* 编码
+    - iplist（压缩列表）：当哈希类型中元素个数小于 hash-max-ziplist-entries 配置（默认 512 个），同时所有值都小于 hash-max-ziplist-value 配置（默认 64 字节）时
+    - hashtable（哈希表）：当上述条件不满足时，Redis 则会采用 hashtable 作为哈希的内部实现。
+* 场景
+    - 做单点登录的时候，就是用这种数据结构存储用户信息，以CookieId作为Key，设置30分钟为缓存过期时间，能很好地模拟出类似Session的效果。
 
-要存储一个用户信息对象数据:
+```sh
+hexists 2007006018 name
+hset 2007006018 name liboming # 1
+hsetnx 2007006018 name liboming # 0
+hget 2007006018 name # liboming
+hdel 20017006018 name city # 0 city 不存在
+hmset 2007006018 city Shanghai height 174 wight 68
+hmget 2007006018 city name age
 
-* 将用户ID作为查找key,把其他信息封装成一个对象以序列化的方式存储，这种方式的缺点是，增加了序列化/反序列化的开销，并且在需要修改其中一项信息时，需要把整个对象取回，并且修改操作需要对并发进行保护，引入CAS等复杂问题。
-* 这个用户信息对象有多少成员就存成多少个key-value对儿，用用户ID+对应属性的名称作为唯一标识来取得对应属性的值，虽然省去了序列化开销和并发问题，但是用户ID为重复存储，如果存在大量这样的数据，内存浪费还是非常可观的。
+hvals 2007006018
+hkeys 2007006018
+hgetall 2007006018
 
-Redis的Hash实际是内部存储的Value为一个HashMap，并提供了直接存取这个Map成员的接口.Key仍然是用户ID, value是一个Map，这个Map的key是成员的属性名，value是属性值，这样对数据的修改和存取都可以直接通过其内部Map的Key(Redis里称内部Map的key为field), 也就是通过 key(用户ID) + field(属性标签) 就可以操作对应属性数据了，既不需要重复存储数据，也不会带来序列化和并发修改控制的问题。
+hincrby 2007006018 height 1
+hstrlen 2007006018 name
 
-Redis提供了接口(hgetall)可以直接取到全部的属性数据,但是如果内部Map的成员很多，那么涉及到遍历整个内部Map的操作，由于Redis单线程模型的缘故，这个遍历操作可能会比较耗时，而另其它客户端的请求完全不响应
-
-HashMap，实际这里会有2种不同实现，这个Hash的成员比较少时Redis为了节省内存会采用类似一维数组的方式来紧凑存储，而不会采用真正的HashMap结构，对应的value redisObject的encoding为zipmap,当成员数量增大时会自动转成真正的HashMap,此时encoding为ht。
-
+object encoding 2007006018
 ```
-hgetall
-hget
-hset
-```
-
-做单点登录的时候，就是用这种数据结构存储用户信息，以CookieId作为Key，设置30分钟为缓存过期时间，能很好地模拟出类似Session的效果。
 
 ### List
 
-Redis list的实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销，Redis内部的很多实现，包括发送缓冲队列等也都是用的这个数据结构。
+* 存储多个有序字符串的一种新类型
+    - 列表中所有的元素都是有序的，所以它们是可以通过索引获取的，也就是 lindex 命令。并且在 Redis 中列表类型的索引是从 0 开始的
+    - 列表中的元素是可以重复的，也就是说在 Redis 列表类型中，可以保存同名元素
+* 实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销
+* 列表就是有序元素的序列：10，20，1，2，3就是一个例表，但用数组实现的List和Linked List实现的list，在属性方面大不相同。
+    - Redis lists基于Linked list实现。这意味着即使在一个list中有数百万个元素，在头部或尾部添加一个元素的操作，其时间复杂度也是常数级别的。用LPUSH命令在十个元素的list头部添加新元素，和在千万元素的list头部添加新元素的速度相同。
+    - Redis Lists用linked list实现的原因是：
+        + 对于数据库系统来说，到头重要的特性是：能非常快的在很大的列表上添加元素
+        + 正如你将要看到的：Redis lists能在常数时间取得常数长度
+* 缺点
+    - 在数组实现的List中利用索引访问元素的速度极快，而同样的操作在linked list实现的list上没有那么快
+* 方法
+    - 查看元素 `lrange key 0 -1`,没有 rrange
+    - 从右边插入元素 `rpush key value [value ...]`, 多个值依次操作,返回key中全部元素个数
+    - 从左边插入元素 `lpush key value [value ...]`, 多个值依次操作,返回key中全部元素个数
+    - 向某个元素前或者后插入元素 `linsert key BEFORE|AFTER pivot value`,返回key中全部元素个数
+    - 插入位置在重复元素第二个的位置？
+    - 获取指定范围内的元素列表 `lrange key start stop`
+        + 索引下标从左到右分别是 0 到 N-1，从右到左是 -1 到 -N
+        + stop 参数在执行时会包括当前元素，并不是所有的语言都是这样的
+    - 获取列表中指定索引下标的元素 `lindex key index`
+    - 获取列表长度 `llen key`
+    - 从列表左侧弹出元素 `lpop key`
+    - 从列表右侧弹出元素 `rpop key`
+    - 删除指定元素 `lrem key count value`
+        + count > 0 表示从左到右，最多删除 count 个值为value元素，返回成功删除元素的个数
+        + count < 0：从右到左，最多删除 count 个值为value元素
+        + count = 0：删除所有值为value元素
+    - 按照索引范围修剪列表 `ltrim key start stop`: 直接保留 start 索引到 stop 索引的之间的元素，并包括当前元素，而之外的元素则都会删除掉,返回改命令是否成功的状态
+    - 修改指定索引下标的元素 `lset key index value`
+    - 阻塞操作：blpop 和 brpop 命令是 lpop 和 rpop 命令的阻塞版本，可以指定多个列表的键.如果 timeout=3，则表示客户端等待 3 秒后才能返回结果，如果 timeout=0，则表示客户端会一直等待，也就是会阻塞,取消不支持
+        + 多个客户端都对同一个键执行 blpop 或者 brpop 命令，则最先执行该命令的客户端会获取到该键的元素。
+        + blpop key [key ...] timeout
+        + brpop key [key ...] timeout
+* 编码
+    - ziplist（压缩列表）：当列表中元素个数小于 512（默认）个，并且列表中每个元素的值都小于 64（默认）个字节时，Redis 会选择用 ziplist 来作为列表的内部实现以减少内存的使用。当然上述默认值也可以通过相关参数修改：list-max-ziplist-entried（元素个数）、list-max-ziplist-value(元素值)。
+    - linkedlist（链表）：当列表类型无法满足 ziplist 条件时，Redis 会选择用 linkedlist 作为列表的内部实现。
+* 场景
+    - twitter的关注列表，粉丝列表
+    - 使用Lists结构，我们可以轻松地实现最新消息排行等功能
+    - 消息队列，可以利用Lists的PUSH操作，将任务存在Lists中，然后工作线程再用POP操作将任务取出进行执行
+    - 聊天系统、社交网络中获取用户最新发表的帖子、简单的消息队列、利用Lrange命令，做基于Redis的分页功能、博客的评论系统
+    - 时间轴
 
-一般意义上讲，列表就是有序元素的序列：10，20，1，2，3就是一个例表，但用数组实现的List和Linked List实现的list，在属性方面大不相同。
-Redis lists基于Linked list实现。这意味着即使在一个list中有数百万个元素，在头部或尾部添加一个元素的操作，其时间复杂度也是常数级别的。用LPUSH命令在十个元素的list头部添加新元素，和在千万元素的list头部添加新元素的速度相同。
+```sh
+LPUSH list1 1 2 3 4 5 # 5 4 3 2 1
+RPUSH list1 55 66 77 # 5 4 3 2 1 55 66 77
+LRANGE list1 0 3    # 取范围值 1 2 3
+LRANGE list1 0 -1    # 取全部
 
-坏消息:在数组实现的List中利用索引访问元素的速度极快，而同样的操作在linked list实现的list上没有那么快。
-
-Redis Lists用linked list实现的原因是：
-* 对于数据库系统来说，到头重要的特性是：能非常快的在很大的列表上添加元素，
-* 正如你将要看到的：Redis lists能在常数时间取得常数长度。
-
+linsert set after 55 new
+lrem set 5 new
+lrem set -5 new
+lrem set 0 new
 ```
-RPUSH list1 "Guanqinglin" // 返回索引
-LRANGE list1 0 3    // 取范围值
-lpush
-lpop
-rpop
-```
-
-* twitter的关注列表，粉丝列表等都可以用Redis的list结构来实现。
-* 使用Lists结构，我们可以轻松地实现最新消息排行等功能。
-* Lists的另一个应用就是消息队列，可以利用Lists的PUSH操作，将任务存在Lists中，然后工作线程再用POP操作将任务取出进行执行。
-* 聊天系统、社交网络中获取用户最新发表的帖子、简单的消息队列、利用Lrange命令，做基于Redis的分页功能、博客的评论系统。
 
 ### Set
 
-就是一堆不重复值的组合。可以存储一些集合性的数据
-
-未排序的集合，其元素是二进制安全的字符串。对外提供的功能与list类似是一个列表的功能，特殊之处在于set是可以自动排重的，当你需要存储一个列表数据，又不希望出现重复数据时，set是一个很好的选择，并且set提供了判断某个成员是否在一个set集合内的重要接口
-
-set 的内部实现是一个 value永远为null的HashMap，实际就是通过计算hash的方式来快速排重的，这也是set能提供判断一个成员是否在集合内的原因。
+* 一堆不重复值的组合。可以存储一些集合性的数据
+* 未排序的集合，其元素是二进制安全的字符串
+* set vs list
+    - set 中的元素是不可以重复的，而 list 是可以保存重复元素的。
+    - set 中的元素是无序的，而 list 中的元素是有序的。
+    - set 中的元素不能通过索引下标获取元素，而 list 中的元素则可以通过索引下标获取元素。
+    - 除此之外 set 还支持更高级的功能，例如多个 set 取交集、并集、差集等。
+* set 的内部实现是一个 value永远为null的HashMap，实际就是通过计算hash的方式来快速排重的，这也是set能提供判断一个成员是否在集合内的原因。
+* 方法
+    - 获取所有元素 `smembers key`
+    - 添加元素:`sadd key member [member ...]` 返回值就是当前执行 sadd 命令成功添加元素的个数
+    - 删除元素:`srem key member [member ...]` 返回值就是当前删除元素的个数
+    - 计算元素个数:`scard key` 复杂度为O(1) 不会遍历 set 中的所有元素，而是直接使用 Redis 中的内部变量
+    - 判读元素是否在集合中 `sismember key member` 复杂度为O(1) 回值为1则表示当前元素在当前 set 中，如果返回 0 则表示当前元素不在 set 中
+    - 随机从 set 中返回指定count个数元素 `srandmember key [count]`  复杂度为O(n) 可选参数 count
+        + count 参数指的是返回元素的个数，如果当前 set 中的元素个数小于 count，则 srandmember 命令返回当前 set 中的所有元素
+        + 如果 count 参数等于 0，则不返回任何数据
+        + 如果 count 参数小于 0，则随机返回当前 count 个数的元素
+    - 从集合中随机弹出元素 `spop key [count]`,也支持 count 可选参数, 和 srandmember 命令不同。spop 命令在随机弹出元素之后，会将弹出的元素从 set 中删除
+    - 集合的交集 `sinter key [key ...]` 复杂度为O(m*k) k是多个集合中元素最少的个数，m是键个数
+    - 集合的并集 `sunion key [key ...]` 复杂度为O(K) k是多个元素个数和
+    - 集合的差集 `sdiff key [key ...]`
+    - 将集合的交集、并集、差集的结果保存,在进行上述比较时，会比较耗费时间，所以为了提高性能可以将交集、并集、差集的结果提前保存起来，这样在需要使用时，可以直接通过 smembers 命令获取
+        + sinterstore destination key [key ...]
+        + sunionstore destination key [key ...]
+        + sdiffstore destination key [key ...]
+* 内部编码
+    - intset(整数集合)：当集合中的元素都是整数，并且集合中的元素个数小于 512 个时，Redis 会选用 intset 作为底层内部实现。
+    - hashtable(哈希表)：当上述条件不满足时，Redis 会采用 hashtable 作为底层实现。
+* 场景
+    - 当需要存储一个列表数据，而又不希望出现重复的时候
+    - 提供了判断某个成员是否在一个Set集合内
+    - 标签
+    - 比如在微博应用中，可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合
+    - 集合提供了求交集、并集、差集等操作，可以非常方便的实现如共同关注、共同喜好、二度好友等功能，对上面的所有集合操作，你还可以使用不同的命令选择将结果返回给客户端还是存集到一个新的集合中。
 
 ```
 SADD myset guan
@@ -270,31 +418,68 @@ spop
 sunion
 ```
 
-当需要存储一个列表数据，而又不希望出现重复的时候
-提供了判断某个成员是否在一个Set集合内的接口
-比如在微博应用中，可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合
-Redis还为集合提供了求交集、并集、差集等操作，可以非常方便的实现如共同关注、共同喜好、二度好友等功能，对上面的所有集合操作，你还可以使用不同的命令选择将结果返回给客户端还是存集到一个新的集合中。
-
 ### Sorted set
 
-使用场景与set类似，区别是set不是自动有序的，而sorted set可以通过用户额外提供一个优先级(score)的参数来为成员排序，并且是插入有序的，即自动排序。
-
-Redis sorted set的内部使用HashMap和跳跃表(SkipList)来保证数据的存储和有序，HashMap里放的是成员到score的映射，而跳跃表里存放的是所有的成员，排序依据是HashMap里存的score,使用跳跃表的结构可以获得比较高的查找效率，并且在实现上比较简单。
+* sorted set可以通过用户额外提供一个优先级(score)的参数来为成员排序，并且是插入有序的，即自动排序
+* 实现：内部使用HashMap和跳跃表(SkipList)来保证数据的存储和有序，HashMap里放的是成员到score的映射，而跳跃表里存放的是所有的成员，排序依据是HashMap里存的score,使用跳跃表的结构可以获得比较高的查找效率，并且在实现上比较简单
+* 方法
+    - 添加元素 `zadd key [NX|XX] [CH] [INCR] score member [score member ...]` 返回值就是当前 zadd 命令成功添加元素的个数。zadd 命令有很多选填参数,时间复杂度为O(log(n))
+        + nx: 元素必须不存在时，才可以设置成功。
+        + xx: 元素必须存在时，才可以设置成功。
+        + ch: 返回此命令执行完成后，有序集合元素和分数发生变化的个数
+        + incr: 对 score 做增加
+    - 计算成员个数 `zcard key`
+    - 计算某个成员的分数 `zscore key member` 如果 key 不存在，或者元素不存在时，该命令返回的都是(nil)
+    - 计算成员的排名
+        + 从分数低到高排名:`zrank key member`
+        + 从分数高到低排名:`zrevrank key member`
+        + 增加元素分数 也可以指定负数，这样当前元素的分数，则会相减 `zincrby key increment member`
+    - 返回指定排名范围的元素,添加了 WITHSCORES 可选参数，则返回数据时会返回当前元素的分数
+        + `zrange key start stop [WITHSCORES]`
+        + `zrevrange key start stop [WITHSCORES]`
+    - 返回指定分数范围的元素,可以用 -inf 和 +inf 参数代表无限小和无限大,min 和 max 参数还支持开区间(小括号)和闭区间(中括号 无效)
+        + `zrangebyscore key min max [WITHSCORES] [LIMIT offset count]`
+        + `zrevrangebyscore key max min [WITHSCORES] [LIMIT offset count]`
+    - 返回指定分数范围元素个数 `zcount key min max`
+    - 删除指定排名内的升序元素 `zremrangebyrank key start stop`
+    - 删除指定分数范围元素 `zremrangebyscore key min max`
+    - 交集 `zinterstore destination numkeys key [key ...] [WEIGHTS weight] [AGGREGATE SUM|MIN|MAX]`
+        + destination：将交集的计算结果，保存到这个键中。
+        + numkeys：需要做交集计算键的个数。
+        + key [key …]：需要做交集计算的键。
+        + WEIGHTS weight：每个键的权重，在做交集计算时，每个键中的分数值都会乘以这个权重，默认每个键的权重为 1。
+        + AGGREGATE SUM|MIN|MAX：计算成员交集后，分值可以按照 sum(和)、min(最小值)、max(最大值)做汇总，默认值为  sum
+    - 并集 `zunionstore destination numkeys key [key ...] [WEIGHTS weight] [AGGREGATE SUM|MIN|MAX]`
+* 编码
+    - ziplist(压缩列表)：当有序集合的元素个数小于 128 个(默认设置)，同时每个元素的值都小于 64 字节(默认设置)，Redis 会采用 ziplist 作为有序集合的内部实现。
+    - skiplist(跳跃表)：当上述条件不满足时，Redis 会采用 skiplist 作为内部编码
+* 场景
+    - 需要一个有序的并且不重复的集合列表，比如twitter 的public timeline可以以发表时间作为score来存储，这样获取时就是自动按时间排好序的。
+    - 做带权重的队列，比如普通消息的score为1，重要消息的score为2，然后工作线程可以选择按score的倒序来获取工作任务。让重要的任务优先执行。
+    - 排行榜应用，取TOP N操作
+    - 做延时任务
+    - 排行榜
+    - 可以做范围查找
 
 ```
-zadd
-zrange
-zrem
-zcard
+zadd zsetkey 1 a 2 b 3 c
+zrank zsetkey a
+
+zincrby zsetkey 5 a
+
+zrange zsetkey 0 2 WITHSCORES
+zrangebyscore zsetkey 4 8 WITHSCORES
+zrangebyscore zsetkey -inf  +inf WITHSCORES
+zrangebyscore zsetkey (3 6 WITHSCORES # <3 <6
+
+zinterstore destination 2 zsetkey1 zsetkey2 WEIGHTS 1 0.5 AGGREGATE max # key1 权重 1 key2 权重 0.5 ，取大值
 ```
 
-#### 场景
 
-当你需要一个有序的并且不重复的集合列表，那么可以选择sorted set数据结构，比如twitter 的public timeline可以以发表时间作为score来存储，这样获取时就是自动按时间排好序的。
-另外还可以用Sorted Sets来做带权重的队列，比如普通消息的score为1，重要消息的score为2，然后工作线程可以选择按score的倒序来获取工作任务。让重要的任务优先执行。
-排行榜应用，取TOP N操作
-做延时任务
-最后一个应用就是可以做范围查找
+## 删除操作
+
+* 清除所有库所有key数据:flushall
+* 清除单个库所有key数据:flushdb
 
 ### Pub/Sub
 
