@@ -108,6 +108,8 @@ CustomLog ${APACHE_LOG_DIR}/access.log combined
 
 sudo service apache2 restart
 sudo vi /etc/hosts
+
+# tomcat服务我影响Apache 服务开启
 ```
 
 ### 配置
