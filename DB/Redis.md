@@ -2,38 +2,48 @@
 
 Redis is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. http://redis.ioRedis是一个数据结构存储，可用作数据库、缓存和消息中间件。
 
-## 优点
-
-* 性能：在碰到需要执行耗时特别久、且结果不频繁变动的SQL时，就特别适合将运行结果放入缓存。这样，后面的请求就去缓存中读取，使得请求能够迅速响应。良好的用户体验
-* 并发：使用Redis做一个缓冲操作，让请求先访问到Redis，而不是直接访问数据库。
-
 ## 原理
 
-单线程的Redis为什么这么快，Redis是单线程工作模型。主要是以下三点：
-
-* 纯内存操作
-* 单线程操作，避免了频繁的上下文切换
+* 一个Key-Value类型的内存数据库，很像memcached，整个数据库统统加载在内存当中进行操作，定期通过异步操作把数据库数据flush到硬盘上进行保存
+* 丰富的数据结构，支持二进制的String，List，Hash，Set及Ordered Set等数据类型操作
+* 性能：纯内存操作，每秒可以处理超过，单线程操作，避免了线程切换和锁的性能消耗，10万次读写操作
+    - 为了达到最快的读写速度将数据都读到内存中，并通过异步的方式将数据写入磁盘。所以redis具有快速和数据持久化的特征。如果不将数据放在内存中，磁盘I/O速度为严重影响redis的性能
+    - 利用队列技术将并发访问变为串行访问，消除了传统数据库串行控制的开销
+* 单个value的最大限制是1GB，不像 memcached只能保存1MB的数据
+* 缓存：在碰到需要执行耗时特别久、且结果不频繁变动的SQL时，就特别适合将运行结果放入缓存。后面的请求就去缓存中读取，使得请求能够迅速响应
+* 并发：让请求先访问到Redis，而不是直接访问数据库
 * 采用了非阻塞I/O多路复用机制，单线程根据Socket的不同状态执行每个Socket(I/O流)：任务
-* 还提供了Select、Epoll、Evport、Kqueue等多路复用函数库
-
-Redis内部使用一个redisObject对象来表示所有的key和value,redisObject最主要的信息:type代表一个value对象具体是何种数据类型，encoding是不同数据类型在redis内部的存储方式，
-
-vm字段，只有打开了Redis的虚拟内存功能，此字段才会真正的分配内存
-
-## 特性
-
-* 丰富的数据结构，支持二进制的String，List，Hash，Set及Ordered Set等数据类型操作。
-* 数据存储在内存中,能支持超过100K+每秒的读写频率。提高了读写速度,实现网站高并发
-* 单线程，避免了线程切换和锁的性能消耗
+* 提供了Select、Epoll、Evport、Kqueue等多路复用函数库
+* 内部使用一个redisObject对象来表示所有的key和value,redisObject最主要的信息
+    - type代表一个value对象具体是何种数据类型
+    - encoding是不同数据类型在redis内部的存储方式
+* 虚拟内存：直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求
+    - key很小而value很大时,使用VM的效果会比较好.因为这样节约的内存比较大
+    - key不小时,可以考虑使用一些非常方法将很大的key变成很大的value,比如可以考虑将key,value组合成一个新的value
+    - vm-max-threads参数,可以设置访问swap文件的线程数,设置最好不要超过机器的核数,如果设置为0,那么所有对swap文件的操作都是串行的.可能会造成比较长时间的延迟,但是对数据完整性有很好的保证
+    - vm字段，只有打开了Redis的虚拟内存功能，此字段才会真正的分配内存
+* 原子操作：对数据的更改要么全部执行，要么全部不执行
+* 发布/订阅
+* 支持Lua脚本
+* 分布式：主从复制与高可用（Redis Sentinel）
+    - Master会将数据同步到slave，而slave不会将数据同步到master。Slave启动时会连接master来同步数据
+    - 利用master来插入数据，slave提供检索服务
+* 读写分离模型：通过增加Slave DB的数量，读的性能可以线性增长
+    - 为了避免Master DB的单点故障，集群一般都会采用两台Master DB做双机热备，所以整个集群的读和写的可用性都非常高
+    - 缺陷在于，不管是Master还是Slave，每个节点都必须保存完整的数据，如果在数据量很大的情况下，集群的扩展能力还是受限于单个节点的存储能力，而且对于Write-intensive类型的应用，读写分离架构并不适合
+    - 注意
+        + Master最好不要做任何持久化工作，如RDB内存快照和AOF日志文件
+        + 如果数据比较重要，某个Slave开启AOF备份数据，策略设置为每秒同步一次
+        + 为了主从复制的速度和连接的稳定性，Master和Slave最好在同一个局域网内
+        + 尽量避免在压力很大的主库上增加从库
+        + 主从复制不要用图状结构，用单向链表结构更为稳定，即：Master <- Slave1 <- Slave2 <- Slave3... 这样的结构方便解决单点故障问题，实现Slave对Master的替换。如果Master挂了，可以立刻启用Slave1做Master，其他不变。
 * 可持久化（RDB与AOF）,Redis 重启后数据不丢失
-* 分布式锁
-* 主从复制与高可用（Redis Sentinel）
-* 集群
-* 支持lua脚本
+* 数据分片模型：将每个节点看成都是独立的master，然后通过业务实现数据分片，将每个master设计成由一个master和多个slave组成的模型
 * 管道：Redis管道是指客户端可以将多个命令一次性发送到服务器，然后由服务器一次性返回所有结果。管道技术在批量执行命令的时候可以大大减少网络传输的开销，提高性能。
 * 事务：Redis事务是一组命令的集合。一个事务中的命令要么都执行，要么都不执行。如果命令在运行期间出现错误，不会自动回滚。管道与事务的区别：管道主要是网络上的优化，客户端缓冲一组命令，一次性发送到服务器端执行，但是并不能保证命令是在同一个事务里面执行；而事务是原子性的，可以确保命令执行的时候不会有来自其他客户端的命令插入到命令序列中。
 * 分布式锁：分布式锁是控制分布式系统之间同步访问共享资源的一种方式。在分布式系统中，常常需要协调他们的动作，如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。
 * 地理信息：从Redis 3.2版本开始，新增了地理信息相关的命令，可以将用户给定的地理位置信息（经纬度）存储起来，并对这些信息进行操作。
+* 缺点：数据库容量受到物理内存的限制，不能用作海量数据的高性能读写，因此Redis适合的场景主要局限在较小数据量的高性能操作和运算上。
 
 ## 安装
 
@@ -181,6 +191,43 @@ struct sdshdr {
 
 ![Alt text](../_static/ "Optional title")
 
+## 通用
+
+* 允许模糊查询key　　有3个通配符  *、?、[]
+* randomkey：返回随机key　　
+* type key：返回key存储的类型
+* exists key：判断某个key是否存在
+* del key：删除key
+* rename key newkey：改名
+* renamenx key newkey：如果newkey不存在则修改成功
+* move key 1：将key移动到1数据库
+* ttl key：查询key的生命周期（秒）
+* expire key 整数值：设置key的生命周期以秒为单位
+* pexpire key 整数值：设置key的生命周期以毫秒为单位
+* pttl key：查询key 的生命周期（毫秒）
+* perisist key：把指定key设置为永久有效
+* ping：测定连接是否存活
+* echo：在命令行打印一些内容
+* select：选择数据库
+* quit：退出连接
+* dbsize：返回当前数据库中key的数目
+* info：获取服务器的信息和统计
+* monitor：实时转储收到的请求
+* config get 配置项：获取服务器配置的信息
+* config set 配置项  值：设置配置项信息
+* flushdb：删除当前选择数据库中所有的key
+* flushall：删除所有数据库中的所有的key
+* time：显示服务器时间，时间戳（秒），微秒数
+* bgrewriteaof：后台保存rdb快照
+* bgsave：后台保存rdb快照
+* save：保存rdb快照
+* lastsave：上次保存时间
+* shutdown [save/nosave]
+* 如果不小心运行了flushall，立即shutdown nosave，关闭服务器，然后手工编辑aof文件，去掉文件中的flushall相关行，然后开启服务器，就可以倒回原来是数据。如果flushall之后，系统恰好bgwriteaof了，那么aof就清空了，数据丢失。
+* showlog：显示慢查询
+    - 多慢才叫慢 slowlog-log-slower-than 10000，来指定（单位为微秒）
+    - 服务器存储多少条慢查询记录 由slowlog-max-len 128，来做限制　　
+
 ## 数据类型
 
 Redis 没有像 MySQL 这类关系型数据库那样强大的查询功能，需要考虑如何把关系型数据库中的数据，合理的对应到缓存的 key-value 数据结构中。
@@ -210,13 +257,19 @@ Redis 没有像 MySQL 这类关系型数据库那样强大的查询功能，需�
     - decr key 自减
     - incrby kek increment 自增指定数字
     - decrby key decrement 自减指定数字
-    - incrbyfloat key increment 自增浮点数
+    - incrbyfloat key increment 0.7
     - 获取字符串长度 `strlen key`
         + 每个中文占用 3 个字节
     - 往字符串append内容: `append key value`
     - 设置并返回原值 `getset key value`
-    - 设置和获取字符串的某一段内容 `getrange key start end` O(n) n是字符长度
+    - 获取字符串的某一段内容 `getrange key start end` O(n) n是字符长度,字符串的下标，左数从0开始，右数从-1开始
+        + 当start>length，则返回空字符串
+        + 当stop>=length，则截取至字符串尾
+        + 如果start所处位置在stop右边，则返回空字符串
     - 设置及获取字符串的某一位（bit）`setrange key offeset values`
+    - setbit key offset value：设置offset对应二进制上的值，返回该位上的旧值。 如果offset过大，则会在中间填充0,offset最大到多少：2^32-1，即可推出最大的字符串为512M
+    - bitop AND|OR|NOT|XOR destkey key1 [key2..] 对key1 key2做opecation并将结果保存在destkey上
+    - setex key time value：设置key对应的值value，并设置有效期为time秒
     - 批量设置一系列字符串的内容
     - DEL key 该命令用于在 key 存在时删除 key。
     - DUMP key 序列化给定 key ，并返回被序列化的值。
@@ -244,6 +297,8 @@ exists name # 0
 set name henry # OK
 setnx name henry # (interger) 0,已存在，无法添加
 setnx henry_lee henry # (interger) 1
+
+setex key time value
 
 set name henry_lee xx # OK 更新
 set name2 henry_lee xx # (nil) 不存在，无法更新
@@ -274,7 +329,7 @@ object encoding city
 * 方法
     - 判断 field 是否存在 `hexists key field`
     - 设置值 `hset key field value` 有返回值的。如果 hset 命令设置成功，则返回 1，否则返回 0
-    - hsetnx:在 field 不存在的时候，才能设置成功
+        + hsetnx:在 field 不存在的时候，才能设置成功
     - 获取值:`hget key field`
     - 删除 field `hdel key field [field ...]`,返回就是成功删除 field 的个数,field 不存在时，并不会报错，而是直接返回 0
     - 计算 field 个数 `hlen key`
@@ -288,7 +343,6 @@ object encoding city
         + `hincrby key field step`
         + `hincrbyfloat key field step`
     - 计算 value 的字符串长度 `hstrlen key field`,没有 field 则返回 0
-    - hdel key field1 field2
 * 编码
     - iplist（压缩列表）：当哈希类型中元素个数小于 hash-max-ziplist-entries 配置（默认 512 个），同时所有值都小于 hash-max-ziplist-value 配置（默认 64 字节）时
     - hashtable（哈希表）：当上述条件不满足时，Redis 则会采用 hashtable 作为哈希的内部实现。
@@ -350,6 +404,7 @@ object encoding 2007006018
         + 多个客户端都对同一个键执行 blpop 或者 brpop 命令，则最先执行该命令的客户端会获取到该键的元素。
         + blpop key [key ...] timeout
         + brpop key [key ...] timeout
+    - rpoplpush source dest：把source 的末尾拿出，放到dest头部，并返回单元值
 * 编码
     - ziplist（压缩列表）：当列表中元素个数小于 512（默认）个，并且列表中每个元素的值都小于 64（默认）个字节时，Redis 会选择用 ziplist 来作为列表的内部实现以减少内存的使用。当然上述默认值也可以通过相关参数修改：list-max-ziplist-entried（元素个数）、list-max-ziplist-value(元素值)。
     - linkedlist（链表）：当列表类型无法满足 ziplist 条件时，Redis 会选择用 linkedlist 作为列表的内部实现。
@@ -357,7 +412,7 @@ object encoding 2007006018
     - twitter的关注列表，粉丝列表
     - 使用Lists结构，我们可以轻松地实现最新消息排行等功能
     - 消息队列，可以利用Lists的PUSH操作，将任务存在Lists中，然后工作线程再用POP操作将任务取出进行执行
-    - 聊天系统、社交网络中获取用户最新发表的帖子、简单的消息队列、利用Lrange命令，做基于Redis的分页功能、博客的评论系统
+    - 聊天系统、社交网络中获取用户最新发表的帖子、简单的消息队列、新闻的分页列表、博客的评论系统。利用Lrange命令，做基于Redis的分页功能、博客的评论系统
     - 时间轴
 
 ```sh
@@ -388,6 +443,8 @@ lrem set 0 new
     - 删除元素:`srem key member [member ...]` 返回值就是当前删除元素的个数
     - 计算元素个数:`scard key` 复杂度为O(1) 不会遍历 set 中的所有元素，而是直接使用 Redis 中的内部变量
     - 判读元素是否在集合中 `sismember key member` 复杂度为O(1) 回值为1则表示当前元素在当前 set 中，如果返回 0 则表示当前元素不在 set 中
+    - spop key：返回并删除集合中1个随机元素（可以坐抽奖，不会重复抽到某人）
+    - smove source dest value：把source的value移动到dest集合中
     - 随机从 set 中返回指定count个数元素 `srandmember key [count]`  复杂度为O(n) 可选参数 count
         + count 参数指的是返回元素的个数，如果当前 set 中的元素个数小于 count，则 srandmember 命令返回当前 set 中的所有元素
         + 如果 count 参数等于 0，则不返回任何数据
@@ -428,18 +485,19 @@ sunion
         + xx: 元素必须存在时，才可以设置成功。
         + ch: 返回此命令执行完成后，有序集合元素和分数发生变化的个数
         + incr: 对 score 做增加
-    - 计算成员个数 `zcard key`
-    - 计算某个成员的分数 `zscore key member` 如果 key 不存在，或者元素不存在时，该命令返回的都是(nil)
-    - 计算成员的排名
+    - 成员个数 `zcard key`
+    - 某个成员的分数 `zscore key member` 如果 key 不存在，或者元素不存在时，该命令返回的都是(nil)
+    - 成员的排名
         + 从分数低到高排名:`zrank key member`
         + 从分数高到低排名:`zrevrank key member`
         + 增加元素分数 也可以指定负数，这样当前元素的分数，则会相减 `zincrby key increment member`
     - 返回指定排名范围的元素,添加了 WITHSCORES 可选参数，则返回数据时会返回当前元素的分数
-        + `zrange key start stop [WITHSCORES]`
+        + 返回名次[start,stop]的元素  默认是升续排列 `zrange key start stop [WITHSCORES]`
         + `zrevrange key start stop [WITHSCORES]`
     - 返回指定分数范围的元素,可以用 -inf 和 +inf 参数代表无限小和无限大,min 和 max 参数还支持开区间(小括号)和闭区间(中括号 无效)
         + `zrangebyscore key min max [WITHSCORES] [LIMIT offset count]`
-        + `zrevrangebyscore key max min [WITHSCORES] [LIMIT offset count]`
+        + 集合（升序）排序后取score在[min, max]内的元素，并跳过offset个，取出N个 zrangebyscore key min max [withscores] limit offset N
+        + 降序 0名开始 `zrevrangebyscore key max min [WITHSCORES] [LIMIT offset count]`
     - 返回指定分数范围元素个数 `zcount key min max`
     - 删除指定排名内的升序元素 `zremrangebyrank key start stop`
     - 删除指定分数范围元素 `zremrangebyscore key min max`
@@ -475,21 +533,48 @@ zrangebyscore zsetkey (3 6 WITHSCORES # <3 <6
 zinterstore destination 2 zsetkey1 zsetkey2 WEIGHTS 1 0.5 AGGREGATE max # key1 权重 1 key2 权重 0.5 ，取大值
 ```
 
-
-## 删除操作
-
-* 清除所有库所有key数据:flushall
-* 清除单个库所有key数据:flushdb
-
 ### Pub/Sub
 
 从字面上理解就是发布（Publish）与订阅（Subscribe），在Redis中，你可以设定对某一个key值进行消息发布及消息订阅，当一个key值上进行了消息发布后，所有订阅它的客户端都会收到相应的消息。这一功能最明显的用法就是用作实时消息系统，比如普通的即时聊天，群聊等功能。
 
-### Transactions
+### 管道
 
-Redis的Transactions提供的并不是严格的ACID的事务（比如一串用EXEC提交执行的命令，在执行中服务器宕机，那么会有一部分命令执行了，剩下的没执行），但是这个Transactions还是提供了基本的命令打包执行的功能（在服务器不出问题的情况下，可以保证一连串的命令是顺序在一起执行的，中间有会有其它客户端命令插进来执行）。Redis还提供了一个Watch功能，你可以对一个key进行Watch，然后再执行Transactions，在这过程中，如果这个Watched的值进行了修改，那么这个Transactions会发现并拒绝执行。
+Redis管道是指客户端可以将多个命令一次性发送到服务器，然后由服务器一次性返回所有结果。管道技术在批量执行命令的时候可以大大减少网络传输的开销，提高性能。
 
-## 应用场景
+## pipeline vs multi
+
+* pipeline 只是把多个redis指令一起发出去，redis并没有保证这些指定的执行是原子的；
+* multi相当于一个redis的transaction的，保证整个操作的原子性，避免由于中途出错而导致最后产生的数据不一致。
+* pipeline方式执行效率要比其他方式高10倍左右的速度，启用multi写入要比没有开启慢一点。
+
+### Transactions 事务
+
+Redis的Transactions提供的并不是严格的ACID的事务（比如一串用EXEC提交执行的命令，在执行中服务器宕机，那么会有一部分命令执行了，剩下的没执行），但是这个Transactions还是提供了基本的命令打包执行的功能（在服务器不出问题的情况下，可以保证一连串的命令是顺序在一起执行的，中间有会有其它客户端命令插进来执行）。
+Redis还提供了一个Watch功能，你可以对一个key进行Watch，然后再执行Transactions，在这过程中，如果这个Watched的值进行了修改，那么这个Transactions会发现并拒绝执行。
+Redis事务是一组命令的集合。一个事务中的命令要么都执行，要么都不执行。如果命令在运行期间出现错误，不会自动回滚。
+
+管道与事务的区别：管道主要是网络上的优化，客户端缓冲一组命令，一次性发送到服务器端执行，但是并不能保证命令是在同一个事务里面执行；而事务是原子性的，可以确保命令执行的时候不会有来自其他客户端的命令插入到命令序列中。
+
+## 锁
+
+* 悲观锁(Pessimistic Lock)：每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁。
+    - 场景：如果项目中使用了缓存且对缓存设置了超时时间。
+    - 当并发量比较大的时候，如果没有锁机制，那么缓存过期的瞬间，大量并发请求会穿透缓存直接查询数据库，造成雪崩效应。
+* 乐观锁(Optimistic Lock), 每次去拿数据的时候都认为别人不会修改，所以不会上锁。
+    - watch命令会监视给定的key，当exec时候如果监视的key从调用watch后发生过变化，则整个事务会失败。
+    - 也可以调用watch多次监视多个key。这样就可以对指定的key加乐观锁了。
+    - 注意watch的key是对整个连接有效的，事务也一样。
+    - 如果连接断开，监视和事务都会被自动清除。当然了exec，discard，unwatch命令都会清除连接中的所有监视。
+
+### 分布式锁
+
+分布式锁是控制分布式系统之间同步访问共享资源的一种方式。在分布式系统中，常常需要协调他们的动作，如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。
+
+### 地理信息
+
+从Redis 3.2版本开始，新增了地理信息相关的命令，可以将用户给定的地理位置信息（经纬度）存储起来，并对这些信息进行操作。
+
+## 场景
 
 Redis在很多方面与其他数据库解决方案不同：它使用内存提供主存储支持，而仅使用硬盘做持久性的存储；它的数据模型非常独特，用的是单线程。另一个大区别在于，你可以在开发环境中使用Redis的功能，但却不需要转到Redis。
 
@@ -502,10 +587,12 @@ Redis在很多方面与其他数据库解决方案不同：它使用内存提供
 * 按照用户投票和时间排序:`score = points / time^alpha`.每次新的新闻贴上来后，我们将ID添加到列表中，使用LPUSH + LTRIM，确保只取出最新的1000条项目。有一项后台任务获取这个列表，并且持续的计算这1000条新闻中每条新闻的最终得分。计算结果由ZADD命令按照新的顺序填充生成列表，老新闻则被清除。这里的关键思路是排序工作是由后台任务来完成的。
 * Redis能够替代memcached，让你的缓存从只能存储数据变得能够更新数据，因此你不再需要每次都重新生成数据了。
 * 队列：现代的互联网应用大量地使用了消息队列（Messaging）。消息队列不仅被用于系统内部组件之间的通信，同时也被用于系统跟其它服务之间的交互。消息队列的使用可以增加系统的可扩展性、灵活性和用户体验。非基于消息队列的系统，其运行速度取决于系统中最慢的组件的速度（注：短板效应）。而基于消息队列可以将系统中各组件解除耦合，这样系统就不再受最慢组件的束缚，各组件可以异步运行从而得以更快的速度完成各自的工作。此外，当服务器处在高并发操作的时候，比如频繁地写入日志文件。可以利用消息队列实现异步处理。从而实现高性能的并发操作。
-* Pub/Sub非常非常简单，运行稳定并且快速。支持模式匹配，能够实时订阅与取消频道。
+* Pub/Sub：运行稳定并且快速。支持模式匹配，能够实时订阅与取消频道。
 * 实时分析正在发生的情况，用于数据统计与防止垃圾邮件等
 * 特定时间内的特定项目：统计在某段特点时间里有多少特定用户访问了某个特定资源
-* 计数：
+* 会话缓存（session cache）
+* Magento提供一个插件来使用Redis作为全页缓存后端。对WordPress的用户来说，Pantheon有一个非常好的插件  wp-redis，这个插件能帮助你以最快速度加载你曾浏览过的页面。
+* 排行榜/计数器
 
 ```
 LPUSH latest.comments <ID>
@@ -533,9 +620,9 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
 ## Redis vs memcache
 
 * 数据都是缓存在内存中提供服务
-* 使用redis
+* redis
     - Redis最佳试用场景是*全部数据in-memory*
-    - 复杂数据结构:当需要除key/value之外的更多数据类型支持时，使用Redis更合适。用户订单列表，用户消息，帖子评论列表
+    - 丰富数据结构:当需要除key/value之外的更多数据类型支持时，使用Redis更合适。用户订单列表，用户消息，帖子评论列表
     - 持久化,周期性的把更新的数据写入到磁盘以及把修改的操作记录追加到文件里记录下来,千万不要把redis当作数据库用
         + redis的定期快照不能保证数据不丢失
         + redis的AOF会降低效率，并且不能支持太大的数据量
@@ -547,46 +634,30 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
         - Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。
     - memcache的value存储，最大为1M，如果存储的value很大，只能使用redis。一定程序上弥补了memcached这类key-value内存缓存服务的不足
     - 支持publish/subscribe，通知，key过期等等特性
-* 使用memcache场景：纯KV，数据量非常大，并发量非常大的业务，或许更适合
+* memcache：纯KV，数据量非常大，并发量非常大的业务，或许更适合
     - 内存分配:memcache使用预分配内存池的方式管理内存，能够省去内存分配时间。redis则是临时申请空间，可能导致碎片。
     - 虚拟内存使用:memcache把所有的数据存储在物理内存里。redis有自己的VM机制，理论上能够存储比物理内存更多的数据，当数据超量时，会引发swap，把冷数据刷到磁盘上。
     - 网络模型:memcache使用非阻塞IO复用模型，redis也是使用非阻塞IO复用模型。但由于redis还提供一些非KV存储之外的排序，聚合功能，在执行这些功能时，复杂的CPU计算，会阻塞整个IO调度。
     - 线程模型:memcache使用多线程，主线程监听，worker子线程接受请求，执行读写，这个过程中，可能存在锁冲突。redis使用单线程，虽无锁冲突，但难以利用多核的特性提升整体吞吐量。
 
-## 注意
-
-* Key命名规范：AppID:KeyName
-* 缓存穿透处理：根据Redis key在缓存中查询后，不存在对应Value，就应该会在后端系统如DB中去查找，该Key的并发请求量一旦变大，那么就会对DB造成很大的压力
-    - 前端风险控制，将恶意穿透情况排除在外；
-    - 对查询结果为空的情况依然进行缓存，但缓存时间会设置得很短，一般是几分钟。
-* 缓存雪崩处理：当缓存服务器重启或者大量缓存集中在某一个时间段失效，这样在失效的时候，也会给后端系统(比如DB)带来很大压力。
-    - 后端连接数限制，错误阈值限制，超时处理，缓存失效时间均匀分布，前端永不失效及后端主动更新。
-* 缓存时长：策略定位复杂，需要多维度的计算。
-* 缓存失效：按时失效，事件失效，后端主动更新。
-* 缓存Key：Hash、规则、前缀+Hash，异常情况可人工干预。
-* Lua脚本：服务端批量处理及事务能力，有条件逻辑的可扩展脚本。使用它的好处有：减少网络开销、原子操作、可复用。
-* Limit：可滑动时间窗口，如应用于Session，Memcached需每次传Key和Value。
-* redis的定期快照不能保证数据不丢失
-* redis的AOF会降低效率，并且不能支持太大的数据量
-
-## 过期策略及内存淘汰机制
+## 缓存失效及内存淘汰机制
 
 * 定时删除：用一个定时器来负责监视Key，过期则自动删除。虽然内存及时释放，但是十分消耗CPU资源。在大并发请求下，CPU要将时间应用在处理请求，而不是删除Key，因此没有采用这一策略。Redis默认每个100ms检查是否有过期的Key，有过期Key则删除。需要说明的是，Redis不是每个100ms将所有的Key检查一次，而是随机抽取进行检查（如果每隔100ms，全部Key进行检查，Redis岂不是卡死）。因此，如果只采用定期删除策略，会导致很多Key到时间没有删除。
 * 惰性删除：在你获取某个Key的时候，Redis会检查一下，这个Key如果设置了过期时间，那么是否过期了？如果过期了此时就会删除。
-* 内存淘汰机制：通过配置文件
-    - Noeviction：当内存不足以容纳新写入数据时，新写入操作会报错。
+* 回收策略：通过配置文件
+    - Noeviction：当内存不足以容纳新写入数据时，新写入操作会报错。no-enviction（驱逐）：禁止驱逐数据
     - Allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的Key。推荐使用，目前项目在用这种；
-    - Allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个key，应该也没人使用吧；
+    - Allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个key
     - Volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的Key。这种情况一般是把Redis既当缓存又做持久化存储的时候才用。不推荐；
-    - Volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个Key。依然不推荐；
-    - Volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的Key优先移除。不推荐。
+    - Volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个Key
+    - Volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的Key优先移除
     - 如果没有设置Expire的Key，不满足先决条件（Prerequisites）；那么Volatile-lru、Volatile-random和Volatile-ttl策略的行为，和Noeviction（不删除）基本上一致。
 
 ```
 maxmemory-policy volatile-lru
 ```
 
-## 缺点
+## 缓存
 
 * 缓存和数据库双写一致性问题:一致性问题是分布式常见问题，还可以再分为最终一致性和强一致性,先明白一个前提：如果对数据有强一致性要求，就不能放缓存。我们所做的一切，只能保证最终一致性。
     - 采取正确更新策略，先更新数据库，再删缓存
@@ -605,30 +676,18 @@ maxmemory-policy volatile-lru
 * 缓存的并发竞争问题:同时有多个子系统去Set一个Key,很多推荐用Redis事务机制，不推荐因为基本都是Redis集群环境，做了数据分片操作。你一个事务中有涉及到多个Key操作的时候，这多个Key不一定都存储在同一个Redis-Server上。
     - 对这个Key操作不要求顺序：这种情况下，准备一个分布式锁，大家去抢锁，抢到锁就做Set操作即可
     - 对这个Key操作要求顺序：数据写入数据库的时候，需要保存一个时间戳
-
-## 锁
-
-* 悲观锁(Pessimistic Lock)：每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁。
-    - 场景：如果项目中使用了缓存且对缓存设置了超时时间。
-    - 当并发量比较大的时候，如果没有锁机制，那么缓存过期的瞬间，大量并发请求会穿透缓存直接查询数据库，造成雪崩效应。
-
-* 乐观锁(Optimistic Lock), 每次去拿数据的时候都认为别人不会修改，所以不会上锁。
-    - watch命令会监视给定的key，当exec时候如果监视的key从调用watch后发生过变化，则整个事务会失败。
-    - 也可以调用watch多次监视多个key。这样就可以对指定的key加乐观锁了。
-    - 注意watch的key是对整个连接有效的，事务也一样。
-    - 如果连接断开，监视和事务都会被自动清除。当然了exec，discard，unwatch命令都会清除连接中的所有监视。
-
-## pipeline vs multi
-
-* pipeline 只是把多个redis指令一起发出去，redis并没有保证这些指定的执行是原子的；
-* multi相当于一个redis的transaction的，保证整个操作的原子性，避免由于中途出错而导致最后产生的数据不一致。
-* pipeline方式执行效率要比其他方式高10倍左右的速度，启用multi写入要比没有开启慢一点。
-
-## 注意
-
-* 估算Redis内存使用量。目前为止，内存的使用成本仍然相对较高，使用内存不能无所顾忌；根据需求合理的评估Redis的内存使用量，选择合适的机器配置，可以在满足需求的情况下节约成本。
-* 优化内存占用。了解Redis内存模型可以选择更合适的数据类型和编码，更好的利用Redis内存。
-* 分析解决问题。当Redis出现阻塞、内存占用等问题时，尽快发现导致问题的原因，便于分析解决问题。
+* 缓存穿透处理：根据Redis key在缓存中查询后，不存在对应Value，就应该会在后端系统如DB中去查找，该Key的并发请求量一旦变大，那么就会对DB造成很大的压力
+    - 前端风险控制，将恶意穿透情况排除在外；
+    - 对查询结果为空的情况依然进行缓存，但缓存时间会设置得很短，一般是几分钟。
+* 缓存雪崩处理：当缓存服务器重启或者大量缓存集中在某一个时间段失效，这样在失效的时候，也会给后端系统(比如DB)带来很大压力。
+    - 后端连接数限制，错误阈值限制，超时处理，缓存失效时间均匀分布，前端永不失效及后端主动更新。
+* 缓存时长：策略定位复杂，需要多维度的计算。
+* 缓存失效：按时失效，事件失效，后端主动更新。
+* 缓存Key：Hash、规则、前缀+Hash，异常情况可人工干预。
+* Lua脚本：服务端批量处理及事务能力，有条件逻辑的可扩展脚本。使用它的好处有：减少网络开销、原子操作、可复用。
+* Limit：可滑动时间窗口，如应用于Session，Memcached需每次传Key和Value。
+* redis的定期快照不能保证数据不丢失
+* redis的AOF会降低效率，并且不能支持太大的数据量
 
 ## 开发规范
 
@@ -661,7 +720,7 @@ maxmemory-policy volatile-lru
     - 高并发下建议客户端添加熔断功能 (例如 netflix hystrix)
     - 设置合理的密码，如有必要可以使用 SSL 加密访问
     - 根据自身业务类型，选好 maxmemory-policy(最大内存淘汰策略)，设置好过期时间。
-
+* Key命名规范：AppID:KeyName
 
 ```sh
 # big key 搜索
@@ -769,6 +828,16 @@ public void delBigList(String host, int port, String password, String bigListKey
     jedis.del(bigListKey);
 }
 ```
+
+## 注意
+
+* 根据需求合理的评估Redis的内存使用量，选择合适的机器配置，可以在满足需求的情况下节约成本
+* 了解Redis内存模型可以选择更合适的数据类型和编码，更好的利用Redis内存
+* 当Redis出现阻塞、内存占用等问题时，尽快发现导致问题的原因，便于分析解决问题
+* Master写内存快照，save命令调度rdbSave函数，会阻塞主线程的工作，当快照比较大时对性能影响是非常大的，会间断性暂停服务，所以Master最好不要写内存快照。
+* Master AOF持久化，如果不重写AOF文件，这个持久化方式对性能的影响是最小的，但是AOF文件会不断增大，AOF文件过大会影响Master重启的恢复速度。Master最好不要做任何持久化工作，包括内存快照和AOF日志文件，特别是不要启用内存快照做持久化,如果数据比较关键，某个Slave开启AOF备份数据，策略为每秒同步一次。
+* Master调用BGREWRITEAOF重写AOF文件，AOF在重写的时候会占大量的CPU和内存资源，导致服务load过高，出现短暂服务暂停现象。
+* Redis主从复制的性能问题，为了主从复制的速度和连接的稳定性，Slave和Master最好在同一个局域网内
 
 ## 工具
 
