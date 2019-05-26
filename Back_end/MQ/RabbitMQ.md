@@ -32,6 +32,29 @@ rabbitmqctl status|stop
 
 # 查看队列状态
 sudo rabbitmqctl list_queues
+
+## Centos7
+# 安装 Erlang
+# 下载 https://packages.erlang-solutions.com/erlang/esl-erlang/FLAVOUR_1_general/esl-erlang_19.3-1~centos~7_amd64.rpm
+yum install epel-release
+yum install unixODBC unixODBC-devel wxBase wxGTK SDL wxGTK-gl
+rpm -ivh esl-erlang_19.3-1~centos~7_amd64.rpm
+# 测试安装是否成功：
+erl
+
+# 下载 http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.9/rabbitmq-server-3.6.9-1.el7.noarch.rpm
+yum install rabbitmq-server-3.6.9-1.el7.noarch.rpm
+rpm -qa | grep erlang
+# 卸载
+rpm -e esl-erlang
+
+## 进入rabbitmq/bin目录
+rabbitmq-plugins enable rabbitmq_management
+# 启动rabbitmq服务
+rabbitmq-server -detached
+# 添加用户并设置权限
+rabbitmqctl add_user albert albert
+rabbitmqctl set_user_tags albert administrator
 ```
 
 ## 原理
@@ -72,9 +95,61 @@ sudo rabbitmqctl list_queues
 * 主题
 * RPC（即远程存储调用）
 
+## 集群
+
+```
+# 现有两台机器ip以及hostname分别为
+192.168.232.130 计算机名为cecily
+192.168.232.129 计算机名为albert
+
+# 在两台机器cecily和albert的/etc/hosts 末尾都加上
+192.168.232.130 cecily
+192.168.232.129 albert
+
+# 查找.erlang.cookie文件的位置,两台机器的.erlang.cookie要一致，这是erlang通讯所需要用到的
+find -name .erlang.cookie
+# 将cecily机器添加到albert中，先将两个机器的防火墙关闭
+systemctl stop firewalld.service
+
+# 在cecily机器执行，将cecily的rabbitmq添加到了albert的集群中
+rabbitmqctl stop_app
+rabbitmqctl join_cluster --ram rabbit@albert
+rabbitmqctl start_app
+
+# Haproxy负载均衡
+# 安装haproxy
+yum install haproxy
+
+# 修改haproxy配置 /etc/haproxy/haproxy.cfg 添加如下内容
+#把rabbitmq节点的管理界面也放到haproxy
+listen rabbitmq_admin
+    bind 0.0.0.0:8600
+    server albert 192.168.232.129:15672
+    server cecily 192.168.232.130:15672
+######################
+
+##raiibitmq集群负载均衡配置
+listen rabbitmq_cluster
+    bind 0.0.0.0:8660
+    option tcplog
+    mode tcp
+    timeout client 3m
+    timeout server 3m
+    balance roundrobin
+    server albert 192.168.232.129:5672 check inter 5s rise 2 fall 3
+    server cecily 192.168.232.130:5672 check inter 5s rise 2 fall 3
+######
+
+# 重新启动haproxy
+systemctl restart haproxy.service
+
+# 问haproxy机器的8600端口进入rabbitmq集群管理界面，8660端口通讯
+```
+
 ## 参考
 
 * [文档](http://www.rabbitmq.com/tutorials/tutorial-one-php.html)
 * [rabbitmq/rabbitmq-server](https://github.com/rabbitmq/rabbitmq-server):Open source multi-protocol messaging broker https://www.rabbitmq.com/
 * [rabbitmq/rabbitmq-tutorials](https://github.com/rabbitmq/rabbitmq-tutorials):Tutorials for using RabbitMQ in various ways http://www.rabbitmq.com/getstarted.html
 * [rabbitmq](http://blog.csdn.net/column/details/rabbitmq.html)
+* [sky-big/RabbitMQ](https://github.com/sky-big/RabbitMQ):RabbitMQ系统3.5.3版本中文完全注释(同时实现了RabbitMQ系统和插件源代码编译，根据配置文件创建RabbitMQ集群，创建连接RabbitMQ系统的客户端节点等相关功能，方便源代码的阅读) https
