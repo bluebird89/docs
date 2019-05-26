@@ -222,6 +222,7 @@ docker pull ubuntu:13.10 # 获取镜像
 docker pull learn/tutorial
 
 docker create ubuntu:14.04 #  create images
+docker create --name mymysql -v /data/mysql-data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root
 
 docker rmi [IMAGE ID] # Remove one or more images.
 
@@ -236,6 +237,7 @@ docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py
 docker run learn/tutorial echo "hello word"   # 两个参数，一个是指定镜像名（从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像），一个是要在镜像中运行的命令
 docker run learn/tutorial apt-get install -y ping   # learn/tutorial镜像里面安装ping程序
 docker run [组织名称]/<镜像名称>:[镜像标签]
+docker run --name some-nginx -d -p 8080:80 nginx # --name: 生成的容器名字
 
 docker ps    # 查看运行容器状态
 docker-compose ps #查看当前项目容器
