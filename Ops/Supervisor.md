@@ -76,6 +76,22 @@ autostart=true
 autorestart=true
 startsecs=30
 startretries=5
+
+[program:demo]
+# ？
+directory = yourpath
+# 启动进程的命令
+command = yourcommand
+# 启动supervisor时启动
+autostart = true
+# 进程exit自动重启
+autorestart = true
+# 执行命令的用户
+user = www-data
+# 日志路径
+stdout_logfile = /var/log/supervisor/demo.log
+# 这个no意思是启动例如nginx或者php-fpm时，由supervior接管守护
+daemonize = no
 ```
 
 ## 启动

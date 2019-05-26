@@ -985,8 +985,7 @@ JavaEE/JDBC/Weblogic
 * [ReactiveX/RxJava](https://github.com/ReactiveX/RxJava):RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.
 * [qiujiayu/AutoLoadCache](https://github.com/qiujiayu/AutoLoadCache):AutoLoadCache 是基于AOP+Annotation等技术实现的高效的缓存管理解决方案，实现缓存与业务逻辑的解耦，并增加异步刷新及“拿来主义机制”，以适应高并发环境下的使用。
 * [eclipse-vertx/vert.x](https://github.com/eclipse-vertx/vert.x):Vert.x is a tool-kit for building reactive applications on the JVM http://vertx.io
-* flow-control
-  - [alibaba/Sentinel](https://github.com/alibaba/Sentinel):A lightweight flow-control library providing high-available protection and monitoring (高可用防护的流量管理框架)
+* [alibaba/Sentinel](https://github.com/alibaba/Sentinel):A lightweight powerful flow control component enabling reliability and monitoring for microservices. (轻量级的流量控制、熔断降级 Java 库)
 * [google/guava](https://github.com/google/guava):Google core libraries for Java
 * [SDKMAN](https://sdkman.io):The Software Development Kit Manager
   - `curl -s "https://get.sdkman.io" | bash`
