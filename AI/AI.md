@@ -308,6 +308,10 @@
 * [AI For Everyone](https://www.coursera.org/learn/ai-for-everyone/)
 * [CS 188 | Introduction to Artificial Intelligence Fall 2018](https://inst.eecs.berkeley.edu/~cs188/fa18/index.html)
 
+## 信息
+
+* 5 月 18 日，北大、清华双双宣布了新专业。北大 2019 年正式启动机器人工程专业招生，清华大学成立人工智能学堂班，今年秋季开始招收本科生。
+
 ## 资源
 
 * [Microsoft/ailab](https://github.com/Microsoft/ailab):Experience, Learn and Code the latest breakthrough innovations with Microsoft AI

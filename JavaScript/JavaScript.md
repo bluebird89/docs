@@ -2718,9 +2718,29 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 
 ## Web API
 
+## 生态
+
+* TypeScript 对战 ES6
+  - 深入理解 ES6 中的基础语法非常重要
+  - 了解 JavaScript 的解释方式以及各种浏览器的局限性也很重要
+  - PWA 和服务工作者的崛起也值得关注。
+* React 对战 Angular Vue
+* Jest 对战 Mocha
+* GraphQL,Apollo（GraphQL 的客户端）REST API 将会下降
+* Parcel 和 Webpack
+* TypeScript 可能超过 ECMAScript
+* GraphQL + TypeScript 占据了 2020 年所需技能的列表。
+* 预测像 Next.js、Nuxt.js 和 Gatsby.js 这样的混合框架将占据很大一部分项目，因此 JavaScript 开发人员必须了解这些工具。
+* Agile（敏捷）这个术语，但它比 Git 或 Redux 被提及的频率更高，这说明 JS 开发者们除了要获得开发岗位必须的硬技能，软技能同样不可忽视。UX 也是如此
+* 作为一个前端开发者，你需要知道如何在技术层面为用户提供更流畅的体验，而不是在设计层面。
+
 ## 面试
 
 * [原生JS(上)](https://juejin.im/post/5cab0c45f265da2513734390)
+
+## 教程
+
+* [verekia/js-stack-from-scratch](https://github.com/verekia/js-stack-from-scratch):🛠️⚡ Step-by-step tutorial to build a modern JavaScript stack.
 
 ## 工具
 
@@ -2752,10 +2772,10 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 * pdf
   - [alvarcarto/url-to-pdf-api](https://github.com/alvarcarto/url-to-pdf-api):Web page PDF/PNG rendering done right. Self-hosted service for rendering receipts, invoices, or any content.
 * [zhangkaitao/es](https://github.com/zhangkaitao/es):JavaEE项目开发脚手架 https://github.com/zhangkaitao/es
+* [facebook/flow](https://github.com/facebook/flow):Adds static typing to JavaScript to improve developer productivity and code quality. https://flow.org/
 
 ## 参考
 
 * [stephentian/33-js-concepts](https://github.com/stephentian/33-js-concepts):📜 每个 JavaScript 工程师都应懂的33个概念 @leonardomso
 * [ECMAScript 2015](https://babeljs.io/learn-es2015/)
 * [BonsaiDen/JavaScript-Garden](https://github.com/BonsaiDen/JavaScript-Garden):A collection of documentation about the most quirky parts of the JavaScript language. http://bonsaiden.github.io/JavaScript-Garden
-* [verekia/js-stack-from-scratch](https://github.com/verekia/js-stack-from-scratch):🛠️⚡ Step-by-step tutorial to build a modern JavaScript stack.
