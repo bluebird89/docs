@@ -110,6 +110,31 @@ npm install -g n  # node版本更新
 n stable
 ```
 
+## 配置
+
+```sh
+nrm ls
+npm ---- https://registry.npmjs.org/
+cnpm --- http://r.cnpmjs.org/
+taobao - http://registry.npm.taobao.org/
+eu ----- http://registry.npmjs.eu/
+au ----- http://registry.npmjs.org.au/
+sl ----- http://npm.strongloop.com/
+nj ----- https://registry.nodejitsu.com/
+pt ----- http://registry.npmjs.pt/
+
+nrm add <registry> <url> [home]
+nrm del <registry>
+nrm test
+nrm use taobao
+
+npm config set registry "http://registry.npmjs.org/"
+npm config set registry http://registry.cnpmjs.org
+
+npm config set proxy http://server:port
+npm config set https-proxy http://server:port
+```
+
 ## 概念
 
 ### 模块化
@@ -532,7 +557,7 @@ process.on('message', function(socket){
 
 但负责接收socket的master需要重新分配发送socket ，而且仅有一个进程去accept连接，效率会降低 node官方的cluster模块就是这么实现的，实质是采用了round－robin轮叫调度算法。
 
-### 集群稳定之路
+### 集群稳定
 
 - 自动重启：我们在主进程上要加入一些子进程管理的机制，比如在一个子进程挂掉后，要重新启动一个子进程来继续服务.假设子进程中有未捕获异常发生；
 
@@ -753,6 +778,7 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
   - [GoogleChromeLabs/ndb](https://github.com/GoogleChromeLabs/ndb):ndb is an improved debugging experience for Node.js, enabled by Chrome DevTools
   - [DevExpress/testcafe](https://github.com/DevExpress/testcafe):A Node.js tool to automate end-to-end web testing. https://devexpress.github.io/testcafe/
   - [visionmedia/supertest](https://github.com/visionmedia/supertest):🕷Super-agent driven library for testing node.js HTTP servers using a fluent API
+* [tj/co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)
 
 ## 面试
 

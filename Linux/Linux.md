@@ -45,7 +45,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 >
 > 在免费和开源组件之上提供支持的商业Linux产品变得可行，因为包括IBM在内的许多企业都从专有的Unix迁移到在Linux上提供中间件和软件解决方案。Red Hat在Red Hat Enterprise Linux周围建立了一个商业支持模型，德国供应商SUSE Linux Enterprise Server（SLES）也是如此。
 
-### 对比
+### Unix vs Linux
 
 * 相似
   - 用户体验角度来讲，没有太多区别！Linux的大部分优点包括操作系统可跨多硬件架构（包括现代PC）特性，以及能够让Unix系统的管理员和用户使用他们熟悉的工具的能力。
@@ -533,7 +533,9 @@ dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on com
 
 ## 指令
 
-/usr/bin/  /bin/ /sbin/
+/usr/bin/
+/bin/
+/sbin/
 
 ```sh
 # 查看linux系统信息
@@ -598,7 +600,7 @@ pidof nginx
 ps -ef | grep nginx # 进程查看
 ps aux | grep nginx
 
-netstat -an | grep LISTEN
+netstat -anp | grep LISTEN
 
 ## 端口查看
 lsof -i:3000
@@ -609,9 +611,10 @@ kill pid
 kill -USR2 $(pidof nginx)
 pkill -f nginx
 
-ctrl+c   ## 有些程序也可以用q键
+uptime # 查看当前系统运行多长时间
 
-退出
+# 退出
+ctrl+c   ## 有些程序也可以用q键
 
 ctrl+z   ## 进程会挂起到后台
 bg jobid  ## 让进程在后台继续执行
@@ -949,6 +952,10 @@ cat ~/.ssh/id_rsa.pub | ssh demo@198.51.100.0 "mkdir -p ~/.ssh && chmod 700 ~/.s
 scp id_rsa.pub git@172.26.186.117:/home/git/
 scp -P 1101 username@servername:/remote_path/filename  ~/local_destination   // 源文件  目标文件
 ssh -p 2222 user@host   # 登陆服务器
+# 复制本地到远程
+scp [-r] local_path username@ip:path
+# 复制远程到本地
+scp [-r] username@ip:path local_path
 
 ## 服务器登陆
 ssh username@remote_host
@@ -982,6 +989,7 @@ get -[r | P] remoteFile localFile # 下载重新命名 r:递归 P：维护权限
 put localFile # 上传文件
 
 df -h # remote
+du -f --max-depth=[遍历文件夹的深度] [file/folder] # 读性好的查看文件空间
 ! df -h # local
 
 get /etc/group
@@ -1152,6 +1160,44 @@ smb://192.168.100.106
 * RAID 1：镜像存储，通过把两块磁盘中的一块磁盘的数据镜像到另一块磁盘上， 实现数据冗余，在两块磁盘上产生互为备份的数据，其容量仅等于一块磁盘的容量。当数据在写入一块磁盘时，会在另一块闲置的磁盘上生产镜像，在不影响性能情况下最大限度的保证系统的可靠性和可修复性；当原始数据繁忙时，可直接从镜像拷贝中读取数据（从两块硬盘中较快的一块中读出），提高读取性能。相反的，RAID 1的写入速度较缓慢。RAID 1一般支持“热交换”，即阵列中硬盘的移除或替换可以在系统运行状态下进行，无须中断退出系统。RAID 1是磁盘阵列中硬盘单位成本最高的，但它提供了很高的数据安全性、可靠性和可用性，当一块硬盘失效时，系统可以自动切换到镜像磁盘上读写，而不需要重组失效的数据。
 * RAID 0+1：也被称为RAID 10，实际是将RAID 0和RAID 1结合的形式，在连续地以位或字节为单位分割数据并且并行读/写多个磁盘的同时，为每一块磁盘做镜像进行冗余。通过RAID 0+1的组合形式，数据除分布在多个盘上外，每个盘都有其物理镜像盘，提供冗余能力，允许一个以下磁盘故障，而不影响数据可用性，并且有快速读/写能力。RAID 0+1至少需要4个硬盘在磁盘镜像中建立带区集。RAID 0+1技术在保证数据高可靠性的同时，也保证了数据读/写的高效性。
 * RAID 5：是一种存储性能、数据安全和存储成本兼顾的存储解决方案。RAID 5可以理解为是RAID 0和RAID 1的折衷方案，RAID 5至少需要三块硬盘。RAID 5可以为系统提供数据安全保障，但保障程度要比镜像低而磁盘空间利用率要比镜像高。RAID 5具有和RAID 0相近似的数据读取速度，只是多了一个奇偶校验信息，写入数据的速度比对单个磁盘进行写入操作稍慢。同时由于多个数据对应一个奇偶校验信息，RAID 5的磁盘空间利用率要比RAID 1高，存储成本相对较低，是目前运用较多的一种解决方案。
+
+## logrotate
+
+* 增加配置/etc/logrotate.d
+* logrotate -f /etc/logrotate.d/nginx
+
+```
+/var/log/nginx/*.log {
+        # 打包日志频率 daily:每天 weekly:每周 monthly:每月
+        daily
+        # 打包文件添加日期后缀
+        dateext
+        # 找不到日志也ok
+        missingok
+        # 保存14份日志
+        rotate 14
+        # 压缩日志 默认gzip
+        compress
+        # 延时压缩到下次rotate
+        delaycompress
+        # 忽略空日志
+        notifempty
+        # ？
+        create 0640 www-data adm
+        # 执行完所有rotate再执行脚本
+        sharedscripts
+        # ?
+        prerotate
+                if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+                        run-parts /etc/logrotate.d/httpd-prerotate; \
+                fi \
+        endscript
+        # ？
+        postrotate
+                invoke-rc.d nginx rotate >/dev/null 2>&1
+        endscript
+}
+```
 
 ### [oguzhaninan/Stacer](https://github.com/oguzhaninan/Stacer)
 
