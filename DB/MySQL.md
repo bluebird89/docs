@@ -5,7 +5,7 @@ Open source relational database management system
 ## 版本
 
 * MariaDB
-* Percona分支版本，它是一个相对比较成熟的、优秀的MySQL分支版本，在性能提升、可靠性、管理型方面做了不少改善。它和官方ORACLE MySQL版本基本完全兼容，并且性能大约有20%以上的提升。
+* Percona:一个相对比较成熟的、优秀的MySQL分支版本，在性能提升、可靠性、管理型方面做了不少改善。与MySQL版本基本完全兼容，并且性能大约有20%以上的提升。
 * Mysql 5.7
     - 对 JSON 的支持
     - the root MySQL user is set to authenticate using the auth_socket plugin by default rather than with a password.
@@ -15,7 +15,7 @@ Open source relational database management system
     - SQL角色：可以在单个的会话中创建、授予、删除和应用 MySQL 角色
         + ROLES_GRAPHML()
         + 增强了对密码重用的限制：之前支持密码过期策略，新版会检测密码是否有效
-    - MySQL 8 基于现有的 GIS 支持，引入了地理和空间参考
+    - 基于现有的 GIS 支持，引入了地理和空间参考
     - 窗口函数(Window Functions)
     - 索引可以被“隐藏”和“显示”。当对索引进行隐藏时，它不会被查询优化器所使用。
     - 降序索引
@@ -26,16 +26,21 @@ Open source relational database management system
     - InnoDB 集群为您的数据库提供集成的原生 HA 解决方案
     - validate_password:默认为caching_sha2_password,客户端不支持
 
-## 客户端
+## 概念
 
-- MySQLWorkbench
-- SQLyog   `ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
-- [phpmyadmin/phpmyadmin](https://github.com/phpmyadmin/phpmyadmin):A web interface for MySQL and MariaDB https://www.phpmyadmin.net/
-    + Communicates directly with your MySQL installation
-    + Handles authentication using MySQL credentials
-    + Executes and returns results for arbitrary SQL queries
-- 命令行
-- Sequel Pro
+- 结构化查询语言(SQL Structured Query Language)
+- 关系型数据库管理系统(RDBMS Relational Database Management System)
+- 索引
+- 数据库操作
+- 表操作
+- 数据操作
+- 子查询
+- 存储过程
+- 触发器
+- 视图
+- 事务
+- 锁
+- 影像复制
 
 ## 安装
 
@@ -60,15 +65,18 @@ mysql_secure_installation # 没有设置 root 帐户的密码，马上设置它;
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
 
-# ubunut 卸载
+# ubuntu
 sudo apt install mysql-server
 
-sudo apt remove mysql-server
+sudo apt remove mysql-server mysql-common
 sudo apt autoremove mysql-server
-sudo apt remove mysql-common
 
 sudo rm /var/lib/mysql/ -R
 sudo rm /etc/mysql/ -R
+
+## MariaDB
+yum -y install mariadb-server mariadb
+systemctl start mariadb && systemctl enable mariadb
 
 dpkg -l | grep mysql  #
 dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P
@@ -94,8 +102,8 @@ getenforce
 #重启机器即可
 
 # 服务管理
-service mysql start|stop|status|restart
-systemctl status mysql.service
+service mysql status|start|stop|restart
+systemctl status|start|stop|restart mysql.service
 
 ## docker
 docker pull mysql
@@ -103,41 +111,19 @@ docker run --name master -p 3306:3307 -e MYSQL_ROOT_PASSWORD=root -d mysql
 
 # Windows,管理员权限执行
 net start/stop mysql # win平台
-
-## MariaDB
-yum -y install mariadb-server mariadb
-systemctl start mariadb && systemctl enable mariadb
 ```
-
-## 概念
-
-- 支持sql语言，指结构化查询语言，全称是 Structured Query Language.
-- RDBMS 指关系型数据库管理系统，全称 Relational Database Management System。
-- DBMS:关联表公共字段的名字可以不一样，但是数据类型必须一样
-- 索引
-- 数据库操作
-- 表操作
-- 数据操作
-- 子查询
-- 存储过程
-- 触发器
-- 视图
-- 事务
-- 锁
-- 外键约束
-- 影像复制
 
 ### 配置
 
-配置文件：/usr/local/etc/my.cnf或者 my.ini
-
-* 数据库文件路径 `datadir="F:/wamp/mysql/data"`
-* 字符集: 客户端向MySQL服务器端请求和返加的数据的字符集，在选择数据库后使用:`set names gbk`;默认使用utf8mb4字符集,utf8mb4是utf8的超集，emoji表情以及部分不常见汉字在utf8下会表现为乱码，故需要升级至utf8mb4。
+* 配置文件：/usr/local/etc/my.cnf或者 my.ini
+* 字符集: 客户端向MySQL服务器端请求和返加的数据的字符集
+    - 在选择数据库后使用:`set names gbk`;
+    - 默认使用utf8mb4字符集,utf8mb4是utf8的超集，emoji表情以及部分不常见汉字在utf8下会表现为乱码，故需要升级至utf8mb4。
     + 数据库存储:一个汉字utf8下为两个长度,gbk下为一个长度
     + 正常一个汉字utf8下为三个字节,gbk下为两个字节
     + 存储emoji
-* 保证客户端使用字符集与服务端返回数据字符集编码一致(以适应客户端为主,修改服务器服务器端配置) 查询系统变量:
-* 校对集:
+* 保证客户端使用字符集与服务端返回数据字符集编码一致(以适应客户端为主,修改服务器服务器端配置)
+* 校对集
     - _bin：按二进制编码比较
     - _ci：不区分大小写比较
 * 连接变量
@@ -149,7 +135,7 @@ systemctl start mariadb && systemctl enable mariadb
         + 默认数值是50，可调优为128，对于Linux系统设置范围为小于512的整数。
 * 缓冲区变量
     - key_buffer_size指定索引缓冲区的大小，它决定索引处理的速度，尤其是索引读的速度。通过检查状态值Key_read_requests和Key_reads，可以知道key_buffer_size设置是否合理。比例key_reads / key_read_requests应该尽可能的低，至少是1:100，1:1000更好（上述状态值可以使用SHOW STATUS LIKE ‘key_read%’获得）。
-        + key_buffer_size只对MyISAM表起作用。即使你不使用MyISAM表，但是内部的临时磁盘表是MyISAM表，也要使用该值。可以使用检查状态值created_tmp_disk_tables得知详情。
+        + key_buffer_size只对MyISAM表起作用。即使不使用MyISAM表，但是内部的临时磁盘表是MyISAM表，也要使用该值。可以使用检查状态值created_tmp_disk_tables得知详情。
         + 计算索引未命中缓存的概率：`key_cache_miss_rate ＝Key_reads / Key_read_requests * 100%`，设置在1/1000左右较好
     - query_cache_size:使用查询缓冲，MySQL将查询结果存放在缓冲区中，今后对于同样的SELECT语句（区分大小写），将直接从缓冲区中读取结果。
         + 如果Qcache_lowmem_prunes的值非常大，则表明经常出现缓冲不够的情况
@@ -190,14 +176,13 @@ systemctl start mariadb && systemctl enable mariadb
     - innodb_log_buffer_size:log缓存大小，一般为1-8M，默认为1M，对于较大的事务，可以增大缓存大小。可设置为4M或8M。
     - innodb_additional_mem_pool_size:该参数指定InnoDB用来存储数据字典和其他内部数据结构的内存池大小。缺省值是1M。通常不用太大，只要够用就行，应该与表结构的复杂度有关系。如果不够用，MySQL会在错误日志中写入一条警告信息。根据MySQL手册，对于2G内存的机器，推荐值是20M，可适当增加。
     - innodb_thread_concurrency=8:推荐设置为 2*(NumCPUs+NumDisks)，默认一般为8
-    - INNODB_LOG_FILE_SIZE:
-* 不要在命令行中输入密码 `mysql -u root -p`
+    - INNODB_LOG_FILE_SIZE
 
 ```sh
 chmod 644 /etc/my.cnf # 文件 /etc/my.conf 只能由 root 用户修改
 cat /dev/null > ~/.mysql_history # 删除 MySQL shell 历史
 
-bind-address = 127.0.0.1 # 将限制来自远程机器的访问，它告诉 MySQL 服务器只接受来自本地主机的连接
+bind-address = 127.0.0.1 # 将限制来自远程机器的访问，只接受来自本地主机的连接
 local-infile=0 # 使用下面的指令以防止在 [mysqld] 部分从 MySQL 中访问底层文件系统。
 
 [client]
@@ -215,7 +200,7 @@ user = mysql
 port = 3306
 socket = /data/3306/mysql.sock
 basedir = /usr/local/mysql
-datadir = /data/3306/data
+datadir = /data/3306/data # 数据库文件路径
 open_files_limit = 10240
 back_log = 600 #在MYSQL暂时停止响应新请求之前，短时间内的多少个请求可以被存在堆栈中。如果系统在短时间内有很多连接，则需要增大该参数的值，该参数值指定到来的TCP/IP连接的监听队列的大小。默认值50。
 max_connections = 3000 #MySQL允许最大的进程连接数，如果经常出现Too Many Connections的错误提示，则需要增大此值。
@@ -271,9 +256,6 @@ max_allowed_packet = 32M
 [mysqld_safe]
 log-error=/data/3306/mysql_oldboy.err
 pid-file=/data/3306/mysqld.
-
-# 默认只允许本地服务器访问
-bind-address = 127.0.0.1
 ```
 
 ```sql
@@ -284,9 +266,9 @@ set names gbk # 修改client connection results字符集
 
 # 出现ERROR 1040: Too many connections错误,修正max_connections的值
 show variables like 'max_connections';  # 最大连接数
-show  status like 'max_used_connections'; # 响应的连接数
+show status like 'max_used_connections'; # 响应的连接数
 
-show full processlist; #
+show full processlist;
 
 show variables like 'key_buffer_size';
 show global status like 'key_read%'; # 请求在内存中没有找到直接从硬盘读取索引
@@ -310,25 +292,27 @@ set global general_log = on;
 mysqld --initialize
 ```
 
+## 客户端
+
+- 命令行
+- MySQLWorkbench
+- SQLyog   `ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
+- [phpmyadmin/phpmyadmin](https://github.com/phpmyadmin/phpmyadmin):A web interface for MySQL and MariaDB https://www.phpmyadmin.net/
+- Sequel Pro
+
 ### 用户管理
 
-* ALL PRIVILEGES:as we saw previously, this would allow a MySQL user full access to a designated database (or if no database is selected, global access across the system)
-* CREATE:allows them to create new tables or databases
-* DROP:allows them to them to delete tables or databases
-* DELETE:allows them to delete rows from tables
-* INSERT:allows them to insert rows into tables
-* SELECT:allows them to use the SELECT command to read through databases
-* UPDATE:allow them to update table rows
+* ALL PRIVILEGES: allow a MySQL user full access to a designated database (or if no database is selected, global access across the system)
 * GRANT OPTION:allows them to grant or remove other users' privileges
 
 ```sql
+mysql -hlocalhost  -P 3306 -u root -p  # 生成用户root与空密码登陆,第一次登陆mysql的时候是没有密码的
+exit|quit| \q
+
 SELECT user,authentication_string,plugin,host FROM mysql.user; # msyql 8.0
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 ALTER USER `root`@`localhost` IDENTIFIED WITH caching_sha2_password BY 'password';
 FLUSH PRIVILEGES;
-
-mysql -hlocalhost  -P 3306 -u root -p  # 生成用户root与空密码登陆,第一次登陆mysql的时候是没有密码的
-exit|quit| \q
 
 CREATE USER 'lee'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456Ac&' # 添加用户
 GRANT ALL PRIVILEGES ON test.* TO lee@'localhost';
@@ -339,32 +323,32 @@ use mysql;
 update user SET Password = PASSWORD('密码') where User = 'root';
 FLUSH PRIVILEGES;
 
-ALTER USER 'root'@'localhost'
-  IDENTIFIED WITH mysql_native_password
-  BY 'password';
-
 REVOKE type_of_permission ON database_name.table_name FROM ‘username’@‘localhost’;
 
-## 重置root密码
-# 获取临时密码
+## 重置root密码 获取临时密码
 grep 'temporary password' /var/log/mysqld.log
 ```
 
 ### 存储引擎
 
-不同数据引擎数据的存储格式
+不同数据引擎数据的存储格式,数据结构的实现
 
-* Myisam:表结构 数据 索引文件分离。适合于一些需要大量查询的应用，但其对于有大量写操作并不是很好。甚至你只是需要update一个字段，整个表都会被锁起来，而别的进程，就算是读进程都 无法操作直到读操作完成。
-  - 表锁：myisam 表级锁 表锁，只有读读之间是并发的，写写之间和读写之间（读和插入之间是可以并发的，去设置concurrent_insert参数，定期执行表优化操作，更新操作就没有办法了）是串行的，所以写起来慢，并且默认的写优先级比读优先级高，高到写操作来了后，可以马上插入到读操作前面去，如果批量写，会导致读请求饿死，所以要设置读写优先级或设置多少写操作后执行读操作的策略;myisam不要使用查询时间太长的sql，如果策略使用不当，也会导致写饿死，所以尽量去拆分查询效率低的sql,
-  - 读的效果好，写的效率差，这和它数据存储格式，索引的指针和锁的策略有关的，它的数据是顺序存储的.索引btree上的节点是一个指向数据物理位置的指针，所以查找起来很快
+* Myisam
+    - 表结构 数据 索引文件分离
+    - 适合于一些需要大量查询的应用，但其对于有大量写操作并不是很好。甚至只是需要update一个字段，整个表都会被锁起来，而别的进程就算是读进程都无法操作直到读操作完成
+    - 表锁：只有读读之间是并发的，写写之间和读写之间（读和插入之间是可以并发的，去设置concurrent_insert参数，定期执行表优化操作，更新操作就没有办法了）是串行的，所以写起来慢，并且默认的写优先级比读优先级高，高到写操作来了后，可以马上插入到读操作前面去，如果批量写，会导致读请求饿死，所以要设置读写优先级或设置多少写操作后执行读操作的策略;
+    - myisam不要使用查询时间太长的sql，如果策略使用不当，也会导致写饿死，所以尽量去拆分查询效率低的sql,
+    - 读的效果好，写的效率差，这和它数据存储格式，索引的指针和锁的策略有关的，它的数据是顺序存储的.索引btree上的节点是一个指向数据物理位置的指针，所以查找起来很快
     - 不支持自动恢复数据：断电之后 使用之前检查和执行可能的修复
-  - 不支持事务：不保证单个命令会完成, 多行update 有错误 只有一些行会被更新
-  - 只有索引缓存在内存中：mysiam只缓存进程内部的索引
-  - 紧密存储：行被仅仅保存在一起
-* Innodb:综合一个文件,写满后递增文件夹。用于在写操作比较多的时候
+    - 不支持事务：不保证单个命令会完成, 多行update会有错误，只有一些行会被更新
+    - 只有索引缓存在内存中：mysiam只缓存进程内部的索引
+    - 紧密存储：行被仅仅保存在一起
+* Innodb
+    - 综合一个文件,写满后递增文件夹
+    - 用于在写操作比较多的时候
     - 支持事务、行级锁、并发性能更好、CPU及内存缓存页优化使得资源利用率更高（推荐）
     - 数据存储方式是聚簇索引,索引节点存的则是数据的主键，所以需要根据主键二次查找
-    - 事务性：Innodb支持事务和四种事务隔离级别
+    - 事务：Innodb支持事务和四种事务隔离级别
     - 外键：Innodb唯一支持外键的存储引擎 create table 命令接受外键
     - 行级锁：锁设定于行一级 有很好的并发性。sql用到索引的时候，行锁是加在索引上的，不是加在数据记录上的，如果sql没有用到索引，仍然会锁定表,mysql的读写之间是可以并发的，普通的select是不需要锁的，当查询的记录遇到锁时，用的是一致性的非锁定快照读，也就是根据数据库隔离级别策略，会去读被锁定行的快照，其它更新或加锁读语句用的是当前读，读取原始行；因为普通读与写不冲突，所以innodb不会出现读写饿死的情况，又因为在使用索引的时候用的是行锁，锁的粒度小，竞争相同锁的情况就少，就增加了并发处理，所以并发读写的效率还是很优秀的，问题在于索引查询后的根据主键的二次查找导致效率低；
     - MySQL InnoDB默认行级锁。行级锁都是基于索引的，如果一条SQL语句用不到索引是不会使用行级锁的，会使用表级锁把整张表锁住
@@ -378,7 +362,7 @@ grep 'temporary password' /var/log/mysqld.log
     - 在聚集索引（主键索引）中，如果有唯一性约束，InnoDB会将默认的next-key lock降级为record lock。
     - Innodb在做任何操作时，会做一个日志操作，便于恢复。
     - 备份方式稍微复杂一点，如果是innodb引擎如何去备份。xtradb是innodb存储引擎的增强版本，更高性能环境下的新特性。
-* code:一个汉字占多少长度与编码有关,最大长度64K，即65535个字节
+* 编码:一个汉字占多少长度与编码有关,最大长度64K，即65535个字节
     - UTF-8：一个汉字 = 3个字节，英文是一个字节  (65535 - 2) / 3 = 21844
     - GBK： 一个汉字 = 2个字节，英文是一个字节 (65535 - 2) / 2 = 32766
     - varchar(n) 表示n个字节，无论汉字和英文，MySql都能存入 n 个字符，仅实际字节长度有所区别
@@ -389,7 +373,7 @@ show engines; # 显示当前数据库支持的存储引擎情况
 
 ### 数据类型
 
-* 整型：
+* 整型
     - tinyint 0-255 或 -2^7~2^7-1 1个字节
     - smallint -2^15~2^15-1 2个字节
     - mediumint -2^23~2^23-1 3个字节
@@ -397,14 +381,14 @@ show engines; # 显示当前数据库支持的存储引擎情况
     - bigint 0-2^64-1 8个字节
     - unsigned:无符号数
     - 显示宽度int(11):最小显示位数(默认不起作用),zerofill会用0填充,不决定数据大小
-* 浮点型(M代表总长度(不含小数点)，D代表小数位数),精度会丢失,不要作比较：
+* 浮点型(M代表总长度(不含小数点)，D代表小数位数),精度会丢失,不要作比较
     - float(M,D) (论上可以保留7位小数) 3.4E+38~3.4E+38 4个字节
     - double(M,D) (理论上保留15位小数) -1.8E+308~1.8E+308 8个字节
 * 定点数:decimal(M,D)，M的最大值是65，D的最大值是30，默认是（10,0）,用于保存精确的小数,使用二进制格式将9个十进制(基于10)数压缩为4个字节
     - 使用二进制格式将9个十进制(基于10)数压缩为4个字节来表示DECIMAL列值
     - M整数与小数部分的总长度， D指的是小数部分的长度
     - 注意:定点数的值是正确的，浮点数会失去精度。浮点数的执行效率要高于定点数。浮点数和定点数支持显示宽度，支持无符号
-* **字符** 类型：
+* **字符**
     - char(M) 固定长度 0-255个字符 char(11) 最多只能存储11个字节
     - varchar(M) 自动伸缩型:比固定长度类型占用更少的存储空间，只占用需要的空间,使用额外的1到2字节存储长度，列小于255使用1字节保存长度，大于255使用2字节保存，
         - varchar保留字符串末尾的空格 0-65535个字节 M为字符个数，M为最大值
@@ -415,7 +399,7 @@ show engines; # 显示当前数据库支持的存储引擎情况
     - text 2^16-1
     - mediumtext 中型文本型 2^24-1 0－1677个字符
     - longtext 大型文本 2^32-1 0-42亿个字符
-* 日期时间(发布日期"这样的数据时，请用时间戳来存)：
+* 日期时间
     - date 2015-10-20
     - time 10:09:08 100908 9:5:0 CURRENT_TIME()
         +  ADDTIME(CURRENT_TIME(), 023000),  SUBTIME(CURRENT_TIME(), 023000);
@@ -427,38 +411,56 @@ show engines; # 显示当前数据库支持的存储引擎情况
         + 查看 SELECT @@sql_mode，使用1970-01-01 00:00:01
     - timestamp保存自 1970年1月1日午夜以来的秒数，和unix时间戳相同，提供4字节存储 只能表示1970年到2038年。默认timestamp值 为 NOT NULL。
     - 默认值：datetime or timestrap 默认值 CURRENT_TIMESTAMP
-* ip:通常使用varchar(15)保存IP地址.inet_aton() inet_ntoa()用于转换
+* ip:通常使用varchar(15)保存IP地址
+    * inet_aton() inet_ntoa()用于转换
+
+* 更小的通常更好：更小的数据类型通常更快，占用更少的磁盘、 内存和CPU缓存， 并且处理时需要的CPU周期也更少。
+* 简单就好： 简单数据类型的操作通常需要更少的CPU周期。 例如， 整型比字符操作代价更低， 因为字符集和校对规则（排序规则 ）使字符比较比整型比较更复杂。
+* 尽量避免NULL： 如果查询中包含可为NULL 的列， 对MySQL来说更难优化， 因为可为NULL 的列 使得索引、 索引统计和值比较都更复杂。 可为 N ULL的列会使用更多的存储空间， 在MySQL里也需要特殊处理。 当可为NULL的列被索引时， 每个索引记录需要一个额 外的字节， 在MyISAM 里甚至还可能导致固定大小的索引（例如只有一个整数列的索引）变成可变大小的索引。例外， lnnoDB 使用单独的位 (bit) 存储NULL 值， 所以对于稀疏数据有很好的空间效率。
+* 整数类型
+    - 有两种类型的数字：整数 (whole number) 和实数 (real number) 。 如果存储整数， 可以使用这几种整数类型：TINYINT, SMALLINT, MEDIUMINT, INT, BIGINT。分别使用8,16, 24, 32, 64位存储空间。 整数类型有可选的 UNSIGNED 属性，表示不允许负值，这大致可以使正数的上限提高一倍。 例如 TINYINT. UNSIGNED 可以存储的范围是 0 - 255, 而 TINYINT 的存储范围是 -128 -127 。有符号和无符号类型使用相同的存储空间，并具有相同的性能 ， 因此可以根据实际情况选择合适的类型。 你的选择决定 MySQL 是怎么在内存和磁盘中保存数据的。 然而， 整数计算一般使用64 位的 BIGINT 整数， 即使在 32 位环境也是如此。（ 一些聚合函数是例外， 它们使用DECIMAL 或 DOUBLE 进行计算）。 MySQL 可以为整数类型指定宽度， 例如 INT(11), 对大多数应用这是没有意义的：它不会限制值的合法范围，只是规定了MySQL 的一些交互工具（例如 MySQL 命令行客户端）用来显示字符的个数。 对千存储和计算来说， INT(1) 和 INT(20) 是相同的。
+* 实数类型 实数是带有小数部分的数字。 然而， 它们不只是为了存储小数部分，也可以使用DECIMAL 存储比 BIGINT 还大的整数。 FLOAT和DOUBLE类型支持使用标准的浮点运算进行近似计算。 DECIMAL类型用于存储精确的小数。 浮点和DECIMAL类型都可以指定精度。 对千DECIMAL列， 可以指定小数点前后所允许的 最大位数。这会影响列的空间消耗。 有多种方法可以指定浮点列所需要的精度， 这会使得MySQL悄悄选择不同的数据类型，或者在存储时对值进行取舍。 这些精度定义是非标准的， 所以我们建议只指定数据类型，不指定精度。 浮点类型在存储同样范围的值时， 通常比DECIMAL使用更少的空间。FLOAT使用4个字节存储。DOUBLE占用8个字节，相比FLOAT有更高的精度和更大的范围。和整数类型一样， 能选择的只是存储类型； MySQL使用DOUBLE作为内部浮点计算的类型。 因为需要额外的空间和计算开销，所以应该尽扯只在对小数进行精确计算时才使用DECIMAL。 但在数据最比较大的时候， 可以考虑使用BIGINT代替DECIMAL, 将需要存储的货币单位根据小数的位数乘以 相应的倍数即可。
+* 字符串类型 VARCHAR 用于存储可变⻓字符串，长度支持到65535 需要使用1或2个额外字节记录字符串的长度 适合：字符串的最大⻓度比平均⻓度⼤很多；更新很少 CHAR 定⻓，⻓度范围是1~255 适合：存储很短的字符串，或者所有值接近同一个长度；经常变更 慷慨是不明智的 使用VARCHAR(5)和VARCHAR(200)存储'hello'的空间开销是一样的。 那么使用更 短的列有什么优势吗？ 事实证明有很大的优势。 更长的列会消耗更多的内存， 因为MySQL通常会分配固定大小的内存块来保存内部值。 尤其是使用内存临时表进行排序或操作时会特别糟糕。 在利用磁盘临时表进行排序时也同样糟糕。 所以最好的策略是只分配真正需要的空间。 4.BLOB和TEXT类型 BLOB和 TEXT都是为存储很大的数据而设计的字符串数据类型， 分别采用 二进制和字符方式存储 。 与其他类型不同， MySQL把每个BLOB和TEXT值当作一个独立的对象处理。 存储引擎 在存储时通常会做特殊处理。 当BLOB和TEXT值太大时，InnoDB会使用专门的 "外部"存储区域来进行存储， 此时每个值在行内需要1 - 4个字节存储 存储区域存储实际的值。 BLOB 和 TEXT 之间仅有的不同是 BLOB 类型存储的是二进制数据， 没有排序规则或字符集， 而 TEXT类型有字符集和排序规则
+* 日期和时间类型 大部分时间类型 都没有替代品， 因此没有什么是最佳选择的问题。 唯一的问题是保存日期和时间的时候需要做什么。 MySQL提供两种相似的日期类型： DATE TIME和 TIMESTAMP。 但是目前我们更建议存储时间戳的方式，因此该处不再对 DATE TIME和 TIMESTAMP做过多说明。
+* 其他类型 5.1选择标识符 在可以满足值的范围的需求， 井且预留未来增长空间的前提下， 应该选择最小的数据类型。 整数类型 整数通常是标识列最好的选择， 因为它们很快并且可以使用AUTO_INCREMENT。 ENUM和SET类型 对于标识列来说，EMUM和SET类型通常是一个糟糕的选择， 尽管对某些只包含固定状态或者类型的静态 "定义表" 来说可能是没有问题的。ENUM和SET列适合存储固定信息， 例如有序的状态、 产品类型、 人的性别。 字符串类型 如果可能， 应该避免使用字符串类型作为标识列， 因为它们很消耗空间， 并且通常比数字类型慢。 对千完全 "随机" 的字符串也需要多加注意， 例如 MDS() 、 SHAl() 或者 UUID() 产生的字符串。 这些函数生成的新值会任意分布在很大的空间内， 这会导致 INSERT 以及一些SELECT语句变得很慢。如果存储 UUID 值， 则应该移除 "-"符号。 5.2特殊类型数据 某些类型的数据井不直接与内置类型一致。 低千秒级精度的时间戳就是一个例子，另一个例子是以个1Pv4地址，人们经常使用VARCHAR(15)列来存储IP地址，然而， 它们实际上是32位无符号整数， 不是字符串。用小数点将地址分成四段的表示方法只是为了让人们阅读容易。所以应该用无符号整数存储IP地址。MySQL提供INET_ATON()和INET_NTOA()函数在这两种表示方法之间转换。
+* 必须把字段定义为NOT NULL并且提供默认值
+    - ull的列使索引/索引统计/值比较都更加复杂，对MySQL来说更难优化
+    - null 这种类型MySQL内部需要进行特殊处理，增加数据库处理记录的复杂性；同等条件下，表中有较多空字段的时候，数据库的处理性能会降低很多
+    - null值需要更多的存储空，无论是表还是索引中每行中的null的列都需要额外的空间来标识
+    - 对null 的处理时候，只能采用is null或is not null，而不能采用=、in、<、<>、!=、not in这些操作符号。
+* 止使用TEXT、BLOB类型：会浪费更多的磁盘和内存空间，非必要的大量的大字段查询会淘汰掉热数据，导致内存命中率急剧降低，影响数据库性能
+* 必须使用varchar(20)存储手机号：涉及到区号或者国家代号，可能出现+-()，varchar可以支持模糊查询，例如：like“138%”
+* 禁止使用ENUM，可使用TINYINT代替：增加新的ENUM值要做DDL操作；ENUM的内部实际存储就是整数，你以为自己定义的是字符串？
 
 ```sql
-`last_opt_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后操作时间', # 创建、修改记录的时候都刷新
-`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间', # 创建的时候把这个字段设置为当前时间，但以后修改时，不再刷新
-`update_time` TIMESTAMP DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间', # 创建的时候把这个字段设置为空或定值，以后修改时刷新
+`last_opt_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后操作时间'; # 创建、修改记录的时候都刷新
+`create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'; # 创建的时候把这个字段设置为当前时间，但以后修改时，不再刷新
+`update_time` TIMESTAMP DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'; # 创建的时候把这个字段设置为空或定值，以后修改时刷新
 ```
 
-### 字段属性
+### 库表操作
 
-* NOT NULL | NULL，该列在添加数据时，是否可以为空。
-* DEFAULT value，给该列定一个默认值。value的值只能是整型、字符型。
-* DEFAULT 1 ，默认值为整型
-* DEFAULT "男" ，默认值为字符型
-* PRIMARY KEY，指定该列主键，值是唯一的，不能重复。
-* AUTO_INCREMENT，指定列的值是自动增长型。 注意：一个数据表，只能有一个主键和一个自动增长型。 提示：数据表的id字段，必须要有 not null primary key auto_incremtn 这三个属性。
-* 查询条件
-    - 字段列表：指要显示指定列的数据，多个字段之间用逗号隔开，各字段之间没有顺序。*：显示所有字段的数据
-    - ORDER BY排序
-    - LIMIT限制返回
-    - 运算符：＝ ＜ ＞ ＜＝ ＞＝ !＝ ＜＞ is not null IS NULL
-    - BETWEEN 1 AND 20:WHERE date BETWEEN '2016-05-10' AND '2016-05-14';
-    - IN / NOT IN：
-    - LIKE('name%') NOT LIKE('name%')：
-    - % 替代 0 个或多个字符
-    - _ 替代一个字符
-    - [charlist] 字符列中的任何单一字符
-    - [^charlist]或[!charlist] 不在字符列中的任何单一字符 WHERE name REGEXP '^[GFs]'；name REGEXP '^[^A-H]';
-    - 逻辑运算: AND & OR(可以混合使用)
-* 别名：涉及超过一个表；在查询中使用了函数；列名称很长或者可读性差；需要把两个列或者多个列结合在一起
-* 添加注释
-* 取到的值为int为字符串
+* DB TABLE
+    - CREATE
+    - DROP
+* DATA
+    - INSERT
+    - DELETE
+    - UPDATE
+    - SELECT
+* 属性
+    - NOT NULL | NULL：字段值是否可以为空
+    - DEFAULT value：字段值是否有一个默认值
+        + DEFAULT 1 ，默认值为整型
+        + DEFAULT "男" ，默认值为字符型
+    - PRIMARY KEY：指定该列主键，值是唯一的，不能重复
+    - AUTO_INCREMENT，指定列的值是自动增长型。 注意：一个数据表，只能有一个主键和一个自动增长型。 提示：数据表的id字段，必须要有 not null primary key auto_incremtn 这三个属性。
+    - ALIAS:别名
+        + 涉及超过一个表
+        + 在查询中使用了函数
+        + 列名称很长或者可读性差
+        + 需要把两个列或者多个列结合在一起
+    - COMMENT:注释
 
 ```sql
 SHOW DATABASES;
@@ -467,11 +469,9 @@ USE db_name; # 可以不切换数据库的情况下操作数据表
 CREATE DATABASE IF NOT EXISTS db_name CHARSET utf8 COLLATE utf8_unicode_ci;  # 特殊符号、关键字表名加``
 ALTER DATABASE db_name charset=utf8;
 DROP DATABASE [IF EXISTS] db_name;
-
 SHOW CREATE DATABASE db_name;
 
 SHOW TABLES;
-
 # CREATE TABLE table_name(col_name  type  attribute , col_name  type  attribute,…… );
 CREATE TABLE test.news(
   id int NOT null AUTO_INCREMENT primary KEY,
@@ -501,6 +501,10 @@ ALTER TABLE 'table_name' ADD INDEX'index_name' ('column');
 ALTER TABLE 'table_name' ADD FULLTEXT 'index_name' ('column');
 ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
 
+DROP TABLE [IF EXISTS] db_name;
+DELETE FROM table_name;  # 清空数据表：数据一条条删除
+TRUNCATE TABLE table_name;  # 删除表,重建同结构
+
 SELECT [DISTINCT] 字段列表|* FROM table_name [WHERE条件][ORDER BY排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
 SELECT id,title,author,hits,addate from news ORDER BY id DESC LIMIT 10,10; # limit [offset,]rowcount:offset 为偏移量，而非主键id
 SELECT * FROM rp_evaluate LIMIT 500 *$i,500
@@ -517,13 +521,59 @@ INSERT INTO table_name values (null,值,....),(null,值,....),(null,值,....); #
 INSERT INTO table_name set volumn1=value1,volumn3=value3,volumn3=value3;
 
 UPDATE table_name  SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件]; # 更新记录
-UPDATE base SET `count` = `count` + 1
-DELETE FROM table_name [WHERE条件];
+UPDATE base SET `count` = `count` + 1；
 
-DROP TABLE [IF EXISTS] db_name;
-DELETE FROM table_name;  # 清空数据表：数据一条条删除
-TRUNCATE TABLE table_name;  # 删除表,重建同结构
+DELETE FROM table_name [WHERE条件];
 ```
+
+## 表设计规范
+
+* 库名、表名、字段名：小写，下划线风格，不超过32个字符，必须见名知意，禁止拼音英文混用
+* 表名t_xxx，非唯一索引名idx_xxx，唯一索引名uniq_xxx
+* 数据库范式
+    - 第一范式(1NF)：字段值具有原子性,不能再分(所有关系型数据库系统都满足第一范式); 例如：姓名字段,其中姓和名是一个整体,如果区分姓和名那么必须设立两个独立字段
+    - 第二范式(2NF)：一个表必须有主键,即每行数据都能被唯一的区分; 备注：必须先满足第一范式
+    - 第三范式(3NF)：一个表中不能包涵其他相关表中非关键字段的信息,即数据表不能有沉余字段;备注：必须先满足第二范式
+* 范式和反范式：对千任何给定的数据通常都有很多种表示方法， 从完全的范式化到完全的反范式化， 以及两者的折中。 在范式化的数据库中， 每个事实数据会出现并且只出现一次。 相反， 在反范式化的数据库中， 信息是冗余的， 可能会存储在多个地方。
+    - 范式的优点和缺点：为性能提升考虑时，经常会被建议对 schema 进行范式化设计，尤其是写密集的场
+    - 范式化的更新操作通常比反范式化要快
+    - 当数据较好地范式化时，就只有很少或者没有重复数据，所以只需要修改更少的数据
+    - 范式化的表通常更小，可以更好地放在内存里，所以执行操作会更快
+    - 很少有多余的数据意味着检索列表数据时更少需要 DISTINCT 或者 GROUP BY语句。
+    - 反范式的优点和缺点
+        + 不需要关联表，则对大部分查询最差的情况----即使表没有使用索引----是全表扫描
+        + 当数据比内存大时这可能比关联要快得多，因为这样避免了随机I/0
+        + 单独的表也能使用更有效的索引策略
+    - 混用范式化和反范式化：在实际应用中经常需要混用，可能使用部分范式化的 schema 、 缓存表，以及其他技巧。 表适当增加冗余字段，如性能优先，但会增加复杂度。可避免表关联查询
+* ER图
+    - PowerDesigner
+    - MySQL Workbench
+* 组织形式
+    * 堆表(所有的记录无序存储)
+    * 聚簇索引表(所有的记录，按照记录主键进行排序存储)
+
+* 表字段少而精
+    - I/O高效
+    - 字段分开维护简单
+    - 单表1G体积 500W⾏行评估
+    - 单行不超过200Byte
+    - 单表不超过50个INT字段
+    - 单表不超过20个CHAR(10)字段
+    - 建议单表字段数控制在20个以内
+    - 拆分TEXT/BLOB，TEXT类型处理性能远低于VARCHAR，强制生成硬盘临时表浪费更多空间。
+* 禁止使用外键，如果有外键完整性约束，需要应用程序控制：外键会导致表与表之间耦合，update与delete操作都会涉及相关联的表，十分影响sql 的性能，甚至会造成死锁。高并发情况下容易造成数据库性能，大数据高并发业务场景数据库使用以性能优先
+* 多表联接查询时，关联字段类型尽量一致，并且都要有索引；
+
+* 所有的InnoDB表都设计一个无业务用途的自增列做主键，对于绝大多数场景都是如此，真正纯只读用InnoDB表的并不多，真如此的话还不如用TokuDB来得划算；
+* 字段长度满足需求前提下，尽可能选择长度小的。此外，字段属性尽量都加上NOT NULL约束，可一定程度提高性能；
+* 尽可能不使用TEXT/BLOB类型，确实需要的话，建议拆分到子表中，不要和主表放在一起，避免SELECT * 的时候读性能太差。
+* 读取数据时，只选取所需要的列，不要每次都SELECT *，避免产生严重的随机读问题，尤其是读到一些TEXT/BLOB列；
+* 对一个VARCHAR(N)列创建索引时，通常取其50%（甚至更小）左右长度创建前缀索引就足以满足80%以上的查询需求了，没必要创建整列的全长度索引；
+* 通常情况下，子查询的性能比较差，建议改造成JOIN写法；
+* 多表连接查询时，把结果集小的表（注意，这里是指过滤后的结果集，不一定是全表数据量小的）作为驱动表；
+* 多表联接并且有排序时，排序字段必须是驱动表里的，否则排序列无法用到索引；
+* 多用复合索引，少用多个独立索引，尤其是一些基数（Cardinality）太小（比如说，该列的唯一值总数少于255）的列就不要创建独立索引了；
+* 类似分页功能的SQL，建议先用主键关联，然后返回结果集，效率会高很多；
 
 ### 联表
 
@@ -537,77 +587,28 @@ TRUNCATE TABLE table_name;  # 删除表,重建同结构
 select a.FirstName,a.LastName, b.City, b.State from Person as a inner join address b on a.PersonId = b.PersonId
 ```
 
-## 高性能表设计规范
+## 查询
 
-良好的逻辑设计和物理设计是高性能的基石， 应该根据系统将要执行的查询语句来设计schema, 这往往需要权衡各种因素。
-
-* 库名、表名、字段名：小写，下划线风格，不超过32个字符，必须见名知意，禁止拼音英文混用
-* 表名t_xxx，非唯一索引名idx_xxx，唯一索引名uniq_xxx
-* 单实例表数目必须小于500
-* 单表列数目必须小于30
-* 表必须有主键，例如自增主键
-
-### 数据类型
-
-* 更小的通常更好：更小的数据类型通常更快，占用更少的磁盘、 内存和CPU缓存， 并且处理时需要的CPU周期也更少。
-* 简单就好： 简单数据类型的操作通常需要更少的CPU周期。 例如， 整型比字符操作代价更低， 因为字符集和校对规则（排序规则 ）使字符比较比整型比较更复杂。
-* 尽量避免NULL： 如果查询中包含可为NULL 的列， 对MySQL来说更难优化， 因为可为NULL 的列 使得索引、 索引统计和值比较都更复杂。 可为 N ULL的列会使用更多的存储空间， 在MySQL里也需要特殊处理。 当可为NULL的列被索引时， 每个索引记录需要一个额 外的字节， 在MyISAM 里甚至还可能导致固定大小的索引（例如只有一个整数列的索引）变成可变大小的索引。例外， lnnoDB 使用单独的位 (bit) 存储NULL 值， 所以对于稀疏数据有很好的空间效率。
-* 整数类型
-    - 有两种类型的数字：整数 (whole number) 和实数 (real number) 。 如果存储整数， 可以使用这几种整数类型：TINYINT, SMALLINT, MEDIUMINT, INT, BIGINT。分别使用8,16, 24, 32, 64位存储空间。 整数类型有可选的 UNSIGNED 属性，表示不允许负值，这大致可以使正数的上限提高一倍。 例如 TINYINT. UNSIGNED 可以存储的范围是 0 - 255, 而 TINYINT 的存储范围是 -128 -127 。有符号和无符号类型使用相同的存储空间，并具有相同的性能 ， 因此可以根据实际情况选择合适的类型。 你的选择决定 MySQL 是怎么在内存和磁盘中保存数据的。 然而， 整数计算一般使用64 位的 BIGINT 整数， 即使在 32 位环境也是如此。（ 一些聚合函数是例外， 它们使用DECIMAL 或 DOUBLE 进行计算）。 MySQL 可以为整数类型指定宽度， 例如 INT(11), 对大多数应用这是没有意义的：它不会限制值的合法范围，只是规定了MySQL 的一些交互工具（例如 MySQL 命令行客户端）用来显示字符的个数。 对千存储和计算来说， INT(1) 和 INT(20) 是相同的。
-* 实数类型 实数是带有小数部分的数字。 然而， 它们不只是为了存储小数部分，也可以使用DECIMAL 存储比 BIGINT 还大的整数。 FLOAT和DOUBLE类型支持使用标准的浮点运算进行近似计算。 DECIMAL类型用于存储精确的小数。 浮点和DECIMAL类型都可以指定精度。 对千DECIMAL列， 可以指定小数点前后所允许的 最大位数。这会影响列的空间消耗。 有多种方法可以指定浮点列所需要的精度， 这会使得MySQL悄悄选择不同的数据类型，或者在存储时对值进行取舍。 这些精度定义是非标准的， 所以我们建议只指定数据类型，不指定精度。 浮点类型在存储同样范围的值时， 通常比DECIMAL使用更少的空间。FLOAT使用4个字节存储。DOUBLE占用8个字节，相比FLOAT有更高的精度和更大的范围。和整数类型一样， 能选择的只是存储类型； MySQL使用DOUBLE作为内部浮点计算的类型。 因为需要额外的空间和计算开销，所以应该尽扯只在对小数进行精确计算时才使用DECIMAL。 但在数据最比较大的时候， 可以考虑使用BIGINT代替DECIMAL, 将需要存储的货币单位根据小数的位数乘以 相应的倍数即可。
-* 字符串类型 VARCHAR 用于存储可变⻓字符串，长度支持到65535 需要使用1或2个额外字节记录字符串的长度 适合：字符串的最大⻓度比平均⻓度⼤很多；更新很少 CHAR 定⻓，⻓度范围是1~255 适合：存储很短的字符串，或者所有值接近同一个长度；经常变更 慷慨是不明智的 使用VARCHAR(5)和VARCHAR(200)存储'hello'的空间开销是一样的。 那么使用更 短的列有什么优势吗？ 事实证明有很大的优势。 更长的列会消耗更多的内存， 因为MySQL通常会分配固定大小的内存块来保存内部值。 尤其是使用内存临时表进行排序或操作时会特别糟糕。 在利用磁盘临时表进行排序时也同样糟糕。 所以最好的策略是只分配真正需要的空间。 4.BLOB和TEXT类型 BLOB和 TEXT都是为存储很大的数据而设计的字符串数据类型， 分别采用 二进制和字符方式存储 。 与其他类型不同， MySQL把每个BLOB和TEXT值当作一个独立的对象处理。 存储引擎 在存储时通常会做特殊处理。 当BLOB和TEXT值太大时，InnoDB会使用专门的 "外部"存储区域来进行存储， 此时每个值在行内需要1 - 4个字节存储 存储区域存储实际的值。 BLOB 和 TEXT 之间仅有的不同是 BLOB 类型存储的是二进制数据， 没有排序规则或字符集， 而 TEXT类型有字符集和排序规则
-* 日期和时间类型 大部分时间类型 都没有替代品， 因此没有什么是最佳选择的问题。 唯一的问题是保存日期和时间的时候需要做什么。 MySQL提供两种相似的日期类型： DATE TIME和 TIMESTAMP。 但是目前我们更建议存储时间戳的方式，因此该处不再对 DATE TIME和 TIMESTAMP做过多说明。
-* 其他类型 5.1选择标识符 在可以满足值的范围的需求， 井且预留未来增长空间的前提下， 应该选择最小的数据类型。 整数类型 整数通常是标识列最好的选择， 因为它们很快并且可以使用AUTO_INCREMENT。 ENUM和SET类型 对于标识列来说，EMUM和SET类型通常是一个糟糕的选择， 尽管对某些只包含固定状态或者类型的静态 "定义表" 来说可能是没有问题的。ENUM和SET列适合存储固定信息， 例如有序的状态、 产品类型、 人的性别。 字符串类型 如果可能， 应该避免使用字符串类型作为标识列， 因为它们很消耗空间， 并且通常比数字类型慢。 对千完全 "随机" 的字符串也需要多加注意， 例如 MDS() 、 SHAl() 或者 UUID() 产生的字符串。 这些函数生成的新值会任意分布在很大的空间内， 这会导致 INSERT 以及一些SELECT语句变得很慢。如果存储 UUID 值， 则应该移除 "-"符号。 5.2特殊类型数据 某些类型的数据井不直接与内置类型一致。 低千秒级精度的时间戳就是一个例子，另一个例子是以个1Pv4地址，人们经常使用VARCHAR(15)列来存储IP地址，然而， 它们实际上是32位无符号整数， 不是字符串。用小数点将地址分成四段的表示方法只是为了让人们阅读容易。所以应该用无符号整数存储IP地址。MySQL提供INET_ATON()和INET_NTOA()函数在这两种表示方法之间转换。
-* 必须把字段定义为NOT NULL并且提供默认值
-    - ull的列使索引/索引统计/值比较都更加复杂，对MySQL来说更难优化
-    - null 这种类型MySQL内部需要进行特殊处理，增加数据库处理记录的复杂性；同等条件下，表中有较多空字段的时候，数据库的处理性能会降低很多
-    - null值需要更多的存储空，无论是表还是索引中每行中的null的列都需要额外的空间来标识
-    - 对null 的处理时候，只能采用is null或is not null，而不能采用=、in、<、<>、!=、not in这些操作符号。
-* 止使用TEXT、BLOB类型：会浪费更多的磁盘和内存空间，非必要的大量的大字段查询会淘汰掉热数据，导致内存命中率急剧降低，影响数据库性能
-* 必须使用varchar(20)存储手机号：涉及到区号或者国家代号，可能出现+-()，varchar可以支持模糊查询，例如：like“138%”
-* 禁止使用ENUM，可使用TINYINT代替：增加新的ENUM值要做DDL操作；ENUM的内部实际存储就是整数，你以为自己定义的是字符串？
-
-### 表结构设计
-
-* 组织形式
-    * 堆表(所有的记录无序存储)
-    * 聚簇索引表(所有的记录，按照记录主键进行排序存储)
-* 范式和反范式：对千任何给定的数据通常都有很多种表示方法， 从完全的范式化到完全的反范式化， 以及两者的折中。 在范式化的数据库中， 每个事实数据会出现并且只出现一次。 相反， 在反范式化的数据库中， 信息是冗余的， 可能会存储在多个地方。
-    - 范式的优点和缺点：为性能提升考虑时，经常会被建议对 schema 进行范式化设计，尤其是写密集的场景。
-    - 范式化的更新操作通常比反范式化要快。
-    - 当数据较好地范式化时，就只有很少或者没有重复数据，所以只需要修改更少的数据。
-    - 范式化的表通常更小，可以更好地放在内存里，所以执行操作会更快。
-    - 很少有多余的数据意味着检索列表数据时更少需要 DISTINCT 或者 GROUP BY语句。
-    - 反范式的优点和缺点：不需要关联表，则对大部分查询最差的情况----即使表没有使用索引----是全表扫描。 当数据比内存大时这可能比关联要快得多，因为这样避免了随机I/0。 单独的表也能使用更有效的索引策略。 混用范式化和反范式化 在实际应用中经常需要混用，可能使用部分范式化的 schema 、 缓存表，以及其他技巧。 表适当增加冗余字段，如性能优先，但会增加复杂度。可避免表关联查询。
-
-简单熟悉数据库范式 第一范式(1NF)：字段值具有原子性,不能再分(所有关系型数据库系统都满足第一范式); 例如：姓名字段,其中姓和名是一个整体,如果区分姓和名那么必须设立两个独立字段; 第二范式(2NF)：一个表必须有主键,即每行数据都能被唯一的区分; 备注：必须先满足第一范式; 第三范式(3NF)：一个表中不能包涵其他相关表中非关键字段的信息,即数据表不能有沉余字段;备注：必须先满足第二范式;
-
-* 表字段少而精
-    - I/O高效
-    - 字段分开维护简单
-    - 单表1G体积 500W⾏行评估
-    - 单行不超过200Byte
-    - 单表不超过50个INT字段
-    - 单表不超过20个CHAR(10)字段
-    - 建议单表字段数控制在20个以内
-    - 拆分TEXT/BLOB，TEXT类型处理性能远低于VARCHAR，强制生成硬盘临时表浪费更多空间。
-* 禁止使用外键，如果有外键完整性约束，需要应用程序控制：外键会导致表与表之间耦合，update与delete操作都会涉及相关联的表，十分影响sql 的性能，甚至会造成死锁。高并发情况下容易造成数据库性能，大数据高并发业务场景数据库使用以性能优先
-
-### Schema设计规范及SQL使用建议
-
-* 所有的InnoDB表都设计一个无业务用途的自增列做主键，对于绝大多数场景都是如此，真正纯只读用InnoDB表的并不多，真如此的话还不如用TokuDB来得划算；
-* 字段长度满足需求前提下，尽可能选择长度小的。此外，字段属性尽量都加上NOT NULL约束，可一定程度提高性能；
-* 尽可能不使用TEXT/BLOB类型，确实需要的话，建议拆分到子表中，不要和主表放在一起，避免SELECT * 的时候读性能太差。
-* 读取数据时，只选取所需要的列，不要每次都SELECT *，避免产生严重的随机读问题，尤其是读到一些TEXT/BLOB列；
-* 对一个VARCHAR(N)列创建索引时，通常取其50%（甚至更小）左右长度创建前缀索引就足以满足80%以上的查询需求了，没必要创建整列的全长度索引；
-* 通常情况下，子查询的性能比较差，建议改造成JOIN写法；
-* 多表联接查询时，关联字段类型尽量一致，并且都要有索引；
-* 多表连接查询时，把结果集小的表（注意，这里是指过滤后的结果集，不一定是全表数据量小的）作为驱动表；
-* 多表联接并且有排序时，排序字段必须是驱动表里的，否则排序列无法用到索引；
-* 多用复合索引，少用多个独立索引，尤其是一些基数（Cardinality）太小（比如说，该列的唯一值总数少于255）的列就不要创建独立索引了；
-* 类似分页功能的SQL，建议先用主键关联，然后返回结果集，效率会高很多；
-
-## group by
+* 字段列表：指要显示指定列的数据，多个字段之间用逗号隔开，各字段之间没有顺序。*：显示所有字段的数据
+* ORDER BY排序
+* LIMIT 限制返回数量
+* WHERE
+    - Index Key：用于确定SQL查询在索引中的连续范围(起始范围+结束范围)的查询条件，被称之为Index Key。由于一个范围，至少包含一个起始与一个终止，因此Index Key也被拆分为Index First Key和Index Last Key，分别用于定位索引查找的起始，以及索引查询的终止条件。
+        + Index First Key：用于确定索引查询的起始范围。提取规则：从索引的第一个键值开始，检查其在where条件中是否存在，若存在并且条件是=、>=，则将对应的条件加入Index First Key之中，继续读取索引的下一个键值，使用同样的提取规则；若存在并且条件是>，则将对应的条件加入Index First Key中，同时终止Index First Key的提取；若不存在，同样终止Index First Key的提取。
+        + Index Last Key：Index Last Key的功能与Index First Key正好相反，用于确定索引查询的终止范围。提取规则：从索引的第一个键值开始，检查其在where条件中是否存在，若存在并且条件是=、<=，则将对应条件加入到Index Last Key中，继续提取索引的下一个键值，使用同样的提取规则；若存在并且条件是 < ，则将条件加入到Index Last Key中，同时终止提取；若不存在，同样终止Index Last Key的提取。
+    - Index Filter：根据where条件固定了索引的查询范围，但是此范围中的项，并不都是满足查询条件的项。提取规则：同样从索引列的第一列开始，检查其在where条件中是否存在：若存在并且where条件仅为 =，则跳过第一列继续检查索引下一列，下一索引列采取与索引第一列同样的提取规则；若where条件为 >=、>、<、<= 其中的几种，则跳过索引第一列，将其余where条件中索引相关列全部加入到Index Filter之中；若索引第一列的where条件包含 =、>=、>、<、<= 之外的条件，则将此条件以及其余where条件中索引相关列全部加入到Index Filter之中；若第一列不包含查询条件，则将所有索引相关条件均加入到Index Filter之中。
+    - Table Filter:提取规则：所有不属于索引列的查询条件，均归为Table Filter之中。
+    - 运算符：＝ ＜ ＞ ＜＝ ＞＝ !＝ ＜＞ is not null IS NULL
+    - BETWEEN 1 AND 20:WHERE date BETWEEN '2016-05-10' AND '2016-05-14'
+    - IN / NOT IN
+    - LIKE('name%') NOT LIKE('name%')
+    - 逻辑运算: AND & OR(可以混合使用)
+* 匹配
+    - % 替代 0 个或多个字符
+    - _ 替代一个字符
+    - [charlist] 字符列中的任何单一字符
+    - [^charlist]或[!charlist] 不在字符列中的任何单一字符 WHERE name REGEXP '^[GFs]'；name REGEXP '^[^A-H]'
+* group by
 
 查询松散索引扫描（Loose Index Scan）与紧凑索引扫描（Tight Index Scan）[链接]（<http://isky000.com/database/mysql_group_by_implement）>
 
@@ -617,57 +618,63 @@ select a.FirstName,a.LastName, b.City, b.State from Person as a inner join addre
     - AVG(DISTINCT), SUM(DISTINCT)和COUNT(DISTINCT)可以使用松散索引扫描。AVG(DISTINCT), SUM(DISTINCT)只能使用单一列作为参数。而COUNT(DISTINCT)可以使用多列参数。
     - 在查询中没有group by和distinct条件。
     - 之前声明的松散扫描限制条件同样起作用。
+* 符合一下条件
+    - 查询在单一表上。
+    - group by指定的所有列是索引的一个最左前缀，并且没有其它的列。比如表t1（ c1,c2,c3,c4）上建立了索引（c1,c2,c3）。如果查询包含"group by c1,c2"，那么可以使用松散索引扫描。但是"group by c2,c3"(不是索引最左前缀)和"group by c1,c2,c4"(c4字段不在索引中)。
+    - 如果在选择列表select list中存在聚集函数，只能使用 min()和max()两个聚集函数，并且指定的是同一列（如果min()和max()同时存在）。这一列必须在索引中，且紧跟着group by指定的列。比如，select t1,t2,min(t3),max(t3) from t1 group by c1,c2。
+    - 如果查询中存在除了group by指定的列之外的索引其他部分，那么必须以常量的形式出现（除了min()和max()两个聚集函数）。比如，select c1,c3 from t1 group by c1,c2不能使用松散索引扫描。而select c1,c3 from t1 where c3 = 3 group by c1,c2可以使用松散索引扫描。
+    - 索引中的列必须索引整个数据列的值(full column values must be indexed)，而不是一个前缀索引。比如，c1 varchar(20), INDEX (c1(10)),这个索引没发用作松散索引扫描。
+    - 紧凑索引扫描方式下，先对索引执行范围扫描（range scan），再对结果元组进行分组。可能是全索引扫描或者范围索引扫描，取决于查询条件。当松散索引扫描条件没有满足的时候，group by仍然有可能避免创建临时表。如果在where条件有范围扫描，那么紧凑索引扫描仅读取满足这些条件的keys（索引元组），否则执行全索引扫描。这种方式读取所有where条件定义的范围内的keys，或者扫描整个索引。紧凑索引扫描，只有在所有满足范围条件的keys被找到之后才会执行分组操作。
+* 在查询中存在常量相等where条件字段（索引中的字段），且该字段在group by指定的字段的前面或者中间。来自于相等条件的常量能够填充搜索keys中的gaps，因而可以构成一个索引的完整前缀。索引前缀能够用于索引查找。如果要求对group by的结果进行排序，并且查找字段组成一个索引前缀，那么MySQL同样可以避免额外的排序操作。 c2在c1,c3之前，c2='a'填充这个坑，组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c2 = 'a' group by c1,c3 c1在索引的最前面，c1=a和group by c2,c3组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c1 = 'a' group by c2,c3 使用紧凑索引扫描，执行计划Extra一般显示"using index"，相当于使用了覆盖索引。
 
-符合一下条件
+```sql
+CREATE [UNIQUE|FULLTEXT]  INDEX index_name on tbl_name (col_name [(length)] [ASC | DESC] , …..);
+alter table table_name ADD INDEX [index_name] (index_col_name,...);
 
-- 查询在单一表上。
-- group by指定的所有列是索引的一个最左前缀，并且没有其它的列。比如表t1（ c1,c2,c3,c4）上建立了索引（c1,c2,c3）。如果查询包含"group by c1,c2"，那么可以使用松散索引扫描。但是"group by c2,c3"(不是索引最左前缀)和"group by c1,c2,c4"(c4字段不在索引中)。
-- 如果在选择列表select list中存在聚集函数，只能使用 min()和max()两个聚集函数，并且指定的是同一列（如果min()和max()同时存在）。这一列必须在索引中，且紧跟着group by指定的列。比如，select t1,t2,min(t3),max(t3) from t1 group by c1,c2。
-- 如果查询中存在除了group by指定的列之外的索引其他部分，那么必须以常量的形式出现（除了min()和max()两个聚集函数）。比如，select c1,c3 from t1 group by c1,c2不能使用松散索引扫描。而select c1,c3 from t1 where c3 = 3 group by c1,c2可以使用松散索引扫描。
-- 索引中的列必须索引整个数据列的值(full column values must be indexed)，而不是一个前缀索引。比如，c1 varchar(20), INDEX (c1(10)),这个索引没发用作松散索引扫描。
+DROP INDEX index_name ON tbl_name;
+alter table table_name drop index index_name;
+alter table t_b drop primary key;
 
-- 紧凑索引扫描方式下，先对索引执行范围扫描（range scan），再对结果元组进行分组。可能是全索引扫描或者范围索引扫描，取决于查询条件。当松散索引扫描条件没有满足的时候，group by仍然有可能避免创建临时表。如果在where条件有范围扫描，那么紧凑索引扫描仅读取满足这些条件的keys（索引元组），否则执行全索引扫描。这种方式读取所有where条件定义的范围内的keys，或者扫描整个索引。紧凑索引扫描，只有在所有满足范围条件的keys被找到之后才会执行分组操作。
+show index from table_name;
+show keys from table_name;
+desc table_Name;
 
-在查询中存在常量相等where条件字段（索引中的字段），且该字段在group by指定的字段的前面或者中间。来自于相等条件的常量能够填充搜索keys中的gaps，因而可以构成一个索引的完整前缀。索引前缀能够用于索引查找。如果要求对group by的结果进行排序，并且查找字段组成一个索引前缀，那么MySQL同样可以避免额外的排序操作。 c2在c1,c3之前，c2='a'填充这个坑，组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c2 = 'a' group by c1,c3 c1在索引的最前面，c1=a和group by c2,c3组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c1 = 'a' group by c2,c3 使用紧凑索引扫描，执行计划Extra一般显示"using index"，相当于使用了覆盖索引。
+CREATE TABLE user_test(
+  id int AUTO_INCREMENT PRIMARY KEY,
+  user_name varchar(30) NOT NULL,
+  sex bit(1) NOT NULL DEFAULT b'1',
+  city varchar(50) NOT NULL,
+  age int NOT NULL,
+  PRIMARY KEY(ID)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE user_test ADD INDEX idx_user(name(10) , city , age); # 因为一般情况下名字的长度不会超过10，这样会加速索引查询速度，还会减少索引文件的大小，提高INSERT的更新速度。
 
-## 方法
+SELECT COUNT(DISTINCT index_column)/COUNT(*) FROM table_name; -- index_column代表要添加前缀索引的列，前缀索引的选择性比值，比值越高说明索引的效率也就越高效。
+SELECT COUNT(DISTINCT LEFT(index_column,1))/COUNT(*),COUNT(DISTINCT LEFT(index_column,2))/COUNT(*),COUNT(DISTINCT LEFT(index_column,3))/COUNT(*) FROM table_name;
+ALTER TABLE table_name ADD INDEX index_name (index_column(length));
 
-- 字符串方法
-  - left()
-  - right()
-  - substr()
-  - instr()
+#### 有效索引
+`SELECT * FROM user_test WHERE user_name = 'feinik' AND age = 26 AND city = '广州';` # 全值匹配
+（user_name ）、（user_name, city）、（user_name , city , age）  # 匹配最左前缀 满足最左前缀查询条件的顺序与索引列的顺序无关
+`SELECT * FROM user_test WHERE user_name LIKE 'feinik%';` # 匹配范围值
 
-### count
+#### 无效索引
+SELECT * FROM user_test WHERE city = '广州';
+SELECT * FROM user_test WHERE age= 26;
+SELECT * FROM user_test WHERE user_name like '%feinik';
+SELECT * FROM user_test WHERE user_name ='feinik' AND city LIKE'广州%' AND age = 26; # 有某个列的范围查询,则其右边的所有列都无法使用索引优化查询
+SELECT * FROM user_test WHERE user_name = concat(user_name, 'fei');  #  索引列不能是表达式的一部分，也不能作为函数的参数
+SELECT user_name, city, age FROM user_test ORDER BY user_name, sex;  #  不在索引列中
+SELECT user_name, city, age FROM user_test ORDER BY user_name ASC, city DESC;  # 方向不一致
+SELECT user_name, city, age, sex FROM user_test ORDER BY user_name;
+SELECT user_name, city, age FROM user_test WHERE user_name LIKE 'feinik%' ORDER BY city;
 
-* myisam 数据行数都会存储在存储引擎 Innodb中的count()会全表或索引扫描
-* SELECT COUNT(country)统计某个列的数据的数量：如果有NULL值，在返回的结果中会被过滤掉
-* SELECT COUNT(*)的处理是有点不同的，它会返回所有数据的数量，但是不会过滤其中的NULL值
-* explain select * from table explain // 用并不真正执行查询，而是查询优化器【估算】的行数，返回值新的行数
-* count(distinct …)会返回彼此不同但是非NULL的数据的行数。
-* 优化
-
-## 问题处理
-
-- top 查看进程消耗
-- 进入mysql show processlist
-- threads_running/QPS/TPS
-- 慢查询
-- MySQL profile工具
-- orzdba
-
-## 中间件
-
-数据库中间件的优劣，一方面有一些通用的指标，另一方面还是要结合业务特点，包括业务的读写 qps ， 涉及的库表结构和SQL语句，来进行综合的判断。综合来看，我认为应该包括这几个方面：
-
-- 基本的功能是否完善。数据库中间件的两个主要功能是分库分表和读写分离，一般的数据库中间件，都满足。但是再进一步剖析，分库分表和读写分离，还是有不少细节需要去研究的。 比如，分库分表功能是能够做到一级划分（只根据一个字段来做分区），还是能够做到二级划分（能够根据两个字段来做分区），划分的形式是否多样（常见有 range、list、hash 方式），划分字段的类型是否能支持多种（比如是只支持根据数值类型字段做划分，还是可以根据数值、字符串、日期类型做划分）。能否提供避免数据倾斜的分区方式等。 对于读写分离功能，细分来看，也包括两种，一种是透明的读写分离，这种功能能够100%兼容 Mysql 或其他数据库的 SQL 语法，同时对于事务也能够正确处理（事务的 SQL 能够路由到主节点，而不是分散到主节点和只读节点）； 另一种是简单的读写分离，对 SQL 的支持范围，只限于数据库中间件内置的 SQL 解释器，有些复杂 SQL 是支持不了的，同时对于事务，也做不到很好的支持。 同时，对读请求的分流策略，也是读写分离功能一个考量点。简单的读写分离功能只是把写发往主节点，读都发往从节点； 而读写分离功能做得细致的话，数据库中间件会能够提供对分流策略的自定义。比如设置为：把30%的读流量，分流到主节点，70%的读流量分流到只读节点。
-- 产品的成熟度、用户的使用情况和社区（商业公司）支持程度。 数据库中间件虽然本身不做存储，但是每条数据都是要从中经过的，一旦出错，可能对业务造成灾难性的影响，所以软件的正确性和稳定性非常重要。为此，中间件的成熟度、已经使用的客户的使用情况、数量、用户的口碑，以及开源社区或者商业公司对该产品的支持程度，就非常重要。一般来说，发布时间越长而且在持续迭代、用户使用数量众多，且有大规模业务使用，社区（包括 QQ 群）比较活跃，文档完善，bug 解决及时的产品，更值得信赖。
-- 产品的易用性，是否配置方便，部署容易，系统管理不会有太大负担。有些中间件模块众多，配置复杂，虽然表面上看起来功能丰富，但业务用到的可能还是最基本的几个功能。选择这样的中间件，即显得不够划算，不仅加重运维负担，同时后续系统的扩展，新业务的支持，也不够敏捷。
-- 是否满足自身业务目前的需求，和潜在的需求。 除了上述两个通用的指标，更重要的是必须根据自己业务的库表结构，分库分表/读写分离需求，业务的SQL语句，读写qps，来判断中间件产品的优劣。 比如，绝大部分中间件，目前都不能支持分布式事务和多表join，但是除了对这两种sql不支持，不少中间件，其实在一些基本的sql，比如带系统函数的sql、聚合类sql上，也支持不够好。
-
-为此，在选择中间件时，就需要根据业务的库表结构，sql语句，以及业务特点，去检查中间件是否对业务的目前sql和潜在sql，能够做到比较好的支持。 另外，选择中间件时，一定要自己做性能测试和压力测试，实事求是地自身业务特点来测定中间件的性能和稳定性情况，不要轻信官方或者第三方发布的一些性能数据。中间件产品的最高境界，其实是不需要特别关注中间件，从而可以把精力放在数据库架构、优化和数据库本身的管理上。
-
-中间件产品发展至今，也可以分为两代，第一代是传统的中间件软件，如mysql proxy， mycat， oneproxy，atlas，kingshard等；第二代则是和公有云结合的，基于中间件的分布式数据库，如阿里DRDS、UCloud UDDB，腾讯云DCDB For TDSQL等。目前一代的数据库中间件产品， 比如等，还做不到这一点，使用这些中间件，你还是需要部署中间件模块，做各种配置，系统扩容是还需要停服做数据迁移，需要比较多的时间投入。而二代的，基于中间件的分布式数据库， 对用户呈现的，是一个类似单机数据库一样的操作和管理界面，管理简单，使用方便。以UCloud 的UDDB为例， 在Web控制台上，一步即可创建并配置好中间件和数据库节点，搭建出一个完整的分布式数据库；通过特殊的建表语句， 即可以配置表的水平划分方式。对于中间件复杂的水平扩容问题，可以通过一个按钮即可完成水平扩容操作，期间不停服，只是每隔一段时间有几毫秒到零点几秒的访问中断。
+# 使用索引排序：ORDER BY 子句后的列顺序要与组合索引的列顺序一致，且所有排序列的排序方向（正序/倒序）需一致；所查询的字段值需要包含在索引列中，及满足覆盖索引。
+SELECT user_name, city, age FROM user_test ORDER BY user_name;
+SELECT user_name, city, age FROM user_test ORDER BY user_name, city;
+SELECT user_name, city, age FROM user_test ORDER BY user_name DESC, city DESC;
+SELECT user_name, city, age FROM user_test WHERE user_name = 'feinik' ORDER BY city;
+```
 
 ## [语句集锦](https://juejin.im/post/584e7b298d6d81005456eb53)
 
@@ -709,8 +716,6 @@ and 主键ID not in (select min(主键ID) from 表名 group by 字段名 having 
 delete from 表名 别名 where (别名.字段1,别名.字段2) in (select 字段1,字段2 from 表名 group by 字段1,字段2 having count(*) > 1)
 and 主键ID not in (select min(主键ID) from 表名 group by 字段1,字段2 having count(*)>1)
 ```
-
-- 业务篇
 
 ```sql
 # 创建测试表
@@ -956,41 +961,82 @@ delete from 表名 where 字段名 in  (select 字段名 from 表名 group by �
 delete from 表名 别名 where (别名.字段1,别名.字段2) in  (select 字段1,字段2 from 表名 group by 字段1,字段2 having count(*) > 1) and 主键ID not in (select min(主键ID) from 表名 group by 字段1,字段2 having count(*)>1)
 ```
 
+## 函数
+
+- 字符串方法
+  - left()
+  - right()
+  - substr()
+  - instr()
+* count
+    - myisam 数据行数都会存储在存储引擎 Innodb中的count()会全表或索引扫描
+    - SELECT COUNT(country)统计某个列的数据的数量：如果有NULL值，在返回的结果中会被过滤掉
+    - SELECT COUNT(*)的处理是有点不同的，它会返回所有数据的数量，但是不会过滤其中的NULL值
+    - explain select * from table explain // 用并不真正执行查询，而是查询优化器【估算】的行数，返回值新的行数
+    - count(distinct …)会返回彼此不同但是非NULL的数据的行数
+
+## 中间件
+
+* 优劣
+    - 一些通用的指标
+    - 要结合业务特点，包括业务的读写 qps ， 涉及的库表结构和SQL语句，来进行综合的判断
+* 中间件产品发展至今，分为两代
+    - 传统的中间件软件，如mysql proxy， mycat， oneproxy，atlas，kingshard等.使用这些中间件，你还是需要部署中间件模块，做各种配置，系统扩容是还需要停服做数据迁移，需要比较多的时间投入
+    - 和公有云结合的，基于中间件的分布式数据库，如阿里DRDS、UCloud UDDB，腾讯云DCDB For TDSQL等,对用户呈现的，是一个类似单机数据库一样的操作和管理界面，管理简单，使用方便
+        + 以UCloud 的UDDB为例
+            * 在Web控制台上，一步即可创建并配置好中间件和数据库节点，搭建出一个完整的分布式数据库；
+            * 通过特殊的建表语句， 即可以配置表的水平划分方式。
+    - 对于中间件复杂的水平扩容问题，可以通过一个按钮即可完成水平扩容操作，期间不停服，只是每隔一段时间有几毫秒到零点几秒的访问中断
+- 主要功能
+    + 分库分表
+        * 能够做到一级划分（只根据一个字段来做分区），还是能够做到二级划分（能够根据两个字段来做分区）
+        * 划分的形式是否多样（常见有 range、list、hash 方式）
+        * 划分字段的类型是否能支持多种（比如是只支持根据数值类型字段做划分，还是可以根据数值、字符串、日期类型做划分）
+        * 能否提供避免数据倾斜的分区方式等
+    + 读写分离功能，细分两种
+        * 透明的读写分离，这种功能能够100%兼容 Mysql 或其他数据库的 SQL 语法，同时对于事务也能够正确处理（事务的 SQL 能够路由到主节点，而不是分散到主节点和只读节点）
+        * 另一种是简单的读写分离，对 SQL 的支持范围，只限于数据库中间件内置的 SQL 解释器，有些复杂 SQL 是支持不了的，同时对于事务，也做不到很好的支持。 同时，对读请求的分流策略，也是读写分离功能一个考量点。简单的读写分离功能只是把写发往主节点，读都发往从节点；
+        * 而读写分离功能做得细致的话，数据库中间件会能够提供对分流策略的自定义。比如设置为：把30%的读流量，分流到主节点，70%的读流量分流到只读节点
+* 产品的成熟度、用户的使用情况和社区（商业公司）支持程度。 数据库中间件虽然本身不做存储，但是每条数据都是要从中经过的，一旦出错，可能对业务造成灾难性的影响，所以软件的正确性和稳定性非常重要。为此，中间件的成熟度、已经使用的客户的使用情况、数量、用户的口碑，以及开源社区或者商业公司对该产品的支持程度，就非常重要。一般来说，发布时间越长而且在持续迭代、用户使用数量众多，且有大规模业务使用，社区（包括 QQ 群）比较活跃，文档完善，bug 解决及时的产品，更值得信赖。
+* 产品的易用性，是否配置方便，部署容易，系统管理不会有太大负担。有些中间件模块众多，配置复杂，虽然表面上看起来功能丰富，但业务用到的可能还是最基本的几个功能。选择这样的中间件，即显得不够划算，不仅加重运维负担，同时后续系统的扩展，新业务的支持，也不够敏捷。
+* 是否满足自身业务目前的需求，和潜在的需求。 除了上述两个通用的指标，更重要的是必须根据自己业务的库表结构，分库分表/读写分离需求，业务的SQL语句，读写qps，来判断中间件产品的优劣。 比如，绝大部分中间件，目前都不能支持分布式事务和多表join，但是除了对这两种sql不支持，不少中间件，其实在一些基本的sql，比如带系统函数的sql、聚合类sql上，也支持不够好。
+* 选择:
+    - 需要根据业务的库表结构，sql语句，以及业务特点，去检查中间件是否对业务的目前sql和潜在sql，能够做到比较好的支持。
+    - 选择中间件时，一定要自己做性能测试和压力测试，实事求是地自身业务特点来测定中间件的性能和稳定性情况，不要轻信官方或者第三方发布的一些性能数据
+* 中间件产品的最高境界:不需要特别关注中间件，从而可以把精力放在数据库架构、优化和数据库本身的管理上
+
 ## 事物
 
 mysql有一个autocommit参数，默认是on，他的作用是每一条单独的查询都是一个事务，并且自动开始，自动提交（执行完以后就自动结束了，如果你要适用select for update，而不手动调用 start transaction，这个for update的行锁机制等于没用，因为行锁在自动提交后就释放了），所以事务隔离级别和锁机制即使你不显式调用start transaction，这种机制在单独的一条查询语句中也是适用的
 
-加锁阶段：在该阶段可以进行加锁操作。在对任何数据进行读操作之前要申请并获得S锁（共享锁，其它事务可以继续加共享锁，但不能加排它锁），在进行写操作之前要申请并获得X锁（排它锁，其它事务不能再获得任何锁）。加锁不成功，则事务进入等待状态，直到加锁成功才继续执行。
-解锁阶段：当事务释放了一个封锁以后，事务进入解锁阶段，在该阶段只能进行解锁操作不能再进行加锁操作。
-
-这种方式虽然无法避免死锁，但是两段锁协议可以保证事务的并发调度是串行化（串行化很重要，尤其是在数据恢复和备份的时候）的。
+* 加锁阶段：在该阶段可以进行加锁操作。在对任何数据进行读操作之前要申请并获得S锁（共享锁，其它事务可以继续加共享锁，但不能加排它锁），在进行写操作之前要申请并获得X锁（排它锁，其它事务不能再获得任何锁）。加锁不成功，则事务进入等待状态，直到加锁成功才继续执行。
+* 解锁阶段：当事务释放了一个封锁以后，事务进入解锁阶段，在该阶段只能进行解锁操作不能再进行加锁操作。
+* 这种方式虽然无法避免死锁，但是两段锁协议可以保证事务的并发调度是串行化（串行化很重要，尤其是在数据恢复和备份的时候）的。
 
 ### 隔离
 
-事务的隔离级别其实都是对于读数据的定义。四个级别逐渐增强，每个级别解决一个问题。事务级别越高,性能越差,大多数环境read committed 可以用，四种隔离级别：
-
-* 未提交读(Read Uncommitted)：允许脏读，也就是可能读取到其他会话中未提交事务修改的数据。
-    - 事物一可以获取事物二中未提交的修改。
-    - 事物一中未提交的修改事物（添加共享锁），事物二同样数据修改会被挂起，等待事物一commit；
-* 提交读(Read Committed)：只能读取到已经提交的数据，Oracle等多数数据库默认都是该级别。后会造成事务一在同一个transaction中两次读取到的数据不同，这就是不可重复读问题。并且在对表进行修改时，会对表数据行加上行共享锁
-    - 数据的读取都是不加锁的，但是数据的写入、修改和删除是需要加锁的。
-* 可重复读(Repeated Read)：可重复读。在同一个事务内的查询都是事务开始时刻一致的，InnoDB默认级别。在SQL标准中，该隔离级别消除了不可重复读，但是还存在幻读。
-    - 可重读这个概念是一事务的多个实例在并发读取数据时，会看到同样的数据行
-    - 当两个事务同时进行时，其中一个事务修改数据对另一个事务不会造成影响，即使修改的事务已经提交也不会对另一个事务造成影响。
-    - 两个事物：事物二修改提交后，事物一不提交无法获取事物二的更新；事物一的修改未提交，事物二的修改无法成功等待事物一提交或者超时；
-    - 读到的数据可能是历史数据，是不及时的数据，不是数据库当前的数据
-    - 对于这种读取历史数据的方式，我们叫它快照读 (snapshot read)，而读取数据库当前版本数据的方式，叫当前读 (current read)
-* 串行读(Serializable)：完全串行化的读，每次读都需要获得表级共享锁，读写相互都会阻塞。
-    - 读加共享锁，写加排他锁，读写互斥。使用的悲观锁的理论，实现简单，数据更加安全，但是并发能力非常差。如果你的业务并发的特别少或者没有并发，同时又要求数据及时可靠的话，可以使用这种模式。
-    - 不要看到select就说不会加锁了，在Serializable这个级别，还是会加锁的！
-
-脏读：脏读就是指当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交到数据库中，这时，另外一个事务也访问这个数据，然后使用了这个数据。
-不可重复读：是指在一个事务内，多次读同一数据。在这个事务还没有结束时，另外一个事务也访问该同一数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修改，那么第一个事务两次读到的的数据可能是不一样的。这样就发生了在一个事务内两次读到的数据是不一样的，因此称为是不可重复读。（即不能读到相同的数据内容）
-幻读:是指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，这种修改涉及到表中的全部数据行。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入一行新数据。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象发生了幻觉一样。
-
-当隔离级别是可重复读，且禁用innodb_locks_unsafe_for_binlog的情况下，在搜索和扫描index的时候使用的next-key locks可以避免幻读。在默认的可重复读的隔离级别里，可以使用加锁读去查询最新的数据（提交读）。
-- Next-Key锁是行锁和GAP（间隙锁）的合并：行锁可以防止不同事务版本的数据修改提交时造成数据冲突的情况。但如何避免别的事务插入数据就成了问题。
-- 行锁防止别的事务修改或删除，GAP锁防止别的事务新增，行锁和GAP锁结合形成的的Next-Key锁共同解决了RR级别在写数据时的幻读问题。
+* 事务的隔离级别对于读数据的定义。四个级别逐渐增强，每个级别解决一个问题。事务级别越高,性能越差,大多数环境read committed 可以用，四种隔离级别：
+    - 未提交读(Read Uncommitted)：允许脏读，也就是可能读取到其他会话中未提交事务修改的数据。
+        + 事物一可以获取事物二中未提交的修改。
+        + 事物一中未提交的修改事物（添加共享锁），事物二同样数据修改会被挂起，等待事物一commit；
+    - 提交读(Read Committed)：只能读取到已经提交的数据，Oracle等多数数据库默认都是该级别。后会造成事务一在同一个transaction中两次读取到的数据不同，这就是不可重复读问题。并且在对表进行修改时，会对表数据行加上行共享锁
+        + 数据的读取都是不加锁的，但是数据的写入、修改和删除是需要加锁的。
+    - 可重复读(Repeated Read)：可重复读。在同一个事务内的查询都是事务开始时刻一致的，InnoDB默认级别。在SQL标准中，该隔离级别消除了不可重复读，但是还存在幻读。
+        + 可重读这个概念是一事务的多个实例在并发读取数据时，会看到同样的数据行
+        + 当两个事务同时进行时，其中一个事务修改数据对另一个事务不会造成影响，即使修改的事务已经提交也不会对另一个事务造成影响。
+        + 两个事物：事物二修改提交后，事物一不提交无法获取事物二的更新；事物一的修改未提交，事物二的修改无法成功等待事物一提交或者超时；
+        + 读到的数据可能是历史数据，是不及时的数据，不是数据库当前的数据
+        + 对于这种读取历史数据的方式，我们叫它快照读 (snapshot read)，而读取数据库当前版本数据的方式，叫当前读 (current read)
+    - 串行读(Serializable)：完全串行化的读，每次读都需要获得表级共享锁，读写相互都会阻塞。
+        + 读加共享锁，写加排他锁，读写互斥。使用的悲观锁的理论，实现简单，数据更加安全，但是并发能力非常差。如果你的业务并发的特别少或者没有并发，同时又要求数据及时可靠的话，可以使用这种模式。
+        + 不要看到select就说不会加锁了，在Serializable这个级别，还是会加锁的
+    - 当隔离级别是可重复读，且禁用innodb_locks_unsafe_for_binlog的情况下，在搜索和扫描index的时候使用的next-key locks可以避免幻读。在默认的可重复读的隔离级别里，可以使用加锁读去查询最新的数据（提交读）
+        + Next-Key锁是行锁和GAP（间隙锁）的合并：行锁可以防止不同事务版本的数据修改提交时造成数据冲突的情况。但如何避免别的事务插入数据就成了问题
+        + 行锁防止别的事务修改或删除，GAP锁防止别的事务新增，行锁和GAP锁结合形成的的Next-Key锁共同解决了RR级别在写数据时的幻读问题
+* 数据可读性
+    - 脏读：脏读就是指当一个事务正在访问数据，并且对数据进行了修改，而这种修改还没有提交到数据库中，这时，另外一个事务也访问这个数据，然后使用了这个数据。
+    - 不可重复读：是指在一个事务内，多次读同一数据。在这个事务还没有结束时，另外一个事务也访问该同一数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修改，那么第一个事务两次读到的的数据可能是不一样的。这样就发生了在一个事务内两次读到的数据是不一样的，因此称为是不可重复读。（即不能读到相同的数据内容）
+    - 幻读:是指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，这种修改涉及到表中的全部数据行。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入一行新数据。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象发生了幻觉一样。
 
 ```sql
 CREATE TABLE user (
@@ -1039,36 +1085,46 @@ select id,class_name,teacher_id from class_teacher where teacher_id=30; #  2 初
 
 ### 悲观锁
 
-悲观并发控制（又名“悲观锁”，Pessimistic Concurrency Control，缩写“PCC”）是一种并发控制的方法。它可以阻止一个事务以影响其他用户的方式来修改数据。如果一个事务执行的操作都某行数据应用了锁，那只有当这个事务把锁释放，其他事务才能够执行与该锁冲突的操作。主要用于数据争用激烈的环境，以及发生并发冲突时使用锁保护数据的成本要低于回滚事务的成本的环境中。依靠数据库的锁机制实现，以保证操作最大程度的独占性
+悲观并发控制（又名“悲观锁”，Pessimistic Concurrency Control，缩写“PCC”）是一种并发控制的方法。它可以阻止一个事务以影响其他用户的方式来修改数据。
 
-要使用悲观锁，我们必须关闭mysql数据库的自动提交属性，因为MySQL默认使用autocommit模式，也就是说，当你执行一个更新操作后，MySQL会立刻将结果进行提交。set autocommit=0; 一锁二查三更新，通过常用的select … for update操作来实现悲观锁，在当前事务结束时自动释放，因此必须在事务中使用。
+* 要使用悲观锁，必须关闭mysql数据库的自动提交属性，因为MySQL默认使用autocommit模式set autocommit=0;
+* 一锁二查三更新，通过常用的select … for update操作来实现悲观锁，在当前事务结束时自动释放，因此必须在事务中使用。
 
-对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）。
-在悲观锁的情况下，为了保证事务的隔离性，就需要一致性锁定读。读取数据时给加锁，其它事务无法修改这些数据。修改删除数据时也要加锁，其它事务无法读取这些数据。
+如果一个事务执行的操作都某行数据应用了锁，那只有当这个事务把锁释放，其他事务才能够执行与该锁冲突的操作。
+主要用于数据争用激烈的环境，以及发生并发冲突时使用锁保护数据的成本要低于回滚事务的成本的环境中。
+依靠数据库的锁机制实现，以保证操作最大程度的独占性
+
+对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。
+悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）。
+在悲观锁的情况下，为了保证事务的隔离性，就需要一致性锁定读。
+读取数据时给加锁，其它事务无法修改这些数据。修改删除数据时也要加锁，其它事务无法读取这些数据。
 select for update语句执行中所有扫描过的行都会被锁上，这一点很容易造成问题。因此如果在mysql中用悲观锁务必要确定走了索引，而不是全表扫描。
 
 - 在对任意记录进行修改前，先尝试为该记录加上排他锁（exclusive locking）。
 - 如果加锁失败，说明该记录正在被修改，那么当前查询可能要等待或者抛出异常。 具体响应方式由开发者根据实际需要决定。
 - 如果成功加锁，那么就可以对记录做修改，事务完成后就会解锁了。
 - 其间如果有其他对该记录做修改或加排他锁的操作，都会等待我们解锁或直接抛出异常。
-
 * 悲观并发控制实际上是“先取锁再访问”的保守策略，为数据处理的安全提供了保证。
 * 在效率方面，处理加锁的机制会让数据库产生额外的开销，还有增加产生死锁的机会；
 * 在只读型事务处理中由于不会产生冲突，也没必要使用锁，这样做只能增加系统负载；还有会降低了并行性，一个事务如果锁定了某行数据，其他事务就必须等待该事务处理完才可以处理那行数
 
 ```sql
-begin;/begin work;/start transaction; (三者选一就可以) # # 0.开始事务
+begin|begin work|start transaction; (三者选一就可以) # # 0.开始事务
 select status from t_goods where id=1 for update; # //1.查询出商品信息
 insert into t_orders (id,goods_id) values (null,1); # //2.根据商品信息生成订单
 update t_goods set status=2; # //3.修改商品status为2
-commit;/commit work; # //4.提交事务
+commit|commit work; # //4.提交事务
 ```
 
 ### 乐观锁
 
-乐观并发控制（又名“乐观锁”，Optimistic Concurrency Control，缩写“OCC”）是一种并发控制的方法。它假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据。在提交数据更新之前，每个事务会先检查在该事务读取数据后，有没有其他事务又修改了该数据。如果其他事务有更新的话，正在提交的事务会进行回滚。
+乐观并发控制（又名“乐观锁”，Optimistic Concurrency Control，缩写“OCC”）是一种并发控制的方法。它假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据。
+在提交数据更新之前，每个事务会先检查在该事务读取数据后，有没有其他事务又修改了该数据。
+如果其他事务有更新的话，正在提交的事务会进行回滚。
 
-在数据库内部update同一行的时候是不允许并发的，即数据库每次执行一条update语句时会获取被update行的写锁，直到这一行被成功更新后才释放。因此在业务操作进行前获取需要锁的数据的当前版本号，然后实际更新数据时再次对比版本号确认与之前获取的相同，并更新版本号，即可确认这之间没有发生并发的修改。如果更新失败即可认为老版本的数据已经被并发修改掉而不存在了，此时认为获取锁失败，需要回滚整个业务操作并可根据需要重试整个过程。
+在数据库内部update同一行的时候是不允许并发的，即数据库每次执行一条update语句时会获取被update行的写锁，直到这一行被成功更新后才释放。
+因此在业务操作进行前获取需要锁的数据的当前版本号，然后实际更新数据时再次对比版本号确认与之前获取的相同，并更新版本号，即可确认这之间没有发生并发的修改。
+如果更新失败即可认为老版本的数据已经被并发修改掉而不存在了，此时认为获取锁失败，需要回滚整个业务操作并可根据需要重试整个过程。
 
 乐观锁假设认为数据一般情况下不会造成冲突，所以在数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了，则让返回用户错误的信息，让用户决定如何去做。乐观锁并不会使用数据库提供的锁机制。一般的实现乐观锁的方式就是记录数据版本。
 
@@ -1117,24 +1173,22 @@ if (updated row > 0) {
 * 在一些情况中，可以对一个查询进行优化以便不用查询数据行即可以检索值。如果查询只使用来自某个表的数字型并且构成某些关键字的最左面前缀的列，为了更快，可以从索引树检索出值。`SELECT key_part3 FROM tb WHERE key_part1=1`
 * 有时MySQL不使用索引，即使有可用的索引。一种情形是当优化器估计到使用索引将需要MySQL访问表中的大部分行时。(在这种情况下，表扫描可能会更快些）。然而，如果此类查询使用LIMIT只搜索部分行，MySQL则使用索引，因为它可以更快地找到几行并在结果中返回。
 
-#### 索引种类
-
-
 * 存储的是完整记录的一个子集，用于加速记录的查询速度，索引的组织形式，一般均为B+树结构。
-* PRIMARY 索引:在主键上自动创建，不允许有空值。一般是在建表的时候同时创建主键索引
-    - 主键递增，数据行写入可以提高插入性能，可以避免page分裂，减少表碎片提升空间和内存的使用
-    - 主键要选择较短的数据类型， Innodb引擎普通索引都会保存主键的值，较短的数据类型可以有效的减少索引的磁盘空间，提高索引的缓存效率
-    - 无主键的表删除，在row模式的主从架构，会导致备库夯住
-* INDEX 索引:就是普通索引
-* UNIQUE 索引:相当于INDEX + Unique
-* FULLTEXT索引:只在MYISAM 存储引擎支持, 目的是全文索引，在VARCHAR或者TEXT类型的列上创建，在内容系统中用的多， 在全英文网站用多(英文词独立). 中文数据不常用，意义不大 国内全文索引通常 使用 sphinx 来完成.全文索引:fulltext是Myisam表特殊索引，从文本中找关键字不是直接和索引中的值进行比较
-* 组合索引：一个索引可以包括15个列。
-    - 建立多个单列索引，查询时和上述的组合索引效率也会大不一样，远远低于我们的组合索引。虽然此时有了三个索引，但MySQL只能用到其中的那个它认为似乎是最有效率的单列索引。
-    - 最左前缀（Leftmost Prefixing）。假如有一个多列索引为key(firstname lastname age)，当搜索条件是以下各种列的组合和顺序时，MySQL将使用该多列索引：firstname，lastname，age  firstname，lastname firstname
-    - (a,b,c)复合索引， ac 可以使用到索引
+* 类别
+    - PRIMARY 索引:在主键上自动创建，不允许有空值。一般是在建表的时候同时创建主键索引
+        + 主键递增，数据行写入可以提高插入性能，可以避免page分裂，减少表碎片提升空间和内存的使用
+        + 主键要选择较短的数据类型， Innodb引擎普通索引都会保存主键的值，较短的数据类型可以有效的减少索引的磁盘空间，提高索引的缓存效率
+        + 无主键的表删除，在row模式的主从架构，会导致备库夯住
+    - INDEX 索引:就是普通索引
+    - UNIQUE 索引:相当于INDEX + Unique
+    - FULLTEXT索引:只在MYISAM 存储引擎支持, 目的是全文索引，在VARCHAR或者TEXT类型的列上创建，在内容系统中用的多， 在全英文网站用多(英文词独立). 中文数据不常用，意义不大 国内全文索引通常 使用 sphinx 来完成.全文索引:fulltext是Myisam表特殊索引，从文本中找关键字不是直接和索引中的值进行比较
+    - 组合索引：一个索引可以包括15个列。
+        + 建立多个单列索引，查询时和上述的组合索引效率也会大不一样，远远低于我们的组合索引。虽然此时有了三个索引，但MySQL只能用到其中的那个它认为似乎是最有效率的单列索引。
+        + 最左前缀（Leftmost Prefixing）。假如有一个多列索引为key(firstname lastname age)，当搜索条件是以下各种列的组合和顺序时，MySQL将使用该多列索引：firstname，lastname，age  firstname，lastname firstname
+        + (a,b,c)复合索引， ac 可以使用到索引
 * 如果是CHAR，VARCHAR类型，length可以小于字段实际长度；如果是BLOB和TEXT类型，必须指定 length
 
-合理的建立索引的建议：
+合理的建立索引的建议
 
 * 越小的数据类型通常更好：越小的数据类型通常在磁盘、内存和CPU缓存中都需要更少的空间，处理起来更快。
 * 在WHERE和JOIN中出现的列需要建立索引，但也不完全如此，因为MySQL只对<，<=，=，>，>=，BETWEEN，IN，以及某些时候的LIKE才会使用索引
@@ -1149,12 +1203,10 @@ if (updated row > 0) {
 * 单索引字段数不允许超过5个：字段超过5个时，实际已经起不到有效过滤数据的作用了
 * 禁止在更新十分频繁、区分度不高的属性上建立索引，字段值离散度这么低,没必要加索引，比如性别
 
-#### 索引缺点
-
 * 虽然索引大大提高了查询速度，同时却会降低更新表的速度，如对表进行INSERT、UPDATE和DELETE。因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。
 * 建立索引会占用磁盘空间的索引文件。一般情况这个问题不太严重，但如果你在一个大表上创建了多种组合索引，索引文件的会膨胀很快。
 
-#### B+Tree树结构的索引规则
+### B+Tree树结构的索引规则
 
 B-tree 索引:大多数谈及的索引类型就是B-tree类型, 可以在create table 和其他命令使用它 myisam使用前缀压缩以减小索引，Innodb不会压缩索引，myiam索引按照行存储物理位置引用被索引的行，Innodb按照主键值引用行，B-tree数据存储是有序的，按照顺序保存了索引的列，加速了数据访问，存储引擎不会扫描整个表得到需要的数据。
 
@@ -1175,63 +1227,14 @@ B-tree 索引:大多数谈及的索引类型就是B-tree类型, 可以在create 
 ![clustered-index](../_static/clustered-index.jpg "clustered-index")
 ![index](../_static/index.jpg "index")
 
-#### where规则
+## 问题处理
 
-* Index Key：用于确定SQL查询在索引中的连续范围(起始范围+结束范围)的查询条件，被称之为Index Key。由于一个范围，至少包含一个起始与一个终止，因此Index Key也被拆分为Index First Key和Index Last Key，分别用于定位索引查找的起始，以及索引查询的终止条件。
-    - Index First Key：用于确定索引查询的起始范围。提取规则：从索引的第一个键值开始，检查其在where条件中是否存在，若存在并且条件是=、>=，则将对应的条件加入Index First Key之中，继续读取索引的下一个键值，使用同样的提取规则；若存在并且条件是>，则将对应的条件加入Index First Key中，同时终止Index First Key的提取；若不存在，同样终止Index First Key的提取。
-    - Index Last Key：Index Last Key的功能与Index First Key正好相反，用于确定索引查询的终止范围。提取规则：从索引的第一个键值开始，检查其在where条件中是否存在，若存在并且条件是=、<=，则将对应条件加入到Index Last Key中，继续提取索引的下一个键值，使用同样的提取规则；若存在并且条件是 < ，则将条件加入到Index Last Key中，同时终止提取；若不存在，同样终止Index Last Key的提取。
-* Index Filter：根据where条件固定了索引的查询范围，但是此范围中的项，并不都是满足查询条件的项。提取规则：同样从索引列的第一列开始，检查其在where条件中是否存在：若存在并且where条件仅为 =，则跳过第一列继续检查索引下一列，下一索引列采取与索引第一列同样的提取规则；若where条件为 >=、>、<、<= 其中的几种，则跳过索引第一列，将其余where条件中索引相关列全部加入到Index Filter之中；若索引第一列的where条件包含 =、>=、>、<、<= 之外的条件，则将此条件以及其余where条件中索引相关列全部加入到Index Filter之中；若第一列不包含查询条件，则将所有索引相关条件均加入到Index Filter之中。
-* Table Filter:提取规则：所有不属于索引列的查询条件，均归为Table Filter之中。
-
-```sql
-CREATE [UNIQUE|FULLTEXT]  INDEX index_name on tbl_name (col_name [(length)] [ASC | DESC] , …..);
-alter table table_name ADD INDEX [index_name] (index_col_name,...);
-
-DROP INDEX index_name ON tbl_name;
-alter table table_name drop index index_name;
-alter table t_b drop primary key;
-
-show index from table_name;
-show keys from table_name;
-desc table_Name;
-
-CREATE TABLE user_test(
-  id int AUTO_INCREMENT PRIMARY KEY,
-  user_name varchar(30) NOT NULL,
-  sex bit(1) NOT NULL DEFAULT b'1',
-  city varchar(50) NOT NULL,
-  age int NOT NULL,
-  PRIMARY KEY(ID)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE user_test ADD INDEX idx_user(name(10) , city , age); # 因为一般情况下名字的长度不会超过10，这样会加速索引查询速度，还会减少索引文件的大小，提高INSERT的更新速度。
-
-SELECT COUNT(DISTINCT index_column)/COUNT(*) FROM table_name; -- index_column代表要添加前缀索引的列，前缀索引的选择性比值，比值越高说明索引的效率也就越高效。
-SELECT COUNT(DISTINCT LEFT(index_column,1))/COUNT(*),COUNT(DISTINCT LEFT(index_column,2))/COUNT(*),COUNT(DISTINCT LEFT(index_column,3))/COUNT(*)
-...FROM table_name;
-ALTER TABLE table_name ADD INDEX index_name (index_column(length));
-
-#### 有效索引
-`SELECT * FROM user_test WHERE user_name = 'feinik' AND age = 26 AND city = '广州';` # 全值匹配
-（user_name ）、（user_name, city）、（user_name , city , age）  # 匹配最左前缀 满足最左前缀查询条件的顺序与索引列的顺序无关
-`SELECT * FROM user_test WHERE user_name LIKE 'feinik%';` # 匹配范围值
-
-#### 无效索引
-SELECT * FROM user_test WHERE city = '广州';
-SELECT * FROM user_test WHERE age= 26;
-SELECT * FROM user_test WHERE user_name like '%feinik';
-SELECT * FROM user_test WHERE user_name ='feinik' AND city LIKE'广州%' AND age = 26; # 有某个列的范围查询,则其右边的所有列都无法使用索引优化查询
-SELECT * FROM user_test WHERE user_name = concat(user_name, 'fei');  #  索引列不能是表达式的一部分，也不能作为函数的参数
-SELECT user_name, city, age FROM user_test ORDER BY user_name, sex;  #  不在索引列中
-SELECT user_name, city, age FROM user_test ORDER BY user_name ASC, city DESC;  # 方向不一致
-SELECT user_name, city, age, sex FROM user_test ORDER BY user_name;
-SELECT user_name, city, age FROM user_test WHERE user_name LIKE 'feinik%' ORDER BY city;
-
-# 使用索引排序：ORDER BY 子句后的列顺序要与组合索引的列顺序一致，且所有排序列的排序方向（正序/倒序）需一致；所查询的字段值需要包含在索引列中，及满足覆盖索引。
-SELECT user_name, city, age FROM user_test ORDER BY user_name;
-SELECT user_name, city, age FROM user_test ORDER BY user_name, city;
-SELECT user_name, city, age FROM user_test ORDER BY user_name DESC, city DESC;
-SELECT user_name, city, age FROM user_test WHERE user_name = 'feinik' ORDER BY city;
-```
+- top 查看进程消耗
+- 进入mysql show processlist
+- threads_running/QPS/TPS
+- 慢查询
+- MySQL profile工具
+- orzdba
 
 ### mysqladmin
 
@@ -1339,11 +1342,6 @@ http://localhost:3000
 * Sorting: `/api/payments?_sort=column1` `/api/payments?_sort=-column1` `/api/payments?_sort=column1,-column2`
 * Fields `/api/payments?_fields=customerNumber,checkNumber` `/api/payments?_fields=-checkNumber`
 
-## ER图
-
-* PowerDesigner
-* MySQL Workbench
-
 ### MySQL Proxy
 
 LVS、HAProxy、Nginx
@@ -1379,15 +1377,13 @@ TPS（Transactions Per Second）
 show global status like 'Questions';
 show global status like 'Uptime'; # QPS = Questions / Uptime
 
-mysql> show global status like 'Com_commit';
-mysql> show global status like 'Com_rollback';
-mysql> show global status like 'Uptime'; # TPS = (Com_commit + Com_rollback) / Uptime
+show global status like 'Com_commit';
+show global status like 'Com_rollback';
+show global status like 'Uptime'; # TPS = (Com_commit + Com_rollback) / Uptime
 
 vmstat 1 3 #  pay attentin to cpu
 iostat -d -k 1 3
 ```
-
-## 扩展配置
 
 ### 主从复制
 
@@ -1403,12 +1399,11 @@ MySQL 在每个事务更新数据之前，由 Master 将事务串行的写入二
 * Slave I/O线程：在start slave之后，该线程负责从Master上拉取binlog内容放进自己的Relay Log中；
 * Slave SQL线程：负责执行Relay Log中的语句。
 * [使用 Docker 完成 MySQL 数据库主从配置](https://juejin.im/post/59fd71c25188254dfa1287a9)
-
 * master将改变记录到二进制日志(binary log)中（这些记录叫做二进制日志事件，binary log events，可以通过show binlog events进行查看）；
 * slave将master的binary log events拷贝到它的中继日志(relay log)；
 * slave重做中继日志中的事件，将改变反映它自己的数据。
 
-#### notice
+### 问题
 
 - 无法远程连接mysql(报错111)：注释掉my.cnf中的bind-address或绑定本地ip
 - 添加server-id and log_bin=
@@ -1434,16 +1429,17 @@ Slave_IO_Running = NO：stop slave; reset slave;start slave;
 ```shell
 sudo apt-get install mysql-proxy
 ```
+
 ## slow log
 
-```
-mysql> set global slow-query-log=on
+```sql
 # 开启慢查询日志
-mysql> set global slow_query_log_file='/var/log/mysql/mysql-slow.log';
+set global slow-query-log=on
+set global slow_query_log_file='/var/log/mysql/mysql-slow.log';
 # 指定慢查询日志文件位置
-mysql> set global log_queries_not_using_indexes=on;
+set global log_queries_not_using_indexes=on;
 # 记录没有使用索引的查询
-mysql> set global long_query_time=1;
+set global long_query_time=1;
 # 只记录处理时间1s以上的慢查询
 分析慢查询日志，可以使用MySQL自带的mysqldumpslow工具，分析的日志较为简单。
 mysqldumpslow -t 3 /var/log/mysql/mysql-slow.log
@@ -1574,18 +1570,6 @@ echo `date +"%Y年%m月%d日 %H:%M:%S"` $Next Bakup succ! >> $LogFile
 #NODE_ENV=$backUpFolder@$backUpFileName /root/.nvm/versions/node/v8.11.3/bin/node /usr/local/work/script/upload.js
 ```
 
-## 参考
-
-* [HOW TO INSTALL MYSQL NDB CLUSTER ON LINUX](https://clusterengine.me/how-to-install-mysql-ndb-cluster-on-linux/)
-* [索引性能分析](http://draveness.me/sql-index-performance.html)
-* [MySQL主从同步](http://geek.csdn.net/news/detail/236754)
-* [MySQL数据库事务隔离级别介绍](http://www.jb51.net/article/49596.htm)
-* [使用 Docker 完成 MySQL 数据库主从配置](https://juejin.im/post/59fd71c25188254dfa1287a9)
-* [shlomi-noach/awesome-mysql](https://github.com/shlomi-noach/awesome-mysql):A curated list of awesome MySQL software, libraries, tools and resources
-* [MySQL 学习笔记](https://notes.diguage.com/mysql/)
-* [jaywcjlove/mysql-tutorial](https://github.com/jaywcjlove/mysql-tutorial):MySQL入门教程（MySQL tutorial book）
-* [MySQL Forums](https://forums.mysql.com/index.php)
-
 ## 工具
 
 * [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. http://vitess.io
@@ -1598,10 +1582,18 @@ echo `date +"%Y年%m月%d日 %H:%M:%S"` $Next Bakup succ! >> $LogFile
 * [alibaba/cobar](https://github.com/alibaba/cobar):a proxy for sharding databases and tables
 * [github/gh-ost](https://github.com/github/gh-ost):GitHub's Online Schema Migrations for MySQL
 
+## 参考
+
+* [HOW TO INSTALL MYSQL NDB CLUSTER ON LINUX](https://clusterengine.me/how-to-install-mysql-ndb-cluster-on-linux/)
+* [索引性能分析](http://draveness.me/sql-index-performance.html)
+* [MySQL主从同步](http://geek.csdn.net/news/detail/236754)
+* [MySQL数据库事务隔离级别介绍](http://www.jb51.net/article/49596.htm)
+* [使用 Docker 完成 MySQL 数据库主从配置](https://juejin.im/post/59fd71c25188254dfa1287a9)
+* [shlomi-noach/awesome-mysql](https://github.com/shlomi-noach/awesome-mysql):A curated list of awesome MySQL software, libraries, tools and resources
+* [MySQL 学习笔记](https://notes.diguage.com/mysql/)
+* [jaywcjlove/mysql-tutorial](https://github.com/jaywcjlove/mysql-tutorial):MySQL入门教程（MySQL tutorial book）
+* [MySQL Forums](https://forums.mysql.com/index.php)
+
 您可以通过创建数据表来存储许可数据，以及所有许可用户标识和产品标识符来对数据进行非规范化（反规范化）处理，并针对特定客户进行查询。 您需要使用INSERT / UPDATE / DELETE上的MySQL触发器来重建表格（不过这要取决于数据来更改的表格），这会显着提高查询数据的性能。
 
 类似地，如果一些连接在MySQL中减慢了查询速度，那么将查询分解为两个或更多语句并在PHP中单独执行它们可能会更快，然后可以在代码中收集和过滤结果。 Laravel 通过预加载在 Eloquent 中就做了类似的事情。
-
-海量数据，高并发的公司
-
-不同引擎数据结构的实现

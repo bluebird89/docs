@@ -26,6 +26,13 @@
 * 线程在Running的过程中可能会遇到阻塞(Blocked)情况:对Running状态的线程加同步锁(Synchronized)使其进入(lock blocked pool ),同步锁被释放进入可运行状态(Runnable)。从jdk源码注释来看，blocked指的是对monitor的等待（可以参考下文的图）即该线程位于等待区。
 * 线程在Running的过程中可能会遇到等待（Waiting）情况:线程可以主动调用object.wait或者sleep，或者join（join内部调用的是sleep，所以可看成sleep的一种）进入。从jdk源码注释来看，waiting是等待另一个线程完成某一个操作，如join等待另一个完成执行，object.wait()等待object.notify()方法执行。
 
+## 类型
+
+* 计算密集
+    - 逻辑
+* IO密集
+    - MySQL：吞吐
+
 ### 进程之间如何通信
 
 * 消息传递（管道、FIFO、消息队列）

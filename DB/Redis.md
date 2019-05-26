@@ -9,10 +9,12 @@ Redis is an in-memory database that persists on disk. The data model is key-valu
 * 性能：纯内存操作，每秒可以处理超过，单线程操作，避免了线程切换和锁的性能消耗，10万次读写操作
     - 为了达到最快的读写速度将数据都读到内存中，并通过异步的方式将数据写入磁盘。所以redis具有快速和数据持久化的特征。如果不将数据放在内存中，磁盘I/O速度为严重影响redis的性能
     - 利用队列技术将并发访问变为串行访问，消除了传统数据库串行控制的开销
+    - 单线程简化数据结构和算法的实现
 * 单个value的最大限制是1GB，不像 memcached只能保存1MB的数据
 * 缓存：在碰到需要执行耗时特别久、且结果不频繁变动的SQL时，就特别适合将运行结果放入缓存。后面的请求就去缓存中读取，使得请求能够迅速响应
 * 并发：让请求先访问到Redis，而不是直接访问数据库
 * 采用了非阻塞I/O多路复用机制，单线程根据Socket的不同状态执行每个Socket(I/O流)：任务
+    - 用epoll作为IO多路复用技术的实现，再加上redis自身事件处理模型将epoll中的链接、读写、关闭都转换为事件，不在网络IO上浪费过多的事件
 * 提供了Select、Epoll、Evport、Kqueue等多路复用函数库
 * 内部使用一个redisObject对象来表示所有的key和value,redisObject最主要的信息
     - type代表一个value对象具体是何种数据类型
