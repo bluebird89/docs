@@ -27,8 +27,10 @@ A PHP Framework For Web Artisans https://laravel.com
         * Postgres: 54320 → 发送到 5432
         * Mailhog: 8025 → 发送到 8025
     + 共享环境：Homestead 机器中并运行 share homestead.app。这会从 Homestead.yaml 配置文件中共享 homestead.app
-* valet： Mac 极简主义者的 Laravel 开发环境，为 Mac 设置了启动后始终在后台运行 Nginx。然后，Valet 使用 DnsMasq 将所有指向安装在本地计算机的站点的请求代理到 *.test 域上
-* composer
+* valet：Mac 极简主义者的 Laravel 开发环境
+  - 为 Mac 设置了启动后始终在后台运行 Nginx
+  - Valet 使用 DnsMasq 将所有指向安装在本地计算机的站点的请求代理到 *.test 域上
+* 通过composer 安装
 * Laragon
 * [laradock](https://github.com/LaraDock/laradock.git)
 
