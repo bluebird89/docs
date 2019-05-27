@@ -132,15 +132,13 @@ apt-get install php
 php -m # 查看添加扩展
 php --ini　＃　查找PHP CLI的ini文件位置
 
-<<<<<<< HEAD
 ln -s /etc/php5/mods-available/redis.ini /etc/php5/cli/conf.d/10-redis.ini
 ln -s /etc/php5/mods-available/redis.ini /etc/php5/apache2/conf.d/10-redis.ini
-=======
+
 apt-cache search memcached
 apt-get install -y php5-memcached
 
 pecl install memcached
->>>>>>> update
 ```
 
 ### Cli
