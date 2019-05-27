@@ -14,8 +14,5 @@ echo '-J-Xmx2G' >> /usr/local/etc/sbtopts
 
 ## 教程
 
-- [tonyskn/coursera-scala](https://github.com/tonyskn/coursera-scala)
-
-## 资源
-
+* [tonyskn/coursera-scala](https://github.com/tonyskn/coursera-scala)
 * [fpinscala/fpinscala](https://github.com/fpinscala/fpinscala):Code, exercises, answers, and hints to go along with the book "Functional Programming in Scala" http://manning.com/bjarnason
