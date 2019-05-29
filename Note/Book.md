@@ -564,18 +564,30 @@
 * 《伊卡洛斯之陨》——彼得·勃鲁盖尔
 * 奇点临近 雷·库兹韦尔
 * 失控 凯文·凯利
+* 《翻译例句词典》
 
-Evolutionary Architecture
-Clean Code, Design Patterns, DDD
-Lean manufacturing principles
-Fault Tolerance Patterns
-Continuous Delivery
-HTTP and REST
+* Evolutionary Architecture
+* Clean Code, Design Patterns, DDD
+* Lean manufacturing principles
+* Fault Tolerance Patterns
+* Continuous Delivery
+* HTTP and REST
 
 ## 数学
 
 * 数学分析
 * 万物皆数：从史前时期到人工智能，跨越千年的数学之旅
+
+## 国家
+
+* 《美国陷阱》
+    - 法律是为国家利益服务的。
+    - 美国司法部的起诉胜率高达98.5%，为什么会有如此惊人的胜率呢？美国检察官就以10项罪名起诉，合计的刑期高达125年，给被告造成巨大的心理压力。而皮耶鲁齐只要认罪，那么一切顺利的话，只会有一项罪名成立
+    - 《反海外腐败法》让美国政府自认为可以追诉任何一家公司，只要用美元计价签订合同，或者仅仅通过设在美国的服务器（例如谷歌的Gmail或者微软的邮箱）收发、存储（甚至只是过境）邮件，都能被美国管辖。
+    - 实际上司法部对本国企业的起诉，反而成为了保护本国企业免遭外国高额罚款的手段。
+    - 所有的美国公司，都在为美国政府分享信息
+        + 如果孟晚舟被引渡到美国，那么将会极为不利，美国的司法体系设计就对被告极为不利，尤其是对弱者，可以说是任人宰割。
+        + 美国企业执行美国政府的法律是非常坚决的，响应速度非常快，完全的执行美国的长臂管辖。
 
 ## 数据
 

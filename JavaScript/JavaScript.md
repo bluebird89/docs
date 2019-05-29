@@ -1526,7 +1526,6 @@ function convert(key, value) {
     }
     return value;
 }
-
 JSON.stringify(xiaoming, convert, '  ');
 
 var xiaoming = {

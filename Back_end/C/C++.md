@@ -55,3 +55,7 @@ gcc file.c # 编译
 * [changkun/modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial):📚 C++11/14/17 On the Fly https://changkun.de/modern-cpp/
 * [runoob](http://www.runoob.com/cplusplus/cpp-tutorial.html)
 * [huihut/interview](https://github.com/huihut/interview):📚 C/C++面试知识总结
+* [cppreference](http://en.cppreference.com/book/)：`C++`官方参考文档
+* [Awesome C/C++](https://fffaraz.github.io/awesome-cpp/)：一系列优秀的`C/C++`框架、库和资源
+* [Awesome Qt](https://github.com/fffaraz/awesome-qt)：一系列优秀的`Qt`库和资源
+* [3rd-party-applications](https://github.com/Razor-qt/razor-qt/wiki/3rd-party-applications)：一系列优秀的`Qt`第三方程序
