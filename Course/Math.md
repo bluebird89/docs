@@ -41,6 +41,10 @@
 * [Matrix Algebra for Engineers](http://coursegraph.com/coursera-matrix-algebra-engineers)
 * [Mathematics for Machine Learning: Linear Algebra](http://coursegraph.com/coursera-linear-algebra-machine-learning)
 * https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/
+* Gilbert Strang教授的MIT公开课：数据分析、信号处理和机器学习中的矩阵方法 Matrix Methods in Data Analysis, Signal Processing, and Machine Learning
+    - [课程主页] (https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/)
+    - [课程官方视频](https://www.youtube.com/playlist?list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k)
+    - [爱可可老师B站搬运链接](https://www.bilibili.com/video/av53055190/)
 
 ## 数据科学
 
@@ -71,7 +75,8 @@
 
 ## 资源
 
-
+* [AI算法工程师手册](http://www.huaxiaozhuan.com)
+* [capital of statistics](http://cos.name/)： 统计之都，国内首个旨在推广与应用统计学知识的社区专业型网站
 
 ## 工具
 

@@ -112,7 +112,7 @@
             * [全书 pdf](https://nndl.github.io/nndl-book.pdf)
             * [示例代码](https://github.com/nndl/nndl-codes)
             * [课程练习](https://github.com/nndl/exercise)
-        + [《深度学习》](https://github.com/exacity/deeplearningbook-chinese):花书
+        + [《深度学习》Deep Learning](https://github.com/exacity/deeplearningbook-chinese):花书
         + [《深度学习 500 问》](https://github.com/scutan90/DeepLearning-500-questions)
         + 《深度学习实战》 [美] 杜威·奥辛格（DouweOsinga）
     - 工具
@@ -332,3 +332,4 @@
 
 * [完备的 AI 学习路线，最详细的资源整理](https://mp.weixin.qq.com/s?__biz=Mzg5NzAxMDgwNg==&mid=2247484212&idx=1&sn=18de3f24ff47ff0e096c38ce90a8d95d&chksm=c0791e2df70e973b03a0496ac045974f581bade3a05aa1416104b5556a515acf0ee07a1c3554)
 * [OpenAI](https://openai.com)
+* 人工智能：一种现代的方法 Artificial Intelligence: A Modern Approach
