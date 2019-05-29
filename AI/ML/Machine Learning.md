@@ -266,6 +266,7 @@
 * 《机器学习实战：基于Scikit-Learn和TensorFlow》
   - [源代码](https://github.com/ageron/handson-ml)
   - [翻译](https://github.com/apachecn/hands-on-ml-zh)
+* [《面向机器学习的特征工程》](https://github.com/apachecn/feature-engineering-for-ml-zh)
 
 ## 教程
 
@@ -338,3 +339,4 @@
 * [roboticcam/machine-learning-notes](https://github.com/roboticcam/machine-learning-notes):My continuously updated Machine Learning, Probabilistic Models and Deep Learning notes and demos (1000+ slides) 我不间断更新的机器学习，概率模型和深度学习的讲义(1000+页)和视频链接
 * [](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)
 * [构建可扩展的机器学习系统（一）：你所需的架构设计知识](https://towardsdatascience.com/being-a-data-scientist-does-not-make-you-a-software-engineer-c64081526372)
+- [MIT Deep Learning](http://www.deeplearningbook.org/)：Bengio写的MIT Press《Deep learning》

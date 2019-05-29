@@ -1,10 +1,13 @@
 # NLP(Natural Language Processing)
 
 
-## 资源
+## 图书
 
-* [我爱自然语言处理](http://www.52nlp.cn/)
-* [基于深度学习的自然语言处理]()：图书
+* [基于深度学习的自然语言处理]
+* 信息检索导论 Introduction to Information Retrieval
+* 统计自然语言处理（第2版）
+* Neural Network Methods for Natural Language Processing Yoav Goldberg
+* 知识图谱 赵军
 
 ## 课程
 
@@ -65,3 +68,4 @@ docker-compose up -d
 * [crownpku/Awesome-Chinese-NLP](https://github.com/crownpku/Awesome-Chinese-NLP):A curated list of resources for Chinese NLP 中文自然语言处理相关资料
 * [lyeoni/nlp-tutorial](https://github.com/lyeoni/nlp-tutorial)
 * [Understanding LSTM Networks](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
+* [我爱自然语言处理](http://www.52nlp.cn/)

@@ -25,6 +25,9 @@
 * wheel：Python 分发的新标准，意在取代 eggs。[官网](http://pythonwheels.com/)
 * [Pipenv](https://github.com/pypa/pipenv):Python Development Workflow for Humans. https://docs.pipenv.org/
 * PBR（https://docs.openstack.org/pbr/latest/）, Python Build Reasonableness 的缩写，是以一致的方式用于管理 Setuptools 包的库。
+- [pypi](https://pypi.python.org/pypi/)：Python第三方库集合
+- [unofficial windows binaries for python extension packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/)：windows下Python第三方库的非官方扩展
+- [Scipy-Lecture-Notes-zh](https://github.com/jayleicn/scipy-lecture-notes-zh-CN)：这是来自 http://scipy-lectures.org 的Python科学计算环境教程的中文版
 
 ```sh
 pip install pipenv
