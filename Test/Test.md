@@ -79,7 +79,9 @@
 
 ### A/B 测试
 
-就是为同一个目标制定两个方案（比如两个页面），让一部分用户使用 A 方案，另一部分用户使用 B 方案，记录下用户的使用情况，看哪个方案更符合设计。
+为同一个目标制定两个方案（比如两个页面），让一部分用户使用 A 方案，另一部分用户使用 B 方案，记录下用户的使用情况，看哪个方案更符合设计。
+
+* 需求声明:假设性的声明,网站页面的变化和可能造成的影响,有关访客及访客对该变量可能有的反应
 
 ## 后续流程
 
@@ -157,6 +159,7 @@
 
 ```
 ab -c 100 -n 100000 http://127.0.0.1:8888/hello/index/
+
 This is ApacheBench, Version 2.3 <$Revision: 655654 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
@@ -210,6 +213,8 @@ Percentage of the requests served within a certain time (ms)
   98%     28
   99%     32
  100%     63 (longest request)
+
+ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 ```
 
 ## 能力

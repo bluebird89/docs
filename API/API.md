@@ -9,6 +9,8 @@
 
 ## API gateway
 
+* 幂等
+
 ### [encode/apistar](https://github.com/encode/apistar)
 
 A smart Web API framework, for Python 3. 🌟 https://docs.apistar.com

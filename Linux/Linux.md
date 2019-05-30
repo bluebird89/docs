@@ -508,9 +508,8 @@ www   localhost.localdomain  #修改localhost.localdomain为www
 
 ## terminal终端
 
-终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
-
-Ubuntu具体说来，它默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
+* 终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
+* Ubuntu具体说来，它默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
 
 ```sh
 dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on command-line
@@ -553,7 +552,8 @@ date -s "2016-07-28 16:12:00" ## 修改时间
 history # 显示历史
 --help # 用于显示 shell 内建命令的简要帮助信息 help exit
 man # 查看命令的帮助
-info ls
+info ls # 查看信息
+info php # 查看信息
 
 cal # 日历
 bc # 支持任意精度的交互执行的计算器语言
@@ -583,68 +583,28 @@ screen # 固定屏
 diff -Naur sources-orig/ sources-fixed/ >myfixes.patch # 参数 -N 代表如果比较的文件不存在，则认为是个空文件， -a 代表将所有文件都作为文本文件对待，-u 代表使用合并格式并输出上下文，-r 代表递归比较目录
 ```
 
-### 服务、进程、端口管理
-
-* 服务：封装的命令行，带有设定的参数、日志记录、运行监控
-* 启动服务会生成进程，端口占用
-
-```sh
-# native service
-sudo systemctl enable|disable nginx | httpd.service # enable 设置开机启动 disable 使服务不自动启动
-sudo systemctl status|start|restart|reload nginx | httpd.service # start 启动 stop 停止 restart 重启
-systemctl list-units --type=service # 查看服务
-
-# pidof prints out the process id of a running program. For example, below command will output the process ID of nginx
-pidof nginx
-
-ps -ef | grep nginx # 进程查看
-ps aux | grep nginx
-
-netstat -anp | grep LISTEN
-
-## 端口查看
-lsof -i:3000
-
-kill -9 pid # 关闭进程
-kill -s 9 processId
-kill pid
-kill -USR2 $(pidof nginx)
-pkill -f nginx
-
-uptime # 查看当前系统运行多长时间
-
-# 退出
-ctrl+c   ## 有些程序也可以用q键
-
-ctrl+z   ## 进程会挂起到后台
-bg jobid  ## 让进程在后台继续执行
-fg jobid   ## 让进程回到前台
-
-iotop # Sorts processes by disk writes, and show how much and how frequently programs are writing to the disk.
-powertop # Lists processes by their energy consume. It\'s a vital command when you\'re outside, somewhere you can\'t charge your laptop.
-nethogs # Lists processes by their network traffic.
-
-top
-top -bn1 | grep php-fpm
-
-htop # Famous process monitor. It has a nice, colorful command-line UI. Some useful keybindings:
-# \ Filter
-# / Search
-# , Choose sorting criteria
-# k Send kill signal
-# u Filter results by user
-# t Open/close tree mode
-# - and + Collabse / uncollapse selected process tree
-# H Turn off displaying threads
-```
-
 ### Network
 
 * 网络分内网与外网
-* 端口提供服务：
-  - 是否暴漏
-  - 修改防火墙规则
+* 端口
+  - 使用
+    - 是否暴漏
+    - 修改防火墙规则
+  - 分类
+    + 0 - 1023： 常用端口和系统端口
+    + 1024 - 49151： 软件的注册端口
+    + 49152 - 65535： 动态端口或私有端口
+  - /etc/services 文件可以查看到更多关于保留端口的信息
+
 * 端口扫描
+* 服务：封装的命令行，带有设定的参数、日志记录、运行监控
+* 启动服务会生成进程，端口占用
+* netstat
+  * -t  仅显示和tcp相关的
+  * -u 仅显示和udp相关的
+  * -n 不限时别名，能显示数字的全部转换为数字
+  * -l   仅显示出于Listen(监听)状态的
+  * -p  显示建立这些连接的程序名
 
 ```sh
 hostname # 返回系统的主机名称
@@ -683,31 +643,92 @@ iptables -P FORWORD DROP
 iptables -P OUTPUT DROP
 iptables -I INPUT -p tcp --dport 80 -j ACCEPT # open port
 
+iptables -A INPUT -p tcp --drop 端口号-j DROP
+iptables -A OUTPUT -p tcp --dport 端口号-j DROP # 关闭端口
+iptables -A INPUT -ptcp --dport  端口号-j ACCEPT　#　打开端口
+
 ## port test
 yum install telnet.x86_64
 telnet 10.0.3.69 2020  # 测试端口能否访问
 
+lsof -i -P | grep ssh
 lsof -i: (port) # 查看端口的占用情况
 lsof -Pni4 | grep LISTEN | grep php
+lsof -i:8080 # 查看8080端口占用
+lsof abc.txt # 显示开启文件abc.txt的进程
+lsof -c abc # 显示abc进程现在打开的文件
+lsof -c -p 1234 # 列出进程号为1234的进程所打开的文件
+lsof -g gid # 显示归属gid的进程情况
+lsof +d /usr/local/ # 显示目录下被进程开启的文件
+lsof +D /usr/local/ # 同上，但是会搜索目录下的目录，时间较长
+lsof -d 4 # 显示使用fd为4的进程
+lsof -i -U # 显示所有打开的端口和UNIX domain文件
 
 netstat -a|all # show listening, non-listening. Sockets. For tcp sockets it shows listening ,established and waiting connections.
-  netstat -at # show all tcp connection detail
-  netstat -au # u option along with -a and it will show all udp connection detail
+netstat -at # show all tcp connection detail
+netstat -au # u option along with -a and it will show all udp connection detail
 netstat -l|listening # hows just the listening ports, very useful when debugging connectivity issues and you wants to check
-  netstat -lt # Display tcp sockets information only
-  netstat -lx # Display Unix sockets information only
-  netstat -au # Display udp sockets information only
+netstat -lt # Display tcp sockets information only
+netstat -lx # Display Unix sockets information only
+netstat -au # Display udp sockets information only
 netstat  -s|statistics # display summary statistics for each protocol.
 netstat  -p|program # show the PID and name of the program to which each socket belongs Superuser can see all the processes and others can see only the processes they own
-–numeric , -n # show numerical addresses instead of trying to determine symbolic host, port or user names
--I ,  –interfaces=iface , -I=iface # display a table of all network interfaces and connections, or the specified interface .
--r,  –route # display the kernel routing tables.  netstat -r and route -e produce the same output.
--v , –verbose # shows Active Internet connections and Active UNIX domain sockets without server information.
-
+netstat  –numeric|-n # show numerical addresses instead of trying to determine symbolic host, port or user names
+netstat  -I ,  –interfaces=iface , -I=iface # display a table of all network interfaces and connections, or the specified interface .
+netstat  -r,  –route # display the kernel routing tables.  netstat -r and route -e produce the same output.
+netstat  -v , –verbose # shows Active Internet connections and Active UNIX domain sockets without server information.
 
 netstat -tunlp # 显示tcp，udp的端口和进程等相关
 netstat -tln | grep 8000
-netstat -tunlp|grep (port)  # // 指定端口号进程情况
+netstat -tunlp|grep (port)  # 指定端口号进程情况
+netstat -anp | grep LISTEN
+
+# native service
+sudo systemctl enable|disable nginx | httpd.service # enable 设置开机启动 disable 使服务不自动启动
+sudo systemctl status|start|restart|reload nginx | httpd.service # start 启动 stop 停止 restart 重启
+systemctl list-units --type=service # 查看服务
+
+# pidof prints out the process id of a running program. For example, below command will output the process ID of nginx
+pidof nginx
+
+ps -ef | grep nginx # 进程查看
+ps aux | grep nginx
+
+kill pid
+kill -9 pid # 关闭进程
+kill -s 9 processId
+kill -USR2 $(pidof nginx)
+pkill -f nginx
+
+uptime # 查看当前系统运行多长时间
+
+# 退出
+ctrl+c   ## 有些程序也可以用q键
+
+ctrl+z   ## 进程会挂起到后台
+bg jobid  ## 让进程在后台继续执行
+fg jobid   ## 让进程回到前台
+
+iotop # Sorts processes by disk writes, and show how much and how frequently programs are writing to the disk.
+powertop # Lists processes by their energy consume. It\'s a vital command when you\'re outside, somewhere you can\'t charge your laptop.
+nethogs # Lists processes by their network traffic.
+
+top
+top -bn1 | grep php-fpm
+
+htop # Famous process monitor. It has a nice, colorful command-line UI. Some useful keybindings:
+# \ Filter
+# / Search
+# , Choose sorting criteria
+# k Send kill signal
+# u Filter results by user
+# t Open/close tree mode
+# - and + Collabse / uncollapse selected process tree
+# H Turn off displaying threads
+
+# 下载工具 
+wget -O newname.md https://github.com/LCTT/TranslateProject/blob/master/README.md     ### 下载 README 文件并重命名为 newname.md
+wget -c url     ### 下载 url 并开启断点续传
 ```
 
 ### 身份
@@ -791,7 +812,8 @@ diff # 比较两个文件的异同
 
 cat -n file # 查看文件内容，从头到尾的内容 -n:列出行号
 tac # 打印文件内容到标准输出(逆序)
-more file # 分屏显示文件内容,终端底部显示当前阅读的进度。可以使用 Enter 键向下滚动一行，使用 Space 键向上滚动一屏，按下 h 显示帮助，q 退出。
+more file # 分屏显示文件内容,终端底部显示当前阅读的进度。可以使用 Enter 键向下滚动一行，使用 Space 键向上滚动一屏，按下 h 显示帮助，q 退出
+more +100 /etc/locale.gen       ### 从 100 行开始显示
 file /bin/ls # 查看文件类型
 head  -n 20|-20 file # 显示文件头几行(默认显示10行)
 tail -n 1 /etc/passwd # 查看文件的尾几行（默认10行）
@@ -996,26 +1018,15 @@ get /etc/group
 !less group # 参看本地文件
 ```
 
-### sougou pinyin
-
-- command line
-- package
-
-  - get package: download sogou_pinyin_linux_1.0.0.0033_amd64.deb
-  - install:
+### Soft install
 
 ```sh
+### sogou
+sogou_pinyin_linux_1.0.0.0033_amd64.deb # get package: download 
 sudo dpkg  -i   sogou_pinyin_linux_1.0.0.0033_amd64.deb
-```
-
-- config:
-
-  - system setting->language support
-  - choose language,key input fcitx
+# config: system setting->language support choose language,key input fcitx
 
 ### atom
-
-```sh
 sudo add-apt-repository ppa:webupd8team/atom
 sudo apt-get update
 sudo apt-get install atom
@@ -1026,11 +1037,8 @@ sudo apt update
 sudo apt install nixnote2
 File->Add Another User
 Tools->Synchronize
-```
 
 ## chrome(firefox 禁用console.log)
-
-```sh
 sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
 sudo apt-get update
