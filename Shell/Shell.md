@@ -135,8 +135,9 @@ lsof -i:80 # -i参数表示网络链接，:80指明端口号
 ## 查找
 
 ```sh
+find . -name PATTERN    ### 从当前目录查找符合 PATTERN 的文件
+find /home -name PATTERN -exec ls -l {} \;  # 从 /home 文件查找所有符合 PATTERN 的文件，并交由 ls 输出详细信息 
 find / -name *.conf -type f -print | xargs file
-
 find / -name *.conf -type f -print | xargs tar cjf test.tar.gz
 
 ssh -p 22 -C -f -N -g -L 9200:192.168.1.19:9200 ihavecar@192.168.1.19
@@ -152,7 +153,6 @@ yum -y localinstall multitail-5.2.9-1.el6.rf.x86_64.rpm
 multitail -e "Accepted" /var/log/secure -l "ping baidu.com"
 
 ps -aux | sort -rnk 3 | head -20
-
 ps -aux | sort -rnk 4 | head -20
 
 netstat -nat | awk  '{print  $5}' | awk -F ':' '{print $1}' | sort | uniq -c | sort -rn | head -n 10 # 查看连接你服务器 top10 用户端的 IP 地址
