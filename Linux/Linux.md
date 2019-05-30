@@ -586,6 +586,7 @@ diff -Naur sources-orig/ sources-fixed/ >myfixes.patch # 参数 -N 代表如果�
 ### Network
 
 * 网络分内网与外网
+
 * 端口
   - 使用
     - 是否暴漏
@@ -595,8 +596,7 @@ diff -Naur sources-orig/ sources-fixed/ >myfixes.patch # 参数 -N 代表如果�
     + 1024 - 49151： 软件的注册端口
     + 49152 - 65535： 动态端口或私有端口
   - /etc/services 文件可以查看到更多关于保留端口的信息
-
-* 端口扫描
+  - 扫描
 * 服务：封装的命令行，带有设定的参数、日志记录、运行监控
 * 启动服务会生成进程，端口占用
 * netstat
@@ -726,9 +726,56 @@ htop # Famous process monitor. It has a nice, colorful command-line UI. Some use
 # - and + Collabse / uncollapse selected process tree
 # H Turn off displaying threads
 
-# 下载工具 
+# 下载工具
 wget -O newname.md https://github.com/LCTT/TranslateProject/blob/master/README.md     ### 下载 README 文件并重命名为 newname.md
 wget -c url     ### 下载 url 并开启断点续传
+```
+
+### 抓包
+
+* -a 　　　将网络地址和广播地址转变成名字；
+* -d 　　　将匹配信息包的代码以人们能够理解的汇编格式给出；
+* -dd 　　　将匹配信息包的代码以c语言程序段的格式给出；
+* -ddd 　　　将匹配信息包的代码以十进制的形式给出；
+* -e 　　　在输出行打印出数据链路层的头部信息；
+* -f 　　　将外部的Internet地址以数字的形式打印出来；
+* -l 　　　使标准输出变为缓冲行形式；
+* -n 　　　不把网络地址转换成名字；
+* -t 　　　在输出的每一行不打印时间戳；
+* -v 　　　输出一个稍微详细的信息，例如在ip包中可以包括ttl和服务类型的信息；
+* -vv 　　　输出详细的报文信息；
+* -c 　　　在收到指定的包的数目后，tcpdump就会停止；
+* -F 　　　从指定的文件中读取表达式,忽略其它的表达式；
+* -i 　　　指定监听的网络接口；
+* -r 　　　从指定的文件中读取包(这些包一般通过-w选项产生)；
+* -w 　　　直接将包写入文件中，并不分析和打印出来；
+* -T 　　　将监听到的包直接解释为指定的类型的报文，常见的类型有rpc（远程过程调用）和snmp（简单网络管理协议；）
+
+```sh
+# 抓取所有经过网卡1，目的IP为172.16.7.206的网络数据
+tcpdump -i eth1 host 172.16.7.206
+# 抓取所有经过网卡1，目的端口为1234的网络数据
+tcpdump -i eth1 dst port 1234
+# 抓取所有经过网卡1，协议类型为UDP的网络数据
+tcpdump -i eth1 udp
+# 抓取本地环路数据包
+tcpdump -i lo udp # 抓取UDP数据
+tcpdump -i lo udp port 1234 # 抓取端口1234的UDP数据
+tcpdump -i lo port 1234 # 抓取端口1234的数据
+
+# 抓取所有经过1234端口的UDP网络数据
+tcpdump udp port 1234
+
+# 抓取所有经过网卡1的SYN类型数据包
+tcpdump -i eth1 ‘tcp[tcpflags] = tcp-syn’
+# 抓取经过网卡1的所有DNS数据包（默认端口）
+tcpdump -i eth1 udp dst port 53
+
+# 逻辑语句过滤：抓取所有经过网卡1，目的网络是172.16，但目的主机不是192.168.1.200的TCP数据
+tcpdump -i eth1 ‘((tcp) and ((dst net 172.16) and (not dst host 192.168.1.200)))’
+
+# 抓取所有经过网卡1，目的主机为172.16.7.206的端口80的网络数据并存储
+tcpdump -i eth1 host 172.16.7.206 and port 80 -w /tmp/xxx.cap
 ```
 
 ### 身份
