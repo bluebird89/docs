@@ -18,6 +18,7 @@ vagrant ssh
 ```sh
 ansible all -m ping --ask-pass # 管理主机测试
 ```
+
 ## mac
 
 * ansible
@@ -44,3 +45,4 @@ ansible all -m ping --ask-pass # 管理主机测试
 * Ansible： https://www.ansible.com/
 * 一些模块： https://docs.ansible.com/ansible/latest/modules/modules_by_category.html
 * 博文： https://www.redhat.com/en/blog/integrating-ansible-jenkins-cicd-process
+* https://linux.cn/article-4215-1.html

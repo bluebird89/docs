@@ -1379,6 +1379,8 @@ PHP 5.5以来，mysql_connect()扩展已被弃用。 现在，建议使用以下
 * mysqli_connection()
 * PDO::__ construct()
 
+https://linux.cn/article-10899-1.html
+
 ```php
 $host = 'localhost:3306';
 $user = 'root';  // MySQL用户帐号

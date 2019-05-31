@@ -295,6 +295,8 @@ True
 3 > 2
 True and True
 True or False
+bool(datetime.time(0, 0)) == False
+
 5 > 3 or 1 > 3
 not 1 > 2
 int('12345', base=8) # 5349
