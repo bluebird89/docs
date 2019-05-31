@@ -2384,6 +2384,15 @@ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServicePro
 php artisan jwt:secret # 使用
 ```
 
+### [andersao/l5-repository](https://github.com/andersao/l5-repository)
+
+Laravel 5 - Repositories to abstract the database layer http://andersao.github.io/l5-repository
+
+* presenter，显示需求
+* repository，存取需求
+* validator，参数验证需求
+* services，业务逻辑
+
 ## 扩展
 
 * [laravel/framework](https://github.com/laravel/framework)
