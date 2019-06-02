@@ -10,7 +10,8 @@ Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.
 
 高效虚拟化：Docker借助LXC并进行革新提供了高效运行环境，而非类似VM的虚拟OS，GuestOS的弊端在于看起来够虚拟，隔离，然而使用起来又浪费资源，又难于管理。Docker则基于LXC的核心Linux Namespace,对cgroups/namespace机制及网络过封装，把隔离性，灵活性（资源分配），便携，安全性，最重要是其性能做到了极致。
 
-Docker的总体架构图: ![](../_static/architect_docker.jpg) Docker与VM对比:Docker是在操作系统层面进行虚拟化，而传统VM则直接在硬件层面虚拟化。 ![](../_static/VMvsDocker.jpg) Docker复用Host主机的OS, 抽象出Docker Engine层面实现调度与隔离，大大降低其负重级别.底层实现则借助了LXC, 管理利用了namespace做全县控制和隔离，cgroup来进行资源配置，aufs（类似git的思想，把文件系统的修改当作一次代码commit进行叠加从而节省存储）提高文件系统资源利用率。
+Docker的总体架构图: ![](../_static/architect_docker.jpg) Docker与VM对比:Docker是在操作系统层面进行虚拟化，而传统VM则直接在硬件层面虚拟化。
+![](../_static/VMvsDocker.jpg) Docker复用Host主机的OS, 抽象出Docker Engine层面实现调度与隔离，大大降低其负重级别.底层实现则借助了LXC, 管理利用了namespace做全县控制和隔离，cgroup来进行资源配置，aufs（类似git的思想，把文件系统的修改当作一次代码commit进行叠加从而节省存储）提高文件系统资源利用率。
 
 ## 原理
 
@@ -158,7 +159,7 @@ sudo systemctl enable docker
 docker version|info
 ```
 
-## Usage:
+## Usage
 
 ensure docker daemon runing
 拉取或新建服务，挂载目录与运行.应用一般包括三种文件：
@@ -176,14 +177,12 @@ ensure docker daemon runing
 
 ### 镜像使用
 
-- REPOSTITORY：表示镜像的仓库源
-- TAG：镜像的标签
-- IMAGE ID：镜像ID
-- CREATED：镜像创建时间
-- SIZE：镜像大小
-
-创建镜像
-
+* 术语
+  - REPOSTITORY：表示镜像的仓库源
+  - TAG：镜像的标签
+  - IMAGE ID：镜像ID
+  - CREATED：镜像创建时间
+  - SIZE：镜像大小
 - 从已经创建的容器中更新镜像，并且提交这个镜像
   - 查看新镜像 docker images
   - 使用镜像来创建一个容器 `docker run -t -i ubuntu:15.10 /bin/bash`
@@ -201,6 +200,20 @@ ensure docker daemon runing
   - -t ：指定要创建的目标镜像名
   - . ：Dockerfile 文件所在目录，可以指定Dockerfile 的绝对路径
   - `docker tag 860c279d2fec runoob/centos:dev` 镜像添加一个新的标签
+* 容器
+  - 流程
+    + 检查本地是否存在指定的镜像，不存在就从公有仓库下载
+    + 利用镜像创建并启动一个容器
+    + 分配一个文件系统，并在只读的镜像层外面挂在一层可读写层
+    + 从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去
+    + 从地址池配置一个ip地址给容器
+    + 执行用户指定的应用程序
+    + 执行完毕后容器被终止
+  - 参数
+    + –name:Assign a name to the container 给容器定义一个名称。
+    + -i:以交互的模式运行容器，通常与-t同时使用。
+    + -t:给Docker分配一个伪输入终端，通常与-i同时使用。
+    + /bin/bash:在容器里执行/bin/bash命令。
 
 ```
 FROM centos:6.7 MAINTAINER Fisher "fisher@sudops.com"
@@ -215,7 +228,7 @@ CMD /usr/sbin/sshd -D
 
 ```sh
 # 镜像
-docker images # 列出本地主机上的镜像
+docker images # 列出所有镜像(images)
 
 docker search httpd  # 搜索镜像
 docker pull ubuntu:13.10 # 获取镜像
@@ -224,12 +237,20 @@ docker pull learn/tutorial
 docker create ubuntu:14.04 #  create images
 docker create --name mymysql -v /data/mysql-data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root
 
-docker rmi [IMAGE ID] # Remove one or more images.
+docker rmi [IMAGE ID] # Remove one or more images 镜像的image ID或者REPOSITORY名
+docker save centos > /data/iso/centos.tar.gz # 导出
+docker load < /data/iso/centos.tar.gz # 导入
 
 docker build [DOCKERFILE PATH] # Build an image from a Dockerfile
 docker build -t my-org:my-image -f /tmp/Dockerfile #  Build an image tagged my-org/my-image where the Dockerfile can be found at /tmp/Dockerfile.
 
 # 容器
+docker ps    # 列出正在运行的容器(containers)
+docker ps -a # 列出所有的容器
+docker-compose ps # 查看当前项目容器
+docker ps -l   # 查看最后一次创建的容器
+
+# 创建
 docker run -i -t ubuntu:15.10 /bin/bash # 在新容器内建立一个伪终端或终端。
 docker run -d -P training/webapp python app.py   #  -P :是容器内部端口随机映射到主机的高端口。
 docker run -d -p 127.0.0.1:5001:5002  --name runoob training/webapp python app.py   # -p : 是容器内部端口绑定到指定的主机端口。  使用--name标识来命名容器
@@ -238,11 +259,11 @@ docker run learn/tutorial echo "hello word"   # 两个参数，一个是指定�
 docker run learn/tutorial apt-get install -y ping   # learn/tutorial镜像里面安装ping程序
 docker run [组织名称]/<镜像名称>:[镜像标签]
 docker run --name some-nginx -d -p 8080:80 nginx # --name: 生成的容器名字
+docker create -v /dbdata --name dbstore training/postgres /bin/true
+docker run -d --volumes-from dbstore --name db1 training/postgres
+docker run -d --add-host=SERVER_NAME:127.0.0.1 bat/spark
+docker run -d -v /data:/data bat/spark
 
-docker ps    # 查看运行容器状态
-docker-compose ps #查看当前项目容器
-docker ps -l   # 查看最后一次创建的容器
-docker commit 698 learn/ping：版本号 alias 提交，获取新的版本号
 docker run lean/ping ping www.google.com
 docker logs -f $CONTAINER_ID  | docker attach $CONTAINER_ID  # -f:动态输出
 
@@ -254,28 +275,22 @@ docker exec [CONTAINER ID] touch /tmp/exec_works # Execute a command inside a ru
 
 docker inspect name  ||  docker ps -l(ast)/-a(ll)     # 查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息
 docker start name
-docker rm name # 移除容器
-docker rm $(docker ps -a -q) # Delete all containers
-docker rmi $(docker images | grep '^<none>' | awk '{print $3}') # Delete all untagged containers
+
+docker commit 698 learn/ping # 版本号 alias 提交，获取新的版本号
 docker push learn/ping
-docker port 7a38a1ad55c6  docker port determined_swanson：查看指定 （ID或者名字）容器的某个确定端口映射到宿主机的端口号
+docker port 7a38a1ad55c6  docker port determined_swanson # 查看指定 （ID或者名字）容器的某个确定端口映射到宿主机的端口号
 
 docker stop $CONTAINER_ID
 docker-compose stop # 关闭当前项目容器
 
+docker rm name # 移除容器
+docker rm $(docker ps -a -q) # Delete all containers
+docker rmi $(docker images | grep '^<none>' | awk '{print $3}') # Delete all untagged containers
+docker rmi $(docker images | grep '^<none>' | awk '{print $3}') # Delete all untagged containers
+
 docker system df # See all space Docker take up
 docker inspect [CONTAINER ID] | grep -wm1 IPAddress | cut -d '"' -f 4 # Get IP address of running container
 docker kill $(docker ps -q) #Kill all running containers
-docker rmi $(docker images | grep '^<none>' | awk '{print $3}') # Delete all untagged containers
-
-# 如果要为底层主机添加卷（例如对于 DB 持久性数据），则应该在镜像内定义映射卷： RUN
-mkdir -p /data VOLUME ["/data"]
-sudo docker run -d -v /data:/data bat/spark
-
-sudo docker create -v /dbdata --name dbstore training/postgres /bin/true
-sudo docker run -d --volumes-from dbstore --name db1 training/postgres
-
-sudo docker run -d --add-host=SERVER_NAME:127.0.0.1 bat/spark
 
 docker exec -it [id]|[name] /bin/bash  #i是交互式操作，t是一个终端，d指的是在后台运行
 ```

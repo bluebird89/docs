@@ -292,6 +292,24 @@ set global general_log = on;
 mysqld --initialize
 ```
 
+## 原理
+
+* 构成
+    - server 层
+        + 连接器：负责将 mysql 客户端和服务端建立连接，连接成功后，会获取当前连接用户的权限。这里获取到的权限对整个连接都有效，一旦连接成功后，如果使用管理员账号对该用户更改权限，当前连接中的拥有的权限保持不变，只有等到下次重新连接才会更新权限。
+        + 查询缓存
+            * 在执行查询之前，mysql 会去看下有没有该条语句的缓存内容，如果有缓存直接从缓存中读取并返回数据，不再执行后面的步骤了，结束查询操作。
+            * 如果没有缓存则继续往后执行，并将执行结果和语句保存在缓存中。
+            * 注意在 mysql8 后已经没有查询缓存这个功能了，因为这个缓存非常容易被清空掉，命中率比较低。只要对表有一个更新，这个表上的所有缓存就会被清空，因此刚缓存下来的内容，还没来得及用就被另一个更新给清空了。
+        + 分析器：对 sql 语句进行语法和语义分析，检查单词是否拼写错误，还有检查要查询的表或字段是否存在。检测出有错误就会返回类似 "You have an error in your sql" 这样的错误信息，并结束查询操作。
+        + 优化器
+            * 通常对于同一个 sql 语句，mysql 内部可能存在多种执行方案，比如存在多个索引时，该选择哪个索引，多个表关联查询时，怎么确认各个表的连接顺序。
+            * 执行结果都一样，但是执行效率不一样，所以 mysql 在执行之前需要尝试找出一个最优的方案来，这就是优化器的主要工作。也会有选择错误方案的时候
+        + 执行器
+            * 在执行语句之前会判断权限，如果没有对应的权限则会直接返回并提示没有相关权限。 注意如果是在前面的查询缓存中查到缓存之后，也会在返回结果前做权限校验的。
+            * 按照选定的方案执行 sql 语句，打开表，调用存储引擎提供的接口去查询并返回结果集数据
+    - 存储层主要是用来存储和查询数据的，常用的存储引擎有 InnoDB、MyISAM
+
 ## 客户端
 
 - 命令行
@@ -959,6 +977,19 @@ select * from 表名 别名 where (别名.字段1,别名.字段2) in  (select �
 delete from 表名 where 字段名 in  (select 字段名 from 表名 group by 字段名 having count(字段名) > 1)   and 主键ID not in  (select min(主键ID) from 表名 group by 字段名 having count(字段名 )>1)
 #多个字段
 delete from 表名 别名 where (别名.字段1,别名.字段2) in  (select 字段1,字段2 from 表名 group by 字段1,字段2 having count(*) > 1) and 主键ID not in (select min(主键ID) from 表名 group by 字段1,字段2 having count(*)>1)
+
+UPDATE categories SET
+    display_order = CASE id
+        WHEN 1 THEN 3
+        WHEN 2 THEN 4
+        WHEN 3 THEN 5
+    END,
+    title = CASE id
+        WHEN 1 THEN 'New Title 1'
+        WHEN 2 THEN 'New Title 2'
+        WHEN 3 THEN 'New Title 3'
+    END
+WHERE id IN (1,2,3)
 ```
 
 ## 函数
@@ -1162,7 +1193,7 @@ if (updated row > 0) {
 
 二级索引维护一套B+树与主键id的数据结构（树形结构），除了行锁，还会在行锁之间加gap锁，保证数据无法添加
 
-### 索引
+## 索引
 
 索引：帮助mysql高效获取数据的数据结构，索引(mysql中叫"键(key)") 数据越大越重要。索引好比一本书，为了找到书中特定的话题，查看目录，获得页码。获取物理位置。大多数MySQL索引(PRIMARY KEY、UNIQUE、INDEX和FULLTEXT)使用B树中存储。空间列类型的索引使用R-树，MEMORY表支持hash索引。存储引擎用于快速查找记录的一种数据结构，通过合理的使用数据库索引可以大大提高系统的访问性能。大大减轻了服务器需要扫描的数据量，从而提高了数据的检索速度；帮助服务器避免排序和临时表；可以将随机 I/O 变为顺序 I/O
 
@@ -1185,7 +1216,7 @@ if (updated row > 0) {
     - 组合索引：一个索引可以包括15个列。
         + 建立多个单列索引，查询时和上述的组合索引效率也会大不一样，远远低于我们的组合索引。虽然此时有了三个索引，但MySQL只能用到其中的那个它认为似乎是最有效率的单列索引。
         + 最左前缀（Leftmost Prefixing）。假如有一个多列索引为key(firstname lastname age)，当搜索条件是以下各种列的组合和顺序时，MySQL将使用该多列索引：firstname，lastname，age  firstname，lastname firstname
-        + (a,b,c)复合索引， ac 可以使用到索引
+        + (a,b,c)复合索引， ac 可以使用到索引a
 * 如果是CHAR，VARCHAR类型，length可以小于字段实际长度；如果是BLOB和TEXT类型，必须指定 length
 
 合理的建立索引的建议
@@ -1206,7 +1237,7 @@ if (updated row > 0) {
 * 虽然索引大大提高了查询速度，同时却会降低更新表的速度，如对表进行INSERT、UPDATE和DELETE。因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。
 * 建立索引会占用磁盘空间的索引文件。一般情况这个问题不太严重，但如果你在一个大表上创建了多种组合索引，索引文件的会膨胀很快。
 
-### B+Tree树结构的索引规则
+### B+Tree树
 
 B-tree 索引:大多数谈及的索引类型就是B-tree类型, 可以在create table 和其他命令使用它 myisam使用前缀压缩以减小索引，Innodb不会压缩索引，myiam索引按照行存储物理位置引用被索引的行，Innodb按照主键值引用行，B-tree数据存储是有序的，按照顺序保存了索引的列，加速了数据访问，存储引擎不会扫描整个表得到需要的数据。
 
@@ -1226,6 +1257,55 @@ B-tree 索引:大多数谈及的索引类型就是B-tree类型, 可以在create 
 * 覆盖索引：索引（如：组合索引）中包含所有要查询的字段的值，查看是否使用了覆盖索引可以通过执行计划中的Extra中的值为Using index。索引支持高效查找行，mysql也能使用索引来接收列的数据。这样不用读取行数据，当发起一个被索引覆盖的查询，explain解释器的extra列看到 using index。避免了读取磁盘数据文件中的行，Innodb的辅助索引叶子节点包含的是主键列，所以主键一定是被索引覆盖的。
 ![clustered-index](../_static/clustered-index.jpg "clustered-index")
 ![index](../_static/index.jpg "index")
+
+
+
+
+## partition
+
+```sql
+use ecommerce;
+CREATE TABLE employees (
+  id INT NOT NULL,
+  fname VARCHAR(30),
+  lname VARCHAR(30),
+  birth TIMESTAMP,
+  hired DATE NOT NULL DEFAULT '1970-01-01',
+  separated DATE NOT NULL DEFAULT '9999-12-31',
+  job_code INT NOT NULL,
+  store_id INT NOT NULL
+  )
+  partition BY RANGE (store_id) (
+  partition p0 VALUES LESS THAN (10000),
+  partition p1 VALUES LESS THAN (50000),
+  partition p2 VALUES LESS THAN (100000),
+  partition p3 VALUES LESS THAN (150000),
+  Partition p4 VALUES LESS THAN MAXVALUE
+  );
+```
+
+## 存储过程
+
+```sql
+use ecommerce;
+DROP PROCEDURE IF EXISTS BatchInser;
+delimiter //   -- 把界定符改成双斜杠
+CREATE PROCEDURE BatchInsert(IN init INT, IN loop_time INT)  -- 第一个参数为初始ID号（可自定义），第二个位生成MySQL记录个数
+  BEGIN
+      DECLARE Var INT;
+      DECLARE ID INT;
+      SET Var = 0;
+      SET ID = init;
+      WHILE Var < loop_time DO
+          insert into employees(id, fname, lname, birth, hired, separated, job_code, store_id) values (ID, CONCAT('chen', ID), CONCAT('haixiang', ID), Now(), Now(), Now(), 1, ID);
+          SET ID = ID + 1;
+          SET Var = Var + 1;
+      END WHILE;
+  END;
+  //
+delimiter ;  -- 界定符改回分号
+CALL BatchInsert(30036, 200000);   -- 调用存储过程插入函数
+```
 
 ## 问题处理
 

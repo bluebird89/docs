@@ -385,6 +385,15 @@ umount  /media/cdrom  # 卸载系统镜像 退出挂载目录，才能卸载
 
 vi /etc/fstab   # 添加以下代码。实现开机自动挂载
 /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom   iso9660    defaults,ro,loop  0 0
+
+mount /dev/fd0 /mnt/floppy 挂载一个软盘
+mount /dev/cdrom /mnt/cdrom 挂载一个cdrom或dvdrom
+mount /dev/hdc /mnt/cdrecorder 挂载一个cdrw或dvdrom
+mount /dev/hdb /mnt/cdrecorder 挂载一个cdrw或dvdrom
+mount -o loop file.iso /mnt/cdrom 挂载一个文件或ISO镜像文件
+mount -t vfat /dev/hda5 /mnt/hda5 挂载一个Windows FAT32文件系统
+mount /dev/sda1 /mnt/usbdisk 挂载一个usb 捷盘或闪存设备
+mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share 挂载一个windows网络共享
 ```
 
 ## 硬件
@@ -392,8 +401,21 @@ vi /etc/fstab   # 添加以下代码。实现开机自动挂载
 ```sh
 fdisk -l # 查看设备名
 
+dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI)
+hdparm -i /dev/hda 罗列一个磁盘的架构特性
+hdparm -tT /dev/sda 在磁盘上执行测试性读取操作
+cat /proc/cpuinfo 显示CPU info的信息
+cat /proc/interrupts 显示中断
+cat /proc/meminfo 校验内存使用
+cat /proc/swaps 显示哪些swap被使用
+cat /proc/version 显示内核的版本
+cat /proc/net/dev 显示网络适配器及统计
+cat /proc/mounts 显示已加载的文件系统
+lspci -tv 罗列 PCI 设备
+lsusb -tv 显示 USB 设备
+
 # 统计数据块使用情况
-df -T # 可以用来查看分区的文件系统
+df -T # 查看分区的文件系统
 df -h # Human-readable 显示目前所有文件系统的可用空间及使用情形
 df -k
 
@@ -538,7 +560,10 @@ dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on com
 
 ```sh
 # 查看linux系统信息
+arch # 显示机器的处理器架构
 uname -a # 显示电脑以及操作系统的相关信息
+uname -m # 显示机器的处理器架构
+uname -r # 显示正在使用的内核版本
 cat /proc/version # 说明正在运行的内核版本
 cat /etc/issue # 显示的是发行版本信息
 lsb_release -a
@@ -547,6 +572,8 @@ date # 获取当前时间
 date +%Y-%m-%d
 date +%Y-%m-%d  --date="-1 day" #加减也可以 month | year
 date -s "2016-07-28 16:12:00" ## 修改时间
+
+clock -w # 将时间修改保存到 BIOS
 
 --version/-V # 查看某个程序的版本
 history # 显示历史
@@ -785,7 +812,13 @@ tcpdump -i eth1 host 172.16.7.206 and port 80 -w /tmp/xxx.cap
 ```sh
 du # 命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
 
-ls -a|l|h|d directory # list 列出某文件夹下的文件，添加参数可实现更细致的功能  -a:列出所有文件，包括隐藏文件 -l:列出文件及其详细信息 -h:文件大小 -d:显示目录本身
+ls -F # 查看目录中的文件
+# -a:列出所有文件，包括隐藏文件
+# -l:列出文件及其详细信息
+# -h:文件大小
+# -d:显示目录本身
+ls -a|l|h|d directory # list 列出某文件夹下的文件，添加参数可实现更细致的功能
+
 # -rw-------    1   root    root    1190    08-10 23:37     anaconda-ks.cfg 长格式实例： 权限位 引用计数 属主、组 大小 最后修改时间
 tree # 查看文件列表
 
@@ -795,6 +828,7 @@ cd -  # 返回进入此目录之前所在的目录
 
 touch # 创建空文件 或 修改文件时间 touch file{1..5}.txt 使用通配符批量创建 5 个文件
 touch  somefile.1  ## 创建一个空文件
+touch -t 0712250000 file1 # 修改一个文件或目录的时间戳 - (YYMMDDhhmm)
 
 echo "hi,boy" > somefile.2  ## 利用重定向“>”的功能，将一条指令的输出结果写入到一个文件中，会覆盖原文件内容，如果指定的文件不存在，则会创建出来
 echo "hi baby" >> somefile.2  ## 将一条指令的输出结果追加到一个文件中，不会覆盖原文件内容
@@ -912,6 +946,11 @@ tree -d # Lists contents of a directory in tree-like format
 
 find . -type f -name "*.css"  # List all CSS files (including subdirectories)
 find . -type f \( -name "*.css" -or -name "*.html" \) # List all CSS or HTML files:
+find / -user user1 搜索属于用户 'user1' 的文件和目录
+find /usr/bin -type f -atime +100 搜索在过去100天内未被使用过的执行文件
+find /usr/bin -type f -mtime -10 搜索在10天内被创建或者修改过的文件
+find / -name \*.rpm -exec chmod 755 '{}' \; 搜索以 '.rpm' 结尾的文件并定义其权限
+find / -xdev -name \*.rpm 搜索以 '.rpm' 结尾的文件，忽略光驱、捷盘等可移动设备
 ```
 
 * `dd if=/dev/zero of=virtual.img bs=1M count=256` 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
@@ -1012,6 +1051,10 @@ usermod -aG wheel username
 etc/group
 chgrp [-options] [群组名] [文档路径]
 
+groupadd group_name 创建一个新用户组
+groupdel group_name 删除一个用户组
+groupmod -n new_group_name old_group_name 重命名一个用户组
+
 choot
 ```
 
@@ -1111,7 +1154,7 @@ get /etc/group
 
 ```sh
 ### sogou
-sogou_pinyin_linux_1.0.0.0033_amd64.deb # get package: download 
+sogou_pinyin_linux_1.0.0.0033_amd64.deb # get package: download
 sudo dpkg  -i   sogou_pinyin_linux_1.0.0.0033_amd64.deb
 # config: system setting->language support choose language,key input fcitx
 

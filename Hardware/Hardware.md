@@ -17,3 +17,8 @@
 ## 工具
 
 * [](https://xod.io/):A VISUAL PROGRAMMING LANGUAGE FOR MICROCONTROLLERS
+
+## 渠道
+
+* [Lenovo](https://www.corporateperks.com/)
+

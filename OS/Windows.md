@@ -9,10 +9,12 @@ Windows是最烂的开发平台
 * 快速启动
   - launchy
   - [Wox-launcher/Wox](https://github.com/Wox-launcher/Wox):Launcher for Windows, an alternative to Alfred and Launchy. http://wox.one
-  - Rolan
+  - Rolan 轻量级桌面启动器
 * 资源管理器: Clover Total Commander
 * 快捷键：AutoHotKey
-* 本地搜索：Listary Everything
+* 本地搜索
+  - [Listary](https://www.listary.com/) :Windows 文件浏览增强工具 极速的文件和APP搜索工具，可大幅度提高打开文件和app的速度
+  - Everything
 * Notepad++ 文本编辑
 * 编辑器：Atom SublimeText3
 * 工具：ShareX
@@ -23,8 +25,6 @@ Windows是最烂的开发平台
 * vagrant
 * VistaSwitcher：程序切换工具
 * StrokeIt:让鼠标手势无处不在
-* Rolan 轻量级桌面启动器
-* Listary :Windows 文件浏览增强工具
 * f.lux 随时间改变屏幕色温
 * 全局鼠标手势：WGestures
 * 字体渲染增强：MacType
@@ -109,6 +109,13 @@ choco install mysql.workbench
 
 cinst Atom
 ```
+
+## 安装
+
+* 先分区格式化，主分区激活
+    - 主分区
+    - 逻辑分区
+* 更新引导记录
 
 ## 配置
 
@@ -245,7 +252,7 @@ sudo apt-get install zeal
 
 * [felixrieseberg/windows95](https://github.com/felixrieseberg/windows95):💩🚀 Windows 95 in Electron. Runs on macOS, Linux, and Windows.
 * [Awesome-Windows/Awesome](https://github.com/Awesome-Windows/Awesome):An awesome & curated list of best applications and tools for Windows.
-* [Windows10 LTSB]()
+* [Windows10 LTSB](https://msdn.itellyou.cn)
 * [Microsoft/MS-DOS](https://github.com/Microsoft/MS-DOS):The original sources of MS-DOS 1.25 and 2.0, for reference purposes
 
 ## 开发
