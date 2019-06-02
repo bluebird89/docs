@@ -63,6 +63,13 @@ ETL(Extraction-Transformation-Loading)：负责将分布的、异构数据源中
 * 《机器学习》（俗称西瓜书） 周志华著，清华大学出版社；
 * 《分布式系统：概念与设计（原书第五版）》，机械工业出版社；
 * 《Spark大数据处理：技术、应用》，机械工业出版社。
+* 《Hadoop: The Definitive Guide: Storage and Analysis at Internet Scale》 Tom White
+* 《Learning Spark: Lightning-Fast Big Data Analysis》 Holden Karau, Andy Kowinski, Mark Hamstra, Matei Zaharia
+* 《Data Architecture: A Primer for the Data Scientist: Big Data, Data Warehouse and Data Vault》 W.H. Inmon, Daniel Linstedt
+* 《SQL反模式》 Bill Karwin
+* 《事务处理：概念与技术》 Jim Gray, Andreas Reuter
+* 《Designing Data-Intensive Applications》 Martin Kleppmann
+* 《Streaming Systems》 Tyler Akidau, Slava Chernyak, Reuven Lax
 
 ## 视图
 

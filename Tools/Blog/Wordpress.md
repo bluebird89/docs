@@ -26,6 +26,10 @@ WordPress, Git-ified. Synced via SVN every 15 minutes, including branches and ta
 
 * [roots/sage](https://github.com/roots/sage):WordPress starter theme with a modern development workflow https://roots.io/sage/
 
+## 优化
+
+* 启动gzip压缩、安装wp super cache、使用公共cdn服务器
+
 ## 参考
 
 * [kinsta](https://kinsta.com/):https://kinsta.com/resources/

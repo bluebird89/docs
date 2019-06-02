@@ -2,13 +2,26 @@
 
 Spring Boot http://projects.spring.io/spring-boot
 
-
 ## install
 
 ```sh
 sdk install springboot
 sdk ls springboot
+
+brew tap pivotal/tap
+brew install springboot
+
+spring --version
 ```
+
+## admin
+
+* [codecentric/spring-boot-admin](https://github.com/codecentric/spring-boot-admin):Admin UI for administration of spring boot applications
+
+## 项目
+
+* [小柒2012 / spring-boot-seckill](https://gitee.com/52itstyle/spring-boot-seckill):从0到1构建分布式秒杀系统，脱离案例讲架构都是耍流氓
+https://blog.52itstyle.vip/archives/2853/
 
 ## 教程
 

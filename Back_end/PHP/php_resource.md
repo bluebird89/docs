@@ -30,13 +30,13 @@
 ##  框架
 
 * 通用
+    - [Laravel 5](https://laravel.com/): 另一个PHP框架 (L5)
+    - [Symfony](https://symfony.com/): 一个独立组件组成的框架 (SF)
     - [Aura PHP](http://auraphp.com/): 一个独立的组件框架
     - [CakePHP](https://cakephp.org/): 一个快速应用程序开发框架 (CP)
-    - [Laravel 5](https://laravel.com/): 另一个PHP框架 (L5)
     - [Nette](https://nette.org): 另一个由个体组件组成的框架
     - [Phalcon](https://phalconphp.com/en/): 通过C扩展实现的框架
     - [PPI Framework 2](http://www.ppi.io): 一个互操作性框架
-    - [Symfony](https://symfony.com/): 一个独立组件组成的框架 (SF)
     - [Yii2](https://github.com/yiisoft/yii2/): 另一个PHP框架
     - [Zend Framework 2](https://framework.zend.com): 另一个由独立组件组成的框架 (ZF2)
     - [Radar](https://github.com/radarphp/Radar.Adr): 一个基于PHP的Action-Domain-Responder实现
@@ -58,7 +58,10 @@
     - [manaphp/manaphp](https://github.com/manaphp/manaphp):ManaPHP Framework
     - [Elgg](https://github.com/Elgg/Elgg )
         + <http://learn.elgg.org/en/stable/guides>
-    - [Kohana](http://kohanaframework.org/):Deprecated PHP Framework last stable release: 3.3.6 / 25. July 2016.
+* 异步框架
+    - Swoole
+    - Amp
+    - ReactPHP
 * 论坛
     - [flarum/flarum](https://github.com/flarum/flarum):Composer starter project for Flarum https://flarum.org
 * 电商
@@ -310,6 +313,8 @@ open http://127.0.0.1:8000
     - [TechEmpower/FrameworkBenchmarks](https://github.com/TechEmpower/FrameworkBenchmarks):Source for the TechEmpower Framework Benchmarks project https://www.techempower.com/benchmarks/
     - [exakat/php-static-analysis-tools](https://github.com/exakat/php-static-analysis-tools):A reviewed list of useful PHP static analysis tools
     - [dreamans/phpAnalysis](https://github.com/dreamans/phpAnalysis):phpAnalysis - PHP应用性能分析系统
+    - Psalm
+    - Phan
     - [phpstan/phpstan](https://github.com/phpstan/phpstan):PHP Static Analysis Tool - discover bugs in your code without running it!
     - [didi/rdebug](https://github.com/didi/rdebug):Rdebug — Real Debugger
 * Architectural 相关的设计模式库，组织代码编程的方法和途径
