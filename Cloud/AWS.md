@@ -19,6 +19,7 @@
 * [awslabs/aws-devops-essential](https://github.com/awslabs/aws-devops-essential):In few hours, quickly learn how to effectively leverage various AWS services to improve developer productivity and reduce the overall time to market for new product capabilities.
 * [mthenw/awesome-layers](https://github.com/mthenw/awesome-layers):λ A curated list of awesome AWS Lambda Layers.
 * [lambci/lambci](https://github.com/lambci/lambci):A continuous integration system built on AWS Lambda
+* [localstack/localstack](https://github.com/localstack/localstack):💻 A fully functional local AWS cloud stack. Develop and test your cloud & Serverless apps offline! https://localstack.cloud
 
 ## 参考
 

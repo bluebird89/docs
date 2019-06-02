@@ -128,9 +128,21 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 * [pinterest/teletraan](https://github.com/pinterest/teletraan):Teletraan is Pinterest's deploy system.
 * [NullArray/AutoSploit](https://github.com/NullArray/AutoSploit):Automated Mass Exploiter
 * [TeaWeb/build](https://github.com/TeaWeb/build):TeaWeb是集静态资源、缓存、代理、统计、监控于一体的可视化智能WebServer。
-
+* [Nethogs](http://sourceforge.net/projects/nethogs/files/nethogs/0.8/nethogs-0.8.0.tar.gz/download):终端下的网络流量监控工具可以直观的显示每个进程占用的带宽
+* [IOZone](http://www.iozone.org/src/current/): Linux 文件系统性能测试工具 可以测试不同的操作系统中文件系统的读写性能 `./iozone -a -n 512m -g 16g -i 0 -i 1 -i 5 -f /mnt/iozone -Rb ./iozone.xls`
+* [IOTop](link) 实时监控磁盘
+* IPtraf 是一个运行在 Linux 下的简单的网络状况分析工具
+* iftop 是类似于 linux 下面 top 的实时流量监控工具。比 iptraf 直观些
+* HTop 是一个 Linux 下的交互式的进程浏览器可以用来替换 Linux 下的 top 命令
+* [NMON](http://sourceforge.jp/projects/sfnet_nmon/releases/) 是一种在 AIX 与各种 Linux 操作系统上广泛使用的监控与分析工具
+* MultiTail 是在控制台打开多个窗口用来实现同时监控多个日志文档、类似 tail 命令的功能的软件
+* [Fail2ban](http://www.fail2ban.org/wiki/index.php/Downloads) 可以监视你的系统日志然后匹配日志的错误信息正则式匹配执行相应的屏蔽动作一般情况下是调用防火墙屏蔽
+* Tmux 是一个优秀的终端复用软件类似 GNU Screen 比 Screen 更加方面、灵活和高效。为了确保连接 SSH 时掉线不影响任务运行
+* 页面显示磁盘空间使用情况 - [Agedu](http://www.chiark.greenend.org.uk/~sgtatham/agedu/)
+* [NMap](http://nmap.org/download.html)是 Linux 下的网络连接扫描和嗅探工具包用来扫描网上电脑开放的网络连接端。
+* [Httperf](http://code.google.com/p/httperf/downloads/list) 比 ab 更强大，能测试出 web 服务能承载的最大服务量及发现潜在问题；比如：内存使用、稳定性。最大优势：可以指定规律进行压力测试，模拟真实环境。
 
 ## 参考
 
 * [liquanzhou/ops_doc](https://github.com/liquanzhou/ops_doc):运维简洁实用手册
-* [ digitalocean tutorials](https://www.digitalocean.com/community/tutorials)
+* [digitalocean tutorials](https://www.digitalocean.com/community/tutorials)

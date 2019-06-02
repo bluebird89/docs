@@ -315,6 +315,7 @@ http {
 
 http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
 
+* backlog 默认位 128，1024 这个值换成自己正常的 QPS
 * First, the incoming URI will be normalized even before any of the location matching takes place. For example, First it will decode the “%XX” values in the URL.
 * It will also resolve the appropriate relative path components in the URL, if there are multiple slashes / in the URL, it will compress them into single slash etc. Only after this initial normalization of the URL, the location matching will come into play.
 * When there is no location modifier, it will just be treated as a prefix string to be matched in the URL.
@@ -323,7 +324,6 @@ http服务上支持若干虚拟主机，每个虚拟主机对应一个server配�
 * After the prefix match, nginx will then check for the regular expression location match in the order in which they are defined in the nginx configuration file.
 * So, the order in which you define the regular expression match in your configuration file is important. The moment nginx matches a regular expression location configuration, it will not look any further. So, use your important critical regular expression location match at the top of your configuration.
 * If there is no regular expression matching location is found, then Nginx will use the previously matched prefix location configuration.
-
 * location匹配优先级:一次请求只能匹配一个location，一旦匹配成功后，便不再继续匹配其余location;
     - =：URI的精确匹配，其后多一个字符都不可以，精确匹配。match only the following EXACT URL
     - ~：区分大小写的正则匹配；case sensitive regular expression match modifier
@@ -344,7 +344,7 @@ http服务上支持若干虚拟主机，每个虚拟主机对应一个server配�
 ```
 server {
     # nginx监听的端口，Mac下默认为8080，小于1024的要以root启动。listen:*:8080
-    listen       [127.0.0.1]:80 [default];
+    listen       [127.0.0.1]:80 [default] backlog = 1024;
     # 基于名称和IP的虚拟主机配置, 可以通过正则匹配
     server_name  www.exam.com .... ~^www\d+\.myserver\.com$;
     client_max_body_size 1024M;
