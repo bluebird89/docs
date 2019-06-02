@@ -85,7 +85,7 @@
 * 《解析极限编程：拥抱变化》
 * 《[精通正则表达式（第3版）](https://www.amazon.cn/gp/product/B008UCHA58)》
 * 《[编译原理（第2版）](https://www.amazon.cn/gp/product/B001NGO85I)》龙书
-* 《[重构：改善既有代码的设计(Refactoring: Improving the Design of Existing Code)](https://www.amazon.cn/gp/product/B011LPUB42)》
+* 《[重构：改善既有代码的设计(Refactoring: Improving the Design of Existing Code)](https://www.amazon.cn/gp/product/B011LPUB42)》 Martin Fowler
 * 《[七周七语言：理解多种编程范型](https://www.amazon.cn/gp/product/B00ALPRM3M)》
 * 《[调试九法：软硬件错误的排查之道](https://www.amazon.cn/gp/product/B00CBBLUFK)》
 * 《程序设计语言：实践之路（第3版）》
@@ -563,8 +563,8 @@
 * X的奇幻之旅
 * 《伊卡洛斯之陨》——彼得·勃鲁盖尔
 * 奇点临近 雷·库兹韦尔
-* 失控 凯文·凯利
-* 《翻译例句词典》
+* 《失控：机器、社会与经济的新生物学》 Kevin Kelly
+* 《翻译例句词典》 W.Brian Arthur
 
 * Evolutionary Architecture
 * Clean Code, Design Patterns, DDD

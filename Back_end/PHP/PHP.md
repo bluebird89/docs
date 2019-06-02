@@ -18,6 +18,11 @@ The PHP Interpreter <http://www.php.net>
 * PHP 作为一门动态脚本语言，优点是开发方便效率高。缺点就是性能差。在密集运算的场景下比 C 、 C++ 相差几十倍甚至上百倍。另外 PHP 不可以直接操作底层，需要依赖扩展库来提供 API 实现。PHP 程序员可以学习一门静态编译语言作为补充实现动静互补，C/C++/Go 都是不错的选择。而且静态语言的编程体验与动态语言完全不同，学习过程可以让你得到更大的提升。 掌握 C/C++ 语言后，还可以阅读 PHP 、 Swoole 、 Nginx 、Redis 、 Linux内核 等开源软件的源码，了解其底层运行原理。 现在最新版本的Swoole提供了C++扩展模块的支持，封装了Zend API，用C++操作PHP变得很简单，可以用C++实现PHP扩展函数和类。
 * PHP
     * 7.1 :2015.12.3 性能提升
+        - 减少内存分配次数
+        + 多使用栈内存
+        + 缓存数组的hash值
+        + 字符串解析成桉树改为宏展开
+        + 使用大块连续内存代替小块破碎内存
     * 7.2 JIT(JUST_IN_TIME)
     * 8:实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
 
@@ -422,27 +427,37 @@ print # 一个语法结构(language constructs), 他并不是一个函数, 参�
 
 #### 复合类型
 
-- Array（数组）:一个有序映射。映射是一种把 values 关联到 keys 的类型。因此可以把它当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性
+* Array（数组）:一个有序映射。映射是一种把 values 关联到 keys 的类型。因此可以把它当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性
     + key 会有如下的强制转换：
         + 包含有合法整型值的字符串会被转换为整型。例如键名 "8" 实际会被储存为 8。但是 "08" 则不会强制转换，因为其不是一个合法的十进制数值。
         + 浮点数也会被转换为整型，意味着其小数部分会被舍去。例如键名 8.7 实际会被储存为 8。
         + 布尔值也会被转换成整型。即键名 true 实际会被储存为 1 而键名 false 会被储存为 0。
         + Null 会被转换为空字符串，即键名 null 实际会被储存为 ""。
         + 数组和对象不能被用为键名。坚持这么做会导致警告：Illegal offset type。
-    + 索引数组
-    + 关联数组
-    + 多维数组
-- Object（对象）
-- callback:接受用户自定义的回调函数作为参数。回调函数不止可以是简单函数，还可以是对象的方法，包括静态类方法。
+    - 类型
+        * 索引数组
+        * 关联数组
+        * 多维数组
+    + 方法
+        * in_array()
+        * array_filter() 过滤数组中的所有值为空的元素
+        * array_reduce($source, function(){}, $distination)
+        * array_walk_recursive()
+        * array_map():处理后的数组, 要得到处理后的元素值,需要return返回
+        * array_walk():返回true或者false,要得到处理后的元素值，需要在传入参数值加 & 引用符号
+        * array_column($array, cloumnName[, indexCloumn])
+* Object（对象）
+* callback:接受用户自定义的回调函数作为参数。回调函数不止可以是简单函数，还可以是对象的方法，包括静态类方法。
 * 资源
 * 类型转换
     - 乘法运算符"*"。如果任何一个操作数是float，则所有的操作数都被当成float，结果也是float。否则操作数会被解释为integer，结果也是integer。并没有改变这些操作数本身的类型；改变的仅是这些操作数如何被求值以及表达式本身的类型
 * 类型判断
     - gettype()
     - empty()
-    - is_null()
     - isset()
+    - is_null()
     - boolean
+    - is_numeric()
 
 ```php
 # array
@@ -600,6 +615,36 @@ call_user_func('my_callback_function');
 $foo = $foo * 1.3;  // $foo 现在是一个浮点数 (2.6)
 $foo = 5 * "10 Little Piggies"; // $foo 是整数 (50)
 $foo = 5 * "10 Small Pigs";     // $foo 是整数 (50)
+
+function array2gbk($array)
+{
+    array_walk($array, function(&$value) {
+        $value = iconv('utf-8', 'gbk', $value);
+    });
+
+    return $array;
+}
+
+function array2gbk($array)
+{
+    $array = array_map(function($value){
+        return iconv('utf-8', 'gbk', $value);
+    }, $array);
+
+    return $array;
+}
+
+$user = array(
+    '0' => array('id' => 100, 'username' => 'a1'),
+    '1' => array('id' => 101, 'username' => 'a2'),
+    '2' => array('id' => 102, 'username' => 'a3'),
+    '3' => array('id' => 103, 'username' => 'a4'),
+    '4' => array('id' => 104, 'username' => 'a5'),
+);
+$username = array();
+array_walk($user, function($value, $key) use (&$username){
+    $username[] = $value['username'];
+});
 ```
 
 ### 控制语句
@@ -2094,19 +2139,35 @@ $cat = new \Animal\Cat();
     - 8:JSON_HEX_QUOT:所有的 " 转换成 \u0022
     - 16:JSON_FORCE_OBJECT:使一个非关联数组输出一个类（Object）而非数组。 在数组为空而接受者需要一个类（Object）的时候尤其有用
     - 32:JSON_NUMERIC_CHECK:将所有数字字符串编码成数字（numbers）
-    - 64:JSON_UNESCAPED_SLASHES:不要编码 /
+    - 64:JSON_UNESCAPED_SLASHES:不要编码 /： 已转义用htmlspecialchars_decode()处理
     - 128:JSON_PRETTY_PRINT:用空白字符格式化返回的数据
     - 256:JSON_UNESCAPED_UNICODE:以字面编码多字节 Unicode 字符（默认是编码成 \uXXXX）
     - 512:JSON_PARTIAL_OUTPUT_ON_ERROR:Substitute some unencodable values instead of failing
     - 1024:JSON_PRESERVE_ZERO_FRACTION:Ensures that float values are always encoded as a float value
 * json_decode()函数解码JSON字符串：将JSON字符串转换为PHP变量
+    - 字符串要求
+        + 使用UTF-8编码
+        + 不能在最后元素有逗号
+        + 不能使用单引号
+        + 不能有\r,\t，如果有请替换
+    - 
 * json_last_error_msg — Returns the error string of the last json_encode() or json_decode() call
-* json_last_error — 返回最后发生的错误
+* int json_last_error ( void ) — 返回最后发生的错误
+    - JSON_ERROR_NONE   没有错误发生   
+    - JSON_ERROR_DEPTH    到达了最大堆栈深度    
+    - JSON_ERROR_STATE_MISMATCH   无效或异常的 JSON  
+    - JSON_ERROR_CTRL_CHAR    控制字符错误，可能是编码不对   
+    - JSON_ERROR_SYNTAX   语法错误     
+    - JSON_ERROR_UTF8 异常的 UTF-8 字符，也许是因为不正确的编码。   PHP 5.3.3
+    - JSON_ERROR_RECURSION    One or more recursive references in the value to be encoded PHP 5.5.0
+    - JSON_ERROR_INF_OR_NAN   One or more NAN or INF values in the value to be encoded    PHP 5.5.0
+    - JSON_ERROR_UNSUPPORTED_TYPE 指定的类型，值无法编码。    PHP 5.5.0
+    - JSON_ERROR_INVALID_PROPERTY_NAME    指定的属性名无法编码。 PHP 7.0.0
+    - JSON_ERROR_UTF16    畸形的 UTF-16 字符，可能因为字符编码不正确。
 
 ```php
 <?php
 $a = array('<foo>',"'bar'",'"baz"','&blong&', "\xc3\xa9");
-
 echo "Normal: ",  json_encode($a), "\n"; # Normal: ["<foo>","'bar'","\"baz\"","&blong&","\u00e9"]
 echo "Tags: ",    json_encode($a, JSON_HEX_TAG), "\n"; # Tags: ["\u003Cfoo\u003E","'bar'","\"baz\"","&blong&","\u00e9"]
 echo "Apos: ",    json_encode($a, JSON_HEX_APOS), "\n"; # Apos: ["<foo>","\u0027bar\u0027","\"baz\"","&blong&","\u00e9"]
@@ -2116,17 +2177,14 @@ echo "Unicode: ", json_encode($a, JSON_UNESCAPED_UNICODE), "\n"; # Unicode: ["<f
 echo "All: ",     json_encode($a, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE), "\n\n"; # All: ["\u003Cfoo\u003E","\u0027bar\u0027","\u0022baz\u0022","\u0026blong\u0026","é"]
 
 $b = array();
-
 echo "Empty array output as array: ", json_encode($b), "\n"; # Empty array output as array: []
 echo "Empty array output as object: ", json_encode($b, JSON_FORCE_OBJECT), "\n\n"; # Empty array output as object: {}
 
 $c = array(array(1,2,3));
-
 echo "Non-associative array output as array: ", json_encode($c), "\n"; # Non-associative array output as array: [[1,2,3]]
 echo "Non-associative array output as object: ", json_encode($c, JSON_FORCE_OBJECT), "\n\n"; # Non-associative array output as object: {"0":{"0":1,"1":2,"2":3}}
 
 $d = array('foo' => 'bar', 'baz' => 'long');
-
 echo "Associative array always output as object: ", json_encode($d), "\n"; # Associative array always output as object: {"foo":"bar","baz":"long"}
 echo "Associative array always output as object: ", json_encode($d, JSON_FORCE_OBJECT), "\n\n"; # Associative array always output as object: {"foo":"bar","baz":"long"}
 ?>

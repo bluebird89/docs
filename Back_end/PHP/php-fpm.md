@@ -1,10 +1,11 @@
-# php-fpm
+# PHP-FPM (PHP-FastCGI Process Manager)
 
-FastCGI 应用速度很快是因为他们持久稳定。不必对每一个请求都启动和初始化。好处是 PHP 脚本运行速度提升 3-30 倍；
-PHP 解释程序被载入内存而不用每次需要时从存储器读取，极大的提升了依靠脚本运行的站点的性能；同时速度的提升并不会增加 CPU 的负担。
-常驻内存启动一些PHP进程待命，当请求进入时分配一个进程进行处理，PHP进程处理完毕后回收进程，但并不销毁进程，这让PHP也能应对高流量的访问请求。
-
-* nginx 一般是把请求发给fastcgi 管理进程处理，fascgi管理进程选择cgi 子进程处理结果，并返回给nginx
+* FastCGI 应用速度很快是因为他们持久稳定。不必对每一个请求都启动和初始化。好处是 PHP 脚本运行速度提升 3-30 倍；
+* PHP 解释程序被载入内存而不用每次需要时从存储器读取，极大的提升了依靠脚本运行的站点的性能；同时速度的提升并不会增加 CPU 的负担。
+* 常驻内存启动一些PHP进程待命，当请求进入时分配一个进程进行处理，PHP进程处理完毕后回收进程，但并不销毁进程，这让PHP也能应对高流量的访问请求
+* PHP-FPM 是 FastCGI 的实现，并提供了进程管理的功能。进程包含 master 进程和 worker 进程两种
+    - master 进程只有一个，负责监听端口，接收来自服务器的请求，
+    - worker 进程则一般有多个（具体数量根据实际需要进行配置），每个进程内部都会嵌入一个 PHP 解释器，是代码真正执行的地方。
 
 ## Mac
 
@@ -55,14 +56,29 @@ sudo systemctl status php7.3-fpm
 killall php-fpm
 ```
 
-## 监听服务
+## 服务
 
-* Unix domain socket:同一台操作系统上的两个或多个进程进行数据通信。与管道相比，Unix domain sockets 既可以使用字节流和数据队列，而管道通信则只能通过字节流。Unix domain sockets的接口和Internet socket很像，但它不使用网络底层协议来通信。Unix domain socket 的功能是POSIX操作系统里的一种组件。Unix domain sockets 使用系统文件的地址来作为自己的身份。它可以被系统进程引用。所以两个进程可以同时打开一个Unix domain sockets来进行通信。不过这种通信方式是发生在系统内核里而不会在网络里传播。压力比较满的时候，用套接字方式，效果确实比较好
-* TCP sockets:使用TCP端口连接127.0.0.1:9000
+* nginx 一般是把请求根据请求类型，加载 对应的 fast-cgi 模块，fascgi管理进程选择cgi 子进程处理结果，并返回给nginx
+* 通信方式
+    - Unix socket:又叫 IPC(inter-process communication 进程间通信) socket，用于实现同一主机上的进程间通信，这种方式需要在 nginx配置文件中填写 php-fpm 的 socket 文件位置。
+        + 与管道相比，Unix domain sockets 既可以使用字节流和数据队列，而管道通信则只能通过字节流。
+        + Unix domain sockets的接口和Internet socket很像，但它不使用网络底层协议来通信。
+        + Unix domain socket 的功能是POSIX操作系统里的一种组件。Unix domain sockets 使用系统文件的地址来作为自己的身份。它可以被系统进程引用。所以两个进程可以同时打开一个Unix domain sockets来进行通信。不过这种通信方式是发生在系统内核里而不会在网络里传播。压力比较满的时候，用套接字方式，效果确实比较好
+    - TCP sockets:使用TCP端口连接127.0.0.1:9000，可以跨服务器，当 nginx 和 php-fpm 不在同一台机器上时，只能使用这种方式
+    - Unix socket 不需要经过网络协议栈，不需要打包拆包、计算校验和、维护序号和应答等，只是将应用层数据从一个进程拷贝到另一个进程。所以其效率比 tcp socket 的方式要高，可减少不必要的 tcp 开销。
+    - unix socket 高并发时不稳定，连接数爆发时，会产生大量的长时缓存，在没有面向连接协议的支撑下，大数据包可能会直接出错不返回异常。而 tcp 这样的面向连接的协议，可以更好的保证通信的正确性和完整性。
+    - 由于 socket 文件本质上是一个文件，存在权限控制的问题，所以需要注意 nginx 进程的权限与 php-fpm 的权限问题，不然会提示无权限访问
 
 ```sh
 listen = 127.0.0.1:9000
-listen = /var/run/php5-fpm.sock
+listen = /var/run/php-fpm.sock
+
+location ~ \.php$ {
+    include /usr/local/etc/nginx/fastcgi.conf; #加载 nginx 的 fastcgi 模块
+    fastcgi_intercept_errors on;
+    fastcgi_pass   127.0.0.1:9000; # tcp 方式，php-fpm 监听的 IP 地址和端口
+   # fasrcgi_pass /usr/run/php-fpm.sock # unix socket 连接方式
+}
 ```
 
 ## 配置

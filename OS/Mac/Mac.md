@@ -549,7 +549,6 @@ iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配�
 ### workflows
 
 -   使用 Vagrant 或者 Docker（配合 docker-machine 和 docker-compose）
-
 -   用 Time Machine 做好备份
 
 ### Keyboard shortcuts

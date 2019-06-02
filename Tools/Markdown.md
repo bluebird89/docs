@@ -713,3 +713,4 @@ Actions->Insert Read More Comment *或者* `Command + .`
 - [mastering-markdown](https://guides.github.com/features/mastering-markdown/)
 - [js-sequence-diagrams](https://bramp.github.io/js-sequence-diagrams/):Turns text into UML sequence diagrams
 - [flowchart.js](http://adrai.github.io/flowchart.js/):Draws simple SVG flow chart diagrams from textual representation of the diagram
+- [adam-p/markdown-here](https://github.com/adam-p/markdown-here):Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. http://markdown-here.com
