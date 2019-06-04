@@ -6,7 +6,7 @@ Open source relational database management system
 
 * MariaDB
 * Percona:一个相对比较成熟的、优秀的MySQL分支版本，在性能提升、可靠性、管理型方面做了不少改善。与MySQL版本基本完全兼容，并且性能大约有20%以上的提升。
-* Mysql 5.7
+* Mysql 5.7.8
     - 对 JSON 的支持
     - the root MySQL user is set to authenticate using the auth_socket plugin by default rather than with a password.
 * [8.0](https://www.mysql.com/why-mysql/white-papers/whats-new-mysql-8-0/)
@@ -110,7 +110,7 @@ docker pull mysql
 docker run --name master -p 3306:3307 -e MYSQL_ROOT_PASSWORD=root -d mysql
 
 # Windows,管理员权限执行
-net start/stop mysql # win平台
+net start|stop mysql # win平台
 ```
 
 ### 配置
@@ -303,22 +303,20 @@ mysqld --initialize
             * 注意在 mysql8 后已经没有查询缓存这个功能了，因为这个缓存非常容易被清空掉，命中率比较低。只要对表有一个更新，这个表上的所有缓存就会被清空，因此刚缓存下来的内容，还没来得及用就被另一个更新给清空了。
         + 分析器：对 sql 语句进行语法和语义分析，检查单词是否拼写错误，还有检查要查询的表或字段是否存在。检测出有错误就会返回类似 "You have an error in your sql" 这样的错误信息，并结束查询操作。
         + 优化器
-            * 通常对于同一个 sql 语句，mysql 内部可能存在多种执行方案，比如存在多个索引时，该选择哪个索引，多个表关联查询时，怎么确认各个表的连接顺序。
+            * 通常对于同一个 sql 语句，mysql 内部可能存在多种执行方案，比如存在多个索引时，该选择哪个索引，多个表关联查询时，怎么确认各个表的连接顺序
             * 执行结果都一样，但是执行效率不一样，所以 mysql 在执行之前需要尝试找出一个最优的方案来，这就是优化器的主要工作。也会有选择错误方案的时候
+            * MYSQL 收到一条查询请求时，会首先通过关键字对SQL语句进行解析，生成一颗“解析树”，
+            * 然后预处理器会校验“解析树”是否合法(主要校验数据列和表明是否存在，别名是否有歧义等)，
+            * 当“解析树”被认为合法后，查询优化器会对这颗“解析树”进行优化，并确定它认为最完美的执行计划。
         + 执行器
             * 在执行语句之前会判断权限，如果没有对应的权限则会直接返回并提示没有相关权限。 注意如果是在前面的查询缓存中查到缓存之后，也会在返回结果前做权限校验的。
             * 按照选定的方案执行 sql 语句，打开表，调用存储引擎提供的接口去查询并返回结果集数据
     - 存储层主要是用来存储和查询数据的，常用的存储引擎有 InnoDB、MyISAM
+* 存储 组织形式
+    - 堆表(所有的记录无序存储)
+    - 聚簇索引表(所有的记录，按照记录主键进行排序存储)
 
-## 客户端
-
-- 命令行
-- MySQLWorkbench
-- SQLyog   `ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
-- [phpmyadmin/phpmyadmin](https://github.com/phpmyadmin/phpmyadmin):A web interface for MySQL and MariaDB https://www.phpmyadmin.net/
-- Sequel Pro
-
-### 用户管理
+### 权限管理
 
 * ALL PRIVILEGES: allow a MySQL user full access to a designated database (or if no database is selected, global access across the system)
 * GRANT OPTION:allows them to grant or remove other users' privileges
@@ -327,14 +325,14 @@ mysqld --initialize
 mysql -hlocalhost  -P 3306 -u root -p  # 生成用户root与空密码登陆,第一次登陆mysql的时候是没有密码的
 exit|quit| \q
 
+CREATE USER 'lee'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456Ac&' # 添加用户
+GRANT ALL PRIVILEGES ON test.*/user.*/ TO lee@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root密码' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
 SELECT user,authentication_string,plugin,host FROM mysql.user; # msyql 8.0
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 ALTER USER `root`@`localhost` IDENTIFIED WITH caching_sha2_password BY 'password';
-FLUSH PRIVILEGES;
-
-CREATE USER 'lee'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456Ac&' # 添加用户
-GRANT ALL PRIVILEGES ON test.* TO lee@'localhost';
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root密码' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
 use mysql;
@@ -432,24 +430,6 @@ show engines; # 显示当前数据库支持的存储引擎情况
 * ip:通常使用varchar(15)保存IP地址
     * inet_aton() inet_ntoa()用于转换
 
-* 更小的通常更好：更小的数据类型通常更快，占用更少的磁盘、 内存和CPU缓存， 并且处理时需要的CPU周期也更少。
-* 简单就好： 简单数据类型的操作通常需要更少的CPU周期。 例如， 整型比字符操作代价更低， 因为字符集和校对规则（排序规则 ）使字符比较比整型比较更复杂。
-* 尽量避免NULL： 如果查询中包含可为NULL 的列， 对MySQL来说更难优化， 因为可为NULL 的列 使得索引、 索引统计和值比较都更复杂。 可为 N ULL的列会使用更多的存储空间， 在MySQL里也需要特殊处理。 当可为NULL的列被索引时， 每个索引记录需要一个额 外的字节， 在MyISAM 里甚至还可能导致固定大小的索引（例如只有一个整数列的索引）变成可变大小的索引。例外， lnnoDB 使用单独的位 (bit) 存储NULL 值， 所以对于稀疏数据有很好的空间效率。
-* 整数类型
-    - 有两种类型的数字：整数 (whole number) 和实数 (real number) 。 如果存储整数， 可以使用这几种整数类型：TINYINT, SMALLINT, MEDIUMINT, INT, BIGINT。分别使用8,16, 24, 32, 64位存储空间。 整数类型有可选的 UNSIGNED 属性，表示不允许负值，这大致可以使正数的上限提高一倍。 例如 TINYINT. UNSIGNED 可以存储的范围是 0 - 255, 而 TINYINT 的存储范围是 -128 -127 。有符号和无符号类型使用相同的存储空间，并具有相同的性能 ， 因此可以根据实际情况选择合适的类型。 你的选择决定 MySQL 是怎么在内存和磁盘中保存数据的。 然而， 整数计算一般使用64 位的 BIGINT 整数， 即使在 32 位环境也是如此。（ 一些聚合函数是例外， 它们使用DECIMAL 或 DOUBLE 进行计算）。 MySQL 可以为整数类型指定宽度， 例如 INT(11), 对大多数应用这是没有意义的：它不会限制值的合法范围，只是规定了MySQL 的一些交互工具（例如 MySQL 命令行客户端）用来显示字符的个数。 对千存储和计算来说， INT(1) 和 INT(20) 是相同的。
-* 实数类型 实数是带有小数部分的数字。 然而， 它们不只是为了存储小数部分，也可以使用DECIMAL 存储比 BIGINT 还大的整数。 FLOAT和DOUBLE类型支持使用标准的浮点运算进行近似计算。 DECIMAL类型用于存储精确的小数。 浮点和DECIMAL类型都可以指定精度。 对千DECIMAL列， 可以指定小数点前后所允许的 最大位数。这会影响列的空间消耗。 有多种方法可以指定浮点列所需要的精度， 这会使得MySQL悄悄选择不同的数据类型，或者在存储时对值进行取舍。 这些精度定义是非标准的， 所以我们建议只指定数据类型，不指定精度。 浮点类型在存储同样范围的值时， 通常比DECIMAL使用更少的空间。FLOAT使用4个字节存储。DOUBLE占用8个字节，相比FLOAT有更高的精度和更大的范围。和整数类型一样， 能选择的只是存储类型； MySQL使用DOUBLE作为内部浮点计算的类型。 因为需要额外的空间和计算开销，所以应该尽扯只在对小数进行精确计算时才使用DECIMAL。 但在数据最比较大的时候， 可以考虑使用BIGINT代替DECIMAL, 将需要存储的货币单位根据小数的位数乘以 相应的倍数即可。
-* 字符串类型 VARCHAR 用于存储可变⻓字符串，长度支持到65535 需要使用1或2个额外字节记录字符串的长度 适合：字符串的最大⻓度比平均⻓度⼤很多；更新很少 CHAR 定⻓，⻓度范围是1~255 适合：存储很短的字符串，或者所有值接近同一个长度；经常变更 慷慨是不明智的 使用VARCHAR(5)和VARCHAR(200)存储'hello'的空间开销是一样的。 那么使用更 短的列有什么优势吗？ 事实证明有很大的优势。 更长的列会消耗更多的内存， 因为MySQL通常会分配固定大小的内存块来保存内部值。 尤其是使用内存临时表进行排序或操作时会特别糟糕。 在利用磁盘临时表进行排序时也同样糟糕。 所以最好的策略是只分配真正需要的空间。 4.BLOB和TEXT类型 BLOB和 TEXT都是为存储很大的数据而设计的字符串数据类型， 分别采用 二进制和字符方式存储 。 与其他类型不同， MySQL把每个BLOB和TEXT值当作一个独立的对象处理。 存储引擎 在存储时通常会做特殊处理。 当BLOB和TEXT值太大时，InnoDB会使用专门的 "外部"存储区域来进行存储， 此时每个值在行内需要1 - 4个字节存储 存储区域存储实际的值。 BLOB 和 TEXT 之间仅有的不同是 BLOB 类型存储的是二进制数据， 没有排序规则或字符集， 而 TEXT类型有字符集和排序规则
-* 日期和时间类型 大部分时间类型 都没有替代品， 因此没有什么是最佳选择的问题。 唯一的问题是保存日期和时间的时候需要做什么。 MySQL提供两种相似的日期类型： DATE TIME和 TIMESTAMP。 但是目前我们更建议存储时间戳的方式，因此该处不再对 DATE TIME和 TIMESTAMP做过多说明。
-* 其他类型 5.1选择标识符 在可以满足值的范围的需求， 井且预留未来增长空间的前提下， 应该选择最小的数据类型。 整数类型 整数通常是标识列最好的选择， 因为它们很快并且可以使用AUTO_INCREMENT。 ENUM和SET类型 对于标识列来说，EMUM和SET类型通常是一个糟糕的选择， 尽管对某些只包含固定状态或者类型的静态 "定义表" 来说可能是没有问题的。ENUM和SET列适合存储固定信息， 例如有序的状态、 产品类型、 人的性别。 字符串类型 如果可能， 应该避免使用字符串类型作为标识列， 因为它们很消耗空间， 并且通常比数字类型慢。 对千完全 "随机" 的字符串也需要多加注意， 例如 MDS() 、 SHAl() 或者 UUID() 产生的字符串。 这些函数生成的新值会任意分布在很大的空间内， 这会导致 INSERT 以及一些SELECT语句变得很慢。如果存储 UUID 值， 则应该移除 "-"符号。 5.2特殊类型数据 某些类型的数据井不直接与内置类型一致。 低千秒级精度的时间戳就是一个例子，另一个例子是以个1Pv4地址，人们经常使用VARCHAR(15)列来存储IP地址，然而， 它们实际上是32位无符号整数， 不是字符串。用小数点将地址分成四段的表示方法只是为了让人们阅读容易。所以应该用无符号整数存储IP地址。MySQL提供INET_ATON()和INET_NTOA()函数在这两种表示方法之间转换。
-* 必须把字段定义为NOT NULL并且提供默认值
-    - ull的列使索引/索引统计/值比较都更加复杂，对MySQL来说更难优化
-    - null 这种类型MySQL内部需要进行特殊处理，增加数据库处理记录的复杂性；同等条件下，表中有较多空字段的时候，数据库的处理性能会降低很多
-    - null值需要更多的存储空，无论是表还是索引中每行中的null的列都需要额外的空间来标识
-    - 对null 的处理时候，只能采用is null或is not null，而不能采用=、in、<、<>、!=、not in这些操作符号。
-* 止使用TEXT、BLOB类型：会浪费更多的磁盘和内存空间，非必要的大量的大字段查询会淘汰掉热数据，导致内存命中率急剧降低，影响数据库性能
-* 必须使用varchar(20)存储手机号：涉及到区号或者国家代号，可能出现+-()，varchar可以支持模糊查询，例如：like“138%”
-* 禁止使用ENUM，可使用TINYINT代替：增加新的ENUM值要做DDL操作；ENUM的内部实际存储就是整数，你以为自己定义的是字符串？
-
 ```sql
 `last_opt_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后操作时间'; # 创建、修改记录的时候都刷新
 `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'; # 创建的时候把这个字段设置为当前时间，但以后修改时，不再刷新
@@ -458,7 +438,7 @@ show engines; # 显示当前数据库支持的存储引擎情况
 
 ### 库表操作
 
-* DB TABLE
+* DB|TABLE
     - CREATE
     - DROP
 * DATA
@@ -482,12 +462,12 @@ show engines; # 显示当前数据库支持的存储引擎情况
 
 ```sql
 SHOW DATABASES;
-USE db_name; # 可以不切换数据库的情况下操作数据表
-
-CREATE DATABASE IF NOT EXISTS db_name CHARSET utf8 COLLATE utf8_unicode_ci;  # 特殊符号、关键字表名加``
+CREATE DATABASE IF NOT EXISTS db_name [CHARSET utf8 COLLATE utf8_unicode_ci];  # 特殊符号、关键字表名加``
 ALTER DATABASE db_name charset=utf8;
 DROP DATABASE [IF EXISTS] db_name;
 SHOW CREATE DATABASE db_name;
+select database();  # 查看当前使用的数据库
+USE db_name;
 
 SHOW TABLES;
 # CREATE TABLE table_name(col_name  type  attribute , col_name  type  attribute,…… );
@@ -504,14 +484,16 @@ CREATE TABLE test.news(
 CREATE TABLE table_name SELECT column1,cloumn2 FROM another_table: # 复制数据不复制主键
 CREATE TABLE table_name like another_table；  #  数据不复制，主键复制
 DESCRIBE|DESC news;
+show columns from news;
 SHOW CREATE TABELE news\G;
 
-ALTER TABLE table_name ADD address varchar(30) first| after name; #  修改数据表
+ALTER TABLE table_name ADD address varchar(30) first| after name;
 ALTER TABLE table_name DROP address;
-ALTER TABLE table_name MODIFY address varchar(100);  # 修改属性
-ALTER TABLE table_name CHANGE address add varchar(100) after id; # 修改字段名字
+ALTER TABLE table_name MODIFY address varchar(100);
+ALTER TABLE table_name CHANGE address add varchar(100) after id;
 ALTER TABLE table_name engine=myisam;
 ALTER TABLE table_name rename to new_table_name;
+RENAME table table_name to new_table_name;
 ALTER TABLE table_name rename to another_DB.new_table_name; # 移动表
 ALTER TABLE 'table_name' ADD PRIMARY KEY'index_name' ('column');
 ALTER TABLE 'table_name' ADD UNIQUE 'index_name' ('column');
@@ -525,7 +507,7 @@ TRUNCATE TABLE table_name;  # 删除表,重建同结构
 
 SELECT [DISTINCT] 字段列表|* FROM table_name [WHERE条件][ORDER BY排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
 SELECT id,title,author,hits,addate from news ORDER BY id DESC LIMIT 10,10; # limit [offset,]rowcount:offset 为偏移量，而非主键id
-SELECT * FROM rp_evaluate LIMIT 500 *$i,500
+SELECT * FROM rp_evaluate LIMIT 500 * $i, 500
 SELECT `rp_e_id`,`evaluate` FROM `rp_evaluate` WHERE `rp_e_id` > 0 LIMIT 500
 SELECT column_name AS alias_name FROM table_name;
 SELECT column_name(s) FROM table_name AS alias_name; SELECT w.name, w.url, a.count, a.date FROM Websites AS w, access_log AS a WHERE a.site_id=w.id and w.name="菜鸟教程";
@@ -533,12 +515,12 @@ SELECT conact('a', 'b')
 SELECT conact_ws(',', 'a', 'b')
 SELECT GROUP_CONCAT(c_name) FROM categories WHERE school_id =1 # 字符拼接
 
-INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…);   # 记录操作：添加 更新与删除数据(新增与修改不用添加TABLE关键字)
+INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…),(值1,值2,值3,…);   # 记录操作：添加 更新与删除数据(新增与修改不用添加TABLE关键字)
 INSERT INTO table_name values (null,值,....); # 全字段插入，自动增长列用null
 INSERT INTO table_name values (null,值,....),(null,值,....),(null,值,....); # 插入多条数据
 INSERT INTO table_name set volumn1=value1,volumn3=value3,volumn3=value3;
 
-UPDATE table_name  SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件]; # 更新记录
+UPDATE table_name SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件]; # 更新记录
 UPDATE base SET `count` = `count` + 1；
 
 DELETE FROM table_name [WHERE条件];
@@ -563,42 +545,13 @@ DELETE FROM table_name [WHERE条件];
         + 当数据比内存大时这可能比关联要快得多，因为这样避免了随机I/0
         + 单独的表也能使用更有效的索引策略
     - 混用范式化和反范式化：在实际应用中经常需要混用，可能使用部分范式化的 schema 、 缓存表，以及其他技巧。 表适当增加冗余字段，如性能优先，但会增加复杂度。可避免表关联查询
-* ER图
-    - PowerDesigner
-    - MySQL Workbench
-* 组织形式
-    * 堆表(所有的记录无序存储)
-    * 聚簇索引表(所有的记录，按照记录主键进行排序存储)
-
-* 表字段少而精
-    - I/O高效
-    - 字段分开维护简单
-    - 单表1G体积 500W⾏行评估
-    - 单行不超过200Byte
-    - 单表不超过50个INT字段
-    - 单表不超过20个CHAR(10)字段
-    - 建议单表字段数控制在20个以内
-    - 拆分TEXT/BLOB，TEXT类型处理性能远低于VARCHAR，强制生成硬盘临时表浪费更多空间。
-* 禁止使用外键，如果有外键完整性约束，需要应用程序控制：外键会导致表与表之间耦合，update与delete操作都会涉及相关联的表，十分影响sql 的性能，甚至会造成死锁。高并发情况下容易造成数据库性能，大数据高并发业务场景数据库使用以性能优先
-* 多表联接查询时，关联字段类型尽量一致，并且都要有索引；
-
-* 所有的InnoDB表都设计一个无业务用途的自增列做主键，对于绝大多数场景都是如此，真正纯只读用InnoDB表的并不多，真如此的话还不如用TokuDB来得划算；
-* 字段长度满足需求前提下，尽可能选择长度小的。此外，字段属性尽量都加上NOT NULL约束，可一定程度提高性能；
-* 尽可能不使用TEXT/BLOB类型，确实需要的话，建议拆分到子表中，不要和主表放在一起，避免SELECT * 的时候读性能太差。
-* 读取数据时，只选取所需要的列，不要每次都SELECT *，避免产生严重的随机读问题，尤其是读到一些TEXT/BLOB列；
-* 对一个VARCHAR(N)列创建索引时，通常取其50%（甚至更小）左右长度创建前缀索引就足以满足80%以上的查询需求了，没必要创建整列的全长度索引；
-* 通常情况下，子查询的性能比较差，建议改造成JOIN写法；
-* 多表连接查询时，把结果集小的表（注意，这里是指过滤后的结果集，不一定是全表数据量小的）作为驱动表；
-* 多表联接并且有排序时，排序字段必须是驱动表里的，否则排序列无法用到索引；
-* 多用复合索引，少用多个独立索引，尤其是一些基数（Cardinality）太小（比如说，该列的唯一值总数少于255）的列就不要创建独立索引了；
-* 类似分页功能的SQL，建议先用主键关联，然后返回结果集，效率会高很多；
 
 ### 联表
 
 表与表之间通过公共字段建立关系
 
 * 公共字段名字可以不一样，但是数据类型必须一样
-* 联表查询降低查询速度。
+* 联表查询降低查询速度
 * 数据冗余与查询速度的平衡
 
 ```sql
@@ -608,9 +561,9 @@ select a.FirstName,a.LastName, b.City, b.State from Person as a inner join addre
 ## 查询
 
 * 字段列表：指要显示指定列的数据，多个字段之间用逗号隔开，各字段之间没有顺序。*：显示所有字段的数据
-* ORDER BY排序
-* LIMIT 限制返回数量
-* WHERE
+* 排序 ORDER BY
+* 限制返回数量 LIMIT
+* 条件：WHERE
     - Index Key：用于确定SQL查询在索引中的连续范围(起始范围+结束范围)的查询条件，被称之为Index Key。由于一个范围，至少包含一个起始与一个终止，因此Index Key也被拆分为Index First Key和Index Last Key，分别用于定位索引查找的起始，以及索引查询的终止条件。
         + Index First Key：用于确定索引查询的起始范围。提取规则：从索引的第一个键值开始，检查其在where条件中是否存在，若存在并且条件是=、>=，则将对应的条件加入Index First Key之中，继续读取索引的下一个键值，使用同样的提取规则；若存在并且条件是>，则将对应的条件加入Index First Key中，同时终止Index First Key的提取；若不存在，同样终止Index First Key的提取。
         + Index Last Key：Index Last Key的功能与Index First Key正好相反，用于确定索引查询的终止范围。提取规则：从索引的第一个键值开始，检查其在where条件中是否存在，若存在并且条件是=、<=，则将对应条件加入到Index Last Key中，继续提取索引的下一个键值，使用同样的提取规则；若存在并且条件是 < ，则将条件加入到Index Last Key中，同时终止提取；若不存在，同样终止Index Last Key的提取。
@@ -627,23 +580,6 @@ select a.FirstName,a.LastName, b.City, b.State from Person as a inner join addre
     - [charlist] 字符列中的任何单一字符
     - [^charlist]或[!charlist] 不在字符列中的任何单一字符 WHERE name REGEXP '^[GFs]'；name REGEXP '^[^A-H]'
 * group by
-
-查询松散索引扫描（Loose Index Scan）与紧凑索引扫描（Tight Index Scan）[链接]（<http://isky000.com/database/mysql_group_by_implement）>
-
-- 正常流程 group by操作在没有合适的索引可用的时候，通常先扫描整个表提取数据并创建一个临时表，然后按照group by指定的列进行排序。在这个临时表里面，对于每一个group的数据行来说是连续在一起的。完成排序之后，就可以发现所有的groups，并可以执行聚集函数（aggregate function）。可以看到，在没有使用索引的时候，需要创建临时表和排序。在执行计划中通常可以看到"Using temporary; Using filesort"。
-- 通过索引 MySQL建立的索引（B+Tree）通常是有序的，如果通过读取索引就完成group by操作，那么就可避免创建临时表和排序。因而使用索引进行group by的最重要的前提条件是所有group by的参照列（分组依据的列）来自于同一个索引，且索引按照顺序存储所有的keys（即BTREE index，而HASH index没有顺序的概念）。松散索引扫描和紧凑索引扫描的最大区别是是否需要扫描整个索引或者整个范围扫描。
-- 松散索引扫描方式下，分组操作和范围预测（如果有的话）一起执行完成的。不需要连续的扫描索引中得每一个元组，扫描时仅考虑索引中得一部分。当查询中没有where条件的时候，松散索引扫描读取的索引元组的个数和groups的数量相同。如果where条件包含范围预测，松散索引扫描查找每个group中第一个满足范围条件，然后再读取最少可能数的keys。松散索引扫描只需要读取很少量的数据就可以完成group by操作，因而执行效率非常高，执行计划中Etra中提示" using index for group-by"。松散索引扫描可以作用于在select list中其它形式的聚集函数，除了min()和max()之外，还支持：
-    - AVG(DISTINCT), SUM(DISTINCT)和COUNT(DISTINCT)可以使用松散索引扫描。AVG(DISTINCT), SUM(DISTINCT)只能使用单一列作为参数。而COUNT(DISTINCT)可以使用多列参数。
-    - 在查询中没有group by和distinct条件。
-    - 之前声明的松散扫描限制条件同样起作用。
-* 符合一下条件
-    - 查询在单一表上。
-    - group by指定的所有列是索引的一个最左前缀，并且没有其它的列。比如表t1（ c1,c2,c3,c4）上建立了索引（c1,c2,c3）。如果查询包含"group by c1,c2"，那么可以使用松散索引扫描。但是"group by c2,c3"(不是索引最左前缀)和"group by c1,c2,c4"(c4字段不在索引中)。
-    - 如果在选择列表select list中存在聚集函数，只能使用 min()和max()两个聚集函数，并且指定的是同一列（如果min()和max()同时存在）。这一列必须在索引中，且紧跟着group by指定的列。比如，select t1,t2,min(t3),max(t3) from t1 group by c1,c2。
-    - 如果查询中存在除了group by指定的列之外的索引其他部分，那么必须以常量的形式出现（除了min()和max()两个聚集函数）。比如，select c1,c3 from t1 group by c1,c2不能使用松散索引扫描。而select c1,c3 from t1 where c3 = 3 group by c1,c2可以使用松散索引扫描。
-    - 索引中的列必须索引整个数据列的值(full column values must be indexed)，而不是一个前缀索引。比如，c1 varchar(20), INDEX (c1(10)),这个索引没发用作松散索引扫描。
-    - 紧凑索引扫描方式下，先对索引执行范围扫描（range scan），再对结果元组进行分组。可能是全索引扫描或者范围索引扫描，取决于查询条件。当松散索引扫描条件没有满足的时候，group by仍然有可能避免创建临时表。如果在where条件有范围扫描，那么紧凑索引扫描仅读取满足这些条件的keys（索引元组），否则执行全索引扫描。这种方式读取所有where条件定义的范围内的keys，或者扫描整个索引。紧凑索引扫描，只有在所有满足范围条件的keys被找到之后才会执行分组操作。
-* 在查询中存在常量相等where条件字段（索引中的字段），且该字段在group by指定的字段的前面或者中间。来自于相等条件的常量能够填充搜索keys中的gaps，因而可以构成一个索引的完整前缀。索引前缀能够用于索引查找。如果要求对group by的结果进行排序，并且查找字段组成一个索引前缀，那么MySQL同样可以避免额外的排序操作。 c2在c1,c3之前，c2='a'填充这个坑，组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c2 = 'a' group by c1,c3 c1在索引的最前面，c1=a和group by c2,c3组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c1 = 'a' group by c2,c3 使用紧凑索引扫描，执行计划Extra一般显示"using index"，相当于使用了覆盖索引。
 
 ```sql
 CREATE [UNIQUE|FULLTEXT]  INDEX index_name on tbl_name (col_name [(length)] [ASC | DESC] , …..);
@@ -1006,36 +942,6 @@ WHERE id IN (1,2,3)
     - explain select * from table explain // 用并不真正执行查询，而是查询优化器【估算】的行数，返回值新的行数
     - count(distinct …)会返回彼此不同但是非NULL的数据的行数
 
-## 中间件
-
-* 优劣
-    - 一些通用的指标
-    - 要结合业务特点，包括业务的读写 qps ， 涉及的库表结构和SQL语句，来进行综合的判断
-* 中间件产品发展至今，分为两代
-    - 传统的中间件软件，如mysql proxy， mycat， oneproxy，atlas，kingshard等.使用这些中间件，你还是需要部署中间件模块，做各种配置，系统扩容是还需要停服做数据迁移，需要比较多的时间投入
-    - 和公有云结合的，基于中间件的分布式数据库，如阿里DRDS、UCloud UDDB，腾讯云DCDB For TDSQL等,对用户呈现的，是一个类似单机数据库一样的操作和管理界面，管理简单，使用方便
-        + 以UCloud 的UDDB为例
-            * 在Web控制台上，一步即可创建并配置好中间件和数据库节点，搭建出一个完整的分布式数据库；
-            * 通过特殊的建表语句， 即可以配置表的水平划分方式。
-    - 对于中间件复杂的水平扩容问题，可以通过一个按钮即可完成水平扩容操作，期间不停服，只是每隔一段时间有几毫秒到零点几秒的访问中断
-- 主要功能
-    + 分库分表
-        * 能够做到一级划分（只根据一个字段来做分区），还是能够做到二级划分（能够根据两个字段来做分区）
-        * 划分的形式是否多样（常见有 range、list、hash 方式）
-        * 划分字段的类型是否能支持多种（比如是只支持根据数值类型字段做划分，还是可以根据数值、字符串、日期类型做划分）
-        * 能否提供避免数据倾斜的分区方式等
-    + 读写分离功能，细分两种
-        * 透明的读写分离，这种功能能够100%兼容 Mysql 或其他数据库的 SQL 语法，同时对于事务也能够正确处理（事务的 SQL 能够路由到主节点，而不是分散到主节点和只读节点）
-        * 另一种是简单的读写分离，对 SQL 的支持范围，只限于数据库中间件内置的 SQL 解释器，有些复杂 SQL 是支持不了的，同时对于事务，也做不到很好的支持。 同时，对读请求的分流策略，也是读写分离功能一个考量点。简单的读写分离功能只是把写发往主节点，读都发往从节点；
-        * 而读写分离功能做得细致的话，数据库中间件会能够提供对分流策略的自定义。比如设置为：把30%的读流量，分流到主节点，70%的读流量分流到只读节点
-* 产品的成熟度、用户的使用情况和社区（商业公司）支持程度。 数据库中间件虽然本身不做存储，但是每条数据都是要从中经过的，一旦出错，可能对业务造成灾难性的影响，所以软件的正确性和稳定性非常重要。为此，中间件的成熟度、已经使用的客户的使用情况、数量、用户的口碑，以及开源社区或者商业公司对该产品的支持程度，就非常重要。一般来说，发布时间越长而且在持续迭代、用户使用数量众多，且有大规模业务使用，社区（包括 QQ 群）比较活跃，文档完善，bug 解决及时的产品，更值得信赖。
-* 产品的易用性，是否配置方便，部署容易，系统管理不会有太大负担。有些中间件模块众多，配置复杂，虽然表面上看起来功能丰富，但业务用到的可能还是最基本的几个功能。选择这样的中间件，即显得不够划算，不仅加重运维负担，同时后续系统的扩展，新业务的支持，也不够敏捷。
-* 是否满足自身业务目前的需求，和潜在的需求。 除了上述两个通用的指标，更重要的是必须根据自己业务的库表结构，分库分表/读写分离需求，业务的SQL语句，读写qps，来判断中间件产品的优劣。 比如，绝大部分中间件，目前都不能支持分布式事务和多表join，但是除了对这两种sql不支持，不少中间件，其实在一些基本的sql，比如带系统函数的sql、聚合类sql上，也支持不够好。
-* 选择:
-    - 需要根据业务的库表结构，sql语句，以及业务特点，去检查中间件是否对业务的目前sql和潜在sql，能够做到比较好的支持。
-    - 选择中间件时，一定要自己做性能测试和压力测试，实事求是地自身业务特点来测定中间件的性能和稳定性情况，不要轻信官方或者第三方发布的一些性能数据
-* 中间件产品的最高境界:不需要特别关注中间件，从而可以把精力放在数据库架构、优化和数据库本身的管理上
-
 ## 事物
 
 mysql有一个autocommit参数，默认是on，他的作用是每一条单独的查询都是一个事务，并且自动开始，自动提交（执行完以后就自动结束了，如果你要适用select for update，而不手动调用 start transaction，这个for update的行锁机制等于没用，因为行锁在自动提交后就释放了），所以事务隔离级别和锁机制即使你不显式调用start transaction，这种机制在单独的一条查询语句中也是适用的
@@ -1169,6 +1075,10 @@ commit|commit work; # //4.提交事务
     - 通过MVCC，虽然每行记录都需要额外的存储空间，更多的行检查工作以及一些额外的维护工作，但可以减少锁的使用，大多数读操作都不用加锁，读数据操作很简单，性能很好，并且也能保证只会读取到符合标准的行，也只锁住必要行。
 * 是使用时间戳
 
+乐观并发控制相信事务之间的数据竞争(data race)的概率是比较小的，因此尽可能直接做下去，直到提交的时候才去锁定，所以不会产生任何锁和死锁。但如果直接简单这么做，还是有可能会遇到不可预期的结果，例如两个事务都读取了数据库的某一行，经过修改以后写回数据库，这时就遇到了问题。
+
+适合用在取锁失败概率比较小的场景，可以提升系统并发性能。用于写比较少的情况下。可以省去了锁的开销，加大了系统的整个吞吐量。上层应用会不断的进行retry，这样反倒是降低了性能，所以这种情况下用悲观锁就比较合适。
+
 ```sql
 select (status,status,version) from t_goods where id=#{id} # 1.查询出商品信息
 update t_goods  # 2.根据商品信息生成订单
@@ -1185,17 +1095,13 @@ if (updated row > 0) {
 }
 ```
 
-乐观并发控制相信事务之间的数据竞争(data race)的概率是比较小的，因此尽可能直接做下去，直到提交的时候才去锁定，所以不会产生任何锁和死锁。但如果直接简单这么做，还是有可能会遇到不可预期的结果，例如两个事务都读取了数据库的某一行，经过修改以后写回数据库，这时就遇到了问题。
-
-适合用在取锁失败概率比较小的场景，可以提升系统并发性能。用于写比较少的情况下。可以省去了锁的开销，加大了系统的整个吞吐量。上层应用会不断的进行retry，这样反倒是降低了性能，所以这种情况下用悲观锁就比较合适。
-
 ### Gap锁
 
 二级索引维护一套B+树与主键id的数据结构（树形结构），除了行锁，还会在行锁之间加gap锁，保证数据无法添加
 
 ## 索引
 
-索引：帮助mysql高效获取数据的数据结构，索引(mysql中叫"键(key)") 数据越大越重要。索引好比一本书，为了找到书中特定的话题，查看目录，获得页码。获取物理位置。大多数MySQL索引(PRIMARY KEY、UNIQUE、INDEX和FULLTEXT)使用B树中存储。空间列类型的索引使用R-树，MEMORY表支持hash索引。存储引擎用于快速查找记录的一种数据结构，通过合理的使用数据库索引可以大大提高系统的访问性能。大大减轻了服务器需要扫描的数据量，从而提高了数据的检索速度；帮助服务器避免排序和临时表；可以将随机 I/O 变为顺序 I/O
+帮助mysql高效获取数据的数据结构，索引(mysql中叫"键(key)") 数据越大越重要。索引好比一本书，为了找到书中特定的话题，查看目录，获得页码。获取物理位置。大多数MySQL索引(PRIMARY KEY、UNIQUE、INDEX和FULLTEXT)使用B树中存储。空间列类型的索引使用R-树，MEMORY表支持hash索引。存储引擎用于快速查找记录的一种数据结构，通过合理的使用数据库索引可以大大提高系统的访问性能。大大减轻了服务器需要扫描的数据量，从而提高了数据的检索速度；帮助服务器避免排序和临时表；可以将随机 I/O 变为顺序 I/O
 
 * 快速找出匹配一个WHERE子句的行。
 * 删除行。当执行联接时，从其它表检索行。
@@ -1203,7 +1109,6 @@ if (updated row > 0) {
 * 如果对一个可用关键字的最左面的前缀进行了排序或分组(例如，ORDER BY key_part_1,key_part_2)，排序或分组一个表。如果所有关键字元素后面有DESC，关键字以倒序被读取。
 * 在一些情况中，可以对一个查询进行优化以便不用查询数据行即可以检索值。如果查询只使用来自某个表的数字型并且构成某些关键字的最左面前缀的列，为了更快，可以从索引树检索出值。`SELECT key_part3 FROM tb WHERE key_part1=1`
 * 有时MySQL不使用索引，即使有可用的索引。一种情形是当优化器估计到使用索引将需要MySQL访问表中的大部分行时。(在这种情况下，表扫描可能会更快些）。然而，如果此类查询使用LIMIT只搜索部分行，MySQL则使用索引，因为它可以更快地找到几行并在结果中返回。
-
 * 存储的是完整记录的一个子集，用于加速记录的查询速度，索引的组织形式，一般均为B+树结构。
 * 类别
     - PRIMARY 索引:在主键上自动创建，不允许有空值。一般是在建表的时候同时创建主键索引
@@ -1218,24 +1123,6 @@ if (updated row > 0) {
         + 最左前缀（Leftmost Prefixing）。假如有一个多列索引为key(firstname lastname age)，当搜索条件是以下各种列的组合和顺序时，MySQL将使用该多列索引：firstname，lastname，age  firstname，lastname firstname
         + (a,b,c)复合索引， ac 可以使用到索引a
 * 如果是CHAR，VARCHAR类型，length可以小于字段实际长度；如果是BLOB和TEXT类型，必须指定 length
-
-合理的建立索引的建议
-
-* 越小的数据类型通常更好：越小的数据类型通常在磁盘、内存和CPU缓存中都需要更少的空间，处理起来更快。
-* 在WHERE和JOIN中出现的列需要建立索引，但也不完全如此，因为MySQL只对<，<=，=，>，>=，BETWEEN，IN，以及某些时候的LIKE才会使用索引
-* 简单的数据类型更好：整型数据比起字符，处理开销更小，因为字符串的比较更复杂。在MySQL中，应该用内置的日期和时间数据类型，而不是用字符串来存储时间；以及用整型数据类型存储IP地址。
-* 尽量避免NULL：应该指定列为NOT NULL，除非你想存储NULL。在MySQL中，含有空值的列很难进行查询优化，因为它们使得索引、索引的统计信息以及比较运算更加复杂。你应该用0、一个特殊的值或者一个空串代替空值
-* 不使用NOT IN和<>操作
-* 不要在列上进行运算  select * from users where YEAR(adddate)<2007; 将在每个行上进行运算，这将导致索引失效而进行全表扫描，因此我们可以改成
-* like语句操作  一般情况下不鼓励使用like操作，如果非使用不可，如何使用也是一个问题。like “%aaa%” 不会使用索引而like “aaa%”可以使用索引。
-* 索引列排序  MySQL查询只使用一个索引，因此如果where子句中已经使用了索引的话，那么order by中的列是不会使用索引的。因此数据库默认排序可以符合要求的情况下不要使用排序操作；尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引。
-* 使用短索引  对串列进行索引，如果可能应该指定一个前缀长度。例如，如果有一个CHAR(255)的列，如果在前10个或20个字符内，多数值是惟一的，那么就不要对整个列进行索引。短索引不仅可以提高查询速度而且可以节省磁盘空间和I/O操作。
-* 单表索引建议控制在5个以内
-* 单索引字段数不允许超过5个：字段超过5个时，实际已经起不到有效过滤数据的作用了
-* 禁止在更新十分频繁、区分度不高的属性上建立索引，字段值离散度这么低,没必要加索引，比如性别
-
-* 虽然索引大大提高了查询速度，同时却会降低更新表的速度，如对表进行INSERT、UPDATE和DELETE。因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。
-* 建立索引会占用磁盘空间的索引文件。一般情况这个问题不太严重，但如果你在一个大表上创建了多种组合索引，索引文件的会膨胀很快。
 
 ### B+Tree树
 
@@ -1258,8 +1145,32 @@ B-tree 索引:大多数谈及的索引类型就是B-tree类型, 可以在create 
 ![clustered-index](../_static/clustered-index.jpg "clustered-index")
 ![index](../_static/index.jpg "index")
 
+## 慢日志 slow log
 
+* 分析慢查询日志，可以使用MySQL自带的mysqldumpslow工具，分析的日志较为简单
+* 使用percona公司的pt-query-digest工具，日志分析功能全面，可分析slow log、binlog、general log
 
+```sql
+# 开启慢查询日志
+set global slow-query-log=on
+# 指定慢查询日志文件位置
+set global slow_query_log_file='/var/log/mysql/mysql-slow.log';
+# 记录没有使用索引的查询
+set global log_queries_not_using_indexes=on;
+# 只记录处理时间1s以上的慢查询
+set global long_query_time=1;
+
+# 查看最慢的前三个查询
+mysqldumpslow -t 3 /var/log/mysql/mysql-slow.log
+
+# 分析慢查询日志
+pt-query-digest /var/log/mysql/mysql-slow.log
+# 分析binlog日志
+mysqlbinlog mysql-bin.000001 >mysql-bin.000001.sql
+pt-query-digest --type=binlog mysql-bin.000001.sql
+#分析普通日志
+pt-query-digest --type=genlog localhost.log
+```
 
 ## partition
 
@@ -1307,16 +1218,239 @@ delimiter ;  -- 界定符改回分号
 CALL BatchInsert(30036, 200000);   -- 调用存储过程插入函数
 ```
 
-## 问题处理
+### 主从复制
 
-- top 查看进程消耗
-- 进入mysql show processlist
-- threads_running/QPS/TPS
-- 慢查询
-- MySQL profile工具
-- orzdba
+MySQL 在每个事务更新数据之前，由 Master 将事务串行的写入二进制日志，即使事务中的语句都是交叉执行的，之后通知存储引擎提交事务。MySQL支持三种复制方式，实现了Data Distribution、Load Balancing、Backups、High Availability and Failover等特性。
+
+* 方法
+    - 基于语句复制：在主服务器上执行的SQL语句，在从服务器上执行同样的语句。MySQL默认采用基于语句的复制，效率比较高。
+    - 基于行复制：MySQL5.0开始支持把改变的内容复制过去，而不是把命令在从服务器上执行一遍。
+    - 混合类型复制：默认采用基于语句的复制，一旦发现基于语句的无法精确的复制时，就会采用基于行的复制。
+* 流程
+    - Master binlog输出线程：Master为每一个复制连接请求创建一个binlog输出线程，用于输出日志内容到相应的Slave；
+    - Slave I/O线程：在start slave之后，该线程负责从Master上拉取binlog内容放进自己的Relay Log中；
+    - Slave SQL线程：负责执行Relay Log中的语句。
+    - master将改变记录到二进制日志(binary log)中（这些记录叫做二进制日志事件，binary log events，可以通过show binlog events进行查看）；
+    - slave将master的binary log events拷贝到它的中继日志(relay log)；
+    - slave重做中继日志中的事件，将改变反映它自己的数据。
+
+![master-slave](../_static/master-slave.gif "master-slave")
+
+### 问题
+
+- 无法远程连接mysql(报错111)：注释掉my.cnf中的bind-address或绑定本地ip
+- 添加server-id and log_bin=
+- 主从服务器检查show variables like 'server%'
+- 主服务器与从服务器
+
+```sql
+GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' IDENTIFIED BY 'slave_password';
+FLUSH PRIVILEGES;
+SHOW MASTER STATUS;
+
+CHANGE MASTER TO MASTER_HOST='202.167.45.10',MASTER_USER='slave_user', MASTER_PASSWORD='slave_password', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=  107;
+START slave;
+show slave status\G;
+
+Slave_IO_Running = NO：stop slave; reset slave;start slave;
+```
+
+### 读写分离
+
+* 通过mysql-proxy调度：与主服务器在一台服务器上，用源代码安装含有lua脚本
+* 复制方法
+    - 基于SQL语句
+        + 对于存在随机数的字段会出现数据不一致
+    - 基于行：记录SQL的所影响的行和相关的值
+        + Insert，记录下所有列的新值。
+        + Delete，记录下到底是哪一行被删除(用主键来标识)
+        + Update，记录下哪一行被更新(用主键来标识)，以及被更新的列和新值
+        + Update语句：会出现一条语句更新一半数据情况
+* 数据延迟
+    - 先写DB，再写缓存，等缓存过期的时候，数据同步已经完成
+    - 同步做成提交（添加）与审核（同步）状态
+
+```shell
+sudo apt-get install mysql-proxy
+```
+
+## 中间件
+
+* 优劣
+    - 一些通用的指标
+    - 要结合业务特点，包括业务的读写 qps ， 涉及的库表结构和SQL语句，来进行综合的判断
+* 中间件产品发展至今，分为两代
+    - 传统的中间件软件，如mysql proxy， mycat， oneproxy，atlas，kingshard等.使用这些中间件，你还是需要部署中间件模块，做各种配置，系统扩容是还需要停服做数据迁移，需要比较多的时间投入
+    - 和公有云结合的，基于中间件的分布式数据库，如阿里DRDS、UCloud UDDB，腾讯云DCDB For TDSQL等,对用户呈现的，是一个类似单机数据库一样的操作和管理界面，管理简单，使用方便
+        + 以UCloud 的UDDB为例
+            * 在Web控制台上，一步即可创建并配置好中间件和数据库节点，搭建出一个完整的分布式数据库；
+            * 通过特殊的建表语句， 即可以配置表的水平划分方式。
+    - 对于中间件复杂的水平扩容问题，可以通过一个按钮即可完成水平扩容操作，期间不停服，只是每隔一段时间有几毫秒到零点几秒的访问中断
+- 主要功能
+    + 分库分表
+        * 能够做到一级划分（只根据一个字段来做分区），还是能够做到二级划分（能够根据两个字段来做分区）
+        * 划分的形式是否多样（常见有 range、list、hash 方式）
+        * 划分字段的类型是否能支持多种（比如是只支持根据数值类型字段做划分，还是可以根据数值、字符串、日期类型做划分）
+        * 能否提供避免数据倾斜的分区方式等
+    + 读写分离功能，细分两种
+        * 透明的读写分离，这种功能能够100%兼容 Mysql 或其他数据库的 SQL 语法，同时对于事务也能够正确处理（事务的 SQL 能够路由到主节点，而不是分散到主节点和只读节点）
+        * 另一种是简单的读写分离，对 SQL 的支持范围，只限于数据库中间件内置的 SQL 解释器，有些复杂 SQL 是支持不了的，同时对于事务，也做不到很好的支持。 同时，对读请求的分流策略，也是读写分离功能一个考量点。简单的读写分离功能只是把写发往主节点，读都发往从节点；
+        * 而读写分离功能做得细致的话，数据库中间件会能够提供对分流策略的自定义。比如设置为：把30%的读流量，分流到主节点，70%的读流量分流到只读节点
+* 产品的成熟度、用户的使用情况和社区（商业公司）支持程度。 数据库中间件虽然本身不做存储，但是每条数据都是要从中经过的，一旦出错，可能对业务造成灾难性的影响，所以软件的正确性和稳定性非常重要。为此，中间件的成熟度、已经使用的客户的使用情况、数量、用户的口碑，以及开源社区或者商业公司对该产品的支持程度，就非常重要。一般来说，发布时间越长而且在持续迭代、用户使用数量众多，且有大规模业务使用，社区（包括 QQ 群）比较活跃，文档完善，bug 解决及时的产品，更值得信赖。
+* 产品的易用性，是否配置方便，部署容易，系统管理不会有太大负担。有些中间件模块众多，配置复杂，虽然表面上看起来功能丰富，但业务用到的可能还是最基本的几个功能。选择这样的中间件，即显得不够划算，不仅加重运维负担，同时后续系统的扩展，新业务的支持，也不够敏捷。
+* 是否满足自身业务目前的需求，和潜在的需求。 除了上述两个通用的指标，更重要的是必须根据自己业务的库表结构，分库分表/读写分离需求，业务的SQL语句，读写qps，来判断中间件产品的优劣。 比如，绝大部分中间件，目前都不能支持分布式事务和多表join，但是除了对这两种sql不支持，不少中间件，其实在一些基本的sql，比如带系统函数的sql、聚合类sql上，也支持不够好。
+* 选择:
+    - 需要根据业务的库表结构，sql语句，以及业务特点，去检查中间件是否对业务的目前sql和潜在sql，能够做到比较好的支持。
+    - 选择中间件时，一定要自己做性能测试和压力测试，实事求是地自身业务特点来测定中间件的性能和稳定性情况，不要轻信官方或者第三方发布的一些性能数据
+* 中间件产品的最高境界:不需要特别关注中间件，从而可以把精力放在数据库架构、优化和数据库本身的管理上
+
+### MySQL Proxy
+
+LVS、HAProxy、Nginx
+
+MySQL Proxy的主要作用是用来做负载均衡，数据库读写分离的。但是需要注意的是，MySQL Proxy还有个强大的扩展功能就是支持Lua语言.
+
+启动MySQL Proxy的时候，加载一个Lua脚本，对每一个进入的query或者insert之类的语句做一次安全检查，甚至替换查询中的某些内容，这样在程序员的 程序中忘记了过滤参数的情况下，还有最后一道防线可用。而且由于是Lua这样的动态脚本语言，在开发，修正，部署方面都会有极大的灵活性。
+
+* connect_server() — 这个函数每次client连接的时候被调用，可以用这个函数来处理负载均衡，决定当前的请求发给那个后台的服务器，如果没有指定这个函数，那么就会采用简单的轮询机制。
+* read_handshake() — 这个函数在server返回初始握手信息时被调用，可以调用这个函数在验证信息发给服务器前进行额外的检查。
+* read_auth() — client发送验证信息给服务器的时候会调用这个函数。
+* read_auth_result() — 服务器验证信息返回后调用这个函数。
+* read_query() — 每次client发送查询请求函数的时候被调用，可以用这个函数进行查询语句的预处理，过滤掉非预期的查询等等，这个是最常用的函数。
+* read_query_result() — 查询结果返回是调用的函数，可以进行结果集处理。
 
 ### mysqladmin
+
+## 维护
+
+* 通常地，单表物理大小不超过10GB，单表行数不超过1亿条，行平均长度不超过8KB，如果机器性能足够，这些数据量MySQL是完全能处理的过来的，不用担心性能问题，这么建议主要是考虑ONLINE DDL的代价较高；
+* 不用太担心mysqld进程占用太多内存，只要不发生OOM kill和用到大量的SWAP都还好；
+* 在以往，单机上跑多实例的目的是能最大化利用计算资源，如果单实例已经能耗尽大部分计算资源的话，就没必要再跑多实例了；
+* 定期使用pt-duplicate-key-checker检查并删除重复的索引。定期使用pt-index-usage工具检查并删除使用频率很低的索引；
+* 定期采集slow query log，用pt-query-digest工具进行分析，可结合Anemometer系统进行slow query管理以便分析slow query并进行后续优化工作；
+* 可使用pt-kill杀掉超长时间的SQL请求，Percona版本中有个选项 innodb_kill_idle_transaction 也可实现该功能；
+* 使用pt-online-schema-change来完成大表的ONLINE DDL需求；
+* 定期使用pt-table-checksum、pt-table-sync来检查并修复mysql主从复制的数据差异；
+
+## 备份
+
+* 备份策略：每天做一次增量备份，每周做一次全量备份，通过定时任务做
+* 在二级复制服务器上进行备份。
+* 备份过程中停止数据的复制，以防止出现数据依赖和外键约束的不一致。
+* 彻底停止MySQL之后，再从数据文件进行备份。
+* 如果使用MySQL dump进行备份，请同时备份二进制日志 — 确保复制过程不被中断。
+* 不要信任 LVM 快照的备份 — 可能会创建不一致的数据，将来会因此产生问题。
+* 为每个表做一个备份，这样更容易实现单表的恢复 — 如果数据与其他表是相互独立的。
+* 使用 mysqldump 时，指定 -opt 参数。
+* 备份前检测和优化表。
+* 临时禁用外键约束，来提高导入的速度。
+* 临时禁用唯一性检查，来提高导入的速度。
+* 每次备份完后，计算数据库/表数据和索引的大小，监控其增长。
+* 使用定时任务（cron）脚本，来监控从库复制的错误和延迟。
+* 定期备份数据。
+* 定期测试备份的数据
+* mysqlcheck
+
+```sql
+mysqldump [-h 主机名] -u 用户名 -p --all-databases > dump.sql
+mysqldump [-h 主机名] -u 用户名 -p --databases 库名1 [库名2 ...] > dump.sql
+mysqldump [-h 主机名] -u 用户名 -p 库名 表名1 [表名2 ...] > dump.sql
+mysqldump -u wcnc -p -d –add-drop-table smgp_apps_wcnc >d:wcnc_db.sql # 导出数据结构
+
+# 恢复全量备份
+mysql -uroot -p < dump.sql
+source  dump.sql
+
+## 增量备份
+# 查看 log_bin 是否开启，因为要做增量备份要开启 log_bin
+show variables like '%log_bin%';
+# 修改配置文件，重启mysql服务，查看sql_log_bin 开启
+#/etc/mysql/mysql.conf.d/mysqld.cnf
+log-bin=/var/lib/mysql/mysql-bin
+server-id=123454
+
+# 查看当前使用的 mysql_bin.000*** 日志文件
+show master status;
+# 添加数据
+insert into `zone`.`users` ( `name`, `sex`, `id`) values ( 'zone3', '0', '4');
+
+# 使用新的日志文件
+mysqladmin -uroot -123456 flush-logs
+# 将刚刚插入的数据删除
+# 恢复
+mysqlbinlog /var/lib/mysql/mysql-bin.000015 | mysql -uroot -p123456 zone;
+
+# 全量备份
+/usr/bin/mysqldump -uroot -p123456  --lock-all-tables --flush-logs test > /home/backup.sql # 参数 —flush-logs：使用一个新的日志文件来记录接下来的日志； —lock-all-tables：锁定所有数据库;
+
+## 脚本
+#!/bin/bash
+#在使用之前，请提前创建以下各个目录
+#获取当前时间
+date_now=$(date "+%Y%m%d-%H%M%S")
+backUpFolder=/home/db/backup/mysql
+username="root"
+password="123456"
+db_name="zone"
+#定义备份文件名
+fileName="${db_name}_${date_now}.sql"
+#定义备份文件目录
+backUpFileName="${backUpFolder}/${fileName}"
+echo "starting backup mysql ${db_name} at ${date_now}."
+/usr/bin/mysqldump -u${username} -p${password}  --lock-all-tables --flush-logs ${db_name} > ${backUpFileName}
+#进入到备份文件目录
+cd ${backUpFolder}
+#压缩备份文件
+tar zcvf ${fileName}.tar.gz ${fileName}
+​
+# use nodejs to upload backup file other place
+#NODE_ENV=$backUpFolder@$backUpFileName node /home/tasks/upload.js
+date_end=$(date "+%Y%m%d-%H%M%S")
+echo "finish backup mysql database ${db_name} at ${date_end}."
+
+## 增量备份脚本
+#!/bin/bash
+#在使用之前，请提前创建以下各个目录
+BakDir=/usr/local/work/backup/daily
+#增量备份时复制mysql-bin.00000*的目标目录，提前手动创建这个目录
+BinDir=/var/lib/mysql
+#mysql的数据目录
+LogFile=/usr/local/work/backup/bak.log
+BinFile=/var/lib/mysql/mysql-bin.index
+#mysql的index文件路径，放在数据目录下的
+​
+mysqladmin -uroot -p123456 flush-logs
+#这个是用于产生新的mysql-bin.00000*文件
+# wc -l 统计行数
+# awk 简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。
+Counter=`wc -l $BinFile |awk '{print $1}'`
+NextNum=0
+#这个for循环用于比对$Counter,$NextNum这两个值来确定文件是不是存在或最新的
+for file in `cat $BinFile`
+do
+    base=`basename $file`
+    echo $base
+    #basename用于截取mysql-bin.00000*文件名，去掉./mysql-bin.000005前面的./
+    NextNum=`expr $NextNum + 1`
+    if [ $NextNum -eq $Counter ]
+    then
+        echo $base skip! >> $LogFile
+    else
+        dest=$BakDir/$base
+        if(test -e $dest)
+        #test -e用于检测目标文件是否存在，存在就写exist!到$LogFile去
+        then
+            echo $base exist! >> $LogFile
+        else
+            cp $BinDir/$base $BakDir
+            echo $base copying >> $LogFile
+         fi
+     fi
+done
+echo `date +"%Y年%m月%d日 %H:%M:%S"` $Next Bakup succ! >> $LogFile
+​
+#NODE_ENV=$backUpFolder@$backUpFileName /root/.nvm/versions/node/v8.11.3/bin/node /usr/local/work/script/upload.js
+```
 
 ### sysbench
 
@@ -1422,236 +1556,17 @@ http://localhost:3000
 * Sorting: `/api/payments?_sort=column1` `/api/payments?_sort=-column1` `/api/payments?_sort=column1,-column2`
 * Fields `/api/payments?_fields=customerNumber,checkNumber` `/api/payments?_fields=-checkNumber`
 
-### MySQL Proxy
-
-LVS、HAProxy、Nginx
-
-MySQL Proxy的主要作用是用来做负载均衡，数据库读写分离的。但是需要注意的是，MySQL Proxy还有个强大的扩展功能就是支持Lua语言.
-
-启动MySQL Proxy的时候，加载一个Lua脚本，对每一个进入的query或者insert之类的语句做一次安全检查，甚至替换查询中的某些内容，这样在程序员的 程序中忘记了过滤参数的情况下，还有最后一道防线可用。而且由于是Lua这样的动态脚本语言，在开发，修正，部署方面都会有极大的灵活性。
-
-* connect_server() — 这个函数每次client连接的时候被调用，可以用这个函数来处理负载均衡，决定当前的请求发给那个后台的服务器，如果没有指定这个函数，那么就会采用简单的轮询机制。
-* read_handshake() — 这个函数在server返回初始握手信息时被调用，可以调用这个函数在验证信息发给服务器前进行额外的检查。
-* read_auth() — client发送验证信息给服务器的时候会调用这个函数。
-* read_auth_result() — 服务器验证信息返回后调用这个函数。
-* read_query() — 每次client发送查询请求函数的时候被调用，可以用这个函数进行查询语句的预处理，过滤掉非预期的查询等等，这个是最常用的函数。
-* read_query_result() — 查询结果返回是调用的函数，可以进行结果集处理。
-
-## 维护
-
-* 通常地，单表物理大小不超过10GB，单表行数不超过1亿条，行平均长度不超过8KB，如果机器性能足够，这些数据量MySQL是完全能处理的过来的，不用担心性能问题，这么建议主要是考虑ONLINE DDL的代价较高；
-* 不用太担心mysqld进程占用太多内存，只要不发生OOM kill和用到大量的SWAP都还好；
-* 在以往，单机上跑多实例的目的是能最大化利用计算资源，如果单实例已经能耗尽大部分计算资源的话，就没必要再跑多实例了；
-* 定期使用pt-duplicate-key-checker检查并删除重复的索引。定期使用pt-index-usage工具检查并删除使用频率很低的索引；
-* 定期采集slow query log，用pt-query-digest工具进行分析，可结合Anemometer系统进行slow query管理以便分析slow query并进行后续优化工作；
-* 可使用pt-kill杀掉超长时间的SQL请求，Percona版本中有个选项 innodb_kill_idle_transaction 也可实现该功能；
-* 使用pt-online-schema-change来完成大表的ONLINE DDL需求；
-* 定期使用pt-table-checksum、pt-table-sync来检查并修复mysql主从复制的数据差异；
-
-## performance
-
-QPS（Queries Per Second，每秒查询书）
-TPS（Transactions Per Second）
-
-```sql
-show global status like 'Questions';
-show global status like 'Uptime'; # QPS = Questions / Uptime
-
-show global status like 'Com_commit';
-show global status like 'Com_rollback';
-show global status like 'Uptime'; # TPS = (Com_commit + Com_rollback) / Uptime
-
-vmstat 1 3 #  pay attentin to cpu
-iostat -d -k 1 3
-```
-
-### 主从复制
-
-MySQL 在每个事务更新数据之前，由 Master 将事务串行的写入二进制日志，即使事务中的语句都是交叉执行的，之后通知存储引擎提交事务。MySQL支持三种复制方式，实现了Data Distribution、Load Balancing、Backups、High Availability and Failover等特性。
-
-* 基于语句复制：在主服务器上执行的SQL语句，在从服务器上执行同样的语句。MySQL默认采用基于语句的复制，效率比较高。
-* 基于行复制：MySQL5.0开始支持把改变的内容复制过去，而不是把命令在从服务器上执行一遍。
-* 混合类型复制：默认采用基于语句的复制，一旦发现基于语句的无法精确的复制时，就会采用基于行的复制。
-
-![master-slave](../_static/master-slave.gif "master-slave")
-
-* Master binlog输出线程：Master为每一个复制连接请求创建一个binlog输出线程，用于输出日志内容到相应的Slave；
-* Slave I/O线程：在start slave之后，该线程负责从Master上拉取binlog内容放进自己的Relay Log中；
-* Slave SQL线程：负责执行Relay Log中的语句。
-* [使用 Docker 完成 MySQL 数据库主从配置](https://juejin.im/post/59fd71c25188254dfa1287a9)
-* master将改变记录到二进制日志(binary log)中（这些记录叫做二进制日志事件，binary log events，可以通过show binlog events进行查看）；
-* slave将master的binary log events拷贝到它的中继日志(relay log)；
-* slave重做中继日志中的事件，将改变反映它自己的数据。
-
-### 问题
-
-- 无法远程连接mysql(报错111)：注释掉my.cnf中的bind-address或绑定本地ip
-- 添加server-id and log_bin=
-- 主从服务器检查show variables like 'server%'
-- 主服务器与从服务器
-
-```sql
-GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' IDENTIFIED BY 'slave_password';
-FLUSH PRIVILEGES;
-SHOW MASTER STATUS;
-
-CHANGE MASTER TO MASTER_HOST='202.167.45.10',MASTER_USER='slave_user', MASTER_PASSWORD='slave_password', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=  107;
-START slave;
-show slave status\G;
-
-Slave_IO_Running = NO：stop slave; reset slave;start slave;
-```
-
-### 读写分离
-
-通过mysql-proxy调度：与主服务器在一台服务器上，用源代码安装含有lua脚本
-
-```shell
-sudo apt-get install mysql-proxy
-```
-
-## slow log
-
-```sql
-# 开启慢查询日志
-set global slow-query-log=on
-set global slow_query_log_file='/var/log/mysql/mysql-slow.log';
-# 指定慢查询日志文件位置
-set global log_queries_not_using_indexes=on;
-# 记录没有使用索引的查询
-set global long_query_time=1;
-# 只记录处理时间1s以上的慢查询
-分析慢查询日志，可以使用MySQL自带的mysqldumpslow工具，分析的日志较为简单。
-mysqldumpslow -t 3 /var/log/mysql/mysql-slow.log
-# 查看最慢的前三个查询
-也可以使用percona公司的pt-query-digest工具，日志分析功能全面，可分析slow log、binlog、general log。
-分析慢查询日志：pt-query-digest /var/log/mysql/mysql-slow.log
-分析binlog日志：mysqlbinlog mysql-bin.000001 >mysql-bin.000001.sql
-pt-query-digest --type=binlog mysql-bin.000001.sql
-分析普通日志：pt-query-digest --type=genlog localhost.log
-```
-
-## 备份
-
-* 备份策略：每天做一次增量备份，每周做一次全量备份，通过定时任务做
-* 在二级复制服务器上进行备份。
-* 备份过程中停止数据的复制，以防止出现数据依赖和外键约束的不一致。
-* 彻底停止MySQL之后，再从数据文件进行备份。
-* 如果使用MySQL dump进行备份，请同时备份二进制日志 — 确保复制过程不被中断。
-* 不要信任 LVM 快照的备份 — 可能会创建不一致的数据，将来会因此产生问题。
-* 为每个表做一个备份，这样更容易实现单表的恢复 — 如果数据与其他表是相互独立的。
-* 使用 mysqldump 时，指定 -opt 参数。
-* 备份前检测和优化表。
-* 临时禁用外键约束，来提高导入的速度。
-* 临时禁用唯一性检查，来提高导入的速度。
-* 每次备份完后，计算数据库/表数据和索引的大小，监控其增长。
-* 使用定时任务（cron）脚本，来监控从库复制的错误和延迟。
-* 定期备份数据。
-* 定期测试备份的数据
-* mysqlcheck
-
-```
-mysqldump -h 主机名 -u 用户名 -p --all-databases > dump.sql
-mysqldump -h 主机名 -u 用户名 -p --databases 库名1 [库名2 ...] > dump.sql
-mysqldump -h 主机名 -u 用户名 -p 库名 表名1 [表名2 ...] > dump.sql
-
-# 全量备份
-/usr/bin/mysqldump -uroot -p123456  --lock-all-tables --flush-logs test > /home/backup.sql # 参数 —flush-logs：使用一个新的日志文件来记录接下来的日志； —lock-all-tables：锁定所有数据库;
-
-## 脚本
-#!/bin/bash
-#在使用之前，请提前创建以下各个目录
-#获取当前时间
-date_now=$(date "+%Y%m%d-%H%M%S")
-backUpFolder=/home/db/backup/mysql
-username="root"
-password="123456"
-db_name="zone"
-#定义备份文件名
-fileName="${db_name}_${date_now}.sql"
-#定义备份文件目录
-backUpFileName="${backUpFolder}/${fileName}"
-echo "starting backup mysql ${db_name} at ${date_now}."
-/usr/bin/mysqldump -u${username} -p${password}  --lock-all-tables --flush-logs ${db_name} > ${backUpFileName}
-#进入到备份文件目录
-cd ${backUpFolder}
-#压缩备份文件
-tar zcvf ${fileName}.tar.gz ${fileName}
-​
-# use nodejs to upload backup file other place
-#NODE_ENV=$backUpFolder@$backUpFileName node /home/tasks/upload.js
-date_end=$(date "+%Y%m%d-%H%M%S")
-echo "finish backup mysql database ${db_name} at ${date_end}."
-
-# 恢复全量备份
-mysql -uroot -p < dump.sql
-source  dump.sql
-
-## 增量备份
-# 查看 log_bin 是否开启，因为要做增量备份要开启 log_bin
-show variables like '%log_bin%';
-# 修改配置文件，重启mysql服务，查看sql_log_bin 开启
-#/etc/mysql/mysql.conf.d/mysqld.cnf
-log-bin=/var/lib/mysql/mysql-bin
-server-id=123454
-
-# 查看当前使用的 mysql_bin.000*** 日志文件
-show master status;
-# 添加数据
-insert into `zone`.`users` ( `name`, `sex`, `id`) values ( 'zone3', '0', '4');
-
-# 使用新的日志文件
-mysqladmin -uroot -123456 flush-logs
-# 将刚刚插入的数据删除
-# 恢复
-mysqlbinlog /var/lib/mysql/mysql-bin.000015 | mysql -uroot -p123456 zone;
-
-## 增量备份脚本
-#!/bin/bash
-#在使用之前，请提前创建以下各个目录
-BakDir=/usr/local/work/backup/daily
-#增量备份时复制mysql-bin.00000*的目标目录，提前手动创建这个目录
-BinDir=/var/lib/mysql
-#mysql的数据目录
-LogFile=/usr/local/work/backup/bak.log
-BinFile=/var/lib/mysql/mysql-bin.index
-#mysql的index文件路径，放在数据目录下的
-​
-mysqladmin -uroot -p123456 flush-logs
-#这个是用于产生新的mysql-bin.00000*文件
-# wc -l 统计行数
-# awk 简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。
-Counter=`wc -l $BinFile |awk '{print $1}'`
-NextNum=0
-#这个for循环用于比对$Counter,$NextNum这两个值来确定文件是不是存在或最新的
-for file in `cat $BinFile`
-do
-    base=`basename $file`
-    echo $base
-    #basename用于截取mysql-bin.00000*文件名，去掉./mysql-bin.000005前面的./
-    NextNum=`expr $NextNum + 1`
-    if [ $NextNum -eq $Counter ]
-    then
-        echo $base skip! >> $LogFile
-    else
-        dest=$BakDir/$base
-        if(test -e $dest)
-        #test -e用于检测目标文件是否存在，存在就写exist!到$LogFile去
-        then
-            echo $base exist! >> $LogFile
-        else
-            cp $BinDir/$base $BakDir
-            echo $base copying >> $LogFile
-         fi
-     fi
-done
-echo `date +"%Y年%m月%d日 %H:%M:%S"` $Next Bakup succ! >> $LogFile
-​
-#NODE_ENV=$backUpFolder@$backUpFileName /root/.nvm/versions/node/v8.11.3/bin/node /usr/local/work/script/upload.js
-```
-
 ## 工具
 
+*  客户端
+    + 命令行
+    + MySQLWorkbench
+    + SQLyog   `ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
+    + [phpmyadmin/phpmyadmin](https://github.com/phpmyadmin/phpmyadmin):A web interface for MySQL and MariaDB https://www.phpmyadmin.net/
+    + Sequel Pro
+* ER图
+    - PowerDesigner
+    - MySQL Workbench
 * [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. http://vitess.io
 * [dbcli/mycli](https://github.com/dbcli/mycli):A Terminal Client for MySQL with AutoCompletion and Syntax Highlighting. http://mycli.net
 * [github/orchestrator](https://github.com/github/orchestrator):MySQL replication topology management and HA

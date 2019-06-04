@@ -172,7 +172,7 @@
     - (https://github.com/rdlowrey/Auryn)[Auryn]: 一个递归的依赖注入容器
     - (https://github.com/thephpleague/container)[Container]: 另一个可伸缩的依赖注入容器
     - (https://github.com/bitExpert/disco)[Disco]: 一个兼容PSR-11基于annotation的依赖注入容器
-    - (http://php-di.org/)[PHP-DI]: 一个支持自动装配和PHP配置的依赖注入容器
+    - [PHP-DI](https://github.com/PHP-DI/PHP-DI): 一个支持自动装配和PHP配置的依赖注入容器 http://php-di.org/
     - (http://pimple.sensiolabs.org/)[Pimple]: 一个小的依赖注入容器
     - (https://github.com/symfony/dependency-injection)[Symfony DI]: 一个依赖注入容器组件 (SF2)
 * 图像 Imagery 处理图像的库

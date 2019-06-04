@@ -20,8 +20,8 @@ spring --version
 
 ## 项目
 
-* [小柒2012 / spring-boot-seckill](https://gitee.com/52itstyle/spring-boot-seckill):从0到1构建分布式秒杀系统，脱离案例讲架构都是耍流氓
-https://blog.52itstyle.vip/archives/2853/
+* [小柒2012 / spring-boot-seckill](https://gitee.com/52itstyle/spring-boot-seckill):从0到1构建分布式秒杀系统，脱离案例讲架构都是耍流氓 https://blog.52itstyle.vip/archives/2853/
+* [ityouknow/spring-boot-examples](https://github.com/ityouknow/spring-boot-examples):about learning Spring Boot via examples. Spring Boot 教程、技术栈示例代码，快速简单上手教程。 http://www.ityouknow.com/
 
 ## 教程
 

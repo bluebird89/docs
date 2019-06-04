@@ -83,3 +83,5 @@ http://xyz.amazonaws.com/hello-world
 ## 参考
 
 * [phodal/serverless](https://github.com/phodal/serverless/):Serverless 架构应用开发指南 - Serverless Architecture Application Development Guide with Serverless Framework. https://serverless.ink
+* [serverless/serverless](https://github.com/serverless/serverless):Serverless Framework – Build web, mobile and IoT applications with serverless architectures using AWS Lambda, Azure Functions, Google CloudFunctions & more! – https://serverless.com
+* [mnapoli/bref](https://github.com/mnapoli/bref):Serverless PHP on AWS Lambda https://bref.sh/
