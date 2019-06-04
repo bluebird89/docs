@@ -146,6 +146,10 @@ systemctl restart haproxy.service
 # 问haproxy机器的8600端口进入rabbitmq集群管理界面，8660端口通讯
 ```
 
+## 图书
+
+* 《深入RabbitMQ》 Gavin M.Roy
+
 ## 参考
 
 * [文档](http://www.rabbitmq.com/tutorials/tutorial-one-php.html)

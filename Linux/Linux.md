@@ -753,33 +753,47 @@ wget -O newname.md https://github.com/LCTT/TranslateProject/blob/master/README.m
 wget -c url     ### 下载 url 并开启断点续传
 ```
 
-### 抓包
+### [Tcpdump](http://www.tcpdump.org/)
 
-* -a 　　　将网络地址和广播地址转变成名字；
-* -d 　　　将匹配信息包的代码以人们能够理解的汇编格式给出；
-* -dd 　　　将匹配信息包的代码以c语言程序段的格式给出；
-* -ddd 　　　将匹配信息包的代码以十进制的形式给出；
-* -e 　　　在输出行打印出数据链路层的头部信息；
-* -f 　　　将外部的Internet地址以数字的形式打印出来；
-* -l 　　　使标准输出变为缓冲行形式；
-* -n 　　　不把网络地址转换成名字；
-* -t 　　　在输出的每一行不打印时间戳；
-* -v 　　　输出一个稍微详细的信息，例如在ip包中可以包括ttl和服务类型的信息；
-* -vv 　　　输出详细的报文信息；
-* -c 　　　在收到指定的包的数目后，tcpdump就会停止；
-* -F 　　　从指定的文件中读取表达式,忽略其它的表达式；
-* -i 　　　指定监听的网络接口；
-* -r 　　　从指定的文件中读取包(这些包一般通过-w选项产生)；
-* -w 　　　直接将包写入文件中，并不分析和打印出来；
-* -T 　　　将监听到的包直接解释为指定的类型的报文，常见的类型有rpc（远程过程调用）和snmp（简单网络管理协议；）
+在命令行中指定的表达式输出匹配捕获到的数据包的信息
+
+* 模式
+  - 主机过滤
+  - 端口过滤
+  - 网络过滤
+  - 协议过滤
+* 参数
+  - -a 　　　将网络地址和广播地址转变成名字；
+  - -d 　　　将匹配信息包的代码以人们能够理解的汇编格式给出；
+  - -dd 　　　将匹配信息包的代码以c语言程序段的格式给出；
+  - -ddd 　　　将匹配信息包的代码以十进制的形式给出；
+  - -e 　　　在输出行打印出数据链路层的头部信息；
+  - -f 　　　将外部的Internet地址以数字的形式打印出来；
+  - -l 　　　使标准输出变为缓冲行形式；
+  - -n 　　　不把网络地址转换成名字；
+  - -t 　　　在输出的每一行不打印时间戳；
+  - -v 　　　输出一个稍微详细的信息，例如在ip包中可以包括ttl和服务类型的信息；
+  - -vv 　　　输出详细的报文信息；
+  - -c 　　　在收到指定的包的数目后，tcpdump就会停止；
+  - -F 　　　从指定的文件中读取表达式,忽略其它的表达式；
+  - -i 　　　指定监听的网络接口；
+  - -r 　　　从指定的文件中读取包(这些包一般通过-w选项产生)；
+  - -w 　　　直接将包写入文件中，并不分析和打印出来；
+  - -T 　　　将监听到的包直接解释为指定的类型的报文，常见的类型有rpc（远程过程调用）和snmp（简单网络管理协议）
+* 表达式
+  - 非 : ! or "not" (去掉双引号)
+  - 且 : && or "and"
+  - 或 : || or "or"
 
 ```sh
-# 抓取所有经过网卡1，目的IP为172.16.7.206的网络数据
-tcpdump -i eth1 host 172.16.7.206
-# 抓取所有经过网卡1，目的端口为1234的网络数据
-tcpdump -i eth1 dst port 1234
+# 抓取所有经过网卡1，目的或源地址IP为172.16.7.206的网络数据
+tcpdump -i eth1 [src|dst] host 172.16.7.206
+# 抓取所有经过网卡1，目的或源端口为1234的网络数据
+tcpdump -i eth1 [src|dst] port 1234
+
+tcpdump -i eth1 [src|dst] net 192.168
 # 抓取所有经过网卡1，协议类型为UDP的网络数据
-tcpdump -i eth1 udp
+tcpdump -i eth1 udp|arp|ip|tcp|icmp
 # 抓取本地环路数据包
 tcpdump -i lo udp # 抓取UDP数据
 tcpdump -i lo udp port 1234 # 抓取端口1234的UDP数据
@@ -795,9 +809,31 @@ tcpdump -i eth1 udp dst port 53
 
 # 逻辑语句过滤：抓取所有经过网卡1，目的网络是172.16，但目的主机不是192.168.1.200的TCP数据
 tcpdump -i eth1 ‘((tcp) and ((dst net 172.16) and (not dst host 192.168.1.200)))’
-
+# 抓取所有经过 eth1，目标 MAC 地址是 00:01:02:03:04:05 的 ICMP 数据
+tcpdump -i eth1 '((icmp) and ((ether dst host 00:01:02:03:04:05)))'
 # 抓取所有经过网卡1，目的主机为172.16.7.206的端口80的网络数据并存储
 tcpdump -i eth1 host 172.16.7.206 and port 80 -w /tmp/xxx.cap
+
+# 只抓 SYN 包
+tcpdump -i eth1 'tcp[tcpflags] = tcp-syn'
+# 抓 SYN, ACK
+tcpdump -i eth1 'tcp[tcpflags] & tcp-syn != 0 and tcp[tcpflags] & tcp-ack != 0'
+# 抓 SMTP 数据
+# 抓取数据区开始为"MAIL"的包，"MAIL"的十六进制为 0x4d41494c。
+tcpdump -i eth1 '((port 25) and (tcp[(tcp[12]>>2):4] = 0x4d41494c))'
+
+# 抓 HTTP GET 数据
+tcpdump -i eth1 'tcp[(tcp[12]>>2):4] = 0x47455420' # "GET "的十六进制是 47455420
+#抓 SSH 返回
+tcpdump -i eth1 'tcp[(tcp[12]>>2):4] = 0x5353482D' # "SSH-"的十六进制是 0x5353482D
+
+# 抓老版本的 SSH 返回信息，如"SSH-1.99.."
+tcpdump -i eth1 '(tcp[(tcp[12]>>2):4] = 0x5353482D) and (tcp[((tcp[12]>>2)+4):2]= 0x312E)'
+# 抓取端口号8000的GET包，然后写入GET.log
+tcpdump -i eth0 '((port 8000) and (tcp[(tcp[12]>>2):4]=0x47455420))' -nnAl -w /tmp/GET.log
+
+# 抓 DNS 请求数据
+tcpdump -i eth1 udp dst port 53
 ```
 
 ### 身份
