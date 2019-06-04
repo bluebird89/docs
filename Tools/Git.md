@@ -296,9 +296,9 @@ gpg --sign demo.txt #签名
 
 Git维护的就是一个commitID树，分别保存着不同状态下的代码。 所以你对代码的任何修改，最终都会反映到 commit 上面去。创建和保存项目的快照及与之后的快照进行对比
 
-* 工作区（Workspace）:进行开发改动的地方，任何对象都是在工作区中诞生和被修改；文件状态：modified:working directory
+* 工作区（Workspace）:开发改动的地方，任何对象都是在工作区中诞生和被修改；文件状态：modified:working directory
 * 暂存区（Index/Stage）:.git目录下的index文件, 暂存区会索引git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；文件状态：staged:Stage(Index)
-* 版本库|本地仓库（Repository）:.git文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；里还包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History
+* 版本库|本地仓库（Repository）:.git文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History,这部分是仓库的控制中心
 * 远程仓库(Remote):通常使用clone命令将远程仓库拷贝到本地仓库中，开发后推送到远程仓库中即可；
 
 ![Git原理-1](../_static/bg2015120901.png)

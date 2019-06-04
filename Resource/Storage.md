@@ -38,4 +38,4 @@ sha256sum /path/filename
 * [agalwood/Motrix](https://github.com/agalwood/Motrix):A full-featured download manger. https://motrix.app/
 * [Downie](https://software.charliemonroe.net/downie/):YouTube Video Downloader for macOS - Charlie
 * [bundlehunt](https://bundlehunt.com/?)
-* [](https://www.baiduwp.com/)
+* [盘下载器](https://www.baiduwp.com/)

@@ -95,6 +95,19 @@ LABLE标签 goto break continue
 
 slice reslice
 
+## 协程
+
+多线程或多进程是并行的基本条件，但单线程也可以用协程(coroutine)做到并发。简单将Goroutine归纳为协程并不合适，因为它运行时会创建多个线程来执行并发任务，且任务单元可被调度到其它线程执行。这更像是多线程和协程的结合体，能最大限度提升执行效率，发挥多核处理器能力。
+
+```go
+// Go编写一个并发编程程序很简单，只需要在函数之前使用一个Go关键字就可以实现并发编程。
+func main() {
+  go func(){
+        fmt.Println("Hello,World!")
+    }()
+}
+```
+
 ### sublime
 
 * 安装gosublime插件
