@@ -24,6 +24,10 @@ kafka-console-producer --broker-list localhost:9092 --topic test
 kafka-console-consumer --bootstrap-server localhost:9092 --topic test --from-beginning
 ```
 
+## 图书
+
+* 《Kafka源码解析与实战》 王亮
+
 ## 项目
 
 * [weiboad/kafka-php](https://github.com/weiboad/kafka-php):kafka php client
