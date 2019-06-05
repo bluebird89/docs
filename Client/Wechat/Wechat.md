@@ -74,6 +74,7 @@ if ($tmpstr==$signature) {
 * [Chatie/wechaty](https://github.com/Chatie/wechaty):WeChat Bot SDK for Personal Account, Powered by TypeScript, Docker, and 💖 https://blog.chatie.io
 * 机器人
     - [youfou/wxpy](https://github.com/youfou/wxpy):微信机器人 / 可能是最优雅的微信个人号 API ✨✨ http://wxpy.readthedocs.io
+    - [Hanson/vbot](https://github.com/hanson/vbot):💬The best wechat robot base on web api! http://create.hanc.cc/vbot/
 * [offu/WeRoBot](https://github.com/offu/WeRoBot):WeRoBot 是一个微信公众号开发框架 https://werobot.readthedocs.io/zh_CN/latest/
 * [lyricat/wechat-format](https://github.com/lyricat/wechat-format):微信公众号排版编辑器，转换 Markdown 到微信特制的 HTML https://lab.lyric.im/wxformat
 

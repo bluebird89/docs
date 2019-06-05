@@ -115,7 +115,10 @@ func main() {
 
 ## 文档
 
-* 离线文档：`godoc -http=:6060` 访问`http://localhost:6060/`
+
+* 离线文档
+  - `go get golang.org/x/tools/cmd/godoc`
+  - `godoc -http=:6060` 访问`http://localhost:6060/`
 - [deanishe/awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
 
 ### [joewalnes/websocketd](https://github.com/joewalnes/websocketd)
@@ -213,6 +216,7 @@ websocketd --port=8080 ./count.sh // 建立server
 * ORM
   - [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io
   - [gomods/athens](https://github.com/gomods/athens):A Go module datastore and proxy https://docs.gomods.io
+  - [jinzhu/gorm](https://github.com/jinzhu/gorm):The fantastic ORM library for Golang, aims to be developer friendly https://gorm.io
 * 路由
   - [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
 * error
@@ -344,6 +348,7 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * [ry/v8worker](https://github.com/ry/v8worker):Minimal golang binding to V8
 * Raft
   - [lni/dragonboat](https://github.com/lni/dragonboat):A feature complete and high performance multi-group Raft library in Go.
+* [go-swagger/go-swagger](https://github.com/go-swagger/go-swagger):Swagger 2.0 implementation for go https://goswagger.io
 
 ## 参考
 
