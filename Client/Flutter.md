@@ -81,6 +81,7 @@ pod setup
 * [pszklarska/FlutterShoppingCart](https://github.com/pszklarska/FlutterShoppingCart):Flutter example of shopping app using Redux architecture https://hackernoon.com/flutter-redux-how-to-make-shopping-list-app-1cd315e79b65
 * [2d-inc/HistoryOfEverything](https://github.com/2d-inc/HistoryOfEverything):Flutter Launch Timeline Demo
 * [Mayandev/morec](https://github.com/Mayandev/morec):💥非常精美的 Flutter 版电影客户端，利用豆瓣现有的 Api，打造了一个完整的电影展示 App(部分 UI 仿豆瓣电影🎥)。 A beautiful movie application build by flutter.
+* [alibaba/flutter-go](https://github.com/alibaba/flutter-go):flutter 开发者帮助 APP，包含 flutter 常用 140+ 组件的demo 演示与中文文档
 
 ## 工具
 

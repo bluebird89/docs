@@ -7,7 +7,6 @@
   - 外部样式表
   - 内部样式表
   - 内联样式
-* 
 
 ```html
 <link rel="stylesheet" type="text/css" href="mystyle.css" />
@@ -589,6 +588,12 @@ position属性
 
 * caniuse检测你正在使用的属性是否被广泛支持
 * Validate
+
+## 问题
+
+```
+https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,300italic 
+```
 
 ## framework
 
