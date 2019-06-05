@@ -25,5 +25,4 @@ npm install --save-dev babel-cli
 
 ## tool
 
-* [swc-project/swc
-](https://github.com/swc-project/swc):Super-fast alternative for babel https://swc-project.github.io/rustdoc/swc/
+* [swc-project/swc](https://github.com/swc-project/swc):Super-fast alternative for babel https://swc-project.github.io/rustdoc/swc/
