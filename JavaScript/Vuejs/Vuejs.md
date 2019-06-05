@@ -121,20 +121,6 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 ### [服务器端渲染（Server side rendering SSR）](https://github.com/vuejs/vue-ssr-docs)
 
 
-## [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
-
-hammer_and_wrench CLI for rapid Vue.js development https://cli.vuejs.org/
-
-* 3.0:图形化界面
-
-```sh
-npm install @vue/cli -g
-yarn global add @vue/cli
-
-vue list
-vue init <template-name> <project-name> # vue init webpack my-project vue init Plortinus/vue-multiple-pages new-project
-```
-
 ## Editor
 
 * [heyscrumpy/tiptap](https://github.com/heyscrumpy/tiptap):A rich-text editor for Vue.js https://tiptap.scrumpy.io
@@ -144,13 +130,10 @@ vue init <template-name> <project-name> # vue init webpack my-project vue init P
 
 * [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
 * [dcloudio/uni-app](https://github.com/dcloudio/uni-app):使用 Vue.js 开发跨平台应用的前端框架 http://uniapp.dcloud.io
-
-### [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
-
-🛠️ Standard Tooling for Vue.js Development https://cli.vuejs.org/
+* [quasarframework/quasar](https://github.com/quasarframework/quasar):Quasar Framework - High performance, Material Design 2, full front end stack with Vue.js https://quasar.dev http://www.quasarchs.com
 
 ```sh
-npm install -g @vue/cli
+ vue init quasarframework/quasar-starter-kit-umd projectName
 ```
 
 ## UI
@@ -185,7 +168,6 @@ npm install -g @vue/cli
 ## 组件
 
 组件系统:可扩展HTML元素，封装可重用代码。自定义的元素
-
 
 - vue-resource
 - better-scroll
@@ -240,6 +222,11 @@ npm install -g @vue/cli
 
 ## 工具
 
+* [vuejs/vue-cli](https://github.com/vuejs/vue-cli):🛠️ Standard Tooling for Vue.js Development https://cli.vuejs.org/
+  - `npm install -g @vue/cli` `yarn global add @vue/cli`
+  - 3.0:图形化界面
+  - `vue list`
+  - `vue init <template-name> <project-name>` # vue init webpack my-project  vue init Plortinus/vue-multiple-pages new-project
 * [mimecorg/vuido](https://github.com/mimecorg/vuido):Native desktop applications using Vue.js.
 * [halfrost/vue-objccn](https://github.com/halfrost/vue-objccn):🔥 用 Vue.js 开发的跨三端应用 / Use Vue.js to develop a cross-platform full stack application
 * [SimulatedGREG/electron-vue](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack.
