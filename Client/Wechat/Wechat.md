@@ -49,10 +49,6 @@ if ($tmpstr==$signature) {
 * [wux-weapp/wux-weapp](https://github.com/wux-weapp/wux-weapp):🐶 微信小程序自定义 UI 组件 https://wux-weapp.github.io/wux-weapp
 * [weui](https://github.com/Tencent/weui):A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications. https://weui.io
 
-## 客户端
-
-* [trazyn/weweChat](https://github.com/trazyn/weweChat):💬 Unofficial WeChat client built with React, MobX and Electron.
-
 ## 工具
 
 * [15921483570/wechat_spider](https://github.com/15921483570/wechat_spider):微信公众号爬虫 (只需设置代理, 一键可以爬取所有历史文章)
@@ -75,8 +71,10 @@ if ($tmpstr==$signature) {
 * 机器人
     - [youfou/wxpy](https://github.com/youfou/wxpy):微信机器人 / 可能是最优雅的微信个人号 API ✨✨ http://wxpy.readthedocs.io
     - [Hanson/vbot](https://github.com/hanson/vbot):💬The best wechat robot base on web api! http://create.hanc.cc/vbot/
-* [offu/WeRoBot](https://github.com/offu/WeRoBot):WeRoBot 是一个微信公众号开发框架 https://werobot.readthedocs.io/zh_CN/latest/
+    - [offu/WeRoBot](https://github.com/offu/WeRoBot):WeRoBot 是一个微信公众号开发框架 https://werobot.readthedocs.io/zh_CN/latest/
 * [lyricat/wechat-format](https://github.com/lyricat/wechat-format):微信公众号排版编辑器，转换 Markdown 到微信特制的 HTML https://lab.lyric.im/wxformat
+* 客户端
+    - [trazyn/weweChat](https://github.com/trazyn/weweChat):💬 Unofficial WeChat client built with React, MobX and Electron.
 
 ## 参考
 

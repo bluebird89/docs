@@ -138,9 +138,11 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 * MultiTail 是在控制台打开多个窗口用来实现同时监控多个日志文档、类似 tail 命令的功能的软件
 * [Fail2ban](http://www.fail2ban.org/wiki/index.php/Downloads) 可以监视你的系统日志然后匹配日志的错误信息正则式匹配执行相应的屏蔽动作一般情况下是调用防火墙屏蔽
 * Tmux 是一个优秀的终端复用软件类似 GNU Screen 比 Screen 更加方面、灵活和高效。为了确保连接 SSH 时掉线不影响任务运行
-* 页面显示磁盘空间使用情况 - [Agedu](http://www.chiark.greenend.org.uk/~sgtatham/agedu/)
+* [Agedu](http://www.chiark.greenend.org.uk/~sgtatham/agedu/):页面显示磁盘空间使用情况
 * [NMap](http://nmap.org/download.html)是 Linux 下的网络连接扫描和嗅探工具包用来扫描网上电脑开放的网络连接端。
 * [Httperf](http://code.google.com/p/httperf/downloads/list) 比 ab 更强大，能测试出 web 服务能承载的最大服务量及发现潜在问题；比如：内存使用、稳定性。最大优势：可以指定规律进行压力测试，模拟真实环境。
+* [CODO](https://github.com/opendevops-cn):为用户提供企业多混合云、自动化运维、完全开源的云管理平台。前端基于Vue iview开发、为用户提供友好的操作界面，增强用户体验。 后端基于Python Tornado开发，其优势为轻量、简洁清晰、异步非阻塞 http://www.opendevops.cn
+    - [demo](http://demo.opendevops.cn) 用户：demo 密码：2ZbFYNv9WibWcR7GB6kcEY
 
 ## 参考
 
