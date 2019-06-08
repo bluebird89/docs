@@ -643,13 +643,7 @@ HTTP下加入SSL层，HTTPS的安全基础是SSL(Secure Sockets Layer 安全套�
 
 HTTP-over-QUIC 实验协议将被重命名为 HTTP/3，并成为 HTTP 协议的第三个正式版本。基于UDP
 
-### 扩展
-
 * [lucas-clemente/quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
-
-## 测试
-
-* [tsenart/vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. https://godoc.org/github.com/tsenart/vegeta/lib
 
 ## 实例
 
@@ -687,6 +681,10 @@ HTTP-over-QUIC 实验协议将被重命名为 HTTP/3，并成为 HTTP 协议的�
     - [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
 * test
     - [JoeDog/siege](https://github.com/JoeDog/siege):Siege is an http load tester and benchmarking utility
+* 测试
+    - [tsenart/vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. https://godoc.org/github.com/tsenart/vegeta/lib
+* 抓包
+    - [httpwatch](https://www.httpwatch.com/)
 
 ## 参考
 

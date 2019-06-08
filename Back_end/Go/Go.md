@@ -188,25 +188,48 @@ websocketd --port=8080 ./count.sh // 建立server
   - Go 语言是一种编程语言，它更重视的是机器时间而不是人类时间。有时候，你的领域中，机器，或者程序性能是最关键的。在这些情况下，Go 可以成为一个很好的 C 或 C++ 替代品。但是，当你编写一个典型的 n 层应用程序时，性能瓶颈通常会出现在数据库中，更重要的是，你将如何对数据建模。
   - 处理的是字节，那么 Go 语言可能是一个不错的选择。 处理的是数据，那么 Go 语言可能不是一个好的选择
 
-## 配置
+## 问题
 
-* [kelseyhightower/envconfig](https://github.com/kelseyhightower/envconfig):Golang library for managing configuration data from environment variables
+```
+package golang.org/x/crypto/acme/autocert: unrecognized import path "golang.org/x/crypto/acme/autocert" (https fetch: Get https://golang.org/x/crypto/acme/autocert?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)
 
-## 包管理
+git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
+```
 
-* [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
-* [Go Packages](https://godoc.org/)
-* [moovweb/gvm](https://github.com/moovweb/gvm):Go Version Manager http://github.com/moovweb/gvm
+## 图书
 
-## UI
+* [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源图书，涵盖CGO、Go汇编语言、RPC实现、Protobuf插件实现、Web框架实现、分布式系统等高阶主题 https://legacy.gitbook.com/book/chai2010/advanced-go-programming-book/details
+* [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN):《The Way to Go》中文译本，中文正式名《Go 入门指南》
 
-* [andlabs/ui](https://github.com/andlabs/ui):Platform-native GUI library for Go.
+## 项目
+
+* [hajimehoshi/ebiten](https://github.com/hajimehoshi/ebiten):A dead simple 2D game library in Go https://hajimehoshi.github.io/ebiten/
+
+## 教程
+
+* [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
+* [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源免费图书(开发中...)https://github.com/chai2010/advanced-go-programming-book
+* [astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
+* [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
+- [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. https://iris-go.com
+- [https://songjiayang.gitbooks.io](https://songjiayang.gitbooks.io)
+- [Go语言入门](https://www.yiibai.com/go/go_start.html)
+- [harlow/go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
+- [astaxie/gopkg](https://github.com/astaxie/gopkg):example for the go pkg's function
+* [astaxie/go-best-practice](https://github.com/astaxie/go-best-practice):Trying to complete over 100 projects in various categories in golang.
+* [Unknwon/go-fundamental-programming](https://github.com/Unknwon/go-fundamental-programming):《Go 编程基础》是一套针对 Google 出品的 Go 语言的视频语音教程，主要面向新手级别的学习者。
 
 ## 扩展
 
 * 框架
   + [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
   - [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang http://go-colly.org/
+* 包管理
+  - [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
+  - [Go Packages](https://godoc.org/)
+  - [moovweb/gvm](https://github.com/moovweb/gvm):Go Version Manager http://github.com/moovweb/gvm
+* UI
+  - [andlabs/ui](https://github.com/andlabs/ui):Platform-native GUI library for Go.
 * desktop apps
   - [zserge/lorca](https://github.com/zserge/lorca):Build cross-platform modern desktop apps in Go + HTML5
 * Cli
@@ -267,49 +290,16 @@ websocketd --port=8080 ./count.sh // 建立server
 * 安全
   - [OWASP/Go-SCP](https://github.com/OWASP/Go-SCP):Go programming language secure coding practices guide
   - [Checkmarx/Go-SCP](https://github.com/Checkmarx/Go-SCP):Go programming language secure coding practices guide
-
-## 问题
-
-```
-package golang.org/x/crypto/acme/autocert: unrecognized import path "golang.org/x/crypto/acme/autocert" (https fetch: Get https://golang.org/x/crypto/acme/autocert?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)
-
-git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
-```
-
-## 编辑器
-
-* [visualfc/liteide](https://github.com/visualfc/liteide)：LiteIDE is a simple, open source, cross-platform Go IDE.
-
-## 项目
-
-* [hajimehoshi/ebiten](https://github.com/hajimehoshi/ebiten):A dead simple 2D game library in Go https://hajimehoshi.github.io/ebiten/
-
-## 扩展
-
+* 配置
+  - [kelseyhightower/envconfig](https://github.com/kelseyhightower/envconfig):Golang library for managing configuration data from environment variables
 - [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
 - [grafana/grafana](https://github.com/grafana/grafana)The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
 - [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
 - [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
 * [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
 * [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
-
-## 代码规范
-
-* [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
-
-## 教程
-
-* [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
-* [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源免费图书(开发中...)https://github.com/chai2010/advanced-go-programming-book
-* [astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
-* [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
-- [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. https://iris-go.com
-- [https://songjiayang.gitbooks.io](https://songjiayang.gitbooks.io)
-- [Go语言入门](https://www.yiibai.com/go/go_start.html)
-- [harlow/go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
-- [astaxie/gopkg](https://github.com/astaxie/gopkg):example for the go pkg's function
-* [astaxie/go-best-practice](https://github.com/astaxie/go-best-practice):Trying to complete over 100 projects in various categories in golang.
-* [Unknwon/go-fundamental-programming](https://github.com/Unknwon/go-fundamental-programming):《Go 编程基础》是一套针对 Google 出品的 Go 语言的视频语音教程，主要面向新手级别的学习者。
+* 代码规范
+  - [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
 
 ## 工具
 
@@ -349,6 +339,8 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * Raft
   - [lni/dragonboat](https://github.com/lni/dragonboat):A feature complete and high performance multi-group Raft library in Go.
 * [go-swagger/go-swagger](https://github.com/go-swagger/go-swagger):Swagger 2.0 implementation for go https://goswagger.io
+* 编辑器
+  - [visualfc/liteide](https://github.com/visualfc/liteide)：LiteIDE is a simple, open source, cross-platform Go IDE.
 
 ## 参考
 
@@ -359,11 +351,6 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 - [changkun/go-under-the-hood](https://github.com/changkun/go-under-the-hood):Go 源码研究 (1.11.1, WIP)
 * [emirpasic/gods](https://github.com/emirpasic/gods):GoDS (Go Data Structures). Containers (Sets, Lists, Stacks, Maps, Trees), Sets (HashSet, TreeSet, LinkedHashSet), Lists (ArrayList, SinglyLinkedList, DoublyLinkedList), Stacks (LinkedListStack, ArrayStack), Maps (HashMap, TreeMap, HashBidiMap, TreeBidiMap, LinkedHashMap), Trees (RedBlackTree, AVLTree, BTree, BinaryHeap), Comparators, Iterators, …
 * [EDDYCJY/blog](https://github.com/EDDYCJY/blog):煎鱼的博客，啊。
-
-## 图书
-
-* [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源图书，涵盖CGO、Go汇编语言、RPC实现、Protobuf插件实现、Web框架实现、分布式系统等高阶主题 https://legacy.gitbook.com/book/chai2010/advanced-go-programming-book/details
-* [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN):《The Way to Go》中文译本，中文正式名《Go 入门指南》
 
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>
