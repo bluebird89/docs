@@ -260,6 +260,7 @@ iostat -d -k 1 3
     - 避免在 where 子句或ORDER BY中对字段进行表达式操作或者函数操作
 * UNION
     - UNION的策略是先创建临时表，然后再把各个查询结果插入到临时表中，最后再来做查询
+    - 尽量用union all代替union：union和union all的差异主要是前者需要将结果集合并后再进行唯一性过滤操作，这就会涉及到排序，增加大量的CPU运算，加大资源消耗及延迟。当然，union all的前提条件是两个结果集没有重复数据。
     - 使用 UNION 来代替 WHERE 子句中的子查询
     - 子查询的效率不如连接查询（join）
         + 因为MySQL不需要在内存中创建临时表来完成这个在逻辑上需要两个步骤的查询工作
@@ -292,18 +293,29 @@ iostat -d -k 1 3
         + `COUNT(*)`:忽略所有的列而直接统计所有的行数。可能会将整个表锁住
         + 假如表沒有主键(Primary key), 那么count(1)比count(*)快，都包括对NULL的统计，而count(column) 是不包括NULL的统计
         + 如果有主键的話，那主键作为count的条件时候count(主键)最快
-        + 如果你的表只有一个字段的话那count(*)就是最快的
+        + InnoDB 中COUNT( * )操作的时间复杂度为 O(N)，其中 N 为表的行数，循环: 读取 + 计数
+        + MyISAM 表中可以快速取到表的行数
+        + 如果的表只有一个字段的话那count(*)就是最快的
         + `count(*)`只是返回表中行数，因此SQL Server在处理`count(*)`的时候只需要找到属于表的数据块块头，然后计算一下行数就行了，而不用去读取里面数据列的数据。而对于count(col)就不一样了，为了去除col列中包含的NULL行，SQL Server必须读取该col的每一行的值，然后确认下是否为NULL，然后在进行计数。
     - LIMIT分页
-        + LIMIT M,N 在特定场景下会降低查询效率，有节制使用
-        + LIMIT 10000，20这样的查询，MySQL需要查询10020条记录然后只返回20条记录，前面的10000条都将被抛弃，这样的代价非常高。
+        + LIMIT M,N:全表扫描,速度会很慢且结果集返回不稳定
+        + LIMIT 10000，20这样的查询，MySQL需要查询10020条记录然后只返回20条记录，前面的10000条都将被抛弃，这样的代价非常高。避免使用 OFFSET `SELECT id FROM t WHERE id > 10000 LIMIT 10 ;`
+        + WHERE id_pk > (pageNum*10) ORDER BY id_pk ASC LIMIT M:ORDER BY后的列对象是主键或唯一所以,使得ORDERBY操作能利用索引被消除但结果集是稳定的
+            * 排序操作:只有ASC 没有DESC
+        + `PREPARE stmt_name FROM SELECT * FROM 表名称 WHERE id_pk > (？* ？) ORDER BY id_pk ASC LIMIT M`
         + 尽可能的使用覆盖索引扫描，而不是查询所有的列。然后根据需要做一次关联查询再返回所有的列
-        + 使用书签记录上次取数据的位置，那么下次就可以直接从该书签记录的位置开始扫描，这样就可以避免使用 OFFSET `SELECT id FROM t WHERE id > 10000 LIMIT 10 ;`
 * where子句中
-    - 应尽量避免字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描.最好不要给数据库留NULL，尽可能的使用 NOT NULL填充数据库.
+    - 应尽量避免字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描.最好不要给数据库留NULL，尽可能的使用 NOT NULL填充数据库
+    - 避免在where子句中对字段进行表达式操作
+    - 避免隐式类型转换
     - 应尽量避免使用负向查询NOT、!=、<>、!<、!>、NOT IN、NOT LIKE等，否则将引擎放弃使用索引而进行全表扫描。
     - 应尽量避免使用 or 来连接条件，如果一个字段有索引，一个字段没有索引，将导致引擎放弃使用索引而进行全表扫描。含有or的查询子句，如果要利用索引，则or之间的每个条件列都必须使用索引；如果没有索引，可以考虑增加索引。
-    - in 和 not in 也要慎用，否则会导致全表扫描,对于连续的数值，能用 between 就不要用 in 了
+    - in 和 not in 也要慎用，否则会导致全表扫描
+    - 区分in和exists， not in和not exists
+        + xists，那么以外层表为驱动表，先被访问，如果是IN，那么先执行子查询。所以IN适合于外表大而内表小的情况；EXISTS适合于外表小而内表大的情况。
+        + 关于not in和not exists，推荐使用not exists，不仅仅是效率问题，not in可能存在逻辑问题。如何高效的写出一个替代not exists的sql语句？
+    - 对于连续的数值，能用 between 就不要用 in 了
+    - select id from t where name like '%abc%' 全表扫描
     - 在 where 子句中使用参数，也会导致全表扫描 select id from t where num = @num
     - 在 WHERE、GROUP BY 和 ORDER BY 的列上加上索引
     - 在查询中存在常量相等where条件字段（索引中的字段），且该字段在group by指定的字段的前面或者中间。来自于相等条件的常量能够填充搜索keys中的gaps，因而可以构成一个索引的完整前缀。索引前缀能够用于索引查找。如果要求对group by的结果进行排序，并且查找字段组成一个索引前缀，那么MySQL同样可以避免额外的排序操作。 c2在c1,c3之前，c2='a'填充这个坑，组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c2 = 'a' group by c1,c3 c1在索引的最前面，c1=a和group by c2,c3组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c1 = 'a' group by c2,c3 使用紧凑索引扫描，执行计划Extra一般显示"using index"，相当于使用了覆盖索引。
@@ -311,19 +323,22 @@ iostat -d -k 1 3
     + 正常流程 group by操作在没有合适的索引可用的时候，通常先扫描整个表提取数据并创建一个临时表，然后按照group by指定的列进行排序。在这个临时表里面，对于每一个group的数据行来说是连续在一起的。完成排序之后，就可以发现所有的groups，并可以执行聚集函数（aggregate function）。可以看到，在没有使用索引的时候，需要创建临时表和排序。在执行计划中通常可以看到"Using temporary; Using filesort"。
     - order by：尽量通过索引直接返回有序数据，减少额外的排序。MySQL中有两种排序方式：
         + 在 where 及 order by 涉及的列上建立索引
-        + 通过有序索引顺序扫描直接返回有效数据，不需要额外的排序，操作效率较高；
-        + 对返回的数据进行排序，也就是常说的Filesort排序，所有不是通过索引直接返回排序结果的排序都是filesort排序。
-        + filesort有两种排序算法，一种是一次扫描算法（较快），二种是两次扫描算法。适当加大系统变量max_length_for_sort_data的值，能够让MySQL选择更优化的filesort排序算法；适当加大sort_buffer_size排序区，尽量让排序在内存中完成，而不是通过创建临时表放在文件中进行。
+        + 通过有序索引顺序扫描直接返回有效数据，不需要额外的排序，操作效率较高
+        + 对返回的数据进行排序，也就是常说的Filesort排序，所有不是通过索引直接返回排序结果的排序都是filesort排序
+        + filesort有两种排序算法
+            * 一种是一次扫描算法（较快）
+            * 二种是两次扫描算法
+            * 适当加大系统变量max_length_for_sort_data的值，能够让MySQL选择更优化的filesort排序算法；适当加大sort_buffer_size排序区，尽量让排序在内存中完成，而不是通过创建临时表放在文件中进行。
 * 关联查询:表与表之间通过一个冗余字段来关联，要比直接使用 JOIN有更好的性能。如果确实需要使用关联查询的情况下，需要特别注意的是
     - 确保 ON和 USING字句中的列上有索引。在创建索引的时候就要考虑到关联的顺序。当表A和表B用列c关联的时候，如果优化器关联的顺序是A、B，那么就不需要在A表的对应列上创建索引。没有用到的索引会带来额外的负担，一般来说，除非有其他理由，只需要在关联顺序中的第二张表的相应列上创建索引
     - 确保任何的 GROUP BY和 ORDER BY中的表达式只涉及到一个表中的列，这样MySQL才有可能使用索引来优化。
     - 任何的关联都执行嵌套循环关联操作，即先在一个表中循环取出单条数据，然后在嵌套循环到下一个表中寻找匹配的行，依次下去，直到找到所有表中匹配的行为为止。然后根据各个表匹配的行，返回查询中需要的各个列
-* select id from t where name like '%abc%' 全表扫描
 * ORM（Object Relational Mapper）
     - 最重要的是“Lazy Loading”：只有在需要的去取值的时候才会去真正的去做
     - 需要小心处理他们，否则可能最终创建了许多微型查询，这会降低数据库性能
     - 可以将多个查询批处理到事务中，其操作速度比向数据库发送单个查询快得多
 * 拒绝3B(big)，大sql，大事务，大批量
+* sub_select
 * 查询松散索引扫描（Loose Index Scan）与紧凑索引扫描（Tight Index Scan）
     + 松散索引扫描方式下，分组操作和范围预测（如果有的话）一起执行完成的。不需要连续的扫描索引中得每一个元组，扫描时仅考虑索引中得一部分。当查询中没有where条件的时候，松散索引扫描读取的索引元组的个数和groups的数量相同。如果where条件包含范围预测，松散索引扫描查找每个group中第一个满足范围条件，然后再读取最少可能数的keys。松散索引扫描只需要读取很少量的数据就可以完成group by操作，因而执行效率非常高，执行计划中Etra中提示" using index for group-by"。松散索引扫描可以作用于在select list中其它形式的聚集函数，除了min()和max()之外，还支持：
         + AVG(DISTINCT), SUM(DISTINCT)和COUNT(DISTINCT)可以使用松散索引扫描。AVG(DISTINCT), SUM(DISTINCT)只能使用单一列作为参数。而COUNT(DISTINCT)可以使用多列参数。
@@ -338,6 +353,10 @@ iostat -d -k 1 3
         + 紧凑索引扫描方式下，先对索引执行范围扫描（range scan），再对结果元组进行分组。可能是全索引扫描或者范围索引扫描，取决于查询条件。当松散索引扫描条件没有满足的时候，group by仍然有可能避免创建临时表。如果在where条件有范围扫描，那么紧凑索引扫描仅读取满足这些条件的keys（索引元组），否则执行全索引扫描。这种方式读取所有where条件定义的范围内的keys，或者扫描整个索引。紧凑索引扫描，只有在所有满足范围条件的keys被找到之后才会执行分组操作。
 * 连表
     - 禁止大表使用JOIN查询、子查询
+    - A join B:LEFT JOIN A表为驱动表INNER JOIN MySQL会自动找出那个数据少的表作用驱动表RIGHT JOIN B表为驱动表
+    - 尽量使用inner join，避免left join
+    - 被驱动表的索引字段作为on的限制字段
+    - 利用小表去驱动大表
     - 删除JOIN和WHERE子句中的计算字段
     - JOIN 查询:确认两个表中Join的字段是被建过索引的。这样，MySQL内部会启动优化Join的SQL语句的机制。
     - 多表连接查询时，把结果集小的表（注意，这里是指过滤后的结果集，不一定是全表数据量小的）作为驱动表
@@ -352,6 +371,15 @@ SELECT film.film_id , film.description
 FROM film INNER JOIN (
     SELECT film_id FROM film ORDER BY title LIMIT 50 , 5 
 ) AS tmp USING (film_id);
+
+# 分页
+SELECT * FROM your_table WHERE id <= 
+(SELECT id FROM your_table ORDER BY id desc LIMIT ($page-1)*$pagesize ORDER BY id desc 
+LIMIT $pagesize
+
+SELECT * FROM your_table AS t1 
+JOIN (SELECT id FROM your_table ORDER BY id desc LIMIT ($page-1)*$pagesize AS t2 
+WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT $pagesize;
 ```
 
 ##  索引优化
@@ -445,7 +473,7 @@ while (1) {
         * DEPENDENT SUBQUERY: 子查询中的第一个 SELECT, 取决于外面的查询. 即子查询依赖于外层查询的结果.
         * DERIVED：衍生，表示导出表的SELECT（FROM子句的子查询）
     - table:输出结果集的表
-    - type:表示表的连接类型(system和const为佳),从最好到最差的连接类型为system、const、eq_reg、ref、range、index和ALL
+    - type:表的连接类型(system和const为佳),从最好到最差的连接类型为system、const、eq_reg、ref、range、index和ALL
         + system、const：可以将查询的变量转为常量.  如id=1; id为 主键或唯一键. 表中只有一条数据， 这个类型是特殊的 const 类型。
         + const: 针对主键或唯一索引的等值查询扫描，最多只返回一行数据。 const 查询速度非常快， 因为它仅仅读取一次即可。例如下面的这个查询，它使用了主键索引，因此 type 就是 const 类型的：explain select * from user_info where id = 2；
         + eq_ref：此类型通常出现在多表的 join 查询，表示对于前表的每一个结果，都只能匹配到后表的一行结果。并且查询的比较操作通常是 =，查询效率较高.访问索引,返回某单一行的数据.(通常在联接时出现，查询使用的索引为主键或惟一键)

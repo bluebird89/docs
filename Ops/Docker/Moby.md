@@ -2,20 +2,23 @@
 
 Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
 
-Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。
+* Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源
+* Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化
+* 容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低
+* 云计算时代的到来，极大程度上整合了硬件网络资源，开发于云端，如成功模版AWS，然而其相应大规模，分布式软件配置及管理则带来相当的复杂度，Docer则借鉴传统的虚拟及镜像机制，提供artifact集装箱能力，从而助力云计算，尤其是类似于提供了Web, Hadoop集群，消息队列等。
+* 镜像装箱机制：类似一个只读模版的文件结构，可以自定义及扩展，用来创建Docker容器。
+* 高效虚拟化：Docker借助LXC并进行革新提供了高效运行环境，而非类似VM的虚拟OS，GuestOS的弊端在于看起来够虚拟，隔离，然而使用起来又浪费资源，又难于管理。Docker则基于LXC的核心Linux Namespace,对cgroups/namespace机制及网络过封装，把隔离性，灵活性（资源分配），便携，安全性，最重要是其性能做到了极致。
+  - Docker复用Host主机的OS, 抽象出Docker Engine层面实现调度与隔离，大大降低其负重级别
+  - 底层实现则借助了LXC, 管理利用了namespace做全县控制和隔离，cgroup来进行资源配置，aufs（类似git的思想，把文件系统的修改当作一次代码commit进行叠加从而节省存储）提高文件系统资源利用率。
+  + 提供了简洁易用的命令行和API
+  + 使用Go语言开发，吸引开源社区关注
+  + 基于联合文件系统的镜像分层技术，加上在线Docker Hub服务，容器迁移方便快捷
+  + 一个容器只包含一个进程的微服务架构
 
-云计算时代的到来，极大程度上整合了硬件网络资源，开发于云端，如成功模版AWS，然而其相应大规模，分布式软件配置及管理则带来相当的复杂度，Docer则借鉴传统的虚拟及镜像机制，提供artifact集装箱能力，从而助力云计算，尤其是类似于提供了Web, Hadoop集群，消息队列等。
-
-镜像装箱机制：类似一个只读模版的文件结构，可以自定义及扩展，用来创建Docker容器。
-
-高效虚拟化：Docker借助LXC并进行革新提供了高效运行环境，而非类似VM的虚拟OS，GuestOS的弊端在于看起来够虚拟，隔离，然而使用起来又浪费资源，又难于管理。Docker则基于LXC的核心Linux Namespace,对cgroups/namespace机制及网络过封装，把隔离性，灵活性（资源分配），便携，安全性，最重要是其性能做到了极致。
-
-Docker的总体架构图: ![](../_static/architect_docker.jpg) Docker与VM对比:Docker是在操作系统层面进行虚拟化，而传统VM则直接在硬件层面虚拟化。
-![](../_static/VMvsDocker.jpg) Docker复用Host主机的OS, 抽象出Docker Engine层面实现调度与隔离，大大降低其负重级别.底层实现则借助了LXC, 管理利用了namespace做全县控制和隔离，cgroup来进行资源配置，aufs（类似git的思想，把文件系统的修改当作一次代码commit进行叠加从而节省存储）提高文件系统资源利用率。
-
-## 原理
-
-支持 Windows/Linux/Mac/AWS/Azure 多种平台的安装，其中 Windows 需要 Win10+，Mac 需要 EI Captain+。
+Docker的总体架构图
+![](../_static/architect_docker.jpg)
+Docker与VM对比:Docker是在操作系统层面进行虚拟化，而传统VM则直接在硬件层面虚拟化。
+![](../_static/VMvsDocker.jpg)
 
 ### 对比
 
@@ -32,14 +35,6 @@ Docker的总体架构图: ![](../_static/architect_docker.jpg) Docker与VM对比
 * 轻便，移植性高
 * 不需要打包系统进镜像所以体积非常小
 * Dockerfile 镜像构建机制让镜像打包部署自动化
-* Docker hub 提供镜像平台方便共享镜像
-
-Docker基于LXC的改进
-
-- 提供了简洁易用的命令行和API
-- 使用Go语言开发，吸引开源社区关注
-- 基于联合文件系统的镜像分层技术，加上在线Docker Hub服务，容器迁移方便快捷
-- 一个容器只包含一个进程的微服务架构
 
 ## 概念
 
@@ -55,7 +50,10 @@ Docker基于LXC的改进
 * 仓库（Repository）：镜像的仓库，用来保存images，当我们创建了自己的image后可以用push把它上传到公有或者私有仓库，类似我们git或者svn代码仓库，这样其他开发人员或者Ops可以pull用来开发或者部署。同样，类似代码仓库，每个镜像支持tag标签。
 * 客户端(Client)：通过命令行或者其他工具使用 Docker API (<https://docs.docker.com/reference/api/docker_remote_api>) 与 Docker 的守护进程通信。
 * 主机(Host)：一个物理或者虚拟的机器用于执行 Docker 守护进程和容器。
-* Docker daemon 作为服务端接受来自客户的请求，并处理这些请求（创建、运行、分发容器）。 客户端和服务端既可以运行在一个机器上，也可通过 socket 或者RESTful API 来进行通信。Docker daemon 一般在宿主主机后台运行，等待接收来自客户端的消息。 Docker 客户端则为用户提供一系列可执行命令，用户用这些命令实现跟 Docker daemon 交互。
+* Docker daemon 作为服务端接受来自客户的请求，并处理这些请求（创建、运行、分发容器）
+  - 客户端和服务端既可以运行在一个机器上，也可通过 socket 或者RESTful API 来进行通信
+  - Docker daemon 一般在宿主主机后台运行，等待接收来自客户端的消息
+  - Docker 客户端则为用户提供一系列可执行命令，用户用这些命令实现跟 Docker daemon 交互
 
 ### 核心技术
 
@@ -118,10 +116,10 @@ Docker基于LXC的改进
 
 ## Install
 
-- Mac : [docker-ce-desktop-mac](https://store.docker.com/editions/community/docker-ce-desktop-mac)
+* 支持 Windows/Linux/Mac/AWS/Azure 多种平台的安装，其中 Windows 需要 Win10+，Mac 需要 EI Captain+
 
 ```sh
-# MAC
+# MAC [docker-ce-desktop-mac](https://store.docker.com/editions/community/docker-ce-desktop-mac)
 brew install docker
 brew install boot2docker
 brew cask install docker-toolbox
@@ -157,6 +155,19 @@ sudo systemctl start docker
 sudo systemctl enable docker
 
 docker version|info
+
+### avoid sudo
+sudo groupadd docker
+sudo gpasswd -a ${USER} docker
+sudo service docker restart
+
+sudo usermod -aG docker ${USER}
+sudo usermod -aG docker $(whoami)
+
+# mac
+docker-machine start # Start virtual machine for docker
+docker-machine env  # It's helps to get environment variables
+eval "$(docker-machine env default)" # Set environment variables
 ```
 
 ## Usage
@@ -224,9 +235,8 @@ RUN /bin/echo -e "LANG=\"en_US.UTF-8\"" >/etc/default/local
 EXPOSE 22
 EXPOSE 80
 CMD /usr/sbin/sshd -D
-```
 
-```sh
+
 # 镜像
 docker images # 列出所有镜像(images)
 
@@ -295,23 +305,7 @@ docker kill $(docker ps -q) #Kill all running containers
 docker exec -it [id]|[name] /bin/bash  #i是交互式操作，t是一个终端，d指的是在后台运行
 ```
 
-### avoid sudo
-
-```sh
-sudo groupadd docker
-sudo gpasswd -a ${USER} docker
-sudo service docker restart
-
-sudo usermod -aG docker ${USER}
-sudo usermod -aG docker $(whoami)
-
-# mac
-docker-machine start # Start virtual machine for docker
-docker-machine env  # It's helps to get environment variables
-eval "$(docker-machine env default)" # Set environment variables
-```
-
-### 容器连接
+## 容器连接
 
 连接系统允许将多个容器连接在一起，共享连接信息。docker连接会创建一个父子关系，其中父容器可以看到子容器的信息。
 
@@ -383,14 +377,12 @@ services:
 * 不要创建大尺寸镜像 大尺寸的镜像难以分配。请确保仅使用必需文件和库来运行应用程序。
 * 不要分两部分传送应用程序 有些人把容器当作虚拟机，所以他们大多会认为，应该将应用程序部署到现有正在运行的容器中。在需要不断部署和调试的开发阶段，可能确实如此；但对于 QA 和生产的持续交付 (CD) 渠道，应用程序应当是镜像的一部分。切记：容器转瞬即逝。
 
-## 仓库
-
-- [Docker Hub](https://hub.docker.com)
-- [The Docker Store](https://store.docker.com/)
-- [docker cloud](https://cloud.docker.com/)
-
 ## 资源
 
+* 仓库
+  - [Docker Hub](https://hub.docker.com)
+  - [The Docker Store](https://store.docker.com/)
+  - [docker cloud](https://cloud.docker.com/)
 * [wurstmeister/kafka-docker](https://github.com/wurstmeister/kafka-docker):Dockerfile for Apache Kafka http://wurstmeister.github.io/kafka-d…
 * [vmware/photon](https://github.com/vmware/photon):Minimal Linux container host https://vmware.github.io/photon
 * [vagrant-libvirt/vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt):Vagrant provider for libvirt.
