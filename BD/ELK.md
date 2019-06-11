@@ -27,11 +27,11 @@
     - 数据收集处理:Flume、heka
     - 消息队列:Redis、Rabbitmq、Kafka、Hadoop、webhdfs
 
+## 安装
 
-echo "kibanaadmin:`openssl passwd -apr1`" | sudo tee -a /etc/nginx/htpasswd.users
-
-kibanaadmin:$apr1$M2kx248q$TRbbkejn8bxFsdztudF6Z0
-
+* Logstash:采集数据导入
+* Elasticsearch:存储数据
+* Kibana:数据的展示
 
 ```sh
 # JDK  放在路径/usr/local/java 编辑配置文件 /etc/profile
@@ -62,7 +62,7 @@ curl -X GET 192.168.88.250:9200   #curl 测试
 # web地址  http://192.168.88.250:9200/_plugin/head/
 
 # nginx
-wget   搭建nginx之前需要安装 pcre
+# 搭建nginx之前需要安装 pcre
 tar xf nginx-1.7.8.tar.gz
 cd /usr/local/nginx
 vim /usr/local/nginx/conf/nginx.conf
@@ -115,52 +115,6 @@ http {
 
    #gzip  on;
 
-   server {
-       listen       80;
-       server_name  localhost;
-
-       #charset koi8-r;
-
-       #access_log  logs/host.access.log  main;
-
-       location / {
-           root   html;
-           index  index.html index.htm;
-       }
-
-       #error_page  404              /404.html;
-
-       # redirect server error pages to the static page /50x.html
-       #
-       error_page   500 502 503 504  /50x.html;
-       location = /50x.html {
-           root   html;
-       }
-
-       # proxy the PHP scripts to Apache listening on 127.0.0.1:80
-       #
-       #location ~ \.php$ {
-       #    proxy_pass   http://127.0.0.1;
-       #}
-
-       # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-       #
-       #location ~ \.php$ {
-       #    root           html;
-       #    fastcgi_pass   127.0.0.1:9000;
-       #    fastcgi_index  index.php;
-       #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
-       #    include        fastcgi_params;
-       #}
-
-       # deny access to .htaccess files, if Apache's document root
-       # concurs with nginx's one
-       #
-       #location ~ /\.ht {
-       #    deny  all;
-       #}
-   }
-
 server {
    listen               *:80;
    server_name          kibana_server;
@@ -192,7 +146,7 @@ vim stdin.conf #编写配置文件
 input{
        file {
                path => "/var/log/nginx/access.log_json"  #NGINX日志地址 json格式
-              codec => "json"  json编码
+              codec => "json"  # json编码
        }
 }
 filter {
@@ -204,7 +158,6 @@ filter {
        }
 }
 output{
-
        elasticsearch {
                hosts => ["192.168.88.250:9200"]   #elasticsearch地址
                index => "logstash-%{type}-%{+YYYY.MM.dd}"   #索引
@@ -222,17 +175,68 @@ output{
 wget https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x64.tar.gz
 tar xf kibana-4.3.1-linux-x64.tar.gz
 cd /usr/local/kibana-4.3.1-linux-x64/
-vim ./config/kibana.yml
 
+# ./config/kibana.yml
 elasticsearch.url: #   只需要修改URL为ElasticSearch的IP地址
-./kibana& 后台启动
+
+./kibana& # 后台启动
 # 启动成功以后 会监听 5601端口
 
 # 可以用Kibana查看 地址 : 192.168.88.250:5601
 # create灰色的 说明没有创建索引  打开你的nginx服务器 刷新几下 采集一下数据 然后  选择 左上角的 Discover
 # 数据可能会出不来 那是因为 Kibana 是根据时间来匹配的 并且 因为 Logstash的采集时间使用的UTC  永远早8个小时 所以设置时间 要设置晚8个小时以后
+
+
+echo "kibanaadmin:`openssl passwd -apr1`" | sudo tee -a /etc/nginx/htpasswd.users
+kibanaadmin:$apr1$M2kx248q$TRbbkejn8bxFsdztudF6Z0
+
+brew install elasticsearch # http://localhost:9200
+brew install logstash # http://localhost:9600
+
+# logstash-sample.conf
+input { stdin { } }
+output {
+  elasticsearch { hosts => ["localhost:9200"]  index => "my_blog"
+        user => "elastic"
+        password => "json"
+  }
+  stdout { codec => rubydebug }
+}
+
+./bin/logstash -f logstash-sample.conf
+
+wget https://artifacts.elastic.co/downloads/kibana/kibana-7.1.1-darwin-x86_64.tar.gz # http://localhost:5601
+```
+
+## metrics
+
+* logstash:日志收集、分析、过滤。部署在客户端比较重
+* 轻量级的filebeat
+
+```sh
+curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.1.1-darwin-x86_64.tar.gz
+tar xzvf filebeat-7.1.1-darwin-x86_64.tar.gz
+cd filebeat-7.1.1-darwin-x86_64/
+
+# filebeat.yml
+Copy snippet
+output.elasticsearch:
+  hosts: ["<es_url>"]
+  username: "elastic"
+  password: "<password>"
+setup.kibana:
+  host: "<kibana_url>"
+./filebeat modules enable redis
+
+./filebeat setup
+./filebeat -e # ./filebeat -e -c /home/elk/filebeat/filebeat.yml
+
 ```
 
 ## 图书
 
 * [ELK Stack权威指南](http://product.china-pub.com/64005)
+
+## 参考
+
+* [Kibana User Guide](https://www.elastic.co/guide/en/kibana/current/index.html)

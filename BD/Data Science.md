@@ -115,9 +115,5 @@ SAS网站的Eight levels of analytics
 * [jaystone776/python-data-science-cheatsheet](https://github.com/jaystone776/python-data-science-cheatsheet):Python数据科学速查表
 * [apachecn/python_data_analysis_and_mining_action](https://github.com/apachecn/python_data_analysis_and_mining_action):《python数据分析与挖掘实战》的代码笔记
 * [iphysresearch/DataSciComp](https://github.com/iphysresearch/DataSciComp):A collection of popular Data Science Competitions
-
-
-## 扩展
-
-<https://mp.weixin.qq.com/s/3jJ4w3fGeW56U15Vdl2xEw>
-<https://blog.algorithmia.com/becoming-a-10x-data-scientist/>
+* [DS100](http://www.ds100.org):Principles and Techniques of Data Science
+* [BrambleXu/pydata-notebook](https://github.com/BrambleXu/pydata-notebook):利用Python进行数据分析 第二版 (2017) 中文翻译笔记

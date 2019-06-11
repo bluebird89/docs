@@ -140,6 +140,7 @@
 
 * [petkaantonov/bluebird](https://github.com/petkaantonov/bluebird):🐦 ⚡️ Bluebird is a full featured promise library with unmatched performance. http://bluebirdjs.com
 * [JacksonTian/eventproxy](https://github.com/JacksonTian/eventproxy):An implementation of task/event based asynchronous pattern. http://html5ify.com/eventproxy
+* [wendux/fly](https://github.com/wendux/fly):🚀 Supporting request forwarding and Promise based HTTP client for all JavaScript runtimes. https://wendux.github.io/dist/#/language
 
 ## 状态
 
