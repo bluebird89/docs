@@ -21,6 +21,16 @@
         * [youtube](https://www.youtube.com/watch?v=OQQ-W_63UgQ&list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6)
         - [云盘资源](https://blog.csdn.net/NeighborhoodGuo/article/details/46868143)
 * [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
+* [CS224N 2019](http://web.stanford.edu/class/cs224n/)
+    - 目前仅提供 2017 年春季课程：https://www.youtube.com/playlist?list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6
+    - https://www.youtube.com/playlist?list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z
+    - https://www.bilibili.com/video/av46216519/
+* [CS 11-747](http://phontron.com/class/nn4nlp2019/)
+    - https://www.youtube.com/playlist?list=PL8PYTP1V4I8Ajj7sY6sdtmjgkt7eo2VMs
+    - https://www.bilibili.com/video/av40929856/
+* [facebookresearch/StarSpace](https://github.com/facebookresearch/StarSpace):Learning embeddings for classification, retrieval and ranking.
+* [jacobeisenstein/gt-nlp-class](https://github.com/jacobeisenstein/gt-nlp-class):Course materials for Georgia Tech CS 4650 and 7650, "Natural Language"
+* [yandexdataschool/nlp_course](https://github.com/yandexdataschool/nlp_course):YSDA course in Natural Language Processing
 
 ```sh
 git clone https://github.com/DSKSD/cs-224n-Pytorch.git
@@ -37,23 +47,11 @@ cd script
 docker-compose up -d
 ```
 
-## 课程
-
-* [CS224N 2019](http://web.stanford.edu/class/cs224n/)
-    - 目前仅提供 2017 年春季课程：https://www.youtube.com/playlist?list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6
-    - https://www.youtube.com/playlist?list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z
-    - https://www.bilibili.com/video/av46216519/
-* [CS 11-747](http://phontron.com/class/nn4nlp2019/)
-    - https://www.youtube.com/playlist?list=PL8PYTP1V4I8Ajj7sY6sdtmjgkt7eo2VMs
-    - https://www.bilibili.com/video/av40929856/
-* [facebookresearch/StarSpace](https://github.com/facebookresearch/StarSpace):Learning embeddings for classification, retrieval and ranking.
-* [jacobeisenstein/gt-nlp-class](https://github.com/jacobeisenstein/gt-nlp-class):Course materials for Georgia Tech CS 4650 and 7650, "Natural Language"
-* [yandexdataschool/nlp_course](https://github.com/yandexdataschool/nlp_course):YSDA course in Natural Language Processing
-
 ## 工具
 
 * [facebookresearch/pytext](https://github.com/facebookresearch/pytext):A natural language modeling framework based on PyTorch https://fb.me/pytextdocs
 * [fighting41love/funNLP](https://github.com/fighting41love/funNLP):文本中抽取结构化信息
+* [isnowfy/snownlp](https://github.com/isnowfy/snownlp):Python library for processing Chinese text
 
 ## 参考
 

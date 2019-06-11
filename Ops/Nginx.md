@@ -788,6 +788,20 @@ location /{
     }
 }
 
+location / {
+    　　root html/dist;
+    　　index index.html index.htm;
+    　　try_files $uri $uri/ /index.html;
+}
+// api/test 会转发，api/test/test 不会转发
+location ~^/api/[^\/]+/[^\/]+ {
+　　rewrite ^(/api)(.*)$ $2 break;
+　　proxy_pass http://myServer;
+　　proxy_set_header Host $host;
+　　proxy_set_header X-Real-IP $remote_addr;
+　　proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+}
+
 location = /room/nginx/queryNewLiveNum.do{
     include conf.d/modules/ssdf.header;
     proxy_cache_methods： GET HEAD POST; #用来设置HTTP哪些方法会被缓存，直播间接口配置了GET、HEAD、POST；
