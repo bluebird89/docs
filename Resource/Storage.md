@@ -37,5 +37,5 @@ sha256sum /path/filename
 * [webtorrent/webtorrent-desktop](https://github.com/webtorrent/webtorrent-desktop):❤️ Streaming torrent app for Mac, Windows, and Linux https://webtorrent.io/desktop
 * [agalwood/Motrix](https://github.com/agalwood/Motrix):A full-featured download manger. https://motrix.app/
 * [Downie](https://software.charliemonroe.net/downie/):YouTube Video Downloader for macOS - Charlie
-* [bundlehunt](https://bundlehunt.com/?)
+* [bundlehunt](https://bundlehunt.com/)
 * [盘下载器](https://www.baiduwp.com/)

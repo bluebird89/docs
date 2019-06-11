@@ -15,7 +15,7 @@ fast, scalable, distributed revision control system. https://git-scm.com/  一�
 * [Gitlab](https://gitlab.com/)
   - [gitlabhq/gitlabhq](https://github.com/gitlabhq/gitlabhq):GitLab CE Mirror | Please open new issues in our issue tracker on GitLab.com https://about.gitlab.com/getting-help/
 * [码云](https://gitee.com)
-* [Coding](https://github.com/)
+* [Coding](https://coding.net)  <https://arsenal.coding.net/p/coding-demo>
 * [sourceforge](https://sourceforge.net/):The Complete Open-Source Software Platform
 * [GitKraken](link)
 * [LaunchPad](link)
