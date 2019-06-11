@@ -74,6 +74,7 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
 -   BracketHighlighter: Bracket and tag highlighter
 -   Ctags:是一个经典的代码跳转插件
 -   ConvertToUTF8:支持 GBK, BIG5, EUC-KR, EUC-JP, Shift_JIS 等编码的插件
+    +   Codecs33
 -   ColorHighlighter:展示你所选择的颜色代码的真正颜色。同时它还包含一个颜色选择器让你可以方便地更改颜色。
 -   Doc​Blockr: Simplifies writing DocBlock comments in Javascript, PHP, CoffeeScript, Actionscript, C & C++
 -   Emmet:更快更高效地编写HTML和CSS

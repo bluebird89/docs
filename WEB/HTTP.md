@@ -695,3 +695,4 @@ HTTP-over-QUIC 实验协议将被重命名为 HTTP/3，并成为 HTTP 协议的�
 * [HTTPS explained with carrier pigeons](https://medium.freecodecamp.org/https-explained-with-carrier-pigeons-7029d2193351)
 * [HTTP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)
 * [HTTP访问控制（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
+* [HTTP API 认证授权术](https://coolshell.cn/articles/19395.html)

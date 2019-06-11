@@ -10,6 +10,18 @@
 * 避免使用可定制性低下的用户界面。
 * 所有程序都是数据的过滤器。
 
+## IO模型
+
+* Blocking IO - 阻塞IO
+* NoneBlocking IO - 非阻塞IO
+* IO multiplexing - IO多路复用
+* signal driven IO - 信号驱动IO
+* asynchronous IO - 异步IO
+
+## 系统
+
+* [XINU](https://xinu.cs.purdue.edu/)
+
 ## 教程
 
 * [UNIX Tutorial for Beginners](http://www.ee.surrey.ac.uk/Teaching/Unix/) – 来自The University of Surrey的新手指南，告诉你Unix系统最基本的特性。
@@ -23,6 +35,6 @@
 * [UNIX Shell Scripting Advanced](https://www.vtc.com/products/Unix-Shell-Scripting-Advanced-tutorials.htm) – VTC 有一组视频的 UNIX 的教程。而这一个是指导高级用户如何进行脚本编程。
 * [Advanced C Shell Programming](http://heather.cs.ucdavis.edu/~matloff/UnixAndC/Unix/CShellII.pdf) – 这是UC Davis 的教程，主要教使用如何使用C shell 和tcsh 进行脚本编程。
 
-## 系统
+## 参考
 
-* [XINU](https://xinu.cs.purdue.edu/):
+* [huaxz1986/APUE_notes](https://github.com/huaxz1986/APUE_notes):《UNIX环境高级编程》中文第三版笔记
