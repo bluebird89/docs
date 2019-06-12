@@ -588,7 +588,6 @@ pm.max_spare_servers=32
 
 用到一些 PHP 的第三方库，这些第三方库经常存在内存泄漏问题，如果不定期重启 PHP-CGI 进程，势必造成内存使用量不断增长。因此 PHP-FPM 作为 PHP-CGI 的管理器，提供了这么一项监控功能，对请求达到指定次数的 PHP-CGI 进程进行重启，保证内存使用量不增长。
 
-
 ## 连接方式
 
 与CPU 频率缩放问题一样？（CPUFreq governor）这些设置在类 Unix 系统和 Windows 上是有效的，可以通过修改 CPU governor，将其从 ondemand 修改为 performance 来提高性能并加快系统的响应。
@@ -619,9 +618,10 @@ static 设置取决于你服务器有多少闲置内存。大多数情况下，�
 * 长连接：不同请求会使用同一个连接句柄
 
 
-## php-fpm 状态查看
+## 状态查看
 
-server添加
+* 在server配置中添加
+* 开启缓存
 
 ```
 location ~ ^/status$ {
@@ -630,14 +630,6 @@ location ~ ^/status$ {
     fastcgi_pass unix:/usr/local/var/run/php-fpm.sock;
     fastcgi_param SCRIPT_FILENAME $fastcgi_script_name;
 }
-
-location ~ \.php$ {
-    root           /home/gittest;
-    fastcgi_pass   unix:/var/run/php/php7.0-fpm.sock;
-    fastcgi_index  index.php;
-    fastcgi_intercept_errors        on;
-    include        fastcgi_params;
-    }
 
 pm.status_path = /status # php-fpm.conf里面打开选项
 # 访问 http://域名/status

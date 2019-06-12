@@ -1273,6 +1273,7 @@ window.location = “http:/example.com/”
 * mysql_connect():PHP 5.5以来扩展已被弃用，建议使用以下2种替代方法之一
 * mysqli_connection()
 * PDO::__ construct()
+    - 提供预处理语句查询、错误异常处理、灵活取得查询结果（返回数组、字符串、对象、回调函数）、字符过滤防止 SQL 攻击、事务处理、存储过程。
 
 https://linux.cn/article-10899-1.html
 
