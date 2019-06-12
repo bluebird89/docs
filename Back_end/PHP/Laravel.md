@@ -2404,13 +2404,14 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
 * [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
 * API
     * [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
-    * [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp.
+    * [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp
 * Swoole
     * [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
 * logger
-    * [overtrue/laravel-query-logger](https://github.com/overtrue/laravel-query-logger):📝 A dev tool to log all queries for laravel application.
+  - [laravel/telescope](https://github.com/laravel/telescope):provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more
+  * [overtrue/laravel-query-logger](https://github.com/overtrue/laravel-query-logger):📝 A dev tool to log all queries for laravel application.
 * Oauth
-    * [laravel/socialite](https://github.com/laravel/socialite):an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub, GitLab and Bitbucket
+    - [laravel/socialite](https://github.com/laravel/socialite):an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub, GitLab and Bitbucket
     * [overtrue/socialite](https://github.com/overtrue/socialite)::octocat: Socialite is an OAuth2 Authentication tool. It is inspired by laravel/socialite, you can easily use it without Laravel.
 * websocket
     - [beyondcode/laravel-websockets](https://github.com/beyondcode/laravel-websockets):Websockets for Laravel. Done right.https://docs.beyondco.de/laravel-websockets/
@@ -2433,7 +2434,6 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
 * [bosnadev/repository](https://github.com/bosnadev/repository):Laravel Repositories is a package for Laravel 5 which is used to abstract the database layer. This makes applications much easier to maintain. https://bosnadev.com
 * [LaravelCollective/html](https://github.com/LaravelCollective/html):HTML and Form Builders for the Laravel Framework
 * [Algolia](https://www.algolia.com/doc/api-client/laravel/algolia-and-scout/):Algolia is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke
-* [laravel/telescope](https://github.com/laravel/telescope):provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more
 * [launcher-host/mercurius](https://github.com/launcher-host/mercurius):Real-time Messenger for Laravel http://mercurius.launcher.host/
 * [Laravel-Backpack/CRUD](https://github.com/Laravel-Backpack/CRUD):Build a custom admin interface for your Eloquent models, using Laravel 5.2 to 5.7 http://backpackforlaravel.com
 * [illuminate/database](https://github.com/illuminate/database):[READ ONLY] Subtree split of the Illuminate Database component (see laravel/framework)

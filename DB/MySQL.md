@@ -110,6 +110,15 @@ docker run --name master -p 3306:3307 -e MYSQL_ROOT_PASSWORD=root -d mysql
 
 # Windows,管理员权限执行
 net start|stop mysql # win平台
+
+## 多实例
+mkdir -p /data/{3306,3307}
+# 配置
+cp support-files/my-small.cnf /data/3306/my.cnf
+cp support-files/mysql.server /data/3306/mysql
+
+cp support-files/my-small.cnf /data/3307/my.cnf
+cp support-files/mysql.server /data/3307/mysql
 ```
 
 ## 原理
@@ -199,7 +208,13 @@ net start|stop mysql # win平台
     - 默认使用utf8mb4字符集,utf8mb4是utf8的超集，emoji表情以及部分不常见汉字在utf8下会表现为乱码，故需要升级至utf8mb4。
     + 数据库存储:一个汉字utf8下为两个长度,gbk下为一个长度
     + 正常一个汉字utf8下为三个字节,gbk下为两个字节
-    + 存储emoji
+    + 系统变量
+        + character_set_server：默认的内部操作字符集
+        + character_set_client：客户端来源数据使用的字符集
+        + character_set_connection：连接层字符集
+        + character_set_results：查询结果字符集
+        + character_set_database：当前选中数据库的默认字符集
+        + character_set_system：系统元数据(字段名等)字符集
 * 保证客户端使用字符集与服务端返回数据字符集编码一致(以适应客户端为主,修改服务器服务器端配置)
 * 校对：规则属于PADSPACE类。这说明在MySQL中的所有CHAR和VARCHAR值比较时不需要考虑任何尾部空格
     - _bin：按二进制编码比较
@@ -281,7 +296,7 @@ port = 3306
 socket = /data/3306/mysql.sock
 basedir = /usr/local/mysql
 datadir = /data/3306/data # 数据库文件路径
-open_files_limit = 10240
+open_files_limit = 1024
 back_log = 600 #在MYSQL暂时停止响应新请求之前，短时间内的多少个请求可以被存在堆栈中。如果系统在短时间内有很多连接，则需要增大该参数的值，该参数值指定到来的TCP/IP连接的监听队列的大小。默认值50。
 max_connections = 3000 #MySQL允许最大的进程连接数，如果经常出现Too Many Connections的错误提示，则需要增大此值。
 
@@ -335,7 +350,58 @@ max_allowed_packet = 32M
 
 [mysqld_safe]
 log-error=/data/3306/mysql_oldboy.err
-pid-file=/data/3306/mysqld.
+pid-file=/data/3306/mysqld
+```
+
+```sh
+# 脚本文件
+#!/bin/sh
+init port=3307
+mysql_user="root"
+mysql_pwd="migongge"
+CmdPath="/application/mysql/bin"
+mysql_sock="/data/${port}/mysql.sock"
+#startup
+function_start_mysql() {
+    if [ ! -e "$mysql_sock" ];then
+     printf "Starting MySQL...\n"
+    /bin/sh ${CmdPath}/mysqld_safe --defaults-file=/data/${port}/my.cnf 2>&1 > /dev/null &
+    else
+      printf "MySQL is running...\n"
+    exit
+    fi
+}
+#stop function
+function_stop_mysql() {
+    if [ ! -e "$mysql_sock" ];then
+    printf "MySQL is stopped...\n"
+    exit
+    else
+    printf "Stoping MySQL...\n"
+    ${CmdPath}/mysqladmin -u ${mysql_user} -p${mysql_pwd} -S /data/${port}/mysql.sock shutdown
+    fi
+}
+#restart function
+function_restart_mysql() {
+   printf "Restarting MySQL...\n"
+   function_stop_mysql
+   sleep 2
+   function_start_mysql
+}
+
+case $1 in
+start)
+function_start_mysql
+;;
+stop)
+function_stop_mysql
+;;
+restart)
+function_restart_mysql
+;;
+*)
+printf "Usage: /data/${port}/mysql {start|stop|restart}\n"
+esac
 ```
 
 ```sql
@@ -374,6 +440,8 @@ mysqld --initialize
 
 ### 权限管理
 
+* all权限:`SELECT,INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER`
+
 ```sql
 mysql -hlocalhost  -P 3306 -u root -p  # 生成用户root与空密码登陆,第一次登陆mysql的时候是没有密码的
 exit|quit| \q
@@ -388,11 +456,15 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password
 ALTER USER `root`@`localhost` IDENTIFIED WITH caching_sha2_password BY 'password';
 FLUSH PRIVILEGES;
 
+select user(); # 当前连接数据库的用户
+
+show grants for 'testuser'@'localhost';
+
 # 更新密码
 update mysql.user SET Password = PASSWORD('密码') where User = 'root';
 FLUSH PRIVILEGES;
 
-REVOKE type_of_permission ON database_name.table_name FROM ‘username’@‘localhost’;
+REVOKE insert,update,select,delete ON database_name.table_name FROM ‘username’@‘localhost’;
 
 ## 重置root密码 获取临时密码
 grep 'temporary password' /var/log/mysqld.log
@@ -486,7 +558,7 @@ grep 'temporary password' /var/log/mysqld.log
 
 ```sql
 SHOW DATABASES;
-CREATE DATABASE IF NOT EXISTS db_name [CHARSET utf8 COLLATE utf8_unicode_ci];  # 特殊符号、关键字表名加``
+CREATE DATABASE IF NOT EXISTS db_name [CHARACTER SET utf8 COLLATE utf8_unicode_ci];  # 特殊符号、关键字表名加``
 ALTER DATABASE db_name charset=utf8;
 DROP DATABASE [IF EXISTS] db_name;
 SHOW CREATE DATABASE db_name;
@@ -1190,6 +1262,7 @@ Unlock tables;
 
 * B-tree数据存储是有序的，按照顺序保存了索引的列，加速了数据访问，存储引擎不会扫描整个表得到需要的数据
 * 多路自平衡的搜索树,允许每个节点有更多的子节点
+* 根节点一般存储在内存中，普通节点和叶子结点保存在硬盘中
 * 使用B-tree索引的查询类型，很好用于全键值、键值范围或键前缀查找
     - 只有在使用了索引的最左前缀的时候才有用
     - 查找没有从索引列的最左边开始,没有什么用处;不能跳过索引的列
@@ -1224,6 +1297,7 @@ Unlock tables;
     * 索引是如何组织数据的存储,表中每一行数据，索引中包含了lastname、firstname、dob列的值，查看下图
     * 更适合外部存储,由于内节点无 data 域,一个结点可以存储更多的内结点,每个节点能索引的范围更大更精确,也意味着 B+树单次磁盘IO的信息量大于B-树,I/O效率更高。
     * 节点增加的链指针,加强了区间访问性，可使用在范围区间查询等，而B-树每个节点 key 和 data 在一起，则无法区间查找。
++ 每次 IO 只读取一个数据页大小的数据，如果要读取的数据大于一个数据页，则会导致多次 IO。因此要尽量让每个节点的数据大小刚好等于一个数据页大小，即每访问一个节点只需一次 IO。
 
 ![index](../_static/index.jpg "index")
 ![B+tree](../_static/B+tree.jpg "B+tree")
@@ -1618,6 +1692,23 @@ MySQL 在每个事务更新数据之前，由 Master 将事务串行的写入二
 ![master-slave](../_static/master-slave.gif "master-slave")
 
 ```sql
+ #主从同步的关键点，从库上不需要开启
+relay-log = /data/3306/relay-bin
+relay-log-info-file = /data/3306/relay-log.info
+binlog_cache_size = 1M
+max_binlog_cache_size = 1M
+max_binlog_size = 2M
+expire_logs_days = 7
+key_buffer_size = 16M
+read_buffer_size = 1M
+read_rnd_buffer_size = 1M
+bulk_insert_buffer_size = 1M
+lower_case_table_names = 1
+skip-name-resolve
+slave-skip-errors = 1032,1062
+replicate-ignore-db=mysql
+server-id = 1    #主库从库ID 不可相同
+
 GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' IDENTIFIED BY 'slave_password';
 FLUSH PRIVILEGES;
 SHOW MASTER STATUS;
@@ -1627,6 +1718,17 @@ START slave;
 show slave status\G;
 
 Slave_IO_Running = NO：stop slave; reset slave;start slave;
+
+# 锁表
+mysql -uroot -p123456 -S /data/3306/mysql.sock -e "flush table with read lock;"
+# 备份
+mysql -uroot -p123456 -S /data/3306/mysql.sock -e "show master status;" >/backup/mysql.log
+mysqldump -uroot -p123456 -S /data/3306/mysql.sock -A -B |gzip >/backup/mysql.sql.gz
+# 解锁
+mysql -uroot -p123456 -S /data/3306/mysql.sock -e "unlock tables;"
+
+# 主库的备份文件解压并恢复数据库
+mysql -uroot -p123456 -S /data/3307/mysql.sock < mysql.sql
 ```
 
 ### 读写分离
@@ -1732,6 +1834,8 @@ mysqldump [-h 主机名] -u 用户名 -p --all-databases > dump.sql
 mysqldump [-h 主机名] -u 用户名 -p --databases 库名1 [库名2 ...] > dump.sql
 mysqldump [-h 主机名] -u 用户名 -p 库名 表名1 [表名2 ...] > dump.sql
 mysqldump -u wcnc -p -d –add-drop-table smgp_apps_wcnc >d:wcnc_db.sql # 导出数据结构
+mysqldump -uroot -p test >/download/testbak_$(date +%F).sql
+mysqldump -uroot -p -B test mysql|gzip >/download/testbak_$(date +%F).sql.gz
 
 # 恢复全量备份
 mysql -uroot -p < dump.sql
