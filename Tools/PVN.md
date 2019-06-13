@@ -146,12 +146,11 @@ pip install shadowsocks
 * [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
 * [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu https://shadowsocks.be
 
-## 参考
+### 服务
 
-* [Shadowsocks (简体中文)](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
-* [openvpn](https://help.ubuntu.com/lts/serverguide/openvpn.html)
-* [gfwlist/gfwlist](https://github.com/gfwlist/gfwlist):The one and only one gfwlist here
-* [How To Set Up an OpenVPN Server on Ubuntu 16.04(https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04)
+* [StreisandEffect/streisand](https://github.com/StreisandEffect/streisand):Streisand sets up a new server running L2TP/IPsec, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, a Tor bridge, and WireGuard. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.
+* [Nyr/openvpn-install](https://github.com/Nyr/openvpn-install):OpenVPN road warrior installer for Debian, Ubuntu and CentOS
+* [trailofbits/algo](https://github.com/trailofbits/algo):Set up a personal IPSEC VPN in the cloud
 
 ## 工具
 
@@ -171,8 +170,10 @@ pip install shadowsocks
 * [Alvin9999/new-pac](https://github.com/Alvin9999/new-pac)
 * BT sync
 
-### 服务
+## 参考
 
-* [StreisandEffect/streisand](https://github.com/StreisandEffect/streisand):Streisand sets up a new server running L2TP/IPsec, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, a Tor bridge, and WireGuard. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.
-* [Nyr/openvpn-install](https://github.com/Nyr/openvpn-install):OpenVPN road warrior installer for Debian, Ubuntu and CentOS
-* [trailofbits/algo](https://github.com/trailofbits/algo):Set up a personal IPSEC VPN in the cloud
+* [Shadowsocks (简体中文)](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
+* [openvpn](https://help.ubuntu.com/lts/serverguide/openvpn.html)
+* [gfwlist/gfwlist](https://github.com/gfwlist/gfwlist):The one and only one gfwlist here
+* [How To Set Up an OpenVPN Server on Ubuntu 16.04(https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04)
+* [max2max/freess](https://github.com/max2max/freess)
