@@ -34,12 +34,13 @@
 ## 设计
 
 * 单一职责原则(Single Responsibility Principle, SRP)： There should never be more than one reason for a class to change. 言下之意做到类只承担单一职责(最细粒度)也就能尽可能地降低类变更的可能性，不同职责要分开单独定义。其实这一原则不仅仅适用于类，还适用于接口以及方法的设计；
-* 开闭原则(Open-Closed Principle, OCP)： Softeware entities like classes,modules and functions should be open for extension but closed for modifications. 这句话翻译过来大意就是，一个软件实体如类、模块和函数，应该通过扩展来实现变化，而不是通过修改已有代码来实现变化。比如参数类型、引用对象尽量使用接口或者抽象类，而不是具体实现类；
+* 开闭原则(Open-Closed Principle, OCP)： Softeware entities like classes,modules and functions should be open for extension but closed for modifications. 一个软件实体如类、模块和函数，应该通过扩展来实现变化，而不是通过修改已有代码来实现变化。比如参数类型、引用对象尽量使用接口或者抽象类，而不是具体实现类；
 * 依赖倒转原则(Dependence Inversion Principle, DIP)： High level modules should not depend upon low level modules. Both should depend upon abstractions. Abstractions should not depend upon details. Details should depend upon abstractions. 依赖多出现在方法参数中。高层模块不应该依赖低层模块(具体实现)，以防止一旦低层模块(具体实现)发生变化，将引起高层模块不必要的改变，同时高层模块之上可能有更高层的模块存在，因此两者都应该依赖于抽象。抽象不依赖具体实现细节，而让具体实现细节依赖抽象。抽象不变，具体实现细节改变可以使影响最小化，也就是要针对接口编程。这一条与里氏代换原则结合起来更容易理解，也可以看出这些原则并不应该被孤立地运用于系统设计中，而应该协同配合起来运用；
-* 里氏代换原则(Liskov Substitution Principle, LSP)： Functions that use pointers or referrnces to base classes must be able to use objects of derived classes without knowing it. 任何基类可以出现的地方，子类一定可以出现，且必须遵从基类所有规则定义，但反过来说，除了扩展基类，我们又为什么要违背基类规则定义呢？这一条与开关原则结合起来理解就是，基类遵循关原则，子类遵循开原则，子类必须满足LSP才允许继承，否则就断开这种继承关系；
+* 里氏代换原则(Liskov Substitution Principle, LSP)： Functions that use pointers or referrnces to base classes must be able to use objects of derived classes without knowing it. 任何基类可以出现的地方，透明地使用其子类的对象，且必须遵从基类所有规则定义，但反过来说，除了扩展基类，我们又为什么要违背基类规则定义呢？这一条与开关原则结合起来理解就是，基类遵循关原则，子类遵循开原则，子类必须满足LSP才允许继承，否则就断开这种继承关系；
 * 接口隔离原则(Interface Segregation Principle, ISP)： Clients should not be forced to depend upon interfaces that they don't use.The dependcy of one class to another one should depend on the smallest possible interface. 使用多个隔离的接口，比使用单个接口要好，也有利于降低类之间的耦合度。类间的依赖关系要建立在最小的接口之上，要防止类必须实现接口中对于自己来说无用的方法情形的出现；
 * 迪米特法则(Law of Demeter, LoD)，也称最少知识原则(Least Knowledge Principle, LKP)： Only talk to your immedate friends. 一个模块或子系统应当尽量少地与其他模块或子系统之间发生直接相互作用，可以通过增加“即时朋友”这个中间人来中转通信，只与“朋友”保持联系，与“陌生人”概不谋面，当模块或子系统出现版本升级更新或环境移植之后，只要朋友不变就好;
 * 合成/聚合复用原则(Composite/Aggregate ReusePrinciple ，CARP)：该原则要求在设计上尽量使用合成/聚合来达到复用的目的，而不是使用继承，也就是说前者优先于后者而被运用。继承会将基类的细节暴露给子类，也称白箱复用，如果基类发生改变，子类也必须相应做出变动，且多继承不易维护。CARP几乎可用于任何环境，依赖少，但是合成/聚合造成类中多对象需要管理
+* 依赖倒置原则(Dependence Inversion Principle) 高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。
 
 ```php
 /**
@@ -189,6 +190,54 @@ $cal->do(12);//104.5
 $cal->do(0);//INF. Warning: Division by zero
 $cal->do(INF);//NAN
 $cal->do('INF');//Fatal error: Uncaught TypeError: Argument 1 passed to Calculator::do() must be of the type float, string given
+
+interface WorkableInterface
+{
+    public function work();
+}
+interface SleepableInterface
+{
+    public function sleep();
+}
+interface ManageableInterface
+{
+    public function beManaged();
+}
+class HumanWorker implements WorkableInterface, SleepableInterface, ManageableInterface
+{
+    public function work()
+    {
+        return 'human working.';
+    }
+    public function sleep()
+    {
+        return 'human sleeping';
+    }
+    public function beManaged()
+    {
+        $this->work();
+        $this->sleep();
+    }
+}
+
+class AndroidWorker implements WorkableInterface, ManageableInterface
+{
+    public function work()
+    {
+        return 'android working.';
+    }
+    public function beManaged()
+    {
+        $this->work();
+    }
+}
+class Captain
+{
+    public function manage(ManageableInterface $worker)
+    {
+        $worker->beManaged();
+    }
+}
 ```
 
 ## Architectural Patterns

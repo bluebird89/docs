@@ -54,8 +54,8 @@
     "group_id": 1,
     "invite_user": "A"
 }
-# signature
 
+# signature
 HMACSHA256(
   base64UrlEncode(header) + "." +
   base64UrlEncode(payload),
