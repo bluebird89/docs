@@ -51,14 +51,15 @@
 
 ## 架构
 
-![](../../_static/nginx_archetect.png "Optional title")
 * master/worker模型：一个master进程可生成一个或多个worker进程；每个worker基于时间驱动机制可以并行响应多个请求
-    - master:加载配置文件、管理worker进程、平滑升级，...
-    - worker：http服务，http代理，fastcgi代理，...
+    - master:加载配置文件、管理worker进程、平滑升级
+    - worker：http服务，http代理，fastcgi代理
 * 事件驱动：epoll(Linux),kqueue（FreeBSD）, /dev/poll(Solaris)
 * 消息通知：select,poll, rt signals
     - 支持sendfile,  sendfile64
     - 支持AIO，mmap
+
+![](../../_static/nginx_archetect.png "Optional title")
 
 ## 安装
 
@@ -129,18 +130,32 @@ $document_uri # 同 $uri
     - Nginx进程PID存放路径
     - 错误日志的存放路径
     - 配置文件的引入
-* events块
-    - 该部分配置主要影响Nginx服务器与用户的网络连接，主要包括：
+* events块:该部分配置主要影响Nginx服务器与用户的网络连接
     - 设置网络连接的序列化
     - 是否允许同时接收多个网络连接
     - 事件驱动模型的选择
     - 最大连接数的配置
+    - 事件模型：
+        + 标准事件模型：Select、poll属于标准事件模型，如果当前系统不存在更有效的方法，nginx会选择select或poll
+    - 高效事件模型
+        + Kqueue：使用于FreeBSD 4.1+, OpenBSD 2.9+, NetBSD 2.0 和 MacOS X.使用双处理器的MacOS X系统使用kqueue可能会造成内核崩溃。
+        + Epoll：使用于Linux内核2.6版本及以后的系统。
+        + /dev/poll：使用于Solaris 7 11/99+，HP/UX 11.22+ (eventport)，IRIX 6.5.15+ 和 Tru64 UNIX 5.1A+。
+        + Eventport：使用于Solaris 10。 为了防止出现内核崩溃的问题， 有必要安装安全补丁
 * http块
     - 定义MIMI-Type
     - 自定义服务日志
     - 允许sendfile方式传输文件
     - 连接超时时间
     - 单连接请求数上限
+    - windows调用php-cgi启动服务
+    - linux通过转交服务给php-fpm处理:配置www.conf服务转交TCP socket或Unix Socket
+        + Unix Sockets
+            * Nginx is run as user/group www-data. PHP-FPM's unix socket therefore needs to be readable/writable by this user.
+            * If we change the Unix socket owner to user/group ubuntu, Nginx will then return a bad gateway error, as it can no longer communicate to the socket file. We would have to change Nginx to run as user "ubuntu" as well, or set the socket file to allow "other" (non user nor group) to be read/written to, which is insecure.
+        + TCP Sockets
+            * This makes PHP-FPM able to be listened to by remote servers
+            * listen.allowed_clients = 127.0.0.1
 * server块
     - 配置网络监听
     - 基于名称的虚拟主机配置
@@ -152,86 +167,70 @@ $document_uri # 同 $uri
     - 网站默认首页配置
 
 ```json
-{
 # nginx.conf
-# 可以运行nginx用户 和组，linux系统尤其重要，如出现403 forbidden错误，很有可能是这个没有设置正确。不配置或者配置为 user nobody nobody ，则默认所有用户都可以启动Nginx进程
-user  www-data www-data;
+{
+    # 运行nginx用户和组，linux系统尤其重要，如出现403 forbidden错误，很有可能是这个没有设置正确。不配置或者配置为 user nobody nobody(window下不指定)，则默认所有用户都可以启动Nginx进程
+    user  www-data www-data;
 
-# 工作进程的个数，通常和cpu的数量相同
-# master进程是接收并分配给worker处理。
-# 如果开启了ssl和gzip一般设置为CPU数量的2倍，可以减少I/O操作。如果Nginx服务器还有其它服务，可以考虑适当减少
-# auto：Nginx进程将自动检测
-worker_processes  3| auto
-#  写在main部分，默认没有设置，可以限制为操作系统最大的限制65535。
-worker rlimit nofile 10240
+    # 工作进程的个数，通常和cpu的数量相同
+    # master进程是接收并分配给worker处理。
+    # 如果开启了ssl和gzip一般设置为CPU数量的2倍，可以减少I/O操作
+    # 如果Nginx服务器还有其它服务，可以考虑适当减少
+    # auto：Nginx进程将自动检测
+    worker_processes  3| auto
 
-# 错误日志
-error_log   /var/log/nginx/error.log;
-#error_log  logs/error.log  main|notice|info;
-# 日志输出到标准错误输出
-error_log stderr
+    # 错误日志
+    error_log   /var/log/nginx/error.log main|notice|info;
+    # 日志输出到标准错误输出
+    error_log stderr;
 
-# 系统守护进程在运行，需要在某文件中保存当前运行程序的主进程号，Nginx支持该保存文件路径的自定义
-pid        /var/run/nginx.pid;
-# 配置文件的引入
-include mime.types
+    # 系统守护进程在运行，需要在某文件中保存当前运行程序的主进程号
+    pid        /var/run/nginx.pid;
 
-# 设置网络连接的序列化:该指令默认为on状态，表示会对多个Nginx进程接收连接进行序列化，防止多个进程对连接的争抢。
-# 所谓的 “惊群问题”，当一个新网络连接来到时，多个worker进程会被同时唤醒，但仅仅只有一个进程可以真正获得连接并处理之。如果每次唤醒的进程数目过多的话，其实是会影响一部分性能的。
-# accept_mutex on，那么多个worker将是以串行方式来处理，其中有一个worker会被唤醒；
-# accept_mutex off，那么所有的worker都会被唤醒，不过只有一个worker能获取新连接，其它的worker会重新进入休眠状态
-# 这个值的开关与否其实是要和具体场景挂钩的
-accept_mutex on | off;
+    #  进程可以打开的最大描述符,可以限制为操作系统最大的限制65535, 超过10240了，会返回502错误
+    worker rlimit nofile 10240
+    # 配置文件的引入
+    include mime.types
 
-# 是否允许同时接收多个网络连接:off:每个worker process 一次只能接收一个新到达的网络连接。若想让每个Nginx的worker process都有能力同时接收多个网络连接，则需要开启此配置
-multi_accept on | off;
+    # 设置网络连接的序列化:该指令默认为on状态，表示会对多个Nginx进程接收连接进行序列化，防止多个进程对连接的争抢。
+    # 所谓的 “惊群问题”，当一个新网络连接来到时，多个worker进程会被同时唤醒，但仅仅只有一个进程可以真正获得连接并处理之。如果每次唤醒的进程数目过多的话，其实是会影响一部分性能的。
+    # accept_mutex on，那么多个worker将是以串行方式来处理，其中有一个worker会被唤醒；
+    # accept_mutex off，那么所有的worker都会被唤醒，不过只有一个worker能获取新连接，其它的worker会重新进入休眠状态
+    # 这个值的开关与否其实是要和具体场景挂钩的
+    accept_mutex on | off;
 
-# 工作模式及链接数上限
-events {
-    # 在Linux操作系统下，Nginx默认使用epoll事件模型，Nginx在Linux操作系统下效率相当高。同时Nginx在OpenBSD或FreeBSD操作系统上采用类似于epoll的高效事件模型kqueue。
-    # epoll是多路复用IO(I/O Multiplexing)中的一种方式
-    # select、poll、kqueue、epoll、rtsigselect、poll、kqueue、epoll、rtsig
-    use epoll;
-    #单个后台worker process进程的最大并发链接数 每一个worker进程能并发处理（发起）的最大连接数。Nginx作为反向代理服务器，计算公式最大连接数 = worker_processes * worker_connections / 4，所以这里客户端最大连接数是1024，这个可以增到8192，但不能超过worker_rlimit_nofile。当Nginx作为http服务器时，计算公式里面是除以2.
-    worker_connections  1024;
-    # 使每个worker进程可以同时处理多个客户端请求
-    multi_accept on
-    # 使用内核的FD文件传输功能，可以减少user mode和kernel mode的切换，从而提升服务器性能
-    sendfile on
-    # 当tcp_nopush设置为on时，会调用tcp_cork方法进行数据传输。 使用该方法会产生这样的效果：当应用程序产生数据时， 内核不会立马封装包，而是当数据量积累到一定量时才会封装，然后传输。
-    tcp_nopush on
+    # 是否允许同时接收多个网络连接:off:每个worker process 一次只能接收一个新到达的网络连接。若想让每个Nginx的worker process都有能力同时接收多个网络连接，则需要开启此配置
+    multi_accept on | off;
+
+    events {
+        # 在Linux操作系统下，Nginx默认使用epoll事件模型,x在OpenBSD或FreeBSD操作系统上采用类似于epoll的高效事件模型kqueue
+        # epoll是多路复用IO(I/O Multiplexing)中的一种方式
+        use epoll;
+        # 单个后台worker process进程的最大并发链接数 Nginx作为反向代理服务器，计算公式最大连接数 = worker_processes * worker_connections / 4，所以这里客户端最大连接数是1024，这个可以增到8192，但不能超过worker_rlimit_nofile。当Nginx作为http服务器时，计算公式里面是除以2.
+        worker_connections  1024;
+        keepalive_timeout 60;
+        # 客户端请求头部的缓冲区大小
+        client_header_buffer_size 4k;
+        # 打开文件指定缓存，默认是没有启用的，max指定缓存数量，建议和打开文件数一致，inactive是指经过多长时间文件没被请求后删除缓存
+        open_file_cache max=65535 inactive=60s;
+        # 多长时间检查一次缓存的有效信息
+        open_file_cache_valid 80s;
+
+        # 使每个worker进程可以同时处理多个客户端请求
+        multi_accept on
+        # 使用内核的FD文件传输功能，可以减少user mode和kernel mode的切换，从而提升服务器性能
+        sendfile on
+        # 当tcp_nopush设置为on时，会调用tcp_cork方法进行数据传输。 使用该方法会产生这样的效果：当应用程序产生数据时， 内核不会立马封装包，而是当数据量积累到一定量时才会封装，然后传输。
+        tcp_nopush on
+    }
 }
-}
-```
-
-### http（服务器设置）
-
-* windows调用php-cgi启动服务
-* linux通过转交服务给php-fpm处理:配置www.conf服务转交TCP socket或Unix Socket
-    - Unix Sockets
-        + Nginx is run as user/group www-data. PHP-FPM's unix socket therefore needs to be readable/writable by this user.
-        + If we change the Unix socket owner to user/group ubuntu, Nginx will then return a bad gateway error, as it can no longer communicate to the socket file. We would have to change Nginx to run as user "ubuntu" as well, or set the socket file to allow "other" (non user nor group) to be read/written to, which is insecure.
-    - TCP Sockets
-        + This makes PHP-FPM able to be listened to by remote servers
-        + listen.allowed_clients = 127.0.0.1
-
-提供http服务相关的一些配置参数，如：是否使用keepalive，是否使用gzip进行压缩
-
-```sh
-touch php7.0-fpm.sock
-chown www-data:www-data php7.0-fpm.sock
-chmod 777 php7.0-fpm.sock
 
 # 设定http服务器，利用它的反向代理功能实现负载均衡支持
 http {
-    # 设定负载均衡的服务器列表 weigth参数表示权值，权值越高被分配到的几率越大
-    upstream phpbackend {
-      server unix:/var/run/php5-fpm.sock1 weight=100 max_fails=5 fail_timeout=5;
-      server unix:/var/run/php5-fpm.sock2 weight=100 max_fails=5 fail_timeout=5;
-      server unix:/var/run/php5-fpm.sock3 weight=100 max_fails=5 fail_timeout=5;
-      server unix:/var/run/php5-fpm.sock4 weight=100 max_fails=5 fail_timeout=5;
-      server 192.168.8.3:80  weight=6;
-    }
+    # 文件扩展名与文件类型映射表
+    include mime.types;
+    # 设定默认文件类型
+    default_type application/octet-stream;
 
     # Stop Displaying Server Version in Configuration
     server_tokens off;
@@ -240,27 +239,17 @@ http {
     set_real_ip_from 127.0.0.1;
     real_ip_header X-Forwarded-For;
 
-    # 文件扩展名与文件类型映射表 设定mime类型,类型由mime.type文件定义
-    include mime.types;
-    # 设定默认文件类型
-    default_type application/octet-stream;
-
-    # 为Nginx服务器设置详细的日志格式 request_time 后端所花
+    # 日志格式 request_time 后端所花时间
+    # $http_x_forwarded_for：真实ip地址
     log_format  main   $remote_addr - $remote_user [$time_local] "$request"
                       $status $body_bytes_sent $request_body "$http_referer"
                       "$http_user_agent" "$http_x_forwarded_for" "$request_time";
-
+    log_format log404 '$status [$time_local] $remote_addr $host$request_uri $sent_http_location';
     access_log  /usr/local/var/log/nginx/access.log main;
-    # 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，
-    # 对于普通应用设为 on，
-    # 如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改成off。
-    sendfile on;
-    # 指令若size>0，则Nginx进程的每个worker process每次调用sendfile()传输的数据了最大不能超出此值；若size=0则表示不限制。默认值为0
-    sendfile_max_chunk 3000;
+    access_log  logs/host.access.404.log  log404;
 
     # 单连接请求数上限:用于限制用户通过某一个连接向Nginx服务器发起请求的次数
     keepalive_requests number;
-    include /usr/local/etc/nginx/conf.d/*.conf;
 
     # Gzip Settings
     gzip on;
@@ -284,66 +273,128 @@ http {
     open_file_cache_min_uses 2;
     open_file_cache_errors on;
 
-    # Client Timeouts 设定请求缓冲
+    # 通过nginx上传文件的大小
     client_max_body_size 500M;
     # 缓冲区代理缓冲用户用户端请求的最大字节数
     client_body_buffer_size 1m;
     client_body_timeout 15;
+    client_header_buffer_size 4k;
     client_header_timeout 15;
-    # 允许客户端请求的最大单文件字节数，一般在上传较大文件时设置限制值
-    client max body_ size 10m
 
-    # 连接超时时间
     # 长连接超时时间，单位是秒，涉及到浏览器的种类、后端服务器的超时设置、操作系统的设置，相对比较敏感
     # header_timeout 为可选项，表示在应答报文头部的 Keep-Alive 域设置超时时间：“Keep-Alive : timeout = header_timeout”
     keepalive_timeout 22 [header_timeout];
+
     # 指定相应客户端的超时时间，这个超时仅限于两个连接活动之间的时间，如果超过这个时间，客户端没有任何活动，Nginx将会关系连接。
     send_timeout 15;
+
     # sendfile 指令指定 nginx 是否调用 sendfile 函数（zero copy 方式）来输出文件，对于普通应用，必须设为 on,如果用来进行下载等应用磁盘IO重负载应用，可设置为 off，以平衡磁盘与网络I/O处理速度，降低系统的uptime.
+    # 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，
+    # 对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改成off。
+    # 指令若size>0，则Nginx进程的每个worker process每次调用sendfile()传输的数据了最大不能超出此值；若size=0则表示不限制。默认值为0
     sendfile on;
+    sendfile_max_chunk 3000;
+    # 允许或禁止使用socke的TCP_CORK的选项，此选项仅在使用sendfile的时候使用
     tcp_nopush on;
     tcp_nodelay on;
 
-    include servers/*;
+    # 后端服务器连接的超时时间_发起握手等候响应超时时间
+    proxy_connect_timeout 90;
+    # 连接成功后_等候后端服务器响应时间_其实已经进入后端的排队之中等候处理（也可以说是后端服务器处理请求的时间）
+    proxy_read_timeout 180;
+    # 后端服务器数据回传时间_就是在规定时间之内后端服务器必须传完所有的数据
+    proxy_send_timeout 180;
+    # 设置从被代理服务器读取的第一部分应答的缓冲区大小，通常情况下这部分应答中包含一个小的应答头，默认情况下这个值的大小为指令proxy_buffers中指定的一个缓冲区的大小，不过可以将其设置为更小
+    proxy_buffer_size 256k;
+    # 设置用于读取应答（来自被代理服务器）的缓冲区数目和大小，默认情况也为分页大小，根据操作系统的不同可能是4k或者8k
+    proxy_buffers 4 256k;
+    proxy_busy_buffers_size 256k;
+    # 设置在写入proxy_temp_path时数据的大小，预防一个工作进程在传递文件时阻塞太长
+    proxy_temp_file_write_size 256k;
+    # proxy_temp_path和proxy_cache_path指定的路径必须在同一分区
+    proxy_temp_path /data0/proxy_temp_dir;
+    # 设置内存缓存空间大小为200MB，1天没有被访问的内容自动清除，硬盘缓存空间大小为30GB。
+    proxy_cache_path /data0/proxy_cache_dir levels=1:2 keys_zone=cache_one:200m inactive=1d max_size=30g;
+
+    # 设定负载均衡的服务器列表 weigth参数表示权值，权值越高被分配到的几率越大
+    upstream phpbackend {
+      server unix:/var/run/php5-fpm.sock1 weight=100 max_fails=5 fail_timeout=5;
+      server unix:/var/run/php5-fpm.sock2 weight=100 max_fails=5 fail_timeout=5;
+      server unix:/var/run/php5-fpm.sock3 weight=100 max_fails=5 fail_timeout=5;
+      server unix:/var/run/php5-fpm.sock4 weight=100 max_fails=5 fail_timeout=5;
+      server 192.168.8.3:80  weight=6;
+    }
 
     # 加载配的本地虚拟机
-    include vhost/*.conf;
+    include /usr/local/etc/nginx/conf.d/`*.conf`;
+    include servers/`*`;
+    include vhost/`*.conf`;
 }
 ```
 
 ### server
 
-http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
-
+* http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
 * backlog 默认位 128，1024 这个值换成自己正常的 QPS
-* First, the incoming URI will be normalized even before any of the location matching takes place. For example, First it will decode the “%XX” values in the URL.
-* It will also resolve the appropriate relative path components in the URL, if there are multiple slashes / in the URL, it will compress them into single slash etc. Only after this initial normalization of the URL, the location matching will come into play.
-* When there is no location modifier, it will just be treated as a prefix string to be matched in the URL.
-* Nginx will first check the matching locations that are defined using the prefix strings.
-* If the URL has multiple location prefix string match, then Nginx will use the longest matching prefix location.
-* After the prefix match, nginx will then check for the regular expression location match in the order in which they are defined in the nginx configuration file.
-* So, the order in which you define the regular expression match in your configuration file is important. The moment nginx matches a regular expression location configuration, it will not look any further. So, use your important critical regular expression location match at the top of your configuration.
-* If there is no regular expression matching location is found, then Nginx will use the previously matched prefix location configuration.
-* location匹配优先级:一次请求只能匹配一个location，一旦匹配成功后，便不再继续匹配其余location;
-    - =：URI的精确匹配，其后多一个字符都不可以，精确匹配。match only the following EXACT URL
-    - ~：区分大小写的正则匹配；case sensitive regular expression match modifier
-    - ~*：不区分字符大小写正则表达式匹配
-    - ^~：uri以指定字符或字符串开头；this configuration will be used as the prefix match, but this will not perform any further regular expression match even if one is available.等同无标志符号，多了不会匹配后面对应规则
-    - /： 通用匹配，任何请求都会匹配到
+* 流程
+    - First, the incoming URI will be normalized even before any of the location matching takes place. For example, First it will decode the “%XX” values in the URL.
+    - It will also resolve the appropriate relative path components in the URL, if there are multiple slashes / in the URL, it will compress them into single slash etc. Only after this initial normalization of the URL, the location matching will come into play.
+    - When there is no location modifier, it will just be treated as a prefix string to be matched in the URL.
+    - Nginx will first check the matching locations that are defined using the prefix strings.
+    - If the URL has multiple location prefix string match, then Nginx will use the longest matching prefix location.
+    - After the prefix match, nginx will then check for the regular expression location match in the order in which they are defined in the nginx configuration file.
+    - So, the order in which you define the regular expression match in your configuration file is important. The moment nginx matches a regular expression location configuration, it will not look any further. So, use your important critical regular expression location match at the top of your configuration.
+    - If there is no regular expression matching location is found, then Nginx will use the previously matched prefix location configuration.
+* location匹配优先级:一次请求只能匹配一个location，一旦匹配成功后，便不再继续匹配其余
+    - 先匹配普通字符串，然后再匹配正则表达式
+        + 普通字符串匹配顺序是根据配置中字符长度从长到短，也就是说使用普通字符串配置的location顺序是无关紧要的
+        + 正则表达式按照配置文件里的顺序测试。找到第一个比配的正则表达式将停止搜索。
+    - `=` URI的精确匹配，其后多一个字符都不可以，精确匹配。match only the following EXACT URL
+    - `~` 区分大小写的正则匹配；case sensitive regular expression match modifier
+    - `~*` 不区分字符大小写正则表达式匹配
+    - `^~` uri以指定字符或字符串开头；this configuration will be used as the prefix match, but this will not perform any further regular expression match even if one is available.等同无标志符号，多了不会匹配后面对应规则
+    - 不带任何修饰符，也表示前缀匹配，但是在正则匹配之后 location /uri
+    - `/` 通用匹配，任何请求都会匹配到
     - 优先级：= >完整路径 >^~ > ~* > ~ > /
-* URL重写时所用的正则表达式需要使用PCRE格式。PCRE正则表达式元字符：
-    - 字符匹配：.,[ ], [^]
-    - 次数匹配：*,+, ?, {m}, {m,}, {m,n}
-    - 位置锚定：^,$
-      - $ at the end means that the specified keyword should be at the end of the URL.
-    - 或者：|  OR operator
-    - 分组：(),后向引用, $1, $2, ...
-    - ( ) – all the values inside this regular expression will be considered as keywords in the URL
+* rewrite：使用正则匹配请求的url，然后根据定义的规则进行重写和改变，需ngx_http_rewrite_module模块来支持url重写功能，该模块是标准模块，默认已经安装
+    - 正则表达式需要使用PCRE格式。PCRE正则表达式元字符：
+        + 字符匹配
+            * . : 匹配除换行符以外的任意字符
+            * 匹配单个字符
+                - [a-z] ： 匹配a-z小写字母的任意一个
+                - [^]
+        + 次数匹配：* +  ?  {m}  {m,} {m,n}
+            * \d ：匹配数字
+        + 位置锚定
+            * ^
+          + $ at the end means that the specified keyword should be at the end of the URL.
+        + 或者：|  OR operator
+        + 分组：(),后向引用, $1, $2, ...
+        + ( ) – all the values inside this regular expression will be considered as keywords in the URL
+    -  if(condition){...}
+            * 用= ,!= 比较的一个变量和字符串，true/false
+            * 使用~， ~*与正则表达式匹配的变量，如果这个正则表达式中包含右花括号}或者分号;则必须给整个正则表达式加引号
+            * 使用-f ，!-f 检查一个文件是否存在
+            * 使用-d, !-d 检查一个目录是否存在
+            * 使用-e ，!-e 检查一个文件、目录、符号链接是否存在
+            * 使用-x ， !-x 检查一个文件是否可执行
+        + return code URL;完成对请求的处理，直接给客户端返回状态码，改指令后所有的nginx配置都是无效的
+        + set variable value;定义一个变量并赋值，值可以是文本，变量或者文本变量混合体
+        + uninitialized_variable_warn on | off 控制是否输出为初始化的变量到日志
+        + rewrite regex replacement [flag]; 通过正则来改变url，可以同时存在一个或者多个指令
+            * last 停止处理后续rewrite指令集，然后对当前重写的新URI在rewrite指令集上重新查找。
+            * break 停止处理后续rewrite指令集，并不在重新查找,但是当前location内剩余非rewrite语句和location外的的非rewrite语句可以执行。
+            * redirect 如果replacement不是以http:// 或https://开始，返回302临时重定向
+            * permant 返回301永久重定向
+            * last和break标记的区别在于，last标记在本条rewrite规则执行完后，会对其所在的server { … } 标签重新发起请求，而break标记则在本条规则匹配完成后，停止匹配，不再做后续的匹配。另外有些时候必须使用last，比如在使用alias指令时，而 使用proxy_pass指令时则必须使用break。
+            * rewrite 规则优先级要高于location，在nginx配置文件中，nginx会先用rewrite来处理url，最后再用处理后的url匹配location
 * alias指令来更改location接收到的URI请求路径
+* 命名匹配：使用@比绑定一个模式，类似变量替换的用法
 
 ```
 server {
-    # nginx监听的端口，Mac下默认为8080，小于1024的要以root启动。listen:*:8080
+    # nginx监听的端口，Mac下默认为8080，小于1024的要以root启动
+    # listen:*:8080
     listen       [127.0.0.1]:80 [default] backlog = 1024;
     # 基于名称和IP的虚拟主机配置, 可以通过正则匹配
     server_name  www.exam.com .... ~^www\d+\.myserver\.com$;
@@ -361,6 +412,8 @@ server {
         root   html;
         # 定义首页索引文件的名称，默认访问的文件名
         index  index.html index.htm;
+
+        rewrite ^(.*)$ http://www.******.com/;
     }
     # 开启nginx列目录
     location download {
@@ -371,7 +424,36 @@ server {
         autoindex_localtime on;
     }
 
-    #直接返回验证文件
+    location / {
+        if ($http_user_agent ~* "xnp") {
+            rewrite ^(.*)$ http://i1.***img.com/help/noimg.gif;
+        }
+
+        proxy_pass http://img_relay$request_uri;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        #error_page 404 http://i1.***img.com/help/noimg.gif;
+        error_page 404 = @fetch;
+    }
+
+    location @fetch {
+        access_log /data/logs/baijiaqi.log log404;
+        rewrite ^(.*)$ http://i1.***img.com/help/noimg.gif redirect;
+    }
+
+    # 对以“mp3或exe”结尾的地址进行负载均衡
+    location ~* \.(mp3|exe)$ {
+        # 设置被代理服务器的端口或套接字，以及URL
+        proxy_pass http://img_relay$request_uri;
+
+        # 将代理服务器收到的用户的信息传到真实服务器上
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+    # 直接返回验证文件
     location = /XDFyle6tNA.txt {
         default_type text/plain;
         return 200 'd6296a84657eb275c05c31b10924f6ea';
@@ -413,6 +495,13 @@ server {
     #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
     #    include        fastcgi_params;
     #}
+    # 设定查看Nginx状态的地址
+    location /NginxStatus {
+        stub_status on;
+        access_log on;
+        auth_basic "NginxStatus";
+        auth_basic_user_file conf/htpasswd;
+    }
 
     location /img/ {
         root /custom/images;
@@ -477,6 +566,12 @@ server {
     location ~ .(jsp|do)$ {
         proxy_pass  http://test;
     }
+}
+
+# 命名匹配：使用@比绑定一个模式，类似变量替换的用法
+error_page 404 = @not_found
+location @not_found {
+    rewrite http://google.com;
 }
 
 server {
@@ -645,31 +740,10 @@ server {
     server_name wx.ijason.cc;
 
     rewrite ^(.*)$ https://$server_name$1 permanent;
-}
-
-server {
-    listen 80;
-    server_name domain.com;
     rewrite ^(.*) https://$server_name$1 permanent;
-}
-server {
-    listen 443 ssl;
-    server_name domain.com;
-    ssl on;
-    # other
-}
-
-server {
-    listen 80;
-    server_name domain.com;
     return 301 https://$server_name$request_uri;
 }
-server {
-    listen 443 ssl;
-    server_name domain.com;
-    ssl on;
-    # other
-}
+
 server {
     listen 443 ssl;
     listen 80;
@@ -678,6 +752,24 @@ server {
     # other
     error_page 497 https://$server_name$request_uri;
 }
+
+if ($http_user_agent ~ MSIE) {
+     rewrite ^(.*)$ /msie/$1 break;
+}
+if ($http_cookie ~* "id=([^;]+)(?:;|$)") {
+    set $id $1;
+}
+if ($request_method = POST) {
+    return 405;
+}
+if ($slow) {
+    limit_rate 10k;
+}
+
+# URL结尾添加斜杠
+rewrite ^(.*[^/])$ $1/ permanent;
+# 删除URL结尾的斜杠
+rewrite ^/(.*)/$ /$1 permanent;
 
 # 配置跨域请求
 add_header Access-Control-Allow-Origin *;
@@ -820,6 +912,8 @@ location = /room/nginx/queryNewLiveNum.do{
     - 不支持HTTPS
 * 反向代理（Reverse Proxy）:以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。简单来说就是真实的服务器不能直接被外部网络访问，所以需要一台代理服务器，而代理服务器能被外部网络访问的同时又跟真实服务器在同一个网络环境，当然也可能是同一台服务器，端口不同而已。
 
+![代理](../_static/nginx_proxy.jpg "Optional title")
+
 ```
 #将请求"http:127.0.0.1:80/helloworld" 转向服务器 "http://127.0.0.1:8081"
 server {
@@ -829,7 +923,7 @@ server {
         location /helloworld {
             proxy_pass     http://127.0.0.1:8081; # 表明了所代理的服务器
             proxy_set_header Host $host:$server_port;
-}
+        }
 
 # websocket的反向代理配置
 server {
@@ -894,8 +988,10 @@ server
     - Round Robin（默认）:轮询(weight=1):每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。
     - weight:指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
     - Least Connections(least_conn): 跟踪和backend当前的活跃连接数目，最少的连接数目说明这个backend负载最轻，将请求分配给他，这种方式会考虑到配置中给每个upstream分配的weight权重信息；
-    - Least Time(least_time): 请求会分配给响应最快和活跃连接数最少的backend；fair（第三方插件）:按后端服务器的响应时间来分配请求，响应时间短的优先分配。
-    - Generic Hash(hash): 以用户自定义资源(比如URL)的方式计算hash值完成分配，其可选consistent关键字支持一致性hash特性；url_hash（第三方插件）:按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存服务器时比较有效。server语句中不能写入weight等其他的参数。在upstream中加入hash语句，hash_method是使用的hash算法。
+    - Least Time(least_time): 请求会分配给响应最快和活跃连接数最少的backend
+        + fair（第三方插件）:按后端服务器的响应时间来分配请求，响应时间短的优先分配。
+    - Generic Hash(hash): 以用户自定义资源(比如URL)的方式计算hash值完成分配，其可选consistent关键字支持一致性hash特性
+        + url_hash（第三方插件）:按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存服务器时比较有效。server语句中不能写入weight等其他的参数。在upstream中加入hash语句，hash_method是使用的hash算法。
     - ip_hash:每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session不能跨服务器的问题。如果后端服务器down掉，要手工down掉。
         - 会出现session不落到同一台服务器上，设置只有一台服务器运行测试代码
 + 会话一致性:用户(浏览器)在和服务端交互的时候，通常会在本地保存一些信息，而整个过程叫做一个会话(Session)并用唯一的Session ID进行标识,最简单的情况是保证会话一致性——相同的会话每次请求都会被分配到同一个backend上去。通过sticky开启的
@@ -958,7 +1054,12 @@ server {
         server 192.168.1.10:8080;
         server 192.168.1.11:8080;
     }
-
+    upstream backend {
+        server squid1:3128;
+        server squid2:3128;
+        hash $request_uri;
+        hash_method crc32;
+    }
     # down 表示单前的server暂时不参与负载
     # weight 权重,默认为1。 weight越大，负载的权重就越大。
     # max_fails 允许请求失败的次数默认为1。当超过最大次数时，返回proxy_next_upstream 模块定义的错误
@@ -973,7 +1074,6 @@ server {
         server 192.168.11.71:20201 weight=100 backup;
         server 192.168.11.72:20201 weight=100 max_fails=3 fail_timeout=30s;
     }
-
 }
 
 sticky learn
@@ -1071,7 +1171,6 @@ cat /usr/local/class/logs/access.log | awk '{print $4,$7,$NF}' | awk -F '"' '{pr
 cat /usr/local/class/logs/access.log | grep 2017:13:28:55 | wc -l
 # 获取每分钟的请求数量，输出成csv文件，然后用excel打开，可以生成柱状图
 cat /usr/local/class/logs/access.log  | awk '{print substr($4,14,5)}' | uniq -c | awk '{print $2","$1}' > access.csv
-# 
 cat /usr/local/nginx/logs/access.log | docker run --rm -i diyan/goaccess   --time-format='%H:%M:%S'   --date-format='%d/%b/%Y'   --log-format='%h %^[%d:%t %^] "%r" %s %b "%R" "%u"' > index.html
 
 cp /var/log/nginx/access.log /var/log/nginx/test.log

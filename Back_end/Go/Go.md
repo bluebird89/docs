@@ -300,6 +300,8 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
 * 代码规范
   - [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
+* file
+  - [chrislusf/seaweedfs](https://github.com/chrislusf/seaweedfs):SeaweedFS is a simple and highly scalable distributed file system. There are two objectives: to store billions of files! to serve the files fast! SeaweedFS implements an object store with O(1) disk seek and an optional Filer with POSIX interface, supporting S3 API, Rack-Aware Erasure Coding for warm storage, FUSE mount, Hadoop compatible, WebDAV.
 
 ## 工具
 

@@ -26,6 +26,7 @@
     - [fengdu78/deeplearning_ai_books](https://github.com/fengdu78/deeplearning_ai_books):deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）
     - [Deep Learning Specialization](http://www.deeplearning.ai)
     - [coursera](https://www.coursera.org/specializations/deep-learning)
+            * [enggen/Deep-Learning-Coursera](https://github.com/enggen/Deep-Learning-Coursera):Deep Learning Specialization by Andrew Ng, deeplearning.ai.
     - [神经网络和深度学习](https://mooc.study.163.com/)
 * [深度学习（小象学院）](https://www.bilibili.com/video/av10324235)
 * [李宏毅深度学习(2017)](https://www.bilibili.com/video/av9770302/)
@@ -73,3 +74,4 @@
 * [nndl/nndl.github.io](https://github.com/nndl/nndl.github.io):《神经网络与深度学习》 Neural Network and Deep Learning https://nndl.github.io
 * [osforscience/deep-learning-ocean](https://github.com/osforscience/deep-learning-ocean):📡 All You Need to Know About Deep Learning - A kick-starter
 * [The Matrix Calculus You Need For Deep Learning](https://explained.ai/matrix-calculus/index.html)
+* [](link)

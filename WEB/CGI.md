@@ -2,18 +2,11 @@
 
 ## PATH_INFO
 
-PATHINFO是一个CGI 1.1的标准，经常用来做为传参载体，
-在Apache中, 当不加配置的时候, 对于PHP脚本, AcceptPathInfo是默认接受的，
-对于Nginx下, 是不支持PATHINFO 的, 也就是需要设置才能使用PATHINFO模式.
-可以使用PATH_INFO来代替Rewrite来实现伪静态页面, 很多PHP框架也使用PATHINFO模式来作为路由载体
-
-php内置解析
-
-
 * 每种动态语言（ PHP,Python 等）的代码文件需要通过对应的解析器才能被服务器识别，而 CGI 协议就是用来使解释器与服务器可以互相通信。通过标准输入（STDIN）和标准输出（STDOUT）和环境变量来与CGI程序间传递数据
 * fork-and-execute:每当客户请求CGI的时候，WEB服务器就请求操作系统生成一个新的CGI解释器进程(如php-cgi.exe)，CGI 的一个进程则处理完一个请求后退出，下一个请求来时再创建新进程。
     - 有多少连接请求就会有多少cgi子进程，每个子进程都需要启动CGI解释器、加载配置等初始化工作，这是性能低下的原因。比如重新解析php.ini、重新载入全部扩展并重初始化全部数据结构
-* 操作系统提供了许多环境变量，定义了程序的执行环境，应用程序可以存取它们。Web服务器和CGI接口又另外设置了一些环境变量，用来向CGI程序传递一些重要的参数 URL、查询字符串、POST数据、HTTP header
+* 操作系统提供了许多环境变量，定义了程序的执行环境，应用程序可以存取它们
+* Web服务器和CGI接口又另外设置了一些环境变量，PATHINFO是一个CGI 1.1的标准，经常用来做为传参载体，用来向CGI程序传递一些重要的参数 URL、查询字符串、POST数据、HTTP header
     - CONTENT_TYPE    这个环境变量的值指示所传递来的信息的MIME类型。目前，环境变量CONTENT_TYPE一般都是：application/x-www-form-urlencoded,他表示数据来自于HTML表单。
     - CONTENT_LENGTH  如果服务器与CGI程序信息的传递方式是POST，这个环境变量即使从标准输入STDIN中可以读到的有效数据的字节数。这个环境变量在读取所输入的数据时必须使用。
     - HTTP_COOKIE 客户机内的 COOKIE 内容。

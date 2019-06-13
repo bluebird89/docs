@@ -384,7 +384,7 @@ PNG ... content of chrome.png ...
         + 发送数据，用函数sendto(); 
         + 关闭网络连接；
 
-```c
+```C
 SOCKET SocketListen =socket(AF_INET,SOCK_STREAM, IPPROTO_TCP);
 SOCKET_ERROR = bind(SocketListen,(const sockaddr*)&addr,sizeof(addr))
 SOCKET_ERROR == listen(SocketListen,2)
@@ -392,7 +392,6 @@ SOCKET SocketWaiter = accept(SocketListen, _Out_    struct sockaddr *addr _
 closesocket(SocketListen);closesocket(SocketWaiter);
 
 socket(PF_INET, SOCK_DGRAM, 0)
-
 ```
 
 ### 状态码 Status Code
@@ -470,10 +469,10 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 
 * 限制获取cookie，用iframe的方式放置了一个淘宝网页到真实页面中，获取淘宝密码信息
 * 同源策略/SOP（Same origin policy）：从一个域上加载的脚本不允许访问另外一个域的文档属性，只要协议、域名、端口有任何一个不同，都被当作是不同的域.除非两个网页是来自于统一‘源头’， 否则不允许一个网页的JavaScript访问另外一个网页的内容，像Cookie，DOM，LocalStorage统统禁止访问
-    - <script>、<img>、<iframe>、<link>、<script>等标签都可以加载跨域资源，而不受同源限制，
+    - `<script>、<img>、<iframe>、<link>、<script>`等标签都可以加载跨域资源，而不受同源限制，
     - 浏览器会限制脚本中发起的跨域请求。比如，使用 XMLHttpRequest 对象和Fetch发起 HTTP 请求就必须遵守同源策略。
     - 协议(http/https) 相同 域名相同 端口相同
-    - 开个口子，对于使用<script src='//static.store.com/jquery.js'> 加载的JavaScript，我们认为它的源属于www.store.com， 而不属于static.store.com，这样就可以操作www.store.com的页面了
+    - 开个口子，对于使用`<script src='//static.store.com/jquery.js'>` 加载的JavaScript，我们认为它的源属于www.store.com， 而不属于static.store.com，这样就可以操作www.store.com的页面了
     - 两个网页的一级域名是相同的，可以共享cookie, 不过cookie的domain一定要设置为那个一级域名才可以，例如：`document.cookie = 'test=true;path=/;domain=store.com'`
     - 对XMLHttpReqeust对象施加同源策略
         - 代理模式：通过服务器端中转，例如你是来自book.com的， 现在想访问movie.com，那可以让那个book.com把请求转发给movie.com嘛！人类好像给这种方式起了个名字
@@ -500,7 +499,7 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
         + Access-Control-Request-Method 首部字段用于预检请求。其作用是，将实际请求所使用的 HTTP 方法告诉服务器。 Access-Control-Request-Method: <method>
         + Access-Control-Request-Headers 首部字段用于预检请求。其作用是，将实际请求所携带的首部字段告诉服务器。Access-Control-Request-Headers: <field-name>[, <field-name>]*
 
-````
+```php
 // 后端返回代码中增加三个字段
 header(“Access-Control-Allow-Origin”:“”);           // 必选 允许所有来源访问
 header(“Access-Control-Allow-Credentials”:“true”);  //可选 是否允许发送cookie
@@ -518,35 +517,27 @@ if(in_array($origin, [
 # 允许所有域名访问则只需在http://server.runoob.com/server.php文件头部添加如下代码：
 header('Access-Control-Allow-Origin:*');
 
-if($_SERVER['REQUEST_METHOD'] == "GET")
-{
+if($_SERVER['REQUEST_METHOD'] == "GET") {
     header('Content-Type: text/plain');
     echo "This HTTP resource is designed to handle POSTed XML input from arunranga.com and not be retrieved with GET";
-
-}
-elseif($_SERVER['REQUEST_METHOD'] == "OPTIONS")
-{
+} elseif ($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
     // 告诉客户端我们支持来自 arunranga.com 的请求并且预请求有效期将仅有20天
     if($_SERVER['HTTP_ORIGIN'] == "http://arunranga.com")
     {
-    header('Access-Control-Allow-Origin: http://arunranga.com');
-    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-    header('Access-Control-Allow-Headers: X-PINGARUNER');
-    header('Access-Control-Max-Age: 1728000');
-    header("Content-Length: 0");
-    header("Content-Type: text/plain");
-    //exit(0);
-    }
-    else
-    {
+        header('Access-Control-Allow-Origin: http://arunranga.com');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: X-PINGARUNER');
+        header('Access-Control-Max-Age: 1728000');
+        header("Content-Length: 0");
+        header("Content-Type: text/plain");
+        //exit(0);
+    } else {
     header("HTTP/1.1 403 Access Forbidden");
     header("Content-Type: text/plain");
     echo "You cannot repeat this request";
 
     }
-}
-elseif($_SERVER['REQUEST_METHOD'] == "POST")
-{
+} elseif($_SERVER['REQUEST_METHOD'] == "POST"){
     /* 通过首先获得XML传送过来的blob来处理POST请求，然后做一些处理, 最后将结果返回客户端
     */
     if($_SERVER['HTTP_ORIGIN'] == "http://arunranga.com")
@@ -560,13 +551,13 @@ elseif($_SERVER['REQUEST_METHOD'] == "POST")
             header('Access-Control-Allow-Origin: http://arunranga.com');
             header('Content-Type: text/plain');
             echo // 处理之后的一些响应
-    }
-    else
+    } else {
         die("POSTing Only Allowed from arunranga.com");
-}
-else
+    }
+} else{
     die("No Other Methods Allowed");
-````
+}
+```
 
 ## 附带身份凭证的请求
 
@@ -577,8 +568,6 @@ else
 * 服务器不得设置 Access-Control-Allow-Origin 的值为“*”。
     * 因为请求的首部中携带了 Cookie 信息，如果 Access-Control-Allow-Origin 的值为“*”，请求将会失败。而将 Access-Control-Allow-Origin 的值设置为 foo.example，则请求将成功执行
     * 响应首部中也携带了 Set-Cookie 字段，尝试对 Cookie 进行修改。如果操作失败，将会抛出异常。
-
-### CORS(跨域资源共享)
 
 ## HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer）
 
@@ -598,18 +587,25 @@ HTTP下加入SSL层，HTTPS的安全基础是SSL(Secure Sockets Layer 安全套�
     - http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。
 * SSL（Secure Sockets Layer 安全套接字层），它是一项标准技术，用于在客户端与服务器之间进行加密通信，可确保互联网连接安全，防止网络犯罪分子读取和修改任何传输信息，包括个人资料。使用40 位关键字作为RC4流加密算法
 * TSL（Transport Layer Security 传输层安全），是 SSL 的继承协议，它建立在 SSL 3.0 协议规范之上，是更为安全的升级版 SSL。
+* 流程
+    - 购买证书，配置域名信息
+        + [Let’s Encrypt](https://letsencrypt.org/)
+    - 获取证书文件，配置nginx,放到cert目录
+    - 解决方案
+        + [certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx)
+        + [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
 
 ![HTTPS签名和验证](../static/https-ac.png "HTTPS签名和验证")
 ![HTTP vs HTTPS](../static/https.png "HTTP与HTTPS区别")
 
-* 购买证书，配置域名信息
-    - [Let’s Encrypt](https://letsencrypt.org/)
-* 获取证书文件，配置nginx,放到cert目录
-* 解决方案
-    - [certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx)
-    - [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
+### CORS(跨域资源共享)
 
 ## 存储
+
+
+* 由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户，这个机制就是Session.
+* 典型的场景比如购物车，当你点击下单按钮时，由于HTTP协议无状态，所以并不知道是哪个用户操作的，所以服务端要为特定的用户创建了特定的Session，用用于标识这个用户，并且跟踪用户，这样才知道购物车里面有几本书。这个Session是保存在服务端的，有一个唯一标识。在服务端保存Session的方法很多，内存、数据库、文件都有。集群的时候也要考虑Session的转移，在大型的网站，一般会有专门的Session服务器集群，用来保存用户会话，这个时候 Session 信息都是放在内存的，使用一些缓存服务比如Memcached之类的来放 Session。
+* 服务端如何识别特定的客户:这个时候Cookie就登场了。每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端。实际上大多数的应用都是用 Cookie 来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在 Cookie 里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器，我就知道你是谁了。
 
 * session:会话标识(session id)
     - 服务器就要给每个客户端分配不同的“身份标识”，然后客户端每次向服务器发请求的时候，都带上这个“身份标识”，服务器就知道这个请求来自于谁了
@@ -636,17 +632,6 @@ HTTP下加入SSL层，HTTPS的安全基础是SSL(Secure Sockets Layer 安全套�
 * cookie:浏览器里面能永久存储的一种数据，仅仅是浏览器实现的一种数据存储功能。
     - cookie由**服务器**生成，发送给浏览器，浏览器把cookie以kv形式保存到某个目录下的文本文件内，下一次请求同一网站时会把该cookie发送给服务器。
     - cookie是存在客户端上的，所以浏览器加入了一些限制确保cookie不会被恶意使用，同时不会占据太多磁盘空间，所以每个域的cookie数量是有限的。
-# 会话
-
-由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户，这个机制就是Session.
-
-典型的场景比如购物车，当你点击下单按钮时，由于HTTP协议无状态，所以并不知道是哪个用户操作的，所以服务端要为特定的用户创建了特定的Session，用用于标识这个用户，并且跟踪用户，这样才知道购物车里面有几本书。这个Session是保存在服务端的，有一个唯一标识。在服务端保存Session的方法很多，内存、数据库、文件都有。集群的时候也要考虑Session的转移，在大型的网站，一般会有专门的Session服务器集群，用来保存用户会话，这个时候 Session 信息都是放在内存的，使用一些缓存服务比如Memcached之类的来放 Session。
-
-服务端如何识别特定的客户:这个时候Cookie就登场了。每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端。实际上大多数的应用都是用 Cookie 来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在 Cookie 里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器，我就知道你是谁了。
-
-
-## 实现
-
 * 你第一次访问网站时，服务端脚本中开启了Sessionsession_start();，
 * 服务器会生成一个不重复的 SESSIONID 的文件session_id();，比如在/var/lib/php/session目录
 * 并将返回(Response)如下的HTTP头 Set-Cookie:PHPSESSIONID=xxxxxxx
@@ -654,8 +639,6 @@ HTTP下加入SSL层，HTTPS的安全基础是SSL(Secure Sockets Layer 安全套�
 * 当你第二次访问页面时，所有Cookie会附带的请求头(Request)发送给服务器端
 * 服务器识别PHPSESSIONID这个cookie，然后去session目录查找对应session文件，
 * 找到这个session文件后，检查是否过期，如果没有过期，去读取Session文件中的配置；如果已经过期，清空其中的配置
-
-## session
 
 * session 在服务器端，cookie 在客户端（浏览器）
 * session 默认被存在在服务器的一个文件里（不是内存）
@@ -688,6 +671,9 @@ POST http://www.xx.com/post.php?session_id=xxxxx
 因此，cookie只是最优雅的实现session的方式，因为cookie对用户来说不可见，同时会自动在HTTP报文中传输
 
 但session也可以通过其他方式来保持， 比如放一个sessionId在URL的参数里
+
+## HTTP2
+
 
 ## QUIC
 
@@ -722,13 +708,14 @@ HTTP-over-QUIC 实验协议将被重命名为 HTTP/3，并成为 HTTP 协议的�
 * [dannagle/PacketSender](https://github.com/dannagle/PacketSender):Network utility for sending / receiving TCP, UDP, SSL https://packetsender.com/
 * [tsenart/vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. https://godoc.org/github.com/tsenart/vegeta/lib
 * flow-control
-    - [alibaba/Sentinel](https://github.com/alibaba/Sentinel):A lightweight flow-control library providing high-available protection and monitoring (高可用防护的流量管理框架) 
+    - [alibaba/Sentinel](https://github.com/alibaba/Sentinel):A lightweight flow-control library providing high-available protection and monitoring (高可用防护的流量管理框架)
 * Performance Measurement
     * [Microsoft/Ethr](https://github.com/Microsoft/Ethr):Ethr is a Network Performance Measurement Tool for TCP, UDP & HTTP.
 * proxy
     - [avwo/whistle](https://github.com/avwo/whistle):HTTP, HTTPS, WebSocket debugging proxy https://wproxy.org/
 * certificates
     - [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
+    - [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh): 实现了 acme 协议, 可以从 letsencrypt 生成免费的证书
 * test
     - [JoeDog/siege](https://github.com/JoeDog/siege):Siege is an http load tester and benchmarking utility
 * 测试
