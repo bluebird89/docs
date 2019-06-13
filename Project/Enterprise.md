@@ -1,73 +1,71 @@
-# 工具
+## 企业级应用
 
-- UDESK:集成客服接入平台
-- tower
-
-## 工具集
-
-- [atlassian](https://www.atlassian.com/)
-    -   stride
-    -   [Jira](https://www.atlassian.com/software/jira)：敏捷开发，处理项目中的多个步骤,用于规划和跟踪工作，并确定优先级，处理产品发布，产品交付后监控性能
-    -   confluence
-    -   sourcetree：git管理
-    -   [bamboo](https://www.atlassian.com/software/bamboo):the choice of professional teams for continuous integration, deployment, and delivery Atlassian的CI/CD服务器解决方案，很多特性和Jenkins类似。它们都是流行的DevOps工具，帮助用户自动化发布流水线，从build到部署。但是，Jenkins是开源的，Bamboo是收费的。
+* [atlassian](https://www.atlassian.com/)
+    - stride
+    - [Jira](https://www.atlassian.com/software/jira)：敏捷开发，处理项目中的多个步骤,用于规划和跟踪工作，并确定优先级，处理产品发布，产品交付后监控性能
+    - confluence
+    - sourcetree：git管理
+    - [bamboo](https://www.atlassian.com/software/bamboo):the choice of professional teams for continuous integration, deployment, and delivery Atlassian的CI/CD服务器解决方案，很多特性和Jenkins类似。它们都是流行的DevOps工具，帮助用户自动化发布流水线，从build到部署。但是，Jenkins是开源的，Bamboo是收费的。
 - [Jfrog](https://jfrog.com)
 - [jgraph/drawio](https://github.com/jgraph/drawio):Source to www.draw.io
 * [apereo/cas](https://github.com/apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
 * [ZenHub](https://www.zenhub.com):Easier than Jira. More powerful than Trello. Built for developers.
-
-## 企业级应用
-
+- UDESK:集成客服接入平台
+- tower
+- 沟通
+    +  [Slack](https://slack.com/)
+    +  [stride](https://app.stride.com/):类似 slack 的软件
+    - [mattermost/mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost https://mattermost.com
 * [apache/incubator-superset](https://github.com/apache/incubator-superset):Apache Superset (incubating) is a modern, enterprise-ready business intelligence web application
 * [vitorfs/bootcamp](https://github.com/vitorfs/bootcamp):An enterprise social network http://trybootcamp.vitorfs.com
 * [reviewboard/reviewboard](https://github.com/reviewboard/reviewboard):An extensible and friendly code review tool for projects and companies of all sizes. https://www.reviewboard.org/
 * [apereo/cas](https://github.com/apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
 * [odoo/odoo](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business. https://www.odoo.com
-* WPS
-    - 1988 年，当推出Windows不久的微软正陷入与苹果的司法鏖战时，在深圳蔡围屋酒店 501 房间里，醒着就敲代码、困了就躺会儿、饿了吃泡面，求伯君就这样把自己关起来单枪匹马、夜以继日地开发WPS。第二年初秋的一天，当求伯君从 501 房间内走出的时候，由十万行代码构建起来的WPS 1. 0 悄然面世。没有铺天盖地的广告、没有高逼格的发布会，甚至连具体发售日期都没有，仅凭口口相传的美誉，横空出世的WPS就迅速风靡全国，拿下了90%的市场份额。 
-    - 金山公司凭借WPS依旧如日中天，并接下了给微软做汉化的业务。这时微软顺水推舟，主动抛出了橄榄枝，希望金山WPS在文档格式上能与自家Word互通。
-    - 求伯君这些秉持着技术大同的理想主义程序员们欣然答应且一分钱都没要。然而向来“赢者通吃”的微软所琢磨的，却是如何通过捆绑销售挖走WPS的用户。
-    - 在微软纵容下，国内盗版系统泛滥，个人电脑从DOS过渡到Windows平台，随之而来的是WPS用户短时间迅速流失。如果没有与微软互通文档格式，或许后来的金山就有足够的时间来应对微软的挑战了。 
-    - 到了 1996 年，金山公司已经连工资都快发不出了。曾经为理想走在一起的开发团队也只剩一二十人。就在这个关口，微软还开出七十万年薪来挖求伯君，一旦成功便能彻底终结WPS这个对手。 
-    - 一度想辞职开酒吧的雷军则请了个半年假，常常一个人跑去蹦迪以疏解心中的郁结……雷军说：那年我失去了理想。 
-    - 只有金山人自己才知道，求伯君这时候已经把房子和车都卖了，只为筹集资金开发出新一代WPS。但金山彼时最严峻的问题，还是如何活下去。“我们当时想过是否要去做房地产、做保健品，先生存下来再说。”雷军回忆。 
-    - 1997 年 10 月，WPS97 的横空出世打消了所有怀疑。
-    - 有感于国产基础软件羸弱的柳传志出手注资重组了金山，并将其改造成了一只“正规军”。这次重组也被认为是中国信息技术行业的软硬强强联合。 
-    - 雷军　我很感激 1998 年联想投资金山。联想是在金山相对比较宽松的软件文化中，注入一些比较严谨的东西，使我们坚定了做世界一流企业的梦想，一步步往前走。我们在很短的时间内大幅度地提高了管理水平。 
-    -　金山与微软的竞争，此前常常打民族牌。这样做容易让人产生误会，误认为金山只会用民族牌博得同情。其实我们对自己的技术也很自信，这次金山要在技术创新和性价比上直接与微软比拼。 
-    - 在 2001 年金山推出自己的WPS Office办公套件的时候，为了维持垄断地位，微软竟然不惜将多年前的互通协定撕毁，抹去了MS Office兼容WPS的功能。这种封杀举动导致WPS一度在市场上销声匿迹。
-    - 2008 年 10 月 20 日，很多人发现自己的电脑里出现了一则通知，微软告诉所有用户若使用盗版Office将会“每小时黑屏一次”。 
-    - **如果对于盗版，微软都留下了“后门”，那么在正版程序中，个人隐私、经济信息甚至国家机密的安全防护岂不是形同虚设?**
-    - “不管你们想没想明白，先做移动版再说。” 2011 年，金山率先发布了安卓版WPS，并以一个月一个版本的速度不断优化更新。 
-    - 2019 年 5 月 17 日，在媒体沟通会上，金山副总裁庄湧宣告： 因为WPS，微软在中国乃至世界办公软件市场才不敢掉以轻心;因为WPS，让全世界了解到在中国还有一家公司能够和微软抗衡。 
+* 邮件
+    - [mailpile/Mailpile](https://github.com/mailpile/Mailpile):A free & open modern, fast email client with user-friendly encryption and privacy features https://mailpile.is
+    - [Foundry376/Mailspring](https://github.com/Foundry376/Mailspring):💌 A beautiful, fast and maintained fork of @nylas Mail by one of the original authors. https://getmailspring.com/
+    - [nylas/nylas-mail](https://github.com/nylas/nylas-mail):💌 An extensible desktop mail app built on the modern web. Forks welcome! https://nylas.com/nylas-mail/
+    - [mailhog/MailHog](https://github.com/mailhog/MailHog):Web and API based SMTP testing
+* 看板
+    - 功能
+        + 列表用来表示卡片在进度上所处的状态，与大多数看板类工具类似，例如可将创建的任务卡片分配到待开发、待测试、已发布等不同列表中；
+        + 加入了泳道，子任务不再是卡片内的检查项，而是一张完整的卡片；
+        + 泳道，一个故事卡片在一条泳道上横向移动，每一列列表，就是卡片移动的步伐，这种方式能清晰的看到一个用户故事从故事卡片，到拆解成若干个任务卡片，到任务评估开发点数，到任务分配到具体的工程师，到任务陆续进入到「待开发」、「开发中」、「待测试」、「已完成」、「已发布」等状态的全过程，非常直观。尽管任务可能很多，每个开发者只需要过滤出自己的任务，就非常清爽了。
+    - 工具
+        + [trello](https://trello.com/)
+        + [Leangoo](https://www.leangoo.com):最敏捷的项目协作工具
+        + [Teambition](https://www.teambition.com):项目管理工具，聊天、文件、看板
+        + [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software):
 
+## 公司文化
 
-## 沟通
+* 雇主品牌，一家企业在员工及社会最广泛大众心目中的品牌形象
+    - 是否重视明星员工；
+    - 的晋升机制是否合理；
+    - 如何应对外界的变化
 
--  [Slack](https://slack.com/)
--  [stride](https://app.stride.com/):类似 slack 的软件
-* [mattermost/mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost https://mattermost.com
+## 转型
 
-## 邮件
+* 传统企业 市场化  商品化
 
-* [mailpile/Mailpile](https://github.com/mailpile/Mailpile):A free & open modern, fast email client with user-friendly encryption and privacy features https://mailpile.is
-* [Foundry376/Mailspring](https://github.com/Foundry376/Mailspring):💌 A beautiful, fast and maintained fork of @nylas Mail by one of the original authors. https://getmailspring.com/
-* [nylas/nylas-mail](https://github.com/nylas/nylas-mail):💌 An extensible desktop mail app built on the modern web. Forks welcome! https://nylas.com/nylas-mail/
-* [mailhog/MailHog](https://github.com/mailhog/MailHog):Web and API based SMTP testing
+## WPS
 
-## 看板
-
-* 列表用来表示卡片在进度上所处的状态，与大多数看板类工具类似，例如可将创建的任务卡片分配到待开发、待测试、已发布等不同列表中；
-* 加入了泳道，子任务不再是卡片内的检查项，而是一张完整的卡片；
-* 泳道，一个故事卡片在一条泳道上横向移动，每一列列表，就是卡片移动的步伐，这种方式能清晰的看到一个用户故事从故事卡片，到拆解成若干个任务卡片，到任务评估开发点数，到任务分配到具体的工程师，到任务陆续进入到「待开发」、「开发中」、「待测试」、「已完成」、「已发布」等状态的全过程，非常直观。尽管任务可能很多，每个开发者只需要过滤出自己的任务，就非常清爽了。
-
-### 工具
-
-- [trello](https://trello.com/)
-- [Leangoo](https://www.leangoo.com):最敏捷的项目协作工具
-- [Teambition](https://www.teambition.com):项目管理工具，聊天、文件、看板
-- [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software):
-
+* 1988 年，当推出Windows不久的微软正陷入与苹果的司法鏖战时，在深圳蔡围屋酒店 501 房间里，醒着就敲代码、困了就躺会儿、饿了吃泡面，求伯君就这样把自己关起来单枪匹马、夜以继日地开发WPS。第二年初秋的一天，当求伯君从 501 房间内走出的时候，由十万行代码构建起来的WPS 1. 0 悄然面世。没有铺天盖地的广告、没有高逼格的发布会，甚至连具体发售日期都没有，仅凭口口相传的美誉，横空出世的WPS就迅速风靡全国，拿下了90%的市场份额。 
+* 金山公司凭借WPS依旧如日中天，并接下了给微软做汉化的业务。这时微软顺水推舟，主动抛出了橄榄枝，希望金山WPS在文档格式上能与自家Word互通。
+* 求伯君这些秉持着技术大同的理想主义程序员们欣然答应且一分钱都没要。然而向来“赢者通吃”的微软所琢磨的，却是如何通过捆绑销售挖走WPS的用户。
+* 在微软纵容下，国内盗版系统泛滥，个人电脑从DOS过渡到Windows平台，随之而来的是WPS用户短时间迅速流失。如果没有与微软互通文档格式，或许后来的金山就有足够的时间来应对微软的挑战了。 
+* 到了 1996 年，金山公司已经连工资都快发不出了。曾经为理想走在一起的开发团队也只剩一二十人。就在这个关口，微软还开出七十万年薪来挖求伯君，一旦成功便能彻底终结WPS这个对手。 
+* 一度想辞职开酒吧的雷军则请了个半年假，常常一个人跑去蹦迪以疏解心中的郁结……雷军说：那年我失去了理想。 
+* 只有金山人自己才知道，求伯君这时候已经把房子和车都卖了，只为筹集资金开发出新一代WPS。但金山彼时最严峻的问题，还是如何活下去。“我们当时想过是否要去做房地产、做保健品，先生存下来再说。”雷军回忆。 
+* 1997 年 10 月，WPS97 的横空出世打消了所有怀疑。
+* 有感于国产基础软件羸弱的柳传志出手注资重组了金山，并将其改造成了一只“正规军”。这次重组也被认为是中国信息技术行业的软硬强强联合。 
+* 雷军　我很感激 1998 年联想投资金山。联想是在金山相对比较宽松的软件文化中，注入一些比较严谨的东西，使我们坚定了做世界一流企业的梦想，一步步往前走。我们在很短的时间内大幅度地提高了管理水平。 
+*　金山与微软的竞争，此前常常打民族牌。这样做容易让人产生误会，误认为金山只会用民族牌博得同情。其实我们对自己的技术也很自信，这次金山要在技术创新和性价比上直接与微软比拼。 
+* 在 2001 年金山推出自己的WPS Office办公套件的时候，为了维持垄断地位，微软竟然不惜将多年前的互通协定撕毁，抹去了MS Office兼容WPS的功能。这种封杀举动导致WPS一度在市场上销声匿迹。
+* 2008 年 10 月 20 日，很多人发现自己的电脑里出现了一则通知，微软告诉所有用户若使用盗版Office将会“每小时黑屏一次”。 
+* **如果对于盗版，微软都留下了“后门”，那么在正版程序中，个人隐私、经济信息甚至国家机密的安全防护岂不是形同虚设?**
+* “不管你们想没想明白，先做移动版再说。” 2011 年，金山率先发布了安卓版WPS，并以一个月一个版本的速度不断优化更新。 
+* 2019 年 5 月 17 日，在媒体沟通会上，金山副总裁庄湧宣告： 因为WPS，微软在中国乃至世界办公软件市场才不敢掉以轻心;因为WPS，让全世界了解到在中国还有一家公司能够和微软抗衡。 
 
 ## [Y-Combinator](https://www.ycombinator.com/)
 
@@ -81,14 +79,12 @@
     - “你愿意辩证地看待现状”以及“你在做出艰难的决定时不会感到痛苦。”
     - “在探求真理的过程中，你可以变得脆弱。”
     - 伟大的公司明白，它们必须要像自己希望的那样表现得与众不同，以此迎接竞争。
-
-  - [Netflix云安全团队的开源项目](http://www.infoq.com/cn/news/2017/09/Netflix-cloud-produce)
+- [Netflix云安全团队的开源项目](http://www.infoq.com/cn/news/2017/09/Netflix-cloud-produce)
 
 ## Apache
 
-Apache Incubator是旨在成为完全成熟的Apache软件基金会项目的开源项目的通道。Incubator项目成立于2002年10月，为那些意图成为Apache基金会努力的一部分的项目和代码库，提供一个进入到Apache软件基金会的路径。那些从外部组织捐赠的所有代码，以及意图移动到Apache的现有外部项目，都必须进入Incubator。Apache Incubator项目一方面充当一个临时容器项目，直到孵化项目被接受并成为Apache软件基金会的一个顶级项目，或变成适当项目的子项目（如Jakarta和Apache XML）。另一方面，孵化器项目生成文档，介绍基金会是如何工作的，以及如何在Apache的架构内把事情做完。这意味着记录Apache软件基金会及其成员项目的过程、 角色、和策略。
-
-顶级项目（Top Level Project）应该是相对于子项目（subproject）来说的。简单来说，就是有些顶级项目会包含一些子项目。每个顶级项目都有独立的委员会来管理。所有的Apache项目都需要经过孵化器孵化，满足Apache的一系列质量要求之后才可毕业。从孵化器里毕业的项目，要么独立成为顶级项目，要么成为其他顶级项目的子项目。
+* Apache Incubator是旨在成为完全成熟的Apache软件基金会项目的开源项目的通道。Incubator项目成立于2002年10月，为那些意图成为Apache基金会努力的一部分的项目和代码库，提供一个进入到Apache软件基金会的路径。那些从外部组织捐赠的所有代码，以及意图移动到Apache的现有外部项目，都必须进入Incubator。Apache Incubator项目一方面充当一个临时容器项目，直到孵化项目被接受并成为Apache软件基金会的一个顶级项目，或变成适当项目的子项目（如Jakarta和Apache XML）。另一方面，孵化器项目生成文档，介绍基金会是如何工作的，以及如何在Apache的架构内把事情做完。这意味着记录Apache软件基金会及其成员项目的过程、 角色、和策略。
+* 顶级项目（Top Level Project）应该是相对于子项目（subproject）来说的。简单来说，就是有些顶级项目会包含一些子项目。每个顶级项目都有独立的委员会来管理。所有的Apache项目都需要经过孵化器孵化，满足Apache的一系列质量要求之后才可毕业。从孵化器里毕业的项目，要么独立成为顶级项目，要么成为其他顶级项目的子项目。
 
 ## Alibaba
 
@@ -97,12 +93,15 @@ Apache Incubator是旨在成为完全成熟的Apache软件基金会项目的开�
     - 天猫品牌事业群主要做品牌的商业数字化转型，成为“线上线下融合经营的主阵地”；
     - 天猫超市事业群将整合原有天猫超市和淘鲜达业务，推进线上线下一体化的超市新零售模式；
     - 天猫进出口事业部将负责履行阿里在进口博览会上做出的未来5年2000亿美元进口额的承诺。
+* [阿里开源](http://1024.yuque.com/)
+* [A Brief History of Alibaba Founders](https://iprice.sg/trends/insights/history-jack-ma-alibaba-18-founders/)
 
 ## Google
 
-* 2014年的时候，时任谷歌高级副总裁的“安卓之父”安迪·鲁宾（Andy Rubin）被女员工指控性骚扰。 报道称，谷歌进行了调查之后，得到了切实的证据。而且谷歌本可以严肃处理，辞退鲁宾，秉公处理。但是，谷歌的高层却选择了掩盖丑闻，还拿出了9000万美元补偿金，保全了鲁宾，让鲁宾主动离职。
+* 2014年的时候，时任谷歌高级副总裁的“安卓之父”安迪·鲁宾（Andy Rubin）被女员工指控性骚扰
+* 报道称，谷歌进行了调查之后，得到了切实的证据。而且谷歌本可以严肃处理，辞退鲁宾，秉公处理。但是，谷歌的高层却选择了掩盖丑闻，还拿出了9000万美元补偿金，保全了鲁宾，让鲁宾主动离职。
 
-##  [Basecamp](https://basecamp.com)
+## [Basecamp](https://basecamp.com)
 
 ## 人工智能
 
@@ -115,14 +114,6 @@ Apache Incubator是旨在成为完全成熟的Apache软件基金会项目的开�
 * 竹间智能
 * 盛大创新院
 * [地平线](https://horizon.ai/)
-
-## 公司文化
-
-雇主品牌，一家企业在它的员工及社会最广泛大众心目中的品牌形象。
-
-* 看它是否重视明星员工；
-* 看它的晋升机制是否合理；
-* 看它如何应对外界的变化
 
 ## 网易
 
@@ -138,10 +129,6 @@ Apache Incubator是旨在成为完全成熟的Apache软件基金会项目的开�
     - 但是，当时的任宇昕坚信编程才是人生的全部意义，对管理并不感兴趣，甚至还多次提出要放弃组长的职位，到QQ服务器小组当一名普通的程序员。不过在管理团队看来，任宇昕当程序员是大材小用，不仅拒绝了他的请求，还让他掌管游戏的新团队。
     - 随着腾讯业务的不断壮大，游戏业务更是屡创佳绩。依靠《DNF》、《穿越火线》、《英雄联盟》等多款热门游戏，腾讯在PC时代牢牢占据了网游的霸主地位，任宇昕也在 2012 年 5 月升任COO。
 
-## 转型
-
-* 传统企业 市场化  商品化
-
 ## 华为
 
 * 华为不会让CFO接班，干部选拔以李云龙、赵刚为标杆；
@@ -150,11 +137,13 @@ Apache Incubator是旨在成为完全成熟的Apache软件基金会项目的开�
 
 * 自研的伺服舵机和 ROSA 机器人系统
 
-## 参考
+## 诺基亚
 
-* [A Brief History of Alibaba Founders](https://iprice.sg/trends/insights/history-jack-ma-alibaba-18-founders/)
-
-## 工具
-
-* [阿里开源](http://1024.yuque.com/)
-
+* 当时iPhone上市不久，芬兰《赫尔辛基新闻报》记者劳瑞·玛卡瓦拉感觉到自己有必要给自己国家的伟大企业提个醒，于是他写了一封邮件，从普通消费者的角度，对比了自己使用的诺基亚E51和iPod touch
+    - 认为塞班系统使用复杂、用户体验差：更换铃声要下探5个层级，每天必用的编辑短信功能，需要从编辑短信、多媒体短信、语音短信和邮件中去选择，远不如苹果的产品上手容易，塞班系统“这些复杂的设计让我抓狂。”
+* 很快，投递邮件又让玛卡瓦拉抓狂：翻遍诺基亚官网，却找不到软件设计部门的邮箱。万般无奈之下，邮件发给了诺基亚新闻中心。
+* 诺基亚新闻中心的反应是“如临大敌”，他们首先想到的，不是要去解决邮件提到的问题（把问题反馈设计部门），而是要“解决”提出问题的玛卡瓦拉。
+* 新闻中心接连不断给玛卡瓦拉打电话，劝说他不要炒作诺基亚的负面新闻。新闻中心高管还开着豪车，在下属的前呼后拥之下，来到《赫尔辛基新闻报》编辑部，和玛卡瓦拉当面交涉。
+* 一番唇枪舌剑、唾沫横飞的交锋后，该高管确定玛卡瓦拉不会对邮件内容进行报道，态度立即来了个180度大转弯
+* 完全赞同邮件中所说的塞班系统的种种反人性设计，在iOS面前，塞班没什么竞争力，因为他4岁的女儿接触到iPhone后，很快就学会了iOS的基本操作。
+* 在2013年9月3日，微软和诺基亚联合宣布，微软以71.7亿美元收购诺基亚手机业务。一代手机巨头就此谢幕，欧洲手机操作系统也成为历史。

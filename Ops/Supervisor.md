@@ -1,11 +1,6 @@
 # Supervisor
 
-统一的入口来管理这些在跑的进程，包括状态检查，启动和关闭，出错时警告，及自动重启等。四个组件：
-
-- supervisord 运行Supervisor的后台服务，它用来启动和管理那些你需要Supervisor管理的子进程，响应客户端发来的请求，重启意外退出的子进程，将子进程的stdout和stderr写入日志，响应事件等。它是Supervisor最核心的部分。
-- supervisorctl 相当于supervisord的客户端，它是一个命令行工具，用户可以通过它向supervisord服务发指令，比如查看子进程状态，启动或关闭子进程。它可以连接不同的supervisord服务，包括远程机上的服务。
-- Web服务器 这是supervisord的Web客户端，用户可以在Web页面上完成类似于supervisorctl的功能。
-- XML-RPC接口 这是留给第三方集成的接口，你的服务可以在远程调用这些XML-RPC接口来控制supervisord管理的子进程。上面的Web服务器其实也是通过这个XML-RPC接口实现的。
+统一的入口来管理在跑的进程，包括状态检查，启动和关闭，出错时警告，及自动重启等。四个组件：
 
 ## 安装
 
@@ -94,9 +89,16 @@ stdout_logfile = /var/log/supervisor/demo.log
 daemonize = no
 ```
 
-## 启动
+## 使用
 
 一个实例：一个Flask的Hello World程序，假设保存在"/home/billy/myapp/app.py"文件中
+
+- supervisord 运行Supervisor的后台服务
+    + 用来启动和管理那些需要Supervisor管理的子进程，响应客户端发来的请求，重启意外退出的子进程，将子进程的stdout和stderr写入日志，响应事件等。它是Supervisor最核心的部分。
+- supervisorctl 相当于supervisord的客户端
+    + 一个命令行工具，用户可以通过它向supervisord服务发指令，比如查看子进程状态，启动或关闭子进程。它可以连接不同的supervisord服务，包括远程机上的服务。
+- Web服务器:supervisord的Web客户端，用户可以在Web页面上完成类似于supervisorctl的功能
+- XML-RPC接口：留给第三方集成的接口，服务可以在远程调用这些XML-RPC接口来控制supervisord管理的子进程。上面的Web服务器其实也是通过这个XML-RPC接口实现的。
 
 ```
 # 查看配置文件
@@ -108,15 +110,13 @@ echo_supervisord_conf > supervisord.conf
 supervisorctl status|reload|start|start all|app
 ```
 
-
-## 参考
-
-* [docs](http://supervisord.org/)
-
-
 ## 问题
 
 ```
 INFO Increased RLIMIT_NOFILE limit to 1024
 INFO RPC interface 'supervisor' initialized
 ```
+
+## 参考
+
+* [docs](http://supervisord.org/)

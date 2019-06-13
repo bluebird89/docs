@@ -316,7 +316,8 @@ kubectl delete deployments hello-minikube1
 * [ramitsurana/awesome-kubernetes](https://github.com/ramitsurana/awesome-kubernetes):A curated list for awesome kubernetes sources 🚢🎉 https://ramitsurana.github.io/awesome-kubernetes/
 * [gjmzj/kubeasz](https://github.com/gjmzj/kubeasz):使用Ansible脚本安装K8S集群，介绍组件交互原理，方便直接，不受国内网络环境影响 https://github.com/gjmzj/kubeasz
 * [kubernetes/community](https://github.com/kubernetes/community):Kubernetes community content
-* [](https://www.kubernetes.org.cn)
+* [Kubernetes 中文社区](https://www.kubernetes.org.cn)
+* [hjacobs/kubernetes-failure-stories](https://github.com/hjacobs/kubernetes-failure-stories):Compilation of public failure/horror stories related to Kubernetes https://k8s.af
 
 ## UI
 

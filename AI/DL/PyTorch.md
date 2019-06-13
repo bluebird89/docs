@@ -14,12 +14,11 @@ Tensors and Dynamic neural networks in Python with strong GPU acceleration http:
 
 ## 参考
 
-* [apachecn/pytorch-doc-zh](https://github.com/apachecn/pytorch-doc-zh):PyTorch 中文文档 http://pytorch.apachecn.org
+* [pytorch/tutorials](https://github.com/pytorch/tutorials) <https://pytorch.org/tutorials/>
+* [apachecn/pytorch-doc-zh](https://github.com/apachecn/pytorch-doc-zh) PyTorch 中文文档 http://pytorch.apachecn.org
 * [chenyuntc/pytorch-book](https://github.com/chenyuntc/pytorch-book):PyTorch tutorials and fun projects including neural talk, neural style, poem writing, anime generation
 * [spro/practical-pytorch](https://github.com/spro/practical-pytorch):PyTorch tutorials demonstrating modern techniques with readable code
 * [yunjey/pytorch-tutorial](https://github.com/yunjey/pytorch-tutorial):PyTorch Tutorial for Deep Learning Researchers
 * [tensor-yu/PyTorch_Tutorial](https://github.com/tensor-yu/PyTorch_Tutorial):《Pytorch模型训练实用教程》中配套代码
 * [yuanlairuci110/pytorch-best-practice-master](https://github.com/yuanlairuci110/PyTorch-best-practice-master)
-* [zergtant/pytorch-handbook](https://github.com/zergtant/pytorch-handbook):pytorch handbook是一本开源的书籍，目标是帮助那些希望和使用PyTorch进行深度学习开发和研究的朋友快速入门，其中包含的Pytorch教程全部通过测试保证可以成功运行
-* [PyTorch教程](https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html)
-
+* [zergtant/pytorch-handbook](https://github.com/zergtant/pytorch-handbook):pytorch handbook是一本开源的书籍，目标是帮助那些希望和使用PyTorch进行深度学习开发和研究的朋友快速入门
