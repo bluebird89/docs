@@ -47,16 +47,22 @@ The PHP Interpreter <http://www.php.net>
 
 * 程序路径：`/usr/local/Cellar/php71/7.1.12_23`
 * 配置文件: `/usr/local/etc/php/7.1/` The php.ini and php-fpm.ini file
-* /usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx 通过php-fpm进程运行
+* 通过php-fpm进程运行 /usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx 
 * php71卸载后php-fpm仍然运行
-* phpize pecl 需要php7.*-dev 支持
+    - `brew services stop php`
+* phpize pecl
+    - phpize有版本号，依赖安装指定目录
+        + mac:`/usr/local/lib/php/pecl/20180731/`
+    - 需要php7.*-dev 支持
 
 ```sh
 /usr/local/apache2/bin/apachectl start/stop   service httpd restart
 
 LoadModule php5_module modules/libphp5.so # httpd.conf中添加
 
-cgi.fix_pathinfo 设置为 0  #  php.ini 文件中的配置项  如果文件不存在，则阻止 Nginx 将请求发送到后端的 PHP-FPM 模块， 以避免遭受恶意脚本注入的攻击
+extension_dir = "/usr/local/lib/php/pecl/20180731"
+
+cgi.fix_pathinfo=0 #  php.ini 文件中的配置项  如果文件不存在，则阻止 Nginx 将请求发送到后端的 PHP-FPM 模块， 以避免遭受恶意脚本注入的攻击
 # 确保 php-fpm 模块使用 www-data 用户和 www-data 用户组的身份运行
 # This is an extremely insecure setting because it tells PHP to attempt to execute the closest file it can find if a PHP file does not match exactly. This basically would allow users to craft PHP requests in a way that would allow them to execute scripts that they shouldn't be allowed to execute.
 
@@ -94,9 +100,6 @@ launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php71.plist
 sudo brew services start/stop/restart php71
 
 PHP Startup: Unable to load dynamic library # 扩展重复加载
-
-php -i | grep php.ini
-php -m
 
 # 默认php-cli为/usr/bin/php，提升优先级
 echo 'export PATH="/usr/local/opt/php@7.1/bin:$PATH"' >> ~/.zshrc
@@ -162,11 +165,14 @@ pecl install memcached
 由webserver使用的php.ini文件，会配置比较短的max_execution_time，而在命令行中的php.ini文件，会配置比较长的max_execution_time。
 
 ```sh
-php --ini
+php --ini # 查看php 配置信息
+php -m | grep swoole
 php -r "echo php_sapi_name();" # 判断当前执行的php是什么模式下 R RUN
 php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数。这种方法首先要设置php解释器的路径，Windows平台在运行CLI之前，需设置类似path c:\php的命令，也失去了CLI脚本第一行的意义，因此不建议使用该方法。
 
 # 第二种方法是首先运行chmod+x <要运行的脚本文件名>（UNIX/Linux环境），将该PHP文件置为可执行权限，然后在CLI脚本头部第一行加入声明（类似于#! /usr/bin/php或PHP CLI解释器位置），接着在命令行直接执行。这是CLI首选方法，建议采用
+
+# /usr/local/lib/php/pecl/20180731/swoole.so doesn't appear to be a valid Zend extension
 ```
 
 ### [PECL](http://pecl.php.net/)：
@@ -180,6 +186,13 @@ PHP Extension Community Library，管理着最底层的PHP扩展。用 C 写的
 ```sh
 phpize -v
 
+cd extname
+phpize
+./configure
+make
+make install
+extension=pgsql
+
 sudo apt-get install php-xml php7.3-xml php-dev php7.3-dev
 sudo apt install php-pear
 
@@ -191,6 +204,11 @@ pear version
 sudo apt install php7.3-dev # to use phpize  生成编译检测脚本
 
 pecl channel-update pecl.php.net
+pecl uninstall redis
+pecl uninstall swoole
+pecl uninstall lua
+
+extension="swoole.so"
 
 HP Warning:  PHP Startup: redis: Unable to initialize module
 Module compiled with module API=20170718
@@ -199,9 +217,7 @@ PHP    compiled with module API=20180731
 pear.php.net is using a unsupported protocol - This should never happen.
 
 pear update-channels
-pecl update-channels
 pear upgrade
-pecl upgrade
 
 Setting up php7.3-fpm (7.3.5-1+ubuntu18.04.1+deb.sury.org+1) ...
 Error: The new file /usr/lib/php/7.3/php.ini-production does not exist!

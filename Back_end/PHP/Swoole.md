@@ -58,6 +58,23 @@ php --ri swoole
 * 网络协议TCP/UDP的认知
 * PHP的各项基本技能
 
+## Server
+
+```php
+# tcp/udp server,可封装rpc
+$s = new \Swoole\Server();
+
+//http server,替代fpm
+$s = new \Swoole\Http\Server()
+
+// 开启http2 支持,实现基于http2 的grpc
+$s = new \Swoole\Http\Server()
+$s->set(['open_http2_protocol' => true]);
+
+// websocket
+$s = new \Swoole\WebScoket\Server();
+```
+
 ## Timer
 
 * swoole_timer_tick 间隔的时钟控制器
@@ -73,6 +90,82 @@ php --ri swoole
 * task
 	- 运行多进程
 * worker
+
+## 协程
+
+* 使用go函数可以让一个函数并发地去执行。在编程过程中，如果某一段逻辑可以并发执行，就可以将它放置到go协程中执行
+* 使用
+    - 使用 go()(\Swoole\Coroutine::create() 的简写) 创建一个协程
+    - 在 go() 的回调函数中, 加入协程需要执行的代码(非阻塞代码)
+        + 区分哪些是阻塞的, 哪些是非阻塞的: 可以参考 官方wiki - runtime
+* 支持的列表:
+    - redis扩展
+    - 使用mysqlnd模式的pdo、mysqli扩展，如果未启用mysqlnd将不支持协程化
+    - soap扩展
+    - file_get_contents、fopen
+    - stream_socket_client (predis)
+    - stream_socket_server
+    - stream_select(需要4.3.2以上版本)
+    - fsockopen
+    - 文件操作 底层使用 AIO 线程池模拟实现
+    - fopen / fclose
+    - fread / fwrite
+    - fgets / fputs
+    - file_get_contents / file_put_contents
+    - unlink / mkdir / rmdir
+    - sleep系列函数
+    - sleep / usleep
+    - time_nanosleep / time_sleep_until
+* 不支持的列表:
+    - mysql：底层使用libmysqlclient
+    - curl：底层使用libcurl （即不能使用CURL驱动的Guzzle）
+    - mongo：底层使用mongo-c-client
+    - pdo_pgsql / pdo_ori / pdo_odbc / pdo_firebird
+* 协程通信
+    - 通道（Channel）:在Swoole4协程中使用new chan就可以创建一个通道。通道可以理解为自带协程调度的队列。它有两个接口push和pop
+        + push：向通道中写入内容，如果已满，它会进入等待状态，有空间时自动恢复
+        + pop：从通道中读取内容，如果为空，它会进入等待状态，有数据时自动恢复
+* 延时任务：用defer实现
+* 需要的功能协程 runtime 下还没支持
+    - 官方和社区已经贡献了很多协程版 API 可供使用
+    - 可以使用 swoole 提供的协程版 client 进行封装, 可以参考 官方 amqp client 封装, 将 socket() 函数实现的 tcp client, 使用 swoole 协程版 tcp client 实现即可
+*  swoole 的协程 vs go 的协程
+    - 所需要的基础知识: 网络编程 + 协程, 不会因为你是用 swoole 还是 go 而有所减少, 基础不大好, 表现出来了就是学着学着就容易卡住, 效率上不来
+    - 以为你写的是 swoole, 不不不, 写的是一个又一个功能的 API, go 也同样(要用到 redis/mysql/mq, 相应的 API 你还是得学得会), 区别在于, swoole 趋势是在底层实现支持(比如 协程runtime), 这样 PHPer 可以无缝切换过来, 而 Gopher 则需要学习一个又一个基于 go 协程封装好的 API. 当初在 PHP 中学习的这些 API, 到 go 里面, 一样需要再熟悉一遍
+    - 最后来谈谈性能, 请允许我用一个傲娇一点的说, 用 swoole 达不到的性能, 换个语言, 呵呵呵. 难易程度排行: 加机器 < 加程序员 < 加语言.
+
+```php
+// 没有开启协程runtime,需要协程版 API
+use Swoole\Coroutine as Co; // 常用的缩写方式
+
+go(function () { // 创建协程, 回调函数中写需要在协程中执行的代码
+    echo "daydaygo";
+    Co::sleep(1); // 不能是阻塞代码
+});
+
+// 开启协程runtime
+\Swoole\Runtime::enableCoRoutine();
+go(function () { // 创建协程, 回调函数中写需要在协程中执行的代码
+    echo "daydaygo";
+    sleep(1); // 不能是阻塞代码
+});
+
+Swoole\Runtime::enableCoroutine();
+
+go(function () {
+    echo "a";
+    defer(function () {
+        echo "~a";
+    });
+    echo "b";
+    defer(function () {
+        echo "~b";
+    });
+    sleep(1);
+    echo "c";
+});
+```
+
 
 ## HTTP
 

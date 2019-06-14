@@ -87,25 +87,25 @@
 
 ## 内容
 
--   Wikipedia
--   Quora
--   Imgur
--   Reddit
--   News:BuzzFeed
--   Pinterest
--   得到
--   [极客时间](https://github.com/shawjia/geektime-desktop):极客时间桌面版 for macOS/Windows/Debain
--   掘金
--   开发者头条
--   码农头条
--   伯乐在线
+*   Wikipedia
+*   Quora
+*   Imgur
+*   Reddit
+*   News:BuzzFeed
+*   Pinterest
+*   得到
+*   [极客时间](https://github.com/shawjia/geektime-desktop):极客时间桌面版 for macOS/Windows/Debain
+*   掘金
+*   开发者头条
+*   码农头条
+*   伯乐在线
 
 ## 管理与沟通
 
--   WhatsApp
--   [Asana](asana.com)
--   [meili/TeamTalk](https://github.com/meili/TeamTalk):TeamTalk is a solution for enterprise IM
-- [klauscfhq/taskbook](https://github.com/klauscfhq/taskbook):📓 Tasks, boards & notes for the command-line habitat
+*   WhatsApp
+*   [Asana](asana.com)
+*   [meili/TeamTalk](https://github.com/meili/TeamTalk):TeamTalk is a solution for enterprise IM
+* [klauscfhq/taskbook](https://github.com/klauscfhq/taskbook):📓 Tasks, boards & notes for the command-line habitat
 
 ## 语言
 
@@ -114,10 +114,10 @@
 
 ### office
 
--   Google Docs [表单](https://docs.google.com/forms/u/0/)
--   libre
--   [Keynote](https://www.apple.com/cn/keynote/)
-- [文档转换](https://smallpdf.com/)
+*   Google Docs [表单](https://docs.google.com/forms/u/0/)
+*   libre
+*   [Keynote](https://www.apple.com/cn/keynote/)
+* [文档转换](https://smallpdf.com/)
 
 ## 表单
 
@@ -131,8 +131,8 @@
 
 ## 生活
 
--   机票：https://flights.manzhinan.com/
--   牙医：德真会
+- 机票：https://flights.manzhinan.com/
+- 牙医：德真会
 - 大吉岭玫瑰红茶Darjeeling Rose Camélia
 - IKEA
 
@@ -148,7 +148,7 @@
 
 ## Podcast
 
--   [ThoughtWorks 洞见](http://www.ximalaya.com/zhubo/81966002/)
+* [ThoughtWorks 洞见](http://www.ximalaya.com/zhubo/81966002/)
 
 ## APP
 
@@ -218,3 +218,4 @@
 * [hedengcheng/tech](https://github.com/hedengcheng/tech):programming, database, distributed systemee
 * [Tutorials & training to grow your development skills](https://www.ibm.com/developerworks/learn/)
 * [Open source](https://www.ibm.com/developerworks/cn/opensource)
+* [TIGERB/easy-tips](https://github.com/TIGERB/easy-tips):A little Tips in my Code Career with PHP&Go 🐘 http://easy-tips.tigerb.cn
