@@ -32,7 +32,7 @@
 * 配置
     - [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv):Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.
 
-##  框架
+## 框架
 
 * 优点
     - 提供了一个用以构建web应用的基本框架，从而简化了用PHP编写web应用程序的流程。
@@ -65,8 +65,8 @@
     - [kakserpom/phpdaemon](https://github.com/kakserpom/phpdaemon):Asynchronous server-side framework for network applications implemented in PHP using libevent http://daemon.io/
     - [mnapoli/bref](https://github.com/mnapoli/bref):Serverless framework for PHP
     - [manaphp/manaphp](https://github.com/manaphp/manaphp):ManaPHP Framework
-    - [Elgg](https://github.com/Elgg/Elgg )
-        + <http://learn.elgg.org/en/stable/guides>
+    - [Elgg](https://github.com/Elgg/Elgg ) <http://learn.elgg.org/en/stable/guides>
+    - [TIGERB/easy-php](https://github.com/TIGERB/easy-php):A Faster Lightweight Full-Stack PHP Framework 🚀 http://easy-php.tigerb.cn
 * 异步框架
     - Swoole
     - Amp
@@ -107,6 +107,7 @@
     - [Pux](https://github.com/c9s/Pux): 另一个快速路由的库
     - [Route](https://github.com/thephpleague/route): 一个基于Fast Route的路由的库
     - [YOURLS/YOURLS](https://github.com/YOURLS/YOURLS):🔗 Your Own URL Shortener https://yourls.org
+    - [ noahbuscher/macaw](https://github.com/NoahBuscher/Macaw):🐦 Simple PHP router
 * 模板 Templating 模板化和词法分析的库和工具
     - [Foil](https://github.com/FoilPHP/Foil): 另一个原生PHP模板库
     - [Lex](https://github.com/pyrocms/lex): 一个轻量级模板解析器
@@ -705,7 +706,7 @@ open http://127.0.0.1:8000
 * PHP网站 PHP Websites PHP相关的有用的网站
     - [Nomad PHP](https://nomadphp.com/): 一个在线PHP学习资源
     - [PHP Best Practices](https://phpbestpractices.org/): 一个PHP最佳实践指南
-    - [PHP FIG](http://www.php-fig.org/): PHP框架交互组
+    - [php-fig/fig-standards](https://github.com/php-fig/fig-standards):Standards either proposed or approved by the Framework Interop Group PHP框架交互组 http://www.php-fig.org/
     - [PHP Mentoring](https://php-mentoring.org/): 点对点PHP导师组织
     - [PHP Security](http://phpsecurity.readthedocs.io/en/latest/index.html): 一个PHP安全指南
     - [PHP The Right Way](http://www.phptherightway.com/): 一个PHP最佳实践的快速指引手册
@@ -723,19 +724,20 @@ open http://127.0.0.1:8000
     - (https://www.owasp.org/index.php/Main_Page)[The Open Web Application Security Project (OWASP)]: 一个开放软件安全社区
     - (https://websec.io/)[WebSec IO]: 一个web安全社区资源
 * PHP书籍 PHP Books
-    - (https://www.functionalphp.com/)[Functional Programming in PHP]: 这本书将告诉你如何利用PHP5.3+的新功能的认识函数式编程的原则
-    - (https://leanpub.com/grumpy-phpunit)[Grumpy PHPUnit]: 一本Chris Hartjes关于使用PHPUnit进行单元测试的书
-    - (http://www.brandonsavage.net)[Mastering Object-Orientated PHP]: 一本Brandon Savage关于PHP面向对象的书
-    - (http://shop.oreilly.com/product/0636920033868.do)[Modern PHP New Features and Good Practices]: 一本Josh Lockhart关于新的PHP功能和最佳做法的书
-    - (https://leanpub.com/mlaphp)[Modernising Legacy Applications in PHP]: 一本Paul M.Jones关于遗留PHP应用进行现代化的书
-    - (https://leanpub.com/php7)[PHP 7 Upgrade Guide]: 一本Colin O'Dell的包含所有PHP 7功能和改变的书
-    - (https://daylerees.com/php-pandas/)[PHP Pandas]: 一本Dayle Rees关于如何学习写PHP的书
-    - (http://www.scalingphpbook.com)[Scaling PHP Applications]: 一本Steve Corona关于扩展PHP应用程序的电子书
-    - (https://leanpub.com/securingphp-coreconcepts)[Securing PHP: Core Concepts]: 一本Chris Cornutt关于PHP常见安全条款和实践的书
-    - (https://leanpub.com/signalingphp)[Signaling PHP]: 一本Cal Evans关于在CLI脚本捕获PCNTL信号的书
-    - (https://leanpub.com/grumpy-testing)[The Grumpy Programmer's Guide to Building Testable PHP Applications]: 一本Chris Hartjes关于构建PHP应用程序测试的书
-    - (https://www.phparch.com/books/xml-parsing-with-php/)[XML Parsing with PHP]: 这本书涵盖的解析和验证XML文档，利用XPath表达式，使用命名空间，以及如何创建和修改XML文件的编程
+    - [Functional Programming in PHP](https://www.functionalphp.com/): 这本书将告诉你如何利用PHP5.3+的新功能的认识函数式编程的原则
+    - [Grumpy PHPUnit](https://leanpub.com/grumpy-phpunit): 一本Chris Hartjes关于使用PHPUnit进行单元测试的书
+    - [Mastering Object-Orientated PHP](http://www.brandonsavage.net): 一本Brandon Savage关于PHP面向对象的书
+    - [Modern PHP New Features and Good Practices](http://shop.oreilly.com/product/0636920033868.do): 一本Josh Lockhart关于新的PHP功能和最佳做法的书
+    - [Modernising Legacy Applications in PHP](https://leanpub.com/mlaphp): 一本Paul M.Jones关于遗留PHP应用进行现代化的书
+    - [PHP 7 Upgrade Guide](https://leanpub.com/php7): 一本Colin O'Dell的包含所有PHP 7功能和改变的书
+    - [PHP Pandas](https://daylerees.com/php-pandas/): 一本Dayle Rees关于如何学习写PHP的书
+    - [Scaling PHP Applications](http://www.scalingphpbook.com): 一本Steve Corona关于扩展PHP应用程序的电子书
+    - [Securing PHP: Core Concepts](https://leanpub.com/securingphp-coreconcepts): 一本Chris Cornutt关于PHP常见安全条款和实践的书
+    - [Signaling PHP](https://leanpub.com/signalingphp): 一本Cal Evans关于在CLI脚本捕获PCNTL信号的书
+    - [The Grumpy Programmer's Guide to Building Testable PHP Applications](https://leanpub.com/grumpy-testing): 一本Chris Hartjes关于构建PHP应用程序测试的书
+    - [XML Parsing with PHP](https://www.phparch.com/books/xml-parsing-with-php/): 这本书涵盖的解析和验证XML文档，利用XPath表达式，使用命名空间，以及如何创建和修改XML文件的编程
     - [Domain-Driven Design in PHP](https://leanpub.com/ddd-in-php): 展示PHP DDD风格的实例
+    - Morden php
 * 其他书籍 Other Books 与一般计算和web开发相关的书
     - (https://www.elastic.co/guide/index.html)[Elasticsearch: The Definitive Guide]: Clinton Cormley和Zachary Tong编写的与Elasticsearch工作的一本指南
     - (http://eloquentjavascript.net/)[Eloquent JavaScript]: Marijin Haverbeke关于JavaScript编程的一本书
@@ -777,8 +779,7 @@ open http://127.0.0.1:8000
 * [PHP: The Right Way](http://www.phptherightway.com/) [PHP: The Right Way](https://github.com/codeguy/php-the-right-way)
 * [reeze/tipi](https://github.com/reeze/tipi):Thinking In PHP Internals, An open book on PHP Internals http://www.php-internals.com/
 * [elarity/advanced-php](https://github.com/elarity/advanced-php):最近打算写一些php一些偏微妙的教程，比如关于多进程、socket等相关，都是自己的一些感悟心得
-* Morden php
-* https://www.phparch.com/magazine/
+* (php[architect] Magazine)[https://www.phparch.com/magazine/]
 
 ## PHP内核
 
@@ -802,6 +803,9 @@ open http://127.0.0.1:8000
 * [dstogov/php-ffi](https://github.com/dstogov/php-ffi):PHP Foreign Function Interface
 - [laruence/php7-internal](https://github.com/laruence/php7-internal):Understanding PHP7 Internal articles
 * [pangudashu/php7-internal](https://github.com/pangudashu/php7-internal):PHP7内核剖析
+* [Awesome PHP](http://coffeephp.com/resources)
+* [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php):A curated list of amazingly awesome PHP libraries, resources and shiny things.
+* [appzcoder/30-seconds-of-php-code](https://github.com/appzcoder/30-seconds-of-php-code):A curated collection of useful PHP snippets that you can understand in 30 seconds or less.
 
 ## 扩展
 
@@ -885,37 +889,18 @@ open http://127.0.0.1:8000
 
 * [thephpleague/flysystem](https://github.com/thephpleague/flysystem):Abstraction for local and remote filesystems https://flysystem.thephpleague.com
 
-##
-
 ```sh
-安装phpcs，phpcbf
+# phpcs，phpcbf
+composer global require "squizlabs/php_codesniffer=*"
+~/.composer/vendor/bin/phpcs
 
-    1.使用composer安装： composer global require "squizlabs/php_codesniffer=*"
+# 安装phpmd
+composer global require phpmd/phpmd
+~/.composer/vendor/bin/phpmd
 
-    2.安装后可执行文件位置：~/.composer/vendor/bin/phpcs
+# 编写git pre-commit钩子
+# .git/hooks/pre-commit，加入脚本内容：https://github.com/tangjun1990/php_tools/blob/master/pre-commit （注意修改脚本中的目录哟！）
 
-2.安装phpmd
-
-    1.使用composer安装： composer global require phpmd/phpmd
-
-    2.安装后可执行文件位置：~/.composer/vendor/bin/phpmd
-
-3.编写git pre-commit钩子
-
-    1.vim .git/hooks/pre-commit，加入脚本内容：https://github.com/tangjun1990/php_tools/blob/master/pre-commit （注意修改脚本中的目录哟！）
-
-    2.chmod +x .git/hooks/pre-commit
-
-4.那么，在你每次进行git commit操作的时候，pre-commit钩子中的shell就会自动帮你检查代码啦！相应的错误信息就会输出到终端
-
-5.当然，如果你不喜欢用hook这种方式，也可以在你每次提交代码之前，手动执行命令来检查
-
-    1.~/.composer/vendor/bin/phpcs dirOrFile --standard=PSR2
-
-    2.~/.composer/vendor/bin/phpmd dirOrFile text codesize,unusedcode,naming
-```
-
-```sh
 # pre-commit
 #!/usr/bin/env bash
 
@@ -957,58 +942,17 @@ else
     echo "  composer global require phpmd/phpmd"
     echo ""
 fi
+
+chmod +x .git/hooks/pre-commit
+
+# 手动执行命令来检查
+~/.composer/vendor/bin/phpcs dirOrFile --standard=PSR2
+~/.composer/vendor/bin/phpmd dirOrFile text codesize,unusedcode,naming
 ```
-
-## 学习路线
-
-* 熟悉HTML/CSS/JS等网页基本元素，完成阶段可自行制作简单的网页，对元素属性相对熟悉。
-* 理解动态语言的概念和运做机制，熟悉基本的PHP语法。
-* 学习如何将PHP与HTML结合起来，完成简单的动态页面。
-* 接触学习MySQL，开始设计数据库。
-* 不断巩固PHP语法，熟悉大部分的PHP常用函数，理解面向对象编程，MySQL优化，以及一些模板和框架。
-* 最终完成一个功能齐全的动态站点。
-
-### 经验
-
-新手不要看到上面的概括就以为PHP学习是很简单的，编程是需要你认真的思考和不断的实践。
-
-* 任何网站都是由网页组成的，也就是说想完成一个网站，必须先学会做网页，掌握静态网页的制作技术是学习开发网站的先决条件。因此我们要学习HTML，为今后制作网站打下基础。学习HTML应该边学边做，HTML中的任何元素都要亲自实践，只有明白了什么元素会起到什么效果之后，才能深刻记忆，一味的看书是不行的。
-
-假设你已经可以完成一个静态页面了，那么就该开始了解动态语言，刚一接触动态语言，可能很多人都会有很多不解，代码不是作为直接输出的，而是要经过处理的，HTML是经过HTML解析器，而PHP也要通过PHP解析器，跟学习HTML一样的道理，想让任何的解析器工作，就必须使用它专用的语法结构。
-
-学习PHP，你应该感到幸运，因为如果你学过其他语言，你就会发现PHP还是相对简单的，这一阶段，你要搞清楚HTML和PHP的概念，你现在完全可以让PHP给你算算一加一等于几，然后在浏览器输出。不要觉得幼稚，这虽然是很小的一段代码，但是对于你的编程之路，可是迈出了一大步。不过现在，你还是一个菜鸟。
-
-* 接下来就要学习数据库了，MySQL可以说是PHP的黄金搭档，我们要征服这个数据库，在你理解了数据库的概念之后，就要尝试通过PHP来连接数据库，进而会用PHP成功的插入，删除和更新数据。
-
-这个时候，你可能会处于这种状态：你会HTML吗？会，我能编好几个表格排板的网页呢！你会PHP吗？会，我会把一加一的运算写在函数里，然后调用！你会MySQL吗？会，我可以把数据库里的数据插入删除啦！
-
-那接下来该做什么呢？尝试着做个小的留言本吧，这同样是新手面临的一道关卡。花了一段时间，你终于学会把表单的数据插入数据库，然后显示出来了，应该说一个程序的雏形已经诞生了。但是，你可能会看人家这个编论坛，那个开发CMS，我什么时候可以写一个呢？不要急，再巩固一下知识，熟悉了PHP和MySQL开发的要领后，再回头看你写的那个留言本，你也许会怀疑那真的是你写的吗？这个时候，你可以完善一下你写的留言本。留言本应该加入注册以及分页的功能，可以的话，UI也可以加强。
-
-这就算学会了吗？NO，NO，NO，还早呢，你到现在还没碰过OOP呢吧？那模板和框架呢？还要继续学习呀！PHP框架提供了一个用以构建web应用的基本框架，从而简化了用PHP编写web应用程序的流程。可以节省开发时间、有助于建立更稳定的应用。所以说，PHP框架是一个可以用来节省时间并强化自己代码的工具。当你第一次选择PHP框架时，建议多尝试几个，每个框架都有自己的长处和短处，例如Zend框架由于多样的功能、并且有一个广泛的支持系统，流行了很长时间。而CakePHP是一个晚于Zend的PHP框架，相应的支持系统也比较少，但是更为方便和易于使用。
-
-了解了面向对象和框架后，你应该接触一下XML了，总而言之，你绝对不会发现你全部都学会了，学无止境！学东西，永远不要妄想有速成这一说，技巧再多，但是缺少努力，那也是白搭。有一点可以保证，就是你学会了PHP，那么再学其它语言，肯定速成，反过来也一样，如果你之前学过其它的语言，那么学PHP肯定快。
-
-多借鉴别人成功的代码，绝对是有益无害，所以要多看那些经过千锤百炼凝出来的经典代码，是进步的最好方法。另外，要强调的是，学习一项技术过程中可能会遇到困难，可能会迷茫，你也许学了一半的PHP，又开始打C#的主意，或者有人说Java很好，这个时候你绝对不能动摇，要坚持到底，彻底学会。祝你顺利学成PHP，开发自己想要的网站。
-
-永远拒绝在你的Controller里直接操作DB
 
 ## 项目
 
 * [a54552239/projectManageApi](https://github.com/a54552239/projectManageApi):项目管理系统接口
-
-## 参考
-
-- [codeguy/php-the-right-way](https://github.com/codeguy/php-the-right-way):An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web <http://www.phptherightway.com>
-- [walu/phpbook](https://github.com/walu/phpbook):PHP扩展开发及内核应用
-- [PHP 教程](http://www.w3school.com.cn/php/)
-- [Awesome PHP](http://coffeephp.com/resources)
-- [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php):A curated list of amazingly awesome PHP libraries, resources and shiny things.
-- [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
-- [PHP Best Practices](https://phpbestpractices.org)
-- [php-fig/fig-standards](https://github.com/php-fig/fig-standards):Standards either proposed or approved by the Framework Interop Group http://www.php-fig.org/
-- [appzcoder/30-seconds-of-php-code](https://github.com/appzcoder/30-seconds-of-php-code):A curated collection of useful PHP snippets that you can understand in 30 seconds or less.
-- [elarity/data-structure-php](https://github.com/elarity/data-structure-php):对于数据结构和算法类的东西
-- [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
 
 ## 工具
 

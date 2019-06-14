@@ -49,7 +49,7 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
 * Content-Type不属于简单请求（MIME类型），都属于预检请求
     - 使用下列方法之一：
         + GET
-        + HEAD
+        + HEAD:获取http header
         + POST
     - Fetch 规范定义了对 CORS 安全的首部字段集合，不得人为设置该集合之外的其他首部字段。该集合为：
         + Accept
@@ -69,11 +69,11 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
     - 请求中没有使用 ReadableStream 对象。
 * 满足下述任一条件时，即应首先发送预检请求,"预检"请求会带上头部信息 Access-Control-Request-Headers: Content-Type
     - 使用了下面任一 HTTP 方法：
-        + PUT
+        + PUT:资源更新
         + DELETE
-        + CONNECT
-        + OPTIONS
-        + TRACE
+        + CONNECT:建立隧道通信
+        + OPTIONS:获取支持的method
+        + TRACE:追踪，返回请求回环信息
         + PATCH
     - 人为设置了对 CORS 安全的首部字段集合之外的其他首部字段。该集合为：
         + Accept
@@ -97,7 +97,11 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
 * 请求
     - 状态行
     - 请求头 HTTP Request Header
-        + Allow：服务器支持哪些请求方法（如GET、POST等）。
+        + Allow：服务器支持哪些请求方法（如GET、POST等）
+        + Accept: 可以处理的媒体类型和优先级
+        + Referer: 请求从哪发起的原始资源URI
+        + User-Agent: 创建请求的用户代理名称
+        + Cookie: cookie信息
         + Content-Encoding：
             * 文档的编码(Encode)方法。只有在解码之后才可以得到 Content-Type 头指定的内容类型
             * 利用gzip压缩文档能够显著地减少HTML文档的下载时间
@@ -136,7 +140,17 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
         + Set-Cookie：设置和页面关联的 Cookie
         + WWW-Authenticate：客户应该在 Authorization 头中提供什么类型的授权信息？在包含401(Unauthorized) 状态行的应答中这个头是必需的
     - 消息主体（entity-body）
-* 断开连接时服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过"四次握手"
+* 响应
+    - 响应头
+        + Location: 重定向地址
+        + Server: 被请求的服务web server的信息
+        + Set-Cookie: 要设置的cookie信息
+        + NAME: 要设置的键值对
+        + expires: cookie过期时间
+        + path: 指定发送cookie的目录
+        + domain: 指定发送cookie的域名
+        + Secure: 指定之后只有https下才发送cookie
+        + HostOnly: 指定之后javascript无法读取cookie
 
 ```
 // 源生的form提交可设置enctype="multipart/form-data"，一般表单中有文件会自动设为该值
@@ -206,6 +220,11 @@ PNG ... content of chrome.png ...
     - 对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；
     - 对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok
 
+```sh
+nc -z -v 127.0.0.1 8889
+curl "http://127.0.0.1:8889/" -vv
+```
+
 ## OSI（Open Systems Interconnection Model）
 
 * 从上往下的，越底层越接近硬件，越往上越接近软件，是一个标准
@@ -235,28 +254,10 @@ PNG ... content of chrome.png ...
     - 入栈:数据发送方每层不断地封装首部与尾部，添加一些传输的信息，确保能传输到目的地。
     - 出栈:数据接收方每层不断地拆除首部与尾部，得到最终传输的数据。
     - TCP 负责将数据分割并装入 IP 包，然后在它们到达的时候重新组合它们。
-    - IP 负责将包发送至接受者。
-* 网络层
-    - IP (网际协议)：计算机之间的通信,无连接的通信协议。
-        + 不会占用两个正在通信的计算机之间的通信线路。这样，IP 就降低了对网络线路的需求。
-        + 每条线可以同时满足许多不同的计算机之间的通信需要。
-        + 通过 IP，消息（或者其他数据）被分割为小的独立的包，并通过因特网在计算机之间传送。
-        + IP 负责将每个包路由至它的目的地.责在因特网上发送和接收数据包。
-        + IP协议是TCP/IP协议的核心，所有的TCP，UDP，IMCP，IGMP的数据都以IP数据格式传输。
-        + IP不是可靠的协议，这是说，IP协议没有提供一种数据未传达以后的处理机制，这被认为是上层协议：TCP或UDP要做的事情。
-        + 数据链路层中一般通过MAC地址来识别不同的节点，而在IP层我们也要有一个类似的地址标识，这就是IP地址。
-        + 32位IP地址分为网络位和地址位，可以减少路由器中路由表记录的数目，有了网络地址，就可以限定拥有相同网络地址的终端都在同一个范围内，那么路由表只需要维护一条这个网络地址的方向，就可以找到相应的这些终端了。
-            * A类IP地址: 0.0.0.0~127.0.0.0
-            * B类IP地址:128.0.0.1~191.255.0.0
-            * C类IP地址:192.168.0.0~239.255.255.0
-        + IP协议头：八位的TTL字段。这个字段规定该数据包在穿过多少个路由之后才会被抛弃。某个IP数据包每穿过一个路由器，该数据包的TTL数值就会减少1，当该数据包的TTL成为零，它就会被自动抛弃。这个字段的最大值也就是255，也就是说一个协议包也就在路由器里面穿行255次就会被抛弃了，根据系统的不同，这个数字也不一样，一般是32或者是64。
-    - ICMP (因特网消息控制协议)：针对错误和状态
-    - DHCP (动态主机配置协议)：针对动态寻址
-    - ARP地址解析） 根据IP地址获取MAC地址的一种解析协议
-        + 本来主机是完全不知道这个IP对应的是哪个主机的哪个接口，当主机要发送一个IP包的时候，会首先查一下自己的ARP高速缓存（就是一个IP-MAC地址对应表缓存）。
-        + 如果查询的IP－MAC值对不存在，那么主机就向网络发送一个ARP协议广播包，这个广播包里面就有待查询的IP地址，而直接收到这份广播的包的所有主机都会查询自己的IP地址，如果收到广播包的某一个主机发现自己符合条件，那么就准备好一个包含自己的MAC地址的ARP包传送给发送ARP广播的主机。
-        + 广播主机拿到ARP包后会更新自己的ARP缓存（就是存放IP-MAC对应表的地方）。发送广播的主机就会用新的ARP缓存数据准备好数据链路层的的数据包发送工作。
-    - RARP协议 与 ARP 相反
+    - IP 负责将包发送至接受者
+* 应用层
+    - 规定应用程序的数据格式
+    - `[HEAD(以太网标头) [HEAD(IP标头) [HEAD(TCP标头) DATA(应用层数据包)]]]`
 * 传输层
     - TCP（Transmission Control Protocol，传输控制协议）：基于连接的协议、端到端和可靠的数据包发送。应用程序之间通信,当应用程序希望通过 TCP 与另一个应用程序通信时，它会发送一个通信请求。这个请求必须被送到一个确切的地址。在双方“握手”之后，TCP 将在两个应用程序之间建立一个全双工 (full-duplex) 的通信。在数据传送之前将它们分割为 IP 包，然后在它们到达的时候将它们重组。
         + 建立在不可靠的网络层 IP 协议之上，IP协议并不能提供任何可靠性机制，TCP的可靠性完全由自己实现，它提供的服务包括数据流传送、可靠性、有效流控、全双工操作和多路复用
@@ -283,6 +284,12 @@ PNG ... content of chrome.png ...
             + 为了保证服务端能收接受到客户端的信息并能做出正确的应答而进行前两次(第一次和第二次)握手
             + 为了保证客户端能够接收到服务端的信息并能做出正确的应答而进行后两次(第二次和第三次)握手。
             - 理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去。
+        * 断开连接：
+            - 服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过"四次挥手"
+            - fin
+            - ack
+            - fin
+            - ack
         * 状态编码：S指代服务器，C指代客户端，S&C表示两者，S/C表示两者之一
             - LISTEN S等待从任意远程TCP端口的连接请求。侦听状态。
             * SYN-SENT C在发送连接请求后等待匹配的连接请求。通过connect()函数向服务器发出一个同步（SYNC）信号后进入此状态。
@@ -318,7 +325,7 @@ PNG ... content of chrome.png ...
             + 能够对握手过程进行精简，减少网络通信往返次数；
             + 能够对TLS加解密过程进行优化；
             + 没有拥塞控制：应用可以更好的控制发送时间和发送速率
-    * 对比
+    - 对比
         - TCP是面向连接(Connection oriented)，UDP是无连接(Connection less)协议
         - TCP是重量级的，UDP是轻量级的；TCP要建立连接、保证可靠性和有序性，就会传输更多的信息，如TCP头部需要20字节，UDP头部只要8个字节，为什么视频流、广播电视、在线多媒体游戏等选择使用UDP
         - TCP无界，UDP有界；TCP通过字节流传输，流模式（TCP）一连串无结构的字节流；UDP中每一个包都是单独的，数据报模式(UDP)
@@ -334,6 +341,39 @@ PNG ... content of chrome.png ...
             + TCP：地址信息在connect/accept时确定 
             + UDP：在sendto/recvfrom函数中每次均需指定地址信息 
             + UDP：shutdown函数无效
+    - Keep-Alive:如果连接双方如果没有一方主动断开都不会断开TCP连接，减少了每次建立HTTP连接时进行TCP连接的消耗
+* 网络层
+    - IP (网际协议)：计算机之间的通信,无连接的通信协议
+        + 不会占用两个正在通信的计算机之间的通信线路。这样，IP 就降低了对网络线路的需求。
+        + 每条线可以同时满足许多不同的计算机之间的通信需要。
+        + 通过 IP，消息（或者其他数据）被分割为小的独立的包，并通过因特网在计算机之间传送。
+        + IP 负责将每个包路由至它的目的地.责在因特网上发送和接收数据包。
+        + IP协议是TCP/IP协议的核心，所有的TCP，UDP，IMCP，IGMP的数据都以IP数据格式传输。
+        + IP不是可靠的协议，这是说，IP协议没有提供一种数据未传达以后的处理机制，这被认为是上层协议：TCP或UDP要做的事情。
+        + 数据链路层中一般通过MAC地址来识别不同的节点，而在IP层我们也要有一个类似的地址标识，这就是IP地址。
+        + 子网掩码: 网络部分都为1，主机部分都为0，目的判断ip的网络部分，如255.255.255.0(11111111.11111111.11111111.00000000)
+        + 32位IP地址分为网络位和地址位，可以减少路由器中路由表记录的数目，有了网络地址，就可以限定拥有相同网络地址的终端都在同一个范围内，那么路由表只需要维护一条这个网络地址的方向，就可以找到相应的这些终端了
+            * A类IP地址: 0.0.0.0~127.0.0.0
+            * B类IP地址:128.0.0.1~191.255.0.0
+            * C类IP地址:192.168.0.0~239.255.255.0
+        + IP协议头：八位的TTL字段。这个字段规定该数据包在穿过多少个路由之后才会被抛弃。某个IP数据包每穿过一个路由器，该数据包的TTL数值就会减少1，当该数据包的TTL成为零，它就会被自动抛弃。这个字段的最大值也就是255，也就是说一个协议包也就在路由器里面穿行255次就会被抛弃了，根据系统的不同，这个数字也不一样，一般是32或者是64。
+    - ICMP (因特网消息控制协议)：针对错误和状态
+    - DHCP (动态主机配置协议)：针对动态寻址
+    - ARP(Address Resolation Protocol): 解析地址协议 根据IP地址获取MAC地址的一种解析协议
+        + 本来主机是完全不知道这个IP对应的是哪个主机的哪个接口，当主机要发送一个IP包的时候，会首先查一下自己的ARP高速缓存（就是一个IP-MAC地址对应表缓存）。
+        + 如果查询的IP－MAC值对不存在，那么主机就向网络发送一个ARP协议广播包，这个广播包里面就有待查询的IP地址，而直接收到这份广播的包的所有主机都会查询自己的IP地址，如果收到广播包的某一个主机发现自己符合条件，那么就准备好一个包含自己的MAC地址的ARP包传送给发送ARP广播的主机。
+        + 广播主机拿到ARP包后会更新自己的ARP缓存（就是存放IP-MAC对应表的地方）。发送广播的主机就会用新的ARP缓存数据准备好数据链路层的的数据包发送工作。
+    - RARP协议 与 ARP 相反
+* 链接层
+    - 定义数据包(帧Frame)
+        + 标头(Head):数据包的一些说明项, 如发送者、接收者、数据类型
+        + 数据(Data):数据包的具体内容
+        + 数据包:[HEAD DATA]
+    - 定义网卡和网卡唯一的mac地址
+        + 以太网规定接入网络的所有终端都应该具有网卡接口，数据包必须是从一个网卡的mac地址到另一网卡接口的mac地址
+        + mac全球唯一，16位16位进制组成，前6厂商编号，后6网卡流水号
+    - 广播发送数据
+        + 向本网络内的所有设备发送数据包，对比接收者mac地址，不是丢包，是接受
 
 ![TCP与UDP对比](../_static/TCPvsUDP.png)
 
@@ -412,7 +452,7 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     - 3XX 重定向：需要进一步的操作以完成请求
 * 300 Multiple Choices：多种选择。请求的资源可包括多个位置，相应可返回一个资源特征与地址的列表用于用户终端（例如：浏览器）选择
     - 301 Moved Permanently：永久移动。请求的资源已被永久的移动到新 URI，返回信息会包括新的 URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替
-    - 302 Found：临时移动。与 301 类似。但资源只是临时被移动。客户端应继续使用原有 URI
+    - 302 tempoery Permanently：临时移动。与 301 类似。但资源只是临时被移动。客户端应继续使用原有 URI
     - 303 See Other：查看其它地址。与 301 类似。使用 GET 和 POST 请求查看
     - 304 Not Modified：未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源
     - 305 Use Proxy：使用代理。所请求的资源必须通过代理访问
@@ -571,10 +611,10 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
 
 ## HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer）
 
-HTTP下加入SSL层，HTTPS的安全基础是SSL(Secure Sockets Layer 安全套接层)，因此加密的详细内容就需要SSL。HTTPS = HTTP 协议(进行通信) + SSL/TLS 协议（加密数据包），增加的 S 代表 Secure
-
-基于TCP提出了SPDY协议以及HTTP/2
-
+* HTTP下加入SSL(Secure Sockets Layer 安全套接层)，因此加密的详细内容就需要SSL
+* HTTPS = HTTP 协议(进行通信) + SSL/TLS 协议（加密数据包），增加的 S 代表 Secure
+    - SSL（Secure Sockets Layer 安全套接字层），它是一项标准技术，用于在客户端与服务器之间进行加密通信，可确保互联网连接安全，防止网络犯罪分子读取和修改任何传输信息，包括个人资料。使用40 位关键字作为RC4流加密算法
+    - TSL（Transport Layer Security 传输层安全），是 SSL 的继承协议，它建立在 SSL 3.0 协议规范之上，是更为安全的升级版 SSL。
 * 作用
     - 内容加密 建立一个信息安全通道，来保证数据传输的安全；
     - 身份认证 确认网站的真实性
@@ -585,8 +625,6 @@ HTTP下加入SSL层，HTTPS的安全基础是SSL(Secure Sockets Layer 安全套�
     - 具有安全性的ssl加密传输协议
     - 端口也不一样，前者是80，后者是443
     - http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。
-* SSL（Secure Sockets Layer 安全套接字层），它是一项标准技术，用于在客户端与服务器之间进行加密通信，可确保互联网连接安全，防止网络犯罪分子读取和修改任何传输信息，包括个人资料。使用40 位关键字作为RC4流加密算法
-* TSL（Transport Layer Security 传输层安全），是 SSL 的继承协议，它建立在 SSL 3.0 协议规范之上，是更为安全的升级版 SSL。
 * 流程
     - 购买证书，配置域名信息
         + [Let’s Encrypt](https://letsencrypt.org/)
@@ -598,24 +636,48 @@ HTTP下加入SSL层，HTTPS的安全基础是SSL(Secure Sockets Layer 安全套�
 ![HTTPS签名和验证](../static/https-ac.png "HTTPS签名和验证")
 ![HTTP vs HTTPS](../static/https.png "HTTP与HTTPS区别")
 
+```
+                              发起请求
+                     --------------------------->　　server
+                              下发证书
+                      <---------------------------   server
+                      证书数字签名(用证书机构公钥加密)
+                     --------------------------->　　证书机构
+                          证书数字签名验证通过
+client(内置证书机构证书) <---------------------------   证书机构
+                      公钥加密随机密码串(未来的共享秘钥)
+                     --------------------------->　　server私钥解密(非对称加密)
+                        SSL协议结束　HTTP协议开始
+                      <---------------------------   server(对称加密)
+                            共享秘钥加密 HTTP
+                     --------------------------->　　server(对称加密)
+```
+
 ### CORS(跨域资源共享)
 
 ## 存储
 
-
-* 由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户，这个机制就是Session.
-* 典型的场景比如购物车，当你点击下单按钮时，由于HTTP协议无状态，所以并不知道是哪个用户操作的，所以服务端要为特定的用户创建了特定的Session，用用于标识这个用户，并且跟踪用户，这样才知道购物车里面有几本书。这个Session是保存在服务端的，有一个唯一标识。在服务端保存Session的方法很多，内存、数据库、文件都有。集群的时候也要考虑Session的转移，在大型的网站，一般会有专门的Session服务器集群，用来保存用户会话，这个时候 Session 信息都是放在内存的，使用一些缓存服务比如Memcached之类的来放 Session。
-* 服务端如何识别特定的客户:这个时候Cookie就登场了。每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端。实际上大多数的应用都是用 Cookie 来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在 Cookie 里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器，我就知道你是谁了。
-
-* session:会话标识(session id)
-    - 服务器就要给每个客户端分配不同的“身份标识”，然后客户端每次向服务器发请求的时候，都带上这个“身份标识”，服务器就知道这个请求来自于谁了
-    - session默认采用 cookie维护
+* cookie:浏览器实现的一种数据存储功能
+    - cookie由**服务器**生成，发送给浏览器，浏览器把cookie以kv形式保存到某个目录下的文本文件内，下一次请求同一网站时会把该cookie发送给服务器
+    - cookie是存在客户端上的，所以浏览器加入了一些限制确保cookie不会被恶意使用，同时不会占据太多磁盘空间，所以每个域的cookie数量是有限的
+* Session:由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户
+    - Session是保存在服务端的，有一个唯一标识 会话标识(session id)
+    - 在服务端保存Session的方法很多，内存、数据库、文件都有
     - 内存的开销 对服务器说是一个巨大的开销，严重的限制了服务器扩展能力
         + 做了负载均衡，那么下一个操作请求到了另一台服务器的时候session会丢失
             * 让某个用户的请求一直粘连在机器
             * session 的复制
         + 把session id 集中存储到一个地方 Memcache,增加了单点失败的可能性
     - 用户离开网站后session会被销毁
+    - 典型的场景
+        + 购物车，当你点击下单按钮时，由于HTTP协议无状态，所以并不知道是哪个用户操作的，标识这并且跟踪用户，这样才知道购物车里面有几本书
+        + 用户验证
+        + 免信息登陆：信息可以写到Cookie里面，访问网站的时候，网站页面的脚本可以读取这个信息，就自动帮你把用户名给填了，能够方便一下用户
+* 服务端如何识别客户,需要cookie维护
+    - 每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端 Set-Cookie:PHPSESSIONID=xxxxxxx
+    - 实际上大多数的应用都是用 Cookie 来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在 Cookie 里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器
+    - 服务器识别PHPSESSIONID这个cookie，然后去session目录查找对应session文件，
+    - 找到这个session文件后，检查是否过期，如果没有过期，去读取Session文件中的配置；如果已经过期，清空其中的配置
 * token
     - 流程
         + 用户通过用户名和密码发送请求。
@@ -629,51 +691,25 @@ HTTP下加入SSL层，HTTPS的安全基础是SSL(Secure Sockets Layer 安全套�
         + 支持移动设备
         + 跨程序调用
         + 安全：不再是发送cookie能够防止CSRF(跨站请求伪造)
-* cookie:浏览器里面能永久存储的一种数据，仅仅是浏览器实现的一种数据存储功能。
-    - cookie由**服务器**生成，发送给浏览器，浏览器把cookie以kv形式保存到某个目录下的文本文件内，下一次请求同一网站时会把该cookie发送给服务器。
-    - cookie是存在客户端上的，所以浏览器加入了一些限制确保cookie不会被恶意使用，同时不会占据太多磁盘空间，所以每个域的cookie数量是有限的。
-* 你第一次访问网站时，服务端脚本中开启了Sessionsession_start();，
-* 服务器会生成一个不重复的 SESSIONID 的文件session_id();，比如在/var/lib/php/session目录
-* 并将返回(Response)如下的HTTP头 Set-Cookie:PHPSESSIONID=xxxxxxx
-* 客户端接收到Set-Cookie的头，将PHPSESSIONID写入cookie
-* 当你第二次访问页面时，所有Cookie会附带的请求头(Request)发送给服务器端
-* 服务器识别PHPSESSIONID这个cookie，然后去session目录查找对应session文件，
-* 找到这个session文件后，检查是否过期，如果没有过期，去读取Session文件中的配置；如果已经过期，清空其中的配置
-
-* session 在服务器端，cookie 在客户端（浏览器）
-* session 默认被存在在服务器的一个文件里（不是内存）
-* session 的运行依赖 session id，而 session id 是存在 cookie 中的，也就是说，如果浏览器禁用了 cookie ，同时 session 也会失效（但是可以通过其它方式实现，比如在 url 中传递 session_id）
-* session 可以放在 文件、数据库、或内存中都可以。
-* 用户验证这种场合一般会用 session 因此，维持一个会话的核心就是客户端的唯一标识，即 session id
-
-## 如果客户端的浏览器禁用了 Cookie 怎么办？
-
-如果一个Cookie都没接收到，基本上可以预判客户端禁用了Cookie，那将session_id附带在每个网址后面(包括POST)，比如：
-
-GET http://www.xx.com/index.php?session_id=xxxxx
-POST http://www.xx.com/post.php?session_id=xxxxx
-
-然后在每个页面的开头使用session_id($_GET['session_id'])，来强制指定当前session_id：
-
-聪明的你肯定想到，那将这个网站发送给别人，那么他将会以你的身份登录并做所有的事情（目前很多订阅公众号就将openid附带在网址后面，这是同样的漏洞）。
-其实不仅仅如此，cookie也可以被盗用，比如XSS注入，通过XSS漏洞获取大量的Cookie，也就是控制了大量的用户，腾讯有专门的XSS漏洞扫描机制，因为大量的QQ盗用，发广告就是因为XSS漏洞
-所以Laravel等框架中，内部实现了Session的所有逻辑，并将PHPSESSIONID设置为httponly并加密，这样，前端JS就无法读取和修改这些敏感信息，降低了被盗用的风险。
-
-* 会使用一种叫做URL重写的技术来进行会话跟踪，即每次HTTP交互，URL后面都会被附加上一个诸如 sid=xxxxx 这样的参数，服务端据此来识别用户。
-* Cookie其实还可以用在一些方便用户的场景下，设想你某次登陆过一个网站，下次登录的时候不想再次输入账号了，怎么办？这个信息可以写到Cookie里面，访问网站的时候，网站页面的脚本可以读取这个信息，就自动帮你把用户名给填了，能够方便一下用户。这也是Cookie名称的由来，给用户的一点甜头。
-* Session是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中；
-* Cookie是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。
-
-常见的session实现方式是基于cookie的， 所以禁用cookie，session随之时效
-
-理论上只要在返回的页面里里能带上一个标识会话的令牌，在浏览器下一次提交的时候，能带上这个令牌，会话就可以被保持
-
-因此，cookie只是最优雅的实现session的方式，因为cookie对用户来说不可见，同时会自动在HTTP报文中传输
-
-但session也可以通过其他方式来保持， 比如放一个sessionId在URL的参数里
+* 禁用了 Cookie
+    - 理论上只要在返回的页面里里能带上一个标识会话的令牌，在浏览器下一次提交的时候，能带上这个令牌，会话就可以被保持
+    - 如果一个Cookie都没接收到，基本上可以预判客户端禁用了Cookie，那将session_id附带在每个网址后面(包括POST)，比如：`http://www.xx.com/index.php?session_id=xxxxx`
+    - 在每个页面的开头使用`session_id($_GET['session_id'])`，来强制指定当前session_id：
+* 安全
+    - PHPSESSIONID设置为httponly并加密，这样，前端JS就无法读取和修改这些敏感信息，降低了被盗用的风险
 
 ## HTTP2
 
+* 多路复用：多个请求共享一个tcp连接
+* 全双工通信
+* 必须https://
+* 头部压缩
+* 二进制传输
+* [HTTP2 vs HTTP1.1](https://http2.akamai.com/demo)
+
+```
+pear install HTTP2
+```
 
 ## QUIC
 
@@ -704,7 +740,6 @@ HTTP-over-QUIC 实验协议将被重命名为 HTTP/3，并成为 HTTP 协议的�
 * [chimurai/http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware):⚡️ The one-liner node.js http-proxy middleware for connect, express and browser-sync
 * [julienschmidt/httprouter](https://github.com/julienschmidt/httprouter):A high performance HTTP request router that scales well
 * [buger/goreplay](https://github.com/buger/goreplay):GoReplay is an open-source tool for capturing and replaying live HTTP traffic into a test environment in order to continuously test your system with real data. It can be used to increase confidence in code deployments, configuration changes and infrastructure changes. https://goreplay.org
-* [JoeDog/siege](https://github.com/JoeDog/siege):Siege is an http load tester and benchmarking utility
 * [dannagle/PacketSender](https://github.com/dannagle/PacketSender):Network utility for sending / receiving TCP, UDP, SSL https://packetsender.com/
 * [tsenart/vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. https://godoc.org/github.com/tsenart/vegeta/lib
 * flow-control
@@ -718,16 +753,12 @@ HTTP-over-QUIC 实验协议将被重命名为 HTTP/3，并成为 HTTP 协议的�
     - [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh): 实现了 acme 协议, 可以从 letsencrypt 生成免费的证书
 * test
     - [JoeDog/siege](https://github.com/JoeDog/siege):Siege is an http load tester and benchmarking utility
-* 测试
     - [tsenart/vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. https://godoc.org/github.com/tsenart/vegeta/lib
 * 抓包
     - [httpwatch](https://www.httpwatch.com/)
 
 ## 参考
 
-* [HTTP 下午茶](http://book.haoduoshipin.com/tealeaf-http/)
-* [关于 TCP/IP，必知必会的十个问题](https://juejin.im/post/598ba1d06fb9a03c4d6464ab)
-* [面试 -- 网络 HTTP](https://juejin.im/post/5872309261ff4b005c4580d4)
 * [bolasblack/http-api-guide](https://github.com/bolasblack/http-api-guide)
 * [HTTPS explained with carrier pigeons](https://medium.freecodecamp.org/https-explained-with-carrier-pigeons-7029d2193351)
 * [HTTP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)

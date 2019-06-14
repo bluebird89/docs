@@ -298,18 +298,19 @@ class Captain
 * 不要把 JS 和 CSS 放在 Blade 模板中，也不要将任何 HTML 放在 PHP 类中
 * 在代码中使用配置和语言文件、常量，而不是写死它
 
-## 参考
+## 图书
 
 * Design Patterns - Elements of Reusable Object-Oriented Software（中文译名：设计模式 - 可复用的面向对象软件元素）
-* [常见设计模式的定义，应用场景和方法](http://www.jianshu.com/p/f3c76b695167)
+* 《[Head First 设计模式（中文版）](https://book.douban.com/subject/2243615/)》
+* 《[设计模式 : 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)》
+
+## 参考
+
 * [hoohack/DesignPattern](https://github.com/hoohack/DesignPattern):设计模式：PHP和Go语言实现
 * [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns)
-* [设计模式](http://www.runoob.com/design-pattern/design-pattern-tutorial.html)
+* [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
 * [kamranahmedse/design-patterns-for-humans](https://github.com/kamranahmedse/design-patterns-for-humans):Design Patterns for Humans™ - An ultra-simplified explanation 
 * [设计模式](http://laravelacademy.org/resources/design-patterns)
 * [Repository 模式](http://laravelacademy.org/post/3063.html)
-* 《[Head First 设计模式（中文版）](https://book.douban.com/subject/2243615/)》
-* 《[设计模式 : 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)》
-* [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
-* [常见设计模式的定义，应用场景和方法](http://www.jianshu.com/p/f3c76b695167)
 * [教程](http://www.runoob.com/design-pattern/design-pattern-tutorial.html)
+* [常见设计模式的定义，应用场景和方法](http://www.jianshu.com/p/f3c76b695167)
