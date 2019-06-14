@@ -91,9 +91,9 @@ server {
     - 注册yiibaseApplication::errorHandler。
     - 通过给定的应用配置初始化应用的各属性。
     - 通过调用 yiibaseApplication::init()（初始化）方法，它会顺次调用 yiibaseApplication::bootstrap() 从而运行引导组件。
-       - 加载扩展清单文件(extension manifest file) vendor/yiisoft/extensions.php。
-       - 创建并运行各个扩展声明的 引导组件（bootstrap components）。
-       - 创建并运行各个 应用组件 以及在应用的 Bootstrap 属性中声明的各个 模块（modules）组件（如果有）。
+        + 加载扩展清单文件(extension manifest file) vendor/yiisoft/extensions.php。
+        + 创建并运行各个扩展声明的 引导组件（bootstrap components）。
+        + 创建并运行各个 应用组件 以及在应用的 Bootstrap 属性中声明的各个 模块（modules）组件（如果有）。
 * 应用会通过 request（请求） 应用组件解析被请求的 路由。
 * 应用创建一个 controller（控制器） 实例具体处理请求。
 * 控制器会创建一个 action（动作） 实例并为该动作执行相关的 Filters（访问过滤器）。
@@ -277,14 +277,14 @@ server {
 
 ## 模型
 
--   属性: 代表可像普通类属性或数组一样被访问的业务数据;yiibaseModel::attributes() 指定模型所拥有的属性。
+*   属性: 代表可像普通类属性或数组一样被访问的业务数据;yiibaseModel::attributes() 指定模型所拥有的属性。
     -   ContactForm 模型类有四个属性 name, email, subject and body， ContactForm 模型用来代表从 HTML 表单获取的输入数据
--   属性标签: 指定属性显示出来的标签; username 转换为 Username， firstNam 转换为 First Name
--   场景：模型支持的场景由模型中申明的 验证规则 来决定
--   块赋值: 只用一行代码将用户所有输入填充到一个模型，将输入数据对应填充到 yiibaseModel::attributes 属性
--   验证规则: 确保输入数据符合所申明的验证规则;
--   数据导出: 允许模型数据导出为自定义格式的数组
--   ActiveRecord
+*   属性标签: 指定属性显示出来的标签; username 转换为 Username， firstNam 转换为 First Name
+*   场景：模型支持的场景由模型中申明的 验证规则 来决定
+*   块赋值: 只用一行代码将用户所有输入填充到一个模型，将输入数据对应填充到 yiibaseModel::attributes 属性
+*   验证规则: 确保输入数据符合所申明的验证规则;
+*   数据导出: 允许模型数据导出为自定义格式的数组
+*   ActiveRecord
 
 ```php
 namespace app/models;
@@ -365,19 +365,19 @@ if ($model->validate()) {
 
 ## component
 
--   yiiwebAssetManager: 管理资源包和资源发布
--   yiidbConnection: 代表一个可以执行数据库操作的数据库连接， 注意配置该组件时必须指定组件类名和其他相关组件属性，如 yiidbConnection::dsn
--   yiibaseApplication::errorHandler: 处理 PHP 错误和异常
--   yiii18nFormatter: 格式化输出显示给终端用户的数据，例如数字可能要带分隔符， 日期使用长格式
--   yiii18nI18N: 支持信息翻译和格式化
--   yiilogDispatcher: 管理日志对象
--   yiiswiftmailerMailer: 支持生成邮件结构并发送
--   yiibaseApplication::request: 代表从终端用户处接收到的请求
--   yiibaseApplication::response: 代表发送给用户的响应
--   yiiwebSession: 代表会话信息，仅在 yiiwebApplication 网页应用中可用
--   yiiwebUrlManager: 支持 URL 地址解析和创建
--   yiiwebUser: 代表认证登录用户信息，仅在 yiiwebApplication 网页应用中可用
--   yiiwebView: 支持渲染视图
+*   yiiwebAssetManager: 管理资源包和资源发布
+*   yiidbConnection: 代表一个可以执行数据库操作的数据库连接， 注意配置该组件时必须指定组件类名和其他相关组件属性，如 yiidbConnection::dsn
+*   yiibaseApplication::errorHandler: 处理 PHP 错误和异常
+*   yiii18nFormatter: 格式化输出显示给终端用户的数据，例如数字可能要带分隔符， 日期使用长格式
+*   yiii18nI18N: 支持信息翻译和格式化
+*   yiilogDispatcher: 管理日志对象
+*   yiiswiftmailerMailer: 支持生成邮件结构并发送
+*   yiibaseApplication::request: 代表从终端用户处接收到的请求
+*   yiibaseApplication::response: 代表发送给用户的响应
+*   yiiwebSession: 代表会话信息，仅在 yiiwebApplication 网页应用中可用
+*   yiiwebUrlManager: 支持 URL 地址解析和创建
+*   yiiwebUser: 代表认证登录用户信息，仅在 yiiwebApplication 网页应用中可用
+*   yiiwebView: 支持渲染视图
 
 ## 控制器
 
@@ -498,41 +498,41 @@ if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
 ## 视图
 
--   组织：@app/views/ControllerID 目录下
--   控制器中渲染
+*   组织：@app/views/ControllerID 目录下
+*   控制器中渲染
     -   yiibaseController::render(): 渲染一个 视图名 并使用一个 布局 返回到渲染结果。
     -   yiibaseController::renderPartial(): 渲染一个 视图名 并且不使用布局。
     -   yiiwebController::renderAjax(): 渲染一个 视图名 并且不使用布局， 并注入所有注册的 JS/CSS 脚本和文件，通常使用在响应 AJAX 网页请求的情况下。
     -   yiibaseController::renderFile(): 渲染一个视图文件目录或别名下的视图文件。
--   视图中渲染
+*   视图中渲染
     -   yiibaseView::render(): 渲染一个 视图名.
     -   yiiwebView::renderAjax(): 渲染一个 视图名 并注入所有注册的 JS/CSS 脚本和文件，通常使用在响应 AJAX 网页请求的情况下。
     -   yiibaseView::renderFile(): 渲染一个视图文件目录或别名下的视图文件。`<?= $this->render('_overview') ?>`
--   视图名
+*   视图名
     -   视图名可省略文件扩展名，这种情况下使用 .php 作为扩展， 视图名 about 对应到 about.php 文件名
     -   视图名以双斜杠 // 开头，对应的视图文件路径为 @app/views/ViewName， 也就是说视图文件在 yiibaseApplication::viewPath 路径下找， 例如 //site/about 对应到 @app/views/site/about.php
     -   视图名以单斜杠/开始，视图文件路径以当前使用模块 的 yiibaseModule::viewPath 开始， 如果不存在模块，使用@app/views/ViewName 开始，例如，如果当前模块为 user， /user/create 对应成 @app/modules/user/views/user/create.php, 如果不在模块中，/user/create 对应@app/views/user/create.php
--   数据
+*   数据
     -   推送：渲染视图时传递参数
     -   拉取：视图从 yiibaseView 视图组件或其他对象中主动获得数据(如 Yii::$app)， 在视图中使用如下表达式$this->context 可获取到控制器
     -   共享数据：视图组件提供 yiibaseView::params 参数属性来让不同视图共享数据
--   布局
+*   布局
     -   数据：
         -   $this 对应和普通视图类似的 yiibaseView 视图组件
         -   $content：包含调用 yiibaseController::render()方法渲染内容视图的结果。
     -   嵌套布局
--   视图事件
+*   视图事件
     -   yiibaseView::EVENT_BEFORE_RENDER: 在控制器渲染文件开始时触发， 该事件可设置 yiibaseViewEvent::isValid 为 false 取消视图渲染。
     -   yiibaseView::EVENT_AFTER_RENDER: 在布局中调用 yiibaseView::beginPage() 时触发， 该事件可获取 yiibaseViewEvent::output 的渲染结果，可修改该属性来修改渲染结果。
     -   yiibaseView::EVENT_BEGIN_PAGE: 在布局调用 yiibaseView::beginPage() 时触发；
     -   yiibaseView::EVENT_END_PAGE: 在布局调用 yiibaseView::endPage() 是触发；
     -   yiiwebView::EVENT_BEGIN_BODY: 在布局调用 yiiwebView::beginBody() 时触发；
     -   yiiwebView::EVENT_END_BODY: 在布局调用 yiiwebView::endBody() 时触发。
--   视图组件：components 中配置
--   yiihelpersHtml
+*   视图组件：components 中配置
+*   yiihelpersHtml
     -   encode:参数中可能隐含的恶意 JavaScript 代码导致跨站脚本（XSS）攻击,在页面进行处理
     -   显示 HTML 内容，先调用 yiihelpersHtmlPurifier 过滤内容:保证输出数据安全上做的不错，但性能不佳，如果你的应用需要高性能可考虑 缓存 过滤后的结果。
--   EntryForm：从用户那请求的数据
+*   EntryForm：从用户那请求的数据
 
 ```php
 # 嵌套布局
@@ -616,7 +616,7 @@ use appcomponentsHelloWidget;
 ?>
 <?php HelloWidget::begin(); ?>
 
-    content that may contain <tag>'s
+    content that may contain <tag>
 
 <?php HelloWidget::end(); ?>
 ```
@@ -743,21 +743,6 @@ use app/assets/AppAsset;
 AppAsset::register($this);  // $this 代表视图对象
 ```
 
-## DB
-
-```php
-self::find()
-    ->select([
-    'title',
-    "DATE_FORMAT(raw_add_time,'%Y-%m-%d') as raw_add_time"
-])
-    ->where(['type' => '0'])
-    ->orderBy('`sort` asc, `raw_update_time` DESC')
-    ->limit(6)
-    ->asArray()
-    ->all();
-```
-
 ## RESTful
 
 * route
@@ -813,7 +798,7 @@ users?expand=profile // 指定由于终端用户的请求包含 expand 参数哪
 
 ## Console
 
-创建网站后台处理的任务
+* 创建网站后台处理的任务
 
 ```sh
 yii <route> [--option1=value1 --option2=value2 ... argument1 argument2 ...]
@@ -832,9 +817,15 @@ exec $SHELL -l
 
 ## 数据库
 
-geterrors
-
 ```php
+self::find()
+    ->select([ 'title', "DATE_FORMAT(raw_add_time,'%Y-%m-%d') as raw_add_time"])
+    ->where(['type' => '0'])
+    ->orderBy('`sort` asc, `raw_update_time` DESC')
+    ->limit(6)
+    ->asArray()
+    ->all();
+
 User::find()->one();  # 此方法返回一条数据；
 User::find()->all();  # 此方法返回所有数据；
 User::find()->count();  # 此方法返回记录的数量；
@@ -860,6 +851,7 @@ User::find()->select('count(*)')->where(['user_id' => $userId, 'status' => 0])->
 User::findBySql(‘SELECT * FROM user‘)->all();  # 此方法是用 sql 语句查询 user 表里面的所有数据；
 User::findBySql(‘SELECT * FROM user‘)->one();  # 此方法是用 sql 语句查询 user 表里面的一条数据；
 
+geterrors
 save() # return bool
 ```
 
@@ -1007,29 +999,22 @@ browser reopen generate new cookie
 * config
 * use
 
-## Admin
-
-* [yii2-ace-admin](https://github.com/myloveGy/yii2-ace-admin)
-
-* `composer require dmstr/yii2-adminlte-asset`
-
 ## 扩展
 
--   [yii2-httpclient](https://github.com/yiisoft/yii2-httpclient)
--   [yii2-authclient](https://github.com/yiisoft/yii2-authclient)
--   [yii2-queue](https://github.com/yiisoft/yii2-queue)
--   [yii2-coding-standards](https://github.com/yiisoft/yii2-coding-standards)
--   [yii2-collection](https://github.com/yiisoft/yii2-collection)
--   [yii2-redis](https://github.com/yiisoft/yii2-redis)
--   [yii2-bootstrap](https://github.com/yiisoft/yii2-bootstrap)
--   [yii2-shell](https://github.com/yiisoft/yii2-shell)
--   [yii2-bootstrap4](https://github.com/yiisoft/yii2-bootstrap4)
--   [yiisoft/log](https://github.com/yiisoft/log)
--   [yii2-elasticsearch](https://github.com/yiisoft/yii2-elasticsearch)
--   [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
--   [2amigos/yii2-file-upload-widget](https://github.com/2amigos/yii2-file-upload-widget):BlueImp File Upload Widget for Yii2
-* doc
-    - [yiisoft/yii2-apidoc](https://github.com/yiisoft/yii2-apidoc)
+* [yii2-httpclient](https://github.com/yiisoft/yii2-httpclient)
+* [yii2-authclient](https://github.com/yiisoft/yii2-authclient)
+* [yii2-queue](https://github.com/yiisoft/yii2-queue)
+* [yii2-coding-standards](https://github.com/yiisoft/yii2-coding-standards)
+* [yii2-collection](https://github.com/yiisoft/yii2-collection)
+* [yii2-redis](https://github.com/yiisoft/yii2-redis)
+* [yii2-bootstrap](https://github.com/yiisoft/yii2-bootstrap)
+* [yii2-shell](https://github.com/yiisoft/yii2-shell)
+* [yii2-bootstrap4](https://github.com/yiisoft/yii2-bootstrap4)
+* [yiisoft/log](https://github.com/yiisoft/log)
+* [yii2-elasticsearch](https://github.com/yiisoft/yii2-elasticsearch)
+* [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
+* [2amigos/yii2-file-upload-widget](https://github.com/2amigos/yii2-file-upload-widget):BlueImp File Upload Widget for Yii2
+* [yii2-ace-admin](https://github.com/myloveGy/yii2-ace-admin) `composer require dmstr/yii2-adminlte-asset`
 
 ## 项目
 
@@ -1039,9 +1024,11 @@ browser reopen generate new cookie
 * [EleTeam/Shop-PHP-Yii2](https://github.com/EleTeam/Shop-PHP-Yii2):EleTeam开源项目-电商全套解决方案之PHP版-Shop-for-PHP-Yii2。一个类似京东/天猫/淘宝的商城，有对应的APP支持，由EleTeam团队维护！
 * [changchang700/yii2cms](https://github.com/changchang700/yii2cms):一款和layui搭配的后台管理cms，集成了权限、用户、配置等常用功能，你可以在这些基础上修改。
 * [yii2-starter-kit/yii2-starter-kit](https://github.com/yii2-starter-kit/yii2-starter-kit):Yii2 Starter Kit http://yii2-starter-kit.terentev.net
+* [TIGERB/vue-in-yii2](https://github.com/TIGERB/vue-in-yii2):a whole framework which use vuejs in frontend and light-yii2 in backend
 
 ## 参考
 
+* [yiisoft/yii2-apidoc](https://github.com/yiisoft/yii2-apidoc)
 * [深入理解 Yii2.0](http://www.digpage.com/index.html)
 * [CraryPrimitiveMan/yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
 * [CraryPrimitiveMan/OnlineCourses](https://github.com/CraryPrimitiveMan/OnlineCourses):An online courses website based on yii2

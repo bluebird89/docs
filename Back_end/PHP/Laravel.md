@@ -2499,6 +2499,7 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
 * [learning laravel](https://learninglaravel.net)
 * [深入 Laravel 核心](https://learnku.com/docs/laravel-core-concept/5.5)
 * [Laravel 之道](https://learnku.com/docs/the-laravel-way/5.6)
+* [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
 
 ## 工程
 

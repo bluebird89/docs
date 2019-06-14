@@ -31,6 +31,7 @@
 * [facebookresearch/StarSpace](https://github.com/facebookresearch/StarSpace):Learning embeddings for classification, retrieval and ranking.
 * [jacobeisenstein/gt-nlp-class](https://github.com/jacobeisenstein/gt-nlp-class):Course materials for Georgia Tech CS 4650 and 7650, "Natural Language"
 * [yandexdataschool/nlp_course](https://github.com/yandexdataschool/nlp_course):YSDA course in Natural Language Processing
+* [nlp-beginner](https://github.com/FudanNLP/nlp-beginner):复旦NLP实验室NLP上手教程 https://nndl.github.io/
 
 ```sh
 git clone https://github.com/DSKSD/cs-224n-Pytorch.git
