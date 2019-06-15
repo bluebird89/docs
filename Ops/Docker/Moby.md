@@ -375,6 +375,7 @@ services:
 * [vmware/photon](https://github.com/vmware/photon):Minimal Linux container host https://vmware.github.io/photon
 * [vagrant-libvirt/vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt):Vagrant provider for libvirt.
 * [deviantony/docker-elk](https://github.com/deviantony/docker-elk):The ELK stack powered by Docker and Compose.
+* [jessfraz/dockerfiles](https://github.com/jessfraz/dockerfiles):Various Dockerfiles I use on the desktop and on servers. https://blog.jessfraz.com/post/docker-containers-on-the-desktop/
 * GUI
   - Potainer
   - Shipyard

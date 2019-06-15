@@ -33,9 +33,9 @@ fi
 
 ## 配置
 
-* 全局配置: git config --global|-l
-  - /etc/gitconfig文件
-  - ubuntu:~/.gitconfig
+* 全局配置
+  - `/etc/gitconfig`
+  - ubuntu:`~/.gitconfig`
 * 系统配置： `git config --system`
 * 项目配置：`git local --system` project/.git/config   `git config`
 * alias说明
@@ -57,9 +57,7 @@ fi
 git --version
 man git # Git User Manual
 
-git config --list --show-origin # 查看配置
-git config --local # repository配置
-git config -l  # 列举所有配置
+git config --global|--system|--local --list[-l]|--edit[-e]|--add|--get|--unset
 
 git config --global user.name "name"
 git config --global user.email "email"
@@ -67,12 +65,12 @@ git config --global color.ui "auto"
 git config --global core.editor "vim" # 设置编辑器为 vim
 git config --global credential.helper osxkeychain
 git config --global core.excludesfile ~/.gitignore
-echo .DS_Store >> ~/.gitignore
-
 git config --global mergetool.sublime.cmd "subl -w \$MERGED"
 git config --global mergetool.sublime.trustExitCode false
 git config --global merge.tool sublime | vimdiff
 git mergetool -y
+
+echo .DS_Store >> ~/.gitignore
 
 git config --global alias.ls 'log --name-status --oneline --graph'
 git config --global rebase.autoStash true
@@ -262,11 +260,13 @@ gpg --sign demo.txt #签名
 
 * 所有的版本控制系统，只能跟踪文本文件的改动,但是图片，视频这些二进制文件，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是知道图片从1kb变成2kb，但是到底改的内容没法记录
 * SVN是集中式版本控制系统，版本库是集中放在中央服务器
+  - 每次次记录哪些文件作了更新、更新哪些行的内容
   - 要从中央服务器哪里得到最新的版本
   - 把自己做完的活推送到中央服务器
-  - 必须联网才能工作
+  - 有本地仓库，必须联网才能工作
   - 每个分支都要放在不同的目录中
 * Git是分布式版本控制系统
+  - 记录文件快照
   - 没有中央服务器的，每个人的电脑就是一个完整的版本库
   - 可以在同一个目录中切换不同的分支
 
@@ -295,6 +295,9 @@ gpg --sign demo.txt #签名
   - info/ 全局性排除（global exclude）文件，不希望被记录在 .gitignore 文件中的忽略模式（ignored patterns）
   - objects/  所有数据内容
   - refs/ 数据（分支）的提交对象的指针
+* 数据结构
+  - 绿色的5位字符表示提交的ID，分别指向父节点
+  - 分支用橘色显示，分别指向特定的提交。当前分支由附在其上的HEAD标识
 * HEAD关键字指的是当前分支最末梢最新的一个提交
 * git reset -- files 用来撤销最后一次git add files
 * git checkout -- files 把文件从暂存区域复制到工作目录，用来丢弃本地修改
@@ -318,9 +321,8 @@ gpg --sign demo.txt #签名
 | mixed | 修改 |修改 | 不修改 |
 | hard | 修改 |修改 | 修改 |
 
-![Alt text](../_static/conventions.svg "Optional title")
-绿色的5位字符表示提交的ID，分别指向父节点。分支用橘色显示，分别指向特定的提交。当前分支由附在其上的HEAD标识。 这张图片里显示最后5次提交，ed489是最新提交。 master分支指向此次提交，另一个maint分支指向祖父提交节点。
-![git commit](../_static/commit-master.svg "git commit")
+![数据结构](../_static/conventions.svg "Optional title")
+![commit](../_static/commit-master.svg "git commit")
 ![checkout-branch](../_static/checkout-branch.svg "checkout-branch")
 ![checkout-after-detached](../_static/checkout-after-detached.svg "checkout-after-detached")
 ![reset-commit](../_static/reset-commit.svg "reset-commit")
@@ -443,7 +445,8 @@ git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1
   - scope: commit 影响的范围, 比如: route, component, utils, build...
   - subject: commit 的概述, 建议符合  50/72 formatting
   - body: commit 具体修改内容, 可以分为多行, 建议符合 50/72 formatting
-  - footer: 一些备注, 通常是 BREAKING CHANGE 或修复的 bug 的链接.
+  - footer: 一些备注, 通常是 BREAKING CHANGE 或修复的 bug 的链接
+  - [Conventional Commits](https://conventionalcommits.org/):
 
 ```sh
 # 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志.进行一次包含最后一次提交加上工作目录中文件快照的提交
@@ -568,10 +571,6 @@ git stash pop stash@{num} # 恢复指定编号的 WIP，同时从队列中移除
 git stash clear # 删除所有
 ```
 
-![merge](../_static/merge.svg "merge")
-![cherry-pick](../_static/cherry-pick.svg "cherry-pick")
-![rebase](../_static/rebase.svg "rebase"):
-
 #### 本地分支
 
 * merge:保持修改内容的历史记录，但是历史记录会很复杂
@@ -606,15 +605,15 @@ git bisect start
 git bisect good
 git bisect bad # Find bug in commit history in a binary search tree style
 
-git cherry-pick [commit] # 选择一个commit，合并进当前分支
-git cherry-pick hash_commit_A hash_commit_B
-
 git --git-dir=/.git format-patch -k -1 --stdout  | git am -3 -k # 将另一个不相关的本地仓库的提交补丁应用到当前仓库
 
 git filter-branch --prune-empty --subdirectory-filter  master # 将Git仓库中某个特定的目录转换为一个全新的仓库
 
 git rm filename # 从 HEAD 中删除文件
 ```
+
+![merge](../_static/merge.svg "merge")
+![rebase](../_static/rebase.svg "rebase")
 
 #### 远程分支
 
@@ -632,8 +631,6 @@ git rm filename # 从 HEAD 中删除文件
   - 从祖先节点把功能分支的提交记录摘下来，然后 rebase 到 master 分支
   - rebase 之后的 commitID 其实已经发生了变化
 * deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
-
-![rebase vs merge](../_staic/mergevsrebase.jpeg "rebase vs merge")
 
 ```sh
 git config get --remote.origin.url
@@ -713,6 +710,8 @@ git push origin :<remote_branch>  # 省略本地分支名，则表示删除指�
 git branch -dr [remote/branch] # 删除远程分支
 git push origin --delete dev # 删除远程分支
 ```
+
+![rebase vs merge](../_static/mergevsrebase.jpeg "rebase vs merge")
 
 ### Pull Request
 
@@ -796,6 +795,13 @@ tar cJf .tar.xz / --exclude-vcs
   - resolving the conflicts
   - add ,commit
 
+```sh
+git cherry-pick [commit] # 选择一个commit，合并进当前分支
+git cherry-pick hash_commit_A hash_commit_B
+```
+
+![cherry-pick](../_static/cherry-pick.svg "cherry-pick")
+
 ## .gitignore
 
 * 过滤目录 : /bin/ 就是将bin目录过滤, 该文件下的所有目录和文件都不被提交;
@@ -857,7 +863,7 @@ Hook是Git系统的本地机制，用于在诸如代码提交（Commit）和合�
         + `<ref-name>` 是ref的全名.
         + 当创建一个新ref,`<old-value>` 将是 40, 即字符`0`.
       * 如果这个hook以非0状态退出,则所有ref都不会被更新(update).
-      * 如果以0退出, 仍可以通过<<update,'update'>> hook 来拒绝特定的ref的更新.
+      * 如果以0退出, 仍可以通过`<update,'update'>` hook 来拒绝特定的ref的更新.
       * hook的标准输入/标准输出,均导向'git send-pack',所以,你可以简单地使用`echo`来为用户打印信息.
     + pre-auto-gc:由'git gc --auto'触发. 它不接受参数, 非0状态退出,将导致'git gc --auto'被取消.
   - Post-
@@ -896,7 +902,7 @@ Hook是Git系统的本地机制，用于在诸如代码提交（Commit）和合�
         - 如果合并失败(冲突),那么这个hook不会影响'git merge'的输出,且不会被执行.
         - 这个hook用于与pre-commit hook共同使用,以保存并恢复working tree的metadata.
       * post-receive:由远程资源库的'git-receive-pack'触发,此时,本地资源库的'git push'已经完成,且所有ref已经更新.这个hook仅执行一次. 它不接受参数,但跟<<pre-receive,'pre-receive'>> hook获取相同的标准输入格式.
-        - 不影响'git-receive-pack'的输出,因为它在实际工作完成之后执行.跟<<post-update,'post-update'>> hook不一样的是,这个hook可以拿到ref在update前后的值.
+        - 不影响'git-receive-pack'的输出,因为它在实际工作完成之后执行.跟`<post-update,'post-update'>` hook不一样的是,这个hook可以拿到ref在update前后的值.
       * post-update:由远程资源库的'git-receive-pack'触发,此时,本地资源库的'git push'已经完成,且所有ref已经更新.它接受可变数量的参数, 每一个参数都是已经实际update的ref的名字.
       * post-rewrite:由改写commit的命令所触发(`git commit --amend`, 'git-rebase'; 当前 'git-filter-branch' 并'不'触发它!!).它的第一个参数,表示当前是什么命令所触发:`amend` 或 `rebase`.
   - update:由远程资源库的'git-receive-pack'触发,此时,'git push'已经在本地资源库执行完毕. 此时,正准备update远程资源库的ref. 它的退出状态,决定了当前ref的update是否可以进行
@@ -987,7 +993,6 @@ git --work-tree=/home/www checkout -f
   - 利用Git有提供各种勾子（hook），即仓库有事件发生时触发执行的脚本
     + 配置一个勾子，在push中央仓库的master分支时，自动构建好对外发布
   - [nvie/gitflow](https://github.com/nvie/gitflow)：Git extensions to provide high-level repository operations for Vincent Driessen's branching model.
-    + 辅助分支组织为了解决特定的问题而进行的各种开发活动。它的生存周期伴随着它的功能完成而消失.完成它的使命之后在merge到主分支之后，也将被删除。
 * **Forking工作流**：让各个开发者都有一个服务端仓库
   - 有2个Git仓库，fork操作基本上就只是一个服务端的克隆
     + 一个本地私有的（fork，其它开发者不允许push到这个仓库，但可以pull到修改。为了方便和其它的开发者共享分支。 各个开发者应该用分支隔离各个功能，就像在功能分支工作流和Gitflow工作流一样。）
@@ -1044,11 +1049,12 @@ git checkout develop
 git merge release-0.1
 git push
 git branch -d release-0.1
-git tag -a 0.1 -m "Initial public release" master（打好Tag以方便跟踪）
+git tag -a 0.1 -m "Initial public release" master # （打好Tag以方便跟踪）
 git push --tags
 
-git checkout -b issue-#001 master
 # Fix the bug
+git checkout -b issue-#001 master
+
 git checkout master
 git merge issue-#001
 git push
@@ -1150,7 +1156,7 @@ git merge FETCH_HEAD
 
 ### submodule
 
-git submodule 主要用来管理一些单向更新的公共模块或底层逻辑
+用来管理一些单向更新的公共模块或底层逻辑
 
 * 允许你的项目模块化成为每一个 Repository，最终汇聚成一个完整的项目
 * Git Submodule 可以别人的 Repo 挂到你自己的 Repo 中的任何位置，成为的 Repo 的一部分
@@ -1297,6 +1303,9 @@ git-quick-stats
 ```
 
 ### Aliases
+
+* [alias](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#git)
+* [GitAlias/gitalias](https://github.com/GitAlias/gitalias#shortcut-examples):Git alias commands for faster easier version control
 
 | Alias                | Command                                                                                                                                 |
 | :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1453,51 +1462,10 @@ These features allow to pause a branch development and switch to another one (_"
 * Use Branches:Branching is one of Git’s most powerful features – and this is not by accident: quick and easy branching was a central requirement from day one. Branches are the perfect tool to help you avoid mixing up different lines of development. You should use branches extensively in your development workflows: for new features, bug fixes, experiments, ideas…
 * Agree on a Workflow:Git lets you pick from a lot of different workflows: long-running branches, topic branches, merge or rebase, git-flow… Which one you choose depends on a couple of factors: your project, your overall development and deployment workflows and (maybe most importantly) on your and your teammates’ personal preferences. However you choose to work, just make sure to agree on a common workflow that everyone follows.
 
-
-## 客户端
-
-* msysgit
-* sourcetree
-* [GitHawkApp/GitHawk](https://github.com/GitHawkApp/GitHawk):A GitHub project manager app for iOS. http://githawk.com
-* Linux
-  - SmartGit
-  - GitKraken
-  - Git Cola
-
 ## 问题
 
 > error: insufficient permission for adding an object to repository database .git/objects
-
-chown -R henry:henry .git/objects
-
-## 文档
-
-* [文档](https://git-scm.com/docs)
-* [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. http://git.io/sheet
-* [atlassian](https://www.atlassian.com/git)
-* [progit/progit](https://github.com/progit/progit):Pro Git 2nd Edition
-* [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
-* [GitHub规范](https://guides.github.com/)
-* [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
-* [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
-* [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
-* [Git权威指南](http://www.worldhello.net/):GotGitHub
-* [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
-* [练习沙盒](https://try.github.io)
-* [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
-* [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub): :octocat:分享 GitHub 上好玩、容易上手的项目，帮你找到编程的乐趣。欢迎推荐、自荐项目，让更多人知道你的项目star
-* [susam/gitpr](https://github.com/susam/gitpr#with-merge-commit):A quick reference guide on fork and pull request workflow
-* [git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
-* [Git Immersion](http://gitimmersion.com/):The surest path to mastering Git is to immerse oneself in its utilities and operations, to experience it first-hand
-* [Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials)
-* [git-tutorial](https://www.learnenough.com/git-tutorial)
-* [GitHub Helps](https://help.github.com/)
-* [k88hudson/git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
-* [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate!
-* [Progit2](https://github.com/progit/progit2)
-* [Magit](https://magit.vc/) Git 在 Emacs 上的打开方式
-* [Vim-fugitive](https://github.com/tpope/vim-fugitive) : Git 在 Vim 上的打开方式
-
+> chown -R henry:henry .git/objects
 
 ## 工具
 
@@ -1529,18 +1497,37 @@ chown -R henry:henry .git/objects
 * [marionebl/commitlint](https://github.com/marionebl/commitlint):📓 Lint commit messages https://marionebl.github.io/commitlint/
 * [pomber/git-history](https://github.com/pomber/git-history)：Quickly browse the history of a file from any git repository https://githistory.xyz/
 * [Bash提示](https://github.com/magicmonty/bash-git-prompt)
+* 客户端
+  - msysgit
+  - sourcetree
+  - [GitHawkApp/GitHawk](https://github.com/GitHawkApp/GitHawk):A GitHub project manager app for iOS. http://githawk.com
+  - Linux
+    + SmartGit
+    + GitKraken
+    + Git Cola
 
 ## 参考
 
-* attributes   Defining attributes per path
-* everyday     Everyday Git With 20 Commands Or So
-* glossary     A Git glossary
-* ignore       Specifies intentionally untracked files to ignore
-* modules      Defining submodule properties
-* revisions    Specifying revisions and ranges for Git
-* tutorial     A tutorial introduction to Git (for version 1.5.1 or newer)
-* workflows    An overview of recommended workflows with Git
-* [alias](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git):oh my zsh 中的 alias
-* [Conventional Commits](https://conventionalcommits.org/)
-* [git-commit-guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
-* [Git 工作流](https://juejin.im/post/5a014d5f518825295f5d56c7)
+* [文档](https://git-scm.com/docs)
+* [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. http://git.io/sheet
+* [Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials)
+* [Progit2](https://github.com/progit/progit2):Pro Git 2nd Edition
+* [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
+* [GitHub规范](https://guides.github.com/)
+* [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
+* [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
+* [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
+* [Git权威指南](http://www.worldhello.net/):GotGitHub
+* [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
+* [练习沙盒](https://try.github.io)
+* [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
+* [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub)
+* [susam/gitpr](https://github.com/susam/gitpr#with-merge-commit):A quick reference guide on fork and pull request workflow
+* [git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
+* [Git Immersion](http://gitimmersion.com/):The surest path to mastering Git is to immerse oneself in its utilities and operations, to experience it first-hand
+* [git-tutorial](https://www.learnenough.com/git-tutorial)
+* [GitHub Helps](https://help.github.com/)
+* [k88hudson/git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
+* [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate!
+* [Magit](https://magit.vc/) Git 在 Emacs 上的打开方式
+* [Vim-fugitive](https://github.com/tpope/vim-fugitive) : Git 在 Vim 上的打开方式
