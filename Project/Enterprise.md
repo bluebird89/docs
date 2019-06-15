@@ -36,6 +36,8 @@
         + [Leangoo](https://www.leangoo.com):最敏捷的项目协作工具
         + [Teambition](https://www.teambition.com):项目管理工具，聊天、文件、看板
         + [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software):
+* SSO
+    - [apereo/cas](apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
 
 ## 公司文化
 
