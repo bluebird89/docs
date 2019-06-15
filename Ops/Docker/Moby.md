@@ -9,16 +9,15 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
 * 镜像装箱机制：类似一个只读模版的文件结构，可以自定义及扩展，用来创建Docker容器。
 * 高效虚拟化：Docker借助LXC并进行革新提供了高效运行环境，而非类似VM的虚拟OS，GuestOS的弊端在于看起来够虚拟，隔离，然而使用起来又浪费资源，又难于管理。Docker则基于LXC的核心Linux Namespace,对cgroups/namespace机制及网络过封装，把隔离性，灵活性（资源分配），便携，安全性，最重要是其性能做到了极致。
   - Docker复用Host主机的OS, 抽象出Docker Engine层面实现调度与隔离，大大降低其负重级别
+  - Docker是在操作系统层面进行虚拟化，而传统VM则直接在硬件层面虚拟化。
   - 底层实现则借助了LXC, 管理利用了namespace做全县控制和隔离，cgroup来进行资源配置，aufs（类似git的思想，把文件系统的修改当作一次代码commit进行叠加从而节省存储）提高文件系统资源利用率。
   + 提供了简洁易用的命令行和API
   + 使用Go语言开发，吸引开源社区关注
   + 基于联合文件系统的镜像分层技术，加上在线Docker Hub服务，容器迁移方便快捷
   + 一个容器只包含一个进程的微服务架构
 
-Docker的总体架构图
-![](../_static/architect_docker.jpg)
-Docker与VM对比:Docker是在操作系统层面进行虚拟化，而传统VM则直接在硬件层面虚拟化。
-![](../_static/VMvsDocker.jpg)
+![Docker的总体架构图](../_static/architect_docker.jpg)
+![Docker vs VM](../_static/VMvsDocker.jpg)
 
 ### 对比
 
@@ -235,8 +234,9 @@ RUN /bin/echo -e "LANG=\"en_US.UTF-8\"" >/etc/default/local
 EXPOSE 22
 EXPOSE 80
 CMD /usr/sbin/sshd -D
+```
 
-
+```sh
 # 镜像
 docker images # 列出所有镜像(images)
 
@@ -324,15 +324,13 @@ docker exec -it [id]|[name] /bin/bash  #i是交互式操作，t是一个终端�
 
 ## boot2docker
 
-> [docker/compose](https://github.com/docker/compose):Define and run multi-container applications with Docker https://docs.docker.com/compose/
+## [docker/compose](https://github.com/docker/compose):Define and run multi-container applications with Docker https://docs.docker.com/compose/
 
-Docker Compose 是一款容器编排程序，使用 YAML 配置的形式将你需要启动的容器管理起来.
-
-能够帮我们处理容器的依赖关系，在每个容器中会将容器的 IP 和服务的名称使用 hosts 的方式绑定，这样我们就能在容器中直接使用服务名称来接入对应的容器了
+* 一款容器编排程序，使用 YAML 配置的形式将你需要启动的容器管理起来
+* 能够帮我们处理容器的依赖关系，在每个容器中会将容器的 IP 和服务的名称使用 hosts 的方式绑定，这样我们就能在容器中直接使用服务名称来接入对应的容器了
 
 ```
 version: "2"
-
 services:
  // 服务名称
     nginx:
@@ -341,25 +339,15 @@ services:
         // 指定服务的镜像名称或镜像 ID
         image: "nginx:latest"
         volumes:
-
           - "$PWD/src/docker/conf:/etc/nginx/conf.d"
-
           - "$PWD:/home/q/system/m_look_360_cn"
-
         ports:
-
           - "8082:80"
-
         container_name: "m.look.360.cn-nginx"
-
     php:
-
         image: "lizheming/php-fpm-yaf"
-
         volumes:
-
             - "$PWD:/home/q/system/m_look_360_cn"
-
         container_name: "m.look.360.cn-php"
 ```
 
@@ -387,12 +375,14 @@ services:
 * [vmware/photon](https://github.com/vmware/photon):Minimal Linux container host https://vmware.github.io/photon
 * [vagrant-libvirt/vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt):Vagrant provider for libvirt.
 * [deviantony/docker-elk](https://github.com/deviantony/docker-elk):The ELK stack powered by Docker and Compose.
+* GUI
+  - Potainer
+  - Shipyard
 
 ## 工具
 
 * [docker/machine](https://github.com/docker/machine)Machine management for a container-centric world
 * [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
-* Potainer
 * [openfaas/faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple for Docker & Kubernetes https://docs.openfaas.com/
 * [portainer/portainer](https://github.com/portainer/portainer):Simple management UI for Docker http://portainer.io
 * [coreos/clair](https://github.com/coreos/clair):Vulnerability Static Analysis for Containers
