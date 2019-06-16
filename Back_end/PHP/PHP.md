@@ -2463,9 +2463,10 @@ nginx通过 fastcgi_param 指令将参数传递给 FastCGI Server
 
 >  5096 segmentation fault (core dumped)  php http_server.php
 
+## 工具
+
+* [docker-library/php](https://github.com/docker-library/php):Docker Official Image packaging for PHP https://php.net
+
 ## 参考
 
 * [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
-
-$GLOBALS['HTTP_RAW_POST_DATA']
-prof

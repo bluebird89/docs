@@ -1671,6 +1671,11 @@ filetype plugin indent on
 set completeopt=longest,menu
 ```
 
+## 镜像源
+
+* [USTC Mirror](http://mirrors.ustc.edu.cn/help/index.html#)
+* [阿里巴巴开源软件站](https://opsx.alibaba.com/)
+
 ## 系统
 
 * [openwrt/openwrt](https://github.com/openwrt/openwrt)：This repository is a mirror of https://git.openwrt.org/openwrt/openwrt.git It is for reference only and is not active for check-ins or for reporting issues. We will continue to accept Pull Requests here. They will be merged via staging trees then into openwrt.git. All issues should be reported at: https://bugs.openwrt.org

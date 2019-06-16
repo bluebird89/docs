@@ -21,7 +21,7 @@ Kubernetes 是自动化编排容器应用的开源平台，这些操作不仅包
 
 服务治理范围覆盖了服务的整个生命周期，从服务建模开始，到开发、测试、审批、发布、运行时管理，以及最后的下线。我们通常说的服务治理主要是指服务运行时的治理，一个好的服务治理框架要遵循"在线治理，实时生效"原则，只有这样才能真正保障服务整体质量。下面介绍服务治理策略在服务运行时的应用。
 
-- 服务越来越多，配置项越来越多，利用统一注册中心解决服务发现和配置管理问题。
+- 服务越来越多，配置项越来越多，利用统一注册中心解决服务发现和配置管P理问题。
 - 服务之间存在多级依赖，靠人工已经无法理清，还要避免潜在的循环依赖问题，我们需要依赖管理机制，支持导出依赖关系图。
 - 服务的性能数据和健康状态数据是服务治理的重要依据，比如访问量、响应时间、并发数等，因此需要有监控、健康检查和统计服务。
 - 当一个服务的访问量越来越大，需要对服务进行扩容，然后在客户端进行流量引导和优先级调度。
@@ -346,6 +346,7 @@ kubectl delete deployments hello-minikube1
 * [kubeless/kubeless](https://github.com/kubeless/kubeless):Kubernetes Native Serverless Framework https://kubeless.io
 * [windmilleng/tilt](https://github.com/windmilleng/tilt):Local Kubernetes development with no stress https://tilt.build/
 * [jetstack/cert-manager](https://github.com/jetstack/cert-manager):Automatically provision and manage TLS certificates in Kubernetes https://jetstack.io
+* [appscode/voyager](https://github.com/appscode/voyager):🚀 Secure HAProxy Ingress Controller for Kubernetes https://appscode.com/products/voyager
 
 <http://violetgo.com/blogs/>
 <http://www.winseliu.com/>

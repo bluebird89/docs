@@ -188,6 +188,10 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 
 * [bigchaindb/bigchaindb](https://github.com/bigchaindb/bigchaindb):Meet BigchainDB. The blockchain database. https://www.bigchaindb.com/
 
+## 图书
+
+* [yeasy/blockchain_guide](https://github.com/yeasy/blockchain_guide):Introduce blockchain related technologies, from theory to practice with bitcoin, ethereum and hyperledger. https://www.gitbook.com/book/yeasy/blockchain_guide
+
 ## 教程
 
 * [itheima1/BlockChain](https://github.com/itheima1/BlockChain):黑马程序员 120天全栈区块链开发 开源教程
