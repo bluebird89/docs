@@ -228,6 +228,12 @@ ll=ls -alF --show-control-chars
 ls=ls --show-control-chars -F
 ```
 
+## xp
+
+> cannt load library mscoree.dll
+
+* 安装 dotNetFx40_Full_x86_x64
+
 ### MarkdownPad
 
 ```
