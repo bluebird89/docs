@@ -54,8 +54,8 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 
 smaba
 
-    windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
-    在Mac中， 先打开Finder, command +K  打开共享目录 输入： smb://192.168.0.4/share
+* windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
+* Mac中， 先打开Finder, command +K  打开共享目录 输入： smb://192.168.0.4/share
 
 ## 软件
 
@@ -63,12 +63,12 @@ smaba
 
 ### 安装
 
--   app store：自动安装
+-   app store安装
 -   互联网下载：下载dmg，会打开安装包，需将app图标拖到application中（文件位置/Users/henry/Library/Application Support）
--   还有文件包直接拖进application：sketch atom
+-   文件包直接拖进application：sketch atom
 -   brew cask install firefox
 
-### 卸载软件
+### 卸载
 
 -   launchpad 长按
 -   finder 找到移动到垃圾桶
@@ -209,6 +209,8 @@ smaba
     - Apple TV Aerial
 * 软件订阅
     - [setapp](https://setapp.com)The first subscription service for Mac apps.
+* 说明
+    -  strace在linux下用来跟踪某个进程的系统调用，dtruss
 
 ### screensavers
 
@@ -232,7 +234,6 @@ smaba
 
 #### iTerm2
 
-[maximum-awesome](https://github.com/square/maximum-awesome)Config files for vim and tmux.
 
 iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配置完毕开箱即用的 tmux
 
@@ -713,6 +714,7 @@ brew switch icu4c 62.1
 *   [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
 *   [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
 *   [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
+*   [maximum-awesome](https://github.com/square/maximum-awesome)Config files for vim and tmux.
 *   [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
 *   [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
 *   [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
