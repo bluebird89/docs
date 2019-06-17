@@ -276,6 +276,10 @@ gpg --sign demo.txt #签名
 ## 原理
 
 * 维护的就是一个commitID树，分别保存着不同状态下的代码
+* 保存对象
+  - 每次add的文件中的每一个文件压缩成二进制文件，存入 Git。压缩后的二进制文件，称为一个 Git 对象，保存在.git/objects目录
+* 暂存区
+  - 
 * 基于时间点的快照：将提交点指向提交时的项目快照
 * 对代码的任何修改，最终都会反映到 commit 上面去。创建和保存项目的快照及与之后的快照进行对比
 * 工作区（Workspace）:开发改动的地方，任何对象都是在工作区中诞生和被修改；文件状态：modified:working directory
@@ -288,6 +292,20 @@ gpg --sign demo.txt #签名
 ![object structure](../_static/object_struct.png)
 ![tree](../_static/tree.jpg)
 <!-- ![Git原理-3](../_static/git_3.jpg) 图片待修复-->
+
+```sh
+# git add 原理
+touch test.txt
+git hash-object -w test.txt # e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+ls -R .git/objects
+# .git/objects/e6:
+# 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+git cat-file -p e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 # 什么也看不到
+
+echo 'hello world' > test.txt
+git hash-object -w test.txt # 3b18e512dba79e4c8300dd08aeb37f8e728b8dad
+git cat-file -p 3b18e512dba79e4c8300dd08aeb37f8e728b8dad #  查看原文件内容 hello world fatal: Not a valid object name 7db03de997c86a4a028e1ebd3a1ceb225be238
+```
 
 #### 工作区 working tree
 

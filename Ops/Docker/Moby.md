@@ -472,6 +472,7 @@ docker run --volumes-from dbdata2 -v $(pwd):/backup busybox tar xvf
   - 尽量将一些常用不变的指令放到前面
   - CMD和ENTRYPOINT尽量使用json数组方式
 * 案例：自定义entrypoint脚本，接收变量进行容器化应用配置
+* [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 
 ```
 # syntax=docker/dockerfile
@@ -1050,6 +1051,7 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 * [manuals](https://docs.docker.com/manuals/)
 * [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects
 * [yeasy/docker_practice](https://github.com/yeasy/docker_practice):Learn and understand Docker technologies, with real DevOps practice! https://legacy.gitbook.com/book/yeasy/docker_practice/details
+* [中文文档](https://docker-doc.readthedocs.io/zh_CN/latest/index.html)
 
 * https://confluence.atlassian.com/bamboo/getting-started-with-docker-and-bamboo-687213473.html
 * [Docker](http://blog.csdn.net/erixhao/article/details/72762851)

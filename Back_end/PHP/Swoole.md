@@ -51,14 +51,45 @@ php -m | grep swoole
 php --ri swoole
 ```
 
-## 基础
+## 原理
 
 * 多线程编程
 * 进程间通信
 * 网络协议TCP/UDP的认知
-* PHP的各项基本技能
 
 ## Server
+
+* master进程
+    - Reactor线程
+        + 负责维护客户端TCP连接、处理网络IO、处理协议、收发数据
+        + 完全是异步非阻塞的模式
+        + 全部为C代码，除Start/Shudown事件回调外，不执行任何PHP代码
+        + 将TCP客户端发来的数据缓冲、拼接、拆分成完整的一个请求数据包
+        + Reactor以多线程的方式运行
+* manager进程
+    - worker进程
+        + 接受由Reactor线程投递的请求数据包，并执行PHP回调函数处理数据
+        + 生成响应数据并发给Reactor线程，由Reactor线程发送给TCP客户端
+        + 可以是异步非阻塞模式，也可以是同步阻塞模式
+        + Worker以多进程的方式运行
+    - TaskWorker进程
+        + 接受由Worker进程通过swoole_server->task/taskwait方法投递的任务
+        + 处理任务，并将结果数据返回（使用swoole_server->finish）给Worker进程
+        + 完全是同步阻塞模式
+        + TaskWorker以多进程的方式运行
+    - 底层会为Worker进程、TaskWorker进程分配一个唯一的ID
+    - 不同的Worker和TaskWorker进程之间可以通过sendMessage接口进行通信
+* 关系
+    - Reactor就是nginx，Worker就是php-fpm
+    - Reactor线程异步并行地处理网络请求，然后再转发给Worker进程中去处理
+    - Reactor和Worker间通过UnixSocket进行通信
+    - Server就是一个工厂，那Reactor就是销售，接受客户订单
+    - Worker就是工人，当销售接到订单后，Worker去工作生产出客户要的东西
+    - TaskWorker可以理解为行政人员，可以帮助Worker干些杂事，让Worker专心工作
+
+![运行流程图](../../_static/swoole_run_cycle.jpg "Optional title")
+![进程/线程结构图](../../_static/swoole_server_model.jpg "Optional title")
+![进程/线程结构图](../../_static/process.jpg "Optional title")
 
 ```php
 # tcp/udp server,可封装rpc

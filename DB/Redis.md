@@ -1024,6 +1024,7 @@ public void delBigList(String host, int port, String password, String bigListKey
 ## 图书
 
 * 《Redis设计与实现》
+* Redis 4.X Cookbook
 
 ## 工具
 
