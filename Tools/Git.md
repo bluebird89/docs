@@ -275,13 +275,25 @@ gpg --sign demo.txt #签名
 
 ## 原理
 
-* 维护的就是一个commitID树，分别保存着不同状态下的代码
-* 保存对象
-  - 每次add的文件中的每一个文件压缩成二进制文件，存入 Git。压缩后的二进制文件，称为一个 Git 对象，保存在.git/objects目录
-* 暂存区
-  - 
 * 基于时间点的快照：将提交点指向提交时的项目快照
 * 对代码的任何修改，最终都会反映到 commit 上面去。创建和保存项目的快照及与之后的快照进行对比
+* 维护的就是一个commitID树，分别保存着不同状态下的代码
+* 保存对象
+  - `git add all`
+    + `git hash-object -w test.txt`:每次add的文件中的每一个文件压缩成二进制文件，存入 Git。压缩后的二进制文件，称为一个 Git 对象，保存在.git/objects目录
+    + `git cat-file -p hashId`: 查看 hash 文件内内容
+    + 暂存区:`git update-index`:在暂存区记录一个发生变动的文件
+    + `git ls-files --stage`:显示暂存区当前的内容
+  - `git commit`
+    + `git write-tree`:将当前的目录结构，生成一个 Git 对象,目录结构也是作为二进制对象保存的，也保存在.git/objects目录里面
+    + `echo "first commit" | git commit-tree hashId`  将目录树对象写入版本历史, 生成hashId
+      * `echo "second commit" | git commit-tree 1552fd52bc14497c11313aa91547255c95728f37 -p c9053865e9dff393fd2f7a92a18f9bd7f2caa7fa`: 更新需要关系父节点
+    + `git log --stat hashID` 查看某个快照信息,没有记录这个快照属于哪个分支
+    + 更新分支指针 `echo 785f188674ef3c6ddc5b516307884e1d551f53ca > .git/refs/heads/master`
+* 分支（branch）
+  - 指向某个快照的指针，分支名就是指针名
+  - 分支会自动更新，如果当前分支有新的快照，指针就会自动指向它
+  - 特殊指针HEAD， 总是指向当前分支的最近一次快照
 * 工作区（Workspace）:开发改动的地方，任何对象都是在工作区中诞生和被修改；文件状态：modified:working directory
 * 暂存区（Index/Stage）:.git目录下的index文件, 暂存区会索引git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；文件状态：staged:Stage(Index)
 * 版本库|本地仓库（Repository）
@@ -1176,6 +1188,7 @@ git merge FETCH_HEAD
   - [unbug/codelf](https://github.com/unbug/codelf):Best GitHub stars, repositories tagger and organizer. Search over projects from Github, Bitbucket, Google Code, Codeplex, Sourceforge, Fedora Project, GitLab to find real-world usage variable names https://unbug.github.io/codelf/
   - [pomber/git-history](https://github.com/pomber/git-history):Quickly browse the history of a file from any git repository https://githistory.xyz/
   - [Tutorial](https://lab.github.com/courses)
+  - [GitHub Helps](https://help.github.com/)
 
 ![Git 使用规范流程](../_static/bg2015080501.png)
 
@@ -1536,13 +1549,12 @@ These features allow to pause a branch development and switch to another one (_"
 * [文档](https://git-scm.com/docs)
 * [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. http://git.io/sheet
 * [Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials)
+* [git-tutorial](https://www.learnenough.com/git-tutorial)
 * [Progit2](https://github.com/progit/progit2):Pro Git 2nd Edition
 * [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
 * [GitHub规范](https://guides.github.com/)
 * [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
-* [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
 * [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
-* [Git权威指南](http://www.worldhello.net/):GotGitHub
 * [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
 * [练习沙盒](https://try.github.io)
 * [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
@@ -1550,9 +1562,8 @@ These features allow to pause a branch development and switch to another one (_"
 * [susam/gitpr](https://github.com/susam/gitpr#with-merge-commit):A quick reference guide on fork and pull request workflow
 * [git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
 * [Git Immersion](http://gitimmersion.com/):The surest path to mastering Git is to immerse oneself in its utilities and operations, to experience it first-hand
-* [git-tutorial](https://www.learnenough.com/git-tutorial)
-* [GitHub Helps](https://help.github.com/)
 * [k88hudson/git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
 * [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate!
 * [Magit](https://magit.vc/) Git 在 Emacs 上的打开方式
 * [Vim-fugitive](https://github.com/tpope/vim-fugitive) : Git 在 Vim 上的打开方式
+* [Git 原理](https://git-scm.com/book/zh/v1/Git-内部原理-Git-对象)

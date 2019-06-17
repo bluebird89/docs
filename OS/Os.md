@@ -105,6 +105,10 @@
         + 主机访问虚拟机，用是的虚拟机的网卡3的IP： 192.168.56.101 ，不管主机“本地连接”有无红叉，永远通。
         + 虚拟机访问互联网，用的是自己的网卡2， 这时主机要能通过“本地连接”有线上网，（无线网卡不行）
 
+## 手机系统
+
+* Aurora
+
 ## 参考
 
 * [cfenollosa/os-tutorial](https://github.com/cfenollosa/os-tutorial):How to create an OS from scratch
