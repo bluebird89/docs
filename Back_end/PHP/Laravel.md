@@ -2399,7 +2399,7 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
 * 权限
     * [Adldap2/Adldap2-Laravel](https://github.com/Adldap2/Adldap2-Laravel):LDAP Authentication & Management for Laravel
 * lumen
-    - [laravel/lumen-framework](https://github.com/laravel/lumen-framework)
+    - [laravel/lumen-framework](https://github.com/laravel/lumen-framework) <https://lumen.laravel.com/docs/5.6>
     - [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
 * [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
 * API

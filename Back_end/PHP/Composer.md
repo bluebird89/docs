@@ -2,7 +2,7 @@
 
 Dependency Manager for PHP https://getcomposer.org/
 
-PHP 用来管理依赖（dependency）关系的工具。可以在自己的项目中声明所依赖的外部工具库（libraries），Composer 会帮你安装这些依赖的库文件。
+PHP 用来管理依赖（dependency）关系的工具。在自项目中声明所依赖的外部工具库（libraries），Composer 会安装这些依赖的库文件。
 
 ## 原理
 
@@ -80,7 +80,7 @@ composer config repo.packagist composer https://packagist.phpcomposer.com # 项�
 * 加载自定义包
   - 建立存放第三方的目录
   - 修改composer.json中的autoload>classmap增加文件路径
-  - `composer dump-autoload`  
+  - `composer dump-autoload`
 * 加载没有制作 Composer，以 require 的方式进行加载
 
 ```

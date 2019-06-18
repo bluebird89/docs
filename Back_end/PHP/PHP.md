@@ -2,21 +2,25 @@
 
 The PHP Interpreter <http://www.php.net>
 
-* 一门弱类型的语言，变量在声明的那一刻不需要确定它的类型，而在运行时类型也会发生显式或隐式的类型改变
 * PHP(Hypertext Preprocessor)
-* PHP是一种解释型语言，即不需要编译。构建在Zend 虚拟机之上
-* PHP是一种服务器端脚本语言，结果以纯 HTML 形式返回给浏览器
-* PHP比其他脚本语言更快,如：Python和asp。
-* HTTP协议在Nginx等服务器的解析下,传送给相应的Handler（PHP等）来处理。后端渲染，默认html处理，模版文件以.php后缀
-* 服务端脚本程序，只能通过服务器访问，需要配置虚拟主机调试
-* 优点是开发方便效率高
+* 一门弱类型的语言，变量在声明的那一刻不需要确定类型，运行时类型会发生显式或隐式的类型改变
+* 一种解释型语言，即不需要编译。构建在Zend 虚拟机之上
+* 一种服务器端脚本语言，只能通过服务器访问，需要配置虚拟主机调试,结果以纯 HTML 形式返回给浏览器
+* PHP比其他脚本语言更快,如：Python和asp
+* HTTP协议在Nginx等服务器的解析下,传送给相应的Handler（PHP等）来处理
+* 后端渲染，默认html处理，模版文件以.php后缀
+* 优点:开发方便效率高
 * 缺点就是性能差
     - 在密集运算的场景下比 C 、 C++ 相差几十倍甚至上百倍。
-    - PHP 不可以直接操作底层，需要依赖扩展库来提供 API 实现
+    - 不可以直接操作底层，需要依赖扩展库来提供 API 实现
 
 ## 发展
 
-* Phar:PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar。用来将多个 PHP 文件打包为一个文件。这个特性使得 PHP 也可以像 Java 一样方便地实现应用程序打包和组件化。一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行。配合 Swoole ，可以在命令行下执行 php server.phar 一键启动服务器。PHP 的代码包可以用 Phar 打包成组件，放到 Swoole 的服务器容器中去加载执行。
+* Phar
+    - PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar
+    - 可以像 Java 一样方便地实现应用程序打包和组件化
+    - 一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行
+    - 配合 Swoole ，可以在命令行下执行 php server.phar 一键启动服务器
 * PHP
     * 7.1 :2015.12.3 性能提升
         - 减少内存分配次数
@@ -33,15 +37,14 @@ The PHP Interpreter <http://www.php.net>
     - 词法分析 Scanning（Lexing），将 PHP 代码转换为语言片段（Tokens）。
     - 解析 Parsing， 将 Tokens 转换成简单而有意义的表达式。
     - 编译 Compilation，将表达式编译成Opcode。
-    - 执行 Execution，顺序执行Opcode，每次一条，以实现PHP代码所表达的功能。
+    - 执行 Execution，虚拟机顺序执行Opcode，每次一条，以实现PHP代码所表达的功能。
     - APC、Opchche 这些扩展可以将Opcode缓存以加速PHP应用的运行速度，使用它们就可以在请求再次来临时省略前三步。
     - 引擎也实现了基本的数据结构、内存分配及管理，提供了相应的API方法供外部调用。
-* 由虚拟机来执行这些OPCODE
 * Extensions 扩展:常见的内置函数、标准库都是通过extension来实现的，这些叫做PHP的核心扩展，用户也可以根据自己的要求安装PHP的扩展。
 * SAPI(Server Application Programming Interface)中文为服务端应用编程接口，它通过一系列钩子函数使得PHP可以和外围交换数据，SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性。通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式。
-* 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用都是上层应用，PHP 程序员主要工作就是编写它们
+* 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用都是上层应用
 
-![PHP 的架构](../../_static/php_construct.jpg "Optional title")
+![PHP 架构](../../_static/php_construct.jpg "Optional title")
 
 ## 安装
 
@@ -134,8 +137,8 @@ apt-get install php
 
 ### 扩展安装
 
-* 使用apt或者yum命令安装
-* 使用pecl安装
+* 用apt或者yum命令安装
+* 用pecl安装
 
 ```sh
 php -m # 查看添加扩展
@@ -160,9 +163,7 @@ pecl install memcached
 * 开发桌面应用就是使用PHP-CLI和GTK包
 * linux下用php编写shell脚本
 * [ircmaxell/phpvm](https://github.com/ircmaxell/phpvm):A PHP version manager for CLI PHP
-
-与PHP不同的配置文件
-由webserver使用的php.ini文件，会配置比较短的max_execution_time，而在命令行中的php.ini文件，会配置比较长的max_execution_time。
+* 配置文件:在命令行中的php.ini文件，会配置比较长的max_execution_time
 
 ```sh
 php --ini # 查看php 配置信息
@@ -175,7 +176,7 @@ php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数
 # /usr/local/lib/php/pecl/20180731/swoole.so doesn't appear to be a valid Zend extension
 ```
 
-### [PECL](http://pecl.php.net/)：
+### [PECL](http://pecl.php.net/)
 
 PHP Extension Community Library，管理着最底层的PHP扩展。用 C 写的
 
@@ -234,13 +235,23 @@ Errors were encountered while processing:
     - 如果项目中每页页面使用的内存不大，建议改成小一些，这样可以承载更多的并发处理。
     - PHP 脚本中调用 memory_get_peak_usage()函数多次测试自己项目脚本
 * Zend OPcache 扩展
-    - PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码(http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码。
-    - 每次请求PHP文件都是这样，这会消耗很多资源，如果每次HTTP请求都必须不断解析、编译和执行PHP脚本，消耗的资源更多。
-    - 如果PHP源码不变，相应的字节码也不会变化，显然没有必要每次都重新生成Opcode，结合在Web应用中无处不在的缓存机制，我们可以把首次生成的Opcode缓存起来,直接从内存中读取预先编译好的字节码
+    - PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列[Zend操作码](http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行
+    - 每次请求PHP文件都是这样，这会消耗很多资源，如果每次HTTP请求都必须不断解析、编译和执行PHP脚本，消耗的资源更多
+    - 如果PHP源码不变，相应的字节码也不会变化，显然没有必要每次都重新生成Opcode，结合在Web应用中无处不在的缓存机制，可以把首次生成的Opcode缓存起来,直接从内存中读取预先编译好的字节码
     - 在配置中开启扩展
 * max_execution_time 用于设置单个 PHP 进程在终止之前最长可运行时间
-* Session 会话放在 Redis 或者 Memcached 中，这么做不仅可以减少磁盘的 IO 操作频率，还可以方便业务服务器伸缩
+* Session 会话放在 Redis 或者 Memcached 中，可以减少磁盘的 IO 操作频率，还可以方便业务服务器伸缩
 * error_reporting
+* cgi.fix_pathinfo:值由1改为0
+    - nginx通过 fastcgi_param 指令将参数传递给 FastCGI Server
+    - 访问URL：http://phpvim.net/foo.jpg/a.php/b.php/c.php
+    - 传递给 FastCGI 的 SCRIPT_FILENAME：foo.jpg/a.php/b.php/c.php
+    - cgi.fix_pathinfo = 1 时，PHP CGI 以 / 为分隔符号从后向前依次检查根目录下如下路径，直到找个某个存在的文件，如果这个文件是个非法的文件
+        + foo.jpg/a.php/b.php
+        + foo.jpg/a.php
+        + foo.jpg
+    - PHP 会把这个文件当成 cgi 脚本执行，并赋值路径给 CGI 环境变量——SCRIPT_FILENAME，也就是 `$_SERVER['SCRIPT_FILENAME']` 的值了。
+        + PHP的cgi SAPI中的参数fix_pathinfo
 
 ```
 # 查看配置
@@ -268,37 +279,35 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 
 ## 基础
 
-* PHP代码的标记：<?php …… ?>
-* PHP文件的扩展名：.php
-* PHP中每行程序代码，必须以英文下的分号(;)结束。
-* PHP程序区分大小写的，但函数名和关键字不区分大小写。如：if、break、switch
-* 访问PHP文件，必须要经过服务器，或者以域名开头来访问。如：http://www.2015.com/test.php
-* PHP文件及路径上不能包括中文或空格。
-* 单行注释：//、#
-* 多行注释：/* …… */
+* 代码标记：`<?php …… ?>`
+* 文件扩展名：`.php`
+* 每行程序代码，必须以英文下的分号(;)结束
+* 区分大小写的，但函数名和关键字不区分大小写。如：if、break、switch
+* 访问PHP文件，必须要经过服务器访问。如：<http://www.2015.com/test.php>
+* 文件名及路径上不能包括中文或空格
+* 单行注释：`//、#`
+* 多行注释：`/* …… */`
 * 变量：临时存储数据的容器，指向值的指针
     - 作用域
         + 包含了 include 和 require 引入的文件
         + 局部变量local：函数内部声明的变量，仅能在函数内部访问
         + 全局作用域global：在所有函数外部定义的变量
             + 除了函数外，全局变量可以被脚本中的任何部分访问
-            + 要在一个函数中访问一个全局变量，需要使用 global 关键字。
-            + 所有全局变量存储在一个名为 $GLOBALS[index] 的数组中。index 保存变量的名称
-            + 这个数组可以在函数内部访问，也可以直接用来更新全局变量。
+            + 要在一个函数中访问一个全局变量，需要使用 global 关键字
+            + 所有全局变量存储在一个名为 $GLOBALS[index] 的数组中。index 保存变量的名称,可以在函数内部访问，也可以直接用来更新全局变量
         + 静态变量（static variable）：仅在局部函数域中存在，但当程序执行离开此作用域时，其值并不丢失
         + parameter：通过调用代码将值传递给函数的局部变量
-    - 变量本身没有类型之说，所说的类型是指变量中存储的数据的类型。
+    - 本身没有类型，所说的类型是指变量中存储的数据的类型
     - 命名
         + 可以包含：字母、数字、下划线，可以用中文。
         + 不能以数字和特殊符号开头，但可以以字母或下划线开头。如：$_ABC、$abc
-    - 变量名称前必须要带“$”符号。“$”不是变量名称一部分，它只是对变量名称的一个引用或标识符
-    - 变量名称区分大小写。如：$name和$Name是两个变量
+    - 变量名称前必须要带“$”符号。“$”不是变量名称一部分，只是对变量名称的一个引用或标识符
     - 命名规则
         + “驼峰式”命名：$getUserName、$getUserPwd
         + “下划线”命名：$get_user_name、$set_user_pwd
     - 赋值
-        - 传值赋值:$variablename指向value存储的地址 `$foo = 'Bob'; `
-        - 引用赋值:新的变量简单的引用了原始变量,只有有名字的变量才可以引用赋值 `$bar = &$foo`;
+        - 传值:$variablename指向value存储的地址 `$foo = 'Bob'; `
+        - 引用:新的变量简单的引用了原始变量,只有有名字的变量才可以引用赋值 `$bar = &$foo`;
     - 可变变量：`$$var`是一个引用变量，用于存储$var的值
 * PHP 之外的变量
     - `$_GET $_POST $_REQUEST`
@@ -306,14 +315,17 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
     - `$_COOKIE`
 * 常量
     - 定义
-        + 常量前面没有美元符号（$）；
-        + 常量只能用 define() 函数定义，而不能通过赋值语句；
-        + 常量可以不用理会变量的作用域而在任何地方定义和访问；
-        + 常量一旦定义就不能被重新定义或者取消定义；
-        + 常量的值只能是标量, PHP 7 中还允许是个 array
-    - define()函数：define(name, value, case-insensitive = false) 区分大小写,成功时返回 TRUE， 或者在失败时返回 FALSE
-    - defined — 检查某个名称的常量是否存在
-    - const关键字在编译时定义常量。 它是一个语言构造不是一个函数。比define()快一点，因为它没有返回值。它总是区分大小写的
+        + 常量前面没有$
+        + 只能用 define() 函数定义，而不能通过赋值语句
+        + 可以不用理会变量的作用域而在任何地方定义和访问
+        + 一旦定义就不能被重新定义或者取消定义
+        + 常量的值只能是标量, PHP 7 中还允许是 array
+    - `define(name, value, case-insensitive = false)`: 区分大小写,成功时返回 TRUE， 或者在失败时返回 FALSE
+    - defined():检查某个名称的常量是否存在
+    - const关键字在编译时定义常量
+        + 是一个语言构造不是一个函数
+        + 比define()快一点，因为没有返回值
+        + 总是区分大小写的
     - 魔术常量
         + `__LINE__`  表示使用当前行号。
         + `__FILE__`    表示文件的完整路径和文件名。 如果它在include中使用，则返回包含文件的名称。
@@ -336,7 +348,7 @@ function myTest()
     $y=$x+$y;
 }
 myTest();
-echo $y; // 输出 15
+echo $y; // 15
 
 function myTest()
 {
@@ -360,16 +372,35 @@ function test()
     $a++;
 }
 
+// 函数内销毁全局变量$foo是无效的
+function destroy_foo() {
+    global $foo;
+    unset($foo);
+    echo $foo;//Notice: Undefined variable: foo
+}
+$foo = 'bar';
+destroy_foo();
+echo $foo;//bar
+
+//要在函数中 unset 一个全局变量，应使用 $GLOBALS 数组来实现
+function foo()
+{
+    unset($GLOBALS['bar']);
+}
+$bar = "something";
+foo();
+echo $bar;//Notice: Undefined variable: bar
+
 # 常量
 define("MESSAGE", "Hello YiiBai PHP");
 const MESSAGE = "Hello const by YiiBai PHP";
 
-require('./ShopProduct.php'); # 加载文件名称
+require('./ShopProduct.php'); # 加载文件
 ```
 
 ### 数据类型
 
-* 标量类型
+* 标量
     + Boolean（布尔型）
         + 布尔值 FALSE 本身
         + 整型值 0（零）
@@ -378,18 +409,18 @@ require('./ShopProduct.php'); # 加载文件名称
         + 不包括任何元素的数组
         + 从空标记生成的 SimpleXML 对象
     + String（字符串）
-        * 单引号PHP字符串中，大多数转义序列和变量不会被解释。 可以使用单引号\'反斜杠和通过\\在单引号引用PHP字符串。
+        * 单引号PHP字符串中，大多数转义序列和变量不会被解释。 可以使用单引号`\'`反斜杠和通过`\\`在单引号引用PHP字符串
         * 双引号的PHP字符串中存储多行文本，特殊字符和转义序列,对一些特殊的字符进行解析
-            * \n  换行（ASCII 字符集中的 LF 或 0x0A (10)）
-            * \r  回车（ASCII 字符集中的 CR 或 0x0D (13)）
-            * \t  水平制表符（ASCII 字符集中的 HT 或 0x09 (9)）
-            * \v  垂直制表符（ASCII 字符集中的 VT 或 0x0B (11)）（自 PHP 5.2.5 起）
-            * \e  Escape（ASCII 字符集中的 ESC 或 0x1B (27)）（自 PHP 5.4.0 起）
-            * \f  换页（ASCII 字符集中的 FF 或 0x0C (12)）（自 PHP 5.2.5 起）
-            * \\  反斜线
-            * \$  美元标记
-            * \"  双引号
-        + heredoc 结构就象是没有使用双引号的双引号字符串，这就是说在 heredoc 结构中单引号不用被转义，但是上文中列出的转义序列还可以使用
+            * `\n`  换行（ASCII 字符集中的 LF 或 0x0A (10)）
+            * `\r`  回车（ASCII 字符集中的 CR 或 0x0D (13)）
+            * `\t`  水平制表符（ASCII 字符集中的 HT 或 0x09 (9)）
+            * `\v`  垂直制表符（ASCII 字符集中的 VT 或 0x0B (11)）（自 PHP 5.2.5 起）
+            * `\e`  Escape（ASCII 字符集中的 ESC 或 0x1B (27)）（自 PHP 5.4.0 起）
+            * `\f`  换页（ASCII 字符集中的 FF 或 0x0C (12)）（自 PHP 5.2.5 起）
+            * `\`  反斜线
+            * `\$`  美元标记
+            * `\"`  双引号
+        + heredoc 结构就象是没有使用双引号的双引号字符串，在 heredoc 结构中单引号不用被转义，但是上文中列出的转义序列还可以使用
         + Nowdoc 结构是类似于单引号字符串的。Nowdoc 结构很象 heredoc 结构，但是 nowdoc 中不进行解析操作。这种结构很适合用于嵌入 PHP 代码或其它大段文本而无需对其中的特殊字符进行转义
         * addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
         * urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
@@ -397,8 +428,8 @@ require('./ShopProduct.php'); # 加载文件名称
     + Float（浮点型）
         * NaN:代表着任何不同值，不应拿 NAN 去和其它值进行比较，包括其自身，应该用 is_nan() 来检查
 - NULL（空值）
-    + 被赋值为 NULL
     + 尚未被赋值
+    + 被赋值为 NULL
     + 被 unset()
         * 删除引用，触发相应变量容器refcount减一
         * 在函数中的行为会依赖于想要销毁的变量的类型而有所不同，比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值
@@ -413,19 +444,18 @@ $a = 0b11111111; // 二进制数字 (等于十进制 255)
 
 $str='Hello text within single quote';
 $str2="Using double \"quote\" with backslash inside double quoted string";
-echo 'You can also have embedded newlines in 
+echo 'You can also have embedded newlines in
 strings this way as it is
 okay to do';
 
  $bar = <<<EOT
 bar
     EOT;
-define('fruit', 'veggie');
 
-$str=strtolower("My name is Yiibai"); # strtoupper
-$str=ucwords("My name is Yiibai"); # strtoupper
-$str=ucfirst("My name is Yiibai"); # lcfirst
-$str=strrev("My name is Yiibai"); # lcfirst
+$str=strtolower("My name is Yiibai");
+$str=ucwords("My name is Yiibai");
+$str=ucfirst("My name is Yiibai");
+$str=strrev("My name is Yiibai");
 
 $len=strlen("My name is Yiibai");
 
@@ -442,18 +472,19 @@ htmlentities(string)
 addslashes(str)
 html_entity_decode(string)
 
-print # 一个语法结构(language constructs), 他并不是一个函数, 参数的list并不要求有括号
+print # 一个语法结构(language constructs), 并不是一个函数, 参数的list并不要求有括号
 ```
 
-#### 复合类型
+#### 复合
 
-* Array（数组）:一个有序映射。映射是一种把 values 关联到 keys 的类型。因此可以把它当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性
-    + key 会有如下的强制转换：
-        + 包含有合法整型值的字符串会被转换为整型。例如键名 "8" 实际会被储存为 8。但是 "08" 则不会强制转换，因为其不是一个合法的十进制数值。
-        + 浮点数也会被转换为整型，意味着其小数部分会被舍去。例如键名 8.7 实际会被储存为 8。
-        + 布尔值也会被转换成整型。即键名 true 实际会被储存为 1 而键名 false 会被储存为 0。
-        + Null 会被转换为空字符串，即键名 null 实际会被储存为 ""。
-        + 数组和对象不能被用为键名。坚持这么做会导致警告：Illegal offset type。
+* Array（数组）:一个有序映射
+    - 映射是一种把 values 关联到 keys 的类型。因此可以把它当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性
+    + key 会有如下的强制转换
+        + 合法整型值的字符串会被转换为整型。例如键名 "8" 实际会被储存为 8。但是 "08" 则不会强制转换，因为其不是一个合法的十进制数值
+        + 浮点数也会被转换为整型，意味着其小数部分会被舍去。例如键名 8.7 实际会被储存为 8
+        + 布尔值也会被转换成整型。即键名 true 实际会被储存为 1 而键名 false 会被储存为 0
+        + Null 会被转换为空字符串，即键名 null 实际会被储存为 ""
+        + 数组和对象不能被用为键名。坚持这么做会导致警告：Illegal offset type
     - 类型
         * 索引数组
         * 关联数组
@@ -469,7 +500,7 @@ print # 一个语法结构(language constructs), 他并不是一个函数, 参�
 * Object（对象）
 * callback:接受用户自定义的回调函数作为参数。回调函数不止可以是简单函数，还可以是对象的方法，包括静态类方法。
 * 资源
-* 转换
+* 类型转换
     - 乘法运算符"*"。如果任何一个操作数是float，则所有的操作数都被当成float，结果也是float。否则操作数会被解释为integer，结果也是integer。并没有改变这些操作数本身的类型；改变的仅是这些操作数如何被求值以及表达式本身的类型
 * 类型判断
     - gettype()
@@ -480,7 +511,7 @@ print # 一个语法结构(language constructs), 他并不是一个函数, 参�
     - is_numeric()
 
 ```php
-# array
+# 声明
 $season=array("summer","winter","spring","autumn");
 $season[0]="summer";
 $season[1]="winter";
@@ -497,8 +528,7 @@ foreach($salary as $k => $v) {
     echo "Key: ".$k." Value: ".$v."<br/>";
 }
 
-$emp = array
-  (
+$emp = array (
   array(1,"sonoo",400000),
   array(2,"john",450000),
   array(3,"rahul",300000)
@@ -516,19 +546,19 @@ print_r(array_chunk($salary,2, $preserve_keys = false));
 
 $season=array("summer","winter","spring","autumn");
 
-sort($season);
+sort($season);# 自身操作
 foreach( $season as $s )
 {
-    echo "$s<br />";
+    echo "$s <br/>";
 }
 
-$reverseseason=array_reverse($season);
+$reverseseason=array_reverse($season); # 赋值新变量
 foreach( $reverseseason as $s )
 {
   echo "$s<br />";
 }
 
-$key=array_search("spring",$season);
+$key=array_search("spring", $season);
 echo $key;
 
 $name1=array("maxsu","john","vivek","minsu");
@@ -538,25 +568,6 @@ foreach( $name3 as $n )
 {
   echo "$n<br />";
 }
-
-//示例一：函数内销毁全局变量$foo是无效的
-function destroy_foo() {
-    global $foo;
-    unset($foo);
-    echo $foo;//Notice: Undefined variable: foo
-}
-$foo = 'bar';
-destroy_foo();
-echo $foo;//bar
-
-//示例二：要在函数中 unset 一个全局变量，应使用 $GLOBALS 数组来实现
-function foo()
-{
-    unset($GLOBALS['bar']);
-}
-$bar = "something";
-foo();
-echo $bar;//Notice: Undefined variable: bar
 
 $arr = array(
     array(
@@ -580,9 +591,9 @@ array_multisort(array_column($arr, 'norder'), SORT_ASC, $arr);
 
 array_map(function($element){return strtotime($element['add_time']);}, $datas);
 
-## 数组合并：
-# 索引数组 +会保留第一个值，后面同样值舍弃，merge不会覆盖掉原来的值
-# 关联数组：+会保留第一个值，merge会保留保留后者
+## 数组合并
+# 索引数组 + 会保留第一个值，后面同样key舍弃，merge不会覆盖掉原来的值
+# 关联数组：+ 会保留第一个值，merge会保留保留后者
 $arr1 = ['PHP', 'apache'];
 $arr2 = ['PHP', 'MySQl', 'HTML', 'CSS'];
 $mergeArr = array_merge($arr1, $arr2);
@@ -645,7 +656,7 @@ function array2gbk($array)
     return $array;
 }
 
-function array2gbk($array)
+function array2gbk1($array)
 {
     $array = array_map(function($value){
         return iconv('utf-8', 'gbk', $value);
@@ -684,20 +695,24 @@ array_walk($user, function($value, $key) use (&$username){
     - foreach循环循环用于遍历数组元素、对象属性
     - while
     - do...while
-* break:中断了当前for，while，do-while，switch和for-each循环的执行。 如果在内循环中使用break，它只中断了内循环的执行。接受一个可选的数字参数来决定跳出几重循环
-* continue：跳过本次循环中剩余的代码并在条件求值为真时开始执行下一次循环。接受一个可选的数字参数来决定跳过几重循环到循环结尾
+* break:中断了当前for，while，do-while，switch和for-each循环的执行
+    - 如果在内循环中使用break，它只中断了内循环的执行
+    - 接受一个可选的数字参数来决定跳出几重循环
+* continue：跳过本次循环中剩余的代码并在条件求值为真时开始执行下一次循环
+    - 接受一个可选的数字参数来决定跳过几重循环到循环结尾
 * return
 * include
-    - 被包含文件先按参数给出的路径寻找，
-    - 如果没有给出目录（只有文件名）时则按照 include_path 指定的目录寻找。
-    - 如果在 include_path 下没找到该文件则 include 最后才在调用脚本文件所在的目录和当前工作目录下寻找。
-    - 如果最后仍未找到文件则 include 结构会发出一条警告；
+    - 被包含文件先按参数给出的路径寻找
+    - 如果没有给出目录（只有文件名）时则按照 include_path 指定的目录寻找
+    - 如果在 include_path 下没找到该文件则 include 最后才在调用脚本文件所在的目录和当前工作目录下寻找
+    - 如果最后仍未找到文件则 include 结构会发出一条警告
     - include_once 语句在脚本执行期间包含并运行指定文件。此行为和 include 语句类似，唯一区别是如果该文件中已经被包含过，则不会再次包含。如同此语句名字暗示的那样，只会包含一次。
 * require 在出错时产生 E_COMPILE_ERROR 级别的错误
-    - require_once 语句和 require 语句完全相同，唯一区别是 PHP 会检查该文件是否已经被包含过，如果是则不会再次包含。
-* goto:跳转到程序中的另一位置。该目标位置可以用目标名称加上冒号来标记，而跳转指令是 goto 之后接上目标位置的标记
+    - require_once 语句和 require 语句完全相同，唯一区别是 PHP 会检查该文件是否已经被包含过，如果是则不会再次包含
+* goto:跳转到程序中的另一位置
+    - 该目标位置可以用目标名称加上冒号来标记，而跳转指令是 goto 之后接上目标位置的标记
 * 替代语法
-* 嵌套的使用
+* 嵌套使用
 
 ```php
 #!/usr/bin/env php
@@ -758,7 +773,7 @@ do{
 <?php
 goto a;
 echo 'Foo';
- 
+
 a:
 echo 'Bar';
 ?>
@@ -933,7 +948,7 @@ var_dump(random_int(100, 999));//int(248)
 
 ### 函数
 
-一段可以重复使用多次的代码。 它可以接受输入作为参数列表和返回值
+一段可以重复使用多次的代码
 
 * 参数
     - 值传递:传递给函数的值默认情况下不会修改实际值(通过值调用),传递给函数的值是通过值调用。作用域函数范围内
@@ -1089,17 +1104,6 @@ setcookie("CookieName", "CookieValue", time()+1*60*60, "/mypath/", "yiibai.com",
 
 $value=$_COOKIE["CookieName"];//returns cookie value
 
-<?php
-setcookie("user", "Maxsu");
-?>
-<?php
-if(!isset($_COOKIE["user"])) {
-    echo "Sorry, cookie is not found!";
-} else {
-    echo "<br/>Cookie Value: " . $_COOKIE["user"];
-}
-?>
-
 # session1.php
 <?php
 session_start();
@@ -1114,6 +1118,7 @@ echo "Session information are set successfully.<br/>";
 <a href="session2.php">Visit next page</a>
 </body>
 </html>
+
 # session2.php
 <?php
 session_start();
@@ -1141,10 +1146,13 @@ echo ("Page Views: ".$_SESSION['counter']);
 
 * 创建文件
 * 访问文件有三种方式
-    - 相对文件 foo.txt => currentdirectory/foo.txt
-    - 相对路径 subdirectory/foo.txt=> currentdirectory/subdirectory/foo.txt
-    - 绝对路径 /main/foo.txt=> /main/foo.txt
-* 打开文件：resource fopen ( string $filename , string $mode [, bool $use_include_path = false [, resource $context ]] )函数用于打开文件或URL并返回资源。 fopen()函数接受两个参数$ filename和$mode。 $filename表示要被打开的文件，$mode表示文件模式
+    - 相对文件 `foo.txt => currentdirectory/foo.txt`
+    - 相对路径 `subdirectory/foo.txt=> currentdirectory/subdirectory/foo.txt`
+    - 绝对路径 `/main/foo.txt=> /main/foo.txt`
+* 打开文件：`resource fopen ( string $filename , string $mode [, bool $use_include_path = false [, resource $context ]] )`函数用于打开文件或URL并返回资源
+    - 接受两个参数
+        + $filename表示要被打开的文件
+        + $mode表示文件模式
     - r 以只读模式打开文件。 它将文件指针放在文件的开头。
     - r+  以读写模式打开文件。 它将文件指针放在文件的开头。
     - w   以只写模式打开文件。 它将文件指针放在文件的开头，并将文件截断为零长度。 如果找不到文件，则会自动创建一个新文件。
@@ -1155,7 +1163,7 @@ echo ("Page Views: ".$_SESSION['counter']);
     - x+  它与x相同，但它以读写模式创建和打开文件。
     - c   以只写模式打开文件。 如果文件不存在，则会创建它。 如果存在，它不会被截断(与’w‘相反)，也不会调用此函数失败(如’x‘的情况)。 文件指针位于文件的开头
     - c+  它与c相同，但它以读写模式打开文件。
-* 读取文件：string fread (resource $handle , int $length )函数用于读取文件的数据
+* 读取文件：`string fread (resource $handle , int $length )`函数用于读取文件的数据
     - 参数：文件资源($handle 由fopen()函数创建的文件指针)和文件大小($length 要读取的字节长度)
     - 逐行读取文件：string fgets ( resource $handle [, int $length ] )函数用于从文件中读取单行数据内容
     - 逐个字符读取文件：string fgetc ( resource $handle )函数用于从文件中读取单个字符
@@ -1166,12 +1174,12 @@ echo ("Page Views: ".$_SESSION['counter']);
 * 删除文件：bool unlink ( string $filename [, resource $context ] )
 * 关闭文件
 * 上传文件：`bool move_uploaded_file ( string $filename , string $destination )`
-    - $_FILES['filename']['name']   返回文件名称
-    - $_FILES['filename']['type'] 返回文件的MIME类型
-    - $_FILES['filename']['size'] 返回文件的大小(以字节为单位)
-    - $_FILES['filename']['tmp_name'] 返回存储在服务器上的文件的临时文件名。
-    - $_FILES['filename']['error']    返回与此文件相关联的错误代码。
-* 下载文件：int readfile ( string $filename [, bool $use_include_path = false [, resource $context ]] )
+    - `$_FILES['filename']['name']`   返回文件名称
+    - `$_FILES['filename']['type']` 返回文件的MIME类型
+    - `$_FILES['filename']['size']` 返回文件的大小(以字节为单位)
+    - `$_FILES['filename']['tmp_name']` 返回存储在服务器上的文件的临时文件名。
+    - `$_FILES['filename']['error']`    返回与此文件相关联的错误代码。
+* 下载文件：`int readfile ( string $filename [, bool $use_include_path = false [, resource $context ]] )`
     - $filename：表示文件名
     - $use_include_path：它是可选参数。它默认为false。可以将其设置为true以搜索included_path中的文件
     - $context：表示上下文流资源
@@ -1245,9 +1253,9 @@ readfile($file_url);
 
 ### redirect
 
-* header ( string $header [, bool $replace = TRUE [, int $http_response_code ]] ) : void
-* using ob_start() and ob_end_flush()
-* javascript
+* `header ( string $header [, bool $replace = TRUE [, int $http_response_code ]] ) : void`
+* `using ob_start() and ob_end_flush()`
+* 通过 javascript
 
 ```php
 header(“Location: http://example.com”[,TRUE,301]);
@@ -1442,8 +1450,8 @@ B::test(); # A
 * protected:类成员在其自身、子类和父类内可见
 * private:类成员只对自己可见。
 * 对于private和protected有个特例:同一个类的对象即使不是同一个实例也可以互相访问对方的私有与受保护成员
-* 范围解析符(::)：通常以self::、 parent::、 static:: 和 <classname>::形式来访问静态成员、类常量
-* static::、self:: 和 parent:: 还可用来调用类中的非静态方法。类中实例或自己
+* 范围解析符(::)：通常以self::、 parent::、 static:: 和 `<classname>::`形式来访问静态成员、类常量
+* static::、self:: 和 parent:: 可用来调用类中的非静态方法。类中实例或自己
 * self
 * parent
 * static:调用类里面的静态属性与静态方法
@@ -1634,8 +1642,8 @@ $controller->register();
 #### trait
 
 * 减少单继承语言的限制，自由地在不同层次结构内独立的类中复用 method
-* 优先级:当前类的成员>trait 的方法>被继承的方法
-* Trait 和 Class 相似，但仅仅旨在用细粒度和一致的方式来组合功能。它为传统继承增加了水平特性的组合；也就是说，应用的几个 Class 之间不需要继承。
+* 优先级:当前类的成员 > trait 的方法 > 被继承的方法
+* Trait 和 Class 相似，但仅旨在用细粒度和一致的方式来组合功能。它为传统继承增加了水平特性的组合；应用的几个 Class 之间不需要继承
 * 无法通过 trait 自身来实例化
 
 ```php
@@ -1671,8 +1679,8 @@ $o->SayWorld();
 ### 匿名类
 
 * 匿名类被嵌套进普通 Class 后，不能访问这个外部类（Outer class）的 private（私有）、protected（受保护）方法或者属性
-* 为了访问外部类（Outer class）protected 属性或方法，匿名类可以 extend（扩展）此外部类。
-* 为了使用外部类（Outer class）的 private 属性，必须通过构造器传进来：
+* 为了访问外部类（Outer class）protected 属性或方法，匿名类可以 extend（扩展）此外部类
+* 为了使用外部类（Outer class）的 private 属性，必须通过构造器传进来
 
 ```php
 $util->setLogger(new class {
@@ -2176,7 +2184,7 @@ $cat = new \Animal\Cat();
 
 ## JSON
 
-* json_encode( mixed $value [, int $options = 0 [, int $depth = 512 ]] )函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据
+* `json_encode( mixed $value [, int $options = 0 [, int $depth = 512 ]] )` 函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据
     - 1:JSON_HEX_TAG:所有的 < 和 > 转换成 \u003C 和 \u003E
     - 2:JSON_HEX_AMP:所有的 & 转换成 \u0026
     - 4:JSON_HEX_APOS:所有的 ' 转换成 \u0027
@@ -2194,7 +2202,7 @@ $cat = new \Animal\Cat();
         + 不能在最后元素有逗号
         + 不能使用单引号
         + 不能有\r,\t，如果有请替换
-* int json_last_error ( void ) — 返回json_encode() or json_decode() call的错误
+* `int json_last_error ( void )`:返回json_encode() or json_decode() call的错误
     - JSON_ERROR_NONE   没有错误发生   
     - JSON_ERROR_DEPTH    到达了最大堆栈深度    
     - JSON_ERROR_STATE_MISMATCH   无效或异常的 JSON  
@@ -2275,6 +2283,7 @@ brew install php71-mcrypt
 
 - mkdir -p ~/php-fpm/logs ~/php-fpm/conf
 - 构建Dockerfile
+* [docker-library/php](https://github.com/docker-library/php):Docker Official Image packaging for PHP https://php.net
 
 ```
 FROM debian:jessie
@@ -2366,10 +2375,6 @@ EXPOSE 9000 CMD ["php-fpm"]
 - docker build -t php:5.6-fpm .
 - docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/local/etc/php -v $PWD/logs:/phplogs -d php:5.6-fpm
 
-### 协程
-
-PHP 最大的优势在于快速开发，劣势在于效率和工程规范。协程、异步这些技术相对学习成本高，优势在于性能提升明显.
-
 ## 性能
 
 ```sh
@@ -2437,35 +2442,16 @@ phpcs --config-set
 
 ## 大数据
 
-* 如果你正在做成千上万条查询，看看你能不能先只做几条查询。我之前曾使用一个PHP函数把70000条查询降为十几条查询，这样它的运行时间就从几分钟降到了几分之一秒。
-* 在你的查询上运行EXPLAIN，看看你是不是缺少什么索引。我曾经做过一个查询，通过增加了一个索引后效率提高了4个数量级，这没有任何夸张的成分。如果你正在使用MySQL，你可以学学这个，这种“黑魔法”技能会让你和你的小伙伴惊呆的。
-* 如果你正在做SQL查询，然后获得结果，并把很多数字弄到一起，看看你能不能使用像SUM（）和AVG（）之类的函数调用GROUP BY语句。跟普遍的情况下，让数据库处理尽量多的计算。我能给你的一点很重要的提示是：（至少在MySQL里是这样）布尔表达式的值为0或1，如果你很有创意的话，你可以使用SUM（）和它的小伙伴们做些很让人惊讶的事情。
-* 看看你是不是把这些同样很耗费时间的数字计算了很多遍。例如，假设1000袋土豆的成本是昂贵的计算，但你并不需要把这个成本计算500次，然后才把1000袋土豆的成本存储在一个数组或其他类似的地方，所以你不必把同样的东西翻来覆去的计算。这个技术叫做记忆术，在像你这样的报告中使用往往会带来奇迹般的效果。
+* 查询上运行EXPLAIN，看看是不是缺少什么索引。曾经做过一个查询，通过增加了一个索引后效率提高了4个数量级
+* 如果正在做SQL查询，然后获得结果，并把很多数字弄到一起，看看你能不能使用像SUM（）和AVG（）之类的函数调用GROUP BY语句
+    - 跟普遍的情况下，让数据库处理尽量多的计算。一点很重要的提示是：（至少在MySQL里是这样）布尔表达式的值为0或1，如果有创意的话，可以使用SUM（）和它的小伙伴们做些很让人惊讶的事情。
+* 是不是把这些同样很耗费时间的数字计算了很多遍。例如，假设1000袋土豆的成本是昂贵的计算，但并不需要把这个成本计算500次，然后才把1000袋土豆的成本存储在一个数组或其他类似的地方，所以你不必把同样的东西翻来覆去的计算。这个技术叫做记忆术，在像你这样的报告中使用往往会带来奇迹般的效果
 
 ## 安全
-
-### cgi.fix_pathinfo
-
-值由1改为0
-
-nginx通过 fastcgi_param 指令将参数传递给 FastCGI Server
-
-* 访问URL：http://phpvim.net/foo.jpg/a.php/b.php/c.php
-* 传递给 FastCGI 的 SCRIPT_FILENAME：foo.jpg/a.php/b.php/c.php
-* cgi.fix_pathinfo = 1 时，PHP CGI 以 / 为分隔符号从后向前依次检查根目录下如下路径，直到找个某个存在的文件，如果这个文件是个非法的文件
-    - foo.jpg/a.php/b.php
-    - foo.jpg/a.php
-    - foo.jpg
-* PHP 会把这个文件当成 cgi 脚本执行，并赋值路径给 CGI 环境变量——SCRIPT_FILENAME，也就是 `$_SERVER['SCRIPT_FILENAME']` 的值了。
-    - PHP的cgi SAPI中的参数fix_pathinfo
 
 ## 问题
 
 >  5096 segmentation fault (core dumped)  php http_server.php
-
-## 工具
-
-* [docker-library/php](https://github.com/docker-library/php):Docker Official Image packaging for PHP https://php.net
 
 ## 参考
 
