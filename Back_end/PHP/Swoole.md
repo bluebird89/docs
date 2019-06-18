@@ -7,10 +7,10 @@ Event-driven asynchronous & concurrent & coroutine networking engine with high p
 * 协程异步，提高对 I/O 密集型场景并发处理能力
 * 方便地开发Http、WebSocket、TCP、UDP 等应用，可以与硬件通信
 * 优点
-    - Node.js 的异步回调 Swoole 有
-    - Go语言的协程 Swoole 也有
-    - 这完全颠覆了对 PHP 的认知
-    - 使用 Swoole PHP 可以实现常驻内存的 Server 程序，可以实现 TCP 、 UDP 异步网络通信的编程开发
+    - Node.js 的异步回调
+    - Go语言的协程
+    - 可以实现常驻内存的 Server 程序
+    - 可以实现 TCP 、 UDP 异步网络通信的编程开发
 * 场景：WebSocket 即使通信、聊天、推送服务器、RPC 远程调用服务、网关、代理、游戏服务器等
 * 异步redis
 
@@ -40,8 +40,6 @@ brew install hiredis # fatal error: 'hiredis/hiredis.h'
 brew install swoole
 pecl install swoole
 
-pecl install swoole
-
 # add swoole.ini
 sudo ln -s  /etc/php/7.2/mods-available/swoole.ini 20-swoole.ini
 
@@ -68,26 +66,26 @@ php --ri swoole
 * TCP协议:流式的，数据包没有边界.在接收1个大数据包时，可能会被拆分成多个数据包发送。多次Send底层也可能会合并成一次进行发送。这里就需要2个操作来解决：
     - 分包：Server收到了多个数据包，需要拆分数据包
     - 合包：Server收到的数据只是包的一部分，需要缓存数据，合并成完整的包
-    - HTTP、HTTPS、FTP、SMTP、POP3、IMAP、SSH、Redis、Memcache、MySQL
+    - 基于TCP的协议：HTTP、HTTPS、FTP、SMTP、POP3、IMAP、SSH、Redis、Memcache、MySQL
     - 自定义网络通信协议
         + EOF协议:每个数据包结尾加一串特殊字符表示包已结束。如memcache、ftp、stmp都使用\r\n作为结束符。发送数据时只需要在包末尾增加\r\n即可。使用EOF协议处理，一定要确保数据包中间不会出现EOF，否则会造成分包错误。
         + 固定包头+包体协议:一个数据包总是由包头+包体2部分组成。包头由一个字段指定了包体或整个包的长度，长度一般是使用2字节/4字节整数来表示。服务器收到包头后，可以根据长度值来精确控制需要再接收多少数据就是完整的数据包。
             * Swoole的Server和异步Client都是在onReceive回调函数中处理数据包，当设置了协议处理后，只有收到一个完整数据包时才会触发onReceive事件
             * 同步客户端在设置了协议处理后，调用 $client->recv() 不再需要传入长度，recv函数在收到完整数据包或发生错误后返回。
-* master进程：是一个多线程的程序
+* master进程：是一个包含多线程的进程
     - 主线程在Accept新的连接后，会将这个连接分配给一个固定的Reactor线程，并由这个线程负责监听此socket
     - Reactor线程：一组
+        + 以多线程的方式运行
         + 负责维护客户端TCP连接、处理网络IO、处理协议、收发数据
         + 完全是异步非阻塞的模式
             * socket可读时读取数据，并进行协议解析，将请求投递到Worker进程
             * socket可写时将数据发送给TCP客户端
         + 全部为C代码，除Start/Shudown事件回调外，不执行任何PHP代码
         + 将TCP客户端发来的数据缓冲、拼接、拆分成完整的一个请求数据包
-        + Reactor以多线程的方式运行
     - 方法
         + onStart
         + onShutdown
-* manager进程：Fork并管理worker/task
+* manager进程：Fork worker/task
     - 方法
         + onManagerStart
         + onManagerStop
@@ -97,7 +95,7 @@ php --ri swoole
         + 服务器reload时，manager进程会逐个关闭/重启子进程
         + Master进程是多线程的，不能安全的执行fork操作
     - worker进程
-        + 以多进程的方式运行
+        + 以多进程方式运行
             * 当Worker进程异常退出，如发生PHP的致命错误、被其他程序误杀，或达到max_request次数之后正常退出。主进程会重新拉起新的Worker进程
         + 接受由Reactor线程投递的请求数据包，并执行PHP回调函数处理数据
         + 响应
@@ -112,7 +110,7 @@ php --ri swoole
             * onReceive
             * onFinish
     - TaskWorker进程
-        + TaskWorker以多进程的方式运行
+        + 以多进程方式运行
         + 支持定时器
         + 做一些异步的慢速任务，比如webim中发广播，发送邮件
         + 接受由Worker进程通过swoole_server->task/taskwait方法投递的任务
@@ -189,14 +187,15 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
 ## 协程 Coroutine
 
 * 协程是子程序的一种， 可以通过yield的方式转移程序控制权，协程之间不是调用者与被调用者的关系，而是彼此对称、平等的。
-* 完全有用户态程序控制，所以也被成为用户态的线程。协程由用户以非抢占的方式调度，而不是操作系统。正因为如此，没有系统调度上下文切换的开销，协程有了轻量，高效，快速等特点。
+* 完全有用户态程序控制，也被成为用户态的线程
+* 由用户以非抢占的方式调度，而不是操作系统。正因为如此，没有系统调度上下文切换的开销，协程有了轻量，高效，快速等特点。
 * 实现
     - 基于PHP生成器Generators\Yield的方式实现
         + 所有主动让出的逻辑都需要yield关键字。这会给程序员带来极大的概率犯错，导致大家对协程的理解转移到了对Generators语法的原理的理解。
         + 由于语法无法兼容老的项目，改造老的项目工程复杂度巨大，成本太高。
     - PHP执行需要的所有状态都保存在一个个通过链表结构关联的VM栈里，每个栈默认会初始化为256K，Swoole可以单独定制这个栈的大小(协程默认为8k),当栈容量不足的时候，会自动扩容，仍然以链表的关系关联每个栈。在每次函数调用的时候，都会在VM Stack空间上申请一块新的栈帧来容纳当前作用域执行所需。
     - 改变原本php的运行方式，不是在函数运行结束切换栈帧，而是在函数执行当前op_array中间任意时候（swoole内部控制为遇到IO等待），可以灵活切换到其他栈帧。
-* 使用go函数可以让一个函数并发地去执行。在编程过程中，如果某一段逻辑可以并发执行，就可以将它放置到go协程中执行
+* 使用go函数可以让一个函数并发地去执行
 * 使用
     - 使用 go()(\Swoole\Coroutine::create() 的简写) 创建一个协程
     - 在 go() 的回调函数中, 加入协程需要执行的代码(非阻塞代码)
@@ -209,9 +208,9 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
     - 官方和社区已经贡献了很多协程版 API 可供使用
     - 可以使用 swoole 提供的协程版 client 进行封装, 可以参考 官方 amqp client 封装, 将 socket() 函数实现的 tcp client, 使用 swoole 协程版 tcp client 实现即可
 *  swoole 的协程 vs go 的协程
-    - 所需要的基础知识: 网络编程 + 协程, 不会因为你是用 swoole 还是 go 而有所减少, 基础不大好, 表现出来了就是学着学着就容易卡住, 效率上不来
-    - 以为你写的是 swoole, 不不不, 写的是一个又一个功能的 API, go 也同样(要用到 redis/mysql/mq, 相应的 API 你还是得学得会), 区别在于, swoole 趋势是在底层实现支持(比如 协程runtime), 这样 PHPer 可以无缝切换过来, 而 Gopher 则需要学习一个又一个基于 go 协程封装好的 API. 当初在 PHP 中学习的这些 API, 到 go 里面, 一样需要再熟悉一遍
-    - 最后来谈谈性能, 请允许我用一个傲娇一点的说, 用 swoole 达不到的性能, 换个语言, 呵呵呵. 难易程度排行: 加机器 < 加程序员 < 加语言.
+    - 基础知识: 网络编程 + 协程, 不会因为你是用 swoole 还是 go 而有所减少, 基础不大好, 表现出来了就是学着学着就容易卡住, 效率上不来
+    - 以为写的是 swoole, 不不不, 写的是一个又一个功能的 API, go 也同样(要用到 redis/mysql/mq, 相应的 API 你还是得学得会), 区别在于, swoole 趋势是在底层实现支持(比如 协程runtime), 这样 PHPer 可以无缝切换过来, 而 Gopher 则需要学习一个又一个基于 go 协程封装好的 API. 当初在 PHP 中学习的这些 API, 到 go 里面, 一样需要再熟悉一遍
+    - 性能： 用 swoole 达不到的性能, 换个语言, 呵呵呵. 难易程度排行: 加机器 < 加程序员 < 加语言.
 
 ```php
 // 没有开启协程runtime,需要协程版 API
@@ -304,10 +303,10 @@ fi
     - 执行mysql_connect后，重新执行mysql_query，这时必然会成功，因为已经重新建立了连接
     - 如果mysql_query返回成功，那么连接是有效的，这是一次正常的调用
 * 异步
+    - MySQL是根据连接数分配资源的，一个MySQL连接同时只能执行1个SQL线程，如果异步MySQL存在并发那么必须创建多个MySQL连接。1000连接那么需要维持1000线程才可以。线程数量增加后，线程间切换会占用大量CPU资源。
+    - MySQL短连接反而不会出现此问题，因为短连接在使用完后就释放了。不会占用MySQL-Server的连接资源
     - 异步MySQL并没有节省SQL执行的时间
-    - 一个MySQL连接同时只能执行1个SQL，如果异步MySQL存在并发那么必须创建多个MySQL连接
     - 异步回调程序中，异步MySQL并没有提升性能。异步最大的好处是可以高并发，如果并发1万个请求，那么就需要建立1万个MySQL连接，这会给MySQL-Server带来巨大的压力。
-    - MySQL是根据连接数分配资源的，一个连接需要开启一个线程。1000连接那么需要维持1000线程才可以。线程数量增加后，线程间切换会占用大量CPU资源。
     - MySQL短连接反而不会出现此问题，因为短连接在使用完后就释放了。不会占用MySQL-Server的连接资源
     - 异步MySQL还带来了额外的编程复杂度，所以除非是特殊场景的需求，否则不建议使用异步MySQL。
     - 坚持要使用异步，那么必须是异步MySQL+连接池的形式。超过规定的MySQL最大连接后，应当对SQL请求进行排队，而不是创建新连接，避免大量并发请求导致MySQL服务器崩溃。
@@ -468,7 +467,7 @@ ps aux | grep swoole_process_server_master | awk '{print $2}'| xargs kill - USR1
 * [EasySwoole](https://www.easyswoole.com/Manual/3.x/Cn/_book/)
 * [Swoft](https://doc.swoft.org/)
 * [One](https://www.kancloud.cn/vic-one/php-one/826876)
-* [MixPHP](link)
+* [mixstart/mixphp](https://github.com/mixstart/mixphp):轻量 PHP 框架，基于 Swoole 的常驻内存型 PHP 高性能框架 (开发文档完善) http://mixphp.cn
 * [matyhtf/framework](https://github.com/matyhtf/framework)PHP advanced Web development framework. The built-in application server based on the development of swoole extension
 * [shenzhe/zphp](https://github.com/shenzhe/zphp)ZPHP是一个极轻的的，定位于后置SOA服务的框架，可开发独立高效的长驻服务，并能适应多端的变化。
 * [xcl3721/Dora-RPC](https://github.com/xcl3721/Dora-RPC):DoraRPC is an RPC For the PHP MicroService by The Swoole
