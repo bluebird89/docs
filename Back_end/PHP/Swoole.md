@@ -464,7 +464,7 @@ ps aux | grep swoole_process_server_master | awk '{print $2}'| xargs kill - USR1
 * [Tencent/tsf](https://github.com/Tencent/tsf):coroutine and Swoole based php server framework in tencent
 * [bixuehujin/blink](https://github.com/bixuehujin/blink):A high performance web framework and application server in PHP. https://docs.rethinkphp.com/blink-framework/v0.4/zh-CN/
 * [SwooleDistributed/SwooleDistributed](https://github.com/SwooleDistributed/SwooleDistributed):swoole 分布式全栈框架
-* [EasySwoole](https://www.easyswoole.com/Manual/3.x/Cn/_book/)
+* [EasySwoole](https://github.com/easy-swoole/easyswoole):High performance Coroutine PHP Framework, base on Swoole http://easyswoole.com/
 * [Swoft](https://doc.swoft.org/)
 * [One](https://www.kancloud.cn/vic-one/php-one/826876)
 * [mixstart/mixphp](https://github.com/mixstart/mixphp):轻量 PHP 框架，基于 Swoole 的常驻内存型 PHP 高性能框架 (开发文档完善) http://mixphp.cn
