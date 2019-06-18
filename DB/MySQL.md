@@ -525,11 +525,49 @@ grep 'temporary password' /var/log/mysqld.log
     - 默认值：datetime or timestrap 默认值 CURRENT_TIMESTAMP
 * ip:通常使用varchar(15)保存IP地址
     * inet_aton() inet_ntoa()用于转换
+* json
+    - 不能有默认值
+    - 添加
+        + 可以是对象的形式，也可以是数组的形式
+        + 用函数 JSON_OBJECT，JSON_ARRAY 生成 json 格式的数据
+    - 查询
+        + JSON_UNQUOTE 函数将双引号去掉，与操作符 ->> 等价
+        + 对象类型 path 这样表示 column->$.path, 而数组类型则是 column->$[index]
+    - 搜索
+        + 用字符串和 JSON 字段比较，是不会相等的
+        + CAST 将字符串转成 JSON
+        + column->path 形式从 select 中查询出来的字符串是包含双引号的，但作为条件这里其实没什么影响，-> 和 ->> 结果是一样的
+        + 严格区分变量类型的，比如说整型和字符串是严格区分
+        + JSON_CONTAINS 第二个参数是不接受整数的，必须字符串
+        + JSON_INSERT() 插入新值，但不会覆盖已经存在的值
+        + JSON_SET() 插入新值，并覆盖已经存在的值
 
 ```sql
 `last_opt_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后操作时间'; # 创建、修改记录的时候都刷新
 `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'; # 创建的时候把这个字段设置为当前时间，但以后修改时，不再刷新
 `update_time` TIMESTAMP DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'; # 创建的时候把这个字段设置为空或定值，以后修改时刷新
+
+CREATE TABLE lnmp (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `category` JSON,
+    `tags` JSON,
+    PRIMARY KEY (`id`)
+);
+INSERT INTO `lnmp` (category, tags) VALUES ('{"id": 1, "name": "lnmp.cn"}', '[1, 2, 3]');
+INSERT INTO `lnmp` (category, tags) VALUES (JSON_OBJECT("id", 2, "name", "php.net"), JSON_ARRAY(1, 3, 5));
+SELECT id, category->'$.id', category->'$.name', tags->'$[0]', tags->'$[2]' FROM lnmp;
+SELECT id, JSON_UNQUOTE(category->'$.name'), category->>'$.name' FROM lnmp;
+
+SELECT * FROM lnmp WHERE category = CAST('{"id": 1, "name": "lnmp.cn"}' as JSON);
+SELECT * FROM lnmp WHERE category->'$.name' = 'lnmp.cn'; # category->>'$.name' = 'lnmp.cn';
+SELECT * FROM lnmp WHERE category->'$.id' = 1; # 不能 ‘1’
+SELECT * FROM lnmp WHERE JSON_CONTAINS(category, '1', '$.id');
+SELECT * FROM lnmp WHERE JSON_CONTAINS(tags, '2');
+UPDATE lnmp SET tags = '[1, 3, 4]' WHERE id = 1;
+UPDATE lnmp SET category = JSON_INSERT(category, '$.name', 'lnmp', '$.url', 'www.lnmp.cn') WHERE id = 1;
+UPDATE lnmp SET category = JSON_SET(category, '$.host', 'www.lnmp.cn', '$.url','http://www.lnmp.cn') WHERE id = 1;
+UPDATE lnmp SET category = JSON_REPLACE(category, '$.name', 'php', '$.url', 'http://www.php.net') WHERE id = 2;
+UPDATE lnmp SET category = JSON_REMOVE(category, '$.url', '$.host') WHERE id = 1;
 ```
 
 ### 库表操作
@@ -1260,13 +1298,21 @@ Unlock tables;
 
 ### B-Tree树
 
-* B-tree数据存储是有序的，按照顺序保存了索引的列，加速了数据访问，存储引擎不会扫描整个表得到需要的数据
+* 定义：一种多路搜索树（并不是二叉的），一颗m阶的B-树，或为空树，或者：
+    - 定义任意非叶子结点最多只有M个儿子；且M>2；
+    - 根结点的儿子数为[2, M]；
+    - 除根结点以外的非叶子结点的儿子数为[M/2, M]；
+    - 每个结点存放至少M/2-1（取上整）和至多M-1个关键字；（至少2个关键字）
+    - 非叶子结点的关键字个数=指向儿子的指针个数-1；
+    - 非叶子结点的关键字：K[1], K[2], …, K[M-1]；且K[i] < K[i+1]；
+    - 非叶子结点的指针：P[1], P[2], …, P[M]；其中P[1]指向关键字小于K[1]的子树，P[M]指向关键字大于K[M-1]的子树，其它P[i]指向关键字属于(K[i-1], K[i])的子树；
+    - 所有叶子结点位于同一层；
+* B-tree数据存储是有序的，按照顺序保存了索引的列，加速了数据访问
 * 多路自平衡的搜索树,允许每个节点有更多的子节点
 * 根节点一般存储在内存中，普通节点和叶子结点保存在硬盘中
 * 使用B-tree索引的查询类型，很好用于全键值、键值范围或键前缀查找
     - 只有在使用了索引的最左前缀的时候才有用
     - 查找没有从索引列的最左边开始,没有什么用处;不能跳过索引的列
-* 只访问索引的查询：B-tree支持只访问索引的查询，不会访问行
 * 前缀索引
     - 索引很长的字符列，这会增加索引的存储空间以及降低索引的效率。选择字符列的前n个字符作为索引，这样可以大大节约索引空间，从而提高索引效率。
     - 要选择足够长的前缀以保证高的选择性，同时又不能太长。
