@@ -2,9 +2,9 @@
 
 WEB服务器
 
-* 基于文件配置。
-* 跨平台的,所有操作系统都能安装。
-* 虚拟主机。
+* 基于文件配置
+* 跨平台的,所有操作系统都能安装
+* 虚拟主机
 
 ## 本地环境
 
@@ -30,41 +30,31 @@ WEB服务器
 
 ## 安装
 
->  windows
-
-* apache2运行于系统服务中。
-* 将bin目录添加到系统变量：Path中添加 apache2/bin(需要重启命令行客户端)
+* windows
+    - apache2运行于系统服务中。
+    - 将bin目录添加到系统变量：Path中添加 apache2/bin(需要重启命令行客户端)
+* mac:系统本身带有apache2
+    - 程序位置：/private/etc/apache2 或者 /etc/apache2
+    - 配置文件：httpd.conf
+    - 开启 `LoadModule php7_module libexec/apache2/libphp7.so`
+    - 站点默认目录：`DocumentRoot "/Library/WebServer/Documents"`
+    - `DirectoryIndex index.php index.html`
+    - 进程管理,用httpd或者aapachectl
+    - 模块路径： /usr/libexec/apache2
 
 ```sh
 httpd -t # 检测配置语法
-
 net start apache2 # 服务管理
 net stop apache2
-```
 
-> mac
-
-系统本身带有apache2
-
-* 程序位置：/private/etc/apache2 或者 /etc/apache2
-* 配置文件：httpd.conf
-* 开启 `LoadModule php7_module libexec/apache2/libphp7.so`
-* 站点默认目录：`DocumentRoot "/Library/WebServer/Documents"`
-* `DirectoryIndex index.php index.html`
-* 进程管理,用httpd或者aapachectl
-* 模块路径： /usr/libexec/apache2
-
-```sh
 apachectl -v
 httpd -t
 sudo httpd -k start
 sudo httpd -k stop
 sudo apachectl -k restart
-```
 
-> ubuntu
+## ubuntu
 
-```sh
 sudo apt-get install python-software-properties
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
@@ -178,7 +168,7 @@ httpd.exe -M # 查看apache加载了哪些模块
 </IfModule>
 ```
 
-#### 分布式配置文件
+### 分布式配置文件
 
 * 在.htaccess配置文件中加入的配置信息只会影响.htaccess所在目录以及子目录的运行效果.
 * 通过.htaccess不用重启服务器
@@ -188,6 +178,16 @@ httpd.exe -M # 查看apache加载了哪些模块
 ```
 php_flag session.auto_start 1 # 指定开关类的配置信息
 php_value date.timezone PRC # 指定字符串形式的配置信息
+
+codeRewriteEngine On
+RewriteBase /
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteEngine on
+RewriteBase /
+RewriteCond %{SERVER_PORT} !^443$
+RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 ```
 
 #### 虚拟主机
@@ -244,10 +244,6 @@ NameVirtualHost *:80
 </VirtualHost>
 ```
 
-## WAMP
-
-apache 配置
-
 ### php配置
 
 * 添加PHP程序文件路径到环境变量
@@ -263,9 +259,6 @@ php -m # 可以找到mysql
 
 * 程序路径
 * 数据库路径
-
-配置通过MySQL Instance Configuration Wizard
-
 * 详细配置、标准配置
 * 开发、服务器、只做数据库
 * 做多功能、实物型、非事物型
@@ -276,12 +269,29 @@ php -m # 可以找到mysql
 * 用户与密码设置
 * 生成配置文件
 
-#### 命令行服务管理
-
 ```
+# 服务管理
 net start mysql
 net stop mysql
 ```
+
+## 运行模式
+
+* MPM Prefork模式：这是最古老最传统，性能最差但也是最香的模式
+    - Master进程根据配置提前fork出子进程，每个子进程中只有一个线程，然后靠这些子进程干活
+    - 一个子进程同时职能干一件事儿，假设说干完一件事需要1秒钟，然后想1秒钟内同时此后10个人的请求，那你就老老实实开10个进程干活
+    - 如果一个进程crash了，并不影响另外九个进程。
+* Worker模式
+    - Master进程fork出N个子进程，但是每个子进程内部不再是单线程了，而是多线程，处理具体每一个http请求就由线程来负责处理
+    - 优点：节省内存资源和CPU资源，因为N个线程可以共享一个进程的内存地址空间，而且线程间切换耗费CPU也要比进程切换耗费CPU少很多
+    - 缺点：要考虑多线程编程安全的问题，因为线程共享进程的内存空间和数据，所以会带来线程安全问题
+* Worker event模式：靠事件监听混饭吃的春药模式，本质上就是要利用epoll搞
+    - 进程和线程模型和Worker模式一模一样，理论上说由于利用事件监听，会更加节省资源，而且对于keep-alive类型的连接，不会存在进程或线程被长期霸占的问题，这都是得益于epoll事件监听
+* 前两种模式，都有一个缺点就是keep-alive的连接会长期占据霸占一个进程或者线程，一直到该连接超时，该进程或者线程才会被空闲出来准备接受另外新的http请求。
+* PHP解析
+    - 默认情况下，PHP解析器是以一个模块形式直接融入到Apache进程中。允许对Apache进程进行改装，往上加载模块
+    - CGI方式：
+        + 需要解析PHP代码的时候，Apache会通过CGI方式调用一次PHP解析器解析PHP代码，PHP解析器在执行完毕PHP代码后将结果再以CGI的方式返回给Apache，同时，该PHP解析器也会销毁掉
 
 ## Docker配置
 
@@ -415,20 +425,6 @@ LoadModule fastcgi_module /usr/local/opt/mod_fastcgi/libexec/mod_fastcgi.so
     ProxyPassMatch ^/(.*\.php(/.*)?)$
     unix:/usr/local/var/run/php-fpm.sock|fcgi://127.0.0.1:9000/usr/local/var/www/htdocs
 </IfModule>
-```
-
-## .htaccess
-
-```
-codeRewriteEngine On
-RewriteBase /
-RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-RewriteEngine on
-RewriteBase /
-RewriteCond %{SERVER_PORT} !^443$
-RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 ```
 
 ##  集成环境

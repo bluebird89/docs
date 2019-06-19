@@ -8,10 +8,8 @@
 
 ## 特性
 
-* 模块化设计、较好扩展性；早期不支持模块的动态装卸载
+* 模块化设计、较好扩展性
 * 高可靠性：基于master/worker模式
-    - master：负责启动服务，分析配置文件，父子启动子进程和worker进程
-    - worker：真正响应用户请求进程
 * 支持热部署(平滑迁移)：不停机更新配置文件、更换日志、更新服务器程序版本；
 * 内存消耗低：10000个keep-alive连接模式下的非活动连接仅消耗2.5M内存；
 * 支持event-driven事件驱动模型, aio一步驱动机制, mmap内存映射；
@@ -49,11 +47,26 @@
 * 支持过滤器，例如zip，SSI
 * 支持SSL加密机制
 
-## 架构
+## 进程模型
 
-* master/worker模型：一个master进程可生成一个或多个worker进程；每个worker基于时间驱动机制可以并行响应多个请求
-    - master:加载配置文件、管理worker进程、平滑升级
-    - worker：http服务，http代理，fastcgi代理
+* master/worker模型
+    - 一个master进程
+        + fork Worker进程：按照配置fork出N个Worker进程，一般说来配置推荐Worker进程数量和CPU核数保持一致即可
+        + 监控Worker进程，当某个Worker异常挂了后，Master进程负责重新拉起一个
+        + 接受外界信号，进行启动、重启、停止
+        + 可以给Worker进程发信号
+    - 多个worker进程：每个worker基于时间驱动机制可以并行响应多个请求
+        + accept客户端请求，完成请求，数据返回给客户端
+        + http服务，http代理，fastcgi代理
+* fast-CGI：一个协议。PHP对于fast-CGI协议具体实现就是耳熟能详的PHP-FPM（PHP FastCGI Process Manager）
+    - CGI不涉及进程管理，PHP解析器被调用完一次后，就销毁掉了，下次调用需要重新初始化
+    - fastCGI涉及到了进程管理，携带着PHP解析器功能的FPM进程是常驻内存的，解析完毕后就一直静静地还在那里，等待请求
+* PHP-FPM
+    - php-fpm的进程模型和nginx一模一样，就是一个Master进程按照配置fork出Worker进程
+    - 不同的是，fpm的worker进程没有“powered by epoll”，每个worker进程内都内嵌了php解析器用来解析php代码，一个fpm进程在已经干活的时候拒绝接受新的请求，是完完全全的基于同步阻塞的工作方式，只有活干完了才会接受新的请求
+    - Nginx和php-FPM之间是如何通信的？其实就是靠socket
+    - php-PFM会监听在回环地址的9000端口上，然后Nginx会将解析PHP的请求发到9000端口上
+    - 或者通过本地unixsocket的方式与php-FPM进行通信
 * 事件驱动：epoll(Linux),kqueue（FreeBSD）, /dev/poll(Solaris)
 * 消息通知：select,poll, rt signals
     - 支持sendfile,  sendfile64

@@ -22,7 +22,7 @@
     - SERVER_SOFTWARE 这个环境变量的值包含了调用CGI程序的HTTP服务器的名称和版本号。例如，上面的值为Apache/2.2.14(Unix)
 * PHP-CGI是PHP自带的FastCGI管理器
     - php-cgi变更php.ini配置后需重启php-cgi才能让新的php-ini生效，不可以平滑重启。
-    - 直接杀死php-cgi进程，php就不能运行了。(PHP-FPM和Spawn-FCGI就没有这个问题，守护进程会平滑从新生成新的子进程。）
+    - 直接杀死php-cgi进程，php就不能运行了。(PHP-FPM和Spawn-FCGI就没有这个问题，守护进程会平滑从新生成新的子进程）
 
 ## FastCGI
 
