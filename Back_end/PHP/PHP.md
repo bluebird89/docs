@@ -2182,38 +2182,49 @@ $dog = new Dog();
 $cat = new \Animal\Cat();
 ```
 
-## JSON
 
-* `json_encode( mixed $value [, int $options = 0 [, int $depth = 512 ]] )` 函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据
-    - 1:JSON_HEX_TAG:所有的 < 和 > 转换成 \u003C 和 \u003E
-    - 2:JSON_HEX_AMP:所有的 & 转换成 \u0026
-    - 4:JSON_HEX_APOS:所有的 ' 转换成 \u0027
-    - 8:JSON_HEX_QUOT:所有的 " 转换成 \u0022
-    - 16:JSON_FORCE_OBJECT:使一个非关联数组输出一个类（Object）而非数组。 在数组为空而接受者需要一个类（Object）的时候尤其有用
-    - 32:JSON_NUMERIC_CHECK:将所有数字字符串编码成数字（numbers）
-    - 64:JSON_UNESCAPED_SLASHES:不要编码 /： 已转义用htmlspecialchars_decode()处理
-    - 128:JSON_PRETTY_PRINT:用空白字符格式化返回的数据
-    - 256:JSON_UNESCAPED_UNICODE:以字面编码多字节 Unicode 字符（默认是编码成 \uXXXX）
-    - 512:JSON_PARTIAL_OUTPUT_ON_ERROR:Substitute some unencodable values instead of failing
-    - 1024:JSON_PRESERVE_ZERO_FRACTION:Ensures that float values are always encoded as a float value
-* json_decode()函数解码JSON字符串：将JSON字符串转换为PHP变量
-    - 字符串要求
-        + 使用UTF-8编码
-        + 不能在最后元素有逗号
-        + 不能使用单引号
-        + 不能有\r,\t，如果有请替换
-* `int json_last_error ( void )`:返回json_encode() or json_decode() call的错误
-    - JSON_ERROR_NONE   没有错误发生   
-    - JSON_ERROR_DEPTH    到达了最大堆栈深度    
-    - JSON_ERROR_STATE_MISMATCH   无效或异常的 JSON  
-    - JSON_ERROR_CTRL_CHAR    控制字符错误，可能是编码不对   
-    - JSON_ERROR_SYNTAX   语法错误     
-    - JSON_ERROR_UTF8 异常的 UTF-8 字符，也许是因为不正确的编码。   PHP 5.3.3
-    - JSON_ERROR_RECURSION    One or more recursive references in the value to be encoded PHP 5.5.0
-    - JSON_ERROR_INF_OR_NAN   One or more NAN or INF values in the value to be encoded    PHP 5.5.0
-    - JSON_ERROR_UNSUPPORTED_TYPE 指定的类型，值无法编码。    PHP 5.5.0
-    - JSON_ERROR_INVALID_PROPERTY_NAME    指定的属性名无法编码。 PHP 7.0.0
-    - JSON_ERROR_UTF16    畸形的 UTF-16 字符，可能因为字符编码不正确。
+## 序列化
+
+* 作用
+    - 方便传输
+    - 方便存储
+* 方案
+    - 文本序列化，常见如json、serialize、xml等，更好可读性
+    - 二进制序列化，常见如msgpack、protobuf、thrift等，速度快
+* 指标
+    - 序列化的速度
+    - 序列化后数据的大小
+* JSON
+    - `json_encode( mixed $value [, int $options = 0 [, int $depth = 512 ]] )` 函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据
+        + 1:JSON_HEX_TAG:所有的 < 和 > 转换成 \u003C 和 \u003E
+        + 2:JSON_HEX_AMP:所有的 & 转换成 \u0026
+        + 4:JSON_HEX_APOS:所有的 ' 转换成 \u0027
+        + 8:JSON_HEX_QUOT:所有的 " 转换成 \u0022
+        + 16:JSON_FORCE_OBJECT:使一个非关联数组输出一个类（Object）而非数组。 在数组为空而接受者需要一个类（Object）的时候尤其有用
+        + 32:JSON_NUMERIC_CHECK:将所有数字字符串编码成数字（numbers）
+        + 64:JSON_UNESCAPED_SLASHES:不要编码 /： 已转义用htmlspecialchars_decode()处理
+        + 128:JSON_PRETTY_PRINT:用空白字符格式化返回的数据
+        + 256:JSON_UNESCAPED_UNICODE:以字面编码多字节 Unicode 字符（默认是编码成 \uXXXX）
+        + 512:JSON_PARTIAL_OUTPUT_ON_ERROR:Substitute some unencodable values instead of failing
+        + 1024:JSON_PRESERVE_ZERO_FRACTION:Ensures that float values are always encoded as a float value
+    - json_decode()函数解码JSON字符串：将JSON字符串转换为PHP变量
+        + 字符串要求
+            * 使用UTF-8编码
+            * 不能在最后元素有逗号
+            * 不能使用单引号
+            * 不能有\r,\t，如果有请替换
+    - `int json_last_error ( void )`:返回json_encode() or json_decode() call的错误
+        + JSON_ERROR_NONE   没有错误发生   
+        + JSON_ERROR_DEPTH    到达了最大堆栈深度    
+        + JSON_ERROR_STATE_MISMATCH   无效或异常的 JSON  
+        + JSON_ERROR_CTRL_CHAR    控制字符错误，可能是编码不对   
+        + JSON_ERROR_SYNTAX   语法错误     
+        + JSON_ERROR_UTF8 异常的 UTF-8 字符，也许是因为不正确的编码。   PHP 5.3.3
+        + JSON_ERROR_RECURSION    One or more recursive references in the value to be encoded PHP 5.5.0
+        + JSON_ERROR_INF_OR_NAN   One or more NAN or INF values in the value to be encoded    PHP 5.5.0
+        + JSON_ERROR_UNSUPPORTED_TYPE 指定的类型，值无法编码。    PHP 5.5.0
+        + JSON_ERROR_INVALID_PROPERTY_NAME    指定的属性名无法编码。 PHP 7.0.0
+        + JSON_ERROR_UTF16    畸形的 UTF-16 字符，可能因为字符编码不正确。
 
 ```php
 <?php
@@ -2244,7 +2255,6 @@ echo "Associative array always output as object: ", json_encode($d, JSON_FORCE_O
 
 * intl
 * mcrypt
-* memeache
 * memeached
     - memcache完全在PHP框架内开发的，提供了memcached的接口，memecached扩展是使用了libmemcached库提供的api与memcached服务端进行交互。 libmemcached 是 memcache 的 C 客户端，它具有低内存，线程安全等优点
     - memcache提供了面向过程及面向对象的接口，memached只支持面向对象的接口。 memcached 实现了更多的 memcached 协议。
@@ -2446,6 +2456,15 @@ phpcs --config-set
 * 如果正在做SQL查询，然后获得结果，并把很多数字弄到一起，看看你能不能使用像SUM（）和AVG（）之类的函数调用GROUP BY语句
     - 跟普遍的情况下，让数据库处理尽量多的计算。一点很重要的提示是：（至少在MySQL里是这样）布尔表达式的值为0或1，如果有创意的话，可以使用SUM（）和它的小伙伴们做些很让人惊讶的事情。
 * 是不是把这些同样很耗费时间的数字计算了很多遍。例如，假设1000袋土豆的成本是昂贵的计算，但并不需要把这个成本计算500次，然后才把1000袋土豆的成本存储在一个数组或其他类似的地方，所以你不必把同样的东西翻来覆去的计算。这个技术叫做记忆术，在像你这样的报告中使用往往会带来奇迹般的效果
+
+## 方向
+
+* PHP的SPL库系列请仔细研究；PHP的socket模块以及pcntl模块，一定要研究尝试一下
+* 从工程代码组织角度去理解和学习设计模式和面向对象OOP
+* 接纳一门新的语言。首先推荐Golang。对自己足够狠，请深入研究C语言
+* MySQL请购买《MySQL技术内幕：innodb存储引擎》和《高性能MySQL》两本书，Redis请购买《Redis设计与实现》
+* 《C Primer Plus》和《Unix环境高级编程》。这地方有一个巨大的错觉，就是读完一遍《C Primer Plus》后就觉得自己会CLang了，有这种优越感的，请你尝试用CLang做个什么东西出来？然后你发现似乎真的什么也做不了，这会儿就可以步入到《Unix环境高级编程》的节奏
+* 一切基于基础之上的上层应用都是海市蜃楼，犹如过眼云烟。不变的永远是基于事件监听的异步非阻塞IO
 
 ## 安全
 
