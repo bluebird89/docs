@@ -48,6 +48,7 @@ if ($tmpstr==$signature) {
 * [wepayui/wepayui](https://github.com/wepayui/wepayui):微信支付场景化组件 https://wepayui.github.io
 * [wux-weapp/wux-weapp](https://github.com/wux-weapp/wux-weapp):🐶 微信小程序自定义 UI 组件 https://wux-weapp.github.io/wux-weapp
 * [weui](https://github.com/Tencent/weui):A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications. https://weui.io
+* [Tencent/weui-wxss](https://github.com/Tencent/weui-wxss):A UI library by WeChat official design team, includes the most useful widgets/modules.
 
 ## 工具
 

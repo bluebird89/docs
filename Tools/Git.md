@@ -38,7 +38,7 @@ fi
   - ubuntu:`~/.gitconfig`
 * 系统配置： `git config --system`
 * 项目配置：`git local --system` project/.git/config   `git config`
-* 优先级：local > global > system
+* 优先级：local > global(用户) > system
 * alias说明
   + prune = fetch --prune - 当在其他人将分支推送到远程仓库时，我也会得到了大量的本地分支。Prune可以删除远端已经删除的任何本地分支。
   + undo = reset --soft HEAD ^ - 如果我在做出提交时犯了一个错误，这个命令会把代码恢复到提交之前的样子。通常我只是在这种情况下修改现有的提交，因为它保留了提交信息。
@@ -284,6 +284,7 @@ gpg --sign demo.txt #签名
     + `git cat-file -p hashId`: 查看 hash 文件内内容
     + 暂存区:`git update-index`:在暂存区记录一个发生变动的文件
     + `git ls-files --stage`:显示暂存区当前的内容
+    + 相同的文件只会存一个blob，不同的commit的区别是commit、tree和有差异的blob
   - `git commit`
     + `git write-tree`:将当前的目录结构，生成一个 Git 对象,目录结构也是作为二进制对象保存的，也保存在.git/objects目录里面
     + `echo "first commit" | git commit-tree hashId`  将目录树对象写入版本历史, 生成hashId
@@ -301,6 +302,7 @@ gpg --sign demo.txt #签名
 
 ![Git原理-1](../_static/bg2015120901.png)
 ![Git原理-2](../_static/git_2.png)
+commit、tree和blob三个对象之间的关系
 ![object structure](../_static/object_struct.png)
 ![tree](../_static/tree.jpg)
 <!-- ![Git原理-3](../_static/git_3.jpg) 图片待修复-->
@@ -605,13 +607,17 @@ git stash pop # 恢复上一次的 WIP 状态，并从队列中移除
 git stash pop stash@{num} # 恢复指定编号的 WIP，同时从队列中移除
 
 git stash clear # 删除所有
+
+pick   7735d66 update #合并到该commit上
+squash bbe6d53 update
+squash 9eb3188 update
+squash 7d33868 update
 ```
 
 #### 本地分支
 
 * merge:保持修改内容的历史记录，但是历史记录会很复杂
   - fast-forward:bugfix分支的历史记录包含master分支所有的历史记录，所以通过把master分支的位置移动到bugfix的最新分支上，Git 就会合并
-  - 
 * rebase:历史记录简单，是在原有提交的基础上将差异内容反映进去。因此，可能导致原本的提交内容无法正常运行
   - 待合并分支rebase主分支
   - 主分钟merge待合并分支
@@ -807,7 +813,7 @@ git push origin v2.1
 git push [remote] --tags  # 提交所有tag
 git push origin --tags
 
-git push origin --delete v1.0.0
+git push origin --delete origin v1.0.0
 git push origin :refs/tags/old # 删除远程指定tag
 # delete remove tag
 git push REMOTE --delete TAG1 TAG2 TAG3
