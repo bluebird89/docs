@@ -49,7 +49,7 @@
 * [因果推理](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/)
 * [Grokking Deep Learning](https://livebook.manning.com/#!/book/grokking-deep-learning/about-this-book/)
 * [Deep Learning](http://www.deeplearningbook.org/)
-* [《深度学习的数学》](link)
+* 《深度学习的数学》
 
 ## 实例
 
@@ -61,6 +61,7 @@
 * [deepfakes/faceswap](https://github.com/deepfakes/faceswap):Non official project based on original /r/Deepfakes thread. Many thanks to him! https://www.reddit.com/r/deepfakes/
 * [XiaoMi/mace](https://github.com/XiaoMi/mace):MACE is a deep learning inference framework optimized for mobile heterogeneous computing platforms. 
 * [jhfjhfj1/autokeras](https://github.com/jhfjhfj1/autokeras):accessible AutoML for deep learning. http://autokeras.com/
+* [cmusatyalab/openface](https://github.com/cmusatyalab/openface):Face recognition with deep neural networks. http://cmusatyalab.github.io/openface/
 
 ## 参考
 
@@ -74,4 +75,3 @@
 * [nndl/nndl.github.io](https://github.com/nndl/nndl.github.io):《神经网络与深度学习》 Neural Network and Deep Learning https://nndl.github.io
 * [osforscience/deep-learning-ocean](https://github.com/osforscience/deep-learning-ocean):📡 All You Need to Know About Deep Learning - A kick-starter
 * [The Matrix Calculus You Need For Deep Learning](https://explained.ai/matrix-calculus/index.html)
-* [](link)
