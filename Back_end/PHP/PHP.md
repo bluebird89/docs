@@ -50,7 +50,7 @@ The PHP Interpreter <http://www.php.net>
 
 * 程序路径：`/usr/local/Cellar/php71/7.1.12_23`
 * 配置文件: `/usr/local/etc/php/7.1/` The php.ini and php-fpm.ini file
-* 通过php-fpm进程运行 /usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx 
+* 通过php-fpm进程运行 `/usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx`
 * php71卸载后php-fpm仍然运行
     - `brew services stop php`
 * phpize pecl
@@ -424,6 +424,7 @@ require('./ShopProduct.php'); # 加载文件
         + Nowdoc 结构是类似于单引号字符串的。Nowdoc 结构很象 heredoc 结构，但是 nowdoc 中不进行解析操作。这种结构很适合用于嵌入 PHP 代码或其它大段文本而无需对其中的特殊字符进行转义
         * addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
         * urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
+        * `ord ( string $string ) : int`:转换字符串第一个字节为 0-255 之间的值
     + Integer（整型）
     + Float（浮点型）
         * NaN:代表着任何不同值，不应拿 NAN 去和其它值进行比较，包括其自身，应该用 is_nan() 来检查
@@ -467,6 +468,8 @@ $str = preg_replace_callback(
 $str
 );
 
+echo ord("S") # 83
+echo ord("Shanghai") # 83
 substr()
 htmlentities(string)
 addslashes(str)
@@ -2189,8 +2192,15 @@ $cat = new \Animal\Cat();
     - 方便传输
     - 方便存储
 * 方案
-    - 文本序列化，常见如json、serialize、xml等，更好可读性
-    - 二进制序列化，常见如msgpack、protobuf、thrift等，速度快
+    - 文本序列化,更好可读性
+        + json
+        + jsond:jsond_encode() jsond_decode()
+        + serialize:serialize() unserialize()
+        + xml
+    - 二进制序列化,速度快
+        + msgpack: msgpack_pack() msgpack_unpack()
+        + protobuf
+        + thrift
 * 指标
     - 序列化的速度
     - 序列化后数据的大小

@@ -2,10 +2,24 @@
 
 Event-driven asynchronous & concurrent & coroutine networking engine with high performance for PHP. <http://www.swoole.com/>
 
+PHP的 协程 高性能网络通信引擎，使用C/C++语言编写，提供了多种通信协议的网络服务器和客户端模块
+
 * 一个异步并行的通信引擎，作为 PHP 的扩展来运行
-* 常驻内存，避免重复加载带来的性能损耗，提升海量性能，
+* 常驻内存，避免重复加载带来的性能损耗，提升海量性能
+    - 进程都是常驻内存的，包括解析过后的PHP代码也会常驻内存，不会反复解析
+    - PHP代码解析后都是常驻内存的，意味着mysql和redis等连接将会是长连接
 * 协程异步，提高对 I/O 密集型场景并发处理能力
 * 方便地开发Http、WebSocket、TCP、UDP 等应用，可以与硬件通信
+    - TCP/UDP/UnixSock 服务器端
+    - Http/WebSocket/Http2.0 服务器端
+    - 协程 TCP/UDP/UnixSock 客户端
+    - 协程 MySQL 客户端
+    - 异步 Redis 客户端
+    - 协程 Http/WebSocket 客户端
+    - 协程 Http2 客户端
+    - AsyncTask
+    - 毫秒定时器
+    - 协程文件读写
 * 优点
     - Node.js 的异步回调
     - Go语言的协程
@@ -57,7 +71,7 @@ php --ri swoole
 
 ## Server
 
-* 强大的TCP/UDP Server框架，支持多线程，EventLoop，事件驱动，异步，Worker进程组，Task异步任务，毫秒定时器，SSL/TLS隧道加密。
+* 强大的TCP/UDP Server框架，支持多线程，EventLoop，事件驱动，异步，Worker进程组，Task异步任务，毫秒定时器，SSL/TLS隧道加密
 * 类型
     - swoole_http_server是swoole_server的子类，内置了Http的支持
     - swoole_websocket_server是swoole_http_server的子类，内置了WebSocket的支持
@@ -73,8 +87,12 @@ php --ri swoole
             * Swoole的Server和异步Client都是在onReceive回调函数中处理数据包，当设置了协议处理后，只有收到一个完整数据包时才会触发onReceive事件
             * 同步客户端在设置了协议处理后，调用 $client->recv() 不再需要传入长度，recv函数在收到完整数据包或发生错误后返回。
 * master进程：是一个包含多线程的进程
-    - 主线程在Accept新的连接后，会将这个连接分配给一个固定的Reactor线程，并由这个线程负责监听此socket
-    - Reactor线程：一组
+    - main线程在Accept新的连接后，会将这个连接分配给一个固定的Reactor线程，并由这个线程负责监听此socket
+        + 主要用于accept链接、接受响应信号
+        + Main线程会将accept的链接按照一定算法分配给Reactor线程
+        + 后面的网络数据IO则靠Reactor线程与客户端完成
+        + Reactor线程会将收到的数据通过管道的方式传递给Worker进程(注意不包括Tasker进程)
+    - Reactor线程组
         + 以多线程的方式运行
         + 负责维护客户端TCP连接、处理网络IO、处理协议、收发数据
         + 完全是异步非阻塞的模式
@@ -85,7 +103,7 @@ php --ri swoole
     - 方法
         + onStart
         + onShutdown
-* manager进程：Fork worker/task
+* manager进程：由Master进程fork出来的，主要负责管理Worker进程,包括fork worker进程、监控worker进程状态、重新拉起新的worker进程等等。
     - 方法
         + onManagerStart
         + onManagerStop
@@ -95,6 +113,7 @@ php --ri swoole
         + 服务器reload时，manager进程会逐个关闭/重启子进程
         + Master进程是多线程的，不能安全的执行fork操作
     - worker进程
+        + 由Manager进程fork而出
         + 以多进程方式运行
             * 当Worker进程异常退出，如发生PHP的致命错误、被其他程序误杀，或达到max_request次数之后正常退出。主进程会重新拉起新的Worker进程
         + 接受由Reactor线程投递的请求数据包，并执行PHP回调函数处理数据
@@ -121,7 +140,7 @@ php --ri swoole
             * onTask
             * onWorkerStart
     - 底层会为Worker进程、TaskWorker进程分配一个唯一的ID
-    - 不同的Worker和TaskWorker进程之间可以通过sendMessage接口进行通信
+    - 不同的Worker和TaskWorker进程之间可以通过sendMessage接口(unix socket)进行通信
 * 关系
     - Reactor就是nginx，Worker就是php-fpm
     - Reactor线程异步并行地处理网络请求，然后再转发给Worker进程中去处理
@@ -135,6 +154,7 @@ php --ri swoole
 * 用了signalfd来实现对信号的屏蔽和处理。可以有效地避免线程/进程被信号打断，系统调用restart的问题。在主进程中Reactor/AIO线程不会接受任何信号
 
 ![运行流程图](../../_static/swoole_run_cycle.jpg "Optional title")
+![运行流程图](../../_static/swoole_model.jpg "Optional title")
 ![进程/线程结构图](../../_static/swoole_server_model.jpg "Optional title")
 ![进程/线程结构图](../../_static/process.jpg "Optional title")
 
@@ -152,7 +172,7 @@ $s->set(['open_http2_protocol' => true]);
 // websocket
 $s = new \Swoole\WebScoket\Server();
 
-
+// 网络通信协议设计
 $server->set(array(
     'open_eof_split' => true,
     'package_eof' => "\r\n",
@@ -176,7 +196,7 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
 
 ## Async
 
-异步IO接口，提供了 异步文件系统IO，定时器，异步DNS查询，异步MySQL等API，异步Http客户端，异步Redis客户端。
+异步IO接口，提供了 异步文件系统IO，定时器，异步DNS查询，异步MySQL等API，异步Http客户端，异步Redis客户端
 
 * swoole_timer 异步毫秒定时器，可以实现间隔时间或一次性的定时任务
     - swoole_timer_tick 间隔的时钟控制器
@@ -186,9 +206,9 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
 
 ## 协程 Coroutine
 
+* 在2.0开始内置协程(Coroutine)的能力，提供了具备协程能力IO接口（统一在命名空间Swoole\Coroutine*
 * 协程是子程序的一种， 可以通过yield的方式转移程序控制权，协程之间不是调用者与被调用者的关系，而是彼此对称、平等的。
-* 完全有用户态程序控制，也被成为用户态的线程
-* 由用户以非抢占的方式调度，而不是操作系统。正因为如此，没有系统调度上下文切换的开销，协程有了轻量，高效，快速等特点。
+* 完全有用户态程序控制，也被成为用户态的线程,由用户以非抢占的方式调度，而不是操作系统。正因为如此，没有系统调度上下文切换的开销，协程有了轻量，高效，快速等特点。
 * 实现
     - 基于PHP生成器Generators\Yield的方式实现
         + 所有主动让出的逻辑都需要yield关键字。这会给程序员带来极大的概率犯错，导致大家对协程的理解转移到了对Generators语法的原理的理解。
@@ -200,7 +220,7 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
     - 使用 go()(\Swoole\Coroutine::create() 的简写) 创建一个协程
     - 在 go() 的回调函数中, 加入协程需要执行的代码(非阻塞代码)
 * 协程通信
-    - 通道（Channel）:在Swoole4协程中使用new chan就可以创建一个通道。通道可以理解为自带协程调度的队列。它有两个接口push和pop
+    - 通道（Channel）:在Swoole4协程中使用new chan就可以创建一个通道。通道可以理解为自带协程调度的队列。两个接口push和pop
         + push：向通道中写入内容，如果已满，它会进入等待状态，有空间时自动恢复
         + pop：从通道中读取内容，如果为空，它会进入等待状态，有数据时自动恢复
 * 延时任务：用defer实现

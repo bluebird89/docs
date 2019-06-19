@@ -146,3 +146,7 @@ asciidoctor -r asciidoctor-diagram xxx.adoc
 ## 参考
 
 * [What nobody tells you about documentation](https://www.divio.com/blog/documentation/)
+
+## 资源
+
+* [myslide](https://myslide.cn)

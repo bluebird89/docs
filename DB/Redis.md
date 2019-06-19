@@ -778,13 +778,63 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
 maxmemory-policy volatile-lru
 ```
 
-## 主从复制
+## 持久化
 
-* 心跳：主从节点在建立复制后，他们之间维护着长连接并彼此发送心跳命令
-    - 主从都有心跳检测机制，各自模拟成对方的客户端进行通信，通过 client list 命令查看复制相关客户端信息，主节点的连接状态为 flags = M，从节点的连接状态是 flags = S。
-    - 主节点默认每隔 10 秒对从节点发送 ping 命令，可修改配置 repl-ping-slave-period 控制发送频率。
-    - 从节点在主线程每隔一秒发送 replconf ack{offset} 命令，给主节点上报自身当前的复制偏移量。
-    - 主节点收到 replconf 信息后，判断从节点超时时间，如果超过 repl-timeout 60 秒，则判断节点下线。
+* RDB：将内存数据全部快照然后存储到硬盘上
+    - 定时触发然后将redis存储在内存中的数据以快照的方式全量持久化到硬盘上
+    - redis-cli控制台下输入命令save就可以实时触发这个操作，此时redis将会被阻塞，不会再响应客户端的其余任何请求
+    - 为了避免这种被阻塞，可以用bgsave来触发rdb备份:redis的主进程会fork出一个子进程来做快照持久化，而主进程可以继续相应客户端的任何请求
+    - 出发机制需要配置条件：数据频率
+* AOF（Append Only File）：类似于mysql的二进制日志方案
+    - aof文件中记录都是在redis中执行过的命令，并不记录数据本身。
+    - 假如连续set了10000次，但是最后这10000个key我又全部删除了，aof文件岂不是会记录20000条命令？所以为了解决这个问题，针对aof还有个很重要的rewrite机制
+    - 将命令追加到aof这个过程redis官方称之为fsync，fsync这个过程是子线程来做的，主线程依然用来处理客户端的请求
+* 对比
+    - rdb恢复速度快，aof恢复速度相对要慢一些。
+    - 如果aof开启了，那么redis在启动时会选择根据aof文件恢复数据而不是rdb，所以一定要保存好rdb文件。
+    - rdb和aof可以同时开启，最大可能地保证数据完整性。如果redis中的数据都是缓存类数据，可以考虑只选择一样即可。
+    - 检测修复rdb文件的工具叫做redis-check-rdb，检测修复aof文件的工具叫做redis-check-aof。
+    - 如果你有1G的redis数据，那么理论上讲做一次bgsave操作最大需要2G内存，但实际上得益于Copy-On-Write（写时拷贝，COW机制），并不一定会需要2G内存，只有在当主进程将所有的key全部修改过的情况下，才会需要2G内存。
+    - 建议redis内存使用量在30%-50%之间，超过50%这个限制就要留心注意下了。
+
+```
+# RDB 何时会触发持久化
+// save 秒数 发生变化的key的数量:
+60秒内如果至少10000个key发生了改变、300秒内至少10个key发生了改变、900秒内至少1一个key发生了改变，那么就会触发bgsave
+save 900 1
+save 300 10
+save 60 10000
+
+// 如果bgsave遇到错误时停止写入
+stop-writes-on-bgsave-error yes
+// 开启rdb文件压缩，可以有效减少rdb文件的体积。开启压缩需要付出的代价自然就是cpu点数了，如果你为了节省cpu资源，可以关闭压缩
+rdbcompression yes
+// 开启crc64校验可以让rdb文件具备更好的完整性，但是也是需要cpu点数的，可以选择关闭
+rdbchecksum yes
+// rdb文件的名字
+dbfilename dump.rdb
+// redis的工作目录，上面的rdb文件就会保存在redis的工作目录中
+dir /var/lib/redis
+
+# AOF
+// 是否开启aof
+appendonly no
+// aof文件名称
+appendfilename "appendonly.aof"
+// fsync时间间隔
+appendfsync everysec
+// 当子进程在对aof文件进行rewrite的时候暂停主进程对fsync的append操作，避免产生冲突。因为aof的时候，是子进程来做的，此时如果主进程来append新的指令了，两个进程同时操作一个文件会产生冲突，所以此时主进程要append的指令会被缓存到内容中，当子进程rewrite完成后会向主进程发送一个信号来通知rewrite已完成，然后主进程再将放到内存中的append指令追加到aof文件尾部
+no-appendfsync-on-rewrite no
+// 触发aof文件rewrite的条件
+// 当当前aof文件大小超过上次aof文件体积100%后，才会启动rewrite
+auto-aof-rewrite-percentage 100
+// 开启rewrite的aof文件最小体积，也就说只有当aof文件超过了64mb后，才会可能产生rewrite。用程序语言表达就是 只有当aof文件体积大于64mb并且当前aof文件体积比上次变化超过了100% 才会产生rewrite。如果aof文件体积小于64mb，那么即便文件变化率超过了100%，也不会发生rewrite。
+auto-aof-rewrie-min-size 64mb
+// 忽略aof文件中错误的不完整的日志，如果该选项为no，那么redis会加载aof失败。损坏的aof文件可以尝试用redis-check-aof来修复
+aof-load-truncated yes
+// 这是redis 4.0出现的新特性，集成了rdb和aof的优点的一个产物。大家知道在aof rewrite的时候还是要全量读取一次所有的数据，然后rewrite期间缓存下的命令。既然都要全量读取一次了，为何不在这次全量读取的时候就索性以rdb格式写入到文件呢？然后再追加rewrite期间产生的新aof指令。这样，数据不仅恢复快，还能保证数据完整性。默认情况下，该选项处于关闭状态。
+aof-user-rdb-preamble no
+```
 
 ## 复制
 
@@ -842,6 +892,12 @@ maxmemory-policy volatile-lru
     - 主节点接受处理命令。
     - 主节点处理完后返回响应结果 。
     - 对于修改命令，异步发送给从节点，从节点在主线程中执行复制的命令。
+* 主从复制
+    - 心跳：主从节点在建立复制后，他们之间维护着长连接并彼此发送心跳命令
+        + 主从都有心跳检测机制，各自模拟成对方的客户端进行通信，通过 client list 命令查看复制相关客户端信息，主节点的连接状态为 flags = M，从节点的连接状态是 flags = S。
+        + 主节点默认每隔 10 秒对从节点发送 ping 命令，可修改配置 repl-ping-slave-period 控制发送频率。
+        + 从节点在主线程每隔一秒发送 replconf ack{offset} 命令，给主节点上报自身当前的复制偏移量。
+        + 主节点收到 replconf 信息后，判断从节点超时时间，如果超过 repl-timeout 60 秒，则判断节点下线。
 
 ## 缓存
 
