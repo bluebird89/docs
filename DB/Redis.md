@@ -307,6 +307,13 @@ Redis 没有像 MySQL 这类关系型数据库那样强大的查询功能，需�
         + raw需要分配两次内存空间（分别为redisObject和sds分配空间）
         + 因此与raw相比，embstr的好处在于创建时少分配一次空间，删除时少释放一次空间，以及对象的所有数据连在一起，寻找方便。
         + embstr的坏处也很明显，如果字符串的长度增加需要重新分配内存时，整个redisObject和sds都需要重新分配空间，因此redis中的embstr实现为只读。
+* 场景
+    - 存储用户token和用户uid `set token user_id`
+    - 投票 `incr vote:1`
+    - 流量访问限制
+        + 对ip开启访问流量限制，假入ip为 211.101.111.111 ， 一秒钟内该ip最多允许访问三次
+    - 复杂的计数功能的缓存
+    - 计数器
 
 ```sh
 exists name # 0
@@ -327,9 +334,12 @@ DECRBY counter 10
 setrange city 3 h # Beihing
 getrange city 3 4 # hi
 object encoding city
-```
 
-一般做一些复杂的计数功能的缓存。计数器
+incr ip:1517207868
+if ( get( ip:1517207868 ) > 3 ) {
+    printf " 超过限制了 ";
+}
+```
 
 ### Hash
 
@@ -382,7 +392,8 @@ object encoding city
             * 之所以在dictht和dictEntry结构之外还有一个dict结构，一方面是为了适应不同类型的键值对，另一方面是为了rehash。
         + dictht
 * 场景
-    - 做单点登录的时候，就是用这种数据结构存储用户信息，以CookieId作为Key，设置30分钟为缓存过期时间，能很好地模拟出类似Session的效果。
+    - 用户信息
+    - 做单点登录的时候，就是用这种数据结构存储用户信息，以CookieId作为Key，设置30分钟为缓存过期时间，能很好地模拟出类似Session的效果
 
 ```sh
 hexists 2007006018 name
@@ -482,10 +493,11 @@ typedef struct dict{
     - 编码转换
         + 单个字符串不能超过64字节，是为了便于统一分配每个节点的长度；这里的64字节是指字符串的长度，不包括SDS结构，因为压缩列表使用连续、定长内存块存储字符串，不需要SDS结构指明长度
 * 场景
-    - twitter的关注列表，粉丝列表
-    - 最新消息排行
+    - 右侧当作队尾，将左侧当作队头
     - 消息队列，可以利用Lists的PUSH操作，将任务存在Lists中，然后工作线程再用POP操作将任务取出进行执行
-    - 聊天系统、社交网络中获取用户最新发表的帖子、简单的消息队列、新闻的分页列表、博客的评论系统。利用Lrange命令，做基于Redis的分页功能、博客的评论系统
+    - 社交网络中获取用户最新发表的帖子
+    - 新闻的分页列表
+    - 博客的评论系统
     - 时间轴
 
 ```sh
@@ -537,11 +549,12 @@ lrem set 0 new
         + length表示元素个数
     - hashtable(哈希表)：当上述条件不满足时，Redis 会采用 hashtable 作为底层实现。
 * 场景
+    - 自动去重
     - 当需要存储一个列表数据，而又不希望出现重复的时候
     - 提供了判断某个成员是否在一个Set集合内
     - 标签
-    - 在微博应用中，可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合
-    - 集合提供了求交集、并集、差集等操作，可以非常方便的实现如共同关注、共同喜好、二度好友等功能，对上面的所有集合操作，你还可以使用不同的命令选择将结果返回给客户端还是存集到一个新的集合中。
+    - 关注列表、粉丝列表
+    - 共同关注、共同喜好、二度好友等功能
 
 ```
 SADD myset guan
@@ -603,7 +616,6 @@ typedef struct intset{
     - 做带权重的队列，比如普通消息的score为1，重要消息的score为2，然后工作线程可以选择按score的倒序来获取工作任务。让重要的任务优先执行。
     - 排行榜应用，取TOP N操作
     - 做延时任务
-    - 排行榜
     - 可以做范围查找
 
 ```
@@ -1028,14 +1040,15 @@ public void delBigList(String host, int port, String password, String bigListKey
 
 ## 工具
 
-* [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager):🔧 Cross-platform GUI management tool for Redis http://redisdesktop.com
+* 客户端
+    - [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager):🔧 Cross-platform GUI management tool for Redis http://redisdesktop.com
+    - [luin/medis](https://github.com/luin/medis):💻 Medis is a beautiful, easy-to-use Mac database management application for Redis. http://getmedis.com
 * [sripathikrishnan/redis-rdb-tools](https://github.com/sripathikrishnan/redis-rdb-tools):Parse Redis dump.rdb files, Analyze Memory, and Export Data to JSON
 * [twitter/twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
 * [CodisLabs/codis](https://github.com/CodisLabs/codis):Proxy based Redis cluster solution supporting pipeline and scaling dynamically
 * [erikdubbelboer/phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. http://dubbelboer.com/phpRedisAdmin/
 * [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis
 * [redis-port](link):redis 间数据同步
-* big key 搜索:参考上面
 * [redis-faina](https://github.com/facebookarchive/redis-faina):热点 key 寻找 (内部实现使用 monitor，所以建议短时间使用)
 * Jedis
     - [Jedis 常见异常汇总](https://yq.aliyun.com/articles/236384)

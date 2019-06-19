@@ -169,6 +169,7 @@ Requested setting INSTALLED_APPS, but settings are not configured. You must eith
 * [django-guardian/django-guardian](https://github.com/django-guardian/django-guardian):Per object permissions for Django https://django-guardian.readthedocs.io/
 * [viewflow/django-material](https://github.com/viewflow/django-material):Material Design for Django http://forms.viewflow.io/
 * [jcalazan/ansible-django-stack](https://github.com/jcalazan/ansible-django-stack):Ansible Playbook for setting up a Django app with Nginx, Gunicorn, PostgreSQL, Celery, RabbitMQ, Supervisor, Virtualenv, and Memcached. A Vagrantfile for provisioning a VirtualBox virtual machine is included as well.
+* [django/daphne](https://github.com/django/daphne):Django Channels HTTP/WebSocket server
 
 ## Taiga
 

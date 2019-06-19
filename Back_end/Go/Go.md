@@ -346,11 +346,12 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 
 ## 参考
 
-- [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
-- [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
-- [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
-- [GO语言中文网](https://studygolang.com/)
-- [changkun/go-under-the-hood](https://github.com/changkun/go-under-the-hood):Go 源码研究 (1.11.1, WIP)
+* [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
+* [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
+* [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
+* [GO语言中文网](https://studygolang.com/)
+* [qiniu/gobook](https://github.com/qiniu/gobook):The Go Programming Language
+* [changkun/go-under-the-hood](https://github.com/changkun/go-under-the-hood):Go 源码研究 (1.11.1, WIP)
 * [emirpasic/gods](https://github.com/emirpasic/gods):GoDS (Go Data Structures). Containers (Sets, Lists, Stacks, Maps, Trees), Sets (HashSet, TreeSet, LinkedHashSet), Lists (ArrayList, SinglyLinkedList, DoublyLinkedList), Stacks (LinkedListStack, ArrayStack), Maps (HashMap, TreeMap, HashBidiMap, TreeBidiMap, LinkedHashMap), Trees (RedBlackTree, AVLTree, BTree, BinaryHeap), Comparators, Iterators, …
 * [EDDYCJY/blog](https://github.com/EDDYCJY/blog):煎鱼的博客，啊。
 
