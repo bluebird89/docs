@@ -331,3 +331,5 @@ vagrant up
 ## 工具
 
 * [dotless-de/vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest):A Vagrant plugin to keep your VirtualBox Guest Additions up to date
+* [scourgen/Vagrant-PHP-Stack](https://github.com/scourgen/Vagrant-PHP-Stack):A kick-ass Vagrant Stack for PHP developer
+* puphpet: 图形化脚本生成

@@ -334,6 +334,7 @@ uninstall_oh_my_zsh
     - [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
     - [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
     - incr是一款自动提示插件
+    - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
 * Theme
     - agnoster
     - cloud
@@ -492,7 +493,6 @@ dmenu 在桌面顶部提供了一个菜单条，可以快速启动应用程序
 ### 脚本
 
 shell 是可以与计算机进行高效交互的文本接口。shell 提供了一套交互式的编程语言（脚本），shell的种类很多，比如 sh、bash、zsh 等。shell 的生命力很强，在各种高级编程语言大行其道的今天，很多的任务依然离不开 shell。比如可以使用 shell 来执行一些编译任务，或者做一些批处理任务，初始化数据、打包程序等等。
-
 
 ```sh
 touch zsh-script.sh
@@ -1398,7 +1398,6 @@ done
 * [msys2](http://www.msys2.org/)
 * powercmd
 * [cmder + gow](http://bliker.github.io/cmder/)
-* git bash
 * [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
 * [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
 

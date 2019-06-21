@@ -692,6 +692,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [ericzhang-cn/maximum-awesome-linux](https://github.com/ericzhang-cn/maximum-awesome-linux):Config files for vim and tmux.
     - ,d brings up NERDTree, a sidebar buffer for navigating and manipulating files
     - ,t brings up ctrlp.vim, a project file filter for easily opening specific files
+* [avelino/vim-bootstrap](https://github.com/avelino/vim-bootstrap):Vim Bootstrap is generator provides a simple method of generating a .vimrc configuration for vim https://vim-bootstrap.com/
 
 ## 插件
 

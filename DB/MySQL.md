@@ -2082,6 +2082,12 @@ http://localhost:3000
 * Sorting: `/api/payments?_sort=column1` `/api/payments?_sort=-column1` `/api/payments?_sort=column1,-column2`
 * Fields `/api/payments?_fields=customerNumber,checkNumber` `/api/payments?_fields=-checkNumber`
 
+## 图书
+
+* 《[高性能 MySQL（第3版）](https://book.douban.com/subject/23008813/)》
+* [数据库索引设计与优化](https://book.douban.com/subject/26419771/)》
+* 《[数据库系统概念（第6版）](https://book.douban.com/subject/10548379/)》
+
 ## 工具
 
 *  客户端

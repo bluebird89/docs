@@ -257,7 +257,7 @@
 * 百面机器学习
 * 李航老师的《统计学习方法》
 * 周志华老师的《机器学习》,又称之为西瓜书。基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等。
-  - [](https://github.com/datawhalechina/pumpkin-book)
+  - [西瓜书](https://github.com/datawhalechina/pumpkin-book)
   - [在线阅读](https://datawhalechina.github.io/pumpkin-book/)
 * 《推荐系统实战》：项亮，很适合对于想了解推荐系统
 * 《概率论与数理统计》
@@ -284,12 +284,12 @@
   - https://www.coursera.org/learn/machine-learning
   - [fengdu78/Coursera-ML-AndrewNg-Notes](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes):吴恩达老师的机器学习课程个人笔记
 * [李宏毅Machine Learning ](https://www.bilibili.com/video/av15889450)
-  * 资料：http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML19.html
-  * 课程视频：https://www.bilibili.com/video/av46561029/
-  * https://www.youtube.com/playlist?list=PLJV_el3uVTsOK_ZK5L0Iv_EQoL1JefRL4
-  * [李宏毅机器学习(2017)](https://www.bilibili.com/video/av10590361/)
-  * https://blog.csdn.net/soulmeetliang/article/details/77461607
-  * [Doraemonzzz/ML-Foundation-and-ML-Techniques](https://github.com/Doraemonzzz/ML-Foundation-and-ML-Techniques):台大机器学习课程作业详解
+  - 资料：http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML19.html
+  - 课程视频：https://www.bilibili.com/video/av46561029/
+  - https://www.youtube.com/playlist?list=PLJV_el3uVTsOK_ZK5L0Iv_EQoL1JefRL4
+  - [李宏毅机器学习(2017)](https://www.bilibili.com/video/av10590361/)
+  - https://blog.csdn.net/soulmeetliang/article/details/77461607
+  - [Doraemonzzz/ML-Foundation-and-ML-Techniques](https://github.com/Doraemonzzz/ML-Foundation-and-ML-Techniques):台大机器学习课程作业详解
 * [机器学习中的数学基础](https://www.bilibili.com/video/av15673238/)
 * [afshinea/stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning):VIP cheatsheets for Stanford's CS 229 Machine Learning
 * [DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python](https://github.com/DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python):这是一个完整的，端到端的机器学习项目，非常适合有一定基础后拿来练习，以提高对完整机器学习项目的认识
@@ -303,6 +303,7 @@
 * [fengdu78/machine_learning_beginner](https://github.com/fengdu78/machine_learning_beginner)
 * [A Course in Machine Learning](http://ciml.info/)
 * [Machine-Learning-Study-Path-March-2019](https://github.com/clone95/Machine-Learning-Study-Path-March-2019)
+* [Yorko/mlcourse.ai](https://github.com/Yorko/mlcourse.ai):Open Machine Learning Course https://mlcourse.ai
 
 ## 比赛
 

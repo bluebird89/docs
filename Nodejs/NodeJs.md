@@ -706,8 +706,6 @@ ORM框架比Web框架要少一些：Sequelize，ORM2，Bookshelf.js，Objection.
 测试框架包括：Mocha，Expresso，Unit.js，Karma……
 构建工具有：Grunt，Gulp，Webpack……
 
-## 教程
-
 ### 实际服务器
 
 nginx作为反向代理服务器，拥有诸多优势，可以做负载均衡和静态资源服务器。
@@ -805,6 +803,7 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 * [noble/bleno](https://github.com/noble/bleno):A Node.js module for implementing BLE (Bluetooth Low Energy) peripherals
 * [octalmage/robotjs](https://github.com/octalmage/robotjs):Node.js Desktop Automation. http://robotjs.io
+* [sveltejs/svelte](https://github.com/sveltejs/svelte):Cybernetically enhanced web apps https://svelte.dev
 
 ##  reference
 

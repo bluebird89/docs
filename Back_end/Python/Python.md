@@ -1349,6 +1349,7 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 * [michaelliao/learn-python3](https://github.com/michaelliao/learn-python3): Learn Python 3 Sample Code
 - [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
 - [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
+
 - [python3](http://www.runoob.com/python3)
 - <http://www.cnblogs.com/linhaifeng/p/7278389.html>
 
@@ -1358,12 +1359,9 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 - [requests/requests](https://github.com/requests/requests)Python HTTP Requests for Humans™ ✨🍰✨ <http://python-requests.org>
 - [scrapy/scrapy](https://github.com/scrapy/scrapy)Scrapy, a fast high-level web crawling & scraping framework for Python. <https://scrapy.org>
 - [fchollet/keras](https://github.com/fchollet/keras)
-- [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide)
 - [ipython/ipython](https://github.com/ipython/ipython)
 - [binux/pyspider](https://github.com/binux/pyspider)A Powerful Spider(Web Crawler) System in Python. <http://docs.pyspider.org/>
 - [fabric/fabric](https://github.com/fabric/fabric)Simple, Pythonic remote execution and deployment. <http://fabfile.org>
-- [vinta/awesome-python](https://github.com/vinta/awesome-python):A curated list of awesome Python frameworks, libraries, software and resources https://awesome-python.com/
-- [keon/algorithms](https://github.com/keon/algorithms)Minimal examples of data structures and algorithms in Python
 
 ## 工具
 
@@ -1380,6 +1378,9 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 
 ## 参考
 
+- [vinta/awesome-python](https://github.com/vinta/awesome-python):A curated list of awesome Python frameworks, libraries, software and resources https://awesome-python.com/
+* [中文文档](https://docs.python.org/zh-cn/3/)
+- [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide)
 * [faif/python-patterns](https://github.com/faif/python-patterns):A collection of design patterns/idioms in Python
 * [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
 * [jobbole/awesome-python-cn](https://github.com/jobbole/awesome-python-cn):Python资源大全中文版，包括：Web框架、网络爬虫、模板引擎、数据库、数据可视化、图片处理等，由伯乐在线持续更新。
@@ -1388,4 +1389,4 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 * [mahmoud/awesome-python-applications](https://github.com/mahmoud/awesome-python-applications):cd Free software that works great, and also happens to be open-source Python. ftp://you:relookin@it.example.com#readme
 * [coodict/python3-in-one-pic](https://github.com/coodict/python3-in-one-pic):Learn python3 in one picture. https://git.io/Coo-py3
 * [lijin-THU/notes-python](https://github.com/lijin-THU/notes-python):中文 Python 笔记
-* [](https://docs.python.org/zh-cn/3/)
+
