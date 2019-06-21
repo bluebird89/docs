@@ -1,4 +1,6 @@
-# Rust
+# [rust-lang/rust]
+
+Empowering everyone to build reliable and efficient software. https://www.rust-lang.org
 
 ## 安装
 

@@ -19,7 +19,6 @@ gatsby develop
 
 * 支持graphsql
 
-
 ## 参考
 
 * [文档](https://next.gatsbyjs.org/docs)

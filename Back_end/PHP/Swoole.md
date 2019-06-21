@@ -63,6 +63,28 @@ php -m | grep swoole
 php --ri swoole
 ```
 
+## 基础
+
+* 多进程/多线程
+    - 了解Linux操作系统进程和线程的概念
+    - 了解Linux进程/线程切换调度的基本知识
+    - 了解进程间通信的基本知识，如管道、UnixSocket、消息队列、共享内存
+* SOCKET
+    - 了解SOCKET的基本操作如accept/connect、send/recv、close、listen、bind
+    - 了解SOCKET的接收缓存区、发送缓存区、阻塞/非阻塞、超时等概念
+* IO复用
+    - 了解select/poll/epoll
+    - 了解基于select/epoll实现的事件循环，Reactor模型
+    - 了解可读事件、可写事件
+* TCP/IP网络协议
+    - 了解TCP/IP协议
+    - 了解TCP、UDP传输协议
+* 调试工具
+    - 使用 gdb 调试Linux程序
+    - 使用 strace 跟踪进程的系统调用
+    - 使用 tcpdump 跟踪网络通信过程
+    - 其他Linux系统工具，如ps、lsof、top、vmstat、netstat、sar、ss等
+
 ## 原理
 
 * 多线程编程
@@ -196,7 +218,7 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
 
 ## Async
 
-异步IO接口，提供了 异步文件系统IO，定时器，异步DNS查询，异步MySQL等API，异步Http客户端，异步Redis客户端
+异步IO接口，提供了异步文件系统IO，定时器，异步DNS查询，异步MySQL等API，异步Http客户端，异步Redis客户端
 
 * swoole_timer 异步毫秒定时器，可以实现间隔时间或一次性的定时任务
     - swoole_timer_tick 间隔的时钟控制器
@@ -487,7 +509,7 @@ ps aux | grep swoole_process_server_master | awk '{print $2}'| xargs kill - USR1
 * [EasySwoole](https://github.com/easy-swoole/easyswoole):High performance Coroutine PHP Framework, base on Swoole http://easyswoole.com/
 * [Swoft](https://doc.swoft.org/)
 * [One](https://www.kancloud.cn/vic-one/php-one/826876)
-* [mixstart/mixphp](https://github.com/mixstart/mixphp):轻量 PHP 框架，基于 Swoole 的常驻内存型 PHP 高性能框架 (开发文档完善) http://mixphp.cn
+* [mix-php/mix](https://github.com/mix-php/mix):轻量 PHP 框架，基于 Swoole 的常驻内存型 PHP 高性能框架 (开发文档完善) http://mixphp.cn
 * [matyhtf/framework](https://github.com/matyhtf/framework)PHP advanced Web development framework. The built-in application server based on the development of swoole extension
 * [shenzhe/zphp](https://github.com/shenzhe/zphp)ZPHP是一个极轻的的，定位于后置SOA服务的框架，可开发独立高效的长驻服务，并能适应多端的变化。
 * [xcl3721/Dora-RPC](https://github.com/xcl3721/Dora-RPC):DoraRPC is an RPC For the PHP MicroService by The Swoole

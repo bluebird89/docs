@@ -148,14 +148,6 @@ Laravel 中 Container（illuminate/container）是 DI/SL 的混合体。关于�
 * 订单类，只要有支付就有订单。
 * 用户相关，尤其是涉及权限时的处理。
 
-#### 进阶
-
-进阶的重点在于经验的积累，尤其实战中 MySQL 的配置、调试与优化。
-
-* 《[高性能 MySQL（第3版）](https://book.douban.com/subject/23008813/)》
-* [数据库索引设计与优化](https://book.douban.com/subject/26419771/)》
-* 《[数据库系统概念（第6版）](https://book.douban.com/subject/10548379/)》
-
 #### 高级
 
 大型网站还可以从数据库读写分离下功夫，解决数据库高负载的问题。再高级一点把数据库抽象为数据访问的相关服务平台，那内容可以引申出多个方面：
@@ -182,16 +174,3 @@ Docker 初级的重点在于 Dockerfile 镜像，Linux CLI 和 shell 编程在�
 
 如果自己不知道怎么配，可以学习 [LaraDock](https://github.com/laradock/laradock)，不过 LaraDock 有点臃肿，但是用来学习和提高认知是非常有帮助的。
 
-#### 高级
-
-* 《[大型网站技术架构：核心原理与案例分析](https://book.douban.com/subject/25723064/)》
-* 《[Docker——容器与容器云（第2版）](https://book.douban.com/subject/26894736/)》
-* 《[Kubernetes权威指南 : 从Docker到Kubernetes实践全接触（第2版）](https://book.douban.com/subject/26902153/)》
-
-## 参考
-
-* [Web 开发进阶指南](https://laravel-china.org/articles/9059/web-development-guide)
-* [todayqq/PHPerInterviewGuide](https://github.com/todayqq/PHPerInterviewGuide)
-* [sushengbuhuo/php-interview-2018](https://github.com/sushengbuhuo/php-interview-2018)
-* [xianyunyh/PHP-Interview](https://github.com/xianyunyh/PHP-Interview):PHP面试整理的资料。包括PHP、MySQL、Linux、计算机网络等资料
-* [金题](https://www.jintix.com/)
