@@ -64,6 +64,7 @@
             * [中文笔记](https://kivy-cn.github.io/Stanford-CS-229-CN/#/)
             * [速查表](https://zhuanlan.zhihu.com/p/56534902)
             * [作业代码](https://github.com/Sierkinhane/CS229-ML-Implements)
+            * [afshinea/stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning):VIP cheatsheets for Stanford's CS 229 Machine Learning https://stanford.edu/~shervine/teaching/cs-229
         + 林轩田《机器学习基石》
             * [中文视频](https://www.bilibili.com/video/av36731342)
             * [中文笔记](https://redstonewill.com/category/ai-notes/lin-ml-foundations/)

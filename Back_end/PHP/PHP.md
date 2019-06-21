@@ -33,16 +33,33 @@ The PHP Interpreter <http://www.php.net>
 
 ## 原理
 
+* SAPI(Server Application Programming Interface)中文为服务端应用编程接口，它通过一系列钩子函数使得PHP可以和外围交换数据,接入层
+    - SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性
+    - 通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式
 * Zend 引擎:PHP4 以后加入 PHP 的，是对原有PHP解释器的重写，整体使用 C 语言进行开发，也就是说可以把PHP理解成用C写的一个编程语言软件，引擎的作用是将PHP代码翻译为一种叫opcode的中间语言，它类似于JAVA的ByteCode（字节码）。引擎对PHP代码会执行四个步骤：
     - 词法分析 Scanning（Lexing），将 PHP 代码转换为语言片段（Tokens）。
     - 解析 Parsing， 将 Tokens 转换成简单而有意义的表达式。
-    - 编译 Compilation，将表达式编译成Opcode。
+    - 编译 Compilation， AST 将表达式编译成Opcode
     - 执行 Execution，虚拟机顺序执行Opcode，每次一条，以实现PHP代码所表达的功能。
     - APC、Opchche 这些扩展可以将Opcode缓存以加速PHP应用的运行速度，使用它们就可以在请求再次来临时省略前三步。
     - 引擎也实现了基本的数据结构、内存分配及管理，提供了相应的API方法供外部调用。
 * Extensions 扩展:常见的内置函数、标准库都是通过extension来实现的，这些叫做PHP的核心扩展，用户也可以根据自己的要求安装PHP的扩展。
-* SAPI(Server Application Programming Interface)中文为服务端应用编程接口，它通过一系列钩子函数使得PHP可以和外围交换数据，SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性。通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式。
 * 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用都是上层应用
+* 请求
+    - php_module_startup()
+    - php_request_startup()
+    - php_excute_script()
+    - php_request_shutdown()
+    - php_module_shutdown()
+* 变量实现
+* 自动回收
+    - 变量赋值只增加引用次数，共用value
+    - 引用计数为0时释放value
+    - 引用计数大于0的value发生写操作时进行分离
+* 语言特性
+* 内存操作
+* 线程安全
+* Opcache
 
 ![PHP 架构](../../_static/php_construct.jpg "Optional title")
 
@@ -57,6 +74,7 @@ The PHP Interpreter <http://www.php.net>
     - phpize有版本号，依赖安装指定目录
         + mac:`/usr/local/lib/php/pecl/20180731/`
     - 需要php7.*-dev 支持
+* [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only.
 
 ```sh
 /usr/local/apache2/bin/apachectl start/stop   service httpd restart
@@ -132,8 +150,6 @@ apt-get install software-properties-common
 sudo add-apt-repository ppa:ondrej/php
 apt-get install php
 ```
-
-* [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only.
 
 ### 扩展安装
 
@@ -1168,13 +1184,13 @@ echo ("Page Views: ".$_SESSION['counter']);
     - c+  它与c相同，但它以读写模式打开文件。
 * 读取文件：`string fread (resource $handle , int $length )`函数用于读取文件的数据
     - 参数：文件资源($handle 由fopen()函数创建的文件指针)和文件大小($length 要读取的字节长度)
-    - 逐行读取文件：string fgets ( resource $handle [, int $length ] )函数用于从文件中读取单行数据内容
-    - 逐个字符读取文件：string fgetc ( resource $handle )函数用于从文件中读取单个字符
+    - 逐行读取文件：`string fgets ( resource $handle [, int $length ] )`函数用于从文件中读取单行数据内容
+    - 逐个字符读取文件：`string fgetc ( resource $handle )`函数用于从文件中读取单个字符
         + 要使用fgetc()函数获取所有数据，请在while循环中使用!feof()函数作为条件。
-* 写入文件：int fwrite ( resource $handle , string $string [, int $length ] )：用于将字符串的内容写入文件
+* 写入文件：`int fwrite ( resource $handle , string $string [, int $length ] )`：用于将字符串的内容写入文件
     - 如果再次运行上面的代码，它将擦除文件的前一个数据并写入新的数据。
     - 附加文件
-* 删除文件：bool unlink ( string $filename [, resource $context ] )
+* 删除文件：`bool unlink ( string $filename [, resource $context ] )`
 * 关闭文件
 * 上传文件：`bool move_uploaded_file ( string $filename , string $destination )`
     - `$_FILES['filename']['name']`   返回文件名称
@@ -1187,6 +1203,8 @@ echo ("Page Views: ".$_SESSION['counter']);
     - $use_include_path：它是可选参数。它默认为false。可以将其设置为true以搜索included_path中的文件
     - $context：表示上下文流资源
     - int：它返回从文件读取的字节数
+* 方法：
+    - basename:返回路径中的文件名部分
 
 ```php
 $filename = "c:\\myfile.txt";
@@ -1252,6 +1270,12 @@ header('Content-Type: application/octet-stream');
 header("Content-Transfer-Encoding: Binary");
 header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");
 readfile($file_url);
+
+echo "1) ".basename("/etc/sudoers.d", ".d").PHP_EOL;
+echo "2) ".basename("/etc/passwd").PHP_EOL;
+echo "3) ".basename("/etc/").PHP_EOL;
+echo "4) ".basename(".").PHP_EOL;
+echo "5) ".basename("/");
 ```
 
 ### redirect
@@ -1934,6 +1958,7 @@ $obj = new \Another\thing; // instantiates object of class Another\thing
 * 性能
     - memory_get_usage()
     - microtime()
+    - `$jRawData = file_get_contents( 'php://input' );`
 
 ```php
 abs(-7)
@@ -2184,6 +2209,9 @@ use Animal\Dog;
 $dog = new Dog();
 $cat = new \Animal\Cat();
 ```
+
+## 异常
+
 
 
 ## 序列化
@@ -2478,9 +2506,78 @@ phpcs --config-set
 
 ## 安全
 
+* md5：一种信息摘要算法（其实就是哈希），不是加密算法，因为md5不可逆，但是加解密是一个可逆的过程
+* 分类
+    - 对称加密，常见算法 DES、3DES、AES等
+        + 用同一个密钥对信息加解密
+        + 欲要加密，必先加密密钥的矛盾
+        + [gibberish-aes-php](https://github.com/ivantcholakov/gibberish-aes-php)
+    - 非对称加密，RSA、DSA、ECDH等
+        + 公钥和私钥是成双成对生成的，二者之间通过某种神秘的数学原理连接
+        + 公钥加密的数据，只能通过相应的私钥解密；私钥加密的数据，只能通过对应的公钥解密
+        + 发给谁信息用谁公钥加密,用自己公钥加密，只有自己私钥解密，利用自己私钥加密，所有有自己公钥的都可以解密
+        + 私钥加密，公钥验签
+        + 公钥可以颁发给任何人，私钥自己保留
+        + [pikirasa](https://github.com/vlucas/pikirasa)
+        + 加密周期长,耗资源
+    - 混合
+        + 随机生成一个AES对称加密用的密钥，然后用客户端的RSA公钥加密后传给客户端
+        + 客户端再通过自己的RSA私钥解密得到这个AES对称密钥，然后再用这个AES对称密钥进行后续的加解密即可
+        + 给这个AES密钥设定一个有效期，过期后，就再次利用上面的流程申请新的AES密钥即可
+* 密钥协商\交换
+    - 避免密钥在网络上的传输被劫持导致的安全问题
+    - 利用RSA等非对称加密技术进行交换
+    - 利用专门伺候密钥交换需求的交换算法，比如DH算法，全称叫做Diffie-Hellman密钥交换
+        + 元首手里有的数据有100（基数）、9、300（加密），古德里安手里的数据有100、3、900（加密），然后两个人此时只需要默默地做下面这一步：元首：9 * 300 = 2700 古德里安：3 * 900 = 2700，就是2700
+        + [diffie-hellman-php](https://github.com/jcink/diffie-hellman-php)
+        + ECDH [ECDH-PHP](https://github.com/Querdos/ECDH-PHP)
+
+```php
+https://github.com/Querdos/ECDH-PHP
+
+<?php
+require_once './autoloader.php';
+use Querdos\lib\ECDHCurve25519;
+$xitele   = new ECDHCurve25519();
+$gudelian = new ECDHCurve25519();
+$xitele->computeSecret( $gudelian->getPublic() );
+$gudelian->computeSecret( $xitele->getPublic() );
+// shareKey1 和 shareKey2 就是协商出来的密钥
+$shareKey1 = $xitele->getSecret();
+echo $shareKey1.PHP_EOL;
+$shareKey2 = $gudelian->getSecret();
+echo $shareKey2.PHP_EOL;
+// 我们用gmp cmp来对比是否为同一个密钥
+if ( 0 == gmp_cmp( $shareKey1, $shareKey2 ) ) {
+  echo "一样".PHP_EOL;
+}
+else {
+  echo "不一样".PHP_EOL;
+}
+// 除此之外，ecdh比dh多了一个验证数据签名验证，也就是说ecdh可以检验数据是否被篡改！
+$msg = "hello world";
+$signature = $xitele->signMessage( $msg );
+if ( $gudelian->verifySignature( $signature, $xitele->getPublic(), $msg ) ) {
+  echo "验证数据签名成功".PHP_EOL;
+}
+else {
+  echo "验证数据签名失败".PHP_EOL;
+}
+exit;
+```
+
 ## 问题
 
 >  5096 segmentation fault (core dumped)  php http_server.php
+
+## 面试
+
+* [Web 开发进阶指南](https://laravel-china.org/articles/9059/web-development-guide)
+* [todayqq/PHPerInterviewGuide](https://github.com/todayqq/PHPerInterviewGuide)
+* [sushengbuhuo/php-interview-2018](https://github.com/sushengbuhuo/php-interview-2018)
+* [xianyunyh/PHP-Interview](https://github.com/xianyunyh/PHP-Interview):PHP面试整理的资料。包括PHP、MySQL、Linux、计算机网络等资料
+* [金题](https://www.jintix.com/)
+* [colinlet/PHP-Interview-QA](https://github.com/colinlet/PHP-Interview-QA):PHP面试问答
 
 ## 参考
 

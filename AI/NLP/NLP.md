@@ -53,6 +53,7 @@ docker-compose up -d
 * [facebookresearch/pytext](https://github.com/facebookresearch/pytext):A natural language modeling framework based on PyTorch https://fb.me/pytextdocs
 * [fighting41love/funNLP](https://github.com/fighting41love/funNLP):文本中抽取结构化信息
 * [isnowfy/snownlp](https://github.com/isnowfy/snownlp):Python library for processing Chinese text
+* [textlint/textlint](https://github.com/textlint/textlint):The pluggable natural language linter for text and markdown. https://textlint.github.io/
 
 ## 参考
 

@@ -288,6 +288,7 @@ docker exec [CONTAINER ID] touch /tmp/exec_works # Execute a command inside a ru
 
 # 获取环境变量
 docker exec container_id env
+docker exec  -it  eeed0831fd62 /bin/bash # 进入容器
 
 docker inspect name  ||  docker ps -l(ast)/-a(ll)     # 查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息
 # 查看容器的名字
@@ -1044,6 +1045,11 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 * [jessfraz/dockerfiles](https://github.com/jessfraz/dockerfiles):Various Dockerfiles I use on the desktop and on servers. https://blog.jessfraz.com/post/docker-containers-on-the-desktop/
 * GUI
   - Shipyard
+
+## 图书
+
+* 《[Docker——容器与容器云（第2版）](https://book.douban.com/subject/26894736/)》
+* 《[Kubernetes权威指南 : 从Docker到Kubernetes实践全接触（第2版）](https://book.douban.com/subject/26902153/)》
 
 ## 工具
 

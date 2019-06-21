@@ -161,27 +161,22 @@ ReactDOM.render(
 
 Flexbox 是css3 里面引入的布局模型－弹性盒子模型，旨在通过弹性的方式来对齐河分布容器中的内容空间，使其能够适应不同屏幕的宽度。react nativie中 的flexbox 是这个规范的一个子集
 
-Flexbox解决了什么问题？
-
 * 浮动布局
 * 不同宽度屏幕的适
 * 宽度自动分配
 * 水平垂直居中
 
-容器属性
+* 容器属性
+  - flexDirection ： row,row-reverse,colum,colum-reverse   #类型于linerlayout 里的 orientation 属性
+  - flexWrap       :   wap,nowap,wap-reverse                      #textview 是否换行
+  - alignItems    ： flex-start,flex-end,center,stretch    # item 的 排列对齐方式 ，上对齐，下对齐 上下间距对齐， 以及严苛对其
+  - justifyContent：flex-start,flex-end,center,space-between,space-roud  # 类似于linerlayout里 layout_gravity 属性
+* 元素属性
+  - flex          ：number                     #类型于weight 属性
+  - alignSelf     ：atuo,flex-start,flex-end,center,stretch  #类似于 gravity 属性
+  - flex－flow  flexDirection 和 flexWrap 属性 的简写形式，默认值为 row nowrap
 
-* flexDirection ： row,row-reverse,colum,colum-reverse   #类型于linerlayout 里的 orientation 属性
-* flexWrap       :   wap,nowap,wap-reverse                      #textview 是否换行
-* alignItems    ： flex-start,flex-end,center,stretch    # item 的 排列对齐方式 ，上对齐，下对齐 上下间距对齐， 以及严苛对其
-* justifyContent：flex-start,flex-end,center,space-between,space-roud  # 类似于linerlayout里 layout_gravity 属性
-
-元素属性
-
-* flex          ：number                     #类型于weight 属性
-* alignSelf     ：atuo,flex-start,flex-end,center,stretch  #类似于 gravity 属性
-* flex－flow  flexDirection 和 flexWrap 属性 的简写形式，默认值为 row nowrap
-
-![lifecycle](/path/to/RN-lifecycle.jpg "lifecycle")
+![lifecycle](../../_static/RN-lifecycle.jpg "lifecycle")
 
 ## ReactJS
 
@@ -191,7 +186,7 @@ Flexbox解决了什么问题？
 - 单向数据流：React 实现了单向响应的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。提高可维护性。
 
 生命周期
-![../_static/react_lifecircle.png]
+![](../../_static/react_lifecircle.png)
 
 ## 组件
 
@@ -212,7 +207,7 @@ Flexbox解决了什么问题？
 - 前端只与Node中间层进行数据通信，Node层则通过thrift接口与后端服务进行数据通信；Node 中间层的 API 设计遵循 RESTFul 的架构风格，并且都以 /api/* 做为前缀；Node 中间层可以视情况添加缓存服务
 
 架构图
-![](../_static/front_back_seperate.png)
+![架构图](../_static/front_back_seperate.png)
 
 - Web端通过ajax调用接口，使用JS把数据渲染到页面上
 - 数据结构和业务逻辑混淆在一起
@@ -238,3 +233,10 @@ npm run eject #  导出配置文件
 
 * 脚手架
   - [gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby):Build blazing fast, modern apps and websites with React https://www.gatsbyjs.org
+* JSX
+  - [developit/htm](https://github.com/developit/htm):Hyperscript Tagged Markup: JSX alternative using standard tagged templates, with compiler support.
+* [reactstudio](https://reactstudio.com)
+
+## 参考
+
+* [Learn the Basics](https://facebook.github.io/react-native/docs/tutorial)
