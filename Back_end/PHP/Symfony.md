@@ -5,20 +5,19 @@ The Symfony PHP framework http://symfony.com. Fabien Potencier
 ## 安装
 
 ```sh
-composer create-project symfony/skeleton my-project
+# get symfony cli
+wget https://get.symfony.com/cli/installer -O - | bash # linux
+curl -sS https://get.symfony.com/cli/installer | bash # mac
+
+symfony new --full [--version=3.4] my_project
+composer create-project symfony/skeleton  my-project "2.3.*" # framework-standard-edition
 
 cd my-project
 composer require server --dev
 
-php bin/console server:run
+# cli-server
+php bin/console server:run -vvv
 php bin/console server:start 0.0.0.0:8000
-
-## symfony client
-curl -sS https://get.symfony.com/cli/installer | bash
-
-## demo
-symfony new --demo my_project
-composer create-project symfony/symfony-demo my_project
 
 ./bin/phpunit
 
@@ -68,25 +67,37 @@ server {
 }
 ```
 
+Entity
+数据库ORM-Doctrine
+Annotation
+
+Serveice
+symfony Proxy with Varish
+Debug bar
+
+团队共享开发环境：域名映射 dns服务器
+
+
+symfony 3.4 与 PHP 7.3
+Warning: "continue" targeting switch is equivalent to
+  "break". Did you mean to use "continue 2"
+
 ## 扩展
 
+* [bundles 仓库](http://knpbundles.com/)
 * [symfony/thanks](https://github.com/symfony/thanks):Give thanks (in the form of a GitHub ★) to your fellow PHP package maintainers (not limited to Symfony components)!
 * [symfony/console](https://github.com/symfony/console):The Console component eases the creation of beautiful and testable command line interfaces. https://symfony.com/console
 * [symfony/http-foundation](https://github.com/symfony/http-foundation):The HttpFoundation component defines an object-oriented layer for the HTTP specification. https://symfony.com/http-foundation
 * [jonaswouters/XhprofBundle](https://github.com/jonaswouters/XhprofBundle):XHProf bundle for Symfony 2
 * [EasyCorp/EasyAdminBundle](https://github.com/EasyCorp/EasyAdminBundle):The new (and simple) admin generator for Symfony applications.
-
-## 工具
-
 * [symfony/dotenv](https://github.com/symfony/dotenv):Symfony Dotenv parses .env files to make environment variables stored in them accessible via getenv(), $_ENV, or $_SERVER. https://symfony.com/dotenv
 
-## 框架
+## 参考
 
 * [Documentation](https://symfony.com/doc/current/index.html)
-* [官网](https://symfony.com/)
+* [symfonycasts](https://symfonycasts.com/)
+* [symfony/symfony-docs](https://github.com/symfony/symfony-docs):The Symfony documentation https://symfony.com/doc
+* [洪大师带你解读Symfony 2框架](https://www.imooc.com/learn/244)
 * [](https://github.com/symfony/symfony-standard)
-* [](https://github.com/javiereguiluz/EasyAdminBundle)
 * [](http://symfony.com/legacy/doc/jobeet/1_2/zh_CN/01?orm=Propel)
 * [](http://www.newlifeclan.com/symfony/)
-* [symfony/symfony-docs](https://github.com/symfony/symfony-docs):The Symfony documentation https://symfony.com/doc
-* [](https://symfony.com/doc/current/setup.html)

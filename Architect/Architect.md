@@ -186,6 +186,7 @@
 * 《架构整洁之道》
 * 《前端架构：从入门到微前端》
 * 《系统架构:复杂系统的产品设计与开发》
+* 《[大型网站技术架构：核心原理与案例分析](https://book.douban.com/subject/25723064/)》
 * 架构设计方面
     - 《系统分析与设计》（Kenneth E.Kendall ，Julie E. Kendall 著）
     - 《设计原本》（Fredrick P.Brooks，Jr. 著）

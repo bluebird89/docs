@@ -2505,6 +2505,7 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
 
 * [code 好事源代码](https://github.com/Ucer/codehaoshi):记录日常开发的笔记，用 laravel 与 vue 构建。后台使用 ucer-admin 管理系统开发
 * [https://github.com/summerblue/larabbs](A forum project base on Laravel 5.5)
+* [mylxsw/wizard](https://github.com/mylxsw/wizard):Wizard是基于Laravel开发框架开发的一款开源项目（API）文档管理工具。 https://mylxsw.github.io/wizard/
 
 ```sh
 git clone git@github.com:summerblue/larabbs.git

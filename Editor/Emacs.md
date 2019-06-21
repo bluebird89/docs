@@ -28,8 +28,7 @@ brew linkapps emacs-plus
 
 emacs --insecure
 
-
-  /usr/local/opt/emacs-plus # Emacs.app was installed to
+/usr/local/opt/emacs-plus # Emacs.app was installed to
 brew linkapps  # To link the application to default Homebrew App location:
 ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications
 ```
@@ -283,6 +282,7 @@ M-g                    设置字体
 * [purcell/emacs.d](https://github.com/purcell/emacs.d):An Emacs configuration bundle with batteries included
 * [emacs-tw/awesome-emacs](https://github.com/emacs-tw/awesome-emacs):A community driven list of useful Emacs packages, libraries and others.
 * [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust ❤️ Emacs
+* [abo-abo/hydra](https://github.com/abo-abo/hydra):make Emacs bindings that stick around
 * <http://blog.csdn.net/redguardtoo/article/details/7222501/>
 * <https://wiki.archlinux.org/index.php/Emacs_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87>)
 * <http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-tips/>
