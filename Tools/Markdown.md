@@ -668,7 +668,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
     - Ulysses for Mac
     - MWeb Lite
     - MWeb for Mac
-    - Twig
+    - [Twig](https://github.com/lukakerr/Pine):A modern, native macOS markdown editor https://lukakerr.github.io/Pine
     - [MacDown](https://github.com/MacDownApp/macdown):Open source Markdown editor for macOS. https://macdown.uranusjr.com/
     - Mark Text:实时显示的markdown编辑器
     * [幕布](https://mubu.com/):可折叠的markdown
@@ -683,6 +683,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
 - [marktext/marktext](https://github.com/marktext/marktext):📝Next generation markdown editor, running on platforms of MacOS Windows and Linux. https://marktext.github.io/website/ `brew cask install mark-text`
 * [fabiospampinato/notable](https://github.com/fabiospampinato/notable):The markdown-based note-taking app that doesn't suck.
 * [Markdown Here](https://markdown-here.com/)
+* [GitNote](https://www.gitnoteapp.com)
 
 ## 工具
 
@@ -705,9 +706,9 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * [Mark Text](https://github.com/marktext/marktext/)
 * [evilstreak/markdown-js](https://github.com/evilstreak/markdown-js):A Markdown parser for javascript
 * [Marp](https://yhatt.github.io/marp/):Markdown Presentation Writer
-* [GitNote](https://www.gitnoteapp.com)
-* [Twig](https://github.com/lukakerr/Pine):A modern, native macOS markdown editor https://lukakerr.github.io/Pine
 * [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
+* [markdown-it/markdown-it](https://github.com/markdown-it/markdown-it):Markdown parser, done right. 100% CommonMark support, extensions, syntax plugins & high speed https://markdown-it.github.io
+* [xi-editor/xi-editor](https://github.com/xi-editor/xi-editor):A modern editor with a backend written in Rust. https://xi-editor.io
 
 ## 参考
 

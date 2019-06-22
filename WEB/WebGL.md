@@ -9,3 +9,4 @@
 ## 参考
 
 * [WebGL: 2D and 3D graphics for the web](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
+* [WebGL进阶——走进图形噪声](https://mp.weixin.qq.com/s/PY3yLozQFtuohHPewUfP9g)

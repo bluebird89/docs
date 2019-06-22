@@ -16,6 +16,8 @@
     - [processone/ejabberd](https://github.com/processone/ejabberd):Robust, ubiquitous and massively scalable Jabber / XMPP Instant Messaging platform https://www.process-one.net/en/ejabberd/
 * table
     - [Table Convert Online](https://tableconvert.com/)
+* monitor
+    - [huginn/huginn](https://github.com/huginn/huginn):Create agents that monitor and act on your behalf. Your agents are standing by!
 
 ## cheatsheets
 
