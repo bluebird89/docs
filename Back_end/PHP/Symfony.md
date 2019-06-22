@@ -67,16 +67,75 @@ server {
 }
 ```
 
+
+## Doctrine
 Entity
-数据库ORM-Doctrine
-Annotation
+Repository
+Proxy:需要时才生成
+
+
+
+## Annotation
+
+annotation: 中间不能有空格
+method #加use
+嵌套
+
+```
+@Route("/hi/{name}",requirements={"name"="\d"})
+```
+router.yml
+php app/console router:debug # 路由列表
+php app/console router:match /hi/4 #路由匹配
+
 
 Serveice
-symfony Proxy with Varish
-Debug bar
+php app/console container:debug # 服务列表
+
+## symfony Proxy with Varish
+
 
 团队共享开发环境：域名映射 dns服务器
 
+
+
+## controller
+
+* request
+* response
+
+
+
+
+## twig
+
+* 判断  {{}}
+* 输出 {% %}
+* 注释{# #}
+
+
+
+## assettic bundle
+
+* 静态资源软连接 `php app/console assets:install web --symlink --relative`
+
+You must add HenryWebBundle to the assetic.bundle config to use the {% javascripts %} tag
+app/config/config.yml里有个assetic配置段  HenryWebBundle
+
+* 静态文件分离
+* coffee 编译
+* 压缩 `https://github.com/mishoo/UglifyJS2`
+* 版本控制
+* 资源合并：`php app/console assetic:dump  --env=prod --on-debug 生成静态文件以及合并`
+    - 2.5 --fork :多线程生成
+
+## View
+
+* 页面管理:类的继承关系管理页面
+* HTML5Boilerplate
+    - http://www.initializr.com/
+
+## 问题
 
 symfony 3.4 与 PHP 7.3
 Warning: "continue" targeting switch is equivalent to
@@ -84,6 +143,7 @@ Warning: "continue" targeting switch is equivalent to
 
 ## 扩展
 
+* Debug bar
 * [bundles 仓库](http://knpbundles.com/)
 * [symfony/thanks](https://github.com/symfony/thanks):Give thanks (in the form of a GitHub ★) to your fellow PHP package maintainers (not limited to Symfony components)!
 * [symfony/console](https://github.com/symfony/console):The Console component eases the creation of beautiful and testable command line interfaces. https://symfony.com/console
@@ -95,8 +155,9 @@ Warning: "continue" targeting switch is equivalent to
 ## 参考
 
 * [Documentation](https://symfony.com/doc/current/index.html)
-* [symfonycasts](https://symfonycasts.com/)
 * [symfony/symfony-docs](https://github.com/symfony/symfony-docs):The Symfony documentation https://symfony.com/doc
+* [中文文档](http://symfonychina.com/doc/current/index.html)
+* [symfonycasts](https://symfonycasts.com/)
 * [洪大师带你解读Symfony 2框架](https://www.imooc.com/learn/244)
 * [](https://github.com/symfony/symfony-standard)
 * [](http://symfony.com/legacy/doc/jobeet/1_2/zh_CN/01?orm=Propel)
