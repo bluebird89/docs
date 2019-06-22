@@ -47,18 +47,30 @@ xpath('//div[contains(@id,"ma") and contains(@id,"in")]') # 选取id值包含ma�
 xpath('//div[contains(text(),"ma")]') # 选取节点文本包含ma的div节点
 ```
 
-## admin UI
+## 参数
 
-* [DormyMo/SpiderKeeper](https://github.com/DormyMo/SpiderKeeper)：admin ui for scrapy/open source scrapinghub http://sk.7mdm.com:5000/
+`scrapy shell "http://quotes.toscrape.com/page/1/"`
+* module
+    - crawler    <scrapy.crawler.Crawler object at 0x110f58a50>
+    - item       {}
+    - request    <GET http://quotes.toscrape.com/page/1/>
+    - response   <200 http://quotes.toscrape.com/page/1/>
+    - settings   <scrapy.settings.Settings object at 0x110f58ad0>
+    - spider     <DefaultSpider 'default' at 0x1112eab50>
+* shortcuts
+    - fetch(url[, redirect=True]) Fetch URL and update local objects (by default, redirects are followed)
+    - fetch(req)                  Fetch a scrapy.Request and update local objects
+    - shelp()           Shell help (print this help)
+    - view(response)    View response in a browser
 
-## 资源
-
-* [CriseLYJ/awesome-python-login-model](https://github.com/CriseLYJ/awesome-python-login-model):😮python模拟登陆一些大型网站，还有一些简单的爬虫
 
 ## 工具
 
 * [scrapy/quotesbot](https://github.com/scrapy/quotesbot):This is a sample Scrapy project for educational purposes 
+* admin UI
+    - [DormyMo/SpiderKeeper](https://github.com/DormyMo/SpiderKeeper)：admin ui for scrapy/open source scrapinghub http://sk.7mdm.com:5000/
 
 ## 参考
 
-* [Scrapy 1.5 documentation](https://docs.scrapy.org/en/latest/)
+* [CriseLYJ/awesome-python-login-model](https://github.com/CriseLYJ/awesome-python-login-model):😮python模拟登陆一些大型网站，还有一些简单的爬虫
+* [Scrapy documentation](https://docs.scrapy.org/en/latest/)
