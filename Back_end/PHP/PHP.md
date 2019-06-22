@@ -92,7 +92,6 @@ cgi.fix_pathinfo=0 #  php.ini 文件中的配置项  如果文件不存在，则
 php.exe -v
 php.exe -i # 运行phpinfo()函数
 
-php.exe -m # 显示已经加载了那些module
 php -a # 进入命令行模式
 
 ### Mac
@@ -158,7 +157,7 @@ apt-get install php
 
 ```sh
 php -m # 查看添加扩展
-php --ini　# 查找PHP CLI的ini文件位置
+php --ri xhprof
 
 ln -s /etc/php5/mods-available/redis.ini /etc/php5/cli/conf.d/10-redis.ini
 ln -s /etc/php5/mods-available/redis.ini /etc/php5/apache2/conf.d/10-redis.ini
@@ -167,6 +166,7 @@ apt-cache search memcached
 apt-get install -y php5-memcached
 
 pecl install memcached
+pecl install channel://pecl.php.net/vld-0.16.0
 ```
 
 ### Cli
@@ -182,8 +182,7 @@ pecl install memcached
 * 配置文件:在命令行中的php.ini文件，会配置比较长的max_execution_time
 
 ```sh
-php --ini # 查看php 配置信息
-php -m | grep swoole
+php --ini　# 查找PHP CLI的ini文件位置
 php -r "echo php_sapi_name();" # 判断当前执行的php是什么模式下 R RUN
 php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数。这种方法首先要设置php解释器的路径，Windows平台在运行CLI之前，需设置类似path c:\php的命令，也失去了CLI脚本第一行的意义，因此不建议使用该方法。
 
@@ -2289,6 +2288,11 @@ echo "Associative array always output as object: ", json_encode($d, JSON_FORCE_O
 ?>
 ```
 
+魔法函数场景
+
+
+
+
 ## 扩展
 
 * intl
@@ -2423,7 +2427,203 @@ EXPOSE 9000 CMD ["php-fpm"]
 - docker build -t php:5.6-fpm .
 - docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/local/etc/php -v $PWD/logs:/phplogs -d php:5.6-fpm
 
+## [xhprof](https://github.com/phacility/xhprof)
+
+* 一个分层PHP性能分析工具。它报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情况。
+* [longxinH/xhprof](https://github.com/longxinH/xhprof):PHP7 support
+* 工具
+    - [EvaEngine/xhprof.io ](https://github.com/EvaEngine/xhprof.io):GUI to analyze the profiling data collected using XHProf – A Hierarchical Profiler for PHP. http://xhprof.io/
+    - [perftools/xhgui](https://github.com/perftools/xhgui):A graphical interface for XHProf data built on MongoDB
+* 方法
+    - xhprof_disable — 停止 xhprof 分析器
+    - xhprof_enable — 启动 xhprof 性能分析器
+    - xhprof_sample_disable — 停止 xhprof 性能采样分析器
+    - xhprof_sample_enable — 以采样模式启动 XHProf 性能分析
+* 主要指标： 
+Inclusive Time (或子树时间)：包括子函数所有执行时间。 
+Exclusive Time/Self Time：函数执行本身花费的时间，不包括子树执行时间。 
+Wall时间：花去了的时间或挂钟时间。 
+CPU时间：用户耗的时间+内核耗的时间 
+
+# 如果xhprof_enable函数写作：xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY)可以输出更多指标。 
+Function Name 函数名 
+Calls 调用次数 
+Calls% 调用百分比 
+
+# 消耗时间 
+**Incl. Wall Time (microsec) ** 调用的包括子函数所有花费时间 以微秒算(一百万分之一秒)
+IWall% 调用的包括子函数所有花费时间的百分比 
+**Excl. Wall Time (microsec) ** 函数执行本身花费的时间，不包括子树执行时间,以微秒算(一百万分之一秒) 
+EWall% 函数执行本身花费的时间的百分比，不包括子树执行时间 
+
+# 消耗CPU 
+Incl. CPU(microsecs) 调用的包括子函数所有花费的cpu时间。减Incl. Wall Time即为等待cpu的时间 
+ICpu% Incl. CPU(microsecs)的百分比 
+Excl. CPU(microsec) 函数执行本身花费的cpu时间，不包括子树执行时间,以微秒算(一百万分之一秒)。 
+ECPU% Excl. CPU(microsec)的百分比 
+
+# 消耗内存 
+Incl.MemUse(bytes) 包括子函数执行使用的内存。 
+IMemUse% Incl.MemUse(bytes)的百分比 
+Excl.MemUse(bytes) 函数执行本身内存,以字节算 
+EMemUse% Excl.MemUse(bytes)的百分比 
+
+# 消耗内存峰值 
+Incl.PeakMemUse(bytes) Incl.MemUse的峰值 
+IPeakMemUse% Incl.PeakMemUse(bytes) 的峰值百分比 
+Excl.PeakMemUse(bytes) Excl.MemUse的峰值 
+EPeakMemUse% EMemUse% 峰值百分比 c
+
+* 黄色最耗时路径
+* 红色是瓶颈
+
+```sh
+git clone https://github.com/longxinH/xhprof
+cd xhprof/extension/
+/usr/local/php/bin/phpize
+./configure --with-php-config=/usr/local/Cellar/php/7.3.6/bin/php-config --enable-xhprof
+make&&make install
+# 配置
+[xhprof]
+extension=xhprof.so
+xhprof.output_dir = /Users/henry/Workspace/www/xhprof # 该目录自由定义即可,用来保存xhprof生成的源文件
+
+## 重启PHP服务
+kill -USR2 `cat /opt/php-7.0.14/var/run/php-fpm.pid`
+
+sudo pecl install channel://pecl.php.net/xhprof-0.9.4
+
+yum install graphviz
+
+
+# 使用
+# 单文件
+xhprof_enable(); # 需要分析的代码
+
+##  Code
+
+$xhprof_data = xhprof_disable();
+include_once ROOT_PATH.'/xhprof_lib/utils/xhprof_lib.php';
+include_once ROOT_PATH . '/xhprof_lib/utils/xhprof_runs.php';
+$xhprof_runs = new XHProfRuns_Default();
+$run_id = $xhprof_runs->save_run($xhprof_data, "xhprof_test"); # 将run_id保存起来或者随代码一起输出
+
+# 查看结果
+$host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
+
+# 项目中
+<?php
+namespace backend\component;
+
+use Yii;
+use common\component\baseController;
+
+class backendBaseController extends baseController
+{
+    public $layout = "/content";
+    public $enableCsrfValidation = false;
+
+    public static $profiling = 0;
+
+    public function init(){
+        parent::init();
+
+        self::$profiling = 1;// !(mt_rand() % 9);
+        if  (self::$profiling) {
+            xhprof_enable(XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
+        }
+    }
+
+    public function __destruct()
+    {
+        if(self::$profiling){
+            $data = xhprof_disable();
+            //$_SERVER['XHPROF_ROOT_PATH'] 该环境变量由第3步得来
+            include_once $_SERVER['XHPROF_ROOT_PATH'] . "/xhprof_lib/utils/xhprof_lib.php";
+            include_once $_SERVER['XHPROF_ROOT_PATH'] . "/xhprof_lib/utils/xhprof_runs.php";
+            $x = new XHProfRuns_Default();
+
+            //当前路由
+            $routeName = Yii::$app->requestedRoute;
+            //路由为空，则说明是首页
+            if (empty($routeName)){
+                $routeName = Yii::$app->defaultRoute;
+            }
+
+            //拼接xhprof分析结果保存文件名
+            $xhprofFilename = str_replace('/', '_', $routeName).'_'.date('Ymd_His');
+            $x->save_run($data, $xhprofFilename);
+        }
+    }
+}
+```
+
 ## 性能
+
+压测 手段
+ab `ab -n1000 -c10 https://www.baidu.com/`  请求数 并发数
+requests per second
+time per request
+
+* time file.php
+查看 user 参数
+XHPorf
+    MO PO 多语言
+
+* 语言级
+编译解析开销
+用语言内置函数
+zend逐行扫描 分析 成zend能识别的语法解析成opcode（内置方法生成opcode 少）执行
+
+内置函数性能：知道方法的时间复杂度
+isset arrat_key_exists
+魔法函数性能不佳
+产生错误抑制符：代码前后改变错误等级 error_reporting 前面忽略 后面还原
+    vld:查看opcode
+    php -dvld.active=1 -dvld.excute=0 at.php
+    excute =0 opcode在么 并不执行
+合理使用内存：unset释放掉
+unset注销不掉
+    正则 回溯开销大
+避免循环内运算：for中 length 放在外面
+减少密集运算：开销比C大
+带引号字符串作为键值
+
+* 周边：系统的依赖，找到问题核心
+    - php 串行
+    - 硬件
+        + 运行环境linux
+        + 硬盘 文件存储
+        + 内存：memache 热数据
+    - 软件
+        + 数据库
+    - 网络
+    - + 减少文件操作：读写内存 << 读写数据库 << 读写磁盘 《〈 读写网络（网络延时）
+    - 减少网络请求
+        + 对方网络不确定
+        + 网络稳定性
+        + 设置超时
+            * 连接超时 800ms
+            * 读超时 200ms
+            * 写超时 500ms
+        + 串行并行化
+            * curl_multi依赖最长
+            * swoole
+    - 压缩PHP输出 Gzip
+        + 快
+        + 服务器、客户端：额外CPU开销
+        + 大于100k使用,根据内容重复度压缩后
+    - 缓存
+        + 重复请求 内容不变
+        + smarty: 开启caching
+    - 重叠时间窗口
+        + 后任务不强依赖前一任务
+        + 旁路方案
+* 方法
+    - APC：Opcache缓存
+        + yac
+    - 扩展实现高频逻辑
+    - runtime优化:HHVM
 
 ```sh
 time php php-src/Zend/micro_bench.php # 源码自带性能测试

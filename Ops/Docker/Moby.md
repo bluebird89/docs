@@ -47,7 +47,7 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
   - Hypervisor抽象虚拟化硬件平台
   - VMWare, XEN抽象虚拟化操作系统
     + 进程隔离需要系统隔离
-  - LXC 进程级别虚拟化
+  - LXC(Linux Container) 进程级别虚拟化
 
 ## Install
 
@@ -112,8 +112,8 @@ docker version|info
   - 进程隔离：每个容器都运行在自己的进程环境中
   - 网络隔离：容器间的虚拟网络接口和 IP 地址都是分开的
   - 资源隔离和分组：使用 cgroups 将 CPU 和内存之类的资源独立分配给每个 Docker 容器
-* 隔离性
-  - namespace，每个容器都有自己单独的名字空间，运行在其中的应用都像是在独立的操作系统中运行一样。名字空间保证了容器之间彼此互不影响。
+* 隔离实现
+  - namespace，每个容器都有单独的名字空间，运行在其中的应用都像是在独立的操作系统中运行一样。名字空间保证了容器之间彼此互不影响。
     + pid namespace：不同用户的进程就是通过pid隔离开的，且不同的namespace中可以有相同pid。所有LXC进程在Docker中的父进程为Docker进程，同时允许嵌套，实现Docker in Docker。
     + net namespace:网络的隔离则通过net namespace实现，每个net namspace有独立的network device， IP, IP routing table， /proc/net目录等。默认采用 veth 的方式，将容器中的虚拟网卡同 host 上的一 个Docker 网桥 docker0 连接在一起。
     + ipc namespace:Container中进程交互采用linux的进程间交互方法， Interprocess Communicaiton - IPC， 包括信号量，消息队列，共享内存等。容器的进程间交互实际上还是 host 上具有相同 pid 名字空间中的进程间交互，因此需要在 IPC 资源申请时加入名字空间信息，每个 IPC 资源有一个唯一的 32 位 id
@@ -121,7 +121,7 @@ docker version|info
     + uts namesapce:UTS - Unix Time-Sharing System namespace允许每个Container拥有独立的hostname和domain name，使其在网络上可以独立的节点而非 主机上的一个进程
     + user namespace：每个Container拥有不同user和group id，可以在容器内用容器内部的用户执行程序而非主机上的用户。
 * 可配额/可度量
-  - Linux的控制组 cgroups实现了对资源配额和度量,容器资源统计和隔离
+  - Linux的控制组 cgroups（Control Groups）实现了对资源配额和度量,容器资源统计和隔离。可以限制、记录、隔离进程组（process groups）所使用的物理资源（如：cpu,memory, io 等等）的机制
   - 确保各个容器可以公平地分享主机的内存、CPU、磁盘 IO 等资源；当然，更重要的是，控制组确保了当容器内的资源使用产生压力时不会连累主机系统
   - cgroups类似文件的接口，在/cgroups目录下新建一个group，在此文件夹新建task，并将pid写入即可实现对改进程的资源控制
   - blkio，cpu，devices，memory，net_cls, ns等9大子系统
