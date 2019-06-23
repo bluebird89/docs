@@ -4,7 +4,7 @@
 
 ### PSR0
 
-类的自动加载
+类自动加载
 
 * 一个完全标准的命名空间(namespace)和类(class)的结构是这样的：\<Vendor Name>\(<Namespace>\)*<Class Name>
 * 每个命名空间(namespace)都必须有一个顶级的空间名(namespace)("组织名(Vendor Name)")。
