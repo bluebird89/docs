@@ -217,6 +217,213 @@ composer install --no-plugins --no-scripts
 调整PHP memory_limit 大小
 ```
 
+## 命名空间
+
+* 如果一个文件中包含命名空间，它必须在其它所有代码之前声明命名空间
+* 用户编写的代码与PHP内部的类/函数/常量或第三方类/函数/常量之间的名字冲突
+* 为很长的标识符名称(通常是为了缓解第一类问题而定义的)创建一个别名（或简短）的名称，提高源代码的可读性
+* 以下类型的代码受命名空间的影响，它们是：类（包括抽象类和traits）、接口、函数和常量
+* 可以在同一个文件中定义多个命名空间,建议使用下面的大括号形式的语法
+* 类名可以通过三种方式引用
+    - 非限定名称，或不包含前缀的类名称，例如 $a=new foo(); 或 foo::staticmethod();。如果当前命名空间是 currentnamespace，foo 将被解析为 currentnamespace\foo。如果使用 foo 的代码是全局的，不包含在任何命名空间中的代码，则 foo 会被解析为foo。
+    - 限定名称,或包含前缀的名称，例如 $a = new subnamespace\foo(); 或 subnamespace\foo::staticmethod();。如果当前的命名空间是 currentnamespace，则 foo 会被解析为 currentnamespace\subnamespace\foo。如果使用 foo 的代码是全局的，不包含在任何命名空间中的代码，foo 会被解析为subnamespace\foo。
+    - 完全限定名称，或包含了全局前缀操作符的名称，例如， $a = new \currentnamespace\foo(); 或 \currentnamespace\foo::staticmethod();。
+* 两种抽象的访问当前命名空间内部元素的方法，`__NAMESPACE__` 魔术常量和namespace关键字
+    - 常量__NAMESPACE__的值是包含当前命名空间名称的字符串。在全局的，不包括在任何命名空间中的代码，它包含一个空的字符串
+* 导入：允许通过别名引用或导入外部的完全限定名称
+    - 为类名称使用别名
+    - 为接口使用别名
+    - 为命名空间名称使用别名
+
+```php
+namespace my\name;
+
+class MyClass {}
+function myfunction() {}
+const MYCONST = 1;
+
+$a = new MyClass;
+$c = new \my\name\MyClass;
+
+$d = namespace\MYCONST;
+
+$d = __NAMESPACE__ . '\MYCONST';
+echo constant($d);
+
+# 同一个文件中定义多个命名空间,两种方式
+namespace MyProject;
+
+const CONNECT_OK = 1;
+class Connection { /* ... */ }
+function connect() { /* ... */  }
+
+namespace AnotherProject;
+
+const CONNECT_OK = 1;
+class Connection { /* ... */ }
+function connect() { /* ... */  }
+
+## 方式2
+namespace MyProject {
+
+const CONNECT_OK = 1;
+class Connection { /* ... */ }
+function connect() { /* ... */  }
+}
+
+namespace AnotherProject {
+
+const CONNECT_OK = 1;
+class Connection { /* ... */ }
+function connect() { /* ... */  }
+}
+
+## 引用方式
+namespace Foo\Bar;
+include 'file1.php';
+
+const FOO = 2;
+function foo() {}
+class foo
+{
+    static function staticmethod() {}
+}
+
+/* 非限定名称 */
+foo(); // 解析为 Foo\Bar\foo resolves to function Foo\Bar\foo
+foo::staticmethod(); // 解析为类 Foo\Bar\foo的静态方法staticmethod。resolves to class Foo\Bar\foo, method staticmethod
+echo FOO; // resolves to constant Foo\Bar\FOO
+
+/* 限定名称 */
+subnamespace\foo(); // 解析为函数 Foo\Bar\subnamespace\foo
+subnamespace\foo::staticmethod(); // 解析为类 Foo\Bar\subnamespace\foo,
+                                  // 以及类的方法 staticmethod
+echo subnamespace\FOO; // 解析为常量 Foo\Bar\subnamespace\FOO
+
+/* 完全限定名称 */
+\Foo\Bar\foo(); // 解析为函数 Foo\Bar\foo
+\Foo\Bar\foo::staticmethod(); // 解析为类 Foo\Bar\foo, 以及类的方法 staticmethod
+echo \Foo\Bar\FOO; // 解析为常量 Foo\Bar\FOO
+
+## __NAMESPACE__
+namespace MyProject;
+echo '"', __NAMESPACE__, '"'; // 输出 "MyProject"
+function get($classname)
+{
+    $a = __NAMESPACE__ . '\\' . $classname;
+    return new $a;
+}
+
+## 全局代码
+echo '"', __NAMESPACE__, '"'; // 输出 ""
+
+## namespace
+namespace MyProject;
+
+use blah\blah as mine; // see "Using namespaces: importing/aliasing"
+
+blah\mine(); // calls function MyProject\blah\mine()
+namespace\blah\mine(); // calls function MyProject\blah\mine()
+
+namespace\func(); // calls function MyProject\func()
+namespace\sub\func(); // calls function MyProject\sub\func()
+namespace\cname::method(); // calls static method "method" of class MyProject\cname
+$a = new namespace\sub\cname(); // instantiates object of class MyProject\sub\cname
+$b = namespace\CONSTANT; // assigns value of constant MyProject\CONSTANT to $b
+
+## 全局
+namespace\func(); // calls function func()
+namespace\sub\func(); // calls function sub\func()
+namespace\cname::method(); // calls static method "method" of class cname
+$a = new namespace\sub\cname(); // instantiates object of class sub\cname
+$b = namespace\CONSTANT; // assigns value of constant CONSTANT to $b
+
+## 使用use操作符导入/使用别名
+namespace foo;
+use My\Full\Classname as Another;
+
+// 下面的例子与 use My\Full\NSname as NSname 相同
+use My\Full\NSname;
+// 导入一个全局类
+use ArrayObject;
+// importing a function (PHP 5.6+)
+use function My\Full\functionName;
+// aliasing a function (PHP 5.6+)
+use function My\Full\functionName as func;
+// importing a constant (PHP 5.6+)
+use const My\Full\CONSTANT;
+
+$obj = new namespace\Another; // 实例化 foo\Another 对象
+$obj = new Another; // 实例化 My\Full\Classname　对象
+NSname\subns\func(); // 调用函数 My\Full\NSname\subns\func
+$a = new ArrayObject(array(1)); // 实例化 ArrayObject 对象
+// 如果不使用 "use \ArrayObject" ，则实例化一个 foo\ArrayObject 对象
+func(); // calls function My\Full\functionName
+echo CONSTANT; // echoes the value of My\Full\CONSTANT
+
+# 通过use操作符导入/使用别名，一行中包含多个use语句
+use My\Full\Classname as Another, My\Full\NSname;
+$obj = new Another; // 实例化 My\Full\Classname 对象
+NSname\subns\func(); // 调用函数 My\Full\NSname\subns\func
+
+# 导入和动态名称
+use My\Full\Classname as Another, My\Full\NSname;
+$obj = new Another; // 实例化一个 My\Full\Classname 对象
+$a = 'Another';
+$obj = new $a;      // 实际化一个 Another 对象
+
+# 导入和完全限定名称
+use My\Full\Classname as Another, My\Full\NSname;
+$obj = new Another; // instantiates object of class My\Full\Classname
+$obj = new \Another; // instantiates object of class Another
+$obj = new Another\thing; // instantiates object of class My\Full\Classname\thing
+$obj = new \Another\thing; // instantiates object of class Another\thing
+```
+
+## 自动加载
+
+PHP在需要类定义的时候调用它
+
+* include 或 require
+* `__autoload`:调用不存在的类时会被自动调用,现在基本废弃
+    - 一个文件中不允许有多个 `__autoload()`方法，引入文件中也存在`__autoload()`
+    - 一个文件中引入多个文件目录
+* bool spl_autoload_register ([ callable $autoload_function [, bool $throw = true [, bool $prepend = false ]]] ) :注册给定的函数作为 `__autoload` 的实现
+    - 函数名称
+    - 闭包函数
+* 获取所有已注册的 `__autoload()` 函数:spl_autoload_functions ( void )
+* spl_classes — 返回所有可用的SPL类
+* spl_autoload_unregister — 注销已注册的`__autoload()`函数
+
+```php
+<?php
+function __autoload($class){
+    if(file_exists($class.".php")){
+        require_once($class.".php");
+    }else{
+        die("文件不存在！");
+    }
+}
+
+Test1::test();
+Test2::test();
+
+// 注册
+spl_autoload_register(function ($class_name) {
+    $class_name = str_replace('\\','/', $class_name); /*将 use语句中的’\’替换成’/‘，避免造成转移字符导致require_once时会报错*/
+    $file_name  = $class_name . '.class.php';
+    if (file_exists($file_name)) {
+        require_once $file_name;
+    }
+
+});
+
+use Animal\Dog;
+
+$dog = new Dog();
+$cat = new \Animal\Cat();
+```
+
 ## 参考
 
 * [官网](https://getcomposer.org/)

@@ -70,14 +70,15 @@ The PHP Interpreter <http://www.php.net>
 * 通过php-fpm进程运行 `/usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx`
 * php71卸载后php-fpm仍然运行
     - `brew services stop php`
-* phpize pecl
+* phpize
     - phpize有版本号，依赖安装指定目录
         + mac:`/usr/local/lib/php/pecl/20180731/`
     - 需要php7.*-dev 支持
 * [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only.
 
 ```sh
-/usr/local/apache2/bin/apachectl start/stop   service httpd restart
+/usr/local/apache2/bin/apachectl start|stop
+service httpd restart
 
 LoadModule php5_module modules/libphp5.so # httpd.conf中添加
 
@@ -117,7 +118,7 @@ mkdir -p ~/Library/LaunchAgents
 cp /usr/local/opt/php71/homebrew.mxcl.php71.plist ~/Library/LaunchAgents/
 launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php71.plist
 
-sudo brew services start/stop/restart php71
+brew services start|stop|restart php71
 
 PHP Startup: Unable to load dynamic library # 扩展重复加载
 
@@ -164,22 +165,20 @@ ln -s /etc/php5/mods-available/redis.ini /etc/php5/apache2/conf.d/10-redis.ini
 
 apt-cache search memcached
 apt-get install -y php5-memcached
-
-pecl install memcached
-pecl install channel://pecl.php.net/vld-0.16.0
 ```
 
 ### Cli
 
 * 用多进程, 子进程结束以后, 内核会负责回收资源
-* 使用多进程,子进程异常退出不会导致整个进程Thread退出. 父进程还有机会重建流程.
-* 一个常驻主进程, 只负责任务分发, 逻辑更清楚.
+* 使用多进程,子进程异常退出不会导致整个进程Thread退出. 父进程还有机会重建流程
+* 一个常驻主进程, 只负责任务分发, 逻辑更清楚
 * 完全支持多线程
-* 如上，可以实现定时任务
+* 实现定时任务
 * 开发桌面应用就是使用PHP-CLI和GTK包
 * linux下用php编写shell脚本
 * [ircmaxell/phpvm](https://github.com/ircmaxell/phpvm):A PHP version manager for CLI PHP
-* 配置文件:在命令行中的php.ini文件，会配置比较长的max_execution_time
+* 配置
+    - 会配置比较长的max_execution_time
 
 ```sh
 php --ini　# 查找PHP CLI的ini文件位置
@@ -197,17 +196,21 @@ PHP Extension Community Library，管理着最底层的PHP扩展。用 C 写的
 
 * [PEAR](http://pear.php.net/)：PHP Extension and Application Repository，管理着项目环境的扩展。用 PHP 写的
     - 编译好的依赖：/usr/lib/php
-* Composer：和PEAR都管理着项目环境的依赖，这些依赖也是用 PHP 写的，区别不大。但 composer 却比 PEAR 来的更受欢迎
+* Composer：和PEAR都管理着项目环境的依赖，这些依赖也是用 PHP 写的，区别不大。但 composer 却比 PEAR 更受欢迎
+* 扩展
+    - vld:查看代码opcache
 
 ```sh
-phpize -v
+pecl install memcached
 
+phpize -v
 cd extname
 phpize
 ./configure
 make
 make install
-extension=pgsql
+# 配置文件添加扩展
+extension="swoole.so"
 
 sudo apt-get install php-xml php7.3-xml php-dev php7.3-dev
 sudo apt install php-pear
@@ -217,14 +220,10 @@ php go-pear.phar
 
 # 修改bin路径
 pear version
-sudo apt install php7.3-dev # to use phpize  生成编译检测脚本
+sudo apt install php7.3-dev # to use phpize 生成编译检测脚本
 
 pecl channel-update pecl.php.net
 pecl uninstall redis
-pecl uninstall swoole
-pecl uninstall lua
-
-extension="swoole.so"
 
 HP Warning:  PHP Startup: redis: Unable to initialize module
 Module compiled with module API=20170718
@@ -241,22 +240,27 @@ dpkg: error processing package php7.3-fpm (--configure):
  installed php7.3-fpm package post-installation script subprocess returned error exit status 1
 Errors were encountered while processing:
  php7.3-fpm
+
+pecl install channel://pecl.php.net/vld-0.16.0
+php -dvld.active=1 -dvld.excute=0 at.php # excute =0 opcode在么 并不执行
 ```
 
 ## 配置
 
-* memory_limit:设定单个 PHP 进程可以使用的系统内存最大值，从系统可用性上来讲建议越大越好
+* memory_limit:设定单个 PHP 进程可以使用的系统内存最大值
     - PHP 操作 Redis Set 集合。修改配置
-    - 如果项目中每页页面使用的内存不大，建议改成小一些，这样可以承载更多的并发处理。
+    - 如果项目中每页页面使用的内存不大，建议改成小一些，这样可以承载更多的并发处理
     - PHP 脚本中调用 memory_get_peak_usage()函数多次测试自己项目脚本
 * Zend OPcache 扩展
     - PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列[Zend操作码](http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行
     - 每次请求PHP文件都是这样，这会消耗很多资源，如果每次HTTP请求都必须不断解析、编译和执行PHP脚本，消耗的资源更多
     - 如果PHP源码不变，相应的字节码也不会变化，显然没有必要每次都重新生成Opcode，结合在Web应用中无处不在的缓存机制，可以把首次生成的Opcode缓存起来,直接从内存中读取预先编译好的字节码
     - 在配置中开启扩展
-* max_execution_time 用于设置单个 PHP 进程在终止之前最长可运行时间
-* Session 会话放在 Redis 或者 Memcached 中，可以减少磁盘的 IO 操作频率，还可以方便业务服务器伸缩
+* max_execution_time 设置单个 PHP 进程在终止之前最长可运行时间
+* Session 会话
+    - 放在 Redis 或者 Memcached 中，可以减少磁盘的 IO 操作频率，还可以方便业务服务器伸缩
 * error_reporting
+    - 
 * cgi.fix_pathinfo:值由1改为0
     - nginx通过 fastcgi_param 指令将参数传递给 FastCGI Server
     - 访问URL：http://phpvim.net/foo.jpg/a.php/b.php/c.php
@@ -269,17 +273,15 @@ Errors were encountered while processing:
         + PHP的cgi SAPI中的参数fix_pathinfo
 
 ```
-# 查看配置
+# 查看
 php-config
+php-config --extension-dir # PHP扩展目录
 
 # session 存储道memcache
 session.save_handler = 'memcached'
 session.save_path = '127.0.0.1:11211'
 
 expose_php = Off # X-Powered-By的配置
-
-# 找到PHP扩展所在目录
-php-config --extension-dir
 
 opcache.enable=1 # 开关打开
 opcache.validate_timestamps=1    # 生产环境中配置为0：因为Zend Opcache将不能觉察PHP脚本的变化，必须手动清空Zend OPcache缓存的字节码，才能让它发现PHP文件的变动。这个配置适合在生产环境中设置为0，但在开发环境设置为1
@@ -295,33 +297,33 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 ## 基础
 
 * 代码标记：`<?php …… ?>`
-* 文件扩展名：`.php`
-* 每行程序代码，必须以英文下的分号(;)结束
-* 区分大小写的，但函数名和关键字不区分大小写。如：if、break、switch
+* 文件扩展名 `.php`
+* 每行代码必须以英文下分号`;`结束
+* 区分大小写，但函数名和关键字不区分大小写。如：`if、break、switch`
 * 访问PHP文件，必须要经过服务器访问。如：<http://www.2015.com/test.php>
-* 文件名及路径上不能包括中文或空格
+* 文件名及路径中不能包括中文或空格
 * 单行注释：`//、#`
 * 多行注释：`/* …… */`
 * 变量：临时存储数据的容器，指向值的指针
     - 作用域
         + 包含了 include 和 require 引入的文件
-        + 局部变量local：函数内部声明的变量，仅能在函数内部访问
-        + 全局作用域global：在所有函数外部定义的变量
+        + 局部变量 local：函数内部声明的变量，仅在函数内部访问
+        + 全局作用域 global：在所有函数外部定义的变量
             + 除了函数外，全局变量可以被脚本中的任何部分访问
             + 要在一个函数中访问一个全局变量，需要使用 global 关键字
             + 所有全局变量存储在一个名为 $GLOBALS[index] 的数组中。index 保存变量的名称,可以在函数内部访问，也可以直接用来更新全局变量
-        + 静态变量（static variable）：仅在局部函数域中存在，但当程序执行离开此作用域时，其值并不丢失
+        + 静态变量（static variable）：仅在局部函数域中存在，当程序执行离开此作用域时，其值并不丢失
         + parameter：通过调用代码将值传递给函数的局部变量
     - 本身没有类型，所说的类型是指变量中存储的数据的类型
     - 命名
         + 可以包含：字母、数字、下划线，可以用中文。
         + 不能以数字和特殊符号开头，但可以以字母或下划线开头。如：$_ABC、$abc
-    - 变量名称前必须要带“$”符号。“$”不是变量名称一部分，只是对变量名称的一个引用或标识符
+    - 变量名称前必须要带`$`符号。`$`不是变量名称一部分，只是对变量名称的一个引用或标识符
     - 命名规则
         + “驼峰式”命名：$getUserName、$getUserPwd
         + “下划线”命名：$get_user_name、$set_user_pwd
     - 赋值
-        - 传值:$variablename指向value存储的地址 `$foo = 'Bob'; `
+        - 传值:$variablename指向value存储的地址 `$foo = 'Bob';`
         - 引用:新的变量简单的引用了原始变量,只有有名字的变量才可以引用赋值 `$bar = &$foo`;
     - 可变变量：`$$var`是一个引用变量，用于存储$var的值
 * PHP 之外的变量
@@ -330,8 +332,8 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
     - `$_COOKIE`
 * 常量
     - 定义
-        + 常量前面没有$
-        + 只能用 define() 函数定义，而不能通过赋值语句
+        + 常量前面没有`$`
+        + 只能用 `define()` 函数定义，而不能通过赋值语句
         + 可以不用理会变量的作用域而在任何地方定义和访问
         + 一旦定义就不能被重新定义或者取消定义
         + 常量的值只能是标量, PHP 7 中还允许是 array
@@ -340,7 +342,7 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
     - const关键字在编译时定义常量
         + 是一个语言构造不是一个函数
         + 比define()快一点，因为没有返回值
-        + 总是区分大小写的
+        + 区分大小写
     - 魔术常量
         + `__LINE__`  表示使用当前行号。
         + `__FILE__`    表示文件的完整路径和文件名。 如果它在include中使用，则返回包含文件的名称。
@@ -361,9 +363,9 @@ function myTest()
 {
     global $x,$y;
     $y=$x+$y;
+    echo $y;
 }
-myTest();
-echo $y; // 15
+myTest(); // 15
 
 function myTest()
 {
@@ -379,7 +381,7 @@ function myTest($x)
 {
     echo $x;
 }
-myTest(5);
+myTest(5); # 5
 function test()
 {
     static $a = 0;
@@ -435,11 +437,13 @@ require('./ShopProduct.php'); # 加载文件
             * `\`  反斜线
             * `\$`  美元标记
             * `\"`  双引号
-        + heredoc 结构就象是没有使用双引号的双引号字符串，在 heredoc 结构中单引号不用被转义，但是上文中列出的转义序列还可以使用
-        + Nowdoc 结构是类似于单引号字符串的。Nowdoc 结构很象 heredoc 结构，但是 nowdoc 中不进行解析操作。这种结构很适合用于嵌入 PHP 代码或其它大段文本而无需对其中的特殊字符进行转义
-        * addslashes函数转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
-        * urldecode函数解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
-        * `ord ( string $string ) : int`:转换字符串第一个字节为 0-255 之间的值
+        + heredoc 结构就象是没有使用双引号的双引号字符串，单引号不用被转义，但是上文中列出的转义序列还可以使用
+        + Nowdoc 结构是类似于单引号字符串的。Nowdoc 结构很象 heredoc 结构，但是 nowdoc 中不进行解析操作
+            * 这种结构很适合用于嵌入 PHP 代码或其它大段文本而无需对其中的特殊字符进行转义
+        + 方法
+            - `addslashes` 转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
+            - `urldecode` 解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
+            - `ord ( string $string ) : int`:转换字符串第一个字节为 0-255 之间的值
     + Integer（整型）
     + Float（浮点型）
         * NaN:代表着任何不同值，不应拿 NAN 去和其它值进行比较，包括其自身，应该用 is_nan() 来检查
@@ -448,7 +452,8 @@ require('./ShopProduct.php'); # 加载文件
     + 被赋值为 NULL
     + 被 unset()
         * 删除引用，触发相应变量容器refcount减一
-        * 在函数中的行为会依赖于想要销毁的变量的类型而有所不同，比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值
+        * 在函数中的行为会依赖于想要销毁的变量的类型而有所不同
+            - 比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值
         * unset 变量与给变量赋值NULL不同，变量赋值NULL直接对相应变量容器refcount = 0
 
 ```php
@@ -464,7 +469,7 @@ echo 'You can also have embedded newlines in
 strings this way as it is
 okay to do';
 
- $bar = <<<EOT
+$bar = <<<EOT
 bar
     EOT;
 
@@ -496,7 +501,7 @@ print # 一个语法结构(language constructs), 并不是一个函数, 参数�
 #### 复合
 
 * Array（数组）:一个有序映射
-    - 映射是一种把 values 关联到 keys 的类型。因此可以把它当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性
+    - 映射是一种把 values 关联到 keys 的类型。因此可以当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性
     + key 会有如下的强制转换
         + 合法整型值的字符串会被转换为整型。例如键名 "8" 实际会被储存为 8。但是 "08" 则不会强制转换，因为其不是一个合法的十进制数值
         + 浮点数也会被转换为整型，意味着其小数部分会被舍去。例如键名 8.7 实际会被储存为 8
@@ -508,25 +513,26 @@ print # 一个语法结构(language constructs), 并不是一个函数, 参数�
         * 关联数组
         * 多维数组
     + 方法
-        * in_array()
-        * array_filter() 过滤数组中的所有值为空的元素
-        * array_reduce($source, function(){}, $distination)
-        * array_walk_recursive()
-        * array_map():处理后的数组, 要得到处理后的元素值,需要return返回
-        * array_walk():返回true或者false,要得到处理后的元素值，需要在传入参数值加 & 引用符号
-        * array_column($array, cloumnName[, indexCloumn])
+        * `in_array()`
+        * `array_filter()` 过滤数组中的所有值为空的元素
+        * `array_reduce($source, function(){}, $distination)`
+        * `array_walk_recursive()`
+        * `array_map()`:处理后的数组, 要得到处理后的元素值,需要return返回
+        * `array_walk()`:返回true或者false,要得到处理后的元素值，需要在传入参数值加 & 引用符号
+        * `array_column($array, cloumnName[, indexCloumn])`
 * Object（对象）
 * callback:接受用户自定义的回调函数作为参数。回调函数不止可以是简单函数，还可以是对象的方法，包括静态类方法。
-* 资源
+* Resource 资源
 * 类型转换
-    - 乘法运算符"*"。如果任何一个操作数是float，则所有的操作数都被当成float，结果也是float。否则操作数会被解释为integer，结果也是integer。并没有改变这些操作数本身的类型；改变的仅是这些操作数如何被求值以及表达式本身的类型
+    - 乘法运算符"*"。如果任何一个操作数是float，则所有的操作数都被当成float，结果也是float。否则操作数会被解释为integer，结果也是integer
+        + 并没有改变这些操作数本身的类型；改变的仅是这些操作数如何被求值以及表达式本身的类型
 * 类型判断
-    - gettype()
-    - empty()
-    - isset()
-    - is_null()
-    - boolean
-    - is_numeric()
+    - `gettype()`
+    - `empty()`
+    - `isset()`
+    - `is_null()`
+    - `boolean()`
+    - `is_numeric()`
 
 ```php
 # 声明
@@ -570,22 +576,14 @@ foreach( $season as $s )
     echo "$s <br/>";
 }
 
-$reverseseason=array_reverse($season); # 赋值新变量
-foreach( $reverseseason as $s )
-{
-  echo "$s<br />";
-}
+print_r(array_reverse($season)); # 赋值新变量
 
-$key=array_search("spring", $season);
-echo $key;
+echo array_search("spring", $season);
 
 $name1=array("maxsu","john","vivek","minsu");
 $name2=array("umesh","maxsu","kartik","minsu");
-$name3=array_intersect($name1,$name2);
-foreach( $name3 as $n )
-{
-  echo "$n<br />";
-}
+print_r(array_intersect($name1,$name2)); # 交集
+
 
 $arr = array(
     array(
@@ -616,8 +614,8 @@ $arr1 = ['PHP', 'apache'];
 $arr2 = ['PHP', 'MySQl', 'HTML', 'CSS'];
 $mergeArr = array_merge($arr1, $arr2);
 $plusArr = $arr1 + $arr2;
-var_dump($mergeArr);
-var_dump($plusArr);
+print_r(($mergeArr);
+print_r(($plusArr);
 
 $items = array(
     [
@@ -651,14 +649,12 @@ array_column($items,'uid'); # [1,2,3,4,5];
 array_column($items,'uid','view'); # [100=>1,200=>2,300=>3,400=>4,500=>5];
 
 array_combine();
-
 array_walk(array, funcname)
-
 function my_callback_function() {
     echo 'hello world!';
 }
 
-// Type 1: Simple callback
+// callback
 call_user_func('my_callback_function');
 
 $foo = $foo * 1.3;  // $foo 现在是一个浮点数 (2.6)
@@ -701,6 +697,7 @@ array_walk($user, function($value, $key) use (&$username){
 * 表达式：任何有值的东西
 * echo：是一个语言结构(语句)，不是一个函数，所以不需要使用括号。但是如果要使用多个参数，则需要使用括号。打印字符串，多行字符串，转义字符，变量，数组等。
 * print
+* print_r
 * printf()
 * 条件
     - if
@@ -713,8 +710,8 @@ array_walk($user, function($value, $key) use (&$username){
     - foreach循环循环用于遍历数组元素、对象属性
     - while
     - do...while
-* break:中断了当前for，while，do-while，switch和for-each循环的执行
-    - 如果在内循环中使用break，它只中断了内循环的执行
+* break:中断当前for，while，do-while，switch和for-each循环的执行
+    - 如果在内循环中使用break，只中断了内循环的执行
     - 接受一个可选的数字参数来决定跳出几重循环
 * continue：跳过本次循环中剩余的代码并在条件求值为真时开始执行下一次循环
     - 接受一个可选的数字参数来决定跳过几重循环到循环结尾
@@ -803,7 +800,9 @@ echo 'Bar';
 
 * 算术运算符:`* / % + - **`
 * 赋值运算符:`= += -= *= **= /= .= %= &= ^= <<= >>= =>`
-* 位运算符：`&(位与) ^（异或） | ~ << >> `
+* 位运算符：`&(位与) ^（异或） | ~ << >>`
+    - &: 转换为布尔 5&1 为1
+    - |：合并集合 1101 | 1011 为 1111
 * 比较运算符:`< <= > >= == != === !== <>`
     - $a <=> $b:太空船运算符 当$a小于、等于、大于$b时 分别返回一个小于、等于、大于0的integer 值
     - $a ?? $b ?? $c:NULL 合并操作符  从左往右第一个存在且不为 NULL 的操作数。如果都没有定义且不为 NULL，则返回 NULL
@@ -818,14 +817,14 @@ echo 'Bar';
     - $a--    后减  返回 $a，然后将 $a 的值减一
 * 数组运算符
     - $a + $b：相同key保留前面
-    - $a == $b： 如果 $a 和 $b 具有相同的键／值对则为 TRUE。
-    - $a === $b：如果 $a 和 $b 具有相同的键／值对并且顺序和类型都相同则为 TRUE。
-    - $a != $b    不等  如果 $a 不等于 $b 则为 TRUE。
-    - $a <> $b    不等  如果 $a 不等于 $b 则为 TRUE。
-    - $a !== $b   不全等 如果 $a 不全等于 $b 则为 TRUE。
+    - $a == $b： 如果 $a 和 $b 具有相同的键／值对则为 TRUE
+    - $a === $b：如果 $a 和 $b 具有相同的键／值对并且顺序和类型都相同则为 TRUE
+    - $a != $b    不等  如果 $a 不等于 $b 则为 TRUE
+    - $a <> $b    不等  如果 $a 不等于 $b 则为 TRUE
+    - $a !== $b   不全等 如果 $a 不全等于 $b 则为 TRUE
 * 类型运算符:`instanceof (int) (float) (string) (array) (object) (bool)`
 * 执行操作符:反引号（``）,尝试将反引号中的内容作为 shell 命令来执行，并将其输出信息返回
-    - 激活了安全模式或者关闭了 shell_exec() 时是无效的
+    - 激活了安全模式或者关闭了 shell_exec() 时无效
 * 错误控制操作符:@,当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉
 * 三元运算符：`$first ? $second : $third`
 
@@ -881,102 +880,22 @@ $a = new MyClass;
 var_dump(!($a instanceof stdClass)); # true
 ```
 
-#### Lambda表达式(匿名函数)与闭包
-
-* Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态。
-* 闭包在匿名函数的基础上增加了与外部环境的变量交互，通过 use 子句中指定要导入的外部环境变量
-
-```php
-function getClosure($n)
-{
-  $a = 100;
-  return function($m) use ($n, &$a) {
-        $a += $n + $m;
-        echo $a."\n";
-    };
-}
-$fn = getClosure(1);
-$fn(1);//102
-$fn(2);//105
-$fn(3);//109
-echo $a;//Notice: Undefined variable
-
-class Dog
-{
-    private $_name;
-    protected $_color;
-
-    public function __construct($name, $color)
-    {
-         $this->_name = $name;
-         $this->_color = $color;
-    }
-
-    public function greet($greeting)
-    {
-         return function() use ($greeting) {
-            //类中闭包可通过 $this 变量导入对象
-            echo "$greeting, I am a {$this->_color} dog named {$this->_name}.\n";
-         };
-    }
-
-    public function swim()
-     {
-         return static function() {
-            //类中静态闭包不可通过 $this 变量导入对象，由于无需将对象导入闭包中，
-            //因此可以节省大量内存，尤其是在拥有许多不需要此功能的闭包时。
-            echo "swimming....\n";
-         };
-     }
-
-     private function privateMethod()
-     {
-        echo "You have accessed to {$this->_name}'s privateMethod().\n";
-     }
-
-     public function __invoke()
-    {
-         //此方法允许对象本身被调用为闭包
-         echo "I am a dog!\n";
-    }
-}
-
-$dog = new Dog("Rover","red");
-$dog->greet("Hello")();
-$dog->swim()();
-$dog();
-//通过ReflectionClass、ReflectionMethod来动态创建闭包，并实现直接调用非公开方法。
-$class = new ReflectionClass('Dog');
-$closure = $class->getMethod('privateMethod')->getClosure($dog);
-$closure();
-
-$username = $_GET['user'] ?? 'nobody';
-
-$a < $b ($a <=> $b) === -1
-$a <= $b    ($a <=> $b) === -1 || ($a <=> $b) === 0
-$a == $b    ($a <=> $b) === 0
-$a != $b    ($a <=> $b) !== 0
-$a >= $b    ($a <=> $b) === 1 || ($a <=> $b) === 0
-$a > $b ($a <=> $b) === 1
-
-$bytes = random_bytes(5);
-var_dump(bin2hex($bytes));//string(10) "385e33f741"
-var_dump(random_int(100, 999));//int(248)
-```
-
 ### 函数
 
 一段可以重复使用多次的代码
 
 * 参数
     - 值传递:传递给函数的值默认情况下不会修改实际值(通过值调用),传递给函数的值是通过值调用。作用域函数范围内
-    - 引用调用:要传递值作为参考(引用)，您需要在参数名称前使用＆符号(&)
-    - 允许使用数组 array 和特殊类型 NULL 作为默认参数
-    - 默认参数
-    - 可变长度参数函数
+    - 引用调用:要传递值作为参考(引用)，需要在参数名称前使用＆符号(&)
+    - 允许使用数组 array 、object、特殊类型 NULL 作为默认参数
+    - 可以设置默认参数
+    - 可变长度参数
 * 可变函数：一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数
-* 匿名函数（Anonymous functions），也叫闭包函数（closures），允许 临时创建一个没有指定名称的函数。最经常用作回调函数（callback）参数的值
+* 匿名函数（Anonymous functions），也叫闭包函数（closures），允许 临时创建一个没有指定名称的函数
+    - 经常用作回调函数（callback）
     - 从父作用域继承变量:use
+    - Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态
+    - 闭包在匿名函数的基础上增加了与外部环境的变量交互，通过 use 子句中指定要导入的外部环境变量
 * 返回值
 * 递归函数
 
@@ -987,7 +906,7 @@ function sayHello(){
 sayHello();//calling function
 
 function sayHello($name,$age = 28){
-echo "Hello $name, you are $age years old<br/>";
+    echo "Hello $name, you are $age years old<br/>";
 }
 sayHello("Maxsu",27);
 sayHello("Henry");
@@ -995,10 +914,10 @@ sayHello("Henry");
 function add_some_extra(&$string)
 {
     $string .= 'and something extra.';
+    echo $string;
 }
 $str = 'This is a string, ';
-add_some_extra($str);
-echo $str; # This is a string, and something extra.
+add_some_extra($str); # This is a string, and something extra.
 
 function makecoffee($types = array("cappuccino"), $coffeeMaker = NULL)
 {
@@ -1010,19 +929,18 @@ echo makecoffee(array("cappuccino", "lavazza"), "teapot");
 
 function increment($i)
 {
-    $i++;
+    echo $i++;
 }
 $i = 10;
-increment($i);
-echo $i; # 10
+increment($i); # 10
 
 function increment(&$i)
 {
-    $i++;
+    echo $i++;
 }
 $i = 10;
 increment($i);
-echo $i;  # 11
+echo $i; # 10 11
 
 function small_numbers()
 {
@@ -1096,6 +1014,82 @@ $example = function () use ($message) {
     var_dump($message);
 };
 echo $example();
+
+function getClosure($n)
+{
+  $a = 100;
+  return function($m) use ($n, &$a) {
+        $a += $n + $m;
+        echo $a."\n";
+    };
+}
+$fn = getClosure(1);
+$fn(1);//102
+$fn(2);//105
+$fn(3);//109
+echo $a;//Notice: Undefined variable
+
+class Dog
+{
+    private $_name;
+    protected $_color;
+
+    public function __construct($name, $color)
+    {
+         $this->_name = $name;
+         $this->_color = $color;
+    }
+
+    public function greet($greeting)
+    {
+         return function() use ($greeting) {
+            //类中闭包可通过 $this 变量导入对象
+            echo "$greeting, I am a {$this->_color} dog named {$this->_name}.\n";
+         };
+    }
+
+    public function swim()
+     {
+         return static function() {
+            //类中静态闭包不可通过 $this 变量导入对象，由于无需将对象导入闭包中，
+            //因此可以节省大量内存，尤其是在拥有许多不需要此功能的闭包时。
+            echo "swimming....\n";
+         };
+     }
+
+     private function privateMethod()
+     {
+        echo "You have accessed to {$this->_name}'s privateMethod().\n";
+     }
+
+     public function __invoke()
+    {
+         //此方法允许对象本身被调用为闭包
+         echo "I am a dog!\n";
+    }
+}
+
+$dog = new Dog("Rover","red");
+$dog->greet("Hello")();
+$dog->swim()();
+$dog();
+//通过ReflectionClass、ReflectionMethod来动态创建闭包，并实现直接调用非公开方法。
+$class = new ReflectionClass('Dog');
+$closure = $class->getMethod('privateMethod')->getClosure($dog);
+$closure();
+
+$username = $_GET['user'] ?? 'nobody';
+
+$a < $b ($a <=> $b) === -1
+$a <= $b    ($a <=> $b) === -1 || ($a <=> $b) === 0
+$a == $b    ($a <=> $b) === 0
+$a != $b    ($a <=> $b) !== 0
+$a >= $b    ($a <=> $b) === 1 || ($a <=> $b) === 0
+$a > $b ($a <=> $b) === 1
+
+$bytes = random_bytes(5);
+print_r(bin2hex($bytes));//string(10) "385e33f741"
+print_r(random_int(100, 999));//int(248)
 ```
 
 ### 状态管理
@@ -1128,13 +1122,13 @@ session_start();
 ?>
 
 <html>
-<body>
-<?php
-$_SESSION["user"] = "Maxsu";
-echo "Session information are set successfully.<br/>";
-?>
-<a href="session2.php">Visit next page</a>
-</body>
+    <body>
+    <?php
+        $_SESSION["user"] = "Maxsu";
+        echo "Session information are set successfully.<br/>";
+    ?>
+    <a href="session2.php">Visit next page</a>
+    </body>
 </html>
 
 # session2.php
@@ -1171,23 +1165,23 @@ echo ("Page Views: ".$_SESSION['counter']);
     - 接受两个参数
         + $filename表示要被打开的文件
         + $mode表示文件模式
-    - r 以只读模式打开文件。 它将文件指针放在文件的开头。
-    - r+  以读写模式打开文件。 它将文件指针放在文件的开头。
-    - w   以只写模式打开文件。 它将文件指针放在文件的开头，并将文件截断为零长度。 如果找不到文件，则会自动创建一个新文件。
-    - w+  以读写模式打开文件。 它将文件指针放在文件的开头，并将文件截断为零长度。 如果找不到文件，则会自动创建一个新文件。
-    - a   以只写模式打开文件。 它将文件指针放在文件的末尾。 如果找不到文件，则会创建一个新文件。
-    - a+  以读写模式打开文件。 它将文件指针放在文件的末尾。 如果找不到文件，则会创建一个新文件。
-    - x   以只写模式创建和打开文件。 它将文件指针放在文件的开头。 如果找到文件，fopen()函数返回FALSE。
-    - x+  它与x相同，但它以读写模式创建和打开文件。
-    - c   以只写模式打开文件。 如果文件不存在，则会创建它。 如果存在，它不会被截断(与’w‘相反)，也不会调用此函数失败(如’x‘的情况)。 文件指针位于文件的开头
-    - c+  它与c相同，但它以读写模式打开文件。
+    - r 以只读模式打开文件。 将文件指针放在文件的开头。
+    - r+  以读写模式打开文件。 将文件指针放在文件的开头。
+    - w   以只写模式打开文件。 将文件指针放在文件的开头，并将文件截断为零长度。 如果找不到文件，则会自动创建一个新文件。
+    - w+  以读写模式打开文件。 将文件指针放在文件的开头，并将文件截断为零长度。 如果找不到文件，则会自动创建一个新文件。
+    - a   以只写模式打开文件。 将文件指针放在文件的末尾。 如果找不到文件，则会创建一个新文件。
+    - a+  以读写模式打开文件。 将文件指针放在文件的末尾。 如果找不到文件，则会创建一个新文件。
+    - x   以只写模式创建和打开文件。 将文件指针放在文件的开头。 如果找到文件，fopen()函数返回FALSE。
+    - x+  与x相同，但以读写模式创建和打开文件。
+    - c   以只写模式打开文件。 如果文件不存在，则会创建。 如果存在，不会被截断(与’w‘相反)，也不会调用此函数失败(如’x‘的情况)。 文件指针位于文件的开头
+    - c+  与c相同，但它以读写模式打开文件。
 * 读取文件：`string fread (resource $handle , int $length )`函数用于读取文件的数据
     - 参数：文件资源($handle 由fopen()函数创建的文件指针)和文件大小($length 要读取的字节长度)
     - 逐行读取文件：`string fgets ( resource $handle [, int $length ] )`函数用于从文件中读取单行数据内容
     - 逐个字符读取文件：`string fgetc ( resource $handle )`函数用于从文件中读取单个字符
         + 要使用fgetc()函数获取所有数据，请在while循环中使用!feof()函数作为条件。
 * 写入文件：`int fwrite ( resource $handle , string $string [, int $length ] )`：用于将字符串的内容写入文件
-    - 如果再次运行上面的代码，它将擦除文件的前一个数据并写入新的数据。
+    - 如果再次运行上面的代码，将擦除文件的前一个数据并写入新的数据。
     - 附加文件
 * 删除文件：`bool unlink ( string $filename [, resource $context ] )`
 * 关闭文件
@@ -1220,9 +1214,9 @@ echo "File written successfully";
 
 $status=unlink('data.txt');
 if($status){
-echo "File deleted successfully";
+    echo "File deleted successfully";
 }else{
-echo "Sorry!";
+    echo "Sorry!";
 }
 
 $fp  = fopen('lock.txt', 'w+');
@@ -1320,93 +1314,15 @@ window.location = “http:/example.com/”
 
 ### MySQL
 
-* mysql_connect():PHP 5.5以来扩展已被弃用，建议使用以下2种替代方法之一
-* mysqli_connection()
-* PDO::__ construct()
-    - 提供预处理语句查询、错误异常处理、灵活取得查询结果（返回数组、字符串、对象、回调函数）、字符过滤防止 SQL 攻击、事务处理、存储过程。
-
-https://linux.cn/article-10899-1.html
-
-```php
-$host = 'localhost:3306';
-$user = 'root';  // MySQL用户帐号
-$pass = '';  // MySQL用户帐号对应的密码
-$conn = mysqli_connect($host, $user, $pass);
-if(! $conn )
-{
-  die('Could not connect: ' . mysqli_error());
-}
-echo 'Connected successfully';
-
-$sql = 'CREATE Database mydb';
-if(mysqli_query( $conn,$sql)){
-    echo "Database mydb created successfully.";
-}else{
-    echo "Sorry, database creation failed ".mysqli_error($conn);
-}
-
-$sql = "create table emp5(id INT AUTO_INCREMENT,name VARCHAR(20) NOT NULL,
-emp_salary INT NOT NULL,primary key (id))";
-if(mysqli_query($conn, $sql)){
- echo "Table emp5 created successfully";
-}else{
-echo "Could not create table: ". mysqli_error($conn);
-
-$sql = 'INSERT INTO emp4(name,salary) VALUES ("maxsu", 9000)';
-if(mysqli_query($conn, $sql)){
- echo "Record inserted successfully";
-}else{
-echo "Could not insert record: ". mysqli_error($conn);
-}
-
-$id=2;
-$name="Rahul";
-$salary=80000;
-$sql = "update emp4 set name="$name", salary=$salary where id=$id";
-if(mysqli_query($conn, $sql)){
- echo "Record updated successfully";
-}else{
-echo "Could not update record: ". mysqli_error($conn);
-}
-
-$id=2;
-$sql = "delete from emp4 where id=$id";
-if(mysqli_query($conn, $sql)){
- echo "Record deleted successfully";
-}else{
-echo "Could not deleted record: ". mysqli_error($conn);
-}
-
-$sql = 'SELECT * FROM emp4';
-$retval=mysqli_query($conn, $sql);
-
-if(mysqli_num_rows($retval) > 0){
- while($row = mysqli_fetch_assoc($retval)){
-    echo "EMP ID :{$row['id']}  <br> ".
-         "EMP NAME : {$row['name']} <br> ".
-         "EMP SALARY : {$row['salary']} <br> ".
-         "--------------------------------<br>";
- } //end of while
-}else{
-echo "0 results";
-}
-
-$sql = 'SELECT * FROM emp4 order by name';
-$retval=mysqli_query($conn, $sql);
-
-if(mysqli_num_rows($retval) > 0){
- while($row = mysqli_fetch_assoc($retval)){
-    echo "EMP ID :{$row['id']}  <br> ".
-         "EMP NAME : {$row['name']} <br> ".
-         "EMP SALARY : {$row['salary']} <br> ".
-         "--------------------------------<br>";
- } //end of while
-}else{
-echo "0 results";
-}
-
-mysqli_close($conn);
-```
+* mysql:PHP 5.5以来扩展已被弃用，建议使用以下2种替代方法之一
+* mysqli
+* PDO
+    - 提供预处理语句查询
+        + 位置参数
+            * `$tis = $conn->prepare("INSERT INTO STUDENTS(name, age) values(?, ?)"); $tis->bindParam(1,$name); $tis->bindParam(2,$age);`
+            * `$tis = $conn->prepare("INSERT INTO STUDENTS(name, age) values(?, ?)"); $tis->bindValue(1,'mike'); $tis->bindValue(2,22);`
+        + 命名参数 `$tis = $conn->prepare("INSERT INTO STUDENTS(name, age) values(:name, :age)"); $tis->bindParam(':name', $name); $tis->bindParam(':age', $age);`
+    - 错误异常处理、灵活取得查询结果（返回数组、字符串、对象、回调函数）、字符过滤防止 SQL 攻击、事务处理、存储过程
 
 ## 面向对象(OOP)
 
@@ -1749,6 +1665,7 @@ echo (new Outer)->func2()->func3(); # 6
 
 ## 魔术方法
 
+* 使用场景
 * `__construct()`
 * `__destruct()`
 * `__call()`
@@ -1774,169 +1691,6 @@ class CallableClass
 $obj = new CallableClass;
 $obj(5);
 var_dump(is_callable($obj));
-```
-
-## 命名空间
-
-* 如果一个文件中包含命名空间，它必须在其它所有代码之前声明命名空间
-* 用户编写的代码与PHP内部的类/函数/常量或第三方类/函数/常量之间的名字冲突
-* 为很长的标识符名称(通常是为了缓解第一类问题而定义的)创建一个别名（或简短）的名称，提高源代码的可读性
-* 以下类型的代码受命名空间的影响，它们是：类（包括抽象类和traits）、接口、函数和常量
-* 可以在同一个文件中定义多个命名空间,建议使用下面的大括号形式的语法
-* 类名可以通过三种方式引用
-    - 非限定名称，或不包含前缀的类名称，例如 $a=new foo(); 或 foo::staticmethod();。如果当前命名空间是 currentnamespace，foo 将被解析为 currentnamespace\foo。如果使用 foo 的代码是全局的，不包含在任何命名空间中的代码，则 foo 会被解析为foo。
-    - 限定名称,或包含前缀的名称，例如 $a = new subnamespace\foo(); 或 subnamespace\foo::staticmethod();。如果当前的命名空间是 currentnamespace，则 foo 会被解析为 currentnamespace\subnamespace\foo。如果使用 foo 的代码是全局的，不包含在任何命名空间中的代码，foo 会被解析为subnamespace\foo。
-    - 完全限定名称，或包含了全局前缀操作符的名称，例如， $a = new \currentnamespace\foo(); 或 \currentnamespace\foo::staticmethod();。
-* 两种抽象的访问当前命名空间内部元素的方法，`__NAMESPACE__` 魔术常量和namespace关键字
-    - 常量__NAMESPACE__的值是包含当前命名空间名称的字符串。在全局的，不包括在任何命名空间中的代码，它包含一个空的字符串
-* 导入：允许通过别名引用或导入外部的完全限定名称
-    - 为类名称使用别名
-    - 为接口使用别名
-    - 为命名空间名称使用别名
-
-```php
-namespace my\name;
-
-class MyClass {}
-function myfunction() {}
-const MYCONST = 1;
-
-$a = new MyClass;
-$c = new \my\name\MyClass;
-
-$d = namespace\MYCONST;
-
-$d = __NAMESPACE__ . '\MYCONST';
-echo constant($d);
-
-# 同一个文件中定义多个命名空间,两种方式
-namespace MyProject;
-
-const CONNECT_OK = 1;
-class Connection { /* ... */ }
-function connect() { /* ... */  }
-
-namespace AnotherProject;
-
-const CONNECT_OK = 1;
-class Connection { /* ... */ }
-function connect() { /* ... */  }
-
-## 方式2
-namespace MyProject {
-
-const CONNECT_OK = 1;
-class Connection { /* ... */ }
-function connect() { /* ... */  }
-}
-
-namespace AnotherProject {
-
-const CONNECT_OK = 1;
-class Connection { /* ... */ }
-function connect() { /* ... */  }
-}
-
-## 引用方式
-namespace Foo\Bar;
-include 'file1.php';
-
-const FOO = 2;
-function foo() {}
-class foo
-{
-    static function staticmethod() {}
-}
-
-/* 非限定名称 */
-foo(); // 解析为 Foo\Bar\foo resolves to function Foo\Bar\foo
-foo::staticmethod(); // 解析为类 Foo\Bar\foo的静态方法staticmethod。resolves to class Foo\Bar\foo, method staticmethod
-echo FOO; // resolves to constant Foo\Bar\FOO
-
-/* 限定名称 */
-subnamespace\foo(); // 解析为函数 Foo\Bar\subnamespace\foo
-subnamespace\foo::staticmethod(); // 解析为类 Foo\Bar\subnamespace\foo,
-                                  // 以及类的方法 staticmethod
-echo subnamespace\FOO; // 解析为常量 Foo\Bar\subnamespace\FOO
-
-/* 完全限定名称 */
-\Foo\Bar\foo(); // 解析为函数 Foo\Bar\foo
-\Foo\Bar\foo::staticmethod(); // 解析为类 Foo\Bar\foo, 以及类的方法 staticmethod
-echo \Foo\Bar\FOO; // 解析为常量 Foo\Bar\FOO
-
-## __NAMESPACE__
-namespace MyProject;
-echo '"', __NAMESPACE__, '"'; // 输出 "MyProject"
-function get($classname)
-{
-    $a = __NAMESPACE__ . '\\' . $classname;
-    return new $a;
-}
-
-## 全局代码
-echo '"', __NAMESPACE__, '"'; // 输出 ""
-
-## namespace
-namespace MyProject;
-
-use blah\blah as mine; // see "Using namespaces: importing/aliasing"
-
-blah\mine(); // calls function MyProject\blah\mine()
-namespace\blah\mine(); // calls function MyProject\blah\mine()
-
-namespace\func(); // calls function MyProject\func()
-namespace\sub\func(); // calls function MyProject\sub\func()
-namespace\cname::method(); // calls static method "method" of class MyProject\cname
-$a = new namespace\sub\cname(); // instantiates object of class MyProject\sub\cname
-$b = namespace\CONSTANT; // assigns value of constant MyProject\CONSTANT to $b
-
-## 全局
-namespace\func(); // calls function func()
-namespace\sub\func(); // calls function sub\func()
-namespace\cname::method(); // calls static method "method" of class cname
-$a = new namespace\sub\cname(); // instantiates object of class sub\cname
-$b = namespace\CONSTANT; // assigns value of constant CONSTANT to $b
-
-## 使用use操作符导入/使用别名
-namespace foo;
-use My\Full\Classname as Another;
-
-// 下面的例子与 use My\Full\NSname as NSname 相同
-use My\Full\NSname;
-// 导入一个全局类
-use ArrayObject;
-// importing a function (PHP 5.6+)
-use function My\Full\functionName;
-// aliasing a function (PHP 5.6+)
-use function My\Full\functionName as func;
-// importing a constant (PHP 5.6+)
-use const My\Full\CONSTANT;
-
-$obj = new namespace\Another; // 实例化 foo\Another 对象
-$obj = new Another; // 实例化 My\Full\Classname　对象
-NSname\subns\func(); // 调用函数 My\Full\NSname\subns\func
-$a = new ArrayObject(array(1)); // 实例化 ArrayObject 对象
-// 如果不使用 "use \ArrayObject" ，则实例化一个 foo\ArrayObject 对象
-func(); // calls function My\Full\functionName
-echo CONSTANT; // echoes the value of My\Full\CONSTANT
-
-# 通过use操作符导入/使用别名，一行中包含多个use语句
-use My\Full\Classname as Another, My\Full\NSname;
-$obj = new Another; // 实例化 My\Full\Classname 对象
-NSname\subns\func(); // 调用函数 My\Full\NSname\subns\func
-
-# 导入和动态名称
-use My\Full\Classname as Another, My\Full\NSname;
-$obj = new Another; // 实例化一个 My\Full\Classname 对象
-$a = 'Another';
-$obj = new $a;      // 实际化一个 Another 对象
-
-# 导入和完全限定名称
-use My\Full\Classname as Another, My\Full\NSname;
-$obj = new Another; // instantiates object of class My\Full\Classname
-$obj = new \Another; // instantiates object of class Another
-$obj = new Another\thing; // instantiates object of class My\Full\Classname\thing
-$obj = new \Another\thing; // instantiates object of class Another\thing
 ```
 
 ## 杂项
@@ -2165,50 +1919,6 @@ var_dump(iterator_to_array($iterator, true));
 var_dump(iterator_to_array($iterator, false));
 ```
 
-## 自动加载
-
-PHP在需要类定义的时候调用它
-
-* include 或 require
-* `__autoload`:调用不存在的类时会被自动调用,现在基本废弃
-    - 一个文件中不允许有多个 `__autoload()`方法，引入文件中也存在`__autoload()`
-    - 一个文件中引入多个文件目录
-* bool spl_autoload_register ([ callable $autoload_function [, bool $throw = true [, bool $prepend = false ]]] ) :注册给定的函数作为 `__autoload` 的实现
-    - 函数名称
-    - 闭包函数
-* 获取所有已注册的 `__autoload()` 函数:spl_autoload_functions ( void )
-* spl_classes — 返回所有可用的SPL类
-* spl_autoload_unregister — 注销已注册的`__autoload()`函数
-
-```php
-<?php
-function __autoload($class){
-    if(file_exists($class.".php")){
-        require_once($class.".php");
-    }else{
-        die("文件不存在！");
-    }
-}
-
-Test1::test();
-Test2::test();
-
-// 注册
-spl_autoload_register(function ($class_name) {
-    $class_name = str_replace('\\','/', $class_name); /*将 use语句中的’\’替换成’/‘，避免造成转移字符导致require_once时会报错*/
-    $file_name  = $class_name . '.class.php';
-    if (file_exists($file_name)) {
-        require_once $file_name;
-    }
-
-});
-
-use Animal\Dog;
-
-$dog = new Dog();
-$cat = new \Animal\Cat();
-```
-
 ## 异常
 
 
@@ -2287,11 +1997,6 @@ echo "Associative array always output as object: ", json_encode($d), "\n"; # Ass
 echo "Associative array always output as object: ", json_encode($d, JSON_FORCE_OBJECT), "\n\n"; # Associative array always output as object: {"foo":"bar","baz":"long"}
 ?>
 ```
-
-魔法函数场景
-
-
-
 
 ## 扩展
 
@@ -2429,7 +2134,7 @@ EXPOSE 9000 CMD ["php-fpm"]
 
 ## [xhprof](https://github.com/phacility/xhprof)
 
-* 一个分层PHP性能分析工具。它报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情况。
+* 一个分层PHP性能分析工具。报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情况。
 * [longxinH/xhprof](https://github.com/longxinH/xhprof):PHP7 support
 * 工具
     - [EvaEngine/xhprof.io ](https://github.com/EvaEngine/xhprof.io):GUI to analyze the profiling data collected using XHProf – A Hierarchical Profiler for PHP. http://xhprof.io/
@@ -2437,43 +2142,37 @@ EXPOSE 9000 CMD ["php-fpm"]
 * 方法
     - xhprof_disable — 停止 xhprof 分析器
     - xhprof_enable — 启动 xhprof 性能分析器
+        + 如果xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY)可以输出更多指标
     - xhprof_sample_disable — 停止 xhprof 性能采样分析器
     - xhprof_sample_enable — 以采样模式启动 XHProf 性能分析
 * 主要指标： 
-Inclusive Time (或子树时间)：包括子函数所有执行时间。 
-Exclusive Time/Self Time：函数执行本身花费的时间，不包括子树执行时间。 
-Wall时间：花去了的时间或挂钟时间。 
-CPU时间：用户耗的时间+内核耗的时间 
-
-# 如果xhprof_enable函数写作：xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY)可以输出更多指标。 
-Function Name 函数名 
-Calls 调用次数 
-Calls% 调用百分比 
-
-# 消耗时间 
-**Incl. Wall Time (microsec) ** 调用的包括子函数所有花费时间 以微秒算(一百万分之一秒)
-IWall% 调用的包括子函数所有花费时间的百分比 
-**Excl. Wall Time (microsec) ** 函数执行本身花费的时间，不包括子树执行时间,以微秒算(一百万分之一秒) 
-EWall% 函数执行本身花费的时间的百分比，不包括子树执行时间 
-
-# 消耗CPU 
-Incl. CPU(microsecs) 调用的包括子函数所有花费的cpu时间。减Incl. Wall Time即为等待cpu的时间 
-ICpu% Incl. CPU(microsecs)的百分比 
-Excl. CPU(microsec) 函数执行本身花费的cpu时间，不包括子树执行时间,以微秒算(一百万分之一秒)。 
-ECPU% Excl. CPU(microsec)的百分比 
-
-# 消耗内存 
-Incl.MemUse(bytes) 包括子函数执行使用的内存。 
-IMemUse% Incl.MemUse(bytes)的百分比 
-Excl.MemUse(bytes) 函数执行本身内存,以字节算 
-EMemUse% Excl.MemUse(bytes)的百分比 
-
-# 消耗内存峰值 
-Incl.PeakMemUse(bytes) Incl.MemUse的峰值 
-IPeakMemUse% Incl.PeakMemUse(bytes) 的峰值百分比 
-Excl.PeakMemUse(bytes) Excl.MemUse的峰值 
-EPeakMemUse% EMemUse% 峰值百分比 c
-
+    - Inclusive Time (或子树时间)：包括子函数所有执行时间。 
+    - Exclusive Time/Self Time：函数执行本身花费的时间，不包括子树执行时间。 
+    - Wall时间：花去了的时间或挂钟时间。 
+    - CPU时间：用户耗的时间+内核耗的时间 
+    - Function Name 函数名 
+    - Calls 调用次数 
+    - Calls% 调用百分比 
+    - 消耗时间 
+        + **Incl. Wall Time (microsec) ** 调用的包括子函数所有花费时间 以微秒算(一百万分之一秒)
+        + IWall% 调用的包括子函数所有花费时间的百分比 
+        + **Excl. Wall Time (microsec) ** 函数执行本身花费的时间，不包括子树执行时间,以微秒算(一百万分之一秒) 
+        + EWall% 函数执行本身花费的时间的百分比，不包括子树执行时间 
+   - 消耗CPU 
+        + Incl. CPU(microsecs) 调用的包括子函数所有花费的cpu时间。减Incl. Wall Time即为等待cpu的时间 
+        + ICpu% Incl. CPU(microsecs)的百分比 
+        + Excl. CPU(microsec) 函数执行本身花费的cpu时间，不包括子树执行时间,以微秒算(一百万分之一秒)。 
+        + ECPU% Excl. CPU(microsec)的百分比 
+   - 消耗内存 
+        + Incl.MemUse(bytes) 包括子函数执行使用的内存。 
+        + IMemUse% Incl.MemUse(bytes)的百分比 
+        + Excl.MemUse(bytes) 函数执行本身内存,以字节算 
+        + EMemUse% Excl.MemUse(bytes)的百分比 
+   - 消耗内存峰值 
+        + Incl.PeakMemUse(bytes) Incl.MemUse的峰值 
+        + IPeakMemUse% Incl.PeakMemUse(bytes) 的峰值百分比 
+        + Excl.PeakMemUse(bytes) Excl.MemUse的峰值 
+        + EPeakMemUse% EMemUse% 峰值百分比
 * 黄色最耗时路径
 * 红色是瓶颈
 
@@ -2493,11 +2192,9 @@ kill -USR2 `cat /opt/php-7.0.14/var/run/php-fpm.pid`
 
 sudo pecl install channel://pecl.php.net/xhprof-0.9.4
 
-yum install graphviz
-
+yum install graphviz # 性能图渲染
 
 # 使用
-# 单文件
 xhprof_enable(); # 需要分析的代码
 
 ##  Code
@@ -2560,47 +2257,36 @@ class backendBaseController extends baseController
 
 ## 性能
 
-压测 手段
-ab `ab -n1000 -c10 https://www.baidu.com/`  请求数 并发数
-requests per second
-time per request
-
-* time file.php
-查看 user 参数
-XHPorf
-    MO PO 多语言
-
+* 测试
+    - 压测
+        + ab `ab -n1000 -c10 https://www.baidu.com/`  -n请求数 -c并发数,结果看下面参数
+            * requests per second
+            * time per request
+    - `time php php-src/Zend/micro_bench.php` :查看 user 参数
+    - XHPorf
 * 语言级
-编译解析开销
-用语言内置函数
-zend逐行扫描 分析 成zend能识别的语法解析成opcode（内置方法生成opcode 少）执行
-
-内置函数性能：知道方法的时间复杂度
-isset arrat_key_exists
-魔法函数性能不佳
-产生错误抑制符：代码前后改变错误等级 error_reporting 前面忽略 后面还原
-    vld:查看opcode
-    php -dvld.active=1 -dvld.excute=0 at.php
-    excute =0 opcode在么 并不执行
-合理使用内存：unset释放掉
-unset注销不掉
-    正则 回溯开销大
-避免循环内运算：for中 length 放在外面
-减少密集运算：开销比C大
-带引号字符串作为键值
-
-* 周边：系统的依赖，找到问题核心
-    - php 串行
+    - 编译解析开销:zend逐行扫描 分析 成zend能识别的语法解析成opcode（内置方法生成opcode 少）执行
+        + 用语言内置函数:已做优化，比自己实现的方法优化
+        + 内置函数性能：知道方法的时间复杂度 比如：isset arrat_key_exists
+        + 魔法函数性能不佳
+        + 产生错误抑制符：代码前后改变错误等级 error_reporting 前面忽略 后面还原，通过vld:查看opcode
+    - 合理使用内存：unset释放掉
+        - unset注销不掉
+    - 正则 回溯开销大
+    - 避免循环内运算：for中 length 放在外面
+    - 减少密集运算：开销比C大
+    - 带引号字符串作为键值
+* 周边：系统依赖，找到问题核心
+    - php是串行执行的
+    - 文件操作性能：读写内存 << 读写数据库 << 读写磁盘 << 读写网络（网络延时）
     - 硬件
         + 运行环境linux
         + 硬盘 文件存储
         + 内存：memache 热数据
     - 软件
         + 数据库
-    - 网络
-    - + 减少文件操作：读写内存 << 读写数据库 << 读写磁盘 《〈 读写网络（网络延时）
-    - 减少网络请求
-        + 对方网络不确定
+    - 网络：减少网络请求
+        + 对方接口不确定
         + 网络稳定性
         + 设置超时
             * 连接超时 800ms
@@ -2617,17 +2303,13 @@ unset注销不掉
         + 重复请求 内容不变
         + smarty: 开启caching
     - 重叠时间窗口
-        + 后任务不强依赖前一任务
+        + 前提是后任务不强依赖前一任务
         + 旁路方案
 * 方法
     - APC：Opcache缓存
         + yac
     - 扩展实现高频逻辑
     - runtime优化:HHVM
-
-```sh
-time php php-src/Zend/micro_bench.php # 源码自带性能测试
-```
 
 ## web
 
