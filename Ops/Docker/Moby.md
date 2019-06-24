@@ -2,21 +2,19 @@
 
 Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
 
-* Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源
-* Docker 可以让开发者打包应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化
+* 一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源
+* 可以让开发者打包应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化
 * 容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低
-* Docker则借鉴传统的虚拟及镜像机制，提供artifact集装箱能力，从而助力云计算，尤其是类似于提供了Web, Hadoop集群，消息队列等。
+* 借鉴传统的虚拟及镜像机制，提供artifact集装箱能力，从而助力云计算，尤其是类似于提供了Web, Hadoop集群，消息队列等。
 * 镜像装箱机制：类似一个只读模版的文件结构，可以自定义及扩展，用来创建Docker容器。
 * 高效虚拟化
-  - Docker借助LXC并进行革新提供了高效运行环境，而非类似VM的虚拟OS，GuestOS的弊端在于看起来够虚拟，隔离，然而使用起来又浪费资源，又难于管理
-  - Docker则基于LXC的核心Linux Namespace,对cgroups/namespace机制及网络过封装，把隔离性，灵活性（资源分配），便携，安全性，最重要是其性能做到了极致。
-  - Docker复用Host主机的OS, 抽象出Docker Engine层面实现调度与隔离，大大降低其负重级别
+  - 借助LXC并进行革新提供了高效运行环境，而非类似VM的虚拟OS，GuestOS的弊端在于看起来够虚拟，隔离，然而使用起来又浪费资源，又难于管理
+  - 基于LXC的核心Linux Namespace,对cgroups/namespace机制及网络过封装，把隔离性，灵活性（资源分配），便携，安全性，最重要是其性能做到了极致。
+  - 复用Host主机的OS, 抽象出Docker Engine层面实现调度与隔离，大大降低其负重级别
   - Docker是在操作系统层面进行虚拟化，而传统VM则直接在硬件层面虚拟化。
   - 底层实现则借助了LXC, 管理利用了namespace做全县控制和隔离，cgroup来进行资源配置，aufs（类似git的思想，把文件系统的修改当作一次代码commit进行叠加从而节省存储）提高文件系统资源利用率。
   - 提供了简洁易用的命令行和API
-  - 使用Go语言开发，吸引开源社区关注
   - 基于联合文件系统的镜像分层技术，加上在线Docker Hub服务，容器迁移方便快捷
-  - 一个容器只包含一个进程的微服务架构
 * 优点
   - 不需要等待虚拟系统启动所以启动快速资源占用低，启动速度快
   - 资源利用率高，一个PC可以跑上千个容器。沙箱机制保证不同服务之间环境隔离
@@ -117,9 +115,9 @@ docker version|info
     + pid namespace：不同用户的进程就是通过pid隔离开的，且不同的namespace中可以有相同pid。所有LXC进程在Docker中的父进程为Docker进程，同时允许嵌套，实现Docker in Docker。
     + net namespace:网络的隔离则通过net namespace实现，每个net namspace有独立的network device， IP, IP routing table， /proc/net目录等。默认采用 veth 的方式，将容器中的虚拟网卡同 host 上的一 个Docker 网桥 docker0 连接在一起。
     + ipc namespace:Container中进程交互采用linux的进程间交互方法， Interprocess Communicaiton - IPC， 包括信号量，消息队列，共享内存等。容器的进程间交互实际上还是 host 上具有相同 pid 名字空间中的进程间交互，因此需要在 IPC 资源申请时加入名字空间信息，每个 IPC 资源有一个唯一的 32 位 id
-    + mnt namespace: mnt namespace允许不同namespace的进程看到的文件结构不同，即隔离文件系统。
+    + mnt namespace:允许不同namespace的进程看到的文件结构不同，即隔离文件系统
     + uts namesapce:UTS - Unix Time-Sharing System namespace允许每个Container拥有独立的hostname和domain name，使其在网络上可以独立的节点而非 主机上的一个进程
-    + user namespace：每个Container拥有不同user和group id，可以在容器内用容器内部的用户执行程序而非主机上的用户。
+    + user namespace：每个Container拥有不同user和group id，可以在容器内用容器内部的用户执行程序而非主机上的用户
 * 可配额/可度量
   - Linux的控制组 cgroups（Control Groups）实现了对资源配额和度量,容器资源统计和隔离。可以限制、记录、隔离进程组（process groups）所使用的物理资源（如：cpu,memory, io 等等）的机制
   - 确保各个容器可以公平地分享主机的内存、CPU、磁盘 IO 等资源；当然，更重要的是，控制组确保了当容器内的资源使用产生压力时不会连累主机系统
@@ -150,21 +148,20 @@ docker version|info
 
 ## 镜像（Image）
 
-* Docker镜像工作原理
-  - 一个只读的模版，用来创建真正Docker容器。有点类似Java的类定义
-  - 一个特殊的文件系统，提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）
-  - 镜像是一种文件结构，Dockerfile中的命令都会在文件系统中创建一个新的层次结构，镜像则构建与这些文件系统之上
-  - 一层层叠加，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。
-  - 这些叠加的最后一层就是container，所以你在container里面改了文件，其实不会进image。
-  - 使用 Union FS 将这些不同的层结合到一个镜像中去,Union FS 有两个用途
-    + 可以实现不借助 LVM、RAID 将多个 disk 挂到同一个目录下
-    + 将一个只读的分支和一个可写的分支联合在一起，Live CD 正是基于此方法可以允许在镜像不变的基础上允许用户在其上进行一些写操作
+* 一个只读的模版，用来创建真正Docker容器。有点类似Java的类定义
+* 一个特殊的文件系统，提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）
+* 镜像是一种文件结构，Dockerfile中的命令都会在文件系统中创建一个新的层次结构，镜像则构建与这些文件系统之上
+* 一层层叠加，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。
+* 这些叠加的最后一层就是container，所以你在container里面改了文件，其实不会进image。
+* 使用 Union FS 将这些不同的层结合到一个镜像中去,Union FS 有两个用途
+  - 可以实现不借助 LVM、RAID 将多个 disk 挂到同一个目录下
+  - 将一个只读的分支和一个可写的分支联合在一起，Live CD 正是基于此方法可以允许在镜像不变的基础上允许用户在其上进行一些写操作
 * `docker pull[选项] [Docker Registry地址]  <仓库名>:<标签名>`
-  - 默认地址是 DockerHub
+  - 默认地址 DockerHub
   - 仓库名：这里的仓库名是两段式名称，既 / ，“/”前面一般是用户名。对于 Docker Hub，如果不给出用户名，则默认为 library ，也就是官方镜像
-* 基于容器制作Docker镜像
+  - 标签名默认 latest
+* 可以基于容器制作Docker镜像
 * 推送Docker镜像至Registry
-* 镜像的本地分发
 
 ```sh
 # 镜像
@@ -200,9 +197,9 @@ docker build -t my-org:my-image -f /tmp/Dockerfile
 
 ## 容器(Container)
 
-* 容器则是镜像创建的实例，类似对象Object,在启动的时候创建一层可写层作为最上层（因为镜像是只读的）
-* docker连接会创建一个父子关系，其中父容器可以看到子容器的信息。
-* 用 docker run 启动一个容器时，在后台 Docker 为容器创建了一个独立的名字空间和控制组集合。
+* 容器是镜像创建的实例，类似对象Object,在启动的时候创建一层可写层作为最上层（因为镜像是只读的）
+* 连接：会创建一个父子关系，其中父容器可以看到子容器的信息
+* run 启动一个容器时，在后台 Docker 为容器创建了一个独立的名字空间和控制组集合
   - 名字空间提供了最基础也是最直接的隔离，在容器中运行的进程不会被运行在主机上的进程和其它容器发现和作用。
   - 每个容器都有自己独有的网络栈，意味着它们不能访问其他容器的 sockets 或接口
   - 如果主机系统上做了相应的设置，容器可以像跟主机交互一样的和其他容器交互
@@ -215,33 +212,28 @@ docker build -t my-org:my-image -f /tmp/Dockerfile
   - 从地址池配置一个ip地址给容器
   - 执行用户指定的应用程序
   - 执行完毕后容器被终止
-* 启动
-  - 基于镜像新建一个容器并启动
-  - 将在终止状态（stopped）的容器重新启动
-  - 参数
-    + –name:给容器定义一个名称，名称是唯一的。如果已经命名了一个叫 web 的容器，当你要再次使用 web 这个名称的时候，需要先用docker rm 来删除之前创建的同名容器
-    + -i:允许你对容器内的标准输入 (STDIN) 进行交互
-    + -t:让Docker分配一个伪终端并绑定到容器的标准输入上
-    + -d 参数启动后会返回一个唯一的 id，也可以通过 docker ps 命令来查看容器信息
-    + /bin/bash:在容器里执行/bin/bash命令
-    + exit 便可以退出这个 ubuntu 容器。退出之后这个容器依然存在，可以用 docker ps -l来看
-    + --rm 标记，则容器在终止后会立刻删除
+* 启动：基于镜像新建一个容器并启动或者将在终止状态（stopped）的容器重新启动
+  - –name:给容器定义一个名称，名称是唯一的。如果已经命名了一个叫 web 的容器，当你要再次使用 web 这个名称的时候，需要先用docker rm 来删除之前创建的同名容器
+  - -i:允许对容器内的标准输入 (STDIN) 进行交互
+  - -t:让Docker分配一个伪终端并绑定到容器的标准输入上
+  - -d 参数启动后会返回一个唯一的 id，也可以通过 docker ps 命令来查看容器信息
+  - /bin/bash:在容器里执行/bin/bash命令
+  - exit 退出这个 ubuntu 容器。退出之后这个容器依然存在，可以用 docker ps -l来看
+  - --rm 容器在终止后会立刻删除
 * docker stop 来终止一个运行中的容器
   - 通过 exit 命令或 Ctrl+d 来退出终端时，所创建的容器立刻终止
 * 交互
   - 短暂方式
     + 启动命令中带有执行语句
-    + exit后 container就终止了，不过并没有消失，可以用 sudo docker ps -a
-    + 可以再次执行一遍：`sudo docker start container_id`：不过这次看不到"hello world"了，只能看到ID
-    + 用logs命令才能看得到： `sudo docker logs container_id`可以看到两个"hello world"
+    + exit后 container就终止了，不过并没有消失，可以用 `sudo docker ps -a`，可以启动：`sudo docker start container_id`
+    + 用logs命令： `sudo docker logs container_id`
   - 交互方式：`docker run -i -t image_name /bin/bash`
-  - daemon方式：即让软件作为长时间服务运行，这就是SAAS啊！例如，一个无限循环打印的脚本(替换为memcached、apache等，操作方法仍然不变！)
 - 从已经创建的容器中更新镜像，并且提交这个镜像
-  + docker run -i -t ubuntu:15.10 /bin/bash # 在新容器内建立一个伪终端或终端。
+  + `docker run -i -t ubuntu:15.10 /bin/bash` # 在新容器内建立一个伪终端或终端
   - -p 3306:3306   表示在这个容器中使用3306端口(第二个)映射到本机的端口号也为3306(第一个)
   - 在运行的容器内使用 apt-get update 命令进行更新,exit退出容器
   - 提交容器`docker commit -m="has update" -a="runoob" e218edb10161 runoob/ubuntu:v2`
-  - 使用新镜像 runoob/ubuntu 来启动一个容器`docker run -t -i runoob/ubuntu:v2 /bin/bash`
+  - 使用新镜像 runoob/ubuntu 来启动一个容器 `docker run -t -i runoob/ubuntu:v2 /bin/bash`
 
 ```sh
 CONTAINER_ID=$(sudo docker run -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done") --name标识来命名容器 -P:是容器内部端口随机映射到主机的高端口 -p : 是容器内部端口绑定到指定的主机端口。 
@@ -257,7 +249,7 @@ docker-compose ps # 查看当前项目容器
 docker ps -l   # 查看最后一次创建的容器
 
 # 创建
-docker create ubuntu:14.04 #  创建一个容器但是不启动它
+docker create ubuntu:14.04 #  创建容器
 docker create --name mymysql -v /data/mysql-data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root
 
 docker run -i -t ubuntu:15.10 /bin/bash # 在新容器内建立一个伪终端或终端
@@ -452,7 +444,7 @@ docker run --volumes-from dbdata2 -v $(pwd):/backup busybox tar xvf
 
 * 读取Dockerfile指令生成 Image
   - 重复利用中间镜像文件加速构建
-* Dockerfile文件格式
+* Dockerfile 语法
   - 使用#来注释
   - 每一个指令都会在镜像上创建一个新的层
   - 每一个指令的前缀都必须是大写的
@@ -460,25 +452,24 @@ docker run --volumes-from dbdata2 -v $(pwd):/backup busybox tar xvf
   - FROM 指令告诉 Docker 使用哪个镜像作为基础，必须以此开始
   - MAINTAINER 说明维护人信息
   - RUN 开头的指令会在创建中运行，比如安装一个软件包
-  - COPY <src> <dest> 指令将文件复制进镜像中
+  - `COPY <src> <dest>` 指令将文件复制进镜像中
   - ENV: 添加环境变量  `ENV RAILS_ENV staging`
   - USER daemon：指定运行容器时的用户名或 UID，后续的 RUN 也会使用指定用户
   - VOLUME ["/data"]：创建一个可以从本地主机或其他容器挂载的挂载点，一般用来存放数据库和需要保持的数据等
   - WORKDIR 指定工作目录
   - EXPOSE 命令来向外部开放端口
-  - ADD <src> <dest>: 将本地目录中的文件添加到docker镜像中 `ADD unicorn.rb /app/config/unicorn.rb`
+  - `ADD <src> <dest>`: 将本地目录中的文件添加到docker镜像中 `ADD unicorn.rb /app/config/unicorn.rb`
     + <src> 可以是Dockerfile所在目录的一个相对路径；也可以是一个 URL
   - ENTRYPOINT
     + ENTRYPOINT ["executable", "param1", "param2"]
-    + ENTRYPOINT command param1 param2（shell中执行）
-    + 启动后执行的命令，并且不可被 docker run 提供的参数覆盖。
+    + 启动后执行的命令，并且不可被 docker run 提供的参数覆盖
     + 每个 Dockerfile 中只能有一个 ENTRYPOINT，当指定多个时，只有最后一个起效
   - CMD 指定运行容器时的操作命令,只有一条，多条，只有最后一条执行，如果用户启动容器时候指定了运行的命令，则会覆盖掉 CMD 指定的命令
-    + CMD ["executable","param1","param2"] 使用 exec 执行，推荐方式；
+    + CMD ["executable","param1","param2"] 使用 exec 执行，推荐方式
     + CMD command param1 param2 在 /bin/sh 中执行，提供给需要交互的应用；
     + CMD ["param1","param2"] 提供给 ENTRYPOINT 的默认参数；
 * 指令
-  - docker build [OPTIONS] PATH | URL |
+  - docker build [OPTIONS] PATH | URL
     + The PATH is a directory on your local filesystem. The URL is a Git repository location.
     + -f :指定 Dockerfile 文件路径
     + -t ：指定要创建的目标镜像名
@@ -1023,17 +1014,23 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 
 ## 准则
 
-* 不要在容器（container）中存储数据 容器可能会被中断、被替换或遭到破坏。请存储在卷 (volume) 中。请确保应用程序适用于写入共享的数据存储。
+* 容器座右铭： “容器属于临时性（一次性）系统。”
+* 不要在容器（container）中存储数据: 容器可能会被中断、被替换或遭到破坏。请存储在卷 (volume) 中。请确保应用程序适用于写入共享的数据存储
 * 监控容器 Docker：推荐 Cloudinsight
 * 不要依赖 IP 地址：每个容器都有自己的内部 IP 地址，如果启动然后停止容器，内部 IP 地址可能会发生变化。请使用环境变量在容器之间传递相应的主机名和端口。
 * 不要以 root 权限运行进程：应使用 USER 指令来为容器的运行指定非 root 用户
 * 不要在镜像中存储证书及使用环境变量。 不要在镜像中对任何用户名/密码进行硬编码操作。请使用环境变量从容器外部检索信息
 * 不要在单个容器中运行一个以上进程 容器只运行一个进程（HTTP 守护进程、应用程序服务器、数据库）时效果最佳
-* 不要只使用“最新版”标签：因为无法跟踪当前运行的镜像版本。
+* 不要只使用“最新版”标签：因为无法跟踪当前运行的镜像版本
 * 不要从正在运行的容器中创建镜像 换句话说，不要使用"docker commit"命令来创建镜像。这一镜像创建方法不可复制，因此应完全避免使用。请始终使用 Dockerfile 或其他任何可完全复制的 S21（从源代码到镜像）方法
 * 不要使用单层镜像 为了有效利用多层文件系统，请始终为操作系统创建属于自己的基本镜像层，然后为用户名定义创建一个层，为运行时安装创建一个层，为配置创建一个层，最后再为应用程序创建一个层。这样，重新创建、管理和分配镜像就会容易些。
 * 不要创建大尺寸镜像 大尺寸的镜像难以分配。请确保仅使用必需文件和库来运行应用程序。
-* 不要分两部分传送应用程序 有些人把容器当作虚拟机，所以他们大多会认为，应该将应用程序部署到现有正在运行的容器中。在需要不断部署和调试的开发阶段，可能确实如此；但对于 QA 和生产的持续交付 (CD) 渠道，应用程序应当是镜像的一部分。切记：容器转瞬即逝。
+* 不要分两部分传送应用程序 有些人把容器当作虚拟机，所以他们大多会认为，应该将应用程序部署到现有正在运行的容器中。在需要不断部署和调试的开发阶段，可能确实如此；但对于 QA 和生产的持续交付 (CD) 渠道，应用程序应当是镜像的一部分。切记：容器转瞬即逝
+
+## 图书
+
+* 《[Docker——容器与容器云（第2版）](https://book.douban.com/subject/26894736/)》
+* 《[Kubernetes权威指南 : 从Docker到Kubernetes实践全接触（第2版）](https://book.douban.com/subject/26902153/)》
 
 ## 资源
 
@@ -1045,11 +1042,6 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 * [jessfraz/dockerfiles](https://github.com/jessfraz/dockerfiles):Various Dockerfiles I use on the desktop and on servers. https://blog.jessfraz.com/post/docker-containers-on-the-desktop/
 * GUI
   - Shipyard
-
-## 图书
-
-* 《[Docker——容器与容器云（第2版）](https://book.douban.com/subject/26894736/)》
-* 《[Kubernetes权威指南 : 从Docker到Kubernetes实践全接触（第2版）](https://book.douban.com/subject/26902153/)》
 
 ## 工具
 
@@ -1075,6 +1067,7 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 * [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects
 * [yeasy/docker_practice](https://github.com/yeasy/docker_practice):Learn and understand Docker technologies, with real DevOps practice! https://legacy.gitbook.com/book/yeasy/docker_practice/details
 * [中文文档](https://docker-doc.readthedocs.io/zh_CN/latest/index.html)
+* [中文文档](http://www.dockerinfo.net)
 
 * https://confluence.atlassian.com/bamboo/getting-started-with-docker-and-bamboo-687213473.html
 * [Docker](http://blog.csdn.net/erixhao/article/details/72762851)

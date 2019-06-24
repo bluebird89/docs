@@ -698,6 +698,48 @@ client(内置证书机构证书) <---------------------------   证书机构
 * 安全
     - PHPSESSIONID设置为httponly并加密，这样，前端JS就无法读取和修改这些敏感信息，降低了被盗用的风险
 
+```
+# 存储方式 N 表示多级目录，值为数字。 MODE 表示创建的 Session 文件权限。使用了 N 参数并且大于 0，那么将不会执行自动垃圾回收。双引号 "quotes" 括起来
+session.save_handler = files
+session.save_path = "N;MODE;/tmp"
+
+# 生命周期：关闭后会直接清除所有session，或者程序实现
+session_destory()方法清除所有session
+unset(session['x'])来清除指定的session['x']
+
+# 垃圾回收机制：session.gc_divisor 与 session.gc_probability 合起来定义了在每个会话初始化时启动 GC 进程的概率 gc_probability/gc_divisor
+# 扫描所有的session信息， 用当前时间减去session的最后修改时间（modified date），同session.gc_maxlifetime参数进行比较，
+session.gc_maxlifetime
+session.gc_probability
+session.gc_divisor
+
+## 共享
+//memcache Ip（127.0.0.1） Port（11211）
+session.save_handler = memcache
+session.save_path = "tcp://127.0.0.1:11211"
+# 数据解析
+function unserialize_php($session_data)
+{
+    $return_data = array();
+    $offset = 0;
+
+    while ($offset < strlen($session_data)) {
+        if (!strstr(substr($session_data, $offset), "|")) {
+            throw new Exception("invalid data, remaining: " .substr($session_data, $offset));
+        }
+        $pos = strpos($session_data, "|", $offset);
+        $num = $pos - $offset;
+        $varname = substr($session_data, $offset, $num);
+        $offset += $num + 1;
+        $data = unserialize(substr($session_data, $offset));
+        $return_data[$varname] = $data;
+        $offset += strlen(serialize($data));
+    }
+    return $return_data;
+}
+$un_data = unserialize_php($data);
+```
+
 ## HTTP2
 
 * 多路复用：多个请求共享一个tcp连接
