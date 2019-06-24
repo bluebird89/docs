@@ -45,6 +45,8 @@ php -S localhost:8888 route/route.php
 
 ## 扩展
 
+* framework
+    - [top-think/framework](https://github.com/top-think/framework):ThinkPHP5 Framework http://www.thinkphp.cn
 * swoole
     * [top-think/think-swoole](https://github.com/top-think/think-swoole):Swoole extend for thinkphp5
 * admin
@@ -52,6 +54,8 @@ php -S localhost:8888 route/route.php
     * [yuan1994/tpAdmin](https://github.com/yuan1994/tpAdmin):一个基于ThinkPHP5的管理后台，支持代码自动生成，RBAC权限管理，无限级节点权限管理，一个智能化的管理后台
     * [Astonep/tp-admin](https://github.com/Astonep/tp-admin):基于ThinkPHP5拿来即用高性能后台管理系统 http://tpadmin.shijinrong.cn/admin/login
     * [ijry/lyadmin](https://github.com/ijry/lyadmin):lyadmin是一套轻量级通用后台，采用ThinkPHP+Bootstrap3制作，内置系统设置、上传管理、权限管理、模块管理、插件管理等功能，独有的Builder页面自动生成技术节省50%开发成本，先进的模块化开发的支持让开发成本一降再降，致力于为个人和中小型企业打造全方位的PHP企业级开发解决方案。另外提供整套企业开发解决方案，集PC、手机、微信、App、小程序五端于一体，更有用户中心模块、门户模块、钱包支付中心模块、商城模块、OAuth2统一登陆、内部Git模块、Docker模块可供选择。 https://www.lingyun.net/lyadmin.html
+* [think-seaslog](https://github.com/top-think/think-seaslog)
+* [top-think/think-annotation](https://github.com/top-think/think-annotation):ThinkPHP6注解
 
 ## 项目
 
@@ -61,5 +65,4 @@ php -S localhost:8888 route/route.php
 ## 参考
 
 * [ThinkPHP5.1完全开发手册](https://www.kancloud.cn/manual/thinkphp5_1)
-* [top-think/framework](https://github.com/top-think/framework):ThinkPHP5 Framework http://www.thinkphp.cn
 * [top-think/thinkng](https://github.com/top-think/thinkng):基于 ThinkPHP 5 框架核心重写的下一代 ThinkPHP

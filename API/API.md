@@ -135,11 +135,84 @@ dec_message = decrypt ( password, enc_message )
 print dec_message   // Hello World!
 ```
 
-## 流程
+## 认证、授权和凭证
 
-* 后端根据需求，定义数据格式和 api，mock好数据 生成api 文档
-* 前端对接接口
-* mockjs + rap 或者 easy-mock
+* API 是无状态的，不推荐使用 Cookie
+    - 使用 cookie，例如 web 项目中 ajax 的方式
+    - 使用 session ID 或 hash 作为 token，但将 token 放入 header 中传递
+    - 将生成的 token （可能是JWT）放入 cookie 传递，利用 HTTPonly 和 Secure 标签保护 token
+* 认证是 authentication，指的是当前用户的身份，当用户登陆过后系统便能追踪到他的身份做出符合相应业务逻辑的操作
+    - 即使用户没有登录，大多数系统也会追踪他的身份，只是当做来宾或者匿名用户来处理
+    - 认证技术解决的是 “我是谁？”的问题
+    - HTTP Basic Authentication
+        + 客户端
+            * 将用户名和密码使用冒号连接，例如 username:abc123456
+            * 为了防止用户名或者密码中存在超出 ASCII 码范围的字符，推荐使用UTF-8编码
+            * 将上面的字符串使用 Base 64 编码，例如 dXNlcm5hbWU6YWJjMTIzNDU2
+            * 在 HTTP 请求头中加入 “Basic + 编码后的字符串”，即：Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            * 设置名称为 Authorization 的 header 头部
+        + Base64 只能称为编码，而不是加密 (实际上无需配置密匙的客户端并没有任何可靠地加密方式，我们都依赖 TSL 协议)。这种方式的致命弱点是编码后的密码如果明文传输则容易在网络传输中泄露，在密码不会过期的情况下，密码一旦泄露，只能通过修改密码的方式
+    - HMAC（AK/SK）认证：对接一些 PASS 平台和支付平台时，会要求我们预先生成一个 access key（AK） 和 secure key（SK），然后通过签名的方式完成认证请求，这种方式可以避免传输 secure key，且大多数情况下签名只允许使用一次，避免了重放攻击。
+        + 利用散列的消息认证码 (Hash-based MessageAuthentication Code) 来实现的，因此有很多地方叫 HMAC 认证，实际上不是非常准确
+        + HMAC 只是利用带有 key 值的哈希算法生成消息摘要，在设计 API 时有具体不同的实现
+            * 客户端需要在认证服务器中预先设置 access key（AK 或叫 app ID） 和 secure key（SK）
+            * 在调用 API 时，客户端需要对参数和 access key 进行自然排序后并使用 secure key 进行签名生成一个额外的参数 digest
+            * 服务器根据预先设置的 secure key 进行同样的摘要计算，并要求结果完全一致
+            * **注意 secure key 不能在网络中传输，以及在不受信任的位置存放（浏览器等）**
+            * 每一次请求的签名变得独一无二，从而实现重放攻击，需要在签名时放入一些干扰信息
+                - 质疑/应答算法（OCRA: OATH Challenge-Response Algorithm）
+                    + 客户端先请求一次服务器，获得一个 401 未认证的返回，并得到一个随机字符串（nonce）
+                    + 将 nonce 附加到按照上面说到的方法进行 HMAC 签名，服务器使用预先分配的 nonce 同样进行签名校验，这个 nonce 在服务器只会被使用一次，因此可以提供唯一的摘要。
+                - 基于时间的一次性密码算法（TOTP：Time-based One-time Password Algorithm）：通过同步时间的方式协商到一致，在一定的时间窗口内有效（1分钟左右）
+                    + 在两步验证中被大量使用：客户端服务器共享密钥然后根据时间窗口能通过 HMAC 算法计算出一个相同的验证码。TOTP HMAC-based One-time Password algorithm
+* 授权是 authorization，指的是什么样的身份被允许访问某些资源，在获取到用户身份后继续检查用户的权限
+    - 单一的系统授权往往是伴随认证来完成的，但是在开放 API 的多系统结构下，授权可以由不同的系统来完成，例如 OAuth
+    - 授权技术是解决“我能做什么？”的问题
+    - OAuth（开放授权）是一个开放标准，允许用户授权第三方网站访问他们存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方网站或分享他们数据的所有内容。
+        + OAuth 是一个授权标准，而不是认证标准。提供资源的服务器不需要知道确切的用户身份（session），只需要验证授权服务器授予的权限（token）即可。
+        + 基本思路就是通过授权服务器获取 access token 和 refresh token（refresh token 用于重新刷新access token），然后通过 access token 从资源服务器获取数据
+        + 验证 access token
+            * 在完成授权流程后，资源服务器可以使用 OAuth 服务器提供的 Introspection 接口来验证access token，OAuth服务器会返回 access token 的状态以及过期时间。在OAuth标准中验证 token 的术语是 Introspection。同时也需要注意 access token 是用户和资源服务器之间的凭证，不是资源服务器和授权服务器之间的凭证。资源服务器和授权服务器之间应该使用额外的认证（例如 Basic 认证）。
+            * 使用 JWT 验证。授权服务器使用私钥签发 JWT 形式的 access token，资源服务器需要使用预先配置的公钥校验 JWT token，并得到 token 状态和一些被包含在 access token 中信息。因此在 JWT 的方案下，资源服务器和授权服务器不再需要通信，在一些场景下带来巨大的优势。同时 JWT 也有一些弱点，我会在JWT 的部分解释。
+        + access token 被设计用来客户端和资源服务器之间交互,过期时间（TTL）应该尽量短，从而避免用户的 access token 被嗅探攻击
+        + refresh token 是被设计用来客户端和授权服务器之间交互。帮助用户维护一个较长时间的状态，避免频繁重新授权.客户端拿着 refresh token 去获取 access token 时同时需要预先配置的 secure key，客户端和授权服务器之前始终存在安全的认证。
+        + OAuth 负责解决分布式系统之间的授权问题，即使有时候客户端和资源服务器或者认证服务器存在同一台机器上。OAuth 没有解决认证的问题，但提供了良好的设计利于和现有的认证系统对接。
+        + Open ID 解决的问题是分布式系统之间身份认证问题，使用Open ID token 能在多个系统之间验证用户，以及返回用户信息，可以独立使用，与 OAuth 没有关联。
+        + OpenID Connect 解决的是在 OAuth 这套体系下的用户认证问题，实现的基本原理是将用户的认证信息（ID token）当做资源处理。在 OAuth 框架下完成授权后，再通过 access token 获取用户的身份。
+        + 如果系统中需要一套独立的认证系统，并不需要多系统之间的授权可以直接采用 Open ID。如果使用了 OAuth 作为授权标准，可以再通过 OpenID Connect 来完成用户的认证。
+    - JWT （JSON Web Token）:一种自包含令牌，令牌签发后无需从服务器存储中检查是否合法，通过解析令牌就能获取令牌的过期、有效等信息
+        + 令牌为一段点分3段式结构
+            * header json 的 base64 编码为令牌第一部分
+            * payload json 的 base64 编码为令牌第二部分
+            * 拼装第一、第二部分编码后的 json 以及 secret 进行签名的令牌的第三部分
+        + 只需要签名的 secret key 就能校验 JWT 令牌，如果在消息体中加入用户 ID、过期信息就可以实现验证令牌是否有效、过期了，无需从数据库/缓存中读取信息
+        + 第一、二部分只是 base64 编码，肉眼不可读，不应当存放敏感信息
+        + 自包含特性，导致了无法被撤回
+* 实现认证和授权的基础是需要一种媒介（credentials）来标记访问者的身份或权利，在现实生活中每个人都需要一张身份证才能访问自己的银行账户、结婚和办理养老保险等，这就是认证的凭证
+* 策略
+    - 基于访问控制列表（ACL）
+    - 基于用户角色的访问控制（RBAC）
+
+## 文档和前后端协作
+
+* 基于注释的 API 文档：通过代码中注释生成 API 文档的轻量级方案
+    - 好处是简单易用，基本与编程语言无关
+    - 因为基于注释，非常适合动态语言的文档输出，例如 Nodejs、PHP、Python。由于NPM包容易安装和使用，这里推荐 nodejs 平台下的 apidocjs
+* 基于反射的 API 文档：使用 swagger 这类通过反射来解析代码，只需要定义好 Model，可以实现自动输出 API 文档。这种方案适合强类型语言例如 Java、.Net，尤其是生成一份稳定、能在团队外使用的 API 文档
+    - swagger 实际上是一整套关于 API 文档、代码生成、测试、文档共享的工具包，包括 :
+        + Swagger Editor 使用 swagger editor 编写文档定义 yml 文件，并生成 swagger 的 json 文件,提供线上版本，也可以本地使用
+        + Swagger UI 解析 swagger 的 json 并生成 html 静态文档
+        + Swagger Codegen 可以通过 json 文档生成 Java 等语言里面的模板文件（模型文件）
+        + Swagger Inspector API 自动化测试
+        + Swagger Hub 共享 swagger 文档
+* 使用契约进行前后端协作：在团队内部，前后端协作本质上需要的不是一份 API 文档，而是一个可以供前后端共同遵守的契约
+    - 前后端可以一起制定一份契约，使用这份契约共同开发，前端使用这份契约 mock API，后端则可以通过它简单的验证API是否正确输出
+    - **契约测试**:消费者驱动的契约  Spring cloud contract
+    - 后端根据需求，生成 API 定义文件，就可以进一步完成生成 HTML 静态文档、模拟 API 数据等操作
+    - 前端对接接口,通过 swagger 的 node 版本 swagger-node 自带的 mock 模式启动一个 Mock server，然后根据约定模拟自己想要的数据, mockjs + rap 或者 easy-mock
+    - 管理契约文件:单独增加了一个管理契约文件的 git仓库，并使用 git 的submodule 来引用到各个涉及到了的代码仓库中
+        + 单独放置还有一个额外的好处:构建契约测试时，可以方便的发送到一台中间服务器。一旦 API 契约发生变化，可以触发 API提供的契约验证测试
+* RAML RestFul API 统一建模语言 （RESTful API Modeling Language）,构建出 API 协作的工具链，设计、构建、测试、文档、共享。
 
 ## 动态令牌
 
@@ -392,6 +465,26 @@ apidoc -i myapp/ -o apidoc/ -t mytemplate/
     - Yapi
     - [RAP2](http://rap2.taobao.org)
     - DOClever
+* 抓包
+    - Charles
+    - fiddler
+* API 文档/契约生成工具
+    - apidoc
+    - swagger
+    - blue sprint
+    - RAML
+* mock 工具清单
+    - wiremock
+    - json-server
+    - node-mock-server
+    - node-mocks-http
+* HTTP 请求拦截器
+    - axios-mock-adapter
+    - jquery-mockjax
+* 契约/API 测试工具
+    - Spring Cloud Contract
+    - Pact
+    - Rest-Assured
 
 ## 参考
 

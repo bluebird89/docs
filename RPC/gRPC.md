@@ -31,7 +31,6 @@ brew install grpc
     - `rpc RecordRoute(stream Point) returns (RouteSummary) {}`：客户端发起的请求是一个流式的数据，比如数组中的逐个元素，服务器返回一个相应
     - `rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}`：客户端发起的请求是一个流式数据，比如数组中的逐个元素，二服务器返回的也是一个类似的数据结构
 
-
 ## 认证方式
 
 * 基于SSL/TLS认证方式
