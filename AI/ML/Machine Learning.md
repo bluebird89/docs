@@ -255,6 +255,10 @@
 ## 图书
 
 * 百面机器学习
+  - 知识：主要是指你对machine learning相关知识和理论的储备
+  - 工具：将你的machine learning知识应用于实际业务的工具
+  - 逻辑：你的举一反三的能力，你解决问题的条理性，你发散思维的能力，你的聪明程度
+  - 业务：深入理解所在行业的商业模式，从业务中发现motivation并进而改进模型算法的能力
 * 李航老师的《统计学习方法》
 * 周志华老师的《机器学习》,又称之为西瓜书。基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等。
   - [西瓜书](https://github.com/datawhalechina/pumpkin-book)
@@ -314,6 +318,20 @@
 * kesci： https://www.kesci.com/
 * Jdata: https://jdata.jd.com/
 * kaggle： https://www.kaggle.com/
+
+## 面试
+
+* 在介绍自己实习时候用过XGBoost预测股票涨跌的过程中，他就会由浅入深依次考察下列问题：
+  - GBDT的原理（知识）
+  - 决策树节点分裂时是如何选择特征的？（知识）
+  - 写出Gini Index和Information Gain的公式并举例说明（知识）
+  - 分类树和回归树的区别是什么？（知识）
+  - 与Random Forest作比较，并以此介绍什么是模型的Bias和Variance（知识）
+  - XGBoost的参数调优有哪些经验（工具）
+  - XGBoost的正则化是如何实现的（工具）
+  - XGBoost的并行化部分是如何实现的（工具）
+  - 为什么预测股票涨跌一般都会出现严重的过拟合现象（业务）
+  - 如果选用一种其他的模型替代XGBoost或者改进XGBoost你会怎么做，为什么？（业务+逻辑+知识）
 
 ## 工具
 

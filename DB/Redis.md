@@ -13,6 +13,9 @@ Redis is an in-memory database that persists on disk. The data model is key-valu
 * 单个value的最大限制是1GB，不像 memcached只能保存1MB的数据
 * 缓存：在碰到需要执行耗时特别久、且结果不频繁变动的SQL时，就特别适合将运行结果放入缓存。后面的请求就去缓存中读取，使得请求能够迅速响应
 * 并发：让请求先访问到Redis，而不是直接访问数据库
+* 一种基于客户端-服务端模型以及请求/响应协议的TCP服务。这意味着通常情况下一个请求会遵循以下步骤：
+    - 客户端向服务端发送一个查询请求，并监听Socket返回，通常是以阻塞模式，等待服务端响应。
+    - 服务端处理命令，并将结果返回给客户端。
 * 采用了非阻塞I/O多路复用机制，单线程根据Socket的不同状态执行每个Socket(I/O流)：任务
     - 用epoll作为IO多路复用技术的实现，再加上redis自身事件处理模型将epoll中的链接、读写、关闭都转换为事件，不在网络IO上浪费过多的事件
 * 提供了Select、Epoll、Evport、Kqueue等多路复用函数库
@@ -50,8 +53,8 @@ Redis is an in-memory database that persists on disk. The data model is key-valu
 ## 安装
 
 * redis-server：redis服务器的daemon启动程序
-* redis-cli：Redis命令操作工具。当然，也可以telnet根据其纯文本协助来操作。
-* redis-benchmark：Redis性能测试工具，测试Redis在你的系统及你的配置下的读写性能。
+* redis-cli：Redis命令操作工具。当然，也可以telnet根据其纯文本协助来操作
+* redis-benchmark：Redis性能测试工具，测试系统Redis读写性能
 * redis-check-aof：更新日志检查
 * redis-check-dump：用于本地数据库检查
 
@@ -69,9 +72,31 @@ systemctl enable|status|stop redis-server
 
 ## 配置
 
-`/etc/redis/redis.conf`
+* `/etc/redis/redis.conf`
 
 ```
+CONFIG GET *
+CONFIG set requirepass "shouce.ren"
+CONFIG get requirepass
+
+daemonize no
+pidfile /var/run/redis.pid
+bind 127.0.0.1
+timeout 300 # 客户端闲置多长时间后关闭连接
+# 数据同步到数据文件 条件
+save 900 1
+save 300 10
+save 60 10000
+rdbcompression yes
+dbfilename dump.rdb # 指定本地数据库文件名
+dir ./ # 指定本地数据库存放目录
+slaveof <masterip> <masterport> # 设置当本机为slav服务时，设置master服务的IP地址及端口，在Redis启动时，它会自动从master进行数据同步
+masterauth <master-password> # master服务设置了密码保护时，slav服务连接master的密码
+requirepass foobared # 配置了连接密码，客户端在连接Redis时需要通过AUTH <password>命令提供密码，默认关闭
+appendonly no # 指定是否在每次更新操作后进行日志记录，Redis在默认情况下是异步的把数据写入磁盘，如果不开启，可能会在断电时导致一段时间内的数据丢失。因为 redis本身同步数据文件是按上面save条件来同步的，所以有的数据会在一段时间内只存在于内存中。默认为no
+appendfilename appendonly.aof # 更新日志文件名，默认为appendonly.aof
+
+
 <add key="RedisServerIP" value="redis:uuid845tylabc123@139.198.13.12:4125"/>
 <!-- 提供的 Redis 环境是单机版配置。如果 Redis 是主从配置，则还需设置 RedisSlaveServerIP-->
 <!--<add key="RedisSlaveServerIP" value="redis:uuid845tylabc123@139.198.13.13:4125"/>-->
@@ -120,9 +145,16 @@ redis-cli -h localhost -p 6379 monitor // 从库执行该命令会一直ping主�
 
 ## 客户端
 
+* 通过监听一个 TCP 端口或者 Unix socket 的方式来接收来自客户端的连接，当一个连接建立后，Redis 内部会进行以下一些操作：
+    - 客户端 socket 会被设置为非阻塞模式，因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型。
+    - 为这个 socket 设置 TCP_NODELAY 属性，禁用 Nagle 算法
+    - 创建一个可读的文件事件用于监听这个客户端 socket 的数据发送
+
 ```sh
+# 设置最大连接数
+redis-server --maxclients 100000
 # 客户端使用
-redis-cli -h localhost -p 6379
+redis-cli -h localhost -p 6379 -a password
 info # 功能统计
 info memory|server|clients|Persistence|Stats|Replication|CPU|cluster|keyspace
 
@@ -130,6 +162,12 @@ type key # 获取类型
 object encoding key # 查看编码
 object idletime key # 查看空转时间
 object refcount key # 查看引用次数
+
+CLIENT LIST 返回连接到 redis 服务的客户端列表
+CLIENT SETNAME  设置当前连接的名称
+CLIENT GETNAME  获取通过 CLIENT SETNAME 命令设置的服务名称
+CLIENT PAUSE    挂起客户端连接，指定挂起的时间以毫秒计
+CLIENT KILL 关闭客户端连接
 ```
 
 ## 内存
@@ -203,40 +241,50 @@ struct sdshdr {
 
 ## 通用
 
-* 允许模糊查询key　　有3个通配符  *、?、[]
-* randomkey：返回随机key　　
-* type key：返回key存储的类型
-* exists key：判断某个key是否存在
-* del key：删除key
-* rename key newkey：改名
-* renamenx key newkey：如果newkey不存在则修改成功
-* move key 1：将key移动到1数据库
-* ttl key：查询key的生命周期（秒）
-* expire key 整数值：设置key的生命周期以秒为单位
-* pexpire key 整数值：设置key的生命周期以毫秒为单位
-* pttl key：查询key 的生命周期（毫秒）
-* perisist key：把指定key设置为永久有效
-* ping：测定连接是否存活
+* KEYS pattern：模糊查询key，通配符  *、?、[]
+* RANDOMKEY：返回随机key　　
+* DUMP key: 序列化给定 key ，并返回被序列化的值
+* TYPE key 返回 key 所储存的值的类型
+* EXISTS key：判断某个key是否存在
+* DEL key：删除key
+* RENAME key newkey：改名
+* RENAMENX key newkey：如果newkey不存在则修改成功,新建key
+    - 修改成功时，返回 1。 如果 NEW_KEY_NAME 已经存在，返回 0
+* MOVE key db：将key移动到1数据库
+* 时效
+    - TTL key：查询key的生命周期（秒）
+    - PTTL key：查询key 的生命周期（毫秒）
+    - EXPIRE key seconds：设置key的生命周期以秒为单位
+    - PEXPIRE key milliseconds：设置key的生命周期以毫秒为单位
+    - EXPIREAT key timestamp
+    - PEXPIREAT key milliseconds-timestamp 设置 key 过期时间的时间戳(unix timestamp) 以毫秒计
+    - PERSIST key：把指定key设置为永久有效
+* 服务
+    - ping：测定连接是否存活
+    - info：获取服务器的信息和统计
+    - monitor：实时转储收到的请求
+    - time：显示服务器时间，时间戳（秒），微秒数
+    - quit：退出连接
+    - shutdown [save/nosave]
 * echo：在命令行打印一些内容
 * select：选择数据库
-* quit：退出连接
 * dbsize：返回当前数据库中key的数目
-* info：获取服务器的信息和统计
-* monitor：实时转储收到的请求
-* config get 配置项：获取服务器配置的信息
-* config set 配置项  值：设置配置项信息
-* flushdb：删除当前选择数据库中所有的key
-* flushall：删除所有数据库中的所有的key
-* time：显示服务器时间，时间戳（秒），微秒数
-* bgrewriteaof：后台保存rdb快照
-* bgsave：后台保存rdb快照
-* save：保存rdb快照
-* lastsave：上次保存时间
-* shutdown [save/nosave]
-* 如果不小心运行了flushall，立即shutdown nosave，关闭服务器，然后手工编辑aof文件，去掉文件中的flushall相关行，然后开启服务器，就可以倒回原来是数据。如果flushall之后，系统恰好bgwriteaof了，那么aof就清空了，数据丢失。
+* 配置
+    - config get 配置项：获取服务器配置的信息
+    - config set 配置项  值：设置配置项信息
+* 数据
+    - flushdb：删除当前选择数据库中所有的key
+    - flushall：删除所有数据库中的所有的key
+        + 如果不小心运行了flushall，立即shutdown nosave，关闭服务器，然后手工编辑aof文件，去掉文件中的flushall相关行，然后开启服务器，就可以倒回原来是数据。如果flushall之后，系统恰好bgwriteaof了，那么aof就清空了，数据丢失。
+* 持久化
+    - bgrewriteaof：后台保存rdb快照
+    - bgsave：后台保存rdb快照
+    - save：保存rdb快照
+    - lastsave：上次保存时间
+
 * showlog：显示慢查询
     - 多慢才叫慢 slowlog-log-slower-than 10000，来指定（单位为微秒）
-    - 服务器存储多少条慢查询记录 由slowlog-max-len 128，来做限制　　
+    - 服务器存储多少条慢查询记录 由slowlog-max-len 128，来做限制
 
 ## 数据类型
 
@@ -248,7 +296,6 @@ Redis 没有像 MySQL 这类关系型数据库那样强大的查询功能，需�
 * 值可以是任何各种类的字符串（包括二进制数据），如：简单的字符串、JSON、XML、二进制等，但有一点要特别注意：在 Redis 中字符串类型的值最大只能保存 512 MB。
 * 例如你可以在一个键下保存一副jpeg图片.即可以完全实现目前 Memcached 的功能，并且效率更高。还可以享受Redis的定时持久化，操作日志及 Replication等功能
 * 方法
-    - 是否存在： `exists key`
     - 设置值:`set key value [EX seconds] [PX milliseconds] [NX|XX]`,有几个非必须的选项
         + EX seconds：为键设置秒级过期时间
         + PX milliseconds：为键设置毫秒级过期时间
@@ -258,6 +305,7 @@ Redis 没有像 MySQL 这类关系型数据库那样强大的查询功能，需�
         + XX：键必须存在，才可以设置成功，用于更新
             * 多次更新，跟原来值一样？
     - 获取值 `get key`
+    - GETBIT key offset 对 key 所储存的字符串值，获取指定偏移量上的位
     - 批量设置值: `mset key value [key value]`
     - 批量获取值:`mget key [key1 key2]`,键不存在，那么它的值将为 nil,并且返回结果的顺序与传入时相同
     - incr 命令用于对值做自增操作，返回的结果分为 3 种情况:
@@ -268,35 +316,19 @@ Redis 没有像 MySQL 这类关系型数据库那样强大的查询功能，需�
     - incrby kek increment 自增指定数字
     - decrby key decrement 自减指定数字
     - incrbyfloat key increment 0.7
-    - 获取字符串长度 `strlen key`
+    - `strlen key` 获取字符串长度
         + 每个中文占用 3 个字节
-    - 往字符串append内容: `append key value`
-    - 设置并返回原值 `getset key value`
+    - `append key value` 往字符串append内容
+    - `getset key value` 设置并返回原值
     - 获取字符串的某一段内容 `getrange key start end` O(n) n是字符长度,字符串的下标，左数从0开始，右数从-1开始
         + 当start>length，则返回空字符串
         + 当stop>=length，则截取至字符串尾
         + 如果start所处位置在stop右边，则返回空字符串
-    - 设置及获取字符串的某一位（bit）`setrange key offeset values`
+    - `setrange key offeset values` 设置及获取字符串的某一位（bit）
     - setbit key offset value：设置offset对应二进制上的值，返回该位上的旧值。 如果offset过大，则会在中间填充0,offset最大到多少：2^32-1，即可推出最大的字符串为512M
     - bitop AND|OR|NOT|XOR destkey key1 [key2..] 对key1 key2做opecation并将结果保存在destkey上
     - setex key time value：设置key对应的值value，并设置有效期为time秒
-    - 批量设置一系列字符串的内容
-    - DEL key 该命令用于在 key 存在时删除 key。
-    - DUMP key 序列化给定 key ，并返回被序列化的值。
-    - EXISTS key 检查给定 key 是否存在。
-    - EXPIRE key seconds 为给定 key 设置过期时间。
-    - EXPIREAT key timestamp EXPIREAT 的作用和 EXPIRE 类似，都用于为 key 设置过期时间。 不同在于 EXPIREAT 命令接受的时间参数是 UNIX 时间戳(unix timestamp)。
-    - PEXPIRE key milliseconds 设置 key 的过期时间以毫秒计。
-    - PEXPIREAT key milliseconds-timestamp 设置 key 过期时间的时间戳(unix timestamp) 以毫秒计
-    - KEYS pattern 查找所有符合给定模式( pattern)的 key 。
-    - MOVE key db 将当前数据库的 key 移动到给定的数据库 db 当中。
-    - PERSIST key 移除 key 的过期时间，key 将持久保持。
-    - PTTL key 以毫秒为单位返回 key 的剩余的过期时间。
-    - TTL key 以秒为单位，返回给定 key 的剩余生存时间(TTL, time to live)。
-    - RANDOMKEY 从当前数据库中随机返回一个 key 。
-    - RENAME key newkey 修改 key 的名称
-    - RENAMENX key newkey 仅当 newkey 不存在时，将 key 改名为 newkey 。
-    - TYPE key 返回 key 所储存的值的类型。
+    - MSET key value [key value ...] 批量设置一系列字符串的内容
 * 编码：长度不能超过512MB
     - int：8个字节的长整型。字符串值是整型时，这个值使用long整型表示，当int数据不再是整数，或大小超过了long的范围时，自动转化为raw。
     - embstr：<=39字节的字符串：redisObject的长度是16字节，sds的长度是9+字符串长度；因此当字符串长度是39时，embstr的长度正好是16+9+39=64，jemalloc正好可以分配64字节的内存单元。
@@ -639,7 +671,12 @@ zinterstore destination 2 zsetkey1 zsetkey2 WEIGHTS 1 0.5 AGGREGATE max # key1 �
 
 ### 管道
 
-Redis管道是指客户端可以将多个命令一次性发送到服务器，然后由服务器一次性返回所有结果。管道技术在批量执行命令的时候可以大大减少网络传输的开销，提高性能。
+* 客户端可以将多个命令一次性发送到服务器，然后由服务器一次性返回所有结果
+* 管道技术在批量执行命令的时候可以大大减少网络传输的开销，提高性能
+
+```sh
+(echo -en "PING\r\n SET w3ckey redis\r\nGET w3ckey\r\nINCR visitor\r\nINCR visitor\r\nINCR visitor\r\n"; sleep 10) | nc localhost 6379
+```
 
 ## pipeline vs multi
 
@@ -649,11 +686,12 @@ Redis管道是指客户端可以将多个命令一次性发送到服务器，然
 
 ### Transactions 事务
 
-Redis的Transactions提供的并不是严格的ACID的事务（比如一串用EXEC提交执行的命令，在执行中服务器宕机，那么会有一部分命令执行了，剩下的没执行），但是这个Transactions还是提供了基本的命令打包执行的功能（在服务器不出问题的情况下，可以保证一连串的命令是顺序在一起执行的，中间有会有其它客户端命令插进来执行）。
-Redis还提供了一个Watch功能，你可以对一个key进行Watch，然后再执行Transactions，在这过程中，如果这个Watched的值进行了修改，那么这个Transactions会发现并拒绝执行。
-Redis事务是一组命令的集合。一个事务中的命令要么都执行，要么都不执行。如果命令在运行期间出现错误，不会自动回滚。
-
-管道与事务的区别：管道主要是网络上的优化，客户端缓冲一组命令，一次性发送到服务器端执行，但是并不能保证命令是在同一个事务里面执行；而事务是原子性的，可以确保命令执行的时候不会有来自其他客户端的命令插入到命令序列中。
+* Redis事务是一组命令的集合。一个事务中的命令要么都执行，要么都不执行。如果命令在运行期间出现错误，不会自动回滚
+* 提供的并不是严格的ACID的事务（比如一串用EXEC提交执行的命令，在执行中服务器宕机，那么会有一部分命令执行了，剩下的没执行），但是这个Transactions还是提供了基本的命令打包执行的功能（在服务器不出问题的情况下，可以保证一连串的命令是顺序在一起执行的，中间有会有其它客户端命令插进来执行）。
+* 提供了一个Watch功能，可以对一个key进行Watch，然后再执行Transactions，在这过程中，如果这个Watched的值进行了修改，那么这个Transactions会发现并拒绝执行。
+* 管道与事务的区别
+    - 管道主要是网络上的优化，客户端缓冲一组命令，一次性发送到服务器端执行，但是并不能保证命令是在同一个事务里面执行
+    - 而事务是原子性的，可以确保命令执行的时候不会有来自其他客户端的命令插入到命令序列中
 
 ## 锁
 
@@ -668,19 +706,33 @@ Redis事务是一组命令的集合。一个事务中的命令要么都执行，
 
 ### 分布式锁
 
-分布式锁是控制分布式系统之间同步访问共享资源的一种方式。在分布式系统中，常常需要协调他们的动作，如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。
+* 分布式锁是控制分布式系统之间同步访问共享资源的一种方式
+* 在分布式系统中，常常需要协调他们的动作，如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。
 
 ### 地理信息
 
 从Redis 3.2版本开始，新增了地理信息相关的命令，可以将用户给定的地理位置信息（经纬度）存储起来，并对这些信息进行操作。
 
+## 分区
+
+* 分割数据到多个Redis实例的处理过程，因此每个实例只保存key的一个子集
+* 优势
+    - 通过利用多台计算机内存的和值，构造更大的数据库
+    - 通过多核和多台计算机，扩展计算与网络带宽
+* 缺点
+    - 涉及多个key（在不同实例）的操作通常是不被支持的
+    - 涉及多个key的redis事务不能使用
+    - 数据处理较为复杂
+    - 增加或删除容量也比较复杂
+* 分区类型
+    - 按范围分区：映射一定范围的对象到特定的Redis实例
+    - hash分区
+        + 用一个hash函数将key转换为一个数字，比如使用crc32 hash函数
+        + 对这个整数取模，将其转化为0-3之间的数字，就可以将这个整数映射到4个Redis实例中的一个了
+
 ## 场景
 
-Redis在很多方面与其他数据库解决方案不同：它使用内存提供主存储支持，而仅使用硬盘做持久性的存储；它的数据模型非常独特，用的是单线程。另一个大区别在于，你可以在开发环境中使用Redis的功能，但却不需要转到Redis。
-
-转向Redis当然也是可取的，许多开发者从一开始就把Redis作为首选数据库；但设想如果你的开发环境已经搭建好，应用已经在上面运行了，那么更换数据库框架显然不那么容易。另外在一些需要大容量数据集的应用，Redis也并不适合，因为它的数据集不会超过系统可用的内存。所以如果你有大数据应用，而且主要是读取访问模式，那么Redis并不是正确的选择。
-然而我喜欢Redis的一点就是你可以把它融入到你的系统中来，这就能够解决很多问题，比如那些你现有的数据库处理起来感到缓慢的任务。这些你就可以通过Redis来进行优化，或者为应用创建些新的功能。在本文中，我就想探讨一些怎样将Redis加入到现有的环境中，并利用它的原语命令等功能来解决 传统环境中碰到的一些常见问题。在这些例子中，Redis都不是作为首选数据库。
-
+* 一些需要大容量数据集的应用，Redis也并不适合，因为它的数据集不会超过系统可用的内存
 * 显示最新的项目列表：列出最新的回复
 * 删除与过滤:用LREM来删除评论 或者 为每个不同的过滤器使用不同的Redis列表。毕竟每个列表只有5000条项目，但Redis却能够使用非常少的内存来处理几百万条项目。
 * 排行榜相关：列出前100名高分选手 列出某用户当前的全球排名
@@ -932,6 +984,24 @@ aof-user-rdb-preamble no
 * redis的定期快照不能保证数据不丢失
 * redis的AOF会降低效率，并且不能支持太大的数据量
 
+## 性能
+
+* `redis-benchmark -n 100000`
+    - -h  指定服务器主机名    127.0.0.1
+    - -p  指定服务器端口 6379
+    - -s  指定服务器 socket
+    - -c  指定并发连接数 50
+    - -n  指定请求数   10000
+    - -d  以字节的形式指定 SET/GET 值的数据大小 2
+    - -k  1=keep alive 0=reconnect    1
+    - -r  SET/GET/INCR 使用随机 key, SADD 使用随机值
+    - -P  通过管道传输 <numreq> 请求  1
+    + -q  强制退出 redis。仅显示 query/sec 值
+    +  --csv   以 CSV 格式输出
+    +  -l  生成循环，永久执行测试
+    +  -t  仅运行以逗号分隔的测试命令列表
+    +  -I  Idle 模式。仅打开 N 个 idle 连接并等待。
+
 ## 失效
 
 * 主动过期: Redis对数据是惰性过期，当一个key到了过期时间，Redis也不会马上清理，但如果这个key过期后被再次访问，Redis就会主动将它清理掉。
@@ -1116,6 +1186,7 @@ public void delBigList(String host, int port, String password, String bigListKey
 
 ## 参考
 
+* [Redis参考手册](http://www.php.cn/manual/view/16063.html)
 * [redis 数据类型详解 以及 redis适用场景场合](http://www.cnblogs.com/mrhgw/p/6278619.html)
 * [使用Redis实现分布式锁及其优化](https://juejin.im/entry/5a0280d551882546d71ec42e)
 * [Redis快速入门及应用](https://juejin.im/entry/5a003862f265da430406042c)
