@@ -1390,14 +1390,13 @@ done
     + MobaXterm
     + Terminus
     + Console2
-    + cmder
+    - [cmder + gow](http://bliker.github.io/cmder/)
     + ConEmu
     + [Babun](http://babun.github.io/)
     + [Terminal](https://github.com/microsoft/terminal):The new Windows Terminal, and the original Windows console host -- all in the same place!
 - [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
 * [msys2](http://www.msys2.org/)
 * powercmd
-* [cmder + gow](http://bliker.github.io/cmder/)
 * [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
 * [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
 

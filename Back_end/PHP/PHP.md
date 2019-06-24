@@ -1998,49 +1998,12 @@ echo "Associative array always output as object: ", json_encode($d, JSON_FORCE_O
 ?>
 ```
 
-## 扩展
-
-* intl
-* mcrypt
-* memeached
-    - memcache完全在PHP框架内开发的，提供了memcached的接口，memecached扩展是使用了libmemcached库提供的api与memcached服务端进行交互。 libmemcached 是 memcache 的 C 客户端，它具有低内存，线程安全等优点
-    - memcache提供了面向过程及面向对象的接口，memached只支持面向对象的接口。 memcached 实现了更多的 memcached 协议。
-    - memcached 支持 Binary Protocol，而 memcache 不支持，意味着 memcached 会有更高的性能。不过，还需要注意的是，memcached 目前还不支持长连接。
-* mongodb
-* Opcache:通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能， 存储预编译字节码的好处就是省去了每次加载和解析 PHP 脚本的开销，但是对于I/O开销如读写磁盘文件、读写数据库等并无影响。
-    - 字节码(Byte Code)：一种包含执行程序比机器码更抽象的中间码，由一序列 op代码/数据对组成的二进制文件。 比如Java源码经编译后生成的字节码在运行时通过JVM(JVM针对不同平台有不同版本，Java程序在JVM中运行而称 为解释性语言Interpreted)再做一次转换生成机器码，才能够跨平台运行；C#也类似，EXE文件的执行依赖.NET Framework；HHVM(HipHop Virtual Machine，Facebook开源的PHP虚拟机)采用了JIT(Just In Time Just Compiling，即时编译)技术，在运行时编译字节码为机器码，让他们的PHP性能测试提升了一个数量级。 唯有C/C++编译生成的二进制文件可直接运行。
-    - 机器码(Machine Code)：也被称为原生码(Native Code)，用二进制代码表示的计算机能直接识别和执行的一种机器指令的集合，它是计算机硬件结构赋予的操作功能。
-* pdo-pgsql
-* phalcon
-* redis: http://pecl.php.net/package/redis
-* sphinx
-* swoole
-* xdebug
-* apc:op缓存
-* [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis
-* PHP-FPM进程池：FastCGI Process Manager 的master process是常驻内存的，以static、dynamic、ondemand三种方式来管理进程池中的worker process，可以有效控制内存和进程并平滑重载PHP配置，在发生意外情况的时候能够重新启动并恢复被破坏的 opcode。
-
-```sh
-brew tap homebrew/homebrew-php
-brew install php71 --with-pear
-
-brew install mcrypt
-brew install php71-xdebug
-
-yum install php-mcrypt|php5-mcrypt
-apt-get install php-mcrypt|php5-mcrypt
-pecl install mcrypt-snapshot|mcrypt-1.0.1
-brew install php71-mcrypt
-```
-
-* [defuse/php-encryption](https://github.com/defuse/php-encryption):Simple Encryption in PHP.
-* [jedisct1/libsodium](https://github.com/jedisct1/libsodium):A modern, portable, easy to use crypto library https://libsodium.org
-
 ## Docker配置
 
 - mkdir -p ~/php-fpm/logs ~/php-fpm/conf
 - 构建Dockerfile
 * [docker-library/php](https://github.com/docker-library/php):Docker Official Image packaging for PHP https://php.net
+* [yeszao/dnmp](https://github.com/yeszao/dnmp):Docker LNMP (Nginx, PHP7/PHP5, MySQL, Redis) https://www.awaimai.com/2120.html
 
 ```
 FROM debian:jessie
@@ -2322,14 +2285,45 @@ class backendBaseController extends baseController
 <?php header("Content-type: text/html; charset=utf-8"); ?>
 ```
 
-## 插件
+## 扩展
 
+* intl
+* mcrypt
+* memeached
+    - memcache完全在PHP框架内开发的，提供了memcached的接口，memecached扩展是使用了libmemcached库提供的api与memcached服务端进行交互。 libmemcached 是 memcache 的 C 客户端，它具有低内存，线程安全等优点
+    - memcache提供了面向过程及面向对象的接口，memached只支持面向对象的接口。 memcached 实现了更多的 memcached 协议。
+    - memcached 支持 Binary Protocol，而 memcache 不支持，意味着 memcached 会有更高的性能。不过，还需要注意的是，memcached 目前还不支持长连接。
+* mongodb
+* Opcache:通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能， 存储预编译字节码的好处就是省去了每次加载和解析 PHP 脚本的开销，但是对于I/O开销如读写磁盘文件、读写数据库等并无影响。
+    - 字节码(Byte Code)：一种包含执行程序比机器码更抽象的中间码，由一序列 op代码/数据对组成的二进制文件。 比如Java源码经编译后生成的字节码在运行时通过JVM(JVM针对不同平台有不同版本，Java程序在JVM中运行而称 为解释性语言Interpreted)再做一次转换生成机器码，才能够跨平台运行；C#也类似，EXE文件的执行依赖.NET Framework；HHVM(HipHop Virtual Machine，Facebook开源的PHP虚拟机)采用了JIT(Just In Time Just Compiling，即时编译)技术，在运行时编译字节码为机器码，让他们的PHP性能测试提升了一个数量级。 唯有C/C++编译生成的二进制文件可直接运行。
+    - 机器码(Machine Code)：也被称为原生码(Native Code)，用二进制代码表示的计算机能直接识别和执行的一种机器指令的集合，它是计算机硬件结构赋予的操作功能。
+* pdo-pgsql
+* phalcon
+* [redis](http://pecl.php.net/package/redis)
+* [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis
+* sphinx
+* swoole
+* [xdebug](https://xdebug.org/)
+    - profiler
+* apc:op缓存
+* [defuse/php-encryption](https://github.com/defuse/php-encryption):Simple Encryption in PHP.
+* [jedisct1/libsodium](https://github.com/jedisct1/libsodium):A modern, portable, easy to use crypto library https://libsodium.org
 * PHPDoc
-* PHPCS PHP代码规范与质量检查工具
 * [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)：PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards. http://pear.php.net/package/PHP_CodeS…
-* [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)：PHP Code Beautifier and Fixer(phpcbf)
+* [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)：PHP Code Beautifier and Fixer(phpcbf) PHP代码规范与质量检查工具
 
 ```sh
+brew tap homebrew/homebrew-php
+brew install php71 --with-pear
+
+brew install mcrypt
+brew install php71-xdebug
+
+yum install php-mcrypt|php5-mcrypt
+apt-get install php-mcrypt|php5-mcrypt
+pecl install mcrypt-snapshot|mcrypt-1.0.1
+brew install php71-mcrypt
+
 # PHP_CodeSniffer
 curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
 php phpcs.phar -h
@@ -2368,6 +2362,9 @@ php php-cs-fixer.phar fix /path/to/file
 
 phpcs --config-show
 phpcs --config-set
+
+pecl channel-update pecl.php.net
+pecl install xdebug
 ```
 
 ## 大数据
@@ -2451,6 +2448,8 @@ exit;
 ## 问题
 
 >  5096 segmentation fault (core dumped)  php http_server.php
+
+>  Warning: "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"?
 
 ## 面试
 

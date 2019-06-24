@@ -217,9 +217,14 @@ ipconfig /flushdns # 刷新域名
   - Alt + enter，切换到全屏状态
 
 ```
+Environment里添加set LANG=zh_CN.UTF-8
+
 # 修改配置文件 vendor/init.bat
 @prompt $E[1;32;40m$P$S{git}{hg}$S$_$E[1;30;40m{lamb}$S$E[0m # 修改前
 @prompt $E[1;32;40m$P$S{git}{hg}$S$_$E[1;30;40m $$ $S$E[0m #修改后
+
+local cmder_prompt = "\x1b[1;32;40m{cwd} {git}{hg} \n\x1b[1;30;40m{lamb} \x1b[0m" #before changes
+local cmder_prompt = "\x1b[1;32;40m{cwd} {git}{hg} \n\x1b[1;30;40m# \x1b[0m" #after changes
 
 # 配置aliases：cmder->config->aliases
 l=ls --show-control-chars
