@@ -2,8 +2,6 @@
 
 Dependency Manager for PHP https://getcomposer.org/
 
-PHP 用来管理依赖（dependency）关系的工具。在自项目中声明所依赖的外部工具库（libraries），Composer 会安装这些依赖的库文件。
-
 ## 原理
 
 * zend_lookup_class_ex
@@ -21,7 +19,7 @@ PHP 用来管理依赖（dependency）关系的工具。在自项目中声明所
 
 ## 安装
 
-* window配置：｀C:\Users\XXX\AppData\Roaming\Composer\config.json｀
+* window配置：`C:\Users\XXX\AppData\Roaming\Composer\config.json`
 
 ```sh
 # method 1
@@ -50,7 +48,6 @@ yum install composer
 sudo chown -R $USER .composer/
 
 ### 卸载composer:找到文件删除即可
-
 # config
 composer config -l # 查看
 composer config -g repo.packagist composer https://packagist.phpcomposer.com ## 全局配置国内镜像
@@ -63,7 +60,10 @@ composer config repo.packagist composer https://packagist.phpcomposer.com # 项�
 * autoload:PHP autoloader 的自动加载映射
     * Files类型格式：支持将数组中的文件进行自动加载，文件的路径相对于项目的根目录.需要在任何请求中都加载某些文件，可以使用 files 自动加载机制
     * classmap类型格式：支持将数组中的路径下的文件进行自动加载。其很方便，但缺点是一旦增加了新文件，需要执行dump-autoload命令重新生成映射文件vendor/composer/autoload_classmap.php。
-    * psr-0类型:支持将命名空间映射到路径。命名空间结尾的\\不可省略。当执行install或update时，加载信息会写入vendor/composer/autoload_namespace.php文件。如果希望解析指定路径下的所有命名空间，则将命名空间置为空串即可。需要注意的是对应name2\space\Foo类的类文件的路径为path2/name2/space/Foo.php
+    * psr-0类型:支持将命名空间映射到路径。命名空间结尾的\\不可省略
+      - 当执行install或update时，加载信息会写入vendor/composer/autoload_namespace.php文件
+      - 如果希望解析指定路径下的所有命名空间，则将命名空间置为空串即可
+      - 需要注意的是对应name2\space\Foo类的类文件的路径为path2/name2/space/Foo.php
     * psr-4类型:支持将命名空间映射到路径。命名空间结尾的\\不可省略。当执行install或update时，加载信息会写入vendor/composer/autoload_psr4.php文件。如果希望解析指定路径下的所有命名空间，则将命名空间置为空串即可。需要注意的是对应name2\space\Foo类的类文件的路径为path2/space/Foo.php，name2不出现在路径中。
     * PSR-4和PSR-0
       - PSR-4指定的就当作当前命名空间的目录
@@ -72,7 +72,7 @@ composer config repo.packagist composer https://packagist.phpcomposer.com # 项�
       * 按需加载
 * name格式："name":"vendor/package"
 * version格式："version":"1.0.2"
-* repositories仓库地址:
+* repositories仓库地址
   - 默认Composer 只使用 Packagist 仓库。通过指定仓库地址，可以从任何地方获取包
   - composer:仓库通过网络提供 packages.json 文件，它包含一个 composer.json 对象的列表，还有额外的 dist 或 source 信息。packages.json 文件通过 PHP 流加载
   - vcs:版本控制系统仓库，如：git、svn、hg
