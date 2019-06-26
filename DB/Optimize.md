@@ -463,7 +463,7 @@ while (1) {
 ### 检查
 
 * EXPLAIN：可以知道MySQL是如何处理SQL语句的,分析SQL语句的执行情况，索引使用、扫描范围
-    - select_type:表示查询的类型。
+    - select_type:表示查询的类型
         - SIMPLE： 表示此查询不包含 UNION 查询或子查询
         * PRIMARY： 表示此查询是最外层的查询
         * SUBQUERY： 子查询中的第一个 SELECT
