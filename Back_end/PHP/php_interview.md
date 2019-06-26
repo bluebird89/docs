@@ -174,3 +174,38 @@ Docker 初级的重点在于 Dockerfile 镜像，Linux CLI 和 shell 编程在�
 
 如果自己不知道怎么配，可以学习 [LaraDock](https://github.com/laradock/laradock)，不过 LaraDock 有点臃肿，但是用来学习和提高认知是非常有帮助的。
 
+## 要求
+
+* 熟悉linux/unix系统与开发环境
+    - Linux内核、文件系统、IO调优
+* 熟悉TCP/IP协议
+* 网络编程
+    - 多线程编程
+* 具有MySQL索引优化、查询优化和存储优化经验
+* memcache、redis、mongodb等常用nosql解决方案
+* 消息队列
+* Swoole
+* yaf
+* Shell
+* Go
+    - 对Kubernetes的定制化开发
+    - docker、kubernetes
+    - 微服务
+        + 微服务产品（服务框架，RPC，Service Mesh，服务注册中心，定时任务，动态配置，服务治理，应用容器等
+* Ruby
+* 测试
+    - 自动化测试和持续集成
+    - Test Driven
+* 数据结构与算法
+* 领域建模
+* 敏捷开发
+* 分布式系统、集群管理
+    - paxos/raft
+    - Ceph/HDFS/GlusterFS
+* C++
+    - 音频
+        + 各种音频算法在移动端(Android/iOS)或服务端的实现和优化, 包括不限于: 音效算法, 音频/语音前后处理增强算法(降噪/回声消除等), 音乐信息检索算法, 音频传输及编解码算法等
+* 大数据
+    - Hadoop/Spark/Hive/Flink/Kafka/Druid
+* 前端技术
+    - 如AngulaJS, ReactJS）

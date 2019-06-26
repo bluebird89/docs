@@ -101,12 +101,21 @@ curl localhost:9200
 # 查看当前节点的所有 Index
 curl -X GET 'http://localhost:9200/_cat/indices?v'
 
-# 新建一个名叫weather的 Index
-curl -X PUT 'localhost:9200/weather'
-# 列出每个 Index 所包含的 Type。
+# 列出每个 Index 所包含的 Type
 curl 'localhost:9200/_mapping?pretty=true'
+
+# 新建一个名叫weather的 Index
+curl -X PUT 'localhost:9200/accounts/person/1' -d '
+{
+  "user": "张三",
+  "title": "工程师",
+  "desc": "数据库管理"
+}'
+
+curl 'localhost:9200/accounts/person/_search'
+
 # 删除
-curl -X DELETE 'localhost:9200/weather'
+curl -X DELETE 'localhost:9200/accounts/person/1'
 ```
 
 ## 配置
