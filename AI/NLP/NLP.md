@@ -25,6 +25,10 @@
     - 目前仅提供 2017 年春季课程：https://www.youtube.com/playlist?list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6
     - https://www.youtube.com/playlist?list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z
     - https://www.bilibili.com/video/av46216519/
+* [NLU公开课CS224U](http://web.stanford.edu/class/cs224u/)
+    - 代码地址：https://github.com/cgpotts/cs224u/
+    - 视频地址：https://www.youtube.com/playlist?list=PLoROMvodv4rObpMCir6rNNUlFAn56Js20
+    - B 站视频地址：https://www.bilibili.com/video/av56067156/
 * [CS 11-747](http://phontron.com/class/nn4nlp2019/)
     - https://www.youtube.com/playlist?list=PL8PYTP1V4I8Ajj7sY6sdtmjgkt7eo2VMs
     - https://www.bilibili.com/video/av40929856/

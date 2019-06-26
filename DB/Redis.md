@@ -281,7 +281,6 @@ struct sdshdr {
     - bgsave：后台保存rdb快照
     - save：保存rdb快照
     - lastsave：上次保存时间
-
 * showlog：显示慢查询
     - 多慢才叫慢 slowlog-log-slower-than 10000，来指定（单位为微秒）
     - 服务器存储多少条慢查询记录 由slowlog-max-len 128，来做限制
