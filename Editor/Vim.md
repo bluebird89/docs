@@ -695,6 +695,15 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
     - ,d brings up NERDTree, a sidebar buffer for navigating and manipulating files
     - ,t brings up ctrlp.vim, a project file filter for easily opening specific files
 * [avelino/vim-bootstrap](https://github.com/avelino/vim-bootstrap):Vim Bootstrap is generator provides a simple method of generating a .vimrc configuration for vim https://vim-bootstrap.com/
+* [lexVim](https://github.com/lexkong/lexVim): `./start_vim.sh`
+    - gd 或者ctrl + ] 跳转到对应的函数定义处
+    - ctrl + t 标签退栈
+    - ctrl + o 跳转到前一个位置
+    - <F4> 最近文件列表
+    - <F5> 在 Vim 的上面打开文件查找窗口
+    - <F9> 生成供函数跳转的 tag
+    - <F2> 打开目录窗口，再按会关闭目录窗口
+    - <F6> 添加函数注释
 
 ## 插件
 

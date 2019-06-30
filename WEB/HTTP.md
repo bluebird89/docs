@@ -95,7 +95,7 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
 ## 流程
 
 * 请求
-    - 状态行
+    - 状态行(request line)
     - 请求头 HTTP Request Header
         + Allow：服务器支持哪些请求方法（如GET、POST等）
         + Accept: 可以处理的媒体类型和优先级
@@ -139,7 +139,8 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
         + Server：服务器名字
         + Set-Cookie：设置和页面关联的 Cookie
         + WWW-Authenticate：客户应该在 Authorization 头中提供什么类型的授权信息？在包含401(Unauthorized) 状态行的应答中这个头是必需的
-    - 消息主体（entity-body）
+    - 空行
+    - 消息主体（entity-body）请求数据
 * 响应
     - 响应头
         + Location: 重定向地址
@@ -179,6 +180,8 @@ Content-Type: application/json;charset=utf-8
 
 {"title":"test","sub":[1,2,3]}
 ```
+
+![ HTTP 请求处理流程](../_static/http_request.jpg "Optional title")
 
 ### 请求方式 POST
 
@@ -758,6 +761,10 @@ pear install HTTP2
 HTTP-over-QUIC 实验协议将被重命名为 HTTP/3，并成为 HTTP 协议的第三个正式版本。基于UDP
 
 * [lucas-clemente/quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
+
+## 图书
+
+* 《HTTP 权威指南》
 
 ## 实例
 
