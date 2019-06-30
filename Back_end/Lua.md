@@ -2,6 +2,9 @@
 
 ## install
 
+Lua 的环境有两种： Lua
+LuaJIT:实行效率提升几十倍
+
 ```sh
 apt-get install lua5.2
 

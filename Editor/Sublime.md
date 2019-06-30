@@ -25,28 +25,26 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
 
 ## 配置
 
-配置文件以对象.功能命名:user重写default
-
--   配置:Preferences.sublime-settings
-    -   包配置：Package Control.sublime-settings
-    -   界面配置：Preferences.sublime-settings
-    -   自定义代码片段：\*.sublime-snippet
-    -   自动补全：\*.sublime-completions
-    -   自动构建：\*.sublime-build
-    -   批处理：\*.sublime-build 通过shell脚本构建
--   主题配置：在包文件下Theme - Monokai Pro
--   快捷键：Default (Windows).sublime-keymap
-
-包管理工具[Package Control](https://packagecontrol.io/installation)
-
--   Preferences > Browse Packages：Installed Packages； windows中~\\AppData\\Roaming\\Sublime Text 3\\
--   安装package：打开控制台console:`ctrl+\`
--   如果安装报错，比如连接远程服务器失败之类的，请设置wbond.net的host，如下：50.116.33.29 sublime.wbond.net
--   重启sublime
--   open Package Control's Command Palette：Control + Shift + P (Windows)，Command + Shift + P (on Mac)，或者通过菜单 Tools > Command Palette
--   install package->输入package文件名称
-- channel配置：
-    - 添加channle:`Control + Shift + P `, `Package Control  Settings-user`
+* 配置文件以对象.功能命名:user重写default
+    -   配置:Preferences.sublime-settings
+        +   包配置：Package Control.sublime-settings
+        +   界面配置：Preferences.sublime-settings
+        +   自定义代码片段：\*.sublime-snippet
+        +   自动补全：\*.sublime-completions
+        +   自动构建：\*.sublime-build
+        +   批处理：\*.sublime-build 通过shell脚本构建
+    -   主题配置：在包文件下Theme - Monokai Pro
+    -   快捷键：Default (Windows).sublime-keymap
+    -   index_files:改为false
+* 包管理工具[Package Control](https://packagecontrol.io/installation)
+    +   Preferences > Browse Packages：Installed Packages； windows中~\\AppData\\Roaming\\Sublime Text 3\\
+    +   安装package：打开控制台console:`ctrl+\`
+    +   如果安装报错，比如连接远程服务器失败之类的，请设置wbond.net的host，如下：50.116.33.29 sublime.wbond.net
+    +   重启sublime
+    +   open Package Control's Command Palette：Control + Shift + P (Windows)，Command + Shift + P (on Mac)，或者通过菜单 Tools > Command Palette
+    +   install package->输入package文件名称
+    + channel配置：
+        + 添加channle:`Control + Shift + P `, `Package Control  Settings-user`
 
 ```
 import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
