@@ -4,14 +4,21 @@ The Go programming language https://golang.org
 
 ## Install
 
-Go 编译器支持交叉编译，也就是说你可以在一台机器上构建运行在具有不同操作系统和处理器架构上运行的应用程序，也就是说编写源代码的机器可以和目标机器有完全不同的特性
+Go 编译器支持交叉编译，可以在一台机器上构建运行在具有不同操作系统和处理器架构上运行的应用程序，也就是说编写源代码的机器可以和目标机器有完全不同的特性
 
+* Go 源码安装
+* Go 标准包安装
+* 第三方工具（yum、apt-get 等）
 * 设置环境变量
-  - GOROOT：(std lib)golang安装路径
-  - $GOARCH 表示目标机器的处理器架构，它的值可以是 386、amd64 或 arm。
-  - $GOOS 表示目标机器的操作系统，它的值可以是 darwin、freebsd、linux 或 windows。
-  - $GOBIN 表示编译器和链接器的安装位置，默认是 $GOROOT/bin
-  - $GOPATH：(external libs)项目路径。go命令常常需要用到的，如go run，go install， go get等。允许设置多个路径，和各个系统环境多路径设置一样，windows用“;”，linux（mac）用“:”分隔。GOPATH是作为编译后二进制的存放目的地和import包时的搜索路径。不要把GOPATH设置成go的安装路径,可以自己在用户目录下面创建一个目录, 如gopath.$GOPATH 默认采用和 $GOROOT 一样的值，但从 Go 1.1 版本开始，你必须修改为其它路径。它可以包含多个包含 Go 语言源码文件、包文件和可执行文件的路径
+  - GOROOT：(std lib)golang安装路径,默认会安装到如下目录：/usr/local/go
+  - GOARCH 表示目标机器的处理器架构，它的值可以是 386、amd64 或 arm。
+  - GOOS 表示目标机器的操作系统，它的值可以是 darwin、freebsd、linux 或 windows。
+  - GOBIN 表示编译器和链接器的安装位置，默认是 GOROOT/bin
+  - go命令常常需要用到的，如go run，go install， go get等
+  - GOPATH：(external libs)编译后二进制的存放目的地和 import 包时的搜索路径
+    + 允许设置多个路径，和各个系统环境多路径设置一样，windows用“;”，linux（mac）用“:”分隔
+    + 不要把GOPATH设置成go的安装路径,可以自己在用户目录下面创建一个目录, 如gopath.$GOPATH 默认采用和 $GOROOT 一样的值，但从 Go 1.1 版本开始，必须修改为其它路径
+    + 可以包含多个包含 Go 语言源码文件、包文件和可执行文件的路径
     + bin目录主要存放可执行文件：需要把GOPATH中的可执行目录也配置到环境变量中, 否则你自行下载的第三方go工具就无法使用了
     + pkg目录存放编译好的库文件, 主要是*.a文件
     + src目录下主要存放go的源文件
@@ -30,6 +37,15 @@ export GOBIN="$HOME/projects/bin"
 export PATH=$PATH:$GOPATH/bin
 source ~/.zshrc
 
+## centos
+wget https://dl.google.com/go/go1.12.6.linux-amd64.tar.gz
+export GO_INSTALL_DIR=$HOME # 安装到用户主目录下
+tar -xvzf go1.10.2.linux-amd64.tar.gz -C $GO_INSTALL_DIR
+export GO_INSTALL_DIR=$HOME # 追加到 $HOME/.bashrc文件中
+export GOROOT=$GO_INSTALL_DIR/go
+export GOPATH=$HOME/mygo
+export PATH=$GOPATH/bin:$PATH:$GO_INSTALL_DIR/go/bin
+
 ### Mac
 brew install golang
 
@@ -41,19 +57,24 @@ mkdir -p $GOPATH $GOPATH/src $GOPATH/pkg $GOPATH/bin
 
 source .bash_profile # 使修改立刻生效
 
+go version
 go env
+
+# $GOPATH/src是 Go 源码存放的目录，所以在正式开始编码前要先确保 $GOPATH/src目录存在
+mkdir -p $GOPATH/src
 ```
 
 ### 插件
 
-go get 用来动态获取远程代码包的，fetch libraries from remote and put them in your $GOPATH.目前支持的有BitBucket、GitHub、Google Code和Launchpad。这个命令在内部实际上分成了两步操作：第一步是下载源码包，第二步是执行go install。下载源码包的go工具会自动根据不同的域名调用不同的源码工具,参数说明：
-
--d 只下载不安装
--f 只有在你包含了-u参数的时候才有效，不让-u去验证import中的每一个都已经获取了，这对于本地fork的包特别有用
--fix 在获取源码之后先运行fix，然后再去做其他的事情
--t 同时也下载需要为运行测试所需要的包
--u 强制使用网络去更新包和它的依赖包:存在unrecognized import path "golang.org/x问题，需要添加代理
--v 显示执行的命令
+* go get 用来动态获取远程代码包的，fetch libraries from remote and put them in your $GOPATH.目前支持的有BitBucket、GitHub、Google Code和Launchpad。这个命令在内部实际上分成了两步操作：第一步是下载源码包，第二步是执行go install。下载源码包的go工具会自动根据不同的域名调用不同的源码工具,参数说明：
+  - -d 只下载不安装
+  - -f 只有在你包含了-u参数的时候才有效，不让-u去验证import中的每一个都已经获取了，这对于本地fork的包特别有用
+  - -fix 在获取源码之后先运行fix，然后再去做其他的事情
+  - -t 同时也下载需要为运行测试所需要的包
+  - -u 强制使用网络去更新包和它的依赖包:存在unrecognized import path "golang.org/x问题，需要添加代理
+  - -v 显示执行的命令
+* golang 在 github 上建立了一个镜像库，如 https://github.com/golang/net 即是 https://golang.org/x/net 的镜像库
+* [Gopm Registry](https://gopm.io):Download Go packages by version, without needing version control tools (eg Git, Hg, etc).
 
 ```go
 go get github.com/yudai/gotty  // ok的
@@ -65,6 +86,14 @@ gofmt -w yourcode.go // Format your code
 godoc fmt                // documentation for package fmt
 godoc fmt Printf         // documentation for fmt.Printf
 godoc -src fmt // fmt package interface in Go source form
+
+mkdir -p $GOPATH/src/golang.org/x
+cd $GOPATH/src/golang.org/x
+git clone https://github.com/golang/net.git
+
+# /etc/hosts
+192.30.253.112 github.com
+151.101.185.194 github.global.ssl.fastly.net
 ```
 
 ## Build&Run
@@ -113,14 +142,6 @@ func main() {
 * 安装gosublime插件
 * 在GoSublime，再往下找到 Settings - Default修改`"env": { "GOPATH":"$HOME/go","PATH": "$HOME/bin:$GOPATH/bin:$PATH" },` `"shell": [“$zsh"],`
 
-## 文档
-
-
-* 离线文档
-  - `go get golang.org/x/tools/cmd/godoc`
-  - `godoc -http=:6060` 访问`http://localhost:6060/`
-- [deanishe/awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
-
 ### [joewalnes/websocketd](https://github.com/joewalnes/websocketd)
 
 Turn any program that uses STDIN/STDOUT into a WebSocket server. Like inetd, but for WebSockets. http://websocketd.com/
@@ -161,7 +182,7 @@ websocketd --port=8080 ./count.sh // 建立server
 </script>
 ```
 
-## 编程的利与弊
+## 利与弊
 
 * 利
   - Go 语言速度非常快：Go 语言是一门非常快速的编程语言。因为 Go 语言是编译成机器码的，因此，它的表现自然会优于那些解释性或具有虚拟运行时的编程语言。Go 程序的编译速度也非常快，并且生成的二进制文件非常小。我们的 API 在短短几秒钟内就编译完毕，生成的可执行文件区区只有 11.5MB 这么小。
@@ -194,6 +215,116 @@ websocketd --port=8080 ./count.sh // 建立server
 package golang.org/x/crypto/acme/autocert: unrecognized import path "golang.org/x/crypto/acme/autocert" (https fetch: Get https://golang.org/x/crypto/acme/autocert?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)
 
 git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
+```
+
+## 教程
+
+* 功能：测试账号系统（后面统称为apiserver）
+  - API 服务器状态检查
+  - 登录测试账号
+  - 新增测试账号
+  - 删除测试账号
+  - 更新测试账号
+  - 获取测试账号的信息
+  - 获取测试账号列表
+* 准备阶段
+  - 如何安装和配置 Go 开发环境
+  - 如何安装和配置 Vim IDE
+* 设计阶段
+  - API 构建技术选型
+    + Go 语言中常用的 API 风格是 RPC 和 REST，常用的媒体类型是 JSON、XML 和 Protobuf。
+    + 常用的组合是 gRPC + Protobuf 和 REST + JSON,API 风格采用 REST，媒体类型选择 JSON
+  - API 基本原理
+  - API 规范设计
+* 开发阶段
+  - 如何读取配置文件
+  - 如何管理和记录日志
+  - 如何做数据库的 CURD 操作
+  - 如何自定义错误 Code
+  - 如何读取和返回 HTTP 请求
+  - 如何进行业务逻辑开发
+  - 如何对请求插入自己的处理逻辑
+  - 如何进行 API 身份验证
+  - 如何进行 HTTPS 加密
+  - 如何用 Makefile 管理 API 源码
+  - 如何给 API 命令添加版本功能
+  - 如何管理 API 命令
+  - 如何生成 Swagger 在线文档
+* 测试阶段
+  - 如何进行单元测试
+  - 如何进行性能测试（函数性能）
+  - 如何做性能分析
+  - API 性能测试和调优
+* 部署阶段
+  - 如何用 Nginx 部署 API 服务
+  - 如何做 API 高可用
+
+![Alt text](../../_static/go_api_example.jpg "Optional title")
+
+```
+├── admin.sh                     # 进程的start|stop|status|restart控制文件
+├── conf                         # 配置文件统一存放目录
+│   ├── config.yaml              # 配置文件
+│   ├── server.crt               # TLS配置文件
+│   └── server.key
+├── config                       # 专门用来处理配置和配置文件的Go package
+│   └── config.go
+├── db.sql                       # 在部署新环境时，可以登录MySQL客户端，执行source db.sql创建数据库和表
+├── docs                         # swagger文档，执行 swag init 生成的
+│   ├── docs.go
+│   └── swagger
+│       ├── swagger.json
+│       └── swagger.yaml
+├── handler                      # 类似MVC架构中的C，用来读取输入，并将处理流程转发给实际的处理函数，最后返回结果
+│   ├── handler.go
+│   ├── sd                       # 健康检查handler
+│   │   └── check.go 
+│   └── user                     # 核心：账号业务逻辑handler
+│       ├── create.go            # 新增账号
+│       ├── delete.go            # 删除账号
+│       ├── get.go               # 获取指定的账号信息
+│       ├── list.go              # 查询账号列表
+│       ├── login.go             # 账号登录
+│       ├── update.go            # 更新账号
+│       └── user.go              # 存放账号handler公用的函数、结构体等
+├── main.go                      # Go程序唯一入口
+├── Makefile                     # Makefile文件，一般大型软件系统都是采用make来作为编译工具
+├── model                        # 数据库相关的操作统一放在这里，包括数据库初始化和对表的增删改查
+│   ├── init.go                  # 初始化和连接数据库
+│   ├── model.go                 # 存放一些公用的go struct
+│   └── user.go                  # 账号相关的数据库CURD操作
+├── pkg                          # 引用的包
+│   ├── auth                     # 认证包
+│   │   └── auth.go
+│   ├── constvar                 # 常量统一存放位置
+│   │   └── constvar.go
+│   ├── errno                    # 错误码存放位置
+│   │   ├── code.go
+│   │   └── errno.go
+│   ├── token
+│   │   └── token.go
+│   └── version                  # 版本包
+│       ├── base.go
+│       ├── doc.go
+│       └── version.go
+├── README.md                    # API目录README
+├── router                       # 路由相关处理
+│   ├── middleware               # API服务器用的是Gin Web框架，Gin中间件存放位置
+│   │   ├── auth.go 
+│   │   ├── header.go
+│   │   ├── logging.go
+│   │   └── requestid.go
+│   └── router.go
+├── service                      # 实际业务处理函数存放位置
+│   └── service.go
+├── util                         # 工具类函数存放目录
+│   ├── util.go 
+│   └── util_test.go
+└── vendor                         # vendor目录用来管理依赖包
+    ├── github.com
+    ├── golang.org
+    ├── gopkg.in
+    └── vendor.json
 ```
 
 ## 图书
@@ -350,6 +481,7 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 ## 参考
 
 * [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
+* [yinggaozhen/awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 https://awesome-go.cn(建设中)
 * [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 * [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
 * [GO语言中文网](https://studygolang.com/)
@@ -357,6 +489,10 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * [changkun/go-under-the-hood](https://github.com/changkun/go-under-the-hood):Go 源码研究 (1.11.1, WIP)
 * [emirpasic/gods](https://github.com/emirpasic/gods):GoDS (Go Data Structures). Containers (Sets, Lists, Stacks, Maps, Trees), Sets (HashSet, TreeSet, LinkedHashSet), Lists (ArrayList, SinglyLinkedList, DoublyLinkedList), Stacks (LinkedListStack, ArrayStack), Maps (HashMap, TreeMap, HashBidiMap, TreeBidiMap, LinkedHashMap), Trees (RedBlackTree, AVLTree, BTree, BinaryHeap), Comparators, Iterators, …
 * [EDDYCJY/blog](https://github.com/EDDYCJY/blog):煎鱼的博客，啊。
+* 离线文档
+  - `go get golang.org/x/tools/cmd/godoc`
+  - `godoc -http=:6060` 访问`http://localhost:6060/`
+- [deanishe/awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
 
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>

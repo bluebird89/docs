@@ -277,6 +277,7 @@ sudo apt-get install zeal
 * [xiazaiba](https://www.xiazaiba.com/)
 * [AlternativeTo](https://alternativeto.net/):Crowdsourced software recommendations
 * [Slant](https://www.slant.co/):Trustworthy product rankings for all your shopping needs
+* [itellyou](https://msdn.itellyou.cn)
 
 ## UI
 

@@ -3,7 +3,7 @@
 The C based gRPC (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)
 
 * 一个高性能、通用的开源RPC框架
-* 基于HTTP/2协议标准和Protobuf序列化协议开发，支持多种开发语言（Golang、Python、Java、C/C++等）
+* 基于HTTP/2协议标准和Protobuf序列化协议开发，支持多种开发语言（Golang、Python、Java、C/C++等）,带来诸如双向流、流控、头部压缩、单 TCP 连接上的多复用请求等特性。这些特性使得其在移动设备上表现更好，更省电和节省空间占用。
 * gRPC 提供了一种简单的方法来定义服务，同时客户端可以充分利用 HTTP/2 stream 的特性，从而有助于节省带宽、降低 TCP 的连接次数、节省CPU的使用等。
 * 服务端，实现了所定义的服务和可供远程调用的方法，运行一个gRPC server来处理客户端的请求
 * 客户端可以像调用本地对象一样直接调用位于不同机器的服务端方法，可以非常方便的创建一些分布式的应用服务。
