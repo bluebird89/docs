@@ -76,7 +76,7 @@ systemctl enable|status|stop redis-server
 
 ```
 CONFIG GET *
-CONFIG set requirepass "shouce.ren"
+CONFIG set requirepass "shouce.ren" # 设置密码
 CONFIG get requirepass
 
 daemonize no
@@ -163,6 +163,7 @@ object encoding key # 查看编码
 object idletime key # 查看空转时间
 object refcount key # 查看引用次数
 
+AUTH PASSWORD # 密码校验
 CLIENT LIST 返回连接到 redis 服务的客户端列表
 CLIENT SETNAME  设置当前连接的名称
 CLIENT GETNAME  获取通过 CLIENT SETNAME 命令设置的服务名称
@@ -250,7 +251,6 @@ struct sdshdr {
 * RENAME key newkey：改名
 * RENAMENX key newkey：如果newkey不存在则修改成功,新建key
     - 修改成功时，返回 1。 如果 NEW_KEY_NAME 已经存在，返回 0
-* MOVE key db：将key移动到1数据库
 * 时效
     - TTL key：查询key的生命周期（秒）
     - PTTL key：查询key 的生命周期（毫秒）
@@ -260,26 +260,32 @@ struct sdshdr {
     - PEXPIREAT key milliseconds-timestamp 设置 key 过期时间的时间戳(unix timestamp) 以毫秒计
     - PERSIST key：把指定key设置为永久有效
 * 服务
-    - ping：测定连接是否存活
+    - PING：测定连接是否存活
     - info：获取服务器的信息和统计
     - monitor：实时转储收到的请求
     - time：显示服务器时间，时间戳（秒），微秒数
     - quit：退出连接
     - shutdown [save/nosave]
-* echo：在命令行打印一些内容
-* select：选择数据库
-* dbsize：返回当前数据库中key的数目
+    - echo：在命令行打印一些内容
+    - CLIENT LIST 获取连接到服务器的客户端连接列表
+    - CLIENT KILL [ip:port] [ID client-id] :关闭客户端连接
+    - SLAVEOF host port 将当前服务器转变为指定服务器的从属服务器(slave server)
 * 配置
     - config get 配置项：获取服务器配置的信息
     - config set 配置项  值：设置配置项信息
 * 数据
+    - MOVE key db：将key移动到1数据库
+    - dbsize：返回当前数据库中key的数目
+    - SET db_number 0 :默认使用 0 号数据库
+    - select index：选择数据库
     - flushdb：删除当前选择数据库中所有的key
     - flushall：删除所有数据库中的所有的key
         + 如果不小心运行了flushall，立即shutdown nosave，关闭服务器，然后手工编辑aof文件，去掉文件中的flushall相关行，然后开启服务器，就可以倒回原来是数据。如果flushall之后，系统恰好bgwriteaof了，那么aof就清空了，数据丢失。
 * 持久化
-    - bgrewriteaof：后台保存rdb快照
-    - bgsave：后台保存rdb快照
-    - save：保存rdb快照
+    - BGREWRITEAOF : 异步执行一个 AOF（AppendOnly File） 文件重写操作
+    - BGSAVE：在后台异步保存当前数据库的数据到磁盘
+    - SAVE：创建当前数据库的备份
+    - 恢复数据，只需将备份文件 (dump.rdb) 移动到 redis 安装目录并启动服务即可。获取 redis 目录可以使用 `CONFIG GET dir`
     - lastsave：上次保存时间
 * showlog：显示慢查询
     - 多慢才叫慢 slowlog-log-slower-than 10000，来指定（单位为微秒）
@@ -664,9 +670,32 @@ zrangebyscore zsetkey (3 6 WITHSCORES # <3 <6
 zinterstore destination 2 zsetkey1 zsetkey2 WEIGHTS 1 0.5 AGGREGATE max # key1 权重 1 key2 权重 0.5 ，取大值
 ```
 
-### Pub/Sub
+### 发布（Publish）与订阅（Subscribe）
 
-从字面上理解就是发布（Publish）与订阅（Subscribe），在Redis中，你可以设定对某一个key值进行消息发布及消息订阅，当一个key值上进行了消息发布后，所有订阅它的客户端都会收到相应的消息。这一功能最明显的用法就是用作实时消息系统，比如普通的即时聊天，群聊等功能。
+* 设定对某一个key值进行消息发布及消息订阅，当一个key值上进行了消息发布后，所有订阅它的客户端都会收到相应的消息
+* 最明显的用法就是用作实时消息系统，比如普通的即时聊天，群聊等功能
+
+```sh
+SUBSCRIBE redisChat
+PSUBSCRIBE redisChat # 订阅一个或多个符合给定模式 每个模式以 * 作为匹配符，比如 it* 匹配所有以 it 开头的频道( it.news 、 it.blog 、 it.tweets 等等)。 news.* 匹配所有以 news. 开头的频道
+
+PUBLISH redisChat "Redis is a great caching technique"
+
+PUBSUB CHANNELS # 查看订阅与发布系统状态
+PUNSUBSCRIBE mychannel # 退订所有给定模式的频道
+```
+
+## HyperLogLog
+
+来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的。
+在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。
+比如数据集 {1, 3, 5, 7, 5, 7, 8}， 那么这个数据集的基数集为 {1, 3, 5 ,7, 8}, 基数(不重复元素)为5。 基数估计就是在误差可接受的范围内，快速计算基数。
+
+```
+PFADD runoobkey "redis"
+
+PFCOUNT runoobkey
+```
 
 ### 管道
 
@@ -685,12 +714,53 @@ zinterstore destination 2 zsetkey1 zsetkey2 WEIGHTS 1 0.5 AGGREGATE max # key1 �
 
 ### Transactions 事务
 
-* Redis事务是一组命令的集合。一个事务中的命令要么都执行，要么都不执行。如果命令在运行期间出现错误，不会自动回滚
-* 提供的并不是严格的ACID的事务（比如一串用EXEC提交执行的命令，在执行中服务器宕机，那么会有一部分命令执行了，剩下的没执行），但是这个Transactions还是提供了基本的命令打包执行的功能（在服务器不出问题的情况下，可以保证一连串的命令是顺序在一起执行的，中间有会有其它客户端命令插进来执行）。
-* 提供了一个Watch功能，可以对一个key进行Watch，然后再执行Transactions，在这过程中，如果这个Watched的值进行了修改，那么这个Transactions会发现并拒绝执行。
+* 一组命令的集合,命令打包执行的功能
+    - 批量操作在发送 EXEC 命令前被放入队列缓存
+    - 收到 EXEC 命令后进入事务执行，事务中任意命令执行失败，其余的命令依然被执行
+    - 在事务执行过程，其他客户端提交的命令请求不会插入到事务执行命令序列中
+* 并不是严格的ACID的事务（比如一串用EXEC提交执行的命令，在执行中服务器宕机，那么会有一部分命令执行了，剩下的没执行）
+* Watch功能，可以对一个key进行Watch，然后再执行Transactions，在这过程中，如果这个Watched的值进行了修改，那么这个Transactions会发现并拒绝执行
 * 管道与事务的区别
     - 管道主要是网络上的优化，客户端缓冲一组命令，一次性发送到服务器端执行，但是并不能保证命令是在同一个事务里面执行
     - 而事务是原子性的，可以确保命令执行的时候不会有来自其他客户端的命令插入到命令序列中
+
+```
+MULTI
+SET book-name "Mastering C++ in 21 days"
+GET book-name
+SADD tag "C++" "Programming" "Mastering Series"
+SMEMBERS tag
+EXEC
+
+Discard # 取消事务，放弃执行事务块内的所有命令
+
+WATCH lock lock_times
+UNWATCH
+```
+
+## 脚本
+
+* 使用 Lua 解释器来执行脚本，执行脚本的常用命令为 EVAL
+* 方法
+    - `EVAL script numkeys key [key ...] arg [arg ...]`
+        + script 参数是一段 Lua 5.1 脚本程序
+        + numkeys： 用于指定键名参数的个数
+    - `SCRIPT LOAD script` 将脚本 script 添加到脚本缓存中，但并不立即执行这个脚本
+    - `EVALSHA sha1 numkeys key [key ...] arg [arg ...]` 根据给定的 sha1 校验码，执行缓存在服务器中的脚本
+        + 根据给定的 sha1 校验码，执行缓存在服务器中的脚本
+    - `SCRIPT EXISTS sha1` 命令用于校验指定的脚本是否已经被保存在缓存当中
+    - `SCRIPT FLUSH` :清除所有 Lua 脚本缓存
+    - `SCRIPT KILL`: 用于杀死当前正在运行的 Lua 脚本，当且仅当这个脚本没有执行过任何写操作时，这个命令才生效,用于终止运行时间过长的脚本
+
+```sh
+EVAL "return {KEYS[1],KEYS[2],ARGV[1],ARGV[2]}" 2 key1 key2 first second
+
+EVALSHA "232fd51614574cf0867b83d384a5e898cfd24e5a" 0 "hello moto"
+SCRIPT EXISTS 232fd51614574cf0867b83d384a5e898cfd24e5a
+
+SCRIPT LOAD "return 1"
+"e0e1f9fabfc9d4800c877a703b823ac0578ff8db"
+```
 
 ## 锁
 
@@ -737,7 +807,9 @@ zinterstore destination 2 zsetkey1 zsetkey2 WEIGHTS 1 0.5 AGGREGATE max # key1 �
 * 排行榜相关：列出前100名高分选手 列出某用户当前的全球排名
 * 按照用户投票和时间排序:`score = points / time^alpha`.每次新的新闻贴上来后，我们将ID添加到列表中，使用LPUSH + LTRIM，确保只取出最新的1000条项目。有一项后台任务获取这个列表，并且持续的计算这1000条新闻中每条新闻的最终得分。计算结果由ZADD命令按照新的顺序填充生成列表，老新闻则被清除。这里的关键思路是排序工作是由后台任务来完成的。
 * Redis能够替代memcached，让你的缓存从只能存储数据变得能够更新数据，因此你不再需要每次都重新生成数据了。
-* 队列：现代的互联网应用大量地使用了消息队列（Messaging）。消息队列不仅被用于系统内部组件之间的通信，同时也被用于系统跟其它服务之间的交互。消息队列的使用可以增加系统的可扩展性、灵活性和用户体验。非基于消息队列的系统，其运行速度取决于系统中最慢的组件的速度（注：短板效应）。而基于消息队列可以将系统中各组件解除耦合，这样系统就不再受最慢组件的束缚，各组件可以异步运行从而得以更快的速度完成各自的工作。此外，当服务器处在高并发操作的时候，比如频繁地写入日志文件。可以利用消息队列实现异步处理。从而实现高性能的并发操作。
+* 队列：现代的互联网应用大量地使用了消息队列（Messaging）。消息队列不仅被用于系统内部组件之间的通信，同时也被用于系统跟其它服务之间的交互。消息队列的使用可以增加系统的可扩展性、灵活性和用户体验。非基于消息队列的系统，其运行速度取决于系统中最慢的组件的速度（注：短板效应）
+* 而基于消息队列可以将系统中各组件解除耦合，这样系统就不再受最慢组件的束缚，各组件可以异步运行从而得以更快的速度完成各自的工作
+* 当服务器处在高并发操作的时候，比如频繁地写入日志文件。可以利用消息队列实现异步处理。从而实现高性能的并发操作。
 * Pub/Sub：运行稳定并且快速。支持模式匹配，能够实时订阅与取消频道。
 * 实时分析正在发生的情况，用于数据统计与防止垃圾邮件等
 * 特定时间内的特定项目：统计在某段特点时间里有多少特定用户访问了某个特定资源

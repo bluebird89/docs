@@ -77,6 +77,7 @@
 
 * [AI算法工程师手册](http://www.huaxiaozhuan.com)
 * [capital of statistics](http://cos.name/)： 统计之都，国内首个旨在推广与应用统计学知识的社区专业型网站
+* [看见统计](https://seeing-theory.brown.edu)
 
 ## 工具
 

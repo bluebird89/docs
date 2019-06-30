@@ -21,6 +21,34 @@ if [ "$?" -ne 0 ]; then echo "command failed"; exit 1; fi
 * ~/.zshrc：zsh配置文件
 * PATH="$PATH:/my_new_path":临时添加，关闭后失效
 * 选项如果单字符选项前使用一个减号-。单词选项前使用两个减号--
+* alias参考
+    - https://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html
+    - https://www.digitalocean.com/community/questions/what-are-your-favorite-bash-aliases
+    - https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/
+    - https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/
+* 原生增强命令
+    - fasd 增强了 cd 命令 （https://github.com/clvv/fasd ）。
+    - bat 增强了 cat 命令 （https://github.com/sharkdp/bat ）。
+    - exa 增强了 ls 命令（https://github.com/ogham/exa ），如果你需要在很多目录上浏览各种文件 ，ranger 命令可以比 cd 和 cat 更有效率（https://github.com/ranger/ranger ），甚至可以在你的终端预览图片。
+    - fd 是一个比 find 更简单更快的命令（https://github.com/sharkdp/fd ），他还会自动地忽略掉一些你配置在 .gitignore 中的文件，以及 .git 下的文件。
+    - grep 是一个上古神器，然而，ack（https://beyondgrep.com/ ）、ag （https://github.com/ggreer/the_silver_searcher ）和 rg（https://github.com/BurntSushi/ripgrep ）是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到你配置在 .gitignore 中的规则。另外，我们会经常玩  command | grep “pattern” 这样的命令，fzf（https://github.com/junegunn/fzf ）会是一个很好用的命令，神器。
+    - rm 是一个危险的命令，尤其是各种 rm -rf …，所以，trash（https://github.com/andreafrancia/trash-cli/ ）是一个更好的删除命令。
+    - man 命令是好读文档的命令，但是man的文档有时候太长了，所以，你可以试式 tldr（https://github.com/tldr-pages/tldr ）命令，把文档上的一些示例整出来给你看。
+    - 如果你想要一个图示化的ping，你可以试试 prettyping （https://github.com/denilsonsa/prettyping ）。
+    - 如果你想搜索以前打过的命令，不要再用 Ctrl +R 了，你可以使用 fzf （https://github.com/junegunn/fzf ）你用过就知道有多强了。
+    - htop （Installation directions） 是 top 的一个加强版。
+    - ncdu （Installation directions） 比 du 好用多了用。另一个选择是 nnn（https://github.com/jarun/nnn ）。
+    - 如果你想把你的命令行操作建录制成一个 SVG 动图，那么你可以尝试使用 asciinema （https://asciinema.org/ ）和 svg-trem （https://github.com/marionebl/svg-term-cli ）。
+    - httpie(https://github.com/jakubroztocil/httpie) 是一个可以用来替代 curl 和 wget 的 http 客户端，httpie 支持 json 和语法高亮，可以使用简单的语法进行 http 访问: http -v github.com。
+    - tmux 在需要经常登录远程服务器工作的时候会很有用，可以保持远程登录的会话，还可以在一个窗口中查看多个 shell 的状态。
+    - Taskbook(https://github.com/klaussinani/taskbook) 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级。
+    - sshrc (sshrc：https://github.com/Russell91/sshrc ) 是个神器，在你登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置。
+    - 参考
+        + https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4
+        + https://dev.to/_darrenburns/tools-to-power-up-your-command-line-part-2-2737
+        + https://dev.to/_darrenburns/power-up-your-command-line-part-3-4o53
+        + https://darrenburns.net/posts/tools/
+        + https://hacker-tools.github.io/
 
 ```sh
 cmd [options] [arguments] # options称为选项，arguments称为参数
@@ -85,36 +113,9 @@ stty erase ^H        #清除退格 (这个很有必要)
 
 /*  /etc/profile 文件设置 */
 export PATH=$PATH:/opt/perl/site/bin:/opt/perl/bin
-```
 
-* alias参考
-    - https://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html
-    - https://www.digitalocean.com/community/questions/what-are-your-favorite-bash-aliases
-    - https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/
-    - https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/
-* 原生增强命令
-    - fasd 增强了 cd 命令 （https://github.com/clvv/fasd ）。
-    - bat 增强了 cat 命令 （https://github.com/sharkdp/bat ）。
-    - exa 增强了 ls 命令（https://github.com/ogham/exa ），如果你需要在很多目录上浏览各种文件 ，ranger 命令可以比 cd 和 cat 更有效率（https://github.com/ranger/ranger ），甚至可以在你的终端预览图片。
-    - fd 是一个比 find 更简单更快的命令（https://github.com/sharkdp/fd ），他还会自动地忽略掉一些你配置在 .gitignore 中的文件，以及 .git 下的文件。
-    - grep 是一个上古神器，然而，ack（https://beyondgrep.com/ ）、ag （https://github.com/ggreer/the_silver_searcher ）和 rg（https://github.com/BurntSushi/ripgrep ）是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到你配置在 .gitignore 中的规则。另外，我们会经常玩  command | grep “pattern” 这样的命令，fzf（https://github.com/junegunn/fzf ）会是一个很好用的命令，神器。
-    - rm 是一个危险的命令，尤其是各种 rm -rf …，所以，trash（https://github.com/andreafrancia/trash-cli/ ）是一个更好的删除命令。
-    - man 命令是好读文档的命令，但是man的文档有时候太长了，所以，你可以试式 tldr（https://github.com/tldr-pages/tldr ）命令，把文档上的一些示例整出来给你看。
-    - 如果你想要一个图示化的ping，你可以试试 prettyping （https://github.com/denilsonsa/prettyping ）。
-    - 如果你想搜索以前打过的命令，不要再用 Ctrl +R 了，你可以使用 fzf （https://github.com/junegunn/fzf ）你用过就知道有多强了。
-    - htop （Installation directions） 是 top 的一个加强版。
-    - ncdu （Installation directions） 比 du 好用多了用。另一个选择是 nnn（https://github.com/jarun/nnn ）。
-    - 如果你想把你的命令行操作建录制成一个 SVG 动图，那么你可以尝试使用 asciinema （https://asciinema.org/ ）和 svg-trem （https://github.com/marionebl/svg-term-cli ）。
-    - httpie(https://github.com/jakubroztocil/httpie) 是一个可以用来替代 curl 和 wget 的 http 客户端，httpie 支持 json 和语法高亮，可以使用简单的语法进行 http 访问: http -v github.com。
-    - tmux 在需要经常登录远程服务器工作的时候会很有用，可以保持远程登录的会话，还可以在一个窗口中查看多个 shell 的状态。
-    - Taskbook(https://github.com/klaussinani/taskbook) 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级。
-    - sshrc (sshrc：https://github.com/Russell91/sshrc ) 是个神器，在你登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置。
-    - 参考
-        + https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4
-        + https://dev.to/_darrenburns/tools-to-power-up-your-command-line-part-2-2737
-        + https://dev.to/_darrenburns/power-up-your-command-line-part-3-4o53
-        + https://darrenburns.net/posts/tools/
-        + https://hacker-tools.github.io/
+bash <(curl -s https://gist.github.com/Jacksgong/9d0519f68b7940a07075a834b3178979/raw/803256593b7b05177408ccbc0bc68e072a8e3a0a/init-shell.sh)
+```
 
 ## 文件管理
 

@@ -236,6 +236,12 @@ update item  set quantity=quantity - 1  where id = 1 and quantity - 1 > 0
     - 看CPU架构
     - 在技术点逐渐深度研究的过程中，广度也得到了完善
 
+## 工具
+
+* [AB](https://httpd.apache.org/docs/2.4/programs/ab.html) - Apache Benchmark - 是一款有 Apache 基金会提供的简单的压测工具
+* [Siege](https://www.joedog.org/siege-home/) <https://www.sitepoint.com/web-app-performance-testing-siege-plan-test-learn/>
+* [locust](https://locust.io/)
+
 ## 参考
 
 * [究竟啥才是互联网架构“高并发”](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651959830&idx=1&sn=ce1c5a58caed227d7dfdbc16d6e1cea4&chksm=bd2d07ca8a5a8edc45cc45c4787cc72cf4c8b96fb43d2840c7ccd44978036a7d39a03dd578b5)

@@ -1075,6 +1075,9 @@ useradd -m -g users -G audio -s /usr/bin/bash newuser ### -m 创建 home 目录�
 groups zhangwang # 查看用户属于那些组（groups）
 cat /etc/group | sort 命令查看某组包含那些成员 # /etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
 sudo usermod -G sudo student # 不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，可以使用usermod命令把它加入sudo组用以具备相应的权限。
+# add the user 'jacks' to 'root' and 'sudo' group
+sudo usermod -aG sudo,root jacks
+
 sudo deluser student --remove-home # 删除用户及用户相关文件；
 userdel -r username
 

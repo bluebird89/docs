@@ -34,13 +34,16 @@ sudo /sbin/service crond start
     - 星号:表示任意值，比如在小时部分填写 * 代表任意小时（每小时）
     - 逗号:可以允许在一个部分中填写多个值，比如在分钟部分填写 1,3 表示一分钟或三分钟 and
     - 斜线:一般配合 * 使用，代表每隔多长时间，比如在小时部分填写 */2 代表每隔两分钟。所以 */1 和 * 没有区别 */2 可以看成是能被2整除的任意值。0-23/2 cycle
-    - 8-11 for an "hours" entry specifies execution at hours 8, 9, 10 and 11.
+    - 中杠（-):表示一个整数范围 8-11 for an "hours" entry specifies execution at hours 8, 9, 10 and 11.
 * Cron jobs can be allowed or disallowed for individual users, as defined in the files /etc/cron.allow and /etc/cron.deny
 * cron invokes the command from the user’s HOME directory with the shell, (/usr/bin/sh).cron supplies a default environment for every shell, defining:
     - HOME=user’s-home-directory
     - LOGNAME=user’s-login-id
     - PATH=/usr/bin:/usr/sbin:.
     - SHELL=/usr/bin/sh
+* 执行脚本时最好要写全局路径
+* 如果引用了环境变量，需要在脚本中使用source加载环境变量
+* 手动执行脚本没问题，但是crontab不执行,这也有可能是环境变量的问题。可以直接在crontab命令总引入环境变量。
 
 ```sh
 crontab -l # Display the current crontab.
@@ -64,12 +67,12 @@ m h  dom mon dow   command
 @monthly - Shorthand for 0 0 1 * *
 @yearly - Shorthand for 0 0 1 1 *
 
-sudo service cron restart
-
-crontab -r # erase your crontab
+sudo service cron restart|start|stop|reload|status
 
 echo ALL >>/etc/cron.deny # we lock out all users by appending "ALL" to the deny file
 echo tdurden >>/etc/cron.allow # To deny access to all users and give access to the user tdurden
+
+* * * * * source /etc/profile;python -h
 ```
 
 ## users
