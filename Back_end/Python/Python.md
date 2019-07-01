@@ -1340,6 +1340,12 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 了解Python的其他工具：Docker containers、UWSGI、GunicornNGINX这些东西。
 了解Google介绍的小技巧：Lambda函数、装饰器、描述符、迭代器生成器、元类。类似于：“python -m http.server”。
 
+## 图书
+
+* [Automate the Boring Stuff with Python](https://automatetheboringstuff.com)
+* [Learning with Python 3](http://openbookproject.net/thinkcs/python/english3e/)
+* [learnpythonthehardway](https://learnpythonthehardway.org/python3/)
+
 ## 教程
 
 * [jackfrued/Python-100-Days](https://github.com/jackfrued/Python-100-Days):Python - 100天从新手到大师

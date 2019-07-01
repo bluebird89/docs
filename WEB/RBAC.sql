@@ -1,3 +1,5 @@
+# 根据用户ID取出用户角色==》如果是超级管理员则不需要做权限判断，否则根据角色取出所属权限==》根据权限取出可访问链接列表==》判断当前操作是否在列表中==》无权限则返回提示页面
+
  CREATE TABLE `user` (
     `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
       `name` varchar(20) NOT NULL DEFAULT '' COMMENT '姓名',

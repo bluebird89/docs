@@ -8,7 +8,6 @@
 
 ## 特性
 
-* 模块化设计、较好扩展性
 * 高可靠性：基于master/worker模式
 * 支持热部署(平滑迁移)：不停机更新配置文件、更换日志、更新服务器程序版本；
 * 内存消耗低：10000个keep-alive连接模式下的非活动连接仅消耗2.5M内存；
@@ -19,6 +18,18 @@
     - Optional HTTP  modules：可选HTTP模块
     - Mail modules：邮件模块
     - 3rd party modules：第三方模块，在编译时需手动指明加载方式加载
+* 跨平台：Nginx 可以在大多数 Unix like OS编译运行，而且也有 Windows 的移植版本
+* 配置异常简单：非常容易上手。配置风格跟程序开发一样，神一般的配置
+* 非阻塞、高并发连接：官方测试能够支撑5万并发连接，在实际生产环境中跑到2～3万并发连接数
+* 事件驱动：通信机制采用 epoll 模型，支持更大的并发连接
+* Master/Worker 结构：一个 master 进程，生成一个或多个 worker 进程
+* 内存消耗小：处理大并发的请求内存消耗非常小。在3万并发连接下，开启的10个 Nginx 进程才消耗150M 内存（15M*10=150M）
+* 内置的健康检查功能：如果 Nginx 代理的后端的某台 Web 服务器宕机了，不会影响前端访问
+* 节省带宽：支持 GZIP 压缩，可以添加浏览器本地缓存的 Header 头
+* 稳定性高：用于反向代理，宕机的概率微乎其微
+* 缺点
+    - Nginx 仅能支 持http、https 和 Email 协议，这样就在适用范围上面小些，这个是它的缺点
+    - 对后端服务器的健康检查，只支持通过端口来检测，不支持通过 ur l来检测。不支持 Session 的直接保持，但能通过 ip_hash 来解决
 
 ## 模块
 
@@ -49,19 +60,23 @@
 
 ## 进程模型
 
+* 架构设计是采用模块化的、基于事件驱动、异步、单线程且非阻塞
+* 大量使用多路复用和事件通知，Nginx 启动以后，会在系统中以 daemon 的方式在后台运行，其中包括一个 master 进程，n(n>=1) 个 worker 进程。所有的进程都是单线程（即只有一个主线程）的，且进程间通信主要使用共享内存的方式。
 * master/worker模型
-    - 一个master进程
+    - 一个master进程:用于接收来自外界的信号，并给 worker 进程发送信号，同时监控 worker 进程的工作状态
         + fork Worker进程：按照配置fork出N个Worker进程，一般说来配置推荐Worker进程数量和CPU核数保持一致即可
         + 监控Worker进程，当某个Worker异常挂了后，Master进程负责重新拉起一个
         + 接受外界信号，进行启动、重启、停止
         + 可以给Worker进程发信号
-    - 多个worker进程：每个worker基于时间驱动机制可以并行响应多个请求
+    - 多个worker进程:外部请求真正的处理者，每个 worker 请求相互独立且平等的竞争来自客户端的请求
+        + 请求只能在一个 worker 进程中被处理，且一个 worker 进程只有一个主线程，所以同时只能处理一个请求
+        + 每个worker基于时间驱动机制可以并行响应多个请求
         + accept客户端请求，完成请求，数据返回给客户端
         + http服务，http代理，fastcgi代理
-* fast-CGI：一个协议。PHP对于fast-CGI协议具体实现就是耳熟能详的PHP-FPM（PHP FastCGI Process Manager）
+* fast-CGI：一个协议
     - CGI不涉及进程管理，PHP解析器被调用完一次后，就销毁掉了，下次调用需要重新初始化
     - fastCGI涉及到了进程管理，携带着PHP解析器功能的FPM进程是常驻内存的，解析完毕后就一直静静地还在那里，等待请求
-* PHP-FPM
+* PHP-FPM（PHP FastCGI Process Manager）PHP对于fast-CGI协议具体实现
     - php-fpm的进程模型和nginx一模一样，就是一个Master进程按照配置fork出Worker进程
     - 不同的是，fpm的worker进程没有“powered by epoll”，每个worker进程内都内嵌了php解析器用来解析php代码，一个fpm进程在已经干活的时候拒绝接受新的请求，是完完全全的基于同步阻塞的工作方式，只有活干完了才会接受新的请求
     - Nginx和php-FPM之间是如何通信的？其实就是靠socket
@@ -100,38 +115,6 @@ sudo nginx # 启动命令
 sudo ngixn -c /usr/local/etc/nginx/nginx.conf
 sudo nginx -s reload|reload|reopen|stop|quit # 重新配置后都需要进行重启操作
 sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
-```
-
-## 配置全局变量
-
-```sh
-$args # 请求中的参数
-$content_length # 请求 HEAD 中的 Content-length
-$content_type # 请求 HEAD 中的 Content_type
-$document_root # 当前请求中 root 的值
-$host # 主机头
-$http_user_agent # 客户端 agent
-$http_cookie # 客户端 cookie
-$limit_rate # 限制连接速率
-$request_method # 客户端请求方式，GET/POST
-$remote_addr # 客户端 IP
-$remote_port # 客户端端口
-$remote_user # 验证的用户名
-$request_filename # 请求的文件绝对路径
-$request_body_file  # 做反向代理时发给后端服务器的本地资源的名称
-$scheme # http/http
-$server_protocol # 协议，HTTP/1.0 OR HTTP/1.1
-$server_addr # 服务器地址
-$server_name # 服务器名称
-$server_port # 服务器端口
-$request_uri # 包含请求参数的 URI
-$uri # 不带请求参数的 URI
-$document_uri # 同 $uri
-
--f/!-f # 判断文件是否存在
--d/!-d # 判断目录是否存在
--e/!-e # 判断文件或目录是否存在
--x/!-x # 判断文件是否可以执行
 ```
 
 ### 配置
@@ -180,6 +163,34 @@ $document_uri # 同 $uri
     - 网站默认首页配置
 
 ```json
+$args # 请求中的参数
+$content_length # 请求 HEAD 中的 Content-length
+$content_type # 请求 HEAD 中的 Content_type
+$document_root # 当前请求中 root 的值
+$host # 主机头
+$http_user_agent # 客户端 agent
+$http_cookie # 客户端 cookie
+$limit_rate # 限制连接速率
+$request_method # 客户端请求方式，GET/POST
+$remote_addr # 客户端 IP
+$remote_port # 客户端端口
+$remote_user # 验证的用户名
+$request_filename # 请求的文件绝对路径
+$request_body_file  # 做反向代理时发给后端服务器的本地资源的名称
+$scheme # http/http
+$server_protocol # 协议，HTTP/1.0 OR HTTP/1.1
+$server_addr # 服务器地址
+$server_name # 服务器名称
+$server_port # 服务器端口
+$request_uri # 包含请求参数的 URI
+$uri # 不带请求参数的 URI
+$document_uri # 同 $uri
+
+-f/!-f # 判断文件是否存在
+-d/!-d # 判断目录是否存在
+-e/!-e # 判断文件或目录是否存在
+-x/!-x # 判断文件是否可以执行
+
 # nginx.conf
 {
     # 运行nginx用户和组，linux系统尤其重要，如出现403 forbidden错误，很有可能是这个没有设置正确。不配置或者配置为 user nobody nobody(window下不指定)，则默认所有用户都可以启动Nginx进程
@@ -920,10 +931,12 @@ location = /room/nginx/queryNewLiveNum.do{
 
 ## 代理
 
-* 正向代理:位于客户端和原始服务器(origin server)之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。客户端才能使用正向代理。当你需要把你的服务器作为代理服务器的时候，可以用Nginx来实现正向代理.正向代理发生在 client 端，用户能感知到的且是用户主动发起的代理。
+* 正向代理:位于客户端和原始服务器(origin server)之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端
+    - 客户端才能使用正向代理。当你需要把你的服务器作为代理服务器的时候，可以用Nginx来实现正向代理.正向代理发生在 client 端，用户能感知到的且是用户主动发起的代理。
     - vpn
     - 不支持HTTPS
-* 反向代理（Reverse Proxy）:以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。简单来说就是真实的服务器不能直接被外部网络访问，所以需要一台代理服务器，而代理服务器能被外部网络访问的同时又跟真实服务器在同一个网络环境，当然也可能是同一台服务器，端口不同而已。
+* 反向代理（Reverse Proxy）:以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器
+    - 简单来说就是真实的服务器不能直接被外部网络访问，所以需要一台代理服务器，而代理服务器能被外部网络访问的同时又跟真实服务器在同一个网络环境，当然也可能是同一台服务器，端口不同而已。
 
 ![代理](../_static/nginx_proxy.jpg "Optional title")
 
@@ -995,7 +1008,7 @@ server
 
 ## 负载均衡
 
-分摊到多个操作单元上进行执行,共同完成工作任务
+分摊到多个操作单元上进行执行,共同完成工作任务，以反向代理的方式进行负载均衡的
 
 * 负载均衡算法
     - Round Robin（默认）:轮询(weight=1):每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。
@@ -1327,6 +1340,7 @@ docker run -p 80:80 --name mynginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc
 - [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes https://kubernetes.github.io/ingress-nginx/
 * [valentinxxx/nginxconfig.io](https://github.com/valentinxxx/nginxconfig.io):⚙️ NGiИX config generator generator on steroids 💉 https://nginxconfig.io
 * [lebinh/ngxtop](https://github.com/lebinh/ngxtop):Real-time metrics for nginx server
+* [sumory/orange](https://github.com/sumory/orange):OpenResty/Nginx Gateway for API Monitoring and Management. http://orange.sumory.com
 
 ## 参考
 

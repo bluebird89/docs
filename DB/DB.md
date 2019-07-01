@@ -70,19 +70,6 @@ WHERE A.id IS null OR B.id IS null;
 ## 读写分离
 
 
-
-## Sharding
-
-把一个 Database 切分成几个部分放到不同的服务器上，以分布式的手段增强数据库的性能。Sharding 又有水平切分和垂直切分的区别，如果数据库中 table 较多，可以把不同的表放在不同的服务器上，这便是垂直切分。如果某些 table 的数据量特别大，需要对其进行水平切分，将这个表的数据分发到多个服务器上。在互联网应用场景，一般以水平切分为主，实现上以数据库中间件（Database middleware）为主.
-
-* 可以保证数据库中的全部数据都会有多分拷贝，数据库的高可用可以保障。解决了主数据并发访问量大的问题。
-* 它并没有解决数据库写操作的分布式需求，此外在数据库查询时也只限制在一台服务器上，并不能支持一次查询多台数据库服务器。
-
-如果有一种构架，可以实现数据库水平切分，把切分的数据分布存储在不同的服务器上，这样当查询请求发送到数据库时，可以在多台数据库中异步检索符合查询条件的语句，这样不但可以利用多台服务器的 CPU，而且还可以充分利用不同服务器上的 IO，显而易见这样的构架会大大提高查询语句的性能。这样的实现却给数据库设计者代码不少麻烦
-
-* 事务（Transaction），我们知道在进行一次数据库写操作的时候，需要定一个事务操作，这样在操作失败的时候可以回滚到原始状态，那当在分布式数据库的情况下，事务需要跨越多个数据库节点以保持数据的完整性，这给开发者带来不少的麻烦。
-* 在关系型数据库中存在大量表关联的情况，分布式的查询操作就会牵扯到大量的数据迁移，显然这必将降低数据库性能。但是，在非关系型数据库中，我们弱化甚至去除了事务和多表关联操作
-
 ## 备份
 
 在部署数据库的时候，不用于以前的单体应用，分布式下数据库部署包括多点部署，一套业务应用数据库被分布在多台数据库服务器上，分主从服务器。主服务器处理日常业务请求，从服务器在运行时不断的对主服务器进行备份，当主服务器出现宕机、或者运行不稳定的情况时，从服务器会立刻替换成主服务器，继续对外提供服务。此时，开发运维人员会对出现问题的服务器进行抢修、恢复，之后再把它投入到生产环境中。这样的构架也被称作为高可用构架，它支持了灾难恢复，为业务世界提供了可靠的支持，也是很多企业级应用采用的主流构架之一。
@@ -122,13 +109,9 @@ NoSQL主要用于解决以下几种问题
 * [Vitess](link)
 * [OneProxy](link)
 
-
 ## [Lede-Inc/Cetus](https://github.com/Lede-Inc/cetus)
 
-专注于稳定、性能和分布式事务的MySQL数据库中间件
-Cetus 主要的功能模块包括以下五个部分，分别是读写分离、分库、SQL 解析、连接池和管理功能。
-
-Cetus 的整体工作流程分为:
+专注于稳定、性能和分布式事务的MySQL数据库中间件,包括以下五个部分，分别是读写分离、分库、SQL 解析、连接池和管理功能。Cetus 的整体工作流程分为:
 
 * Cetus 读取启动配置文件和其他配置并启动，监听客户端请求；
 * 收到客户端新建连接请求后，Cetus 经过用户鉴权和连接池，判断连接数是否达到上限，确定是否新建连接；
@@ -232,7 +215,6 @@ Cetus 的整体工作流程分为:
 * [twitter/twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
 * [alibaba/druid](https://github.com/alibaba/druid):阿里巴巴数据库事业部出品，为监控而生的数据库连接池。阿里云Data Lake Analytics(https://www.aliyun.com/product/datalakeanalytics )、DRDS、TDDL 连接池powered by Druid https://github.com/alibaba/druid/wiki
 * [cloudera/hue](https://github.com/cloudera/hue):Hue is an open source SQL Cloud Assistant for developing and accessing SQL/Data Apps. http://gethue.com
-
 
 ## 参考
 

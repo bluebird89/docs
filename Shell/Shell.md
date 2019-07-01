@@ -1438,6 +1438,7 @@ ccache gcc foo.c
     - fzf：命令行下模糊搜索工具，能够交互式智能搜索并选取文件或者内容，配合终端ctrl-r历史命令搜索简直完美。
 * monitor
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序的
+    - nslookup:指定查询的类型，可以查到DNS记录的生存时间还可以指定使用哪个DNS服务器进行解释
     - [htop](http://hisham.hm/htop/): 提供更美观、更方便的进程监控工具
     - [atop](http://www.atoptool.nl/):按日记录进程的日志供以后分析。它也能显示所有进程的资源消耗。它还会高亮显示已经达到临界负载的资源。
     - [apachetop](https://github.com/JeremyJones/Apachetop) 会监控 apache 网络服务器的整体性能。它主要是基于 mytop。它会显示当前的读取进程、写入进程的数量以及请求进程的总数。
@@ -1456,7 +1457,7 @@ ccache gcc foo.c
     - [ngrep](http://ngrep.sourceforge.net/) 就是网络层的 grep。它使用 pcap ，允许通过指定扩展正则表达式或十六进制表达式来匹配数据包。
     - [MRTG](http://oss.oetiker.ch/mrtg/) 最初被开发来监控路由器的流量，但现在它也能够监控网络相关的东西。它每五分钟收集一次，然后产生一个 HTML 页面。它还具有发送邮件报警的能力。
     - [bmon](https://github.com/tgraf/bmon/) 能监控并帮助你调试网络。它能捕获网络相关的统计数据，并以友好的方式进行展示。你还可以与 bmon 通过脚本进行交互。
-    - traceroute是一个内置工具，能显示路由和测量数据包在网络中的延迟。
+    - traceroute是一个内置工具，能显示路由和测量数据包在网络中的延迟,数据包在IP网络经过的路由器的IP地址
     - [IPTState](http://www.phildev.net/iptstate/index.shtml) 可以让你观察流量是如何通过 iptables，并通过你指定的条件来进行排序。该工具还允许你从 iptables 的表中删除状态信息。
     - [darkstat](https://unix4lyfe.org/darkstat/) 能捕获网络流量并计算使用情况的统计数据。该报告保存在一个简单的 HTTP 服务器中，它为你提供了一个非常棒的图形用户界面。
     - [vnStat]( http://humdi.net/vnstat/) 是一个网络流量监控工具，它的数据统计是由内核进行提供的，其消耗的系统资源非常少。系统重新启动后，它收集的数据仍然存在。有艺术感的系统管理员可以使用它的颜色选项。
@@ -1509,6 +1510,7 @@ ccache gcc foo.c
 * [GitSquared/edex-ui](https://github.com/GitSquared/edex-ui):A science fiction terminal emulator designed for large touchscreens that runs on all major OSs.
 * [rupa/z](https://github.com/rupa/z):z - jump around
 * [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
+* [jwilm/alacritty](https://github.com/jwilm/alacritty):A cross-platform, GPU-accelerated terminal emulator
 
 ## 参考
 
@@ -1522,6 +1524,7 @@ ccache gcc foo.c
 * [An A-Z Index of the Bash command line for Linux.](https://ss64.com/bash/)
 * [Google’s Shell Style Guide](https://google.github.io/styleguide/shell.xml)
 * [jlevy/the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
+* [explainshell](https://explainshell.com)
 
 ## 脚本参考
 

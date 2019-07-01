@@ -266,9 +266,9 @@ sudo ufw status
 sudo ufw app list
 sudo ufw allow 'Nginx HTTP'
 sudo ufw allow https
+sudo ufw allow 443
 sudo ufw enable/disable
 bash <(curl -s https://git.jacksgong.com/Jacksgong/script/raw/master/firewall.sh)
-
 
 # 查看某一端口的占用情况
 [sudo ]lsof -i : (port)

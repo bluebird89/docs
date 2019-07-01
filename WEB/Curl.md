@@ -4,6 +4,12 @@ curl is used in command lines or scripts to transfer data.发出网络请求，�
 
 ## 使用
 
+* -X/--request [GET|POST|PUT|DELETE|…]  指定请求的 HTTP 方法
+* -H/--header                           指定请求的 HTTP Header
+* -d/--data                             指定请求的 HTTP 消息体（Body）
+* -v/--verbose                          输出详细的返回信息
+* -u/--user                             指定账号、密码
+* -b/--cookie                           读取 cookie
 * -i:--include Include protocol response headers in the output
 * -v:--verbose       Make the operation more talkative
 

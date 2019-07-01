@@ -106,6 +106,7 @@ glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgre
 # No need for a GUI - a nice, colorful, graphical representation
 # https://git-scm.com/docs/git-log
 # via https://medium.com/@payload.dd/thanks-for-the-git-st-i-will-use-this-4da5839a21a4
+find-branch = !sh -c \"git branch -a | grep -v remotes | grep $1 | head -n 1 | xargs git checkout\"
 
 [merge]
 ff = only
@@ -686,7 +687,7 @@ git remote rm <主机名> # 删除 origin 仓库信息
 git remote rename <原主机名> <新主机名> # 用于远程主机的改名
 git remote prune origin # removes tracking branches whose remote branches are removed
 
-git remote update wilson # 更新源代码信息
+git remote update [wilson] # 更新源代码信息
 
 git branch --set-upstream  v1.0 origin/v1.0
 git branch --set-upstream-to|track v1.0 origin/v1.0

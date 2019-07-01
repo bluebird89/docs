@@ -20,7 +20,7 @@
 
 ![RPC 的调用过程](../_static/How_rpc_works.jpeg "Optional title")
 
-## HTTP 与 RPC 的区别
+## HTTP vs RPC
 
 * 传输协议：
     - HTTP 基于 HTTP 协议。
@@ -36,12 +36,15 @@
     - 比如集团内部的服务调用，推荐使用 RPC。
     - RPC 比 HTTP 性能消耗低，传输效率高，服务治理也方便
 
-
 ## RPC vs REST
 
-* RPC 相比 REST 的优点主要有 3 点：
+* RPC 相比 REST 的优点：
     - RPC+Protobuf 采用的是 TCP 做传输协议，REST 直接使用 HTTP 做应用层协议，这种区别导致 REST 在调用性能上会比 RPC+Protobuf 低
     - RPC 不像 REST 那样，每一个操作都要抽象成对资源的增删改查，在实际开发中，有很多操作很难抽象成资源，比如登录操作。所以在实际开发中并不能严格按照 REST 规范来写 API，RPC 就不存在这个问题
+    - 相比 gRPC，OpenAPI 的定义更难懂，也更啰嗦，结构也更复杂
+    - 流式传输:在有第一批结果时就开始传输。而 REST 只返回一个单独的 JSON 数组，在服务器端收集到所有结果之前是不会向客户端发送任何数据的
+        + REST:要求客户端轮询搜索结果，先是发送一个 POST 请求发起搜索，然后再不断发送 GET 请求获取搜索结果。响应消息中包含了一个用于表示搜索是否已完成的字段
+        + 需要在.proto 文件中加入 stream 关键字。下面是我们的 Search 函数定义：`rpc Search (SearchRequest) returns (stream Trip) {}`
     - RPC 屏蔽网络细节、易用，和本地调用类似
         + 这里的易用指的是调用方式上的易用性。在做 RPC 开发时，开发过程很烦琐，需要先写一个 DSL 描述文件，然后用代码生成器生成各种语言代码，当描述文件有更改时，必须重新定义和编译，维护性差。
 * REST 相较 RPC 也有很多优势：
