@@ -124,7 +124,6 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
 
 * https:面对charles等抓包工具时，其实并没有什么卵用，只要配置一下根证书瞬间可以看到一切明文
 
-
 ```
 // 加密密码
 password = '123456'
@@ -470,6 +469,7 @@ apidoc -i myapp/ -o apidoc/ -t mytemplate/
 * 抓包
     - Charles
     - fiddler
+    - [Wireshark](https://www.wireshark.org)
 * API 文档/契约生成工具
     - apidoc
     - swagger
@@ -490,5 +490,6 @@ apidoc -i myapp/ -o apidoc/ -t mytemplate/
 
 ## 参考
 
+* [OAI/OpenAPI-Specification](https://github.com/OAI/OpenAPI-Specification):The OpenAPI Specification Repository https://openapis.org
 * [jsonapi](https://jsonapi.org/format/)
 * [shieldfy/API-Security-Checklist](https://github.com/shieldfy/API-Security-Checklist):Checklist of the most important security countermeasures when designing, testing, and releasing your API
