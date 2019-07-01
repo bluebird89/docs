@@ -151,7 +151,7 @@ rel表示这个API与当前网址的关系（collection关系，并给出该coll
 
 ## StrongLoop
 
-StrongLoop API Platform构建于开源的LoopBack.io之上，LoopBack是一个高度可扩展的Node.js API框架。借助于LoopBack，我们可以快速创建可扩展的API和数据库映射。
+StrongLoop API Platform构建于开源的LoopBack.io之上，LoopBack是一个高度可扩展的Node.js API框架。借助于LoopBack，可以快速创建可扩展的API和数据库映射。
 
 * [StrongLoop](https://mac.aotu.io/docs/dev-rd/strongloop.html)
 * [文档](https://docs.strongloop.com/pages/viewpage.action?pageId=10879061)

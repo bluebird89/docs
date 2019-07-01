@@ -138,6 +138,87 @@
         - 在WEB项目中的平面图绘制，如需要绘制线，多边形，图片等。
         - 数据可视化。
 
+## Data URL
+
+* 以data:模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中
+* 由data:前缀、MIME类型（表明数据类型）、base64标志位（如果是文本，则可选）以及数据本身四部分组成 `data:[<mediatype>][;base64],data`
+* 优势
+    - 当访问外部资源很麻烦或受限时，可以将外部资源转为Data URL引用(这个比较鸡肋)
+    - 当图片是在服务器端用程序动态生成，每个访问用户显示的都不同时，这是需要返回一个可用的URL（场景较少）
+    - 当图片的体积太小，占用一个HTTP会话不是很值得时（雪碧图可以出场了）
+* 缺点
+    - 体积更大：Base64编码的数据体积通常是原数据的体积4/3，也就是Data URL形式的图片会比二进制格式的图片体积大1/3
+    - 不会缓存：Data URL形式的图片不会被浏览器缓存，这意味着每次访问这样的页面时都被下载一次。这是一个使用效率方面的问题——尤其当这个图片被整个网站大量使用的时候。
+* 场景
+    - 在浏览器地址栏中使用
+    - 在script/img/video/iframe等标签的src属性内使用Data URL
+    - 在`<link>`标签的href中使用Data URL
+    - 在css样式background的url中使用Data URL
+
+```
+# uuencode
+uuencode -m <源文件> <转码后标识>
+
+## Javascript
+btoa('hello base64') // "aGVsbG8gYmFzZTY0"
+atob('aGVsbG8gYmFzZTY0') // "hello base64"
+
+# Canvas提供了toDataURL
+<canvas id="testCanvas" width="200" height="100"></canvas>
+<textarea id="testCanvas-content"></textarea>
+
+var canvas = document.getElementById('testCanvas');
+if (canvas.getContext) {
+  var ctx = canvas.getContext('2d');
+  // 设置字体
+  ctx.font = "Bold 20px Arial";
+  // 设置对齐方式
+  ctx.textAlign = "left";
+  // 设置填充颜色
+  ctx.fillStyle = "#0f0";
+  // 设置字体内容，以及在画布上的位置
+  ctx.fillText("hello base64", 10, 30);
+  // 描边颜色
+  ctx.strokeStyle = "#0f0";
+  // 绘制空心字
+  ctx.strokeText("hello base64", 10, 80);
+  // 获取 Data URL
+  document.getElementById('testCanvas-content').value = canvas.toDataURL();
+}
+
+# FileReader API的readAsDataURL
+<div class="demo-area">
+  <input type="file" id="testReadAsDataURL">
+  <textarea id="testReadAsDataURL-content"></textarea>
+</div>
+
+var reader = new FileReader()
+reader.onload = function(e) {
+  var textarea = document.getElementById('testReadAsDataURL-content');
+  textarea.value = reader.result
+}
+document.getElementById('testReadAsDataURL').onchange = function(e) {
+  var file = e.target.files[0]
+  reader.readAsDataURL(file)
+}
+
+<a href="base64内容" target="_blank" id="setDataURLInHref"></a>
+var scriptDataURL = `data:text/javascript;base64,YWxlcnQoJ+WcqHNjcmlwdOS4reS9v+eUqERhdGEgVVJMJykK`
+// 对应文本为：alert('在script中使用Data URL')
+$('#setDataURLInScriptBtn').click(function() {
+  $('<script>').attr('src', scriptDataURL).appendTo($('body'))
+})
+
+var linkDataURL = `data:text/css;base64,I3NldERhdGFVUkxJbkxpbmtCdG57Y29sb3I6IHJlZDt9Cg==`
+// 对应内容为：setDataURLInLinkBtn{color: red;}
+$('#setDataURLInLinkBtn').click(function() {
+  $('<link rel="stylesheet" type ="text/css">').attr('href', linkDataURL).appendTo($('head'))
+})
+
+const bgDataURL = $('#testCanvas-content')[0].value
+$('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
+```
+
 ## 工具
 
 * [IMageMagick](https://imagemagick.cn/)
@@ -174,3 +255,7 @@
 * [Pixelmator](http://www.pixelmator.com):图像处理软件
 * [GIPHY](https://giphy.com/):寻找动图好去处。
 * [Beautiful Royalty-Free Photos Sorted By AI](https://www.pickpik.com)
+
+## 参考
+
+* [Data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs)
