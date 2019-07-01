@@ -1271,6 +1271,16 @@ echo "4) ".basename(".").PHP_EOL;
 echo "5) ".basename("/");
 ```
 
+### php://input
+
+* Coentent-Type仅在取值为application/x-www-data-urlencoded和multipart/form-data两种情况下，PHP才会将http请求数据包中相应的数据填入全局变量$_POST
+* PHP不能识别的Content-Type类型的时候，会将http请求包中相应的数据填入变量$HTTP_RAW_POST_DATA
+* Coentent-Type为multipart/form-data的时候，PHP不会将http请求数据包中的相应数据填入php://input
+* “php://input可以读取没有处理过的POST数据
+* php://input读取不到$_GET数据。是因为$_GET数据作为query_path写在http请求头部(header)的PATH字段，而不是写在http请求的body部分
+* 只有Content-Type为application/x-www-data-urlencoded时，php://input数据才跟$_POST数据相一致
+* 相较于$HTTP_RAW_POST_DATA而言，它给内存带来的压力较小，并且不需要特殊的php.ini设置
+
 ### redirect
 
 * `header ( string $header [, bool $replace = TRUE [, int $http_response_code ]] ) : void`

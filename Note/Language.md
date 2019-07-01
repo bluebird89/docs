@@ -50,7 +50,7 @@
 
 ## 参考
 
-* programinglanguange
+* [learndesignthehardway](https://www.learndesignthehardway.com)
 
 ## 语言
 

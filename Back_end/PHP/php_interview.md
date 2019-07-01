@@ -193,6 +193,8 @@ Docker 初级的重点在于 Dockerfile 镜像，Linux CLI 和 shell 编程在�
     - 微服务
         + 微服务产品（服务框架，RPC，Service Mesh，服务注册中心，定时任务，动态配置，服务治理，应用容器等
 * Ruby
+* 业务
+    - 支付接口
 * 测试
     - 自动化测试和持续集成
     - Test Driven
@@ -208,4 +210,4 @@ Docker 初级的重点在于 Dockerfile 镜像，Linux CLI 和 shell 编程在�
 * 大数据
     - Hadoop/Spark/Hive/Flink/Kafka/Druid
 * 前端技术
-    - 如AngulaJS, ReactJS）
+    - 如AngulaJS, ReactJS

@@ -987,6 +987,8 @@ find /usr/bin -type f -atime +100 搜索在过去100天内未被使用过的执�
 find /usr/bin -type f -mtime -10 搜索在10天内被创建或者修改过的文件
 find / -name \*.rpm -exec chmod 755 '{}' \; 搜索以 '.rpm' 结尾的文件并定义其权限
 find / -xdev -name \*.rpm 搜索以 '.rpm' 结尾的文件，忽略光驱、捷盘等可移动设备
+
+cat $FILE | pbcopy # 将内容复制到粘贴板
 ```
 
 * `dd if=/dev/zero of=virtual.img bs=1M count=256` 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
@@ -1153,7 +1155,7 @@ scp [-r] username@ip:path local_path
 ## 服务器登陆
 ssh username@remote_host
 ssh username@remote_host ls /var/www
-
+ssh -i ~/.ssh/my_key root@$YOU_SERVER_IP
 # /etc/ssh/sshd_config
 PasswordAuthentication no  # Disable Password Authentication
 PubkeyAuthentication yes

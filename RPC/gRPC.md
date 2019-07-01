@@ -13,7 +13,6 @@ The C based gRPC (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)
 
 * 下载[Protocol Buffers v3.8.0](https://github.com/protocolbuffers/protobuf/releases)
 
-
 ```
 ./configure --prefix=your_pb_install_path
 
@@ -25,7 +24,7 @@ brew install grpc
 
 ## 概念
 
-* service定义了一个server。其中的接口可以是四种类型
+* service定义了一个server,其中的接口可以是四种类型
     - `rpc GetFeature(Point) returns (Feature) {}`：类似普通的函数调用，客户端发送请求Point到服务器，服务器返回相应Feature.
     - `rpc ListFeatures(Rectangle) returns (stream Feature) {}`：客户端发起一次请求，服务器端返回一个流式数据，比如一个数组中的逐个元素
     - `rpc RecordRoute(stream Point) returns (RouteSummary) {}`：客户端发起的请求是一个流式的数据，比如数组中的逐个元素，服务器返回一个相应
@@ -38,6 +37,10 @@ brew install grpc
 * 两种方式可以混合使用
 
 ## example
+
+* 在.proto 文件中定义好接口:可以确保客户端发送或服务器端接收到的数据是遵循规范的，这样非常有助于调试
+* 使用 protoc 编译器编译这个文件，生成客户端和服务器端代码
+* 可以开始编写调用这个 API 或提供 API 服务的代码
 
 ```python
 pip install grpcio
@@ -231,6 +234,10 @@ grpc_cli call localhost:50051 SayHello "name: 'gRPC CLI'"
 Received an error when querying services endpoint.
 Reflection request not implemented; is the ServerReflection service enabled?
 ```
+
+## 工具
+
+* [Linkerd](https://kubernetes.io/blog/2018/11/07/grpc-load-balancing-on-kubernetes-without-tears/)
 
 ## 参考
 

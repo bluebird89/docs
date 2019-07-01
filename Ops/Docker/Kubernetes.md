@@ -316,7 +316,6 @@ kubectl delete deployments hello-minikube1
 * [jetstack/cert-manager](https://github.com/jetstack/cert-manager):Automatically provision and manage TLS certificates in Kubernetes https://jetstack.io
 * [appscode/voyager](https://github.com/appscode/voyager):🚀 Secure HAProxy Ingress Controller for Kubernetes https://appscode.com/products/voyager
 
-
 ## 参考
 
 * [Tutorials](https://kubernetes.io/docs/tutorials/)
