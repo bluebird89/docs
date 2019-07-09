@@ -42,6 +42,7 @@ if ($tmpstr==$signature) {
     - [微信公众平台技术文档](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1472017492_58YV5)
 * [测试号](https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login)
 * [有赞](https://www.youzan.com/)
+* [支付](https://pay.weixin.qq.com/wiki/doc/api/index.html)
 
 ## UI
 
