@@ -10,9 +10,11 @@ The PHP Interpreter <http://www.php.net>
 * HTTP协议在Nginx等服务器的解析下,传送给相应的Handler（PHP等）来处理
 * 后端渲染，默认html处理，模版文件以.php后缀
 * 优点:开发方便效率高
-* 缺点就是性能差
-    - 在密集运算的场景下比 C 、 C++ 相差几十倍甚至上百倍。
+* 缺点
+    - 性能差：在密集运算的场景下比 C 、 C++ 相差几十倍甚至上百倍
     - 不可以直接操作底层，需要依赖扩展库来提供 API 实现
+    - **可控** 常驻内存运行环境的缺失
+        + 不可控：进程的入口点和退出时机由额外的程序控制，执行PHP脚本的时机仍然由外部驱动
 
 ## 发展
 
@@ -174,6 +176,7 @@ apt-get install -y php5-memcached
 * 一个常驻主进程, 只负责任务分发, 逻辑更清楚
 * 完全支持多线程
 * 实现定时任务
+    - 
 * 开发桌面应用就是使用PHP-CLI和GTK包
 * linux下用php编写shell脚本
 * [ircmaxell/phpvm](https://github.com/ircmaxell/phpvm):A PHP version manager for CLI PHP
@@ -324,7 +327,11 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
         + “下划线”命名：$get_user_name、$set_user_pwd
     - 赋值
         - 传值:$variablename指向value存储的地址 `$foo = 'Bob';`
-        - 引用:新的变量简单的引用了原始变量,只有有名字的变量才可以引用赋值 `$bar = &$foo`;
+        - 引用:新的变量简单的引用了原始变量,只有有名字的变量才可以引用赋值 `$bar = &$foo`
+        - 对象赋值，浅拷贝,取了另一个名字而已，指向的内存空间还是一样 还是两份数据？
+        - `$a = $b $b =56` $a 的值不变
+        - clone函数在克隆对象时候，普通属性是深拷贝，原对象的对象属性还是引用赋值，浅拷贝
+        - 魔术方法__clone实现真正深拷贝
     - 可变变量：`$$var`是一个引用变量，用于存储$var的值
 * PHP 之外的变量
     - `$_GET $_POST $_REQUEST`
@@ -413,6 +420,38 @@ define("MESSAGE", "Hello YiiBai PHP");
 const MESSAGE = "Hello const by YiiBai PHP";
 
 require('./ShopProduct.php'); # 加载文件
+
+# __clone实现真正深拷贝
+class Test{
+    public $a=1;
+}
+
+class TestOne{
+    public $b=1;
+    public $obj;
+    //包含了一个对象属性，clone时，它会是浅拷贝
+    public function __construct(){
+        $this->obj = new Test();
+    }
+
+    //  方法一 重写clone函数
+    public function __clone(){
+        $this->obj = clone $this->obj;
+    }
+}
+
+$m = new TestOne();
+
+//方法二，序列化反序列化实现对象深拷贝
+$n = serialize($m);
+$n = unserialize($n);
+
+$n->b = 2;
+echo $m->b;//输出原来的1
+echo PHP_EOL;
+//普通属性实现了深拷贝，改变普通属性b，不会对源对象有影响
+$n->obj->a = 3;
+echo $m->obj->a;//输出1，不随新对象改变，还是保持了原来的属性,可以看到，序列化和反序列化可以实现对象的深拷贝
 ```
 
 ### 数据类型
@@ -1154,6 +1193,21 @@ if (!isset($_SESSION['counter'])) {
 echo ("Page Views: ".$_SESSION['counter']);
 ```
 
+## IO
+
+* 本质上是 “流(stream)” ，通过流操作文件、内存、网络等设备的数据。查看PHP 源代码
+* 读写文件
+* 命令行输入和输出:php_sapi_name返回值为cli，标准输入输出均指向终端
+    - STDIN: 标准输入，只读，等同于用fopen打开”php://stdin”;
+    - STDOUT: 标准输出，只写，等同于用fopen打开”php://stdout”;
+    - STDERR: 标准错误输出，只写，等同于fopen打开”php://stderr”。
+* 与远程网址交互:curl
+* file_get_contents
+* 方法
+    - fputs
+    - fwrite
+
+
 ### 文件操作
 
 * 创建文件
@@ -1175,6 +1229,7 @@ echo ("Page Views: ".$_SESSION['counter']);
     - x+  与x相同，但以读写模式创建和打开文件。
     - c   以只写模式打开文件。 如果文件不存在，则会创建。 如果存在，不会被截断(与’w‘相反)，也不会调用此函数失败(如’x‘的情况)。 文件指针位于文件的开头
     - c+  与c相同，但它以读写模式打开文件。
+* flock：获取文件锁，可用其实现进程互斥锁；
 * 读取文件：`string fread (resource $handle , int $length )`函数用于读取文件的数据
     - 参数：文件资源($handle 由fopen()函数创建的文件指针)和文件大小($length 要读取的字节长度)
     - 逐行读取文件：`string fgets ( resource $handle [, int $length ] )`函数用于从文件中读取单行数据内容
@@ -1184,7 +1239,7 @@ echo ("Page Views: ".$_SESSION['counter']);
     - 如果再次运行上面的代码，将擦除文件的前一个数据并写入新的数据。
     - 附加文件
 * 删除文件：`bool unlink ( string $filename [, resource $context ] )`
-* 关闭文件
+* 关闭文件 `fclose($fd)`
 * 上传文件：`bool move_uploaded_file ( string $filename , string $destination )`
     - `$_FILES['filename']['name']`   返回文件名称
     - `$_FILES['filename']['type']` 返回文件的MIME类型
@@ -1364,10 +1419,14 @@ window.location = “http:/example.com/”
         + 对象的属性
         + guards:阻止递归调用
     - 对象的方法不会存在对象里面，要使用对象的方法，实际上是通过指针找到这个类，再用这个类里面的方法来执行的。（通过类序列化检测）
-* 延迟绑定：子类重写父类方法，其它调用该方法时用static而非self
-    - static:: 不再被解析为定义当前方法所在的类，而是在实际运行时计算的。也可以称之为"静态绑定"，因为它可以用于（但不限于）静态方法的调用
-    - 当进行静态方法调用时，该类名即为明确指定的那个（通常在 :: 运算符左侧部分）
-    - 当进行非静态方法调用时，即为该对象所属的类。
+* static
+    - 修饰函数或变量使其成为类函数和类变量
+    - 修饰函数内变量延长生命周期至整个应用程序
+    - 延迟绑定：子类重写父类方法，其它调用该方法时用static而非self
+        + static:: 不再被解析为定义当前方法所在的类，而是在实际运行时计算的。也可以称之为"静态绑定"，因为它可以用于（但不限于）静态方法的调用
+        + 当进行静态方法调用时，该类名即为明确指定的那个（通常在 :: 运算符左侧部分）
+        + 当进行非静态方法调用时，即为该对象所属的类
+    - self 只引用声明，static 执行当前对象
 * 对象复制：对对象的所有属性执行一个浅复制（shallow copy）。所有的引用属性 仍然会是一个指向原来的变量的引用
 * 传递:默认情况下通过引用传递
     - 对象作为参数传递、作为结果返回或者赋值给另外一个变量
@@ -1394,18 +1453,82 @@ class B extends A {
 }
 
 B::test(); # A
+
+class Base {
+    public function __construct() {
+        echo "Base constructor!", PHP_EOL;
+    }
+
+    public static function getSelf() {
+        return new self();
+    }
+
+    public static function getInstance() {
+        return new static();
+    }
+
+    public function selfFoo() {
+        return self::foo();
+    }
+
+    public function staticFoo() {
+        return static::foo();
+    }
+
+    public function thisFoo() {
+        return $this->foo();
+    }
+
+    public function foo() {
+        echo  "Base Foo!", PHP_EOL;
+    }
+}
+
+class Child extends Base {
+    public function __construct() {
+        echo "Child constructor!", PHP_EOL;
+    }
+
+    public function foo() {
+        echo "Child Foo!", PHP_EOL;
+    }
+}
+
+$base = Child::getSelf();
+$child = Child::getInstance();
+
+$child->selfFoo();
+$child->staticFoo();
+$child->thisFoo();
+// Base constructor!
+// Child constructor!
+// Base Foo!
+// Child Foo!
+// Child Foo!
 ```
 
 #### 访问控制(可见性)
 
 * public:类成员在任何地方可见
-* protected:类成员在其自身、子类和父类内可见
+* protected:类成员在自身、子类和父类内可见
 * private:类成员只对自己可见。
-* 对于private和protected有个特例:同一个类的对象即使不是同一个实例也可以互相访问对方的私有与受保护成员
+* private和protected有个特例:同一个类的对象即使不是同一个实例也可以互相访问对方的私有与受保护成员
 * 范围解析符(::)：通常以self::、 parent::、 static:: 和 `<classname>::`形式来访问静态成员、类常量
 * static::、self:: 和 parent:: 可用来调用类中的非静态方法。类中实例或自己
 * self
+    - 替代类名，引用当前类的静态成员变量和静态函数；
+    - 抑制多态行为，引用当前类的函数而非子类中覆盖的实现；
+* self VS static
+    - 在函数引用上
+        + 对于静态成员函数，self指向代码当前类，static指向调用类
+        + 对于非静态成员函数，self抑制多态，指向当前类的成员函数，static等同于this，动态指向调用类的函数
 * parent
+* this
+    - this不能用在静态成员函数中，self可以；
+    - 对静态成员函数/变量的访问，建议 用self，不要用$this::或$this->的形式；
+    - 对非静态成员变量的访问，不能用self，只能用this;
+    - this要在对象已经实例化的情况下使用，self没有此限制；
+    - 在非静态成员函数内使用，self抑制多态行为，引用当前类的函数；而this引用调用类的重写(override)函数（如果有的话）
 * static:调用类里面的静态属性与静态方法
 
 ```php

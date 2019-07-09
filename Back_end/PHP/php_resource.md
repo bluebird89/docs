@@ -329,6 +329,7 @@ open http://127.0.0.1:8000
     - [dreamans/phpAnalysis](https://github.com/dreamans/phpAnalysis):phpAnalysis - PHP应用性能分析系统
     - Psalm
     - Phan
+    - [nunomaduro/phpinsights](https://github.com/nunomaduro/phpinsights):💡Instant PHP quality checks from your console https://phpinsights.com
     - [phpstan/phpstan](https://github.com/phpstan/phpstan):PHP Static Analysis Tool - discover bugs in your code without running it!
     - [didi/rdebug](https://github.com/didi/rdebug):Rdebug — Real Debugger
 * Architectural 相关的设计模式库，组织代码编程的方法和途径

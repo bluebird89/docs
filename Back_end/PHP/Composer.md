@@ -168,14 +168,17 @@ composer init  # 新建文件 composer.json
 composer init --require=foo/bar:1.0.0 -n
 composer init --require="twig/twig:1.*" -n --profile # 显示执行时间
 
+composer why vlucas/phpdotenv # 确定哪些依赖项需要它
 composer search monolog
-compsoer show monolog
+compsoer show -t monolog # 用依赖关系树的形式 查看安装的包及其版本号和说明
+composer status -v # 查看本地修改的软件包和文件
 composer clear-cache
 
 composer global require "squizlabs/php_codesniffer=*"
 composer global require friendsofphp/php-cs-fixer
 
 composer install -vvv # 使用composer install或者composer update命令将会更新所有的扩展包
+composer outdated -m # 检测一下已安装的包，哪些有可以升级
 composer update|remove [packagename] -vvv # 更新的话，先删除composer.lock文件
 composer self-update
 
@@ -429,6 +432,7 @@ $cat = new \Animal\Cat();
 * [官网](https://getcomposer.org/)
 * [中文](https://www.phpcomposer.com/)
 * [Packagist](https://packagist.org):The PHP Package Repository
+* [阿里云 Composer 全量镜像](https://mirrors.aliyun.com/composer/index.html)
 
 ## 工具
 
