@@ -180,6 +180,7 @@
 ## 资源
 
 * [facebook/watchman](https://github.com/facebook/watchman):Watches files and records, or triggers actions, when they change. https://facebook.github.io/watchman/
+* [阿里镜像](https://opsx.alibaba.com/mirror)
 
 ## 词典
 

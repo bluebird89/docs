@@ -1,6 +1,6 @@
 # [golang/go](https://github.com/golang/go)
 
-The Go programming language https://golang.org
+The Go programming language https://golang.org [中国官网](https://golang.google.cn/)
 
 ## Install
 
@@ -15,13 +15,13 @@ Go 编译器支持交叉编译，可以在一台机器上构建运行在具有�
   - GOOS 表示目标机器的操作系统，它的值可以是 darwin、freebsd、linux 或 windows。
   - GOBIN 表示编译器和链接器的安装位置，默认是 GOROOT/bin
   - go命令常常需要用到的，如go run，go install， go get等
-  - GOPATH：(external libs)编译后二进制的存放目的地和 import 包时的搜索路径
+  - GOPATH：(external libs):值是一个目录的路径，也可以是多个目录路径，每个目录都代表 Go语言的一个工作区
     + 允许设置多个路径，和各个系统环境多路径设置一样，windows用“;”，linux（mac）用“:”分隔
     + 不要把GOPATH设置成go的安装路径,可以自己在用户目录下面创建一个目录, 如gopath.$GOPATH 默认采用和 $GOROOT 一样的值，但从 Go 1.1 版本开始，必须修改为其它路径
-    + 可以包含多个包含 Go 语言源码文件、包文件和可执行文件的路径
-    + bin目录主要存放可执行文件：需要把GOPATH中的可执行目录也配置到环境变量中, 否则你自行下载的第三方go工具就无法使用了
-    + pkg目录存放编译好的库文件, 主要是*.a文件
-    + src目录下主要存放go的源文件
+    + 可以包含多个包含 Go 语言源码文件、包文件和可执行文件的路径，每个目录下包含目录
+        * bin：存放可执行文件：需要把GOPATH中的可执行目录也配置到环境变量中, 否则自行下载的第三方go工具就无法使用了 编译后二进制的存放目的地
+        * pkg：存放安装后的归档文件, 主要是*.a文件
+        * src：存放go的源文件 import 包时的搜索路径
 
 ```sh
 ### linux
@@ -64,15 +64,122 @@ go env
 mkdir -p $GOPATH/src
 ```
 
+## 组织
+
+* 源码
+    - Go 语言的源码以代码包为基本组织单位的。在文件系统中，这些代码包其实是与目录一一对应的。由于目录可以有子目录，所以代码包也可以有子包
+    - 一个代码包中可以包含任意个以.go 为扩展名的源码文件，这些源码文件都需要被声明属于同一个代码包
+    - 代码包的名称一般会与源码文件所在的目录同名。如果不同名，那么在构建、安装的过程中会以代码包名称为准
+    - 每个代码包都会有导入路径。代码包的导入路径是其他代码在使用该包中的程序实体时，需要引入的路径。在实际使用程序实体之前，必须先导入其所在的代码包。具体的方式就是import该代码包的导入路径
+    - 在工作区中，一个代码包的导入路径实际上就是从 src 子目录，到该包的实际存储位置的相对路径。
+    - Go 语言源码的组织方式就是以环境变量 GOPATH、工作区、src 目录和代码包为主线的。一般情况下，Go 语言的源码文件都需要被存放在环境变量 GOPATH 包含的某个工作区（目录）中的 src 目录下的某个代码包（目录）中
+    - 命令码源文件
+        + 命令源码文件是程序的运行入口，是每个可独立运行的程序必须拥有的。可以通过构建或安装，生成与其对应的可执行文件，后者一般会与该命令源码文件的直接父目录同名。
+        + 如果一个源码文件声明属于main包，并且包含一个无参数声明且无结果声明的main函数
+        + 对于一个独立的程序来说，命令源码文件永远只会也只能有一个。如果有与命令源码文件同包的源码文件，那么它们也应该声明属于main包
+    - 库源码文件
+        + 不能被直接运行的源码文件，仅用于存放程序实体(变量、常量、函数、结构体和接口的统称)，这些程序实体可以被其他代码使用
+    - 把命令源码文件中的代码拆分到其他库源码文件
+        + 同目录下的源码文件的代码包声明语句要一致。也就是说，它们要同属于一个代码包。这对于所有源码文件都是适用的。
+            * 如果目录中有命令源码文件，那么其他种类的源码文件也应该声明属于main包，这也是我们成功构建和运行它们的前提。
+        + 源码文件声明的代码包的名称可以与其所在的目录的名称不同。在针对代码包进行构建时，生成的结果文件的主名称与其父目录的名称一致。
+        + **源码文件所在的目录相对于 src 目录的相对路径就是它的代码包导入路径，而实际使用其程序实体时给定的限定符要与它声明所属的代码包名称对应**
+        + 名称的首字母为大写的程序实体才可以被当前包外的代码引用，否则它就只能被当前包内的其他代码引用
+        + 对于包级私有的程序实体，即使导入了它所在的代码包也无法引用到它
+        + 代码包声明规则(可以与目录不一致)、代码包导入规则（导入目录路径）以及程序实体的访问权限规则（使用声明的包）。在进行模块化编程时，必须记住这些规则，否则代码很可能无法通过编译。
+        + 导入两个代码包，而这两个代码包的导入路径的最后一级是相同，文件声明的包名相同，则肯定冲突，会报错redeclared。
+        + 如果会产生冲突，那么怎样解决这种冲突，有几种方式？
+            * 设置别名
+            * 导入的点操作，import(. "bbbb")。这样就可以直接调用bbbb下面的函数而不用再bbbb.funcname的方式调用
+            * 如果只是想引入某包并没有在代码中实际调用则可以这么处理来避免冲突:import(_ "bbbb")
+        + 在 Go 1.5 及后续版本中，可以通过创建internal代码包让一些程序实体仅仅能被当前模块中的其他代码引用。这被称为 Go 程序实体的第三种访问权限：模块级私有。
+* 安装
+    - 某个工作区的 src 子目录下的源码文件在安装后一般会被放置到当前工作区的 pkg 子目录下对应的目录中，，或者被直接放置到该工作区的 bin 子目录中
+    - 安装某个代码包而产生的归档文件是与这个代码包同名的
+    - 归档文件的相对目录与 pkg 目录之间还有一级目录，叫做平台相关目录。平台相关目录的名称是由 build（也称“构建”）的目标操作系统、下划线和目标计算架构的代号组成的，比如 linux_amd64
+* 构建 VS 安装
+    - go install 安装操作会先执行构建，然后还会进行链接操作，并且把结果文件搬运到指定目录
+        + 安装的是库源码文件,结果文件会被搬运到它所在工作区的 pkg 目录下的某个子目录中
+        + 如果安装的是命令源码文件，那么结果文件会被搬运到它所在工作区的 bin 目录中，或者环境变量
+    - 构建和安装代码包的时候都会执行编译、打包等操作，并且，这些操作生成的任何文件都会先被保存到某个临时的目录中
+    - go build
+        + 如果构建的是库源码文件，那么操作后产生的结果文件只会存在于临时目录中。这里的构建的主要意义在于检查和验证。
+        + 如果构建的是命令源码文件，那么操作的结果文件会被搬运到源码文件所在的目录中
+        + 默认不会编译目标代码包所依赖的那些代码包。当然，如果被依赖的代码包的归档文件不存在，或者源码文件有了变化，那它还是会被编译。
+        + 参数
+            * -a，不但目标代码包总是会被编译，依赖的代码包也总会被编译，即使依赖的是标准库中的代码包也是如此。
+            * -i, 不但要编译依赖的代码包，还要安装它们的归档文
+            * -x，命令具体都执行了哪些操作
+            * -n，只查看具体操作而不执行它们
+            * -v,看到编译的代码包的名称。它在与-a 结合
+* 问题
+    - Go 语言在多个工作区中查找依赖包的时候是以怎样的顺序进行的？
+    - 形成命名空间
+    - 如果在多个工作区中都存在导入路径相同的代码包会产生冲突吗？
+
+```sh
+# 一个已存在的代码包导入路径
+github.com/labstack/echo
+
+# 生成归档文件 相对目录就是 github.com/labstack， 文件为 echo.a 目录 pkg/linux_amd64/github.com/labstack
+go install github.com/labstack/echo
+
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, world!")
+}
+
+```
+
+## 导入
+
+* 包的属性名字以大写字母开头，那么它就是已导出的
+
+## 程序实体
+
+* 变量、常量、函数、结构体和接口的统称
+* 程序实体的名字被统称为标识符。标识符可以是任何 Unicode 编码可以表示的字母字符、数字以及下划线“_”，但是其首字母不能是数字
+* 类型声明
+    - 当连续两个或多个函数的已命名形参类型相同时，除最后一个类型以外，其它都可以省略。
+    - 初始化时显式声明
+    - 类型推断是一种编程语言在编译期自动解释表达式类型的能力
+        + 在声明一个变量而不指定其类型时（即使用不带类型的 := 语法或 var = 表达式语法），变量的类型由右值推导得出。
+        + 使得它可以被赋予任何类型的值,明显提升程序的灵活性，使得代码重构变得更加容易，同时又不会给代码的维护带来额外负担（实际上，它恰恰可以避免散弹式的代码修改），更不会损失程序的运行效率。
+        + 函数内使用短变量声明 `name := flag.String("name", "everyone", "The greeting object.")`
+    - 变量重声明的前提条件如下
+        + 由于变量的类型在其初始化时就已经确定了，所以对它再次声明时赋予的类型必须与其原本的类型相同，否则会产生编译错误。
+        + 变量的重声明只可能发生在某一个代码块中。如果与当前的变量重名的是外层代码块中的变量，那么就是另外一种含义了，我在下一篇文章中会讲到。
+        + 变量的重声明只有在使用短变量声明时才会发生，否则也无法通过编译。如果要在此处声明全新的变量，那么就应该使用包含关键字var的声明语句，但是这时就不能与同一个代码块中的任何变量有重名了。
+        + 被“声明并赋值”的变量必须是多个，并且其中至少有一个是新的变量。这时我们才可以说对其中的旧变量进行了重声明。
+* 作用域
+    - 包级私有和模块级私有访问权限对应的都是代码包代码块，公开的访问权限对应的是全域代码块
+    - 一个程序实体的作用域总是会被限制在某个代码块中，而这个作用域最大的用处，就是对程序实体的访问权限的控制。
+    - 首先，代码引用变量的时候总会最优先查找当前代码块中的那个变量。注意，这里的“当前代码块”仅仅是引用变量的代码所在的那个代码块，并不包含任何子代码块。
+    - 其次，如果当前代码块中没有声明以此为名的变量，那么程序会沿着代码块的嵌套关系，从直接包含当前代码块的那个代码块开始，一层一层地查找。
+    - 一般情况下，程序会一直查到当前代码包代表的代码块。如果仍然找不到，那么 Go 语言的编译器就会报错了。
+
 ### 插件
 
-* go get 用来动态获取远程代码包的，fetch libraries from remote and put them in your $GOPATH.目前支持的有BitBucket、GitHub、Google Code和Launchpad。这个命令在内部实际上分成了两步操作：第一步是下载源码包，第二步是执行go install。下载源码包的go工具会自动根据不同的域名调用不同的源码工具,参数说明：
-  - -d 只下载不安装
-  - -f 只有在你包含了-u参数的时候才有效，不让-u去验证import中的每一个都已经获取了，这对于本地fork的包特别有用
-  - -fix 在获取源码之后先运行fix，然后再去做其他的事情
-  - -t 同时也下载需要为运行测试所需要的包
-  - -u 强制使用网络去更新包和它的依赖包:存在unrecognized import path "golang.org/x问题，需要添加代理
-  - -v 显示执行的命令
+* go get
+    - 会自动从一些主流公用代码仓库（比如 GitHub）下载目标代码包，并把它们安装到环境变量 GOPATH 包含的第 1 工作区的相应目录中。如果存在环境变量
+    - 目前支持的有BitBucket、GitHub、Google Code和Launchpad
+    - 这个命令在内部实际上分成了两步操作
+        + 第一步是下载源码包
+        + 第二步是执行go install
+    - 下载源码包的go工具会自动根据不同的域名调用不同的源码工具,参数说明：
+        + -d 只下载不安装
+        + -f 只有在你包含了-u参数的时候才有效，不让-u去验证import中的每一个都已经获取了，这对于本地fork的包特别有用
+        + -fix 在获取源码之后先运行一个用于根据当前 Go 语言版本修正代码的工具，然后再去做其他的事情
+        + -t 同时也下载需要为运行测试所需要的包
+        + -insecure：允许通过非安全的网络协议下载和安装代码包。HTTP 就是这样的协议。
+        + -u ：下载并安装代码包，不论工作区中是否已存在它们。强制使用网络去更新包和它的依赖包:存在unrecognized import path "golang.org/x问题，需要添加代理
+        + -v 显示执行的命令
+* 对代码包的远程导入路径进行自定义的方法是
+    - 在该代码包中的库源码文件的包声明语句的右边加入导入注释，像这样：`package semaphore // import "golang.org/x/sync/semaphore"`
+    - `go get golang.org/x/sync/semaphore` 后，golang.org 下的路径 /x/sync/semaphore 并不是存放包的真实地址
 * golang 在 github 上建立了一个镜像库，如 https://github.com/golang/net 即是 https://golang.org/x/net 的镜像库
 * [Gopm Registry](https://gopm.io):Download Go packages by version, without needing version control tools (eg Git, Hg, etc).
 
@@ -114,7 +221,100 @@ go run hello.go
 
 包别名 可见性
 
-数据类型： 布尔bool 整型inter 字节型byte float complex type 自定义 b := 1 _ 忽略 strconv iota
+## 数据类型
+
+ type 自定义 b := 1 _ 忽略 strconv iota
+
+* 判断所谓的“传值”或者“传引用”只要看被传递的值的类型就好了
+* 值类型
+    - 基础数据类型
+        + bool
+        + string
+        + int  int8  int16  int32  int64
+        + uint uint8 uint16 uint32 uint64 uintptr
+        + byte // uint8 的别名
+        + rune // int32 的别名
+        +     // 表示一个 Unicode 码点
+        + float32 float64
+        + complex64 complex128
+    - struct 结构体:一组字段（field）
+        + 结构体字段使用点号来访问
+        + 结构体字段可以通过结构体指针来访问,使用隐式间接引用，直接写 p.X 就可以
+        + 特点
+            * 零值都会是拥有特定结构，但是没有任何定制化内容的值，相当于一个空壳。值中的字段也都会被分别赋予各自类型的零值。
+            * 延迟初始化：在实际需要的时候才进行。优点是可以分散初始化操作带来的计算量和存储空间消耗。
+        + List
+        + Element
+        + Ring:在内部就是一个循环链表。它的根元素永远不会持有任何实际的元素值，而该元素的存在就是为了连接这个循环链表的首尾两端。
+        + Heap
+* 数组类型
+    - 数组类型 [n]T 表示拥有 n 个 T 类型的值的数组
+    - 长度是固定的,数组的长度在声明它的时候就必须给定，并且之后不会再改变。可以说，数组的长度是其类型的一部分
+* 引用类型
+    - slice切片类型
+        + []bool{true, true, false}
+        + 切片可包含任何类型，甚至包括其它的切片
+        + 用内建函数 make 来创建, 会分配一个元素为零值的数组并返回一个引用了它的切片`a := make([]int, 5)  // len(a)=5`
+            * b := make([]int, 0, 5) // len(b)=0, cap(b)=5
+            * b = b[:cap(b)] // len(b)=5, cap(b)=5
+            * b = b[1:]      // len(b)=4, cap(b)=4
+        + 值是可变长的。切片的长度可以自动地随着其中元素数量的增长而增长，但不会随着元素数量的减少而减小。
+        + a[low : high] 过两个下标来界定,会选择一个半开区间，包括第一个元素，但排除最后一个元素,利用它的默认行为来忽略上下界。切片下界的默认值为 0，上界则是该切片的长度。
+        + 切片并不存储任何数据，它只是描述了底层数组中的一段。
+        + 更改切片的元素会修改其底层数组中对应的元素。 与它共享底层数组的切片都会观测到这些修改。
+        + 在每个切片的底层数据结构中，一定会包含一个数组。数组可以被叫做切片的底层数组
+        + 切片也可以被看作是对数组的某个连续片段的引用
+        + 通过切片表达式基于某个数组或切片生成新切片的时候
+        + 结构可以为其它类型
+        + 长度就是它所包含的元素个数。len(s)
+        + 切片的容量是从它的第一个元素开始数，到其底层数组元素末尾的个数。cap(s)
+        + 切片的零值是 nil。nil 切片的长度和容量为 0 且没有底层数组。
+        + 在底层数组不变的情况下，切片代表的窗口可以向右扩展，直至其底层数组的末尾。
+        + `func append(s []T, vs ...T) []T`:切片追加新的元素
+        + for 循环的 range 形式可遍历切片或映射。当使用 for 循环遍历切片时，每次迭代都会返回两个值。第一个值为当前元素的下标，第二个值为该下标所对应元素的一份副本。
+            * 可以将下标或值赋予 _ 来忽略它
+        + 一旦一个切片无法容纳更多的元素，Go 语言就会想办法扩容。但它并不会改变原来的切片，而是会生成一个容量更大的切片，然后将把原有的元素和新元素一并拷贝到新切片中
+        + 在一般的情况下，可以简单地认为新切片的容量（以下简称新容量）将会是原切片容量（以下简称原容量）的 2 倍。
+        + 当原切片的长度（以下简称原长度）大于或等于1024时，将会以原容量的1.25倍作为基准
+    - map字典类型
+        + var m map[string]Vertex： key 类型 value 类型
+        + 将键映射到值
+        + 映射的零值为 nil 。nil 映射既没有键，也不能添加键。
+        + 键类型受限
+        + 非原子操作需要加锁， map并发读写需要加锁，map操作不是并发安全的，判断一个操作是否是原子的可以使用 go run race 命令做数据的竞争检测
+    - Channel通道类型
+        + 不要通过共享内存来通信，而应该通过通信来共享内存
+        + 一个通道相当于一个先进先出（FIFO）的队列。通道中的各个元素值都是严格地按照发送的顺序排列的，先被发送通道的元素值一定会先被接收。元素值的发送和接收都需要用到操作符
+        + 对于同一个通道，发送操作之间是互斥的，接收操作之间也是互斥的。
+        + 发送操作和接收操作中对元素值的处理都是不可分割的。
+        + 发送操作在完全完成之前会被阻塞。接收操作也是如此。
+        + 缓冲通道的情况。如果通道已满，那么对它的所有发送操作都会被阻塞，直到通道中有元素值被接收走。
+        + 非缓冲通道，情况要简单一些。无论是发送操作还是接收操作，一开始执行就会被阻塞，直到配对的操作也开始执行，才会继续传递。由此可见，非缓冲通道是在用同步的方式传递数据。也就是说，只有收发双方对接上了，数据才会被传递。
+    - 函数类型
+* 指针
+    - 指针保存了值的内存地址
+        + 声明：类型 *T 是指向 T 类型值的指针。其零值为 nil。 `var p *int`
+        + 生成：& 操作符会生成一个指向其操作数的指针 `i := 42 p = &i`
+        + 获取值：`*` 操作符表示指针指向的底层值
+        + 指针操作原始值，值引用 操作副本
+    - 选择值或指针作为接收者
+        + 方法能够修改其接收者指向的值
+        + 避免在每次调用方法时复制该值。若值的类型为大型结构体时，这样做会更加高效。
+* 类型转换 表达式 T(v) 将值 v 转换为类型 T
+
+## 常量
+
+* 常量的声明与变量类似，只不过是使用 const 关键字。
+* 常量可以是字符、字符串、布尔值或数值。
+* 常量不能用 := 语法声明。
+* 数值常量是高精度的 值。 一个未指定类型的常量由上下文来决定其类型。
+    - int 类型最大可以存储一个 64 位的整数，有时会更小。）
+    - int 可以存放最大64位的整数，根据平台不同有时会更少。）
+
+runtime
+math
+flag
+time
 
 << >> 左右移位
 
@@ -123,6 +323,15 @@ go run hello.go
 LABLE标签 goto break continue
 
 slice reslice
+
+## 函数
+
+* 输入与输出类型限制 `func (T) Read(b []byte) (n int, err error)`
+* defer 语句会将函数推迟到外层函数返回之后执行。推迟调用的函数其参数会立即求值，但直到外层函数返回前该函数都不会被调用。
+* defer 栈 推迟的函数调用会被压入一个栈中。当外层函数返回时，被推迟的函数会按照后进先出的顺序调用
+* 函数也是值。可以像其它值一样传递。函数值可以用作函数的参数或返回值
+* 闭包是一个函数值，它引用了其函数体之外的变量。该函数可以访问并赋予其引用的变量的值，换句话说，该函数被这些变量“绑定”在一起。例如，函数 adder 返回一个闭包。每个闭包都被绑定在其各自的 sum 变量上。
+* 接受一个值作为参数的函数必须接受一个指定类型的值，不能是指针
 
 ## 协程
 
@@ -137,7 +346,134 @@ func main() {
 }
 ```
 
-### sublime
+## 方法
+
+* Go 没有类,类方法的实现，定义时指明数据结构
+    - 为结构体类型定义方法
+    - 为非结构体类型声明方法
+    - 为指针接收者声明方法：指针接收者的方法可以修改接收者指向的值
+        + 使用值接收者，那么 Scale 方法会对原始 Vertex 值的副本进行操作
+        + 带指针参数的函数必须接受一个指针,以指针为接收者的方法被调用时，接收者既能为值又能为指针
+        + 以值为接收者的方法被调用时，接收者既能为值又能为指针
+        + 优点
+            * 方法能够修改其接收者指向的值
+            * 可以避免在每次调用方法时复制该值。若值的类型为大型结构体时，这样做会更加高效。
+* 只能为在同一包内定义的类型的接收者声明方法，而不能为其它包内定义的类型（包括 int 之类的内建类型）的接收者声明方法。
+* 方法就是一类带特殊的 接收者 参数的函数。
+* 方法接收者在它自己的参数列表内，位于 func 关键字和方法名之间。
+* 方法只是个带接收者参数的函数
+
+## 接口
+
+* 由一组方法签名定义的集合，接口类型的变量可以保存任何实现了这些方法的值
+* 接口也是值。它们可以像其它值一样传递。接口值可以用作函数的参数或返回值。
+* 在内部，接口值可以看做包含值和具体类型的元组 `(value, type)`,接口值保存了一个具体底层类型的具体值。接口值调用方法时会执行其底层类型的同名方法。
+* 类型通过实现一个接口的所有方法来实现该接口
+* 隐式接口从接口的实现中解耦了定义，这样接口的实现可以出现在任何包中，无需提前准备。
+* 底层值为 nil 的接口值，即便接口内的具体值为 nil，方法仍然会被 nil 接收者调用
+* 保存了 nil 具体值的接口其自身并不为 nil,nil 接口值既不保存值也不保存具体类型
+* 空接口
+    - 指定了零个方法的接口值被称为 *空接口：*  `interface{}`
+    - 空接口可保存任何类型的值。（因为每个类型都至少实现了零个方法）
+    - 空接口被用来处理未知类型的值。例如，fmt.Print 可接受类型为 interface{} 的任意数量的参数
+* 类型断言 提供了访问接口值底层具体值的方式
+    - `t := i.(T)` 断言接口值 i 保存了具体类型 T，并将其底层类型为 T 的值赋予变量 t,若 i 并未保存 T 类型的值，该语句就会触发一个恐慌。
+    - `t, ok := i.(T)`  判断 一个接口值是否保存了一个特定的类型，类型断言可返回两个值：其底层值以及一个报告断言是否成功的布尔值
+        +  i 保存了一个 T:t 将会是其底层值，而 ok 为 true
+        +  否则，ok 将为 false 而 t 将为 T 类型的零值，程序并不会产生恐慌
+*  类型选择 是一种按顺序从几个类型断言中选择分支的结构,类型选择中的 case 为类型（而非值）， 它们针对给定接口值所存储的值的类型进行比较
+
+```go
+var i interface{} = "hello"
+s := i.(string)
+fmt.Println(s)
+
+s, ok := i.(string)
+fmt.Println(s, ok)
+
+f, ok := i.(float64)
+
+switch v := i.(type) {
+```
+
+## fmt
+
+* fmt 包中定义的 Stringer 是最普遍的接口之一
+* 错误：使用 error 值来表示错误状态，error 类型是一个内建接口，自定义错误流程
+    - 声明错误数据类型 并实现接口error
+    - 通常函数会返回一个 error 值，调用代码应当判断这个错误是否等于 nil 来进行错误处理
+    - error 为 nil 时表示成功；非 nil 的 error 表示失败
+
+```go
+type Stringer interface {
+    String() string
+}
+
+type error interface {
+    Error() string
+}
+
+i, err := strconv.Atoi("42")
+if err != nil {
+    fmt.Printf("couldn't convert number: %v\n", err)
+    return
+}
+fmt.Println("Converted integer:", i)
+```
+
+##
+
+* 一个 io.Reader 包装另一个 io.Reader，然后通过某种方式修改其数据流
+* image 包定义了 Image 接口
+    - Bounds 方法的返回值 Rectangle 实际上是一个 image.Rectangle，它在 image 包中声明
+
+```go
+package image
+
+type Image interface {
+    ColorModel() color.Model
+    Bounds() Rectangle
+    At(x, y int) color.Color
+}
+```
+
+## go 程（goroutine）
+
+* 由 Go 运行时管理的轻量级线程
+* `go f(x, y, z)`会启动一个新的 Go 程并执行 `f(x, y, z)`
+    - f, x, y 和 z 的求值发生在当前的 Go 程中，而 f 的执行发生在新的 Go 程中
+* Go 程在相同的地址空间中运行，因此在访问共享的内存时必须进行同步。sync 包提供了这种能力，不过在 Go 中并不经常用到，因为还有其它的办法
+
+## 信道
+
+* 带有类型的管道
+* 声明`ch := make(chan int, n)`
+    - n 为缓存长度
+* 通过用信道操作符 <- 来发送或者接收值
+* 默认情况下，发送和接收操作在另一端准备好之前都会阻塞。这使得 Go 程可以在没有显式的锁或竞态变量的情况下进行同步。
+* 当信道的缓冲区填满后，向其发送数据时会阻塞。当缓冲区为空时，接受方会阻塞。
+* 发送者可通过 close 关闭一个信道来表示没有需要发送的值了，向一个已经关闭的信道发送数据会引发程序恐慌（panic）
+* 接收者可以通过为接收表达式分配第二个参数来测试信道是否被关闭：若没有值可以接收且信道已被关闭，那么在执行完 `v, ok := <-ch` 之后 ok 会被设置为 false
+* 循环 for i := range c 会不断从信道接收值，直到它被关闭
+* 信道与文件不同，通常情况下无需关闭它们。只有在必须告诉接收者不再有需要发送的值时才有必要关闭，例如终止一个 range 循环
+
+## 控制语句
+
+* select:使一个 Go 程可以等待多个通信操作
+    - 会阻塞到某个分支可以继续执行为止，这时就会执行该分支
+    - 当多个分支都准备好时会随机选择一个执行
+    - select 中的其它分支都没有准备好时，default 分支就会执行
+
+## 互斥锁（Mutex）
+
+* 保证每次只有一个 Go 程能够访问一个共享的变量，从而避免冲突
+* 在代码前调用 Lock 方法，在代码后调用 Unlock 方法来保证一段代码的互斥执行
+* 标准库中提供了 sync.Mutex 互斥锁类型及其两个方法：
+    - Lock
+    - Unlock
+* 用 defer 语句来保证互斥锁一定会被解锁
+
+### GoSublime
 
 * 安装gosublime插件
 * 在GoSublime，再往下找到 Settings - Default修改`"env": { "GOPATH":"$HOME/go","PATH": "$HOME/bin:$GOPATH/bin:$PATH" },` `"shell": [“$zsh"],`
@@ -331,6 +667,7 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 
 * [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源图书，涵盖CGO、Go汇编语言、RPC实现、Protobuf插件实现、Web框架实现、分布式系统等高阶主题 https://legacy.gitbook.com/book/chai2010/advanced-go-programming-book/details
 * [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN):《The Way to Go》中文译本，中文正式名《Go 入门指南》
+* 并发编程
 
 ## 项目
 
@@ -338,6 +675,7 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 
 ## 教程
 
+* [Go 指南](https://tour.go-zh.org/basics/2)
 * [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
 * [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源免费图书(开发中...)https://github.com/chai2010/advanced-go-programming-book
 * [astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
@@ -350,6 +688,8 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * [astaxie/go-best-practice](https://github.com/astaxie/go-best-practice):Trying to complete over 100 projects in various categories in golang.
 * [Unknwon/go-fundamental-programming](https://github.com/Unknwon/go-fundamental-programming):《Go 编程基础》是一套针对 Google 出品的 Go 语言的视频语音教程，主要面向新手级别的学习者。
 * [Alikhll/golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
+* [go_command_tutorial](https://github.com/hyper0x/go_command_tutorial):Go 命令教程
+* [hyper0x/Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers/tree/master/src/puzzlers):An example project, for my column named "Core Golang - 36 lessons"
 
 ## 扩展
 
@@ -370,7 +710,6 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
   - [mgechev/revive](https://github.com/mgechev/revive):🔥 ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint. https://revive.run
 * ORM
   - [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io
-  - [gomods/athens](https://github.com/gomods/athens):A Go module datastore and proxy https://docs.gomods.io
   - [jinzhu/gorm](https://github.com/jinzhu/gorm):The fantastic ORM library for Golang, aims to be developer friendly https://gorm.io
 * 路由
   - [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
@@ -430,6 +769,9 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 - [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
 * [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
 * [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
+* proxy
+    -   [gomods/athens](https://github.com/gomods/athens):A Go module datastore and proxy https://docs.gomods.io
+    -   [goproxyio/goproxy](https://github.com/goproxyio/goproxy):A global proxy for Go modules. https://goproxy.io
 * 代码规范
   - [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
 * file
@@ -480,6 +822,7 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 
 ## 参考
 
+* [spec](https://golang.google.cn/ref/spec)
 * [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
 * [yinggaozhen/awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 https://awesome-go.cn(建设中)
 * [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
@@ -488,7 +831,8 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * [qiniu/gobook](https://github.com/qiniu/gobook):The Go Programming Language
 * [changkun/go-under-the-hood](https://github.com/changkun/go-under-the-hood):Go 源码研究 (1.11.1, WIP)
 * [emirpasic/gods](https://github.com/emirpasic/gods):GoDS (Go Data Structures). Containers (Sets, Lists, Stacks, Maps, Trees), Sets (HashSet, TreeSet, LinkedHashSet), Lists (ArrayList, SinglyLinkedList, DoublyLinkedList), Stacks (LinkedListStack, ArrayStack), Maps (HashMap, TreeMap, HashBidiMap, TreeBidiMap, LinkedHashMap), Trees (RedBlackTree, AVLTree, BTree, BinaryHeap), Comparators, Iterators, …
-* [EDDYCJY/blog](https://github.com/EDDYCJY/blog):煎鱼的博客，啊。
+* [EDDYCJY/blog](https://github.com/EDDYCJY/blog):煎鱼的博客
+* [Go-zh/go](https://github.com/Go-zh/go):Go 语言文档中文翻译 https://go-zh.org
 * 离线文档
   - `go get golang.org/x/tools/cmd/godoc`
   - `godoc -http=:6060` 访问`http://localhost:6060/`
