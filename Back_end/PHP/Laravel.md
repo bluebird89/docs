@@ -205,15 +205,11 @@ if (App::environment(['local', 'staging'])) {
 
 ## Artisan
 
-Laravel利用PHP的CLI构建了强大的Console工具artisan，artisan几乎能够创建任何你想要的模板类以及管理配置你的应用，在开发和运维管理中扮演着极其重要的角色，artisan是Laravel开发不可或缺的工具。在Laravel根目录下运行：PHP artisan list可查看所有命令列表。用好artisan能极大地简化开发工作，并减少错误发生的可能；另外，还可以编写自己的命令。下面列举部分比较常用的命令：
+利用PHP的CLI构建了强大的Console工具artisan，几乎能够创建任何想要的模板类以及管理配置应用，在开发和运维管理中扮演着极其重要的角色
 
-- 启用维护模式：php artisan down --message='Upgrading Database' --retry=60
-- 关闭维护模式：php artisan up
-- 生成路由缓存：php artisan route:cache
-- 清除路由缓存：php artisan route:clear
-- 数据库迁移 Migrations：php artisan make:migration create_users_table --create=users
-- 创建资源控制器：php artisan make:controller PhotoController --resource --model=Photo
-- 创建模型及迁移：php artisan make:model User -m
+* 数据库迁移 Migrations：php artisan make:migration create_users_table --create=users
+* 创建资源控制器：php artisan make:controller PhotoController --resource --model=Photo
+* 创建模型及迁移：php artisan make:model User -m
 
 ```sh
 php artisan --version # 显示目前的Laravel版本
@@ -287,7 +283,7 @@ php artisan baum:install # Scaffolds a new migration and model suitable for Baum
 //生成30条数据
 factory(App\User::class,30)->create()
 // tinker的使用
-E:\opensource\blog>php artisan tinker
+php artisan tinker
 Psy Shell v0.7.2 (PHP 5.6.19 鈥?cli) by Justin Hileman
 $user = new App\User;
 => App\User {#628}
@@ -298,8 +294,7 @@ $user->email = 'fation@126.com'
 $user->password = bcrypt('123456');
 => "$2y$10$kyCuwqSpzGTTZgAPMgCDgung9miGRygyCAIKHJhylYyW9osKKc3lu"
 $user->save();
-"insert into `users` (`name`, `email`, `password`, `updated_at`, `created_at`) v
-alues (?, ?, ?, ?, ?)"
+"insert into `users` (`name`, `email`, `password`, `updated_at`, `created_at`) values (?, ?, ?, ?, ?)"
 => true
 exit
 ```
@@ -363,7 +358,7 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
     - 绑定实例:使用 instance 方法将现有对象实例绑定到容器中。给定的实例会始终在随后的调用中返回到容器中
     - 绑定初始数据:需要注入一个基本值
     - 绑定接口到实现:将接口绑定到给定实现
-    - 上下文绑定:使用了相同的接口，但你希望每个类都能注入不同的实现
+    - 上下文绑定:使用了相同的接口，但希望每个类都能注入不同的实现
     - 标记：解析某个「分类」下的所有绑定
     - 解析：使用 make 方法将容器中的类实例解析出来
     - 自动注入：使用「类型提示」的方式在由容器解析的类的构造函数中添加依赖项，包括 控制器、事件监听器、队列任务、中间件 等
@@ -579,7 +574,7 @@ class Repository
 * 全局约束：希望某个具体的路由参数都遵循同一个正则表达式的约束，就使用 pattern 方法在 RouteServiceProvider 的 boot 方法中定义这些模式
 * 命名路由可以方便地为指定路由生成 URL 或者重定向。通过在路由定义上链式调用 name 方法指定路由名称
     - 可以使用全局辅助函数 route 来生成链接或者重定向到该路由
-* 路由组允许你在大量路由之间共享路由属性，例如中间件或命名空间，而不需要为每个路由单独定义这些属性。共享属性应该以数组的形式传入 Route::group 方法的第一个参数中
+* 路由组允许在大量路由之间共享路由属性，例如中间件或命名空间，而不需要为每个路由单独定义这些属性。共享属性应该以数组的形式传入 Route::group 方法的第一个参数中
     - 给路由组中所有的路由分配中间件，可以在 group 之前调用 middleware 方法。中间件会依照它们在数组中列出的顺序来运行
     - 使用 namespace 方法将相同的 PHP 命名空间分配给路由组的中所有的控制器
     - 用来处理子域名。子域名可以像路由 URI 一样被分配路由参数，允许你获取一部分子域名作为参数给路由或控制器使用
@@ -589,7 +584,7 @@ class Repository
         + 自定义键名：要模型绑定在检索给定的模型类时使用除 id 之外的数据库字段，可以在 Eloquent 模型上重写 getRouteKeyName 方法
     - 显式绑定：注册显式绑定，使用路由器的 model 方法来为给定参数指定类
 * 自定义解析逻辑：使用 Route::bind 方法。传递到 bind 方法的闭包会接受 URI 中大括号对应的值，并且返回你想要在该路由中注入的类的实例
-* 表单伪造：需要在表单中增加隐藏的 _method 输入标签。使用 _method 字段的值作为 HTTP 的请求方法；也可以使用辅助函数 method_field 来生成隐藏的 _method 输入标签
+* 表单伪造：需要在表单中增加隐藏的 `_method` 输入标签。使用 `_method` 字段的值作为 HTTP 的请求方法；也可以使用辅助函数 `method_field` 来生成隐藏的 _method 输入标签
 
 ```php
 Route::get('foo', function () {
@@ -972,7 +967,7 @@ Route::resource('fotos', 'PhotoController')
 /fotos/{foto}/editar
 ```
 
-### HTTP 请求 request
+### 请求 request
 
 * 通过依赖注入的方式来获取当前 HTTP 请求的实例，你应该在控制器方法中类型提示 Illuminate\Http\Request。传入的请求的实例将通过 服务容器 自动注入
 * 路由参数
@@ -2230,7 +2225,7 @@ public function boot()
 }
 ```
 
-- 语言包：如果你的扩展包里面包含了本地化，则可以使用 loadTranslationsFrom 方法来告知 Laravel 该如何加载它们。下例假设你的包名称为courier
+- 语言包：如果扩展包里面包含了本地化，则可以使用 loadTranslationsFrom 方法来告知 Laravel 该如何加载。下例假设你的包名称为courier
 
 ```php
 /**
@@ -2293,7 +2288,7 @@ echo trans('courier::messages.welcome');//扩展包翻译参照使用了双分�
 14 }
 ```
 
-- 公用 Assets：你可以发布像 JavaScript、CSS 和图片这些资源文件到应用程序的 public 目录上。当用户执行 vendor:publish 命令时，您的 Assets 将被复制到指定的发布位置。由于每次更新包时通常都需要覆盖资源，因此您可以使用 --force 标志：php artisan vendor:publish --tag=public --force
+- 公用 Assets：可以发布像 JavaScript、CSS 和图片这些资源文件到应用程序的 public 目录上。当用户执行 vendor:publish 命令时，您的 Assets 将被复制到指定的发布位置。由于每次更新包时通常都需要覆盖资源，因此您可以使用 --force 标志：php artisan vendor:publish --tag=public --force
 
 ```
  1 /**

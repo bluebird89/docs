@@ -50,8 +50,8 @@ sudo chown -R $USER .composer/
 ### 卸载composer:找到文件删除即可
 # config
 composer config -l # 查看
-composer config -g repo.packagist composer https://packagist.phpcomposer.com ## 全局配置国内镜像
-composer config repo.packagist composer https://packagist.phpcomposer.com # 项目配置国内镜像
+composer config -g repo.packagist composer https://packagist.phpcomposer.com # 全局配置
+composer config repo.packagist composer https://packagist.phpcomposer.com # 项目配置
 ```
 
 ## package
@@ -427,12 +427,19 @@ $dog = new Dog();
 $cat = new \Animal\Cat();
 ```
 
+## 源
+
+* [aliyun](https://mirrors.aliyun.com/composer/)
+* [tencent](https://mirrors.cloud.tencent.com/composer/)
+* [huaweicloud](https://mirrors.huaweicloud.com/repository/php/)
+* [cnpkg.org](https://php.cnpkg.org)
+* [laravel-china](https://packagist.laravel-china.org)
+
 ## 参考
 
 * [官网](https://getcomposer.org/)
 * [中文](https://www.phpcomposer.com/)
 * [Packagist](https://packagist.org):The PHP Package Repository
-* [阿里云 Composer 全量镜像](https://mirrors.aliyun.com/composer/index.html)
 
 ## 工具
 
