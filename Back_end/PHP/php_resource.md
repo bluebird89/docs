@@ -132,7 +132,8 @@
     - [Sculpin](https://sculpin.io): 转换Markdown和Twig为静态HTML的工具
     - [Spress](http://spress.yosymfony.com): 一个能够将Markdown和Twig转化为HTML的可扩展工具
 * 超文本传输协议 HTTP
-    - [Buzz](https://github.com/kriswallsmith/Buzz): 另一个HTTP客户端
+    - [Buzz](https://github.com/kriswallsmith/Buzz): 一个HTTP客户端
+    - Saber
     - [guzzle/guzzle](https://github.com/guzzle/guzzle):Guzzle, an extensible PHP HTTP client <http://guzzlephp.org/> http://docs.guzzlephp.org/en/stable/index.html
     - [HTTPFul](https://github.com/nategood/httpful): 一个链式HTTP库
     - [PHP VCR](http://php-vcr.github.io/): 一个录制和重放HTTP请求的库
@@ -387,7 +388,7 @@ open http://127.0.0.1:8000
     - (https://github.com/mjaschen/phpgeo)[PHPGeo]: 一个简单的地理库
 * 日期和时间 Date and Time 处理日期和时间的库
     - (http://yohan.giarel.li/CalendR/)[CalendR]: 一个日历管理库
-    - (https://github.com/briannesbitt/Carbon)[Carbon]: 一个简单的日期时间API扩展
+    - [Carbon](https://github.com/briannesbitt/Carbon): 一个简单的日期时间API扩展 https://carbon.nesbot.com
     - (https://github.com/cakephp/chronos)[Chronos]: 一个支持可变和不可变日期时间的DateTime API扩展
     - (https://github.com/jasonlewis/expressive-date)[ExpressiveDate]: 另一个日期时间API扩展
     - (https://github.com/fightbulc/moment.php)[Moment.php]: 灵感来源于Moment.js的PHP DateTime处理库，支持国际化

@@ -5,16 +5,17 @@ Event-driven asynchronous & concurrent & coroutine networking engine with high p
 PHP的 协程 高性能网络通信引擎，使用C/C++语言编写，提供了多种通信协议的网络服务器和客户端模块
 
 * 一个异步并行的通信引擎，作为 PHP 的扩展来运行
+* 其进程模型的设计，既解决了异步问题，又解决了并行
 * 常驻内存，避免重复加载带来的性能损耗，提升海量性能
     - 进程都是常驻内存的，包括解析过后的PHP代码也会常驻内存，不会反复解析
     - PHP代码解析后都是常驻内存的，意味着mysql和redis等连接将会是长连接
 * 协程异步，提高对 I/O 密集型场景并发处理能力
+    - redis
 * 方便地开发Http、WebSocket、TCP、UDP 等应用，可以与硬件通信
     - TCP/UDP/UnixSock 服务器端
     - Http/WebSocket/Http2.0 服务器端
     - 协程 TCP/UDP/UnixSock 客户端
     - 协程 MySQL 客户端
-    - 异步 Redis 客户端
     - 协程 Http/WebSocket 客户端
     - 协程 Http2 客户端
     - AsyncTask
@@ -25,8 +26,18 @@ PHP的 协程 高性能网络通信引擎，使用C/C++语言编写，提供了�
     - Go语言的协程
     - 可以实现常驻内存的 Server 程序
     - 可以实现 TCP 、 UDP 异步网络通信的编程开发
+* 缺点
+    - 无法做密集计算。当然这一点是php甚至是所有动态语言都存在的问题
+    - 更容易内存泄露。在处理全局变量，静态变量的时候一定要小心，这种不会被GC清理的变量会存在整个生命周期中，如果没有正确的处理，很容易消耗完所有的内存
 * 场景：WebSocket 即使通信、聊天、推送服务器、RPC 远程调用服务、网关、代理、游戏服务器等
-* 异步redis
+
+## 版本
+
+* 4.0
+    - 提供了完整的协程(Coroutine)+通道(Channel)特性，带来全的CSP编程模型。应用层可使用完全同步的编程方式，底层自动实现异步IO
+    - 底层加入 Hook 机制，使原生的 Mysql PDO、Redis 操作协程化
+* 4.4
+    - 支持 CURL 协程化
 
 ## 安装
 
@@ -85,17 +96,12 @@ php --ri swoole
     - 使用 tcpdump 跟踪网络通信过程
     - 其他Linux系统工具，如ps、lsof、top、vmstat、netstat、sar、ss等
 
-## 原理
-
-* 多线程编程
-* 进程间通信
-* 网络协议TCP/UDP的认知
-
 ## Server
 
 * 强大的TCP/UDP Server框架，支持多线程，EventLoop，事件驱动，异步，Worker进程组，Task异步任务，毫秒定时器，SSL/TLS隧道加密
 * 类型
     - swoole_http_server是swoole_server的子类，内置了Http的支持
+        + 采用优秀的 Reactor 模型，处理速度可逼进 NGINX 处理静态页面的 速度
     - swoole_websocket_server是swoole_http_server的子类，内置了WebSocket的支持
     - swoole_redis_server是swoole_server的子类，内置了Redis服务器端协议的支持
 * 默认使用SWOOLE_PROCESS模式，因此会额外创建Master和Manager两个进程。
@@ -228,9 +234,19 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
 
 ## 协程 Coroutine
 
-* 在2.0开始内置协程(Coroutine)的能力，提供了具备协程能力IO接口（统一在命名空间Swoole\Coroutine*
-* 协程是子程序的一种， 可以通过yield的方式转移程序控制权，协程之间不是调用者与被调用者的关系，而是彼此对称、平等的。
-* 完全有用户态程序控制，也被成为用户态的线程,由用户以非抢占的方式调度，而不是操作系统。正因为如此，没有系统调度上下文切换的开销，协程有了轻量，高效，快速等特点。
+* 在2.0开始内置协程(Coroutine)的能力，提供了具备协程能力IO接口（统一在命名空间Swoole\Coroutine*）
+    - 在4.4之前的版本中，Swoole一直不支持CURL协程化，在代码中无法使用curl。由于curl使用了libcurl库实现，无法直接hook它的socket，4.4版本使用Swoole\Coroutine\Http\Client模拟实现了curl的API，并在底层替换了curl_init等函数的C Handler。
+* 协程是子程序的一种， 可以通过yield的方式转移程序控制权，协程之间不是调用者与被调用者的关系，而是彼此对称、平等的
+* 为每一个请求创建对应的协程，根据IO的状态来合理的调度协程
+* 有轻量，高效，快速等特点
+    - 用户态线程，遇到 IO 主动让出
+    - PHP 代码依然是串行执行的，无需加锁
+    - 开销极低，仅占用内存，不存在进程/线程切换开销
+    - 并发量大，单个进程可开启 50W 个协程
+    - 随时随地，只要想并发，就调用 go 创建新协程
+* 开发者可以无感知的用同步的代码编写方式达到异步IO的效果和性能，避免了传统异步回调所带来的离散的代码逻辑和陷入多层回调中导致代码无法维护
+* 由于底层封装了协程，所以对比传统的PHP层协程框架，开发者不需要使用yield关键词来标识一个协程IO操作，所以不再需要对yield的语义进行深入理解以及对每一级的调用都修改为yield，这极大的提高了开发效率
+* 完全有用户态程序控制，也被称为用户态的线程,由用户以非抢占的方式调度，所有的操作都可以在用户态完成，创建和切换的消耗更低。而不是操作系统，没有系统调度上下文切换的开销
 * 实现
     - 基于PHP生成器Generators\Yield的方式实现
         + 所有主动让出的逻辑都需要yield关键字。这会给程序员带来极大的概率犯错，导致大家对协程的理解转移到了对Generators语法的原理的理解。
@@ -238,7 +254,6 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
     - PHP执行需要的所有状态都保存在一个个通过链表结构关联的VM栈里，每个栈默认会初始化为256K，Swoole可以单独定制这个栈的大小(协程默认为8k),当栈容量不足的时候，会自动扩容，仍然以链表的关系关联每个栈。在每次函数调用的时候，都会在VM Stack空间上申请一块新的栈帧来容纳当前作用域执行所需。
     - 改变原本php的运行方式，不是在函数运行结束切换栈帧，而是在函数执行当前op_array中间任意时候（swoole内部控制为遇到IO等待），可以灵活切换到其他栈帧。
 * 使用go函数可以让一个函数并发地去执行
-* 使用
     - 使用 go()(\Swoole\Coroutine::create() 的简写) 创建一个协程
     - 在 go() 的回调函数中, 加入协程需要执行的代码(非阻塞代码)
 * 协程通信
@@ -249,10 +264,22 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
 * 需要的功能协程 runtime 下还没支持
     - 官方和社区已经贡献了很多协程版 API 可供使用
     - 可以使用 swoole 提供的协程版 client 进行封装, 可以参考 官方 amqp client 封装, 将 socket() 函数实现的 tcp client, 使用 swoole 协程版 tcp client 实现即可
+* task 也可以开启协程
 *  swoole 的协程 vs go 的协程
+    -  swoole 的协程 和 golang的调度方式完全不同，每一个进程里面的协程都是串行执行所以无需担心访问资源加锁问题
+    -  利用多进程实现并行
     - 基础知识: 网络编程 + 协程, 不会因为你是用 swoole 还是 go 而有所减少, 基础不大好, 表现出来了就是学着学着就容易卡住, 效率上不来
     - 以为写的是 swoole, 不不不, 写的是一个又一个功能的 API, go 也同样(要用到 redis/mysql/mq, 相应的 API 你还是得学得会), 区别在于, swoole 趋势是在底层实现支持(比如 协程runtime), 这样 PHPer 可以无缝切换过来, 而 Gopher 则需要学习一个又一个基于 go 协程封装好的 API. 当初在 PHP 中学习的这些 API, 到 go 里面, 一样需要再熟悉一遍
     - 性能： 用 swoole 达不到的性能, 换个语言, 呵呵呵. 难易程度排行: 加机器 < 加程序员 < 加语言.
+
+|    多进程 |多线程 |协程|
+| ------------- | ------------- |------------- |
+|创建  |fork   | pthread_create | go|
+|回收 | wait   | pthread_join  |  -|
+|通信方式    |IPC 进程间通    |数据同步/锁  |array/chan|
+|资源消耗   | 进程切换开销 | 进程切换开销  |非常低|
+|并发能力   | 数百  |数千 | 50万|
+|编程难度   | 困难  |非常困难   | 容易|
 
 ```php
 // 没有开启协程runtime,需要协程版 API
@@ -473,8 +500,6 @@ $serv->set([
 ]);
 ```
 
-## 异步 vs 协程
-
 ## HTTP
 
 * Swoole 与 Nginx 结合使用
@@ -494,6 +519,12 @@ ps - ef | grep 'swoole_process_server'| grep - v 'grep'
 # worker reload
 ps aux | grep swoole_process_server_master | awk '{print $2}'| xargs kill - USR1
 ```
+
+## 通信
+
+* CSP 有一句很经典的话：不要通过共享内存来通信，而应该通过通信来共享内存
+
+## strace
 
 ## 项目
 

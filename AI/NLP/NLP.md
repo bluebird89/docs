@@ -61,6 +61,7 @@ docker-compose up -d
 
 ## 参考
 
+* [msgi/nlp-journey](https://github.com/msgi/nlp-journey):nlp相关的一些论文及代码, 包括LDA主题模型、词向量(Word Embedding)、命名实体识别(NER)、文本分类(Text Classificatin)、文本生成、文本相似性(Text Similarity)计算等，基于keras和tensorflow
 * [sebastianruder/NLP-progress](https://github.com/sebastianruder/NLP-progress):Repository to track the progress in Natural Language Processing (NLP), including the datasets and the current state-of-the-art for the most common NLP tasks.
 * [NervanaSystems/nlp-architect](https://github.com/NervanaSystems/nlp-architect):NLP Architect by Intel AI Lab: Python library for exploring the state-of-the-art deep learning topologies and techniques for natural language processing and natural language understanding http://nlp_architect.nervanasys.com/
 * [salesforce/decaNLP](https://github.com/salesforce/decaNLP):The Natural Language Decathlon: A Multitask Challenge for NLP
