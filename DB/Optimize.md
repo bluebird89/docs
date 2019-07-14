@@ -152,12 +152,12 @@ iostat -d -k 1 3
     - 调优数据库连接池大小或者线程池大小
     - 调整数据库事务隔离级别
 * 在夜间安排批量删除，避免不必要的锁表
-* 你的客户必须使用业务、领域特定的知识，预估预期你将处理的数据库中的数据量。
+* 客户必须使用业务、领域特定的知识，预估预期将处理的数据库中的数据量
 * 对重量级、更新少的数据考虑使用应用级别的缓存
 * 不在数据库做计算，cpu计算务必移至业务层
 * 禁止使用小数存储国币,尽量少的使用除法
 * 硬盘操作可能是最重大的瓶颈：把数据变得紧凑会对这种情况非常有帮助，因为这减少了对硬盘的访问。需要留够足够的扩展空间
-* 固定长度的表会更快：固定长度的表会提高性能，因为MySQL搜寻得会更快一些，因为这些固定的长度是很容易计算下一个数据的偏移量的，所以读取的自然也会很快。固定长度的表也更容易被缓存和重建。不过，唯一的副作用是，固定长度的字段会浪费一些空间，因为定长的字段无论你用不用，他都是要分配那么多的空间。
+* 固定长度的表会更快：固定长度的表会提高性能，因为MySQL搜寻得会更快一些，因为这些固定的长度是很容易计算下一个数据的偏移量的，所以读取的自然也会很快。固定长度的表也更容易被缓存和重建。不过，唯一的副作用是，固定长度的字段会浪费一些空间，因为定长的字段无论用不用，都是要分配那么多的空间
 * 拆分大的DELETE 或INSERT 语句
 * 平衡范式与冗余，为提高效率可以牺牲范式设计，冗余数据.保持数据最小量的冗余 — 不要复制没必要的数据
 * 尽量避免NULL并且提供默认值:把可为 NULL的列改为 NOT NULL不会对性能提升有多少帮助，只是如果计划在列上创建索引，就应该将该列设置为 NOT NULL
@@ -171,7 +171,7 @@ iostat -d -k 1 3
     - 例外：lnnoDB 使用单独的位 (bit) 存储NULL值， 所以对于稀疏数据有很好的空间效率
 * 数据类型
     - 遵循小而简单：满足值的范围的需求前提下，井且预留未来增长空间的前提下，尽可能选择长度小的，更小的数据类型通常更快，占用更少的磁盘、内存和CPU缓存，I/O高效 并且处理时需要的CPU周期也更少
-    - 整数类型
+    - 整数类型：尽量使用TINYINT、SMALLINT、MEDIUM_INT作为整数类型而非INT，如果非负则加上UNSIGNED
         * 整数通常是标识列最好的选择， 因为它们很快并且可以使用AUTO_INCREMENT
         + 整数 (whole number)
             * 可以使用这几种整数类型：TINYINT, SMALLINT, MEDIUMINT, INT, BIGINT。分别使用8,16, 24, 32, 64位存储空间
@@ -192,7 +192,7 @@ iostat -d -k 1 3
             * 和整数类型一样，能选择的只是存储类型； MySQL使用DOUBLE作为内部浮点计算的类型。 因为需要额外的空间和计算开销，所以应该尽扯只在对小数进行精确计算时才使用DECIMAL。
             * 在数据最比较大的时候， 可以考虑使用BIGINT代替DECIMAL, 将需要存储的货币单位根据小数的位数乘以相应的倍数即可。
         + 整型比字符操作代价更低：因为字符集和校对规则（排序规则 ）使字符比较比整型比较更复杂,会使用整型来存储ip地址，使用 DATETIME来存储时间，而不是使用字符串
-    - 字符串类型
+    - 字符串类型：只分配真正需要的空间
         + VARCHAR 用于存储可变⻓字符串，长度支持到 65535 需要使用1或2个额外字节记录字符串的长度
             * 适合：字符串的最大⻓度比平均⻓度⼤很多；更新很少
             * 节约空间，因为CHAR是固定长度，而VARCHAR不是（utf8 不受这个影响）
@@ -203,10 +203,11 @@ iostat -d -k 1 3
             * 更长的列会消耗更多的内存， 因为MySQL通常会分配固定大小的内存块来保存内部值。 尤其是使用内存临时表进行排序或操作时会特别糟糕。 在利用磁盘临时表进行排序时也同样糟糕。
             * 最好的策略是只分配真正需要的空间
         + SELECT uid FROM t_user WHERE phone=13812345678 用 SELECT uid FROM t_user WHERE phone=’13812345678’ phone 为varchar
-        + 字符串类型 如果可能， 应该避免使用字符串类型作为标识列， 因为它们很消耗空间， 并且通常比数字类型慢。
-    - 日期和时间类型
-        + TIMESTAMP使用4个字节存储空间， DATETIME使用8个字节存储空间。
-        + TIMESTAMP只能表示1970 - 2038年，比 DATETIME表示的范围小得多，而且 TIMESTAMP的值因时区不同而不同。
+        + 字符串类型 如果可能， 应该避免使用字符串类型作为标识列， 因为它们很消耗空间， 并且通常比数字类型慢
+        + 使用枚举或整数代替字符串类型
+    - 日期和时间类型：尽量使用TIMESTAMP而非DATETIME
+        + TIMESTAMP使用4个字节存储空间， DATETIME使用8个字节存储空间
+        + TIMESTAMP只能表示1970 - 2038年，比 DATETIME表示的范围小得多，而且 TIMESTAMP的值因时区不同而不同
     - 尽可能不使用TEXT/BLOB类型
         + 确实需要的话，建议拆分到子表中，不要和主表放在一起，避免SELECT * 的时候读性能太差。
         + 非必要的大量的大字段查询会淘汰掉热数据，导致内存命中率急剧降低，影响数据库性能
@@ -226,7 +227,7 @@ iostat -d -k 1 3
     + 如果存储 UUID 值， 则应该移除 "-"符号。
     + 特殊类型数据 某些类型的数据井不直接与内置类型一致
         * 低千秒级精度的时间戳
-        * IPv4地址:人们经常使用VARCHAR(15)列来存储IP地址，然而， 它们实际上是32位无符号整数，不是字符串。用小数点将地址分成四段的表示方法只是为了让人们阅读容易。所以应该用无符号整数存储IP地址。MySQL提供INET_ATON()和INET_NTOA()函数在这两种表示方法之间转换
+        * 整型来存IPv4地址:实际上是32位无符号整数，不是字符串。用小数点将地址分成四段的表示方法只是为了让人们阅读容易。所以应该用无符号整数存储IP地址。MySQL提供INET_ATON()和INET_NTOA()函数在这两种表示方法之间转换
 * 分离频繁更新和频繁读取的数据，新增字段时分析使用链接表还是扩展行
 * 规范
     - 控制单表数据量:单表1G体积 500W⾏,控制在千万级
@@ -470,15 +471,15 @@ while (1) {
 
 * EXPLAIN：可以知道MySQL是如何处理SQL语句的,分析SQL语句的执行情况，索引使用、扫描范围
     - select_type:表示查询的类型
-        - SIMPLE： 表示此查询不包含 UNION 查询或子查询
-        * PRIMARY： 表示此查询是最外层的查询
+        - SIMPLE： 简单查询:不包含 UNION 查询或子查询
+        * PRIMARY： 主查询，或者是最外面的查询语句
         * SUBQUERY： 子查询中的第一个 SELECT
         * UNION： 表示此查询是 UNION 的第二或随后的查询
         * DEPENDENT UNION： UNION 中的第二个或后面的查询语句, 取决于外面的查询
         * UNION RESULT, UNION 的结果
         * DEPENDENT SUBQUERY: 子查询中的第一个 SELECT, 取决于外面的查询. 即子查询依赖于外层查询的结果.
         * DERIVED：衍生，表示导出表的SELECT（FROM子句的子查询）
-    - table:输出结果集的表
+    - table:查询的表
     - type:表的连接类型(system和const为佳),从最好到最差的连接类型为system、const、eq_reg、ref、range、index和ALL
         + system、const：可以将查询的变量转为常量.  如id=1; id为 主键或唯一键. 表中只有一条数据， 这个类型是特殊的 const 类型。
         + const: 针对主键或唯一索引的等值查询扫描，最多只返回一行数据。 const 查询速度非常快， 因为它仅仅读取一次即可。例如下面的这个查询，它使用了主键索引，因此 type 就是 const 类型的：explain select * from user_info where id = 2；
@@ -601,6 +602,52 @@ if ($stmt = $mysqli->prepare("SELECT username FROM user WHERE state=?")) {
 }
 ```
 
+## 批量插入
+
+* 合并数据:合并后日志量（MySQL的binlog和innodb的事务让日志）减少了，降低日志刷盘的数据量和频率，同时也能减少SQL语句解析的次数，减少网络传输的IO。
+    - bulk_insert_buffer_size=120M 或者更大
+    - 在同一SQL中务必不能超过SQL长度限制，通过max_allowed_packet配置可以修改，默认是1M，测试时修改为8M
+* 事物
+    - 有innodb_log_buffer_size配置项，超过这个值会把innodb的数据刷到磁盘中，这时，效率会有所下降
+* 对于Innodb类型:数据有序插入,导入的数据按照主键的顺序排列
+* MyISAM:禁用索引
+* Load Data:将假设各数据列的值以制表符（t）分隔，各数据行以换行符（n）分隔，数据值的排列顺序与各数据列在数据表里的先后顺序一致
+* 数据量较大时（1千万以上），性能会急剧下降，这是由于此时数据量超过了innodb_buffer的容量，每次定位索引涉及较多的磁盘读写操作，性能下降较快
+* 预处理
+
+```sql
+INSERT INTO TBL_TEST (id) VALUES (1), (2), (3)
+
+## Myisam类型:关闭MyISAM表非唯一索引的更新
+ALTER TABLE tblname DISABLE KEYS;
+loading the data
+ALTER TABLE tblname ENABLE KEYS;
+```
+
+## 批量更新
+
+* replace into 操作本质是对重复的记录先delete 后insert，如果更新的字段不全会将缺失的字段置为缺省值，用这个要悠着点！否则不小心清空大量数据可不是闹着玩的！！！
+* insert into 则是只update重复记录，不会改变其它字段。
+
+
+```sql
+UPDATE categories
+  SET display_order = CASE id
+    WHEN 1 THEN 3
+    WHEN 2 THEN 4
+    WHEN 3 THEN 5
+  END,
+  title = CASE id
+    WHEN 1 THEN 'New Title 1'
+    WHEN 2 THEN 'New Title 2'
+    WHEN 3 THEN 'New Title 3'
+  END
+WHERE id IN (1,2,3)
+
+replace into test_tbl (id,dr) values (1,'2'),(2,'3'),...(x,'y');
+insert into test_tbl (id,dr) values (1,'2'),(2,'3'),...(x,'y') on duplicate key update dr=values(dr);
+```
+
 #### 维护优化
 
 * 定期分析和检查表
@@ -633,7 +680,10 @@ optimize table tbl_name;
 
 ## 工具
 
-* Query Monitor:数据库查询特性使其成为定位慢SQL查询的宝贵工具。该插件会报告所有页面请求过程中的数据库请求，并且可以通过调用这些查询代码或者原件
+* sysbench：一个模块化，跨平台以及多线程的性能测试工具
+* iibench-mysql：基于 Java 的 MySQL/Percona/MariaDB 索引进行插入性能测试工具
+* tpcc-mysql：Percona开发的TPC-C测试工具
+* Query Monitor:数据库查询特性使其成为定位慢SQL查询工具。该插件会报告所有页面请求过程中的数据库请求，并且可以通过调用这些查询代码或者原件
 * [Meituan-Dianping/SQLAdvisor](https://github.com/Meituan-Dianping/SQLAdvisor):输入SQL，输出索引优化建议
 
 ## 行为规范

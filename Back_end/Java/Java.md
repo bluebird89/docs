@@ -920,6 +920,10 @@ public class Puppy{
   3.如何解决检索难题；(数据库代理中间件：mysql-proxy、Cobar、MaxScale等;)
   4.如何解决统计分析问题；(离线、近实时)
 
+把精力放在java基础，设计模式，jvm原理，spring+springmvc原理及源码，linux，mysql事务隔离与锁机制，mongodb，http/tcp，多线程，分布式架构（dubbo，dubbox，spring cloud），弹性计算架构，微服务架构（springboot+zookeeper+docker+jenkins），java性能优化，以及相关的项目管理等等。
+
+后端追求的是：三高（高并发，高可用，高性能），安全，存储，业务等等。
+
 ## 客户端
 
 - JavaFX
@@ -972,6 +976,7 @@ JavaEE/JDBC/Weblogic
 
 ## 工具
 
+* [alibaba/p3c](https://github.com/alibaba/p3c):Alibaba Java Coding Guidelines pmd implements and IDE plugin
 * [Java SE](https://www.oracle.com/technetwork/java/javase)
 * [apache/httpcomponents-core](https://github.com/apache/httpcomponents-core)
 * [apache/tomcat](https://github.com/apache/tomcat)

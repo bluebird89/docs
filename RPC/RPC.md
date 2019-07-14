@@ -58,6 +58,44 @@
     - 对外用 REST 更易理解，更通用些
     - 当然以现有的服务器性能，如果两个系统间调用不是特别频繁，对性能要求不是非常高，REST 的性能完全可以满足。
 
+```php
+<?php
+
+const RPC_EOL = "\r\n\r\n";
+
+function request($host, $class, $method, $param, $version = '1.0', $ext = []) {
+    $fp = stream_socket_client($host, $errno, $errstr);
+    if (!$fp) {
+        throw new Exception("stream_socket_client fail errno={$errno} errstr={$errstr}");
+    }
+
+    $req = [
+        "jsonrpc" => '2.0',
+        "method" => sprintf("%s::%s::%s", $version, $class, $method),
+        'params' => $param,
+        'id' => '',
+        'ext' => $ext,
+    ];
+    $data = json_encode($req) . RPC_EOL;
+    fwrite($fp, $data);
+
+    $result = '';
+    while (!feof($fp)) {
+        $tmp = stream_socket_recvfrom($fp, 1024);
+        if (strpos($tmp, RPC_EOL)) {
+            break;
+        } else {
+            $result .= $tmp;
+        }
+    }
+
+    fclose($fp);
+    return json_decode($result, true);
+}
+
+var_dump(request('tcp://127.0.0.1:18307', \App\Rpc\Lib\UserInterface::class, 'getList',  [1, 2], "1.0"));
+```
+
 ##  [brpc/brpc](https://github.com/brpc/brpc)
 
 Brpc 是百度开源的一个基于 protobuf 接口的 RPC 框架，它囊括了百度内部所有 RPC 协议，并支持多种第三方协议，到现在为止，brpc 在 GitHub 上已经拥有 6000 多个关注、17 个代码贡献者。
