@@ -110,10 +110,13 @@ int close(int fd);
         + 在epoll出世前，QQ用户量剧增，但是select以及select的高配版本poll都无法解决他们的问题，于是乎QQ当年的服务器就不得不用UDP协议来避规这个问题，一直到后来有了epoll，QQ开始逐步在PC客户端中的配置项中允许用户选择UDP服务器或TCP服务器
 * 信号驱动IO
 
+## 工具
+
+* [henrylee2cn/teleport](https://github.com/henrylee2cn/teleport):Teleport is a versatile, high-performance and flexible socket framework. It can be used for RPC, micro services, peer-peer, push services, game services and so on. https://github.com/henrylee2cn/tpdoc
+
 ## 资源
 
 <http://blog.csdn.net/hguisu/article/details/7445768/>
-
 <http://blog.csdn.net/hguisu/article/details/7444092>
 <http://blog.csdn.net/hguisu/article/details/7448528>
 <http://blog.csdn.net/tongdoudpj/article/details/1750045>
@@ -121,7 +124,3 @@ int close(int fd);
 <http://www.cnblogs.com/JohnTsai/p/5197646.html>
 
 http://blog.csdn.net/dragonyangang/article/details/77937042
-
-## 工具
-
-* [henrylee2cn/teleport](https://github.com/henrylee2cn/teleport):Teleport is a versatile, high-performance and flexible socket framework. It can be used for RPC, micro services, peer-peer, push services, game services and so on. https://github.com/henrylee2cn/tpdoc

@@ -27,6 +27,38 @@ brew services start php
     - /private/etc/php-fpm.d/www.conf.default
     - /usr/local/etc/php/7.3/php-fpm.d/www.conf
 
+## 原理
+
+* 在 Nginx + PHP-Fpm 模式下开发非常简单 不用担心内存泄露
+    - nginx基于epoll事件模型，一个worker同时可处理多个请求
+    - fpm-worker在同一时刻可处理一个请求
+    - fpm-worker每次处理请求前需要重新初始化mvc框架，然后再释放资源
+    - 高并发请求时，fpm-worker不够用，nginx直接响应502
+    - fpm-worker进程间切换消耗大
+* php的fastcgi进程管理器php-fpm和nginx的配合已经运行得足够好，但是由于php-fpm本身是同步阻塞进程模型，在请求结束后释放所有的资源（包括框架初始化创建的一系列对象，导致PHP进程空转（创建<-->销毁<-->创建）消耗大量的CPU资源，从而导致单机的吞吐能力有限。请求夯住，会导致 CPU 不能释放资源， 大大浪费了 CPU 使用率。
+* php-fpm进程模型也非常简单的，是 属于预派生子进程模式。Apache 就是采用该模式 来一个请求就 fork 一个进程，进程的开销是非常大的。这会大大降低吞吐率，并发数由进程数决定。
+    - 程序启动后就会创建N个进程。每个子进程进入Accept，等待新的连接进入
+    - 当客户端连接到服务器时，其中一个子进程会被唤醒，开始处理客户端请求，并且不再接受新的TCP连接
+    - 当此连接关闭时，子进程会释放，重新进入Accept，参与处理新的连接
+* 优点
+    - 完全可以复用进程，不需要太多的上下文切换
+* 缺点
+    - 严重依赖进程的数量解决并发问题，一个客户端连接就需要占用一个进程，工作进程的数量有多少，并发处理能力就有多少。操作系统可以创建的进程数量是有限的。
+    - PHP框架初始化会占用大量的计算资源，每个请求都需要初始化。
+    - 启动大量进程会带来额外的进程调度消耗。数百个进程时可能进程上下文切换调度消耗占CPU不到1%可以忽略不计，如果启动数千甚至数万个进程，消耗就会直线上升。调度消耗可能占到 CPU 的百分之几十甚至 100%。
+    - 如果请求一个第三方请求非常慢，请求过程中会一直占用 CPU 资源，浪费了昂贵的硬件资源
+* 解决
+    - IO密集性业务：频繁的上下文切换
+        + 提高IO复用的能力
+        + 将php-fpm同步阻塞模式替换为异步非阻塞模式，异步开启模式比较复杂不易维护，当然不一定使用php-fpm
+    - 线程模式开发太过复杂
+        + 一个进程中能开的线程数也有限，线程太多也会增加 CPU 的负荷和内存资源，线程没有阻塞态，IO 阻塞也不能主动让出 CPU资源，属于抢占式调度模型。不太适合 php 开发。
+    - swoole 4.+开启了全协程模式，让同步代码异步执行
+
+php-fpm工作模式
+
+![php-fpm工作模式](../../_static/php-fpm-struct.png "Optional title")
+
 ## 服务
 
 ```sh
@@ -57,9 +89,11 @@ sudo systemctl status php7.3-fpm
 killall php-fpm
 ```
 
-## 服务
+## 配置
 
 * nginx 一般是把请求根据请求类型，加载 对应的 fast-cgi 模块，fascgi管理进程选择cgi 子进程处理结果，并返回给nginx
+* 静态：直接开启指定数量的php-fpm进程，不再增加或者减少
+* 动态：开始的时候开启一定数量的php-fpm进程，当请求量变大的时候，动态的增加php-fpm进程数到上限，当空闲的时候自动释放空闲的进程数到一个下限。
 * 通信方式
     - Unix socket:又叫 IPC(inter-process communication 进程间通信) socket，用于实现同一主机上的进程间通信，这种方式需要在 nginx配置文件中填写 php-fpm 的 socket 文件位置。
         + 与管道相比，Unix domain sockets 既可以使用字节流和数据队列，而管道通信则只能通过字节流。
@@ -70,7 +104,7 @@ killall php-fpm
     - unix socket 高并发时不稳定，连接数爆发时，会产生大量的长时缓存，在没有面向连接协议的支撑下，大数据包可能会直接出错不返回异常。而 tcp 这样的面向连接的协议，可以更好的保证通信的正确性和完整性。
     - 由于 socket 文件本质上是一个文件，存在权限控制的问题，所以需要注意 nginx 进程的权限与 php-fpm 的权限问题，不然会提示无权限访问
 
-```sh
+```
 listen = 127.0.0.1:9000
 listen = /var/run/php-fpm.sock
 
@@ -80,14 +114,7 @@ location ~ \.php$ {
     fastcgi_pass   127.0.0.1:9000; # tcp 方式，php-fpm 监听的 IP 地址和端口
    # fasrcgi_pass /usr/run/php-fpm.sock # unix socket 连接方式
 }
-```
 
-## 配置
-
-* 静态：直接开启指定数量的php-fpm进程，不再增加或者减少
-* 动态：开始的时候开启一定数量的php-fpm进程，当请求量变大的时候，动态的增加php-fpm进程数到上限，当空闲的时候自动释放空闲的进程数到一个下限。
-
-```
 [global]
 pid=run/php-fpm.pid # pid设置，默认在安装目录中的var/run/php-fpm.pid，建议开启
 
@@ -148,9 +175,7 @@ rlimit_core = 0 #设置核心rlimit最大限制值. 可用值: 'unlimited' 、0�
 chroot = #启动时的Chroot目录. 所定义的目录需要是绝对路径. 如果没有设置, 则chroot不被使用.
 chdir = #设置启动目录，启动时会自动Chdir到该目录. 所定义的目录需要是绝对路径. 默认值: 当前目录，或者/目录（chroot时）
 catch_workers_output = yes #重定向运行过程中的stdout和stderr到主要的错误日志文件中. 如果没有设置, stdout 和 stderr 将会根据FastCGI的规则被重定向到 /dev/null . 默认值: 空.
-```
 
-```
 # /private/etc/php-fpm.conf
 error_log = /usr/local/var/log/php-fpm.log # 开启日志
 
@@ -617,7 +642,6 @@ static 设置取决于你服务器有多少闲置内存。大多数情况下，�
     - static 设置取决于你服务器有多少闲置内存
 * 短连接：应对并发消耗过多的资源开销
 * 长连接：不同请求会使用同一个连接句柄
-
 
 ## 状态查看
 
