@@ -108,6 +108,7 @@ NoSQL主要用于解决以下几种问题
 * [TDDL](link)
 * [Vitess](link)
 * [OneProxy](link)
+* [Gaea](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650779105&idx=1&sn=ed5093ab25a2b002cded6485fde97562&chksm=f3f91874c48e916252f7b46cccf5e4d6473feccaa4c078a84bbe24495317c6bdc59a59dbe699)
 
 ## [Lede-Inc/Cetus](https://github.com/Lede-Inc/cetus)
 
