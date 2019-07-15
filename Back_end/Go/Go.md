@@ -668,6 +668,7 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源图书，涵盖CGO、Go汇编语言、RPC实现、Protobuf插件实现、Web框架实现、分布式系统等高阶主题 https://legacy.gitbook.com/book/chai2010/advanced-go-programming-book/details
 * [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN):《The Way to Go》中文译本，中文正式名《Go 入门指南》
 * 并发编程
+* [Mastering_Go_ZH_CN](https://wskdsgcf.gitbook.io/mastering-go-zh-cn/)
 
 ## 项目
 
