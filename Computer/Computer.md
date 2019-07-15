@@ -225,3 +225,4 @@ total = *p + 200;
 *   [freecodecamp](https://www.freecodecamp.org/):Learn to code for free.
 *   [scratch](https://scratch.mit.edu/)
 *   [codecademy](https://www.codecademy.com/)
+*   [wxwmd/HIT-Computer-Courses](https://github.com/wxwmd/HIT-Computer-Courses):哈工大计算机课程资料，包含计算机系统等多个科目

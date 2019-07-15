@@ -6,6 +6,7 @@ The Prometheus monitoring system and time series database. https://prometheus.io
 
 * [grafana/loki](https://github.com/grafana/loki):Like Prometheus, but for logs.
 * [improbable-eng/thanos](https://github.com/improbable-eng/thanos):Highly available Prometheus setup with long term storage capabilities.
+* [coreos/prometheus-operator](https://github.com/coreos/prometheus-operator):Prometheus Operator creates/configures/manages Prometheus clusters atop Kubernetes
 
 ## 参考
 
