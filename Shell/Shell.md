@@ -782,6 +782,9 @@ cat ~/pub_key >>~/.ssh/authorized_keys //将内容追加到authorized_keys文件
 192.168.91.134
 
 ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root/.ssh/id_rsa.pub') }}'" -k
+
+# have SSH host keys for those IPs in your ~/.ssh/known_hosts
+ssh-keygen -R <IP_ADDRESS>
 ```
 
 ## [Hyper](https://hyper.is)

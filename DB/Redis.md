@@ -1257,6 +1257,7 @@ public void delBigList(String host, int port, String password, String bigListKey
 
 ## 参考
 
+* [Redis 教程](http://www.runoob.com/redis)
 * [Redis参考手册](http://www.php.cn/manual/view/16063.html)
 * [redis 数据类型详解 以及 redis适用场景场合](http://www.cnblogs.com/mrhgw/p/6278619.html)
 * [使用Redis实现分布式锁及其优化](https://juejin.im/entry/5a0280d551882546d71ec42e)

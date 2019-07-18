@@ -701,6 +701,8 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
   - [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
   - [Go Packages](https://godoc.org/)
   - [moovweb/gvm](https://github.com/moovweb/gvm):Go Version Manager http://github.com/moovweb/gvm
+* network
+    - [davyxu/cellnet](https://github.com/davyxu/cellnet):High performance, simple, extensible golang open source network library
 * UI
   - [andlabs/ui](https://github.com/andlabs/ui):Platform-native GUI library for Go.
 * desktop apps
