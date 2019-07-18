@@ -181,7 +181,6 @@ apt-get install -y php5-memcached
 * 一个常驻主进程, 只负责任务分发, 逻辑更清楚
 * 完全支持多线程
 * 实现定时任务
-    - 
 * 开发桌面应用就是使用PHP-CLI和GTK包
 * linux下用php编写shell脚本
 * [ircmaxell/phpvm](https://github.com/ircmaxell/phpvm):A PHP version manager for CLI PHP
@@ -268,7 +267,6 @@ php -dvld.active=1 -dvld.excute=0 at.php # excute =0 opcode在么 并不执行
 * Session 会话
     - 放在 Redis 或者 Memcached 中，可以减少磁盘的 IO 操作频率，还可以方便业务服务器伸缩
 * error_reporting
-    - 
 * cgi.fix_pathinfo:值由1改为0
     - nginx通过 fastcgi_param 指令将参数传递给 FastCGI Server
     - 访问URL：http://phpvim.net/foo.jpg/a.php/b.php/c.php
@@ -488,6 +486,19 @@ echo $m->obj->a;//输出1，不随新对象改变，还是保持了原来的属�
             - `addslashes` 转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
             - `urldecode` 解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
             - `ord ( string $string ) : int`:转换字符串第一个字节为 0-255 之间的值
+        * printf
+            - %b binary representation
+            - %c print the ascii character, same as chr() function
+            - %d standard integer representation
+            - %e scientific notation
+            - %u unsigned integer representation of a positive integer
+            - %u unsigned integer representation of a negative integer
+            - %f floating point representation
+            - %o octal representation
+            - %s string representation
+            - %x hexadecimal representation (lower-case)
+            - %X hexadecimal representation (upper-case)
+            - %+d  sign specifier on a positive or negative integer
     + Integer（整型）
     + Float（浮点型）
         * NaN:代表着任何不同值，不应拿 NAN 去和其它值进行比较，包括其自身，应该用 is_nan() 来检查
@@ -564,6 +575,8 @@ print # 一个语法结构(language constructs), 并不是一个函数, 参数�
         * `array_map()`:处理后的数组, 要得到处理后的元素值,需要return返回
         * `array_walk()`:返回true或者false,要得到处理后的元素值，需要在传入参数值加 & 引用符号
         * `array_column($array, cloumnName[, indexCloumn])`
+    + 遍历
+        * each — 返回数组中当前的键／值对并将数组指针向前移动一步
 * Object（对象）
 * callback:接受用户自定义的回调函数作为参数。回调函数不止可以是简单函数，还可以是对象的方法，包括静态类方法。
 * Resource 资源

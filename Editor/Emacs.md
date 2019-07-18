@@ -279,6 +279,7 @@ M-g                    设置字体
 
 ## 参考
 
+* [joaotavora/yasnippet](https://github.com/joaotavora/yasnippet):A template system for Emacs http://joaotavora.github.com/yasnippet/
 * [purcell/emacs.d](https://github.com/purcell/emacs.d):An Emacs configuration bundle with batteries included
 * [emacs-tw/awesome-emacs](https://github.com/emacs-tw/awesome-emacs):A community driven list of useful Emacs packages, libraries and others.
 * [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust ❤️ Emacs

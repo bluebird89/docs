@@ -517,6 +517,8 @@ rpm -ql httpd  #查询所有安装httpd的目录和文件
 sudo apt-get autoclean
 sudo apt-get autoremove
 sudo apt-get clean
+
+./configure -h
 ```
 
 ### web设置

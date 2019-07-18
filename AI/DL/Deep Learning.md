@@ -43,6 +43,7 @@
     - 图书：https://nndl.github.io/nndl-book.pdf
     - 示例代码：https://github.com/nndl/nndl-codes
     - 课程练习：https://github.com/nndl/exercise
+* [](https://www.cs.toronto.edu/~hinton/)
 
 ## 图书
 
@@ -75,3 +76,4 @@
 * [nndl/nndl.github.io](https://github.com/nndl/nndl.github.io):《神经网络与深度学习》 Neural Network and Deep Learning https://nndl.github.io
 * [osforscience/deep-learning-ocean](https://github.com/osforscience/deep-learning-ocean):📡 All You Need to Know About Deep Learning - A kick-starter
 * [The Matrix Calculus You Need For Deep Learning](https://explained.ai/matrix-calculus/index.html)
+* [zeusees/HyperDL-Tutorial](https://github.com/zeusees/HyperDL-Tutorial):深度学习教程整理 | 干货 http://www.zeusee.com

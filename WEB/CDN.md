@@ -39,3 +39,8 @@ Content Delivery Network，即内容分发网络。CDN 是构建在网络之上�
     - 用户通过 CDN 输出对应格式
 
 ![原理](../_static/cdn.jpg "Optional title")
+
+
+## Tool
+
+* [justjavac/ReplaceGoogleCDN](https://github.com/justjavac/ReplaceGoogleCDN):♋️ 一个 Chrome 插件：将 Google CDN 替换为国内的
