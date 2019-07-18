@@ -1895,6 +1895,67 @@ LVS、HAProxy、Nginx
 
 * “垂直分割”是一种把数据库中的表按列变成几张表的方法，这样可以降低表的复杂度和字段的数目
 
+## sysbench
+
+## [10万连接](https://mp.weixin.qq.com/s?__biz=MzAwNzA5MzA0NQ==&mid=2652150991&idx=1&sn=d6df2a44544d61b5255d0cb5e4c97d12&chksm=80e35295b794db833fd4408a3d34096c66efdca5c4054a8e741b2ce3a759bde2b4875e164a10)
+
+* Percona Server的线程池
+* 正确的网络设置
+* 为MySQL服务器配置多个IP地址（每个IP限制65535个连接）
+
+```
+[mysqld]
+datadir {{ mysqldir }}
+ssl=0
+skip-log-bin
+log-error=error.log
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+character_set_server=latin1
+collation_server=latin1_swedish_ci
+skip-character-set-client-handshake
+innodb_undo_log_truncate=off
+# general
+table_open_cache = 200000
+table_open_cache_instances=64
+back_log=3500
+max_connections=110000
+# files
+innodb_file_per_table
+innodb_log_file_size=15G
+innodb_log_files_in_group=2
+innodb_open_files=4000
+# buffers
+innodb_buffer_pool_size= 40G
+innodb_buffer_pool_instances=8
+innodb_log_buffer_size=64M
+# tune
+innodb_doublewrite= 1
+innodb_thread_concurrency=0
+innodb_flush_log_at_trx_commit= 0
+innodb_flush_method=O_DIRECT_NO_FSYNC
+innodb_max_dirty_pages_pct=90
+innodb_max_dirty_pages_pct_lwm=10
+innodb_lru_scan_depth=2048
+innodb_page_cleaners=4
+join_buffer_size=256K
+sort_buffer_size=256K
+innodb_use_native_aio=1
+innodb_stats_persistent = 1
+#innodb_spin_wait_delay=96
+innodb_adaptive_flushing = 1
+innodb_flush_neighbors = 0
+innodb_read_io_threads = 16
+innodb_write_io_threads = 16
+innodb_io_capacity=1500
+innodb_io_capacity_max=2500
+innodb_purge_threads=4
+innodb_adaptive_hash_index=0
+max_prepared_stmt_count=1000000
+innodb_monitor_enable = '%'
+performance_schema = ON
+```
+
 ### mysqladmin
 
 ## 维护

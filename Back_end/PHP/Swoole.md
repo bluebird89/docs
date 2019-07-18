@@ -36,19 +36,35 @@ PHP的 协程 高性能网络通信引擎，使用C/C++语言编写，提供了�
 * 4.0
     - 提供了完整的协程(Coroutine)+通道(Channel)特性，带来全的CSP编程模型。应用层可使用完全同步的编程方式，底层自动实现异步IO
     - 底层加入 Hook 机制，使原生的 Mysql PDO、Redis 操作协程化
+* 4.3
+    - 异步回调模块已过时，目前仅修复 BUG，不再进行维护, 且在4.3版本中移除了异步模块。请使用 Coroutine 协程模块。
 * 4.4
     - 支持 CURL 协程化
 
 ## 安装
 
 ```sh
+brew install openssl
+brew install nghttp2
+
 wget https://github.com/swoole/swoole-src/archive/v1.10.2.zip
 tar zxvf v1.10.2.zip
 cd swoole
 phpize
 ./configure  --enable-openssl --enable-async-redis --with-php-config=/Applications/MAMP/bin/php/php7.1.0/bin/php-config    --prefix=/usr/local   CPPFLAGS="-I/usr/local/opt/openssl/include"  LDFLAGS="-L/usr/local/opt/openssl/lib" --enable-swoole-debug
-make
-sudo make install # 编译后的模块在 /modules 中，将swoole.so添加到php.ini中
+./configure \
+--enable-coroutine \
+--enable-openssl  \
+--enable-http2  \
+--enable-async-redis \
+--enable-sockets \
+--enable-mysqlnd
+
+// Enable openssl support, require openssl library
+sudo pecl download swoole
+./configure --enable-openssl --enable-http2 --enable-sockets --enable-mysqlnd -with-openssl-dir=/usr/local/Cellar/openssl/1.0.2s/
+
+make clean && make && sudo make install  # 编译后的模块在 /modules 中，将swoole.so添加到php.ini中
 
 # php.ini
 extension=swoole.so
@@ -166,6 +182,7 @@ php --ri swoole
         + 完全是同步阻塞模式
         + 方法
             * onTask
+            * finsh
             * onWorkerStart
     - 底层会为Worker进程、TaskWorker进程分配一个唯一的ID
     - 不同的Worker和TaskWorker进程之间可以通过sendMessage接口(unix socket)进行通信
@@ -231,12 +248,17 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
     - swoole_timer_after 指定的时间后执行
     - swoole_timer_clear 删除定时器
 * swoole_async_read/swoole_async_write 文件系统操作的异步接口
+    - 4.3 已放弃，用协程实现
+* MySQL
+    - 勿同时使用异步回调和协程MySQL
+    - swoole_mysql 已移除
+    - Swoole\Redis 移除
 
 ## 协程 Coroutine
 
 * 在2.0开始内置协程(Coroutine)的能力，提供了具备协程能力IO接口（统一在命名空间Swoole\Coroutine*）
     - 在4.4之前的版本中，Swoole一直不支持CURL协程化，在代码中无法使用curl。由于curl使用了libcurl库实现，无法直接hook它的socket，4.4版本使用Swoole\Coroutine\Http\Client模拟实现了curl的API，并在底层替换了curl_init等函数的C Handler。
-* 协程是子程序的一种， 可以通过yield的方式转移程序控制权，协程之间不是调用者与被调用者的关系，而是彼此对称、平等的
+* 协程是子程序的一种，可以通过yield的方式转移程序控制权，协程之间不是调用者与被调用者的关系，而是彼此对称、平等的
 * 为每一个请求创建对应的协程，根据IO的状态来合理的调度协程
 * 有轻量，高效，快速等特点
     - 用户态线程，遇到 IO 主动让出
@@ -265,6 +287,7 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
     - 官方和社区已经贡献了很多协程版 API 可供使用
     - 可以使用 swoole 提供的协程版 client 进行封装, 可以参考 官方 amqp client 封装, 将 socket() 函数实现的 tcp client, 使用 swoole 协程版 tcp client 实现即可
 * task 也可以开启协程
+* 内部调用redis mysql,执行时间为 max(redis, mysql)
 *  swoole 的协程 vs go 的协程
     -  swoole 的协程 和 golang的调度方式完全不同，每一个进程里面的协程都是串行执行所以无需担心访问资源加锁问题
     -  利用多进程实现并行
@@ -311,23 +334,50 @@ go(function () {
     sleep(1);
     echo "c";
 });
+
+function Swoole\Coroutine::create(callable $function, ...$args) : int|false;
+function go(callable $function, ...$args) : int|false; // 短名API
 ```
 
 ## 进程 Process
 
-进程管理模块，可以方便的创建子进程，进程间通信，进程管理
+* 进程管理模块，可以方便的创建子进程，进程间通信，进程管理
+* PHP自带的pcntl，存在很多不足
+    - pcntl没有提供进程间通信的功能
+    - pcntl不支持重定向标准输入和输出
+    - pcntl只提供了fork这样原始的接口，容易使用错误
+    - swoole_process提供了比pcntl更强大的功能，更易用的API，使PHP在多进程编程方面更加轻松
+* 特性：
+    - 基于Unix Socket和sysvmsg消息队列的进程间通信，只需调用write/read或者push/pop即可
+    - 支持重定向标准输入和输出，在子进程内echo不会打印屏幕，而是写入管道，读键盘输入可以重定向为管道读取数据
+    - 配合Event模块，创建的PHP子进程可以异步的事件驱动模式
+    - 提供了exec接口，创建的进程可以执行其他程序，与原PHP父进程之间可以方便的通信
+* 场景
+    - 多进程并行
+
+```sh
+pstree -p pid
+```
 
 ## Buffer
 
 强大的内存区管理工具，像C一样进行指针计算，又无需关心内存的申请和释放，而且不用担心内存越界，底层全部做好了。
 
-## Table
+## Memory
 
-基于共享内存和自旋锁实现的超高性能内存表。彻底解决线程，进程间数据共享，加锁同步等问题。
+* 优点
+    - Memory下的模块可以安全的用于异步非阻塞程序中，不存在任何IO消耗
+    - 所有模块均为多进程安全的，无需担心数据同步问题
+    - Memory相关模块对象为有限资源，不可大量创建
+* Table：基于共享内存和自旋锁实现的超高性能内存表。彻底解决线程，进程间数据共享，加锁同步等问题。
+    - swoole_table的性能可以达到单线程每秒读写200W次
+    - 应用代码无需加锁，Table内置行锁自旋锁，所有操作均是多线程/多进程安全。用户层完全不需要考虑数据同步问题。
+    - 支持多进程，Table可以用于多进程之间共享数据
+    - 使用行锁，而不是全局锁，仅当2个进程在同一CPU时间，并发读取同一条数据才会进行发生抢锁
+* 优点
+    - 进程间共享
 
-swoole_table的性能可以达到单线程每秒读写200W次
-
-## TCP/UDP压测工具
+## 压测
 
 * -c 参数，并发的数量，会启动对应数量的进程用于测试
 * -n 参数，请求的总数量，-n 10000, -c 100，平均到每个子进程的数量为100

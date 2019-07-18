@@ -1029,7 +1029,7 @@ browser reopen generate new cookie
 ## 参考
 
 * [yiisoft/yii2-apidoc](https://github.com/yiisoft/yii2-apidoc)
-* [深入理解 Yii2.0](http://www.digpage.com/index.html)
+* [深入理解 Yii2.0](http://www.digpage.com/index.html) https://www.kancloud.cn/kancloud/yii-in-depth
 * [CraryPrimitiveMan/yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
 * [CraryPrimitiveMan/OnlineCourses](https://github.com/CraryPrimitiveMan/OnlineCourses):An online courses website based on yii2
 * [多语言版本切换](https://blog.csdn.net/u012979009/article/details/51697969)

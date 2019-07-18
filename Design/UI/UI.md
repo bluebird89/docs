@@ -45,6 +45,7 @@ getstorybook
 * [airbnb/Lona](https://github.com/airbnb/Lona):A tool for defining design systems and using them to generate cross-platform UI code, Sketch files, and other artifacts.
 * [google/material-design-lite](https://github.com/google/material-design-lite):Material Design Components in HTML/CSS/JS https://getmdl.io
 * [material-components/material-components-web](https://github.com/material-components/material-components-web):Modular and customizable Material Design UI components for the web https://material.io/develop/
+* [vugu/vugu](https://github.com/vugu/vugu):Vugu: A modern UI library for Go+WebAssembly (experimental) https://www.vugu.org  https://www.vugu.org/doc/start
 
 ## Client
 

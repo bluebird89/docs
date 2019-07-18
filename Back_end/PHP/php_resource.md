@@ -328,7 +328,7 @@ open http://127.0.0.1:8000
     - [TechEmpower/FrameworkBenchmarks](https://github.com/TechEmpower/FrameworkBenchmarks):Source for the TechEmpower Framework Benchmarks project https://www.techempower.com/benchmarks/
     - [exakat/php-static-analysis-tools](https://github.com/exakat/php-static-analysis-tools):A reviewed list of useful PHP static analysis tools
     - [dreamans/phpAnalysis](https://github.com/dreamans/phpAnalysis):phpAnalysis - PHP应用性能分析系统
-    - Psalm
+    - [vimeo/psalm](https://github.com/vimeo/psalm):A static analysis tool for finding errors in PHP applications https://psalm.dev
     - Phan
     - [nunomaduro/phpinsights](https://github.com/nunomaduro/phpinsights):💡Instant PHP quality checks from your console https://phpinsights.com
     - [phpstan/phpstan](https://github.com/phpstan/phpstan):PHP Static Analysis Tool - discover bugs in your code without running it!

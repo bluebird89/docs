@@ -2,18 +2,11 @@
 
 The MongoDB Database https://www.mongodb.com/
 
-mongodb由C＋＋写就，其名字来自humongous这个单词的中间部分。关于它的一个最简洁描述为：scalable, high-performance, open source, schema-free, document-oriented database。MongoDB的主要目标是在键/值存储方式（提供了高性能和高度伸缩性）以及传统的RDBMS系统（丰富的功能）架起一座桥梁，集两者的优势于一身。
-
-数据结构：db->collection->document（BSON（binary json）存放于硬盘）
-
-跟一般的key-value数据库不一样的是，它的value中存储了结构信息
-
-以单文档为单位存储的，你可以任意给一个或一批文档新增或删除字段，而不会对其它文档造成影响，这就是所谓的schema-free，这也是文档型数据库最主要的优点。
-
-Mongo最大的特点是他支持的查询语言非常强大，其语法有点类似于面向对象的查询语言，几乎可以实现类似关系数据库单表查询的绝大部分功能，而且还支持对数据建立索引。Mongo还可以解决海量数据的查询效率，根据官方文档，当数据量达到50GB以上数据时，Mongo数据库访问速度是MySQL10 倍以上。
-
-BSON是Binary JSON 的简称，是一个JSON文档对象的二进制编码格式。BSON同JSON一样支持往其它文档对象和数组中再插入文档对象和数组，同时扩展了JSON的数据类型。如：BSON有Date类型和BinDate类型。
-BSON被比作二进制的交换格式，如同Protocol Buffers，但BSON比它更“schema-less”，非常好的灵活性但空间占用稍微大一点。
+* 由C＋＋写就，其名字来自humongous这个单词的中间部分。关于它的一个最简洁描述为：scalable, high-performance, open source, schema-free, document-oriented database。MongoDB的主要目标是在键/值存储方式（提供了高性能和高度伸缩性）以及传统的RDBMS系统（丰富的功能）架起一座桥梁，集两者的优势于一身。
+* 数据结构：db->collection->document（BSON（binary json）存放于硬盘）,BSON是Binary JSON 的简称，是一个JSON文档对象的二进制编码格式。BSON同JSON一样支持往其它文档对象和数组中再插入文档对象和数组，同时扩展了JSON的数据类型。如：BSON有Date类型和BinDate类型。
+* BSON被比作二进制的交换格式，如同Protocol Buffers，但BSON比它更“schema-less”，非常好的灵活性但空间占用稍微大一点
+* 跟一般的key-value数据库不一样的是，它的value中存储了结构信息,以单文档为单位存储的，可以任意给一个或一批文档新增或删除字段，而不会对其它文档造成影响，这就是所谓的schema-free，这也是文档型数据库最主要的优点。
+* 最大的特点是支持的查询语言非常强大，其语法有点类似于面向对象的查询语言，几乎可以实现类似关系数据库单表查询的绝大部分功能，而且还支持对数据建立索引。Mongo还可以解决海量数据的查询效率，根据官方文档，当数据量达到50GB以上数据时，Mongo数据库访问速度是MySQL10 倍以上。
 
 ## 安装
 
@@ -45,10 +38,10 @@ brew services mongodb # 启动服务
 mongo -version
 ```
 
-## 使用
+## 特点
 
-* 事务支持 MongoDB 目前只支持单文档事务，需要复杂事务支持的场景暂时不适合
-* 灵活的文档模型 JSON 格式存储最接近真实对象模型，对开发者友好，方便快速开发迭代
+* 事务支持：目前只支持单文档事务，需要复杂事务支持的场景暂时不适合
+* 灵活的文档模型：没有固定的Schema，JSON 格式存储最接近真实对象模型，对开发者友好，方便快速开发迭代
 * 高可用复制集 满足数据高可靠、服务高可用的需求，运维简单，故障自动切换
 * 可扩展分片集群 海量数据存储，服务能力水平扩展
 * 高性能 mmapv1、wiredtiger、mongorocks（rocksdb）、in-memory 等多引擎支持满足各种场景需求
@@ -58,8 +51,8 @@ mongo -version
 
 ### 服务端配置
 
-配置文件:/etc/mongod.conf
-开启mongo服务端的命令参数写入配置文档，以参数-f启动 `mongod -f C:datadbmongodb_config.config`
+* 配置文件:/etc/mongod.conf
+* 开启mongo服务端的命令，参数写入配置文档，以参数-f启动 `mongod -f C:datadbmongodb_config.config`
 
 * --dbpath ：存储MongoDB数据文件的目录` mongod * --dbpath=C:datadb`
 * --directoryperdb：指定每个数据库单独存储在一个目录中（directory），该目录位于–dbpath指定的目录下，每一个子目录都对应一个数据库名字。
@@ -78,7 +71,7 @@ mongo -version
 * --username/-u 和 –password/-p ：指定访问MongoDB数据库的账户和密码，只有当认证通过后，用户才能访问数据库；
 * --authenticationDatabase ：指定创建User的数据库，在哪个数据库中创建User时，该数据库就是User的Authentication Database；
 
-```mongodb
+```sh
 # 服务启动
 /usr/bin/mongod -auth --config /etc/mongod.conf
 
@@ -134,7 +127,6 @@ help
 
 # 查看mongod的启动参数
 db.serverCmdLineOpts()
-
 ```
 
 ## 库操作
@@ -408,6 +400,18 @@ db.students.insert([
 db.students.find();
 db.teachers.find();
 ```
+
+## mongodump mongorestore
+
+备份和恢复数据库
+
+## mongoexport和mongoimport
+
+导入导出JSON、CSV和TSV数据
+
+## mongosniff
+
+网络嗅探工具，用来观察发送到数据库的操作
 
 ## docker
 
