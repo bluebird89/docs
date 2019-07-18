@@ -58,6 +58,17 @@ SAS网站的Eight levels of analytics
 ## 教程
 
 * [数据可视化入门教程](https://www.yuque.com/mo-college/beginner-tutorial)
+* [Introduction to Data Science Specialization](http://coursegraph.com/coursera-specializations-introduction-data-science):4门子课程，涵盖数据科学简介，面向数据科学的开源工具，数据科学方法论，SQL基础
+* [Applied Data Science Specialization](http://coursegraph.com/coursera-specializations-applied-data-science):面向数据科学的Python，Python数据可视化，Python数据分析，数据科学应用毕业项目
+* [Applied Data Science with Python Specialization](http://coursegraph.com/coursera-specializations-data-science-python):通过Python编程语言介绍数据科学的相关领域，包括应用统计学，机器学习，信息可视化，文本分析和社交网络分析等知识
+* [Data Science at Scale Specialization](http://coursegraph.com/coursera-specializations-data-science):包括3门子课程和1个毕业项目课程，包括大规模数据系统和算法，数据分析模型与方法，数据科学结果分析
+* [Advanced Data Science with IBM Specialization](http://coursegraph.com/coursera-specializations-advanced-data-science-ibm):4门子课程，涵盖数据科学基础，高级机器学习和信号处理，结合深度学习的人工智能应用
+* [Data Mining Specialization](http://coursegraph.com/coursera-specializations-data-mining):5门子课程和1个毕业项目课程，涵盖数据可视化，信息检索，文本挖掘与分析，模式发现和聚类分析
+* [Data Analysis and Interpretation Specialization](http://coursegraph.com/coursera-specializations-data-analysis):5门子课程，分别是数据管理和可视化，数据分析工具，回归模型，机器学习，毕业项目
+* [Executive Data Science Specialization](http://coursegraph.com/coursera-specializations-executive-data-science):4门子课程和1门毕业项目课程，涵盖数据科学速成，数据科学小组建设，数据分析管理，现实生活中的数据科学
+* [Data Science Math Skills](http://coursegraph.com/coursera-datasciencemathskills)
+* [Data Science Ethics](http://coursegraph.com/coursera-data-science-ethics)
+* [How to Win a Data Science Competition: Learn from Top Kagglers](http://coursegraph.com/coursera-competitive-data-science)
 
 ## 资源
 

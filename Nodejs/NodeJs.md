@@ -784,6 +784,7 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
 
 ## 教程
 
+* [The Node Beginner Book](https://www.nodebeginner.org/index-zh-cn.html)
 * [ElemeFE/node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
 * [Chiara-yen/startLearningNodejs](https://github.com/Chiara-yen/startLearningNodejs):
 * [scotch-io/node-todo](https://github.com/scotch-io/node-todo):A simple Node/MongoDB/Angular todo app https://scotch.io/tutorials/creating-…

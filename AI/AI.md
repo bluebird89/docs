@@ -90,6 +90,7 @@
     - 实战
         + [Kaggle 主页](https://www.kaggle.com/)
         + [Kaggle 路线](https://github.com/apachecn/kaggle)
+        + [image-net](http://www.image-net.org/)
     - 工具
         + [Scikit-Learn 官方文档](https://scikit-learn.org/stable/index.html): <http://sklearn.apachecn.org/#/>
 * 深度学习
