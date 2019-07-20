@@ -219,9 +219,17 @@ Create React apps with no build configuration.
 ```sh
 npm install -g create-react-app
 
+npx create-react-app my-app
+npm init react-app my-app
+yarn create react-app my-app
+
 create-react-app my-app
-cd my-app/
-npm start
+cd my-app
+
+npm|yarn start
+npm|yarn test
+npm run build | yarn build
+
 npm run eject #  导出配置文件
 ```
 

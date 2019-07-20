@@ -329,6 +329,7 @@
 * [腾讯AI开发平台](https://ai.qq.com)
 * [GokuMohandas/practicalAI](https://github.com/GokuMohandas/practicalAI):📚A practical approach to learning machine learning.
 * [makelove/True_Artificial_Intelligence](https://github.com/makelove/True_Artificial_Intelligence):真AI人工智能
+* [microsoft/ai-edu](https://github.com/microsoft/ai-edu):AI education materials for Chinese students, teachers and IT professionals.
 
 ## 工具
 

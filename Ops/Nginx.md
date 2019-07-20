@@ -598,6 +598,12 @@ location @not_found {
     rewrite http://google.com;
 }
 
+# 负载均衡
+upstream app_weapp {
+    server localhost:5757;
+    keepalive 8;
+}
+
 server {
     listen      443;
     server_name wx.ijason.cc;
@@ -751,12 +757,6 @@ location /images/abc {
 location ~ /images/abc/ {
     # 只有去掉 config D 才有效：先最长匹配 config G 开头的地址，继续往下搜索，匹配到这一条正则
     [ configuration H]
-}
-
-# example
-upstream app_weapp {
-    server localhost:5757;
-    keepalive 8;
 }
 
 server {
