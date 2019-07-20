@@ -244,6 +244,7 @@ $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
 * [nagadomi/waifu2x](https://github.com/nagadomi/waifu2x):Image Super-Resolution for Anime-Style Art
 * [remove](http://remove.bg):Remove Image Background
 * [Find The Best Free Stock Photos For Your Project](https://www.mailomix.com/products/stock-photo-search/)
+* [ImageOptim/ImageOptim](https://github.com/ImageOptim/ImageOptim):GUI image optimizer for Mac https://imageoptim.com/mac
 
 ## 资源
 

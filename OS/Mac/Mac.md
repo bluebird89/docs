@@ -234,7 +234,6 @@ smaba
 
 #### iTerm2
 
-
 iTerm2 是 MAC 下最好的终端工具。可以简单的认为，iTerm2 是配置完毕开箱即用的 tmux
 
 -   iTerm2 的标签的颜色会变化，以指示该 tPab 当前的状态。当该标签有新输出的时候，标签会变成洋红色；新的输出长时间没有查看，标签会变成红色。可在设置中关掉该功能。
@@ -679,8 +678,29 @@ launchctl list
 
 ## 端口查看
 
+* lsof
+    - -a 列出打开文件存在的进程
+    - -c<进程名> 列出指定进程所打开的文件
+    - -g 列出GID号进程详情
+    - -d<文件号> 列出占用该文件号的进程
+    - +d<目录> 列出目录下被打开的文件
+    - +D<目录> 递归列出目录下被打开的文件
+    - -n<目录> 列出使用NFS的文件
+    - -i<条件> 列出符合条件的进程。（4、6、协议、:端口、 @ip ）
+    - -p<进程号> 列出指定进程号所打开的文件
+    - -u 列出UID号进程详情
+    - -h 显示帮助信息
+    - -v 显示版本信息
+
+
 ```sh
+sudo lsof -nP -iTCP:端口号 -sTCP:LISTEN
 lsof -Pni4 | grep LISTEN | grep php
+lsof -nP -iTCP:4000 |grep LISTEN|awk '{print $2;}'
+lsof -i tcp:8811
+
+netstat lnp tcp
+netsta lnp udp
 ```
 
 ## 问题

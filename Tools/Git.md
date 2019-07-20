@@ -858,6 +858,10 @@ git cherry-pick hash_commit_A hash_commit_B
 
 ```sh
 git update-index --assume-unchanged # 永久性地告诉Git不要管某个本地文件
+
+# 屏蔽当前文件夹下文件
+*
+!.gitignore
 ```
 
 ### 搭建git私有服务器

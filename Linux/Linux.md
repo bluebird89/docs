@@ -518,7 +518,7 @@ sudo apt-get autoclean
 sudo apt-get autoremove
 sudo apt-get clean
 
-./configure -h
+./configure -h # 完全自定义 参数
 ```
 
 ### web设置

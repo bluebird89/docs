@@ -88,6 +88,11 @@ sudo ln -s  /etc/php/7.2/mods-available/swoole.ini 20-swoole.ini
 php -m | grep swoole
 # 查看是否有 async_redis => enabled
 php --ri swoole
+
+# nginx 转发至 swoole
+if (!-e $request_filebname){
+  proxy_pass http://127.0.0.1:8811;
+}
 ```
 
 ## 基础
@@ -197,6 +202,7 @@ php --ri swoole
 * 多线程使用pthread线程库
 * 使用了eventfd作为线程/进程间消息通知的机制
 * 用了signalfd来实现对信号的屏蔽和处理。可以有效地避免线程/进程被信号打断，系统调用restart的问题。在主进程中Reactor/AIO线程不会接受任何信号
+* 进程错误后会继续重启
 
 ![运行流程图](../../_static/swoole_run_cycle.jpg "Optional title")
 ![运行流程图](../../_static/swoole_model.jpg "Optional title")
