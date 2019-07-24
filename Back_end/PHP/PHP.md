@@ -506,7 +506,7 @@ echo $m->obj->a;//输出1，不随新对象改变，还是保持了原来的属�
     + 尚未被赋值
     + 被赋值为 NULL
     + 被 unset()
-        * 删除引用，触发相应变量容器refcount减一
+        * 删除引用，触发相应变量容器refcount减一 引用计数器
         * 在函数中的行为会依赖于想要销毁的变量的类型而有所不同
             - 比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值
         * unset 变量与给变量赋值NULL不同，变量赋值NULL直接对相应变量容器refcount = 0
@@ -1825,10 +1825,10 @@ echo (new Outer)->func2()->func3(); # 6
 * `__destruct()`
 * `__call()`
 * `__callStatic()`
-* `__get()`
-* `__set()`
-* `__isset()`
-* `__unset()`
+* `__get()`:读取不可访问属性的值
+* `__set()`:在给不可访问属性赋值时
+* `__isset()`:当对不可访问属性调用 isset() 或 empty() 时
+* `__unset()`:当对不可访问属性调用 unset() 时
 * `__sleep()`:serialize() 函数会检查类中是否存在一个魔术方法 __sleep()。如果存在，该方法会先被调用，然后才执行序列化操作,可以用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组,不能返回父类的私有成员的名字。这样做会产生一个 E_NOTICE 级别的错误.
 * `__wakeup()`:unserialize() 会检查是否存在一个 __wakeup() 方法。如果存在，则会先调用 __wakeup 方法，预先准备对象需要的资源
 * `__toString()`:用于一个类被当成字符串时应怎样回应
@@ -2662,6 +2662,50 @@ $order = $container->get('Order');//通过容器拿到我们的Order类
 $order->add();//正常的使用业务
 ```
 
+## curl
+
+* 下列选项的值将被作为长整形使用(在option参数中指定)：
+    - CURLOPT_INFILESIZE: 上传一个文件到远程站点，这个选项告诉PHP你上传文件的大小。
+    - CURLOPT_VERBOSE: 想CURL报告每一件意外的事情，设置这个选项为一个非零值。
+    - CURLOPT_HEADER: 想把一个头包含在输出中，设置这个选项为一个非零值。
+    - CURLOPT_NOPROGRESS: 不会PHP为CURL传输显示一个进程条，设置这个选项为一个非零值。注意：PHP自动设置这个选项为非零值，e仅仅为了调试的目的来改变这个选项。
+    - CURLOPT_NOBODY: 不想在输出中包含body部分，设置这个选项为一个非零值
+    - CURLOPT_FAILONERROR: 想让PHP在发生错误(HTTP代码返回大于等于300)时，不显示，设置这个选项为一人非零值。默认行为是返回一个正常页，忽略代码。
+    - CURLOPT_UPLOAD: 想让PHP为上传做准备，设置这个选项为一个非零值。
+    - CURLOPT_POST: 想PHP去做一个正规的HTTP POST，设置这个选项为一个非零值。这个POST是普通的 application/x-www-from-urlencoded 类型，多数被HTML表单使用。
+    - CURLOPT_FTPLISTONLY: 设置这个选项为非零值，PHP将列出FTP的目录名列表。
+    - CURLOPT_FTPAPPEND: 设置这个选项为一个非零值，PHP将应用远程文件代替覆盖它。
+    - CURLOPT_NETRC: 设置这个选项为一个非零值，PHP将在你的 ~./netrc 文件中查找你要建立连接的远程站点的用户名及密码。
+    - CURLOPT_FOLLOWLOCATION: 设置这个选项为一个非零值(象 “Location: “)的头，服务器会把它当做HTTP头的一部分发送(注意是递归的，PHP将发送形如 “Location: “的头)。
+    - CURLOPT_PUT: 设置这个选项为一个非零值去用HTTP上传一个文件。要上传这个文件必须设置CURLOPT_INFILE和CURLOPT_INFILESIZE选项.
+    - CURLOPT_MUTE: 设置这个选项为一个非零值，PHP对于CURL函数将完全沉默。
+    - CURLOPT_TIMEOUT: 设置一个长整形数，作为最大延续多少秒 告诉成功 PHP 从服务器接收缓冲完成前需要等待多长时间 **响应超时**
+    - CURLOPT_LOW_SPEED_LIMIT: 设置一个长整形数，控制传送多少字节。
+    - CURLOPT_LOW_SPEED_TIME: 设置一个长整形数，控制多少秒传送CURLOPT_LOW_SPEED_LIMIT规定的字节数。
+    - CURLOPT_RESUME_FROM: 传递一个包含字节偏移地址的长整形参数，(你想转移到的开始表单)。
+    - CURLOPT_SSLVERSION: 传递一个包含SSL版本的长参数。默认PHP将被它自己努力的确定，在更多的安全中你必须手工设置。
+    - CURLOPT_TIMECONDITION: 传递一个长参数，指定怎么处理CURLOPT_TIMEVALUE参数。可以设置这个参数为TIMECOND_IFMODSINCE 或 TIMECOND_ISUNMODSINCE。这仅用于HTTP
+    - CURLOPT_CONNECTTIMEOUT:告诉 PHP 在成功连接服务器前等待多久 **连接超时**
+    - CURLOPT_TIMEVALUE: 传递一个从1970-1-1开始到现在的秒数。这个时间将被CURLOPT_TIMEVALUE选项作为指定值使用，或被默认TIMECOND_IFMODSINCE使用。
+* 下列选项的值将被作为字符串：
+    - CURLOPT_URL: 这是想用PHP取回的URL地址。也可以在用curl_init()函数初始化时设置这个选项。
+    - CURLOPT_USERPWD: 传递一个形如[username]:[password]风格的字符串,作用PHP去连接。
+    - CURLOPT_PROXYUSERPWD: 传递一个形如[username]:[password] 格式的字符串去连接HTTP代理。
+    - CURLOPT_RANGE: 传递一个想指定的范围。它应该是”X-Y”格式，X或Y是被除外的。HTTP传送同样支持几个间隔，用逗句来分隔(X-Y,N-M)。
+    - CURLOPT_POSTFIELDS: 传递一个作为HTTP “POST”操作的所有数据的字符串。
+    - CURLOPT_REFERER: 在HTTP请求中包含一个”referer”头的字符串。
+    - CURLOPT_USERAGENT: 在HTTP请求中包含一个”user-agent”头的字符串。
+    - CURLOPT_FTPPORT: 传递一个包含被ftp “POST”指令使用的IP地址。这个POST指令告诉远程服务器去连接我们指定的IP地址。这个字符串可以是一个IP地址，一个主机名，一个网络界面名(在UNIX下)，或是‘-'(使用系统默认IP地址)。
+    - CURLOPT_COOKIE: 传递一个包含HTTP cookie的头连接。
+    - CURLOPT_SSLCERT: 传递一个包含PEM格式证书的字符串。
+    - CURLOPT_SSLCERTPASSWD: 传递一个包含使用CURLOPT_SSLCERT证书必需的密码。
+    - CURLOPT_COOKIEFILE: 传递一个包含cookie数据的文件的名字的字符串。这个cookie文件可以是Netscape格式，或是堆存在文件中的HTTP风格的头。
+    - CURLOPT_CUSTOMREQUEST: 当进行HTTP请求时，传递一个字符被GET或HEAD使用。为进行DELETE或其它操作是有益的，更Pass a string to be used instead of GET or HEAD when doing an HTTP request. This is useful for doing or another, more obscure, HTTP request. 注意: 在确认的服务器支持命令先不要去这样做。下列的选项要求一个文件描述(通过使用fopen()函数获得)：　
+    - CURLOPT_FILE: 这个文件将是放置传送的输出文件，默认是STDOUT.
+    - CURLOPT_INFILE: 这个文件是传送过来的输入文件。
+    - CURLOPT_WRITEHEADER: 这个文件写有输出的头部分。
+    - CURLOPT_STDERR: 这个文件写有错误而不是stderr。用来获取需要登录的页面的例子,当前做法是每次或许都登录一次,有需要的人再做改进了.
+
 ## 扩展
 
 * intl
@@ -2747,7 +2791,7 @@ pecl install xdebug
 ## 大数据
 
 * 查询上运行EXPLAIN，看看是不是缺少什么索引。曾经做过一个查询，通过增加了一个索引后效率提高了4个数量级
-* 如果正在做SQL查询，然后获得结果，并把很多数字弄到一起，看看你能不能使用像SUM（）和AVG（）之类的函数调用GROUP BY语句
+* 如果正在做SQL查询，然后获得结果，并把很多数字弄到一起，看看能不能使用像SUM（）和AVG（）之类的函数调用GROUP BY语句
     - 跟普遍的情况下，让数据库处理尽量多的计算。一点很重要的提示是：（至少在MySQL里是这样）布尔表达式的值为0或1，如果有创意的话，可以使用SUM（）和它的小伙伴们做些很让人惊讶的事情。
 * 是不是把这些同样很耗费时间的数字计算了很多遍。例如，假设1000袋土豆的成本是昂贵的计算，但并不需要把这个成本计算500次，然后才把1000袋土豆的成本存储在一个数组或其他类似的地方，所以你不必把同样的东西翻来覆去的计算。这个技术叫做记忆术，在像你这样的报告中使用往往会带来奇迹般的效果
 

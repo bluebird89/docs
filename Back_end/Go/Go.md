@@ -138,6 +138,23 @@ func main() {
 
 * 包的属性名字以大写字母开头，那么它就是已导出的
 
+```go
+package main
+
+import "fmt"
+/**
+ * 每次导入一个包
+ * import "fmt"
+ * import "math"
+ *
+ * 也可以分组导入
+ * import (
+ *     "fmt"
+ *     "math"
+ * )
+ */
+```
+
 ## 程序实体
 
 * 变量、常量、函数、结构体和接口的统称
@@ -160,6 +177,17 @@ func main() {
     - 首先，代码引用变量的时候总会最优先查找当前代码块中的那个变量。注意，这里的“当前代码块”仅仅是引用变量的代码所在的那个代码块，并不包含任何子代码块。
     - 其次，如果当前代码块中没有声明以此为名的变量，那么程序会沿着代码块的嵌套关系，从直接包含当前代码块的那个代码块开始，一层一层地查找。
     - 一般情况下，程序会一直查到当前代码包代表的代码块。如果仍然找不到，那么 Go 语言的编译器就会报错了。
+
+```go
+// 申明变量geekwho,并自动赋值为0，默认Go会推断为int的类型
+    geeks1 := 0
+    // 你也可以直接申明为int类型的变量geekwho
+    var geeks2 int
+    // 申明两个变量i，j为int的类型并初始化
+    var i, j int = 1, 2
+    // 申明3个变量并初始化
+    var go_, php, java = true, false, "no!"
+```
 
 ### 插件
 
@@ -219,12 +247,9 @@ go run hello.go
 >>:64 >> 4  4
 ```
 
-包别名 可见性
-
 ## 数据类型
 
- type 自定义 b := 1 _ 忽略 strconv iota
-
+* type 自定义 b := 1 _ 忽略 strconv iota
 * 判断所谓的“传值”或者“传引用”只要看被传递的值的类型就好了
 * 值类型
     - 基础数据类型
@@ -394,6 +419,65 @@ fmt.Println(s, ok)
 f, ok := i.(float64)
 
 switch v := i.(type) {
+
+
+package main
+
+import (
+    "fmt"
+)
+// 申明接口有2个方法
+type Switchs interface {
+    On() string
+    Off() string
+}
+
+// 申明一个结构体，类似PHP的Light类
+type Light struct {
+    Status string
+}
+//添加一个On方法
+func (l Light) On() string {
+    l.Status = "light is on"
+    return l.Status
+}
+//添加一个Off方法
+func (l Light) Off() string {
+    l.Status = "light is off"
+    return l.Status
+}
+
+func main() {
+    // 初始化类
+    l := Light{}
+    fmt.Println(l.On())
+    fmt.Println(l.Off())
+}
+```
+
+## 面向对象
+
+```go
+package main
+
+import (
+    "fmt"
+    "math"
+)
+// 申明一个结构体
+type HelloWorld struct {
+    X, Y float64
+}
+// 添加一个Run方法，首字母大写为公用方法，小写为私有方法。
+func (v HelloWorld) Run() float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+func main() {
+    // 初始化类
+    v := HelloWorld{3, 4}
+    fmt.Println(v.Run())
+}
 ```
 
 ## fmt
@@ -472,6 +556,72 @@ type Image interface {
     - Lock
     - Unlock
 * 用 defer 语句来保证互斥锁一定会被解锁
+
+## 测试
+
+
+
+* 必须import testing包
+* 文件名必须以xx_test.go命名
+* 单元
+    - 方法必须是Test[^a-z]开头
+    - 方法参数必须 t *testing.T
+    - 函数中通过调用testing.T的Error, Errorf, FailNow, Fatal, FatalIf方法，说明测试不通过，调用Log方法用来记录测试的信息
+    - 参数
+        + -c : 编译go test成为可执行的二进制文件，但是不运行测试
+        + -i : 安装测试包依赖的package，但是不运行测试。
+* 压力
+    - 创建benchmark性能测试用例文件 `*_b_test.go` *代表要测试的文件名
+    - 函数名必须以Benchmark开头,BenchmarkXxx或Benchmark_xxx, xxx可以是任意字母数字的组合，但是Xxx首字母不能是小写字母
+* 用性能测试生成CPU状态图
+    - 生成cpu profile文件`go test -bench=".*" -cpuprofile=cpu.prof -c`
+    - 用go tool pprof工具 `go tool pprof *.test cpu.prof`
+
+```sh
+go test [-c] [-i] [build flags] [packages] [flags for test binary]
+
+package gotest
+
+import (
+    "testing"
+)
+
+func Test_Division_1(t *testing.T) {
+    if i, e := Division(6, 2); i != 3 || e != nil { //try a unit test on function
+        t.Error("除法函数测试没通过") // 如果不是如预期的那么就报错
+    } else {
+        t.Log("第一个测试通过了") //记录一些你期望记录的信息
+    }
+}
+
+func Test_Division_2(t *testing.T) {
+    t.Error("就是不通过")
+}
+
+// 压力测试 go test -file webbench_test.go -test.bench=".*"表示测试全部的压力测试函数
+package gotest
+
+import (
+    "testing"
+)
+
+func Benchmark_Division(b *testing.B) {
+    for i := 0; i < b.N; i++ { //use b.N for looping
+        Division(4, 5)
+    }
+}
+
+func Benchmark_TimeConsumingFunction(b *testing.B) {
+    b.StopTimer() //调用该函数停止压力测试的时间计数
+
+    //做一些初始化的工作,例如读取文件数据,数据库连接之类的,这样这些时间不影响测试函数本身的性能
+
+    b.StartTimer() //重新开始时间
+    for i := 0; i < b.N; i++ {
+        Division(4, 5)
+    }
+}
+```
 
 ### GoSublime
 

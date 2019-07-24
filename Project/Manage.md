@@ -80,10 +80,6 @@
     - 通过定时任务或服务器脚本对自身数据库进行增删改查操作
     - 调用或通知其他服务做一些事情
 
-## 参考
-
-- [一篇文章读懂项目管理中的精髓](http://blog.csdn.net/gitchat/article/details/77688870)
-
 ## 图书
 
 - 有限与无限的游戏
@@ -93,6 +89,7 @@
 
 * [tron1991/open-product-management](https://github.com/tron1991/open-product-management):A curated list of product management advice for technical people.
 * [basecamp/sub](https://github.com/basecamp/sub):a delicious way to organize programs
+* [一篇文章读懂项目管理中的精髓](http://blog.csdn.net/gitchat/article/details/77688870)
 
 ## 工具
 

@@ -14,6 +14,7 @@ fast, scalable, distributed revision control system. https://git-scm.com/
 * [backlog](https://backlog.com/):Online project management tool for developers
 * [gogits/gogs](https://github.com/gogits/gogs):Gogs is a painless self-hosted Git service. https://gogs.io
 * [go-gitea/gitea](https://github.com/go-gitea/gitea):Gitea: Git with a cup of tea http://gitea.io
+* [工蜂](https://git.code.tencent.com)
 
 ## 安装
 

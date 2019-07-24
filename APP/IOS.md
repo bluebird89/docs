@@ -61,3 +61,4 @@
 * [haxpor/Potatso](https://github.com/haxpor/Potatso):Potatso is an iOS client that implements Shadowsocks proxy with the leverage of NetworkExtension framework.
 * [forkingdog/FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture):A UINavigationController's category to enable fullscreen pop gesture with iOS7+ system style.
 * [tbodt/ish](https://github.com/tbodt/ish):Linux shell for iOS https://ish.app
+* [HandyJSON](https://github.com/alibaba/HandyJSON):一个用于 Swift 语言中的 JSON 序列化 / 反序列化库

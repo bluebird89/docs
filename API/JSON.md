@@ -14,3 +14,4 @@ JSON.stringify
 * [msgpack/msgpack](https://github.com/msgpack/msgpack):MessagePack is an extremely efficient object serialization library. It's like JSON, but very fast and small. http://msgpack.org/
 * [google/gson](https://github.com/google/gson):A Java serialization/deserialization library to convert Java Objects into JSON and back
 * [simdjson](https://github.com/lemire/simdjson):Parsing gigabytes of JSON per second https://arxiv.org/abs/1902.08318
+* [baidu/amis](https://github.com/baidu/amis):一种基于特定 JSON 格式生成 MIS 页面的工具 https://baidu.github.io/amis/
