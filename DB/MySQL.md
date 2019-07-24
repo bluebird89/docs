@@ -2221,6 +2221,7 @@ http://localhost:3000
 * [alibaba/AliSQL](https://github.com/alibaba/AliSQL/wiki):AliSQL is a MySQL branch originated from Alibaba Group. Fetch document from Release Notes at bottom.
 * [alibaba/cobar](https://github.com/alibaba/cobar):a proxy for sharding databases and tables
 * [github/gh-ost](https://github.com/github/gh-ost):GitHub's Online Schema Migrations for MySQL
+* [oracle/mysql-operator](https://github.com/oracle/mysql-operator):Create, operate and scale self-healing MySQL clusters in Kubernetes
 
 ## 参考
 

@@ -143,6 +143,7 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 * [Httperf](http://code.google.com/p/httperf/downloads/list) 比 ab 更强大，能测试出 web 服务能承载的最大服务量及发现潜在问题；比如：内存使用、稳定性。最大优势：可以指定规律进行压力测试，模拟真实环境。
 * [CODO](https://github.com/opendevops-cn):为用户提供企业多混合云、自动化运维、完全开源的云管理平台。前端基于Vue iview开发、为用户提供友好的操作界面，增强用户体验。 后端基于Python Tornado开发，其优势为轻量、简洁清晰、异步非阻塞 http://www.opendevops.cn
     - [demo](http://demo.opendevops.cn) 用户：demo 密码：2ZbFYNv9WibWcR7GB6kcEY
+* [Tencent/bk-ci](https://github.com/Tencent/bk-ci):蓝鲸CI平台(BlueKing CI) https://bk.tencent.com
 
 ## 参考
 
