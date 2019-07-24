@@ -197,6 +197,8 @@
         + [3分钟了解今日头条推荐系统原理](https://v.qq.com/x/page/g05349lb80j.html)
         + [facebook是如何为十亿人推荐好友的](https://code.facebook.com/posts/861999383875667/recommending-items-to-more-than-a-billion-people/)
         + [Netflix的个性化和推荐系统架构](http://techblog.netflix.com/2013/03/system-architectures-for.html)
+    - 资源
+        + [deep-recommender-system](https://github.com/chocoluffy/deep-recommender-system)
 * 风控模型（评分卡模型）:在银行、互金等公司与借贷相关业务中最常见也是最重要的模型之一。简而言之它的作用就是对客户进行打分，来对客户是否优质进行评判。
     - 评分卡模型主要分为三大类
         + A卡（Application score card）申请评分卡

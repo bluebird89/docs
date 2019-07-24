@@ -865,6 +865,7 @@ Hybrid App开发
     - 搭建与服务；Linux操作
 * 拥有撰写规范的数据字典、接口文档能力：服务端开发人员的一条成长之路便是成为架构师，在有足够的能力进行架构设计前，先要了解 Rustful API，并会写规范的数据字典和接口文档。
     - 数据字典
+
     ```
     |字段|类型|空|键值|注释|
     |----|----|----|----|----|
@@ -950,8 +951,6 @@ Hybrid App开发
 * 前后端协商好接口方式通过 HTTP 提供，统一使用 POST 谓词。负责 Model 层
 * 接口数据结构使用 JSON 实现，形式使用REST
 
-![前后分离式 Web 架构示意](../static/fbs.png "前后分离式 Web 架构示意")
-
 * 最上端是服务端，就是我们常说的后端。后端对于我们来说，就是一个接口的集合，服务端提供各种各样的接口供我们使用。因为有 Node.js 层，也不用局限是什么形式的服务。对于后端开发来说，他们只用关心业务代码的接口实现。
 * 服务端下面是 Node.js 应用
 * Node.js 应用中有一层 Model Proxy 与服务端进行通讯。这一层主要目前是抹平我们对不同接口的调用方式，封装一些 View 层需要的 Model。
@@ -962,6 +961,7 @@ Hybrid App开发
 * 引入 Node.js，只是把本该就前端控制的部分交由前端掌控。
 * 前端开发人员则可以利用nodejs来搭建自己的本地服务器，直接在本地开发，然后通过一些插件来将api请求转发到后台，这样就可以完全模拟线上的场景，并且与后台解耦
 
+![前后分离式 Web 架构示意](../static/fbs.png "前后分离式 Web 架构示意")
 ![淘宝基于 Node.js 的前后端分离分层](../static/taobao.jpg "淘宝基于 Node.js 的前后端分离分层")
 
 ## 实现
@@ -988,10 +988,6 @@ Hybrid App开发
             * 分批次验收前端的功能页面 基于功能测试用例，进行页面级别上的功能回归
             * 整合前后端的 BUG 信息 前后端的 BUG 信息全部是反馈给 QA，由 QA 统一去追相应的技术人员。 比如说前端发现有个接口有问题，只反馈给 QA，剩下的工作就是由 QA 去找相应的后端负责人。
 * 需要的是耐心及专注。团队的技术成长都是有节奏的，是没有办法一步到位的。
-
-## 技术栈
-
-* Python + Django框架完成接口的开发，前端使用Vue.js + element UI
 
 ### 增加一层nodejs
 
@@ -1156,15 +1152,10 @@ Node服务端渲染好处多多，但除了上述技术性的问题需要解决�
 
 如果你确定要用 node 做服务端渲染的话，建议你应该用一些开源成熟的框架。比如在 react 体系下比较有代表性的 next.js， vue 体系下的 Nuxt.js。
 
-
 ## 实例
 
 * [cyanharlow/purecss-francine](https://github.com/cyanharlow/purecss-francine)：HTML/CSS drawing in the style of an 18th-century oil painting. Hand-coded entirely in HTML & CSS.
-
-## 框架
-
-* [twbs/ratchet](https://github.com/twbs/ratchet):Build mobile apps with simple HTML, CSS, and JavaScript components. http://goratchet.com
-* [zurb/foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. http://foundation.zurb.com
+* Python + Django框架完成接口的开发，前端使用Vue.js + element UI
 
 ## 面试
 
@@ -1173,9 +1164,13 @@ Node服务端渲染好处多多，但除了上述技术性的问题需要解决�
 * [nanhupatar/FEGuide](https://github.com/nanhupatar/FEGuide):【前端面试题+前端学习+面试指南】 一份涵盖大部分前端工程师所需要掌握的核心知识。这个项目就是为了帮助那些找工作的前端开发工程师去回顾前端的基础知识，如果你不想找工作，也可以通过查看这些面试问题去巩固你的前端技能。 https://github.com/nanhupatar/FEGuide
 * [ScriptOJ](http://scriptoj.mangojuice.top/):Web 前端开发评测系统,从大量实战代码、面试题目中总结出精华题库和相应的测试
 * [五年面试，三年模拟](https://juejin.im/post/5ca0425e51882567ce181037)
+* [校招社招必备核心前端面试问题与详细解答](https://segmentfault.com/a/1190000019758067)
 
 ## 工具
 
+* 框架
+    - [twbs/ratchet](https://github.com/twbs/ratchet):Build mobile apps with simple HTML, CSS, and JavaScript components. http://goratchet.com
+    - [zurb/foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. http://foundation.zurb.com
 * [ElemeFE/cooking](https://github.com/ElemeFE/cooking):更易上手的前端构建工具 http://elemefe.github.io/cooking/
 * [ImageOptim/ImageOptim](https://github.com/ImageOptim/ImageOptim):GUI image optimizer for Mac https://imageoptim.com/mac
 * [chinchang/web-maker](https://github.com/chinchang/web-maker):A blazing fast & offline frontend playground https://webmakerapp.com/

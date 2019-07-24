@@ -43,6 +43,7 @@
     - 图书：https://nndl.github.io/nndl-book.pdf
     - 示例代码：https://github.com/nndl/nndl-codes
     - 课程练习：https://github.com/nndl/exercise
+* [Deep Learning from the Foundations](https://www.fast.ai/2019/06/28/course-p2v3/)
 * [](https://www.cs.toronto.edu/~hinton/)
 
 ## 图书
@@ -60,12 +61,14 @@
 
 * [floydhub/dl-docker](https://github.com/floydhub/dl-docker):An all-in-one Docker image for deep learning. Contains all the popular DL frameworks (TensorFlow, Theano, Torch, Caffe, etc.) https://www.floydhub.com
 * [deepfakes/faceswap](https://github.com/deepfakes/faceswap):Non official project based on original /r/Deepfakes thread. Many thanks to him! https://www.reddit.com/r/deepfakes/
-* [XiaoMi/mace](https://github.com/XiaoMi/mace):MACE is a deep learning inference framework optimized for mobile heterogeneous computing platforms. 
+* [XiaoMi/mace](https://github.com/XiaoMi/mace):MACE is a deep learning inference framework optimized for mobile heterogeneous computing platforms
 * [jhfjhfj1/autokeras](https://github.com/jhfjhfj1/autokeras):accessible AutoML for deep learning. http://autokeras.com/
 * [cmusatyalab/openface](https://github.com/cmusatyalab/openface):Face recognition with deep neural networks. http://cmusatyalab.github.io/openface/
+* [PaddlePaddle](https://github.com/PaddlePaddle):百度自主研发、集深度学习训练和预测框架、模型库、工具组件、服务平台等为一体的开源深度学习平台 http://paddlepaddle.org/
 
 ## 参考
 
+* [alibaba/x-deeplearning](https://github.com/alibaba/x-deeplearning):An industrial deep learning framework for high-dimension sparse data
 * [Model Zoo](https://modelzoo.co/):Discover open source deep learning code and pretrained models.
 * [deep-learning-ai](https://www.nvidia.com/en-us/deep-learning-ai/developer/)
 * [karpathy/char-rnn](https://github.com/karpathy/char-rnn):Multi-layer Recurrent Neural Networks (LSTM, GRU, RNN) for character-level language models in Torch

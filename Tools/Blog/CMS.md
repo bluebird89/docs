@@ -11,6 +11,7 @@
 * [Echosong/beego_blog](https://github.com/Echosong/beego_blog):beego+layui+mysql 开发 简洁美观的个人博客系统
 * [gaearon/overreacted.io](https://github.com/gaearon/overreacted.io):Personal blog by Dan Abramov. https://overreacted.io
 * [docsifyjs/docsify](https://github.com/docsifyjs/docsify):🃏 A magical documentation site generator. https://docsify.js.org
+* [Docsite](https://github.com/txd-team/docsite): 款集官网、文档、博客和社区为一体的静态开源站点的解决方案，具有简单易上手、上手不撒手的特质，同时支持 react 和静态渲染、PC 端和移动端、支持中英文国际化、SEO、markdown 文档、全局站点搜索、站点风格自定义、页面自定义等功能 https://docsite.js.org
 
 ## [Canner/canner](https://github.com/Canner/canner)
 

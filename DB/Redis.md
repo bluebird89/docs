@@ -149,6 +149,7 @@ redis-cli -h localhost -p 6379 monitor // 从库执行该命令会一直ping主�
     - 客户端 socket 会被设置为非阻塞模式，因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型。
     - 为这个 socket 设置 TCP_NODELAY 属性，禁用 Nagle 算法
     - 创建一个可读的文件事件用于监听这个客户端 socket 的数据发送
+* 长链接 短链接
 
 ```sh
 # 设置最大连接数
@@ -772,11 +773,9 @@ SCRIPT LOAD "return 1"
     - 也可以调用watch多次监视多个key。这样就可以对指定的key加乐观锁了。
     - 注意watch的key是对整个连接有效的，事务也一样。
     - 如果连接断开，监视和事务都会被自动清除。当然了exec，discard，unwatch命令都会清除连接中的所有监视。
-
-### 分布式锁
-
-* 分布式锁是控制分布式系统之间同步访问共享资源的一种方式
-* 在分布式系统中，常常需要协调他们的动作，如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。
+* 分布式锁
+    - 分布式锁是控制分布式系统之间同步访问共享资源的一种方式
+    - 在分布式系统中，常常需要协调他们的动作，如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。
 
 ### 地理信息
 
@@ -798,6 +797,37 @@ SCRIPT LOAD "return 1"
     - hash分区
         + 用一个hash函数将key转换为一个数字，比如使用crc32 hash函数
         + 对这个整数取模，将其转化为0-3之间的数字，就可以将这个整数映射到4个Redis实例中的一个了
+
+## Cluster
+
+* CLUSTER INFO 打印集群的信息
+    - cluster_state：集群的状态。ok表示集群是成功的，如果至少有一个solt坏了，就将处于error状态。
+    - cluster_slots_assigned：有多少槽点被分配了，如果是16384，表示全部槽点已被分配。
+    - cluster_slots_ok：多少槽点状态是OK的, 16384 表示都是好的。
+    - cluster_slots_pfail：多少槽点处于暂时疑似下线[PFAIL]状态，这些槽点疑似出现故障，但并不表示是有问题，也会继续提供服务。
+    - cluster_slots_fail：多少槽点处于暂时下线[FAIL]状态，这些槽点已经出现故障，下线了。等待修复解决。
+    - cluster_known_nodes：已知节点的集群中的总数，包括在节点 握手的状态可能不是目前该集群的成员。这里总公有9个。
+    - cluster_size：(The number of master nodes serving at least one hash slot in the cluster) 简单说就是集群中主节点［Master］的数量。
+    - cluster_current_epoch：本地当前时期变量。这是使用，以创造独特的不断增加的版本号过程中失败接管
+    - cluster_my_epoch：这是分配给该节点的当前配置版本
+    - cluster_stats_messages_sent：通过群集节点到节点的二进制总线发送的消息数
+    - cluster_stats_messages_received：通过群集节点到节点的二进制总线上接收报文的数量
+* CLUSTER NODES 列出集群当前已知的所有节点（node），以及这些节点的相关信息。
+* CLUSTER MEET <ip> <port> 将 ip 和 port 所指定的节点添加到集群当中，让它成为集群的一份子。
+* CLUSTER FORGET <node_id> 从集群中移除 node_id 指定的节点。
+* CLUSTER REPLICATE <node_id> 将当前节点设置为 node_id 指定的节点的从节点。
+* CLUSTER SAVECONFIG 将节点的配置文件保存到硬盘里面。
+* CLUSTER ADDSLOTS <slot> [slot ...] 将一个或多个槽（slot）指派（assign）给当前节点。
+* CLUSTER DELSLOTS <slot> [slot ...] 移除一个或多个槽对当前节点的指派。
+* CLUSTER FLUSHSLOTS 移除指派给当前节点的所有槽，让当前节点变成一个没有指派任何槽的节点。
+* CLUSTER SETSLOT <slot> NODE <node_id> 将槽 slot 指派给 node_id 指定的节点。
+* CLUSTER SETSLOT <slot> MIGRATING <node_id> 将本节点的槽 slot 迁移到 node_id 指定的节点中。
+* CLUSTER SETSLOT <slot> IMPORTING <node_id> 从 node_id 指定的节点中导入槽 slot 到本节点。
+* CLUSTER SETSLOT <slot> STABLE 取消对槽 slot 的导入（import）或者迁移（migrate）
+* CLUSTER KEYSLOT <key> 计算键 key 应该被放置在哪个槽上。
+* CLUSTER COUNTKEYSINSLOT <slot> 返回槽 slot 目前包含的键值对数量。
+* CLUSTER GETKEYSINSLOT <slot> <count> 返回 count 个 slot 槽中的键。
+* CLUSTER SLAVES node-id 返回一个master节点的slaves 列表
 
 ## 场景
 

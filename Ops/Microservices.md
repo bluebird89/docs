@@ -213,12 +213,12 @@ APP要符合12因子（Twelve-Factor）的规范：
 
 ## 旧系统改造
 
-![原有系统进行微服务改造](../_static/upgrade.png "Optional title")
+* The Anti-Corruption Layer：反腐层，这层完成对老系统的桥接，并阻止老系统的腐烂蔓延。它包含三部分：
+    - Facade：简化对老系统接口的对接。
+    - Adapter：Request，Response 请求协议适配
+    - Translator：领域模型适配，转换微服务模型和老系统模型。
 
-The Anti-Corruption Layer：反腐层，这层完成对老系统的桥接，并阻止老系统的腐烂蔓延。它包含三部分：
-* Facade：简化对老系统接口的对接。
-* Adapter：Request，Response 请求协议适配
-* Translator：领域模型适配，转换微服务模型和老系统模型。
+![原有系统进行微服务改造](../_static/upgrade.png "Optional title")
 
 ## 问题
 
@@ -235,13 +235,11 @@ The Anti-Corruption Layer：反腐层，这层完成对老系统的桥接，并�
     - 插件热插拔,规则的动态配置,易扩展。
     - 支持集群部署，支持A/B Test
     - soul 是基于webflux的， 依赖rxJava ,其实高性能的，响应式的网关
-
-## 资源
-
-* [amio/awesome-micro](https://github.com/amio/awesome-micro) :A collection of awesome things regarding zeit's micro.
+* [Tars](https://github.com/tarsCloud): 高性能、多语言的微服务治理框架
 
 ## 参考
 
+* [amio/awesome-micro](https://github.com/amio/awesome-micro) :A collection of awesome things regarding zeit's micro.
 * [微服务与API网关（上）: 为什么需要API网关？](http://blog.didispace.com/hzf-ms-apigateway-1/)
 * [罗辑思维Go语言微服务改造实践](http://www.techug.com/post/luo-ji-si-wei-go-service-upgrade.html)
 * [一篇文章带你了解Cloud Native](https://blog.csdn.net/u011537073/article/details/72360966)

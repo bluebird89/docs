@@ -937,27 +937,17 @@ public class Puppy{
 
 JavaEE/JDBC/Weblogic
 
-## IDE:IntelliJ IDEA
-
-* [插件库](https://plugins.jetbrains.com/idea)
-  - Alibaba Java Code Guidelines
-
-## 测试
-
-* [alibaba/arthas](https://github.com/alibaba/arthas):Alibaba Java Diagnostic Tool Arthas/Alibaba Java诊断利器Arthas https://alibaba.github.io/arthas/
-* [mockito/mockito](https://github.com/mockito/mockito):Most popular Mocking framework for unit tests written in Java http://mockito.org
-
-## datetime
-
-* [JodaOrg/joda-time](https://github.com/JodaOrg/joda-time):Joda-Time is the widely used replacement for the Java date and time classes prior to Java SE 8. http://www.joda.org/joda-time/
-
 ## 资源
 
-* [OpenJDK](http://openjdk.java.net)
-
-## 框架
-
-* [lets-blade/blade](https://github.com/lets-blade/blade):🚀 Lightning fast and elegant mvc framework for Java8 https://lets-blade.com
+* [插件库](https://plugins.jetbrains.com/idea)
+ [Cloud Toolkit](https://www.aliyun.com/product/cloudtoolkit): 一款 IDE 插件，可以帮助开发者更高效地开发、测试、诊断并部署应用
+* 测试
+  - [alibaba/arthas](https://github.com/alibaba/arthas):Alibaba Java Diagnostic Tool Arthas/Alibaba Java诊断利器Arthas https://alibaba.github.io/arthas/
+  - [mockito/mockito](https://github.com/mockito/mockito):Most popular Mocking framework for unit tests written in Java http://mockito.org
+* datetime
+  - [JodaOrg/joda-time](https://github.com/JodaOrg/joda-time):Joda-Time is the widely used replacement for the Java date and time classes prior to Java SE 8. http://www.joda.org/joda-time/
+* 框架
+  - [lets-blade/blade](https://github.com/lets-blade/blade):🚀 Lightning fast and elegant mvc framework for Java8 https://lets-blade.com
 
 ## project
 
@@ -981,8 +971,9 @@ JavaEE/JDBC/Weblogic
 
 ## 工具
 
-* [alibaba/p3c](https://github.com/alibaba/p3c):Alibaba Java Coding Guidelines pmd implements and IDE plugin
 * [Java SE](https://www.oracle.com/technetwork/java/javase)
+* [OpenJDK](http://openjdk.java.net)
+* [alibaba/p3c](https://github.com/alibaba/p3c):Alibaba Java Coding Guidelines pmd implements and IDE plugin
 * [apache/httpcomponents-core](https://github.com/apache/httpcomponents-core)
 * [apache/tomcat](https://github.com/apache/tomcat)
 * [apache/jmeter](https://github.com/apache/jmeter)a 100% pure Java application designed to test and measure performance. It may be used as a highly portable server benchmark as well as multi-client load generator.
@@ -1003,8 +994,10 @@ JavaEE/JDBC/Weblogic
   - `source "$HOME/.sdkman/bin/sdkman-init.sh"`
 * [liuanxin/api-document](https://github.com/liuanxin/api-document):java spring-mvc document collect
 
+
 ## 参考
 
+* Alibaba Java Code Guidelines
 * [aalansehaiyang/technology-talk](https://github.com/aalansehaiyang/technology-talk)：汇总java生态圈常用技术框架、开源中间件，系统架构、项目管理、经典架构案例、数据库、常用三方库、线上运维等知识
 - [zhanglei-workspace/shopping-management-system](https://github.com/zhanglei-workspace/shopping-management-system)
 * [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns):Design patterns implemented in Java http://java-design-patterns.com

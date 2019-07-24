@@ -13,6 +13,17 @@ phpunit --version
 
 ## 使用
 
+* 单元测试类名必须以 Test 结尾，必须继承 \PHPUnit\Framework\TestCase 基类。
+* 每个测试函数必须以 test 开头
+* 提供了 @test 的注解，如果一个测试函数添加了 @test 注解，那么测试函数名字就不必以 test 开头
+* PHPUnit\Framework\TestCase 有一个 setUp 函数，如果自己编写的测试类重写了这个函数，那么每次在开始执行测试函数之前，会先执行 setUp 进行测试之前的初始化。同样，也有一个 tearDown 的函数，如果重写，那么在测试函数执行完毕之后调用 tearDown 函数
+* Mock 测试:虚拟出一个 调用
+* 执行单个文件
+    - Phpstorm 下 当前测试类右键Run即可
+    - `phpunit tests/ArraysTest.php`
+* 全局单元测试:一次性执行所有的单元测试，可以编写 phpunit.xml 文件来实现
+    - `<directory>test</directory>` 指定了测试代码都放在 test 目录下
+
 ```php
 # 功能代码 src/Email.php
 declare(strict_types=1);
@@ -85,6 +96,26 @@ final class EmailTest extends TestCase
 }
 
 # `phpunit --bootstrap src/Email.php tests/EmailTest`
+
+/**
+ * Generated from @assert (0, 0) == 0.
+ */
+public function testSum() {
+    $obj = new Calculator;
+    $this->assertEquals(0, $obj->sum(0, 0));
+}
+
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit>
+    <testsuites>
+        <testsuite>
+            <directory>test</directory>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <log type="testdox-html" target="tmp/log.html"/>
+    </logging>
+</phpunit>
 ```
 
 ## 配置使用
