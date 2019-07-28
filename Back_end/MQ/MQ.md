@@ -3,8 +3,8 @@
 一种应用间的通信方式，消息发送后可以立即返回，由消息系统来确保消息的可靠传递。解决系统间异步通信的中间件,用于解决系统解耦和请求的削峰平谷的问题.消息发布者只管把消息发布到 MQ 中而不用管谁来取，消息使用者只管从 MQ 中取消息而不管是谁发布的。作为成熟的异步通信模式，对比常用的同步通信模式，有如下优势：
 
 * 先投递先到达的保证是一个消息队列
-* 同步变异步
-* 解耦：防止引入过多的 API 给系统的稳定性带来风险；调用方使用不当会给被调用方系统造成压力，被调用方处理不当会降低调用方系统的响应能力。如果一个系统挂了，则不会影响另外个系统的继续运行。
+* 异步调用
+* 系统解耦 ：防止引入过多的 API 给系统的稳定性带来风险；调用方使用不当会给被调用方系统造成压力，被调用方处理不当会降低调用方系统的响应能力。如果一个系统挂了，则不会影响另外个系统的继续运行。
     - 下游系统处理异常，上游系统如何处理
     - 系统宕机的情况下会不会导致数据丢失
     - 当有业务数据异常时，如何去定位是上游系统发送出了问题还是下游系统的问题
@@ -47,6 +47,16 @@
 
 ## 消息级别
 
+* 问题
+    - 消息丢失
+    - 消息重发
+    - 消息积压
+        + 基于一个prefetch count来控制这个unack message的数量，通过 “channel.basicQos(10)” 这个方法来设置当前channel的prefetch count
+            * 正在投递到channel过程 + 服务在处理中 + 异步ack之后还没完
+            * 超过了prefetch count指定的数量，此时RabbitMQ就会停止给这个channel投递消息了，必须要等待已经投递过去的消息被ack了，此时才能继续投递下一个消息
+            * 设置在100~300之间
+        + 设置太高 在高并发下服务直接被击垮了，内存溢出，OOM，服务宕机，然后大量unack的消息会被重新投递给其他的消费者服务，此时其他消费者服务一样的情况，直接宕机，最后造成雪崩效应
+        + 过小导致吞吐量过低
 * 至多一次（Qos=0）：下游允许部分消息丢失，不进行处理，这种方式一般适用于监控信息和 log 的传递，少一两条影响不大
     - 生产者只需要异步发送，在发送失败或者消费失败的时候不做任何处理即可
     - MQ 在消费者拉走消息后，就直接将消息标记为已经消费或者删除消息
@@ -80,6 +90,22 @@
     - 在消费时，内存加载时会加载一整个 Commitlog 文件，如果同一个 Broker 上的两个主题，一个主题的消息积压了很长时间开始才开始消费，而另一个主题在及时消费新发送的消息时，Broker 可能会频发的读取文件更新到缓存中，造成磁盘性能损耗，进而影响到生产时的发送性能。所以虽然 RocketMQ 支持海量消息积压，但如果是在共享的集群中，还是建议用户最好能做到及时消费，保证集群中所有主题都在消费相近时间段的消息，这样命中内存缓存的概率会比较高，消费时不会带来额外的磁盘开销。
     - 需要同步刷盘保证数据可靠性的应用，磁盘读写性能的重要性一般来讲也会远高于磁盘的空间大小。 成本上来讲，如果可以显著的提高单机性能，虽然单价来看固态硬盘更加昂贵，但是如果可以节省部分 CPU，内存和机架位置，还是很划算的
 * 在同步刷盘的场景下，RocketMQ 是顺序写，而 Kafka 是随机写。通常情况下，我们认为顺序写的性能远高于随机写，尤其时对于传统的机械硬盘来讲更是如此。 且当 Broker 上的 topic 数量增多时，RocketMQ 在写消息的性能上几乎不会受到影响，而对 Kafka 的影响则会较大。
+
+## 服务实例管理
+
+* 
+
+## 消费
+
+* 消费者从RabbitMQ获取消息的时候，都是通过一个channel的概念来进行的
+* 对消息的消费、ack等操作，全部都是基于这个channel来进行的
+* 批量的发送ack消息（基于同一个channel）给RabbitMQ，这样可以提升整体的性能和吞吐量
+* 标记
+    - 自动ack，是非常简单的。RabbitMQ只要投递一个消息出去给仓储服务，那么他立马就把这个消息给标记为删除，因为他是不管仓储服务到底接收到没有，处理完没有的。性能很好，但是数据容易丢失
+    - 手动ack，那么就是必须等仓储服务完成商品调度发货以后，才会手动发送ack给RabbitMQ，此时RabbitMQ才会认为消息处理完毕，然后才会标记消息为删除
+        + 服务宕机，RabbitMQ会重发消息给另外一个服务实例，保证数据不丢
+* 处理某个消息失败
+    - 使用nack操作：通知RabbitMQ没处理成功消息，然后让RabbitMQ将这个消息再次投递给其他服务实例尝试去完成
 
 ## 可用性
 
@@ -117,6 +143,23 @@
         + Kafka 将 Offset 保存到 Broker 对应的 topic 中
         + RocketMQ 则支持有两种模式，默认是集群模式，topic 中的每条消息只会集群中的一个实例消费，这种模式由服务端管理 Offset，还有一种是广播模式，集群中的所有实例都会消费一份全量消息，这种模式由客户端管理 Offset。
 
+## 数据准确性
+
+* 消费机器 收到消息后未处理宕机
+    - MQ系统机制：只要服务收到一个消息，RabbitMQ就会立马把这条订单消息给标记为删除，这个行为叫做自动ack
+    - 关闭autoAck的行为，手动发送ack消息
+        + 消费者服务实例会自己注册到RabbitMQ,RabbitMQ其实是知道有哪些消费者服务实例存在的
+        + RabbitMQ就会通过自己内部的一个“basic.delivery”方法来投递消息到仓储服务里去，让他消费消息
+        + 投递的时候，会给这次消息的投递带上一个重要的东西，就是“delivery tag”，可以认为是本次消息投递的一个唯一标识。通过这个唯一ID，可以定位一次消息投递
+        + 每次消费了一条消息，处理完毕完成调度发货之后，就会发送一个ack消息给RabbitMQ服务器，这个ack消息是会带上自己本次消息的delivery tag的
+        + RabbitMQ根据哪个channel的哪个delivery tag，对那条消息删除，标识为已经处理完毕
+* 中间件机器宕机
+    - 消息的持久化
+        + 自动恢复queue
+        + 消息持久化
+* 未来得及持久化到磁盘上，同时也还没来得及投递到作为消费，中间件机器宕机
+
+
 ## 单机性能因素
 
 * 硬件层面
@@ -133,26 +176,20 @@
 
 ## 产品
 
-- [PhxQueue](https://github.com/Tencent/phxqueue):[介绍](https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&mid=2650997820&idx=1&sn=c21021580f5474e6f570d1a1eada22bd&chksm=bdbefc6f8ac975791c85d2e9e8cb58a2c384d3daf29c4ac808789aa2281d2dd53c4d2baaf33d&mpshare=1&scene=1&srcid=09141b12nitpm39kMwTLxSIg&pass_ticket=T61h6XjBkARmtNGuhNVdyhTXYAlGFU%2Brx%2FhZrUNp8OOKx9ul0UwejPXkjaJ%2F3yFI#rd)
-- [nsqio/nsq](https://github.com/nsqio/nsq) [文档](http://nsq.io/overview/quick_start.html)
-- [apache/incubator-rocketmq](https://github.com/apache/incubator-rocketmq) a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability.
-- [Apache ActiveMQ](link)
-- [kr/beanstalkd](https://github.com/kr/beanstalkd):Beanstalk is a simple, fast work queue. http://kr.github.io/beanstalkd/
-
-### 产品对比
-
-* 从社区活跃度：按照目前网络上的资料，RabbitMQ 、activeM 、ZeroMQ 三者中，综合来看，RabbitMQ 是首选。
-* 持久化消息比较：ZeroMq 不支持，ActiveMq 和RabbitMq 都支持。持久化消息主要是指我们机器在不可抗力因素等情况下挂掉了，消息不会丢失的机制。
-* 综合技术实现：可靠性、灵活的路由、集群、事务、高可用的队列、消息排序、问题追踪、可视化管理工具、插件系统等等。RabbitMq / Kafka 最好，ActiveMq 次之，ZeroMq 最差。当然ZeroMq 也可以做到，不过自己必须手动写代码实现，代码量不小。尤其是可靠性中的：持久性、投递确认、发布者证实和高可用性。
-* 高并发：毋庸置疑，RabbitMQ 最高，原因是它的实现语言是天生具备高并发高可用的erlang 语言。
-* 比较关注的比较， RabbitMQ 和 Kafka
-    - RabbitMq 比Kafka 成熟，在可用性上，稳定性上，可靠性上，  RabbitMq  胜于  Kafka  （理论上）。
-    - Kafka 的定位主要在日志等方面， 因为Kafka 设计的初衷就是处理日志的，可以看做是一个日志（消息）系统一个重要组件，针对性很强，所以 如果业务方面还是建议选择 RabbitMq 。
-    - Kafka 的性能（吞吐量、TPS ）比RabbitMq 要高出来很多。
-
-## 使用
-
-- 弹幕
+* [PhxQueue](https://github.com/Tencent/phxqueue):[介绍](https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&mid=2650997820&idx=1&sn=c21021580f5474e6f570d1a1eada22bd&chksm=bdbefc6f8ac975791c85d2e9e8cb58a2c384d3daf29c4ac808789aa2281d2dd53c4d2baaf33d&mpshare=1&scene=1&srcid=09141b12nitpm39kMwTLxSIg&pass_ticket=T61h6XjBkARmtNGuhNVdyhTXYAlGFU%2Brx%2FhZrUNp8OOKx9ul0UwejPXkjaJ%2F3yFI#rd)
+* [nsqio/nsq](https://github.com/nsqio/nsq) [文档](http://nsq.io/overview/quick_start.html)
+* [apache/incubator-rocketmq](https://github.com/apache/incubator-rocketmq) a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability.
+* [Apache ActiveMQ](link)
+* [kr/beanstalkd](https://github.com/kr/beanstalkd):Beanstalk is a simple, fast work queue. http://kr.github.io/beanstalkd/
+* 对比
+    - 从社区活跃度：按照目前网络上的资料，RabbitMQ 、activeM 、ZeroMQ 三者中，综合来看，RabbitMQ 是首选。
+    - 持久化消息比较：ZeroMq 不支持，ActiveMq 和RabbitMq 都支持。持久化消息主要是指我们机器在不可抗力因素等情况下挂掉了，消息不会丢失的机制。
+    - 综合技术实现：可靠性、灵活的路由、集群、事务、高可用的队列、消息排序、问题追踪、可视化管理工具、插件系统等等。RabbitMq / Kafka 最好，ActiveMq 次之，ZeroMq 最差。当然ZeroMq 也可以做到，不过自己必须手动写代码实现，代码量不小。尤其是可靠性中的：持久性、投递确认、发布者证实和高可用性。
+    - 高并发：毋庸置疑，RabbitMQ 最高，原因是它的实现语言是天生具备高并发高可用的erlang 语言。
+    - 比较关注的比较， RabbitMQ 和 Kafka
+        + RabbitMq 比Kafka 成熟，在可用性上，稳定性上，可靠性上，  RabbitMq  胜于  Kafka  （理论上）。
+        + Kafka 的定位主要在日志等方面， 因为Kafka 设计的初衷就是处理日志的，可以看做是一个日志（消息）系统一个重要组件，针对性很强，所以 如果业务方面还是建议选择 RabbitMq 。
+        + Kafka 的性能（吞吐量、TPS ）比RabbitMq 要高出来很多
 
 ## 工具
 
