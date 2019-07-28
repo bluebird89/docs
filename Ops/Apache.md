@@ -292,6 +292,7 @@ net stop mysql
     - 默认情况下，PHP解析器是以一个模块形式直接融入到Apache进程中。允许对Apache进程进行改装，往上加载模块
     - CGI方式：
         + 需要解析PHP代码的时候，Apache会通过CGI方式调用一次PHP解析器解析PHP代码，PHP解析器在执行完毕PHP代码后将结果再以CGI的方式返回给Apache，同时，该PHP解析器也会销毁掉
+* Apache所采用的select网络I/O模型非常低效:进程干的事情多：执行PHP、输出HTML都得干，占用的资源就多（CPU、内存）
 
 ## Docker配置
 

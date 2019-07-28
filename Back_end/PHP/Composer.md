@@ -52,6 +52,9 @@ sudo chown -R $USER .composer/
 composer config -l # 查看
 composer config -g repo.packagist composer https://packagist.phpcomposer.com # 全局配置
 composer config repo.packagist composer https://packagist.phpcomposer.com # 项目配置
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+
+composer config -g --unset repos.packagist
 ```
 
 ## package

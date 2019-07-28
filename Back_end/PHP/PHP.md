@@ -1825,6 +1825,7 @@ echo (new Outer)->func2()->func3(); # 6
 * `__destruct()`
 * `__call()`
 * `__callStatic()`
+ `__clone()`
 * `__get()`:读取不可访问属性的值
 * `__set()`:在给不可访问属性赋值时
 * `__isset()`:当对不可访问属性调用 isset() 或 empty() 时
@@ -1834,7 +1835,7 @@ echo (new Outer)->func2()->func3(); # 6
 * `__toString()`:用于一个类被当成字符串时应怎样回应
 * `__invoke()`:当尝试以调用函数的方式调用一个对象时
 * `__set_state()`
-* `__clone()`
+
 
 ```php
 class CallableClass
