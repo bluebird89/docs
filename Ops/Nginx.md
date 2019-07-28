@@ -22,6 +22,7 @@
 * 配置异常简单：非常容易上手。配置风格跟程序开发一样，神一般的配置
 * 非阻塞、高并发连接：官方测试能够支撑5万并发连接，在实际生产环境中跑到2～3万并发连接数
 * 事件驱动：通信机制采用 epoll 模型，支持更大的并发连接
+    - 新的epoll（Linux 2.6内核）和kqueue（freebsd）网络I/O模型
 * Master/Worker 结构：一个 master 进程，生成一个或多个 worker 进程
 * 内存消耗小：处理大并发的请求内存消耗非常小。在3万并发连接下，开启的10个 Nginx 进程才消耗150M 内存（15M*10=150M）
 * 内置的健康检查功能：如果 Nginx 代理的后端的某台 Web 服务器宕机了，不会影响前端访问
@@ -414,6 +415,9 @@ http {
             * rewrite 规则优先级要高于location，在nginx配置文件中，nginx会先用rewrite来处理url，最后再用处理后的url匹配location
 * alias指令来更改location接收到的URI请求路径
 * 命名匹配：使用@比绑定一个模式，类似变量替换的用法
+* 缓存
+    - 浏览器缓存，静态资源缓存用：`expires 7d;`
+    - 代理层缓存
 
 ```
 server {
@@ -918,6 +922,7 @@ location ~^/api/[^\/]+/[^\/]+ {
 　　proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 }
 
+
 location = /room/nginx/queryNewLiveNum.do{
     include conf.d/modules/ssdf.header;
     proxy_cache_methods： GET HEAD POST; #用来设置HTTP哪些方法会被缓存，直播间接口配置了GET、HEAD、POST；
@@ -927,6 +932,16 @@ location = /room/nginx/queryNewLiveNum.do{
     proxy_cache:  qz_fa_cache        #用来设置哪个缓存区将被使用，并定义缓存区的名称
     proxy_pass http http://backend_qz_fa;
 }
+
+location ~ \.(htm|html)?$ {
+    proxy_cache cache;
+    roxy_cache_key:      $uri$is_args$args;
+    add_header X-Cache $upstream_cache_status;
+    proxy_cache_valid:   200 10m;
+    proxy_cache_valid:   any 1m;
+    proxy_pass http http://real_server;
+    proxy_redirect off;
+}
 ```
 
 ## 代理
@@ -935,6 +950,7 @@ location = /room/nginx/queryNewLiveNum.do{
     - 客户端才能使用正向代理。当你需要把你的服务器作为代理服务器的时候，可以用Nginx来实现正向代理.正向代理发生在 client 端，用户能感知到的且是用户主动发起的代理。
     - vpn
     - 不支持HTTPS
+    - 静态代理
 * 反向代理（Reverse Proxy）:以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器
     - 简单来说就是真实的服务器不能直接被外部网络访问，所以需要一台代理服务器，而代理服务器能被外部网络访问的同时又跟真实服务器在同一个网络环境，当然也可能是同一台服务器，端口不同而已。
 
@@ -1008,11 +1024,10 @@ server
 
 ## 负载均衡
 
-分摊到多个操作单元上进行执行,共同完成工作任务，以反向代理的方式进行负载均衡的
-
-* 负载均衡算法
+* 分摊到多个操作单元上进行执行,共同完成工作任务，以反向代理的方式进行负载均衡的
+* 算法
     - Round Robin（默认）:轮询(weight=1):每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。
-    - weight:指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
+    - weight 加权轮询:指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
     - Least Connections(least_conn): 跟踪和backend当前的活跃连接数目，最少的连接数目说明这个backend负载最轻，将请求分配给他，这种方式会考虑到配置中给每个upstream分配的weight权重信息；
     - Least Time(least_time): 请求会分配给响应最快和活跃连接数最少的backend
         + fair（第三方插件）:按后端服务器的响应时间来分配请求，响应时间短的优先分配。
@@ -1051,7 +1066,7 @@ server {
         proxy_set_header Host $host:$server_port;
     }
 
-    upstream bakend {
+    upstream backend {
         server 192.168.1.10;
         server 192.168.1.11;
         keepalive 1024;
@@ -1143,6 +1158,51 @@ match http {
     expect ~* "200 OK";
 }
 ```
+
+## 限流
+
+* 漏桶算法实现
+    - limit_req_zone定义在http块中，$binary_remote_addr 表示保存客户端IP地址的二进制形式
+    - Zone定义IP状态及URL访问频率的共享内存区域。zone=keyword标识区域的名字，以及冒号后面跟区域大小。16000个IP地址的状态信息约1MB，所以示例中区域可以存储160000个IP地址。
+    - Rate定义最大请求速率。示例中速率不能超过每秒100个请求
+    - burst排队大小，nodelay不限制单个请求间的时间
+
+```
+limit_req_zone $binary_remote_addr zone=mylimit:10m rate=100r/s;
+
+limit_req zone=mylimit burst=20 nodelay;
+```
+
+## 黑白名单
+
+```
+# 不限流白名单
+geo $limit{
+    122.16.11.0/24 0;
+}
+
+map $limit $limit_key{
+    1 $binary_remote_addr;
+    0 "";
+}
+
+limit_req_zone $limit_key zone=mylimt:10m rate=1r/s;
+
+location / {
+    limit_req zone=mylimit burst=1 nodelay;
+    proxy_pass http://serveice3Cluster
+}
+
+# 黑名单
+location / {
+    deny 10.52.119.21;
+    deny 10.52.119.0/24;
+    allow 10.1.1.0/16;
+    allow 1001:0db8::/32;
+    deny all;
+}
+```
+
 
 ## [鉴权配置](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/)
 

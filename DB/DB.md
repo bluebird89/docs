@@ -140,6 +140,7 @@ NoSQL主要用于解决以下几种问题
 * [amark/gun](https://github.com/amark/gun):A realtime, decentralized, offline-first, graph database engine. https://gun.eco/docs
 * [vasilakisfil/Introspected-REST](https://github.com/vasilakisfil/Introspected-REST):An alternative to REST and GraphQL https://introspected.rest
 * [alibaba/tair](https://github.com/alibaba/tair):A distributed key-value storage system developed by Alibaba Group
+* [taosdata/TDengine](https://github.com/taosdata/TDengine):An open-source big data platform designed and optimized for the Internet of Things (IoT). https://www.taosdata.com
 * [apple/foundationdb](https://github.com/apple/foundationdb):FoundationDB - the open source, distributed, transactional key-value store https://www.foundationdb.org
 * [msiemens/tinydb](https://github.com/msiemens/tinydb):TinyDB is a lightweight document oriented database optimized for your happiness :) https://tinydb.readthedocs.org
 * [gruns/ImmortalDB](https://github.com/gruns/ImmortalDB):🔩 A relentless key-value store for the browser.

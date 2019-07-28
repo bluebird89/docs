@@ -72,6 +72,7 @@
     -   [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub):🍰 万物皆可 RSS https://docs.rsshub.app
     - [FreshRSS/FreshRSS](https://github.com/FreshRSS/FreshRSS):A free, self-hostable aggregator… http://freshrss.org
     - [feeddemon](http://www.feeddemon.com/)
+* [brainpickings](brainpickings.org):阅读充电好去处
 
 ## 建站
 

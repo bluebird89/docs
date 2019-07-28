@@ -48,9 +48,9 @@
     - 区块链：需求同比增长 517%：精通区块链的工程师通常拥有后端工程师、系统工程师或解决方案架构师等头衔
 * 结对编程（一种开发方式，两名程序员在一个工作站上工作）的工作方式能够提高自己在一家公司工作的意愿
 
-## 参考
+## 工具
 
-* [learndesignthehardway](https://www.learndesignthehardway.com)
+* [Ruby regular expression editor](https://rubular.com):a Ruby regular expression editor
 
 ## 语言
 
@@ -58,6 +58,7 @@
 
 ## 资源
 
+* [learndesignthehardway](https://www.learndesignthehardway.com)
 * [EZLippi/practical-programming-books](https://github.com/EZLippi/practical-programming-books)这里收录比较实用的计算机相关技术书籍，可以在短期之内入门的简单实用教程、一些技术网站以及一些写的比较好的博文
 * [freeCodeCamp/freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp):The https://freeCodeCamp.org open source codebase and curriculum. Learn to code for free together with millions of people.
 * [sdmg15/Best-websites-a-programmer-should-visit](https://github.com/sdmg15/Best-websites-a-programmer-should-visit):🔗 Some useful websites for programmers.

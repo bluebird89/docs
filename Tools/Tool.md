@@ -19,6 +19,8 @@
 * monitor
     - [huginn/huginn](https://github.com/huginn/huginn):Create agents that monitor and act on your behalf. Your agents are standing by!
 * [yehuio/Coot](https://github.com/yehuio/Coot):玩转 IFTTT 体验极客生活，互联网自动化神器 https://coot.io
+* 笔记
+    - TickTick
 
 ## cheatsheets
 

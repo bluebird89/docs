@@ -64,7 +64,6 @@
     - 快速做决定意味着在你的职业生涯中你能做出更多的决定，这会让你对哪一个备选项才是正确的选择产生更强的直觉。经验是生产力的关键，更高的生产力将为你提供更多的经验：这是一个良性循环。
     - 在你意识到自己缺乏直觉的情况下，坚持抽象原则。在你的职业生涯中建立一个可靠的原则清单。原则是形式化的直觉，比原始模式识别适用于更广泛的情况 (这需要对类似情况有直接且广泛的经验)。
 
-
 ## 语言
 
 * [skiplang/skip](https://github.com/skiplang/skip):A programming language to skip the things you have already computed http://www.skiplang.com
@@ -73,19 +72,17 @@
 
 * [gothinkster/realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 https://realworld.io/
 
-## resource
-
-- [Java World](http://www.javaworld.com/)
-- [Java SE 技术文档](http://docs.oracle.com/javase/)
-- [DZone](http://www.dzone.com)
-- [Stackoverflow](http://stackoverflow.com/)
-
 ## 参考
 
+* [Java World](http://www.javaworld.com/)
+* [Java SE 技术文档](http://docs.oracle.com/javase/)
+* [DZone](http://www.dzone.com)
+* [Stackoverflow](http://stackoverflow.com/)
 * [30-seconds/30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code)：Curated collection of useful Javascript snippets that you can understand in 30 seconds or less. https://30secondsofcode.org/
 * [教程](http://www.phperz.com/special.html)
 * [aosabook/500lines](https://github.com/aosabook/500lines):500 Lines or Less
 * [斯坦福大学公开课：编程方法学28集全](https://www.bilibili.com/video/av8048664)
+* [hellerve/programming-talks](https://github.com/hellerve/programming-talks):Awesome & interesting talks about programming
 
 ## 工具
 
@@ -95,3 +92,4 @@
 * [unbug/codelf](https://github.com/unbug/codelf):Best GitHub stars, repositories tagger and organizer. Search over projects from Github, Bitbucket, Google Code, Codeplex, Sourceforge, Fedora Project, GitLab to find real-world usage variable names https://unbug.github.io/codelf/
 * [prettier/prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. https://prettier.io
 * [ggreer/the_silver_searcher](https://github.com/ggreer/the_silver_searcher):A code-searching tool similar to ack, but faster. http://geoff.greer.fm/ag/
+* [hackmdio/codimd](https://github.com/hackmdio/codimd):CodiMD - Realtime collaborative markdown notes on all platforms.
