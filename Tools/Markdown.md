@@ -671,19 +671,23 @@ Actions->Insert Read More Comment *或者* `Command + .`
     - [Twig](https://github.com/lukakerr/Pine):A modern, native macOS markdown editor https://lukakerr.github.io/Pine
     - [MacDown](https://github.com/MacDownApp/macdown):Open source Markdown editor for macOS. https://macdown.uranusjr.com/
     - Mark Text:实时显示的markdown编辑器
-    * [幕布](https://mubu.com/):可折叠的markdown
+    - [Quiver](link)
+    - [幕布](https://mubu.com/):可折叠的markdown
     - [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
 * [typora](https://www.typora.io/)
 * windows
     - MarkdownPad(需要浏览器渲染插件awesome)
     - MarkPad
     - Cmd Markdown
+    - CherryTree
     - [zybuluo](https://www.zybuluo.com/cmd/)
 - MacDow：MWeb 是专业的 Markdown 写作、记笔记、静态博客生成软件。然后这里**重点说明**一下：MWeb 有**两个模式**，外部模式和文档库模式。外部模式中把本地硬盘或 Dropbox 等网盘的文件夹引入，就可以使用 MWeb 的拖拽、粘贴插入图片、图床等特色功能。文档库模式设计为用于记笔记和静态博客生成。对于有**同步和协作需求**的朋友，请使用外部模式！使用视图菜单或者快捷键 `CMD + E` 可以打开外部模式，`CMD + L` 可以打开文档库。左边的第一第二栏是使用**右键**和底部的几个按钮操作，另外就是右上角有三个按钮了（外部模式是两个），快捷键分别是：`CMD + 7/8/9`。
 - [marktext/marktext](https://github.com/marktext/marktext):📝Next generation markdown editor, running on platforms of MacOS Windows and Linux. https://marktext.github.io/website/ `brew cask install mark-text`
 * [fabiospampinato/notable](https://github.com/fabiospampinato/notable):The markdown-based note-taking app that doesn't suck.
 * [Markdown Here](https://markdown-here.com/)
 * [GitNote](https://www.gitnoteapp.com)
+* [MedleyText](link)
+* OneNote
 
 ## 工具
 

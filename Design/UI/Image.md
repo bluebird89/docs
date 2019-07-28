@@ -245,6 +245,7 @@ $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
 * [remove](http://remove.bg):Remove Image Background
 * [Find The Best Free Stock Photos For Your Project](https://www.mailomix.com/products/stock-photo-search/)
 * [ImageOptim/ImageOptim](https://github.com/ImageOptim/ImageOptim):GUI image optimizer for Mac https://imageoptim.com/mac
+* [illuminations](https://illuminations.nctm.org):在线画图网站
 
 ## 资源
 

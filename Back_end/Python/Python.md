@@ -1353,11 +1353,10 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 * [Yixiaohan/codeparkshare](https://github.com/Yixiaohan/codeparkshare):Python初学者（零基础学习Python、Python入门）书籍、视频、资料、社区推荐
 * [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide):Python best practices guidebook, written for Humans. http://docs.python-guide.org
 * [michaelliao/learn-python3](https://github.com/michaelliao/learn-python3): Learn Python 3 Sample Code
-- [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
-- [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
-
-- [python3](http://www.runoob.com/python3)
-- <http://www.cnblogs.com/linhaifeng/p/7278389.html>
+* [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
+* [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
+* [python3](http://www.runoob.com/python3)
+* <http://www.cnblogs.com/linhaifeng/p/7278389.html>
 
 ## 扩展
 
@@ -1395,4 +1394,4 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 * [mahmoud/awesome-python-applications](https://github.com/mahmoud/awesome-python-applications):cd Free software that works great, and also happens to be open-source Python. ftp://you:relookin@it.example.com#readme
 * [coodict/python3-in-one-pic](https://github.com/coodict/python3-in-one-pic):Learn python3 in one picture. https://git.io/Coo-py3
 * [lijin-THU/notes-python](https://github.com/lijin-THU/notes-python):中文 Python 笔记
-
+* [Python 3 cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/):Python3教学手册
