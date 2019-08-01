@@ -54,3 +54,7 @@ yarn config set disturl https://npm.taobao.org/dist --global
 > Failed to fetch https://dl.yarnpkg.com/debian/dists/stable/InRelease  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY E074D16EB6FF4DE3
 
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+
+> Yarn, node-gyp rebuild compile error, node_modules/fsevents: Command failed
+
+sudo rm -r node_modules && rm yarn.lock && yarn install

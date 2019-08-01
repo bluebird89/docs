@@ -35,9 +35,12 @@ C:\>tasklist|findstr "2448"
 thread.exe  2016 Console    0    16,064 K
 ```
 
-## 使用
-
 ### box管理
+
+* 下载
+    - 环境有默认的box名称，添加box时不带url或uri会默认从官网下载（速度不敢保证）
+    - 国外服务器通过wget下载，scp root@192.168.10.10:virtualbox.box virtualbox.box
+    - box版本号的问题
 
 ```sh
 vagrant box list              # 列表
@@ -52,16 +55,8 @@ vagrant box repackage         # 重新打包
 
 vagrant plugin repair|update
 vagrant plugin expunge --reinstall
-```
 
-box下载
-
-* 环境有默认的box名称，添加box时不带url或uri会默认从官网下载（速度不敢保证）
-* 国外服务器通过wget下载，scp root@192.168.10.10:virtualbox.box virtualbox.box
-* box版本号的问题
-
-```json
-// 新建metadata.json
+# 新建metadata.json
 {
     "name": "laravel/homestead",            //盒子名称
     "versions":
@@ -114,6 +109,8 @@ vagrant package (--base web --output web.box --vagrantfile Vagrantfile) # 打包
 vagrant provision --provision-with chef
 
 vagrant plugin install vagrant-vbguest # 插件安装
+
+
 ```
 
 ## 配置
@@ -290,6 +287,14 @@ Vagrant.configure("2") do |config|
         end
     end
 end
+```
+
+## 实例管理
+
+```sh
+# 查看实例
+vagrant global-status --prune
+
 ```
 
 ## 网络说明
