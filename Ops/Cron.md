@@ -94,6 +94,8 @@ nohup /usr/local/bin/php /mnt/cdrom/ppcbin/htdocs/crmd/yii  process/sync&
 setsid ping www.ibm.com
 
 jobs
+
+ps axu|grep "php artisan send:AsynSendEmail"|grep -v "grep"|wc -l;
 ```
 
 ## 工具
