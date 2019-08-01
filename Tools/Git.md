@@ -1191,6 +1191,7 @@ git merge FETCH_HEAD
 * github pages:必须使用master作为分支
   - hexo：添加文章后现hexo g（生成） hexo d（部署）
   - jekyll：直接push到master就好
+* [import]( https://github.com/new/import)
 * 参考
   - [awesome-actions](https://github.com/sdras/awesome-actions):A curated list of awesome actions to use on GitHub
   - [gitalk/gitalk](https://github.com/gitalk/gitalk):Gitalk is a modern comment component based on Github Issue and Preact. https://gitalk.github.io

@@ -2358,10 +2358,16 @@ function boot()
 
 $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 
-### 
+## 任务调度
+
+```sh
+php artisan schedule:run
+```
+
+## 测试
 
 ```php
-
+php artisan make:test UserTest --unit
 ```
 
 ### [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
@@ -2402,7 +2408,6 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
 * Swoole
   - [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
 * logger
-  - [laravel/telescope](https://github.com/laravel/telescope):provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more
   - [overtrue/laravel-query-logger](https://github.com/overtrue/laravel-query-logger):📝 A dev tool to log all queries for laravel application.
   - [andersao/laravel-request-logger](https://github.com/andersao/laravel-request-logger):HTTP request logger middleware for Laravel
   - [antonioribeiro/tracker](https://github.com/antonioribeiro/tracker):Laravel Stats Tracker
@@ -2420,12 +2425,13 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
 * pay
   - [laravel/cashier](https://github.com/laravel/cashier):provides an expressive, fluent interface to Stripe's subscription billing services.
 * [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
-* [laravel/dusk](https://github.com/laravel/dusk):Laravel Dusk provides an expressive, easy-to-use browser automation and testing API.
 * [laravel/envoy](https://github.com/laravel/envoy):Elegant SSH tasks for PHP. a clean, minimal syntax for defining common tasks you run on your remote servers
 * [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
 * [barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf):A DOMPDF Wrapper for Laravel
 * RBAC
   - [Zizaco/entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
+  - [spatie/laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
+  - [FrozenNode/Laravel-Administrator](https://github.com/FrozenNode/Laravel-Administrator):An administrative interface package for Laravel http://administrator.frozennode.com/
 * [bosnadev/repository](https://github.com/bosnadev/repository):Laravel Repositories is a package for Laravel 5 which is used to abstract the database layer. This makes applications much easier to maintain. https://bosnadev.com
 * [LaravelCollective/html](https://github.com/LaravelCollective/html):HTML and Form Builders for the Laravel Framework
 * [Algolia](https://www.algolia.com/doc/api-client/laravel/algolia-and-scout/):Algolia is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke
@@ -2435,7 +2441,6 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
   - [illuminate/database](https://github.com/illuminate/database):[READ ONLY] Subtree split of the Illuminate Database component (see laravel/framework)
   - [protoqol/prequel](https://github.com/Protoqol/Prequel)
   - Redis
-    + [laravel/horizon](https://github.com/laravel/horizon):Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues. https://horizon.laravel.com
   - MongoDB
     + [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb#installation):A MongoDB based Eloquent model and Query builder for Laravel (Moloquent) https://jenssegers.com
 * [GrahamCampbell/Laravel-Throttle](https://github.com/GrahamCampbell/Laravel-Throttle):A rate limiter for Laravel 5 https://gjcampbell.co.uk/
@@ -2444,16 +2449,16 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
   - [laravel/valet](https://github.com/laravel/valet):Valet is a Laravel development environment for Mac minimalists.
   - [weprovide/valet-plus](https://github.com/weprovide/valet-plus):Blazing fast macOS PHP development environment https://medium.com/@timneutkens/intro…
 * debug
+  - [laravel/telescope](https://github.com/laravel/telescope):provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more
   - [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
   - [stefanzweifel/laravel-stats](https://github.com/stefanzweifel/laravel-stats):📈 Get insights about your Laravel or Lumen Project
   - [wujunze/laravel-debug-helper](https://github.com/wujunze/laravel-debug-helper):Laravel package to help debug
 * [codex-project/codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! http://codex-project.ninja
-* [spatie/laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
-* [FrozenNode/Laravel-Administrator](https://github.com/FrozenNode/Laravel-Administrator):An administrative interface package for Laravel http://administrator.frozennode.com/
 * [laravelshift](https://laravelshift.com/):laravel upgrade
 * [Laravel Analyzer](link)
 * MQ
   - [vyuldashev/laravel-queue-rabbitmq](https://github.com/vyuldashev/laravel-queue-rabbitmq):RabbitMQ driver for Laravel Queue
+  - [laravel/horizon](https://github.com/laravel/horizon):Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues. https://horizon.laravel.com
 * [InfyOmLabs/laravel-generator](https://github.com/InfyOmLabs/laravel-generator):InfyOm Laravel Generator - API, Scaffold, CRUD Laravel Generator http://labs.infyom.com/laravelgenerator/
 * [spatie/laravel-fractal](https://github.com/spatie/laravel-fractal):An easy to use Fractal wrapper built for Laravel and Lumen applications
 * [barryvdh/laravel-snappy](https://github.com/barryvdh/laravel-snappy):Laravel Snappy PDF
@@ -2465,10 +2470,14 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
   - [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
 * [laravel-zero/laravel-zero](https://github.com/laravel-zero/laravel-zero):A PHP framework for console artisans https://laravel-zero.com
 * [nWidart/laravel-modules](https://github.com/nWidart/laravel-modules):Module Management In Laravel https://nwidart.com/laravel-modules/
-* [Forge](https://forge.laravel.com):Painless PHP Servers Provision and deploy unlimited PHP applications on DigitalOcean, Linode, AWS, and more.
-* [envoyer](https://envoyer.io):Deployments you've only dreamed about. Zero downtime. Zero fuss.
+* cron
+  - [Forge](https://forge.laravel.com):Painless PHP Servers Provision and deploy unlimited PHP applications on DigitalOcean, Linode, AWS, and more.
 * [Laravel Spark](https://spark.laravel.com):provides the perfect starting point for your next big idea. Forget all the boilerplate and focus on what matters: your application.
 * [Laravel Nova](https://nova.laravel.com):a beautifully designed administration panel for Laravel. Carefully crafted by the creators of Laravel to make you the most productive developer in the galaxy.
+* 测试
+  - [laravel/dusk](https://github.com/laravel/dusk):Laravel Dusk provides an expressive, easy-to-use browser automation and testing API.
+* 部署
+  - [envoyer](https://envoyer.io):Deployments you've only dreamed about. Zero downtime. Zero fuss
 
 ```sh
 # laravel-admin
@@ -2514,6 +2523,77 @@ Debugbar::addMeasure('now', LARAVEL_START, microtime(true));
 Debugbar::measure('My long operation', function() {
     // Do something…
 });
+
+# Larave Telescope 是 Laravel 框架的优雅调试助手。Telescope 可深入了解进入应用程序的请求、异常、日志条目、数据库查询、排队作业、邮件、通知、缓存操作、计划任务、变量转储等。Telescope 是您本地 Laravel 开发环境的绝佳伴侣。
+composer require laravel/telescope
+php artisan telescope:install
+php artisan migrate
+
+php artisan telescope:publish # 更新
+# 从 app 配置文件中删除 TelescopeServiceProvider 服务提供注册。相反，在 AppServiceProvider 的 register 方法中手动注册服务
+php artisan vendor:publish --tag=telescope-migrations # 导出默认迁移
+# 配置文件 config/telescope.php 监听配置
+# app/Providers/TelescopeServiceProvider.php
+# 过滤 授权
+
+# Laravel Dusk
+composer require --dev laravel/dusk
+php artisan dusk:install
+# .env 文件中设置 APP_URL 变量 与在浏览器中打开本应用的 URL 匹配
+# 手动启动 chromedrive
+php artisan dusk
+
+php artisan dusk:make LoginTest
+
+# laravel/envoy
+composer global require laravel/envoy
+# / Envoy.blade.php
+@servers(['web' => ['user@192.168.1.1']])
+# 变量
+@setup
+    $now = new DateTime();
+    $environment = isset($env) ? $env : "testing";
+@endsetup
+@include('vendor/autoload.php')
+@story('deploy')
+    git
+    composer
+@endstory
+@task('git')
+    git pull origin master
+@endtask
+
+@task('composer')
+    composer install
+@endtask
+@task('deploy', ['on' => 'web'])
+    cd site
+
+    @if ($branch)
+        git pull origin {{ $branch }}
+    @endif
+
+    php artisan migrate
+@endtask
+@finished
+    @slack('webhook-url', '#bots')
+    @discord('discord-webhook-url')
+@endfinished
+
+envoy run deploy --branch=master
+
+# laravel/scout  为 Eloquent 模型 的全文搜索提供了基于驱动的简单的解决方案。通过使用模型观察者， Scout 会自动同步 Eloquent 记录的搜索索引
+composer require laravel/scout
+php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
+
+# horizon
+composer require laravel/horizon
+php artisan horizon:install
+php artisan queue:failed-table // 存储任何 失败的队列任务
+php artisan migrate
+
+php artisan horizon
+php artisan horizon:pause|continue|terminate
 ```
 
 ## 参考
@@ -2590,6 +2670,9 @@ password: password
 ## 问题
 
 > Call to undefined function openssl_encrypt() # 开启OpenSSL扩展
+
+>  SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint
+>  关联表中类型不一致造成
 
 <http://laravelacademy.org/post/6718.html>
 <https://d.laravel-china.org/docs/5.3/facades#how-facades-work>

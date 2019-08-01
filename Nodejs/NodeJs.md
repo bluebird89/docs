@@ -708,14 +708,34 @@ ORM框架比Web框架要少一些：Sequelize，ORM2，Bookshelf.js，Objection.
 
 ### 实际服务器
 
-nginx作为反向代理服务器，拥有诸多优势，可以做负载均衡和静态资源服务器。
-后面的两台机器就是我们的nodejs应用服务器集群。
-nginx 的负载均衡是用在多机器环境下的，单机的负载均衡还是要靠cluster 这类模块来做。
-nginx与node应用服务器的对比：
-nginx是一个高性能的反向代理服务器，要大量并且快速的转发请求，所以不能采用上面第三种方法，原因是仅有一个进程去accept，然后通过消息队列等同步方式使其他子进程处理这些新建的连接，效率会低一些。
-nginx采用第二种方法，那就依然可能会产生负载不完全均衡和惊群问题。nginx是怎么解决的呢：
-nginx中使用mutex互斥锁解决这个问题，具体措施有使用全局互斥锁，每个子进程在epoll_wait()之前先去申请锁，申请到则继续处理，获取不到则等待，并设置了一个负载均衡的算法（当某一个子进程的任务量达到总设置量的7/8时，则不会再尝试去申请锁）来均衡各个进程的任务量。具体的nginx如何解决惊群，看这篇文章: <http://blog.csdn.net/russell_tao/article/details/7204260>
-node应用服务器为什么可以采用方案三呢，我的理解是：node作为具体的应该服务器负责实际处理用户的请求，处理可能包含数据库等操作，不是必须快速的接收大量请求，而且转发到某具体的node单台服务器上的请求较之nginx也少了很多。
+* nginx作为反向代理服务器，拥有诸多优势，可以做负载均衡和静态资源服务器。
+* 后面的两台机器就是我们的nodejs应用服务器集群。
+* nginx 的负载均衡是用在多机器环境下的，单机的负载均衡还是要靠cluster 这类模块来做。
+* nginx与node应用服务器的对比：
+* nginx是一个高性能的反向代理服务器，要大量并且快速的转发请求，所以不能采用上面第三种方法，原因是仅有一个进程去accept，然后通过消息队列等同步方式使其他子进程处理这些新建的连接，效率会低一些。
+* nginx采用第二种方法，那就依然可能会产生负载不完全均衡和惊群问题。nginx是怎么解决的呢：
+* nginx中使用mutex互斥锁解决这个问题，具体措施有使用全局互斥锁，每个子进程在epoll_wait()之前先去申请锁，申请到则继续处理，获取不到则等待，并设置了一个负载均衡的算法（当某一个子进程的任务量达到总设置量的7/8时，则不会再尝试去申请锁）来均衡各个进程的任务量。具体的nginx如何解决惊群，看这篇文章: <http://blog.csdn.net/russell_tao/article/details/7204260>
+* node应用服务器为什么可以采用方案三呢，我的理解是：node作为具体的应该服务器负责实际处理用户的请求，处理可能包含数据库等操作，不是必须快速的接收大量请求，而且转发到某具体的node单台服务器上的请求较之nginx也少了很多。
+
+## 面试
+
+* [jimuyouyou/node-interview-questions](https://github.com/jimuyouyou/node-interview-questions)
+
+## 教程
+
+* [The Node Beginner Book](https://www.nodebeginner.org/index-zh-cn.html)
+* [ElemeFE/node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
+* [Chiara-yen/startLearningNodejs](https://github.com/Chiara-yen/startLearningNodejs):
+* [scotch-io/node-todo](https://github.com/scotch-io/node-todo):A simple Node/MongoDB/Angular todo app https://scotch.io/tutorials/creating-…
+* [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list. Curated from the top ranked articles and always updated
+* [nodejs](https://www.runoob.com/nodejs)
+* [alsotang/node-lessons](https://github.com/alsotang/node-lessons):📕《Node.js 包教不包会》 by alsotang
+* [node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
+* [nodejs入门](https://leanpub.com/nodebeginner-chinese)
+* [NodeJS的代码调试和性能调优](http://www.cnblogs.com/hustskyking/p/how-to-build-a-https-server.html)
+* [swbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
+* [Node.js v8.x 中文文档](https://www.nodeapp.cn/)
+* [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list (November 2018) https://twitter.com/nodepractices/
 
 ## 扩展
 
@@ -778,35 +798,26 @@ node应用服务器为什么可以采用方案三呢，我的理解是：node作
   - [visionmedia/supertest](https://github.com/visionmedia/supertest):🕷Super-agent driven library for testing node.js HTTP servers using a fluent API
 * [tj/co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)
 
-## 面试
-
-* [jimuyouyou/node-interview-questions](https://github.com/jimuyouyou/node-interview-questions)
-
-## 教程
-
-* [The Node Beginner Book](https://www.nodebeginner.org/index-zh-cn.html)
-* [ElemeFE/node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
-* [Chiara-yen/startLearningNodejs](https://github.com/Chiara-yen/startLearningNodejs):
-* [scotch-io/node-todo](https://github.com/scotch-io/node-todo):A simple Node/MongoDB/Angular todo app https://scotch.io/tutorials/creating-…
-* [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list. Curated from the top ranked articles and always updated
-* [nodejs](https://www.runoob.com/nodejs)
-* [alsotang/node-lessons](https://github.com/alsotang/node-lessons):📕《Node.js 包教不包会》 by alsotang
-* [node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
-* [nodejs入门](https://leanpub.com/nodebeginner-chinese)
-* [NodeJS的代码调试和性能调优](http://www.cnblogs.com/hustskyking/p/how-to-build-a-https-server.html)
-* [swbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
-* [Node.js v8.x 中文文档](https://www.nodeapp.cn/)
-* [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list (November 2018) https://twitter.com/nodepractices/
-
-## 工具
-
 * [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 * [noble/bleno](https://github.com/noble/bleno):A Node.js module for implementing BLE (Bluetooth Low Energy) peripherals
 * [octalmage/robotjs](https://github.com/octalmage/robotjs):Node.js Desktop Automation. http://robotjs.io
 * [sveltejs/svelte](https://github.com/sveltejs/svelte):Cybernetically enhanced web apps https://svelte.dev
 
-##  reference
+## reference
 
 * [Guides](https://nodejs.org/en/docs/guides/)
 * [Node.js v11.6.0 Documentation](https://nodejs.org/api/)
+
+##  问题
+
+> node-sass
+
+```sh
+npm install -g mirror-config-china --registry=http://registry.npm.taobao.org
+npm install node-sass
+
+SASS_BINARY_SITE=https://npm.taobao.org/mirrors/node-sass/ npm install node-sass
+
+yarn install node-sass
+```
