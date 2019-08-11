@@ -7,3 +7,4 @@ The world's simplest facial recognition api for Python and the command line
 * [justadudewhohacks/face-api.js](https://github.com/justadudewhohacks/face-api.js):JavaScript API for face detection and face recognition in the browser with tensorflow.js
 * [deepinsight/insightface](https://github.com/deepinsight/insightface):Face Recognition Project on MXNet
 * [cs231n/cs231n.github.io](https://github.com/cs231n/cs231n.github.io):Public facing notes page
+* [](https://github.com/ageitgey/face_recognition)

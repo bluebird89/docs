@@ -356,6 +356,8 @@
 * [GokuMohandas/practicalAI](https://github.com/GokuMohandas/practicalAI):A practical approach to learning machine learning.
 * [sea-boat/MachineLearning_Lab](https://github.com/sea-boat/MachineLearning_Lab):Code lab for machine learning. Including Least Square Method,Gradient Descent,Newton's Method,Hierarchy Cluster,KNN,Markov,Adaboost,Random Number Generation(all kinds of distributions),N Sigma outlier detection,outlier detection based on median,FFT outlier detection,DBSCAN,Kmeans,Naive Bayes,perceptron,reinforcement learning.
 * [roboticcam/machine-learning-notes](https://github.com/roboticcam/machine-learning-notes):My continuously updated Machine Learning, Probabilistic Models and Deep Learning notes and demos (1000+ slides) 我不间断更新的机器学习，概率模型和深度学习的讲义(1000+页)和视频链接
-* [](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)
 * [构建可扩展的机器学习系统（一）：你所需的架构设计知识](https://towardsdatascience.com/being-a-data-scientist-does-not-make-you-a-software-engineer-c64081526372)
-- [MIT Deep Learning](http://www.deeplearningbook.org/)：Bengio写的MIT Press《Deep learning》
+* [MIT Deep Learning](http://www.deeplearningbook.org/)：Bengio写的MIT Press《Deep learning》
+* [yhangf/ML-NOTE](https://github.com/yhangf/ML-NOTE):📙慢慢整理所学的机器学习算法，并根据自己所理解的样子叙述出来。(注重数学推导) 
+* [](https://github.com/apache/predictionio)
+* [](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)

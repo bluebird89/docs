@@ -30,6 +30,7 @@
     - [线性代数](https://zhuanlan.zhihu.com/p/36311622)
         + 麻省理工的《线性代数及其应用》
         + [Linear Algebra and Learning from Data](http://math.mit.edu/~gs/learningfromdata/)
+        + [MIT《线性代数（Linear Algebra）》](https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/)
     - [微积分和统计学](https://zhuanlan.zhihu.com/p/36584206)
         + 《普林斯顿微积分读本》
         + 入门教材: 深入浅出统计学
@@ -37,6 +38,7 @@
         + 推荐视频：[可汗学院统计学](http://open.163.com/special/Khan/khstatistics.html)
     - [概率论与数理统计](https://zhuanlan.zhihu.com/p/36584335)
         + 陈希孺院士的《概率论与数理统计》
+        + [斯坦福《概率与统计（Probability and Statistics）》](https://online.stanford.edu/courses/gse-yprobstat-probability-and-statistics)
 * python
     - 环境
         * [Anaconda](https://www.anaconda.com/download/)
@@ -90,6 +92,7 @@
     - 实战
         + [Kaggle 主页](https://www.kaggle.com/)
         + [Kaggle 路线](https://github.com/apachecn/kaggle)
+        + [如何赢得数据科学竞赛：向顶尖 Kaggler 学习（How to Win a Data Science Competition: Learn from Top Kagglers）](https://www.coursera.org/learn/competitive-data-science)
         + [image-net](http://www.image-net.org/)
     - 工具
         + [Scikit-Learn 官方文档](https://scikit-learn.org/stable/index.html): <http://sklearn.apachecn.org/#/>
@@ -108,6 +111,9 @@
             * [秋季CS230视频列表](https://www.bilibili.com/video/av47055599)
             * [春季CS230课程大纲](http://cs230.stanford.edu/syllabus/)
             * [Cheetsheet](https://stanford.edu/~shervine/teaching/cs-230.html)
+        + [全栈深度学习训练营（Full Stack Deep Learning Bootcamp）](https://fullstackdeeplearning.com/march2019)
+        + [用于视觉识别的卷积神经网络（Convolutional Neural Networks for Visual Recognition）](https://www.youtube.com/playlist?list=PLzUTmXVwsnXod6WNdg57Yc3zFx_f-RYsq)
+        + [程序员深度学习实战（Practical Deep Learning for Coders）](https://course.fast.ai/)
     - 书籍
         + 神经网络与深度学习 - 复旦邱锡鹏
             * [GitHub地址](https://nndl.github.io/)
@@ -130,6 +136,7 @@
             * [视频地址](https://www.bilibili.com/video/av24724071)： <https://www.youtube.com/watch?v=2pWv7GOvuf0>
             * [课程PPT](http://speech.ee.ntu.edu.tw/~tlkagk/courses_MLDS18.html)
             * [课程笔记](https://blog.csdn.net/cindy_1102/article/details/87905272)
+        + [强化学习入门课程（Introduction to Reinforcement Learning）](：https://www.youtube.com/watch?v=2pWv7GOvuf0&list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ)
 * 自然语言处理（NLP，Natural Language Processing）:研究计算机处理人类语言的一门技术，目的是弥补人类交流（自然语言）和计算机理解（机器语言）之间的差距。NLP包含句法语义分析、信息抽取、文本挖掘、机器翻译、信息检索、问答系统和对话系统等领域。
     - 公开课
         + CS224n 斯坦福深度自然语言处理课
@@ -139,6 +146,7 @@
         + 自然语言处理 - Dan Jurafsky 和 Chris Manning
             - [B站英文字幕版](https://www.bilibili.com/video/av35805262/)
             - [学术激流网](http://academictorrents.com/details/d2c8f8f1651740520b7dfab23438d89bc8c0c0ab)
+        * [深度学习自然语言处理（Natural Language Processing with Deep Learning）](https://www.youtube.com/playlist?list=PLU40WL8Ol94IJzQtileLTqGZuXtGlLMP_)
     - 书籍
         - Python自然语言处理
         - 自然语言处理综论 Daniel Jurafsky和James H. Martin
@@ -337,6 +345,7 @@
 
 * [rlabbe/Kalman-and-Bayesian-Filters-in-Python](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python):Kalman Filter book using Jupyter Notebook. Focuses on building intuition and experience, not formal proofs. Includes Kalman filters,extended Kalman filters, unscented Kalman filters, particle filters, and more. All exercises include solutions.
 * [facebookresearch/fastText](https://github.com/facebookresearch/fastText):Library for fast text representation and classification.
+* [bytedance/byteps](https://github.com/bytedance/byteps):A high performance and general PS framework for distributed training
 
 ## 参考
 
