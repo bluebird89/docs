@@ -38,6 +38,20 @@ make && make install
 
 ## 配置
 
+* source 配置
+    - sql_query_pre：前置sql操作，用户设置连接字符集，定义一些sql变量
+    - sql_query：数据获取sql语句
+    - sql_query_post：数据获取之后的sql操作，用于保存一些状态数据等
+    - sql_query_killlist：屏蔽索引id数据源，用来告诉sphinx，哪些索引id要屏蔽,配合kbatch使用
+* index 配置
+    - source：使用数据配置名，对应source配置名称
+    - path：索引数据保存路径
+    - mlock：索引缓存设置，0不使用
+    - min_word_len：索引的词的最小长度 设为1 既可以搜索单个字节搜索,越小 索引越精确,但建立索引花费的时间越长
+    - ngram_len：对于非字母型数据的长度切割(默认已字符和数字切割,设置1为按没个字母切割)
+    - ngram_chars：ngram 字符集，中文需要配置
+    - kbatch：屏蔽索引的列表
+
 ```
 # 搜索统计表
 CREATE TABLE `sph_search_counter` (

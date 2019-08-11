@@ -1,6 +1,6 @@
-# [Drone](https://drone.io)
+# [drone/drone](https://github.com/drone/drone)
 
-Automate Software Testing and Delivery
+Drone is a Container-Native, Continuous Delivery Platform https://drone.io
 
 ## 插件
 

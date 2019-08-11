@@ -490,6 +490,7 @@ grep 'temporary password' /var/log/mysqld.log
     - M整数与小数部分的总长度， D指的是小数部分的长度
     - 注意:定点数的值是正确的，浮点数会失去精度。浮点数的执行效率要高于定点数。浮点数和定点数支持显示宽度，支持无符号
 * **字符**
+    - 长度 指的 字符长度而不是字节数
     - char(M) 固定长度 0-255个字符
         + 不足的话右边填充空格以达到指定的长度
         + 存取数度还是要比varchar要快得多，因为其长度固定，方便程序的存储与查找
@@ -1080,6 +1081,10 @@ WHERE id IN (1,2,3)
     - SELECT COUNT(*)的处理是有点不同的，它会返回所有数据的数量，但是不会过滤其中的NULL值
     - explain select * from table explain // 用并不真正执行查询，而是查询优化器【估算】的行数，返回值新的行数
     - count(distinct …)会返回彼此不同但是非NULL的数据的行数
+
+```sql
+set @currenttime=(select UNIX_TIMESTAMP(current_timestamp()));
+```
 
 ## 事物
 
