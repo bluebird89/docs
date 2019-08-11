@@ -43,6 +43,7 @@ The official GitHub mirror of the Chromium source https://chromium.googlesource.
 * Wappalyzer:网站分析工具
 * 眼不见心不烦：屏蔽微博
 * 网页截图:注释&批注：捕获整个页面或任何部分
+* The Great Suspender
 
 ```
 Navigating the current page:
