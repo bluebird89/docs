@@ -41,6 +41,7 @@ pip install IPython
 * 视频分析
 
 ## 问题
+
 > ERROR: Cannot uninstall 'wrapt'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
 
 ## 项目
@@ -57,6 +58,7 @@ pip install IPython
 * [open-source-for-science/TensorFlow-Course](https://github.com/open-source-for-science/TensorFlow-Course):Simple and ready-to-use tutorials for TensorFlow
 * [machinelearningmindset/TensorFlow-Course](https://github.com/machinelearningmindset/TensorFlow-Course):Simple and ready-to-use tutorials for TensorFlow
 * [Hvass-Labs/TensorFlow-Tutorials](https://github.com/Hvass-Labs/TensorFlow-Tutorials):TensorFlow Tutorials with YouTube Videos
+* [TensorFlow for Deep Learning Research](http://web.stanford.edu/class/cs20si/)
 
 ## 参考
 

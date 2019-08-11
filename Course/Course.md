@@ -1,3 +1,4 @@
+
 # Courses
 
 * [prakhar1989/awesome-courses](https://github.com/prakhar1989/awesome-courses):List of awesome university courses for learning Computer Science!
@@ -55,6 +56,7 @@
     -   Do It Yourself — 教你成为家居改造达人。
     -   Adafruit Learning System — 提供免费电子设备 DIY 教程。
     -   Grovo — 学习如何使用上百种网站应用，提高自己的工作效率。
+*  Udemy
 
 ## 前端
 
@@ -64,6 +66,7 @@
 *   HTML Dog — 学习 HTML, CSS 和 JavaScript 编程技能。
 *   Skillcrush — 提供职业网页设计与开发课程。
 *   Hack Design — 全球顶级设计师教你网页/app 设计，完全免费。
+*   Frontend Masters
 
 ## 外语
 
@@ -86,3 +89,4 @@
 * [mbinary/USTC-CS-Courses-Resource](https://github.com/mbinary/USTC-CS-Courses-Resource):❤️中国科学技术大学计算机学院课程资源(https://mbinary.xyz/ustc-cs/) https://mbinary.xyz/ustc-cs/
     - ftp.ustclug.org； /ebook/USTC-CS-Courses-Resource； ftp@ftp
     - afp://ftp.ustclug.org/； /ebook/USTC-CS-Courses-Resource； Connect As Guest
+* Pluralsight

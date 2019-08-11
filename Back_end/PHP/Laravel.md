@@ -196,8 +196,9 @@ php artisan  key:generate
 
 .env 文件中列出的所有变量将被加载到 PHP 的超级全局变量 $ _ENV 中。你可以使用 env 函数检索这些变量的值
 
-* 通过 .env 文件中的 APP_ENV 变量确定的。你可以通过 App facade 中的 environment 方法来访问此值
+* 通过 .env 文件中的 APP_ENV 变量确定的。可以通过 App facade 中的 environment 方法来访问此值
 * 使用全局 config 函数来访问配置值 `$value = config('app.timezone');`,临时设置配置值，传递一个数组给 config 函数
+    - 需要config/app.php 配置
 * 使用 Memcached 来存储会话 config/session.php `'driver' => 'memcached',`
 * 使用专业缓存驱动器 config/cache.php `'default' => 'redis',`
 
@@ -250,15 +251,17 @@ php artisan key:generate  # 设置程序密钥   No supported encrypter found. T
 php artisan make:controller App\TestController # 指定创建位置 在app目录下创建TestController
 php artisan make:controller PhotoController --resource # 创建Rest风格资源控制器
 php artisan make:middleware # 生成一个中间件
-php artisan make:migration #  生成一个迁移文件
+
 php artisan make:Model App\\Models\\User(linux or macOs 加上转义符) # 指定路径创建
 php artisan make:provider # 生成一个服务提供商的类
 php artisan make:request #  生成一个表单消息类
-php artisan migrate:install # 创建一个迁移库文件
+
 php artisan make:migration #  生成一个迁移文件
 php artisan vendor:publish # 发布来自插件包的资源:
 php artisan vendor:publish # 发表一些可以发布的有用的资源来自提供商的插件包
 
+php artisan migrate:install # 创建一个迁移库文件
+php artisan make:migration #  生成一个迁移文件
 php artisan migrate:refresh # 复位并重新运行所有的迁移
 php artisan migrate:reset # 回滚全部数据库迁移
 php artisan migrate:rollback #  回滚最后一个数据库迁移
@@ -314,7 +317,7 @@ exit
 * 没有模型：概念不清楚
     - 所有业务逻辑的总体
     - 与关系数据库交互的类
-* Console 目录包含了所有自定义的 Artisan 命令。通过 make:command 来生成,包含了控制台内核，可以用来注册你的自定义 Artisan 命令和你定义的 计划任务 的地方
+* Console 包含了所有自定义的 Artisan 命令。通过 make:command 来生成,包含了控制台内核，可以用来注册你的自定义 Artisan 命令和你定义的 计划任务 的地方
 * Event:通过 event:generate 或 event:make 时生成。Events 目录存放了 事件类。可以使用事件来提醒应用其他部分发生了特定的操作，为应用提供了大量的灵活性和解耦。
 * Exceptions:应用的异常处理器，也是应用抛出异常的好地方。如果想自定义记录或者渲染异常的方式，你就要修改此目录下的 Handler 类。
 * Job:通过make:job 时生成。存放了应用中的 队列任务。应用的任务可以被推送到队列或者在当前请求的生命周期内同步运行。在当前请求期间同步运行的任务可以看做是一个「命令」，因为它们是 命令模式 的实现
@@ -1557,7 +1560,7 @@ flat map
 
 ## 表单验证机制
 
-表单验证在web开发中是不可或缺的，其重要性也不言而喻，也算是每个web框架的标配部件了。Laravel表单验证拥有标准且庞大的规则集，通过规则调用来完成数据验证，多个规则组合调用须以"|"符号连接，一旦验证失败将自动回退并可自动绑定视图。
+Laravel表单验证拥有标准且庞大的规则集，通过规则调用来完成数据验证，多个规则组合调用须以"|"符号连接，一旦验证失败将自动回退并可自动绑定视图。
 
 下例中，附加bail规则至title属性，在第一次验证required失败后将立即停止验证；"."语法符号在Laravel中通常表示嵌套包含关系，这个在其他语言或框架语法中也比较常见
 
@@ -2370,6 +2373,55 @@ php artisan schedule:run
 php artisan make:test UserTest --unit
 ```
 
+## 日志
+
+* 有效通道驱动列表
+  - stack 用于创建「多通道」通道的聚合器
+  - single  基于单文件/路径的日志通道（StreamHandler）
+  - daily 基于 RotatingFileHandler 的 Monolog 驱动，以天为维度对日志进行分隔
+  - slack 基于 SlackWebhookHandler 的 Monolog 驱动
+  - syslog  基于 SyslogHandler 的 Monolog 驱动
+  - errorlog  基于 ErrorLogHandler 的 Monolog 驱动
+  - monolog Monolog 改成驱动，可以使用所有支持的 Monolog 处理器
+  - custom  调用指定改成创建通道的驱动
+* 配置 Single 和 Daily 通道
+  - bubble  表示消息在被处理后是否冒泡到其它通道  true
+  - permission  日志文件权限  644
+  - locking 在日志文件写入前尝试锁定它 false
+* 模式
+  - single 所有日志信息都会输出到storage/log/laravel.log文件中
+  - daily 每天的日志信息都会输出到storage/log文件夹下的日志文件中，日志文件名会包含当天的年月日信息；
+  - syslog 日志信息输出到系统的日志文件中；比如，笔者是centos系统，日志信息写到了/var/log/message文件中
+  - errorlog 相当于调用PHP的error_log语句，没有写入到文件
+* 级别
+  - debug 代码引用为 "MonologLogger::DEBUG"  100 详细的调试信息
+  - info  代码引用为 "MonologLogger::INFO" 200 感兴趣的事件，比如登录、退出
+  - notice  代码引用为 "MonologLogger::NOTICE" 250 普通但值得注意的事件
+  - warning 代码引用为 "MonologLogger::WARNING"  300 警告但不是错误，比如使用了被废弃的API
+  - error 代码引用为 "MonologLogger::ERROR"  400 运行时错误，不需要立即处理但需要被记录和监控
+  - critical  代码引用为 "MonologLogger::CRITICAL" 500 严重问题，如异常
+  - alert 代码引用为 "MonologLogger::ALERT"  550 需要立即采取行动，如数据库异常等
+  - emergency 代码引用为 "MonologLogger::EMERGENCY"  600
+
+```php
+# config/app.php  配置
+
+// 日志模式，可选择参数有 "single", "daily", "syslog", "errorlog"
+'log' => env('APP_LOG', 'single'),
+// 错误等级，为 "RFC 5424" 中定义的八种日志级
+'log_level' => env('APP_LOG_LEVEL', 'debug'),
+
+use Illuminate\Support\Facades\Log;
+
+Log::alert("数据库访问异常");
+Log::critical("系统出现未知错误");
+Log::error("指定变量不存在");
+Log::warning("该方法已经被废弃");
+Log::notice("用户在异地登录");
+Log::info("用户xxx登录成功");
+Log::debug("调试信息");
+```
+
 ### [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
 
 🔐 JSON Web Token Authentication for Laravel & Lumen http://jwt-auth.com
@@ -2379,6 +2431,26 @@ composer require tymon/jwt-auth # 修改app.php 添加到providers
 
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider" # 生成配置文件
 php artisan jwt:secret # 使用
+```
+
+## 部署
+
+* 开发环境改成生产环境 (.env) `APP_ENV=local 改成 APP_ENV=production`
+* 关闭调试模式 (.env) `APP_DEBUG=true 改成 APP_DEBUG=false`
+* 缓存配置文件
+  - `php artisan config:cache // 配置缓存，生成：bootstrap/cache/config.php`
+  - `php artisan config:clear // 清除配置缓存`
+* 缓存路由文件
+ - `php artisan route:cache // 路由缓存，生成：bootstrap/cache/routes.php`
+ - `php artisan config:clear // 清除路由缓存`
+* 性能优化 `php artisan optimize // 优化，生成编译文件；`
+* 优化自动加载 `composer dump-autoload --optimize`
+* 禁止列出上传目录
+
+```
+<Files *>
+    Options -Indexes
+</Files>
 ```
 
 ### [andersao/l5-repository](https://github.com/andersao/l5-repository)
@@ -2405,6 +2477,7 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
 * API
   - [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
   - [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp
+  - [mylxsw/wizard](https://github.com/mylxsw/wizard):Wizard是基于Laravel开发框架开发的一款开源项目（API）文档管理工具。 https://mylxsw.github.io/wizard/
 * Swoole
   - [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
 * logger
@@ -2596,39 +2669,22 @@ php artisan horizon
 php artisan horizon:pause|continue|terminate
 ```
 
-## 参考
+## 教程
 
-* [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
-* [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
-* [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
-* [laravel/docs](https://github.com/laravel/docs)
-* [laravel-china/laravel-docs](https://github.com/laravel-china/laravel-docs):Laravel 中文文档 https://d.laravel-china.org
-* [laravel/spark-docs](https://github.com/laravel/spark-docs)
-* [summerblue/laravel5-cheatsheet](https://github.com/summerblue/laravel5-cheatsheet):A quick reference guide (cheat sheet) for Laravel 5.1 LTS, listing artisan, composer, routes and other useful bits of information. https://cs.laravel-china.org/
-* [samedreams/artisan-road](https://github.com/samedreams/artisan-road):Programmers are artisans （This book is a guide for artisans）
 * [xiaohuilam/laravel](https://github.com/xiaohuilam/laravel/wiki):Laravel 深入浅出指南 —— Laravel 5.7 源代码解析，新手进阶指南。
-
-* [快速入门 —— 使用 Laragon 在 Windows 中搭建 Laravel 开发环境](http://laravelacademy.org/post/7754.html)
+* [learning laravel](https://learninglaravel.net)
+* [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
+* [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart
 * [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
 * [laravel入门教程](https://d.laravel-china.org/docs/5.5)
-* [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
-* [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)
-* [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
+* [基于 Laravel + Vue 构建 API 驱动的前后端分离应用系列](https://laravelacademy.org/category/api-app)
+* [基于 Laravel 构建前后端分离应用系列教程](https://laravelacademy.org/api-driven-development-laravel-vue)
+
+## 项目
+
 * [Laravel5.5 + Vue开发单页应用](http://www.laravel-vue.xyz/2018/03/22/laravel_vue_v2/)
-* [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
-* [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart
-* [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
-* [LeoYang90/laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis):详解 laravel 源码
-* [learning laravel](https://learninglaravel.net)
-* [深入 Laravel 核心](https://learnku.com/docs/laravel-core-concept/5.5)
-* [Laravel 之道](https://learnku.com/docs/the-laravel-way/5.6)
-
-
-## 工程
-
 * [code 好事源代码](https://github.com/Ucer/codehaoshi):记录日常开发的笔记，用 laravel 与 vue 构建。后台使用 ucer-admin 管理系统开发
 * [https://github.com/summerblue/larabbs](A forum project base on Laravel 5.5)
-* [mylxsw/wizard](https://github.com/mylxsw/wizard):Wizard是基于Laravel开发框架开发的一款开源项目（API）文档管理工具。 https://mylxsw.github.io/wizard/
 
 ```sh
 git clone git@github.com:summerblue/larabbs.git
@@ -2650,6 +2706,25 @@ password: password
 
 # Non-static method Redis::hGet() cannot be called statically
 ```
+
+## 参考
+
+* [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
+* [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
+* [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
+* [laravel/docs](https://github.com/laravel/docs)
+* [laravel-china/laravel-docs](https://github.com/laravel-china/laravel-docs):Laravel 中文文档 https://d.laravel-china.org
+* [laravel/spark-docs](https://github.com/laravel/spark-docs)
+* [summerblue/laravel5-cheatsheet](https://github.com/summerblue/laravel5-cheatsheet):A quick reference guide (cheat sheet) for Laravel 5.1 LTS, listing artisan, composer, routes and other useful bits of information. https://cs.laravel-china.org/
+* [samedreams/artisan-road](https://github.com/samedreams/artisan-road):Programmers are artisans （This book is a guide for artisans）
+
+* [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
+* [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)
+* [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
+* [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
+* [LeoYang90/laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis):详解 laravel 源码
+* [深入 Laravel 核心](https://learnku.com/docs/laravel-core-concept/5.5)
+* [Laravel 之道](https://learnku.com/docs/the-laravel-way/5.6)
 
 ## 前后端分离
 
@@ -2683,3 +2758,5 @@ http://blog.csdn.net/u013474436/article/details/52847326>
 <http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html>
 <http://laravel-china.github.io/php-the-right-way/>
 <http://laravelacademy.org/post/6842.html>
+
+* [快速入门 —— 使用 Laragon 在 Windows 中搭建 Laravel 开发环境](http://laravelacademy.org/post/7754.html)

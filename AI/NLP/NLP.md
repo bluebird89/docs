@@ -74,3 +74,4 @@ docker-compose up -d
 * [lyeoni/nlp-tutorial](https://github.com/lyeoni/nlp-tutorial)
 * [Understanding LSTM Networks](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
 * [我爱自然语言处理](http://www.52nlp.cn/)
+* [](https://github.com/facebookresearch/fastText)
