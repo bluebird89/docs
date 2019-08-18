@@ -268,9 +268,11 @@ M-g                    设置字体
 
 ## 插件
 
-* org-mode，这个工具用来写作，还可用来做任务管理，任务计时器，甚至可以用来做表格的计算
-* 做文件管理的插件 helm 和 ivy，这两个插件完成的功能差不多，但是 helm 比较重量级一些，如果一个项目的代码量比较大时，文件的切换和搜索就没那么快了，所以我更喜欢轻量级的 ivy。
-* evil 和 magit，evil 可以让 Emacs 变身成为一个 Vim，大多数的 Vim 操作都可以覆盖上。
+* org-mode:写作，任务管理，任务计时器，甚至可以用来做表格的计算
+* 文件管理的插件
+    - helm 比较重量级一些，如果一个项目的代码量比较大时，文件的切换和搜索就没那么快
+    - 轻量级的 ivy
+* evil 可以让 Emacs 变身成为一个 Vim，大多数的 Vim 操作都可以覆盖上
 * magit 是一个可以使 Emacs 变身成为 Git 的插件。
 
 ## 框架
@@ -279,20 +281,20 @@ M-g                    设置字体
 
 ## 参考
 
+* [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs#macos):A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! http://spacemacs.org
 * [joaotavora/yasnippet](https://github.com/joaotavora/yasnippet):A template system for Emacs http://joaotavora.github.com/yasnippet/
 * [purcell/emacs.d](https://github.com/purcell/emacs.d):An Emacs configuration bundle with batteries included
 * [emacs-tw/awesome-emacs](https://github.com/emacs-tw/awesome-emacs):A community driven list of useful Emacs packages, libraries and others.
 * [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust ❤️ Emacs
 * [abo-abo/hydra](https://github.com/abo-abo/hydra):make Emacs bindings that stick around
-* <http://blog.csdn.net/redguardtoo/article/details/7222501/>
-* <https://wiki.archlinux.org/index.php/Emacs_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87>)
-* <http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-tips/>
-* <http://www.jianshu.com/p/dc9515c6a33f>
-* 一年成为 Emacs 高手，当年我也是靠着这一篇文章真正入门 emacs,
-* https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org
-* 陈斌 (一年成为 Emacs 高手的作者)的 Emacs 配置，是一个很不错的配置，我现在使用的配置要就是从这个演化来的 https://github.com/redguardtoo/emacs.d
+* 一年成为 Emacs 高手， https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org
+* 陈斌的 Emacs 配置 https://github.com/redguardtoo/emacs.d
 * Steve Purcell 大牛的配置，很适合 Web 开发者：https://github.com/purcell/emacs.d
 * Spacemacs 配置，适合新手，有着非常完善的文档：https://github.com/syl20bnr/spacemacs
 * reddit 的 Emacs 频道，最前沿的 Emacs 技巧：https://www.reddit.com/r/emacs/
 * Emacs org-mode 的文档，从这个文档中你可以发现纯文本的魔力：https://orgmode.org/
 * Emacs Wiki，上面有大量的 Emacs 插件的实践，虽然质量参差不齐，但是也有很多优秀的插件 https://www.emacswiki.org/emacs/EmacsWiki
+* <http://blog.csdn.net/redguardtoo/article/details/7222501/>
+* <https://wiki.archlinux.org/index.php/Emacs_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87>)
+* <http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-tips/>
+* <http://www.jianshu.com/p/dc9515c6a33f>

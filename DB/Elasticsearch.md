@@ -82,6 +82,9 @@ curl localhost:9200
   - Elastic 本质上是一个分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个 Elastic 实例
   - 单个 Elastic 实例称为一个节点（node）
   - 一组节点构成一个集群（cluster）
+* 对应关系
+  - 关系数据库 ⇒ 数据库 ⇒ 表 ⇒ 行 ⇒ 列(Columns)
+  - Elasticsearch ⇒ 索引 ⇒ 类型 ⇒ 文档 ⇒ 字段(Fields)
 * index
   - Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）,查找数据的时候，直接查找该索引
   - Elastic 数据管理的顶层单位就叫做 Index（索引）,它是单个数据库的同义词
@@ -92,10 +95,6 @@ curl localhost:9200
 * document：Index 里面单条的记录称为 Document（文档）
   - 多条 Document 构成了一个 Index
   - Document 使用 JSON 格式表示，同一个 Index 里面的 Document，不要求有相同的结构（scheme），但是最好保持相同，这样有利于提高搜索效率
-* field:
-* 对应关系
-  - 关系数据库 ⇒ 数据库 ⇒ 表 ⇒ 行 ⇒ 列(Columns)
-  - Elasticsearch ⇒ 索引 ⇒ 类型 ⇒ 文档 ⇒ 字段(Fields)
 
 ```sh
 # 查看当前节点的所有 Index
@@ -105,7 +104,7 @@ curl -X GET 'http://localhost:9200/_cat/indices?v'
 curl 'localhost:9200/_mapping?pretty=true'
 
 # 新建一个名叫weather的 Index
-curl -X PUT 'localhost:9200/accounts/person/1' -d '
+curl -X PUT 'localhost:9200/accounts/person/1' -d'
 {
   "user": "张三",
   "title": "工程师",

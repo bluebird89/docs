@@ -1292,3 +1292,4 @@ public void delBigList(String host, int port, String password, String bigListKey
 * [redis 数据类型详解 以及 redis适用场景场合](http://www.cnblogs.com/mrhgw/p/6278619.html)
 * [使用Redis实现分布式锁及其优化](https://juejin.im/entry/5a0280d551882546d71ec42e)
 * [Redis快速入门及应用](https://juejin.im/entry/5a003862f265da430406042c)
+* [](https://mp.weixin.qq.com/s?__biz=MzU0OTk3ODQ3Ng==&mid=2247486004&idx=1&sn=5b85ccd76638c5b35c472d77e75eeaf9&chksm=fba6e237ccd16b219655f02084e2d61312a4e0b643fea88c5fa843bf0fd9baea7514f9073777)
