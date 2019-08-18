@@ -1178,16 +1178,6 @@ Python 实现的算法和设计模式。
 - [Pycoder's Weekly](http://pycoders.com/)
 - [Python Weekly](http://www.pythonweekly.com/)
 
-## Twitter
-
-- [@codetengu](https://twitter.com/codetengu)
-- [@getpy](https://twitter.com/getpy)
-- [@planetpython](https://twitter.com/planetpython)
-- [@pycoders](https://twitter.com/pycoders)
-- [@pypi](https://twitter.com/pypi)
-- [@pythontrending](https://twitter.com/pythontrending)
-- [@PythonWeekly](https://twitter.com/PythonWeekly)
-
 ## 学习指南
 
 - [Scipy-lecture-notes](http://hao.jobbole.com/scipy-lecture-notes/)：如何用Python来做学术？[官网](https://github.com/scipy-lectures/scipy-lecture-notes)
