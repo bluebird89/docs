@@ -192,6 +192,22 @@ php artisan  key:generate
 # php artisan serve
 ```
 
+### [laradock/laradock](https://github.com/laradock/laradock)
+
+Docker PHP development environment. http://laradock.io
+
+```sh
+git clone https://github.com/Laradock/laradock.git
+cp env-example .env
+docker-compose up -d nginx mysql phpmyadmin redis workspace #
+docker-compose up --build # 会构建所有容器：Service 'aws' failed to build: COPY failed: stat /var/lib/docker/tmp/docker-builder279203978/ssh_keys: no such file or directory
+
+## 问题
+> No such file or directory: u'./docker-compose.dev.yml'
+
+.env->COMPOSE_FILE:COMPOSE_FILE=docker-compose.yml
+```
+
 ## 配置
 
 .env 文件中列出的所有变量将被加载到 PHP 的超级全局变量 $ _ENV 中。你可以使用 env 函数检索这些变量的值

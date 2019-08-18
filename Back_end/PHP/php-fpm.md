@@ -1,32 +1,28 @@
 # PHP-FPM (PHP-FastCGI Process Manager)
 
 * 多进程的 FastCGI 管理程序
-* PHP-FPM的管理下的，这是一个PHP进程管理器，它常驻内存启动一些PHP进程待命，当请求进入时分配一个进程进行处理，PHP进程处理完毕后回收进程，但并不销毁进程，这让PHP也能应对高流量的访问请求。
-* FastCGI 应用速度很快是因为他们持久稳定。不必对每一个请求都启动和初始化。好处是 PHP 脚本运行速度提升 3-30 倍；
-* PHP 解释程序被载入内存而不用每次需要时从存储器读取，极大的提升了依靠脚本运行的站点的性能；同时速度的提升并不会增加 CPU 的负担。
+* FastCGI 应用速度很快是因为持久稳定。不必对每一个请求都启动和初始化。提升 PHP 脚本运行速度
+* PHP 解释程序被载入内存而不用每次需要时从存储器读取，极大的提升了依靠脚本运行的站点的性能；同时速度的提升并不会增加 CPU 的负担
 * 常驻内存启动一些PHP进程待命，当请求进入时分配一个进程进行处理，PHP进程处理完毕后回收进程，但并不销毁进程，这让PHP也能应对高流量的访问请求
-* PHP-FPM 是 FastCGI 的实现，并提供了进程管理的功能。进程包含 master 进程和 worker 进程两种
-    - master 进程只有一个，负责监听端口，接收来自服务器的请求，
-    - worker 进程则一般有多个（具体数量根据实际需要进行配置），每个进程内部都会嵌入一个 PHP 解释器，是代码真正执行的地方。
+* PHP-FPM 是 FastCGI 的实现，并提供了进程管理的功能。进程包含两种
+    - master 进程只有一个，负责监听端口，接收来自服务器的请求
+    - worker 进程则一般有多个（具体数量根据实际需要进行配置），每个进程内部都会嵌入一个 PHP 解释器，是代码真正执行的地方
 
-## Mac
+## 安装
 
-/usr/local/etc/php/7.2
-
-```sh
-brew install php --without-apache --with-fpm
-brew services start php
-```
-
-### 约定目录
-
-* bin: /usr/local/php/sbin/php-fpm
+* 约定目录
+    - bin: /usr/local/php/sbin/php-fpm
 * 配置文件路径
     - /usr/local/php/etc/php.ini
     - /usr/local/php/etc/php-fpm.conf
     - /private/etc/php-fpm.conf
     - /private/etc/php-fpm.d/www.conf.default
     - /usr/local/etc/php/7.3/php-fpm.d/www.conf
+
+```sh
+brew install php --without-apache --with-fpm
+brew services start php
+```
 
 ## 原理
 
@@ -59,8 +55,6 @@ brew services start php
     - 线程模式开发太过复杂
         + 一个进程中能开的线程数也有限，线程太多也会增加 CPU 的负荷和内存资源，线程没有阻塞态，IO 阻塞也不能主动让出 CPU资源，属于抢占式调度模型。不太适合 php 开发。
     - swoole 4.+开启了全协程模式，让同步代码异步执行
-
-php-fpm工作模式
 
 ![php-fpm工作模式](../../_static/php-fpm-struct.png "Optional title")
 
