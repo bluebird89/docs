@@ -5,7 +5,7 @@
 
 ## 指标
 
-MySQL 客户端和服务端通信协议是“半双工”的，这就意味着，客户端发送给服务器和服务器发给客户端是不能同时发生，这种协议让MySQL通信简单快速，但也就无法进行流量控制，一旦一端开始了，另一端是能等它结束。所以查询语句很长的时候，参数max_allowed_packet就特别重要了。
+MySQL 客户端和服务端通信协议是“半双工”的，客户端发送给服务器和服务器发给客户端是不能同时发生，这种协议让MySQL通信简单快速，但也就无法进行流量控制，一旦一端开始了，另一端是能等它结束。所以查询语句很长的时候，参数max_allowed_packet就特别重要了。
 
 * 响应时间包括服务时间和等待时间，但这两个时间并不能细分出来，所以响应时间受影响比较大。我们可以通过估计查询的响应时间来做最初步的判断。
 * 扫描的行数
@@ -34,6 +34,16 @@ vmstat 1 3 #  pay attentin to cpu
 iostat -d -k 1 3
 ```
 
+## 优化
+
+* 效果：SQL及索引 > 数据库表结构 > 系统配置 > 硬件，成本相反
+* 优先考虑通过缓存降低对数据库的读操作（如：redis）
+* 考虑读写分离，降低数据库写操作
+* 开始数据拆分
+    - 首先考虑按照业务垂直拆分
+    - 再考虑水平拆分：先分库（设置数据路由规则，把数据分配到不同的库中）
+    - 最后再考虑分表，单表拆分到数据1000万以内
+
 ## 问题处理
 
 - top 查看进程消耗
@@ -60,6 +70,7 @@ iostat -d -k 1 3
 
 ## 硬件优化
 
+* 专门用于数据库的服务器，并采用ssd
 * CPU相关：服务器的BIOS设置中，可调整下面的几个配置，目的是发挥CPU最大性能，或者避免经典的NUMA问题：
     - 选择Performance Per Watt Optimized(DAPC)模式，发挥CPU最大性能，跑DB这种通常需要高运算量的服务就不要考虑节电了；
     - 关闭C1E和C States等选项，目的也是为了提升CPU效率；
@@ -116,8 +127,28 @@ iostat -d -k 1 3
 
 * 使用 innodb_flush_method=O_DIRECT 来避免写的时候出现双缓冲区。
 * 避免使用 O_DIRECT 和 EXT3 文件系统 — 这会把所有写入的东西序列化。
-* 分配足够 innodb_buffer_pool_size ，来将整个InnoDB 文件加载到内存 — 减少从磁盘上读。
-* 不要让 innodb_log_file_size 太大，这样能够更快，也有更多的磁盘空间 — 经常刷新有利降低发生故障时的恢复时间。
+* innodb_buffer_pool_size:保存索引和原始数据，来将整个InnoDB 文件加载到内存 — 减少从磁盘上读
+    - InnoDB严重依赖缓冲池，必须为它分配了足够的内存
+    - 可以减少磁盘访问，内存读写速度比磁盘的读写速度快很多，所以这个参数对mysql性能有很大提升。当然，这里不是越大越好，也要考虑实际的服务器情况
+    - 更大的缓冲池会使得mysql服务在重启和关闭的时候花费很长时间
+    - 独立使用的mysql服务器：设置为服务器内存的约75%~80%
+    - 还有其他服务也在运行：需要减去这部分程序占用的内存、mysql自身需要的内存以及减去足够让操作系统缓存InnoDB日志文件的内存，至少是足够缓存最近经常访问的部分
+* innodb_log_file_size 不要太大，这样能够更快，也有更多的磁盘空间 — 经常刷新有利降低发生故障时的恢复时间
+    - InnoDB使用日志来减少提交事务时的开销
+    - InnoDB用日志把随机I/O变成顺序I/O
+    - innodb_log_files_in_group：控制日志文件数，一般默认为2。mysql事务日志文件是循环覆写的
+    - 当一个日志文件写满后，innodb会自动切换到另一个日志文件，而且会触发数据库的checkpoint，这回导致innodb缓存脏页的小批量刷新，会明显降低innodb的性能
+    - 如果innodb_log_file_size设置太小，就会导致innodb频繁地checkpoint，导致性能降低
+    - 如果设置太大，由于事务日志是顺序I/O，大大提高了I/O性能，但是在崩溃恢复InnoDB时，会导致恢复时间变长。
+    - 如果InnoDB数据表有频繁的写操作，那么选择合适的innodb_log_file_size值对提升MySQL性能很重要。
+    - 日志文件的全部大小，应该足够容纳服务器一个小时的活动内容
+        + 在业务高峰期，计算出1分钟写入事务日志（redo log）的量，然后评估出一个小时的redo log量
+        + Log sequence number是写入事务日志的总字节数，通过1分钟内两个值的差值，可以看到每分钟有多少KB日志写入到MySQL中
+* innodb_log_buffer_size：控制日志缓冲区的大小，不需要把日志缓冲区设置得非常大。推荐的范围是1MB~8MB
+* innodb_flush_log_at_trx_commit 控制commit动作是否刷新log buffer到磁盘中 
+    - = 0 把日志缓冲写到日志文件中，并且每秒钟刷新一次，但是事务提交时不做任何事，该设置是3者中性能最好的。也就是说设置为0时是(大约)每秒刷新写入到磁盘中的，当系统崩溃，会丢失1秒钟的数据。
+    - 保持默认值（1）的话，能保证数据的完整性，也能保证复制不会滞后
+    - 
 * 不要同时使用 innodb_thread_concurrency 和 thread_concurrency 变量 — 这两个值不能兼容。
 * 为 max_connections 指定一个小的值 — 太多的连接将耗尽你的RAM，导致整个MySQL服务器被锁定。
 * 保持 thread_cache 在一个相对较高的数值，大约是 16 — 防止打开连接时候速度下降。
@@ -127,9 +158,47 @@ iostat -d -k 1 3
 * 增加 max_heap_table_size — 防止磁盘写。
 * 不要将 sort_buffer_size 的值设置的太高 — 可能导致连接很快耗尽所有内存。
 * 监控 key_read_requests 和 key_reads，以便确定 key_buffer 的值 — key 的读需求应该比 key_reads 的值更高，否则使用 key_buffer 就没有效率了。
-* 设置 innodb_flush_log_at_trx_commit = 0 可以提高性能，但是保持默认值（1）的话，能保证数据的完整性，也能保证复制不会滞后。
-* 有一个测试环境，便于测试你的配置，可以经常重启，不会影响生产环境。
+* 有一个测试配置的环境，可以经常重启，不会影响生产环境
 * 只允许使用内网域名，而不是ip连接数据库.不只是数据库，缓存（memcache、redis）的连接，服务（service）的连接都必须使用内网域名，机器迁移/平滑升级/运维管理…太多太多的好处
+
+```
+[client]
+socket = /var/lib/mysql/mysql.sock
+port = 3306
+
+[mysqld]
+# GENERAL
+datadir = /var/lib/mysql
+socket = /var/lib/mysql/mysql.sock
+pid_file = /var/lib/mysql/mysql.pid
+user = mysql
+port = 3306
+
+# INNODB
+innodb_buffer_pool_size = <value>
+innodb_log_file_size = <value>
+innodb_file_per_table = 1
+
+# LOGGING
+slow_query_log = ON
+slow_query_log = /var/lib/mysql/mysql-slow.log
+log_error = /var/lib/mysql/mysql-error.log
+
+# OTHER
+tmp_table_size = 32M
+max_heap_table_size = 32M
+# 禁用缓存
+query_cache_type = 0
+query_cache_size = 0
+max_connections = <value>
+thread_cache_size = <value>
+open_files_limit = 65535
+
+pager grep Log
+show engine innodb status\G select sleep(60); show engine innodb status\G;
+```
+
+![InnoDB-cache 缓存与文件](../_static/InnoDB-cache.jpg "Optional title")
 
 ### Schema优化
 

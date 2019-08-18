@@ -8,6 +8,23 @@
 * 数据库层
 * UI 层
 
+## 架构
+
+* Make Fewer HTTP Requests 
+* Use a Content Delivery Network
+* Add an Expires Header
+* Gzip Components 
+* Put CSS at the Top 
+* Move Scripts to the Bottom
+* Avoid CSS Expressions 
+* Make JavaScript and CSS External 
+* Reduce DNS Lookups
+* Minify JavaScript 
+* Avoid Redirects 
+* Remove Duplicate Scripts
+* Configure ETags 
+* Make Ajax Cacheable
+
 ## 压力测试
 
 * 首先说一下如何产生压力，产生压力的方法有很多，通常可以写脚本产生压力机器人对服务器进行发包和收包操作，也可以使用现有的工具(像jmeter、LoadRunner这些），所以说产生压力其实并不难，难点在于产生的压力是不是真实地反映了实际用户的操作场景。举个例子来说，对游戏来说单纯的并发登陆场景在整个线上环境中的占比可能并不大(新开服等特殊情况除外)，相反"登陆-开始战斗-结束战斗"、不同用户执行不同动作这种"混合模式"占了更大的比重。所以如何从实际环境中提炼出具体的场景比重，并且把这种比重转化成实际压力是一个重要的关注点。
@@ -222,6 +239,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 * [GoogleChromeLabs/quicklink](https://github.com/GoogleChromeLabs/quicklink):⚡️Faster subsequent page-loads by prefetching in-viewport links during idle time
 * 分析
     - [matomo-org/matomo](https://github.com/matomo-org/matomo):Liberating Web Analytics. Star us on Github? +1. Matomo is the leading open alternative to Google Analytics that gives you full control over your data. Matomo lets you easily collect data from websites, apps & the IoT and visualise this data and extract insights. Privacy is built-in. We love Pull Requests! https://matomo.org/
+* [YSlow](http://yslow.org):analyzes web pages and why they're slow based on Yahoo!'s rules for high performance web sites
 
 ## 监控
 

@@ -1115,6 +1115,68 @@ obj.y # 获取属性'y'
 hasattr(obj, 'power') # 有属性'power'吗？ True
 ```
 
+## IO
+
+* Input Stream就是数据从外面（磁盘、网络）流进内存，Output Stream就是数据从内存流到外面去
+
+## 进程与线程
+
+* 进程是由若干线程组成的，一个进程至少有一个线程
+* 多线程和多进程区别：
+    - 多进程中，同一个变量，各自有一份拷贝存在于每个进程中，互不影响，而多线程中，所有变量都由所有线程共享
+    - 任何一个变量都可以被任何一个线程修改，因此，线程之间共享数据最大的危险在于多个线程同时改一个变量，把内容给改乱了
+* 锁
+    - 好处：确保了某段关键代码只能由一个线程从头到尾完整地执行
+    - 坏处：
+        + 阻止了多线程并发执行，包含锁的某段代码实际上只能以单线程模式执行，效率就大大地下降了
+        + 由于可以存在多个锁，不同的线程持有不同的锁，并试图获取对方持有的锁时，可能会造成死锁，导致多个线程全部挂起，既不能执行，也无法结束，只能靠操作系统强制终止。
+* 用C、C++或Java来改写相同的死循环，直接可以把全部核心跑满，4核就跑到400%，8核就跑到800%，为什么Python不行
+    - Python的线程虽然是真正的线程，但解释器执行代码时，有一个GIL锁：Global Interpreter Lock，任何Python线程执行前，必须先获得GIL锁，然后，每执行100条字节码，解释器就自动释放GIL锁，让别的线程有机会执行
+    - 这个GIL全局锁实际上把所有线程的执行代码都给上了锁，所以，多线程在Python中只能交替执行，即使100个线程跑在100核CPU上，也只能用到1个核
+    - 要真正利用多核，除非重写一个不带GIL的解释器
+    - 可以使用多线程，但不要指望能有效利用多核
+* 线程使用 局部变量
+    - 只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁
+    - 问题:函数调用的时候，传递起来很麻烦
+* ThreadLocal
+    - 全局变量local_school就是一个ThreadLocal对象，每个Thread对它都可以读写student属性(线程的局部变量，可以任意读写而互不干扰)，但互不影响
+    - 最常用的地方就是为每个线程绑定一个数据库连接，HTTP请求，用户身份信息等，这样一个线程的所有调用到的处理函数都可以非常方便地访问这些资源。
+* 多任务
+    - Master-Worker模式，Master负责分配任务，Worker负责执行任务，通常是一个Master，多个Worker
+    - 用多进程实现Master-Worker，主进程就是Master，其他进程就是Worker。
+        + 优点
+            * 稳定性高，因为一个子进程崩溃了，不会影响主进程和其他子进程。（当然主进程挂了所有进程就全挂了，但是Master进程只负责分配任务，挂掉的概率低）
+            * 著名的Apache最早就是采用多进程模式
+        + 缺点
+            * 创建进程的代价大，在Unix/Linux系统下，用fork调用还行，在Windows下创建进程开销巨大
+            * 操作系统能同时运行的进程数也是有限的，在内存和CPU的限制下，如果有几千个进程同时运行，操作系统连调度都会成问题
+    - 用多线程实现Master-Worker，主线程就是Master，其他线程就是Worker
+        + 通常比多进程快一点，但是也快不到哪去
+        + 致命的缺点
+            * 任何一个线程挂掉都可能直接造成整个进程崩溃，因为所有线程共享进程的内存
+            * 在Windows上，如果一个线程执行的代码出了问题，经常可以看到这样的提示：“该程序执行了非法操作，即将关闭”，其实往往是某个线程出了问题，但是操作系统会强制结束整个进程
+    - 只要数量一多，效率肯定上不去
+        + 切换是有代价的，需要先保存当前执行的现场环境（CPU寄存器状态、内存页等），然后，把新任务的执行环境准备好（恢复上次的寄存器状态，切换内存页等），才能开始执行
+        + 如果有几千个任务同时进行，操作系统可能就主要忙着切换任务，根本没有多少时间去执行任务了，这种情况最常见的就是硬盘狂响，点窗口无反应，系统处于假死状态
+        + 一旦多到一个限度，就会消耗掉系统所有的资源，结果效率急剧下降，所有任务都做不好
+    - 是否采用多任务的第二个考虑是任务的类型
+        + 计算密集型：要进行大量的计算，消耗CPU资源，比如计算圆周率、对视频进行高清解码等等，全靠CPU的运算能力
+            * 要最高效地利用CPU，计算密集型任务同时进行的数量应当等于CPU的核心数
+            * 主要消耗CPU资源，因此，代码运行效率至关重要。Python这样的脚本语言运行效率很低，完全不适合计算密集型任务。对于计算密集型任务，最好用C语言编写。
+        + IO密集型
+            * 涉及到网络、磁盘IO的任务
+            * CPU消耗很少，任务的大部分时间都在等待IO操作完成（因为IO的速度远远低于CPU和内存的速度）
+            * 任务越多，CPU效率越高，但也有一个限度。常见的大部分任务都是IO密集型任务，比如Web应用
+            * 99%的时间都花在IO上，花在CPU上的时间很少，因此，用运行速度极快的C语言替换用Python这样运行速度极低的脚本语言，完全无法提升运行效率
+            * 最合适的语言就是开发效率最高（代码量最少）的语言，脚本语言是首选，C语言最差
+    - 异步IO
+        + 考虑到CPU和IO之间巨大的速度差异，一个任务在执行的过程中大部分时间都在等待IO操作，单进程单线程模型会导致别的任务无法并行执行，因此，才需要多进程模型或者多线程模型来支持多任务并发执行。
+        + 现代操作系统对IO操作已经做了巨大的改进，最大的特点就是支持异步IO
+        + 如果充分利用操作系统提供的异步IO支持，就可以用单进程单线程模型来执行多任务，这种全新的模型称为事件驱动模型，Nginx就是支持异步IO的Web服务器，它在单核CPU上采用单进程模型就可以高效地支持多任务。在多核CPU上，可以运行多个进程（数量与CPU核心数相同），充分利用多核CPU。由于系统总的进程数量十分有限，因此操作系统调度非常高效。用异步IO编程模型来实现多任务是一个主要的趋势。
+* 分布式进程：multiprocessing模块中managers子模块还支持把多进程分布到多台机器上。一个服务进程可以作为调度者，将任务分布到其他多个进程中，依靠网络通信
+    - Queue之所以能通过网络访问，就是通过QueueManager实现的。由于QueueManager管理的不止一个Queue，所以，要给每个Queue的网络调用接口起个名字，比如get_task_queue
+    - authkey:为了保证两台机器正常通信，不被其他机器恶意干扰
+
 ## DB
 
 db API DRIVER即数据库接口驱动:
@@ -1123,12 +1185,27 @@ db API DRIVER即数据库接口驱动:
 * [mysqlclient] is a fork of MySQLdb which notably supports Python 3 and can be used as a drop-in replacement for MySQLdb. At the time of this writing, this is the recommended choice for using MySQL with Django.
 * [MySQL Connector/Python] is a pure Python driver from Oracle that does not require the MySQL client library or any Python modules outside the standard library.
 
-### MySQL
-
 ```sh
 sudo apt-get install libmysqlclient-dev
 pip install mysqlclient
 ```
+
+## 正则
+
+* 原理
+    - 编译正则表达式，如果正则表达式的字符串本身不合法，会报错；
+    - 用编译后的正则表达式去匹配字符串
+* \d可以匹配一个数字，\w可以匹配一个字母或数字
+* .可以匹配任意字符
+* *表示任意个字符（包括0个），用+表示至少一个字符，用?表示0个或1个字符，用{n}表示n个字符，用{n,m}表示n-m个字符
+* []表示范围：
+    - [0-9a-zA-Z\_]可以匹配一个数字、字母或者下划线；
+    - [0-9a-zA-Z\_]+可以匹配至少由一个数字、字母或者下划线组成的字符串，比如'a100'，'0_Z'，'Py3000'等等；
+    - [a-zA-Z\_][0-9a-zA-Z\_]*可以匹配由字母或下划线开头，后接任意个由一个数字、字母或者下划线组成的字符串，也就是Python合法的变量；
+    - [a-zA-Z\_][0-9a-zA-Z\_]{0, 19}更精确地限制了变量的长度是1-20个字符（前面1个字符+后面最多19个字符）
+* A|B可以匹配A或B
+* ^表示行的开头，$表示行的结束
+* 由于Python的字符串本身也用\转义，建议使用Python的r前缀，就不用考虑转义的问题
 
 ## OOP高级
 
@@ -1136,20 +1213,6 @@ pip install mysqlclient
 
 - map:函数接收两个参数，一个是函数，一个是Iterable，map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回
 - reduce:把一个函数作用在一个序列[x1, x2, x3, ...]上，这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算 `reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)`
-
-#### [IPython](https://ipython.org/)
-
-ipython:`pip3 install ipython`
-
-### [pypy](http://pypy.org/)
-
-## Server
-
-* SimpleHTTPServer
-
-```sh
-python2 -m SimpleHTTPServer 8080
-```
 
 ### docker
 
@@ -1225,37 +1288,48 @@ CMD ["python3"]
 /System/Library/Frameworks/Python.framework/Versions/2.7/share': Operation not permitted
 ```
 
-学习Python需要掌握如下基础知识以及相关技能。
-1.Python基础知识（变量、语句、数据类型、数值类型、字符串、布尔类型、列表、字典、元组、条件语句、循环语句、函数、装饰器、面向对象、网络socket、爬虫）
-2.Python基础库（模块、包、系统模块、三方模块）
-3.python文件处理（读、写、执行、）
-4.python字符统计
-5.python数据排序
+* 基础知识：日常的重复训练
+    - 变量
+    - 语句
+    - 数据类型
+    - 数值类型
+    - 字符串
+    - 布尔类型
+    - 列表
+    - 字典
+    - 元组
+    - 条件语句
+    - 循环语句
+    - 函数
+    - 装饰器
+    - 面向对象
+    - 网络socket
+    - 爬虫
+* 基础库
+* 模块
+* 模块
+    - 将多个代码块（按功能）定义到同一个文件中。别的文件中使用时则先导入模块，在调用模块内变量或函数。
+    - 模块命名规范
+        + 建议全小写英文字母和数字
+        + 避免与常用模块或第三方模块名称冲突
+    - 控制模块内代码在使用python mod.py时执行，在导入时不执行
+        + 通过Global内变量__name__进行判断
+        + 当以python mod.py运行脚本时__name__变量为__main__字符串
+        + 当以模块导入时__name__为模块名称字符串
+* 系统模块
+* 三方模块
+* 包
+    - 将不同模块文件放在不同文件夹内，包文件夹下面需要有__init__.py文件用以声明该文件为Python包。
+    - 使用时需要从包内导入模块后调用模块中变量和函数。
 
-1.1初学者的困境
-只记Python基础语法，却没什么鸟用。就像幼儿园，老师在黑板上写的‘肉’字，记住这个字咋写，一笔一划的记住，只需要半天，但是把这个词和你平时吃的东西绑定，以至于后面你想到这个字，就流口水，需要日常的重复训练。
-
-同理：无方向的看书，看视频也没什么用，其实可以通过直接实战来上手，比如：
-文件操作
-字符排序
-网络编程
-
-错误的学习方法：
-很多人在学习Python的时候常常会犯下面一种情况：
-买一本厚厚的编程指南，逼自己看完，记住每个语法，闭门看书三个月，吃透一本书，最后一行代码也写不出来。
-
-正确的学习方法：
-编程就像骑自行车，买一本<<骑自行车大全>>是没有什么用的。
-正确姿势：掌握最基础的姿势，就可以骑上车出发了，实际联系几天，摔几跤，基本就学会了。
-
-1.2自我进行测评
-很多朋友反馈：Python基础语法都学会了，但不知如何写项目进阶？
-1.List，Dict特性倒背如流，就是无法写出实际的项目。
-2.各种书籍也看，写不出东西。
-3.各种视频也看，写不出东西。
-4.各种大会也去，名词高大上，但是没学到具体的技能。
-
-对自我进行检测：
+* 文件处理（读、写、执行、）
+* 字符
+    - 统计
+    - 排序
+* 数据排序
+* 网络编程
+* 掌握最基础的姿势，就可以骑上车出发了，实际联系几天，摔几跤，基本就学会了
+* Python基础语法都学会了，但不知如何写项目进阶？
 
 1.给你一个字符串“come baby,python rocks!” 如何统计里面字母o出现的次数！
 思路：遍历字符串，定义一个变量，每次o出现，都+1
@@ -1266,78 +1340,37 @@ CMD ["python3"]
 3.给你一个字符串“come baby,python rocks!” 如何统计这里面字母出现次数的前三名！
 思路：排序，取出前三
 
-后续扩展练习：
-
 1.给你一个字符串“come baby,python rocks!” 怎么统计出现次数前三的字母。
 2.一个nginx日志文件，怎么统计IP出现次数前三的url。
 3.一个nginx日志文件，统计IP出现前三后，如何存入MySQL数据库。
 4.存入MySQL中的日志文件，如何输出给浏览器端显示。
 5.如何美化前端表格等等。
 
-2.如何学习python库
-模块
-将多个代码块（按功能）定义到同一个文件中。别的文件中使用时则先导入模块，在调用模块内变量或函数。
-模块命名要符合python变量的命名规范
-1.建议全小写英文字母和数字
-2.避免与常用模块或第三方模块名称冲突
-控制模块内代码在使用python mod.py时执行，在导入时不执行
-1.通过Global内变量__name__进行判断
-2.当以python mod.py运行脚本时__name__变量为__main__字符串
-3.当以模块导入时__name__为模块名称字符串
+* 全栈Web开发学习路线
+    - 基础入门（入门、数据类型、条件表达、循环语句）
+    - 基础进阶（文件操作、函数、装饰器、模块、面向对象、网络编程）
+    - 前端知识（Html、Css、Js、Jquery、Bootstrap、）
+    - 高级用法（Django、Flask、数据库操作、MVC、ORM、Admin、template）
+    - 项目实战（电商项目、爬虫项目、常用组件、运维项目、代码调优）
+    - 高级进阶（数据算法、代码规范、面试技巧）
 
-包
-将不同模块文件放在不同文件夹内，包文件夹下面需要有__init__.py文件用以声明该文件为Python包。
-使用时需要从包内导入模块后调用模块中变量和函数。
-
-常用系统模块：
-
-os,sys,time,datetime,urllib,xml,json,email,csv,collections,math,zipfile,trafile,hashlib
-常用三方模块：
-
-requests,pyquery,django,flask,mysqlclient,paramiko,redis,lxml,dateutils,ipaddr,netaddr
-
-模块学习方法：
-
-1.先知道有没有
-2.用的时候在查
-内置工具：dir、help
-搜索引擎：google、百度
-
-3.推荐Python值得实践项目
-https://www.shiyanlou.com/courses/31
-https://www.shiyanlou.com/courses/487
-https://www.shiyanlou.com/courses/552
-
-4.正确的编程思路以及学习方法
-计算机是人发明的，目的就是完成人的手动工作，跳不出人的思维。
-1.弄清楚想要解决的问题。
-2.思考自己如何去解决问题
-3.画流程图（伪代码编写）
-4.翻译成编程语言
-5.运行调试代码
-
-5.Python全栈Web开发学习路线
-Python基础入门（入门、数据类型、条件表达、循环语句）
-Python基础进阶（文件操作、函数、装饰器、模块、面向对象、网络编程）
-Python前端知识（Html、Css、Js、Jquery、Bootstrap、）
-Python高级用法（Django、Flask、数据库操作、MVC、ORM、Admin、template）
-Python项目实战（电商项目、爬虫项目、常用组件、运维项目、代码调优）
-Python高级进阶（数据算法、代码规范、面试技巧）
-
-重要：多抄、多写、多想、多问、多看、多听、多说
-
-1.学习编程就是为了解决实际的问题，把自己在工作或学习中的重复工作程序化
-2.谷歌和度娘
-3.加入开源社区（多看、多分享、多交流）
-4.参加培训辅导（仔细听课、跟上课堂学习，有问题做记录，课后查阅资料或请求他人）
-5.善于记录笔记，不断总结，查漏补缺。
-阅读文档：这是迄今为止最被低估的事情，阅读文档能大大增强你对。
-了解最受欢迎的代码库：它们的设计原理，工作原理（如：Flask，Django，requests）
-尝试编写并发代码：了解线程、进程，它们如何运行，以及它们在Python中的弱点。
-了解Sockets，Network库，异步功能。了解一下scipy和numpy。
+学习编程就是为了解决实际的问题，把自己在工作或学习中的重复工作程序化
+阅读文档
+并发
+    * 了解线程、进程，它们如何运行，以及它们在Python中的弱点。
+了解Sockets，Network库，异步功能
 了解解释器的设计和运行原理：为什么有这么多不同的Python实现。（Python是用英语编写的，不是C语言），这个概念非常重要。
-了解Python生态系统：请不要在记事本中写Python，至少到现在还不要。学习使用PyCharm、了解一下PEP8、了解PIP、setuptools、virtualenv。
-了解Python的其他工具：Docker containers、UWSGI、GunicornNGINX这些东西。
+了解Python生态
+PyCharm
+PEP8
+PIP
+setuptools
+virtualenv
+
+## Docker containers
+## UWSGI
+## GunicornNGINX
+
 了解Google介绍的小技巧：Lambda函数、装饰器、描述符、迭代器生成器、元类。类似于：“python -m http.server”。
 
 ## 图书
@@ -1355,21 +1388,23 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 * [michaelliao/learn-python3](https://github.com/michaelliao/learn-python3): Learn Python 3 Sample Code
 * [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
 * [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
-* [python3](http://www.runoob.com/python3)
-* <http://www.cnblogs.com/linhaifeng/p/7278389.html>
+* [Python 3 cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/):Python3教学手册
 
-## 扩展
+##  项目
 
-- [faif/python-patterns](https://github.com/faif/python-patterns)A collection of design patterns/idioms in Python
-- [requests/requests](https://github.com/requests/requests)Python HTTP Requests for Humans™ ✨🍰✨ <http://python-requests.org>
-- [scrapy/scrapy](https://github.com/scrapy/scrapy)Scrapy, a fast high-level web crawling & scraping framework for Python. <https://scrapy.org>
-- [fchollet/keras](https://github.com/fchollet/keras)
-- [ipython/ipython](https://github.com/ipython/ipython)
-- [binux/pyspider](https://github.com/binux/pyspider)A Powerful Spider(Web Crawler) System in Python. <http://docs.pyspider.org/>
-- [fabric/fabric](https://github.com/fabric/fabric)Simple, Pythonic remote execution and deployment. <http://fabfile.org>
+* https://www.shiyanlou.com/courses/31
+* https://www.shiyanlou.com/courses/487
+* https://www.shiyanlou.com/courses/552
 
 ## 工具
 
+* [faif/python-patterns](https://github.com/faif/python-patterns)A collection of design patterns/idioms in Python
+* [requests/requests](https://github.com/requests/requests)Python HTTP Requests for Humans™ ✨🍰✨ <http://python-requests.org>
+* [scrapy/scrapy](https://github.com/scrapy/scrapy)Scrapy, a fast high-level web crawling & scraping framework for Python. <https://scrapy.org>
+* [fchollet/keras](https://github.com/fchollet/keras)
+* 
+* [binux/pyspider](https://github.com/binux/pyspider)A Powerful Spider(Web Crawler) System in Python. <http://docs.pyspider.org/>
+* [fabric/fabric](https://github.com/fabric/fabric)Simple, Pythonic remote execution and deployment. <http://fabfile.org>
 * 插件
     - [xadmin](https://github.com/sshwsfc/xadmin) [文档](https://xadmin.readthedocs.io/en/latest/index.html)
     - [django-bootstrap-toolkit](https://github.com/dyve/django-bootstrap-toolkit)
@@ -1377,21 +1412,29 @@ Python高级进阶（数据算法、代码规范、面试技巧）
 * [locustio/locust](https://github.com/locustio/locust):Scalable user load testing tool written in Python http://locust.io
 * [agronholm/apscheduler](https://github.com/agronholm/apscheduler):Task scheduling library for Python
 * [benfred/py-spy](https://github.com/benfred/py-spy):Sampling profiler for Python programs
-- [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges)Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
-- [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
-- [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs#macos):A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! http://spacemacs.org
+* [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges)Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
+* [ipython/ipython](https://github.com/ipython/ipython) https://ipython.org/  `pip3 install ipython`
+* [pypy](http://pypy.org/)
+* Server
+    - SimpleHTTPServer `python2 -m SimpleHTTPServer 8080`
+* 常用系统模块：
+    - os,sys,time,datetime,urllib,xml,json,email,csv,collections,math,zipfile,trafile,hashlib
+* 常用三方模块：
+    - requests,pyquery,django,flask,mysqlclient,paramiko,redis,lxml,dateutils,ipaddr,netaddr
 
 ## 参考
 
-- [vinta/awesome-python](https://github.com/vinta/awesome-python):A curated list of awesome Python frameworks, libraries, software and resources https://awesome-python.com/
+* [vinta/awesome-python](https://github.com/vinta/awesome-python):A curated list of awesome Python frameworks, libraries, software and resources https://awesome-python.com/
+* [jobbole/awesome-python-cn](https://github.com/jobbole/awesome-python-cn):Python资源大全中文版，包括：Web框架、网络爬虫、模板引擎、数据库、数据可视化、图片处理等，由伯乐在线持续更新。
+* [mahmoud/awesome-python-applications](https://github.com/mahmoud/awesome-python-applications):cd Free software that works great, and also happens to be open-source Python. ftp://you:relookin@it.example.com#readme
 * [中文文档](https://docs.python.org/zh-cn/3/)
-- [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide)
+* [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide)
 * [faif/python-patterns](https://github.com/faif/python-patterns):A collection of design patterns/idioms in Python
 * [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
-* [jobbole/awesome-python-cn](https://github.com/jobbole/awesome-python-cn):Python资源大全中文版，包括：Web框架、网络爬虫、模板引擎、数据库、数据可视化、图片处理等，由伯乐在线持续更新。
 * [Python 开源库及示例代码](https://github.com/programthink/opensource/blob/master/libs/python.wiki)
 * [kriadmin/30-seconds-of-python-code](https://github.com/kriadmin/30-seconds-of-python-code)
-* [mahmoud/awesome-python-applications](https://github.com/mahmoud/awesome-python-applications):cd Free software that works great, and also happens to be open-source Python. ftp://you:relookin@it.example.com#readme
 * [coodict/python3-in-one-pic](https://github.com/coodict/python3-in-one-pic):Learn python3 in one picture. https://git.io/Coo-py3
 * [lijin-THU/notes-python](https://github.com/lijin-THU/notes-python):中文 Python 笔记
-* [Python 3 cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/):Python3教学手册
+
+* [python3](http://www.runoob.com/python3)
+* <http://www.cnblogs.com/linhaifeng/p/7278389.html>

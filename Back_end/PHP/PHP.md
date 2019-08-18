@@ -176,16 +176,16 @@ apt-get install -y php5-memcached
 
 ### Cli
 
-* 用多进程, 子进程结束以后, 内核会负责回收资源
-* 使用多进程,子进程异常退出不会导致整个进程Thread退出. 父进程还有机会重建流程
+* 用多进程
+    - 子进程结束以后, 内核会负责回收资源
+    - 子进程异常退出不会导致整个进程Thread退出. 父进程还有机会重建流程
 * 一个常驻主进程, 只负责任务分发, 逻辑更清楚
-* 完全支持多线程
 * 实现定时任务
 * 开发桌面应用就是使用PHP-CLI和GTK包
 * linux下用php编写shell脚本
 * [ircmaxell/phpvm](https://github.com/ircmaxell/phpvm):A PHP version manager for CLI PHP
 * 配置
-    - 会配置比较长的max_execution_time
+    - 配置比较长的max_execution_time
 
 ```sh
 php --ini　# 查找PHP CLI的ini文件位置
@@ -392,31 +392,17 @@ function myTest($x)
     echo $x;
 }
 myTest(5); # 5
-function test()
-{
-    static $a = 0;
-    echo $a;
-    $a++;
-}
 
-// 函数内销毁全局变量$foo是无效的
+// 函数内销毁全局变量$foo是无效的,应使用 $GLOBALS 数组来实现
 function destroy_foo() {
     global $foo;
-    unset($foo);
+    // unset($foo);
+    unset($GLOBALS['bar']);
     echo $foo;//Notice: Undefined variable: foo
 }
 $foo = 'bar';
 destroy_foo();
 echo $foo;//bar
-
-//要在函数中 unset 一个全局变量，应使用 $GLOBALS 数组来实现
-function foo()
-{
-    unset($GLOBALS['bar']);
-}
-$bar = "something";
-foo();
-echo $bar;//Notice: Undefined variable: bar
 
 # 常量
 define("MESSAGE", "Hello YiiBai PHP");

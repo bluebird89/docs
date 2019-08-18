@@ -1574,8 +1574,7 @@ AH 因你今晚共我唱
     - 为你唱首歌
     - 安阳
 * 朴树
-    - New BOY
-    - forever young
+    - 对《New Boy》重新填词、编曲，做了一首《Foever young》
 * 海龟先生
 * 刺猬
     - 白日梦蓝
