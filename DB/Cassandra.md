@@ -59,6 +59,7 @@ select * from emp where empid = 1;
 
 create index idx_dept on emp(emp_dept);
 ```
+
 ## 工具
 
 * RazorSQL

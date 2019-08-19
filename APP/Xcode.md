@@ -4,8 +4,6 @@
 
 ## 安装
 
-
-
 ```
 # install
 xcode-select –install
