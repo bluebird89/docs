@@ -2707,6 +2707,27 @@ function checkCookie()
 
 console.log() 写入到浏览器的控制台：能看到结构化的东西；不会打断页面的操作
 
+```javascript
+console.log(‘Hello World!’);
+console.info(‘Something happened…’);
+console.warn(‘Something strange happened…’);
+console.error(‘Something horrible happened…’);
+
+console.trace()
+console.time() && console.timeEnd() // console.time()开始计算时间，然后使用console.timeEnd()进行打印。
+console.memory // （是属性，不是函数）来检查你的堆大小状态。
+console.profile(‘profileName’) & console.profileEnd(‘profileName’) // 
+console.count(“STUFF I COUNT”) // 函数或代码反复出现的情况下，您可以使用console.count('?')来计算您的代码被读取的次数
+console.assert(condition, msg) // 在condition为假时记录某些内容。
+
+console.group()
+console.groupEnd() // 使用控制台组，将控制台日志组织在一起，每个分组在层次结构中创建另一个级别。 调用groupEnd()减少一个级别(回到上一个层级)。
+console.table() // 打印一个非常漂亮的表格
+
+console.clear() // 清空控制台
+console.dir()   // 打印一条以三角形符号开头的语句，可以点击三角展开查看对象的属性。
+```
+
 ## indexedDB
 
 ## [localForage/localForage](https://github.com/localForage/localForage)
@@ -2774,6 +2795,7 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 * [facebook/flow](https://github.com/facebook/flow):Adds static typing to JavaScript to improve developer productivity and code quality. https://flow.org/
 * db
   - [pubkey/rxdb](https://github.com/pubkey/rxdb):💻 📱 A realtime Database for JavaScript Applications https://rxdb.info/
+* live-server
 
 ## 参考
 
@@ -2782,3 +2804,6 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 * [BonsaiDen/JavaScript-Garden](https://github.com/BonsaiDen/JavaScript-Garden):A collection of documentation about the most quirky parts of the JavaScript language. http://bonsaiden.github.io/JavaScript-Garden
 * [lydiahallie/javascript-questions](https://github.com/lydiahallie/javascript-questions):A long list of (advanced) JavaScript questions, and their explanations ✨ Updated weekly!
 * [airbnb/javascript](https://github.com/airbnb/javascript):JavaScript Style Guide
+* [chrome dev tools](http://www.css88.com/archives/8175)
+* [bgrins/devtools-snippets](https://github.com/bgrins/devtools-snippets):A collection of helpful snippets to use inside of browser devtools
+* [九个Console命令，让js调试更简单 ](https://github.com/dwqs/blog/issues/32)

@@ -36,13 +36,6 @@ code
 * React则可以在所有的前端领域中盛行。
     - GraphQL在未来将有很大可能替代 REST
 
-## 测试
-
-* [wix/detox](https://github.com/wix/detox):Gray Box End-to-End Testing and Automation Framework for Mobile Apps
-
-# 博客
-
-* [zwwill/blog](https://github.com/zwwill/blog):✏️ stay hungry stay foolish
 
 ## 工具
 
@@ -57,6 +50,10 @@ code
 * [alibaba/rax](https://github.com/alibaba/rax):[ constructionWork In Progress v1.0] The fastest way to build cross-container application. https://developers.taobao.com/
 * [airbnb/lottie-web](https://github.com/airbnb/lottie-web):Render After Effects animations natively on Web, Android and iOS, and React Native. http://airbnb.io/lottie/
 * [patr0nus/DeskGap](https://github.com/patr0nus/DeskGap):A cross-platform desktop app framework based on Node.js and the system webview https://deskgap.com/
+* 测试
+    - [wix/detox](https://github.com/wix/detox):Gray Box End-to-End Testing and Automation Framework for Mobile Apps
+* [jiahaog/nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
+* [revery-ui/revery](https://github.com/revery-ui/revery)：⚡️ Native, high-performance, cross-platform desktop apps - built with Reason! https://www.outrunlabs.com/revery/
 
 ## 参考
 
@@ -64,3 +61,4 @@ code
 - [Bilibili/ijkplayer](https://github.com/Bilibili/ijkplayer)Android/iOS video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.
 - [airbnb/lottie-android](https://github.com/airbnb/lottie-android):Render After Effects animations natively on Android and iOS, Web, and React Native http://airbnb.io/lottie/
 - [airbnb/lottie-ios](https://github.com/airbnb/lottie-ios):An iOS library to natively render After Effects vector animations http://airbnb.io/lottie/
+* [zwwill/blog](https://github.com/zwwill/blog):✏️ stay hungry stay foolish

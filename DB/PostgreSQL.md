@@ -20,8 +20,7 @@ pg_ctl -D /usr/local/var/postgres stop -s -m fast #  关闭
 
 ## 使用
 
-数据库跟当前系统管理员对应的数据库
-Postgres uses an authentication scheme called "peer authentication" for local connections. Basically, this means that if the user's operating system username matches a valid Postgres username, that user can login with no further authentication.
+* 数据库跟当前系统管理员对应的数据库 Postgres uses an authentication scheme called "peer authentication" for local connections. Basically, this means that if the user's operating system username matches a valid Postgres username, that user can login with no further authentication.
 
 ```sql
 sudo -u postgres psql # 登录
@@ -166,15 +165,13 @@ class Ext_Pgsql {
 
 * PostgreSQL实战
 
-## 客户端
-
-- psql
-- PgAdmin
-- pgFouine
-- [sosedoff/pgweb](https://github.com/sosedoff/pgweb):Cross-platform client for PostgreSQL databases http://sosedoff.github.io/pgweb
-
 ## 工具
 
+* 客户端
+    - psql
+    - PgAdmin
+    - pgFouine
+    - [sosedoff/pgweb](https://github.com/sosedoff/pgweb):Cross-platform client for PostgreSQL databases http://sosedoff.github.io/pgweb
 * [PostgREST/postgrest](https://github.com/PostgREST/postgrest):REST API for any Postgres database https://postgrest.org
 * [brianc/node-postgres](https://github.com/brianc/node-postgres):PostgreSQL client for node.js. https://node-postgres.com
 * [dbcli/pgcli](https://github.com/dbcli/pgcli):Postgres CLI with autocompletion and syntax highlighting http://pgcli.com

@@ -5,8 +5,6 @@
 * 特点
     - 允许把函数本身作为参数传入另一个函数，还允许返回一个函数
 
-
-
 ## 资源
 
 * [MostlyAdequate/mostly-adequate-guide](https://github.com/MostlyAdequate/mostly-adequate-guide):Mostly adequate guide to FP (in javascript)
