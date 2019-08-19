@@ -2,7 +2,6 @@
 
 客户端开发
 
-
 ```sh
 npm install -g cordova
 ```
