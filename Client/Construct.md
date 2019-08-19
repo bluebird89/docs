@@ -208,6 +208,84 @@ module.exports = {
 };
 ```
 
+## bower
+
+Bower can manage components that contain HTML, CSS, JavaScript, fonts or even image files. Bower doesn't concatenate or minify code or do anything else - it just installs the right versions of the packages you need and their dependencies.客户端技术的软件包管理器，它可用于搜索、安装和卸载如JavaScript、HTML、CSS之类的网络资源
+
+```sh
+# installs the project dependencies listed in bower.json
+npm install -g bower
+# Create a bower.json
+bower init
+
+# registered package
+bower search|info|install|update|uninstall jquery underscore
+# GitHub shorthand:添加到依赖文件中
+bower install --save desandro/masonry
+# Git endpoint
+bower install git://github.com/user/package.git
+# URL
+bower install <http://example.com/script.js>
+
+# use
+<script src="bower_components/jquery/dist/jquery.min.js">
+</script>
+```
+
+## 配置
+
+加一个.bowerrc文件
+
+```json
+{
+  "directory" : "js/lib"
+}
+```
+
+## grunt
+
+Grunt: The JavaScript Task Runner.构建工具:自动化。对于需要反复重复的任务，例如压缩（minification）、编译、单元测试、linting等.每次运行grunt时，它都会使用node的require()系统查找本地已安装好的grunt。正因为如此，你可以从你项目的任意子目录运行grunt。 `
+
+```sh
+npm install -g grunt-cli
+npm install grunt  // 项目中安装
+```
+
+# [parcel-bundler/parcel](https://github.com/parcel-bundler/parcel)
+
+📦🚀 Blazing fast, zero configuration web application bundler https://parceljs.org
+
+## 使用
+
+```
+npm install -g parcel-bundler
+
+npm init -y
+npm install parcel-bundler -S
+
+"scripts": {
+    "dev": "parcel index.html -p 3030",
+    "build": "parcel build index.html"
+}
+
+npm install babel-preset-env -S
+# .babelrc 文件，添加以下配置
+{
+ "presets": ["env"]
+}
+
+npm install postcss-modules autoprefixer -S
+# 创建 .postcssrc 文件
+{
+ "modules": true,
+ "plugins": {
+ "autoprefixer": {
+"grid": true
+ }
+ }
+}
+```
+
 ## 参考
 
 * [前端构建大法 Gulp 系列](http://deshui.wang/%E6%8A%80%E6%9C%AF/2016/01/01/why-need-front-end-build)

@@ -11,3 +11,5 @@ Bitcoin Core integration/staging tree https://bitcoin.org/en/download
 * [ccxt/ccxt](https://github.com/ccxt/ccxt):A JavaScript / Python / PHP cryptocurrency trading library with support for more than 100 bitcoin/altcoin exchanges
 
 ## 工具
+
+* [thrasher-/gocryptotrader](https://github.com/thrasher-/gocryptotrader):A cryptocurrency trading bot and framework supporting multiple exchanges written in Golang.

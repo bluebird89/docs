@@ -1,5 +1,2 @@
-# Influxdb
+# [Influxdb](https://github.com/influxdata/influxdb)
 
-## 参考
-
-* [](https://github.com/influxdata/influxdb)
