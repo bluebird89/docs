@@ -97,6 +97,13 @@ WHERE A.id IS null OR B.id IS null;
     - 这方面最具代表性的是dynamo和bigtable 2篇论文所阐述的思路。前者是一个完全无中心的设计，节点之间通过gossip方式传递集群信息，数据保证最终一致性，后者是一个中心化的方案设计，通过类似一个分布式锁服务来保证强一致性,数据写入先写内存和redo log，然后定期compat归并到磁盘上，将随机写优化为顺序写，提高写入性能。
     - Schema free，auto-sharding等。比如目前常见的一些文档数据库都是支持schema-free的，直接存储json格式数据，并且支持auto-sharding等功能，比如mongodb。
 
+## 事物的四大特性(ACID)
+
+* 原子性： 事务是最小的执行单位，不允许分割。事务的原子性确保动作要么全部完成，要么完全不起作用；
+* 一致性： 执行事务前后，数据保持一致，多个事务对同一个数据读取的结果是相同的；
+* 隔离性： 并发访问数据库时，一个用户的事务不被其他事务所干扰，各并发事务之间数据库是独立的；
+* 持久性： 一个事务被提交之后。它对数据库中数据的改变是持久的，即使数据库发生故障也不应该对其有任何影响。
+
 ## 分层数据库
 
 * IMS基于层次模型工作。将数据视为树。 以第一次构建数据库时预期的方式访问数据（先访问Customer，再访问Account），就可以非常快速地进行数据访问。但由于缺少灵活性。
@@ -113,6 +120,8 @@ WHERE A.id IS null OR B.id IS null;
 * [Vitess](link)
 * [OneProxy](link)
 * [Gaea](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650779105&idx=1&sn=ed5093ab25a2b002cded6485fde97562&chksm=f3f91874c48e916252f7b46cccf5e4d6473feccaa4c078a84bbe24495317c6bdc59a59dbe699)
+
+## IDC 数据中心（Internet Data Center）
 
 ## [Lede-Inc/Cetus](https://github.com/Lede-Inc/cetus)
 
