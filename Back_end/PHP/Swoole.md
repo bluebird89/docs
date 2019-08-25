@@ -368,9 +368,34 @@ function go(callable $function, ...$args) : int|false; // 短名API
     - 提供了exec接口，创建的进程可以执行其他程序，与原PHP父进程之间可以方便的通信
 * 场景
     - 多进程并行
+* `Swoole\Process::__construct(callable $function, $redirect_stdin_stdout = false, $create_pipe = true)`
+    - $function，子进程创建成功后要执行的函数，底层会自动将函数保存到对象的callback属性上。如果希望更改执行的函数，可赋值新的函数到对象的callback属性
+    - $redirect_stdin_stdout，重定向子进程的标准输入和输出。启用此选项后，在子进程内输出内容将不是打印屏幕，而是写入到主进程管道。读取键盘输入将变为从管道中读取数据。默认为阻塞读取。
+    - $create_pipe，是否创建管道，启用$redirect_stdin_stdout后，此选项将忽略用户参数，强制为true。如果子进程内没有进程间通信，可以设置为 false。
+* 进程间的通讯
+    - 管道pipe：每次创建一个进程后，就会随之创建一个管道
+        + 半双工: 数据单向流动, 一端只读, 一端只写
+        + 同步 vs 异步: 默认为同步阻塞模式, 可以使用 swoole_event_add() 添加管道到 swoole 的 event loop 中, 实现异步IO
+    - 消息队列
 
 ```sh
 pstree -p pid
+
+$process = new Swoole\Process('callback_function', false, true);
+$process->write('数据');#写入数据
+$process->read()#读取数据
+
+for ($i = 0; $i < 3; $i++) {
+    $process = new Swoole\Process(function ($process) {
+        var_dump('子进程：' . $process->pop());
+//        $process->push('hello 主进程');#推送到主进程
+    });
+    $process->useQueue(1, 2 | swoole_process::IPC_NOWAIT);//启用消息队列，争抢模式，非阻塞，可能会被任意一个子进程接收到
+    $pid = $process->start();
+
+    $process->push('hello 子进程');#推送到子进程,不能当做管道使用
+//    echo '主进程消息：' . $process->pop() . PHP_EOL;
+}
 ```
 
 ## Buffer

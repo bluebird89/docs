@@ -48,6 +48,13 @@ curl --user name:password example.com # http认证
 curl --cookie "name=xxx" www.example.com # curl发送cookie，具体的cookie的值，可以从http response头信息的`Set-Cookie`字段中得到
 curl -c cookies http://example.com # 可以保存服务器返回的cookie到文件
 curl -b cookies http://example.com # 使用这个文件作为cookie信息，进行后续的请求
+
+brew reinstall curl --with-openssl --with-nghttp2
+brew install nghttp2
+brew install curl-openssl
+echo ‘export PATH="/usr/local/opt/curl-openssl/bin:$PATH"’ >> ~/.bash_profile
+
+curl --http2 -I https://nghttp2.org/
 ```
 
 ## Notice

@@ -244,6 +244,15 @@ struct sdshdr {
 ## 通用
 
 * KEYS pattern：模糊查询key，通配符  *、?、[]
+    - `keys user_token*`:遍历算法，复杂度是O(n),导致 Redis 服务卡顿，因为Redis 是单线程程序，顺序执行所有指令，其它指令必须等到当前的 keys 指令执行完了才可以继续
+    - 遍历大数据量用 `SCAN cursor [MATCH pattern] [COUNT count]`
+        + 复杂度虽然也是 O(n)，但是它是通过游标分步进行的，不会阻塞线程,增量的循环，每次调用只会返回一小部分的元素
+        + 提供 count 参数，不是结果数量，是redis单次遍历字典槽位数量(约等于) 
+        + 同 keys 一样，它也提供模式匹配功能; 
+        + 服务器不需要为游标保存状态，游标的唯一状态就是 scan 返回给客户端的游标整数; 
+        + 返回的结果可能会有重复，需要客户端去重复，这点非常重要; 
+        + 单次返回的结果是空的并不意味着遍历结束，而要看返回的游标值是否为零
+        + `scan 0 match user_token* count 5`
 * RANDOMKEY：返回随机key　　
 * DUMP key: 序列化给定 key ，并返回被序列化的值
 * TYPE key 返回 key 所储存的值的类型
