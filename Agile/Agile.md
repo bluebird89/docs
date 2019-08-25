@@ -184,3 +184,4 @@
 * 精益思想
 * 《持续交付》Jez Humble
 * 持续交付2.0：业务引领的DevOps精要 乔梁
+* Agile IT organization design

@@ -2,11 +2,9 @@
 
 系统的健壮性、 可用性：原则是要保护系统，不能让所有用户都失败。直接抛弃一半请求
 
-## 结构
-
-* 应用程序层
-* 数据库层
-* UI 层
+* 性能
+    - 网页中代码真实的运行速度
+    - 用户在使用时感受到的速度
 
 ## 架构
 
@@ -27,13 +25,14 @@
 
 ## 压力测试
 
-* 首先说一下如何产生压力，产生压力的方法有很多，通常可以写脚本产生压力机器人对服务器进行发包和收包操作，也可以使用现有的工具(像jmeter、LoadRunner这些），所以说产生压力其实并不难，难点在于产生的压力是不是真实地反映了实际用户的操作场景。举个例子来说，对游戏来说单纯的并发登陆场景在整个线上环境中的占比可能并不大(新开服等特殊情况除外)，相反"登陆-开始战斗-结束战斗"、不同用户执行不同动作这种"混合模式"占了更大的比重。所以如何从实际环境中提炼出具体的场景比重，并且把这种比重转化成实际压力是一个重要的关注点。
-* 产生压力之后，通常我们可以拿到TPS、响应时延等性能数据，那么如何定位性能问题呢？TPS、响应时延只能告诉你服务器是否存在问题，但不能帮助你定位问题。这些表面背后是整个后台处理逻辑综合作用的结果，这时候可以先关注系统的CPU、内存、IO、网络，对比在tps、时延达到瓶颈时这些系统数据的情况，确定性能问题是系统哪一部分造成的，然后再回到代码的逻辑中逐个优化这些点。
+* 产生压力的方法有很多
+    - 写脚本产生压力机器人对服务器进行发包和收包操作
+    - 使用现有的工具(像jmeter、LoadRunner这些python的FunkLoad）大的压力测试用 erlang开发的tsung
+    - 难点在于产生的压力是不是真实地反映了实际用户的操作场景。举个例子来说，对游戏来说单纯的并发登陆场景在整个线上环境中的占比可能并不大(新开服等特殊情况除外)，相反"登陆-开始战斗-结束战斗"、不同用户执行不同动作这种"混合模式"占了更大的比重。所以如何从实际环境中提炼出具体的场景比重，并且把这种比重转化成实际压力是一个重要的关注点。
+* 产生压力之后，通常我们可以拿到TPS、响应时延等性能数据，那么如何定位性能问题呢？
+    - TPS、响应时延只能告诉你服务器是否存在问题，但不能帮助你定位问题。这些表面背后是整个后台处理逻辑综合作用的结果，这时候可以先关注系统的CPU、内存、IO、网络，对比在tps、时延达到瓶颈时这些系统数据的情况，确定性能问题是系统哪一部分造成的，然后再回到代码的逻辑中逐个优化这些点。
 * 当服务器的整体性能就可以相对稳定下来，这时候就需要对自己服务器的承载能力有一个预估，通过产生真实压力、对比系统数据，大致可以对单套系统的处理能力有个真实的评价，然后结合业务规模配置服务器数量。
-
-- 单机的压力测试(包括functional test)，我平时都用python的FunkLoad
-- 遇到大的压力测试，使用erlang开发的tsung会比较好，可以分布式测试，他们都是open source的
-- 压力测试的目标，是搞死服务器，从而找到瓶颈点，如果搞不死，意义就不大
+* 压力测试的目标：是搞死服务器，从而找到瓶颈点，如果搞不死，意义就不大
 
 ## 大流量
 
@@ -49,40 +48,25 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 
 要想达到要非常少的机器扛住大规模的并发，可能需要抛弃servlet，直接用netty或者nio参考v8，nodejs，tornado等直接构建非阻塞的异步协程socket服务器
 
-## 性能
-
-* 网页中代码真实的运行速度
-* 用户在使用时感受到的速度
-
 ### 秒杀系统
 
-问题：读写冲突，锁非常严重，这是秒杀业务难的地方。
-
-#### 方案
-
-- 将请求尽量拦截在系统上游（不要让锁冲突落到数据库上去）
-- 充分利用缓存（缓存抗读压力），典型的读多些少的应用场景，大部分请求是车次查询，票查询，下单和支付才是写请求。
-
-#### 方法
-
-##### 浏览器层（限速）
-
-- 客户端：产品层面，用户点击"查询"或者"购票"后，按钮置灰，禁止用户重复提交请求；
-- JS层面，限制用户在x秒之内只能提交一次请求；
-
-##### 站点层（按照uid做限速，做页面缓存）
-
-- 防止程序员写for循环调用:对uid进行请求计数和去重,5s只透过一个请求，其余的请求怎么办？缓存，页面缓存，同一个uid，限制访问频度，做页面缓存，x秒内到达站点层的请求，均返回同一页面。同一个item的查询，例如车次，做页面缓存，x秒内到达站点层的请求，均返回同一页面。如此限流，既能保证用户有良好的用户体验（没有返回404）又能保证系统的健壮性（利用页面缓存，把请求拦截在站点层了）。
-
-##### 服务层
-
-- 对于写请求，做请求队列，每次只透有限的写请求去数据层（下订单，支付这样的写业务）
-- 读请求，怎么优化？cache抗，不管是memcached还是redis，单机抗个每秒10w应该都是没什么问题的。
-- 分时分段售票：将流量摊匀
-- 数据粒度的优化：你去购票，对于余票查询这个业务，票剩了58张，还是26张，你真的关注么，其实我们只关心有票和无票？流量大的时候，做一个粗粒度的"有票""无票"缓存即可。
-- 一些业务逻辑的异步：例如下单业务与 支付业务的分离
-
-给我们抢票的启示是，开动秒杀后，45分钟之后再试试看，说不定又有票哟~ [秒杀系统架构优化思路](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651959391&idx=1&sn=fb28fd5e5f0895ddb167406d8a735548)
+* 问题：读写冲突，锁非常严重，这是秒杀业务难的地方。
+* 方案
+    - 将请求尽量拦截在系统上游（不要让锁冲突落到数据库上去）
+    - 充分利用缓存（缓存抗读压力），典型的读多些少的应用场景，大部分请求是车次查询，票查询，下单和支付才是写请求。
+* 方法
+    - 浏览器层（限速）
+        + 客户端：产品层面，用户点击"查询"或者"购票"后，按钮置灰，禁止用户重复提交请求；
+        + JS层面，限制用户在x秒之内只能提交一次请求；
+    - 站点层（按照uid做限速，做页面缓存）
+        + 防止程序员写for循环调用:对uid进行请求计数和去重,5s只透过一个请求，其余的请求怎么办？缓存，页面缓存，同一个uid，限制访问频度，做页面缓存，x秒内到达站点层的请求，均返回同一页面。同一个item的查询，例如车次，做页面缓存，x秒内到达站点层的请求，均返回同一页面。如此限流，既能保证用户有良好的用户体验（没有返回404）又能保证系统的健壮性（利用页面缓存，把请求拦截在站点层了）。
+    - 服务层
+        + 对于写请求，做请求队列，每次只透有限的写请求去数据层（下订单，支付这样的写业务）
+        + 读请求，怎么优化？cache抗，不管是memcached还是redis，单机抗个每秒10w应该都是没什么问题的。
+        + 分时分段售票：将流量摊匀
+        + 数据粒度的优化：你去购票，对于余票查询这个业务，票剩了58张，还是26张，你真的关注么，其实我们只关心有票和无票？流量大的时候，做一个粗粒度的"有票""无票"缓存即可。
+        + 一些业务逻辑的异步：例如下单业务与 支付业务的分离
+* 抢票的启示是，开动秒杀后，45分钟之后再试试看，说不定又有票哟~ [秒杀系统架构优化思路](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651959391&idx=1&sn=fb28fd5e5f0895ddb167406d8a735548)
 
 ## 大访问量
 
@@ -99,9 +83,9 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
     - IBM AIX 集群
 * LVS集群采用三层结构，负载调度器、服务器池、共享存储主要组成。
 * 构架师来运营一家公司的网站必须考虑的三个问题
-    *网络构架
-    *服务器构架
-    *应用程序开发
+    - 网络构架
+    - 服务器构架
+    - 应用程序开发
 
 ## 大数据存储
 
@@ -125,14 +109,14 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
     - Mysql 分区技术:分区技术将一个表拆成多个表，比较常用的方式是将表中的记录按照某种Hash算法进行拆分，简单的拆分方法如取模方式。在一定的层面表名不变，在真正的磁盘存储时存储在不同的分区
     - Mysql 集群;单点故障时，冗余备份
 
-## 网站加速技术
+## 加速技术
 
 * Squid 代理缓存技术（Squid：乌鱼）反向缓存-动静分离:Squid是一款用来做代理服务器的软件。作用是动静分离，将数据保存在缓存池中Squid cache，能够代理服务器执行。代理服务器就如同买火车票，去火车票代理售票点，买票，而不是去火车站，这样就减少了火车站的压力，提高了速度。
 * 页面静态化缓存
 * Memcache,Redis:Memcache 是一个高性能的分布式的内存对象缓存系统，目前全世界不少人使用这个缓存项目来构建自己大负载的网站，来分担数据库的压力，通过在内存里维护一个统一的巨大的hash表，它能够用来存储各种格式的数据，包括图像、视频、文件以及数据库检索的结果等。简单的说就是将数据调用到内存中，然后从内存中读取，从而大大提高读取速度。(注: 摘自百度全科)
 * Sphinx 搜索加速:phinx全文索引,Sphinx 是一个基于SQL的全文检索引擎，可以结合MySQL，PostgreSQL作全文搜索，它可以提供比数据库本身更专业的搜索功能，使得应用程序更容易实现专业化的全文检索。
 
-## 网站服务监控
+## 监控
 
 * 服务监控
     - apache web 服务监控
@@ -145,75 +129,225 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
     - cacti监控原理
     - Cacti 监测系统的工作原理
 
-## XSS
+## 安全
 
-* 对用户所有提交的文本进行htmlspecialchars函数处理
+* 永远不要相信用户的输入（包括Cookies，因为那也是用户的输入）
+* 对用户的口令进行Hash，并使用salt，以防止Rainbow 攻击
+    - Hash算法可用MD5或SHA1等
+    - 对口令使用salt的意思是，user 在设定密码时，system 产生另外一个random string(salt)。在datbase 存的​​是与salt + passwd 产的md5sum 及salt
+    - 当要验证密码时就把user 输入的string 加上使用者的salt，产生md5s​​um 来比对。 理论上用salt 可以大幅度让密码更难破解，相同的密码除非刚好salt 相同，最后​​存在database 上的内容是不一样的。google一下md5+salt你可以看到很多文章
+    - 关于Rainbow 攻击，其意思是很像密码字典表，但不同的是，Rainbow Table存的是已经被Hash过的密码了，而且其查找密码的速度更快，这样可以让攻击非常快）。使用慢一点的Hash算法来保存口令，如 bcrypt (被时间检证过了) 或是 scrypt (更强，但是也更新一些) (1, 2)。你可以阅读一下 How To Safely Store A Password（陈皓注：酷壳以前曾介绍过bcrypt这个算法，这里，我更建议我们应该让用户输入比较强的口令，比如Apple ID注册的过程需要用户输入超过8位，需要有大小写和数字的口令，或是做出类似于这样的用户体验的东西）。
+* 不要试图自己去发明或创造一个自己的[fancy的认证系统](https://stackoverflow.com/questions/1581610/how-can-i-store-my-users-passwords-safely/1581919#1581919)，你可能会忽略到一些不容易让你查觉的东西而导致你的站点被hack了。（陈皓注：我在腾讯那坑爹的申诉系统中说过这个事了，我说过这句话——“真正的安全系统是协同整个社会的安全系统做出来的一道安全长城，而不是什么都要自己搞”，当然，很遗憾不是所有的人都能看懂这个事，包括一些资深的人）
+* 了解 [处理信用卡的一些规则](https://www.pcisecuritystandards.org/) . ([这里也有一个问题你可以查看一下](https://stackoverflow.com/questions/51094/payment-processors-what-do-i-need-to-know-if-i-want-to-accept-credit-cards-on)) （有两上vendor可以帮助你，一个是 Authorize.Net 另一个是 PayFlow Pro）
+* 使用 SSL/HTTPS 来加密传输登录页面或是任可有敏感信息的页面，比如信用卡号等。
+* 知道如何对付session 劫持。（陈皓注：请参看wikipedia的这[Session Hijacking](https://en.wikipedia.org/wiki/Session_hijacking)，）
+* 保持你的系统里的所有软件更新到最新的patch。
+* 确保你的数据库连接是安全的。
+* 确保你能了解最新的攻击技术，以及你系统的脆弱处。
 
-## Injection Attack
+* XSS 跨站脚本攻击（Cross-Site Scripting）：浏览器错误的将攻击者提供的用户输入数据（表单提交或URL参数）当做JavaScript脚本给执行了
+    - 看见输入框就输入：` /><script>alert("xss")</script> ` 进行提交
+    - JS 代码被执行后果
+        + 偷走用户浏览器里的 Cookie；
+        + 通过浏览器的记住密码功能获取到你的站点登录账号和密码；
+        + 盗取用户的机密信息；
+        + 你的用户在站点上能做到的事情，有了 JS 权限执行权限就都能做，也就是说 A 用户可以模拟成为任何用户；
+        + 在网页中嵌入恶意代码；
+    - 解决
+        + 对数据进行严格的输出编码，使得攻击者提供的数据不再被浏览器认为是脚本而被误执行
+        + 编码需要根据输出数据所在的上下文来进行相应的编码，HTML编码 URL编码 JavaScript编码、CSS编码、HTML属性编码、JSON编码
+        + 对style、script、image、src、a等等不安全的因素进行过滤或转义(htmlentities htmlspecialchars  strip_tags() 函数来去除 HTML 标签或者使用 htmlentities() 或是 htmlspecialchars())，smarty twig 都会默认为输出加上 htmlentities 防范
+        + 将cookie设置成HTTP-only:禁止客户端操作cookie
+        + [BeEF](https://beefproject.com/)
+* SQL 注入 Injection：通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。 `SELECT * FROM users WHERE username = 'peter' OR '1' = '1'`
+    - 解决
+        + 转义用户输入的数据 addslashes 和 mysql_real_escape_string 这种转义是不安全的
+        + 使用封装好的语句,使用PDO 或 MySQLi 的数据库扩展
+        + 工具 [SQLmap](http://sqlmap.org/)
+* iframe带来的风险：需要用到第三方提供的页面组件，通常会以iframe的方式引入：添加第三方提供的广告、天气预报、社交分享插件等等。可以在iframe中运行JavaScirpt脚本、Flash插件、弹出对话框等等，这可能会破坏前端用户体验
+    - 如果iframe中的域名因为过期而被恶意攻击者抢注，或者第三方被黑客攻破，iframe中的内容被替换掉了，从而利用用户浏览器中的安全漏洞下载安装木马、恶意勒索软件等等
+    - 解决
+        + 在HTML5中，iframe有了一个叫做sandbox的安全属性，通过它可以对iframe的行为进行各种限制，充分实现“最小权限“原则。使用sandbox的最简单的方式就是只在iframe元素中添加上这个关键词就好 `<iframe sandbox src="..."> ... </iframe>`
+        + sandbox还忠实的实现了“Secure By Default”原则，也就是说，如果你只是添加上这个属性而保持属性值为空，那么浏览器将会对iframe实施史上最严厉的调控限制，基本上来讲就是除了允许显示静态资源以外，其他什么都做不了。比如不准提交表单、不准弹窗、不准执行脚本等等，连Origin都会被强制重新分配一个唯一的值，换句话讲就是iframe中的页面访问它自己的服务器都会被算作跨域请求。
+        + sandbox也提供了丰富的配置参数，我们可以进行较为细粒度的控制。一些典型的参数如下：
+            * allow-forms：允许iframe中提交form表单
+            * allow-popups：允许iframe中弹出新的窗口或者标签页（例如，window.open()，showModalDialog()，target=”_blank”等等）
+            * allow-scripts：允许iframe中执行JavaScript
+            * allow-same-origin：允许iframe中的网页开启同源策略
+* ClickJacking（点击劫持）：在通过iframe使用别人提供的内容时，自己的页面也可能正在被不法分子放到他们精心构造的iframe或者frame当中，进行点击劫持攻击，攻击利用了受害者的用户身份，在其不知情的情况下进行一些操作，删除某个重要文件记录，或者窃取敏感信息
+    - 步骤
+        + 攻击者精心构造一个诱导用户点击的内容，比如Web页面小游戏
+        + 将我们的页面放入到iframe当中
+        + 利用z-index等CSS样式将这个iframe叠加到小游戏的垂直方向的正上方
+        + 把iframe设置为100%透明度
+        + 受害者访问到这个页面后，肉眼看到的是一个小游戏，如果受到诱导进行了点击的话，实际上点击到的却是iframe中的我们的页面
+    - 解决
+        + Frame Breaking方案
+        + 使用X-Frame-Options：DENY这个HTTP Header来明确的告知浏览器，不要把当前HTTP响应中的内容在HTML Frame中显示出来
+* 错误的内容推断
+    - 攻击者在上传图片的时候，看似提交的是个图片文件，实则是个含有JavaScript的脚本文件
+    - 后端服务器在返回的响应中设置的Content-Type Header仅仅只是给浏览器提供当前响应内容类型的建议，而浏览器有可能会自作主张的根据响应中的实际内容去推断内容的类型。
+    - 解决
+        + 通过设置X-Content-Type-Options参数值为nosniff 这个HTTP Header明确禁止浏览器去推断响应类型
+* SSRF（Server-Side Request Forgery：服务器端请求伪造）：通过注入恶意代码从服务端发起，通过服务端就再访问内网的系统，然后获取不该获取的数据
+    - 产生在包含这些方法的代码中，比如 curl、file_get_contents、fsockopen
+        + curl 中 `http://www.xxx.com/demo.php?url=file:///etc/passwd`
+    - 解决
+        + LFI （本地文件包含） 是一个用户未经验证从磁盘读取文件的漏洞 include 
+        + 对 curl、file_get_contents、fsockopen、这些方法中的参数进行严格验证！
+        + 限制协议只能为HTTP或HTTPS，禁止进行跳转。
+        + 如果有白名单，解析参数中的URL，判断是否在白名单内。
+        + 如果没有白名单，解析参数中的URL，判断是否为内网IP。
+* CSRF（Cross-site request forgery：跨站请求伪造）：攻击者通过伪装成受信任的用户，盗用受信任用户的身份，用受信任用户的身份发送恶意请求
+    - 解决
+        + 服务端生成一个 CSRF 令牌加密安全字符串Token传递给用户，并将 Token 存储于 Cookie 或者 Session 中,在网页构造表单时，将 Token 令牌放在表单中的隐藏字段，表单请求服务器以后会根据用户的 Cookie 或者 Session 里的 Token 令牌比对，校验成功才给予通过
+        + 对于不确定是否有csrf风险的请求，可以使用验证码（尽管体验会变差）
+        + 对于一些重要的操作（修改密码、修改邮箱），必须使用二次验证
+        + 利用HTTP头中的Referer判断请求来源是否合法
+* 文件上传：上传了一个可执行的文件到服务器上执行
+    - 解决
+        + 文件扩展名检测
+        + 文件 MIME 验证
+        + 文件重命名
+        + 文件目录设置不可执行权限
+        + 设置单独域名的文件服务器
+* HTTPS也可能掉坑里：浏览器发出去第一次请求就被攻击者拦截了下来并做了修改，根本不给浏览器和服务器进行HTTPS通信的机会
+    - 用户在浏览器里输入URL的时候往往不是从https://开始的，而是直接从域名开始输入，随后浏览器向服务器发起HTTP通信，然而由于攻击者的存在，它把服务器端返回的跳转到HTTPS页面的响应拦截了，并且代替客户端和服务器端进行后续的通信
+    - 解决
+        + 使用HSTS（HTTP Strict Transport Security），它通过HTTP Header以及一个预加载的清单，来告知浏览器在和网站进行通信的时候强制性的使用HTTPS，而不是通过明文的HTTP进行通信 `Strict-Transport-Security: max-age=<seconds>; includeSubDomains; preload`
+* 信息泄露：敏感数据泄露
+    - 本地存储数据泄露:前端存储敏感、机密信息始终都是一件危险的事情，推荐的做法是尽可能不在前端存这些数据
+    - 解决
+        + 敏感数据脱敏（比如手机号、身份证、邮箱、地址）
+        + 服务器上不允许提交包含打印 phpinfo 、$_SERVER 和 调试信息等代码。
+        + 定期从开源平台扫描关于企业相关的源码项目
+        + 密码加密
+            * 哈希（Hash）是将目标文本转换成具有相同长度的、不可逆的杂凑字符串（或叫做消息摘要)
+            * 加密（Encrypt）是将目标文本转换成具有不同长度的、可逆的密文
+            * 加盐处理避免了两个同样的密码会产生同样哈希的问题， bcrypt
+* 中间人攻击：MITM （中间人） 攻击不是针对服务器直接攻击，而是针对用户进行，攻击者作为中间人欺骗服务器他是用户，欺骗用户他是服务器，从而来拦截用户与网站的流量，并从中注入恶意内容或者读取私密信息，通常发生在公共 WiFi 网络中，也有可能发生在其他流量通过的地方，例如ISP运营商。
+    - 解决
+        + 使用 HTTPS，使用 HTTPS 可以将你的连接加密，并且无法读取或者篡改流量。
+        + WEB 服务器配置加上 Strict-Transport-Security 标示头，此头部信息告诉浏览器，你的网站始终通过 HTTPS 访问，如果未通过 HTTPS 将返回错误报告提示浏览器不应显示该页面。 需要到 https://hstspreload.org 注册网站，
+* 不安全的第三方依赖包
+    - 自动化的工具可以使用，比如NSP(Node Security Platform)，Snyk等等
+    - 静态资源完整性校验
+        + 每个资源文件都可以有一个SRI值。它由两部分组成，减号（-）左侧是生成SRI值用到的哈希算法名，右侧是经过Base64编码后的该资源文件的Hash值。 <script src=“https://example.js” integrity=“sha384-eivAQsRgJIi2KsTdSnfoEGIRTo25NCAqjNJNZalV63WKX3Y51adIzLT4So1pk5tX”></script>
+* DDoS 分布式拒绝服务，Distributed Denial of Service，其原理就是利用大量的请求造成资源过载，导致服务不可用
+    - 网络层 DDoS
+        + SYN Flood：当攻击方随意构造源 IP 去发送 SYN 包时，服务器返回的 SYN + ACK 就不能得到应答（因为 IP 是随意构造的），此时服务器就会尝试重新发送，并且会有至少 30s 的等待时间，导致资源饱和服务不可用，此攻击属于慢型 DDoS 攻击
+        + ACK Flood：在 TCP 连接建立之后，所有的数据传输 TCP 报文都是带有 ACK 标志位的，主机在接收到一个带有 ACK 标志位的数据包的时候，需要检查该数据包所表示的连接四元组是否存在，如果存在则检查该数据包所表示的状态是否合法，然后再向应用层传递该数据包
+        + UDP Flood：攻击者可以伪造大量的源 IP 地址去发送 UDP 包，UDP 包双向流量会基本相等，因此发起这种攻击的攻击者在消耗对方资源的时候也在消耗自己的资源。 此种攻击属于大流量攻击
+        + ICMP Flood：不断发送不正常的 ICMP 包（所谓不正常就是 ICMP 包内容很大），导致目标带宽被占用，但其本身资源也会被消耗
+        + 防御
+            * 网络架构上做好优化，采用负载均衡分流。
+            * 确保服务器的系统文件是最新的版本，并及时更新系统补丁。
+            * 添加抗 DDos 设备，进行流量清洗。
+            * 限制同时打开的 SYN 半连接数目，缩短 SYN 半连接的 Timeout 时间。
+            * 限制单 IP 请求频率。
+            * 防火墙等防护设置禁止 ICMP 包等。
+            * 严格限制对外开放的服务器的向外访问。
+            * 运行端口映射程序或端口扫描程序，要认真检查特权端口和非特权端口。
+            * 关闭不必要的服务。
+            * 认真检查网络设备和主机/服务器系统的日志。只要日志出现漏洞或是时间变更,那这台机器就可能遭到了攻击。
+            * 限制在防火墙外与网络文件共享。这样会给黑客截取系统文件的机会，主机的信息暴露给黑客，无疑是给了对方入侵的机会。
+    - 应用层 DDoS:在网络应用层耗尽你的带宽
+        + CC 攻击(Challenge Collapasar):针对消耗资源比较大的页面不断发起不正常的请求，导致资源耗尽
+        + DNS Flood 攻击采用的方法是向被攻击的服务器发送大量的域名解析请求，通常请求解析的域名是随机生成或者是网络世界上根本不存在的域名，被攻击的DNS 服务器在接收到域名解析请求的时候首先会在服务器上查找是否有对应的缓存，如果查找不到并且该域名无法直接由服务器解析的时候，DNS 服务器会向其上层 DNS 服务器递归查询域名信息。域名解析的过程给服务器带来了很大的负载，每秒钟域名解析请求超过一定的数量就会造成 DNS 服务器解析域名超时。一台 DNS 服务器所能承受的动态域名查询的上限是每秒钟 9000 个请求
+        + HTTP 慢速连接攻击:建立起 HTTP 连接，设置一个较大的 Conetnt-Length，每次只发送很少的字节，让服务器一直以为 HTTP 头部没有传输完成，这样连接一多就很快会出现连接耗尽。
+        + 防御
+            * 判断 User-Agent 字段（不可靠，因为可以随意构造）
+            * 针对 IP + cookie，限制访问频率（由于 cookie 可以更改，IP 可以使用代理，或者肉鸡，也不可靠)
+            * 关闭服务器最大连接数等，合理配置中间件，缓解 DDoS 攻击。
+            * 请求中添加验证码，比如请求中有数据库操作的时候。
+            * 编写代码时，尽量实现优化，并合理使用缓存技术，减少数据库的读取操作。
+* 流量劫持
+    - DNS 劫持:如果当用户通过某一个域名访问一个站点的时候，被篡改的 DNS 服务器返回的是一个恶意的钓鱼站点的 IP，用户就被劫持到了恶意钓鱼站点
+        + 要不就是网络运营商搞的鬼，一般小的网络运营商与黑产勾结会劫持 DNS，要不就是电脑中毒，被恶意篡改了路由器的 DNS 配置
+        + 应对
+            * 取证很重要，时间、地点、IP、拨号账户、截屏、URL 地址等一定要有。
+            * 可以跟劫持区域的电信运营商进行投诉反馈。
+            * 如果投诉反馈无效，直接去工信部投诉，一般来说会加白你的域名。
+    - HTTP 劫持：当用户访问某个站点的时候会经过运营商网络，而不法运营商和黑产勾结能够截获 HTTP 请求返回内容，并且能够篡改内容，然后再返回给用户，从而实现劫持页面，轻则插入小广告，重则直接篡改成钓鱼网站页面骗用户隐私。
+        + 根本原因，是 HTTP 协议没有办法对通信对方的身份进行校验以及对数据完整性进行校验
+* 服务器漏洞
+    - 越权操作：涉及到数据库的操作都需要先进行严格的验证
+    - 目录遍历漏洞：通过在 URL 或参数中构造 ../，./ 和类似的跨父目录字符串的 ASCII 编码、unicode 编码等，完成目录跳转，读取操作系统各个目录下的敏感文件
+        + 需要对 URL 或者参数进行 ../，./ 等字符的转义过滤
+    - 源码暴露漏洞：
+* 设计缺陷
+    - 返回信息过多：不要返回 用户已被禁用，统一返回 用户名或密码错误
+    - 短信接口
+        + 设置同一手机号短信发送间隔
+        + 设置每个IP地址每日最大发送量
+        + 设置每个手机号每日最大发送量
+        + 升级验证码，采用滑动拼图、文字点选、图表点选...
+        + 升级短信接口的验证方法
 
-* SQL注入，就是通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。
-* 它是利用现有应用程序，将（恶意）的SQL命令注入到后台数据库引擎执行的能力，它可以通过在Web表单中输入（恶意）SQL语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图去执行SQL语句。
+```php
+$username = $_GET['username'];
+$query = $pdo->prepare('SELECT * FROM users WHERE username = :username');
+$query->execute(['username' => $username]);
+$data = $query->fetch();
 
-## SSO
+//user signup
+$password = $_POST['password'];
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-用户自动登出可能是因为网站的登录cookie过期且SSO上的登录cookie也过期，这时当某个请求到达后台时，会清空所有与认证有关的cookie并重定向到SSO的登录页面。登录cookie的有效期是20分钟，但用户抱怨的是刚登录不久就被自动踢出，从日志上看也的确如此。所以“登录cookie过期”的不在场证明相当完美。
+//login
+$password = $_POST['password'];
+$hash = '1234'; //load this value from your db
 
-另外的可能就是缓存挂了。每个请求到达后台时，都会到服务器缓存中取出在用户登录时存储的一个token，将之与请求所携带的cookie中的token比较，如果不相符就自动登出。之所以这样做是考虑用户的安全，将伪造或窃取cookie登录的黑客拒之门外。如果存储或读取缓存失败，自然也会自动登出。齐识以前在读写缓存的地方加了很详细的日志，并没看到任何错误发生。“缓存”作案的可能性也不大。
+if(password_verify($password, $hash)) {
+  echo 'Password is valid!';
+} else {
+  echo 'Invalid password.';
+}
+```
 
-网站前端每隔2分钟会自动向后台发一个心跳请求，如果服务器发现本次心跳与上一次心跳间隔时间超过3分钟，就认为用户已处于不活跃状态，自动将其登出。这么做也是为了用户安全，比如将所有网站页面关闭，3分钟后再次打开，将会自动跳转到登录页面。如果心跳请求没有发送成功，下次请求到来时很可能已经超过了3分钟，就会把用户踢出去
+## SSO（Single Sign On，单点登录）
 
-## WEB开发中需要了解的东西
+* 能够做到一次登录多次使用
+    - 依赖项目为前后端分离项目
+    - SSO认证中心不是前后端分离的，就是前端代码和后端代码部署在一个项目中
+    - 前后端分离项目，登录使用token进行解决，前端每次请求接口时都必须传递token参数
+* 用户自动登出可能是因为网站的登录cookie过期且SSO上的登录cookie也过期，这时当某个请求到达后台时，会清空所有与认证有关的cookie并重定向到SSO的登录页面。登录cookie的有效期是20分钟，但用户抱怨的是刚登录不久就被自动踢出，从日志上看也的确如此。所以“登录cookie过期”的不在场证明相当完美。
+* 另外的可能就是缓存挂了。每个请求到达后台时，都会到服务器缓存中取出在用户登录时存储的一个token，将之与请求所携带的cookie中的token比较，如果不相符就自动登出。之所以这样做是考虑用户的安全，将伪造或窃取cookie登录的黑客拒之门外。如果存储或读取缓存失败，自然也会自动登出。齐识以前在读写缓存的地方加了很详细的日志，并没看到任何错误发生。“缓存”作案的可能性也不大。
+* 自动登出
+    - 前端每隔2分钟会自动向后台发一个心跳请求，如果服务器发现本次心跳与上一次心跳间隔时间超过3分钟，就认为用户已处于不活跃状态，自动将其登出
+    - 这么做也是为了用户安全，比如将所有网站页面关闭，3分钟后再次打开，将会自动跳转到登录页面
+    - 如果心跳请求没有发送成功，下次请求到来时很可能已经超过了3分钟，就会把用户踢出去
 
-* 接口和用户体验
-    - 小心浏览器的实现标准上的不一致，确信让你的网站能够适当地跨浏览器。至少，你的网站需要测试一下下面的浏览器：
-        - 最新的 Gecko 引擎 (Firefox)，
-        - 一个 Webkit 引擎 (Safari, Chrome, 或是其它的移动设备上的浏览器)
-        -  IE 浏览器 (测试IE的兼容性你可以使用微软IE的 Application Compatibility VPC Images)
-        -  Opera 浏览器
-        -  使用一下[browsershots](http://browsershots.org/) 来看看你的网页在不同的浏览器下是怎么被显示出来的
-    - 考虑一下人们是怎么来访问你的网站而不是那些主流的浏览器：手机，读屏软件和搜索引擎，例如：一些Accessibility的东西： [WAI](https://www.w3.org/WAI/) 和  [Section508](https://www.section508.gov/), 移动设备开发：[MobiForge](https://mobiforge.com/).
-    - 部署Staging：怎么部署网站的更新而不会影响用户的访问。 Ed Lucas的答案 可以让你了解一些（陈皓注：Ed说了一些如版本控制，自动化build，备份，回滚等机制）。
-    * 千万不要直接给用户显示不友好的错误信息。
-    * 千万不要把用户的邮件地址以明文显示出来，这样会被爬虫爬走并被让用户的邮箱被垃圾邮件搞死。
-    * 为用户的链接加上 rel="nofollow" 的属性以 避免垃圾网站的干扰。（陈皓注：nofollow是HTML的一个属性，用于通知搜索引擎“这个链接所指向的网页非我所能控制，对其内容不予置评”，或者简单地说，该链接不是对目标网站或网页的“投票”，这样搜索引擎不会再访问这个链接。这个是用来减少一些特定垃圾页面对原网站的影响，从而可以改善搜索结果的质量，并且防止垃圾链接的蔓延。）
-    * 为网站建立[一些的限制](https://blog.codinghorror.com/rate-limiting-and-velocity-checking/) – 这个属于安全性的范畴。（陈皓注：比如你在Google注册邮箱时，你一口气注册超过两个以上的邮箱，gmail要求给你发短信或是给你打电话认证，比如Discuz论坛的会限制你发贴或是搜索的间隔时间等等，更多的网站会用CAPTCHA来确认是人为的操作。 这些限制都是为了防止垃圾和恶意攻击）
-    * 学习如何做 Progressive Enhancement. Progressive Enhancement是一个Web Design的理念，
-        * 基础的内容和功能应该可以被所有的浏览器存取
-        * 页面布局的应该使用外部的CSS链接
-        * Javascript也应该是外部链接还应该是 unobtrusive 的
-        * 应该让用户可以设置他们的偏好
-    * 如果POST成功，要在POST方法后重定向网址，这样可以阻止用户通过刷新页面重复提交。
-    * 严重关注Accessibility。因为这是法律上的需求（陈皓注：Section 508是美国的508法案，其是美国劳工复健法的改进，它是一部联邦法律，这个法律要求所有技术要考虑到残障人士的应用，如果某个大众信息传播网站，如果某些用户群体（如残疾人）浏览该网站获取信息时，如果他们无法正常获得所期望的信息（如无法正常浏览），那可以依据相关法规，可以对该网站依法起诉）。 [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) 为这方面的事提供很不错的资源.
-* 安全
-    * 在网上有很多关于安全的文章，但是 [OWASP 开发指导](https://www.owasp.org/index.php/OWASP_Guide_Project) 涵盖了几乎所有关于Web站点安全的东西。（陈皓注：OWASP(开放Web应用安全项目- Open Web Application Security Project)是一个开放的非营利性组织，目前全球有130个分会近万名会员，其主要目标是研议协助解决Web软体安全之标准、工具与技术文件，长期 致力于协助政府或企业了解并改善网页应用程式与网页服务的安全性。OWASP被视为Web应用安全领域的权威参考。2009年下列发布的美国国家和国际立法、标准、准则、委员会和行业实务守则参考引用了OWASP。美国联邦贸易委员会(FTC)强烈建议所有企业需遵循OWASP十大WEB弱点防护守则）
-    * 了解什么是 SQL 注入攻击 并知道怎么阻止这种攻击。
-    * 永远不要相信用户的输入（包括Cookies，因为那也是用户的输入）
-    * 对用户的口令进行Hash，并使用salt，以防止Rainbow 攻击（陈皓注：Hash算法可用MD5或SHA1等，对口令使用salt的意思是，user 在设定密码时，system 产生另外一个random string(salt)。在datbase 存的​​是与salt + passwd 产的md5sum 及salt。 当要验证密码时就把user 输入的string 加上使用者的salt，产生md5s​​um 来比对。 理论上用salt 可以大幅度让密码更难破解，相同的密码除非刚好salt 相同，最后​​存在database 上的内容是不一样的。google一下md5+salt你可以看到很多文章。关于Rainbow 攻击，其意思是很像密码字典表，但不同的是，Rainbow Table存的是已经被Hash过的密码了，而且其查找密码的速度更快，这样可以让攻击非常快）。使用慢一点的Hash算法来保存口令，如 bcrypt (被时间检证过了) 或是 scrypt (更强，但是也更新一些) (1, 2)。你可以阅读一下 How To Safely Store A Password（陈皓注：酷壳以前曾介绍过bcrypt这个算法，这里，我更建议我们应该让用户输入比较强的口令，比如Apple ID注册的过程需要用户输入超过8位，需要有大小写和数字的口令，或是做出类似于这样的用户体验的东西）。
-    * 不要试图自己去发明或创造一个自己的[fancy的认证系统](https://stackoverflow.com/questions/1581610/how-can-i-store-my-users-passwords-safely/1581919#1581919)，你可能会忽略到一些不容易让你查觉的东西而导致你的站点被hack了。（陈皓注：我在腾讯那坑爹的申诉系统中说过这个事了，我说过这句话——“真正的安全系统是协同整个社会的安全系统做出来的一道安全长城，而不是什么都要自己搞”，当然，很遗憾不是所有的人都能看懂这个事，包括一些资深的人）
-    * 了解 [处理信用卡的一些规则](https://www.pcisecuritystandards.org/) . ([这里也有一个问题你可以查看一下](https://stackoverflow.com/questions/51094/payment-processors-what-do-i-need-to-know-if-i-want-to-accept-credit-cards-on)) （有两上vendor可以帮助你，一个是 Authorize.Net 另一个是 PayFlow Pro）
-    * 使用 SSL/HTTPS 来加密传输登录页面或是任可有敏感信息的页面，比如信用卡号等。
-    * 知道如何对付session 劫持。（陈皓注：请参看wikipedia的这[Session Hijacking](https://en.wikipedia.org/wiki/Session_hijacking)，）
-    * 避免 跨站脚本攻击(XSS)。（陈皓注：参看酷壳站前几天发的《新浪微博的XSS攻击事件》）
-    * 避免 跨站伪造请求攻击 cross site request forgeries (XSRF).
-    * 保持你的系统里的所有软件更新到最新的patch。
-    * 确保你的数据库连接是安全的。
-    * 确保你能了解最新的攻击技术，以及你系统的脆弱处。
-    * 请读一下 [The Google Browser Security Handbook](https://code.google.com/p/browsersec/wiki/Main).
-    * 请读一下 [The Web Application Hacker’s Handbook](https://www.amazon.com/dp/0470170778/?tag=stackoverflow17-20).
-    * [Mozilla的安全编程规范](https://wiki.mozilla.org/WebAppSec/Secure_Coding_Guidelines)
-    * [Ruby on Rails的Web安全的开发教程](https://guides.rubyonrails.org/security.html)
-* 性能
-    - 只要需要，请实现cache机制，了解并合理地使用 HTTP caching 以及 HTML5 Manifest.
-    - 优化页面 —— 不要使用20KB图片来平铺网页背景。（陈皓注：还有很多网页页面优化性的文章，你可以STFG – Search The Fucking Google一下。如果你要调试的话，你可以使用firebug或是chrome内置的开发人员的工具来查看网页装载的性能）
-    - 学习如何 gzip/deflate 网页 (deflate 更好).
-    - 把多个CSS文件和Javascript文件合并成一个，这样可以减少浏览器的网络连数，并且使用gzip压缩被反复用到的文件。
-    - 学习一下 Yahoo Exceptional Performance 这个网站上的东西，上面有很多非常不错的改善前端性能的指导，以及 YSlow 这个工具。 Google page speed 是另一个用来做性能采样的工具。这两个工具都需要安装 Firebug 。
-    - 为那些小的图片使用 CSS Image Sprites，就像工具条一样。 (参看 “最小化 HTTP 请求” ) （陈皓注：把所有的小图片合并成一个图片，然后用CSS把显示其中的一块，这样，这些小图片只用传输一次，酷壳的Wordpress样式的那个RSS订阅列表中的小图标就是这样做的）
-    - 繁忙的网络应该考虑把网页的内容分开存放在不同的域名下。（陈皓注：比如有专门的图片服务器——图片相当耗带宽，或是专门的Ajax服务器）
-    - 静态网页 (如，图片，CSS，JavaScript，以及一些不需要访问cookies的网页) 应该放在一个不使用cookies的独立的域名下，因为所有在同一个域名或子域名下的cookie会被这个域名下的请求一同发送。另一个好的选择是使用 Content Delivery Network (CDN).
-    - 使用单个页面的HTTP请求数最小化。
-    - 为Javascript使用 Google Closure Compiler 或是 其它压缩工具（陈皓注：压缩Javascript代码可以让你的页面减少网络传输从而可以得到很快的喧染。注意，并不是所有的工具都可以正确压缩Javascript的，Google的这个工具甚至还可以帮你优化你的代码）
-    - 确认你的网站有一个 favicon.ico 文件放在网站的根下，如 /favicon.ico. 浏览器会自动请求这个文件，就算这个图标文件没有在你的网页中明显说明，浏览器也会请求。如果你没有这个文件，就会出大量的404错误，这会消耗你的服务器带宽。（陈皓注：服务器返回404页面会比这个ico文件可能还大）
+## 接口和用户体验
+
+* 小心浏览器的实现标准上的不一致，确信让你的网站能够适当地跨浏览器 来看看网页在不同的浏览器下是怎么被显示出来的
+* 考虑一下人们是怎么来访问你的网站而不是那些主流的浏览器：手机，读屏软件和搜索引擎，例如：一些Accessibility的东西： [WAI](https://www.w3.org/WAI/) 和  [Section508](https://www.section508.gov/), 移动设备开发：[MobiForge](https://mobiforge.com/).
+* 部署Staging：怎么部署网站的更新而不会影响用户的访问。 Ed Lucas的答案 可以让你了解一些（陈皓注：Ed说了一些如版本控制，自动化build，备份，回滚等机制）。
+* 千万不要直接给用户显示不友好的错误信息。
+* 千万不要把用户的邮件地址以明文显示出来，这样会被爬虫爬走并被让用户的邮箱被垃圾邮件搞死。
+* 为用户的链接加上 rel="nofollow" 的属性以 避免垃圾网站的干扰。（陈皓注：nofollow是HTML的一个属性，用于通知搜索引擎“这个链接所指向的网页非我所能控制，对其内容不予置评”，或者简单地说，该链接不是对目标网站或网页的“投票”，这样搜索引擎不会再访问这个链接。这个是用来减少一些特定垃圾页面对原网站的影响，从而可以改善搜索结果的质量，并且防止垃圾链接的蔓延。）
+* 为网站建立[一些的限制](https://blog.codinghorror.com/rate-limiting-and-velocity-checking/) – 这个属于安全性的范畴。（陈皓注：比如你在Google注册邮箱时，你一口气注册超过两个以上的邮箱，gmail要求给你发短信或是给你打电话认证，比如Discuz论坛的会限制你发贴或是搜索的间隔时间等等，更多的网站会用CAPTCHA来确认是人为的操作。 这些限制都是为了防止垃圾和恶意攻击）
+* 学习如何做 Progressive Enhancement. Progressive Enhancement是一个Web Design的理念
+    - 基础的内容和功能应该可以被所有的浏览器存取
+    - 页面布局的应该使用外部的CSS链接
+    - Javascript也应该是外部链接还应该是 unobtrusive 的
+    - 应该让用户可以设置他们的偏好
+* 如果POST成功，要在POST方法后重定向网址，这样可以阻止用户通过刷新页面重复提交。
+* 严重关注Accessibility。因为这是法律上的需求（陈皓注：Section 508是美国的508法案，其是美国劳工复健法的改进，它是一部联邦法律，这个法律要求所有技术要考虑到残障人士的应用，如果某个大众信息传播网站，如果某些用户群体（如残疾人）浏览该网站获取信息时，如果他们无法正常获得所期望的信息（如无法正常浏览），那可以依据相关法规，可以对该网站依法起诉）。 [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) 为这方面的事提供很不错的资源.
+
+## 性能
+
+* 只要需要，请实现cache机制，了解并合理地使用 HTTP caching 以及 HTML5 Manifest.
+* 优化页面 —— 不要使用20KB图片来平铺网页背景。（陈皓注：还有很多网页页面优化性的文章，你可以STFG – Search The Fucking Google一下。如果你要调试的话，你可以使用firebug或是chrome内置的开发人员的工具来查看网页装载的性能）
+* 学习如何 gzip/deflate 网页 (deflate 更好).
+* 把多个CSS文件和Javascript文件合并成一个，这样可以减少浏览器的网络连数，并且使用gzip压缩被反复用到的文件。
+* 学习一下 Yahoo Exceptional Performance 这个网站上的东西，上面有很多非常不错的改善前端性能的指导，以及 YSlow 这个工具。 Google page speed 是另一个用来做性能采样的工具。这两个工具都需要安装 Firebug 。
+* 为那些小的图片使用 CSS Image Sprites，就像工具条一样。 (参看 “最小化 HTTP 请求” ) （陈皓注：把所有的小图片合并成一个图片，然后用CSS把显示其中的一块，这样，这些小图片只用传输一次，酷壳的Wordpress样式的那个RSS订阅列表中的小图标就是这样做的）
+* 繁忙的网络应该考虑把网页的内容分开存放在不同的域名下。（陈皓注：比如有专门的图片服务器——图片相当耗带宽，或是专门的Ajax服务器）
+* 静态网页 (如，图片，CSS，JavaScript，以及一些不需要访问cookies的网页) 应该放在一个不使用cookies的独立的域名下，因为所有在同一个域名或子域名下的cookie会被这个域名下的请求一同发送。另一个好的选择是使用 Content Delivery Network (CDN).
+* 使用单个页面的HTTP请求数最小化。
+* 为Javascript使用 Google Closure Compiler 或是 其它压缩工具（陈皓注：压缩Javascript代码可以让你的页面减少网络传输从而可以得到很快的喧染。注意，并不是所有的工具都可以正确压缩Javascript的，Google的这个工具甚至还可以帮你优化你的代码）
+* 确认你的网站有一个 favicon.ico 文件放在网站的根下，如 /favicon.ico. 浏览器会自动请求这个文件，就算这个图标文件没有在你的网页中明显说明，浏览器也会请求。如果你没有这个文件，就会出大量的404错误，这会消耗你的服务器带宽。（陈皓注：服务器返回404页面会比这个ico文件可能还大）
 
 ## 趋势
 
@@ -235,22 +369,20 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 * [acaudwell/Logstalgia](https://github.com/acaudwell/Logstalgia):replay or stream website access logs as a retro arcade game https://logstalgia.io
 * 压力测试
     - apache AB
-    + webbench
-- record and replay
-    + [rrweb-io/rrweb](https://github.com/rrweb-io/rrweb):record and replay the web https://www.rrweb.io/
-    + [sindresorhus/pageres](https://github.com/sindresorhus/pageres):Capture website screenshots
-- [缩短网址](http://suo.im/)
-- [google/pprof](https://github.com/google/pprof):pprof is a tool for visualization and analysis of profiling data
+    - webbench
+* record and replay
+    - [rrweb-io/rrweb](https://github.com/rrweb-io/rrweb):record and replay the web https://www.rrweb.io/
+    - [sindresorhus/pageres](https://github.com/sindresorhus/pageres):Capture website screenshots
+* [缩短网址](http://suo.im/)
+* [google/pprof](https://github.com/google/pprof):pprof is a tool for visualization and analysis of profiling data
 * [GoogleChromeLabs/quicklink](https://github.com/GoogleChromeLabs/quicklink):⚡️Faster subsequent page-loads by prefetching in-viewport links during idle time
 * 分析
     - [matomo-org/matomo](https://github.com/matomo-org/matomo):Liberating Web Analytics. Star us on Github? +1. Matomo is the leading open alternative to Google Analytics that gives you full control over your data. Matomo lets you easily collect data from websites, apps & the IoT and visualise this data and extract insights. Privacy is built-in. We love Pull Requests! https://matomo.org/
-* [YSlow](http://yslow.org):analyzes web pages and why they're slow based on Yahoo!'s rules for high performance web sites
-
-## 监控
-
-* [davidkpiano/xstate](https://github.com/davidkpiano/xstate):State machines and statecharts for the modern web. https://xstate.js.org/docs
-* [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
-* [brendangregg/FlameGraph](https://github.com/brendangregg/FlameGraph):Stack trace visualizer http://www.brendangregg.com/flamegraphs.html
+    - [YSlow](http://yslow.org):analyzes web pages and why they're slow based on Yahoo!'s rules for high performance web sites
+* 监控
+    - [davidkpiano/xstate](https://github.com/davidkpiano/xstate):State machines and statecharts for the modern web. https://xstate.js.org/docs
+    - [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
+    - [brendangregg/FlameGraph](https://github.com/brendangregg/FlameGraph):Stack trace visualizer http://www.brendangregg.com/flamegraphs.html
 
 ## 参考
 
@@ -258,15 +390,24 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 * [Web](https://developers.google.com/web/)
 * [Web](https://developer.mozilla.org/zh-CN/docs/Web)
 * [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
-- [Web 开发](https://www.ibm.com/developerworks/cn/web/)
+* [Web 开发](https://www.ibm.com/developerworks/cn/web/)
 * [Design Issues](https://www.w3.org/DesignIssues/)
 * [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) https://solid.mit.edu/
-
-* [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
+* [OWASP 开发指导](https://www.owasp.org/index.php/OWASP_Guide_Project) 涵盖了几乎所有关于Web站点安全的东西。
+    - OWASP(开放Web应用安全项目- Open Web Application Security Project)是一个开放的非营利性组织，目前全球有130个分会近万名会员，其主要目标是研议协助解决Web软体安全之标准、工具与技术文件，长期 致力于协助政府或企业了解并改善网页应用程式与网页服务的安全性
+    - OWASP被视为Web应用安全领域的权威参考。2009年下列发布的美国国家和国际立法、标准、准则、委员会和行业实务守则参考引用了OWASP。美国联邦贸易委员会(FTC)强烈建议所有企业需遵循OWASP十大WEB弱点防护守则）
+* [OWASP™ Foundation](https://www.owasp.org/index.php/Main_Page):the free and open software security community
+* [The Google Browser Security Handbook](https://code.google.com/p/browsersec/wiki/Main).
+* [The Web Application Hacker’s Handbook](https://www.amazon.com/dp/0470170778/?tag=stackoverflow17-20).
+* [Mozilla的安全编程规范](https://wiki.mozilla.org/WebAppSec/Secure_Coding_Guidelines)
+* [Ruby on Rails的Web安全的开发教程](https://guides.rubyonrails.org/security.html)
 * [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning Area. https://developer.mozilla.org/en-US/docs/Learn
+
+
 * [WEB开发中需要了解的东西](https://coolshell.cn/articles/6043.html): [What technical details should a programmer of a web application consider before making the site public?](https://softwareengineering.stackexchange.com/questions/46716/what-technical-details-should-a-programmer-of-a-web-application-consider-before/46738#46738)
-* [关于大型网站技术演进的思考](http://blog.jobbole.com/84761/)
+* [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
 * [A Beginner’s Guide to Website Speed Optimization](https://kinsta.com/learn/page-speed/)
+* [关于大型网站技术演进的思考](http://blog.jobbole.com/84761/)
 * [大型WEB架构设计](https://mp.weixin.qq.com/s?__biz=MzAwNzY4OTgyNA==&mid=2651826002&idx=1&sn=237e6c340626171cf1f4eb6e0f19f182&chksm=8081445db7f6cd4bea29330141ac28228f09c024dd5671cb945171bf41a20d6f1386c455e330)
 - [PHP 进阶之路 - 亿级 pv 网站架构实战之性能压榨](https://segmentfault.com/a/1190000010455076)
 - [全站缓存](https://segmentfault.com/a/1190000005808789)

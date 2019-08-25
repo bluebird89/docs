@@ -123,11 +123,19 @@ sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
 * 全局块：主要影响Nginx全局，通常包括下面几个部分：
     - 配置运行Nginx服务器用户（组）
         - PHP7默认的用户和组是www-data。The main configuration file is: /etc/nginx/nginx.conf
-    - worker process数
+    - worker process数:worker角色的工作进程的个数
+        + master进程是接收并分配请求给worker处理
+        + 简单一点可以设置为cpu的核数grep ^processor /proc/cpuinfo | wc -l，也是 auto 值
+        + 如果开启了ssl和gzip更应该设置成与逻辑CPU数量一样甚至为2倍，可以减少I/O操作
+    - worker_cpu_affinity:在高并发情况下，通过设置cpu粘性来降低由于多CPU核切换造成的寄存器等现场重建带来的性能损耗。如worker_cpu_affinity 0001 0010 0100 1000; （四核）
+    - worker_rlimit_nofile 10240 默认是没有设置，可以限制为操作系统最大的限制65535
     - Nginx进程PID存放路径
     - 错误日志的存放路径
     - 配置文件的引入
 * events块:该部分配置主要影响Nginx服务器与用户的网络连接
+    - worker_connections:每一个worker进程能并发处理（发起）的最大连接数（包含与客户端或后端被代理服务器间等所有连接数）
+        + 最大连接数 = worker_processes * worker_connections/4
+        + 不能超过后面的worker_rlimit_nofile
     - 设置网络连接的序列化
     - 是否允许同时接收多个网络连接
     - 事件驱动模型的选择
@@ -140,8 +148,13 @@ sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
         + /dev/poll：使用于Solaris 7 11/99+，HP/UX 11.22+ (eventport)，IRIX 6.5.15+ 和 Tru64 UNIX 5.1A+。
         + Eventport：使用于Solaris 10。 为了防止出现内核崩溃的问题， 有必要安装安全补丁
 * http块
+    - sendfile on 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，减少用户空间到内核空间的上下文切换。对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。
     - 定义MIMI-Type
+    - keepalive_timeout 65 : 长连接超时时间，单位是秒 长连接请求大量小文件的时候，可以减少重建连接的开销，但假如有大文件上传，65s内没上传完成会导致失败。如果设置时间过长，用户又多，长时间保持连接会占用大量资源。
+    - send_timeout : 用于指定响应客户端的超时时间。这个超时仅限于两个连接活动之间的时间，如果超过这个时间，客户端没有任何活动，Nginx将会关闭连接。
     - 自定义服务日志
+    - client_max_body_size 10m 允许客户端请求的最大单文件字节数。如果有上传较大文件，请设置它的限制值
+    - client_body_buffer_size 128k  缓冲区代理缓冲用户端请求的最大字节数
     - 允许sendfile方式传输文件
     - 连接超时时间
     - 单连接请求数上限
@@ -153,15 +166,39 @@ sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
         + TCP Sockets
             * This makes PHP-FPM able to be listened to by remote servers
             * listen.allowed_clients = 127.0.0.1
+    - http_proxy：:nginx作为反向代理服务器的功能，包括缓存功能
+        + proxy_connect_timeout 60 nginx跟后端服务器连接超时时间(代理连接超时)
+        + proxy_read_timeout 60 连接成功后，与后端服务器两个成功的响应操作之间超时时间(代理接收超时)
+        + proxy_buffer_size 4k 设置代理服务器（nginx）从后端realserver读取并保存用户头信息的缓冲区大小，默认与proxy_buffers大小相同，其实可以将这个指令值设的小一点
+        + proxy_buffers 4 32k proxy_buffers缓冲区，nginx针对单个连接缓存来自后端realserver的响应，网页平均在32k以下的话，这样设置
+        + proxy_busy_buffers_size 64k 高负荷下缓冲大小（proxy_buffers*2）
+        + proxy_max_temp_file_size  当proxy_buffers放不下后端服务器的响应内容时，会将一部分保存到硬盘的临时文件中，这个值用来设置最大临时文件大小，默认1024M，它与proxy_cache没有关系。大于这个值，将从upstream服务器传回。设置为0禁用。
+        + proxy_temp_file_write_size 64k 当缓存被代理的服务器响应到临时文件时，这个选项限制每次写临时文件的大小。proxy_temp_path（可以在编译的时候）指定写到哪那个目录。
+        + proxy_pass，proxy_redirect见 location 部分。
+    - http_gzip gzip on : 开启gzip压缩输出，减少网络传输
+        + gzip_min_length 1k ：设置允许压缩的页面最小字节数，页面字节数从header头得content-length中进行获取。默认值是20。建议设置成大于1k的字节数，小于1k可能会越压越大。
+        + gzip_buffers 4 16k ：设置系统获取几个单位的缓存用于存储gzip的压缩结果数据流。4 16k代表以16k为单位，安装原始数据大小以16k为单位的4倍申请内存。
+        + gzip_http_version 1.0 ：用于识别 http 协议的版本，早期的浏览器不支持 Gzip 压缩，用户就会看到乱码，所以为了支持前期版本加上了这个选项，如果你用了 Nginx 的反向代理并期望也启用 Gzip 压缩的话，由于末端通信是 http/1.0，故请设置为 1.0。
+        + gzip_comp_level 6 ：gzip压缩比，1压缩比最小处理速度最快，9压缩比最大但处理速度最慢(传输快但比较消耗cpu)
+        + gzip_types ：匹配mime类型进行压缩，无论是否指定,”text/html”类型总是会被压缩的。
+        + gzip_proxied any ：Nginx作为反向代理的时候启用，决定开启或者关闭后端服务器返回的结果是否压缩，匹配的前提是后端服务器必须要返回包含”Via”的 header头。
+        + gzip_vary on ：和http头有关系，会在响应头加个 Vary: Accept-Encoding ，可以让前端的缓存服务器缓存经过gzip压缩的页面，例如，用Squid缓存经过Nginx压缩的数据。
 * server块
     - 配置网络监听
     - 基于名称的虚拟主机配置
     - 基于IP的虚拟主机配置
+    - http_stream
+        + 通过一个简单的调度算法来实现客户端IP到后端服务器的负载均衡，upstream后接负载均衡器的名字，后端realserver以 host:port options; 方式组织在 {} 中。如果后端被代理的只有一台，也可以直接写在 proxy_pass
 * location块
     - location配置
     - 请求根目录配置
     - 更改location的URI
+        + proxy_pass http:/backend 请求转向backend定义的服务器列表，即反向代理，对应upstream负载均衡器。也可以proxy_pass http://ip:port。
     - 网站默认首页配置
+* 通用
+    - autoindex on;  允许列出整个目录
+    - autoindex_exact_size off; 默认为on，显示出文件的确切大小，单位是bytes。改为off后，显示出文件的大概大小，单位是kB或者MB或者GB
+    - autoindex_localtime on;默认为off，显示的文件时间为GMT时间。改为on后，显示的文件时间为文件的服务器时间
 
 ```json
 $args # 请求中的参数
@@ -1400,6 +1437,10 @@ docker run -p 80:80 --name mynginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc
 - [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes https://kubernetes.github.io/ingress-nginx/
 * [valentinxxx/nginxconfig.io](https://github.com/valentinxxx/nginxconfig.io):⚙️ NGiИX config generator generator on steroids 💉 https://nginxconfig.io
 * [lebinh/ngxtop](https://github.com/lebinh/ngxtop):Real-time metrics for nginx server
+    - `pip install ngxtop`
+    - `ngxtop [选项]（print | top | avg | sum） <var>`
+    - `ngxtop top remote_addr`  `ngxtop -i'status> = 404'`
+    - `ngxtop -l /path/access.log` `ngxtop -f common -l /path/access.l`
 * [sumory/orange](https://github.com/sumory/orange):OpenResty/Nginx Gateway for API Monitoring and Management. http://orange.sumory.com
 
 ## 参考
