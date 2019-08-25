@@ -43,15 +43,44 @@ iostat -d -k 1 3
     - 首先考虑按照业务垂直拆分
     - 再考虑水平拆分：先分库（设置数据路由规则，把数据分配到不同的库中）
     - 最后再考虑分表，单表拆分到数据1000万以内
+* 开启查询缓存，优化查询
+* explainselect查询，这可以帮你分析你的查询语句或是表结构的性能瓶颈。EXPLAIN 的查询结果还会告诉你你的索引主键被如何利用的，你的数据表是如何被搜索和排序的
+* 当只要一行数据时使用limit 1，MySQL数据库引擎会在找到一条数据后停止搜索，而不是继续往后查少下一条符合记录的数据
+* 为搜索字段建索引
+* 使用 ENUM 而不是 VARCHAR。如果你有一个字段，比如“性别”，“国家”，“民族”，“状态”或“部门”，你知道这些字段的取值是有限而且固定的，那么，你应该使用 ENUM 而不是VARCHAR
+* Prepared StatementsPrepared Statements很像存储过程，是一种运行在后台的SQL语句集合，我们可以从使用 prepared statements 获得很多好处，无论是性能问题还是安全问题。
+* Prepared Statements 可以检查一些绑定好的变量，这样可以保护程序不会受到“SQL注入式”攻击
+
+垂直分表
+
+选择正确的存储引擎
 
 ## 问题处理
 
-- top 查看进程消耗
-- 进入mysql show processlist
-- threads_running/QPS/TPS
-- 慢查询
-- MySQL profile工具
-- orzdba
+* top 查看进程消耗
+* threads_running/QPS/TPS
+* MySQL profile工具
+* orzdba
+* msyqladmin                                 mysql客户端，可进行管理操作
+* mysqlshow                                  功能强大的查看shell命令
+* show [SESSION | GLOBAL] variables          查看数据库参数信息
+* SHOW [SESSION | GLOBAL] STATUS             查看数据库的状态信息
+* information_schema                         获取元数据的方法
+* SHOW ENGINE INNODB STATUS                  Innodb引擎的所有状态
+* SHOW PROCESSLIST                           查看当前所有连接session状态
+* explain                                    获取查询语句的执行计划
+* show index                                 查看表的索引信息
+* slow-log                                   记录慢查询语句,
+* mysqldumpslow                              分析slowlog文件的
+* zabbix                  监控主机、系统、数据库（部署zabbix监控平台）
+* pt-query-digest         分析慢日志
+* mysqlslap               分析慢日志
+* sysbench                压力测试工具
+* mysql profiling         统计数据库整体状态工具    
+* Performance Schema      mysql性能状态统计的数据
+* workbench               管理、备份、监控、分析、优化工具（比较费资源）
+* show status  like '%lock%';    # 查询锁状态
+* kill SESSION_ID;   # 杀掉有问题的session
 
 ## 低效原因
 
@@ -107,6 +136,35 @@ iostat -d -k 1 3
     - 将使用 MySQL 的 host 和 MySQL自身的 host 都配置在一个 host 文件中 — 这样没有 DNS 查找。
     - 永远不要强制杀死一个MySQL进程 — 你将损坏数据库，并运行备份。
     - 让你的服务器只服务于MySQL — 后台处理程序和其他服务会占用数据库的 CPU 时间。
+
+```
+# cpu方面
+vmstat、sar top、htop、nmon、mpstat
+# 内存
+free 、ps -aux 、
+# IO设备（磁盘、网络）
+iostat 、 ss  、 netstat 、 iptraf、iftop、lsof、
+
+vmstat 命令说明：
+Procs：r显示有多少进程正在等待CPU时间。b显示处于不可中断的休眠的进程数量。在等待I/O
+Memory：swpd显示被交换到磁盘的数据块的数量。未被使用的数据块，用户缓冲数据块，用于操作系统的数据块的数量
+Swap：操作系统每秒从磁盘上交换到内存和从内存交换到磁盘的数据块的数量。s1和s0最好是0
+Io：每秒从设备中读入b1的写入到设备b0的数据块的数量。反映了磁盘I/O
+System：显示了每秒发生中断的数量(in)和上下文交换(cs)的数量
+Cpu：显示用于运行用户代码，系统代码，空闲，等待I/O的CPU时间
+
+iostat命令说明
+实例命令：iostat -dk 1 5
+　　　　    iostat -d -k -x 5 （查看设备使用率（%util）和响应时间（await））
+tps：该设备每秒的传输次数。“一次传输”意思是“一次I/O请求”。多个逻辑请求可能会被合并为“一次I/O请求”。
+iops ：硬件出厂的时候，厂家定义的一个每秒最大的IO次数
+
+"一次传输"请求的大小是未知的。
+kB_read/s：每秒从设备（drive expressed）读取的数据量；
+KB_wrtn/s：每秒向设备（drive expressed）写入的数据量；
+kB_read：读取的总数据量；
+kB_wrtn：写入的总数量数据量；这些单位都为Kilobytes。
+```
 
 ### 文件系统层优化
 
@@ -202,6 +260,27 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
 
 ### Schema优化
 
+* 字段名及字段配制合理性
+    - 剔除关系不密切的字段；
+    - 字段命名要有规则及相对应的含义（不要一部分英文，一部分拼音，还有类似a.b.c这样不明含义的字段）；
+    - 字段命名尽量不要使用缩写（大多数缩写都不能明确字段含义）；
+    - 字段不要大小写混用（想要具有可读性，多个英文单词可使用下划线形式连接）；
+    - 字段名不要使用保留字或者关键字；
+    - 保持字段名和类型的一致性；
+    - 慎重选择数字类型；
+    - 给文本字段留足余量；
+* 系统特殊字段处理及建成后建议
+    - 添加删除标记（例如操作人、删除时间）；
+    - 建立版本机制；
+* 表结构合理性配置
+    - 多型字段的处理，就是表中是否存在字段能够分解成更小独立的几部分（例如：人可以分为男人和女人）；
+    - 多值字段的处理，可以将表分为三张表，这样使得检索和排序更加有调理，且保证数据的完整性！
+* 其它建议
+    - 对于大数据字段，独立表进行存储，以便影响性能（例如：简介字段）；
+    - 使用varchar类型代替char，因为varchar会动态分配长度，char指定长度是固定的；
+    - 给表创建主键，对于没有主键的表，在查询和索引定义上有一定的影响；
+    - 避免表字段运行为null，建议设置默认值（例如：int类型设置默认值为0）在索引查询上，效率立显；
+    - 建立索引，最好建立在唯一和非空的字段上，建立太多的索引对后期插入、更新都存在一定的影响（考虑实际情况来创建）
 * 为不同的需求选择不同的存储引擎
     - 日志表或审计表使用ARCHIVE存储引擎：写的效率更高
 * 保证数据库的整洁性:移除不必要的表

@@ -107,7 +107,8 @@ composer global update # 升级
 valet stop|uninstall|restart
 
 composer global require "laravel/installer"
-laravel new blog # 访问 http://blog.test
+laravel new blog # 访问 http://blog.test 
+#  99160 segmentation fault
 
 valet links # 查看所有目录链接的列表
 valet link|unlink app-name # 目录中提供单个站点 Valet 会在 ~/.valet/Sites 中创建一个符号链接指向当前的目录
@@ -2181,6 +2182,10 @@ class AppServiceProvider extends ServiceProvider
     }
 }
 ```
+
+## Mail
+
+* `Swift_TransportException with message 'Expected response code 250 but got code "530", with message "530 5.7.1 Authentication required`
 
 ## Laravel的Restful风格
 

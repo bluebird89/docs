@@ -301,6 +301,10 @@ gpg --sign demo.txt #签名
 * 暂存区（Index/Stage）:.git目录下的index文件, 暂存区会索引git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；文件状态：staged:Stage(Index)
 * 版本库|本地仓库（Repository）
   - .git文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History,这部分是仓库的控制中心
+* objects 目录下有 3 种类型的数据： `git cat-file -p`
+  - Blob 文件
+  - Tree 文件夹
+  - Commit 创建的提交节点 整合了 tree 和 blob 类型，保存了当前的所有变化
 
 ![Git原理-1](../_static/bg2015120901.png)
 ![Git原理-2](../_static/git_2.png)
@@ -321,6 +325,35 @@ git cat-file -p e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 # 什么也看不到
 echo 'hello world' > test.txt
 git hash-object -w test.txt # 3b18e512dba79e4c8300dd08aeb37f8e728b8dad
 git cat-file -p 3b18e512dba79e4c8300dd08aeb37f8e728b8dad #  查看原文件内容 hello world fatal: Not a valid object name 7db03de997c86a4a028e1ebd3a1ceb225be238
+
+.
+└── .git
+    ├── HEAD  # 存储的是当前所在的位置，其内容是分支的名称                                     
+    ├── branches
+    ├── config # 创建的远端，分支都在等信息都在配置文件里有表现；fetch 操作的行为也是在这里配置的
+    ├── description
+    ├── hooks
+    │   ├── applypatch-msg.sample
+    │   ├── commit-msg.sample
+    │   ├── fsmonitor-watchman.sample
+    │   ├── post-update.sample
+    │   ├── pre-applypatch.sample
+    │   ├── pre-commit.sample
+    │   ├── pre-push.sample
+    │   ├── pre-rebase.sample
+    │   ├── pre-receive.sample
+    │   ├── prepare-commit-msg.sample
+    │   └── update.sample
+    ├── index
+    ├── info
+    │   └── exclude
+    ├── objects # 通过一种算法可以得到任意文件的 “指纹”（40 位 16 进制数字），然后通过文件指纹存取数据，存取的数据目录 git hash-object test.txt 命令来看看创建的 test.txt 的 “文件指纹”：
+    │   ├── .DS_Store
+    │   ├── info
+    │   └── pack
+    └── refs # 引用文件，如本地分支，远端分支，标签等
+        ├── heads
+        └── tags
 ```
 
 #### 工作区 working tree
