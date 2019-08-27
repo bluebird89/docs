@@ -1378,6 +1378,7 @@ virtualenv
 * [Automate the Boring Stuff with Python](https://automatetheboringstuff.com)
 * [Learning with Python 3](http://openbookproject.net/thinkcs/python/english3e/)
 * [learnpythonthehardway](https://learnpythonthehardway.org/python3/)
+* [Think Python: How to Think Like a Computer Scientist](http://greenteapress.com/thinkpython2/html/index.html)
 
 ## 教程
 
@@ -1402,7 +1403,6 @@ virtualenv
 * [requests/requests](https://github.com/requests/requests)Python HTTP Requests for Humans™ ✨🍰✨ <http://python-requests.org>
 * [scrapy/scrapy](https://github.com/scrapy/scrapy)Scrapy, a fast high-level web crawling & scraping framework for Python. <https://scrapy.org>
 * [fchollet/keras](https://github.com/fchollet/keras)
-* 
 * [binux/pyspider](https://github.com/binux/pyspider)A Powerful Spider(Web Crawler) System in Python. <http://docs.pyspider.org/>
 * [fabric/fabric](https://github.com/fabric/fabric)Simple, Pythonic remote execution and deployment. <http://fabfile.org>
 * 插件
