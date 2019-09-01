@@ -1,5 +1,16 @@
 # CMS
 
+* 菜单
+    - 添加栏目
+    - 配置权限勾选栏目
+* 模块
+    - 代码逻辑块实现
+    - 添加类，再添加action
+    - 配置权限勾选模块
+    - main中配置栏目
+
+## 框架
+
 * [netlify/netlify-cms](https://github.com/netlify/netlify-cms):A CMS for Static Site Generators https://www.netlifycms.org
 * [typecho/typecho](https://github.com/typecho/typecho):A PHP Blogging Platform. Simple and Powerful. http://typecho.org
 * [b3log/pipe](https://github.com/b3log/pipe):🎷 A small and beautiful blogging platform. 小而美的博客平台。 http://pipe.b3log.org

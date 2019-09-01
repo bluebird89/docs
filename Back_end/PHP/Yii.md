@@ -106,9 +106,9 @@ server {
 
 ## 原理
 
--   入口文件
--   application:配置主体属性->init(bootstrap)->run
--   主体属性
+* 入口文件
+* application:配置主体属性->init(bootstrap)->run
+* 主体属性
     -   id：用来区分其他应用的唯一标识 ID
     -   basePath：该应用的根目录
     -   aliases:用一个数组定义多个 别名
@@ -140,9 +140,9 @@ server {
     -   viewPath
     -   vendorPath
     -   enableCoreCommands
--   事件属性
-    -   on beforeRequest\\afterRequest
-    -   on beforeAction\\afterAction
+* 事件属性
+    - on beforeRequest\\afterRequest
+    - on beforeAction\\afterAction
 
 ```php
 [
@@ -277,14 +277,14 @@ server {
 
 ## 模型
 
-*   属性: 代表可像普通类属性或数组一样被访问的业务数据;yiibaseModel::attributes() 指定模型所拥有的属性。
-    -   ContactForm 模型类有四个属性 name, email, subject and body， ContactForm 模型用来代表从 HTML 表单获取的输入数据
-*   属性标签: 指定属性显示出来的标签; username 转换为 Username， firstNam 转换为 First Name
-*   场景：模型支持的场景由模型中申明的 验证规则 来决定
-*   块赋值: 只用一行代码将用户所有输入填充到一个模型，将输入数据对应填充到 yiibaseModel::attributes 属性
-*   验证规则: 确保输入数据符合所申明的验证规则;
-*   数据导出: 允许模型数据导出为自定义格式的数组
-*   ActiveRecord
+* 属性: 代表可像普通类属性或数组一样被访问的业务数据;yiibaseModel::attributes() 指定模型所拥有的属性。
+    - ContactForm 模型类有四个属性 name, email, subject and body， ContactForm 模型用来代表从 HTML 表单获取的输入数据
+* 属性标签: 指定属性显示出来的标签; username 转换为 Username， firstNam 转换为 First Name
+* 场景：模型支持的场景由模型中申明的 验证规则 来决定
+* 块赋值: 只用一行代码将用户所有输入填充到一个模型，将输入数据对应填充到 yiibaseModel::attributes 属性
+* 验证规则: 确保输入数据符合所申明的验证规则;
+* 数据导出: 允许模型数据导出为自定义格式的数组
+* ActiveRecord
 
 ```php
 namespace app/models;
@@ -365,36 +365,36 @@ if ($model->validate()) {
 
 ## component
 
-*   yiiwebAssetManager: 管理资源包和资源发布
-*   yiidbConnection: 代表一个可以执行数据库操作的数据库连接， 注意配置该组件时必须指定组件类名和其他相关组件属性，如 yiidbConnection::dsn
-*   yiibaseApplication::errorHandler: 处理 PHP 错误和异常
-*   yiii18nFormatter: 格式化输出显示给终端用户的数据，例如数字可能要带分隔符， 日期使用长格式
-*   yiii18nI18N: 支持信息翻译和格式化
-*   yiilogDispatcher: 管理日志对象
-*   yiiswiftmailerMailer: 支持生成邮件结构并发送
-*   yiibaseApplication::request: 代表从终端用户处接收到的请求
-*   yiibaseApplication::response: 代表发送给用户的响应
-*   yiiwebSession: 代表会话信息，仅在 yiiwebApplication 网页应用中可用
-*   yiiwebUrlManager: 支持 URL 地址解析和创建
-*   yiiwebUser: 代表认证登录用户信息，仅在 yiiwebApplication 网页应用中可用
-*   yiiwebView: 支持渲染视图
+* yiiwebAssetManager: 管理资源包和资源发布
+* yiidbConnection: 代表一个可以执行数据库操作的数据库连接， 注意配置该组件时必须指定组件类名和其他相关组件属性，如 yiidbConnection::dsn
+* yiibaseApplication::errorHandler: 处理 PHP 错误和异常
+* yiii18nFormatter: 格式化输出显示给终端用户的数据，例如数字可能要带分隔符， 日期使用长格式
+* yiii18nI18N: 支持信息翻译和格式化
+* yiilogDispatcher: 管理日志对象
+* yiiswiftmailerMailer: 支持生成邮件结构并发送
+* yiibaseApplication::request: 代表从终端用户处接收到的请求
+* yiibaseApplication::response: 代表发送给用户的响应
+* yiiwebSession: 代表会话信息，仅在 yiiwebApplication 网页应用中可用
+* yiiwebUrlManager: 支持 URL 地址解析和创建
+* yiiwebUser: 代表认证登录用户信息，仅在 yiiwebApplication 网页应用中可用
+* yiiwebView: 支持渲染视图
 
 ## 控制器
 
--   控制器：很精练，包含的操作代码简短
+*   控制器：很精练，包含的操作代码简短
     -   article 对应 app/controllers/ArticleController;
     -   post-comment 对应 app/controllers/PostCommentController;
     -   admin/post-comment 对应 app/controllers/admin/PostCommentController;
     -   adminPanels/post-comment 对应 app/controllers/adminPanels/PostCommentController.
--   操作 ID：总是被以小写处理，如果一个操作 ID 由多个单词组成，单词之间将由连字符连接（如 create-comment）。
+*   操作 ID：总是被以小写处理，如果一个操作 ID 由多个单词组成，单词之间将由连字符连接（如 create-comment）。
     -   操作 ID 映射为方法名时移除了连字符，将每个单词首字母大写，并加上 action 前缀。 例子：操作 ID create-comment 相当于方法名 actionCreateComment。
     -   默认操作默认为 index，如果想修改默认操作，只需简单地在控制器类中覆盖这个属性
--   内联操作:独立操作通过继承 yiibaseAction 或它的子类来定义。 例如 Yii 发布的 yiiwebViewAction 和 yiiwebErrorAction 都是独立操作
+*   内联操作:独立操作通过继承 yiibaseAction 或它的子类来定义。 例如 Yii 发布的 yiiwebViewAction 和 yiiwebErrorAction 都是独立操作
     -   通过控制器中覆盖 yiibaseController::actions()方法在 action map 中申明
--   过滤器
+*   过滤器
     -   beforeAction
     -   afterAction
-- yiifiltersCors 应在 授权 / 认证 过滤器之前定义，以保证CORS头部被发送。
+* yiifiltersCors 应在 授权 / 认证 过滤器之前定义，以保证CORS头部被发送。
 
 ```php
 namespace app/components;
@@ -498,13 +498,13 @@ if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
 ## 视图
 
-*   组织：@app/views/ControllerID 目录下
-*   控制器中渲染
+* 组织：@app/views/ControllerID 目录下
+* 控制器中渲染
     -   yiibaseController::render(): 渲染一个 视图名 并使用一个 布局 返回到渲染结果。
     -   yiibaseController::renderPartial(): 渲染一个 视图名 并且不使用布局。
     -   yiiwebController::renderAjax(): 渲染一个 视图名 并且不使用布局， 并注入所有注册的 JS/CSS 脚本和文件，通常使用在响应 AJAX 网页请求的情况下。
     -   yiibaseController::renderFile(): 渲染一个视图文件目录或别名下的视图文件。
-*   视图中渲染
+* 视图中渲染
     -   yiibaseView::render(): 渲染一个 视图名.
     -   yiiwebView::renderAjax(): 渲染一个 视图名 并注入所有注册的 JS/CSS 脚本和文件，通常使用在响应 AJAX 网页请求的情况下。
     -   yiibaseView::renderFile(): 渲染一个视图文件目录或别名下的视图文件。`<?= $this->render('_overview') ?>`
@@ -627,14 +627,14 @@ use appcomponentsHelloWidget;
 
 ## Module
 
-* debug
-* gii
-
 * 模块是独立的软件单元，由模型, 视图, 控制器和其他支持组件组成，
 * 终端用户可以访问在应用主体中已安装的模块的控制器，
 * 模块被当成小应用主体来看待，和应用主体不同的是， 模块不能单独部署，必须属于某个应用主体。
 * 模块中控制器的路由必须以模块ID开始，接下来为控制器ID和操作ID
 * 特性可分组，每个组包含一些强相关的特性， 每个特性组可以做成一个模块由特定的开发人员和开发组来开发和维护。
+
+* debug
+* gii
 
 ```php
 // 配置
@@ -653,12 +653,10 @@ $module = Yii::$app->controller->module;
 
 ## Asset
 
-前端资源管理：资源包指定为继承yiiwebAssetBundle的PHP类，要指定资源所在位置，包含哪些CSS和JavaScript文件以及和其他包的依赖关系。
-
-源资源: 资源文件和PHP源代码放在一起，不能被Web直接访问.为了使用这些源资源，它们要拷贝到一个可Web访问的Web目录中 成为发布的资源,这个过程称为发布资源
-发布资源: 资源文件放在可通过Web直接访问的Web目录中
-外部资源: 资源文件放在你的Web应用不同的Web服务器上
-
+* 前端资源管理：资源包指定为继承yiiwebAssetBundle的PHP类，要指定资源所在位置，包含哪些CSS和JavaScript文件以及和其他包的依赖关系。
+    - 源资源: 资源文件和PHP源代码放在一起，不能被Web直接访问.为了使用这些源资源，它们要拷贝到一个可Web访问的Web目录中 成为发布的资源,这个过程称为发布资源
+    - 发布资源: 资源文件放在可通过Web直接访问的Web目录中
+    - 外部资源: 资源文件放在你的Web应用不同的Web服务器上
 * sourcePath: 指定包包含资源文件的根目录， 当资源文件不能被Web访问时该属性应设置
 * basePath: 指定包含资源包中资源文件并可Web访问的目录，当指定sourcePath 属性， 资源管理器 会发布包的资源到一个可Web访问并覆盖该属性
 * baseUrl: 指定对应到yiiwebAssetBundle::basePath目录的URL
@@ -974,6 +972,25 @@ UploadForm UploadedFile
 ## session stay
 
 browser reopen generate new cookie
+
+## 源码
+
+* yii\base\Object:轻量级基类。表示基本的数据结构：init()
+* yii\base\Compontent：集成Object,进一步支持 事件与行为
+* Path Alias:@开头
+* \yii\web\View:
+* yii\base\Model:rules scenarios
+* yii\web\Controller:return渲染内容，而非echo；
+* yii\base\ActionFilter:动作过滤器
+* yii\base\Widget
+theme:
+console Application
+
+```php
+$event = new \yii\base\Event;$compontent->trigger($eventName, $event);
+
+$compontent->on($eventName, $handler);
+```
 
 ## Yii1.1
 
