@@ -1,16 +1,16 @@
 # IDE
 
-- IntelliJ IDEA:业界被公认为最好的java开发工具之一
-  + PyCharm
-  + WebStorm:一款JavaScript 开发工具
-  + CLion:专为C/C++所创建的跨平台IDE
-  + AppCode:用于帮助开发 Mac、iPhone 和 iPad 的应用程序
-  + RubyMine:供了一个综合的Ruby编码编辑器
-- [Komodo IDE](https://www.activestate.com/)
-- [visualfc/liteide](https://github.com/visualfc/liteide):LiteIDE is a simple, open source, cross-platform Go IDE.
+* IntelliJ IDEA:业界被公认为最好的java开发工具之一
+  - PyCharm
+  - WebStorm:一款JavaScript 开发工具
+  - CLion:专为C/C++所创建的跨平台IDE
+  - AppCode:用于帮助开发 Mac、iPhone 和 iPad 的应用程序
+  - RubyMine:供了一个综合的Ruby编码编辑器
+* [Komodo IDE](https://www.activestate.com/)
+* [visualfc/liteide](https://github.com/visualfc/liteide):LiteIDE is a simple, open source, cross-platform Go IDE.
 * [CodeSandbox](https://codesandbox.io/)
   - [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ https://codesandbox.io
-- [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
+* [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
 * [theia-ide/theia](https://github.com/theia-ide/theia):Theia is a cloud & desktop IDE framework implemented in TypeScript. http://theia-ide.org
 
 ## PHPStrom
@@ -21,8 +21,7 @@ ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/loca
 
 会在根目录下生成文件夹./php，其中有config and system, 自定义配置：Create the file "idea.properties" and open it in an editor. Set theidea.system.path and/or idea.config.path variables as desired, for example:
 
-- new project
-
+* new project
   - Drual
   - Joomla
   - Wordpress
@@ -171,41 +170,41 @@ ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/loca
 
 ## 导航
 
-- Command+O 跳转到某个类
-- Command+shift+O 跳转到某个文件
-- Command+alt+O 跳转到某个符号
-- Control+←,Control+→ 转到上/下一个编辑器选项卡
-- F12 打开之前打开的工具窗口（TODO、终端等）
-- Command+L 跳转行
-- Command+E 弹出最近文件
-- Command+alt+←,Command+alt+→ 向前向后导航到代码块交接处（一般是空行处）
-- Command+shift+delete 导航到上一个编辑位置的位置
-- Command+B 跳转到变量声明处
-- Control+J 获取变量相关信息（类型、注释等，注释是拿上一行的注释）
-- Command+Y 小浮窗显示变量声明时的行
-- Command+[,Command+] 光标现在的位置和之前的位置切换
-- Command+F12 文件结构弹出式菜单
-- alt+H 类的层次结构
-- F2,shift+F2 切换到上\下一个突出错误的位置
-- Command+↑ 跳转到导航栏
-- F3 添加书签
-- alt+F3 添加带助记的书签
-- alt+1,alt+2... 切换到相应助记的书签位置
-- Command+F3 打开书签列表
+* Command+O 跳转到某个类
+* Command+shift+O 跳转到某个文件
+* Command+alt+O 跳转到某个符号
+* Control+←,Control+→ 转到上/下一个编辑器选项卡
+* F12 打开之前打开的工具窗口（TODO、终端等）
+* Command+L 跳转行
+* Command+E 弹出最近文件
+* Command+alt+←,Command+alt+→ 向前向后导航到代码块交接处（一般是空行处）
+* Command+shift+delete 导航到上一个编辑位置的位置
+* Command+B 跳转到变量声明处
+* Control+J 获取变量相关信息（类型、注释等，注释是拿上一行的注释）
+* Command+Y 小浮窗显示变量声明时的行
+* Command+[,Command+] 光标现在的位置和之前的位置切换
+* Command+F12 文件结构弹出式菜单
+* alt+H 类的层次结构
+* F2,shift+F2 切换到上\下一个突出错误的位置
+* Command+↑ 跳转到导航栏
+* F3 添加书签
+* alt+F3 添加带助记的书签
+* alt+1,alt+2... 切换到相应助记的书签位置
+* Command+F3 打开书签列表
 
 ## 版本控制
 
-- control+V 打开VST小浮窗
-- Command+K 提交项目
-- Command+T 更新项目
-- alt+shift+C 打开最近修改列表
+* control+V 打开VST小浮窗
+* Command+K 提交项目
+* Command+T 更新项目
+* alt+shift+C 打开最近修改列表
 
 ## 重构
 
-- F5 复制文件到某个目录
-- F6 移动文件到某个目录
-- Command+delete 安全删除
-- shift+F6 重命名
+* F5 复制文件到某个目录
+* F6 移动文件到某个目录
+* Command+delete 安全删除
+* shift+F6 重命名
 
 ## 模版
 
@@ -215,8 +214,9 @@ livetemplate
 
 * [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/
 * [cdoco/jetbrains-license-server](https://github.com/cdoco/jetbrains-license-server):已废弃
-* [激活](https://www.jianshu.com/p/133af2e4fe3f):修改host 0.0.0.0 account.jetbrains.com  去http://idea.lanyus.com/生存激活码
+* [激活](https://www.jianshu.com/p/133af2e4fe3f): 修改host 0.0.0.0 account.jetbrains.com  去http://idea.lanyus.com/ 生存激活码
 * [LightTable/LightTable](https://github.com/LightTable/LightTable):The Light Table IDE ⛺ http://www.lighttable.com
+* [申请免费使用](https://www.jetbrains.com/shop/eform/opensource?product=ALL) 
 
 ## 参考
 

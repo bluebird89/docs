@@ -541,6 +541,9 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT $pagesize;
 
 查询速度的提高是以插入、更新、删除的速度为代价的，这些写操作，增加了大量的I/O
 
+* 用在where条件中和排序动作中
+    - 先过滤，再排序，会用到过滤条件中的索引参数，但是排序会使用较慢的外部排序。因为这个结果集是经过过滤的，并没有什么索引参与。
+    - 先排序，再过滤，可以使用同一个索引，排序的优先级高于过滤的优先级。选择合适的索引，在过滤的同时就把这个事给办了。但是扫描的行数会增加。
 * 不要过度使用索引，过多的索引可能会导致过高的磁盘使用率以及过高的内存占用.评估你的查询
 * 单列索引：一些基数（Cardinality）太小（比如说，该列的唯一值总数少于255）的列就不要创建独立索引了
 * 尽量避免事后添加索引：可能需要监控大量的SQL才能定位到问题所在，而且添加索引的时间肯定是远大于初始添加索引所需要的时间
@@ -584,6 +587,32 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT $pagesize;
 select film_id , actor_id from film_actor where actor_id = 1 or film_id = 1
 # 老版本的MySQL会随机选择一个索引，但新版本做如下的优化
 select film_id , actor_id from film_actor where actor_id = 1 union all select film_id , actor_id from film_actor where film_id = 1 and actor_id <> 1
+
+CREATE TABLE `test` (
+  `id` int(11) NOT NULL,
+  `a` int(11) DEFAULT NULL,
+  `b` int(11) DEFAULT NULL,
+  `c` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+DROP PROCEDURE IF EXISTS test_initData;
+DELIMITER $
+CREATE PROCEDURE test_initData()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    WHILE i<=100000 DO
+        INSERT INTO test(id,a,b,c) VALUES(i,i*2,i*3,i*4);
+        SET i = i+1;
+    END WHILE;
+END $
+
+DELIMITER ;
+CALL test_initData();
+
+explain select * from test where a>10 and b >10  order by c # idx_a_b_c  extra 则用到了filesort
+explain select * from test where c>10 and b >10   order by a # idx_b_a_c，但依然使用的filesort
+explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by c # 使用了index，使用了where，只在索引上就完成了操作。但扫描的行数却增加了。
 ```
 
 ## 存储优化
@@ -617,24 +646,25 @@ while (1) {
 
 ### 检查
 
-* EXPLAIN：可以知道MySQL是如何处理SQL语句的,分析SQL语句的执行情况，索引使用、扫描范围
+* EXPLAIN：分析SQL语句的执行情况，索引使用、扫描范围
     - select_type:表示查询的类型
-        - SIMPLE： 简单查询:不包含 UNION 查询或子查询
-        * PRIMARY： 主查询，或者是最外面的查询语句
-        * SUBQUERY： 子查询中的第一个 SELECT
-        * UNION： 表示此查询是 UNION 的第二或随后的查询
-        * DEPENDENT UNION： UNION 中的第二个或后面的查询语句, 取决于外面的查询
-        * UNION RESULT, UNION 的结果
-        * DEPENDENT SUBQUERY: 子查询中的第一个 SELECT, 取决于外面的查询. 即子查询依赖于外层查询的结果.
-        * DERIVED：衍生，表示导出表的SELECT（FROM子句的子查询）
+        + SIMPLE： 简单查询:不包含 UNION 查询或子查询
+        + PRIMARY： 主查询，或者是最外面的查询语句
+        + SUBQUERY： 子查询中的第一个
+        + UNION： 表示此查询是 UNION 的第二或后面的查询语句
+        + DEPENDENT UNION： UNION 中的第二个或后面的查询语句, 取决于外面的查询
+        + UNION RESULT, UNION 的结果
+        + DEPENDENT SUBQUERY: 子查询中的第一个 SELECT, 取决于外面的查询. 即子查询依赖于外层查询的结果.
+        + DERIVED：衍生，表示导出表的SELECT（FROM子句的子查询）
     - table:查询的表
-    - type:表的连接类型(system和const为佳),从最好到最差的连接类型为system、const、eq_reg、ref、range、index和ALL
-        + system、const：可以将查询的变量转为常量.  如id=1; id为 主键或唯一键. 表中只有一条数据， 这个类型是特殊的 const 类型。
+    - type:在表中找到所需行的方式，或者叫访问类型. 从下到上，性能越来越差。
+        + system,const：只有一行记录,可以将查询的变量转为常量. 如id=1; id为 主键或唯一键
         + const: 针对主键或唯一索引的等值查询扫描，最多只返回一行数据。 const 查询速度非常快， 因为它仅仅读取一次即可。例如下面的这个查询，它使用了主键索引，因此 type 就是 const 类型的：explain select * from user_info where id = 2；
-        + eq_ref：此类型通常出现在多表的 join 查询，表示对于前表的每一个结果，都只能匹配到后表的一行结果。并且查询的比较操作通常是 =，查询效率较高.访问索引,返回某单一行的数据.(通常在联接时出现，查询使用的索引为主键或惟一键)
-        + ref：访问索引,返回某个值的数据.(可以返回多行) 通常使用=时发生
-        + range：这个连接类型使用索引返回一个范围中的行，比如使用>或<查找东西，并且该字段上建有索引时发生的情况(注:不一定好于index)
-        + index：表示全索引扫描(full index scan),以索引的顺序进行全表扫描，优点是不用排序,缺点是还要全表扫描
+        + eq_ref：唯一性索引扫描，对于每个索引键，表中只有一条记录与之匹配,此类型通常出现在多表的 join 查询，表示对于前表的每一个结果，都只能匹配到后表的一行结果。并且查询的比较操作通常是 =，查询效率较高.(通常在联接时出现，查询使用的索引为主键或惟一键)
+        + ref：非唯一性索引扫描，返回匹配某个单独值的所有行，本质上也是一种索引访问，它返回所有匹配某个单独值的行，然而，它可能会找到多个符合条件的行，属于查找和扫描的混合体。
+        + range：检索给定范围的行，使用一个索引来选择行，key列显示使用了哪个索引
+            * 范围扫描索引比全表扫描要好，因为它只需要开始于索引的某一点，而结束于另一点，不用扫描全部索引
+        + index 全索引扫描(full index scan):只遍历索引树. 优点：比ALL快、不用排序,缺点是还要全表扫描
         + ALL：全表扫描，从内存读取整张表，增加I/O的速度并在CPU上加载
     - possible_keys:表示查询时，可能使用的索引
     - key:表示实际使用的索引
@@ -642,10 +672,10 @@ while (1) {
     - ref:这个表示显示索引的哪一列被使用了，如果可能的话,是一个常量
     - rows:扫描的行数
     - Extra:执行情况的描述和说明
-        + using index：只用到索引,可以避免访问表.
-        + using where：使用到where来过虑数据. 不是所有的where clause都要显示using where. 如以=方式访问索引.
+        + using index：使用了覆盖索引，避免访问了表的数据行，效率不错
+        + 如果同时出现using where，表明索引被用来执行索引键值的查找；如果没有同时出现using where，表明索引用来读取数据而非执行查找动作。
         + using tmporary：用到临时表
-        + using filesort：用到额外的排序. (当使用order by v1,而没用到索引时,就会使用额外的排序)
+        + using filesort：对数据使用一个外部的索引排序，而不是按照表内的索引顺序进行读取. (当使用order by v1,而没用到索引时,就会使用额外的排序)
         + range checked for eache record(index map:N)：没有好的索引.
     - mysql workbeach会显示执行计划
 * show:查看MySQL状态及变量
