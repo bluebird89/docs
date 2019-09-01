@@ -807,7 +807,7 @@ open http://127.0.0.1:8000
 * [hoohack/read-php-src](https://github.com/hoohack/read-php-src)
 * [php/php-langspec](https://github.com/php/php-langspec):PHP Language Specification http://www.php.net
 * [dstogov/php-ffi](https://github.com/dstogov/php-ffi):PHP Foreign Function Interface
-- [laruence/php7-internal](https://github.com/laruence/php7-internal):Understanding PHP7 Internal articles
+* [laruence/php7-internal](https://github.com/laruence/php7-internal):Understanding PHP7 Internal articles
 * [pangudashu/php7-internal](https://github.com/pangudashu/php7-internal):PHP7内核剖析
 * [Awesome PHP](http://coffeephp.com/resources)
 * [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php):A curated list of amazingly awesome PHP libraries, resources and shiny things.

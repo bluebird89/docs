@@ -1,4 +1,3 @@
-
 # Crontab
 
 Linux下的后台进程，用来定期的执行一些任务
@@ -24,6 +23,7 @@ sudo /sbin/service crond start
 
 ## use
 
+* 单个值的时间点为准，固定周期
 * parameter
     - m:minute 0-59
     - h:hour 0-23

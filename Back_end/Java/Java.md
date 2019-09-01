@@ -940,7 +940,7 @@ JavaEE/JDBC/Weblogic
 ## 资源
 
 * [插件库](https://plugins.jetbrains.com/idea)
- [Cloud Toolkit](https://www.aliyun.com/product/cloudtoolkit): 一款 IDE 插件，可以帮助开发者更高效地开发、测试、诊断并部署应用
+  - [Cloud Toolkit](https://www.aliyun.com/product/cloudtoolkit): 一款 IDE 插件，可以帮助开发者更高效地开发、测试、诊断并部署应用
 * 测试
   - [alibaba/arthas](https://github.com/alibaba/arthas):Alibaba Java Diagnostic Tool Arthas/Alibaba Java诊断利器Arthas https://alibaba.github.io/arthas/
   - [mockito/mockito](https://github.com/mockito/mockito):Most popular Mocking framework for unit tests written in Java http://mockito.org

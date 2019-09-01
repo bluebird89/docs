@@ -112,6 +112,8 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 * 源码编译安装
 
 ```sh
+do-release-upgrade
+
 # fix ubuntu
 sudo rm/var/lib/apt/lists/lock
 sudo rm/var/lib/dpkg/lock
@@ -257,6 +259,20 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted
 * 工作区
   * Win 键，进入活动概览视图模式
   * Ctrl + Alt + 方向箭头
+* super:window
+* long hold super:Keyboard Shortcuts
+* Ctrl+Alt+arrow+keys:switch workspace
+* Ctrl+Alt+Shift and an arrow key to move a window between workspaces
+* Paste:Middle Click
+* Alt+F2:want to run a command without pulling up a terminal
+* Ctrl+Alt+F#:Switch Between Virtual Consoles, use alt+ arrow keys to switch,并行存在的
+* Press Alt and type the name of the menu item you want to activate – for example, if you’re using Firefox and want menu items related to bookmarks, press the Alt key and type bookmark. Use the arrow keys and Enter key to activate a menu item.
+* Super+L or Ctrl+Alt+L: Locks the screen
+* Super+D or Ctrl+Alt+D: Show desktop
+* Ctrl+Q: Close an application window
+* Prt Scrn:take a screenshot of the desktop.
+* Alt+Prt Scrn:take a  screenshot of a window.
+* Shift+Prt Scrn:take a screenshot of an area you select.
 
 ## 端口与进程管理
 
