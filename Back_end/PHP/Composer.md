@@ -2,6 +2,10 @@
 
 Dependency Manager for PHP https://getcomposer.org/
 
+* 自动加载可以使用__autoload()和sql_autoload_register()两种机制
+  - _autoload()有个缺点就是一个进程中只能定义一次
+  - sql_autoload_register()不存在这个问题，它可以把函数注册到__autoload队列中
+
 ## 原理
 
 * zend_lookup_class_ex
@@ -150,6 +154,31 @@ composer config -g --unset repos.packagist
 ```
 
 
+* PSR-0: $student = new \Bpp\Student(); 时，对于 PSR-0 代码目录结构是： bpp/Bpp/Student.php 。即目录包含了最外层的命名空间 Bpp 
+  - 目录名称与命名空间层层对应，类名中的下划线_会被转化成目录分隔符，会导致目录结构变得比较深,加载”Foo\Bar\Baz”这个class时，会去寻找“src\Foo\Bar\Baz.php”这个文件，这个配置会以map的形式写入生成的vendor/composer/autoload_namespaces.php中。
+* PSR-4: $user = new \App\User(); 时，对于 PSR-4 代码目录结构是： app/User.php 。即目录不需要包含最外层的命名空间 App 
+  - 去加载”Foo\Bar\Baz”这个class时，会去寻找“src\Bar\Baz.php”这个文件，对应的会写入到vendor/composer/autoload_psr4.php 这个文件中
+* classmap:通过配置指定的目录或者文件，然后在composer安装或者更新的时，它会扫描指定目录下以.php和.inc结尾的文件中的class，生成class到指定file path的映射，并加入到新生成的vendor/composer/autoload_classmap.php 文件 所以通过 classmap 的类即使不遵循 PSR-0 和 PSR-4 规范也可以自动加载成功。
+* files:手动指定供直接加载的文件（相对于 vendor 目录）所以也不需要满足 PSR-0 和 PSR-4 规范。
+
+```
+ "autoload": {
+    "psr-0": {
+      "Bpp\\": "bpp/",
+      "Foo\\": "src/"
+    },
+    "psr-4": {
+      "App\\": "app/"
+      "Foo\\": "src/"
+    },
+    "classmap": ["map"],
+    "files": [
+      "aes/Aes.php",
+      "aes/test/TestAes.php"
+    ]
+  }
+```
+
 ## 使用
 
 * global 命令允许你在 COMPOSER_HOME 目录下执行命令
@@ -193,6 +222,7 @@ export PATH="/usr/local/bin:/Users/username/.composer/vendor/bin":$PATH # 添加
 composer dump-autoload --optimize|-o # 优化自动加载,将 PSR-4/PSR-0 的规则转化为了 classmap 的规则
 composer dump-autoload --classmap-authoritative|-a  # 同样也是生成了 classmap，区别在于当加载器在 classmap 中找不到目标类时，不会再去文件系统中查找
 composer dump-autoload --apcu # 要安装 apcu 扩展。apcu 可以理解为一块内存，并且可以在多进程中共享,文件系统中找到的结果存储到共享内存
+composer run-script
 
 # >=1.0
 # >=1.0 <2.0

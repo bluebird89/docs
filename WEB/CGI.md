@@ -1,4 +1,5 @@
-# CGI(common gateway interface)
+# CGI(common gateway interface) 通用网关协议
+
 
 ## PATH_INFO
 
@@ -26,7 +27,7 @@
 
 ## FastCGI
 
-* 像是一个常驻(long-live)型的CGI，可以一直执行着，只要激活后，不会每次都要花费时间去fork一次，整个工作流程是这样：
+* 一个常驻(long-live)型的CGI，可以一直执行着，只要激活后，不会每次都要花费时间去fork一次，整个工作流程是这样：
     - Web Server启动时载入FastCGI进程管理器（IIS ISAPI或Apache Module)
     - FastCGI进程管理器自身初始化，启动多个CGI解释器进程(可见多个php-cgi)并等待来自Web Server的连接。
     - 当客户端请求到达Web Server时，FastCGI进程管理器选择并连接到一个CGI解释器。 Web server将CGI环境变量和标准输入发送到FastCGI子进程php-cgi。
@@ -49,7 +50,7 @@
 * 提供了更好的PHP进程管理方式，可以有效控制内存和进程、可以平滑重载PHP配置
     - 配置都是在PHP-FPM.ini的文件内，而启动、重启都可以从php/sbin/PHP-FPM中进行。更方便的是修改php.ini后可以直接使用PHP-FPM reload进行加载，无需杀掉进程就可以完成php.ini的修改加载
     - 控制的进程cpu回收的速度比较慢,内存分配的很均匀。
-* 当PHP需要在Apache服务器下运行时，一般来说，它可以模块的形式集成， 此时模块的作用是接收Apache传递过来的PHP文件请求，并处理这些请求， 然后将处理后的结果返回给Apache。如果在Apache启动前在其配置文件中配置好了PHP模块， PHP模块通过注册apache2的ap_hook_post_config挂钩，在Apache启动的时候启动此模块以接受PHP文件的请求。
+* 当PHP需要在Apache服务器下运行时，一般来说，它可以模块的形式集成，此时模块的作用是接收Apache传递过来的PHP文件请求，并处理这些请求， 然后将处理后的结果返回给Apache。如果在Apache启动前在其配置文件中配置好了PHP模块， PHP模块通过注册apache2的ap_hook_post_config挂钩，在Apache启动的时候启动此模块以接受PHP文件的请求。
 * Apache的Hook机制
     - 把php作为apache的一个子模块来运行。php5_module通过sapi将数据传给php解析器来解析php代码
     - Apache 允许模块(包括内部模块和外部模块，例如mod_php5.so，mod_perl.so等)将自定义的函数注入到请求处理循环中。 换句话说，模块可以在Apache的任何一个处理阶段中挂接(Hook)上自己的处理函数，从而参与Apache的请求处理过程。
@@ -68,6 +69,9 @@
 * PHP中cgi.fix_pathinfo配置项打开
     - PHP会去根据CGI规范来检查SCRIPT_FILENAME中那部分是访问脚本和PATH_INFO(ini配置解释)
     - 并根据SCRIPT_NAME来修改PATH_INFO(和PATH_TRANSLATED)为正确的值然后, 就只要添加一个FASTCGI_PARAM项就好了
+* Nignx 与 PHP 通过Socket通信，fastcgi_pass所配置的内容，便是告诉Nginx接收到用户请求以后，该往哪里转发
+    - ngx_http_fastcgi_module：实现了FastCGI的Client，fastcgi_param所声明的内容，将会被传递给“FastCGI server”
+    - fastcgi_param配置 REMOTE_ADDR ，这不正是我们在PHP中用 `$_SERVER[‘REMOTE_ADDR’]` 取到的用户IP
 
 ```
 LoadModule php5_module C:/php/php5apache2_2.dll

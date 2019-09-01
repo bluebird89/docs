@@ -27,18 +27,18 @@ Open source relational database management system
 
 ## 概念
 
-- 结构化查询语言(SQL Structured Query Language)
-- 关系型数据库管理系统(RDBMS Relational Database Management System)
-- 数据库 表操作
-- 数据操作
-- 索引
-- 锁
-- 子查询
-- 存储过程
-- 触发器
-- 视图
-- 事务
-- 影像复制
+* 结构化查询语言(SQL Structured Query Language)
+* 关系型数据库管理系统(RDBMS Relational Database Management System)
+* 数据库 表操作
+* 数据操作
+* 索引
+* 锁
+* 子查询
+* 存储过程
+* 触发器
+* 视图
+* 事务
+* 影像复制
 
 ## 安装
 
@@ -1849,9 +1849,29 @@ CREATE TABLE employees (
   );
 ```
 
-## 存储过程
+## 存储过程（Stored Procedure）
+
+* 一种在数据库中存储复杂程序，以便外部程序调用的一种数据库对象.数据库 SQL 语言层面的代码封装与重用
+* 为了完成特定功能的SQL语句集，经编译创建并保存在数据库中，用户可通过指定存储过程的名字并给定参数(需要时)来调用执行。
+* 可以回传值，并可以接受参数.
+    - inout参数就尽量的少用
+* 存储过程和默认数据库相关联，如果想指定存储过程创建在某个特定的数据库下，那么在过程名前面加数据库名做前缀
+* 创建的存储过程保存在数据库的数据字典中。
+* 过程体
+    - dml、ddl语句，if-then-else和while-do语句、声明变量的declare语句
+    - begin开始，以end结束(可嵌套)
+    - 表示过程体结束的begin-end块，则不需要分号。
+* 变量
+    - 用户变量名一般以@开头
+    - 可以读写用户变量，全局可以读取到
+    - 全局变量的值作为参数传入存储过程，修改的局部作用域的副本
+    - 内部的变量在其作用域范围内享有更高的优先权
+* 注释：--：该风格一般用于单行注释
+* 更改用 CREATE PROCEDURE 建立的预先指定的存储过程，其不会影响相关存储过程或存储功能
 
 ```sql
+SET @p_in=1
+
 use ecommerce;
 DROP PROCEDURE IF EXISTS BatchInser;
 delimiter //   -- 把界定符改成双斜杠
@@ -1859,6 +1879,7 @@ CREATE PROCEDURE BatchInsert(IN init INT, IN loop_time INT)  -- 第一个参数�
   BEGIN
       DECLARE Var INT;
       DECLARE ID INT;
+      DECLARE l_int int unsigned default 4000000; 
       SET Var = 0;
       SET ID = init;
       WHILE Var < loop_time DO
@@ -1869,7 +1890,101 @@ CREATE PROCEDURE BatchInsert(IN init INT, IN loop_time INT)  -- 第一个参数�
   END;
   //
 delimiter ;  -- 界定符改回分号
+
 CALL BatchInsert(30036, 200000);   -- 调用存储过程插入函数
+
+label1: BEGIN
+　　label2: BEGIN
+　　　　label3: BEGIN
+        declare var int;  
+        set var=parameter+1;
+
+        if var=0 then 
+        insert into t values(17);  
+        end if;  
+        if parameter=0 then 
+        update t set s1=s1+1;  
+        else 
+        update t set s1=s1+2;  
+        end if;
+
+        case var  
+        when 0 then   
+        insert into t values(17);  
+        when 1 then   
+        insert into t values(18);  
+        else   
+        insert into t values(19);  
+        end case;
+
+        while var<6 do  
+        insert into t values(var);  
+        set var=var+1;  
+        end while;
+
+        repeat  
+        insert into t values(v);  
+        set v=v+1;  
+        until v>=5  
+        end repeat;
+
+        LOOP_LABLE:loop  
+        insert into t values(v);  
+        set v=v+1;  
+        if v >=5 then 
+        leave LOOP_LABLE;  
+        end if;  
+        end loop;
+
+        LOOP_LABLE:loop  
+        if v=3 then   
+        set v=v+1;  
+        ITERATE LOOP_LABLE;  
+        end if;  
+        insert into t values(v);  
+        set v=v+1;  
+        if v>=5 then 
+        leave LOOP_LABLE;  
+        end if;  
+        end loop;  
+　　　　END label3 ;
+　　END label2;
+END label1
+
+# 输出参数
+delimiter //
+create procedure out_param(out|inout p_out int)
+    begin
+      select p_out;
+      set p_out=2;
+      select p_out;
+    end
+    //
+delimiter ;
+ 
+set @p_out=1;
+ 
+call out_param(@p_out);
+
+DECLARE l_numeric number(8,2) DEFAULT 9.95;  
+DECLARE l_date date DEFAULT '1999-12-31';  
+DECLARE l_datetime datetime DEFAULT '1999-12-31 23:59:59';  
+DECLARE l_varchar varchar(255) DEFAULT 'This will not be padded';
+
+SELECT 'Hello World' into @x;
+SET @y='Goodbye Cruel World';
+
+CREATE PROCEDURE GreetWorld( ) SELECT CONCAT(@greeting,' World');  
+SET @greeting='Hello';  
+CALL GreetWorld( );
+
+select name from mysql.proc where db='数据库名';
+select routine_name from information_schema.routines where routine_schema='数据库名';
+showprocedure status where db='数据库名';
+SHOWCREATE PROCEDURE 数据库.存储过程名;
+
+ALTER PROCEDURE
+DROP PROCEDURE
 ```
 
 ### 主从复制

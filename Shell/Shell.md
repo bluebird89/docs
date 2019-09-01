@@ -135,6 +135,23 @@ lsof -i:80 # -i参数表示网络链接，:80指明端口号
 
 ## 查找
 
+* xargs:给命令传递参数的一个过滤器
+    - 将管道或标准输入（stdin）数据转换成命令行参数 也能够从文件的输出中读取数据
+    - 能够捕获一个命令的输出，然后传递给另外一个命令
+    - 参数
+        + -a file 从文件中读入作为sdtin
+        + -e flag ，注意有的时候可能会是-E，flag必须是一个以空格分隔的标志，当xargs分析到含有flag这个标志的时候就停止。
+        + -p 当每次执行一个argument的时候询问一次用户。
+        + -n num 后面加次数，表示命令在执行的时候一次用的argument的个数，默认是用所有的。
+        + -t 表示先打印命令，然后再执行。
+        + -i|I，将xargs的每项名称，一般是一行一行赋值给 {}，可以用 {} 代替。
+        + -r no-run-if-empty 当xargs的输入为空的时候则停止xargs，不用再去执行了。
+        + -s num 命令行的最大字符数，指的是 xargs 后面那个命令的最大命令行字符数。
+        + -L|l num 从标准输入一次读取 num 行送给 command 命令。
+        + -d delim 分隔符，默认的xargs分隔符是回车，argument的分隔符是空格，这里修改的是xargs的分隔符。
+        + -x exit的意思，主要是配合-s使用。。
+        + -P 修改最大的进程数，默认是1，为0时候为as many as it can 
+
 ```sh
 find . -name PATTERN    ### 从当前目录查找符合 PATTERN 的文件
 find /home -name PATTERN -exec ls -l {} \;  # 从 /home 文件查找所有符合 PATTERN 的文件，并交由 ls 输出详细信息 
@@ -158,6 +175,22 @@ ps -aux | sort -rnk 4 | head -20
 
 netstat -nat | awk  '{print  $5}' | awk -F ':' '{print $1}' | sort | uniq -c | sort -rn | head -n 10 # 查看连接你服务器 top10 用户端的 IP 地址
 cat .bash_history | sort | uniq -c | sort -rn | head -n 10 (or cat .zhistory | sort | uniq -c | sort -rn | head -n 10 # 查看一下你最常用的10个命令
+
+cat test.txt | xargs # 多行输入单行输出
+echo "nameXnameXnameXname" | xargs -dX -n2 # 自定义一个定界符
+
+ls *.jpg | xargs -n1 -I {} cp {} /data/images # 复制所有图片文件到 /data/images 目录下
+
+find . -type f -name "*.jpg" -print | xargs tar -czvf images.tar.gz # 查找所有的 jpg 文件，并且压缩
+find . -type f -name "*.php" -print0 | xargs -0 wc -l # 统计一个源代码目录中所有 php 文件的行数
+find . -type f -name "*.log" -print0 | xargs -0 rm -f
+
+#!/bin/bash
+#sk.sh命令内容，打印出所有参数。
+
+echo $*
+
+cat arg.txt | xargs -I {} ./sk.sh -p {} -l
 ```
 
 ## 磁盘管理
@@ -1376,52 +1409,13 @@ done
 
 * [direnv/direnv](https://github.com/direnv/direnv):Unclutter your .profile http://direnv.net
 
-## terminal
-
-* Mac
-    - Iterm2
-* Linux
-    - 下的原生命令行
-* Windows
-    - WSL:提供了一个由微软开发的Linux兼容的内核接口（不包含Linux内核代码），然后可以在其上运行GNU用户空间
-        + WSL2
-    + [putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
-    + xshell6
-    + [FinalShell](http://www.hostbuf.com/)
-    + WinSSHTerm
-    + KiTTY
-    + ZOC Terminal
-    + MobaXterm
-    + Terminus
-    + Console2
-    - [cmder + gow](http://bliker.github.io/cmder/)
-    + ConEmu
-    + [Babun](http://babun.github.io/)
-    + [Terminal](https://github.com/microsoft/terminal):The new Windows Terminal, and the original Windows console host -- all in the same place!
-- [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
-* [msys2](http://www.msys2.org/)
-* powercmd
-* [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
-* [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
-
 ## 教程
 
 * [learnbyexample/command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):⚡️ From finding text to search and replace, from sorting to beautifying text and more 🎨
 * [learnbyexample/Linux_command_line](https://github.com/learnbyexample/Linux_command_line):💻 Introduction to Linux commands and Shell scripting
 * [learnbyexample/scripting_course](https://github.com/learnbyexample/scripting_course):📓 A reference guide to Linux command line, Vim and Scripting https://learnbyexample.github.io/scripting_course/
 * [Introduction to text manipulation on UNIX-based systems](https://www.ibm.com/developerworks/aix/library/au-unixtext/index.html)
-
-## 扩展
-
-* shellcheck：shell脚本静态检查工具，能够识别语法错误以及不规范的写法。
-* yapf：Google开发的python代码格式规范化工具，支持pep8以及Google代码风格。
-* mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连。
-* PathPicker(fpp):在命令行输出中自动识别目录和文件，支持交互式，配合git非常有用
-* sz/rz：交互式文件传输，在多重跳板机下传输文件非常好用，不用一级一级传输。
-* ccache：高速C/C++编译缓存工具，反复编译内核非常有用。使用起来也非常方便
-* tmux：终端复用工具，替代screen、nohup
-* neovim: 替代vim。
-* script/scriptreplay: 终端会话录制。
+* [Linux 教程](https://www.runoob.com/linux/linux-tutorial.html)
 
 ```sh
 cat demo.json | jq '.id,.name,.status,.attachments'
@@ -1432,10 +1426,36 @@ ccache gcc foo.c
 
 ## 工具
 
+* terminal
+    - Mac
+        + Iterm2
+    - Linux
+        + 下的原生命令行
+    - Windows
+        + WSL:提供了一个由微软开发的Linux兼容的内核接口（不包含Linux内核代码），然后可以在其上运行GNU用户空间
+            * WSL2
+        + [putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+        + xshell6
+        + [FinalShell](http://www.hostbuf.com/)
+        + WinSSHTerm
+        + KiTTY
+        + ZOC Terminal
+        + MobaXterm
+        + Terminus
+        + Console2
+        + [cmder + gow](http://bliker.github.io/cmder/)
+        + ConEmu
+        + [Babun](http://babun.github.io/)
+        + [Terminal](https://github.com/microsoft/terminal):The new Windows Terminal, and the original Windows console host -- all in the same place!
+    - [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
+    - [msys2](http://www.msys2.org/)
+    - powercmd
+    - [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
+    - [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
 * help
     - [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
 * 查看
-    * [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings.
+    - [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings.
 * 搜索
     - ag：比grep、ack更快的递归搜索文件内容
     - fzf：命令行下模糊搜索工具，能够交互式智能搜索并选取文件或者内容，配合终端ctrl-r历史命令搜索简直完美。
@@ -1514,6 +1534,15 @@ ccache gcc foo.c
 * [rupa/z](https://github.com/rupa/z):z - jump around
 * [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
 * [jwilm/alacritty](https://github.com/jwilm/alacritty):A cross-platform, GPU-accelerated terminal emulator
+* shellcheck：shell脚本静态检查工具，能够识别语法错误以及不规范的写法
+* yapf：Google开发的python代码格式规范化工具，支持pep8以及Google代码风格。
+* mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连。
+* PathPicker(fpp):在命令行输出中自动识别目录和文件，支持交互式，配合git非常有用
+* sz/rz：交互式文件传输，在多重跳板机下传输文件非常好用，不用一级一级传输。
+* ccache：高速C/C++编译缓存工具，反复编译内核非常有用。使用起来也非常方便
+* tmux：终端复用工具，替代screen、nohup
+* neovim: 替代vim。
+* script/scriptreplay: 终端会话录制。
 
 ## 参考
 
@@ -1528,22 +1557,20 @@ ccache gcc foo.c
 * [Google’s Shell Style Guide](https://google.github.io/styleguide/shell.xml)
 * [jlevy/the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
 * [explainshell](https://explainshell.com)
-
-## 脚本参考
-
-* http://www.bashoneliners.com/
-* http://www.shell-fu.org/
-* http://www.commandlinefu.com/
-* http://www.shelldorado.com/scripts/
-* https://snippets.siftie.com/public/tag/bash/
-* https://bash.cyberciti.biz/
-* https://github.com/alexanderepstein/Bash-Snippets
-* https://github.com/miguelgfierro/scripts
-* https://github.com/epety/100-shell-script-examples
-* https://github.com/ruanyf/simple-bash-scripts
-* 框架:
-    * 写bash脚本的框架 https://github.com/Bash-it/bash-it
-* 和shell有关的索引资源：
-    - https://github.com/alebcay/awesome-shell
-    - https://github.com/awesome-lists/awesome-bash
-    - https://terminalsare.sexy/
+* 脚本参考
+    - http://www.bashoneliners.com/
+    - http://www.shell-fu.org/
+    - http://www.commandlinefu.com/
+    - http://www.shelldorado.com/scripts/
+    - https://snippets.siftie.com/public/tag/bash/
+    - https://bash.cyberciti.biz/
+    - https://github.com/alexanderepstein/Bash-Snippets
+    - https://github.com/miguelgfierro/scripts
+    - https://github.com/epety/100-shell-script-examples
+    - https://github.com/ruanyf/simple-bash-scripts
+    - 框架:
+        - 写bash脚本的框架 https://github.com/Bash-it/bash-it
+    - 和shell有关的索引资源：
+        + https://github.com/alebcay/awesome-shell
+        + https://github.com/awesome-lists/awesome-bash
+        + https://terminalsare.sexy/

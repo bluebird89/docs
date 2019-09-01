@@ -228,12 +228,14 @@ docker build -t my-org:my-image -f /tmp/Dockerfile
     + exit后 container就终止了，不过并没有消失，可以用 `sudo docker ps -a`，可以启动：`sudo docker start container_id`
     + 用logs命令： `sudo docker logs container_id`
   - 交互方式：`docker run -i -t image_name /bin/bash`
-- 从已经创建的容器中更新镜像，并且提交这个镜像
-  + `docker run -i -t ubuntu:15.10 /bin/bash` # 在新容器内建立一个伪终端或终端
+* 从已经创建的容器中更新镜像，并且提交这个镜像
+  - `docker run -i -t ubuntu:15.10 /bin/bash` # 在新容器内建立一个伪终端或终端
   - -p 3306:3306   表示在这个容器中使用3306端口(第二个)映射到本机的端口号也为3306(第一个)
   - 在运行的容器内使用 apt-get update 命令进行更新,exit退出容器
   - 提交容器`docker commit -m="has update" -a="runoob" e218edb10161 runoob/ubuntu:v2`
   - 使用新镜像 runoob/ubuntu 来启动一个容器 `docker run -t -i runoob/ubuntu:v2 /bin/bash`
+* container not running:remove container and recreate
+
 
 ```sh
 CONTAINER_ID=$(sudo docker run -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done") --name标识来命名容器 -P:是容器内部端口随机映射到主机的高端口 -p : 是容器内部端口绑定到指定的主机端口。 
@@ -267,7 +269,8 @@ docker run -d --add-host=SERVER_NAME:127.0.0.1 bat/spark
 docker run -d -v /data:/data bat/spark
 
 docker run lean/ping ping www.google.com
-# 查看输出
+
+# 查看日志
 docker logs -f $CONTAINER_ID  | docker attach $CONTAINER_ID  # -f:动态输出
 
 docker top determined_swanson    # 查看容器内部运行的进程
