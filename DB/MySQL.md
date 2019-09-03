@@ -119,6 +119,13 @@ cp support-files/mysql.server /data/3306/mysql
 
 cp support-files/my-small.cnf /data/3307/my.cnf
 cp support-files/mysql.server /data/3307/mysql
+
+# dpkg: error processing package mariadb-server-10.0 (--configure):subprocess installed post-installation script returned error exit status 1
+sudo apt-get remove --purge mysql*
+sudo apt-get remove --purge mysql
+sudo apt-get remove --purge mariadb
+sudo apt-get remove --purge mariadb*
+sudo apt-get --purge remove mariadb-server
 ```
 
 ## 原理
@@ -466,10 +473,19 @@ show grants for 'testuser'@'localhost';
 update mysql.user SET Password = PASSWORD('密码') where User = 'root';
 FLUSH PRIVILEGES;
 
-REVOKE insert,update,select,delete ON database_name.table_name FROM ‘username’@‘localhost’;
+DROP USER 'user'@'localhost'
+REVOKE CREATE,DROP,INSERT,UPDATE,SELECT,DELETE ON database_name.table_name FROM ‘username’@‘localhost’;
 
 ## 重置root密码 获取临时密码
 grep 'temporary password' /var/log/mysqld.log
+
+# mariadb 重置root密码
+sudo systemctl stop mysqlsudo systemctl set-environment MYSQLD_OPTS="--skip-grant-tables --skip-networking"
+sudo systemctl start mariadb
+sudo mysql -u rootUPDATE mysql.user SET password = PASSWORD('new_password') WHERE user = 'root';
+UPDATE mysql.user SET authentication_string = '' WHERE user = 'root';
+UPDATE mysql.user SET plugin = '' WHERE user = 'root';s
+udo systemctl restart mariadb
 ```
 
 ### 数据类型
