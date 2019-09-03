@@ -236,7 +236,6 @@ docker build -t my-org:my-image -f /tmp/Dockerfile
   - 使用新镜像 runoob/ubuntu 来启动一个容器 `docker run -t -i runoob/ubuntu:v2 /bin/bash`
 * container not running:remove container and recreate
 
-
 ```sh
 CONTAINER_ID=$(sudo docker run -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done") --name标识来命名容器 -P:是容器内部端口随机映射到主机的高端口 -p : 是容器内部端口绑定到指定的主机端口。 
 docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py
@@ -322,6 +321,13 @@ docker cp # 从容器里向外拷贝文件或目录
 
 # 登陆到容器中
 docker exec -it [id]|[name] /bin/bash  #i是交互式操作，t是一个终端，d指的是在后台运行
+
+# 获取容器IP
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
+CID=$(docker run -d -p 4321 base nc -lk 4321);
+docker inspect $CID
+
+docker inspect <container id> | grep "IPAddress"
 ```
 
 ## 网络
@@ -550,10 +556,20 @@ docker tag 860c279d2fec runoob/centos:dev
 # Ubuntu 14.04、Debian 7 Wheezy /etc/default/docker
 DOCKER_OPTS="--registry-mirror=https://docker.mirrors.ustc.edu.cn/"
 sudo service docker restart
-# Ubuntu 16.04+、Debian 8+、CentOS 7 /etc/docker/daemon.jso
+# Ubuntu 16.04+、Debian 8+、CentOS 7 /etc/docker/daemon.json
 {
   "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn/"]
 }
+
+# ~/.docker.json
+{
+    "auths": {
+        "registry.cn-beijing.aliyuncs.com": {
+            "auth": "ZGFvbG9uZy5xaXVAdG1vZ3JvdXA6dG1vNjU0MzIx"
+        }
+    }
+}
+
 sudo systemctl restart docker
 
 docker login --username=liboming88@yeah.net registry.cn-hangzhou.aliyuncs.com

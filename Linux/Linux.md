@@ -670,19 +670,19 @@ diff -Naur sources-orig/ sources-fixed/ >myfixes.patch # 参数 -N 代表如果�
 * 服务：封装的命令行，带有设定的参数、日志记录、运行监控
 * 启动服务会生成进程，端口占用
 * netstat:打印网络连接、路由表、连接的数据统计、伪装连接以及广播域成员
-  * -a 所有当前的连接
-  * -t 显示和tcp相关
-  * -u 显示和udp相关
-  * -x 显示和Unix sockets相关
-  * -n|numeric 禁用域名解析功能
-  * -l 显示处于Listen(监听)状态
-  * -p|program 显示建立连接的程序名与进程号
-  * -s|statistics 网络统计数据，包括某个协议下的收发包数量
-  * -r 选项打印内核路由信息
-  * -ie 打印网络接口信息
-  * -c 持续输出信息
-  * -g 输出 IPv4 和 IPv6 的多播组信息
-  * -v|verbose shows Active Internet connections and Active UNIX domain sockets without server information.
+  - -a 所有当前的连接
+  - -t 显示和tcp相关
+  - -u 显示和udp相关
+  - -x 显示和Unix sockets相关
+  - -n|numeric 禁用域名解析功能
+  - -l 显示处于Listen(监听)状态
+  - -p|program 显示建立连接的程序名与进程号
+  - -s|statistics 网络统计数据，包括某个协议下的收发包数量
+  - -r 选项打印内核路由信息
+  - -ie 打印网络接口信息
+  - -c 持续输出信息
+  - -g 输出 IPv4 和 IPv6 的多播组信息
+  - -v|verbose shows Active Internet connections and Active UNIX domain sockets without server information.
 
 ```sh
 hostname # 返回系统的主机名称
@@ -771,8 +771,11 @@ uptime # 查看当前系统运行多长时间
 ctrl+c   ## 有些程序也可以用q键
 
 ctrl+z   ## 进程会挂起到后台
+
+jobs # 后台列表
+fg %3   ## 让进程回到前台
 bg jobid  ## 让进程在后台继续执行
-fg jobid   ## 让进程回到前台
+kill -STOP %job_id
 
 iotop # Sorts processes by disk writes, and show how much and how frequently programs are writing to the disk.
 powertop # Lists processes by their energy consume. It\'s a vital command when you\'re outside, somewhere you can\'t charge your laptop.
@@ -1122,6 +1125,7 @@ sudo adduser lilei # 新建一个叫做lilei的用户，添加用户到系统，
 
 sudo useradd # 只创建用户，创建完了需要用 passwd lilei 去设置新用户的密码
 useradd -m -g users -G audio -s /usr/bin/bash newuser ### -m 创建 home 目录， -g 所属的主组， -G 指定该用户在哪些附加组， -s 设定默认的 shell ，newuser 为新的用户名
+usermod -a -G group1,group2 username
 
 groups zhangwang # 查看用户属于那些组（groups）
 cat /etc/group | sort 命令查看某组包含那些成员 # /etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
@@ -1146,6 +1150,9 @@ groupdel group_name 删除一个用户组
 groupmod -n new_group_name old_group_name 重命名一个用户组
 
 choot
+
+@ 修改用户
+henry:x:1000:1000:henry.li,,,:/home/henry:/bin/bash
 ```
 
 ### 匹配符
@@ -1296,6 +1303,8 @@ sudo tlp start
 ```
 
 ## 日志
+
+* Syslog
 
 ```sh
 journalctl -b -1 # 命令可以重现上一次启动时候的信息
