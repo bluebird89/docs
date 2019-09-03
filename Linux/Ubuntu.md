@@ -254,13 +254,13 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted
 # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse
 ```
 
-## keywordmap
+## keyword map
 
 * 工作区
   * Win 键，进入活动概览视图模式
   * Ctrl + Alt + 方向箭头
-* super:window
-* long hold super:Keyboard Shortcuts
+* super:window  long hold super:Keyboard Shortcuts
+* super + s :  show all workspaces
 * Ctrl+Alt+arrow+keys:switch workspace
 * Ctrl+Alt+Shift and an arrow key to move a window between workspaces
 * Paste:Middle Click
@@ -273,6 +273,9 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted
 * Prt Scrn:take a screenshot of the desktop.
 * Alt+Prt Scrn:take a  screenshot of a window.
 * Shift+Prt Scrn:take a screenshot of an area you select.
+* ctrl + super + d :show desktop
+* Super+Tab Switch between windows from the same application, or from the selected application after Super+Tab.This shortcut uses ` on US keyboards, where the ` key is above Tab. On all other keyboards, the shortcut is Superplus the key above Tab.
+* Super+A Show the list of applications.
 
 ## 端口与进程管理
 
@@ -575,69 +578,68 @@ find  目录 -name  "an*" [部分名称]     # 模糊查找文件名字以an开�
 
 ### Terminal
 
-Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节。终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
-
-Ubuntu具体说来，它默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
-
-* Tab 点击Tab键可以实现命令补全,目录补全、命令参数补全;
-* Ctrl+c:强行终止当前程序（常用）;
-* Ctrl+d:键盘输入结束或退出终端（常用）;
-* Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
-* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
-* Ctrl+a:将光标移至输入行头，相当于Home键;
-* Ctrl+e:将光标移至输入行末，相当于End键;
-* Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
-* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
-* Shift+PgUp:将终端显示向上滚动;
-* Shift+PgDn:将终端显示向下滚动;
-* Ctrl+d:键盘输入结束或退出终端
-* Tab 自动补全
-* Ctrl+a 光标移动到开始位置
-* Ctrl+e 光标移动到最末尾
-* Ctrl+k 删除此处至末尾的所有内容
-* Ctrl+u 删除此处至开始的所有内容
-* Ctrl+d 删除当前字符
-* Ctrl+h 删除当前字符前一个字符
-* Ctrl+w 删除此处到左边的单词
-* Ctrl+y 粘贴由 Ctrl+u ， Ctrl+d ， Ctrl+w 删除的单词
-* Ctrl+l 相当于clear，即清屏
-* Ctrl+r 查找历史命令
-* Ctrl+b 向回移动光标
-* Ctrl+f 向前移动光标
-* Ctrl+t 将光标位置的字符和前一个字符进行位置交换
-* Ctrl+& 恢复 ctrl+h 或者 ctrl+d 或者 ctrl+w 删除的内容
-* Ctrl+S 暂停屏幕输出
-* Ctrl+Q 继续屏幕输出
-* Ctrl+Left-Arrow 光标移动到上一个单词的词首
-* Ctrl+Right-Arrow 光标移动到下一个单词的词尾
-* Ctrl+p 向上显示缓存命令
-* Ctrl+n 向下显示缓存命令
-* Ctrl+d 关闭终端
-* Ctrl+xx 在EOL和当前光标位置移动
-* Ctrl+x@ 显示可能hostname补全
-* Ctrl+c 终止进程/命令
-* Shift +上或下 终端上下滚动
-* Shift+PgUp/PgDn 终端上下翻页滚动
-* Ctrl+Shift+n 新终端
-* alt+F2 输入gnome-terminal打开终端
-* Shift+Ctrl+T 打开新的标签页
-* Shift+Ctrl+W 关闭标签页
-* Shift+Ctrl+C 复制
-* Shift+Ctrl+V 粘贴
-* Alt+数字 切换至对应的标签页
-* Shift+Ctrl+N 打开新的终端窗口
-* Shift+Ctrl+Q 管壁终端窗口
-* Shift+Ctrl+PgUp/PgDn 左移右移标签页
-* Ctrl+PgUp/PgDn 切换标签页
-* F1 打开帮助指南
-* F10 激活菜单栏
-* F11 全屏切换
-* Alt+F 打开 “文件” 菜单（file）
-* Alt+E 打开 “编辑” 菜单（edit）
-* Alt+V 打开 “查看” 菜单（view）
-* Alt+S 打开 “搜索” 菜单（search）
-* Alt+T 打开 “终端” 菜单（terminal）
-* Alt+H 打开 “帮助” 菜单（help）
+* Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节
+* 终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
+* 默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
+* 快捷键
+  - Tab 点击Tab键可以实现命令补全,目录补全、命令参数补全;
+  - Ctrl+c:强行终止当前程序（常用）;
+  - Ctrl+d:键盘输入结束或退出终端（常用）;
+  - Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
+  - Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
+  - Ctrl+a:将光标移至输入行头，相当于Home键;
+  - Ctrl+e:将光标移至输入行末，相当于End键;
+  - Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
+  - Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
+  - Shift+PgUp:将终端显示向上滚动;
+  - Shift+PgDn:将终端显示向下滚动;
+  - Ctrl+d:键盘输入结束或退出终端
+  - Ctrl+a 光标移动到开始位置
+  - Ctrl+e 光标移动到最末尾
+  - Ctrl+k 删除此处至末尾的所有内容
+  - Ctrl+u 删除此处至开始的所有内容
+  - Ctrl+d 删除当前字符
+  - Ctrl+h 删除当前字符前一个字符
+  - Ctrl+w 删除此处到左边的单词
+  - Ctrl+y 粘贴由 Ctrl+u ， Ctrl+d ， Ctrl+w 删除的单词
+  - Ctrl+l 相当于clear，即清屏
+  - Ctrl+r 查找历史命令
+  - Ctrl+b 向回移动光标
+  - Ctrl+f 向前移动光标
+  - Ctrl+t 将光标位置的字符和前一个字符进行位置交换
+  - Ctrl+& 恢复 ctrl+h 或者 ctrl+d 或者 ctrl+w 删除的内容
+  - Ctrl+S 暂停屏幕输出
+  - Ctrl+Q 继续屏幕输出
+  - Ctrl+Left-Arrow 光标移动到上一个单词的词首
+  - Ctrl+Right-Arrow 光标移动到下一个单词的词尾
+  - Ctrl+p 向上显示缓存命令
+  - Ctrl+n 向下显示缓存命令
+  - Ctrl+d 关闭终端
+  - Ctrl+xx 在EOL和当前光标位置移动
+  - Ctrl+x@ 显示可能hostname补全
+  - Ctrl+c 终止进程/命令
+  - Shift +上或下 终端上下滚动
+  - Shift+PgUp/PgDn 终端上下翻页滚动
+  - Ctrl+Shift+n 新终端
+  - alt+F2 输入gnome-terminal打开终端
+  - Shift+Ctrl+T 打开新的标签页
+  - Shift+Ctrl+W 关闭标签页
+  - Shift+Ctrl+C 复制
+  - Shift+Ctrl+V 粘贴
+  - Alt+数字 切换至对应的标签页
+  - Shift+Ctrl+N 打开新的终端窗口
+  - Shift+Ctrl+Q 管壁终端窗口
+  - Shift+Ctrl+PgUp/PgDn 左移右移标签页
+  - Ctrl+PgUp/PgDn 切换标签页
+  - F1 打开帮助指南
+  - F10 激活菜单栏
+  - F11 全屏切换
+  - Alt+F 打开 “文件” 菜单（file）
+  - Alt+E 打开 “编辑” 菜单（edit）
+  - Alt+V 打开 “查看” 菜单（view）
+  - Alt+S 打开 “搜索” 菜单（search）
+  - Alt+T 打开 “终端” 菜单（terminal）
+  - Alt+H 打开 “帮助” 菜单（help）
 
 ## 系统相关
 
@@ -720,13 +722,10 @@ sudo vi /etc/timezone
 
 > ssh
 
-基于密钥的验证是最安全的几个身份验证模式使用OpenSSH,如普通密码和Kerberos票据。 基于密钥的验证密码身份验证有几个优点,例如键值更难以蛮力,比普通密码或者猜测,提供充足的密钥长度。 其他身份验证方法仅在非常特殊的情况下使用。
-
-SSH可以使用RSA(Rivest-Shamir-Adleman)或“DSA(数字签名算法)的钥匙。 这两个被认为是最先进的算法,当SSH发明,但DSA已经被视为近年来更不安全。 RSA是唯一推荐选择新钥匙,所以本指南使用RSA密钥”和“SSH密钥”可以互换使用。
-
-基于密钥的验证使用两个密钥,一个“公共”键,任何人都可以看到,和另一个“私人”键,只有老板是允许的。 安全通信使用的基于密钥的认证,需要创建一个密钥对,安全地存储私钥在电脑人想从登录,并存储公钥在电脑上一个想登录。
-
-使用基于密钥登录使用ssh通常被认为是比使用普通安全密码登录。 导的这个部分将解释的过程中生成的一组公共/私有RSA密钥,并将它们用于登录到你的Ubuntu电脑通过OpenSSH(s)。如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端，我们称为
+* 基于密钥的验证是最安全的几个身份验证模式使用OpenSSH,如普通密码和Kerberos票据。 基于密钥的验证密码身份验证有几个优点,例如键值更难以蛮力,比普通密码或者猜测,提供充足的密钥长度。 其他身份验证方法仅在非常特殊的情况下使用。
+* SSH可以使用RSA(Rivest-Shamir-Adleman)或“DSA(数字签名算法)的钥匙。 这两个被认为是最先进的算法,当SSH发明,但DSA已经被视为近年来更不安全。 RSA是唯一推荐选择新钥匙,所以本指南使用RSA密钥”和“SSH密钥”可以互换使用。
+* 基于密钥的验证使用两个密钥,一个“公共”键,任何人都可以看到,和另一个“私人”键,只有老板是允许的。 安全通信使用的基于密钥的认证,需要创建一个密钥对,安全地存储私钥在电脑人想从登录,并存储公钥在电脑上一个想登录。
+* 使用基于密钥登录使用ssh通常被认为是比使用普通安全密码登录。 导的这个部分将解释的过程中生成的一组公共/私有RSA密钥,并将它们用于登录到你的Ubuntu电脑通过OpenSSH(s)。如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端，我们称为
 
 ```sh
 # 密钥生成
@@ -1088,6 +1087,7 @@ sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser
 sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 sudo apt-get update
 sudo apt-get install mysql-workbench-community
+sudo apt install mysql-workbench
 
 sudo apt install aptitude
 sudo aptitude install <packagename>
