@@ -216,8 +216,7 @@ grant_type=refresh_token&refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
 
 ## 参考
 
-* [ The OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749)
-* [](link)
+* [The OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749)
 
 ## 工具
 

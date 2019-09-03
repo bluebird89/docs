@@ -26,6 +26,14 @@ cd elasticsearch-5.5.2/
 ./bin/elasticsearch -d -p pid
 # 开启另一端开口,返回一个 JSON 对象，包含当前节点、集群、版本等信息
 curl localhost:9200
+
+# ubuntu
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+sudo apt-get install apt-transport-https
+sudo apt-get update && sudo apt-get install elasticsearch
+sudo service elasticsearch start
+
+curl -XGET 'localhost:9200/_cat/health?v&pretty'
 ```
 
 ## 原理
