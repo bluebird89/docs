@@ -33,6 +33,7 @@ find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws 
 chown -R :www-data . # Ubuntu  chown -R :<your web server group name> 
 chmod u+x bin/magento
 
+## 通过 http://dowmian//setup 安装
 # 命令行安装
 create USER 'magento'@'%' IDENTIFIED BY 'magento';
 GRANT ALL PRIVILEGES ON magento.* TO 'magento'@'localhost';
@@ -55,6 +56,11 @@ bin/magento setup:install \ 
 --currency=USD \ 
 --timezone=America/Chicago \ 
 --use-rewrites=1
+
+php bin/magento setup:upgrade
+php bin/magento setup:di:compile
+php bin/magento setup:static-content:Deploy -f
+chmod -R 777 var/ generated/
 ```
 
 ## 命令
@@ -102,6 +108,11 @@ bin/magento cache:clean
 bin/magento cron:install
 bin/magento info:adminuri
 
+bin/magento setup:db:status
+bin/magento setup:db-schema:upgrade
+bin/magento setup:db-data:upgrade
+bin/magento dev:query-log:enable
+
 bin/magento admin:user:create --admin-user=henry --admin-password=111111 --admin-email=11111@qq.com --admin-firstname=henry --admin-lastname=li
 ```
 
@@ -110,6 +121,26 @@ bin/magento admin:user:create --admin-user=henry --admin-password=111111 --admin
 * New public and private keys are now associated with your account that you can click to copy
 * Save this information or keep the page open when working with your Magento project
 * Use the Public key as your username and the Private key as your password
+* 在根目录中创建一个新文件auth.json
+
+```language
+{
+   "http-basic": {
+      "repo.magento.com": {
+         "username": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+         "password": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+      }
+   }
+}
+```
+
+
+```language
+$store_id = Mage::app()->getStore('default')->getId();
+foreach($product_ids as $id){
+    Mage::getSingleton('catalog/product_action')->updateAttributes(array($id), array('price'=>$price), $store_id);
+}
+```
 
 ## REST
 
@@ -134,6 +165,7 @@ bin/magento admin:user:create --admin-user=henry --admin-password=111111 --admin
 
 ## 参考
 
+* [Magento2解决方案专家认证](https://u.magento.com/certified-magento2-solution-specialist):75个多项选择题 90分钟完成考试
 * [marketplace](https://marketplace.magento.com)
 * https://magento.com/technical-resources
 * https://devdocs.magento.com/#/individual-contributors

@@ -489,6 +489,10 @@ git checkout [file]  # 使用HEAD中的最新内容替换工作区中的文件�
 git checkout [commit] [file] # 恢复某个commit的指定文件到暂存区和工作区
 git checkout origin/master -- path/to/file # 丢弃工作区的修改
 git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1234567a44341404 / HEAD
+
+git update-index --assume-unchanged <file>Resume tracking files with:
+git update-index --no-assume-unchanged <file>
+
 ```
 
 #### 暂存区
