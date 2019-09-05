@@ -1,15 +1,15 @@
+
 ## music
 
-- Spotify
-- [Soundcloud](http://soundcloud.com)
-- [Musicbed](http://www.musicbed.com/):为视频寻找最优秀的配乐
-- [Lavaradio](http://www.lavaradio.com):环境音乐电台，按场景来选择音乐
-- [Garageband](https://www.apple.com/cn/ios/garageband/):非常强大的音乐软件，经常被忽视，可以自己摆弄着做音乐，做铃声等
-- 网易云音乐
-- 虾米
-- QQ音乐
-- [last.fm](https://www.last.fm/)
-- [nukeop/nuclear](https://github.com/nukeop/nuclear):Popcorn Time for music http://nuclear.gumblert.tech/
+* Spotify
+* [Soundcloud](http://soundcloud.com)
+* [Musicbed](http://www.musicbed.com/):为视频寻找最优秀的配乐
+* [Lavaradio](http://www.lavaradio.com):环境音乐电台，按场景来选择音乐
+* [Garageband](https://www.apple.com/cn/ios/garageband/):非常强大的音乐软件，经常被忽视，可以自己摆弄着做音乐，做铃声等
+* 网易云音乐
+* QQ音乐
+* [last.fm](https://www.last.fm/)
+* [nukeop/nuclear](https://github.com/nukeop/nuclear):Popcorn Time for music http://nuclear.gumblert.tech/
 
 ## 人物
 
@@ -29,8 +29,6 @@
 * 肖邦
 * 贝多芬
 * 李宗盛
-    - 《自己的歌》
-    - 《山丘》
     - 《新写的旧歌》
 
 ## 工具
@@ -40,4 +38,5 @@
 * [hnarayanan/shpotify](https://github.com/hnarayanan/shpotify):A command-line interface to Spotify. https://harishnarayanan.org/projects/
 * [musicforprogramming](https://musicforprogramming.net/)
 * [MusicTools](http://tool.yijingying.com/musictools/)
+* [slsknet](http://www.slsknet.org/):1999年底由著名音乐分享平台Napster的程序员Nir Arbel所开发的P2P共享软件Soulseek(简称SLSK)正式出现，在历经13年多的时间内，这它成为音乐共享软件中口碑最好用户最多的软件之一
 * <http://www.qqyewu.com/>
