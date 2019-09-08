@@ -1196,6 +1196,25 @@ match http {
 }
 ```
 
+*  Smooth Weighted Round-Robin（SWRR）:有 3 台机器 A、B、C 权重分别为 5、1、1，其中数组 s 代表机器列表、n 代表机器数量，每个机器的 cw 初始化为 0、ew 初始化为机器权重、tw 代表本轮选择中所有机器的 ew 之和、best 表示本轮被选中的机器。简单的描述就是每次选择机器列表中 cw 值最大的机器，被选中机器的 cw 将会减去 tw，从而降低下次被选中的机会，简单的伪代码描述如下：
+
+```c
+best = NULL;
+tw = 0;
+for(i = random() % n; i != i || falg; i = (i + 1) % n) {
+    flag = 0;
+    s[i].cw += s[i].ew;
+    tw += s[i].ew;
+    if (best == NULL || s[i].cw > best->cw) {
+        best = &s[i];
+    }
+}
+ 
+best->cw -= tw;
+return best;
+```
+![Alt text](../_static/ngnix-weight.png "Optional title")
+
 ## 限流
 
 * 漏桶算法实现

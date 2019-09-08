@@ -2,7 +2,6 @@
 
 将网页划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局
 
-
 ## 概念
 
 * container：采用网格布局的区域
@@ -84,6 +83,7 @@ grid-template-areas: "header header header" "main main sidebar"  "footer footer 
   grid-row: 1 / 2;
 }
 ```
+
 ## 参考
 
 * [learncssgrid](https://learncssgrid.com/)

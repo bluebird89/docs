@@ -4,36 +4,36 @@ Mac：最大优势是 GUI 和命令行的完美结合
 
 ## 硬件
 
--   Apple Magic Trackpad 2：重现Mac pro mul touch功能
--   耳机 BeoPlay H6
--   iPad Pro：阅读利器
--   格式化移动硬盘：ExFAT格式
-- imac Radeon Pro 580
+*   Apple Magic Trackpad 2：重现Mac pro mul touch功能
+*   耳机 BeoPlay H6
+*   iPad Pro：阅读利器
+*   格式化移动硬盘：ExFAT格式
+* imac Radeon Pro 580
     + (2019)Radeon Pro 580X 图形处理器 (配备 8GB 显存) 可选配 Radeon Pro Vega 48
 
 ## 系统配置
 
--   开启鼠标更多功能
--   将功能键(F1-F12)的行为设置为标准的功能键
--   dock 停在左边
--   iphone,只能同步一台设备itunes配置
--   设置未收录的开发者应用`sudo spctl --master-disable`
+*   开启鼠标更多功能
+*   将功能键(F1-F12)的行为设置为标准的功能键
+*   dock 停在左边
+*   iphone,只能同步一台设备itunes配置
+*   设置未收录的开发者应用`sudo spctl --master-disable`
 
 ### 配置文件
 
--   [arialdomartini/dotfiles](https://github.com/arialdomartini/dotfiles)Just my Mac OS X and Linux dot files
--   [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
--   [skwp/dotfiles](https://github.com/skwp/dotfiles) YADR - The best vim,git,zsh plugins and the cleanest vimrc you've ever seen
--   [holman/dotfiles](https://github.com/holman/dotfiles)@holman does dotfiles
--   [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files.
--   [使用 dotfiles 和 stow 管理你的 dotfiles](https://github.com/jcouyang/dotfiles)
--   [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
+*   [arialdomartini/dotfiles](https://github.com/arialdomartini/dotfiles)Just my Mac OS X and Linux dot files
+*   [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
+*   [skwp/dotfiles](https://github.com/skwp/dotfiles) YADR - The best vim,git,zsh plugins and the cleanest vimrc you've ever seen
+*   [holman/dotfiles](https://github.com/holman/dotfiles)@holman does dotfiles
+*   [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files.
+*   [使用 dotfiles 和 stow 管理你的 dotfiles](https://github.com/jcouyang/dotfiles)
+*   [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
 
 ### 命令行
 
--   [guarinogabriel/Mac-CLI](https://github.com/guarinogabriel/Mac-CLI)  OS X command line tools for developers – The ultimate tool to manage your Mac. It provides a huge set of command line commands that automatize the usage of your OS X system.
--   [0nn0/terminal-mac-cheatsheet](https://github.com/0nn0/terminal-mac-cheatsheet)List of my most used commands and shortcuts in the terminal for Mac
--   [rgcr/m-cli](https://github.com/rgcr/m-cli): Swiss Army Knife for macOS
+*   [guarinogabriel/Mac-CLI](https://github.com/guarinogabriel/Mac-CLI)  OS X command line tools for developers – The ultimate tool to manage your Mac. It provides a huge set of command line commands that automatize the usage of your OS X system.
+*   [0nn0/terminal-mac-cheatsheet](https://github.com/0nn0/terminal-mac-cheatsheet)List of my most used commands and shortcuts in the terminal for Mac
+*   [rgcr/m-cli](https://github.com/rgcr/m-cli): Swiss Army Knife for macOS
 
 ```sh
 # mac专有的pbcopy/pbpaste 把命令行输出拷贝到系统粘贴板：
@@ -47,8 +47,8 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 
 ### Spoitlight
 
--   查词典 Command+L
--   在浏览器查询 Command+B
+*   查词典 Command+L
+*   在浏览器查询 Command+B
 
 ## 共享目录
 
@@ -59,24 +59,20 @@ smaba
 
 ## 软件
 
-可以通过plist文件安装软件
-
-### 安装
-
--   app store安装
--   互联网下载：下载dmg，会打开安装包，需将app图标拖到application中（文件位置/Users/henry/Library/Application Support）
--   文件包直接拖进application：sketch atom
--   brew cask install firefox
-
-### 卸载
-
--   launchpad 长按
--   finder 找到移动到垃圾桶
--   通过appcleaner彻底清除
+* 安装
+    - 可以通过plist文件安装软件
+    -   app store安装
+    -   互联网下载：下载dmg，会打开安装包，需将app图标拖到application中（文件位置/Users/henry/Library/Application Support）
+    -   文件包直接拖进application：sketch atom
+    -   brew cask install firefox
+* 卸载
+    -   launchpad 长按
+    -   finder 找到移动到垃圾桶
+    -   通过appcleaner彻底清除
 
 ### 软件列表
 
--   系统
+*   系统
     -   [airmail](http://airmailapp.com/):mail client
     -   [Hazel](https://www.noodlesoft.com/):Automated Organization for Your Mac.
     -   [Gemini](https://macpaw.com/gemini):The intelligent duplicate file finder
@@ -107,6 +103,7 @@ smaba
     - [sveinbjornt/Sloth](https://github.com/sveinbjornt/Sloth):Mac app that shows all open files and sockets in use by all running processes. Nice GUI for lsof. https://sveinbjorn.org/sloth
     - Luna Display:Turn your iPad into a second display
     - 实用工具：/System/Library/CoreServices/Applications
+    - [QSpace](link)一个国产软件，MacOS 系统的多视图文件管理器，支持很多特色功能。让你摆脱多窗口来回切换的繁琐，和拖拽时找不准目标的尴尬。
 -   vpn
     -   Tunnelblick_3.7.2_build_4850：点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
 -   设计
