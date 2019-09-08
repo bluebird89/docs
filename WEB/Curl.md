@@ -4,50 +4,71 @@ curl is used in command lines or scripts to transfer data.发出网络请求，�
 
 ## 使用
 
+* -A 指定客户端的用户代理标头，即User-Agent
 * -X/--request [GET|POST|PUT|DELETE|…]  指定请求的 HTTP 方法
+* -x参数指定 HTTP 请求的代理
 * -H/--header                           指定请求的 HTTP Header
-* -d/--data                             指定请求的 HTTP 消息体（Body）
+* -d/--data                             发送 POST 请求的数据体
 * -v/--verbose                          输出详细的返回信息
 * -u/--user                             指定账号、密码
 * -b/--cookie                           读取 cookie
-* -i:--include Include protocol response headers in the output
-* -v:--verbose       Make the operation more talkative
+* -i:--include  打印出服务器回应的 HTTP 标头
+* -I参数向服务器发出 HEAD 请求，然会将服务器返回的 HTTP 标头打印出来
+* -v:--verbose   输出通信的整个过程，用于调试
+* -e 用来设置 HTTP 的标头Referer，表示请求的来源
+* -F 用来向服务器上传二进制文件
+* -G 用来构造 URL 的查询字符串
+* -k参数指定跳过 SSL 检测
+* --limit-rate用来限制 HTTP 请求和回应的带宽，模拟慢网速的环境
+* -o 参数将服务器的回应保存成文件，等同于wget命令
+* -O 将服务器回应保存成文件，并将 URL 的最后部分当作文件名
+* -s 将不输出错误和进度信息
+* -u 用来设置服务器认证的用户名和密码
+
 
 ```sh
+curl http://www.baidu.com
+curl http://www.baidu.com > /tmp/baidu.html # save html
+curl -o /tmp/baidu.html http://www.baidu.com # 保存文件
+
+curl -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36' https://google.com
+
+curl -b 'foo1=bar' -b 'foo2=baz' https://google.com # curl发送cookie，具体的cookie的值，可以从http response头信息的`Set-Cookie`字段中得到
+curl -b cookies.txt http://example.com # 使用这个文件作为cookie信息，进行后续的请求
+curl -c cookies http://example.com # 可以保存服务器返回的cookie到文件
+
+curl -d'login=emma＆password=123'-X POST https://google.com/login
+curl -d 'login=emma' -d 'password=123' -X POST  https://google.com/login
+curl -d '@data.txt' https://google.com/login
+curl -X POST--data-urlencode "date=April 1" example.com/form.cgi # 会自动将发送的数据进行 URL 编码
+curl -X DELETE www.example.com
+
+curl --header "Content-Type:application/json" http://example.com    # 增加一个头信息
+curl -e 'https://google.com?q=example' https://www.example.com
+curl -H 'Referer: https://google.com?q=example' https://www.example.com
+curl -d '{"login": "emma", "pass": "123"}' -H 'Content-Type: application/json' https://google.com/login
 curl -X POST \
   http://localhost:8080/ \
   -H 'cache-control: no-cache' \
+  -H 'Accept-Language: en-US' \
   -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
   -F 'html=@/example'
 
-curl http://www.baidu.com
-curl http://www.baidu.com > /tmp/baidu.html # save html
+curl -F 'file=@photo.png' https://google.com/profile #  MIME 类型设为application/octet-stream。
+curl -F 'file=@photo.png;type=image/png' https://google.com/profile
 
-curl -o /tmp/baidu.html http://www.baidu.com # 保存文件
-curl -d "name=test&page=1" http://www.baidu.com // -d 参数指定表单以POST的形式执行。
-curl -I  http://www.baidu.com  # 只显示http response的头信息
+curl -i  http://www.baidu.com  # 显示http response的头信息
+curl -I https://www.example.com 
 curl -v www.baidu.com #  -v参数可以显示一次http通信的整个过程，包括端口连接和http request头信息
 curl --trace output.txt www.baidu.com # 查看更详细的通信过程
 curl --trace-ascii output.txt www.baidu.com
-curl --referer http://www.example.com http://www.example.com # 在http request头信息中，提供一个referer字段，表示你是从哪里跳转过来的
 
-curl example.com/form.cgi?data=xxx
-curl -X POST --data "data=xxx" example.com/form.cgi
-curl -X POST--data-urlencode "date=April 1" example.com/form.cgi
-curl -X POST www.example.com  #  curl默认的HTTP方法是GET，使用-X参数可以支持其他动词。
-curl -X DELETE www.example.com
-
-# 上传文件
-curl --header "Content-Type:application/json" http://example.com    # 增加一个头信息
-curl --user-agent "[User Agent]" [URL] # User Agent字段:这个字段是用来表示客户端的设备信息。服务器有时会根据这个字段，针对不同设备，返回不同格式的网页
-curl -i -X POST --url http://localhost:8001/apis/ --data 'upstream_url=http://camp.uats.cc' --data 'request_path=login' # i:显示http response的头信息，连同网页代码一起
+curl -G -d 'q=kitties' -d 'count=20' https://google.com/search # 实际请求的 URL 为https://google.com/search?q=kitties&count=20。如果省略--G，会发出一个 POST 请求
 
 curl -L www.sina.com # 网址自动跳转的 跳转到新网址
-curl --user name:password example.com # http认证
+curl -u 'bob:12345' https://google.com/login # 设置用户名为bob，密码为12345，然后将其转为 HTTP 标头Authorization: Basic Ym9iOjEyMzQ1
 
-curl --cookie "name=xxx" www.example.com # curl发送cookie，具体的cookie的值，可以从http response头信息的`Set-Cookie`字段中得到
-curl -c cookies http://example.com # 可以保存服务器返回的cookie到文件
-curl -b cookies http://example.com # 使用这个文件作为cookie信息，进行后续的请求
+curl -x socks5://james:cats@myproxy.com:8080 https://www.example.com
 
 brew reinstall curl --with-openssl --with-nghttp2
 brew install nghttp2

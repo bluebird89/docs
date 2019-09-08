@@ -1,12 +1,10 @@
 # 资源
 
-资源内容
-
--   软件：apple 与 google 生态
+* 软件：apple 与 google 生态
 
 ## 硬件
 
--   keyward
+*   keyward
     -   FILCO 斐尔可 87 圣手忍者 FILCO Majestouch2 87
     -   斐尔可（FILCO） FKBN87MRL/EB2 Majestouch 2「87 圣手二代」
     -   HHKB Professional ~~2~~
@@ -47,24 +45,24 @@
 
 ## 汉字
 
--   字解：一款非常优秀的 APP，对于了解汉字，做设计非常有帮助。
--   日课：简洁精致的诗词 APP
--   Chinagram：关于汉字的 APP
--   [Chineasy](https://www.chineasy.com/):设计很出色，充分利用汉字的优势，将汉字转换为一幅幅精美的图片，让识字变成一种享受。
--   [造字](http://www.myfont.me):用手写来造字
--   dictionary:[goldendict/goldendict](https://github.com/goldendict/goldendict)
+*   字解：一款非常优秀的 APP，对于了解汉字，做设计非常有帮助。
+*   日课：简洁精致的诗词 APP
+*   Chinagram：关于汉字的 APP
+*   [Chineasy](https://www.chineasy.com/):设计很出色，充分利用汉字的优势，将汉字转换为一幅幅精美的图片，让识字变成一种享受。
+*   [造字](http://www.myfont.me):用手写来造字
+*   dictionary:[goldendict/goldendict](https://github.com/goldendict/goldendict)
 
 ## 写作
 
--   [字里行间](https://zi.com/):中文写作 APP，开发者的设计功力非常强
--   [简书](http://www.jianshu.com/)
--   [Medium]():一个非常优质的写作社区
--   [Bear](http://www.bear-writer.com/):
--   [Byword](https://metaclassy.com/):简洁，优美，专注于文字。非常棒的写作工具。
+*   [字里行间](https://zi.com/):中文写作 APP，开发者的设计功力非常强
+*   [简书](http://www.jianshu.com/)
+*   [Medium]():一个非常优质的写作社区
+*   [Bear](http://www.bear-writer.com/):
+*   [Byword](https://metaclassy.com/):简洁，优美，专注于文字。非常棒的写作工具。
 
 ## 阅读
 
--   RSS(Really Simple Syndication)
+*   RSS(Really Simple Syndication)
     -   The Old Reader
     -   Feedly:博客阅读与整理，导出订阅https://feedly.com/i/opml
     -   Inoreader
@@ -76,15 +74,15 @@
 
 ## 建站
 
--   [Sauarespace](https://www.squarespace.com/):建网站变成了像创造艺术品一样的体验
--   [Virb](http://virb.com/)
--   [Webflow](https://webflow.com/)
+*   [Sauarespace](https://www.squarespace.com/):建网站变成了像创造艺术品一样的体验
+*   [Virb](http://virb.com/)
+*   [Webflow](https://webflow.com/)
 
 ## 产品
 
--   [Producthunt](https://www.producthunt.com/):收录最新最优秀的产品
--   [Next](http://next.36kr.com/posts)
--   [少数派](https://sspai.com/)
+*   [Producthunt](https://www.producthunt.com/):收录最新最优秀的产品
+*   [Next](http://next.36kr.com/posts)
+*   [少数派](https://sspai.com/)
 
 ## 内容
 
@@ -161,7 +159,7 @@
 
 ## 新闻
 
-- [theatlantic](https://www.theatlantic.com/world/)
+* [theatlantic](https://www.theatlantic.com/world/)
 
 ## 工具
 
@@ -182,6 +180,7 @@
 
 * [facebook/watchman](https://github.com/facebook/watchman):Watches files and records, or triggers actions, when they change. https://facebook.github.io/watchman/
 * [阿里镜像](https://opsx.alibaba.com/mirror)
+* [腾讯软件源](https://mirrors.cloud.tencent.com)
 
 ## 词典
 
