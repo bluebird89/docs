@@ -1390,6 +1390,7 @@ virtualenv
 * [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
 * [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
 * [Python 3 cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/):Python3教学手册
+* [在 Windows 上用 Python 做开发](https://docs.microsoft.com/zh-cn/windows/python/)
 
 ##  项目
 

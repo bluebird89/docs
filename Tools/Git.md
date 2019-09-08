@@ -1014,6 +1014,7 @@ Hook是Git系统的本地机制，用于在诸如代码提交（Commit）和合�
   - [git-ci-hooks](https://bitbucket.org/tpettersen/git-ci-hooks/src/master/)
   - [templates](https://github.com/git/git/tree/master/templates)
   - [Git hooks](https://githooks.com)
+  - [Arkweid/lefthook](https://github.com/Arkweid/lefthook):Fast and powerful Git hooks manager for any type of projects.
 
 ```sh
 git init --bare /opt/html.git
@@ -1240,6 +1241,7 @@ git merge FETCH_HEAD
   - [pomber/git-history](https://github.com/pomber/git-history):Quickly browse the history of a file from any git repository https://githistory.xyz/
   - [Tutorial](https://lab.github.com/courses)
   - [GitHub Helps](https://help.github.com/)
+  - [github/hub](https://github.com/github/hub):A command-line tool that makes git easier to use with GitHub. https://hub.github.com/
 
 ![Git 使用规范流程](../_static/bg2015080501.png)
 

@@ -84,7 +84,7 @@ echo 'bundler' >> "$(brew --prefix rbenv)/default-gems"
 echo 'gem: --no-document' >> ~/.gemrc
 ```
 
-## install rails
+## install
 
 ```sh
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
@@ -151,6 +151,10 @@ rails server
 
 * [Gems](https://rubygems.org):Find, install, and publish RubyGems.
 
+## 教程
+
+* [Ruby on Rails Tutorial](https://www.railstutorial.org/book)
+
 ##  项目
 
 * [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. https://www.discourse.org
@@ -173,3 +177,5 @@ rails server
 ## 参考
 
 * [rubocop-hq/ruby-style-guide](https://github.com/rubocop-hq/ruby-style-guide):A community-driven Ruby coding style guide
+* [bbatsov/rails-style-guide](https://github.com/bbatsov/rails-style-guide):A community-driven Ruby on Rails 4 style guide
+* [bbatsov/ruby-style-guide](https://github.com/bbatsov/ruby-style-guide):A community-driven Ruby coding style guide

@@ -63,6 +63,7 @@
     - 生化危机启示录2
     - 铲子骑士—死神
     - 空洞骑士
+    - 火炬之光 2
     - 文明6：控制一个文明，然后不断发展、扩张的过程。在游戏里玩家可以控制任一地球上知名的文明，流程上模拟真实世界的发展。游戏中既可以在情景模式下于特定的场景和过关条件下挑战自己，也可以自定义地图规模、所参与的文明和所处时代后逐步发展自己的文明。由于一代代的积累进步，很多地方已经相当拟真，对历史一些奇观、文明的见解也很独到，使得代入感很强。
 * 配件
     - 买单机标配，不要买套餐
@@ -84,7 +85,6 @@
 
 ###  塞尔达传说：荒野之息
 
-
 * 有哪个公主，要逼着自己在母亲的葬礼上都不能哭泣？
 * 有哪个公主，从幼年开始就要被迫在没有指引的条件下学习她一无所知的本领？
 * 有哪个公主，17岁生日时的庆祝方式是跑去拉聂耳山泡冰水修行？
@@ -93,7 +93,6 @@
 *
 * 所以她会在开始时对林克那样疏远，一个承载了太多期待、却如何努力也不能回应这份期待的一国公主，连亲生父亲都在无休止地给她施加压力，身边却突然出现了一个同年龄的不世出天才，不难理解，这种感觉既讽刺又让人窝火。长久的压力，甚至在她最后感受到预兆（日记最后一页）时，都没有勇气告诉其他人，因为她是一个“无能”的公主。
 * 这样的一个少女，维持了百年的脆弱和平，我操纵着林克游山玩水爬树摸鱼的每一分每一秒，她都在用历代最强的三角力量与盖侬斗争，甚至没办法像林克一样获得失去记忆的这份仁慈，她一直、一直在战斗，也一直、一直注视着林克，并且无法忘记任何事情。
-
 * 习惯
     - 一开始就找克克洛
     - 开启怪物商店
@@ -334,10 +333,6 @@
 ![野怪](../_static/zelda_boss.jpg "Optional title")
 ![小游戏](../_static/zelda_game.jpg "Optional title")
 
-#### 攻略
-
-* [游击网](http://www.i7gg.com/game/detail?id=40827)
-
 ## Play station 4
 
 * 配置 - pro - slim - 天蝎 - 1080ti
@@ -346,20 +341,21 @@
 * 战神
 * 只狼：影逝二度
 * 刺客信条：大革命（英语：Assassin's Creed Unity）
+* HOB
 
 ### PC
 
--   PES
--   战地
--   使命召唤
--   [diasurgical/devilution](https://github.com/diasurgical/devilution):Diablo devolved - magic behind the 1996 computer game
--   Dota
--   风暴英雄
--   星际争霸3
--   暗黑破坏神2
--   魔兽世界
--   守望先锋
--   Minecraft
+* PES
+* 战地
+* 使命召唤
+* [diasurgical/devilution](https://github.com/diasurgical/devilution):Diablo devolved - magic behind the 1996 computer game
+* Dota
+* 风暴英雄
+* 星际争霸3
+* 暗黑破坏神2
+* 魔兽世界
+* 守望先锋
+* Minecraft
     +   [Mojang/brigadier](https://github.com/Mojang/brigadier):Brigadier is a command parser & dispatcher, designed and developed for Minecraft: Java Edition.
 * WeGame
     - 程序员升职记
@@ -409,6 +405,7 @@
 ## 参考
 
 * [miloyip/game-programmer](https://github.com/miloyip/game-programmer):A Study Path for Game Programmer
+* [游击网](http://www.i7gg.com/game/detail?id=40827)
 
 ## 工具
 
