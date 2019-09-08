@@ -506,14 +506,14 @@ RUN apt-get -y update
 RUN apt-get -y install nginx
 # 将外部文件拷贝到镜像里,src可以为url
 ADD http://nicescale.com/  /data/nicescale.tgz
-# WORKDIR /path/to/workdir, 设置工作目录
+# 设置工作目录
 WORKDIR /var/www
 # USER , 设置用户ID
 USER nginx
 # VULUME <#dir>, 设置volume
 VOLUME [‘/data’]
 RUN /bin/echo -e "LANG=\"en_US.UTF-8\"" >/etc/default/local
-# EXPOSE , 暴露哪些端口
+# EXPOSE 暴露哪些端口
 EXPOSE 22 80 443
 ## 容器启动时执行指令
 # ENTRYPOINT [‘executable’, ‘param1’,’param2’] 执行命令

@@ -885,6 +885,12 @@ define("UPDATE", 8);
 $permission = READ|WRITE; // 赋予权限 加法
 $permission = READ & ~WRITE; // 禁止写权限 反向全量的选法
 
+# 做权限验证
+echo 2 & 10; // 输出：2
+echo 2 | 10; // 输出结果：10
+echo 1 ^ 1; // 输出结果：0
+echo 1 ^ 0; // 输出结果：1
+
 if( READ & $permission ){ //判断权限
 　　echo "ok";
 }

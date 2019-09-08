@@ -34,6 +34,10 @@
 利用现成的工具去生成/操作一个抽象语法树（AST），甚至可以会写一个DSL（领域特定语言）。 所以你得理解词法分析、语法分析、语义分析，中间代码生成，代码优化这个基本编译的过程。
 学习了编译与原理，会对语言的一些设计有更深的理解，比如LISP。
 
+* Compilers: Principles,Techniques,and Tools 编译原理技术和工具 Alfred V.Aho,Ravi Sethi,Jeffrey D.Ullman 
+* Modern Compiler Implementation in C  Andrew W.Appel,with Jens Palsberg  现代编译原理-C语言描述 
+* Advanced Compiler Design and Implementation  Steven S.Muchnick  高级编译器设计与实现 
+
 ## 计算机网络
 
 * 分组交换

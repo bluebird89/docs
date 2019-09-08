@@ -1,6 +1,5 @@
 # Meditation
 
-
 * 冥想会让你发现，思维永远比你想的混乱，控制它和暂停思维，是你控制力的表现。
 * 究竟渴望什么样的生活，你在生活各个方面的价值取向和偏好是什么样.Take your time and be patient. Life itself will eventually answer all those questions it once raised for you.
     - 想象二十年后你理想中的一天的生活是什么样子？
