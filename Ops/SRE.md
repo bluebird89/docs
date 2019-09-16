@@ -1,6 +1,4 @@
-# SRE
-
-站点可靠性工程(Site Reliability Engineering)：
+# SRE 站点可靠性工程(Site Reliability Engineering)：
 
 ## 黄金指标
 

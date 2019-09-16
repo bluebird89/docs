@@ -314,6 +314,20 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 * 而要做到覆盖骨干功能和bug所属功能，却不是简简单单在页面中点几下就行了的。
 * 任何一个项目或者产品，骨干功能都有它的使用场景。冒烟测试就是要保证这些骨干功能的使用场景都能跑通，如果没跑通，后续的系统测试就没必要了。
 
+## fiddler
+
+* 抓包
+  - 客户端与监测机处于同一网络
+  - 客户端wifi添加代理（PC的IP地址）
+  - 客户端端口8888
+* HTTPS请求
+  - Tools->Telerik Fiddler Options
+  - 选中"Decrpt HTTPS traffic"，Fiddler就可以截获HTTPS请求
+  - 选中"Allow remote computers to connect"，是允许别的机器把HTTP/HTTPS请求发送到Fiddler上来
+  - 手机修改代理地址与端口
+  - 手机访问PC的IP：8888端口下载并安装证书
+* [](http://docs.telerik.com/fiddler/)
+
 ## 工具
 
 * redmine
@@ -342,4 +356,3 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 
 - [我们是怎样在项目内落地自动化测试体系的](http://blog.csdn.net/gitchat/article/details/78086617)
 - [How We Made Writing Tests Fun and Easy](https://blog.daftcode.pl/how-we-made-writing-tests-fun-and-easy-2d7e1fac6d16)
-

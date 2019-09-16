@@ -7,6 +7,27 @@ help your devleop APIs faster
 * document:依据你创建的Clollections自动生成API文档,并将其发布成规范的格式
 * collarorate:通过同步连接你的team和你的api，以及权限控制，API库
 
+## 安装
+
+```
+wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz
+sudo tar -xzf postman.tar.gz -C /opt
+rm postman.tar.gz
+sudo ln -s /opt/Postman/Postman /usr/bin/postman
+
+# get Postman to show up in the Unity Launcher
+~/.local/share/applications/postman.desktop <<EOL
+[Desktop Entry]
+Encoding=UTF-8
+Name=Postman
+Exec=postman
+Icon=/opt/Postman/app/resources/app/assets/icon.png
+Terminal=false
+Type=Application
+Categories=Development;
+EOL
+```
+
 ## collections
 
 收藏的测试Postman echo用例。官网有整理的api collection可以直接导入。

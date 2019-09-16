@@ -535,8 +535,8 @@ udo systemctl restart mariadb
     - time 10:09:08 100908 9:5:0 CURRENT_TIME()
         +  ADDTIME(CURRENT_TIME(), 023000),  SUBTIME(CURRENT_TIME(), 023000);
         +  TIMEDIFF(end_at, start_at)
-        +   TIME_FORMAT(start_at, '%h:%i %p') start_at
-        +   UTC_TIME()
+        +  TIME_FORMAT(start_at, '%h:%i %p') start_at
+        +  UTC_TIME()
     - datetime '1000-01-01 00:00:00' to '9999-12-31 23:59:59'，精度是秒，存储值为 2016-05-06 22:39:40
         + Strict mode (and more specifically NO_ZERO_DATE which is part of strict mode) usually sets off that error if the table was created with an all zero default date
         + 查看 SELECT @@sql_mode，使用1970-01-01 00:00:01
@@ -587,6 +587,17 @@ UPDATE lnmp SET category = JSON_INSERT(category, '$.name', 'lnmp', '$.url', 'www
 UPDATE lnmp SET category = JSON_SET(category, '$.host', 'www.lnmp.cn', '$.url','http://www.lnmp.cn') WHERE id = 1;
 UPDATE lnmp SET category = JSON_REPLACE(category, '$.name', 'php', '$.url', 'http://www.php.net') WHERE id = 2;
 UPDATE lnmp SET category = JSON_REMOVE(category, '$.url', '$.host') WHERE id = 1;
+
+select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at) as time from tmo_loyalty_customersync_log  where  created_at > '2019-09-12 08:00:00' and created_at < '2019-09-12 09:00:00'
+selECT * FROM cron_schedule  where job_code='tmo_sync_jde_customers';
+
+select day(timestamp) as Day, hour(timestamp) as Hour, count(*) as Count
+from MyTable
+where timestamp between :date1 and :date2
+group by day(timestamp), hour(timestamp)
+
+select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at) as time from tmo_loyalty_customersync_log  group by year(created_at),month(created_at),day(created_at),hour(created_at)  order by begin desc limit 10;
+
 ```
 
 ### 库表操作
@@ -2500,6 +2511,7 @@ http://localhost:3000
 * [alibaba/cobar](https://github.com/alibaba/cobar):a proxy for sharding databases and tables
 * [github/gh-ost](https://github.com/github/gh-ost):GitHub's Online Schema Migrations for MySQL
 * [oracle/mysql-operator](https://github.com/oracle/mysql-operator):Create, operate and scale self-healing MySQL clusters in Kubernetes
+* [soar](https://github.com/XiaoMi/soar):SQL Optimizer And Rewriter
 
 ## 参考
 

@@ -6,8 +6,6 @@
 
 ## Hotkey
 
-Firefox 键盘快捷键
-
 * 导航类
     - 后退： Alt+左方向键 或  Backspace
     - 前进： Shift+Backspace 或  Alt+右方向键
@@ -90,6 +88,11 @@ Firefox 键盘快捷键
 ## 插件
 
 * RESTClient
+
+## 功能
+
+* Firefox Test Pilot
+    - 国际版Firefox [Firefox Private Network Beta](https://private-network.firefox.com/)
 
 ## Engine
 

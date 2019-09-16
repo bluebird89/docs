@@ -1008,7 +1008,7 @@ sudo apt install sogoupinyin
 sudo apt remove libreoffice-common
 
 # remove Amazon
-sudo apt-get remove unity-webapps-common
+sudo apt-get remove unity-webapps-common thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku onboard deja-dup empathy
 
 # 不要选择显示星期或者年份
 gsettings set com.canonical.indicator.datetime time-format 'custom'
