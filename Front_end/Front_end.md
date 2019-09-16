@@ -1098,10 +1098,6 @@ app.listen(80, function () {
 
 ## 服务端渲染
 
-[前端性能优化之加载技术](https://juejin.im/post/59b73ef75188253db70acdb5)
-
-[SSR VR CSR](https://medium.com/walmartlabs/the-benefits-of-server-side-rendering-over-client-side-rendering-5d07ff2cefe8) 什么是服务端渲染
-
 服务端渲染也称作 SSR(Server Side Render) 。不同于客户端渲染，服务端渲染会在后端把页面 DOM 的结构树转成 String 吐出来，然后到前端（如浏览器）解析渲染。
 
 优势
@@ -1152,19 +1148,24 @@ Node服务端渲染好处多多，但除了上述技术性的问题需要解决�
 
 如果你确定要用 node 做服务端渲染的话，建议你应该用一些开源成熟的框架。比如在 react 体系下比较有代表性的 next.js， vue 体系下的 Nuxt.js。
 
+
+* [前端性能优化之加载技术](https://juejin.im/post/59b73ef75188253db70acdb5)
+* [SSR VR CSR](https://medium.com/walmartlabs/the-benefits-of-server-side-rendering-over-client-side-rendering-5d07ff2cefe8) 什么是服务端渲染
+
+
 ## 实例
 
 * [cyanharlow/purecss-francine](https://github.com/cyanharlow/purecss-francine)：HTML/CSS drawing in the style of an 18th-century oil painting. Hand-coded entirely in HTML & CSS.
-* Python + Django框架完成接口的开发，前端使用Vue.js + element UI
 
 ## 面试
 
-- [DDFE/DDFE-blog](https://github.com/DDFE/DDFE-blog)
-- [h5bp/Front-end-Developer-Interview-Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions):A professional front-end template for building fast, robust, and adaptable web apps or sites. https://html5boilerplate.com/
+* [DDFE/DDFE-blog](https://github.com/DDFE/DDFE-blog)
+* [h5bp/Front-end-Developer-Interview-Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions):A professional front-end template for building fast, robust, and adaptable web apps or sites. https://html5boilerplate.com/
 * [nanhupatar/FEGuide](https://github.com/nanhupatar/FEGuide):【前端面试题+前端学习+面试指南】 一份涵盖大部分前端工程师所需要掌握的核心知识。这个项目就是为了帮助那些找工作的前端开发工程师去回顾前端的基础知识，如果你不想找工作，也可以通过查看这些面试问题去巩固你的前端技能。 https://github.com/nanhupatar/FEGuide
 * [ScriptOJ](http://scriptoj.mangojuice.top/):Web 前端开发评测系统,从大量实战代码、面试题目中总结出精华题库和相应的测试
 * [五年面试，三年模拟](https://juejin.im/post/5ca0425e51882567ce181037)
 * [校招社招必备核心前端面试问题与详细解答](https://segmentfault.com/a/1190000019758067)
+* [haizlin/fe-interview](https://github.com/haizlin/fe-interview):前端面试每日 3+1，以面试题来驱动学习，提倡每日学习与思考，每天进步一点
 
 ## 工具
 
@@ -1188,13 +1189,13 @@ Node服务端渲染好处多多，但除了上述技术性的问题需要解决�
 
 ## 参考
 
-- [从软件工程角度看大前端技术栈](http://blog.csdn.net/gitchat/article/details/77199990)
-- [Web前端开发知识体系精简](www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
-- [前端工程师技能图谱](https://github.com/TeamStuQ/skill-map/blob/master/data/map-FrontEndEngineer.md)
-- [dwqs/blog](https://github.com/dwqs/blog)
-- [Web前端知识体系精简](http://www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
-- [前端跨域整理](https://juejin.im/post/5815f4abbf22ec006893b431)
-- [KieSun/Front-end-knowledge](https://github.com/KieSun/Front-end-knowledge):前端知识集锦
+* [从软件工程角度看大前端技术栈](http://blog.csdn.net/gitchat/article/details/77199990)
+* [Web前端开发知识体系精简](www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
+* [前端工程师技能图谱](https://github.com/TeamStuQ/skill-map/blob/master/data/map-FrontEndEngineer.md)
+* [Web前端知识体系精简](http://www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
+* [前端跨域整理](https://juejin.im/post/5815f4abbf22ec006893b431)
+* [KieSun/Front-end-knowledge](https://github.com/KieSun/Front-end-knowledge):前端知识集锦
+* [dwqs/blog](https://github.com/dwqs/blog)
 * [jawil/blog](https://github.com/jawil/blog):Too young, too simple. Sometimes, naive & stupid 🐌
 * [thedaviddias/Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist):🗂 The perfect Front-End Checklist for modern websites and meticulous developers https://frontendchecklist.io
 * [AlloyTeam/Mars](https://github.com/AlloyTeam/Mars)腾讯移动Web前端知识库

@@ -5,34 +5,34 @@ A PHP Framework For Web Artisans https://laravel.com
 ## 安装
 
 * Homestead
-    - 安装virtualbox、vagrant
-    - parallels `vagrant plugin install vagrant-parallels`
-    - vagrant box add [--name] laravel\homestead [homestead.box] <https://atlas.hashicorp.com/laravel/boxes/homestead> <https://atlas.hashicorp.com/laravel/boxes/homestead/versions/2.1.0/providers/virtualbox.box>
-    - `vagrant list`
-    - git clone <https://github.com/laravel/homestead.git> Homestead
-    - bash init.sh
-    - 修改.homestread\Homestead.yaml
-    - 修改scripts/homestead.rb
-    - vagrant provision
-    - vagrant init
-    - vagrant up:The SSH command responded with a non-zero exit status.
-    - 添加ip
-    - 从主机的数据库客户端连接到 MySQL 或 Postgres，就连接到 127.0.0.1 和端口 33060 (MySQL) 或 54320 (Postgres)。账号密码分别是 homestead／secret
-    - 命令 schedule:run ，调度便会在每分钟运行一次。schedule:run 命令会检查定义在你 App\Console\Kernel 类中的调度任务
-    - 端口
-        + SSH: 2222 → 发送到 22
-        * HTTP: 8000 → 发送到 80
-        * HTTPS: 44300 → 发送到 443
-        * MySQL: 33060 → 发送到 3306
-        * Postgres: 54320 → 发送到 5432
-        * Mailhog: 8025 → 发送到 8025
+  - 安装virtualbox vagrant
+  - parallels `vagrant plugin install vagrant-parallels`
+  - vagrant box add [--name] laravel\homestead [homestead.box] <https://atlas.hashicorp.com/laravel/boxes/homestead> <https://atlas.hashicorp.com/laravel/boxes/homestead/versions/2.1.0/providers/virtualbox.box>
+  - `vagrant list`
+  - git clone <https://github.com/laravel/homestead.git> Homestead
+  - bash init.sh
+  - 修改.homestread\Homestead.yaml
+  - 修改scripts/homestead.rb
+  - vagrant provision
+  - vagrant init
+  - vagrant up:The SSH command responded with a non-zero exit status.
+  - 添加ip
+  - 从主机的数据库客户端连接到 MySQL 或 Postgres，就连接到 127.0.0.1 和端口 33060 (MySQL) 或 54320 (Postgres)。账号密码分别是 homestead／secret
+  - 命令 schedule:run，会检查定义在你 App\Console\Kernel 类中的调度任务，调度每分钟运行一次
+  - 端口
+    + SSH: 2222 → 发送到 22
+    + HTTP: 8000 → 发送到 80
+    + HTTPS: 44300 → 发送到 443
+    + MySQL: 33060 → 发送到 3306
+    + Postgres: 54320 → 发送到 5432
+    + Mailhog: 8025 → 发送到 8025
     + 共享环境：Homestead 机器中并运行 share homestead.app。这会从 Homestead.yaml 配置文件中共享 homestead.app
 * valet：Mac 极简主义者的 Laravel 开发环境
   - 为 Mac 设置了启动后始终在后台运行 Nginx
   - Valet 使用 DnsMasq 将所有指向安装在本地计算机的站点的请求代理到 *.test 域上
-* 通过composer 安装
+* 通过composer 安装:`composer create-project --prefer-dist laravel/laravel blog`
 * Laragon
-* [laradock](https://github.com/LaraDock/laradock.git)
+* [laradock/laradock](https://github.com/laradock/laradock):Docker PHP development environment. http://laradock.io
 
 ```yaml
 box: laravel/homestead
@@ -182,22 +182,16 @@ server {
     }
 }
 
-
 composer global require laravel/installer
 laravel new blog
 
-composer create-project --prefer-dist laravel/laravel blog
+
 
 php artisan  key:generate
 
 # php artisan serve
-```
 
-### [laradock/laradock](https://github.com/laradock/laradock)
-
-Docker PHP development environment. http://laradock.io
-
-```sh
+# laradock
 git clone https://github.com/Laradock/laradock.git
 cp env-example .env
 docker-compose up -d nginx mysql phpmyadmin redis workspace #
@@ -233,15 +227,11 @@ if (App::environment(['local', 'staging'])) {
 
 ## Artisan
 
-利用PHP的CLI构建了强大的Console工具artisan，几乎能够创建任何想要的模板类以及管理配置应用，在开发和运维管理中扮演着极其重要的角色
-
-* 数据库迁移 Migrations：php artisan make:migration create_users_table --create=users
-* 创建资源控制器：php artisan make:controller PhotoController --resource --model=Photo
-* 创建模型及迁移：php artisan make:model User -m
+利用PHP的CLI构建了强大的Console工具artisan，几乎能够创建任何想要的模板类以及管理配置应用
 
 ```sh
 php artisan --version # 显示目前的Laravel版本
-php artisan help [name]  # 显示命令行的帮助
+php artisan help [name]  # 显示命令行帮助
 php artisan list  # 列出命令
 php artisan down --message="Upgrading Database" --retry=60 # 进入维护模式
 php artisan up # 退出维护模式
@@ -267,16 +257,18 @@ php artisan make:console #  生成一个Artisan命令
 php artisan key:generate  # 设置程序密钥   No supported encrypter found. The cipher and / or key length are invalid.
 php artisan make:controller App\TestController # 指定创建位置 在app目录下创建TestController
 php artisan make:controller PhotoController --resource # 创建Rest风格资源控制器
+php artisan make:controller PhotoController --resource --model=Photo
 php artisan make:middleware # 生成一个中间件
+php artisan make:model User -m
 
 php artisan make:Model App\\Models\\User(linux or macOs 加上转义符) # 指定路径创建
 php artisan make:provider # 生成一个服务提供商的类
 php artisan make:request #  生成一个表单消息类
 
-php artisan make:migration #  生成一个迁移文件
 php artisan vendor:publish # 发布来自插件包的资源:
 php artisan vendor:publish # 发表一些可以发布的有用的资源来自提供商的插件包
 
+php artisan make:migration create_users_table --create=users
 php artisan migrate:install # 创建一个迁移库文件
 php artisan make:migration #  生成一个迁移文件
 php artisan migrate:refresh # 复位并重新运行所有的迁移
@@ -357,13 +349,13 @@ exit
 
 ## 请求周期
 
-Laravel 采用了单一入口模式，应用的所有请求入口都是 public/index.php 文件。
+Laravel 采用了单一入口模式，应用的所有请求入口都是 public/index.php 文件
 
-- 注册类文件自动加载器：Laravel通过composer进行依赖管理，并在bootstrap/autoload.php中注册了Composer Auto Loader (PSR-4)，应用中类的命名空间将被映射到类文件实际路径，不再需要开发者手动导入各种类文件，而由自动加载器自行导入。因此，Laravel允许你在应用中定义的类可以自由放置在Composer Auto Loader能自动加载的任何目录下，但大多数时候还是建议放置在app目录下或app的某个子目录下
-- 创建服务容器：从 bootstrap/app.php 文件中取得 Laravel 应用实例 $app (服务容器)
-- 创建 HTTP / Console 内核：传入的请求会被发送给 HTTP 内核或者 console 内核进行处理，HTTP 内核继承自 Illuminate\Foundation\Http\Kernel 类。它定义了一个 bootstrappers 数组，数组中的类在请求真正执行前进行前置执行，这些引导程序配置了错误处理，日志记录，检测应用程序环境，以及其他在请求被处理前需要完成的工作；HTTP 内核同时定义了一个 HTTP 中间件列表，所有的请求必须在处理前通过这些中间件处理 HTTP session 的读写，判断应用是否在维护模式， 验证 CSRF token 等等
-- 载入服务提供者至容器：在内核引导启动的过程中最重要的动作之一就是载入服务提供者到你的应用，服务提供者负责引导启动框架的全部各种组件，例如数据库、队列、验证器以及路由组件。因为这些组件引导和配置了框架的各种功能，所以服务提供者是整个 Laravel 启动过程中最为重要的部分，所有的服务提供者都配置在 config/app.php 文件中的 providers 数组中。首先，所有提供者的 register 方法会被调用；一旦所有提供者注册完成，接下来，boot 方法将会被调用
-- 分发请求：一旦应用完成引导和所有服务提供者都注册完成，Request 将会移交给路由进行分发。路由将分发请求给一个路由或控制器，同时运行路由指定的中间件
+* 注册类文件自动加载器：Laravel通过composer进行依赖管理，并在bootstrap/autoload.php中注册了Composer Auto Loader (PSR-4)，应用中类的命名空间将被映射到类文件实际路径，不再需要开发者手动导入各种类文件，而由自动加载器自行导入。因此，Laravel允许你在应用中定义的类可以自由放置在Composer Auto Loader能自动加载的任何目录下，但大多数时候还是建议放置在app目录下或app的某个子目录下
+* 创建服务容器：从 bootstrap/app.php 文件中取得 Laravel 应用实例 $app (服务容器)
+* 创建 HTTP / Console 内核：传入的请求会被发送给 HTTP 内核或者 console 内核进行处理，HTTP 内核继承自 Illuminate\Foundation\Http\Kernel 类。它定义了一个 bootstrappers 数组，数组中的类在请求真正执行前进行前置执行，这些引导程序配置了错误处理，日志记录，检测应用程序环境，以及其他在请求被处理前需要完成的工作；HTTP 内核同时定义了一个 HTTP 中间件列表，所有的请求必须在处理前通过这些中间件处理 HTTP session 的读写，判断应用是否在维护模式， 验证 CSRF token 等等
+* 载入服务提供者至容器：在内核引导启动的过程中最重要的动作之一就是载入服务提供者到你的应用，服务提供者负责引导启动框架的全部各种组件，例如数据库、队列、验证器以及路由组件。因为这些组件引导和配置了框架的各种功能，所以服务提供者是整个 Laravel 启动过程中最为重要的部分，所有的服务提供者都配置在 config/app.php 文件中的 providers 数组中。首先，所有提供者的 register 方法会被调用；一旦所有提供者注册完成，接下来，boot 方法将会被调用
+* 分发请求：一旦应用完成引导和所有服务提供者都注册完成，Request 将会移交给路由进行分发。路由将分发请求给一个路由或控制器，同时运行路由指定的中间件
 
 ## 服务容器
 
@@ -522,6 +514,53 @@ class RiakServiceProvider extends ServiceProvider
         });
     }
 }
+
+# 反射
+class User 
+{
+    protected $log;
+
+    public function __construct(FileLog $log)
+    {
+        $this->log = $log;   
+    }
+
+    public function login()
+    {
+        // 登录成功，记录登录日志
+        echo 'login success...';
+        $this->log->write();
+    }
+
+}
+
+function make($concrete){
+
+    $reflector = new ReflectionClass($concrete);
+    $constructor = $reflector->getConstructor();
+    // 为什么这样写的? 主要是递归。比如创建FileLog不需要传入参数。
+    if(is_null($constructor)) {
+        return $reflector->newInstance();
+    }else {
+        // 构造函数依赖的参数
+        $dependencies = $constructor->getParameters();
+        // 根据参数返回实例，如FileLog
+        $instances = getDependencies($dependencies);
+        return $reflector->newInstanceArgs($instances);
+    }
+
+}
+
+function getDependencies($paramters) {
+    $dependencies = [];
+    foreach ($paramters as $paramter) {
+        $dependencies[] = make($paramter->getClass()->name);
+    }
+    return $dependencies;
+}
+
+$user = make('User');
+$user->login();
 ```
 
 ## Facades

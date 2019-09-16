@@ -498,12 +498,13 @@ git update-index --no-assume-unchanged <file>
 #### 暂存区
 
 * commit:生成上次提交的状态与当前状态的差异记录（也被称为revision）,系统会根据修改的内容计算出没有重复的40位英文及数字来给提交命名
-  - pick：正常选中
-  - reword：选中，并且修改提交信息；
-  - edit：选中，rebase时会暂停，允许你修改这个commit（参考这里）
-  - squash：选中，会将当前commit与上一个commit合并，会有多个commit信息
-  - fixup：与squash相同，但不会保存当前commit的提交信息，会舍去commit信息
-  - exec：执行其他shell命令
+  - p, pick = use commit
+  - r, reword = use commit, but edit the commit message
+  - e, edit = use commit, but stop for amending
+  - s, squash = use commit, but meld into previous commit 有多个commit信息
+  - f, fixup = like "squash", but discard this commit's log message
+  - x, exec = run command (the rest of the line) using shell
+  - d, drop = remove commit
 * stash:还未提交的修改内容以及新添加的文件，留在索引区域或工作树的情况下切换到其他的分支时，修改内容会从原来的分支移动到目标分支
   - 如果在checkout的目标分支中相同的文件也有修改，checkout会失败的。这时要么先提交修改内容，要么用stash暂时保存修改内容后再checkout
 * merge 命令把不同分支合并起来。合并前，索引必须和当前提交相同。
@@ -871,7 +872,7 @@ tar cJf .tar.xz / --exclude-vcs
 
 ## cherry-pick
 
-* 可以选择某一个分支中的一个或几个commit(s)来进行操作,当执行完 cherry-pick 以后，将会 生成一个新的提交,这个新的提交的哈希值和原来的不同，但标识名 一样
+* picking a commit from a branch and applying it to another. 选择某一个分支中的一个或几个commit(s)来进行操作,当执行完 cherry-pick 以后，将会生成一个新的提交,这个新的提交的哈希值和原来的不同，但标识名 一样
 * 从develop分支新开分支fromdevelop-01，然后commit两次，这时候develop分支只需要第二次提交的信息，步骤：
   - git checkout develop
   - git cherry-pick 第二次commitID

@@ -283,18 +283,18 @@ Linux内核处于用户进程和硬件之间，包括系统调用接口和Linux�
 * /sbin：系统管理命令，也用于存储二进制文件。这里存放的是系统管理员使用的管理程序，只有root才能访问
 * /tmp：存放程序在运行时产生的信息和数据。但在引导启动后，运行的程序最好使用/var/tmp来 代替/tmp，因为前者可能拥有一个更大的磁盘空间。
 * /usr：最庞大的目录，要用到的应用程序和文件几乎都在这个目录，所有命令、库、man页和其他一般操作中所需的不改变的文件（节省了磁盘空间，且易于管理）。
-  * 比较重要的目录/usr/local 本地管理员软件安装目录
-  * /usr/x11r6：存放x window的目录。
-  * /usr/bin：众多的应用程序。
-  * /usr/sbin：超级用户的一些管理程序。
-  * /usr/doc：linux文档。
-  * /usr/include：linux下开发和编译应用程序所需要的头文件。
-  * /usr/lib：常用的动态链接库和软件包的配置文件。
-  * /usr/man：帮助文档。
-  * /usr/src：源代码，linux内核的源代码就放在/usr/src/linux 里。
-  * /usr/local下一般是你安装软件的目录，这个目录就相当于在windows下的programefiles这个目录
-  * /usr/local/bin：本地增加的命令。
-  * /usr/local/lib：本地增加的库根文件系统。
+  - /usr/local 本地管理员软件安装目录
+  - /usr/x11r6：存放x window的目录。
+  - /usr/bin：众多的应用程序。
+  - /usr/sbin：超级用户的一些管理程序。
+  - /usr/doc：linux文档。
+  - /usr/include：linux下开发和编译应用程序所需要的头文件。
+  - /usr/lib：常用的动态链接库和软件包的配置文件。
+  - /usr/man：帮助文档。
+  - /usr/src：源代码，linux内核的源代码就放在/usr/src/linux 里。
+  - /usr/local下一般是你安装软件的目录，这个目录就相当于在windows下的programefiles这个目录
+  - /usr/local/bin：本地增加的命令。
+  - /usr/local/lib：本地增加的库根文件系统。
 * /var：某些大文件的溢出区，包含会改变的文件，比如spool目录(mail、news、打印机等用的)， log文件、 formatted manual pages和暂存文件。传统上/var 的所有东西曾在 /usr 下的某个地方，但这样/usr 就不可能只读安装了。
   - /var/catman：包括了格式化过的帮助(man)页。帮助页的源文件一般存在 /usr/man/catman中；有些man页可能有预格式化的版本，存在/usr/man/cat中。而其他的man页在第一次看时都需要格式化，格 式化完的版本存在/var/man中，这样其他人再看相同的页时就无须等待格式化了。(/var/catman经常被 清除，就像清除临时目录一样。)
   - /var/lib：存放系统正常运行时要改变的文件。
@@ -1028,11 +1028,15 @@ find / -xdev -name \*.rpm 搜索以 '.rpm' 结尾的文件，忽略光驱、捷�
 cat $FILE | pbcopy # 将内容复制到粘贴板
 
 # 复制本地到远程
-scp [-r] local_path username@ip:path
-# 复制远程到本地
-scp [-r] username@ip:path local_path
+scp foobar.txt your_username@remotehost.edu:/some/remote/directory
+scp foo.txt bar.txt your_username@remotehost.edu:~
+scp -r foo your_username@remotehost.edu:/some/remote/directory/bar
+scp -P 2264 foobar.txt your_username@remotehost.edu:foobar.txt /some/local/directory
+scp your_username@rh1.edu:/some/remote/directory/foobar.txt your_username@rh2.edu:/some/remote/directory/
+scp your_username@remotehost.edu:/some/remote/directory/\{a,b,c\} .
+scp your_username@remotehost.edu:~/\{foo.txt,bar.txt\} .
 scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music 
-scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music/001.mp3 
+scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music/001.mp3
 ```
 
 ### 权限
@@ -1102,6 +1106,7 @@ tar -jtvf aa.tar.bz2 # -t  只查看，不解压
   - nobody:nogroup
 * 每次次新建用户如果不指定用户组的话，默认会自动创建一个与用户名相同的用户组
 * 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限
+* gid
 
 ```sh
 who # 查看有谁在线

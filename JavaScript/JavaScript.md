@@ -2758,6 +2758,11 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
 
 * [原生JS(上)](https://juejin.im/post/5cab0c45f265da2513734390)
 
+## 图书
+
+* 《JavaScript高级程序设计》（第3版）
+* 《JavaScript权威指南》
+
 ## 教程
 
 * [verekia/js-stack-from-scratch](https://github.com/verekia/js-stack-from-scratch):🛠️⚡ Step-by-step tutorial to build a modern JavaScript stack.

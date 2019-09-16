@@ -309,12 +309,12 @@ vagrant global-status --prune
   - 方便团队协作，别人可以访问你的虚拟机
   - 需要有网络，有路由器分配IP
 
-### 记录
+### 问题
 
-- v1.9.4 bugs :SSH cann't connect
-- `It appears your machine doesn't support NFS, or there is not an adapter to enable NFS on this machine for Vagrant`:`sudo apt-get install nfs-kernel-server`
-- `default: Warning: Authentication failure. Retrying...`;homestead.rb 中加入如下配置`config.ssh.username = 'vagrant'``config.ssh.password = 'vagrant'`
-- Vagrant was unable to mount VirtualBox shared folders. This is usually because the filesystem "vboxsf" is not available
+* v1.9.4 bugs :SSH cann't connect
+* `It appears your machine doesn't support NFS, or there is not an adapter to enable NFS on this machine for Vagrant`:`sudo apt-get install nfs-kernel-server`
+* `default: Warning: Authentication failure. Retrying...`;homestead.rb 中加入如下配置`config.ssh.username = 'vagrant'``config.ssh.password = 'vagrant'`
+* Vagrant was unable to mount VirtualBox shared folders. This is usually because the filesystem "vboxsf" is not available
 
 ```sh
 sudo apt-get install virtualbox-guest-utils # ubuntu
