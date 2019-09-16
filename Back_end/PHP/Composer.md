@@ -153,7 +153,6 @@ composer config -g --unset repos.packagist
     ]
 ```
 
-
 * PSR-0: $student = new \Bpp\Student(); 时，对于 PSR-0 代码目录结构是： bpp/Bpp/Student.php 。即目录包含了最外层的命名空间 Bpp 
   - 目录名称与命名空间层层对应，类名中的下划线_会被转化成目录分隔符，会导致目录结构变得比较深,加载”Foo\Bar\Baz”这个class时，会去寻找“src\Foo\Bar\Baz.php”这个文件，这个配置会以map的形式写入生成的vendor/composer/autoload_namespaces.php中。
 * PSR-4: $user = new \App\User(); 时，对于 PSR-4 代码目录结构是： app/User.php 。即目录不需要包含最外层的命名空间 App 
@@ -162,6 +161,9 @@ composer config -g --unset repos.packagist
 * files:手动指定供直接加载的文件（相对于 vendor 目录）所以也不需要满足 PSR-0 和 PSR-4 规范。
 
 ```
+composer config repositories.repo-name vcs https://github.com//repo
+composer config -g  repositories.tmo composer https://packages.tmogroup.asia/
+
  "autoload": {
     "psr-0": {
       "Bpp\\": "bpp/",
@@ -199,6 +201,8 @@ composer list  # 列出所有可用的命令
 composer init  # 新建文件 composer.json
 composer init --require=foo/bar:1.0.0 -n
 composer init --require="twig/twig:1.*" -n --profile # 显示执行时间
+
+composer require /repo:dev-branchname
 
 composer why vlucas/phpdotenv # 确定哪些依赖项需要它
 composer search monolog

@@ -15,6 +15,10 @@ All Submissions you make to Magento Inc. (“Magento") through GitHub are subjec
     - Console
     - Controller
 
+## 概念
+
+* 不能直接获取数据结构：entity one big data can't var_dump
+
 ## install
 
 * 文件有写权限
@@ -116,6 +120,48 @@ bin/magento dev:query-log:enable
 bin/magento admin:user:create --admin-user=henry --admin-password=111111 --admin-email=11111@qq.com --admin-firstname=henry --admin-lastname=li
 ```
 
+## DB
+
+* type
+  - static: 升级数据库
+  - int: 字段添加到到customer_entity_int中,eav_attribute:字段映射表,升级数据就行
+
+```php
+if (version_compare($context->getVersion(), '0.9.2', '<')) {
+    $customerSetup->addAttribute(
+        Customer::ENTITY,
+        'agreed_status',
+        [
+            'type' => 'int',
+            'label' => 'Agreed Status',
+            'input' => 'text',
+            'visible' => true,
+            'required' => false,
+            'system' => false,
+            'sort_order' => 150,
+            'position' => 150
+        ]
+    );
+    $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, 'jde_accountno')
+        ->setData('used_in_forms', ['adminhtml_customer'])
+        ->save();
+}
+
+```
+
+## 获取数据
+
+```php
+Authorization: Bearer <authentication token>
+
+$customer->getId()　　# 通过token获取用户信息
+$customer = $this->customerRepository->getById($customerId);
+```
+
+## observer
+
+hook action
+
 ## auth
 
 * New public and private keys are now associated with your account that you can click to copy
@@ -142,7 +188,7 @@ foreach($product_ids as $id){
 }
 ```
 
-## REST
+## webapi
 
 ## GraphSQL
 
@@ -153,6 +199,24 @@ foreach($product_ids as $id){
 ## 问题
 
 * Error 503 Backend fetch failed：access forbidden by rule, request: "GET /pub/health_check.php HTTP/1.1"
+* Call to a member function getNext() on null in generated/code/Magento/User/Model/User/Interceptor.php/app/code/Magento/Backend/Model/Locale/Manager.php#L96-L100
+
+```
+// Add the following code
+if ($userData) {
+  $userData->___init();
+}
+
+if ($userData && $userData->getInterfaceLocale()) {
+    $interfaceLocale = $userData->getInterfaceLocale();
+} elseif ($this->getGeneralLocale()) {
+    $interfaceLocale = $this->getGeneralLocale();
+}
+```
+
+## 配置后台
+
+
 
 ## 工具
 
