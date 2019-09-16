@@ -1059,8 +1059,14 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 * [vagrant-libvirt/vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt):Vagrant provider for libvirt.
 * [deviantony/docker-elk](https://github.com/deviantony/docker-elk):The ELK stack powered by Docker and Compose.
 * [jessfraz/dockerfiles](https://github.com/jessfraz/dockerfiles):Various Dockerfiles I use on the desktop and on servers. https://blog.jessfraz.com/post/docker-containers-on-the-desktop/
+* [yeszao/dnmp](https://github.com/yeszao/dnmp):Docker LNMP (Nginx, PHP7/PHP5, MySQL, Redis) https://www.awaimai.com/2120.html
 * GUI
-  - Shipyard
+  - [Shipyard](https://github.com/shipyard/shipyard)
+  - https://www.portainer.io/
+  - https://kitematic.com/
+  - https://dockstation.io/ 
+  - Rancher is an open source software platform that enables organizations to run and manage Docker and Kubernetes in production. 
+
 
 ## 工具
 

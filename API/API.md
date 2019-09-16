@@ -7,10 +7,10 @@
 
 ## 文档格式
 
-*   请求地址
-*   请求类型
-*   参数说明
-*   返回结果说明
+* 请求地址
+* 请求类型
+* 参数说明
+* 返回结果说明
 
 ## 状态
 
@@ -478,6 +478,7 @@ apidoc -i myapp/ -o apidoc/ -t mytemplate/
     - json-server
     - node-mock-server
     - node-mocks-http
+    - [nuysoft/Mock](https://github.com/nuysoft/Mock):A simulation data generator http://mockjs.com
 * HTTP 请求拦截器
     - axios-mock-adapter
     - jquery-mockjax

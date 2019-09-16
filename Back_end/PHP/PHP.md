@@ -1817,7 +1817,7 @@ echo (new Outer)->func2()->func3(); # 6
 * `__destruct()`
 * `__call()`
 * `__callStatic()`
- `__clone()`
+* `__clone()`
 * `__get()`:读取不可访问属性的值
 * `__set()`:在给不可访问属性赋值时
 * `__isset()`:当对不可访问属性调用 isset() 或 empty() 时
@@ -1827,7 +1827,6 @@ echo (new Outer)->func2()->func3(); # 6
 * `__toString()`:用于一个类被当成字符串时应怎样回应
 * `__invoke()`:当尝试以调用函数的方式调用一个对象时
 * `__set_state()`
-
 
 ```php
 class CallableClass
@@ -1839,6 +1838,16 @@ class CallableClass
 $obj = new CallableClass;
 $obj(5);
 var_dump(is_callable($obj));
+```
+
+## 反射
+
+```php
+# 利用反射机制创建实例
+$reflector = new reflectionClass(User::class);
+$constructor = $reflector->getConstructor();
+$dependencies = $constructor->getParameters();
+$user = $reflector->newInstanceArgs($dependencies = []);
 ```
 
 ## 杂项
@@ -2435,18 +2444,18 @@ class backendBaseController extends baseController
 
 ## 控制反转（Inversion of Control，缩写为IoC）
 
-* 面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度.为相互依赖的组件提供抽象，将依赖的获取交给第三方来控制，即依赖对象不在被依赖的模块中获取
-* 常见的方式
+* 面向对象编程中的一种设计原则，可以用来减低代码之间的耦合度，为相互依赖的组件提供抽象，将依赖的获取交给第三方来控制，即依赖对象不在被依赖的模块中获取
+* 方式
     - 依赖注入（Dependency Injection，简称DI）：构造函数注入 或者 属性注入
     - 依赖查找（Dependency Lookup）
-* 通过控制反转，对象在被创建的时候，由一个调控系统内所有对象的外界实体，将其所依赖的对象的引用传递(注入)给它
+* 控制反转：对象在被创建的时候，由一个调控系统内所有对象的外界实体，将其所依赖的对象的引用传递(注入)给它，由外部负责其依赖需求
 * 依赖倒置(Dependence Inversion Principle,DIP) 是一种抽象的软件设计原则
     - 高层模块不应依赖于低层模块，底层的模块要依赖于高层模块定义的接口,两者应该依赖于抽象
     - 抽象不应该依赖于实现，实现应该依赖于抽象
     - 电脑就相当于是高层模块，而 U盘、鼠标等就相当于是底层模块。电脑定义了一个插口（接口），可以供其他的设备插入使用，但是电脑并不依赖于具体要插入的设备，它只是定义好了一个接口规范，只要是符合这个接口规范的设备都可以插入到这台电脑上来使用
-* IOC 容器主要功能就是：
-    - 自动的管理依赖关系，避免手工管理的缺陷。
-    - 再需要使用依赖的时候自动的为我们注入所需依赖。
+* IOC 容器功能：
+    - 自动的管理依赖关系，避免手工管理的缺陷
+    - 再需要使用依赖的时候自动的为我们注入所需依赖
     - 管理对象的声明周期
     - 利用反射类来完成容器的自动注入
 
@@ -2873,6 +2882,11 @@ exit;
 * [xianyunyh/PHP-Interview](https://github.com/xianyunyh/PHP-Interview):PHP面试整理的资料。包括PHP、MySQL、Linux、计算机网络等资料
 * [金题](https://www.jintix.com/)
 * [colinlet/PHP-Interview-QA](https://github.com/colinlet/PHP-Interview-QA):PHP面试问答
+
+## 工具
+
+* [https://phar.io](https://phar.io):The PHAR Installation and Verification Environment (PHIVE)
+* [sebastianfeldmann/phpbu](https://github.com/sebastianfeldmann/phpbu):PHP Backup Utility - Creates and encrypts database and file backups, syncs your backups to other servers or cloud services and assists you monitor your backup process https://phpbu.de
 
 ## 参考
 
