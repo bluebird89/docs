@@ -23,6 +23,8 @@
     - TickTick
 * flowchart
     - [Zen Flowchart](https://www.zenflowchart.com)
+* 輸入法
+    -  [Rime](https://rime.im)
 
 ## cheatsheets
 
