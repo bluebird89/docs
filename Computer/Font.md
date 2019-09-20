@@ -1,5 +1,7 @@
 # Font
 
+* [microsoft/cascadia-code](https://github.com/microsoft/cascadia-code):This is a fun, new monospaced font that includes programming ligatures and is designed to enhance the modern look and feel of the Windows Terminal.
+
 ## 工具
 
 * [fonttools/fonttools](https://github.com/fonttools/fonttools):A library to manipulate font files from Python.

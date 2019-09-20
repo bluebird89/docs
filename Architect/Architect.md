@@ -242,6 +242,7 @@
 
 ## 参考
 
+* [xingshaocheng/architect-awesome](https://github.com/xingshaocheng/architect-awesome)
 * [优秀架构师必须掌握的架构思维](http://www.infoq.com/cn/articles/architecture-thought)
 * [《微服务架构实战 160 讲》](https://time.geekbang.org/course/intro/84)
 * [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer):Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.
