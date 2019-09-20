@@ -1521,8 +1521,7 @@ ccache gcc foo.c
 * [niieani/bash-oo-framework](https://github.com/niieani/bash-oo-framework):Bash Infinity is a modern boilerplate / framework / standard library for bash
 * [ericfreese/rat](https://github.com/ericfreese/rat):Compose shell commands to build interactive terminal applications
 * [kovidgoyal/kitty](https://github.com/kovidgoyal/kitty):A cross-platform, fast, feature full, GPU based terminal emulator
-* 自动更正命令
-    - [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
+* [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
 * [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
 * [sindresorhus/fkill-cli](https://github.com/sindresorhus/fkill-cli):Fabulously kill processes. Cross-platform.
 * [tartley/colorama](https://github.com/tartley/colorama):Simple cross-platform colored terminal text in Python
@@ -1549,6 +1548,7 @@ ccache gcc foo.c
 * [dylanaraps/pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):📖 A collection of pure bash alternatives to external processes.
 * [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)：A curated list of awesome command-line frameworks, toolkits, guides and gizmos. Inspired by awesome-php.
 * [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
+* [fengyuhetao/shell](https://github.com/fengyuhetao/shell):Linux命令行与shell脚本编程大全案例
 * [Bash Guide for Beginners](https://www.tldp.org/LDP/Bash-Beginners-Guide/html/)
 * [Bash Reference Manual](https://tiswww.case.edu/php/chet/bash/bashref.html)
 * [Bash scripting cheat sheet](https://devhints.io/bash)

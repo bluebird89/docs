@@ -2,8 +2,12 @@
 
 ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.
 
+* 由雅虎开发并开源给 Apache，用来实现分布式协调服务，使用 Java 语言开发，是 Google Chubby 的开源实现
+* 一个典型的分布式数据一致性的解决方案，为分布式应用提供了高效且可靠的分布式协调服务，提供了诸如统一命名服务、配置管理和分布式锁等分布式的基础服务，分布式应用程序可以基于它实现诸如数据发布/订阅、负载均衡、命名服务、分布式协调/通知、集群管理、Master 选举、分布式锁和分布式队列等功能
 * 一个开放源代码的分布式协调服务。它具有高性能、高可用的特点，同时也具有严格的顺序访问控制能力（主要是写操作的严格顺序性)
 * 基于对 ZAB 协议（ZooKeeper Atomic Broadcast，ZooKeeper 原子消息广播协议）的实现，能够很好地保证分布式环境中数据的一致性
+    - 基本实现思路和 Paxos/Raft 类似，都有 Leader 和 Follower 的概念，以及选举和数据同步机制
+    - ZAB 设计目标是构建高可用的分布式数据主备系统，而 Paxos 算法则用于构建一个分布式的一致性状态机系统。
     - 两种模式
         + 恢复模式（选主）：服务启动或者在领导者崩溃后。领导者被选举出来，且大多数Server完成了和 leader的状态同步以后，恢复模式就结束了
         + 广播模式（同步）
@@ -20,6 +24,7 @@ ZooKeeper is a centralized service for maintaining configuration information, na
         + 偏序是指如果一个消息b在消息a后被同一个发送者发布，a必将排在b前面
 * 缺点
     - 不适合用作海量数据存储，取而代之的可以采用数据库或者分布式文件系统等
+    - 使用 Zookeeper 作为注册中心的话，需要安装 Java 运行时环境，此外，Zookeeper 需要胖客户端，每个服务节点需要通过对应语言的 SDK 与 Zookeeper 进行通信，如果通过 HTTP API 进行服务注册和发现的话，还要自行维护服务消费者与服务提供者之间的健康检查。
 
 ## 原理
 
@@ -49,6 +54,10 @@ ZooKeeper is a centralized service for maintaining configuration information, na
     - 客户端在连接 ZooKeeper 服务集群时，会按照一定的随机算法选择集群中的某台服务器，然后和它共同创建一个 TCP 连接，使客户端连上到那台服务器
     - 当那台服务器失效时，客户端自动会重新选择另一台服务器进行连接，从而保证服务的连续性
 * 目录服务
+    - 提供基于类似文件系统的目录节点树的方式来实现数据存储
+    - 每个子目录项都被称作为 znode，这个 znode 是被它所在的路径唯一标识
+    - znode 可以有子节点目录，并且每个 znode 可以存储数据并且可以对应多个版本
+    - znode 可以被监控，包括这个目录节点中存储的数据的修改，子节点目录的变化等，一旦变化可以通知设置监控的客户端，这个是 Zookeeper 的核心特性，也正是基于这一特性，可以将其作为注册中心实现服务注册和发现.Dubbo 默认就推荐基于 Zookeeper 作为注册中心
     - ZooKeeper启动奇数个进程，来形成一个小的目录服务集群。这个集群会提供给所有其他进程，进行读写其巨大的"配置树"的能力
     - 这些数据不仅仅会存放在一个ZooKeeper进程中，而是会根据一套非常安全的算法，让多个进程来承载
     - 由于ZooKeeper的数据存储结构，是一个类似文件目录的树状系统，把每个进程都绑定到其中一个"分枝"上，然后通过检查这些"分支"，来进行服务器请求的转发，就能简单的解决请求路由（由谁去做）的问题
@@ -102,6 +111,61 @@ ZooKeeper is a centralized service for maintaining configuration information, na
         + Leader根据follower的zxid确定同步点；
         + 完成同步后通知follower 已经成为uptodate状态；
         + Follower收到uptodate消息后，又可以重新接受client的请求进行服务了。
+
+## 安装
+
+* 模式
+    - 单机模式：只有一台机器的集群
+    - 集群模式
+
+```sh
+brew install zookeeper
+
+# /usr/local/etc/zookeeper/zoo.cfg
+# The number of milliseconds of each tick
+tickTime=2000 # ZK 的时间单元，ZK 中所有时间都是以这个时间单元为基础进行整数倍配置
+# The number of ticks that the initial▫
+# synchronization phase can take
+initLimit=10 # Follower 在启动过程中，会从 Leader 同步所有最新数据，然后确定自己能够对外服务的起始状态，Leader 允许 Follower 在 `initLimit` 时间内完成这个工作。
+# The number of ticks that can pass between▫
+# sending a request and getting an acknowledgement
+syncLimit=5 # 在运行过程中，Leader 负责与 ZK 集群中所有机器进行通信，例如通过一些心跳检测机制来检测机器的存活状态。如果 Leader 发出心跳包在 `syncLimit` 之后，还没有从 Follower 那里收到响应，那么就认为这个 Follower 已经不在线了。
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just▫
+# example sakes.
+dataDir=/usr/local/var/run/zookeeper/data # 存储快照文件 snapshot 的目录，默认情况下，事务日志也会存储在这里。
+# the port at which the clients will connect
+clientPort=2181 # ZK 客户端连接 ZK 服务器的端口，即对外服务端口，默认设置为 2181。
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+#maxClientCnxns=60 # 单个客户端与单台服务器之间的连接数的限制，是 ip 级别的，默认是 60，如果设置为 0，那么表明不作任何限制
+#
+# Be sure to read the maintenance section of the▫
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAd    min.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+#autopurge.snapRetainCount=3 # 参数和下面的参数搭配使用，用于指定需要保留的文件数目，默认是保留 3 个。
+# Purge task interval in hours
+# Set to "0" to disable auto purge feature
+#autopurge.purgeInterval=1 # # ZK 提供了自动清理事务日志和快照文件的功能，这个参数指定了清理频率，单位是小时，需要配置一个 1 或更大的整数，默认是 0，表示不开启自动清理功能。
+# `server.x=[hostname]:nnnnn[:nnnnn]`：对应上面的伪集群配置，x 是一个数字，与 myid 文件（该文件在 ZK 服务器启动手动创建，保存在 `dataDir` 配置的目录下，其中只有一个数字，即一个 Server ID）中的 id 是一致的，右边配置的是对应机器的 IP 地址和两个端口，第一个端口用于 Follower 和 Leader 之间的数据同步和其它通信，第二个端口用于 Leader 选举过程中投票通信。
+server.1=127.0.0.1:2888:3888 
+
+zkServer start|stop|restart
+touch /usr/local/var/run/zookeeper/data/myid
+echo 1 >> /usr/local/var/run/zookeeper/data/myid
+telnet 127.0.0.1 2181
+
+stat # 打印服务端信息
+
+zkCli -server 127.0.0.1:2181
+create /hello zookeeper
+ls /
+set /hello zk
+delete /hello
+```
 
 ## API
 
