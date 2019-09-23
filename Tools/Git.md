@@ -852,7 +852,7 @@ git tag -d TAG1 TAG2 TAG3 # 删除本地tag
 git push [remote] [tagname]  # 提交指定tag
 git push origin v2.1
 git push [remote] --tags  # 提交所有tag
-git push origin --tags
+git push origin --tags # 不推　commit
 
 git push origin --delete origin v1.0.0
 git push origin :refs/tags/old # 删除远程指定tag

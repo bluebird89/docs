@@ -208,6 +208,7 @@
 * [aosabook/500lines](https://github.com/aosabook/500lines):500 Lines or Less
 * [斯坦福大学公开课：编程方法学28集全](https://www.bilibili.com/video/av8048664)
 * [hellerve/programming-talks](https://github.com/hellerve/programming-talks):Awesome & interesting talks about programming
+* [charlax/professional-programming](https://github.com/charlax/professional-programming):A collection of full-stack resources for programmers.
 
 ## 工具
 
