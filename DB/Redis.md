@@ -6,8 +6,8 @@ Redis is an in-memory database that persists on disk. The data model is key-valu
 
 * 一个Key-Value类型的内存数据库，很像memcached，整个数据库统统加载在内存当中进行操作，定期通过异步操作把数据库数据flush到硬盘上进行保存
 * 丰富的数据结构，支持二进制的String，List，Hash，Set及Ordered Set等数据类型操作
-* 性能：纯内存操作，每秒可以处理超过，单线程操作，避免了线程切换和锁的性能消耗，10万次读写操作
-    - 为了达到最快的读写速度将数据都读到内存中，并通过异步的方式将数据写入磁盘。所以redis具有快速和数据持久化的特征。如果不将数据放在内存中，磁盘I/O速度为严重影响redis的性能
+* 性能：纯内存操作，单线程操作，避免了线程切换和锁的性能消耗，10万次读写操作
+    - 为了达到最快的读写速度将数据都读到内存中，并通过异步的方式将数据写入磁盘
     - 利用队列技术将并发访问变为串行访问，消除了传统数据库串行控制的开销
     - 单线程简化数据结构和算法的实现
 * 单个value的最大限制是1GB，不像 memcached只能保存1MB的数据
@@ -42,7 +42,7 @@ Redis is an in-memory database that persists on disk. The data model is key-valu
         + 为了主从复制的速度和连接的稳定性，Master和Slave最好在同一个局域网内
         + 尽量避免在压力很大的主库上增加从库
         + 主从复制不要用图状结构，用单向链表结构更为稳定，即：Master <- Slave1 <- Slave2 <- Slave3... 这样的结构方便解决单点故障问题，实现Slave对Master的替换。如果Master挂了，可以立刻启用Slave1做Master，其他不变。
-* 可持久化（RDB与AOF）,Redis 重启后数据不丢失
+* 持久化（RDB与AOF）,Redis 重启后数据不丢失
 * 数据分片模型：将每个节点看成都是独立的master，然后通过业务实现数据分片，将每个master设计成由一个master和多个slave组成的模型
 * 管道：Redis管道是指客户端可以将多个命令一次性发送到服务器，然后由服务器一次性返回所有结果。管道技术在批量执行命令的时候可以大大减少网络传输的开销，提高性能。
 * 事务：Redis事务是一组命令的集合。一个事务中的命令要么都执行，要么都不执行。如果命令在运行期间出现错误，不会自动回滚。管道与事务的区别：管道主要是网络上的优化，客户端缓冲一组命令，一次性发送到服务器端执行，但是并不能保证命令是在同一个事务里面执行；而事务是原子性的，可以确保命令执行的时候不会有来自其他客户端的命令插入到命令序列中。
@@ -1119,6 +1119,13 @@ aof-user-rdb-preamble no
 * Limit：可滑动时间窗口，如应用于Session，Memcached需每次传Key和Value。
 * redis的定期快照不能保证数据不丢失
 * redis的AOF会降低效率，并且不能支持太大的数据量
+* 失效
+    - 主动过期: Redis对数据是惰性过期，当一个key到了过期时间，Redis也不会马上清理，但如果这个key过期后被再次访问，Redis就会主动将它清理掉。
+    - 被动过期: 如果过期的Key一直没被访问，Redis也不会一直把它放那不管，它会每秒10次(默认配置)的执行以下的清理工作：
+        + 随机从所有带有过期时间的Key里取出20个
+        + 如果发现有过期的，就清理
+        + 如果这里有25%的Key都是过期的，就继续回到第一步再来一次
+        + 同时会判断这20个里过期Key的清理时间，是否超过25% CPU时间(默认25ms)，如果超过了，也不会再继续清理，这个可以保证Redis的CPU不会被占用过长的时间
 
 ## 性能
 
@@ -1137,15 +1144,6 @@ aof-user-rdb-preamble no
     +  -l  生成循环，永久执行测试
     +  -t  仅运行以逗号分隔的测试命令列表
     +  -I  Idle 模式。仅打开 N 个 idle 连接并等待。
-
-## 失效
-
-* 主动过期: Redis对数据是惰性过期，当一个key到了过期时间，Redis也不会马上清理，但如果这个key过期后被再次访问，Redis就会主动将它清理掉。
-* 被动过期: 如果过期的Key一直没被访问，Redis也不会一直把它放那不管，它会每秒10次(默认配置)的执行以下的清理工作：
-    - 随机从所有带有过期时间的Key里取出20个
-    - 如果发现有过期的，就清理
-    - 如果这里有25%的Key都是过期的，就继续回到第一步再来一次
-    - 同时会判断这20个里过期Key的清理时间，是否超过25% CPU时间(默认25ms)，如果超过了，也不会再继续清理，这个可以保证Redis的CPU不会被占用过长的时间
 
 ## Culster
 
@@ -1327,4 +1325,3 @@ public void delBigList(String host, int port, String password, String bigListKey
 * [redis 数据类型详解 以及 redis适用场景场合](http://www.cnblogs.com/mrhgw/p/6278619.html)
 * [使用Redis实现分布式锁及其优化](https://juejin.im/entry/5a0280d551882546d71ec42e)
 * [Redis快速入门及应用](https://juejin.im/entry/5a003862f265da430406042c)
-* [](https://mp.weixin.qq.com/s?__biz=MzU0OTk3ODQ3Ng==&mid=2247486004&idx=1&sn=5b85ccd76638c5b35c472d77e75eeaf9&chksm=fba6e237ccd16b219655f02084e2d61312a4e0b643fea88c5fa843bf0fd9baea7514f9073777)

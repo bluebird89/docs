@@ -355,6 +355,7 @@
 * 暗黑破坏神2
 * 魔兽世界
 * 守望先锋
+* [群星stellaris]（https://stellaris.paradoxwikis.com/Economy）
 * Minecraft
     +   [Mojang/brigadier](https://github.com/Mojang/brigadier):Brigadier is a command parser & dispatcher, designed and developed for Minecraft: Java Edition.
 * WeGame

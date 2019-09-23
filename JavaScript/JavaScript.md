@@ -2776,6 +2776,7 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
   - [oussamahamdaoui/forgJs](https://github.com/oussamahamdaoui/forgJs):ForgJs is a javascript lightweight object validator. Go check the Quick start section and start coding with love
 * validate
   - [chriso/validator.js](https://github.com/chriso/validator.js):String validation
+  - [hapijs/joi](https://github.com/hapijs/joi): The most powerful data validation library for JS
 * Grid
   - [e-oj/Magic-Grid](https://github.com/e-oj/Magic-Grid):A simple, lightweight Javascript library for dynamic grid layouts. https://www.npmjs.com/package/magic-grid
 * bundler

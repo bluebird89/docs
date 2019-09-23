@@ -14,7 +14,7 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
 
 ## 原理
 
-不要用操作dom的思维去用Vue，用操作数据的思维去用吧
+* 不要用操作dom的思维去用Vue，用操作数据的思维去用吧
 
 ### 构造器
 
@@ -25,8 +25,6 @@ Vue实例实质上就是MVVM模式（Model-View-ViewModel），每个Vue实例�
 * 要挂载的元素
 * 方法
 * 生命周期回调
-
-![生命周期](./../../_static/lifecycle.png "Optional title")
 
 ```js
 var data = { a: 1 }
@@ -51,6 +49,8 @@ var MyComponent = Vue.extend({
 // the pre-defined extension options
 var myComponentInstance = new MyComponent()
 ```
+
+![生命周期](./../../_static/lifecycle.png "Optional title")
 
 ## 语法
 
@@ -225,6 +225,7 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
   - [Eagle.js](https://github.com/Zulko/eagle.js)
   - [jdf2e/nutui](https://github.com/jdf2e/nutui):京东风格的轻量级移动端Vue组件库 (A Vue.js 2.0 UI Toolkit for Mobile Web) https://nutui.jd.com
   -  [HEYUI](https://www.heyui.top/):基于Vue.js的高质量UI组件库
+* [gridsome](https://gridsome.org):A Vue.js framework for Headless CMSs
 
 ## 参考
 
