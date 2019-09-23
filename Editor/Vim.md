@@ -743,6 +743,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [coolwanglu/vim.js](https://github.com/coolwanglu/vim.js):JavaScript port of Vim http://coolwanglu.github.io/vim.js/emterpreter/vim.html
 * [junegunn/fzf](https://github.com/junegunn/fzf):🌸 A command-line fuzzy finder
 * [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar):vinegar.vim: Combine with netrw to create a delicious salad dressing https://www.vim.org/scripts/script.php?script_id=5671
+* [neoclide/coc.nvim](https://github.com/neoclide/coc.nvim):Intellisense engine for vim8 & neovim, full language server protocol support as VSCode https://salt.bountysource.com/teams/coc-nvim
 
 ## 教程
 
