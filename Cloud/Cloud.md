@@ -1,4 +1,16 @@
 # 云服务
+
+## 过程
+
+* PaaS (Platform as a Service)
+    - Google App Engine（简称GAE）：允许用自己喜欢的语言如Java, Python来开发应用程序，然后部署到GAE上运行，完全不用考虑应用程序的伸缩问题，GAE可以帮助你从0扩展到全球规模。
+* IaaS（Infrastructure as a Service）：计算，存储，数据库，队列，或者是虚拟机， AWS
+* 微服务
+    - Netflix不但在生产环境大规模使用微服务， 还为Spring Cloud贡献了大量的、著名的开源组件，包括Eureka， Hystrix， Zuul ，Ribbon 等，可以说是功勋卓著。
+* Service Mesh 说：现在在微服务的执行过程中，需要一个依赖库，实现微服务的发现，监控和保护， 这个依赖库和和业务密切绑定,把依赖库和业务剥离开.Google趁机落子，和IBM等大佬提出了一个Service Mesh的框架，叫做Istio
+* Google还有gRPC来进行微服务之间的调用，支持多语言，多种平台，并且面向HTTP/2.
+* Google提出的序列化协议是Protocol Buffers，这个序列化机制也是语言中立，平台中立的，性能高，数据传输过程中压缩得比较小。
+
 # 本地优先（local-first）
 
 * 云应用（Cloud apps），也可以将它们称为“ SaaS ”或“基于 Web 的应用程序”。它们的共同点是，通常通过 Web 浏览器或移动应用访问它们，将数据存储在服务器上。

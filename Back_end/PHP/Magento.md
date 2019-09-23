@@ -125,6 +125,50 @@ bin/magento admin:user:create --admin-user=henry --admin-password=111111 --admin
 * type
   - static: 升级数据库
   - int: 字段添加到到customer_entity_int中,eav_attribute:字段映射表,升级数据就行
+InstallSchema.php
+This file is executed first just after your modules registration
+  (Means just after your module & its version entries are done in to the
+  table -> 
+setup_module
+
+). This file is used to create tables with
+  their columns attribute into your database that are later used by the
+  new installed module.
+InstallData.php
+This file is executed after 
+InstallSchema.php
+
+. It is used to add
+  data to the newly created table or any existing table.
+UpgradeSchema.php
+This file comes with the module & runs only then, if you are already
+  having that modules previous version installed in your magento(Means
+  it has entry of its previous version into the table ->
+  
+setup_module
+
+). It is used to manipulate the table related to the
+  module(Means it is used to alter the table schema means columns
+  attribute & to add new column into that table).
+UpgradeData.php
+This file runs after 
+UpgradeSchema.php
+
+. It is having the same
+  concept as 
+InstallData.php
+
+ has but using this file you can
+  change/alter the database contents without the use of model files. You
+  can also use this file to add new content to the database same us
+  
+InstallData.php
+
+. But same like 
+UpgradeSchema.php
+
+ it will also runs only then if you are having that modules previous version
+  installed in your magento.
 
 ```php
 if (version_compare($context->getVersion(), '0.9.2', '<')) {
@@ -192,16 +236,84 @@ foreach($product_ids as $id){
 
 ## GraphSQL
 
+* 客户端工具会自动拉取文档
+* 使用快捷鍵生成query
+
 ## varnish
 
 * 更新缓存
+
+## 后台
+
+* 配置level:website->store->storeview
+* storecode: all stores 添加配置
+
+```xml
+<group id="success_tracker" translate="label"   type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+    <label>Success Tracker</label>
+    <field id="success_tracker_blockid" translate="label comment" type="select" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Success Tracker T&amp;C Block</label>
+        <source_model>Tmo\Backend\Model\Config\Source\Blocks</source_model>
+    </field>
+</group>
+```
+
+## Exception
+
+* magento 定義各種exception
+    - \Magento\Framework\Exception\LocalizedException
+
+```php
+ public function massCopyToCheckout($customerId, $cartId, $itemIds = []) {
+        try {
+            if (!empty($itemIds)) {
+                $checkoutQuote = $this->getCheckoutQuote($customerId);
+                $cartItems = $this->quoteItemRepository->getList($cartId);
+
+                foreach ($itemIds as $itemId) {
+                    $itemAlreadyInCart = false;
+                    foreach ($checkoutQuote->getItems() as $item) {
+                        if ($item->getLinkedItemId() == $itemId) {
+                            $itemAlreadyInCart = true;
+                            continue;
+                        }
+                    }
+
+                    if (!$itemAlreadyInCart) {
+                        foreach ($cartItems as $item) {
+                            if ($item->getId() == $itemId) {
+                                $checkoutItem = clone $item;
+                                $checkoutItem->setId(null);
+                                $checkoutItem->setLinkedItemId($item->getId());
+                                $checkoutQuote->addItem($checkoutItem);
+                            }
+                        }
+                    }
+                }
+
+                $checkoutQuote->collectTotals();
+                $this->quoteRepository->save($checkoutQuote);
+
+                return true;
+            }
+        } catch (LocalizedException $e) {
+            throw new LocalizedException(__('Parameter itemIds may be wrong'));
+        }
+    }
+
+# 沒有exception,抓不到
+
+```
 
 ## 问题
 
 * Error 503 Backend fetch failed：access forbidden by rule, request: "GET /pub/health_check.php HTTP/1.1"
 * Call to a member function getNext() on null in generated/code/Magento/User/Model/User/Interceptor.php/app/code/Magento/Backend/Model/Locale/Manager.php#L96-L100
+* composer 後需要從新開啓cache
+* new extension 返回404
+* generate 權限問題：強力刪除，magento 密碼 magento
 
-```
+```php
 // Add the following code
 if ($userData) {
   $userData->___init();
@@ -212,6 +324,18 @@ if ($userData && $userData->getInterfaceLocale()) {
 } elseif ($this->getGeneralLocale()) {
     $interfaceLocale = $this->getGeneralLocale();
 }
+
+## accountLogin.php 权限验证：郵箱登錄問題：因爲websiteId 的問題
+$customer = $this->accountAuthenticator->authenticateWithoutPassword($accountId); 
+
+public function authenticateWithoutPassword($username) {
+    try {
+        $customer = $this->customerRepository->get($username);
+    } catch (NoSuchEntityException $e) {
+        throw new InvalidEmailOrPasswordException(__('Invalid login or password.'));
+    }
+
+
 ```
 
 ## 配置后台

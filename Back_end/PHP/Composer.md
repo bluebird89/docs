@@ -195,6 +195,7 @@ composer config -g  repositories.tmo composer https://packages.tmogroup.asia/
 * 考虑缓存，dist包优先:Composer会自动存档你下载的dist包(`~/.composer/cache/files/`)。默认设置下，dist包用于加了tag的版本，例如"symfony/symfony": "v2.1.4"，或者是通配符或版本区间，"2.1.\*"或">=2.2,<2.3-dev"
 * Github允许你下载某个git引用的压缩包。为了强制使用压缩包，而不是克隆源代码，可以使用install和update的--prefer-dist选项。
 * 考虑修改，源代码优先:--prefer-source
+* composer remove 更新很多版本库
 
 ```sh
 composer list  # 列出所有可用的命令
