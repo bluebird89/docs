@@ -96,7 +96,6 @@ bin/magento setup:db-data:upgrade
 
 bin/magento module:{enable/disable} AcmeWidgets_ProductPromotor
 
-
 bin/magento indexer:reindex
 
 bin/magento deploy:mode:show
