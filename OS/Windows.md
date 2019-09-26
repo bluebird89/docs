@@ -182,27 +182,33 @@ FTYPE pngfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo V
 * Win + Home：最小化所有窗口，除了当前激活窗口
 * win + p:投影
 * 命令行：WIN+R
-
   - 输入"msconfig"，弹出系统设置界面，可设置禁止、允许进程开机自启动；
   - 输入"psr"后回车：打开步骤记录器；
   - 输入"mip"，启动数学公式手写板；
   - cmd进入命令行
+* 快捷方式可以设置快捷键
+* Shift+Tab（返回上一个选项或上一栏）
+* Ctrl+Shift+Tab（切换至上一个标签）
+* CTRL+鼠标左键，拖动文件、文件夹都可以立马生成文件对应的副本
+* Win+T to cycle through the taskbar icons
+* Win + d：删除文件
 
 ```sh
 ipconfig /flushdns # 刷新域名
 ```
 
-快捷方式可以设置快捷键
+## 添加自启动 add startup
 
-- Shift+Tab（返回上一个选项或上一栏）
-- Ctrl+Shift+Tab（切换至上一个标签）
-- CTRL+鼠标左键，拖动文件、文件夹都可以立马生成文件对应的副本
-- Win+T to cycle through the taskbar icons
-- Win + d：删除文件
+* cmd: shell:startup
+* get C:\Users\Henry\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+* add shortcuts into folder
 
 ## 服务管理
 
-* `sc delete jenkins`
+* 获取服务名称
+  - 在服务列表中，找到服务项
+  - 点击找到服务名称
+* 删除服务项:`sc delete jenkins`
 
 ### [cmder + gow](http://bliker.github.io/cmder/)
 
