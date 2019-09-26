@@ -117,56 +117,81 @@ ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/loca
 
 ## mac
 
-- command + 左键：代码定义处
-- Command+F 搜索
-- Command+R 替换
-- Command+G 查找下一个
-- Command+shift+G 查找下一个
-- Command+shift+F 按路径搜索
-- Command+shift+R 按路径替换
-- Command+O 跳转到某个类
-- Command+shift+O 跳转到某个文件
-- Command+alt+O 跳转到某个符号
-- F12 打开之前打开的工具窗口（TODO、终端等）
-- Command+L 弹出输入框，指定跳转到第几行
-- Command+E 弹出对话框，可以选择最近打开过的文件
-- Command+B 跳转到变量声明处
-- Control+J 获取变量或函数相关信息（类型、注释等，注释是拿上一行的注释）
-- Command+Y 小浮窗显示变量或函数声明时的行
-- F2,shift+F2 切换到上\下一个突出错误的位置
-- F3 添加书签
-- alt+F3 添加带助记的书签
-- alt+1,alt+2... 切换到相应助记的书签位置
-- Command+F3 打开书签列表
-- 双击shift 弹出小浮窗搜索所有
-- Command+1,Command+2... 打开各种工具窗口
-- Command+~切换项目 Command+shift+~ 反向切换项目 (在打开的不同项目中切换) -
+* command + 左键：代码定义处
+* Command+F 搜索
+* Command+R 替换
+* Command+G 查找下一个
+* Command+shift+G 查找下一个
+* Command+shift+F 按路径搜索
+* Command+shift+R 按路径替换
+* Command+O 跳转到某个类
+* Command+shift+O 跳转到某个文件
+* Command+alt+O 跳转到某个符号
+* F12 打开之前打开的工具窗口（TODO、终端等）
+* Command+L 弹出输入框，指定跳转到第几行
+* Command+E 弹出对话框，可以选择最近打开过的文件
+* Command+B 跳转到变量声明处
+* Control+J 获取变量或函数相关信息（类型、注释等，注释是拿上一行的注释）
+* Command+Y 小浮窗显示变量或函数声明时的行
+* F2,shift+F2 切换到上\下一个突出错误的位置
+* F3 添加书签
+* alt+F3 添加带助记的书签
+* alt+1,alt+2... 切换到相应助记的书签位置
+* Command+F3 打开书签列表
+* 双击shift 弹出小浮窗搜索所有
+* Command+1,Command+2... 打开各种工具窗口
+* Command+~切换项目 Command+shift+~ 反向切换项目 (在打开的不同项目中切换) -
+* 全局搜索（command + shift + F）
+* 显示类中的方法 （command + 7）
+* 函数追踪 （command +鼠标点击）
+* 单行注释/取消（command + /）
+* 输入行号跳到某一行（command + l）
+* 列出打开的文件（command + e）
+* 删除当前行（command + x）
+* 复制当前行（command + d）
+* 跳到变量申明处（command + b）
+* 格式化代码（command + option + l）
+* 关闭当前窗口 （command + w）
+* 项目刷新 （command + option + y）
+* 多行注释（command + option + /）
+* 查找//@todo标签（command + 6）
+* 列出左侧文件（command + 1）
+* 切换大小写（command + shift + u）
+* 复制（command + c）
+* 粘贴（command + v）
+* 撤销（command + z）
+* 配置文件头默认注释:IDE settings->Editor->File and Code Templates->PHP File Header。
+* 设置注释不顶格:IDE settings->Editor->Code Style->PHP 去掉勾 Line comment at first column。
+* 去掉右上角浏览器:IDE settings->tools ->WebBrowsers  去掉选中即可。
+* PHPStorm + CodeSniffer设置:IDE settings->Languages & Frameworks->PHP->CodeSniffer-> 配置即可。
+* 选择编码规范:IDE settings->Editor->Inspections->PHP->PHP Code Sniffer validation(打钩) ->Coding Standard 选择规范（PEAR）。
+* 下载地址:http://pear.php.net/package/PHP_CodeSniffer/
 
 ## 编辑
 
-- Command+alt+T 用 (if..else, try..catch, for, etc.)包住
-- alt+↑ 向上选取代码块
-- alt+↓ 向下选取代码块
-- Command+alt+L 格式化代码
-- Control+alt+I 快速调整缩进
-- Command+D 复制代码副本
-- Command+delete 删除当前行
-- Control+Shift+J 清除缩进变成单行
-- shift+回车 快速换行
-- Command+回车 换行光标还在原先位置
-- Command+shift+U 大小写转换
-- Command+shift+[,Command+shift+] 文件选项卡快速切换
-- Command+加号,Command+减号 收缩代码块
-- Command+shift+加号，Command+shift+减号 收缩整个文档的代码块
-- Command+W 关闭当前文件选项卡
-- alt+单击 光标在多处定位
-- Control+shift+J 把下面行的缩进收上来
-- shift + F6 高级修改，可快速修改光标所在的标签、变量、函数等
-- alt+/ 代码补全
-- Control+alt+R 运行项目
-- Command+Control+R 运行Debug
-- Command+F8 添加断点
-- Command+shift+F8 打开断点列表
+* Command+alt+T 用 (if..else, try..catch, for, etc.)包住
+* alt+↑ 向上选取代码块
+* alt+↓ 向下选取代码块
+* Command+alt+L 格式化代码
+* Control+alt+I 快速调整缩进
+* Command+D 复制代码副本
+* Command+delete 删除当前行
+* Control+Shift+J 清除缩进变成单行
+* shift+回车 快速换行
+* Command+回车 换行光标还在原先位置
+* Command+shift+U 大小写转换
+* Command+shift+[,Command+shift+] 文件选项卡快速切换
+* Command+加号,Command+减号 收缩代码块
+* Command+shift+加号，Command+shift+减号 收缩整个文档的代码块
+* Command+W 关闭当前文件选项卡
+* alt+单击 光标在多处定位
+* Control+shift+J 把下面行的缩进收上来
+* shift + F6 高级修改，可快速修改光标所在的标签、变量、函数等
+* alt+/ 代码补全
+* Control+alt+R 运行项目
+* Command+Control+R 运行Debug
+* Command+F8 添加断点
+* Command+shift+F8 打开断点列表
 
 ## 导航
 
