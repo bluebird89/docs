@@ -54,24 +54,16 @@ choco install jdk8
 ```
 
 - 安装 Android Studio
-
   - Android Studio的欢迎界面中选择Configure | SDK Manager
-
     - SDK Platforms(Android 6.0 (Marshmallow):Show Package Details)
-
       - Google APIs
       - Android SDK Platform 23
       - Intel x86 Atom_64 System Image
       - Google APIs Intel x86 Atom_64 System Image
-
     - SDK Tools(Show Package Details)
-
       - Android SDK Build-Tools:23.0.1
-
   - 添加用户变量ANDROID_HOME，sdk地址：D:\Tool\Android\sdk
-
   - 新建项目运行，保证有物理机或者一个AVD
-
 - 项目构建
 
 ```sh
@@ -115,12 +107,33 @@ react-native run-android
 react-native run-ios
 ```
 
-## 开发基础
+## 配置
+
+```
+{
+  "name": "flickr-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "^2.1.8"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:4000"
+}
+
+```
 
 ### JSX
 
-react.js 、react-dom.js 和 Browser.js ，它们必须首先加载。其中，react.js 是 React 的核心库，react-dom.js 是提供与 DOM 相关的功能，Browser.js 的作用是将 JSX 语法转为 JavaScript 语法
-写 HTML 标签或 React 标签，它们终将被转换成原生的 JavaScript 并创建 DOM。
+* react.js 、react-dom.js 和 Browser.js ，它们必须首先加载。其中，react.js 是 React 的核心库，react-dom.js 是提供与 DOM 相关的功能，Browser.js 的作用是将 JSX 语法转为 JavaScript 语法
+* 写 HTML 标签或 React 标签，它们终将被转换成原生的 JavaScript 并创建 DOM。
 
 ```typescript
 <script type="text/babel">
@@ -165,7 +178,6 @@ Flexbox 是css3 里面引入的布局模型－弹性盒子模型，旨在通过�
 * 不同宽度屏幕的适
 * 宽度自动分配
 * 水平垂直居中
-
 * 容器属性
   - flexDirection ： row,row-reverse,colum,colum-reverse   #类型于linerlayout 里的 orientation 属性
   - flexWrap       :   wap,nowap,wap-reverse                      #textview 是否换行
@@ -190,27 +202,24 @@ Flexbox 是css3 里面引入的布局模型－弹性盒子模型，旨在通过�
 
 ## 组件
 
-- React Router是React中使用的路由库，通过管理URL来管理组件及对应的状态。Router组件本身只是一个容器，真正的路由要通过Route组件定义。Router组件支持嵌套路由、支持通配符，能让你轻松控制整个项目的路由结构。
-- Redux跟React没有直接的关系，本身可以支持React、Angular、Ember等等框架。Redux其实是Flux-like 更优雅的写法。通过react-redux这个库，可以方便的将react和redux结合起来：React负责页面展现，Redux负责维护/更新数据状态。大致过程为：当用户在View中触发事件产生Action，Action 进到 Reducer，Reducer根据Action Type去匹配对应处理的动作，然后返回一个新的状态。View则因为检测到状态更新而进行重绘。Redux只有一个Store负责存放整个App的状态，而唯一能改变状态的方法只有发送Action。Redux社区中使用比较多的库有：redux-sagas、redux-gen、redux-loop、redux-effects、redux-side-effects、redux-thunks、rx-redux、redux-rx…
+* React Router是React中使用的路由库，通过管理URL来管理组件及对应的状态。Router组件本身只是一个容器，真正的路由要通过Route组件定义。Router组件支持嵌套路由、支持通配符，能让你轻松控制整个项目的路由结构。
+* Redux跟React没有直接的关系，本身可以支持React、Angular、Ember等等框架。Redux其实是Flux-like 更优雅的写法。通过react-redux这个库，可以方便的将react和redux结合起来：React负责页面展现，Redux负责维护/更新数据状态。大致过程为：当用户在View中触发事件产生Action，Action 进到 Reducer，Reducer根据Action Type去匹配对应处理的动作，然后返回一个新的状态。View则因为检测到状态更新而进行重绘。Redux只有一个Store负责存放整个App的状态，而唯一能改变状态的方法只有发送Action。Redux社区中使用比较多的库有：redux-sagas、redux-gen、redux-loop、redux-effects、redux-side-effects、redux-thunks、rx-redux、redux-rx…
 
 ## 前后端分离
 
-阶段
-- Web端通过ajax调用接口，使用JS把数据渲染到页面上
-- 数据结构和业务逻辑混淆在一起
-
-前后端分离的意义主要在于解耦，解耦后前后端职责划分更明确，前端能做的事也越来越多，比如我们可以在Node层做些监控和日志管理，将SSO登录集成进Node层，使用PM2对Node做多进程管理。这样之后，后端项目就可以做成”微服务”式的架构。
-后端项目”微服务”式架构有如下优势：
-- 每个项目都很有针对性，仅关注某个业务方向。
-- 每个项目可由不同团队独立开发，互不影响，能快速响应需求、及时推出市场。
-- 允许在频繁发布不同项目的同时保持系统其他部分的可用性和稳定性：依赖少、构建速度快 & 上线速度快。
-- 前端只与Node中间层进行数据通信，Node层则通过thrift接口与后端服务进行数据通信；Node 中间层的 API 设计遵循 RESTFul 的架构风格，并且都以 /api/* 做为前缀；Node 中间层可以视情况添加缓存服务
+* Web端通过ajax调用接口，使用JS把数据渲染到页面上
+* 数据结构和业务逻辑混淆在一起
+* 前后端分离的意义主要在于解耦，解耦后前后端职责划分更明确，前端能做的事也越来越多，比如我们可以在Node层做些监控和日志管理，将SSO登录集成进Node层，使用PM2对Node做多进程管理。这样之后，后端项目就可以做成”微服务”式的架构。
+* 后端项目”微服务”式架构有如下优势：
+* 每个项目都很有针对性，仅关注某个业务方向。
+* 每个项目可由不同团队独立开发，互不影响，能快速响应需求、及时推出市场。
+* 允许在频繁发布不同项目的同时保持系统其他部分的可用性和稳定性：依赖少、构建速度快 & 上线速度快。
+* 前端只与Node中间层进行数据通信，Node层则通过thrift接口与后端服务进行数据通信；Node 中间层的 API 设计遵循 RESTFul 的架构风格，并且都以 /api/* 做为前缀；Node 中间层可以视情况添加缓存服务
+* Web端通过ajax调用接口，使用JS把数据渲染到页面上
+* 数据结构和业务逻辑混淆在一起
 
 架构图
 ![架构图](../_static/front_back_seperate.png)
-
-- Web端通过ajax调用接口，使用JS把数据渲染到页面上
-- 数据结构和业务逻辑混淆在一起
 
 ## [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app)
 

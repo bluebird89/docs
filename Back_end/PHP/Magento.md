@@ -2,7 +2,7 @@
 
 All Submissions you make to Magento Inc. (“Magento") through GitHub are subject to the following terms and conditions: (1) You grant Magento a perpetual, worldwide, non-exclusive, no charge, royalty free, irrevocable license under your applicable copyrights and patents to reproduce, prepare derivative works of, display, publically perform, subli… http://www.magento.com
 
-* 默认开启了 N 多个模块，很多是不需要的，靠禁用相应模块这个方法来给产品加速
+* 默认开启了 N 多个模块，靠禁用相应模块这个方法来给产品加速
 * A module is a type of component. A component can be
     - A module (code that extends Magento behavior)
     - A theme (changes the look and feel of your Magento Admin or storefront)
@@ -15,10 +15,6 @@ All Submissions you make to Magento Inc. (“Magento") through GitHub are subjec
     - Console
     - Controller
 
-## 概念
-
-* 不能直接获取数据结构：entity one big data can't var_dump
-
 ## install
 
 * 文件有写权限
@@ -30,12 +26,44 @@ All Submissions you make to Magento Inc. (“Magento") through GitHub are subjec
     - generated
 
 ```sh
+# php.ini cgi.fix_pathinfo line and change the value to 0
+# fpm/php.ini cli/php.ini
+memory_limit = 2G
+max_execution_time = 1800
+dzlib.output_compression = On
+
+# www.conf in an editor.
+user = nginx
+group = nginx
+listen = /run/php-fpm/php-fpm.sock
+listen.owner = nginx
+listen.group = nginx
+listen.mode = 0660
+
+# auth.json
+{
+    "github-oauth": {
+        "github.com": "<your GitHub personal access token>"
+    },
+    "http-basic": {
+        "repo.magento.com": {
+            "username": "<public key>",
+            "password": "<private key>"
+        }
+    }
+}
+
 composer create-project --repository=https://repo.magento.com/ magento/project-community-edition magento2
 
 find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
 find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} + 
 chown -R :www-data . # Ubuntu  chown -R :<your web server group name> 
 chmod u+x bin/magento
+
+ps aux | grep nginx
+usermod -a -G www-data <username>
+groups henry
+sudo chown -R :<web server group> .
 
 ## 通过 http://dowmian//setup 安装
 # 命令行安装
@@ -44,7 +72,7 @@ GRANT ALL PRIVILEGES ON magento.* TO 'magento'@'localhost';
 SHOW GRANTS FOR 'magento'@'localhost';
 flush privileges;
 
-bin/magento setup:install \ 
+php bin/magento setup:install \ 
 --base-url=http://www.magento-dev.com/ \ 
 --db-host=localhost \ 
 --db-name=magento \ 
@@ -61,13 +89,47 @@ bin/magento setup:install \ 
 --timezone=America/Chicago \ 
 --use-rewrites=1
 
+php bin/magento deploy:mode:set developer
+
 php bin/magento setup:upgrade
 php bin/magento setup:di:compile
 php bin/magento setup:static-content:Deploy -f
 chmod -R 777 var/ generated/
+
+# nginx config
+ upstream fastcgi_backend {
+   server  unix:/run/php/php7.2-fpm.sock;
+ }
+
+ server {
+
+   listen 80;
+   server_name www.magento-dev.com;
+   set $MAGE_ROOT /var/www/html/magento2;
+   include /var/www/html/magento2/nginx.conf.sample;
+ }
+ 
+# Sample data
+magento sampledata:deploy
 ```
 
-## 命令
+## Websites, Stores, and Views
+
+* Global->websites->stores->store views(different languages)
+* Magento installations begin with a single website which by default, is called “Main Website.”
+* All stores under the same website share the same Admin and checkout.
+
+## Theme
+
+* Manually
+  - Extract the file which named the file “themes.zip”
+  - Then upload it into webroot folder
+  - php bin/magento setup:upgrade –keep-generated
+  - php bin/magento setup:static-content:deploy
+  - admin panel >> Ves Setup >> Import >> Choose profile json file -> install
+  - Stores >> Configuration >> General >> Web >> Default Pages >> Choose default cms homepage
+
+## Cli
 
 * module:版本号，数据库会记录，包与数据库不一致，命令行无法运行
 
@@ -119,55 +181,388 @@ bin/magento dev:query-log:enable
 bin/magento admin:user:create --admin-user=henry --admin-password=111111 --admin-email=11111@qq.com --admin-firstname=henry --admin-lastname=li
 ```
 
+## WebAPI
+
+* Api
+* Api/Data
+* etc\webapi.xml
+  - Route:This is the URL which will be used to call our API https://{{MagentoBaseURL}}/index.php/rest/V1/custom/{{categoryId}}/products
+  - Service Class – This is the interface class of our API and the main method “getAssignedProducts” will be called with {{categoryId}} as the parameter
+  - Resources- This defines who has the permission to call this API. It could be anonymous (everyone) or self (customer) or specific admin user with specific permission for example Scommerce_Custom::custom which can be added in acl.xml
+    - the ‘self’ permission allows a customer to access the /V1/customers/me route and retrieve information about itself only. In the handling code the PHP session cookie is used to verify that the customer is legitimate and matches the supplied customer_id parameter. Session authentication is discussed further below.
+    - the ‘anonymous’ permission, as its name suggests, allows access to the /V1/customers route – even for a user who’s not logged-in. The route is used to create a customer when data is posted to it, so it makes sense that access needs to be open. This might seem like a security risk, but the POST data also requires a valid form key to process the request.
+* Scommerce\Custom\Api\CategoryLinkManagementInterface.php:the main interface file
+* Authentication
+    - Token  Mobile application  Yes     Yes
+    - OAuth  Third-party application (integration)   No  Yes
+    - Session Javascript application on the frontend site or admin site   Yes     Yes
+* Intergered[Swagger](http://website-base-url/swagger)
+
+```
+<route url="/V1/custom/:categoryId/products" method="GET">
+    <service class="Scommerce\Custom\Api\CategoryLinkManagementInterface" method="getAssignedProducts" />
+    <resources>
+        <resource ref="self"/>
+    </resources>
+</route>
+
+# CategoryLinkManagementInterface.php under Scommerce\Custom\Api\namespace Scommerce\Custom\Api;
+ 
+/**
+ * @api
+ */
+interface CategoryLinkManagementInterface
+{
+    /**
+     * Get products assigned to a category
+     *
+     * @param int $categoryId
+     * @return \Scommerce\Custom\Api\Data\CategoryProductLinkInterface[]
+     */
+    public function getAssignedProducts($categoryId);
+}
+
+
+#  CategoryProductLinkInterface.php under \Scommerce\Custom\Api\Data\
+namespace Scommerce\Custom\Api\Data;
+ 
+/**
+ * @api
+ */
+interface CategoryProductLinkInterface
+{
+    /**
+     * @return string|null
+     */
+    public function getSku();
+ 
+    /**
+     * @param string $sku
+     * @return $this
+     */
+    public function setSku($sku);
+ 
+    /**
+     * @return string|null
+     */
+    public function getName();
+ 
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name);
+ 
+    /**
+     * @return float|null
+     */
+    public function getPrice();
+ 
+    /**
+     * @param float $price
+     * @return $this
+     */
+    public function setPrice($price);
+ 
+    /**
+     * @return int|null
+     */
+    public function getPosition();
+ 
+    /**
+     * @param int $position
+     * @return $this
+     */
+    public function setPosition($position);
+ 
+    /**
+     * @return string|null
+     */
+    public function getCategoryDescription();
+ 
+    /**
+     * @param string $description
+     * @return $this
+     */
+    public function setCategoryDescription($description);
+}
+
+# \Scommerce\Custom\etc\di.xml
+<config ...>
+    <preference for="Scommerce\Custom\Api\CategoryLinkManagementInterface" type="Scommerce\Custom\Model\CategoryLinkManagement" />
+    <preference for="Scommerce\Custom\Api\Data\CategoryProductLinkInterface" type="Scommerce\Custom\Model\CategoryProductLink" />
+</config>
+
+# under Scommerce\Custom\Model\CategoryLinkManagement.php as specified in di.xml
+namespace Scommerce\Custom\Model;
+ 
+/**
+ * Class CategoryLinkManagement
+ */
+class CategoryLinkManagement implements  \Scommerce\Custom\Api\CategoryLinkManagementInterface
+{
+    /**
+     * @var \Magento\Catalog\Api\CategoryRepositoryInterface
+     */
+    protected $categoryRepository;
+ 
+    /**
+     * @var \Scommerce\Custom\Api\Data\CategoryProductLinkInterfaceFactory
+     */
+    protected $productLinkFactory;
+ 
+    /**
+     * CategoryLinkManagement constructor.
+     *
+     * @param \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository
+     * @param \Scommerce\Custom\Api\Data\CategoryProductLinkInterfaceFactory $productLinkFactory
+     */
+    public function __construct(
+        \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
+        \Scommerce\Custom\Api\Data\CategoryProductLinkInterfaceFactory $productLinkFactory
+    ) {
+        $this->categoryRepository = $categoryRepository;
+        $this->productLinkFactory = $productLinkFactory;
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssignedProducts($categoryId)
+    {
+        $category = $this->categoryRepository->get($categoryId);
+        if (!$category->getIsActive()) {
+            return [[
+                'error' => true,
+                'error_desc' => 'Category is disabled'
+            ]];
+        }
+        $categoryDesc = $category->getDescription();
+ 
+        /** @var \Magento\Catalog\Model\ResourceModel\Product\Collection $products */
+        $products = $category->getProductCollection()
+            ->addFieldToSelect('position')
+            ->addFieldToSelect('name')
+            ->addFieldToSelect('price');
+ 
+        /** @var \Scommerce\Custom\Api\Data\CategoryProductLinkInterface[] $links */
+        $links = [];
+ 
+        /** @var \Magento\Catalog\Model\Product $product */
+        foreach ($products->getItems() as $product) {
+            /** @var \Scommerce\Custom\Api\Data\CategoryProductLinkInterface $link */
+            $link = $this->productLinkFactory->create();
+            $link->setSku($product->getSku())
+                ->setName($product->getName())
+                ->setPrice($product->getFinalPrice())
+                ->setPosition($product->getData('cat_index_position'))
+                ->setCategoryDescription($categoryDesc);
+            $links[] = $link;
+        }
+ 
+        return $links;
+    }
+}
+
+# Scommerce\Custom\Model\CategoryProductLink.php
+namespace Scommerce\Custom\Model;
+ 
+/**
+ * @codeCoverageIgnore
+ */
+class CategoryProductLink implements \Scommerce\Custom\Api\Data\CategoryProductLinkInterface
+{
+    /**#@+
+     * Constant for confirmation status
+     */
+    const KEY_SKU                   = 'sku';
+    const KEY_NAME                  = 'name';
+    const KEY_PRICE                 = 'price';
+    const KEY_CATEGORY_DESC         = 'category_description';
+    const KEY_POSITION              = 'position';
+    /**#@-*/
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function getSku()
+    {
+        return $this->_get(self::KEY_SKU);
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->_get(self::KEY_NAME);
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function getPosition()
+    {
+        return $this->_get(self::KEY_POSITION);
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrice()
+    {
+        return $this->_get(self::KEY_PRICE);
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategoryDescription()
+    {
+        return $this->_get(self::KEY_CATEGORY_DESC);
+    }
+ 
+    /**
+     * @param string $sku
+     * @return $this
+     */
+    public function setSku($sku)
+    {
+        return $this->setData(self::KEY_SKU, $sku);
+    }
+ 
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        return $this->setData(self::KEY_NAME, $name);
+    }
+ 
+    /**
+     * @param int $position
+     * @return $this
+     */
+    public function setPosition($position)
+    {
+        return $this->setData(self::KEY_POSITION, $position);
+    }
+ 
+    /**
+     * @param float $price
+     * @return $this
+     */
+    public function setPrice($price)
+    {
+        return $this->setData(self::KEY_PRICE, $price);
+    }
+ 
+    /**
+     * @param string $description
+     * @return $this
+     */
+    public function setCategoryDescription($description)
+    {
+        return $this->setData(self::KEY_CATEGORY_DESC, $description);
+    }
+ 
+}
+
+# generate admin level access key
+curl -XPOST -H 'Content-Type: application/json' http://magento-url/rest/V1/integration/admin/token -d '{ "username": "user-name", "password": "admin-password" }'
+```
+
+## Backend
+
+* system configuration
+  - system.xml:Tab => Section => Group => Filed
+    + translate: it is used to translate the label text that is used for tab rendering.
+    + `sort_order`: It describe the tab position with other tabs.
+    + id : it is unique name to identify tab of configuration
+    + showInDefault: means this section will be shown when default value is selected in current configuration scope.
+    + showInWebsite: means this section will be shown when a website is selected in current configuration scope.
+    + showInStore: means this section will be shown store is selected in current configuration scope.
+    + fields type
+        + checkbox,
+        + checkboxes,
+        + column,
+        + date,
+        + editablemultiselect,
+        + editor,
+        + fieldset,
+        + file,
+        + gallery,
+        + hidden,
+        + image,
+        + imagefile,
+        + label,
+        + link,
+        + multiline,
+        + multiselect,
+        + note,
+        + obscure,
+        + password,
+        + radio,
+        + radios,
+        + reset,
+        + select,
+        + submit,
+        + text,
+        + textarea,
+        + time
+  - configuration option values are store in `core_config_data` table.
+
+```XML
+<?xml version="1.0"?>
+<!--
+/**
+ * file dir: magento2_root/app/code/JRB/Customconfig/etc/adminhtml/system.xml
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="my_custom_tab" translate="label" sortOrder="1000">
+            <label>Custom tab</label>
+        </tab>
+        <section id="my_custom_section" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Custom section</label>
+            <tab>my_custom_tab</tab>
+            <resource>JRB_Customconfig::config</resource>
+            <group id="my_custom_group" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Custom Group</label>
+                <field id="my_custom_field" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom field</label>
+            <comment><![CDATA[Custom text field]]></comment>
+                </field>
+                <field id="mycustom_image" type="image" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+    <label>My custom image</label>
+    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+    <upload_dir config="system/filesystem/media" scope_info="1">catalog/product/custom_image</upload_dir>
+    <base_url type="media" scope_info="1">catalog/product/custom_image</base_url>
+</field>
+            </group>
+        </section>
+    </system>
+</config>
+```
+
+## method
+
+* `_forward()`:not change the request url
+* `_redirect()`:change the request url
+
 ## DB
 
 * type
   - static: 升级数据库
   - int: 字段添加到到customer_entity_int中,eav_attribute:字段映射表,升级数据就行
-InstallSchema.php
-This file is executed first just after your modules registration
-  (Means just after your module & its version entries are done in to the
-  table -> 
-setup_module
-
-). This file is used to create tables with
-  their columns attribute into your database that are later used by the
-  new installed module.
-InstallData.php
-This file is executed after 
-InstallSchema.php
-
-. It is used to add
-  data to the newly created table or any existing table.
-UpgradeSchema.php
-This file comes with the module & runs only then, if you are already
-  having that modules previous version installed in your magento(Means
-  it has entry of its previous version into the table ->
-  
-setup_module
-
-). It is used to manipulate the table related to the
-  module(Means it is used to alter the table schema means columns
-  attribute & to add new column into that table).
-UpgradeData.php
-This file runs after 
-UpgradeSchema.php
-
-. It is having the same
-  concept as 
-InstallData.php
-
- has but using this file you can
-  change/alter the database contents without the use of model files. You
-  can also use this file to add new content to the database same us
-  
-InstallData.php
-
-. But same like 
-UpgradeSchema.php
-
- it will also runs only then if you are having that modules previous version
-  installed in your magento.
+* run installSchema.php for the first time when installing the module
+* If you installed the module before, you will need to upgrade module and write the table create code to the UpgradeSchema.php. change attribute setup_version greater than current setup version in module.xml
+* InstallSchema.php:This file is executed first just after your modules registration (Means just after your module & its version entries are done in to the table -> setup_module ). This file is used to create tables with their columns attribute into your database that are later used by the new installed module.
+* InstallData.php: This file is executed after InstallSchema.php: . It is used to add data to the newly created table or any existing table.
+* UpgradeSchema.php: This file comes with the module & runs only then, if you are already having that modules previous version installed in your magento(Means it has entry of its previous version into the table -> setup_module ). It is used to manipulate the table related to the module(Means it is used to alter the table schema means columns attribute & to add new column into that table).
+* UpgradeData.php: This file runs after UpgradeSchema.php . It is having the same concept as InstallData.php: has but using this file you can change/alter the database contents without the use of model files. You can also use this file to add new content to the database same us But same like UpgradeSchema.php it will also runs only then if you are having that modules previous version installed in your magento.
 
 ```php
 if (version_compare($context->getVersion(), '0.9.2', '<')) {
@@ -189,7 +584,6 @@ if (version_compare($context->getVersion(), '0.9.2', '<')) {
         ->setData('used_in_forms', ['adminhtml_customer'])
         ->save();
 }
-
 ```
 
 ## 获取数据
@@ -223,7 +617,6 @@ hook action
 }
 ```
 
-
 ```language
 $store_id = Mage::app()->getStore('default')->getId();
 foreach($product_ids as $id){
@@ -231,12 +624,92 @@ foreach($product_ids as $id){
 }
 ```
 
-## webapi
+## Model
 
-## GraphSQL
+* required cache clear:IdentityInterface. The IdentityInterface will force Model class define the getIdentities() method which will return a unique id for the model.
+* model file contain overall database logic
+* The resource model will execute sql queries
+* collection model is considered a resource model which allow us to filter and fetch a collection table data
 
+## GRAPHQL
+
+* module/etc/schema.graphqls
+* type
+    - Query:search object
+    - Mutation:performing CRUD operations
+* filters
+    - input:query conditons
+* result obejct fileds
+* 聲明module
+* 添加graphQL
+* 添加後臺配置
 * 客户端工具会自动拉取文档
 * 使用快捷鍵生成query
+
+
+```
+# http://www.magento-dev.com/graphql
+{
+  products(
+    filter:{
+      price:{
+        gt:"45"
+      }
+    }
+  )
+  {
+    items {
+      name
+    }
+  }
+}
+```
+
+## plugin
+
+* interceptor system:A class which will intercept and modify the behaviour of a public method is referred to as plugins
+  - Intercepting a method call can be done by running code before, after, and around that method call
+  - This allows you to substitute or extend the behaviour of original, public methods for any class or interface.
+  - Field
+    + type name: The class or interface to which your module wants interfere
+    + plugin name: An unique name that identifies your plugin name. It also used to merge the configurations for the plugin
+      + plugin type: Name of plugin’s class or its virtual type. e.g: \Vendor\Module\Plugin\<ModelName>\Plugin
+
+```xml
+# di.xml
+<config>
+    <type name="observed_type">
+        <plugin name="plugin_name" type="plugin_class_name" sortOrder="sort_order_number" disable="true|false"></plugin>
+    </type>
+</config>
+```
+```php
+namespace \Vendor\Module\Plugin\ModelName;
+ 
+class ProductPlugin
+{
+    public function aroundSave(\Magento\Catalog\Model\Product $subject, callable $proceed)
+    {
+        doSomethingBeforeGettingSave
+        $returnValue = $proceed();
+        if ($returnValue){
+            $this->doSomeOtherWork()
+        }
+
+        return $returnValue;
+    }
+
+    public function afterGetPrice(\Magento\Catalog\Model\Product $subject, $result)
+    {
+        return $result + 1;
+    }
+    
+    public function beforeSetPrice(\Magento\Catalog\Model\Product $subject, $price)
+    {
+        return [$price + 1];
+    }
+}
+```
 
 ## varnish
 
@@ -306,6 +779,7 @@ foreach($product_ids as $id){
 
 ## 问题
 
+* 不能直接获取数据结构：entity one big data can't var_dump
 * Error 503 Backend fetch failed：access forbidden by rule, request: "GET /pub/health_check.php HTTP/1.1"
 * Call to a member function getNext() on null in generated/code/Magento/User/Model/User/Interceptor.php/app/code/Magento/Backend/Model/Locale/Manager.php#L96-L100
 * composer 後需要從新開啓cache
@@ -337,10 +811,6 @@ public function authenticateWithoutPassword($username) {
 
 ```
 
-## 配置后台
-
-
-
 ## 工具
 
 * ERP
@@ -354,6 +824,7 @@ public function authenticateWithoutPassword($username) {
 
 * [Magento2解决方案专家认证](https://u.magento.com/certified-magento2-solution-specialist):75个多项选择题 90分钟完成考试
 * [marketplace](https://marketplace.magento.com)
+* [Docs](https://devdocs.magento.com/)
 * https://magento.com/technical-resources
 * https://devdocs.magento.com/#/individual-contributors
 * https://devdocs.magento.com/guides/v2.3/config-guide/
