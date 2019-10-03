@@ -109,6 +109,17 @@ chmod -R 777 var/ generated/
    include /var/www/html/magento2/nginx.conf.sample;
  }
  
+
+<VirtualHost *:80>
+        ServerName packagist.domain.com
+ 
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+ 
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
 # Sample data
 magento sampledata:deploy
 ```
@@ -117,7 +128,8 @@ magento sampledata:deploy
 
 * Global->websites->stores->store views(different languages)
 * Magento installations begin with a single website which by default, is called “Main Website.”
-* All stores under the same website share the same Admin and checkout.
+* All stores under the same website share the same Admin and checkout
+* store_code
 
 ## Theme
 
@@ -146,7 +158,7 @@ bin/magento maintenance:disable
 
 bin/magento setup:install
 bin/magento setup:upgrade
-bin/magento setup:di:compile
+bin/magento setup:di:compile # recreate Interceptor
 bin/magento setup:static-content:deploy -f
 bin/magento setup:uninstall
 bin/magento setup:config:set
@@ -173,30 +185,35 @@ bin/magento cache:clean
 bin/magento cron:install
 bin/magento info:adminuri
 
-bin/magento setup:db:status
-bin/magento setup:db-schema:upgrade
-bin/magento setup:db-data:upgrade
-bin/magento dev:query-log:enable
-
 bin/magento admin:user:create --admin-user=henry --admin-password=111111 --admin-email=11111@qq.com --admin-firstname=henry --admin-lastname=li
 ```
 
+## module
+
+* 更新版本號，composer require 會拉取最新版本號代碼
+* 可以定義後臺配置的路由（重寫）
+
 ## WebAPI
 
-* Api
-* Api/Data
-* etc\webapi.xml
-  - Route:This is the URL which will be used to call our API https://{{MagentoBaseURL}}/index.php/rest/V1/custom/{{categoryId}}/products
-  - Service Class – This is the interface class of our API and the main method “getAssignedProducts” will be called with {{categoryId}} as the parameter
-  - Resources- This defines who has the permission to call this API. It could be anonymous (everyone) or self (customer) or specific admin user with specific permission for example Scommerce_Custom::custom which can be added in acl.xml
-    - the ‘self’ permission allows a customer to access the /V1/customers/me route and retrieve information about itself only. In the handling code the PHP session cookie is used to verify that the customer is legitimate and matches the supplied customer_id parameter. Session authentication is discussed further below.
-    - the ‘anonymous’ permission, as its name suggests, allows access to the /V1/customers route – even for a user who’s not logged-in. The route is used to create a customer when data is posted to it, so it makes sense that access needs to be open. This might seem like a security risk, but the POST data also requires a valid form key to process the request.
-* Scommerce\Custom\Api\CategoryLinkManagementInterface.php:the main interface file
+* `http://<:host:>/rest/<:store_code:>/<:api_path:>`
+* 结构
+    - module.xml
+    - registeration.php
+    - Api
+    - Api/Data
+    - etc\webapi.xml
+      + Route:This is the URL which will be used to call our API https://{{MagentoBaseURL}}/index.php/rest/V1/custom/{{categoryId}}/products
+      + Service Class – This is the interface class of our API and the main method “getAssignedProducts” will be called with {{categoryId}} as the parameter
+      + Resources- This defines who has the permission to call this API. It could be anonymous (everyone) or self (customer) or specific admin user with specific permission for example Scommerce_Custom::custom which can be added in acl.xml
+        + the ‘self’ permission allows a customer to access the /V1/customers/me route and retrieve information about itself only. In the handling code the PHP session cookie is used to verify that the customer is legitimate and matches the supplied customer_id parameter. Session authentication is discussed further below.
+        + the ‘anonymous’ permission, as its name suggests, allows access to the /V1/customers route – even for a user who’s not logged-in. The route is used to create a customer when data is posted to it, so it makes sense that access needs to be open. This might seem like a security risk, but the POST data also requires a valid form key to process the request.
+    - Scommerce\Custom\Api\CategoryLinkManagementInterface.php:the main interface file
 * Authentication
-    - Token  Mobile application  Yes     Yes
+    - Token  Mobile application  Yes     Yes 可以通过token解析出来，比如用户信息
     - OAuth  Third-party application (integration)   No  Yes
     - Session Javascript application on the frontend site or admin site   Yes     Yes
 * Intergered[Swagger](http://website-base-url/swagger)
+* 参数：接口定义接受参数，与返回值类型
 
 ```
 <route url="/V1/custom/:categoryId/products" method="GET">
@@ -554,6 +571,7 @@ curl -XPOST -H 'Content-Type: application/json' http://magento-url/rest/V1/integ
 
 ## DB
 
+* 修改脚本后要修改模块版本号
 * type
   - static: 升级数据库
   - int: 字段添加到到customer_entity_int中,eav_attribute:字段映射表,升级数据就行
@@ -561,10 +579,15 @@ curl -XPOST -H 'Content-Type: application/json' http://magento-url/rest/V1/integ
 * If you installed the module before, you will need to upgrade module and write the table create code to the UpgradeSchema.php. change attribute setup_version greater than current setup version in module.xml
 * InstallSchema.php:This file is executed first just after your modules registration (Means just after your module & its version entries are done in to the table -> setup_module ). This file is used to create tables with their columns attribute into your database that are later used by the new installed module.
 * InstallData.php: This file is executed after InstallSchema.php: . It is used to add data to the newly created table or any existing table.
-* UpgradeSchema.php: This file comes with the module & runs only then, if you are already having that modules previous version installed in your magento(Means it has entry of its previous version into the table -> setup_module ). It is used to manipulate the table related to the module(Means it is used to alter the table schema means columns attribute & to add new column into that table).
+* UpgradeSchema.php: This file comes with the module & runs only then, if you are already having that modules previous version installed in your magento(Means it has entry of its previous version into the table -> setup_module ). It is used to manipulate the table related to the module(Means it is used to alter the table schema means columns attribute & to add new column into that table).change attribute setup_version greater than current setup version in module.xml
 * UpgradeData.php: This file runs after UpgradeSchema.php . It is having the same concept as InstallData.php: has but using this file you can change/alter the database contents without the use of model files. You can also use this file to add new content to the database same us But same like UpgradeSchema.php it will also runs only then if you are having that modules previous version installed in your magento.
 
 ```php
+bin/magento setup:db:status
+bin/magento setup:db-schema:upgrade
+bin/magento setup:db-data:upgrade
+bin/magento dev:query-log:enable
+
 if (version_compare($context->getVersion(), '0.9.2', '<')) {
     $customerSetup->addAttribute(
         Customer::ENTITY,
@@ -646,7 +669,6 @@ foreach($product_ids as $id){
 * 客户端工具会自动拉取文档
 * 使用快捷鍵生成query
 
-
 ```
 # http://www.magento-dev.com/graphql
 {
@@ -711,9 +733,171 @@ class ProductPlugin
 }
 ```
 
+## Order
+
+* Order Status:Processing Pending->Payment Suspected Fraud->Payment Review->Pending On Hold Complete Closed Canceled Pending PayPal
+* Order State:->submit->Pending Payment->Processing->Order shipped->Order shipped->Complete->in_transit->Closed Canceled On Hold Payment Review
+
+
+CHECKOUT, PAYMENT, & SHIPPING
+One-Page Online Checkout
+Integrated for Real-Time Shipping Rates from UPS®, FedEx®, and USPS®
+Option on Credit Card Transactions to Authorize and Charge or Authorize Only and Charge on Creation of Invoices
+Integrated with Amazon Payments, PayPal, Authorize.net, and Google Checkout
+Ability to Accept Checks, Money Order, and Online Purchase Orders
+SSL Security Support for All Online Order and Sensitive Transactions
+Online Tax and Shipping Calculation and Prior to Checkout Estimates
+Option to Create Account as Part of Online Checkout Process
+Gift Message Management
+Configurable Saved Cart Expiration
+Multiple Shipping Address Management
+Online Order Tracking from Customer Account
+Ability to Manage Multiple Shipments on a Single Online Order
+Destination Country Management
+Per Order and Per Item Flat Rate Shipping Option
+Free Shipping Functionality
+Manage Shipping by Weight and Destination
+ 
+SEARCH ENGINE OPTIMIZATION (SEO)
+Light Footprint Design for Fast Load Time and Search Engine Optimization
+Google Site Map Creation and Site Map Auto Generation
+Search Engine Friendly URL’s Including URL ReWrite Controls
+META Information Management at Product and Category Levels
+Auto-Generated Popular Search Terms Page
+ 
+ANALYTICS AND REPORTING
+Integration with Google Analytics
+Admin Report Dashboard with Business Overview
+Sales Reports Including Total Sales and Returns
+Tax Reports
+Abandoned Shopping Cart Reports
+Best Viewed Products Reports
+Top Sold Products Report
+Low Stock Item Report
+Onsite Search Terms Report
+Product Reviews Report with RSS Support
+Tags Report with RSS Support
+Coupon Usage Report
+ 
+MARKETING PROMOTIONS AND TOOS
+Online Poll Creation and Management
+Newsletter Management
+Landing Page Creation Tools
+Catalog Promotional Pricing and Controls
+Flexible Coupons Rule and Pricing Restrictions
+Free Shipping Promotion Management
+Multi-Tier Pricing for Volume Discounts
+Bundled Products Options
+Customer Group Pricing
+Recently Viewed Products
+New Items Promotional Tool
+On Page and In Shopping Cart Upsells and Cross Sells
+Send to a Friend and Wishlist Management
+ 
+ORDER MANAGEMENT
+View, edit, create and fulfill orders from admin panel
+Create one or multiple invoices, shipments and credit memos per order to allow for split fulfillment
+Print invoices and packing slips
+-
+ Call Center (phone) order creation − Includes ability to create new 
+customer, or select existing customer and view - shopping cart, 
+wishlist, last ordered items, and compared products list, as well as 
+select addresses, give discounts and assign custom prices
+Create re-orders for customers from administration panel
+Email Notifications of Orders
+RSS feed of New Orders
+ 
+CUSTOMER SERVICE
+Contact Us form
+Feature-rich Customer Accounts
+Order History with Status Updates
+Order Tracking from Account
+Password Reset email from front-end and admin panel
+Order and Account Update Emails
+Customizable Order Emails
+Create and Edit Orders from the Admin Panel
+ 
+CUSTOMER ACCOUNTS
+Order status and history
+Re-orders from account
+Recently ordered items
+Address Book with unlimited addresses
+Default Billing and Shipping addresses
+Wishlist with ability to add comments
+Email or Send RSS feed of Wishlist
+Newsletter Subscription management
+Product Reviews submitted
+Product Tags submitted
+ 
+CATALOG MANAGEMENT
+Inventory Management with Backordered items, Minimum and Maximum quantities
+Batch Import and Export of catalog
+Batch Updates to products in admin panel
+Google Base Integration
+Simple, Configurable (e.g. size, color, etc.), Bundled and Grouped Products
+Virtual Products
+Downloadable/Digital Products
+Customer Personalized Products – upload text for embroidery, monogramming, etc.
+Tax Rates per location, customer group and product type
+Attribute Sets for quick product creation of different item types
+Create Store-specific attributes on the fly
+Media Manager with automatic image resizing and watermarking
+Advanced Pricing Rules and support for Special Prices (see marketing tools)
+Search Results rewrites and redirects
+Approve, Edit and Delete Product Tags
+Approve, Edit and Delete Product Reviews
+-
+ RSS feed for Low Inventory Alerts Customer Personalized Products – 
+Upload text for embroidery, monogramming, etc. (this one is 
+already there, but want to have the following shown after it)
+Customer Personalized Products – Upload Image
+Customer Personalized Products – Select Date/Time options for products
+Customer Sorting – Define Attributes for Customer
+Sorting on category (price, brand, etc.)
+ 
+PRODUCT BROWSING
+Multiple Images Per Product
+Product Image Zoom-in Capability
+Product Reviews
+Related Products
+Stock Availability
+Multi-Tier Pricing Upsell
+Product Option Selection
+Grouped Products View
+Add to Wishlist
+Send to a Friend with Email
+ 
+CATALOG BROWSING
+Layered / Faceted Navigation for filtering of products in categories
+Layered / Faceted Navigation for filtering of products in search results
+Flat Catalog Module for Improved Performance with large catalogs
+Static Block tool to create category landing pages
+Ability to assign designs on category and product level (unique design per product/category)
+Configurable search with auto-suggested terms
+Recently viewed products
+Product comparisons
+Recently compared products
+Cross-sells, Up-sells and Related Items
+Popular Search Terms Cloud
+Filter by Product Tags
+Product Reviews
+Product listing in grid or list format
+Breadcrumbs
+
 ## varnish
 
-* 更新缓存
+* 两级缓存：框架->varnish
+* https://varnish-cache.org/docs/6.3/
+* https://www.linode.com/docs/websites/varnish/getting-started-with-varnish-cache/
+
+```
+varnishncsa -F '%U%q %{Varnish:hitmiss}x'
+```
+
+## 用户
+
+Associate' : 'Preferred
+
 
 ## 后台
 
@@ -807,8 +991,6 @@ public function authenticateWithoutPassword($username) {
     } catch (NoSuchEntityException $e) {
         throw new InvalidEmailOrPasswordException(__('Invalid login or password.'));
     }
-
-
 ```
 
 ## 工具
@@ -825,6 +1007,7 @@ public function authenticateWithoutPassword($username) {
 * [Magento2解决方案专家认证](https://u.magento.com/certified-magento2-solution-specialist):75个多项选择题 90分钟完成考试
 * [marketplace](https://marketplace.magento.com)
 * [Docs](https://devdocs.magento.com/)
+* [samples](https://github.com/magento/magento2-samples)
 * https://magento.com/technical-resources
 * https://devdocs.magento.com/#/individual-contributors
 * https://devdocs.magento.com/guides/v2.3/config-guide/

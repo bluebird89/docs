@@ -55,6 +55,25 @@ rabbitmq-server -detached
 # 添加用户并设置权限
 rabbitmqctl add_user albert albert
 rabbitmqctl set_user_tags albert administrator
+
+# ubuntu
+wget http://packages.erlang-solutions.com/site/esl/esl-erlang/FLAVOUR_1_general/esl-erlang_20.1-1~ubuntu~xenial_amd64.deb
+sudo dpkg -i esl-erlang_20.1-1\~ubuntu\~xenial_amd64.deb
+echo "deb https://dl.bintray.com/rabbitmq/debian xenial main" | sudo tee /etc/apt/sources.list.d/bintray.rabbitmq.list
+
+wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add -
+sudo apt-get install rabbitmq-server
+
+sudo systemctl start|enable rabbitmq-server.service
+sudo rabbitmqctl status
+
+sudo rabbitmqctl add_user admin password 
+sudo rabbitmqctl set_user_tags admin administrator
+sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
+
+sudo rabbitmq-plugins enable rabbitmq_management
+sudo chown -R rabbitmq:rabbitmq /var/lib/rabbitmq/
+http://[your-vultr-server-IP]:15672/ # 管理地址
 ```
 
 ## 原理

@@ -426,7 +426,7 @@ git clone -b v1.21.0 https://github.com/grpc/grpc
 # 从远程仓库中克隆一个特定的分支
 git init
 git remote add url origin
-git checkout branchName
+git checkout -b com.mt365 origin/com.mt365
 
 git stutus -s(short) # 查看本地的代码状态,上次提交更新后的更改或者写入缓存的改动
 

@@ -2,7 +2,8 @@
 
 Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
 
-* 一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源
+* 基于 Go 语言 并遵从Apache2.0协议开源的应用容器引擎
+* 一个基于LXC技术之上构建的container容器引擎，通过内核虚拟化技术（namespace及cgroups）来提供容器的资源隔离与安全保障，KVM是通过硬件实现的虚拟化技术，它是通过系统来实现资源隔离与安全保障，占用系统资源比较小
 * 可以让开发者打包应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化
 * 容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低
 * 借鉴传统的虚拟及镜像机制，提供artifact集装箱能力，从而助力云计算，尤其是类似于提供了Web, Hadoop集群，消息队列等。

@@ -1047,6 +1047,7 @@ scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music/001.mp3
 * writable 写权限2，编辑、新增、修改文件内容|修改目录结构的权限
 * excutable执行权限1，通常指可以运行的二进制程序文件或者脚本文件(Linux 上不是通过文件后缀名来区分文件的类型)|可以进入目录
 * 所有者权限，所属用户组权限，是指所在的用户组中的所有其它用户对于该文件的权限
+* chmod g+s: This means that all new files and subdirectories created within the current directory inherit the group ID of the directory, rather than the primary group ID of the user who created the file.  This will also be passed on to new subdirectories created in the current directory.
 
 ```sh
 # -r-xr-x---
@@ -1397,34 +1398,34 @@ smb://192.168.100.106
 
 ```
 /var/log/nginx/*.log {
-        # 打包日志频率 daily:每天 weekly:每周 monthly:每月
-        daily
-        # 打包文件添加日期后缀
-        dateext
-        # 找不到日志也ok
-        missingok
-        # 保存14份日志
-        rotate 14
-        # 压缩日志 默认gzip
-        compress
-        # 延时压缩到下次rotate
-        delaycompress
-        # 忽略空日志
-        notifempty
-        # ？
-        create 0640 www-data adm
-        # 执行完所有rotate再执行脚本
-        sharedscripts
-        # ?
-        prerotate
-                if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
-                        run-parts /etc/logrotate.d/httpd-prerotate; \
-                fi \
-        endscript
-        # ？
-        postrotate
-                invoke-rc.d nginx rotate >/dev/null 2>&1
-        endscript
+  # 打包日志频率 daily:每天 weekly:每周 monthly:每月
+  daily
+  # 打包文件添加日期后缀
+  dateext
+  # 找不到日志也ok
+  missingok
+  # 保存14份日志
+  rotate 14
+  # 压缩日志 默认gzip
+  compress
+  # 延时压缩到下次rotate
+  delaycompress
+  # 忽略空日志
+  notifempty
+  # ？
+  create 0640 www-data adm
+  # 执行完所有rotate再执行脚本
+  sharedscripts
+  # ?
+  prerotate
+          if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+                  run-parts /etc/logrotate.d/httpd-prerotate; \
+          fi \
+  endscript
+  # ？
+  postrotate
+          invoke-rc.d nginx rotate >/dev/null 2>&1
+  endscript
 }
 ```
 

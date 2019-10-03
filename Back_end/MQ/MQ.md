@@ -180,6 +180,7 @@
 * [nsqio/nsq](https://github.com/nsqio/nsq) [文档](http://nsq.io/overview/quick_start.html)
 * [apache/incubator-rocketmq](https://github.com/apache/incubator-rocketmq) a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability.
 * [Apache ActiveMQ](link)
+* [Celery](http://www.celeryproject.org):Distributed Task Queue
 * [kr/beanstalkd](https://github.com/kr/beanstalkd):Beanstalk is a simple, fast work queue. http://kr.github.io/beanstalkd/
 * 对比
     - 从社区活跃度：按照目前网络上的资料，RabbitMQ 、activeM 、ZeroMQ 三者中，综合来看，RabbitMQ 是首选。
