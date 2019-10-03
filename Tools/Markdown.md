@@ -688,6 +688,9 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * [GitNote](https://www.gitnoteapp.com)
 * [MedleyText](link)
 * OneNote
+* Haroopad
+    - [下载地址](http://pad.haroopress.com/user.html)
+    - `sudo dpkg -i haroopad-v0.13.1-x64.deb`
 
 ## 工具
 

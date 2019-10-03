@@ -10,3 +10,5 @@
 ## 资源
 
 * [妹日新鲜](https://meiri.fireside.fm)
+* [IPN](https://ipn.li/faq)
+* [ThoughtWorks 洞见](http://www.ximalaya.com/zhubo/81966002/)

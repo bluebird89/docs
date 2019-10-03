@@ -145,10 +145,6 @@
 * [zenany/weekly](https://github.com/zenany/weekly):汇总平时看到的好文章，技术、产品、管理均有，尽量保证一周汇总一篇
 * [thepracticaldev/dev.to](https://github.com/thepracticaldev/dev.to):Where programmers share ideas and help each other grow https://dev.to
 
-## Podcast
-
-* [ThoughtWorks 洞见](http://www.ximalaya.com/zhubo/81966002/)
-
 ## APP
 
 *   36氪
@@ -181,6 +177,7 @@
 * [facebook/watchman](https://github.com/facebook/watchman):Watches files and records, or triggers actions, when they change. https://facebook.github.io/watchman/
 * [阿里镜像](https://opsx.alibaba.com/mirror)
 * [腾讯软件源](https://mirrors.cloud.tencent.com)
+* [](https://bitnami.com)
 
 ## 词典
 

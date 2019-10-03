@@ -235,6 +235,38 @@ ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/loca
 
 livetemplate
 
+## 功能
+
+* REST Client：Tools | Test RESTful Web Service
+    - Generate Authorization Header
+    - Alt+Insert (CMD+N on Mac OS X) will add a new cookie
+* command-line tool
+    - Project Settings | Command Line Tool Support
+    - Tools | Run Command... menu or with Ctrl+Shift+X
+* MAMP
+* DataBase:MySQL
+    - SQL Editor
+    - ?, :variable, @variable, #variable# or $variable$：设置语句参数
+    - control+j:查看单条数据
+* vagrant
+    - Init in Project Root
+    - Start SSH session
+
+## key
+
+* double shift：搜索文件
+* alt + 1:项目试图切换
+* command + shift + n：打开输入的文件
+* command + e :最近文件
+
+## version control
+
+phpstrom 添加版本信息分组:名词，提交时添加动词
+
+## 参考
+
+* [](https://confluence.jetbrains.com/display/PhpStorm)
+
 ## 工具
 
 * [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/

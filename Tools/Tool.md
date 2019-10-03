@@ -25,10 +25,11 @@
     - [Zen Flowchart](https://www.zenflowchart.com)
 * 輸入法
     -  [Rime](https://rime.im)
-
-## cheatsheets
-
-* [Rico's cheatsheets](https://devhints.io/)
+*  task
+    -  todolist
+    -  any do
+* cheatsheets
+    - [Rico's cheatsheets](https://devhints.io/)
 
 ## 专注
 
