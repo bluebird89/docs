@@ -274,14 +274,14 @@ code --disable-extensions . # disable all extensions
 
 ## 扩展
 
--   [VSCodium/vscodium](https://github.com/VSCodium/vscodium):binary releases of VS Code without MS branding/telemetry/licensing
--   [viatsko/awesome-vscode](https://github.com/viatsko/awesome-vscode):A curated list of delightful VS Code packages and resources.
--   [Microsoft/vscode-tips-and-tricks](https://github.com/Microsoft/vscode-tips-and-tricks):Collection of helpful tips and tricks for VS Code.
--   [vscode-element-helper](https://github.com/ElemeFE/vscode-element-helper)
--   [keyboard-shortcuts-macos](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
--   https://code.visualstudio.com/
--   [octref/polacode](https://github.com/octref/polacode):📸 Polaroid for your code
--   [shanalikhan/code-settings-sync](https://github.com/shanalikhan/code-settings-sync):🌴💪 Synchronize your Visual Studio Code Settings Across Multiple Machines using Github GIST 💪🌴
+*   [VSCodium/vscodium](https://github.com/VSCodium/vscodium):binary releases of VS Code without MS branding/telemetry/licensing
+*   [viatsko/awesome-vscode](https://github.com/viatsko/awesome-vscode):A curated list of delightful VS Code packages and resources.
+*   [Microsoft/vscode-tips-and-tricks](https://github.com/Microsoft/vscode-tips-and-tricks):Collection of helpful tips and tricks for VS Code.
+*   [vscode-element-helper](https://github.com/ElemeFE/vscode-element-helper)
+*   [keyboard-shortcuts-macos](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
+*   https://code.visualstudio.com/
+*   [octref/polacode](https://github.com/octref/polacode):📸 Polaroid for your code
+*   [shanalikhan/code-settings-sync](https://github.com/shanalikhan/code-settings-sync):🌴💪 Synchronize your Visual Studio Code Settings Across Multiple Machines using Github GIST 💪🌴
 
 ## 工具
 
@@ -289,4 +289,4 @@ code --disable-extensions . # disable all extensions
 
 ## 參考
 
--   [文檔](https://code.visualstudio.com/docs)
+* [文檔](https://code.visualstudio.com/docs)

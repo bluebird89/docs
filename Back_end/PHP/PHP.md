@@ -554,6 +554,7 @@ print # 一个语法结构(language constructs), 并不是一个函数, 参数�
         * 关联数组
         * 多维数组
     + 方法
+        * `+`:运算符把右边的数组元素附加到左边的数组后面，两个数组中都有的键名，则只用左边数组中的，右边的被忽略。
         * `in_array()`
         * `array_filter()` 过滤数组中的所有值为空的元素
         * `array_reduce($source, function(){}, $distination)`
@@ -2708,6 +2709,993 @@ $order->add();//正常的使用业务
     - CURLOPT_WRITEHEADER: 这个文件写有输出的头部分。
     - CURLOPT_STDERR: 这个文件写有错误而不是stderr。用来获取需要登录的页面的例子,当前做法是每次或许都登录一次,有需要的人再做改进了.
 
+## 正则
+
+# PREG
+
+正则表达式
+
+> 元字符
+
+* .   匹配除换行符以外的任意字符
+* \w  匹配字母或数字或下划线或汉字
+* \s  匹配任意的空白符
+* \d  匹配数字
+* \b  匹配单词的开始或结束
+* ^   匹配字符串的开始
+* $   匹配字符串的结束
+
+> 字符转义
+
+如你要查找.，或者*,就出现了问题：你没办法指定它们，因为它们会被解释成别的意思。这时你就得使用\来取消这些字符的特殊意义。因此，你应该使用\\.和\\\*。当然，要查找\本身，你也得用\\\。
+
+> 重复
+
+* `*`   重复零次或更多次
+* `+`   重复一次或更多次
+* ?   重复零次或一次
+* {n} 重复n次
+* {n,}    重复n次或更多次
+* {n,m}   重复n到m次
+
+> 字符类
+
+* [“your set”]：如[aeiou]，则匹配a，e，i，o和u中的任意一个，同理[.?!]匹配标点符号(.或?或!)
+* [0-9]：与\d就是完全一致，表示一位数字
+* [a-zA-Z]：表示一个字母，[a-z0-9A-Z]等同于\w(当然值考虑英文的话)
+
+\(?0\d{2}[)-]?\d{8} # (010)88886666，或022-22334455，或02912345678等
+
+如果你认真去看例4-1，发现那个表达式也能匹配010)12345678或(022-87654321这样的“不正确”的格式。要解决这个问题，我们需要用到分枝条件。
+
+正则表达式里的分枝条件指的是有几种规则，如果满足其中任意一种规则都应该当成匹配，具体方法是用|（竖线）把不同的规则分隔开
+
+例5-1：0\d{2}-\d{8}|0\d{3}-\d{7}
+
+分析：这个表达式能匹配两种以连字号分隔的电话号码：一种是三位区号，8位本地号(如：010-12345678)，一种是4位区号，7位本地号(如：0376-2233445)，0\d{2}-\d{8}表示“0”加两数字加“-”加8个数字，0\d{3}-\d{7}表示“0”加三数字加“-”加7个数字，|可理解为“或”。就是查找与前者相匹配或者与后者相匹配的内容。
+
+注意：使用分枝条件时，要注意各个条件的顺序。因为匹配分枝条件时，将会从左到右地测试每个条件，如果满足了某个分枝的话，就不会去再管其它的条件了。如：\d{5}-\d{4}|\d{5}和\d{5}|\d{5}-\d{4}是不同的。
+
+> 分组
+
+我们已经提到了怎么重复单个字符（直接在字符后面加上限定符就行了）；但如果想要重复多个字符又该怎么办？你可以用小括号来指定子表达式(也叫做分组)，然后你就可以指定这个子表达式的重复次数了。
+
+例6-1：(\d{1,3}.){3}\d{1,3}
+
+分析：这是一个简单的IP地址匹配表达式。要理解这个表达式，请按下列顺序分析它：\d{1,3}匹配1到3位的数字，(\d{1,3}\.) {3}匹配三位数字加上一个英文句号(这个整体也就是这个分组)重复3次，最后再加上一个一到三位的数字\d{1,3}。
+
+不幸的是，它也将匹配256.300.888.999这种不可能存在的IP地址。如果能使用算术比较的话，或许能简单地解决这个问题，但是正则表达式中并不提供关于数学的任何功能，所以只能使用冗长的分组，选择，字符类来描述一个正确的IP地址：((2[0-4]\d|25[0-5]|[01]?\d\d?).){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)。
+
+> 反义
+
+* \W  匹配任意不是字母，数字，下划线，汉字的字符
+* \S  匹配任意不是空白符的字符
+* \D  匹配任意非数字的字符
+* \B  匹配不是单词开头或结束的位置
+* [^x]    匹配除了x以外的任意字符
+* [^aeiou]    匹配除了aeiou这几个字母以外的任意字符
+
+>  后向引用
+
+使用小括号指定一个子表达式后，匹配这个子表达式的文本(也就是此分组捕获的内容)可以在表达式或其它程序中作进一步的处理。默认情况下，每个分组会自动拥有一个组号，规则是：从左向右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。
+后向引用用于重复搜索前面某个分组匹配的文本。例如，\1代表分组1匹配的文本。
+
+例8-1：\b(\w+)\b\s+\1\b
+
+分析：可以匹配重复的单词，像go go, 或者kitty kitty。这个表达式首先是一个单词，也就是单词开始处和结束处之间的多于一个的字母或数字\b(\w+)\b，这个单词会被捕获到编号为1的分组中，然后是1个或几个空白符\s+，最后是分组1中捕获的内容（也就是前面匹配的那个单词）\1。
+
+
+对一个正则表达式模式或部分模式两边添加圆括号将导致相关匹配存储到一个临时缓冲区中，所捕获的每个子匹配都按照在正则表达式模式中从左至右所遇到的内容存储。存储子匹配的缓冲区编号从 1 开始，连续编号直至最大 99 个子表达式。每个缓冲区都可以使用 '\n' 访问，其中 n 为一个标识特定缓冲区的一位或两位十进制数。
+
+可以使用非捕获元字符 '?:', '?=', or '?!' 来忽略对相关匹配的保存。
+
+> 常用分组语法
+
+* 捕获  (exp)   匹配exp,并捕获文本到自动命名的组里
+* (?<name>exp)    匹配exp,并捕获文本到名称为name的组里，也可以写成(?'name'exp)
+* (?:exp) 匹配exp,不捕获匹配的文本，也不给此分组分配组号
+* 零宽断言    (?=exp) 匹配exp前面的位置
+* (?<=exp)    匹配exp后面的位置
+* (?!exp) 匹配后面跟的不是exp的位置
+* `(?<!exp)`    匹配前面不是exp的位置
+注释  (?#comment) 这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读
+
+> 贪婪与懒惰
+
+当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配尽可能多的字符。以这个表达式为例：a.\*b，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串aabab。这被称为贪婪匹配。
+有时，我们更需要懒惰匹配，也就是匹配尽可能少的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号?。这样.\*?就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。现在看看懒惰版的例子吧：
+a.*?b匹配最短的，以a开始，以b结束的字符串。如果把它应用于aabab的话，它会匹配aab（第一到第三个字符）和ab（第四到第五个字符）。
+
+注意：最先开始的匹配拥有最高的优先权
+
+* *?  重复任意次，但尽可能少重复
+* +?  重复1次或更多次，但尽可能少重复
+* ??  重复0次或1次，但尽可能少重复
+* {n,m}?  重复n到m次，但尽可能少重复
+* {n,}?   重复n次以上，但尽可能少重复
+
+> 模式修正符
+
+* i：模式中的字符将同时匹配大小写字母。
+* m：“行起始”和“行结束”除了匹配整个字符串开头和结束外，还分别匹配其中的换行符的之后和之前。
+* s：模式中的圆点元字符（.）匹配所有的字符，包括换行符。没有此设定的话，则不包括换行符。
+* x：模式中的空白字符除了被转义的或在字符类中的以外完全被忽略，在未转义的字符类之外的 #以及下一个换行符之间的所有字符，包括两头，也都被忽略。
+* e：如果设定了此修正符，preg_replace() 在替换字符串中对逆向引用作正常的替换，
+* ?在 . + 和 * 之后 表示非贪婪匹配: *、+和?限定符都是贪婪的，因为它们会尽可能多的匹配文字，只有在它们的后面加上一个?就可以实现非贪婪或最小匹配。
+
+
+<?php
+$string = "上飞机离开我<img border='0' alt='' src='/uploadfile/2009/0921/20090921091612567.jpg' border='0' />sdfsdf";
+ 
+$su = preg_match("/ \<[ ]*img.*src[ ]*\=[ ]*[\"|\'](.+?)[\"|\'] /", $string,$match); // 匹配src=的内容
+print_r($match[1]); // 输出 /uploadfile/2009/0921/20090921091612567.jpg
+ 
+$su = preg_match("/ \<[ ]*img.*src[ ]*\=[ ]*[\"|\'](.+)[\"|\'] /", $string,$match);
+print_r($match[1]); // 输出 /uploadfile/2009/0921/20090921091612567.jpg' border='
+?>
+
+\   将下一个字符标记为一个特殊字符、或一个原义字符、或一个 向后引用、或一个八进制转义符。例如，'n' 匹配字符 "n"。'\n' 匹配一个换行符。序列 '\' 匹配 "" 而 "\(" 则匹配 "("。
+^   匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 '\n' 或 '\r' 之后的位置。
+$   匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 '\n' 或 '\r' 之前的位置。
+*   匹配前面的子表达式零次或多次。例如，zo* 能匹配 "z" 以及 "zoo"。* 等价于{0,}。
++   匹配前面的子表达式一次或多次。例如，'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。
+?   匹配前面的子表达式零次或一次。例如，"do(es)?" 可以匹配 "do" 或 "does" 中的"do" 。? 等价于 {0,1}。
+{n} n 是一个非负整数。匹配确定的 n 次。例如，'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。
+{n,}    n 是一个非负整数。至少匹配n 次。例如，'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。
+{n,m}   m 和 n 均为非负整数，其中n <= m。最少匹配 n 次且最多匹配 m 次。例如，"o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。
+?   当该字符紧跟在任何一个其他限制符 (*, +, ?, {n}, {n,}, {n,m}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 "oooo"，'o+?' 将匹配单个 "o"，而 'o+' 将匹配所有 'o'。
+.   匹配除 "\n" 之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用象 '[.\n]' 的模式。
+[xyz]   字符集合。匹配所包含的任意一个字符。例如， '[abc]' 可以匹配 "plain" 中的 'a'。
+[^xyz]  负值字符集合。匹配未包含的任意字符。例如， '[^abc]' 可以匹配 "plain" 中的'p'、'l'、'i'、'n'。
+[a-z]   字符范围。匹配指定范围内的任意字符。例如，'[a-z]' 可以匹配 'a' 到 'z' 范围内的任意小写字母字符。
+[^a-z]  负值字符范围。匹配任何不在指定范围内的任意字符。例如，'[^a-z]' 可以匹配任何不在 'a' 到 'z' 范围内的任意字符。
+\b  匹配一个单词边界，也就是指单词和空格间的位置。例如， 'er\b' 可以匹配"never" 中的 'er'，但不能匹配 "verb" 中的 'er'。
+\B  匹配非单词边界。'er\B' 能匹配 "verb" 中的 'er'，但不能匹配 "never" 中的 'er'。
+\cx 匹配由 x 指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 'c' 字符。
+\d  匹配一个数字字符。等价于 [0-9]。
+\D  匹配一个非数字字符。等价于 [^0-9]。
+\f  匹配一个换页符。等价于 \x0c 和 \cL。
+\n  匹配一个换行符。等价于 \x0a 和 \cJ。
+\r  匹配一个回车符。等价于 \x0d 和 \cM。
+\s  匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。
+\S  匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。
+\t  匹配一个制表符。等价于 \x09 和 \cI。
+\v  匹配一个垂直制表符。等价于 \x0b 和 \cK。
+\w  匹配包括下划线的任何单词字符。等价于'[A-Za-z0-9_]'。
+\W  匹配任何非单词字符。等价于 '[^A-Za-z0-9_]'。
+\xn 匹配 n，其中 n 为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，'\x41' 匹配 "A"。'\x041' 则等价于 '\x04' & "1"。正则表达式中可以使用 ASCII 编码。
+\num    匹配 num，其中 num 是一个正整数。对所获取的匹配的引用。例如，'(.)\1' 匹配两个连续的相同字符。
+\n  标识一个八进制转义值或一个向后引用。如果 \n 之前至少 n 个获取的子表达式，则 n 为向后引用。否则，如果 n 为八进制数字 (0-7)，则 n 为一个八进制转义值。
+\nm 标识一个八进制转义值或一个向后引用。如果 \nm 之前至少有 nm 个获得子表达式，则 nm 为向后引用。如果 \nm 之前至少有 n 个获取，则 n 为一个后跟文字 m 的向后引用。如果前面的条件都不满足，若 n 和 m 均为八进制数字 (0-7)，则 \nm 将匹配八进制转义值 nm。
+\nml    如果 n 为八进制数字 (0-3)，且 m 和 l 均为八进制数字 (0-7)，则匹配八进制转义值 nml。
+\un 匹配 n，其中 n 是一个用四个十六进制数字表示的 Unicode 字符。例如， \u00A9 匹配版权符号 (?)。
+\(pattern\) 匹配pattern 并获取这一匹配。所获取的匹配可以从产生的Matches集合得到，在VBScript 中使用SubMatches集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 '\(' 或 '\)'。
+
+\(?:pattern\) 匹配pattern但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 "或" 字符“|”来组合一个模式的各个部分是很有用。
+例如，“industr\(?:y|ies\)”就是一个比 “industry|industries” 更简略的表达式。
+
+\(?=pattern\) 正向预查，在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，'Windows (?=95|98|NT|2000)' 能匹配 "Windows 2000" 中的 "Windows" ，但不能匹配"Windows 3.1" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
+
+(?!pattern) 负向预查，在任何不匹配 pattern 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如'Windows (?!95|98|NT|2000)' 能匹配 "Windows 3.1" 中的 "Windows"，但不能匹配 "Windows 2000" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
+
+x|y 匹配x或y。例如，'z|food' 能匹配 "z" 或 "food"。'(z|f)ood' 则匹配 "zood" 或 "food"。
+
+```language
+用户名: ^[a-z0-9_-]{3,16}$
+密码: ^[a-z0-9_-]{6,18}$
+十六进制值: ^#?([a-f0-9]{6}|[a-f0-9]{3})$
+电子邮箱: ^([a-z0-9_.-]+)@([\da-z.-]+).([a-z.]{2,6})$
+URL: ^(https?://)?([\da-z.-]+).([a-z.]{2,6})([/\w .-]*)*/?$
+IP 地址: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+HTML 标签: <([a-z]+)([<]+)*(?:>(.*)</\1>|\s+/>)$
+Unicode编码中的汉字范围： ^[u4e00-u9fa5],{0,}$
+匹配中文字符的正则表达式： [\u4e00-\u9fa5]
+评注：匹配中文还真是个头疼的事，有了这个表达式就好办了
+匹配双字节字符(包括汉字在内)： [^\x00-\xff]
+评注：可以用来计算字符串的长度（一个双字节字符长度计2，ASCII字符计1）
+匹配空白行的正则表达式： \n\s*\r
+评注：可以用来删除空白行
+匹配HTML标记的正则表达式： <(\S*?)[^>]*>.*?</\1>|<.*? />
+评注：网上流传的版本太糟糕，上面这个也仅仅能匹配部分，对于复杂的嵌套标记依旧无能为力
+匹配首尾空白字符的正则表达式： ^\s*|\s*$
+评注：可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式
+匹配Email地址的正则表达式： \w+([-+.]\w+)*@\w+([-.]\w+)*.\w+([-.]\w+)*
+评注：表单验证时很实用
+匹配网址URL的正则表达式： [a-zA-z]+://[^\s]*
+评注：网上流传的版本功能很有限，上面这个基本可以满足需求
+匹配帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)： ^[a-zA-Z][a-zA-Z0-9_]{4,15}$
+评注：表单验证时很实用
+匹配国内电话号码： \d{3}-\d{8}|\d{4}-\d{7}
+评注：匹配形式如 0511-4405222 或 021-87888822
+匹配腾讯QQ号： [1-9][0-9]{4,}
+评注：腾讯QQ号从10000开始
+匹配中国大陆邮政编码： [1-9]\d{5}(?!\d)
+评注：中国大陆邮政编码为6位数字
+匹配身份证： \d{15}|\d{18}
+评注：中国大陆的身份证为15位或18位
+匹配ip地址： ((2[0-4]\d|25[0-5]|[01]?\d\d?).){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)
+评注：提取ip地址时有用
+
+^[1-9]\d*$　 　 //匹配正整数
+^-[1-9]\d*$ 　 //匹配负整数
+^-?[1-9]\d*$　　 //匹配整数
+^[1-9]\d*|0$　 //匹配非负整数（正整数 + 0）
+^-[1-9]\d*|0$　　 //匹配非正整数（负整数 + 0）
+^[1-9]\d*.\d*|0.\d*[1-9]\d*$　　 //匹配正浮点数
+^-([1-9]\d*.\d*|0.\d*[1-9]\d*)$　 //匹配负浮点数
+^-?([1-9]\d*.\d*|0.\d*[1-9]\d*|0?.0+|0)$　 //匹配浮点数
+^[1-9]\d*.\d*|0.\d*[1-9]\d*|0?.0+|0$　　 //匹配非负浮点数（正浮点数 + 0）
+^(-([1-9]\d*.\d*|0.\d*[1-9]\d*))|0?.0+|0$　　//匹配非正浮点数（负浮点数 + 0）
+评注：处理大量数据时有用，具体应用时注意修正
+
+^[A-Za-z]+$　　//匹配由26个英文字母组成的字符串
+^[A-Z]+$　　//匹配由26个英文字母的大写组成的字符串
+^[a-z]+$　　//匹配由26个英文字母的小写组成的字符串
+^[A-Za-z0-9]+$　　//匹配由数字和26个英文字母组成的字符串
+^\w+$　　//匹配由数字、26个英文字母或者下划线组成的字符串
+```
+
+## 参考
+
+* [五分钟，正则表达式不再是你的烦恼](https://www.jianshu.com/p/4f258d81ff4c)
+* https://www.w3cschool.cn/regexp/jhbv1pr1.html
+* https://www.cnblogs.com/yelons/p/6644579.html
+* https://www.cnblogs.com/longdaye/p/8001221.html
+* https://blog.csdn.net/kkobebryant/article/details/267527
+* http://www.jb51.net/article/77428.htm
+* https://www.cnblogs.com/hellohell/p/5718319.html
+
+## PHP7
+
+* PHP是以多进程模型设计的，这样的好处是请求之间互不干涉，一个请求失败也不会对其他进程造成影响
+
+短闭包
+空合并运算符
+Trait
+属性类型
+扩散运算符
+JIT 编译器
+FFI
+匿名类
+声明返回类型
+Contemporary cryptography
+Generators
+
+## 功能
+
+-   改进的性能 - PHPNG代码合并在PHP7中，这是比 PHP5快两倍;
+-   降低内存消耗 - 优化后PHP7使用较少的资源;
+-   标量类型声明 - 现在，参数和返回值类型可以被强制执行;
+-   一致性的64位支持 - 64位架构机器持续支持;
+-   改进异常层次结构 - 异常层次结构得到改善;
+-   许多致命错误转换成异常 - 异常的范围增大覆盖为许多致命的错误转化异常；
+-   安全随机数发生器 - 加入新的安全随机数生成器的API;
+-   已过时的API和扩展删除 - 不同的旧的和不支持的应用程序和扩展，从最新的版本中删除;
+-   null合并运算符（??）的新空合并运算符被加入;
+-   返回和标量类型声明支持返回类型和参数类型也被加入;
+-   增加了对匿名匿名类的支持;
+-   零成本声明支持零成本加入断言。
+
+## 语法
+
+-   变量标量类型声明：标量类型声明与返回类型声明
+    -   int
+    -   float
+    -   bool
+    -   string
+    -   interfaces
+    -   array
+    -   callable
+-   Null合并运算符：用来与isset（）函数函数一起替换三元操作
+-   飞船操作符：用于比较两个表达式。当第一个表达式较第二个表达式分别小于，等于或大于时它分别返回-1，0或1。
+-   定义常量数组
+-   匿名类
+-   Closure::call() 方法加入到临时绑定（bindTo）的对象范围
+-   引入了过滤 unserialize（）函数以在反序列化不受信任的数据对象时提供更好的安全性。它可以防止可能的代码注入，使开发人员能够使用序列化白名单类。
+-   IntlChar类：这个类自身定义了许多静态方法用于操作多字符集的 unicode 字符。需要安装intl拓展
+-   两个新的函数引入以产生一个跨平台的方式加密安全整数和字符串。
+    -   random_bytes() - 生成加密安全伪随机字节。
+    -   random_int() - 生成加密安全伪随机整数。
+-   期望是向后兼容的增强到旧 assert() 函数。期望允许在生产代码零成本的断言，并提供在断言失败时抛出自定义异常的能力。assert() 不是一种语言构建体，其中第一个参数是一个表达式的比较字符串或布尔用于测试。
+    -   ssertion - 断言。在PHP 5中，这必须是要计算一个字符串或要测试一个布尔值。 在PHP中7，这也可能是一个返回值的表达式，将执行和使用的结果，以指示断言是成功还是失败。
+- 生成器支持返回表达式：它允许在生成器函数中通过使用 return 语法来返回一个表达式 （但是不允许返回引用值）， 可以通过调用 Generator::getReturn() 方法来获取生成器的返回值， 但是这个方法只能在生成器完成产生工作以后调用一次。
+- 生成器委派：只需在最外层生成其中使用yield from，就可以把一个生成器自动委派给其他的生成器
+- 会话选项设置：session_start() 可以加入一个数组覆盖php.ini的配置
+-   单次使用 use 语句可以用来从同一个命名空间导入类，函数和常量(而不用多次使用 use 语句)。
+-   错误处理：传统的错误报告机制的错误：通过抛出异常错误处理。类似于异常，这些错误异常会冒泡，直到它们到达第一个匹配的catch块。如果没有匹配的块，那么会使用 set_exception_handler() 安装一个默认的异常处理并被调用，并在情况下，如果没有默认的异常处理程序，那么该异常将被转换为一个致命的错误，并会像传统错误那样处理。
+    -   由于 Error 层次结构不是从异常（Exception），代码扩展使用catch (Exception $e) { ... } 块来处理未捕获的异常，PHP5中将不会处理这样的错误。  catch (Error $e) { ... } 块或 set_exception_handler（）处理程序需要处理的致命错误。
+-   引入了intdiv()的新函数，它执行操作数的整数除法并返回结果为 int 类型
+-   null合并运算符
+-   Unicode codepoint 转译语法:接受一个以16进制形式的 Unicode codepoint，并打印出一个双引号或heredoc包围的 UTF-8 编码格式的字符串。 可以接受任何有效的 codepoint，并且开头的 0 是可以省略的
+- preg_replace_callback_array：可以使用一个关联数组来对每个正则表达式注册回调函数， 正则表达式本身作为关联数组的键， 而对应的回调函数就是关联数组的值
+* 改变了大多数错误的报告方式。不同于传统（PHP 5）的错误报告机制，大多数错误被作为 Error 异常抛出。
+* list 会按照原来的顺序进行赋值。不再是逆序了.不再支持解开字符串
+* foreach不再改变内部数组指针
+* 十六进制字符串不再被认为是数字
+* $HTTP_RAW_POST_DATA 被移 使用php://input代替
+* 7.1
+  - 参数以及返回值的类型现在可以通过在类型前加上一个问号使之允许为空。当启用这个特性时，传入的参数或者函数返回的结果要么是给定的类型，要么是null
+  - 返回值声明为 void 类型的方法要么干脆省去 return 语句。对于 void来说，NULL 不是一个合法的返回值。
+  - 类常量可见性
+  - iterable 伪类:可以被用在参数或者返回值类型中，它代表接受数组或者实现了Traversable接口的对象.
+  - 多异常捕获处理:一个catch语句块现在可以通过管道字符(|)来实现多个异常的捕获。 这对于需要同时处理来自不同类的不同异常时很有用
+  - list支持键名
+  - 字符串支持负向
+  - 将callback 转闭包:Closure新增了一个静态方法，用于将callable快速地 转为一个Closure 对象。
+  - 对http2服务器推送的支持现在已经被加入到 CURL 扩展
+  - 传递参数过少时将抛出错误:过去我们传递参数过少 会产生warning。php7.1开始会抛出error
+  - 移除了ext/mcrypt拓展
+* 7.2
+  - 增加新的类型object
+  - 通过名称加载扩展:扩展文件不再需要通过文件加载 (Unix下以.so为文件扩展名，在Windows下以 .dll 为文件扩展名) 进行指定。可以在php.ini配置文件进行启用
+  - 允许重写抽象方法:当一个抽象类继承于另外一个抽象类的时候，继承后的抽象类可以重写被继承的抽象类的抽象方法。
+  - 使用Argon2算法生成密码散列:Argon2 已经被加入到密码散列（password hashing） API (这些函数以 password_ 开头), 以下是暴露出来的常量
+  - 新增 PDO 字符串扩展类型,准备支持多语言字符集，PDO的字符串类型已经扩展支持国际化的字符集。以下是扩展的常量：
+    + PDO::PARAM_STR_NATL
+    + PDO::PARAM_STR_CHAR
+    + PDO::ATTR_DEFAULT_STR_PARAM
+  - 命名分组命名空间支持尾部逗号
+  - number_format 返回值
+  - get_class()不再允许null。
+  - count 作用在不是 Countable Types 将发生warning
+  - 不带引号的字符串:在之前不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。现在将会产生waring。
+  - __autoload 被废弃
+  -  each 被废弃:使用此函数遍历时，比普通的 foreach 更慢， 并且给新语法的变化带来实现问题。因此它被废弃了。
+  - is_object、gettype修正:is_object 作用在**__PHP_Incomplete_Class** 将反正 true;gettype作用在闭包在将正确返回resource
+  - Convert Numeric Keys in Object/Array Casts:把数组转对象的时候，可以访问到整型键的值。
+* 7.3
+  - 添加了 array_key_first() 和 array_key_last() 来获取数组的第一个和最后一个元素的键名
+  - 添加了 fpm_get_status() 方法, 来获取FPM状态数组,
+  - 添加了几个FPM的配置项, 用来控制日志单行最大字符数, 日志缓冲等: log_limit, log_buffering, decorate_workers_output
+  - libcurl >= 7.15.5 is now required
+  - curl 添加了一堆常量
+  - json_decode 添加了一个常量, JSON_THROW_ON_ERROR, 如果解析失败可以抛出异常, 而不是通过之前的方法 json_last_error() 去获取
+  - spl autoloader: 如果一个加载失败, 剩下的都不再执行
+  - 说明了一些循环引用的情况会得到怎样的结果
+  - heredoc/nowdoc  中如果遇到跟定界符相同的字符串就认为结束了,  而最后真正的结束符则会被认为是语法错误;
+  - 在 循环+switch-case 语句的case 中使用continue 会报warning
+  - 说明了, 静态变量在被继承时, 如果在子类里发生了循环引用, 父类里的静态变量会跟着变
+* 7.4
+  - 短闭包函数
+  - 预加载:框架启动时在内存中加载文件，而且在后续请求中永久有效,每次预加载的文件发生改变时，框架需要重新启动
+  - 属性类型限定
+  - 三元运算符 `$data['date'] ??= new DateTime();`
+
+```php
+// Strict mode
+declare(strict_types=1);
+function sum(int ...$ints)
+{
+   return array_sum($ints);
+}
+print(sum(2, '3', 4.1)); # Fatal error
+
+declare(strict_types=1);
+function returnIntValue(int $value): int
+{
+   return $value + 1.0;
+}
+print(returnIntValue(5));
+
+$username = $_GET['username'] ?? $_POST['username'] ?? 'not passed'; # null合并运算符
+
+print( 1 <=> 1);print("<br/>"); // 0
+print( 1 <=> 2);print("<br/>"); // -1
+print( 2 <=> 1);print("<br/>"); // 1
+
+define('ALLOWED_IMAGE_EXTENSIONS', ['jpg', 'jpeg', 'gif', 'png']);
+
+interface Logger {
+   public function log(string $msg);
+}
+class Application {
+   private $logger;
+
+   public function getLogger(): Logger {
+      return $this->logger;
+   }
+
+   public function setLogger(Logger $logger) {
+      $this->logger = $logger;
+   }
+}
+
+$app = new Application;
+$app->setLogger(new class implements Logger {
+   public function log(string $msg) {
+      print($msg);
+   }
+});
+$app->getLogger()->log("My first Log Message");
+
+class A {
+   private $x = 1;
+}
+$value = function() {
+   return $this->x;
+};
+print($value->call(new A));
+
+class MyClass1 {
+   public $obj1prop;
+}
+class MyClass2 {
+   public $obj2prop;
+}
+$obj1 = new MyClass1();
+$obj1->obj1prop = 1;
+$obj2 = new MyClass2();
+$obj2->obj2prop = 2;
+$serializedObj1 = serialize($obj1);
+$serializedObj2 = serialize($obj2);
+$data = unserialize($serializedObj1 , ["allowed_classes" => true]); // 不允许将所有的对象都转换为 __PHP_Incomplete_Class 对象
+$data2 = unserialize($serializedObj2 , ["allowed_classes" => ["MyClass1", "MyClass2"]]); // 将除 MyClass 和 MyClass2 之外的所有对象都转换为 __PHP_Incomplete_Class 对象
+
+$bytes = random_bytes(5);
+print(bin2hex($bytes));
+print(random_int(-1000, 0));
+
+printf('%x', IntlChar::CODEPOINT_MAX);
+echo IntlChar::charName('@');
+var_dump(IntlChar::ispunct('!'));
+
+ini_set('assert.exception', 1);
+class CustomError extends AssertionError {}
+assert(false, new CustomError('Custom Error Message!'));
+
+use com\yiibai\{ClassA, ClassB, ClassC as C};
+use function com\yiibai\{fn_a, fn_b, fn_c};
+use const com\yiibai\{ConstA, ConstB, ConstC};
+
+$gen = (function() {
+    yield 1;
+    yield 2;
+
+    return 3;
+})();
+foreach ($gen as $val) {
+    echo $val, PHP_EOL;
+}
+echo $gen->getReturn(), PHP_EOL;
+# output
+//1
+//2
+//3
+
+function gen()
+{
+    yield 1;
+    yield 2;
+
+    yield from gen2();
+}
+function gen2()
+{
+    yield 3;
+    yield 4;
+}
+foreach (gen() as $val)
+{
+    echo $val, PHP_EOL;
+}
+var_dump(intdiv(10,3)) //3
+
+session_start([
+    'cache_limiter' => 'private',
+    'read_and_close' => true,
+]);
+
+class MathOperations
+{
+   protected $n = 10;
+
+   // Try to get the Division by Zero error object and display as Exception
+   public function doOperation(): string
+   {
+      try {
+         $value = $this->n % 0;
+         return $value;
+      } catch (DivisionByZeroError $e) {
+         return $e->getMessage();
+      }
+   }
+}
+$mathOperationsObj = new MathOperations();
+print($mathOperationsObj->doOperation());
+
+echo "\u{aa}";// ª
+echo "\u{0000aa}";// ª
+echo "\u{9999}";// 香
+
+string preg_replace_callback_array(array $regexesAndCallbacks, string $input);
+$tokenStream = []; // [tokenName, lexeme] pairs
+
+$input = <<<'end'
+$a = 3; // variable initialisation
+end;
+
+// Pre PHP 7 code
+preg_replace_callback(
+    [
+        '~\$[a-z_][a-z\d_]*~i',
+        '~=~',
+        '~[\d]+~',
+        '~;~',
+        '~//.*~'
+    ],
+    function ($match) use (&$tokenStream) {
+        if (strpos($match[0], '$') === 0) {
+            $tokenStream[] = ['T_VARIABLE', $match[0]];
+        } elseif (strpos($match[0], '=') === 0) {
+            $tokenStream[] = ['T_ASSIGN', $match[0]];
+        } elseif (ctype_digit($match[0])) {
+            $tokenStream[] = ['T_NUM', $match[0]];
+        } elseif (strpos($match[0], ';') === 0) {
+            $tokenStream[] = ['T_TERMINATE_STMT', $match[0]];
+        } elseif (strpos($match[0], '//') === 0) {
+            $tokenStream[] = ['T_COMMENT', $match[0]];
+        }
+    },
+    $input
+);
+
+// PHP 7+ code
+preg_replace_callback_array(
+    [
+        '~\$[a-z_][a-z\d_]*~i' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_VARIABLE', $match[0]];
+        },
+        '~=~' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_ASSIGN', $match[0]];
+        },
+        '~[\d]+~' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_NUM', $match[0]];
+        },
+        '~;~' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_TERMINATE_STMT', $match[0]];
+        },
+        '~//.*~' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_COMMENT', $match[0]];
+        }
+    ],
+    $input
+);
+
+interface Throwable
+    |- Exception implements Throwable
+        |- ...
+    |- Error implements Throwable
+        |- TypeError extends Error
+        |- ParseError extends Error
+        |- AssertionError extends Error
+        |- ArithmeticError extends Error
+            |- DivisionByZeroError extends ArithmeticError
+function handler(Exception $e) { ... }
+set_exception_handler('handler');
+
+// 兼容 PHP 5 和 7
+function handler($e) { ... }
+
+// 仅支持 PHP 7
+function handler(Throwable $e) { ... }
+
+list($a,$b,$c) = [1,2,3];
+var_dump($a);//1
+var_dump($b);//2
+var_dump($c);//3
+
+$array = [0, 1, 2];
+foreach ($array as &$val) {
+    var_dump(current($array));
+}
+?>
+#php 5
+int(1)
+int(2)
+bool(false)
+#php7
+int(0)
+int(0)
+int(0)
+
+var_dump("0x123" == "291");
+#php5
+true
+#php7
+false
+
+function fun() :?string
+{
+  return null;
+}
+
+function fun1(?$a)
+{
+  var_dump($a);
+}
+fun1(null);//null
+fun1('1');//1
+
+function fun() :void
+{
+  echo "hello world";
+}
+
+function fun() :void
+{
+  echo "hello world";
+}
+
+class Something
+{
+    const PUBLIC_CONST_A = 1;
+    public const PUBLIC_CONST_B = 2;
+    protected const PROTECTED_CONST = 3;
+    private const PRIVATE_CONST = 4;
+}
+
+function iterator(iterable $iter)
+{
+    foreach ($iter as $val) {
+        //
+    }
+}
+
+try {
+    // some code
+} catch (FirstException | SecondException $e) {
+    // handle first and second exceptions
+}
+
+$data = [
+    ["id" => 1, "name" => 'Tom'],
+    ["id" => 2, "name" => 'Fred'],
+];
+
+// list() style
+list("id" => $id1, "name" => $name1) = $data[0];
+var_dump($id1);//1
+
+$a= "hello";
+$a[-2];//l
+
+<?php
+class Test
+{
+    public function exposeFunction()
+    {
+        return Closure::fromCallable([$this, 'privateFunction']);
+    }
+
+    private function privateFunction($param)
+    {
+        var_dump($param);
+    }
+}
+
+$privFunc = (new Test)->exposeFunction();
+$privFunc('some value');
+
+function test(object $obj) : object
+{
+    return new SplQueue();
+}
+test(new StdClass());
+
+; ini file
+extension=php-ast
+zend_extension=opcache
+
+abstract class A
+{
+    abstract function test(string $s);
+}
+abstract class B extends A
+{
+    // overridden - still maintaining contravariance for parameters and covariance for return
+    abstract function test($s) : int;
+}
+
+use Foo\Bar\{
+    Foo,
+    Bar,
+    Baz,
+};
+
+var_dump(number_format(-0.01)); // now outputs string(1) "0" instead of string(2) "-0"
+
+var_dump(get_class(null))// warning
+
+count(1), // integers are not countable
+
+// array to object
+$arr = [0 => 1];
+$obj = (object)$arr;
+var_dump(
+    $obj,
+    $obj->{'0'}, // now accessible
+    $obj->{0} // now accessible
+);
+
+array_map(fn(User $user) => $user->id, $users)
+
+```
+
+## 禁止
+
+-   不要使用 `mysql_` 函数：从核心中全部移除了
+
+## 工具
+
+* [swisnl/php7-upgrade-tools](https://github.com/swisnl/php7-upgrade-tools):A set of tools for upgrading applications to PHP 7
+* [rectorphp/rector](https://github.com/rectorphp/rector):Instant Upgrades for PHP Applications https://www.tomasvotruba.cz/blog/2018/02/19/rector-part-1-what-and-how/
+
+## 参考
+
+-   [tpunt/PHP7-Reference](tpunt/PHP7-Reference):An overview of the features, changes, and backward compatibility breakages in PHP 7
+
+## PHP能力
+
+用工具来实现想法，不管是自己的想法还是他人的需求，学会转化
+
+* 平静的心态：遇事不可急躁，不可轻言放弃，而是需要静静的思考。
+* 一套烂熟于心的问题解决思路
+    - 编码问题
+    - PHP和SQL数据库执行效率问题
+    - Session和Cookie域和加密解析问题
+    - 程序的执行顺序问题
+    - 程序编写的多环境适用问题
+    - 分类的构建和结构设计问题
+    - 字符串处理问题：正则表达式处理或简单PHP字符串处理函数来处理
+    - 各种模板引擎的编写局限性问题
+    - PHP和web端数据交互问题（如ajax，接口调用等）
+* 过硬的PHP基础知识：没有过硬的PHP基础知识，哪怕心态再好，问题解决的能力再强，也只能纸上谈兵。过硬的基础知识会让你在项目开发过程中游刃有余。
+    - 语法规则，这个不说了，这个不会，就没入门，赶紧买本书或找个网站补补
+    - MYSQL各种sql语句的写法，增删改查基本的不说了,in(),union,left(),leftjoin,as,replace,alter table,where的字段排序,各种索引建立的方法要特别熟悉。
+    - 会自己搭建LAMP环境和WAMP环境，用集成软件一键式安装的不算。开发程序，对于自己开发的环境构建结构都不清楚，怎么排查问题？所以至少要会用对立的msi文件来安装自己需要的开发环境。安装3-5遍成功，这个算还行，还得会安装各种扩展，配置apache服务，知道各种参数设置的地方以及知道怎么设置各种参数；会linux操作系统的基本命令。
+    - 熟悉web方面的其他程序，因为PHP不是一个完全独立的东西，他是一个和其他语言和要素配合来完成一个项目的，如果对其他语言和要素不太熟悉，在团队协作过程中会非常吃力。这些其他要素包括：html，javascript，jquery，xml，http协议，正则表达式等
+* 综合的互联网应用及项目管理知识和素养
+    - 见识广博，擅于学习：不要只顾着天天编程，学会抽点时间去看看一些大型开源系统的架构思路，以及大型商务网站的构建方式。向他们学习，补充自己的不足。比如至少该晓得不同类型的开源系统有哪些吧，比如Uchome,dede,phpcms,wordpress,discuz,帝国等等看多了，会总结发现一些常规性的思路，比如缓存的机制，比如模板机制，比如静态页面生成等等。
+    - 项目解决方案选型：不同需求，用不同的机构和选型。有些架构固然强大，但是用于小型项目也会很吃力，就是杀机不用牛刀。根据需求来选型很重要。选型不是随口就能定的，需要一个PHP程序员用于良好的储备，个人觉得至少需要以下储备，才具备选型能力：熟练应用至少一个PHP框架，两-三个PHP开源系统；拥有自己的一套应用系统。
+    - 良好的项目管理素养：项目不是一直开发过程中，项目也会进入运营期，维护期，这样，具备良好的项目管理素养会使项目更加稳定，可控。良好的项目管理素养包括：
+        + 良好的项目开发及维护习惯，记住：千万别为了一时的省力，造成后面多次的重复劳动。时时提醒自己将工作流程化，流程规划化，规范简单化。
+        + 良好的多人合作管理意识：项目不是一个人的，是多人协作的产物，也是服务于大众的，因而，要提升协作意识，让相关人员一同来完善项目。
+    - 丰富的项目开发应用经验：学理论，去考试或考核是学校里面的事儿，没有项目经验，就像满肚子经文，吐也难吐出。这就需要实际的项目将自己的知识去学会转化为需求实现。
+    - 良好的开发规范
+        + 代码可读性强：对象，方法，函数的注释；一套成熟的命名规范；
+        + 代码冗余度底：程序和文件的重用性大，高内聚，低耦合
+        + 执行效率高：用最简单的程序流程实现应用需求，勿扰大弯子
+        + 代码安全性好：做一名警惕的程序员，任何有用户输入和上传文件的地方都得额外谨慎，也许一个程序员一时的疏忽就会导致一个系统顷刻间崩溃。
+
+## 技术结构
+
+## 第一阶段：基础阶段（基础PHP程序员）
+
+重点：把LNMP搞熟练（核心是安装配置基本操作)
+
+目标：能够完成基本的LNMP系统安装，简单配置维护；能够做基本的简单系统的PHP开发；能够在PHP中型系统中支持某个PHP功能模块的开发。
+
+时间：完成本阶段的时间因人而异，有的成长快半年一年就过了，成长慢的两三年也有。
+
+### Linux
+
+基本命令、操作、启动、基本服务配置（包括rpm安装文件，各种服务配置等）；
+会写简单的shell脚本和awk/sed 脚本命令等。
+
+### Nginx
+
+做到能够安装配置nginx+php，知道基本的nginx核心配置选项，知道 server/fastcgi_pass/access_log 等基础配置，目标是能够让nginx+php_fpm顺利工作。
+
+### MySQL
+
+会自己搭建mysql，知道基本的mysql配置选项；知道innodb和myisam的区别，知道针对InnoDB和MyISAM两个引擎的不同配置选项；
+知道基本的两个引擎的差异和选择上面的区别；能够纯手工编译搭建一个MySQL数据库并且配置好编码等正常稳定运行；核心主旨是能够搭建一个可运行的MySQL数据库。
+
+### PHP
+
+基本语法数组、字符串、数据库、XML、Socket、GD/ImageMgk图片处理等等；
+熟悉各种跟MySQL操作链接的api（mysql/mysqli/PDO)，知道各种编码问题的解决；知道常规熟练使用的PHP框架（ThinkPHP、Zendframework、Yii、Yaf等）；
+了解基本MVC的运行机制和为什么这么做，稍微知道不同的PHP框架之间的区别；
+能够快速学习一个MVC框架。能够知道开发工程中的文件目录组织，有基本的良好的代码结构和风格，能够完成小系统的开发和中型系统中某个模块的开发工作。
+
+### 前端
+
+如果条件时间允许，可以适当学习下 HTML/CSS/JS 等相关知识，知道什么web标准，div+css的web/wap页面模式，知道HTML5和HTML4的区别；
+了解一些基本的前端只是和JS框架（jQuery之类的）；
+了解一些基本的JavaScript编程知识；（本项不是必须项，如果有时间，稍微了解一下是可以的，不过不建议作为重点，除非个人有强烈兴趣）
+
+### 系统设计
+能够完成小型系统的基本设计，包括简单的数据库设计，能够完成基本的浏览器 -< Nginx+PHP -< 数据库 架构的设计开发工作；
+能够支撑每天几十万到数百万流量网站的开发维护工作；
+
+## 第二阶段：提高阶段
+
+重点：提高针对LNMP的技能，能够更全面的对LNMP有熟练的应用。
+目标：能够随时随地搭建好LNMP环境，快速完成常规配置；能够追查解决大部分遇到的开发和线上环境的问题；能够独立承担中型系统的构架和开发工作；能够在大型系统中承担某个中型模块的开发工作；
+
+### Linux:
+
+在第一阶段的基础上面，能够流畅的使用Shell脚本来完成很多自动化的工作；
+awk/sed/perl 也操作的不错，能够完成很多文本处理和数据统计等工作；
+基本能够安装大部分非特殊的Linux程序（包括各种库、包、第三方依赖等等，比如MongoDB/Redis/Sphinx/Luncene/SVN之类的）；
+了解基本的Linux服务，知道如何查看Linux的性能指标数据，知道基本的Linux下面的问题跟踪等。
+
+### Nginx:
+
+在第一阶段的基础上面，了解复杂一些的Nginx配置；
+包括 多核配置、events、proxy_pass，sendfile/tcp_*配置，知道超时等相关配置和性能影响；
+知道nginx除了web server，还能够承担代理服务器、反向静态服务器等配置；
+知道基本的nginx配置调优；
+知道如何配置权限、编译一个nginx扩展到nginx；
+知道基本的nginx运行原理（master/worker机制，epoll），知道为什么nginx性能比apache性能好等知识；
+
+### MySQL/MongoDB：
+
+在第一阶段的基础上面，在MySQL开发方面，掌握很多小技巧，包括常规SQL优化（group by/order by/rand优化等）；
+除了能够搭建MySQL，还能够冷热备份MySQL数据，还知道影响innodb/myisam性能的配置选项（比如key_buffer/query_cache/sort_buffer/innodb_buffer_pool_size/innodb_flush_log_at_trx_commit等），也知道这些选项配置成为多少值合适；
+另外也了解一些特殊的配置选项，比如 知道如何搭建mysql主从同步的环境，知道各个binlog_format的区别；
+知道MySQL的性能追查，包括slow_log/explain等，还能够知道基本的索引建立处理等知识；
+原理方面了解基本的MySQL的架构（Server+存储引擎），知道基本的InnoDB/MyISAM索引存储结构和不同（聚簇索引，B树）；
+知道基本的InnoDB事务处理机制；
+了解大部分MySQL异常情况的处理方案（或者知道哪儿找到处理方案）；
+条件允许的情况，建议了解一下NoSQL的代表MongoDB数据库，顺便对比跟MySQL的差别，同时能够在合适的应用场景安全谨慎的使用MongoDB，知道基本的PHP与MongoDB的结合开发。
+
+### Redis/Memcached：
+
+在大部分中型系统里面一定会涉及到缓存处理，所以一定要了解基本的缓存；
+知道Memcached和Redis的异同和应用场景，能够独立安装 Redis/Memcached，了解Memcahed的一些基本特性和限制，比如最大的value值，知道PHP跟他们的使用结合；
+Redis了解基本工作原理和使用，了解常规的数据类型，知道什么场景应用什么类型，了解Redis的事务等等;
+原理部分，能够大概了解Memcached的内存结构（slab机制），redis就了解常用数据类型底层实现存储结构（SDS/链表/SkipList/HashTable）等等，顺便了解一下Redis的事务、RDB、AOF等机制更好
+
+### PHP：
+
+除了第一阶段的能力，安装配置方面能够随意安装PHP和各种第三方扩展的编译安装配置；
+了解php-fpm的大部分配置选项和含义（如max_requests/max_children/request_terminate_timeout之类的影响性能的配置），知道mod_php/fastcgi的区别；
+在PHP方面已经能够熟练各种基础技术，还包括各种深入些的PHP，包括对PHP面向对象的深入理解/SPL/语法层面的特殊特性比如反射之类的；
+在框架方面已经阅读过最少一个以上常规PHP MVC框架的代码了，知道基本PHP框架内部实现机制和设计思想；在PHP开发中已经能够熟练使用常规的设计模式来应用开发（抽象工厂/单例/观察者/命令链/策略/适配器 等模式）；
+建议开发自己的PHP MVC框架来充分让开发自由化，让自己深入理解MVC模式，也让自己能够在业务项目开发里快速升级；
+熟悉PHP的各种代码优化方法，熟悉大部分PHP安全方面问题的解决处理；熟悉基本的PHP执行的机制原理（Zend引擎/扩展基本工作机制）；
+
+### C/C++：
+
+开始涉猎一定的C/C++语言，能够写基本的C/C++代码，对基本的C/C++语法熟悉（指针、数组操作、字符串、常规标准API）和数据结构（链表、树、哈希、队列）有一定的熟悉下；
+对Linux下面的C语言开发有基本的了解概念，会简单的makefile文件编写，能够使用简单的GCC/GDB的程序编译简单调试工作；
+对基本的网络编程有大概了解。（本项是为了向更高层次打下基础）
+
+### 前端：
+
+在第一阶段的基础上面，熟悉基本的HTTP协议（协议代码200/300/400/500，基本的HTTP交互头）；
+条件允许，可以在深入写出稍微优雅的HTML+CSS+JavaScript，或者能够大致简单使用某些前端框架（jQuery/YUI/ExtJS/RequireJS/BootStrap之类）；
+如果条件允许，可以深入学习JavaScript编程，比如闭包机制、DOM处理；再深入些可以读读jQuery源码做深入学习。（本项不做重点学习，除非对前端有兴趣）
+
+### 系统设计：
+
+能够设计大部分中型系统的网站架构、数据库、基本PHP框架选型；性能测试排查处理等；
+能够完成类似：浏览器 -< CDN(Squid) -< Nginx+PHP -< 缓存 -< 数据库 结构网站的基本设计开发维护；
+能够支撑每天数百万到千万流量基本网站的开发维护工作；
+
+## 第三阶段：高级阶段 （高级PHP程序员）
+
+重点：除了基本的LNMP程序，还能够在某个方向或领域有深入学习。（纵深维度发展）
+
+目标：除了能够完成基本的PHP业务开发，还能够解决大部分深入复杂的技术问题，并且可以独立设计完成中大型的系统设计和开发工作；自己能够独立hold深入某个技术方向，在这块比较专业。（比如在MySQL、Nginx、PHP、Redis等等任一方向深入研究）
+
+### Linux：
+
+除了第二阶段的能力，在Linux下面除了常规的操作和性能监控跟踪，还能够使用很多高级复杂的命令完成工作（watch/tcpdump/starce/ldd/ar等)；
+在shell脚本方面，已经能够编写比较复杂的shell脚本（超过500行）来协助完成很多包括备份、自动化处理、监控等工作的shell；
+对awk/sed/perl 等应用已经如火纯青，能够随意操作控制处理文本统计分析各种复杂格式的数据；
+对Linux内部机制有一些了解，对内核模块加载，启动错误处理等等有个基本的处理；
+同时对一些其他相关的东西也了解，比如NFS、磁盘管理等等；
+#
+## Nginx:
+
+在第二阶段的基础上面，已经能够把Nginx操作的很熟练，能够对Nginx进行更深入的运维工作，比如监控、性能优化，复杂问题处理等等；
+看个人兴趣，更多方面可以考虑侧重在关于Nginx工作原理部分的深入学习，主要表现在阅读源码开始，比如具体的master/worker工作机制，Nginx内部的事件处理，内存管理等等；
+同时可以学习Nginx扩展的开发，可以定制一些自己私有的扩展；
+同时可以对Nginx+Lua有一定程度的了解，看看是否可以结合应用出更好模式；
+这个阶段的要求是对Nginx原理的深入理解，可以考虑成为Nginx方向的深入专业者。
+
+### MySQL/MongoDB：
+
+在第二阶段的基础上面，在MySQL应用方面，除了之前的基本SQL优化，还能够在完成一些复杂操作，比如大批量数据的导入导出，线上大批量数据的更改表结构或者增删索引字段等等高危操作；
+除了安装配置，已经能够处理更多复杂的MySQL的问题，比如各种问题的追查，主从同步延迟问题的解决、跨机房同步数据方案、MySQL高可用架构等都有涉及了解；
+对MySQL应用层面，对MySQL的核心关键技术比较熟悉，比如事务机制（隔离级别、锁等）、对触发器、分区等技术有一定了解和应用；
+对MySQL性能方面，有包括磁盘优化（SAS迁移到SSD）、服务器优化（内存、服务器本身配置）、除了二阶段的其他核心性能优化选项（innodb_log_buffer_size/back_log/table_open_cache/thread_cache_size/innodb_lock_wait_timeout等）、连接池软件选择应用，对show *（show status/show profile）类的操作语句有深入了解，能够完成大部分的性能问题追查；
+MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解，冷热备份，多IDC备份等；在MySQL原理方面，有更多了解，比如对MySQL的工作机制开始阅读部分源码，比如对主从同步（复制）技术的源码学习，或者对某个存储引擎（MyISAM/Innodb/TokuDB）等等的源码学习理解，如果条件允许，可以参考CSV引擎开发自己简单的存储引擎来保存一些数据，增强对MySQL的理解；
+在这个过程，如果自己有兴趣，也可以考虑往DBA方向发展。MongoDB层面，可以考虑比如说在写少读多的情况开始在线上应用MongoDB，或者是做一些线上的数据分析处理的操作，具体场景可以按照工作来，不过核心是要更好的深入理解RMDBS和NoSQL的不同场景下面的应用，如果条件或者兴趣允许，可以开始深入学习一下MongoDB的工作机制。
+
+### Redis/Memcached：
+
+在第二阶段的基础上面，能够更深入的应用和学习。因为Memcached不是特别复杂，建议可以把源码进行阅读，特别是内存管理部分，方便深入理解；Redis部分，可以多做一些复杂的数据结构的应用（zset来做排行榜排序操作/事务处理用来保证原子性在秒杀类场景应用之类的使用操作）；
+多涉及aof等同步机制的学习应用，设计一个高可用的Redis应用架构和集群；
+建议可以深入的学习一下Redis的源码，把在第二阶段积累的知识都可以应用上，特别可以阅读一下包括核心事件管理、内存管理、内部核心数据结构等充分学习了解一下。如果兴趣允许，可以成为一个Redis方面非常专业的使用者。
+
+### PHP：
+
+作为基础核心技能，我们在第二阶段的基础上面，需要有更深入的学习和应用。
+
+从基本代码应用上面来说，能够解决在PHP开发中遇到95%的问题，了解大部分PHP的技巧；
+对大部分的PHP框架能够迅速在一天内上手使用，并且了解各个主流PHP框架的优缺点，能够迅速方便项目开发中做技术选型；
+在配置方面，除了常规第二阶段会的知识，会了解一些比较偏门的配置选项（php auto_prepend_file/auto_append_file），包括扩展中的一些复杂高级配置和原理（比如memcached扩展配置中的memcache.hash_strategy、apc扩展配置中的apc.mmap_file_mask/apc.slam_defense/apc.file_update_protection之类的）；
+对php的工作机制比较了解，包括php-fpm工作机制（比如php-fpm在不同配置机器下面开启进程数量计算以及原理），对zend引擎有基本熟悉（vm/gc/stream处理），阅读过基本的PHP内核源码（或者阅读过相关文章），对PHP内部机制的大部分核心数据结构（基础类型/Array/Object）实现有了解，对于核心基础结构（zval/hashtable/gc）有深入学习了解；
+能够进行基本的PHP扩展开发，了解一些扩展开发的中高级知识（minit/rinit等），熟悉php跟apache/nginx不同的通信交互方式细节（mod_php/fastcgi）；
+除了开发PHP扩展，可以考虑学习开发Zend扩展，从更底层去了解PHP。
+
+### C/C++：
+
+在第二阶段基础上面，能够在C/C++语言方面有更深入的学习了解，能够完成中小型C/C++系统的开发工作；
+除了基本第二阶段的基础C/C++语法和数据结构，也能够学习一些特殊数据结构（b-tree/rb-tree/skiplist/lsm-tree/trie-tree等）方便在特殊工作中需求；
+在系统编程方面，熟悉多进程、多线程编程；多进程情况下面了解大部分多进程之间的通信方式，能够灵活选择通信方式（共享内存/信号量/管道等）；
+多线程编程能够良好的解决锁冲突问题，并且能够进行多线程程序的开发调试工作；同时对网络编程比较熟悉，了解多进程模型/多线程模型/异步网络IO模型的差别和选型，熟悉不同异步网络IO模型的原理和差异（select/poll/epoll/iocp等），并且熟悉常见的异步框架（ACE/ICE/libev/libevent/libuv/Boost.ASIO等）和使用，如果闲暇也可以看看一些国产自己开发的库（比如muduo）；
+同时能够设计好的高并发程序架构（leader-follow/master-worker等）；
+了解大部分C/C++后端Server开发中的问题（内存管理、日志打印、高并发、前后端通信协议、服务监控），知道各个后端服务RPC通信问题（struct/http/thirft/protobuf等）；
+能够更熟络的使用GCC和GDB来开发编译调试程序，在线上程序core掉后能够迅速追查跟踪解决问题；
+通用模块开发方面，可以积累或者开发一些通用的工具或库（比如异步网络框架、日志库、内存池、线程池等），不过开发后是否应用要谨慎，省的埋坑去追bug；
+
+### 前端：
+
+深入了解HTTP协议（包括各个细致协议特殊协议代码和背后原因，比如302静态文件缓存了，502是nginx后面php挂了之类的）；
+除了之前的前端方面的各种框架应用整合能力，前端方面的学习如果有兴趣可以更深入，表现形式是，可以自己开发一些类似jQuery的前端框架，或者开发一个富文本编辑器之类的比较琐碎考验JavaScript功力；
+
+### 其他领域语言学习：
+
+在基础的PHP/C/C++语言方面有基本积累，建议在当前阶段可以尝试学习不同的编程语言，看个人兴趣爱好，脚本类语言可以学学 Python/Ruby 之类的，函数式编程语言可以试试 Lisp/Haskell/Scala/Erlang 之类的，静态语言可以试试 Java/Golang，数据统计分析可以了解了解R语言，如果想换个视角做后端业务，可以试试 Node.js还有前面提到的跟Nginx结合的Nginx_Lua等。学习不同的语言主要是提升自己的视野和解决问题手段的差异，比如会了解除了进程/线程，还有轻量级协程；
+比如在跨机器通信场景下面，Erlang的解决方案简单的惊人；比如在不想选择C/C++的情况下，还有类似高效的Erlang/Golang可用等等；
+主要是提升视野。
+
+### 其他专业方向学习：
+
+在本阶段里面，会除了基本的LNMP技能之外，会考虑一些其他领域知识的学习，这些都是可以的，看个人兴趣和长期的目标方向。
+
+目前情况能够选择的领域比较多，比如、云计算（分布式存储、分布式计算、虚拟机等），机器学习（数据挖掘、模式识别等，应用到统计、个性化推荐），自然语言处理（中文分词等），搜索引擎技术、图形图像、语音识别等等。
+
+除了这些高大上的，也有很多偏工程方面可以学习的地方，比如高性能系统、移动开发（Android/IOS）、计算机安全、嵌入式系统、硬件等方向。
+
+### 系统设计：
+
+系统设计在第二阶段的基础之上，能够应用掌握的经验技能，设计出比较复杂的中大型系统，能够解决大部分线上的各种复杂系统的问题，完成类似 浏览器 -< CDN -< 负载均衡 -<接入层 -< Nginx+PHP -< 业务缓存 -< 数据库 -< 各路复杂后端RPC交互（存储后端、逻辑后端、反作弊后端、外部服务） -< 更多后端 酱紫的复杂业务；
+能够支撑每天数千万到数亿流量网站的正常开发维护工作。
+
+
+## 面试
+
+> mysql_real_escape_string mysql_escape_string区别
+
+mysql_real_escape_string需要预先连接数据库，并可在第二个参数传入数据库连接（不填则使用上一个连接）
+两者都是对数据库插入数据进行转义，但是mysql_real_escape_string转义时，会考虑数据库连接的字符集。
+它们的用处都是用来能让数据正常插入到数据库中，并防止sql注入，但是并不能做到100%防止sql注入。
+
+> 内存泄漏
+
+内存泄漏是因为一块被分配内存既不能被使用，也不能被回收，直到浏览器进程结束。
+
+页面元素被删除，但是绑定在该元素上的事件未被删除；
+闭包维持函数内局部变量（外部不可控），使其得不到释放；
+意外的全局变量；
+引用被删除，但是引用内的引用，还存在内存中。
+
+外部调用类函数
+
+> sql注入
+
+ZEND引擎维护了一个栈zval，每个创建的变量和资源都会压入这个栈中，每个压入的数组结构都类似：[refcount => int, is_ref => 0|1, value => union, type => string]，变量被unset时，ref_count如果变成0，则被回收。
+
+当遇到变量循环引用自身时，使用同步回收算法回收。
+
+sapi是php封装的对外数据传递接口，通常有cgi/fastcgi/cli/apache2handler四种运行模式。
+
+crc32
+
+
+索引用b+树存储，而不是哈希表，数据库索引存储还有其他数据结构吗？
+
+答：O(log(n))，O(1)
+
+因为哈希表是散列的，在遇到`key`>'12'这种查找条件时，不起作用，并且空间复杂度较高。
+
+备注：b+数根据层数决定时间复杂度，数据量多的情况下一般4-5层，然后用二分法查找页中的数据，时间复杂度远小于log(n)。
+
 ## 扩展
 
 * intl
@@ -2873,6 +3861,17 @@ exit;
 >  5096 segmentation fault (core dumped)  php http_server.php
 
 >  Warning: "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"?
+
+## 环境平台
+
+* [XAMPP](https://www.apachefriends.org/index.html)
+* [wamp](link)
+* [mamp](https://www.mamp.info)
+    - http://localhost:8888/MAMP/
+    - /Applications/MAMP/htdocs
+    - MySQL port：8889
+* Wnmp:Version of nginx for Windows uses the native Win32 API (not the Cygwin emulation layer). Only the select() connection processing method is currently used, so high performance and scalability should not be expected. 
+    - `tasklist /fi "imagename eq nginx.exe" # 查看进程，没有查看error.log`
 
 ## 面试
 

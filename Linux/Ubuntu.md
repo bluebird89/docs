@@ -132,8 +132,8 @@ sudo apt-get autoremove # 移除之前被其他软件包依赖，但现在不再
 sudo apt-get clean # 移除下载到本地的已经安装的软件包，默认保存在/var/cache/apt/archives/
 sudo apt-get autoclean #移除已安装的软件的旧版本软件包
 
-sudo dpkg --configure -a # fixing broken dependencies
-dpkg
+sudo dpkg --configure -a # fixing broken dependencies E: Sub-process /usr/bin/dpkg returned an error code (1)
+sudo apt-get install -f
 ## 参数
 -i|--install
 -l|--list #简明地列出软件包的状态。
@@ -197,10 +197,13 @@ make && make install
 
 ### 列表
 
-* 云笔记:simplenote
-* video: VLC
-* editor: atom
-* oh my zsh 而非 zsh fish
+* 云笔记
+  - simplenote
+* video:
+  - VLC
+* editor
+  - atom
+* oh my zsh
 * KchmViewer:阅读CHM
 * LaTeX
 * Chromium
@@ -214,7 +217,12 @@ make && make install
 * albert
 * 听播客: Vocal
 * PDF 阅读：Foxit Reader
-* gimp
+* 图片
+  - gnome-screenshot:`sudo apt-get install gnome-screenshot`
+  - Gimp
+  - Shutter
+  - Imagemagick
+  - Kazam
 * Gtile:分屏工具
 * MySQL Workbench
 * Cloud music
@@ -228,6 +236,18 @@ make && make install
 * [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite
 * [Sayonara Player](https://sayonara-player.com/index.php)
 * Disk Usage Analyzer
+* 浮动图标工具栏：docky `sudo apt-get install docky`
+* 贴纸
+  - indicator-stickynotes
+  - Xpad:`sudo apt-get install xpad`
+
+```
+sudo add-apt-repository ppa:umang/indicator-stickynotes
+sudo apt-get update
+sudo apt-get install indicator-stickynotes 
+
+```
+
 
 ## VM
 
@@ -755,6 +775,7 @@ im-config
 
 # download sogoupinyin_2.2.0.0108_amd64.deb
 sudo dpkg  -i   sogoupinyin_2.2.0.0108_amd64.deb # 手动安装
+sudo apt-get install -f
 
 # 配置
 system setting->language support
@@ -783,8 +804,6 @@ sudo apt-get update
 sudo apt-get install google-chrome-stable
 
 # mysql workbeach
-
-# down
 sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 sudo apt-get update
 sudo apt-get install mysql-workbench-community
@@ -801,6 +820,13 @@ sudo aptitude install <packagename>
 
 sudo dpkg --configure -a # fixing broken dependencies
 sudo apt-get install -f
+
+[VMware Workstation 12 Pro](http://www.vmware.com/cn/products/workstation/workstation-evaluation)
+sudo chmod +x VMware-Workstation-Full-12.1.1-3770994.x86_64.bundle
+sudo ./VMware-Workstation-Full-12.1.1-3770994.x86_64.bundle
+可用Linux版注册密钥：5A02H-AU243-TZJ49-GTC7K-3C61N
+VMware =》 菜单选中VM =》点击 Install VMware Tools
+sudo apt-get install lamp-server
 ```
 
 > PHP

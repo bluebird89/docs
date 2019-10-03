@@ -405,7 +405,7 @@ if(password_verify($password, $hash)) {
 ## 参考
 
 * [wx-chevalier/Web-Series](https://github.com/wx-chevalier/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
-* [Web](https://developers.google.com/web/)
+* [Web](https://developers.google.com/web/) 
 * [Web](https://developer.mozilla.org/zh-CN/docs/Web)
 * [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
 * [Web 开发](https://www.ibm.com/developerworks/cn/web/)
