@@ -169,16 +169,17 @@
 * Taiga
 * Tuleap
 * Jira Software from Atlassian
+* conflurence : document
 * VivifyScrum
 * Binfire
 * VersionOne
 * Wrike
-*  Zoho Sprints
-*  PivotalTracker
-*  Assembla
-*  Planbox
-*  Axosoft
-*  [TAPD](https://www.tapd.cn/official/index):腾讯敏捷研发体系十余年的发展成果，为产品研发全生命周期提供解决方案，支持敏捷需求规划、迭代计划跟踪、测试与质量保证、持续构建交付等全过程研发实践
+* Zoho Sprints
+* PivotalTracker
+* Assembla
+* Planbox
+* Axosoft
+* [TAPD](https://www.tapd.cn/official/index):腾讯敏捷研发体系十余年的发展成果，为产品研发全生命周期提供解决方案，支持敏捷需求规划、迭代计划跟踪、测试与质量保证、持续构建交付等全过程研发实践
 
 ## 图书
 

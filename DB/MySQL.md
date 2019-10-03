@@ -597,7 +597,6 @@ where timestamp between :date1 and :date2
 group by day(timestamp), hour(timestamp)
 
 select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at) as time from tmo_loyalty_customersync_log  group by year(created_at),month(created_at),day(created_at),hour(created_at)  order by begin desc limit 10;
-
 ```
 
 ### 库表操作
@@ -647,6 +646,8 @@ CREATE TABLE test.news(
 )charset=utf8 collate=utf8_bin;
 CREATE TABLE table_name SELECT column1,cloumn2 FROM another_table: # 复制数据不复制主键
 CREATE TABLE table_name like another_table；  #  数据不复制，主键复制
+INSERT office_dup SELECT * FROM offices;
+
 DESCRIBE|DESC news;
 show columns from news;
 SHOW CREATE TABELE news\G;
@@ -657,7 +658,7 @@ ALTER TABLE table_name MODIFY address varchar(100);
 ALTER TABLE table_name CHANGE address add varchar(100) after id;
 ALTER TABLE table_name engine=myisam;
 ALTER TABLE table_name rename to new_table_name;
-RENAME table table_name to new_table_name;
+RENAME table table_name to new_table_name, tb3 TO tb4;
 ALTER TABLE table_name rename to another_DB.new_table_name; # 移动表
 ALTER TABLE 'table_name' ADD PRIMARY KEY'index_name' ('column');
 ALTER TABLE 'table_name' ADD UNIQUE 'index_name' ('column');
@@ -2561,6 +2562,8 @@ http://localhost:3000
     + MySQLWorkbench
     + SQLyog   `ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
     + [phpmyadmin/phpmyadmin](https://github.com/phpmyadmin/phpmyadmin):A web interface for MySQL and MariaDB https://www.phpmyadmin.net/
+        * `sudo apt-get install phpmyadmin`
+        * 
     + Sequel Pro
 * ER图
     - PowerDesigner

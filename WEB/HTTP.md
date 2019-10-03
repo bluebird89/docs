@@ -797,6 +797,15 @@ client(内置证书机构证书) <---------------------------   证书机构
                      --------------------------->　　server(对称加密)
 ```
 
+```
+adduser letsencrypt
+usermod -aG sudo letsencrypt
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install python-certbot-apache
+sudo certbot --apache -d packagist.domain.com
+```
+
 ### CORS(跨域资源共享)
 
 ## 存储
@@ -986,6 +995,7 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 * [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh):A pure Unix shell script implementing ACME client protocol https://acme.sh
 * [asciimoo/wuzz](https://github.com/asciimoo/wuzz):Interactive cli tool for HTTP inspection
 * [square/okhttp](https://github.com/square/okhttp):An HTTP+HTTP/2 client for Android and Java applications. http://square.github.io/okhttp/
+* HttpClient
 * [sindresorhus/ky](https://github.com/sindresorhus/ky):Tiny and elegant HTTP client based on the browser Fetch API
 * [oldj/SwitchHosts](https://github.com/oldj/SwitchHosts):Switch hosts quickly! https://oldj.github.io/SwitchHosts/
 * [coyove/goflyway](https://github.com/coyove/goflyway):An encrypted HTTP server

@@ -120,6 +120,24 @@ ps -ef |grep mysql  ##显示mysql现有的进程
 kill pid  ##删除mysql现有进程
 ```
 
+## innobackupex
+
+```sh
+sudo yum install http://www.percona.com/downloads/percona-release/redhat/0.1-4/percona-release-0.1-4.noarch.rpm
+sudo yum install percona-xtrabackup-24
+# Debian / Ubuntu
+wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
+sudo dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
+sudo apt-get update
+sudo apt-get install percona-xtrabackup-24
+
+innobackupex --user=root --password='Passw0rd!' /backups/
+innobackupex --user=root --password='Passw0rd!' --parallel=8 /backups/
+innobackupex --user=root --password='Passw0rd!' --parallel=8 --compress --compress-threads=8 /backups/
+innobackupex --decompress /backups/2017-04-29_21-18-04/
+innobackupex --apply-log --use-memory=4G /backups/2017-04-29_21-18-04
+```
+
 ## problem
 
 Errors were encountered while processing:
