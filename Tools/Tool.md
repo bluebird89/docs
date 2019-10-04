@@ -38,6 +38,7 @@
 ## 资源
 
 * [helloacm](https://helloacm.com/crontab-generator/): 集成工具集
+* [scottslowe/learning-tools](https://github.com/scottslowe/learning-tools):A collection of tools and files for learning new technologies 
 
 ## 生活
 

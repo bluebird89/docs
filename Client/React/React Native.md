@@ -242,9 +242,10 @@ npm run build | yarn build
 npm run eject #  导出配置文件
 ```
 
-## 课程
+## 项目
 
 * [tyroprogrammer/learn-react-app](https://github.com/tyroprogrammer/learn-react-app):Application that will help you learn React fundamentals. Install this application locally - there's tutorial, code snippets and exercises. The main objective of this project is to help you get off the ground with React!
+* [microsoft/TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter):A starter template for TypeScript and React with a detailed README describing how to use the two together. 
 
 ## 工具
 
