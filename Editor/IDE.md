@@ -267,6 +267,49 @@ phpstrom 添加版本信息分组:名词，提交时添加动词
 
 * [](https://confluence.jetbrains.com/display/PhpStorm)
 
+## IDEA
+
+ALT+SHIFT+T就可以自动生成对应的Junit方法了
+Ctrl+E最近修改过的文件
+定位类
+
+ctrl+n
+
+
+
+定位文件
+
+ctrl + shift +n
+
+
+
+定位函数或者属性
+
+ctrl + shift + alt +n
+
+
+
+字符串
+
+ctrl + shift + f
+
+大小写 ctrl+shift+u
+
+列操作
+
+ctrl+shift+alt +j
+
+数据数据是统一的，能够实现批量处理
+
+live template
+postfix
+
+ALT+ENTER
+还能够自动创建实现类..
+导包
+格式化输出数据
+修正单词拼写
+
 ## 工具
 
 * [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/
