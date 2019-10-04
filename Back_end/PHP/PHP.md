@@ -940,6 +940,7 @@ var_dump(!($a instanceof stdClass)); # true
     - 允许使用数组 array 、object、特殊类型 NULL 作为默认参数
     - 可以设置默认参数
     - 可变长度参数
+    - 可变数量的参数列表:`...`
 * 可变函数：一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数
 * 匿名函数（Anonymous functions），也叫闭包函数（closures），允许 临时创建一个没有指定名称的函数
     - 经常用作回调函数（callback）
@@ -991,6 +992,15 @@ function increment(&$i)
 $i = 10;
 increment($i);
 echo $i; # 10 11
+
+function sum(...$numbers) {
+    $acc = 0;
+    foreach ($numbers as $n) {
+        $acc += $n;
+    }
+    return $acc;
+}
+echo sum(1, 2, 3, 4);
 
 function small_numbers()
 {

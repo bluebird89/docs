@@ -1296,6 +1296,17 @@ public void delBigList(String host, int port, String password, String bigListKey
 * Master调用BGREWRITEAOF重写AOF文件，AOF在重写的时候会占大量的CPU和内存资源，导致服务load过高，出现短暂服务暂停现象。
 * Redis主从复制的性能问题，为了主从复制的速度和连接的稳定性，Slave和Master最好在同一个局域网内
 
+介绍一下你使用过redis的哪些数据结构，并描述一下使用的业务场景；
+介绍一下你操作redis用到的是什么插件；
+介绍一下你们使用的序列化方式；
+介绍一下你们使用redis遇到过给你印象较深的问题；
+介绍一下你所了解的几个http head头并描述其用途；
+如果前端提交成功，后端无法接受数据，这时候你将如何排查问题；
+描述一下http基本报文结构;
+如果服务器返回cookie，存储在响应内容里面head头的字段叫做什么;
+当服务端返回Transer-Encoding：chunked 代表什么含义
+是否了解分段加载并描述下其技术流程。
+
 ## 图书
 
 * 《Redis设计与实现》
