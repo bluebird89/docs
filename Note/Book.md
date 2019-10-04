@@ -30,6 +30,7 @@
 * 《[计算机系统概论](https://www.amazon.cn/gp/product/B0011F9OQE)》
 * 《[TCP/IP详解 卷1：协议](https://www.amazon.cn/gp/product/B00116OTVS)》
 * 《[深入理解计算机系统（原书第2版）](https://www.amazon.cn/gp/product/B004BJ18KM)》(CSAPP) Computer Systems: A Programmer's Perspective, 3/E (CS:APP3e) Randal E. Bryant and David R. O'Hallaron, Carnegie Mellon University
+    - 作为一名计算机程序员，如果缺乏对计算机的层次理解，那么其基本素养是值得怀疑的，其思考基础是有欠缺的。当我们沉浸在这样或者那样的编程教程里，沉浸在大量的语法架构之中的时候，反而常常因为这样或者那样一门复杂的技术而忘记计算机系统的构成其本身。【深入理解计算机系统】就是这样一本好书，能提升技术人员的基本技术素养，让我受益匪浅。
 * 《[计算机程序的构造和解释（Structure and Interpretation of Computer Programs）](https://www.amazon.cn/gp/product/B0011AP7RY)》
     * <https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html>
     * [SICP 解题集](https://sicp.readthedocs.io/en/latest/#)
