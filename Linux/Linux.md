@@ -237,7 +237,8 @@ Linux内核处于用户进程和硬件之间，包括系统调用接口和Linux�
   - /etc/network/interfaces：网络接口
   - /etc/resolv.conf:系统的dns服务
   - /etc/rc或者/etc/rc.d或者/etc/init.d：启动、或改变运行级时运行的脚本或脚本的目录。系统初始化文件
-  - /etc/passwd：用户数据库，其中的域给出了用户名、真实姓名、用户起始目 录、加密口令和用户的其他信息。
+  - /etc/passwd：用户数据库，其中的域给出了用户名、真实姓名、用户起始目 录、加密口令和用户的其他信息
+  - /etc/shadow：在安装了影子(shadow)口令软件的系统上的影子口令文件。影子口令文件将/etc/passwd文件中的加密口令移动到/etc/shadow中，而后者只对超级用户(root)可读。这使破译口令更困 难，以此增加系统的安全性。
   - /etc/fdprm：软盘参数表，用以说明不同的软盘格式。可用setfdprm进 行设置。更多的信息见setfdprm的帮助页。
   - /etc/fstab：指定启动时需要自动安装的文件系统列表。也包括用swapon -a启用的swap区的信息。
   - /etc/group：类似/etc/passwd ，但说明的不是用户信息而是组的信息。包括组的各种数据。
@@ -246,14 +247,15 @@ Linux内核处于用户进程和硬件之间，包括系统调用接口和Linux�
   - /etc/magic：“file”的配置文件。包含不同文件格式的说 明，“file”基于它猜测文件类型。
   - /etc/motd：motd是message of the day的缩写，用户成功登录后自动输出。内容由系统管理员确定。常用于通告信息，如计划关机时间的警告等。
   - /etc/mtab：当前安装的文件系统列表。由脚本(scritp)初始化，并由 mount命令自动更新。当需要一个当前安装的文件系统的列表时使用(例如df命令)。
-  - /etc/shadow：在安装了影子(shadow)口令软件的系统上的影子口令 文件。影子口令文件将/etc/passwd文件中的加密口令移动到/etc/shadow中，而后者只对超级用户(root)可读。这使破译口令更困 难，以此增加系统的安全性。
   - /etc/login.defs：login命令的配置文件。
   - /etc/printcap：类似/etc/termcap ，但针对打印机。语法不同。
-  - /etc/profile 、/etc/csh.login、/etc/csh.cshrc：登录或启动时bourne或cshells执行的文件。这允许系统管理员为所有用户建立全局缺省环境。
+  - /etc/profile：系统环境变量
+  - /etc/csh.login、/etc/csh.cshrc：登录或启动时bourne或cshells执行的文件。这允许系统管理员为所有用户建立全局缺省环境。
   - /etc/securetty：确认安全终端，即哪个终端允许超级用户(root) 登录。一般只列出虚拟控制台，这样就不可能(至少很困难)通过调制解调器(modem)或网络闯入系统并得到超级用户特权。
   - /etc/shells：列出可以使用的shell。chsh命令允许用户在本文件 指定范围内改变登录的shell。提供一台机器ftp服务的服务进程ftpd检查用户shell是否列在/etc/shells文件 中，如果不是，将不允许该用户登录。
   - /etc/termcap：终端性能数据库。说明不同的终端用什么“转义序列”控 制。写程序时不直接输出转义序列(这样只能工作于特定品牌的终端)，而是从/etc/termcap中查找要做的工作的 正确序列。这样，多数的程序可以在多数终端上运行。
   - /etc/apt/sources.list：软件源管理
+  - /etc/init.d/:服务网初始化脚本
 * /home：用户主目录的基点
   - 比如用户user的主目录就是/home/user，可以用~user表示。
   - /root：系统管理员的主目录。
@@ -957,7 +959,13 @@ wc  -l|-m|-w # 行 字符 字 获取某一个文件的行数和字数`wc package
 cp -r|p|d|a 源文件 目标位置/目标名称 # 复制文件或目录  r:复制目录 p:连带文件属性一起复制 -d:源文件是链接文件，则复制链接属性 a:相当于pdr
 
 sort # 排序
-diff # 比较两个文件的异同
+diff file1 file2 # 比较两个文件的异同
+md5sum  file
+md5sum -c file
+
+dos2unix # 行结束符转换成unix
+base64 inputfile output
+base64 -d inputfile output
 
 cat -n file # 查看文件内容，从头到尾的内容 -n:列出行号 当一个文档太长时， cat 只能展示最后布满屏幕的内容
 tac # 打印文件内容到标准输出(逆序)
@@ -1758,6 +1766,7 @@ set completeopt=longest,menu
 * [Monit](https://mmonit.com/monit/):功能异常强大的进程、文件、设备、系统监控软件，适用于Linux/Unix系统
 * [Linuxbrew/brew](https://github.com/Linuxbrew/brew):🍺🐧 The Homebrew package manager for Linux https://linuxbrew.sh
 * [johnfactotum/foliate](https://github.com/johnfactotum/foliate):A simple and modern GTK eBook reader https://johnfactotum.github.io/foliate/
+* [systemd/systemd](https://github.com/systemd/systemd):systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic. 
 
 ## 参考
 

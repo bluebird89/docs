@@ -21,3 +21,4 @@
     - *Logstash*，它是作为一个纯粹的、进入 Elasticsearch 数据库的服务器端管道。你可以使用各种编码语言和 API 集成 Logstash。这样，你的网站和移动应用程序中的信息就可以直接输入到强大的 Elastic Stalk 搜索引擎中。
 * [LOGalyze](http://www.logalyze.com)
 * [Fluentd](https://www.fluentd.org)
+* [GoAccess](https://goaccess.io/):an open source real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser.

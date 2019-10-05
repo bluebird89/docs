@@ -23,6 +23,7 @@ jmeter
 
 * JMETER_HOME/lib:用来放使用的 jar 文件
 * JMETER_HOME/lib/ext:用来放 JMeter 组件和扩展
+
 ## 使用
 
 配置 测试计划

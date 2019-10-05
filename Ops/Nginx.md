@@ -1,6 +1,7 @@
 # [nginx/nginx](https://github.com/nginx/nginx)
 
 解决基于进程模型产生的C10k问题，请求时即使无状态连接如web服务都无法达到并发响应量级一万现状。2006年俄罗斯编写。全称为engine X，缩减合并称为nginx。
+一款 事件驱动（event-driven） 非阻塞模式的 Web 服务器.与事件循环相比 fork 子进程消耗更多系统资源。基于事件的 HTTP 服务器完胜。
 
 ## 版本
 
@@ -31,6 +32,7 @@
 * 缺点
     - Nginx 仅能支 持http、https 和 Email 协议，这样就在适用范围上面小些，这个是它的缺点
     - 对后端服务器的健康检查，只支持通过端口来检测，不支持通过 ur l来检测。不支持 Session 的直接保持，但能通过 ip_hash 来解决
+    - 需要在构建 Nginx 时，通过设置参数选项，才能将其添加进 Nginx 服务器
 
 ## 模块
 
@@ -137,6 +139,10 @@ sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
         + 最大连接数 = worker_processes * worker_connections/4
         + 不能超过后面的worker_rlimit_nofile
     - 设置网络连接的序列化
+    - keepalive 连接数是能够有效减少延迟提升 web 页面加载速度的优化性能手段
+    - keepalive_requests 指令用于设置单个客户端能够在一个 keepalive 连接上处理的请求数量。
+    - keepalive_timeout 设置空闲 keepalive 连接保持打开的时间。
+    - keepalive 是关于 upstream（上游） 服务器和 Nginx 连接有关的配置 - 当 Nginx 充当代理或负载均衡服务器角色时。表示在空闲状态 upstream 服务器在单个 worker 进程中支持的 keepalive 连接数。
     - 是否允许同时接收多个网络连接
     - 事件驱动模型的选择
     - 最大连接数的配置
