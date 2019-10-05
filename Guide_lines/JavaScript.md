@@ -1,8 +1,9 @@
 # js代码规范
 
-## Eslint
+## [eslint/eslint](https://github.com/eslint/eslint)
 
-是一个开源的 JavaScript 代码检查工具，使用 Node.js 编写，由 Nicholas C. Zakas 于 2013 年 6 月创建。ESLint 的初衷是为了让程序员可以创建自己的检测规则，使其可以在编码的过程中发现问题而不是在执行的过程中。ESLint 的所有规则都被设计成可插入的，为了方便使用，ESLint 内置了一些规则，在这基础上也可以增加自定义规则。
+一个开源的 JavaScript 代码检查工具，使用 Node.js 编写，由 Nicholas C. Zakas 于 2013 年 6 月创建。ESLint 的初衷是为了让程序员可以创建自己的检测规则，使其可以在编码的过程中发现问题而不是在执行的过程中。ESLint 的所有规则都被设计成可插入的，为了方便使用，ESLint 内置了一些规则，在这基础上也可以增加自定义规则。
+A fully pluggable tool for identifying and reporting on patterns in JavaScript https://eslint.org
 
 * vscode中使用，安装ESLint扩展
 * [Configuring ESLint](http://eslint.cn/docs/user-guide/configuring)
@@ -75,6 +76,9 @@ npm install -g eslint-plugin-html
 
 ## 参考
 
+* [中国官网](http://eslint.cn/)
+* [官网](https://eslint.org/)
+* [standard/eslint-config-standard](https://github.com/standard/eslint-config-standard):ESLint Config for JavaScript Standard Style https://standardjs.com
 * [airbnb/javascript](https://github.com/airbnb/javascript):JavaScript Style Guide
 * [standard/standard](https://github.com/standard/standard):JavaScript Style Guide, with linter & automatic code fixer <https://standardjs.com>
 * [rwaldron/idiomatic.js](https://github.com/rwaldron/idiomatic.js):Principles of Writing Consistent, Idiomatic JavaScript

@@ -36,6 +36,6 @@
 * [newrelic](https://newrelic.com/)
 * [netdata/netdata](https://github.com/netdata/netdata):Real-time performance monitoring, done right! https://my-netdata.io/
 * [Monit](link)
-* CAT:美团的东西非常少，大部分拿点评的来充门面。CAT作为美团点评基础监控组件，它已经在中间件框架（MVC框架，RPC框架，数据库框架，缓存框架等）中得到广泛应用，为美团点评各业务线提供系统的性能指标、健康状况、基础告警等。
+* CAT:作为美团点评基础监控组件，已经在中间件框架（MVC框架，RPC框架，数据库框架，缓存框架等）中得到广泛应用，为美团点评各业务线提供系统的性能指标、健康状况、基础告警等。
 
 ![Alt text](../_static/monitor_tools.jpg "Optional title")
