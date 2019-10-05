@@ -993,6 +993,7 @@ JavaEE/JDBC/Weblogic
   - `curl -s "https://get.sdkman.io" | bash`
   - `source "$HOME/.sdkman/bin/sdkman-init.sh"`
 * [liuanxin/api-document](https://github.com/liuanxin/api-document):java spring-mvc document collect
+* [eclipse-vertx/vert.x](https://github.com/eclipse-vertx/vert.x/):Vert.x is a tool-kit for building reactive applications on the JVM http://vertx.io
 
 ## 参考
 

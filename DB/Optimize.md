@@ -202,12 +202,11 @@ kB_wrtn：写入的总数量数据量；这些单位都为Kilobytes。
 * innodb_flush_log_at_trx_commit 控制commit动作是否刷新log buffer到磁盘中 
     - = 0 把日志缓冲写到日志文件中，并且每秒钟刷新一次，但是事务提交时不做任何事，该设置是3者中性能最好的。也就是说设置为0时是(大约)每秒刷新写入到磁盘中的，当系统崩溃，会丢失1秒钟的数据。
     - 保持默认值（1）的话，能保证数据的完整性，也能保证复制不会滞后
-    - 
 * 不要同时使用 innodb_thread_concurrency 和 thread_concurrency 变量 — 这两个值不能兼容。
 * 为 max_connections 指定一个小的值 — 太多的连接将耗尽你的RAM，导致整个MySQL服务器被锁定。
 * 保持 thread_cache 在一个相对较高的数值，大约是 16 — 防止打开连接时候速度下降。
 * 使用 skip-name-resolve — 移除 DNS 查找。
-* 如果你的查询重复率比较高，并且你的数据不是经常改变，请使用查询缓存 — 但是，在经常改变的数据上使用查询缓存会对性能有负面影响。
+* 如果查询重复率比较高，并且数据不是经常改变，请使用查询缓存, 在经常改变的数据上使用查询缓存会对性能有负面影响。
 * 增加 temp_table_size — 防止磁盘写。
 * 增加 max_heap_table_size — 防止磁盘写。
 * 不要将 sort_buffer_size 的值设置的太高 — 可能导致连接很快耗尽所有内存。
@@ -448,7 +447,7 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
         + MyISAM 表中可以快速取到表的行数
         + 如果的表只有一个字段的话那count(*)就是最快的
         + `count(*)`只是返回表中行数，因此SQL Server在处理`count(*)`的时候只需要找到属于表的数据块块头，然后计算一下行数就行了，而不用去读取里面数据列的数据。而对于count(col)就不一样了，为了去除col列中包含的NULL行，SQL Server必须读取该col的每一行的值，然后确认下是否为NULL，然后在进行计数。
-    - LIMIT分页
+    - 分页
         + LIMIT M,N:全表扫描,速度会很慢且结果集返回不稳定
         + LIMIT 10000，20这样的查询，MySQL需要查询10020条记录然后只返回20条记录，前面的10000条都将被抛弃，这样的代价非常高。避免使用 OFFSET `SELECT id FROM t WHERE id > 10000 LIMIT 10 ;`
         + WHERE id_pk > (pageNum*10) ORDER BY id_pk ASC LIMIT M:ORDER BY后的列对象是主键或唯一所以,使得ORDERBY操作能利用索引被消除但结果集是稳定的
@@ -462,10 +461,10 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
     - 应尽量避免使用负向查询NOT、!=、<>、!<、!>、NOT IN、NOT LIKE等，否则将引擎放弃使用索引而进行全表扫描。
     - 应尽量避免使用 or 来连接条件，如果一个字段有索引，一个字段没有索引，将导致引擎放弃使用索引而进行全表扫描。含有or的查询子句，如果要利用索引，则or之间的每个条件列都必须使用索引；如果没有索引，可以考虑增加索引。
     - in 和 not in 也要慎用，否则会导致全表扫描
-    - 区分in和exists， not in和not exists
+    - 区分in和exists， not in和not exists，造成了驱动顺序的改变
         + exists，那么以外层表为驱动表，先被访问，如果是IN，那么先执行子查询。所以IN适合于外表大而内表小的情况；EXISTS适合于外表小而内表大的情况。
         + 关于not in和not exists，推荐使用not exists，不仅仅是效率问题，not in可能存在逻辑问题。如何高效的写出一个替代not exists的sql语句？
-    - 对于连续的数值，能用 between 就不要用 in 了
+    - 对于 IN 做了相应的优化，即将 IN 中的常量全部存储在一个数组里面，而且这个数组是排好序的。 对于连续的数值，能用 between 就不要用 in 了
     - select id from t where name like '%abc%' 全表扫描
     - 在 where 子句中使用参数，也会导致全表扫描 select id from t where num = @num
     - 在 WHERE、GROUP BY 和 ORDER BY 的列上加上索引
@@ -488,6 +487,10 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
     - 最重要的是“Lazy Loading”：只有在需要的去取值的时候才会去真正的去做
     - 需要小心处理他们，否则可能最终创建了许多微型查询，这会降低数据库性能
     - 可以将多个查询批处理到事务中，其操作速度比向数据库发送单个查询快得多
+* 排序
+    - 如果排序字段没有用到索引，就尽量少排序
+    - 如果限制条件中其他字段没有索引，尽量少用 or，有一个不是索引字段，会造成该查询不走索引的情况。 使用 union all 或者是 union(必要的时候)的方式来代替“or”会得到更好的效果
+    - 不使用ORDER BY RAND()
 * 拒绝3B(big)，大sql，大事务，大批量
 * sub_select
 * 查询松散索引扫描（Loose Index Scan）与紧凑索引扫描（Tight Index Scan）
@@ -503,6 +506,7 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
         + 索引中的列必须索引整个数据列的值(full column values must be indexed)，而不是一个前缀索引。比如，c1 varchar(20), INDEX (c1(10)),这个索引没发用作松散索引扫描。
         + 紧凑索引扫描方式下，先对索引执行范围扫描（range scan），再对结果元组进行分组。可能是全索引扫描或者范围索引扫描，取决于查询条件。当松散索引扫描条件没有满足的时候，group by仍然有可能避免创建临时表。如果在where条件有范围扫描，那么紧凑索引扫描仅读取满足这些条件的keys（索引元组），否则执行全索引扫描。这种方式读取所有where条件定义的范围内的keys，或者扫描整个索引。紧凑索引扫描，只有在所有满足范围条件的keys被找到之后才会执行分组操作。
 * 连表
+    - union 和 union all 的差异主要是前者需要将结果集合并后再进行唯一性过滤操作，这就会涉及到排序，增加大量的 CPU 运算，加大资源消耗及延迟。
     - 禁止大表使用JOIN查询、子查询
     - A join B:LEFT JOIN A表为驱动表INNER JOIN MySQL会自动找出那个数据少的表作用驱动表RIGHT JOIN B表为驱动表
     - 尽量使用inner join，避免left join
@@ -531,6 +535,9 @@ LIMIT $pagesize
 SELECT * FROM your_table AS t1 
 JOIN (SELECT id FROM your_table ORDER BY id desc LIMIT ($page-1)*$pagesize AS t2 
 WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT $pagesize;
+
+# 取出的结果集如下图表示，A 表不在 B 表中的数据
+select colname … from A表 Left join B表 on where a.id = b.id where b.id is null
 ```
 
 ##  索引优化
