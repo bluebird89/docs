@@ -9,6 +9,7 @@
     + 百度云
         * [acgotaku/BaiduExporter](https://github.com/acgotaku/BaiduExporter):Assistant for Baidu to export download links to aria2/aria2-rpc
         * [b3log/baidu-netdisk-downloaderx](https://github.com/b3log/baidu-netdisk-downloaderx):⚡️ 百度网盘不限速下载器 BND，支持 Windows、Mac 和 Linux。 https://hacpai.com/tag/bnd
+        * [CodeTips/BaiduNetdiskPlugin-macOS ](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~
     + [坚果云](https://www.jianguoyun.com/)
     + [数蚁](https://teamyi.com)
     + [nextcloud/server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data https://nextcloud.com
