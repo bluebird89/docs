@@ -30,6 +30,9 @@
     -  any do
 * cheatsheets
     - [Rico's cheatsheets](https://devhints.io/)
+    - [wtfutil/wtf](https://github.com/wtfutil/wtf):The personal information dashboard for your terminal. http://wtfutil.com
+* Rss
+    - [NetNewsWire5](https://github.com/brentsimmons/NetNewsWire/releases/download/mac-5.0.2/NetNewsWire5.0.2.zip)
 
 ## 专注
 
@@ -39,6 +42,7 @@
 
 * [helloacm](https://helloacm.com/crontab-generator/): 集成工具集
 * [scottslowe/learning-tools](https://github.com/scottslowe/learning-tools):A collection of tools and files for learning new technologies 
+* 
 
 ## 生活
 

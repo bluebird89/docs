@@ -811,6 +811,7 @@ ORM框架比Web框架要少一些：Sequelize，ORM2，Bookshelf.js，Objection.
 
 * [Guides](https://nodejs.org/en/docs/guides/)
 * [Node.js v11.6.0 Documentation](https://nodejs.org/api/)
+* [goldbergyoni/nodebestpractices](https://github.com/goldbergyoni/nodebestpractices):white_check_mark The largest Node.js best practices list (September 2019) https://twitter.com/nodepractices/
 
 ##  问题
 
