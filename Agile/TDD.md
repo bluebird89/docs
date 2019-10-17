@@ -72,3 +72,9 @@
         + 编写失败的测试，驱动出产品代码
         + 充分利用代码生成
         + 刻意练习的节奏
+
+## 参考
+
+* [极限编程](http://www.extremeprogramming.cn)
+* [eXtremeProgramming-cn/xp-gym-training](https://github.com/eXtremeProgramming-cn/xp-gym-training):Free open source training materials for eXtreme Programming practitioners and promoters
+* [gigix/dojo-scaffold](https://github.com/gigix/dojo-scaffold):A Java/Gradle scaffold for coding dojos

@@ -323,6 +323,7 @@ brew install pipenv
 * [kennethreitz/requests-html](https://github.com/kennethreitz/requests-html):下载完网页之后,内置了html网页的解析
 * [request/request-promise](https://github.com/request/request-promise):The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.
 * [httpstat](https://github.com/reorx/httpstat):curl statistics made simple
+* [encode/httpx](https://github.com/encode/httpx):A next generation HTTP client for Python. butterfly https://www.encode.io/httpx
 
 ## 数据库
 

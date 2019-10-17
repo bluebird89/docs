@@ -2105,6 +2105,11 @@ mysql -uroot -p123456 -S /data/3306/mysql.sock -e "unlock tables;"
 
 # 主库的备份文件解压并恢复数据库
 mysql -uroot -p123456 -S /data/3307/mysql.sock < mysql.sql
+
+mysql -u username -p database_name < file.sql
+
+mysql -u username –-password=your_password database_name < file.sql
+
 ```
 
 ### 读写分离
@@ -2565,6 +2570,8 @@ http://localhost:3000
         * `sudo apt-get install phpmyadmin`
         * 
     + Sequel Pro
+    + navicate
+        * [DoubleLabyrinth/navicat-keygen](https://github.com/DoubleLabyrinth/navicat-keygen):A keygen for Navicat
 * ER图
     - PowerDesigner
     - MySQL Workbench

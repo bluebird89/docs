@@ -4,7 +4,7 @@
 
 ## 硬件
 
-*   keyward
+* keyward
     -   FILCO 斐尔可 87 圣手忍者 FILCO Majestouch2 87
     -   斐尔可（FILCO） FKBN87MRL/EB2 Majestouch 2「87 圣手二代」
     -   HHKB Professional ~~2~~
@@ -74,9 +74,9 @@
 
 ## 建站
 
-*   [Sauarespace](https://www.squarespace.com/):建网站变成了像创造艺术品一样的体验
-*   [Virb](http://virb.com/)
-*   [Webflow](https://webflow.com/)
+* [Sauarespace](https://www.squarespace.com/):建网站变成了像创造艺术品一样的体验
+* [Virb](http://virb.com/)
+* [Webflow](https://webflow.com/)
 
 ## 产品
 
@@ -171,6 +171,7 @@
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 * [DaveDavenport/rofi](https://github.com/DaveDavenport/rofi):Rofi: A window switcher, application launcher and dmenu replacement
 * [keeweb/keeweb](https://github.com/keeweb/keeweb):Free cross-platform password manager compatible with KeePass https://keeweb.info
+* [KeeWeb](https://keeweb.info):Free cross-platform password manager compatible with KeePass
 
 ## 资源
 
