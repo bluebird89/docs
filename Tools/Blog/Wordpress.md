@@ -38,3 +38,18 @@ WordPress, Git-ified. Synced via SVN every 15 minutes, including branches and ta
 
 * [Varying-Vagrant-Vagrants/VVV](https://github.com/Varying-Vagrant-Vagrants/VVV):An open source Vagrant configuration for developing with WordPress https://varyingvagrantvagrants.org
 * [postlight/headless-wp-starter](https://github.com/postlight/headless-wp-starter):🔪 WordPress + React Starter kit
+* [Apps](https://apps.wordpress.com)
+* https://sarah.dev/writing/
+* https://github.com/brickspert/blog
+* https://github.com/GavinZhuLei/vue-form-making
+* https://github.com/fangzesheng/free-api
+* https://github.com/zhisheng17/flink-learning
+* https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
+* https://github.com/benweet/stackedit
+* https://github.com/roots/sage
+* https://github.com/digitalocean/nginxconfig.io
+* https://github.com/future-architect/vuls
+* https://github.com/woocommerce/woocommerce
+* https://github.com/roots/bedrock
+* https://github.com/wpscanteam/wpscan
+* https://wp-cli.org/

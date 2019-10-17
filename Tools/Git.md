@@ -1589,6 +1589,7 @@ These features allow to pause a branch development and switch to another one (_"
 * [marionebl/commitlint](https://github.com/marionebl/commitlint):📓 Lint commit messages https://marionebl.github.io/commitlint/
 * [pomber/git-history](https://github.com/pomber/git-history)：Quickly browse the history of a file from any git repository https://githistory.xyz/
 * [Bash提示](https://github.com/magicmonty/bash-git-prompt)
+* [arzzen/git-quick-stats](https://github.com/arzzen/git-quick-stats):▁▅▆▃▅ Git quick statistics is a simple and efficient way to access various statistics in git repository. http://git-quick-stats.sh
 * 客户端
   - msysgit
   - sourcetree

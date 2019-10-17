@@ -948,6 +948,8 @@ JavaEE/JDBC/Weblogic
   - [JodaOrg/joda-time](https://github.com/JodaOrg/joda-time):Joda-Time is the widely used replacement for the Java date and time classes prior to Java SE 8. http://www.joda.org/joda-time/
 * 框架
   - [lets-blade/blade](https://github.com/lets-blade/blade):🚀 Lightning fast and elegant mvc framework for Java8 https://lets-blade.com
+* Admin
+  - [elunez/eladmin](https://github.com/elunez/eladmin):项目基于 Spring Boot 2.1.0 、 Jpa、 Spring Security、redis、Vue的前后端分离的后台管理系统，项目采用分模块开发方式， 权限控制采用 RBAC，支持数据字典与数据权限管理，支持一键生成前后端代码，支持动态路由 https://auauz.net
 
 ## project
 
@@ -994,6 +996,7 @@ JavaEE/JDBC/Weblogic
   - `source "$HOME/.sdkman/bin/sdkman-init.sh"`
 * [liuanxin/api-document](https://github.com/liuanxin/api-document):java spring-mvc document collect
 * [eclipse-vertx/vert.x](https://github.com/eclipse-vertx/vert.x/):Vert.x is a tool-kit for building reactive applications on the JVM http://vertx.io
+* [jenv/jenv](https://github.com/jenv/jenv):Manage your Java environment http://www.jenv.be
 
 ## 参考
 

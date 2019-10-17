@@ -126,7 +126,8 @@
   + 500 -- 应用故障，一般是应用抛出了异常没有正常响应，比如达到Redis和MySQL的瓶颈。
   + 压力测试不出来的坑：现在大多数正式的项目都是前后端分离的，所以上述说的其实都是压后端接口，而有一种情况是压根压不出来的，那就是接口调用数。作为后端开发，一定要搞清楚承受冲击的前端页面在加载的过程中会调用几个接口，调用几次。如果不搞清楚这些，在真实环境中后端服务器就可能承受比前端服务器还高的压力，从而影响之前针对压力测试数据做出的评估。针对这种情况，其实最好的方案就是在开发之时就跟前端约定好接口调用规则，在接口设计和交互上进行避免。
 * 工具
-  - [AB Apache Benchmark](https://httpd.apache.org/docs/2.4/programs/ab.html):有 Apache 基金会提供的简单的压测工具
+  - [AB Apache Benchmark](https://httpd.apache.org/docs/2.4/programs/ab.html):Apache 基金会提供的简单的压测工具
+    + `apr_socket_connect(): Invalid argument (22)`: use "http://127.0.0.1" instead of localhost
   - [Siege](https://www.joedog.org/siege-home/)
   - [Locust](https://locust.io/):An open source load testing tool
   - 参考
