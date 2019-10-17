@@ -24,6 +24,9 @@ All Submissions you make to Magento Inc. (“Magento") through GitHub are subjec
     - pub/media
     - pub/static
     - generated
+* upgrade
+    - Generating non-existent classes such as factories and interceptors for plug-ins
+    - generating the dependency injection configuration for the object manager.
 
 ```sh
 # php.ini cgi.fix_pathinfo line and change the value to 0
@@ -187,6 +190,14 @@ bin/magento info:adminuri
 
 bin/magento admin:user:create --admin-user=henry --admin-password=111111 --admin-email=11111@qq.com --admin-firstname=henry --admin-lastname=li
 ```
+
+## Flow
+
+* cart quote-》checkout quote
+    - 添加item到cart前验证：agento\CatalogInventory\Model\Quote\Item\QuantityValidator
+* re-order
+    - out of stock
+    - disable
 
 ## module
 
@@ -571,16 +582,17 @@ curl -XPOST -H 'Content-Type: application/json' http://magento-url/rest/V1/integ
 
 ## DB
 
-* 修改脚本后要修改模块版本号
+* 修改脚本后要修改模块版本号,升级跟版本号有关
 * type
   - static: 升级数据库
   - int: 字段添加到到customer_entity_int中,eav_attribute:字段映射表,升级数据就行
-* run installSchema.php for the first time when installing the module
-* If you installed the module before, you will need to upgrade module and write the table create code to the UpgradeSchema.php. change attribute setup_version greater than current setup version in module.xml
-* InstallSchema.php:This file is executed first just after your modules registration (Means just after your module & its version entries are done in to the table -> setup_module ). This file is used to create tables with their columns attribute into your database that are later used by the new installed module.
-* InstallData.php: This file is executed after InstallSchema.php: . It is used to add data to the newly created table or any existing table.
-* UpgradeSchema.php: This file comes with the module & runs only then, if you are already having that modules previous version installed in your magento(Means it has entry of its previous version into the table -> setup_module ). It is used to manipulate the table related to the module(Means it is used to alter the table schema means columns attribute & to add new column into that table).change attribute setup_version greater than current setup version in module.xml
-* UpgradeData.php: This file runs after UpgradeSchema.php . It is having the same concept as InstallData.php: has but using this file you can change/alter the database contents without the use of model files. You can also use this file to add new content to the database same us But same like UpgradeSchema.php it will also runs only then if you are having that modules previous version installed in your magento.
+* script
+    - installSchema：for the first time when installing the module
+    - UpgradeSchema：If you installed the module before, you will need to upgrade module and write the table create code to the UpgradeSchema.php. change attribute setup_version greater than current setup version in module.xml
+    - InstallSchema:This file is executed first just after your modules registration (Means just after your module & its version entries are done in to the table -> setup_module ). This file is used to create tables with their columns attribute into your database that are later used by the new installed module.
+    - InstallData: This file is executed after InstallSchema.php: . It is used to add data to the newly created table or any existing table.
+    - UpgradeSchema: This file comes with the module & runs only then, if you are already having that modules previous version installed in your magento(Means it has entry of its previous version into the table -> setup_module ). It is used to manipulate the table related to the module(Means it is used to alter the table schema means columns attribute & to add new column into that table).change attribute setup_version greater than current setup version in module.xml
+    - UpgradeData: runs after UpgradeSchema.php . It is having the same concept as InstallData: has but using this file you can change/alter the database contents without the use of model files. You can also use this file to add new content to the database same us But same like UpgradeSchema.php it will also runs only then if you are having that modules previous version installed in your magento.
 
 ```php
 bin/magento setup:db:status
@@ -618,6 +630,13 @@ $customer->getId()　　# 通过token获取用户信息
 $customer = $this->customerRepository->getById($customerId);
 ```
 
+## Indexer
+
+```
+bin/magento indexer:reindex
+bin/magento indexer:status
+```
+
 ## observer
 
 hook action
@@ -628,6 +647,7 @@ hook action
 * Save this information or keep the page open when working with your Magento project
 * Use the Public key as your username and the Private key as your password
 * 在根目录中创建一个新文件auth.json
+* 后台接口:需要admin token `<resource ref="Magento_Customer::customer"/>`
 
 ```language
 {
@@ -735,9 +755,10 @@ class ProductPlugin
 
 ## Order
 
-* Order Status:Processing Pending->Payment Suspected Fraud->Payment Review->Pending On Hold Complete Closed Canceled Pending PayPal
-* Order State:->submit->Pending Payment->Processing->Order shipped->Order shipped->Complete->in_transit->Closed Canceled On Hold Payment Review
-
+* Order Status
+    - Processing Pending->Payment Suspected Fraud->Payment Review->Pending On Hold Complete Closed Canceled Pending PayPal
+* Order State
+    - ->submit->Pending Payment->Processing->Order shipped->Order shipped->Complete->in_transit->Closed Canceled On Hold Payment Review
 
 CHECKOUT, PAYMENT, & SHIPPING
 One-Page Online Checkout
@@ -894,30 +915,11 @@ Breadcrumbs
 varnishncsa -F '%U%q %{Varnish:hitmiss}x'
 ```
 
-## 用户
-
-Associate' : 'Preferred
-
-
-## 后台
-
-* 配置level:website->store->storeview
-* storecode: all stores 添加配置
-
-```xml
-<group id="success_tracker" translate="label"   type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-    <label>Success Tracker</label>
-    <field id="success_tracker_blockid" translate="label comment" type="select" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
-        <label>Success Tracker T&amp;C Block</label>
-        <source_model>Tmo\Backend\Model\Config\Source\Blocks</source_model>
-    </field>
-</group>
-```
-
 ## Exception
 
 * magento 定義各種exception
     - \Magento\Framework\Exception\LocalizedException
+* 方便前端错误封装以及不同语言的对应
 
 ```php
  public function massCopyToCheckout($customerId, $cartId, $itemIds = []) {
@@ -958,8 +960,59 @@ Associate' : 'Preferred
     }
 
 # 沒有exception,抓不到
+```
+
+## 用户
+
+* 类型
+    - Associate
+    - Preferred
+
+## 后台
+
+* 配置level:website->store->storeview
+* storecode: all stores 添加配置
+
+```xml
+<group id="success_tracker" translate="label"   type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+    <label>Success Tracker</label>
+    <field id="success_tracker_blockid" translate="label comment" type="select" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Success Tracker T&amp;C Block</label>
+        <source_model>Tmo\Backend\Model\Config\Source\Blocks</source_model>
+    </field>
+</group>
+```
+
+## Tax
+
+* tax rules
+* tax zones and Rates
+* tax class
+    - kind
+        + Customer — You can create as many customer tax classes as you need, and assign them to customer groups. For example, in some jurisdictions, wholesale transactions are not taxed, but retail transactions are. You can associate members of the Wholesale Customer group with the Wholesale tax class.
+        + Product — Product classes are used in calculations to determine the correct tax rate is applied in the shopping cart. When you create product, it is assigned to a specific tax class. For example, food might not be taxed, or be taxed at a different rate.
+        + Shipping — If your store charges an additional tax on shipping, you should designate a specific product tax class for shipping. Then in the configuration, specify it as the tax class that is used for shipping.
+    - setting:Stores > Settings > Configuration->sales->tax->tax class
+
+## 框架
+
+* class interface not found: 在code 中生成
+* EVA
+    - eav_entity_type  根据type 获取类型id
+    - eav_attribute:获取类型属性id
+* product  
+    - image detail role:`SELECT * FROM catalog_product_entity_varchar where entity_id=59 and attribute_id in (87,88,89,128) order by store_id asc;`
+    - `SELECT * FROM magento.catalog_product_entity_int where attribute_id =97;`
+
+```sql
+# 获取商品的enable 状态
+SELECT entity_id FROM `catalog_product_entity_int` WHERE attribute_id = (SELECT attribute_id FROM `eav_attribute` WHERE `attribute_code` LIKE 'status') AND `catalog_product_entity_int`.value = 2
 
 ```
+
+## 迁移数据库
+
+* This project doesn't support inserting the domain automatically since it has two subdomains for different websites. update core_config_data set value='http://api.mannatech.com.test/' where config_id=22;
 
 ## 问题
 

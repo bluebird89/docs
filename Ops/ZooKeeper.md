@@ -169,6 +169,10 @@ delete /hello
 
 ## API
 
+## 资源
+
+* [yaojingguo/geekbang-zk-course](https://github.com/yaojingguo/geekbang-zk-course):极客时间ZooKeeper实战与源代码剖析课程资源
+
 ## 图书
 
 * Zookeeper: 分布式过程协同技术详解

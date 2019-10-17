@@ -169,6 +169,7 @@ pip install shadowsocks
 - [txthinking/brook](https://github.com/txthinking/brook):Brook is a cross-platform(Linux/MacOS/Windows/Android/iOS) proxy/vpn software
 * [Alvin9999/new-pac](https://github.com/Alvin9999/new-pac)
 * BT sync
+* [ShadowsocksR-Live/shadowsocksr-native](https://github.com/ShadowsocksR-Live/shadowsocksr-native):从容翻越党国敏感日 ShadowsocksR (SSR) native implementation for all platforms powered by libuv, GFW terminator
 
 ## 参考
 

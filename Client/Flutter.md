@@ -83,6 +83,7 @@ pod setup
 * [Mayandev/morec](https://github.com/Mayandev/morec):💥非常精美的 Flutter 版电影客户端，利用豆瓣现有的 Api，打造了一个完整的电影展示 App(部分 UI 仿豆瓣电影🎥)。 A beautiful movie application build by flutter.
 * [alibaba/flutter-go](https://github.com/alibaba/flutter-go):flutter 开发者帮助 APP，包含 flutter 常用 140+ 组件的demo 演示与中文文档
 * [OpenFlutter/Flutter-Notebook](https://github.com/OpenFlutter/Flutter-Notebook):日更的FlutterDemo合集
+* [CarGuo/gsy_github_app_flutter](https://github.com/CarGuo/gsy_github_app_flutter):超完整的Flutter项目，功能丰富，适合学习和日常使用。
 
 ## 工具
 

@@ -26,6 +26,7 @@
 * [tinymce](https://www.tinymce.com/)
 * [CKEditor](http://ckeditor.com/)
 * [quilljs/quill](https://github.com/quilljs/quill):Quill is a modern WYSIWYG editor built for compatibility and extensibility. https://quilljs.com
+* [basecamp/trix](https://github.com/basecamp/trix):A rich text editor for everyday writing https://trix-editor.org/
 
 ## 在线
 

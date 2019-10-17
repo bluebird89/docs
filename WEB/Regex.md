@@ -233,3 +233,4 @@ ls users-[0-9][!0-9][a-zA-Z]*
 
 * [JS正则表达式完整教程](https://juejin.im/post/5965943ff265da6c30653879)
 * [ziishaned/learn-regex](https://github.com/ziishaned/learn-regex):Learn regex the easy way
+* [any86/any-rule](https://github.com/any86/any-rule): whale 常用正则大全, 支持vscode扩展插件 https://any86.github.io/any-rule/

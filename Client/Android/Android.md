@@ -92,9 +92,12 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 
 * [stormzhang/android-interview-questions-cn](https://github.com/stormzhang/android-interview-questions-cn):最全面的高质量 Android 面试指南。
 
-## ROM
+## 资源
 
-* 一加
+* ROM
+    - 一加
+* STORE
+    - [yeriomin/YalpStore](https://github.com/yeriomin/YalpStore):Download apks from Google Play Store
 
 ## 扩展
 
