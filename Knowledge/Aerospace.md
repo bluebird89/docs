@@ -17,6 +17,8 @@
 * 蓝色起源(Blue Origin):亚马逊CEO贝索斯
 * 维珍(Virgin)创始人理查德·布兰森(Richard Branson)拥有“维珍银河”(Virgin Galactic)
     - 2月22日，英国太空飞机公司维珍银河（Virgin Galactic），搭载了第一位太空乘客，进行了试飞。飞机飞到距离地面90公里的太空，然后安全返回。
+* 美国宇航局的政策是，以后的载人飞行都发包给私人公司，政府不再建造航天飞机，现有的航天飞机都已经退役了。
+* 目前，美国宇航员进入国际空间站，都通过俄罗斯的飞船，每个座位的价格是8000万美元。SpaceX 公司的龙飞船，迄今只完成过无人的货运任务，向国际空间站运送货物，还没有载人飞行过。
 
 ### SpaceX
 
@@ -55,3 +57,4 @@
 ## 工具
 
 * [飞行模拟器](https://www.geo-fs.com/int/cn/)
+* [stellarium](https://stellarium.org/en/):s a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.

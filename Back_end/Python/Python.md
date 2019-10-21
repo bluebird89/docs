@@ -1391,6 +1391,7 @@ virtualenv
 * [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
 * [Python 3 cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/):Python3教学手册
 * [在 Windows 上用 Python 做开发](https://docs.microsoft.com/zh-cn/windows/python/)
+* [简明 Python 教程 A Byte of Python](https://bop.mol.uno)
 
 ##  项目
 
