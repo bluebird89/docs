@@ -717,6 +717,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
 * [markdown-it/markdown-it](https://github.com/markdown-it/markdown-it):Markdown parser, done right. 100% CommonMark support, extensions, syntax plugins & high speed https://markdown-it.github.io
 * [xi-editor/xi-editor](https://github.com/xi-editor/xi-editor):A modern editor with a backend written in Rust. https://xi-editor.io
+* [taniarascia/takenote](https://github.com/taniarascia/takenote):📝 A web-based note-taking app with GitHub sync and Markdown support. https://takenote.dev
 
 ## 参考
 

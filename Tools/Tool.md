@@ -33,6 +33,9 @@
     - [wtfutil/wtf](https://github.com/wtfutil/wtf):The personal information dashboard for your terminal. http://wtfutil.com
 * Rss
     - [NetNewsWire5](https://github.com/brentsimmons/NetNewsWire/releases/download/mac-5.0.2/NetNewsWire5.0.2.zip)
+* URL Shortener
+    - [YOURLS/YOURLS](https://github.com/YOURLS/YOURLS):🔗 Your Own URL Shortener https://yourls.org
+        + 自增序列算法:设置 id 自增，一个 10进制 id 对应一个 62进制的数值，1对1，也就不会出现重复的情况
 
 ## 专注
 
@@ -42,7 +45,6 @@
 
 * [helloacm](https://helloacm.com/crontab-generator/): 集成工具集
 * [scottslowe/learning-tools](https://github.com/scottslowe/learning-tools):A collection of tools and files for learning new technologies 
-* 
 
 ## 生活
 

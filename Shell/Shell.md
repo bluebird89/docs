@@ -1460,6 +1460,7 @@ ccache gcc foo.c
     - ag：比grep、ack更快的递归搜索文件内容
     - fzf：命令行下模糊搜索工具，能够交互式智能搜索并选取文件或者内容，配合终端ctrl-r历史命令搜索简直完美。
 * monitor
+    - [ogham/exa](https://github.com/ogham/exa):A modern version of ‘ls’. https://the.exa.website/
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序的
     - nslookup:指定查询的类型，可以查到DNS记录的生存时间还可以指定使用哪个DNS服务器进行解释
     - [htop](http://hisham.hm/htop/): 提供更美观、更方便的进程监控工具

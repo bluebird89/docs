@@ -129,3 +129,4 @@
 
 * [QUANTAXIS/QUANTAXIS](https://github.com/QUANTAXIS/QUANTAXIS):QUANTAXIS 兼容股票和期货的 数据爬取-清洗/存储-分析/回测-可视化/交易/复盘的本地一站式解决方案 http://book.yutiansut.com
 * [vnpy/vnpy](https://github.com/vnpy/vnpy)：基于Python的开源量化交易平台开发框架 http://www.vnpy.com
+* [firefly-iii/firefly-iii](https://github.com/firefly-iii/):Firefly III: a personal finances manager https://firefly-iii.org/

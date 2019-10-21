@@ -22,3 +22,4 @@
 * [LOGalyze](http://www.logalyze.com)
 * [Fluentd](https://www.fluentd.org)
 * [GoAccess](https://goaccess.io/):an open source real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser.
+* [rsyslog/rsyslog](https://github.com/rsyslog/rsyslog):a Rocket-fast SYStem for LOG processing http://www.rsyslog.com

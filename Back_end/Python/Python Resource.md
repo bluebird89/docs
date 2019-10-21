@@ -1113,8 +1113,6 @@ Python 实现的算法和设计模式。
 
 ## 编辑器插件
 
-编辑器和 IDE 的插件
-
 * Emacs
   - Elpy：Emacs Python 开发环境。[官网](https://github.com/jorgenschaefer/elpy)
 - Sublime Text
@@ -1142,10 +1140,6 @@ Python 实现的算法和设计模式。
 * Errbot：最简单和最流行的聊天机器人用来实现自动聊天工具。[官网](http://errbot.io/en/latest/)
 * [Lector](https://github.com/BasioMeusPuga/Lector):基于 Qt 的电子书阅读器
 * [Asciinema](https://github.com/asciinema/asciinema):Python 编写的终端会话录制器
-
-## 服务
-
-在线工具和简化开发的 API 。
 
 ## 持续集成
 
@@ -1181,17 +1175,17 @@ Python 实现的算法和设计模式。
 
 ## 学习指南
 
-- [Scipy-lecture-notes](http://hao.jobbole.com/scipy-lecture-notes/)：如何用Python来做学术？[官网](https://github.com/scipy-lectures/scipy-lecture-notes)
-- [SScientific-python-lectures](http://hao.jobbole.com/scientific-python-lectures/)：Python科学计算的资料。[官网](https://github.com/jrjohansson/scientific-python-lectures)
-- [Mario-Level-1](http://hao.jobbole.com/mario-level-1/)：用Python和Pygame写的超级马里奥第一关。[官网](https://github.com/justinmeister/Mario-Level-1)
-- [Python Koans](http://hao.jobbole.com/python-koans/)：Python的交互式学习工具。[官网](https://github.com/gregmalcolm/python_koans)
-- [Minecraft](http://hao.jobbole.com/minecraft-python/)：用python写的Minecraft游戏。[官网](https://github.com/fogleman/Minecraft)
-- [pycrumbs](http://hao.jobbole.com/python-pycrumbs/)：Python资源大全。[官网](https://github.com/kirang89/pycrumbs/blob/master/pycrumbs.md)
-- [python-patterns](http://hao.jobbole.com/python-patterns/)：使用python实现设计模式。[官网](https://github.com/faif/python-patterns)
-- [Projects](http://hao.jobbole.com/python-projects/)：Python项目大集合。[官网](https://github.com/karan/Projects)
-- [The Hitchhiker's Guide to Python](http://hao.jobbole.com/the-hitchhikers-guide-to-python/)：旅行者的Python学习指南。[官网](http://docs.python-guide.org/en/latest/)
-- [Code Like a Pythonista: Idiomatic Python](http://top.jobbole.com/18767/)：如何像Python高手(Pythonista)一样编程。[官网](http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html)
-- [Prodesire/Python-Guide-CN](https://github.com/Prodesire/Python-Guide-CN):Python最佳实践指南
+* [Scipy-lecture-notes](http://hao.jobbole.com/scipy-lecture-notes/)：如何用Python来做学术？[官网](https://github.com/scipy-lectures/scipy-lecture-notes)
+* [SScientific-python-lectures](http://hao.jobbole.com/scientific-python-lectures/)：Python科学计算的资料。[官网](https://github.com/jrjohansson/scientific-python-lectures)
+* [Mario-Level-1](http://hao.jobbole.com/mario-level-1/)：用Python和Pygame写的超级马里奥第一关。[官网](https://github.com/justinmeister/Mario-Level-1)
+* [Python Koans](http://hao.jobbole.com/python-koans/)：Python的交互式学习工具。[官网](https://github.com/gregmalcolm/python_koans)
+* [Minecraft](http://hao.jobbole.com/minecraft-python/)：用python写的Minecraft游戏。[官网](https://github.com/fogleman/Minecraft)
+* [pycrumbs](http://hao.jobbole.com/python-pycrumbs/)：Python资源大全。[官网](https://github.com/kirang89/pycrumbs/blob/master/pycrumbs.md)
+* [python-patterns](http://hao.jobbole.com/python-patterns/)：使用python实现设计模式。[官网](https://github.com/faif/python-patterns)
+* [Projects](http://hao.jobbole.com/python-projects/)：Python项目大集合。[官网](https://github.com/karan/Projects)
+* [The Hitchhiker's Guide to Python](http://hao.jobbole.com/the-hitchhikers-guide-to-python/)：旅行者的Python学习指南。[官网](http://docs.python-guide.org/en/latest/)
+* [Code Like a Pythonista: Idiomatic Python](http://top.jobbole.com/18767/)：如何像Python高手(Pythonista)一样编程。[官网](http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html)
+* [Prodesire/Python-Guide-CN](https://github.com/Prodesire/Python-Guide-CN):Python最佳实践指南
 * [pgbovine/OnlinePythonTutor](https://github.com/pgbovine/OnlinePythonTutor):Visualize Python, Java, JavaScript, TypeScript, Ruby, C, and C++ code execution in your Web browser http://pythontutor.com/
 * [Python fundamentals](https://www.python-tutorial.net/)
 * [sfermigier/awesome-functional-python](https://github.com/sfermigier/awesome-functional-python)
@@ -1217,11 +1211,8 @@ Python 实现的算法和设计模式。
 ## 源码
 
 * [flaggo/python3-source-code-analysis](https://github.com/flaggo/python3-source-code-analysis):《Python 3 源码剖析》
-
 * functional programming
   * [evhub/coconut](https://github.com/evhub/coconut):Simple, elegant, Pythonic functional programming. http://coconut-lang.org
-* qrcode
-  - [MyQR](link)
 
 ## reference
 
