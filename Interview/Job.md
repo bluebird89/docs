@@ -101,6 +101,7 @@
 
 ## 离职
 
+* 频繁离职：在一个环境中经历太短，还没有解决问题/攻克难题就离开了，如果多次这样，可能会习惯性规避问题或者过多的评估环境因素，而少有想自己怎么去克服困难，解决问题；毕竟一走了之是最简单的事
 * 2周离职，现实与预期不符；3个月离职，岗位职责/工作内容有问题
 * 6个月离职，直接上级有问题
 * 2年离职，公司战略/企业文化不喜欢
@@ -251,4 +252,5 @@
 
 ## 参考
 
-* [geekcompany/ResumeSample](https://github.com/geekcompany/ResumeSample):Resume template for Chinese programmers 
+* [geekcompany/ResumeSample](https://github.com/geekcompany/ResumeSample):Resume template for Chinese programmers
+* [yifeikong/reverse-interview-zh](https://github.com/yifeikong/reverse-interview-zh):技术面试最后反问面试官的话

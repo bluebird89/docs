@@ -211,3 +211,4 @@ $sub = addcslashes(mysql_real_escape_string("%something_"), "%_");
 * [trimstray/the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge):💫 A collection of awesome lists, manuals, blogs, hacks, one-liners, cli/web tools and more. Especially for System and Network Administrators, DevOps, Pentesters or Security Researchers.
 * [Micropoor/Micro8](https://github.com/Micropoor/Micro8):Gitbook https://micro8.gitbook.io/micro8/
 * [hacker-tools](https://hacker-tools.github.io/lectures/)
+* [danielmiessler/SecLists](https://github.com/danielmiessler/SecLists):SecLists is the security tester's companion. It's a collection of multiple types of lists used during security assessments, collected in one place. List types include usernames, passwords, URLs, sensitive data patterns, fuzzing payloads, web shells, and many more.https://www.owasp.org/index.php/OWASP_Internet_of_Things_Project
