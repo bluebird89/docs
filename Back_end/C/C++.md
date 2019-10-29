@@ -36,6 +36,10 @@ gcc file.c # 编译
 
 * [cameron314/concurrentqueue](https://github.com/cameron314/concurrentqueue):A fast multi-producer, multi-consumer lock-free concurrent queue for C++11
 
+## 图书
+
+* 《C Primer Plus》
+
 ## 工具
 
 - [Tencent/libco](https://github.com/Tencent/libco)libco is a coroutine library which is widely used in wechat back-end service.

@@ -470,11 +470,16 @@ nslookup #  命令用于互动式地查询域名记录
 whois github.com # 用来查看域名的注册情况
 ```
 
-### 列表
+### 公共 DNS 服务
 
 ```
 8.8.8.8
 8.8.4.4
+
+# Cloudflare 
+
+1.1.1.1
+1.0.0.1
 ```
 
 ### [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest)
