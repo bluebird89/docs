@@ -25,7 +25,6 @@ curl is used in command lines or scripts to transfer data.发出网络请求，�
 * -s 将不输出错误和进度信息
 * -u 用来设置服务器认证的用户名和密码
 
-
 ```sh
 curl http://www.baidu.com
 curl http://www.baidu.com > /tmp/baidu.html # save html

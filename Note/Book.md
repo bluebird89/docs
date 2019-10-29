@@ -53,9 +53,10 @@
 * 《[UNIX网络编程 卷2：进程间通信](https://www.amazon.cn/gp/product/B012R5A29O)》
 * 《[UNIX编程环境](https://www.amazon.cn/gp/product/B00IYTQBYS/)》
 * 《[Unix 环境高级编程(第3版)](https://www.amazon.cn/gp/product/B00KMR129E)》
+* 《Unix网络高级编程》
 * 《Unix/Linux 编程实践教程》
 * 《UNIX操作系统设计》
-* 《unix网络高级编程》
+* 《[UNIX编程艺术](https://www.amazon.cn/gp/product/B008Z1IEQ8)》
 * 《Linux/Unix 系统编程手册》
 * 《[深入理解Linux内核](https://www.amazon.cn/gp/product/B0011F5RYM)》
 * 《[深入Linux内核架构](https://www.amazon.cn/gp/product/B003QN7J7U)》
@@ -77,7 +78,6 @@
 
 * 《[编程原本](https://www.amazon.cn/gp/product/B006P7V73G)》
 * 《[代码大全2(Code Complete)](https://www.amazon.cn/gp/product/B0061XKRXA)》
-* 《[UNIX编程艺术](https://www.amazon.cn/gp/product/B008Z1IEQ8)》
 * 《[代码整洁之道(Clean Code)](https://www.amazon.cn/gp/product/B0031M9GHC)》
 * 《[编程珠玑（第2版）（Programming Pearls ）](https://www.amazon.cn/gp/product/B00SFZH0DC)》
 * 《[编程珠玑（续）](https://www.amazon.cn/gp/product/B0150BMQDM)》
@@ -113,6 +113,7 @@
 * 《数据结构与算法 JavaScript 描述》
 * 算法图解
 * 大话数据结构
+* 《Redis设计与实现》
 * 剑指 offer
 
 ## 设计
@@ -865,6 +866,7 @@
 
 《斯通纳》
 《安静的美国人》
+伯林传
 
 
 ## 资源

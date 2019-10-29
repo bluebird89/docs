@@ -626,3 +626,4 @@ Docker 初级的重点在于 Dockerfile 镜像，Linux CLI 和 shell 编程在�
 * [WsmDyj/Interview](https://github.com/WsmDyj/Interview):Some interview experience
 * [CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes):😋 技术面试必备基础知识 https://cyc2018.github.io/CS-Notes
 * [0voice/interview_internal_reference](https://github.com/0voice/interview_internal_reference):2019年最新总结，阿里，腾讯，百度，美团，头条等技术面试题目，以及答案，专家出题人分析汇总。
+* [qinxuewu/interview-docs](https://github.com/qinxuewu/interview-docs):Java知识学习总结+源码阅读笔记。

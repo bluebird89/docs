@@ -154,18 +154,19 @@ pip install shadowsocks
 
 ## 工具
 
-- [Lantern](https://github.com/getlantern/lantern)
-- [firefly-proxy](https://github.com/yinghuocho/firefly-proxy):A proxy software to help circumventing the Great Firewall.
-- [XX-net/XX-Net](https://github.com/XX-net/XX-Net)a web proxy tool
-- [googlehosts/hosts](https://github.com/googlehosts/hosts)
-- [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
-- shadowsocksx
-- Perfect Privacy
-- ExpressVPN
-- NordVPN
-- 私人互联网接入
-- PureVPN
-- 完美隐私
+* [Lantern](https://github.com/getlantern/lantern)
+* [firefly-proxy](https://github.com/yinghuocho/firefly-proxy):A proxy software to help circumventing the Great Firewall.
+* [XX-net/XX-Net](https://github.com/XX-net/XX-Net)a web proxy tool
+* [googlehosts/hosts](https://github.com/googlehosts/hosts)
+* [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core):A platform for building proxies to bypass network restrictions. https://www.v2ray.com/
+* [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
+* shadowsocksx
+* Perfect Privacy
+* ExpressVPN
+* NordVPN
+* 私人互联网接入
+* PureVPN
+* 完美隐私
 - [txthinking/brook](https://github.com/txthinking/brook):Brook is a cross-platform(Linux/MacOS/Windows/Android/iOS) proxy/vpn software
 * [Alvin9999/new-pac](https://github.com/Alvin9999/new-pac)
 * BT sync
