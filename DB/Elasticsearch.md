@@ -166,6 +166,8 @@ curl -X DELETE 'localhost:9200/accounts/person/1'
   - [siddontang/go-mysql-elasticsearch](https://github.com/siddontang/go-mysql-elasticsearch):Sync MySQL data into elasticsearch
 * [Elasticsearch的开源分发包](https://opendistro.github.io/for-elasticsearch/)
 * [Yelp/elastalert](https://github.com/Yelp/elastalert):Easy & Flexible Alerting With ElasticSearch https://elastalert.readthedocs.org
+* UI
+  - [appbaseio/dejavu](https://github.com/appbaseio/dejavu):The Missing Web UI for Elasticsearch: Import, browse and edit data with rich filters and query views, create search UIs visually. https://opensource.appbase.io/dejavu/
 
 ## 参考
 
