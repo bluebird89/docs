@@ -35,6 +35,15 @@
 * 基于美元的外汇。 
     - 从基于房地产的金融过渡到基于产业结构效率的金融，从基于抵押的信用过渡到基于大数据的信用。
 
+## A股
+
+* 
+
 ## 工具
 
 * [waditu/tushare](https://github.com/waditu/tushare):TuShare is a utility for crawling historical data of China stocks
+
+## 参考
+
+* 吕梁
+* 曼昆的《经济学原理》

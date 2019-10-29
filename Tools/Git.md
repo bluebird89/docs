@@ -612,6 +612,7 @@ git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -
 %x00    print a byte from a hex code
 %w([[,[,]]])    switch line wrapping, like the -w option of git-shortlog(1).
 
+git shortlog -sn # 显示提交记录的参与者列表
 git log -n3 # 查看最近的三次提交
 git log branch1 ^branch2 # 查看在分支1不在分支2的log
 
@@ -619,6 +620,9 @@ git log [tag] HEAD --pretty=format:%s   # 显示某个commit之后的所有变�
 git log [tag] HEAD --grep feature  # 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件
 git log --follow [file]  # 显示某个文件的版本历史，包括文件改名
 git log --name-status --oneline
+git log -p FILE # 查看 README.md 的修改历史
+git log -S'stupid'  # 搜索修改符合 stupid 的历史
+git log ..BRANCH # 这个命令返回某个非 HEAD 分支的提交记录
 
 #  使用 git reset --hard commitID 把本地开发代码回滚到了一个之前的版本，而且还没有推到远端，怎么才能找回丢失的代码呢？
 #  你如果使用 git log 查看提交日志，并不能找回丢弃的那些 commitID。
@@ -670,6 +674,8 @@ squash 7d33868 update
 ```sh
 git branch [-r]|[-a] # 列出所有远程/所有分支，不带参数时列出本地分支
 git branch -av # 查看所有分支（包括远程分支）和最后一次提交日志
+git branch –merged & git branch –no-merged # 返回已合并分支列表或未合并的分支列表
+git branch –contains SHA # 返回包含某个指定 sha 的分支列表
 
 git branch <new-branch> <old-branch>|[commit] # 新建分支，不带old-branch为默认在当前分支上建立新分支 但依然停留在当前分支
 git branch --track [branch] [remote-branch] # 新建一个分支，与指定的远程分支建立追踪关系
@@ -694,6 +700,7 @@ git --git-dir=/.git format-patch -k -1 --stdout  | git am -3 -k # 将另一个�
 git filter-branch --prune-empty --subdirectory-filter  master # 将Git仓库中某个特定的目录转换为一个全新的仓库
 
 git rm filename # 从 HEAD 中删除文件
+git rm –cached FILE # 这个命令只删除远程文件
 ```
 
 ![merge](../_static/merge.svg "merge")
@@ -1243,6 +1250,19 @@ git merge FETCH_HEAD
   - [Tutorial](https://lab.github.com/courses)
   - [GitHub Helps](https://help.github.com/)
   - [github/hub](https://github.com/github/hub):A command-line tool that makes git easier to use with GitHub. https://hub.github.com/
+* 技巧
+  - 源码浏览页面，按 t 可以快速进入模糊文件名搜索模式
+  - 仓库主页，按 w 可以快速进行分支过滤
+  - 任意 GitHub 页面中，按 ? 展示当前页面可用的快捷键
+  - 在任意的 diff URL 添加 ?w=1 用来整理缩进
+  - 按范围过滤提交记录: master@{time}..master
+  - 按作者过滤提交记录: ?author=github_handle
+  - 在命令行输入 hub pull-request 创建pull request
+  - 在比较页面、合并请求页面或者评论页面的URL后增加 .diff 或者 .patch，可以得到 diff 或者 patch 的文本格式。
+  - 可以直接在收到的 GitHub 通知邮件进行评论，不必在网站页面中评论
+  - 在文件展示页面，点击某行或者通过按 SHIFT 选择多行，URL 会有相应的改变。如果你要给你的队友分享一段代码是非常方便的：
+  - 在合并请求、问题或者任何评论中中提到用户会使用户关注全部的后续通知
+  - 在合并请求、问题、或者任何评论中，sha和问题码(例如：#1)会被自动链接。并且，你也可以链接其它仓库的 sha 或者问题码，格式：user/repo@sha1 或者 user/repo#1。
 
 ![Git 使用规范流程](../_static/bg2015080501.png)
 

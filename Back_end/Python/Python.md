@@ -1437,6 +1437,7 @@ virtualenv
 * [kriadmin/30-seconds-of-python-code](https://github.com/kriadmin/30-seconds-of-python-code)
 * [coodict/python3-in-one-pic](https://github.com/coodict/python3-in-one-pic):Learn python3 in one picture. https://git.io/Coo-py3
 * [lijin-THU/notes-python](https://github.com/lijin-THU/notes-python):中文 Python 笔记
+* [pythonbook](https://python.cs.southern.edu/pythonbook/pythonbook.pdf)
 
 * [python3](http://www.runoob.com/python3)
 * <http://www.cnblogs.com/linhaifeng/p/7278389.html>

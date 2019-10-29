@@ -239,4 +239,5 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 * [JavaScript 进阶之 Vue.js + Node.js 入门实战开发](http://blog.csdn.net/gitchat/article/details/77931664)
 * [HcySunYang/vue-design](https://github.com/HcySunYang/vue-design):📖逐行级别的源码分析 http://hcysun.me/vue-design/
 * [Vue.js 技术揭秘](https://ustbhuangyi.github.io/vue-analysis/)
+* [开发技巧](https://segmentfault.com/a/1190000020620972)
 * http://www.cnblogs.com/keepfool/
