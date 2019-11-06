@@ -3,13 +3,23 @@
 Open Source, Distributed, RESTful Search Engine，一个基于Lucene的实时的分布式搜索和分析全文搜索引擎
 
 * 设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便
-* 基于RESTful接口。普通请求是...get?a=1；rest请求....get/a/1 可以快速地储存、搜索和分析海量数据
+* 基于RESTful接口
 * 面向文档型数据库，一条数据在这里就是一个文档，用JSON作为文档序列化的格式
+* 分布式搜索引擎
+* 实时数据分析
+
+## 功能
+
+* 存储
+  - 搜索
+  - 聚合
+* 日志
 
 ## 安装
 
 * 安装Java8 环境
 * Mac
+  - bin:
   - Data:    /usr/local/var/elasticsearch/elasticsearch_henry/
   - Logs:    /usr/local/var/log/elasticsearch/elasticsearch_henry.log
   - Plugins: /usr/local/opt/elasticsearch/libexec/plugins/
@@ -17,15 +27,15 @@ Open Source, Distributed, RESTful Search Engine，一个基于Lucene的实时的
   - plugin script: /usr/local/opt/elasticsearch/libexec/bin/elasticsearch-plugin
 
 ```sh
+# JDK  放在路径/usr/local/java 编辑配置文件 /etc/profile
+export JAVA_HOME=/usr/local/java/jdk1.8.0_77
+export PATH=$JAVA_HOME/bin:$PATH
+java -version
+
 wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.2.zip
+wget https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.1.0/elasticsearch-2.1.0.tar.gz
 unzip elasticsearch-5.5.2.zip
-cd elasticsearch-5.5.2/
-# 开启服务，默认的9200端口运行
-./bin/elasticsearch
-# 后台运行
-./bin/elasticsearch -d -p pid
-# 开启另一端开口,返回一个 JSON 对象，包含当前节点、集群、版本等信息
-curl localhost:9200
+tar xf elasticsearch-2.1.0.tar.gz
 
 # ubuntu
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
@@ -33,7 +43,32 @@ sudo apt-get install apt-transport-https
 sudo apt-get update && sudo apt-get install elasticsearch
 sudo service elasticsearch start
 
+brew install elasticsearch # http://localhost:9200
+
+cd elasticsearch-5.5.2/
+./plugin  -install mobz/elasticsearch-head  # web集群管理插件  安装好了以后可以在plugin文件发现多了一个head
+
+# 开启服务，默认的9200端口运行
+./bin/elasticsearch
+./elasticsearch  -Des.insecure.allow.root=true  #加这个参数才可以root启动
+./bin/elasticsearch -d -p pid # 后台运行
+
+# 开启另一端开口,返回一个 JSON 对象，包含当前节点、集群、版本等信息
+curl localhost:9200
 curl -XGET 'localhost:9200/_cat/health?v&pretty'
+{
+ "name" : "Reeva Payge",
+ "cluster_name" : "elasticsearch",
+ "version" : {
+   "number" : "2.1.0",
+   "build_hash" : "72cd1f1a3eee09505e036106146dc1949dc5dc87",
+   "build_timestamp" : "2015-11-18T22:40:03Z",
+   "build_snapshot" : false,
+   "lucene_version" : "5.3.1"
+ },
+ "tagline" : "You Know, for Search"
+}
+# web地址  http://192.168.88.250:9200/_plugin/head/
 ```
 
 ## 原理
@@ -129,6 +164,232 @@ curl -X DELETE 'localhost:9200/accounts/person/1'
 
 * 默认情况下，Elastic 只允许本机访问，如果需要远程访问，可以修改 Elastic 安装目录的config/elasticsearch.yml文件，去掉network.host的注释，将它的值改成0.0.0.0，然后重新启动 Elastic
 
+## ELK
+
+* 标准化:
+    - 路径规划: /data/logs/,/data/logs/access,/data/logs/error,/data/logs/run
+    - 格式要求: 严格要求使用json
+    - 命名规则: access_log error_log runtime_log system_log
+    - 日志切割: 按天，按小时。访问,错误，程序日志按小时，系统日志按天收集。
+    - 原始文本: rsync推送NAS，后删除最近三天前。
+    - 消息队列: 访问日志,写入Redis_DB6，错误日志Redis_DB7,程序日志Redis_DB8
+* 工具化:
+    - 访问日志  Apache、Nginx、Tomcat       (使用file插件)
+    - 错误日志  java日志、异常日志          (使用mulitline多行插件)
+    - 系统日志  /var/log/*、rsyslog         (使用syslog)
+    - 运行日志  程序写入的日志文件          (可使用file插件或json插件)
+    - 网络日志  防火墙、交换机、路由器      (syslog插件)
+* 集群化:
+    - 每台ES上面都启动一个Kibana
+    - Kibana都连自己的ES
+    - 前端Nginx负载均衡+验证,代理至后端Kibana
+    - 通过消息队列来实现程序解耦以及高可用等扩展
+* 监控化:
+    - 对ES以及Kibana、进行监控。如果服务DOWN及时处理。
+    - 使用Redis的list作为ELKstack消息队列。
+    - Redis的List Key长度进行监控(llen key_name)。例:超过"10万"即报警(根据实际情况以及业务情况)
+* 迭代化:
+    - 开源日志分析平台:ELK、EFK、EHK
+    - 数据收集处理:Flume、heka
+    - 消息队列:Redis、Rabbitmq、Kafka、Hadoop、webhdfs
+
+```
+elasticsearch-plugin list
+elasticsearch-plugin install analysis-icu
+
+elasticsearch -E node.name=node1 -E cluster.name=geektime -E path.data=node1_data -d
+elasticsearch -E node.name=node2 -E cluster.name=geektime -E path.data=node2_data -d
+elasticsearch -E node.name=node3 -E cluster.name=geektime -E path.data=node3_data -d
+
+http://localhost:9200/_cat/nodes
+```
+
+## 安装
+
+## Logstash
+
+采集数据导入
+
+```sh
+## 搭建
+wget https://download.elastic.co/logstash/logstash/logstash-2.1.1.tar.gz
+tar xf logstash-2.1.1.tar.gz
+
+brew install logstash # http://localhost:9600
+
+cd /usr/local/logstash-2.1.1/bin
+vim stdin.conf #编写配置文件
+input{
+       file {
+               path => "/var/log/nginx/access.log_json"  #NGINX日志地址 json格式
+              codec => "json"  # json编码
+       }
+}
+filter {
+       mutate {
+               split => ["upstreamtime", ","]
+       }
+       mutate {
+               convert => ["upstreamtime", "float"]
+       }
+}
+output{
+       elasticsearch {
+               hosts => ["192.168.88.250:9200"]   #elasticsearch地址
+               index => "logstash-%{type}-%{+YYYY.MM.dd}"   #索引
+               document_type => "%{type}"
+               workers => 1
+               flush_size => 20000        #传输数量 默认500
+               idle_flush_time => 10      #传输秒数  默认1秒
+               template_overwrite => true
+       }
+}
+
+# logstash-sample.conf
+input { stdin { } }
+output {
+  elasticsearch { hosts => ["localhost:9200"]  index => "my_blog"
+        user => "elastic"
+        password => "json"
+  }
+  stdout { codec => rubydebug }
+}
+
+./bin/logstash -f logstash-sample.conf
+./logstash -f stdin.conf &  #后台启动
+# 启动成功以后 打开刚才搭建的web服务器  es就能看到数据
+```
+
+## Kibana
+
+数据的展示
+
+```sh
+# 搭建
+wget https://artifacts.elastic.co/downloads/kibana/kibana-7.1.1-darwin-x86_64.tar.gz # http://localhost:5601
+tar xf kibana-4.3.1-linux-x64.tar.gz
+cd /usr/local/kibana-4.3.1-linux-x64/
+
+# ./config/kibana.yml
+elasticsearch.url: #   只需要修改URL为ElasticSearch的IP地址
+
+./kibana& # 后台启动
+# 启动成功以后 会监听 5601端口
+
+# 可以用Kibana查看 地址 : 192.168.88.250:5601
+# create灰色的 说明没有创建索引  打开你的nginx服务器 刷新几下 采集一下数据 然后  选择 左上角的 Discover
+# 数据可能会出不来 那是因为 Kibana 是根据时间来匹配的 并且 因为 Logstash的采集时间使用的UTC  永远早8个小时 所以设置时间 要设置晚8个小时以后
+
+
+echo "kibanaadmin:`openssl passwd -apr1`" | sudo tee -a /etc/nginx/htpasswd.users
+kibanaadmin:$apr1$M2kx248q$TRbbkejn8bxFsdztudF6Z0
+
+# nginx
+# 搭建nginx之前需要安装 pcre
+tar xf nginx-1.7.8.tar.gz
+cd /usr/local/nginx
+vim /usr/local/nginx/conf/nginx.conf
+
+#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+events {
+  worker_connections  1024;
+}
+
+http {
+    upstream kibana4 {  #对Kibana做代理
+           server 127.0.0.1:5601 fail_timeout=0;
+    }
+   include       mime.types;
+   default_type  application/octet-stream;
+
+   #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+   #                  '$status $body_bytes_sent "$http_referer" '
+   #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    log_format json '{"@timestamp":"$time_iso8601",'   #配置NGINX的日志格式 json
+                       '"host":"$server_addr",'
+                       '"clientip":"$remote_addr",'
+                       '"size":$body_bytes_sent,'
+                       '"responsetime":$request_time,'
+                       '"upstreamtime":"$upstream_response_time",'
+                       '"upstreamhost":"$upstream_addr",'
+                       '"http_host":"$host",'
+                       '"url":"$uri",'
+                       '"xff":"$http_x_forwarded_for",'
+                       '"referer":"$http_referer",'
+                       '"agent":"$http_user_agent",'
+                       '"status":"$status"}';
+    access_log /var/log/nginx/access.log_json json;   #配置日志路径 json格式
+    error_log /var/log/nginx/error.log;
+
+   sendfile        on;
+   #tcp_nopush     on;
+
+   #keepalive_timeout  0;
+   keepalive_timeout  65;
+
+   #gzip  on;
+
+server {
+   listen               *:80;
+   server_name          kibana_server;
+   access_log           /var/log/nginx/kibana.srv-log-dev.log;
+   error_log            /var/log/nginx/kibana.srv-log-dev.error.log;
+
+   location / {
+       root   /var/www/kibana;
+       index  index.html  index.htm;
+   }
+
+   location ~ ^/kibana4/.* {
+       proxy_pass           http://kibana4;
+       rewrite             ^/kibana4/(.*)  /$1 break;
+       proxy_set_header     X-Forwarded-For $proxy_add_x_forwarded_for;
+       proxy_set_header     Host            $host;
+       auth_basic           "Restricted";
+       auth_basic_user_file /etc/nginx/conf.d/kibana.myhost.org.htpasswd;
+   }
+
+}
+}
+```
+
+## BEATS
+
+
+## metrics
+
+* logstash:日志收集、分析、过滤。部署在客户端比较重
+* 轻量级的filebeat
+
+```sh
+curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.1.1-darwin-x86_64.tar.gz
+tar xzvf filebeat-7.1.1-darwin-x86_64.tar.gz
+cd filebeat-7.1.1-darwin-x86_64/
+
+# filebeat.yml
+Copy snippet
+output.elasticsearch:
+  hosts: ["<es_url>"]
+  username: "elastic"
+  password: "<password>"
+setup.kibana:
+  host: "<kibana_url>"
+./filebeat modules enable redis
+
+./filebeat setup
+./filebeat -e # ./filebeat -e -c /home/elk/filebeat/filebeat.yml
+```
+
+## X-Pack
+
 ## ES VS Solr
 
 * 接口
@@ -152,6 +413,10 @@ curl -X DELETE 'localhost:9200/accounts/person/1'
 -Xmx512m
 ```
 
+## 图书
+
+* [ELK Stack权威指南](http://product.china-pub.com/64005)
+
 ## 工具
 
 * 分词
@@ -174,3 +439,8 @@ curl -X DELETE 'localhost:9200/accounts/person/1'
 * [Elasticsearch 5.4 中文文档](http://cwiki.apachecn.org/pages/viewpage.action?pageId=4260364)
 * [elastic/elasticsearch-definitive-guide](https://github.com/elastic/elasticsearch-definitive-guide):The Definitive Guide to Elasticsearch https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html
 * [Elasticsearch 权威指南](https://fuxiaopang.gitbooks.io/learnelasticsearch/)
+* [Kibana User Guide](https://www.elastic.co/guide/en/kibana/current/index.html)
+* [Logstash 参考文档](https://www.elastic.co/guide/e...
+
+极客时间版权所有: https://time.geekbang.org/course/detail/197-102665)
+

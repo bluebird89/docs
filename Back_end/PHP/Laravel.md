@@ -2800,6 +2800,7 @@ php artisan horizon:pause|continue|terminate
 * [Laravel5.5 + Vue开发单页应用](http://www.laravel-vue.xyz/2018/03/22/laravel_vue_v2/)
 * [code 好事源代码](https://github.com/Ucer/codehaoshi):记录日常开发的笔记，用 laravel 与 vue 构建。后台使用 ucer-admin 管理系统开发
 * [https://github.com/summerblue/larabbs](A forum project base on Laravel 5.5)
+* [bagisto/bagisto](https://github.com/bagisto/bagisto):A Free and Opensource laravel eCommerce framework built for all to build and scale your business. https://bagisto.com
 
 ```sh
 git clone git@github.com:summerblue/larabbs.git

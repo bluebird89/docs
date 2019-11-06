@@ -191,6 +191,10 @@ find . -type f -name "*.log" -print0 | xargs -0 rm -f
 echo $*
 
 cat arg.txt | xargs -I {} ./sk.sh -p {} -l
+
+# 输出nginx日志的ip和每个ip的pv，pv最高的前10
+#2019-06-26T10:01:57+08:00|nginx001.server.ops.pro.dc|100.116.222.80|10.31.150.232:41021|0.014|0.011|0.000|200|200|273|-|/visit|sign=91CD1988CE8B313B8A0454A4BBE930DF|-|-|http|POST|112.4.238.213
+awk -F"|" '{print $3}' access.log | sort | uniq -c | sort -nk1 -r | head -n10
 ```
 
 ## 磁盘管理
@@ -245,6 +249,14 @@ grep “string” filenameKeyword*
 grep 'Ubuntu' *.txt
 grep “startingKeyword.*endingKeyword” filename
 grep -i “string” filename # 不会考虑搜索字符串是大写还是小写
+grep -rn --color POST access.log # n则输出具体的行数
+
+grep -rn --color Exception -A10 -B2   error.log # A  after  内容后n行 B  before  内容前n行 C  count?  内容前后n行
+
+# 删除目录中的所有class文件
+find . | grep .class$ | xargs rm -rvf
+#把所有的rmvb文件拷贝到目录
+ls *.rmvb | xargs -n1 -i cp {} /mount/xiaodianying
 ```
 
 ### [zsh-users/zsh](https://github.com/zsh-users/zsh)
@@ -1405,9 +1417,7 @@ for i in $IO_SQL_STATUS; do
 done
 ```
 
-## 配置
-
-* [direnv/direnv](https://github.com/direnv/direnv):Unclutter your .profile http://direnv.net
+## 
 
 ## 教程
 
@@ -1416,6 +1426,7 @@ done
 * [learnbyexample/scripting_course](https://github.com/learnbyexample/scripting_course):📓 A reference guide to Linux command line, Vim and Scripting https://learnbyexample.github.io/scripting_course/
 * [Introduction to text manipulation on UNIX-based systems](https://www.ibm.com/developerworks/aix/library/au-unixtext/index.html)
 * [Linux 教程](https://www.runoob.com/linux/linux-tutorial.html)
+* [linuxcommand](http://linuxcommand.org)
 
 ```sh
 cat demo.json | jq '.id,.name,.status,.attachments'
@@ -1543,6 +1554,8 @@ ccache gcc foo.c
 * tmux：终端复用工具，替代screen、nohup
 * neovim: 替代vim。
 * script/scriptreplay: 终端会话录制。
+* 配置
+    - [direnv/direnv](https://github.com/direnv/direnv):Unclutter your .profile http://direnv.net
 
 ## 参考
 

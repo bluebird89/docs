@@ -146,6 +146,38 @@ source $(brew --prefix)/etc/bash_completion
 fi
 ```
 
+## 源管理
+
+```
+# 清华 https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/
+# 替换
+git -C "$(brew --repo)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+git -C "$(brew --repo homebrew/core)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+git -C "$(brew --repo homebrew/cask)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git
+brew update
+
+## 阿里
+# 更换 brew
+cd "$(brew --repo)"
+git remote set-url origin https://mirrors.aliyun.com/homebrew/brew.git
+# 更换 homebrew-core
+cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git
+
+brew update
+
+echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles' >> ~/.zshrc
+source ~/.zshrc
+
+# 还原
+git -C "$(brew --repo)" remote set-url origin https://github.com/Homebrew/brew.git
+git -C "$(brew --repo homebrew/core)" remote set-url origin https://github.com/Homebrew/homebrew-core.git
+git -C "$(brew --repo homebrew/cask)" remote set-url origin https://github.com/Homebrew/homebrew-cask.git
+brew update
+```
+
+## 问题
+
 > brew postinstall node  brew postinstall php@7.1 安装权限问题
 
 cd /usr/local && sudo chown -R $(whoami) bin etc include lib sbin share var Frameworks
@@ -156,8 +188,8 @@ brew update --force
 
 ## 软件
 
-bash_completion
-zsh_completion
+* bash_completion
+* zsh_completion
 
 ## 工具
 

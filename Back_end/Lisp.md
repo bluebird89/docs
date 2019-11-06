@@ -12,4 +12,5 @@ brew install clisp
 * [common-lisp](https://common-lisp.net/)
 * [kanaka/mal](https://github.com/kanaka/mal):mal - Make a Lisp
 * [Quickdocs](http://quickdocs.org)
+* [Practical Common Lisp](http://www.gigamonkeys.com/book/)
 
