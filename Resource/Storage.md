@@ -31,6 +31,7 @@
     - [Downie](https://software.charliemonroe.net/downie/):YouTube Video Downloader for macOS - Charlie
     - [bundlehunt](https://bundlehunt.com/)
     - [盘下载器](https://www.baiduwp.com/)
+    - [Algram/ytdl-webserver](https://github.com/Algram/ytdl-webserver):📻 Webserver for downloading youtube videos. Ready for docker.
 
 ## md5 verdify
 
