@@ -308,6 +308,7 @@
 * [A Course in Machine Learning](http://ciml.info/)
 * [Machine-Learning-Study-Path-March-2019](https://github.com/clone95/Machine-Learning-Study-Path-March-2019)
 * [Yorko/mlcourse.ai](https://github.com/Yorko/mlcourse.ai):Open Machine Learning Course https://mlcourse.ai
+* [sjwhitworth/golearn](https://github.com/sjwhitworth/golearn):Machine Learning for Go
 
 ## 比赛
 
