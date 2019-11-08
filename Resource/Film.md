@@ -38,3 +38,4 @@
 * [](http://www.fjisu.com/mov/)
 * [rarbg](http://www.rarbg.to/)
 * [疯狂影视](http://ifkdy.com/)
+* [52倍人生](https://m.douban.com/time/column/76/)

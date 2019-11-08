@@ -39,9 +39,6 @@ query myQry ($name: String!) {
 
 * 类型的定义以及查询本身都是通过 Schema 去定义的。GraphQL 的 Schema 语言全称叫 Schema Definition Language。Schema 本身并不代表你数据库中真实的数据结构，它的定义决定了这整个端点能干些什么事情，能向端点要什么，操作什么
 
-
-
-
 ## 项目
 
 * <https://developer.github.com/v4/>
