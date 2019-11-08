@@ -658,7 +658,7 @@ open http://127.0.0.1:8000
     - (https://github.com/kriswallsmith/spork)[Spork]: 一个处理forking的库
     - (https://github.com/EvanDotPro/Sslurp)[Sslurp]: 一个使得SSL处理减少的库
     - (https://github.com/jeremeamia/super_closure)[SuperClosure]: 一个允许闭包序列化的库
-    - (http://symfony.com/doc/current/components/var_dumper.html)[Symfony VarDumper]: 一个dumper库(SF2)
+    - [Symfony/var-dumper](https://github.com/symfony/var-dumper): The VarDumper component provides mechanisms for walking through any arbitrary PHP variable. It provides a better dump() function that you can use instead of var_dump(). https://symfony.com/var-dumper
     - (http://anahkiasen.github.io/underscore-php/)[Underscore]: 一个Undersccore JS库的PHP实现
     - (https://github.com/filp/whoops)[Whoops]: 一个不错的错误处理库
 

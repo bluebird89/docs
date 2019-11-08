@@ -25,6 +25,7 @@
 * [Docsite](https://github.com/txd-team/docsite): 款集官网、文档、博客和社区为一体的静态开源站点的解决方案，具有简单易上手、上手不撒手的特质，同时支持 react 和静态渲染、PC 端和移动端、支持中英文国际化、SEO、markdown 文档、全局站点搜索、站点风格自定义、页面自定义等功能 https://docsite.js.org
 * [TryGhost/Ghost](https://github.com/TryGhost/Ghost):👻 The #1 headless Node.js CMS for professional publishing https://ghost.org
 * [gridsome/gridsome](https://github.com/gridsome/gridsome):⚡️Build lightning fast websites and apps with Vue.js https://gridsome.org
+* [vuejs/vuepress](https://github.com/vuejs/vuepress):📝 Minimalistic Vue-powered static site generator https://vuepress.vuejs.org
 
 ## [Canner/canner](https://github.com/Canner/canner)
 
