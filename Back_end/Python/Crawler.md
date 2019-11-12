@@ -47,12 +47,9 @@ http://www.runoob.com/xpath/xpath-tutorial.html
 
 * 爬虫实战：从数据到产品
 
-## 工具
+## 教程
 
-* [bupt1987/html-parser](https://github.com/bupt1987/html-parser):php html parser，类似与PHP Simple HTML DOM Parser，但是比它快好几倍
-* [IonicaBizau/scrape-it](https://github.com/IonicaBizau/scrape-it):🔮 A Node.js scraper for humans.  https://ionicabizau.net/blog/30-how-to-write-a-web-scraper-in-nodejs
-* [PuerkitoBio/gocrawl](https://github.com/PuerkitoBio/gocrawl):Polite, slim and concurrent web crawler.
-* [crawlab-team/crawlab](https://github.com/crawlab-team/crawlab):Distributed web crawler admin platform for spiders management regardless of languages and frameworks.
+* [Kr1s77/Python-crawler-tutorial-starts-from-zero](https://github.com/Kr1s77/Python-crawler-tutorial-starts-from-zero):python爬虫教程，带你从零到一，包含js逆向，selenium, tesseract OCR识别,mongodb的使用，以及scrapy框架
 
 ## 实例
 
@@ -62,3 +59,10 @@ http://www.runoob.com/xpath/xpath-tutorial.html
 * [modood/Administrative-divisions-of-China](https://github.com/modood/Administrative-divisions-of-China):中华人民共和国行政区划：省级（省份直辖市自治区）、 地级（城市）、 县级（区县）、 乡级（乡镇街道）、 村级（村委会居委会） ，中国省市区镇村二级三级四级五级联动地址数据 Node.js 爬虫。
 * [XuefengHuang/lianjia-scrawler](https://github.com/XuefengHuang/lianjia-scrawler):链家二手房租房在线数据，存量房交易服务平台数据，详细数据分析教程 http://www.ershoufangdata.com
 * [wonderfulsuccess/weixin_crawler](https://github.com/wonderfulsuccess/weixin_crawler):高效微信公众号历史文章和阅读数据爬虫powered by scrapy 
+
+## 工具
+
+* [bupt1987/html-parser](https://github.com/bupt1987/html-parser):php html parser，类似与PHP Simple HTML DOM Parser，但是比它快好几倍
+* [IonicaBizau/scrape-it](https://github.com/IonicaBizau/scrape-it):🔮 A Node.js scraper for humans.  https://ionicabizau.net/blog/30-how-to-write-a-web-scraper-in-nodejs
+* [PuerkitoBio/gocrawl](https://github.com/PuerkitoBio/gocrawl):Polite, slim and concurrent web crawler.
+* [crawlab-team/crawlab](https://github.com/crawlab-team/crawlab):Distributed web crawler admin platform for spiders management regardless of languages and frameworks.

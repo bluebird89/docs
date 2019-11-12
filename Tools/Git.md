@@ -842,6 +842,7 @@ git push origin --delete new-branch
   - 第一个x代表大版本只有在项目有重大变更时更新
   - 第二个x代表常规版本有新需求会更新
   - 第三个x代表紧急BUG修正
+* 有合并分支的流程　最后打标签
 
 ```sh
 git tag # 列出所有tag
@@ -1610,6 +1611,7 @@ These features allow to pause a branch development and switch to another one (_"
 * [pomber/git-history](https://github.com/pomber/git-history)：Quickly browse the history of a file from any git repository https://githistory.xyz/
 * [Bash提示](https://github.com/magicmonty/bash-git-prompt)
 * [arzzen/git-quick-stats](https://github.com/arzzen/git-quick-stats):▁▅▆▃▅ Git quick statistics is a simple and efficient way to access various statistics in git repository. http://git-quick-stats.sh
+* [okonet/lint-staged](https://github.com/okonet/lint-staged):🚫💩 — Run linters on git staged files
 * 客户端
   - msysgit
   - sourcetree

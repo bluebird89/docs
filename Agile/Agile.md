@@ -193,6 +193,20 @@
 * Do incremental upgrades. Each minor version of Rails provides the deprecation warnings for the next version. By upgrading from 3.2 to 4.0, 4.0 to 4.1, etc we were able to identify problems in the next version early and define clear milestones.
 * Keep up the momentum. Rails upgrades can seem daunting. Create ways in which your team can have quick wins to keep momentum going. Share the responsibility across teams so that everyone is familiar with the new version of the framework and prevent burnout. Once you’re on the newest version add a build to your app that periodically runs your suite against edge Rails so you can catch bugs in your code or your framework early.
 * Expect things to break. Upgrades are hard and in an application as large as GitHub things are bound to break. While we didn’t take the site down during the upgrade we had issues with CI, local development, slow queries, and other problems that didn’t show up in our CI builds or click testing.
+* Principles behind the Agile Manifesto,We follow these principles:
+    - Our highest priority is to satisfy the customer through early and continuous delivery of valuable software.
+    - Welcome changing requirements, even late in development. Agile processes harness change for the customer's competitive advantage.
+    - Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale.
+    - Business people and developers must work together daily throughout the project.
+    - Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.
+    - The most efficient and effective method of conveying information to and within a development team is face-to-face conversation.
+    - Working software is the primary measure of progress.
+    - Agile processes promote sustainable development. 
+    - The sponsors, developers, and users should be able to maintain a constant pace indefinitely.
+    - Continuous attention to technical excellence and good design enhances agility.
+    - Simplicity--the art of maximizing the amount of work not done--is essential.
+    - The best architectures, requirements, and designs emerge from self-organizing teams.
+    - At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.
 
 ## 工具
 
@@ -224,3 +238,7 @@
 * 持续交付2.0：业务引领的DevOps精要 乔梁
 * Agile IT organization design
 * [Google工作法](https://www.yuque.com/heqingbao/msfy2c/zg56gm)
+
+## 参考
+
+* [](https://www.atlassian.com/agile)
