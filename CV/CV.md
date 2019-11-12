@@ -13,6 +13,7 @@ Blur
 ## 项目
 
 * [deeppomf/DeepCreamPy](https://github.com/deeppomf/DeepCreamPy):Decensoring Hentai with Deep Neural Networks
+* [thunil/TecoGAN](https://github.com/thunil/TecoGAN):This repo will contain source code and materials for the TecoGAN project, i.e. code for a TEmporally COherent GAN
 
 ## 参考
 

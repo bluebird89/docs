@@ -1003,7 +1003,7 @@
 * kindle
     - <http://kindle115.com/>
     - [鸠摩搜书](https://www.jiumodiary.com/)
-    - Calibre
+    - [Calibre](https://calibre-ebook.com/new-in/thirteen)
     - <http://kmate.me/cn/>
     - <https://readfree.me/>
 

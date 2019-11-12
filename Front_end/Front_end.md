@@ -1186,6 +1186,7 @@ Node服务端渲染好处多多，但除了上述技术性的问题需要解决�
     - [cubiq/iscroll](https://github.com/cubiq/iscroll):Smooth scrolling for the web http://iscrolljs.com
 * 富文本
     - [ckeditor/ckeditor5](https://github.com/ckeditor/ckeditor5):Development environment for CKEditor 5 – the best browser-based rich text editor. https://ckeditor.comv
+* [ymm-tech/gods-pen](https://github.com/ymm-tech/gods-pen):基于vue的高扩展在线网页制作平台，可自定义组件，可添加脚本，可数据统计。A mobile page builder/editor, similar with amolink. https://godspen.ymm56.com
 
 ## 参考
 
@@ -1203,3 +1204,4 @@ Node服务端渲染好处多多，但除了上述技术性的问题需要解决�
 * [司徒正美](link)
 * [张鑫旭](https://www.zhangxinxu.com/)
 * [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
+* [木易杨前端进阶](https://muyiy.cn/blog/)

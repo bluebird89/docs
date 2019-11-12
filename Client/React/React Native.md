@@ -374,6 +374,7 @@ npm run eject #  导出配置文件
     - [kmagiera/react-native-gesture-handler](https://github.com/kmagiera/react-native-gesture-handler):Declarative API exposing platform native touch and gesture system to React Native.
 * Hooks
     - [rehooks/awesome-react-hooks](https://github.com/rehooks/awesome-react-hooks):Awesome React Hooks
+    - [zeit/swr](https://github.com/zeit/swr):React Hooks library for remote data fetching https://swr.now.sh
 * 组件
     - [brillout/awesome-react-components](https://github.com/brillout/awesome-react-components):Catalog of React Components & Libraries https://devarchy.com/react
     - [AllenFang/react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-table):A Bootstrap table built with React.js https://allenfang.github.io/react-boo…

@@ -2801,6 +2801,7 @@ php artisan horizon:pause|continue|terminate
 * [code 好事源代码](https://github.com/Ucer/codehaoshi):记录日常开发的笔记，用 laravel 与 vue 构建。后台使用 ucer-admin 管理系统开发
 * [https://github.com/summerblue/larabbs](A forum project base on Laravel 5.5)
 * [bagisto/bagisto](https://github.com/bagisto/bagisto):A Free and Opensource laravel eCommerce framework built for all to build and scale your business. https://bagisto.com
+* [qqphp-com/laravel-blog-poetry-all](https://github.com/qqphp-com/laravel-blog-poetry-all):Laravel诗词博客-匠心编程，热爱生活。喜欢就 Star 吧 http://qqphp.com
 
 ```sh
 git clone git@github.com:summerblue/larabbs.git
