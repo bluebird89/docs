@@ -846,93 +846,94 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 ## 扩展
 
 * 框架
-  + [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
-  - [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang http://go-colly.org/
+    + [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
+    - [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang http://go-colly.org/
 * 包管理
-  - [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
-  - [Go Packages](https://godoc.org/)
-  - [moovweb/gvm](https://github.com/moovweb/gvm):Go Version Manager http://github.com/moovweb/gvm
+    - [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
+    - [Go Packages](https://godoc.org/)
+    - [moovweb/gvm](https://github.com/moovweb/gvm):Go Version Manager http://github.com/moovweb/gvm
 * network
     - [davyxu/cellnet](https://github.com/davyxu/cellnet):High performance, simple, extensible golang open source network library
 * UI
-  - [andlabs/ui](https://github.com/andlabs/ui):Platform-native GUI library for Go.
+    - [andlabs/ui](https://github.com/andlabs/ui):Platform-native GUI library for Go.
 * desktop apps
-  - [zserge/lorca](https://github.com/zserge/lorca):Build cross-platform modern desktop apps in Go + HTML5
+    - [zserge/lorca](https://github.com/zserge/lorca):Build cross-platform modern desktop apps in Go + HTML5
 * Cli
-  - [spf13/cobra](https://github.com/spf13/cobra):A Commander for modern Go CLI interactions
+    - [spf13/cobra](https://github.com/spf13/cobra):A Commander for modern Go CLI interactions
 * 语法检测
-  - [mgechev/revive](https://github.com/mgechev/revive):🔥 ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint. https://revive.run
+    - [mgechev/revive](https://github.com/mgechev/revive):🔥 ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint. https://revive.run
 * ORM
-  - [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io
-  - [jinzhu/gorm](https://github.com/jinzhu/gorm):The fantastic ORM library for Golang, aims to be developer friendly https://gorm.io
+    - [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io
+    - [jinzhu/gorm](https://github.com/jinzhu/gorm):The fantastic ORM library for Golang, aims to be developer friendly https://gorm.io
 * 路由
-  - [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
+    - [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
 * error
-  - [pkg/errors](https://github.com/pkg/errors):Simple error handling primitives https://godoc.org/github.com/pkg/errors
+    - [pkg/errors](https://github.com/pkg/errors):Simple error handling primitives https://godoc.org/github.com/pkg/errors
 * 微服务
-  - [go-kit/kit](https://github.com/go-kit/kit):A standard library for microservices. https://gokit.io
+    - [go-kit/kit](https://github.com/go-kit/kit):A standard library for microservices. https://gokit.io
 * 测试
-  - [stretchr/testify](https://github.com/stretchr/testify):A toolkit with common assertions and mocks that plays nicely with the standard library
-  - [codegangsta/gin](https://github.com/codegangsta/gin):Live reload utility for Go web servers
-  - [360EntSecGroup-Skylar/goreporter](https://github.com/360EntSecGroup-Skylar/goreporter):A Golang tool that does static analysis, unit testing, code review and generate code quality report.
+    - [stretchr/testify](https://github.com/stretchr/testify):A toolkit with common assertions and mocks that plays nicely with the standard library
+    - [codegangsta/gin](https://github.com/codegangsta/gin):Live reload utility for Go web servers
+    - [360EntSecGroup-Skylar/goreporter](https://github.com/360EntSecGroup-Skylar/goreporter):A Golang tool that does static analysis, unit testing, code review and generate code quality report.
 * mock
-  - [golang/mock](https://github.com/golang/mock):GoMock is a mocking framework for the Go programming language.
+    - [golang/mock](https://github.com/golang/mock):GoMock is a mocking framework for the Go programming language.
 * 模版
-  - [flosch/pongo2](https://github.com/flosch/pongo2):Django-syntax like template-engine for Go
+    - [flosch/pongo2](https://github.com/flosch/pongo2):Django-syntax like template-engine for Go
 * logger
-  - [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
+    - [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
 * 缓存
-  - [patrickmn/go-cache](https://github.com/patrickmn/go-cache):An in-memory key:value store/cache (similar to Memcached) library for Go, suitable for single-machine applications. https://patrickmn.com/projects/go-cache/
+    - [patrickmn/go-cache](https://github.com/patrickmn/go-cache):An in-memory key:value store/cache (similar to Memcached) library for Go, suitable for single-machine applications. https://patrickmn.com/projects/go-cache/
 * 数据库
-  - [dgraph-io/badger](https://github.com/dgraph-io/badger):Fast key-value DB in Go. https://open.dgraph.io/post/badger/
-  - [DATA-DOG/go-sqlmock](https://github.com/DATA-DOG/go-sqlmock):Sql mock driver for golang to test database interactions
-  - [mongodb/mongo-go-driver](https://github.com/mongodb/mongo-go-driver):The Go driver for MongoDB
-  - [upper/db](https://github.com/upper/db):Productive data access layer for Go. https://upper.io/db.v3
-  - [jmoiron/sqlx](https://github.com/jmoiron/sqlx):general purpose extensions to golang's database/sql http://jmoiron.github.io/sqlx/
-  - [globalsign/mgo](https://github.com/globalsign/mgo):The MongoDB driver for Go
+    - [dgraph-io/badger](https://github.com/dgraph-io/badger):Fast key-value DB in Go. https://open.dgraph.io/post/badger/
+    - [DATA-DOG/go-sqlmock](https://github.com/DATA-DOG/go-sqlmock):Sql mock driver for golang to test database interactions
+    - [mongodb/mongo-go-driver](https://github.com/mongodb/mongo-go-driver):The Go driver for MongoDB
+    - [upper/db](https://github.com/upper/db):Productive data access layer for Go. https://upper.io/db.v3
+    - [jmoiron/sqlx](https://github.com/jmoiron/sqlx):general purpose extensions to golang's database/sql http://jmoiron.github.io/sqlx/
+    - [globalsign/mgo](https://github.com/globalsign/mgo):The MongoDB driver for Go
 * Http
-  - [xtaci/kcp-go](https://github.com/xtaci/kcp-go):A Production-Grade Reliable-UDP Library for golang
-  - [valyala/fasthttp](https://github.com/valyala/fasthttp):Fast HTTP package for Go. Tuned for high performance. Zero memory allocations in hot paths. Up to 10x faster than net/http
+    - [panjf2000/gnet](https://github.com/panjf2000/gnet):🌐🐳 A high-performance, lightweight, non-blocking, event-driven networking framework written in pure Go.
+    - [xtaci/kcp-go](https://github.com/xtaci/kcp-go):A Production-Grade Reliable-UDP Library for golang
+    - [valyala/fasthttp](https://github.com/valyala/fasthttp):Fast HTTP package for Go. Tuned for high performance. Zero memory allocations in hot paths. Up to 10x faster than net/http
 * excel
-  - [360EntSecGroup-Skylar/excelizes](https://github.com/360EntSecGroup-Skylar/excelize):Golang library for reading and writing Microsoft Excel™ (XLSX) files.
+    - [360EntSecGroup-Skylar/excelizes](https://github.com/360EntSecGroup-Skylar/excelize):Golang library for reading and writing Microsoft Excel™ (XLSX) files.
 * event-loop
-  - [tidwall/evio](https://github.com/tidwall/evio):Fast event-loop networking for Go
+    - [tidwall/evio](https://github.com/tidwall/evio):Fast event-loop networking for Go
 * mobile
-  - [golang/mobile](https://github.com/golang/mobile):[mirror] Go on Mobile https://godoc.org/golang.org/x/mobile
+    - [golang/mobile](https://github.com/golang/mobile):[mirror] Go on Mobile https://godoc.org/golang.org/x/mobile
 * redis
-  - [gomodule/redigo](https://github.com/gomodule/redigo):Go client for Redis
-  - [go-redis/redis](https://github.com/go-redis/redis):Type-safe Redis client for Golang
+    - [gomodule/redigo](https://github.com/gomodule/redigo):Go client for Redis
+    - [go-redis/redis](https://github.com/go-redis/redis):Type-safe Redis client for Golang
 * UI
-  - [google/gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
-  - [vugu/vugu](https://github.com/vugu/vugu):Vugu: A modern UI library for Go+WebAssembly (experimental) https://www.vugu.org
+    - [google/gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
+    - [vugu/vugu](https://github.com/vugu/vugu):Vugu: A modern UI library for Go+WebAssembly (experimental) https://www.vugu.org
 * WEB
-  - [go-martini/martini](https://github.com/go-martini/martini):Classy web framework for Go http://martini.codegangsta.io
+    - [go-martini/martini](https://github.com/go-martini/martini):Classy web framework for Go http://martini.codegangsta.io
 * numeric
-  - [gonum/gonum](https://github.com/gonum/gonum):Gonum is a set of numeric libraries for the Go programming language. It contains libraries for matrices, statistics, optimization, and more https://www.gonum.org/
+    - [gonum/gonum](https://github.com/gonum/gonum):Gonum is a set of numeric libraries for the Go programming language. It contains libraries for matrices, statistics, optimization, and more https://www.gonum.org/
 * compiler
-  - [aykevl/tinygo](https://github.com/aykevl/tinygo):Go compiler for small devices, based on LLVM.
+    - [aykevl/tinygo](https://github.com/aykevl/tinygo):Go compiler for small devices, based on LLVM.
 * transfer
-  - [divan/txqr](https://github.com/divan/txqr):Transfer data via animated QR codes
+    - [divan/txqr](https://github.com/divan/txqr):Transfer data via animated QR codes
 * 安全
-  - [OWASP/Go-SCP](https://github.com/OWASP/Go-SCP):Go programming language secure coding practices guide
-  - [Checkmarx/Go-SCP](https://github.com/Checkmarx/Go-SCP):Go programming language secure coding practices guide
+    - [OWASP/Go-SCP](https://github.com/OWASP/Go-SCP):Go programming language secure coding practices guide
+    - [Checkmarx/Go-SCP](https://github.com/Checkmarx/Go-SCP):Go programming language secure coding practices guide
 * 配置
-  - [kelseyhightower/envconfig](https://github.com/kelseyhightower/envconfig):Golang library for managing configuration data from environment variables
-- [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
-- [grafana/grafana](https://github.com/grafana/grafana)The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
-- [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
-- [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
+    - [kelseyhightower/envconfig](https://github.com/kelseyhightower/envconfig):Golang library for managing configuration data from environment variables
+* [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
+* [grafana/grafana](https://github.com/grafana/grafana)The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
+* [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
+* [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
 * [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
 * [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
 * proxy
     -   [gomods/athens](https://github.com/gomods/athens):A Go module datastore and proxy https://docs.gomods.io
     -   [goproxyio/goproxy](https://github.com/goproxyio/goproxy):A global proxy for Go modules. https://goproxy.io
 * 代码规范
-  - [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
+    - [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
 * file
-  - [chrislusf/seaweedfs](https://github.com/chrislusf/seaweedfs):SeaweedFS is a simple and highly scalable distributed file system. There are two objectives: to store billions of files! to serve the files fast! SeaweedFS implements an object store with O(1) disk seek and an optional Filer with POSIX interface, supporting S3 API, Rack-Aware Erasure Coding for warm storage, FUSE mount, Hadoop compatible, WebDAV.
+    - [chrislusf/seaweedfs](https://github.com/chrislusf/seaweedfs):SeaweedFS is a simple and highly scalable distributed file system. There are two objectives: to store billions of files! to serve the files fast! SeaweedFS implements an object store with O(1) disk seek and an optional Filer with POSIX interface, supporting S3 API, Rack-Aware Erasure Coding for warm storage, FUSE mount, Hadoop compatible, WebDAV.
 * auth
-  - [volatiletech/authboss](https://github.com/volatiletech/authboss):The boss of http auth.
+    - [volatiletech/authboss](https://github.com/volatiletech/authboss):The boss of http auth.
 * [bettercap/bettercap](https://github.com/bettercap/bettercap):The state of the art network attack and monitoring framework. https://www.bettercap.org/
 * [shiyanhui/dht](https://github.com/shiyanhui/dht):BitTorrent DHT Protocol && DHT Spider. http://bthub.io
 * [variadico/noti](https://github.com/variadico/noti):Monitor a process and trigger a notification.
@@ -982,6 +983,7 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 * [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
 * [GO语言中文网](https://studygolang.com/)
+* [uber-go/guide](https://github.com/uber-go/guide):The Uber Go Style Guide.
 * [qiniu/gobook](https://github.com/qiniu/gobook):The Go Programming Language
 * [changkun/go-under-the-hood](https://github.com/changkun/go-under-the-hood):Go 源码研究 (1.11.1, WIP)
 * [emirpasic/gods](https://github.com/emirpasic/gods):GoDS (Go Data Structures). Containers (Sets, Lists, Stacks, Maps, Trees), Sets (HashSet, TreeSet, LinkedHashSet), Lists (ArrayList, SinglyLinkedList, DoublyLinkedList), Stacks (LinkedListStack, ArrayStack), Maps (HashMap, TreeMap, HashBidiMap, TreeBidiMap, LinkedHashMap), Trees (RedBlackTree, AVLTree, BTree, BinaryHeap), Comparators, Iterators, …

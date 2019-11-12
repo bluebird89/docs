@@ -36,8 +36,22 @@
 * URL Shortener
     - [YOURLS/YOURLS](https://github.com/YOURLS/YOURLS):🔗 Your Own URL Shortener https://yourls.org
         + 自增序列算法:设置 id 自增，一个 10进制 id 对应一个 62进制的数值，1对1，也就不会出现重复的情况
-* Language
-    - [byoungd/English-level-up-tips-for-Chinese](https://github.com/byoungd/English-level-up-tips-for-Chinese)
+
+## Language
+
+* [byoungd/English-level-up-tips-for-Chinese](https://github.com/byoungd/English-level-up-tips-for-Chinese)
+* 习惯
+    - 用英文思考，将「思维的语言」和外语对应起来，
+    - 大量阅读
+    - 写：写下来的东西一定要清楚明白。开始的时候请少用，甚至不用从句，永远不用自己不认识的词
+    - 模仿写作。模仿写作类似于、但不同于汉译英。模仿写作要求文章本身是原汁原味的英语文章，同时有比较地道的汉语翻译。我们在训练的时候，先不要看英语原文，而是看着翻译过来的汉语，先把它翻回英文。之后再和英语原文对照。有比较就有鉴别。通过这种比较，我们就能够感觉出，同样一个意思，人家用那个词，那样的句型表达，为什么比自己写的好。这比单纯的背诵人家写好的英语范文，或者自己埋头苦写，不去积累，效果要好很多。这个方法很简单，但对于提高写作水平非常有效。
+    - 基本
+        + 不要使用隐喻、明喻，以及其他你从报刊上看到的比喻手法。
+        + 在能用小词的地方绝不使用大词。
+        + 如果可以剔除一个词，剔除之。
+        + 能用主动语态的不用被动语态。
+        + 如果你能从日常英语中找到合适的对应的词，绝不使用外国短语、科学词语和一些专门的行话。
+        + 如果按规则会说出粗野的话，立即打破上述规则。
 
 ## 专注
 

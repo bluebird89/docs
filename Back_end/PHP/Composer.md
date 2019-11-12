@@ -20,6 +20,7 @@ Dependency Manager for PHP https://getcomposer.org/
 * $prefix为空的PSR-4加载规则:如果找不到，那就在fallbackDirsPsr4下找A\B\C.php文件
 * $prefix不为空的PSR-0加载规则:PSR-0支持namespace和下划线分隔的类（PEAR-like class name）；这点对一些需要向namespace迁移的旧仓库很有用 对于类A\B\C或者A_B_C，先找A\B\对应目录下面的C.php；再找A\对应目录下面的B\C.php；以此类推
 * $prefix为空的PSR-0加载规则:如果找不到，直接在prefixesPsr0中找A\B\C.php文件 如果还没有找到，在条件允许的状态下，可以到include path中找A\B\C.php文件
+* composer install 会遍历　lock 源
 
 ## 安装
 

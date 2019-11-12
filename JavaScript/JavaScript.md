@@ -2817,6 +2817,7 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
 * [DateJS](https://github.com/datejs/Datejs)
 * [iamkun/dayjs](https://github.com/iamkun/dayjs):⏰ Day.js 2KB immutable date library alternative to Moment.js with the same modern API https://github.com/iamkun/dayjs
 * [moment/moment](https://github.com/moment/moment):Parse, validate, manipulate, and display dates in javascript. http://momentjs.com
+* [moment/moment-timezone](https://github.com/moment/moment-timezone):Timezone support for moment.js http://momentjs.com/timezone
 
 ## 图表 Data Visualization
 
