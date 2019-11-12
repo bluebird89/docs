@@ -317,11 +317,16 @@ public class TokenDemo {
   }
 ```
 
+## 数据
+
+* 2019天猫双11交易峰值创下新纪录，达54.4万笔/秒
+
 ## 工具
 
 * [AB](https://httpd.apache.org/docs/2.4/programs/ab.html) - Apache Benchmark - 是一款有 Apache 基金会提供的简单的压测工具
 * [Siege](https://www.joedog.org/siege-home/) <https://www.sitepoint.com/web-app-performance-testing-siege-plan-test-learn/>
 * [locust](https://locust.io/)
+* [mcollina/autocannon](https://github.com/mcollina/autocannon):fast HTTP/1.1 benchmarking tool written in Node.js
 
 ## 参考
 

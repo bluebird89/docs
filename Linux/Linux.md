@@ -60,8 +60,8 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 一个典型的Linux发行版包括：Linux内核，一些GNU程序库和工具，命令行shell，图形界面的X Window系统和相应的桌面环境，如KDE或GNOME，并包含数千种从办公套件，编译器，文本编辑器到科学工具的应用软件。
 
 * 入门：类似Windows的体验；安装简单；可靠；“类似Linux”，且不自成一派；“恰好管用”；
-  - Linux Mint Download
-  - Debian Download
+  -  Mint
+  - Debian
 * 进阶：完全掌控你的电脑和操作系统；了解Linux内部；精简的优化系统
   - Slackware Linux
   - [Arch Linux](https://www.archlinux.org/)
@@ -94,6 +94,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - TENS Linux (DOD Project)
   - Tin Hat Linux
   - OpenBSD
+  - Manjaro
 * 最小化：将在旧的硬件上运行；尽可能最小化
   - ArchBang
   - Lubuntu
@@ -107,11 +108,11 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 
 Linux内核处于用户进程和硬件之间，包括系统调用接口和Linux内核子系统。除系统调用外，由五个主要的子系统组成：
 
-* 进程调度：它控制着进程对CPU的访问，当需要选择一个进程开始运行时，由调度程序选择最应该运行的进程；
-* 内存管理：它允许多个进程安全地共享主内存区域，支持虚拟内存；从逻辑上可以分为硬件无关的部分和硬件相关的部分；
+* 进程调度：控制着进程对CPU的访问，当需要选择一个进程开始运行时，由调度程序选择最应该运行的进程；
+* 内存管理：允许多个进程安全地共享主内存区域，支持虚拟内存；从逻辑上可以分为硬件无关的部分和硬件相关的部分；
   - Swap分区，即交换区，系统在物理内存不够时，与Swap进行交换。即当系统的物理内存不够用时，把硬盘中一部分空间释放出来，以供当前运行的程序使用。当那些程序要运行时，再从Swap分区中恢复保存的数据到内存中。那些被释放内存空间的程序一般是很长时间没有什么操作的程序。Swap空间一般应大于或等于物理内存的大小，同时最小不应小于64M，最大应该是物理内存的两倍。
-* 虚拟文件系统(VFS)：它隐藏了各种不同硬件的具体细节，为所有设备提供统一的接口，支持多达数十种不同的文件系统，分为逻辑文件系统和设备驱动程序；
-* 网络：它提供了对各种网络标准协议的存取和各种网络硬件的支持，分为网络协议和网络驱动程序两部分；
+* 虚拟文件系统(VFS)：隐藏了各种不同硬件的具体细节，为所有设备提供统一的接口，支持多达数十种不同的文件系统，分为逻辑文件系统和设备驱动程序；
+* 网络：提供了对各种网络标准协议的存取和各种网络硬件的支持，分为网络协议和网络驱动程序两部分；
 * 进程间通信：支持进程间各种通信机制，包括共享内存、消息队列和管道等。
 
 ## 内存
@@ -373,36 +374,7 @@ source ~/.zshrc
 sudo update-alternatives --config editor # 修改默认编辑器
 ```
 
-### 设置IP地址、网关DNS
-
-```sh
-cd  /etc/sysconfig/network-scripts/
-vi  ifcfg-eno16777736  #编辑配置文件，添加修改以下内容
-
-TYPE="Ethernet"
-BOOTPROTO="static"  #启用静态IP地址
-DEFROUTE="yes"
-IPV4_FAILURE_FATAL="no"
-IPV6INIT="yes"
-IPV6_AUTOCONF="yes"
-IPV6_DEFROUTE="yes"
-IPV6_FAILURE_FATAL="no"
-NAME="eno16777736"
-UUID="8071cc7b-d407-4dea-a41e-16f7d2e75ee9"
-ONBOOT="yes"  #开启自动启用网络连接
-IPADDR0="192.168.21.128"  #设置IP地址
-PREFIX0="24"  #设置子网掩码
-GATEWAY0="192.168.21.2"  #设置网关
-DNS1="8.8.8.8"  #设置主DNS
-DNS2="8.8.4.4"  #设置备DNS
-HWADDR="00:0C:29:EB:F2:B3"
-IPV6_PEERDNS="yes"
-IPV6_PEERROUTES="yes"
-
-service network restart   #重启网络
-```
-
-### 镜像挂载
+### 挂载
 
 所有存储设备都必须挂载使用，包括硬盘
 
@@ -793,6 +765,32 @@ htop # Famous process monitor. It has a nice, colorful command-line UI. Some use
 # 下载工具
 wget -O newname.md https://github.com/LCTT/TranslateProject/blob/master/README.md     ### 下载 README 文件并重命名为 newname.md
 wget -c url     ### 下载 url 并开启断点续传
+
+### 设置IP地址、网关DNS
+cd  /etc/sysconfig/network-scripts/
+vi  ifcfg-eno16777736  #编辑配置文件，添加修改以下内容
+
+TYPE="Ethernet"
+BOOTPROTO="static"  #启用静态IP地址
+DEFROUTE="yes"
+IPV4_FAILURE_FATAL="no"
+IPV6INIT="yes"
+IPV6_AUTOCONF="yes"
+IPV6_DEFROUTE="yes"
+IPV6_FAILURE_FATAL="no"
+NAME="eno16777736"
+UUID="8071cc7b-d407-4dea-a41e-16f7d2e75ee9"
+ONBOOT="yes"  #开启自动启用网络连接
+IPADDR0="192.168.21.128"  #设置IP地址
+PREFIX0="24"  #设置子网掩码
+GATEWAY0="192.168.21.2"  #设置网关
+DNS1="8.8.8.8"  #设置主DNS
+DNS2="8.8.4.4"  #设置备DNS
+HWADDR="00:0C:29:EB:F2:B3"
+IPV6_PEERDNS="yes"
+IPV6_PEERROUTES="yes"
+
+service network restart   #重启网络
 ```
 
 ### [Tcpdump](http://www.tcpdump.org/)
@@ -1108,19 +1106,31 @@ tar -jtvf aa.tar.bz2 # -t  只查看，不解压
 
 ### 用户管理
 
-* 身份
-  - owner
-  - group
+* 用户owner
+  - 用户帐号和其相关信息 (密码除外) 均是存放在 /etc/passwd 配置文件中
+  - 由于所有用户对 passwd 文件均有读取的权限，因此密码信息并未保存在该文件中，而是采用 MD5 加密算法加密 保存在了 /etc/shadow 的配置文件中，只有 root 用户可以读取
+    + passwd 文件中，一行定义一个用户帐号，每行均由多个不同的字段构成，各字段值间用 ":” 分隔，每个字段均代表该帐号某方面的信息
+    + 系统自动创建了 linux 进程或部分服务程序正常工作所需要使用的账户，账户的最后一个字段的值一般为 /sbin/nologin，表示该帐号不能用来登录系统`account:password(用 x 占位):accountId:groupId:accountName:homeDir:shell`
+    + 让某用户没有 telnet 权限，即不允许该用户利用 telnet 远程登录和访问 linux 操作系统，则设置该用户所使用的 shell 为 / bin/true 即可。
+    + 让用户没有 telnet 和 ftp 登录权限，则可设置该用户的 shell 为 / bin/false
+    + 每行定义和保存一个账户的相关信息。第一个字段为用户帐户名，第二个字段为账户的密码
+    + 设置所有用户账户密码过期的时间，则可通过修改 / etc/login.defs 配置文件中的 PASS_MAX_DAYS 配置项的值来实现，其默认值为 99999，代表用户账户密码永不过期。其中 PASS_MIN_LEN 配置项用于指定账户密码的最小长度，默认为 5 个字符。
+  - 新建用户如果不指定用户组的话，默认会自动创建一个与用户名相同的用户组
+  - 创建用户账户时，系统会自动创建该用户对应的主目录，该目录默认放在 / home 目录下，若要改变位置，可以利用 - d 参数指定；对于用户登录时使用的 shell，默认为 / bin/bash，若要更改，则使用 - s 参数指定
+  - 锁定用户：通过在密码文件 shadow 的密码字段前加 “！” 来标识该用户被锁定
+  - 除了用户账户可被锁定外，账户密码也可被锁定，任何一方被锁定后，都将无法登录系统。只有 root 用户才有权执行该命令
+* 用户组group
+  - 用户组帐号信息保存在 /etc/group 配置文件中，任何用户均可以读取。用户组的真实密码保存在 /etc/gshadow 配置文件中
+  - /etc/group：第一个字段代表用户组的名称，第二个字段为 x，第三个为用户组的 ID 号，第四个为该用户组的用户成员列表，各用户名间用逗号分隔
+  - 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限
   - others
   - nobody:nogroup
-* 每次次新建用户如果不指定用户组的话，默认会自动创建一个与用户名相同的用户组
-* 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限
 * gid
 
 ```sh
-who # 查看有谁在线
+who # 查看谁在线
 last # 查看最近的登陆历史记录
-who am i # 只列出用户名
+whoami # 只列出用户名 用于查询当前用户的名称
 who mom likes/who am i # 列出用户名，所使用终端的编号和开启时间
 finger # 列出当前用户的详细信息，需使用apt-get提前安装
 
@@ -1129,31 +1139,63 @@ su - <user> # 切换用户，同时环境变量也会跟着改变成目标用户
 su -l lilei # 切换登录用户
 sudo adduser lilei # 新建一个叫做lilei的用户，添加用户到系统，同时也会默认为新用户创建 home目录
 
+useradd [option] username
+#  option
+-c 注释      用户设置对账户的注释说明文字
+-d 主目录    指定用来取代默认的 / home/username 的主目录
+-m          若主目录不存在，则创建它。-r 与 - m 相结合，可为系统账户创建主目录
+-M          不创建主目录
+-e date     指定账户过期的日期。日期格式为 MM/DD/YY
+-f days     帐号过期几日后永久停权。若指定为 -，则立即被停权，若为 - 1，则关闭此功能
+-g 用户组     指定将用户加入到哪个用户组，该用户组必须存在
+-G 用户组列表 指定用户同时加入的用户组列表，各组用逗分隔
+-n          不为用户创建私有用户组
+-s shell    指定用户登录时使用的 shell，默认为 / bin/bash
+-r          创建一个用户 ID 小于 500 的系统账户，默认不创建对应的主目录
+-u 用户 ID    手动指定新用户的 ID 值，该值必须唯一，且大于 499
+-p password 为新建用户指定登录密码。此处的 password 是对应登录密码经 MD5 加密后所得到的密码值，不实真实密码原文，因此在实际应用中，该参数选项使用较少，通常单独使用 passwd 命令来为用户设置登录密码。
+
 sudo useradd # 只创建用户，创建完了需要用 passwd lilei 去设置新用户的密码
 useradd -m -g users -G audio -s /usr/bin/bash newuser ### -m 创建 home 目录， -g 所属的主组， -G 指定该用户在哪些附加组， -s 设定默认的 shell ，newuser 为新的用户名
+useradd -d /var/vodup -s /sbin/nologin vodup
+useradd -g babyfish nisj
+id nisj # uid=502(nisj) gid=500(babyfish) groups=500(babyfish) id 命令用于显示当前用户的 uid，gid 和所属的用户组的列表
+tail -1 /etc/passwd # nisj:x:502:500::/home/nisj:/bin/bash
+
+usermod [option] username
+usermod -l nsj0820 nsj820 # -l newName oldName 改变用户帐户名，主目录仍为原来
+usermod -d /home/nsj0820 nsj0820 # 修改主目录
+usermod -L user # 锁定账户
+usermod -U user # 接锁账户
 usermod -a -G group1,group2 username
 
 groups zhangwang # 查看用户属于那些组（groups）
 cat /etc/group | sort 命令查看某组包含那些成员 # /etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
 sudo usermod -G sudo student # 不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，可以使用usermod命令把它加入sudo组用以具备相应的权限。
-# add the user 'jacks' to 'root' and 'sudo' group
-sudo usermod -aG sudo,root jacks
-
+sudo usermod -aG sudo,root jacks # add the user 'jacks' to 'root' and 'sudo' group
+usermod -a -G groupA user # -a 代表 append， 将自己添加到 用户组 groupA 中，而不必离开其他用户组
 sudo deluser student --remove-home # 删除用户及用户相关文件；
-userdel -r username
+userdel -r username # -r 在删除该账户的同时，一并删除该账户对应的主目录
 
-etc/passwd
-
-passwd 用户名  # 设定用户密码
+passwd 用户名  # 设定密码:只有 root 用户才有权设置指定账户的密码。一般用户只能设置或修改自己账户的密码（不带参数）
 sudo passwd username # 强制修改用户密码，没有密码强度限制
-usermod -aG wheel username
+passwd -l 帐户名
+passwd -u 帐户名 # 解锁账户密码
+passwd -S 账户名 # 查询当前账户的密码是否被锁定
+passwd -d 帐户名 # 帐户密码被删除后，将不能登录系统，除非重新设置密码 该命令也只有 root 用户才有权执行
 
-etc/group
 chgrp [-options] [群组名] [文档路径]
 
-groupadd group_name 创建一个新用户组
-groupdel group_name 删除一个用户组
-groupmod -n new_group_name old_group_name 重命名一个用户组
+groupadd [r] group_name # 创建用户组,命令带有 - r 参数，则创建系统用户组，该类用户组的 GID 值小于 500；若没有 - r 参数，则创建普通用户组，其 GID 值大于或等于 500.
+groupmod -n new_group_name old_group_name # 重命名一个用户组
+groupmod -g new_GID 用户组名称 # 重设用户组的 GID,但不能与已有用户组的 GID 值重复 
+groupdel group_name # 删除用户组
+
+gpasswd -a 用户账户  用户组名 # 可以将用户添加到指定的组，使其成为该组的成员
+gpasswd -d 用户账户  用户组名 # 若要从用户组中移除某用户
+
+groups nisj # groups 用于产看指定用户所隶属的用户组
+gpasswd -A 用户账户 要管理的用户组 # 将指定的用户设置为指定用户组的用户管理员。用户管理员只能对授权的用户组进行用户管理 (添加用户到组或从组中删除用户)，无权对其他用户组进行管理。
 
 choot
 

@@ -16,3 +16,7 @@ echo '-J-Xmx2G' >> /usr/local/etc/sbtopts
 
 * [tonyskn/coursera-scala](https://github.com/tonyskn/coursera-scala)
 * [fpinscala/fpinscala](https://github.com/fpinscala/fpinscala):Code, exercises, answers, and hints to go along with the book "Functional Programming in Scala" http://manning.com/bjarnason
+
+## 工具
+
+* [polynote/polynote](https://github.com/polynote/polynote):A better notebook for Scala (and more) https://polynote.org

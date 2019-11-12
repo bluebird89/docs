@@ -13,3 +13,4 @@ IPFS(InterPlanetary File System),Peer-to-peer hypermedia protocol https://ipfs.i
 ## 参考
 
 * [ipfs/awesome-ipfs](https://github.com/ipfs/awesome-ipfs):Useful resources for using IPFS and building things on top of it https://awesome.ipfs.io/
+* [](https://simpleaswater.com/ipfs/tutorials/hosting_website_on_ipfs_ipns_dnslink)
