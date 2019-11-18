@@ -492,8 +492,7 @@
 * 《[大教堂与集市](https://www.amazon.cn/gp/product/B00KQDTZ4S)》
 * 《卓有成效的程序员》
 * 《[程序员的职业素养（Pragmatic Programmer）](https://www.amazon.cn/gp/product/B01LZJ8L9J)》
-* 《[程序员修炼之道：从小工到专家](https://www.amazon.cn/gp/product/B004GV08CY)》
-* 程序员的修炼之道《The Pragmatic Programmer》
+* 《[程序员修炼之道：从小工到专家《The Pragmatic Programmer》](https://www.amazon.cn/gp/product/B004GV08CY)》
 * 程序员的自我修养
 * 《[软件开发者路线图：从学徒到高手](https://www.amazon.cn/gp/product/B00H6X6LD4)》
 * 《[我编程，我快乐: 程序员职业规划之道](https://www.amazon.cn/gp/product/B00CBBKDGM)》
@@ -713,11 +712,13 @@
 * to kill a mockingbird
 * 动物农场
 * 道德经
+* 保罗·奥斯特
+    - 《斯通纳》
 
 ## 政治
 
 * 旧制度与大革命
-* 约翰·威廉斯 《斯通纳》
+* 约翰·威廉斯 
 
 ## 科幻
 

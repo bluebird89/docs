@@ -51,7 +51,7 @@ iostat -d -k 1 3
 * Prepared StatementsPrepared Statements很像存储过程，是一种运行在后台的SQL语句集合，我们可以从使用 prepared statements 获得很多好处，无论是性能问题还是安全问题。
 * Prepared Statements 可以检查一些绑定好的变量，这样可以保护程序不会受到“SQL注入式”攻击
 
-## 问题处理
+## 指令
 
 * top 查看进程消耗
 * threads_running/QPS/TPS

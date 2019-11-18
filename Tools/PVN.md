@@ -159,6 +159,7 @@ pip install shadowsocks
 * [XX-net/XX-Net](https://github.com/XX-net/XX-Net)a web proxy tool
 * [googlehosts/hosts](https://github.com/googlehosts/hosts)
 * [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core):A platform for building proxies to bypass network restrictions. https://www.v2ray.com/
+* [yanue/V2rayU](https://github.com/yanue/V2rayU):V2rayU,基于v2ray核心的mac版客户端,用于科学上网,使用swift编写,支持vmess,shadowsocks,socks5等服务协议,支持订阅, 支持二维码,剪贴板导入,手动配置,二维码分享等 https://github.com/yanue/V2rayU
 * [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
 * shadowsocksx
 * Perfect Privacy
