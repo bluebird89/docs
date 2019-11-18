@@ -70,6 +70,7 @@ query myQry ($name: String!) {
 ## 参考
 
 * [教程](https://www.howtographql.com/)
+* 《GraphQL 学习之道》
 * [chentsulin/awesome-graphql](https://github.com/chentsulin/awesome-graphql):Awesome list of GraphQL & Relay## 实例
 * [learnapollo/learnapollo](https://github.com/learnapollo/learnapollo)
 * [graphql/express-graphql](https://github.com/graphql/express-graphql):Create a GraphQL HTTP server with Express.

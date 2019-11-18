@@ -31,6 +31,7 @@ sudo tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
 export PATH=$PATH:/usr/local/go/bin # 默认安装路径 /usr/local/go (c:\Go under Windows)添加到/etc/profile (for a system-wide installation) or $HOME/.profile
 
 mkdir -p ~/projects/{bin,pkg,src}
+
 export GOROOT=/usr/local/go # Installing to a custom location.install the Go tools to a different location. In this case you must set the GOROOT environment variable to point to the directory in which it was installed.
 export GOPATH=$HOME/projects #默认安装包的路径
 export GOBIN="$HOME/projects/bin"
@@ -823,6 +824,7 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 ## 项目
 
 * [hajimehoshi/ebiten](https://github.com/hajimehoshi/ebiten):A dead simple 2D game library in Go https://hajimehoshi.github.io/ebiten/
+* [go-shiori/shiori](https://github.com/go-shiori/shiori):Simple bookmark manager built with Go
 
 ## 教程
 
@@ -848,6 +850,7 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * 框架
     + [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
     - [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang http://go-colly.org/
+    - [Gourouting/singo](https://github.com/Gourouting/singo):Gin+Gorm开发Golang API快速开发脚手架
 * 包管理
     - [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
     - [Go Packages](https://godoc.org/)

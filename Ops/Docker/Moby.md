@@ -1068,7 +1068,6 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
   - https://dockstation.io/ 
   - Rancher is an open source software platform that enables organizations to run and manage Docker and Kubernetes in production. 
 
-
 ## 工具
 
 * [docker/machine](https://github.com/docker/machine) Machine management for a container-centric world
@@ -1094,6 +1093,7 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 * [yeasy/docker_practice](https://github.com/yeasy/docker_practice):Learn and understand Docker technologies, with real DevOps practice! https://legacy.gitbook.com/book/yeasy/docker_practice/details
 * [中文文档](https://docker-doc.readthedocs.io/zh_CN/latest/index.html)
 * [中文文档](http://www.dockerinfo.net)
+* [LXC](https://stgraber.org/2013/12/20/lxc-1-0-blog-post-series/)
 
 * https://confluence.atlassian.com/bamboo/getting-started-with-docker-and-bamboo-687213473.html
 * [Docker](http://blog.csdn.net/erixhao/article/details/72762851)
