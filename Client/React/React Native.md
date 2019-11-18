@@ -155,6 +155,9 @@ ReactDOM.render(
 
 ### 组件
 
+* React Router是React中使用的路由库，通过管理URL来管理组件及对应的状态。Router组件本身只是一个容器，真正的路由要通过Route组件定义。Router组件支持嵌套路由、支持通配符，能让你轻松控制整个项目的路由结构。
+* Redux跟React没有直接的关系，本身可以支持React、Angular、Ember等等框架。Redux其实是Flux-like 更优雅的写法。通过react-redux这个库，可以方便的将react和redux结合起来：React负责页面展现，Redux负责维护/更新数据状态。大致过程为：当用户在View中触发事件产生Action，Action 进到 Reducer，Reducer根据Action Type去匹配对应处理的动作，然后返回一个新的状态。View则因为检测到状态更新而进行重绘。Redux只有一个Store负责存放整个App的状态，而唯一能改变状态的方法只有发送Action。Redux社区中使用比较多的库有：redux-sagas、redux-gen、redux-loop、redux-effects、redux-side-effects、redux-thunks、rx-redux、redux-rx…
+
 ```typescript
 var HelloMessage = React.createClass({
   render: function() {
@@ -200,11 +203,6 @@ Flexbox 是css3 里面引入的布局模型－弹性盒子模型，旨在通过�
 生命周期
 ![](../../_static/react_lifecircle.png)
 
-## 组件
-
-* React Router是React中使用的路由库，通过管理URL来管理组件及对应的状态。Router组件本身只是一个容器，真正的路由要通过Route组件定义。Router组件支持嵌套路由、支持通配符，能让你轻松控制整个项目的路由结构。
-* Redux跟React没有直接的关系，本身可以支持React、Angular、Ember等等框架。Redux其实是Flux-like 更优雅的写法。通过react-redux这个库，可以方便的将react和redux结合起来：React负责页面展现，Redux负责维护/更新数据状态。大致过程为：当用户在View中触发事件产生Action，Action 进到 Reducer，Reducer根据Action Type去匹配对应处理的动作，然后返回一个新的状态。View则因为检测到状态更新而进行重绘。Redux只有一个Store负责存放整个App的状态，而唯一能改变状态的方法只有发送Action。Redux社区中使用比较多的库有：redux-sagas、redux-gen、redux-loop、redux-effects、redux-side-effects、redux-thunks、rx-redux、redux-rx…
-
 ## 前后端分离
 
 * Web端通过ajax调用接口，使用JS把数据渲染到页面上
@@ -241,12 +239,6 @@ npm run build | yarn build
 
 npm run eject #  导出配置文件
 ```
-
-## 项目
-
-* [tyroprogrammer/learn-react-app](https://github.com/tyroprogrammer/learn-react-app):Application that will help you learn React fundamentals. Install this application locally - there's tutorial, code snippets and exercises. The main objective of this project is to help you get off the ground with React!
-* [microsoft/TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter):A starter template for TypeScript and React with a detailed README describing how to use the two together. 
-* [CarGuo/GSYGithubAPP](https://github.com/CarGuo/GSYGithubApp)
 
 ## 工具
 
@@ -431,9 +423,6 @@ npm run eject #  导出配置文件
     - [wix/react-native-interactable](https://github.com/wix/react-native-interactable):Experimental implementation of high performance interactable views in React Native
     - [alibaba-fusion/next](https://github.com/alibaba-fusion/next):A configurable component library for web built on React. https://fusion.design
     - [react-native-debugger](https://github.com/jhen0409/react-native-debugger)
-
-## 扩展
-
 * [redux-saga/redux-saga](https://github.com/redux-saga/redux-saga):An alternative side effect model for Redux apps https://redux-saga.js.org/
 * [acdlite/recompose](https://github.com/acdlite/recompose):A React utility belt for function components and higher-order components.
 * [jamiebuilds/react-loadable](https://github.com/jamiebuilds/react-loadable):⏳ A higher order component for loading components with promises.
@@ -471,7 +460,32 @@ npm run eject #  导出配置文件
 * [Semantic-Org/Semantic-UI-React](https://github.com/Semantic-Org/Semantic-UI-React):The official Semantic-UI-React integration https://react.semantic-ui.com
 * [shoutem/ui](https://github.com/shoutem/ui):Customizable set of components for React Native applications
 
-## 学习
+## 项目
+
+* [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):这应该是最好的网易云音乐播放器了，没有之一，如果有请打醒 🤘
+* [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐nodejs api https://binaryify.github.io/NeteaseCl…
+* [JonJam/yorpw_ui_web](https://github.com/JonJam/yorpw_ui_web):Password manager SPA built using React and Redux
+* [JonJam/react-redux-ts](https://github.com/JonJam/react-redux-ts):React/Redux TypeScript starter project
+* [taikongfeizhu/webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
+* [duxianwei520/react](https://github.com/duxianwei520/react):一个react+redux+webpack+ES6+antd的SPA的后台管理底层框架
+* [fbsamples/f8app](https://github.com/fbsamples/f8app):Source code of the official F8 app of 2017, powered by React Native and other Facebook open source projects. http://makeitopen.com
+* [EleTeam/Shop-React-Native](https://github.com/EleTeam/Shop-React-Native):EleTeam开源项目 - 电商全套解决方案之 React Native 版 - Shop-React-Native。一个类似京东/天猫/淘宝的商城，有对应的服务端支持，由EleTeam团队维护！
+* [tyroprogrammer/learn-react-app](https://github.com/tyroprogrammer/learn-react-app):Application that will help you learn React fundamentals. Install this application locally - there's tutorial, code snippets and exercises. The main objective of this project is to help you get off the ground with React!
+* [microsoft/TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter):A starter template for TypeScript and React with a detailed README describing how to use the two together. 
+* [CarGuo/GSYGithubAPP](https://github.com/CarGuo/GSYGithubApp)
+
+## 参考
+
+* [Reactjs docs](https://reactjs.org/docs/hello-world.html)
+* [React Native的极简手册](http://www.jianshu.com/p/318342e139c7) 没看懂
+* [reactnativecn/react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
+* [react-native-guide](https://github.com/reactnativecn/react-native-guide)
+* [styleguidist/react-styleguidist](https://github.com/styleguidist/react-styleguidist):Isolated React component development environment with a living style guide https://react-styleguidist.js.org/
+* [wojtekmaj/react-lifecycle-methods-diagram](https://github.com/wojtekmaj/react-lifecycle-methods-diagram):Interactive React lifecycle methods diagram. http://projects.wojtekmaj.pl/react-li…
+* [react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit https://react-native-training.github.…
+* [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native):Awesome React Native components, news, tools, and learning material! http://www.awesome-react-native.com
+* [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
+* [xgrommx/awesome-redux](https://github.com/xgrommx/awesome-redux):Awesome list of Redux examples and middlewares
 
 * [kay-is/react-from-zero](https://github.com/kay-is/react-from-zero):A simple (99% ES2015 less) tutorial for React
 * [fangwei716/30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
@@ -488,30 +502,6 @@ npm run eject #  导出配置文件
 * [ruanyf/react-demos](https://github.com/ruanyf/react-demos):a collection of simple demos of React.js
 * [30-seconds/30-seconds-of-react](https://github.com/30-seconds/30-seconds-of-react):Curated collection of useful React snippets that you can understand in 30 seconds or less.
 
-## 项目
-
-* [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):这应该是最好的网易云音乐播放器了，没有之一，如果有请打醒 🤘
-* [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐nodejs api https://binaryify.github.io/NeteaseCl…
-* [JonJam/yorpw_ui_web](https://github.com/JonJam/yorpw_ui_web):Password manager SPA built using React and Redux
-* [JonJam/react-redux-ts](https://github.com/JonJam/react-redux-ts):React/Redux TypeScript starter project
-* [taikongfeizhu/webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
-* [duxianwei520/react](https://github.com/duxianwei520/react):一个react+redux+webpack+ES6+antd的SPA的后台管理底层框架
-* [fbsamples/f8app](https://github.com/fbsamples/f8app):Source code of the official F8 app of 2017, powered by React Native and other Facebook open source projects. http://makeitopen.com
-* [EleTeam/Shop-React-Native](https://github.com/EleTeam/Shop-React-Native):EleTeam开源项目 - 电商全套解决方案之 React Native 版 - Shop-React-Native。一个类似京东/天猫/淘宝的商城，有对应的服务端支持，由EleTeam团队维护！
-
-## 参考
-
-* [Reactjs docs](https://reactjs.org/docs/hello-world.html)
-* [React Native的极简手册](http://www.jianshu.com/p/318342e139c7) 没看懂
-* [reactnativecn/react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
-* [react-native-guide](https://github.com/reactnativecn/react-native-guide)
-* [styleguidist/react-styleguidist](https://github.com/styleguidist/react-styleguidist):Isolated React component development environment with a living style guide https://react-styleguidist.js.org/
-* [wojtekmaj/react-lifecycle-methods-diagram](https://github.com/wojtekmaj/react-lifecycle-methods-diagram):Interactive React lifecycle methods diagram. http://projects.wojtekmaj.pl/react-li…
-* [react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit https://react-native-training.github.…
-* [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native):Awesome React Native components, news, tools, and learning material! http://www.awesome-react-native.com
-* [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
-* [xgrommx/awesome-redux](https://github.com/xgrommx/awesome-redux):Awesome list of Redux examples and middlewares
-
 * [设计含结构](https://github.com/airbnb/react-sketchapp)
 * [文档](http://airbnb.io/react-sketchapp/docs/)
 * [文档](http://reactnative.cn/docs/0.49/getting-started.html)
@@ -524,4 +514,5 @@ npm run eject #  导出配置文件
 * [vhpoet/react-native-styling-cheat-sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet):Most of the React Native styling material in one page
 * [tachyons-css/tachyons](https://github.com/tachyons-css/tachyons/):Functional css for humans https://tachyons.io
 * [React Native精解与实践](link)
+* 《React 学习之道》
 * [Learn the Basics](https://facebook.github.io/react-native/docs/tutorial)
