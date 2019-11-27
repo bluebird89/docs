@@ -501,6 +501,7 @@ npm run eject #  导出配置文件
 * [huzidaha/react-naive-book](https://github.com/huzidaha/react-naive-book):开源、免费、专业、简单的 React.js 在线教程 http://huziketang.com/books/react
 * [ruanyf/react-demos](https://github.com/ruanyf/react-demos):a collection of simple demos of React.js
 * [30-seconds/30-seconds-of-react](https://github.com/30-seconds/30-seconds-of-react):Curated collection of useful React snippets that you can understand in 30 seconds or less.
+* [React 开发必须知道的 34 个技巧](https://juejin.im/post/5dcb5a80e51d4520db19b906)
 
 * [设计含结构](https://github.com/airbnb/react-sketchapp)
 * [文档](http://airbnb.io/react-sketchapp/docs/)
