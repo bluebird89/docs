@@ -1643,5 +1643,6 @@ These features allow to pause a branch development and switch to another one (_"
 * [k88hudson/git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
 * [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate!
 * [Magit](https://magit.vc/) Git 在 Emacs 上的打开方式
+* [](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
 * [Vim-fugitive](https://github.com/tpope/vim-fugitive) : Git 在 Vim 上的打开方式
 * [Git 原理](https://git-scm.com/book/zh/v1/Git-内部原理-Git-对象)

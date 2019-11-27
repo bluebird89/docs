@@ -483,3 +483,4 @@ $cat = new \Animal\Cat();
 ## 工具
 
 * [Ocramius/PackageVersions](https://github.com/Ocramius/PackageVersions):📦 Composer addon to efficiently get installed packages' version numbers
+* [satis](https://github.com/composer/satis)

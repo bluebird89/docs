@@ -15,8 +15,8 @@
     + [数蚁](https://teamyi.com)
     + [nextcloud/server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data https://nextcloud.com
     - [Resilio](link)
-- 服务
-    + [syncthing/syncthing](https://github.com/syncthing/syncthing):Open Source Continuous File Synchronization https://forum.syncthing.net/
+* 服务
+    - [syncthing/syncthing](https://github.com/syncthing/syncthing):Open Source Continuous File Synchronization https://forum.syncthing.net/
     - [chrislusf/seaweedfs](https://github.com/chrislusf/seaweedfs):SeaweedFS is a simple and highly scalable distributed file system. There are two objectives: to store billions of files! to serve the files fast! SeaweedFS implements an object store with O(1) disk seek, and an optional Filer with POSIX interface.
     - [ncw/rclone](https://github.com/ncw/rclone):"rsync for cloud storage" - Google Drive, Amazon Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Cloudfiles, Google Cloud Storage, Yandex Files https://rclone.org
     - [cytopia/linux-timemachine](https://github.com/cytopia/linux-timemachine):Rsync-based OSX-like time machine for Linux and BSD (and even OSX)
@@ -31,6 +31,7 @@
     - [Downie](https://software.charliemonroe.net/downie/):YouTube Video Downloader for macOS - Charlie
     - [bundlehunt](https://bundlehunt.com/)
     - [盘下载器](https://www.baiduwp.com/)
+    - [EagleGet](http://www.eagleget.com/cn/)
     - [Algram/ytdl-webserver](https://github.com/Algram/ytdl-webserver):📻 Webserver for downloading youtube videos. Ready for docker.
 
 ## md5 verdify

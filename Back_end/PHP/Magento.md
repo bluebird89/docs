@@ -124,7 +124,7 @@ chmod -R 777 var/ generated/
 </VirtualHost>
 
 # Sample data
-magento sampledata:deploy
+bin/magento sampledata:deploy
 ```
 
 ## Websites, Stores, and Views
@@ -193,11 +193,23 @@ bin/magento admin:user:create --admin-user=henry --admin-password=111111 --admin
 
 ## Flow
 
+* When a customer adds an item to their shopping cart for the first time, Magento creates a quote. Magento uses a quote to perform tasks such as
+* Track each item the customer wants to buy, including the quantity and base cost
+* Gather information about the customer, including billing and shipping addresses
+* Determine shipping costs
+* Calculate the subtotal, add costs (shipping fees, taxes, etc.) and apply coupons to determine the grand total
+* Determine the payment method
+* Place the order so that the merchant can fulfill it.
 * cart quote-》checkout quote
     - 添加item到cart前验证：agento\CatalogInventory\Model\Quote\Item\QuantityValidator
 * re-order
     - out of stock
     - disable
+
+## Product
+
+* Configuration > Catalog > Inventory > Product Stock Options: Product Stock Options, find 2 sections: Maximum Qty Allowed in Shopping Cart and Minimum Qty Allowed in Shopping Cart.
+
 
 ## module
 
@@ -587,7 +599,9 @@ curl -XPOST -H 'Content-Type: application/json' http://magento-url/rest/V1/integ
   - static: 升级数据库
   - int: 字段添加到到customer_entity_int中,eav_attribute:字段映射表,升级数据就行
 * script
-    - installSchema：for the first time when installing the module
+    - installSchema：for the first time when installing the module,只在第一次安装模块时执行
+        + remove the information that let Magento know your module has installed in the system. Please open the table ‘setup_module’, find and remove a row has module equals to vendor_module `DELETE FROM setup_module WHERE module='<Vendor>_<Module>'`
+        + install by composer:`php bin/magento module:uninstall -r <Vendor>_<Module>`
     - UpgradeSchema：If you installed the module before, you will need to upgrade module and write the table create code to the UpgradeSchema.php. change attribute setup_version greater than current setup version in module.xml
     - InstallSchema:This file is executed first just after your modules registration (Means just after your module & its version entries are done in to the table -> setup_module ). This file is used to create tables with their columns attribute into your database that are later used by the new installed module.
     - InstallData: This file is executed after InstallSchema.php: . It is used to add data to the newly created table or any existing table.
@@ -1138,6 +1152,12 @@ function fatalErrorHandler()
     - Microsoft Dynamics AXMS Dynamics是一个成熟的数字解决方案，通过智能客户账户管理和订单创建工具简化工作流程。 它有助于快速简单的订购流程，从而增强客户体验。 作为最好的Magento ERP系统之一，它为你提供了许多非常有用的电子商务功能，如多种语言和货币支持，以及强大的交付，营销和SEO优化工具集等等。通过与Magento电子商务平台集成，你可以执行以下操作：将客户更新功能导入Magento;从Magento到MS Dynamics AX的订单结果导出;从Magento向Dynamics出口客户创建功能;将目录数据导入Magento;在Magento和MS Dynamics AX之间同步编辑/更新的订单数据。
     - Sage ERP.该ERP软件包适用于任何类型和规模的在线业务。 正如公司网站上报道的那样，Sage主要用于处理财务和企业管理。 此Magento ERP使你可以借助移动，云和内部部署管理工具来控制你的网上商店。 它非常适合制造，批发和服务流程。使用Sage ERP的Magento平台将能够：可跟踪库存细节;可跨部门、跨语言、跨立法合作；可使用总分类帐，预算，成本会计等管理财务流程;可控制采购，现金流;可更新客户信息。
     - Epicor这种价格低廉到中等价位的ERP完善了我们针对Magento平台的最佳ERP解决方案列表。 Epicor是一款端到端的ERP软件，可以帮助你有效地管理后台办公流程，如计划和调度，人力资本，生产，绩效和客户关系管理。 该数字解决方案在140个国家/地区拥有20,000多个客户，其本地化版本约有30种语言。 此外，Epicor在促进客户需求、项目执行、减少浪费和服务协调等方面具有很大的便利性和灵活性。与Magento平台Epicor保持一致可以让你：保存有信誉的产品的历史记录；提供可行的VAR（增值经销商）渠道;支持MS / SQL / SOA技术解决方案;在各部门之间获得更大的数据连通性;可采用强大的财务分析
+* docker
+    - https://github.com/markshust/docker-magento
+    - https://github.com/magento-notes/magento2-exam-notes
+    - https://github.com/clean-docker/Magento2
+    - https://github.com/webkul/magento2-varnish-redis-ssl-docker-compose
+    - https://github.com/fballiano/docker-magento2
 
 ## 参考
 
