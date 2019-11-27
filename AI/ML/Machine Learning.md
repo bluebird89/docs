@@ -271,6 +271,7 @@
   - [源代码](https://github.com/ageron/handson-ml)
   - [翻译](https://github.com/apachecn/hands-on-ml-zh)
 * [《面向机器学习的特征工程》](https://github.com/apachecn/feature-engineering-for-ml-zh)
+* [Model-Based Machine Learning](http://mbmlbook.com/index.html)
 
 ## 教程
 

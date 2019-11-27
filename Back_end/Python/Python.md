@@ -1417,6 +1417,7 @@ virtualenv
 * [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges)Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
 * [ipython/ipython](https://github.com/ipython/ipython) https://ipython.org/  `pip3 install ipython`
 * [pypy](http://pypy.org/)
+* [pypa/pipenv](https://github.com/pypa/pipenv):Python Development Workflow for Humans. https://pipenv.kennethreitz.org
 * Server
     - SimpleHTTPServer `python2 -m SimpleHTTPServer 8080`
 * 常用系统模块：
