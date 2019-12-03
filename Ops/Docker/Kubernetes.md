@@ -286,6 +286,7 @@ kubectl get pods --all-namespaces  // list two pods, one an ‘addon-manager’ 
 
 * [Tutorials](https://kubernetes.io/docs/tutorials/)
 * [Kubernetes 中文社区](https://www.kubernetes.org.cn)
+* [Kubernetes中文文档](http://docs.kubernetes.org.cn/)
 * [容器编排和部署](https://developer.ibm.com/cn/solutions/container-orchestration-and-deployment/)
 * [hobby-kube/guide](https://github.com/hobby-kube/guide):Kubernetes clusters for the hobbyist
 * [kelseyhightower/kubernetes-the-hard-way](https://github.com/kelseyhightower/kubernetes-the-hard-way):Bootstrap Kubernetes the hard way on Google Cloud Platform. No scripts.
