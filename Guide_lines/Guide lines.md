@@ -11,3 +11,4 @@
 * [](https://github.com/bendc/frontend-guidelines)
 * [](https://github.com/Microsoft/api-guidelines)
 * [](https://github.com/elsewhencode/project-guidelines)
+* [sparanoid/chinese-copywriting-guidelines](https://github.com/sparanoid/chinese-copywriting-guidelines):Chinese copywriting guidelines for better written communication／中文文案排版指北 https://sparanoid.com/note/chinese-copywriting-guidelines/

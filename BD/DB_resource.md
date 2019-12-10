@@ -124,6 +124,7 @@
     - [National Center for Environmental Informatio](https://www.ncdc.noaa.gov/data-access):涵盖地球物理学、大气和海洋数据。他们目前是世界上最大的气候和天气信息提供商。
 * 地理
     - [NASA 的 Earth Data](https://earthdata.nasa.gov/):包含了美国宇航局的地球观测数据，其中包含如 NC 地表温度和碳通量等信息。
+    - [uiwjs/province-city-china](https://github.com/uiwjs/province-city-china)🇨🇳最全最新中国【省、市、区县、乡镇街道】json,csv,sql数据 https://npm.im/province-city-china
 * 社会
     - [Pew Internet](https://www.pewinternet.org/datasets/)
     - [Bureau of Labor Statistics](https://www.bls.gov/data/):美国劳动力市场活跃度、工作条件和价格变化的数据

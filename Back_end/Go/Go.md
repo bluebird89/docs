@@ -1002,6 +1002,7 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
 * [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
 * proxy
+    - [goproxy/goproxy.cn](https://github.com/goproxy/goproxy.cn):The most trusted Go module proxy in China. https://goproxy.cn
     -   [gomods/athens](https://github.com/gomods/athens):A Go module datastore and proxy https://docs.gomods.io
     -   [goproxyio/goproxy](https://github.com/goproxyio/goproxy):A global proxy for Go modules. https://goproxy.io
 * 代码规范
