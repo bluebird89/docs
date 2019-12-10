@@ -2,7 +2,7 @@
 
 每个系统都使用资源。这些资源可以是图片，视频文件，网页，商业信息，或者在基于计算机的系统中可以被代表的任何事物
 服务的目的是提供一个窗口给客户端以便客户端能访问这些资源。服务架构师和开发人员想要这些服务变得易于实现、维护、扩展、伸缩。RESTful 架构允许这些，甚至更多
-一般来说，RESTful 服务应该有下面的属性和特征，也就是我要详细描述的内容：
+一般来说，RESTful 服务应该有下面的属性和特征：
 
 - 模型表示（Representations）
 - 消息（Messages）
@@ -131,6 +131,13 @@ rel表示这个API与当前网址的关系（collection关系，并给出该coll
 - API的身份认证应该使用OAuth 2.0框架。
 - 服务器返回的数据格式，应该尽量使用JSON，避免使用XML。
 
+
+Client - server: Servers (back end) and clients (front end) can be developed independently.
+
+Stateless: Session state should be stored on the client. Client data should not be stored on the server between requests.
+
+Cacheable: Client can cache responses to improve scalability and performance.
+
 ### 实例
 
 * <https://api.github.com/>
@@ -145,13 +152,8 @@ rel表示这个API与当前网址的关系（collection关系，并给出该coll
 
 ### 参考
 
-- [RESTful Web 服务：教程](https://zhuanlan.zhihu.com/p/21644769)
-- [Kerberos](http://danlebrero.com/2017/03/26/Kerberos-explained-in-pictures/)
-- [restapitutorial](https://www.restapitutorial.com/)
-
-## StrongLoop
-
-StrongLoop API Platform构建于开源的LoopBack.io之上，LoopBack是一个高度可扩展的Node.js API框架。借助于LoopBack，可以快速创建可扩展的API和数据库映射。
-
-* [StrongLoop](https://mac.aotu.io/docs/dev-rd/strongloop.html)
-* [文档](https://docs.strongloop.com/pages/viewpage.action?pageId=10879061)
+* [RESTful Web 服务：教程](https://zhuanlan.zhihu.com/p/21644769)
+* [Kerberos](http://danlebrero.com/2017/03/26/Kerberos-explained-in-pictures/)
+* [restapitutorial](https://www.restapitutorial.com/)
+* [StrongLoop](https://mac.aotu.io/docs/dev-rd/strongloop.html): StrongLoop API Platform构建于开源的LoopBack.io之上，LoopBack是一个高度可扩展的Node.js API框架。借助于LoopBack，可以快速创建可扩展的API和数据库映射。
+    - [文档](https://docs.strongloop.com/pages/viewpage.action?pageId=10879061)
