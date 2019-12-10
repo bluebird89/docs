@@ -1,10 +1,8 @@
 # Hardware
 
 * Radeon Pro Vega
-
-* 8核心16线程
-* 3月21日，AMD在游戏开发者大会上正式公布自家的实时光线追踪技术，说白了也就是和N卡旗下RTX显卡抗衡的自家技术。该解决方案是基于Raden Rays构建的，是一个开源的GPU光追引擎，支持OpenCL等技术
-
+    - 8核心16线程
+    - 3月21日，AMD在游戏开发者大会上正式公布自家的实时光线追踪技术，说白了也就是和N卡旗下RTX显卡抗衡的自家技术。该解决方案是基于Raden Rays构建的，是一个开源的GPU光追引擎，支持OpenCL等技术
 
 ## IOE
 
@@ -14,13 +12,18 @@
 
 * 固态硬盘在乱序写时，性能表现比机械硬盘会好很多，特别是多线程同时进行写操作时，性能也会比单线程顺序写强
 
-## 工具
+## 耳机
 
-* [XOD](https://xod.io/):A VISUAL PROGRAMMING LANGUAGE FOR MICROCONTROLLERS
+* B&O PLAY by BANG & OLUFSEN - BeoPlay H6 Over-Ear Headphones, Natural (1642003)
 
-## 渠道
+## 电脑
 
-* [Lenovo](https://www.corporateperks.com/)
+* macbook pro 15
+* 戴尔全新27英寸XPS旗舰一体机
+
+## 键盘：
+* Das Keyboard Professional Model S for Mac (DASK3PROMS1MACCLI)
+* MX Board Silent基于经典的G80-3000打造，内部采用樱桃自家的MX静音轴，轴体内部拥有独特形状的橡胶垫来降低敲击时产生的噪音，目前，MX Board Silent键盘提供了MX红轴和MX黑轴两种轴体供用户选择，轴体寿命5000万次。售价149美元（约合1030元人民币）。
 
 ## 手机
 
@@ -44,6 +47,11 @@
     - 白永祥是Pro 7这款产品最大的责任人，那么黄章无疑是魅族这家公司最大的责任人。腾讯《深网》接触到的多位魅族在职或离职员工均表示，黄章丝毫没意识到一个团队的稳定性有多重要，不顾及频繁换人的后果。“本身产品定位就有问题，加上魅族Pro 7上市前销售和市场的人全换了，完全没有按照正确的节奏去卖。
 * 一加
     - 只做旗舰机
+* iphone se
+
+## 渠道
+
+* [Lenovo](https://www.corporateperks.com/)
 
 ## 技巧
 
@@ -55,3 +63,4 @@
 ## 工具
 
 * [Krog](https://www.korg.com)
+* [XOD](https://xod.io/):A VISUAL PROGRAMMING LANGUAGE FOR MICROCONTROLLERS

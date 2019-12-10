@@ -3896,6 +3896,7 @@ exit;
 
 * [https://phar.io](https://phar.io):The PHAR Installation and Verification Environment (PHIVE)
 * [sebastianfeldmann/phpbu](https://github.com/sebastianfeldmann/phpbu):PHP Backup Utility - Creates and encrypts database and file backups, syncs your backups to other servers or cloud services and assists you monitor your backup process https://phpbu.de
+* [laradock/laradock](https://github.com/Laradock/laradock):The most popular full PHP development environment on Docker. http://laradock.io
 
 ## 参考
 
