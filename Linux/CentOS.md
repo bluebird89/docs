@@ -13,6 +13,11 @@ yum install net-tools
 sudo yum install epel-release # add the CentOS 7 EPEL repository
 ```
 
+## 自启服务
+
+* `/etc/rc.d/rc.local`
+* `/etc/rc.d/init.d/`
+
 ## 防火墙
 
 * CentOS 7默认使用的是firewall作为防火墙，使用iptables必须重新设置一下

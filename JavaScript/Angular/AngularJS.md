@@ -1,4 +1,4 @@
-# * [angular/angular.js](https://github.com/angular/angular.js)
+# [angular/angular.js](https://github.com/angular/angular.js)
 
 AngularJS - HTML enhanced for web apps! https://angularjs.org
 
@@ -35,7 +35,7 @@ npm test # 单元测试
 npm run e2e  # E2E测试End-to-end
 ```
 
-### 项目结构
+### 结构
 
 * app/app.components.ts, 一个自定义组件，Typescript代码。
 * app/app.module.ts, 模块文件，用于组合管理组件，Typescript代码。
@@ -84,9 +84,30 @@ ng generate enum my-new-enum # 枚举对象Enum
 ng generate module my-module # 模块Modulew
 ```
 
+## hooks
+
+* constructor: The constructor is always called first.
+* ngOnInit: This lifecycle hook is called after the constructor.
+* ngOnchanges: When the value of an input is changed, this lifecycle hook is executed.
+* ngDoCheck: When the input properties are checked, this method will be called.
+* ngAfterContentInit: When the content of the component is initialized, this hook is called. A component-only hook.
+* ngAfterContentChecked: Called after the content is checked. A component-only hook.
+* ngAfterViewInit: After a view is initialized, this hook is called. A component-only hook.
+* ngAfterViewChecked: After a view is checked, this hook is called. A component-only hook.
+* ngOnDestroy: This method is called before Angular destroys the component/directive.
+
+## UI
+
+* [angular/material](https://github.com/angular/material):Material design for AngularJS https://material.angularjs.org/
+* [angular/material2](https://github.com/angular/material2):Material Design components for Angular https://material.angular.io
+
 ## 工具
 
-* [chieffancypants/angular-loading-bar](https://github.com/chieffancypants/angular-loading-bar):A fully automatic loading / progress bar for your angular apps. 
+* [angular/angular](https://github.com/angular/angular) One framework. Mobile & desktop. https://angular.io
+* [rintoj/ngx-virtual-scroller](https://github.com/rintoj/ngx-virtual-scroller):Virtual Scroll displays a virtual, "infinite" list.
+* [angular/angular-cli](https://github.com/angular/angular-cli):CLI tool for Angular https://cli.angular.io/
+* [akveo/nebular](https://github.com/akveo/nebular):Angular 7 Components, Auth and Security https://akveo.github.io/nebular
+* [chieffancypants/angular-loading-bar](https://github.com/chieffancypants/angular-loading-bar):A fully automatic loading / progress bar for your angular apps.
 * [akveo/nebular](https://github.com/akveo/nebular):Angular 7 Components, Auth and Security https://akveo.github.io/nebular
 * [ngrx/platform](https://github.com/ngrx/platform):Reactive libraries for Angular https://ngrx.io
 
@@ -115,3 +136,4 @@ ng generate module my-module # 模块Modulew
 * [gdi2290/angular-starter](https://github.com/gdi2290/angular-starter):🎉 An Angular Starter kit featuring Angular (Router, Http, Forms, Services, Tests, E2E, Dev/Prod, HMR, Async/Lazy Routes, AoT via ngc), Karma, Protractor, Jasmine, Istanbul, TypeScript, TsLint, Codelyzer, Hot Module Replacement, @types, and Webpack by @TipeIO https://tipe.io
 * [Top 12 Productivity Tips for WebStorm and Angular – Part 1](https://www.sitepoint.com/productivity-tips-for-webstorm-and-angular-part-1/)
 * [Angular2新的体验](http://blog.fens.me/angular2-init/)
+* [gdi2290/awesome-angular](https://github.com/gdi2290/awesome-angular):📄 A curated list of awesome Angular resources by @tipeio https://tipe.io
