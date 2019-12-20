@@ -166,13 +166,19 @@ docker version|info
 
 ```sh
 # 镜像
-docker images # 列出所有镜像(images)
+docker images ls ubuntu:18.04 # 列出所有镜像(images)
+docker image ls --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}"
 
 docker search httpd  # 搜索镜像
 
 docker pull ubuntu:18.04 # 获取镜像
 docker pull registry.hub.docker.com/ubuntu:18.04 # 等价于上面
 docker pull learn/tutorial
+
+# 镜像、容器、数据卷所占用的空间
+docker system df
+# 删除 因为更新镜像而没有标签的镜像
+docker image prune
 
 # 容器运行后，保存新镜像
 docker commit -m "Added json gem" -a "Docker Newbee" 0b2616b0e5a8 ouruser/sinatra:v2
@@ -922,8 +928,6 @@ links:
     - redis
 
 log_driver: "json-file"|"syslog"|"none"
-
-log_driver: "syslog"
 
 log_opt:
     syslog-address: "tcp://192.168.0.42:123"
