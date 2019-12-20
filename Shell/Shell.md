@@ -2,22 +2,13 @@
 
 Shell是Linux/Unix的一个外壳。隐藏了操作系统底层的细节,作为命令解析器负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序。
 
-```sh
-# 命令失败，往往需要脚本停止执行，防止错误累积
-set -e
-command || { echo "command failed"; exit 1; }
-if ! command; then echo "command failed"; exit 1; fi
-command
-if [ "$?" -ne 0 ]; then echo "command failed"; exit 1; fi
-```
-
 ## 配置
 
 * /etc/profile：所有用户的shell都有权使用配置好的环境变量 添加 export PATH="$PATH:/my_new_path"
 * bash_profile  ~/.bashrc 当用户登录时，该文件仅仅执行一次。用来设置环境变量功能和/etc/profile 相同只不过只针对用户来设定,需要source生效或者退出后生效
     - 如果ssh方式远程登录Linux时，会自动执行用户家目录下的.bash_profile文件，所有可以在这个文件里面添加一些内容，以便ssh登录Linux时都会执行相应的内容。
-* /etc/vim/.vimrc # vim的root用户配置文件
-* ～/.vimrc # 针对当前用户的配置
+* /etc/vim/.vimrc:vim的root用户配置文件
+* ～/.vimrc:针对当前用户的配置
 * ~/.zshrc：zsh配置文件
 * PATH="$PATH:/my_new_path":临时添加，关闭后失效
 * 选项如果单字符选项前使用一个减号-。单词选项前使用两个减号--
@@ -34,16 +25,16 @@ if [ "$?" -ne 0 ]; then echo "command failed"; exit 1; fi
     - fd 是一个比 find 更简单更快的命令（https://github.com/sharkdp/fd ），会自动地忽略掉一些你配置在 .gitignore 中的文件，以及 .git 下的文件
     - grep 是一个上古神器，然而，ack（https://beyondgrep.com/ ）、ag （https://github.com/ggreer/the_silver_searcher ）和 rg（https://github.com/BurntSushi/ripgrep ）是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到你配置在 .gitignore 中的规则。另外，我们会经常玩  command | grep “pattern” 这样的命令，fzf（https://github.com/junegunn/fzf ）会是一个很好用的命令，神器。
     - rm 是一个危险的命令，尤其是各种 rm -rf …，所以，trash（https://github.com/andreafrancia/trash-cli/ ）是一个更好的删除命令。
-    - man 命令是好读文档的命令，但是man的文档有时候太长了，所以，你可以试式 tldr（https://github.com/tldr-pages/tldr ）命令，把文档上的一些示例整出来给你看。
-    - 如果你想要一个图示化的ping，你可以试试 prettyping （https://github.com/denilsonsa/prettyping ）
-    - 如果你想搜索以前打过的命令，不要再用 Ctrl +R 了，你可以使用 fzf （https://github.com/junegunn/fzf ）你用过就知道有多强了。
-    - htop （Installation directions） 是 top 的一个加强版。
-    - ncdu （Installation directions） 比 du 好用多了用。另一个选择是 nnn（https://github.com/jarun/nnn ）。
-    - 如果你想把你的命令行操作建录制成一个 SVG 动图，那么你可以尝试使用 asciinema （https://asciinema.org/ ）和 svg-trem （https://github.com/marionebl/svg-term-cli ）。
-    - httpie(https://github.com/jakubroztocil/httpie) 是一个可以用来替代 curl 和 wget 的 http 客户端，httpie 支持 json 和语法高亮，可以使用简单的语法进行 http 访问: http -v github.com。
-    - tmux 在需要经常登录远程服务器工作的时候会很有用，可以保持远程登录的会话，还可以在一个窗口中查看多个 shell 的状态。
-    - Taskbook(https://github.com/klaussinani/taskbook) 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级。
-    - sshrc (sshrc：https://github.com/Russell91/sshrc ) 是个神器，在你登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置。
+    - man 命令是好读文档的命令，但是man的文档有时候太长了，所以，可以试式 tldr（https://github.com/tldr-pages/tldr ）命令，把文档上的一些示例整出来给看。
+    - 如果想要一个图示化的ping，可以试试 prettyping （https://github.com/denilsonsa/prettyping ）。
+    - 如果想搜索以前打过的命令，不要再用 Ctrl +R 了，可以使用 fzf （https://github.com/junegunn/fzf ）
+    - [htop](Installation directions):top 的一个加强版。
+    - [ncdu]()比 du 好用多了用。另一个选择是 nnn（https://github.com/jarun/nnn ）。
+    - 如果想把的命令行操作建录制成一个 SVG 动图，那么可以尝试使用 asciinema （https://asciinema.org/ ）和 svg-trem （https://github.com/marionebl/svg-term-cli ）。
+    - [httpie](https://github.com/jakubroztocil/httpie) 是一个可以用来替代 curl 和 wget 的 http 客户端，httpie 支持 json 和语法高亮，可以使用简单的语法进行 http 访问: http -v github.com。
+    - [tmux] 在需要经常登录远程服务器工作的时候会很有用，可以保持远程登录的会话，还可以在一个窗口中查看多个 shell 的状态。
+    - [Taskbook](https://github.com/klaussinani/taskbook) 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级。
+    - [sshrc](https://github.com/Russell91/sshrc ) 是个神器，在登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置。
     - 参考
         + https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4
         + https://dev.to/_darrenburns/tools-to-power-up-your-command-line-part-2-2737
@@ -537,15 +528,110 @@ echo "Args count: $#"
 exit 0
 ```
 
+* 内建命令 `type cd`
+    - 不需要使用子进程来执行,已经和shell编译成了一体，作为shell工具的组成部分存在。不需要借助外部程序文件来运行
+* 外部命令
+    - 程序通常位于/bin、/usr/bin、/sbin或/usr/sbin中
+    - 外部命令执行时，会创建出一个子进程。这种操作被称为衍生(forking),需要花费时间和精力来设置新子进程的环境
+* 历史记录
+    - `history -a`shell会话之前强制将命令历史记录写入.bash_history文件
+    - `!!` `!20`:显示出从 shell历史记录中唤回的命令，然后执行该命令
+* 别名
+    - 创建：`alias li='ls -li'`
+    - 查看：`alias -p`
+
+* 支持模糊匹配符
+
+* 每次bash会生成子shell进程，只有部分父进程的环境被复制到子shell环境中
+* 利用exit命令有条不紊地退出子shell
+* 命令列 表要想成为进程列表，这些命令必须包含在括号里 `(pwd ; ls ; cd /etc ; pwd ; cd ; pwd ; ls)` 生成了一个子shell来执行对应的命令
+* 要想知道是否生成了子shell，得借助一个使用了环境变量的命令。这个命令就是echo $BASH_SUBSHELL。如果该命令返回0，就表明没有子shell。如果返回 1或者其他更大的数字，就表明存在子shell。 `( pwd ; echo $BASH_SUBSHELL)`
+* sleep命令会在后台(&)睡眠3000秒(50分钟)。当它被置入后台，在shell CLI提示符返回 之前，会出现两条信息。第一条信息是显示在方括号中的后台作业(background job)号(1)。 第二条是后台作业的进程ID(2396)。
+* `jobs -l`:将进程列表置入后台模式。你既可以在子shell中 进行繁重的处理工作，同时也不会让子shell的I/O受制于终端
+* 生成子shell的成本不低，而且速度还慢。创建嵌套子shell更是火上浇油
+
+## 协程
+
+* 在后台生成一个子shell，并在这个子shell中执行命令 `coproc My_Job { sleep 10; }`
+* 扩展语法:必须确保在第一个花括号({)和命令名之间有一个空格。还必须保证命令以分号(;)结 尾。另外，分号和闭花括号(})之间也得有一个空格
+
 ## 文件管理
 
-新建文件夹（mkdir）
-新建文件（touch）
-移动（mv）
-复制（cp）
-删除（rm）
+* 新建文件夹（mkdir）
+* 新建文件（touch）
+* 移动（mv）
+* 复制（cp）
+* 删除（rm）
+* 链接
+    - 符号链接就是一个实实在在的文件，它指向存放在虚拟目录结构中某个地方的另一个文件
+    - 硬链接会创建独立的虚拟文件，其中包含了原始文件的信息及位置。但是它们从根本上而言是同一个文件。引用硬链接文件等同于引用了源文件。只能对处于同一存储媒体的文件创建硬链接。要想在不同存储媒体的文件之间创建链接， 只能使用符号链接。
 
-## 端口占用
+```
+file my_file
+mount # 输出当前系统上挂载设备列表
+mount -t vfat /dev/sdb1 /media/disk
+umount /home/rich/mnt
+df -h
+
+grep [options] pattern [file]
+grep -v t file1 # 反向搜索(输出不匹配该模式的行)
+# -c参数:有多少行含有匹配的模式
+```
+
+## 环境变量
+
+* 系统环境变量
+    - 基本上都是使用全大写字母，以区别于普通用户的环境变量
+    - set命令会显示为某个特定进程设置的所有环境变量，包括局部变量、全局变量以及用户定义变量
+    - 引用某个环境变量的时候，必须在变量前面加上一个美元符`($)`.显示变量当前值、让变量作为命令行参数.如果要用到变量，使用$;如果要操作变量，不使用$
+    - 可作为数组使用
+* 全局变量：对于shell会话和所有生成的子shell都是可见的
+    - 创建全局环境变量的方法是先创建一个局部环境变量，然后再把它导出到全局环境中
+    - 修改/删除子shell中全局环境变量并不会影响到父shell中该变量的值
+    - 子shell甚至无法使用export命令改变父shell中全局环境变量的值
+    - unset命令中引用环境变量时，记住不要使用$.在子进程中删除了一个全局环境变量， 这只对子进程有效。该全局环境变量在父进程中依然可用
+* 局部变量：对创建它们的 shell可见
+    - 要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾
+    - 变量名、等号和值之间没有空格
+    - 如果生成了另外一个shell，它在子shell中就不可用,退出了子进程，那个局部环境变量就不可用
+    - 回到父shell时，子shell中设置的局部变量就不存在
+* PATH环境变量:定义了用于进行命令和程序查找的目录,如果命令或者程序的位置没有包括在PATH变量中，那么如果不使用绝对路径的话，shell是没法找到的
+    - 目录使用冒号分隔
+    - PATH变量的修改只能持续到退出或重启系统
+    - 登入Linux系统启动一个bash shell时，默认情况下bash会在几个文件中查找命令。这些文件叫作启动文件或环境文件
+    - 启动bash shell有3种方式
+        + 登录时作为默认登录shell:
+            * $HOME/.bashrc
+            * /etc/profile:系统上默认的bash shell的主启动文件,系统上的每个用户登录时都会执行这个启动文件.按照下列顺序运行第一个被找到的文件，余下的则被忽略
+            * $HOME/.bash_profile:会先去检查HOME目录中是不是还有一个叫.bashrc的启动文件。如果有 的话，会先执行启动文件里面的命令
+            * $HOME/.bash_login
+            * $HOME/.profile
+        + 作为非登录shell的交互式shell,不会访问/etc/profile文件，只会检查用户HOME目录 中的.bashrc文件
+        + 作为运行脚本的非交互shell
+            * 如果父shell是登录shell，在/etc/profile、/etc/profile.d/*.sh和$HOME/.bashrc文件中 设置并导出了变量，用于执行脚本的子shell就能够继承这些变量
+            * 由父shell设置但并未导出的变量都是局部变量。子shell无法继承局部变量。
+
+```sh
+printenv HOME
+
+# 局部用户定义变量
+my_variable=Hello
+echo $my_variable
+
+mytest=(one two three four five)
+echo ${mytest[2]}
+mytest[2]=seven
+unset mytest[2]
+echo ${mytest[*]}
+
+my_variable="I am Global now"
+export my_variable
+echo $my_variable
+
+PATH=$PATH:/home/christine/Scripts
+```
+
+## 端口
 
 ```sh
 netstat -an | grep 3306
@@ -657,6 +743,8 @@ diskus -h
 wget https://github.com/jftuga/duu/releases/download/2.20/duu.py
 python3 duu.py
 python3 duu.py /home/sk/Downloads/
+
+ls -l my_script # 过滤输出列表
 ```
 
 ## grep
@@ -936,17 +1024,17 @@ dmenu 在桌面顶部提供了一个菜单条，可以快速启动应用程序
 
 ### 快捷键
 
-* Tab:点击Tab键可以实现命令补全,目录补全、命令参数补全;
-* Ctrl+c:强行终止当前程序（常用）;
-* Ctrl+d:键盘输入结束或退出终端（常用）;
-* Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
-* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
-* Ctrl+a:将光标移至输入行头，相当于Home键;
-* Ctrl+e:将光标移至输入行末，相当于End键;
-* Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
-* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
-* Shift+PgUp:将终端显示向上滚动;
-* Shift+PgDn:将终端显示向下滚动;
+* Tab:点击Tab键可以实现命令补全,目录补全、命令参数补全
+* Ctrl+c:强行终止当前程序（常用）
+* Ctrl+d:键盘输入结束或退出终端（常用）
+* Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行
+* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg
+* Ctrl+a:将光标移至输入行头，相当于Home键
+* Ctrl+e:将光标移至输入行末，相当于End键
+* Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用
+* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用
+* Shift+PgUp:将终端显示向上滚动
+* Shift+PgDn:将终端显示向下滚动
 
 ### 脚本
 
@@ -1213,11 +1301,10 @@ ln -s /usr/local/bin/gtac /usr/local/bin/tac
 
 ## 免密码登录
 
-* `~/.ssh`
-* authorized_keys:存放远程免密登录的公钥,主要通过这个文件记录多台机器的公钥
-* id_rsa : 生成的私钥文件
-* id_rsa.pub ： 生成的公钥文件
-* know_hosts : 已知的主机公钥清单　
+* ~/.ssh/authorized_keys:存放远程免密登录的公钥,主要通过这个文件记录多台机器的公钥
+* ~/.ssh/id_rsa : 生成的私钥文件
+* ~/.ssh/id_rsa.pub ： 生成的公钥文件
+* ~/.ssh/know_hosts : 已知的主机公钥清单　
 * 如果希望ssh公钥生效需满足至少下面两个条件：
     - .ssh目录的权限必须是700
     - .ssh/authorized_keys文件权限必须是600
@@ -1252,29 +1339,94 @@ ssh-keygen -R <IP_ADDRESS>
 * 简单选择屏幕滚动，使用CTRL + SHIFT + K清理缓冲区。
 * 可自定义隐藏大部分不必要的细节（标签栏、菜单），默认提供许多颜色主题
 
-## 实例
+## 语法
 
-* 开头加解释器：#!/bin/bash
-* 语法缩进，使用四个空格；多加注释说明。
-* 命名建议规则：变量名大写、局部变量小写，函数名小写，名字体现出实际作用。
-* 默认变量是全局的，在函数中变量local指定为局部变量，避免污染其他作用域。
-* 有两个命令能帮助我调试脚本：set -e 遇到执行非0时退出脚本，set-x 打印执行过程。
-* 写脚本一定先测试再到生产上。
+* 应用
+    - 不适用场景
+        + 比数组更复杂的数据结构
+        + 出现了复杂的转义问题
+        + 有太多的字符串操作
+        + 不太需要调用其它程序和跟其它程序管道交互
+* 语法
+    - 开头解释器：`#!/bin/bash`
+    - 语法缩进:四个空格
+    - 在标准输入上输入多行字符串
+    - 命名建议规则：变量名大写、局部变量小写，函数名小写，名字体现出实际作用
+    - 默认变量是全局的，在函数中变量local指定为局部变量，避免污染其他作用域
+    - `$()`与``:用于shell命令的执行 用`$()`代替反单引号(`)
+    - `pwd -P`:得出当前物理路径（非引用等路径）
+    - dirname：显示最后一个结点前的路径
+    - basename：显示最后一个结点的名称
+    - function:定义一个函数，可加或不加
+    - `egrep`
+    - 用`[[]]`(双层中括号)替代[]
+    - `bash -n myscript.sh `
+        + -n:脚本进行语法检查
+        + -v:跟踪脚本里每个命令的执行 `set -o verbose`
+        + `set -x` -x:跟踪脚本里每个命令的执行并附加扩充信息 `set -o xtrace`
+        + `set -e`:遇到执行非0时退出脚本
+        + `set -o nounset`:引用未定义的变量(缺省值为“”)
+        + `set -o errexit`:执行失败的命令被忽略
+* 变量
+    - 从bash 3.2版开始，正则表达式和globbing表达式都不能用引号包裹。如果表达式里有空格，可以把它存储到一个变量里
+    - local:函数内部变量
+    - readonly:只读变量
+    - 尽量对bash脚本里的所有变量使用local或readonly进行注解
+* 操作符
+    - `||`  逻辑or(仅双中括号里使用)
+    - `&&`  逻辑and(仅双中括号里使用)
+    - `<`   字符串比较(双中括号里不需要转移)
+    - `-lt` 数字比较
+    - `=`   字符串相等
+    - `==`  以Globbing方式进行字符串比较(仅双中括号里使用，参考下文)
+    - `=~`  用正则表达式进行字符串比较(仅双中括号里使用，参考下文)
+    - `-n`  非空字符串
+    - `-z`  空字符串
+    - `-eq` 数字相等
+    - `-ne` 数字不等
+* 内置变量
+    - `$0`  脚本名称
+    - `$n`  传给脚本/函数的第n个参数
+    - `$$`  脚本的PID
+    - `$!`  上一个被执行的命令的PID(后台运行的进程)
+    - `$?`  上一个命令的退出状态(管道命令使用${PIPESTATUS})
+    - `$#`  传递给脚本/函数的参数个数 能够处理空格参数，而且参数间的空格也能正确的处理
+    - `$@`  传递给脚本/函数的所有参数(识别每个参数) 用双引号括起来
+    - `$*`  传递给脚本/函数的所有参数(把所有参数当成一个字符串)
+* 调试
+
+* 正则表达式
+* 习惯
+    - 多加注释说明
+    - 写脚本一定先测试再到生产上
 
 ```sh
+# 任何字词都可以当作分界符,有内嵌变量替换操作，可以把第一个MARKER用单引号包起来
+command  << 'MARKER'
+${var}
+$(cmd)
+MARKER
+
 # 获取随机字符串或数字
-## 获取随机8位字符串：
+## 获取随机8位字符串
 # echo $RANDOM |md5sum |cut -c 1-8 # 471b94f2
 # openssl rand -base64 4
 # cat /proc/sys/kernel/random/uuid |cut -c 1-8
 
-## 获取随机8位数字：
+## 获取随机8位数字
 # echo $RANDOM |cksum |cut -c 1-8  # cksum：打印CRC效验和统计字节
 # openssl rand -base64 4 |cksum |cut -c 1-8
 # date +%N |cut -c 1-8
 
-# 定义一个颜色输出字符串函数
 
+# 命令失败，往往需要脚本停止执行，防止错误累积
+set -e
+command || { echo "command failed"; exit 1; }
+if ! command; then echo "command failed"; exit 1; fi
+command
+if [ "$?" -ne 0 ]; then echo "command failed"; exit 1; fi
+
+# 定义一个颜色输出字符串函数
 #方法1：
 function echo_color() {
 
@@ -1315,9 +1467,10 @@ function echo_color() {
 
 }
 
-使用方法：echo_color green "test"
+#
+echo_color green "test"
 
-function关键字定义一个函数，可加或不加。
+
 
 # 批量创建用户
 
@@ -1406,7 +1559,6 @@ if [ $PORT_C -eq 0 -o $PS_C -eq 0 ]; then
 fi
 
 # 检查主机存活状态
-
 方法1：将错误IP放到数组里面判断是否ping失败三次
 
 #!/bin/bash
@@ -1446,8 +1598,7 @@ for IP in $IP_LIST; do
     fi
 
 done
-
-方法2：将错误次数放到FAIL_COUNT变量里面判断是否ping失败三次
+# 将错误次数放到FAIL_COUNT变量里面判断是否ping失败三次
 
 #!/bin/bash
 
@@ -1483,7 +1634,7 @@ for IP in $IP_LIST; do
 
 done
 
-方法3：利用for循环将ping通就跳出循环继续，如果不跳出就会走到打印ping失败
+# 利用for循环将ping通就跳出循环继续，如果不跳出就会走到打印ping失败
 
 #!/bin/bash
 

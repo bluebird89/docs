@@ -493,3 +493,4 @@ apidoc -i myapp/ -o apidoc/ -t mytemplate/
 * [OAI/OpenAPI-Specification](https://github.com/OAI/OpenAPI-Specification):The OpenAPI Specification Repository https://openapis.org
 * [jsonapi](https://jsonapi.org/format/)
 * [shieldfy/API-Security-Checklist](https://github.com/shieldfy/API-Security-Checklist):Checklist of the most important security countermeasures when designing, testing, and releasing your API
+* [microsoft/api-guidelines](https://github.com/microsoft/api-guidelines):Microsoft REST API Guidelines
