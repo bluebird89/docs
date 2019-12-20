@@ -77,6 +77,31 @@ webm
 
 * 视频直接拖可以播放不卡
 
+```
+docker run --name video -v /Users/tangqingsong/files:/root/videos -d -i -p 8081:8081 -p 1935:1935 ubuntu:18.04 && docker ps
+docker exec -it video bash
+
+wget https://github.com/winshining/nginx-http-flv-module/archive/master.zip ; unzip master.zip
+wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar.gz
+vim objs/Makefile # 删除里面的-Werror删除
+
+./configure --add-module=../nginx-http-flv-module-master
+
+rtmp {                #RTMP服务
+   server {
+       listen 1935;  #//服务端口
+        chunk_size 4096;   #//数据传输块的大小
+
+        application vod {
+                play /opt/video/vod; #//视频文件存放位置。
+        }
+   }
+}
+
+# vlc
+rtmp://localhost/vod/out.mp4
+```
+
 ## 资源
 
 * TED

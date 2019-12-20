@@ -21,13 +21,14 @@
 * [yehuio/Coot](https://github.com/yehuio/Coot):玩转 IFTTT 体验极客生活，互联网自动化神器 https://coot.io
 * 笔记
     - TickTick
+    - [laurent22/joplin](https://github.com/laurent22/joplin):Joplin - an open source note taking and to-do application with synchronization capabilities for Windows, macOS, Linux, Android and iOS. Forum: https://discourse.joplinapp.org/ https://joplinapp.org
 * flowchart
     - [Zen Flowchart](https://www.zenflowchart.com)
 * 輸入法
-    -  [Rime](https://rime.im)
-*  task
-    -  todolist
-    -  any do
+    - [Rime](https://rime.im)
+* task
+    - todolist
+    - any do
 * cheatsheets
     - [Rico's cheatsheets](https://devhints.io/)
     - [wtfutil/wtf](https://github.com/wtfutil/wtf):The personal information dashboard for your terminal. http://wtfutil.com
@@ -36,6 +37,8 @@
 * URL Shortener
     - [YOURLS/YOURLS](https://github.com/YOURLS/YOURLS):🔗 Your Own URL Shortener https://yourls.org
         + 自增序列算法:设置 id 自增，一个 10进制 id 对应一个 62进制的数值，1对1，也就不会出现重复的情况
+* 加密
+    - [hashicorp/vault](https://github.com/hashicorp/vault):A tool for secrets management, encryption as a service, and privileged access management https://www.vaultproject.io/
 
 ## Language
 

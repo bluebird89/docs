@@ -50,6 +50,7 @@ SAS网站的Eight levels of analytics
 * 《数据科学实战》
 * 《决战大数据》
 * [andkret/Cookbook](https://github.com/andkret/Cookbook):The Data Engineering Cookbook https://andreaskretz.com/
+* [The Little Handbook of Statistical Practice](http://www.jerrydallal.com/LHSP/LHSP.htm)
 
 ## 公司
 

@@ -30,23 +30,34 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
 
 ## 概念
 
-* Pods:调度的最小颗粒不是单纯的容器，而是抽象成一个Pod，Pod是一个可以被创建、销毁、调度、管理的最小的部署单元
+* Pod:调度的最小颗粒不是单纯的容器，而是抽象成一个Pod，Pod是一个可以被创建、销毁、调度、管理的最小的部署单元
     - 把相关的一个或多个容器（Container）构成一个Pod，通常Pod里的容器运行相同的应用
     - Pod包含的容器运行在同一个Minion(Host)上，看作一个统一管理单元，共享相同的volumes和network namespace/IP和Port空间
 * Services:基本操作单元，是真实应用服务的抽象，每一个服务后面都有很多对应的容器来支持，通过Proxy的port和服务selector决定服务请求传递给后端提供服务的容器，对外表现为一个单一访问地址，外部不需要了解后端如何运行，这给扩展或维护后端带来很大的好处
+    - 定义一系列Pod以及访问这些Pod的策略的一层抽象。Service通过Label找到Pod组。因为Service是抽象的，所以在图表里通常看不到它们的存在，这也就让这一概念更难以理解。
+    - 假定有2个后台Pod，并且定义后台Service的名称为‘backend-service’，lable选择器为（tier=backend, app=myapp）。backend-service 的Service会完成如下两件重要的事情：
+        + 会为Service创建一个本地集群的DNS入口，因此前端Pod只需要DNS查找主机名为 ‘backend-service’，就能够解析出前端应用程序可用的IP地址。
+        + 现在前端已经得到了后台服务的IP地址，但是它应该访问2个后台Pod的哪一个呢？Service在这2个后台Pod之间提供透明的负载均衡，会将请求分发给其中的任意一个（如下面的动画所示）。通过每个Node上运行的代理（kube-proxy）完成
 * Replication Controllers:理解成更复杂形式的pods，它确保任何时候Kubernetes集群中有指定数量的pod副本(replicas)在运行，如果少于指定数量的pod副本(replicas)，Replication Controller会启动新的Container，反之会杀死多余的以保证数量不变
-    - 使用预先定义的pod模板创建pods，一旦创建成功，pod 模板和创建的pods没有任何关联，可以修改 pod 模板而不会对已创建pods有任何影响，也可以直接更新通过Replication Controller创建的pods。对于利用 pod 模板创建的pods，Replication Controller根据 label selector 来关联，通过修改pods的label可以删除对应的pods。Replication Controller主要有如下用法：
-    - Rescheduling:Replication Controller会确保Kubernetes集群中指定的pod副本(replicas)在运行， 即使在节点出错时
-    - Scaling:通过修改Replication Controller的副本(replicas)数量来水平扩展或者缩小运行的pods。
-    - Rolling updates:Replication Controller的设计原则使得可以一个一个地替换pods来滚动更新（rolling updates）服务。
-    - Multiple release tracks:如果需要在系统中运行multiple release的服务，Replication Controller使用labels来区分multiple release tracks。
+    - 使用预先定义的pod模板创建pods，一旦创建成功，pod 模板和创建的pods没有任何关联，可以修改 pod 模板而不会对已创建pods有任何影响，也可以直接更新通过Replication Controller创建的pods。
+    - 创建Replication Controller时，需要指定两个东西：
+        + Pod模板：用来创建Pod副本的模板
+        + Label：Replication Controller需要监控的Pod的标签。
+    - 对于利用 pod 模板创建的pods，Replication Controller根据 label selector 来关联，通过修改pods的label可以删除对应的pods。
+    - Replication Controller主要有如下用法：
+        + Rescheduling:Replication Controller会确保Kubernetes集群中指定的pod副本(replicas)在运行， 即使在节点出错时
+        + Scaling:通过修改Replication Controller的副本(replicas)数量来水平扩展或者缩小运行的pods。
+        + Rolling updates:Replication Controller的设计原则使得可以一个一个地替换pods来滚动更新（rolling updates）服务。
+        + Multiple release tracks:如果需要在系统中运行multiple release的服务，Replication Controller使用labels来区分multiple release tracks。
     - 以上三个概念便是用户可操作的REST对象。Kubernetes以RESTfull API形式开放的接口来处理
-* Labels：service和replicationController只是建立在pod之上的抽象，最终是要作用于pod的，那么它们如何跟pod联系起来呢？这就引入了label的概念：label其实很好理解，就是为pod加上可用于搜索或关联的一组key/value标签，而service和replicationController正是通过label来与pod关联的。为了将访问Service的请求转发给后端提供服务的多个容器，正是通过标识容器的labels来选择正确的容器；Replication Controller也使用labels来管理通过 pod 模板创建的一组容器，这样Replication Controller可以更加容易，方便地管理多个容器。
+* Labels：service和replicationController只是建立在pod之上的抽象，最终是要作用于pod的，那么它们如何跟pod联系起来呢？这就引入了label的概念：就是为pod加上可用于搜索或关联的一组key/value标签，而service和replicationController正是通过label来与pod关联的。
+    - 为了将访问Service的请求转发给后端提供服务的多个容器，正是通过标识容器的labels来选择正确的容器；
+    - Replication Controller也使用labels来管理通过 pod 模板创建的一组容器，这样Replication Controller可以更加容易，方便地管理多个容器。
 * 如下图所示，有三个pod都有label为"app=backend"，创建service和replicationController时可以指定同样的label:"app=backend"，再通过label selector机制，就将它们与这三个pod关联起来了。例如，当有其他frontend pod访问该service时，自动会转发到其中的一个backend pod
 
 ![](../_static/labels.png)
 
-## 知识结构
+## 结构
 
 * Kubernetes集群架构
     - Kubernetes集群架构概述
@@ -126,6 +137,21 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
 
 Kubenetes整体框架如下图，主要包括kubecfg、Master API Server、Kubelet、Minion(Host)以及Proxy
 
+* Node（节点）：集群中相对于Master而言的工作主机，每个Node上运行用于启动和管理Pid的服务Kubelet，并能够被Master管理。在Node上运行的服务进行包括Kubelet、kube-proxy和docker daemon。
+    - Node信息
+        + Node地址：主机的IP地址，或者Node ID。
+        + Node运行状态：包括Pending、Running、Terminated三种状态。
+        + Node Condition（条件）：描述Running状态Node的运行条件，目前只有一种条件----Ready。Ready表示Node处于健康状态，可以接收从Master发来的创建Pod的指令。
+        + Node系统容量：描述Node可用的系统资源，包括CPU、内存数量、最大可调度Pod数量等。
+        + 其他：Node的其他信息，包括实例的内核版本号、Kubernetes版本号、Docker版本号、操作系统名称等。
+    - 管理：Node通常是物理机、虚拟机或者云服务商提供的资源，并不是由Kubernetes创建的。Kubernetes创建一个Node，仅仅表示Kubernetes在系统内部创建了一个Node对象，创建后即会对其进行一系列健康检查，包括是否可以连通、服务是否正确启动、是否可以创建Pod等。如果检查未能通过，则该Node将会在集群中被标记为不可用（Not Ready）。
+        + Node Controller是Kubernetes Master中的一个组件，用于管理Node对象。它的两个主要功能包括：集群范围内的Node信息同步，以及单个Node的生命周期管理。 Node信息同步可以通过kube-controller-manager的启动参数--node-sync-period设置同步的时间周期。
+    - 自注册:当Kubelet的--register-node参数被设置为true（默认值即为true）时，Kubelet会向apiserver注册自己。这也是Kubernetes推荐的Node管理方式。 Kubelet进行自注册的启动参数如下：
+        + --apiservers=: apiserver地址；
+        + --kubeconfig=: 登录apiserver所需凭据/证书的目录；
+        + --cloud_provider=: 云服务商地址，用于获取自身的metadata；
+        + --register-node=: 设置为true表示自动注册到apiserver。
+    - 手动管理Node:将Kubelet启动参数中的--register-node参数的值设置为false
 * Master 控制节点:定义了Kubernetes 集群Master/API Server的主要声明，包括Pod Registry、Controller Registry、Service Registry、Endpoint Registry、Minion Registry、Binding Registry、RESTStorage以及Client, 是client(Kubecfg)调用Kubernetes API，管理Kubernetes主要构件Pods、Services、Minions、容器的入口。Master由API Server、Scheduler以及Registry等组成。从下图可知Master的工作流主要分以下步骤：
     - Kubecfg将特定的请求，比如创建Pod，发送给Kubernetes Client。
     - Kubernetes Client将请求发送给API server。
@@ -188,12 +214,56 @@ Kubenetes整体框架如下图，主要包括kubecfg、Master API Server、Kubel
 通过客户端的kubectl命令集操作，API Server响应对应的命令结果，从而达到对kubernetes集群的管理
 
 ```sh
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/linux/amd64/kubectl # download a specific version
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+brew install kubectl
+
+# install ubuntu
+sudo apt-get update && sudo apt-get install -y apt-transport-https
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
+
+# install centos
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+yum install -y kubectl
+
+kubectl config view
+
+kubectl version|cluster-info
+kubectl config view
+kubectl get pods --all-namespaces  // list two pods, one an ‘addon-manager’ and another a ‘dashboard’
 kubectl delete deployments hello-minikube1
+kubectl get pods -A
+kubectl get deployments|events|services
+
+kubectl create -f single-config-file.yaml
+
+# Expose the Pod to the public internet
+kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+
+kubectl describe pod kubernetes-dashboard -n kube-system
+
+kubectl delete services hello-minikube
+kubectl delete deployment hello-minikube
 ```
 
 ### etcd
 
-它并不是kubernetes的一部分，它是 CoreOS 团队发起的一个管理配置信息和服务发现（service discovery）项目，目标是构建一个高可用的分布式键值（key-value）数据库。与kubernetes和docker一样还是在快速迭代开发中的产品，没有ZooKeeper那样成熟。
+并不是kubernetes的一部分，它是 CoreOS 团队发起的一个管理配置信息和服务发现（service discovery）项目，目标是构建一个高可用的分布式键值（key-value）数据库。与kubernetes和docker一样还是在快速迭代开发中的产品，没有ZooKeeper那样成熟。
 
 ### 熔断机制
 
@@ -224,22 +294,53 @@ kubectl is the command line client you’ll use to connect to the Kubernetes clu
 
 * config file: `~/.kube/`
 * all the virtual machine bits:`~/.minikube/`
+* 启动参数
+    - export http_proxy命令是添加命令行代理，主要是为了让minikube可以在命令行通过proxy去下载相关文件
+    - --docker-env http_proxy...，设置虚拟机中docker daemon的环境变量，这里的环境变量http_proxy表示虚拟机中docker daemon使用的代理
+    - --docker-env no_proxy，设置虚拟机中docker daemon不使用代理的地址段
+    - --log_dir=tmp，设置minikube的日志存储位置，这里是当前目录下的tmp文件夹。该目录下会出现INFO和ERROR的日志，INFO是一定会有，ERROR是出错的时候才有。比如
+    - --cpus 4，设置虚拟机的cpu核数
+    - --memory 8192，设置虚拟机的内存大小，单位为M
+* 参考
+    - [Hello Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/)
 
 ```shell
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew cask install virtualbox
+# To check if virtualization is supported on macOS, run the following command on your terminal
+sysctl -a | grep -E --color 'machdep.cpu.features|VMX'
 
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.7.1/minikube-darwin-amd64
+brew install minikube
+
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64
 chmod +x minikube
-sudo mv minikube /usr/local/bin/
+sudo mv minikube /usr/local/bin
+minikube start --vm-driver=virtualbox|parallels|vmwarefusion|hyperkit|vmware --disk-size='10g'  --image-mirror-country='cn' --image-repository='registry.cn-hangzhou.aliyuncs.com/google_containers'
+minikube start --registry-mirror=https://registry.docker-cn.com --kubernetes-version v1.12.1
+minikube start --memory=8192 --cpus=4 --disk-size=20g  --registry-mirror=https://docker.mirrors.ustc.edu.cn --kubernetes-version=v1.12.5 --docker-env http_proxy=http://192.168.0.40:8123 --docker-env https_proxy=http://192.168.0.40:8123 --docker-env no_proxy=localhost,127.0.0.1,::1,192.168.0.0/24,192.168.99.0/24
 
-minikube status
+minikube docker-env|stop|status|delete
+rm -rf  ~/.minikube
 
-curl -Lo kubectl http://storage.googleapis.com/kubernetes-release/release/v1.3.0/bin/darwin/amd64/kubectl
-chmod +x kubectl
-sudo mv kubectl /usr/local/bin/
+E1211 16:50:42.913765   43824 cache_images.go:80] CacheImage k8s.gcr.io/k8s-dns-sidecar-amd64:1.14.13 -> /Users/henry/.minikube/cache/images/k8s.gcr.io/k8s-dns-sidecar-amd64_1.14.13 failed: fetching image: Get https://k8s.gcr.io/v2/: dial tcp [2404:6800:4008:c01::52]:443: i/o timeout
+Unable to load cached images: loading cached images: loading image /Users/henry/.minikube/cache/images/k8s.gcr.io/kube-scheduler_v1.16.2: stat /Users/henry/.minikube/cache/images/k8s.gcr.io/kube-scheduler_v1.16.2
 
-kubectl get pods --all-namespaces  // list two pods, one an ‘addon-manager’ and another a ‘dashboard’
+# goole服务器，只能拉取国内的镜像
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.2.24
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.2.24 k8s.gcr.io/etcd:3.2.24
+
+minikube ssh|dashboard
+minikube dashboard --url
+minikube service hello-minikube --url
+
+minikube addons list
+minikube addons enable|disable heapster
+minikube addons  enable ingress
+
+kubectl delete service hello-node
+kubectl delete deployment hello-node
+
+minikube service list
 ```
 
 ## 实例
@@ -281,6 +382,7 @@ kubectl get pods --all-namespaces  // list two pods, one an ‘addon-manager’ 
 * [OpenKruise](https://github.com/openkruise/kruise):从不同维度解决 Kubernetes 之上应用的自动化问题，包括部署，升级，弹性扩缩容，Qos 调节，健康检查，迁移修复等
 * [AHAS](https://www.aliyun.com/product/ahas): 为 K8s 等容器环境提供了架构可视化的功能，同时，具有故障注入式高可用能力评测和一键流控降级等功能，可以快速低成本的提升应用可用性
 * [eon01/kubernetes-workshop](https://github.com/eon01/kubernetes-workshop): A Gentle introduction to Kubernetes with more than just the basics. 
+* [okd](https://docs.okd.io/)
 
 ## 参考
 
