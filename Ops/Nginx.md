@@ -118,6 +118,10 @@ sudo nginx # 启动命令
 sudo ngixn -c /usr/local/etc/nginx/nginx.conf
 sudo nginx -s reload|reload|reopen|stop|quit # 重新配置后都需要进行重启操作
 sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
+
+wget https://github.com/winshining/nginx-http-flv-module/archive/master.zip ; unzip master.zip
+wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar.gz
+./configure --add-module=../nginx-http-flv-module-master
 ```
 
 ### 配置

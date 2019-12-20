@@ -342,11 +342,6 @@ h1 {margin : 10px 0px 15px 5px;}
 a:hover {border-color: gray;}
 ```
 
-position属性
-  fixed
-  relative
-  absolute
-
 * transform
   - skew(20deg)
   - rotate(45deg)
@@ -357,19 +352,31 @@ position属性
 定义元素框相对于其正常位置应该出现的位置，或者相对于父元素、另一个元素甚至浏览器窗口本身的位置
 
 * 块元素
-    - 块元素单独占一行。
-    - 块元素左右都有换行符。
-    - 块元素可以设置width和height属性。
-    - 常用的块元素：`<div>、<p>、<h1>、<table>、<form>、<ul>、<ol>、<li>、<pre>`等
+  - 块元素单独占一行
+  - 块元素左右都有换行符
+  - 块元素可以设置width和height属性
+  - 常用的块元素：`<div>、<p>、<h1>、<table>、<form>、<ul>、<ol>、<li>、<pre>`等
 * 行内元素
-    - 行内元素不会单独占一行，多个行内元素会排在同一行。
-    - 行内元素没有width和height属性。
-    - 行内元素：`<span>、<font>、<b>、<i>、<u>、<s>、<a>、<input>、<label>、<img>`等
-* `<div>`和`<span>`是没有意义的标记，但是又使用最多的
+  - 行内元素不会单独占一行，多个行内元素会排在同一行
+  - 行内元素没有width和height属性
+  - 行内元素：`<span>、<font>、<b>、<i>、<u>、<s>、<a>、<input>、<label>、<img>`等
+* `<div>`和`<span>`是没有意义的标记，但是又使用最多
 * `<img>`和`<input>`是行内块元素(inline-block)，也有width和height
 * 以使用 display 属性改变生成的框的类型： block none
-
-不可以在内联元素 `<span>` 中嵌入`<p>`
+* position
+  - static:默认值,浏览器会按照源码的顺序，决定每个元素的位置，这称为"正常的页面流"（normal flow）。每个块级元素占据自己的区块（block），元素与元素之间不产生重叠，这个位置就是元素的默认位置
+    + 元素位置，是浏览器自主决定的，所以这时top、bottom、left、right这四个属性无效
+  - fixed：相对于视口（viewport，浏览器窗口）进行偏移，即定位基点是浏览器窗口。这会导致元素的位置不随页面滚动而变化，好像固定在网页上一样
+  - relative:相对于默认位置（即static时的位置）进行偏移，即定位基点是元素的默认位置,必须搭配top、bottom、left、right这四个属性一起使用，用来指定偏移的方向和距离
+  - absolute:相对于上级元素（一般是父元素）进行偏移，即定位基点是父元素
+    + 限制条件：定位基点（一般是父元素）不能是static定位，否则定位基点就会变成整个网页的根元素html
+    + absolute定位也必须搭配top、bottom、left、right这四个属性一起使用
+    + 定位的元素会被"正常页面流"忽略，即在"正常页面流"中，该元素所占空间为零，周边元素不受影响
+  - sticky：产生动态效果，很像relative和fixed的结合，比如网页的搜索工具栏、表头
+    + 生效的前提：必须搭配top、bottom、left、right这四个属性一起使用，不能省略
+    + 规则：
+      * 当页面滚动，父元素开始脱离视口时（即部分不可见），只要与sticky元素的距离达到生效门槛（top），relative定位自动切换为fixed定位；
+      * 等到父元素完全脱离视口时（即完全不可见），fixed定位自动切换回relative定位
 
 ## 样式管理
 

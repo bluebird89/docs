@@ -30,19 +30,53 @@ The PHP Interpreter <http://www.php.net>
         + 缓存数组的hash值
         + 字符串解析成桉树改为宏展开
         + 使用大块连续内存代替小块破碎内存
+        + 空合并赋值操作符:第一个操作数是存在并且不为 NULL，则返回该操作数。否则返回第二个操作数
     * 7.2 JIT(JUST_IN_TIME)
     * 7.4
         - 预加载
             + 在服务器启动的时候，将某些文件永久读取到内存中，之后的请求即可直接从这内存中读取。利用这个功能，能够将框架，或者是类库预加载到内存中，以进一步提高性能，还能将php写的函数，当成内部函数使用（因为已经永久加载到内存，整个服务器共享）
             + 文件有所更新就得重新启动服务器
             + php.ini的 `opcache.preload` 指向一个启动文件，可以包含其他文件
+        - 协变返回和逆变参数
+            + 协变返回类型
+        - 抛弃 array_merge ：在数组表达式中引入了扩展运算符
+        - 箭头函数
+        - 协变量返回和协变量参数
     * 8:实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
+
+```php
+$username = $_GET['user'] ?? 'nobody';
+
+# 7.4
+$parts = ['apple', 'pear'];
+$fruits = ['banana', 'orange', ...$parts, 'watermelon'];
+var_dump($fruits);
+
+$b = array_map(fn($n) => $n * $n * $n, [1, 2, 3, 4, 5]);
+## 替换use
+$factor = 10;
+$calc = fn($num) => $num * $factor;
+```
 
 ## 原理
 
+* PHP 代码 => Token => 抽象语法树 => Opcodes => 执行
+    - 源代码通过词法分析得到 Token Token 是 PHP 代码被切割成的有意义的标识。PHP7 一共有 137 种 Token，在 zend_language_parser.h 文件中做了定义。
+    - 基于语法分析器将 Token 转换成抽象语法树（AST） Token 就是一个个的词块，但是单独的词块不能表达完整的语义，还需要借助一定的规则进行组织串联。所以就需要语法分析器根据语法匹配 Token，将 Token 进行串联。语法分析器串联完 Token 后的产物就是抽象语法树（AST，Abstract Syntax Tree）。 AST 是 PHP7 版本的新特性，之前版本的 PHP 代码的执行过程中是没有生成 AST 这一步的。它的作用主要是实现了 PHP 编译器和解释器的解耦，提升了可维护性。
+    - 将语法树转换成 Opcode 需要将语法树转换成 Opcode，才能被引擎直接执行。
+    - 执行 Opcodes opcodes 是 opcode 的集合形式，是 PHP 执行过程中的中间代码。PHP 工程优化措施中有一个比较常见的 “开启 opcache”，指的技术这里将 opcodes 进行缓存。通过省去从源码到 opcode 的阶段，引擎直接执行缓存好的 opacode，以提升性能。
 * SAPI(Server Application Programming Interface)中文为服务端应用编程接口，它通过一系列钩子函数使得PHP可以和外围交换数据,接入层
     - SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性
     - 通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式
+    - 几种常用的 SAPI：
+        + apache2handler: Apache 扩展，编译后生成动态链接库，配置到 Apache 下。当有 http 请求到 Apache 时，根据配置会调用此动态链接库来执行 PHP 代码，完成与 PHP 的交互。
+        + cgi-fcgi: 编译后生成支持 CGI 协议的可执行程序，webserver（如 NGINX）通过 CGI 协议把请求传给 CGI 进程，CGI 进程根据请求执行相应代码后将执行结果返回给 webserver。
+        + fpm-fcgi: fpm 是 FastCGI 进程管理器。以 NGINX 服务器为例，当有请求发送到 NGINX 服务器，NGINX 按照 FastCGI 协议把请求交给 php-fpm 进程处理。
+        + cli: PHP 的命令行交互接口
+            * Zend 目录 Zend 目录是 PHP 的核心代码。PHP 中的内存管理，垃圾回收、进程管理、变量、数组实现等均在该目录的源码里。
+            * main 目录 main 目录是 SAPI 层和 Zend 层的黏合剂。Zend 层实现了 PHP 脚本的编译和执行，sapi 层实现了输入和输出的抽象，main 目录则在它们中间起着承上启下的作用。承上，解析 SAPI 的请求，分析要执行的脚本文件和参数；启下，调用 zend 引擎之前，完成必要的模块初始化等工作。
+            * ext 目录 ext 是 PHP 扩展相关的目录，常用的 array、str、pdo 等系列函数都在这里定义。
+            * TSRM TSRM（Thread Safe Resource Manager）—— 线程安全资源管理器， 是用来保证资源共享的安全。
 * Zend 引擎:PHP4 以后加入 PHP 的，是对原有PHP解释器的重写，整体使用 C 语言进行开发，也就是说可以把PHP理解成用C写的一个编程语言软件，引擎的作用是将PHP代码翻译为一种叫opcode的中间语言，它类似于JAVA的ByteCode（字节码）。引擎对PHP代码会执行四个步骤：
     - 词法分析 Scanning（Lexing），将 PHP 代码转换为语言片段（Tokens）。
     - 解析 Parsing， 将 Tokens 转换成简单而有意义的表达式。
