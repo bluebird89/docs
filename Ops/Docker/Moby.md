@@ -92,7 +92,7 @@ sudo apt-get install -y docker.io
 sudo systemctl start docker
 sudo systemctl enable docker
 
-### avoid sudo
+### avoid sudo, need relogin system
 sudo groupadd docker
 sudo gpasswd -a ${USER} docker
 sudo service docker restart
