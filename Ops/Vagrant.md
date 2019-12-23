@@ -17,6 +17,10 @@ Vagrant is a tool for building and distributing development environments. https:
 brew cask install virtualbox
 brew cask install vagrant
 brew cask install vagrant-manager
+
+sudo apt-get -y install ruby rubygems
+wget https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_x86_64.deb
+sudo dpkg -i vagrant_2.2.6_x86_64.deb
 ```
 
 ### windows
