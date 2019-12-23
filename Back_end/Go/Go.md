@@ -18,9 +18,10 @@ Go 编译器支持交叉编译，可以在一台机器上构建运行在具有�
   - GOPATH：(external libs):值是一个目录的路径，也可以是多个目录路径，每个目录都代表 Go语言的一个工作区
     + 允许设置多个路径，和各个系统环境多路径设置一样，windows用“;”，linux（mac）用“:”分隔
     + 不要把GOPATH设置成go的安装路径,可以自己在用户目录下面创建一个目录, 如gopath.$GOPATH 默认采用和 $GOROOT 一样的值，但从 Go 1.1 版本开始，必须修改为其它路径
+    + go get命令去获取远程库的时候，一般会安装到第一个工作区当中
     + 可以包含多个包含 Go 语言源码文件、包文件和可执行文件的路径，每个目录下包含目录
         * bin：存放可执行文件：需要把GOPATH中的可执行目录也配置到环境变量中, 否则自行下载的第三方go工具就无法使用了 编译后二进制的存放目的地
-        * pkg：存放安装后的归档文件, 主要是*.a文件
+        * pkg：存放安装后的归档文件, 主要是`*.a`文件
         * src：存放go的源文件 import 包时的搜索路径
 
 ```sh
@@ -113,6 +114,16 @@ mkdir -p $GOPATH/src
             * -x，命令具体都执行了哪些操作
             * -n，只查看具体操作而不执行它们
             * -v,看到编译的代码包的名称。它在与-a 结合
+* 结构
+    - api：用于存放依照Go版本顺序的API增量列表文件。这里所说的API包含公开的变量、常量、函数等。这些API增量列表文件用于Go语言API检查
+    - bin：用于存放主要的标准命令文件（可执行文件），包含go、godoc、gofmt
+    - blog：用于存放官方博客中的所有文章
+    - doc：用于存放标准库的HTML格式的程序文档。我们可以通过godoc命令启动一个Web程序展示这些文档
+    - lib：用于存放一些特殊的库文件
+    - misc：用于存放一些辅助类的说明和工具
+    - pkg：用于存放安装Go标准库后的所有归档文件（以.a结尾的文件）。注意，你会发现其中有名称为linux_amd64的文件夹，我们称为平台相关目录。这类文件夹的名称由对应的操作系统和计算架构的名称组合而成。通过go install命令，Go程序会被编译成平台相关的归档文件存放到其中
+    - src：用于存放Go自身、Go标准工具以及标准库的所有源码文件
+    - test：存放用来测试和验证Go本身的所有相关文件
 * 问题
     - Go 语言在多个工作区中查找依赖包的时候是以怎样的顺序进行的？
     - 形成命名空间
@@ -133,6 +144,50 @@ func main() {
     fmt.Println("Hello, world!")
 }
 
+```
+
+## 交叉编译
+
+
+指在一个平台上就能生成可以在另一个平台运行的代码
+
+$GOOS       $GOARCH
+android     arm
+darwin      386
+darwin      amd64
+darwin      arm
+darwin      arm64
+dragonfly   amd64
+freebsd     386
+freebsd     amd64
+freebsd     arm
+linux       386
+linux       amd64
+linux       arm
+linux       arm64
+linux       ppc64
+linux       ppc64le
+linux       mips
+linux       mipsle
+linux       mips64
+linux       mips64le
+linux       s390x
+netbsd      386
+netbsd      amd64
+netbsd      arm
+openbsd     386
+openbsd     amd64
+openbsd     arm
+plan9       386
+plan9       amd64
+solaris     amd64
+windows     386
+windows     amd64
+
+
+
+```
+GOOS=linux GOARCH=amd64 go build main.go
 ```
 
 ## 导入
@@ -622,6 +677,24 @@ func Benchmark_TimeConsumingFunction(b *testing.B) {
         Division(4, 5)
     }
 }
+```
+
+## 代理
+
+× 构建或运行你的应用时，Go 将会通过 goproxy.cn 获取依赖
+
+```
+# 启用 Go Modules 功能
+export GO111MODULE=on
+export GOPROXY=https://goproxy.cn
+
+
+go env -w GOPROXY=https://goproxy.cn,direct # 出现 does not override conflicting OS environment variable
+# 设置不走 proxy 的私有仓库，多个用逗号相隔
+go env -w GOPRIVATE=*.corp.example.com
+
+go env -w GOSUMDB=off # 示Get https://sum.golang.org/lookup/xxxxxx: dial tcp 216.58.200.49:443: i/o timeout
+go env -w GOSUMDB="sum.golang.google.cn"
 ```
 
 ### GoSublime

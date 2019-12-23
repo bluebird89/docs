@@ -13,8 +13,8 @@ if [ "$?" -ne 0 ]; then echo "command failed"; exit 1; fi
 
 ## 配置
 
-* /etc/profile：所有用户的shell都有权使用你配置好的环境变量 添加 export PATH="$PATH:/my_new_path"
-* bash_profile  ~/.bashrc 当用户登录时，该文件仅仅执行一次。用来设置环境变量 功能和/etc/profile 相同只不过 他指针对用户来设定,需要source 生效或者退出后生效
+* /etc/profile：所有用户的shell都有权使用配置好的环境变量 添加 export PATH="$PATH:/my_new_path"
+* bash_profile  ~/.bashrc 当用户登录时，该文件仅仅执行一次。用来设置环境变量功能和/etc/profile 相同只不过只针对用户来设定,需要source生效或者退出后生效
     - 如果ssh方式远程登录Linux时，会自动执行用户家目录下的.bash_profile文件，所有可以在这个文件里面添加一些内容，以便ssh登录Linux时都会执行相应的内容。
 * /etc/vim/.vimrc # vim的root用户配置文件
 * ～/.vimrc # 针对当前用户的配置
@@ -27,14 +27,15 @@ if [ "$?" -ne 0 ]; then echo "command failed"; exit 1; fi
     - https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/
     - https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/
 * 原生增强命令
-    - fasd 增强了 cd 命令 （https://github.com/clvv/fasd ）。
+    - [fasd](https://github.com/clvv/fasd):增强cd命令
     - bat 增强了 cat 命令 （https://github.com/sharkdp/bat ）。
-    - exa 增强了 ls 命令（https://github.com/ogham/exa ），如果你需要在很多目录上浏览各种文件 ，ranger 命令可以比 cd 和 cat 更有效率（https://github.com/ranger/ranger ），甚至可以在你的终端预览图片。
-    - fd 是一个比 find 更简单更快的命令（https://github.com/sharkdp/fd ），他还会自动地忽略掉一些你配置在 .gitignore 中的文件，以及 .git 下的文件。
+    - exa 增强了 ls 命令（https://github.com/ogham/exa ）
+    - 如果你需要在很多目录上浏览各种文件 ，ranger 命令可以比 cd 和 cat 更有效率（https://github.com/ranger/ranger ），甚至可以在你的终端预览图片。
+    - fd 是一个比 find 更简单更快的命令（https://github.com/sharkdp/fd ），会自动地忽略掉一些你配置在 .gitignore 中的文件，以及 .git 下的文件
     - grep 是一个上古神器，然而，ack（https://beyondgrep.com/ ）、ag （https://github.com/ggreer/the_silver_searcher ）和 rg（https://github.com/BurntSushi/ripgrep ）是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到你配置在 .gitignore 中的规则。另外，我们会经常玩  command | grep “pattern” 这样的命令，fzf（https://github.com/junegunn/fzf ）会是一个很好用的命令，神器。
     - rm 是一个危险的命令，尤其是各种 rm -rf …，所以，trash（https://github.com/andreafrancia/trash-cli/ ）是一个更好的删除命令。
     - man 命令是好读文档的命令，但是man的文档有时候太长了，所以，你可以试式 tldr（https://github.com/tldr-pages/tldr ）命令，把文档上的一些示例整出来给你看。
-    - 如果你想要一个图示化的ping，你可以试试 prettyping （https://github.com/denilsonsa/prettyping ）。
+    - 如果你想要一个图示化的ping，你可以试试 prettyping （https://github.com/denilsonsa/prettyping ）
     - 如果你想搜索以前打过的命令，不要再用 Ctrl +R 了，你可以使用 fzf （https://github.com/junegunn/fzf ）你用过就知道有多强了。
     - htop （Installation directions） 是 top 的一个加强版。
     - ncdu （Installation directions） 比 du 好用多了用。另一个选择是 nnn（https://github.com/jarun/nnn ）。
@@ -95,8 +96,58 @@ export PS1="\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h: \[\e[0;35m\]\W\[\e[m\] \\$  "
 // 另外种主提示符样式（对CentOS默认的主提示符加颜色标识）
 # export PS1="[\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h \[\e[0;35m\]\W\[\e[m\]]\\$  "
 
-/* .bashrc 文件中个人习惯的别名命令 */
+alias #list
+alias ..='cd ..'
+alias amazonbackup='s3backup'
+alias apt-get='sudo apt-get'
+
+alias name=value
+alias name='command'
+alias name='command arg1 arg2'
+alias name='/path/to/script'
+alias name='/path/to/script.pl arg1'
+unalias aliasname
+unalias foo
+
+# disable a bash alias temporarily
+## path/to/full/command
+/usr/bin/clear
+## call alias with a backslash ##
+\c
+## use /bin/ls command and avoid ls alias ##
+command ls
+
+# .bashrc
+# if user is not root, pass all commands via sudo #
+if [ $UID -ne 0 ]; then
+    alias reboot='sudo reboot'
+    alias update='sudo apt-get upgrade'
+fi
+### Get os name via uname ###
+_myos="$(uname)"
+ 
+### add alias as per os using $_myos ###
+case $_myos in
+   Linux) alias foo='/path/to/linux/bin/foo';;
+   FreeBSD|OpenBSD) alias foo='/path/to/bsd/bin/foo' ;;
+   SunOS) alias foo='/path/to/sunos/bin/foo' ;;
+   *) ;;
+esac
+
+# alias
+## Colorize the ls output ##
+alias ls='ls --color=auto'
+## Use a long listing format ##
+alias ll='ls -la'
+## Show hidden files ##
 alias cls='clear'   #DOS风格的清空
+# ls better
+alias la="ls -aF"
+alias ld="ls -ld"
+alias ll="ls -l"
+alias lt='ls -At1 && echo "------Oldest--"'
+alias ltr='ls -Art1 && echo "------Newest--"'
+
 alias h='history | tail'
 alias hg='history | grep'
 alias hl='history | less'
@@ -105,9 +156,334 @@ alias svim='sudo vim'
 alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
 alias install='sudo apt get install'
 alias update='sudo apt-get update && sudo apt-get upgrade'
-alias ..="cd .."
-alias ...="cd ..; cd .."
+## get rid of command not found ##
+alias cd..='cd ..'
+ 
+## a quick way to get out of current directory ##
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
 alias www='python -m SimpleHTTPServer 8000'
+## Colorize the grep command output for ease of use (good for log files)##
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias sha1='openssl sha1'
+# install  colordiff package :)
+alias diff='colordiff'
+alias mount='mount |column -t'
+# handy short cuts #
+alias h='history'
+alias j='jobs -l'
+alias path='echo -e ${PATH//:/\\n}'
+alias now='date +"%T"'
+alias nowtime=now
+alias nowdate='date +"%d-%m-%Y"'
+alias vi=vim
+alias svi='sudo vi'
+alias vis='vim "+set si"'
+alias edit='vim'
+
+# add and remove new/deleted files from git index automatically
+alias gitar="git ls-files -d -m -o -z --exclude-standard | xargs -0 git update-index --add --remove"
+# git push
+alias gpd="git push origin develop"
+alias gpm="git push origin master"
+# Remove git from a project
+alias ungit="find . -name '.git' -exec rm -rf {} \;"
+
+# Stop after sending count ECHO_REQUEST packets #
+alias ping='ping -c 5'
+# Do not wait interval 1 second, go fast #
+alias fastping='ping -c 100 -s.2'
+alias ports='netstat -tulanp'
+## replace mac with your actual server mac address #
+alias wakeupnas01='/usr/bin/wakeonlan 00:11:32:11:15:FC'
+alias wakeupnas02='/usr/bin/wakeonlan 00:11:32:11:15:FD'
+alias wakeupnas03='/usr/bin/wakeonlan 00:11:32:11:15:FE'
+## shortcut  for iptables and pass it via sudo#
+alias ipt='sudo /sbin/iptables'
+ 
+# display all rules #
+alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
+alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
+alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
+alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
+alias firewall=iptlist
+# get web server headers #
+alias header='curl -I'
+ 
+# find out if remote server supports gzip / mod_deflate or not #
+alias headerc='curl -I --compress'
+
+# do not delete / or prompt if deleting more than 3 files at a time #
+alias rm='rm -I --preserve-root'
+
+# confirmation #
+alias mv='mv -i'
+alias cp='cp -i'
+alias ln='ln -i'
+ 
+# Parenting changing perms on / #
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+ # distro specific  - Debian / Ubuntu and friends #
+# install with apt-get
+alias apt-get="sudo apt-get"
+alias updatey="sudo apt-get --yes"
+ ## distrp specifc RHEL/CentOS ##
+alias update='yum update'
+alias updatey='yum -y update'
+
+# reboot / halt / poweroff
+alias reboot='sudo /sbin/reboot'
+alias poweroff='sudo /sbin/poweroff'
+alias halt='sudo /sbin/halt'
+alias shutdown='sudo /sbin/shutdown'
+
+# update on one command
+alias update='sudo apt-get update && sudo apt-get upgrade'
+
+# also pass it via sudo so whoever is admin can reload it without calling you #
+alias nginxreload='sudo /usr/local/nginx/sbin/nginx -s reload'
+alias nginxtest='sudo /usr/local/nginx/sbin/nginx -t'
+alias lightyload='sudo /etc/init.d/lighttpd reload'
+alias lightytest='sudo /usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf -t'
+alias httpdreload='sudo /usr/sbin/apachectl -k graceful'
+alias httpdtest='sudo /usr/sbin/apachectl -t && /usr/sbin/apachectl -t -D DUMP_VHOSTS'
+
+# if cron fails or if you want backup on demand just run these commands #
+# again pass it via sudo so whoever is in admin group can start the job #
+# Backup scripts #
+alias backup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type local --taget /raid1/backups'
+alias nasbackup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type nas --target nas01'
+alias s3backup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type nas --target nas01 --auth /home/scripts/admin/.authdata/amazon.keys'
+alias rsnapshothourly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+alias rsnapshotdaily='sudo  /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+alias rsnapshotweekly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+alias rsnapshotmonthly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+alias amazonbackup=s3backup
+
+## play video files in a current directory ##
+# cd ~/Download/movie-name
+# playavi or vlc
+alias playavi='mplayer *.avi'
+alias vlc='vlc *.avi'
+ 
+# play all music files from the current directory #
+alias playwave='for i in *.wav; do mplayer "$i"; done'
+alias playogg='for i in *.ogg; do mplayer "$i"; done'
+alias playmp3='for i in *.mp3; do mplayer "$i"; done'
+ 
+# play files from nas devices #
+alias nplaywave='for i in /nas/multimedia/wave/*.wav; do mplayer "$i"; done'
+alias nplayogg='for i in /nas/multimedia/ogg/*.ogg; do mplayer "$i"; done'
+alias nplaymp3='for i in /nas/multimedia/mp3/*.mp3; do mplayer "$i"; done'
+ 
+# shuffle mp3/ogg etc by default #
+alias music='mplayer --shuffle *'
+
+## All of our servers eth1 is connected to the Internets via vlan / router etc  ##
+alias dnstop='dnstop -l 5  eth1'
+alias vnstat='vnstat -i eth1'
+alias iftop='iftop -i eth1'
+alias tcpdump='tcpdump -i eth1'
+alias ethtool='ethtool eth1'
+ 
+# work on wlan0 by default #
+# Only useful for laptop as all servers are without wireless interface
+alias iwconfig='iwconfig wlan0'
+
+
+## pass options to free ##
+alias meminfo='free -m -l -t'
+ 
+## get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+ 
+## get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+ 
+## Get server cpu info ##
+alias cpuinfo='lscpu'
+ 
+#copy output of last command to clipboard
+alias cl="fc -e -|pbcopy"
+
+# top
+alias cpu='top -o cpu'
+alias mem='top -o rsize' # memory
+
+# copy the working directory path
+alias cpwd='pwd|tr -d "\n"|pbcopy'
+
+# DNS (with update thanks to @blanco)
+alias flush="sudo killall -HUP mDNSResponder"
+
+# share history between terminal sessions
+alias he="history -a" # export history
+alias hi="history -n" # import history
+
+# Get your current public IP
+alias ip="curl icanhazip.com"
+
+## older system use /proc/cpuinfo ##
+##alias cpuinfo='less /proc/cpuinfo' ##
+ 
+## get GPU ram on desktop / laptop##
+alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
+
+# Reboot my home Linksys WAG160N / WAG54 / WAG320 / WAG120N Router / Gateway from *nix.
+alias rebootlinksys="curl -u 'admin:my-super-password' 'http://192.168.1.2/setup.cgi?todo=reboot'"
+ 
+# Reboot tomato based Asus NT16 wireless bridge
+alias reboottomato="ssh admin@192.168.1.1 /sbin/reboot"
+
+## this one saved by butt so many times ##
+alias wget='wget -c'
+
+## this one saved by butt so many times ##
+alias ff4='/opt/firefox4/firefox'
+alias ff13='/opt/firefox13/firefox'
+alias chrome='/opt/google/chrome/chrome'
+alias opera='/opt/opera/opera'
+ 
+#default ff
+alias ff=ff13
+ 
+#my default browser
+alias browser=chrome
+
+## set some other defaults ##
+alias df='df -H'
+alias du='du -ch'
+ 
+# top is atop, just like vi is vim
+alias top='atop'
+ 
+## nfsrestart  - must be root  ##
+## refresh nfs mount / cache etc for Apache ##
+alias nfsrestart='sync && sleep 2 && /etc/init.d/httpd stop && umount netapp2:/exports/http && sleep 2 && mount -o rw,sync,rsize=32768,wsize=32768,intr,hard,proto=tcp,fsc natapp2:/exports /http/var/www/html &&  /etc/init.d/httpd start'
+ 
+## Memcached server status  ##
+alias mcdstats='/usr/bin/memcached-tool 10.10.27.11:11211 stats'
+alias mcdshow='/usr/bin/memcached-tool 10.10.27.11:11211 display'
+ 
+## quickly flush out memcached server ##
+alias flushmcd='echo "flush_all" | nc 10.10.27.11 11211'
+ 
+## Remove assets quickly from Akamai / Amazon cdn ##
+alias cdndel='/home/scripts/admin/cdn/purge_cdn_cache --profile akamai'
+alias amzcdndel='/home/scripts/admin/cdn/purge_cdn_cache --profile amazon'
+ 
+## supply list of urls via file or stdin
+alias cdnmdel='/home/scripts/admin/cdn/purge_cdn_cache --profile akamai --stdin'
+alias amzcdnmdel='/home/scripts/admin/cdn/purge_cdn_cache --profile amazon --stdin'
+
+# time machine log
+alias tmlog="syslog -F '\$Time \$Message' -k Sender com.apple.backupd-auto -k Time ge -30m | tail -n 1"
+
+# trim newlines
+alias tn='tr -d "\n"'
+
+# list TODO/FIX lines from the current project
+alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
+
+# create a Taskpaper todo file in the current folder
+alias tp='touch todo.taskpaper && open -a "Taskpaper" todo.taskpaper'
+
+
+# Reloads the bashrc file
+alias bashreload="source ~/.bashrc && echo Bash config reloaded"
+
+# Open nano and make backup of original file. Useful for config files and things you don't want to edit the original
+function nanobk() {
+    echo "You are making a copy of $1 before you open it. Press enter to continue."
+    read nul
+    cp $1 $1.bak
+    nano $1
+}
+
+# Clear DNS Cache
+
+# Still need testing on this one
+
+alias flushdns="sudo /etc/init.d/dns-clean restart && echo DNS cache flushed"
+
+
+# Get IPs associated with this site
+
+# Work to dynamically list all interfaces. Will add later. 
+# Currently only uses the hardcoded interface names
+
+function myip()
+{
+    extIp=$(dig +short myip.opendns.com @resolver1.opendns.com)
+
+    printf "Wireless IP: "
+    MY_IP=$(/sbin/ifconfig wlp4s0 | awk '/inet/ { print $2 } ' |
+      sed -e s/addr://)
+    echo ${MY_IP:-"Not connected"}
+
+
+    printf "Wired IP: "
+    MY_IP=$(/sbin/ifconfig enp0s25 | awk '/inet/ { print $2 } ' |
+      sed -e s/addr://)
+    echo ${MY_IP:-"Not connected"}
+
+    echo ""
+    echo "WAN IP: $extIp"
+
+}
+
+
+# Syntax: "repeat [X] [command]"
+function repeat()      
+{
+    local i max
+    max=$1; shift;
+    for ((i=1; i <= max ; i++)); do  # --> C-like syntax
+        eval "$@";
+    done
+}
+
+
+# Make some of the file manipulation programs verbose
+alias mv="mv -v"
+alias rm="rm -vi"
+alias cp="cp -v"
+
+# Prints disk usage in human readable form
+alias d="du -sh"
+
+# Clear the screen of your clutter
+alias c="clear"
+alias cl="clear;ls;pwd"
+
+# GREP Motifications
+alias grep="grep --color"
+alias grepp="grep -P --color"
+
+
+# Json tools (pipe unformatted to these to nicely format the JSON)
+alias json="python -m json.tool"
+alias jsonf="python -m json.tool"
+
+# Edit shortcuts for config files
+alias sshconfig="${EDITOR:-nano} ~/.ssh/config"
+alias bashrc="${EDITOR:-nano} +120 ~/.bashrc && source ~/.bashrc && echo Bash config edited and reloaded."
+
+# SSH helper
+alias sshclear="rm ~/.ssh/multiplex/* -f && echo SSH connection cache cleared;"
+alias sshlist="echo Currently open ssh connections && echo && l ~/.ssh/multiplex/"
+
 
 stty erase ^H        #清除退格 (这个很有必要)
 
@@ -115,6 +491,50 @@ stty erase ^H        #清除退格 (这个很有必要)
 export PATH=$PATH:/opt/perl/site/bin:/opt/perl/bin
 
 bash <(curl -s https://gist.github.com/Jacksgong/9d0519f68b7940a07075a834b3178979/raw/803256593b7b05177408ccbc0bc68e072a8e3a0a/init-shell.sh)
+
+# ~/.inputrc
+set completion-ignore-case on
+```
+
+## 语法
+
+* bash shell 内置了一个type命令会根据你输入的单词来显示此命令的类型，主要有以下五种类型：
+    - 别名
+    - 方法
+    - 内置命令
+    - 关键字
+    - 文件
+    - 参数
+        + 逐行详细地查看脚本的内容，可以使用-v 选项。
+        + -x 选项，它们在执行时显示命令。当我们决定选择分支的时候，更加使用
+* 语法
+    - 有变量的字符串里，推荐使用双引号
+* 语句
+    - exit 0：表示脚本结束退出，exit有一个整型参数，0表示正常退出，非0表示脚本执行中有错误
+* 参数
+    - $0    文件本身的名字
+    - $1  表示位置的参数，第一个参数传递给脚本
+    - ${10}   在超过两位数的参数时，使用大括号限定起来
+    - $#  参数的个数
+    - $*  表示所有的参数
+* 文件
+    -  basename 文件名
+
+
+
+```sh
+type -a|t cd
+
+test -d $HOME/bin || mkdir $HOME/bin
+
+#! /bin/bash
+echo "Hello World"
+echo "file name $(basename $0)"
+echo "You are using `basename $0`"
+echo "Hello $1"
+echo "Hello $*"
+echo "Args count: $#"
+exit 0
 ```
 
 ## 文件管理
@@ -281,11 +701,25 @@ source ~/.bashrc # 运行
 
 A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
 
-* 首先兼容bash
-* 自动cd：只需输入目录的名称即可
+* 兼容bash
+* 自动cd：只需输入目录名称
 * 命令选项补齐，比如输入 git，然后按 Tab，即可显示出 git都有哪些命令
 * 目录一次性补全：比如输入 Doc/doc按 Tab键会自动变成 Documents/document/
-* 插件和主题支持
+* 组件
+    - [plugin](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins)
+    - [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
+    - [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
+    - [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
+    - [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
+    - incr是一款自动提示插件
+    - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
+* Theme
+    - agnoster
+    - cloud
+    - wedisagree
+    - [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
+* 工具
+    - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
 
 ```sh
 # 自动安装
@@ -307,11 +741,9 @@ cd ~/.oh-my-zsh/custom/plugins
 git clone git://github.com/zsh-users/zsh-syntax-highlighting.git # add to .zshrc plugin
 
 echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.zshrc
-```
 
-> 配置： home目录的.zshrc(不用单配，插件配置有)
+## 配置：home目录的.zshrc(不用单配，插件配置有)
 
-```sh
 # install fonts-powerline
 `sudo apt-get install fonts-powerline`
 
@@ -373,22 +805,6 @@ upgrade_oh_my_zsh
 uninstall_oh_my_zsh
 ```
 
-* 组件
-    - [plugin](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins)
-    - [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
-    - [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
-    - [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
-    - [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
-    - incr是一款自动提示插件
-    - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
-* Theme
-    - agnoster
-    - cloud
-    - wedisagree
-    - [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
-* 工具
-    - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
-
 ### [fish-shell/fish-shell](https://github.com/fish-shell/fish-shell)
 
 The user-friendly command line shell. http://fishshell.com
@@ -397,6 +813,7 @@ The user-friendly command line shell. http://fishshell.com
 * 有效路径为下划线
 * 光标会给提示:→(选中) 只采纳一部分，可以按下(Alt + →)
 * 补全存在的历史记录或猜测可能性(tab选择)
+* [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager.
 
 ```sh
 # 安装
@@ -410,11 +827,8 @@ curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher  // �
 fisher omf/theme-default
 fish # 启动
 help # 手册
-```
 
-> 配置文件：~/.config/fish/config.fish或者fish_config
-
-```sh
+## 配置文件：~/.config/fish/config.fish或者fish_config
 if grep fish /etc/shells
     echo Found fish
 else if grep bash /etc/shells
@@ -454,8 +868,6 @@ function fish_prompt
   set_color normal
 end
 ```
-
-* [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager.
 
 ### xmonad
 
@@ -801,8 +1213,7 @@ ln -s /usr/local/bin/gtac /usr/local/bin/tac
 
 ## 免密码登录
 
-~/.ssh
-
+* `~/.ssh`
 * authorized_keys:存放远程免密登录的公钥,主要通过这个文件记录多台机器的公钥
 * id_rsa : 生成的私钥文件
 * id_rsa.pub ： 生成的公钥文件
@@ -1552,7 +1963,7 @@ ccache gcc foo.c
 * sz/rz：交互式文件传输，在多重跳板机下传输文件非常好用，不用一级一级传输。
 * ccache：高速C/C++编译缓存工具，反复编译内核非常有用。使用起来也非常方便
 * tmux：终端复用工具，替代screen、nohup
-* neovim: 替代vim。
+* neovim: 替代vim
 * script/scriptreplay: 终端会话录制。
 * 配置
     - [direnv/direnv](https://github.com/direnv/direnv):Unclutter your .profile http://direnv.net
