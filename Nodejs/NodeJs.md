@@ -41,12 +41,11 @@ Node.js JavaScript runtime ✨🐢🚀✨ <https://nodejs.org>
 
 ```sh
 # ubuntu
-sudo git clone https://github.com/nodejs/node.git
-sudo chmod -R 755 node
-cd node
-sudo ./configure
-sudo make
-sudo make install
+wget https://nodejs.org/dist/v8.11.1/node-v8.11.1.tar.gz
+tar zxvf node-v8.11.1.tar.gz
+cd node-v8.11.1
+./configure
+make && make install
 
 # centos
 wget https://nodejs.org/dist/v4.2.3/node-v4.2.3-linux-x64.tar.gz
@@ -131,13 +130,12 @@ nrm test
 nrm use taobao
 
 npm config set registry "http://registry.npmjs.org/"
-npm config set registry http://registry.cnpmjs.org
+npm config set registry https://registry.npm.taobao.org
 
 npm config set proxy http://server:port
 npm config set https-proxy http://server:port
 ```
 
-## 概念
 
 ### 模块化
 

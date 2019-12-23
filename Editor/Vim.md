@@ -385,9 +385,10 @@ ye Copy to end of word |
 ### 文件
 
 * vi filename :打开或新建文件，并将光标置于第一行首
-* :open file 在vim窗口中打开一个新文件
+* :open|o file 在vim窗口中打开一个新文件
 * vim file1 file2 file3 ... 同时打开多个文件
 * :split file 在新窗口中打开文件
+* :close – close current window
 * 切换同时打开的文件
     - :bn 切换到下一个文件
     - :bp 切换到上一个文件
@@ -416,6 +417,9 @@ ye Copy to end of word |
 * l|space|w：光标右移一个字符
 * k|Ctrl+p：光标上移一行
 * j|Ctrl+n|Enter：光标下移一行
+H – move to top of screen
+M – move to middle of screen
+L – move to bottom of screen
 * 30j:向下移动30行
 * w|W：向后移动一个单词（光标停在单词首部），如果已到行尾，则转至下一行行首。此命令快，可以代替l命令
 * e|E：光标右移一个单词至词尾
@@ -799,3 +803,4 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * <https://github.com/junegunn/vim-plug>: junegunn 是韩国的一个大牛，擅长写 Vim 插件，看起来总是令人赏心悦目
 * [SpaceVim](https://github.com/SpaceVim/SpaceVim):一个开箱即用的 Vim 配置，对新手很友好，和 Spacemacs 一样
 * [reddit 的 Vim 频道](https://www.reddit.com/r/vim/):有很多最前沿的 Vim 技巧
+https://www.linuxtrainingacademy.com/vim-cheat-sheet/
