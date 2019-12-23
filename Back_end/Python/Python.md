@@ -17,9 +17,8 @@ The Python programming language,Guido van Rossum在1989年圣诞节期间，为�
 * 目标是执行速度。PyPy采用JIT技术，对Python代码进行动态编译（注意不是解释），所以可以显著提高Python代码的执行速度。绝大部分Python代码都可以在PyPy下运行，但是PyPy和CPython有一些是不同的，这就导致相同的Python代码在两种解释器下执行可能会有不同的结果。
 * Jython是运行在Java平台上的Python解释器，可以直接把Python代码编译成Java字节码执行。
 
-## 环境管理
 
-### MAC
+### install
 
 * Mac下的python2.7 默认是安装在／System目录下的。但是～～～Mac有个Rootless机制，默认不允许直接在／System下作修改。所以要先关闭Rootless机制。关闭有风险
     - 重启电脑, 重启过程中按住command+R, 进入恢复模式
@@ -64,6 +63,18 @@ sudo apt-get install python3-pip python3-dev libpq-dev postgresql postgresql-con
 
 # centos
 yum install python36
+
+
+# compile
+ls -l /usr/bin | grep python
+wget https://www.python.org/ftp/python/3.7.6/Python-3.7.6.tgz
+tar -zxvf Python-3.7.6.tgz
+./configure --prefix=/usr/local/python3.7.6  --with-ssl --enable-optimizations
+make 
+sudo make install
+rm /usr/bin/python 
+
+ln -s /usr/local/python3.7.6/bin/python3.7 /usr/bin/python
 ```
 
 [Using Python on a Macintosh](https://docs.python.org/3/using/mac.html)
