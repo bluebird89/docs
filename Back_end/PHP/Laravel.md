@@ -223,6 +223,10 @@ if (App::environment('local')) {
 if (App::environment(['local', 'staging'])) {
     // 环境为 local 或 staging
 }
+
+# 清除配置缓存
+php artisan cache:clear
+php artisan config:clear
 ```
 
 ## Artisan

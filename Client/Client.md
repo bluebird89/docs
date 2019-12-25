@@ -30,13 +30,6 @@ Redis是一个Key-Value结构的内存数据库，用它维护User Id和Token的
 code
 ```
 
-## Vue.js vs Angular vs React
-
-* Vue.js只会在 Web前端中占据主导地位
-* React则可以在所有的前端领域中盛行。
-    - GraphQL在未来将有很大可能替代 REST
-
-
 ## 工具
 
 * [fastlane/fastlane](https://github.com/fastlane/fastlane):🚀 The easiest way to automate building and releasing your iOS and Android apps https://fastlane.tools

@@ -2,17 +2,12 @@
 
 Build cross-platform desktop apps with JavaScript, HTML, and CSS https://electronjs.org， 用 web 技术构建跨平台的桌面应用。它有如下特性：
 
-- 自动更新
-- 崩溃报告
-- Windows 安装
-- 调试和分析
-- 原生菜单和通知
-
-Electron 的架构包括 Node.js runtime、V8和嵌套的微型 Chromium 浏览器。Electron 应用在多个进程中运行：主进程运行的是应用的 package.json 声明的 main 脚本。为了显示一个用户界面，该脚本可以打开 窗口。这些脚本的每一个都运行在独立的进程中（一个所谓的渲染进程），就像 web 浏览器的 tab 标签。
-
-## 框架
-
-* [mherrmann/fbs](https://github.com/mherrmann/fbs):Electron alternative based on Python and Qt https://build-system.fman.io
+* Electron 的架构包括 Node.js runtime、V8和嵌套的微型 Chromium 浏览器。Electron 应用在多个进程中运行：主进程运行的是应用的 package.json 声明的 main 脚本。为了显示一个用户界面，该脚本可以打开 窗口。这些脚本的每一个都运行在独立的进程中（一个所谓的渲染进程），就像 web 浏览器的 tab 标签。
+* 自动更新
+* 崩溃报告
+* Windows 安装
+* 调试和分析
+* 原生菜单和通知
 
 ## 教程
 
@@ -27,6 +22,8 @@ Electron 的架构包括 Node.js runtime、V8和嵌套的微型 Chromium 浏览�
 
 ## 工具
 
+* 框架
+    - [mherrmann/fbs](https://github.com/mherrmann/fbs):Electron alternative based on Python and Qt https://build-system.fman.io
 * [chentsulin/electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate):Live editing development on desktop app
 * [electron/electron-api-demos](https://github.com/electron/electron-api-demos):Explore the Electron APIs http://electron.atom.io/#get-started
 * [electron/devtron](https://github.com/electron/devtron):An Electron DevTools Extension http://electron.atom.io/devtron
@@ -39,6 +36,6 @@ Electron 的架构包括 Node.js runtime、V8和嵌套的微型 Chromium 浏览�
 * [electron/spectron](https://github.com/electron/spectron):🔎 Test Electron apps using ChromeDriver http://electronjs.org/spectron
 * [electron-userland/electron-forge](https://github.com/electron-userland/electron-forge):A complete tool for creating, publishing, and installing modern Electron applications https://electronforge.io
 
-## 资源
+## 参考
 
 * [sindresorhus/awesome-electron](https://github.com/sindresorhus/awesome-electron):Useful resources for creating apps with Electron
