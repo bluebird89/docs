@@ -27,6 +27,7 @@ sudo dnf install git # Fedora
 brew install git
 brew install git-flow
 brew install git && brew install bash-completion
+
 # Add bash-completion to your ~/.bash_profile or ~/.zshrc
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
@@ -38,10 +39,10 @@ fi
 * 全局配置
   - `/etc/gitconfig`
   - ubuntu:`~/.gitconfig`
-* 系统配置： `git config --system`
+* 系统配置：`git config --system`
 * 项目配置：`git local --system` project/.git/config   `git config`
 * 优先级：local > global(用户) > system
-* alias说明
+* alias
   + prune = fetch --prune - 当在其他人将分支推送到远程仓库时，我也会得到了大量的本地分支。Prune可以删除远端已经删除的任何本地分支。
   + undo = reset --soft HEAD ^ - 如果我在做出提交时犯了一个错误，这个命令会把代码恢复到提交之前的样子。通常我只是在这种情况下修改现有的提交，因为它保留了提交信息。
   + stash-all = stash save --include-untracked - 当你正在开发，有人临时要求你切换分支时，stash 是非常有用的。这个命令确保当你 stash 时，可以记录没有被 git add 的新文件。
@@ -71,20 +72,18 @@ git config --global core.excludesfile ~/.gitignore
 git config --global mergetool.sublime.cmd "subl -w \$MERGED"
 git config --global mergetool.sublime.trustExitCode false
 git config --global merge.tool sublime | vimdiff
+git config --global diff.submodule log
+git config status.submodulesummary 1　# show you a short summary of changes to your submodules
+git config --global rebase.autoStash true
 
 git config --unset --local user.name
 git mergetool -y
 
 echo .DS_Store >> ~/.gitignore
 
-git config --global alias.ls 'log --name-status --oneline --graph'
-git config --global rebase.autoStash true
-git config --global alias.st 'status --porcelain'
-
-git config --global diff.submodule log
-git config status.submodulesummary 1　# show you a short summary of changes to your submodules
-
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+git config --global alias.ls 'log --name-status --oneline --graph'
+git config --global alias.st 'status --porcelain'
 
 # 配置文件
 [user]
@@ -179,7 +178,7 @@ cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 * HTTP(S)
 
 ```sh
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/github
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/github # github添加key诸侯，提交默认会检查id_rsa
 ssh-add -K ~/.ssh/github # 如果不是默认密钥 id_rsa ，则需要以下命令注册密钥文件，-K 参数将密钥存入 Mac Keychain
 cat ~/.ssh/github.pub # 添加公钥到服务器
 
@@ -264,7 +263,7 @@ gpg --sign demo.txt #签名
 
 ## Git VS SVN
 
-* 版本控制系统（VCS: Version Control System），正会为提供这种记录和追溯变更的能力,但是图片，视频这些二进制文件，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是知道图片从1kb变成2kb，但是到底改的内容没法记录
+* 版本控制系统（VCS: Version Control System），为提供这种记录和追溯变更的能力。但是图片，视频这些二进制文件，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是知道图片从1kb变成2kb，但是到底改的内容没法记录
 * SVN是集中式版本控制系统，版本库是集中放在中央服务器
   - 每次次记录哪些文件作了更新、更新哪些行的内容
   - 要从中央服务器哪里得到最新的版本
@@ -279,6 +278,7 @@ gpg --sign demo.txt #签名
 ## 原理
 
 * 基于时间点的快照：将提交点指向提交时的项目快照
+* HEAD:的是当前分支最末梢最新的一个提交
 * 对代码的任何修改，最终都会反映到 commit 上面去。创建和保存项目的快照及与之后的快照进行对比
 * 维护的就是一个commitID树，分别保存着不同状态下的代码
 * 保存对象
@@ -301,7 +301,7 @@ gpg --sign demo.txt #签名
 * 工作区（Workspace）:开发改动的地方，任何对象都是在工作区中诞生和被修改；文件状态：modified:working directory
 * 暂存区（Index/Stage）:.git目录下的index文件, 暂存区会索引git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；文件状态：staged:Stage(Index)
 * 版本库|本地仓库（Repository）
-  - .git文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History,这部分是仓库的控制中心
+  - `.git`文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History,这部分是仓库的控制中心
 * objects 目录下有 3 种类型的数据： `git cat-file -p`
   - Blob 文件
   - Tree 文件夹
@@ -309,6 +309,7 @@ gpg --sign demo.txt #签名
 
 ![Git原理-1](../_static/bg2015120901.png)
 ![Git原理-2](../_static/git_2.png)
+
 commit、tree和blob三个对象之间的关系
 ![object structure](../_static/object_struct.png)
 ![tree](../_static/tree.jpg)
@@ -357,46 +358,43 @@ git cat-file -p 3b18e512dba79e4c8300dd08aeb37f8e728b8dad #  查看原文件内�
         └── tags
 ```
 
-#### 工作区 working tree
+### 工作区 working tree
 
 * 仓库元数据
-  - config* 配置文件
-  - description 描述，仅供 Git Web 程序使用
-  - HEAD  当前被检出的分支
-  - index 暂存区信息
-  - hooks/  客户端或服务端的钩子脚本（hook scripts）
-  - info/ 全局性排除（global exclude）文件，不希望被记录在 .gitignore 文件中的忽略模式（ignored patterns）
-  - objects/  所有数据内容
-  - refs/ 数据（分支）的提交对象的指针
+  - `config` 配置文件
+  - `description` 仅供 Git Web 程序使用的描述
+  - `HEAD`  当前被检出分支
+  - `index` 暂存区信息
+  - `hooks/`  客户端或服务端的钩子脚本（hook scripts）
+  - `info/` 全局性排除（global exclude）文件，不希望被记录在 .gitignore 文件中的忽略模式（ignored patterns）
+  - `objects/`  所有数据内容
+  - `refs/` 数据（分支）的提交对象的指针
 * 数据结构
   - 绿色的5位字符表示提交的ID，分别指向父节点
   - 分支用橘色显示，分别指向特定的提交。当前分支由附在其上的HEAD标识
-* HEAD关键字指的是当前分支最末梢最新的一个提交
-* git checkout -- files 把文件从暂存区域复制到工作目录，用来丢弃本地修改
-* git checkout HEAD -- files 回滚到复制最后一次提交。跳过暂存区域直接从仓库取出文件或者直接提交代码
-* checkout命令用于从历史提交（或者暂存区域）中拷贝文件到工作目录，也可用于切换分支
-  - git checkout HEAD~ foo.c会将提交节点HEAD~(即当前提交节点的父节点)中的foo.c复制到工作目录并且加到暂存区域中。
-    - 如果命令中没有指定提交节点，则会从暂存区域中拷贝内容
-    - 当不指定文件名，而是给出一个（本地）分支时，那么HEAD标识会移动到那个分支（也就是说，我们“切换”到那个分支了），然后暂存区域和工作目录中的内容会和HEAD对应的提交节点一致。新提交节点（下图中的a47c3）中的所有文件都会被复制（到暂存区域和工作目录中）；只存在于老的提交节点（ed489）中的文件会被删除；不属于上述两者的文件会被忽略，不受影响。
-    - 如果既没有指定文件名，也没有指定分支名，而是一个标签、远程分支、SHA-1值或者是像master~3类似的东西，就得到一个匿名分支，称作detached HEAD（被分离的HEAD标识）。这样可以很方便地在历史版本之间互相切换。比如说你想要编译1.6.6.1版本的git，你可以运行git checkout v1.6.6.1（这是一个标签，而非分支名），编译，安装，然后切换回另一个分支，比如说git checkout master。然而，当提交操作涉及到“分离的HEAD”时，其行为会略有不同
-        + 当HEAD处于分离状态（不依附于任一分支）时，提交操作可以正常进行，但是不会更新任何已命名的分支.一旦此后你切换到别的分支，比如说master，那么这个提交节点（可能）再也不会被引用到，然后就会被丢弃掉了。注意这个命令之后就不会有东西引用2eecb。如果你想保存这个状态，可以用命令git checkout -b name来创建一个新的分支。
-* 更改上一次提交：`git commit --amend ""`,会使用与当前提交相同的父节点进行一次新提交，旧的提交会被取消。
-* reset命令把当前分支指向另一个位置，并且有选择的变动工作目录和索引
-  - 从历史仓库中复制文件到索引，而不动工作目录。
-  - 用参数--mixed或者不使用参数： 即更改引用的指向及重置暂存区，但是不改变工作区
-  - 用--hard选项
-    + 替换引用的指向。引用指向新的提交ID。
-    + 替换暂存区。替换后，暂存区的内容和引用指向的目录树一致。
-    + 替换工作区。替换后，工作区的内容变得和暂存区一致，也和HEAD所指向的目录树内容相同。
-  - 如果用--soft选项，只会执行上面第一条，只更改引用的指向，不改变暂存区和工作区
-  - 没有给出提交点的版本号，那么默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交，如果用--hard选项，工作目录也同样。
+* 撤销工作区的文件修改:`git checkout -- [filename]` 用于从历史提交（或者暂存区域）中拷贝文件到工作目录,工作区的文件变化一旦被撤销，就无法找回了;切换分支
+  - `git checkout HEAD -- files`:回滚到最后一次提交。跳过暂存区域直接从仓库取出文件
+  - `git checkout HEAD~ foo.c`:会将提交节点HEAD~中的foo.c复制到工作目录并且加到暂存区域中
+  - 切换分支:当不指定文件名，给出一个（本地）分支时，那么HEAD标识会移动到那个分支，暂存区域和工作目录中的内容会和HEAD对应的提交节点一致
+    + 新提交节点（下图中的a47c3）中的所有文件都会被复制（到暂存区域和工作目录中）
+    + 只存在于老提交节点（ed489）中的文件会被删除
+    + 不属于上述两者的文件会被忽略，不受影响保留
+  - detached HEAD（被分离的HEAD标识）:既没有指定文件名，也没有指定分支名，而是一个标签、远程分支、SHA-1值或者是像master~3类似的东西，就得到一个匿名分支
+    + 方便地在历史版本之间互相切换。`git checkout v1.6.6.1`
+    + 当HEAD处于分离状态（不依附于任一分支）时，提交操作可以正常进行，但是不会更新任何已命名的分支.一旦此后切换到别的分支，比如说master，那么这个提交节点（可能）再也不会被引用到，然后就会被丢弃掉
+    + 如果想保存这个状态，可以用命令git checkout -b name来创建一个新的分支
+* 更改上次提交：`git commit --amend ""`,会使用与当前提交相同的父节点进行一次新提交，旧的提交会被取消
+* 撤销提交:`git revert HEAD`:在当前提交后面，新增一次提交，抵消掉上一次提交导致的所有变化。它不会改变过去的历史，所以是首选方式，没有任何丢失代码的风险
+  - 想抵消多个提交，必须在命令行依次指定这些提交
+  - `--no-edit`：执行时不打开默认编辑器，直接使用 Git 自动生成的提交信息
+  - `--no-commit`：只抵消暂存区和工作区的文件变化，不产生新的提交
+* 丢弃提交:`git reset [last good SHA]` 让最新提交的指针回到以前某个时点，该时点之后的提交都从历史中消失
+  - `--mixed`（默认）：更改引用的指向，不改变工作区的文件（但会改变暂存区）.想找回那些丢弃掉的提交，可以使用`git reflog`
+  - `--hard`:更改引用的指向;替换暂存区内容和引用指向的目录树一致;替换工作区内容和暂存区一致，也和HEAD所指向的目录树内容相同
+  - `--soft`:更改引用的指向，不改变暂存区和工作区
+  - 没有给出提交点的版本号，默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交
   - 如果给了文件名(或者 -p选项), 那么工作效果和带文件名的checkout差不多，除了索引被更新
-
-|   名称   | HEAD位置 | 索引  | 工作树 |
-|----------|----------|----------|----------|
-| soft | 修改 |不修改 | 不修改 |
-| mixed | 修改 |修改 | 不修改 |
-| hard | 修改 |修改 | 修改 |
+* 从暂存区撤销文件: `git rm --cached [filename]`
 
 ![数据结构](../_static/conventions.svg "Optional title")
 ![commit](../_static/commit-master.svg "git commit")
@@ -473,7 +471,7 @@ git reset –hard HEAD^ | HEAD^^ | HEAD~100 # 回退版本
 git reset –hard dc5f1d1 # 只要记得版本号就可以穿梭回到现代
 git reset . # 已提交至暂存区的文件 此类文件的状态为 Changes to be
 
-git revert [commit]|HEAD # 回退到某个提交，但是不删除commit,会产生新提交
+git revert [commit]|HEAD # 回退到某个提交，不删除commit,会产生新提交
 
 # 移除没有track文件
 git clean -f     # remove untracked files
@@ -493,10 +491,9 @@ git checkout  branchname/ remotes/origin/branchname  / 158e4ef8409a7f115250309e1
 
 git update-index --assume-unchanged <file>Resume tracking files with:
 git update-index --no-assume-unchanged <file>
-
 ```
 
-#### 暂存区
+### 暂存区
 
 * commit:生成上次提交的状态与当前状态的差异记录（也被称为revision）,系统会根据修改的内容计算出没有重复的40位英文及数字来给提交命名
   - p, pick = use commit
@@ -526,7 +523,7 @@ git update-index --no-assume-unchanged <file>
   - subject: commit 的概述, 建议符合  50/72 formatting
   - body: commit 具体修改内容, 可以分为多行, 建议符合 50/72 formatting
   - footer: 一些备注, 通常是 BREAKING CHANGE 或修复的 bug 的链接
-  - [Conventional Commits](https://conventionalcommits.org/):
+  - [Conventional Commits](https://conventionalcommits.org/)
 
 ```sh
 # 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志.进行一次包含最后一次提交加上工作目录中文件快照的提交
@@ -660,7 +657,7 @@ squash 9eb3188 update
 squash 7d33868 update
 ```
 
-#### 本地分支
+### 本地分支
 
 * merge:保持修改内容的历史记录，但是历史记录会很复杂
   - fast-forward:bugfix分支的历史记录包含master分支所有的历史记录，所以通过把master分支的位置移动到bugfix的最新分支上，Git 就会合并
@@ -707,7 +704,7 @@ git rm –cached FILE # 这个命令只删除远程文件
 ![merge](../_static/merge.svg "merge")
 ![rebase](../_static/rebase.svg "rebase")
 
-#### 远程分支
+### 远程分支
 
 * pull:远程数据库的内容就会自动合并，=fetch+merge
   - -rebase # 将当前分支的版本追加到从远程 pull 回来的节点之后
@@ -716,8 +713,8 @@ git rm –cached FILE # 这个命令只删除远程文件
 * fetch:取得远程数据库的最新历史记录到本地
 * merge 处理冲突更直接
 * rebase 合并分支，重写历史
-  * 合并分支，但是不合并提交记录（commit）
-  * rebase合并如果有冲突则一个一个文件的去合并解决冲突,能够保证清晰的 commit 记录。
+  - 合并分支，但是不合并提交记录（commit）
+  - rebase合并如果有冲突则一个一个文件的去合并解决冲突,能够保证清晰的 commit 记录。
   - 变基会通过在原来的分支中为每次提交创建全新提交来重写项目历史。变基的主要好处在于你会得到一个更加整洁的项目历史
   - rebase 先找出共同的祖先节点
   - 从祖先节点把功能分支的提交记录摘下来，然后 rebase 到 master 分支
@@ -837,7 +834,7 @@ git branch -d new-branch
 git push origin --delete new-branch
 ```
 
-#### Tag
+### Tag
 
 * 版本号使用x.x.x进行定义,一个常见的版本号类似于：0.11.10
   - 第一个x代表大版本只有在项目有重大变更时更新
@@ -871,7 +868,7 @@ git push REMOTE --delete TAG1 TAG2 TAG3
 git tag -fa tagname
 ```
 
-#### archive
+### archive
 
 ```sh
 git archive
@@ -879,7 +876,7 @@ git archive
 tar cJf .tar.xz / --exclude-vcs
 ```
 
-## cherry-pick
+### cherry-pick
 
 * picking a commit from a branch and applying it to another. 选择某一个分支中的一个或几个commit(s)来进行操作,当执行完 cherry-pick 以后，将会生成一个新的提交,这个新的提交的哈希值和原来的不同，但标识名 一样
 * 从develop分支新开分支fromdevelop-01，然后commit两次，这时候develop分支只需要第二次提交的信息，步骤：
@@ -897,9 +894,9 @@ git cherry-pick hash_commit_A hash_commit_B
 
 ## .gitignore
 
-* 过滤目录 : /bin/ 就是将bin目录过滤, 该文件下的所有目录和文件都不被提交;
-* 过滤某个类型文件 : *.zip *.class 就是过滤zip 和 class 后缀的文件, 这些文件不被提交;
-* 过滤指定文件 : /gen/R.java, 过滤该文件, 该文件不被提交;
+* 过滤目录: `/bin/`
+* 过滤某个类型文件 :`*.zip *.class`
+* 过滤指定文件 : `/gen/R.java`
 * 可以递归忽略.gitignore文件内容
 * 参考
   - [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
@@ -1241,9 +1238,24 @@ git merge FETCH_HEAD
 * github pages:必须使用master作为分支
   - hexo：添加文章后现hexo g（生成） hexo d（部署）
   - jekyll：直接push到master就好
-* [import]( https://github.com/new/import)
+* [import](https://github.com/new/import)
+* ation:持续集成由很多操作组成，比如抓取代码、运行测试、登录远程服务器，发布到第三方服务等等,把每个操作写成独立的脚本文件，存放到代码仓库，使得其他开发者可以引用
+  - actions
+    + [awesome-actions](https://github.com/sdras/awesome-actions):A curated list of awesome actions to use on GitHub
+    + [github actions marketpalce](https://github.com/marketplace?type=actions)
+  - 原理：每个 action 就是一个独立脚本，因此可以做成代码仓库，使用userName/repoName的语法引用 action。用户可以引用某个具体版本的 action
+    + 存放在代码仓库的.github/workflows目录
+    + 文件采用 YAML 格式，后缀名统一为.yml，GitHub 只要发现.github/workflows目录里面有.yml文件，就会自动运行该文件
+    + 仓库顶部的菜单会出现Actions一项
+    + 密钥储存到当前仓库的Settings/Secrets里面
+  - 术语
+    + workflow （工作流程）：持续集成一次运行的过程，就是一个 workflow。
+    + job （任务）：一个 workflow 由一个或多个 jobs 构成，含义是一次持续集成的运行，可以完成多个任务。
+    + step（步骤）：每个 job 由多个 step 构成，一步步完成。
+    + action （动作）：每个 step 可以依次执行一个或多个命令（action）
+  - starter
+    + [actions/starter-workflows](https://github.com/actions/starter-workflows):Accelerating new GitHub Actions workflows https://github.com/features/actions
 * 参考
-  - [awesome-actions](https://github.com/sdras/awesome-actions):A curated list of awesome actions to use on GitHub
   - [gitalk/gitalk](https://github.com/gitalk/gitalk):Gitalk is a modern comment component based on Github Issue and Preact. https://gitalk.github.io
   - [desktop/desktop](https://github.com/desktop/desktop):Simple collaboration from your desktop https://desktop.github.com
   - [OctoLinker/OctoLinker](https://github.com/OctoLinker/OctoLinker):OctoLinker – Available on Chrome, Firefox and Opera https://octolinker.github.iow
@@ -1252,6 +1264,7 @@ git merge FETCH_HEAD
   - [pomber/git-history](https://github.com/pomber/git-history):Quickly browse the history of a file from any git repository https://githistory.xyz/
   - [Tutorial](https://lab.github.com/courses)
   - [GitHub Helps](https://help.github.com/)
+  - [GitHub规范](https://guides.github.com/)
   - [github/hub](https://github.com/github/hub):A command-line tool that makes git easier to use with GitHub. https://hub.github.com/
 * 技巧
   - 源码浏览页面，按 t 可以快速进入模糊文件名搜索模式
@@ -1264,10 +1277,49 @@ git merge FETCH_HEAD
   - 在比较页面、合并请求页面或者评论页面的URL后增加 .diff 或者 .patch，可以得到 diff 或者 patch 的文本格式。
   - 可以直接在收到的 GitHub 通知邮件进行评论，不必在网站页面中评论
   - 在文件展示页面，点击某行或者通过按 SHIFT 选择多行，URL 会有相应的改变。如果你要给你的队友分享一段代码是非常方便的：
-  - 在合并请求、问题或者任何评论中中提到用户会使用户关注全部的后续通知
-  - 在合并请求、问题、或者任何评论中，sha和问题码(例如：#1)会被自动链接。并且，你也可以链接其它仓库的 sha 或者问题码，格式：user/repo@sha1 或者 user/repo#1。
+  - 在合并请求、问题或者任何评论中中提到用户会使用户关注全部的后续通知,sha和问题码(例如：#1)会被自动链接。并且也可以链接其它仓库的 sha 或者问题码，格式：user/repo@sha1 或者 user/repo#1。
 
 ![Git 使用规范流程](../_static/bg2015080501.png)
+
+```yaml
+name: GitHub Actions Demo
+
+on: [push, pull_request]
+on:
+  push:
+    branches:    
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-18.04
+    name: My first job
+    steps:
+    - name: Print a greeting
+      env:
+        MY_VAR: Hi there! My name is
+        FIRST_NAME: Mona
+        MIDDLE_NAME: The
+        LAST_NAME: Octocat
+      run: |
+        echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: build
+        BUILD_SCRIPT: npm install && npm run build
+  my_second_job:
+    name: My second job
+    needs: build-and-deploy
+  job3:
+    needs: [build-and-deploy, job2]
+
+```
 
 ### submodule
 
@@ -1309,9 +1361,7 @@ git checkout --  .
 
 ### subtree
 
-git subtree 对于部分需要双向更新的可复用逻辑来说，特别适合管理.比如一些需要复用的业务组件代码。在我之前的实践中，我也曾用subtree来管理构建系统逻辑。
-
-Merge subtrees together and split repository into subtrees
+git subtree 对于部分需要双向更新的可复用逻辑来说，特别适合管理.比如一些需要复用的业务组件代码. Merge subtrees together and split repository into subtrees
 
 [文档](https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt)
 
@@ -1584,7 +1634,6 @@ These features allow to pause a branch development and switch to another one (_"
 
 ## 工具
 
-* [github/hub](https://github.com/github/hub)hub helps you win at git. http://hub.github.com/
 * [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
 * [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
 * [jonas/tig](https://github.com/jonas/tig):text-mode interface for git
@@ -1612,7 +1661,6 @@ These features allow to pause a branch development and switch to another one (_"
 * [marionebl/commitlint](https://github.com/marionebl/commitlint):📓 Lint commit messages https://marionebl.github.io/commitlint/
 * [pomber/git-history](https://github.com/pomber/git-history)：Quickly browse the history of a file from any git repository https://githistory.xyz/
 * [Bash提示](https://github.com/magicmonty/bash-git-prompt)
-* [arzzen/git-quick-stats](https://github.com/arzzen/git-quick-stats):▁▅▆▃▅ Git quick statistics is a simple and efficient way to access various statistics in git repository. http://git-quick-stats.sh
 * [okonet/lint-staged](https://github.com/okonet/lint-staged):🚫💩 — Run linters on git staged files
 * 客户端
   - msysgit
@@ -1631,7 +1679,6 @@ These features allow to pause a branch development and switch to another one (_"
 * [git-tutorial](https://www.learnenough.com/git-tutorial)
 * [Progit2](https://github.com/progit/progit2):Pro Git 2nd Edition
 * [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
-* [GitHub规范](https://guides.github.com/)
 * [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
 * [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
 * [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
@@ -1644,6 +1691,6 @@ These features allow to pause a branch development and switch to another one (_"
 * [k88hudson/git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
 * [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate!
 * [Magit](https://magit.vc/) Git 在 Emacs 上的打开方式
-* [](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
+* [learn-git-with-bitbucket-cloud](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
 * [Vim-fugitive](https://github.com/tpope/vim-fugitive) : Git 在 Vim 上的打开方式
 * [Git 原理](https://git-scm.com/book/zh/v1/Git-内部原理-Git-对象)
