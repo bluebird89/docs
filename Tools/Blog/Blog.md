@@ -46,10 +46,11 @@ alias hgd="hexo g&&hexo d"
 
 站点目录下的_config.yml为站点配置文件，主题目录下的_config.yml为主题配置文件
 
-
-# [gohugoio/hugo](https://github.com/gohugoio/hugo)
+## [gohugoio/hugo](https://github.com/gohugoio/hugo)
 
 The world’s fastest framework for building websites. https://gohugo.io
+
+*  deploy 通过Aerobatic[<https://gohugo.io/hosting-and-deployment/hosting-on-bitbucket/>]
 
 ## install && use
 
@@ -81,18 +82,17 @@ hugo -t themename // 测试主题效果
 hugo server -t themename
 ```
 
-## deploy 通过Aerobatic[<https://gohugo.io/hosting-and-deployment/hosting-on-bitbucket/>]
-
 ## 参考
 
 * [barretlee/hexo-admin](https://github.com/barretlee/hexo-admin)
+* [gcushen/hugo-academic](https://github.com/gcushen/hugo-academic):📝 The website builder for Hugo. Build and deploy a beautiful website in minutes! https://sourcethemes.com/academic/
 * https://jimmysong.io/hugo-handbook
 
-# [jekyll/jekyll](https://github.com/jekyll/jekyll)
+## [jekyll/jekyll](https://github.com/jekyll/jekyll)
 
 🌐 Jekyll is a blog-aware static site generator in Ruby https://jekyllrb.com static website generator，搭建静态博客，通过markdown文件自动生成html文件。Github Pages即靠Jekyll实现的。[官网](https://jekyllrb.com)
 
-# install:
+## install:
 
 ```
 gem install jekyll bundler
@@ -101,7 +101,7 @@ bundle exec
 jekyll serve
 ```
 
-# 文件说明
+## 文件说明
 
 - _config.yml 是配置文件，最为重要，包含了所有配置信息
 - _includes 文件夹包含了将被反复利用的文件，比如footer，header
