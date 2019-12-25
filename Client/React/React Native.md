@@ -2,48 +2,35 @@
 
 A framework for building native apps with React. http://facebook.github.io/react-native/
 
-React 是一套可以用简洁的语法高效绘制 DOM 的框架
-
-通过 React 来构建 iOS 原生应用和 Android 原生应用。Virtual DOM 保持不变，你仍然可以使用 JSX 来创建它，但实际的 UI 是用原生的组件构建，
-
-RN是在Facebook所提出的核心概念Learn once, write anywhere所诞生的产物，着力于提高多平台开发的开发效率。我们可以同时为android和ios两个平台开发App，只需要根据两个平台不一样的地方去做一些调整即可。RN主要负责UI部分，而原生主要负责交互和数据处理。RN属于hybrid开发，并且与原生无缝连接，相比Web App和Native开发，RN取长补短，集合了两者的优势。RN开发的APP可以跳过App Store审核，远程更新代码，提高迭代频率和效率，既有Native的体验，又保留React的开发效率。
-RN的原理是将React代码转化为原生API，iOS一套，Android一套。RN在一开始生成OC模块表，然后把这个模块表传入JS中，JS参照模块表，就能间接调用OC的代码。
-
-围绕着React所建立起来的生态系统以及组件化开发思想能有效地分解大规模应用的复杂度、提高资源复用率。简单的说，React拥有以下你想要的特性：
-
-* 同构渲染：服务器端和客户端共用一套代码，一份模板，两端使用。
-* 完全组件化：自动分析加载页面的静态资源依赖。
-* 生态圈：畅享所有 React 组件。
-* 比webview 更好的体验，更好的性能，更好的手机交互
-* 未来发展的一种趋势之一，提前了解学习，装13
-* 解决项目中一些痛点，比如更新，ui方面的需求改动，丰富的运营手段。
+* React 是一套可以用简洁的语法高效绘制 DOM 的框架,通过 React 来构建 iOS 原生应用和 Android 原生应用。Virtual DOM 保持不变，你仍然可以使用 JSX 来创建它，但实际的 UI 是用原生的组件构建，
+* RN是在Facebook所提出的核心概念Learn once, write anywhere所诞生的产物，着力于提高多平台开发的开发效率。我们可以同时为android和ios两个平台开发App，只需要根据两个平台不一样的地方去做一些调整即可。RN主要负责UI部分，而原生主要负责交互和数据处理。RN属于hybrid开发，并且与原生无缝连接，相比Web App和Native开发，RN取长补短，集合了两者的优势。RN开发的APP可以跳过App Store审核，远程更新代码，提高迭代频率和效率，既有Native的体验，又保留React的开发效率。
+* RN的原理是将React代码转化为原生API，iOS一套，Android一套。RN在一开始生成OC模块表，然后把这个模块表传入JS中，JS参照模块表，就能间接调用OC的代码。
+* 围绕着React所建立起来的生态系统以及组件化开发思想能有效地分解大规模应用的复杂度、提高资源复用率。拥有以下特性：
+  - 同构渲染：服务器端和客户端共用一套代码，一份模板，两端使用。
+  - 完全组件化：自动分析加载页面的静态资源依赖。
+  - 生态圈：畅享所有 React 组件。
+  - 比webview 更好的体验，更好的性能，更好的手机交互
+  - 未来发展的一种趋势之一，提前了解学习，装13
+  - 解决项目中一些痛点，比如更新，ui方面的需求改动，丰富的运营手段。
 * 由于 AppStore 审核周期的限制，如何动态的更改 app 成为了永恒的话题。无论采用何种方式，我们的流程总是可以归结为以下三部曲：“从 Server 获取配置 --> 解析 --> 执行native代码”。
     - 通过 HTTP 请求获取 JSON 格式的配置文件。
     - 配置文件中标记了每一个元素的属性，比如位置，颜色，图片 URL 等。
     - 解析完 JSON 后，我们调用 Objective-C 的代码，完成 UI 控件的渲染。
-
-React是由Facebook开发出来的用于开发用户交互界面的JS库。其源码由Facebook和社区优秀的程序员维护。React带来了很多新的东西，例如组件化、JSX、虚拟DOM等。其提供的虚拟DOM使得我们渲染组件呈现非常之快，让我们从频繁操作DOM的繁重工作之中解脱。它做的工作更多偏重于MVC中的V层，结合其它如Flux等一起，你可以非常容易构建强大的应用。
-
-React的世界里，一切都是组件。你可以构建任何直接的HTML没有的组件，例如下拉菜单、导航菜单等。同时，组件里也可以包含其它组件。每一个组件都有一个render方法，用于呈现该组件。同时，每一个组件都有属于自己的scope，从而与其它的组件界定开来，用于构建属于该组件的方法，以方便复用。JSX是基于JS的扩展，它允许你在JS里直接写HTML的代码，而不用像我们过去一样要想在JS里写HTML不得不拼接一大堆的字符串。React不直接操作DOM，频繁的操作DOM会非常影响性能和体验。React将DOM结构储存在内存中，与render方法的返回值进行比较，通过其自由的diff算法计算出不同的地方，然后反应到真实的DOM当中。也就是说，大多数情况我们渲染组件、更改组件状态等都是操作的虚拟DOM，只有在有所改变的情况下，才会反应到真实的DOM当中。React Native基于ReacJS，把 React 编程模式的能力带到移动开发,用来开发iOS和Android原生应用.
-
-odeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多系统级的API，如文件操作、网络编程等. 用事件驱动, 异步编程,主要是为后台网络服务设计.React Native 借助 Node.js，即 JavaScript 运行时来创建 JavaScript 代码。
-
-总结来说，React Native使用NodeJS来做系统处理，使用React来渲染。
-
-## 使用
-
-* 你使用 React Native 从头开始构建一个新应用，并希望使用 JavaScript 开发所有的东西
-* 正在使用 React Native 开发少量的二级页面：不需要与应用程序的其他部分有密切联系，但整体观感却更像是“原生”的。
-* 有一个使用 Swift/Java/Objective-C/Kotlin 开发的应用程序，现在你想要使用 React Native 开发其中的一部分。不适合，数据保存方法的不一致
-* 你的公司里有一个 iOS 团队和一个 Android 团队：要让原生开发和 React Native 开发在企业中大规模并存仍然很困难。
+* React是由Facebook开发出来的用于开发用户交互界面的JS库。其源码由Facebook和社区优秀的程序员维护。React带来了很多新的东西，例如组件化、JSX、虚拟DOM等。其提供的虚拟DOM使得我们渲染组件呈现非常之快，从频繁操作DOM的繁重工作之中解脱。它做的工作更多偏重于MVC中的V层，结合其它如Flux等一起，你可以非常容易构建强大的应用。
+* React的世界里，一切都是组件。你可以构建任何直接的HTML没有的组件，例如下拉菜单、导航菜单等。同时，组件里也可以包含其它组件。每一个组件都有一个render方法，用于呈现该组件。同时，每一个组件都有属于自己的scope，从而与其它的组件界定开来，用于构建属于该组件的方法，以方便复用。JSX是基于JS的扩展，它允许你在JS里直接写HTML的代码，而不用像我们过去一样要想在JS里写HTML不得不拼接一大堆的字符串。React不直接操作DOM，频繁的操作DOM会非常影响性能和体验。React将DOM结构储存在内存中，与render方法的返回值进行比较，通过其自由的diff算法计算出不同的地方，然后反应到真实的DOM当中。也就是说，大多数情况我们渲染组件、更改组件状态等都是操作的虚拟DOM，只有在有所改变的情况下，才会反应到真实的DOM当中。React Native基于ReacJS，把 React 编程模式的能力带到移动开发,用来开发iOS和Android原生应用.
+* NodeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多系统级的API，如文件操作、网络编程等. 用事件驱动, 异步编程,主要是为后台网络服务设计.React Native 借助 Node.js，即 JavaScript 运行时来创建 JavaScript 代码。
+* 总结来说，React Native使用NodeJS来做系统处理，使用React来渲染。
+* 适用
+  - 使用 React Native 从头开始构建一个新应用，并希望使用 JavaScript 开发所有的东西
+  - 正在使用 React Native 开发少量的二级页面：不需要与应用程序的其他部分有密切联系，但整体观感却更像是“原生”的。
+  - 有一个使用 Swift/Java/Objective-C/Kotlin 开发的应用程序，现在你想要使用 React Native 开发其中的一部分。不适合，数据保存方法的不一致
+  - 公司里有一个 iOS 团队和一个 Android 团队：要让原生开发和 React Native 开发在企业中大规模并存仍然很困难
 
 ## [安装](https://facebook.github.io/react-native/docs/getting-started.html)
 
-### windows
-
-- Chocolatey（ 基于Nuget的Windows包管理工具）安装与使用
-
 ```sh
+# windows
+# Chocolatey（ 基于Nuget的Windows包管理工具）安装与使用
 # 以管理员身份运行cmd：
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
@@ -171,8 +158,6 @@ ReactDOM.render(
 );
 ```
 
-### 布局
-
 #### Flexbox
 
 Flexbox 是css3 里面引入的布局模型－弹性盒子模型，旨在通过弹性的方式来对齐河分布容器中的内容空间，使其能够适应不同屏幕的宽度。react nativie中 的flexbox 是这个规范的一个子集
@@ -209,12 +194,12 @@ Flexbox 是css3 里面引入的布局模型－弹性盒子模型，旨在通过�
 * 数据结构和业务逻辑混淆在一起
 * 前后端分离的意义主要在于解耦，解耦后前后端职责划分更明确，前端能做的事也越来越多，比如我们可以在Node层做些监控和日志管理，将SSO登录集成进Node层，使用PM2对Node做多进程管理。这样之后，后端项目就可以做成”微服务”式的架构。
 * 后端项目”微服务”式架构有如下优势：
-* 每个项目都很有针对性，仅关注某个业务方向。
-* 每个项目可由不同团队独立开发，互不影响，能快速响应需求、及时推出市场。
-* 允许在频繁发布不同项目的同时保持系统其他部分的可用性和稳定性：依赖少、构建速度快 & 上线速度快。
-* 前端只与Node中间层进行数据通信，Node层则通过thrift接口与后端服务进行数据通信；Node 中间层的 API 设计遵循 RESTFul 的架构风格，并且都以 /api/* 做为前缀；Node 中间层可以视情况添加缓存服务
-* Web端通过ajax调用接口，使用JS把数据渲染到页面上
-* 数据结构和业务逻辑混淆在一起
+  - 每个项目都很有针对性，仅关注某个业务方向
+  - 每个项目可由不同团队独立开发，互不影响，能快速响应需求、及时推出市场
+  - 允许在频繁发布不同项目的同时保持系统其他部分的可用性和稳定性：依赖少、构建速度快 & 上线速度快
+  - 前端只与Node中间层进行数据通信，Node层则通过thrift接口与后端服务进行数据通信；Node 中间层的 API 设计遵循 RESTFul 的架构风格，并且都以 /api/* 做为前缀；Node 中间层可以视情况添加缓存服务
+  - Web端通过ajax调用接口，使用JS把数据渲染到页面上
+  - 数据结构和业务逻辑混淆在一起
 
 架构图
 ![架构图](../_static/front_back_seperate.png)
@@ -240,8 +225,14 @@ npm run build | yarn build
 npm run eject #  导出配置文件
 ```
 
+## 问题
+
+* UI 抽象层翻译出来的 iOS 和安卓原生页面，做不到完全一致，尤其是复杂页面，样式或功能存在差异
+* 想用 React Native 做到 iOS 和安卓体验一致，并且充分发挥原生控件的功能，就需要同时熟悉 React Native、iOS、安卓三个平台，这对开发者的要求实在太高了Airbnb 公司在使用 React Native 两年后，宣布放弃，改用原生技术栈
+
 ## 工具
 
+* [Expo](https://expo.io/):The fastest way to build an app
 * [uber/baseweb](https://github.com/uber/baseweb):A React Component library implementing the Base design language https://baseweb.design
 * [react-hook-form/react-hook-form](https://github.com/react-hook-form/react-hook-form):clipboard React hooks for form validation without the hassle. https://react-hook-form.com
 * JSX
@@ -282,7 +273,7 @@ npm run eject #  导出配置文件
     - [hshoff/vx](https://github.com/hshoff/vx):🐯react + d3 = vx | visualization components https://vx-demo.now.sh/
     - [react-native-community/react-native-linear-gradient](https://github.com/react-native-community/react-native-linear-gradient):A <LinearGradient /> component for react-native
     - [nadbm/react-datasheet](https://github.com/nadbm/react-datasheet):Excel-like data grid component for react https://nadbm.github.io/react-datasheet/
-    - [hustcc/echarts-for-react](https://github.com/hustcc/echarts-for-react):📈 baidu Echarts(v3.0 & v4.0) components for React wrapper. 一个简单的 echarts(v3.0 & v4.0) 的 react 封装。 https://git.hust.cc/echarts-for-react
+    - [hustcc/echarts-for-react](https://github.com/hustcc/echarts-for-react):📈 baidu Echarts(v3.0 & v4.0) components for React wrapper. 一个简单的 echarts(v3.0 & v4.0) 的 react 封装 https://git.hust.cc/echarts-for-react
 * 表单
     - [mozilla-services/react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form):A React component for building Web forms from JSON Schema.
     - [jaredpalmer/formik](https://github.com/jaredpalmer/formik):Build forms in React, without the tears 😭 https://jaredpalmer.com/formik
