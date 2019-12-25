@@ -332,7 +332,6 @@ open http://127.0.0.1:8000
     - Phan
     - [nunomaduro/phpinsights](https://github.com/nunomaduro/phpinsights):💡Instant PHP quality checks from your console https://phpinsights.com
     - [phpstan/phpstan](https://github.com/phpstan/phpstan):PHP Static Analysis Tool - discover bugs in your code without running it!
-    - [didi/rdebug](https://github.com/didi/rdebug):Rdebug — Real Debugger
 * Architectural 相关的设计模式库，组织代码编程的方法和途径
     - (https://github.com/igorw/compose)[Compose]: 一个功能组合库
     - (https://github.com/domnikl/DesignPatternsPHP)[Design Patterns PHP]: 一个使用PHP实现的设计模式存储库
@@ -357,8 +356,9 @@ open http://127.0.0.1:8000
     - (http://phpdbg.com/)[PHPDBG]: 一个交互的PHP调试器
     - (https://tideways.io/)[Tideways.io]: Monitoring and profiling tool
     - (https://github.com/nette/tracy)[Tracy]: A一个简单的错误检测，写日志和时间测量库
-    - (https://github.com/xdebug/xdebug)[xDebug]: 一个调试和分析PHP的工具
-    - (https://github.com/phacility/xhprof)[XHProf]: 一个最初由Facebook开发的分析工具
+    - [xDebug](https://github.com/xdebug/xdebug): 一个调试和分析PHP的工具
+        + [jokkedk/webgrind](https://github.com/jokkedk/webgrind):Xdebug Profiling Web Frontend in PHP
+    - [XHProf](https://github.com/phacility/xhprof): 一个最初由Facebook开发的分析工具
     - (http://www.zend.com/en/products/server/z-ray)[Z-Ray]: 一个调试和配置Zend服务器的工具
     - [didi/rdebug](https://github.com/didi/rdebug):Rdebug — Real Debugger
 * 构建工具 Build Tools 项目构建和自动化工具
@@ -411,6 +411,7 @@ open http://127.0.0.1:8000
     - [Analog](https://github.com/jbroadway/analog): 一个基于闭包的微型日志包
     - [KLogger](https://github.com/katzgrau/KLogger): 一个易用的兼容PSR-3的日志类
     - [Monolog](https://github.com/Seldaek/monolog): 一个全面的日志工具
+    - [log4php](http://logging.apache.org/log4php/)
     - [EasyCorp/easy-log-handler](https://github.com/EasyCorp/easy-log-handler):Human-friendly log files that make you more productive https://easycorp.io/EasyLog
     - [SeasX/SeasLog](https://github.com/SeasX/SeasLog)：An effective,fast,stable log extension for PHP.http://pecl.php.net/package/SeasLog http://neeke.github.io/SeasLog/
 * 电子商务 E-commerce 处理支付和构建在线电子商务商店的库和应用
@@ -621,7 +622,7 @@ open http://127.0.0.1:8000
 * 搜索
     - [elastic/elasticsearch-php](https://github.com/elastic/elasticsearch-php):Official PHP low-level client for Elasticsearch.
 * 机器学习
-    - [PHP-ML](https://github.com/php-ai/php-ml): 一个机器学习的PHP库
+    - [PHP-ML](https://github.com/php-ai/php-ml): 一个机器学习的PHP库 PHP-ML - Machine Learning library for PHP
 * 杂项 Miscellaneous 创建一个开发环境的软件
     - (https://github.com/doctrine/annotations)[Annotations]: 一个注释库(Doctrine的一部分)
     - (https://github.com/cakephp/utility)[Cake Utility]: 工具类如Inflector，字符串，哈希，安全和XML (CP)
@@ -853,10 +854,6 @@ open http://127.0.0.1:8000
 
 * [walkor/phpsocket.io](https://github.com/walkor/phpsocket.io):A server side alternative implementation of socket.io in PHP based on workerman.
 * [OpenIBC/Ohsce](https://github.com/OpenIBC/Ohsce):PHP HI-REL SOCKET TCP/UDP/ICMP/Serial .高可靠性PHP通信&控制框架SOCKET-TCP/UDP/ICMP/硬件Serial-RS232/RS422/RS485 AND MORE! http://www.ohsce.org
-
-## ML
-
-* [php-ai/php-ml](https://github.com/php-ai/php-ml):PHP-ML - Machine Learning library for PHP
 
 ## DI
 

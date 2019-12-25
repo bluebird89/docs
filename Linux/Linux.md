@@ -407,6 +407,16 @@ source ~/.zshrc
 sudo update-alternatives --config editor # 修改默认编辑器
 ```
 
+## 配置
+
+```
+# /etc/sysctl.conf 
+net.ipv4.ip_local_port_range = 1024 65535 # 用户端口范围 
+net.ipv4.tcp_max_syn_backlog = 4096 
+net.ipv4.tcp_fin_timeout = 30 
+fs.file-max=65535 # 系统最大文件句柄，控制的是能打开文件最大数量
+```
+
 ### 挂载
 
 所有存储设备都必须挂载使用，包括硬盘

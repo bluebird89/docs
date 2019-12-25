@@ -2,6 +2,15 @@
 
 Shell是Linux/Unix的一个外壳。隐藏了操作系统底层的细节,作为命令解析器负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序。
 
+* 支持模糊匹配符
+* 每次bash会生成子shell进程，只有部分父进程的环境被复制到子shell环境中
+* 利用exit命令有条不紊地退出子shell
+* 命令列 表要想成为进程列表，这些命令必须包含在括号里 `(pwd ; ls ; cd /etc ; pwd ; cd ; pwd ; ls)` 生成了一个子shell来执行对应的命令
+* 要想知道是否生成了子shell，得借助一个使用了环境变量的命令。这个命令就是echo $BASH_SUBSHELL。如果该命令返回0，就表明没有子shell。如果返回 1或者其他更大的数字，就表明存在子shell。 `( pwd ; echo $BASH_SUBSHELL)`
+* sleep命令会在后台(&)睡眠3000秒(50分钟)。当它被置入后台，在shell CLI提示符返回 之前，会出现两条信息。第一条信息是显示在方括号中的后台作业(background job)号(1)。 第二条是后台作业的进程ID(2396)。
+* `jobs -l`:将进程列表置入后台模式。你既可以在子shell中 进行繁重的处理工作，同时也不会让子shell的I/O受制于终端
+* 生成子shell的成本不低，而且速度还慢。创建嵌套子shell更是火上浇油
+
 ## 配置
 
 * /etc/profile：所有用户的shell都有权使用配置好的环境变量 添加 export PATH="$PATH:/my_new_path"
@@ -17,30 +26,12 @@ Shell是Linux/Unix的一个外壳。隐藏了操作系统底层的细节,作为�
     - https://www.digitalocean.com/community/questions/what-are-your-favorite-bash-aliases
     - https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/
     - https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/
-* 原生增强命令
-    - [fasd](https://github.com/clvv/fasd):增强cd命令
-    - bat 增强了 cat 命令 （https://github.com/sharkdp/bat ）。
-    - exa 增强了 ls 命令（https://github.com/ogham/exa ）
-    - 如果你需要在很多目录上浏览各种文件 ，ranger 命令可以比 cd 和 cat 更有效率（https://github.com/ranger/ranger ），甚至可以在你的终端预览图片。
-    - fd 是一个比 find 更简单更快的命令（https://github.com/sharkdp/fd ），会自动地忽略掉一些你配置在 .gitignore 中的文件，以及 .git 下的文件
-    - grep 是一个上古神器，然而，ack（https://beyondgrep.com/ ）、ag （https://github.com/ggreer/the_silver_searcher ）和 rg（https://github.com/BurntSushi/ripgrep ）是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到你配置在 .gitignore 中的规则。另外，我们会经常玩  command | grep “pattern” 这样的命令，fzf（https://github.com/junegunn/fzf ）会是一个很好用的命令，神器。
-    - rm 是一个危险的命令，尤其是各种 rm -rf …，所以，trash（https://github.com/andreafrancia/trash-cli/ ）是一个更好的删除命令。
-    - man 命令是好读文档的命令，但是man的文档有时候太长了，所以，可以试式 tldr（https://github.com/tldr-pages/tldr ）命令，把文档上的一些示例整出来给看。
-    - 如果想要一个图示化的ping，可以试试 prettyping （https://github.com/denilsonsa/prettyping ）。
-    - 如果想搜索以前打过的命令，不要再用 Ctrl +R 了，可以使用 fzf （https://github.com/junegunn/fzf ）
-    - [htop](Installation directions):top 的一个加强版。
-    - [ncdu]()比 du 好用多了用。另一个选择是 nnn（https://github.com/jarun/nnn ）。
-    - 如果想把的命令行操作建录制成一个 SVG 动图，那么可以尝试使用 asciinema （https://asciinema.org/ ）和 svg-trem （https://github.com/marionebl/svg-term-cli ）。
-    - [httpie](https://github.com/jakubroztocil/httpie) 是一个可以用来替代 curl 和 wget 的 http 客户端，httpie 支持 json 和语法高亮，可以使用简单的语法进行 http 访问: http -v github.com。
-    - [tmux] 在需要经常登录远程服务器工作的时候会很有用，可以保持远程登录的会话，还可以在一个窗口中查看多个 shell 的状态。
-    - [Taskbook](https://github.com/klaussinani/taskbook) 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级。
-    - [sshrc](https://github.com/Russell91/sshrc ) 是个神器，在登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置。
-    - 参考
-        + https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4
-        + https://dev.to/_darrenburns/tools-to-power-up-your-command-line-part-2-2737
-        + https://dev.to/_darrenburns/power-up-your-command-line-part-3-4o53
-        + https://darrenburns.net/posts/tools/
-        + https://hacker-tools.github.io/
+* 参考
+    - https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4
+    - https://dev.to/_darrenburns/tools-to-power-up-your-command-line-part-2-2737
+    - https://dev.to/_darrenburns/power-up-your-command-line-part-3-4o53
+    - https://darrenburns.net/posts/tools/
+    - https://hacker-tools.github.io/
 
 ```sh
 cmd [options] [arguments] # options称为选项，arguments称为参数
@@ -49,9 +40,10 @@ echo $SHELL # 查看shell
 
 /* 如果vim还没有语法高亮，那么在/etc/profile 中添加以下语句 */
 export TERM=xterm-color
-// 注: 只对各个用户自己的主目录下的.vimrc修改的话，修改内容只对本用户有效,要想全部有效，可以修改 /etc/vimrc           同样的 /etc/bashrc 是针对所有用户的启动文件
+// 注: 只对各个用户自己的主目录下的.vimrc修改的话，修改内容只对本用户有效,要想全部有效，可以修改 /etc/vimrc           
+# 同样的 /etc/bashrc 是针对所有用户的启动文件
 
-/* 以下是 ~/.vimrc 文件的内容 */
+# ~/.vimrc
 set nonumber # 不设置行号
 set shell=/bin/bash     # 设置shell环境
 syntax on     # 开启vim语法高亮
@@ -62,7 +54,7 @@ set nocompatible     # 不向下兼容vi
 set showmatch      # 开启括号匹配
 set cursorline     # 光标所在行高亮
 set ruler     # 设置标尺
-set laststatus=2     # 开启状态栏（默认是1）
+set laststatus=2     # 开启状态栏(默认是1)
 set smartindent     # 开启新航时使用智能自动缩进
 set hlsearch     # 搜索时高亮显示找到的文本
 set wrap     # 设置自动换行
@@ -73,9 +65,9 @@ filetype on     # 检测文件类型
 set history=500     # 设置历史行数
 set smartindent     # 理想添加 依据上面的格式自动对齐
 
-ls /usr/share/vim/vim72/colors/  #可以查看vim支持的主题色
+ls /usr/share/vim/vim72/colors/  # 可以查看vim支持的主题色
 
-/* 目录配色方案（将/etc中的DIR_COLORS文件复制到自己主目录中，并重命名为.dir_colors） */
+/* 目录配色方案(将/etc中的DIR_COLORS文件复制到自己主目录中，并重命名为.dir_colors) */
 cp /etc/DIR_COLORS ~/.dir_colors
 
 /* PS1 用户主提示符配色方案(在 .bashrc 文件中添加) */
@@ -84,11 +76,11 @@ export PS1="\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h: \[\e[0;35m\]\W\[\e[m\] \\$  "
 # PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h: \[\033[35m\]\W\[\033[m\] \\$  "
 # export PS1
 
-// 另外种主提示符样式（对CentOS默认的主提示符加颜色标识）
+// 另外种主提示符样式(（)对CentOS默认的主提示符加颜色标识)
 # export PS1="[\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h \[\e[0;35m\]\W\[\e[m\]]\\$  "
 
-alias #list
-alias ..='cd ..'
+alias # list
+
 alias amazonbackup='s3backup'
 alias apt-get='sudo apt-get'
 
@@ -132,6 +124,9 @@ alias ls='ls --color=auto'
 alias ll='ls -la'
 ## Show hidden files ##
 alias cls='clear'   #DOS风格的清空
+# Clear the screen of your clutter
+alias c="clear"
+alias cl="clear;ls;pwd"
 # ls better
 alias la="ls -aF"
 alias ld="ls -ld"
@@ -142,14 +137,17 @@ alias ltr='ls -Art1 && echo "------Newest--"'
 alias h='history | tail'
 alias hg='history | grep'
 alias hl='history | less'
+# share history between terminal sessions
+alias he="history -a" # export history
+alias hi="history -n" # import history
 alias nis="npm install --save "
 alias svim='sudo vim'
 alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
 alias install='sudo apt get install'
-alias update='sudo apt-get update && sudo apt-get upgrade'
+
 ## get rid of command not found ##
 alias cd..='cd ..'
- 
+
 ## a quick way to get out of current directory ##
 alias ..='cd ..'
 alias ...='cd ../../../'
@@ -167,7 +165,6 @@ alias sha1='openssl sha1'
 alias diff='colordiff'
 alias mount='mount |column -t'
 # handy short cuts #
-alias h='history'
 alias j='jobs -l'
 alias path='echo -e ${PATH//:/\\n}'
 alias now='date +"%T"'
@@ -217,7 +214,11 @@ alias rm='rm -I --preserve-root'
 alias mv='mv -i'
 alias cp='cp -i'
 alias ln='ln -i'
- 
+# Make some of the file manipulation programs verbose
+alias mv="mv -v"
+alias rm="rm -vi"
+alias cp="cp -v"
+
 # Parenting changing perms on / #
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
@@ -290,7 +291,6 @@ alias ethtool='ethtool eth1'
 # Only useful for laptop as all servers are without wireless interface
 alias iwconfig='iwconfig wlan0'
 
-
 ## pass options to free ##
 alias meminfo='free -m -l -t'
  
@@ -317,10 +317,6 @@ alias cpwd='pwd|tr -d "\n"|pbcopy'
 
 # DNS (with update thanks to @blanco)
 alias flush="sudo killall -HUP mDNSResponder"
-
-# share history between terminal sessions
-alias he="history -a" # export history
-alias hi="history -n" # import history
 
 # Get your current public IP
 alias ip="curl icanhazip.com"
@@ -390,7 +386,6 @@ alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 # create a Taskpaper todo file in the current folder
 alias tp='touch todo.taskpaper && open -a "Taskpaper" todo.taskpaper'
 
-
 # Reloads the bashrc file
 alias bashreload="source ~/.bashrc && echo Bash config reloaded"
 
@@ -403,17 +398,12 @@ function nanobk() {
 }
 
 # Clear DNS Cache
-
 # Still need testing on this one
-
 alias flushdns="sudo /etc/init.d/dns-clean restart && echo DNS cache flushed"
 
-
 # Get IPs associated with this site
-
 # Work to dynamically list all interfaces. Will add later. 
 # Currently only uses the hardcoded interface names
-
 function myip()
 {
     extIp=$(dig +short myip.opendns.com @resolver1.opendns.com)
@@ -423,7 +413,6 @@ function myip()
       sed -e s/addr://)
     echo ${MY_IP:-"Not connected"}
 
-
     printf "Wired IP: "
     MY_IP=$(/sbin/ifconfig enp0s25 | awk '/inet/ { print $2 } ' |
       sed -e s/addr://)
@@ -431,9 +420,7 @@ function myip()
 
     echo ""
     echo "WAN IP: $extIp"
-
 }
-
 
 # Syntax: "repeat [X] [command]"
 function repeat()      
@@ -445,23 +432,12 @@ function repeat()
     done
 }
 
-
-# Make some of the file manipulation programs verbose
-alias mv="mv -v"
-alias rm="rm -vi"
-alias cp="cp -v"
-
 # Prints disk usage in human readable form
 alias d="du -sh"
-
-# Clear the screen of your clutter
-alias c="clear"
-alias cl="clear;ls;pwd"
 
 # GREP Motifications
 alias grep="grep --color"
 alias grepp="grep -P --color"
-
 
 # Json tools (pipe unformatted to these to nicely format the JSON)
 alias json="python -m json.tool"
@@ -475,10 +451,9 @@ alias bashrc="${EDITOR:-nano} +120 ~/.bashrc && source ~/.bashrc && echo Bash co
 alias sshclear="rm ~/.ssh/multiplex/* -f && echo SSH connection cache cleared;"
 alias sshlist="echo Currently open ssh connections && echo && l ~/.ssh/multiplex/"
 
-
 stty erase ^H        #清除退格 (这个很有必要)
 
-/*  /etc/profile 文件设置 */
+# /etc/profile
 export PATH=$PATH:/opt/perl/site/bin:/opt/perl/bin
 
 bash <(curl -s https://gist.github.com/Jacksgong/9d0519f68b7940a07075a834b3178979/raw/803256593b7b05177408ccbc0bc68e072a8e3a0a/init-shell.sh)
@@ -489,8 +464,43 @@ set completion-ignore-case on
 
 ## 语法
 
-* bash shell 内置了一个type命令会根据你输入的单词来显示此命令的类型，主要有以下五种类型：
+* 应用
+    - 不适用场景
+        + 比数组更复杂的数据结构
+        + 出现了复杂的转义问题
+        + 有太多的字符串操作
+        + 不太需要调用其它程序和跟其它程序管道交互
+* 变量
+    - 从bash 3.2版开始，正则表达式和globbing表达式都不能用引号包裹。如果表达式里有空格，可以把它存储到一个变量里
+    - local:函数内部变量
+    - readonly:只读变量
+    - 尽量对bash脚本里的所有变量使用local或readonly进行注解
+* 操作符
+    - `||`  逻辑or(仅双中括号里使用)
+    - `&&`  逻辑and(仅双中括号里使用)
+    - `<`   字符串比较(双中括号里不需要转移)
+    - `-lt` 数字比较
+    - `=`   字符串相等
+    - `==`  以Globbing方式进行字符串比较(仅双中括号里使用，参考下文)
+    - `=~`  用正则表达式进行字符串比较(仅双中括号里使用，参考下文)
+    - `-n`  非空字符串
+    - `-z`  空字符串
+    - `-eq` 数字相等
+    - `-ne` 数字不等
+* 内置变量
+    - `$0`  脚本名称
+    - `$n`  传给脚本/函数的第n个参数
+    - `$$`  脚本的PID
+    - `$!`  上一个被执行的命令的PID(后台运行的进程)
+    - `$?`  上一个命令的退出状态(管道命令使用${PIPESTATUS})
+    - `$#`  传递给脚本/函数的参数个数 能够处理空格参数，而且参数间的空格也能正确的处理
+    - `$@`  传递给脚本/函数的所有参数(识别每个参数) 用双引号括起来
+    - `$*`  传递给脚本/函数的所有参数(把所有参数当成一个字符串)
+    - `${10}`   在超过两位数的参数时，使用大括号限定起来
+* bash shell 内置了一个type命令会根据输入的单词来显示此命令的类型，主要有以下五种类型：
     - 别名
+        + 创建：`alias li='ls -li'`
+        + 查看：`alias -p`
     - 方法
     - 内置命令
     - 关键字
@@ -500,18 +510,41 @@ set completion-ignore-case on
         + -x 选项，它们在执行时显示命令。当我们决定选择分支的时候，更加使用
 * 语法
     - 有变量的字符串里，推荐使用双引号
+    - 开头解释器：`#!/bin/bash`
+    - 语法缩进:四个空格
+    - 在标准输入上输入多行字符串
+    - 命名建议规则：变量名大写、局部变量小写，函数名小写，名字体现出实际作用
+    - 默认变量是全局的，在函数中变量local指定为局部变量，避免污染其他作用域
+    - `$()`与``:用于shell命令的执行 用`$()`代替反单引号(`)
+    - `pwd -P`:得出当前物理路径(（)非引用等路径)
+    - function:定义一个函数，可加或不加
+    - `egrep`
+    - 用`[[]]`(双层中括号)替代[]
+    - `bash -n myscript.sh `
+        + -n:脚本进行语法检查
+        + -v:跟踪脚本里每个命令的执行 `set -o verbose`
+        + `set -x` -x:跟踪脚本里每个命令的执行并附加扩充信息 `set -o xtrace`
+        + `set -e`:遇到执行非0时退出脚本
+        + `set -o nounset`:引用未定义的变量(缺省值为“”)
+        + `set -o errexit`:执行失败的命令被忽略
 * 语句
     - exit 0：表示脚本结束退出，exit有一个整型参数，0表示正常退出，非0表示脚本执行中有错误
-* 参数
-    - $0    文件本身的名字
-    - $1  表示位置的参数，第一个参数传递给脚本
-    - ${10}   在超过两位数的参数时，使用大括号限定起来
-    - $#  参数的个数
-    - $*  表示所有的参数
 * 文件
-    -  basename 文件名
-
-
+    - dirname：显示最后一个结点前的路径
+    - basename：显示最后一个结点的名称
+* 内建命令 `type cd`
+    - 不需要使用子进程来执行,已经和shell编译成了一体，作为shell工具的组成部分存在。不需要借助外部程序文件来运行
+* 外部命令
+    - 程序通常位于/bin、/usr/bin、/sbin或/usr/sbin中
+    - 外部命令执行时，会创建出一个子进程。这种操作被称为衍生(forking),需要花费时间和精力来设置新子进程的环境
+* 历史记录
+    - `history -a` shell会话之前强制将命令历史记录写入.bash_history文件
+    - `!!` `!20`:显示出从 shell历史记录中唤回的命令，然后执行该命令
+* 正则表达式
+* 习惯
+    - 多加注释说明
+    - 写脚本一定先测试再到生产上
+* 调试
 
 ```sh
 type -a|t cd
@@ -528,28 +561,6 @@ echo "Args count: $#"
 exit 0
 ```
 
-* 内建命令 `type cd`
-    - 不需要使用子进程来执行,已经和shell编译成了一体，作为shell工具的组成部分存在。不需要借助外部程序文件来运行
-* 外部命令
-    - 程序通常位于/bin、/usr/bin、/sbin或/usr/sbin中
-    - 外部命令执行时，会创建出一个子进程。这种操作被称为衍生(forking),需要花费时间和精力来设置新子进程的环境
-* 历史记录
-    - `history -a`shell会话之前强制将命令历史记录写入.bash_history文件
-    - `!!` `!20`:显示出从 shell历史记录中唤回的命令，然后执行该命令
-* 别名
-    - 创建：`alias li='ls -li'`
-    - 查看：`alias -p`
-
-* 支持模糊匹配符
-
-* 每次bash会生成子shell进程，只有部分父进程的环境被复制到子shell环境中
-* 利用exit命令有条不紊地退出子shell
-* 命令列 表要想成为进程列表，这些命令必须包含在括号里 `(pwd ; ls ; cd /etc ; pwd ; cd ; pwd ; ls)` 生成了一个子shell来执行对应的命令
-* 要想知道是否生成了子shell，得借助一个使用了环境变量的命令。这个命令就是echo $BASH_SUBSHELL。如果该命令返回0，就表明没有子shell。如果返回 1或者其他更大的数字，就表明存在子shell。 `( pwd ; echo $BASH_SUBSHELL)`
-* sleep命令会在后台(&)睡眠3000秒(50分钟)。当它被置入后台，在shell CLI提示符返回 之前，会出现两条信息。第一条信息是显示在方括号中的后台作业(background job)号(1)。 第二条是后台作业的进程ID(2396)。
-* `jobs -l`:将进程列表置入后台模式。你既可以在子shell中 进行繁重的处理工作，同时也不会让子shell的I/O受制于终端
-* 生成子shell的成本不低，而且速度还慢。创建嵌套子shell更是火上浇油
-
 ## 协程
 
 * 在后台生成一个子shell，并在这个子shell中执行命令 `coproc My_Job { sleep 10; }`
@@ -557,16 +568,16 @@ exit 0
 
 ## 文件管理
 
-* 新建文件夹（mkdir）
-* 新建文件（touch）
-* 移动（mv）
-* 复制（cp）
-* 删除（rm）
+* 新建文件夹(mkdir)
+* 新建文件(touch)
+* 移动(mv)
+* 复制(cp)
+* 删除(rm)
 * 链接
     - 符号链接就是一个实实在在的文件，它指向存放在虚拟目录结构中某个地方的另一个文件
     - 硬链接会创建独立的虚拟文件，其中包含了原始文件的信息及位置。但是它们从根本上而言是同一个文件。引用硬链接文件等同于引用了源文件。只能对处于同一存储媒体的文件创建硬链接。要想在不同存储媒体的文件之间创建链接， 只能使用符号链接。
 
-```
+```sh
 file my_file
 mount # 输出当前系统上挂载设备列表
 mount -t vfat /dev/sdb1 /media/disk
@@ -642,7 +653,7 @@ lsof -i:80 # -i参数表示网络链接，:80指明端口号
 ## 查找
 
 * xargs:给命令传递参数的一个过滤器
-    - 将管道或标准输入（stdin）数据转换成命令行参数 也能够从文件的输出中读取数据
+    - 将管道或标准输入(（)stdin)数据转换成命令行参数 也能够从文件的输出中读取数据
     - 能够捕获一个命令的输出，然后传递给另外一个命令
     - 参数
         + -a file 从文件中读入作为sdtin
@@ -710,7 +721,7 @@ fdisk  -l # 所有硬盘的分区信息,包括没有挂上的分区和USB设备
 ls -l /dev/sda* # 查看第一块硬盘的分区信息
 df -a|-h|-T #-a或-all：显示全部的文件系统 -h或--human-readable：以可读性较高的方式来显示信息 -T或--print-type：显示文件系统的类型
 
-du [option] 目录名或文件名 # [option]主要参数  -a或-all：显示目录中个别文件的大小 -h或--human-readable：以K，M，G为单位显示，提高信息可读性 -S或--separate-dirs：省略指定目录下的子目录，只显示该目录的总和（注意：该命令是大写S） ncdu
+du [option] 目录名或文件名 # [option]主要参数  -a或-all：显示目录中个别文件的大小 -h或--human-readable：以K，M，G为单位显示，提高信息可读性 -S或--separate-dirs：省略指定目录下的子目录，只显示该目录的总和(（)注意：该命令是大写S) ncdu
 
 tin-summer
 curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git vmchale/tin-summer
@@ -769,6 +780,27 @@ ls *.rmvb | xargs -n1 -i cp {} /mount/xiaodianying
 
 ### [zsh-users/zsh](https://github.com/zsh-users/zsh)
 
+* [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)：A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
+    - 兼容bash
+    - 自动cd：只需输入目录名称
+    - 命令选项补齐，比如输入 git，然后按 Tab，即可显示出 git都有哪些命令
+    - 目录一次性补全：比如输入 Doc/doc按 Tab键会自动变成 Documents/document/
+    - 组件
+        + [plugin](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins)
+        + [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
+        + [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
+        + [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
+        + [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
+        + incr是一款自动提示插件
+        + [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
+    - Theme
+        + agnoster
+        + cloud
+        + wedisagree
+        + [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
+    - 工具
+        + [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
+
 ```sh
 cat /etc/shells
 
@@ -783,33 +815,8 @@ wget --no-check-certificate 。![]https://github.com/robbyrussell/oh-my-zsh/raw/
 
 chsh -s /bin/zsh
 source ~/.bashrc # 运行
-```
 
-#### [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-
-A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
-
-* 兼容bash
-* 自动cd：只需输入目录名称
-* 命令选项补齐，比如输入 git，然后按 Tab，即可显示出 git都有哪些命令
-* 目录一次性补全：比如输入 Doc/doc按 Tab键会自动变成 Documents/document/
-* 组件
-    - [plugin](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins)
-    - [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
-    - [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
-    - [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
-    - [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
-    - incr是一款自动提示插件
-    - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
-* Theme
-    - agnoster
-    - cloud
-    - wedisagree
-    - [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
-* 工具
-    - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
-
-```sh
+# oh-my-zsh
 # 自动安装
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
@@ -878,7 +885,7 @@ alias ipe='curl ipinfo.io/ip' # 需要知道你的外部 IP 地址
 alias ipi='ipconfig getifaddr en0' # 知道你的本地 IP 地址
 alias c='clear'
 
-ZSH_THEME="robbyrussell" # 主题设置（文件在~/.oh-my-zsh/themes）
+ZSH_THEME="robbyrussell" # 主题设置(（)文件在~/.oh-my-zsh/themes)
 
 # 插件
 plugins=(git textmate ruby autojump osx mvn gradle autojump)
@@ -911,7 +918,7 @@ brew install fish
 # iterm 配置
 echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
 chsh -s /usr/local/bin/fish
-curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher  // 安装fisherman（fish 的插件管理器）
+curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher  // 安装fisherman(（)fish 的插件管理器)
 fisher omf/theme-default
 fish # 启动
 help # 手册
@@ -959,54 +966,44 @@ end
 
 ### xmonad
 
-所有操作都通过键盘，只适合命令行的重度用户.用来管理软件窗口的位置和大小，会自动在桌面上平铺（tiling）窗口。桌面环境通常很重，窗口管理器就很轻，不仅体积小，资源占用也少，用户可以配置各种细节，释放出系统的最大性能。
+所有操作都通过键盘，只适合命令行的重度用户.用来管理软件窗口的位置和大小，会自动在桌面上平铺(（)tiling)窗口。桌面环境通常很重，窗口管理器就很轻，不仅体积小，资源占用也少，用户可以配置各种细节，释放出系统的最大性能。
 
-  ● 极简主义和高度可配置。默认配置中几乎没有窗户装饰和工具栏，而且可以大范围进行定制。
-  ● 面向键盘，友好的用户体验。
-  ● 平铺。不必手动排列窗口。
-  ● 如果你使用鼠标，光标所在的窗口自动获得焦点。
-
-> 安装
+* 极简主义和高度可配置。默认配置中几乎没有窗户装饰和工具栏，而且可以大范围进行定制。
+* 面向键盘，友好的用户体验。
+* 平铺。不必手动排列窗口。
+* 如果你使用鼠标，光标所在的窗口自动获得焦点
+* 配置文件:～/.xmonad/xmonad.hs。该文件需要用户自己新建 modMask = mod4Mask
+* 使用
+    + 退出当前会话,通过xmonad 会话重新登录,有默认的功能键mod(alt)
+    + 打开终端:mod + shift + return 新窗口总是独占主栏，旧窗口平分副栏
+    + 切换布局:mod + space
+    + 移动副栏到主栏:mod + , 逆操作 mod + .
+    + 切换栏:mod + j mod + k
+    + 移动栏位置:mod + return
+    + 调整窗口顺序 mod + shift + j mod + shift + k
+    + 调整窗口尺寸: mod + l mod + h
+    + 该窗口就会变成浮动窗口，可以放到屏幕的任何位置:mod + 鼠标左键拖动窗口
+    + 调整窗口大小:mod + 鼠标右键
+    + 当前浮动窗口就会结束浮动，重新回到 xmonad 的布局:mod + t
+    + 关闭窗口:mod + shift + c
+    + 工作区切换:mod + 1到mod + 9
+    + 把光标前的两个词调换一下位置：按一下 esc 键，然后再按一下 t
+    + 将一个窗口移到不同的工作区，先用mod + j或mod + k，将其变成焦点窗口，然后使用mod + shift + 6，就将其移到了6号工作区(1号工作区是终端，2号是浏览器，4号是虚拟机)
+* 多显示器: xrandr(或者Xinerama 和 winView，另外 arandr 是 xrandr 的图形界面),多显示器时，每个显示器会分配到一个工作区
+    + 查看显示器的连接情况:xrandr -q
+    + 转移焦点到左显示器:mod + w
+    + 转移焦点到右显示器:mod + e
+* xmobar:提供了一个状态栏，将常用信息显示在上面,配置文件~/.xmobarrc
+* dmenu 在桌面顶部提供了一个菜单条，可以快速启动应用程序
+    + mod + p就会进入dmenu菜单栏
+    + 按下ESC键可以退出
+    + 方向键用来选择应用程序
+    + return键用来启动
 
 ```sh
 sudo apt-get install xmonad
 sudo apt-get install xmobar dmenu
-```
-
-配置文件:～/.xmonad/xmonad.hs。该文件需要用户自己新建 modMask = mod4Mask
-
-> 使用
-
-- 退出当前会话,通过xmonad 会话重新登录,有默认的功能键mod(alt)
-- 打开终端:mod + shift + return 新窗口总是独占主栏，旧窗口平分副栏
-- 切换布局:mod + space
-- 移动副栏到主栏:mod + , 逆操作 mod + .
-- 切换栏:mod + j mod + k
-- 移动栏位置:mod + return
-- 调整窗口顺序 mod + shift + j mod + shift + k
-- 调整窗口尺寸: mod + l mod + h
-- 该窗口就会变成浮动窗口，可以放到屏幕的任何位置:mod + 鼠标左键拖动窗口
-- 调整窗口大小:mod + 鼠标右键
-- 当前浮动窗口就会结束浮动，重新回到 xmonad 的布局:mod + t
-- 关闭窗口:mod + shift + c
-- 工作区切换:mod + 1到mod + 9
-- 把光标前的两个词调换一下位置：按一下 esc 键，然后再按一下 t
-- 将一个窗口移到不同的工作区，先用mod + j或mod + k，将其变成焦点窗口，然后使用mod + shift + 6，就将其移到了6号工作区(1号工作区是终端，2号是浏览器，4号是虚拟机)
-
-多显示器: xrandr(或者Xinerama 和 winView，另外 arandr 是 xrandr 的图形界面),多显示器时，每个显示器会分配到一个工作区
-
-- 查看显示器的连接情况:xrandr -q
-- 转移焦点到左显示器:mod + w
-- 转移焦点到右显示器:mod + e
-
-xmobar:提供了一个状态栏，将常用信息显示在上面,配置文件~/.xmobarrc
-
-dmenu 在桌面顶部提供了一个菜单条，可以快速启动应用程序
-
-- mod + p就会进入dmenu菜单栏
-- 按下ESC键可以退出
-- 方向键用来选择应用程序
-- return键用来启动
+``` 
 
 ### iterm2
 
@@ -1025,8 +1022,8 @@ dmenu 在桌面顶部提供了一个菜单条，可以快速启动应用程序
 ### 快捷键
 
 * Tab:点击Tab键可以实现命令补全,目录补全、命令参数补全
-* Ctrl+c:强行终止当前程序（常用）
-* Ctrl+d:键盘输入结束或退出终端（常用）
+* Ctrl+c:强行终止当前程序(（)常用)
+* Ctrl+d:键盘输入结束或退出终端(（)常用)
 * Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行
 * Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg
 * Ctrl+a:将光标移至输入行头，相当于Home键
@@ -1038,7 +1035,7 @@ dmenu 在桌面顶部提供了一个菜单条，可以快速启动应用程序
 
 ### 脚本
 
-shell 是可以与计算机进行高效交互的文本接口。shell 提供了一套交互式的编程语言（脚本），shell的种类很多，比如 sh、bash、zsh 等。shell 的生命力很强，在各种高级编程语言大行其道的今天，很多的任务依然离不开 shell。比如可以使用 shell 来执行一些编译任务，或者做一些批处理任务，初始化数据、打包程序等等。
+shell 是可以与计算机进行高效交互的文本接口。shell 提供了一套交互式的编程语言(（)脚本)，shell的种类很多，比如 sh、bash、zsh 等。shell 的生命力很强，在各种高级编程语言大行其道的今天，很多的任务依然离不开 shell。比如可以使用 shell 来执行一些编译任务，或者做一些批处理任务，初始化数据、打包程序等等。
 
 ```sh
 touch zsh-script.sh
@@ -1295,10 +1292,6 @@ brew install coreutils
 ln -s /usr/local/bin/gtac /usr/local/bin/tac
 ```
 
-## 分类
-
-* mosh
-
 ## 免密码登录
 
 * ~/.ssh/authorized_keys:存放远程免密登录的公钥,主要通过这个文件记录多台机器的公钥
@@ -1330,75 +1323,14 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 ssh-keygen -R <IP_ADDRESS>
 ```
 
-## [Hyper](https://hyper.is)
-
 ### Konsole
 
-* 搜索/高亮功能。高亮匹配是实时刷新的，这对于拖尾日志文件真的很方便。
-* 易于选择和复制文本块。
-* 简单选择屏幕滚动，使用CTRL + SHIFT + K清理缓冲区。
-* 可自定义隐藏大部分不必要的细节（标签栏、菜单），默认提供许多颜色主题
+* 搜索/高亮功能。高亮匹配是实时刷新的，这对于拖尾日志文件真的很方便
+* 易于选择和复制文本块
+* 简单选择屏幕滚动，使用CTRL + SHIFT + K清理缓冲区
+* 可自定义隐藏大部分不必要的细节(（)标签栏、菜单)，默认提供许多颜色主题
 
 ## 语法
-
-* 应用
-    - 不适用场景
-        + 比数组更复杂的数据结构
-        + 出现了复杂的转义问题
-        + 有太多的字符串操作
-        + 不太需要调用其它程序和跟其它程序管道交互
-* 语法
-    - 开头解释器：`#!/bin/bash`
-    - 语法缩进:四个空格
-    - 在标准输入上输入多行字符串
-    - 命名建议规则：变量名大写、局部变量小写，函数名小写，名字体现出实际作用
-    - 默认变量是全局的，在函数中变量local指定为局部变量，避免污染其他作用域
-    - `$()`与``:用于shell命令的执行 用`$()`代替反单引号(`)
-    - `pwd -P`:得出当前物理路径（非引用等路径）
-    - dirname：显示最后一个结点前的路径
-    - basename：显示最后一个结点的名称
-    - function:定义一个函数，可加或不加
-    - `egrep`
-    - 用`[[]]`(双层中括号)替代[]
-    - `bash -n myscript.sh `
-        + -n:脚本进行语法检查
-        + -v:跟踪脚本里每个命令的执行 `set -o verbose`
-        + `set -x` -x:跟踪脚本里每个命令的执行并附加扩充信息 `set -o xtrace`
-        + `set -e`:遇到执行非0时退出脚本
-        + `set -o nounset`:引用未定义的变量(缺省值为“”)
-        + `set -o errexit`:执行失败的命令被忽略
-* 变量
-    - 从bash 3.2版开始，正则表达式和globbing表达式都不能用引号包裹。如果表达式里有空格，可以把它存储到一个变量里
-    - local:函数内部变量
-    - readonly:只读变量
-    - 尽量对bash脚本里的所有变量使用local或readonly进行注解
-* 操作符
-    - `||`  逻辑or(仅双中括号里使用)
-    - `&&`  逻辑and(仅双中括号里使用)
-    - `<`   字符串比较(双中括号里不需要转移)
-    - `-lt` 数字比较
-    - `=`   字符串相等
-    - `==`  以Globbing方式进行字符串比较(仅双中括号里使用，参考下文)
-    - `=~`  用正则表达式进行字符串比较(仅双中括号里使用，参考下文)
-    - `-n`  非空字符串
-    - `-z`  空字符串
-    - `-eq` 数字相等
-    - `-ne` 数字不等
-* 内置变量
-    - `$0`  脚本名称
-    - `$n`  传给脚本/函数的第n个参数
-    - `$$`  脚本的PID
-    - `$!`  上一个被执行的命令的PID(后台运行的进程)
-    - `$?`  上一个命令的退出状态(管道命令使用${PIPESTATUS})
-    - `$#`  传递给脚本/函数的参数个数 能够处理空格参数，而且参数间的空格也能正确的处理
-    - `$@`  传递给脚本/函数的所有参数(识别每个参数) 用双引号括起来
-    - `$*`  传递给脚本/函数的所有参数(把所有参数当成一个字符串)
-* 调试
-
-* 正则表达式
-* 习惯
-    - 多加注释说明
-    - 写脚本一定先测试再到生产上
 
 ```sh
 # 任何字词都可以当作分界符,有内嵌变量替换操作，可以把第一个MARKER用单引号包起来
@@ -1666,7 +1598,7 @@ done
 
 # 监控CPU、内存和硬盘利用率
 
-1）CPU
+1)CPU
 
 借助vmstat工具来分析CPU统计信息。
 
@@ -1710,7 +1642,7 @@ if [ $USE -ge 50 ]; then
 
 fi
 
-2）内存
+2)内存
 
 #!/bin/bash
 
@@ -1742,7 +1674,7 @@ if [ $FREE -lt 1024 ]; then
 
 fi
 
-3）硬盘
+3)硬盘
 
 #!/bin/bash
 
@@ -1817,7 +1749,7 @@ done
 
 # 检查网站可用性
 
-1）检查URL可用性
+1)检查URL可用性
 
 方法1：
 
@@ -1849,7 +1781,7 @@ if ! wget -T 10 --tries=1 --spider $1 >/dev/null 2>&1; then
 
 使用方法：check_url www.baidu.com
 
-2）判断三次URL可用性
+2)判断三次URL可用性
 
 思路与上面检查主机存活状态一样。
 
@@ -1979,8 +1911,6 @@ for i in $IO_SQL_STATUS; do
 done
 ```
 
-## 
-
 ## 教程
 
 * [learnbyexample/command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):⚡️ From finding text to search and replace, from sorting to beautifying text and more 🎨
@@ -1989,6 +1919,7 @@ done
 * [Introduction to text manipulation on UNIX-based systems](https://www.ibm.com/developerworks/aix/library/au-unixtext/index.html)
 * [Linux 教程](https://www.runoob.com/linux/linux-tutorial.html)
 * [linuxcommand](http://linuxcommand.org)
+* [Advanced Bash-Scripting Guide](http://tldp.org/LDP/abs/html/index.html)
 
 ```sh
 cat demo.json | jq '.id,.name,.status,.attachments'
@@ -2005,7 +1936,7 @@ ccache gcc foo.c
     - Linux
         + 下的原生命令行
     - Windows
-        + WSL:提供了一个由微软开发的Linux兼容的内核接口（不包含Linux内核代码），然后可以在其上运行GNU用户空间
+        + WSL:提供了一个由微软开发的Linux兼容的内核接口(（)不包含Linux内核代码)，然后可以在其上运行GNU用户空间
             * WSL2
         + [putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
         + xshell6
@@ -2029,9 +1960,21 @@ ccache gcc foo.c
     - [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
 * 查看
     - [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings.
+* [fasd](https://github.com/clvv/fasd) 增强cd命令
+* [bat](https://github.com/sharkdp/bat) 增强 cat 命令
+* [exa](https://github.com/ogham/exa) 增强 ls 命令
+* [ranger](https://github.com/ranger/ranger) 在很多目录上浏览各种文件 比 cd 和 cat 更有效率，甚至可以在终端预览图片
+* [prettyping](https://github.com/denilsonsa/prettyping) 图示化的ping
+* [ncdu]()比 du 好用多了,另一个选择是 [nnn](https://github.com/jarun/nnn)
+* [asciinema](https://asciinema.org/)和 [svg-trem](https://github.com/marionebl/svg-term-cli) 如果想把的命令行操作建录制成一个 SVG 动图
+* [httpie](https://github.com/jakubroztocil/httpie) 是一个可以用来替代 curl 和 wget 的 http 客户端，httpie 支持 json 和语法高亮，可以使用简单的语法进行 http 访问: http -v github.com
+* [tmux]() 在需要经常登录远程服务器工作的时候会很有用，可以保持远程登录的会话，还可以在一个窗口中查看多个 shell 的状态 替代screen、nohup
+* [Taskbook](https://github.com/klaussinani/taskbook) 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级
+* [sshrc](https://github.com/Russell91/sshrc ) 在登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置
 * 搜索
-    - ag：比grep、ack更快的递归搜索文件内容
-    - fzf：命令行下模糊搜索工具，能够交互式智能搜索并选取文件或者内容，配合终端ctrl-r历史命令搜索简直完美。
+    - [ack](https://beyondgrep.com/)、[ag](https://github.com/ggreer/the_silver_searcher)和 [rg](https://github.com/BurntSushi/ripgrep)是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到配置在 .gitignore 中的规则
+    - [fzf](https://github.com/junegunn/fzf) 如果想搜索以前打过的命令，不要再用 Ctrl +R,命令行下模糊搜索工具，能够交互式智能搜索并选取文件或者内容，配合终端ctrl-r历史命令搜索简直完美
+    - [fd](https://github.com/sharkdp/fd) 是一个比 find 更简单更快的命令，会自动地忽略掉一些你配置在 .gitignore 中的文件，以及 .git 下的文件
 * monitor
     - [ogham/exa](https://github.com/ogham/exa):A modern version of ‘ls’. https://the.exa.website/
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序的
@@ -2068,8 +2011,8 @@ ccache gcc foo.c
 * hex
     - [sharkdp/hexyl](https://github.com/sharkdp/hexyl):A command-line hex viewer
 * git
-    * [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
-    * tig：字符模式下交互查看git项目，可以替代git命令。
+    - [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
+    - tig：字符模式下交互查看git项目，可以替代git命令。
 * download
     - you-get: 非常强大的媒体下载工具，支持youtube、google+、优酷、芒果TV、腾讯视频、秒拍等视频下载。
     - axel：多线程下载工具，下载文件时可以替代curl、wget。
@@ -2113,9 +2056,9 @@ ccache gcc foo.c
 * PathPicker(fpp):在命令行输出中自动识别目录和文件，支持交互式，配合git非常有用
 * sz/rz：交互式文件传输，在多重跳板机下传输文件非常好用，不用一级一级传输。
 * ccache：高速C/C++编译缓存工具，反复编译内核非常有用。使用起来也非常方便
-* tmux：终端复用工具，替代screen、nohup
 * neovim: 替代vim
-* script/scriptreplay: 终端会话录制。
+* script/scriptreplay: 终端会话录制
+* [Hyper](https://hyper.is)
 * 配置
     - [direnv/direnv](https://github.com/direnv/direnv):Unclutter your .profile http://direnv.net
 
@@ -2144,9 +2087,9 @@ ccache gcc foo.c
     - https://github.com/miguelgfierro/scripts
     - https://github.com/epety/100-shell-script-examples
     - https://github.com/ruanyf/simple-bash-scripts
-    - 框架:
+    - 框架
         - 写bash脚本的框架 https://github.com/Bash-it/bash-it
-    - 和shell有关的索引资源：
+    - 和shell有关的索引资源
         + https://github.com/alebcay/awesome-shell
         + https://github.com/awesome-lists/awesome-bash
         + https://terminalsare.sexy/

@@ -14,29 +14,19 @@ module bundler(模块加载器兼打包工具)。所有小文件打包成一个�
 * 支持 SourceUrls 和 SourceMaps，易于调试
 * 使用异步 IO 并具有多级缓存。这使得 webpack 很快且在增量编译上更加快
 
-### 概念
+## 概念
 
-模块打包机：它做的事情是，分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。所有的文件都都当做模块处理
-
-Webpack的工作方式是：把你的项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个（或多个）浏览器可识别的JavaScript文件。
-
-Loaders：使用不同的loader，webpack有能力调用外部的脚本或工具，实现对不同格式的文件的处理，比如说分析转换scss为css，或者把下一代的JS文件（ES6，ES7)转换为现代浏览器兼容的JS文件，对React的开发而言，合适的Loaders可以把React的中用到的JSX文件转换为JS文件。单独安装并且需要在webpack.config.js中的modules关键字下进行配置，不同的组件不同rules。Loaders的配置包括以下几方面：
+* 模块打包机：分析项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。所有的文件都都当做模块处理
+* Webpack的工作方式是：把项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个（或多个）浏览器可识别的JavaScript文件。
+* Loaders：使用不同的loader，webpack有能力调用外部的脚本或工具，实现对不同格式的文件的处理，比如说分析转换scss为css，或者把下一代的JS文件（ES6，ES7)转换为现代浏览器兼容的JS文件，对React的开发而言，合适的Loaders可以把React的中用到的JSX文件转换为JS文件。单独安装并且需要在webpack.config.js中的modules关键字下进行配置，不同的组件不同rules。Loaders的配置包括以下几方面：
     - test：一个用以匹配loaders所处理文件的拓展名的正则表达式（必须）
     - loader：loader的名称（必须）
     - include/exclude:手动添加必须处理的文件（文件夹）或屏蔽不需要处理的文件（文件夹）（可选）；
     - query：为loaders提供额外的设置选项（可选）
+* Source Maps：webpack就可以在打包时为我们生成的source maps，这为我们提供了一种对应编译文件和源文件的方法，使得编译后的代码可读性更高，也更容易调试。
+* 默认配置文件只有一个webpack.config.js
 
-Source Maps：webpack就可以在打包时为我们生成的source maps，这为我们提供了一种对应编译文件和源文件的方法，使得编译后的代码可读性更高，也更容易调试。
-
-Webpack 的默认配置文件只有一个，即 webpack.config.js
-
-### 区别
-
-Gulp/Grunt是一种能够优化前端的开发流程的工具，而WebPack是一种模块化的解决方案，不过Webpack的优点使得Webpack在很多场景下可以替代Gulp/Grunt类的工具。
-
-Grunt和Gulp的工作方式是：在一个配置文件中，指明对某些文件进行类似编译，组合，压缩等任务的具体步骤，工具之后可以自动替你完成这些任务。
-
-### 安装
+## 安装
 
 ```sh
 npm init  #  初始化项目信息
@@ -57,13 +47,14 @@ webpack hello.js hello.bundle.js --module-bind 'css=style-loader!css-loader' --w
 -d #  提供source map，方便调试。
 ```
 
-### 配置文件
+## 配置
 
 * entry：入口文件
 * output：生成文件
 * __dirname：全局变量，当前脚本目录
 * devtool: 'eval-source-map',
 * devserver：webpack-dev-server配置
+* loaders：
 
 ```js
 var webpack = require('webpack');
@@ -139,9 +130,7 @@ gulp.task("webpack", function(callback) { // 配合grunt/pulp使用
 }
 ```
 
-- loaders：
-
-### 组件
+## 组件
 
 * webpack-dev-server：浏览器监听你的代码的修改，并自动刷新显示修改后的结果.基于Node.js Express框架的开发服务器，它是一个静态资源Web服务器，对于简单静态页面或者仅依赖于独立服务的前端页面，都可以直接使用这个开发服务器进行开发。在开发过程中，开发服务器会监听每一个文件的变化，进行实时打包，并且可以推送通知前端页面代码发生了变化，从而可以实现页面的自动刷新。
 * babel：编译JavaScript的平台
@@ -154,12 +143,12 @@ gulp.task("webpack", function(callback) { // 配合grunt/pulp使用
 
 ### 插件
 
-插件（Plugins）是用来拓展Webpack功能的，它们会在整个构建过程中生效，执行相关的任务。
+插件（Plugins）是用来拓展Webpack功能的，会在整个构建过程中生效，执行相关的任务
 
-与loaders区别：loaders是在打包构建过程中用来处理源文件的（JSX，Scss，Less..），一次处理一个，插件并不直接操作单个文件，它直接对整个构建过程其作用。
-
+* 与loaders区别：loaders是在打包构建过程中用来处理源文件的（JSX，Scss，Less..），一次处理一个，插件并不直接操作单个文件，它直接对整个构建过程其作用
 * HtmlWebpackPlugin：依据一个简单的index.html模板，生成一个自动引用你打包后的JS文件的新index.html。
 * Hot Module Replacement：在修改组件代码后，自动刷新实时预览修改后的效果。配置在webpack配置文件中添加HMR插件；在Webpack Dev Server中添加"hot"参数；如果是React模块，使用我们已经熟悉的Babel可以更方便的实现功能热加载。
+* [webpack/webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware):A development middleware for webpack
 
 ### 构建
 
@@ -182,12 +171,12 @@ gulp.task("webpack", function(callback) { // 配合grunt/pulp使用
     - 启用 post-css
     - 启用 optimize-minimize（如 uglify 等）
     - 中大型的商业网站生产环境下，是绝对不能有 console.log() 的，所以要为 babel 配置 Remove console transform
-
-这里需要说明的是因为开发环境下启用了 hot module replacement，为了让样式源文件的修改也同样能被热替换，不能使用 ExtractTextPlugin，而转为随 JS Bundle 一起输出。
-
-package.json 里添加相应的配置：
+* 需要说明的是因为开发环境下启用了 hot module replacement，为了让样式源文件的修改也同样能被热替换，不能使用 ExtractTextPlugin，而转为随 JS Bundle 一起输出。
+* 在开发环境下的时候，需要使用 npm run dev 来启动，而在生产环境中，则用 npm run build 来发布
+* 在真实场景中，不会直接使用 webpack-dev-server，而采用 express + webpack/webpack-dev-middleware
 
 ```json
+# package.json
 {
   "scripts": {
     "build": "webpack --optimize-minimize",
@@ -198,10 +187,6 @@ package.json 里添加相应的配置：
 
 npm run dev // 构建npm脚本
 ```
-
-在开发环境下的时候，你需要使用 npm run dev 来启动，而在生产环境中，则用 npm run build 来发布。
-
-在真实场景中，我们不会直接使用 webpack-dev-server，而采用 express + webpack/webpack-dev-middleware
 
 ## [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
 
@@ -234,10 +219,77 @@ plugins: [
 "scripts": {
     "dev": "webpack-dashboard -- node index.js"
 }
+```
 
-# 在vue-cli与create-my-react
-plugin 位置正确
-脚本配置正确
+### webpack-bundle-analyzer
+
+```sh
+npm install --save-dev webpack-bundle-analyzer
+
+# 修改webpack.config.js
+let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+module.exports = {
+    plugins: [new BundleAnalyzerPlugin()]
+}
+
+npm run build --report
+```
+
+```js
+module.exports = {
+    context: path.resolve('js'),
+    entry: {
+        utils:'./utils.js',
+        main:'./main.js'
+    },
+    output: {
+        path: path.resolve('build/js/'),
+        publicPath:'/public/assets/js/',
+        filename: '[name].js'
+    },
+    devServer: {
+        contentBase: 'views'
+    },
+    module: {
+        preLoaders: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'jshint'
+            }
+        ],
+
+        loaders: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel',
+                query: {
+                    presets: [
+                        'es2015'
+                    ]
+                }
+            },
+            {
+                test: /\.less$/,
+                exclude: /node_modules/,
+                loader: 'style!css!less'
+            },
+            {
+                test: /\.(jpg|jpeg|png|gif)$/,
+                include: /images/,
+                loader: 'url'
+            }
+
+        ]
+    },
+
+    jshint:{
+            "failOnHint": true,
+            'esnext': true,
+        }
+};
 ```
 
 ### 跨域
@@ -258,34 +310,15 @@ proxyTable: {
 }
 ```
 
-### webpack-bundle-analyzer
-
-```sh
-npm install --save-dev webpack-bundle-analyzer
-
-# 修改webpack.config.js
-let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
-module.exports = {
-    plugins: [new BundleAnalyzerPlugin()]
-}
-
-npm run build --report
-```
-
-## 部署
-
 ## 问题
 
+```
 Parsing error: The keyword 'import' is reserved
 
 "parserOptions": {
     "sourceType": "module"
   }
-
-## 插件
-
-* [webpack/webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware):A development middleware for webpack
+```
 
 ## 参考
 

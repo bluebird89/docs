@@ -138,12 +138,12 @@ WHERE A.id IS null OR B.id IS null;
 * [alibaba/otter](https://github.com/alibaba/otter)：阿里巴巴分布式数据库同步系统(解决中美异地机房)
 * [Nozbe/WatermelonDB](https://github.com/Nozbe/WatermelonDB):🍉 Next-gen database for powerful React and React Native apps that scales to 10,000s of records and remains fast ⚡️
 * [grafana/grafana](https://github.com/grafana/grafana):The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More https://grafana.com
-- [getredash/redash](https://github.com/getredash/redash) Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. <http://redash.io/>
-- [pingcap/tidb](https://github.com/pingcap/tidb)TiDB is a distributed NewSQL database compatible with MySQL protocol
-- [apache/incubator-superset](https://github.com/apache/incubator-superset): a modern, enterprise-ready business intelligence web application. a data exploration and visualization web application.
-- [Meituan-Dianping/SQLAdvisor](https://github.com/Meituan-Dianping/SQLAdvisor)输入SQL，输出索引优化建议
-- [HVF/franchise](https://github.com/HVF/franchise)：🍟 a notebook sql client. what you get when have a lot of sequels. https://franchise.cloud
-- [greenplum-db/gpdb](https://github.com/greenplum-db/gpdb):Greenplum Database http://greenplum.org
+* [getredash/redash](https://github.com/getredash/redash) Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. <http://redash.io/>
+* [pingcap/tidb](https://github.com/pingcap/tidb)TiDB is a distributed NewSQL database compatible with MySQL protocol
+* [apache/incubator-superset](https://github.com/apache/incubator-superset): a modern, enterprise-ready business intelligence web application. a data exploration and visualization web application.
+* [Meituan-Dianping/SQLAdvisor](https://github.com/Meituan-Dianping/SQLAdvisor)输入SQL，输出索引优化建议
+* [HVF/franchise](https://github.com/HVF/franchise)：🍟 a notebook sql client. what you get when have a lot of sequels. https://franchise.cloud
+* [greenplum-db/gpdb](https://github.com/greenplum-db/gpdb):Greenplum Database http://greenplum.org
 * [realm/realm-js](https://github.com/realm/realm-js):Realm is a mobile database: an alternative to SQLite & key-value stores https://realm.io
 * [orbitdb/orbit-db](https://github.com/orbitdb/orbit-db):Peer-to-Peer Databases for the Decentralized Web
 * [prometheus/prometheus](https://github.com/prometheus/prometheus)：The Prometheus monitoring system and time series database. https://prometheus.io/
@@ -199,6 +199,7 @@ WHERE A.id IS null OR B.id IS null;
     -  [DolphinDB](https://www.dolphindb.cn/):自带金融基因，内置并优化了很多与金融分析相关的函数，譬如各种sliding window function, correlation/covariance/beta/percentile, 处理panel data的分组计算功能 context by， 用于数据透视的pivot by、用于数据聚合的group by， 用于时间序列数据分段处理的segment by， 以及时间序列数据特有的asof join和window join， 也包括常用的分类和拟合算法
         +  [文档](dolphindb/Tutorials_CN)
     -  Informix TimeSeries
+* [Pivotal Greenplum](https://pivotal.io/pivotal-greenplum):Parallel Postgres for enterprise analytics at scale
 
 ## 图书
 
@@ -233,5 +234,5 @@ WHERE A.id IS null OR B.id IS null;
 ## 参考
 
 * [数据库的原理](http://blog.jobbole.com/100349/)
-- [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)
+* [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)
 * [enochtangg/quick-SQL-cheatsheet](https://github.com/enochtangg/quick-SQL-cheatsheet):A quick reminder of all SQL queries and examples on how to use them.

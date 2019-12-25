@@ -416,6 +416,7 @@ dig可以显示整个查询过程
         + 从”根域名服务器”查到”顶级域名服务器”的NS记录和A记录（IP地址）
         + 从”顶级域名服务器”查到”次级域名服务器”的NS记录和A记录（IP地址）
         + 从”次级域名服务器”查出”主机名”的IP地址
+* [](https://www.ipaddress.com/)
 
 ```sh
 dig math.stackexchange.com
@@ -468,6 +469,12 @@ host github.com # host命令可以看作dig命令的简化版本。返回当前�
 host 192.30.252.153
 nslookup #  命令用于互动式地查询域名记录
 whois github.com # 用来查看域名的注册情况
+
+sudo killall -HUP mDNSResponder
+sudo killall mDNSResponderHelper
+sudo dscacheutil -flushcache
+
+ifconfig /flushdns
 ```
 
 ### 公共 DNS 服务
@@ -476,10 +483,24 @@ whois github.com # 用来查看域名的注册情况
 8.8.8.8
 8.8.4.4
 
-# Cloudflare 
+Public DNS+ 
+119.29.29.29
+182.254.116.116
 
+#百度 BaiduDNS
+180.76.76.76
+
+# 114dns
+114.114.114.114
+114.114.114.115
+
+# Cloudflare 
 1.1.1.1
 1.0.0.1
+
+alidns
+223.5.5.5
+223.6.6.6
 ```
 
 ### [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest)

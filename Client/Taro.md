@@ -16,16 +16,16 @@ yarn global add @tarojs/cli
 taro init myApp
 
 # 编译预览模式
-$ npm run dev:weapp|h5
+npm run dev:weapp|h5
 # 仅限全局安装
-$ taro build --type weapp|h5 --watch
+taro build --type weapp|h5 --watch
 # npx 用户也可以使用
-$ npx taro build --type weapp|h5 --watch
+npx taro build --type weapp|h5 --watch
 
 # 打包
-$ npm build dev:weapp|h5
+npm build dev:weapp|h5
 # 仅限全局安装
-$ taro build --type weapp|h5
+taro build --type weapp|h5
 # npx 用户也可以使用
-$ npx taro build --type weapp|h5
+npx taro build --type weapp|h5
 ```

@@ -1,65 +1,56 @@
-# API（Application Programming Interface，应用程序编程接口
+# API（Application Programming Interface) 应用程序编程接口
 
-一些预先定义的函数或者接口，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无须访问源码，或理解内部工作机制的细节。
-
-* 防止API被恶意调用
-* API通信中数据加密的问题
-
-## 文档格式
-
-* 请求地址
-* 请求类型
-* 参数说明
-* 返回结果说明
+一些预先定义的函数或者接口，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无须访问源码，或理解内部工作机制的细节
 
 ## 状态
 
-* 前后端分离，业界广泛采用的方式就是采用token
+* 前后端分离，业界广泛采用token方式
+* 初始
     - 第一次来登记的时候，服务器根据用户出具信息，在核验完毕身份证后（验证密码）后，发放token
     - 客户端保存token,后面访问接口时带上token
     - token 加有效期
         + 通过抓包等方式得知了服务器API的地址，就意味着可以任意调用API了，API会被盗用。为了避免这种被盗用，引入签名机制
-    - 验证签名：采取多少数据项、用md5或者sha1
-        + 固定字符串，或有规律字符串。如果客户端被反编译了，签名机制就会被人得知。所以，在签名机制中引入另外一个新的重要元素：时间戳。
-        + 时间戳
-            * 判定API访问的时效性
-            * 参与签名运算
-        * 考虑
-            * 可变性：每次的签名必须是不一样的
-            * 时效性：每次请求的时效性，过期作废
-            * 唯一性：每次的签名是唯一的
-            * 完整性：能够对传入数据进行验证，防止篡改
-        + 方法
-            * 发送方和接收方约定一个加密的盐值，进行生成签名。 `/api/login?username=xxx&password=xxx&sign=xxx`
-            * 单向散列加密：把任意长的输入串变化成固定长的输出串，并且由输出串难以得到输入串
-                - 算法：MD5 SHA MAC CRC
-                - 优点
-                    + 方便存储：加密后都是固定大小（32位）的字符串，能够分配固定大小的空间存储。
-                    + 损耗低：加密/加密对于性能的损耗微乎其微。
-                    + 文件加密：只需要32位字符串就能对一个巨大的文件验证其完整性。
-                    + 不可逆：大多数的情况下不可逆，具有良好的安全性
-                - 缺点：存在暴力破解的可能性，最好通过加盐值的方式提高安全性。
-                - 场景：用于敏感数据，比如用户密码，请求参数，文件加密等。
-                - 推荐：password_hash（）
-            * 对称加密:同一个密钥可以同时用作数据的加密和解密
-                - 算法：DES（AES 是 DES 的升级版，密钥长度更长，选择更多，也更灵活，安全性更高，速度更快） AES
-                - 优点：算法公开、计算量小、加密速度快、加密效率高。
-                - 缺点：发送方和接收方必须商定好密钥，然后使双方都能保存好密钥，密钥管理成为双方的负担。
-                - 应用场景 相对大一点的数据量或关键数据的加密。
-                - mcrypt_encrypt 和 mcrypt_decrypt在 PHP7.2 版本中已经被弃用了，在新版本中使用 openssl_encrypt 和 openssl_decrypt 两个方法
-            * 非对称加密:需要两个密钥来进行加密和解密，这两个秘钥分别是公钥（public key）和私钥（private key）
-                - 算法
-                    + RSA2  SHA256WithRSA   强制要求RSA密钥的长度至少为2048
-                    + RSA SHA1WithRSA 对RSA密钥的长度不限制，推荐使用2048位以上
-                - 优点 与对称加密相比，安全性更好，加解密需要不同的密钥，公钥和私钥都可进行相互的加解密。
-                - 缺点 加密和解密花费时间长、速度慢，只适合对少量数据进行加密。
-                - 应用场景:适合于对安全性要求很高的场景，适合加密少量数据，比如支付数据、登录数据等。
-        + 密钥：
-            * 将密钥设置到环境变量中，每次从环境变量中加载
-            * 将密钥存放到配置中心，统一进行管理
-            * 设置密钥有效期，比如一个月进行重置一次
-    - 只要客户端被反编译了，加密方式和签名机制都会暴露出来，所以安全是需要双方配合的
-    - token或者aes加解密密码:建议走POST方式，也可以将这些信息放到http header中，也可以放到http body中
+* 签名机制：采取多数据项、用md5或者sha1
+    - 固定字符串，或有规律字符串。如果客户端被反编译了，签名机制就会被人得知。所以，引入另外一个新的重要元素：时间戳
+    - 时间戳
+        + 判定API访问的时效性
+        + 参与签名运算
+    + 考虑
+        + 可变性：每次的签名必须是不一样的
+        + 时效性：每次请求的时效性，过期作废
+        + 唯一性：每次的签名是唯一的
+        + 完整性：能够对传入数据进行验证，防止篡改
+    - 方法
+        + 发送方和接收方约定一个加密的盐值，进行生成签名 `/api/login?username=xxx&password=xxx&sign=xxx`
+        + 单向散列加密：把任意长的输入串变化成固定长的输出串，并且由输出串难以得到输入串
+            * 算法：MD5 SHA MAC CRC
+            * 优点
+                - 方便存储：加密后都是固定大小（32位）的字符串，能够分配固定大小的空间存储。
+                - 损耗低：加密/加密对于性能的损耗微乎其微。
+                - 文件加密：只需要32位字符串就能对一个巨大的文件验证其完整性。
+                - 不可逆：大多数的情况下不可逆，具有良好的安全性
+            * 缺点：存在暴力破解的可能性，最好通过加盐值的方式提高安全性。
+            * 场景：用于敏感数据，比如用户密码，请求参数，文件加密等。
+            * 推荐：password_hash（）
+        + 对称加密:同一个密钥可以同时用作数据的加密和解密
+            * 算法：DES（AES 是 DES 的升级版，密钥长度更长，选择更多，也更灵活，安全性更高，速度更快） AES
+            * 优点：算法公开、计算量小、加密速度快、加密效率高。
+            * 缺点：发送方和接收方必须商定好密钥，然后使双方都能保存好密钥，密钥管理成为双方的负担。
+            * 应用场景 相对大一点的数据量或关键数据的加密。
+            * mcrypt_encrypt 和 mcrypt_decrypt在 PHP7.2 版本中已经被弃用了，在新版本中使用 openssl_encrypt 和 openssl_decrypt 两个方法
+        + 非对称加密:需要两个密钥来进行加密和解密，这两个秘钥分别是公钥（public key）和私钥（private key）
+            * 算法
+                - RSA2  SHA256WithRSA   强制要求RSA密钥的长度至少为2048
+                - RSA SHA1WithRSA 对RSA密钥的长度不限制，推荐使用2048位以上
+            * 优点 与对称加密相比，安全性更好，加解密需要不同的密钥，公钥和私钥都可进行相互的加解密。
+            * 缺点 加密和解密花费时间长、速度慢，只适合对少量数据进行加密。
+            * 应用场景:适合于对安全性要求很高的场景，适合加密少量数据，比如支付数据、登录数据等。
+    - 密钥：
+        + 将密钥设置到环境变量中，每次从环境变量中加载
+        + 将密钥存放到配置中心，统一进行管理
+        + 设置密钥有效期，比如一个月进行重置一次
+* 只要客户端被反编译了，加密方式和签名机制都会暴露出来，所以安全是需要双方配合的
+* token或者aes加解密密码:建议走POST方式，也可以将这些信息放到http header中，也可以放到http body中
 
 ```
 // 第一步请求
@@ -102,7 +93,7 @@ enc_bank_card = encrypt( enc_password, bank_card )
 http.post( "http://host.com/api/bankcard/create", { enc_bank_card, enc_password, token } ).signature( 'api/bankcard/create'+timestamp )
 
 // 第四步，服务端收到数据后，验证API签名和timestamp时效性，最后解密数据，入库
-// 验证signature和timestamp时效性伪代码略过...
+// 验证signature和timestamp时效性
 // 获取客户端传来的token enc_bankcard enc_password
 token = get_post( 'token' )
 enc_bankcard = get( 'enc_bankcard' )
@@ -117,29 +108,14 @@ openssl genrsa - out private_key . pem 2048
 openssl rsa - in private_key . pem - pubout - out public_key . pem
 ```
 
-## 加密
-
-* https:面对charles等抓包工具时，其实并没有什么卵用，只要配置一下根证书瞬间可以看到一切明文
-
-```
-// 加密密码
-password = '123456'
-// 需要加密的内容
-message = 'Hello World!'
-// 利用加密密码对内容进行加密
-enc_message = encrypt( password, message )
-// 解密
-dec_message = decrypt ( password, enc_message )
-print dec_message   // Hello World!
-```
-
 ## 认证、授权和凭证
 
 * API 是无状态的，不推荐使用 Cookie
     - 使用 cookie，例如 web 项目中 ajax 的方式
     - 使用 session ID 或 hash 作为 token，但将 token 放入 header 中传递
     - 将生成的 token （可能是JWT）放入 cookie 传递，利用 HTTPonly 和 Secure 标签保护 token
-* 认证是 authentication，指的是当前用户的身份，当用户登陆过后系统便能追踪到他的身份做出符合相应业务逻辑的操作
+* 实现认证和授权的基础是需要一种媒介（credentials）来标记访问者的身份或权利
+* 认证（authentication）：指的是当前用户的身份，当用户登陆过后系统便能追踪到他的身份做出符合相应业务逻辑的操作
     - 即使用户没有登录，大多数系统也会追踪他的身份，只是当做来宾或者匿名用户来处理
     - 认证技术解决的是 “我是谁？”的问题
     - HTTP Basic Authentication
@@ -163,7 +139,7 @@ print dec_message   // Hello World!
                     + 将 nonce 附加到按照上面说到的方法进行 HMAC 签名，服务器使用预先分配的 nonce 同样进行签名校验，这个 nonce 在服务器只会被使用一次，因此可以提供唯一的摘要。
                 - 基于时间的一次性密码算法（TOTP：Time-based One-time Password Algorithm）：通过同步时间的方式协商到一致，在一定的时间窗口内有效（1分钟左右）
                     + 在两步验证中被大量使用：客户端服务器共享密钥然后根据时间窗口能通过 HMAC 算法计算出一个相同的验证码。TOTP HMAC-based One-time Password algorithm
-* 授权是 authorization，指的是什么样的身份被允许访问某些资源，在获取到用户身份后继续检查用户的权限
+* 授权（authorization）：指的是什么样的身份被允许访问某些资源，在获取到用户身份后继续检查用户的权限
     - 单一的系统授权往往是伴随认证来完成的，但是在开放 API 的多系统结构下，授权可以由不同的系统来完成，例如 OAuth
     - 授权技术是解决“我能做什么？”的问题
     - OAuth（开放授权）是一个开放标准，允许用户授权第三方网站访问他们存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方网站或分享他们数据的所有内容。
@@ -186,13 +162,17 @@ print dec_message   // Hello World!
         + 只需要签名的 secret key 就能校验 JWT 令牌，如果在消息体中加入用户 ID、过期信息就可以实现验证令牌是否有效、过期了，无需从数据库/缓存中读取信息
         + 第一、二部分只是 base64 编码，肉眼不可读，不应当存放敏感信息
         + 自包含特性，导致了无法被撤回
-* 实现认证和授权的基础是需要一种媒介（credentials）来标记访问者的身份或权利，在现实生活中每个人都需要一张身份证才能访问自己的银行账户、结婚和办理养老保险等，这就是认证的凭证
 * 策略
     - 基于访问控制列表（ACL）
     - 基于用户角色的访问控制（RBAC）
 
-## 文档和前后端协作
+## 文档
 
+* 格式
+    - 请求地址
+    - 请求类型
+    - 参数说明
+    - 返回结果说明
 * 基于注释的 API 文档：通过代码中注释生成 API 文档的轻量级方案
     - 好处是简单易用，基本与编程语言无关
     - 因为基于注释，非常适合动态语言的文档输出，例如 Nodejs、PHP、Python。由于NPM包容易安装和使用，这里推荐 nodejs 平台下的 apidocjs
@@ -211,12 +191,6 @@ print dec_message   // Hello World!
     - 管理契约文件:单独增加了一个管理契约文件的 git仓库，并使用 git 的submodule 来引用到各个涉及到了的代码仓库中
         + 单独放置还有一个额外的好处:构建契约测试时，可以方便的发送到一台中间服务器。一旦 API 契约发生变化，可以触发 API提供的契约验证测试
 * RAML RestFul API 统一建模语言 （RESTful API Modeling Language）,构建出 API 协作的工具链，设计、构建、测试、文档、共享。
-
-## 动态令牌
-
-* OTP：One-Time Password 一次性密码。
-* HOTP：HMAC-based One-Time Password 基于HMAC算法加密的一次性密码。
-* TOTP：Time-based One-Time Password 基于时间戳算法的一次性密码。
 
 ### [encode/apistar](https://github.com/encode/apistar)
 
@@ -248,20 +222,19 @@ if __name__ == '__main__':
 
 ### apidoc
 
-* 配置
-    - 每次导出接口文档都必须要让apidoc读取到apidoc.json文件(如果未添加配置文件，导出报错)，可以在项目的根目录下添加apidoc.json文件
-    - 项目中使用了package.json文件(例如:node.js工程)，可以将apidoc.json文件中的所有配置信息放到package.json文件中的apidoc参数中
-    - 参数
-        + name
-        + version
-        + description
-        + title
-        + url
-        + header.title
-        + header.filename   页眉文件名(markdown)
-        + footer.title    页脚导航标题
-        + footer.filename     页脚文件名(markdown)
-        + order   接口名称或接口组名称的排序列表,如果未定义，那么所有名称会自动排序 "Error", "Define", "PostTitleAndError", "PostError"
+* 每次导出接口文档都必须要让apidoc读取到apidoc.json文件(如果未添加配置文件，导出报错)，可以在项目的根目录下添加apidoc.json文件
+* 项目中使用了package.json文件(例如:node.js工程)，可以将apidoc.json文件中的所有配置信息放到package.json文件中的apidoc参数中
+* 参数
+    - name
+    - version
+    - description
+    - title
+    - url
+    - header.title
+    - header.filename   页眉文件名(markdown)
+    - footer.title    页脚导航标题
+    - footer.filename     页脚文件名(markdown)
+    - order   接口名称或接口组名称的排序列表,如果未定义，那么所有名称会自动排序 "Error", "Define", "PostTitleAndError", "PostError"
 
 ```
 # 安装
@@ -405,6 +378,30 @@ apidoc -i myapp/ -o apidoc/ -t mytemplate/
 
 ```
 
+## 恶意调用
+
+## 加密
+
+* https:面对charles等抓包工具时，其实并没有什么卵用，只要配置一下根证书瞬间可以看到一切明文
+
+```
+// 加密密码
+password = '123456'
+// 需要加密的内容
+message = 'Hello World!'
+// 利用加密密码对内容进行加密
+enc_message = encrypt( password, message )
+// 解密
+dec_message = decrypt ( password, enc_message )
+print dec_message   // Hello World!
+```
+
+## 动态令牌
+
+* OTP：One-Time Password 一次性密码
+* HOTP：HMAC-based One-Time Password 基于HMAC算法加密的一次性密码
+* TOTP：Time-based One-Time Password 基于时间戳算法的一次性密码
+
 ## 接口
 
 * [public-apis/public-apis](https://github.com/public-apis/public-apis):A collective list of free APIs for use in software and web development. https://ultimatecourses.com
@@ -474,7 +471,7 @@ apidoc -i myapp/ -o apidoc/ -t mytemplate/
     - swagger
     - blue sprint
     - RAML
-* mock 工具清单
+* mock
     - wiremock
     - json-server
     - node-mock-server
