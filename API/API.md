@@ -141,19 +141,27 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
                     + 在两步验证中被大量使用：客户端服务器共享密钥然后根据时间窗口能通过 HMAC 算法计算出一个相同的验证码。TOTP HMAC-based One-time Password algorithm
 * 授权（authorization）：指的是什么样的身份被允许访问某些资源，在获取到用户身份后继续检查用户的权限
     - 单一的系统授权往往是伴随认证来完成的，但是在开放 API 的多系统结构下，授权可以由不同的系统来完成，例如 OAuth
-    - 授权技术是解决“我能做什么？”的问题
-    - OAuth（开放授权）是一个开放标准，允许用户授权第三方网站访问他们存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方网站或分享他们数据的所有内容。
-        + OAuth 是一个授权标准，而不是认证标准。提供资源的服务器不需要知道确切的用户身份（session），只需要验证授权服务器授予的权限（token）即可。
-        + 基本思路就是通过授权服务器获取 access token 和 refresh token（refresh token 用于重新刷新access token），然后通过 access token 从资源服务器获取数据
-        + 验证 access token
-            * 在完成授权流程后，资源服务器可以使用 OAuth 服务器提供的 Introspection 接口来验证access token，OAuth服务器会返回 access token 的状态以及过期时间。在OAuth标准中验证 token 的术语是 Introspection。同时也需要注意 access token 是用户和资源服务器之间的凭证，不是资源服务器和授权服务器之间的凭证。资源服务器和授权服务器之间应该使用额外的认证（例如 Basic 认证）。
-            * 使用 JWT 验证。授权服务器使用私钥签发 JWT 形式的 access token，资源服务器需要使用预先配置的公钥校验 JWT token，并得到 token 状态和一些被包含在 access token 中信息。因此在 JWT 的方案下，资源服务器和授权服务器不再需要通信，在一些场景下带来巨大的优势。同时 JWT 也有一些弱点，我会在JWT 的部分解释。
+    - OAuth（开放授权）是一个开放标准，允许用户授权第三方网站访问存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方网站或分享他们数据的所有内容
+        + OAuth 是一个授权标准，而不是认证标准。提供资源的服务器不需要知道确切的用户身份（session），只需要验证授权服务器授予的权限（token）即可
         + access token 被设计用来客户端和资源服务器之间交互,过期时间（TTL）应该尽量短，从而避免用户的 access token 被嗅探攻击
         + refresh token 是被设计用来客户端和授权服务器之间交互。帮助用户维护一个较长时间的状态，避免频繁重新授权.客户端拿着 refresh token 去获取 access token 时同时需要预先配置的 secure key，客户端和授权服务器之前始终存在安全的认证。
         + OAuth 负责解决分布式系统之间的授权问题，即使有时候客户端和资源服务器或者认证服务器存在同一台机器上。OAuth 没有解决认证的问题，但提供了良好的设计利于和现有的认证系统对接。
-        + Open ID 解决的问题是分布式系统之间身份认证问题，使用Open ID token 能在多个系统之间验证用户，以及返回用户信息，可以独立使用，与 OAuth 没有关联。
-        + OpenID Connect 解决的是在 OAuth 这套体系下的用户认证问题，实现的基本原理是将用户的认证信息（ID token）当做资源处理。在 OAuth 框架下完成授权后，再通过 access token 获取用户的身份。
+        + Open ID 解决的问题是分布式系统之间身份认证问题，使用Open ID token 能在多个系统之间验证用户，以及返回用户信息，可以独立使用，与 OAuth 没有关联
+        + OpenID Connect 解决的是在 OAuth 这套体系下的用户认证问题，实现的基本原理是将用户的认证信息（ID token）当做资源处理。在 OAuth 框架下完成授权后，再通过 access token 获取用户的身份
         + 如果系统中需要一套独立的认证系统，并不需要多系统之间的授权可以直接采用 Open ID。如果使用了 OAuth 作为授权标准，可以再通过 OpenID Connect 来完成用户的认证。
+    - 类型：grant_type：authorization_code password client_credentials
+        + 授权码（authorization code）方式：向第三方应用先申请一个授权码，然后再用该码获取令
+            * 流程:前端跳转到第三方应用登录链接->用户点击链接跳转到第三方应用登录并进行授权->前端跳转到所指定应用回调资源地址并伴随用于交互 AccessToken 的 Code->后端根据请求第三方应用并使用 Code 获取该用户的 AccessToken->获取 AccessToken 之后的应用即可自主的从第三方应用中获取用户的资源信息
+            * 应用登记：注册一个 Application,添加回调url,得到 ClientId 和 Client Secret
+            * 验证 access token 
+                - 在完成授权流程后，资源服务器可以使用 OAuth 服务器提供的 Introspection 接口来验证access token，OAuth服务器会返回 access token 的状态以及过期时间。在OAuth标准中验证 token 的术语是 Introspection。同时也需要注意 access token 是用户和资源服务器之间的凭证，不是资源服务器和授权服务器之间的凭证。资源服务器和授权服务器之间应该使用额外的认证（例如 Basic 认证）。
+                - 使用 JWT 验证。授权服务器使用私钥签发 JWT 形式的 access token，资源服务器需要使用预先配置的公钥校验 JWT token，并得到 token 状态和一些被包含在 access token 中信息。因此在 JWT 的方案下，资源服务器和授权服务器不再需要通信，在一些场景下带来巨大的优势。同时 JWT 也有一些弱点，我会在JWT 的部分解释。
+        + 隐藏式（implicit）：直接向前端颁发令牌，跳回redirect_uri，令牌的位置是 URL 锚点（fragment），而不是查询字符串（querystring）。因为 OAuth 2.0 允许跳转网址是 HTTP 协议，因此存在"中间人攻击"的风险，而浏览器跳转时，锚点不会发到服务器，就减少了泄漏令牌的风险。
+            * 用于一些安全要求不高的场景，并且令牌的有效期必须非常短，通常就是会话期间（session）有效，浏览器关掉，令牌就失效了
+        + 密码式（password）：使用用户名和密码，申请令牌
+            * 验证身份通过后，直接给出令牌。注意，这时不需要跳转，而是把令牌放在 JSON 数据里面，作为 HTTP 回应，客户端因此拿到令牌
+        + 凭证式（client credentials）：适用于没有前端的命令行应用，即在命令行下请求令牌
+            * 给出的令牌，是针对第三方应用的，而不是针对用户的，即有可能多个用户共享同一个令牌
     - JWT （JSON Web Token）:一种自包含令牌，令牌签发后无需从服务器存储中检查是否合法，通过解析令牌就能获取令牌的过期、有效等信息
         + 令牌为一段点分3段式结构
             * header json 的 base64 编码为令牌第一部分
@@ -165,6 +173,65 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
 * 策略
     - 基于访问控制列表（ACL）
     - 基于用户角色的访问控制（RBAC）
+
+```
+{
+  ClientId: 'xxxxxxxxx',
+  Client Secret: 'xxxxxxxxx',
+  redirect: 'xxxxxxxxxxx'
+}
+
+前端             后端                       后端          后端 
+-—---------       --------------     -------------     ----------
+| Client ID | -->| code + state |-->|access_token |-->| user info |
+-----------       --------------     -------------     ----------
+
+# 前端获取 code & state
+GET https://github.com/login/oauth/authorize?client_id=your_client_id&redirect_uri=your_callback_url&scope=user&state=random_string
+| name | type | description |
+| ------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |   
+| client_id | string | 第一步中注册得到的ClientID |    
+| redirect_uri | string | 第一步中设置的回调地址 |  
+| loin | string | 推荐登录的 Github 账户，一般不填 | 
+| scope | string | 这个参数指定了最后能获取到的信息，取值范围有 user 和 repo 等等,默认同时取 user 和 repo 的信息，详细取值范围见Github 文档 |
+| state | string | 你设定的一个随机值，用来防止 cross-sit 攻击 |   
+| allow_signup | string | 这个参数指定是否允许用户在认证的时候注册 Github 账号，默认是 true |
+## 要求用户登录，然后询问是否同意给予授权
+## 跳转到redirect_uri指定的跳转网址，并且带上授权码
+http://localhost:8080/oauth/callback?code=859310e7cecc9196f4af
+
+# 后端获取 access_token
+POST https://github.com/login/oauth/access_token
+
+| Name | Type | Description |
+| ------------- | ------ | ----------------------------- | 
+| client_id | string | 第一步中获取到的 ClientID |
+| cleint_secret | string | 第一步中获取到的 ClientSecret |
+| code | string | 第二步中前端获取到的 code |
+| redirect_uri | string | 第一步中设置的回调地址 |
+| state | string | 第一步中设置的随机值 |
+## 根据头部的 Accept 的值返回
+application/x-www-form-urlencoded
+access_token=e72e16c7e42f292c6912e7710c838347ae178b4a&token_type=bearer
+
+application/json
+{
+  "access_token": "e72e16c7e42f292c6912e7710c838347ae178b4a",
+  "scope": "repo,gist",
+  "token_type": "bearer"
+}
+
+## access_token 获取用户信息
+curl -H "Authorization: Bearer ACCESS_TOKEN" \
+https://api.github.com/user
+
+## 更新token
+/oauth/token?
+  grant_type=refresh_token&
+  client_id=CLIENT_ID&
+  client_secret=CLIENT_SECRET&
+  refresh_token=REFRESH_TOKEN
+```
 
 ## 文档
 
