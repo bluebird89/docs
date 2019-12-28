@@ -3,8 +3,8 @@
 A PHP Framework For Web Artisans https://laravel.com
 
 ## 安装
-
-* Homestead
+ 
+* [laravel/homestead](https://github.com/laravel/homestead):an official, pre-packaged Vagrant box that provides you a wonderful development environment without requiring you to install PHP, a web server, and any other server software on your local machine
   - 安装virtualbox vagrant
   - parallels `vagrant plugin install vagrant-parallels`
   - vagrant box add [--name] laravel\homestead [homestead.box] <https://atlas.hashicorp.com/laravel/boxes/homestead> <https://atlas.hashicorp.com/laravel/boxes/homestead/versions/2.1.0/providers/virtualbox.box>
@@ -27,11 +27,12 @@ A PHP Framework For Web Artisans https://laravel.com
     + Postgres: 54320 → 发送到 5432
     + Mailhog: 8025 → 发送到 8025
     + 共享环境：Homestead 机器中并运行 share homestead.app。这会从 Homestead.yaml 配置文件中共享 homestead.app
-* valet：Mac 极简主义者的 Laravel 开发环境
+* [laravel/valet](https://github.com/laravel/valet):Valet is a Laravel development environment for Mac minimalists.
+  - [weprovide/valet-plus](https://github.com/weprovide/valet-plus):Blazing fast macOS PHP development environment https://medium.com/@timneutkens/intro…
   - 为 Mac 设置了启动后始终在后台运行 Nginx
   - Valet 使用 DnsMasq 将所有指向安装在本地计算机的站点的请求代理到 *.test 域上
 * 通过composer 安装:`composer create-project --prefer-dist laravel/laravel blog`
-* Laragon
+* [Laragon](https://sourceforge.net/projects/laragon/)
 * [laradock/laradock](https://github.com/laradock/laradock):Docker PHP development environment. http://laradock.io
 
 ```yaml
@@ -185,11 +186,8 @@ server {
 composer global require laravel/installer
 laravel new blog
 
-
-
-php artisan  key:generate
-
-# php artisan serve
+php artisan key:generate
+php artisan serve
 
 # laradock
 git clone https://github.com/Laradock/laradock.git
@@ -205,16 +203,26 @@ docker-compose up --build # 会构建所有容器：Service 'aws' failed to buil
 
 ## 配置
 
-.env 文件中列出的所有变量将被加载到 PHP 的超级全局变量 $ _ENV 中。你可以使用 env 函数检索这些变量的值
+启动时会加载项目中的.env文件的所有变量,bootstrap过程中的LoadEnvironmentVariables.超级全局变量 `$_ENV` 中或者 `env` 函数检索变量值
 
-* 通过 .env 文件中的 APP_ENV 变量确定的。可以通过 App facade 中的 environment 方法来访问此值
+* 开发、测试、生产三套环境 项目中应该有三个`.env.dev`、`.env.test`、`.env.prod`
+  - nginx配置文件里设置APP_ENV环境变量fastcgi_param APP_ENV dev;
+  - 设置服务器上运行PHP的用户的环境变量，比如在www用户的/home/www/.bashrc中添加export APP_ENV dev
+  - 在部署项目的持续集成任务或者部署脚本里执行`cp .env.dev .env`
+* `APP_ENV` 通过 `App::environment` 方法来访问此值
 * 使用全局 config 函数来访问配置值 `$value = config('app.timezone');`,临时设置配置值，传递一个数组给 config 函数
     - 需要config/app.php 配置
-* 使用 Memcached 来存储会话 config/session.php `'driver' => 'memcached',`
-* 使用专业缓存驱动器 config/cache.php `'default' => 'redis',`
+* 存储会话 config/session.php `'driver' => 'memcached',`
+* 缓存驱动器 config/cache.php `'default' => 'redis',`
 
 ```
 'debug' => env('APP_DEBUG', false),
+
+# 自定义env文件的路径与文件名
+$app = new Illuminate\Foundation\Application(
+    realpath(__DIR__.'/../')
+);
+$app->loadEnvironmentFrom('customer.env')
 
 if (App::environment('local')) {
     // 环境为 local
@@ -247,7 +255,10 @@ php artisan serve # 在php开发服务器中服务这个应用
 php artisan tinker  # 在应用中交互
 php artisan app:name #  设置应用程序命名空间
 
+php artisan key:generate  # 设置程序密钥   No supported encrypter found. The cipher and / or key length are invalid.
+
 php artisan auth:clear-resets # 清除过期的密码重置密钥 未使用过
+
 php artisan cache:clear # 清除应用程序缓存
 php artisan cache:table # 创建一个缓存数据库表的迁移
 
@@ -256,15 +267,13 @@ php artisan config:clear  # 删除配置的缓存文件
 php artisan db:seed # 数据库生成模拟数据
 php artisan event:generate  # 生成event和listen  需要实现配置eventserviceprivoder
 
-php artisan make:command TopicMakeExcerptCommand --command=topics:excerpt
-php artisan make:console #  生成一个Artisan命令
-php artisan key:generate  # 设置程序密钥   No supported encrypter found. The cipher and / or key length are invalid.
 php artisan make:controller App\TestController # 指定创建位置 在app目录下创建TestController
 php artisan make:controller PhotoController --resource # 创建Rest风格资源控制器
 php artisan make:controller PhotoController --resource --model=Photo
-php artisan make:middleware # 生成一个中间件
-php artisan make:model User -m
 
+php artisan make:middleware # 生成一个中间件
+
+php artisan make:model Models/Blog -m
 php artisan make:Model App\\Models\\User(linux or macOs 加上转义符) # 指定路径创建
 php artisan make:provider # 生成一个服务提供商的类
 php artisan make:request #  生成一个表单消息类
@@ -273,8 +282,8 @@ php artisan vendor:publish # 发布来自插件包的资源:
 php artisan vendor:publish # 发表一些可以发布的有用的资源来自提供商的插件包
 
 php artisan make:migration create_users_table --create=users
-php artisan migrate:install # 创建一个迁移库文件
 php artisan make:migration #  生成一个迁移文件
+php artisan migrate:install # 创建一个迁移库文件
 php artisan migrate:refresh # 复位并重新运行所有的迁移
 php artisan migrate:reset # 回滚全部数据库迁移
 php artisan migrate:rollback #  回滚最后一个数据库迁移
@@ -337,7 +346,7 @@ exit
 * Listeners：通过event:generate 或 make:listener 时生成，包含了用来处理 事件 的类。事件监听器接收事件实例并执行响应该事件被触发的逻辑。例如，UserRegistered 事件可能由 SendWelcomeEmail 监听器处理
 * Mail：通过make:mail 时生成。包含应用所有的邮件发送类。邮件对象允许你将构建邮件的逻辑封装在可以使用 Mail::send 方法来发送邮件的地方
 * Notifications：命令 make:notification 时生成。Notifications 目录包含应用发送的所有「事务性」通知，比如关于在应用中发生的事件的简单通知。Laravel 的通知功能抽象了通知发送，可以通过各种驱动（例如邮件、Slack、短信）发送通知，或是存储在数据库中。
-* Policies： 命令 make:policy 来创建。Policies 目录包含了应用的授权策略类。策略可以用来决定一个用户是否有权限去操作指定资源
+* Policies：命令 make:policy 来创建。Policies 目录包含了应用的授权策略类。策略可以用来决定一个用户是否有权限去操作指定资源
 * Providers：服务提供器通过在服务容器中绑定服务、注册事件、以及执行其他任务来为即将到来的请求做准备来启动应用。
 * Rules：命令 make:rule 命令时被创建。Rules 目录包含应用自定义验证规则对象。这些规则意在将复杂的验证逻辑封装在一个简单的对象中
 * Broadcast
@@ -361,21 +370,31 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
 * 载入服务提供者至容器：在内核引导启动的过程中最重要的动作之一就是载入服务提供者到你的应用，服务提供者负责引导启动框架的全部各种组件，例如数据库、队列、验证器以及路由组件。因为这些组件引导和配置了框架的各种功能，所以服务提供者是整个 Laravel 启动过程中最为重要的部分，所有的服务提供者都配置在 config/app.php 文件中的 providers 数组中。首先，所有提供者的 register 方法会被调用；一旦所有提供者注册完成，接下来，boot 方法将会被调用
 * 分发请求：一旦应用完成引导和所有服务提供者都注册完成，Request 将会移交给路由进行分发。路由将分发请求给一个路由或控制器，同时运行路由指定的中间件
 
+## 配置
+
+* `.env`
+
+```php
+# 时区
+# config/app.php
+ 'timezone' => 'PRC|UTC+8', # UTC(Coordinated Universal  Time)  UTC+8
+```
+
 ## 服务容器
 
-服务容器是 Laravel 管理类依赖和运行依赖注入的有力工具
+管理类依赖和运行依赖注入工具
 
-* 编写服务提供器
+* 编写
     - `php artisan make:provider HelperServiceProvider`
-    - 继承 Illuminate\Support\ServiceProvider 类。大多数服务提供器都包含 register 和 boot 方法。
+    - 继承 `Illuminate\Support\ServiceProvider` 类。大多数服务提供器都包含 register 和 boot 方法。
     - 注册：在 register 方法中，只需要绑定类到 服务容器中。而不需要尝试在 register 方法中注册任何事件监听器、路由或任何其他功能
     - 引导：服务提供器中注册一个视图组件呢？这应该在 boot 方法中完成。此方法在所有其他服务提供器都注册之后才能调用，可以访问已经被框架注册的所有服务
         + 引导方法依赖注入：可以为服务提供器的 boot 方法设置类型提示
-    - 延迟提供器：提供器仅在 服务容器 中注册绑定，直到当它真正需要注册绑定，提高应用程序的性能，因为它不会在每次请求时都从文件系统中加载
+    - 延迟提供器：提供器仅在服务容器中注册绑定，直到真正需要注册绑定，提高应用程序的性能，因为它不会在每次请求时都从文件系统中加载
 * 服务提供者是 Laravel 应用程序引导启动的中心，所有核心服务都是通过服务提供器进行引导。注册服务容器绑定、事件监听器、中间件，甚至是路由的注册
-    - 服务提供者在 config/app.php 配置文件中的providers数组中进行注册，许多提供器并不会在每次请求时都被加载，只有当它们提供的服务实际需要时才会加载。这种我们称之为「延迟」提供器
-    - 应用程序中注册的路由通过RouteServiceProvider实例来加载
-    - 事件监听器在EventServiceProvider类中进行注册
+    - `config/app.php` 中的providers数组中进行注册
+    - 注册的路由:`RouteServiceProvider`实例来加载
+    - 事件监听器:`EventServiceProvider`类中进行注册
     - 中间件（路由中间件）：在app/Http/Kernel.php类文件中注册，调用时与路由进行绑定
     - 在新创建的应用中，AppServiceProvider 文件中方法实现都是空的，这个提供者是你添加应用专属的引导和服务的最佳位置，当然，对于大型应用你可能希望创建几个服务提供者，每个都具有粒度更精细的引导
 * 依赖注入
@@ -567,19 +586,19 @@ $user = make('User');
 $user->login();
 ```
 
-## Facades
+## 门面（Facades）
 
 为应用程序的 服务容器 中可用的类提供了一个「静态」接口. 是服务容器中底层类的「静态代理」，提供了简洁而富有表现力的语法，甚至比传统的静态方法更具可测试性和扩展性。
 
 * 原理
-    - 继承自 Illuminate\Support\Facades\Facade 类。使用了 __callStatic() 魔术方法将你的 Facades 的调用延迟，直到对象从容器中被解析出来。
+    - 继承自 Illuminate\Support\Facades\Facade 类。使用了 __callStatic() 魔术方法将的 Facades 的调用延迟，直到对象从容器中被解析出来
     - 使用 Facade 进行的任何调用都将传递给 Laravel 缓存服务的底层实例。
 * 缺点
     - 会引起类作用范围的膨胀：因为 Facades 使用起来非常简单而且不需要注入，就会使得我们在不经意间在单个类中使用许多 Facades，从而导致类变的越来越大。而使用依赖注入的时候，使用的类越多，构造方法就会越长，在视觉上就会引起注意，提醒你这个类有点庞大了。因此在使用 Facades 的时候，要特别注意控制好类的大小，让类的作用范围保持短小。
-* Facades Vs. 依赖注入
+* Facades Vs 依赖注入
     - 依赖注入的主要优点之一是切换注入类的实现的能力。这在测试的时候很有用，因为你可以注入一个 mock 或者 stub ，并断言在 stub 上调用的各种方法。
     - Facades 使用动态方法来代理从服务容器解析的对象的方法调用，我们可以像测试注入的类实例一样来测试 Facades
-* Facades Vs. 辅助函数
+* Facades Vs 辅助函数
     - 在底层，辅助函数 cache 实际是调用 Cache facade 中的 get 方法。因此，尽管我们使用的是辅助函数，我们依然可以编写以下测试来验证该方法是否使用我们预期的参数来调用：
 
 ```php
@@ -603,7 +622,7 @@ public function testBasicExample()
 * 使用接口的原因：低耦合和简单性
     - 高耦合:依赖于一个扩展包的特定缓存类。一旦这个扩展包的 API 被更改了，我们的代码就必须跟着改变
     - 根据接口定义，就很容易判断给定服务提供的功能。 可以将契约视为说明框架功能的简洁文档。
-* 使用：要获得一个契约的实现，你只需要被解析的类的构造函数中添加「类型提示」即可
+* 使用：要获得一个契约的实现，只需要被解析的类的构造函数中添加「类型提示」即可
 
 ```php
 <?php
@@ -763,7 +782,7 @@ $name = Route::currentRouteName();
 $action = Route::currentRouteAction();
 ```
 
-## 路由中间件（Middleware）
+## 中间件（Middleware）
 
 提供了一种方便的机制来过滤进入应用的 HTTP 请求,中间件都位于 app/Http/Middleware 目录
 
@@ -838,6 +857,8 @@ Route::put('post/{id}', function ($id) {
 ```
 
 ### 迁移与填充 Migration && Seeder
+
+* 外键：数据类型一致 `unsignedInteger`
 
 ```php
 // 数据迁移
@@ -1416,6 +1437,8 @@ View::composer('*', function ($view) {
     //
 });
 View::creator('profile', 'App\Http\ViewCreators\ProfileCreator');
+
+php artisan storage:link # public/storage（软连接） → storage/app/public
 ```
 
 ### URL
@@ -1530,6 +1553,9 @@ class SessionServiceProvider extends ServiceProvider
 ### Command
 
 ```php
+php artisan make:command TopicMakeExcerptCommand --command=topics:excerpt
+php artisan make:console #  生成一个Artisan命令
+
 //在 app/Console/Kernel.php 文件里面, 添加以下
 protected $commands = [
     \App\Console\Commands\TopicMakeExcerptCommand::class,
@@ -1599,15 +1625,51 @@ php artisan topics:excerpt
 ## 数据操作
 
 * 优化
-    - 数据关联模型读取时使用 延迟预加载 和 预加载 ；
-    - 使用 Laravel Debugbar 或者 Clockwork 留意每一个页面的总数据库请求数量；
+    - 数据关联模型读取时使用 延迟预加载 和 预加载
+    - 使用 Laravel Debugbar 或者 Clockwork 留意每一个页面的总数据库请求数量
     - 从数据库里面拿出来的数据集合进行缓存，减少数据库的压力，运行在内存上的专业缓存软件对数据的读取也远远快于数据库
 * 方式
     - facade
     - 查询构造器
-    - Eloquent ORM
+    - Eloquent ORM:对象关系映射(Object Relational Mapping)
 
 ```php
+DB::insert("insert into student(name,age) values(?,?)",['sandy',19]);
+DB::delete('delete from student where name=?',['sandy']);
+DB::update('update student set sex=? where name=?',['男','tory']);
+DB::select('select * from student');
+DB::select('select * from users where id = :id', ['id' => 1]);
+DB::statement('drop table users');
+
+# 查询构建器
+$res=DB::table('student')->get();//first()返回结果集中的第一条数据
+$res=DB::table('student')->where('id','1001')->first();//value()返回一条数据中的指定字段
+$res=DB::table('student')->where('id','1003')->value('name');//pluck()返回结果集中name字段的所有值
+$res=DB::table('student')->pluck(2,function ($res){
+  foreach ($res as $user){
+    var_dump($user);
+    if ($user->id >=1003) return false;
+  }
+});
+
+# Eloquent
+# 查询
+$table=Student::all();
+$row=Student::find(1002);
+// 新建
+$stu=new Student();
+$stu->name='orm2';
+$stu->save();
+Student::create(['name'=>'orm3','age'=>13]); //create方法批量添加数据
+// 删除
+Student::destroy(1006,1007);
+Student::where('id',1008)->delete(); //通过查询构建器删除
+// 修改
+$stu=Student::find(1005);
+$stu->age=21;
+$stu->save();
+Student::where('id',1005)->update(['age'=>22]);//通过查询构建器修改
+
 $posts = Cache::remember('index.posts', $minutes = 30, function()
 {
     return Post::with('comments', 'tags', 'author', 'seo')->whereHidden(0)->get();
@@ -1618,7 +1680,7 @@ $posts = Cache::remember('index.posts', $minutes = 30, function()
 
 flat map
 
-## 表单验证机制
+## 表单验证
 
 Laravel表单验证拥有标准且庞大的规则集，通过规则调用来完成数据验证，多个规则组合调用须以"|"符号连接，一旦验证失败将自动回退并可自动绑定视图。
 
@@ -1710,7 +1772,6 @@ Laravel事件机制是一种很好的应用解耦方式，因为一个事件可�
   ```
 
 - 停止事件传播：在监听器的 handle 方法中返回 false 来停止事件传播到其他的监听器
-
 - 触发事件：调用 event 辅助函数可触发事件，事件将被分发到它所有已经注册的监听器上
 
   ```
@@ -2167,7 +2228,7 @@ Eloquent 会假设对应关联的外键名称是基于模型名称的。在这�
   23 }
   ```
 
-如果你在一个给定的模型中监听许多事件，也可使用观察者将所有监听器变成一个类，类的一个方法就是一个事件监听器
+如果在一个给定的模型中监听许多事件，也可使用观察者将所有监听器变成一个类，类的一个方法就是一个事件监听器
 
 ```php
 # 定义观察者：
@@ -2239,8 +2300,8 @@ class AppServiceProvider extends ServiceProvider
 Laravel本身是基于Composer管理的一个包，遵循Composer的相关规范，可以通过Composer来添加所依赖的其他Composer包，因此在做应用的扩展开发时，可以开发Composer包然后引入项目中即可；
 另外也可开发基于Laravel的专属扩展包。下面所讲的就是Laravel的专属扩展开发，最好的方式是使用 contracts ，而不是 facades，因为你开发的包并不能访问所有 Laravel 提供的测试辅助函数，模拟 contracts 要比模拟 facade 简单很多。
 
-- 服务提供者：服务提供者是你的扩展包与 Laravel 连接的重点，须定义自己的服务提供者并继承自 Illuminate\Support\ServiceProvider 基类
-- 路由：若要为你的扩展包定义路由，只需在包的服务提供者的 boot 方法中传递 routes 文件路径到 loadRoutesFrom 方法即可
+* 服务提供者：服务提供者是你的扩展包与 Laravel 连接的重点，须定义自己的服务提供者并继承自 Illuminate\Support\ServiceProvider 基类
+* 路由：若要为你的扩展包定义路由，只需在包的服务提供者的 boot 方法中传递 routes 文件路径到 loadRoutesFrom 方法即可
 
 ```
 1 /**
@@ -2415,11 +2476,11 @@ function boot()
 }
 ```
 
-### traits
+## traits
 
 ## 调试
 
-* 配置文件中`APP_DEBUG`
+* 配置文件:`APP_DEBUG`
 * `storage/logs`中的日志文件
 * lavavel批量插入保证字段名称、数量一致，不要赛选数据
 
@@ -2556,10 +2617,10 @@ $user->login();
 
 * 开发环境改成生产环境 (.env) `APP_ENV=local 改成 APP_ENV=production`
 * 关闭调试模式 (.env) `APP_DEBUG=true 改成 APP_DEBUG=false`
-* 缓存配置文件
+* 缓存配置
   - `php artisan config:cache // 配置缓存，生成：bootstrap/cache/config.php`
   - `php artisan config:clear // 清除配置缓存`
-* 缓存路由文件
+* 缓存路由
  - `php artisan route:cache // 路由缓存，生成：bootstrap/cache/routes.php`
  - `php artisan config:clear // 清除路由缓存`
 * 性能优化 `php artisan optimize // 优化，生成编译文件；`
@@ -2588,15 +2649,15 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
   - [laravel/framework](https://github.com/laravel/framework)
   - [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js.
   - [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
-* 权限
-  - [Adldap2/Adldap2-Laravel](https://github.com/Adldap2/Adldap2-Laravel):LDAP Authentication & Management for Laravel
+  - [bosnadev/repository](https://github.com/bosnadev/repository):Laravel Repositories is a package for Laravel 5 which is used to abstract the database layer. This makes applications much easier to maintain. https://bosnadev.com
 * lumen
-    - [laravel/lumen-framework](https://github.com/laravel/lumen-framework) <https://lumen.laravel.com/docs/5.6>
-    - [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
+  - [laravel/lumen-framework](https://github.com/laravel/lumen-framework) <https://lumen.laravel.com/docs/5.6>
+  - [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
 * API
   - [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
   - [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp
   - [mylxsw/wizard](https://github.com/mylxsw/wizard):Wizard是基于Laravel开发框架开发的一款开源项目（API）文档管理工具。 https://mylxsw.github.io/wizard/
+  - [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
 * Swoole
   - [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
 * logger
@@ -2618,13 +2679,12 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
   - [laravel/cashier](https://github.com/laravel/cashier):provides an expressive, fluent interface to Stripe's subscription billing services.
 * [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
 * [laravel/envoy](https://github.com/laravel/envoy):Elegant SSH tasks for PHP. a clean, minimal syntax for defining common tasks you run on your remote servers
-* [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
 * [barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf):A DOMPDF Wrapper for Laravel
 * RBAC
   - [Zizaco/entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
   - [spatie/laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
+  - [Adldap2/Adldap2-Laravel](https://github.com/Adldap2/Adldap2-Laravel):LDAP Authentication & Management for Laravel
   - [FrozenNode/Laravel-Administrator](https://github.com/FrozenNode/Laravel-Administrator):An administrative interface package for Laravel http://administrator.frozennode.com/
-* [bosnadev/repository](https://github.com/bosnadev/repository):Laravel Repositories is a package for Laravel 5 which is used to abstract the database layer. This makes applications much easier to maintain. https://bosnadev.com
 * [LaravelCollective/html](https://github.com/LaravelCollective/html):HTML and Form Builders for the Laravel Framework
 * [Algolia](https://www.algolia.com/doc/api-client/laravel/algolia-and-scout/):Algolia is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke
 * [launcher-host/mercurius](https://github.com/launcher-host/mercurius):Real-time Messenger for Laravel http://mercurius.launcher.host/
@@ -2636,10 +2696,6 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
   - MongoDB
     + [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb#installation):A MongoDB based Eloquent model and Query builder for Laravel (Moloquent) https://jenssegers.com
 * [GrahamCampbell/Laravel-Throttle](https://github.com/GrahamCampbell/Laravel-Throttle):A rate limiter for Laravel 5 https://gjcampbell.co.uk/
-* 环境
-  - [laravel/homestead](https://github.com/laravel/homestead):an official, pre-packaged Vagrant box that provides you a wonderful development environment without requiring you to install PHP, a web server, and any other server software on your local machine
-  - [laravel/valet](https://github.com/laravel/valet):Valet is a Laravel development environment for Mac minimalists.
-  - [weprovide/valet-plus](https://github.com/weprovide/valet-plus):Blazing fast macOS PHP development environment https://medium.com/@timneutkens/intro…
 * debug
   - [laravel/telescope](https://github.com/laravel/telescope):provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more
   - [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
@@ -2670,6 +2726,7 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
   - [laravel/dusk](https://github.com/laravel/dusk):Laravel Dusk provides an expressive, easy-to-use browser automation and testing API.
 * 部署
   - [envoyer](https://envoyer.io):Deployments you've only dreamed about. Zero downtime. Zero fuss
+* [overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat):微信 SDK for Laravel, 基于 overtrue/wechat
 
 ```sh
 # laravel-admin
@@ -2831,13 +2888,14 @@ password: password
 ## 参考
 
 * [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
-* [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
+* [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel) 来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
 * [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
 * [laravel/docs](https://github.com/laravel/docs)
 * [laravel-china/laravel-docs](https://github.com/laravel-china/laravel-docs):Laravel 中文文档 https://d.laravel-china.org
 * [laravel/spark-docs](https://github.com/laravel/spark-docs)
 * [summerblue/laravel5-cheatsheet](https://github.com/summerblue/laravel5-cheatsheet):A quick reference guide (cheat sheet) for Laravel 5.1 LTS, listing artisan, composer, routes and other useful bits of information. https://cs.laravel-china.org/
 * [samedreams/artisan-road](https://github.com/samedreams/artisan-road):Programmers are artisans （This book is a guide for artisans）
+* [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习 
 
 * [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
 * [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)
@@ -2849,14 +2907,14 @@ password: password
 
 ## 前后端分离
 
-* npm install
-* 配置webpack proxy
-* 运行arstian serve
+* `npm install`
+* 配置`webpack proxy`
+* 运行`arstian serve`
   - 创建migration,并配置字段
   - migrate
   - 生成模型与控制器
   - 配置api路由
-* npm run watch
+* `npm run watch`
 * 配置单页首页
   - 引入app.css 和 app.js
   - 配置前端路由
@@ -2870,7 +2928,6 @@ password: password
 >  SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint
 >  关联表中类型不一致造成
 
-<http://laravelacademy.org/post/6718.html>
 <https://d.laravel-china.org/docs/5.3/facades#how-facades-work>
 <https://d.laravel-china.org/docs/5.5/container>
 <http://www.jb51.net/article/73462.htm> <
@@ -2878,6 +2935,3 @@ http://blog.csdn.net/u013474436/article/details/52847326>
 <http://www.cnblogs.com/lyzg/p/6181055.html>
 <http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html>
 <http://laravel-china.github.io/php-the-right-way/>
-<http://laravelacademy.org/post/6842.html>
-
-* [快速入门 —— 使用 Laragon 在 Windows 中搭建 Laravel 开发环境](http://laravelacademy.org/post/7754.html)

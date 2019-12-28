@@ -3,46 +3,41 @@
 The PHP Interpreter <http://www.php.net>
 
 * PHP(Hypertext Preprocessor)
-* 一门弱类型的语言，变量在声明的那一刻不需要确定类型，运行时类型会发生显式或隐式的类型改变
-* 一种解释型语言，即不需要编译。构建在Zend 虚拟机之上
+* 一门弱类型的语言，变量在声明时不需要确定类型，运行时类型会发生显式或隐式的类型改变
+* 一种解释型语言，即不需要编译。构建在 Zend 虚拟机之上
 * 一种服务器端脚本语言，只能通过服务器访问，需要配置虚拟主机调试,结果以纯 HTML 形式返回给浏览器
-* PHP比其他脚本语言更快,如：Python和asp
 * HTTP协议在Nginx等服务器的解析下,传送给相应的Handler（PHP等）来处理
 * 后端渲染，默认html处理，模版文件以.php后缀
 * 优点:开发方便效率高
 * 缺点
-    - 性能差：在密集运算的场景下比 C 、 C++ 相差几十倍甚至上百倍
+    - 性能差：在密集运算的场景下比 C 、C++ 相差很大
     - 不可以直接操作底层，需要依赖扩展库来提供 API 实现
-    - **可控** 常驻内存运行环境的缺失
-        + 不可控：进程的入口点和退出时机由额外的程序控制，执行PHP脚本的时机仍然由外部驱动
+    - **可控**：常驻内存运行环境的缺失
+    - 不可控：进程的入口点和退出时机由额外的程序控制，执行PHP脚本的时机仍然由外部驱动
 
 ## 发展
 
-* Phar
-    - PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar
-    - 可以像 Java 一样方便地实现应用程序打包和组件化
-    - 一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行
-    - 配合 Swoole ，可以在命令行下执行 php server.phar 一键启动服务器
-* PHP
-    * 7.1 :2015.12.3 性能提升
-        - 减少内存分配次数
-        + 多使用栈内存
-        + 缓存数组的hash值
-        + 字符串解析成桉树改为宏展开
-        + 使用大块连续内存代替小块破碎内存
-        + 空合并赋值操作符:第一个操作数是存在并且不为 NULL，则返回该操作数。否则返回第二个操作数
-    * 7.2 JIT(JUST_IN_TIME)
-    * 7.4
-        - 预加载
-            + 在服务器启动的时候，将某些文件永久读取到内存中，之后的请求即可直接从这内存中读取。利用这个功能，能够将框架，或者是类库预加载到内存中，以进一步提高性能，还能将php写的函数，当成内部函数使用（因为已经永久加载到内存，整个服务器共享）
-            + 文件有所更新就得重新启动服务器
-            + php.ini的 `opcache.preload` 指向一个启动文件，可以包含其他文件
-        - 协变返回和逆变参数
-            + 协变返回类型
-        - 抛弃 array_merge ：在数组表达式中引入了扩展运算符
-        - 箭头函数
-        - 协变量返回和协变量参数
-    * 8:实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
+* Phar：PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar。可以像 Java 一样方便地实现应用程序打包和组件化，一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行。配合 Swoole ，可以在命令行下执行 php server.phar 一键启动服务器
+* 7.1 :2015.12.3
+    - 减少内存分配次数
+    - 多使用栈内存
+    - 缓存数组的hash值
+    - 字符串解析成桉树改为宏展开
+    - 使用大块连续内存代替小块破碎内存
+    - 空合并赋值操作符:第一个操作数是存在并且不为 NULL，则返回该操作数。否则返回第二个操作数
+* 7.2 JIT(JUST_IN_TIME)
+* 7.4
+    - 预加载
+        - 在服务器启动的时候，将某些文件永久读取到内存中，之后的请求即可直接从这内存中读取。利用这个功能，能够将框架，或者是类库预加载到内存中，以进一步提高性能，还能将php写的函数，当成内部函数使用（因为已经永久加载到内存，整个服务器共享）
+        - 文件有所更新就得重新启动服务器
+        - php.ini的 `opcache.preload` 指向一个启动文件，可以包含其他文件
+    - 协变返回和逆变参数
+        - 协变返回类型
+    - 抛弃 array_merge ：在数组表达式中引入了扩展运算符
+    - 箭头函数
+    - 协变量返回和协变量参数
+* 8
+    - 实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
 
 ```php
 $username = $_GET['user'] ?? 'nobody';
@@ -65,7 +60,16 @@ $calc = fn($num) => $num * $factor;
     - 基于语法分析器将 Token 转换成抽象语法树（AST） Token 就是一个个的词块，但是单独的词块不能表达完整的语义，还需要借助一定的规则进行组织串联。所以就需要语法分析器根据语法匹配 Token，将 Token 进行串联。语法分析器串联完 Token 后的产物就是抽象语法树（AST，Abstract Syntax Tree）。 AST 是 PHP7 版本的新特性，之前版本的 PHP 代码的执行过程中是没有生成 AST 这一步的。它的作用主要是实现了 PHP 编译器和解释器的解耦，提升了可维护性。
     - 将语法树转换成 Opcode 需要将语法树转换成 Opcode，才能被引擎直接执行。
     - 执行 Opcodes opcodes 是 opcode 的集合形式，是 PHP 执行过程中的中间代码。PHP 工程优化措施中有一个比较常见的 “开启 opcache”，指的技术这里将 opcodes 进行缓存。通过省去从源码到 opcode 的阶段，引擎直接执行缓存好的 opacode，以提升性能。
-* SAPI(Server Application Programming Interface)中文为服务端应用编程接口，它通过一系列钩子函数使得PHP可以和外围交换数据,接入层
+* 四层体系构成，从下到上依次是 Zend 引擎、Extensions 扩展、SAPI 接口、上层应用
+* Zend 引擎:PHP4 以后加入 PHP 的，是对原有PHP解释器的重写，整体使用 C 语言进行开发。作用是将PHP代码翻译为一种叫opcode的中间语言，它类似于JAVA的ByteCode（字节码）。引擎对PHP代码会执行四个步骤：
+    - 词法分析 Scanning（Lexing），将 PHP 代码转换为语言片段（Tokens）
+    - 解析 Parsing， 将 Tokens 转换成简单而有意义的表达式
+    - 编译 Compilation， AST 将表达式编译成Opcode
+    - 执行 Execution，虚拟机顺序执行Opcode，每次一条，以实现PHP代码所表达的功能
+    - APC、Opchche 这些扩展可以将Opcode缓存以加速PHP应用的运行速度，使用它们就可以在请求再次来临时省略前三步
+    - 引擎也实现了基本的数据结构、内存分配及管理，提供了相应的API方法供外部调用
+* Extensions 扩展:常见的内置函数、标准库都是通过extension来实现的，这些叫做PHP的核心扩展，用户也可以根据自己的要求安装PHP的扩展
+* SAPI(Server Application Programming Interface) 服务端应用编程接口：通过一系列钩子函数使得PHP可以和外围交换数据
     - SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性
     - 通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式
     - 几种常用的 SAPI：
@@ -77,14 +81,6 @@ $calc = fn($num) => $num * $factor;
             * main 目录 main 目录是 SAPI 层和 Zend 层的黏合剂。Zend 层实现了 PHP 脚本的编译和执行，sapi 层实现了输入和输出的抽象，main 目录则在它们中间起着承上启下的作用。承上，解析 SAPI 的请求，分析要执行的脚本文件和参数；启下，调用 zend 引擎之前，完成必要的模块初始化等工作。
             * ext 目录 ext 是 PHP 扩展相关的目录，常用的 array、str、pdo 等系列函数都在这里定义。
             * TSRM TSRM（Thread Safe Resource Manager）—— 线程安全资源管理器， 是用来保证资源共享的安全。
-* Zend 引擎:PHP4 以后加入 PHP 的，是对原有PHP解释器的重写，整体使用 C 语言进行开发，也就是说可以把PHP理解成用C写的一个编程语言软件，引擎的作用是将PHP代码翻译为一种叫opcode的中间语言，它类似于JAVA的ByteCode（字节码）。引擎对PHP代码会执行四个步骤：
-    - 词法分析 Scanning（Lexing），将 PHP 代码转换为语言片段（Tokens）。
-    - 解析 Parsing， 将 Tokens 转换成简单而有意义的表达式。
-    - 编译 Compilation， AST 将表达式编译成Opcode
-    - 执行 Execution，虚拟机顺序执行Opcode，每次一条，以实现PHP代码所表达的功能。
-    - APC、Opchche 这些扩展可以将Opcode缓存以加速PHP应用的运行速度，使用它们就可以在请求再次来临时省略前三步。
-    - 引擎也实现了基本的数据结构、内存分配及管理，提供了相应的API方法供外部调用。
-* Extensions 扩展:常见的内置函数、标准库都是通过extension来实现的，这些叫做PHP的核心扩展，用户也可以根据自己的要求安装PHP的扩展。
 * 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用都是上层应用
 * 请求
     - php_module_startup()
@@ -1270,7 +1266,11 @@ echo ("Page Views: ".$_SESSION['counter']);
     - 相对文件 `foo.txt => currentdirectory/foo.txt`
     - 相对路径 `subdirectory/foo.txt=> currentdirectory/subdirectory/foo.txt`
     - 绝对路径 `/main/foo.txt=> /main/foo.txt`
-* 打开文件：`resource fopen ( string $filename , string $mode [, bool $use_include_path = false [, resource $context ]] )`函数用于打开文件或URL并返回资源
+* 打开文件：`resource fopen ( string $filename , string $mode [, bool $use_include_path = false [, resource $context ]] )` 用于打开文件或URL并返回资源
+    - filename 是 "scheme://..." 的格式，则被当成一个 URL，PHP 将搜索协议处理器（也被称为封装协议）来处理此模式
+    - 如果该协议尚未注册封装协议，PHP 将发出一条消息来帮助检查脚本中潜在的问题并将 filename 当成一个普通的文件名继续执行下去
+    - 指定的是一个本地文件，将尝试在该文件上打开一个流。该文件必须是 PHP 可以访问的，因此需要确认文件访问权限允许该访问
+    - 相对路径无法打开
     - 接受两个参数
         + $filename表示要被打开的文件
         + $mode表示文件模式
@@ -1310,26 +1310,15 @@ echo ("Page Views: ".$_SESSION['counter']);
     - basename:返回路径中的文件名部分
 
 ```php
+# 读取
 $filename = "c:\\myfile.txt";
 $handle = fopen($filename, "r");//open file in read mode
 $contents = fread($handle, filesize($filename));//read file
 echo $contents;//printing data of file
 fclose($handle);//close file
 
-$fp = fopen('data.txt', 'w');//open file in write mode
-fwrite($fp, 'hello ');
-fwrite($fp, 'php file');
-fclose($fp);
-echo "File written successfully";
-
-$status=unlink('data.txt');
-if($status){
-    echo "File deleted successfully";
-}else{
-    echo "Sorry!";
-}
-
-$fp  = fopen('lock.txt', 'w+');
+# 写入并加
+$fp  = fopen(dirname(__FILE__) . '/lock.txt', 'w+');
 if (flock($fp, LOCK_EX)) {
     fwrite($fp, 'write something');
     flock($fp, LOCK_UN);
@@ -1338,17 +1327,26 @@ if (flock($fp, LOCK_EX)) {
 }
 fclose($fp);
 
+# 追加
+$fp = fopen(dirname(__FILE__) . '/data.txt', 'a');//opens file in append mode
+fwrite($fp, ' this is additional text ');
+fwrite($fp, 'appending data');
+fclose($fp);
+echo "File appended successfully";
+
+# 删除
+$status=unlink(dirname(__FILE__) . '/data.txt');
+if($status){
+    echo "File deleted successfully";
+}else{
+    echo "Sorry!";
+}
+
 $fp = fopen("c:\\file1.txt", "r");//open file in read mode
 while(!feof($fp)) {
   echo fgetc($fp);
 }
 fclose($fp);
-
-$fp = fopen('data.txt', 'a');//opens file in append mode
-fwrite($fp, ' this is additional text ');
-fwrite($fp, 'appending data');
-fclose($fp);
-echo "File appended successfully";
 
 # uploadform.html
 <form action="uploader.php" method="post" enctype="multipart/form-data">
@@ -1387,7 +1385,7 @@ echo "5) ".basename("/");
 * PHP不能识别的Content-Type类型的时候，会将http请求包中相应的数据填入变量$HTTP_RAW_POST_DATA
 * Coentent-Type为multipart/form-data的时候，PHP不会将http请求数据包中的相应数据填入php://input
 * “php://input可以读取没有处理过的POST数据
-* php://input读取不到$_GET数据。是因为$_GET数据作为query_path写在http请求头部(header)的PATH字段，而不是写在http请求的body部分
+* php://input读取不到`$_GET`数据。因为`$_GET`数据作为query_path写在http请求头部(header)的PATH字段，而不是写在http请求的body部分
 * 只有Content-Type为application/x-www-data-urlencoded时，php://input数据才跟$_POST数据相一致
 * 相较于$HTTP_RAW_POST_DATA而言，它给内存带来的压力较小，并且不需要特殊的php.ini设置
 
@@ -2090,7 +2088,7 @@ $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 
 * 一个生成器函数看起来像一个普通的函数，不同的是普通函数返回一个值，而一个生成器可以yield生成许多它所需要的值
 * 一个简单的例子就是使用生成器来重新实现 range() 函数。 标准的 range() 函数需要在内存中生成一个数组包含每一个在它范围内的值，然后返回该数组, 结果就是会产生多个很大的数组。 比如，调用 range(0, 1000000) 将导致内存占用超过 100 MB。
-* 当一个生成器被调用的时候，它返回一个可以被遍历的对象.当你遍历这个对象的时候(例如通过一个foreach循环)，PHP 将会在每次需要值的时候调用生成器函数，并在产生一个值之后保存生成器的状态，这样它就可以在需要产生下一个值的时候恢复调用状态。
+* 当一个生成器被调用的时候，它返回一个可以被遍历的对象.当遍历这个对象的时候(例如通过一个foreach循环)，PHP 将会在每次需要值的时候调用生成器函数，并在产生一个值之后保存生成器的状态，这样它就可以在需要产生下一个值的时候恢复调用状态。
 * 一旦不再需要产生更多的值，生成器函数可以简单退出，而调用生成器的代码还可以继续执行，就像一个数组已经被遍历完了
 * 生成器函数的核心是yield关键字。它最简单的调用形式看起来像一个return申明，不同之处在于普通return会返回值并终止函数的执行，而yield会返回一个值给循环调用此生成器的代码并且只是暂停执行生成器函数。
 * 在一个表达式上下文(例如在一个赋值表达式的右侧)中使用yield，你必须使用圆括号把yield申明包围起来

@@ -392,6 +392,7 @@ git cat-file -p 3b18e512dba79e4c8300dd08aeb37f8e728b8dad #  查看原文件内�
   - `--mixed`（默认）：更改引用的指向，不改变工作区的文件（但会改变暂存区）.想找回那些丢弃掉的提交，可以使用`git reflog`
   - `--hard`:更改引用的指向;替换暂存区内容和引用指向的目录树一致;替换工作区内容和暂存区一致，也和HEAD所指向的目录树内容相同
   - `--soft`:更改引用的指向，不改变暂存区和工作区
+  - `--keep`:更改引用的指向，不改变工作区
   - 没有给出提交点的版本号，默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交
   - 如果给了文件名(或者 -p选项), 那么工作效果和带文件名的checkout差不多，除了索引被更新
 * 从暂存区撤销文件: `git rm --cached [filename]`
@@ -412,6 +413,7 @@ git clone [--recurse-submodules]  [url] [project-name] # 下载一个项目和�
 git clone http[s]://example.com/path/to/repo.git/
 git clone ssh://example.com/path/to/repo.git/
 git clone [user@]example.com:path/to/repo.git/
+git clone username@host:/path/to/repository
 git clone git://example.com/path/to/repo.git/
 git clone /opt/git/project.git
 git clone file:///opt/git/project.git
@@ -493,7 +495,7 @@ git update-index --assume-unchanged <file>Resume tracking files with:
 git update-index --no-assume-unchanged <file>
 ```
 
-### 暂存区
+### 暂存区 Index
 
 * commit:生成上次提交的状态与当前状态的差异记录（也被称为revision）,系统会根据修改的内容计算出没有重复的40位英文及数字来给提交命名
   - p, pick = use commit
@@ -564,7 +566,7 @@ git log [branchname]
 --abbrev-commit  # （仅展示commit信息的图形化分支）
 -S[keyword]  # 搜索提交历史，根据关键词 git log -Smethodname
 --name-status
-git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%an, %cr)' --abbrev-commit
+git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%an, %cr)' --abbrev-commit --name-status --oneline --decorate --all
 git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%an, %cr)' --abbrev-commit"
 %H  commit hash
 %h  commit short hash
@@ -670,7 +672,7 @@ squash 7d33868 update
 * branch name should be descriptive
 
 ```sh
-git branch [-r]|[-a] # 列出所有远程/所有分支，不带参数时列出本地分支
+git branch -r|a # 列出所有远程/所有分支，不带参数时列出本地分支
 git branch -av # 查看所有分支（包括远程分支）和最后一次提交日志
 git branch –merged & git branch –no-merged # 返回已合并分支列表或未合并的分支列表
 git branch –contains SHA # 返回包含某个指定 sha 的分支列表
@@ -724,7 +726,7 @@ git rm –cached FILE # 这个命令只删除远程文件
 ```sh
 git config get --remote.origin.url
 git remote [-v] # 列出所有的仓库地址
-git remote show [remote] # 显示某个远程仓库的信息
+git remote show [remote] # 显示远程仓库信息
 
 git remote add origin git@github.com:han1202012/TabHost_Test.git # 本地git仓库关联GitHub仓库
 git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 修改远程仓库地址
@@ -750,6 +752,7 @@ git merge new # 合并指定分支到当前分支，新增一个 commit 追加
 git merge --no-ff master # 不快速合并
 git merge 　--squash  # 压缩分支的提交
 git mergetool # 使用配置的合并工具来解决冲突
+git diff <source_branch> <target_branch>
 
 git checkout --ours <文件名> # 使用当前分支 HEAD 版本
 git checkout --theirs <文件名> # # 使用合并分支版本，通常是源冲突文件的
@@ -847,6 +850,7 @@ git tag # 列出所有tag
 git tag -l|-n
 git show [tag]  # 查看tag信息
 
+git tag 1.0.0 1b2e1d63ff
 git tag -a v2.1 -m 'first version' # -a 创建一个带注释的标签，不带-a的话，不会记录时间 作者 以及注释
 git tag -am v2.2 "连猴子都懂的Git"
 git tag -a tagName commitId # 追加tag在指定commit
@@ -910,7 +914,9 @@ git update-index --assume-unchanged # 永久性地告诉Git不要管某个本地
 !.gitignore
 ```
 
-### 搭建git私有服务器
+## 自动化部署
+
+* 搭建git仓库
 
 ```sh
 groupadd git
@@ -930,8 +936,32 @@ cd /home/testgit
 git init --bare /path/to/repo.git
 sudo chown -R git:git sample.git
 # 禁止git用户登录shell:修改/etc/passwd 为
-git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell //可以正常通过ssh使用git，但无法登录shell
+git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell # 可以正常通过ssh使用git，但无法登录shell
+
+#  服务器
 git clone git@server:/path/to/repo.git
+chown -R git website
+# post-receive｜ post-update
+#!/bin/sh
+# 打印输出
+echo '======上传代码到服务器======'
+# 打开线上项目文件夹
+DEPLOY_DIR=/usr/share/nginx/html/
+cd $DEPLOY_DIR
+# 这个很重要，如果不取消的话将不能在cd的路径上进行git操作
+unset GIT_DIR
+env -i git reset --hard
+env -i git pull
+# 自动编译vue项目,如有需要请去掉前面的#号
+# npm run build
+# 自动更新composer（我暂时没试过）
+# composer update
+echo $(date) >> hook.log
+echo '======代码更新完成======'
+
+chmod +x post-receive|post-update
+
+# 本地 clone push
 git clone git@115.159.146.94:/home/testgit/sample.git lsgogit
 ```
 
@@ -1631,6 +1661,11 @@ These features allow to pause a branch development and switch to another one (_"
 
 > error: insufficient permission for adding an object to repository database .git/objects
 > chown -R henry:henry .git/objects
+> 
+> git clone:
+> error: object 3cb254d902a9b226bf95696af3a98839bb7797a4: badDate: invalid author/committer line - bad date
+> fatal: fsck error in packed object
+> fatal: index-pack failed
 
 ## 工具
 
@@ -1682,6 +1717,7 @@ These features allow to pause a branch development and switch to another one (_"
 * [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
 * [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
 * [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
+* [rogerdudler/git-guide](https://github.com/rogerdudler/git-guide):git - the simple guide http://rogerdudler.github.com/git-guide
 * [练习沙盒](https://try.github.io)
 * [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
 * [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub)

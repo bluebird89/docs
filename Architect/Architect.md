@@ -4,7 +4,7 @@
 
 ## 能力
 
-* 以工程思维全面理解业务需
+* 以工程思维全面理解业务
 * 基于模型和基础模式抽象简
 * 提出恰当可行的整体解决方
 * 在限定资源范围完成明确目
@@ -239,6 +239,7 @@
 ## 参考
 
 * [xingshaocheng/architect-awesome](https://github.com/xingshaocheng/architect-awesome)
+* [toutiaoio/awesome-architecture](https://github.com/toutiaoio/awesome-architecture):架构师技术图谱
 * [优秀架构师必须掌握的架构思维](http://www.infoq.com/cn/articles/architecture-thought)
 * [《微服务架构实战 160 讲》](https://time.geekbang.org/course/intro/84)
 * [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer):Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.

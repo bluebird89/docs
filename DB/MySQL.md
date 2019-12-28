@@ -306,6 +306,7 @@ socket = /data/3306/mysql.sock
 basedir = /usr/local/mysql
 datadir = /data/3306/data # 数据库文件路径
 open_files_limit = 1024
+default-time-zone = '+8:00' # 重启mysql使新时区生效
 back_log = 600 #在MYSQL暂时停止响应新请求之前，短时间内的多少个请求可以被存在堆栈中。如果系统在短时间内有很多连接，则需要增大该参数的值，该参数值指定到来的TCP/IP连接的监听队列的大小。默认值50。
 max_connections = 3000 #MySQL允许最大的进程连接数，如果经常出现Too Many Connections的错误提示，则需要增大此值。
 
@@ -415,6 +416,7 @@ esac
 
 ```sql
 status # 查看连接信息
+select version();
 SHOW VARIABLES LIKE "character_set%"; # character_set_client  接受的客户端编码  character_set_result # 返回结果集的编码
 SET character_set_client=GBK; # 不一致的话,修改
 set names gbk # 修改client connection results字符集
@@ -439,6 +441,19 @@ show global status like 'created_tmp%';
 
 show variables like "general_log%";  # 记录操作,pdo执行过程
 set global general_log = on;
+
+show variables like '%time_zone%';
+
+# 仅修改当前会话的时区，停止会话失效
+set time_zone = '+8:00';
+# 修改全局的时区配置
+set global time_zone = '+8:00';
+flush privileges;
+# 8.0 GA版本开始支持将参数写入并且持久化：
+set persist time_zone='+0:00';
+
+select now();
+select curtime();
 ```
 
 ```sh

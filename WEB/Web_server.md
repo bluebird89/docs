@@ -1,4 +1,4 @@
-# Web/ApplicationServers
+# Web/Application Servers
 
 * WebServers服务器：Web服务器，使用 http协议向Web提供内容。
 * ApplicationServers：应用程序服务器，托管并公开业务逻辑和进程。
@@ -75,7 +75,6 @@ ifconfig # linux mac
 
 * DNS（Domain Name System）域名解析系统是应用层协议，为其他应用层协议工作的，包括不限于HTTP和SMTP以及FTP，用于将用户提供的主机名解析为ip地址
 * DNS服务器,存储了IP地址和域名对应关系，是一台数据库服务器
-
 * 流程
     - 当用户在浏览器中输入网址域名时，首先就会访问系统设置的DNS域名解析服务器（通常由ISP运营商如电信、联通提供）
     - 如果该服务器内保存着该域名对应的IP信息，则直接返回该信息供用户访问网站
@@ -160,6 +159,29 @@ ifconfig # linux mac
 * Centralized Logging
 
 ![WEB生产环境架构](../_static/production.png "WEB生产环境架构")
+
+## 网站搭建
+
+* 域名申请
+  - 获取一级域名 example.com，
+  - 域名认证(身份证)
+  - 添加域名解析记录，默认两条记录，自由配置二级域名
+  - 修改域名解析服务器，最长需要72个小时
+* 购买服务器:获取ip，搭建环境
+* https配置
+  - 申请证书，下载并放到服务器
+  - 分配到域名（会添加一条新记录到域名解析）
+  - 修改配置文件
+
+```
+  ssl on;
+  ssl_certificate conf.d/1_www.example.com_bundle.crt;
+  ssl_certificate_key conf.d/2_www.example.com.key;
+  ssl_session_timeout 5m;
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2; #按照这个协议配置
+  ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;#按照这个套件配置
+  ssl_prefer_server_ciphers on;
+```
 
 ## 演化
 
