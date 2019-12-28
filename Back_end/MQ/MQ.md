@@ -91,10 +91,6 @@
     - 需要同步刷盘保证数据可靠性的应用，磁盘读写性能的重要性一般来讲也会远高于磁盘的空间大小。 成本上来讲，如果可以显著的提高单机性能，虽然单价来看固态硬盘更加昂贵，但是如果可以节省部分 CPU，内存和机架位置，还是很划算的
 * 在同步刷盘的场景下，RocketMQ 是顺序写，而 Kafka 是随机写。通常情况下，我们认为顺序写的性能远高于随机写，尤其时对于传统的机械硬盘来讲更是如此。 且当 Broker 上的 topic 数量增多时，RocketMQ 在写消息的性能上几乎不会受到影响，而对 Kafka 的影响则会较大。
 
-## 服务实例管理
-
-* 
-
 ## 消费
 
 * 消费者从RabbitMQ获取消息的时候，都是通过一个channel的概念来进行的
@@ -159,7 +155,6 @@
         + 消息持久化
 * 未来得及持久化到磁盘上，同时也还没来得及投递到作为消费，中间件机器宕机
 
-
 ## 单机性能因素
 
 * 硬件层面
@@ -173,6 +168,32 @@
 * 应用层面
     - 文件读写的方式：一般来说，顺序读写速度远高于随机读写，且一次性读写的文件越大相对来说效率越高。应用可以据此来对文件结构和读写方式做一定优化。
     - 缓存策略： 应用可以通过一定的缓存策略，提前将可能用到的数据读到内存中，当收到请求时，如果能命中缓存中的数据，在缓存中直接读取效率远高于读写磁盘。同样，写操作时也可以通过缓存将零散的写操作进行汇集，提高写操作的效率。 所有适合的缓存策略将显著提高 Broker 的处理能力。
+
+## RabbitMQ
+
+```sh
+brew install rabbitmq
+
+git clone git://github.com/alanxz/rabbitmq-c.git  
+cd rabbitmq-c
+mkdir build  && cd build  
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..  
+cmake --build . --target install
+
+wget http://pecl.php.net/get/amqp-1.9.1.tgz
+tar zvxf amqp-1.9.1.tgz
+cd amqp-1.9.1
+phpize
+./configure --with-amqp
+make && make install
+
+[ 17%] Linking C shared library librabbitmq.dylib
+ld: cannot link directly with dylib/framework, your binary is not an allowed client of /usr/lib/libcrypto.dylib for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make[2]: *** [librabbitmq/librabbitmq.4.4.0.dylib] Error 1
+make[1]: *** [librabbitmq/CMakeFiles/rabbitmq.dir/all] Error 2
+make: *** [all] Error 2
+```
 
 ## 产品
 

@@ -12,6 +12,4 @@
 * [wx-chevalier/Developer-Zero-To-Mastery](https://github.com/wx-chevalier/Developer-Zero-To-Mastery):📚 To Be Professional Developer From Zero To Mastery, Interactive MindMap, RoadMap(Learning Path/Interview Questions), xCompass, Weekly for Developer, to Learn Everything in ITCS 💫 程序员的技术视野、知识管理与职业规划，提高个人与团队的研发效能
 * [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub)::octocat: 分享 GitHub 上有趣、入门级的开源项目「每月28号更新」 https://hellogithub.com
 * [rsapkf/goodies](https://github.com/rsapkf/goodies):Collection of GitHub repos, blogs and websites to learn cool things https://goodies.gitbook.io/goodies/
-
-https://bitcannon.net/index.xml
-https://bitwarden.com
+* [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):The most comprehensive database of Chinese poetry
