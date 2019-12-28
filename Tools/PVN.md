@@ -139,13 +139,6 @@ apt-get install python-pip
 pip install shadowsocks
 ```
 
-## 客户端
-
-* freevpn
-* [Potatso lite](https://itunes.apple.com/us/app/potatso-lite/id1239860606)
-* [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
-* [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu https://shadowsocks.be
-
 ### 服务
 
 * [StreisandEffect/streisand](https://github.com/StreisandEffect/streisand):Streisand sets up a new server running L2TP/IPsec, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, a Tor bridge, and WireGuard. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.
@@ -161,7 +154,7 @@ pip install shadowsocks
 * [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core):A platform for building proxies to bypass network restrictions. https://www.v2ray.com/
 * [yanue/V2rayU](https://github.com/yanue/V2rayU):V2rayU,基于v2ray核心的mac版客户端,用于科学上网,使用swift编写,支持vmess,shadowsocks,socks5等服务协议,支持订阅, 支持二维码,剪贴板导入,手动配置,二维码分享等 https://github.com/yanue/V2rayU
 * [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
-* shadowsocksx
+* [iMeiji/shadowsocks_install](https://github.com/iMeiji/shadowsocks_install)
 * Perfect Privacy
 * ExpressVPN
 * NordVPN
@@ -172,6 +165,12 @@ pip install shadowsocks
 * [Alvin9999/new-pac](https://github.com/Alvin9999/new-pac)
 * BT sync
 * [ShadowsocksR-Live/shadowsocksr-native](https://github.com/ShadowsocksR-Live/shadowsocksr-native):从容翻越党国敏感日 ShadowsocksR (SSR) native implementation for all platforms powered by libuv, GFW terminator
+*  客户端
+    - freevpn
+    - [Potatso lite](https://itunes.apple.com/us/app/potatso-lite/id1239860606)
+    - [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
+    - [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu https://shadowsocks.be
+
 
 ## 参考
 
@@ -180,3 +179,5 @@ pip install shadowsocks
 * [gfwlist/gfwlist](https://github.com/gfwlist/gfwlist):The one and only one gfwlist here
 * [How To Set Up an OpenVPN Server on Ubuntu 16.04(https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04)
 * [max2max/freess](https://github.com/max2max/freess)
+* [haoel/haoel.github.io ](https://github.com/haoel/haoel.github.io)
+* [JadaGates/ShadowsocksBio](https://github.com/JadaGates/ShadowsocksBio):SS的前世今生

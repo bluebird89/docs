@@ -39,6 +39,8 @@
         + 自增序列算法:设置 id 自增，一个 10进制 id 对应一个 62进制的数值，1对1，也就不会出现重复的情况
 * 加密
     - [hashicorp/vault](https://github.com/hashicorp/vault):A tool for secrets management, encryption as a service, and privileged access management https://www.vaultproject.io/
+* 密码管理
+    - [Bitwarden](https://bitwarden.com/):Solve your password management problems
 
 ## Language
 

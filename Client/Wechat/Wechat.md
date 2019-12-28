@@ -33,6 +33,62 @@ if ($tmpstr==$signature) {
 * accessToken openId:
 * userInfo
 
+```php
+
+# 把access_token缓存到本地或者内存中，在项目中取缓存中的access_token来调用在2小时内都可以随便调用，没有调用次数的
+# 2小时后过期了，请求access_token生成接口，生成新的access_token
+<?php
+//缓存access_token
+function getToken(){
+    $appid='填写你的APPID';//APPID
+    $appsecret='填写你的APPSECRET';//APPSECRET
+    $file = file_get_contents("access_token.json",true);//读取access_token.json里面的数据
+    $result = json_decode($file,true);
+    //判断access_token是否在有效期内，如果在有效期则获取缓存的access_token
+    //如果过期了则请求接口生成新的access_token并且缓存access_token.json
+    if (time() > $result['expires']){
+        $data = array();
+        $data['access_token'] = getNewToken($appid,$appsecret);
+        $data['expires']=time()+7000;
+        $jsonStr =  json_encode($data);
+        $fp = fopen("access_token.json", "w");
+        fwrite($fp, $jsonStr);
+        fclose($fp);
+        return $data['access_token'];
+    }else{
+        return $result['access_token'];
+    }
+}
+  
+//获取新的access_token
+function getNewToken($appid,$appsecret){
+    $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appsecret}";
+    $access_token_Arr =  https_request($url);
+    
+    return $access_token_Arr['access_token'];
+}
+  
+//向获取access_token接口发起请求
+function https_request ($url){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $out = curl_exec($ch);
+        curl_close($ch);
+        return  json_decode($out,true);
+}
+  
+//调用函数
+getToken();
+  
+//输出当前缓存文件有效期内的access_token
+$jsondata = file_get_contents('access_token.json'); 
+$access_token_data = json_decode($jsondata);
+echo $access_token_data->access_token;
+?>
+```
+
 ## platform
 
 微信生态的构建
