@@ -100,6 +100,7 @@ SAS网站的Eight levels of analytics
 * 无监督学习
     - explains Unsupervised Learning really well：https://towardsdatascience.com/unsupervised-learning-with-python-173c51dc7f03
     - 无监督学习、有监督学习和强化学习的区别：https://blogs.nvidia.com/blog/2018/08/02/supervised-unsupervised-learning/
+* [Mining Social Media](http://socialdata.site/introduction/)
 
 ## 工具
 

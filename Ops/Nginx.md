@@ -338,7 +338,12 @@ http {
     application/javascript application/x-javascript application/json
     application/xml  application/rss+xml font/truetype application/x-font-ttf
     font/opentype application/vnd.ms-fontobject image/svg+xml;
-
+    
+    # root目录显示文件列表
+    autoindex on;
+    autoindex_exact_size off;
+    autoindex_localtime on;
+    
     # Cache
     open_file_cache max=200000 inactive=20s;
     open_file_cache_valid 30s;
