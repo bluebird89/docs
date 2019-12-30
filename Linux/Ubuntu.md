@@ -36,14 +36,6 @@ win10 && UBUNTU 双系统
   - 选中分区boot分区
 * 重启运行
 
-## screen
-
-* tweak
-
-```sh
-sudo apt install gnome-tweak-tool
-```
-
 ### 网络配置
 
 ```sh
@@ -209,7 +201,6 @@ make && make install
 * LaTeX
 * Chromium
 * Nylas N1：超好用的跨平台电子邮件客户端  Thunderbird
-* sougou
 * Spotify for Linux：音乐流媒体服务
 * Lightworks Free：专业的非线视频编辑器
 * Viber：跨平台的 Skype 替代品
@@ -226,7 +217,7 @@ make && make install
   - Kazam
 * Gtile:分屏工具
 * MySQL Workbench
-* Cloud music
+* [Cloud music](http://d1.music.126.net/dmusic/netease-cloud-music_1.2.0_amd64_ubuntu_20190424_1.deb)
 * shadowshocks
 * Jitsy:通讯工具
 * Synaptic：软件管理
@@ -237,7 +228,7 @@ make && make install
 * [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite
 * [Sayonara Player](https://sayonara-player.com/index.php)
 * Disk Usage Analyzer
-* 浮动图标工具栏：docky `sudo apt-get install docky`
+* [Pomodoro](https://gnomepomodoro.org/)
 * 贴纸
   - indicator-stickynotes
   - Xpad:`sudo apt-get install xpad`
@@ -250,6 +241,11 @@ sudo apt-get install indicator-stickynotes
 sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
 sudo apt-get update
 sudo apt-get install indicator-sysmonitor
+
+# 
+sudo add-apt-repository ppa:kasra-mp/ubuntu-indicator-weather
+sudo apt-get update
+sudo apt-get install indicator-weather
 ```
 
 ## VM
@@ -261,7 +257,7 @@ codesudo apt install open-vm-tools open-vm-tools-desktop # 重启
 ## source
 
 ```
-# 使用清华提供镜像源
+# 清华提供镜像源
 # 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse
 # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main main restricted universe multiverse
@@ -280,8 +276,8 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted
 ## keyword map
 
 * 工作区
-  * Win 键，进入活动概览视图模式
-  * Ctrl + Alt + 方向箭头
+  - Win 键，进入活动概览视图模式
+  - Ctrl + Alt + 方向箭头
 * super:window  long hold super:Keyboard Shortcuts
 * super + s :  show all workspaces
 * Ctrl+Alt+arrow+keys:switch workspace
@@ -298,7 +294,11 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted
 * Shift+Prt Scrn:take a screenshot of an area you select.
 * ctrl + super + d :show desktop
 * Super+Tab Switch between windows from the same application, or from the selected application after Super+Tab.This shortcut uses ` on US keyboards, where the ` key is above Tab. On all other keyboards, the shortcut is Superplus the key above Tab.
-* Super+A Show the list of applications.
+* Super+A Show the list of applications
+* Screenshots
+  - ctrl+Print：复制截图到窗口
+  - ctrl+alt+Print：窗口截取并添加到粘贴板
+  - shift+alt+Print:区域截取并添加到粘贴板
 
 ## 端口与进程管理
 
@@ -768,37 +768,37 @@ ssh username@remote_host ls /var/www
 
 ### 软件安装
 
-#### [sougou pinyin](https://pinyin.sogou.com/linux/?r=pinyin)
-
-command line或者package
-
 ```sh
-sudo apt install fcitx fcitx-googlepinyin im-config
-im-config
+# [sougou pinyin](https://pinyin.sogou.com/linux/?r=pinyin)
+sudo apt-get purge ibus
+sudo apt install fcitx fcitx-table fcitx-googlepinyin im-config
+im-config # 查看配置
 
+# add source
+deb http://archive.ubuntukylin.com:10006/ubuntukylin trusty main
+sudo apt install sogoupinyin
 # download sogoupinyin_2.2.0.0108_amd64.deb
-sudo dpkg  -i   sogoupinyin_2.2.0.0108_amd64.deb # 手动安装
+sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb # 手动安装
 sudo apt-get install -f
 
 # 配置
 system setting->language support
 choose language,key input method system: fcitx
-fcitx add sogou pinyin
+# fcitx add sogou pinyin 
 
 Ctrl+Shift+F # trantional change simple
 
-# atom install
+# atom
 sudo add-apt-repository ppa:webupd8team/atom
 sudo apt-get update
 sudo apt-get install atom
 
 sudo apt install vlc
+
 # evernote
 sudo add-apt-repository ppa:nixnote/nixnote2-daily
 sudo apt update
 sudo apt install nixnote2
-File->Add Another User…
-Tools->Synchronize
 
 # chrome(firefox 禁用console.log)
 sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
@@ -824,35 +824,100 @@ sudo aptitude install <packagename>
 sudo dpkg --configure -a # fixing broken dependencies
 sudo apt-get install -f
 
-[VMware Workstation 12 Pro](http://www.vmware.com/cn/products/workstation/workstation-evaluation)
+# [VMware Workstation 12 Pro](http://www.vmware.com/cn/products/workstation/workstation-evaluation)
 sudo chmod +x VMware-Workstation-Full-12.1.1-3770994.x86_64.bundle
 sudo ./VMware-Workstation-Full-12.1.1-3770994.x86_64.bundle
-可用Linux版注册密钥：5A02H-AU243-TZJ49-GTC7K-3C61N
-VMware =》 菜单选中VM =》点击 Install VMware Tools
+# 注册密钥：5A02H-AU243-TZJ49-GTC7K-3C61N
+# VMware =》 菜单选中VM =》点击 Install VMware Tools
 sudo apt-get install lamp-server
+
+## [fusuma](https://github.com/iberianpig/fusuma):Multitouch gestures with libinput driver on X11, Linux 
+sudo gpasswd -a $USER input # 重新登录账户
+sudo apt-get install libinput-tools
+sudo apt-get install xdotool
+sudo apt-get install ruby
+gem install|update fusuma
+gsettings set org.gnome.desktop.peripherals.touchpad send-events enable # 确保触控板的info传输到GNOME桌面环境
+
+fusuma # 启动
+mkdir -p ~/.config/fusuma
+gedit ~/.config/fusuma/config.yml
+# ~/.config/fusuma/config.yml  tab 键写成 Tab
+# 配置 Startup Application: fusuma value
+swipe:
+  3:
+    left:
+      command: 'xdotool key super+Left'
+    right:
+      command: 'xdotool key super+Right'
+    up:
+      command: 'xdotool key super+Up'
+    down:
+      command: 'xdotool key super+Down'
+  4:
+    left:
+      command: 'xdotool key alt+Shift+Tab'
+    right:
+      command: 'xdotool key alt+Tab'
+    up:
+      command: 'xdotool key ctrl+w'
+    down:
+      command: 'xdotool key ctrl+t'
+
+pinch:
+  2:
+    in:
+      command: 'xdotool key ctrl+equal'
+    out:
+      command: 'xdotool key ctrl+minus'
+  4:
+    in:
+      command: 'xdotool key super+a'
+    out:
+      command: 'xdotool key super+s'
+
+threshold:
+  swipe: 1
+  pinch: 1
+
+interval:
+  swipe: 1
+  pinch: 1
 ```
 
-> PHP
-
-```sh
+### PHP
 sudo apt-get install autoconf build-essential curl libtool \
   libssl-dev libcurl4-openssl-dev libxml2-dev libreadline7 \
   libreadline-dev libzip-dev libzip4  openssl \
   pkg-config zlib1g-dev
 
 ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib # configure: error: Cannot find OpenSSL’s libraries
-```
 
-#### [xflux-gui/fluxgui](https://github.com/xflux-gui/fluxgui)
-
-Better lighting for Linux. Open source GUI for xflux https://justgetflux.com/linux.html
-
-```sh
+#### [xflux-gui/fluxgui](https://github.com/xflux-gui/fluxgui):Better lighting for Linux. Open source GUI for xflux https://justgetflux.com/linux.html
 sudo add-apt-repository ppa:nathan-renniewaldock/flux
 sudo apt-get update
 sudo apt-get install fluxgui
 ```
 
+## 快捷方式
+
+
+```
+sudo touch /usr/share/applications/fusuma.desktop
+# /usr/share/applications/fusuma.desktop 添加到开机启动
+[Desktop Entry]
+Encoding=UTF-8
+Name=fusuma
+Comment=fusuma
+Exec=/var/lib/gems/2.5.0/gems/fusuma-0.10.2/exe/fusuma
+＃上面这里时你的fusuma的路径，如果你不知道在哪里，就在根目录下搜索一下，找到这个路径。
+Icon=/usr/share/icons/chumoban.png
+＃这里是你的fusuma的图标，随便找一个就行，如果时强迫症，非得找个好看的，就来这里http://www.iconfont.cn/
+Terminal=false  #软件打开时是否启动终端，这里选择false
+StartupNotify=false
+Type=Application
+Categories=Application;Development;
+```
 ### 问题
 
 > Boot分区不足
@@ -885,7 +950,7 @@ top [-] [d] [p] [q] [c] [C] [S] [s]  [n]，参数
 * q 该选项将使top没有任何延迟的进行刷新。如果调用程序有超级用户权限，那么top将以尽可能高的优先级运行。
 * S 指定累计模式。
 * s 使top命令在安全模式中运行。这将去除交互命令所带来的潜在危险。
-* i  使top不显示任何闲置或者僵死进程。
+* i 使top不显示任何闲置或者僵死进程。
 * c 显示整个命令行而不只是显示命令名。
 * 多核CPU监控:在top基本视图中，按键盘数字“1”，可监控每个逻辑CPU的状况
 * 统计信息区:前五行是系统整体的统计信息。
@@ -982,16 +1047,16 @@ htop
 * Hypervisor：Linux的最重要创新之一，引入Hypervisor，运行其他操作系统的操作系统，它们为执行提供独立的虚拟硬件平台，同时硬件虚拟平台可以提供对底层机器的虚拟的完整访问.在解决软件架构设计问题时，通常做法是引入一个抽象层来解决，其实这种做法是有点普世原理，同样适用于硬件封装，Hypervisor正是这样一种虚拟抽象层。 只有5%的时间在全负荷工作，其他时间则处于休眠或者空闲状态，虚拟化技术可以大大提升服务器的利用率，从而间接减少服务器数量，即成本！ ![](../_static/Hypervisor.jpg) Hypervisor作为虚拟技术的核心，抽象虚拟化硬件平台.它支持给每一个虚拟机分配内存，CPU， 网络和磁盘，并加载虚拟机的客户操作系统。当然，在获取到这么优秀功能（对硬件的虚拟化，并搭载操作系统）的代价，自然牺牲了启动速度及在资源利用率，性能的开销等。
 * LXC(Linux Container）：一种内核虚拟化技术，相比上述的Hypervisor技术则提供更轻量级的虚拟化，以隔离进程和资源，且无需提供指令解析机制及全虚拟化的复杂性，LXC或者容器将操作系统层面的资源分到孤立／隔离的组中，用来管理使用资源。LXC为Sourceforge上的开源项目，其实现是借助Linux的内核特性，（cgroups子系统+namespace）, 在OS层次上做整合为进程提供虚拟执行环境，即称之为容器，除了分配绑定cpu，内存，提供独立的namespace（网络，pid，ipc，mnt，uts）
 
-> Samba服务
+## Samba服务
 
 ```sh
-# 安装与配置
+# 安装
 apt-get install samba
 mkdir -p /home／directory
 chmod 777 /home／directory
-vim /etc/samba/smb.conf
-#[global]的地方添加 security = user
-# 文件最后添加下列设定
+
+## 配置/etc/samba/smb.conf
+# 文件加下列设定
 [global]
 workgroup = WORKGROUP           #设置工作组
 server string = Samba Server        #设置描述字符串
@@ -1017,27 +1082,21 @@ smb://192.168.100.106
 \\172.16.44.175\Ubuntu
 ```
 
-### ubunu 优化
+### 优化
+
+* lnav工具是在终端界面看日志的神器
 
 ```sh
-# 提高电池的寿命并且减少过热
+# 安装解码器
+sudo apt-get install ubuntu-restricted-extras
+
+# 提高电池寿命并且减少过热
 sudo add-apt-repository ppa:linrunner/tlp
-sudo apt update
 sudo apt install tlp tlp-rdw
 sudo tlp start
 
-# Guake是一个比较酷的终端
+# Guake一个比较酷的终端
 sudo apt install guake
-
-# add source  or http://pinyin.sogou.com/linux/
-deb http://archive.ubuntukylin.com:10006/ubuntukylin trusty main
-sudo apt install sogoupinyin
-
-# remove libre
-sudo apt remove libreoffice-common
-
-# remove Amazon
-sudo apt-get remove unity-webapps-common thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku onboard deja-dup empathy
 
 # 不要选择显示星期或者年份
 gsettings set com.canonical.indicator.datetime time-format 'custom'
@@ -1045,24 +1104,22 @@ gsettings set com.canonical.indicator.datetime time-format 'custom'
 gsettings set com.canonical.indicator.datetime custom-time-format '%Y年%m月%d日 %A%H:%M:%S'
 
 # unity Unity显示的位置
-gsettings set com.canonical.Unity.Launcher launcher-position Bottom
-gsettings set com.canonical.Unity.Launcher launcher-position Left
+gsettings set com.canonical.Unity.Launcher launcher-position Bottom|Left
 
 # 点击图标最小化
 gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
 
-# Tweak tool优化工具    Unity Tweak Tool  gnome-tweak-tool
-sudo apt-get install gnome-tweak-tool
+# Tweak tool优化工具
+sudo apt-get install gnome-tweak-tool # 应用有 Tweaks配置界面
 sudo apt-get install unity-tweak-tool
 
-ifconfig
+sudo apt install materia-gtk-theme
+sudo apt install papirus-icon-theme #  Applications: Materia-light  Icons: Papirus
 
-sudo apt install net-tools       # ifconfig
+sudo apt install net-tools       # ifconfig 必备
 sudo apt install iputils-ping
 
-记录下网卡名字，比如我的，有enp4s0f2、lo、wlp9s0b1三个
-
-# 编辑文件sudo vim /etc/sysctl.conf 在末尾添加
+# 记录下网卡名字，比如我的，有enp4s0f2、lo、wlp9s0b1三个 /etc/sysctl.conf 追加
 net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1 #需跟网卡信息对应
@@ -1072,21 +1129,35 @@ sudo sysctl -p
 
 xset m 0 0 # 设置鼠标加速度
 
-# 安装状态栏指示器
-sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
-sudo apt update
-sudo apt install indicator-sysmonitor
+sudo apt-get remove totem \
+rhythmbox \
+gnome-mahjongg \
+aisleriot \
+gnome-mines \
+cheese \
+transmission-common \
+gnome-orca \
+webbrowser-app \
+unity-webapps-common \
+gnome-sudoku \
+onboard \
+simple-scan \
+landscape-client-ui-install \
+deja-dup \
+totem \
+rhythmbox \
+empathy \
+brasero
 
-sudo apt-get remove thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku onboard deja-dup
 sudo apt-get autoremove
 sudo apt-get autoclean
+
+sudo apt-get install unrar lnav cmake qtcreator
+
+# /etc/dhcp/dhclient.conf 添加使用aliyun和114的DNS
+prepend domain-name-servers 114.114.114.114;
+prepend domain-name-servers 223.5.5.5;
 ```
-
-## Screenshots
-
-* ctrl+Print：复制截图到窗口
-* ctrl+alt+Print：窗口截取并添加到粘贴板
-* shift+alt+Print:区域截取并添加到粘贴板
 
 ### phpMyAdmin
 
@@ -1123,6 +1194,14 @@ sudo aptitude install <packagename>
 sudo aptitude -f install <packagename>
 ```
 
+## 配置
+
+```
+# ~/.bash_aliases
+alias pip=/usr/local/bin/pip3.6
+alias python=/usr/bin/python3.6
+```
+
 ## 18.04
 
 * cgroup v2
@@ -1130,15 +1209,25 @@ sudo aptitude -f install <packagename>
 * 最新 MD 驱动
 * 针对 SATA Link 电源管理的改进
 * 默认采用的 JRE/JDK 是 OpenJDK 10
+* Keymap
+   - Switch to overview: Super key
+   - List all applications: Super key + A
+   - Switch workspaces: Ctrl + Alt + Up/Down
+   - ctlr+alt+shift+上下键:窗口移入下一个工作区
+
 
 ## config
 
 * install sogou chrome VLC git zsh
 * Ubuntu Software => Add-ons => Shell extensions:NetSpeed  Coverflow Alt-Tab
-* 统一管理主题中的各个部分:`sudo apt install gnome-tweak-tool`
 * sudo vim /etc/default/grub
     - `add  GRUB_DISABLE_OS_PROBER=true`
     - 修复grub:sudo update-grub
+
+```
+Failed to connect to 127.0.0.1 port 1080: Connection refused
+检测网络代理
+```
 
 ## 参考
 
