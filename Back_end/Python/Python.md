@@ -17,7 +17,6 @@ The Python programming language,Guido van Rossum在1989年圣诞节期间，为�
 * 目标是执行速度。PyPy采用JIT技术，对Python代码进行动态编译（注意不是解释），所以可以显著提高Python代码的执行速度。绝大部分Python代码都可以在PyPy下运行，但是PyPy和CPython有一些是不同的，这就导致相同的Python代码在两种解释器下执行可能会有不同的结果。
 * Jython是运行在Java平台上的Python解释器，可以直接把Python代码编译成Java字节码执行。
 
-
 ### install
 
 * Mac下的python2.7 默认是安装在／System目录下的。但是～～～Mac有个Rootless机制，默认不允许直接在／System下作修改。所以要先关闭Rootless机制。关闭有风险
@@ -110,7 +109,7 @@ pyenv global 2.7.12 3.5.2 # prefer 2.7.12 over 3.5.2
 pyenv local 3.5.2
 pyenv shell 3.5.2
 
-$ curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
+curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
 export PATH=$HOME/.pyenv/bin:$PATH  //加进系统的环境变量 ～／.zshrc
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
@@ -163,7 +162,7 @@ Wheels are the new standard of python distribution and are intended to replace e
 
 ## 包管理工具easy_install.py和pip(pip3 python3)第三方包的安装管理
 
-Python2.7的安装包中，easy_install.py是默认安装的，而pip需要我们手动安装
+Python2.7的安装包中，easy_install.py是默认安装的，而pip需要手动安装
 
 ```sh
 curl https://bootstrap.pypa.io/get-pip.py > get-pip.py
@@ -574,7 +573,7 @@ while n < 10:
 
 ##### 函数
 
-函数就是最基本的一种代码抽象的方式。
+函数就是最基本的一种代码抽象的方式
 
 * 函数名其实就是指向一个函数对象的引用，完全可以把函数名赋给一个变量
     - abs(-10)是函数调用，而abs是函数本身
@@ -905,10 +904,10 @@ max(*(10, 5, 6, 7))
 
 ##### 模块 Module
 
-* 大大提高了代码的可维护性。
-* 其次，编写代码不必从零开始。当一个模块编写完毕，就可以被其他地方引用。包括Python内置的模块和来自第三方的模块
+* 提高了代码的可维护性
+* 编写代码不必从零开始。当一个模块编写完毕，就可以被其他地方引用。包括Python内置的模块和来自第三方的模块
 * 可以避免函数名和变量名冲突。相同名字的函数和变量完全可以分别存在不同的模块中，尽量不要与内置函数名字冲突
-* 避免模块名冲突，Python又引入了按目录来组织模块的方法，称为包（Package）。
+* 避免模块名冲突，Python又引入了按目录来组织模块的方法，称为包（Package）
     - 一个abc.py的文件就是一个名字叫abc的模块
     - 通过包来组织模块，避免冲突。方法是选择一个顶层包名，比如mycompany文件下的abc.py（mycompany.abc）。只要顶层的包名不与别人冲突，那所有模块都不会与别人冲突
     - 还可以扩展多级目录mycompany.web.www
@@ -1190,7 +1189,7 @@ hasattr(obj, 'power') # 有属性'power'吗？ True
 
 ## DB
 
-db API DRIVER即数据库接口驱动:
+db API DRIVER即数据库接口驱动
 
 * [MySQLdb] is a native driver that has been developed and supported for over a decade by Andy Dustman.不支持python3
 * [mysqlclient] is a fork of MySQLdb which notably supports Python 3 and can be used as a drop-in replacement for MySQLdb. At the time of this writing, this is the recommended choice for using MySQL with Django.
@@ -1289,9 +1288,10 @@ CMD ["python3"]
 
 ## selenium
 
+* 安装 chromedriver
+
 `python3 -m pip install selenium`
 
-安装 chromedriver
 
 ## 问题
 
@@ -1365,10 +1365,8 @@ CMD ["python3"]
     - 项目实战（电商项目、爬虫项目、常用组件、运维项目、代码调优）
     - 高级进阶（数据算法、代码规范、面试技巧）
 
-学习编程就是为了解决实际的问题，把自己在工作或学习中的重复工作程序化
-阅读文档
 并发
-    * 了解线程、进程，它们如何运行，以及它们在Python中的弱点。
+了解线程、进程，它们如何运行，以及它们在Python中的弱点。
 了解Sockets，Network库，异步功能
 了解解释器的设计和运行原理：为什么有这么多不同的Python实现。（Python是用英语编写的，不是C语言），这个概念非常重要。
 了解Python生态
@@ -1378,11 +1376,9 @@ PIP
 setuptools
 virtualenv
 
-## Docker containers
 ## UWSGI
 ## GunicornNGINX
 
-了解Google介绍的小技巧：Lambda函数、装饰器、描述符、迭代器生成器、元类。类似于：“python -m http.server”。
 
 ## 图书
 
@@ -1403,12 +1399,10 @@ virtualenv
 * [Python 3 cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/):Python3教学手册
 * [在 Windows 上用 Python 做开发](https://docs.microsoft.com/zh-cn/windows/python/)
 * [简明 Python 教程 A Byte of Python](https://bop.mol.uno)
-
-##  项目
-
 * https://www.shiyanlou.com/courses/31
 * https://www.shiyanlou.com/courses/487
 * https://www.shiyanlou.com/courses/552
+* [python3](http://www.runoob.com/python3)
 
 ## 工具
 
@@ -1450,6 +1444,3 @@ virtualenv
 * [coodict/python3-in-one-pic](https://github.com/coodict/python3-in-one-pic):Learn python3 in one picture. https://git.io/Coo-py3
 * [lijin-THU/notes-python](https://github.com/lijin-THU/notes-python):中文 Python 笔记
 * [pythonbook](https://python.cs.southern.edu/pythonbook/pythonbook.pdf)
-
-* [python3](http://www.runoob.com/python3)
-* <http://www.cnblogs.com/linhaifeng/p/7278389.html>
