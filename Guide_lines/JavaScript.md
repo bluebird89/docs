@@ -77,7 +77,6 @@ npm install -g eslint-plugin-html
 ## 参考
 
 * [中国官网](http://eslint.cn/)
-* [官网](https://eslint.org/)
 * [standard/eslint-config-standard](https://github.com/standard/eslint-config-standard):ESLint Config for JavaScript Standard Style https://standardjs.com
 * [airbnb/javascript](https://github.com/airbnb/javascript):JavaScript Style Guide
 * [standard/standard](https://github.com/standard/standard):JavaScript Style Guide, with linter & automatic code fixer <https://standardjs.com>
