@@ -49,15 +49,15 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 一个典型的Linux发行版包括：Linux内核，一些GNU程序库和工具，命令行shell，图形界面的X Window系统和相应的桌面环境，如KDE或GNOME，并包含数千种从办公套件，编译器，文本编辑器到科学工具的应用软件。
 
 * 入门：类似Windows的体验；安装简单；可靠；“类似Linux”，且不自成一派；“恰好管用”；
-  - Mint
+  - [Mint](https://linuxmint.com/)
   - Debian
 * 进阶：完全掌控你的电脑和操作系统；了解Linux内部；精简的优化系统
   - Slackware Linux
   - [Arch Linux](https://www.archlinux.org/)
-  - Gentoo Linux
+  - [Gentoo Linux](https://www.gentoo.org/)
   - FreeBSD
 * 安全与稳定：为学习最新的东西而甘冒风险；最新和最伟大的功能；有趣的配置以便于处理重大更改
-  - Arch Linux
+  - [Arch Linux](https://www.archlinux.org/)
   - OpenSuse Tumbleweed
   - Fedora Rawhide
   - Gentoo Unstable
@@ -67,7 +67,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - openSuse Leap
   - Ubuntu Studio
 * 服务器：稳定性；安全；支持其他出于同样原因的程序员使用
-  - CentOS
+  - [CentOS](https://www.centos.org/)
   - Red Hat Enterprise Linux (RHEL)
   - Debian 9 Download
   - FreeBSD
@@ -83,10 +83,10 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - TENS Linux (DOD Project)
   - Tin Hat Linux
   - OpenBSD
-  - Manjaro
+  - [Manjaro](https://manjaro.org/)
 * 最小化：将在旧的硬件上运行；尽可能最小化
   - ArchBang
-  - Lubuntu
+  - [Lubuntu](https://kubuntu.org/)
   - Puppy Linux
   - Tiny Core Linux
   - Bodhi Linux
@@ -453,7 +453,7 @@ mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share 挂�
 ## 硬件
 
 ```sh
-fdisk -l # 查看设备名
+fdisk -l # 查看硬盘编号
 
 dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI)
 hdparm -i /dev/hda 罗列一个磁盘的架构特性
