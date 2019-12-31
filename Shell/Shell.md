@@ -1014,7 +1014,7 @@ end
 ```sh
 sudo apt-get install xmonad
 sudo apt-get install xmobar dmenu
-``` 
+```
 
 ### iterm2
 
@@ -1030,7 +1030,84 @@ sudo apt-get install xmobar dmenu
 | 可以搜索全屏展示所有的 tab | ⌘+Option+e         |
 | 全屏                       | command+enter      |
 
-### 快捷键
+### Terminal 快捷键
+
+* Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节
+* 终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
+* 默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
+* 快捷键
+  - Tab 点击Tab键可以实现命令补全,目录补全、命令参数补全;
+  - Ctrl+c:强行终止当前程序（常用）;
+  - Ctrl+d:键盘输入结束或退出终端（常用）;
+  - Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
+  - Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
+  - Ctrl+a:将光标移至输入行头，相当于Home键;
+  - Ctrl+e:将光标移至输入行末，相当于End键;
+  - Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
+  - Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
+  - Shift+PgUp:将终端显示向上滚动;
+  - Shift+PgDn:将终端显示向下滚动;
+  - Ctrl+d:键盘输入结束或退出终端
+  - Ctrl+a 光标移动到开始位置
+  - Ctrl+e 光标移动到最末尾
+  - Ctrl+k 删除此处至末尾的所有内容
+  - Ctrl+u 删除此处至开始的所有内容
+  - Ctrl+d 删除当前字符
+  - Ctrl+h 删除当前字符前一个字符
+  - Ctrl+w 删除此处到左边的单词
+  - Ctrl+y 粘贴由 Ctrl+u ， Ctrl+d ， Ctrl+w 删除的单词
+  - Ctrl+l 相当于clear，即清屏
+  - Ctrl+r 查找历史命令
+  - Ctrl+b 向回移动光标
+  - Ctrl+f 向前移动光标
+  - Ctrl+t 将光标位置的字符和前一个字符进行位置交换
+  - Ctrl+& 恢复 ctrl+h 或者 ctrl+d 或者 ctrl+w 删除的内容
+  - Ctrl+S 暂停屏幕输出
+  - Ctrl+Q 继续屏幕输出
+  - Ctrl+Left-Arrow 光标移动到上一个单词的词首
+  - Ctrl+Right-Arrow 光标移动到下一个单词的词尾
+  - Ctrl+p 向上显示缓存命令
+  - Ctrl+n 向下显示缓存命令
+  - Ctrl+d 关闭终端
+  - Ctrl+xx 在EOL和当前光标位置移动
+  - Ctrl+x@ 显示可能hostname补全
+  - Ctrl+c 终止进程/命令
+  - Shift +上或下 终端上下滚动
+  - Shift+PgUp/PgDn 终端上下翻页滚动
+  - Ctrl+Shift+n 新终端
+  - alt+F2 输入gnome-terminal打开终端
+  - Shift+Ctrl+T 打开新的标签页
+  - Shift+Ctrl+W 关闭标签页
+  - Shift+Ctrl+C 复制
+  - Shift+Ctrl+V 粘贴
+  - Alt+数字 切换至对应的标签页
+  - Shift+Ctrl+N 打开新的终端窗口
+  - Shift+Ctrl+Q 管壁终端窗口
+  - Shift+Ctrl+PgUp/PgDn 左移右移标签页
+  - Ctrl+PgUp/PgDn 切换标签页
+  - F1 打开帮助指南
+  - F10 激活菜单栏
+  - F11 全屏切换
+  - Alt+F 打开 “文件” 菜单（file）
+  - Alt+E 打开 “编辑” 菜单（edit）
+  - Alt+V 打开 “查看” 菜单（view）
+  - Alt+S 打开 “搜索” 菜单（search）
+  - Alt+T 打开 “终端” 菜单（terminal）
+  - Alt+H 打开 “帮助” 菜单（help）
+  - cmmand + d:新开同框分屏
+  - Ctrl+d:键盘输入结束或退出终端
+  - Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行
+  - Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg
+  - Ctrl+a:将光标移至输入行头，相当于Home键
+  - Ctrl+e:将光标移至输入行末，相当于End键
+  - Ctrl + K :删除从光标所在位置到行末,常配合ctrl+a使用
+  - Alt+Backspace:向前删除一个单词，常配合ctrl+e使用
+  - Shift+PgUp:将终端显示向上滚动
+  - Shift+PgDn:将终端显示向下滚动
+  - clear|ctrl+l :清屏
+  - Ctrl + U 删除光标之前的全部内容
+  - Ctrl + Y 撤销之前的删除操作
+  - Ctrl + W 删除之前的一个参数
 
 * Tab:点击Tab键可以实现命令补全,目录补全、命令参数补全
 * Ctrl+c:强行终止当前程序(（)常用)
@@ -1049,6 +1126,10 @@ sudo apt-get install xmobar dmenu
 * Ctrl+r  查询命令(多次按)
 * Ctrl+/  撤销
 * Alt–.   使用前一次命令的最后一个词(命令本身也是一个词)
+
+```sh
+dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on command-line
+```
 
 ### 脚本
 

@@ -28,6 +28,7 @@ Go 编译器支持交叉编译，可以在一台机器上构建运行在具有�
 ### linux
 wget  https://redirector.gvt1.com/edgedl/go/go$VERSION.$OS-$ARCH.tar.gz
 sudo tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
+echo 'export PATH="/home/dnt/go/bin:$PATH"' >> ~/.bashrc
 
 export PATH=$PATH:/usr/local/go/bin # 默认安装路径 /usr/local/go (c:\Go under Windows)添加到/etc/profile (for a system-wide installation) or $HOME/.profile
 
