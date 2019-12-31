@@ -1,6 +1,6 @@
 # [torvalds/linux](https://github.com/torvalds/linux)
 
-* UNIX/Linux 本身是没有图形界面的，通常在 UNIX/Linux 发行版上看到的图形界面实际都只是运行在 Linux 系统之上的一套软件,而 Linux 上的这套软件以前是 XFree86，现在则是 xorg（X.Org），而这套软件又是通过 X 窗口系统（X Window System，也常被称为 X11 或 X）实现的，X 本身只是工具包及架构协议，而 xorg 便是 X 架构规范的一个实现体，也就是说它是实现了 X 协议规范的一个提供图形界面服务的服务器，就像实现了 http 协议提供 web 服务的 Apache 。
+* UNIX/Linux 本身是没有图形界面的，通常在 UNIX/Linux 发行版上看到的图形界面实际都只是运行在 Linux 系统之上的一套软件,而 Linux 上的这套软件以前是 XFree86，现在则是 xorg（X.Org），而这套软件又是通过 X 窗口系统（X Window System，也常被称为 X11 或 X）实现的，X 本身只是工具包及架构协议，而 xorg 便是 X 架构规范的一个实现体，也就是说它是实现了 X 协议规范的一个提供图形界面服务的服务器，就像实现了 http 协议提供 web 服务的 Apache 。如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端，我们称为 X Client，像如下几个大家熟知也最流行的实现了客户端功能的桌面环境 KDE，GNOME，XFCE，LXDE 。
 * 如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端，我们称为 X Client，像如下几个大家熟知也最流行的实现了客户端功能的桌面环境 KDE，GNOME，XFCE，LXDE 。
 * Linux 是一个可以实现多用户登陆的操作系统，多用户可以同时登陆同一台主机，共享主机的一些资源，不同的用户也分别有自己的用户空间，可用于存放各自的文件。虽然不同用户的文件是放在同一个物理磁盘上的甚至同一个逻辑分区或者目录里，但是由于 Linux 的用户管理和 文件权限机制，不同用户不可以轻易地查看、修改彼此的文件。
 * Linux系统默认的字符编码是 UTF-8。Windows 是 GBK 编码，不支持UTF8. 所以 Linux下 的中文文件名到 Windwos下就成了乱码。
@@ -296,7 +296,7 @@ Linux内核处于用户进程和硬件之间，包括系统调用接口和Linux�
 * /lib：标准程序设计库，又叫动态链接共享库及内核模块，作用类似windows里的.dll文件。根文件系统上的程序所需的共享库，这些文件包含了可被许多程序共享的代码，以避免每个程序都包含有相同的子程序的副本，故可以使得可执行文件变得更小，节省空间。
   - /lib/modules目录包含系统核心可加载各种模块，尤其是那些在恢复损坏的系统时重 新引导系统所需的模块(例如网络和文件系统驱动)。
 * /mnt：系统管理员临时安装(mount)文件系统的安装点。程序并不自动支持安装到/mnt 。/mnt下面可以分为许多子目录，例如/mnt/dosa可能是使用 msdos文件系统的软驱，而/mnt/exta可能是使用ext2文件系统的软驱，/mnt/cdrom光 驱等等。
-* opt：额外安装的可选应用程序包所放置的位置，刚才装的测试版firefox，就可以装到/opt/firefox_beta目录下，/opt/firefox_beta目录下面就包含了运 行firefox所需要的所有文件、库、数据等等。要删除firefox的时候，你只需删除/opt/firefox_beta目录即可，非常简单。
+* /opt：额外安装的可选应用程序包所放置的位置，刚才装的测试版firefox，就可以装到/opt/firefox_beta目录下，/opt/firefox_beta目录下面就包含了运 行firefox所需要的所有文件、库、数据等等。要删除firefox的时候，你只需删除/opt/firefox_beta目录即可，非常简单。
   - /proc：虚拟的目录，是系统内存的映射。可直接访问这个目录来获取系统信息。
   - /proc/x：关于进程x的信息目录，这x是这一进程的标识号。每个进程在 /proc下有一个名为自己进程号的目录。
   - /proc/cpuinfo：存放处理器(cpu)的信息，如cpu的类型、制造商、 型号和性能等。
@@ -331,7 +331,7 @@ Linux内核处于用户进程和硬件之间，包括系统调用接口和Linux�
   - /usr/local下一般是你安装软件的目录，这个目录就相当于在windows下的programefiles这个目录
   - /usr/local/bin：本地增加的命令。
   - /usr/local/lib：本地增加的库根文件系统。
-* /var：某些大文件的溢出区，包含会改变的文件，比如spool目录(mail、news、打印机等用的)， log文件、 formatted manual pages和暂存文件。传统上/var 的所有东西曾在 /usr 下的某个地方，但这样/usr 就不可能只读安装了。
+* /var：用户创建的所有变量文件和临时文件的存储，比如spool目录(mail、news、打印机等用的)， log文件、 formatted manual pages和暂存文件。传统上/var 的所有东西曾在 /usr 下的某个地方，但这样/usr 就不可能只读安装了。
   - /var/catman：包括了格式化过的帮助(man)页。帮助页的源文件一般存在 /usr/man/catman中；有些man页可能有预格式化的版本，存在/usr/man/cat中。而其他的man页在第一次看时都需要格式化，格 式化完的版本存在/var/man中，这样其他人再看相同的页时就无须等待格式化了。(/var/catman经常被 清除，就像清除临时目录一样。)
   - /var/lib：存放系统正常运行时要改变的文件。
   - /var/local：存放/usr/local中 安装的程序的可变数据(即系统管理员安装的程序)。注意，如果必要，即使本地安装的程序也会使用其他/var目录，例如/var/lock 。
@@ -340,7 +340,7 @@ Linux内核处于用户进程和硬件之间，包括系统调用接口和Linux�
   - /var/run：保存在下一次系统引导前有效的关于系统的信息文件。例如，/var/run/utmp包 含当前登录的用户的信息。
   - /var/spool：放置“假脱机(spool)”程序的目录，如mail、 news、打印队列和其他队列工作的目录。每个不同的spool在/var/spool下有自己的子目录，例如，用户的邮箱就存放在/var/spool/mail 中。
   - /var/tmp：比/tmp允许更大的或需要存在较长时间的临时文件。注意系统管理 员可能不允许/var/tmp有很旧的文件。
-* /lost+found：这个 目录平时是空的，系统非正常关机而留下“无家可归”的文件就在这里。
+* /lost+found：平时是空的，系统非正常关机而留下“无家可归”的文件就在这里。
 
 ## 信号量
 
@@ -407,9 +407,85 @@ source ~/.zshrc
 sudo update-alternatives --config editor # 修改默认编辑器
 ```
 
-## 配置
+## 启动项
 
-```
+* 启动目录： /etc/rc.d/rc[0~6].d
+* 命令行脚本文件：/etc/init.d/ 查看系统引导时启动的服务项
+* 本地文件：/etc/rc.local
+* 添加 /etc/init.d/nginx start
+
+```sh
+systemctl list-unit-files --type=service | grep enabled # 展示开机启动时的进程项
+
+sudo systemctl stop bluetooth.service
+sudo systemctl disable bluetooth.service
+systemctl status bluetooth.service
+
+sudo systemctl mask bluetooth.service # 完全阻止开机启动 把它掩盖起来
+
+## 禁用服务列表
+accounts-daemon.service # AccountsService 的一部分，AccountsService 允许程序获得或操作用户账户信息
+avahi-daemon.service # 用于零配置网络发现，使电脑超容易发现网络中打印机或其他的主机
+brltty.service # 提供布莱叶盲文设备支持，例如布莱叶盲文显示器。
+debug-shell.service # 开放了一个巨大的安全漏洞（该服务提供了一个无密码的 root shell ，用于帮助 调试 systemd 问题），除非你正在使用该服务，否则永远不要启动服务。
+ModemManager.service # 该服务是一个被 dbus 激活的守护进程，用于提供移动
+pppd-dns.service # 是一个计算机发展的遗物，如果你使用拨号接入互联网的话，保留它，否则你不需要它。
+rtkit-daemon.service # 一个 实时内核调度器real-time kernel scheduler
+whoopsie.service # 是 Ubuntu 错误报告服务。它用于收集 Ubuntu 系统崩溃报告，并发送报告到 https://daisy.ubuntu.com 。 你可以放心地禁止其启动，或者永久的卸载它。
+wpa_supplicant.service # 仅在你使用 Wi-Fi 连接时需要
+
+# 查看linux系统信息
+uname -a # 显示电脑以及操作系统的相关信息 -r 核心版本
+cat /proc/version # 说明正在运行的内核版本
+cat /etc/issue # 显示的是发行版本信息
+lsb_release -a
+
+df -T
+reboot｜poweroff
+date # 获取当前时间
+cal # 日历
+bc # 计算器
+
+uname # 返回系统名称 sudo uname --m
+hostname # 返回系统的主机名称
+--version/-V # 查看某个程序的版本
+history # 显示历史
+help # 用于显示 shell 内建命令的简要帮助信息 help exit
+man #
+info ls
+ssh # 连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。
+grep  # 用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
+alias server="python -m SimpleHTTPServer 9000" # 使用 alias 这个 bash 内置的命令来为它们创建一个短别名
+
+which # 寻找执行文件
+whereis
+who
+locate #
+
+tar # 用来处理文件压缩的默认 Unix 工具.
+md5sum  # 它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
+
+# 界面切换
+init 3
+init 5
+--run level 0 :关机
+--run level 3 :纯文本模式
+--run level 5 :含有图形接口模式
+--run level 6 :重新启动
+
+chkconfig --list sshd
+
+## 修改时区
+sudo tzselect
+sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+
+sudo vi /etc/timezone
+# 改为Asia/Shanghai
+
+# ~/.bash_aliases
+alias pip=/usr/local/bin/pip3.6
+alias python=/usr/bin/python3.6
+
 # /etc/sysctl.conf 
 net.ipv4.ip_local_port_range = 1024 65535 # 用户端口范围 
 net.ipv4.tcp_max_syn_backlog = 4096 
@@ -431,6 +507,11 @@ mkdir /media/cdrom  # 新建镜像文件挂载目录
 cd /usr/local/src  #进入系统镜像文件存放目录
 ls  # 列出目录文件，可以看到刚刚上传的系统镜像文件
 
+dd # 默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
+# dd if=/dev/zero of=virtual.img bs=1M count=256  # 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
+# dd if=/dev/stdin of=test bs=10 count=1 conv=ucase # 将输出的英文字符转换为大写再写入文件
+sudo mount # 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
+
 # 挂载系统镜像 mount -t 文件系统 设备描述文件 挂载点（已经存在空目录）
 mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom
 cd  /media/cdrom  # 进入挂载目录，使用ls命令可以看到已经有文件存在了
@@ -440,6 +521,7 @@ umount  /media/cdrom  # 卸载系统镜像 退出挂载目录，才能卸载
 vi /etc/fstab   # 添加以下代码。实现开机自动挂载
 /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom   iso9660    defaults,ro,loop  0 0
 
+## 挂载镜像文件
 mount /dev/fd0 /mnt/floppy 挂载一个软盘
 mount /dev/cdrom /mnt/cdrom 挂载一个cdrom或dvdrom
 mount /dev/hdc /mnt/cdrecorder 挂载一个cdrw或dvdrom
@@ -448,6 +530,11 @@ mount -o loop file.iso /mnt/cdrom 挂载一个文件或ISO镜像文件
 mount -t vfat /dev/hda5 /mnt/hda5 挂载一个Windows FAT32文件系统
 mount /dev/sda1 /mnt/usbdisk 挂载一个usb 捷盘或闪存设备
 mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share 挂载一个windows网络共享
+mkdir /media/cdrom  #新建镜像文件挂载目录
+cd /usr/local/src  #进入系统镜像文件存放目录
+ls  #列出目录文件，可以看到刚刚上传的系统镜像文件
+mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom #挂载系统镜像
+cd  /media/cdrom  #进入挂载目录，使用ls命令可以看到已经有文件存在了
 ```
 
 ## 硬件
@@ -582,29 +669,6 @@ hostname  www  #设置主机名为www
 
 vi /etc/hostname #编辑配置文件
 www   localhost.localdomain  #修改localhost.localdomain为www
-```
-
-## terminal终端
-
-* 终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
-* 快捷键
-  - cmmand + d:新开同框分屏
-  - Ctrl+d:键盘输入结束或退出终端
-  - Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行
-  - Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg
-  - Ctrl+a:将光标移至输入行头，相当于Home键
-  - Ctrl+e:将光标移至输入行末，相当于End键
-  - Ctrl + K :删除从光标所在位置到行末,常配合ctrl+a使用
-  - Alt+Backspace:向前删除一个单词，常配合ctrl+e使用
-  - Shift+PgUp:将终端显示向上滚动
-  - Shift+PgDn:将终端显示向下滚动
-  - clear|ctrl+l :清屏
-  - Ctrl + U 删除光标之前的全部内容
-  - Ctrl + Y 撤销之前的删除操作
-  - Ctrl + W 删除之前的一个参数
-
-```sh
-dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on command-line
 ```
 
 ## 指令
@@ -808,32 +872,6 @@ htop # Famous process monitor. It has a nice, colorful command-line UI. Some use
 # 下载工具
 wget -O newname.md https://github.com/LCTT/TranslateProject/blob/master/README.md     ### 下载 README 文件并重命名为 newname.md
 wget -c url     ### 下载 url 并开启断点续传
-
-### 设置IP地址、网关DNS
-cd  /etc/sysconfig/network-scripts/
-vi  ifcfg-eno16777736  #编辑配置文件，添加修改以下内容
-
-TYPE="Ethernet"
-BOOTPROTO="static"  #启用静态IP地址
-DEFROUTE="yes"
-IPV4_FAILURE_FATAL="no"
-IPV6INIT="yes"
-IPV6_AUTOCONF="yes"
-IPV6_DEFROUTE="yes"
-IPV6_FAILURE_FATAL="no"
-NAME="eno16777736"
-UUID="8071cc7b-d407-4dea-a41e-16f7d2e75ee9"
-ONBOOT="yes"  #开启自动启用网络连接
-IPADDR0="192.168.21.128"  #设置IP地址
-PREFIX0="24"  #设置子网掩码
-GATEWAY0="192.168.21.2"  #设置网关
-DNS1="8.8.8.8"  #设置主DNS
-DNS2="8.8.4.4"  #设置备DNS
-HWADDR="00:0C:29:EB:F2:B3"
-IPV6_PEERDNS="yes"
-IPV6_PEERROUTES="yes"
-
-service network restart   #重启网络
 ```
 
 ### [Tcpdump](http://www.tcpdump.org/)
@@ -919,52 +957,6 @@ tcpdump -i eth0 '((port 8000) and (tcp[(tcp[12]>>2):4]=0x47455420))' -nnAl -w /t
 tcpdump -i eth1 udp dst port 53
 ```
 
-### 目录
-
-```sh
-du # 命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
-
-ls -F # 查看目录中的文件
-# -a:列出所有文件，包括隐藏文件
-# -l:列出文件及其详细信息
-# -h:文件大小
-# -d:显示目录本身
-ls -a|l|h|d directory # list 列出某文件夹下的文件，添加参数可实现更细致的功能
-
-# -rw-------    1   root    root    1190    08-10 23:37     anaconda-ks.cfg 长格式实例： 权限位 引用计数 属主、组 大小 最后修改时间
-tree # 查看文件列表
-
-cd /home/henry|~|..|../.. # change directory 通过相对路径、绝对路径切换目录,cd到不存在的目录时会报错
-cd   # 进入用户主目录
-cd -  # 返回进入此目录之前所在的目录
-
-touch # 创建空文件 或 修改文件时间 touch file{1..5}.txt 使用通配符批量创建 5 个文件
-touch  somefile.1  ## 创建一个空文件
-touch -t 0712250000 file1 # 修改一个文件或目录的时间戳 - (YYMMDDhhmm)
-
-echo "hi,boy" > somefile.2  ## 利用重定向“>”的功能，将一条指令的输出结果写入到一个文件中，会覆盖原文件内容，如果指定的文件不存在，则会创建出来
-echo "hi baby" >> somefile.2  ## 将一条指令的输出结果追加到一个文件中，不会覆盖原文件内容
-
-rename # 批量重命名,需要用到正则表达式
-rename 's/.txt/.c/' *.txt 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件:
-rename 'y/a-z/A-Z/' *.c 批量将这 5 个文件，文件名改为大写
-
-pwd # print working directory 打印当前目录
-mkdir # make directories 创建目录
-mkdir -p father/son/grandson # 递归创建
-
-mv  sourcefile  destinationDirectory|desalinationFile  #  移动文件、文件重命名 将当前目录下的install.log 移动到aaa文件夹中去
-
-rmdir # remove empty directories 删除目录
-rm -rf directory # r递归删除，f参数表示强制
-rm -rf log/* # 方法二：删除logs文件夹下的所有文件，而不删除文件夹本身
-
-# 生产环境把rm -rf 命令替换为mv，再写个定时shell定期清理
-# 帐号权限的分离，线上分配work帐号，只能够删除/home/work/logs/目录，无法删除根目录。
-# cd ${log_path} && rm -rf *
-# 制定编码规范，对目录进行操作之前，要先判断目录是否存在。
-```
-
 ### 文件
 
 Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能使用本地磁盘分区的文件系统，也可以使用网络上的文件系统。Linux的大部分目录结构是依据FHS标准（英文：Filesystem Hierarchy Standard 中文：文件系统层次结构标准）规定好的，多数 Linux 版本采用这种文件组织形式，FHS 定义了系统中每个区域的用途、所需要的最小构成的文件和目录同时还给出了例外处理与矛盾处理。
@@ -979,7 +971,7 @@ Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能
   * 设备文件：（ /dev 目录下有各种设备文件，大都跟具体的硬件设备相关），如猫的串口设备，用字符c表示；
   * socket文件;用字符s表示，比如启动MySQL服务器时，产生的mysql.sock的文件;
   * pipe 管道文件：可以实现两个程序（可以从不同机器上telnet）实时交互，用字符p表示；
-  * `l` 链接文件:软链接等同于 Windows 上的快捷方式；用字符l表示； 软硬链接文件的共同点和区别：无论是修改软链接，硬链接生成的文件还是直接修改源文件，相应的文件都会改变，但是如果删除了源文件，硬链接生成的文件依旧存在而软链接生成的文件就不再有效了。
+  * 链接文件:软链接等同于 Windows 上的快捷方式；用字符l表示； 软硬链接文件的共同点和区别：无论是修改软链接，硬链接生成的文件还是直接修改源文件，相应的文件都会改变，但是如果删除了源文件，硬链接生成的文件依旧存在而软链接生成的文件就不再有效了。
 * 虚拟文件系统
   * 将各种不同文件系统的操作和管理纳入到一个统一的框架中，使得用户程序可以通过同一个文件系统界面，也就是同一组系统调用，对各种不同的文件系统以及文件进行操作；用户程序可以不关心不同文件系统的实现细节，而使用系统提供的统一、抽象、虚拟的文件系统界面；这种统一的框架就是所谓的虚拟文件系统转换，一般简称虚拟文件系统(VFS)；
   * VFS的对象类型包括：超级块(superblock)对象、索引节点(inode)对象、目录项(dentry)对象和文件(file)对象；
@@ -992,12 +984,99 @@ Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能
 * dd：默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
 * `dd if=/dev/stdin of=test bs=10 count=1 conv=ucase` 将输出的英文字符转换为大写再写入文件
 * sudo mount 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
+* 文件权限:一个目录同时具有读权限和执行权限才可以打开并查看内部文件，而一个目录要有写权限才允许在其中创建其它文件，这是因为目录文件实际保存着该目录里面的文件的列表等信息。
+  - 读权限：可以使用 `cat <file name>` 之类的命令来读取某个文件的内容; 读权限4：读取文件内容|查询目录下文件名 如：cat、more、head、tail ls
+  - 写权限: 写权限2，编辑、新增、修改文件内容|修改目录结构的权限
+  - 执行权限:通常指可以运行的二进制程序文件或者脚本文件(Linux 上不是通过文件后缀名来区分文件的类型);
+  - 所有者权限，所属用户组权限，是指所在的用户组中的所有其它用户对于该文件的权限
+  - chmod g+s: This means that all new files and subdirectories created within the current directory inherit the group ID of the directory, rather than the primary group ID of the user who created the file.  This will also be passed on to new subdirectories created in the current directory.
+* 文件压缩
+  - -r:表示递归打包包含子目录的全部内容
+  - -q:表示为安静模式，即不向屏幕输出信息
+  - -o:表示输出文件，需在其后紧跟打包输出文件名
+  - -[1-9]:设置压缩等级，1 表示最快压缩但体积大，9 表示体积最小但耗时最久。
+  - -x:排除我们上一次创建的 zip 文件，否则又会被打包进这一次的压缩文件中
+  - -e：创建加密压缩包
+  - -l:将 LF（换行） 转换为 CR+LF(windows 回车加换行)
+  - -c 创建归档
+  - -x 解压归档
+  - -v 显示处理过程
+  - -f 目标文件，其后必须紧跟 目标文件
+  - -j 调用 bzip2 进行解压缩
+  - -z 调用 gzip 进行解压缩
+  - -t 列出归档中的文件
 
 ```sh
+du # 命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
+du -h 文件/目录 # 查看文件占据磁盘空间大小,命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`命令会生成相关文件和有关目录的空间使用情况的报告。它很容易使用，也可以递归地运行，会遍历每个子目录并且返回每个文件的单个大小。`du -sh *`
+
+ls -F # 查看目录中的文件
+# -a:列出所有文件，包括隐藏文件
+# -l:列出文件及其详细信息
+# -h:文件大小
+# -d:显示目录本身
+ls -a|l|h|d directory # list 列出某文件夹下的文件，添加参数可实现更细致的功能
+
+# -rw-------    1   root    root    1190    08-10 23:37     anaconda-ks.cfg 长格式实例： 权限位 引用计数 属主、组 大小 最后修改时间
+tree # 查看文件列表
+tree /home -p # 获取项目树形结构 Tree 用可视化的效果展示一个目录下的文件
+
+cd /home/henry|~|..|../.. # change directory 通过相对路径、绝对路径切换目录,cd到不存在的目录时会报错
+cd   # 进入用户主目录
+cd -  # 返回进入此目录之前所在的目录
+
+touch # 创建空文件 或 修改文件时间 touch file{1..5}.txt 使用通配符批量创建 5 个文件
+touch  somefile.1  ## 创建一个空文件
+touch  filename|dir/filename
+touch -t 0712250000 file1 # 修改一个文件或目录的时间戳 - (YYMMDDhhmm)
 file logo.png # Returns information for given file
+file /bin/ls # 查看文件类型
+
+echo "hi,boy" > somefile.2  ## 利用重定向“>”的功能，将一条指令的输出结果写入到一个文件中，会覆盖原文件内容，如果指定的文件不存在，则会创建出来
+echo "hi baby" >> somefile.2  ## 将一条指令的输出结果追加到一个文件中，不会覆盖原文件内容
+
+rename # 批量重命名,需要用到正则表达式
+rename 's/.txt/.c/' *.txt 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件:
+rename 'y/a-z/A-Z/' *.c 批量将这 5 个文件，文件名改为大写
+
+pwd # print working directory 打印当前目录
+
+mkdir  newdir # make directories 创建目录
+mkdir -p father/son/grandson # 递归创建
+mkdir  dir/newdir|dir/dir/newdir
+basename，dirname
+
+# 移动文件、文件重命名
+mv  sourcefile  destinationDirectory|desalinationFile  #  移动文件、文件重命名 将当前目录下的install.log 移动到aaa文件夹中去
+mv  dir1  dir2                # dir1移动到dir2目录下,并给改名字为"原名"
+mv  dir1  dir2/newdir         # dir1移动到dir2目录下,并给改名字为newdir
+mv  dir1/dir2  dir3/dir4      # dir2移动到dir4目录下,并给改名字为"原名"
+mv  dir1/dir2  dir3/dir4/newdir  # dir2移动到dir4目录下,并给改名字为 newdir
+mv  dir1/dir2  ./             # dir2移动到 当前 目录下,并给改名字为"原名"
+mv  dir1/dir2  ./newdir           # dir2移动到 当前 目录下,并给改名字为newdir
+
+rmdir # remove empty directories 删除目录
+rm -rf directory # r递归删除，f参数表示强制
+rm -rf log/* # 方法二：删除logs文件夹下的所有文件，而不删除文件夹本身
+rm  filename      # 普通文件删除
+rm dir # 删除目录
+rm -r dir         # 删除目录[无视层次]需要-r参数
+rm -rf  文件      # recursive force 递归强制删除文件,force 避免删除隐藏文件的提示
+rm -rf /         # 递归强制方式删除系统里边的全部内容
+
+# 生产环境把rm -rf 命令替换为mv，再写个定时shell定期清理
+# 帐号权限的分离，线上分配work帐号，只能够删除/home/work/logs/目录，无法删除根目录。
+# cd ${log_path} && rm -rf *
+# 制定编码规范，对目录进行操作之前，要先判断目录是否存在。
 
 wc  -l|-m|-w # 行 字符 字 获取某一个文件的行数和字数`wc package.json`
+
 cp -r|p|d|a 源文件 目标位置/目标名称 # 复制文件或目录  r:复制目录 p:连带文件属性一起复制 -d:源文件是链接文件，则复制链接属性 a:相当于pdr
+cp  file1  dir1  # file1被复制到dir1目录下一份，并给改名字为“原名”
+cp  file1  dir1/newfile  # file1被复制到dir1目录下一份，并给改名字为newfile
+cp -r dir1  dir2 # dir1被复制到dir2目录下一份，并给改名字为“原名” # recursive递归方式拷贝目录
+cp -r dir1  dir2/newdir  # dir1被复制到dir2目录下一份，并给改名字为newdir
+cp -r dir1/dir2/dir3   dir4/dir5  # dir3被复制到dir5目录下一份，并给改名字为"原名"
 
 sort # 排序
 diff file1 file2 # 比较两个文件的异同
@@ -1009,20 +1088,28 @@ base64 inputfile output
 base64 -d inputfile output
 
 cat -n file # 查看文件内容，从头到尾的内容 -n:列出行号 当一个文档太长时， cat 只能展示最后布满屏幕的内容
+cat  filename   # 在终端显示文件全部内容,读取某一个文件内的内容,打印文件内容到标准输出(正序)
+more filename   # 通过"敲回车"方式从第一行逐行查看文件内容,不支持回看,q键退出查看
+less filename   # "上下左右"键方式查看文件各个部分内容,支持回看，q键退出查看
+head  -n  filename # 查看文件“前n行”内容
+tail  -n  filename # 查看文件“末尾n行”内容
+tail -n 1 /etc/passwd
+wc  filename     # 计算文件行数
+nl # 显示的时候，顺道输出行号
+umask # 档案预设权限
+chattr # 配置文件档案隐藏属性
+lsattr # 显示档案隐藏属性
+
 tac # 打印文件内容到标准输出(逆序)
 
-more file # 分屏显示文件内容,终端底部显示当前阅读的进度 逐行显示内容
-
-Enter 键向下滚动一行
-Space 键向上滚动一屏
-h 显示帮助
-q 退出
-more +100 /etc/locale.gen       # 从 100 行开始显示
-
-file /bin/ls # 查看文件类型
 head  -n 20 file # 显示文件头几行(默认显示10行)
 tail -n 1 /etc/passwd # 查看文件的尾几行（默认10行）
 tail -f file
+
+
+# Enter 键向下滚动一行 Space 键向上滚动一屏 h 显示帮助 q 退出
+more +100 /etc/locale.gen       # 从 100 行开始显示
+more file # 分屏显示文件内容,终端底部显示当前阅读的进度 逐行显示内容
 
 less [参数] 文件 # 上下滚动查看内容
 -c 从顶部（从上到下）刷新屏幕，并显示文件内容。而不是通过底部滚动完成刷新；
@@ -1052,12 +1139,16 @@ p n% 跳到n%，比如 10%，也就是说比整个文件内容的10%处开始显
 v 调用vi编辑器；
 q 退出less
 
+echo  内容 > filename    # 给文件“覆盖写”方式追加内容
+echo  内容 >> filename   # 给文件纯追加内容
 cat file >> another file # 文件追加
 
 ln source new-link
 ln -s source new-link
 ln -s 源文件 目标文件 创建链接文件 # 链接文件相当于快捷方式 (文件名都必须写绝对路径)
 ln -l /user/bin/java #  show link info
+ln  # unix 里面的链接同 Windows 中的快捷方式类似，允许你快速地访问到一个特定的文件。
+sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/
 
 psketch
 
@@ -1065,6 +1156,8 @@ tee # It splits the output of a program, so we can both print & save it. For exa
 echo "127.0.0.1 foobar" | sudo tee -a /etc/hosts
 
 tree -d # Lists contents of a directory in tree-like format
+
+sudo mkfs.ext4 virtual.img # 格式化virtual.img为ext4格式
 
 find . -type f -name "*.css"  # List all CSS files (including subdirectories)
 find . -type f \( -name "*.css" -or -name "*.html" \) # List all CSS or HTML files:
@@ -1086,56 +1179,27 @@ scp your_username@remotehost.edu:/some/remote/directory/\{a,b,c\} .
 scp your_username@remotehost.edu:~/\{foo.txt,bar.txt\} .
 scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music 
 scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music/001.mp3
-```
 
-### 权限
-
-一个目录同时具有读权限和执行权限才可以打开并查看内部文件，而一个目录要有写权限才允许在其中创建其它文件，这是因为目录文件实际保存着该目录里面的文件的列表等信息。
-
-* readable 读权限4：读取文件内容|查询目录下文件名 如：cat、more、head、tail ls
-* writable 写权限2，编辑、新增、修改文件内容|修改目录结构的权限
-* excutable执行权限1，通常指可以运行的二进制程序文件或者脚本文件(Linux 上不是通过文件后缀名来区分文件的类型)|可以进入目录
-* 所有者权限，所属用户组权限，是指所在的用户组中的所有其它用户对于该文件的权限
-* chmod g+s: This means that all new files and subdirectories created within the current directory inherit the group ID of the directory, rather than the primary group ID of the user who created the file.  This will also be passed on to new subdirectories created in the current directory.
-
-```sh
 # -r-xr-x---
 chmod 755 test # change the permissions mode of a file 修改权限  赋予一个shell文件test.sh可执行权限，拥有者可读、写、执行，群组账号和其他人可读、执行。
 chmod  u g o a | +（加入） -（除去） =（设置） | r w x | 文档路径
-
 chmod u=rwx,g+rwx,o-rwx test
-
+chmod 000  filename   # 所有用户没有任何权限
 sudo chown user1:user1 /etc/apt/sources.list # 修改文件的属主或属组 change file ownership
 
 usermod -a -G sudo username
 chown [-R] [帐号名称] [文件或目录]
 chown [-R] [帐号名称]:[群组名称] [文件或目录]
-```
 
-### 压缩
-
-* -c 创建归档
-* -x 解压归档
-* -v 显示处理过程
-* -f 目标文件，其后必须紧跟 目标文件
-* -j 调用 bzip2 进行解压缩
-* -z 调用 gzip 进行解压缩
-* -t 列出归档中的文件
-* -r:表示递归打包包含子目录的全部内容
-* -q:表示为安静模式，即不向屏幕输出信息
-* -o:表示输出文件，需在其后紧跟打包输出文件名
-* -[1-9]:设置压缩等级，1 表示最快压缩但体积大，9 表示体积最小但耗时最久。
-* -x:排除我们上一次创建的 zip 文件，否则又会被打包进这一次的压缩文件中
-* -e：创建加密压缩包
-* -l:将 LF（换行） 转换为 CR+LF(windows 回车加换行)
-
-```sh
 zip -r -9 -q -o shiyanlou_9.zip /home/shiyanlou -x ~/*.zip # 设置不同压缩等级
 zip -r -e -o shiyanlou_encryption.zip /home/shiyanlou  # 创建加密
 zip -r -l -o shiyanlou.zip /home/shiyanlou   # 解决windows和linux对换行的不同处理问题
 
 unzip -q shiyanlou.zip -d ziptest   # 静默且指定解压目录，目录不存在会自动创建
 unzip -O GBK 中文压缩文件.zip # 使用 -O（英文字母，大写 o）参数指定编码类型
+gzip，zcat
+bzip2，bzcat
+tar
 
 tar -zcvf 压缩文件名 源文件 # 压缩/解压 同时打包 -z:识别.gz格式  -c:压缩  -v:显示压缩过程  -f:指定压缩包名
 tar -zxvf  压缩文件名   # 解压缩同时解打包
@@ -1145,10 +1209,28 @@ tar -jxvf aa.tar.bz2  /tmp/ # 解打包同时解压缩
 
 tar -ztvf aa.tar.gz  # 查看不解压
 tar -jtvf aa.tar.bz2 # -t  只查看，不解压
+
+whereis who  # 只能搜索二进制文件(-b)，man 帮助文件(-m)和源代码文件(-s)。
+where composer
+type composer
+locate /etc/sh(查找 /etc 下所有以 sh 开头的文件)  # 通过/var/lib/mlocate/mlocate.db数据库查找，不过这个数据库也不是实时更新的，系统会使用定时任务每天自动执行 updatedb 命令更新一次，所以有时候你刚添加的文件，它可能会找不到
+locate /usr/share/\*.jpg # 注意要添加 * 号前面的反斜杠转义，否则会无法找到。
+which man # 使用 which 来确定是否安装了某个指定的软件，因为它只从 PATH 环境变量指定的路径中去搜索命令
+sudo find /etc/ -name interfaces/ # 格式find [path] [option] [action];  不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索。
+
+find  ./  -size  +50c # 在当前目录下查找大小[大于]50个字节的文件
+find  ./  -size  -50c # 在当前目录下查找大小[小于]50个字节的文件
+find / -name passwd -mindepth 3 -maxdepth 4 # 在3到4个层次的目录里边定位passwd文件
+find  /  -name  passwd[完整名称]     # "递归遍历"系统全部目录查找名字等于passwd的文件
+find  目录 -name  "an*" [部分名称]     # 模糊查找文件名字以an开始的
 ```
 
 ### 用户管理
 
+* 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限。
+* 家目录修改后需要手动创建，不同于创建用户家目录设置
+* 创建用户时设置家目录，该目录会自动创建
+* 修改用户家目录时，该目录不会自动创建(需要手动创建)
 * 用户owner
   - 用户帐号和其相关信息 (密码除外) 均是存放在 /etc/passwd 配置文件中
   - 由于所有用户对 passwd 文件均有读取的权限，因此密码信息并未保存在该文件中，而是采用 MD5 加密算法加密 保存在了 /etc/shadow 的配置文件中，只有 root 用户可以读取
@@ -1171,6 +1253,16 @@ tar -jtvf aa.tar.bz2 # -t  只查看，不解压
 * gid
 
 ```sh
+su <user> # 切换到用户user,执行时需要输入目标用户的密码；
+su - <user> # 切换用户，同时环境变量也会跟着改变成目标用户的环境变量。
+su -l <lilei> # </lilei>切换登录用户;
+sudo adduser <lilei>  # </lilei>新建一个叫做lilei的用户，添加用户到系统，同时也会默认为新用户创建 home目录：
+sudo <useradd>  # </useradd>只创建用户，创建完了需要用 passwd lilei 去设置新用户的密码;
+groups <zhangwang>  # </zhangwang>查看用户属于那些组（groups）   // 每
+cat /etc/group | sort 命令查看某组包含那些成员  # /etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
+sudo usermod -G sudo <student>  # </student>不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，我们可以使用usermod命令把它加入sudo组用以具备相应的权限。
+sudo deluser student --remove-home：删除用户及用户相关文件；
+
 who # 查看谁在线
 last # 查看最近的登陆历史记录
 whoami # 只列出用户名 用于查询当前用户的名称
@@ -1181,6 +1273,9 @@ su <user> # 切换到用户user,执行时需要输入目标用户的密码
 su - <user> # 切换用户，同时环境变量也会跟着改变成目标用户的环境变量。
 su -l lilei # 切换登录用户
 sudo adduser lilei # 新建一个叫做lilei的用户，添加用户到系统，同时也会默认为新用户创建 home目录
+su -
+su - root
+su henry
 
 useradd [option] username
 #  option
@@ -1204,13 +1299,22 @@ useradd -d /var/vodup -s /sbin/nologin vodup
 useradd -g babyfish nisj
 id nisj # uid=502(nisj) gid=500(babyfish) groups=500(babyfish) id 命令用于显示当前用户的 uid，gid 和所属的用户组的列表
 tail -1 /etc/passwd # nisj:x:502:500::/home/nisj:/bin/bash
+useradd  username      # 创建用户会同时创建同名组
+useradd  -g  组编号   username # 创建用户的同时设置组别
+useradd  -g 组编号 -u 用户编号 -d 家目录 username # 创建用户同时，指定组别、用户编号、家目录
 
+usermod  -g gid  username     # 修改组别是常见操作
+usermod  -g gid -u uid -d 家目录  -l  newname   username # 修改组别、用户编号、家目录、名字
+usermod techmoe -G sudo # 用户添加进sudo组
 usermod [option] username
 usermod -l nsj0820 nsj820 # -l newName oldName 改变用户帐户名，主目录仍为原来
 usermod -d /home/nsj0820 nsj0820 # 修改主目录
 usermod -L user # 锁定账户
 usermod -U user # 接锁账户
 usermod -a -G group1,group2 username
+
+userdel username     # 删除用户(删除passwd文件对应信息)，此时其家目录需要手动删除
+userdel -r username  # 删除用户的同时也删除其“家目录”
 
 # 修改 user test to love
 usermod -l love -d /home/love -m test
@@ -1237,6 +1341,7 @@ groupadd [r] group_name # 创建用户组,命令带有 - r 参数，则创建系
 groupmod -n new_group_name old_group_name # 重命名一个用户组
 groupmod -g new_GID 用户组名称 # 重设用户组的 GID,但不能与已有用户组的 GID 值重复 
 groupdel group_name # 删除用户组
+groupmod -g gid  -n newname  groupname
 
 gpasswd -a 用户账户  用户组名 # 可以将用户添加到指定的组，使其成为该组的成员
 gpasswd -d 用户账户  用户组名 # 若要从用户组中移除某用户
@@ -1248,6 +1353,18 @@ choot
 
 @ 修改用户
 henry:x:1000:1000:henry.li,,,:/home/henry:/bin/bash
+
+# 关掉sudo的密码:所有sudo组内的用户使用sudo时就不需要密码
+sudo visudo
+
+%sudo   ALL=(ALL:ALL) ALL # change
+%sudo   ALL=(ALL:ALL) NOPASSWD:ALL
+
+# 关闭root账号登陆和使用密码登陆
+# /etc/ssh/sshd_config
+PermitRootLogin no # 关闭root账号登陆
+PasswordAuthentication yes # 关闭密码登陆
+systemctl reload ssh.service
 ```
 
 ### 匹配符
@@ -1335,93 +1452,6 @@ get /etc/group
 !less group # 参看本地文件
 ```
 
-### Soft install
-
-```sh
-### sogou
-sogou_pinyin_linux_1.0.0.0033_amd64.deb # get package: download
-sudo dpkg  -i   sogou_pinyin_linux_1.0.0.0033_amd64.deb
-# config: system setting->language support choose language,key input fcitx
-
-### atom
-sudo add-apt-repository ppa:webupd8team/atom
-sudo apt-get update
-sudo apt-get install atom
-
-# ervernote
-sudo add-apt-repository ppa:nixnote/nixnote2-daily
-sudo apt update
-sudo apt install nixnote2
-File->Add Another User
-Tools->Synchronize
-
-## chrome(firefox 禁用console.log)
-sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install google-chrome-stable
-```
-
-## 启动项
-
-* /etc/init.d：查看系统引导时启动的服务项
-* 启动目录： /etc/rc.d/rc[0~6].d
-* 命令行脚本文件：/etc/init.d/
-* 本地文件：/etc/rc.local
-* 添加 /etc/init.d/nginx start
-
-```sh
-systemctl list-unit-files --type=service | grep enabled # 展示开机启动时的进程项
-
-sudo systemctl stop bluetooth.service
-sudo systemctl disable bluetooth.service
-systemctl status bluetooth.service
-
-sudo systemctl mask bluetooth.service # 完全阻止开机启动 把它掩盖起来
-
-## 禁用服务列表
-accounts-daemon.service # AccountsService 的一部分，AccountsService 允许程序获得或操作用户账户信息
-avahi-daemon.service # 用于零配置网络发现，使电脑超容易发现网络中打印机或其他的主机
-brltty.service # 提供布莱叶盲文设备支持，例如布莱叶盲文显示器。
-debug-shell.service # 开放了一个巨大的安全漏洞（该服务提供了一个无密码的 root shell ，用于帮助 调试 systemd 问题），除非你正在使用该服务，否则永远不要启动服务。
-ModemManager.service # 该服务是一个被 dbus 激活的守护进程，用于提供移动
-pppd-dns.service # 是一个计算机发展的遗物，如果你使用拨号接入互联网的话，保留它，否则你不需要它。
-rtkit-daemon.service # 一个 实时内核调度器real-time kernel scheduler
-whoopsie.service # 是 Ubuntu 错误报告服务。它用于收集 Ubuntu 系统崩溃报告，并发送报告到 https://daisy.ubuntu.com 。 你可以放心地禁止其启动，或者永久的卸载它。
-wpa_supplicant.service # 仅在你使用 Wi-Fi 连接时需要。
-
-# 提高电池的寿命并且减少过热
-sudo add-apt-repository ppa:linrunner/tlp
-sudo apt-get update
-sudo apt-get install tlp tlp-rdw
-sudo tlp start
-```
-
-## 日志
-
-* Syslog
-
-```sh
-journalctl -b -1 # 命令可以重现上一次启动时候的信息
-journalctl -b -2 # 可以重现倒数第 2 次启动
-systemd-analyze blame # 这个命令可以显示进程耗时
-```
-
-## Boot分区不足
-
-```sh
-# 查看已安装的linux-image各版本
-dpkg --get-selections |grep linux-image
-# 查看使用版本
-uname -a
-# 清除旧版本
-sudo apt-get purge linux-image-3.5.0-27-generic
-# 图中因使用remove命令而残留的deinstall的
-sudo dpkg -P linux-image-extra-3.5.0-17-generic
-```
-
-chkconfig --list sshd
-
 ## 终端命令
 
 * ssh:连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。
@@ -1436,15 +1466,10 @@ chkconfig --list sshd
 * Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程。
 * ln:unix 里面的链接同 Windows 中的快捷方式类似，允许你快速地访问到一个特定的文件。`sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
 
-## Hypervisor
+## 虚拟化
 
-Linux的最重要创新之一，引入Hypervisor，运行其他操作系统的操作系统，它们为执行提供独立的虚拟硬件平台，同时硬件虚拟平台可以提供对底层机器的虚拟的完整访问.在解决软件架构设计问题时，通常做法是引入一个抽象层来解决，其实这种做法是有点普世原理，同样适用于硬件封装，Hypervisor正是这样一种虚拟抽象层。 只有5%的时间在全负荷工作，其他时间则处于休眠或者空闲状态，虚拟化技术可以大大提升服务器的利用率，从而间接减少服务器数量，即成本！ ![](../_static/Hypervisor.jpg) 
-Hypervisor作为虚拟技术的核心，抽象虚拟化硬件平台.它支持给每一个虚拟机分配内存，CPU， 网络和磁盘，并加载虚拟机的客户操作系统。当然，在获取到这么优秀功能（对硬件的虚拟化，并搭载操作系统）的代价，自然牺牲了启动速度及在资源利用率，性能的开销等。
-
-## LXC(Linux Container）
-
-一种内核虚拟化技术，相比上述的Hypervisor技术则提供更轻量级的虚拟化，以隔离进程和资源，且无需提供指令解析机制及全虚拟化的复杂性，LXC或者容器将操作系统层面的资源分到孤立／隔离的组中，用来管理使用资源。
-LXC为Sourceforge上的开源项目，其实现是借助Linux的内核特性，（cgroups子系统+namespace）, 在OS层次上做整合为进程提供虚拟执行环境，即称之为容器，除了分配绑定cpu，内存，提供独立的namespace（网络，pid，ipc，mnt，uts）
+* Hypervisor：Linux的最重要创新之一，引入Hypervisor，运行其他操作系统的操作系统，它们为执行提供独立的虚拟硬件平台，同时硬件虚拟平台可以提供对底层机器的虚拟的完整访问.在解决软件架构设计问题时，通常做法是引入一个抽象层来解决，其实这种做法是有点普世原理，同样适用于硬件封装，Hypervisor正是这样一种虚拟抽象层。 只有5%的时间在全负荷工作，其他时间则处于休眠或者空闲状态，虚拟化技术可以大大提升服务器的利用率，从而间接减少服务器数量，即成本！ ![](../_static/Hypervisor.jpg) Hypervisor作为虚拟技术的核心，抽象虚拟化硬件平台.它支持给每一个虚拟机分配内存，CPU， 网络和磁盘，并加载虚拟机的客户操作系统。当然，在获取到这么优秀功能（对硬件的虚拟化，并搭载操作系统）的代价，自然牺牲了启动速度及在资源利用率，性能的开销等。
+* LXC(Linux Container）：一种内核虚拟化技术，相比上述的Hypervisor技术则提供更轻量级的虚拟化，以隔离进程和资源，且无需提供指令解析机制及全虚拟化的复杂性，LXC或者容器将操作系统层面的资源分到孤立／隔离的组中，用来管理使用资源。LXC为Sourceforge上的开源项目，其实现是借助Linux的内核特性，（cgroups子系统+namespace）, 在OS层次上做整合为进程提供虚拟执行环境，即称之为容器，除了分配绑定cpu，内存，提供独立的namespace（网络，pid，ipc，mnt，uts）
 
 ## Samba
 
@@ -1489,6 +1514,16 @@ smb://192.168.100.106
 * RAID 1：镜像存储，通过把两块磁盘中的一块磁盘的数据镜像到另一块磁盘上， 实现数据冗余，在两块磁盘上产生互为备份的数据，其容量仅等于一块磁盘的容量。当数据在写入一块磁盘时，会在另一块闲置的磁盘上生产镜像，在不影响性能情况下最大限度的保证系统的可靠性和可修复性；当原始数据繁忙时，可直接从镜像拷贝中读取数据（从两块硬盘中较快的一块中读出），提高读取性能。相反的，RAID 1的写入速度较缓慢。RAID 1一般支持“热交换”，即阵列中硬盘的移除或替换可以在系统运行状态下进行，无须中断退出系统。RAID 1是磁盘阵列中硬盘单位成本最高的，但它提供了很高的数据安全性、可靠性和可用性，当一块硬盘失效时，系统可以自动切换到镜像磁盘上读写，而不需要重组失效的数据。
 * RAID 0+1：也被称为RAID 10，实际是将RAID 0和RAID 1结合的形式，在连续地以位或字节为单位分割数据并且并行读/写多个磁盘的同时，为每一块磁盘做镜像进行冗余。通过RAID 0+1的组合形式，数据除分布在多个盘上外，每个盘都有其物理镜像盘，提供冗余能力，允许一个以下磁盘故障，而不影响数据可用性，并且有快速读/写能力。RAID 0+1至少需要4个硬盘在磁盘镜像中建立带区集。RAID 0+1技术在保证数据高可靠性的同时，也保证了数据读/写的高效性。
 * RAID 5：是一种存储性能、数据安全和存储成本兼顾的存储解决方案。RAID 5可以理解为是RAID 0和RAID 1的折衷方案，RAID 5至少需要三块硬盘。RAID 5可以为系统提供数据安全保障，但保障程度要比镜像低而磁盘空间利用率要比镜像高。RAID 5具有和RAID 0相近似的数据读取速度，只是多了一个奇偶校验信息，写入数据的速度比对单个磁盘进行写入操作稍慢。同时由于多个数据对应一个奇偶校验信息，RAID 5的磁盘空间利用率要比RAID 1高，存储成本相对较低，是目前运用较多的一种解决方案。
+
+## 日志
+
+* Syslog
+
+```sh
+journalctl -b -1 # 命令可以重现上一次启动时候的信息
+journalctl -b -2 # 可以重现倒数第 2 次启动
+systemd-analyze blame # 这个命令可以显示进程耗时
+```
 
 ## logrotate
 

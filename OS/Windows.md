@@ -59,6 +59,7 @@ Windows是最烂的开发平台
 * WinSCP FTP客户羰
 * Boxee 媒体中心
 * Media Player Classic 媒体播放
+* EasyBCD 2.3：多系统引导文件管理
 
 ```sh
 ## 安装 choco 以管理员运行cmd
