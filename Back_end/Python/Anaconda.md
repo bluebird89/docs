@@ -8,9 +8,9 @@ Anaconda(森蚺)是一个包含180+的科学包及其依赖项的发行版本。
 
 ## packages
 
-- Anaconda Navigator ：用于管理工具包和环境的图形用户界面，后续涉及的众多管理命令也可以在 Navigator 中手工实现。
-- qtconsole ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。
-- spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境。
+* Anaconda Navigator ：用于管理工具包和环境的图形用户界面，后续涉及的众多管理命令也可以在 Navigator 中手工实现。
+* qtconsole ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。
+* spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境。
 
 ## install
 

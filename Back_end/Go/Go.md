@@ -10,9 +10,9 @@ Go 编译器支持交叉编译，可以在一台机器上构建运行在具有�
 * Go 标准包安装
 * 第三方工具（yum、apt-get 等）
 * 设置环境变量
-  - GOROOT：(std lib)golang安装路径,默认会安装到如下目录：/usr/local/go
-  - GOARCH 表示目标机器的处理器架构，它的值可以是 386、amd64 或 arm。
-  - GOOS 表示目标机器的操作系统，它的值可以是 darwin、freebsd、linux 或 windows。
+  - GOROOT：(std lib)golang安装路径,默认会安装到如下目录：`/usr/local/go`
+  - GOARCH 表示目标机器的处理器架构，值可以是 386、amd64 或 arm。
+  - GOOS 表示目标机器的操作系统，值可以是 darwin、freebsd、linux 或 windows。
   - GOBIN 表示编译器和链接器的安装位置，默认是 GOROOT/bin
   - go命令常常需要用到的，如go run，go install， go get等
   - GOPATH：(external libs):值是一个目录的路径，也可以是多个目录路径，每个目录都代表 Go语言的一个工作区
@@ -36,8 +36,16 @@ mkdir -p ~/projects/{bin,pkg,src}
 
 export GOROOT=/usr/local/go # Installing to a custom location.install the Go tools to a different location. In this case you must set the GOROOT environment variable to point to the directory in which it was installed.
 export GOPATH=$HOME/projects #默认安装包的路径
-export GOBIN="$HOME/projects/bin"
-export PATH=$PATH:$GOPATH/bin
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=$HOME/go
+export GOPROXY=https://goproxy.cn
+export GOBIN=$GOPATH/bin
+# ~/.bash_profile
+export PATH=$PATH:$GOROOT/bin:$GOBIN
+
 source ~/.zshrc
 
 ## centos
@@ -149,7 +157,6 @@ func main() {
 
 ## 交叉编译
 
-
 指在一个平台上就能生成可以在另一个平台运行的代码
 
 $GOOS       $GOARCH
@@ -185,11 +192,13 @@ solaris     amd64
 windows     386
 windows     amd64
 
-
-
 ```
 GOOS=linux GOARCH=amd64 go build main.go
 ```
+
+## 代理
+
+* docker->performence->damon=>+
 
 ## 导入
 
@@ -616,8 +625,6 @@ type Image interface {
 
 ## 测试
 
-
-
 * 必须import testing包
 * 文件名必须以xx_test.go命名
 * 单元
@@ -688,7 +695,6 @@ func Benchmark_TimeConsumingFunction(b *testing.B) {
 # 启用 Go Modules 功能
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn
-
 
 go env -w GOPROXY=https://goproxy.cn,direct # 出现 does not override conflicting OS environment variable
 # 设置不走 proxy 的私有仓库，多个用逗号相隔
@@ -776,6 +782,8 @@ websocketd --port=8080 ./count.sh // 建立server
 package golang.org/x/crypto/acme/autocert: unrecognized import path "golang.org/x/crypto/acme/autocert" (https fetch: Get https://golang.org/x/crypto/acme/autocert?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)
 
 git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
+
+use of vendored package not allowed # vendor文件夹里面的包路径出现计算机多个目录下，例如c:\go\src；d:\myapp\src等文件夹下存在相同的路径，编译器无法决定加载哪个路径下的文件
 ```
 
 ## 教程
@@ -918,6 +926,7 @@ git clone git@github.com:golang/crypto.git $(GOROOT)/src/golang.org/x/crypto
 * [go_command_tutorial](https://github.com/hyper0x/go_command_tutorial):Go 命令教程
 * [hyper0x/Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers/tree/master/src/puzzlers):An example project, for my column named "Core Golang - 36 lessons"
 * [hoanhan101/ultimate-go](https://github.com/hoanhan101/ultimate-go):Ultimate Go study guide, with heavily documented code and programs analysis all in 1 place →
+* [ardanlabs/gotraining](https://github.com/ardanlabs/gotraining):Go Training Class Material
 
 ## 扩展
 

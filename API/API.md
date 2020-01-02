@@ -445,6 +445,47 @@ apidoc -i myapp/ -o apidoc/ -t mytemplate/
 
 ```
 
+## 前后端实践
+
+* 问题
+    - 接口频繁变动：需要提高需求的理解能力和接口设计能力
+    - 接口文档在定接口时起到一定作用，写完接口就没有用了
+    - 接口文档落后：**没有给我们带来价值**
+    - 测试： “提测” 之前只能喝茶，“提测” 之后又忙的要命
+* 解决：让接口文档发挥价值，提高变动接口的成本，测试尽早介入。加大契约修改成本
+    - 接口文档发挥出价值，就要赋予契约的意义。
+    - 契约应该由前端同学来驱动，前后端共同协商。由于前端同学与 UX 接触比较紧密，更了解页面所需的数据以及整体的 User Journey，前端同学驱动会更加合理。
+    - 契约敲定之后，要生成 Mock Server，前后端同学就要依照契约各自开发。Mock Server 可暂时替代后台服务，帮组前端开发，同时，测试同学也可以依照契约文档来编写测试脚本，使用 Mock Server 进行脚本验证。
+    - 后端接口发生变化除了口头通知以外必须修改契约：修改契约的成本变高
+
+## [raml-mocker](https://github.com/xbl/raml-mocker) 
+
+基于 Raml 使用 Nodejs 开发的 Mock Server 工具，使用 Raml 描述接口中设置 response 的 example 指令即可，raml-mocker 会解析 Raml 文件，并启动一个 Mock Server，将  example 的内容返回给浏览器。
+
+* 配置 `.raml-config.json`
+    - controller: controller 目录路径
+    - raml: raml 文件目录
+    - main: raml 目录下的入口文件
+    - port:  mock server 服务端口号
+    - plugins: 插件
+
+```sh
+git clone https://github.com/xbl/raml-mocker-starter.git raml-api
+cd raml-api
+git remote rm origin
+yarn install
+yarn|npm start
+
+curl -i http://localhost:3000/api/v1/users/1/books/
+# or
+curl -i http://localhost:3000/api/v1/users/1/books/1
+
+# 生成 API 可视化文档
+yarn|npm run build
+
+yarn test
+```
+
 ## 恶意调用
 
 ## 加密

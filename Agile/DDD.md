@@ -21,6 +21,7 @@
 
 * 《领域特定语言》
 * Kent Beck 《测试驱动开发》
+* [gdut-yy/Domain-Driven-Design-zh](https://github.com/gdut-yy/Domain-Driven-Design-zh): 《领域驱动设计》
 
 ## 参考
 
