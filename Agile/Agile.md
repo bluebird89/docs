@@ -276,6 +276,7 @@ Scrum、XP（eXtreme Programming）、OpenUP
 * 持续交付2.0：业务引领的DevOps精要 乔梁
 * Agile IT organization design
 * [Google工作法](https://www.yuque.com/heqingbao/msfy2c/zg56gm)
+* 《Clean Agile》
 
 ## 参考
 

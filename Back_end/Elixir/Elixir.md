@@ -2,7 +2,6 @@
 
 Elixir is a dynamic, functional language designed for building scalable and maintainable applications http://elixir-lang.org/
 
-
 ## 安装
 
 ```sh

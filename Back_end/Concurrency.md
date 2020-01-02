@@ -305,16 +305,35 @@ public class TokenDemo {
 * [Siege](https://www.joedog.org/siege-home/) <https://www.sitepoint.com/web-app-performance-testing-siege-plan-test-learn/>
 * [locust](https://locust.io/)
 * [mcollina/autocannon](https://github.com/mcollina/autocannon):fast HTTP/1.1 benchmarking tool written in Node.js
+* 压测
+  - [wrk](https://github.com/wg/wrk): Modern HTTP benchmarking tool
+  - [gatling](https://github.com/gatling/gatling) Async Scala-Akka-Netty based Load Test Tool http://gatling.io
+  - [sniper](https://github.com/btfak/sniper): A powerful & high-performance http load tester
+  - [hey](https://github.com/rakyll/hey): HTTP load generator, ApacheBench (ab) replacement, formerly known as rakyll/boom
+  - [Siege](https://github.com/JoeDog/siege): Siege is an http load tester and benchmarking utility
+  - [http_load](http://www.acme.com/software/http_load/): http_load runs multiple http fetches in parallel, to test the throughput of a web server.
+  - [vegeta](https://github.com/tsenart/vegeta/): HTTP load testing tool and library. It’s over 9000!
+  - [t50](https://github.com/fredericopissarra/t50): mixed packet injector tool
+  - [GoReplay](https://github.com/buger/goreplay): GoReplay is an open-source tool for capturing and replaying live HTTP traffic into a test environment in order to continuously test your system with real data. It can be used to increase confidence in code deployments, configuration changes and infrastructure changes. https://goreplay.org
+  - [tcpcopy](https://github.com/session-replay-tools/tcpcopy): An online request replication tool, also a tcp stream replay tool, fit for real testing, performance testing, stability testing, stress testing, load testing, smoke testing, etc
+  - [gryphon](https://github.com/wslfa/gryphon): Gryphon是由网易自主研发的能够模拟千万级别并发用户的一个软件，目的是能够用较少的资源来模拟出大量并发用户，并且能够更加真实地进行压力测试， 以解决网络消息推送服务方面的压力测试的问题和传统压力测试的问题。Gryphon分为两个程序，一个运行gryphon，用来模拟用户，一个是 intercept，用来截获响应包信息给gryphon。Gryphon模拟用户的本质是用一个连接来模拟一个用户，所以有多少个连接，就有多少个用户，而用户的素材则取自于pcap抓包文件。值得注意的是，Gryphon架构类似于tcpcopy，也可以采用传统使用方式和高级使用方式。
+  - [locust.io](http://locust.io/): An open source load testing tool. Define user behaviour with Python code, and swarm your system with millions of simultaneous users.
+
+```sh
+#apache ab
+yum install apr-util
+
+#webench
+wget http://blog.zyan.cc/soft/linux/webbench/webbench-1.5.tar.gz
+tar zxvf webbench-1.5.tar.gz
+cd webbench-1.5
+make && make install
+```
 
 ## 参考
 
 * [究竟啥才是互联网架构“高并发”](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651959830&idx=1&sn=ce1c5a58caed227d7dfdbc16d6e1cea4&chksm=bd2d07ca8a5a8edc45cc45c4787cc72cf4c8b96fb43d2840c7ccd44978036a7d39a03dd578b5)
 * [工作线程数究竟要设置为多少](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651960260&idx=1&sn=051fd566d43d7fd35724bdf55484ee5f&chksm=bd2d06188a5a8f0e64467381c7b3df5bdcb7f81ba055d5d21ec2f8b888492be15527d23070b0)
+* 并发：<https://www.zhihu.com/question/19683490>
+* 分布式系统：<https://www.zhihu.com/question/37051661>
 
-并发：<https://www.zhihu.com/question/19683490>
-
-分布式系统：<https://www.zhihu.com/question/37051661>
-
-http://ifeve.com/talk-concurrency/
-
-http://www.jianshu.com/p/40d4c7aebd66

@@ -28,6 +28,7 @@ rustc --version
 ## 框架
 
 * [tokio-rs/tokio](https://github.com/tokio-rs/tokio):A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language. https://tokio.rs
+* [yewstack/yew](https://github.com/yewstack/yew):Rust / Wasm framework for building client web apps https://yew.rs/docs/
 
 # 工具
 
