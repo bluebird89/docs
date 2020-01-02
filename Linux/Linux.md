@@ -415,6 +415,8 @@ sudo update-alternatives --config editor # 修改默认编辑器
 * 添加 /etc/init.d/nginx start
 
 ```sh
+sudo dmidecode
+
 systemctl list-unit-files --type=service | grep enabled # 展示开机启动时的进程项
 
 sudo systemctl stop bluetooth.service
@@ -497,12 +499,38 @@ fs.file-max=65535 # 系统最大文件句柄，控制的是能打开文件最大
 
 所有存储设备都必须挂载使用，包括硬盘
 
+* 分区类型:磁盘上存储分区信息的方式，包含了分区从哪里开始的信息
+  - MBR（Master Boot Record）：存在于驱动器开始部分的一个特殊的启动扇区。这个扇区包含了已安装的操作系统的启动加载器和驱动器的逻辑分区信息
+    + 分为基本分区（primary partion）和扩展分区（extension partion）两种
+    + 主分区总数不能大于4个，其中最多只能有一个扩展分区
+    + 基本分区可以马上被挂载使用但不能再分区，扩展分区必须再进行二次分区后才能挂载。扩展分区下的二次分区被称之为逻辑分区，逻辑分区数量限制视磁盘类型而定
+    + MBR的主分区号为1-4，逻辑分区号为从5开始累加的数字
+  - GPT（GUID Partition Table）:驱动器上的每个分区都有一个全局唯一的标识符（globally unique identifier，GUID）没有主分区和逻辑分区之分，每个硬盘最多可以有128个分区，
 * /dev/sda1      第一个scsi硬盘的第一分区
 * /dev/cdrom     光盘
 * /dev/hdc       IDE硬盘   centos 5.5
 * /dev/sr0       光盘      centos 6.x
+* `etc/fstab`: `UUID=b543f8f7-579c-45b5-96d6-31de6fa1a55e /home/lgd/disk1 ext4 defaults 1 2`
+  - 分区设备文件名或UUID
+  - 挂载点
+  - 文件系统名称
+  - 挂载参数，挂载权限
+  - 指定分区是否被dump备份，0代表不备份，1代表每天备份，2代表不定期备份。
+  - 指定分区是否被fsck检测，0代表不检测，其他数字代表检测的优先级，比如1的优先级比2高。根目录所在的分区的优先级为1，其他分区的优先级为大于或等于2
 
 ```sh
+df -Th
+# 分区
+sudo fdisk /dev/sdb # 硬盘进行分区
+m # 查看所有命令的菜单及帮助信息
+d # 删除不想要的分区
+n # 添加一个新的分区
+p # 设置一个主分区（e为扩展分区），再接下来设置起止扇区号（一个扇区512B，根据个人需要设置分区大小）
+t # 更改分区类型
+L # 可查看所有分区类型的编号，根据个人需求，输入对应的分区类型编号
+w # 保存退出
+sudo mkfs.ext4 /dev/sdb1 # 格式化成ext4文件系统 （输入sudo mkfs，按两次tab键，会出现多种文件系统，根据需求选择）
+
 mkdir /media/cdrom  # 新建镜像文件挂载目录
 cd /usr/local/src  #进入系统镜像文件存放目录
 ls  # 列出目录文件，可以看到刚刚上传的系统镜像文件
@@ -516,7 +544,6 @@ sudo mount # 查看下主机已经挂载的文件系统，每一行代表一个�
 mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom
 cd  /media/cdrom  # 进入挂载目录，使用ls命令可以看到已经有文件存在了
 
-umount  /media/cdrom  # 卸载系统镜像 退出挂载目录，才能卸载
 
 vi /etc/fstab   # 添加以下代码。实现开机自动挂载
 /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom   iso9660    defaults,ro,loop  0 0
@@ -534,7 +561,9 @@ mkdir /media/cdrom  #新建镜像文件挂载目录
 cd /usr/local/src  #进入系统镜像文件存放目录
 ls  #列出目录文件，可以看到刚刚上传的系统镜像文件
 mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom #挂载系统镜像
-cd  /media/cdrom  #进入挂载目录，使用ls命令可以看到已经有文件存在了
+cd  /media/cdrom  #进入挂载目录，使用ls命令可以看到已经有文件存在
+
+umount  /media/cdrom  # 卸载系统镜像 退出挂载目录，才能卸载
 ```
 
 ## 硬件
@@ -557,8 +586,9 @@ lsusb -tv 显示 USB 设备
 
 # 统计数据块使用情况
 df -T # 查看分区的文件系统
-df -h # Human-readable 显示目前所有文件系统的可用空间及使用情形
+df -h # Human-readable 显示目前所有文件系统的总容量，使用量，剩余容量
 df -k
+du -b /home # 查看目前/HOME目录的容量(k)及子目录的容量(k)
 
 du -h --max-depth=1 /home  # 文件大小相加
 du -h --max-depth=1 /home/*
@@ -819,8 +849,9 @@ netstat -tunlp # 显示tcp，udp的端口和进程等相关
 netstat -tln | grep 8000
 netstat -tunlp|grep (port)  # 指定端口号进程情况
 netstat -anp | grep LISTEN
+netstat -anp | grep LISTEN # 通过进程id查看占用的端口
 netstat -atnp | grep ESTA # 查询建立连接状态
-sudo netstat -nlpt | grep 80 # 查看进程
+sudo netstat -anp | grep 80 # 通过进程id查看占用的端口
 watch -d -n0 "netstat -atnp | grep ESTA" # watch 命令监视 active 状态的连接
 
 # native service
@@ -831,7 +862,7 @@ systemctl list-units --type=service # 查看服务
 # pidof prints out the process id of a running program. For example, below command will output the process ID of nginx
 pidof nginx
 
-ps -ef | grep nginx # 进程查看
+ps -ef | grep nginx # 根据进程名查看进程id
 ps aux | grep nginx
 
 kill pid

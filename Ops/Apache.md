@@ -46,7 +46,6 @@ sudo httpd -k stop
 sudo apachectl -k restart
 
 ## ubuntu
-
 sudo apt-get install python-software-properties
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update

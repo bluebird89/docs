@@ -1013,3 +1013,5 @@ JavaEE/JDBC/Weblogic
 * [Java并发](https://mp.weixin.qq.com/s?__biz=MjM5MzA1Mzc3Nw==&mid=2247484908&idx=1&sn=fe9004cd8369cabf448c9f43466bad0f&chksm=a69da8d291ea21c493d82e63705604055e2bd4d09f42c5e835051e3187a9cfefa317e6484b65)
 * [ruibaby/halo](https://github.com/ruibaby/halo):Halo可能是最好的Java博客系统😉 https://docs.halo.run
 * [java-design-patterns](https://java-design-patterns.com/patterns/)
+* http://ifeve.com/talk-concurrency/
+* http://www.jianshu.com/p/40d4c7aebd66
