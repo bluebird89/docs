@@ -242,12 +242,12 @@
     - The best architectures, requirements, and designs emerge from self-organizing teams.
     - At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.
 
-## 整体框架主要有三个：
-
-Scrum、XP（eXtreme Programming）、OpenUP
-
 ## 工具
 
+* 框架
+    - Scrum
+    - XP（eXtreme Programming）
+    - OpenUP
 * MyCollab
 * Odoo
 * OpenProject
