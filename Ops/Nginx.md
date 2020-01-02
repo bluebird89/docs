@@ -99,14 +99,31 @@
 * ubunutu
     - `/usr/share/doc/nginx-doc/examples/`
 * Mac
-    + 程序文件 /usr/local/Cellar/nginx
-    + 配置文件 /usr/local/etc/nginx/nginx.conf   /usr/local/nginx/conf/nginx.conf
-    + 日志与服务器文件 /usr/local/var/log/nginx/
-    + Severs config:/usr/local/etc/nginx/servers/
-    + Docroot is: /usr/local/Cellar/nginx/1.12.2_1/html /usr/local/var/www, 软件更新后版本号会发生变化，默认也会失效
+    - 程序文件 /usr/local/Cellar/nginx
+    - 配置文件 /usr/local/etc/nginx/nginx.conf   /usr/local/nginx/conf/nginx.conf
+    - 日志与服务器文件 /usr/local/var/log/nginx/
+    - Severs config:/usr/local/etc/nginx/servers/
+    - Docroot is: /usr/local/Cellar/nginx/1.12.2_1/html /usr/local/var/www, 软件更新后版本号会发生变化，默认也会失效
 
 ```sh
 brew info nginx
+
+# LuaJIT
+wget http://luajit.org/download/LuaJIT-2.0.2.tar.gz
+make install PREFIX=/usr/local/LuaJIT
+
+export LUAJIT_LIB=/usr/local/LuaJIT/lib
+export LUAJIT_INC=/usr/local/LuaJIT/include/luajit-2.0
+
+wget https://github.com/simpl/ngx_devel_kit/archive/v0.3.0.tar.gz
+wget https://github.com/openresty/lua-nginx-module/archive/v0.10.9rc7.tar.gz
+wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar.gz
+
+./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -fPIC' --with-ld-opt='-Wl,-z,relro -Wl,-z,now -pie' --add-module=/opt/download/ngx_devel_kit-0.3.0 --add-module=/opt/download/lua-nginx-module-0.10.9rc7
+make -j 4 && make install
+
+echo "/usr/local/LuaJIT/lib" >> /etc/ld.so.conf
+ldconfig
 
 sudo chown root:wheel /usr/local/Cellar/nginx/1.12.2_1/bin/nginx
 sudo chmod u+s /usr/local/Cellar/nginx/1.12.2_1/bin/nginx
@@ -119,8 +136,8 @@ sudo ngixn -c /usr/local/etc/nginx/nginx.conf
 sudo nginx -s reload|reload|reopen|stop|quit # 重新配置后都需要进行重启操作
 sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
 
-wget https://github.com/winshining/nginx-http-flv-module/archive/master.zip ; unzip master.zip
-wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar.gz
+wget https://github.com/winshining/nginx-http-flv-module/archive/master.zip
+unzip master.zip
 ./configure --add-module=../nginx-http-flv-module-master
 ```
 
@@ -138,7 +155,7 @@ wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar
     - Nginx进程PID存放路径
     - 错误日志的存放路径
     - 配置文件的引入
-* events块:该部分配置主要影响Nginx服务器与用户的网络连接
+* events:该部分配置主要影响Nginx服务器与用户的网络连接
     - worker_connections:每一个worker进程能并发处理（发起）的最大连接数（包含与客户端或后端被代理服务器间等所有连接数）
         + 最大连接数 = worker_processes * worker_connections/4
         + 不能超过后面的worker_rlimit_nofile
@@ -157,7 +174,7 @@ wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar
         + Epoll：使用于Linux内核2.6版本及以后的系统。
         + /dev/poll：使用于Solaris 7 11/99+，HP/UX 11.22+ (eventport)，IRIX 6.5.15+ 和 Tru64 UNIX 5.1A+。
         + Eventport：使用于Solaris 10。 为了防止出现内核崩溃的问题， 有必要安装安全补丁
-* http块
+* http
     - sendfile on 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，减少用户空间到内核空间的上下文切换。对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。
     - 定义MIMI-Type
     - keepalive_timeout 65 : 长连接超时时间，单位是秒 长连接请求大量小文件的时候，可以减少重建连接的开销，但假如有大文件上传，65s内没上传完成会导致失败。如果设置时间过长，用户又多，长时间保持连接会占用大量资源。
@@ -193,13 +210,13 @@ wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar
         + gzip_types ：匹配mime类型进行压缩，无论是否指定,”text/html”类型总是会被压缩的。
         + gzip_proxied any ：Nginx作为反向代理的时候启用，决定开启或者关闭后端服务器返回的结果是否压缩，匹配的前提是后端服务器必须要返回包含”Via”的 header头。
         + gzip_vary on ：和http头有关系，会在响应头加个 Vary: Accept-Encoding ，可以让前端的缓存服务器缓存经过gzip压缩的页面，例如，用Squid缓存经过Nginx压缩的数据。
-* server块
+* server
     - 配置网络监听
     - 基于名称的虚拟主机配置
     - 基于IP的虚拟主机配置
     - http_stream
         + 通过一个简单的调度算法来实现客户端IP到后端服务器的负载均衡，upstream后接负载均衡器的名字，后端realserver以 host:port options; 方式组织在 {} 中。如果后端被代理的只有一台，也可以直接写在 proxy_pass
-* location块
+* location
     - location配置
     - 请求根目录配置
     - 更改location的URI
@@ -709,7 +726,7 @@ server {
     }
 }
 
-# 客户端请求限制
+# access_module：基于ip白名单的访问控制
 imit_except  GET {
     allow  172.16.0.0/16;
     denyall;
@@ -743,7 +760,7 @@ ssl_session_cache # ; # 指明ssl会话缓存机制；off | none | [builtin[:siz
 include fastcgi_params;
 
 location  /images/ {
-    alias/data/imgs/;
+    alias /data/imgs/;
 }
 
 location  = / {
@@ -856,6 +873,26 @@ add_header Access-Control-Allow-Origin *;
 header(“Access-Control-Allow-Credentials”:“true”);  //可选 是否允许发送cookie
 add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"; # Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight response.
 add_header Access-Control-Allow-Methods "GET, POST, OPTIONS"; # Content-Type is not allowed by Access-Control-Allow-Headers in preflight response.
+
+
+# secure_link_module：对数据安全性提供 加密验证和 时效性 /download?md5=xxxx&expires=xxxx
+location / {
+    # 提取参数
+    secure_link $arg_md5,
+    $arg_expires;
+    secure_link_md5 "$secure_link_expiress$uri key字符串";
+
+    # 不满足就跳转
+    if ($secure_link = ""){
+    return 403 ;
+    }
+
+    if ($secure_link = "0"){
+     return 410 ;
+    }
+}
+
+# access_module来设置ip访问频率
 ```
 
 ### 伪静态
@@ -1411,13 +1448,43 @@ crontab –e
 15 0 * * * /root/shell/nginx_log_to_mysql.sh &> /var/log/nginx_sh.log
 ```
 
+## [Nginx+Lua](https://github.com/loveshell/ngx_lua_waf)
+
+* 防火墙进行防护：
+    - 拦截Cookie类型工具
+    - 拦截异常post请求
+    - 拦截CC洪水攻击
+    - 拦截URL
+    - 拦截arg（提交的参数）
+* 配置
+    - attacklog：记录攻击日志
+    - logdir：日志目录设置
+    - urldeny：url规则匹配
+    - redirect；拦截后重定向
+    - cookiematch：cookie匹配
+    - postmatch：post请求的匹配
+    - whitemodule：是否开启白名单
+        + ipwhitelist：白名单列表
+    - black_fileExt：禁止上传的文件后缀
+    - ccdeny：防CC
+        + ccrate：频率设置（默认1分钟同一个IP只能请求同一个地址100次）
+    - html：拦截后的返回内容
+
+```
+# /etc/nginx/nginx.conf
+lua_package_path "/etc/nginx/waf/?.lua";
+lua_shared_dict limit 10m ;
+init_by_lua_file /etc/nginx/waf/init.lua;
+access_by_lua_file /etc/nginx/waf/waf.lua ;
+```
+
 ## docker 配置
 
 ### 构建镜像
 
-- www目录将映射为nginx容器配置的虚拟目录
-- logs目录将映射为nginx容器的日志目录
-- conf目录里的配置文件将映射为nginx容器的配置文件
+* www目录将映射为nginx容器配置的虚拟目录
+* logs目录将映射为nginx容器的日志目录
+* conf目录里的配置文件将映射为nginx容器的配置文件
 
 ```
 mkdir -p ~/nginx/www ~/nginx/logs ~/nginx/conf
@@ -1450,14 +1517,12 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"]
-```
 
-```
 docker pull nginx
 docker run -p 80:80 --name mynginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/wwwlogs  -d nginx
 
-`docker build -t nginx .`
-`docker images nginx`
+docker build -t nginx .
+docker images nginx
 ```
 
 ## 模块
@@ -1467,8 +1532,8 @@ docker run -p 80:80 --name mynginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc
 
 ## 工具
 
-- [openresty/openresty](https://github.com/openresty/openresty):Turning Nginx into a Full-Fledged Scriptable Web Platform https://openresty.org
-- [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes https://kubernetes.github.io/ingress-nginx/
+* [openresty/openresty](https://github.com/openresty/openresty):Turning Nginx into a Full-Fledged Scriptable Web Platform https://openresty.org
+* [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes https://kubernetes.github.io/ingress-nginx/
 * [valentinxxx/nginxconfig.io](https://github.com/valentinxxx/nginxconfig.io):⚙️ NGiИX config generator generator on steroids 💉 https://nginxconfig.io
 * [lebinh/ngxtop](https://github.com/lebinh/ngxtop):Real-time metrics for nginx server
     - `pip install ngxtop`
@@ -1479,12 +1544,12 @@ docker run -p 80:80 --name mynginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc
 
 ## 参考
 
-- [git-mirror/nginx](https://github.com/git-mirror/nginx)：A mirror of the nginx SVN repository. <http://nginx.org/>
-- [alibaba/tengine](https://github.com/alibaba/tengine):A distribution of Nginx with some advanced features http://tengine.taobao.org/
-- [Nginx documentation](http://nginx.org/en/docs/)
-- [《Nginx官方文档》使用nginx作为HTTP负载均衡](http://ifeve.com/nginx-http/)
-- [xuexb/learn-nginx](https://github.com/xuexb/learn-nginx):学习nginx配置, 包括: 编译安装、反向代理、重定向、url重写、nginx缓存、跨域配置等
-- [Nginx 配置简述](http://www.cnblogs.com/hustskyking/p/nginx-configuration-start.html)
-- [Understanding the Nginx Configuration File Structure and Configuration Contexts](https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts)
+* [git-mirror/nginx](https://github.com/git-mirror/nginx)：A mirror of the nginx SVN repository. <http://nginx.org/>
+* [alibaba/tengine](https://github.com/alibaba/tengine):A distribution of Nginx with some advanced features http://tengine.taobao.org/
+* [Nginx documentation](http://nginx.org/en/docs/)
+* [《Nginx官方文档》使用nginx作为HTTP负载均衡](http://ifeve.com/nginx-http/)
+* [xuexb/learn-nginx](https://github.com/xuexb/learn-nginx):学习nginx配置, 包括: 编译安装、反向代理、重定向、url重写、nginx缓存、跨域配置等
+* [Nginx 配置简述](http://www.cnblogs.com/hustskyking/p/nginx-configuration-start.html)
+* [Understanding the Nginx Configuration File Structure and Configuration Contexts](https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts)
 * [jaywcjlove/nginx-tutorial](https://github.com/jaywcjlove/nginx-tutorial):Nginx安装维护入门学习笔记，以及各种实例。
 * [chef-cookbooks/nginx](https://github.com/chef-cookbooks/nginx):Development repository for nginx cookbook https://supermarket.chef.io/cookbooks/nginx
