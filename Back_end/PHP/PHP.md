@@ -328,6 +328,16 @@ opcache.max_accelerated_files=4000    # Opcache哈希表可以存储的脚本文
 opcache.fast_shutdown=1         # 使用快速停止续发事件
 
 php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
+
+防止变量覆盖： register_globals=off
+防止越权访问目录： open_basedir=/var/www/html（指定目录）
+防止远程文件包含： allow_url_include=off and allow_url_fopen=off
+防止显示详细的错误信息： display_errors=off
+记录错误在日志文件中： log_errors=on
+关闭不安全的字符串转义处理函数（防SQLi和XSS）： magic_quotes_gpc=off
+如果PHP以CGI方式安装则需要关闭： cgi.fix_pathinfo=0
+防御XSS（开启HttpOnly） session.cookie_httponly=1
+HTTPS下提高安全性： session.cookie_secure=1
 ```
 
 ## 基础

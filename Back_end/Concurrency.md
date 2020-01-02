@@ -301,7 +301,7 @@ public class TokenDemo {
 
 ## 工具
 
-* [AB](https://httpd.apache.org/docs/2.4/programs/ab.html) - Apache Benchmark - 是一款有 Apache 基金会提供的简单的压测工具
+* [AB](https://httpd.apache.org/docs/2.4/programs/ab.html) :Apache Benchmark - 是一款有 Apache 基金会提供的简单的压测工具 `ab -n 5000 -c 50 https://www.baodu.com`
 * [Siege](https://www.joedog.org/siege-home/) <https://www.sitepoint.com/web-app-performance-testing-siege-plan-test-learn/>
 * [locust](https://locust.io/)
 * [mcollina/autocannon](https://github.com/mcollina/autocannon):fast HTTP/1.1 benchmarking tool written in Node.js
