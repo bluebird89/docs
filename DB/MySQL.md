@@ -337,7 +337,9 @@ myisam_max_sort_file_size = 10G # MySQL重建索引时所允许的最大临时�
 myisam_max_extra_sort_file_size = 10G
 myisam_repair_threads = 1 # 如果一个表拥有超过一个索引, MyISAM 可以通过并行排序使用超过一个线程去修复他们.这对于拥有多个CPU以及大量内存情况的用户,是一个很好的选择.
 
-server-id = 1
+server-id = 1 # 开启binlog日志
+log_bin=/var/log/mysql/mysql-bin.log
+binlog_rows_query_log_events=on # 记录SQL
 
 innodb_file_io_threads = 4 #文件IO的线程数，一般为 4，但是在 Windows 下，可以设置得较大。
 innodb_thread_concurrency = 8 #服务器有几个CPU就设置为几，建议用默认设置，一般为8.
