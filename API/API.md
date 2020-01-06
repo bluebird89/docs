@@ -2,6 +2,17 @@
 
 一些预先定义的函数或者接口，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无须访问源码，或理解内部工作机制的细节
 
+* A well defined pipeline to process requests
+* REST API done right (methods, status code and headers)
+* Validation made easy
+* Security beared in mind
+* Policy based request throttling
+* Easy to add new APIs
+* Easy to document and test
+* Introspection
+    - API 系统自动收集 metrics，自我监控
+    - 无论是撰写者，还是调用者，都很很方便的获取想要获取的信息
+
 ## 状态
 
 * 前后端分离，业界广泛采用token方式
@@ -233,6 +244,155 @@ https://api.github.com/user
   refresh_token=REFRESH_TOKEN
 ```
 
+## [JSON API](https://jsonapi.org/format/)
+
+* 最早来源于Ember Data（Ember是一个JavaScript前端框架，在框架中定义了一个通用的数据格式，后来被广泛认可）
+* MIME 类型:JSON API数据格式已经被IANA机构接受了注册，因此必须使用application/vnd.api+json类型。客户端请求头中Content-Type应该为application/vnd.api+json，并且在Accept中也必须包含application/vnd.api+json。如果指定错误服务器应该返回415或406状态码。
+* 文档结构:在顶级节点使用data、errors、meta，来描述数据、错误信息、元信息，注意data和errors应该互斥，不能再一个文档中同时存在
+    - 典型的data的对象格式:有效信息一般都放在attributes中
+        + id显而易见为唯一标识，可以为数字也可以为hash字符串，取决于后端实现
+        + type 描述数据的类型，可以对应为数据模型的类名
+        + attributes 代表资源的具体数据
+        + relationships、links为可选属性，用来放置关联数据和资源地址等数据
+    - errors属性:作为列表存在，因为针对每个资源可能出现多个错误信息,HTTP状态码会使用一个通用的401，然后把具体的验证信息在errors给出来
+        + code
+        + 在title字段中给出错误信息
+        + 如果在本地或者开发环境想打出更多的调试堆栈信息，可以增加一个detail字段让调试更加方便。需要注意的一点是，应该在生产环境屏蔽部分敏感信息，detail字段最好在生产环境不可见。
+* 返回码
+    - 200 OK 200是一个最常用的状态码用来表示请求成功，例如GET请求到某一个资源，或者更新、删除某资源。 需要注意的是使用POST创建资源应该返回201表示数据被创建。
+    - 201 Created 如果客户端发起一个POST请求，在RESTful部分我们提到，POST为创建资源，如果服务器处理成功应该返回一个创建成功的标志，在HTTP协议中，201为新建成功的状态。文档规定，服务器必须在data中返回id和type。 下面是一个HTTP的返回例子：
+    - 401 Unauthorized 如果服务器在检查用户输入的时候，需要传入的参数不能满足条件，服务器可以给出401错误，标记客户端错误，需要客户端自查。
+    - 415 Unsupported Media Type 当服务器媒体类型Content-Type和Accept指定错误的时候，应该返回415。
+    - 403 Forbidden 当客户端访问未授权的资源时，服务器应该返回403要求用户授权信息。
+    - 404 Not Found 这个太常见了，当指定资源找不到时服务器应当返回404。
+    - 500 Internal Server Error 当服务器发生任何内部错误时，应当返回500，并给出errors字段，必要的时候需要返回错误的code，便于查错。一般来说，500错误是为了区分4XX错误，包括任何服务器内部技术或者业务异常都应该返回500。
+* HATEOAS(Hypermedia As The Engine Of Application State): 在没有文档的情况下找到这些资源的地址呢，一种可行的办法就是在API的返回体里面加入导航信息，也就是links
+
+```json
+{
+  "data": [{
+    "type": "articles",
+    "id": "1",
+    "attributes": {
+      "title": "JSON:API paints my bikeshed!"
+    },
+    "links": {
+      "self": "http://example.com/articles/1"
+    },
+    "relationships": {
+      "author": {
+        "links": {
+          "self": "http://example.com/articles/1/relationships/author",
+          "related": "http://example.com/articles/1/author"
+        },
+        "data": { "type": "people", "id": "9" }
+      },
+      "comments": {
+        "links": {
+          "self": "http://example.com/articles/1/relationships/comments",
+          "related": "http://example.com/articles/1/comments"
+        },
+        "data": [
+          { "type": "comments", "id": "5" },
+          { "type": "comments", "id": "12" }
+        ]
+      }
+    }
+  }],
+  "included": [{
+    "type": "people",
+    "id": "9",
+    "attributes": {
+      "first-name": "Dan",
+      "last-name": "Gebhardt",
+      "twitter": "dgeb"
+    },
+    "links": {
+      "self": "http://example.com/people/9"
+    }
+  }, {
+    "type": "comments",
+    "id": "5",
+    "attributes": {
+      "body": "First!"
+    },
+    "relationships": {
+      "author": {
+        "data": { "type": "people", "id": "2" }
+      }
+    },
+    "links": {
+      "self": "http://example.com/comments/5"
+    }
+  }, {
+    "type": "comments",
+    "id": "12",
+    "attributes": {
+      "body": "I like XML better"
+    },
+    "relationships": {
+      "author": {
+        "data": { "type": "people", "id": "9" }
+      }
+    },
+    "links": {
+      "self": "http://example.com/comments/12"
+    }
+  }]
+}
+```
+
+编译时」和「运行时」分开
+
+## 架构
+
+* 把 API 执行路径上的各种处理都抽象出来，放到公共路径（或者叫中间件，middleware）之中，为 API 的撰写者扫清各种障碍，同时能够促使 API 更加标准化。
+* pipeline 下的组件
+  - throttling：API 应该有最基本的访问速度的控制，比如，对同一个用户，发布 tweet 的速度不可能超过一个阈值，比如每秒钟 1 条（实际的平均速度应该远低于这个）。超过这个速度，就是滥用（abuse），需要制止并返回 429 Too many requests。throttling 可以使用 leaky bucket 实现（restify 直接提供）。
+  - parser / validation：接下来要解析 HTTP request 包含的 headers，body 和 URL 里的 querystring，并对解析出来的结果进行 validation。这个过程可以屏蔽很多服务的滥用，并提前终止服务的执行。比如你的 API 要求调用者必须提供 X-Client-Id，没有提供的，或者提供的格式不符合要求的，统统拒绝。这个步骤非常重要，如同我们的皮肤，将肮脏的世界和我们的器官隔离开来。
+  - ACL：除了基本的 throttling 和 validation 外，控制资源能否被访问的另一个途径是 ACL。管理员应该能够配置一些规则，这些规则能够进一步将不合法 / 不合规的访问过滤掉。比如说：路径为 "/topic/19805970" 的知乎话题，北京时间晚上10点到次日早上7点的时间端，允许在中国大陆显示。这样的规则可以是一个复杂的表达式，其触发条件（url）可以被放置在一个 bloom filter 里，满足 filter 的 url 再进一步在 hash map 里找到其对应的规则表达式，求解并返回是否允许显示。至于一个诸如country = "CN" && time >= 00:00CST && time < 07:00CST（这是一个管理员输入的表达式）这样的表达式如何处理，请移步 如何愉快地写个小parser。
+  - normalization：顾名思义，这个组件的作用是把请求的内容预处理，使其统一。normalization 可以被进一步分为多个串行执行的 strategy，比如：
+    + paginator：把 request 里和 page / sort 相关的信息组合起来，生成一个 paginator。
+    + client adapter：把 API client 身份相关的信息（device id，platform，user id，src ip，...）组合成一个 adapter。
+    + input adapter：输入数据的适配。这是为处女座准备的。很多时候，输入数据的格式和语言处理数据的格式不一样，这对处女座程序员是不可接受的。比如说 API 的输入一般是 snake case（show_me_the_money），而在某些语言里面（如: javascript），约定俗成的命名规则是 showMeTheMoney，所以把输入的名称转换有利于对代码有洁癖的程序员。
+  - authentication：用户身份验证。主要是处理 "Authorization" 头。对于不需要验证的 API，可以跳过这一步。做 API，身份验证一定不要使用 cookie/session based authentication，而应该使用 token。现有的 token base authentication 有 oauth, jwt 等。如果使用 jwt，要注意 jwt 是 stateless 的 token，一般不需要服务器再使用数据库对 token 里的内容校验，所以使用 jwt 一定要用 https 保护 token，并且要设置合适的超时时间让 token 自动过期。
+  - authorization：用户有了身份之后，进一步需要知道用户有什么样的权限访问什么样的资源。比如：uid 是 9527 的用户对 "POST /topic/"（创建一个新的话题），"PUT /topic/:id"（修改已有的话题）有访问权限，当他发起 "DELETE /topic/1234" 时，在 authorization 这一层直接被拒绝。authorization 是另一种 ACL（role based ACL），处理方式也类似。
+  - conditional request：在访问的入口处，如果访问是 PUT/PATCH 这样修改已有资源的操作，好的 API 实现会要求客户端通过 conditional request（if-match / if-modified）做 concurrent control，目的是保证客户端要更新数据时，它使用的是服务器的该数据的最新版本，而非某个历史版本，否则返回 412 precondition failed（更多详情，请参考我之前的文章 撰写合格的REST API）。
+  - preprocessing hook：
+  - processing：API 本身的处理。这个一般是 API 作者提供的处理函数。
+  - postprocessing：
+  - conditional request：在访问的出口处，如果访问的是 GET 这样的操作，好的 API 实现会支持客户端的 if-none-match/if-not-modified 请求。当条件匹配，返回 200 OK 和结果，否则，返回 304 Not Modified。304 Not Modified 对客户端来说如同瑰宝，除了节省网络带宽之外，客户端不必刷新数据。如果你的 app 里面某个类别下有五十篇文章，下拉刷新的结果是 304 Not Modified，客户端不必重绘这 50 篇文章。当然，有不少 API 的实现是通过返回的数据中的一个自定义的状态码来决定，这好比「脱裤子放屁」—— 显得累赘了。
+  - response normalization：和 request 阶段的 normalization 类似，在输出阶段，需要将结果转换成合适的格式返回给用户。response normalization 也有很多 strategy，比如：
+    + output adapter：如果说 input adapter 是为有洁癖的程序员准备的，可有可无，那么 output adapter 则并非如此。它能保持输出格式的一致和统一。比如你的数据库里的字段是 camel case，你的程序也都是用 camel case，然而 API 的输出需要统一为 snake case，那么，在 output adapter 这个阶段统一处理会好过每个 API 自己处理。
+    + aliasing：很多时候获得的数据的名称和定义好的 API 的接口的名称并不匹配，如果在每个 API 里面单独处理非常啰嗦。这种处理可以被抽取出来放在 normalization 的阶段完成。API 的撰写者只需要定义名称 A 需要被 alias 成 B 就好，剩下的由框架帮你完成。
+    + partial response：partial response 是 google API 的一个非常有用的特性（见：https://developers.google.com/+/web/api/rest/#partial-response ），他能让你不改变 API 实现的情况下，由客户端来决定服务器返回什么样的结果（当前结果的一个子集），这非常有利于节省网络带宽。
+  - serialization：如果 API 支持 content negotiation，那么服务器在有可能的情况下，优先返回客户端建议的输出类型。同一个 API，android 可以让它返回 application/msgpack；web 可以让它返回 application/json，而 xbox 可以获得 application/xml 的返回，各取所需。
+  - postserialization：这也是个 hook，在数据最终被发送给客户端前，API 调用者可以最后一次 inject 自己想要的逻辑。一般而言，一些 API 系统内部的统计数据可以在此收集（所有的出错处理路径和正常路径都在这里交汇）。
+
+## 子系统
+
+* 配置管理
+  - 一个公共的地方来放置预置的属性。toml
+  - 配置文件可以重载（override）：系统提供一个公共的配置文件：default，然后各种运行时相关的配置文件继承并局部重载这个配置。在系统启动的时候，二者合并。
+  - 运行的时候改写配置：像管理缓存一样去管理和配置相关的数据，将其封装在一个容器里：当配置被修改时，调用这个容器的 invalidate 方法 —— 这样，下次访问任意一个配置项时，会重新读入配置，并缓存起来
+* CLI：不是给用户用的，是给程序员用的。
+  - 难点
+    + CLI 的发现和自注册。你的 framework 的用户只要遵循某种 convention 撰写 CLI，这些 CLI 就会被自动集成到系统里。
+    + CLI 的撰写者能够轻松地获取到系统的信息，也就是说，系统有自省（introspection）的能力。
+* 测试框架
+  -  functional testing 是可以全局考虑.
+  -  ava 描述测试的 fixture
+
+## 契约
+
+* 一开始随意了，简单了，会给之后的维护和更新带来无穷无尽的痛苦
+* 可以很方便地描述 API 的输入输出，并生成交互式的 API 文档（读 API 文档的时候，可以在线运行 API） 设计工具有
+  - swagger：缺点是太繁杂，撰写起来很麻烦
+    + 通过代码反向生成 swagger 文档
+    + 先撰写代码把 API 的输入输出定义清楚，然后通过这个定义来生成 swagger 文档，在 swagger-ui 里面调试和验证；当借口设计符合期望后，再完成具体的实现
+  - API blueprint：更偏向 API 的文档化，所以它选择的描述语言是 markdown。validation 相关的内容用 markdown 描述不是很舒服，看别人写的文档很容易明白，自己写起来就会错漏百出。API blueprint 的工具链也是个薄弱环节，很多工具都没有或者不成熟
+  - RAML
+
 ## 文档
 
 * 格式
@@ -442,7 +602,6 @@ apidoc -i myapp/ -o apidoc/ -t mytemplate/
  *       "lastname": "Doe"
  *     }
  */
-
 ```
 
 ## 前后端实践
@@ -529,6 +688,12 @@ print dec_message   // Hello World!
 
 ## 工具
 
+* [restify](link)
+  - validator  joi
+  - swagger
+  - waterline
+  - log:bunyan
+  - ava / rewire / supertest / nyc
 * Gateway
     - [TykTechnologies/tyk](https://github.com/TykTechnologies/tyk)：Tyk Open Source API Gateway written in Go
 * [GoogleChrome/puppeteer](https://github.com/GoogleChrome/puppeteer):Headless Chrome Node API https://try-puppeteer.appspot.com/
