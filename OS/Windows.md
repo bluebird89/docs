@@ -163,6 +163,7 @@ ipconfig /flushdns # 刷新域名
 
 ### [cmder + gow](http://bliker.github.io/cmder/)
 
+* [cmderdev/cmder](https://github.com/cmderdev/cmder)
 * 添加到环境变量
 * 快捷键
   - 双Tab，用于补全
@@ -172,11 +173,20 @@ ipconfig /flushdns # 刷新域名
   - Alt+F4，关闭所有标签页
   - Ctrl+1，切换到第一个页签，Ctrl+2同理
   - Alt + enter，切换到全屏状态
+* 参考
+  - [README]()
 
 ```
-Environment里添加set LANG=zh_CN.UTF-8
+# 中文显示乱码
+Settings->Startup->Environment 添加
+set LANG=zh_CN.UTF-8
+set LC_ALL=zh_CN.utf8
 
-# 修改配置文件 vendor/init.bat
+
+# 添加到右键菜单
+Cmder.exe /REGISTER ALL|USER
+
+# vendor/init.bat
 @prompt $E[1;32;40m$P$S{git}{hg}$S$_$E[1;30;40m{lamb}$S$E[0m # 修改前
 @prompt $E[1;32;40m$P$S{git}{hg}$S$_$E[1;30;40m $$ $S$E[0m #修改后
 
