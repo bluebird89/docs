@@ -402,6 +402,7 @@ if(password_verify($password, $hash)) {
     - [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
     - [brendangregg/FlameGraph](https://github.com/brendangregg/FlameGraph):Stack trace visualizer http://www.brendangregg.com/flamegraphs.html
 * [the-benchmarker/web-frameworks](https://github.com/the-benchmarker/web-frameworks):Which is the fastest web framework?
+* [chaitin/xray](https://github.com/chaitin/xray):一款完善的安全评估工具，支持常见 web 安全问题扫描和自定义 poc | 使用之前务必先阅读文档 https://xray.cool
 
 ## 参考
 
