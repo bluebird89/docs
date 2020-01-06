@@ -5,7 +5,7 @@
 * Firefox自己研制的Gecko内核
 * IE 浏览器 (测试IE的兼容性你可以使用微软IE的 Application Compatibility VPC Images)
 * [browsershots](http://browsershots.org/) 
-* [brave/browser-laptop](https://github.com/brave/browser-laptop):Brave browser for Desktop and Laptop computers running Windows, OSX, and Linux <https://www.brave.com>
+* [brave/brave-browser](https://github.com/brave/brave-browser):Brave browser for Desktop and Laptop computers running Windows, OSX, and Linux <https://www.brave.com>
 * beaker
 * Opera
     - adds unlimited VPN service to its
