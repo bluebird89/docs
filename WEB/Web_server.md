@@ -45,7 +45,9 @@
         + 从HttpRequest中获得Header, Cookie, QueryString 等信息， 从HttpResponse中获得输出流，直接向浏览器输出结果
     - WSGI （Web Service Gateway Interface）
 - Apache拥有丰富的模块组件支持，稳定性强，BUG少，动态内容处理强。
-- Nginx轻量级，占用资源少，负载均衡，高并发处理强，静态内容处理高效。
+  + 运行数以万计的并发访问，会导致服务器消耗大量内存
+  + 操作系统对其进行进程或线程间的切换也消耗了大量的 CPU 资源，导致 HTTP 请求的平均响应速度降低
+- Nginx轻量级，占用资源少，负载均衡，高并发处理强，静态内容处理高效。 Apache 是同步多进程模型，一个连接对应一个进程；Nginx是异步的，多个连接（万级别）可以对应一个进程。
 
 ## TCP/IP
 
