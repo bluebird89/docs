@@ -4,8 +4,19 @@ Status, process, and documents for ECMA262 https://tc39.github.io/ecma262/
 
 ## ES6
 
+* let, const（变量类型）：解决变量作用域泄露的问题。
+* Class, extends, super（类、继承）：让对象原型的写法更加清晰、更像面向对象编程的语法，也更加通俗易懂。
+* Arrow functions（箭头函数）：1.简洁、简洁、简洁，2.解决this绑定的问题（继承外面的this）。
+* Template string（模板字符串）：解决传统写法非常麻烦的问题。
+* Destructuring（解构）：避免让API使用者记住多个参数的使用顺序。
+* Default, rest（默认值、参数）：简化，替代arguments，使代码更易于阅读。
 
 ### Modules
+
+* CommonJS:Node.JS首先采用了js模块化的概念。Node.js服务器端通过exports、module.exports来输出模块，并使用require同步载入模块，而浏览器端的可以使用Browserify实现
+* AMD:AMD规范用于异步加载模块，主要用于浏览器端，当然也支持其他js环境，主要应用有requireJS
+* ImmutableJS:知道在JavaScript中有两种数据类型：基础数据类型和引用类型。在JavaScript中的对象数据是可以变的，由于使用了引用，所以修改了复制的值也会相应地修改原始值。通常用deepCopy来避免修改，但这样做法会产生资源浪费。而ImmutableJS的出现很好的解决了这一问题。
+* ES6 Module:ES6标准定义了JS的模块化方式，目的是取代CommonJS、AMD、CMD等规范，一统江湖，成为通用的模块化解决方案。但浏览器和Node端对ES6的支持度还不是很高，需要用Babel进行转译（Babel编译器可以将ES6、JSX等代码转换成浏览器可以看得懂的语法）。
 
 #### 优点
 
