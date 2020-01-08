@@ -267,6 +267,7 @@ https://api.github.com/user
     - 404 Not Found 这个太常见了，当指定资源找不到时服务器应当返回404。
     - 500 Internal Server Error 当服务器发生任何内部错误时，应当返回500，并给出errors字段，必要的时候需要返回错误的code，便于查错。一般来说，500错误是为了区分4XX错误，包括任何服务器内部技术或者业务异常都应该返回500。
 * HATEOAS(Hypermedia As The Engine Of Application State): 在没有文档的情况下找到这些资源的地址呢，一种可行的办法就是在API的返回体里面加入导航信息，也就是links
+* erlang社区的webmachine或者clojure下的liberator
 
 ```json
 {
