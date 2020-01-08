@@ -6,21 +6,19 @@
     - confluence
     - sourcetree：git管理
     - [bamboo](https://www.atlassian.com/software/bamboo):the choice of professional teams for continuous integration, deployment, and delivery Atlassian的CI/CD服务器解决方案，很多特性和Jenkins类似。它们都是流行的DevOps工具，帮助用户自动化发布流水线，从build到部署。但是，Jenkins是开源的，Bamboo是收费的。
-- [Jfrog](https://jfrog.com)
-- [jgraph/drawio](https://github.com/jgraph/drawio):Source to www.draw.io
-* [apereo/cas](https://github.com/apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
+* [Jfrog](https://jfrog.com)
+* [jgraph/drawio](https://github.com/jgraph/drawio):Source to www.draw.io
 * [ZenHub](https://www.zenhub.com):Easier than Jira. More powerful than Trello. Built for developers.
 * UDESK:集成客服接入平台
 * towe
 * [飞书](https://www.feishu.cn/): slack + google docs
+* [Slack](https://slack.com/)
 * [tinode/chat](https://github.com/tinode/chat):Instant messaging server; backend in Go; Android, web command line clients; chatbots
 * 沟通
-    + [Slack](https://slack.com/)
     - [mattermost/mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost https://mattermost.com
 * [apache/incubator-superset](https://github.com/apache/incubator-superset):Apache Superset (incubating) is a modern, enterprise-ready business intelligence web application
 * [vitorfs/bootcamp](https://github.com/vitorfs/bootcamp):An enterprise social network http://trybootcamp.vitorfs.com
 * [reviewboard/reviewboard](https://github.com/reviewboard/reviewboard):An extensible and friendly code review tool for projects and companies of all sizes. https://www.reviewboard.org/
-* [apereo/cas](https://github.com/apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
 * [odoo/odoo](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business. https://www.odoo.com
 * 邮件
     - [mailpile/Mailpile](https://github.com/mailpile/Mailpile):A free & open modern, fast email client with user-friendly encryption and privacy features https://mailpile.is
@@ -174,7 +172,6 @@
 * 产业
     - 2009年，苹果基于成本和平衡供应商的考虑，开始扶持中国产业链，造就了一个个波澜壮阔的传奇。打工妹周群思带领蓝思科技打入苹果供应链，实现财富暴增。港股上市的舜宇光学10年涨了100倍，公司厨师和清洁工都变成了百万富翁。
     - 但苹果产业链并非只是一个造富故事，它将中国消费电子零配件企业带到了一个全新的高度，后面华为、小米、OV等手机巨头充分受益了苹果的供应商资源和技术外溢效应，并在残酷的拼杀中淬炼出核心竞争力，最终拉近了跟苹果的距离。
-
 
 ## [Basecamp](https://basecamp.com)
 
