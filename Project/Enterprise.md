@@ -12,6 +12,7 @@
 * [ZenHub](https://www.zenhub.com):Easier than Jira. More powerful than Trello. Built for developers.
 * UDESK:集成客服接入平台
 * towe
+* [飞书](https://www.feishu.cn/): slack + google docs
 * [tinode/chat](https://github.com/tinode/chat):Instant messaging server; backend in Go; Android, web command line clients; chatbots
 * 沟通
     + [Slack](https://slack.com/)
@@ -41,9 +42,9 @@
 
 ## 公司文化
 
-* 雇主品牌，一家企业在员工及社会最广泛大众心目中的品牌形象
-    - 是否重视明星员工；
-    - 的晋升机制是否合理；
+* 雇主品牌:一家企业在员工及社会最广泛大众心目中的品牌形象
+    - 是否重视明星员工
+    - 的晋升机制是否合理
     - 如何应对外界的变化
 
 ## 企业本质

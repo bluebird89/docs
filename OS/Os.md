@@ -70,6 +70,18 @@
 
 ![reactor](../_satic/eventloop.png "Optional title")
 
+## 环境变量
+
+* execve函数接收3个参数
+    - 第一个是可执行文件的路径pathname
+    - 第二个是参数的指针数组argv 指向一个NULL结尾的指针数组，每个元素都是一个指向参数字符串的指针。按照约定，argv[0]是可执行文件的名称
+    - 第三个是环境变量的指针数组envp  数据结构类似。唯一的区别是，环境变量数组元素指向的字符串都是名-值对形式的，比如"PWD=/usr/droh"
+    - 加载:找到pathname对应的可执行文件后，execve会调用操作系统永驻内存的loader代码，把可执行文件的代码和数据从磁盘复制到内存。然后，跳到其第一个指令或“入口点”开始执行该程序
+
+```
+int execve(const char *pathname, char *const argv[], char *const envp[]);
+```
+
 ## 并发控制
 
 * 现代操作系统以及硬件基本都支持并发程序

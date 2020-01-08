@@ -2,40 +2,16 @@
 
 Node.js JavaScript runtime ✨🐢🚀✨ <https://nodejs.org>
 
-因为JavaScript是单线程执行，根本不能进行同步IO操作，所以，JavaScript的这一“缺陷”导致了它只能使用异步IO。
-
-在2009年，Ryan正式推出了基于JavaScript语言和V8引擎的开源Web服务器项目，命名为Node.js。借助JavaScript天生的事件驱动机制加V8高性能引擎，使编写高性能Web服务轻而易举。
-
-其高性能并行I/O使得分布式开发更加高效，利用稳定接口可提升web渲染速度，也十分适合做实时应用开发。
-
-* CommonJS:Node.JS首先采用了js模块化的概念。Node.js服务器端通过exports、module.exports来输出模块，并使用require同步载入模块，而浏览器端的可以使用Browserify实现。
-* AMD:AMD规范用于异步加载模块，主要用于浏览器端，当然也支持其他js环境，主要应用有requireJS。
-* ES6 Module:ES6标准定义了JS的模块化方式，目的是取代CommonJS、AMD、CMD等规范，一统江湖，成为通用的模块化解决方案。但浏览器和Node端对ES6的支持度还不是很高，需要用Babel进行转译（Babel编译器可以将ES6、JSX等代码转换成浏览器可以看得懂的语法）。
-* Gulp/Grunt+Webpack/Browserify:在构建前端项目资源，使用自动化工具协助进行自动化程序码打包、转译等重复性工作，可以大幅提升开发效率。
-  - Gulp:Gulp和Grunt一样是一种基于任务的构建工具，能够优化前端工作流程。
-  - Webpack:webpack傻瓜式的项目构建方式解决了模块化开发和静态文件处理两大问题。但随着项目越来越大，特定需求的出现就使得webpack越来越难配置了。因此webpack在没太多特定需求的项目使用是没有问题的，当然，webpack的未来肯定是围绕ES的支持度、构建速度与产出代码的性能和用户体验来建设的。其未来的重要关注点：
-    - 高性能的构建缓存
-    - 提升初始化速度和增量构建效率
-    - 更好的支持Type Script
-    - 修订长期缓存
-    - 支持WASM模块支持
-    - 提升用户体验
-  - Browserify:Browserify是基于Unix小工具协作的方式实现模块化方案的，轻便且配置容易，管道形式的组织则让开发者很容易插拔或修改其中某一环节的操作。
-* ES2015/ES6:我们都知道ECMASCRIPT是组成JS的三要素之一，ES6其第6个版本，ES的历史确实也挺曲折的。通过ES6最常用的特性，我们来了解ES6到底解决了什么：
-  - let, const（变量类型）：解决变量作用域泄露的问题。
-  - Class, extends, super（类、继承）：让对象原型的写法更加清晰、更像面向对象编程的语法，也更加通俗易懂。
-  - Arrow functions（箭头函数）：1.简洁、简洁、简洁，2.解决this绑定的问题（继承外面的this）。
-  - Template string（模板字符串）：解决传统写法非常麻烦的问题。
-  - Destructuring（解构）：避免让API使用者记住多个参数的使用顺序。
-  - Default, rest（默认值、参数）：简化，替代arguments，使代码更易于阅读。
-* ImmutableJS:我们知道在JavaScript中有两种数据类型：基础数据类型和引用类型。在JavaScript中的对象数据是可以变的，由于使用了引用，所以修改了复制的值也会相应地修改原始值。通常我们用deepCopy来避免修改，但这样做法会产生资源浪费。而ImmutableJS的出现很好的解决了这一问题。
+* 因为JavaScript是单线程执行，根本不能进行同步IO操作，所以，JavaScript的这一“缺陷”导致了它只能使用异步IO。
+* 在2009年，Ryan正式推出了基于JavaScript语言和V8引擎的开源Web服务器项目，命名为Node.js。借助JavaScript天生的事件驱动机制加V8高性能引擎，使编写高性能Web服务轻而易举。
+* 其高性能并行I/O使得分布式开发更加高效，利用稳定接口可提升web渲染速度，也十分适合做实时应用开发。
 
 ## 场景
 
-* 前端实践，脚手架，工程化，快速开发；
-* API Proxy 中间层实践，页面即服务概念；
-* 面向企业开发的 Web 框架；
-* Node 最新技术与性能调优。
+* 前端实践，脚手架，工程化，快速开发
+* API Proxy 中间层实践，页面即服务概念
+* 面向企业开发的 Web 框架
+* Node 最新技术与性能调优
 
 ## 安装
 
@@ -136,6 +112,14 @@ npm config set proxy http://server:port
 npm config set https-proxy http://server:port
 ```
 
+## 环境
+
+* 内置的export命令用来在当前进程中创建环境变量（自然也会被子进程继承）
+* 在命令行中调用其他程序时，在前面添加类似上面的变量赋值，则会将该变量添加到子进程的环境变量中
+
+```sh
+API_URL=http://example.com/api node ./index.js # 通过process.env.API_URL取得传入的API地址
+```
 
 ### 模块化
 
@@ -559,7 +543,7 @@ process.on('message', function(socket){
 
 ### 集群稳定
 
-- 自动重启：我们在主进程上要加入一些子进程管理的机制，比如在一个子进程挂掉后，要重新启动一个子进程来继续服务.假设子进程中有未捕获异常发生；
+* 自动重启：我们在主进程上要加入一些子进程管理的机制，比如在一个子进程挂掉后，要重新启动一个子进程来继续服务.假设子进程中有未捕获异常发生；
 
 ```js
 // worker.js
@@ -717,6 +701,19 @@ ORM框架比Web框架要少一些：Sequelize，ORM2，Bookshelf.js，Objection.
 * nginx中使用mutex互斥锁解决这个问题，具体措施有使用全局互斥锁，每个子进程在epoll_wait()之前先去申请锁，申请到则继续处理，获取不到则等待，并设置了一个负载均衡的算法（当某一个子进程的任务量达到总设置量的7/8时，则不会再尝试去申请锁）来均衡各个进程的任务量。具体的nginx如何解决惊群，看这篇文章: <http://blog.csdn.net/russell_tao/article/details/7204260>
 * node应用服务器为什么可以采用方案三呢，我的理解是：node作为具体的应该服务器负责实际处理用户的请求，处理可能包含数据库等操作，不是必须快速的接收大量请求，而且转发到某具体的node单台服务器上的请求较之nginx也少了很多。
 
+##  问题
+
+> node-sass
+
+```sh
+npm install -g mirror-config-china --registry=http://registry.npm.taobao.org
+npm install node-sass
+
+SASS_BINARY_SITE=https://npm.taobao.org/mirrors/node-sass/ npm install node-sass
+
+yarn install node-sass
+```
+
 ## 面试
 
 * [jimuyouyou/node-interview-questions](https://github.com/jimuyouyou/node-interview-questions)
@@ -810,16 +807,3 @@ ORM框架比Web框架要少一些：Sequelize，ORM2，Bookshelf.js，Objection.
 * [Guides](https://nodejs.org/en/docs/guides/)
 * [Node.js v11.6.0 Documentation](https://nodejs.org/api/)
 * [goldbergyoni/nodebestpractices](https://github.com/goldbergyoni/nodebestpractices):white_check_mark The largest Node.js best practices list (September 2019) https://twitter.com/nodepractices/
-
-##  问题
-
-> node-sass
-
-```sh
-npm install -g mirror-config-china --registry=http://registry.npm.taobao.org
-npm install node-sass
-
-SASS_BINARY_SITE=https://npm.taobao.org/mirrors/node-sass/ npm install node-sass
-
-yarn install node-sass
-```
