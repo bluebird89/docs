@@ -927,6 +927,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [hyper0x/Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers/tree/master/src/puzzlers):An example project, for my column named "Core Golang - 36 lessons"
 * [hoanhan101/ultimate-go](https://github.com/hoanhan101/ultimate-go):Ultimate Go study guide, with heavily documented code and programs analysis all in 1 place →
 * [ardanlabs/gotraining](https://github.com/ardanlabs/gotraining):Go Training Class Material
+* [alco/gostart](https://github.com/alco/gostart):A getting started guide for Go newcomers
 
 ## 扩展
 

@@ -130,17 +130,8 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
     - Cacti 监测系统的工作原理
 
 ## 安全
-安全这块怎么考虑的，你该怎么回答，有没有标准答案
-查看详情
-学院君：脱离上下文 只能泛泛而谈 也反应了面试官的水平
-2019/9/5
-张若初 回复 学院君：确实这样！但是应该也几方面的回答吧，我感觉有标准答案，仅仅以面试而论。
-2019/9/5
-学院君 回复 张若初：常见的比如数据库安全，主要是 SQL 注入，前端 XSS 注入攻击，以及提交请求时 CSRF 攻击
-2019/9/5
-张若初 回复 学院君：嗯嗯~
-2019/9/5
-学院君 回复 张若初：然后还有就是 DDoS 攻击、恶意爬取页面如何防护（限制 IP 等）、用户认证/授权安全如何保证（密码、令牌安全等）
+
+* 常见的比如数据库安全，主要是 SQL 注入，前端 XSS 注入攻击，以及提交请求时 CSRF 攻击  DDoS 攻击、恶意爬取页面如何防护（限制 IP 等）、用户认证/授权安全如何保证（密码、令牌安全等）
 * 永远不要相信用户的输入（包括Cookies，因为那也是用户的输入）
 * 对用户的口令进行Hash，并使用salt，以防止Rainbow 攻击
     - Hash算法可用MD5或SHA1等
@@ -403,6 +394,7 @@ if(password_verify($password, $hash)) {
     - [brendangregg/FlameGraph](https://github.com/brendangregg/FlameGraph):Stack trace visualizer http://www.brendangregg.com/flamegraphs.html
 * [the-benchmarker/web-frameworks](https://github.com/the-benchmarker/web-frameworks):Which is the fastest web framework?
 * [chaitin/xray](https://github.com/chaitin/xray):一款完善的安全评估工具，支持常见 web 安全问题扫描和自定义 poc | 使用之前务必先阅读文档 https://xray.cool
+* [zeit](https://zeit.co/)
 
 ## 参考
 
