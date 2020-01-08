@@ -13,10 +13,20 @@
 * 区别
     - Gulp/Grunt是一种能够优化前端的开发流程的工具，而WebPack是一种模块化的解决方案，不过Webpack的优点使得Webpack在很多场景下可以替代Gulp/Grunt类的工具。
     - Grunt和Gulp的工作方式是：在一个配置文件中，指明对某些文件进行类似编译，组合，压缩等任务的具体步骤，工具之后可以自动替你完成这些任务。
+* Gulp/Grunt+Webpack/Browserify:在构建前端项目资源，使用自动化工具协助进行自动化程序码打包、转译等重复性工作，可以大幅提升开发效率。
+  - Gulp:Gulp和Grunt一样是一种基于任务的构建工具，能够优化前端工作流程。
+  - Webpack:webpack傻瓜式的项目构建方式解决了模块化开发和静态文件处理两大问题。但随着项目越来越大，特定需求的出现就使得webpack越来越难配置了。因此webpack在没太多特定需求的项目使用是没有问题的，当然，webpack的未来肯定是围绕ES的支持度、构建速度与产出代码的性能和用户体验来建设的。其未来的重要关注点：
+    - 高性能的构建缓存
+    - 提升初始化速度和增量构建效率
+    - 更好的支持Type Script
+    - 修订长期缓存
+    - 支持WASM模块支持
+    - 提升用户体验
+  - Browserify:Browserify是基于Unix小工具协作的方式实现模块化方案的，轻便且配置容易，管道形式的组织则让开发者很容易插拔或修改其中某一环节的操作。
 
 ## Gulp
 
-The streaming build system ,用自动化构建工具增强你的工作流程
+The streaming build system ,用自动化构建工具增强工作流程
 
 * API
   - gulp.task(name [, deps, fn])：注册一个task, name 是task的名字，deps是可选项，就是这个task依赖的tasks, fn是task要执行的函数
@@ -31,11 +41,6 @@ npm install --save-dev gulp
 
 ## gulpfile.js
 var gulp = require('gulp');
-gulp.task('default', function() { // 将你的默认的任务代码放在这 });
-# 运行
-gulp
-
-## 脚本例子
 gulp.task('default',function(){
 return gulp
       .src("\\*\*/\*.js")
@@ -45,35 +50,26 @@ return gulp
       .pipe(gulp.dest('./build/'))
 })
 
-    gulp.task('js', ,['jscs', 'jshint'], function(){
-     return gulp
-        .src('./src/**/*.js')
-        .pipe(concat('alljs'))
-        .pipe(uglify())
-        .pipe(gulp.dest('./build/'));
-    });
-    说明：jscs和jshint先运行，随后再运行js的task.jscs和jshint是并行执行的，而不是顺序执行
- 
-    gulp.src(['client/*.js', '!client/b*.js', 'client/c.js'])   # !是排除某些文件
+gulp.src(['client/*.js', '!client/b*.js', 'client/c.js'])   # !是排除某些文件
 
-    gulp.task('js',['jscs', 'jshint'],function(){
-     return gulp
-        .src('./src/**/*.js', {base:'./src/'})
-        .pipe(uglify())
-        .pipe(gulp.dest('./build/'));
+gulp.task('js',['jscs', 'jshint'],function(){
+ return gulp
+    .src('./src/**/*.js', {base:'./src/'})
+    .pipe(uglify())
+    .pipe(gulp.dest('./build/'));
 
-    });
-    // 说明：options.base 是指多少路径被保留，比如上面的 ./src/users/list.js 会被输出到 ./build/users/list.js
+});
+// 说明： jscs和jshint先运行，随后再运行js的task.jscs和jshint是并行执行的，而不是顺序执行 options.base 是指多少路径被保留，比如上面的 ./src/users/list.js 会被输出到 ./build/users/list.js
 
-    gulp.task('watch-js', function(){
-      gulp.watch('./src/**/*.js',['jshint','jscs']);
-    });
+gulp.task('watch-js', function(){
+  gulp.watch('./src/**/*.js',['jshint','jscs']);
+});
 
-    gulp.task('watch-less', function(){
-      gulp.watch('./src/**/*.less',function(event){
-        console.log('less event'+event.type+' '+event.path)
-      });
-    });
+gulp.task('watch-less', function(){
+  gulp.watch('./src/**/*.less',function(event){
+    console.log('less event'+event.type+' '+event.path)
+  });
+});
 
 #### 实例
 var gulp = require('gulp');
@@ -112,6 +108,7 @@ gulp.watch('./src/scripts/*.js', function() {
         gulp.run('styles');
   });
 });
+
 gulp scripts
 ```
 
@@ -150,14 +147,14 @@ Grunt: The JavaScript Task Runner.构建工具:自动化。对于需要反复重
 
 ```sh
 npm install -g grunt-cli
-npm install grunt  // 项目中安装
+npm install grunt  # 项目中安装
 ```
 
 ## [parcel-bundler/parcel](https://github.com/parcel-bundler/parcel)
 
 📦🚀 Blazing fast, zero configuration web application bundler https://parceljs.org
 
-```
+```sh
 npm install -g parcel-bundler
 
 npm init -y

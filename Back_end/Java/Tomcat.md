@@ -1,8 +1,19 @@
 ## [apache/tomcat](https://github.com/apache/tomcat)
 
- an open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies. http://tomcat.apache.org/
+an open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies. http://tomcat.apache.org/
 
 ## 安装
+
+* 配置
+    - CATALINA_HOME:/usr/share/tomcat8
+        + 默认根目录：/usr/share/tomcat8-root/default_root
+        + Manager app:/usr/share/tomcat8-admin/manager/META-INF/context.xml
+        + Host Manager app:/usr/share/tomcat8-admin/host-manager/META-INF/context.xml
+    - CATALINA_BASE:/var/lib/tomcat8, 应用程序、配置与日志
+        + 用户帐号信息都保存在 /var/lib/tomcat8/conf/tomcat-users.xml 的文件中
+    - /etc/tomcat8/
+        - 服务器配置server.xml
+        - 用户配置：tomcat-users.xml
 
 ```sh
 sudo add-apt-repository ppa:linuxuprising/java
@@ -78,15 +89,8 @@ sudo /etc/init.d/tomcat8 start
 sudo ufw allow 8080/tcp
 ```
 
-- Tomcat 配置文件
-    - CATALINA_HOME:/usr/share/tomcat8
-        + 默认根目录：/usr/share/tomcat8-root/default_root
-        + Manager app:/usr/share/tomcat8-admin/manager/META-INF/context.xml
-        + Host Manager app:/usr/share/tomcat8-admin/host-manager/META-INF/context.xml
-    - CATALINA_BASE:/var/lib/tomcat8, 应用程序、配置与日志
-        + 用户帐号信息都保存在 /var/lib/tomcat8/conf/tomcat-users.xml 的文件中
-    - /etc/tomcat8/
-        - 服务器配置server.xml
-        - 用户配置：tomcat-users.xml
-
 ## Catalina
+
+## 参考
+
+* [Tomcat 内核设计剖析](link)
