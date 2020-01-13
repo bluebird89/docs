@@ -46,8 +46,6 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 
 ### 发行版
 
-一个典型的Linux发行版包括：Linux内核，一些GNU程序库和工具，命令行shell，图形界面的X Window系统和相应的桌面环境，如KDE或GNOME，并包含数千种从办公套件，编译器，文本编辑器到科学工具的应用软件。
-
 * 入门：类似Windows的体验；安装简单；可靠；“类似Linux”，且不自成一派；“恰好管用”；
   - [Mint](https://linuxmint.com/)
   - Debian
@@ -109,20 +107,59 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - 单用户模式(single user mode)：初始脚本还没有开始执行，可以检测并修复计算机可能存在的错误
   - 一系列的初始脚本(startup scripts)：常见的shell scripts，执行如下功能： 设置计算机名称，时区，检测文件系统，挂载硬盘，清空临时文件，设置网络
   - 给出登录(login)对话框，或者是图形化的登录界面
+* GNU GRUB（GRand Unified Bootloader简称“GRUB”）是一个来自GNU项目的多操作系统启动引导管理程序。
+  - GRUB是一个支持多种操作系统的启动引导管理器，在一台有多个操作系统的计算机中，可以通过GRUB在计算机启动时选择用户希望运行的操作系统。
+  - 同时GRUB可以引导Linux系统分区上的不同内核，也可用于向内核传递启动参数，如进入单用户模式。
 
 ## 组成
 
+典型的Linux发行版包括
+
 * Linux内核处于用户进程和硬件之间，负责管理系统的进程、内存、设备驱动程序、文件和网络系统，决定着系统的性能和稳定性。除系统调用外，由五个主要的子系统组成：
-  - 进程管理：控制着进程对CPU的访问，当需要选择一个进程开始运行时，由调度程序选择最应该运行的进程；支持进程间各种通信机制，包括共享内存、消息队列和管道等
-    + 系统调用接口：SCI 层提供了某些机制执行从用户空间到内核的函数调用。这个接口依赖于体系结构.实际上是一个非常有用的函数调用多路复用和多路分解服务。在 ./linux/kernel 中您可以找到 SCI 的实现
-  - 内存管理：允许多个进程安全地共享主内存区域，支持虚拟内存
+  - 进程管理
+    + 进程实际是某特定应用程序的一个运行实体
+    + 调度程序:通过在短的时间间隔内轮流运行这些进程而实现“多任务”。这一短的时间间隔称为“时间片”，让进程轮流运行的方法称为“进程调度”
+    + 进程调度控制进程对CPU的访问。当需要选择下一个进程运行时，由调度程序选择最值得运行的进程。可运行进程实际上是仅等待CPU资源的进程，如果某个进程在等待其它资源，则该进程是不可运行进程。Linux使用了比较简单的基于优先级的进程调度算法选择新的进程。
+    + 通过多任务机制，每个进程可认为只有自己独占计算机，从而简化程序的编写。每个进程有自己单独的地址空间，并且只能由这一进程访问，这样，操作系统避免了进程之间的互相干扰以及“坏”程序对系统可能造成的危害
+    + 进程间的通讯机制来帮助完成这样的任务。Linux 中常见的进程间通讯机制有信号、管道、共享内存、信号量和套接字等
+    + 内核通过 SCI 提供了一个应用程序编程接口（API）来创建一个新进程（fork、exec 或 Portable Operating System Interface [POSⅨ] 函数），停止进程（kill、exit），并在它们之间进行通信和同步（signal 或者 POSⅨ 机制）。
+  - 内存管理：允许多个进程安全地共享主内存区域，支持虚拟内存.括了管理可用内存的方式，以及物理和虚拟映射所使用的硬件机制
+    + 将内存划分为容易处理的“内存页”（对于大部分体系结构来说都是 4KB）
+    + 提供了对 4KB 缓冲区的抽象,使用 4KB 缓冲区为基数，然后从中分配结构，并跟踪内存页使用情况，比如哪些内存页是满的，哪些页面没有完全使用，哪些页面为空。这样就允许该模式根据系统需要来动态调整内存使用。
+    + 交换:出现可用内存被消耗光的情况，页面可以移出内存并放入磁盘中。源代码可以在 ./linux/mm 中找到
     + Swap分区，即交换区，系统在物理内存不够时，与Swap进行交换。
       * 即当系统的物理内存不够用时，把硬盘中一部分空间释放出来，以供当前运行的程序使用。当那些程序要运行时，再从Swap分区中恢复保存的数据到内存中。
       * 那些被释放内存空间的程序一般是很长时间没有什么操作的程序。
       * Swap空间一般应大于或等于物理内存的大小，同时最小不应小于64M，最大应该是物理内存的两倍。
-  - 设备驱动程序
-  - 虚拟文件系统(VFS)：隐藏了各种不同硬件的具体细节，为所有设备提供统一的接口，支持多达数十种不同的文件系统，分为逻辑文件系统和设备驱动程序；
-  - 网络管理：提供了对各种网络标准协议的存取和各种网络硬件的支持，分为网络协议和网络驱动程序两部分；
+  - 设备驱动程序:为每一种硬件控制器所编写的设备驱动程序模块。实际控制操作系统和硬件设备之间的交互.运行在高特权级的处理器环境中，从而可以直接对硬件进行操作,任何一个设备驱动程序的错误都可能导致操作系统的崩溃.
+    + 提供一组操作系统可理解的抽象接口完成和操作系统之间的交互，而与硬件相关的具体操作细节由设备驱动程序完成。一般而言，设备驱动程序和设备的控制芯片有关，例如，如果计算机硬盘是 SCSI  硬盘，则需要使用 SCSI  驱动程序，而不是 IDE 驱动程序。
+  - 文件系统：将独立的文件系统组合成了一个层次化的树形结构，并且由一个单独的实体代表这一文件系统
+    + 将新的文件系统通过一个称为“挂装”或“挂上”的操作将其挂装到某个目录上，从而让不同的文件系统结合成为一个整体
+    + 类型
+      * 普通文件：C语言元代码、SHELL脚本、二进制的可执行文件等。分为纯文本和二进制。
+      * 目录文件：目录，存储文件的唯一地方。
+      * 链接文件：指向同一个文件或目录的的文件。
+      * 设备文件：与系统外设相关的，通常在/dev下面。分为块设备和字符设备。
+      * 管道(FIFO)文件 :  提供进程建通信的一种方式
+      * 套接字(socket) 文件： 该文件类型与网络通信有关
+    + 虚拟文件系统(VirtualFileSystem,VFS):隐藏了各种不同硬件的具体细节，为所有设备提供统一的接口，支持多达数十种不同的文件系统，分为逻辑文件系统和设备驱动程序
+      * 逻辑文件系统指Linux所支持的文件系统，如ext2,fat等
+      * 设备驱动程序为每一种硬件控制器所编写的设备驱动程序模块
+    + 虚拟文件系统（VFS）是 Linux 内核中非常有用的一个方面，因为它为文件系统提供了一个通用的接口抽象。VFS 在 SCI 和内核所支持的文件系统之间提供了一个交换层。即VFS 在用户和文件系统之间提供了一个交换层。
+      * 在 VFS 上面，是对诸如 open、close、read 和 write 之类的函数的一个通用 API 抽象。在 VFS 下面是文件系统抽象，它定义了上层函数的实现方式。它们是给定文件系统（超过 50 个）的插件。文件系统的源代码可以在 ./linux/fs 中找到。
+    + 文件系统层之下是缓冲区缓存，它为文件系统层提供了一个通用函数集（与具体文件系统无关）。这个缓存层通过将数据保留一段时间（或者随即预先读取数据以便在需要是就可用）优化了对物理设备的访问
+    + 缓冲区缓存之下是设备驱动程序，它实现了特定物理设备的接口
+  - 网络接口（NET）：提供了对各种网络标准协议的存取和各种网络硬件的支持，分为网络协议和网络驱动程序两部分；
+    + 网络协议部分负责实现每一种可能的网络传输协议。众所周知，TCP/IP  协议是 Internet  的标准协议，同时也是事实上的工业标准。
+    + 网络部分由BSD套接字、网络协议层和网络设备驱动程序组成。网络设备驱动程序负责与硬件设备通讯，每一种可能的硬件设备都有相应的设备驱动程序。
+  - 系统调用接口：SCI 层提供了某些机制执行从用户空间到内核的函数调用。这个接口依赖于体系结构。SCI 实际上是一个非常有用的函数调用多路复用和多路分解服务。在 ./linux/kernel 中您可以找到 SCI 的实现，并在 ./linux/arch 中找到依赖于体系结构的部分
+* 一些GNU程序库和工具
+* 命令行shell：系统的用户界面，提供了用户与内核进行交互操作的一种接口。它接收用户输入的命令并把它送入内核去执行，是一个命令解释器
+  - Bourne Shell：是贝尔实验室开发的。
+  - BASH：是GNU的Bourne Again Shell，是GNU操作系统上默认的shell,大部分linux的发行套件使用的都是这种shell。
+  - Korn Shell：是对Bourne SHell的发展，在大部分内容上与Bourne Shell兼容。
+  - C Shell：是SUN公司Shell的BSD版本。
+* 图形界面的X Window系统和相应的桌面环境，如KDE或GNOME，并包含数千种从办公套件，编译器，文本编辑器到科学工具的应用软件
 
 ## CPU活动状态
 
@@ -259,108 +296,291 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - 信号量支持两个原子操作P()和V()，前者叫做测试操作，后者叫做增加操作；后来的系统把这两种操作分别叫做down()和up()；
   - down()操作通过对信号量计数减1来请求获得一个信号量；up()操作用来释放信号量，该操作也被称作“提升”(upping)信号量，因为它会增加信号量的计数值。
 
-## 系统启动
+## 磁盘分区
 
-* GNU GRUB（GRand Unified Bootloader简称“GRUB”）是一个来自GNU项目的多操作系统启动引导管理程序。
-  - GRUB是一个支持多种操作系统的启动引导管理器，在一台有多个操作系统的计算机中，可以通过GRUB在计算机启动时选择用户希望运行的操作系统。
-  - 同时GRUB可以引导Linux系统分区上的不同内核，也可用于向内核传递启动参数，如进入单用户模式。
+* 引导分区类型:磁盘上存储分区信息的方式，包含了分区从哪里开始的信息
+  - MBR（Master Boot Record）：存在于驱动器开始部分的一个特殊的启动扇区。这个扇区包含了已安装的操作系统的启动加载器和驱动器的逻辑分区信息
+    + 分为基本分区（primary partion）和扩展分区（extension partion）两种
+    + 主分区总数不能大于4个，其中最多只能有一个扩展分区
+    + 基本分区可以马上被挂载使用但不能再分区，扩展分区必须再进行二次分区后才能挂载。扩展分区下的二次分区被称之为逻辑分区，逻辑分区数量限制视磁盘类型而定
+    + MBR的主分区号为1-4，逻辑分区号为从5开始累加的数字
+    + 主引导程序（偏移地址0000H--0088H ），它负责从活动分区中装载，并运行系统引导程序。 出错信息数据区，偏移地址0089H--00E1H 为出错信息，00E2H--01BDH 全为0 字节。
+    + 分区表（DPT,Disk Partition Table ）含4 个分区项，偏移地址01BEH--01FDH, 每个分区表项长16 个字节，共64 字节为 分区项1 、分区项2 、分区项3 、分区项4
+    + 结束标志字，偏移地址01FE--01FF 的2 个字节值为结束标志 55AA
+  - GPT（GUID Partition Table）:驱动器上的每个分区都有一个全局唯一的标识符（globally unique identifier，GUID）没有主分区和逻辑分区之分，每个硬盘最多可以有128个分区
+    + 分为4个区域：EFI信息区(GPT头)、分区表、GPT分区、备份区域
+* `etc/fstab`: `UUID=b543f8f7-579c-45b5-96d6-31de6fa1a55e /home/lgd/disk1 ext4 defaults 1 2`
+  - 分区设备文件名或UUID
+  - 挂载点
+  - 文件系统名称
+  - 挂载参数，挂载权限
+  - 指定分区是否被dump备份，0代表不备份，1代表每天备份，2代表不定期备份。
+  - 指定分区是否被fsck检测，0代表不检测，其他数字代表检测的优先级，比如1的优先级比2高。根目录所在的分区的优先级为1，其他分区的优先级为大于或等于2
+* 主分区和扩展分区的数目之和不能大于四个
+* 标识一般使用/dev/hd[a-z]X或者/dev/sd[a-z]X来标识，其中[a-z]代表硬盘号，X代表硬盘内的分区号。
+* 整块硬盘分区的块号标识:Linux下用hda、hdb、sda、sdb 等来标识不同的硬盘;
+  - IDE接口硬盘：表示为/dev/hda1、/dev/hdb …；
+  - SCSI 接口的硬盘、SATA接口的硬盘表示为/dev/sda、/dev/sdb … …
+  - 硬盘内的分区：如果X的值是1到4,表示硬盘的主分区（包含扩展分区）；逻辑分区从是从5开始的，比如/dev/hda5肯定是逻辑分区了；
+* 主分区(Primary Partion)：马上被使用但不能再分区
+* 扩展分区(Extension Partion)：必须再进行分区后才能使用，也就是说它必须还要进行二次分区。
+  - 扩展分区只不过是逻辑分区的“容器”，实际上只有主分区和逻辑分区进行数据存储。
+  - 逻辑分区（(Logical Partion)）：由扩展分区建立起来的分区。逻辑分区没有数量上限制。
+* 用hda1、hda2、 hda5、hda6 来标识不同的分区。其中，字母a 代表第一块硬盘，b代表第二块硬盘，依次类推。而数字1 代表一块硬盘的第一个分区、2 代表第二个分区，依次类推。1 到4 对应的是主分区(Primary Partition)或扩展分区(Extension Partition)。从5开始，对应的都是硬盘的逻辑分区(Logical Partition)。一块硬盘即使只有一个主分区，逻辑分区也是从5开始编号的，这点应特别注意。
 
 ## 文件系统
 
+* 文件结构是文件存放在磁盘等存贮设备上的组织方法。主要体现在对文件和目录的组织上。
+* 磁盘分区和目录的关系如下：
+  - 任何一个分区都必须挂载到某个目录上。
+  - 目录是逻辑上的区分。分区是物理上的区分。
+  - 磁盘Linux分区都必须挂载到目录树中的某个具体的目录上才能进行读写操作。
+  - 根目录是所有Linux的文件和目录所在的地方，需要挂载上一个磁盘分区。
 * 文件是一个抽象的概念，它是存放一切数据或信息的仓库
   - Windows操作系统也是采用树型结构，但其树型结构的根是磁盘分区的盘符，有几个分区就有几个树型结构，它们之间的关系式并列的
   - Linux中，无论操作系统管理几个磁盘分区，目录树只有一个,结构为：根目录(/)在上，其它的平行在下；
     + Linux是一个多用户系统，制定这样一个固定的目录规划有助于对系统文件和不同的用户文件进行统一管理；
     + Linux 文件系统是一个目录树的结构，文件系统结构从一个根目录开始，根文件系统所占空间一般应该比较小，因为其中的绝大部分文件都不需要经常改动，而且包括严格的文件和一个小的 不经常改变的文件系统不容易损坏。除了可能的一个叫/vmlinuz标准的系统引导映像之外，根目录一般不含任何文件
-* /：每台机器都有根文件系统，它包含系统引导和使其他文件系统得以mount所必要的文件，根文件系统应该有单用户状态所必须的足够的内容。还应该包括修复损坏 系统、恢复备份等的工具。
-* /bin：包含了引导启动所需的命令或普通用户可能用的命令(可能在引导启动后),都是二进制可执行命令。多是系统中重要的系统文件
-* /boot：目录存放引导加载器(bootstrap loader)使用的文件，如lilo，核心映像也经常放在这里，而不是放在根目录中。但是如果有许多核心映像，这个目录就可能变得很大，这时使用单独的 文件系统会更好一些。还有一点要注意的是，要确保核心映像必须在ide硬盘的前1024柱面内。
-* /dev：存放了设备文件，即设备驱动程序，用户通过这些文件访问外部设备。比如，用户可 以通过访问/dev/mouse来访问鼠标的输入，就像访问其他文件一样。
-  - /dev/console：系统控制台，也就是直接和系统连接的监视器。
-  - /dev/hd：ide硬盘驱动程序接口。如：/dev/hda指的是第一个硬 盘，had1则是指/dev/hda的第一个分区。如系统中有其他的硬盘，则依次为/dev /hdb、/dev/hdc、. . . . . .；如有多个分区则依次为hda1、hda2 . . . . . .
-  - /dev/sd：scsi磁盘驱动程序接口。如系统有scsi硬盘，就不会访问/dev/had， 而会访问/dev/sda。
-  - /dev/fd：软驱设备驱动程序。如：/dev/fd0指 系统的第一个软盘，也就是通常所说的a盘，/dev/fd1指第二个软盘，. . . . . .而/dev/fd1 h1440则表示访问驱动器1中的4.5高密盘。
-  - /dev/st：scsi磁带驱动器驱动程序。
-  - /dev/tty：提供虚拟控制台支持。如：/dev/tty1指 的是系统的第一个虚拟控制台，/dev/tty2则是系统的第二个虚拟控制台。
-  - /dev/pty：提供远程登陆伪终端支持。在进行telnet登录时就要用到/dev/pty设 备。
-  - /dev/ttys：计算机串行接口，对于dos来说就是“com1”口。
-  - /dev/cua：计算机串行接口，与调制解调器一起使用的设备。
-  - /dev/null：“黑洞”，所有写入该设备的信息都将消失。例如：当想要将屏幕 上的输出信息隐藏起来时，只要将输出信息输入到/dev/null中即可。
-* /etc：系统管理和配置文件
-  - /etc/hostname:系统的hostname
-  - /etc/network/interfaces：网络接口
-  - /etc/resolv.conf:系统的dns服务
-  - /etc/rc或者/etc/rc.d或者/etc/init.d：启动、或改变运行级时运行的脚本或脚本的目录。系统初始化文件
-  - /etc/passwd：用户数据库，其中的域给出了用户名、真实姓名、用户起始目 录、加密口令和用户的其他信息
-  - /etc/shadow：在安装了影子(shadow)口令软件的系统上的影子口令文件。影子口令文件将/etc/passwd文件中的加密口令移动到/etc/shadow中，而后者只对超级用户(root)可读。这使破译口令更困 难，以此增加系统的安全性。
-  - /etc/fdprm：软盘参数表，用以说明不同的软盘格式。可用setfdprm进 行设置。更多的信息见setfdprm的帮助页。
-  - /etc/fstab：指定启动时需要自动安装的文件系统列表。也包括用swapon -a启用的swap区的信息。
-  - /etc/group：类似/etc/passwd ，但说明的不是用户信息而是组的信息。包括组的各种数据。
-  - /etc/inittab：init 的配置文件。
-  - /etc/issue：包括用户在登录提示符前的输出信息。通常包括系统的一段短说明 或欢迎信息。具体内容由系统管理员确定。
-  - /etc/magic：“file”的配置文件。包含不同文件格式的说 明，“file”基于它猜测文件类型。
-  - /etc/motd：motd是message of the day的缩写，用户成功登录后自动输出。内容由系统管理员确定。常用于通告信息，如计划关机时间的警告等。
-  - /etc/mtab：当前安装的文件系统列表。由脚本(scritp)初始化，并由 mount命令自动更新。当需要一个当前安装的文件系统的列表时使用(例如df命令)。
-  - /etc/login.defs：login命令的配置文件。
-  - /etc/printcap：类似/etc/termcap ，但针对打印机。语法不同。
-  - /etc/profile：系统环境变量
-  - /etc/csh.login、/etc/csh.cshrc：登录或启动时bourne或cshells执行的文件。这允许系统管理员为所有用户建立全局缺省环境。
-  - /etc/securetty：确认安全终端，即哪个终端允许超级用户(root) 登录。一般只列出虚拟控制台，这样就不可能(至少很困难)通过调制解调器(modem)或网络闯入系统并得到超级用户特权。
-  - /etc/shells：列出可以使用的shell。chsh命令允许用户在本文件 指定范围内改变登录的shell。提供一台机器ftp服务的服务进程ftpd检查用户shell是否列在/etc/shells文件 中，如果不是，将不允许该用户登录。
-  - /etc/termcap：终端性能数据库。说明不同的终端用什么“转义序列”控 制。写程序时不直接输出转义序列(这样只能工作于特定品牌的终端)，而是从/etc/termcap中查找要做的工作的 正确序列。这样，多数的程序可以在多数终端上运行。
-  - /etc/apt/sources.list：软件源管理
-  - /etc/init.d/:服务网初始化脚本
-* /home：用户主目录的基点
-  - 比如用户user的主目录就是/home/user，可以用~user表示。
-  - /root：系统管理员的主目录。
-* /lib：标准程序设计库，又叫动态链接共享库及内核模块，作用类似windows里的.dll文件。根文件系统上的程序所需的共享库，这些文件包含了可被许多程序共享的代码，以避免每个程序都包含有相同的子程序的副本，故可以使得可执行文件变得更小，节省空间。
-  - /lib/modules目录包含系统核心可加载各种模块，尤其是那些在恢复损坏的系统时重 新引导系统所需的模块(例如网络和文件系统驱动)。
-* /mnt：系统管理员临时安装(mount)文件系统的安装点。程序并不自动支持安装到/mnt 。/mnt下面可以分为许多子目录，例如/mnt/dosa可能是使用 msdos文件系统的软驱，而/mnt/exta可能是使用ext2文件系统的软驱，/mnt/cdrom光 驱等等。
-* /opt：额外安装的可选应用程序包所放置的位置，刚才装的测试版firefox，就可以装到/opt/firefox_beta目录下，/opt/firefox_beta目录下面就包含了运 行firefox所需要的所有文件、库、数据等等。要删除firefox的时候，你只需删除/opt/firefox_beta目录即可，非常简单。
-  - /proc：虚拟的目录，是系统内存的映射。可直接访问这个目录来获取系统信息。
-  - /proc/x：关于进程x的信息目录，这x是这一进程的标识号。每个进程在 /proc下有一个名为自己进程号的目录。
-  - /proc/cpuinfo：存放处理器(cpu)的信息，如cpu的类型、制造商、 型号和性能等。
-  - /proc/devices：当前运行的核心配置的设备驱动的列表。
-  - /proc/dma：显示当前使用的dma通道。
-  - /proc/filesystems：核心配置的文件系统信息。
-  - /proc/interrupts：显示被占用的中断信息和占用者的信息，以及被占用 的数量。
-  - /proc/ioports：当前使用的i/o端口。
-  - /proc/kcore：系统物理内存映像。与物理内存大小完全一样，然而实际上没有 占用这么多内存；它仅仅是在程序访问它时才被创建。(注意：除非你把它拷贝到什么地方，否则/proc下没有任何东西占用任何磁盘空间。)
-  - /proc/kmsg：核心输出的消息。也会被送到syslog。
-  -  /proc/ksyms：核心符号表。
-  -  /proc/loadavg：系统“平均负载”；3个没有意义的指示器指出系统当前 的工作量。
-  -  /proc/meminfo：各种存储器使用信息，包括物理内存和交换分区 (swap)。
-  -  /proc/modules：存放当前加载了哪些核心模块信息。
-  -  /proc/net：网络协议状态信息。
-  -  /proc/self：存放到查看/proc的 程序的进程目录的符号连接。当2个进程查看/proc时，这将会是不同的连接。这主要便于程序得到它自己的进程目录。
-  -  /proc/stat：系统的不同状态，例如，系统启动后页面发生错误的次数。
-  -  /proc/uptime：系统启动的时间长度。
-  -  /proc/version：核心版本。
-* /sbin：系统管理命令，也用于存储二进制文件。这里存放的是系统管理员使用的管理程序，只有root才能访问
-* /tmp：存放程序在运行时产生的信息和数据。但在引导启动后，运行的程序最好使用/var/tmp来 代替/tmp，因为前者可能拥有一个更大的磁盘空间。
-* /usr：最庞大的目录，要用到的应用程序和文件几乎都在这个目录，所有命令、库、man页和其他一般操作中所需的不改变的文件（节省了磁盘空间，且易于管理）。
-  - /usr/local 本地管理员软件安装目录
-  - /usr/x11r6：存放x window的目录。
-  - /usr/bin：众多的应用程序。
-  - /usr/sbin：超级用户的一些管理程序。
-  - /usr/doc：linux文档。
-  - /usr/include：linux下开发和编译应用程序所需要的头文件。
-  - /usr/lib：常用的动态链接库和软件包的配置文件。
-  - /usr/man：帮助文档。
-  - /usr/src：源代码，linux内核的源代码就放在/usr/src/linux 里。
-  - /usr/local下一般是你安装软件的目录，这个目录就相当于在windows下的programefiles这个目录
-  - /usr/local/bin：本地增加的命令。
-  - /usr/local/lib：本地增加的库根文件系统。
-* /var：用户创建的所有变量文件和临时文件的存储，比如spool目录(mail、news、打印机等用的)， log文件、 formatted manual pages和暂存文件。传统上/var 的所有东西曾在 /usr 下的某个地方，但这样/usr 就不可能只读安装了。
-  - /var/catman：包括了格式化过的帮助(man)页。帮助页的源文件一般存在 /usr/man/catman中；有些man页可能有预格式化的版本，存在/usr/man/cat中。而其他的man页在第一次看时都需要格式化，格 式化完的版本存在/var/man中，这样其他人再看相同的页时就无须等待格式化了。(/var/catman经常被 清除，就像清除临时目录一样。)
-  - /var/lib：存放系统正常运行时要改变的文件。
-  - /var/local：存放/usr/local中 安装的程序的可变数据(即系统管理员安装的程序)。注意，如果必要，即使本地安装的程序也会使用其他/var目录，例如/var/lock 。
-  - /var/lock：锁定文件。许多程序遵循在/var/lock中 产生一个锁定文件的约定，以用来支持他们正在使用某个特定的设备或文件。其他程序注意到这个锁定文件时，就不会再使用这个设备或文件。
-  - /var/log：各种程序的日志(log)文件，尤其是login (/var/log/wtmplog纪 录所有到系统的登录和注销) 和syslog (/var/log/messages 纪录存储所有核心和系统程序信息)。/var/log 里的文件经常不确定地增长，应该定期清除。
-  - /var/run：保存在下一次系统引导前有效的关于系统的信息文件。例如，/var/run/utmp包 含当前登录的用户的信息。
-  - /var/spool：放置“假脱机(spool)”程序的目录，如mail、 news、打印队列和其他队列工作的目录。每个不同的spool在/var/spool下有自己的子目录，例如，用户的邮箱就存放在/var/spool/mail 中。
-  - /var/tmp：比/tmp允许更大的或需要存在较长时间的临时文件。注意系统管理 员可能不允许/var/tmp有很旧的文件。
-* /lost+found：平时是空的，系统非正常关机而留下“无家可归”的文件就在这里。
+* 文件系统类型
+  - ext2 ： 早期linux中常用的文件系统
+  - ext3 ： ext2的升级版，带日志功能
+  - RAMFS ： 内存文件系统，速度很快
+  - NFS ： 网络文件系统，由SUN发明，主要用于远程文件共享
+  - MS-DOS ： MS-DOS文件系统
+  - VFAT ： Windows 95/98 操作系统采用的文件系统
+  - FAT ： Windows XP 操作系统采用的文件系统
+  - NTFS： Windows NT/XP 操作系统采用的文件系统
+  - HPFS ： OS/2 操作系统采用的文件系统
+  - PROC : 虚拟的进程文件系统
+  - ISO9660 ： 大部分光盘所采用的文件系统
+  - ufsSun : OS 所采用的文件系统
+  - NCPFS ： Novell 服务器所采用的文件系统
+  - SMBFS ： Samba 的共享文件系统
+  - XFS ： 由SGI开发的先进的日志文件系统，支持超大容量文件
+  - JFS ：IBM的AIX使用的日志文件系统
+  - ReiserFS : 基于平衡树结构的文件系统
+  - udf: 可擦写的数据光盘文件系统
+* 特性
+  - 分区完毕后还需要进行格式化(format)，之后操作系统才能够使用这个分区，格式化的目的是能使操作系统可以使用的文件系统格式
+  - 每种操作系统能够使用的文件系统并不相同，Linux 的正统文件系统则为 Ext2 (Linux second extended file system, ext2fs)这一个。此外，在默认的情况下，windows 操作系统是不会认识 Linux 的 Ext2 的。
+  - 可被挂载的数据为一个文件系统而不是一个分区：
+    + 将一个分区格式化为多个文件系统(例如LVM)
+    + 将多个分区合成一个文件系统(LVM, 软件磁盘阵列 RAID (software raid))
+  - 被指定为相应的文件系统后，整个分区被分为 1024，2048 和 4096 字节大小的块。根据块使用的不同，可分为：
+    + 超级块(Superblock): 这是整个文件系统的第一块空间。包括整个文件系统的基本信息，如块大小，inode/block的总量、使用量、剩余量，指向空间 inode 和数据块的指针等相关信息。
+    + inode块(文件索引节点) : 文件系统索引,记录文件的属性。它是文件系统的最基本单元，是文件系统连接任何子目录、任何文件的桥梁。每个子目录和文件只有唯一的一个 inode 块。它包含了文件系统中文件的基本属性(文件的长度、创建及修改时间、权限、所属关系)、存放数据的位置等相关信息. 在 Linux 下可以通过 “ls -li” 命令查看文件的 inode 信息。硬连接和源文件具有相同的 inode 。
+    + 数据块(Block) :实际记录文件的内容，若文件太大时，会占用多个 block。为了提高目录访问效率，Linux 还提供了表达路径与 inode 对应关系的 dentry 结构。它描述了路径信息并连接到节点 inode，它包括各种目录信息，还指向了 inode 和超级块。
+    + 查看某个文件时，会先从inode table中查出文件属性及数据存放点，再从数据块中读取数据
+    + 索引式文件系统(indexed allocation)：某一个文件的属性与权限数据是放置到 inode 4 号，而这个 inode 记录了文件数据的实际放置点为 2, 7, 13, 15 这四个 block 号码，此时操作系统就能够据此来排列磁盘的阅读顺序，可以一口气将四个 block 内容读出来
+      * 如果文件系统使用太久， 常常删除/编辑/新增文件时，那么还是可能会造成文件数据太过于离散的问题，此时或许会需要进行重整一下的
+    + FAT：并没有 inode 存在，每个 block 号码都记录在前一个 block 当中，要一个一个的将 block 读出后，才会知道下一个 block 在何处。
+      * 如果同一个文件数据写入的 block 分散的太过厉害时，则我们的磁盘读取头将无法在磁盘转一圈就读到所有的数据， 因此磁盘就会多转好几圈才能完整的读取到这个文件的内容
+      * 碎片整理：文件写入的 block 太过于离散了，此时文件读取的效能将会变的很差所致，将同一个文件所属的 blocks 汇整在一起
+* 目录功用
+  - /：每台机器都有根文件系统，它包含系统引导和使其他文件系统得以mount所必要的文件，根文件系统应该有单用户状态所必须的足够的内容。还应该包括修复损坏 系统、恢复备份等的工具。
+  - /bin：包含了引导启动所需的命令或普通用户可能用的命令(可能在引导启动后),都是二进制可执行命令。多是系统中重要的系统文件
+  - /boot：目录存放引导加载器(bootstrap loader)使用的文件，如lilo，核心映像也经常放在这里，而不是放在根目录中。但是如果有许多核心映像，这个目录就可能变得很大，这时使用单独的 文件系统会更好一些。还有一点要注意的是，要确保核心映像必须在ide硬盘的前1024柱面内。
+  - /dev：存放了设备文件，即设备驱动程序，用户通过这些文件访问外部设备。比如，用户可 以通过访问/dev/mouse来访问鼠标的输入，就像访问其他文件一样。
+    + /dev/console：系统控制台，也就是直接和系统连接的监视器。
+    + /dev/hd：ide硬盘驱动程序接口。如：/dev/hda指的是第一个硬 盘，had1则是指/dev/hda的第一个分区。如系统中有其他的硬盘，则依次为/dev /hdb、/dev/hdc、. . . . . .；如有多个分区则依次为hda1、hda2 . . . . . .
+    + /dev/sd：scsi磁盘驱动程序接口。如系统有scsi硬盘，就不会访问/dev/had， 而会访问/dev/sda。
+    + /dev/fd：软驱设备驱动程序。如：/dev/fd0指 系统的第一个软盘，也就是通常所说的a盘，/dev/fd1指第二个软盘，. . . . . .而/dev/fd1 h1440则表示访问驱动器1中的4.5高密盘。
+    + /dev/st：scsi磁带驱动器驱动程序。
+    + /dev/tty：提供虚拟控制台支持。如：/dev/tty1指 的是系统的第一个虚拟控制台，/dev/tty2则是系统的第二个虚拟控制台。
+    + /dev/pty：提供远程登陆伪终端支持。在进行telnet登录时就要用到/dev/pty设 备。
+    + /dev/ttys：计算机串行接口，对于dos来说就是“com1”口。
+    + /dev/cua：计算机串行接口，与调制解调器一起使用的设备。
+    + /dev/cdrom     光盘
+    + /dev/hdc       IDE硬盘   centos 5.5
+    + /dev/sr0       光盘      centos 6.x
+    + /dev/null：“黑洞”，所有写入该设备的信息都将消失。例如：当想要将屏幕 上的输出信息隐藏起来时，只要将输出信息输入到/dev/null中即可。
+  - /etc：系统管理和配置文件
+    + /etc/hostname:系统的hostname
+    + /etc/network/interfaces：网络接口
+    + /etc/resolv.conf:系统的dns服务
+    + /etc/rc或者/etc/rc.d或者/etc/init.d：启动、或改变运行级时运行的脚本或脚本的目录。系统初始化文件
+    + /etc/passwd：用户数据库，其中的域给出了用户名、真实姓名、用户起始目 录、加密口令和用户的其他信息
+    + /etc/shadow：在安装了影子(shadow)口令软件的系统上的影子口令文件。影子口令文件将/etc/passwd文件中的加密口令移动到/etc/shadow中，而后者只对超级用户(root)可读。这使破译口令更困 难，以此增加系统的安全性。
+    + /etc/fdprm：软盘参数表，用以说明不同的软盘格式。可用setfdprm进 行设置。更多的信息见setfdprm的帮助页。
+    + /etc/fstab：指定启动时需要自动安装的文件系统列表。也包括用swapon -a启用的swap区的信息。
+    + /etc/group：类似/etc/passwd ，但说明的不是用户信息而是组的信息。包括组的各种数据。
+    + /etc/inittab：init 的配置文件。
+    + /etc/issue：包括用户在登录提示符前的输出信息。通常包括系统的一段短说明 或欢迎信息。具体内容由系统管理员确定。
+    + /etc/magic：“file”的配置文件。包含不同文件格式的说 明，“file”基于它猜测文件类型。
+    + /etc/motd：motd是message of the day的缩写，用户成功登录后自动输出。内容由系统管理员确定。常用于通告信息，如计划关机时间的警告等。
+    + /etc/mtab：当前安装的文件系统列表。由脚本(scritp)初始化，并由 mount命令自动更新。当需要一个当前安装的文件系统的列表时使用(例如df命令)。
+    + /etc/login.defs：login命令的配置文件。
+    + /etc/printcap：类似/etc/termcap ，但针对打印机。语法不同。
+    + /etc/profile：系统环境变量
+    + /etc/csh.login、/etc/csh.cshrc：登录或启动时bourne或cshells执行的文件。这允许系统管理员为所有用户建立全局缺省环境。
+    + /etc/securetty：确认安全终端，即哪个终端允许超级用户(root) 登录。一般只列出虚拟控制台，这样就不可能(至少很困难)通过调制解调器(modem)或网络闯入系统并得到超级用户特权。
+    + /etc/shells：列出可以使用的shell。chsh命令允许用户在本文件 指定范围内改变登录的shell。提供一台机器ftp服务的服务进程ftpd检查用户shell是否列在/etc/shells文件 中，如果不是，将不允许该用户登录。
+    + /etc/termcap：终端性能数据库。说明不同的终端用什么“转义序列”控 制。写程序时不直接输出转义序列(这样只能工作于特定品牌的终端)，而是从/etc/termcap中查找要做的工作的 正确序列。这样，多数的程序可以在多数终端上运行。
+    + /etc/apt/sources.list：软件源管理
+    + /etc/init.d/:服务网初始化脚本
+  - /home：用户主目录的基点
+    + 比如用户user的主目录就是/home/user，可以用~user表示。
+    + /root：系统管理员的主目录。
+  - /lib：标准程序设计库，又叫动态链接共享库及内核模块，作用类似windows里的.dll文件。根文件系统上的程序所需的共享库，这些文件包含了可被许多程序共享的代码，以避免每个程序都包含有相同的子程序的副本，故可以使得可执行文件变得更小，节省空间。
+    + /lib/modules目录包含系统核心可加载各种模块，尤其是那些在恢复损坏的系统时重 新引导系统所需的模块(例如网络和文件系统驱动)。
+  - /mnt：系统管理员临时安装(mount)文件系统的安装点。程序并不自动支持安装到/mnt 。/mnt下面可以分为许多子目录，例如/mnt/dosa可能是使用 msdos文件系统的软驱，而/mnt/exta可能是使用ext2文件系统的软驱，/mnt/cdrom光 驱等等。
+  - /opt：额外安装的可选应用程序包所放置的位置，刚才装的测试版firefox，就可以装到/opt/firefox_beta目录下，/opt/firefox_beta目录下面就包含了运 行firefox所需要的所有文件、库、数据等等。要删除firefox的时候，你只需删除/opt/firefox_beta目录即可，非常简单。
+    + /proc：虚拟的目录，是系统内存的映射。可直接访问这个目录来获取系统信息。
+    + /proc/x：关于进程x的信息目录，这x是这一进程的标识号。每个进程在 /proc下有一个名为自己进程号的目录。
+    + /proc/cpuinfo：存放处理器(cpu)的信息，如cpu的类型、制造商、 型号和性能等。
+    + /proc/devices：当前运行的核心配置的设备驱动的列表。
+    + /proc/dma：显示当前使用的dma通道。
+    + /proc/filesystems：核心配置的文件系统信息。
+    + /proc/interrupts：显示被占用的中断信息和占用者的信息，以及被占用 的数量。
+    + /proc/ioports：当前使用的i/o端口。
+    + /proc/kcore：系统物理内存映像。与物理内存大小完全一样，然而实际上没有 占用这么多内存；它仅仅是在程序访问它时才被创建。(注意：除非你把它拷贝到什么地方，否则/proc下没有任何东西占用任何磁盘空间。)
+    + /proc/kmsg：核心输出的消息。也会被送到syslog。
+    +  /proc/ksyms：核心符号表。
+    +  /proc/loadavg：系统“平均负载”；3个没有意义的指示器指出系统当前 的工作量。
+    +  /proc/meminfo：各种存储器使用信息，包括物理内存和交换分区 (swap)。
+    +  /proc/modules：存放当前加载了哪些核心模块信息。
+    +  /proc/net：网络协议状态信息。
+    +  /proc/self：存放到查看/proc的 程序的进程目录的符号连接。当2个进程查看/proc时，这将会是不同的连接。这主要便于程序得到它自己的进程目录。
+    +  /proc/stat：系统的不同状态，例如，系统启动后页面发生错误的次数。
+    +  /proc/uptime：系统启动的时间长度。
+    +  /proc/version：核心版本。
+  - /sbin：系统管理命令，也用于存储二进制文件。这里存放的是系统管理员使用的管理程序，只有root才能访问
+  - /tmp：存放程序在运行时产生的信息和数据。但在引导启动后，运行的程序最好使用/var/tmp来 代替/tmp，因为前者可能拥有一个更大的磁盘空间。
+  - /usr：最庞大的目录，要用到的应用程序和文件几乎都在这个目录，所有命令、库、man页和其他一般操作中所需的不改变的文件（节省了磁盘空间，且易于管理）。
+    + /usr/local 本地管理员软件安装目录
+    + /usr/x11r6：存放x window的目录。
+    + /usr/bin：众多的应用程序。
+    + /usr/sbin：超级用户的一些管理程序。
+    + /usr/doc：linux文档。
+    + /usr/include：linux下开发和编译应用程序所需要的头文件。
+    + /usr/lib：常用的动态链接库和软件包的配置文件。
+    + /usr/man：帮助文档。
+    + /usr/src：源代码，linux内核的源代码就放在/usr/src/linux 里。
+    + /usr/local下一般是你安装软件的目录，这个目录就相当于在windows下的programefiles这个目录
+    + /usr/local/bin：本地增加的命令
+    + /usr/local/lib：本地增加的库根文件系统
+  - /var：用户创建的所有变量文件和临时文件的存储，比如spool目录(mail、news、打印机等用的)， log文件、 formatted manual pages和暂存文件。传统上/var 的所有东西曾在 /usr 下的某个地方，但这样/usr 就不可能只读安装了。
+    + /var/catman：包括了格式化过的帮助(man)页。帮助页的源文件一般存在 /usr/man/catman中；有些man页可能有预格式化的版本，存在/usr/man/cat中。而其他的man页在第一次看时都需要格式化，格 式化完的版本存在/var/man中，这样其他人再看相同的页时就无须等待格式化了。(/var/catman经常被 清除，就像清除临时目录一样。)
+    + /var/lib：存放系统正常运行时要改变的文件。
+    + /var/local：存放/usr/local中 安装的程序的可变数据(即系统管理员安装的程序)。注意，如果必要，即使本地安装的程序也会使用其他/var目录，例如/var/lock 。
+    + /var/lock：锁定文件。许多程序遵循在/var/lock中 产生一个锁定文件的约定，以用来支持他们正在使用某个特定的设备或文件。其他程序注意到这个锁定文件时，就不会再使用这个设备或文件。
+    + /var/log：各种程序的日志(log)文件，尤其是login (/var/log/wtmplog纪 录所有到系统的登录和注销) 和syslog (/var/log/messages 纪录存储所有核心和系统程序信息)。/var/log 里的文件经常不确定地增长，应该定期清除。
+    + /var/run：保存在下一次系统引导前有效的关于系统的信息文件。例如，/var/run/utmp包 含当前登录的用户的信息。
+    + /var/spool：放置“假脱机(spool)”程序的目录，如mail、 news、打印队列和其他队列工作的目录。每个不同的spool在/var/spool下有自己的子目录，例如，用户的邮箱就存放在/var/spool/mail 中。
+    + /var/tmp：比/tmp允许更大的或需要存在较长时间的临时文件。注意系统管理 员可能不允许/var/tmp有很旧的文件。
+  - /lost+found：平时是空的，系统非正常关机而留下“无家可归”的文件就在这里。
+* 挂载：所有存储设备都必须挂载使用，包括硬盘
+  - 将一个文件系统的顶层目录挂到另一个文件系统的子目录上，使它们成为一个整体,把该子目录称为挂载点.
+  - 挂载点必须是一个目录
+  - 一个分区挂载在一个已存在的目录上，这个目录可以不为空，但挂载后这个目录下以前的内容将不可用
+  - 光盘、软盘、其他操作系统使用的文件系统的格式与linux使用的文件系统格式是不一样的。光盘是ISO9660；软盘是fat16或ext2；windows NT是fat16、NTFS；windows98是fat16、fat32；windows2000和windowsXP是fat16、fat32、 NTFS。挂载前要了解linux是否支持所要挂载的文件系统格式。
+    + -t 指定设备的文件系统类型（什么提到的文件类型）
+    + -o 指定挂载文件系统时的选项。有些也可用在/etc/fstab中。常用的有
+      * codepage=XXX 代码页
+      * iocharset=XXX 字符集
+      * ro 以只读方式挂载
+      * rw 以读写方式挂载
+      * nouser 使一般用户无法挂载
+      * user 可以让一般用户挂载设备
+  - 在/etc目录下有个fstab文件，它里面列出了linux开机时自动挂载的文件系统的列表
+    + 第一列是挂载的文件系统的设备名，第二列是挂载点，第三列是挂载的文件系统类型，第四列是挂载的选项，选项间用逗号分隔
+    + 参数defaults实际上包含了一组默认参数：
+      * rw 以可读写模式挂载
+      * suid 开启用户ID和群组ID设置位
+      * dev 可解读文件系统上的字符或区块设备
+      * exec 可执行二进制文件
+      * auto 自动挂载
+      * nouser 使一般用户无法挂载
+      * async 以非同步方式执行文件系统的输入输出操作
+* 文件系统在内核中的表示
+  - 文件与IO: 每个进程在PCB（Process Control Block）中都保存着一份文件描述符表，文件描述符就是这个表的索引，每个表项都有一个指向已打开文件的指针.已打开的文件在内核中用file结构体表示，文件描述符表中的指针指向file结构体。
+    + 维护File Status Flag（file结构体的成员f_flags）
+    + 当前读写位置（file结构体的成员f_pos）
+    + 指向一个file_operations结构体，这个结构体的成员都是函数指针，指向实现各种文件操作的内核函数.由内核调用file_operations的各成员所指向的内核函数完成用户请求
+      * release成员用于完成用户程序的close请求,减少引用计数，只有引用计数减到0才关闭文件
+    + f_count:引用计数（Reference Count）,当close(fd1)时并不会释放file结构体，而只是把引用计数减到1,引用计数减到0同时释放file结构体，这才真的关闭了文件
+    + 一个指向dentry结构体的指针，“dentry”是directory entry（目录项）的缩写.为了减少读盘次数，内核缓存了目录的树状结构，称为dentry cache，其中每个节点是一个dentry结构体，只要沿着路径各部分的dentry搜索即可
+      * 只保存最近访问过的目录项，如果要找的目录项在cache中没有，就要从磁盘读到内存中。
+      * 每个dentry结构体都有一个指针指向inode结构体。inode结构体保存着从磁盘inode读上来的信息,例如所有者、文件大小、文件类型和权限位等。
+      * 每个inode结构体都有一个指向inode_operations结构体的指针，后者也是一组函数指针指向一些完成文件目录操作的内核函数.inode_operations所指向的不是针对某一个文件进行操作的函数，而是影响文件和目录布局的函数
+      * inode结构体有一个指向super_block结构体的指针。super_block结构体保存着从磁盘分区的超级块读上来的信息，例如文件系统类型、块大小等
+      * super_block结构体的s_root成员是一个指向dentry的指针，表示这个文件系统的根目录被mount到哪里，在上图的例子中这个分区被mount到/home目录下。
+
+![VFS子系统](../_static/VFS.png "VFS子系统")
+
+```sh
+df -Th
+
+fdisk -l # 查看硬盘编号
+
+# 分区
+sudo fdisk /dev/sdb # 硬盘进行分区
+m # 查看所有命令的菜单及帮助信息
+d # 删除不想要的分区
+n # 添加一个新的分区
+p # 设置一个主分区（e为扩展分区），再接下来设置起止扇区号（一个扇区512B，根据个人需要设置分区大小）
+t # 更改分区类型
+L # 可查看所有分区类型的编号，根据个人需求，输入对应的分区类型编号
+w # 保存退出
+
+# 统计数据块使用情况
+df -T # 查看分区的文件系统
+df -h # Human-readable 显示目前所有文件系统的总容量，使用量，剩余容量
+df -k
+du -b /home # 查看目前/HOME目录的容量(k)及子目录的容量(k)
+
+du -h --max-depth=1 /home  # 文件大小相加
+du -h --max-depth=1 /home/*
+du -sm * | sort -n //统计当前目录大小 并安大小 排序
+du -sk * | sort -n
+du -sk * | grep guojf //看一个人的大小
+
+sudo mkfs.ext4 /dev/sdb1 # 格式化成ext4文件系统 （输入sudo mkfs，按两次tab键，会出现多种文件系统，根据需求选择）
+
+mkdir /media/cdrom  # 新建镜像文件挂载目录
+cd /usr/local/src  #进入系统镜像文件存放目录
+ls  # 列出目录文件，可以看到刚刚上传的系统镜像文件
+
+dd # 默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
+# dd if=/dev/zero of=virtual.img bs=1M count=256  # 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
+# dd if=/dev/stdin of=test bs=10 count=1 conv=ucase # 将输出的英文字符转换为大写再写入文件
+sudo mount # 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
+
+# 挂载系统镜像 mount -t 文件系统 设备描述文件 挂载点（已经存在空目录）
+mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom
+cd  /media/cdrom  # 进入挂载目录，使用ls命令可以看到已经有文件存在了
+
+
+# /etc/fstab   # 添加以下代码。实现开机自动挂载
+/dev/hda2 / ext3 defaults 1 1
+/dev/hda1 /boot ext3 defaults 1 2
+none /dev/pts devpts gid=5,mode=620 0 0
+none /proc proc defaults 0 0
+none /dev/shm tmpfs defaults 0 0
+/dev/hda3 swap swap defaults 0 0
+/dev/cdrom /mnt/cdrom iso9660 noauto,codepage=936,iocharset=gb2312 0 0
+/dev/fd0 /mnt/floppy auto noauto,owner,kudzu 0 0
+/dev/hdb1 /mnt/winc vfat defaults,codepage=936,iocharset=cp936 0 0
+/dev/hda5 /mnt/wind vfat defaults,codepage=936,iocharset=cp936 0 0
+/usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom   iso9660    defaults,ro,loop  0 0
+
+## 挂载 mount [-参数] [设备名称] [挂载点]
+mount /dev/fd0 /mnt/floppy # 挂载一个软盘
+mount /dev/cdrom /mnt/cdrom # 挂载一个cdrom或dvdrom
+mount /dev/hdc /mnt/cdrecorder # 挂载一个cdrw或dvdrom
+mount /dev/hdb /mnt/cdrecorder # 挂载一个cdrw或dvdrom
+mount -o loop file.iso /mnt/cdrom 挂载一个文件或ISO镜像文件
+mount -t vfat /dev/hda5 /mnt/hda5 # 挂载一个Windows FAT32文件系统
+mount /dev/sda1 /mnt/usbdisk 挂载一个usb 捷盘或闪存设备
+mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share 挂载一个windows网络共享
+mkdir /media/cdrom  #新建镜像文件挂载目录
+cd /usr/local/src  #进入系统镜像文件存放目录
+ls  #列出目录文件，可以看到刚刚上传的系统镜像文件
+mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom #挂载光盘
+cd  /media/cdrom  #进入挂载目录，使用ls命令可以看到已经有文件存在
+
+umount  /media/cdrom  # 卸载系统镜像 退出挂载目录，才能卸载
+```
 
 ## 信号量
 
@@ -439,9 +659,7 @@ sudo dmidecode
 
 systemctl list-unit-files --type=service | grep enabled # 展示开机启动时的进程项
 
-sudo systemctl stop bluetooth.service
-sudo systemctl disable bluetooth.service
-systemctl status bluetooth.service
+sudo systemctl stop|disable|status bluetooth.service
 
 sudo systemctl mask bluetooth.service # 完全阻止开机启动 把它掩盖起来
 
@@ -456,37 +674,6 @@ rtkit-daemon.service # 一个 实时内核调度器real-time kernel scheduler
 whoopsie.service # 是 Ubuntu 错误报告服务。它用于收集 Ubuntu 系统崩溃报告，并发送报告到 https://daisy.ubuntu.com 。 你可以放心地禁止其启动，或者永久的卸载它。
 wpa_supplicant.service # 仅在你使用 Wi-Fi 连接时需要
 
-# 查看linux系统信息
-uname -a # 显示电脑以及操作系统的相关信息 -r 核心版本
-cat /proc/version # 说明正在运行的内核版本
-cat /etc/issue # 显示的是发行版本信息
-lsb_release -a
-
-df -T
-reboot｜poweroff
-date # 获取当前时间
-cal # 日历
-bc # 计算器
-
-uname # 返回系统名称 sudo uname --m
-hostname # 返回系统的主机名称
---version/-V # 查看某个程序的版本
-history # 显示历史
-help # 用于显示 shell 内建命令的简要帮助信息 help exit
-man #
-info ls
-ssh # 连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。
-grep  # 用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
-alias server="python -m SimpleHTTPServer 9000" # 使用 alias 这个 bash 内置的命令来为它们创建一个短别名
-
-which # 寻找执行文件
-whereis
-who
-locate #
-
-tar # 用来处理文件压缩的默认 Unix 工具.
-md5sum  # 它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
-
 # 界面切换
 init 3
 init 5
@@ -500,127 +687,7 @@ chkconfig --list sshd
 ## 修改时区
 sudo tzselect
 sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
-
-sudo vi /etc/timezone
-# 改为Asia/Shanghai
-
-# ~/.bash_aliases
-alias pip=/usr/local/bin/pip3.6
-alias python=/usr/bin/python3.6
-
-# /etc/sysctl.conf 
-net.ipv4.ip_local_port_range = 1024 65535 # 用户端口范围 
-net.ipv4.tcp_max_syn_backlog = 4096 
-net.ipv4.tcp_fin_timeout = 30 
-fs.file-max=65535 # 系统最大文件句柄，控制的是能打开文件最大数量
-```
-
-### 挂载
-
-所有存储设备都必须挂载使用，包括硬盘
-
-* 分区类型:磁盘上存储分区信息的方式，包含了分区从哪里开始的信息
-  - MBR（Master Boot Record）：存在于驱动器开始部分的一个特殊的启动扇区。这个扇区包含了已安装的操作系统的启动加载器和驱动器的逻辑分区信息
-    + 分为基本分区（primary partion）和扩展分区（extension partion）两种
-    + 主分区总数不能大于4个，其中最多只能有一个扩展分区
-    + 基本分区可以马上被挂载使用但不能再分区，扩展分区必须再进行二次分区后才能挂载。扩展分区下的二次分区被称之为逻辑分区，逻辑分区数量限制视磁盘类型而定
-    + MBR的主分区号为1-4，逻辑分区号为从5开始累加的数字
-    + 主引导程序（偏移地址0000H--0088H ），它负责从活动分区中装载，并运行系统引导程序。 出错信息数据区，偏移地址0089H--00E1H 为出错信息，00E2H--01BDH 全为0 字节。
-    + 分区表（DPT,Disk Partition Table ）含4 个分区项，偏移地址01BEH--01FDH, 每个分区表项长16 个字节，共64 字节为 分区项1 、分区项2 、分区项3 、分区项4
-    + 结束标志字，偏移地址01FE--01FF 的2 个字节值为结束标志 55AA
-  - GPT（GUID Partition Table）:驱动器上的每个分区都有一个全局唯一的标识符（globally unique identifier，GUID）没有主分区和逻辑分区之分，每个硬盘最多可以有128个分区
-    + 分为4个区域：EFI信息区(GPT头)、分区表、GPT分区、备份区域
-* /dev/sda1      第一个scsi硬盘的第一分区
-* /dev/cdrom     光盘
-* /dev/hdc       IDE硬盘   centos 5.5
-* /dev/sr0       光盘      centos 6.x
-* `etc/fstab`: `UUID=b543f8f7-579c-45b5-96d6-31de6fa1a55e /home/lgd/disk1 ext4 defaults 1 2`
-  - 分区设备文件名或UUID
-  - 挂载点
-  - 文件系统名称
-  - 挂载参数，挂载权限
-  - 指定分区是否被dump备份，0代表不备份，1代表每天备份，2代表不定期备份。
-  - 指定分区是否被fsck检测，0代表不检测，其他数字代表检测的优先级，比如1的优先级比2高。根目录所在的分区的优先级为1，其他分区的优先级为大于或等于2
-
-```sh
-df -Th
-# 分区
-sudo fdisk /dev/sdb # 硬盘进行分区
-m # 查看所有命令的菜单及帮助信息
-d # 删除不想要的分区
-n # 添加一个新的分区
-p # 设置一个主分区（e为扩展分区），再接下来设置起止扇区号（一个扇区512B，根据个人需要设置分区大小）
-t # 更改分区类型
-L # 可查看所有分区类型的编号，根据个人需求，输入对应的分区类型编号
-w # 保存退出
-sudo mkfs.ext4 /dev/sdb1 # 格式化成ext4文件系统 （输入sudo mkfs，按两次tab键，会出现多种文件系统，根据需求选择）
-
-mkdir /media/cdrom  # 新建镜像文件挂载目录
-cd /usr/local/src  #进入系统镜像文件存放目录
-ls  # 列出目录文件，可以看到刚刚上传的系统镜像文件
-
-dd # 默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
-# dd if=/dev/zero of=virtual.img bs=1M count=256  # 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
-# dd if=/dev/stdin of=test bs=10 count=1 conv=ucase # 将输出的英文字符转换为大写再写入文件
-sudo mount # 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
-
-# 挂载系统镜像 mount -t 文件系统 设备描述文件 挂载点（已经存在空目录）
-mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom
-cd  /media/cdrom  # 进入挂载目录，使用ls命令可以看到已经有文件存在了
-
-
-vi /etc/fstab   # 添加以下代码。实现开机自动挂载
-/usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom   iso9660    defaults,ro,loop  0 0
-
-## 挂载镜像文件
-mount /dev/fd0 /mnt/floppy 挂载一个软盘
-mount /dev/cdrom /mnt/cdrom 挂载一个cdrom或dvdrom
-mount /dev/hdc /mnt/cdrecorder 挂载一个cdrw或dvdrom
-mount /dev/hdb /mnt/cdrecorder 挂载一个cdrw或dvdrom
-mount -o loop file.iso /mnt/cdrom 挂载一个文件或ISO镜像文件
-mount -t vfat /dev/hda5 /mnt/hda5 挂载一个Windows FAT32文件系统
-mount /dev/sda1 /mnt/usbdisk 挂载一个usb 捷盘或闪存设备
-mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share 挂载一个windows网络共享
-mkdir /media/cdrom  #新建镜像文件挂载目录
-cd /usr/local/src  #进入系统镜像文件存放目录
-ls  #列出目录文件，可以看到刚刚上传的系统镜像文件
-mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom #挂载系统镜像
-cd  /media/cdrom  #进入挂载目录，使用ls命令可以看到已经有文件存在
-
-umount  /media/cdrom  # 卸载系统镜像 退出挂载目录，才能卸载
-```
-
-## 硬件
-
-```sh
-fdisk -l # 查看硬盘编号
-
-dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI)
-hdparm -i /dev/hda 罗列一个磁盘的架构特性
-hdparm -tT /dev/sda 在磁盘上执行测试性读取操作
-cat /proc/cpuinfo 显示CPU info的信息
-cat /proc/interrupts 显示中断
-cat /proc/meminfo 校验内存使用
-cat /proc/swaps 显示哪些swap被使用
-cat /proc/version 显示内核的版本
-cat /proc/net/dev 显示网络适配器及统计
-cat /proc/mounts 显示已加载的文件系统
-lspci -tv 罗列 PCI 设备
-lsusb -tv 显示 USB 设备
-
-# 统计数据块使用情况
-df -T # 查看分区的文件系统
-df -h # Human-readable 显示目前所有文件系统的总容量，使用量，剩余容量
-df -k
-du -b /home # 查看目前/HOME目录的容量(k)及子目录的容量(k)
-
-du -h --max-depth=1 /home  # 文件大小相加
-du -h --max-depth=1 /home/*
-du -sm * | sort -n //统计当前目录大小 并安大小 排序
-du -sk * | sort -n
-du -sk * | grep guojf //看一个人的大小
-
-grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
+# /etc/timezone 改为Asia/Shanghai
 
 # 关机（必须用root用户）
 shutdown -h now  ## 立刻关机
@@ -628,8 +695,7 @@ shutdown -h 10  ##  10分钟以后关机
 shutdown -h 12:00:00  ##12点整的时候关机
 shutdown -h # 关机后关闭电源
 shutdown -r now  # 关机/重启 -h:关机 -r:重启
-halt   #  等于立刻关机
-reboot   # 等于立刻重启
+halt｜reboot｜poweroff
 ```
 
 ### 设备驱动
@@ -646,6 +712,30 @@ reboot   # 等于立刻重启
 * 设备驱动程序：处理和管理硬件控制器的软件就是设备驱动程序
 * I/O端口包括控制寄存器、状态寄存器和数据寄存器三大类
 * 根据访问外设寄存器的不同方式，将CPU分为两大类：一类是“内存映射”(memory-mapped)方式，另一类是“I/O映射”(I/O- mapped)方式。
+
+```sh
+## 硬件
+dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI)
+hdparm -i /dev/hda 罗列一个磁盘的架构特性
+hdparm -tT /dev/sda 在磁盘上执行测试性读取操作
+cat /proc/cpuinfo 显示CPU info的信息
+cat /proc/interrupts 显示中断
+cat /proc/meminfo 校验内存使用
+cat /proc/swaps 显示哪些swap被使用
+cat /proc/version 显示内核的版本
+cat /proc/net/dev 显示网络适配器及统计
+cat /proc/mounts 显示已加载的文件系统
+lspci -tv 罗列 PCI 设备
+lsusb -tv 显示 USB 设备
+
+grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
+
+# 查看linux系统信息
+uname -a # 显示电脑以及操作系统的相关信息 -r 核心版本
+cat /proc/version # 说明正在运行的内核版本
+cat /etc/issue # 显示的是发行版本信息
+lsb_release -a
+```
 
 ## 软件
 
@@ -716,15 +806,6 @@ sudo apt-get clean
 ./configure -h # 完全自定义 参数
 ```
 
-### web设置
-
-```sh
-hostname  www  #设置主机名为www
-
-vi /etc/hostname #编辑配置文件
-www   localhost.localdomain  #修改localhost.localdomain为www
-```
-
 ## 指令
 
 * /usr/bin/
@@ -757,6 +838,15 @@ info php # 查看信息
 
 cal # 日历
 bc # 支持任意精度的交互执行的计算器语言
+date # 获取当前时间
+
+--version/-V # 查看某个程序的版本
+ssh # 连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。
+grep  # 用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
+alias server="python -m SimpleHTTPServer 9000" # 使用 alias 这个 bash 内置的命令来为它们创建一个短别名
+
+tar # 用来处理文件压缩的默认 Unix 工具.
+md5sum  # 它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
 
 # 修改时区
 sudo tzselect
@@ -814,8 +904,17 @@ diff -Naur sources-orig/ sources-fixed/ >myfixes.patch # 参数 -N 代表如果�
   - -v|verbose shows Active Internet connections and Active UNIX domain sockets without server information.
 
 ```sh
+# /etc/sysctl.conf
+net.ipv4.ip_local_port_range = 1024 65535 # 用户端口范围
+net.ipv4.tcp_max_syn_backlog = 4096
+net.ipv4.tcp_fin_timeout = 30
+fs.file-max=65535 # 系统最大文件句柄，控制的是能打开文件最大数量
+
 hostname # 返回系统的主机名称
 host xx.xxx.com # 显示某域名相关托管服务器/邮件服务器
+hostname  www  #设置主机名为www
+# /etc/hostname # 编辑配置文件
+www   localhost.localdomain  #修改localhost.localdomain为www
 
 curl http://icanhazip.com # 查看本机IP
 curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
@@ -1032,8 +1131,19 @@ Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能
   * VFS的对象类型包括：超级块(superblock)对象、索引节点(inode)对象、目录项(dentry)对象和文件(file)对象；
   * 虚拟文件系统界面是虚拟文件系统所提供的抽象界面，它主要由一组标准的、抽象的操作构成，这些函数(操作)以系统调用的形式供用户调用。
 * ln 主要用于在两个文件中创建链接，链接又分为 Hard Links (硬链接)和 Symbolic Links (符号链接或软链接)，其中默认为创建硬链接，使用 -s 参数指定创建软链接
-  * 硬链接（Hard Link）：硬链接是使用同一个索引节点（inode号）的链接， 即可以允许多个文件名指向同一个文件索引节点（硬链接不支持目录链接，不能跨分区链接），删除一个硬链接，不会影响该索引节点的源文件以及其下的多个硬链接。增加一个文件的链接数，只要该文件的链接数不为 0 ，该文件就不会被物理删除，所以删除一个具有多个硬链接数的文件，必须删除所有它的硬链接才可删除。
+  * 硬链接（Hard Link）：硬链接是使用同一个索引节点（inode号）的链接， 即可以允许多个文件名指向同一个文件索引节点
+    - 原文件名和连接文件名都指向相同的物理地址
+    - 目录不能有硬连接
+    - 修改其中一个，与其连接的文件同时被修改
+    - 硬连接不能跨越文件系统（不能跨越不同的分区）文件在磁盘中只有一个拷贝，节省硬盘空间
+    - 删除一个硬链接，不会影响该索引节点的源文件以及其下的多个硬链接,可以防止不必要的误删除
+    - 增加一个文件的链接数，只要该文件的链接数不为 0 ，该文件就不会被物理删除，所以删除一个具有多个硬链接数的文件，必须删除所有它的硬链接才可删除。
+    - 由于删除文件要在同一个索引节点属于唯一的连接时才能成功，因此可以防止不必要的误删除
   * 软连接（符号链接，Symbolic Link）：符号链接是以路径的形式创建的链接，类似于windows的快捷方式链接，符号链接允许创建多个文件名链接到同一个源文件，删除源文件，其下的所有软连接将不可用。（软连接支持目录，支持跨分区、跨文件系统）
+  * 区别
+    - 硬链接原文件和新文件的inode编号一致。而软链接不一样。
+    - 对原文件删除，会导致软链接不可用，而硬链接不受影响。
+    - 对原文件的修改，软、硬链接文件内容也一样的修改，因为都是指向同一个文件内容的。
 * `dd if=/dev/zero of=virtual.img bs=1M count=256` 从/dev/zero设备创建一个容量为 256M 的空文件virtual.img
 * `sudo mkfs.ext4 virtual.img` 格式化virtual.img为ext4格式
 * dd：默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
