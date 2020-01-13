@@ -111,20 +111,17 @@ ipconfig # 显示每个已经配置了的接口的IP地址、子网掩码和缺�
 ipconfig /all # 为DNS和WINS服务器显示它已配置且所有使用的附加信息，并且能够显示内置于本地网卡中的物理地址（MAC）
 ```
 
-## 网络模型
+## 图书
 
-* 通过socket() 函数建立监听套接字；
-* 通过bind()函数绑定刚刚生成的监听套接字；
-* 通过listen()函数监听刚刚生成的监听套接字；
-* 通过accept() 函数生成连接套接字；
-* 通过recv()/send()函数利用连接套接字收发数据；
-* 通过close()函数断开连接。
+* 《TCP/IP 协议详解》
+* 《TCP/IP高效编程：改善网络程序的44个技巧》
+* 《Unix环境高级编程》
+* 《Unix网络编程：卷一》
 
 ## 工具
 
 * [localtunnel/localtunnel](https://github.com/localtunnel/localtunnel):expose yourself https://localtunnel.me
 * [cisco/joy](https://github.com/cisco/joy):A package for capturing and analyzing network flow data and intraflow data, for network research, forensics, and security monitoring.
-* [wireshark](https://www.wireshark.org)
 * [SolarWinds](http://www.solarwinds.com):管理大小企业网络上的网络流量。网络设备监控器可监控你网络上的任何一个设备，查找各种提示或错误
 * [maxmcd/webtty](https://github.com/maxmcd/webtty):Share a terminal session over WebRTC https://maxmcd.github.io/webtty/
 * [fatedier/frp](https://github.com/fatedier/frp):A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet.

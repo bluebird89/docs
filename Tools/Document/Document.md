@@ -96,6 +96,7 @@ npm install gitbook-cli -g
 - TickTick
 - [石墨文档](https://shimo.im)
 - [GitbookIO/gitbook](https://github.com/GitbookIO/gitbook):📝 Modern documentation format and toolchain using Git and Markdown https://www.gitbook.com
+* [mkdocs/mkdocs](https://github.com/mkdocs/mkdocs):Project documentation with Markdown. http://www.mkdocs.org
 
 ## PPT
 
