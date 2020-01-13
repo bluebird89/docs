@@ -98,8 +98,12 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
 
 ## 流程
 
-* 请求
+* 打开一个TCP连接：TCP连接被用来发送一条或多条请求，以及接受响应消息。客户端可能打开一条新的连接，或重用一个已经存在的连接，或者也可能开几个新的TCP连接连向服务端。
+* 发送一个HTTP报文：HTTP报文（在HTTP/2之前）是语义可读的。在HTTP/2中，这些简单的消息被封装在了帧中，这使得报文不能被直接读取，但是原理仍是相同的。
     - 状态行(request line)
+        + 一个HTTP的method，经常是由一个动词像GET, POST 或者一个名词像OPTIONS，HEAD来定义客户端的动作行为。通常客户端的操作都是获取资源（GET方法）或者发送HTML form表单值（POST方法），虽然在一些情况下也会有其他操作。
+        + 要获取的资源的路径，通常是上下文中就很明显的元素资源的URL，它没有protocol （http://），domain（developer.mozilla.org），或是TCP的port（HTTP一般在80端口）。
+        + HTTP协议版本号
     - 请求头 HTTP Request Header
         + Allow：服务器支持哪些请求方法（如GET、POST等）
         + Accept: 可以处理的媒体类型和优先级
@@ -145,7 +149,11 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
         + WWW-Authenticate：客户应该在 Authorization 头中提供什么类型的授权信息？在包含401(Unauthorized) 状态行的应答中这个头是必需的
     - 空行
     - 消息主体（entity-body）请求数据
-* 响应
+* 读取服务端返回的报文信息
+    - 状态行(request line)
+        + HTTP协议版本号。
+        + 一个状态码（status code），来告知对应请求执行成功或失败，以及失败的原因。
+        + 一个状态信息，这个信息是非权威的状态码描述信息，可以由服务端自行设定。
     - 响应头
         + Location: 重定向地址
         + Server: 被请求的服务web server的信息
@@ -156,6 +164,9 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
         + domain: 指定发送cookie的域名
         + Secure: 指定之后只有https下才发送cookie
         + HostOnly: 指定之后javascript无法读取cookie
+* 关闭连接或者为后续请求重用连接
+* 报文：HTTP/1.1以及更早的HTTP协议报文都是语义可读的。在HTTP/2中，这些报文被嵌入到了一个新的二进制结构，帧。帧允许实现很多优化，比如报文头部的压缩和复用。即使只有原始HTTP报文的一部分以HTTP/2发送出来，每条报文的语义依旧不变，客户端会重组原始HTTP/1.1请求。因此用HTTP/1.1格式来理解HTTP/2报文仍旧有效。
+    -
 
 ```
 // 源生的form提交可设置enctype="multipart/form-data"，一般表单中有文件会自动设为该值
@@ -174,6 +185,10 @@ headers: {
 ...
 })
 
+GET / HTTP/1.1
+Host: developer.mozilla.org
+Accept-Language: fr
+
 POST http://www.example.com HTTP/1.1
 Content-Type: application/x-www-form-urlencoded;charset=utf-8
 
@@ -182,7 +197,14 @@ title=test&sub%5B%5D=1&sub%5B%5D=2&sub%5B%5D=3
 POST http://www.example.com HTTP/1.1
 Content-Type: application/json;charset=utf-8
 
-{"title":"test","sub":[1,2,3]}
+HTTP/1.1 200 OK
+Date: Sat, 09 Oct 2010 14:28:02 GMT
+Server: Apache
+Last-Modified: Tue, 01 Dec 2009 20:18:22 GMT
+ETag: "51142bc1-7449-479b075b2891b"
+Accept-Ranges: bytes
+Content-Length: 29769
+Content-Type: text/html
 ```
 
 ![ HTTP 请求处理流程](../_static/http_request.jpg "Optional title")
@@ -279,14 +301,15 @@ curl "http://127.0.0.1:8889/" -vv
             + 为了保证客户端能够接收到服务端的信息并能做出正确的应答而进行后两次(第二次和第三次)握手。
             - 理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去
             - SACK_PERM:SACK选项 默认情况下，接受端接受到一个包后，发送 ACK 确认，但是，默认只支持顺序的确认，也就是说，发送 A, B, C 个包，如果我收到了 A, C的包， B没有收到，那么对于 C，这个包我是不会确认的，需要等 B这个包收到后再确认，那么 TCP有超时重传机制，如果一个包很久没有确认，就会当它丢失了，进行重传，这样会造成很多多余的包重传，浪费传输空间。为了解决这个问题， SACK就提出了选择性确认机制，启用 SACK 后，接受端会确认所有收到的包，这样发送端就只用重传真正丢失的包了。
-        * 断开连接：服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过"四次挥手",由TCP的半关闭（half-close）造成
-            - 某端发送一个FIN 发起一个断开请求（该端执行“主动关闭”（active close）），进入 FIN-WAIT 状态
-            - 另一端收到FIN后，发送一个ACK 确认断开请求 进入CLOSE_WAIT状态
-            - 另一端立即发送一个FIN断开请求，进入LAST_ACK状态，在 RFC 2581中的 4.2 节有提到， ack可以延迟确认，只要求保证在 500ms之内保证确认包到达即可。在这样的标准下， TCP确认是有可能进行合并延迟确认的
-            - 一端收到FIN后进入TIME_WAIT状态，接着发送一个ACK给 另一端进入CLOSED状态
-                + TIME_WAIT状态需要经过2MSL(最大报文段生存时间)才能返回到CLOSE状态
+        * 断开连接：服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过"四次挥手"（要对方关闭与对方关闭完成两次确认）,由TCP的半关闭（half-close）造成
+            - 主动关闭连接的一方，调用close()；协议层发送FIN包 发起一个断开请求（该端执行“主动关闭”（active close）），进入 FIN-WAIT 状态
+            - 被动关闭的一方收到FIN包后，协议层回复ACK；被动关闭的一方，进入CLOSE_WAIT状态,主动关闭的一方等待对方关闭，则进入FIN_WAIT_2状态；此时，主动关闭的一方 等待 被动关闭一方的应用程序，调用close操作
+            - 被动关闭的一方在完成所有数据发送后，调用close()操作；协议层发送FIN包给主动关闭的一方，等待对方的ACK，被动关闭的一方进入LAST_ACK状态；在 RFC 2581中的 4.2 节有提到， ack可以延迟确认，只要求保证在 500ms之内保证确认包到达即可。在这样的标准下， TCP确认是有可能进行合并延迟确认的
+            - 主动关闭的一方收到FIN包，协议层回复ACK；此时，主动关闭连接的一方，进入TIME_WAIT状态；而被动关闭的一方，进入CLOSED状态
+                + 等待2MSL(最大报文段生存时间)时间，主动关闭的一方，结束TIME_WAIT，进入CLOSED状态 `netstat -a | grep TIME_WAIT | wc -l`
                     * 保证TCP协议的全双工连接能够可靠关闭
                     * 保证这次连接的重复数据段从网络中消失
+                + 有一个连接没有进入CLOSED状态之前，这个连接是不能被重用的
         * 状态编码：S指代服务器，C指代客户端，S&C表示两者，S/C表示两者之一
             - LISTEN S等待从任意远程TCP端口的连接请求。侦听状态。
             * SYN-SENT C在发送连接请求后等待匹配的连接请求。通过connect()函数向服务器发出一个同步（SYNC）信号后进入此状态。
@@ -504,6 +527,14 @@ alidns
 223.6.6.6
 ```
 
+## HTTP控制常见特性
+
+* 缓存：文档如何缓存能通过HTTP来控制。服务端能告诉代理和客户端哪些文档需要被缓存，缓存多久，而客户端也能够命令中间的缓存代理来忽略存储的文档。
+* 开放同源限制：为了防止网络窥听和其它隐私泄漏，浏览器强制对Web网站做了分割限制。只有来自于相同来源的网页才能够获取网站的全部信息。这样的限制有时反而成了负担，HTTP可以通过修改头部来开放这样的限制，因此Web文档可以是由不同域下的信息拼接成的（某些情况下，这样做还有安全因素考虑）。
+* 认证：一些页面能够被保护起来，仅让特定的用户进行访问。基本的认证功能可以直接通过HTTP提供，使用Authenticate相似的头部即可，或用HTTP Cookies来设置指定的会话。
+* 代理和隧道：通常情况下，服务器和/或客户端是处于内网的，对外网隐藏真实 IP 地址。因此 HTTP 请求就要通过代理越过这个网络屏障。但并非所有的代理都是 HTTP 代理。例如，SOCKS协议的代理就运作在更底层，一些像 FTP 这样的协议也能够被它们处理。
+* 会话：使用HTTP Cookies允许你用一个服务端的状态发起请求，这就创建了会话。虽然基本的HTTP是无状态协议。这很有用，不仅是因为这能应用到像购物车这样的电商业务上，更是因为这使得任何网站都能轻松为用户定制展示内容了。
+
 ### [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest)
 
 DNS Performance test
@@ -523,6 +554,12 @@ bash ./dnstest.sh |sort -k 22 -n
 一种连接模式，实现通信协议的通信过程而建立成来的通信管道，其真实的代表是客户端和服务器端的一个通信进程，双方进程通过socket进行通信，而通信的规则采用指定的协议。可以创建任何协议的连接，因为其它协议都是基于此的
 
 * 应用层与TCP/IP协议族通信的中间软件抽象层，它是一组接口。在设计模式中，Socket其实就是一个门面模式，对TCP/IP协议的封装，它把复杂的TCP/IP协议族隐藏在Socket接口后面，对用户来说，一组简单的接口就是全部，让Socket去组织数据，以符合指定的协议。
+* socket就是一个 五元组 [180.172.35.150:45678, tcp, 180.97.33.108:80] ，包括：
+    - 源IP
+    - 源端口
+    - 目的IP
+    - 目的端口
+    - 类型：TCP or UDP
 * 优点
     - 传输数据为字节级，传输数据可自定义，数据量小（对于手机应用讲：费用低）
     - 传输数据时间短，性能高
@@ -533,16 +570,16 @@ bash ./dnstest.sh |sort -k 22 -n
     - 对开发人员的开发水平要求高
     - 相对于Http协议传输，增加了开发量
 * TCP编程
-    - 服务器端一般步骤是： 
+    - 服务器端步骤是： 
         + 创建一个socket，用函数socket()； 
-        + 设置socket属性，用函数setsockopt(); * 可选 
+        + 设置socket属性，用函数setsockopt(); *可选*
         + 绑定IP地址、端口等信息到socket上，用函数bind(); 
         + 开启监听，用函数listen()； 
         + 接收客户端上来的连接，用函数accept()； 
         + 收发数据，用函数send()和recv()，或者read()和write(); 
-        + 关闭网络连接； 
+        + 通过函数断开连接； 
         + 关闭监听； 
-    + 客户端一般步骤是： 
+    + 客户端步骤是： 
         + 创建一个socket，用函数socket()； 
         + 设置socket属性，用函数setsockopt();* 可选 
         + 绑定IP地址、端口等信息到socket上，用函数bind();* 可选 
@@ -923,18 +960,26 @@ $un_data = unserialize_php($data);
 
 ## http 1.0
 
-* 早先1.0的HTTP版本，是一种无状态、无连接的应用层协议。
-* HTTP1.0规定浏览器和服务器保持短暂的连接，浏览器的每次请求都需要与服务器建立一个TCP连接，服务器处理完成后立即断开TCP连接（无连接），服务器不跟踪每个客户端也不记录过去的请求（无状态）。
-* 这种无状态性可以借助cookie/session机制来做身份认证和状态记录
+* 一种无状态、无连接的应用层协议。
+* 规定浏览器和服务器保持短暂的连接，浏览器的每次请求都需要与服务器建立一个TCP连接，服务器处理完成后立即断开TCP连接（无连接），服务器不跟踪每个客户端也不记录过去的请求（无状态）
+* 可以借助cookie/session机制来做身份认证和状态记录
     - 无连接的特性导致最大的性能缺陷就是无法复用连接。每次发送请求的时候，都需要进行一次TCP的连接，而TCP的连接释放过程又是比较费事的。这种无连接的特性会使得网络的利用率非常低。
     - 队头阻塞（headoflineblocking）。由于HTTP1.0规定下一个请求必须在前一个请求响应到达之前才能发送。假设前一个请求响应一直不到达，那么下一个请求就不发送，同样的后面的请求也给阻塞了。
 * 无法复用TCP连接和并行发送请求
 * TCP传输的单位是packet，HTTP则采用request-response的模型
+* Chrome 最多允许对同一个 Host 建立六个 TCP 连接。不同的浏览器有一些区别
 
 ## HTTP1.1
 
-* 出现了keep-alive这个头部字段，它表示会在建立TCP连接后，完成首次的请求，并不会立刻断开TCP连接，而是保持这个连接状态进而可以复用这个通道
-* 支持请求管道化，“并行”发送请求，但是这个并行，也不是真正意义上的并行，而是可以把先进先出队列从客户端（请求队列）迁移到服务端（响应队列）
+* 把 Connection 头写进标准，并且默认开启持久连接,除非请求中写明 Connection: close，那么浏览器和服务器之间是会维持一段时间的 TCP 连接，不会一个请求结束就断掉。
+* 持久连接:`Connection: keep-alive` 头部字段 ，表示会在建立TCP连接后，完成首次的请求，并不会立刻断开TCP连接，而是保持这个连接状态进而可以复用
+* 维持连接，SSL 的开销也可以避免
+* 单个 TCP 连接在同一时刻只能处理一个请求
+    - 任意两个 HTTP 请求从开始到结束的时间在同一个 TCP 连接里不能重叠。
+    - 支持请求管道化，“并行”发送请求，但是这个并行，也不是真正意义上的并行，而是可以把先进先出队列从客户端（请求队列）迁移到服务端（响应队列）,在浏览器中默认是关闭的
+        + 一些代理服务器不能正确的处理 HTTP Pipelining。
+        + 正确的流水线实现是复杂的。
+        + Head-of-line Blocking 连接头阻塞：在建立起一个 TCP 连接之后，假设客户端在这个连接连续向服务器发送了几个请求，按照标准，服务器应该按照收到请求的顺序返回结果 假设服务器在处理首个请求时花费了大量时间，那么后面所有的请求都需要等着首个请求结束才能响应(堵塞)。
 * 浏览器客户端在同一时间，针对同一域名下的请求有一定数量限制。超过限制数目的请求会被阻塞 通常一次只能有 6 个连接。例如，如果其中一个请求由于服务器上的某些复杂逻辑而卡住，那么它们中的每一个都可以一次处理一个请求，整个连接就会冻结并等待响应。这个问题称为前端阻塞。
     - 为何一些站点会有多个静态资源 CDN 域名的原因
 * 缺点
@@ -985,6 +1030,9 @@ pear install HTTP2
 
 openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 365 -nodes
 ```
+
+## [Wireshark](https://www.wireshark.org) <https://github.com/dafang/notebook/issues/114>
+
 
 ## QUIC
 
@@ -1045,7 +1093,6 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
     - [tsenart/vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. https://godoc.org/github.com/tsenart/vegeta/lib
 * 抓包
     - [httpwatch](https://www.httpwatch.com/)
-    - [Wireshark](https://www.wireshark.org)
 * DNS
     - [jedisct1/dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. https://dnscrypt.info
     - [googlehosts/hosts](https://github.com/googlehosts/hosts):镜像：https://coding.net/u/scaffrey/p/hosts/git

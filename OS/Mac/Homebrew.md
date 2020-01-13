@@ -73,6 +73,8 @@ brew remove  name # 卸载软件
 brew cleanup #清除下载的缓存
 brew update && brew upgrade && brew cleanup ; say mission complete
 
+brew update-reset # `require': cannot load such file -- active_support/core_ext/object/blank (LoadError)
+
 brew link --force openssl # 链接新的openssl到环境变量中
 brew link --overwrite docker
 

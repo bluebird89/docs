@@ -115,15 +115,6 @@
 
 ![](../../_static/nginx_archetect.png "Optional title")
 
-```
-#设置 worker 数量。
- worker_processes 4
-#work 绑定 cpu(4 work 绑定 4cpu)。
- worker_cpu_affinity 0001 0010 0100 1000
-#work 绑定 cpu (4 work 绑定 8cpu 中的 4 个) 。
- worker_cpu_affinity 0000001 00000010 00000100 00001000
-```
-
 ## 安装
 
 * ubunutu
@@ -307,7 +298,10 @@ $document_uri # 同 $uri
     # 如果Nginx服务器还有其它服务，可以考虑适当减少
     # auto：Nginx进程将自动检测
     worker_processes  3| auto
-    worker_cpu_affinity 0001 0010 0100 1000;
+    #work 绑定 cpu(4 work 绑定 4cpu)。
+    worker_cpu_affinity 0001 0010 0100 1000
+    #work 绑定 cpu (4 work 绑定 8cpu 中的 4 个) 。
+    worker_cpu_affinity 0000001 00000010 00000100 00001000
 
     # 日志输出到标准错误输出
     error_log stderr;
@@ -752,8 +746,8 @@ server {
     #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
     #    include        fastcgi_params;
     #}
-    # 设定查看Nginx状态的地址
-    location /NginxStatus {
+    # 设定查看Nginx状态
+    location ~ ^/status$ {
         stub_status on;
         access_log on;
         auth_basic "NginxStatus";
@@ -1574,16 +1568,37 @@ fi
 
 ## 限流
 
-* 漏桶算法实现
+* 连接数限流模块ngx_http_limit_conn_module
+    - 可以根据定义的键来限制每个键值的连接数，如同一个IP来源的连接数。并不是所有的连接都会被该模块计数，只有那些正在被处理的请求（这些请求的头信息已被完全读入）所在的连接才会被计数
+* 漏桶算法实现的请求限流模块ngx_http_limit_req_module
     - limit_req_zone定义在http块中，$binary_remote_addr 表示保存客户端IP地址的二进制形式
     - Zone定义IP状态及URL访问频率的共享内存区域。zone=keyword标识区域的名字，以及冒号后面跟区域大小。16000个IP地址的状态信息约1MB，所以示例中区域可以存储160000个IP地址。
     - Rate定义最大请求速率。示例中速率不能超过每秒100个请求
     - burst排队大小，nodelay不限制单个请求间的时间
 
 ```
-limit_req_zone $binary_remote_addr zone=mylimit:10m rate=100r/s;
+## 连接数限流
+# http{}中加上如下配置实现限制 限制每个用户的并发连接数，取名one
+limit_conn_zone $binary_remote_addr zone=one:10m; # 针对单个IP的并发限制
+limit_conn_zone $ server_name zone=perserver:10m; # 针对域名进行并发限制
+#配置记录被限流后的日志级别，默认error级别
+limit_conn_log_level error;
+#配置被限流后返回的状态码，默认返回503
+limit_conn_status 503;
 
-limit_req zone=mylimit burst=20 nodelay;
+# server{}里加上如下代码
+#限制用户并发连接数为1
+limit_conn one 1;
+
+ab -n 5 -c 5 http://10.23.22.239/index.html
+
+## 请求数限制
+# http{}中配置 区域名称为one，大小为10m，平均处理的请求频率不能超过每秒一次。
+limit_req_zone $binary_remote_addr zone=one:10m rate=100r/s;
+
+# 在server{}中配置 设置每个IP桶的数量为5
+limit_req zone=one burst=5;
+ab -n 10 -c 10 http://10.23.22.239/index.html
 ```
 
 ## 黑白名单

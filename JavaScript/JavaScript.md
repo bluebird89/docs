@@ -1568,6 +1568,15 @@ JSON.parse('{"name":"小明","age":14}', function (key, value) {
 * 对象模型是基于原型实现的，特点是简单，缺点是理解起来比传统的类－实例模型要困难，
 * 最大的缺点是继承的实现需要编写大量代码，并且需要正确实现原型链。
 
+* JavaScript最重要的概念可能在于原型链。基于原型链的委托机制就是原型继承的本质。
+    - 所有的数据都是对象，JS的根对象是Object.prototype对象，它是一个空对象
+    - 要得到一个对象，不是通过实例化类而是找到一个对象作为原型来克隆它
+    - 对象会记住它的原型；就JS而言，对象的原型其实是其构造器的原型（new），包含在其隐藏属性_proto_中
+    - 如果对象无法响应某个请求，它会把这个请求委托给自己的原型
+    - JavaScript的原型最初都是由Object.prototype对象克隆而来；
+    - 对象构造器的原型并不限于Object.prototype,可以动态的指向其他对象； A.prototype=obj
+    - 原型链并非无限长，到顶（Object.prototype）以后，如果没有找到就会返回undefined；
+
 ```javascript
 var Bird = {
     fly: function () {
