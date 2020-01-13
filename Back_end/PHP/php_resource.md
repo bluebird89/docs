@@ -378,6 +378,7 @@ open http://127.0.0.1:8000
     - (https://github.com/KnpLabs/KnpMenu)[KnpMenu]: 一个菜单库
 * 资源管理 Asset Management 管理，压缩和最小化web站点资源的工具
     - (https://github.com/tedious/JShrink)[JShrink]: 一个JavaScript的最小化库
+    - [mrclay/minify](https://github.com/mrclay/minify):Combines. minifies, and serves CSS or Javascript files
     - (https://github.com/meenie/munee)[Munee]: 一个资源优化库
     - (https://github.com/puli/repository)[Puli]: 一个检测资源绝对路径的库
     - (https://github.com/Bee-Lab/bowerphp)[BowerPHP]: Bower的一个PHP实现，一个web包管理工具

@@ -23,6 +23,7 @@
 
 * [看得见的统计概率入门](https://seeing-theory.brown.edu/cn.html)
 * [基本概率和统计学概念](https://www.edx.org/course/introduction-to-probability-0)
+* [Introduction to Probability, Statistics, and Random Processes](https://probabilitycourse.com/)
 
 ## 数值分析与算法
 
