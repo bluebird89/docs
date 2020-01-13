@@ -239,7 +239,6 @@ class Captain
 }
 ```
 
-
 ## 分类
 
 * 创建型模式：对类的实例化过程的抽象。一些系统在创建对象时，需要动态地决定怎样创建对象，创建哪些对象，以及如何组合和表示这些对象。创建模式描述了怎样构造和封装这些动态的决定。包含类的创建模式和对象的创建模式。
@@ -359,7 +358,7 @@ class Captain
 
 ## 图书
 
-* Design Patterns - Elements of Reusable Object-Oriented Software（中文译名：设计模式 - 可复用的面向对象软件元素）
+* Design Patterns:Elements of Reusable Object-Oriented Software（设计模式 - 可复用的面向对象软件元素）
 * 《[Head First 设计模式（中文版）](https://book.douban.com/subject/2243615/)》
 * 《[设计模式 : 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)》
 

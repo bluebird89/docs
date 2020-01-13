@@ -84,6 +84,8 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - Tin Hat Linux
   - OpenBSD
   - [Manjaro](https://manjaro.org/)
+  - [elementary OS](https://elementary.io/)
+  - [openEuler](https://openeuler.org/):
 * 最小化：将在旧的硬件上运行；尽可能最小化
   - ArchBang
   - [Lubuntu](https://kubuntu.org/)
