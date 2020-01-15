@@ -24,6 +24,7 @@ rustc --version
 [source.crates-io]
 registry = "https://github.com/rust-lang/crates.io-index"
 replace-with = 'ustc'
+
 [source.ustc]
 registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 
@@ -34,23 +35,11 @@ replace-with = "rustcc"
 registry = "https://code.aliyun.com/rustcc/crates.io-index"
 ```
 
-## Cargo
-
-Rust’s build system and package manager.
-
-```sh
-cargo --verison
-cargo new project
-cargo build --realse
-cargo run|check|update
-
-rustup component add rls --toolchain stable-x86_64-apple-darwin
-```
-
 ## 工具
 
 * 包资源
     - [rayon-rs/rayon](https://github.com/rayon-rs/rayon):Rayon: A data parallelism library for Rust
+    - [Docs.rs](https://docs.rs/)
 * 框架
     - [tokio-rs/tokio](https://github.com/tokio-rs/tokio):A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language. https://tokio.rs
     - [yewstack/yew](https://github.com/yewstack/yew):Rust / Wasm framework for building client web apps https://yew.rs/docs/

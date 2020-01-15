@@ -618,6 +618,7 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * [tailwindcss/tailwindcss](https://github.com/tailwindcss/tailwindcss):A utility-first CSS framework for rapid UI development.  https://tailwindcss.com/
 * element
 * iView
+* [daneden/animate.css](https://github.com/daneden/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. http://daneden.github.io/animate.css
 
 ## 实例
 

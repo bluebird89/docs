@@ -222,7 +222,8 @@
     - (https://github.com/php-mock/php-mock)[PHP-Mock]: 一个基于PHP函数的模拟库
     - (https://github.com/phpspec/phpspec)[PHPSpec]: 一个基于功能点设计的单元测试库
     - (https://qa.php.net/write-test.php)[PHPT]: 一个使用PHP本身的测试工具
-    - (https://github.com/sebastianbergmann/phpunit)[PHPUnit]: 一个单元测试框架
+    - [PHPUnit](https://github.com/sebastianbergmann/phpunit): 一个单元测试框架
+    - [mockery/mockery](https://github.com/mockery/mockery):Mockery is a simple yet flexible PHP mock object framework for use in unit testing with PHPUnit, PHPSpec or any other testing framework. Its core goal is to offer a test double framework with a succinct API capable of clearly defining all possible object operations and interactions using a human readable Domain Specific Language (DSL). http://docs.mockery.io
     - (https://github.com/phpspec/prophecy)[Prophecy]: 一个可选度很高的模拟框架
     - (https://github.com/mauris/samsui)[Samsui]: 另一个伪数据生成库
     - (https://github.com/mikey179/vfsStream)[VFS Stream]: 一个用于测试的虚拟文件系统流的包装器

@@ -1,6 +1,15 @@
 # [rust-lang/cargo](https://github.com/rust-lang/cargo)
 
-The Rust package manager https://doc.rust-lang.org/cargo
+Rust’s build system and package manager. https://doc.rust-lang.org/cargo
+
+```sh
+cargo --verison
+cargo new project
+cargo build --realse
+cargo run|check|update
+
+rustup component add rls --toolchain stable-x86_64-apple-darwin
+```
 
 ## 工具
 

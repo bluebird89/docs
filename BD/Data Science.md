@@ -113,6 +113,7 @@ SAS网站的Eight levels of analytics
 * [jeroenjanssens/data-science-at-the-command-line](https://github.com/jeroenjanssens/data-science-at-the-command-line):Data Science at the Command Line https://datascienceatthecommandline.com
 * [metabase/metabase](https://github.com/metabase/metabase):The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 https://metabase.com
 * [EasyExcel](https://github.com/alibaba/easyexcel):一个用来对 Java 进行解析、生成 Excel 的框架
+* [bokeh/bokeh](https://github.com/bokeh/bokeh):Interactive Data Visualization in the browser, from Python https://bokeh.org
 
 ## 参考
 

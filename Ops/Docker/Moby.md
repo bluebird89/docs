@@ -1088,6 +1088,7 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 * [doctrine/annotations](https://github.com/doctrine/annotations):Annotations Docblock Parser
 * [jwilder/dockerize](https://github.com/jwilder/dockerize):Utility to simplify running applications in docker containers
 * [GoogleContainerTools/distroless](https://github.com/GoogleContainerTools/distroless):🥑 Language focused docker images, minus the operating system.
+* [dockersamples/docker-swarm-visualizer](https://github.com/dockersamples/docker-swarm-visualizer):A visualizer for Docker Swarm Mode using the Docker Remote API, Node.JS, and D3
 
 ## 参考
 
