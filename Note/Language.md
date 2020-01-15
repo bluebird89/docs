@@ -64,13 +64,13 @@
 
 ## 工具
 
-* [Ruby regular expression editor](https://rubular.com):a Ruby regular expression editor
 * [bazelbuild/bazel](https://github.com/bazelbuild/bazel):a fast, scalable, multi-language and extensible build system https://bazel.build
 
 ## 语言
 
 * [unisonweb/unison](https://github.com/unisonweb/unison):Next generation programming language, currently in development http://unisonweb.org
 * [vlang/v](https://github.com/vlang/v):Simple, fast, safe, compiled language for developing maintainable software. Compiles itself in <1s with zero dependencies. 1.0 release in December 2019. https://vlang.io
+* [taichi-dev/taichi](https://github.com/taichi-dev/taichi):The Taichi programming language http://taichi.graphics
 
 ## 资源
 

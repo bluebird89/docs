@@ -230,6 +230,7 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 
 * [Vue.js——60分钟快速入门](http://www.cnblogs.com/keepfool/p/5619070.html)
 * [vuejs/vue-docs-zh-cn](https://github.com/vuejs/vue-docs-zh-cn)
+* [NLRX-WJC/Learn-Vue-Source-Code](https://github.com/NLRX-WJC/Learn-Vue-Source-Code):🔥 🔥逐行剖析Vue.js源码 在线阅读地址https://nlrx-wjc.github.io/Learn-Vue-Source-Code/
 * [官方文档](https://cn.vuejs.org/v2/guide/)
 * [文档](https://vuejs.org/v2/guide/)
 * [vuejs/awesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
