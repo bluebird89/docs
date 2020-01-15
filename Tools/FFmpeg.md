@@ -2,11 +2,41 @@
 
 Mirror of git://source.ffmpeg.org/ffmpeg.git  Fast Forward Moving Pictures Experts Group https://ffmpeg.org
 
+## 概念
+
+* 视频文件本身其实是一个容器（container），里面包括了视频和音频，也可能有字幕等其他内容
+* 格式：`ffmpeg -formats`
+  - MP4
+  - MKV
+  - WebM
+  - AVI
+* 编码 `ffmpeg -codecs` 视频和音频都需要经过编码，才能保存成文件
+  - 视频
+    + H.262(有版权)
+    + H.264(有版权)
+    + H.265(有版权)
+    + VP8(无版权)
+    + VP9(无版权)(无版权)
+    + AV1(无版权)
+  - 音频
+    + MP3
+    + AAC
+* 编码器
+  - 视频
+    + libx264：最流行的开源 H.264 编码器
+    + NVENC：基于 NVIDIA GPU 的 H.264 编码器
+    + libx265：开源的 HEVC 编码器
+    + libvpx：谷歌的 VP8 和 VP9 编码器
+    + libaom：AV1 编码器
+  - 音频
+    + libfdk-aac
+    + aac
+
 ## use
 
 * video player
 * Directshow Filter
-* 转码工具
+* 转码
 
 ## Multimedia
 
@@ -40,21 +70,39 @@ Mirror of git://source.ffmpeg.org/ffmpeg.git  Fast Forward Moving Pictures Exper
 * ffmpeg 快速的音频、视频编码器/解码器
 * ffplay 多媒体播放器
 * ffprobe 多媒体文件特征解析
-* 同时FFmpeg编译之后包含libavcodec、libavformat、libavdevice、libavfilter、libavutil、libpostproc、libswresample、libswscale
+* FFmpeg编译之后包含libavcodec、libavformat、libavdevice、libavfilter、libavutil、libpostproc、libswresample、libswscale
 
 ## use
 
-* -hide_banner hide ffmpeg compilation information
-* -ss  seek for that second to start its processing, so it will extract frames from that moment. (00:00:07.000 is the second 7 from the video in this case)
-* -vframes the number of frames to extract (1 in this case). FFMPEG will extract only one image and it will use thumb.jpg as output file. You might notice that in this case we are not using a pattern like "%04d" as we are extracting only one frame.
-* -vf
-    * "fps=1" so ffmpeg will filter the video and extract one image (1 frame per second) for the output;
-    * fps=1/5 extract one image every 5 seconds
-    * -vsync vfr: This is a parameter that tells the filter to use a variable bitrate video synchronization. If we do not use this parameter ffmpeg will fail to find only the keyframes and shoud extract other frames that can be not processed correctly.
-* -s 480x300: frame size of image to output (image resized to fit dimensions)
-* -f image2: forces format
-* -b:v 64k  video bitrate of the output file to 64 kbit/s
-* -r 24 frame rate of the output file to 24 fps
+* `ffmpeg {1} {2} -i {3} {4} {5}`
+  - 全局参数
+  - 输入文件参数
+  - 输入文件
+  - 输出文件参数
+  - 输出文件
+* 参数
+  - -hide_banner:show ffmpeg compilation information
+  - -ss  seek for that second to start its processing, so it will extract frames from that moment. (00:00:07.000 is the second 7 from the video in this case)
+  - -vframes the number of frames to extract (1 in this case). FFMPEG will extract only one image and it will use thumb.jpg as output file. You might notice that in this case we are not using a pattern like "%04d" as we are extracting only one frame.
+  - -vf
+      - "fps=1" so ffmpeg will filter the video and extract one image (1 frame per second) for the output;
+      - fps=1/5 extract one image every 5 seconds
+      - -vsync vfr: This is a parameter that tells the filter to use a variable bitrate video synchronization. If we do not use this parameter ffmpeg will fail to find only the keyframes and shoud extract other frames that can be not processed correctly.
+  - -s 480x300: frame size of image to output (image resized to fit dimensions)
+  - -f image2: forces format
+  - -b:v 64k  video bitrate of the output file to 64 kbit/s
+  - -r 24 frame rate of the output file to 24 fps
+  - -c：指定编码器
+  - -c copy：直接复制，不经过重新编码（比较快）
+  - -c:v：指定视频编码器
+  - -c:a：指定音频编码器
+  - -an：去除音频流
+  - -vn：去除视频流
+  - -preset：指定输出的视频质量，会影响文件的生成速度，有以下几个可用的值 ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow。
+  - -y：不经过确认，输出时直接覆盖同名文件
+* 转换容器格式（transmuxing）指的是，将视频文件从一种容器转到另一种容器 `ffmpeg -i input.mp4 -c copy output.webm`
+* 调整码率（transrating）指的是，改变编码的比特率，一般用来将视频文件的体积变小
+* 裁剪（cutting）指的是，截取原始视频里面的一个片段，输出为一个新视频。可以指定开始时间（start）和持续时间（duration），也可以指定结束时间（end）。
 
 ```sh
 sudo apt|yum -y install ffmpeg
@@ -62,9 +110,17 @@ sudo apt|yum -y install ffmpeg
 ffmpeg -h full
 
 ffmpeg.exe [global options] [input file options] -i input_file [output file options] output_files
-
+ffmpeg -i input.mp4 # 查看视频文件的元信息，比如编码格式和比特率
 ffmpeg -i test.mp4 -r 1 -f image2 image-%5d.jpeg
 ffmpeg -ss 0.5 -i inputfile.mp4 -t 1 -s 480x300 -f image2 imagefile.jpg
+
+ffmpeg \
+-y \ # 全局参数
+-c:a libfdk_aac -c:v libx264 \ # 输入文件参数
+-i input.mp4 \ # 输入文件
+-c:v libvpx-vp9 -c:a libvorbis \ # 输出文件参数
+output.webm # 输出文件
+
 ffprobe -show_format test.mp4
 
 ffmpeg -i test.flv 2>&1 | grep 'Duration' | cut -d ' ' -f 4 | sed s/,// # duration
@@ -82,10 +138,53 @@ ffmpeg -i video.webm -vf "select=eq(pict_type\,I)" -vsync vfr thumb%04d.jpg -hid
 
 ffmpeg -r 1 -i input.m2v -r 24 output.avi
 
-
 ffmpeg -i test.mp4 -acodec aac -vn output.aac # 提取音频
 ffmpeg -i input.mp4 -vcodec copy -an output.mp4 # 提取视频
-ffmpeg -ss 00:00:15 -t 00:00:05 -i input.mp4 -vcodec copy -acodec copy output.mp4 # -ss表示开始切割的时间，-t表示要切多少。上面就是从15秒开始，切5秒钟出来。
+ffmpeg -ss 00:00:15 -t 00:00:05 -i input.mp4 -vcodec copy -acodec copy output.mp4 # -ss表示开始切割的时间，-t表示要切多少。上面就是从15秒开始，切5秒钟出来
+ffmpeg -ss 2.5 -i [input] -to 10 -c copy [output]
+# 从指定时间开始，连续对1秒钟的视频进行截图
+ffmpeg \
+-y \
+-i input.mp4 \
+-ss 00:01:24 -t 00:00:01 \
+output_%3d.jpg
+
+# 指定只截取一帧
+ffmpeg \
+-ss 01:23:45 \
+-i input \
+-vframes 1 -q:v 2 \
+output.jpg
+
+# 指定码率最小为964K，最大为3856K，缓冲区大小为 2000K
+ffmpeg \
+-i input.mp4 \
+-minrate 964K -maxrate 3856K -bufsize 2000K \
+output.mp4
+
+# 从 1080p 转为 480p
+ffmpeg \
+-i input.mp4 \
+-vf scale=480:-1 \
+output.mp4
+
+# 从视频里面提取音频（demuxing）
+ffmpeg \
+-i input.mp4 \
+-vn -c:a copy \
+output.aac
+
+# 添加音轨（muxing）
+ffmpeg \
+-i input.aac -i input.mp4 \
+output.mp4
+
+# 将音频文件，转为带封面的视频文件
+ffmpeg \
+-loop 1 \
+-i cover.jpg -i input.mp3 \
+-c:v libx264 -c:a aac -b:a 192k -shortest \
+output.mp4
 ```
 
 ## Tool
