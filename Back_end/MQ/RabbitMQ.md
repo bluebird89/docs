@@ -74,6 +74,27 @@ sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 sudo rabbitmq-plugins enable rabbitmq_management
 sudo chown -R rabbitmq:rabbitmq /var/lib/rabbitmq/
 http://[your-vultr-server-IP]:15672/ # 管理地址
+
+
+git clone git://github.com/alanxz/rabbitmq-c.git
+cd rabbitmq-c
+mkdir build  && cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+cmake --build . --target install
+
+wget http://pecl.php.net/get/amqp-1.9.1.tgz
+tar zvxf amqp-1.9.1.tgz
+cd amqp-1.9.1
+phpize
+./configure --with-amqp
+make && make install
+
+[ 17%] Linking C shared library librabbitmq.dylib
+ld: cannot link directly with dylib/framework, your binary is not an allowed client of /usr/lib/libcrypto.dylib for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make[2]: *** [librabbitmq/librabbitmq.4.4.0.dylib] Error 1
+make[1]: *** [librabbitmq/CMakeFiles/rabbitmq.dir/all] Error 2
+make: *** [all] Error 2
 ```
 
 ## 原理
