@@ -50,7 +50,7 @@ gem install bundler
 #  learn more about the environment and configuration of gems
 gem env home
 
-gem install rails
+gem install rails -v [5.0.1]
 #  install a specific version of Rails
 gem search '^rails$' --all
 gem install rails -v 4.2.7
@@ -82,16 +82,6 @@ gem install bundler
 echo 'bundler' >> "$(brew --prefix rbenv)/default-gems"
 
 echo 'gem: --no-document' >> ~/.gemrc
-```
-
-## install
-
-```sh
-curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-sudo apt-get install -y nodejs
-gem install rails -v 5.0.1
-rbenv rehash
-rails -v
 ```
 
 ### SQL
@@ -147,10 +137,6 @@ rake db:create
 rails server
 ```
 
-## 包管理
-
-* [Gems](https://rubygems.org):Find, install, and publish RubyGems.
-
 ## 教程
 
 * [Ruby on Rails Tutorial](https://www.railstutorial.org/book)
@@ -162,6 +148,8 @@ rails server
 
 ## 工具
 
+* 包管理
+    - [Gems](https://rubygems.org):Find, install, and publish RubyGems.
 * [rbenv/rbenv](https://github.com/rbenv/rbenv):Groom your app’s Ruby environment
 * [Bundler](https://bundler.io/)
 * [activeadmin/activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. https://activeadmin.info
@@ -173,6 +161,7 @@ rails server
 * [plataformatec/devise](https://github.com/plataformatec/devise):Flexible authentication solution for Rails with Warden. http://blog.plataformatec.com.br/tag/devise/
 * [sferik/rails_admin](https://github.com/sferik/rails_admin):RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data
 * [capistrano/capistrano](https://github.com/capistrano/capistrano):Remote multi-server automation tool http://www.capistranorb.com
+* [Ruby regular expression editor](https://rubular.com):a Ruby regular expression editor
 
 ## 参考
 

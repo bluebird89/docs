@@ -1,5 +1,6 @@
 # 面向对象程序设计语言(OOP)
 
+* 最重要的思想:代码重用
 * 所有的对象都是通过类来描绘
 * 越抽象、越顶层、越脱离具体某一实现的设计，越能提高代码的灵活性，越能应对未来的需求变化。好的代码设计，不仅能应对当下的需求，而且在将来需求发生变化的时候，仍然能够在不破坏原有代码设计的情况下灵活应对。
 
@@ -36,6 +37,8 @@
 
 ### 多态（Polymorphism）
 
+* polymorphism (from Greek πολύς, polys, "many, much" and μορφή, morphē, "form, shape") is the provision of a single interface to entities of different types. A polymorphic type is one whose operations can also be applied to values of some other type, or types.
+* 对一个操作（接口）使用多种数据类型
 * 条件
     - 支持父类对象可以引用子类对象
         + 实现与声明绑定
@@ -210,6 +213,10 @@ class AlarmDoor extends Door implements Alarm {
     - 封装具体的实现细节
     - 为实现类定义抽象的接口
 * 只要搞清楚了每条原则是为了解决什么样的问题而产生的
+* 接口继承要远重要于类继承
+    - 一种控制反转:通过抽象出一系列接口，并在这些接口上进行操作，使得控制逻辑不依赖于具体的实现
+    - 具体的实现可以并不关心控制逻辑如何使用自己，它们会在需要的时候被调用。由此，使用对象的逻辑和对象本身充分解耦，由接口这座桥梁将二者联系起来。这样，代码得到了最大程度的被重用。
+    - Liskov substitution principle（里氏变换原则）:if S is a subtype of T, then objects of type T may be replaced with objects of type S
 
 ## 组合优于继承
 
