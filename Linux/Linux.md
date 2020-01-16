@@ -659,6 +659,23 @@ source ~/.zshrc
 sudo update-alternatives --config editor # 修改默认编辑器
 ```
 
+## 服务配置
+
+```
+# /lib/systemd/system/goweb.service
+[Unit]
+Description=goweb
+
+[Service]
+Type=simple
+Restart=always # ensures that systemd will always try to restart the program if it stops
+RestartSec=5s # wait time between restart attempts
+ExecStart=/home/user/go/go-web/main #  the point of entry for this service
+
+[Install]
+WantedBy=multi-user.target
+```
+
 ## 启动项
 
 * 启动目录： /etc/rc.d/rc[0~6].d
@@ -1364,7 +1381,6 @@ chmod u=rwx,g+rwx,o-rwx test
 chmod 000  filename   # 所有用户没有任何权限
 sudo chown user1:user1 /etc/apt/sources.list # 修改文件的属主或属组 change file ownership
 
-usermod -a -G sudo username
 chown [-R] [帐号名称] [文件或目录]
 chown [-R] [帐号名称]:[群组名称] [文件或目录]
 
@@ -1438,6 +1454,7 @@ sudo <useradd>  # </useradd>只创建用户，创建完了需要用 passwd lilei
 groups <zhangwang>  # </zhangwang>查看用户属于那些组（groups）   // 每
 cat /etc/group | sort 命令查看某组包含那些成员  # /etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
 sudo usermod -G sudo <student>  # </student>不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，我们可以使用usermod命令把它加入sudo组用以具备相应的权限。
+usermod -a -G sudo username
 sudo deluser student --remove-home：删除用户及用户相关文件；
 
 who # 查看谁在线
