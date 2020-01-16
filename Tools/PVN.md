@@ -98,10 +98,10 @@ OpenVPN提供了两种认证方法：
 
 提供客户端配置文件 client.ovpn
 
-```
+```sh
 apt-get install openvpn # 客户端
 
-/etc/openvpn/ # 客户端默认配置文件放置服务端配置文件
+# 客户端默认配置文件放置服务端配置文件
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /etc/openvpn/
 
 openvpn /etc/openvpn/client.ovpn # 连接
@@ -151,8 +151,9 @@ pip install shadowsocks
 * [firefly-proxy](https://github.com/yinghuocho/firefly-proxy):A proxy software to help circumventing the Great Firewall.
 * [XX-net/XX-Net](https://github.com/XX-net/XX-Net)a web proxy tool
 * [googlehosts/hosts](https://github.com/googlehosts/hosts)
-* [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core):A platform for building proxies to bypass network restrictions. https://www.v2ray.com/
-* [yanue/V2rayU](https://github.com/yanue/V2rayU):V2rayU,基于v2ray核心的mac版客户端,用于科学上网,使用swift编写,支持vmess,shadowsocks,socks5等服务协议,支持订阅, 支持二维码,剪贴板导入,手动配置,二维码分享等 https://github.com/yanue/V2rayU
+* [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core):A platform for building proxies to bypass network restrictions. <https://www.v2ray.com/>
+    - [yanue/V2rayU](https://github.com/yanue/V2rayU):V2rayU,基于v2ray核心的mac版客户端,用于科学上网,使用swift编写,支持vmess,shadowsocks,socks5等服务协议,支持订阅, 支持二维码,剪贴板导入,手动配置,二维码分享等 https://github.com/yanue/V2rayU
+    - [jiangxufeng/v2rayL](https://github.com/jiangxufeng/v2rayL):v2ray linux GUI客户端，支持订阅、vemss、ss等协议，自动更新订阅、检查版本更新
 * [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
 * [iMeiji/shadowsocks_install](https://github.com/iMeiji/shadowsocks_install)
 * Perfect Privacy
@@ -165,19 +166,18 @@ pip install shadowsocks
 * [Alvin9999/new-pac](https://github.com/Alvin9999/new-pac)
 * BT sync
 * [ShadowsocksR-Live/shadowsocksr-native](https://github.com/ShadowsocksR-Live/shadowsocksr-native):从容翻越党国敏感日 ShadowsocksR (SSR) native implementation for all platforms powered by libuv, GFW terminator
-*  客户端
-    - freevpn
-    - [Potatso lite](https://itunes.apple.com/us/app/potatso-lite/id1239860606)
-    - [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
-    - [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu https://shadowsocks.be
-
+* 客户端
+  - freevpn
+  - [Potatso lite](https://itunes.apple.com/us/app/potatso-lite/id1239860606)
+  - [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
+  - [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu https://shadowsocks.be
 
 ## 参考
 
 * [Shadowsocks (简体中文)](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 * [openvpn](https://help.ubuntu.com/lts/serverguide/openvpn.html)
 * [gfwlist/gfwlist](https://github.com/gfwlist/gfwlist):The one and only one gfwlist here
-* [How To Set Up an OpenVPN Server on Ubuntu 16.04(https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04)
+* [How To Set Up an OpenVPN Server on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04)
 * [max2max/freess](https://github.com/max2max/freess)
-* [haoel/haoel.github.io ](https://github.com/haoel/haoel.github.io)
+* [haoel/haoel.github.io](https://github.com/haoel/haoel.github.io)
 * [JadaGates/ShadowsocksBio](https://github.com/JadaGates/ShadowsocksBio):SS的前世今生
