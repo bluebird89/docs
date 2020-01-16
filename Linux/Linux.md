@@ -1658,8 +1658,11 @@ mkdir /home/myshare
 chmod 777 /home/myshare
 
 sudo smbpasswd  -a  henry # add user
+sudo ufw allow 'Samba'
+# /etc/samba/smb.conf 添加下列设定
+ ntlm auth = yes
+#======================= Share Definitions =====================
 
-vim /etc/samba/smb.conf # 添加下列设定
 [share]
 comment=This is samba dir
 browseable = yes
@@ -1673,7 +1676,7 @@ public = yes
 available = yes
 writable = yes
 
-sudo service samba status | start | stop | restart
+sudo service samba|smbd status | start | stop | restart
 
 # mac 链接 finder中com＋K
 smb://192.168.100.106
