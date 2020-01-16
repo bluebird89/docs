@@ -101,6 +101,7 @@ service mysql start
   - 软件源镜像服务器可能会有多个，有时候某些特定的软件需要我们添加特定的源；
   - deb包是Debian，Ubuntu等Linux发行版的软件安装包，扩展名为.deb，是类似于rpm的软件包，Debian，Ubuntu系统不推荐使用deb软件包，因为要解决软件包依赖问题，安装也比较麻烦。下载相应deb软件包，使用dpkg命令来安装
   - 源管理
+    + software & updates:select best server
     + 配置路径
       * /etc/apt/sources.list
       * /etc/apt/sources.list.d
@@ -567,7 +568,7 @@ top [-] [d] [p] [q] [c] [C] [S] [s]  [n]，参数
 * c 显示整个命令行而不只是显示命令名。
 * 多核CPU监控:在top基本视图中，按键盘数字“1”，可监控每个逻辑CPU的状况
 * 统计信息区:前五行是系统整体的统计信息。
-  * 第一行是任务队列信息，同 uptime 命令的执行结果
+  - 第一行是任务队列信息，同 uptime 命令的执行结果
     + 10:37:35  当前时间
     + up 25 days, 17:29 系统运行时间，格式为时:分
     + 1 user  当前登录用户数

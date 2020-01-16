@@ -2039,6 +2039,15 @@ for i in $IO_SQL_STATUS; do
 done
 ```
 
+## 问题
+
+```
+# Sorry, user henry is not allowed to execute '/usr/bin/apt update' as root
+# 从recovery 模式进入到root 用户界面
+# /etc/sudoers
+henry ALL=(ALL) NOPASSWD:ALL
+```
+
 ## 教程
 
 * [learnbyexample/command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):⚡️ From finding text to search and replace, from sorting to beautifying text and more 🎨
