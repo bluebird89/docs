@@ -166,7 +166,6 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
         + HostOnly: 指定之后javascript无法读取cookie
 * 关闭连接或者为后续请求重用连接
 * 报文：HTTP/1.1以及更早的HTTP协议报文都是语义可读的。在HTTP/2中，这些报文被嵌入到了一个新的二进制结构，帧。帧允许实现很多优化，比如报文头部的压缩和复用。即使只有原始HTTP报文的一部分以HTTP/2发送出来，每条报文的语义依旧不变，客户端会重组原始HTTP/1.1请求。因此用HTTP/1.1格式来理解HTTP/2报文仍旧有效。
-    -
 
 ```
 // 源生的form提交可设置enctype="multipart/form-data"，一般表单中有文件会自动设为该值
@@ -840,6 +839,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
     - 解决方案
         + [certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx)
         + [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
+        + [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh)
 
 ![HTTPS签名和验证](../static/https-ac.png "HTTPS签名和验证")
 ![HTTP vs HTTPS](../static/https.png "HTTP与HTTPS区别")
@@ -859,15 +859,17 @@ client(内置证书机构证书) <---------------------------   证书机构
                       <---------------------------   server(对称加密)
                             共享秘钥加密 HTTP
                      --------------------------->　　server(对称加密)
-```
 
-```
+
 adduser letsencrypt
 usermod -aG sudo letsencrypt
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get update
 sudo apt-get install python-certbot-apache
 sudo certbot --apache -d packagist.domain.com
+
+acme.sh --issue -d thinkphp.com -w /home/henry/Workspace/thinkphp/public
+acme.sh --issue --debug -d thinkphp.com -d henry.thinkphp.com -w /home/henry/Workspace/thinkphp/public
 ```
 
 ### CORS(跨域资源共享)
@@ -1025,7 +1027,7 @@ $un_data = unserialize_php($data);
         + 因为TCP是需要保证有序的，假如单个TCP连接同时承载了四路逻辑连接，其中某个逻辑连接丢包了，则其它三路都会受影响，都必须从丢包的时刻开始重传，这无疑是极大的浪费
         + 测试表明，如果丢包率超过2%，那么HTTP/2甚至不如HTTP 1.1，因为HTTP 1.1中各连接物理隔离，不会互相影响。
 
-```
+```sh
 pear install HTTP2
 
 openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 365 -nodes

@@ -8,6 +8,16 @@
     - 客户端通过http请求获取json、xml等数据格式数据，并对数据进行解析显示
 * 各种语言都会有封装好的客户端插件，如java的solrj、python的solrpy，php的php-solr-client，根据提供的api进行索引和查询
 
+## 安装
+
+* startup configuration in /etc/default/solr.in.sh
+
+```
+wget http://mirror.bit.edu.cn/apache/lucene/solr/8.4.1/solr-8.4.1.tgz
+tar xzf solr-8.4.1.tgz solr-8.4.1/bin/install_solr_service.sh --strip-components=2
+sudo ./install_solr_service.sh solr-8.4.1.tgz
+```
+
 ## 原理
 
 * 创建
@@ -26,4 +36,4 @@
 
 ## 参考
 
-* solr cookbook
+* [solr cookbook]

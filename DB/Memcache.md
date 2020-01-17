@@ -21,13 +21,14 @@ memcached.exe -d install|start|stop
 ## Mac
 brew install libmemcached memcached
 brew install zlib
+brew services start memcached -d
 
 yum install libmemcached libmemcached-devel
 yum install zlib zlib-devel # 压缩
 yum install memcached
 
 # ubuntu
-sudo apt-get install memcached php-memcached
+sudo apt-get install memcached libmemcached-tools php-memcached
 
 wget http://memcached.org/latest
 tar -zxvf memcached-1.x.x.tar.gz
@@ -41,13 +42,13 @@ make && make test && sudo make install
 # -l是监听的服务器IP地址，可以有多个地址
 # -p是设置Memcache监听的端口
 /usr/local/bin/memcached -d
-brew services start memcached -d
-
 memcached -d -m 2048 -l 10.0.0.40 -p 11211
 memcached -p 11211 -m 64m -vv # 显示了调试信息
 
 # 安装客户端
 sudo pecl install memcached
+
+sudo systemctl restart|status memcached
 ```
 
 ## 概念
@@ -66,14 +67,22 @@ sudo pecl install memcached
 
 ## 配置
 
-* -p memcached监听的TCP端口
-* -l 监听的ip地址，127.0.0.1是本机，当然也可以写上你的服务器IP，如：10.0.0.10，这是我服务器的IP地址，如果你需要多个服务器都能够读取这台memcached的缓存数据，那么就必须设定这个ip
+* -p Specifies on which port Memcached should listen. The default port is 11211
+* -l 监听的ip地址，127.0.0.1是本机，当然也可以写上你的服务器IP，如：10.0.0.10，这是服务器的IP地址，如果需要多个服务器都能够读取这台memcached的缓存数据，那么就必须设定这个ip
 * -d 以daemon方式运行，将程序放入后台
-* -u memcached的运行用户，我设定的是nobody
-* -P memcached的pid文件路径
-* -m memcached可以使用的最大内存数量
-* -c memcached同时可以接受的最大的连接数
-* -s memcached的socket文件路径
+* -u  Specifies with which user the service will use to run. By default, the service will run as root
+* -P 的pid文件路径
+* -m 可以使用的最大内存数量 Caps the amount of memory available to Memcached
+* -c Caps the number of concurrent connections. The default is 1024.
+* -s socket文件路径
+
+```
+# /etc/memcached.conf
+-l 127.0.0.1 # bind Memcached to the local interface to avoid potential DDOS attacks
+-U 0 # restrict UDP  sudo netstat -plunt
+
+memcstat --servers="localhost" 
+```
 
 ## 方法
 
