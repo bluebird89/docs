@@ -1945,6 +1945,14 @@ docker build -t nginx .
 docker images nginx
 ```
 
+## 问题
+
+```
+FastCGI sent in stderr: “Primary script unknown”
+fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name; 改为
+fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+```
+
 ## 模块
 
 * [winshining/nginx-http-flv-module](https://github.com/winshining/nginx-http-flv-module):Media streaming server based on nginx-rtmp-module, HTTP-FLV/RTMP/HLS/DASH supported.

@@ -84,7 +84,7 @@ export PS1="\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h: \[\e[0;35m\]\W\[\e[m\] \\$  "
 alias # list
 
 alias amazonbackup='s3backup'
-alias apt-get='sudo apt-get'
+alias apt='sudo apt-get'
 
 alias name=value
 alias name='command'
@@ -2057,6 +2057,10 @@ henry ALL=(ALL) NOPASSWD:ALL
 * [Linux 教程](https://www.runoob.com/linux/linux-tutorial.html)
 * [linuxcommand](http://linuxcommand.org)
 * [Advanced Bash-Scripting Guide](http://tldp.org/LDP/abs/html/index.html)
+* [denysdovhan/bash-handbook](https://github.com/denysdovhan/bash-handbook):book For those who wanna learn Bash https://git.io/bash-handbook
+* [dylanaraps / pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
+* [Idnan / bash-guide](https://github.com/Idnan/bash-guide):A guide to learn bash
+
 
 ```sh
 cat demo.json | jq '.id,.name,.status,.attachments'
@@ -2095,12 +2099,15 @@ ccache gcc foo.c
     - [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
 * help
     - [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
+    - [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/
+    - [jaywcjlove / linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
 * 查看
     - [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings.
 * [fasd](https://github.com/clvv/fasd) 增强cd命令
 * [bat](https://github.com/sharkdp/bat) 增强 cat 命令
-* [exa](https://github.com/ogham/exa) 增强 ls 命令
-* [ranger](https://github.com/ranger/ranger) 在很多目录上浏览各种文件 比 cd 和 cat 更有效率，甚至可以在终端预览图片
+* [ogham/exa](https://github.com/ogham/exa):A modern version of ‘ls’. https://the.exa.website/
+* [alexanderepstein/Bash-Snippets](https://github.com/alexanderepstein/Bash-Snippets):A collection of small bash scripts for heavy terminal users
+* [ranger](https://github.com/ranger/ranger) 在多目录上浏览各种文件 比 cd 和 cat 更有效率，甚至可以在终端预览图片
 * [prettyping](https://github.com/denilsonsa/prettyping) 图示化的ping
 * [ncdu]()比 du 好用多了,另一个选择是 [nnn](https://github.com/jarun/nnn)
 * [asciinema](https://asciinema.org/)和 [svg-trem](https://github.com/marionebl/svg-term-cli) 如果想把的命令行操作建录制成一个 SVG 动图
@@ -2110,16 +2117,15 @@ ccache gcc foo.c
 * [sshrc](https://github.com/Russell91/sshrc ) 在登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置
 * 搜索
     - [ack](https://beyondgrep.com/)、[ag](https://github.com/ggreer/the_silver_searcher)和 [rg](https://github.com/BurntSushi/ripgrep)是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到配置在 .gitignore 中的规则
-    - [fzf](https://github.com/junegunn/fzf) 如果想搜索以前打过的命令，不要再用 Ctrl +R,命令行下模糊搜索工具，能够交互式智能搜索并选取文件或者内容，配合终端ctrl-r历史命令搜索简直完美
+    - [fzf](https://github.com/junegunn/fzf) cherry_blossom A command-line fuzzy finder `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf ~/.fzf/install`
     - [fd](https://github.com/sharkdp/fd) 是一个比 find 更简单更快的命令，会自动地忽略掉一些你配置在 .gitignore 中的文件，以及 .git 下的文件
 * monitor
-    - [ogham/exa](https://github.com/ogham/exa):A modern version of ‘ls’. https://the.exa.website/
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序的
     - nslookup:指定查询的类型，可以查到DNS记录的生存时间还可以指定使用哪个DNS服务器进行解释
     - [htop](http://hisham.hm/htop/): 提供更美观、更方便的进程监控工具
-    - [atop](http://www.atoptool.nl/):按日记录进程的日志供以后分析。它也能显示所有进程的资源消耗。它还会高亮显示已经达到临界负载的资源。
+    - [atop](http://www.atoptool.nl/):按日记录进程的日志供以后分析。也能显示所有进程的资源消耗。还会高亮显示已经达到临界负载的资源。
     - [apachetop](https://github.com/JeremyJones/Apachetop) 会监控 apache 网络服务器的整体性能。它主要是基于 mytop。它会显示当前的读取进程、写入进程的数量以及请求进程的总数。
-    - [ftptop](http://www.proftpd.org/docs/howto/Scoreboard.html) 给你提供了当前所有连接到 ftp 服务器的基本信息，如会话总数，正在上传和下载的客户端数量以及客户端是谁。
+    - [ftptop](http://www.proftpd.org/docs/howto/Scoreboard.html) 给提供了当前所有连接到 ftp 服务器的基本信息，如会话总数，正在上传和下载的客户端数量以及客户端是谁。
     - [mytop](http://jeremy.zawodny.com/mysql/mytop/) 是一个很简洁的工具，用于监控 mysql 的线程和性能。它能让你实时查看数据库以及正在处理哪些查询。
     - [powertop](https://01.org/powertop) 可以帮助你诊断与电量消耗和电源管理相关的问题。它也可以帮你进行电源管理设置，以实现对你服务器最有效的配置。你可以使用 tab 键切换选项卡
     - [iotop](http://guichaz.free.fr/iotop/) 用于检查 I/O 的使用情况，并为你提供了一个类似 top 的界面来显示。它按列显示读和写的速率，每行代表一个进程。当发生交换或 I/O 等待时，它会显示进程消耗时间的百分比。
@@ -2138,23 +2144,25 @@ ccache gcc foo.c
     - [IPTState](http://www.phildev.net/iptstate/index.shtml) 可以让你观察流量是如何通过 iptables，并通过你指定的条件来进行排序。该工具还允许你从 iptables 的表中删除状态信息。
     - [darkstat](https://unix4lyfe.org/darkstat/) 能捕获网络流量并计算使用情况的统计数据。该报告保存在一个简单的 HTTP 服务器中，它为你提供了一个非常棒的图形用户界面。
     - [vnStat]( http://humdi.net/vnstat/) 是一个网络流量监控工具，它的数据统计是由内核进行提供的，其消耗的系统资源非常少。系统重新启动后，它收集的数据仍然存在。有艺术感的系统管理员可以使用它的颜色选项。
-    - netstat 是一个内置的工具，它能显示 TCP 网络连接，路由表和网络接口数量，被用来在网络中查找问题。
-    - ss 命令能够显示的信息比 netstat 更多，也更快。如果你想查看统计结果的总信息，你可以使用命令 ss -s
+    - netstat 是一个内置的工具，显示 TCP 网络连接，路由表和网络接口数量，被用来在网络中查找问题。
+    - ss:iproute2 包附带的另一个工具，允许查询 socket 的有关统计信息,显示的信息比 netstat 更多，也更快。如果想查看统计结果的总信息，你可以使用命令 ss -s
     - [Nmap](http://nmap.org/) 可以扫描你服务器开放的端口并且可以检测正在使用哪个操作系统。但你也可以将其用于 SQL 注入漏洞、网络发现和渗透测试相关的其他用途。
     - [MTR](http://www.bitwizard.nl/mtr/) 将 traceroute 和 ping 的功能结合到了一个网络诊断工具上。当使用该工具时，它会限制单个数据包的跳数，然后监视它们的到期时到达的位置。然后每秒进行重复。
     - [Justniffer](http://justniffer.sourceforge.net/) 是 tcp 数据包嗅探器。使用此嗅探器你可以选择收集低级别的数据还是高级别的数据。它也可以让你以自定义方式生成日志。比如模仿 Apache 的访问日志。
-* man
-    * [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/
 * hex
     - [sharkdp/hexyl](https://github.com/sharkdp/hexyl):A command-line hex viewer
 * git
     - [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
+    - [magicmonty/bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):An informative and fancy bash prompt for Git users
     - tig：字符模式下交互查看git项目，可以替代git命令。
 * download
     - you-get: 非常强大的媒体下载工具，支持youtube、google+、优酷、芒果TV、腾讯视频、秒拍等视频下载。
     - axel：多线程下载工具，下载文件时可以替代curl、wget。
 * prompt
     - [b-ryan/powerline-shell](https://github.com/b-ryan/powerline-shell):A beautiful and useful prompt for your shell
+        + pre-patched and adjusted fonts for usage with the Powerline statusline plugin `sudo apt-get install fonts-powerline`
+        + Powerline a statusline plugin for vim, and provides statuslines and prompts for several other applications `pip install powerline-status`
+    - [starship/starship](https://github.com/starship/starship):cometmilky_way The cross-shell prompt for astronauts https://starship.rs
 * sql
     - mycli：mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令。
 * json

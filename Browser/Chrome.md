@@ -128,6 +128,7 @@ V       enter visual line mode
 
 * Ctrl键或Cmd并点链接：打开一个新的标签页而不离开现有的页面
 * Shift键或Cmd并点链接：在一个全新的窗口中打开一个链接
+* ubuntu:d+o:搜索浏览记录
 * 空格键向下滚动一个完整的页面长度 Shift键和空格键：相反操作
 * Ctrl键或Cmd+Shift+T：重新打开你最近关闭的标签
 * Ctrl+Shift+D：打开一堆选项卡并想把这些页面都保存起来

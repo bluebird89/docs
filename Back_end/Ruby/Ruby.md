@@ -11,38 +11,70 @@ The Ruby Programming Language https://www.ruby-lang.org/
 ## [安装](https://gorails.com/setup/ubuntu/14.04)
 
 ```sh
-# Ubuntu 依赖nodejs
+# ubuntu
+sudo apt-get install ruby-full
+
+# 准备
+sudo apt install curl
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
 sudo apt-get update
-# install ruby depency
-sudo apt install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev
+sudo apt-get install git-core zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn autoconf bison build-essential  libreadline6-dev libncurses5-dev  libgdbm5 libgdbm-dev
 # install rbenv
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-source ~/.bashrc
-type rbenv
-# install the ruby-build
+exec $SHELL
+
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+exec $SHELL
 
-## 更新rbenv
-cd ~/.rbenv
-git pull
-
+rbenv install -l
+rbenv install 2.7.0
+rbenv global 2.7.0
+#  卸载
+rbenv uninstall 2.1.3
 # 卸载 rbenv,屏蔽~/.bashrc
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-
 rm -rf `rbenv root`
 
-## list all the available versions of Ruby
-rbenv install -l
-rbenv install 2.5.1
-#  set it asy our default version of Ruby
-rbenv global 2.5.1
-#  卸载
-rbenv uninstall 2.1.3
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+curl -sSL https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+rvm install 2.4.0
+rvm use 2.4.0 --default
+
+# Mac
+brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
+# echo 'eval "$(rbenv init -)"' >> ~/Projects/config/env.sh
+rbenv install 2.1.1
+rbenv global 2.1.1
+
+# rvm 是 Ruby 的版本管理工具，其作用是在系统中安装若干个不同版本的 Ruby，且不让它们之间发生冲突
+sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+curl -sSL https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+rvm install 2.7.0
+rvm use 2.7.0 --default
+rvm uninstall 1.9.2
+
+## compile
+wget http://ftp.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0.tar.gz
+tar -xzvf ruby-2.7.0.tar.gz
+cd ruby-2.7.0/
+./configure
+make
+sudo make install
 
 ruby -v
+
+# Managing gems in application
+echo 'bundler' >> "$(brew --prefix rbenv)/default-gems"
 # turn off local documentation generation
 echo "gem: --no-document" > ~/.gemrc
 # Bundler is a tool that manages gem dependencies for projects
@@ -58,30 +90,6 @@ gem install rails -v 4.2.7
 rbenv rehash
 
 rails -v
-
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-curl -sSL https://get.rvm.io | bash -s stable
-source ~/.rvm/scripts/rvm
-rvm install 2.4.0
-rvm use 2.4.0 --default
-
-# Mac
-brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
-# echo 'eval "$(rbenv init -)"' >> ~/Projects/config/env.sh
-rbenv install 2.1.1
-rbenv global 2.1.1
-
-# rvm 是 Ruby 的版本管理工具，其作用是在系统中安装若干个不同版本的 Ruby，且不让它们之间发生冲突
-curl -sSL https://get.rvm.io | bash -s stable
-rvm install 2.3.1
-rvm use 2.3.1
-rvm uninstall 1.9.2
-
-# Managing gems in application
-gem install bundler
-echo 'bundler' >> "$(brew --prefix rbenv)/default-gems"
-
-echo 'gem: --no-document' >> ~/.gemrc
 ```
 
 ### SQL
