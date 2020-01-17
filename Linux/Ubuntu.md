@@ -71,6 +71,9 @@ ping 8.8.8.8检测连接
 # host  文件修改 以Ubuntu为主要使用系统，不用修改hosts can access google
 sudo su # switch root
 curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
+
+# 时区设置 
+sudo dpkg-reconfigure tzdata
 ```
 
 ## 服务管理
@@ -95,6 +98,7 @@ service mysql start
   - ubuntu.16替换apt-get为apt
 * 软件源管理
   - 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
+  - snap
   - 根据这些信息在相关的服务器上下载软件安装
   - 安装某个软件时，如果该软件有其它依赖程序，系统会为我们自动安装所以来的程序；
   - 如果本地的数据库不够新，可能就会发生搜索不到的情况，这时候需要我们更新本地的数据库，使用命令sudo apt-get update可执行更新；

@@ -283,6 +283,7 @@ sudo apt-get --purge remove mariadb-server
     - 严格模式
 
 ```sh
+\s|status
 chmod 644 /etc/my.cnf # 文件 /etc/my.conf 只能由 root 用户修改
 cat /dev/null > ~/.mysql_history # 删除 MySQL shell 历史
 
@@ -467,11 +468,14 @@ mysqld --initialize
 ### 权限管理
 
 * all权限:`SELECT,INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER`
+* 插件
+    - auth_socket plugin：　`sudo mysql` 直接登录
 
 ```sql
 mysql -hlocalhost  -P 3306 -u root -p  # 生成用户root与空密码登陆,第一次登陆mysql的时候是没有密码的
 exit|quit| \q
 
+SELECT user,authentication_string,plugin,host FROM mysql.user;
 CREATE USER 'lee'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456Ac&' # 添加用户
 GRANT ALL PRIVILEGES ON test.*/user.*/ TO lee@'localhost';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root密码' WITH GRANT OPTION;
@@ -2584,8 +2588,9 @@ http://localhost:3000
     + MySQLWorkbench
     + SQLyog   `ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
     + [phpmyadmin/phpmyadmin](https://github.com/phpmyadmin/phpmyadmin):A web interface for MySQL and MariaDB https://www.phpmyadmin.net/
-        * `sudo apt-get install phpmyadmin`
-        * 
+        * `sudo add-apt-repository ppa:phpmyadmin/ppa`
+        * `export DEBIAN_FRONTEND=noninteractive`
+        * `sudo apt-get -yq install phpmyadmin`
     + Sequel Pro
     + navicate
         * [DoubleLabyrinth/navicat-keygen](https://github.com/DoubleLabyrinth/navicat-keygen):A keygen for Navicat

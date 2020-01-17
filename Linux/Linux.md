@@ -741,19 +741,25 @@ halt｜reboot｜poweroff
 * 设备驱动程序：处理和管理硬件控制器的软件就是设备驱动程序
 * I/O端口包括控制寄存器、状态寄存器和数据寄存器三大类
 * 根据访问外设寄存器的不同方式，将CPU分为两大类：一类是“内存映射”(memory-mapped)方式，另一类是“I/O映射”(I/O- mapped)方式。
+* LSB(Linux Standard Base)
 
 ```sh
+arch| uname -m
+
 ## 硬件
 dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI)
 hdparm -i /dev/hda 罗列一个磁盘的架构特性
 hdparm -tT /dev/sda 在磁盘上执行测试性读取操作
 cat /proc/cpuinfo 显示CPU info的信息
+cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c # cpu型号
+at /proc/cpuinfo | grep physical | uniq -c # 物理cpu颗数
 cat /proc/interrupts 显示中断
 cat /proc/meminfo 校验内存使用
 cat /proc/swaps 显示哪些swap被使用
 cat /proc/version 显示内核的版本
 cat /proc/net/dev 显示网络适配器及统计
 cat /proc/mounts 显示已加载的文件系统
+lscpu
 lspci -tv 罗列 PCI 设备
 lsusb -tv 显示 USB 设备
 
@@ -998,6 +1004,7 @@ lsof -d 4 # 显示使用fd为4的进程
 lsof -i -U # 显示所有打开的端口和UNIX domain文件
 
 netstat -tunlp # 显示tcp，udp的端口和进程等相关
+sudo netstat -plunt
 netstat -tln | grep 8000
 netstat -tunlp|grep (port)  # 指定端口号进程情况
 netstat -anp | grep LISTEN
