@@ -46,10 +46,23 @@ sudo httpd -k stop
 sudo apachectl -k restart
 
 ## ubuntu
+sudo apt-get install apache2 -y
+sudo ufw app list
+sudo ufw app info "Apache Full"
+sudo ufw allow in "Apache Full"
+
 sudo apt-get install python-software-properties
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
 sudo apt-get install apache2 libapache2-mod-php7.2 mysql-server php7.2 php7.2-xml php7.2-gd php7.2-opcache php7.2-mbstring php7.2-mysql
+sudo apt-get install php-{bcmath,bz2,intl,gd,mbstring,mysql,zip,fpm} -y
+
+sudo apt install php libapache2-mod-php php-mysql
+
+# /etc/apache2/mods-enabled/dir.conf
+<IfModule mod_dir.c>
+    DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+</IfModule>
 
 sudo mkdir -p /var/www/unixmen1.local/public_html
 sudo chown -R $USER:$USER /var/www/unixmen1.local/public_html/
@@ -86,6 +99,12 @@ CustomLog ${APACHE_LOG_DIR}/access.log combined
 # after it has been globally disabled with "a2disconf".
 #Include conf-available/serve-cgi-bin.conf
 </VirtualHost>
+
+a2ensite polr.conf # Enable the configuration
+a2dissite 000-default.conf
+sudo apache2ctl configtest
+
+a2enmod rewrite # Enable the Apache rewrite module.
 
 sudo service apache2 restart
 sudo vi /etc/hosts

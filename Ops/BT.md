@@ -142,6 +142,10 @@ memcached安装目录
 /etc/init.d/memcached reload
 ```
 
+## 工具
+
+* [sentora](http://sentora.org/):
+
 ## 参考
 
 * [腾讯云主机放行安全组教程](https://www.bt.cn/bbs/thread-1229-1-1.html)
