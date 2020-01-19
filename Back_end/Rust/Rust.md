@@ -5,7 +5,7 @@ Empowering everyone to build reliable and efficient software. https://www.rust-l
 ## 安装
 
 ```sh
-curl https://sh.rustup.rs -sSf | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 brew install rustup
 rustup update # 更新
