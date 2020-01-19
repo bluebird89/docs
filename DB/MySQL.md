@@ -69,7 +69,7 @@ sudo apt install mysql-server
 
 sudo apt remove mysql-server mysql-common
 sudo apt autoremove mysql-server
-
+sudo mysql_ssl_rsa_setup --uid=mysql # 
 sudo rm /var/lib/mysql/ -R
 sudo rm /etc/mysql/ -R
 

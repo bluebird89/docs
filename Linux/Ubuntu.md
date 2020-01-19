@@ -212,7 +212,8 @@ sudo dpkg --configure -a # fixing broken dependencies
 
 sudo apt install aptitude
 sudo aptitude install <packagename>
-sudo aptitude -f install <packagename>
+dpkg --get-selections | grep hold
+sudo aptitude -f install <packagename> # Unable to correct problems, you have held broken packages
 
 sudo apt-get install -f # fix software database is boken
 
