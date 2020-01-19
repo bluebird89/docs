@@ -53,6 +53,8 @@ brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
 # echo 'eval "$(rbenv init -)"' >> ~/Projects/config/env.sh
 rbenv install 2.1.1
 rbenv global 2.1.1
+# rbenv works by creating a directory of shims, which point to the files used by the Ruby version that's currently enabled. Through the rehash sub-command, rbenv maintains shims in that directory to match every Ruby command across every installed version of Ruby on your server.
+rbenv rehash
 
 # rvm 是 Ruby 的版本管理工具，其作用是在系统中安装若干个不同版本的 Ruby，且不让它们之间发生冲突
 sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
@@ -86,10 +88,11 @@ gem install rails -v [5.0.1]
 #  install a specific version of Rails
 gem search '^rails$' --all
 gem install rails -v 4.2.7
-# rbenv works by creating a directory of shims, which point to the files used by the Ruby version that's currently enabled. Through the rehash sub-command, rbenv maintains shims in that directory to match every Ruby command across every installed version of Ruby on your server.
-rbenv rehash
+
 
 rails -v
+
+gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
 ```
 
 ### SQL
