@@ -1,6 +1,6 @@
 # [antirez/redis](https://github.com/antirez/redis)
 
-Redis is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. http://redis.ioRedis是一个数据结构存储，可用作数据库、缓存和消息中间件。
+Redis is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. http://redis.io
 
 ## 原理
 
@@ -72,13 +72,10 @@ systemctl enable|status|stop redis-server
 
 ## 配置
 
-* `/etc/redis/redis.conf`
-
 ```
-CONFIG GET *
-CONFIG set requirepass "shouce.ren" # 设置密码
-CONFIG get requirepass
+openssl rand 60 | openssl base64 -A # 生产密码
 
+# /etc/redis/redis.conf
 daemonize no
 pidfile /var/run/redis.pid
 bind 127.0.0.1
@@ -96,6 +93,15 @@ requirepass foobared # 配置了连接密码，客户端在连接Redis时需要�
 appendonly no # 指定是否在每次更新操作后进行日志记录，Redis在默认情况下是异步的把数据写入磁盘，如果不开启，可能会在断电时导致一段时间内的数据丢失。因为 redis本身同步数据文件是按上面save条件来同步的，所以有的数据会在一段时间内只存在于内存中。默认为no
 appendfilename appendonly.aof # 更新日志文件名，默认为appendonly.aof
 
+rename-command FLUSHDB ""
+rename-command FLUSHALL ""
+rename-command DEBUG ""
+rename-command SHUTDOWN SHUTDOWN_MENOT
+rename-command CONFIG ASC12_CONFIG
+
+CONFIG GET *
+CONFIG set requirepass "shouce.ren" # 设置密码
+CONFIG get requirepass
 
 <add key="RedisServerIP" value="redis:uuid845tylabc123@139.198.13.12:4125"/>
 <!-- 提供的 Redis 环境是单机版配置。如果 Redis 是主从配置，则还需设置 RedisSlaveServerIP-->

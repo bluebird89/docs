@@ -48,7 +48,7 @@ rpm -qa | grep erlang
 # 卸载
 rpm -e esl-erlang
 
-## 进入rabbitmq/bin目录
+## rabbitmq/bin
 rabbitmq-plugins enable rabbitmq_management
 # 启动rabbitmq服务
 rabbitmq-server -detached
@@ -59,22 +59,33 @@ rabbitmqctl set_user_tags albert administrator
 # ubuntu
 wget http://packages.erlang-solutions.com/site/esl/esl-erlang/FLAVOUR_1_general/esl-erlang_20.1-1~ubuntu~xenial_amd64.deb
 sudo dpkg -i esl-erlang_20.1-1\~ubuntu\~xenial_amd64.deb
+
 echo "deb https://dl.bintray.com/rabbitmq/debian xenial main" | sudo tee /etc/apt/sources.list.d/bintray.rabbitmq.list
 
 wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add -
-sudo apt-get install rabbitmq-server
+sudo apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA"
 
-sudo systemctl start|enable rabbitmq-server.service
-sudo rabbitmqctl status
+## Install RabbitMQ signing key
+curl -fsSL https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | sudo apt-key add -
+# /etc/apt/sources.list.d/bintray.rabbitmq.list
+deb https://dl.bintray.com/rabbitmq-erlang/debian bionic erlang
+deb https://dl.bintray.com/rabbitmq/debian bionic main
 
-sudo rabbitmqctl add_user admin password 
-sudo rabbitmqctl set_user_tags admin administrator
-sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
+sudo apt-get install rabbitmq-server -y --fix-missing
 
-sudo rabbitmq-plugins enable rabbitmq_management
+sudo systemctl  status|start|enable rabbitmq-server.service
+
+sudo rabbitmqctl stop|status  # 查看服务状态
+sudo rabbitmqctl list_users # 查看当前所有用户
+sudo rabbitmqctl list_user_permissions guest # 查看默认guest用户的权限
+sudo rabbitmqctl add_user username password # 添加新用户
+sudo rabbitmqctl set_user_tags username administrator # 设置用户tag
+sudo rabbitmqctl set_permissions -p / username ".*" ".*" ".*" # 赋予用户默认vhost的全部操作权限
+sudo rabbitmqctl delete_user guest # 删掉默认用户(由于RabbitMQ默认的账号用户名和密码都是guest。为了安全起见, 可以删掉默认用户）
+
+sudo rabbitmq-plugins disable|enable rabbitmq_management
 sudo chown -R rabbitmq:rabbitmq /var/lib/rabbitmq/
 http://[your-vultr-server-IP]:15672/ # 管理地址
-
 
 git clone git://github.com/alanxz/rabbitmq-c.git
 cd rabbitmq-c
