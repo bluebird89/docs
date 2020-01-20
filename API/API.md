@@ -736,6 +736,7 @@ print dec_message   // Hello World!
     - Yapi
     - [RAP2](http://rap2.taobao.org)
     - DOClever
+    - [star7th / showdoc](https://github.com/star7th/showdoc):ShowDoc is a tool greatly applicable for an IT team to share documents online一个非常适合IT团队的在线API文档、技术文档工具 https://www.showdoc.cc
 * 抓包
     - Charles
     - fiddler
@@ -766,3 +767,4 @@ print dec_message   // Hello World!
 * [jsonapi](https://jsonapi.org/format/)
 * [shieldfy/API-Security-Checklist](https://github.com/shieldfy/API-Security-Checklist):Checklist of the most important security countermeasures when designing, testing, and releasing your API
 * [microsoft/api-guidelines](https://github.com/microsoft/api-guidelines):Microsoft REST API Guidelines
+* [Best Practices for Designing a Pragmatic RESTful API](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
