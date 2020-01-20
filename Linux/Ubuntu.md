@@ -450,6 +450,7 @@ interval:
   swipe: 1
   pinch: 1
 
+# Postman
 tar -zxvf Postman*.tar.gz
 sudo mv Postman /opt/Postman
 sudo cp ~/下载/desktops/postman.desktop /usr/share/applications/
