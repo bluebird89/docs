@@ -33,9 +33,13 @@ export PATH=$JAVA_HOME/bin:$PATH
 java -version
 
 wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.2.zip
+
 wget https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.1.0/elasticsearch-2.1.0.tar.gz
 unzip elasticsearch-5.5.2.zip
 tar xf elasticsearch-2.1.0.tar.gz
+
+curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.5.1-amd64.deb
+sudo dpkg -i elasticsearch-7.5.1-amd64.deb
 
 # ubuntu
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
@@ -441,6 +445,3 @@ setup.kibana:
 * [Elasticsearch 权威指南](https://fuxiaopang.gitbooks.io/learnelasticsearch/)
 * [Kibana User Guide](https://www.elastic.co/guide/en/kibana/current/index.html)
 * [Logstash 参考文档](https://www.elastic.co/guide/e...
-
-极客时间版权所有: https://time.geekbang.org/course/detail/197-102665)
-
