@@ -138,6 +138,15 @@ remote_user: root
     + `ansible -m setup --connection=local localhost`
     + `ansible -i ./hosts remote -m setup`
 
+* 目录
+  - defaults: This directory lets you set default variables for included or dependent roles. Any defaults set here can be overridden in playbooks or inventory files.
+  - files: This directory contains static files and script files that might be copied to or executed on a remote server.
+  - handlers: All handlers that were in your playbook previously can now be added into this directory.
+  - meta: This directory is reserved for role metadata, typically used for dependency management.. For example, you can define a list of roles that must be applied before the current role is invoked.
+  - templates: This directory is reserved for templates that will generate files on remote hosts. Templates typically use variables defined on files located in the vars directory, and on host information that is collected at runtime.
+  - tasks: This directory contains one or more files with tasks that would normally be defined in the tasks section of a regular Ansible playbook. These tasks can directly reference files and templates contained in their respective directories within the role, without the need to provide a full path to the file.
+  - vars: Variables for a role can be specified in files inside this directory and then referenced elsewhere in a role.
+
 ```sh
 # roles入口文件 /etc/ansible/site.yml
 - hosts: webservers
@@ -340,6 +349,72 @@ ansible-playbook -i ./hosts nginx.yml
       service:
         name: nginx
         state: reloaded
+
+- hosts: all
+  become: true
+  vars:
+    doc_root: /var/www/example
+  tasks:
+    - name: Update apt
+      apt: update_cache=yes
+
+    - name: Install Apache
+      apt: name=apache2 state=latest
+
+    - name: Create custom document root
+      file: path={{ doc_root }} state=directory owner=www-data group=www-data
+
+    - name: Set up HTML file
+      copy: src=index.html dest={{ doc_root }}/index.html owner=www-data group=www-data mode=0644
+
+    - name: Set up Apache virtual host file
+      template: src=vhost.tpl dest=/etc/apache2/sites-available/000-default.conf
+      notify: restart apache
+
+  handlers:
+    - name: restart apache
+      service: name=apache2 state=restarted
+```
+
+## 语法
+
+* template
+
+```
+## loop
+- name: Install Packages
+  apt: name={{ item }} state=latest
+  with_items:
+     - vim
+     - git
+     - curl
+
+- hosts: all
+  become: true
+  vars:
+     packages: [ 'vim', 'git', 'curl' ]
+  tasks:
+     - name: Install Package
+       apt: name={{ item }} state=latest
+       with_items: "{{ packages }}"
+
+- name: Shutdown Debian Based Systems
+  command: /sbin/shutdown -t now
+  when: ansible_os_family == "Debian"
+
+## conditions
+- name: Check if PHP is installed
+  register: php_installed
+  command: php -v
+  ignore_errors: true
+
+- name: This task is only executed if PHP is installed
+  debug: var=php_install
+  when: php_installed|success
+
+- name: This task is only executed if PHP is NOT installed
+  debug: msg='PHP is NOT installed'
+  when: php_installed|failed
 ```
 
 ### 常用模块及API
@@ -404,7 +479,7 @@ ansible webservers -m user -a "name=johnd state=absent remove=yes" # 删除用�
 * Vault允许您加密任何Yaml文件，通常将其作用与变量文件，Vault不会加密文件和模板，只能使用Yaml文件。
 * 在创建加密文件时，系统会询问您必须使用的密码，以便稍后在调用角色或Playbook时进行编辑。 将密码保存在安全的地方 `ansible-vault create vars/main.yml`
 
-## ansible-galaxy
+## [ansible-galaxy](https://galaxy.ansible.com/docs/)
 
 ## Usage
 
@@ -420,6 +495,6 @@ ansible webservers -m user -a "name=johnd state=absent remove=yes" # 删除用�
 * [Ansible中文权威指南](http://www.ansible.com.cn/?wztf_magedu)
 * [非常好的Ansible入门教程](https://blog.csdn.net/pushiqiang/article/details/78126063)
 * [An Ansible2 Tutoria](https://serversforhackers.com/c/an-ansible2-tutorial)
-* 一些模块： https://docs.ansible.com/ansible/latest/modules/modules_by_category.html
+* [模块](https://docs.ansible.com/ansible/latest/modules/modules_by_category.html)
 * 博文： https://www.redhat.com/en/blog/integrating-ansible-jenkins-cicd-process
 * https://linux.cn/article-4215-1.html
