@@ -98,6 +98,7 @@
 * 《Head First设计模式(Head First Design Patterns)》:面向对象程序设计
 * 《深入浅出设计模式》
 * 《The Clean Coder》：专业程序员的行为守则
+* 分布式系统原理与范型
 * 《Working Effectively With Legacy Code》
 
 ## 算法与数据结构
