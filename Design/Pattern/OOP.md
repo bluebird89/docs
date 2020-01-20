@@ -1,6 +1,21 @@
 # 面向对象程序设计语言(OOP)
 
 * 最重要的思想:代码重用
+    - 代码复用性（Code Reusability）：从代码开发者的角度来讲的
+    - 代码复用（Code Resue）：从代码使用者的角度来讲的
+    - DRY 原则：“不重复”并不代表“可复用”
+    - 规则
+        + 减少代码耦合
+        + 满足单一职责原则
+        + 模块化
+        + 业务与非业务逻辑分离：越是跟业务无关的代码越是容易复用，越是针对特定业务的代码越难复用
+        + 通用代码下沉
+        + 利用面对对象特性
+            * 利用继承，将公共的代码抽取到父类，子类复用父类的属性和方法
+            * 多态，动态地替换一段代码的部分逻辑，让这段代码可复用
+            * 越抽象、越不依赖具体的实现，越容易复用
+            * 封装成模块，隐藏可变的细节、暴露不变的接口，就越容易复用。
+        + 应用模板等设计模式
 * 所有的对象都是通过类来描绘
 * 越抽象、越顶层、越脱离具体某一实现的设计，越能提高代码的灵活性，越能应对未来的需求变化。好的代码设计，不仅能应对当下的需求，而且在将来需求发生变化的时候，仍然能够在不破坏原有代码设计的情况下灵活应对。
 * 目的：提高代码的可读性、可扩展性、复用性、可维护性
@@ -71,6 +86,11 @@
 * 通过规定好的接口进行交互，每一层其实对它的上层或下层都是一个黑盒，不关心它内部的实现，只关心它们之间进行交互的接口，接口是规定的信息，要给到什么都是规定好的。
 * 优点
     - 可以对任何一层进行独立升级、优化，只要保持接口不变那么这个模型整体就不会有问题，比如说物理层从以太网线到光纤，网络速度大大提高，但是整个技术革新的时候，其他层是没有做更多工作的，工作只在物理层完成
+    - 代码复用
+    - 隔离变化
+    - 隔离关注点
+    - 提高代码的可测试性
+    - 应对系统的复杂性
 * MVC：M 表示 Model，V 表示 View，C 表示 Controller
 * 前后端
     - UserEntity 和 UserRepository 组成了数据访问层 负责数据读写
@@ -264,6 +284,7 @@ public class Ostrich implements Tweetable, EggLayable {//鸵鸟
 * 用接口抽象出类的特性
 * 用抽象类来复用代码
 
+* 把合适的代码放到合适的类中。合理地划分代码可以实现代码的高内聚、低耦合，类与类之间的交互简单清晰，代码整体结构一目了然
 * 划分职责进而识别出有哪些类
     - 把需求描述中的名词罗列出来，作为可能的候选类，然后再进行筛选
     - 根据需求描述，把其中涉及的功能点，一个一个罗列出来，然后再去看哪些功能点职责相近，操作同样的属性，可否应该归为同一个类
@@ -276,6 +297,7 @@ public class Ostrich implements Tweetable, EggLayable {//鸵鸟
         + 聚合（Aggregation）是一种包含关系，A 类对象包含 B 类对象，B 类对象的生命周期可以不依赖 A 类对象的生命周期，也就是说可以单独销毁 A 类对象而不影响 B 对象。比如课程与学生之间的关系
         + 组合（Composition）也是一种包含关系。A 类对象包含 B 类对象，B 类对象的生命周期跟依赖 A 类对象的生命周期，B 类对象不可单独存在，比如鸟与翅膀之间的关系
         + 依赖（Dependency）是一种比关联关系更加弱的关系，包含关联关系。不管是 B 类对象是 A 类对象的成员变量，还是 A 类的方法使用 B 类对象作为参数或者返回值、局部变量，只要 B 类对象和 A 类对象有任何使用关系
+    - 上下层系统之间的调用倾向于通过同步接口，同层之间的调用倾向于异步消息调用。
 * 将类组装起来并提供执行入口。
 
 ## 单一职责原则 SRP Single Responsibility Principle
@@ -327,4 +349,126 @@ public class Ostrich implements Tweetable, EggLayable {//鸵鸟
         + 一方面更侧重于接口的设计
         + 另一方面它的思考角度也是不同的。接口隔离原则提供了一种判断接口的职责是否单一的标准：通过调用者如何使用接口来间接地判定。如果调用者只使用部分接口或接口的部分功能，那接口的设计就不够职责单一。
 
-## 参考
+## 迪米特法则 LOD Law of Demeter
+
+* Each unit should have only limited knowledge about other units: only units “closely” related to the current unit. Or: Each unit should only talk to its friends; Don’t talk to strangers.
+* 不该有直接依赖关系的类之间，不要有依赖；有依赖关系的类之间，尽量只依赖必要的接口（也就是定义中的“有限知识”）
+* 实现代码的“高内聚、松耦合”
+    - 高内聚：相近的功能应该放到同一个类中，不相近的功能不要放到同一个类中
+    - 松耦合：类与类之间的依赖关系简单清晰
+    - “高内聚”用来指导类本身的设计，“松耦合”用来指导类与类之间依赖关系的设计。
+
+```java
+# 既不想违背高内聚的设计思想，也不想违背迪米特法则
+public interface Serializable {
+  String serialize(Object object);
+}
+
+public interface Deserializable {
+  Object deserialize(String text);
+}
+
+public class Serialization implements Serializable, Deserializable {
+  @Override
+  public String serialize(Object object) {
+    String serializedResult = ...;
+    ...
+    return serializedResult;
+  }
+
+  @Override
+  public Object deserialize(String str) {
+    Object deserializedResult = ...;
+    ...
+    return deserializedResult;
+  }
+}
+
+public class DemoClass_1 {
+  private Serializable serializer;
+
+  public Demo(Serializable serializer) {
+    this.serializer = serializer;
+  }
+  //...
+}
+
+public class DemoClass_2 {
+  private Deserializable deserializer;
+
+  public Demo(Deserializable deserializer) {
+    this.deserializer = deserializer;
+  }
+  //...
+}
+```
+
+## 依赖反转原则
+
+* 控制反转（IOC）Inversion Of Control
+    - “控制”指的是对程序执行流程的控制
+    - “反转”指的是在没有使用框架之前，程序员自己控制整个程序的执行,在使用框架之后，整个程序的执行流程可以通过框架来控制。流程的控制权从程序员“反转”到了框架。
+* 依赖注入（DI）Dependency Injection:不通过 new() 的方式在类内部创建依赖类对象，而是将依赖的类对象在外部创建好之后，通过构造函数、函数参数等方式传递（或注入）给类使用。
+    - 提高了代码的扩展性:可以灵活地替换依赖的类
+    - 依赖注入框架（DI Framework）:只需要通过依赖注入框架提供的扩展点，简单配置一下所有需要创建的类对象、类与类之间的依赖关系，就可以实现由框架来自动创建对象、管理对象的生命周期、依赖注入等事情
+        + Google Guice、Java Spring、Pico Container、Butterfly Container 等
+* 依赖反转原则（DIP）Dependency Inversion Principle
+    - High-level modules shouldn’t depend on low-level modules. Both modules should depend on abstractions. In addition, abstractions shouldn’t depend on details. Details depend on abstractions.
+    - 在调用链上，调用者属于高层，被调用者属于低层。
+    - 主要用来指导框架层面的设计
+
+```java
+// 依赖注入的实现方式
+public class Notification {
+    private MessageSender messageSender;    // 通过构造函数将messageSender传递进来
+    public Notification(MessageSender messageSender) {
+        this.messageSender = messageSender;
+    }
+    public void sendMessage(String cellphone, String message) {
+        //...省略校验逻辑等...
+        this.messageSender.send(cellphone, message);
+    }
+}
+
+public interface MessageSender {
+    void send(String cellphone, String message);
+}
+// 短信发送类
+public class SmsSender implements MessageSender {
+    @Override
+    public void send(String cellphone, String message) { //....
+    }
+}
+
+// 站内信发送类
+public class InboxSender implements MessageSender {
+    @Override
+    public void send(String cellphone, String message) { //....
+    }
+}
+
+//使用Notification
+MessageSender messageSender = new SmsSender();
+Notification notification = new Notification(messageSender);
+notification.sendMessage("13918942177", "短信验证码：2346");
+```
+
+## KISS Keep It Simple and Stupid
+
+* 考虑逻辑复杂度、实现难度、代码的可读性
+* 工具类的功能都比较通用和全面，所以，在代码实现上，需要考虑和处理更多的细节，执行效率就会有所影响
+* 本身就复杂的问题，用复杂的方法解决，并不违背 KISS 原则。
+* 原则
+    - 不要使用同事可能不懂的技术来实现代码。比如前面例子中的正则表达式，还有一些编程语言中过于高级的语法等。
+    - 不要重复造轮子，要善于使用已经有的工具类库。经验证明，自己去实现这些类库，出 bug 的概率会更高，维护的成本也比较高。
+    - 不要过度优化。不要过度使用一些奇技淫巧（比如，位运算代替算术运算、复杂的条件语句代替 if-else、使用一些过于底层的函数等）来优化代码，牺牲代码的可读性。
+
+## YAGNI You Ain’t Gonna Need It
+
+需不需要做的问题
+
+## DRY Don’t Repeat Yourself
+
+* 逻辑重复的应该合并
+* 语义不重复：从代码实现逻辑上看起来是重复的，从功能上来看，两个函数干的是完全不重复的两件事情
+* 执行重复的应该合并
