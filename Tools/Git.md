@@ -1259,7 +1259,7 @@ git merge FETCH_HEAD
 ![Gitflow工作流](https://github.com/xirong/my-git/raw/master/images/git-workflow-release-cycle-4maintenance.png)
 ![Git-Develop 分支模式](https://github.com/xirong/my-git/raw/master/_image/2016-09-22-20-57-27.jpg)
 
-## GitHub
+## [GitHub](https://github.com/)
 
 围绕Git 构建 SaaS 服务
 
@@ -1285,6 +1285,11 @@ git merge FETCH_HEAD
     + action （动作）：每个 step 可以依次执行一个或多个命令（action）
   - starter
     + [actions/starter-workflows](https://github.com/actions/starter-workflows):Accelerating new GitHub Actions workflows https://github.com/features/actions
+* [CLi](https://github.com/cli/cli)
+  - `brew install github/gh/gh`
+  - `scoop bucket add github-gh https:scoop install gh`
+  - `gh pr [status, list, view, checkout, create]gh issue [status, list, view, create]gh help`
+  - [文档](https://cli.github.com/manual/)
 * 参考
   - [gitalk/gitalk](https://github.com/gitalk/gitalk):Gitalk is a modern comment component based on Github Issue and Preact. https://gitalk.github.io
   - [desktop/desktop](https://github.com/desktop/desktop):Simple collaboration from your desktop https://desktop.github.com

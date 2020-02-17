@@ -53,27 +53,18 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - Slackware Linux
   - [Arch Linux](https://www.archlinux.org/)
   - [Gentoo Linux](https://www.gentoo.org/)
-  - FreeBSD
 * 安全与稳定：为学习最新的东西而甘冒风险；最新和最伟大的功能；有趣的配置以便于处理重大更改
-  - [Arch Linux](https://www.archlinux.org/)
   - OpenSuse Tumbleweed
   - Fedora Rawhide
-  - Gentoo Unstable
 * 正常：运行平稳，维护量低；最小配置；大部分事情可以自动完成；兼容硬件和软件
-  - Debian Download
-  - Fedora
   - openSuse Leap
   - Ubuntu Studio
 * 服务器：稳定性；安全；支持其他出于同样原因的程序员使用
   - [CentOS](https://www.centos.org/)
   - Red Hat Enterprise Linux (RHEL)
-  - Debian 9 Download
   - FreeBSD
 * 性能：显著的性能提升；高负载计算
   - Clear Linux  (For Intel CPUS, by Intel)
-  - Gentoo Linux
-  - Arch Linux
-  - FreeBSD
 * 桌面：安全性；匿名性
   - TAILS Linux
   - Alpine Linux
@@ -82,7 +73,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - Tin Hat Linux
   - OpenBSD
   - [Manjaro](https://manjaro.org/)
-  - [elementary OS](https://elementary.io/)
+  - [Elementary OS](https://elementary.io/)
   - [openEuler](https://openeuler.org/):
 * 最小化：将在旧的硬件上运行；尽可能最小化
   - ArchBang
@@ -90,8 +81,10 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - Puppy Linux
   - Tiny Core Linux
   - Bodhi Linux
-* Canonical的Ubuntu、Debian
 * SUSE Linux Enterprise Server
+* Zorin OS
+* Cub Linux
+* Icaros Desktop
 
 ## 启动
 
