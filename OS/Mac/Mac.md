@@ -750,3 +750,7 @@ brew switch icu4c 62.1
 ## 工具
 
 * [basecamp/pow](https://github.com/basecamp/pow):Zero-configuration Rack server for Mac OS X http://pow.cx/v
+
+## 黑苹果
+
+* [黑果小兵的部落阁](https://blog.daliansky.ne)

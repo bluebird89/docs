@@ -6,8 +6,9 @@ Windows是最烂的开发平台
 
 * 软件包管理
   - [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation https://chocolatey.org/
+    + 程序安装位置：`~\AppData\Local\Packages\`
   - [Scoop](https://scoop.sh)
-    + 在用户根目录（一般是 C:\Users\用户名）下创建了一个名为 scoop 的文件夹，并默认将软件下载安装到这个文件夹下
+    + 在用户根目录（一般`是 C:\Users\用户名）下创建了一个名为 scoop 的文件夹，并默认将软件下载安装到这个文件夹下
     + 软件安装到一个相对隔离的环境下（Each program you install is isolated and independent），从而保证环境的统一和路径不被污染
 * 快速启动
   - launchy
@@ -164,6 +165,21 @@ FTYPE pngfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo V
 ipconfig /flushdns # 刷新域名
 ```
 
+## 改造PowerShell
+
+* 如何添加启动脚本
+
+```
+# 
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+Install-Module posh-git [-Scope CurrentUser]
+Install-Module oh-my-posh [-Scope CurrentUser]
+
+Import-Module posh-git
+Import-Module oh-my-posh
+Set-Theme PowerLine
+```
+
 ## 服务管理
 
 * 获取服务名称
@@ -236,15 +252,13 @@ sudo apt-get install zeal
 ## WSL(Windows Subsystem for Linux)
 
 * 支持bash：在启用或关闭 Windows 功能，开启Windows Subsystem for linux (Beta) [参考](https://blog.jessfraz.com/post/windows-for-linux-nerds/)
+* [Dev on Windows with WSL](https://dowww.spencerwoo.com/)
 
 ```
 # PowerShell as Administrator
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 restart system
 cmd + r input:bash download ubuntu
-
-# 
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 ```
 
 ## 系统
