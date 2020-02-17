@@ -2074,6 +2074,7 @@ ccache gcc foo.c
 * terminal
     - Mac
         + Iterm2
+            * [mbadolato / iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes):Over 200 terminal color schemes/themes for iTerm/iTerm2. Includes ports to Terminal, Konsole, PuTTY, Xresources, XRDB, Remmina, Termite, XFCE, Tilda, FreeBSD VT, Terminator, Kitty, MobaXterm, LXTerminal, Microsoft's Windows Terminal, Visual Studio http://www.iterm2colorschemes.com
     - Linux
         + 下的原生命令行
     - Windows
