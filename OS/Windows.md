@@ -63,6 +63,7 @@ Windows是最烂的开发平台
 * Boxee 媒体中心
 * Media Player Classic 媒体播放
 * EasyBCD 2.3：多系统引导文件管理
+* [microsoft/PowerToys](https://github.com/microsoft/PowerToys):Windows system utilities to maximize productivity
 
 ```sh
 ## 安装 choco 以管理员运行cmd
@@ -182,15 +183,12 @@ ipconfig /flushdns # 刷新域名
   - Alt+F4，关闭所有标签页
   - Ctrl+1，切换到第一个页签，Ctrl+2同理
   - Alt + enter，切换到全屏状态
-* 参考
-  - [README]()
 
 ```
 # 中文显示乱码
 Settings->Startup->Environment 添加
 set LANG=zh_CN.UTF-8
 set LC_ALL=zh_CN.utf8
-
 
 # 添加到右键菜单
 Cmder.exe /REGISTER ALL|USER
@@ -244,12 +242,14 @@ sudo apt-get install zeal
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 restart system
 cmd + r input:bash download ubuntu
+
+# 
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 ```
 
 ## 系统
 
 * [felixrieseberg/windows95](https://github.com/felixrieseberg/windows95):💩🚀 Windows 95 in Electron. Runs on macOS, Linux, and Windows.
-* [Awesome-Windows/Awesome](https://github.com/Awesome-Windows/Awesome):An awesome & curated list of best applications and tools for Windows.
 * [Windows10 LTSB](https://msdn.itellyou.cn)
 * [Microsoft/MS-DOS](https://github.com/Microsoft/MS-DOS):The original sources of MS-DOS 1.25 and 2.0, for reference purposes
 
@@ -265,5 +265,6 @@ cmd + r input:bash download ubuntu
 * [AlternativeTo](https://alternativeto.net/):Crowdsourced software recommendations
 * [Slant](https://www.slant.co/):Trustworthy product rankings for all your shopping needs
 * [itellyou](https://msdn.itellyou.cn)
+* [Awesome-Windows/Awesome](https://github.com/Awesome-Windows/Awesome):An awesome & curated list of best applications and tools for Windows.
 * UI
   - [duilib/duilib](https://github.com/duilib/duilib):Duilib是一个Windows下免费开源的DirectUI界面库
