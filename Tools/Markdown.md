@@ -673,7 +673,6 @@ Actions->Insert Read More Comment *或者* `Command + .`
     - Mark Text:实时显示的markdown编辑器
     - [Quiver](link)
     - [幕布](https://mubu.com/):可折叠的markdown
-    - [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
 * [typora](https://www.typora.io/)
 * windows
     - MarkdownPad(需要浏览器渲染插件awesome)
@@ -687,6 +686,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * [Markdown Here](https://markdown-here.com/)
 * [GitNote](https://www.gitnoteapp.com)
 * [MedleyText](link)
+* [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
 * OneNote
 * Haroopad
     - [下载地址](http://pad.haroopress.com/user.html)
@@ -721,7 +721,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
 
 ## 参考
 
-- [mastering-markdown](https://guides.github.com/features/mastering-markdown/)
-- [js-sequence-diagrams](https://bramp.github.io/js-sequence-diagrams/):Turns text into UML sequence diagrams
-- [flowchart.js](http://adrai.github.io/flowchart.js/):Draws simple SVG flow chart diagrams from textual representation of the diagram
-- [adam-p/markdown-here](https://github.com/adam-p/markdown-here):Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. http://markdown-here.com
+* [mastering-markdown](https://guides.github.com/features/mastering-markdown/)
+* [js-sequence-diagrams](https://bramp.github.io/js-sequence-diagrams/):Turns text into UML sequence diagrams
+* [flowchart.js](http://adrai.github.io/flowchart.js/):Draws simple SVG flow chart diagrams from textual representation of the diagram
+* [adam-p/markdown-here](https://github.com/adam-p/markdown-here):Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. http://markdown-here.com

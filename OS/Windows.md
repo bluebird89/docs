@@ -4,8 +4,11 @@ Windows是最烂的开发平台
 
 ## 工具
 
-* [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation https://chocolatey.org/
-* [Scoop](https://scoop.sh)
+* 软件包管理
+  - [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation https://chocolatey.org/
+  - [Scoop](https://scoop.sh)
+    + 在用户根目录（一般是 C:\Users\用户名）下创建了一个名为 scoop 的文件夹，并默认将软件下载安装到这个文件夹下
+    + 软件安装到一个相对隔离的环境下（Each program you install is isolated and independent），从而保证环境的统一和路径不被污染
 * 快速启动
   - launchy
   - [Wox-launcher/Wox](https://github.com/Wox-launcher/Wox):Launcher for Windows, an alternative to Alfred and Launchy. http://wox.one
@@ -70,6 +73,12 @@ choco search python php birtualbox jdk8 cclear
 choco install mysql.workbench
 
 cinst Atom
+
+## scoop
+set-executionpolicy remotesigned -scope currentuser # 保证允许本地脚本的执行
+iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+scoop help|update|info
+scoop + search|install|status|uninstall|home + 对象
 ```
 
 ## 安装
