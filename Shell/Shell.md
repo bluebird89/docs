@@ -2095,6 +2095,7 @@ ccache gcc foo.c
     - [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
     - [msys2](http://www.msys2.org/)
     - powercmd
+    - [PowerShell](https://github.com/PowerShell/PowerShell):PowerShell for every system! https://microsoft.com/PowerShell
     - [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
     - [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
 * help
