@@ -35,6 +35,7 @@
 * Rss
     - [NetNewsWire5](https://github.com/brentsimmons/NetNewsWire/releases/download/mac-5.0.2/NetNewsWire5.0.2.zip)
     - [theoldreader](https://theoldreader.com/)
+    - [anyant / rssant](https://github.com/anyant/rssant):蚁阅 - 让 RSS 更好用，轻松订阅你喜欢的博客和资讯 https://rss.anyant.com
 * URL Shortener
     - [YOURLS/YOURLS](https://github.com/YOURLS/YOURLS):🔗 Your Own URL Shortener https://yourls.org
         + 自增序列算法:设置 id 自增，一个 10进制 id 对应一个 62进制的数值，1对1，也就不会出现重复的情况
