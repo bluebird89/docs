@@ -80,6 +80,7 @@
 ## 工具
 
 * [odoo/odoo](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business. https://www.odoo.com
+* [monicahq / monica](https://github.com/monicahq/monica):Personal CRM. Remember everything about your friends and family. https://www.monicahq.com
 
 ## 参考
 
