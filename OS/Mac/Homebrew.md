@@ -27,8 +27,8 @@
 
 ### brew vs brew cask
 
-* brew:从下载源码解压后。／.configure&& make install ,同时包含相关以来库，并自动配置好各种环境变量，易于卸载。
-* brew cask：已经编译好的应用包（.dmg/.pkg）,仅仅下载解压，放到同】统一目录（／opt/homebrew-cask/caskroom）
+* brew:下载源码解压后。／.configure&& make install,同时包含相关以来库，并自动配置好各种环境变量，易于卸载
+* brew cask：在 Homebrew 基础上的一个增强工具，用来安装 Mac 上的 GUI 程序应用包.已经编译好的应用包（.dmg/.pkg）,仅仅下载解压，放到统一目录（／opt/homebrew-cask/caskroom）,再软链到~/Applications/目录下
 
 ```shell
 # 安装homebrew
@@ -50,13 +50,11 @@ brew untap Homebrew/homebrew-versions # Remove a tapped repository
 
 brew list --versions # 列出本机通过brew安装的所有软件
 
-brew install caskroom/cask/brew-cask
-brew install brew-cask-completion
-brew install -vd FORMULA
-brew install tig
-brew install bash-completion
+brew search name| /wget*/ # 搜索brew 支持的软件（支持模糊搜索)
 
-brew search name| /wget*/ # 搜索brew 支持的软件（支持模糊搜索
+brew install caskroom/cask/brew-cask
+brew install -vd FORMULA
+brew install tig|bash-completion|brew-cask-completion
 
 brew (info|home|options) [FORMULA...]
 

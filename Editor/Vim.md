@@ -799,6 +799,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [junegunn/fzf](https://github.com/junegunn/fzf):🌸 A command-line fuzzy finder
 * [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar):vinegar.vim: Combine with netrw to create a delicious salad dressing https://www.vim.org/scripts/script.php?script_id=5671
 * [neoclide/coc.nvim](https://github.com/neoclide/coc.nvim):Intellisense engine for vim8 & neovim, full language server protocol support as VSCode https://salt.bountysource.com/teams/coc-nvim
+* [vimwiki / vimwiki](https://github.com/vimwiki/vimwiki):Personal Wiki for Vim http://vimwiki.github.io/
 
 ## 教程
 
@@ -806,4 +807,3 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * <https://github.com/junegunn/vim-plug>: junegunn 是韩国的一个大牛，擅长写 Vim 插件，看起来总是令人赏心悦目
 * [SpaceVim](https://github.com/SpaceVim/SpaceVim):一个开箱即用的 Vim 配置，对新手很友好，和 Spacemacs 一样
 * [reddit 的 Vim 频道](https://www.reddit.com/r/vim/):有很多最前沿的 Vim 技巧
-https://www.linuxtrainingacademy.com/vim-cheat-sheet/

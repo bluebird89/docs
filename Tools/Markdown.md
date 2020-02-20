@@ -692,6 +692,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
     - [下载地址](http://pad.haroopress.com/user.html)
     - `sudo dpkg -i haroopad-v0.13.1-x64.deb`
 * [notable/notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. https://notable.md
+* [tamlok / vnote](https://github.com/tamlok/vnote):https://github.com/tamlok/vnote
 
 ## 工具
 
