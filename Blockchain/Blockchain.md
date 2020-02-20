@@ -2,6 +2,13 @@
 
 A distributed database that is used to maintain a continuously growing list of records, called blocks.所有的记账能迅速同步到所有账本 设计者署名为中本聪的人创造一种不受政府或其他任何人控制的货币！
 
+* 本质上是一个去中心化的分布式数据库。就是用一串与密码学产生的数据块构成。在加密的前提下，包含了一定时间内的系统全部信息交流数据，每个区块之间的链接关系，整体就构成了区块链。但是现在市面上真正被人所熟知的区块链的技术，更多是像比特币，以太币这样的数字货币。但是，从互联网技术发展来看，真正引爆区块链技术的很有可能还是社交和资讯等领域。
+* 解决了是他们的身份的真实和唯一性，而不是机器人或者水军。身份唯一性，是社交的前提。但是在现有的社交网络中，虚假身份和僵尸层出不穷。你可以是匿名，但是你的身份是真实的，可溯源的。ONO创始人徐可的期望就是通过区块链改变现有社交产品和环境，“让社交变得更自由、更放松、更随心所欲”。
+* 比特币发明者中本聪，在2010 年 12 月，自己的笔记本上写到：只要对网络有好处，我们就必须要去做。这也许是对所有新技术最好的解释。
+* 特征
+    - 不可变性
+    - 溯源
+    - 分布式共识
 * 数据库
 * 每个节点平等，保存整个数据库
 * 最终一致
@@ -59,6 +66,13 @@ Initial Coin Offering的简称，是一种以出售新的初始数字加密货�
 * 不存在所有成员都信任的管理当局
 * 写入的数据不要求实时使用
 * 挖矿的收益能够弥补本身的成本
+* 商业逻辑的重构
+    - 供应链-票据融资
+    - 供应链-应收款融资
+    - 供应链-授信融资
+    - 资产数字化
+    - 商品生命周期跟踪
+    - 区块链合同存证
 
 ### 比特币
 
@@ -114,21 +128,10 @@ Initial Coin Offering的简称，是一种以出售新的初始数字加密货�
 * [OKCoin](https://www.okcoin.com/)
 * [火币网](https://www.huobi.com/)
 
-## 场景
-
-商业逻辑的重构
-
-* 供应链-票据融资
-* 供应链-应收款融资
-* 供应链-授信融资
-* 资产数字化
-* 商品生命周期跟踪
-* 区块链合同存证
-
 ## 扩展
 
-- [seanseany/blockchain-cli](https://github.com/seanseany/blockchain-cli)
-- [lhartikk/naivechain](https://github.com/lhartikk/naivechain)
+* [seanseany/blockchain-cli](https://github.com/seanseany/blockchain-cli)
+* [lhartikk/naivechain](https://github.com/lhartikk/naivechain)
 
 ```sh
 npm install blockchain-cli -g
@@ -141,29 +144,6 @@ termianl1:open 5000
 terminal2:connect localhost 5000
 termianl1:bl + tab
 ```
-
-区块链技术，本质上是一个去中心化的分布式数据库。就是用一串与密码学产生的数据块构成。在加密的前提下，包含了一定时间内的系统全部信息交流数据，每个区块之间的链接关系，整体就构成了区块链。但是现在市面上真正被人所熟知的区块链的技术，更多是像比特币，以太币这样的数字货币。但是，从互联网技术发展来看，真正引爆区块链技术的很有可能还是社交和资讯等领域。
-
-不管是网络支付在资讯领域，还是LBS、区块链技术在社交领域应用，其实，解决的都是用户的痛点问题。早期网络支付解决的是，用户及时快速的拿到想看的内容的诉求。而LBS是让快速，快速的认识附近和周边有趣的人，有共同爱好的人，一起认识并进行交流，但是原有的产品形态都是无法满足这个需求。
-
-LBS这个变化，可能讨论更多的是人与人之间的网络化，从线下到线上。但是，互联网最终的使命是让所有的人、任何事物、随时随地，都可以有效的互联互通互动。在这个过程中，用户的第一诉求是降低获取或者沟通成本，这是最大的诉求。可以预感，区块链成为有效社交的技术突破点。
-
-对于区块链技术，解决了是他们的身份的真实和唯一性，而不是机器人或者水军。身份唯一性，是社交的前提。但是在现有的社交网络中，虚假身份和僵尸层出不穷。你可以是匿名，但是你的身份是真实的，可溯源的。ONO创始人徐可的期望就是通过区块链改变现有社交产品和环境，“让社交变得更自由、更放松、更随心所欲”。
-
-场景检验：
-
-不管是资讯，还是社交等行业，这是最贴近用户，与人们的生活最为密切的行业，也是人们的刚性和底层需求。在对此，用户嗅觉和变化最为敏锐的。因为这些行业使用的频次高，覆盖不同的用户群体，会有不同的诉求。
-
-每一次技术革新的时候，之所以最先影响的就是这些行业。是因为这些行业积累很深，用户数据充分，使用场景丰富，频次密集，最适合用来检验新技术的。通过网络支付对于用户与商家连接场景的改变，LBS对于人与人之间连接的改变，区块链对于社交赋予更多新的生命和活力，这些都是新技术与应用的完美结合。
-
-在所有的互联网新技术的应用中，从技术的萌芽，迭代，发展，到行业应用，再反推整个技术的迭代和成熟。每一次都是逐渐推动，相辅相成，互为因果的关系，最后逐步扩展成主流的应用和模式。在这个过程中，不管是人与人，人与物，个人与商家等，都能方便、自动、高效的互动，这有效的拓宽了人与人、人与物、物与物之间更为广泛的信息交互，进一步促进了互联网新技术的更迭与发展。 随着网络应用的快递增长，这种情况会越来越明显。
-
-比特币发明者中本聪，在2010 年 12 月，自己的笔记本上写到：只要对网络有好处，我们就必须要去做。这也许是对所有新技术最好的解释。
-
-区块链有三个重要特征：不可变性，溯源和分布式共识。
-
-<https://medium.freecodecamp.org/how-does-blockchain-really-work-i-built-an-app-to-show-you-6b70cd4caf7d>
-<https://www.zhihu.com/question/27687960/answer/84583016>
 
 ## 知识
 
@@ -198,7 +178,6 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 
 ## 工具
 
-* [bigchaindb/bigchaindb](https://github.com/bigchaindb/bigchaindb):Meet BigchainDB. The blockchain database. https://www.bigchaindb.com/
 * [MetaMask/metamask-extension](https://github.com/MetaMask/metamask-extension):🌐 🔌 The MetaMask browser extension, enables browsing Ethereum blockchain enabled websites. https://metamask.io/
 * [iov-one/weave](https://github.com/iov-one/weave):Easy-to-use framework to build Tendermint ABCI applications
 * [embark-framework/embark](https://github.com/embark-framework/embark):Framework for serverless Decentralized Applications using Ethereum, IPFS and other platforms https://embark.status.im/
@@ -213,4 +192,7 @@ LBS这个变化，可能讨论更多的是人与人之间的网络化，从线�
 * [liuchengxu/blockchain-tutorial](https://github.com/liuchengxu/blockchain-tutorial):🌾 A step-by-step blockchain tutorial in simplified Chinese https://liuchengxu.gitbook.io/blockchain
 * [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料
 * [myeoskit](https://www.myeoskit.com)
+* [区块链背后的密码学](https://learning.nervos.org/crypto-block)
 
+<https://medium.freecodecamp.org/how-does-blockchain-really-work-i-built-an-app-to-show-you-6b70cd4caf7d>
+<https://www.zhihu.com/question/27687960/answer/84583016>

@@ -25,9 +25,15 @@
 * wheel：Python 分发的新标准，意在取代 eggs。[官网](http://pythonwheels.com/)
 * [Pipenv](https://github.com/pypa/pipenv):Python Development Workflow for Humans. https://docs.pipenv.org/
 * PBR（https://docs.openstack.org/pbr/latest/）, Python Build Reasonableness 的缩写，是以一致的方式用于管理 Setuptools 包的库。
-- [pypi](https://pypi.python.org/pypi/)：Python第三方库集合
-- [unofficial windows binaries for python extension packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/)：windows下Python第三方库的非官方扩展
-- [Scipy-Lecture-Notes-zh](https://github.com/jayleicn/scipy-lecture-notes-zh-CN)：这是来自 http://scipy-lectures.org 的Python科学计算环境教程的中文版
+* [pypi](https://pypi.python.org/pypi/)：Python第三方库集合
+* [unofficial windows binaries for python extension packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/)：windows下Python第三方库的非官方扩展
+* [Scipy-Lecture-Notes-zh](https://github.com/jayleicn/scipy-lecture-notes-zh-CN)：这是来自 http://scipy-lectures.org 的Python科学计算环境教程的中文版
+* 常用包
+  - lxml：比Beautiful Soup更快更强的解析库
+  - pandas：数据处理神器
+  - time：设置爬虫访问间隔防止被抓
+  - random：随机数生成工具，配合time使用
+  - [mahmoud/boltons](https://github.com/mahmoud/boltons):🔩 Like builtins, but boltons. Constructs/recipes/snippets that would be handy in the standard library. Nothing like Michael Bolton. https://boltons.readthedocs.org
 
 ```sh
 pip install pipenv
@@ -232,6 +238,7 @@ brew install pipenv
   - mycli：一个 MySQL 命令行客户端，具有自动补全和语法高亮功能。[官网](https://github.com/dbcli/mycli)
   - pgcli：Postgres 命令行工具，具有自动补全和语法高亮功能。[官网](https://github.com/dbcli/pgcli)
   - try：一个从来没有更简单的命令行工具，用来试用python库。[官网](https://github.com/timofurrer/try)
+* [tqdm / tqdm](https://github.com/tqdm/tqdm)：A Fast, Extensible Progress Bar for Python and CLI https://tqdm.github.io
 
 ## 下载器
 
@@ -313,12 +320,12 @@ brew install pipenv
 
 * [requests/requests](https://github.com/requests/requests)：Python HTTP Requests for Humans™ sparklescakesparkles http://python-requests.org
 * [grequests](https://github.com/kennethreitz/grequests)：requests 库 + gevent ，用于异步 HTTP 请求.
-* httplib2：全面的 HTTP 客户端库。[官网](https://github.com/jcgregorio/httplib2)
-* treq：类似 requests 的Python API 构建于 Twisted HTTP 客户端之上。[官网](https://github.com/twisted/treq)
-* urllib3：一个具有线程安全连接池，支持文件 post，清晰友好的 HTTP 库。[官网](https://github.com/shazow/urllib3)
+* [httplib2](https://github.com/jcgregorio/httplib2)：全面的 HTTP 客户端库
+* [treq](https://github.com/twisted/treq)：类似 requests 的Python API 构建于 Twisted HTTP 客户端之上。
+* [urllib3](https://github.com/shazow/urllib3)：一个具有线程安全连接池，支持文件 post，清晰友好的 HTTP 库。
 * [kennethreitz/responder](https://github.com/kennethreitz/responder):a familiar HTTP Service Framework for Python https://python-responder.org
 * [pycurl](http://pycurl.sourceforge.net)是一个用C语言写的libcurl Python实现，功能强大，支持的协议有：FTP,HTTP,HTTPS,TELNET等，可以理解为Linux下curl命令功能的Python封装
-* scapy(http://www.wecdev.org/projects/scapy/)是一个强大的交互式数据包处理程序，它能够对数据包进行伪造或解包，包括发送数据包，包嗅探，应答和反馈等功能。
+* [scapy](http://www.wecdev.org/projects/scapy/)是一个强大的交互式数据包处理程序，它能够对数据包进行伪造或解包，包括发送数据包，包嗅探，应答和反馈等功能。
 * [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. https://httpbin.org
 * [kennethreitz/requests-html](https://github.com/kennethreitz/requests-html):下载完网页之后,内置了html网页的解析
 * [request/request-promise](https://github.com/request/request-promise):The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.
@@ -348,7 +355,7 @@ Python实现的数据库。
 * queries：psycopg2 库的封装，用来和 PostgreSQL 进行交互。[官网](https://github.com/gmr/queries)
 * txpostgres：基于 Twisted 的异步 PostgreSQL 驱动。[官网](http://txpostgres.readthedocs.org/en/latest/)
 * [influxdata/influxdb-python](https://github.com/influxdata/influxdb-python):Python client for InfluxDB
-- 其他关系型数据库
+* 其他关系型数据库
   - apsw：另一个 Python SQLite封装。[官网](http://rogerbinns.github.io/apsw/)
   - dataset：在数据库中存储Python字典
   - pymssql：一个简单的Microsoft SQL Server数据库接口。[官网](http://www.pymssql.org/en/latest/)
@@ -389,18 +396,18 @@ Python实现的数据库。
 
 全栈 Web 框架。
 
-* [Django](http://hao.jobbole.com/django/)：Python 界最流行的 web 框架。[官网](https://www.djangoproject.com/)
-* [awesome-django](https://github.com/rosarior/awesome-django)系列
-* [Flask](http://hao.jobbole.com/flask/)：一个 Python 微型框架。[官网](http://flask.pocoo.org/)
-* [awesome-flask](https://github.com/humiaozuzu/awesome-flask)系列
+* [Django](https://www.djangoproject.com/)：Python 界最流行的 web 框架
+  - [awesome-django](https://github.com/rosarior/awesome-django)系列
+* [Flask](http://flask.pocoo.org/)：一个 Python 微型框架
+  - [awesome-flask](https://github.com/humiaozuzu/awesome-flask)系列
 * pyramid：一个小巧，快速，接地气的开源Python web 框架。
-* [awesome-pyramid](https://github.com/uralbash/awesome-pyramid)系列
-* [Bottle](http://hao.jobbole.com/bottle/)：一个快速小巧，轻量级的 WSGI 微型 web 框架。[官网](http://bottlepy.org/docs/dev/index.html)
-* CherryPy：一个极简的 Python web 框架，服从 HTTP/1.1 协议且具有WSGI 线程池。[官网](http://www.cherrypy.org/)
-* TurboGears：一个可以扩展为全栈解决方案的微型框架。[官网](http://www.turbogears.org/)
-* [web.py](http://hao.jobbole.com/python-webpy/)：一个 Python 的 web 框架，既简单，又强大。[官网](http://webpy.org/)
-* web2py：一个全栈 web 框架和平台，专注于简单易用。[官网](http://www.web2py.com/)
-* [Tornado](http://hao.jobbole.com/tornado/)：一个web 框架和异步网络库。[官网](http://www.tornadoweb.org/en/latest/)
+  - [awesome-pyramid](https://github.com/uralbash/awesome-pyramid)系列
+* [Bottle](http://bottlepy.org/docs/dev/index.html/)：一个快速小巧，轻量级的 WSGI 微型 web 框架。
+* [CherryPy](http://www.cherrypy.org/)：一个极简的 Python web 框架，服从 HTTP/1.1 协议且具有WSGI 线程池。
+* [TurboGears](http://www.turbogears.org/)：一个可以扩展为全栈解决方案的微型框架。
+* [web.py](http://webpy.org/)：一个 Python 的 web 框架，既简单，又强大。
+* [web2py](http://www.web2py.com/)：一个全栈 web 框架和平台，专注于简单易用。
+* [Tornado](http://www.tornadoweb.org/en/latest/)：一个web 框架和异步网络库。
 
 ## 权限
 
@@ -465,58 +472,58 @@ Python实现的数据库。
 
 实现验证方案的库。
 
-- OAuth
-  + Authomatic：简单但是强大的框架，身份验证/授权客户端。[官网](http://peterhudec.github.io/authomatic/)
-  + django-allauth：Django 的验证应用。[官网](https://github.com/pennersr/django-allauth)
-  + django-oauth-toolkit：为 Django 用户准备的 OAuth2。[官网](https://github.com/evonove/django-oauth-toolkit)
-  + django-oauth2-provider：为 Django 应用提供 OAuth2 接入。[官网](https://github.com/caffeinehit/django-oauth2-provider)
-  + Flask-OAuthlib：OAuth 1.0/a, 2.0 客户端实现，供 Flask 使用。[官网](https://github.com/lepture/flask-oauthlib)
-  + OAuthLib：一个 OAuth 请求-签名逻辑通用、 完整的实现。[官网](https://github.com/IDAn/oauthlib)
-  + python-oauth2：一个完全测试的抽象接口。用来创建 OAuth 客户端和服务端。[官网](https://github.com/joestump/python-oauth2)
-  + python-social-auth：一个设置简单的社会化验证方式。[官网](https://github.com/omab/python-social-auth)
-  + rauth：OAuth 1.0/a, 2.0, 和 Ofly 的 Python 库。[官网](https://github.com/litl/rauth)
-  + sanction：一个超级简单的OAuth2 客户端实现。[官网](https://github.com/demianbrecht/sanction)
-- 其他
-  + jose：JavaScript 对象签名和加密草案的实现。[官网](https://github.com/demonware/jose)
-  + PyJWT：JSON Web 令牌草案 01。[官网](https://github.com/jpadilla/pyjwt)
-  + python-jws：JSON Web 签名草案 02 的实现。[官网](https://github.com/brianloveswords/python-jws)
-  + python-jwt：一个用来生成和验证 JSON Web 令牌的模块。[官网](https://github.com/davedoesdev/python-jwt)
+* OAuth
+  - Authomatic：简单但是强大的框架，身份验证/授权客户端。[官网](http://peterhudec.github.io/authomatic/)
+  - django-allauth：Django 的验证应用。[官网](https://github.com/pennersr/django-allauth)
+  - django-oauth-toolkit：为 Django 用户准备的 OAuth2。[官网](https://github.com/evonove/django-oauth-toolkit)
+  - django-oauth2-provider：为 Django 应用提供 OAuth2 接入。[官网](https://github.com/caffeinehit/django-oauth2-provider)
+  - Flask-OAuthlib：OAuth 1.0/a, 2.0 客户端实现，供 Flask 使用。[官网](https://github.com/lepture/flask-oauthlib)
+  - OAuthLib：一个 OAuth 请求-签名逻辑通用、 完整的实现。[官网](https://github.com/IDAn/oauthlib)
+  - python-oauth2：一个完全测试的抽象接口。用来创建 OAuth 客户端和服务端。[官网](https://github.com/joestump/python-oauth2)
+  - python-social-auth：一个设置简单的社会化验证方式。[官网](https://github.com/omab/python-social-auth)
+  - rauth：OAuth 1.0/a, 2.0, 和 Ofly 的 Python 库。[官网](https://github.com/litl/rauth)
+  - sanction：一个超级简单的OAuth2 客户端实现。[官网](https://github.com/demianbrecht/sanction)
+* 其他
+  - jose：JavaScript 对象签名和加密草案的实现。[官网](https://github.com/demonware/jose)
+  - PyJWT：JSON Web 令牌草案 01。[官网](https://github.com/jpadilla/pyjwt)
+  - python-jws：JSON Web 签名草案 02 的实现。[官网](https://github.com/brianloveswords/python-jws)
+  - python-jwt：一个用来生成和验证 JSON Web 令牌的模块。[官网](https://github.com/davedoesdev/python-jwt)
 
 ## 模板引擎
 
 模板生成和词法解析的库和工具。
 
-* [Jinja2](http://hao.jobbole.com/jinja2/)：一个现代的，对设计师友好的模板引擎。[官网](https://github.com/pallets/jinja)
-* Chameleon：一个 HTML/XML 模板引擎。 模仿了 ZPT（Zope Page Templates）, 进行了速度上的优化。[官网](https://chameleon.readthedocs.org/en/latest/)
-* Genshi：Python 模板工具，用以生成 web 感知的结果。[官网](https://genshi.edgewall.org/)
-* Mako：Python 平台的超高速轻量级模板。[官网](http://www.makotemplates.org/)
+* [Jinja2](https://github.com/pallets/jinja)：一个现代的，对设计师友好的模板引擎。
+* [Chameleon](https://chameleon.readthedocs.org/en/latest/)：一个 HTML/XML 模板引擎。 模仿了 ZPT（Zope Page Templates）, 进行了速度上的优化。
+* [Genshi](https://genshi.edgewall.org/)：Python 模板工具，用以生成 web 感知的结果。
+* [Mako](http://www.makotemplates.org/)：Python 平台的超高速轻量级模板。
 
 ## Queue
 
 处理事件以及任务队列的库。
 
-* celery：一个异步任务队列/作业队列，基于分布式消息传递。[官网](http://www.celeryproject.org/)
-* huey：小型多线程任务队列。[官网](https://github.com/coleifer/huey)
-* [mrq](http://hao.jobbole.com/mrq/)：Mr. Queue -一个 Python 的分布式 worker 任务队列， 使用 Redis 和 gevent。[官网](https://github.com/pricingassistant/mrq)
-* rq：简单的 Python 作业队列。[官网](http://python-rq.org/)
-* simpleq：一个简单的，可无限扩张的，基于亚马逊 SQS 的队列。[官网](https://github.com/rdegges/simpleq)
+* [celery](http://www.celeryproject.org/)：一个异步任务队列/作业队列，基于分布式消息传递。
+* [huey](https://github.com/coleifer/huey)：小型多线程任务队列。
+* [mrq](https://github.com/pricingassistant/mrq)：Mr. Queue -一个 Python 的分布式 worker 任务队列， 使用 Redis 和 gevent。
+* [rq](http://python-rq.org/)：简单的 Python 作业队列。
+* [simpleq](https://github.com/rdegges/simpleq)：一个简单的，可无限扩张的，基于亚马逊 SQS 的队列。
 
 ## 搜索
 
 对数据进行索引和执行搜索查询的库和软件。
 
-* django-haystack：Django 模块化搜索。[官网](https://github.com/django-haystack/django-haystack)
-* elasticsearch-py：Elasticsearch 的官方底层 Python 客户端。[官网](https://www.elastic.co/guide/en/elasticsearch/client/python-api/current/index.html)
+* [django-haystack](https://github.com/django-haystack/django-haystack)：Django 模块化搜索。
+* [elasticsearch-py](https://www.elastic.co/guide/en/elasticsearch/client/python-api/current/index.html)：Elasticsearch 的官方底层 Python 客户端。
 * [elasticsearch-dsl-py](https://github.com/elastic/elasticsearch-dsl-py)：Elasticsearch 的官方高级 Python 客户端。
-* solrpy：[solr](http://lucene.apache.org/solr/)的 Python 客户端。[官网](https://github.com/edsu/solrpy)
-* Whoosh：一个快速的纯 Python 搜索引擎库。[官网](http://whoosh.readthedocs.org/en/latest/)
+* [solrpy](https://github.com/edsu/solrpy)：[solr](http://lucene.apache.org/solr/)的 Python 客户端。
+* [Whoosh](http://whoosh.readthedocs.org/en/latest/)：一个快速的纯 Python 搜索引擎库。
 
 ## 动态消息
 
 用来创建用户活动的库。
 
-* django-activity-stream：从你的站点行为中生成通用活动信息流。[官网](https://github.com/justquick/django-activity-stream)
-* Stream-Framework：使用 Cassandra 和 Redis 创建动态消息和通知系统。[官网](https://github.com/tschellenbach/Stream-Framework)
+* [django-activity-stream](https://github.com/justquick/django-activity-stream)：从你的站点行为中生成通用活动信息流。
+* [Stream-Framework](https://github.com/tschellenbach/Stream-Framework)：使用 Cassandra 和 Redis 创建动态消息和通知系统。
 
 ## 资源管理
 
@@ -808,8 +815,8 @@ Python实现的数据库。
 进行代码库测试和生成测试数据的库。
 
 * 测试框架
-  - unittest：(Python 标准库) 单元测试框架。[官网](https://docs.python.org/2/library/unittest.html)
-  - nose：nose 扩展了 unittest 的功能。[官网](https://nose.readthedocs.org/en/latest/)
+  - [unittest](https://docs.python.org/2/library/unittest.html)：(Python 标准库) 单元测试框架。
+  - [nose](https://nose.readthedocs.org/en/latest/) 扩展了 unittest 的功能。
   - contexts：一个 Python 3.3+ 的 BDD 框架。受到C# – Machine.Specifications的启发。[官网](https://github.com/benjamin-hodgson/Contexts)
   - hypothesis：Hypothesis 是一个基于先进的 Quickcheck 风格特性的测试库。[官网](https://github.com/DRMacIver/hypothesis)
   - mamba：Python 的终极测试工具， 拥护BDD。[官网](http://nestorsalceda.github.io/mamba/)
@@ -833,7 +840,7 @@ Python实现的数据库。
   - httmock：针对 Python 2.6+ 和 3.2+ 生成 伪造请求的库。[官网](https://github.com/patrys/httmock)
   - httpretty：Python 的 HTTP 请求 mock 工具。[官网](http://falcao.it/HTTPretty/)
   - [getsentry/responses](https://github.com/getsentry/responses)：utility for mocking out the Python Requests library.
-  - VCR.py：在你的测试中记录和重放 HTTP 交互。[官网](https://github.com/kevin1024/vcrpy)
+  - [VCR.py](https://github.com/kevin1024/vcrpy)：在测试中记录和重放 HTTP 交互。
 * 对象工厂
   - factoryboy：一个 Python 用的测试固件 (test fixtures) 替代库。[官网](https://github.com/rbarrois/factoryboy)
   - mixer：另外一个测试固件 (test fixtures) 替代库，支持 Django, Flask, SQLAlchemy, Peewee 等。[官网](https://github.com/klen/mixer)
@@ -845,7 +852,11 @@ Python实现的数据库。
   - fake2db：伪数据库生成器。[官网](https://github.com/emirozer/fake2db)
   - radar：生成随机的日期/时间。[官网](https://pypi.python.org/pypi/radar)
 * 错误处理
-  - FuckIt.py：FuckIt.py 使用最先进的技术来保证你的 Python 代码无论对错都能继续运行。[官网](https://github.com/ajalt/fuckitpy)
+  - [FuckIt.py](https://github.com/ajalt/fuckitpy)：FuckIt.py 使用最先进的技术来保证你的 Python 代码无论对错都能继续运行。
+* 自动化
+  - [theacodes / nox](https://github.com/theacodes/nox):Flexible test automation for Python https://nox.thea.codes
+  - [tox-dev/tox](https://github.com/tox-dev/tox):Command line driven CI frontend and development task automation tool https://tox.readthedocs.io
+  - [pyinvoke / invoke](https://github.com/pyinvoke/invoke):Pythonic task management & command execution. http://pyinvoke.org
 
 ## 代码分析和Lint工具
 
@@ -862,6 +873,9 @@ Python实现的数据库。
   - pylama：Python 和 JavaScript 的代码审查工具。[官网](https://pylama.readthedocs.org/en/latest/)
 * 代码格式化
   - autopep8：自动格式化 Python 代码，以使其符合 PEP8 规范。[官网](https://github.com/hhatto/autopep8)
+* 代码质量
+  - Codacy：自动化代码审查，更加快速的发布高质量代码。对于开源项目是免费的。[官网](https://www.codacy.com/)
+  - QuantifiedCode：一个数据驱动、自动、持续的代码审查工具。[官网](https://www.quantifiedcode.com/)
 
 ## Debugging Tools
 
@@ -986,6 +1000,7 @@ MapReduce 框架和库。
 * fn.py：在 Python 中进行函数式编程 : 实现了一些享受函数式编程缺失的功能。[官网](https://github.com/kachayev/fn.py)
 * funcy：炫酷又实用的函数式工具。[官网](https://github.com/Suor/funcy)
 * Toolz：一组用于迭代器，函数和字典的函数式编程工具。[官网](https://github.com/pytoolz/toolz)
+* [evhub/coconut](https://github.com/evhub/coconut):Simple, elegant, Pythonic functional programming. http://coconut-lang.org
 
 ## 第三方 API
 
@@ -1005,19 +1020,19 @@ MapReduce 框架和库。
 
 用于 DevOps 的软件和库。
 
-* Ansible：一个非常简单的 IT 自动化平台。[官网](https://github.com/ansible/ansible)
-* SaltStack：基础设施自动化和管理系统。[官网](https://github.com/saltstack/salt)
-* OpenStack：用于构建私有和公有云的开源软件。[官网](http://www.openstack.org/)
-* Docker Compose：快速，分离的开发环境，使用 Docker。[官网](https://docs.docker.com/compose/)
-* Fabric：一个简单的，Python 风格的工具，用来进行远程执行和部署。[官网](http://www.fabfile.org/)
-* cuisine：为 Fabric 提供一系列高级函数。[官网](https://github.com/sebastien/cuisine)
-* Fabtools：一个用来编写超赞的 Fabric 文件的工具。[官网](https://github.com/ronnix/fabtools)
-* gitapi：Git 的纯 Python API。[官网](https://bitbucket.org/haard/gitapi)
-* hgapi：Mercurial 的纯 Python API。[官网](https://bitbucket.org/haard/hgapi)
-* honcho：[Foreman](https://github.com/ddollar/foreman)的 Python 克隆版，用来管理基于[Procfile](https://devcenter.heroku.com/articles/procfile)的应用。[官网](https://github.com/nickstenning/honcho)
-* pexpect：Controlling interactive programs in a pseudo-terminal like 在一个伪终端中控制交互程序，就像 GNU expect 一样。[官网](https://github.com/pexpect/pexpect)
+* [Ansible](https://github.com/ansible/ansible)：一个非常简单的 IT 自动化平台。
+* [SaltStack](https://github.com/saltstack/salt)：基础设施自动化和管理系统。
+* [OpenStack](http://www.openstack.org/)：用于构建私有和公有云的开源软件。
+* [Docker Compose](https://docs.docker.com/compose/)：快速，分离的开发环境，使用 Docker。
+* [Fabric](http://www.fabfile.org/)：一个简单的，Python 风格的工具，用来进行远程执行和部署。
+* [cuisine](https://github.com/sebastien/cuisine)：为 Fabric 提供一系列高级函数。
+* [Fabtools](https://github.com/ronnix/fabtools)：一个用来编写超赞的 Fabric 文件的工具。
+* [gitapi](https://bitbucket.org/haard/gitapi)：Git 的纯 Python API。
+* [hgapi](https://bitbucket.org/haard/hgapi)：Mercurial 的纯 Python API。
+* [honcho](https://github.com/nickstenning/honcho)：[Foreman](https://github.com/ddollar/foreman)的 Python 克隆版，用来管理基于[Procfile](https://devcenter.heroku.com/articles/procfile)的应用。
+* [pexpect](https://github.com/pexpect/pexpect)：Controlling interactive programs in a pseudo-terminal like 在一个伪终端中控制交互程序，就像 GNU expect 一样。
 * [giampaolo/psutil](https://github.com/giampaolo/psutil)：一个跨平台进程和系统工具模块。
-* supervisor：UNIX 的进程控制系统。[官网](https://github.com/Supervisor/supervisor)
+* [supervisor](https://github.com/Supervisor/supervisor)：UNIX 的进程控制系统。
 
 ## 任务调度
 
@@ -1107,15 +1122,15 @@ MapReduce 框架和库。
 
 Python 实现的算法和设计模式。
 
-* [algorithms](http://hao.jobbole.com/algorithms/)：一个 Python 算法模块。[官网](https://github.com/nryoung/algorithms)
-* python-patterns：Python 设计模式的集合。[官网](https://github.com/faif/python-patterns)
-* sortedcontainers：快速，纯 Python 实现的SortedList，SortedDict 和 SortedSet 类型。[官网](http://www.grantjenks.com/docs/sortedcontainers/)
+* [algorithms](https://github.com/nryoung/algorithms)：一个 Python 算法模块。
+* [python-patterns](https://github.com/faif/python-patterns)：Python 设计模式的集合。
+* [sortedcontainers](http://www.grantjenks.com/docs/sortedcontainers/)：快速，纯 Python 实现的SortedList，SortedDict 和 SortedSet 类型。
 
 ## 编辑器插件
 
 * Emacs
   - Elpy：Emacs Python 开发环境。[官网](https://github.com/jorgenschaefer/elpy)
-- Sublime Text
+* Sublime Text
   - SublimeJEDI：一个 Sublime Text 插件，用来使用超赞的自动补全库 Jedi。[官网](https://github.com/srusskih/SublimeJEDI)
   - Anaconda：Anaconda 把你的 Sublime Text 3 变成一个功能齐全的 Python IDE。[官网](https://github.com/DamnWidget/anaconda)
 * Vim
@@ -1137,7 +1152,7 @@ Python 实现的算法和设计模式。
 
 用于开发聊天机器人的库
 
-* Errbot：最简单和最流行的聊天机器人用来实现自动聊天工具。[官网](http://errbot.io/en/latest/)
+* [Errbot](http://errbot.io/en/latest/)：最简单和最流行的聊天机器人用来实现自动聊天工具。
 * [Lector](https://github.com/BasioMeusPuga/Lector):基于 Qt 的电子书阅读器
 * [Asciinema](https://github.com/asciinema/asciinema):Python 编写的终端会话录制器
 
@@ -1150,28 +1165,23 @@ Python 实现的算法和设计模式。
 * Vexor CI：一个为私人 app 提供持续集成的工具，支持按分钟付费。[官网](https://vexor.io/)
 * Wercker：基于 Docker 平台，用来构建和部署微服务。[官网](http://wercker.com/)
 
-## 代码质量
-
-* Codacy：自动化代码审查，更加快速的发布高质量代码。对于开源项目是免费的。[官网](https://www.codacy.com/)
-* QuantifiedCode：一个数据驱动、自动、持续的代码审查工具。[官网](https://www.quantifiedcode.com/)
-
 ## 网站
 
-- [r/Python](https://www.reddit.com/r/python)
-- [CoolGithubProjects](https://www.coolgithubprojects.com/)
-- [Django Packages](https://www.djangopackages.com/)
-- [Full Stack Python](http://www.fullstackpython.com/)
-- [Python 3 Wall of Superpowers](http://python3wos.appspot.com/)
-- [Python Hackers](http://pythonhackers.com/open-source/)
-- [Python ZEEF](https://python.zeef.com/alan.richmond)
-- [Trending Python repositories on GitHub today](https://github.com/trending?l=python)
-- [PyPI Ranking](http://pypi-ranking.info/alltime)
+* [r/Python](https://www.reddit.com/r/python)
+* [CoolGithubProjects](https://www.coolgithubprojects.com/)
+* [Django Packages](https://www.djangopackages.com/)
+* [Full Stack Python](http://www.fullstackpython.com/)
+* [Python 3 Wall of Superpowers](http://python3wos.appspot.com/)
+* [Python Hackers](http://pythonhackers.com/open-source/)
+* [Python ZEEF](https://python.zeef.com/alan.richmond)
+* [Trending Python repositories on GitHub today](https://github.com/trending?l=python)
+* [PyPI Ranking](http://pypi-ranking.info/alltime)
 
 ## 周刊
 
-- [Import Python Newsletter](http://importpython.com/newsletter/)
-- [Pycoder's Weekly](http://pycoders.com/)
-- [Python Weekly](http://www.pythonweekly.com/)
+* [Import Python Newsletter](http://importpython.com/newsletter/)
+* [Pycoder's Weekly](http://pycoders.com/)
+* [Python Weekly](http://www.pythonweekly.com/)
 
 ## 学习指南
 
@@ -1190,15 +1200,11 @@ Python 实现的算法和设计模式。
 * [Python fundamentals](https://www.python-tutorial.net/)
 * [sfermigier/awesome-functional-python](https://github.com/sfermigier/awesome-functional-python)
 * [apachecn/python_data_analysis_and_mining_action](https://github.com/apachecn/python_data_analysis_and_mining_action):《python数据分析与挖掘实战》的代码笔记
-
-## 包
-
-* lxml：比Beautiful Soup更快更强的解析库
-* pandas：数据处理神器
-* time：设置爬虫访问间隔防止被抓
-* random：随机数生成工具，配合time使用
-* tqdm：交互好工具，显示程序运行进度
-* [mahmoud/boltons](https://github.com/mahmoud/boltons):🔩 Like builtins, but boltons. Constructs/recipes/snippets that would be handy in the standard library. Nothing like Michael Bolton. https://boltons.readthedocs.org
+* [gto76/python-cheatsheet](https://github.com/gto76/python-cheatsheet):Comprehensive Python Cheatsheet https://gto76.github.io/python-cheatsheet/
+* 面试
+  - [kenwoodjw/python_interview_question](https://github.com/kenwoodjw/python_interview_question):关于python的面试题
+* 图书
+  - [Test-Driven Web Development with Python](https://www.obeythetestinggoat.com/pages/book.html#toc)
 
 ## Algorithmic Trading
 
@@ -1211,20 +1217,6 @@ Python 实现的算法和设计模式。
 ## 源码
 
 * [flaggo/python3-source-code-analysis](https://github.com/flaggo/python3-source-code-analysis):《Python 3 源码剖析》
-* functional programming
-  * [evhub/coconut](https://github.com/evhub/coconut):Simple, elegant, Pythonic functional programming. http://coconut-lang.org
-
-## reference
-
-* [gto76/python-cheatsheet](https://github.com/gto76/python-cheatsheet):Comprehensive Python Cheatsheet https://gto76.github.io/python-cheatsheet/
-
-## 面试
-
-* [kenwoodjw/python_interview_question](https://github.com/kenwoodjw/python_interview_question):关于python的面试题
-
-## 图书
-
-* [Test-Driven Web Development with Python](https://www.obeythetestinggoat.com/pages/book.html#toc)
 
 ## 知识点
 

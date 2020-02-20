@@ -51,7 +51,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - Debian
 * 进阶：完全掌控你的电脑和操作系统；了解Linux内部；精简的优化系统
   - Slackware Linux
-  - [Arch Linux](https://www.archlinux.org/)
+  - [Arch Linux](https://www.archlinux.org/) [安装教程](https://www.viseator.com/categories/Linux/)
   - [Gentoo Linux](https://www.gentoo.org/)
 * 安全与稳定：为学习最新的东西而甘冒风险；最新和最伟大的功能；有趣的配置以便于处理重大更改
   - OpenSuse Tumbleweed
@@ -737,32 +737,51 @@ halt｜reboot｜poweroff
 * LSB(Linux Standard Base)
 
 ```sh
-arch| uname -m
+arch| uname -m # 显示机器的处理器架构
+
+# 查看linux系统信息
+cat /proc/version # 说明正在运行的内核版本
+cat /etc/issue # 显示的是发行版本信息
+lsb_release -a
+uname -a # 显示电脑以及操作系统的相关信息
+uname -r # 显示正在使用的内核版本
 
 ## 硬件
 dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI)
 hdparm -i /dev/hda 罗列一个磁盘的架构特性
 hdparm -tT /dev/sda 在磁盘上执行测试性读取操作
-cat /proc/cpuinfo 显示CPU info的信息
+cat /proc/cpuinfo # 显示CPU info的信息
 cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c # cpu型号
 at /proc/cpuinfo | grep physical | uniq -c # 物理cpu颗数
 cat /proc/interrupts 显示中断
-cat /proc/meminfo 校验内存使用
+cat /proc/meminfo # 内存使用
 cat /proc/swaps 显示哪些swap被使用
 cat /proc/version 显示内核的版本
 cat /proc/net/dev 显示网络适配器及统计
 cat /proc/mounts 显示已加载的文件系统
 lscpu
-lspci -tv 罗列 PCI 设备
-lsusb -tv 显示 USB 设备
+lspci -tv # 罗列 PCI 设备
+lsusb -tv # 显示 USB 设备
+
+# Show info about disk sda
+hdparm -i /dev/sda
+
+# Perform a read speed test on disk sda
+hdparm -tT /dev/sda
 
 grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
 
-# 查看linux系统信息
-uname -a # 显示电脑以及操作系统的相关信息 -r 核心版本
-cat /proc/version # 说明正在运行的内核版本
-cat /etc/issue # 显示的是发行版本信息
-lsb_release -a
+# Display processor related statistics
+mpstat 1
+
+# Display virtual memory statistics
+vmstat 1
+
+# Display I/O statistics
+iostat 1
+
+# Display the last 100 syslog messages  (Use /var/log/syslog for Debian based systems.)
+tail 100 /var/log/messages
 ```
 
 ## 软件
@@ -841,19 +860,12 @@ sudo apt-get clean
 * /sbin/
 
 ```sh
-# 查看linux系统信息
-arch # 显示机器的处理器架构
-uname -a # 显示电脑以及操作系统的相关信息
-uname -m # 显示机器的处理器架构
-uname -r # 显示正在使用的内核版本
-cat /proc/version # 说明正在运行的内核版本
-cat /etc/issue # 显示的是发行版本信息
-lsb_release -a
-
 date # 获取当前时间
 date +%Y-%m-%d
 date +%Y-%m-%d  --date="-1 day" #加减也可以 month | year
 date -s "2016-07-28 16:12:00" ## 修改时间
+# Show how long the system has been running + load
+uptime # 查看当前系统运行多长时间
 
 clock -w # 将时间修改保存到 BIOS
 
@@ -862,14 +874,12 @@ history # 显示历史
 --help # 用于显示 shell 内建命令的简要帮助信息 help exit
 man # 查看命令的帮助
 info ls # 查看信息
-info php # 查看信息
 
 cal # 日历
 bc # 支持任意精度的交互执行的计算器语言
 date # 获取当前时间
 
 --version/-V # 查看某个程序的版本
-ssh # 连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。
 grep  # 用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
 alias server="python -m SimpleHTTPServer 9000" # 使用 alias 这个 bash 内置的命令来为它们创建一个短别名
 
@@ -951,7 +961,40 @@ ping -c 次数 ip # 测试网络畅通性
 ping 8.8.8.8 # 检测连接
 ip addr # 查看IP地址
 
-ifconfig # 查询本机网络信息
+# Display all network interfaces and ip address
+ifconfig -a
+# Display eth0 address and details
+ifconfig eth0
+
+# Query or control network driver and hardware settings
+ethtool eth0
+
+# Send ICMP echo request to host
+ping host
+
+# Display whois information for domain
+whois domain
+
+# Display DNS information for domain
+dig domain
+
+# Reverse lookup of IP_ADDRESS
+dig -x IP_ADDRESS
+
+# Display DNS ip address for domain
+host domain
+
+# Display the network address of the host name.
+hostname -i
+
+# Display all local ip addresses
+hostname -I
+
+# Download http://domain.com/file
+wget http://domain.com/file
+
+# Display listening tcp and udp ports and corresponding programs
+netstat -nutlp
 
 sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
 
@@ -983,6 +1026,7 @@ iptables -A INPUT -ptcp --dport  端口号-j ACCEPT　#　打开端口
 yum install telnet.x86_64
 telnet 10.0.3.69 2020  # 测试端口能否访问
 
+# # List all open files on the system
 lsof -i -P | grep ssh
 lsof -i: (port) # 查看端口的占用情况
 lsof -Pni4 | grep LISTEN | grep php
@@ -995,6 +1039,8 @@ lsof +d /usr/local/ # 显示目录下被进程开启的文件
 lsof +D /usr/local/ # 同上，但是会搜索目录下的目录，时间较长
 lsof -d 4 # 显示使用fd为4的进程
 lsof -i -U # 显示所有打开的端口和UNIX domain文件
+# List files opened by user
+lsof -u user
 
 netstat -tunlp # 显示tcp，udp的端口和进程等相关
 sudo netstat -plunt
@@ -1014,6 +1060,7 @@ systemctl list-units --type=service # 查看服务
 # pidof prints out the process id of a running program. For example, below command will output the process ID of nginx
 pidof nginx
 
+# Display all the currently running processes on the system.
 ps -ef | grep nginx # 根据进程名查看进程id
 ps aux | grep nginx
 
@@ -1023,11 +1070,8 @@ kill -s 9 processId
 kill -USR2 $(pidof nginx)
 pkill -f nginx
 
-uptime # 查看当前系统运行多长时间
-
 # 退出
 ctrl+c   ## 有些程序也可以用q键
-
 ctrl+z   ## 进程会挂起到后台
 
 jobs # 后台列表
@@ -1409,13 +1453,13 @@ type composer
 locate /etc/sh(查找 /etc 下所有以 sh 开头的文件)  # 通过/var/lib/mlocate/mlocate.db数据库查找，不过这个数据库也不是实时更新的，系统会使用定时任务每天自动执行 updatedb 命令更新一次，所以有时候你刚添加的文件，它可能会找不到
 locate /usr/share/\*.jpg # 注意要添加 * 号前面的反斜杠转义，否则会无法找到。
 which man # 使用 which 来确定是否安装了某个指定的软件，因为它只从 PATH 环境变量指定的路径中去搜索命令
-sudo find /etc/ -name interfaces/ # 格式find [path] [option] [action];  不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索。
 
+sudo find /etc/ -name interfaces/ # 格式find [path] [option] [action];  不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索。
 find  ./  -size  +50c # 在当前目录下查找大小[大于]50个字节的文件
 find  ./  -size  -50c # 在当前目录下查找大小[小于]50个字节的文件
 find / -name passwd -mindepth 3 -maxdepth 4 # 在3到4个层次的目录里边定位passwd文件
-find  /  -name  passwd[完整名称]     # "递归遍历"系统全部目录查找名字等于passwd的文件
-find  目录 -name  "an*" [部分名称]     # 模糊查找文件名字以an开始的
+find  /  -name  passwd     # "递归遍历"系统全部目录查找名字等于passwd的文件
+find  目录 -name  "an*"     # 模糊查找文件名字以an开始的
 ```
 
 ### 用户管理
@@ -1461,6 +1505,8 @@ who # 查看谁在线
 last # 查看最近的登陆历史记录
 whoami # 只列出用户名 用于查询当前用户的名称
 who mom likes/who am i # 列出用户名，所使用终端的编号和开启时间
+# Show who is logged in and what they are doing.
+w
 finger # 列出当前用户的详细信息，需使用apt-get提前安装
 
 su <user> # 切换到用户user,执行时需要输入目标用户的密码
@@ -1604,13 +1650,13 @@ cat ~/.ssh/id_rsa.pub | ssh demo@198.51.100.0 "mkdir -p ~/.ssh && chmod 700 ~/.s
 
 # 传输文件通过ssh
 scp id_rsa.pub git@172.26.186.117:/home/git/
-scp -P 1101 username@servername:/remote_path/filename  ~/local_destination   // 源文件  目标文件
-ssh -p 2222 user@host   # 登陆服务器
+scp -P 1101 username@servername:/remote_path/filename  ~/local_destination   # 源文件  目标文件
 
 ## 服务器登陆
-ssh username@remote_host
+ssh -p 2222 user@host   # 登陆服务器
 ssh username@remote_host ls /var/www
 ssh -i ~/.ssh/my_key root@$YOU_SERVER_IP
+
 # /etc/ssh/sshd_config
 PasswordAuthentication no  # Disable Password Authentication
 PubkeyAuthentication yes
@@ -2116,4 +2162,4 @@ set completeopt=longest,menu
 * [十五分钟制作一个属于自己得Linux操作系统](https://mp.weixin.qq.com/s?__biz=MzA3OTgyMDcwNg==&mid=2650636229&idx=1&sn=5904d82ee06d0e78a6140e1905bd06f0&chksm=87a47d08b0d3f41e592774b07f2977876f42e4d14d7f148e53f0f805d249bd20cdd83495a337)
 * [VITUX](https://vitux.com) Linux Compendium
 * [judasn/Linux-Tutorial](https://github.com/judasn/Linux-Tutorial):《Java 程序员眼中的 Linux》 https://github.com/judasn/Linux-Tutorial
-https://www.linuxtrainingacademy.com/linux-commands-cheat-sheet/
+* [Linux From Scratch](https://www.linuxtrainingacademy.com/linux-commands-cheat-sheet/)

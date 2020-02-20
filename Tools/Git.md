@@ -15,7 +15,7 @@ fast, scalable, distributed revision control system. https://git-scm.com/
 * [gogits/gogs](https://github.com/gogits/gogs):Gogs is a painless self-hosted Git service. https://gogs.io
 * [go-gitea/gitea](https://github.com/go-gitea/gitea):Gitea: Git with a cup of tea http://gitea.io
 * [工蜂](https://git.code.tencent.com)
-* [GitKraken](link)
+* [GitKraken](https://www.gitkraken.com/)
 
 ## 安装
 
@@ -1076,7 +1076,7 @@ git --work-tree=/home/www checkout -f
 ## 工作流
 
 * **集中式工作流**：维护一个master分支，开发者提交功能修改到中央库前，需要先fetch在中央库的新增提交，rebase自己提交到中央库提交历史之上
-* **功能性分支**：所有的功能开发应该在一个专门的分支
+* **功能性分支**：每个 feature 分支都是用来开发某个新功能，以便与项目的其他部分隔离。
   - 开发者每次在开始新功能前先创建一个新分支，功能分支应该有个有描述性的名字，比如animated-menu-items或issue-#1061，隔离功能的开发
   - 功能分支也可以（且应该）push到中央仓库中 `git push -u origin animated-menu-items`
   - 合并：push到中央仓库的功能分支上并发起一个Pull Request请求去合并修改到master
@@ -1096,7 +1096,9 @@ git --work-tree=/home/www checkout -f
       + 当新功能完成时，合并回develop分支，不直接和 Master 分支交互
       + Merge Master 分支上的最新代码 git merge --no-ff origin/master ，使得 Master 分支上的变更更新到迭代开发分支上面
     - 发布分支（release）：清理发布、执行所有测试、更新文档和其它为下个发布做准备操作的地方，像是一个专门用于改善发布的功能分支
-      + 对应一个迭代，基于Develop分支创建一个Release分支，完成Release后，合并到Master和Develop分支
+      + 对应一个迭代，基于Develop分支创建一个Release分支
+      + release 为预上线分支，如果上线前发现了bug，在 release 上进行修改提交，这样就可以允许其他团队在不干扰发布工作的情况下处理新功能。
+      + 当 release 确定发布时，要合并到 master 和 developer 分支。
       * 发起 pull request 请求，并指定 Code Review 人，请求的分支选择本次上线的 release 分支，即 release20150730
       * 被指定 Code Review 的人，对发起者的代码 Review 后，决定是否可以提交测试，若有问题，评论注释代码后，提交者对代码进行进行修改，重复上面，直到代码 Review 者认为 Ok，对这些代码发布到测试环境验证
       + 重复多次后，就会达到一个稳定可发布的版本，即上线版本，上线后，将 release 版本上面最后的提交合并到 Master 分支上面，并打 Tag0.3

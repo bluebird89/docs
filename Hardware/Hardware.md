@@ -57,6 +57,8 @@
 * 一加
     - 只做旗舰机
 * iphone se
+* 中兴
+    - ZTE BLADE 20 smart
 
 ## 渠道
 
