@@ -108,6 +108,11 @@
 
 * “亲情里最刻骨铭心的不是父母的伟光正，而是父母卑微、猥琐 、慌张、无助、茫然的镜头。” 她评价《背影
 
+## 陶立夏
+
+* 半夜醒来，天幕中有一弯月牙，它柠檬黄的光照耀着厚厚的积雪，空气是蓬松清冷的暖灰色。这景象比所有梦境都更轻盈美丽。 我们都是要死的，却依然努力着、挣扎着，认真地过着这一生。爱着，盼望着。为什么？
+* 没有人骗你，是你自己选择要去相信而已。
+
 ## 工具
 
 * [koreader/koreader](https://github.com/koreader/koreader):An ebook reader application supporting PDF, DjVu, EPUB, FB2 and many more formats, running on Kindle, Kobo, PocketBook, Ubuntu Touch and Android devices http://koreader.rocks/

@@ -119,6 +119,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - [marked2](http://marked2app.com/)
     - [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
     - Upad
+    - [Bear](https://bear.app/):Write beautifully on iPhone, iPad, and Mac
 * 下载
     - bitlord
     - Folx
