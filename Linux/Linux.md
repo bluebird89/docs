@@ -51,11 +51,12 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - Debian
 * 进阶：完全掌控你的电脑和操作系统；了解Linux内部；精简的优化系统
   - Slackware Linux
-  - [Arch Linux](https://www.archlinux.org/) [安装教程](https://www.viseator.com/categories/Linux/)
+  - [Arch Linux](https://www.archlinux.org/)
   - [Gentoo Linux](https://www.gentoo.org/)
 * 安全与稳定：为学习最新的东西而甘冒风险；最新和最伟大的功能；有趣的配置以便于处理重大更改
   - OpenSuse Tumbleweed
   - Fedora Rawhide
+  - [Kali](https://www.kali.org/)
 * 正常：运行平稳，维护量低；最小配置；大部分事情可以自动完成；兼容硬件和软件
   - openSuse Leap
   - Ubuntu Studio
@@ -103,6 +104,12 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 * GNU GRUB（GRand Unified Bootloader简称“GRUB”）是一个来自GNU项目的多操作系统启动引导管理程序。
   - GRUB是一个支持多种操作系统的启动引导管理器，在一台有多个操作系统的计算机中，可以通过GRUB在计算机启动时选择用户希望运行的操作系统。
   - 同时GRUB可以引导Linux系统分区上的不同内核，也可用于向内核传递启动参数，如进入单用户模式。
+  - 同时支持EFI和BIOS方式的启动
+
+```sh
+# 启动盘制作
+sudo dd bs=4M if=/home/hcf/dev/iso/ubuntu-16.04-desktop-amd64.iso of=/dev/sdb4
+```
 
 ## 组成
 
