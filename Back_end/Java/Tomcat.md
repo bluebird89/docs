@@ -110,3 +110,4 @@ sudo service tomcat8 restart
 ## 参考
 
 * [Tomcat 内核设计剖析](link)
+* [Tomcat学习四步走：内核、集群、参数及性能](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650765045&idx=1&sn=344349247fab0e45a0d319e6917a307e&chksm=f3f9c360c48e4a763a6e21c9ec07b1fa839e997661c851f6d72ec6560f3d872fb6065c15f2cb)

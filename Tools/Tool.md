@@ -23,6 +23,7 @@
     - TickTick
     - [laurent22/joplin](https://github.com/laurent22/joplin):Joplin - an open source note taking and to-do application with synchronization capabilities for Windows, macOS, Linux, Android and iOS. Forum: https://discourse.joplinapp.org/ https://joplinapp.org
     - [P3X OneNote](link)： a cloud-based note-taking application and is considered as an exact alternative to the well known Microsoft OneNote application
+    - [Notion](https://www.notion.so/):Work offline, collaborate in real-time, write without distractions.
 * flowchart
     - [Zen Flowchart](https://www.zenflowchart.com)
 * 輸入法

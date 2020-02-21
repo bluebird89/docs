@@ -521,6 +521,9 @@ git update-index --no-assume-unchanged <file>
     + style: 代码格式修改, 注意不是 css 修改
     + test: 测试用例修改
     + chore: 其他修改, 比如构建流程, 依赖管理.
+    + build
+    + ci
+    + perf
   - scope: commit 影响的范围, 比如: route, component, utils, build...
   - subject: commit 的概述, 建议符合  50/72 formatting
   - body: commit 具体修改内容, 可以分为多行, 建议符合 50/72 formatting
@@ -535,6 +538,8 @@ git commit -a # 把unstaged文件变成staged(不包括新建文件)，然后com
 git commit –am "message" # git add . + git commit -m 'message' 合并使用,只提交修改
 git commit -v # 提交时显示所有diff信息
 git commit --amend [file1] [file2] ... # 修改上一次提交日志 使用一次新的commit，替代上一次提交,如果代码没有任何新变化，则用来改写上一次commit的提交信息
+
+git commit -m "fix(core): remove deprecated and defunct wtf* apis" -m "These apis have been deprecated in v8, so they should stick around till v10, but since they are defunct we are removing them early so that they don't take up payload size." -m "PR Close #33949"
 
 # message 格式
 # 第1行：提交修改内容的摘要
