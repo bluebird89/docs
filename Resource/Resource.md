@@ -5,26 +5,26 @@
 ## 硬件
 
 * keyward
-    -   FILCO 斐尔可 87 圣手忍者 FILCO Majestouch2 87
-    -   斐尔可（FILCO） FKBN87MRL/EB2 Majestouch 2「87 圣手二代」
-    -   HHKB Professional ~~2~~
-    -   Kinesis KB600 Advantage2
-    -   Das Keyboard Model S Professional for Mac Clicky MX Blue Mechanical Keyboard (DASK3PROMS1MACCLI)
-    -   IKBC C87 F87 红轴最好
-    -   cherry mx8.0
-    -   腕托
--   Computer（大尺寸屏幕,甚至两块屏幕）
-    -   MacBook Pro:15 寸，16G
-    -   Acer Chromebook R11
-    -   明基 EW2775ZH
-    -   明基 PD2710QC
-    -   Chromebook
-*   耳机
-    -   Libratone小鸟音响
-        +   TRACK+无线智能降噪耳机：1498
-        +   TRACK入耳式无线耳机：698元
-        +   1098元的TRACK Air无线耳机
-        +   1698元的TRACK Air+无线降噪耳机
+    - FILCO 斐尔可 87 圣手忍者 FILCO Majestouch2 87
+    - 斐尔可（FILCO） FKBN87MRL/EB2 Majestouch 2「87 圣手二代」
+    - HHKB Professional ~~2~~
+    - Kinesis KB600 Advantage2
+    - Das Keyboard Model S Professional for Mac Clicky MX Blue Mechanical Keyboard (DASK3PROMS1MACCLI)
+    - IKBC C87 F87 红轴最好
+    - cherry mx8.0
+    - 腕托
+* Computer（大尺寸屏幕,甚至两块屏幕）
+    - MacBook Pro:15 寸，16G
+    - Acer Chromebook R11
+    - 明基 EW2775ZH
+    - 明基 PD2710QC
+    - Chromebook
+* 耳机
+    - Libratone小鸟音响
+        + TRACK+无线智能降噪耳机：1498
+        + TRACK入耳式无线耳机：698元
+        + 1098元的TRACK Air无线耳机
+        + 1698元的TRACK Air+无线降噪耳机
 
 ### 设计
 
@@ -45,29 +45,32 @@
 
 ## 汉字
 
-*   字解：一款非常优秀的 APP，对于了解汉字，做设计非常有帮助。
-*   日课：简洁精致的诗词 APP
-*   Chinagram：关于汉字的 APP
-*   [Chineasy](https://www.chineasy.com/):设计很出色，充分利用汉字的优势，将汉字转换为一幅幅精美的图片，让识字变成一种享受。
-*   [造字](http://www.myfont.me):用手写来造字
-*   dictionary:[goldendict/goldendict](https://github.com/goldendict/goldendict)
+* 字解：一款非常优秀的 APP，对于了解汉字，做设计非常有帮助。
+* 日课：简洁精致的诗词 APP
+* Chinagram：关于汉字的 APP
+* [Chineasy](https://www.chineasy.com/):设计很出色，充分利用汉字的优势，将汉字转换为一幅幅精美的图片，让识字变成一种享受。
+* [造字](http://www.myfont.me):用手写来造字
+* dictionary
+    - [goldendict/goldendict](https://github.com/goldendict/goldendict)
+    - [Flowerowl/ici](https://github.com/Flowerowl/ici):💥A dictionary used by programmers in the command line https://pypi.python.org/pypi/ici/
+    - [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf):⭐️ 给变量起名的事情上，为你生命省 3s (Save 3 seconds of your life when naming things.)
 
 ## 写作
 
-*   [字里行间](https://zi.com/):中文写作 APP，开发者的设计功力非常强
-*   [简书](http://www.jianshu.com/)
-*   [Medium]():一个非常优质的写作社区
-*   [Bear](http://www.bear-writer.com/):
-*   [Byword](https://metaclassy.com/):简洁，优美，专注于文字。非常棒的写作工具。
+* [字里行间](https://zi.com/):中文写作 APP，开发者的设计功力非常强
+* [简书](http://www.jianshu.com/)
+* [Medium]():一个非常优质的写作社区
+* [Bear](http://www.bear-writer.com/):
+* [Byword](https://metaclassy.com/):简洁，优美，专注于文字。非常棒的写作工具。
 
 ## 阅读
 
-*   RSS(Really Simple Syndication)
-    -   The Old Reader
-    -   Feedly:博客阅读与整理，导出订阅https://feedly.com/i/opml
-    -   Inoreader
-    -   Reeder
-    -   [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub):🍰 万物皆可 RSS https://docs.rsshub.app
+* RSS(Really Simple Syndication)
+    - The Old Reader
+    - Feedly:博客阅读与整理，导出订阅https://feedly.com/i/opml
+    - Inoreader
+    - Reeder
+    - [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub):🍰 万物皆可 RSS https://docs.rsshub.app
     - [FreshRSS/FreshRSS](https://github.com/FreshRSS/FreshRSS):A free, self-hostable aggregator… http://freshrss.org
     - [feeddemon](http://www.feeddemon.com/)
 * [brainpickings](brainpickings.org):阅读充电好去处
@@ -80,30 +83,30 @@
 
 ## 产品
 
-*   [Producthunt](https://www.producthunt.com/):收录最新最优秀的产品
-*   [Next](http://next.36kr.com/posts)
-*   [少数派](https://sspai.com/)
+* [Producthunt](https://www.producthunt.com/):收录最新最优秀的产品
+* [Next](http://next.36kr.com/posts)
+* [少数派](https://sspai.com/)
 
 ## 内容
 
-*   Wikipedia
-*   Quora
-*   Imgur
-*   Reddit
-*   News:BuzzFeed
-*   Pinterest
-*   得到
-*   [极客时间](https://github.com/shawjia/geektime-desktop):极客时间桌面版 for macOS/Windows/Debain
-*   掘金
-*   开发者头条
-*   码农头条
-*   伯乐在线
+* Wikipedia
+* Quora
+* Imgur
+* Reddit
+* News:BuzzFeed
+* Pinterest
+* 得到
+* [极客时间](https://github.com/shawjia/geektime-desktop):极客时间桌面版 for macOS/Windows/Debain
+* 掘金
+* 开发者头条
+* 码农头条
+* 伯乐在线
 
 ## 管理与沟通
 
-*   WhatsApp
-*   [Asana](asana.com)
-*   [meili/TeamTalk](https://github.com/meili/TeamTalk):TeamTalk is a solution for enterprise IM
+* WhatsApp
+* [Asana](asana.com)
+* [meili/TeamTalk](https://github.com/meili/TeamTalk):TeamTalk is a solution for enterprise IM
 * [klauscfhq/taskbook](https://github.com/klauscfhq/taskbook):📓 Tasks, boards & notes for the command-line habitat
 
 ## 语言
@@ -113,27 +116,20 @@
 
 ### office
 
-*   Google Docs [表单](https://docs.google.com/forms/u/0/)
-*   libre
-*   [Keynote](https://www.apple.com/cn/keynote/)
+* Google Docs [表单](https://docs.google.com/forms/u/0/)
+* libre
+* [Keynote](https://www.apple.com/cn/keynote/)
 * [文档转换](https://smallpdf.com/)
 
 ## 表单
 
--   金数据 jinshuju.net
--   MailChimp mailchimp.com
+* 金数据 jinshuju.net
+* MailChimp mailchimp.com
 
 ## 社交
 
 * [sindresorhus/caprine](https://github.com/sindresorhus/caprine):Elegant Facebook Messenger desktop app https://sindresorhus.com/caprine
 * [TheYahya/sherlock](https://github.com/TheYahya/sherlock):🔎 Find usernames across social networks
-
-## 生活
-
-- 机票：https://flights.manzhinan.com/
-- 牙医：德真会
-- 大吉岭玫瑰红茶Darjeeling Rose Camélia
-- IKEA
 
 ## Blog
 
@@ -147,11 +143,11 @@
 
 ## APP
 
-*   36氪
-*   quora
-*   知乎
-*   Medium
-*   Pinterest
+* 36氪
+* quora
+* 知乎
+* Medium
+* Pinterest
 
 ## 新闻
 
@@ -179,15 +175,6 @@
 * [阿里镜像](https://opsx.alibaba.com/mirror)
 * [腾讯软件源](https://mirrors.cloud.tencent.com)
 * [](https://bitnami.com)
-
-## 词典
-
-*   [Flowerowl/ici](https://github.com/Flowerowl/ici):💥A dictionary used by programmers in the command line https://pypi.python.org/pypi/ici/
-*   [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf):⭐️ 给变量起名的事情上，为你生命省 3s (Save 3 seconds of your life when naming things.)
-
-## 文章
-
-* [xitu/gold-miner](https://github.com/xitu/gold-miner):🥇掘金翻译计划，可能是世界最大最好的英译中技术社区，最懂读者和译者的翻译平台： https://juejin.im/tag/掘金翻译计划
 
 ## 参考
 
@@ -218,3 +205,4 @@
 * [Tutorials & training to grow your development skills](https://www.ibm.com/developerworks/learn/)
 * [Open source](https://www.ibm.com/developerworks/cn/opensource)
 * [TIGERB/easy-tips](https://github.com/TIGERB/easy-tips):A little Tips in my Code Career with PHP&Go 🐘 http://easy-tips.tigerb.cn
+* [xitu/gold-miner](https://github.com/xitu/gold-miner):🥇掘金翻译计划，可能是世界最大最好的英译中技术社区，最懂读者和译者的翻译平台： https://juejin.im/tag/掘金翻译计划
