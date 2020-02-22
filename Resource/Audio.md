@@ -12,3 +12,4 @@
 * [妹日新鲜](https://meiri.fireside.fm)
 * [IPN](https://ipn.li/faq)
 * [ThoughtWorks 洞见](http://www.ximalaya.com/zhubo/81966002/)
+* [剩余价值](http://www.surplusvalue.club/)
