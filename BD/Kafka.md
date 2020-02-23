@@ -199,16 +199,13 @@ topic
 
 * 《Kafka源码解析与实战》 王亮
 
-## 项目
-
-* [weiboad/kafka-php](https://github.com/weiboad/kafka-php):kafka php client
-* [dpkp/kafka-python](https://github.com/dpkp/kafka-python):Python client for Apache Kafka http://kafka-python.readthedocs.io/
-* [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. https://shopify.github.io/sarama
-
 ## 工具
 
 * [yahoo/kafka-manager](https://github.com/yahoo/kafka-manager):A tool for managing Apache Kafka.
 * [tchiotludo/kafkahq](https://github.com/tchiotludo/kafkahq):Kafka GUI for topics, topics data, consumers group, schema registry, connect and more... https://tchiotludo.github.io/kafkahq/
+* [weiboad/kafka-php](https://github.com/weiboad/kafka-php):kafka php client
+* [dpkp/kafka-python](https://github.com/dpkp/kafka-python):Python client for Apache Kafka http://kafka-python.readthedocs.io/
+* [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. https://shopify.github.io/sarama
 
 ## 参考
 

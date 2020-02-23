@@ -36,4 +36,5 @@ sudo ./install_solr_service.sh solr-8.4.1.tgz
 
 ## 参考
 
-* [solr cookbook]
+* [solr cookbook]()
+* [Solr Ref Guide](https://lucene.apache.org/solr/guide/8_4)
