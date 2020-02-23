@@ -1,4 +1,4 @@
-# [scala/scala](https://github.com/scala/scala)
+ [#scala/scala](https://github.com/scala/scala)
 
 The Scala programming language http://www.scala-lang.org/
 
