@@ -5,30 +5,29 @@
 
 ## 特性
 
+× 高并发 高性能
+    - 内存消耗低：10000个keep-alive连接模式下的非活动连接仅消耗2.5M内存；
+    - 非阻塞、高并发连接：官方测试能够支撑5万并发连接，在实际生产环境中跑到2～3万并发连接数
+    - 事件驱动：通信机制采用 epoll 模型，支持更大的并发连接
+        - 支持event-driven事件驱动模型, aio异步驱动机制, mmap内存映射；
+        - 新的epoll（Linux 2.6内核）和kqueue（freebsd）网络I/O模型
+    - 节省带宽：支持 GZIP 压缩，可以添加浏览器本地缓存的 Header 头
 * 高可靠性：基于master/worker模式，一个 master 进程，生成一个或多个 worker 进程
-* 支持热部署(平滑迁移)：不停机更新配置文件、更换日志、更新服务器程序版本；
-* 内存消耗低：10000个keep-alive连接模式下的非活动连接仅消耗2.5M内存；
-* 高度模块化（非DSO机制）
+    - 功能：如果 Nginx 代理的后端的某台 Web 服务器宕机了，不会影响前端访问
+    - 用于反向代理，宕机的概率微乎其微
+* 热部署(平滑迁移)：不停机更新配置文件、更换日志、更新服务器程序版本；
+* 可扩展性好：高度模块化（非DSO机制）
 * 跨平台：Nginx 可以在大多数 Unix like OS编译运行，而且也有 Windows 的移植版本
-* 非阻塞、高并发连接：官方测试能够支撑5万并发连接，在实际生产环境中跑到2～3万并发连接数
-* 事件驱动：通信机制采用 epoll 模型，支持更大的并发连接
-    - 支持event-driven事件驱动模型, aio异步驱动机制, mmap内存映射；
-    - 新的epoll（Linux 2.6内核）和kqueue（freebsd）网络I/O模型
-* 内置的健康检查功能：如果 Nginx 代理的后端的某台 Web 服务器宕机了，不会影响前端访问
-* 节省带宽：支持 GZIP 压缩，可以添加浏览器本地缓存的 Header 头
 * 配置异常简单：非常容易上手
-* 稳定性高：用于反向代理，宕机的概率微乎其微
 * 缺点
     - 仅能支持http、https 和 Email 协议，这样就在适用范围上面小些
     - 对后端服务器的健康检查，只支持通过端口来检测，不支持通过 url来检测。不支持 Session 的直接保持，但能通过 ip_hash 来解决
     - 模块默认编译进 Nginx 中，如果需要增加或删除模块，需要重新编译 Nginx，这一点不如 Apache 的动态加载模块方便
+    - Apache:一个进程处理一个链接
 
 ## 版本
 
 * Nginx 从 1.7.11 开始实现了线程池机制，大部分场景中可以避免使用阻塞，整体性能有了数倍提升。https://www.nginx.com/blog/thread-pools-boost-performance-9x/
-
-## 扩展版本
-
 * NGINX Plus 由 Web 服务器、内容缓存和负载均衡器组成。流行的开源 NGINX Web 服务器的商业版本。NGINX Web 应用程序防火墙（WAF）是一款基于开源 ModSecurity 研发的商业软件，为针对七层的攻击提供保护，例如 SQL 注入或跨站脚本攻击，并根据如 IP 地址或者报头之类的规则阻止或放行， NGNX WAF 作为 NGINX Plus 的动态模块运行，部署在网络的边缘，以保护内部的 Web 服务和应用程序免受 DDoS 攻击和骇客入侵。
     - NGINX Unit 是 Igor Sysoev 设计的新型开源应用服务器，由核心 NGINX 软件开发团队实施。可运行 PHP、Python 和 Go 的新型开源应用服务器。Unit 是"完全动态的"，并允许以蓝绿部署的方式无缝重启新版本的应用程序，而无需重启任何进程。所有的 Unit 配置都通过使用 JSON 配置语法的内置 REST API 进行处理，并没有配置文件。目前 Unit 可运行由最近版本的 PHP、Python 和 Go 编写的代码。在同一台服务器上可以支持多语言的不同版本混合运行。即将推出更多语言的支持，包括 Java 和 Node.JS。
     - NGINX Controller 是 NGINX Plus 的中央集中式监控和管理平台。Controller 充当控制面板，并允许用户通过使用图形用户界面"在单一位置管理数百个 NGINX Plus 服务器"。该界面可以创建 NGINX Plus 服务器的新实例，并实现负载平衡、 URL 路由和 SSL 终端的中央集中配置。Controller 还具备监控功能，可观察应用程序的健壮性和性能。
@@ -48,7 +47,7 @@
     - Optional HTTP  modules：可选HTTP模块
     - 第三方模块 3rd party modules：HTTP Upstream Request Hash 模块、Notice 模块和 HTTP Access Key 模块及用户自己开发的模块。
 * Web 服务器，以 B/S（Browser/Server）方式提供服务
-    - 静态页面的 Web 服务器
+    - 静态资源服务
     - 支持 CGI 协议的动态语言，比如 Perl、PHP 等，但是不支持 Java。将处理过的内容通过 HTTP Server 分发
     - 虚拟主机（server）
     - keepalive
@@ -62,13 +61,16 @@
     - 纯粹把静态文件独立成单独的域名，放在独立的服务器上，也是目前主流推崇的方案；
     - 动态跟静态文件混合在一起发布，通过 Nginx 来分开。
 * 反向代理
-    * pop3, smpt,imap4等邮件协议的反向代理；
+    * pop3, smpt,imap4等邮件协议的反向代理，应用服务集群扩展，动态扩容
+    * 缓存：是边缘节点，减少时间延迟
+    * 负载均衡：容灾
 * 支持过滤器，例如zip，SSI
 * 支持SSL加密机制
+* API服务：OpenResty
 
 ## 进程模型
 
-* 架构设计是采用模块化的、基于事件驱动、异步、单线程且非阻塞
+* 多进程模型 架构设计是采用模块化的、基于事件驱动、异步、单线程且非阻塞
 * 大量使用多路复用和事件通知，Nginx 启动以后，会在系统中以 daemon 的方式在后台运行，其中包括一个 master 进程，n(n>=1) 个 worker 进程。所有的进程都是单线程（即只有一个主线程）的，且进程间通信主要使用共享内存的方式。
 * master/worker模型
     - 一个master进程:充当整个进程组与用户的交互接口，同时对进程进行监护，管理 Worker 进程来实现重启服务、平滑升级、更换日志文件、配置文件实时生效等功能
@@ -258,6 +260,13 @@ wget https://github.com/winshining/nginx-http-flv-module/archive/master.zip
 unzip master.zip
 ./configure --add-module=../nginx-http-flv-module-master
 ```
+
+## 组成
+
+* nginx 二进制可执行文件
+* nginx.conf 配置文件
+* accedd.log 访问日志
+* error.log 错误日志
 
 ### 配置
 
@@ -1818,7 +1827,7 @@ sticky learn
 ## 日志
 
 * gnuplot:生成png
-* go-access:直接输出html
+* [allinurl / goaccess](https://github.com/allinurl/goaccess):GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. https://goaccess.io
 * ngxtop 统计实时数据
     - `pip install ngxtop`
     - `ngxtop -c conf/nginx.conf -t 1` -c 指定配置文件，-t 刷新频率，单位为秒
@@ -1923,15 +1932,17 @@ chmod +x /root/shell/nginx_log_to_mysql.sh
 crontab –e
 # 凌晨0时15分执行
 15 0 * * * /root/shell/nginx_log_to_mysql.sh &> /var/log/nginx_sh.log
+
+sudo goaccess logs/access.log  -o html/report.html --real-time-html --time-format='%H:%M:%S' --date-format='%d/%b/%Y' --log-format=COMBINED
 ```
 
 ## 优化
 
 * 调整 worker_processes：指 Nginx 要生成的 Worker 数量，最佳实践是每个 CPU 运行 1 个工作进程。
-* 最大化 worker_connections。
+* 最大化 worker_connections
 * 启用 Gzip 压缩：压缩文件大小，减少了客户端 HTTP 的传输带宽，因此提高了页面加载速度。
 * 为静态文件启用缓存。
-* 禁用 access_logs：访问日志记录，它记录每个 Nginx 请求，因此消耗了大量 CPU 资源，从而降低了 Nginx 性能。
+* 禁用 access_logs：访问日志记录，记录每个 Nginx 请求，因此消耗了大量 CPU 资源，从而降低了 Nginx 性能。
 
 ## [Nginx+Lua](https://github.com/loveshell/ngx_lua_waf)
 
