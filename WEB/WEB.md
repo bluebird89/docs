@@ -306,6 +306,22 @@ if(password_verify($password, $hash)) {
 }
 ```
 
+## TCP BBR
+
+Google给出的一个改良版的tcp网络协议，相当于在已有TCP协议的基础上打了个补丁的意思，这个改良版TCP协议对拥塞控制有很好的支持，对于网络较差的环境有不错的应用场景.Linux系统内核版本大于4.9
+
+```
+echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+
+sysctl   -p # 配置生效
+
+sysctl net.ipv4.tcp_available_congestion_control # 查看
+lsmod | grep bbr
+```
+
+
+
 ## SSO（Single Sign On，单点登录）
 
 * 能够做到一次登录多次使用
@@ -428,7 +444,6 @@ if(password_verify($password, $hash)) {
 - 《大型网站技术架构：核心原理与案例分析》 6.2 应用服务器集群的伸缩性设计
 
 <https://zhuanlan.zhihu.com/p/22360384>
-
 <http://tips.codekiller.cn/2017/05/17/maglev_describe/>
 <http://developer.51cto.com/art/200807/83518.htm>
 <https://help.aliyun.com/document_detail/29322.html>

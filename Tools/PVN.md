@@ -156,6 +156,7 @@ pip install shadowsocks
     - [jiangxufeng/v2rayL](https://github.com/jiangxufeng/v2rayL):v2ray linux GUI客户端，支持订阅、vemss、ss等协议，自动更新订阅、检查版本更新
 * [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
 * [iMeiji/shadowsocks_install](https://github.com/iMeiji/shadowsocks_install)
+* [trojan-gfw](https://github.com/trojan-gfw/trojan):An unidentifiable mechanism that helps you bypass GFW. https://trojan-gfw.github.io/trojan/
 * Perfect Privacy
 * ExpressVPN
 * NordVPN

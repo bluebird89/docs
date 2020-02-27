@@ -899,8 +899,8 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 ## 图书
 
 * [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源图书，涵盖CGO、Go汇编语言、RPC实现、Protobuf插件实现、Web框架实现、分布式系统等高阶主题 https://legacy.gitbook.com/book/chai2010/advanced-go-programming-book/details
-* [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN):《The Way to Go》中文译本，中文正式名《Go 入门指南》
-* 并发编程
+* [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN)* 《Go 入门指南 The Way to Go》
+* 《Go 并发编程实战》
 * [Mastering_Go_ZH_CN](https://wskdsgcf.gitbook.io/mastering-go-zh-cn/)
 
 ## 项目
@@ -912,6 +912,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 
 * [Go 指南](https://tour.go-zh.org/basics/2)
 * [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
+* [hyper0x / Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers):An example project, for my column named "Core Golang - 36 lessons"
 * [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源免费图书(开发中...)https://github.com/chai2010/advanced-go-programming-book
 * [astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
 * [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
@@ -923,7 +924,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [astaxie/go-best-practice](https://github.com/astaxie/go-best-practice):Trying to complete over 100 projects in various categories in golang.
 * [Unknwon/go-fundamental-programming](https://github.com/Unknwon/go-fundamental-programming):《Go 编程基础》是一套针对 Google 出品的 Go 语言的视频语音教程，主要面向新手级别的学习者。
 * [Alikhll/golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
-* [go_command_tutorial](https://github.com/hyper0x/go_command_tutorial):Go 命令教程
+* [go_command_tutorial](https://github.com/hyper0x/go_command_tutorial):Golang command tutorial in Chinese. 
 * [hyper0x/Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers/tree/master/src/puzzlers):An example project, for my column named "Core Golang - 36 lessons"
 * [hoanhan101/ultimate-go](https://github.com/hoanhan101/ultimate-go):Ultimate Go study guide, with heavily documented code and programs analysis all in 1 place →
 * [ardanlabs/gotraining](https://github.com/ardanlabs/gotraining):Go Training Class Material
@@ -1060,6 +1061,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * Raft
   - [lni/dragonboat](https://github.com/lni/dragonboat):A feature complete and high performance multi-group Raft library in Go.
 * [go-swagger/go-swagger](https://github.com/go-swagger/go-swagger):Swagger 2.0 implementation for go https://goswagger.io
+* [GoAdminGroup / go-admin](https://github.com/GoAdminGroup/go-admin):A golang framework helps gopher to build a data visualization and admin panel in ten minutes https://www.go-admin.com
 * 编辑器
   - [visualfc/liteide](https://github.com/visualfc/liteide)：LiteIDE is a simple, open source, cross-platform Go IDE.
 * [rodrigo-brito/gocity](https://github.com/rodrigo-brito/gocity):📊 Code City metaphor for visualizing Go source code in 3D https://go-city.github.io
@@ -1073,6 +1075,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [yinggaozhen/awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 https://awesome-go.cn(建设中)
 * [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 * [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
+* [The Go Programming Language Specification](https://golang.google.cn/ref/spec)
 * [GO语言中文网](https://studygolang.com/)
 * [uber-go/guide](https://github.com/uber-go/guide):The Uber Go Style Guide.
 * [qiniu/gobook](https://github.com/qiniu/gobook):The Go Programming Language
