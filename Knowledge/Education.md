@@ -132,6 +132,18 @@
 It is not worth an intelligent man’s time to be in the majority. By definition, there are already enough people to do that. G. H. Hardy
 ```
 
+
+
+## 能力
+
+
+
+* 表达沟通
+* 想象力
+* 对孩子的陪伴
+
+
+
 ## 观点
 
 * 孩子面前克制，看他发展

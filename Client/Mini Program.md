@@ -8,6 +8,7 @@
 
 * 微信
     - [开发工具](https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/devtools.html)
+    - [kbone](https://developers.weixin.qq.com/miniprogram/dev/extended/kbone/):一个致力于微信小程序和 Web 端同构的解决方案
 * 支付宝
 * 百度
 * 头条

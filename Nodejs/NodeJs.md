@@ -763,6 +763,7 @@ yarn install node-sass
   - [typeorm/typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. http://typeorm.io
   - [sequelize/sequelize](https://github.com/sequelize/sequelize):An easy-to-use multi SQL dialect ORM for Node.js https://sequelize.org
 * HTTP
+    - [sindresorhus / got](https://github.com/sindresorhus/got):🌐 Human-friendly and powerful HTTP request library for Node.js
 * Logger
   - [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
   - [expressjs/morgan](https://github.com/expressjs/morgan):HTTP request logger middleware for node.js
