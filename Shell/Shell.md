@@ -2075,8 +2075,7 @@ ccache gcc foo.c
     - Mac
         + Iterm2
             * [mbadolato / iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes):Over 200 terminal color schemes/themes for iTerm/iTerm2. Includes ports to Terminal, Konsole, PuTTY, Xresources, XRDB, Remmina, Termite, XFCE, Tilda, FreeBSD VT, Terminator, Kitty, MobaXterm, LXTerminal, Microsoft's Windows Terminal, Visual Studio http://www.iterm2colorschemes.com
-    - Linux
-        + 下的原生命令行
+    - Linux下原生命令行
     - Windows
         + WSL:提供了一个由微软开发的Linux兼容的内核接口(（)不包含Linux内核代码)，然后可以在其上运行GNU用户空间
             * WSL2
@@ -2086,7 +2085,7 @@ ccache gcc foo.c
         + WinSSHTerm
         + KiTTY
         + ZOC Terminal
-        + MobaXterm
+        + [MobaXterm](https://mobaxterm.mobatek.net/) Enhanced terminal for Windows with X11 server, tabbed SSH client, network tools and much more
         + Terminus
         + Console2
         + [cmder + gow](http://bliker.github.io/cmder/)
