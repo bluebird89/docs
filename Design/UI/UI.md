@@ -6,10 +6,6 @@
 * 交互
 * 习惯
 
-## 字体
-
-* [rsms/inter](https://github.com/rsms/inter):The Inter UI font family http://rsms.me/inter/
-
 ### [storybooks/storybook](https://github.com/storybooks/storybook)
 
 Interactive UI component dev & test: React, React Native, Vue, Angular https://storybook.js.org

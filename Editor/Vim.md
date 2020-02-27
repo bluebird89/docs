@@ -760,6 +760,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 ## 配置
 
 * vimtutor
+* [qvacua / vimr](https://github.com/qvacua/vimr):VimR — Neovim GUI for macOS http://vimr.org
 * [amix/vimrc](https://github.com/amix/vimrc):The ultimate Vim configuration: vimrc
 * [Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe):A code-completion engine for Vim http://valloric.github.io/YouCompleteMe/
 * [philc/vimium](https://github.com/philc/vimium):The hacker's browser.

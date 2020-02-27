@@ -3,6 +3,7 @@
 * [microsoft/cascadia-code](https://github.com/microsoft/cascadia-code):This is a fun, new monospaced font that includes programming ligatures and is designed to enhance the modern look and feel of the Windows Terminal.
 * [tonsky/FiraCode](https://github.com/tonsky/FiraCode):Monospaced font with programming ligatures
 * [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
+* [rsms/inter](https://github.com/rsms/inter):The Inter UI font family http://rsms.me/inter/
 
 ## 工具
 
