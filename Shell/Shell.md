@@ -73,7 +73,8 @@ ls /usr/share/vim/vim72/colors/  # 可以查看vim支持的主题色
 cp /etc/DIR_COLORS ~/.dir_colors
 
 /* PS1 用户主提示符配色方案(在 .bashrc 文件中添加) */
-export PS1="\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h: \[\e[0;35m\]\W\[\e[m\] \\$  "
+export PS1="\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h: \[\e[0;35m\]\W\[\e[m\] \\$"
+
 // 另外种等效写法
 # PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h: \[\033[35m\]\W\[\033[m\] \\$  "
 # export PS1
@@ -2061,7 +2062,6 @@ henry ALL=(ALL) NOPASSWD:ALL
 * [dylanaraps / pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
 * [Idnan / bash-guide](https://github.com/Idnan/bash-guide):A guide to learn bash
 
-
 ```sh
 cat demo.json | jq '.id,.name,.status,.attachments'
 
@@ -2122,6 +2122,7 @@ ccache gcc foo.c
     - [fd](https://github.com/sharkdp/fd) 是一个比 find 更简单更快的命令，会自动地忽略掉一些你配置在 .gitignore 中的文件，以及 .git 下的文件
 * monitor
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序的
+    - [ sqshq / sampler ](https://github.com/sqshq/sampler):Tool for shell commands execution, visualization and alerting. Configured with a simple YAML file. https://sampler.dev
     - nslookup:指定查询的类型，可以查到DNS记录的生存时间还可以指定使用哪个DNS服务器进行解释
     - [htop](http://hisham.hm/htop/): 提供更美观、更方便的进程监控工具
     - [atop](http://www.atoptool.nl/):按日记录进程的日志供以后分析。也能显示所有进程的资源消耗。还会高亮显示已经达到临界负载的资源。
@@ -2172,9 +2173,9 @@ ccache gcc foo.c
     - cloc：代码统计工具，能够统计代码的空行数、注释行、编程语言。
 * benchmark
     - [sharkdp/hyperfine](https://github.com/sharkdp/hyperfine):A command-line benchmarking tool
-* bash
+* [bash](http://ftp.gnu.org/gnu/bash/)
     - [Bash-it/bash-it](https://github.com/Bash-it/bash-it):A community Bash framework.
-    - [下载](http://ftp.gnu.org/gnu/bash/)
+    - [ dylanaraps / pure-bash-bible ](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
 * [svenstaro/genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator https://svenstaro.github.io/genact/
 * [kentcdodds/cross-env](https://github.com/kentcdodds/cross-env):🔀 Cross platform setting of environment scripts https://www.npmjs.com/package/cross-env
 * [Swordfish90/cool-retro-term](https://github.com/Swordfish90/cool-retro-term):A good looking terminal emulator which mimics the old cathode display...
@@ -2196,7 +2197,7 @@ ccache gcc foo.c
 * [rupa/z](https://github.com/rupa/z):z - jump around
 * [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
 * [jwilm/alacritty](https://github.com/jwilm/alacritty):A cross-platform, GPU-accelerated terminal emulator
-* shellcheck：shell脚本静态检查工具，能够识别语法错误以及不规范的写法
+* [koalaman / shellcheck](https://github.com/koalaman/shellcheck)：ShellCheck, a static analysis tool for shell scripts https://www.shellcheck.net
 * yapf：Google开发的python代码格式规范化工具，支持pep8以及Google代码风格。
 * mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连。
 * PathPicker(fpp):在命令行输出中自动识别目录和文件，支持交互式，配合git非常有用

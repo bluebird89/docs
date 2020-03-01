@@ -1062,6 +1062,7 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 ## 工具
 
 * [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie):As easy as httpie /aitch-tee-tee-pie/ 🥧 Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc. https://twitter.com/clihttp https://httpie.org
+* [ eliangcs / http-prompt ](https://github.com/eliangcs/http-prompt):HTTPie + prompt_toolkit = an interactive command-line HTTP client featuring autocomplete and syntax highlighting http://http-prompt.com
 * [snail007/goproxy](https://github.com/snail007/goproxy):Proxy is a high performance HTTP(S), websocket, TCP, UDP,Secure DNS, Socks5 proxy server implemented by golang. Now, it supports chain-style proxies,nat forwarding in different lan,TCP/UDP port forwarding, SSH forwarding.Proxy是golang实现的高性能http,https,websocket,tcp,防污染DNS,socks5代理服务器,支持内网穿透,链式代理,通讯加密,智能HTTP,SOCKS5代理,域名黑白名单,跨平台,KCP协议支持,集成外部API。
 * [Netflix/pollyjs](https://github.com/Netflix/pollyjs):Record, Replay, and Stub HTTP Interactions. https://netflix.github.io/pollyjs
 * [hazbo/httpu](https://github.com/hazbo/httpu):The terminal-first http client
@@ -1102,6 +1103,8 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
     - [googlehosts/hosts](https://github.com/googlehosts/hosts)
     - [Cloudflare](https://www.cloudflare.com):域名注册服务
     - [coredns/coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins https://coredns.io
+* 广告
+    - [ pi-hole / pi-hole ](https://github.com/pi-hole/pi-hole):A black hole for Internet advertisements https://pi-hole.net
 
 ## 参考
 
