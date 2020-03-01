@@ -238,9 +238,10 @@ PHP Extension Community Library，管理着最底层的PHP扩展。用 C 写的
     - vld:查看代码opcache
 
 ```sh
+sudo apt install php-pear
 pecl install memcached
 
-phpize -v
+phpize -v # 需要安装php7.*-dev
 cd extname
 phpize
 ./configure
@@ -250,7 +251,6 @@ make install
 extension="swoole.so"
 
 sudo apt-get install php-xml php7.3-xml php-dev php7.3-dev
-sudo apt install php-pear
 
 wget http://pear.php.net/go-pear.phar
 php go-pear.phar

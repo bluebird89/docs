@@ -118,6 +118,132 @@
     It doesn't even matter  一切都是徒劳。
 ```
 
+## Right Here Waiting
+
+```
+Oceans apart day after day
+And I slowly go insane
+I hear your voice on the line
+But it doesn't stop the pain
+
+If I see you next to never
+How can we say forever
+Wherever you go
+Whatever you do
+I will be right here waiting for you
+Whatever it takes
+Or how my heart breaks
+I will be right here waiting for you
+I took for granted, all the times
+That I thought would last somehow
+I hear the laughter, I taste the tears
+But I can't get near you now
+Oh, can't you see it baby
+You've got me going crazy
+Wherever you go
+Whatever you do
+I will be right here waiting for you
+Whatever it takes
+Or how my heart breaks
+I will be right here waiting for you
+I wonder how we can survive
+This romance
+But in the end if I'm with you
+I'll take the chance
+Oh, can't you see it baby
+You've got me going crazy
+Wherever you go
+Whatever you do
+I will be right here waiting for you
+Whatever it takes
+Or how my heart breaks
+I will be right here waiting for you
+Waiting for you
+```
+
+## You raise me up
+
+```
+When I am down, and, oh, my soul, so weary
+When troubles come, and my heart burdened be
+Then, I am still and wait here in the silence
+Until you come and sit awhile with me
+You raise me up, so I can stand on mountains
+You raise me up to walk on stormy seas
+I am strong when I am on your shoulders
+You raise me up to more than I can be
+You raise me up, so I can stand on mountains
+You raise me up to walk on stormy seas
+I am strong when I am on your shoulders
+You raise me up to more than I can be
+You raise me up, so I can stand on mountains
+You raise me up to walk on stormy seas
+I am strong when I am on your shoulders
+You raise me up to more than I can be
+You raise me up, so I can stand on mountains
+You raise me up to walk on stormy seas
+I am strong when I am on your shoulders
+You raise me up to more than I can be
+You raise me up to more than I can be
+```
+
+## set fire to the Rain
+
+```
+I let it fall, my heart
+And as it fell you rose to claim it
+It was dark and I was over
+Until you kissed my lips and you saved me
+My hands, they were strong
+But my knees were far too weak
+To stand in your arms
+Without falling to your feet
+But there's a side to you
+That I never knew, never knew
+All the things you'd say
+They were never true, never true
+And the games you'd play
+You would always win, always win
+But I set fire to the rain
+Watched it pour as I touched your face
+Let it burn while I cried
+'Cause I heard it screaming out your name, your name
+When I lay with you
+I could stay there, close my eyes
+Feel you here forever
+You and me, together, nothing is better
+'Cause there's a side to you
+That I never knew, never knew
+All the things you'd say
+They were never true, never true
+And the games you'd play
+You would always win, always win
+But I set fire to the rain
+Watched it pour as I touched your face
+Let it burn while I cried
+'Cause I heard it screaming out your name, your name
+I set fire to the rain
+And I threw us into the flames
+When we fell, something died
+'Cause I knew that that was the last time
+The last time
+Sometimes, I wake up by the door
+That heart you caught must be waiting for you
+Even now when we're already over
+I can't help myself from looking for you
+I set fire to the rain
+Watched it pour as I touched your face
+Let it burn while I cried
+'Cause I heard it screaming out your name, your name
+I set fire to the rain
+And I threw us into the flames
+When we fell, something died
+'Cause I knew that that was the last time
+The last time
+Let it burn
+Let it burn
+```
+
 ##        龙的传人
          歌曲原唱：李建复    填    词：侯德健
 
@@ -2116,6 +2242,9 @@ AH 因你今晚共我唱
 * 滨崎步的《My All》
 * 艾怡良
     - 垂直活着，水平留恋着
+
+## piano
+
 
 ## 吉他
 
