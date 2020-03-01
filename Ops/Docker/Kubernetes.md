@@ -341,6 +341,77 @@ kubectl delete service hello-node
 kubectl delete deployment hello-node
 
 minikube service list
+
+
+#!/bin/bash
+# download k8s 1.15.2 images
+# get image-list by 'kubeadm config images list --kubernetes-version=v1.15.2'
+# gcr.azk8s.cn/google-containers == k8s.gcr.io
+images=(
+    kube-apiserver:v1.17.3
+    kube-controller-manager:v1.17.3
+    kube-scheduler:v1.17.3
+    kube-proxy:v1.17.3
+    pause:3.1
+    etcd:3.4.3-0
+    coredns:1.6.5
+)
+for imageName in ${images[@]};do
+    docker pull gcr.azk8s.cn/google-containers/$imageName 
+    docker tag  gcr.azk8s.cn/google-containers/$imageName k8s.gcr.io/$imageNam 
+    docker rmi  gcr.azk8s.cn/google-containers/$imageName
+
+    docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName
+    docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName k8s.gcr.io/$imageName
+    docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName
+done
+```
+
+
+
+```
+kubectl get nodes
+kubectl get pods -n kube-system | grep coredns
+
+kubectl apply -f  kube-flannel.yml
+
+kubectl create secret generic user --from-file=./username.txt
+kubectl get secrets
+
+kubectl describe pod test-liveness-exec
+
+kubectl get pod test-liveness-exec -o yaml
+
+
+kubectl get deployments
+kubectl rollout status deployment/nginx-deployment
+kubectl rollout history deployment/nginx-deployment
+kubectl rollout undo deployment/nginx-deployment --to-revision=2
+kubectl rollout pause deployment/nginx-deployment
+kubectl rollout resume deploy/nginx-deployment
+
+# 查看一下这个 Deployment 所控制的 ReplicaSet
+kubectl get rs
+
+kubectl edit deployment/nginx-deployment
+kubectl set image deployment/nginx-deployment nginx=nginx:1.91
+
+kubectl get service nginx
+
+kubectl get statefulset web
+kubectl get pods -w -l app=nginx
+```
+
+
+## 问题
+
+```
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+# kubectl命令需要使用kubernetes-admin来运行
+echo “export KUBECONFIG=/etc/kubernetes/admin.conf” >> ~/.bash_profile
+
+source ~/.bash_profile
 ```
 
 ## 实例
@@ -354,6 +425,7 @@ minikube service list
     - [kubernetes-sigs/kustomize](https://github.com/kubernetes-sigs/kustomize):Customization of kubernetes YAML configurations
 * 部署
     - [kubernetes-incubator/kubespray](https://github.com/kubernetes-incubator/kubespray):Deploy a Production Ready Kubernetes Cluster
+    - [kubernetes-sigs / kind](https://github.com/kubernetes-sigs/kind/):Kubernetes IN Docker - local clusters for testing Kubernetes https://kind.sigs.k8s.io/
 * UI
     - [Qihoo360/wayne](https://github.com/Qihoo360/wayne):Web UI for Kubernetes multi-clusters
 *  Chaos
@@ -386,6 +458,9 @@ minikube service list
 * [eon01/kubernetes-workshop](https://github.com/eon01/kubernetes-workshop): A Gentle introduction to Kubernetes with more than just the basics. 
 * [okd](https://docs.okd.io/)
 * [ubuntu/microk8s](https://github.com/ubuntu/microk8s):MicroK8s is a small, fast, single-package Kubernetes for developers, IoT and edge. https://microk8s.io
+* [kubernetes
+/
+ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes  https://kubernetes.github.io/ingress-nginx/
 
 ## 参考
 
@@ -403,6 +478,10 @@ minikube service list
 * [gjmzj/kubeasz](https://github.com/gjmzj/kubeasz):使用Ansible脚本安装K8S集群，介绍组件交互原理，方便直接，不受国内网络环境影响 https://github.com/gjmzj/kubeasz
 * [kubernetes/community](https://github.com/kubernetes/community):Kubernetes community content
 * [hjacobs/kubernetes-failure-stories](https://github.com/hjacobs/kubernetes-failure-stories):Compilation of public failure/horror stories related to Kubernetes https://k8s.af
+* [ContainerSolutions
+/
+k8s-deployment-strategies](https://github.com/ContainerSolutions/k8s-deployment-strategies):Kubernetes deployment strategies explained https://blog.container-solutions.com/kubernetes-deployment-strategies
+
 * [手动一步步搭建k8s(Kubernetes)高可用集群](https://www.centos.bz/2017/07/k8s-kubernetes-ha-cluster/)
 * [开源容器集群管理系统Kubernetes架构及组件介绍](https://yq.aliyun.com/articles/47308)
 * [Kubernetes总架构图](http://blog.csdn.net/huwh_/article/details/71308171)

@@ -276,6 +276,12 @@ cd xxx
 make && make install
 ```
 
+## 用户管理
+
+```sh
+sudo -s # swithc user root
+```
+
 ## keyword map
 
 * 工作区

@@ -132,6 +132,7 @@ npm run serve
 * [bopoda/ace](https://github.com/bopoda/ace):Twitter bootstrap 3 admin template http://ace.jeka.by
 * [almasaeed2010/AdminLTE](https://github.com/almasaeed2010/AdminLTE):AdminLTE - Free Premium Admin control Panel Theme Based On Bootstrap 3.x https://adminlte.io
 * [ColorlibHQ/AdminLTE](https://github.com/ColorlibHQ/AdminLTE):AdminLTE - Free Premium Admin control Panel Theme Based On Bootstrap 3.x https://adminlte.io
+* [ pi-hole / AdminLTE ](https://github.com/pi-hole/AdminLTE)
 * [keen/dashboards](https://github.com/keen/dashboards):Responsive dashboard templates 📊✨ http://keen.github.io/dashboards/
 * [marmelab/react-admin](https://github.com/marmelab/react-admin):A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, React and Material Design http://marmelab.com/react-admin
 * [](https://github.com/puikinsh/gentelella)
