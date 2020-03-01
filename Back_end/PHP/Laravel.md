@@ -107,7 +107,8 @@ composer global update # 升级
 
 valet stop|uninstall|restart
 
-composer global require "laravel/installer"
+composer global require laravel/installer
+# $HOME/.config/composer/vendor/bin
 laravel new blog # 访问 http://blog.test 
 #  99160 segmentation fault
 

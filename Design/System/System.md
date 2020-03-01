@@ -60,6 +60,10 @@ BO 是内存计算逻辑对象，不是业务逻辑层对象，不是只能给�
 * 减少IO：合并细粒度接口为粗粒度接口、频繁的覆盖操作可以只做最后一次操作。这里一个需要特别注意的地方: 代码中尽量避免在循环中调用外部服务，更好的做法是使用粗粒度批量接口在循环外面只进行一次请求。
 * 分区：频繁访问的数据集规模保持在合理的范围。
 
-## 扩展
+## 工具
 
-- [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)
+× [ nicolargo / glances ](https://github.com/nicolargo/glances):Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems. http://nicolargo.github.io/glances/
+
+## 参考
+
+* [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)

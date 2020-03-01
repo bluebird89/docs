@@ -1020,6 +1020,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [goproxy/goproxy.cn](https://github.com/goproxy/goproxy.cn):The most trusted Go module proxy in China. https://goproxy.cn
     -   [gomods/athens](https://github.com/gomods/athens):A Go module datastore and proxy https://docs.gomods.io
     -   [goproxyio/goproxy](https://github.com/goproxyio/goproxy):A global proxy for Go modules. https://goproxy.io
+    -   [ snail007 / goproxy ](https://github.com/snail007/goproxy):Proxy是高性能全功能的http代理、https代理、socks5代理、内网穿透、内网穿透p2p、内网穿透代理、内网穿透反向代理、内网穿透服务器、Websocket代理、TCP代理、UDP代理、DNS代理、DNS加密代理，代理API认证，全能跨平台代理服务器。 http://snail007.github.io/goproxy
 * 代码规范
     - [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
 * file
