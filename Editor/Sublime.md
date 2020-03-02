@@ -13,6 +13,10 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 sudo apt-get update
 sudo apt-get install sublime-text
 
+# download and tar to /opt/sublime_text
+sudo ln -s /opt/sublime_text/sublime_text /user/local/bin/subl
+sudo ln -s /opt/sublime_text/sublime_text.desktop ~/.local/share/applications/
+
 ### Mac
 brew cask install sublime-text
 
@@ -55,66 +59,127 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
         "https://packagecontrol.io/channel_v3.json"
         // "channel_v3.jsondir/channel_v3.json"
     ],
+
+
+# /home/henry/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
+{
+"always_show_minimap_viewport": true,
+"auto_find_in_selection": true,
+"bold_folder_labels": false,
+"caret_style": "wide",
+"close_windows_when_empty": false,
+"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
+"copy_with_empty_selection": false,
+"create_window_at_startup": false,
+"detect_indentation": true,
+"dictionary": "Packages/Language - English/en_GB.dic",
+"drag_text": false,
+"file_exclude_patterns":
+[
+    ".DS_Store"
+],
+"folder_exclude_patterns":
+[
+    ".bundle",
+    ".git",
+    ".hg",
+    ".sass-cache",
+    ".svn",
+    "bin",
+    "CVS",
+    "tmp"
+],
+"font_options":
+[
+    "subpixel_antialias"
+],
+"font_face": "Monaco",
+"font_size": 10,
+"highlight_line": true,
+"highlight_modified_tabs": true,
+"ignored_packages":
+[
+    "Vintage"
+],
+"indent_guide_options":
+[
+    "draw_normal",
+    "draw_active"
+],
+"line_padding_bottom": 3,
+"line_padding_top": 3,
+"match_brackets_angle": true,
+"material_theme_accent_orange": true,
+"material_theme_compact_sidebar": true,
+"material_theme_panel_separator": true,
+"material_theme_small_tab": true,
+"overlay_scroll_bars": "enabled",
+"theme": "Material-Theme.sublime-theme",
+"trim_trailing_white_space_on_save": true,
+"word_wrap": true
+}
 ```
 
 
 ## 插件
 
--   AlignTab:一个使用正则表达式来帮助对齐的插件
--   Alignment：进行智能对齐
--   All Autocomplete: Extend Sublime Text 2 auto-completion to find matches in all open files of the current window
-- Anaconda
--   autofilename:自动关联图片,css,js等资源路径插件
--   AutoFileName: Plugin that auto-completes filenames
--   AutoPEP8：格式化Python代码
--   Autoprefixer插件：这是一款CSS3私有前缀自动补全插件
--   Bootstrap 3 Snippets:A sublime plugin complete with Bootstrap 3 snippets
--   BracketHighlighter: Bracket and tag highlighter
--   Ctags:是一个经典的代码跳转插件
--   ConvertToUTF8:支持 GBK, BIG5, EUC-KR, EUC-JP, Shift_JIS 等编码的插件
-    +   Codecs33
--   ColorHighlighter:展示你所选择的颜色代码的真正颜色。同时它还包含一个颜色选择器让你可以方便地更改颜色。
--   Doc​Blockr: Simplifies writing DocBlock comments in Javascript, PHP, CoffeeScript, Actionscript, C & C++
--   Emmet:更快更高效地编写HTML和CSS
--   FileDiffs: Shows diffs between the current file, or selection(s) in the current file, and clipboard, another file, or unsaved changes
--   Git:Plugin for some git integration into sublime text
--   GitGutter: A Sublime Text 2 and 3 plugin to see git diff in gutter
--   QuickGotoAnything
--   Go to definition
--   HTML-CSS-JS Prettify：格式化（美化）html、css、js三种文件类型的插件
--   JavaScript Patterns
--   jQuery:插件强大
--   La​Te​XTools:LaTeX 环境配置以及编译
--   LaTeX-cwl LaTeX 命令的自动补全
--   LaTeXYZ 提供更加智能的数学环境下的自动补全以及快捷键
--   MarkdownEditing
--   Markdown Preview
--   Modific:高亮自上次提交后修改过的代码行（支持Git，SVN，Bazaar，Mercurial以及TFS）
--   MultiEditUtils:该插件用于帮助多重选择下的编辑
--   Origami:可以随心所欲地分割窗口！创建新板块，删除板块，在板块之间移动或复制显示内容。
--   Package Control
--   PackageResourceViewer:查看和编辑SublimeText附带的不同的包
--   PHP Code Beautifier:代码美化插件
--   Pretty JSON
--   Python Auto-Complete: Sublime Text 2 plugin which adds additional auto-completion capability to Python scripts
--   Python Imports Sorter: Sublime Text 2 plugin to organize your imports easily
--   Python PEP8 Autoformat: Python PEP8 auto-format is a plugin to interactively reformat Python source code according to PEP-8
--   PythonTraceback: Easy navigation in your python tracebacks
--   SideBarEnhancements: Enhancements to sidebar. Files and folders.
--   Sftp:代码实时同步到测试服务器插件
--   SublimeTableEditor:markdown表格插件
--   SublimeTmpl：文件模板都在插件目录的SublimeTmpl/templates
-    -   command palette 中输入tmpl:
-    -   自定义模板路径: "Data\\Packages\\User\\SublimeTmpl\\templates" 目录;默认模版路径: "Data\\Packages\\SublimeTmpl\\templates" 目录
-    -   复制默认模版修改
-    -   支持 ${date} 变量
--   [SublimeLinter](https://github.com/SublimeLinter/SublimeLinter)：The code linting framework for Sublime Text 3 http://sublimelinter.com
--   SublimeCodeIntel:code intelligence and smart autocomplete engine
--   Sublime​REPL:不同语言命令行模式
--   SublimeLinter-pep8: Linter plugin for python using PEP8
--   SublimeEnhancements
--   TrailingSpaces: Highlight trailing spaces and delete them in a flash
--   Terminal:Sublime中直接使用终端打开你的项目文件夹
+*   AlignTab:一个使用正则表达式来帮助对齐的插件
+*   Alignment：进行智能对齐
+*   All Autocomplete: Extend Sublime Text 2 auto-completion to find matches in all open files of the current window
+*   Anaconda
+*   autofilename:自动关联图片,css,js等资源路径插件
+*   AutoFileName: Plugin that auto-completes filenames
+*   AutoPEP8：格式化Python代码
+*   Autoprefixer插件：这是一款CSS3私有前缀自动补全插件
+*   Bootstrap 3 Snippets:A sublime plugin complete with Bootstrap 3 snippets
+*   BracketHighlighter: Bracket and tag highlighter
+*   ChineseLocalizations
+*   Ctags:是一个经典的代码跳转插件
+*   ConvertToUTF8:支持 GBK, BIG5, EUC-KR, EUC-JP, Shift_JIS 等编码的插件
+*   Codecs33
+*   ColorHighlighter:展示你所选择的颜色代码的真正颜色。同时它还包含一个颜色选择器让你可以方便地更改颜色。
+*   Doc​Blockr: Simplifies writing DocBlock comments in Javascript, PHP, CoffeeScript, Actionscript, C & C++
+*   Emmet:更快更高效地编写HTML和CSS
+*   FileDiffs: Shows diffs between the current file, or selection(s) in the current file, and clipboard, another file, or unsaved changes
+*   Git:Plugin for some git integration into sublime text
+*   GitGutter: A Sublime Text 2 and 3 plugin to see git diff in gutter
+*   QuickGotoAnything
+*   Go to definition
+*   HTML-CSS-JS Prettify：格式化（美化）html、css、js三种文件类型的插件
+*   JavaScript Patterns
+*   jQuery:插件强大
+*   La​Te​XTools:LaTeX 环境配置以及编译
+*   LaTeX-cwl LaTeX 命令的自动补全
+*   LaTeXYZ 提供更加智能的数学环境下的自动补全以及快捷键
+*   MarkdownEditing
+*   Markdown Light
+*   Markdown Preview
+*   Modific:高亮自上次提交后修改过的代码行（支持Git，SVN，Bazaar，Mercurial以及TFS）
+*   MultiEditUtils:该插件用于帮助多重选择下的编辑
+*   Origami:可以随心所欲地分割窗口！创建新板块，删除板块，在板块之间移动或复制显示内容。
+*   Package Control
+*   PackageResourceViewer:查看和编辑SublimeText附带的不同的包
+*   PHP Code Beautifier:代码美化插件
+*   Pretty JSON
+*   Python Auto-Complete: Sublime Text 2 plugin which adds additional auto-completion capability to Python scripts
+*   Python Imports Sorter: Sublime Text 2 plugin to organize your imports easily
+*   Python PEP8 Autoformat: Python PEP8 auto-format is a plugin to interactively reformat Python source code according to PEP-8
+*   PythonTraceback: Easy navigation in your python tracebacks
+*   SideBarEnhancements: Enhancements to sidebar. Files and folders.
+*   Sftp:代码实时同步到测试服务器插件
+*   SublimeTableEditor:markdown表格插件
+*   SublimeTmpl：文件模板都在插件目录的SublimeTmpl/templates
+*   command palette 中输入tmpl:
+*   自定义模板路径: "Data\\Packages\\User\\SublimeTmpl\\templates" 目录;默认模版路径: "Data\\Packages\\SublimeTmpl\\templates" 目录
+*   复制默认模版修改
+*   支持 ${date} 变量
+*   [SublimeLinter](https://github.com/SublimeLinter/SublimeLinter)：The code linting framework for Sublime Text 3 http://sublimelinter.com
+*   SublimeCodeIntel:code intelligence and smart autocomplete engine
+*   Sublime​REPL:不同语言命令行模式
+*   SublimeLinter-pep8: Linter plugin for python using PEP8
+*   SublimeEnhancements
+*   TrailingSpaces: Highlight trailing spaces and delete them in a flash
+*   Terminal:Sublime中直接使用终端打开你的项目文件夹
 
 ```
 ctrl+alt+h html
@@ -474,12 +539,12 @@ Ctrl+Shift+上下：替换行
 
 ### 主题theme
 
--   material
--   Monokai Pro
--   [SpaceGray](https://github.com/kkga/spacegray/)
--   [allanhortle/Centurion](https://github.com/allanhortle/Centurion)
--   [kkga/spacegray](https://github.com/kkga/spacegray):A Hyperminimal UI Theme for Sublime Text <http://kkga.github.io/spacegray>
-- [ihodev/sublime-boxy](https://github.com/ihodev/sublime-boxy):It Was the Most Hackable Theme for Sublime Text 3
+*   Material Theme
+*   Monokai Pro
+*   [SpaceGray](https://github.com/kkga/spacegray/)
+*   [allanhortle/Centurion](https://github.com/allanhortle/Centurion)
+*   [kkga/spacegray](https://github.com/kkga/spacegray):A Hyperminimal UI Theme for Sublime Text <http://kkga.github.io/spacegray>
+* [ihodev/sublime-boxy](https://github.com/ihodev/sublime-boxy):It Was the Most Hackable Theme for Sublime Text 3
 
 ```
 Package Control ‣ Install Package ‣ Theme - Monokai Pro

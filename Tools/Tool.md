@@ -47,6 +47,8 @@
     - [Bitwarden](https://bitwarden.com/):Solve your password management problems
 * Sass
     - [Atarity/deploy-your-own-saas](https://github.com/Atarity/deploy-your-own-saas):List of "only yours" cloud services for everyday needs 🏴
+* 亮度管理
+    - [Redshift](http://jonls.dk/redshift/)
 
 ## Language
 
