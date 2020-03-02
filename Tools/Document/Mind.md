@@ -4,7 +4,7 @@
 
 ## 工具
 
-* FreeMind
+* [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page)
 * XMind
 * MindMaster
 * [百度脑图](https://naotu.baidu.com)
@@ -13,4 +13,3 @@
 * Mindly
 * iMindMap
 * [mindmeister](https://www.mindmeister.com)
-
