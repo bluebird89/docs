@@ -26,6 +26,7 @@ php public/index.php index/Demon/start # 命令行运行
 
 ```sh
 composer create-project topthink/think tp5
+
 composer require topthink/think-swoole
 ```
 

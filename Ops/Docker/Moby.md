@@ -95,6 +95,9 @@ sudo usermod -aG docker ${USER}|(whoami)
 
 sudo systemctl enable docker # 开机启动
 
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chmod g+rwx "$HOME/.docker" -R
+
 # docker 服务状态查看
 docker version|info
 ```

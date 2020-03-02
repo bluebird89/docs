@@ -27,6 +27,22 @@
     + 选中分区boot分区
   - 重启运行
 
+
+## hardware
+
+```sh
+free -m
+sudo lshw -c memory
+
+systemd-analyze plot > file.svg 
+systemd-analyze blame | head -n 10
+
+# Lower value means Linux will use swap space less whereas higher value causes Linux to use swap space more often. The default value on Ubuntu is 60 which means when your computer uses up 40% of physical RAM
+# /etc/sysctl.conf Add
+vm.swappiness = 10
+sudo sysctl vm.swappiness=10
+```
+
 ### 网络配置
 
 ```sh
@@ -60,7 +76,7 @@ ip addr # 查看IP地址
 
 hostname  www  #设置主机名为www
 
-vi /etc/hostname #编辑配置文件
+# etc/hostname #编辑配置文件
 www   localhost.localdomain  #修改localhost.localdomain为www
 
 sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
@@ -74,13 +90,21 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 
 # 时区设置 
 sudo dpkg-reconfigure tzdata
+
+# /etc/apt/apt.conf.d/00aptitude append this line of code to the end
+Acquire::Languages "none";
 ```
 
 ## 服务管理
 
 ```sh
-systemctl status nginx
-sudo systemctl enable|start|restart|reload nginx
+#  display Unneeded Startup Applications
+sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop # 
+# list any services launched at startup
+service --status-all
+systemctl list-unit-files | grep enabled 
+
+systemctl status|start|restart|reload|enable|disable nginx
 
 sudo uname --m
 
@@ -89,7 +113,7 @@ systemctl unmask mysql.service
 service mysql start
 ```
 
-### 软件安装
+### 软件
 
 * 在线安装:通过软件包管理工具
   - sudo gedit /etc/apt/sources.list
@@ -151,7 +175,7 @@ service mysql start
   - [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite
   - [Sayonara Player](https://sayonara-player.com/index.php)
   - Disk Usage Analyzer
-  - [Pomodoro](https://gnomepomodoro.org/)
+  - [Pomodoro](https://gnomepomodoro.org/) `sudo apt-get install gnome-shell-pomodoro`
   - 贴纸
     + indicator-stickynotes
     + Xpad:`sudo apt-get install xpad`
@@ -280,6 +304,36 @@ make && make install
 
 ```sh
 sudo -s # swithc user root
+# displays all the users logged in a system and their activities
+w
+w --short
+w --ip-addr
+
+# who
+# who -b
+# who -d
+# who --ips
+
+# users
+# users --version
+# users --help
+
+# whoami
+# whoami --version
+# whoami --help
+```
+
+## [Gnome](https://wiki.gnome.org/)
+
+* Gnome Shell Extensions
+  -  Open Weather
+  -  [paradoxxxzero / gnome-shell-system-monitor-applet](https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet)Display system informations in gnome shell status bar, such as memory usage, cpu usage, network rates
+
+```sh
+# install broswer extension
+sudo apt install chrome-gnome-shell
+# https://extensions.gnome.org/  search for Gnome extensions you wish to install. Flip the ON switch to install the extension
+sudo apt install gnome-shell-extensions # config weather show
 ```
 
 ## keyword map
@@ -335,22 +389,25 @@ lsof -Pni4 | grep LISTEN | grep php
 kill -9 pid
 ```
 
-### 软件
+### 優化
 
 ```sh
-sudo apt install fonts-firacode
+# /etc/fstab
+Now change “errors=remount-ro” to “noatime,errors=remount-ro”. 
+
+echo -e "#\x21/bin/sh\\nfstrim -v /" | sudo tee /etc/cron.daily/trim
+sudo chmod +x /etc/cron.daily/trim
+
+sudo apt install fonts-firacode virtualbox mysql-workbench-community preload compizconfig-settings-manager
 
 # [sougou pinyin](https://pinyin.sogou.com/linux/?r=pinyin)
-sudo apt-get purge ibus
 sudo apt install fcitx fcitx-table fcitx-googlepinyin im-config
 im-config # 查看配置
 
-# add source
-deb http://archive.ubuntukylin.com:10006/ubuntukylin trusty main
-sudo apt install sogoupinyin
 # download sogoupinyin_2.2.0.0108_amd64.deb
 sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb # 手动安装
 sudo apt-get install -f
+
 # 配置
 system setting->language support
 choose language,key input method system: fcitx
@@ -363,25 +420,30 @@ wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key a
 sudo apt-get update
 sudo apt-get install google-chrome-stable
 
+sudo add-apt-repository ppa:ubuntuhandbook1/apps
+sudo apt-get update
+sudo apt-get install laptop-mode-tools
+
+# Use apt-fast instead of apt-get
+sudo add-apt-repository ppa:apt-fast/stable
+sudo apt-get update && sudo apt-get install apt-fast
+
 # mysql workbeach
 sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 sudo apt-get update
-sudo apt-get install mysql-workbench-community
 
 systemctl unmask mysql.service
 service mysql start
 
-sudo add-apt-repository ppa:umang/indicator-stickynotes
-sudo apt-get update
-sudo apt-get install indicator-stickynotes 
+sudo apt-add-repository ppa:umang/indicator-stickynotes
+sudo apt-get update && sudo apt-get install indicator-stickynotes
+
 
 sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
-sudo apt-get update
-sudo apt-get install indicator-sysmonitor
+sudo apt-get update && sudo apt-get install indicator-sysmonitor
 
 sudo add-apt-repository ppa:kasra-mp/ubuntu-indicator-weather
-sudo apt-get update
-sudo apt-get install indicator-weather
+sudo apt-get update && sudo apt-get install indicator-weather
 
 # 提高电池寿命并且减少过热
 sudo add-apt-repository ppa:linrunner/tlp
@@ -403,6 +465,7 @@ sudo ./VMware-Workstation-Full-12.1.1-3770994.x86_64.bundle
 # VMware =》 菜单选中VM =》点击 Install VMware Tools
 sudo apt-get install lamp-server
 
+sudo apt install gnome-tweak-tool
 ## [fusuma](https://github.com/iberianpig/fusuma):Multitouch gestures with libinput driver on X11, Linux 
 sudo gpasswd -a $USER input # 重新登录账户
 sudo apt-get install libinput-tools
@@ -479,8 +542,7 @@ sudo apt-get install unity-tweak-tool
 sudo apt install materia-gtk-theme
 sudo apt install papirus-icon-theme #  Applications: Materia-light  Icons: Papirus
 
-sudo apt install net-tools       # ifconfig 必备
-sudo apt install iputils-ping
+sudo apt install net-tools iputils-ping # ifconfig 必备
 
 # 记录下网卡名字，比如我的，有enp4s0f2、lo、wlp9s0b1三个 /etc/sysctl.conf 追加
 net.ipv6.conf.all.disable_ipv6 = 1
@@ -513,6 +575,7 @@ empathy \
 brasero
 
 sudo apt-get autoremove
+sudo apt-get clean
 sudo apt-get autoclean
 
 # /etc/dhcp/dhclient.conf 添加使用aliyun和114的DNS
@@ -546,7 +609,10 @@ sudo apt install htop
 htop
 ```
 
-## 快捷方式
+## [desktop-entry](https://specifications.freedesktop.org/desktop-entry-spec/latest/)
+
+* `~/.local/share/applications/`
+* `/usr/share/applications/`
 
 ```
 sudo touch /usr/share/applications/fusuma.desktop
@@ -563,6 +629,28 @@ Terminal=false  #软件打开时是否启动终端，这里选择false
 StartupNotify=false
 Type=Application
 Categories=Application;Development;
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Sublime Text
+GenericName=Text Editor
+Comment=Sophisticated text editor for code, markup and prose
+Exec=/opt/sublime_text/sublime_text %F
+Terminal=false
+MimeType=text/plain;
+Icon=s/opt/sublime_text/Icon/48x48/sublime-text.png
+Categories=TextEditor;Development;
+StartupNotify=true
+Actions=Window;Document;
+[Desktop Action Window]
+Name=New Window
+Exec=/opt/sublime_text/sublime_text -n
+OnlyShowIn=Unity;
+[Desktop Action Document]
+Name=New File
+Exec=/opt/sublime_text/sublime_text --command new_file
+OnlyShowIn=Unity;
 ```
 
 ## top
