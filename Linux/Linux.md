@@ -967,26 +967,47 @@ curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 ping -c 次数 ip # 测试网络畅通性
 ping 8.8.8.8 # 检测连接
 ip addr # 查看IP地址
+# Send ICMP echo request to host
+ping host
 
-# Display all network interfaces and ip address
+# interface configuration.’ It allows admins to view their network interfaces and assign, add, delete, or control interface parameters
 ifconfig -a
 # Display eth0 address and details
 ifconfig eth0
 
+# iwconfig command is very similar to ifconfig, except the fact that it is only for configuring wireless interfaces.
+# iwconfig
+# iwconfig --help
+# man iwconfig
+
 # Query or control network driver and hardware settings
 ethtool eth0
 
-# Send ICMP echo request to host
-ping host
+# manage network devices, tunnels, routing, and many more
+ip addr
+# ip link
+# ip addr add 192.168.1.XXX/24 dev eth0
 
 # Display whois information for domain
-whois domain
+whois google.com
 
 # Display DNS information for domain
 dig domain
 
 # Reverse lookup of IP_ADDRESS
 dig -x IP_ADDRESS
+
+# querying DNS servers and grab essential information regarding remote servers
+nslookup google.com
+
+# display the routes our packets take before reaching a remote destination
+traceroute google.com
+
+# networking tool which displays the TCP/IP packets transmitted and received by your system
+
+tcpdump
+# tcpdump -c 15
+# tcpdump --help
 
 # Display DNS ip address for domain
 host domain
@@ -1005,7 +1026,8 @@ netstat -nutlp
 
 sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
 
-# iptables
+# restrict or block IPs and is used to protect servers from various malicious attacks
+iptables -L
 service iptables status
 service iptables stop # tempory
 chkconfig optables off # always
@@ -2146,14 +2168,14 @@ set completeopt=longest,menu
 
 ## 参考
 
-* [luongvo209/Awesome-Linux-Software](https://github.com/luongvo209/Awesome-Linux-Software): A list of awesome applications, software, tools and other materials for Linux distros
+* [luong-komorebi/Awesome-Linux-Software](https://github.com/luong-komorebi/Awesome-Linux-Software):A list of awesome applications, software, tools and other materials for Linux distros. https://luong-komorebi.github.io/Awesome-Linux-Software/
 * [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/index.html)
 * [LVS：跑在Linux内核上的负载均衡器](https://liangshuang.name/2017/11/19/lvs/)
-* [Introduction to Linux](https://www.ibm.com/developerworks/linux/newto/) – 这是来自IBM的教程，用于给那些想学习Linux的人。
+* [Introduction to Linux](https://www.ibm.com/developerworks/linux/newto/) – 来自IBM的教程，用于给那些想学习Linux的人。
 * [Linux Desktop 101](https://www.lifewire.com/learn-how-linux-4102755) – 这是一个 14周 课时的教程，主要用于学校里教学生如何在一个PC上运行一个Linux操作系统。
 * [Hands-On Introduction to Linux](http://tldp.org/LDP/intro-linux/html/index.html) – Machtelt Garrels 的一个格式相当不错的教程。
 * [Getting Started with Linux](https://www.linux.org/lessons/beginner/index.html) – 来自Linux Online 的20课时的用于新手的教程。
-* [Advanced Linux Programming](http://www.advancedlinuxprogramming.com/) – 这是一本电子书可以免费下载。这本书主要教程序员们怎么在Linux下做软件和编程序。
+* [Advanced Linux Programming](http://www.advancedlinuxprogramming.com/) 一本免费下载电子书,主要教程序员们怎么在Linux下做软件和编程序。
 * [IBM’s Technical Library](https://www.ibm.com/developerworks/views/linux/libraryview.jsp?type_by=Tutorials) – IBM’s Technical Library 提供的一组给高级Linux用户的教程。
 * [HAPPY HACKING LINUX](https://azer.bike/happy-hacking-linux/)
 * [linuxkit/linuxkit](https://github.com/linuxkit/linuxkit):A toolkit for building secure, portable and lean operating systems for containers

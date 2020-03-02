@@ -259,6 +259,22 @@ sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
 wget https://github.com/winshining/nginx-http-flv-module/archive/master.zip
 unzip master.zip
 ./configure --add-module=../nginx-http-flv-module-master
+
+sudo 2>&1 nginx -V | tr -- - '\n' | grep _module # View Compiled Nginx Modules
+
+Upgrade Nginx on the Fly
+Nginx allows admins to upgrade the binary and/or configuration file on the fly. This means your client requests will not be interrupted due to server upgrades. To do this, first, we need to locate the PID of the master Nginx process. We can do it using a simple command that we’ve already demonstrated.
+
+$ cat /run/nginx.pid
+Your new Nginx binary should be ready by now. Spawn a new set of Nginx master/worker processes which use the new binary via the below command.
+
+$ sudo kill -s USR2 `cat /run/nginx.pid`
+Now kill the worker processes used by the first master process using the following command.
+
+$ sudo kill -s WINCH `cat /run/nginx.pid.oldbin`
+Follow it by killing the old master process.
+
+$ sudo kill -s QUIT `cat /run/nginx.pid.oldbin`
 ```
 
 ## 组成
