@@ -3056,7 +3056,7 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
   - [tgriesser/knex](https://github.com/tgriesser/knex):A query builder for PostgreSQL, MySQL and SQLite3, designed to be flexible, portable, and fun to use. http://knexjs.org
   - [typeorm/typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. http://typeorm.io
 * live-server
-
+* [facebookexperimental / rome](https://github.com/facebookexperimental/rome):An experimental JavaScript toolchain https://romejs.dev
 * [Lodash](https://github.com/lodash/lodash):为数组、字符串、object 和 argument 对象提供更一致的跨环境迭代支持，并已成为 Underscore 的超集
 * [Underscore](https://github.com/jashkenas/underscore):为 JavaScript 中的常见任务提供实用的函数
 * [Ramda](https://github.com/ramda/ramda):为函数式编程而设计，可以轻松创建不改变用户数据状态的函数式管道。Ramda 的核心设计理念是创建具有不变性和无副作用的函数。所有的函数会被自动柯里化，并根据易用性安排参数的顺序。

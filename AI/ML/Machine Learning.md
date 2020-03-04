@@ -346,6 +346,7 @@
 * [guess-js/guess](https://github.com/guess-js/guess):Libraries & tools for enabling Machine Learning driven user-experiences on the web https://guess-js.github.io/
 * [streamlit/streamlit](https://github.com/streamlit/streamlit):Streamlit — The fastest way to build custom ML tools https://streamlit.io
 * [apple/turicreate](https://github.com/apple/turicreate):Turi Create simplifies the development of custom machine learning models.
+* [ouyanghuiyu / chineseocr_lite](https://github.com/ouyanghuiyu/chineseocr_lite):超轻量级中文ocr，支持竖排文字识别, 支持ncnn推理 , psenet(8.5M) + crnn(6.3M) + anglenet(1.5M) 总模型仅17M
 
 ## 参考
 

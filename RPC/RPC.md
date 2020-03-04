@@ -123,3 +123,4 @@ braft 是基于 brpc 的 Raft 协议工业级 C++ 实现，设计之初就考虑
 * [grpc/grpc-web](https://github.com/grpc/grpc-web):gRPC for Web Clients https://grpc.io
 * [improbable-eng/grpc-web](https://github.com/improbable-eng/grpc-web):gRPC Web implementation for Golang and TypeScript
 * [Tencent/Tars](https://github.com/Tencent/Tars):Tars is a highly performance rpc framework based on naming service using tars protocol and provides a semi-automatic operation platform.
+* [smallnest / rpcx](https://github.com/smallnest/rpcx):A zero cost, faster multi-language bidirectional microservices framework in Go, like alibaba Dubbo, but with more features, Scale easily. Try it. Test it. If you feel it's better, use it! 𝐉𝐚𝐯𝐚有𝐝𝐮𝐛𝐛𝐨, 𝐆𝐨𝐥𝐚𝐧𝐠有𝐫𝐩𝐜𝐱! https://rpcx.io

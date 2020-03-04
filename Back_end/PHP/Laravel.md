@@ -2676,6 +2676,7 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
   - [z-song/laravel-admin](https://github.com/z-song/laravel-admin):Build a full-featured administrative interface in ten minutes http://laravel-admin.org
   - [the-control-group/voyager](https://github.com/the-control-group/voyager):Voyager - The Missing Laravel Admin https://laravelvoyager.com
   - [LaraAdmin](https://laraadmin.com/)
+  - [Laravel Nova](https://nova.laravel.com):a beautifully designed administration panel for Laravel. Carefully crafted by the creators of Laravel to make you the most productive developer in the galaxy.
 * pay
   - [laravel/cashier](https://github.com/laravel/cashier):provides an expressive, fluent interface to Stripe's subscription billing services.
 * [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
@@ -2722,7 +2723,6 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
 * cron
   - [Forge](https://forge.laravel.com):Painless PHP Servers Provision and deploy unlimited PHP applications on DigitalOcean, Linode, AWS, and more.
 * [Laravel Spark](https://spark.laravel.com):provides the perfect starting point for your next big idea. Forget all the boilerplate and focus on what matters: your application.
-* [Laravel Nova](https://nova.laravel.com):a beautifully designed administration panel for Laravel. Carefully crafted by the creators of Laravel to make you the most productive developer in the galaxy.
 * 测试
   - [laravel/dusk](https://github.com/laravel/dusk):Laravel Dusk provides an expressive, easy-to-use browser automation and testing API.
 * 部署
