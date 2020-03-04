@@ -2627,13 +2627,13 @@ http://localhost:3000
 *  客户端
     + 命令行
     + MySQLWorkbench
-    + SQLyog   `ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
+    + SQLyog:`ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
     + [phpmyadmin/phpmyadmin](https://github.com/phpmyadmin/phpmyadmin):A web interface for MySQL and MariaDB https://www.phpmyadmin.net/
         * `sudo add-apt-repository ppa:phpmyadmin/ppa`
         * `export DEBIAN_FRONTEND=noninteractive`
         * `sudo apt-get -yq install phpmyadmin`
     + Sequel Pro
-    + navicate
+    + navicat
         * [DoubleLabyrinth/navicat-keygen](https://github.com/DoubleLabyrinth/navicat-keygen):A keygen for Navicat
 * ER图
     - PowerDesigner
@@ -2648,7 +2648,6 @@ http://localhost:3000
 * [alibaba/cobar](https://github.com/alibaba/cobar):a proxy for sharding databases and tables
 * [github/gh-ost](https://github.com/github/gh-ost):GitHub's Online Schema Migrations for MySQL
 * [oracle/mysql-operator](https://github.com/oracle/mysql-operator):Create, operate and scale self-healing MySQL clusters in Kubernetes
-* [soar](https://github.com/XiaoMi/soar):SQL Optimizer And Rewriter
 
 ## 参考
 

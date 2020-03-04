@@ -519,7 +519,7 @@ func main() {
     fmt.Println(l.On())
     fmt.Println(l.Off())
 }
-```
+````
 
 ## 面向对象
 
@@ -689,12 +689,17 @@ func Benchmark_TimeConsumingFunction(b *testing.B) {
 
 ## 代理
 
-× 构建或运行你的应用时，Go 将会通过 goproxy.cn 获取依赖
+* 代理并缓存go模块。可以利用该代理来避免DNS污染导致的模块拉取缓慢或失败的问题，加速构建
+* 构建或运行你的应用时，Go 将会通过 goproxy.cn 获取依赖
 
 ```
 # 启用 Go Modules 功能
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn
+export GOPROXY=https://mirrors.aliyun.com/goproxy/
+
+echo "export GO111MODULE=on" >> ~/.profile && source ~/.profile
+echo "export GOPROXY=https://goproxy.cn" >> ~/.profile && source ~/.profile
 
 go env -w GOPROXY=https://goproxy.cn,direct # 出现 does not override conflicting OS environment variable
 # 设置不走 proxy 的私有仓库，多个用逗号相隔
@@ -974,17 +979,19 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
 * 缓存
     - [patrickmn/go-cache](https://github.com/patrickmn/go-cache):An in-memory key:value store/cache (similar to Memcached) library for Go, suitable for single-machine applications. https://patrickmn.com/projects/go-cache/
-* 数据库
+* DB
     - [dgraph-io/badger](https://github.com/dgraph-io/badger):Fast key-value DB in Go. https://open.dgraph.io/post/badger/
     - [DATA-DOG/go-sqlmock](https://github.com/DATA-DOG/go-sqlmock):Sql mock driver for golang to test database interactions
     - [mongodb/mongo-go-driver](https://github.com/mongodb/mongo-go-driver):The Go driver for MongoDB
     - [upper/db](https://github.com/upper/db):Productive data access layer for Go. https://upper.io/db.v3
     - [jmoiron/sqlx](https://github.com/jmoiron/sqlx):general purpose extensions to golang's database/sql http://jmoiron.github.io/sqlx/
-    - [globalsign/mgo](https://github.com/globalsign/mgo):The MongoDB driver for Go
+    - [globalsign/mgo](https://github.com/globalsign/mgo):The MongoDB driver for God
 * Http
     - [panjf2000/gnet](https://github.com/panjf2000/gnet):🌐🐳 A high-performance, lightweight, non-blocking, event-driven networking framework written in pure Go.
     - [xtaci/kcp-go](https://github.com/xtaci/kcp-go):A Production-Grade Reliable-UDP Library for golang
     - [valyala/fasthttp](https://github.com/valyala/fasthttp):Fast HTTP package for Go. Tuned for high performance. Zero memory allocations in hot paths. Up to 10x faster than net/http
+* QUIC
+    - [lucas-clemente / quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
 * excel
     - [360EntSecGroup-Skylar/excelizes](https://github.com/360EntSecGroup-Skylar/excelize):Golang library for reading and writing Microsoft Excel™ (XLSX) files.
 * event-loop
@@ -1008,6 +1015,8 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * 安全
     - [OWASP/Go-SCP](https://github.com/OWASP/Go-SCP):Go programming language secure coding practices guide
     - [Checkmarx/Go-SCP](https://github.com/Checkmarx/Go-SCP):Go programming language secure coding practices guide
+* Plot
+    - [gonum / plot](https://github.com/gonum/plot):A repository for plotting and visualizing data
 * 配置
     - [kelseyhightower/envconfig](https://github.com/kelseyhightower/envconfig):Golang library for managing configuration data from environment variables
 * [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现

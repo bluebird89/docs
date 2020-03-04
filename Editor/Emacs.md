@@ -283,13 +283,16 @@ M-g                    设置字体
 
 * [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs#macos):A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! http://spacemacs.org
 * [joaotavora/yasnippet](https://github.com/joaotavora/yasnippet):A template system for Emacs http://joaotavora.github.com/yasnippet/
-* [purcell/emacs.d](https://github.com/purcell/emacs.d):An Emacs configuration bundle with batteries included
+* Config
+    - [purcell/emacs.d](https://github.com/purcell/emacs.d):An Emacs configuration bundle with batteries included
+    - [hlissner / doom-emacs](https://github.com/hlissner/doom-emacs):An Emacs configuration for the stubborn martian vimmer
 * [emacs-tw/awesome-emacs](https://github.com/emacs-tw/awesome-emacs):A community driven list of useful Emacs packages, libraries and others.
 * [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust ❤️ Emacs
 * [abo-abo/hydra](https://github.com/abo-abo/hydra):make Emacs bindings that stick around
-* 一年成为 Emacs 高手， https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org
+
+* [redguardtoo / mastering-emacs-in-one-year-guide](https://github.com/redguardtoo/mastering-emacs-in-one-year-guide)Be great at emacs in one year
 * 陈斌的 Emacs 配置 https://github.com/redguardtoo/emacs.d
-* Steve Purcell 大牛的配置，很适合 Web 开发者：https://github.com/purcell/emacs.d
+
 * Spacemacs 配置，适合新手，有着非常完善的文档：https://github.com/syl20bnr/spacemacs
 * reddit 的 Emacs 频道，最前沿的 Emacs 技巧：https://www.reddit.com/r/emacs/
 * Emacs org-mode 的文档，从这个文档中你可以发现纯文本的魔力：https://orgmode.org/

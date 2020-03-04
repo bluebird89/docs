@@ -503,8 +503,13 @@ ifconfig /flushdns
 ### 公共 DNS 服务
 
 ```
+# /etc/resolv.conf
+# Google Public DNS IP addresses
 8.8.8.8
 8.8.4.4
+
+2001:4860:4860::8888
+2001:4860:4860::8844
 
 Public DNS+ 
 119.29.29.29
@@ -517,13 +522,16 @@ Public DNS+
 114.114.114.114
 114.114.114.115
 
-# Cloudflare 
+# Cloudflare
 1.1.1.1
 1.0.0.1
 
-alidns
-223.5.5.5
-223.6.6.6
+# alidns 
+nameserver 223.5.5.5
+nameserver 223.6.6.6
+
+# tsinghua
+101.6.6.6 / 2001:da8::666
 ```
 
 ## HTTP控制常见特性

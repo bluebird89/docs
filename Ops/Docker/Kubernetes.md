@@ -221,12 +221,20 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 
 brew install kubectl
 
-# install ubuntu
-sudo apt-get update && sudo apt-get install -y apt-transport-https
+# ubuntu
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add - 
+cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+EOF
+
 sudo apt-get update
-sudo apt-get install -y kubectl
+sudo apt-get install -y kubelet kubeadm kubectl
 
 # install centos
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
@@ -342,7 +350,6 @@ kubectl delete deployment hello-node
 
 minikube service list
 
-
 #!/bin/bash
 # download k8s 1.15.2 images
 # get image-list by 'kubeadm config images list --kubernetes-version=v1.15.2'
@@ -357,9 +364,9 @@ images=(
     coredns:1.6.5
 )
 for imageName in ${images[@]};do
-    docker pull gcr.azk8s.cn/google-containers/$imageName 
-    docker tag  gcr.azk8s.cn/google-containers/$imageName k8s.gcr.io/$imageNam 
-    docker rmi  gcr.azk8s.cn/google-containers/$imageName
+#    docker pull gcr.azk8s.cn/google-containers/$imageName 
+#    docker tag  gcr.azk8s.cn/google-containers/$imageName k8s.gcr.io/$imageNam 
+#    docker rmi  gcr.azk8s.cn/google-containers/$imageName
 
     docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName
     docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName k8s.gcr.io/$imageName
@@ -382,7 +389,6 @@ kubectl describe pod test-liveness-exec
 
 kubectl get pod test-liveness-exec -o yaml
 
-
 kubectl get deployments
 kubectl rollout status deployment/nginx-deployment
 kubectl rollout history deployment/nginx-deployment
@@ -401,7 +407,6 @@ kubectl get service nginx
 kubectl get statefulset web
 kubectl get pods -w -l app=nginx
 ```
-
 
 ## 问题
 
