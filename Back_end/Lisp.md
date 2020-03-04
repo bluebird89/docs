@@ -14,3 +14,6 @@ brew install clisp
 * [Quickdocs](http://quickdocs.org)
 * [Practical Common Lisp](http://www.gigamonkeys.com/book/)
 
+## Tool
+
+* [Portacle](https://portacle.github.io/):a multiplatform, complete IDE for Common Lisp. It includes Emacs, SBCL, Git, Quicklisp, all configured and ready to use

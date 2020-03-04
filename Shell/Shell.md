@@ -2175,7 +2175,7 @@ ccache gcc foo.c
     - [sharkdp/hyperfine](https://github.com/sharkdp/hyperfine):A command-line benchmarking tool
 * [bash](http://ftp.gnu.org/gnu/bash/)
     - [Bash-it/bash-it](https://github.com/Bash-it/bash-it):A community Bash framework.
-    - [ dylanaraps / pure-bash-bible ](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
+    - [dylanaraps/pure-bash-bible ](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
 * [svenstaro/genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator https://svenstaro.github.io/genact/
 * [kentcdodds/cross-env](https://github.com/kentcdodds/cross-env):🔀 Cross platform setting of environment scripts https://www.npmjs.com/package/cross-env
 * [Swordfish90/cool-retro-term](https://github.com/Swordfish90/cool-retro-term):A good looking terminal emulator which mimics the old cathode display...
@@ -2185,7 +2185,6 @@ ccache gcc foo.c
 * [niieani/bash-oo-framework](https://github.com/niieani/bash-oo-framework):Bash Infinity is a modern boilerplate / framework / standard library for bash
 * [ericfreese/rat](https://github.com/ericfreese/rat):Compose shell commands to build interactive terminal applications
 * [kovidgoyal/kitty](https://github.com/kovidgoyal/kitty):A cross-platform, fast, feature full, GPU based terminal emulator
-* [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
 * [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
 * [sindresorhus/fkill-cli](https://github.com/sindresorhus/fkill-cli):Fabulously kill processes. Cross-platform.
 * [tartley/colorama](https://github.com/tartley/colorama):Simple cross-platform colored terminal text in Python

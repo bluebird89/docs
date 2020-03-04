@@ -49,7 +49,8 @@
     - [Atarity/deploy-your-own-saas](https://github.com/Atarity/deploy-your-own-saas):List of "only yours" cloud services for everyday needs 🏴
 * 亮度管理
     - [Redshift](http://jonls.dk/redshift/)
-
+* 白板
+    - [excalidraw / excalidraw](https://github.com/excalidraw/excalidraw):Excalidraw is a whiteboard tool that lets you easily sketch diagrams that have a hand-drawn feel to them. https://excalidraw.com
 ## Language
 
 * [byoungd/English-level-up-tips-for-Chinese](https://github.com/byoungd/English-level-up-tips-for-Chinese)

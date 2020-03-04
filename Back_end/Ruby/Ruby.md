@@ -14,7 +14,6 @@ The Ruby Programming Language https://www.ruby-lang.org/
 # ubuntu
 sudo apt-get install ruby-full
 
-# 准备
 sudo apt install curl
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -73,6 +72,15 @@ cd ruby-2.7.0/
 make
 sudo make install
 
+## trouble
+ERROR:  Loading command: install (LoadError) cannot load such file -- zlib
+ERROR:  While executing gem ... (NoMethodError)    undefined method `invoke_with_build_args' for nil:NilClass
+
+# ext/zlib ext/openssl
+ruby ./extconf.rb
+make
+sudo make install
+
 ruby -v
 
 # Managing gems in application
@@ -89,10 +97,17 @@ gem install rails -v [5.0.1]
 gem search '^rails$' --all
 gem install rails -v 4.2.7
 
-
 rails -v
 
 gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
+```
+
+## gem
+
+```
+gem sources -l
+gem sources --remove https://rubygems.org/
+gem sources -a https://mirrors.aliyun.com/rubygems/
 ```
 
 ### SQL

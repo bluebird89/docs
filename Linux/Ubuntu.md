@@ -468,8 +468,7 @@ sudo apt-get install lamp-server
 sudo apt install gnome-tweak-tool
 ## [fusuma](https://github.com/iberianpig/fusuma):Multitouch gestures with libinput driver on X11, Linux 
 sudo gpasswd -a $USER input # 重新登录账户
-sudo apt-get install libinput-tools
-sudo apt-get install xdotool
+sudo apt-get install libinput-tools  xdotool
 sudo apt-get install ruby
 gem install|update fusuma
 gsettings set org.gnome.desktop.peripherals.touchpad send-events enable # 确保触控板的info传输到GNOME桌面环境

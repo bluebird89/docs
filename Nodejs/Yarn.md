@@ -7,8 +7,7 @@ Yarn是Facebook提供的替代npm的工具，可以加速node模块的下载 与
 ## 安装
 
 ```sh
-curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt-get update && sudo apt-get install yarn
 

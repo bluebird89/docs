@@ -3828,6 +3828,8 @@ composer global require friendsofphp/php-cs-fixer
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 brew install homebrew/php/php-cs-fixer
 
+composer global require phpmd/phpmd
+
 sudo php-cs-fixer self-update
 brew upgrade php-cs-fixer
 
