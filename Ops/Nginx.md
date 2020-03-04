@@ -1,11 +1,10 @@
 # [nginx/nginx](https://github.com/nginx/nginx)
 
-一个免费、开源、高性能、轻量级的 HTTP 和反向代理服务器 基于事件驱动（event-driven） 非阻塞模式的 Web 服务器.与事件循环相比 fork 子进程消耗更多系统资源，基于事件的 HTTP 服务器完胜。
-解决基于进程模型产生的C10k问题，请求时即使无状态连接如web服务都无法达到并发响应量级一万现状。2006年俄罗斯编写。全称为engine X，缩减合并称为nginx。
+2006年俄罗斯编写。全称为engine X，缩减合并称为nginx。一个免费、开源、高性能、轻量级的 HTTP 和反向代理服务器 基于事件驱动（event-driven） 非阻塞模式的 Web 服务器.与事件循环相比 fork 子进程消耗更多系统资源，基于事件的 HTTP 服务器完胜。解决基于进程模型产生的C10k问题，请求时即使无状态连接如web服务都无法达到并发响应量级一万现状。
 
 ## 特性
 
-× 高并发 高性能
+* 高并发 高性能
     - 内存消耗低：10000个keep-alive连接模式下的非活动连接仅消耗2.5M内存；
     - 非阻塞、高并发连接：官方测试能够支撑5万并发连接，在实际生产环境中跑到2～3万并发连接数
     - 事件驱动：通信机制采用 epoll 模型，支持更大的并发连接
@@ -121,6 +120,7 @@
 
 * ubunutu
     - `/usr/share/doc/nginx-doc/examples/`
+    - `/usr/share/nginx`
 * Mac
     - 程序文件 /usr/local/Cellar/nginx
     - 配置文件 /usr/local/etc/nginx/nginx.conf   /usr/local/nginx/conf/nginx.conf
@@ -145,34 +145,31 @@ export LUAJIT_INC=/usr/local/LuaJIT/include/luajit-2.0
 wget https://github.com/simpl/ngx_devel_kit/archive/v0.3.0.tar.gz
 wget https://github.com/openresty/lua-nginx-module/archive/v0.10.9rc7.tar.gz
 
-wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.43.tar.gz && tar -zxf pcre-8.43.tar.gz
+wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.40.tar.gz && tar -zxf pcre-8.40.tar.gz
 wget http://zlib.net/zlib-1.2.11.tar.gz && tar -zxf zlib-1.2.11.tar.gz
-wget http://www.openssl.org/source/openssl-1.1.1c.tar.gz && tar -zxf openssl-1.1.1c.tar.gz
+wget http://www.openssl.org/source/openssl-1.1.1f.tar.gz && tar -zxf openssl-1.1.1f.tar.gz
 wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar.gz
 
- ./configure
+./configure \
 --prefix=/usr/share/nginx \
 --sbin-path=/usr/sbin/nginx \
 --conf-path=/etc/nginx/nginx.conf \
 --pid-path=/run/nginx.pid \
---with-pcre=../pcre-8.43
---with-zlib=../zlib-1.2.11
---with-openssl=../openssl-1.1.0c \
+--with-pcre=../pcre-8.40 \
+--with-zlib=../zlib-1.2.11 \
+--with-openssl=../openssl-1.1.0f \
 --with-openssl-opt=enable-ec_nistp_64_gcc_128 \
 --with-openssl-opt=no-nextprotoneg \
 --with-openssl-opt=no-weak-ssl-ciphers \
 --with-openssl-opt=no-ssl3 \
---with-http_ssl_module
---with-stream
+--with-http_ssl_module \
+--with-stream \
 --with-stream_realip_module \
 --with-stream_ssl_module \
 --with-stream_ssl_preread_module \
 --with-mail \
 --with-mail_ssl_module \
---with-mail=dynamic
---add-module=/usr/build/nginx-rtmp-module
---add-dynamic-module=/usr/build/3party_module
---modules-path=/usr/lib/nginx/modules \
+--with-mail=dynamic \
 --error-log-path=/var/log/nginx/error.log \
 --http-log-path=/var/log/nginx/access.log \
 --lock-path=/var/lock/nginx.lock \
@@ -207,8 +204,22 @@ wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar
 --with-cc-opt='-g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2' \
 --with-ld-opt='-Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now'
 
+  nginx path prefix: "/usr/share/nginx"
+  nginx binary file: "/usr/sbin/nginx"
+  nginx modules path: "/usr/share/nginx/modules"
+  nginx configuration prefix: "/etc/nginx"
+  nginx configuration file: "/etc/nginx/nginx.conf"
+  nginx pid file: "/run/nginx.pid"
+  nginx error log file: "/var/log/nginx/error.log"
+  nginx http access log file: "/var/log/nginx/access.log"
+  nginx http client request body temporary files: "/var/lib/nginx/body"
+  nginx http proxy temporary files: "/var/lib/nginx/proxy"
+  nginx http fastcgi temporary files: "/var/lib/nginx/fastcgi"
+  nginx http uwsgi temporary files: "/var/lib/nginx/uwsgi"
+  nginx http scgi temporary files: "/var/lib/nginx/scgi"
+
 ./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -fPIC' --with-ld-opt='-Wl,-z,relro -Wl,-z,now -pie' --add-module=/opt/download/ngx_devel_kit-0.3.0 --add-module=/opt/download/lua-nginx-module-0.10.9rc7
-make -j 4 && make install
+make && sudo make install
 
 echo "/usr/local/LuaJIT/lib" >> /etc/ld.so.conf
 ldconfig
@@ -265,16 +276,13 @@ sudo 2>&1 nginx -V | tr -- - '\n' | grep _module # View Compiled Nginx Modules
 Upgrade Nginx on the Fly
 Nginx allows admins to upgrade the binary and/or configuration file on the fly. This means your client requests will not be interrupted due to server upgrades. To do this, first, we need to locate the PID of the master Nginx process. We can do it using a simple command that we’ve already demonstrated.
 
-$ cat /run/nginx.pid
+cat /run/nginx.pid
 Your new Nginx binary should be ready by now. Spawn a new set of Nginx master/worker processes which use the new binary via the below command.
 
-$ sudo kill -s USR2 `cat /run/nginx.pid`
-Now kill the worker processes used by the first master process using the following command.
+sudo kill -s USR2 `cat /run/nginx.pid` Now kill the worker processes used by the first master process using the following command.
 
-$ sudo kill -s WINCH `cat /run/nginx.pid.oldbin`
-Follow it by killing the old master process.
-
-$ sudo kill -s QUIT `cat /run/nginx.pid.oldbin`
+sudo kill -s WINCH `cat /run/nginx.pid.oldbin`
+sudo kill -s QUIT `cat /run/nginx.pid.oldbin` # Follow it by killing the old master process.
 ```
 
 ## 组成

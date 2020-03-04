@@ -12,6 +12,7 @@
 * UDESK:集成客服接入平台
 * towe
 * [飞书](https://www.feishu.cn/): slack + google docs
+* [welink](https://www.huaweicloud.com/product/welink.html):
 * [Slack](https://slack.com/)
 * [tinode/chat](https://github.com/tinode/chat):Instant messaging server; backend in Go; Android, web command line clients; chatbots
 * 沟通
