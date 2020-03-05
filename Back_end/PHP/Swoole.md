@@ -27,7 +27,7 @@ Event-driven asynchronous & concurrent & coroutine networking engine with high p
 * 缺点
     - 无法做密集计算。当然这一点是php甚至是所有动态语言都存在的问题
     - 更容易内存泄露。在处理全局变量，静态变量的时候一定要小心，这种不会被GC清理的变量会存在整个生命周期中，如果没有正确的处理，很容易消耗完所有的内存
-* 场景：WebSocket 即使通信、聊天、推送服务器、RPC 远程调用服务、网关、代理、游戏服务器等
+* 场景：WebSocket 即时通信、聊天、推送服务器、RPC 远程调用服务、网关、代理、游戏服务器等
 
 ## 版本
 
@@ -77,7 +77,6 @@ cp -R /usr/local/Cellar/openssl/1.0.2o_1/include/openssl /usr/local/include # fa
 brew install hiredis # fatal error: 'hiredis/hiredis.h'
 
 brew install swoole
-pecl install swoole
 
 # add swoole.ini
 sudo ln -s  /etc/php/7.2/mods-available/swoole.ini 20-swoole.ini
@@ -86,11 +85,6 @@ sudo ln -s  /etc/php/7.2/mods-available/swoole.ini 20-swoole.ini
 php -m | grep swoole
 # 查看是否有 async_redis => enabled
 php --ri swoole
-
-# nginx 转发至 swoole
-if (!-e $request_filebname){
-  proxy_pass http://127.0.0.1:8811;
-}
 ```
 
 ## 基础

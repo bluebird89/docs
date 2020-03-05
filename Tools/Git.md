@@ -1467,7 +1467,7 @@ Good-lookin' diffs. Actually… nah… The best-lookin' diffs. tada git diff 格
 ```sh
 #  install
 npm install -g diff-so-fancy
-yarn install -g diff-so-fancy
+yarn global add diff-so-fancy
 
 #Arch Linux下面工作，更简单：
 sudo pacman -S diff-so-fancy
