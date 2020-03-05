@@ -12,3 +12,4 @@
 * [Search Icons Visually](http://compute.vision/nouns/index.html)
 * [Fotor](Fotor.com):免费在线平面设计工具和图片编辑器
 * [coreui / coreui-icons](https://github.com/coreui/coreui-icons):CoreUI Free Icons - Premium designed free icon set with marks in SVG, Webfont and raster formats https://coreui.io/icons/
+* [astrit / css.gg](https://github.com/astrit/css.gg):500+ CSS Icons. Customizable, Retina Ready with API & NPM https://css.gg
