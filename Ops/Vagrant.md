@@ -104,17 +104,15 @@ vagrant ssh web/dbmaster
 vagrant ssh-config
 
 vagrant reload  # 重新启动虚拟机，主要用于重新载入配置文件
-vagrant reload --provision #系统更新配置文件的命令
+vagrant reload --provision # 系统更新配置文件的命令
 
-vagrant destroy # 销毁虚拟机
+vagrant destroy # 销毁
 
 vagrant package (--base web --output web.box --vagrantfile Vagrantfile) # 打包环境，包名、包文件
 
 vagrant provision --provision-with chef
 
 vagrant plugin install vagrant-vbguest # 插件安装
-
-
 ```
 
 ## 配置

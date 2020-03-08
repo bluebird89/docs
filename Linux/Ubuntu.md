@@ -93,6 +93,10 @@ sudo dpkg-reconfigure tzdata
 
 # /etc/apt/apt.conf.d/00aptitude append this line of code to the end
 Acquire::Languages "none";
+
+# DNS /etc/resolv.conf
+nameserver 223.5.5.5  
+nameserver 223.6.6.6
 ```
 
 ## 服务管理

@@ -1696,6 +1696,29 @@ PermitRootLogin no|yes|without-password  ## restrict the root login to only be p
 sudo systemctl reload sshd.service
 ```
 
+## [Openssl](https://www.openssl.org/)
+
+a robust, commercial-grade, and full-featured toolkit for the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols. It is also a general-purpose cryptography library
+
+```sh
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+    LANGUAGE = (unset),
+    LC_ALL = (unset),
+    LANG = "en_US.UTF-8"
+are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+
+# .bashrc
+export LC_CTYPE=en_US.UTF-8 
+export LC_ALL=en_US.UTF-8
+
+# openssl: error while loading shared libraries: libcrypto.so.1.1: cannot open shared object file: No such file or directory
+  
+ln -s /usr/local/openssl/lib/libssl.so.1.1 /usr/lib/libssl.so.1.1
+ln -s /usr/local/openssl/lib/libcrypto.so.1.1 /usr/lib/libcrypto.so.1.1
+```
+
 ### SFTP
 
 stands for SSH File Transfer Protocol, or Secure File Transfer Protocol, is a separate protocol packaged with SSH that works in a similar way over a secure connection.

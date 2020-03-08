@@ -138,91 +138,34 @@ mysql_secure_installation #设置Mysql密码，根据提示按Y 回车输入2次
 
 ```sh
 sudo apt-get install python-software-properties software-properties-common
-sudo apt-get install software-properties-common # ubuntu 18.04
 
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
 
 sudo apt-cache search php7.1*
 
-sudo apt-get install php7.2 \
-php7.2-fpm \
-php7.2-mysql \
-php7.2-common \
-php7.2-curl \
-php7.2-cli \
-php7.2-mbstring \
-php7.2-xml \
-php7.2-bcmath
-php7.2-mcrypt
-
-sudo apt-get install 
-php7.1-json \
-php7.1-cgi \
-php7.1-gd \
-php-pear \
-php7.1-intl
-php7.2-soap
-php7.2-xdebug
-
-
-sudo apt-get install -y php-pear \
-php5.6-mcrypt \
-php5.6-mbstring \
-php5.6-curl \
-php5.6-cli \
-php5.6-mysql \
-php5.6-gd \
-php5.6-intl \
-php5.6-xsl \
-php5.6-zip
+sudo apt-get install php7.2 
+php7.2-fpm  php7.2-mysql php7.2-common php7.2-curl php7.2-cli php7.2-mbstring php7.2-xml php7.2-bcmath php7.2-mcrypt php7.2-json php7.2-cgi php7.2-gd php-pear php7.2-intl php7.2-soap php7.2-xdebug php7.2-xsl php7.2-zip php7.2-xmlrpc php7.2-imagick php7.2-dev php7.2-imap php7.2-opcache -y
 
 ## 编译
 wegt https://www.php.net/distributions/php-7.3.5.tar.gz
 cd /usr/local/src
 tar -zvxf php-7.3.5.tar.gz
-cd php-5.5.14
+cd php-7.3.5
+
+sudo apt install gcc make openssl curl libbz2-dev libxml2-dev libjpeg-dev libpng-dev libfreetype6-dev pkg-config libzip-dev bison autoconf build-essential pkg-config git-core libltdl-dev libbz2-dev libxml2-dev libxslt1-dev libssl-dev libicu-dev libpspell-dev libenchant-dev libmcrypt-dev libpng-dev libjpeg8-dev libfreetype6-dev libmysqlclient-dev libreadline-dev libcurl4-openssl-dev librecode-dev libsqlite3-dev libonig-dev libicu-dev
+
+# No package ‘oniguruma’ found
+git clone https://github.com/kkos/oniguruma.git oniguruma
+cd oniguruma
+./autogen.sh
+./configure
+make
+make install
+
+./configure --prefix=/usr/local/php7 --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-pdo-mysql --with-zlib --enable-xml --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --enable-mbstring --with-openssl --enable-pcntl --enable-sockets --with-xmlrpc --enable-soap --without-pear --with-gettext --enable-intl --enable-maintainer-zts --enable-exif --enable-calendar --enable-opcache --enable-session --with-iconv --with-pdo-mysql=mysqlnd
 
 export LD_LIBRARY_PATH=/usr/local/libgd/lib
-./configure --prefix=/usr/local/php \
---with-config-file-path=/usr/local/php/etc \
---with-mysql=/usr/local/mysql \
---with-mysqli=/usr/local/mysql/bin/mysql_config \
---with-mysql-sock=/tmp/mysql.sock \
---with-pdo-mysql=/usr/local/mysql \
---with-gd \
---with-png-dir=/usr/local/libpng \
---with-jpeg-dir=/usr/local/jpeg \
---with-freetype-dir=/usr/local/freetype \
---with-xpm-dir=/usr/ \
---with-vpx-dir=/usr/local/libvpx/ \
---with-zlib-dir=/usr/local/zlib \
---with-t1lib=/usr/local/t1lib \
---with-iconv \
---enable-libxml \
---enable-xml \
---enable-bcmath \
---enable-shmop \
---enable-sysvsem \
---enable-inline-optimization \
---enable-opcache \
---enable-mbregex \
---enable-fpm \
---enable-mbstring \
---enable-ftp \
---enable-gd-native-ttf \
---with-openssl \
---enable-pcntl \
---enable-sockets \
---with-xmlrpc \
---enable-zip \
---enable-soap \
---without-pear \
---with-gettext \
---enable-session \
---with-mcrypt \
---with-curl \
---enable-ctype
 
 make && make install
 
