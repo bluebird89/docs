@@ -366,5 +366,6 @@
 * [MIT Deep Learning](http://www.deeplearningbook.org/)：Bengio写的MIT Press《Deep learning》
 * [deeplearning-ai/machine-learning-yearning-cn](https://github.com/deeplearning-ai/machine-learning-yearning-cn):Machine Learning Yearning 中文版 - 《机器学习训练秘籍》 - Andrew Ng 著 
 * [yhangf/ML-NOTE](https://github.com/yhangf/ML-NOTE):📙慢慢整理所学的机器学习算法，并根据自己所理解的样子叙述出来。(注重数学推导) 
+* [hankcs / HanLP](https://github.com/hankcs/HanLP):中文分词 词性标注 命名实体识别 依存句法分析 语义依存分析 新词发现 关键词短语提取 自动摘要 文本分类聚类 拼音简繁转换 自然语言处理 http://hanlp.com/
 * [](https://github.com/apache/predictionio)
 * [](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)
