@@ -156,6 +156,9 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * [](https://visualgo.net/en):可视化
 * [我接触过的前端数据结构与算法](https://juejin.im/post/5958bac35188250d892f5c91)
 * [algorithm004-01/algorithm004-01](https://github.com/algorithm004-01/algorithm004-01)
+* [labuladong
+/
+fucking-algorithm](https://github.com/labuladong/fucking-algorithm):手把手撕LeetCode题目，扒各种算法套路的裤子，not only how，but also why. English version supported! https://labuladong.gitbook.io/algo/
 
 ## 工具
 
