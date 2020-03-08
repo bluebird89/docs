@@ -22,7 +22,7 @@ eter Deutsch 提出的分布式系统八大谬论概括了程序员新手可能�
 * 传输成本是零
 * 网络是同质的
 
-## 一致性
+## 一致性 Paxos/Raft
 
 ## 高可用HA（High Availability）
 
