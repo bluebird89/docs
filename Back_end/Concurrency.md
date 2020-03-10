@@ -384,7 +384,6 @@ private void doCheck()
         Thread.sleep(100);
     }
 }
-
 ```
 
 ## 数据
@@ -423,3 +422,5 @@ make && make install
 ```
 
 ## 参考
+
+* [libevent/libevent](https://github.com/libevent/libevent) :Event notification library https://libevent.org
