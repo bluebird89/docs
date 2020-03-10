@@ -309,7 +309,7 @@ class Captain
     - 可以通过多线程同步机制，确保只有一个实例被创建，这会引起一些额外的性能开销
 * 在复杂的软件环境下，如果有大量不同类型的单件，要处理好，他们之间的构造顺序问题。
 
-## 策略模式
+## 策略
 
 针对一组算法，将每一个算法封装到具有共同接口的独立的类中，从而使得它们可以相互替换。策略模式使得算法可以在不影响到客户端的情况下发生变化。策略模式把行为和环境分开。环境类负责维持和查询行为类，各种算法在具体的策略类中提供。由于算法和环境独立开来，算法的增减，修改都不会影响到环境和客户端。
 
@@ -320,26 +320,26 @@ class Captain
     - 可以创建一组类的统一访问接口
     - 可以在不破坏类封装性的基础上，使得类可以同不曾估计到的系统进行交互
 
-## 装饰模式
+## 装饰
 
 式以对客户端透明的方式扩展对象的功能，是继承关系的一个替代方案，提供比继承更多的灵活性。动态给一个对象增加功能，这些功能可以再动态的撤消。增加由一些基本功能的排列组合而产生的非常大量的功能。
 
-## 适配器模式
+## 适配器
 
 把一个类的接口变换成客户端所期待的另一种接口，从而使原本因接口原因不匹配而无法一起工作的两个类能够一起工作。适配类可以根据参数返还一个合适的实例给客户端
 将两个不兼容的类纠合在一起使用，属于结构型模式，需要Adaptee(被适配者)和Adaptor(适配器)两个身份。
 
-## 代理模式
+## 代理
 
 给某一个对象提供一个代理对象，并由代理对象控制对源对象的引用。代理就是一个人或一个机构代表另一个人或者一个机构采取行动。
 
 某些情况下，客户不想或者不能够直接引用一个对象，代理对象可以在客户和目标对象直接起到中介的作用。客户端分辨不出代理主题对象与真实主题对象。代理模式可以并不知道真正的被代理对象，而仅仅持有一个被代理对象的接口，这时候代理对象不能够创建被代理对象，被代理对象必须有系统的其他角色代为创建并传入。
 
-## 观察者模式
+## 观察者
 
 定义了一种一队多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使他们能够自动更新自己。发布订阅。
 
-## 模板模式（Template）
+## 模板（Template）
 
 * 模板方法模式准备一个抽象类，将部分逻辑以具体方法以及具体构造子的形式实现，然后声明一些抽象方法来迫使子类实现剩余的逻辑。
 
@@ -358,9 +358,8 @@ class Captain
 
 ## 图书
 
-* Design Patterns:Elements of Reusable Object-Oriented Software（设计模式 - 可复用的面向对象软件元素）
 * 《[Head First 设计模式（中文版）](https://book.douban.com/subject/2243615/)》
-* 《[设计模式 : 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)》
+* 《[设计模式 : 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)》 Design Patterns:Elements of Reusable Object-Oriented Software
 
 ## 参考
 
@@ -368,6 +367,7 @@ class Captain
 * [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns)
 * [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
 * [kamranahmedse/design-patterns-for-humans](https://github.com/kamranahmedse/design-patterns-for-humans):Design Patterns for Humans™ - An ultra-simplified explanation 
+
 * [设计模式](http://laravelacademy.org/resources/design-patterns)
 * [Repository 模式](http://laravelacademy.org/post/3063.html)
 * [教程](http://www.runoob.com/design-pattern/design-pattern-tutorial.html)
