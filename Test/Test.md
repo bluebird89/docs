@@ -306,7 +306,7 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
   - 错误的数据，测试 validator 是否正常工作；
   - 正常的数据，测试基本功能是否工作。
 
-## fiddler
+## [fiddler](http://docs.telerik.com/fiddler/)
 
 * 抓包
   - 客户端与监测机处于同一网络
@@ -318,7 +318,10 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
   - 选中"Allow remote computers to connect"，是允许别的机器把HTTP/HTTPS请求发送到Fiddler上来
   - 手机修改代理地址与端口
   - 手机访问PC的IP：8888端口下载并安装证书
-* [](http://docs.telerik.com/fiddler/)
+
+## 图书
+
+* 《全程软件测试（第三版）》
 
 ## 工具
 
@@ -336,6 +339,7 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 * Meissa
 * EasyMock
 * jmockit
+* [cypress-io / cypress](https://github.com/cypress-io/cypress):Fast, easy and reliable testing for anything that runs in a browser. https://www.cypress.io
 * [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev):A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev
 * [getgauge/gauge](https://github.com/getgauge/gauge):Light weight cross-platform test automation https://gauge.org
 * [abseil/googletest](https://github.com/abseil/googletest):Google Test
@@ -343,10 +347,13 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
   - QT4A，UI 自动化测试 for Android： https://github.com/Tencent/QT4A
   - QT4i，UI 自动化测试 for iOS： https://github.com/Tencent/QT4i
   - QT4W，UI 自动化测试 for Web： https://github.com/Tencent/QT4W
-* 桌面程序的工具有：QTP、 AutoRunner
-* web应用的工具有：QTP、AutoRunner、Robot Framework、watir、selenium
+* QTP
+* AutoRunner
+* Robot Framework
+* watir
+* [Airtest IDE](https://airtest.netease.com/):Cross platform UI automation IDE
 
 ## 参考
 
-- [我们是怎样在项目内落地自动化测试体系的](http://blog.csdn.net/gitchat/article/details/78086617)
-- [How We Made Writing Tests Fun and Easy](https://blog.daftcode.pl/how-we-made-writing-tests-fun-and-easy-2d7e1fac6d16)
+* [我们是怎样在项目内落地自动化测试体系的](http://blog.csdn.net/gitchat/article/details/78086617)
+* [How We Made Writing Tests Fun and Easy](https://blog.daftcode.pl/how-we-made-writing-tests-fun-and-easy-2d7e1fac6d16)

@@ -29,6 +29,49 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * [使用 dotfiles 和 stow 管理你的 dotfiles](https://github.com/jcouyang/dotfiles)
 * [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
 
+## 启动项
+
+* 配置目录
+    - ~/Library/Preferences/ – （当前用户设置的进程）
+    - ~/Library/LaunchAgents/ – （当前用户的守护进程）
+    - /Library/LaunchAgents/ – （管理员设置的用户进程）
+    - /Library/LaunchDaemons/ – （管理员提供的系统守护进程）
+    - /System/Library/LaunchAgents/ – （Mac操作系统提供的用户进程）
+    - /System/Library/LaunchDaemons/ – （Mac操作系统提供的系统守护进程）
+
+```sh
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>KeepAlive</key>
+    <true/>
+    <key>Label</key>
+    <string>memcached</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/usr/bin/memcached</string>
+      <string>-d</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>UserName</key>
+    <string>michael</string>
+  </dict>
+</plist>
+
+# 查看服务名
+launchctl list | grep anydesk
+# 停止服务
+launchctl stop com.philandro.anydesk
+# 移除服务
+launchctl unload com.philandro.anydesk
+
+# 添加服务
+launchctl load -w ~/Library/LaunchAgents/memcached.plist
+```
+
 ### 命令行
 
 * [guarinogabriel/Mac-CLI](https://github.com/guarinogabriel/Mac-CLI)  OS X command line tools for developers – The ultimate tool to manage your Mac. It provides a huge set of command line commands that automatize the usage of your OS X system.
@@ -95,7 +138,14 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - [wulkano/kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology <https://getkap.co>
     - [Unarchiver](link)
     - [LICEcap](link):gif录制
-    - [sizeup](link)
+    - [sizeup](link) 窗口管理软件
+        + control+option+command + M ： 使当前窗口全屏
+        + control+option+command + 方向键上键 ： 使当前窗口占用当前屏幕上半部分
+        + control+option+command + 方向键下键 ： 使当前窗口占用当前屏幕下半部分
+        + control+option+command + 方向键左键 ： 使当前窗口占用当前屏幕左半部分
+        + control+option+command + 方向键右键 ： 使当前窗口占用当前屏幕右半部分
+        + control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
+        + control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
     - [Spectacle](link):控制窗口
     - [chunkwm](https://koekeishiya.github.io/chunkwm/index.html):a tiling window manager for macOS 
     - [onmyway133/FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
@@ -222,31 +272,29 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 
 ### 苹果铃声制作
 
-- 音乐文件用itunes打开
-- getinfo剪辑（长度不变）
-- 转换acc
-- 在文件位置移开未见重命名.m4r
-- 拖进tones
-- 同步手机
+* 音乐文件用itunes打开
+* getinfo剪辑（长度不变）
+* 转换acc
+* 在文件位置移开未见重命名.m4r
+* 拖进tones
+* 同步手机
 
 #### iTerm2
 
-iTerm2 是 MAC 下最好的终端工具
+* iTerm2 的标签的颜色会变化，以指示该 tPab 当前的状态。当该标签有新输出的时候，标签会变成洋红色；新的输出长时间没有查看，标签会变成红色。可在设置中关掉该功能。
+* 在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等
 
-- iTerm2 的标签的颜色会变化，以指示该 tPab 当前的状态。当该标签有新输出的时候，标签会变成洋红色；新的输出长时间没有查看，标签会变成红色。可在设置中关掉该功能。
-- 在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等
 
-## 键位
-
-* Command ⌘
-* Shift ⇧
-* Option ⌥
-* Control ⌃
-* Caps Lock ⇪
-* Fn
 
 ## 快捷键
 
+* ## 键位
+    - Command ⌘
+    - Shift ⇧
+    - Option ⌥
+    - Control ⌃
+    - Caps Lock ⇪
+    - Fn
 * option + command + sapce：finder
 * Command–空格键：打开Spotlight
 * command + n:新文件或新窗口
@@ -379,36 +427,36 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 
 ## Safari && [Chrome](https://www.google.com/chrome/browser/desktop/index.html#)
 
-- command + 1（2、3...）分别是打开书签栏的第一个、第二个..
-- command+r command + shift + r刷新。喜欢看直播的同学有福啦。
-- command+d 当前网页添加到书签。
-- command+opt+1打开topsites。
-- command+opt+2打开历史记录。
-- command+【 上一个标签页。
-- command+】 下一个标签页。
-- command+shift+home 打开首页。
-- command + w:关闭当前标签
-- Safari偏好设置 -->Command+ ，
-- 进入阅读模式 -->Command+Shift+ R
-- 选中文字加便签 -->Command+Shift+Y
-- ⌥-⌘-I 开发工具
-- 关闭其他标签 Conmand+Option+w
-- 标签向左 Ctrl+Shift+tab
-- 标签向右 Ctrl+tab
-- 标签左右 Shift+Command+ &lt;- / ->
-- 新建标签 Conmand+T
-- 新建窗口 Conmand+n
-- 打开侧栏 Conmand+Shift+L
-- 打开标签栏 Shift+Command+B
-- 刷新 Command+R
-- 恢复 Command+Z
-- 主页 Command+Shift+H
-- 调试工具 Option-Command-I
-- Command–上箭头：页面历史的切换
-- Command+M: 最小化窗口
-- Command+W: 关闭窗口
-- Command+Q: 退出程序
-- 按住⌘键:
+* command + 1（2、3...）分别是打开书签栏的第一个、第二个..
+* command+r command + shift + r刷新。喜欢看直播的同学有福啦。
+* command+d 当前网页添加到书签。
+* command+opt+1打开topsites。
+* command+opt+2打开历史记录。
+* command+【 上一个标签页。
+* command+】 下一个标签页。
+* command+shift+home 打开首页。
+* command + w:关闭当前标签
+* Safari偏好设置 -->Command+ ，
+* 进入阅读模式 -->Command+Shift+ R
+* 选中文字加便签 -->Command+Shift+Y
+* ⌥-⌘-I 开发工具
+* 关闭其他标签 Conmand+Option+w
+* 标签向左 Ctrl+Shift+tab
+* 标签向右 Ctrl+tab
+* 标签左右 Shift+Command+ &lt;- / ->
+* 新建标签 Conmand+T
+* 新建窗口 Conmand+n
+* 打开侧栏 Conmand+Shift+L
+* 打开标签栏 Shift+Command+B
+* 刷新 Command+R
+* 恢复 Command+Z
+* 主页 Command+Shift+H
+* 调试工具 Option-Command-I
+* Command–上箭头：页面历史的切换
+* Command+M: 最小化窗口
+* Command+W: 关闭窗口
+* Command+Q: 退出程序
+* 按住⌘键:
     - 可以拖拽选中的字符串；
     - 点击 url：调用默认浏览器访问该网址；
     - 点击文件：调用默认程序打开文件；
@@ -424,16 +472,6 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
     - 智能查找，支持正则查找：⌘+f。
     - ⌘+;弹出自动补齐窗口 之前做法 control + r：历史命令行匹配
     - ⌘+Option+e全屏展示所有的 tab，可以搜索
-
-#### sizeup窗口管理软件（多屏幕、半栏、1/4栏）
-
-* control+option+command + M ： 使当前窗口全屏
-* control+option+command + 方向键上键 ： 使当前窗口占用当前屏幕上半部分
-* control+option+command + 方向键下键 ： 使当前窗口占用当前屏幕下半部分
-* control+option+command + 方向键左键 ： 使当前窗口占用当前屏幕左半部分
-* control+option+command + 方向键右键 ： 使当前窗口占用当前屏幕右半部分
-* control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
-* control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
 
 #### 文稿快捷键
 

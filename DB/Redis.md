@@ -1329,6 +1329,7 @@ public void delBigList(String host, int port, String password, String bigListKey
 * [erikdubbelboer/phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. http://dubbelboer.com/phpRedisAdmin/
 * [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis
 * [redis-port](link):redis 间数据同步
+* [laixintao / iredis](https://github.com/laixintao/iredis):Interactive Redis: A Terminal Client for Redis with AutoCompletion and Syntax Highlighting. https://iredis.io/show
 * [redis-faina](https://github.com/facebookarchive/redis-faina):热点 key 寻找 (内部实现使用 monitor，所以建议短时间使用)
 * Jedis
     - [Jedis 常见异常汇总](https://yq.aliyun.com/articles/236384)
