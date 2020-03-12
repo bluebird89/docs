@@ -25,6 +25,21 @@
 * 日志文件/usr/local/var
 * 链接文件 /usr/local/opt
 
+```
+curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install >> brew_install
+
+HOMEBREW_PREFIX = "/usr/local".freeze
+HOMEBREW_REPOSITORY = "/usr/local/Homebrew".freeze
+HOMEBREW_CACHE = "#{ENV["HOME"]}/Library/Caches/Homebrew".freeze
+HOMEBREW_OLD_CACHE = "/Library/Caches/Homebrew".freeze
+#BREW_REPO = "https://github.com/Homebrew/brew".freeze
+BREW_REPO = "git://mirrors.ustc.edu.cn/brew.git".freeze
+#CORE_TAP_REPO = "https://github.com/Homebrew/homebrew-core".freeze
+CORE_TAP_REPO = "git://mirrors.ustc.edu.cn/homebrew-core.git".freeze
+
+/usr/bin/ruby ~/brew_install
+```
+
 ### brew vs brew cask
 
 * brew:下载源码解压后。／.configure&& make install,同时包含相关以来库，并自动配置好各种环境变量，易于卸载
@@ -32,10 +47,10 @@
 
 ```shell
 # 安装homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 # 使用brew的国内镜像
-cd "$(brew --repo)" && git remote set-url origin https://git.coding.net/homebrew/homebrew.git
 cd $home && brew update
 
 echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile(.zshrc)
@@ -44,7 +59,7 @@ brew -v|version
 brew config
 
 brew tap homebrew/services # brew 服务管理
-brew tap caskroom/cask
+# brew tap caskroom/cask
 brew tap caskroom/versions
 brew untap Homebrew/homebrew-versions # Remove a tapped repository
 
@@ -142,8 +157,10 @@ export PATH="/usr/local/sbin:$PATH"
 # Homebrew bash completion
 ##
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
-source $(brew --prefix)/etc/bash_completion
+    source $(brew --prefix)/etc/bash_completion
 fi
+
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
 ```
 
 ## 源管理
@@ -153,24 +170,26 @@ fi
 git -C "$(brew --repo)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
 git -C "$(brew --repo homebrew/core)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
 git -C "$(brew --repo homebrew/cask)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git
-brew update
+git -C "$(brew --repo homebrew/cask-fonts)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask-fonts.git
+git -C "$(brew --repo homebrew/cask-drivers)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask-drivers.git
 
 ## 更换 阿里
-cd "$(brew --repo)"
-git remote set-url origin https://mirrors.aliyun.com/homebrew/brew.git
-# 更换 homebrew-core
-cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git
-brew update
-
+cd "$(brew --repo)" && git remote set-url origin https://mirrors.aliyun.com/homebrew/brew.git
+cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core" && git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git
 echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles' >> ~/.zshrc
-source ~/.zshrc
+
+## 中科大
+cd "$(brew --repo)" && git remote set-url origin git://mirrors.ustc.edu.cn/brew.git
+cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core" && git remote set-url origin git://mirrors.ustc.edu.cn/homebrew-core.git
+echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.bash_profile
 
 # 还原
 git -C "$(brew --repo)" remote set-url origin https://github.com/Homebrew/brew.git
 git -C "$(brew --repo homebrew/core)" remote set-url origin https://github.com/Homebrew/homebrew-core.git
 git -C "$(brew --repo homebrew/cask)" remote set-url origin https://github.com/Homebrew/homebrew-cask.git
+
 brew update
+source ~/.zshrc
 ```
 
 ## 问题

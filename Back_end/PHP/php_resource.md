@@ -13,12 +13,12 @@
     - [PaketHub](https://pakethub.com):All-in-One PHP Package Repository
     - [Private Packagist](https://packagist.com):Composer package archive as a service for PHP
     - [WordPress Packagist](https://wpackagist.org):Manage your plugins with Composer
-- 依赖管理 Dependency Management 依赖和包管理库
+* 依赖管理 Dependency Management 依赖和包管理库
     - [Composer Installers](https://github.com/composer/installers): 一个多框架Composer库安装器
     - [Composer](https://getcomposer.org/)
     - [Melody](http://melody.sensiolabs.org/): 一个用于构建Composer脚本文件的工具
     - [Pickle](https://github.com/FriendsOfPHP/pickle): 一个PHP扩展安装器
-- 其他的依赖管理 Dependency Management Extras
+* 其他的依赖管理 Dependency Management Extras
     - [Composed](https://github.com/joshdifabio/composed): 一个在运行时解析你项目Composer环境的库
     - [Composer Checker](https://github.com/silpion/composer-checker): 一个校验Composer配置的工具
     - [Composer Merge Plugin](https://github.com/wikimedia/composer-merge-plugin): 一个用于合并多个composer.json文件的Composer插件
@@ -255,11 +255,11 @@ open http://127.0.0.1:8000
 
 ## 文档生成
 
-* (https://github.com/apigen/apigen)[APIGen]: 另一个API文档生成器
-* (https://github.com/justinwalsh/daux.io)[daux.io]: 一个使用Markdown文件的文档生成器
-* (https://github.com/phpDocumentor/phpDocumentor2)[PHP Documentor 2]: 一个API文档生成器
-* (http://phpdox.de/)[phpDox]: 一个PHP项目的文档生成器（不限于API文档）
-* (https://github.com/FriendsOfPHP/Sami)[Sami]: 一个API文档生成器
+* [APIGen](https://github.com/apigen/apigen): 另一个API文档生成器
+* [daux.io](https://github.com/justinwalsh/daux.io): 一个使用Markdown文件的文档生成器
+* [PHP Documentor 2](https://github.com/phpDocumentor/phpDocumentor2): 一个API文档生成器
+* [phpDox](http://phpdox.de/): 一个PHP项目的文档生成器（不限于API文档）
+* [Sami](https://github.com/FriendsOfPHP/Sami): 一个API文档生成器
 * [zircote/swagger-php](https://github.com/zircote/swagger-php):A php swagger annotation and parsing library http://zircote.com/swagger-php/
 * [michelf/php-markdown](https://github.com/michelf/php-markdown):Parser for Markdown and Markdown Extra derived from the original Markdown.pl by John Gruber. http://michelf.ca/projects/php-markdown/
 * [erusev/parsedown](https://github.com/erusev/parsedown):Markdown Parser in PHP http://parsedown.org
@@ -768,8 +768,8 @@ open http://127.0.0.1:8000
 
 ## 播客 PHP Podcasts
 
-- [PHP Town Hall](https://phptownhall.com/): 一个随意的Ben Edmunds和Phil Sturgeon的PHP播客
-- [PHP Roundtable](https://www.phproundtable.com/): PHP Roundtable是一个讨论PHP开发者关心话题的临时聚会
+* [PHP Town Hall](https://phptownhall.com/): 一个随意的Ben Edmunds和Phil Sturgeon的PHP播客
+* [PHP Roundtable](https://www.phproundtable.com/): PHP Roundtable是一个讨论PHP开发者关心话题的临时聚会
 
 ## 阅读
 
@@ -873,14 +873,11 @@ open http://127.0.0.1:8000
 ## network
 
 * [slince/spike](https://github.com/slince/spike):📣 A fast reverse proxy written in PHP that helps to expose local services to the internet
+* [kitetail / zttp](https://github.com/kitetail/zttp):A developer-experience focused HTTP client, optimized for most common use cases.
 
 ## graphql
 
 * [graphql-php](https://webonyx.github.io/graphql-php/):A PHP port of GraphQL reference implementation http://webonyx.github.io/graphql-php/
-
-## 后台
-
-* [Nova](https://nova.laravel.com/):administration panel for Laravel
 
 ## utilities
 

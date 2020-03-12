@@ -109,6 +109,29 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
         + Accept: 可以处理的媒体类型和优先级
         + Referer: 请求从哪发起的原始资源URI
         + User-Agent: 创建请求的用户代理名称
+        + Cache-Control 控制缓存具体的行为
+            * 请求指令:
+                - no-cache    无   强制源服务器再次验证
+                - no-store    无   不缓存请求或是响应的任何内容
+                - max-age=[秒] 缓存时长，单位是秒   缓存的时长，也是响应的最大的Age值
+                - min-fresh=[秒]   必需  期望在指定时间内响应仍然有效
+                - no-transform    无   代理不可更改媒体类型
+                - only-if-cached  无   从缓存获取
+                - cache-extension 无   新的指令标记(token)
+            * 响应指令
+                - public    无   任意一方都能缓存该资源(客户端、代理服务器等)
+                - private 可省略 只能特定用户缓存该资源
+                - no-cache    可省略 缓存前必须先确认其有效性
+                - no-store    无   不缓存请求或响应的任何内容
+                - no-transform    无   代理不可更改媒体类型
+                - must-revalidate 无   可缓存但必须再向源服务器进确认
+                - proxy-revalidate    无   要求中间缓存服务器对缓存的响应有效性再进行确认
+                - max-age=[秒] 缓存时长，单位是秒   缓存的时长，也是响应的最大的Age值
+                - s-maxage=[秒]    必需  公共缓存服务器响应的最大Age值
+                - cache-extension -   新指令标记(token)
+        + Pragma    HTTP1.0时的遗留字段，当值为"no-cache"时强制验证缓存,优先级高于Cache-Control和Expires `<meta http-equiv="Pragma" content="no-cache">`
+            * 仅有IE才能识别这段meta标签含义
+            * 服务端响应添加'Pragma': 'no-cache'，浏览器表现行为和强制刷新类似
         + Cookie: cookie信息
         + Content-Encoding：
             * 文档的编码(Encode)方法。只有在解码之后才可以得到 Content-Type 头指定的内容类型
@@ -136,9 +159,13 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
                 - .torrent    application/x-bittorrent
                 - .wav    audio/wav
                 - .xhtml  text/html
-        + Date：当前的 GMT 时间
-        + Expires：应该在什么时候认为文档已经过期，从而不再缓存它.
-        + Last-Modified：文档的最后改动时间。客户可以通过 If-Modified-Since 请求头提供一个日期，该请求将被视为一个条件 GET，服务器端的资源没有变化,只有改动时间迟于指定时间的文档才会返回，否则返回一个 304(Not Modified) 状态
+        + Date：创建报文的日期时间(启发式缓存阶段会用到这个字段)
+        + Expires：告知客户端资源缓存失效的绝对时间
+        + Last-Modified：文档的最后改动时间。客户可以通过 If-Modified-Since 请求头提供一个日期，服务器端的资源没有变化,只有改动时间迟于指定时间的文档才会返回，否则返回一个 304(Not Modified) 状态
+        + If-Match  条件请求，携带上一次请求中资源的ETag，服务器根据这个字段判断文件是否有新的修改
+        + If-None-Match   和If-Match作用相反，服务器根据这个字段判断文件是否有新的修改
+        + If-Modified-Since   比较资源前后两次访问最后的修改时间是否一致
+        + If-Unmodified-Since 比较资源前后两次访问最后的修改时间是否一致
         + Location：表示客户应当到哪里去提取文档
         + Refresh：表示浏览器应该在多少时间之后刷新文档，以秒计
             * 注意：这种功能通常是通过设置 HTML 页面 HEAD 区的 ＜META HTTP-EQUIV=”Refresh” CONTENT=”5;URL=http://host/path"＞实现
@@ -164,6 +191,9 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
         + domain: 指定发送cookie的域名
         + Secure: 指定之后只有https下才发送cookie
         + HostOnly: 指定之后javascript无法读取cookie
+        + ETag    服务器生成资源的唯一标识
+        + Vary    代理服务器缓存的管理信息
+        + Age 资源在缓存代理中存贮的时长(取决于max-age和s-maxage的大小)
 * 关闭连接或者为后续请求重用连接
 * 报文：HTTP/1.1以及更早的HTTP协议报文都是语义可读的。在HTTP/2中，这些报文被嵌入到了一个新的二进制结构，帧。帧允许实现很多优化，比如报文头部的压缩和复用。即使只有原始HTTP报文的一部分以HTTP/2发送出来，每条报文的语义依旧不变，客户端会重组原始HTTP/1.1请求。因此用HTTP/1.1格式来理解HTTP/2报文仍旧有效。
 
@@ -371,13 +401,35 @@ curl "http://127.0.0.1:8889/" -vv
         + 通过 IP，消息（或者其他数据）被分割为小的独立的包，并通过因特网在计算机之间传送。
         + IP 负责将每个包路由至它的目的地.责在因特网上发送和接收数据包。
         + IP协议是TCP/IP协议的核心，所有的TCP，UDP，IMCP，IGMP的数据都以IP数据格式传输。
-        + IP不是可靠的协议，这是说，IP协议没有提供一种数据未传达以后的处理机制，这被认为是上层协议：TCP或UDP要做的事情。
-        + 数据链路层中一般通过MAC地址来识别不同的节点，而在IP层我们也要有一个类似的地址标识，这就是IP地址。
+        + IP不是可靠的协议，没有提供一种数据未传达以后的处理机制，这被认为是上层协议：TCP或UDP要做的事情。
+        + 数据链路层中一般通过MAC地址来识别不同的节点，而在IP层也有一个类似的地址标识，这就是IP地址
+        + 格式：{ <Network-number>, <Host-number> }:net-id:表示ip地址所在的网络号, host-id：表示ip地址所在网络中的某个主机号码。
         + 子网掩码: 网络部分都为1，主机部分都为0，目的判断ip的网络部分，如255.255.255.0(11111111.11111111.11111111.00000000)
         + 32位IP地址分为网络位和地址位，可以减少路由器中路由表记录的数目，有了网络地址，就可以限定拥有相同网络地址的终端都在同一个范围内，那么路由表只需要维护一条这个网络地址的方向，就可以找到相应的这些终端了
-            * A类IP地址: 0.0.0.0~127.0.0.0
-            * B类IP地址:128.0.0.1~191.255.0.0
-            * C类IP地址:192.168.0.0~239.255.255.0
+            * A类IP地址:网络号占1个字节，网络号的第一位固定为0  0.0.0.0~127.0.0.0
+            * B类IP地址:网络号占2个字节，网络号的前两位固定为10 128.0.0.1~191.255.0.0
+            * C类IP地址:网络号占3个字节，网络号的前三位固定位110 192.168.0.0~239.255.255.0
+            * D类地址： 前四位是1110，用于多播(multicast)，即一对多通信。
+            * E类地址： 前四位是1111，保留为以后使用。
+            * 特殊IP地址
+                - {0,0}:网络号和主机号都全部为0，表示“本网络上的本主机”，只能用作源地址。
+                - {0，host-id}:本网络上的某台主机。 只能用作源地址。
+                - {-1,-1}： 表示网络号和主机号的所有位上都是1（二进制），用于本网络上的广播，只能用作目的地址，发到该地址的数据包不能转发到源地址所在网络之外。
+                - {net-id,-1}:直接广播到指定的网络上。 只能用作目的地址。
+                - {net-id,subnet-id,-1}:直接广播到指定网络的指定子网络上。 只用作目的地址。
+                - {net-id,-1,-1}:直接广播到指定网络的所有子网络上。 只能用作目的地址。
+                - {127，}:即网络号为127的任意ip地址。 都是内部主机回环地址(loopback),永远都不能出现在主机外部的网络中。
+        + 127.0.0.1 vs 0.0.0.0
+            * 属于特殊地址。 都属于A类地址。 都是IPV4地址
+            * 0.0.0.0地址被用于表示一个无效的，未知的或者不可用的目标。
+                + 在服务器中，0.0.0.0指的是本机上的所有IPV4地址，如果一个主机有两个IP地址，192.168.1.1 和 10.1.2.1，并且该主机上的一个服务监听的地址是0.0.0.0,那么通过两个ip地址都能够访问该服务。
+                + 在路由中，0.0.0.0表示的是默认路由，即当路由表中没有找到完全匹配的路由的时候所对应的路由。
+            * 所有网络号为127的地址都被称之为回环地址(所有发往该类地址的数据包都应该被loop back)
+                - 回环测试,通过使用ping 127.0.0.1 测试某台机器上的网络设备，操作系统或者TCP/IP实现是否工作正常。
+                - DDos攻击防御： 网站收到DDos攻击之后，将域名A记录到127.0.0.1，即让攻击者自己攻击自己。
+                - 大部分Web容器测试的时候绑定的本机地址。
+            * localhost:一个域名，用于指代this computer或者this host,可以用它来获取运行在本机上的网络服务
+                - 
         + IP协议头：八位的TTL字段。这个字段规定该数据包在穿过多少个路由之后才会被抛弃。某个IP数据包每穿过一个路由器，该数据包的TTL数值就会减少1，当该数据包的TTL成为零，它就会被自动抛弃。这个字段的最大值也就是255，也就是说一个协议包也就在路由器里面穿行255次就会被抛弃了，根据系统的不同，这个数字也不一样，一般是32或者是64。
     - ICMP (因特网消息控制协议)：针对错误和状态
     - DHCP (动态主机配置协议)：针对动态寻址
@@ -1072,6 +1124,9 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 * [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie):As easy as httpie /aitch-tee-tee-pie/ 🥧 Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc. https://twitter.com/clihttp https://httpie.org
 * [ eliangcs / http-prompt ](https://github.com/eliangcs/http-prompt):HTTPie + prompt_toolkit = an interactive command-line HTTP client featuring autocomplete and syntax highlighting http://http-prompt.com
 * [snail007/goproxy](https://github.com/snail007/goproxy):Proxy is a high performance HTTP(S), websocket, TCP, UDP,Secure DNS, Socks5 proxy server implemented by golang. Now, it supports chain-style proxies,nat forwarding in different lan,TCP/UDP port forwarding, SSH forwarding.Proxy是golang实现的高性能http,https,websocket,tcp,防污染DNS,socks5代理服务器,支持内网穿透,链式代理,通讯加密,智能HTTP,SOCKS5代理,域名黑白名单,跨平台,KCP协议支持,集成外部API。
+* [ProxymanApp
+/
+Proxyman](https://github.com/ProxymanApp/Proxyman):Modern and Delightful HTTP Debugging Proxy for macOS, iOS and Android ⚡️ https://proxyman.io
 * [Netflix/pollyjs](https://github.com/Netflix/pollyjs):Record, Replay, and Stub HTTP Interactions. https://netflix.github.io/pollyjs
 * [hazbo/httpu](https://github.com/hazbo/httpu):The terminal-first http client
 * [fukamachi/woo](https://github.com/fukamachi/woo):A fast non-blocking HTTP server on top of libev http://ultra.wikia.com/wiki/Woo_(kaiju)

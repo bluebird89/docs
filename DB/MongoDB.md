@@ -477,8 +477,8 @@ MongoDB 中的 Sharding 正式为了水平扩展而设计的。MongoDB 中通过
 
 ## 参考
 
-* [MongoDB Docs](https://docs.mongodb.com/)
-* https://github.com/rueckstiess/mtools/wiki/mlaunch
-* https://github.com/zhaoyi0113/mongo-cluster-docker
+* [MongoDB Docs](https://docs.mongodb.com/) 
+* [senssei/mongo-cluster-docker](https://github.com/senssei/mongo-cluster-docker):Docker compose config for mongodb cluster
 * [MongoDB的水平扩展，你做对了吗？](https://juejin.im/entry/5a0266a76fb9a0450908ec76)
 * [rueckstiess/mtools](https://github.com/rueckstiess/mtools):A collection of scripts to set up MongoDB test environments and parse and visualize MongoDB log files.
+* [MongoDB集群优化](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650785533&idx=1&sn=ceeb7833d721ab5c5a9ae76397405f93&chksm=f3f97368c48efa7ef6cb96ec4cbc2b1bc50f4510bcba7bb48dffd76be509d36b8fb099574446)
