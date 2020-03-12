@@ -142,6 +142,11 @@ EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水
 EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里
 ```
 
+## 信号量（Semaphore）
+
+* 保证多个线程不会互相冲突
+* 在门口挂n把钥匙。进去的人就取一把钥匙，出来时再把钥匙挂回原处。后到的人发现钥匙架空了，就知道必须在门口排队等着了
+
 ## 阶段
 
 * 原生php实现TCP Server -> 原生php实现http协议 -> 掌握tcpdump的使用 -> 深刻理解tcp连接过程

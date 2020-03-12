@@ -264,6 +264,7 @@
 * 《[Java核心技术·卷2：高级特性（原书第9版）](https://www.amazon.cn/gp/product/B00IK7SM6O)》
 * Spring实战（第4版）
 * 《大型网站系统与 Java 中间件实践》
+* Head First Java
 * Tomcat架构解析
 * Java虚拟机
 * 《Java多线程编程核心技术》
