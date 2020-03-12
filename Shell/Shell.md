@@ -575,6 +575,36 @@ echo "Args count: $#"
 exit 0
 ```
 
+## PS1
+
+```
+\a    ASCII 响铃字符（也可以键入 \007） 
+\d    "Wed Sep 06" 格式的日期 
+\e    ASCII 转义字符（也可以键入 \033） 
+\h    主机名的第一部分（如 "mybox"） 
+\H    主机的全称（如 "mybox.mydomain.com"） 
+\j    在此 shell 中通过按 ^Z 挂起的进程数 
+\l    此 shell 的终端设备名（如 "ttyp4"） 
+\n    换行符 
+\r    回车符 
+\s    shell 的名称（如 "bash"） 
+\t    24 小时制时间（如 "23:01:01"） 
+\T    12 小时制时间（如 "11:01:01"） 
+\@    带有 am/pm 的 12 小时制时间 
+\u    用户名 
+\v    bash 的版本（如 2.04） 
+\V    Bash 版本（包括补丁级别） ?/td> 
+\w    当前工作目录（如 "/home/drobbins"） 
+\W    当前工作目录的“基名 (basename)”（如 "drobbins"） 
+\!    当前命令在历史缓冲区中的位置 
+\#    命令编号（只要您键入内容，它就会在每次提示时累加） 
+\$    如果您不是超级用户 (root)，则插入一个 "$"；如果您是超级用户，则显示一个 "#" 
+\xxx    插入一个用三位数 xxx（用零代替未使用的数字，如 "\007"）表示的 ASCII 字符 
+\\    反斜杠 
+\[    这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使 bash 能够正确计算自动换行。 
+\]    这个序列应该出现在非打印字符序列之后
+```
+
 ## 协程
 
 * 在后台生成一个子shell，并在这个子shell中执行命令 `coproc My_Job { sleep 10; }`
@@ -2119,7 +2149,7 @@ ccache gcc foo.c
 * 搜索
     - [ack](https://beyondgrep.com/)、[ag](https://github.com/ggreer/the_silver_searcher)和 [rg](https://github.com/BurntSushi/ripgrep)是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到配置在 .gitignore 中的规则
     - [fzf](https://github.com/junegunn/fzf) cherry_blossom A command-line fuzzy finder `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf ~/.fzf/install`
-    - [fd](https://github.com/sharkdp/fd) 是一个比 find 更简单更快的命令，会自动地忽略掉一些你配置在 .gitignore 中的文件，以及 .git 下的文件
+    - [fd](https://github.com/sharkdp/fd) A simple, fast and user-friendly alternative to 'find' 一个比 find 更简单更快的命令，会自动地忽略掉一些配置在 .gitignore 中的文件，以及 .git 下的文件
 * monitor
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序的
     - [ sqshq / sampler ](https://github.com/sqshq/sampler):Tool for shell commands execution, visualization and alerting. Configured with a simple YAML file. https://sampler.dev

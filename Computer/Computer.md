@@ -158,3 +158,7 @@ total = *p + 200;
 * [scratch](https://scratch.mit.edu/)
 * [wxwmd/HIT-Computer-Courses](https://github.com/wxwmd/HIT-Computer-Courses):哈工大计算机课程资料，包含计算机系统等多个科目
 * [ianw / bottomupcs](https://github.com/ianw/bottomupcs):Bottom Up Computer Science http://www.bottomupcs.com
+
+## 参考
+
+* [wolverinn / Waking-Up](https://github.com/wolverinn/Waking-Up):计算机基础（计算机网络/操作系统/数据库/Git...）面试问题全面总结，包含详细的follow-up question以及答案

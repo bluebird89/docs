@@ -10,34 +10,46 @@
   - 注意，尽管已经存在一个进行代码翻译的解释层，有些时候Java的字节码代码还是会被JIT编译器进行二次编译。 C++语言被用户诟病的原因之一是大多数C++编译器不支持垃圾收集机制。通常使用C++编程的时候，程序员于程序中初始化对象时，会在主机内存堆栈上分配一块内存与地址，当不需要此对象时，进行析构或者删除的时候再释放分配的内存地址。如果对象是在堆栈上分配的，而程序员又忘记进行删除，那么就会造成内存泄漏（Memory Leak）。长此以往，程序运行的时候可能会生成很多不清除的垃圾，浪费了不必要的内存空间。而且如果同一内存地址被删除两次的话，程序会变得不稳定，甚至崩溃。因此有经验的C++程序员都会在删除之后将指针重置为NULL，然后在删除之前先判断指针是否为NULL。 C++中也可以使用"智能指针"（Smart Pointer）或者使用C++托管扩展编译器的方法来实现自动化内存释放，智能指针可以在标准类库中找到，而C++托管扩展被微软的Visual C++ 7.0及以上版本所支持。智能指针的优点是不需引入缓慢的垃圾收集机制，而且可以不考虑线程安全的问题，但是缺点是如果不善使用智能指针的话，性能有可能不如垃圾收集机制，而且不断地分配和释放内存可能造成内存碎片，需要手动对堆进行压缩。除此之外，由于智能指针是一个基于模板的功能，所以没有经验的程序员在需要使用多态特性进行自动清理时也可能束手无策。 Java语言则不同，上述的情况被自动垃圾收集功能自动处理。对象的创建和放置都是在内存堆栈上面进行的。当一个对象没有任何引用的时候，Java的自动垃圾收集机制就发挥作用，自动删除这个对象所占用的空间，释放内存以避免内存泄漏。
 * 甲骨文与该平台的另外两大贡献者IBM 和 Red Hat 共同做出了这个决定:Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家。
 
-## JDK(Java Development Kit)版本
+## 版本
 
-JVM->JRE:(Java Runtime Environment)->JDK
+* JRE(Java Runtime Environment) 就是运行Java字节码的虚拟机JVM
+* 要编译成Java字节码，就需要JDK(Java Development Kit)，因为JDK除了包含JRE，还提供了编译器、调试器等开发工具。
 
-* Open JDK:免费的开源实现,GPL License发布，很多Linux发行版中都会包含这个Open JDK 。
-* Oracle JDK
-  + JavaSE(J2SE)(Java2 Platform Standard Edition，java平台标准版）:从JDK 5.0开始，改名为Java SE
-    * Java SE 5.0 (1.5.0)
-    * Java SE 8.0 (1.8.0):从2019年1月 后续的update 开始就要收费 8u191, 8u192这样的东西，191,192就是update 的编号。
-    * Java SE 9
-    * Java SE 10
-  + JavaEE(J2EE)(Java 2 Platform,Enterprise Edition，java平台企业版):从2018年2月26日开始，J2EE改名为Jakarta EE
-  + JavaME(J2ME)(Java 2 Platform Micro Edition，java平台微型版)。
-  - 组件
-    + javac – 编译器，将源程序转成字节码
-    + jar – 打包工具，将相关的类文件打包成一个文件
-    + javadoc – 文档生成器，从源码注释中提取文档
-    + jdb – debugger，查错工具
-    + java – 运行编译后的java程序（.class后缀的）
-    + appletviewer：小程序浏览器，一种执行HTML文件上的Java小程序的Java浏览器。
-    + Javah：产生可以调用Java过程的C过程，或建立能被Java程序调用的C过程的头文件。
-    + Javap：Java反汇编器，显示编译类文件中的可访问功能和数据，同时显示字节代码含义。
-    + Jconsole: Java进行系统调试和监控的工具
-* Oracle Java SE Advanced, Java  SE Advanced Desktop, Java SE Suite:为企业级用户提供的高级工具和功能，可以监控、部署、管理企业级的Java程序
+* Java EE：Enterprise Edition 在Java SE的基础上加上了大量的API和库，以便方便开发Web应用、数据库、消息服务等 从2018年2月26日开始，J2EE改名为Jakarta EE
+* Java SE：Standard Edition 包含标准的JVM和标准库
+  - Open JDK:免费的开源实现,GPL License发布，很多Linux发行版中都会包含这个Open JDK
+  - Oracle JDK
+    + JavaSE(J2SE)(Java2 Platform Standard Edition，java平台标准版）:从JDK 5.0开始，改名为Java SE
+      - Java SE 5.0 (1.5.0)
+      - Java SE 8.0 (1.8.0):从2019年1月 后续的update 开始就要收费 8u191, 8u192这样的东西，191,192就是update 的编号。
+      - Java SE 9
+      - Java SE 10
+    + 组件
+      * java:其实就是JVM，运行Java程序，就是启动JVM，然后让JVM执行指定的编译后的代码
+      * javac:编译器，把Java源码文件（以.java后缀结尾）编译为Java字节码文件（以.class后缀结尾）
+      * jar:打包工具，把一组.class文件打包成一个.jar文件，便于发布
+      * javadoc:文档生成器，从Java源码中自动提取注释并生成文档
+      * jdb:debugger，用于开发阶段的运行调试
+      * appletviewer：小程序浏览器，一种执行HTML文件上的Java小程序的Java浏览器。
+      * Javah：产生可以调用Java过程的C过程，或建立能被Java程序调用的C过程的头文件。
+      * Javap：Java反汇编器，显示编译类文件中的可访问功能和数据，同时显示字节代码含义。
+      * Jconsole: Java进行系统调试和监控的工具
+  - Oracle Java SE Advanced, Java  SE Advanced Desktop, Java SE Suite:为企业级用户提供的高级工具和功能，可以监控、部署、管理企业级的Java程序
+* Java ME：Micro Edition 针对嵌入式设备的“瘦身版”，Java SE的标准库无法在Java ME上使用，Java ME的虚拟机也是“瘦身版”
+* 路线图如下：
+  - 学习Java SE，掌握Java语言本身、Java核心开发技术以及Java标准库的使用；
+  - 学习Java EE，那么Spring框架、数据库开发、分布式架构就是需要学习的；
+  - 大数据开发，那么Hadoop、Spark、Flink这些大数据平台就是需要学习的，他们都基于Java或Scala开发；
+  - 学习移动开发，那么就深入Android平台，掌握Android App开发。
 
 ### 安装
 
-* [下载JDK(Java Development Kit)](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* [下载JDK(Java Development Kit)](https://www.oracle.com/java/technologies/javase-downloads.html)
+* 目录
+    - CLASS_PATH JVM用到的一个环境变量，用来指示JVM如何搜索class,保证class文件能够在任意目录下运行.启动JVM时设置classpath才是推荐的做法,java命令传入-classpath或-cp参数,默认classpath为.
+    - PATH 保证javac可以在任意目录下运行
+* Mac
+    - 默认安装目录 `/Library/Java/JavaVirtualMachines/`
 
 ```sh
 # windows
@@ -62,15 +74,18 @@ sudo add-apt-repository ppa:linuxuprising/java
 sudo apt-get install oracle-java11-installer
 sudo apt-get install oracle-java11-set-default
 
-## JAVA_HOME Environment Variable配置
-sudo vim /etc/environment # 添加 JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+## JAVA_HOME Environment Variable配置 etc/environment # 添加 JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 source /etc/environment
 echo $JAVA_HOME
 
-# mac
+# mac ~/.bash_profile
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home
 export PATH=${PATH}:$JAVA_HOME/bin
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+# export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export CLASS_PATH=.:"$JAVA_HOME/lib"
+
+# 卸载
+sudo rm -rf /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk
 
 # 或者
 JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
@@ -85,12 +100,14 @@ sudo yum install java-1.8.0-openjdk-devel
 sudo update-alternatives --config java | javac # 会获得程序路径
 
 java -version
+
+java -classpath|cp .;C:\work\project1\bin;C:\shared abc.xyz.Hello # 搜索Hello.class
 ```
 
 ### Java 源程序与编译型运行
 
 * 编译型源程序->可执行程序->操作系统执行
-* Java 源程序：源程序（.java）->字节码程序（.class）->**解释器执行**->操作系统执行
+* Java 源程序：源程序（.java）->字节码程序（.class）->**解释器执行**->操作系统执行,无法直接运行Java源码文件，原因是它需要依赖其他的库
   - 源文件:Javac 后面跟着的是java文件的文件名，例如 HelloWorld.java。 该命令用于将 java 源文件编译为 class 字节码文件
     + 一个源文件中只能有一个public类
     + 一个源文件可以有多个非public类
@@ -111,7 +128,7 @@ public class HelloWorld {
     }
 }
 
-javac HelloWorld.java // 编译
+javac HelloWorld.java // 编译 HelloWorld.class文件
 java HelloWorld // 运行
 ```
 
@@ -983,16 +1000,13 @@ JavaEE/JDBC/Weblogic
 
 ## 教程
 
-* [Java 教程](http://www.runoob.com/java/)
-* [Java学习路线图](http://www.jianshu.com/p/d51551b0a8ba)
-* [史上最精炼JAVA知识点基础总结](http://www.jianshu.com/p/9caf1c755889)
-* [shuzheng/zheng](https://github.com/shuzheng/zheng):基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、支付中心、用户管理（支持第三方登录）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。 http://47.93.195.63/zheng-upms-server
-* [apachecn/thinking-in-java-zh](https://github.com/apachecn/thinking-in-java-zh):📖 Java 编程思想
-* [doocs/advanced-java](https://github.com/doocs/advanced-java):😮 互联网 Java 工程师进阶知识完全扫盲 https://doocs.github.io/advanced-java
+* [Java教程](https://www.liaoxuefeng.com/wiki/1252599548343744)
 
 ## 工具
 
-
+* IDE
+  - [Eclipse](https://www.eclipse.org/)
+  - IDEA
 * [插件库](https://plugins.jetbrains.com/idea)
   - [Cloud Toolkit](https://www.aliyun.com/product/cloudtoolkit): 一款 IDE 插件，可以帮助开发者更高效地开发、测试、诊断并部署应用
 * 测试
@@ -1040,6 +1054,9 @@ JavaEE/JDBC/Weblogic
 
 ## 参考
 
+* [shuzheng/zheng](https://github.com/shuzheng/zheng):基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、支付中心、用户管理（支持第三方登录）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。 http://47.93.195.63/zheng-upms-server
+* [apachecn/thinking-in-java-zh](https://github.com/apachecn/thinking-in-java-zh):📖 Java 编程思想
+* [doocs/advanced-java](https://github.com/doocs/advanced-java):😮 互联网 Java 工程师进阶知识完全扫盲 https://doocs.github.io/advanced-java
 * [docs4dev](https://www.docs4dev.com)
 * Alibaba Java Code Guidelines
 * [aalansehaiyang/technology-talk](https://github.com/aalansehaiyang/technology-talk)：汇总java生态圈常用技术框架、开源中间件，系统架构、项目管理、经典架构案例、数据库、常用三方库、线上运维等知识
@@ -1047,11 +1064,8 @@ JavaEE/JDBC/Weblogic
 * [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns):Design patterns implemented in Java http://java-design-patterns.com
 * [Java Algorithm And Data Structure Interview Questions and Programs](http://www.codespaghetti.com/java-algorithms-questions/)
 * [Snailclimb/JavaGuide](https://github.com/Snailclimb/JavaGuide):A core knowledge that most Java programmers need to master https://github.com/Snailclimb/JavaGuide
-* [google/guava](https://github.com/google/guava):Google core libraries for Java
 * [crossoverJie/JCSprout](https://github.com/crossoverJie/JCSprout):👨‍🎓 Java Core Sprout : basic, concurrent, algorithm
 * [ruibaby/halo](https://github.com/ruibaby/halo):Halo可能是最好的Java博客系统😉 https://docs.halo.run
 
 * http://ifeve.com/talk-concurrency/
-* http://www.jianshu.com/p/40d4c7aebd66
-* [安装教程](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-debian-8)类debian系统
 * [Java并发](https://mp.weixin.qq.com/s?__biz=MjM5MzA1Mzc3Nw==&mid=2247484908&idx=1&sn=fe9004cd8369cabf448c9f43466bad0f&chksm=a69da8d291ea21c493d82e63705604055e2bd4d09f42c5e835051e3187a9cfefa317e6484b65)
