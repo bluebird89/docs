@@ -651,15 +651,6 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * `CMD + 4` 是在编辑器/预览模式和三栏模式中切换。
 * `CMD + R` 是在编辑器和预览模式中切换。
 
-##  插件
-
-* sublime插件
-    + Markdown Preview：预览
-    + MarkdownEditing：代码提示
-    + Markdown Extended：语法高亮
-    + MarkdownLivePreview `alt + m`
-    + Markdown​TOC
-
 ## 编辑器
 
 * [typora](https://www.typora.io/)
@@ -680,11 +671,9 @@ Actions->Insert Read More Comment *或者* `Command + .`
 	- MarkdownPad(需要浏览器渲染插件awesome)
 	- MarkPad
 * [fabiospampinato/notable](https://github.com/fabiospampinato/notable):The markdown-based note-taking app that doesn't suck.
-* [Markdown Here](https://markdown-here.com/)
 * [GitNote](https://www.gitnoteapp.com)
 * [MedleyText](https://medleytext.net/):reate stylish and meaningful programming notes, blogs with ease
 * [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
-* [tamlok/vnote](https://github.com/tamlok/vnote):https://github.com/tamlok/vnote
 * 开源
 	- [CherryTree](http://www.giuspen.com/cherrytree/):A hierarchical note taking application, featuring rich text and syntax highlighting, storing data in a single XML or SQLite file
 
@@ -705,8 +694,6 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * [benweet/stackedit](https://github.com/benweet/stackedit):In-browser Markdown editor https://stackedit.io/
 * [markedjs/marked](https://github.com/markedjs/marked):A markdown parser and compiler. Built for speed. https://marked.js.org/
 * [mdx-js/mdx](https://github.com/mdx-js/mdx):JSX in Markdown for ambitious projects https://mdxjs.com
-* [nhnent/tui.editor](https://github.com/nhnent/tui.editor):🍞📝 Markdown WYSIWYG Editor. GFM Standard + Chart & UML Extensible. http://ui.toast.com/tui-editor
-* [Mark Text](https://github.com/marktext/marktext/)
 * [evilstreak/markdown-js](https://github.com/evilstreak/markdown-js):A Markdown parser for javascript
 * [Marp](https://yhatt.github.io/marp/):Markdown Presentation Writer
 * [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
