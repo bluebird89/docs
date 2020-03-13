@@ -67,53 +67,47 @@ server {
 }
 ```
 
-
 ## Doctrine
-Entity
-Repository
-Proxy:需要时才生成
 
-
+* Entity
+* Repository
+* Proxy:需要时才生成
 
 ## Annotation
 
-annotation: 中间不能有空格
-method #加use
-嵌套
+* annotation: 中间不能有空格
+* method #加use
+* 嵌套
 
 ```
 @Route("/hi/{name}",requirements={"name"="\d"})
 ```
-router.yml
+
+## Router
+
+```
+# router.yml
 php app/console router:debug # 路由列表
 php app/console router:match /hi/4 #路由匹配
 
-
-Serveice
+#Serveice
 php app/console container:debug # 服务列表
+```
 
 ## symfony Proxy with Varish
 
+* 团队共享开发环境：域名映射 dns服务器
 
-团队共享开发环境：域名映射 dns服务器
-
-
-
-## controller
+## Controller
 
 * request
 * response
 
-
-
-
-## twig
+## [Twig](https://twig.symfony.com/)
 
 * 判断  {{}}
 * 输出 {% %}
 * 注释{# #}
-
-
 
 ## assettic bundle
 
@@ -132,25 +126,46 @@ app/config/config.yml里有个assetic配置段  HenryWebBundle
 ## View
 
 * 页面管理:类的继承关系管理页面
-* HTML5Boilerplate
-    - http://www.initializr.com/
+* [HTML5Boilerplate](http://www.initializr.com/)
 
 ## 问题
 
+```
 symfony 3.4 与 PHP 7.3
 Warning: "continue" targeting switch is equivalent to
   "break". Did you mean to use "continue 2"
+```
 
-## 扩展
+## 工具
 
-* Debug bar
+* Debug
+	- Debug bar
 * [bundles 仓库](http://knpbundles.com/)
-* [symfony/thanks](https://github.com/symfony/thanks):Give thanks (in the form of a GitHub ★) to your fellow PHP package maintainers (not limited to Symfony components)!
-* [symfony/console](https://github.com/symfony/console):The Console component eases the creation of beautiful and testable command line interfaces. https://symfony.com/console
-* [symfony/http-foundation](https://github.com/symfony/http-foundation):The HttpFoundation component defines an object-oriented layer for the HTTP specification. https://symfony.com/http-foundation
-* [jonaswouters/XhprofBundle](https://github.com/jonaswouters/XhprofBundle):XHProf bundle for Symfony 2
-* [EasyCorp/EasyAdminBundle](https://github.com/EasyCorp/EasyAdminBundle):The new (and simple) admin generator for Symfony applications.
-* [symfony/dotenv](https://github.com/symfony/dotenv):Symfony Dotenv parses .env files to make environment variables stored in them accessible via getenv(), $_ENV, or $_SERVER. https://symfony.com/dotenv
+	- [jonaswouters/XhprofBundle](https://github.com/jonaswouters/XhprofBundle):XHProf bundle for Symfony 2
+	- [symfony/maker-bundle](https://github.com/symfony/maker-bundle):Symfony Maker Bundle https://symfony.com/
+	- [symfony/security-bundle(https://github.com/symfony/security-bundle):The security system is one of the most powerful parts of Symfony and can largely be controlled via its configuration. https://symfony.com/security-bundle
+	- [symfony/framework-bundle](https://github.com/symfony/framework-bundle):The FrameworkBundle defines the main framework configuration, from sessions and translations to forms, validation, routing and more. https://symfony.com/framework-bundle
+* Compontent
+	- [symfony/http-kernel](https://github.com/symfony/http-kernel):The HttpKernel component provides a structured process for converting a Request into a Response. https://symfony.com/http-kernel
+	- [symfony/routing](https://github.com/symfony/routing):The Routing component maps an HTTP request to a set of configuration variables. https://symfony.com/routing
+	- [symfony/contracts](https://github.com/symfony/contracts):A set of abstractions extracted out of the Symfony components https://symfony.com
+	- [symfony/dom-crawler](https://github.com/symfony/dom-crawler):The DomCrawler component eases DOM navigation for HTML and XML documents. https://symfony.com/dom-crawler
+	- [symfony/config](https://github.com/symfony/config):The Config component helps you find, load, combine, autofill and validate configuration values of any kind, whatever their source may be (YAML, XML, INI files, or for instance a database). https://symfony.com/config
+	- [symfony/dependency-injection](https://github.com/symfony/dependency-injection):The DependencyInjection component allows you to standardize and centralize the way objects are constructed in your application. https://symfony.com/dependency-injection
+* 扩展
+	- [symfony/console](https://github.com/symfony/console):The Console component eases the creation of beautiful and testable command line interfaces. https://symfony.com/console
+	- [symfony/http-foundation](https://github.com/symfony/http-foundation):The HttpFoundation component defines an object-oriented layer for the HTTP specification. https://symfony.com/http-foundation
+	- [symfony/dotenv](https://github.com/symfony/dotenv):Symfony Dotenv parses .env files to make environment variables stored in them accessible via getenv(), `$_ENV`, or `$_SERVER`. https://symfony.com/dotenv
+* Admin
+	- [EasyCorp/EasyAdminBundle](https://github.com/EasyCorp/EasyAdminBundle):The new (and simple) admin generator for Symfony applications.
+* Framework
+	- [symfony-standard](https://github.com/symfony/symfony-standard):The "Symfony Standard Edition" distribution http://symfony.com
+* security
+	- [symfony/security](https://github.com/symfony/security):The Security component provides a complete security system for your web application. https://symfony.com/components/Security
+* DEMO
+	- [symfony/demo](https://github.com/symfony/demo):Symfony Demo Application https://symfony.com/
+* Frontend
+	- [symfony/webpack-encore](https://github.com/symfony/webpack-encore):A simple but powerful API for processing & compiling assets built around Webpack
 
 ## 参考
 
@@ -159,6 +174,5 @@ Warning: "continue" targeting switch is equivalent to
 * [中文文档](http://symfonychina.com/doc/current/index.html)
 * [symfonycasts](https://symfonycasts.com/)
 * [洪大师带你解读Symfony 2框架](https://www.imooc.com/learn/244)
-* [](https://github.com/symfony/symfony-standard)
-* [](http://symfony.com/legacy/doc/jobeet/1_2/zh_CN/01?orm=Propel)
-* [](http://www.newlifeclan.com/symfony/)
+* Blog
+	- [教程](http://www.newlifeclan.com/)
