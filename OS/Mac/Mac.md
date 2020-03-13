@@ -776,6 +776,7 @@ brew switch icu4c 62.1
 * [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
 * [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
 * [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(<http://sourabhbajaj.com/mac-setup/>) 推荐
+* [mac-setup/](http://sourabhbajaj.com/mac-setup/) the basics of setting up a development environment on a new Mac
 * [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
 * [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
 * [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
@@ -792,7 +793,6 @@ brew switch icu4c 62.1
 * [hzlzh/Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
 * [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
 * [Mac效率神器Alfred以及常用Workflow](https://www.jianshu.com/p/0e78168da7ab)
-* [mac-setup/](http://sourabhbajaj.com/mac-setup/)
 * [JadenGeller/Helium](https://github.com/JadenGeller/Helium):A floating browser window for OS X <http://heliumfloats.com>
 
 ## 图书

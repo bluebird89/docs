@@ -970,7 +970,7 @@ chmod +x post-receive|post-update
 git clone git@115.159.146.94:/home/testgit/sample.git lsgogit
 ```
 
-### hook
+## hook
 
 Hook是Git系统的本地机制，用于在诸如代码提交（Commit）和合并(Merge)之类的操作之前或之后触发的定制化脚本，可以把它们看作是Git的插件系统。
 
