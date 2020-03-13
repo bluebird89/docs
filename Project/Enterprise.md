@@ -1,10 +1,12 @@
 ## 企业级应用
 
+* [station](https://getstation.com/):One app to rule them all
 * [atlassian](https://www.atlassian.com/)
     - stride
     - [Jira](https://www.atlassian.com/software/jira)：敏捷开发，处理项目中的多个步骤,用于规划和跟踪工作，并确定优先级，处理产品发布，产品交付后监控性能
-    - confluence
-    - sourcetree：git管理
+    - [confluence](https://www.atlassian.com/software/confluence)
+    - [sourcetree](https://www.sourcetreeapp.com/)：Simplicity and power in a beautiful Git GUI
+    - [asana](https://asana.com/)
     - [bamboo](https://www.atlassian.com/software/bamboo):the choice of professional teams for continuous integration, deployment, and delivery Atlassian的CI/CD服务器解决方案，很多特性和Jenkins类似。它们都是流行的DevOps工具，帮助用户自动化发布流水线，从build到部署。但是，Jenkins是开源的，Bamboo是收费的。
 * [Jfrog](https://jfrog.com)
 * [jgraph/drawio](https://github.com/jgraph/drawio):Source to www.draw.io
@@ -13,10 +15,10 @@
 * towe
 * [飞书](https://www.feishu.cn/): slack + google docs
 * [welink](https://www.huaweicloud.com/product/welink.html):
-* [Slack](https://slack.com/)
 * [tinode/chat](https://github.com/tinode/chat):Instant messaging server; backend in Go; Android, web command line clients; chatbots
 * 沟通
     - [mattermost/mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost https://mattermost.com
+    - [Slack](https://slack.com/)
 * [apache/incubator-superset](https://github.com/apache/incubator-superset):Apache Superset (incubating) is a modern, enterprise-ready business intelligence web application
 * [vitorfs/bootcamp](https://github.com/vitorfs/bootcamp):An enterprise social network http://trybootcamp.vitorfs.com
 * [reviewboard/reviewboard](https://github.com/reviewboard/reviewboard):An extensible and friendly code review tool for projects and companies of all sizes. https://www.reviewboard.org/
@@ -32,10 +34,11 @@
         + 加入了泳道，子任务不再是卡片内的检查项，而是一张完整的卡片；
         + 泳道，一个故事卡片在一条泳道上横向移动，每一列列表，就是卡片移动的步伐，这种方式能清晰的看到一个用户故事从故事卡片，到拆解成若干个任务卡片，到任务评估开发点数，到任务分配到具体的工程师，到任务陆续进入到「待开发」、「开发中」、「待测试」、「已完成」、「已发布」等状态的全过程，非常直观。尽管任务可能很多，每个开发者只需要过滤出自己的任务，就非常清爽了。
     - 工具
-        + [trello](https://trello.com/)
+        + [trello](https://trello.com/):Bring the power of a visual perspective to your team
         + [Leangoo](https://www.leangoo.com):最敏捷的项目协作工具
+        + [notion](https://www.notion.so/):All-in-one workspace
         + [Teambition](https://www.teambition.com):项目管理工具，聊天、文件、看板
-        + [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software):
+        + [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software)
 * SSO
     - [apereo/cas](apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
 
@@ -49,10 +52,10 @@
 ## 企业本质
 
 * 类型
-    - 门槛低，不可复制：糊口生意；
-    - 门槛低，可以复制：规模生意； 
-    - 门槛高，不可复制：专家生意；
-    - 门槛高，可以复制：伟大生意。
+    - 门槛低，不可复制：糊口生意
+    - 门槛低，可以复制：规模生意 
+    - 门槛高，不可复制：专家生意
+    - 门槛高，可以复制：伟大生意
 * 方法
     - 主动做那些难做的事，建立门槛
     - 解决利润问题
@@ -132,9 +135,9 @@
 
 * 阿里云事业群升级为阿里云智能事业群
 * 天猫
-    - 天猫品牌事业群主要做品牌的商业数字化转型，成为“线上线下融合经营的主阵地”；
-    - 天猫超市事业群将整合原有天猫超市和淘鲜达业务，推进线上线下一体化的超市新零售模式；
-    - 天猫进出口事业部将负责履行阿里在进口博览会上做出的未来5年2000亿美元进口额的承诺。
+    - 天猫品牌事业群主要做品牌的商业数字化转型，成为“线上线下融合经营的主阵地”
+    - 天猫超市事业群将整合原有天猫超市和淘鲜达业务，推进线上线下一体化的超市新零售模式
+    - 天猫进出口事业部将负责履行阿里在进口博览会上做出的未来5年2000亿美元进口额的承诺
 * [阿里开源](http://1024.yuque.com/)
 * [A Brief History of Alibaba Founders](https://iprice.sg/trends/insights/history-jack-ma-alibaba-18-founders/)
 
@@ -211,11 +214,11 @@
 
 ## 华为
 
-* 华为不会让CFO接班，干部选拔以李云龙、赵刚为标杆；
+* 华为不会让CFO接班，干部选拔以李云龙、赵刚为标杆
 
 ## 土豆
 
-* “七夕夜晚，七年土豆，今晚正式退休。谢谢每个兄弟姐妹，也谢谢路上每个经过的人在故事里留下的一笔色彩……下一个有趣的梦里再见。”   2012年8月24日，王微在微博里写下这样一段话，宣告自己正式从土豆网退休。同年，优酷土豆宣布合并
+* “七夕夜晚，七年土豆，今晚正式退休。谢谢每个兄弟姐妹，也谢谢路上每个经过的人在故事里留下的一笔色彩……下一个有趣的梦里再见。” 2012年8月24日，王微在微博里写下这样一段话，宣告自己正式从土豆网退休。同年，优酷土豆宣布合并
 
 ## 美团
 
