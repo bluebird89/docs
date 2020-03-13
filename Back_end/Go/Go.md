@@ -994,6 +994,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [flosch/pongo2](https://github.com/flosch/pongo2):Django-syntax like template-engine for Go
 * logger
     - [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
+    - [allinurl / goaccess](https://github.com/allinurl/goaccess):GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. https://goaccess.io
 * 缓存
     - [patrickmn/go-cache](https://github.com/patrickmn/go-cache):An in-memory key:value store/cache (similar to Memcached) library for Go, suitable for single-machine applications. https://patrickmn.com/projects/go-cache/
 * DB

@@ -662,38 +662,31 @@ Actions->Insert Read More Comment *或者* `Command + .`
 
 ## 编辑器
 
-* mac
-    - Mou for Mac
-    - [Bear](https://bear.app/)
-    - Ulysses for Mac
-    - [Twig](https://github.com/lukakerr/Pine):A modern, native macOS markdown editor https://lukakerr.github.io/Pine
-    - [MacDown](https://github.com/MacDownApp/macdown):Open source Markdown editor for macOS. https://macdown.uranusjr.com/
-    - Mark Text:实时显示的markdown编辑器
-    - [Quiver](link)
-    - [幕布](https://mubu.com/):可折叠的markdown
 * [typora](https://www.typora.io/)
-* windows
-    - MarkdownPad(需要浏览器渲染插件awesome)
-    - MarkPad
-    - Cmd Markdown
-    - CherryTree
-    - [zybuluo](https://www.zybuluo.com/cmd/)
-- MacDow：MWeb 是专业的 Markdown 写作、记笔记、静态博客生成软件。
-  - 外部模式中把本地硬盘或 Dropbox 等网盘的文件夹引入，就可以使用 MWeb 的拖拽、粘贴插入图片、图床等特色功能。
-  - 文档库模式设计为用于记笔记和静态博客生成。
-  - 对于有**同步和协作需求**的朋友，请使用外部模式！使用视图菜单或者快捷键 `CMD + E` 可以打开外部模式，`CMD + L` 可以打开文档库。左边的第一第二栏是使用**右键**和底部的几个按钮操作，另外就是右上角有三个按钮了（外部模式是两个），快捷键分别是：`CMD + 7/8/9`。
-- [marktext/marktext](https://github.com/marktext/marktext):📝Next generation markdown editor, running on platforms of MacOS Windows and Linux. https://marktext.github.io/website/
-  -  `brew cask install mark-text`
+* [marktext/marktext](https://github.com/marktext/marktext):📝A simple and elegant markdown editor, available for Linux, macOS and Windows. https://marktext.app
+* [Haroopad](http://pad.haroopress.com/user.html):a markdown enabled document processor for creating web-friendly documents
+* [notable/notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. https://notable.md
+* [Cmd Markdown](https://www.zybuluo.com/cmd/):网页版
+* Mac
+	- [Mou](http://25.io/mou/):Markdown editor for developers.
+	- [Bear](https://bear.app/):Write beautifully on iPhone, iPad, and Mac
+	- [Ulysses for Mac](https://ulysses.app/):The Ultimate Writing App for Mac, iPad and iPhone
+	- [Twig](https://github.com/lukakerr/Pine):A modern, native macOS markdown editor https://lukakerr.github.io/Pine
+	- [MacDown](https://github.com/MacDownApp/macdown):Open source Markdown editor for macOS. https://macdown.uranusjr.com/
+	- [Quiver](http://happenapps.com/):a notebook built for programmers. It lets you easily mix text, code, Markdown and LaTeX within one note, edit code with an awesome code editor, live preview Markdown and LaTeX, and find any note instantly via the full-text search.收费
+	- [幕布](https://mubu.com/):极简大纲笔记 | 一键生成思维导图
+	- [MWeb](https://zh.mweb.im/):是专业的 Markdown 写作、记笔记、静态博客生成软件。
+* Windows
+	- MarkdownPad(需要浏览器渲染插件awesome)
+	- MarkPad
 * [fabiospampinato/notable](https://github.com/fabiospampinato/notable):The markdown-based note-taking app that doesn't suck.
 * [Markdown Here](https://markdown-here.com/)
 * [GitNote](https://www.gitnoteapp.com)
-* [MedleyText](link)
+* [MedleyText](https://medleytext.net/):reate stylish and meaningful programming notes, blogs with ease
 * [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
-* OneNote
-* [Haroopad](http://pad.haroopress.com/user.html)
-    - `sudo dpkg -i haroopad-v0.13.1-x64.deb`
-* [notable/notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. https://notable.md
-* [tamlok / vnote](https://github.com/tamlok/vnote):https://github.com/tamlok/vnote
+* [tamlok/vnote](https://github.com/tamlok/vnote):https://github.com/tamlok/vnote
+* 开源
+	- [CherryTree](http://www.giuspen.com/cherrytree/):A hierarchical note taking application, featuring rich text and syntax highlighting, storing data in a single XML or SQLite file
 
 ## 工具
 

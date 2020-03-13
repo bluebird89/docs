@@ -13,3 +13,4 @@
 * [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub)::octocat: 分享 GitHub 上有趣、入门级的开源项目「每月28号更新」 https://hellogithub.com
 * [rsapkf/goodies](https://github.com/rsapkf/goodies):Collection of GitHub repos, blogs and websites to learn cool things https://goodies.gitbook.io/goodies/
 * [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):The most comprehensive database of Chinese poetry
+* [jnv/lists](https://github.com/jnv/lists):The definitive list of lists (of lists) curated on GitHub and elsewhere
