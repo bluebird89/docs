@@ -88,16 +88,11 @@ npm install gitbook-cli -g
 * 豆瓣：书、电影评论
 * Goole keep
 * notes
-* Boostnote:代码片段笔记
-* MedleyText
-* Quiver
 * [OneNote](https://products.office.com/zh-CN/onenote)
-* CherryTree
 * TickTick
 * [石墨文档](https://shimo.im)
 * [GitbookIO/gitbook](https://github.com/GitbookIO/gitbook):📝 Modern documentation format and toolchain using Git and Markdown https://www.gitbook.com
 * [mkdocs/mkdocs](https://github.com/mkdocs/mkdocs):Project documentation with Markdown. http://www.mkdocs.org
-* notion
 
 ## PPT
 
