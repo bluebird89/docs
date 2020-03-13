@@ -39,6 +39,7 @@ export GOPATH=$HOME/projects #默认安装包的路径
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
+# Mac
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/go
 export GOPROXY=https://goproxy.cn
@@ -1090,15 +1091,19 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [ginuerzh/gost](https://github.com/ginuerzh/gost):GO Simple Tunnel - a simple tunnel written in golang
 * [rakyll/statik](https://github.com/rakyll/statik):Embed files into a Go executable
 * [ry/v8worker](https://github.com/ry/v8worker):Minimal golang binding to V8
+* IDE
+    - [gopls](https://github.com/golang/tools/blob/master/gopls/doc/user.md) cannot use path@version syntax in GOPATH mode `GO111MODULE=on go get golang.org/x/tools/gopls@latest`
 * Raft
   - [lni/dragonboat](https://github.com/lni/dragonboat):A feature complete and high performance multi-group Raft library in Go.
 * [go-swagger/go-swagger](https://github.com/go-swagger/go-swagger):Swagger 2.0 implementation for go https://goswagger.io
 * 编辑器
   - [visualfc/liteide](https://github.com/visualfc/liteide)：LiteIDE is a simple, open source, cross-platform Go IDE.
+  - VS Code Glide
 * [rodrigo-brito/gocity](https://github.com/rodrigo-brito/gocity):📊 Code City metaphor for visualizing Go source code in 3D https://go-city.github.io
 
 ## 参考
 
+* [Wiki](https://github.com/golang/go/wiki)
 * [Alikhll/golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
 * [spec](https://golang.google.cn/ref/spec)
 * [developer-learning/learning-golang](https://github.com/developer-learning/learning-golang):Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（文档、书籍、视频
@@ -1118,7 +1123,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * 离线文档
   - `go get golang.org/x/tools/cmd/godoc`
   - `godoc -http=:6060` 访问`http://localhost:6060/`
-- [deanishe/awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
+* [deanishe/awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
 
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>
