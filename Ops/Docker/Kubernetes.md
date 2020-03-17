@@ -248,6 +248,8 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cl
 EOF
 yum install -y kubectl
 
+swapoff -a
+
 kubectl config view
 
 kubectl version|cluster-info
@@ -258,6 +260,10 @@ kubectl get pods -A
 kubectl get deployments|events|services
 
 kubectl create -f single-config-file.yaml
+
+# 部署weave网络
+sysctl net.bridge.bridge-nf-call-iptables=1 -w
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
 # Expose the Pod to the public internet
 kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10
