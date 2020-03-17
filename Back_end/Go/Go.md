@@ -203,7 +203,8 @@ GOOS=linux GOARCH=amd64 go build main.go
 
 ## 导入
 
-* 包的属性名字以大写字母开头，那么它就是已导出的
+* 包的属性名字以大写字母开头，那么就是已导出的
+* 名称的首字母为大写的程序实体才可以被当前包外的代码引用，否则它就只能被当前包内的其他代码引用
 
 ```go
 package main
@@ -710,6 +711,19 @@ go env -w GOSUMDB=off # 示Get https://sum.golang.org/lookup/xxxxxx: dial tcp 21
 go env -w GOSUMDB="sum.golang.google.cn"
 ```
 
+## Modules
+
+* [goproxyio / goproxy](https://github.com/goproxyio/goproxy):A global proxy for Go modules. https://goproxy.io
+* [gomods / athens](https://github.com/gomods/athens):A Go module datastore and proxy https://docs.gomods.io
+
+```
+export GO111MODULE=on
+export GOPROXY=https://goproxy.io
+export GOPROXY="https://athens.azurefd.net"
+
+go env -w GOPRIVATE=*.mingbai.com
+```
+
 ### GoSublime
 
 * 安装gosublime插件
@@ -951,8 +965,6 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [alco/gostart](https://github.com/alco/gostart):A getting started guide for Go newcomers
 * [geektutu / 7days-golang](https://github.com/geektutu/7days-golang):7 days golang apps from scratch (web framework Gee, distributed cache GeeCache, object relational mapping ORM framework GeeORM etc) 7天用Go动手写/从零实现系列 https://geektutu.com/post/gee.html
 * [go101 / go101](https://github.com/go101/go101):An online book focusing on Go syntax/semantics. https://go101.org
-
-- [Go语言入门](https://www.yiibai.com/go/go_start.html) 
 
 ## 扩展
 

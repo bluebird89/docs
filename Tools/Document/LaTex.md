@@ -9,6 +9,11 @@ LaTeX is a high-quality typesetting system; it includes features designed for th
 
 * [mactex](http://www.tug.org/mactex/)
 
+```
+brew cask install basictex # basic
+brew cask install mactex # full
+```
+
 ## 工具
 
 * [mathpix](https://mathpix.com):Convert images to LaTeX

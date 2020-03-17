@@ -116,9 +116,9 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 
 ## 工具
 
-- [apex/up](https://github.com/apex/up):Deploy infinitely scalable serverless apps, apis, and sites in seconds. https://apex.github.io/up/
-- [apex/apex](https://github.com/apex/apex):Build, deploy, and manage AWS Lambda functions with ease (with Go support!). http://apex.run
-- [spinnaker/spinnaker](https://github.com/spinnaker/spinnaker):Spinnaker is an open source, multi-cloud continuous delivery platform for releasing software changes with high velocity and confidence. http://www.spinnaker.io/
+* [apex/up](https://github.com/apex/up):Deploy infinitely scalable serverless apps, apis, and sites in seconds. https://apex.github.io/up/
+* [apex/apex](https://github.com/apex/apex):Build, deploy, and manage AWS Lambda functions with ease (with Go support!). http://apex.run
+* [spinnaker/spinnaker](https://github.com/spinnaker/spinnaker):Spinnaker is an open source, multi-cloud continuous delivery platform for releasing software changes with high velocity and confidence. http://www.spinnaker.io/
 * [gaia-pipeline/gaia](https://github.com/gaia-pipeline/gaia):Build powerful pipelines in any programming language.
 * [jumpserver/jumpserver](https://github.com/jumpserver/jumpserver):Jumpserver是全球首款完全开源的堡垒机，是符合 4A 的专业运维审计系统。 http://www.jumpserver.org
 * [PERIODIC TABLE OF DEVOPS TOOLS](https://xebialabs.com/periodic-table-of-devops-tools/)
@@ -144,6 +144,7 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 * [CODO](https://github.com/opendevops-cn):为用户提供企业多混合云、自动化运维、完全开源的云管理平台。前端基于Vue iview开发、为用户提供友好的操作界面，增强用户体验。 后端基于Python Tornado开发，其优势为轻量、简洁清晰、异步非阻塞 http://www.opendevops.cn
     - [demo](http://demo.opendevops.cn) 用户：demo 密码：2ZbFYNv9WibWcR7GB6kcEY
 * [Tencent/bk-ci](https://github.com/Tencent/bk-ci):蓝鲸CI平台(BlueKing CI) https://bk.tencent.com
+* [theonedev / onedev](https://github.com/theonedev/onedev):Super Easy All-In-One DevOps Platform
 
 ## 参考
 
