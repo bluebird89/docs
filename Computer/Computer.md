@@ -125,8 +125,11 @@ total = *p + 200;
 * [Teach Yourself Computer Science](https://teachyourselfcs.com/)
 * [Composing Programs](http://www.composingprograms.com/): a free online introduction to programming and computer science.
 * [CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes):📚 Computer Science Learning Notes
+* [CoolPhilChen / SJTU-Courses](https://github.com/CoolPhilChen/SJTU-Courses/):上海交通大学课程资料分享
 * [sjtu-se-courseware/sjtu-se-courseware](https://github.com/sjtu-se-courseware/sjtu-se-courseware):上海交大软件学院课件
-* [mbinary/USTC-CS-Courses-Resource](https://github.com/mbinary/USTC-CS-Courses-Resource):❤️中国科学技术大学计算机学院课程资源 https://mbinary.coding.me/ustc-cs/
+* [PKUanonym / REKCARC-TSC-UHT](https://github.com/PKUanonym/REKCARC-TSC-UHT):清华大学计算机系课程攻略 Guidance for courses in Department of Computer Science and Technology, Tsinghua University https://rekcarc-tsc-uht.readthedocs.io/
+* [USTC-Resource/USTC-CS-Courses-Resource](https://github.com/USTC-Resource/USTC-Course):❤️中国科学技术大学计算机学院课程资源 https://mbinary.coding.me/ustc-cs/
+* [tongtzeho / PKUCourse](https://github.com/tongtzeho/PKUCourse):北大计算机课程大作业
 * [InterviewMap/CS-Interview-Knowledge-Map](https://github.com/InterviewMap/CS-Interview-Knowledge-Map):Build the best interview map. The current content includes JS, network, browser related, performance optimization, security, framework, Git, data structure, algorithm, etc. https://yuchengkai.cn/docs/zh/frontend/
 * [CS50's Introduction to Computer Science](https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x)
 * [数据结构(上)(自主模式)](http://www.xuetangx.com/courses/course-v1:TsinghuaX+30240184+sp/about)

@@ -1,12 +1,12 @@
-# MySQL
+# [mysql / mysql-server](https://github.com/mysql/mysql-server)
 
-Open source relational database management system
+MySQL Server, the world's most popular open source database, and MySQL Cluster, a real-time, open source transactional database. http://www.mysql.com/
 
 ## 版本
 
 * MariaDB
-* Percona:一个相对比较成熟的、优秀的MySQL分支版本，在性能提升、可靠性、管理型方面做了不少改善。与MySQL版本基本完全兼容，并且性能大约有20%以上的提升。
-* Mysql 5.7.8
+* Percona:一个相对比较成熟的、优秀的MySQL分支版本，在性能提升、可靠性、管理型方面做了不少改善。与MySQL版本基本完全兼容，并且性能大约有20%以上的提升
+* 5.7.8
     - 对 JSON 的支持
 * [8.0](https://www.mysql.com/why-mysql/white-papers/whats-new-mysql-8-0/)
     - 更好的性能：读/写工作负载、IO 密集型工作负载、以及高竞争（"hot spot"热点竞争问题）工作负载。
@@ -25,26 +25,12 @@ Open source relational database management system
     - InnoDB 集群提供集成的原生 HA 解决方案
     - validate_password:默认为caching_sha2_password,客户端不支持
 
-## 概念
-
-* 结构化查询语言(SQL Structured Query Language)
-* 关系型数据库管理系统(RDBMS Relational Database Management System)
-* 数据库 表操作
-* 数据操作
-* 索引
-* 锁
-* 子查询
-* 存储过程
-* 触发器
-* 视图
-* 事务
-* 影像复制
-
 ## 安装
 
-```shell
-### MAC
+```sh
+## MAC
 brew install mysql
+
 /usr/local/Cellar/mysql/8.0.11/bin/mysqld
 --initialize-insecure
 --user=henry
@@ -53,23 +39,21 @@ brew install mysql
 --tmpdir=/tmp
 
 brew services start mysql
+mysql.server start|stop|restart|status
 
-brew cask install mysqlworkbench
-brew cask install sequel-pro
-
-mysql.server start|stop|restart|status  # Mac服务管理
+brew cask install mysqlworkbench|sequel-pro # 客户端
 
 mysql_secure_installation # 没有设置 root 帐户的密码，马上设置它;通过删除可从本地主机外部访问的 root 帐户来禁用远程 root 用户登录;删除匿名用户帐户和测试数据库
 
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
 
-# ubuntu
+## ubuntu
 sudo apt install mysql-server
-
+## 卸载
 sudo apt remove mysql-server mysql-common
 sudo apt autoremove mysql-server
-sudo mysql_ssl_rsa_setup --uid=mysql # 
+sudo mysql_ssl_rsa_setup --uid=mysql #
 sudo rm /var/lib/mysql/ -R
 sudo rm /etc/mysql/ -R
 
@@ -135,11 +119,11 @@ sudo apt-get --purge remove mariadb-server
         + 负责将 mysql 客户端和服务端建立连接，连接成功后，会获取当前连接用户的权限
         + 获取到的权限对整个连接都有效，一旦连接成功后，如果使用管理员账号对该用户更改权限，当前连接中的拥有的权限保持不变，只有等到下次重新连接才会更新权限
         + 客户端用一个单独的数据包将查询请求发送给服务器，所以当查询语句很长的时候，需要设置 max_allowed_packet参数。但是需要注意的是，如果查询实在是太大，服务端会拒绝接收更多数据并抛出异常。
-        + 服务器响应给用户的数据通常会很多，由多个数据包组成。但是当服务器响应客户端请求时，客户端必须完整的接收整个返回结果，而不能简单的只取前面几条结果，然后让服务器停止发送。因而在实际开发中，尽量保持查询简单且只返回必需的数据，减小通信间数据包的大小和数量是一个非常好的习惯，这也是查询中尽量避免使用 SELECT*以及加上 LIMIT限制的原因之一。
+        + 服务器响应给用户的数据通常会很多，由多个数据包组成。但是当服务器响应客户端请求时，客户端必须完整的接收整个返回结果，而不能简单的只取前面几条结果，然后让服务器停止发送。因而在实际开发中，尽量保持查询简单且只返回必需的数据，减小通信间数据包的大小和数量
         + 客户端如果太长时间没动静，连接器就会自动将它断开。这个时间是由参数 wait_timeout 控制的，默认值是 8 小时。
         + 长连接是指连接成功后，如果客户端持续有请求，则一直使用同一个连接。短连接则是指每次执行完很少的几次查询就断开连接，下次查询再重新建立一个。
-        + 全部使用长连接后，你可能会发现，有些时候 MySQL 占用内存涨得特别快，这是因为 MySQL 在执行过程中临时使用的内存是管理在连接对象里面的。这些资源会在连接断开的时候才释放。所以如果长连接累积下来，可能导致内存占用太大，被系统强行杀掉（OOM）
-            * 定期断开长连接。使用一段时间，或者程序里面判断执行过一个占用内存的大查询后，断开连接，之后要查询再重连
+        + 全部使用长连接后，占用内存涨得特别快，因为 MySQL 在执行过程中临时使用的内存是管理在连接对象里面的。这些资源会在连接断开的时候才释放。所以如果长连接累积下来，可能导致内存占用太大，被系统强行杀掉（OOM）
+            * 定期断开长连接。使用一段时间或者程序里面判断执行过一个占用内存的大查询后，断开连接，之后要查询再重连
             * 如果你用的是 MySQL 5.7 或更新版本，可以在每次执行一个比较大的操作后，通过执行 mysql_reset_connection 来重新初始化连接资源。这个过程不需要重连和重新做权限验证，但是会将连接恢复到刚刚创建完时的状态。
     - 查询缓存
         + 在执行查询之前，如果查询缓存是打开的，会检查这个查询语句是否命中查询缓存中的数据，之前执行过的语句及其结果可能会以 key-value 对的形式，被直接缓存在内存中。key 是查询的语句，value 是查询的结果。如果有缓存直接从缓存中读取并返回数据，不再执行后面的步骤了，结束查询操作
@@ -163,56 +147,53 @@ sudo apt-get --purge remove mariadb-server
             * 合理控制缓存空间大小，一般来说其大小设置为几十兆比较合适
             * 可以通过 SQL_CACHE和 SQL_NO_CACHE来控制某个查询语句是否需要进行缓存
             * 不要轻易打开查询缓存，特别是写密集型应用。如果想用，可以将 query_cache_type设置为 DEMAND，这时只有加入 SQL_CACHE 的查询才会走缓存
-        + 注意在 mysql8 后已经没有查询缓存这个功能了，因为这个缓存非常容易被清空掉，命中率比较低。只要对表有一个更新，这个表上的所有缓存就会被清空，因此刚缓存下来的内容，还没来得及用就被另一个更新给清空了
+        + 注意:在 mysql8 后已经没有这个功能了，因为这个缓存非常容易被清空掉，命中率比较低。只要对表有一个更新，这个表上的所有缓存就会被清空，因此刚缓存下来的内容，还没来得及用就被另一个更新给清空了
         + 按需使用：可以将参数 query_cache_type 设置成 DEMAND，这样对于默认的 SQL 语句都不使用查询缓存。而对于确定要使用查询缓存的语句，可以用 SQL_CACHE 显式指定
     - 分析器
-        + 词法分析：通过关键字将SQL语句进行解析，并生成一颗对应的解析树
-        + 语法分析：预处理器会校验“解析树”是否合法(主要校验数据列和表明是否存在，别名是否有歧义等)，
+        + 词法分析：通过关键字将SQL语句进行解析，并生成一颗对应的解析树,预处理器会校验“解析树”是否合法(主要校验数据列和表明是否存在，别名是否有歧义等)，
             * 检查单词是否拼写错误
             * 检查要查询的表或字段是否存在。检测出有错误就会返回类似 "You have an error in your sql" 这样的错误信息，并结束查询操作
     - 优化器：对于一个 sql 语句，mysql 内部可能存在多种执行方案，结果都一样，但效率不一样，在执行之前需要尝试找出一个最优的执行计划.在表里面有多个索引的时候，决定使用哪个索引；或者在一个语句有多表关联（join）的时候，决定各个表的连接顺序。
-        + 使用基于成本的优化器，它尝试预测一个查询使用某种执行计划时的成本，并选择其中成本最小的一个。成本的最小单位是读取一个4K数据页的成本
+        + 基于成本的优化器:它尝试预测一个查询使用某种执行计划时的成本，并选择其中成本最小的一个。成本的最小单位是读取一个4K数据页的成本
         + 在MySQL可以通过查询当前会话的 last_query_cost的值来得到其计算当前查询的成本 `show status like 'last_query_cost';` 结果为数据页的数量
         + 有非常多的原因会导致MySQL选择错误的执行计划
             * 比如统计信息不准确、不会考虑不受其控制的操作成本（用户自定义函数、存储过程）
             * MySQL认为的最优跟我们想的不一样（我们希望执行时间尽可能短，但MySQL值选择它认为成本小的，但成本小并不意味着执行时间短）
         + 优化策略
-            * 多表关联的查询（INTER JOIN），优化器会根据数据的选择性来重新决定关联的顺序，选择性高的会被置前。如果关联设计到N张表，优化器会尝试N！种的关联顺序，从中选出一种最优的排列顺序
+            * 多表关联的查询（INTER JOIN）:优化器会根据数据的选择性来重新决定关联的顺序，选择性高的会被置前。如果关联设计到N张表，优化器会尝试N！种的关联顺序，从中选出一种最优的排列顺序
             * 提前终止查询（比如：使用Limit时，查找到满足数量的结果集后会立即终止查询）
             * 将外连接转化成内连接
             * 覆盖索引扫描：索引中的列包含所有查询中需要的列的时候，只需要使用索引返回数据，不需要搜索数据行
-            * 优化排序（在老版本MySQL会使用两次传输排序，即先读取行指针和需要排序的字段在内存中对其排序，然后再根据排序结果去读取数据行，而新版本采用的是单次传输排序，也就是一次读取所有的数据行，然后根据给定的列排序。对于I/O密集型应用，效率会高很多）
-            * 结果集进行排序，这时候会采取两种策略
+            * 优化排序
+                - 在老版本MySQL会使用两次传输排序，即先读取行指针和需要排序的字段在内存中对其排序，然后再根据排序结果去读取数据行
+                - 新版本采用的是单次传输排序，也就是一次读取所有的数据行，然后根据给定的列排序,对于I/O密集型应用，效率会高很多）
+            * 结果集进行排序，会采取两种策略
                 - 如果结果集的容量小于“排序缓冲区”的容量，在内存中进行排序
                 - 如果查询的结果大于“排序缓冲区”，则先将结果集拆分成多个“排序缓冲区”可以容纳的子集，然后把各个子集排序的结果存放在磁盘上，最后对各个子集进行合并
             * 等价规则:如 出现 where 5=5 and a>5 会转化成where a>5
             * COUNT(),MIN(),MAX()：在EXTRA中会出现 “Selecttables optimized away”的字样
                 - 对于B-Tree索引而言，Max()/Min()的结果分别返回的是二叉树中最左边以及最右边的值，所以不需要进行表的访问就可以直接取到对应的值
-                - 当执行 select max(id) from table1 where name=’sun’ 时,如果name没有建立相应的索引,MYSQL会进行全表扫描,将SQL等同的转化为 `select id from table1 use index(PRIMARY) where name=’sun’ limit 1`
+                - 当执行 `select max(id) from table1 where name=’sun’` 时,如果name没有建立相应的索引,MYSQL会进行全表扫描,将SQL等同的转化为 `select id from table1 use index(PRIMARY) where name=’sun’ limit 1`
                 - 对于Count()函数而言，在MYISAM引擎中维护了一个对应的常量值，也不需要对表进行访问就可以直接取到Count的值
             * 提前终止，在下列几种情况中，查询会提前终止，并不再对表进行扫描
                 - 当优化器发现查询的结果已经满足查询需求的时候。比如查询中用到了LIMIT
                 - Where的条件不成立的时候。例如 where id>100 and id <10
             * 列表IN()的比较
-                - where id in(2,4,1,3,8,6) 这种类型的限制条件在很多的RDBMS中等同于where id=2 or id=4 or id=3 or id=8 or id=6. 这种算法的复杂度是O(n)
+                - where id in(2,4,1,3,8,6) 这种类型的限制条件在很多的RDBMS中等同于`where id=2 or id=4 or id=3 or id=8 or id=6` 这种算法的复杂度是O(n)
                 - 在MYSQL中,首先会对In列表进行排序，然后通过二分查找的方式进行比较，该方式的算法复杂度是O(log n).如果IN列表中的数据量非常的大，则效果会非常的明显
             * 关联子查询
-                - 因为select …from table1 t1 where t1.id in(select t2.fk from table2 t2 wheret2.id=’…’) 类型的语句往往会被优化成 select …. From table1 t1 where exists (select* from table2 t2 where t2.id=’…’ and t2.fk=t1.id), 由于在进行tabl2查询时, table1的值还无法确定, 所以会对table1进行全表扫描
-                - 尽量用 INNER JOIN 替代 IN(),重写成 select * from table1 t1 inner jointable2 t2 using (id) where t2.id=’…’
-                - 表链接用到索引
+                - 因为`select …from table1 t1 where t1.id in(select t2.fk from table2 t2 wheret2.id=’…’)` 类型的语句往往会被优化成 `select …. From table1 t1 where exists (select* from table2 t2 where t2.id=’…’ and t2.fk=t1.id)`, 由于在进行tabl2查询时, table1的值还无法确定, 所以会对table1进行全表扫描
+                - 尽量用 INNER JOIN 替代 IN(),重写成 `select * from table1 t1 inner join table2 t2 using (id) where t2.id=’…’`,表链接用到索引
             * UNION的限制：UNION操作不会把UNION外的操作推送到每个子集
                 - 为每个子操作单独的添加限制条件，例如  学生表有10000条记录,会员表有10000表记录,如果想按照姓名排序取两个表的前20条记录,如果在各个子查询中添加limit的话,则最外层的limit操作将会从40条记录中取20条,否则是从20000条中取20条
     - 执行器
         + 在执行语句之前会判断权限，如果没有对应的权限则会直接返回并提示没有相关权限
-        + 注意如果是在前面的查询缓存中查到缓存之后，也会在返回结果前做权限校验的
+        + 如果是在前面的查询缓存中查到缓存之后，也会在返回结果前做权限校验的
         + 按照选定的方案执行 sql 语句，打开表，调用存储引擎提供的接口（handler API）去查询并返回结果集数据
-        + 在查询优化阶段就为每一张表创建了一个 handler实例，优化器可以根据这些实例的接口来获取表的相关信息，包括表的所有列名、索引统计信息等
+        + 在查询优化阶段就为每一张表创建了一个 handler 实例，优化器可以根据这些实例的接口来获取表的相关信息，包括表的所有列名、索引统计信息等
         + 存储引擎接口提供了非常丰富的功能，但其底层仅有几十个接口，这些接口像搭积木一样完成了一次查询的大部分操作
-        + 在数据库的慢查询日志中看到一个 rows_examined 的字段，表示这个语句执行过程中扫描了多少行。这个值就是在执行器每次调用引擎获取数据行的时候累加的。
-* 存储层主要是用来存储和查询数据的，常用的存储引擎有 InnoDB、MyISAM
-    - 组织形式
-        + 堆表(所有的记录无序存储)
-        + 聚簇索引表(所有的记录，按照记录主键进行排序存储)
+        + 在数据库的慢查询日志中看到一个 rows_examined 的字段，表示这个语句执行过程中扫描了多少行,这个值是在执行器每次调用引擎获取数据行的时候累加的
+* 存储层：用来存储和查询数据
 * 更新流程
     - 物理日志 redo log（重做日志）
         + WAL（Write-Ahead Logging）：关键点就是先写日志，再写磁盘。当有一条记录需要更新的时候，InnoDB 引擎就会先把记录写到 redo log 里面，并更新内存，这个时候更新就算完成了。同时，InnoDB 引擎会在适当的时候，将这个操作记录更新到磁盘里面，而这个更新往往是在系统比较空闲的时候做
@@ -242,13 +223,6 @@ sudo apt-get --purge remove mariadb-server
         + 如果不使用“两阶段提交”，那么数据库的状态就有可能和用它的日志恢复出来的库的状态不一致
 
 [MySQL查询](../_static/mysql_query.png)
-
-```
-mysql -h$ip -P$port -u$user -p
-show processlist
-
-select SQL_CACHE * from T where ID=10；
-```
 
 ### 配置
 
@@ -502,7 +476,6 @@ select curtime();
 
 ```sh
 # mysqladmin
-
 mysqld --initialize
 ```
 
@@ -514,6 +487,7 @@ mysqld --initialize
 
 ```sql
 mysql -hlocalhost  -P 3306 -u root -p  # 生成用户root与空密码登陆,第一次登陆mysql的时候是没有密码的
+
 exit|quit| \q
 
 SELECT user,authentication_string,plugin,host FROM mysql.user;
@@ -547,7 +521,9 @@ sudo systemctl start mariadb
 sudo mysql -u rootUPDATE mysql.user SET password = PASSWORD('new_password') WHERE user = 'root';
 UPDATE mysql.user SET authentication_string = '' WHERE user = 'root';
 UPDATE mysql.user SET plugin = '' WHERE user = 'root';s
-udo systemctl restart mariadb
+sudo systemctl restart mariadb
+
+show processlist
 ```
 
 ### 数据类型
@@ -661,7 +637,7 @@ group by day(timestamp), hour(timestamp)
 select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at) as time from tmo_loyalty_customersync_log  group by year(created_at),month(created_at),day(created_at),hour(created_at)  order by begin desc limit 10;
 ```
 
-### 库表操作
+### 库表数据操作
 
 * DB|TABLE
     - CREATE
@@ -773,18 +749,6 @@ DELETE FROM table_name [WHERE条件];
         + 单独的表也能使用更有效的索引策略
     - 混用范式化和反范式化：在实际应用中经常需要混用，可能使用部分范式化的 schema 、 缓存表，以及其他技巧。 表适当增加冗余字段，如性能优先，但会增加复杂度。可避免表关联查询
 
-### 联表
-
-表与表之间通过公共字段建立关系
-
-* 公共字段名字可以不一样，但是数据类型必须一样
-* 联表查询降低查询速度
-* 数据冗余与查询速度的平衡
-
-```sql
-select a.FirstName,a.LastName, b.City, b.State from Person as a inner join address b on a.PersonId = b.PersonId
-```
-
 ## 查询
 
 * 字段列表：指要显示指定列的数据，多个字段之间用逗号隔开，各字段之间没有顺序。*：显示所有字段的数据
@@ -808,6 +772,11 @@ select a.FirstName,a.LastName, b.City, b.State from Person as a inner join addre
     - [^charlist]或[!charlist] 不在字符列中的任何单一字符 WHERE name REGEXP '^[GFs]'；name REGEXP '^[^A-H]'
 * group by：ORDER BY 联合指的是如果 ORDER BY 后面的字段是联合索引覆盖 where 条件之后的一个字段，由于索引已经处于有序状态，MySQL 就会直接从索引上读取有序的数据，然后在磁盘上读取数据之后按照该顺序组织数据，从而减少了对磁盘数据进行排序的操作。
     - 对于未覆盖 ORDER BY 的查询，其有一项 Creating sort index，即为磁盘数据进行排序的耗时最高；对于覆盖 ORDER BY 的查询，其就不需要进行排序，而其耗时主要体现在从磁盘上拉取数据的过程。
+* 联表：表与表之间通过公共字段建立关系
+    - 公共字段名字可以不一样，但是数据类型必须一样
+    - 联表查询降低查询速度
+    - 数据冗余与查询速度的平衡
+* 子查询
 
 ```sql
 CREATE [UNIQUE|FULLTEXT]  INDEX index_name on tbl_name (col_name [(length)] [ASC | DESC] , …..);
@@ -856,13 +825,10 @@ SELECT user_name, city, age FROM user_test ORDER BY user_name;
 SELECT user_name, city, age FROM user_test ORDER BY user_name, city;
 SELECT user_name, city, age FROM user_test ORDER BY user_name DESC, city DESC;
 SELECT user_name, city, age FROM user_test WHERE user_name = 'feinik' ORDER BY city;
-```
 
-## 关联
+select a.FirstName,a.LastName, b.City, b.State from Person as a inner join address b on a.PersonId = b.PersonId
 
 ## [语句集锦](https://juejin.im/post/584e7b298d6d81005456eb53)
-
-```sql
 # 查询时间
 select date_format(create_time, '%Y-%m-%d') as day from table_name
 # int 时间戳类型
@@ -930,7 +896,6 @@ from
 ) c group by diff;
 
 # 签到问题
-
 # 创建参考表(模拟数据需要用到)
 CREATE TABLE `test_nums` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -1178,7 +1143,7 @@ set @currenttime=(select UNIX_TIMESTAMP(current_timestamp()));
 
 ## 事物
 
-mysql有一个autocommit参数，默认是on，作用是每一条单独的查询都是一个事务，并且自动开始，自动提交（执行完以后就自动结束了，如果你要适用select for update，而不手动调用 start transaction，这个for update的行锁机制等于没用，因为行锁在自动提交后就释放了），所以事务隔离级别和锁机制即使你不显式调用start transaction，这种机制在单独的一条查询语句中也是适用的
+mysql有一个autocommit参数，默认是on，作用是每一条单独的查询都是一个事务，并且自动开始，自动提交（执行完以后就自动结束了，如果要适用select for update，而不手动调用 start transaction，这个for update的行锁机制等于没用，因为行锁在自动提交后就释放了），所以事务隔离级别和锁机制即使你不显式调用start transaction，这种机制在单独的一条查询语句中也是适用的
 
 * 加锁阶段
     - 在对任何数据进行读操作之前要申请并获得S锁（共享锁，其它事务可以继续加共享锁，但不能加排它锁）
@@ -1196,11 +1161,16 @@ mysql有一个autocommit参数，默认是on，作用是每一条单独的查询
     - 读已提交(Read Committed)：只能读取到已经提交的数据，Oracle等多数数据库默认都是该级别。造成事务一在同一个transaction中两次读取到的数据不同，这就是不可重复读问题。并且在对表进行修改时，会对表数据行加上行共享锁
         + 数据的读取都是不加锁的，但是数据的写入、修改和删除是需要加锁的
     - 可重复读(Repeated Read)：在同一个事务内的查询都是事务开始时刻一致的，InnoDB默认级别。在SQL标准中，该隔离级别消除了不可重复读，但是还存在幻读。
-        + 可重读这个概念是一事务的多个实例在并发读取数据时，会看到同样的数据行
+        + 概念是一事务的多个实例在并发读取数据时，会看到同样的数据行
         + 当两个事务同时进行时，其中一个事务修改数据对另一个事务不会造成影响，即使修改的事务已经提交也不会对另一个事务造成影响。
-        + 两个事物：事物二修改提交后，事物一不提交无法获取事物二的更新；事物一的修改未提交，事物二的修改无法成功等待事物一提交或者超时；
+        + 两个事物：事物二修改提交后，事物一不提交无法获取事物二的更新；事物一的修改未提交，事物二的修改无法成功等待事物一提交或者超时
         + 读到的数据可能是历史数据，是不及时的数据，不是数据库当前的数据
-        + 对于这种读取历史数据的方式，我们叫它快照读 (snapshot read)，而读取数据库当前版本数据的方式，叫当前读 (current read)
+        + 对于这种读取历史数据的方式叫快照读 (snapshot read)，而读取数据库当前版本数据的方式，叫当前读 (current read)
+            * 每行数据的最后加两个隐藏列,一个保存行的创建事务id，一个保存行的删除事务id.事务id，在mysql内部是全局唯一递增的
+            * 始终都是查找的之前的那个快照
+        + 只会查询创建时间的事务id小于等于当前事务id的行，这样可以确保这个行是在当前事务中创建，或者是之前创建的
+        + 如果某个事务执行期间，别的事务更新了一条数据:插入了一行记录，然后将新插入的记录的创建时间设置为新的事务的id，同时将这条记录之前的那个版本的删除时间设置为新的事务的id
+        + 
     - 串行读(Serializable)：完全串行化的读，每次读都需要获得表级共享锁，读写相互都会阻塞。
         + 读加共享锁，写加排他锁，读写互斥。使用的悲观锁的理论，实现简单，数据更加安全，但是并发能力非常差。如果你的业务并发的特别少或者没有并发，同时又要求数据及时可靠的话，可以使用这种模式。
         + 不要看到select就说不会加锁了，在Serializable这个级别，还是会加锁的
@@ -1520,6 +1490,9 @@ CREATE TABLE  People (
 ### 存储引擎
 
 不同数据引擎数据的存储格式,数据结构的实现,数据行并不是存储引擎管理的最小存储单位，索引只能够帮助我们定位到某个数据页，每一次磁盘读写的最小单位为也是数据页，而一个数据页内存储了多个数据行，我们需要了解数据页的内部结构才能知道存储引擎怎么定位到某一个数据行
+ 
+ + 堆表(所有的记录无序存储)
+        + 聚簇索引表(所有的记录，按照记录主键进行排序存储)
 
 * MEMORY
     - 要求存储在Memory数据表里的数据用的是长度不变的格式，这意味着不能用BLOB和TEXT这样的长度可变的数据类型，VARCHAR是种长度可变的类型，但因为它在MySQL内部当做长度固定不变的CHAR类型，所以可以使用。
@@ -1904,66 +1877,6 @@ pt-query-digest --type=binlog mysql-bin.000001.sql
 pt-query-digest --type=genlog localhost.log
 ```
 
-## 分区、分表、分库
-
-* 围绕概念
-    - 隔离：一类数据操作的时候，对其它类数据没有影响
-    - 瓶颈：数据放在一起量太大，交易量太多，出现了，磁盘、IO、网络、CPU等撑不住的情况
-* 分区、分表、分库满足的是不同的隔离级别，以及解决不同的瓶颈
-* Sharding（分片）
-    - 把一个 Database 切分成几个部分放到不同的服务器上，以分布式的手段增强数据库的性能。 有水平切分和垂直切分的区别
-        + 垂直切分:如果数据库中 table 较多，可以把不同的表放在不同的服务器上
-        + 水平切分：如果某些 table 的数据量特别大，需要对其进行水平切分，将这个表的数据分发到多个服务器上
-            * 事务（Transaction）：在进行一次数据库写操作的时候，需要定一个事务操作，这样在操作失败的时候可以回滚到原始状态，那当在分布式数据库的情况下，事务需要跨越多个数据库节点以保持数据的完整性
-    - 在互联网应用场景，一般以水平切分为主，实现上以数据库中间件（Database middleware）为主
-* Partition：由DBMS来完成的分区，根据一定规则，将数据库中的一张表分解成多个更小的，容易管理的部分。从逻辑上看，只有一张表，但是底层却是由多个物理分区组成。
-* 分表与分区的区别在于：分区从逻辑上来讲只有一张表，而分表则是将一张表分解成多张表。
-* 分区优点
-    - 存储更多数据。分区表的数据可以分布在不同的物理设备上，从而高效地利用多个硬件设备。和单个磁盘或者文件系统相比，可以存储更多数据
-    - 优化查询。在where语句中包含分区条件时，可以只扫描一个或多个分区表来提高查询效率；涉及sum和count语句时，也可以在多个分区上并行处理，最后汇总结果。
-    - 分区表更容易维护。例如：想批量删除大量数据可以清除整个分区。
-    - 避免某些特殊的瓶颈，例如InnoDB的单个索引的互斥访问，ext3问价你系统的inode锁竞争等
-* 分区表的限制因素
-    - 一个表最多只能有1024个分区
-    - MySQL5.1中，分区表达式必须是整数，或者返回整数的表达式。在MySQL5.5中提供了非整数表达式分区的支持。
-    - 如果分区字段中有主键或者唯一索引的列，那么多有主键列和唯一索引列都必须包含进来。即：分区字段要么不包含主键或者索引列，要么包含全部主键和索引列。
-    - 分区表中无法使用外键约束
-    - MySQL的分区适用于一个表的所有数据和索引，不能只对表数据分区而不对索引分区，也不能只对索引分区而不对表分区，也不能只对表的一部分数据分区。
-* 是否支持分区 `show variables like '%partition%'` have_partintioning 的值为YES，表示支持分区
-* 分区类型
-    - RANGE分区：基于属于一个给定连续区间的列值，把多行分配给分区
-    - LIST分区：类似于按RANGE分区，区别在于LIST分区是基于列值匹配一个离散值集合中的某个值来进行选择
-    - HASH分区：基于用户定义的表达式的返回值来进行选择的分区，该表达式使用将要插入到表中的这些行的列值进行计算。这个函数可以包含MySQL中有效的、产生非负整数值的任何表达式
-    - KEY分区：类似于按HASH分区，区别在于KEY分区只支持计算一列或多列，且MySQL服务器提供其自身的哈希函数。必须有一列或多列包含整数值
-* 分库：在数据库层面就完全的隔开
-* 分表：严禁其他人使用归属于他的数据库表
-* 单表行数超过 500 万行或者单表容量超过 2GB
-    - MySQL 为了提高性能，会将表的索引装载到内存中。InnoDB buffer size 足够的情况下，其能完成全加载进内存，查询不会有问题。
-    - 当单表数据库到达某个量级的上限时，导致内存无法存储其索引，使得之后的 SQL 查询会产生磁盘 IO，从而导致性能下降
-    - 当然，这个还有具体的表结构的设计有关，最终导致的问题都是内存限制
-* 不应该滥用分库分表,如果预计三年后的数据量根本达不到这个级别，请不要在创建表时就分库分表
-
-```sql
-use ecommerce;
-CREATE TABLE employees (
-  id INT NOT NULL,
-  fname VARCHAR(30),
-  lname VARCHAR(30),
-  birth TIMESTAMP,
-  hired DATE NOT NULL DEFAULT '1970-01-01',
-  separated DATE NOT NULL DEFAULT '9999-12-31',
-  job_code INT NOT NULL,
-  store_id INT NOT NULL
-  )
-  partition BY RANGE (store_id) (
-  partition p0 VALUES LESS THAN (10000),
-  partition p1 VALUES LESS THAN (50000),
-  partition p2 VALUES LESS THAN (100000),
-  partition p3 VALUES LESS THAN (150000),
-  Partition p4 VALUES LESS THAN MAXVALUE
-  );
-```
-
 ## 存储过程（Stored Procedure）
 
 * 一种在数据库中存储复杂程序，以便外部程序调用的一种数据库对象.数据库 SQL 语言层面的代码封装与重用
@@ -2102,25 +2015,33 @@ ALTER PROCEDURE
 DROP PROCEDURE
 ```
 
+## 查询技巧
+
+* 每门课都大于80的学生的名称
+
+## 触发器
+## 视图
+## 影像复制
+
 ### 主从复制
 
-MySQL 在每个事务更新数据之前，由 Master 将事务串行的写入二进制日志，即使事务中的语句都是交叉执行的，之后通知存储引擎提交事务。MySQL支持三种复制方式，实现了Data Distribution、Load Balancing、Backups、High Availability and Failover等特性。
+每个事务更新数据之前，由 Master 将事务串行的写入二进制日志，即使事务中的语句都是交叉执行的，之后通知存储引擎提交事务。MySQL支持三种复制方式，实现了Data Distribution、Load Balancing、Backups、High Availability and Failover等特性。
 
 * 原理
     -  SQL 语句级的，也就是重新执行 BINLOG 中的 SQL 语句
     -  Binlog 是按照事务提交的先后顺序记录的， 恢复也是按这个顺序进行的
     -  在一个事务未提交前，其他并发事务不能插入满足其锁定条件的任何记录，也就是不允许出现幻读
 * 方法
-    - 基于语句复制：在主服务器上执行的SQL语句，在从服务器上执行同样的语句。MySQL默认采用基于语句的复制，效率比较高。
-    - 基于行复制：MySQL5.0开始支持把改变的内容复制过去，而不是把命令在从服务器上执行一遍。
-    - 混合类型复制：默认采用基于语句的复制，一旦发现基于语句的无法精确的复制时，就会采用基于行的复制。
+    - 基于语句复制：在主服务器上执行的SQL语句，在从服务器上执行同样的语句。MySQL默认采用基于语句的复制，效率比较高
+    - 基于行复制：MySQL5.0开始支持把改变的内容复制过去，而不是把命令在从服务器上执行一遍
+    - 混合类型复制：默认采用基于语句的复制，一旦发现基于语句的无法精确的复制时，就会采用基于行的复制
 * 流程
-    - Master binlog输出线程：Master为每一个复制连接请求创建一个binlog输出线程，用于输出日志内容到相应的Slave；
-    - Slave I/O线程：在start slave之后，该线程负责从Master上拉取binlog内容放进自己的Relay Log中；
-    - Slave SQL线程：负责执行Relay Log中的语句。
-    - master将改变记录到二进制日志(binary log)中（这些记录叫做二进制日志事件，binary log events，可以通过show binlog events进行查看）；
-    - slave将master的binary log events拷贝到它的中继日志(relay log)；
-    - slave重做中继日志中的事件，将改变反映它自己的数据。
+    - Master binlog输出线程：Master为每一个复制连接请求创建一个binlog输出线程，用于输出日志内容到相应的Slave
+    - Slave I/O线程：在start slave之后，该线程负责从Master上拉取binlog内容放进自己的Relay Log中
+    - Slave SQL线程：负责执行Relay Log中的语句
+    - master将改变记录到二进制日志(binary log)中（这些记录叫做二进制日志事件(binary log events)，可以通过show binlog events进行查看）
+    - slave将master的binary log events拷贝到它的中继日志(relay log)
+    - slave重做中继日志中的事件，将改变反映它自己的数据
 * 问题
     - 无法远程连接mysql(报错111)：注释掉my.cnf中的bind-address或绑定本地ip
     - 添加server-id and log_bin=
@@ -2167,16 +2088,22 @@ mysql -uroot -p123456 -S /data/3306/mysql.sock -e "unlock tables;"
 
 # 主库的备份文件解压并恢复数据库
 mysql -uroot -p123456 -S /data/3307/mysql.sock < mysql.sql
-
 mysql -u username -p database_name < file.sql
-
 mysql -u username –-password=your_password database_name < file.sql
-
 ```
 
 ### 读写分离
 
-* 通过mysql-proxy调度：与主服务器在一台服务器上，用源代码安装含有lua脚本
+* 定义：主库进行事务性查询（插入、更新、删除）操作，从库进行 SELECT 查询操作
+* 意义：
+    - 对大部分 web 应用而言，都是读多写少，一主多从可以提高系统的并发处理能力
+    - 增加冗余备份，一处写入（主），多处同步（从），可以提高系统的可用性
+    - 读写分离，让主库专注于写，让读库专注于读，区分优化读库和写库，从而提升数据库性能
+* 实现：
+    - 在代码层级，需要将查询和写入操作区分开，通过不同的数据库连接实现，对于简单的读写分离，通过配置文件完成即可，对于多个主库/从库，从配置数组中随机选取一个建立连接即可，对于更复杂的数据库集群，可以通过数据库中间件来建立连接
+        + 通过mysql-proxy调度：与主服务器在一台服务器上，用源代码安装含有lua脚本
+    - 在数据库级别，要实现主库记录通过同步机制实时同步到从库，以便随时可以从从库查询到最新记录，关于这一块可以通过配置主库和从库通过 binlog 日志实现数据同步复制
+        + 数据延迟:由于需要从库通过网络请求去主库拉取数据，对于高并发场景，可能会由于系统负载、网络延迟问题导致从库和主库短期内的数据不一致（毫秒级或者秒级），针对这种情况，对于简单的中小型系统，可以在写入操作完成后强制查询操作使用主库连接来解决，比如 Laravel 的数据库 sticky 配置项底层实现就是这么干的，此外还可以借助缓存层来解决这种不一致性，然后主从同步之后触发缓存更新
 * 复制方法
     - 基于SQL语句
         + 对于存在随机数的字段会出现数据不一致
@@ -2192,29 +2119,7 @@ mysql -u username –-password=your_password database_name < file.sql
 ```shell
 sudo apt-get install mysql-proxy
 ```
-读写分离的定义：
 
-读写分离通常指的是让主库进行事务性查询（插入、更新、删除）操作，而让从库进行 SELECT 查询操作，通俗来说，就是主库写、从库读。
-
-2）读写分离的意义：
-
-1、对大部分 web 应用而言，都是读多写少，我们设计一主多从，可以提高系统的并发处理能力；
-2、增加冗余备份，一处写入（主），多处同步（从），可以提高系统的可用性；
-3、读写分离，让主库专注于写，让读库专注于读，区分优化读库和写库，从而提升数据库性能。
-
-3）读写分离的实现：
-
-通过读写分离的定义，我们知道，所谓读写分离，就是写入操作都在主库完成，查询操作都在从库完成。
-
-所以在代码层级，我们需要将查询和写入操作区分开，通过不同的数据库连接实现，对于简单的读写分离，通过配置文件完成即可，对于多个主库/从库，从配置数组中随机选取一个建立连接即可，对于更复杂的数据库集群，可以通过数据库中间件来建立连接。
-
-在数据库级别，我们要实现主库记录通过同步机制实时同步到从库，以便随时可以从从库查询到最新记录，关于这一块可以通过配置主库和从库通过 binlog 日志实现数据同步复制。
-
-4）数据延迟
-
-binlog 同步机制简单方便，但是由于需要从库通过网络请求去主库拉取数据，对于高并发场景，可能会由于系统负载、网络延迟问题导致从库和主库短期内的数据不一致（毫秒级或者秒级），针对这种情况，对于简单的中小型系统，可以在写入操作完成后强制查询操作使用主库连接来解决，比如 Laravel 的数据库 sticky 配置项底层实现就是这么干的，此外我们还可以借助缓存层来解决这种不一致性，然后主从同步之后触发缓存更新。
-
-需要注意的是，在分布式系统中，绝对的数据一致性是无法保证的，我们必须在 CAP 中找到一个平衡。
 ## 中间件
 
 * 优劣
@@ -2260,6 +2165,46 @@ LVS、HAProxy、Nginx
 
 ## 分库分表
 
+## 分区、分表、分库
+
+* 围绕概念
+    - 隔离：一类数据操作的时候，对其它类数据没有影响
+    - 瓶颈：数据放在一起量太大，交易量太多，出现了，磁盘、IO、网络、CPU等撑不住的情况
+* 分区、分表、分库满足的是不同的隔离级别，以及解决不同的瓶颈
+* Sharding（分片）
+    - 把一个 Database 切分成几个部分放到不同的服务器上，以分布式的手段增强数据库的性能。 有水平切分和垂直切分的区别
+        + 垂直切分:如果数据库中 table 较多，可以把不同的表放在不同的服务器上
+        + 水平切分：如果某些 table 的数据量特别大，需要对其进行水平切分，将这个表的数据分发到多个服务器上
+            * 事务（Transaction）：在进行一次数据库写操作的时候，需要定一个事务操作，这样在操作失败的时候可以回滚到原始状态，那当在分布式数据库的情况下，事务需要跨越多个数据库节点以保持数据的完整性
+    - 在互联网应用场景，一般以水平切分为主，实现上以数据库中间件（Database middleware）为主
+* Partition：由DBMS来完成的分区，根据一定规则，将数据库中的一张表分解成多个更小的，容易管理的部分。从逻辑上看，只有一张表，但是底层却是由多个物理分区组成。
+* 分表与分区的区别在于：分区从逻辑上来讲只有一张表，而分表则是将一张表分解成多张表。
+* 分区优点
+    - 存储更多数据。分区表的数据可以分布在不同的物理设备上，从而高效地利用多个硬件设备。和单个磁盘或者文件系统相比，可以存储更多数据
+    - 优化查询。在where语句中包含分区条件时，可以只扫描一个或多个分区表来提高查询效率；涉及sum和count语句时，也可以在多个分区上并行处理，最后汇总结果。
+    - 分区表更容易维护。例如：想批量删除大量数据可以清除整个分区。
+    - 避免某些特殊的瓶颈，例如InnoDB的单个索引的互斥访问，ext3问价你系统的inode锁竞争等
+* 分区表的限制因素
+    - 一个表最多只能有1024个分区
+    - MySQL5.1中，分区表达式必须是整数，或者返回整数的表达式。在MySQL5.5中提供了非整数表达式分区的支持。
+    - 如果分区字段中有主键或者唯一索引的列，那么多有主键列和唯一索引列都必须包含进来。即：分区字段要么不包含主键或者索引列，要么包含全部主键和索引列。
+    - 分区表中无法使用外键约束
+    - MySQL的分区适用于一个表的所有数据和索引，不能只对表数据分区而不对索引分区，也不能只对索引分区而不对表分区，也不能只对表的一部分数据分区。
+* 是否支持分区 `show variables like '%partition%'` have_partintioning 的值为YES，表示支持分区
+* 分区类型
+    - RANGE分区：基于属于一个给定连续区间的列值，把多行分配给分区
+    - LIST分区：类似于按RANGE分区，区别在于LIST分区是基于列值匹配一个离散值集合中的某个值来进行选择
+    - HASH分区：基于用户定义的表达式的返回值来进行选择的分区，该表达式使用将要插入到表中的这些行的列值进行计算。这个函数可以包含MySQL中有效的、产生非负整数值的任何表达式
+    - KEY分区：类似于按HASH分区，区别在于KEY分区只支持计算一列或多列，且MySQL服务器提供其自身的哈希函数。必须有一列或多列包含整数值
+* 分库：在数据库层面就完全的隔开
+* 分表：严禁其他人使用归属于他的数据库表
+* 单表行数超过 500 万行或者单表容量超过 2GB
+    - MySQL 为了提高性能，会将表的索引装载到内存中。InnoDB buffer size 足够的情况下，其能完成全加载进内存，查询不会有问题。
+    - 当单表数据库到达某个量级的上限时，导致内存无法存储其索引，使得之后的 SQL 查询会产生磁盘 IO，从而导致性能下降
+    - 当然，这个还有具体的表结构的设计有关，最终导致的问题都是内存限制
+* 不应该滥用分库分表,如果预计三年后的数据量根本达不到这个级别，请不要在创建表时就分库分表
+
+
 * “垂直分割”是一种把数据库中的表按列变成几张表的方法，这样可以降低表的复杂度和字段的数目
 
 表数据容量达到亿级，影响到交易并发量，需要进行拆分
@@ -2275,7 +2220,7 @@ LVS、HAProxy、Nginx
 随着业务增长，垂直分库还是会遇到单体瓶颈，比如库存表，每次交易、下单、秒杀都会涉及到频繁修改库存表，当业务到达一定级别，可能导致库存表单体性能瓶颈，这个时候，我们就需要对其进行水平拆分。
 
 相对于垂直拆分把不同表拆分到不同数据库，水平拆分指的是把同一张表进行拆分，这个「水平」可以理解为按照表的数据行进行切分，把一张表拆分成多个表，如果是水平分表，则拆分后的表可以存放到同一个库，如果是水平分库分表，还要把拆分后的表放到不同数据库。
-2019/9/3
+
 学院君：2、垂直拆分和水平拆分需要注意的问题
 
 垂直拆分和水平拆分都是为了提高数据库负载和并发处理能力，但是引入它们也增加了系统的复杂度，垂直拆分还要好一些，尤其是水平拆分，如何拆分，拆分后如何查询，都是比较棘手的问题。
@@ -2304,7 +2249,27 @@ LVS、HAProxy、Nginx
 
 在具体实践中，可以借助数据库中间件来做分库分表，比如 Cobar 等，但是一定建立在你对分库分表底层的东西非常熟悉，否则一旦出现问题，那是灾难性的。
 
-## sysbench
+
+```sql
+use ecommerce;
+CREATE TABLE employees (
+  id INT NOT NULL,
+  fname VARCHAR(30),
+  lname VARCHAR(30),
+  birth TIMESTAMP,
+  hired DATE NOT NULL DEFAULT '1970-01-01',
+  separated DATE NOT NULL DEFAULT '9999-12-31',
+  job_code INT NOT NULL,
+  store_id INT NOT NULL
+  )
+  partition BY RANGE (store_id) (
+  partition p0 VALUES LESS THAN (10000),
+  partition p1 VALUES LESS THAN (50000),
+  partition p2 VALUES LESS THAN (100000),
+  partition p3 VALUES LESS THAN (150000),
+  Partition p4 VALUES LESS THAN MAXVALUE
+  );
+```
 
 ## [10万连接](https://mp.weixin.qq.com/s?__biz=MzAwNzA5MzA0NQ==&mid=2652150991&idx=1&sn=d6df2a44544d61b5255d0cb5e4c97d12&chksm=80e35295b794db833fd4408a3d34096c66efdca5c4054a8e741b2ce3a759bde2b4875e164a10)
 
@@ -2516,10 +2481,10 @@ echo `date +"%Y年%m月%d日 %H:%M:%S"` $Next Bakup succ! >> $LogFile
 
 ## Docker
 
-- mkdir -p ~/mysql/data ~/mysql/logs ~/mysql/conf
-- 创建Dockerfile
-
 ```
+# mkdir -p ~/mysql/data ~/mysql/logs ~/mysql/conf`
+# Dockerfile
+
 FROM debian:jessie
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
@@ -2584,20 +2549,25 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 3306
 CMD ["mysqld"]
-```
 
 - docker build -t mysql .
 - docker run -p 3306:3306 --name mymysql -v $PWD/conf/my.cnf:/etc/mysql/my.cnf -v $PWD/logs:/logs -v $PWD/data:/mysql_data -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
+```
+
 
 ### [o1lab/xmysql](https://github.com/o1lab/xmysql)
 
 One command to generate REST APIs for any MySql Database.
 
+* composite primary keys: `/api/payments/103___JM555205`
+* _p indicates page and _size indicates size of response rows,By default 20 records and max of 100 are returned per GET request on a table.`/api/payments?_p=2&_size=50`
+* Sorting: `/api/payments?_sort=column1` `/api/payments?_sort=-column1` `/api/payments?_sort=column1,-column2`
+* Fields `/api/payments?_fields=customerNumber,checkNumber` `/api/payments?_fields=-checkNumber`
+
 ```shell
 npm install -g xmysql
 xmysql -h localhost -u mysqlUsername -p mysqlPassword -d databaseName
 http://localhost:3000
-```
 
 - GET       /api/tableName
 - POST      /api/tableName
@@ -2610,11 +2580,7 @@ http://localhost:3000
 - POST     /dynamic
 - GET      /api/tableName/describe
 - GET      /api/tables
-
-* composite primary keys: `/api/payments/103___JM555205`
-* _p indicates page and _size indicates size of response rows,By default 20 records and max of 100 are returned per GET request on a table.`/api/payments?_p=2&_size=50`
-* Sorting: `/api/payments?_sort=column1` `/api/payments?_sort=-column1` `/api/payments?_sort=column1,-column2`
-* Fields `/api/payments?_fields=customerNumber,checkNumber` `/api/payments?_fields=-checkNumber`
+```
 
 ## 图书
 
