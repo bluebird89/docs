@@ -156,7 +156,6 @@ nmcli dev show | grep 'IP4.DNS'
 ENV http_proxy http://proxy-chain.xxx.com:911/ 528
 ENV https_proxy http://proxy-chain.xxx.com:912/ 1
 
-
 {
     "authorization-plugins": [],
     "data-root": "", 
@@ -245,6 +244,7 @@ ENV https_proxy http://proxy-chain.xxx.com:912/ 1
     "registry-mirrors": [
       "https://dockerhub.azk8s.cn",
       "https://hub-mirror.c.163.com"
+      "https://registry.docker-cn.com"
     ],
      #镜像加速的地址，增加后在 docker info中可查看。
     "seccomp-profile": "",
