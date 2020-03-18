@@ -108,6 +108,25 @@ php --ri swoole
     - 使用 strace 跟踪进程的系统调用
     - 使用 tcpdump 跟踪网络通信过程
     - 其他Linux系统工具，如ps、lsof、top、vmstat、netstat、sar、ss等
+* 信号
+    - SIGTERM: 向主进程 / 管理进程发送此信号服务器将安全终止
+    - 在 PHP 代码中可以调用 $serv->shutdown() 完成此操作
+    - SIGUSR1: 向主进程 / 管理进程发送 SIGUSR1 信号，将平稳地 restart 所有 Worker 进程
+    - SIGUSR2: 向主进程 / 管理进程发送 SIGUSR2 信号，将平稳地重启所有 Task 进程
+
+* 回调
+    - 匿名函数
+    - 函数
+    - 类静态方法
+    - 对象方法
+
+```
+# 重启所有worker进程
+kill -USR1 主进程PID
+
+# 仅重启task进程
+kill -USR2 主进程PID
+```
 
 ## Server
 
@@ -254,11 +273,11 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
 
 ## 协程 Coroutine
 
-* 对异步回调的一种解决方案
+* 异步回调的一种解决方案,非标准的线程实现
 * 在2.0开始内置协程(Coroutine)的能力，提供了具备协程能力IO接口（统一在命名空间Swoole\Coroutine*）
     - 在4.4之前的版本中，Swoole一直不支持CURL协程化，在代码中无法使用curl。由于curl使用了libcurl库实现，无法直接hook它的socket，4.4版本使用Swoole\Coroutine\Http\Client模拟实现了curl的API，并在底层替换了curl_init等函数的C Handler。
 * 协程是子程序的一种，可以通过yield的方式转移程序控制权，协程之间不是调用者与被调用者的关系，而是彼此对称、平等的
-* 为每一个请求创建对应的协程，根据IO的状态来合理的调度协程
+* 每个 Worker 进程 会存在一个协程调度器来调度协程，协程切换的时机就是遇到 I/O 操作或代码显性切换时，进程内以单线程的形式运行协程，也就意味着一个进程内同一时间只会有一个协程在运行且切换时机明确，也就无需处理像多线程编程下的各种同步锁的问题
 * 有轻量，高效，快速等特点
     - 用户态线程，遇到 IO 主动让出
     - PHP 代码依然是串行执行的，无需加锁
@@ -297,6 +316,7 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
     - 不能存在阻塞代码:Swoole 提供的异步函数的 MySQL、Redis、Memcache、MongoDB、HTTP、Socket等客户端，文件操作、sleep/usleep 等均为阻塞函数
         + Swoole 提供了 MySQL、PostgreSQL、Redis、HTTP、Socket 的协程客户端可以使用，同时 Swoole 4.1 之后提供了一键协程化的方法 \Swoole\Coroutine::enableCoroutine()，只需在使用协程前运行这一行代码，Swoole 会将 所有使用 php_stream 进行 socket 操作均变成协程调度的异步 I/O 
     - 不能通过全局变量储存状态:`$_GET/$_POST/$_REQUEST/$_SESSION/$_COOKIE/$_SERVER`等$_开头的变量、global 变量，以及 static 静态属性
+        + 同一个 Worker 内还会存在多个协程并存在协程切换，也就意味着一个 Worker 会在一个时间周期内同时处理多个协程（或直接理解为请求）的代码，也就意味着如果使用了全局变量来储存状态可能会被多个协程所使用，也就是说不同的请求之间可能会混淆数据
         + 对于全局变量，均是跟随着一个 请求(Request) 而产生的,CLI 应用，会存在 全局周期 和 请求周期(协程周期) 两种长生命周期
             * 全局周期，我们只需要创建一个静态变量供全局调用即可，静态变量意味着在服务启动后，任意协程和代码逻辑均共享此静态变量内的数据，也就意味着存放的数据不能是特别服务于某一个请求或某一个协程；
             * 协程周期，由于 Hyperf 会为每个请求自动创建一个协程来处理，那么一个协程周期在此也可以理解为一个请求周期，在协程内，所有的状态数据均应存放于 Hyperf\Utils\Context 类中，通过该类的 get、set 来读取和存储任意结构的数据，这个 Context(协程上下文) 类在执行任意协程时读取或存储的数据都是仅限对应的协程的，同时在协程结束时也会自动销毁相关的上下文数据。

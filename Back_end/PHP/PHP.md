@@ -17,7 +17,60 @@ The PHP Interpreter <http://www.php.net>
 
 ## 发展
 
-* Phar：PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar。可以像 Java 一样方便地实现应用程序打包和组件化，一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行。配合 Swoole ，可以在命令行下执行 php server.phar 一键启动服务器
+* Phar：PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar。可以像 Java 一样方便地实现应用程序打包和组件化，一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行。配合 Swoole，可以在命令行下执行 php server.phar 一键启动服务器
+* 7:PHP是以多进程模型设计的，好处是请求之间互不干涉，一个请求失败也不会对其他进程造成影响
+    - 变量标量类型声明：标量类型声明与返回类型声明
+        + int
+        + float
+        + bool
+        + string
+        + interfaces
+        + array
+        + callable
+    - 短闭包
+    - null合并运算符（??）的新空合并运算符被加入 用来与isset（）函数函数一起替换三元操作
+    - Trait
+    - 属性类型
+    - 扩散运算符
+    - JIT 编译器
+    - FFI
+    - 匿名类
+    - Contemporary cryptography
+    - Generators
+    -   改进的性能 - PHPNG代码合并在PHP7中，比 PHP5快两倍
+    -   降低内存消耗 - 优化后PHP7使用较少的资源
+    -   标量类型声明:参数和返回值类型可以被强制执行
+    -   一致性的64位支持 - 64位架构机器持续支持
+    -   改进异常层次结构 - 异常层次结构得到改善
+    -   许多致命错误转换成异常 - 异常的范围增大覆盖为许多致命的错误转化异常；
+    -   安全随机数发生器 - 加入新的安全随机数生成器的API
+    -   已过时的API和扩展删除 - 不同的旧的和不支持的应用程序和扩展，从最新的版本中删除
+    -   零成本声明支持零成本加入断言
+    -  飞船操作符：用于比较两个表达式。当第一个表达式较第二个表达式分别小于，等于或大于时它分别返回-1，0或1。
+    +   定义常量数组
+    +   Closure::call() 方法加入到临时绑定（bindTo）的对象范围
+    +   引入了过滤 unserialize（）函数以在反序列化不受信任的数据对象时提供更好的安全性。它可以防止可能的代码注入，使开发人员能够使用序列化白名单类。
+    +   IntlChar类：这个类自身定义了许多静态方法用于操作多字符集的 unicode 字符。需要安装intl拓展
+    +   两个新的函数引入以产生一个跨平台的方式加密安全整数和字符串。
+        +   random_bytes() - 生成加密安全伪随机字节。
+        +   random_int() - 生成加密安全伪随机整数。
+    +   期望是向后兼容的增强到旧 assert() 函数。期望允许在生产代码零成本的断言，并提供在断言失败时抛出自定义异常的能力。assert() 不是一种语言构建体，其中第一个参数是一个表达式的比较字符串或布尔用于测试。
+        +   ssertion - 断言。在PHP 5中，这必须是要计算一个字符串或要测试一个布尔值。 在PHP中7，这也可能是一个返回值的表达式，将执行和使用的结果，以指示断言是成功还是失败。
+    + 生成器支持返回表达式：允许在生成器函数中通过使用 return 语法来返回一个表达式 （但是不允许返回引用值）， 可以通过调用 Generator::getReturn() 方法来获取生成器的返回值， 但是这个方法只能在生成器完成产生工作以后调用一次。
+    + 生成器委派：只需在最外层生成其中使用yield from，就可以把一个生成器自动委派给其他的生成器
+    + 会话选项设置：session_start() 可以加入一个数组覆盖php.ini的配置
+    +   单次使用 use 语句可以用来从同一个命名空间导入类，函数和常量(而不用多次使用 use 语句)。
+    +   错误处理：传统的错误报告机制的错误：通过抛出异常错误处理。类似于异常，这些错误异常会冒泡，直到它们到达第一个匹配的catch块。如果没有匹配的块，那么会使用 set_exception_handler() 安装一个默认的异常处理并被调用，并在情况下，如果没有默认的异常处理程序，那么该异常将被转换为一个致命的错误，并会像传统错误那样处理。
+        +   由于 Error 层次结构不是从异常（Exception），代码扩展使用catch (Exception $e) { ... } 块来处理未捕获的异常，PHP5中将不会处理这样的错误。  catch (Error $e) { ... } 块或 set_exception_handler（）处理程序需要处理的致命错误。
+    +   引入了intdiv()的新函数，它执行操作数的整数除法并返回结果为 int 类型
+    +   null合并运算符
+    +   Unicode codepoint 转译语法:接受一个以16进制形式的 Unicode codepoint，并打印出一个双引号或heredoc包围的 UTF-8 编码格式的字符串。 可以接受任何有效的 codepoint，并且开头的 0 是可以省略的
+    + preg_replace_callback_array：可以使用一个关联数组来对每个正则表达式注册回调函数， 正则表达式本身作为关联数组的键， 而对应的回调函数就是关联数组的值
+    - 改变了大多数错误的报告方式。不同于传统（PHP 5）的错误报告机制，大多数错误被作为 Error 异常抛出。
+    - list 会按照原来的顺序进行赋值。不再是逆序了.不再支持解开字符串
+    - foreach不再改变内部数组指针
+    - 十六进制字符串不再被认为是数字
+    - $HTTP_RAW_POST_DATA 被移 使用php://input代替
 * 7.1 :2015.12.3
     - 减少内存分配次数
     - 多使用栈内存
@@ -25,8 +78,53 @@ The PHP Interpreter <http://www.php.net>
     - 字符串解析成桉树改为宏展开
     - 使用大块连续内存代替小块破碎内存
     - 空合并赋值操作符:第一个操作数是存在并且不为 NULL，则返回该操作数。否则返回第二个操作数
-* 7.2 JIT(JUST_IN_TIME)
+    - 参数以及返回值的类型现在可以通过在类型前加上一个问号使之允许为空。当启用这个特性时，传入的参数或者函数返回的结果要么是给定的类型，要么是null
+    - 返回值声明为 void 类型的方法要么干脆省去 return 语句。对于 void来说，NULL 不是一个合法的返回值。
+    - 类常量可见性
+    - iterable 伪类:可以被用在参数或者返回值类型中，它代表接受数组或者实现了Traversable接口的对象.
+    - 多异常捕获处理:一个catch语句块现在可以通过管道字符(|)来实现多个异常的捕获。 这对于需要同时处理来自不同类的不同异常时很有用
+    - list支持键名
+    - 字符串支持负向
+    - 将callback 转闭包:Closure新增了一个静态方法，用于将callable快速地 转为一个Closure 对象。
+    - 对http2服务器推送的支持现在已经被加入到 CURL 扩展
+    - 传递参数过少时将抛出错误:过去我们传递参数过少 会产生warning。php7.1开始会抛出error
+    - 移除了ext/mcrypt拓展
+* 7.2
+    - JIT(JUST_IN_TIME)
+    - 增加新的类型object
+    - 通过名称加载扩展:扩展文件不再需要通过文件加载 (Unix下以.so为文件扩展名，在Windows下以 .dll 为文件扩展名) 进行指定。可以在php.ini配置文件进行启用
+    - 允许重写抽象方法:当一个抽象类继承于另外一个抽象类的时候，继承后的抽象类可以重写被继承的抽象类的抽象方法。
+    - 使用Argon2算法生成密码散列:Argon2 已经被加入到密码散列（password hashing） API (这些函数以 password_ 开头), 以下是暴露出来的常量
+    - 新增 PDO 字符串扩展类型,准备支持多语言字符集，PDO的字符串类型已经扩展支持国际化的字符集。以下是扩展的常量：
+        + PDO::PARAM_STR_NATL
+        + PDO::PARAM_STR_CHAR
+        + PDO::ATTR_DEFAULT_STR_PARAM
+    - 命名分组命名空间支持尾部逗号
+    - number_format 返回值
+    - get_class()不再允许null。
+    - count 作用在不是 Countable Types 将发生warning
+    - 不带引号的字符串:在之前不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。现在将会产生waring。
+    - __autoload 被废弃
+    -  each 被废弃:使用此函数遍历时，比普通的 foreach 更慢， 并且给新语法的变化带来实现问题。因此它被废弃了。
+    - is_object、gettype修正:is_object 作用在**__PHP_Incomplete_Class** 将反正 true;gettype作用在闭包在将正确返回resource
+    - Convert Numeric Keys in Object/Array Casts:把数组转对象的时候，可以访问到整型键的值。
+* 7.3
+    - 添加了 array_key_first() 和 array_key_last() 来获取数组的第一个和最后一个元素的键名
+    - 添加了 fpm_get_status() 方法, 来获取FPM状态数组,
+    - 添加了几个FPM的配置项, 用来控制日志单行最大字符数, 日志缓冲等: log_limit, log_buffering, decorate_workers_output
+    - libcurl >= 7.15.5 is now required
+    - curl 添加了一堆常量
+    - json_decode 添加了一个常量, JSON_THROW_ON_ERROR, 如果解析失败可以抛出异常, 而不是通过之前的方法 json_last_error() 去获取
+    - spl autoloader: 如果一个加载失败, 剩下的都不再执行
+    - 说明了一些循环引用的情况会得到怎样的结果
+    - heredoc/nowdoc  中如果遇到跟定界符相同的字符串就认为结束了,  而最后真正的结束符则会被认为是语法错误;
+    - 在 循环+switch-case 语句的case 中使用continue 会报warning
+    - 说明了, 静态变量在被继承时, 如果在子类里发生了循环引用, 父类里的静态变量会跟着变
 * 7.4
+    - 短闭包函数
+    - 预加载:框架启动时在内存中加载文件，而且在后续请求中永久有效,每次预加载的文件发生改变时，框架需要重新启动
+    - 属性类型限定
+    - 三元运算符 `$data['date'] ??= new DateTime();`
     - 预加载
         - 在服务器启动的时候，将某些文件永久读取到内存中，之后的请求即可直接从这内存中读取。利用这个功能，能够将框架，或者是类库预加载到内存中，以进一步提高性能，还能将php写的函数，当成内部函数使用（因为已经永久加载到内存，整个服务器共享）
         - 文件有所更新就得重新启动服务器
@@ -40,7 +138,367 @@ The PHP Interpreter <http://www.php.net>
     - 实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
 
 ```php
-$username = $_GET['user'] ?? 'nobody';
+// Strict mode
+declare(strict_types=1);
+function sum(int ...$ints)
+{
+   return array_sum($ints);
+}
+print(sum(2, '3', 4.1)); # Fatal error
+
+declare(strict_types=1);
+function returnIntValue(int $value): int
+{
+   return $value + 1.0;
+}
+print(returnIntValue(5));
+
+$username = $_GET['username'] ?? $_POST['username'] ?? 'not passed'; # null合并运算符
+
+print( 1 <=> 1);print("<br/>"); // 0
+print( 1 <=> 2);print("<br/>"); // -1
+print( 2 <=> 1);print("<br/>"); // 1
+
+define('ALLOWED_IMAGE_EXTENSIONS', ['jpg', 'jpeg', 'gif', 'png']);
+
+interface Logger {
+   public function log(string $msg);
+}
+class Application {
+   private $logger;
+
+   public function getLogger(): Logger {
+      return $this->logger;
+   }
+
+   public function setLogger(Logger $logger) {
+      $this->logger = $logger;
+   }
+}
+
+$app = new Application;
+$app->setLogger(new class implements Logger {
+   public function log(string $msg) {
+      print($msg);
+   }
+});
+$app->getLogger()->log("My first Log Message");
+
+class A {
+   private $x = 1;
+}
+$value = function() {
+   return $this->x;
+};
+print($value->call(new A));
+
+class MyClass1 {
+   public $obj1prop;
+}
+class MyClass2 {
+   public $obj2prop;
+}
+$obj1 = new MyClass1();
+$obj1->obj1prop = 1;
+$obj2 = new MyClass2();
+$obj2->obj2prop = 2;
+$serializedObj1 = serialize($obj1);
+$serializedObj2 = serialize($obj2);
+$data = unserialize($serializedObj1 , ["allowed_classes" => true]); // 不允许将所有的对象都转换为 __PHP_Incomplete_Class 对象
+$data2 = unserialize($serializedObj2 , ["allowed_classes" => ["MyClass1", "MyClass2"]]); // 将除 MyClass 和 MyClass2 之外的所有对象都转换为 __PHP_Incomplete_Class 对象
+
+$bytes = random_bytes(5);
+print(bin2hex($bytes));
+print(random_int(-1000, 0));
+
+printf('%x', IntlChar::CODEPOINT_MAX);
+echo IntlChar::charName('@');
+var_dump(IntlChar::ispunct('!'));
+
+ini_set('assert.exception', 1);
+class CustomError extends AssertionError {}
+assert(false, new CustomError('Custom Error Message!'));
+
+use com\yiibai\{ClassA, ClassB, ClassC as C};
+use function com\yiibai\{fn_a, fn_b, fn_c};
+use const com\yiibai\{ConstA, ConstB, ConstC};
+
+$gen = (function() {
+    yield 1;
+    yield 2;
+
+    return 3;
+})();
+foreach ($gen as $val) {
+    echo $val, PHP_EOL;
+}
+echo $gen->getReturn(), PHP_EOL;
+# output
+//1
+//2
+//3
+
+function gen()
+{
+    yield 1;
+    yield 2;
+
+    yield from gen2();
+}
+function gen2()
+{
+    yield 3;
+    yield 4;
+}
+foreach (gen() as $val)
+{
+    echo $val, PHP_EOL;
+}
+var_dump(intdiv(10,3)) //3
+
+session_start([
+    'cache_limiter' => 'private',
+    'read_and_close' => true,
+]);
+
+class MathOperations
+{
+   protected $n = 10;
+
+   // Try to get the Division by Zero error object and display as Exception
+   public function doOperation(): string
+   {
+      try {
+         $value = $this->n % 0;
+         return $value;
+      } catch (DivisionByZeroError $e) {
+         return $e->getMessage();
+      }
+   }
+}
+$mathOperationsObj = new MathOperations();
+print($mathOperationsObj->doOperation());
+
+echo "\u{aa}";// ª
+echo "\u{0000aa}";// ª
+echo "\u{9999}";// 香
+
+string preg_replace_callback_array(array $regexesAndCallbacks, string $input);
+$tokenStream = []; // [tokenName, lexeme] pairs
+
+$input = <<<'end'
+$a = 3; // variable initialisation
+end;
+
+// Pre PHP 7 code
+preg_replace_callback(
+    [
+        '~\$[a-z_][a-z\d_]*~i',
+        '~=~',
+        '~[\d]+~',
+        '~;~',
+        '~//.*~'
+    ],
+    function ($match) use (&$tokenStream) {
+        if (strpos($match[0], '$') === 0) {
+            $tokenStream[] = ['T_VARIABLE', $match[0]];
+        } elseif (strpos($match[0], '=') === 0) {
+            $tokenStream[] = ['T_ASSIGN', $match[0]];
+        } elseif (ctype_digit($match[0])) {
+            $tokenStream[] = ['T_NUM', $match[0]];
+        } elseif (strpos($match[0], ';') === 0) {
+            $tokenStream[] = ['T_TERMINATE_STMT', $match[0]];
+        } elseif (strpos($match[0], '//') === 0) {
+            $tokenStream[] = ['T_COMMENT', $match[0]];
+        }
+    },
+    $input
+);
+
+// PHP 7+ code
+preg_replace_callback_array(
+    [
+        '~\$[a-z_][a-z\d_]*~i' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_VARIABLE', $match[0]];
+        },
+        '~=~' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_ASSIGN', $match[0]];
+        },
+        '~[\d]+~' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_NUM', $match[0]];
+        },
+        '~;~' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_TERMINATE_STMT', $match[0]];
+        },
+        '~//.*~' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_COMMENT', $match[0]];
+        }
+    ],
+    $input
+);
+
+interface Throwable
+    |- Exception implements Throwable
+        |- ...
+    |- Error implements Throwable
+        |- TypeError extends Error
+        |- ParseError extends Error
+        |- AssertionError extends Error
+        |- ArithmeticError extends Error
+            |- DivisionByZeroError extends ArithmeticError
+function handler(Exception $e) { ... }
+set_exception_handler('handler');
+
+// 兼容 PHP 5 和 7
+function handler($e) { ... }
+
+// 仅支持 PHP 7
+function handler(Throwable $e) { ... }
+
+list($a,$b,$c) = [1,2,3];
+var_dump($a);//1
+var_dump($b);//2
+var_dump($c);//3
+
+$array = [0, 1, 2];
+foreach ($array as &$val) {
+    var_dump(current($array));
+}
+?>
+#php 5
+int(1)
+int(2)
+bool(false)
+#php7
+int(0)
+int(0)
+int(0)
+
+var_dump("0x123" == "291");
+#php5
+true
+#php7
+false
+
+function fun() :?string
+{
+  return null;
+}
+
+function fun1(?$a)
+{
+  var_dump($a);
+}
+fun1(null);//null
+fun1('1');//1
+
+function fun() :void
+{
+  echo "hello world";
+}
+
+function fun() :void
+{
+  echo "hello world";
+}
+
+class Something
+{
+    const PUBLIC_CONST_A = 1;
+    public const PUBLIC_CONST_B = 2;
+    protected const PROTECTED_CONST = 3;
+    private const PRIVATE_CONST = 4;
+}
+
+function iterator(iterable $iter)
+{
+    foreach ($iter as $val) {
+        //
+    }
+}
+
+try {
+    // some code
+} catch (FirstException | SecondException $e) {
+    // handle first and second exceptions
+}
+
+$data = [
+    ["id" => 1, "name" => 'Tom'],
+    ["id" => 2, "name" => 'Fred'],
+];
+
+// list() style
+list("id" => $id1, "name" => $name1) = $data[0];
+var_dump($id1);//1
+
+$a= "hello";
+$a[-2];//l
+
+<?php
+class Test
+{
+    public function exposeFunction()
+    {
+        return Closure::fromCallable([$this, 'privateFunction']);
+    }
+
+    private function privateFunction($param)
+    {
+        var_dump($param);
+    }
+}
+
+$privFunc = (new Test)->exposeFunction();
+$privFunc('some value');
+
+function test(object $obj) : object
+{
+    return new SplQueue();
+}
+test(new StdClass());
+
+; ini file
+extension=php-ast
+zend_extension=opcache
+
+abstract class A
+{
+    abstract function test(string $s);
+}
+abstract class B extends A
+{
+    // overridden - still maintaining contravariance for parameters and covariance for return
+    abstract function test($s) : int;
+}
+
+use Foo\Bar\{
+    Foo,
+    Bar,
+    Baz,
+};
+
+var_dump(number_format(-0.01)); // now outputs string(1) "0" instead of string(2) "-0"
+
+var_dump(get_class(null))// warning
+
+count(1), // integers are not countable
+
+// array to object
+$arr = [0 => 1];
+$obj = (object)$arr;
+var_dump(
+    $obj,
+    $obj->{'0'}, // now accessible
+    $obj->{0} // now accessible
+);
+
+array_map(fn(User $user) => $user->id, $users)
+
+```
+
+```php
+$username = $_GET['user'] ?? 'nobody'
 
 # 7.4
 $parts = ['apple', 'pear'];
@@ -90,8 +548,10 @@ $calc = fn($num) => $num * $factor;
     - php_module_shutdown()
 * 变量实现
 * 自动回收
-    - 变量赋值只增加引用次数，共用value
-    - 引用计数为0时释放value
+    - 引用计数 (reference counting) GC 机制
+    - 每个对象都内含一个引用计数器 refcount，每个 reference 连接到对象，计数器加 1,共用value
+    - 当 reference 离开生存空间或被设为 NULL，计数器减 1
+    - 当某个对象的引用计数器为零时,释放其所占的内存空间
     - 引用计数大于0的value发生写操作时进行分离
 * 语言特性
 * 内存操作
@@ -1196,7 +1656,7 @@ print_r(random_int(100, 999));//int(248)
 
 服务器端存储技术
 
-* cookie是一个小段信息，存储在客户端浏览器中。它可用于识别用户。cookie在服务器端创建并保存到客户端浏览器。 每当客户端向服务器发送请求时，cookie都会嵌入请求。 这样，cookie数据信息可以在服务器端接收。
+* cookie是一个小段信息，存储在客户端浏览器中。用于识别用户。cookie在服务器端创建并保存到客户端浏览器。 每当客户端向服务器发送请求时，cookie都会嵌入请求。 这样，cookie数据信息可以在服务器端接收。
     - 设置
     - 获取
     - 删除
@@ -1865,11 +2325,11 @@ echo (new Outer)->func2()->func3(); # 6
 
 ## 魔术方法
 
-* 使用场景
+* 以双下划线（__）开始命名的方法
 * `__construct()`
 * `__destruct()`
-* `__call()`
-* `__callStatic()`
+* `__call($funName, $arguments)`:当调用一个未定义或不可达方法时， __call () 方法将被调用
+* `__callStatic($funName, $arguments)`   当调用一个未定义或不可达的静态方法时， __callStatic () 方法将被调用
 * `__clone()`
 * `__get()`:读取不可访问属性的值
 * `__set()`:在给不可访问属性赋值时
@@ -1878,8 +2338,10 @@ echo (new Outer)->func2()->func3(); # 6
 * `__sleep()`:serialize() 函数会检查类中是否存在一个魔术方法 __sleep()。如果存在，该方法会先被调用，然后才执行序列化操作,可以用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组,不能返回父类的私有成员的名字。这样做会产生一个 E_NOTICE 级别的错误.
 * `__wakeup()`:unserialize() 会检查是否存在一个 __wakeup() 方法。如果存在，则会先调用 __wakeup 方法，预先准备对象需要的资源
 * `__toString()`:用于一个类被当成字符串时应怎样回应
-* `__invoke()`:当尝试以调用函数的方式调用一个对象时
-* `__set_state()`
+* `__invoke()`:以调用函数的方式访问一个对象时， __invoke () 方法将首先被调用
+* `__set_state()`:当调用 var_export () 方法时，__set_state () 方法将被调用
+* `__autoload($className)`   试图载入一个未定义的类时调用。
+* `__debugInfo()`   输出 debug 信息。
 
 ```php
 class CallableClass
@@ -2143,6 +2605,13 @@ var_dump(iterator_to_array($iterator, false));
 ## 异常
 
 
+## 重定向
+
+```
+header('Location: http://www.baidu.com') ;
+echo '<meta http-equiv="Refresh" content="0;url=http://www.baidu.com" >';
+echo '<script>window.location.href="www.baidu.com"</script>';
+```
 
 ## 序列化
 
@@ -2219,14 +2688,16 @@ echo "Associative array always output as object: ", json_encode($d, JSON_FORCE_O
 ?>
 ```
 
-## Docker配置
+## Docker
 
-- mkdir -p ~/php-fpm/logs ~/php-fpm/conf
-- 构建Dockerfile
 * [docker-library/php](https://github.com/docker-library/php):Docker Official Image packaging for PHP https://php.net
 * [yeszao/dnmp](https://github.com/yeszao/dnmp):Docker LNMP (Nginx, PHP7/PHP5, MySQL, Redis) https://www.awaimai.com/2120.html
 
 ```
+mkdir -p ~/php-fpm/logs ~/php-fpm/conf
+
+# Dockerfile
+
 FROM debian:jessie
 
 # persistent / runtime deps
@@ -2311,10 +2782,11 @@ fi \
     echo 'listen = [::]:9000'; \
 } | tee php-fpm.d/zz-docker.conf
 EXPOSE 9000 CMD ["php-fpm"]
+
+docker build -t php:5.6-fpm .
+docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/local/etc/php -v $PWD/logs:/phplogs -d php:5.6-fpm
 ```
 
-- docker build -t php:5.6-fpm .
-- docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/local/etc/php -v $PWD/logs:/phplogs -d php:5.6-fpm
 
 ## [xhprof](https://github.com/phacility/xhprof)
 
@@ -2730,7 +3202,7 @@ $order->add();//正常的使用业务
 
 ## curl
 
-* 下列选项的值将被作为长整形使用(在option参数中指定)：
+* 选项的值将被作为长整形使用(在option参数中指定)：
     - CURLOPT_INFILESIZE: 上传一个文件到远程站点，这个选项告诉PHP你上传文件的大小。
     - CURLOPT_VERBOSE: 想CURL报告每一件意外的事情，设置这个选项为一个非零值。
     - CURLOPT_HEADER: 想把一个头包含在输出中，设置这个选项为一个非零值。
@@ -2753,7 +3225,7 @@ $order->add();//正常的使用业务
     - CURLOPT_TIMECONDITION: 传递一个长参数，指定怎么处理CURLOPT_TIMEVALUE参数。可以设置这个参数为TIMECOND_IFMODSINCE 或 TIMECOND_ISUNMODSINCE。这仅用于HTTP
     - CURLOPT_CONNECTTIMEOUT:告诉 PHP 在成功连接服务器前等待多久 **连接超时**
     - CURLOPT_TIMEVALUE: 传递一个从1970-1-1开始到现在的秒数。这个时间将被CURLOPT_TIMEVALUE选项作为指定值使用，或被默认TIMECOND_IFMODSINCE使用。
-* 下列选项的值将被作为字符串：
+* 选项的值将被作为字符串：
     - CURLOPT_URL: 这是想用PHP取回的URL地址。也可以在用curl_init()函数初始化时设置这个选项。
     - CURLOPT_USERPWD: 传递一个形如[username]:[password]风格的字符串,作用PHP去连接。
     - CURLOPT_PROXYUSERPWD: 传递一个形如[username]:[password] 格式的字符串去连接HTTP代理。
@@ -2772,40 +3244,28 @@ $order->add();//正常的使用业务
     - CURLOPT_WRITEHEADER: 这个文件写有输出的头部分。
     - CURLOPT_STDERR: 这个文件写有错误而不是stderr。用来获取需要登录的页面的例子,当前做法是每次或许都登录一次,有需要的人再做改进了.
 
-## 正则
+## 正则表达式 PREG
 
-# PREG
-
-正则表达式
-
-> 元字符
-
-* .   匹配除换行符以外的任意字符
-* \w  匹配字母或数字或下划线或汉字
-* \s  匹配任意的空白符
-* \d  匹配数字
-* \b  匹配单词的开始或结束
-* ^   匹配字符串的开始
-* $   匹配字符串的结束
-
-> 字符转义
-
-如你要查找.，或者*,就出现了问题：你没办法指定它们，因为它们会被解释成别的意思。这时你就得使用\来取消这些字符的特殊意义。因此，你应该使用\\.和\\\*。当然，要查找\本身，你也得用\\\。
-
-> 重复
-
-* `*`   重复零次或更多次
-* `+`   重复一次或更多次
-* ?   重复零次或一次
-* {n} 重复n次
-* {n,}    重复n次或更多次
-* {n,m}   重复n到m次
-
-> 字符类
-
-* [“your set”]：如[aeiou]，则匹配a，e，i，o和u中的任意一个，同理[.?!]匹配标点符号(.或?或!)
-* [0-9]：与\d就是完全一致，表示一位数字
-* [a-zA-Z]：表示一个字母，[a-z0-9A-Z]等同于\w(当然值考虑英文的话)
+* 元字符
+    - .   匹配除换行符以外的任意字符
+    - \w  匹配字母或数字或下划线或汉字
+    - \s  匹配任意的空白符
+    - \d  匹配数字
+    - \b  匹配单词的开始或结束
+    - ^   匹配字符串的开始
+    - $   匹配字符串的结束
+* 字符转义:要查找特殊意义字符`.`，或者`*`,使用\来取消。使用`\\.` `\\\*` `\\\`
+* 重复
+    - `*`   重复零次或更多次
+    - `+`   重复一次或更多次
+    - ?   重复零次或一次
+    - {n} 重复n次
+    - {n,}    重复n次或更多次
+    - {n,m}   重复n到m次
+* 字符类
+    - [“your set”]：如[aeiou]，则匹配a，e，i，o和u中的任意一个，同理[.?!]匹配标点符号(.或?或!)
+    - [0-9]：与\d就是完全一致，表示一位数字
+    - [a-zA-Z]：表示一个字母，[a-z0-9A-Z]等同于\w(当然值考虑英文的话)
 
 \(?0\d{2}[)-]?\d{8} # (010)88886666，或022-22334455，或02912345678等
 
@@ -2819,29 +3279,22 @@ $order->add();//正常的使用业务
 
 注意：使用分枝条件时，要注意各个条件的顺序。因为匹配分枝条件时，将会从左到右地测试每个条件，如果满足了某个分枝的话，就不会去再管其它的条件了。如：\d{5}-\d{4}|\d{5}和\d{5}|\d{5}-\d{4}是不同的。
 
-> 分组
-
-我们已经提到了怎么重复单个字符（直接在字符后面加上限定符就行了）；但如果想要重复多个字符又该怎么办？你可以用小括号来指定子表达式(也叫做分组)，然后你就可以指定这个子表达式的重复次数了。
-
-例6-1：(\d{1,3}.){3}\d{1,3}
+* 分组：用小括号来指定子表达式，然后就可以指定这个子表达式的重复次数了 `(\d{1,3}.){3}\d{1,3}`
 
 分析：这是一个简单的IP地址匹配表达式。要理解这个表达式，请按下列顺序分析它：\d{1,3}匹配1到3位的数字，(\d{1,3}\.) {3}匹配三位数字加上一个英文句号(这个整体也就是这个分组)重复3次，最后再加上一个一到三位的数字\d{1,3}。
 
 不幸的是，它也将匹配256.300.888.999这种不可能存在的IP地址。如果能使用算术比较的话，或许能简单地解决这个问题，但是正则表达式中并不提供关于数学的任何功能，所以只能使用冗长的分组，选择，字符类来描述一个正确的IP地址：((2[0-4]\d|25[0-5]|[01]?\d\d?).){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)。
 
-> 反义
-
-* \W  匹配任意不是字母，数字，下划线，汉字的字符
-* \S  匹配任意不是空白符的字符
-* \D  匹配任意非数字的字符
-* \B  匹配不是单词开头或结束的位置
-* [^x]    匹配除了x以外的任意字符
-* [^aeiou]    匹配除了aeiou这几个字母以外的任意字符
-
->  后向引用
-
-使用小括号指定一个子表达式后，匹配这个子表达式的文本(也就是此分组捕获的内容)可以在表达式或其它程序中作进一步的处理。默认情况下，每个分组会自动拥有一个组号，规则是：从左向右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。
-后向引用用于重复搜索前面某个分组匹配的文本。例如，\1代表分组1匹配的文本。
+* 反义
+    - \W  匹配任意不是字母，数字，下划线，汉字的字符
+    - \S  匹配任意不是空白符的字符
+    - \D  匹配任意非数字的字符
+    - \B  匹配不是单词开头或结束的位置
+    - [^x]    匹配除了x以外的任意字符
+    - [^aeiou]    匹配除了aeiou这几个字母以外的任意字符
+* 后向引用：使用小括号指定一个子表达式后，匹配这个子表达式的文本(也就是此分组捕获的内容)可以在表达式或其它程序中作进一步的处理
+    - 默认情况下，每个分组会自动拥有一个组号，规则是：从左向右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。
+    - 后向引用用于重复搜索前面某个分组匹配的文本。例如，\1代表分组1匹配的文本。
 
 例8-1：\b(\w+)\b\s+\1\b
 
@@ -2852,41 +3305,41 @@ $order->add();//正常的使用业务
 
 可以使用非捕获元字符 '?:', '?=', or '?!' 来忽略对相关匹配的保存。
 
-> 常用分组语法
+* 常用分组语法
+    - 捕获  (exp)   匹配exp,并捕获文本到自动命名的组里
+    - (?<name>exp)    匹配exp,并捕获文本到名称为name的组里，也可以写成(?'name'exp)
+    - (?:exp) 匹配exp,不捕获匹配的文本，也不给此分组分配组号
+    - 零宽断言    (?=exp) 匹配exp前面的位置
+    - (?<=exp)    匹配exp后面的位置
+    - (?!exp) 匹配后面跟的不是exp的位置
+    - `(?<!exp)`    匹配前面不是exp的位置
+    - 注释  (?#comment) 这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读
+* 贪婪与懒惰
+    当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配尽可能多的字符。以这个表达式为例：a.\*b，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串aabab。这被称为贪婪匹配。
+    有时，我们更需要懒惰匹配，也就是匹配尽可能少的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号?。这样.\*?就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。现在看看懒惰版的例子吧：
+    a.*?b匹配最短的，以a开始，以b结束的字符串。如果把它应用于aabab的话，它会匹配aab（第一到第三个字符）和ab（第四到第五个字符）。注意：最先开始的匹配拥有最高的优先权
+    - *?  重复任意次，但尽可能少重复
+    - +?  重复1次或更多次，但尽可能少重复
+    - ??  重复0次或1次，但尽可能少重复
+    - {n,m}?  重复n到m次，但尽可能少重复
+    - {n,}?   重复n次以上，但尽可能少重复
+* 模式修正符
+    - i：模式中的字符将同时匹配大小写字母。
+    - m：“行起始”和“行结束”除了匹配整个字符串开头和结束外，还分别匹配其中的换行符的之后和之前。
+    - s：模式中的圆点元字符（.）匹配所有的字符，包括换行符。没有此设定的话，则不包括换行符。
+    - x：模式中的空白字符除了被转义的或在字符类中的以外完全被忽略，在未转义的字符类之外的 #以及下一个换行符之间的所有字符，包括两头，也都被忽略。
+    - e：如果设定了此修正符，preg_replace() 在替换字符串中对逆向引用作正常的替换，
+    - ?在 . + 和 * 之后 表示非贪婪匹配: *、+和?限定符都是贪婪的，因为它们会尽可能多的匹配文字，只有在它们的后面加上一个?就可以实现非贪婪或最小匹配。
+* 参考
+    - [五分钟，正则表达式不再是你的烦恼](https://www.jianshu.com/p/4f258d81ff4c)
+    - https://www.w3cschool.cn/regexp/jhbv1pr1.html
+    - https://www.cnblogs.com/yelons/p/6644579.html
+    - https://www.cnblogs.com/longdaye/p/8001221.html
+    - https://blog.csdn.net/kkobebryant/article/details/267527
+    - http://www.jb51.net/article/77428.htm
+    - https://www.cnblogs.com/hellohell/p/5718319.html
 
-* 捕获  (exp)   匹配exp,并捕获文本到自动命名的组里
-* (?<name>exp)    匹配exp,并捕获文本到名称为name的组里，也可以写成(?'name'exp)
-* (?:exp) 匹配exp,不捕获匹配的文本，也不给此分组分配组号
-* 零宽断言    (?=exp) 匹配exp前面的位置
-* (?<=exp)    匹配exp后面的位置
-* (?!exp) 匹配后面跟的不是exp的位置
-* `(?<!exp)`    匹配前面不是exp的位置
-注释  (?#comment) 这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读
-
-> 贪婪与懒惰
-
-当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配尽可能多的字符。以这个表达式为例：a.\*b，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串aabab。这被称为贪婪匹配。
-有时，我们更需要懒惰匹配，也就是匹配尽可能少的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号?。这样.\*?就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。现在看看懒惰版的例子吧：
-a.*?b匹配最短的，以a开始，以b结束的字符串。如果把它应用于aabab的话，它会匹配aab（第一到第三个字符）和ab（第四到第五个字符）。
-
-注意：最先开始的匹配拥有最高的优先权
-
-* *?  重复任意次，但尽可能少重复
-* +?  重复1次或更多次，但尽可能少重复
-* ??  重复0次或1次，但尽可能少重复
-* {n,m}?  重复n到m次，但尽可能少重复
-* {n,}?   重复n次以上，但尽可能少重复
-
-> 模式修正符
-
-* i：模式中的字符将同时匹配大小写字母。
-* m：“行起始”和“行结束”除了匹配整个字符串开头和结束外，还分别匹配其中的换行符的之后和之前。
-* s：模式中的圆点元字符（.）匹配所有的字符，包括换行符。没有此设定的话，则不包括换行符。
-* x：模式中的空白字符除了被转义的或在字符类中的以外完全被忽略，在未转义的字符类之外的 #以及下一个换行符之间的所有字符，包括两头，也都被忽略。
-* e：如果设定了此修正符，preg_replace() 在替换字符串中对逆向引用作正常的替换，
-* ?在 . + 和 * 之后 表示非贪婪匹配: *、+和?限定符都是贪婪的，因为它们会尽可能多的匹配文字，只有在它们的后面加上一个?就可以实现非贪婪或最小匹配。
-
-
+```
 <?php
 $string = "上飞机离开我<img border='0' alt='' src='/uploadfile/2009/0921/20090921091612567.jpg' border='0' />sdfsdf";
  
@@ -2943,7 +3396,6 @@ $   匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multi
 
 x|y 匹配x或y。例如，'z|food' 能匹配 "z" 或 "food"。'(z|f)ood' 则匹配 "zood" 或 "food"。
 
-```language
 用户名: ^[a-z0-9_-]{3,16}$
 密码: ^[a-z0-9_-]{6,18}$
 十六进制值: ^#?([a-f0-9]{6}|[a-f0-9]{3})$
@@ -2953,31 +3405,18 @@ IP 地址: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-
 HTML 标签: <([a-z]+)([<]+)*(?:>(.*)</\1>|\s+/>)$
 Unicode编码中的汉字范围： ^[u4e00-u9fa5],{0,}$
 匹配中文字符的正则表达式： [\u4e00-\u9fa5]
-评注：匹配中文还真是个头疼的事，有了这个表达式就好办了
 匹配双字节字符(包括汉字在内)： [^\x00-\xff]
-评注：可以用来计算字符串的长度（一个双字节字符长度计2，ASCII字符计1）
 匹配空白行的正则表达式： \n\s*\r
-评注：可以用来删除空白行
 匹配HTML标记的正则表达式： <(\S*?)[^>]*>.*?</\1>|<.*? />
-评注：网上流传的版本太糟糕，上面这个也仅仅能匹配部分，对于复杂的嵌套标记依旧无能为力
 匹配首尾空白字符的正则表达式： ^\s*|\s*$
-评注：可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式
 匹配Email地址的正则表达式： \w+([-+.]\w+)*@\w+([-.]\w+)*.\w+([-.]\w+)*
-评注：表单验证时很实用
 匹配网址URL的正则表达式： [a-zA-z]+://[^\s]*
-评注：网上流传的版本功能很有限，上面这个基本可以满足需求
 匹配帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)： ^[a-zA-Z][a-zA-Z0-9_]{4,15}$
-评注：表单验证时很实用
 匹配国内电话号码： \d{3}-\d{8}|\d{4}-\d{7}
-评注：匹配形式如 0511-4405222 或 021-87888822
 匹配腾讯QQ号： [1-9][0-9]{4,}
-评注：腾讯QQ号从10000开始
 匹配中国大陆邮政编码： [1-9]\d{5}(?!\d)
-评注：中国大陆邮政编码为6位数字
 匹配身份证： \d{15}|\d{18}
-评注：中国大陆的身份证为15位或18位
 匹配ip地址： ((2[0-4]\d|25[0-5]|[01]?\d\d?).){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)
-评注：提取ip地址时有用
 
 ^[1-9]\d*$　 　 //匹配正整数
 ^-[1-9]\d*$ 　 //匹配负整数
@@ -2998,504 +3437,9 @@ Unicode编码中的汉字范围： ^[u4e00-u9fa5],{0,}$
 ^\w+$　　//匹配由数字、26个英文字母或者下划线组成的字符串
 ```
 
-## 参考
-
-* [五分钟，正则表达式不再是你的烦恼](https://www.jianshu.com/p/4f258d81ff4c)
-* https://www.w3cschool.cn/regexp/jhbv1pr1.html
-* https://www.cnblogs.com/yelons/p/6644579.html
-* https://www.cnblogs.com/longdaye/p/8001221.html
-* https://blog.csdn.net/kkobebryant/article/details/267527
-* http://www.jb51.net/article/77428.htm
-* https://www.cnblogs.com/hellohell/p/5718319.html
-
-## PHP7
-
-* PHP是以多进程模型设计的，这样的好处是请求之间互不干涉，一个请求失败也不会对其他进程造成影响
-
-短闭包
-空合并运算符
-Trait
-属性类型
-扩散运算符
-JIT 编译器
-FFI
-匿名类
-声明返回类型
-Contemporary cryptography
-Generators
-
-## 功能
-
--   改进的性能 - PHPNG代码合并在PHP7中，这是比 PHP5快两倍;
--   降低内存消耗 - 优化后PHP7使用较少的资源;
--   标量类型声明 - 现在，参数和返回值类型可以被强制执行;
--   一致性的64位支持 - 64位架构机器持续支持;
--   改进异常层次结构 - 异常层次结构得到改善;
--   许多致命错误转换成异常 - 异常的范围增大覆盖为许多致命的错误转化异常；
--   安全随机数发生器 - 加入新的安全随机数生成器的API;
--   已过时的API和扩展删除 - 不同的旧的和不支持的应用程序和扩展，从最新的版本中删除;
--   null合并运算符（??）的新空合并运算符被加入;
--   返回和标量类型声明支持返回类型和参数类型也被加入;
--   增加了对匿名匿名类的支持;
--   零成本声明支持零成本加入断言。
-
-## 语法
-
--   变量标量类型声明：标量类型声明与返回类型声明
-    -   int
-    -   float
-    -   bool
-    -   string
-    -   interfaces
-    -   array
-    -   callable
--   Null合并运算符：用来与isset（）函数函数一起替换三元操作
--   飞船操作符：用于比较两个表达式。当第一个表达式较第二个表达式分别小于，等于或大于时它分别返回-1，0或1。
--   定义常量数组
--   匿名类
--   Closure::call() 方法加入到临时绑定（bindTo）的对象范围
--   引入了过滤 unserialize（）函数以在反序列化不受信任的数据对象时提供更好的安全性。它可以防止可能的代码注入，使开发人员能够使用序列化白名单类。
--   IntlChar类：这个类自身定义了许多静态方法用于操作多字符集的 unicode 字符。需要安装intl拓展
--   两个新的函数引入以产生一个跨平台的方式加密安全整数和字符串。
-    -   random_bytes() - 生成加密安全伪随机字节。
-    -   random_int() - 生成加密安全伪随机整数。
--   期望是向后兼容的增强到旧 assert() 函数。期望允许在生产代码零成本的断言，并提供在断言失败时抛出自定义异常的能力。assert() 不是一种语言构建体，其中第一个参数是一个表达式的比较字符串或布尔用于测试。
-    -   ssertion - 断言。在PHP 5中，这必须是要计算一个字符串或要测试一个布尔值。 在PHP中7，这也可能是一个返回值的表达式，将执行和使用的结果，以指示断言是成功还是失败。
-- 生成器支持返回表达式：它允许在生成器函数中通过使用 return 语法来返回一个表达式 （但是不允许返回引用值）， 可以通过调用 Generator::getReturn() 方法来获取生成器的返回值， 但是这个方法只能在生成器完成产生工作以后调用一次。
-- 生成器委派：只需在最外层生成其中使用yield from，就可以把一个生成器自动委派给其他的生成器
-- 会话选项设置：session_start() 可以加入一个数组覆盖php.ini的配置
--   单次使用 use 语句可以用来从同一个命名空间导入类，函数和常量(而不用多次使用 use 语句)。
--   错误处理：传统的错误报告机制的错误：通过抛出异常错误处理。类似于异常，这些错误异常会冒泡，直到它们到达第一个匹配的catch块。如果没有匹配的块，那么会使用 set_exception_handler() 安装一个默认的异常处理并被调用，并在情况下，如果没有默认的异常处理程序，那么该异常将被转换为一个致命的错误，并会像传统错误那样处理。
-    -   由于 Error 层次结构不是从异常（Exception），代码扩展使用catch (Exception $e) { ... } 块来处理未捕获的异常，PHP5中将不会处理这样的错误。  catch (Error $e) { ... } 块或 set_exception_handler（）处理程序需要处理的致命错误。
--   引入了intdiv()的新函数，它执行操作数的整数除法并返回结果为 int 类型
--   null合并运算符
--   Unicode codepoint 转译语法:接受一个以16进制形式的 Unicode codepoint，并打印出一个双引号或heredoc包围的 UTF-8 编码格式的字符串。 可以接受任何有效的 codepoint，并且开头的 0 是可以省略的
-- preg_replace_callback_array：可以使用一个关联数组来对每个正则表达式注册回调函数， 正则表达式本身作为关联数组的键， 而对应的回调函数就是关联数组的值
-* 改变了大多数错误的报告方式。不同于传统（PHP 5）的错误报告机制，大多数错误被作为 Error 异常抛出。
-* list 会按照原来的顺序进行赋值。不再是逆序了.不再支持解开字符串
-* foreach不再改变内部数组指针
-* 十六进制字符串不再被认为是数字
-* $HTTP_RAW_POST_DATA 被移 使用php://input代替
-* 7.1
-  - 参数以及返回值的类型现在可以通过在类型前加上一个问号使之允许为空。当启用这个特性时，传入的参数或者函数返回的结果要么是给定的类型，要么是null
-  - 返回值声明为 void 类型的方法要么干脆省去 return 语句。对于 void来说，NULL 不是一个合法的返回值。
-  - 类常量可见性
-  - iterable 伪类:可以被用在参数或者返回值类型中，它代表接受数组或者实现了Traversable接口的对象.
-  - 多异常捕获处理:一个catch语句块现在可以通过管道字符(|)来实现多个异常的捕获。 这对于需要同时处理来自不同类的不同异常时很有用
-  - list支持键名
-  - 字符串支持负向
-  - 将callback 转闭包:Closure新增了一个静态方法，用于将callable快速地 转为一个Closure 对象。
-  - 对http2服务器推送的支持现在已经被加入到 CURL 扩展
-  - 传递参数过少时将抛出错误:过去我们传递参数过少 会产生warning。php7.1开始会抛出error
-  - 移除了ext/mcrypt拓展
-* 7.2
-  - 增加新的类型object
-  - 通过名称加载扩展:扩展文件不再需要通过文件加载 (Unix下以.so为文件扩展名，在Windows下以 .dll 为文件扩展名) 进行指定。可以在php.ini配置文件进行启用
-  - 允许重写抽象方法:当一个抽象类继承于另外一个抽象类的时候，继承后的抽象类可以重写被继承的抽象类的抽象方法。
-  - 使用Argon2算法生成密码散列:Argon2 已经被加入到密码散列（password hashing） API (这些函数以 password_ 开头), 以下是暴露出来的常量
-  - 新增 PDO 字符串扩展类型,准备支持多语言字符集，PDO的字符串类型已经扩展支持国际化的字符集。以下是扩展的常量：
-    + PDO::PARAM_STR_NATL
-    + PDO::PARAM_STR_CHAR
-    + PDO::ATTR_DEFAULT_STR_PARAM
-  - 命名分组命名空间支持尾部逗号
-  - number_format 返回值
-  - get_class()不再允许null。
-  - count 作用在不是 Countable Types 将发生warning
-  - 不带引号的字符串:在之前不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。现在将会产生waring。
-  - __autoload 被废弃
-  -  each 被废弃:使用此函数遍历时，比普通的 foreach 更慢， 并且给新语法的变化带来实现问题。因此它被废弃了。
-  - is_object、gettype修正:is_object 作用在**__PHP_Incomplete_Class** 将反正 true;gettype作用在闭包在将正确返回resource
-  - Convert Numeric Keys in Object/Array Casts:把数组转对象的时候，可以访问到整型键的值。
-* 7.3
-  - 添加了 array_key_first() 和 array_key_last() 来获取数组的第一个和最后一个元素的键名
-  - 添加了 fpm_get_status() 方法, 来获取FPM状态数组,
-  - 添加了几个FPM的配置项, 用来控制日志单行最大字符数, 日志缓冲等: log_limit, log_buffering, decorate_workers_output
-  - libcurl >= 7.15.5 is now required
-  - curl 添加了一堆常量
-  - json_decode 添加了一个常量, JSON_THROW_ON_ERROR, 如果解析失败可以抛出异常, 而不是通过之前的方法 json_last_error() 去获取
-  - spl autoloader: 如果一个加载失败, 剩下的都不再执行
-  - 说明了一些循环引用的情况会得到怎样的结果
-  - heredoc/nowdoc  中如果遇到跟定界符相同的字符串就认为结束了,  而最后真正的结束符则会被认为是语法错误;
-  - 在 循环+switch-case 语句的case 中使用continue 会报warning
-  - 说明了, 静态变量在被继承时, 如果在子类里发生了循环引用, 父类里的静态变量会跟着变
-* 7.4
-  - 短闭包函数
-  - 预加载:框架启动时在内存中加载文件，而且在后续请求中永久有效,每次预加载的文件发生改变时，框架需要重新启动
-  - 属性类型限定
-  - 三元运算符 `$data['date'] ??= new DateTime();`
-
-```php
-// Strict mode
-declare(strict_types=1);
-function sum(int ...$ints)
-{
-   return array_sum($ints);
-}
-print(sum(2, '3', 4.1)); # Fatal error
-
-declare(strict_types=1);
-function returnIntValue(int $value): int
-{
-   return $value + 1.0;
-}
-print(returnIntValue(5));
-
-$username = $_GET['username'] ?? $_POST['username'] ?? 'not passed'; # null合并运算符
-
-print( 1 <=> 1);print("<br/>"); // 0
-print( 1 <=> 2);print("<br/>"); // -1
-print( 2 <=> 1);print("<br/>"); // 1
-
-define('ALLOWED_IMAGE_EXTENSIONS', ['jpg', 'jpeg', 'gif', 'png']);
-
-interface Logger {
-   public function log(string $msg);
-}
-class Application {
-   private $logger;
-
-   public function getLogger(): Logger {
-      return $this->logger;
-   }
-
-   public function setLogger(Logger $logger) {
-      $this->logger = $logger;
-   }
-}
-
-$app = new Application;
-$app->setLogger(new class implements Logger {
-   public function log(string $msg) {
-      print($msg);
-   }
-});
-$app->getLogger()->log("My first Log Message");
-
-class A {
-   private $x = 1;
-}
-$value = function() {
-   return $this->x;
-};
-print($value->call(new A));
-
-class MyClass1 {
-   public $obj1prop;
-}
-class MyClass2 {
-   public $obj2prop;
-}
-$obj1 = new MyClass1();
-$obj1->obj1prop = 1;
-$obj2 = new MyClass2();
-$obj2->obj2prop = 2;
-$serializedObj1 = serialize($obj1);
-$serializedObj2 = serialize($obj2);
-$data = unserialize($serializedObj1 , ["allowed_classes" => true]); // 不允许将所有的对象都转换为 __PHP_Incomplete_Class 对象
-$data2 = unserialize($serializedObj2 , ["allowed_classes" => ["MyClass1", "MyClass2"]]); // 将除 MyClass 和 MyClass2 之外的所有对象都转换为 __PHP_Incomplete_Class 对象
-
-$bytes = random_bytes(5);
-print(bin2hex($bytes));
-print(random_int(-1000, 0));
-
-printf('%x', IntlChar::CODEPOINT_MAX);
-echo IntlChar::charName('@');
-var_dump(IntlChar::ispunct('!'));
-
-ini_set('assert.exception', 1);
-class CustomError extends AssertionError {}
-assert(false, new CustomError('Custom Error Message!'));
-
-use com\yiibai\{ClassA, ClassB, ClassC as C};
-use function com\yiibai\{fn_a, fn_b, fn_c};
-use const com\yiibai\{ConstA, ConstB, ConstC};
-
-$gen = (function() {
-    yield 1;
-    yield 2;
-
-    return 3;
-})();
-foreach ($gen as $val) {
-    echo $val, PHP_EOL;
-}
-echo $gen->getReturn(), PHP_EOL;
-# output
-//1
-//2
-//3
-
-function gen()
-{
-    yield 1;
-    yield 2;
-
-    yield from gen2();
-}
-function gen2()
-{
-    yield 3;
-    yield 4;
-}
-foreach (gen() as $val)
-{
-    echo $val, PHP_EOL;
-}
-var_dump(intdiv(10,3)) //3
-
-session_start([
-    'cache_limiter' => 'private',
-    'read_and_close' => true,
-]);
-
-class MathOperations
-{
-   protected $n = 10;
-
-   // Try to get the Division by Zero error object and display as Exception
-   public function doOperation(): string
-   {
-      try {
-         $value = $this->n % 0;
-         return $value;
-      } catch (DivisionByZeroError $e) {
-         return $e->getMessage();
-      }
-   }
-}
-$mathOperationsObj = new MathOperations();
-print($mathOperationsObj->doOperation());
-
-echo "\u{aa}";// ª
-echo "\u{0000aa}";// ª
-echo "\u{9999}";// 香
-
-string preg_replace_callback_array(array $regexesAndCallbacks, string $input);
-$tokenStream = []; // [tokenName, lexeme] pairs
-
-$input = <<<'end'
-$a = 3; // variable initialisation
-end;
-
-// Pre PHP 7 code
-preg_replace_callback(
-    [
-        '~\$[a-z_][a-z\d_]*~i',
-        '~=~',
-        '~[\d]+~',
-        '~;~',
-        '~//.*~'
-    ],
-    function ($match) use (&$tokenStream) {
-        if (strpos($match[0], '$') === 0) {
-            $tokenStream[] = ['T_VARIABLE', $match[0]];
-        } elseif (strpos($match[0], '=') === 0) {
-            $tokenStream[] = ['T_ASSIGN', $match[0]];
-        } elseif (ctype_digit($match[0])) {
-            $tokenStream[] = ['T_NUM', $match[0]];
-        } elseif (strpos($match[0], ';') === 0) {
-            $tokenStream[] = ['T_TERMINATE_STMT', $match[0]];
-        } elseif (strpos($match[0], '//') === 0) {
-            $tokenStream[] = ['T_COMMENT', $match[0]];
-        }
-    },
-    $input
-);
-
-// PHP 7+ code
-preg_replace_callback_array(
-    [
-        '~\$[a-z_][a-z\d_]*~i' => function ($match) use (&$tokenStream) {
-            $tokenStream[] = ['T_VARIABLE', $match[0]];
-        },
-        '~=~' => function ($match) use (&$tokenStream) {
-            $tokenStream[] = ['T_ASSIGN', $match[0]];
-        },
-        '~[\d]+~' => function ($match) use (&$tokenStream) {
-            $tokenStream[] = ['T_NUM', $match[0]];
-        },
-        '~;~' => function ($match) use (&$tokenStream) {
-            $tokenStream[] = ['T_TERMINATE_STMT', $match[0]];
-        },
-        '~//.*~' => function ($match) use (&$tokenStream) {
-            $tokenStream[] = ['T_COMMENT', $match[0]];
-        }
-    ],
-    $input
-);
-
-interface Throwable
-    |- Exception implements Throwable
-        |- ...
-    |- Error implements Throwable
-        |- TypeError extends Error
-        |- ParseError extends Error
-        |- AssertionError extends Error
-        |- ArithmeticError extends Error
-            |- DivisionByZeroError extends ArithmeticError
-function handler(Exception $e) { ... }
-set_exception_handler('handler');
-
-// 兼容 PHP 5 和 7
-function handler($e) { ... }
-
-// 仅支持 PHP 7
-function handler(Throwable $e) { ... }
-
-list($a,$b,$c) = [1,2,3];
-var_dump($a);//1
-var_dump($b);//2
-var_dump($c);//3
-
-$array = [0, 1, 2];
-foreach ($array as &$val) {
-    var_dump(current($array));
-}
-?>
-#php 5
-int(1)
-int(2)
-bool(false)
-#php7
-int(0)
-int(0)
-int(0)
-
-var_dump("0x123" == "291");
-#php5
-true
-#php7
-false
-
-function fun() :?string
-{
-  return null;
-}
-
-function fun1(?$a)
-{
-  var_dump($a);
-}
-fun1(null);//null
-fun1('1');//1
-
-function fun() :void
-{
-  echo "hello world";
-}
-
-function fun() :void
-{
-  echo "hello world";
-}
-
-class Something
-{
-    const PUBLIC_CONST_A = 1;
-    public const PUBLIC_CONST_B = 2;
-    protected const PROTECTED_CONST = 3;
-    private const PRIVATE_CONST = 4;
-}
-
-function iterator(iterable $iter)
-{
-    foreach ($iter as $val) {
-        //
-    }
-}
-
-try {
-    // some code
-} catch (FirstException | SecondException $e) {
-    // handle first and second exceptions
-}
-
-$data = [
-    ["id" => 1, "name" => 'Tom'],
-    ["id" => 2, "name" => 'Fred'],
-];
-
-// list() style
-list("id" => $id1, "name" => $name1) = $data[0];
-var_dump($id1);//1
-
-$a= "hello";
-$a[-2];//l
-
-<?php
-class Test
-{
-    public function exposeFunction()
-    {
-        return Closure::fromCallable([$this, 'privateFunction']);
-    }
-
-    private function privateFunction($param)
-    {
-        var_dump($param);
-    }
-}
-
-$privFunc = (new Test)->exposeFunction();
-$privFunc('some value');
-
-function test(object $obj) : object
-{
-    return new SplQueue();
-}
-test(new StdClass());
-
-; ini file
-extension=php-ast
-zend_extension=opcache
-
-abstract class A
-{
-    abstract function test(string $s);
-}
-abstract class B extends A
-{
-    // overridden - still maintaining contravariance for parameters and covariance for return
-    abstract function test($s) : int;
-}
-
-use Foo\Bar\{
-    Foo,
-    Bar,
-    Baz,
-};
-
-var_dump(number_format(-0.01)); // now outputs string(1) "0" instead of string(2) "-0"
-
-var_dump(get_class(null))// warning
-
-count(1), // integers are not countable
-
-// array to object
-$arr = [0 => 1];
-$obj = (object)$arr;
-var_dump(
-    $obj,
-    $obj->{'0'}, // now accessible
-    $obj->{0} // now accessible
-);
-
-array_map(fn(User $user) => $user->id, $users)
-
-```
-
 ## 禁止
 
--   不要使用 `mysql_` 函数：从核心中全部移除了
-
-## 工具
-
-* [swisnl/php7-upgrade-tools](https://github.com/swisnl/php7-upgrade-tools):A set of tools for upgrading applications to PHP 7
-* [rectorphp/rector](https://github.com/rectorphp/rector):Instant Upgrades for PHP Applications https://www.tomasvotruba.cz/blog/2018/02/19/rector-part-1-what-and-how/
-
-## 参考
-
--   [tpunt/PHP7-Reference](tpunt/PHP7-Reference):An overview of the features, changes, and backward compatibility breakages in PHP 7
+-  不要使用 `mysql_` 函数：从核心中全部移除了
 
 ## PHP能力
 
@@ -3576,7 +3520,7 @@ array_map(fn(User $user) => $user->id, $users)
 重点：提高针对LNMP的技能，能够更全面的对LNMP有熟练的应用。
 目标：能够随时随地搭建好LNMP环境，快速完成常规配置；能够追查解决大部分遇到的开发和线上环境的问题；能够独立承担中型系统的构架和开发工作；能够在大型系统中承担某个中型模块的开发工作；
 
-### Linux:
+### Linux
 
 在第一阶段的基础上面，能够流畅的使用Shell脚本来完成很多自动化的工作；
 awk/sed/perl 也操作的不错，能够完成很多文本处理和数据统计等工作；
@@ -3759,90 +3703,6 @@ crc32
 
 备注：b+数根据层数决定时间复杂度，数据量多的情况下一般4-5层，然后用二分法查找页中的数据，时间复杂度远小于log(n)。
 
-## 扩展
-
-* intl
-* mcrypt
-* memeached
-    - memcache完全在PHP框架内开发的，提供了memcached的接口，memecached扩展是使用了libmemcached库提供的api与memcached服务端进行交互。 libmemcached 是 memcache 的 C 客户端，它具有低内存，线程安全等优点
-    - memcache提供了面向过程及面向对象的接口，memached只支持面向对象的接口。 memcached 实现了更多的 memcached 协议。
-    - memcached 支持 Binary Protocol，而 memcache 不支持，意味着 memcached 会有更高的性能。不过，还需要注意的是，memcached 目前还不支持长连接。
-* mongodb
-* Opcache:通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能， 存储预编译字节码的好处就是省去了每次加载和解析 PHP 脚本的开销，但是对于I/O开销如读写磁盘文件、读写数据库等并无影响。
-    - 字节码(Byte Code)：一种包含执行程序比机器码更抽象的中间码，由一序列 op代码/数据对组成的二进制文件。 比如Java源码经编译后生成的字节码在运行时通过JVM(JVM针对不同平台有不同版本，Java程序在JVM中运行而称 为解释性语言Interpreted)再做一次转换生成机器码，才能够跨平台运行；C#也类似，EXE文件的执行依赖.NET Framework；HHVM(HipHop Virtual Machine，Facebook开源的PHP虚拟机)采用了JIT(Just In Time Just Compiling，即时编译)技术，在运行时编译字节码为机器码，让他们的PHP性能测试提升了一个数量级。 唯有C/C++编译生成的二进制文件可直接运行。
-    - 机器码(Machine Code)：也被称为原生码(Native Code)，用二进制代码表示的计算机能直接识别和执行的一种机器指令的集合，它是计算机硬件结构赋予的操作功能。
-* pdo-pgsql
-* phalcon
-* [redis](http://pecl.php.net/package/redis)
-* [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis
-* sphinx
-* swoole
-* [xdebug](https://xdebug.org/)
-    - profiler
-* apc:op缓存
-* [defuse/php-encryption](https://github.com/defuse/php-encryption):Simple Encryption in PHP.
-* [jedisct1/libsodium](https://github.com/jedisct1/libsodium):A modern, portable, easy to use crypto library https://libsodium.org
-* PHPDoc
-* [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)：PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards. http://pear.php.net/package/PHP_CodeS…
-* [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)：PHP Code Beautifier and Fixer(phpcbf) PHP代码规范与质量检查工具
-
-```sh
-brew tap homebrew/homebrew-php
-brew install php71 --with-pear
-
-brew install mcrypt
-brew install php71-xdebug
-
-yum install php-mcrypt|php5-mcrypt
-apt-get install php-mcrypt|php5-mcrypt
-pecl install mcrypt-snapshot|mcrypt-1.0.1
-brew install php71-mcrypt
-
-# PHP_CodeSniffer
-curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-php phpcs.phar -h
-curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
-php phpcbf.phar -h
-
-pear install PHP_CodeSniffer
-
-composer global require "squizlabs/php_codesniffer=*"
-
-phpcs /path/to/code/myfile.php
-phpcs /path/to/code
-
-/Users/henry/.composer/vendor/bin/phpcs # phpstrom 开启
-
-# vscode
-phpcs.enable true
-
-# php-cs-fixer
-wget http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -O php-cs-fixer
-wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.10.0/php-cs-fixer.phar -O php-cs-fixer
-curl -L http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -o php-cs-fixer
-
-sudo chmod a+x php-cs-fixer
-sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
-
-composer global require friendsofphp/php-cs-fixer
-export PATH="$PATH:$HOME/.composer/vendor/bin"
-brew install homebrew/php/php-cs-fixer
-
-composer global require phpmd/phpmd
-
-sudo php-cs-fixer self-update
-brew upgrade php-cs-fixer
-
-php php-cs-fixer.phar fix /path/to/dir
-php php-cs-fixer.phar fix /path/to/file
-
-phpcs --config-show
-phpcs --config-set
-
-pecl channel-update pecl.php.net
-pecl install xdebug
-```
-
 ## 大数据
 
 * 查询上运行EXPLAIN，看看是不是缺少什么索引。曾经做过一个查询，通过增加了一个索引后效率提高了4个数量级
@@ -3860,12 +3720,12 @@ pecl install xdebug
 * 《C Primer Plus》和《Unix环境高级编程》。这地方有一个巨大的错觉，就是读完一遍《C Primer Plus》后就觉得自己会CLang了，有这种优越感的，请你尝试用CLang做个什么东西出来？然后你发现似乎真的什么也做不了，这会儿就可以步入到《Unix环境高级编程》的节奏
 * 一切基于基础之上的上层应用都是海市蜃楼，犹如过眼云烟。不变的永远是基于事件监听的异步非阻塞IO
 * 技术 
-    - 不懂什么是分布式配置中心
-    - 不懂服务熔断、限流、降级
-    - 拒绝使用异步框架
-    - 拒绝使用分布式KV数据库
-    - 拒绝微服务架构
-    - 拒绝Docker发布代码
+    - 分布式配置中心
+    - 服务熔断、限流、降级
+    - 异步框架
+    - 分布式KV数据库
+    - 微服务架构
+    - Docker发布代码
 
 ## 安全
 
@@ -3935,17 +3795,6 @@ exit;
 
 >  Warning: "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"?
 
-## 环境平台
-
-* [XAMPP](https://www.apachefriends.org/index.html)
-* [wamp](link)
-* [mamp](https://www.mamp.info)
-    - http://localhost:8888/MAMP/
-    - /Applications/MAMP/htdocs
-    - MySQL port：8889
-* Wnmp:Version of nginx for Windows uses the native Win32 API (not the Cygwin emulation layer). Only the select() connection processing method is currently used, so high performance and scalability should not be expected. 
-    - `tasklist /fi "imagename eq nginx.exe" # 查看进程，没有查看error.log`
-
 ## 面试
 
 * [Web 开发进阶指南](https://laravel-china.org/articles/9059/web-development-guide)
@@ -3955,12 +3804,109 @@ exit;
 * [金题](https://www.jintix.com/)
 * [colinlet/PHP-Interview-QA](https://github.com/colinlet/PHP-Interview-QA):PHP面试问答
 
+## 扩展
+
+* intl
+* mcrypt
+* memeached
+    - memcache完全在PHP框架内开发的，提供了memcached的接口，memecached扩展是使用了libmemcached库提供的api与memcached服务端进行交互。 libmemcached 是 memcache 的 C 客户端，它具有低内存，线程安全等优点
+    - memcache提供了面向过程及面向对象的接口，memached只支持面向对象的接口。 memcached 实现了更多的 memcached 协议。
+    - memcached 支持 Binary Protocol，而 memcache 不支持，意味着 memcached 会有更高的性能。不过，还需要注意的是，memcached 目前还不支持长连接。
+* mongodb
+* Opcache:通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能， 存储预编译字节码的好处就是省去了每次加载和解析 PHP 脚本的开销，但是对于I/O开销如读写磁盘文件、读写数据库等并无影响。
+    - 字节码(Byte Code)：一种包含执行程序比机器码更抽象的中间码，由一序列 op代码/数据对组成的二进制文件。 比如Java源码经编译后生成的字节码在运行时通过JVM(JVM针对不同平台有不同版本，Java程序在JVM中运行而称 为解释性语言Interpreted)再做一次转换生成机器码，才能够跨平台运行；C#也类似，EXE文件的执行依赖.NET Framework；HHVM(HipHop Virtual Machine，Facebook开源的PHP虚拟机)采用了JIT(Just In Time Just Compiling，即时编译)技术，在运行时编译字节码为机器码，让他们的PHP性能测试提升了一个数量级。 唯有C/C++编译生成的二进制文件可直接运行。
+    - 机器码(Machine Code)：也被称为原生码(Native Code)，用二进制代码表示的计算机能直接识别和执行的一种机器指令的集合，它是计算机硬件结构赋予的操作功能。
+* pdo-pgsql
+* phalcon
+* [redis](http://pecl.php.net/package/redis)
+    - [predis](https://github.com/nrk/predis/):Flexible and feature-complete Redis client for PHP and HHVM https://github.com/nrk/predis/wiki 纯 php 实现的，通过 socket 与 redis 服务器通信，使用时只需要通过 composer 加载依赖，无需额外安装扩展
+    - [phpredis/phpredis](https://github.com/phpredis/phpredis): A PHP extension for Redis 是基于 c 语言开发的 PHP 扩展，速度快、内存小.需要安装对应的扩展才能使用.功能上两者差不多，性能上略胜一筹，但由于与 redis 通信的主要瓶颈还是在网络 IO 上
+* sphinx
+* swoole
+* [xdebug](https://xdebug.org/)
+    - profiler
+* apc:op缓存
+* [defuse/php-encryption](https://github.com/defuse/php-encryption):Simple Encryption in PHP.
+* [jedisct1/libsodium](https://github.com/jedisct1/libsodium):A modern, portable, easy to use crypto library https://libsodium.org
+* PHPDoc
+* [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)：PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards. http://pear.php.net/package/PHP_CodeS…
+* [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)：PHP Code Beautifier and Fixer(phpcbf) PHP代码规范与质量检查工具
+
+```sh
+brew tap homebrew/homebrew-php
+brew install php71 --with-pear
+
+brew install mcrypt
+brew install php71-xdebug
+
+yum install php-mcrypt|php5-mcrypt
+apt-get install php-mcrypt|php5-mcrypt
+pecl install mcrypt-snapshot|mcrypt-1.0.1
+brew install php71-mcrypt
+
+# PHP_CodeSniffer
+curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+php phpcs.phar -h
+curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
+php phpcbf.phar -h
+
+pear install PHP_CodeSniffer
+
+composer global require "squizlabs/php_codesniffer=*"
+
+phpcs /path/to/code/myfile.php
+phpcs /path/to/code
+
+/Users/henry/.composer/vendor/bin/phpcs # phpstrom 开启
+
+# vscode
+phpcs.enable true
+
+# php-cs-fixer
+wget http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -O php-cs-fixer
+wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.10.0/php-cs-fixer.phar -O php-cs-fixer
+curl -L http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -o php-cs-fixer
+
+sudo chmod a+x php-cs-fixer
+sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
+
+composer global require friendsofphp/php-cs-fixer
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+brew install homebrew/php/php-cs-fixer
+
+composer global require phpmd/phpmd
+
+sudo php-cs-fixer self-update
+brew upgrade php-cs-fixer
+
+php php-cs-fixer.phar fix /path/to/dir
+php php-cs-fixer.phar fix /path/to/file
+
+phpcs --config-show
+phpcs --config-set
+
+pecl channel-update pecl.php.net
+pecl install xdebug
+```
+
 ## 工具
 
 * [https://phar.io](https://phar.io):The PHAR Installation and Verification Environment (PHIVE)
 * [sebastianfeldmann/phpbu](https://github.com/sebastianfeldmann/phpbu):PHP Backup Utility - Creates and encrypts database and file backups, syncs your backups to other servers or cloud services and assists you monitor your backup process https://phpbu.de
 * [laradock/laradock](https://github.com/Laradock/laradock):The most popular full PHP development environment on Docker. http://laradock.io
+* [swisnl/php7-upgrade-tools](https://github.com/swisnl/php7-upgrade-tools):A set of tools for upgrading applications to PHP 7
+* [rectorphp/rector](https://github.com/rectorphp/rector):Instant Upgrades for PHP Applications https://www.tomasvotruba.cz/blog/2018/02/19/rector-part-1-what-and-how/
+* 环境平台
+    - [XAMPP](https://www.apachefriends.org/index.html)
+    - [wamp](link)
+    - [mamp](https://www.mamp.info)
+        + http://localhost:8888/MAMP/
+        + /Applications/MAMP/htdocs
+        + MySQL port：8889
+    - Wnmp:Version of nginx for Windows uses the native Win32 API (not the Cygwin emulation layer). Only the select() connection processing method is currently used, so high performance and scalability should not be expected. 
+        + `tasklist /fi "imagename eq nginx.exe" # 查看进程，没有查看error.log`
 
 ## 参考
 
 * [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
+* [tpunt/PHP7-Reference](tpunt/PHP7-Reference):An overview of the features, changes, and backward compatibility breakages in PHP 7

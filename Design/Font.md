@@ -4,7 +4,7 @@
 * [tonsky/FiraCode](https://github.com/tonsky/FiraCode):Monospaced font with programming ligatures
 * [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
 * [rsms/inter](https://github.com/rsms/inter):The Inter UI font family http://rsms.me/inter/
-* [ ryanoasis / nerd-fonts ](https://github.com/ryanoasis/nerd-fonts#option-3-install-script):Iconic font aggregator, collection, & patcher. 3,600+ icons, 50+ patched fonts: Hack, Source Code Pro, more. Glyph collections: Font Awesome, Material Design Icons, Octicons, & more https://NerdFonts.com
+* [ryanoasis/nerd-fonts ](https://github.com/ryanoasis/nerd-fonts#option-3-install-script):Iconic font aggregator, collection, & patcher. 3,600+ icons, 50+ patched fonts: Hack, Source Code Pro, more. Glyph collections: Font Awesome, Material Design Icons, Octicons, & more https://NerdFonts.com
 
 ```
 sudo apt install fonts-firacode
