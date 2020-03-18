@@ -194,6 +194,7 @@ source ~/.zshrc
 
 ## 问题
 
+```
 > brew postinstall node  brew postinstall php@7.1 安装权限问题
 
 cd /usr/local && sudo chown -R $(whoami) bin etc include lib sbin share var Frameworks
@@ -201,6 +202,7 @@ cd /usr/local && sudo chown -R $(whoami) bin etc include lib sbin share var Fram
 > Error: undefined method `core_tap?' for nil:NilClass
 
 brew update --force
+```
 
 ## 软件
 

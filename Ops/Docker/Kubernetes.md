@@ -380,8 +380,6 @@ for imageName in ${images[@]};do
 done
 ```
 
-
-
 ```
 kubectl get nodes
 kubectl get pods -n kube-system | grep coredns
@@ -424,6 +422,10 @@ echo “export KUBECONFIG=/etc/kubernetes/admin.conf” >> ~/.bash_profile
 
 source ~/.bash_profile
 ```
+
+## 图书
+
+* 《[Kubernetes权威指南 : 从Docker到Kubernetes实践全接触（第2版）](https://book.douban.com/subject/26902153/)》
 
 ## 实例
 

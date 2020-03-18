@@ -92,6 +92,11 @@ systemctl status|start|stop|restart mysql.service
 docker pull mysql
 docker run --name master -p 3306:3307 -e MYSQL_ROOT_PASSWORD=root -d mysql
 
+docker run -d --name mysql8 -p 3306:3306 --restart=always -v /Users/henry/Container/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=user_center mysql --sql_mode=NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+docker exec -it mysql8 bash  #进入doccker
+mysql -uroot -p123456 #连接mysql
+alter user 'root'@'%' identified with mysql_native_password by '123456'; #更改身份验证插件
+
 # Windows,管理员权限执行
 net start|stop mysql # win平台
 

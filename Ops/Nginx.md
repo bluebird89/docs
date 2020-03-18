@@ -334,7 +334,11 @@ sudo kill -s QUIT `cat /run/nginx.pid.oldbin` # Follow it by killing the old mas
         + /dev/poll：使用于Solaris 7 11/99+，HP/UX 11.22+ (eventport)，IRIX 6.5.15+ 和 Tru64 UNIX 5.1A+。
         + Eventport：使用于Solaris 10。 为了防止出现内核崩溃的问题， 有必要安装安全补丁
 * HTTP 块：代理、缓存和日志定义等绝大多数功能和第三方模块的配置都在这里
-    - sendfile on 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，减少用户空间到内核空间的上下文切换。对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。
+    - sendfile on 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，减少用户空间到内核空间的上下文切换。对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载
+    - 当使用sendfile函数时，TCP_NOPUSH才起作用，因为在sendfile时，Nginx会要求发送某些信息来预先解释数据，这些信息其实就是报头内容，典型情况下报头很小，而且套接字上设置了TCP_NODELAY。有报头的包将被立即传输，在某些情况下（取决于内部的包计数器），因为这个包成功地被对方收到后需要请求对方确认。这样，大量数据的传输就会被推迟而且产生了不必要的网络流量交换。而通过设置TCP_NOPUSH=on，表示将所有HTTP的header一次性发出去
+    - TCP_NODELAY只有在配置长连接时才起作用，因为长连接可能引起小包的阻塞，配置TCP_NODELAY可以避免该阻塞
+    - Use the tcp_nopush directive together with the sendfile on;directive. This enables NGINX to send HTTP response headers in one packet right after the chunk of data has been obtained by sendfile().
+    - 在 nginx 中，tcp_nopush 配置和 tcp_nodelay “互斥”。
     - 定义MIMI-Type
     - keepalive_timeout 65 : 长连接超时时间，单位是秒 长连接请求大量小文件的时候，可以减少重建连接的开销，但假如有大文件上传，65s内没上传完成会导致失败。如果设置时间过长，用户又多，长时间保持连接会占用大量资源。
     - send_timeout : 用于指定响应客户端的超时时间。这个超时仅限于两个连接活动之间的时间，如果超过这个时间，客户端没有任何活动，Nginx将会关闭连接。
@@ -342,6 +346,7 @@ sudo kill -s QUIT `cat /run/nginx.pid.oldbin` # Follow it by killing the old mas
     - client_max_body_size 10m 允许客户端请求的最大单文件字节数。如果有上传较大文件，请设置它的限制值
     - client_body_buffer_size 128k  缓冲区代理缓冲用户端请求的最大字节数
     - 允许sendfile方式传输文件
+    - 增大TCP的listen queue：sudo sysctl -w net.core.somaxconn=4096或者永久修改/etc/sysctl.conf：net.core.somaxconn = 4096，然后修改Nginx：`listen 80 backlog=4096;`
     - 连接超时时间
     - 单连接请求数上限
     - windows调用php-cgi启动服务
@@ -385,6 +390,7 @@ sudo kill -s QUIT `cat /run/nginx.pid.oldbin` # Follow it by killing the old mas
     - autoindex on;  允许列出整个目录
     - autoindex_exact_size off; 默认为on，显示出文件的确切大小，单位是bytes。改为off后，显示出文件的大概大小，单位是kB或者MB或者GB
     - autoindex_localtime on;默认为off，显示的文件时间为GMT时间。改为on后，显示的文件时间为文件的服务器时间
+* add_header并不享受Nginx的继承机制，意味着如果子context中有add_header，那么它将覆盖所有的父context中的add_header配置。比如，在http中配置了3个add_header，然后在server中配置了1个add_header，那么server中的add_header会将http中的所有3个add_header给覆盖掉
 
 ```json
 $args # 请求中的参数
@@ -494,7 +500,7 @@ http {
     #默认编码
     charset utf-8;
     # Stop Displaying Server Version in Configuration
-    server_tokens off;
+    server_tokens off; # 去掉Nginx版本号
     #服务器名字的hash表大小
     server_names_hash_bucket_size 128;
 
@@ -556,7 +562,7 @@ http {
     gzip_buffers 4 16k;    #压缩缓冲区
     gzip_http_version 1.0; #压缩版本（默认1.1，前端如果是squid2.5请使用1.0） 设置压缩级别，范围1-9,9压缩级别最高，也最耗费CPU资源
     gzip_comp_level 2;     #压缩等级
-    gzip_types text/plain application/x-javascript text/css application/xml;    #压缩类型，默认就已经包含textml，所以下面就不用再写了，写上去也不会有问题，但是会有一个warn。
+    gzip_types text/plain application/x-javascript text/css application/xml;    # 压缩类型，默认就已经包含textml，所以下面就不用再写了，写上去也不会有问题，但是会有一个warn。
     gzip_vary on;
 
     # Let NGINX get the real client IP for its access logs
@@ -678,6 +684,8 @@ http {
             * last和break标记的区别在于，last标记在本条rewrite规则执行完后，会对其所在的server { … } 标签重新发起请求，而break标记则在本条规则匹配完成后，停止匹配，不再做后续的匹配。另外有些时候必须使用last，比如在使用alias指令时，而 使用proxy_pass指令时则必须使用break。
             * rewrite 规则优先级要高于location，在nginx配置文件中，nginx会先用rewrite来处理url，最后再用处理后的url匹配location
 * alias指令来更改location接收到的URI请求路径
+    - root不做替换，而是直接将location添加到root的末尾
+    - alias会做替换，即将location的值替换成root的值
 * 命名匹配：使用@比绑定一个模式，类似变量替换的用法
 * 缓存
     - 浏览器缓存，静态资源缓存用：`expires 7d;`
@@ -1476,9 +1484,9 @@ server
     * 采用Nginx的on-the-fly配置
         - curl http://localhost/upstream_conf?upstream=backend
         - curl http://localhost/upstream_conf?upstream=backend\&id=1\&drain=1
-    * 健康监测:涉及到两个参数，max_fails=1 fail_timeout=10s;意味着只要Nginx向backend发送一个请求失败或者没有收到一个响应，就认为该backend在接下来的10s是不可用的状态。
+    * 健康监测:涉及到两个参数，max_fails=1 fail_timeout=10s;意味着只要Nginx向backend发送一个请求失败或者没有收到一个响应，就认为该backend在接下来的10s是不可用的状态
 + 基于DNS的负载均衡缺陷：DNS不会检查主机和IP地址的可访问性，所以分配给客户端的IP不确保是可用的(Google 404)；DNS的解析结果会在客户端、多个中间DNS服务器不断的缓存，所以backend的分配不会那么的理想。
-    * backend group中的主机可以配置成域名的形式，如果在域名的后面添加resolve参数，那么Nginx会周期性的解析这个域名，当域名解析的结果发生变化的时候会自动生效而不用重启。
+    * backend group中的主机可以配置成域名的形式，如果在域名的后面添加resolve参数，那么Nginx会周期性的解析这个域名，当域名解析的结果发生变化的时候会自动生效而不用重启
 * TCP/UDP流量的负载均衡
     - HTTP和HTTPS的负载均衡叫做七层负载均衡:均衡器可以根据HTTP/HTTPS协议的头部(User-Agent、Language等)、响应码甚至是响应内容做额外的规则，达到特定条件特定目的的backend转发的需求。
     - TCP和UDP协议的负载均衡叫做四层负载均衡:适用于LDAP/MySQL/RTMP和DNS/syslog/RADIUS各种应用场景。这类情况的负载均衡使用stream来配置，Nginx编译的时候需要支持–with-stream选项
@@ -1486,7 +1494,7 @@ server
 * 其他特性
     - slow_start=30s：防止新添加/恢复的主机被突然增加的请求所压垮，通过这个参数可以让该主机的weight从0开始慢慢增加到设定值，让其负载有一个缓慢增加的过程。
     - max_conns=30：可以设置backend的最大连接数目，当超过这个数目的时候会被放到queue队列中，同时队列的大小和超时参数也可以设置，当队列中的请求数大于设定值，或者超过了timeout但是backend还不能处理请求，则客户端将会收到一个错误返回。通常来说这还是一个比较重要的参数，因为Nginx作为反向代理的时候，通常就是用于抗住并发量的，如果给backend过多的并发请求，很可能会占用后端过多的资源(比如线程、进程非事件驱动)，最终反而会影响backend的处理能力。
-* #client_body_in_file_only设置为On 可以讲client post过来的数据记录到文件中用来做debug
+* client_body_in_file_only设置为On 可以讲client post过来的数据记录到文件中用来做debug
 * client_body_temp_path设置记录文件的目录 可以设置最多3层目录
 
 ```
@@ -2036,8 +2044,12 @@ EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"]
 
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY /some/content /usr/share/nginx/html
+
 docker pull nginx
 docker run -p 80:80 --name mynginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/wwwlogs  -d nginx
+docker run -p 8081:80 -v /some/content:/usr/share/nginx/html:ro -d nginx
 
 docker build -t nginx .
 docker images nginx

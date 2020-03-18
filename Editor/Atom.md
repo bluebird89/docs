@@ -1,6 +1,6 @@
-## Atom
+## [Atom](https://github.com/atom/atom)
 
-GitHub推出的一款编辑器,现代, 易用, 可定制,The hackable text editor,只关注最重要的定制，不要在无关紧要的细节上浪费生命。
+:atom: The hackable text editor https://atom.io GitHub推出的一款编辑器,现代, 易用, 可定制,只关注最重要的定制，不要在无关紧要的细节上浪费生命。
 
 ## 安装
 
@@ -16,8 +16,8 @@ atom
 
 ## 插件安装
 
-- 命令面板：Ctrl + Shift + P
-- 设置面板:Edit->Preferences 命令面板 Settings View:Open ctrl + ,
+* 命令面板：Ctrl + Shift + P
+* 设置面板:Edit->Preferences 命令面板 Settings View:Open ctrl + ,
 
 ## 初始化配置
 
@@ -83,9 +83,7 @@ prefix 不要用缩写
 
 ## 插件
 
-### apm
-
-`apm` is Atom's package manager, based on Node's `npm` tool.
+* `apm` is Atom's package manager, based on Node's `npm` tool.
 
 Command                    | Description
 -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -294,8 +292,6 @@ sudo pip install --upgrade autopep8
 ## 参考
 
 * [Atom Flight Manual](http://flight-manual.atom.io/)
-* [官网](https://ide.atom.io/)
 * [awesome-atom](https://github.com/mehcode/awesome-atom)
-
-- 代码片段:~/.atom/snippets.cson <http://blog.csdn.net/u010494080/article/details/50993771>
-- git <http://blog.csdn.net/u010494080/article/details/51229211>
+* 代码片段:~/.atom/snippets.cson <http://blog.csdn.net/u010494080/article/details/50993771>
+* git <http://blog.csdn.net/u010494080/article/details/51229211>

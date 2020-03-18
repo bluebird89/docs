@@ -30,3 +30,7 @@ The Kubernetes Package Manager https://helm.sh
     - 通过chart及其配置构建一次发布
     - 安装chart到Kubernetes集群，并跟踪随后的发布
     - 通过与Kubernetes交互升级或卸载chart
+
+## 参考
+
+* [](https://hub.kubeapps.com/)

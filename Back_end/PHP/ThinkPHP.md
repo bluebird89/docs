@@ -11,6 +11,7 @@ PHP Framework ThinkPHP5——为API开发而设计的高性能PHP框架（基于
     - 行为（Behavior） ：行为在新版ThinkPHP的架构里面起着举足轻重的作用，在系统核心之上，设置了很多标签扩展位，而每个标签位置可以依次执行各自的独立行为。行为扩展就因此而诞生了，而且很多系统功能也是通过内置的行为扩展完成的，所有行为扩展都是可替换和增加的，由此形成了底层框架可组装的基础。<br><b>
     - 驱动（ Driver ）：数据库驱动、缓存驱动、标签库驱动和模板引擎驱动，以及外置的类扩展。
 * 5.1.37
+* 6
 
 ## 功能
 
@@ -28,6 +29,7 @@ php public/index.php index/Demon/start # 命令行运行
 composer create-project topthink/think tp5
 
 composer require topthink/think-swoole
+php think run
 ```
 
 ## web配置
