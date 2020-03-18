@@ -28,6 +28,11 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
 ![Docker的总体架构图](../_static/architect_docker.jpg)
 ![Docker vs VM](../_static/VMvsDocker.jpg)
 
+## 概念
+
+* Docker Engine：整个Docker的核心与基础，平时使用的docker命令，以及提供Docker核心功能的Docker守护进程（Docker Deamon）——包括管理Image、运行Contrainer等
+* Boot2Docker：Docker基于Linux内核特性，因此只能运行于Linux之上，为了能在Mac/Windows系统上运行，有了Boot2Docker。Boot2Docker会先启动一个VirtualBox虚拟机，然后在该虚拟机中运行一个Linux系统，再在Linux中运行Docker
+
 ## 虚拟化进程
 
 * 单应用单物理机
@@ -57,11 +62,6 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
 brew install docker
 brew install boot2docker
 brew cask install docker-toolbox
-
-# docker-machine 远程管理、控制多台主机
-docker-machine start # Start virtual machine for docker
-docker-machine env  # It's helps to get environment variables
-eval "$(docker-machine env default)" # Set environment variables
 
 ## centos
 yum install docker
@@ -273,6 +273,16 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
+## [docker/machine](https://github.com/docker/machine) 
+
+Machine management for a container-centric world 创建运行Docker的宿主机的，比如AWS、Azure上的虚拟机，也可以用来在本地创建VirtualBox等虚拟机.直接把Boot2Docker的功能也取代了，于是Boot2Docker成为了历史
+
+```sh
+docker-machine start # Start virtual machine for docker
+docker-machine env  # It's helps to get environment variables
+eval "$(docker-machine env default)" # Set environment variables
+```
+
 ### 核心技术
 
 * 隔离：
@@ -340,9 +350,13 @@ docker image ls --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}"
 
 docker search httpd  # 搜索镜像
 
+docker pull learn/tutorial # 默认 lastest
+docker pull username/repository:tag
 docker pull ubuntu:18.04 # 获取镜像
-docker pull registry.hub.docker.com/ubuntu:18.04 # 等价于上面
-docker pull learn/tutorial
+docker pull username/repository:tag # 从Docker Hub中获取某个用户下的image
+docker pull registry.hub.docker.com/ubuntu:18.04 
+docker pull registry-host:5000/respository:tag # 私有registry中获取image
+docker pull gcr.azk8s.cn/google_containers/hyperkube-amd64:v1.9.2
 
 # 镜像、容器、数据卷所占用的空间
 docker system df
@@ -353,6 +367,7 @@ docker image prune
 docker commit -m "Added json gem" -a "Docker Newbee" 0b2616b0e5a8 ouruser/sinatra:v2
 
 docker rmi [IMAGE ID|name # Remove one or more images 镜像的image ID或者REPOSITORY名
+docker image rm image_id # 新方式
 # 删除镜像之前要先用 docker rm 删掉依赖于这个镜像的所有容器.
 docker rmi $(docker images -q -f "dangling=true")
 docker save centos > /data/iso/centos.tar.gz # 导出
@@ -361,21 +376,27 @@ docker save -o wdx-local-whale.tar wdxtub/wdx-whale
 # 删除所有镜像，小心
 docker rmi $(docker images -q)
 
+docker image prune -a # 删除所有没用到的image
 docker history # 显示生成一个镜像的历史命令
 
 docker load < /data/iso/centos.tar.gz # 导入
 docker load --input wdx-local-whale.tar
 
 docker build [DOCKERFILE PATH] # Build an image from a Dockerfile
-#  Build an image tagged my-org/my-image where the Dockerfile can be found at /tmp/Dockerfile.
-docker build -t my-org:my-image -f /tmp/Dockerfile
+docker build -t repository:tag . #  从Dockerfile构建image
+docker build -t my-org:my-image -f /tmp/Dockerfile # Build an image tagged my-org/my-image where the Dockerfile can be found at /tmp/Dockerfile.
 
-docker pull gcr.azk8s.cn/google_containers/hyperkube-amd64:v1.9.2
+docker tag image-id|image-name mynewtag # 会默认使用image-name:latest所指向的image
+docker tag image-name:tag newname:newtag
+docker tag f2a91732366c myregistry:5000/username/repository:tag # 私有Registry打tag
+
+docker push username/repository:tag 
+docker push registry-host:5000/username/repository
 ```
 
 ## 容器(Container)
 
-* 容器是镜像创建的实例，类似对象Object,在启动的时候创建一层可写层作为最上层（因为镜像是只读的）
+* 容器是镜像创建的实例，类似对象Object,在启动的时候创建一层可写层作为最上层（因为镜像是只读的）.使用Copy-On-Write的方式完成对文件系统的修改， 这样对文件系统的修改将会作为一个新的层添加到既有层之上，而不是直接修改既有的层
 * 连接：会创建一个父子关系，其中父容器可以看到子容器的信息
 * run 启动一个容器时，在后台 Docker 为容器创建了一个独立的名字空间和控制组集合
   - 名字空间提供了最基础也是最直接的隔离，在容器中运行的进程不会被运行在主机上的进程和其它容器发现和作用。
@@ -394,7 +415,7 @@ docker pull gcr.azk8s.cn/google_containers/hyperkube-amd64:v1.9.2
   - –name:给容器定义一个名称，名称是唯一的。如果已经命名了一个叫 web 的容器，当你要再次使用 web 这个名称的时候，需要先用docker rm 来删除之前创建的同名容器
   - -i:允许对容器内的标准输入 (STDIN) 进行交互
   - -t:让Docker分配一个伪终端并绑定到容器的标准输入上
-  - -d 参数启动后会返回一个唯一的 id，也可以通过 docker ps 命令来查看容器信息
+  - -d 后台运行container 参数启动后会返回一个唯一的 id，也可以通过 docker ps 命令来查看容器信息
   - /bin/bash:在容器里执行/bin/bash命令
   - exit 退出这个 ubuntu 容器。退出之后这个容器依然存在，可以用 docker ps -l来看
   - --rm 容器在终止后会立刻删除
@@ -423,6 +444,7 @@ docker port adoring_stonebraker 5002
 
 # 容器
 docker ps # 列出正在运行的容器(containers)
+docker container ls 
 docker ps -a # 列出所有的容器
 docker-compose ps # 查看当前项目容器
 docker ps -l   # 查看最后一次创建的容器
@@ -432,6 +454,7 @@ docker create ubuntu:14.04 #  创建容器
 docker create --name mymysql -v /data/mysql-data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root
 
 docker run -i -t ubuntu:15.10 /bin/bash # 在新容器内建立一个伪终端或终端
+docker run --rm alpine # 退出container之后，自动删除container
 
 docker run -d -P training/webapp python app.py   #  -P :是容器内部端口随机映射到主机的高端口。
 docker run -d -p 127.0.0.1:5001:5002  --name runoob training/webapp python app.py   # -p : 是容器内部端口绑定到指定的主机端口。  使用--name标识来命名容器
@@ -443,9 +466,13 @@ docker run --name some-nginx -d -p 8080:80 nginx # --name: 生成的容器名字
 docker create -v /dbdata --name dbstore training/postgres /bin/true
 docker run -d --volumes-from dbstore --name db1 training/postgres
 docker run -d --add-host=SERVER_NAME:127.0.0.1 bat/spark
-docker run -d -v /data:/data bat/spark
-
+docker run -v /path-on-host:/path-in-container alpine # 文件夹映射
+docker run -e MY_ENV=some_value alpine # 指定环境变量
 docker run lean/ping ping www.google.com
+
+docker run -it -w /home alpine sh # 设置container的工作路径
+
+docker run -it --link source-container:alias alpine sh # link两个container
 
 # 查看日志
 docker logs -f $CONTAINER_ID  | docker attach $CONTAINER_ID  # -f:动态输出
@@ -461,15 +488,19 @@ docker exec [CONTAINER ID] touch /tmp/exec_works # Execute a command inside a ru
 # 获取环境变量
 docker exec container_id env
 docker exec  -it  eeed0831fd62 /bin/bash # 进入容器
-
+docker exec -it 97aae54c2fac sh # 登录到运行的container中
 docker inspect name  ||  docker ps -l(ast)/-a(ll)     # 查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息
 # 查看容器的名字
 docker inspect -f "{{ .Name }}" aed84ee21bde
 docker start name # 一个已经终止的容器启动运行
+docker container start 97aae54c2fac # 重新运行已停止的container
 
 # login
+docker login # 登录到Docker Hub
 docker login docker.io
+docker login host:port # 登录到私有Docker Registry 
 docker commit 698 learn/ping # 版本号 alias 提交，获取新的版本号
+
 docker push learn/ping
 docker port 7a38a1ad55c6|determined_swanson # 查看指定 （ID或者名字）容器的某个确定端口映射到宿主机的端口号
 
@@ -480,6 +511,7 @@ docker attach # 连接(进入)到一个正在运行的容器
 docker wait # 阻塞到一个容器，直到容器停止运行
 
 docker rm -f name # 移除容器
+docker container rm container_id # 新方式
 docker rm $(docker ps -a -q) # Delete all containers
 docker rmi $(docker images | grep '^<none>' | awk '{print $3}') # Delete all untagged containers
 docker rmi $(docker images | grep '^<none>' | awk '{print $3}') # Delete all untagged containers
@@ -491,6 +523,9 @@ docker kill $(docker ps -q) #Kill all running containers
 docker ps -a | grep 'weeks ago' | awk '{print $1}' | xargs docker rm
 # 删除已经停止的容器
 docker rm `docker ps -a -q`
+docker system prune -a # 清理整个docker的无用数据
+docker system prune --volumes # 会清除volume，如果要同时清除无用的volume
+docker container prune  # 删除所有停止掉的container
 
 docker events # 得到docker服务器的实时的事件
 docker port # 显示容器的端口映射
@@ -591,28 +626,44 @@ docker run -t -i --rm --link db:db training/webapp /bin/bash
 cat /etc/hosts # 父容器 web 的 hosts 文件
 ```
 
-## 存储卷
+## 持久化
 
-* 数据卷是一个可供一个或多个容器使用的特殊目录，它绕过 UFS，可以提供很多有用的特性：
-  - 数据卷可以在容器之间共享和重用
-  - 对数据卷的修改会立马生效
-  - 对数据卷的更新，不会影响镜像
-  - 卷会一直存在，直到没有容器使用
-* 数据卷的使用，类似于 Linux 下对目录或文件进行 mount
-* 有一些持续更新的数据需要在容器之间共享，最好创建数据卷容器
-  - 数据卷容器，其实就是一个正常的容器，专门用来提供数据卷供其它容器挂载的
-  - 在其他容器中使用 --volumes-from 来挂载 dbdata 容器中的数据卷
-  - 用多个 --volumes-from 参数来从多个容器挂载多个数据卷
-  - 可以从其他已经挂载了数据卷的容器来挂载数据卷
-  - 使用 --volumes-from 参数所挂载数据卷的容器自己并不需要保持在运行状态
-  - 如果删除了挂载的容器（包括 dbdata、db1 和 db2），数据卷并不会被自动删除。如果要删除一个数据卷，必须在删除最后一个还挂载着它的容器时使用 docker rm -v 命令来指定同时删除关联的容器。
-  - 备份：使用 --volumes-from 标记来创建一个加载 dbdata 容器卷的容器，并从本地主机挂载当前到容器的 /backup 目录
-  - 恢复
-    + 创建一个带有数据卷的容器 dbdata2
-    + 创建另一个容器，挂载 dbdata2 的容器，并使用 untar 解压备份文件到挂载的容器卷中
-* 存储卷类型及功能
-* 存储卷应用
-* 存储卷共享
+* bind mount:将host机器的目录mount到container中
+  - host机器的目录路径必须为全路径(准确的说需要以/或~/开始的路径)，不然docker会将其当做volume而不是volume处理
+  - 如果host机器上的目录不存在，docker会自动创建该目录
+  - 如果container中的目录不存在，docker会自动创建该目录
+  - 如果container中的目录已经有内容，那么docker会使用host上的目录将其覆盖掉
+* 存储卷:绕过container的文件系统，直接将数据写到host机器上，只是volume是被docker管理的，docker下所有的volume都在host机器上的指定目录下/var/lib/docker/volumes
+  - 数据卷是一个可供一个或多个容器使用的特殊目录，绕过 UFS，可以提供很多有用的特性：
+    + 数据卷可以在容器之间共享和重用
+    + 对数据卷的修改会立马生效
+    + 对数据卷的更新，不会影响镜像
+    + 卷会一直存在，直到没有容器使用
+  - 规则
+    + 如果volume是空的而container中的目录有内容，那么docker会将container目录中的内容拷贝到volume中
+    + 如果volume中已经有内容，则会将container中的目录覆盖
+  - 数据卷的使用，类似于 Linux 下对目录或文件进行 mount
+  - 有一些持续更新的数据需要在容器之间共享，最好创建数据卷容器
+    + 数据卷容器，其实就是一个正常的容器，专门用来提供数据卷供其它容器挂载的
+    + 在其他容器中使用 --volumes-from 来挂载 dbdata 容器中的数据卷
+    + 用多个 --volumes-from 参数来从多个容器挂载多个数据卷
+    + 可以从其他已经挂载了数据卷的容器来挂载数据卷
+    + 使用 --volumes-from 参数所挂载数据卷的容器自己并不需要保持在运行状态
+    + 如果删除了挂载的容器（包括 dbdata、db1 和 db2），数据卷并不会被自动删除。如果要删除一个数据卷，必须在删除最后一个还挂载着它的容器时使用 docker rm -v 命令来指定同时删除关联的容器。
+    + 备份：使用 --volumes-from 标记来创建一个加载 dbdata 容器卷的容器，并从本地主机挂载当前到容器的 /backup 目录
+    + 恢复
+      * 创建一个带有数据卷的容器 dbdata2
+      * 创建另一个容器，挂载 dbdata2 的容器，并使用 untar 解压备份文件到挂载的容器卷中
+    + 参数
+      * shared  原始mount的次级mount会显示在重复mount中, 且重复mount的次级mount的内容也会在原始mount中显示
+      * slave 与shared mount相似，只是内容单方向可见，重复mount的内容不会在原始mount中显示。
+      * private 次级mount在原始mount和重复mount之间互不可见
+      * rshared 与shared mount一样，只是传播范围扩展至嵌套的重复mount和原始mount
+      * rslave  与slave mount一样,只是传播范围扩展至嵌套的重复mount和原始mount
+      * rprivate  默认值，与private mount一样，即原始mount和重复mount之间都不会传播内容。
+  - 存储卷类型及功能
+  - 存储卷应用
+  - 存储卷共享
 
 ```sh
 # 加载主机的 /src/webapp 目录到容器的 /opt/webapp 目录，ro 只读属性
@@ -627,6 +678,21 @@ docker run --volumes-from dbdata -v $(pwd):/backup ubuntu tar cvf /backup/backup
 # 恢复
 docker run -v /dbdata --name dbdata2 ubuntu /bin/bash
 docker run --volumes-from dbdata2 -v $(pwd):/backup busybox tar xvf
+
+
+docker volume ls # 查看已建立的volume
+docker volume create my-volume-2 # 创建
+docker volume inspect my-volume # 查看
+docker run -it -v my-volume:/mydata alpine sh # 挂载
+docker run -d -it --name devtest --volume "$(pwd)"/target:/app:ro nginx:latest
+docker run -d --name devtest --mount source=myvol,target=/app nginx:latest
+docker run -d -it --name devtest --mount type=bind,source="$(pwd)"/target,target=/app,readonly nginx:latest
+docker run -d -it --name devtest --mount type=bind,source="$(pwd)"/target,target=/app --mount type=bind,source="$(pwd)"/target,target=/app2,readonly,bind-propagation=rslave   nginx:latest
+docker volume rm my-vol # 删除已建立的volume
+
+# 创建一个匿名的volume，并将此volume绑定到container的/foo目录中
+# Dockerfile
+VOLUME /foo
 ```
 
 ## Dockerfile
@@ -638,25 +704,31 @@ docker run --volumes-from dbdata2 -v $(pwd):/backup busybox tar xvf
   - 每一个指令都会在镜像上创建一个新的层
   - 每一个指令的前缀都必须是大写的
   - INSTRUCTION arguments
-  - FROM 指令告诉 Docker 使用哪个镜像作为基础，必须以此开始
-  - MAINTAINER 说明维护人信息
-  - RUN 开头的指令会在创建中运行，比如安装一个软件包
-  - `COPY <src> <dest>` 指令将文件复制进镜像中
+  - FROM 设置基础的image
+  - MAINTAINER 维护人信息
+  - RUN 在构建image的时候运行的命令
+  - `ADD <src> <dest>`: 将本地目录中的文件添加到docker镜像中 `ADD unicorn.rb /app/config/unicorn.rb`  <src> 可以是Dockerfile所在目录的一个相对路径；也可以是一个 URL
+  - `COPY <src> <dest>` 只能拷贝宿主机上的文件复制进镜像中
   - ENV: 添加环境变量  `ENV RAILS_ENV staging`
   - USER daemon：指定运行容器时的用户名或 UID，后续的 RUN 也会使用指定用户
   - VOLUME ["/data"]：创建一个可以从本地主机或其他容器挂载的挂载点，一般用来存放数据库和需要保持的数据等
-  - WORKDIR 指定工作目录
-  - EXPOSE 命令来向外部开放端口
-  - `ADD <src> <dest>`: 将本地目录中的文件添加到docker镜像中 `ADD unicorn.rb /app/config/unicorn.rb`
-    + <src> 可以是Dockerfile所在目录的一个相对路径；也可以是一个 URL
-  - ENTRYPOINT
+  - WORKDIR 声明工作路径
+  - EXPOSE 向外暴露的网络端口
+    + 不使用EXPOSE，那么container中的端口只能通过-p向外发布(但是使用非默认bridge网络的container除外)
+    + 如果使用了EXPOSE，那么可以通过docker run时使用-P将所有EXPOSE的端口映射到宿主机的随机端口
+    + 如果使用了EXPOSE，那么也可以通过-p向外发布
+  - CMD 运行容器时的操作命令,只有一条。如果有多条，只有最后一条执行，如果用户启动容器时候指定了运行的命令，则会覆盖掉 CMD 指定的命令
+    + CMD ["executable","param1","param2"] 使用 exec 执行，推荐方式
+    + CMD command param1 param2 在 /bin/sh 中执行，提供给需要交互的应用
+    + CMD ["param1","param2"] 提供给 ENTRYPOINT 的默认参数
+  - ENTRYPOINT：在启动container的时候运行命令，覆盖CMD
     + ENTRYPOINT ["executable", "param1", "param2"]
     + 启动后执行的命令，并且不可被 docker run 提供的参数覆盖
     + 每个 Dockerfile 中只能有一个 ENTRYPOINT，当指定多个时，只有最后一个起效
-  - CMD 指定运行容器时的操作命令,只有一条，多条，只有最后一条执行，如果用户启动容器时候指定了运行的命令，则会覆盖掉 CMD 指定的命令
-    + CMD ["executable","param1","param2"] 使用 exec 执行，推荐方式
-    + CMD command param1 param2 在 /bin/sh 中执行，提供给需要交互的应用；
-    + CMD ["param1","param2"] 提供给 ENTRYPOINT 的默认参数；
+  - CMD和ENTRYPOINT都有shell模式和exec模式
+    + 在shell模式下，container的主进程通过sh为入口，在sh中再执行CMD/ENTRYPOINT所指定的命令.ENTRYPOINT会覆盖CMD
+    + 在exec模式下，container直接就执行CMD/ENTRYPOINT所指定的命令. CMD所设置的参数会成为ENTRYPOINT的参数
+  - HEALTHCHECK 健康检查：`HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost/ || exit 1`
 * 指令
   - docker build [OPTIONS] PATH | URL
     + The PATH is a directory on your local filesystem. The URL is a Git repository location.
@@ -708,6 +780,42 @@ docker commit -m "Added json gem" -a "Docker Newbee" 0b2616b0e5a8 ouruser/sinatr
 
 # 根据imageid添加|修改标签
 docker tag 860c279d2fec runoob/centos:dev
+```
+
+## Network
+
+* 类型
+  - bridge：多由于独立container之间的通信
+  - host： 直接使用宿主机的网络，端口也使用宿主机的
+  - overlay：当有多个docker主机时，跨主机的container通信
+  - macvlan：每个container都有一个虚拟的MAC地址
+  - none: 禁用网络
+* 默认情况下，分别会建立一个bridge、一个host和一个none的网络.都是使用的这个bridge的网络，可以访问外网和其他container的（需要通过IP地址）
+  - 默认的名为bridge的网络是有很多限制的，可以自行创建bridge类型的网络。默认的bridge网络与自建bridge网络有以下区别：
+    + 端口不会自行发布，必须使用-p参数才能为外界访问，而使用自建的bridge网络时，container的端口可直接被相同网络下的其他container访问。
+    + container之间的如果需要通过名字访问，需要--link参数，而如果使用自建的bridge网络，container之间可以通过名字互访。
+
+The bridged network is the default choice unless otherwise specified. In this mode, the container has its own networking namespace and is then bridged via virtual interfaces to the host (or node in the case of K8s) network.
+In a default Linux installation, the client talks to the daemon via a local IPC/Unix socket at /var/run/docker.sock.
+runc is the reference implementation of the OCI container- runtime-spec,runc is a small, lightweight CLI wrapper for libcontainer
+In the Docker engine stack, containerd sits between the daemon and runc at the OCI layer. Kubernetes can also use containerd via cri-containerd.
+Containerd's sole purpose in life was to manage container lifecycle operations — start | stop | pause | rm....
+The daemon communicates with containerd via a CRUD-style API over gRPC18.
+Despite its name, containerd cannot actually create containers. It uses runc to do that. It converts the required Docker image into an OCI bundle and tells runc to use this to create a new container.
+If you are building Linux images, and using the apt package manager, you should use the no-install-recommends flag with the apt-get install command.
+In terms of Docker constructs, a Pod is modelled as a group of Docker containers with shared namespaces and shared filesystem volumes.
+If that Pod is deleted for any reason, even if an identical replacement is created, the related thing (e.g. volume) is also destroyed and created anew.
+Containers within the Pod see the system hostname as being the same as the configured name for the Pod.
+
+```sh
+docker network ls
+
+docker network inspect bridge # 查看网络详情
+docker network create --driver bridge my-network # 创建bridge网络
+
+
+docker run -dit --name alpine1 --network my-network alpine # 启动两个container，同时加入my-network:
+docker run -dit --name alpine2 --network my-network alpine # 进入容器2 可以 ping alpine1 的通
 ```
 
 ## 仓库（Repository）
@@ -795,10 +903,12 @@ docker tag  csphere/nginx:1.7 192.168.1.2/csphere/nginx:1.7
 docker push 192.168.1.2/csphere/nginx:1.7
 ```
 
-## Docker Compose
+## [docker/compose](https://github.com/docker/compose):Define and run multi-container applications with Docker https://docs.docker.com/compose/
 
-Docker 官方编排（Orchestration）项目之一，负责快速在集群中部署分布式应用
-
+* Docker 官方编排（Orchestration）项目之一，负责快速在集群中部署分布式应用
+* 来源于之前的Fig项目，使用python代码编写
+* 一款容器编排程序，使用 YAML 配置的形式将需要启动的容器管理起来
+* 能够处理容器的依赖关系，在每个容器中会将容器的 IP 和服务的名称使用 hosts 的方式绑定，这样就能在容器中直接使用服务名称来接入对应的容器了
 * 允许用户在一个模板（YAML 格式）中定义一组相关联的应用容器（被称为一个 project，即项目），部署流程中各个动作的执行顺序，部署过程所需要依赖文件和被部署文件的存储位置和获取方式，以及如何验证部署成功。例如一个 Web 服务容器再加上后端的数据库服务容器等。
 * 概念
   - 工程（project）:运行目录下的所有文件（docker-compose.yml，extends文件或环境变量文件等）组成一个工程，若无特殊指定工程名即为当前目录名
@@ -822,13 +932,13 @@ Docker 官方编排（Orchestration）项目之一，负责快速在集群中部
     + –pull 始终尝试通过拉取操作来获取更新版本的镜像
     + -m, –memory MEM为构建的容器设置内存大小
     + –build-arg key=val为服务设置build-time变量
-  - bundle             Generate a Docker bundle from the Compose file
-  - config             Validate and view the Compose file
+  - bundle：Generate a Docker bundle from the Compose file
+  - config：Validate and view the Compose file
     + –resolve-image-digests 将镜像标签标记为摘要
     + -q, –quiet 只验证配置，不输出。 当配置正确时，不输出任何内容，当文件配置错误，输出错误信息
     + –services 打印服务名，一行一个
     + –volumes 打印数据卷名，一行一个
-  - create             Create services
+  - create：Create services
     + –force-recreate：重新创建容器，即使配置和镜像没有改变，不兼容–no-recreate参数
     + –no-recreate：如果容器已经存在，不需要重新创建，不兼容–force-recreate参数
     + –no-build：不创建镜像，即使缺失
@@ -1122,6 +1232,9 @@ net: "bridge"|"none"|"host"
 security_opt:
     - label:user:USER
     - label:role:ROLE
+
+docker build -t my-image .
+docker run my-image
 ```
 
 ## 容器资源限制
@@ -1134,14 +1247,6 @@ security_opt:
 * CPU资源限制及三种形式及其应用
 * 内存及Swap资源限制及其应用
 * 案例：使用stress-ng镜像验正资源限制效果
-
-## boot2docker
-
-## [docker/compose](https://github.com/docker/compose):Define and run multi-container applications with Docker https://docs.docker.com/compose/
-
-* 来源于之前的Fig项目，使用python代码编写
-* 一款容器编排程序，使用 YAML 配置的形式将需要启动的容器管理起来
-* 能够处理容器的依赖关系，在每个容器中会将容器的 IP 和服务的名称使用 hosts 的方式绑定，这样就能在容器中直接使用服务名称来接入对应的容器了
 
 ```
 version: "2"
@@ -1226,8 +1331,8 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 
 ## 图书
 
+* [Docker — 从入门到实践](https://yeasy.gitbooks.io/docker_practice/content/)
 * 《[Docker——容器与容器云（第2版）](https://book.douban.com/subject/26894736/)》
-* 《[Kubernetes权威指南 : 从Docker到Kubernetes实践全接触（第2版）](https://book.douban.com/subject/26902153/)》
 
 ## 资源
 
@@ -1247,7 +1352,6 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 
 ## 工具
 
-* [docker/machine](https://github.com/docker/machine) Machine management for a container-centric world
 * [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
 * [openfaas/faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple for Docker & Kubernetes https://docs.openfaas.com/
 * [coreos/clair](https://github.com/coreos/clair):Vulnerability Static Analysis for Containers

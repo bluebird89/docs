@@ -93,6 +93,13 @@
 * 在北京、上海这样的超级大都市，纯电动汽车就是一个解决方案
 * 燃料电池的汽车可能在重型卡车上会得到比较好的应用。
 
+## 汽车
+
+* 布加迪(Bugatti) ，是德国大众汽车集团子公司旗下的豪华汽车品牌
+    - 在第二次世界大战后渐渐衰落并几经转手，1998年大众集团收购并复兴了布加迪品牌，将其确立为一个独立运营的法国汽车品牌。布加迪的总部依然设立在法国的莫尔塞姆
+    - 由意大利人埃多尔·布加迪（Ettore Bugatti）在1909年创造的，专门生产运动跑车和高级豪华轿车
+    - 车辆的引擎全是由手工制造和调校，所有可以轻量化的零件都不放过，布加迪注重车辆的细节与平衡
+
 ## 参考
 
 * [nasa-jpl/open-source-rover](https://github.com/nasa-jpl/open-source-rover):A build-it-yourself, 6-wheel rover based on the rovers on Mars! https://opensourcerover.jpl.nasa.gov

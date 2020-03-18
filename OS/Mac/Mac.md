@@ -111,9 +111,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - launchpad 长按
     - finder 找到移动到垃圾桶
     - 通过appcleaner彻底清除
-
-### 软件列表
-
 * 系统
     - [airmail](http://airmailapp.com/):mail client
     - [Hazel](https://www.noodlesoft.com/):Automated Organization for Your Mac.
@@ -278,6 +275,15 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * 在文件位置移开未见重命名.m4r
 * 拖进tones
 * 同步手机
+
+## Route table
+
+```
+netstat -nr # 查看路由表
+sudo route -n add -net 192.168.0.0 -netmask 255.255.255.0 192.168.5.254
+route add -net 172.17.0.0 -netmask 255.255.255.0 dev eth0
+route add [-net|-host] [网域或主机] netmask [mask] [gw|dev]
+```
 
 #### iTerm2
 
