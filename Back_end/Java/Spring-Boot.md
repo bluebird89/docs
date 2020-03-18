@@ -14,14 +14,22 @@ brew install springboot
 spring --version
 ```
 
-## admin
+## 问题
 
-* [codecentric/spring-boot-admin](https://github.com/codecentric/spring-boot-admin):Admin UI for administration of spring boot applications
+```
+javax.net.ssl.SSLException
+MESSAGE: closing inbound before receiving peer's close_notify
+
+在spring配置文件中 src/main/resources/application.yaml url前添加一句话：useSSL=false
+url: jdbc:mysql://localhost:13306/ecommerce_order_mysql?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useServerPrepStmts=false&rewriteBatchedStatements=true&useSSL=false
+```
 
 ## 项目
 
 * [小柒2012 / spring-boot-seckill](https://gitee.com/52itstyle/spring-boot-seckill):从0到1构建分布式秒杀系统，脱离案例讲架构都是耍流氓 https://blog.52itstyle.vip/archives/2853/
 * [ityouknow/spring-boot-examples](https://github.com/ityouknow/spring-boot-examples):about learning Spring Boot via examples. Spring Boot 教程、技术栈示例代码，快速简单上手教程。 http://www.ityouknow.com/
+* admin
+    - [codecentric/spring-boot-admin](https://github.com/codecentric/spring-boot-admin):Admin UI for administration of spring boot applications
 
 ## 教程
 
@@ -30,6 +38,10 @@ spring --version
 * [Spring Boot中文文档](http://cwiki.apachecn.org/display/SpringBoot)
 * [eugenp/tutorials](https://github.com/eugenp/tutorials):The "REST With Spring" Course: http://bit.ly/restwithspring
 
-## Blog
+## 工具
+
+* [Spring Initalizr](https://start.spring.io/):bootstrap your application
+
+## 参考
 
 * [葬爱家族丶冷少](https://jiangyongkang.gitee.io)

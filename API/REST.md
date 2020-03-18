@@ -116,6 +116,7 @@
 * Erlang/Elixir: webmachine/ewebmachine
 * Ruby: webmachine-ruby
 * Clojure：liberator
+* REST Client:VS code 插件 
 
 ## 参考
 

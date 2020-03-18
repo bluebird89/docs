@@ -3,6 +3,11 @@
 🚀 A coroutine framework that focuses on hyperspeed and flexibility, specifically used for build microservices or middlewares. https://www.hyperf.io
 The Way to PHP Microservice Hyperf = Hyperspeed + Flexibility
 
+
+```
+composer create-project hyperf/hyperf-skeleton 
+```
+
 ## 中间件
 
 * 全局中间件 -> 方法级别中间件 -> 类级别中间件
