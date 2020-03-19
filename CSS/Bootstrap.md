@@ -38,7 +38,6 @@ npm install bootstrap@3
 
 * [bootstrapstudi](https://bootstrapstudio.io/)
 
-## CSS
 
 the browser’s default styles, styles from frameworks such as Bootstrap and your own written CSS
 

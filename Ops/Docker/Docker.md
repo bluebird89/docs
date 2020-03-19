@@ -445,13 +445,12 @@ docker create --name mymysql -v /data/mysql-data:/var/lib/mysql -p 3306:3306 -e 
 docker create -v /dbdata --name dbstore training/postgres /bin/true
 
 docker run [组织名称]/<镜像名称>:[镜像标签]
-docker run learn/tutorial echo "hello word"   # 两个参数，一个是指定镜像名（从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像），一个是要在镜像中运行的命令
+docker run learn/tutorial echo "hello word"   # 一次性命令：镜像名（从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像），一个是要在镜像中运行的命令
 docker run -it ubuntu:15.10 /bin/bash # 在新容器内建立一个伪终端或终端
 docker run --rm alpine # 退出container之后，自动删除container
-docker run -d -P training/webapp python app.py   #  -P :是容器内部端口随机映射到主机的高端口。
+docker run -d -P training/webapp python app.py   #  -P :是容器内部端口随机映射到主机的端口
 docker run -d -p 127.0.0.1:5001:5002  --name runoob training/webapp python app.py   # -p : 是容器内部端口绑定到指定的主机端口。  使用--name标识来命名容器
 docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py
-docker run --name some-nginx -d -p 8080:80 nginx # --name: 生成的容器名字
 docker run -d --volumes-from dbstore --name db1 training/postgres
 docker run -d --add-host=SERVER_NAME:127.0.0.1 bat/spark
 docker run -v /path-on-host:/path-in-container alpine # 文件夹映射
@@ -767,7 +766,6 @@ docker build -t runoob/centos:6.7 -t runoob/centos:latest .
 docker build [DOCKERFILE PATH] # Build an image from a Dockerfile
 docker build -t repository:tag . #  从Dockerfile构建image
 docker build -t my-org:my-image -f /tmp/Dockerfile # Build an image tagged my-org/my-image where the Dockerfile can be found at /tmp/Dockerfile.
-
 
 docker commit 698 learn/ping # 版本号 alias 提交，获取新的版本号
 docker push learn/ping
