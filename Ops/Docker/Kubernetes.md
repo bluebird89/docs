@@ -135,7 +135,7 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
 
 ## 构件
 
-Kubenetes整体框架如下图，主要包括kubecfg、Master API Server、Kubelet、Minion(Host)以及Proxy
+整体框架如下图，主要包括kubecfg、Master API Server、Kubelet、Minion(Host)以及Proxy
 
 * Node（节点）：集群中相对于Master而言的工作主机，每个Node上运行用于启动和管理Pid的服务Kubelet，并能够被Master管理。在Node上运行的服务进行包括Kubelet、kube-proxy和docker daemon。
     - Node信息
@@ -213,6 +213,16 @@ Kubenetes整体框架如下图，主要包括kubecfg、Master API Server、Kubel
 
 通过客户端的kubectl命令集操作，API Server响应对应的命令结果，从而达到对kubernetes集群的管理
 
+* 通过~/.kube/config文件完成其自身的配置，比如默认操作的cluster，context，namespace等
+* Cluster表示一个k8s集群，最重要的配置是集群中API server的URL，另外通常需要通过certificate-authority-data配置CA证书。
+* Users表示用户，先配置顶层用户，再将用户与cluster进行关联。user可以的认证信息可以配置username/password，authentication token或者client key等。
+* Context用于将cluster与user进行关联，多个context可以指向相同的user或者cluster，另外，context需要配置在cluster下的默认namespace。
+* Current context配置项用于指定当前操作的context，进而指定当前是由谁操作的是哪个cluster。
+* ~/.kube/config文件中有4个顶级配置项：clusters，users，contexts和current-context，需要注意的是users并不位于clusters之下。cluster和user关联行程context。可以直接对该文件进行修改，也可以通过kubectl config命令进行修改。
+* master机器也需要安装kubelet，因为master机器上的kubelet会根据/etc/kubernetes/manifests文件内容启动control plane的各个组件，比如api server，scheduler等。
+* master上的/etc/kubernetes/admin.conf文件可以直接拷贝成~/.kube/config文件以供kubectl使用
+* 可以在~/.kube目录下创建多个config文件，而不用将所有cluster都糅合在一起，然后通过KUBECONFIG环境变量指定kubectl使用的配置文件：`export KUBECONFIG=~/.kube/config2`
+
 ```sh
 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/linux/amd64/kubectl # download a specific version
@@ -273,6 +283,34 @@ kubectl describe pod kubernetes-dashboard -n kube-system
 
 kubectl delete services hello-minikube
 kubectl delete deployment hello-minikube
+
+kubectl config set-cluster my-other-cluster --server=https://k8s.example.com:6443 --certificate-authority=path/to/the/cafile # 创建cluster
+kubectl config set-credentials foo --username=foo --password=pass # 创建用户
+
+kubectl config set-context some-context --cluster=my-other-cluster --user=foo --namespace=bar # 创建context
+kubectl config current-context # 获取current context
+kubectl config set-context --current --namespace [new namespace] # 切换namespace
+
+kubectl config use-context my-other-context # 切换current context
+kubectl config set-context minikube --namespace=another-namespace # 为context更改默认的namespace
+
+alias kcd='kubectl config set-context $(kubectl config current-context) --namespace ' # # To easily switch between namespaces, define an alias like this
+
+kubectl config get-clusters # 获取所有cluster
+kubectl config get-contexts # 查看所有context
+```
+
+```sh
+
+kubectl exec -it [pod-name] -- /bin/bash # 登录到pod中(pod只有一个container的情况)
+
+kubectl exec -it [pod-name] --container [container-name] -- /bin/bash # 登录到pod中的某个container中（pod包含多个container）
+
+
+
+helm delete --purge [release name] # helm删除release(release name 可用于新的release)
+
+helm delete [release name] # helm删除release(release name将保留，即不能用于新的release)
 ```
 
 ### etcd

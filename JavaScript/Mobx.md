@@ -8,4 +8,4 @@ Simple, scalable state management. http://mobx.js.org
 
 ## 工具
 
-*   [mobxjs/mobx-react-devtools](https://github.com/mobxjs/mobx-react-devtools):Tools to perform runtime analyses of React applications powered by MobX and React
+*  [mobxjs/mobx-react-devtools](https://github.com/mobxjs/mobx-react-devtools):Tools to perform runtime analyses of React applications powered by MobX and React

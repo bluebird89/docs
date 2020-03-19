@@ -122,6 +122,9 @@ vagrant plugin install vagrant-vbguest # 插件安装
     - SSH配置
     - Vagrant配置
 * 搭建集群:ip中的0与1默认被占用，hostname不能含特殊符号
+* 网络
+    - 默认使用的NAT类型的网络
+    - public_network：新建新网络，与宿主机的ip处于同一个IP网段里面
 
 ```ruby
 # -*- mode: ruby -*-
