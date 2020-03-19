@@ -2861,9 +2861,7 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
   - [standard/standard](https://github.com/standard/standard):🌟 JavaScript Style Guide, with linter & automatic code fixer https://standardjs.com
   - JSHint
   - JSLint
-  - [eslint/eslint](https://github.com/eslint/eslint):A fully pluggable tool for identifying and reporting on patterns in JavaScript https://eslint.org
   - [HubSpot/odometer](https://github.com/HubSpot/odometer):Smoothly transitions numbers with ease. #hubspot-open-source
-  - [standard/eslint-config-standard](https://github.com/standard/eslint-config-standard):ESLint Config for JavaScript Standard Style https://standardjs.com
 * 压缩
   - [mishoo/UglifyJS](https://github.com/mishoo/UglifyJS):JavaScript parser / mangler / compressor / beautifier library for NodeJS http://marijn.haverbeke.nl/uglifyjs
   - [mishoo/UglifyJS2](https://github.com/mishoo/UglifyJS2):JavaScript parser / mangler / compressor / beautifier toolkit http://lisperator.net/uglifyjs/
@@ -3001,7 +2999,6 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
 * [Modernizr/Modernizr](https://github.com/Modernizr/Modernizr):Modernizr is a JavaScript library that detects HTML5 and CSS3 features in the user’s browser. https://modernizr.com
 * [mozilla-neutrino/neutrino-dev](https://github.com/mozilla-neutrino/neutrino-dev):Create and build modern JavaScript applications with zero initial configuration. https://neutrino.js.org
 * [facebook/immutable-js](https://github.com/facebook/immutable-js):Immutable persistent data collections for Javascript which increase efficiency and simplicity. http://facebook.github.io/immutable-js/
-* [babel/babel](https://github.com/babel/babel):🐠 Babel is a compiler for writing next generation JavaScript. https://babeljs.io/
 * [yaronn/blessed-contrib](https://github.com/yaronn/blessed-contrib):Build terminal dashboards using ascii/ansi art and javascript
 * [antvis/g6](https://github.com/antvis/g6):A Graph Visualization Framework in JavaScript https://antv.alipay.com/zh-cn/g6/1.x/index.html
 * [nolanlawson/optimize-js](https://github.com/nolanlawson/optimize-js):Optimize a JavaScript file for faster initial load by wrapping eagerly-invoked functions
@@ -3057,7 +3054,6 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
   - [typeorm/typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. http://typeorm.io
 * live-server
 * [facebookexperimental / rome](https://github.com/facebookexperimental/rome):An experimental JavaScript toolchain https://romejs.dev
-* [Lodash](https://github.com/lodash/lodash):为数组、字符串、object 和 argument 对象提供更一致的跨环境迭代支持，并已成为 Underscore 的超集
 * [Underscore](https://github.com/jashkenas/underscore):为 JavaScript 中的常见任务提供实用的函数
 * [Ramda](https://github.com/ramda/ramda):为函数式编程而设计，可以轻松创建不改变用户数据状态的函数式管道。Ramda 的核心设计理念是创建具有不变性和无副作用的函数。所有的函数会被自动柯里化，并根据易用性安排参数的顺序。
 * [MathJS](https://github.com/josdejong/mathjs):JavaScript 和 Node.js 的数学扩展库，与 JavaScript 内置的 Math 库兼容。该库包含一个灵活的表达式解析器，能够运行符号计算，并提供了一系列内置函数和常量。

@@ -54,7 +54,7 @@ webpack hello.js hello.bundle.js --module-bind 'css=style-loader!css-loader' --w
 * __dirname：全局变量，当前脚本目录
 * devtool: 'eval-source-map',
 * devserver：webpack-dev-server配置
-* loaders：
+* loaders
 
 ```js
 var webpack = require('webpack');
@@ -132,22 +132,27 @@ gulp.task("webpack", function(callback) { // 配合grunt/pulp使用
 
 ## 组件
 
-* webpack-dev-server：浏览器监听你的代码的修改，并自动刷新显示修改后的结果.基于Node.js Express框架的开发服务器，它是一个静态资源Web服务器，对于简单静态页面或者仅依赖于独立服务的前端页面，都可以直接使用这个开发服务器进行开发。在开发过程中，开发服务器会监听每一个文件的变化，进行实时打包，并且可以推送通知前端页面代码发生了变化，从而可以实现页面的自动刷新。
+* webpack-dev-server：浏览器监听代码修改，并自动刷新显示修改后的结果.基于Node.js Express框架的开发服务器，一个静态资源Web服务器，对于简单静态页面或者仅依赖于独立服务的前端页面，都可以直接使用这个开发服务器进行开发。在开发过程中，开发服务器会监听每一个文件的变化，进行实时打包，并且可以推送通知前端页面代码发生了变化，从而可以实现页面的自动刷新。
 * babel：编译JavaScript的平台
-    - 下一代的JavaScript代码（ES6，ES7...），即使这些标准目前并未被当前的浏览器完全的支持；
+    - 下一代的JavaScript代码（ES6，ES7...），即使这些标准目前并未被当前的浏览器完全的支持
     - 使用基于JavaScript进行了拓展的语言，比如React的JSX；
 * css-loader：能够使用类似@import 和 url(...)的方法实现 require()的功能。`require('css-loader!./style.css');`:可以解析执行css文件
+  - CSS Module的官网，CSS Module只对类名和动画的名字起作用
 * style-loader：所有的计算后的样式加入页面中，二者组合在一起使你能够把样式表嵌入webpack打包后的JS文件中`require('style-loader!css-loader!./style.css');`:为了生成一个style标签，并且将解析后的css文件插入到style中去
-* CSS modules：通过CSS模块，所有的类名，动画名默认都只作用于当前模块。在CSS loader中进行配置后，你所需要做的一切就是把"modules"传递到所需要的地方，然后就可以直接把CSS的类名传递到组件的代码中，且这样做只对当前组件有效，不必担心在不同的模块中使用相同的类名造成冲突。
+* CSS modules：通过CSS模块，所有的类名，动画名默认都只作用于当前模块。在CSS loader中进行配置后，所需要做的一切就是把"modules"传递到所需要的地方，然后就可以直接把CSS的类名传递到组件的代码中，且这样做只对当前组件有效，不必担心在不同的模块中使用相同的类名造成冲突。
 * UglifyJsPlugin，可以优化（支持压缩、混淆）代码
+* file-loader:将图片转为连接
+* url-loader:对小图片直接Base64编码，对大图片通过file-loader进行处理
+* image-webpack-loader:对各种图片进行压缩
+* mini-css-extract-plugin:所有的css抽离为独立的css文件
 
 ### 插件
 
 插件（Plugins）是用来拓展Webpack功能的，会在整个构建过程中生效，执行相关的任务
 
 * 与loaders区别：loaders是在打包构建过程中用来处理源文件的（JSX，Scss，Less..），一次处理一个，插件并不直接操作单个文件，它直接对整个构建过程其作用
-* HtmlWebpackPlugin：依据一个简单的index.html模板，生成一个自动引用你打包后的JS文件的新index.html。
-* Hot Module Replacement：在修改组件代码后，自动刷新实时预览修改后的效果。配置在webpack配置文件中添加HMR插件；在Webpack Dev Server中添加"hot"参数；如果是React模块，使用我们已经熟悉的Babel可以更方便的实现功能热加载。
+* HtmlWebpackPlugin：依据一个简单的index.html模板，生成一个自动引用打包后的JS文件到新index.html
+* 热替换（HMR）Hot Module Replacement：在修改组件代码后，自动刷新实时预览修改后的效果。配置在webpack配置文件中添加HMR插件；在Webpack Dev Server中添加"hot"参数；如果是React模块，使用我们已经熟悉的Babel可以更方便的实现功能热加载。
 * [webpack/webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware):A development middleware for webpack
 
 ### 构建
@@ -156,8 +161,24 @@ gulp.task("webpack", function(callback) { // 配合grunt/pulp使用
 * UglifyJsPlugin：压缩JS代码；
 * OccurenceOrderPlugin :为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
 * 缓存：一个哈希值添加到打包的文件名中，使用方法如下,添加特殊的字符串混合体（[name], [id] and [hash]）到输出文件名前 `filename: "bundle-[hash].js"`
+* 代码分隔(Code Split):减少代码重复;支持缓存;
+  - 场景
+    + 入口文件，每个入口文件将有单独的一次代码分割
+    + 使用SplitChunksPlugin插件
+    + 异步加载，比如使用import()
+  - 做法
+    + 为第三方依赖库(vendor)单独打包
+    + 为webpack自己的runtime代码（manifest）单独打包
+    + 为公共业务代码单独打包
+    + 为异步加载的module单独打包
+  - Webpack4放弃了CommonsChunkPlugin，转而使用SplitChunksPlugin，并通过内置的optimization配置段进行配置
+    + 默认只对两种情况进行分割：一是异步加载的module，二是被其他chunk引用次数大于等于2的module
+    + 对第三方库有默认的配置(配置有名为vendors的cacheGroup)，为每个第三方库单独默认生成对应的异步加载文件
+    + 默认生产chunk最小为30k
+    + 默认有两个cacheGroup，一个为vendors用于处理第三方依赖库；一个是default(处理当module被引用等于或超过2次时情况)
+  - 一个module有可能同属于多个cacheGroup，因此可以通过设置某个cacheGroup的优先级(priority)来解决，priority值越大，表示优先级越高，也即会优先其作用。Webpack的两个默认cacheGroup的优先级都被设置成了负数，而我们自定义的cacheGroup的默认priority为0，因此可以初步保证自定义的cacheGroup总会优先于默认的起作用。
 
-### [重构webpack配置文件](https://zhuanlan.zhihu.com/p/29161762):配置不同环境
+### [配置不同环境](https://zhuanlan.zhihu.com/p/29161762)
 
 * 开发环境
     - NODE_ENV 为 development
@@ -320,27 +341,6 @@ Parsing error: The keyword 'import' is reserved
   }
 ```
 
-## 参考
-
-* [webpack-simple](https://github.com/vuejs-templates/webpack-simple)
-* [webpack 从入门到工程实践](http://gitbook.cn/books/599270d5625e0436309466c7/index.html)
-* [Webpack 工程的 PWA 实战](http://gitbook.cn/books/59957adbebb0e06f9f24c389/index.html)
-* [webpack/react-starter](https://github.com/webpack/react-starter):[OUTDATED] Starter template for React with webpack. Doesn't focus on simplicity! NOT FOR BEGINNERS!
-* [入门Webpack](http://www.jianshu.com/p/42e11515c10f)
-* [Webpack for React](http://www.pro-react.com/materials/appendixA/)
-* [代码](https://github.com/bluebird89/webpack_for_react)
-* [vue-cli document](https://vuejs-templates.github.io/webpack/)
-* [基于webpack的前后端分离开发环境实战](https://segmentfault.com/a/1190000009266900)
-* [webpack：从入门到真实项目配置](https://juejin.im/post/59bb37fa6fb9a00a554f89d2)
-* [petehunt/webpack-howto](https://github.com/petehunt/webpack-howto)
-* [webpack/webpack-dev-server](https://github.com/webpack/webpack-dev-server):Serves a webpack app. Updates the browser on changes.
-* [KieSun/webpack-demo](https://github.com/KieSun/webpack-demo):从入门到真实项目配置，每个 commit 基本都对应一小节
-* [wallstreetcn/webpack-and-spa-guide](https://github.com/wallstreetcn/webpack-and-spa-guide):Webpack 4 和单页应用入门
-* [ruanyf/webpack-demos](https://github.com/ruanyf/webpack-demos):a collection of simple demos of Webpack
-* [webpack-contrib/awesome-webpack](https://github.com/webpack-contrib/awesome-webpack):A curated list of awesome Webpack resources, libraries and tools
-* [webpack-china/awesome-webpack-cn](https://github.com/webpack-china/awesome-webpack-cn):[印记中文](https://docschina.org/) - webpack 优秀中文文章 https://webpack.docschina.org/
-* [gwuhaolin/dive-into-webpack](https://github.com/gwuhaolin/dive-into-webpack):全面的Webpack教程《深入浅出Webpack》电子书 http://webpack.wuhaolin.cn
-
 ## 工具
 
 * [survivejs/webpack-merge](https://github.com/survivejs/webpack-merge):Merge designed for Webpack (MIT)
@@ -348,3 +348,27 @@ Parsing error: The keyword 'import' is reserved
 * [shama/webpack-stream](https://github.com/shama/webpack-stream):🍹 Run webpack through a stream interface
 * [webpackmonitor/webpackmonitor](https://github.com/webpackmonitor/webpackmonitor):A tool for monitoring webpack optimization metrics through the development process http://webpackmonitor.com
 * [GoogleChromeLabs/webpack-libs-optimizations](https://github.com/GoogleChromeLabs/webpack-libs-optimizations):Using a library in your webpack project? Here’s how to optimize it
+* [webpack/webpack-dev-server](https://github.com/webpack/webpack-dev-server):Serves a webpack app. Updates the browser on changes.
+
+## 参考
+
+* [webpack-contrib/awesome-webpack](https://github.com/webpack-contrib/awesome-webpack):A curated list of awesome Webpack resources, libraries and tools
+* [webpack-china/awesome-webpack-cn](https://github.com/webpack-china/awesome-webpack-cn):[印记中文](https://docschina.org/) - webpack 优秀中文文章 https://webpack.docschina.org/
+* [gwuhaolin/dive-into-webpack](https://github.com/gwuhaolin/dive-into-webpack):全面的Webpack教程《深入浅出Webpack》电子书 http://webpack.wuhaolin.cn
+
+* [webpack-simple](https://github.com/vuejs-templates/webpack-simple)
+* [webpack 从入门到工程实践](http://gitbook.cn/books/599270d5625e0436309466c7/index.html)
+* [Webpack 工程的 PWA 实战](http://gitbook.cn/books/59957adbebb0e06f9f24c389/index.html)
+* [webpack/react-starter](https://github.com/webpack/react-starter):[OUTDATED] Starter template for React with webpack. Doesn't focus on simplicity! NOT FOR BEGINNERS!
+
+* [入门Webpack](http://www.jianshu.com/p/42e11515c10f)
+* [Webpack for React](http://www.pro-react.com/materials/appendixA/)
+* [代码](https://github.com/bluebird89/webpack_for_react)
+
+* [vue-cli document](https://vuejs-templates.github.io/webpack/)
+* [基于webpack的前后端分离开发环境实战](https://segmentfault.com/a/1190000009266900)
+* [webpack：从入门到真实项目配置](https://juejin.im/post/59bb37fa6fb9a00a554f89d2)
+* [petehunt/webpack-howto](https://github.com/petehunt/webpack-howto)
+* [KieSun/webpack-demo](https://github.com/KieSun/webpack-demo):从入门到真实项目配置，每个 commit 基本都对应一小节
+* [wallstreetcn/webpack-and-spa-guide](https://github.com/wallstreetcn/webpack-and-spa-guide):Webpack 4 和单页应用入门
+* [ruanyf/webpack-demos](https://github.com/ruanyf/webpack-demos):a collection of simple demos of Webpack

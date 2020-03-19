@@ -32,6 +32,7 @@ The streaming build system ,用自动化构建工具增强工作流程
   - gulp.task(name [, deps, fn])：注册一个task, name 是task的名字，deps是可选项，就是这个task依赖的tasks, fn是task要执行的函数
   - gulp.src：构建源文件
   - gulp.dest(path[, options]) 就是最终文件要输出的路径，options一般不用 - gulp.watch(glob [, opts], tasks) or gulp.watch(glob [, opts, cb]) 就是监视文件的变化，然后运行指定的Tasks或者函数
+* [前端构建大法 Gulp 系列](http://deshui.wang/%E6%8A%80%E6%9C%AF/2016/01/01/why-need-front-end-build)
 
 ```js
 # 全局安装
@@ -143,7 +144,7 @@ bower install <http://example.com/script.js>
 
 ## grunt
 
-Grunt: The JavaScript Task Runner.构建工具:自动化。对于需要反复重复的任务，例如压缩（minification）、编译、单元测试、linting等.每次运行grunt时，它都会使用node的require()系统查找本地已安装好的grunt。正因为如此，你可以从你项目的任意子目录运行grunt。 `
+The JavaScript Task Runner.构建工具:自动化。对于需要反复重复的任务，例如压缩（minification）、编译、单元测试、linting等.每次运行grunt时，它都会使用node的require()系统查找本地已安装好的grunt。正因为如此，可以从你项目的任意子目录运行grunt
 
 ```sh
 npm install -g grunt-cli
@@ -182,7 +183,3 @@ npm install postcss-modules autoprefixer -S
  }
 }
 ```
-
-## 参考
-
-* [前端构建大法 Gulp 系列](http://deshui.wang/%E6%8A%80%E6%9C%AF/2016/01/01/why-need-front-end-build)
