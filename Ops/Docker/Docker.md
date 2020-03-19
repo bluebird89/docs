@@ -73,33 +73,20 @@ sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent softwa
 
 # Add Docker's official GPG key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
 
 # set up the stable repository
-sudo add-apt-repository \
- "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
- $(lsb_release -cs) \
- stable"
- # aliyun
-sudo add-apt-repository "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
-
-apt-get update && apt-get install -y \
-  apt-transport-https ca-certificates curl software-properties-common gnupg2
-
-### Add Docker’s official GPG key
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-
-### Add Docker apt repository.
-add-apt-repository \
-  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) \
-  stable"
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs)   stable"
+sudo add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+sudo add-apt-repository "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"  # aliyun
 
 ## Install Docker CE.
 apt-get update && apt-get install -y \
   containerd.io=1.2.10-3 \
   docker-ce=5:19.03.4~3-0~ubuntu-$(lsb_release -cs) \
   docker-ce-cli=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)
+sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 # Setup daemon.
 cat > /etc/docker/daemon.json <<EOF
@@ -113,17 +100,13 @@ cat > /etc/docker/daemon.json <<EOF
 }
 EOF
 
+sudo systemctl start docker
+
 mkdir -p /etc/systemd/system/docker.service.d
 
 # Restart docker.
 systemctl daemon-reload
 systemctl restart docker
-
-# Update the apt package index and install
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
-
-sudo systemctl start docker
 
 ### avoid sudo, need relogin system
 sudo groupadd docker
@@ -137,8 +120,14 @@ sudo systemctl enable docker # 开机启动
 sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
 sudo chmod g+rwx "$HOME/.docker" -R
 
-# docker 服务状态查看
-docker version|info
+docker version|info # docker 服务状态查看
+docker system df # 镜像、容器、数据卷所占用的空间
+
+docker events # 得到docker服务器的实时的事件
+docker port # 显示容器的端口映射
+docker top # 显示容器的进程信息
+docker diff # 显示容器文件系统的前后变化
+docker cp # 从容器里向外拷贝文件或目录
 ```
 
 ## 配置
@@ -148,19 +137,15 @@ docker build  --no-cache --build-arg HTTP_PROXY=http://xx.xx.xx.xx:xx --build-ar
 
 # Discover the address of your DNS server
 nmcli dev show | grep 'IP4.DNS'
-# Update the Docker daemon /etc/docker/daemon.json
-{
-    "dns": ["192.168.210.2", "8.8.8.8"]
-}
 
 ENV http_proxy http://proxy-chain.xxx.com:911/ 528
 ENV https_proxy http://proxy-chain.xxx.com:912/ 1
-
 {
     "authorization-plugins": [],
     "data-root": "", 
      #Docker运行时使用的根路径,根路径下的内容稍后介绍，默认/var/lib/docker
-    "dns": [],  
+    # Update the Docker daemon /etc/docker/daemon.json
+    "dns": ["192.168.210.2", "8.8.8.8"] 
      #设定容器DNS的地址，在容器的 /etc/resolv.conf文件中可查看
     "dns-opts": [],
      #容器 /etc/resolv.conf 文件，其他设置
@@ -337,54 +322,57 @@ eval "$(docker-machine env default)" # Set environment variables
   - 可以实现不借助 LVM、RAID 将多个 disk 挂到同一个目录下
   - 将一个只读的分支和一个可写的分支联合在一起，Live CD 正是基于此方法可以允许在镜像不变的基础上允许用户在其上进行一些写操作
 * `docker pull[选项] [Docker Registry地址]  <仓库名>:<标签名>`
-  - 默认地址 DockerHub
-  - 仓库名：这里的仓库名是两段式名称，既 / ，“/”前面一般是用户名。对于 Docker Hub，如果不给出用户名，则默认为 library ，也就是官方镜像
+  - Docker 镜像仓库地址：地址的格式一般是 <域名/IP>[:端口号]。默认地址是 Docker Hub。
+  - 仓库名：两段式名称，即 <用户名>/<软件名>。对于 Docker Hub，如果不给出用户名，则默认为 library，也就是官方镜像。
   - 标签名默认 latest
+* 虚悬镜像（dangling image）:既没有仓库名，也没有标签，均为<none>。这个镜像原本是有镜像名和标签的，随着官方镜像维护，发布了新版本后，重新 docker pull 时，旧的镜像名被转移到了新下载的镜像身上，而旧的镜像上的这个名称则被取消，从而成为了 <none>。
+  - 除了 docker pull 可能导致这种情况，docker build 也同样可以导致这种现象。由于新旧镜像同名，旧镜像名称被取消，从而出现仓库名、标签均为 <none> 的镜像。
+* 中间层镜像:为了加速镜像构建、重复利用资源，Docker 会利用中间层镜像.`docker image ls` 列表中只会显示顶层镜像，如果希望显示包括中间层镜像在内的所有镜像的话，需要加 -a 参数
+  - 看到很多无标签的镜像,这些无标签镜像不应该删除，否则会导致上层镜像因为依赖丢失而出错
+* 删除行为分为Untagged和Delete两类
+  - 只有某个镜像的所有标签都被取消，该镜像才可能会被Delete
+  - 有可能某个其它镜像或容器正依赖于当前镜像的某一层。在这样的情况下，该镜像所有标签都被取消该镜像也不会被删除
 * 可以基于容器制作Docker镜像
 * 推送Docker镜像至Registry
 
 ```sh
-# 镜像
-docker images ls ubuntu:18.04 # 列出所有镜像(images)
-docker image ls --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}"
+# 镜像查看
+docker image ls ubuntu:18.04 # 列出所有镜像(images)
+docker image ls --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}" # 自定义格式
+docker image ls -f dangling=true
+docker image ls -f since=mongo:3.2
+docker image ls -q # 列出 ID
+docker image ls --digests # 列出 摘要
 
 docker search httpd  # 搜索镜像
 
+docker pull [选项] [Docker Registry 地址[:端口号]/]仓库名[:标签]
 docker pull learn/tutorial # 默认 lastest
-docker pull username/repository:tag
 docker pull ubuntu:18.04 # 获取镜像
 docker pull username/repository:tag # 从Docker Hub中获取某个用户下的image
-docker pull registry.hub.docker.com/ubuntu:18.04 
 docker pull registry-host:5000/respository:tag # 私有registry中获取image
 docker pull gcr.azk8s.cn/google_containers/hyperkube-amd64:v1.9.2
 
-# 镜像、容器、数据卷所占用的空间
-docker system df
-# 删除 因为更新镜像而没有标签的镜像
-docker image prune
-
-# 容器运行后，保存新镜像
-docker commit -m "Added json gem" -a "Docker Newbee" 0b2616b0e5a8 ouruser/sinatra:v2
-
-docker rmi [IMAGE ID|name # Remove one or more images 镜像的image ID或者REPOSITORY名
-docker image rm image_id # 新方式
-# 删除镜像之前要先用 docker rm 删掉依赖于这个镜像的所有容器.
+docker rmi [IMAGE ID]|[Image name]  # 镜像的image ID或者REPOSITORY名
+docker [image] rm image_id｜image_name # 新方式 镜像短 ID、镜像长 ID、镜像名 或者 镜像摘要
+docker rmi $(docker images -q) # 删除所有镜像，小心
 docker rmi $(docker images -q -f "dangling=true")
+docker image rm $(docker image ls -q redis)
+
 docker save centos > /data/iso/centos.tar.gz # 导出
 docker save -o wdx-local-whale.tar wdxtub/wdx-whale
+docker export 7691a814370e > ubuntu.tar
 
-# 删除所有镜像，小心
-docker rmi $(docker images -q)
-
-docker image prune -a # 删除所有没用到的image
-docker history # 显示生成一个镜像的历史命令
-
+cat ubuntu.tar | docker import - test/ubuntu:v1.0
 docker load < /data/iso/centos.tar.gz # 导入
 docker load --input wdx-local-whale.tar
 
-docker build [DOCKERFILE PATH] # Build an image from a Dockerfile
-docker build -t repository:tag . #  从Dockerfile构建image
-docker build -t my-org:my-image -f /tmp/Dockerfile # Build an image tagged my-org/my-image where the Dockerfile can be found at /tmp/Dockerfile.
+# 删除 因为更新镜像而没有标签的镜像
+docker image prune -a # 删除所有没用到的image
+docker history # 显示生成一个镜像的历史命令
+
+# 容器运行后，保存新镜像
+docker commit -m "Added json gem" -a "Docker Newbee" 0b2616b0e5a8 ouruser/sinatra:v2
 
 docker tag image-id|image-name mynewtag # 会默认使用image-name:latest所指向的image
 docker tag image-name:tag newname:newtag
@@ -402,7 +390,7 @@ docker push registry-host:5000/username/repository
   - 名字空间提供了最基础也是最直接的隔离，在容器中运行的进程不会被运行在主机上的进程和其它容器发现和作用。
   - 每个容器都有自己独有的网络栈，意味着它们不能访问其他容器的 sockets 或接口
   - 如果主机系统上做了相应的设置，容器可以像跟主机交互一样的和其他容器交互
-  - 当指定公共端口或使用 links 来连接 2 个容器时，容器就可以相互通信了（可以根据配置来限制通信的策略）。
+  - 当指定公共端口或使用 links 来连接 2 个容器时，容器就可以相互通信了（可以根据配置来限制通信的策略）
 * 流程
   - 检查本地是否存在指定的镜像，不存在就从公有仓库下载
   - 利用镜像创建并启动一个容器
@@ -412,6 +400,9 @@ docker push registry-host:5000/username/repository
   - 执行用户指定的应用程序
   - 执行完毕后容器被终止
 * 启动：基于镜像新建一个容器并启动或者将在终止状态（stopped）的容器重新启动
+  - --name标识来命名容器 
+  - -P:是容器内部端口随机映射到主机端口 
+  - -p:是容器内部端口绑定到指定的主机端口
   - –name:给容器定义一个名称，名称是唯一的。如果已经命名了一个叫 web 的容器，当你要再次使用 web 这个名称的时候，需要先用docker rm 来删除之前创建的同名容器
   - -i:允许对容器内的标准输入 (STDIN) 进行交互
   - -t:让Docker分配一个伪终端并绑定到容器的标准输入上
@@ -436,15 +427,14 @@ docker push registry-host:5000/username/repository
 * container not running:remove container and recreate
 
 ```sh
-CONTAINER_ID=$(sudo docker run -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done") --name标识来命名容器 -P:是容器内部端口随机映射到主机的高端口 -p : 是容器内部端口绑定到指定的主机端口。 
+CONTAINER_ID=$(sudo docker run -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done")
 docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py
 
 # 查看端口
 docker port adoring_stonebraker 5002
 
 # 容器
-docker ps # 列出正在运行的容器(containers)
-docker container ls 
+docker [container] ps # 列出正在运行的容器(containers)
 docker ps -a # 列出所有的容器
 docker-compose ps # 查看当前项目容器
 docker ps -l   # 查看最后一次创建的容器
@@ -452,102 +442,70 @@ docker ps -l   # 查看最后一次创建的容器
 # 创建
 docker create ubuntu:14.04 #  创建容器
 docker create --name mymysql -v /data/mysql-data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root
+docker create -v /dbdata --name dbstore training/postgres /bin/true
 
-docker run -i -t ubuntu:15.10 /bin/bash # 在新容器内建立一个伪终端或终端
+docker run [组织名称]/<镜像名称>:[镜像标签]
+docker run learn/tutorial echo "hello word"   # 两个参数，一个是指定镜像名（从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像），一个是要在镜像中运行的命令
+docker run -it ubuntu:15.10 /bin/bash # 在新容器内建立一个伪终端或终端
 docker run --rm alpine # 退出container之后，自动删除container
-
 docker run -d -P training/webapp python app.py   #  -P :是容器内部端口随机映射到主机的高端口。
 docker run -d -p 127.0.0.1:5001:5002  --name runoob training/webapp python app.py   # -p : 是容器内部端口绑定到指定的主机端口。  使用--name标识来命名容器
 docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py
-docker run learn/tutorial echo "hello word"   # 两个参数，一个是指定镜像名（从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像），一个是要在镜像中运行的命令
-docker run learn/tutorial apt-get install -y ping   # learn/tutorial镜像里面安装ping程序
-docker run [组织名称]/<镜像名称>:[镜像标签]
 docker run --name some-nginx -d -p 8080:80 nginx # --name: 生成的容器名字
-docker create -v /dbdata --name dbstore training/postgres /bin/true
 docker run -d --volumes-from dbstore --name db1 training/postgres
 docker run -d --add-host=SERVER_NAME:127.0.0.1 bat/spark
 docker run -v /path-on-host:/path-in-container alpine # 文件夹映射
 docker run -e MY_ENV=some_value alpine # 指定环境变量
-docker run lean/ping ping www.google.com
-
 docker run -it -w /home alpine sh # 设置container的工作路径
-
 docker run -it --link source-container:alias alpine sh # link两个container
 
-# 查看日志
-docker logs -f $CONTAINER_ID  | docker attach $CONTAINER_ID  # -f:动态输出
+docker logs -f $CONTAINER_ID  # 查看日志
+docker attach $CONTAINER_ID  # -f:动态输出
 
 docker top determined_swanson    # 查看容器内部运行的进程
-docker-compose exec {container-name} bash
 
 docker inspect [CONTAINER ID] # Shows all the info of a container.
 docker inspect id | grep IPAddress | cut -d '"' -f 4 # 获取Container IP地址
 docker inspect -f '{{range $p, $conf := .NetworkSettings.Ports}} {{$p}} -> {{(index $conf 0).HostPort}} {{end}}' id # 获取端口映射
-docker exec [CONTAINER ID] touch /tmp/exec_works # Execute a command inside a running container.
-
-# 获取环境变量
-docker exec container_id env
-docker exec  -it  eeed0831fd62 /bin/bash # 进入容器
-docker exec -it 97aae54c2fac sh # 登录到运行的container中
 docker inspect name  ||  docker ps -l(ast)/-a(ll)     # 查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息
-# 查看容器的名字
-docker inspect -f "{{ .Name }}" aed84ee21bde
-docker start name # 一个已经终止的容器启动运行
-docker container start 97aae54c2fac # 重新运行已停止的container
+docker inspect -f "{{ .Name }}" aed84ee21bde # 查看容器的名字
+docker inspect <container id> | grep "IPAddress"
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
+docker inspect [CONTAINER ID] | grep -wm1 IPAddress | cut -d '"' -f 4 # Get IP address of running container
+
+docker exec [CONTAINER ID] touch /tmp/exec_works # Execute a command inside a running container.
+docker exec -i 69d1 bash
+docker exec -it [id]|[name] /bin/bash  #i是交互式操作，t是一个终端，d指的是在后台运行
+docker exec container_id env # 获取环境变量
 
 # login
 docker login # 登录到Docker Hub
 docker login docker.io
-docker login host:port # 登录到私有Docker Registry 
-docker commit 698 learn/ping # 版本号 alias 提交，获取新的版本号
+docker login host:port # 登录到私有Docker Registry
 
-docker push learn/ping
-docker port 7a38a1ad55c6|determined_swanson # 查看指定 （ID或者名字）容器的某个确定端口映射到宿主机的端口号
+docker container start|stop|restart $CONTAINER_ID
 
-docker stop|restart $CONTAINER_ID
-docker-compose stop # 关闭当前项目容器
-
-docker attach # 连接(进入)到一个正在运行的容器
 docker wait # 阻塞到一个容器，直到容器停止运行
 
-docker rm -f name # 移除容器
-docker container rm container_id # 新方式
-docker rm $(docker ps -a -q) # Delete all containers
+docker [container] rm -f container_id|name # 删除一个运行中的容器，可以添加 -f 参数
 docker rmi $(docker images | grep '^<none>' | awk '{print $3}') # Delete all untagged containers
-docker rmi $(docker images | grep '^<none>' | awk '{print $3}') # Delete all untagged containers
-
-docker system df # See all space Docker take up
-docker inspect [CONTAINER ID] | grep -wm1 IPAddress | cut -d '"' -f 4 # Get IP address of running container
-docker kill $(docker ps -q) #Kill all running containers
 # 删除老的(一周前创建)容器
 docker ps -a | grep 'weeks ago' | awk '{print $1}' | xargs docker rm
-# 删除已经停止的容器
-docker rm `docker ps -a -q`
+
+docker kill $(docker ps -q) #Kill all running containers
+
 docker system prune -a # 清理整个docker的无用数据
 docker system prune --volumes # 会清除volume，如果要同时清除无用的volume
 docker container prune  # 删除所有停止掉的container
-
-docker events # 得到docker服务器的实时的事件
-docker port # 显示容器的端口映射
-docker top # 显示容器的进程信息
-docker diff # 显示容器文件系统的前后变化
-
-docker cp # 从容器里向外拷贝文件或目录
-
-# 登陆到容器中
-docker exec -it [id]|[name] /bin/bash  #i是交互式操作，t是一个终端，d指的是在后台运行
-
-# 获取容器IP
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
-CID=$(docker run -d -p 4321 base nc -lk 4321);
-docker inspect $CID
-
-docker inspect <container id> | grep "IPAddress"
 ```
 
-## 网络
+## 网络 Network
 
-* Docker网络模型及工作原理
+* 默认情况下，分别会建立一个bridge、一个host和一个none的网络.都是使用的这个bridge的网络，可以访问外网和其他container的（需要通过IP地址）
+  - 默认的名为bridge的网络是有很多限制的，可以自行创建bridge类型的网络。默认的bridge网络与自建bridge网络有以下区别：
+    + 端口不会自行发布，必须使用-p参数才能为外界访问，而使用自建的bridge网络时，container的端口可直接被相同网络下的其他container访问。
+    + container之间的如果需要通过名字访问，需要--link参数，而如果使用自建的bridge网络，container之间可以通过名字互访。
+* 网络模型及工作原理
   - 要实现网络通信，机器需要至少一个网络接口（物理接口或虚拟接口）来收发数据包；此外，如果不同子网之间要进行通信，需要路由机制。
   - Docker 中的网络接口默认都是虚拟的接口。虚拟接口的优势之一是转发效率较高。 Linux 通过在内核中进行数据复制来实现虚拟接口之间的数据转发，发送接口的发送缓存中的数据包被直接复制到接收接口的接收缓存中。对于本地系统和容器内系统看来就像是一个正常的以太网卡，只是它不需要真正同外部网络设备通信，速度要快很多。
   - 访问外部网络，需要本地系统的转发支持
@@ -561,11 +519,13 @@ docker inspect <container id> | grep "IPAddress"
     + 容器一端放到新容器中，并修改名字作为 eth0，这个接口只在容器的名字空间可见；
     + 从网桥可用地址段中获取一个空闲地址分配给容器的 eth0，并配置默认路由到桥接网卡 veth65f9。
   - docker run 的时候通过 --net 参数来指定容器的网络配置，有4个可选值
-    + --net=bridge 这个是默认值，连接到默认的网桥。
-    + --net=host 告诉 Docker 不要将容器网络放到隔离的名字空间中，即不要容器化容器内的网络。此时容器使用本地主机的网络，它拥有完全的本地主机接口访问权限。容器进程可以跟主机其它 root 进程一样可以打开低范围的端口，可以访问本地网络服务比如 D-bus，还可以让容器做一些影响整个主机系统的事情，比如重启主机。因此使用这个选项的时候要非常小心。如果进一步的使用 --privileged=true，容器会被允许直接配置主机的网络堆栈。
+    + --net=bridge 这个是默认值，连接到默认的网桥,独立container之间的通信
+    + --net=host 告诉 Docker 不要将容器网络放到隔离的名字空间中，即不要容器化容器内的网络。直接使用宿主机的网络，端口也使用宿主机的,容器进程可以跟主机其它 root 进程一样可以打开低范围的端口，可以访问本地网络服务比如 D-bus，还可以让容器做一些影响整个主机系统的事情，比如重启主机。因此使用这个选项的时候要非常小心。如果进一步的使用 --privileged=true，容器会被允许直接配置主机的网络堆栈。
     + --net=container:NAME_or_ID 让 Docker 将新建容器的进程放到一个已存在容器的网络栈中，新容器进程有自己的文件系统、进程列表和资源限制，但会和已存在的容器共享 IP 地址和端口等网络资源，两者进程可以直接通过 lo 环回接口通信。
-    + --net=none 让 Docker 将新容器放到隔离的网络栈中，但是不进行网络配置。之后，用户可以自己进行配置。
-* Docker网络模型验正
+    + --net=none 禁用网络 让 Docker 将新容器放到隔离的网络栈中，但是不进行网络配置。之后，用户可以自己进行配置
+    + overlay：当有多个docker主机时，跨主机的container通信
+    + macvlan：每个container都有一个虚拟的MAC地址
+* 网络模型验正
 * 暴露容器应用至节点外部
   - 使用 -P 标记时，Docker 会随机映射一个 49000~49900 的端口到内部容器开放的网络端口
   - -p（小写的）则可以指定要映射的端口，并且，在一个指定端口上只可以绑定一个容器。支持的格式
@@ -601,11 +561,20 @@ docker inspect <container id> | grep "IPAddress"
   - --dns=IP_ADDRESS 添加 DNS 服务器到容器的 /etc/resolv.conf 中，让容器用这个服务器来解析所有不在/etc/hosts 中的主机名。
   - --dns-search=DOMAIN 设定容器的搜索域，当设定搜索域为 .example.com 时，在搜索一个名为 host 的主机时，DNS 不仅搜索host，还会搜索 host.example.com。 注意：如果没有上述最后 2 个选项，Docker 会默认用主机上的 /etc/resolv.conf 来配置容器。
 * 配置Docker进程的网络属性
+* The bridged network is the default choice unless otherwise specified. In this mode, the container has its own networking namespace and is then bridged via virtual interfaces to the host (or node in the case of K8s) network.
+* In a default Linux installation, the client talks to the daemon via a local IPC/Unix socket at /var/run/docker.sock.
+* runc is the reference implementation of the OCI container- runtime-spec,runc is a small, lightweight CLI wrapper for libcontainer
+* In the Docker engine stack, containerd sits between the daemon and runc at the OCI layer. Kubernetes can also use containerd via cri-containerd.
+* Containerd's sole purpose in life was to manage container lifecycle operations — start | stop | pause | rm....
+* The daemon communicates with containerd via a CRUD-style API over gRPC18.
+* Despite its name, containerd cannot actually create containers. It uses runc to do that. It converts the required Docker image into an OCI bundle and tells runc to use this to create a new container.
+* If you are building Linux images, and using the apt package manager, you should use the no-install-recommends flag with the apt-get install command.
+* In terms of Docker constructs, a Pod is modelled as a group of Docker containers with shared namespaces and shared filesystem volumes.
+* If that Pod is deleted for any reason, even if an identical replacement is created, the related thing (e.g. volume) is also destroyed and created anew.
+* Containers within the Pod see the system hostname as being the same as the configured name for the Pod.
 
 ```sh
 docker run -d -P training/webapp python app.py
-docker ps -l # 可以查看到端口映射情况 0.0.0.0:32768->5000/tcp 本机 127.0.0.1:32768
-docker logs -f ecstatic_mirzakhani
 
 docker run -d -p 5000:5000 training/webapp python app.py
 docker run -d -p 5000:5000  -p 3000:80 training/webapp python app.py
@@ -614,16 +583,22 @@ docker run -d -p 127.0.0.1::5000/udp training/webapp python app.py
 docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py
 
 docker port nostalgic_morse 5000
+docker port 7a38a1ad55c6|determined_swanson # 查看指定 （ID或者名字）容器的某个确定端口映射到宿主机的端口号
 
+# 创建一个新的 web 容器，并将它连接到 db 容器
 docker run -d --name db training/postgres
 docker rm -f web
-# 创建一个新的 web 容器，并将它连接到 db 容器
 docker run -d -P --name web --link db:db training/webapp python app.py
-
 docker run --rm --name web2 --link db:db training/webapp env # 查看环境变量
-
 docker run -t -i --rm --link db:db training/webapp /bin/bash
 cat /etc/hosts # 父容器 web 的 hosts 文件
+
+docker network create --driver bridge my-network # 创建bridge网络
+docker network ls
+docker network inspect bridge # 查看网络详情
+
+docker run -dit --name alpine1 --network my-network alpine # 启动两个container，同时加入my-network:
+docker run -dit --name alpine2 --network my-network alpine # 进入容器2 可以 ping alpine1 的通
 ```
 
 ## 持久化
@@ -679,7 +654,6 @@ docker run --volumes-from dbdata -v $(pwd):/backup ubuntu tar cvf /backup/backup
 docker run -v /dbdata --name dbdata2 ubuntu /bin/bash
 docker run --volumes-from dbdata2 -v $(pwd):/backup busybox tar xvf
 
-
 docker volume ls # 查看已建立的volume
 docker volume create my-volume-2 # 创建
 docker volume inspect my-volume # 查看
@@ -707,6 +681,7 @@ VOLUME /foo
   - FROM 设置基础的image
   - MAINTAINER 维护人信息
   - RUN 在构建image的时候运行的命令
+    + `RUN ["可执行文件", "参数1", "参数2"]`
   - `ADD <src> <dest>`: 将本地目录中的文件添加到docker镜像中 `ADD unicorn.rb /app/config/unicorn.rb`  <src> 可以是Dockerfile所在目录的一个相对路径；也可以是一个 URL
   - `COPY <src> <dest>` 只能拷贝宿主机上的文件复制进镜像中
   - ENV: 添加环境变量  `ENV RAILS_ENV staging`
@@ -740,7 +715,7 @@ VOLUME /foo
 * 案例：自定义entrypoint脚本，接收变量进行容器化应用配置
 * [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 
-```
+```sh
 # syntax=docker/dockerfile
 # syntax=docker/dockerfile:1.0
 # syntax=docker.io/docker/dockerfile:1
@@ -765,6 +740,20 @@ USER nginx
 # VULUME <#dir>, 设置volume
 VOLUME [‘/data’]
 RUN /bin/echo -e "LANG=\"en_US.UTF-8\"" >/etc/default/local
+
+RUN buildDeps='gcc libc6-dev make' \
+    && apt-get update \
+    && apt-get install -y $buildDeps \
+    && wget -O redis.tar.gz "http://download.redis.io/releases/redis-3.2.5.tar.gz" \
+    && mkdir -p /usr/src/redis \
+    && tar -xzf redis.tar.gz -C /usr/src/redis --strip-components=1 \
+    && make -C /usr/src/redis \
+    && make -C /usr/src/redis install \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm redis.tar.gz \
+    && rm -r /usr/src/redis \
+    && apt-get purge -y --auto-remove $buildDeps
+
 # EXPOSE 暴露哪些端口
 EXPOSE 22 80 443
 ## 容器启动时执行指令
@@ -775,47 +764,60 @@ CMD ["start"]
 
 # 构建镜像
 docker build -t runoob/centos:6.7 -t runoob/centos:latest .
+docker build [DOCKERFILE PATH] # Build an image from a Dockerfile
+docker build -t repository:tag . #  从Dockerfile构建image
+docker build -t my-org:my-image -f /tmp/Dockerfile # Build an image tagged my-org/my-image where the Dockerfile can be found at /tmp/Dockerfile.
 
+
+docker commit 698 learn/ping # 版本号 alias 提交，获取新的版本号
+docker push learn/ping
 docker commit -m "Added json gem" -a "Docker Newbee" 0b2616b0e5a8 ouruser/sinatra:v2
 
 # 根据imageid添加|修改标签
 docker tag 860c279d2fec runoob/centos:dev
-```
 
-## Network
+# example
+// COPY <源路径>... <目标路径>，支持正则匹配
+COPY hom* /mydir/
+COPY hom?.txt /mydir/
 
-* 类型
-  - bridge：多由于独立container之间的通信
-  - host： 直接使用宿主机的网络，端口也使用宿主机的
-  - overlay：当有多个docker主机时，跨主机的container通信
-  - macvlan：每个container都有一个虚拟的MAC地址
-  - none: 禁用网络
-* 默认情况下，分别会建立一个bridge、一个host和一个none的网络.都是使用的这个bridge的网络，可以访问外网和其他container的（需要通过IP地址）
-  - 默认的名为bridge的网络是有很多限制的，可以自行创建bridge类型的网络。默认的bridge网络与自建bridge网络有以下区别：
-    + 端口不会自行发布，必须使用-p参数才能为外界访问，而使用自建的bridge网络时，container的端口可直接被相同网络下的其他container访问。
-    + container之间的如果需要通过名字访问，需要--link参数，而如果使用自建的bridge网络，container之间可以通过名字互访。
+// ADD和COPY类似，能够自动将gzip, bzip2 以及 xz压缩格式自动解压，
+// 无需自动解压时，使用COPY
+ADD ubuntu-xenial-core-cloudimg-amd64-root.tar.gz /
 
-The bridged network is the default choice unless otherwise specified. In this mode, the container has its own networking namespace and is then bridged via virtual interfaces to the host (or node in the case of K8s) network.
-In a default Linux installation, the client talks to the daemon via a local IPC/Unix socket at /var/run/docker.sock.
-runc is the reference implementation of the OCI container- runtime-spec,runc is a small, lightweight CLI wrapper for libcontainer
-In the Docker engine stack, containerd sits between the daemon and runc at the OCI layer. Kubernetes can also use containerd via cri-containerd.
-Containerd's sole purpose in life was to manage container lifecycle operations — start | stop | pause | rm....
-The daemon communicates with containerd via a CRUD-style API over gRPC18.
-Despite its name, containerd cannot actually create containers. It uses runc to do that. It converts the required Docker image into an OCI bundle and tells runc to use this to create a new container.
-If you are building Linux images, and using the apt package manager, you should use the no-install-recommends flag with the apt-get install command.
-In terms of Docker constructs, a Pod is modelled as a group of Docker containers with shared namespaces and shared filesystem volumes.
-If that Pod is deleted for any reason, even if an identical replacement is created, the related thing (e.g. volume) is also destroyed and created anew.
-Containers within the Pod see the system hostname as being the same as the configured name for the Pod.
+// CMD 容器启动命令，用于指定默认的容器主进程的启动命令，类似RUN
+// 使用该格式'CMD ["可执行文件", "参数1", "参数2"...]'
+// 注：CMD是注进程，退出后整个容器退出，因此不能后台执行
+CMD service nginx start //后台执行nginx，执行完立刻退出
+CMD ["nginx", "-g", "daemon off;"] //前台执行，正确
 
-```sh
-docker network ls
+// ENTRYPOINT和CMD类似，不过可以继续加参数(如docker run myip -i)
+// 或者执行脚本
+ENTRYPOINT [ "curl", "-s", "http://ip.cn" ]
+ENTRYPOINT ["docker-entrypoint.sh"]
 
-docker network inspect bridge # 查看网络详情
-docker network create --driver bridge my-network # 创建bridge网络
+// ENV <key> <value>
+ENV NODE_VERSION 7.2.0
+RUN curl -SLO https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz
 
+// VOLUME 定义匿名卷
+// '/data'目录就会在运行时自动挂载为匿名卷，任何向'/data'中写入的信息都不会记录进容器存储层，从而保证了容器存储层的无状态化。
+VOLUME /data
 
-docker run -dit --name alpine1 --network my-network alpine # 启动两个container，同时加入my-network:
-docker run -dit --name alpine2 --network my-network alpine # 进入容器2 可以 ping alpine1 的通
+// WORKDIR 指定工作目录
+WORKDIR <工作目录路径>
+
+// USER 指定当前用户
+USER <用户名>
+
+// ONBUILD 当内容与该项目相关时，前面加上ONBUILD即可重用
+FROM node:slim
+RUN mkdir /app
+WORKDIR /app
+ONBUILD COPY ./package.json /app
+ONBUILD RUN [ "npm", "install" ]
+ONBUILD COPY . /app/
+CMD [ "npm", "start" ]
 ```
 
 ## 仓库（Repository）
@@ -839,6 +841,10 @@ docker run -dit --name alpine2 --network my-network alpine # 进入容器2 可�
 * Private Registry 是开发者或者企业自建的镜像存储库，通常用来保存企业内部的 Docker 镜像，用于内部开发流程和产品的发布、版本控制
   - 类似私服
   - 在 Docker Pull 或 Dockerfile 中直接键入 Private Registry 的地址，通常这样会导致与 Private Registry 的绑定，缺乏灵活性
+  - Registry的组织格式
+  - 利用docker-registry构建简单的私有Registry
+  - docker-compose简介
+  - 使用VMWare Harbor构建企业级私有Registry
 
 ```sh
 # Ubuntu 14.04、Debian 7 Wheezy /etc/default/docker
@@ -860,41 +866,22 @@ sudo service docker restart
 
 sudo systemctl restart docker
 
-docker login --username=liboming88@yeah.net registry.cn-hangzhou.aliyuncs.com
-
-# 七牛
 docker login -u {你的七牛账号} -p {密码} reg.qiniu.com
+docker login --username=liboming88@yeah.net registry.cn-hangzhou.aliyuncs.com # # aliyun 子账户名为subaccount，企业别名为misaka-network 个人帐户 或者 AIM Username: subaccount@misaka-network
 
 docker pull reg.qiniu.com/{命名空间}/{镜像名}:{标签}
 docker pull reg.qiniu.com/{命名空间}/{镜像名}:{标签}
+docker pull registry.cn-hangzhou.aliyuncs.com/bluebird89/myubuntu:[镜像版本号]
 
 docker tag {镜像名或id} reg.qiniu.com/{命名空间}/{镜像名}:{标签}
 docker tag nginx:latest reg.qiniu.com/mynamespace/mynginx:mytag
+docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/bluebird89/myubuntu:[镜像版本号]
 
 docker push reg.qiniu.com/{命名空间}/{镜像名}:{标签}
 docker push reg.qiniu.com/mynamespace/mynginx:mytag
-
-# aliyun
-docker login --username=liboming88@yeah.net registry.cn-hangzhou.aliyuncs.com
-# 子账户名为subaccount，企业别名为misaka-network
-# 个人帐户 或者 AIM
-Username: subaccount@misaka-network
-
-# 通过 tag 绑定 仓库
-docker pull registry.cn-hangzhou.aliyuncs.com/bluebird89/myubuntu:[镜像版本号]
-docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/bluebird89/myubuntu:[镜像版本号]
 docker push registry.cn-hangzhou.aliyuncs.com/bluebird89/myubuntu:[镜像版本号]
-```
 
-## 私有Registry
-
-* Registry的组织格式
-* 利用docker-registry构建简单的私有Registry
-* docker-compose简介
-* 使用VMWare Harbor构建企业级私有Registry
-
-```sh
-# 部署registry
+## 部署私有 registry
 mkdir /registry
 docker run  -p 80:5000  -e STORAGE_PATH=/registry  -v /registry:/registry  registry:2.0
 
@@ -914,18 +901,18 @@ docker push 192.168.1.2/csphere/nginx:1.7
   - 工程（project）:运行目录下的所有文件（docker-compose.yml，extends文件或环境变量文件等）组成一个工程，若无特殊指定工程名即为当前目录名
     + 一个工程当中可包含多个服务，每个服务中定义了容器运行的镜像，参数，依赖。
     + 工程配置文件默认为docker-compose.yml，可通过环境变量COMPOSE_FILE或-f参数自定义配置文件，其定义了多个有依赖关系的服务及每个服务运行的容器
-  - 服务（service）：一个应用容器，实际上可以运行多个镜像的实例。
+  - 服务（service）：一个应用容器，实际上可以运行多个镜像的实例
     + 可以基于指定的镜像，还可以基于一份Dockerfile
   - 项目(project)：由一组关联的应用容器组成的一个完整业务单元。
 * 指令
   - 参数
-    + -f，–file FILE指定Compose模板文件，默认为docker-compose.yml，可以多次指定。
-    + -p，–project-name NAME指定项目名称，默认将使用所在目录名称作为项目名。
+    + -f|file FILE 指定Compose模板文件，默认为docker-compose.yml，可以多次指定
+    + -p|project-name NAME 指定项目名称，默认将使用所在目录名称作为项目名
     + -x-network-driver 使用Docker的可拔插网络后端特性（需要Docker 1.9+版本）
-    + -x-network-driver DRIVER指定网络后端的驱动，默认为bridge（需要Docker 1.9+版本）
+    + -x-network-driver DRIVER 指定网络后端的驱动，默认为bridge（需要Docker 1.9+版本）
     + -verbose输出更多调试信息
-    + -v，–version打印版本并退出
-  - build              Build or rebuild services
+    + -v|version打印版本并退出
+  - build  Build or rebuild services
     + –compress 通过gzip压缩构建上下环境
     + –force-rm 删除构建过程中的临时容器
     + –no-cache 构建镜像过程中不使用缓存
@@ -943,20 +930,20 @@ docker push 192.168.1.2/csphere/nginx:1.7
     + –no-recreate：如果容器已经存在，不需要重新创建，不兼容–force-recreate参数
     + –no-build：不创建镜像，即使缺失
     + –build：创建容器前，生成镜像
-  - down               Stop and remove containers, networks, images, and volumes
+  - down:Stop and remove containers, networks, images, and volumes
     + –rmi type，删除镜像，类型必须是：all，删除compose文件中定义的所有镜像；local，删除镜像名为空的镜像
     + -v, –volumes，删除已经在compose文件中定义的和匿名的附在容器上的数据卷
     + –remove-orphans，删除服务中没有在compose中定义的容器
-  - events             Receive real time events from containers
-  - exec               Execute a command in a running container
+  - events:Receive real time events from containers
+  - exec:Execute a command in a running container
     + -d 分离模式，后台运行命令。
     + –privileged 获取特权。
     + –user USER 指定运行的用户。
     + -T 禁用分配TTY，默认docker-compose exec分配TTY。
     + –index=index，当一个服务拥有多个容器时，可通过该参数登陆到该服务下的任何服务，例如：docker-compose exec –index=1 web /bin/bash ，web服务中包含多个容器
-  - help|h              Get help on a command
-  - images             List images
-  - kill               Kill containers
+  - help|h:Get help on a command
+  - images:List images
+  - kill:Kill containers
     + `docker-compose kill -s SIGIN` 通过发送SIGKILL信号来强制停止服务容器。 支持通过-s参数来指定发送的信号
   - logs               View output from containers
   - pause              Pause services
@@ -1044,6 +1031,7 @@ docker push 192.168.1.2/csphere/nginx:1.7
 ```sh
 sudo curl -L https://github.com/docker/compose/releases/download/1.23.0-rc3/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
+sudo sh -c 'curl -L https://raw.githubusercontent.com/docker/compose/1.8.0/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose' # 命令补全
 
 yum -y install epel-release
 yum -y install python-pip
@@ -1054,9 +1042,11 @@ pip install docker-compose
 sudo rm /usr/local/bin/docker-compose
 sudo pip uninstall docker-compose
 
-# example
+# docker-compose.yml
 version: '2'
+
 services:
+
   web:
     image: dockercloud/hello-world
     ports:
@@ -1085,6 +1075,21 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
+  app2:
+      build: ./dir //指定Dockerfile所在目录，通过Dockerfile构建镜像
+    app3:
+      build:
+        context: ./dir //指定Dockerfile所在目录
+        dockerfile: Dockerfile-alternate //指定Dockerfile文件名
+        args:
+          buildno: 1 //指定参数
+    app4:
+        build:
+            context: .
+            cache_from: //指定缓存
+              - alpine:latest
+              - corp/web_app:3.14
+
 networks:
   front-tier:
     driver: bridge
@@ -1112,26 +1117,42 @@ extra_hosts:
  - "somehost:162.242.195.82"
  - "otherhost:50.31.209.229"
 
+entrypoint: /code/entrypoint.sh # 指定服务容器启动后执行的入口文件
+user: nginx # 指定容器中运行应用的用户名
+
+
+working_dir: /code # 指定容器中工作目录
+
+domainname: your_website.com # 指定容器中搜索域名、主机名、mac 地址等
+hostname: test
+mac_address: 08-00-27-00-0C-0A
+
 volumes:
-  // 只是指定一个路径，Docker 会自动在创建一个数据卷（这个路径是容器内部的）。
-  - /var/lib/mysql
-  // 使用绝对路径挂载数据卷
-  - /opt/data:/var/lib/mysql
-  // 以 Compose 配置文件为中心的相对路径作为数据卷挂载到容器。
-  - ./cache:/tmp/cache
-  // 使用用户的相对路径（~/ 表示的目录是 /home/<用户目录>/ 或者 /root/）。
-  - ~/configs:/etc/configs/:ro
-  // 已经存在的命名的数据卷。
-  - datavolume:/var/lib/mysql
+  - /var/lib/mysql   // 只是指定一个路径，Docker 会自动在创建一个数据卷（这个路径是容器内部的）
+  - /opt/data:/var/lib/mysql   // 使用绝对路径挂载数据卷
+  - ./cache:/tmp/cache   // 以 Compose 配置文件为中心的相对路径作为数据卷挂载到容器
+  - ~/configs:/etc/configs/:ro   // 使用用户的相对路径（~/ 表示的目录是 /home/<用户目录>/ 或者 /root/）
+  - datavolume:/var/lib/mysql   // 已经存在的命名的数据卷
 
 volumes_from:
    - service_name
      - container_name
 
+secrets:
+  my_secret:
+    file: ./my_secret.txt
+  my_other_secret:
+    external: true
+
 tmpfs: /run
 tmpfs:
   - /run
   - /tmp
+
+dns: 8.8.8.8
+dns:
+  - 8.8.8.8
+  - 114.114.114.114
 
 dns_search：example.com
 dns_search：
@@ -1140,6 +1161,7 @@ dns_search：
 
 pid: "host"
 
+env_file: .env
 env_file:
   - ./common.env
   - ./apps/web.env
@@ -1149,7 +1171,6 @@ environment:
   RACK_ENV: development
   SHOW: 'true'
   SESSION_SECRET:
-
 environment:
   - RACK_ENV=development
   - SHOW=true
@@ -1211,7 +1232,6 @@ links:
     - redis
 
 log_driver: "json-file"|"syslog"|"none"
-
 log_opt:
     syslog-address: "tcp://192.168.0.42:123"
 services:
@@ -1225,16 +1245,24 @@ services:
         aliases:
          - alias2
 
+network_mode: "bridge"|"none"|"host"
 network_mode: "service:[service name]"
 network_mode: "container:[container name/id]"
-net: "bridge"|"none"|"host"
 
 security_opt:
     - label:user:USER
     - label:role:ROLE
+healthcheck:
+  test: ["CMD", "curl", "-f", "http://localhost"]
+  interval: 1m30s
+  timeout: 10s
+  retries: 3
 
 docker build -t my-image .
 docker run my-image
+docker-compose stop # 关闭当前项目容器
+docker-compose exec {container-name} bash
+docker-compose kill -s SIGINT
 ```
 
 ## 容器资源限制
