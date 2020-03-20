@@ -476,6 +476,7 @@ docker exec [CONTAINER ID] touch /tmp/exec_works # Execute a command inside a ru
 docker exec -i 69d1 bash
 docker exec -it [id]|[name] /bin/bash  #i是交互式操作，t是一个终端，d指的是在后台运行
 docker exec container_id env # 获取环境变量
+docker exec -it 260d7645dac3 /bin/sh # Mac /bin/zsh 报错 OCI runtime exec failed: exec failed: container_linux.go:344: starting container process caused "exec: \"/bin/zsh\": stat /bin/zsh: no such file or directory": unknow
 
 # login
 docker login # 登录到Docker Hub

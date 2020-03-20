@@ -2606,6 +2606,7 @@ http://localhost:3000
     + Sequel Pro
     + navicat
         * [DoubleLabyrinth/navicat-keygen](https://github.com/DoubleLabyrinth/navicat-keygen):A keygen for Navicat
+        * Navicat Premium for Mac
 * ER图
     - PowerDesigner
     - MySQL Workbench

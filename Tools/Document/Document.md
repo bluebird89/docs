@@ -6,13 +6,12 @@ Universal markup converter http://johnmacfarlane.net/pandoc
 John MacFarlane开发的标记语言转换工具，可实现不同标记语言间的格式转换.
 
 * 将Markdown转化为Word，然后统计字数
+* [文档](http://pandoc.org/getting-started.html )
 
 ```
 pandoc WEB.md -o web.docx
 pandoc API.md -o api.docx -c Github.css
 ```
-
-* [文档](http://pandoc.org/getting-started.html )
 
 ##  [GitbookIO/gitbook](https://github.com/GitbookIO/gitbook)
 
@@ -20,12 +19,12 @@ pandoc API.md -o api.docx -c Github.css
 
 npm install gitbook-cli -g
 
-- gitbook --version：查看当前使用的版本
-- gitbook ls：系统存在的 gitbook 版本
-- gitbook ls-remote：所有 gitbook 版本
-- gitbook fetch：下载对应的 gitbook 版本
-- gitbook current：当前目录使用的 gitbook 版本
-- 配置文件book.json：
+* gitbook --version：查看当前使用的版本
+* gitbook ls：系统存在的 gitbook 版本
+* gitbook ls-remote：所有 gitbook 版本
+* gitbook fetch：下载对应的 gitbook 版本
+* gitbook current：当前目录使用的 gitbook 版本
+* 配置文件book.json
 
 # 使用
 
@@ -74,6 +73,21 @@ npm install gitbook-cli -g
 - gitbook serve 运行
 - gitbook build 编译书籍
 
+## 项目
+
+* README应该简明扼要，条理清晰，建议包含以下方面：
+  - 项目简介：用一两句话简单描述该项目所实现的业务功能；
+  - 技术选型：列出项目的技术栈，包括语言、框架和中间件等；
+  - 本地构建：列出本地开发过程中所用到的工具命令；
+  - 领域模型：核心的领域概念，比如对于示例电商系统来说有Order、Product等；
+  - 测试策略：自动化测试如何分类，哪些必须写测试，哪些没有必要写测试；
+  - 技术架构：技术架构图；
+  - 部署架构：部署架构图；
+  - 外部依赖：项目运行时所依赖的外部集成方，比如订单系统会依赖于会员系统；
+  - 环境信息：各个环境的访问方式，数据库连接等；
+  - 编码实践：统一的编码实践，比如异常处理原则、分页封装等；
+  - FAQ：开发过程中常见问题的解答。
+
 ## 笔记
 
 带标签功能，并且可以聚合统计;概念用文档整理，结构化用思维导图（不宜太详细）
@@ -103,6 +117,24 @@ npm install gitbook-cli -g
 
 * [corkami/pics](https://github.com/corkami/pics):Posters, drawings...
 
+## [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor)
+
+💎 A fast, open source text processor and publishing toolchain, written in Ruby, for converting AsciiDoc content to HTML5, DocBook 5 (or 4.5) and other formats. https://asciidoctor.org
+
+```sh
+gem install asciidoctor
+
+gem install asciidoctor-diagram
+sudo apt-get intall openjdk-8-jre-headless  install graphviz
+
+asciidoctor -r asciidoctor-diagram xxx.adoc
+```
+
+## 参考
+
+* [What nobody tells you about documentation](https://www.divio.com/blog/documentation/)
+* [myslide](https://myslide.cn)
+
 ## 工具
 
 * [coolwanglu/pdf2htmlEX](https://github.com/coolwanglu/pdf2htmlEX):Convert PDF to HTML without losing text or format. http://coolwanglu.github.com/pdf2htmlEX/
@@ -127,23 +159,3 @@ npm install gitbook-cli -g
 * [gsuitedevs/md2googleslides](https://github.com/gsuitedevs/md2googleslides):Generate Google Slides from markdown
 * [mailcow/mailcow-dockerized](https://github.com/mailcow/mailcow-dockerized):mailcow: dockerized - 🐮 + 🐋 = 💕 https://mailcow.email
 
-## [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor)
-
-💎 A fast, open source text processor and publishing toolchain, written in Ruby, for converting AsciiDoc content to HTML5, DocBook 5 (or 4.5) and other formats. https://asciidoctor.org
-
-```sh
-gem install asciidoctor
-
-gem install asciidoctor-diagram
-sudo apt-get intall openjdk-8-jre-headless  install graphviz
-
-asciidoctor -r asciidoctor-diagram xxx.adoc
-```
-
-## 参考
-
-* [What nobody tells you about documentation](https://www.divio.com/blog/documentation/)
-
-## 资源
-
-* [myslide](https://myslide.cn)
