@@ -223,10 +223,10 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
   - [Weex-ui](https://github.com/alibaba/weex-ui)
   - [Eagle.js](https://github.com/Zulko/eagle.js)
   - [jdf2e/nutui](https://github.com/jdf2e/nutui):京东风格的轻量级移动端Vue组件库 (A Vue.js 2.0 UI Toolkit for Mobile Web) https://nutui.jd.com
-  -  [HEYUI](https://www.heyui.top/):基于Vue.js的高质量UI组件库
-* [gridsome](https://gridsome.org):A Vue.js framework for Headless CMSs
+  - [HEYUI](https://www.heyui.top/):基于Vue.js的高质量UI组件库
 * Admin
   - [PanJiaChen / vue-element-admin](https://github.com/PanJiaChen/vue-element-admin):🎉 A magical vue admin https://panjiachen.github.io/vue-element-admin
+  - [taylorchen709 / vue-admin](https://github.com/taylorchen709/vue-admin):admin template based on vuejs2 and element. https://taylorchen709.github.io/vue-admin/
 
 ## 参考
 

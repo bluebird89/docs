@@ -213,6 +213,11 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
 
 通过客户端的kubectl命令集操作，API Server响应对应的命令结果，从而达到对kubernetes集群的管理
 
+* 前提
+    - 禁用防火墙
+    - 禁用swap分区
+    - 禁用SELinux
+    - sysctl net.bridge.bridge-nf-call-iptables=1
 * 通过~/.kube/config文件完成其自身的配置，比如默认操作的cluster，context，namespace等
 * Cluster表示一个k8s集群，最重要的配置是集群中API server的URL，另外通常需要通过certificate-authority-data配置CA证书。
 * Users表示用户，先配置顶层用户，再将用户与cluster进行关联。user可以的认证信息可以配置username/password，authentication token或者client key等。
@@ -222,6 +227,7 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
 * master机器也需要安装kubelet，因为master机器上的kubelet会根据/etc/kubernetes/manifests文件内容启动control plane的各个组件，比如api server，scheduler等。
 * master上的/etc/kubernetes/admin.conf文件可以直接拷贝成~/.kube/config文件以供kubectl使用
 * 可以在~/.kube目录下创建多个config文件，而不用将所有cluster都糅合在一起，然后通过KUBECONFIG环境变量指定kubectl使用的配置文件：`export KUBECONFIG=~/.kube/config2`
+* 默认使用default的namespace，也可以在命令行中通过--namespace指定.永久地修改namespace，可以通过context，context位于kubectl的配置文件中，通常位于$HOME/.kube/config文件中，该文件中也包含向cluster认证的信息
 
 ```sh
 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
@@ -261,15 +267,21 @@ yum install -y kubectl
 swapoff -a
 
 kubectl config view
-
+kubectl config set-context my-context --namespace=mystuff --users xxx --clusters xxx
 kubectl version|cluster-info
-kubectl config view
+
 kubectl get pods --all-namespaces  // list two pods, one an ‘addon-manager’ and another a ‘dashboard’
 kubectl delete deployments hello-minikube1
 kubectl get pods -A
 kubectl get deployments|events|services
 
+kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=172.28.128.228 # 创建
+kubectl config use-context my-context # 使用
 kubectl create -f single-config-file.yaml
+
+kubectl get objecttyp # 获取某种obejct的列表
+
+kubectl get objecttype object-name # 获取某个object详情
 
 # 部署weave网络
 sysctl net.bridge.bridge-nf-call-iptables=1 -w
@@ -298,15 +310,9 @@ alias kcd='kubectl config set-context $(kubectl config current-context) --namesp
 
 kubectl config get-clusters # 获取所有cluster
 kubectl config get-contexts # 查看所有context
-```
-
-```sh
 
 kubectl exec -it [pod-name] -- /bin/bash # 登录到pod中(pod只有一个container的情况)
-
 kubectl exec -it [pod-name] --container [container-name] -- /bin/bash # 登录到pod中的某个container中（pod包含多个container）
-
-
 
 helm delete --purge [release name] # helm删除release(release name 可用于新的release)
 

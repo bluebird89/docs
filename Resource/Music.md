@@ -30,6 +30,10 @@
 * 李宗盛
     - 《新写的旧歌》
 
+## 演奏
+
+* The Royal Philharmonic：英国皇家爱乐乐团1946年创立，1966年英国女王为乐团冠上“皇家”头衔，奠定了其在英国乐坛无可替代的地位。乐团以丰富、流畅的音色和近乎完美的配合以及对经典曲目的驾驭能力征服了世界。 
+
 ## 工具
 
 * [YongHaoWu/NeteaseCloudMusicFlac](https://github.com/YongHaoWu/NeteaseCloudMusicFlac):根据网易云音乐的歌单, 下载flac无损音乐到本地. Download the FLAC music from Internet according to your NeteaseCloudMusic playlist.
