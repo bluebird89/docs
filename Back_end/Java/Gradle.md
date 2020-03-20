@@ -14,7 +14,42 @@ scoop install gradle # Scoop is a command-line installer for Windows inspired by
 choco install gradle # Chocolatey is “the package manager for Windows”.
 
 gradle -v
+```
 
+## 配置
+
+```sh
+# 项目配置 build.gradle
+repositories {
+    maven {
+        url "http://maven.aliyun.com/nexus/content/groups/public"
+    }
+}
+# 验证 build.gradle 文件内增加一个任务
+task showRepos {
+    doLast {
+        repositories.each {
+            println "repository: ${it.name} ('${it.url}')"
+        }
+    }
+gradle -q showRepos
+
+# 配置全局 (用户家目录)/.gradle/init.gradle
+allprojects {
+    repositories {
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public"
+        }
+    }
+}
+```
+
+## 使用
+
+* 配置文件:build.gradle 
+
+```sh
+gradle build
 ./gradlew wrapper --gradle-version=4.4 --distribution-type=bin
 ./gradlew tasks
 ```

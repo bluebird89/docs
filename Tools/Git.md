@@ -1320,6 +1320,8 @@ git merge FETCH_HEAD
   - 可以直接在收到的 GitHub 通知邮件进行评论，不必在网站页面中评论
   - 在文件展示页面，点击某行或者通过按 SHIFT 选择多行，URL 会有相应的改变。如果你要给你的队友分享一段代码是非常方便的：
   - 在合并请求、问题或者任何评论中中提到用户会使用户关注全部的后续通知,sha和问题码(例如：#1)会被自动链接。并且也可以链接其它仓库的 sha 或者问题码，格式：user/repo@sha1 或者 user/repo#1。
+* 速度慢
+  - 添加本地dns， 通过[ipaddress](https://www.ipaddress.com/)查询ip
 
 ![Git 使用规范流程](../_static/bg2015080501.png)
 
@@ -1361,6 +1363,10 @@ jobs:
   job3:
     needs: [build-and-deploy, job2]
 
+# github
+219.76.4.4 github-cloud.s3.amazonaws.com
+192.30.253.112 github.com
+151.101.185.194 github.global.ssl.fastly.net
 ```
 
 ### submodule

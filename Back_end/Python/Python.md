@@ -63,7 +63,6 @@ sudo apt-get install python3-pip python3-dev libpq-dev postgresql postgresql-con
 # centos
 yum install python36
 
-
 # compile
 ls -l /usr/bin | grep python
 wget https://www.python.org/ftp/python/3.7.6/Python-3.7.6.tgz
@@ -162,7 +161,7 @@ Wheels are the new standard of python distribution and are intended to replace e
 
 ## 包管理工具easy_install.py和pip(pip3 python3)第三方包的安装管理
 
-Python2.7的安装包中，easy_install.py是默认安装的，而pip需要手动安装
+* Python2.7的安装包中，easy_install.py是默认安装的，而pip需要手动安装
 
 ```sh
 curl https://bootstrap.pypa.io/get-pip.py > get-pip.py
@@ -196,6 +195,24 @@ pip completion --bash >> ~/.profile # Bash  pip命令自动补全
 
 pip completion --zsh >> ~/.zprofile  # 对于zsh
  ~/.profile
+
+# pip 源替换
+清华：https://pypi.tuna.tsinghua.edu.cn/simple
+阿里云：http://mirrors.aliyun.com/pypi/simple/
+中国科技大学 https://pypi.mirrors.ustc.edu.cn/simple/
+华中理工大学：http://pypi.hustunique.com/
+山东理工大学：http://pypi.sdutlinux.org/
+豆瓣：http://pypi.douban.com/simple/
+腾讯云：http://mirrors.cloud.tencent.com/pypi/simple
+
+# ~/.pip/pip.conf
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+[install]
+trusted-host=mirrors.aliyun.com ## 目标
+
+# 暂时替换
+pip install torch -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 ### [iPython](https://github.com/ipython/ipython)
@@ -1397,6 +1414,7 @@ virtualenv
 * [在 Windows 上用 Python 做开发](https://docs.microsoft.com/zh-cn/windows/python/)
 * [简明 Python 教程 A Byte of Python](https://bop.mol.uno)
 * [Python最佳实践指南](https://pythonguidecn.readthedocs.io/zh/latest/index.html)
+
 * https://www.shiyanlou.com/courses/31
 * https://www.shiyanlou.com/courses/487
 * https://www.shiyanlou.com/courses/552
