@@ -1801,6 +1801,27 @@ smb://192.168.100.106
 # windows access internet \\192.168.1.13 share
 ```
 
+## OS Page Cache和Buffer Cache
+
+* pagecache：文件系统层级的缓存
+  - 从磁盘里读取的内容是存储到这里，这样程序读取磁盘内容就会非常快，比如使用Linux的grep和find等命令查找内容和文件时，第一次会慢很多，再次执行就快好多倍，几乎是瞬间
+  - page cache的数据被修改过后，也即脏数据，等到写入磁盘时机到来时，会转移到buffer cache 而不是直接写入到磁盘。
+  - 看到的cached这列的数值表示的是当前的页缓存（page cache）的占用量，page cache文件的页数据，页是逻辑上的概念，因此page cache是与文件系统同级的
+* buffer cache：磁盘等块设备的缓冲，内存的这一部分是要写入到磁盘里的
+  - buffers列表示当前的块缓存（buffer cache）占用量，buffer cache用于缓存块设备（如磁盘）的块数据。
+  - 块是物理上的概念，因此buffer cache是与块设备驱动程序同级的
+* 两者都是用来加速数据IO
+  - 将写入的页标记为dirty，然后向外部存储flush
+  - 读数据时首先读取缓存，如果未命中，再去外部存储读取，并且将读取来的数据也加入缓存
+* 操作系统总是积极地将所有空闲内存都用作page cache和buffer cache，当os的内存不够用时也会用LRU等算法淘汰缓存页
+
+```sh
+free -m
+-/+ buffers/cache
+```
+
+![Alt text](../_static/buffer_page.png "Optional title")
+
 ## RAID
 
 磁盘阵列（Redundant Arrays of independent Disks,RAID）,廉价冗余（独立）磁盘阵列。RAID是一种把多块独立的物理硬盘按不同的方式组合起来形成一个硬盘组（逻辑硬盘），提供比单个硬盘更高的存储性能和数据备份技术。RAID技术，可以实现把多个磁盘组合在一起作为一个逻辑卷提供磁盘跨越功能；可以把数据分成多个数据块（Block）并行写入/读出多个磁盘以提高访问磁盘的速度；可以通过镜像或校验操作提供容错能力。具体的功能以不同的RAID组合实现。在用户看来，RAID组成的磁盘组就像是一个硬盘，可以对它进行分区、格式化等操作。RAID的存储速度比单个硬盘高很多，并且可以提供自动数据备份，提供良好的容错能力。RAID级别，不同的RAID组合方式分为不同的RAID级别：
