@@ -356,8 +356,10 @@ alias df='df -H'
 alias du='du -ch'
  
 # top is atop, just like vi is vim
-alias top='atop'
- 
+alias top='sudo htop'
+alias cat='bat'
+alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+
 ## nfsrestart  - must be root  ##
 ## refresh nfs mount / cache etc for Apache ##
 alias nfsrestart='sync && sleep 2 && /etc/init.d/httpd stop && umount netapp2:/exports/http && sleep 2 && mount -o rw,sync,rsize=32768,wsize=32768,intr,hard,proto=tcp,fsc natapp2:/exports /http/var/www/html &&  /etc/init.d/httpd start'
@@ -2135,7 +2137,6 @@ ccache gcc foo.c
 * 查看
     - [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings.
 * [fasd](https://github.com/clvv/fasd) 增强cd命令
-* [bat](https://github.com/sharkdp/bat) 增强 cat 命令
 * [ogham/exa](https://github.com/ogham/exa):A modern version of ‘ls’. https://the.exa.website/
 * [alexanderepstein/Bash-Snippets](https://github.com/alexanderepstein/Bash-Snippets):A collection of small bash scripts for heavy terminal users
 * [ranger](https://github.com/ranger/ranger) 在多目录上浏览各种文件 比 cd 和 cat 更有效率，甚至可以在终端预览图片
@@ -2152,7 +2153,7 @@ ccache gcc foo.c
     - [fd](https://github.com/sharkdp/fd) A simple, fast and user-friendly alternative to 'find' 一个比 find 更简单更快的命令，会自动地忽略掉一些配置在 .gitignore 中的文件，以及 .git 下的文件
 * monitor
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序的
-    - [ sqshq / sampler ](https://github.com/sqshq/sampler):Tool for shell commands execution, visualization and alerting. Configured with a simple YAML file. https://sampler.dev
+    - [sqshq / sampler ](https://github.com/sqshq/sampler):Tool for shell commands execution, visualization and alerting. Configured with a simple YAML file. https://sampler.dev
     - nslookup:指定查询的类型，可以查到DNS记录的生存时间还可以指定使用哪个DNS服务器进行解释
     - [htop](http://hisham.hm/htop/): 提供更美观、更方便的进程监控工具
     - [atop](http://www.atoptool.nl/):按日记录进程的日志供以后分析。也能显示所有进程的资源消耗。还会高亮显示已经达到临界负载的资源。
@@ -2186,10 +2187,10 @@ ccache gcc foo.c
 * git
     - [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
     - [magicmonty/bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):An informative and fancy bash prompt for Git users
-    - tig：字符模式下交互查看git项目，可以替代git命令。
+    - tig：字符模式下交互查看git项目，可以替代git命令
 * download
     - you-get: 非常强大的媒体下载工具，支持youtube、google+、优酷、芒果TV、腾讯视频、秒拍等视频下载。
-    - axel：多线程下载工具，下载文件时可以替代curl、wget。
+    - axel：多线程下载工具，下载文件时可以替代curl、wget
 * prompt
     - [b-ryan/powerline-shell](https://github.com/b-ryan/powerline-shell):A beautiful and useful prompt for your shell
         + pre-patched and adjusted fonts for usage with the Powerline statusline plugin `sudo apt-get install fonts-powerline`

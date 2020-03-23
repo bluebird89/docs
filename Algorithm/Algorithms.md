@@ -132,6 +132,10 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
     - [jeffgerickson/algorithms](https://github.com/jeffgerickson/algorithms):Bug-tracking for Jeff's algorithms book, notes, etc.
     - [作业](http://jeffe.cs.illinois.edu/teaching/algorithms/hwex.html)
 
+## 图书
+
+* 《数据结构与算法分析：C语言描述版》
+
 ## 参考
 
 * [OpenGenus/cosmos](https://github.com/OpenGenus/cosmos):[Show ❤️ love by 🌟] Your personal library of every algorithm and data structure code that you will ever encounter
@@ -156,9 +160,7 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * [](https://visualgo.net/en):可视化
 * [我接触过的前端数据结构与算法](https://juejin.im/post/5958bac35188250d892f5c91)
 * [algorithm004-01/algorithm004-01](https://github.com/algorithm004-01/algorithm004-01)
-* [labuladong
-/
-fucking-algorithm](https://github.com/labuladong/fucking-algorithm):手把手撕LeetCode题目，扒各种算法套路的裤子，not only how，but also why. English version supported! https://labuladong.gitbook.io/algo/
+* [labuladong / fucking-algorithm](https://github.com/labuladong/fucking-algorithm):手把手撕LeetCode题目，扒各种算法套路的裤子，not only how，but also why. English version supported! https://labuladong.gitbook.io/algo/
 
 ## 工具
 
