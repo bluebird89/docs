@@ -360,6 +360,8 @@ docker rmi $(docker images -q) # 删除所有镜像，小心
 docker rmi $(docker images -q -f "dangling=true")
 docker image rm $(docker image ls -q redis)
 
+docker inspect zookeeper # 获取镜像基本信息
+
 docker save centos > /data/iso/centos.tar.gz # 导出
 docker save -o wdx-local-whale.tar wdxtub/wdx-whale
 docker export 7691a814370e > ubuntu.tar
@@ -843,7 +845,6 @@ CMD [ "npm", "start" ]
   - 在 Docker Pull 或 Dockerfile 中直接键入 Private Registry 的地址，通常这样会导致与 Private Registry 的绑定，缺乏灵活性
   - Registry的组织格式
   - 利用docker-registry构建简单的私有Registry
-  - docker-compose简介
   - 使用VMWare Harbor构建企业级私有Registry
 
 ```sh
@@ -1260,7 +1261,18 @@ healthcheck:
 
 docker build -t my-image .
 docker run my-image
-docker-compose stop # 关闭当前项目容器
+
+
+docker-compose build
+docker-compose up -d --force-recreate
+docker-compose up 启动所有容器
+docker-compose up -d  后台启动并运行所有容器
+docker-compose up --no-recreate -d  不重新创建已经停止的容器
+docker-compose up -d test2  只启动test2这个容器
+docker-compose stop 停止容器
+docker-compose start  启动容器
+docker-compose down 停止并销毁容器
+
 docker-compose exec {container-name} bash
 docker-compose kill -s SIGINT
 ```

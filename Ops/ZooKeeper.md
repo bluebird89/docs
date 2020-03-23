@@ -120,6 +120,8 @@ ZooKeeper is a centralized service for maintaining configuration information, na
 
 ```sh
 brew install zookeeper
+brew serveices start zookeeper
+zkServer status
 
 # /usr/local/etc/zookeeper/zoo.cfg
 # The number of milliseconds of each tick
@@ -133,7 +135,9 @@ syncLimit=5 # 在运行过程中，Leader 负责与 ZK 集群中所有机器进�
 # the directory where the snapshot is stored.
 # do not use /tmp for storage, /tmp here is just▫
 # example sakes.
-dataDir=/usr/local/var/run/zookeeper/data # 存储快照文件 snapshot 的目录，默认情况下，事务日志也会存储在这里。
+dataDir=/usr/local/var/run/zookeeper/data # 存储快照文件 snapshot 的目录，默认情况下，事务日志也会存储在这里
+# 日志存放目录
+dataLogDir=/usr/local/var/run/zookeeper/log/zk1
 # the port at which the clients will connect
 clientPort=2181 # ZK 客户端连接 ZK 服务器的端口，即对外服务端口，默认设置为 2181。
 # the maximum number of client connections.
@@ -151,28 +155,67 @@ clientPort=2181 # ZK 客户端连接 ZK 服务器的端口，即对外服务端�
 # Set to "0" to disable auto purge feature
 #autopurge.purgeInterval=1 # # ZK 提供了自动清理事务日志和快照文件的功能，这个参数指定了清理频率，单位是小时，需要配置一个 1 或更大的整数，默认是 0，表示不开启自动清理功能。
 # `server.x=[hostname]:nnnnn[:nnnnn]`：对应上面的伪集群配置，x 是一个数字，与 myid 文件（该文件在 ZK 服务器启动手动创建，保存在 `dataDir` 配置的目录下，其中只有一个数字，即一个 Server ID）中的 id 是一致的，右边配置的是对应机器的 IP 地址和两个端口，第一个端口用于 Follower 和 Leader 之间的数据同步和其它通信，第二个端口用于 Leader 选举过程中投票通信。
-server.1=127.0.0.1:2888:3888 
+# 集群配置
+# server.x 分别对应myid文件的内容（每个 zoo.cfg 文件都需要添加）  2287(通讯端口):3387（选举端口）
+server.1=localhost:2287:3387
+server.2=localhost:2288:3388
+server.3=localhost:2289:3389
 
-zkServer start|stop|restart
+zkServer.sh start|stop|restart
 touch /usr/local/var/run/zookeeper/data/myid
 echo 1 >> /usr/local/var/run/zookeeper/data/myid
-telnet 127.0.0.1 2181
-
-stat # 打印服务端信息
-
-zkCli -server 127.0.0.1:2181
-create /hello zookeeper
-ls /
-set /hello zk
-delete /hello
 ```
 
 ## API
 
-## 资源
+* ZooKeeper -server host:port cmd args
+    - stat path [watch]
+    - set path data [version]
+    - ls path [watch]
+    - delquota [-n|-b] path
+    - ls2 path [watch]
+    - setAcl path acl
+    - setquota -n|-b val path
+    - history
+    - redo cmdno
+    - printwatches on|off
+    - delete path [version]
+    - sync path
+    - listquota path
+    - rmr path
+    - get path [watch]
+    - create [-s] [-e] path data acl
+        + 创建顺序节点 添加flag：-s
+        + 创建临时节点，请添加flag：-e 当客户端断开连接时，临时节点将被删除
+    - addauth scheme auth
+    - quit
+    - getAcl path
+    - close
+    - connect host:port
 
-* [yaojingguo/geekbang-zk-course](https://github.com/yaojingguo/geekbang-zk-course):极客时间ZooKeeper实战与源代码剖析课程资源
+```sh
+zkCli -server 127.0.0.1:2181
+
+stat /path # 打印服务端信息
+ls /path # 列出子项
+
+create /MyFirstZnode Hello # create /path /data
+get /MyFirstZnode
+
+create -s /MyFirstZnode Hello2 # 顺序节点
+get /FirstZnode0000000023 # 要访问顺序节点，必须输入znode的完整路径
+set /MyFirstZnode Hello3
+rmr /MyFirstZnode
+
+get /FirstZnode 1 # 当指定的znode或znode的子数据更改时，监视器会显示通知
+create /parent/path/subnode/path /data # 创建子项/子节点
+```
+
 
 ## 图书
 
 * Zookeeper: 分布式过程协同技术详解
+
+## 资源
+
+* [yaojingguo/geekbang-zk-course](https://github.com/yaojingguo/geekbang-zk-course):极客时间ZooKeeper实战与源代码剖析课程资源
