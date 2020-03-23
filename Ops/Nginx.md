@@ -2050,6 +2050,7 @@ COPY /some/content /usr/share/nginx/html
 docker pull nginx
 docker run -p 80:80 --name mynginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/wwwlogs  -d nginx
 docker run -p 8081:80 -v /some/content:/usr/share/nginx/html:ro -d nginx
+docker run --name nginx -d -p 80:80 -p 81:81 -v $PWD/html:/usr/share/nginx/html -v $PWD/conf:/etc/nginx/conf -v $PWD/logs:/var/log/nginx --restart=always nginx:1.14-alpine
 
 docker build -t nginx .
 docker images nginx
