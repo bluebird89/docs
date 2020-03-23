@@ -32,6 +32,7 @@
     - [bundlehunt](https://bundlehunt.com/)
     - [盘下载器](https://www.baiduwp.com/)
     - [EagleGet](http://www.eagleget.com/cn/)
+    - [agalwood / Motrix](https://github.com/agalwood/Motrix):A full-featured download manager. https://motrix.app/
     - [Algram/ytdl-webserver](https://github.com/Algram/ytdl-webserver):📻 Webserver for downloading youtube videos. Ready for docker.
 
 ## md5 verdify
