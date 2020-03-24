@@ -378,6 +378,8 @@ curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.1.1-
 tar xzvf filebeat-7.1.1-darwin-x86_64.tar.gz
 cd filebeat-7.1.1-darwin-x86_64/
 
+curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb
+
 # filebeat.yml
 Copy snippet
 output.elasticsearch:
@@ -406,6 +408,12 @@ setup.kibana:
   - solr xml json
   - es json
 * 近实时搜索
+
+## docker
+
+```sh
+docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --name elk sebp/elk
+```
 
 ## 问题
 
