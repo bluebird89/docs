@@ -263,9 +263,43 @@ sudo systemctl restart docker
 
 Machine management for a container-centric world 创建运行Docker的宿主机的，比如AWS、Azure上的虚拟机，也可以用来在本地创建VirtualBox等虚拟机.直接把Boot2Docker的功能也取代了，于是Boot2Docker成为了历史
 
+* config：查看当前激活状态 Docker 主机的连接信息
+* creat：创建 Docker 主机
+  - 需要 Boot2Docker ISO 支持
+* env：显示连接到某个主机需要的环境变量
+* inspect： 以 json 格式输出指定Docker的详细信息
+* ip： 获取指定 Docker 主机的地址
+* kill： 直接杀死指定的 Docker 主机
+* ls： 列出所有的管理主机
+* provision： 重新配置指定主机
+* regenerate-certs： 为某个主机重新生成 TLS 信息
+* restart： 重启指定的主机
+* rm： 删除某台 Docker 主机，对应的虚拟机也会被删除
+* ssh： 通过 SSH 连接到主机上，执行命令
+* scp： 在 Docker 主机之间以及 Docker 主机和本地主机之间通过 scp 远程复制数据
+* mount： 使用 SSHFS 从计算机装载或卸载目录
+* start： 启动一个指定的 Docker 主机，如果对象是个虚拟机，该虚拟机将被启动
+* status： 获取指定 Docker 主机的状态(包括：Running、Paused、Saved、Stopped、Stopping、Starting、Error)等
+* stop： 停止一个指定的 Docker 主机
+* upgrade： 将一个指定主机的 Docker 版本更新为最新
+* url： 获取指定 Docker 主机的监听 URL
+
 ```sh
-docker-machine start # Start virtual machine for docker
-docker-machine env  # It's helps to get environment variables
+ base=https://github.com/docker/machine/releases/download/v0.16.0 &&
+  curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+  sudo mv /tmp/docker-machine /usr/local/bin/docker-machine &&
+  chmod +x /usr/local/bin/docker-machine
+
+docker-machine ls
+docker-machine create --driver virtualbox test
+docker-machine ip test
+
+docker-machine start|stop test # Start virtual machine for docker
+docker-machine ssh test
+
+docker-machine active # 查看当前激活状态的 Docker 主机
+
+docker-machine env  test
 eval "$(docker-machine env default)" # Set environment variables
 ```
 
@@ -462,11 +496,11 @@ docker run -it -w /home alpine sh # 设置container的工作路径
 docker run -it --link source-container:alias alpine sh # link两个container
 
 docker logs -f $CONTAINER_ID  # 查看日志
-docker attach $CONTAINER_ID  # -f:动态输出
+docker attach $CONTAINER_ID # 退出容器会终止容器
 
 docker top determined_swanson    # 查看容器内部运行的进程
 
-docker inspect [CONTAINER ID] # Shows all the info of a container.
+docker inspect [CONTAINER ID] # Shows all the info of a container. 退出容器终端，不会导致容器的停止
 docker inspect id | grep IPAddress | cut -d '"' -f 4 # 获取Container IP地址
 docker inspect -f '{{range $p, $conf := .NetworkSettings.Ports}} {{$p}} -> {{(index $conf 0).HostPort}} {{end}}' id # 获取端口映射
 docker inspect name  ||  docker ps -l(ast)/-a(ll)     # 查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息
@@ -897,6 +931,10 @@ docker push 192.168.1.2/csphere/nginx:1.7
 * 来源于之前的Fig项目，使用python代码编写
 * 一款容器编排程序，使用 YAML 配置的形式将需要启动的容器管理起来
 * 能够处理容器的依赖关系，在每个容器中会将容器的 IP 和服务的名称使用 hosts 的方式绑定，这样就能在容器中直接使用服务名称来接入对应的容器了
+* 三个步骤：
+  - 使用 Dockerfile 定义应用程序的环境。
+  - 使用 docker-compose.yml 定义构成应用程序的服务，这样它们可以在隔离环境中一起运行。
+  - 执行 docker-compose up 命令来启动并运行整个应用程序
 * 允许用户在一个模板（YAML 格式）中定义一组相关联的应用容器（被称为一个 project，即项目），部署流程中各个动作的执行顺序，部署过程所需要依赖文件和被部署文件的存储位置和获取方式，以及如何验证部署成功。例如一个 Web 服务容器再加上后端的数据库服务容器等。
 * 概念
   - 工程（project）:运行目录下的所有文件（docker-compose.yml，extends文件或环境变量文件等）组成一个工程，若无特殊指定工程名即为当前目录名
@@ -985,30 +1023,44 @@ docker push 192.168.1.2/csphere/nginx:1.7
     + –scale SERVICE=NUM 设置服务运行容器的个数，将覆盖在compose中通过scale指定的参数
   - version            Show the Docker-Compose version information
 * 模版文件
-  - Compose目前有三个版本分别为Version 1，Version 2，Version 3
-  - depends_on：解决容器的依赖、启动先后的问题
+  - 目前有三个版本分别为Version 1，Version 2，Version 3
+  - depends_on：设置依赖关系，解决容器的依赖、启动先后的问题
+    + docker-compose up ：以依赖性顺序启动服务,被依赖项先启动
+    + docker-compose up SERVICE ：自动包含 SERVICE 的依赖项
+    + docker-compose stop ：按依赖关系顺序停止服务
+  - expose:暴露端口，但不映射到宿主机，只允许能被连接的服务访问。仅可以指定内部端口为参数
   - ports用于映射端口的标签，使用HOST:CONTAINER格式或者只是指定容器的端口，宿主机会随机映射端口
   - extra_hosts：添加主机名的标签，会在/etc/hosts文件中添加一些记录
-  - tmpfs：挂载临时目录到容器内部，与 run 的参数一样效果
-  - volumes：挂载一个目录或者一个已存在的数据卷容器
+  - tmpfs：在容器内安装一个临时文件系统，挂载临时目录到容器内部，与 run 的参数一样效果
+  - build
+    + 指定为构建镜像上下文路径
+    + 作为具有在上下文指定的路径的对象,以及可选的 Dockerfile 和 arg
+  - volumes：将主机的数据卷或着文件挂载到容器里
     + 使用 [HOST:CONTAINER]格式
-    + 使用[HOST:CONTAINER:ro]格式，后者对于容器来说，数据卷是只读的，可以有效保护宿主机的文件系统。
-    + Compose的数据卷指定路径可以是相对路径，使用 . 或者 .. 来指定相对目录。
+    + 使用[HOST:CONTAINER:ro]格式，后者对于容器来说，数据卷是只读的，可以有效保护宿主机的文件系统
+    + Compose的数据卷指定路径可以是相对路径，使用 . 或者 .. 来指定相对目录
   - volumes_from：从另一个服务或容器挂载其数据卷
   - dns：自定义DNS服务器。可以是一个值，也可以是一个列表
-  - entrypoint:定义接入点，覆盖Dockerfile中的定义：entrypoint: /code/entrypoint.sh
-  - PID模式设置为主机PID模式，跟主机系统共享进程命名空间。容器使用这个标签将能够访问和操纵其他容器和宿主机的名称空间。
-  - env_file:定义一个专门存放变量的文件
+  - entrypoint:定义接入点，覆盖Dockerfile中的定义：`entrypoint: /code/entrypoint.sh`
+  - PID模式设置为主机PID模式，跟主机系统共享进程命名空间。容器使用这个标签将能够访问和操纵其他容器和宿主机的名称空间
+  - env_file:定义一个专门存放变量的文件,也可以列表 `env_file: .env`
     + 如果通过docker-compose -f FILE指定配置文件，则env_file中路径会使用配置文件路径
     + 如果有变量名称与environment指令冲突，则以后者为准
-    + 如果在配置文件中有build操作，变量并不会进入构建过程中。
-  - environment：设置镜像变量，它可以保存变量到镜像里面，也就是说启动的容器也会包含这些变量设置，这是与 arg 最大的不同。
-    + 一般 arg 标签的变量仅用在构建过程中。而 environment 和 Dockerfile 中的 ENV 指令一样会把变量一直保存在镜像、容器中，类似 docker run -e 的效果。
+    + 如果在配置文件中有build操作，变量并不会进入构建过程中
+  - environment：设置镜像变量，可以保存变量到镜像里面，也就是说启动的容器也会包含这些变量设置，这是与 arg 最大的不同
+    + 一般 arg 标签的变量仅用在构建过程中。而 environment 和 Dockerfile 中的 ENV 指令一样会把变量一直保存在镜像、容器中，类似 docker run -e 的效果
+  - 环境变量可以用来配置Docker-Compose的行为
+    + COMPOSE_PROJECT_NAME 设置通过Compose启动的每一个容器前添加的项目名称，默认是当前工作目录的名字
+    + COMPOSE_FILE 设置docker-compose.yml模板文件的路径。默认路径是当前工作目录。
+    + DOCKER_HOST 设置Docker daemon的地址。默认使用`unix:///var/run/docker.sock`
+    + DOCKER_TLS_VERIFY 如果设置不为空，则与Docker daemon交互通过TLS进行。
+    + DOCKER_CERT_PATH 配置TLS通信所需要的验证(ca.pem、cert.pem 和 key.pem)文件的路径，默认是 ~/.docker 。
   - cap_add:增加指定容器的内核能力（capacity）
   - cap_drop:去掉指定容器的内核能力（capacity）
-  - cgroup_parent:创建了一个cgroup组名
-  - devices:指定设备映射关系
-  - expose:暴露端口，但不映射到宿主机，只允许能被连接的服务访问。仅可以指定内部端口为参数
+  - cgroup_parent:为容器指定父 cgroup 组，意味着将继承该组的资源限制
+  - command 覆盖容器启动的默认命令 `command: ["bundle", "exec", "thin", "-p", "3000"]`
+  - devices:指定设备映射列表
+  - container_name 指定自定义容器名称，而不是生成的默认名称
   - extends:基于其它模板文件进行扩展
     + A、要避免出现循环依赖
     + B、extends不会继承links和volumes_from中定义的容器和数据卷资源
@@ -1016,16 +1068,16 @@ docker push 192.168.1.2/csphere/nginx:1.7
   - labels:为容器添加Docker元数据（metadata）信息
   - links:链接到其它服务中的容器。使用服务名称（同时作为别名），或者“服务名称:服务别名”（如 SERVICE:ALIAS）
     + 使用别名将会自动在服务容器中的/etc/hosts里创建
-  - log_driver:指定日志驱动类型,目前支持三种日志驱动类型
+  - log_driver:定服务容器的日志记录驱动程序，默认值为json-file `driver: "json-file"`
   - log_opt:日志驱动的相关参数
-  - net:设置网络模式
+  - network_mode 设置网络模式
+  - secrets：存储敏感数据
+  - restart
+    + no：是默认的重启策略，在任何情况下都不会重启容器。
+    + always：容器总是重新启动。
+    + on-failure：在容器非正常退出时（退出状态非0），才会重启容器。
+    + unless-stopped：在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器
   - security_opt:指定容器模板标签（label）机制的默认属性（用户、角色、类型、级别等）
-  - 环境变量可以用来配置Docker-Compose的行为。
-    + COMPOSE_PROJECT_NAME 设置通过Compose启动的每一个容器前添加的项目名称，默认是当前工作目录的名字。
-    + COMPOSE_FILE 设置docker-compose.yml模板文件的路径。默认路径是当前工作目录。
-    + DOCKER_HOST 设置Docker daemon的地址。默认使用unix:///var/run/docker.sock。
-    + DOCKER_TLS_VERIFY 如果设置不为空，则与Docker daemon交互通过TLS进行。
-    + DOCKER_CERT_PATH 配置TLS通信所需要的验证(ca.pem、cert.pem 和 key.pem)文件的路径，默认是 ~/.docker 。
 * 参考
   - [yeasy/docker-compose-files](https://github.com/yeasy/docker-compose-files):Some typical docker compose templates.
 
@@ -1091,11 +1143,31 @@ services:
               - alpine:latest
               - corp/web_app:3.14
 
+version: "3.1"
+services:
+
+mysql:
+  image: mysql
+  environment:
+    MYSQL_ROOT_PASSWORD_FILE: /run/secrets/my_secret
+  secrets:
+    - my_secret
+
+secrets:
+  my_secret:
+    file: ./my_secret.txt
+
 networks:
   front-tier:
     driver: bridge
   back-tier:
     driver: bridge
+
+security-opt：
+  - label:user:USER   # 设置容器的用户标签
+  - label:role:ROLE   # 设置容器的角色标签
+  - label:type:TYPE   # 设置容器的安全策略标签
+  - label:level:LEVEL  # 设置容器的安全等级标签
 
 build:
   # 可以是Dockerfile的文件路径，也可以是到链接到git仓库的url，当提供的值是相对路径时，被解析为相对于撰写文件的路径，此目录也是发送到Docker守护进程的context
@@ -1114,13 +1186,13 @@ services:
   db:
     image: postgres
 
+# 此服务的内部容器中 /etc/hosts 创建一个具有 ip 地址和主机名的映射关系
 extra_hosts:
  - "somehost:162.242.195.82"
  - "otherhost:50.31.209.229"
 
 entrypoint: /code/entrypoint.sh # 指定服务容器启动后执行的入口文件
 user: nginx # 指定容器中运行应用的用户名
-
 
 working_dir: /code # 指定容器中工作目录
 
@@ -1249,6 +1321,23 @@ services:
 network_mode: "bridge"|"none"|"host"
 network_mode: "service:[service name]"
 network_mode: "container:[container name/id]"
+
+services:
+  some-service:
+    networks:
+      some-network:
+        aliases:
+         - alias1
+      other-network:
+        aliases:
+         - alias2
+networks:
+  some-network:
+    # Use a custom driver
+    driver: custom-driver-1
+  other-network:
+    # Use a custom driver which takes special options
+    driver: custom-driver-2
 
 security_opt:
     - label:user:USER
@@ -1416,7 +1505,7 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 * [中文文档](https://docker-doc.readthedocs.io/zh_CN/latest/index.html)
 * [中文文档](http://www.dockerinfo.net)
 * [LXC](https://stgraber.org/2013/12/20/lxc-1-0-blog-post-series/)
+* [每天5分钟玩转Docker容器技术](https://mp.weixin.qq.com/s/7o8QxGydMTUe4Q7Tz46Diw)
 
 * https://confluence.atlassian.com/bamboo/getting-started-with-docker-and-bamboo-687213473.html
 * [Docker](http://blog.csdn.net/erixhao/article/details/72762851)
-* [Docker 教程](http://www.runoob.com/docker/docker-tutorial.html)

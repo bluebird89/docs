@@ -691,6 +691,10 @@ PUBSUB CHANNELS # 查看订阅与发布系统状态
 PUNSUBSCRIBE mychannel # 退订所有给定模式的频道
 ```
 
+分布式锁
+限流
+和源数据的同步问题
+
 ## HyperLogLog
 
 来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的。
@@ -872,8 +876,9 @@ SCRIPT LOAD "return 1"
 ## Sentinel
 
 * 2.8中提供了哨兵工具来实现自动化的系统监控和故障恢复功能。作用就是监控Redis系统的运行状况。功能：
-    - 监控主服务器和从服务器是否正常运行。 
-    - 主服务器出现故障时自动将从服务器转换为主服务器。
+    - 监控主服务器和从服务器是否正常运行
+    - 主服务器出现故障时自动将从服务器转换为主服务器
+* 由若干 Sentinel 节点组成的分布式集群，可以实现故障发现、故障自动转移、配置中心和客户端通知。Redis Sentinel 的节点数量要满足 2n+1(n>=1)的奇数个
 * 工作方式
     - 每个Sentinel（哨兵）进程以每秒钟一次的频率向整个集群中的Master主服务器，Slave从服务器以及其他Sentinel（哨兵）进程发送一个 PING 命令。
     - 如果一个实例（instance）距离最后一次有效回复 PING 命令的时间超过 down-after-milliseconds 选项所指定的值， 则这个实例会被 Sentinel（哨兵）进程标记为主观下线（SDOWN）
@@ -883,8 +888,9 @@ SCRIPT LOAD "return 1"
     - 当Master主服务器被 Sentinel（哨兵）进程标记为客观下线（ODOWN）时，Sentinel（哨兵）进程向下线的 Master主服务器的所有 Slave从服务器发送 INFO 命令的频率会从 10 秒一次改为每秒一次。
     - 若没有足够数量的 Sentinel（哨兵）进程同意 Master主服务器下线， Master主服务器的客观下线状态就会被移除。若 Master主服务器重新向 Sentinel（哨兵）进程发送 PING 命令返回有效回复，Master主服务器的主观下线状态就会被移除。
 * 优点：
-    - 哨兵模式是基于主从模式的，所有主从的优点，哨兵模式都具有
+    - 哨兵模式是基于主从模式的，所有主从的优点，都具有
     - 主从可以自动切换，系统更健壮，可用性更高
+    - 方便实现 Redis 数据节点的线形扩展，轻松突破 Redis 自身单线程瓶颈，可极大满足 Redis 大容量或高性能的业务需求
 * 缺点：
     - 较难支持在线扩容，在集群容量达到上限时在线扩容会变得很复杂
 
@@ -928,6 +934,29 @@ SCRIPT LOAD "return 1"
 * CLUSTER COUNTKEYSINSLOT <slot> 返回槽 slot 目前包含的键值对数量。
 * CLUSTER GETKEYSINSLOT <slot> <count> 返回 count 个 slot 槽中的键。
 * CLUSTER SLAVES node-id 返回一个master节点的slaves 列表
+
+```
+# redis.conf
+aemonize yes
+port 8001（分别对每个机器的端口号进行设置）
+dir /usr/local/redis-cluster/8001/（指定数据文件存放位置，必须要指定不同的目录位置，不然会丢失数据）
+cluster-enabled yes（启动集群模式）
+cluster-config-file nodes-8001.conf（集群节点信息文件，这里800x最好和port对应上）
+cluster-node-timeout 5000
+
+bind 127.0.0.1（去掉bind绑定访问ip信息）
+
+protected-mode no （关闭保护模式）
+appendonly yes
+
+redis-server /usr/local/redis-cluster/800*/redis.conf
+
+./redis-trib.rb create --replicas 1 127.0.0.1:7000 127.0.0.1:7001 \
+127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005
+
+/usr/local/redis/redis-5.0.2/src/redis-cli -a xxx --cluster create --cluster-replicas 1 192.168.5.100:8001 192.168.5.100:8002 192.168.5.100:8003 192.168.5.100:8004 192.168.5.100:8005 192.168.5.100:8006
+/usr/local/redis/src/redis-cli -a xxx -c -h 192.168.0.60 -p 8001 shutdown # 逐个进行关闭
+```
 
 ## 场景
 
@@ -1184,6 +1213,39 @@ maxmemory-policy volatile-lru
 
 ```sh
 redis-benchmark -h host -p port -k 0 -t get -n 100000  -c 8000
+```
+
+* 使用规范
+    - 冷热数据区分 虽然 Redis支持持久化，但将所有数据存储在 Redis 中，成本非常昂贵。建议将热数据 (如 QPS超过 5k) 的数据加载到 Redis 中。低频数据可存储在 Mysql、 ElasticSearch中。
+    - 业务数据分离 不要将不相关的数据业务都放到一个 Redis中。一方面避免业务相互影响，另一方面避免单实例膨胀，并能在故障时降低影响面，快速恢复。
+    - 消息大小限制 由于 Redis 是单线程服务，消息过大会阻塞并拖慢其他操作。保持消息内容在 1KB 以下是个好的习惯。严禁超过 50KB 的单条记录。消息过大还会引起网络带宽的高占用，持久化到磁盘时的 IO 问题。
+    - 连接数限制 连接的频繁创建和销毁，会浪费大量的系统资源，极限情况会造成宿主机当机。请确保使用了正确的 Redis 客户端连接池配置。
+    - 缓存 Key 设置失效时间 作为缓存使用的 Key，必须要设置失效时间。失效时间并不是越长越好，请根据业务性质进行设置。注意，失效时间的单位有的是秒，有的是毫秒，这个很多同学不注意容易搞错。
+    - 缓存不能有中间态 缓存应该仅作缓存用，去掉后业务逻辑不应发生改变，万不可切入到业务里。第一，缓存的高可用会影响业务；第二，产生深耦合会发生无法预料的效果；第三，会对维护行产生肤效果。
+    - 扩展方式首选客户端 hash：如单 redis 集群并不能为你的数据服务，不要着急扩大你的 redis 集群（包括 M/S 和 Cluster)，集群越大，在状态同步和持久化方面的性能越差。 优先使用客户端 hash 进行集群拆分。如：根据用户 id 分 10 个集群，用户尾号为 0 的落在第一个集群。
+* 操作限制
+    - 严禁使用 Keys Keys 命令效率极低，属于 O(N)操作，会阻塞其他正常命令，在 cluster 上，会是灾难性的操作。严禁使用，DBA 应该 rename 此命令，从根源禁用。
+    - 严禁使用 Flush flush 命令会清空所有数据，属于高危操作。严禁使用，DBA 应该 rename 此命令，从根源禁用，仅 DBA 可操作。
+    - 严禁作为消息队列使用 如没有非常特殊的需求，严禁将 Redis 当作消息队列使用。Redis 当作消息队列使用，会有容量、网络、效率、功能方面的多种问题。如需要消息队列，可使用高吞吐的 Kafka 或者高可靠的 RocketMQ。
+    - 严禁不设置范围的批量操作 redis 那么快，慢查询除了网络延迟，就属于这些批量操作函数。大多数线上问题都是由于这些函数引起。
+        + [zset] 严禁对 zset 的不设范围操作 ZRANGE、 ZRANGEBYSCORE等多个操作 ZSET 的函数，严禁使用 ZRANGE myzset 0 -1 等这种不设置范围的操作。请指定范围，如 ZRANGE myzset 0 100。如不确定长度，可使用 ZCARD 判断长度
+        + [hash] 严禁对大数据量 Key 使用 HGETALL HGETALL会取出相关 HASH 的所有数据，如果数据条数过大，同样会引起阻塞，请确保业务可控。如不确定长度，可使用 HLEN 先判断长度
+        + [key] Redis Cluster 集群的 mget 操作 Redis Cluster 的 MGET 操作，会到各分片取数据聚合，相比传统的 M/S架构，性能会下降很多，请提前压测和评估
+        + [其他] 严禁使用 sunion, sinter, sdiff等一些聚合操作
+    - 禁用 select 函数 select函数用来切换 database，对于使用方来说，这是很容易发生问题的地方，cluster 模式也不支持多个 database，且没有任何收益，禁用。
+    - 禁用事务 redis 本身已经很快了，如无大的必要，建议捕获异常进行回滚，不要使用事务函数，很少有人这么干。
+    - 禁用 lua 脚本扩展 lua 脚本虽然能做很多看起来很 cool 的事情，但它就像是 SQL 的存储过程，会引入性能和一些难以维护的问题，禁用。
+    - 禁止长时间 monitor monitor函数可以快速看到当前 redis 正在执行的数据流，但是当心，高峰期长时间阻塞在 monitor 命令上，会严重影响 redis 的性能。此命令不禁止使用，但使用一定要特别特别注意。
+* Key 规范：Redis 的 Key 一定要规范，这样在遇到问题时，能够进行方便的定位。Redis 属于无 scheme 的 KV 数据库，所以，我们靠约定来建立其 scheme 语义。其好处：
+    - 能够根据某类 key 进行数据清理
+    - 能够根据某类 key 进行数据更新
+    - 能够方面了解到某类 key 的归属方和应用场景
+    - 为统一化、平台化做准备，减少技术变更
+    - 一个 key 需要带以下维度：业务、key 用途、变量等，各个维度使用 : 进行分隔，以下是几个 key 的实例:
+
+```
+user:sex 用户 10002232 的性别
+msg:achi 201712 的用户发言数量排行榜
 ```
 
 ## 开发规范
