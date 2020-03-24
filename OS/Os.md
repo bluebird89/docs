@@ -28,8 +28,50 @@
 
 ## 存储
 
-页是计算机管理存储器的逻辑块，硬件及OS往往将主存和磁盘存储区分割为连续的大小相等的块，每个存储块称为一页（许多OS中，页的大小通常为4K）
-主存和磁盘以页为单位交换数据。当程序要读取的数据不在主存中时，会触发一个缺页异常，此时系统会向磁盘发出读盘信号，磁盘会找到数据的起始位置并向后连续读取一页或几页载入内存中，然后异常返回，程序继续运行。
+* 页是计算机管理存储器的逻辑块，将主存和磁盘存储区分割为连续的大小相等的块，每个存储块称为一页（许多OS中，页的大小通常为4K）
+* 主存和磁盘以页为单位交换数据。当程序要读取的数据不在主存中时，会触发一个缺页异常，此时系统会向磁盘发出读盘信号，磁盘会找到数据的起始位置并向后连续读取一页或几页载入内存中，然后异常返回，程序继续运行
+* Page cache:针对文件系统的,是文件的缓存,在文件层面上的数据会缓存到page cache
+    - 读：通过将磁盘中的数据缓存到内存中，从而减少磁盘I/O操作提高性能
+        + 磁盘访问的速度比内存慢好几个数量级（毫秒和纳秒的差距）
+        + 被访问过的数据，有很大概率会被再次访问
+        + 内核发起一个读请求时（例如进程发起read()请求），首先会检查请求的数据是否缓存到了page cache中，如果有，那么直接从内存中读取，不需要访问磁盘，这被称为cache命中（cache hit）
+        + 如果cache中没有请求的数据，即cache未命中（cache miss），就必须从磁盘中读取数据。然后内核将读取的数据缓存到cache中，这样后续的读请求就可以命中cache了
+        + page可以只缓存一个文件部分的内容，不需要把整个文件都缓存进来
+    - page回写（page writeback）：在page cache中的数据更改时能够被同步到磁盘上
+        + 当内核发起一个写请求时（例如进程发起write()请求），同样是直接往cache中写入，磁盘的内容不会直接更新
+        + 内核会将被写入的page标记为dirty，并将其加入dirty list中。内核会周期性地将dirty list中的page写回到磁盘上，从而使磁盘上的数据和内存中缓存的数据一致
+            * 用户进程调用sync() 和 fsync()系统调用
+            * 空闲内存低于特定的阈值（threshold）
+            * Dirty数据在内存中驻留的时间超过一个特定的阈值
+    - 一个inode对应一个page cache对象，一个page cache对象包含多个物理page，其内容对应磁盘上的block
+    - Cache回收：释放page，从而释放内存空间。cache回收的任务是选择合适的page释放，并且如果page是dirty的，需要将page写回到磁盘中再释放。理想的做法是释放距离下次访问时间最久的page，但是很明显不现实
+        + LRU（least rencently used)算法是选择最近一次访问时间最靠前的page，即干掉最近没被光顾过的page。原始LRU算法存在的问题是，有些文件只会被访问一次，但是按照LRU的算法，即使这些文件以后再也不会被访问了，但是如果它们是刚刚被访问的，就不会被选中。
+        + Two-List策略:维护了两个list，active list 和 inactive list
+            + 在active list上的page被认为是hot的，不能释放。只有inactive list上的page可以被释放的。首次缓存的数据的page会被加入到inactive list中，已经在inactive list中的page如果再次被访问，就会移入active list中。两个链表都使用了伪LRU算法维护，新的page从尾部加入，移除时从头部移除，就像队列一样。如果active list中page的数量远大于inactive list，那么active list头部的页面会被移入inactive list中，从而位置两个表的平衡
+        + 内核使用address_space结构来表示一个page cache https://www.linuxidc.com/Linux/2018-12/156117.htm
+            * 
+* Buffer cache:针对磁盘块的缓存,也就是在没有文件系统的情况下,直接对磁盘进行操作的数据会缓存到buffer cache中,例如,文件系统的元数据都会缓存到buffer cache中
+
+```c
+# address_space
+struct address_space {
+    struct inode            *host;              /* owning inode */
+    struct radix_tree_root  page_tree;          /* radix tree of all pages */
+    spinlock_t              tree_lock;          /* page_tree lock */
+    unsigned int            i_mmap_writable;    /* VM_SHARED ma count */
+    struct prio_tree_root   i_mmap;             /* list of all mappings */
+    struct list_head        i_mmap_nonlinear;   /* VM_NONLINEAR ma list */
+    spinlock_t              i_mmap_lock;        /* i_mmap lock */
+    atomic_t                truncate_count;     /* truncate re count */
+    unsigned long           nrpages;            /* total number of pages */
+    pgoff_t                 writeback_index;    /* writeback start offset */
+    struct address_space_operations *a_ops;     /* operations table */
+    unsigned                long flags;         /* gfp_mask and error flags */
+    struct backing_dev_info *backing_dev_info;  /* read-ahead information */
+    spinlock_t              private_lock;       /* private lock */
+    struct list_head        private_list;       /* private list */
+    struct
+```
 
 ## 网络编程模型
 

@@ -2136,6 +2136,7 @@ ccache gcc foo.c
     - [jaywcjlove / linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
 * 查看
     - [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings.
+* [lynx](link):终端构建的Web浏览应用程序
 * [fasd](https://github.com/clvv/fasd) 增强cd命令
 * [ogham/exa](https://github.com/ogham/exa):A modern version of ‘ls’. https://the.exa.website/
 * [alexanderepstein/Bash-Snippets](https://github.com/alexanderepstein/Bash-Snippets):A collection of small bash scripts for heavy terminal users
@@ -2149,7 +2150,7 @@ ccache gcc foo.c
 * [sshrc](https://github.com/Russell91/sshrc ) 在登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置
 * 搜索
     - [ack](https://beyondgrep.com/)、[ag](https://github.com/ggreer/the_silver_searcher)和 [rg](https://github.com/BurntSushi/ripgrep)是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到配置在 .gitignore 中的规则
-    - [fzf](https://github.com/junegunn/fzf) cherry_blossom A command-line fuzzy finder `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf ~/.fzf/install`
+    - [fzf](https://github.com/junegunn/fzf) cherry_blossom A command-line fuzzy finder `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install`
     - [fd](https://github.com/sharkdp/fd) A simple, fast and user-friendly alternative to 'find' 一个比 find 更简单更快的命令，会自动地忽略掉一些配置在 .gitignore 中的文件，以及 .git 下的文件
 * monitor
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序的
