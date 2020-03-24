@@ -228,8 +228,9 @@ ENV https_proxy http://proxy-chain.xxx.com:912/ 1
     "allow-nondistributable-artifacts": [],
     "registry-mirrors": [
       "https://dockerhub.azk8s.cn",
-      "https://hub-mirror.c.163.com"
-      "https://registry.docker-cn.com"
+      "https://hub-mirror.c.163.com",
+      "https://registry.docker-cn.com",
+      http://docker.mirrors.ustc.edu.cn,
     ],
      #镜像加速的地址，增加后在 docker info中可查看。
     "seccomp-profile": "",
