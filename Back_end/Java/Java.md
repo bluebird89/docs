@@ -134,7 +134,26 @@ java HelloWorld // 运行
 
 ## JVM
 
-*
+* 垃圾收集器
+* 类加载机制
+* Class文件结构
+* 参数调优
+* 字节码文件
+* 锁升级
+* JMM
+* JVM并发
+* JIT
+
+## JDK
+
+一套依据jvm规范实现的一套API
+
+* 集合
+* 多线程
+* NIO
+* 反射
+* 文件操作
+* Lambda语法
 
 ## 基础
 
@@ -925,6 +944,30 @@ public class UserController {
 }
 ```
 
+## 并发编程
+
+* 线程安全
+* 线程池
+* AQS
+* 锁
+* 悲观锁/乐观锁
+* 非/公平锁
+* Concurrent工具包
+* 无锁队列
+* ABA问题
+* 伪共享
+* 死锁
+
+## SSM
+
+* IOC
+* AOP
+* Mybatis
+* 日志组件
+* 设计模式
+* DDD
+* UML
+
 * 基础知识：
   - Java反射：Field、Type
   - Java代理：proxy、cglib
@@ -1005,6 +1048,11 @@ JavaEE/JDBC/Weblogic
 ## 图书
 
 * 《深入理解Java虚拟机》
+* 《Effective Java 中文版》
+* 《数据结构与算法分析：Java语言描述》
+* 《Java核心技术系列：Java多线程编程核心技术》
+* 《Java性能权威指南》
+* 《Java并发编程实战》
 
 ## 教程
 
