@@ -110,10 +110,9 @@ FTYPE pngfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo V
 ## 快捷键
 
 * alt+tab：长按为显示任务列表，短切为与上次任务切换
-* WIN+D：窗口最小化，显示桌面，再按一次还原桌面
+* WIN+D：显示桌面，再按一次还原桌面
 * WIN+R：打开运行，输入命令可以执行相应操作，输入路径可以打开对应路径，输入程序名称可以打开对应程序（前提是你打开的是windows下面的程序）;输入cmd打- 开DOS窗口，输入notepad打开记事本，输入calc打开计算器等
 * WIN+E：打开我的电脑
-* CTRL+ALT+Delete Ctrl + Shift + Esc ：程序不响应时用这一招结束不响应的程序，xp下用得比较多
 * WIN+L：锁屏
 * WIN+Tab/ALT+SHIFT+TAB：切换程序
 * CTRL+W：关闭程序标签页
@@ -126,13 +125,17 @@ FTYPE pngfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo V
 * 在桌面或者任何文件夹下，CTRL+鼠标左键，拖动文件、文件夹都可以立马生成文件对应的副本
 * 新建只有扩展名的文件的方法：".suffix."，·比如创建.gitignore，正常情况下windows是不允许创建的，但在扩展名后面加点，即.gitignore.就可以正常创建了
 * CTRL+SHIFT+ESC/Ctrl+Alt+Del：打开进程管理器
-* WIN+左箭头：当前窗口缩放为屏幕的一半，靠屏幕左侧显示
-* WIN+右箭头：当前窗口缩放为屏幕的一半，靠屏幕右侧显示
-* WIN+上箭头：最大化当前窗口
-* WIN+下箭头：还原和最小化当前窗口
-* Win+Shift+左箭头：移动到左边屏幕
-* Win+Shift+右箭头：移动到右边屏幕
-* 在桌面上，右键任何一个程序，鼠标定位到快捷键一栏，为该应用设置启动快捷键，然后你就可以通过这个这个快捷键来启动该程序啦
+* 分屏
+  * WIN+左箭头：当前窗口缩放为屏幕的一半，靠屏幕左侧显示
+  * WIN+右箭头：当前窗口缩放为屏幕的一半，靠屏幕右侧显示
+  * WIN+上箭头：最大化当前窗口|缩放为屏幕的一半，靠屏幕上侧
+  * WIN+下箭头：还原和最小化当前窗口|缩放为屏幕的一半，靠屏幕下侧
+* 虚拟桌面
+  * 「Win+Ctrl+D」：创建新的虚拟桌面
+  * 「Win+Ctrl+F4」：删除当前虚拟桌面
+  * Win+Shift+左箭头：移动到左边屏幕
+  * Win+Shift+右箭头：移动到右边屏幕
+* 在桌面上，右键任何一个程序，鼠标定位到快捷键一栏，为该应用设置启动快捷键，然后就可以通过这个这个快捷键来启动该程序啦
 * alt + f4:关闭程序
 * shift + del：彻底删除文件
 * alt + d：定位到地址栏
