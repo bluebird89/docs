@@ -3085,6 +3085,7 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
 * [mjackson/expect](https://github.com/mjackson/expect):Write better assertions
 * [expressjs/multer](https://github.com/expressjs/multer):Node.js middleware for handling `multipart/form-data`.
 * [Microsoft/napajs](https://github.com/Microsoft/napajs):Napa.js: a multi-threaded JavaScript runtime
+* [cheeriojs / cheerio](https://github.com/cheeriojs/cheerio):Fast, flexible, and lean implementation of core jQuery designed specifically for the server. https://cheerio.js.org/
 
 ## 教程
 

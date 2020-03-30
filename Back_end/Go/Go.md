@@ -980,8 +980,6 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * TINYGO - A GO COMPILER FOR SMALL PLACES bring the Go programming language to microcontrollers and modern web browsers by creating a new compiler based on LLVM.
 * network
     - [davyxu/cellnet](https://github.com/davyxu/cellnet):High performance, simple, extensible golang open source network library
-* UI
-    - [andlabs/ui](https://github.com/andlabs/ui):Platform-native GUI library for Go.
 * desktop apps
     - [zserge/lorca](https://github.com/zserge/lorca):Build cross-platform modern desktop apps in Go + HTML5
 * Cli
@@ -1033,7 +1031,9 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [gomodule/redigo](https://github.com/gomodule/redigo):Go client for Redis
     - [go-redis/redis](https://github.com/go-redis/redis):Type-safe Redis client for Golang
 * UI
+    - [andlabs/ui](https://github.com/andlabs/ui):Platform-native GUI library for Go.
     - [google/gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
+    - [fyne-io / fyne](https://github.com/fyne-io/fyne):Cross platform GUI in Go based on Material Design https://fyne.io/
     - [vugu/vugu](https://github.com/vugu/vugu):Vugu: A modern UI library for Go+WebAssembly (experimental) https://www.vugu.org
 * WEB
     - [go-martini/martini](https://github.com/go-martini/martini):Classy web framework for Go http://martini.codegangsta.io
@@ -1066,6 +1066,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [snail007 / goproxy ](https://github.com/snail007/goproxy):Proxy是高性能全功能的http代理、https代理、socks5代理、内网穿透、内网穿透p2p、内网穿透代理、内网穿透反向代理、内网穿透服务器、Websocket代理、TCP代理、UDP代理、DNS代理、DNS加密代理，代理API认证，全能跨平台代理服务器。 http://snail007.github.io/goproxy
 * 代码规范
     - [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
+    - [golang-standards / project-layout](https://github.com/golang-standards/project-layout):Standard Go Project Layout
 * file
     - [chrislusf/seaweedfs](https://github.com/chrislusf/seaweedfs):SeaweedFS is a simple and highly scalable distributed file system. There are two objectives: to store billions of files! to serve the files fast! SeaweedFS implements an object store with O(1) disk seek and an optional Filer with POSIX interface, supporting S3 API, Rack-Aware Erasure Coding for warm storage, FUSE mount, Hadoop compatible, WebDAV.
 * auth
@@ -1080,7 +1081,8 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [murlokswarm/app](https://github.com/murlokswarm/app):Package to build GUI apps with Go, HTML and CSS.
 * [justinas/alice](https://github.com/justinas/alice):Painless middleware chaining for Go https://godoc.org/github.com/justinas/alice
 * [spf13/viper](https://github.com/spf13/viper):Go configuration with fangs
-* [derekparker/delve](https://github.com/derekparker/delve):Delve is a debugger for the Go programming language.
+* Debug
+    - [derekparker/delve](https://github.com/derekparker/delve):Delve is a debugger for the Go programming language.
 * [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
 * [goreleaser/goreleaser](https://github.com/goreleaser/goreleaser)：Deliver Go binaries as fast and easily as possible https://goreleaser.com
 * [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin):Golang plugin system over RPC.

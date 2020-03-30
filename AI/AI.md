@@ -1,4 +1,4 @@
-# AI
+# 人工智能：Artificial Intelligence
 
 * 领域
     - 语音识别
@@ -387,10 +387,10 @@
 * [rlabbe/Kalman-and-Bayesian-Filters-in-Python](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python):Kalman Filter book using Jupyter Notebook. Focuses on building intuition and experience, not formal proofs. Includes Kalman filters,extended Kalman filters, unscented Kalman filters, particle filters, and more. All exercises include solutions.
 * [facebookresearch/fastText](https://github.com/facebookresearch/fastText):Library for fast text representation and classification.
 * [bytedance/byteps](https://github.com/bytedance/byteps):A high performance and general PS framework for distributed training
+* [mindspore-ai / mindspore](https://github.com/mindspore-ai/mindspore):MindSpore is a new open source deep learning training/inference framework that could be used for mobile, edge and cloud scenarios. https://www.mindspore.cn
 
 ## 参考
 
 * [完备的 AI 学习路线，最详细的资源整理](https://mp.weixin.qq.com/s?__biz=Mzg5NzAxMDgwNg==&mid=2247484212&idx=1&sn=18de3f24ff47ff0e096c38ce90a8d95d&chksm=c0791e2df70e973b03a0496ac045974f581bade3a05aa1416104b5556a515acf0ee07a1c3554)
 * [OpenAI](https://openai.com)
-* 人工智能：一种现代的方法 Artificial Intelligence: A Modern Approach
 * [wx-chevalier/AIDL-Series](https://github.com/wx-chevalier/AIDL-Series):📚 Series of Artificial Intelligence & Deep Learning, including Mathematics Fundamentals, Python Practices, NLP Application, etc. 💫 人工智能与深度学习实战，机器学习篇 | Tensoflow 篇

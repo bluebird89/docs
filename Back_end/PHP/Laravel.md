@@ -2774,7 +2774,7 @@ Debugbar::measure('My long operation', function() {
     // Do something…
 });
 
-# Larave Telescope 是 Laravel 框架的优雅调试助手。Telescope 可深入了解进入应用程序的请求、异常、日志条目、数据库查询、排队作业、邮件、通知、缓存操作、计划任务、变量转储等。Telescope 是您本地 Laravel 开发环境的绝佳伴侣。
+# Larave Telescope 是 Laravel 框架的优雅调试助手。Telescope 可深入了解进入应用程序的请求、异常、日志条目、数据库查询、排队作业、邮件、通知、缓存操作、计划任务、变量转储等
 composer require laravel/telescope
 php artisan telescope:install
 php artisan migrate

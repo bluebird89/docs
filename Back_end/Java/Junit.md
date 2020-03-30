@@ -12,6 +12,10 @@ Failture:由断言方法引起，输出与预期不一样
 Error:代码异常引起
 测试用例不是用来证明你是对的，而是用来证明你没有错
 
+## 版本
+
+JUnit5=Platform+Jupiter+Vintage
+
 ## 工具
 
 * [JUnitGenerator V2.0](link)自动生成测试代码，需要安装

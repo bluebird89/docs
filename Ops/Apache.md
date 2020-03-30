@@ -189,7 +189,7 @@ httpd.exe -M # 查看apache加载了哪些模块
 
 ```
 # 禁用重写功能
-/etc/apache2/apache2.conf 
+/etc/apache2/apache2.conf
 AllowOverride None
 
 php_flag session.auto_start 1 # 指定开关类的配置信息
@@ -471,7 +471,7 @@ LoadModule fastcgi_module /usr/local/opt/mod_fastcgi/libexec/mod_fastcgi.so
 </IfModule>
 ```
 
-##  集成环境
+## 集成环境
 
 * LAMP for Linux
 * MAMP for Mac

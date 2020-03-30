@@ -73,19 +73,29 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - TENS Linux (DOD Project)
   - Tin Hat Linux
   - OpenBSD
-  - [Manjaro](https://manjaro.org/)
+  - [Manjaro](https://manjaro.org/):基于 Arch 的 Linux 发行版,安装是一件稍微复杂的工作
   - [Elementary OS](https://elementary.io/)
   - [openEuler](https://openeuler.org/):
 * 最小化：将在旧的硬件上运行；尽可能最小化
   - ArchBang
-  - [Lubuntu](https://kubuntu.org/)
+  - [Kubuntu](https://kubuntu.org/):unites Ubuntu with KDE and the fabulous Plasma desktop, bringing you a full set of applications.  需要等待数月来获取新的 KDE 软件
+  - [Lubuntu](https://lubuntu.net/):a fast and lightweight operating system with a clean and easy-to-use user interface.It is a Linux system, that uses the minimal desktop LXDE/LXQT, and a selection of light applications
   - Puppy Linux
   - Tiny Core Linux
   - Bodhi Linux
 * SUSE Linux Enterprise Server
-* Zorin OS
+* [Zorin OS](https://zorinos.com/):努力提供了良好的用户体验
+  - [Zorin Grid](https://itsfoss.com/zorin-grid/)
 * Cub Linux
 * Icaros Desktop
+* [pop!_os](https://system76.com/pop)
+* [KDE Neon](https://neon.kde.org/):基于 Ubuntu 的轻量级 Linux 发行版,采用 KDE Plasma 桌面，看起来精美绝伦
+* [Nitrux](https://nxos.org/):
+
+## 桌面环境
+
+* [KDE](https://kde.org/)
+* [Xfce](https://www.xfce.org/)
 
 ## 启动
 
@@ -659,9 +669,9 @@ source ~/.zshrc
 sudo update-alternatives --config editor # 修改默认编辑器
 ```
 
-## 服务配置
+## 服务
 
-```
+```sh
 # /lib/systemd/system/goweb.service
 [Unit]
 Description=goweb
@@ -674,6 +684,55 @@ ExecStart=/home/user/go/go-web/main #  the point of entry for this service
 
 [Install]
 WantedBy=multi-user.target
+
+systemctl --version
+whereis systemd|whereis systemctl
+ps -eaf | grep [s]ystemd # 检查systemd是否运行
+systemd-analyze blame #  分析启动时各个进程花费的时间
+systemd-analyze critical-chain # 分析启动时的关键链
+systemctl list-unit-files --type=service | grep enabled # 展示开机启动时的进程项
+
+sudo systemctl is-active|stop|enable|disable|status|restart|start|reload|kill|is-enabled bluetooth.service
+sudo systemctl mask|unmask bluetooth.service # 如何屏蔽（让它不能启动）或显示服务
+
+## 禁用服务列表
+accounts-daemon.service # AccountsService 的一部分，AccountsService 允许程序获得或操作用户账户信息
+avahi-daemon.service # 用于零配置网络发现，使电脑超容易发现网络中打印机或其他的主机
+brltty.service # 提供布莱叶盲文设备支持，例如布莱叶盲文显示器。
+debug-shell.service # 开放了一个巨大的安全漏洞（该服务提供了一个无密码的 root shell ，用于帮助 调试 systemd 问题），除非你正在使用该服务，否则永远不要启动服务。
+ModemManager.service # 该服务是一个被 dbus 激活的守护进程，用于提供移动
+pppd-dns.service # 是一个计算机发展的遗物，如果你使用拨号接入互联网的话，保留它，否则你不需要它。
+rtkit-daemon.service # 一个 实时内核调度器real-time kernel scheduler
+whoopsie.service # 是 Ubuntu 错误报告服务。它用于收集 Ubuntu 系统崩溃报告，并发送报告到 https://daisy.ubuntu.com 。 可以放心地禁止其启动，或者永久的卸载它。
+wpa_supplicant.service # 仅在你使用 Wi-Fi 连接时需要
+
+systemctl list-units # 列出所有运行中单元
+systemctl --failed # 列出所有失败单元
+
+systemctl list-unit-files --type=mount # 列出所有系统挂载点
+systemctl start|stop|restart|reload|status|is-active|enable|disable|mask|unmask tmp.mount # 挂载、卸载、重新挂载、重载系统挂载点并检查系统中挂载点状态
+
+systemctl list-unit-files --type=socket # 列出所有可用系统套接口
+systemctl start|restart|stop|reload|status|is-active|enable|disable|mask|unmask cups.socket
+
+systemctl show -p CPUShares httpd.service # 获取当前某个服务的CPU分配额
+systemctl set-property httpd.service CPUShares=2000 # 将某个服务（httpd.service）的CPU分配份额限制为2000 CPUShares/
+# vi /etc/systemd/system/httpd.service.d/90-CPUShares.conf
+[Service]
+CPUShares=2000
+
+systemctl show httpd # 检查某个服务的所有配置细节
+systemd-analyze critical-chain httpd.service # 分析某个服务（httpd）的关键链
+systemctl list-dependencies httpd.service # 获取某个服务（httpd）的依赖性列表
+systemd-cgls # 按等级列出控制组
+systemd-cgtop # 按CPU、内存、输入和输出列出控制组
+systemctl get-default # 列出当前使用的运行等级
+systemctl rescue # 启动系统救援模式
+systemctl isolate runlevel5.target|graphical.target # 启动运行等级5，即图形模式
+systemctl emergency # 进入紧急模式
+systemctl isolate runlevel3.target|multiuser.target # 启动运行等级3，即多用户模式（命令行）
+systemctl set-default runlevel3.target|runlevel5.target # 设置默认运行等级
+systemctl reboot|halt|suspend|hibernate|hybrid-sleep # 重启、停止、挂起、休眠系统或使系统进入混合睡眠
 ```
 
 ## 启动项
@@ -685,23 +744,6 @@ WantedBy=multi-user.target
 
 ```sh
 sudo dmidecode
-
-systemctl list-unit-files --type=service | grep enabled # 展示开机启动时的进程项
-
-sudo systemctl stop|disable|status bluetooth.service
-
-sudo systemctl mask bluetooth.service # 完全阻止开机启动 把它掩盖起来
-
-## 禁用服务列表
-accounts-daemon.service # AccountsService 的一部分，AccountsService 允许程序获得或操作用户账户信息
-avahi-daemon.service # 用于零配置网络发现，使电脑超容易发现网络中打印机或其他的主机
-brltty.service # 提供布莱叶盲文设备支持，例如布莱叶盲文显示器。
-debug-shell.service # 开放了一个巨大的安全漏洞（该服务提供了一个无密码的 root shell ，用于帮助 调试 systemd 问题），除非你正在使用该服务，否则永远不要启动服务。
-ModemManager.service # 该服务是一个被 dbus 激活的守护进程，用于提供移动
-pppd-dns.service # 是一个计算机发展的遗物，如果你使用拨号接入互联网的话，保留它，否则你不需要它。
-rtkit-daemon.service # 一个 实时内核调度器real-time kernel scheduler
-whoopsie.service # 是 Ubuntu 错误报告服务。它用于收集 Ubuntu 系统崩溃报告，并发送报告到 https://daisy.ubuntu.com 。 你可以放心地禁止其启动，或者永久的卸载它。
-wpa_supplicant.service # 仅在你使用 Wi-Fi 连接时需要
 
 # 界面切换
 init 3
@@ -1444,7 +1486,7 @@ scp -P 2264 foobar.txt your_username@remotehost.edu:foobar.txt /some/local/direc
 scp your_username@rh1.edu:/some/remote/directory/foobar.txt your_username@rh2.edu:/some/remote/directory/
 scp your_username@remotehost.edu:/some/remote/directory/\{a,b,c\} .
 scp your_username@remotehost.edu:~/\{foo.txt,bar.txt\} .
-scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music 
+scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music
 scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music/001.mp3
 
 # -r-xr-x---
@@ -1608,7 +1650,7 @@ chgrp [-options] [群组名] [文档路径]
 
 groupadd [r] group_name # 创建用户组,命令带有 - r 参数，则创建系统用户组，该类用户组的 GID 值小于 500；若没有 - r 参数，则创建普通用户组，其 GID 值大于或等于 500.
 groupmod -n new_group_name old_group_name # 重命名一个用户组
-groupmod -g new_GID 用户组名称 # 重设用户组的 GID,但不能与已有用户组的 GID 值重复 
+groupmod -g new_GID 用户组名称 # 重设用户组的 GID,但不能与已有用户组的 GID 值重复
 groupdel group_name # 删除用户组
 groupmod -g gid  -n newname  groupname
 
@@ -1710,11 +1752,11 @@ are supported and installed on your system.
 perl: warning: Falling back to the standard locale ("C").
 
 # .bashrc
-export LC_CTYPE=en_US.UTF-8 
+export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # openssl: error while loading shared libraries: libcrypto.so.1.1: cannot open shared object file: No such file or directory
-  
+
 ln -s /usr/local/openssl/lib/libssl.so.1.1 /usr/lib/libssl.so.1.1
 ln -s /usr/local/openssl/lib/libcrypto.so.1.1 /usr/lib/libcrypto.so.1.1
 ```
@@ -2209,7 +2251,7 @@ set completeopt=longest,menu
 * [Monit](https://mmonit.com/monit/):功能异常强大的进程、文件、设备、系统监控软件，适用于Linux/Unix系统
 * [Linuxbrew/brew](https://github.com/Linuxbrew/brew):🍺🐧 The Homebrew package manager for Linux https://linuxbrew.sh
 * [johnfactotum/foliate](https://github.com/johnfactotum/foliate):A simple and modern GTK eBook reader https://johnfactotum.github.io/foliate/
-* [systemd/systemd](https://github.com/systemd/systemd):systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic. 
+* [systemd/systemd](https://github.com/systemd/systemd):systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic.
 
 ## 参考
 

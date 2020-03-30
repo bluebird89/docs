@@ -27,17 +27,16 @@ The official GitHub mirror of the Chromium source https://chromium.googlesource.
 * OurStickys:Chrome特色网页便签纸
 * Print Friendly & PDF：用户自定义打印内容
 * Postman：接口调试
-* Octotree:Code tree for GitHub
 * SimilarSites:一键查找姊妹网站
 * speedtest:网络测速插件
 * [deanoemcke/thegreatsuspender](https://github.com/deanoemcke/thegreatsuspender):A chrome extension for suspending all tabs to free up memory
-* Tampermonkey
-    - https://greasyfork.org/zh-CN
+* [Tampermonkey](https://www.tampermonkey.net/)
+    - [Greasyfork](https://greasyfork.org/zh-CN)
     - https://openuserjs.org
 * 批量打开多个链接 LinkClump
 * XML Tree
 * User-Agent Switcher for Chrome
-* Video Speed Controller:刷课（刷剧）神器！给网页视频加个速
+* [Video Speed Controller](https://github.com/igrigorik/videospeed):给视频加个速
 * [philc/vimium](The hacker's browser.)The hacker's browser.
 * Vue React AngularJS Devtools
 * Wappalyzer:网站分析工具
