@@ -1,15 +1,15 @@
-# deepin
+# [deepin](https://www.deepin.org/)
 
 ```
 # error: /boot/vmlinuz-4.18.12-041812-generic has invalid signature
 # error: you need to load the kernel first
-disable Secure Boot in the BIOS/UEFI 
+disable Secure Boot in the BIOS/UEFI
 
 AMD-Vi: Unable to write to IOMMU perf counter.
 
 # grub模式:暂时设置
 ls # 显示所有的分区,找到原来系统分区 （hd0,gpt3）
-set root=(hd0,gpt3) 
+set root=(hd0,gpt3)
 set prefix=(hd0,gpt3)/boot/grub
 insmod normal
 normal #进入 recovery
@@ -25,7 +25,7 @@ sudo install-grub /dev/sda # efi挂载点
 fdisk -l # 查看 type 为 EFI system
 sudo grub-install /dev/nvmeOn1p1 # 重新安装efi挂载点
 
-# grub-install: warning: this GPT partition label contains no BIOS Boot Partition; embedding won’t be possible 
+# grub-install: warning: this GPT partition label contains no BIOS Boot Partition; embedding won’t be possible
 parted /dev/nvmeOn1 set 1 bios_grub on
 parted /dev/nvmeOn1 print
 

@@ -261,7 +261,7 @@
   - 业务：深入理解所在行业的商业模式，从业务中发现motivation并进而改进模型算法的能力
 * 李航老师的《统计学习方法》
 * 周志华老师的《机器学习》,又称之为西瓜书。基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等。
-  - [西瓜书](https://github.com/datawhalechina/pumpkin-book)
+  - [西瓜书](https://github.com/datawhalechina/pumpkin-book) 《机器学习》（西瓜书）公式推导解析，在线阅读地址：https://datawhalechina.github.io/pumpkin-book
   - [在线阅读](https://datawhalechina.github.io/pumpkin-book/)
 * 《推荐系统实战》：项亮，很适合对于想了解推荐系统
 * 《概率论与数理统计》
@@ -368,4 +368,5 @@
 * [yhangf/ML-NOTE](https://github.com/yhangf/ML-NOTE):📙慢慢整理所学的机器学习算法，并根据自己所理解的样子叙述出来。(注重数学推导) 
 * [hankcs / HanLP](https://github.com/hankcs/HanLP):中文分词 词性标注 命名实体识别 依存句法分析 语义依存分析 新词发现 关键词短语提取 自动摘要 文本分类聚类 拼音简繁转换 自然语言处理 http://hanlp.com/
 * [](https://github.com/apache/predictionio)
+* [Bilibili-机器学习白板系列](https://www.yuque.com/bystander-wg876/yc5f72)
 * [](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)

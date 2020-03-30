@@ -71,8 +71,9 @@ arp -a
     - 应用层：HTTP 应用层 表示层 会话层 curl
         + 在传输数据时，可以只使用（传输层）TCP/IP协议，但是那样的话，如果没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用到应用层协议，应用层协议有很多，比如HTTP、FTP、TELNET等，也可以自己定义应用层协议。WEB使用HTTP协议作应用层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发到网络上。
     - 传输层  TCP UDP telent
-    - 网络层 IP ping traceroute 
+    - 网络层 IP ping traceroute
     - 数据链路层 物理层
+* 子网掩码决定了一个子网的计算机数目，简单的算法就是2的M次方。M表示二进制的子网掩码后面0的数目
 
 ![七层协议](../_static/osi_1.png "Optional title")
 ![数据流](../_static/osi2.jpeg "Optional title")
@@ -208,6 +209,17 @@ ipconfig /all # 为DNS和WINS服务器显示它已配置且所有使用的附加
 * Use the tcp_nopush directive together with the sendfile on;directive. This enables NGINX to send HTTP response headers in one packet right after the chunk of data has been obtained by sendfile().
 * 默认路由：A default route is the route that takes effect when no other route is available for an IP destination address.If a packet is received on a routing device, the device first checks to see if the IP destination address is on one of the device’s local subnets. If the destination address is not local, the device checks its routing table. If the remote destination subnet is not listed in the routing table, the packet is forwarded to the next hop toward the destination using the default route. The default route generally has a next-hop address of another routing device, which performs the same process. The process repeats until a packet is delivered to the destination.
 
+## Overlay 网络
+
+* 组成：
+    - 边缘设备：是指与虚拟机直接相连的设备
+    - 控制平面：主要负责虚拟隧道的建立维护以及主机可达性信息的通告
+    - 转发平面：承载 Overlay 报文的物理网络
+* 采用TRILL、VxLan、GRE、NVGRE等隧道技术
+    - TRILL（Transparent InterconnecTIon of Lots of Links）技术是电信设备厂商主推的新型环网技术
+    - NVGRE（Network VirtualizaTIon using Generic RouTIng EncapsulaTIon）STT（Stateless Transport Tunneling Protocol）是IT厂商主推的Overlay技术；
+    - 非常熟悉的VXLAN（Virtual eXtensible LAN）等基于隧道的封装技术
+
 ## 图书
 
 * 《TCP/IP 协议详解》
@@ -224,6 +236,7 @@ ipconfig /all # 为DNS和WINS服务器显示它已配置且所有使用的附加
 * [fatedier/frp](https://github.com/fatedier/frp):A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet.
 * [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core):A platform for building proxies to bypass network restrictions. https://www.v2ray.com/
 * [librenms/librenms](https://github.com/librenms/librenms):Community-based GPL-licensed network monitoring system http://www.librenms.org/
+* [Zenmap](https://nmap.org/zenmap/):Nmap网络扫描器的官方前端程序
 
 ## 参考
 

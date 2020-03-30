@@ -27,7 +27,7 @@
    - Go:
        + Google力推，有很完善的标准库，效能强大堪比C系列。
        + 目前学习资源较少（感谢伟大B站的付出，真香）
-       + 网站范例：Google、 Youtube、哔哩哔哩、头条、腾讯云 
+       + 网站范例：Google、 Youtube、哔哩哔哩、头条、腾讯云
 * 静态内容服务器:在80端口上监听，解析客户端发过来的HTTP的请求， 然后把相对应的HTML文件、Image等返回给客户端
 * 动态:用一个动态内容服务器（wsgi server，Tomcat等）来接受并且封装HTTP 请求，降低程序员的负担
     - CGI
@@ -96,7 +96,7 @@ ifconfig # linux mac
         + 学校或家长可选，拦截色情网站，保护少年儿童免受网络色情内容的毒害 114.114.114.110 114.114.115.110
     - 阿里DNS（`http://www.alidns.com/`）DNS递归解析系统，面向互联网用户提供快速、稳定、智能的免费DNS递归解析服务:223.5.5.5  223.6.6.6
     - SDNS（`http://www.sdns.cn/`）1.2.4.8  210.2.4.8
-    - 中科大的DNS:202.38.64.1 202.112.20.131 202.141.160.95 202.141.160.99 202.141.176.95 202.141.176.99 
+    - 中科大的DNS:202.38.64.1 202.112.20.131 202.141.160.95 202.141.160.99 202.141.176.95 202.141.176.99
     - OneDNS: 112.124.47.27 南方首选/北方备用  114.215.126.16 北方首选/南方备用
 * 国内用户普遍使用的是ISP运营商提供的DNS服务器，这样有着一个巨大的风险，就是DNS劫持,目前国内ISP运营商普遍采用DNS劫持的方法，干扰用户正常上网，例如，当用户访问一个不存在（或者被封）的网站，电信运营商就会把用户劫持到一个满屏都是广告的页面，以帮助自己盈利！
     - 劫持广告：原来的网页被放置到一个iframe里，并注入了flash广告。
@@ -114,7 +114,7 @@ ifconfig # linux mac
     - 三种多重处理模块：mpm_prefork、mpm_worker、mpm_envent，
         + mpm_prefork：模块产生众多子进程，每个子进程是单线程的，每个线程链接一个请求，如此一对一的关系。所以如果请求数大于进程数时，服务器的性能就表现得差强人意了。
         + mpm_worker：worker中子进程是多线程的，每个线程管理一个用户连接。线程数要多于进程数量，这也就意味着新的连接能立刻得到一个空闲的线程，而不用等待进程空闲。
-        + mpm_event：该模块与worker相似，区别在于event可以处理长连接(keep-alive)，以避免线程被请求长期占用而造成资源浪费，同时也增强了高并发场景下的请求处理能力。 
+        + mpm_event：该模块与worker相似，区别在于event可以处理长连接(keep-alive)，以避免线程被请求长期占用而造成资源浪费，同时也增强了高并发场景下的请求处理能力。
     - apache适合处理动态请求
 * Nginx是通过异步的、非阻塞的、事件驱动的方式在实现的
     - 异步的，多个连接（万级别）可以对应一个进程 。
@@ -202,7 +202,7 @@ ifconfig # linux mac
   + 一个线程处理一个连接，非阻塞IO:在一个进程中通过多个线程来处理多个连接，一个线程处理一个连接。Apache的worker模式就是这种典型例子，使其可支持更多的并发连接。不过这种模式的总体性能还不如prefork，所以一般不选用worker模式
   + 一个进程处理多个连接，异步I/O:潜在的前提条件就是使用IO多路复用就绪通知。这种情况下，将处理多个连接的进程叫做worker进程或服务进程。worker的数量可以配置，如Nginx中的worker_processes 4。
   + 一个线程处理多个连接，异步IO:即使有高性能的IO多路复用就绪通知，但磁盘IO的等待还是无法避免的。更加高效的方法是对磁盘文件使用异步IO，目前很少有Web服务器真正意义上支持这种异步IO。
- 
+
 ## 部署
 
 * 域名购买：GoDaddy
@@ -259,5 +259,9 @@ ifconfig # linux mac
 
 * [sullo/nikto](https://github.com/sullo/nikto):Nikto web server scanner
 * [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh):A pure Unix shell script implementing ACME client protocol https://acme.sh
+* [Webmin](http://www.webmin.com)
+* [Shorewall](http://shorewall.net):一种用于配置iptable的GUI
+* [cPanel](http://cpanel.com/products/)
+* [Cockpit](http://cockpit-project.org):由红帽公司开发，旨在让服务器管理起来更容易。借助这个基于Web的GUI，你就能处理众多任务，比如管理存储资源、检查日志、启动/终止服务以及监控多台服务器
 * [snail007/goproxy](https://github.com/snail007/goproxy):Proxy is a high performance HTTP(S), websocket, TCP, UDP,Secure DNS, Socks5 proxy server implemented by golang. Now, it supports chain-style proxies,nat forwarding in different lan,TCP/UDP port forwarding, SSH forwarding.Proxy是golang实现的高性能http,https,websocket,tcp,防污染DNS,socks5代理服务器,支持内网穿透,链式代理,通讯加密,智能HTTP,SOCKS5代理,域名黑白名单,跨平台,KCP协议支持,集成外部API。
 * [remoteinterview/zero](https://github.com/remoteinterview/zero):Zero is a web server to simplify web development. https://zeroserver.io/

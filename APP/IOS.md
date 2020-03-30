@@ -12,7 +12,7 @@
 * Mac：Safari浏览器 > 偏好设置 > 高级 > 在菜单栏中显示“开发”菜单
 * 连接电脑，打开手机浏览器页面；Mac中的develop 中手机的页面列表
 
-# 功能
+## 功能
 
 * 屏幕录制
 * live photo：效果：循环视频，以及长曝光照片
@@ -36,7 +36,9 @@
 * MAC投影手机
     - 手机线连MAC
     - Mac打开QuickTime Player,新建影片录制
-    - 点击红点旁边那个箭头, 选择 iPhone.
+    - 点击红点旁边那个箭头, 选择 iPhone
+* shortcut
+    - https://shortcuts.sspai.com/#/main/workflow
 
 ## UI
 
@@ -45,14 +47,6 @@
 ## 课程
 
 * [eseedo/iOSCourse](https://github.com/eseedo/iOSCourse):iOS开发初学者入门 http://icode.fun/
-
-## 参考
-
-* [phoboslab/Ejecta](https://github.com/phoboslab/Ejecta):A Fast, Open Source JavaScript, Canvas & Audio Implementation for iOS
-* [Apple Developer Documentation](https://developer.apple.com/documentation)
-* [nikitavoloboev/my-ios](https://github.com/nikitavoloboev/my-ios):List of applications and tools that make my iOS experience even more amazing
-* [SwiftOldDriver/iOS-Weekly](https://github.com/SwiftOldDriver/iOS-Weekly):🇨🇳 老司机 iOS 周报
-* [微云IOS团队](https://iweiyun.github.io)
 
 ## 工具
 
@@ -64,3 +58,11 @@
 * [forkingdog/FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture):A UINavigationController's category to enable fullscreen pop gesture with iOS7+ system style.
 * [tbodt/ish](https://github.com/tbodt/ish):Linux shell for iOS https://ish.app
 * [HandyJSON](https://github.com/alibaba/HandyJSON):一个用于 Swift 语言中的 JSON 序列化 / 反序列化库
+
+## 参考
+
+* [phoboslab/Ejecta](https://github.com/phoboslab/Ejecta):A Fast, Open Source JavaScript, Canvas & Audio Implementation for iOS
+* [Apple Developer Documentation](https://developer.apple.com/documentation)
+* [nikitavoloboev/my-ios](https://github.com/nikitavoloboev/my-ios):List of applications and tools that make my iOS experience even more amazing
+* [SwiftOldDriver/iOS-Weekly](https://github.com/SwiftOldDriver/iOS-Weekly):🇨🇳 老司机 iOS 周报
+* [微云IOS团队](https://iweiyun.github.io)
