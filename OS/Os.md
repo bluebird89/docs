@@ -49,7 +49,6 @@
         + Two-List策略:维护了两个list，active list 和 inactive list
             + 在active list上的page被认为是hot的，不能释放。只有inactive list上的page可以被释放的。首次缓存的数据的page会被加入到inactive list中，已经在inactive list中的page如果再次被访问，就会移入active list中。两个链表都使用了伪LRU算法维护，新的page从尾部加入，移除时从头部移除，就像队列一样。如果active list中page的数量远大于inactive list，那么active list头部的页面会被移入inactive list中，从而位置两个表的平衡
         + 内核使用address_space结构来表示一个page cache https://www.linuxidc.com/Linux/2018-12/156117.htm
-            * 
 * Buffer cache:针对磁盘块的缓存,也就是在没有文件系统的情况下,直接对磁盘进行操作的数据会缓存到buffer cache中,例如,文件系统的元数据都会缓存到buffer cache中
 
 ```c

@@ -513,11 +513,13 @@ $calc = fn($num) => $num * $factor;
 
 ## 原理
 
+* Zend引擎读取.php文件
 * PHP 代码 => Token => 抽象语法树 => Opcodes => 执行
-    - 源代码通过词法分析得到 Token Token 是 PHP 代码被切割成的有意义的标识。PHP7 一共有 137 种 Token，在 zend_language_parser.h 文件中做了定义。
-    - 基于语法分析器将 Token 转换成抽象语法树（AST） Token 就是一个个的词块，但是单独的词块不能表达完整的语义，还需要借助一定的规则进行组织串联。所以就需要语法分析器根据语法匹配 Token，将 Token 进行串联。语法分析器串联完 Token 后的产物就是抽象语法树（AST，Abstract Syntax Tree）。 AST 是 PHP7 版本的新特性，之前版本的 PHP 代码的执行过程中是没有生成 AST 这一步的。它的作用主要是实现了 PHP 编译器和解释器的解耦，提升了可维护性。
-    - 将语法树转换成 Opcode 需要将语法树转换成 Opcode，才能被引擎直接执行。
-    - 执行 Opcodes opcodes 是 opcode 的集合形式，是 PHP 执行过程中的中间代码。PHP 工程优化措施中有一个比较常见的 “开启 opcache”，指的技术这里将 opcodes 进行缓存。通过省去从源码到 opcode 的阶段，引擎直接执行缓存好的 opacode，以提升性能。
+    - 源代码通过词法分析得到 Token： Token 是 PHP 代码被切割成的有意义的标识。PHP7 一共有 137 种 Token，在 zend_language_parser.h 文件中做了定义
+    - 基于语法分析器将 Token 转换成抽象语法树（AST）：Token 就是一个个的词块，但是单独的词块不能表达完整的语义，还需要借助一定的规则进行组织串联。所以就需要语法分析器根据语法匹配 Token，将 Token 进行串联。语法分析器串联完 Token 后的产物就是抽象语法树（AST，Abstract Syntax Tree）。 AST 是 PHP7 版本的新特性，之前版本的 PHP 代码的执行过程中是没有生成 AST 这一步的。它的作用主要是实现了 PHP 编译器和解释器的解耦，提升了可维护性。
+    - 语法树转换成 Opcode
+    - 执行 Opcodes： opcodes 是 opcode 的集合形式，是 PHP 执行过程中的中间代码。
+* 开启 opcache：指将 opcodes 进行缓存。通过省去从源码到 opcode 的阶段，引擎直接执行缓存好的 opacode，以提升性能
 * 四层体系构成，从下到上依次是 Zend 引擎、Extensions 扩展、SAPI 接口、上层应用
 * Zend 引擎:PHP4 以后加入 PHP 的，是对原有PHP解释器的重写，整体使用 C 语言进行开发。作用是将PHP代码翻译为一种叫opcode的中间语言，它类似于JAVA的ByteCode（字节码）。引擎对PHP代码会执行四个步骤：
     - 词法分析 Scanning（Lexing），将 PHP 代码转换为语言片段（Tokens）
@@ -556,9 +558,26 @@ $calc = fn($num) => $num * $factor;
 * 语言特性
 * 内存操作
 * 线程安全
-* Opcache
 
 ![PHP 架构](../../_static/php_construct.jpg "Optional title")
+
+```sh
+## 开启Opcache
+zend_extension=opcache.so
+opcache.enable=1
+opcache.enable_cli=1
+opcache.huge_code_pages=1
+opcache.file_cache=/tmp
+
+# 系统开启HugePages
+cat /proc/meminfo  | grep Huge
+AnonHugePages:    106496 kB
+HugePages_Total:     512
+HugePages_Free:      504
+HugePages_Rsvd:       27
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+```
 
 ## 安装
 
@@ -1442,20 +1461,16 @@ var_dump(!($a instanceof stdClass)); # true
     - 可变长度参数
     - 可变数量的参数列表:`...`
 * 可变函数：一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数
-* 匿名函数（Anonymous functions），也叫闭包函数（closures），允许 临时创建一个没有指定名称的函数
+* 匿名函数（Anonymous functions），也叫闭包函数（Closure），允许 临时创建一个没有指定名称的函数
     - 经常用作回调函数（callback）
-    - 从父作用域继承变量:use
+    - 不能直接访问闭包外的变量，通过 use 关键字来调用上下文变量
+    - 闭包内所引用的变量不能被外部所访问,在闭包内对变量的改变从而影响到上下文变量的值，使用&的引用传参
     - Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态
     - 闭包在匿名函数的基础上增加了与外部环境的变量交互，通过 use 子句中指定要导入的外部环境变量
 * 返回值
 * 递归函数
 
 ```php
-function sayHello(){
-    echo "Hello PHP Function";
-}
-sayHello();//calling function
-
 function sayHello($name,$age = 28){
     echo "Hello $name, you are $age years old<br/>";
 }
@@ -3789,6 +3804,52 @@ else {
 exit;
 ```
 
+## [xdebug](https://xdebug.org/)
+
+* 浏览器扩展：xdebug helper(非必须)
+* [原理](https://xdebug.org/docs/remote)
+    - PHP Xdebug 插件起了9000端口（server）
+        + 浏览器向服务器发送一个带有 XDEBUG_SESSION_START 参数的请求，服务器收到这个请求之后交给后端的 PHP（已开启 xdebug 模块）处理
+        + Php 接受带了 XDEBUG_SESSION_START 参数的请求，Xdebug 会向来源 ip 客户端(IDE)的 9000 端口（默认是 9000 端口）发送一个 debug 请求，然后客户端的 9000 端口响应这个请求，那么 debug 就开始了
+        + 客户端（IDE）收到 Xdebug 发送过来的执行情况，把这些信息展示给开发者
+        + Php 知道 Xdebug 已经准备好了，那么就开始开始一行一行的执行代码，但是每执行一行都会让 Xdebug 过滤一下，Xdebug 在过滤每一行代码的时候，都会暂停代码的执行，然后向客户端的 9000 端口发送该行代码的执行情况，等待客户端的决策
+  - IDE监听9000端口(client):集成了一个遵循 BGDp 的 Xdebug 插件
+        + 启动插件:会启动一个 9000 的端口监听远程服务器发过来的 debug 信息
+    - servers:实际服务起的端口号，脚本运行需要的地址
+  - 通信协议 DBGp:端口意义不大,加了一层代理
+
+```
+brew install php71-xdebug
+pecl install xdebug
+
+# php.ini
+zend_extension="xdebug.so"
+xdebug.remote_enable = on
+xdebug.remote_host = localhost
+xdebug.remote_port = 9000
+xdebug.remote_handler = dbgp
+<!-- xdebug.remote_mode = "req" -->
+xdebug.idekey = PHPSTORM
+xdebug.remote_log = /tmp/xdebug.log
+
+# PHPstrom setting
+## debug
+Debug port 9000
+
+## DBGP
+PHPSTORM
+localhost
+80
+
+## Servers
+localhost 80 Xdebug
+
+# Script
+URL # 实际URL
+
+## start listening
+```
+
 ## 问题
 
 >  5096 segmentation fault (core dumped)  php http_server.php
@@ -3813,7 +3874,7 @@ exit;
     - memcache提供了面向过程及面向对象的接口，memached只支持面向对象的接口。 memcached 实现了更多的 memcached 协议。
     - memcached 支持 Binary Protocol，而 memcache 不支持，意味着 memcached 会有更高的性能。不过，还需要注意的是，memcached 目前还不支持长连接。
 * mongodb
-* Opcache:通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能， 存储预编译字节码的好处就是省去了每次加载和解析 PHP 脚本的开销，但是对于I/O开销如读写磁盘文件、读写数据库等并无影响。
+* Opcache:通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能，省去了每次加载和解析 PHP 脚本的开销，但是对于I/O开销如读写磁盘文件、读写数据库等并无影响
     - 字节码(Byte Code)：一种包含执行程序比机器码更抽象的中间码，由一序列 op代码/数据对组成的二进制文件。 比如Java源码经编译后生成的字节码在运行时通过JVM(JVM针对不同平台有不同版本，Java程序在JVM中运行而称 为解释性语言Interpreted)再做一次转换生成机器码，才能够跨平台运行；C#也类似，EXE文件的执行依赖.NET Framework；HHVM(HipHop Virtual Machine，Facebook开源的PHP虚拟机)采用了JIT(Just In Time Just Compiling，即时编译)技术，在运行时编译字节码为机器码，让他们的PHP性能测试提升了一个数量级。 唯有C/C++编译生成的二进制文件可直接运行。
     - 机器码(Machine Code)：也被称为原生码(Native Code)，用二进制代码表示的计算机能直接识别和执行的一种机器指令的集合，它是计算机硬件结构赋予的操作功能。
 * pdo-pgsql
@@ -3823,8 +3884,6 @@ exit;
     - [phpredis/phpredis](https://github.com/phpredis/phpredis): A PHP extension for Redis 是基于 c 语言开发的 PHP 扩展，速度快、内存小.需要安装对应的扩展才能使用.功能上两者差不多，性能上略胜一筹，但由于与 redis 通信的主要瓶颈还是在网络 IO 上
 * sphinx
 * swoole
-* [xdebug](https://xdebug.org/)
-    - profiler
 * apc:op缓存
 * [defuse/php-encryption](https://github.com/defuse/php-encryption):Simple Encryption in PHP.
 * [jedisct1/libsodium](https://github.com/jedisct1/libsodium):A modern, portable, easy to use crypto library https://libsodium.org
@@ -3837,7 +3896,6 @@ brew tap homebrew/homebrew-php
 brew install php71 --with-pear
 
 brew install mcrypt
-brew install php71-xdebug
 
 yum install php-mcrypt|php5-mcrypt
 apt-get install php-mcrypt|php5-mcrypt
@@ -3886,7 +3944,6 @@ phpcs --config-show
 phpcs --config-set
 
 pecl channel-update pecl.php.net
-pecl install xdebug
 ```
 
 ## 工具

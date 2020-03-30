@@ -1179,7 +1179,7 @@ mysql有一个autocommit参数，默认是on，作用是每一条单独的查询
             * 始终都是查找的之前的那个快照
         + 只会查询创建时间的事务id小于等于当前事务id的行，这样可以确保这个行是在当前事务中创建，或者是之前创建的
         + 如果某个事务执行期间，别的事务更新了一条数据:插入了一行记录，然后将新插入的记录的创建时间设置为新的事务的id，同时将这条记录之前的那个版本的删除时间设置为新的事务的id
-        + 
+        +
     - 串行读(Serializable)：完全串行化的读，每次读都需要获得表级共享锁，读写相互都会阻塞。
         + 读加共享锁，写加排他锁，读写互斥。使用的悲观锁的理论，实现简单，数据更加安全，但是并发能力非常差。如果你的业务并发的特别少或者没有并发，同时又要求数据及时可靠的话，可以使用这种模式。
         + 不要看到select就说不会加锁了，在Serializable这个级别，还是会加锁的
@@ -1329,10 +1329,10 @@ select * from table lock in share mode
 select * from table for update --增删改自动加了排他锁
 
 # 死锁产生，无法更新锁
-begin transelect * from table lock in share mode 
+begin transelect * from table lock in share mode
 update table set column1='hello'
 
-begin transelect * from table lock in share mode 
+begin transelect * from table lock in share mode
 update table set column1='world'
 
 # 有机会产生死锁，但实际上要看情况
@@ -1372,15 +1372,15 @@ Innodb_row_lock_time_max # 从系统启动到现在等待最长的一次所花�
 Innodb_row_lock_waits  # 从系统启动到现在总共等待的次数。
 
 
-SET AUTOCOMMIT=0; 
-LOCK TABLES t1 WRITE, t2 READ, ...; 
-[do something with tables t1 and t2 here]; 
-COMMIT; 
+SET AUTOCOMMIT=0;
+LOCK TABLES t1 WRITE, t2 READ, ...;
+[do something with tables t1 and t2 here];
+COMMIT;
 UNLOCK TABLES;
 
-Lock tables orders read local, order_detail read local; 
-Select sum(total) from orders; 
-Select sum(subtotal) from order_detail; 
+Lock tables orders read local, order_detail read local;
+Select sum(total) from orders;
+Select sum(subtotal) from order_detail;
 Unlock tables;
 ```
 
@@ -1396,9 +1396,9 @@ Unlock tables;
     - 非叶子结点的指针：P[1], P[2], …, P[M]；其中P[1]指向关键字小于K[1]的子树，P[M]指向关键字大于K[M-1]的子树，其它P[i]指向关键字属于(K[i-1], K[i])的子树；
     - 所有叶子结点位于同一层
 * B-tree数据存储是有序的，按照顺序保存了索引的列，加速了数据访问
-    - 所有键值分布在整个树中 
-    - 任何关键字出现且只出现在一个节点中 
-    - 搜索有可能在非叶子节点结束 
+    - 所有键值分布在整个树中
+    - 任何关键字出现且只出现在一个节点中
+    - 搜索有可能在非叶子节点结束
     - 在关键字全集内做一次查找，性能逼近二分查找算法
 * 结构
     - 最外层浅蓝色磁盘块1里有数据17、35（深蓝色）和指针P1、P2、P3（黄色）。P1指针表示小于17的磁盘块，P2是在17-35之间，P3指向大于35的磁盘块。真实数据存在于子叶节点也就是最底下的一层3、5、9、10、13……非叶子节点不存储真实的数据，只存储指引搜索方向的数据项
@@ -1499,7 +1499,7 @@ CREATE TABLE  People (
 ### 存储引擎
 
 不同数据引擎数据的存储格式,数据结构的实现,数据行并不是存储引擎管理的最小存储单位，索引只能够帮助我们定位到某个数据页，每一次磁盘读写的最小单位为也是数据页，而一个数据页内存储了多个数据行，我们需要了解数据页的内部结构才能知道存储引擎怎么定位到某一个数据行
- 
+
  + 堆表(所有的记录无序存储)
         + 聚簇索引表(所有的记录，按照记录主键进行排序存储)
 
@@ -1637,7 +1637,7 @@ CREATE TABLE  People (
     - LOAD TABLE FROM MASTER操作对于InnoDB是不起作用的，解决方法是首先把InnoDB转换成MyISAM表，导入数据后再转成InnoDB表，但是对于额外的InnoDB特性（如外键）的表是不适用的
     - InnoDB表的行锁也不是绝对的，假如在执行一个SQL语句时MySQL不能确定要扫描的范围，此时InnoDB依旧会锁全表，例如update table set num=1 where name like '%aaa%'
     - 和MyISAM比Insert操作的话，InnoDB还达不到MyISAM的写性能，如果是基于索引的update操作，虽然MyISAM会逊色与InnoDB，但是那么多高并发的写，从库能否追的上也是一个大问题。通常情况下会实现多实例分库分表架构来解决
-    - InnoDB支持事务，MyISAM不支持。对于InnoDB每一条SQL语言都默认封装成事务，自动提交，这样会影响速度，所以最好把多条SQL语言放在begin和commit之间，组成一个事务 
+    - InnoDB支持事务，MyISAM不支持。对于InnoDB每一条SQL语言都默认封装成事务，自动提交，这样会影响速度，所以最好把多条SQL语言放在begin和commit之间，组成一个事务
     - 大项目总量约几个亿的rows的某一类型（如日志等）业务表会使用MyISAM
     - 绝大多数都只是读查询，可以考虑MyISAM，如果既有读写也挺频繁，请使用InnoDB
 * 编码:一个汉字占多少长度与编码有关,最大长度64K，即65535个字节
@@ -1916,7 +1916,7 @@ CREATE PROCEDURE BatchInsert(IN init INT, IN loop_time INT)  -- 第一个参数�
   BEGIN
       DECLARE Var INT;
       DECLARE ID INT;
-      DECLARE l_int int unsigned default 4000000; 
+      DECLARE l_int int unsigned default 4000000;
       SET Var = 0;
       SET ID = init;
       WHILE Var < loop_time DO
@@ -1933,57 +1933,57 @@ CALL BatchInsert(30036, 200000);   -- 调用存储过程插入函数
 label1: BEGIN
 　　label2: BEGIN
 　　　　label3: BEGIN
-        declare var int;  
+        declare var int;
         set var=parameter+1;
 
-        if var=0 then 
-        insert into t values(17);  
-        end if;  
-        if parameter=0 then 
-        update t set s1=s1+1;  
-        else 
-        update t set s1=s1+2;  
+        if var=0 then
+        insert into t values(17);
+        end if;
+        if parameter=0 then
+        update t set s1=s1+1;
+        else
+        update t set s1=s1+2;
         end if;
 
-        case var  
-        when 0 then   
-        insert into t values(17);  
-        when 1 then   
-        insert into t values(18);  
-        else   
-        insert into t values(19);  
+        case var
+        when 0 then
+        insert into t values(17);
+        when 1 then
+        insert into t values(18);
+        else
+        insert into t values(19);
         end case;
 
-        while var<6 do  
-        insert into t values(var);  
-        set var=var+1;  
+        while var<6 do
+        insert into t values(var);
+        set var=var+1;
         end while;
 
-        repeat  
-        insert into t values(v);  
-        set v=v+1;  
-        until v>=5  
+        repeat
+        insert into t values(v);
+        set v=v+1;
+        until v>=5
         end repeat;
 
-        LOOP_LABLE:loop  
-        insert into t values(v);  
-        set v=v+1;  
-        if v >=5 then 
-        leave LOOP_LABLE;  
-        end if;  
+        LOOP_LABLE:loop
+        insert into t values(v);
+        set v=v+1;
+        if v >=5 then
+        leave LOOP_LABLE;
+        end if;
         end loop;
 
-        LOOP_LABLE:loop  
-        if v=3 then   
-        set v=v+1;  
-        ITERATE LOOP_LABLE;  
-        end if;  
-        insert into t values(v);  
-        set v=v+1;  
-        if v>=5 then 
-        leave LOOP_LABLE;  
-        end if;  
-        end loop;  
+        LOOP_LABLE:loop
+        if v=3 then
+        set v=v+1;
+        ITERATE LOOP_LABLE;
+        end if;
+        insert into t values(v);
+        set v=v+1;
+        if v>=5 then
+        leave LOOP_LABLE;
+        end if;
+        end loop;
 　　　　END label3 ;
 　　END label2;
 END label1
@@ -1998,21 +1998,21 @@ create procedure out_param(out|inout p_out int)
     end
     //
 delimiter ;
- 
+
 set @p_out=1;
- 
+
 call out_param(@p_out);
 
-DECLARE l_numeric number(8,2) DEFAULT 9.95;  
-DECLARE l_date date DEFAULT '1999-12-31';  
-DECLARE l_datetime datetime DEFAULT '1999-12-31 23:59:59';  
+DECLARE l_numeric number(8,2) DEFAULT 9.95;
+DECLARE l_date date DEFAULT '1999-12-31';
+DECLARE l_datetime datetime DEFAULT '1999-12-31 23:59:59';
 DECLARE l_varchar varchar(255) DEFAULT 'This will not be padded';
 
 SELECT 'Hello World' into @x;
 SET @y='Goodbye Cruel World';
 
-CREATE PROCEDURE GreetWorld( ) SELECT CONCAT(@greeting,' World');  
-SET @greeting='Hello';  
+CREATE PROCEDURE GreetWorld( ) SELECT CONCAT(@greeting,' World');
+SET @greeting='Hello';
 CALL GreetWorld( );
 
 select name from mysql.proc where db='数据库名';
@@ -2588,19 +2588,18 @@ http://localhost:3000
 
 *  客户端
     + 命令行
-    + MySQLWorkbench
-    + SQLyog:`ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
+    + [MySQL Workbench](https://www.mysql.com/products/workbench/)
     + [phpmyadmin/phpmyadmin](https://github.com/phpmyadmin/phpmyadmin):A web interface for MySQL and MariaDB https://www.phpmyadmin.net/
         * `sudo add-apt-repository ppa:phpmyadmin/ppa`
         * `export DEBIAN_FRONTEND=noninteractive`
         * `sudo apt-get -yq install phpmyadmin`
+    + SQLyog:`ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
     + Sequel Pro
     + navicat
         * [DoubleLabyrinth/navicat-keygen](https://github.com/DoubleLabyrinth/navicat-keygen):A keygen for Navicat
         * Navicat Premium for Mac
 * ER图
     - PowerDesigner
-    - MySQL Workbench
 * [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. http://vitess.io
 * [dbcli/mycli](https://github.com/dbcli/mycli):A Terminal Client for MySQL with AutoCompletion and Syntax Highlighting. http://mycli.net
 * [github/orchestrator](https://github.com/github/orchestrator):MySQL replication topology management and HA
@@ -2614,12 +2613,12 @@ http://localhost:3000
 
 ## 参考
 
+* [shlomi-noach/awesome-mysql](https://github.com/shlomi-noach/awesome-mysql):A curated list of awesome MySQL software, libraries, tools and resources
+*
 * [HOW TO INSTALL MYSQL NDB CLUSTER ON LINUX](https://clusterengine.me/how-to-install-mysql-ndb-cluster-on-linux/)
 * [索引性能分析](http://draveness.me/sql-index-performance.html)
 * [MySQL主从同步](http://geek.csdn.net/news/detail/236754)
 * [MySQL数据库事务隔离级别介绍](http://www.jb51.net/article/49596.htm)
 * [使用 Docker 完成 MySQL 数据库主从配置](https://juejin.im/post/59fd71c25188254dfa1287a9)
-* [shlomi-noach/awesome-mysql](https://github.com/shlomi-noach/awesome-mysql):A curated list of awesome MySQL software, libraries, tools and resources
 * [MySQL 学习笔记](https://notes.diguage.com/mysql/)
 * [jaywcjlove/mysql-tutorial](https://github.com/jaywcjlove/mysql-tutorial):MySQL入门教程（MySQL tutorial book）
-* [MySQL Forums](https://forums.mysql.com/index.php)

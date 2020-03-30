@@ -35,19 +35,28 @@ eter Deutsch 提出的分布式系统八大谬论概括了程序员新手可能�
 
 ## Zookeeper
 
-## 两阶段提交
+## 两阶段提交 2PC
+
+严重影响性能，并不适合高并发的场景，而且其实现复杂，牺牲了一部分可用性
 
 ## TCC
 
 ## 分片
 
+* 对资料的切割，也就是一套主从已经装不下了.分片的逻辑可以放在客户端，比如驱动层的数据库中间件，Memcache等；也可以放在服务端，比如ES、Mongo等
+* 分片的信息组成了一组元数据，存放了切割的规则。这些信息可以借助外部的存储比如KAFKA；也有的直接同步在集群每个节点的内存中，比如ES。比
 * Round-Robin  资料轮流落进不同的机器，数据比较平均，适合弱相关性的数据存储。坏处是聚合查询可能会非常慢，扩容、缩容难。
 * Hash 使用某些信息的Hash进行寻路，客户端依照同样的规则可以方便的找到服务端数据。问题与轮询类似，数据过于分散且扩容、缩容难。Hash同样适合弱相关的数据，并可通过一致性哈希来解决数据的迁移问题。
 * Range 根据范围来分片数据，比如日期范围。可以将一类数据归档到特定的节点，以增加查询速度。此类分片会遇到热点问题，会冷落很多机器。
 * 自定义 自定义一些分片规则。比如通过用户的年龄，区域等进行切分。你需要维护大量的路由表，然后自己控制数据和访问的倾斜问题。
 * 嵌套 属于自定义的一种，路由规则可以嵌套。比如首先使用Range进行虚拟分片，然后再使用Hash进行实际分片。在实际操作中，这很有用，需要客户端和服务端的结合才能完成。
+* 切分字段的选择非常重要，如果几个维度都很必要，解决的方式就是冗余—-按照每个切分维度，都写一份数据。
 
 ## 副本
+
+* 副本越多，可用性越高,延迟越大
+* 既要保证数据的增量迁移，又要保证集群的正确服务
+* master选举通常都是投票机制，所以最小组集群的台数一般都设置成n/2+1
 
 ## 分区
 
@@ -58,6 +67,14 @@ eter Deutsch 提出的分布式系统八大谬论概括了程序员新手可能�
 ## Quorum/NWR
 
 ## 幂等
+
+## 分布式事务
+
+* 写多个分片的协调
+* 并发读写某一个值
+* 最终一致性
+    - 采用了BASE（Basically Available（基本可用）， Soft state（软状态），Eventually consistent（最终一致性）） 的系统，选择的是弱一致性，高度依赖业务监控组件
+
 
 ## 一致性哈希
 
@@ -103,3 +120,4 @@ eter Deutsch 提出的分布式系统八大谬论概括了程序员新手可能�
 * [rShetty/awesome-distributed-systems](https://github.com/rShetty/awesome-distributed-systems):Awesome list of distributed systems resources http://rajeevnb.com
 * [gdamdam/awesome-decentralized-web](https://github.com/gdamdam/awesome-decentralized-web):an awesome list of decentralized services
 * [wx-chevalier/Distributed-Infrastructure-Series](https://github.com/wx-chevalier/Distributed-Infrastructure-Series):📚 深入浅出分布式基础架构，Linux 与操作系统篇 | 分布式系统篇 | 分布式计算篇 | 数据库篇 | 网络篇 | 虚拟化与编排篇 | 大数据与云计算篇
+* [分布式系统架构经典资料](https://www.infoq.cn/article/2018/05/distributed-system-architecture/)

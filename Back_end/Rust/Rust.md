@@ -57,9 +57,8 @@ registry = "https://code.aliyun.com/rustcc/crates.io-index"
 * [flosse/rust-web-framework-comparison](https://github.com/flosse/rust-web-framework-comparison):A comparison of some web frameworks and libs written in Rust
 * [pest-parser/pest](https://github.com/pest-parser/pest):The Elegant Parser https://pest.rs
 * [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust heart Emacs
-* [rust-lang
-/
-rust-by-example](https://github.com/rust-lang/rust-by-example):Learn Rust with examples (Live code editor included) https://doc.rust-lang.org/stable/rust-by-example/
+* [rust-lang / rust-by-example](https://github.com/rust-lang/rust-by-example):Learn Rust with examples (Live code editor included) https://doc.rust-lang.org/stable/rust-by-example/
+* [zesterer / flume](https://github.com/zesterer/flume):A safe and fast multi-producer, single-consumer channel. https://crates.io/crates/flume
 
 ## 参考
 

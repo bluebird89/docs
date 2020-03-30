@@ -4,32 +4,33 @@ Redis is an in-memory database that persists on disk. The data model is key-valu
 
 ## 原理
 
+* 一种基于客户端-服务端模型以及请求/响应协议的TCP服务
+    - 客户端向服务端发送一个查询请求，并监听Socket返回，通常是以阻塞模式，等待服务端响应
+    - 服务端处理命令，并将结果返回给客户端
 * 性能：纯内存操作，单线程操作，避免了线程切换和锁的性能消耗，10万次读写操作
-    - 为了达到最快的读写速度将数据都读到内存中，并通过异步的方式将数据写入磁盘
+    - 将数据都读到内存中，并通过异步的方式将数据写入磁盘
     - 利用队列技术将并发访问变为串行访问，消除了传统数据库串行控制的开销
     - 单线程简化数据结构和算法的实现
 * 单个value的最大限制是1GB(memcached 是1MB)
-* 一种基于客户端-服务端模型以及请求/响应协议的TCP服务
-    - 客户端向服务端发送一个查询请求，并监听Socket返回，通常是以阻塞模式，等待服务端响应
-    - 服务端处理命令，并将结果返回给客户端。
-* 采用了非阻塞I/O多路复用机制，单线程根据Socket的不同状态执行每个Socket(I/O流)：任务
+* 非阻塞I/O多路复用机制，单线程根据Socket的不同状态执行每个Socket(I/O流)：任务
     - 用epoll作为IO多路复用技术的实现，再加上redis自身事件处理模型将epoll中的链接、读写、关闭都转换为事件，不在网络IO上浪费过多的事件
 * 提供了Select、Epoll、Evport、Kqueue等多路复用函数库
 * 内部使用一个redisObject对象来表示所有的key和value,redisObject最主要的信息
     - type代表一个value对象具体是何种数据类型
     - encoding是不同数据类型在redis内部的存储方式
-* 虚拟内存：直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求
+* 虚拟内存：构建了VM 机制，因为调用系统函数的话，会浪费一定的时间去移动和请求
     - key很小而value很大时,使用VM的效果会比较好.因为这样节约的内存比较大
     - key不小时,可以考虑使用一些非常方法将很大的key变成很大的value,比如可以考虑将key,value组合成一个新的value
     - vm-max-threads参数,可以设置访问swap文件的线程数,设置最好不要超过机器的核数,如果设置为0,那么所有对swap文件的操作都是串行的.可能会造成比较长时间的延迟,但是对数据完整性有很好的保证
-    - vm字段，只有打开了Redis的虚拟内存功能，此字段才会真正的分配内存
+    - vm 字段，只有打开了Redis的虚拟内存功能，此字段才会真正的分配内存
 * 支持Lua脚本
 * 分布式：主从复制与高可用（Redis Sentinel）
     - Master会将数据同步到slave，而slave不会将数据同步到master。Slave启动时会连接master来同步数据
     - 利用master来插入数据，slave提供检索服务
 * 读写分离模型：通过增加Slave DB的数量，读的性能可以线性增长
     - 为了避免Master DB的单点故障，集群一般都会采用两台Master DB做双机热备，所以整个集群的读和写的可用性都非常高
-    - 缺陷在于，不管是Master还是Slave，每个节点都必须保存完整的数据，如果在数据量很大的情况下，集群的扩展能力还是受限于单个节点的存储能力，而且对于Write-intensive类型的应用，读写分离架构并不适合
+    - 缺陷
+        + 不管是Master还是Slave，每个节点都必须保存完整的数据，如果在数据量很大的情况下，集群的扩展能力还是受限于单个节点的存储能力，而且对于Write-intensive类型的应用，读写分离架构并不适合
     - 注意
         + Master最好不要做任何持久化工作，如RDB内存快照和AOF日志文件
         + 如果数据比较重要，某个Slave开启AOF备份数据，策略设置为每秒同步一次
@@ -37,7 +38,7 @@ Redis is an in-memory database that persists on disk. The data model is key-valu
         + 尽量避免在压力很大的主库上增加从库
         + 主从复制不要用图状结构，用单向链表结构更为稳定，即：Master <- Slave1 <- Slave2 <- Slave3... 这样的结构方便解决单点故障问题，实现Slave对Master的替换。如果Master挂了，可以立刻启用Slave1做Master，其他不变。
 * 分布式锁：分布式锁是控制分布式系统之间同步访问共享资源的一种方式。在分布式系统中，常常需要协调他们的动作，如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。
-* 缺点：数据库容量受到物理内存的限制，不能用作海量数据的高性能读写，因此Redis适合的场景主要局限在较小数据量的高性能操作和运算上。
+* 缺点：容量受到物理内存的限制，不能用作海量数据的高性能读写，局限在较小数据量的高性能操作和运算上。
 
 ### 版本
 
@@ -195,7 +196,7 @@ CLIENT KILL 关闭客户端连接
         + dictEntry：Redis是Key-Value数据库，因此对每个键值对都会有一个dictEntry，里面存储了指向Key和Value的指针；next指向下一个dictEntry，与本Key-Value无关。
         + Key：Key（”hello”）并不是直接以字符串存储，而是存储在SDS结构中。
         + redisObject：Value(“world”)既不是直接以字符串存储，也不是像Key一样直接存储在SDS中，而是存储在redisObject中。实际上，不论Value是5种类型的哪一种，都是通过redisObject来存储的；而redisObject中的type字段指明了Value对象的类型，ptr字段则指向对象所在的地址。不过可以看出，字符串对象虽然经过了redisObject的包装，但仍然需要通过SDS存储。
-            * type字段表示对象的类型;目前包括REDIS_STRING(字符串)、REDIS_LIST (列表)、REDIS_HASH(哈希)、REDIS_SET(集合)、REDIS_ZSET(有序集合)
+            * type:表示对象的类型,REDIS_STRING(字符串)、REDIS_LIST (列表)、REDIS_HASH(哈希)、REDIS_SET(集合)、REDIS_ZSET(有序集合)
             * encoding表示对象的内部编码:每种类型，都有至少两种内部编码，例如对于字符串，有int、embstr、raw三种编码。通过encoding属性，Redis可以根据不同的使用场景来为对象设置不同的编码，大大提高了Redis的灵活性和效率。
                 - 以对象为例，有压缩列表和双端链表两种编码方式；如果列表中的元素较少，倾向于使用压缩列表进行存储，因为压缩列表占用内存更少，而且比双端链表可以更快载入；当列表对象元素较多时，压缩列表就会转化为更适合存储大量元素的双端链表。
             * lru记录的是对象最后一次被命令程序访问的时间，占据的比特数不同的版本有所不同。通过对比lru时间与当前时间，可以计算某个对象的空转时间(单位是秒),一个特殊之处在于它不改变对象的lru值. 还与Redis的内存回收有关系：如果Redis打开了maxmemory选项，且内存回收算法选择的是volatile-lru或allkeys—lru，那么当Redis内存占用超过maxmemory指定的值时，Redis会优先选择空转时间最长的对象进行释放。
@@ -205,6 +206,7 @@ CLIENT KILL 关闭客户端连接
                 - 享对象只能是整数值的字符串对象，但是5种类型都可能使用共享对象。Redis服务器在初始化时，会创建10000个字符串对象，值分别是0~9999的整数值；当Redis需要使用值为0~9999的字符串对象时，可以直接使用这些共享对象。10000这个数字可以通过调整参数REDIS_SHARED_INTEGERS（4.0中是OBJ_SHARED_INTEGERS）的值进行改变。
             * ptr指针指向具体的数据
             * 一个redisObject对象的大小为16字节
+            * vm:只有打开了Redis的虚拟内存功能，此字段才会真正的分配内存，该功能默认是关闭状态的
         + jemalloc：无论是DictEntry对象，还是redisObject、SDS对象，都需要内存分配器（如jemalloc）分配内存进行存储。以DictEntry对象为例，有3个指针组成，在64位机器下占24个字节，jemalloc会为它分配32字节大小的内存单元。
             * jemalloc在64位系统中，将内存空间划分为小、大、巨大三个范围；每个范围内又划分了许多小的内存块单位；当Redis存储数据时，会选择大小最合适的内存块进行存储。
         + SDS(Simple Dynamic String)
@@ -247,10 +249,10 @@ struct sdshdr {
     - `keys user_token*`:遍历算法，复杂度是O(n),导致 Redis 服务卡顿，因为Redis 是单线程程序，顺序执行所有指令，其它指令必须等到当前的 keys 指令执行完了才可以继续
     - 遍历大数据量用 `SCAN cursor [MATCH pattern] [COUNT count]`
         + 复杂度虽然也是 O(n)，但是它是通过游标分步进行的，不会阻塞线程,增量的循环，每次调用只会返回一小部分的元素
-        + 提供 count 参数，不是结果数量，是redis单次遍历字典槽位数量(约等于) 
-        + 同 keys 一样，它也提供模式匹配功能; 
-        + 服务器不需要为游标保存状态，游标的唯一状态就是 scan 返回给客户端的游标整数; 
-        + 返回的结果可能会有重复，需要客户端去重复，这点非常重要; 
+        + 提供 count 参数，不是结果数量，是redis单次遍历字典槽位数量(约等于)
+        + 同 keys 一样，它也提供模式匹配功能;
+        + 服务器不需要为游标保存状态，游标的唯一状态就是 scan 返回给客户端的游标整数;
+        + 返回的结果可能会有重复，需要客户端去重复，这点非常重要;
         + 单次返回的结果是空的并不意味着遍历结束，而要看返回的游标值是否为零
         + `scan 0 match user_token* count 5`
 * RANDOMKEY：返回随机key　　
@@ -307,7 +309,7 @@ struct sdshdr {
 * 值可以是任何各种类的字符串（包括二进制数据），如：简单的字符串、JSON、XML、二进制等，注意：在 Redis 中字符串类型的值最大只能保存 512 MB
 * 例如可以在一个键下保存一副jpeg图片.即可以完全实现目前 Memcached 的功能，并且效率更高。还可以享受Redis的定时持久化，操作日志及 Replication等功能
 * 方法
-    - 设置值:`set key value [EX seconds] [PX milliseconds] [NX|XX]`,有几个非必须的选项
+    - 设置 `set key value [EX seconds] [PX milliseconds] [NX|XX]`,有几个非必须的选项
         + EX seconds：为键设置秒级过期时间
         + PX milliseconds：为键设置毫秒级过期时间
         + NX：键必须不存在，才可以设置成功，用于添加
@@ -315,32 +317,34 @@ struct sdshdr {
             * 基于 setnx 这种特性，setnx 命令可以作为分布式锁的一种解决方案
         + XX：键必须存在，才可以设置成功，用于更新
             * 多次更新，跟原来值一样？
-    - 获取值 `get key`
-    - GETBIT key offset 对 key 所储存的字符串值，获取指定偏移量上的位
-    - 批量设置值: `mset key value [key value]`
-    - 批量获取值:`mget key [key1 key2]`,键不存在，那么它的值将为 nil,并且返回结果的顺序与传入时相同
-    - incr 命令用于对值做自增操作，返回的结果分为 3 种情况:
-        + 如果值不是整数，那么返回的一定是错误
-        + 如果值是整数，那么返回自增后的结果
-        + 如果键不存在，那么就会创建此键，然后按照值为 0 自增， 就是返回 1
-    - decr key 自减
-    - incrby kek increment 自增指定数字
-    - decrby key decrement 自减指定数字
-    - incrbyfloat key increment 0.7
+    - 获取 `get key`
+
+    - 批量设置值  `mset key value [key value]`
+    - 批量获取值 `mget key [key1 key2]`,键不存在，值将为 nil,并且返回结果的顺序与传入时相同
+    - 对值做自增操作 `incr key`
+        + 如果值不是整数，返回错误
+        + 如果值是整数，返回自增结果
+        + 如果键不存在，创建此键，然后按照值为 0 自增(1)
+    - `decr key` 自减
+    - `incrby kek increment` 自增指定数字
+    - `decrby key decrement` 自减指定数字
+    - `incrbyfloat key increment 0.7`
     - `strlen key` 获取字符串长度
         + 每个中文占用 3 个字节
     - `append key value` 往字符串append内容
     - `getset key value` 设置并返回原值
-    - 获取字符串的某一段内容 `getrange key start end` O(n) n是字符长度,字符串的下标，左数从0开始，右数从-1开始
+    - `getrange key start end` 获取字符串的某一段内容 O(n) n是字符长度,字符串的下标，左数从0开始，右数从-1开始
         + 当start>length，则返回空字符串
         + 当stop>=length，则截取至字符串尾
         + 如果start所处位置在stop右边，则返回空字符串
-    - `setrange key offeset values` 设置及获取字符串的某一位（bit）
-    - setbit key offset value：设置offset对应二进制上的值，返回该位上的旧值。 如果offset过大，则会在中间填充0,offset最大到多少：2^32-1，即可推出最大的字符串为512M
+    - `setrange key offeset values`
+    - 获取指定偏移量上的位 `GETBIT key offset`
+    - 设置offset对应二进制上的值，返回该位上的旧值 `setbit key offset value`：如果offset过大，则会在中间填充0,offset最大到多少：2^32-1，即可推出最大的字符串为512M
     - bitop AND|OR|NOT|XOR destkey key1 [key2..] 对key1 key2做opecation并将结果保存在destkey上
     - setex key time value：设置key对应的值value，并设置有效期为time秒
     - MSET key value [key value ...] 批量设置一系列字符串的内容
 * 编码：长度不能超过512MB
+    - 内部存储默认就是一个字符串，被redisObject所引用，当遇到incr,decr等操作时会转成数值型进行计算，此时redisObject的encoding字段为int
     - int：8个字节的长整型。字符串值是整型时，这个值使用long整型表示，当int数据不再是整数，或大小超过了long的范围时，自动转化为raw。
     - embstr：<=39字节的字符串：redisObject的长度是16字节，sds的长度是9+字符串长度；因此当字符串长度是39时，embstr的长度正好是16+9+39=64，jemalloc正好可以分配64字节的内存单元。
         + 由于其实现是只读的，因此在对embstr对象进行修改时，都会先转化为raw再进行修改，因此，只要是修改embstr对象，修改后的对象一定是raw的，无论是否达到了39个字节
@@ -392,8 +396,8 @@ if ( get( ip:1517207868 ) > 3 ) {
 * Redis的Hash实际是内部存储的Value为一个HashMap，并提供了直接存取这个Map成员的接口
     - Key仍然是用户ID, value是一个Map，这个Map的key是成员的属性名，value是属性值，这样对数据的修改和存取都可以直接通过其内部Map的Key(Redis里称内部Map的key为field), 也就是通过 key(用户ID) + field(属性标签) 就可以操作对应属性数据了，既不需要重复存储数据，也不会带来序列化和并发修改控制的问题。
     - Redis提供了接口(hgetall)可以直接取到全部的属性数据,但是如果内部Map的成员很多，那么涉及到遍历整个内部Map的操作，由于Redis单线程模型的缘故，这个遍历操作可能会比较耗时，而另其它客户端的请求完全不响应
-* HashMap，实际这里会有2种不同实现
-    - 这个Hash的成员比较少时Redis为了节省内存会采用类似一维数组的方式来紧凑存储，而不会采用真正的HashMap结构，对应的value redisObject的encoding为zipmap
+* HashMap，会有2种不同实现
+    - 成员比较少时:为了节省内存会采用类似一维数组的方式来紧凑存储，而不会采用真正的HashMap结构，对应的value redisObject的encoding为zipmap
     - 当成员数量增大时会自动转成真正的HashMap,此时encoding为ht
 * 方法
     - 判断 field 是否存在 `hexists key field`
@@ -491,7 +495,7 @@ typedef struct dict{
 * 用来存储多个有序的字符串，每个字符串称为元素；一个列表可以存储2^32-1个元素
     - 列表中所有的元素都是有序的，所以可以通过索引获取的，也就是 lindex 命令。索引是从 0 开始的
     - 列表中的元素是可以重复的，也就是说在 Redis 列表类型中，可以保存同名元素
-* 实现为一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销
+* 实现:一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销
 * 列表就是有序元素的序列：10，20，1，2，3就是一个例表，但用数组实现的List和Linked List实现的list，在属性方面大不相同。
     - 基于Linked list实现。意味着即使在一个list中有数百万个元素，在头部或尾部添加一个元素的操作，其时间复杂度也是常数级别的。用LPUSH命令在十个元素的list头部添加新元素，和在千万元素的list头部添加新元素的速度相同。
     - Redis Lists用linked list实现的原因是：
@@ -538,6 +542,7 @@ typedef struct dict{
 * 场景
     - 右侧当作队尾，将左侧当作队头
     - 消息队列，可以利用Lists的PUSH操作，将任务存在Lists中，然后工作线程再用POP操作将任务取出进行执行
+    - 关注列表，粉丝列表
     - 社交网络中获取用户最新发表的帖子
     - 新闻的分页列表
     - 博客的评论系统
@@ -565,7 +570,7 @@ lrem set 0 new
     - set 中的元素是无序的，而 list 中的元素是有序的。
     - set 中的元素不能通过索引下标获取元素，而 list 中的元素则可以通过索引下标获取元素。
     - 除此之外 set 还支持更高级的功能，例如多个 set 取交集、并集、差集等。
-* set 的内部实现是一个 value永远为null的HashMap，实际就是通过计算hash的方式来快速排重的，这也是set能提供判断一个成员是否在集合内的原因。
+* 实现:一个 value永远为null的HashMap，实际就是通过计算hash的方式来快速排重的，这也是set能提供判断一个成员是否在集合内的原因。
 * 方法
     - 获取所有元素 `smembers key`
     - 添加元素:`sadd key member [member ...]` 返回值就是当前执行 sadd 命令成功添加元素的个数
@@ -586,7 +591,7 @@ lrem set 0 new
         + sinterstore destination key [key ...]
         + sunionstore destination key [key ...]
         + sdiffstore destination key [key ...]
-* 内部编码
+* 编码
     - intset(整数集合)：当集合中的元素都是整数，并且集合中的元素个数小于 512 个时
         + encoding代表contents中存储内容的类型
         + contents（存储集合中的元素）是int8_t类型，但实际上其存储的值是int16_t、int32_t或int64_t，具体的类型便是由encoding决定的；
@@ -1188,10 +1193,10 @@ maxmemory-policy volatile-lru
     - 长连接的话，PHP-FPM调用的所有CGI都只会共用一个长连接，所以也就是只会产生固定数量的time_out
     - 参数
         + host: string. can be a host, or the path to a unix domain socket
-        + port: int, optional 
-        + timeout: float, value in seconds (optional, default is 0 meaning unlimited) 
-        + persistent_id: string. identity for the requested persistent connection 
-        + retry_interval: int, value in milliseconds (optional)  
+        + port: int, optional
+        + timeout: float, value in seconds (optional, default is 0 meaning unlimited)
+        + persistent_id: string. identity for the requested persistent connection
+        + retry_interval: int, value in milliseconds (optional)
 
 ## 性能
 
@@ -1414,6 +1419,34 @@ public void delBigList(String host, int port, String password, String bigListKey
 
 * 《Redis设计与实现》
 * Redis 4.X Cookbook
+
+## [rdr](https://github.com/xueqiu/rdr)
+
+解析 redis rdbfile 工具。与redis-rdb-tools相比，RDR 是由golang 实现的，速度更快（5GB rdbfile 在我的PC上大约需要2分钟）
+
+* 参数解释
+    - show 网页显示 rdbfile 的统计信息
+    - keys 从 rdbfile 获取所有 key
+    - help 帮助
+    - --version 显示版本信息
+
+
+```sh
+# Linux amd64
+wget https://github.com/xueqiu/rdr/releases/download/v0.0.1/rdr-linux -O /usr/local/bin/rdr
+chmod +x /usr/local/bin/rdr
+
+# MacOS
+curl https://github.com/xueqiu/rdr/releases/download/v0.0.1/rdr-darwin -o /usr/local/bin/rdr
+chmod +x /usr/local/bin/rdr
+
+# Windows 浏览器下载下面链接，在点击运行
+https://github.com/xueqiu/rdr/releases/download/v0.0.1/rdr-windows.exe
+
+./rdr show -p 8080 *.rdb
+# 分析多个 Redis rdb
+rdr keys FILE1 [FILE2] [FILE3]...
+```
 
 ## 工具
 

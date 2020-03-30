@@ -16,8 +16,8 @@
     + 安装类型：其他选项
     + 磁盘空间分区
         * /：主分区 系统文件，30GB；  挂载点 /  /dev/sda
-        * /swap：逻辑分区 交换分区（虚拟内存），建议是当前 RAM 的两倍
-        * /boot：逻辑分区 引导分区 安装启动引导器的设备 包含系统内核和系统启动所需的文件，实现双系统的关键所在，建议500M 挂载点 /boot 
+        * /swap：逻辑分区 交换分区（虚拟内存），建议是当前 RAM
+        * /boot：逻辑分区 引导分区 安装启动引导器的设备,包含系统内核和系统启动所需的文件，实现双系统的关键所在，建议500M 挂载点 /boot
         * /home：逻辑分区 home目录，存放音乐、图片及下载等文件的空间，建议最后分配所有剩下的空间 挂载点 /home
         * /usr 大一点
         * 生产服务器建议单独再划分一个/data分区存放数据
@@ -34,7 +34,7 @@
 free -m
 sudo lshw -c memory
 
-systemd-analyze plot > file.svg 
+systemd-analyze plot > file.svg
 systemd-analyze blame | head -n 10
 
 # Lower value means Linux will use swap space less whereas higher value causes Linux to use swap space more often. The default value on Ubuntu is 60 which means when your computer uses up 40% of physical RAM
@@ -76,26 +76,26 @@ ip addr # 查看IP地址
 
 hostname  www  #设置主机名为www
 
-# etc/hostname #编辑配置文件
+# etc/hostname
 www   localhost.localdomain  #修改localhost.localdomain为www
 
 sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
 
-host xx.xxx.com：显示某域名相关托管服务器/邮件服务器
+host xx.xxx.com： # 显示某域名相关托管服务器/邮件服务器
 ping 8.8.8.8检测连接
 
 # host  文件修改 以Ubuntu为主要使用系统，不用修改hosts can access google
 sudo su # switch root
 curl https://github.com/racaljk/hosts/blob/master/hosts -L >> /etc/hosts
 
-# 时区设置 
+# 时区设置
 sudo dpkg-reconfigure tzdata
 
 # /etc/apt/apt.conf.d/00aptitude append this line of code to the end
 Acquire::Languages "none";
 
 # DNS /etc/resolv.conf
-nameserver 223.5.5.5  
+nameserver 223.5.5.5
 nameserver 223.6.6.6
 ```
 
@@ -103,10 +103,10 @@ nameserver 223.6.6.6
 
 ```sh
 #  display Unneeded Startup Applications
-sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop # 
+sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop #
 # list any services launched at startup
 service --status-all
-systemctl list-unit-files | grep enabled 
+systemctl list-unit-files | grep enabled
 
 systemctl status|start|restart|reload|enable|disable nginx
 
@@ -141,25 +141,22 @@ service mysql start
 * 从二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到合适的目录，然后将包含可执行的主程序文件的目录添加进PATH环境变量即可
 * 源码编译安装
 * 列表
-  - 云笔记
-    + simplenote
-  - video:
-    + VLC
-  - editor
-    + atom
+  - simplenote
+  - VLC
   - oh my zsh
   - KchmViewer:阅读CHM
   - LaTeX
   - Chromium
-  - Nylas N1：超好用的跨平台电子邮件客户端  Thunderbird
+  - Nylas N1：超好用的跨平台电子邮件客户端
+  - Thunderbird
   - Spotify for Linux：音乐流媒体服务
   - Lightworks Free：专业的非线视频编辑器
   - Viber：跨平台的 Skype 替代品
   - Vivaldi：功能强大的 web 浏览器
   - BleachBit: cleaner(softer center)
   - albert
-  - 听播客: Vocal
-  - PDF 阅读：Foxit Reader
+  - Vocal:听播客
+  - Foxit Reader:PDF 阅读
   - 图片
     + gnome-screenshot:`sudo apt-get install gnome-screenshot`
     + Gimp
@@ -167,7 +164,6 @@ service mysql start
     + Imagemagick
     + Kazam
   - Gtile:分屏工具
-  - MySQL Workbench
   - [Cloud music](http://d1.music.126.net/dmusic/netease-cloud-music_1.2.0_amd64_ubuntu_20190424_1.deb)
   - shadowshocks
   - Jitsy:通讯工具
@@ -196,17 +192,19 @@ sudo apt-cache search softname1 softname2 softname3...... # 针对本地数据�
 sudo apt[-get] install [packagename] # 其后加上软件包名，用于安装一个软件包
 sudo apt[-get] -f install # 解决依赖问题
 sudo apt update --fix-missing
+sudo apt update
 sudo apt[-get] upgrade # 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表 升级本地可更新的全部软件包，但存在依赖问题时将不会升级，通常会在更新之前执行一次update
 sudo apt[-get] dist-upgrade # 解决依赖关系并升级(存在一定危险性)
 sudo apt --fix-broken install # continue install
 
 sudo apt-get remove netease-cloud-music # 移除已安装的软件包，包括与被移除软件包有依赖关系的软件包，但不包含软件包的配置文件
 sudo apt-get autoremove # 移除之前被其他软件包依赖，但现在不再被使用的软件包  purge 与remove相同，但会完全移除软件包，包含其配置文件
-sudo apt-get clean # 移除下载到本地的已经安装的软件包，默认保存在/var/cache/apt/archives/
+sudo apt-get clean # 删除所有已下载的包文件，默认保存在/var/cache/apt/archives/
 sudo apt-get autoclean # 移除已安装的软件的旧版本软件包
+apt-get download packagename  # 下载指定的二进制包到当前目录
+sudo apt-get purge packagename # 卸载并清除软件包的配置
+apt-get source packagename  # 下载源码包文件
 
-sudo dpkg --configure -a # fixing broken dependencies E: Sub-process /usr/bin/dpkg returned an error code (1)
-sudo apt-get install -f
 ## 参数
 -i|--install
 -l|--list #简明地列出软件包的状态。
@@ -234,17 +232,31 @@ sudo dpkg -i netease-cloud-music_1.1.0_amd64_ubuntu.deb # install failed.depency
 dpkg --get-selections | grep hold
 --reinstall # 重新安装已经安装但可能存在问题的软件包
 --install-suggests # 同时安装APT给出的建议安装的软件包
-# 显示包的具体信息
-dpkg -p package-name
-sudo dpkg --configure -a # fixing broken dependencies
+dpkg -p package-name # 显示包的具体信息
+sudo dpkg --configure -a # fixing broken dependencies E: Sub-process /usr/bin/dpkg returned an error code (1)
 
 sudo apt install aptitude
 sudo aptitude install <packagename>
 dpkg --get-selections | grep hold
 sudo aptitude -f install <packagename> # Unable to correct problems, you have held broken packages
 
-sudo apt-get install -f # fix software database is boken
+sudo add-apt-repository ppa:nilarimogard/webupd8   # add source
+sudo add-apt-repository -r(--remove) ppa:nilarimogard/webupd8   # add source
 
+## error
+E: Could not get lock /var/lib/dpkg/lock – open (11: Resource temporarily unavailable)
+E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
+
+sudo killall apt apt-get
+
+## 源码编译 源码cp到/usr/local/src/下
+cd xxx
+./configure --help
+./configure --prefix=/usr/local/libxml2
+make && sudo make install
+```
+
+```
 ## 替换源
 sudo mv /etc/apt/sources.list /etc/apt/sources.list.backup #备份系统默认的软件源
 
@@ -284,24 +296,6 @@ deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe 
 deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
 deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
 deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
-
-sudo add-apt-repository ppa:nilarimogard/webupd8   # add source
-sudo add-apt-repository -r(--remove) ppa:nilarimogard/webupd8   # add source
-sudo apt update
-sudo apt update --fix-missing
-sudo apt-get upgrade
-
-## error
-E: Could not get lock /var/lib/dpkg/lock – open (11: Resource temporarily unavailable)
-E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
-
-sudo killall apt apt-get
-
-## 源码编译 源码cp到/usr/local/src/下
-cd xxx
-./configure --help
-./configure --prefix=/usr/local/libxml2
-make && make install
 ```
 
 ## 用户管理
@@ -340,7 +334,7 @@ sudo apt install chrome-gnome-shell
 sudo apt install gnome-shell-extensions # config weather show
 ```
 
-## keyword map
+## keymap
 
 * 工作区
   - Win 键，进入活动概览视图模式
@@ -366,6 +360,8 @@ sudo apt install gnome-shell-extensions # config weather show
   - ctrl+Print：复制截图到窗口
   - ctrl+alt+Print：窗口截取并添加到粘贴板
   - shift+alt+Print:区域截取并添加到粘贴板
+* Ctrl+Alt+[F1~F6] ，切换到1~6号控制台
+* Ctrl+Alt+F7 可以返回图形界面
 
 ## 端口与进程管理
 
@@ -393,11 +389,11 @@ lsof -Pni4 | grep LISTEN | grep php
 kill -9 pid
 ```
 
-### 優化
+### 优化
 
 ```sh
 # /etc/fstab
-Now change “errors=remount-ro” to “noatime,errors=remount-ro”. 
+Now change “errors=remount-ro” to “noatime,errors=remount-ro”.
 
 echo -e "#\x21/bin/sh\\nfstrim -v /" | sudo tee /etc/cron.daily/trim
 sudo chmod +x /etc/cron.daily/trim
@@ -470,7 +466,7 @@ sudo ./VMware-Workstation-Full-12.1.1-3770994.x86_64.bundle
 sudo apt-get install lamp-server
 
 sudo apt install gnome-tweak-tool
-## [fusuma](https://github.com/iberianpig/fusuma):Multitouch gestures with libinput driver on X11, Linux 
+## [fusuma](https://github.com/iberianpig/fusuma):Multitouch gestures with libinput driver on X11, Linux
 sudo gpasswd -a $USER input # 重新登录账户
 sudo apt-get install libinput-tools  xdotool
 sudo apt-get install ruby
@@ -797,3 +793,4 @@ sudo update-grub
 * [LewisVo/Awesome-Linux-Software](https://github.com/LewisVo/Awesome-Linux-Software):🐧 A list of awesome applications, software, tools and other materials for Linux distros.
 * [kholia/OSX-KVM](https://github.com/kholia/OSX-KVM):Run El Capitan, macOS Sierra, High Sierra and Mojave on QEMU/KVM. No support is provided at the moment.
 * [shubhampathak/autosetup](https://github.com/shubhampathak/autosetup):Auto setup is a bash script compatible with Debian based distributions to install and setup necessary programs.
+* [Ubuntu完全教程](https://www.cnblogs.com/dutlei/archive/2012/11/20/2778327.html)

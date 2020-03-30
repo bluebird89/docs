@@ -12,7 +12,10 @@ composer create-project --prefer-dist yiisoft/yii2-app-advanced yii2-advanced
 
 composer install
 php requirements.php
+./init
 
+php yii serve --docroot="@frontend/web" --port=8888
+./yii serve
 vim common/config/main-local.php # components['db'] 配置
 yii migrate # 生成数据表
 # 断言测试
@@ -1036,6 +1039,11 @@ $compontent->on($eventName, $handler);
 * [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
 * [2amigos/yii2-file-upload-widget](https://github.com/2amigos/yii2-file-upload-widget):BlueImp File Upload Widget for Yii2
 * [yii2-ace-admin](https://github.com/myloveGy/yii2-ace-admin) `composer require dmstr/yii2-adminlte-asset`
+
+
+```sh
+composer require --prefer-dist yiisoft/yii2-sphinx
+```
 
 ## 项目
 
