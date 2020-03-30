@@ -13,6 +13,11 @@
 * [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
 * [theia-ide/theia](https://github.com/theia-ide/theia):Theia is a cloud & desktop IDE framework implemented in TypeScript. http://theia-ide.org
 
+
+## 说明
+
+* 打印统一 keyMap
+
 ## PHPStrom
 
 ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/local/bin/pstorm,IDE启动需要占用单独进程终端，可以`pstorm&`启动
@@ -265,50 +270,29 @@ phpstrom 添加版本信息分组:名词，提交时添加动词
 
 ## 参考
 
-* [](https://confluence.jetbrains.com/display/PhpStorm)
+
 
 ## IDEA
 
-ALT+SHIFT+T就可以自动生成对应的Junit方法了
-Ctrl+E最近修改过的文件
-定位类
+* 就可以自动生成对应的Junit方法:  ALT+SHIFT+T
+* 最近修改过的文件: Ctrl+E
+* 定位类: ctrl+n
+* 定位文件: ctrl + shift +n
+* 定位函数或者属性 ctrl + shift + alt +n
+* 字符串 ctrl + shift + f
+* 大小写 ctrl+shift+u
+* 列操作 ctrl+shift+alt +j
 
-ctrl+n
+数据是统一的，能够实现批量处理
 
+## live template
+## postfix
 
-
-定位文件
-
-ctrl + shift +n
-
-
-
-定位函数或者属性
-
-ctrl + shift + alt +n
-
-
-
-字符串
-
-ctrl + shift + f
-
-大小写 ctrl+shift+u
-
-列操作
-
-ctrl+shift+alt +j
-
-数据数据是统一的，能够实现批量处理
-
-live template
-postfix
-
-ALT+ENTER
-还能够自动创建实现类..
-导包
-格式化输出数据
-修正单词拼写
+* ALT+ENTER
+* 自动创建实现类
+* 导包
+* 格式化输出数据
+* 修正单词拼写
 
 ## 工具
 
@@ -317,7 +301,8 @@ ALT+ENTER
 * [激活](https://www.jianshu.com/p/133af2e4fe3f): 修改host 0.0.0.0 account.jetbrains.com  去http://idea.lanyus.com/ 生存激活码
 * [LightTable/LightTable](https://github.com/LightTable/LightTable):The Light Table IDE ⛺ http://www.lighttable.com
 * [申请免费使用](https://www.jetbrains.com/shop/eform/opensource?product=ALL) 
+* [ChrisRM/material-theme-jetbrains](https://github.com/ChrisRM/material-theme-jetbrains#installation):JetBrains theme of Material Theme
 
 ## 参考
 
-* [ChrisRM/material-theme-jetbrains](https://github.com/ChrisRM/material-theme-jetbrains#installation):JetBrains theme of Material Theme
+* [](https://confluence.jetbrains.com/display/PhpStorm)

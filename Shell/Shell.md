@@ -2107,7 +2107,8 @@ ccache gcc foo.c
     - Mac
         + Iterm2
             * [mbadolato / iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes):Over 200 terminal color schemes/themes for iTerm/iTerm2. Includes ports to Terminal, Konsole, PuTTY, Xresources, XRDB, Remmina, Termite, XFCE, Tilda, FreeBSD VT, Terminator, Kitty, MobaXterm, LXTerminal, Microsoft's Windows Terminal, Visual Studio http://www.iterm2colorschemes.com
-    - Linux下原生命令行
+    - Linux
+        + 原生命令行
     - Windows
         + WSL:提供了一个由微软开发的Linux兼容的内核接口(（)不包含Linux内核代码)，然后可以在其上运行GNU用户空间
             * WSL2
@@ -2118,16 +2119,15 @@ ccache gcc foo.c
         + KiTTY
         + ZOC Terminal
         + [MobaXterm](https://mobaxterm.mobatek.net/) Enhanced terminal for Windows with X11 server, tabbed SSH client, network tools and much more
-        + Terminus
         + Console2
         + [cmder + gow](http://bliker.github.io/cmder/)
         + ConEmu
+        + [PowerShell](https://github.com/PowerShell/PowerShell):PowerShell for every system! https://microsoft.com/PowerShell
         + [Babun](http://babun.github.io/)
         + [Terminal](https://github.com/microsoft/terminal):The new Windows Terminal, and the original Windows console host -- all in the same place!
     - [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
     - [msys2](http://www.msys2.org/)
     - powercmd
-    - [PowerShell](https://github.com/PowerShell/PowerShell):PowerShell for every system! https://microsoft.com/PowerShell
     - [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
     - [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
 * help

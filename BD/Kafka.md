@@ -29,7 +29,7 @@
             - 这种方式可以获取很大的I/O提升，省去了用户空间到内核空间复制的开销（调用文件的read会把数据先放到内核空间的内存中，然后再复制到用户空间的内存中）
             - 缺陷——不可靠，写到mmap中的数据并没有被真正的写到硬盘，操作系统会在程序主动调用flush的时候才把数据真正的写到硬盘
             - 提供了一个参数——producer.type来控制是不是主动flush，如果Kafka写入到mmap之后就立即flush然后再返回Producer叫 同步 (sync)；写入mmap之后立即返回Producer不调用flush叫异步 (async)。
-    + 顺序写入：由于现代的操作系统提供了预读和写技术，磁盘的顺序写大多数情况下比随机写内存还要快
+    + 顺序写入：由于现代的操作系统提供了预读和写技术，磁盘的顺序写大多数情况下比随机写内存还要快.顺序写能到 600M/S，而随机写只有 100K/S
         * 磁盘读写的快慢取决于怎么使用它，也就是顺序读写或者随机读写。在顺序读写的情况下，磁盘的顺序读写速度和内存持平。
         * 因为硬盘是机械结构，每次读写都会寻址->写入，其中寻址是一个“机械动作”，它是最耗时的。所以硬盘最讨厌随机I/O，最喜欢顺序I/O。为了提高读写硬盘的速度，Kafka就是使用顺序I/O。
         * 磁盘操作有以下几个好处
@@ -41,7 +41,7 @@
         *  删除数据策略
             -  基于时间
             -  基于partition文件大小
-   + Zero-copy 零拷贝:避免了内核之间的切换,快速移动数据。少了一次内存交换 基于sendfile实现Zero Copy sendfile系统调用则提供了一种减少以上多次copy，提升文件传输性能的方法。`sendfile(socket, file, len);`
+   + Zero-copy 零拷贝:避免了内核之间的切换,快速移动数据。少了一次内存交换 基于sendfile实现 Zero Copy sendfile系统调用则提供了一种减少以上多次copy，提升文件传输性能的方法。`sendfile(socket, file, len);`
         + 传统模式下，文件进行传输具体流程：
             - 硬盘—>内核buf—>用户buf—>socket相关缓冲区—>协议引擎
             - 调用read函数，文件数据被copy到内核缓冲区
@@ -61,7 +61,9 @@
 ## 版本
 
 * 0.9:从“一个高吞吐量，分布式的消息系统”改为”一个分布式流平台“
-    - 之前的版本偏移量存储在 ZooKeeper。之后的版本偏移量存储在 Kafka中。Kafka 定义了一个系统 Topic，专用用来存储偏移量的数据。
+    - 之前的版本偏移量存储在 ZooKeeper。之后的版本偏移量存储在 Kafka中。Kafka 定义了一个系统 Topic，专用用来存储偏移量的数据
+* 0.11
+    - 引入幂等性解决 Kakfa 集群内部的数据重复
 
 ## 场景
 
@@ -84,8 +86,8 @@
 * Partition（分区）:一个 Topic 可以分为多个 Partition，每个 Partition 是一个有序的队列，Partition 中的每条消息都存在一个有序的偏移量（Offest），同一个 Consumer Group 中，只有一个 Consumer 实例可消费某个 Partition 的消息
     - 它是一个物理概念，对应到系统上的就是一个或若干个目录，一个分区就是一个 提交日志.分区的编号是从 0 开始的
     - 6-12最佳，最好能够被节点数整除，避免数据倾斜
-    - 每个 Partition 在存储层面是 append log 文件
-    - 任何发布到此 Partition 的消息都会被直接追加到 log 文件的尾部
+    - 每个 Partition 在存储层面是 log 文件
+    - 任何发布到此 Partition 的消息都会被直接 append 到 log 文件的尾部
     - 先后以顺序的方式读取
     - 每条消息在文件中的位置称为 Offest（偏移量），消费者都会实时记录自己消费到了那个 Offset，以便出错的时候从上次的位置继续消费，这个 Offset 就保存在 Index 文件中。
     - Partition 是以文件的形式存储在文件系统中，log 文件根据 Broker 中的配置保留一定时间后删除来释放磁盘空间
@@ -93,9 +95,9 @@
     - 分区可以分布在不同的服务器上，也就是说，一个主题可以跨越多个服务器，以此来提供比单个服务器更强大的性能
     - Offset一般由消费者管理，当然也可以通过程序按需要设置。Offset只有commit以后，才会改变，否则，将一直获取重复的数据。新的kafka已经将这些Offset的放到了一个专有的主题：__consumer_offsets
     - 一个分区内的 .log 文件最大为 1G，做这个限制目的是为了方便把 .log 加载到内存去操作
-* 段 Segment：为防止 Log 文件过大导致数据定位效率低下，Kafka 采用分片和索引的机制，将每个 Partition 分为多个 Segment
-    - 每个 segment 文件的大小相等。每个 Segment 对应 2 个文件 Index 文件和 Log 文件
-    - 两个文件位于一个相同的文件夹下，文件夹的命名规则为：Topic 名称+分区序号.文件名以这个 Segment 中起始的 Offset 命名，文件扩展名是 .log。Segment 对应的索引的文件名字一样，扩展名是 .index
+* 段 Segment：为防止 Log 文件过大导致数据定位效率低下，采用分片和索引的机制，将每个 Partition 分为多个 Segment
+    - 每个 segment 文件的大小相等。每个 Segment 对应 2 个文件 Index 文件和 Log 文件,位于同一个文件夹下，文件夹的命名规则为：Topic 名称+分区序号
+    - 文件名以这个 Segment 中起始的 Offset 命名，文件扩展名是 .log。Segment 对应的索引的文件名字一样，扩展名是 .index
     - Index 文件中存储的数据的索引信息，第一列是 Offset，第二列数据所对应的 Log 文件中的偏移量
     - 去消费 Offset 为 3 的数据，首先通过二分法找到数据在哪个 Index 文件中，然后在通过 Index 中 Offset 找到数据在 Log 文件中的 Offset
     - 减少索引文件的大小，降低空间使用，方便直接加载进内存中，这里的索引使用稀疏矩阵，不会每一个 Message 都记录下具体位置，而是每隔一定的字节数，再建立一条索引。 索引包含两部分：
@@ -322,8 +324,8 @@ bin/kafka-topics.sh --describe --zookeeper 192.168.1.7:2181 --topic cxuantopic
 Topic: cxuantopic Partition: 0 Leader: 1 Replicas: 1,2 Isr: 1,2 # 主题 cxuantopic 的分区为0 Replicas: 1，2  复制因子为2 复制的为1，2
 
 # 生产者生产数据
-kafka-console-producer --broker-list localhost:9092 --topic test
-./kafka-console-producer.sh --broker-list 192.168.1.7:9092 --topic cxuantopic
+kafka-console-producer --broker-list localhost:9092 --replication-factor 1 --partitions 1  --topic test
+./kafka-console-producer.sh --broker-list 192.168.1.7:9092 --replication-factor 1 --partitions 1  --topic cxuantopic
 
 # 消费者
 kafka-console-consumer --bootstrap-server localhost:9092 --topic test --from-beginning
@@ -380,13 +382,18 @@ bin/kafka-console-consumer.sh --bootstrap-server 192.168.1.7:9092 --topic cxuant
 ## 消费
 
 * 订阅 Topic 是以一个消费组来订阅的，一个消费组里面可以有多个消费者。同一个消费组中的两个消费者，不会同时消费一个 Partition
+* Partition 的分配问题，即确定哪个 Partition 由哪个消费者来消费
+    - 轮询（RountRobin）对于 Topic 组生效: 前提是一个消费者组中的所有消费者订阅的主题是一样的
+    - (Range）对于单个 Topic 生效: 会出现消费者数据不均衡的问题
+    - 同一个消费者组里的消费者不能同时消费同一个分区
 * API：订阅 Topic 时，可以用正则表达式，如果有新 Topic 匹配上，那能自动订阅上
 * Offset 的保存
     - 一个消费组消费 Partition，需要保存 Offset 记录消费到哪，以前保存在 ZK 中，由于 ZK 的写性能不好，以前的解决方法都是 Consumer 每隔一分钟上报一次
     -  ZK 的性能严重影响了消费的速度，而且很容易出现重复消费。在 0.10 版本后，Kafka 把这个 Offset 的保存，从 ZK 总剥离，保存在一个名叫 consumeroffsets topic 的 Topic 中
-    -  写进消息的 Key 由 Groupid、Topic、Partition 组成，Value 是偏移量 Offset。Topic 配置的清理策略是 Compact。总是保留最新的 Key，其余删掉。
-    -  一般情况下，每个 Key 的 Offset 都是缓存在内存中，查询的时候不用遍历 Partition，如果没有缓存，第一次就会遍历 Partition 建立缓存，然后查询返回。
-*  分配 Partition—Reblance
+    -  消息的 Key 由 Groupid、Topic、Partition 组成，Value 是偏移量 Offset
+    -  Topic 配置的清理策略是 Compact。总是保留最新的 Key，其余删掉
+    -  一般情况下，每个 Key 的 Offset 都是缓存在内存中，查询的时候不用遍历 Partition，如果没有缓存，第一次就会遍历 Partition 建立缓存，然后查询返回
+*  分配 Partition—Reblance:消费者组里的消费者个数变化的时候
     -  消费也要从 Broker 中选一个 Coordinator，用于分配 Partition。选 Coordinator：看 Offset 保存在那个 Partition；该 Partition Leader 所在的 Broker 就是被选定的 Coordinator。
     -  交互流程：把 Coordinator 选出来之后，就是要分配了。整个流程是这样的：
         +  Consumer 启动、或者 Coordinator 宕机了，Consumer 会任意请求一个 Broker，发送 ConsumerMetadataRequest 请求。
@@ -394,7 +401,7 @@ bin/kafka-console-consumer.sh --bootstrap-server 192.168.1.7:9092 --topic cxuant
         +  Consumer 发送 Heartbeat 请求给 Coordinator，返回 IllegalGeneration 的话，就说明 Consumer 的信息是旧的了，需要重新加入进来，进行 Reblance。
     -  Reblance 流程
         +  Consumer 给 Coordinator 发送 JoinGroupRequest 请求。
-        +  这时其他 Consumer 发 Heartbeat 请求过来时，Coordinator 会告诉他们，要 Reblance 了。
+        +  这时其他 Consumer 发 Heartbeat 请求过来时，Coordinator 会告诉他们，要 Reblance 了
         +  其他 Consumer 发送 JoinGroupRequest 请求。
         +  所有记录在册的 Consumer 都发了 JoinGroupRequest 请求之后，Coordinator 就会在这里 Consumer 中随便选一个 Leader。 然后回 JoinGroupRespone，这会告诉 Consumer 你是 Follower 还是 Leader，对于 Leader，还会把 Follower 的信息带给它，让它根据这些信息去分配 Partition。
         +  Consumer 向 Coordinator 发送 SyncGroupRequest，其中 Leader 的 SyncGroupRequest 会包含分配的情况。
@@ -405,6 +412,7 @@ bin/kafka-console-consumer.sh --bootstrap-server 192.168.1.7:9092 --topic cxuant
             *  消费者主动关闭
             *  消费者宕机了
             *  Coordinator 自己也宕机了
+*  如果 Kafka 没有数据，消费者可能会陷入死循环，一直返回空数据:在消费数据时候回传递一个 Timeout 参数，如果当时没有数据可供消费，消费者会等待一段时间在返回
 
 ## 保证数据可靠性
 
@@ -418,16 +426,23 @@ bin/kafka-console-consumer.sh --bootstrap-server 192.168.1.7:9092 --topic cxuant
         + Leader 维护了一个动态的 ISR 列表（同步副本的作用），只需要这个列表中的 Follower 和 Leader 同步。
         + 当 ISR 中的 Follower 完成数据的同步之后，Leader 就会给生产者发送 Ack，如果 Follower 长时间未向 Leader 同步数据，则该 Follower 将被剔除 ISR，这个时间阈值也是自定义的
         + 同样 Leader 故障后，就会从 ISR 中选举新的 Leader
-    - 怎么选择 ISR 的节点呢
+    - ISR 节点的选择
         + 通信的时间要快，要和 Leader 可以很快的完成通信，这个时间默认是 10s
         + Leader 数据差距，消息条数默认是 10000 条(后面版本被移除)
             * Kafka 发送消息是批量发送的，所以会一瞬间 Leader 接受完成，但是 Follower 还没有拉取，所以会频繁踢出和加入 ISR，数据会保存到 ZooKeeper 和内存中，所以会频繁更新 ZooKeeper 和内存
             * 对于某些不太重要的数据，对数据的可靠性要求不是很高，能够容忍数据的少量丢失，所以没必要等 ISR 中的 Follower 全部接受成功
 * 保证消费数据的一致性：通过 HW 来保证
     - LEO：指每个 Follower 的最大的 Offset
-    - HW（高水位）：指消费者能见到的最大的 Offset，LSR 队列中最小的 LEO，也就是说消费者只能看到 1~6 的数据，后面的数据看不到，也消费不了
-    - Follower 故障:Follower 发生故障后会被临时踢出 LSR，待该 Follower 恢复后，Follower 会读取本地的磁盘记录的上次的 HW，并将该 Log 文件高于 HW 的部分截取掉，从 HW 开始向 Leader 进行同步，等该 Follower 的 LEO 大于等于该 Partition 的 HW，即 Follower 追上 Leader 后，就可以重新加入 LSR
-    - Leader 故障：Leader 发生故障后，会从 ISR 中选出一个新的 Leader，之后，为了保证多个副本之间的数据一致性，其余的 Follower 会先将各自的 Log 文件高于 HW 的部分截掉（新 Leader 自己不会截掉），然后从新的 Leader 同步数据。
+    - HW（高水位）：指消费者能见到的最大的 Offset，LSR 队列中最小的 LEO。（单patriation 多副本的平均合格水位）
+    - 就是说消费者只能看到最公共数据，后面的数据看不到，也消费不了
+    - Follower 故障
+        + Follower 发生故障后会被临时踢出 LSR
+        + 待该 Follower 恢复后，Follower 会读取本地的磁盘记录的上次的 HW，并将该 Log 文件高于 HW 的部分截取掉，从 HW 开始向 Leader 进行同步
+        + 等该 Follower 的 LEO 大于等于该 Partition 的 HW，即 Follower 追上 Leader 后，就可以重新加入 LSR
+    - Leader 故障
+        + Leader 发生故障后，会从 ISR 中选出一个新的 Leader，
+        + 为了保证多个副本之间的数据一致性，其余的 Follower 会先将各自的 Log 文件高于 HW 的部分截掉（新 Leader 自己不会截掉）
+        + 从新的 Leader 同步数据。
 
 ## 消息投递语义
 
@@ -439,18 +454,20 @@ bin/kafka-console-consumer.sh --bootstrap-server 192.168.1.7:9092 --topic cxuant
         + 生产者生产消息异常，不管，生产下一个消息，消息就丢了。
         + 消费者处理消息，先更新 Offset，再做业务处理，做业务处理失败，消费者重启，消息就丢了。
     - Exactly once：只且一次，消息不丢失不重复，只且消费一次.首先要保证消息不丢，再去保证不重复
-        + 生产者重复:生产保证幂等性
+        + 生产者重复:生产保证幂等性，Ack 默认就是 -1
             * 为每个 Producer 分配一个 Pid，作为该 Producer 的唯一标识
-            * Producer 会为每一个维护一个单调递增的 Seq,eq_seq == broker_seq+1 时，Broker 才会接受该消息，因为：
-                - 消息的 Seq 比 Broker 的 Seq 大超过时，说明中间有数据还没写入，即乱序了。
-                - 消息的 Seq 不比 Broker 的 Seq 小，那么说明该消息已被保存。
+            * Producer 会为每一个维护一个单调递增的 Seq（Seqnumber）, eq_seq == broker_seq+1 时，Broker 才会接受该消息，因为：
+                - 消息的 Seq 比 Broker 的 Seq 大时，说明中间有数据还没写入，即乱序了
+                - 消息的 Seq 不比 Broker 的 Seq 小，那么说明该消息已被保存
+            * 如果 Pid、Partition、Seqnumber 三者一样，则 Kafka 认为是重复数据，就不会落盘保存
+        + 如果生产者挂掉后，也会出现有数据重复的现象；所以幂等性解决在单次会话的单个分区的数据重复，但是在分区间或者跨会话的是数据重复的是无法解决的
         + 重复消费
             * 下游系统保证幂等性，重复消费也不会导致多条记录。
-            * 把 Commit Offset 和业务处理绑定成一个事务。
+            * 把 Commit Offset 和业务处理绑定成一个事务
 * 事务性/原子性广播:
-    - 先从多个源 Topic 中获取数据。
-    - 做业务处理，写到下游的多个目的 Topic。
-    - 更新多个源 Topic 的 Offset。
+    - 先从多个源 Topic 中获取数据
+    - 做业务处理，写到下游的多个目的 Topic
+    - 更新多个源 Topic 的 Offset
     - 思路
         + 引入 Tid（transaction id），和 Pid 不同，这个 ID 是应用程序提供的，用于标识事务，和 Producer 是谁并没关系。 就是任何 Producer 都可以使用这个 Tid 去做事务，这样进行到一半就死掉的事务，可以由另一个 Producer 去恢复。
         + 同时为了记录事务的状态，类似对 Offset 的处理，引入 Transaction Coordinator 用于记录 Transaction Log。

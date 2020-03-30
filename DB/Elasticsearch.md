@@ -136,8 +136,9 @@ curl -XGET 'localhost:9200/_cat/health?v&pretty'
   - Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）,查找数据的时候，直接查找该索引
   - Elastic 数据管理的顶层单位就叫做 Index（索引）,它是单个数据库的同义词
   - 每个 Index （即数据库）的名字必须是小写
-* type
+* type:相当于表结构的描述
   - Document 可以分组，比如weather这个 Index 里面，可以按城市分组（北京和上海），也可以按气候分组（晴天和雨天）。这种分组就叫做 Type，它是虚拟的逻辑分组，用来过滤 Document
+  - 类型是通过mapping来定义每个字段的类型
   - 不同的 Type 应该有相似的结构（schema），举例来说，id字段不能在这个组是字符串，在另一个组是数值。这是与关系型数据库的表的一个区别。性质完全不同的数据（比如products和logs）应该存成两个 Index，而不是一个 Index 里面的两个 Type（虽然可以做到）
 * document：Index 里面单条的记录称为 Document（文档）
   - 多条 Document 构成了一个 Index
@@ -208,7 +209,6 @@ elasticsearch -E node.name=node3 -E cluster.name=geektime -E path.data=node3_dat
 http://localhost:9200/_cat/nodes
 ```
 
-## 安装
 
 ## Logstash
 
@@ -395,6 +395,18 @@ setup.kibana:
 ```
 
 ## X-Pack
+
+
+keyword类型是不会分词的，直接根据字符串内容建立反向索引
+text类型在存入elasticsearch的时候，会先分词，然后根据分词后的内容建立反向索引
+
+## API
+
+## 分布式
+
+* 对数据进行切分，同时每一个分片会保存多个副本
+* 节点是对等的，节点间会通过自己的一些规则选取集群的master，master会负责集群状态信息的改变，并同步给其他节点
+* 只有建立索引和类型需要经过master，数据的写入有一个简单的routing规则，可以route到集群中的任意节点，所以数据写入压力是分散在整个集群的
 
 ## ES VS Solr
 

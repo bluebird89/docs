@@ -46,6 +46,28 @@ gradlew bootRun --debug-jvm # 调试
 * 后台任务与分布式锁
     - Spring原生提供了任务处理(TaskExecutor)和任务计划(TaskSchedulor)机制
     - 在分布式场景下，还需要引入分布式锁来解决并发冲突，为此我们引入一个轻量级的分布式锁框架ShedLock
+* 统一代码风格
+    - 客户端的请求数据类统一使用相同后缀，比如Command
+    - 返回给客户端的数据统一使用相同后缀，比如Represetation
+    - 统一对请求处理的流程框架，比如采用传统的3层架构或者DDD战术模式
+    - 提供一致的异常返回（请参考“异常处理”小节）
+    - 提供统一的分页结构类
+    - 明确测试分类以及统一的测试基础类
+* 静态代码检查
+    - Checkstyle：用于检查代码格式，规范编码风格
+    - Spotbugs：Findbugs的继承者
+    - Dependency check：OWASP提供的Java类库安全性检查
+    - Sonar：用于代码持续改进的跟踪
+* API文档
+* 数据库迁移：采用了Flyway作为数据库迁移工具，加入了Flyway依赖后，在src/main/sources/db/migration目录下创建迁移脚本文件
+* 多环境构建
+    - local：用于开发者本地开发
+    - ci：用于持续集成
+    - dev：用于前端开发联调
+    - qa：用于测试人员
+    - uat：类生产环境，用于功能验收(有时也称为staging环境)
+    - prod：正式的生产环境
+* CORS：采用CORS机制
 
 ```java
 //request id in header may come from Gateway, eg. Nginx
@@ -163,6 +185,20 @@ public class DistributedLockExecutor {
 public String doBusiness() {
     return distributedLockExecutor.executeWithLock(() -> "Hello World.",
             new LockConfiguration("key", Instant.now().plusSeconds(60)));
+}
+
+## CORS配置
+@Configuration
+public class CorsConfiguration {
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**");
+            }
+        };
+    }
 }
 ```
 

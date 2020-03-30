@@ -235,6 +235,7 @@ $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
     - FastStone Image Viewer
 * 截图
     - Snipaste
+    - Xnip
 * [libvips/libvips](https://github.com/libvips/libvips):A fast image processing library with low memory needs. https://libvips.github.io/libvips/
 * [AlloyImage](https://github.com/AlloyTeam/AlloyImage)基于HTML5技术的专业图像处理库
 * [DmitryUlyanov/deep-image-prior](https://github.com/DmitryUlyanov/deep-image-prior):Image restoration with neural networks but without learning. https://dmitryulyanov.github.io/deep_image_prior

@@ -244,7 +244,7 @@ cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
-curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add - 
+curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
 cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
 deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
 EOF
@@ -414,8 +414,8 @@ images=(
     coredns:1.6.5
 )
 for imageName in ${images[@]};do
-#    docker pull gcr.azk8s.cn/google-containers/$imageName 
-#    docker tag  gcr.azk8s.cn/google-containers/$imageName k8s.gcr.io/$imageNam 
+#    docker pull gcr.azk8s.cn/google-containers/$imageName
+#    docker tag  gcr.azk8s.cn/google-containers/$imageName k8s.gcr.io/$imageNam
 #    docker rmi  gcr.azk8s.cn/google-containers/$imageName
 
     docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName
@@ -457,6 +457,8 @@ kubectl get pods -w -l app=nginx
 ```
 
 ## 问题
+
+* [gotok8s / k8s-docker-desktop-for-mac](https://github.com/gotok8s/k8s-docker-desktop-for-mac):Docker Desktop for Mac 开启并使用 Kubernetes https://github.com/gotok8s/gotok8s
 
 ```
 The connection to the server localhost:8080 was refused - did you specify the right host or port?
@@ -511,11 +513,24 @@ source ~/.bash_profile
 * [appscode/voyager](https://github.com/appscode/voyager):🚀 Secure HAProxy Ingress Controller for Kubernetes https://appscode.com/products/voyager
 * [openshift/origin](https://github.com/openshift/origin):The self-managing, auto-upgrading, Kubernetes distribution for everyone http://www.openshift.org
 * [OpenKruise](https://github.com/openkruise/kruise):从不同维度解决 Kubernetes 之上应用的自动化问题，包括部署，升级，弹性扩缩容，Qos 调节，健康检查，迁移修复等
+* [Kube-ops-view](link)
 * [AHAS](https://www.aliyun.com/product/ahas): 为 K8s 等容器环境提供了架构可视化的功能，同时，具有故障注入式高可用能力评测和一键流控降级等功能，可以快速低成本的提升应用可用性
-* [eon01/kubernetes-workshop](https://github.com/eon01/kubernetes-workshop): A Gentle introduction to Kubernetes with more than just the basics. 
+* [eon01/kubernetes-workshop](https://github.com/eon01/kubernetes-workshop): A Gentle introduction to Kubernetes with more than just the basics.
 * [okd](https://docs.okd.io/)
 * [ubuntu/microk8s](https://github.com/ubuntu/microk8s):MicroK8s is a small, fast, single-package Kubernetes for developers, IoT and edge. https://microk8s.io
 * [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes  https://kubernetes.github.io/ingress-nginx/
+* cabin:一个Kubernetes 的原生的手机App仪表盘
+* Kubectx:Kubectx与kubens捆绑在一起，当你使用kubectl的时候，允许你在Kubernetes集群和命名空间之间切换
+* Kube-shell:个和Kubernetes CLI集成的 Shell，它有一些非常漂亮的特性
+* Kube-prompt
+* Kail是一个 Kubernetes tail。作为一个Kubernetes日志查看器，kail允许你使用选择器从匹配的pods流式的查看日志
+* Weave Scope是一个Docker 和 Kubernetes的排错&监控工具
+* PowerfulSeal 的灵感来源于 Chaos Monkey，由 Bloomberg 工程师团队开发。它可以给你的Kubernetes集群添加混乱，如杀掉目标的pods或者是节点。它以两个模式操作：交互式和自治的。
+    - 交互式模式被设计为允许你发现你的集群组件，并且人工的停止一些事情看会发生什么。它操作在节点，pods，部署，和命名空间上。
+    - 自治模式读取一个策略文件，可以包含任意
+* Marmot是一个来自于谷歌的工作流执行引擎，用于处理SRE和Ops需要的工作流。它被设计为处理基础架构变更的工具，但它可以和Kubernetes一起使用
+* Ark 是一个用于管理从你的Kubernetes资源和卷做灾难恢复的工具。Ark提供一个简单并且鲁棒的方式来备份和从系列的检查点恢复Kubernetes资源和持久化的卷。备份文件被存储在一个对象存储服务
+* Sysdig是一个容器排错工具，它可以捕获系统调用和来自于Linux内核的事件。简单的说，对于整个集群，Sysdig就是strace + tcpdump + htop + iftop + lsof + wireshark。
 
 ## 参考
 

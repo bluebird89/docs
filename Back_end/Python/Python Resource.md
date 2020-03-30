@@ -319,6 +319,7 @@ brew install pipenv
 使用HTTP的库。
 
 * [requests/requests](https://github.com/requests/requests)：Python HTTP Requests for Humans™ sparklescakesparkles http://python-requests.org
+* [psf / requests](https://github.com/psf/requests/):A simple, yet elegant HTTP library. https://requests.readthedocs.io
 * [grequests](https://github.com/kennethreitz/grequests)：requests 库 + gevent ，用于异步 HTTP 请求.
 * [httplib2](https://github.com/jcgregorio/httplib2)：全面的 HTTP 客户端库
 * [treq](https://github.com/twisted/treq)：类似 requests 的Python API 构建于 Twisted HTTP 客户端之上。
@@ -408,6 +409,7 @@ Python实现的数据库。
 * [web.py](http://webpy.org/)：一个 Python 的 web 框架，既简单，又强大。
 * [web2py](http://www.web2py.com/)：一个全栈 web 框架和平台，专注于简单易用。
 * [Tornado](http://www.tornadoweb.org/en/latest/)：一个web 框架和异步网络库。
+* [tiangolo / fastapi](https://github.com/tiangolo/fastapi):FastAPI framework, high performance, easy to learn, fast to code, ready for production https://fastapi.tiangolo.com/
 
 ## 权限
 

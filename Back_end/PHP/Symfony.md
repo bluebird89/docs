@@ -10,6 +10,9 @@ wget https://get.symfony.com/cli/installer -O - | bash # linux
 curl -sS https://get.symfony.com/cli/installer | bash # mac
 
 symfony new --full [--version=3.4] my_project
+composer create-project symfony/website-skeleton my_project_name
+
+symfony new my_project_name
 composer create-project symfony/skeleton  my-project "2.3.*" # framework-standard-edition
 
 cd my-project

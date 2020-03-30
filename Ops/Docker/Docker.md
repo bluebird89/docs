@@ -538,10 +538,10 @@ docker container prune  # 删除所有停止掉的container
 
 ## 网络 Network
 
-* 默认情况下，分别会建立一个bridge、一个host和一个none的网络.都是使用的这个bridge的网络，可以访问外网和其他container的（需要通过IP地址）
-  - 默认的名为bridge的网络是有很多限制的，可以自行创建bridge类型的网络。默认的bridge网络与自建bridge网络有以下区别：
-    + 端口不会自行发布，必须使用-p参数才能为外界访问，而使用自建的bridge网络时，container的端口可直接被相同网络下的其他container访问。
-    + container之间的如果需要通过名字访问，需要--link参数，而如果使用自建的bridge网络，container之间可以通过名字互访。
+* libnetwork 是 docker 容器网络库，最核心的内容是其定义的 Container Network Model (CNM)，这个模型对容器网络进行了抽象，由以下三类组件组成：
+  - Sandbox 是容器的网络栈，包含容器的 interface、路由表和 DNS 设置。 Linux Network Namespace 是 Sandbox 的标准实现。Sandbox 可以包含来自不同 Network 的 Endpoint。也就是说Sandbox将一个容器与另一个容器通过Namespace进行隔离，一个容器包含一个sandbox，每一个sandbox可以有多个Endpoint隶属于不同的网络。
+  - Endpoint 的作用是将 Sandbox 接入 Network。Endpoint 的典型实现是 veth pair。一个 Endpoint 只能属于一个网络，也只能属于一个 Sandbox。
+  - Network 包含一组 Endpoint，同一 Network 的 Endpoint 可以直接通信。Network 的实现可以是 Linux Bridge、VLAN 等
 * 网络模型及工作原理
   - 要实现网络通信，机器需要至少一个网络接口（物理接口或虚拟接口）来收发数据包；此外，如果不同子网之间要进行通信，需要路由机制。
   - Docker 中的网络接口默认都是虚拟的接口。虚拟接口的优势之一是转发效率较高。 Linux 通过在内核中进行数据复制来实现虚拟接口之间的数据转发，发送接口的发送缓存中的数据包被直接复制到接收接口的接收缓存中。对于本地系统和容器内系统看来就像是一个正常的以太网卡，只是它不需要真正同外部网络设备通信，速度要快很多。
@@ -562,6 +562,25 @@ docker container prune  # 删除所有停止掉的container
     + --net=none 禁用网络 让 Docker 将新容器放到隔离的网络栈中，但是不进行网络配置。之后，用户可以自己进行配置
     + overlay：当有多个docker主机时，跨主机的container通信
     + macvlan：每个container都有一个虚拟的MAC地址
+* 默认情况下，分别会建立一个bridge、一个host和一个none的网络.都是使用的这个bridge的网络，可以访问外网和其他container的（需要通过IP地址）
+  - bridge(默认)的网络是有很多限制的，可以自行创建bridge类型的网络
+    + Docker在安装时会在宿主机上创建名为docker0的网桥，所谓网桥相当于一个虚拟交换机,容器都会挂到docker0上
+    + 容器和docker0之间通过veth进行连接，veth相当于一根虚拟网线，连接容器和虚拟交换机，这样就使得docker0与容器连通了。
+    + 默认的bridge网络与自建bridge网络有以下区别：
+      * 端口不会自行发布，必须使用-p参数才能为外界访问，而使用自建的bridge网络时，container的端口可直接被相同网络下的其他container访问。
+      * container之间的如果需要通过名字访问，需要--link参数，而如果使用自建的bridge网络，container之间可以通过名字互访
+  - none:挂在这个网络下的容器除了lo，没有其他任何网卡。容器run时，可以通过添加--network=none参数来指定该容器使用none网络
+  - host:共享Docker宿主机的网络栈，即容器的网络配置与host宿主机完全一样。可以通过添加--network=host参数来指定该容器使用host网络
+    + 直接使用Docker host的网络最大的好处就是性能，如果容器对网络传输效率有较高要求，则可以选择host网络
+    + 不便之处就是牺牲一些灵活性,端口冲突
+* 跨主机网络方案
+  - 自定义容器网络
+    + bridge
+    + overlay：创建跨主机的网络。需要一个 key-value 数据库用于保存网络状态信息，包括 Network、Endpoint、IP 等。Consul、Etcd 和 ZooKeeper 都是 Docker 支持的 key-vlaue 软件
+      * 每创建一个网络类型为overlay的容器，则docker_gwbridge下都会挂载一个vethxxx，这说明确实overlay容器是通过此网桥进行对外连接的
+      * 还是从 bridge 网络docker_gwbridge出去的，但是由于consul的作用（记录了overlay网络的endpoint、sandbox、network等信息），使得docker知道了此网络是 overlay 类型的，这样此overlay网络下的不同主机之间就能够相互访问，但其实出口还是在docker_gwbridge网桥
+    + macvlan：创建跨主机的网络
+  - 第三方方案：常用的包括 flannel、weave 和 calico
 * 网络模型验正
 * 暴露容器应用至节点外部
   - 使用 -P 标记时，Docker 会随机映射一个 49000~49900 的端口到内部容器开放的网络端口
@@ -571,7 +590,7 @@ docker container prune  # 删除所有停止掉的container
     + hostPort:containerPort
   - 查看容器端口映射本地端口 `docker port`
 * 容器互联
-  - 端口映射外
+  - 端口映射
   - --link name:alias，其中 name 是要链接的容器的名称，alias 是这个连接的别名
   - 在两个互联的容器之间创建了一个安全隧道，而且不用映射它们的端口到宿主主机上。在启动 db 容器的时候并没有使用 -p 和 -P 标记，从而避免了暴露数据库端口到外部网络上
   - 为容器公开连接信息
@@ -587,7 +606,7 @@ docker container prune  # 删除所有停止掉的container
   - –mtu=BYTES –容器网络中的 MTU
   - –dns=IP_ADDRESS… –使用指定的DNS服务器    # 在启动服务时指定，也可以 Docker 容器启动（docker run）时候指定
   - –dns-search=DOMAIN… –指定DNS搜索域
-  - -h HOSTNAME or –hostname=HOSTNAME –配置容器主机名  # 在 docker run 执行时使用
+  - -h HOSTNAME or –hostname=HOSTNAME –配置容器主机名
   - –link=CONTAINER_NAME:ALIAS –添加到另一个容器的连接
   - –net=bridge|none|container:NAME_or_ID|host –配置容器的桥接模式
   - -p SPEC or –publish=SPEC –映射容器端口到宿主主机
@@ -598,6 +617,14 @@ docker container prune  # 删除所有停止掉的container
   - --dns=IP_ADDRESS 添加 DNS 服务器到容器的 /etc/resolv.conf 中，让容器用这个服务器来解析所有不在/etc/hosts 中的主机名。
   - --dns-search=DOMAIN 设定容器的搜索域，当设定搜索域为 .example.com 时，在搜索一个名为 host 的主机时，DNS 不仅搜索host，还会搜索 host.example.com。 注意：如果没有上述最后 2 个选项，Docker 会默认用主机上的 /etc/resolv.conf 来配置容器。
 * 配置Docker进程的网络属性
+* 不同网络之间的容器由于网络独立性的要求是无法ping通的。原因是iptables-save DROP掉了docker之间的网络
+* 不同网络之间的docker通信
+  - 为其中一个容器添加另外一个容器的网络
+  - Docker DNS Server：docker daemon 实现了一个内嵌的DNS server，使容器可以直接通过“容器名”通信。有个限制，只能在user-defined网络中使用。默认的bridge网络是无法使用的
+  - joined 容器：可以使两个或多个容器共享一个网络栈，共享网卡和配置信息
+    + 适合场景：
+      * 不同容器中的程序希望通过loopback高效快速地通信，比如web server与app server
+      * 希望监控其他容器的网络流量，比如运行在独立容器中的网络监控程序
 * The bridged network is the default choice unless otherwise specified. In this mode, the container has its own networking namespace and is then bridged via virtual interfaces to the host (or node in the case of K8s) network.
 * In a default Linux installation, the client talks to the daemon via a local IPC/Unix socket at /var/run/docker.sock.
 * runc is the reference implementation of the OCI container- runtime-spec,runc is a small, lightweight CLI wrapper for libcontainer
@@ -634,8 +661,35 @@ docker network create --driver bridge my-network # 创建bridge网络
 docker network ls
 docker network inspect bridge # 查看网络详情
 
+docker network create -d bridge --subnet 172.10.0.0/24 --gateway 172.10.0.1 my_net # 创建
+docker run -it --network my_net --ip 172.10.0.3 busybox # 使用
+
 docker run -dit --name alpine1 --network my-network alpine # 启动两个container，同时加入my-network:
 docker run -dit --name alpine2 --network my-network alpine # 进入容器2 可以 ping alpine1 的通
+
+-A DOCKER-ISOLATION -i docker0 -o br-ac4fe2d72b18 -j DROP
+-A DOCKER-ISOLATION -i br-ac4fe2d72b18 -o docker0 -j DROP
+-A DOCKER-ISOLATION -i br-62f17c363f02 -o br-ac4fe2d72b18 -j DROP
+-A DOCKER-ISOLATION -i br-ac4fe2d72b18 -o br-62f17c363f02 -j DROP
+-A DOCKER-ISOLATION -i br-62f17c363f02 -o docker0 -j DROP
+-A DOCKER-ISOLATION -i docker0 -o br-62f17c363f02 -j DROP
+
+docker network connect my_net httpd # 为httpd容器再添加一个my_net网络（假设httpd原来只有默认的bridge网络）
+
+docker run -it --network=my_net --name=bbox1 busybox
+docker run -it --network=my_net --name=bbox2 busybox # bbox2就可以直接ping到bbox1
+
+docker run -d -it --name=web1 httpd
+docker run -it --network=container:web1 busybox #
+
+docker run -d -p 8500:8500 -h consul --name consul progrium/consul -server -bootstrap
+# 为了 consul 发现各个 docker 主机节点，需要在各个节点上进行配置。修改各个节点 docker daemon 的配置文件/etc/systemd/system/docker.service
+--cluster-store=consul://<consul_ip>:8500 --cluster-advertise=ens3:2376 # <consul_ip> 表示运行 consul 容器的节点IP。ens3为当前节点的ip地址对应的网卡，也可以直接填写ip地址
+
+docker network create -d overlay ov_net2 # 在一个节点中进行上述创建过程，其他节点自动会识别到该网络，原因正是在于consul的服务发现功能
+docker network create -d overlay ov_net3 --subnet 172.19.0.0/24 --gateway 172.19.0.1
+
+docker run --network ov_net2 busybox # 之后创建容器的时候只需要指定--network参数为ov_net2即可
 ```
 
 ## 持久化
@@ -1348,9 +1402,17 @@ healthcheck:
   timeout: 10s
   retries: 3
 
+deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 150M
+
+//启动所有容器，必须使用--compatibility参数，否则CPU内存限制无效
+docker-compose --compatibility up
+
 docker build -t my-image .
 docker run my-image
-
 
 docker-compose build
 docker-compose up -d --force-recreate
@@ -1364,6 +1426,8 @@ docker-compose down 停止并销毁容器
 
 docker-compose exec {container-name} bash
 docker-compose kill -s SIGINT
+
+docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"
 ```
 
 ## 容器资源限制

@@ -19,7 +19,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * iphone,只能同步一台设备itunes配置
 * 设置未收录的开发者应用`sudo spctl --master-disable`
 
-### 配置文件
+### 配置
 
 * [arialdomartini/dotfiles](https://github.com/arialdomartini/dotfiles)Just my Mac OS X and Linux dot files
 * [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
@@ -28,6 +28,27 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files.
 * [使用 dotfiles 和 stow 管理你的 dotfiles](https://github.com/jcouyang/dotfiles)
 * [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
+* [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
+* [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
+* [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
+* [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
+* [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
+* [maximum-awesome](https://github.com/square/maximum-awesome)Config files for vim and tmux.
+* [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
+* [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
+* [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
+* [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(<http://sourabhbajaj.com/mac-setup/>) 推荐
+* [mac-setup/](http://sourabhbajaj.com/mac-setup/) the basics of setting up a development environment on a new Mac
+* [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
+* [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
+* [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
+* [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
+* [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
+* [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
+* [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
+* [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
+* [Mac OS X 配置指南](https://wild-flame.github.io/guides/)
+* [phodal/setup.guide](https://github.com/phodal/setup.guide)
 
 ## 启动项
 
@@ -99,6 +120,10 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
     - Mac中， 先打开Finder, command +K  打开共享目录 输入： smb://192.168.0.4/share
 
+## Stickies
+
+系统自带的便利贴
+
 ## 软件
 
 * 安装
@@ -127,7 +152,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - f.lux 屏幕颜色控制
     - manico
     - [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
-    - [alfred](https://www.alfredapp.com/):a very powerful launcher that you can program to show you anything you want
     - [MrRio/vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. <http://parall.ax/vtop>
     - [GPG Suite](https://gpgtools.org/)
     - [dashlane](https://www.dashlane.com/zh):密码管理工具
@@ -144,12 +168,13 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
         + control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
         + control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
     - [Spectacle](link):控制窗口
-    - [chunkwm](https://koekeishiya.github.io/chunkwm/index.html):a tiling window manager for macOS 
+    - [chunkwm](https://koekeishiya.github.io/chunkwm/index.html):a tiling window manager for macOS
     - [onmyway133/FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
     - [sveinbjornt/Sloth](https://github.com/sveinbjornt/Sloth):Mac app that shows all open files and sockets in use by all running processes. Nice GUI for lsof. https://sveinbjorn.org/sloth
     - Luna Display:Turn your iPad into a second display
     - 实用工具：/System/Library/CoreServices/Applications
-    - [QSpace](link)一个国产软件，MacOS 系统的多视图文件管理器，支持很多特色功能。让你摆脱多窗口来回切换的繁琐，和拖拽时找不准目标的尴尬。
+    - [QSpace](link)一个国产软件，MacOS 系统的多视图文件管理器，支持很多特色功能。让你摆脱多窗口来回切换的繁琐，和拖拽时找不准目标的尴尬
+    - [Ityscal](https://www.mowglii.com/itsycal/)  日历
 * vpn
     - Tunnelblick_3.7.2_build_4850：点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
 * 设计
@@ -157,6 +182,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - Axure：原型工具
     - CmapTools：概念图
     - UML:staruml
+    - 截图
 * 写作
     - Latex
     - Alternote(evernote简单客户端)
@@ -170,7 +196,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * 下载
     - bitlord
     - Folx
-    - [CodeTips/BaiduNetdiskPlugin-macOS](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~ 
+    - [CodeTips/BaiduNetdiskPlugin-macOS](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~
 * 工具
     - [CheatSheet] 长按⌘键可以显示当前程序快捷键
     - [flux](https://justgetflux.com/)
@@ -186,7 +212,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * Web开发
     - [Paw](https://paw.cloud/):The most advanced API tool for Mac
     - MAMP:基础版不支持自定义
-    - 虚拟机：parallels
     - [yichengchen/clashX](https://github.com/yichengchen/clashX):A rule based custom proxy with GUI for Mac base on clash.
 * 沟通
     - [Textual 7](<Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.>)
@@ -210,7 +235,8 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - [trello](https://trello.com/home): Project management tool
     - [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
     - Day One - Digital journal
-    - Just Focus
+    - Just Focus：商店下载
+    - [pomofocus](https://pomofocus.io/):网页版
     - Any.do
     - Todoist
     - TickTick
@@ -253,8 +279,12 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - Apple TV Aerial
 * 软件订阅
     - [setapp](https://setapp.com)The first subscription service for Mac apps.
+* [LyricsX](https://github.com/MichaelRow/Lyrics)
+* [fliqlo](https://fliqlo.com/):A flip Clock screensavers
 * 说明
     - strace在linux下用来跟踪某个进程的系统调用，dtruss
+* [JadenGeller/Helium](https://github.com/JadenGeller/Helium):A floating browser window for OS X <http://heliumfloats.com>
+* elpass
 
 ### screensavers
 
@@ -289,8 +319,6 @@ route add [-net|-host] [网域或主机] netmask [mask] [gw|dev]
 
 * iTerm2 的标签的颜色会变化，以指示该 tPab 当前的状态。当该标签有新输出的时候，标签会变成洋红色；新的输出长时间没有查看，标签会变成红色。可在设置中关掉该功能。
 * 在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等
-
-
 
 ## 快捷键
 
@@ -574,9 +602,14 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * 四指左扫或右扫： 在全屏幕的应用之间轻扫
 * 五指张开或捏合： 显示桌面
 
-## Alfred
+## [alfred](https://www.alfredapp.com/):a very powerful launcher that you can program to show you anything you want
 
-免费版虽然功能阉割，但是够用,也可以购买 Powerpack. 快捷键：option + space
+* 购买 Powerpack. 快捷键：option + space
+* [workflow](http://www.alfredworkflow.com/)
+* [learn-anything / alfred-workflows](https://github.com/learn-anything/alfred-workflows):Amazing Alfred Workflows
+* [gharlan / alfred-github-workflow](https://github.com/gharlan/alfred-github-workflow):GitHub Workflow for Alfred 3
+* [hzlzh / AlfredWorkflow.com](https://github.com/hzlzh/AlfredWorkflow.com):A public Collection of Alfred Workflows. http://www.alfredworkflow.com/
+* [zenorocha / alfred-workflows](https://github.com/zenorocha/alfred-workflows):🤘 A collection of Alfred 3 and 4 workflows that will rock your world
 
 ### features
 
@@ -767,40 +800,6 @@ brew switch icu4c 62.1
 * Utilities > Terminal打开一个终端。在终端,输入resetpassword并按Enter键
 * 选择你的OS X驱动。从下拉下“:选择用户帐户”,选择你想要的用户帐户重置密码
 
-## 配置
-
-* [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
-* [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles):🔧 .files, including ~/.macos — sensible hacker defaults for macOS <https://mths.be/dotfiless>
-* [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files. https://thoughtbot.com
-* [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
-* [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
-* [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
-* [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
-* [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
-* [maximum-awesome](https://github.com/square/maximum-awesome)Config files for vim and tmux.
-* [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
-* [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
-* [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
-* [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(<http://sourabhbajaj.com/mac-setup/>) 推荐
-* [mac-setup/](http://sourabhbajaj.com/mac-setup/) the basics of setting up a development environment on a new Mac
-* [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
-* [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
-* [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
-* [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
-* [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
-* [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
-* [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
-* [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
-* [Mac OS X 配置指南](https://wild-flame.github.io/guides/)
-* [phodal/setup.guide](https://github.com/phodal/setup.guide)
-
-### 软件列表
-
-* [hzlzh/Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
-* [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
-* [Mac效率神器Alfred以及常用Workflow](https://www.jianshu.com/p/0e78168da7ab)
-* [JadenGeller/Helium](https://github.com/JadenGeller/Helium):A floating browser window for OS X <http://heliumfloats.com>
-
 ## 图书
 
 * [The Cult of Mac, 2nd Ed](link)
@@ -809,6 +808,7 @@ brew switch icu4c 62.1
 
 * [basecamp/pow](https://github.com/basecamp/pow):Zero-configuration Rack server for Mac OS X http://pow.cx/v
 
-## 黑苹果
+## 参考
 
 * [黑果小兵的部落阁](https://blog.daliansky.ne)
+* [hzlzh/Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
