@@ -8,12 +8,11 @@ Vagrant is a tool for building and distributing development environments. https:
 
 ## 安装
 
-### mac
-
 * /usr/local/bin
 * /opt/vagrant/bin/vagrant
 
 ```sh
+### mac
 brew cask install virtualbox
 brew cask install vagrant
 brew cask install vagrant-manager
@@ -21,25 +20,16 @@ brew cask install vagrant-manager
 sudo apt-get -y install ruby rubygems
 wget https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_x86_64.deb
 sudo dpkg -i vagrant_2.2.6_x86_64.deb
-```
 
-### windows
-
-- 下载virtualbox与vagrant
-- 安装
-- 端口检测
-
-```
 # 在windows命令行窗口下执行
 C:\>netstat -aon|findstr "80"
 TCP  127.0.0.1:80   0.0.0.0:0   LISTENING      2448
 # 看到了吗，端口被进程号为2448的进程占用，继续执行下面命令
-
 C:\>tasklist|findstr "2448"
 thread.exe  2016 Console    0    16,064 K
 ```
 
-### box管理
+## box管理
 
 * 下载
     - 环境有默认的box名称，添加box时不带url或uri会默认从官网下载（速度不敢保证）
@@ -76,10 +66,11 @@ vagrant plugin expunge --reinstall
         }
     ]
 }
+
 vagrant box add metadata.json
 ```
 
-### 服务管理
+## 服务管理
 
 通常情况下Box只做最基本的设置，因此Vagrant通常使用Chef或者Puppet来做进一步的环境搭建.那么Chef或者Puppet称为provisioning，而该命令就是指定开启相应的provisioning。按照Vagrant作者的说法，所谓的provisioning就是"The problem of installing software on a booted system"的意思。
 
@@ -294,15 +285,14 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-## 实例管理
+## 实例
 
 ```sh
 # 查看实例
 vagrant global-status --prune
-
 ```
 
-## 网络说明
+## 网络
 
 * 端口映射(Forwarded port) ，顾名思义是指把宿主计算机的端口映射到虚拟机的某一个端口上，访问宿主计算机端口时，请求实际是被转发到虚拟机上指定端口的。Vagrantfile中设定语法为： `config.vm.forwarded_port 80, 8080` 以上将访问宿主计算机8080端口的请求都转发到虚拟机的80端口上进行处理。 默认只转发TCP包，UDP需要额外添加以下语句： `config.vm.forwarded_port 80, 8080, protocol: "udp"`
   - 简单易理解:容易实现外网访问虚拟机
@@ -314,7 +304,7 @@ vagrant global-status --prune
   - 方便团队协作，别人可以访问你的虚拟机
   - 需要有网络，有路由器分配IP
 
-### 问题
+## 问题
 
 * v1.9.4 bugs :SSH cann't connect
 * `It appears your machine doesn't support NFS, or there is not an adapter to enable NFS on this machine for Vagrant`:`sudo apt-get install nfs-kernel-server`
@@ -331,15 +321,15 @@ sh ./VBoxLinuxAdditions.run
 vagrant up
 ```
 
+## 工具
+
+* [dotless-de/vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest):A Vagrant plugin to keep your VirtualBox Guest Additions up to date
+* [scourgen/Vagrant-PHP-Stack](https://github.com/scourgen/Vagrant-PHP-Stack):A kick-ass Vagrant Stack for PHP developer
+* puphpet: 图形化脚本生成
+
 ## 参考
 
 * [Parallels/vagrant-parallels](https://github.com/Parallels/vagrant-parallels)Vagrant Parallels Provider
 * [Vagrant Documentation](https://www.vagrantup.com/docs/)
 * [官网](https://app.vagrantup.com/boxes/search?provider=virtualbox) 比如：https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.4/providers/virtualbox.boxes
 * [资源](http://www.vagrantbox.es/)
-
-## 工具
-
-* [dotless-de/vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest):A Vagrant plugin to keep your VirtualBox Guest Additions up to date
-* [scourgen/Vagrant-PHP-Stack](https://github.com/scourgen/Vagrant-PHP-Stack):A kick-ass Vagrant Stack for PHP developer
-* puphpet: 图形化脚本生成

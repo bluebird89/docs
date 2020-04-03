@@ -1,141 +1,26 @@
 # Rsync
 
-rsync is a file transfer program capable of efficient remote update
-via a fast differencing algorithm.
+rsync is a file transfer program capable of efficient remote update via a fast differencing algorithm.
 
-* 增量 – 强大的原因，对比文件差异，然后只传输差异部分
-* 压缩 – 强大的原因，怎么实现秒传？传得越少，速度越快
+* 增量 – 对比文件差异，然后只传输差异部分
+* 压缩 – 怎么实现秒传？传得越少，速度越快
 * 黑名单 – 某些目录和文件是永远不用传的
 * 安全 – 有权限校验，可以走ssh通道，根据主机、或者用户名
 * 连续 – 不是一次只传一个文件
 
 ## 配置
 
-rsyncd.conf，其控制认证、访问、日志记录等等。该文件是由一个或多个模块结构组成。一个模块定义以方括弧中的模块名开始，直到下一个模块定义开始或者文件结束，模块中包含格式为name = value的参数定义。每个模块其实就对应需要备份的一个目录树.
+* 配置文件 `rsyncd.conf`:控制认证、访问、日志记录等等。该文件是由一个或多个模块结构组成
+* 一个模块定义以方括弧中的模块名开始，直到下一个模块定义开始或者文件结束，模块中包含格式为name = value的参数定义
+* 每个模块其实就对应需要备份的一个目录树
 
-```sh
-mkdir /etc/rsyncd
-touch /etc/rsyncd/rsyncd.conf
-ln -s /etc/rsyncd/rsyncd.conf /etc/rsyncd.conf
+## 参数
 
-mkdir /etc/rsyncd  # 创建一个目录存放rsyncd.motd和rsyncd.pwd文件
-touch /etc/rsyncd/rsyncd.secrets # 创建rsyncd.secrets文件存放用户名：密码
-chmod 600 /etc/rsyncd/rsyncd.secrets  # 为了密码的安全性，将rsyncd.secrets文件的权限设为600
-
-hosta:hosta-s-password
-hostb:hostb-s-password
-
-touch /etc/rsyncd/rsyncd.motd  //创建登录成功欢迎页面
-vi /etc/rsyncd/rsyncd.motd  //编辑欢迎信息
-find / -name rsyncd.conf    //找到配置文件所在的目录
-vi /etc/rsyncd.conf  //编辑配置文件
-
-# /etc/rsyncd: configuration file for rsync daemon mode
-# See rsyncd.conf man page for more options.
-# configuration example:
-
-uid = root   #设置用户
-gid = root  #设置用户组
-syslog facility = local3 # 将使用LOCAL3 日志设备（facility) 需要在 /etc/syslog.conf 文件中添加如：local3.info /var/log/rsync.log,重启服务service syslog restart
-
-use chroot = yes
-read only = yes
-
-max connections = 4  #客户端最多连接数
-timeout = 300
-
-pid file = /var/run/rsyncd.pid  #设  rsync 的守护进程将其 PID 写入指定的文件。
-motd file = /etc/rsyncd/rsyncd.motd  # 指定一个消息文件，当客户连接服务器时该文件的内容显示给客户。 登录成功欢迎页面
-log file    # 指定 rsync 守护进程的日志文件，而不将日志发送给 syslog。
-
-host allow = 192.168.0.221 192.168.0.222 #允许连接的IP，IP段用空格隔开
-hosts deny=*
-
-secrets file = /etc/rsyncd/rsyncd.secrets
-auth users = bua,bub
-
-# exclude = lost+found/
-# transfer logging = yes
-# timeout = 900
-# ignore nonreadable = yes
-# dont compress   = *.gz *.tgz *.zip *.z *.Z *.rpm *.deb *.bz2
-
-# [ftp]
-#        path = /home/ftp
-#        comment = ftp export area
-
-[uploadfile] #模块名
-    path = /data  #本模块指定的文件目录
-    list = no  #是否列出服务器提供的同步目录，设置为no较为安全
-    ignore errors  #忽略IO错误
-    auth users = user1  #认证用户，在rsyncd.pwd设置了该用户的密码
-    secrets file = /etc/rsyncd/rsyncd.pwd  #指定用户：密码文件
-    comment = module loading success!  #该模块的说明文字
-    exclude = a/ b/   #排除本模块下指定目录中的个别文件目录
-
-[home]
-    uid = root
-    gid = root
-    path = /home
-    comment = product server home
-    exclude = www/ samba/ ftp/
-[www]
-    path = /home/www
-    comment = product server www
-    exclude = logs/
-
-touch /opt/app/rsync/etc/rsyncucweb.password
-echo "images:ucweb@file" > /opt/app/rsync/etc/rsyncucweb.password
-chmod 600 /opt/app/rsync/ect/rsyncucweb.password # 更改密码文件的权限
-
-/www/wdlinux/rsync/bin/rsync --daemon  --config=/etc/rsyncd.conf  # 启动rsync服务; etc/rc.d/rc.local，设置开机启动 在最后添加/opt/app/rsync/bin/rsync --daemon --config=/opt/app/rsync/etc/rsync.conf
-
-chkconfig rsync off
-# service xinetd restart
-# echo "/usr/bin/rsync --daemon">>/etc/rc.local
-# /usr/bin/rsync --daemon
-
-iptables -A INPUT -p tcp -m state --state NEW  -m tcp --dport 873 -j ACCEPT  //设置873端口通过服务器
-ptables -L   //查看防火墙是否打开了873端口
-ps -ef | grep rsync  //查看rsync进程是否开启
-
-rsync  --list-only user1@***.***.***.***::uploadfile  # 查看rsync服务器上提供出来的同步文件列表（用户名@rsync服务器IP::模块名）
-rsync --list-only rsync://bua@192.168.0.220/home
-rsync -avzP -delete user1@***.***.***.***::uploadfile /data/test  # 将rsync服务器上uploadfile模块下的代码同步到本地/data/test下
-rsync -avzP --delete rsync://bua@192.168.0.220/www /backups/192.168.0.220/$(date +'%y-%m-%d')/www # 保存历史归档
-rsync -avzP --delete --exclude "lost+found/" /home/ hosta@192.168.0.221::hosta-home # 推送同步
-
-# 首先在备份主机上部署如下的目录：
-/backups/192.168.0.220/current # 存放同步的目录
-/backups/192.168.0.220/archive # 存放归档的目录
-rsync -avzP --delete bua@192.168.0.220::home /backups/192.168.0.220/current/home # 先备份，后存档
-tar -cjf /backups/192.168.0.220/archive/home-$(date +'%y-%m-%d').tbz \
--C /backups/192.168.0.220/current/home .
-```
-
-
-```sh
-## 客户端
-echo “ucweb@file”>/etc/rsyncucweb.password
-chmod 600 /etc/rsyncucweb.password
-rsync -avz --password-file=/etc/rsyncucweb.password images@172.16.10.201::case /opt/case
-
-vim /usr/sbin/rsync.sh # 设置自动化
-rsync -avz --password-file=/etc/rsyncucweb.password images@172.16.10.201::case /opt/case 
-tar -zcvf /opt/case.$(date +%Y-%m-%d).tar.gz /opt/case
-
-chmod 770 /usr/sbin/rsync.sh
-crontab –e
-00 * * * * /bin/sh /usr/sbin/rsyncd.sh
-```
-
-## 使用
-
-* --delete：删除目标上无关的文件
-* -v, --verbose  详细模式输出
-* -q, --quiet    精简输出模式
-* -c, --checksum 打开校验开关，强制对文件传输进行校验
 * -a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD
+* -c, --checksum 打开校验开关，强制对文件传输进行校验v，使用文件校验和而不是时间戳来决定改变的文件，通常消耗的时间更久
+* --delete：删除目标上无关的文件
+* -d 不要递归目录
+* -v, --verbose  详细模式输出
 * -r, --recursive  对子目录以递归模式处理
 * -R, --relative  使用相对路径信息
 * -b, --backup  创建备份，也就是对于目的已经存在有同样的文件名时，将老的文件重新命名为~filename。可以使用--suffix选项来指定不同的备份文件前缀。
@@ -309,6 +194,134 @@ rsync -avzi thegeekstuff@192.168.200.10:/var/lib/rpm/ /root/temp/ # View the Cha
 rsync -avz --include 'P*' --exclude '*' thegeekstuff@192.168.200.10:/var/lib/rpm/ /root/temp/ #  Include and Exclude Pattern during File Transfer
 rsync -avz --max-size='100K' thegeekstuff@192.168.200.10:/var/lib/rpm/ /root/temp/ # Do Not Transfer Large Files
 rsync -avzW  thegeekstuff@192.168.200.10:/var/lib/rpm/ /root/temp # Transfer the Whole File
+```
+
+## 使用
+
+```sh
+mkdir /etc/rsyncd
+touch /etc/rsyncd/rsyncd.conf
+ln -s /etc/rsyncd/rsyncd.conf /etc/rsyncd.conf
+
+mkdir /etc/rsyncd  # 创建一个目录存放rsyncd.motd和rsyncd.pwd文件
+touch /etc/rsyncd/rsyncd.secrets # 创建rsyncd.secrets文件存放用户名：密码
+chmod 600 /etc/rsyncd/rsyncd.secrets  # 为了密码的安全性，将rsyncd.secrets文件的权限设为600
+
+hosta:hosta-s-password
+hostb:hostb-s-password
+
+touch /etc/rsyncd/rsyncd.motd  # 创建登录成功欢迎页面
+vi /etc/rsyncd/rsyncd.motd  # 编辑欢迎信息
+find / -name rsyncd.conf    # 找到配置文件所在的目录
+vi /etc/rsyncd.conf  # 编辑配置文件
+
+# /etc/rsyncd: configuration file for rsync daemon mode
+# See rsyncd.conf man page for more options.
+# configuration example:
+
+uid = root   #设置用户
+gid = root  #设置用户组
+syslog facility = local3 # 将使用LOCAL3 日志设备（facility) 需要在 /etc/syslog.conf 文件中添加如：local3.info /var/log/rsync.log,重启服务service syslog restart
+
+use chroot = yes
+read only = yes
+
+max connections = 4  #客户端最多连接数
+timeout = 300
+
+pid file = /var/run/rsyncd.pid  #设  rsync 的守护进程将其 PID 写入指定的文件。
+motd file = /etc/rsyncd/rsyncd.motd  # 指定一个消息文件，当客户连接服务器时该文件的内容显示给客户。 登录成功欢迎页面
+log file    # 指定 rsync 守护进程的日志文件，而不将日志发送给 syslog。
+
+host allow = 192.168.0.221 192.168.0.222 #允许连接的IP，IP段用空格隔开
+hosts deny=*
+
+secrets file = /etc/rsyncd/rsyncd.secrets
+auth users = bua,bub
+
+# exclude = lost+found/
+# transfer logging = yes
+# timeout = 900
+# ignore nonreadable = yes
+# dont compress   = *.gz *.tgz *.zip *.z *.Z *.rpm *.deb *.bz2
+
+# [ftp]
+#        path = /home/ftp
+#        comment = ftp export area
+
+[uploadfile] #模块名
+    path = /data  #本模块指定的文件目录
+    list = no  #是否列出服务器提供的同步目录，设置为no较为安全
+    ignore errors  #忽略IO错误
+    auth users = user1  #认证用户，在rsyncd.pwd设置了该用户的密码
+    secrets file = /etc/rsyncd/rsyncd.pwd  #指定用户：密码文件
+    comment = module loading success!  #该模块的说明文字
+    exclude = a/ b/   #排除本模块下指定目录中的个别文件目录
+
+[home]
+    uid = root
+    gid = root
+    path = /home
+    comment = product server home
+    exclude = www/ samba/ ftp/
+[www]
+    path = /home/www
+    comment = product server www
+    exclude = logs/
+
+touch /opt/app/rsync/etc/rsyncucweb.password
+echo "images:ucweb@file" > /opt/app/rsync/etc/rsyncucweb.password
+chmod 600 /opt/app/rsync/ect/rsyncucweb.password # 更改密码文件的权限
+
+/www/wdlinux/rsync/bin/rsync --daemon  --config=/etc/rsyncd.conf  # 启动rsync服务; etc/rc.d/rc.local，设置开机启动 在最后添加/opt/app/rsync/bin/rsync --daemon --config=/opt/app/rsync/etc/rsync.conf
+
+chkconfig rsync off
+# service xinetd restart
+# echo "/usr/bin/rsync --daemon">>/etc/rc.local
+# /usr/bin/rsync --daemon
+
+iptables -A INPUT -p tcp -m state --state NEW  -m tcp --dport 873 -j ACCEPT  //设置873端口通过服务器
+ptables -L   //查看防火墙是否打开了873端口
+ps -ef | grep rsync  //查看rsync进程是否开启
+
+rsync  --list-only user1@***.***.***.***::uploadfile  # 查看rsync服务器上提供出来的同步文件列表（用户名@rsync服务器IP::模块名）
+rsync --list-only rsync://bua@192.168.0.220/home
+rsync -avzP -delete user1@***.***.***.***::uploadfile /data/test  # 将rsync服务器上uploadfile模块下的代码同步到本地/data/test下
+rsync -avzP --delete rsync://bua@192.168.0.220/www /backups/192.168.0.220/$(date +'%y-%m-%d')/www # 保存历史归档
+rsync -avzP --delete --exclude "lost+found/" /home/ hosta@192.168.0.221::hosta-home # 推送同步
+
+# 首先在备份主机上部署如下的目录：
+/backups/192.168.0.220/current # 存放同步的目录
+/backups/192.168.0.220/archive # 存放归档的目录
+rsync -avzP --delete bua@192.168.0.220::home /backups/192.168.0.220/current/home # 先备份，后存档
+tar -cjf /backups/192.168.0.220/archive/home-$(date +'%y-%m-%d').tbz \
+-C /backups/192.168.0.220/current/home .
+```
+
+```sh
+## 客户端
+echo “ucweb@file”>/etc/rsyncucweb.password
+chmod 600 /etc/rsyncucweb.password
+rsync -avz --password-file=/etc/rsyncucweb.password images@172.16.10.201::case /opt/case
+
+vim /usr/sbin/rsync.sh # 设置自动化
+rsync -avz --password-file=/etc/rsyncucweb.password images@172.16.10.201::case /opt/case 
+tar -zcvf /opt/case.$(date +%Y-%m-%d).tar.gz /opt/case
+
+chmod 770 /usr/sbin/rsync.sh
+crontab –e
+00 * * * * /bin/sh /usr/sbin/rsyncd.sh
+```
+
+```sh
+HOMES="alan"
+DRIVE="/media/WDPassport"
+
+for HOME in $HOMES; do
+    cd /home/$HOME
+    rsync -cdlptgov --delete . /$DRIVE/$HOME # 拷贝它在源目录中发现的文件和目录
+    find . -maxdepth 1 -type d -not -name "." -exec rsync -crlptgov --delete {} /$DRIVE/$HOME \;
+done
 ```
 
 ## 参考

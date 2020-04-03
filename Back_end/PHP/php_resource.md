@@ -134,6 +134,7 @@
     - [Buzz](https://github.com/kriswallsmith/Buzz): 一个HTTP客户端
     - Saber
     - [guzzle/guzzle](https://github.com/guzzle/guzzle):Guzzle, an extensible PHP HTTP client <http://guzzlephp.org/> http://docs.guzzlephp.org/en/stable/index.html
+        + [guzzle / promises](https://github.com/guzzle/promises):Promises/A+ library for PHP with synchronous support
     - [HTTPFul](https://github.com/nategood/httpful): 一个链式HTTP库
     - [PHP VCR](http://php-vcr.github.io/): 一个录制和重放HTTP请求的库
     - [rmccue/Requests](https://github.com/rmccue/Requests):Requests for PHP is a humble HTTP request library. It simplifies how you interact with other sites and takes away all your worries. http://requests.ryanmccue.info/

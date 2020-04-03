@@ -29,6 +29,7 @@
 * macbook pro 15
 * 戴尔27英寸XPS旗舰一体机
 * GPD p2 max 8.9英寸
+* MateBook X Pro 2020 
 
 ## 键盘
 
