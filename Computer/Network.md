@@ -121,10 +121,10 @@ ipconfig /all # 为DNS和WINS服务器显示它已配置且所有使用的附加
 
 ## 阻塞与非阻塞
 
-程序在等待调用结果（消息，返回值）时的当前线程状态
+程序在等待调用结果（消息，返回值）时当前线程状态
 
-* 阻塞调用：指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回。
-* 非阻塞调用：在不能立刻得到结果之前，该调用不会阻塞当前线程。
+* 阻塞调用：指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回
+* 非阻塞调用：在不能立刻得到结果之前，该调用不会阻塞当前线程
 
 * 子网
     - 子网划分只是一种逻辑上的划分方式，子网与广播域之间并不存在一一对应的关系。
@@ -219,6 +219,25 @@ ipconfig /all # 为DNS和WINS服务器显示它已配置且所有使用的附加
     - TRILL（Transparent InterconnecTIon of Lots of Links）技术是电信设备厂商主推的新型环网技术
     - NVGRE（Network VirtualizaTIon using Generic RouTIng EncapsulaTIon）STT（Stateless Transport Tunneling Protocol）是IT厂商主推的Overlay技术；
     - 非常熟悉的VXLAN（Virtual eXtensible LAN）等基于隧道的封装技术
+
+## 网络测速
+
+```sh
+# Speedtest
+sudo apt install speedtest-cli
+sudo pip3 install speedtest-cli
+speedtest
+
+# fast
+npm install --global fast-cli
+fast -u
+
+# iPerf
+sudo apt install iperf
+ip addr show | grep inet.*brd # Obtain the IP address of the server machine
+iperf -s # incoming connections from clients
+iperf -c 192.168.1.2 # substituting the IP address of your server machine for the sample one
+```
 
 ## 图书
 

@@ -1,15 +1,13 @@
 # [torvalds/linux](https://github.com/torvalds/linux)
 
-* UNIX/Linux 本身是没有图形界面的，通常在 UNIX/Linux 发行版上看到的图形界面实际都只是运行在 Linux 系统之上的一套软件,而 Linux 上的这套软件以前是 XFree86，现在则是 xorg（X.Org），而这套软件又是通过 X 窗口系统（X Window System，也常被称为 X11 或 X）实现的，X 本身只是工具包及架构协议，而 xorg 便是 X 架构规范的一个实现体，也就是说它是实现了 X 协议规范的一个提供图形界面服务的服务器，就像实现了 http 协议提供 web 服务的 Apache 。如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端，我们称为 X Client，像如下几个大家熟知也最流行的实现了客户端功能的桌面环境 KDE，GNOME，XFCE，LXDE 。
-* 如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端，我们称为 X Client，像如下几个大家熟知也最流行的实现了客户端功能的桌面环境 KDE，GNOME，XFCE，LXDE 。
-* Linux 是一个可以实现多用户登陆的操作系统，多用户可以同时登陆同一台主机，共享主机的一些资源，不同的用户也分别有自己的用户空间，可用于存放各自的文件。虽然不同用户的文件是放在同一个物理磁盘上的甚至同一个逻辑分区或者目录里，但是由于 Linux 的用户管理和 文件权限机制，不同用户不可以轻易地查看、修改彼此的文件。
-* Linux系统默认的字符编码是 UTF-8。Windows 是 GBK 编码，不支持UTF8. 所以 Linux下 的中文文件名到 Windwos下就成了乱码。
-* linux特点
-  - 它是单内核，与之相反的是微内核。
-  - 模块化设计，支持动态加载内核模块。
-  - 支持对称多处理机制（SMP），多个处理器需要考虑共享资源问题。
-  - 抢占式多任务操作系统，内核对进程的调度属于抢占式。
-  - 支持内核线程，但它不区分线程与进程，对他来说所有进程都一样。
+* 一个可以实现多用户登陆的操作系统，多用户可以同时登陆同一台主机，共享主机的一些资源，不同的用户也分别有自己的用户空间，可用于存放各自的文件。虽然不同用户的文件是放在同一个物理磁盘上的甚至同一个逻辑分区或者目录里，但是由于 Linux 的用户管理和 文件权限机制，不同用户不可以轻易地查看、修改彼此的文件
+* 系统默认的字符编码是 UTF-8。Windows 是 GBK 编码，不支持UTF8. 所以 Linux下 的中文文件名到 Windwos下就成了乱码
+* 特点
+  - 单内核，与之相反的是微内核
+  - 模块化设计，支持动态加载内核模块
+  - 支持对称多处理机制（SMP），多个处理器需要考虑共享资源问题
+  - 抢占式多任务操作系统，内核对进程的调度属于抢占式
+  - 支持内核线程，但不区分线程与进程，对他来说所有进程都一样
 
 ## Linux vs Unix
 
@@ -44,7 +42,25 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
     + 对于Linux，供应商可以为特定硬件设备创建设备驱动，并有理由预计，它可以在大多数发行版中运行。
 * Linux 已经显示出超越专有 Unix 的显著优势在于其在大量硬件平台和设备上的可用性。 Raspberry Pi 受到业余爱好者和发烧友的欢迎，它是 Linux 驱动的，为运行 Linux 的各种物联网设备打开了大门。 已经提到了 Android 设备，汽车（包括Automotive Grade Linux）和智能电视，其中Linux占有很大的市场份额
 
+## 10 moments that shaped Linux history
+
+* Linus Torvalds initially released Linux to the world in 1991 as a hobby. It didn't remain a hobby for long!
+* In 1993, several Linux distributions were founded, notably Debian, Red Hat, and Slackware. These were important because they demonstrated Linux's gains in market acceptance and development that enabled it to survive the tumultuous OS wars, browser wars, and protocol wars of the 1990s. In contrast, many established, commercial, and proprietary products did not make it past the turn of the millennium!
+* In 2000, IBM announced it would invest US$1 billion dollars in Linux. In his CNN Money [article about the investment](https://money.cnn.com/2000/12/12/technology/ibm_linux), Richard Richtmyer wrote: "The announcement underscores Big Blue's commitment to Linux and marks significant progress in moving the alternative operating system into the mainstream commercial market."
+* In 2002, it seemed the entire Hollywood movie industry adopted Linux. Disney, Dreamworks, and Industrial Light & Magic all began making movies with Linux that year.
+* In 2003, another big moment came with the US government's acceptance of Linux. Red Hat Linux was awarded the Department of Defense Common Operating Environment (COE) certification. This is significant because the government—intelligence and military agencies in particular—have very strict requirements for computing systems to prevent attacks and support national security. This opened the door for other agencies to use Linux. Later that year, the National Weather Service announced it would replace outdated systems with new computers running Linux.
+* This "moment" is really a collection of my personal experiences. As my career progressed in the 2000s, I discovered several types of systems and devices that I managed were all running Linux. Some of the places I found Linux were VMware ESX, F5 Big-IP, Check Point UTM Edge, Cisco ASA, and PIX. This made me realize that Linux was truly viable and here to stay.
+* In 2004, Canonical was founded by Mark Shuttleworth to provide an easy-to-use Linux desktop—Ubuntu Linux—based on the Debian distribution. I think Ubuntu Linux helped to expand the desktop Linux install base. It put Linux in front of many more people, from casual home users to professional software developers.
+* Google released two operating systems based on the Linux kernel: the Android mobile operating system in mid-2008 and Chrome OS, running on a Chromebook, in 2011. Since then, millions of Android mobile phones and Chromebooks have been sold.
+* In the past 10 years or so, cloud computing has gone from a grandiose vision of computing on the internet to a reinvention of how we use computers personally and professionally. The big players in the cloud space are built on Linux, including Amazon Web Services, Google Cloud Services, and Linode. Even in cases where we aren't certain, such as Microsoft Azure, running Linux workloads is well supported.
+* Many automakers began introducing Linux a few years ago. This led to the formation of the collaborative open source project called Automotive Grade Linux. Major car makers, such as Toyota and Subaru, have joined together to develop Linux-based automotive entertainment, navigation, and engine-management systems.
+
 ### 发行版
+
+* GNU
+  - Linux
+* BSD
+  - Mac
 
 * 入门：类似Windows的体验；安装简单；可靠；“类似Linux”，且不自成一派；“恰好管用”；
   - [Mint](https://linuxmint.com/)
@@ -94,8 +110,12 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 
 ## 桌面环境
 
-* [KDE](https://kde.org/)
-* [Xfce](https://www.xfce.org/)
+* UNIX/Linux 本身是没有图形界面的，通常在 UNIX/Linux 发行版上看到的图形界面实际都只是运行在 Linux 系统之上的一套软件,以前是 XFree86，现在则是 xorg（X.Org），这套软件又是通过 X 窗口系统（X Window System，也常被称为 X11 或 X）实现的，X 本身只是工具包及架构协议，而 xorg 便是 X 架构规范的一个实现体，实现了 X 协议规范的一个提供图形界面服务的服务器，就像实现了 http 协议提供 web 服务的 Apache
+* 如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端 X Client，像如下几个熟知也最流行的实现了客户端功能的桌面环境
+  - [KDE](https://kde.org/)
+  - [Xfce](https://www.xfce.org/)
+  - GNOME
+  - LXDE
 
 ## 启动
 
@@ -179,25 +199,30 @@ sudo dd bs=4M if=/home/hcf/dev/iso/ubuntu-16.04-desktop-amd64.iso of=/dev/sdb4
   - Korn Shell：是对Bourne SHell的发展，在大部分内容上与Bourne Shell兼容。
   - C Shell：是SUN公司Shell的BSD版本。
 
-## CPU活动状态
+## 配置
 
-* 运行于用户空间，执行用户进程。
-* 运行于内核空间，处于进程上下文，表示执行某个进程。
-* 运行于内核空间，处于中断上下文，此时与任务进程都无关，它在处理某个中断。
+```sh
+## ~/.bashrc:
+# set default editor to Vim
+export EDITOR=vim
+```
+
+## 内核
+
+* 操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限
 
 ## 内存
 
-* 地址概念
-  - 将主板上的物理内存条所提供的内存空间定义为物理内存空间，其中每个内存单元的实际地址就是物理地址；
-  - 将应用程序员看到的内存空间定义为虚拟地址空间(或地址空间)，其中的地址就叫做虚拟地址(或虚地址)，一般用“段:偏移量”的形式来描述，如A815:CF2D；
-  - 线性地址空间是指一段连续的、不分段的、范围为0~4GB的地址空间，一个线性地址就是线性地址空间的一个绝对地址。
+* 地址
+  - 将主板上的物理内存条所提供的内存空间定义为物理内存空间，其中每个内存单元的实际地址就是物理地址
+  - 将程序员看到的内存空间定义为虚拟地址空间(或地址空间)，其中的地址就叫做虚拟地址(或虚地址)，一般用“段:偏移量”的形式来描述，如A815:CF2D
+  - 线性地址空间是指一段连续的、不分段的、范围为0~4GB的地址空间，一个线性地址就是线性地址空间的一个绝对地址
 * 虚地址转换为物理地址：在保护模式下，内存管理单元(MMU)由一个或一组芯片组成，其功能是指虚拟地址映射为物理地址，即进行地址转换；MMU是一种硬件电路，它包含分段部件和分页部件两个部件，分别叫做分段机制和分页机制
-  - 分段机制是把一个虚拟地址转换为线性地址
   - 分页机制是把一个线性地址转换为物理地址
   - 32位线性地址空间要采用两级页表：页表是把线性地址映射到物理地址的一种数据结构，4GB的线性空间可以被划分为1M个4KB大小的页，每个页表项占4字节，则1M个页表项的页表就需要占用4MB空间，而且还要求是连续的，于是采用两级页表来实现；两级页表就是对页表再进行分页，第一级称为页目录，其中存放关于页表的信息；4MB的页表再次分页，可以分为1K个4KB大小的页
-* 页面高速缓存自动保留处理器最近使用的32项页表项，因此可以覆盖128KB范围的内存；
-* Linux主要采用分页机制来实现虚拟存储器管理，原因为：
-  - Linux的分段机制使得所有的进程都使用相同的段寄存器，这使得内存管理变得简单；
+* 页面高速缓存自动保留处理器最近使用的32项页表项，因此可以覆盖128KB范围的内存
+* Linux主要采用分页机制来实现虚拟存储器管理，因为：
+  - Linux的分段机制使得所有的进程都使用相同的段寄存器，这使得内存管理变得简单
   - Linux的设计目标之一就是能够被移植到绝大多数流行的处理平台上，但许多RISC处理器支持的分段功能非常有限；为了保证可移植性，Linux采用三级分页模式，因为许多处理器都采用64位结构；Linux定义了三种类型的页表：页目录(PGD)、中间目录(PMD)和页表(PT)。
 * 请求调页
   - 如果被访问的页不在内存，也就是说，这个页还没有被存放在任何一个物理页面中，那么，内核分配一个新的页面并将其适当地初始化，这种技术称为“请求调页”；
@@ -209,34 +234,45 @@ sudo dd bs=4M if=/home/hcf/dev/iso/ubuntu-16.04-desktop-amd64.iso of=/dev/sdb4
 
 ## 进程&线程
 
+* 程序是一个普通文件，是机器代码指令和数据的集合，存储在磁盘上的一个可执行映像中，可执行映像(executable image)就是一个可执行文件的内容
+* 进程代表程序的执行过程，它是一个动态的实体，随着程序中指令的执行而不断地变化，在某个时刻进程的内容被称为进程映像(process image)
+  - 程序执行过程是一个执行环境的总和，除了包括程序中各种指令和数据外，还有一些额外数据
+  - 执行环境的动态变化体现了程序的运行，为了对动态变化的过程进行描述，就引入了“进程”概念
 * 进程
-  - 处于执行期的程序，它包含各种资源，比如文件、信号、内核数据、处理器状态、内存空间、执行线程、全局数据段等。进程提供了虚拟处理器和虚拟内存，看起来进程就像自己独享相应资源。
-  - 内核将所有进程保存在任务队列中，它是一个双向循环链表，该链表中每个节点的类型都是task_struct进程描述符结构
-  - 所有进程都是PID为1的init进程的后代，内核启动的最后阶段启动init进程，它负责读取系统的初始化脚本并执行其它相关程序。
-  - 每个进程都有一个父进程，每个进程也都可以有零个或多个子进程。
-  - fork()用于创建子进程，它通过拷贝当前进程来创建一个子进程，父子进程区别在于PID、PPID、某些资源、统计量不同。fork()使用了写时拷贝机制，父进程和子进程共享同一个拷贝，只有需要写入时数据才会被复制。
-  - fork()的实际开销就是复制父进程的页表以及给子进程创建唯一进程描述符。
-  - exec()负责读取可执行文件并将其载入空间开始运行。进程调用exit()系统调用时进程被终结。
-  - 运行着的程序，每个进程都有着它自己的地址空间，这些空间由进程被允许访问的内存地址组成
-  - 有一个或多个执行线程，而线程是一系列执行指令的集合：单线程进程就只有一个线程，而多线程的进程则有多个线程
-  - 一个进程中的线程共享各种资源，特别是地址空间
-  - 一个进程中的线程可以直接通过共享内存来进行通信
-  - 当然对于不同的进程，默认情况下，它们不能共享内存。
-  - 环境变量通常在系统启动时由初始化脚本进行初始化，然后由系统中的所有其他进程继承。同样，当在一个程序中打开另一个程序时，调用程序会先复制一个与自身完全一样的进程，即子进程。子进程可以根据需要修改环境变量。最后，子进程再通过执行被调用的程序来覆盖自己
-    * fork：是由操作系统内核实现的系统调用，用于创建当前进程自身的一个副本；
-    * exec：是由操作系统内核实现的系统调用，用于在已有进程的上下文中运行一个可执行文件。
-* 程序是一个普通文件，是机器代码指令和数据的集合，这些指令和数据存储在磁盘上的一个可执行映像中，可执行映像(executable image)就是一个可执行文件的内容；
-* 进程代表程序的执行过程，它是一个动态的实体，随着程序中指令的执行而不断地变化，在某个时刻进程的内容被称为进程映像(process image)；
-* 程序的执行过程可以说是一个执行环境的总和，这个执行环境除了包括程序中各种指令和数据外，还有一些额外数据；而执行环境的动态变化体现了程序的运行，为了对动态变化的过程进行描述，就引入了“进程”概念。
+  - 处于执行期的程序，包含各种资源，比如文件、信号、内核数据、处理器状态、内存空间、执行线程、全局数据段等。进程提供了虚拟处理器和虚拟内存，看起来进程就像自己独享相应资源
+  - 内核将所有进程保存在任务队列中，是一个双向循环链表，该链表中每个节点的类型都是task_struct进程描述符结构
+  - 所有进程都是PID为1的init进程的后代，内核启动的最后阶段启动init进程，负责读取系统的初始化脚本并执行其它相关程序
+  - 每个进程都有一个父进程，每个进程也都可以有零个或多个子进程
+  - fork()用于创建子进程，通过拷贝当前进程来创建一个子进程，父子进程区别在于PID、PPID、某些资源、统计量不同
+    + 由操作系统内核实现的系统调用，用于创建当前进程自身的一个副本
+    + fork()使用了写时拷贝机制，父进程和子进程共享同一个拷贝，只有需要写入时数据才会被复制
+    + fork()的实际开销:复制父进程的页表以及给子进程创建唯一进程描述符
+  - exec()负责读取可执行文件并将其载入空间开始运行
+    + 由操作系统内核实现的系统调用，用于在已有进程的上下文中运行一个可执行文件
+  - 进程调用exit()系统调用时进程被终结
+  - 运行着的程序，每个进程都有着它自己的地址空间，由被允许进程访问的内存地址组成
+  - 有一个或多个执行线程，而线程是一系列执行指令的集合
+    + 一个进程中的线程共享各种资源，特别是地址空间
+    + 一个进程中的线程可以直接通过共享内存来进行通信
+  - 不同的进程，默认情况下，它们不能共享内存
+  - 环境变量通常在系统启动时由初始化脚本进行初始化，然后由系统中的所有其他进程继承。同样，当在一个程序中打开另一个程序时，调用程序会先复制一个与自身完全一样的进程，即子进程。子进程可以根据需要修改环境变量。子进程再通过执行被调用的程序来覆盖自己
 * 进程控制块：对进程的描述结构叫做task_struct，将这样的数据结构称作进程控制块(PCB)
   - PCB是一个其域多达80多项的相当庞大的数据结构，按其功能将所有域划分为：状态信息，链接信息、各种标识符、进程间通信信息、时间和定时器信息、调度信息、文件系统信息、虚拟内存信息和处理器环境信息
   - 组织方式有：进程链表、散列表、可运行队列和等待队列
+* 进程切换:内核必须有能力挂起正在CPU上运行的进程，并恢复以前挂起的某个进程的执行
+  - 流程
+    + 保存处理机上下文，包括程序计数器和其他寄存器
+    + 更新PCB信息
+    + 把进程的PCB移入相应的队列，如就绪、在某事件阻塞等队列
+    + 选择另一个进程执行，并更新其PCB
+    + 更新内存管理的数据结构恢复处理机上下文
+  - 进程阻塞：正在执行的进程，由于期待的某些事件未发生，如请求系统资源失败、等待某种操作的完成、新数据尚未到达或无新工作做等，则由系统自动执行阻塞原语(Block)，使自己由运行状态变为阻塞状态
 * 内核状态
   - 运行态、就绪态和阻塞态(或等待态)
   - 四种可能的转换关系：运行态->阻塞态、运行态->就绪态、就绪态->运行态和阻塞态->就绪态
   - 将就绪态和运行态合并为一个状态—可运行态，再包括其它方面的一些改变，将进程状态划分为：可运行态、睡眠(或等待)态(分为深度睡眠态和浅度睡眠态)、暂停状态和僵死状态。
 * 调度
-  - 目的就是最大限度地利用CPU时间，只要有可执行的任务就要尽量去执行它们，但我们知道系统中几乎总是任务数大于处理器个数，所以肯定某个时刻有任务得不到执行。
+  - 目的:最大限度地利用CPU时间，只要有可执行的任务就要尽量去执行，系统中几乎总是任务数大于处理器个数，所以肯定某个时刻有任务得不到执行
   - 多任务系统能并发地执行多个进程，一个CPU时是一对多，多个CPU时是多对多，所有任务看起来就像是同时在运行一样
   - 多任务系统分为抢占式和非抢占式
     + linux是抢占式调度，调度程序来决定进程的挂起和执行，每个进程能执行的时间为时间片，现代系统一般都有一定的策略来动态分配时间片
@@ -259,19 +295,70 @@ sudo dd bs=4M if=/home/hcf/dev/iso/ubuntu-16.04-desktop-amd64.iso of=/dev/sdb4
       * 前者是一种简单的先入先出调度算法，它不使用时间片。处于SCHED_FIFO级别的进程会比任何SCHED_NORMAL级别的进程先得到调度。一旦某个SCHED_FIFO级别的进程处于可执行状态，它将会一直执行，直到它自己阻塞或显示释放CPU。只有更高优先级的SCHED_FIFO或SCHED_RR进程才能抢占它。两个相同优先级的SCHED_FIFO级别的进程会轮流执行，其它普通进程只能等它变为不可运行状态后才有机会执行。
       * SCHED_RR大致与SCHED_FIFO相同，但它是耗尽事先分配的时间后就不再继续执行，即SCHED_RR是带了时间片的SCHED_FIFO。时间片只是相对于同一优先级的进程，低优先级的进程无法抢占SCHED_RR任务，即使它的时间片耗尽也不行。
     + 考虑因素：考虑五个方面：公平、高效、响应时间、周转时间和吞吐量
-* 进程的地址空间划分为“内核空间”和“用户空间”
-  - Linux的虚拟地址空间的大小为4GB，内核将这4GB的空间分为两部分，较高的1GB(虚地址0xC0000000到0xFFFFFFFF)供内核使用，称为“内核空间”；
-  - 而较低的3GB(虚地址0x00000000到0xBFFFFFFF)供各个进程使用，称为“用户空间”；
-  - 因为每个进程可以通过系统调用进入内核，因此，内核空间由系统内的所有进程共享；
-  - 于是，从具体进程的角度来看，每个进程都可以拥有4GB的虚拟地址空间(也叫做虚拟内存)。
+* 为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分
+  - Linux的虚拟地址空间的大小为4GB，内核将这4GB的空间分为两部分
+  - 内核空间:较高的1GB(虚地址0xC0000000到0xFFFFFFFF)供内核使用
+  - 用户空间:较低的3GB(虚地址0x00000000到0xBFFFFFFF)供各个进程使用
+  - 每个进程可以通过系统调用进入内核，内核空间由系统内的所有进程共享.从具体进程的角度来看，每个进程都可以拥有4GB的虚拟地址空间(也叫做虚拟内存)
+* CPU活动状态
+  - 运行于用户空间，执行用户进程
+  - 运行于内核空间，处于进程上下文，表示执行某个进程
+  - 运行于内核空间，处于中断上下文，此时与任务进程都无关，它在处理某个中断
 * 线程是进程的活动对象，每个线程都拥有独立的程序计数器、进程栈和一组寄存器。
   - 线程能在同一程序里面共享内存地址空间，共享文件和其它资源。
   - 从内核角度来说linux并没有线程这个概念，它将线程当成是进程来看待。
   - 内核线程没有独立的地址空间，只运行在内核空间，从不切换到用户空间。
 * 放弃处理器时间 linux 通过sched_yield()系统调用来放弃当前进程的处理器时间，让给其他待执行进行，对于实时进程，它会将进程从活动队列中移到其优先级队列的后面。早期linux的yield语义不一样，只会将进程放到优先级队列的末尾，放弃的时间不会太长。
+* 文件描述符fd：用于表述指向文件的引用的抽象化概念，形式上是一个非负整数
+  - 实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表
+  - 当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符
 
-## 硬件管理
+## 硬件
 
+* 磁盘分区
+  - 引导分区类型:磁盘上存储分区信息的方式，包含了分区从哪里开始的信息
+    + MBR（Master Boot Record）：存在于驱动器开始部分的一个特殊的启动扇区。这个扇区包含了已安装的操作系统的启动加载器和驱动器的逻辑分区信息
+      * 分为基本分区（primary partion）和扩展分区（extension partion）两种
+      * 主分区总数不能大于4个，其中最多只能有一个扩展分区
+      * 基本分区可以马上被挂载使用但不能再分区，扩展分区必须再进行二次分区后才能挂载。扩展分区下的二次分区被称之为逻辑分区，逻辑分区数量限制视磁盘类型而定
+      * MBR的主分区号为1-4，逻辑分区号为从5开始累加的数字
+      * 主引导程序（偏移地址0000H--0088H ），它负责从活动分区中装载，并运行系统引导程序。 出错信息数据区，偏移地址0089H--00E1H 为出错信息，00E2H--01BDH 全为0 字节。
+      * 分区表（DPT,Disk Partition Table ）含4 个分区项，偏移地址01BEH--01FDH, 每个分区表项长16 个字节，共64 字节为 分区项1 、分区项2 、分区项3 、分区项4
+      * 结束标志字，偏移地址01FE--01FF 的2 个字节值为结束标志 55AA
+    + GPT（GUID Partition Table）:驱动器上的每个分区都有一个全局唯一的标识符（globally unique identifier，GUID）没有主分区和逻辑分区之分，每个硬盘最多可以有128个分区
+      * 分为4个区域：EFI信息区(GPT头)、分区表、GPT分区、备份区域
+  - `etc/fstab`: `UUID=b543f8f7-579c-45b5-96d6-31de6fa1a55e /home/lgd/disk1 ext4 defaults 1 2`
+    + 分区设备文件名或UUID
+    + 挂载点
+    + 文件系统名称
+    + 挂载参数，挂载权限
+    + 指定分区是否被dump备份，0代表不备份，1代表每天备份，2代表不定期备份。
+    + 指定分区是否被fsck检测，0代表不检测，其他数字代表检测的优先级，比如1的优先级比2高。根目录所在的分区的优先级为1，其他分区的优先级为大于或等于2
+  - 主分区和扩展分区的数目之和不能大于四个
+  - 标识一般使用/dev/hd[a-z]X或者/dev/sd[a-z]X来标识，其中[a-z]代表硬盘号，X代表硬盘内的分区号。
+  - 整块硬盘分区的块号标识:Linux下用hda、hdb、sda、sdb 等来标识不同的硬盘;
+    + IDE接口硬盘：表示为/dev/hda1、/dev/hdb …；
+    + SCSI 接口的硬盘、SATA接口的硬盘表示为/dev/sda、/dev/sdb … …
+    + 硬盘内的分区：如果X的值是1到4,表示硬盘的主分区（包含扩展分区）；逻辑分区从是从5开始的，比如/dev/hda5肯定是逻辑分区了；
+  - 主分区(Primary Partion)：马上被使用但不能再分区
+  - 扩展分区(Extension Partion)：必须再进行分区后才能使用，也就是说它必须还要进行二次分区。
+    + 扩展分区只不过是逻辑分区的“容器”，实际上只有主分区和逻辑分区进行数据存储。
+    + 逻辑分区（(Logical Partion)）：由扩展分区建立起来的分区。逻辑分区没有数量上限制。
+  - 用hda1、hda2、 hda5、hda6 来标识不同的分区。其中，字母a 代表第一块硬盘，b代表第二块硬盘，依次类推。而数字1 代表一块硬盘的第一个分区、2 代表第二个分区，依次类推。1 到4 对应的是主分区(Primary Partition)或扩展分区(Extension Partition)。从5开始，对应的都是硬盘的逻辑分区(Logical Partition)。一块硬盘即使只有一个主分区，逻辑分区也是从5开始编号的
+* 设备驱动
+  - 设备分为“块设备”和“字符设备”
+    + Linux将设备看成文件，具有三方面的含义
+      * 每个设备都对应一个文件名，在内核中也就对应一个索引节点
+      * 对文件操作的系统调用大都适用于设备文件；
+      * 从应用程序的角度看，设备文件的逻辑空间是一个线性空间；
+      * 对于同一个具体的设备而言，文件操作和设备驱动是同一个事物的不同层次，概念上可以将一个系统划分为应用、文件系统和设备驱动三个层次；
+    + Linux将设备分为两大类，
+      * 一类是像磁盘那样的以块或扇区为单位、成块进行输入/输出的设备，称为块设备；
+      * 另一类是像键盘那样以字符(字节)为单位，逐个字符进行输入/输出的设备，称为字符设备；文件系统通常都建立在块设备上。
+  - 设备驱动程序：处理和管理硬件控制器的软件就是设备驱动程序
+  - I/O端口包括控制寄存器、状态寄存器和数据寄存器三大类
+  - 根据访问外设寄存器的不同方式，将CPU分为两大类：一类是“内存映射”(memory-mapped)方式，另一类是“I/O映射”(I/O- mapped)方式。
+  - LSB(Linux Standard Base)
 * 速度问题。CPU的速度非常快，但向硬件发起一个请求并接到其响应的速度是相当慢的
   - 轮询机制是让内核定期对硬件设备进行查询，看是否需要处理，如果需要则处理，这种情况可能会让内核做很多无用功
   - 中断机制则反过来，让硬件主动来发送信号，当硬件有事件发生时则向内核发出信号，然后内核再介入处理
@@ -299,61 +386,144 @@ sudo dd bs=4M if=/home/hcf/dev/iso/ubuntu-16.04-desktop-amd64.iso of=/dev/sdb4
       * 对于网卡的中断信号处理应该快速将网卡数据包拷贝到内存中，这就是上半部的工作，快速执行完后马上结束中断处理，将处理器交还给中断前的程序。
       * 耗时的数据包处理操作则放到下半部中，这部分可以稍后一点再处理，没有很强的时效性。
 * 中断上下文是指内核在执行一个中断处理程序时所处的上下文，在该上下文中不能睡眠，也不能调用某些函数。中断处理程序时打断了其它正在执行的代码，所以它必须要快速简洁地执行完毕，中断处理程序有自己的栈。
+* GUI
+  - i-nex 收集硬件信息，并且类似于 Windows 下流行的 CPU-Z 的显示。
+  - HardInfo 显示硬件具体信息，甚至包括一组八个的流行的性能基准程序，你可以用它们评估你的系统性能。
+  - KInfoCenter 和 Lshw 也能够显示硬件的详细信息，并且可以从许多软件仓库中获取。
+
+```sh
+inxi -Fxz # 能够列出包括 CPU、图形、音频、网络、驱动、分区、传感器等详细信息 -F 参数意味着你将得到完整的输出，x 增加细节信息，z 参数隐藏像 MAC 和 IP 等私人身份信息
+hwinfo --short
+lshw -short
+
+# cpu
+lscpu 
+lshw -C cpu
+lshw -C cpu | grep -i product # 只查看 CPU 品牌和型号
+lscpu | grep -i mhz # 查看 CPU 的速度（兆赫兹）
+lscpu | grep -i bogo # 或其 BogoMips 额定功率
+
+# memory 
+dmidecode -t memory | grep -i size # 列出每根内存条和其容量
+lshw -short -C memory # 获取系统内存更多的信息，包括类型、容量、速度和电压
+dmidecode -t memory | grep -i max # 可以安装的最大内存
+lshw -short -C memory | grep -i empty # 检查一下计算机是否有空闲的插槽可以插入额外的内存条
+
+# 显卡内存
+lspci | grep -i vga
+lspci -v -s 00:02.0 #  加上视频设备号
+
+# 磁盘文件系统和设备
+lshw -short -C disk # 显示每个磁盘设备的描述信息
+hdparm -i /dev/sda # 获取任何指定的 SATA 磁盘详细信息，例如其型号、序列号以及支持的模式和扇区数量等
+lsblk # 列出所有磁盘及其分区和大小
+fdisk -l # 获取更多有关扇区数量、大小、文件系统 ID 和 类型以及分区开始和结束扇区
+blkid # 列出了每个分区的唯一标识符（UUID）及其文件系统类型
+df -m # 列出已挂载的文件系统和它们的挂载点，以及已用的空间和可用的空间
+lsusb|lspci # 列出已挂载的文件系统和它们的挂载点，以及已用的空间和可用的空间
+# 统计数据块使用情况
+df -Th
+df -T # 查看分区的文件系统
+df -h # Human-readable 显示目前所有文件系统的总容量，使用量，剩余容量
+df -k
+du -b /home # 查看目前/HOME目录的容量(k)及子目录的容量(k)
+
+du # 命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
+du -h 文件/目录 # 查看文件占据磁盘空间大小,命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`命令会生成相关文件和有关目录的空间使用情况的报告。它很容易使用，也可以递归地运行，会遍历每个子目录并且返回每个文件的单个大小。`du -sh *`
+du -h --max-depth=1 /home  # 文件大小相加
+du -h --max-depth=1 /home/*
+du -sm * | sort -n //统计当前目录大小 并安大小 排序
+du -sk * | sort -n
+du -sk * | grep guojf //看一个人的大小
+
+# 分区
+sudo fdisk /dev/sdb # 硬盘进行分区
+m # 查看所有命令的菜单及帮助信息
+d # 删除不想要的分区
+n # 添加一个新的分区
+p # 设置一个主分区（e为扩展分区），再接下来设置起止扇区号（一个扇区512B，根据个人需要设置分区大小）
+t # 更改分区类型
+L # 可查看所有分区类型的编号，根据个人需求，输入对应的分区类型编号
+w # 保存退出
+
+sudo mkfs.ext4 /dev/sdb1 # 格式化成ext4文件系统 （输入sudo mkfs，按两次tab键，会出现多种文件系统，根据需求选择）
+
+lshw -C network # 网卡硬件详细信息
+ifconfig -a
+ip link show
+netstat -i
+
+dmidecode -t bios # 显示了 UEFI 或 BIOS 的日期和版
+
+arch| uname -m # 显示机器的处理器架构
+
+# 查看linux系统信息
+cat /proc/version # 说明正在运行的内核版本
+cat /etc/issue # 显示的是发行版本信息
+lsb_release -a
+uname -a # 显示电脑以及操作系统的相关信息
+uname -r # 显示正在使用的内核版本
+
+## 硬件
+dmidecode -q # 显示硬件系统部件 - (SMBIOS / DMI)
+hdparm -i /dev/hda # 罗列一个磁盘的架构特性
+hdparm -tT /dev/sda # 在磁盘上执行测试性读取操作
+cat /proc/cpuinfo # 显示CPU info的信息
+cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c # cpu型号
+at /proc/cpuinfo | grep physical | uniq -c # 物理cpu颗数
+cat /proc/interrupts # 显示中断
+cat /proc/meminfo # 内存使用
+cat /proc/swaps # 显示哪些swap被使用
+cat /proc/version # 显示内核的版本
+cat /proc/net/dev # 显示网络适配器及统计
+cat /proc/mounts # 显示已加载的文件系统
+lscpu
+lspci -tv # 罗列 PCI 设备
+lsusb -tv # 显示 USB 设备
+
+# Show info about disk sda
+hdparm -i /dev/sda
+
+# Perform a read speed test on disk sda
+hdparm -tT /dev/sda
+
+grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
+
+# Display processor related statistics
+mpstat 1
+
+# Display virtual memory statistics
+vmstat 1
+
+# Display I/O statistics
+iostat 1
+
+# Display the last 100 syslog messages  (Use /var/log/syslog for Debian based systems.)
+tail 100 /var/log/messages
+```
 
 ## 内核同步
 
-- 临界区(critical regions)就是访问和操作共享数据的代码段，多个内核任务并发访问同一个资源通常是不安全的；
-- 如果两个内核任务可能处于同一个临界区，就是一种错误现象；如果确实发生了这种情况，就称它为竞争状态；
-- 避免并发和防止竞争状态称为同步(synchronization)。
-- 死锁
+* 临界区(critical regions)就是访问和操作共享数据的代码段，多个内核任务并发访问同一个资源通常是不安全的；
+* 如果两个内核任务可能处于同一个临界区，就是一种错误现象；如果确实发生了这种情况，就称它为竞争状态；
+* 避免并发和防止竞争状态称为同步(synchronization)。
+* 死锁
   - 包括自死锁和ABBA死锁，
   - 产生死锁有四个原因：互斥使用、不可抢占、请求和保持，以及循环等待；
   - 避免死锁的方法有：破坏“不可剥夺”条件、破坏“请求和保持”条件、破坏“循环等待”条件。
-- 并发执行：“伪并发”和“真并发”
+* 并发执行：“伪并发”和“真并发”
   - 中断：它可能随时打断当前正在执行的代码；
   - 内核抢占：内核中的任务可能会被另一个任务抢占；
   - 睡眠及其与用户空间的同步：在内核执行的进程可能会睡眠，这就会唤醒调度程序，调度一个新的用户进程执行；
   - 对称多处理：两个或多个处理器可以同时执行代码。
-- 信号量：是一种睡眠锁，它是1968年由Dijkstra提出的，如果一个任务试图获得一个已被持有的信号量，信号量会将其推入等待队列，然后让其睡眠；当持有信号量的进程将信号量释放后，在等待队列中的一个任务将被唤醒，从而可以获得这个信号量；
+* 信号量：是一种睡眠锁，它是1968年由Dijkstra提出的，如果一个任务试图获得一个已被持有的信号量，信号量会将其推入等待队列，然后让其睡眠；当持有信号量的进程将信号量释放后，在等待队列中的一个任务将被唤醒，从而可以获得这个信号量；
   - 信号量支持两个原子操作P()和V()，前者叫做测试操作，后者叫做增加操作；后来的系统把这两种操作分别叫做down()和up()；
   - down()操作通过对信号量计数减1来请求获得一个信号量；up()操作用来释放信号量，该操作也被称作“提升”(upping)信号量，因为它会增加信号量的计数值。
 
-## 磁盘分区
-
-* 引导分区类型:磁盘上存储分区信息的方式，包含了分区从哪里开始的信息
-  - MBR（Master Boot Record）：存在于驱动器开始部分的一个特殊的启动扇区。这个扇区包含了已安装的操作系统的启动加载器和驱动器的逻辑分区信息
-    + 分为基本分区（primary partion）和扩展分区（extension partion）两种
-    + 主分区总数不能大于4个，其中最多只能有一个扩展分区
-    + 基本分区可以马上被挂载使用但不能再分区，扩展分区必须再进行二次分区后才能挂载。扩展分区下的二次分区被称之为逻辑分区，逻辑分区数量限制视磁盘类型而定
-    + MBR的主分区号为1-4，逻辑分区号为从5开始累加的数字
-    + 主引导程序（偏移地址0000H--0088H ），它负责从活动分区中装载，并运行系统引导程序。 出错信息数据区，偏移地址0089H--00E1H 为出错信息，00E2H--01BDH 全为0 字节。
-    + 分区表（DPT,Disk Partition Table ）含4 个分区项，偏移地址01BEH--01FDH, 每个分区表项长16 个字节，共64 字节为 分区项1 、分区项2 、分区项3 、分区项4
-    + 结束标志字，偏移地址01FE--01FF 的2 个字节值为结束标志 55AA
-  - GPT（GUID Partition Table）:驱动器上的每个分区都有一个全局唯一的标识符（globally unique identifier，GUID）没有主分区和逻辑分区之分，每个硬盘最多可以有128个分区
-    + 分为4个区域：EFI信息区(GPT头)、分区表、GPT分区、备份区域
-* `etc/fstab`: `UUID=b543f8f7-579c-45b5-96d6-31de6fa1a55e /home/lgd/disk1 ext4 defaults 1 2`
-  - 分区设备文件名或UUID
-  - 挂载点
-  - 文件系统名称
-  - 挂载参数，挂载权限
-  - 指定分区是否被dump备份，0代表不备份，1代表每天备份，2代表不定期备份。
-  - 指定分区是否被fsck检测，0代表不检测，其他数字代表检测的优先级，比如1的优先级比2高。根目录所在的分区的优先级为1，其他分区的优先级为大于或等于2
-* 主分区和扩展分区的数目之和不能大于四个
-* 标识一般使用/dev/hd[a-z]X或者/dev/sd[a-z]X来标识，其中[a-z]代表硬盘号，X代表硬盘内的分区号。
-* 整块硬盘分区的块号标识:Linux下用hda、hdb、sda、sdb 等来标识不同的硬盘;
-  - IDE接口硬盘：表示为/dev/hda1、/dev/hdb …；
-  - SCSI 接口的硬盘、SATA接口的硬盘表示为/dev/sda、/dev/sdb … …
-  - 硬盘内的分区：如果X的值是1到4,表示硬盘的主分区（包含扩展分区）；逻辑分区从是从5开始的，比如/dev/hda5肯定是逻辑分区了；
-* 主分区(Primary Partion)：马上被使用但不能再分区
-* 扩展分区(Extension Partion)：必须再进行分区后才能使用，也就是说它必须还要进行二次分区。
-  - 扩展分区只不过是逻辑分区的“容器”，实际上只有主分区和逻辑分区进行数据存储。
-  - 逻辑分区（(Logical Partion)）：由扩展分区建立起来的分区。逻辑分区没有数量上限制。
-* 用hda1、hda2、 hda5、hda6 来标识不同的分区。其中，字母a 代表第一块硬盘，b代表第二块硬盘，依次类推。而数字1 代表一块硬盘的第一个分区、2 代表第二个分区，依次类推。1 到4 对应的是主分区(Primary Partition)或扩展分区(Extension Partition)。从5开始，对应的都是硬盘的逻辑分区(Logical Partition)。一块硬盘即使只有一个主分区，逻辑分区也是从5开始编号的，这点应特别注意。
-
 ## 文件系统
 
-* 文件结构是文件存放在磁盘等存贮设备上的组织方法。主要体现在对文件和目录的组织上。
-* 磁盘分区和目录的关系如下：
+* 文件结构是文件存放在磁盘等存贮设备上的组织方法,主要体现在对文件和目录的组织上。
+* 磁盘分区和目录的关系如下
   - 任何一个分区都必须挂载到某个目录上。
   - 目录是逻辑上的区分。分区是物理上的区分。
   - 磁盘Linux分区都必须挂载到目录树中的某个具体的目录上才能进行读写操作。
@@ -531,34 +701,6 @@ sudo dd bs=4M if=/home/hcf/dev/iso/ubuntu-16.04-desktop-amd64.iso of=/dev/sdb4
 ![VFS子系统](../_static/VFS.png "VFS子系统")
 
 ```sh
-df -Th
-
-fdisk -l # 查看硬盘编号
-
-# 分区
-sudo fdisk /dev/sdb # 硬盘进行分区
-m # 查看所有命令的菜单及帮助信息
-d # 删除不想要的分区
-n # 添加一个新的分区
-p # 设置一个主分区（e为扩展分区），再接下来设置起止扇区号（一个扇区512B，根据个人需要设置分区大小）
-t # 更改分区类型
-L # 可查看所有分区类型的编号，根据个人需求，输入对应的分区类型编号
-w # 保存退出
-
-# 统计数据块使用情况
-df -T # 查看分区的文件系统
-df -h # Human-readable 显示目前所有文件系统的总容量，使用量，剩余容量
-df -k
-du -b /home # 查看目前/HOME目录的容量(k)及子目录的容量(k)
-
-du -h --max-depth=1 /home  # 文件大小相加
-du -h --max-depth=1 /home/*
-du -sm * | sort -n //统计当前目录大小 并安大小 排序
-du -sk * | sort -n
-du -sk * | grep guojf //看一个人的大小
-
-sudo mkfs.ext4 /dev/sdb1 # 格式化成ext4文件系统 （输入sudo mkfs，按两次tab键，会出现多种文件系统，根据需求选择）
-
 mkdir /media/cdrom  # 新建镜像文件挂载目录
 cd /usr/local/src  #进入系统镜像文件存放目录
 ls  # 列出目录文件，可以看到刚刚上传的系统镜像文件
@@ -571,7 +713,6 @@ sudo mount # 查看下主机已经挂载的文件系统，每一行代表一个�
 # 挂载系统镜像 mount -t 文件系统 设备描述文件 挂载点（已经存在空目录）
 mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom
 cd  /media/cdrom  # 进入挂载目录，使用ls命令可以看到已经有文件存在了
-
 
 # /etc/fstab   # 添加以下代码。实现开机自动挂载
 /dev/hda2 / ext3 defaults 1 1
@@ -597,7 +738,6 @@ mount /dev/sda1 /mnt/usbdisk 挂载一个usb 捷盘或闪存设备
 mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share 挂载一个windows网络共享
 mkdir /media/cdrom  #新建镜像文件挂载目录
 cd /usr/local/src  #进入系统镜像文件存放目录
-ls  #列出目录文件，可以看到刚刚上传的系统镜像文件
 mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/cdrom #挂载光盘
 cd  /media/cdrom  #进入挂载目录，使用ls命令可以看到已经有文件存在
 
@@ -656,9 +796,9 @@ umount  /media/cdrom  # 卸载系统镜像 退出挂载目录，才能卸载
 * ${变量名//旧的字串/新的字串}: 将符合旧字串的全部字串替换为新的字串
 
 ```sh
-declare tmp // 使用 declare 命令创建一个变量名为 tmp 的变量
-tmp=God // 使用 = 号赋值运算符，将变量 tmp 赋值为 God
-echo $tmp // 读取变量的值：使用 echo 命令和 $ 符号（$ 符号用于表示引用一个变量的值）
+declare tmp # 使用 declare 命令创建一个变量名为 tmp 的变量
+tmp=God # 使用 = 号赋值运算符，将变量 tmp 赋值为 God
+echo $tmp # 读取变量的值：使用 echo 命令和 $ 符号（$ 符号用于表示引用一个变量的值）
 set:显示当前 Shell 所有变量，包括其内建环境变量（与 Shell 外观等相关），用户自定义变量及导出的环境变量。
 env:显示与当前用户相关的环境变量，还可以让命令在指定环境中运行
 export：显示从 Shell 中导出成环境变量的变量
@@ -769,73 +909,9 @@ shutdown -r now  # 关机/重启 -h:关机 -r:重启
 halt｜reboot｜poweroff
 ```
 
-### 设备驱动
-
-* 设备分为“块设备”和“字符设备”
-  - Linux将设备看成文件，具有三方面的含义
-    + 每个设备都对应一个文件名，在内核中也就对应一个索引节点
-    + 对文件操作的系统调用大都适用于设备文件；
-    + 从应用程序的角度看，设备文件的逻辑空间是一个线性空间；
-    + 对于同一个具体的设备而言，文件操作和设备驱动是同一个事物的不同层次，概念上可以将一个系统划分为应用、文件系统和设备驱动三个层次；
-  - Linux将设备分为两大类，
-    + 一类是像磁盘那样的以块或扇区为单位、成块进行输入/输出的设备，称为块设备；
-    + 另一类是像键盘那样以字符(字节)为单位，逐个字符进行输入/输出的设备，称为字符设备；文件系统通常都建立在块设备上。
-* 设备驱动程序：处理和管理硬件控制器的软件就是设备驱动程序
-* I/O端口包括控制寄存器、状态寄存器和数据寄存器三大类
-* 根据访问外设寄存器的不同方式，将CPU分为两大类：一类是“内存映射”(memory-mapped)方式，另一类是“I/O映射”(I/O- mapped)方式。
-* LSB(Linux Standard Base)
-
-```sh
-arch| uname -m # 显示机器的处理器架构
-
-# 查看linux系统信息
-cat /proc/version # 说明正在运行的内核版本
-cat /etc/issue # 显示的是发行版本信息
-lsb_release -a
-uname -a # 显示电脑以及操作系统的相关信息
-uname -r # 显示正在使用的内核版本
-
-## 硬件
-dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI)
-hdparm -i /dev/hda 罗列一个磁盘的架构特性
-hdparm -tT /dev/sda 在磁盘上执行测试性读取操作
-cat /proc/cpuinfo # 显示CPU info的信息
-cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c # cpu型号
-at /proc/cpuinfo | grep physical | uniq -c # 物理cpu颗数
-cat /proc/interrupts 显示中断
-cat /proc/meminfo # 内存使用
-cat /proc/swaps 显示哪些swap被使用
-cat /proc/version 显示内核的版本
-cat /proc/net/dev 显示网络适配器及统计
-cat /proc/mounts 显示已加载的文件系统
-lscpu
-lspci -tv # 罗列 PCI 设备
-lsusb -tv # 显示 USB 设备
-
-# Show info about disk sda
-hdparm -i /dev/sda
-
-# Perform a read speed test on disk sda
-hdparm -tT /dev/sda
-
-grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
-
-# Display processor related statistics
-mpstat 1
-
-# Display virtual memory statistics
-vmstat 1
-
-# Display I/O statistics
-iostat 1
-
-# Display the last 100 syslog messages  (Use /var/log/syslog for Debian based systems.)
-tail 100 /var/log/messages
-```
-
 ## 软件
 
-* 包管理：apt yum
+* 包管理：apt|yum
   - 原理
     + 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
     + 根据这些信息在相关的服务器上下载软件安装
@@ -907,6 +983,17 @@ sudo apt-get clean
 * /usr/bin/
 * /bin/
 * /sbin/
+* ssh:连接到一个远程主机，然后登录进入其 Unix shell。通过本地机器的终端在服务器上提交指令
+* grep:用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
+* alias 这个 bash 内置的命令来为它们创建一个短别名:alias server="python -m SimpleHTTPServer 9000"
+* Curl 是一个命令行工具，用来通过 HTTP（s），FTP 等其它几十种你可能尚未听说过的协议来发起网络请求
+* Tree 用可视化的效果向你展示一个目录下的文件 tree -P '_.min._'
+* Tmux 是一个终端复用器,它是一个可以将多个终端连接到单个终端会话的工具。可以在一个终端中进行程序之间的切换，添加分屏窗格，还有就是将多个终端连接到同一个会话，使它们保持同步。 当你在远程服务器上工作时，Tmux 特别有用，因为它可以让你创建新的选项卡，然后在选项卡之间切换
+* du 命令会生成相关文件和有关目录的空间使用情况的报告。容易使用，也可以递归地运行，会遍历每个子目录并且返回每个文件的单个大小。`du -sh *`
+* tar:用来处理文件压缩的默认 Unix 工具
+* md5sum:它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
+* Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程。
+* ln:unix 里面的链接同 Windows 中的快捷方式类似，允许你快速地访问到一个特定的文件。`sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
 
 ```sh
 date # 获取当前时间
@@ -962,6 +1049,12 @@ diff -Naur sources-orig/ sources-fixed/ >myfixes.patch # 参数 -N 代表如果�
 
 ### Network
 
+* 类型
+  - lo  回环接口
+  - eth0 或 enp* 以太网接口
+  - wlan0 无线网接口
+  - ppp0  点对点协议接口（由拨号调制解调器、PPTP VPN 连接或者 USB 调制解调器使用）
+  - vboxnet0 或 vmnet* 虚拟机网络接口
 * 网络分内网与外网
 * 端口
   - 使用
@@ -1046,8 +1139,6 @@ nslookup google.com
 traceroute google.com
 
 # networking tool which displays the TCP/IP packets transmitted and received by your system
-
-tcpdump
 # tcpdump -c 15
 # tcpdump --help
 
@@ -1122,6 +1213,9 @@ netstat -anp | grep LISTEN # 通过进程id查看占用的端口
 netstat -atnp | grep ESTA # 查询建立连接状态
 sudo netstat -anp | grep 80 # 通过进程id查看占用的端口
 watch -d -n0 "netstat -atnp | grep ESTA" # watch 命令监视 active 状态的连接
+
+ip route | column -t # 显示默认网关和路由表：
+netstat -r
 
 # native service
 sudo systemctl enable|disable nginx | httpd.service # enable 设置开机启动 disable 使服务不自动启动
@@ -1262,20 +1356,81 @@ Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能
 * FHS包含两层规范：
   - / 下面的各个目录应该要放什么文件数据，例如 /etc 应该放置设置文件，/bin 与 /sbin 则应该放置可执行文件等等。
   - 针对 /usr 及 /var 这两个目录的子目录来定义。例如 /var/log 放置系统登录文件，/usr/share 放置共享数据等等。
-* 文件类型
+* 类型
   * `-` 普通文件：一般是用一些相关的应用程序创建的（如图像工具、文档工具、归档工具... 或 cp工具等),这类文件的删除方式是用rm 命令,而创建使用touch命令,用符号-表示；
   * `d` 目录：目录在Linux是一个比较特殊的文件，用字符d表示，删除用rm 或rmdir命令；
-  * 块设备文件：存在于/dev目录下，如硬盘，光驱等设备，用字符d表示;
+  * 块设备文件：存在于/dev目录下，如硬盘，光驱等设备，用字符d表示
   * 设备文件：（ /dev 目录下有各种设备文件，大都跟具体的硬件设备相关），如猫的串口设备，用字符c表示；
   * socket文件;用字符s表示，比如启动MySQL服务器时，产生的mysql.sock的文件;
   * pipe 管道文件：可以实现两个程序（可以从不同机器上telnet）实时交互，用字符p表示；
-  * 链接文件:软链接等同于 Windows 上的快捷方式；用字符l表示； 软硬链接文件的共同点和区别：无论是修改软链接，硬链接生成的文件还是直接修改源文件，相应的文件都会改变，但是如果删除了源文件，硬链接生成的文件依旧存在而软链接生成的文件就不再有效了。
+  * 链接文件:软链接等同于 Windows 上的快捷方式；用字符l表示； 软硬链接文件的共同点和区别：无论是修改软链接，硬链接生成的文件还是直接修改源文件，相应的文件都会改变，但是如果删除了源文件，硬链接生成的文件依旧存在而软链接生成的文件就不再有效了
+  * 备份会以在文件名后附加 ~ 字符的文件名保存
+* 查看
+  - ls
+    + 参数
+      * -a:列出所有文件，包括隐藏文件
+      * -A 所有隐藏文件（. 和 .. 除外）
+      * -l:列出文件及其详细信息
+      * -h｜--human:将文件大小转换为更加人性化的表示方法
+      * -d:显示目录本身
+      * -o 选项只显示所有者的列
+      * -g 选项只显示所属组的列
+      * -m:以逗号分隔文件列表
+      * -1:每行一个文件
+      * -X 按文件扩展名而不是文件名对条目进行排序
+      * -R 递归地列出目录
+      * --time-style
+        - full-iso：ISO 完整格式（1970-01-01 21:12:00）
+        - long-iso：ISO 长格式（1970-01-01 21:12）
+        - iso：iso 格式（01-01 21:12）
+        - locale：本地化格式（使用你的区域设置）
+        - posix-STYLE：POSIX 风格（用区域设置定义替换 STYLE）
+      * -t 根据文件的最近更改的时间（最新的文件最先列出）进行排序
+    + 匹佩符
+      * `*`：匹配 0 或多个字符，如`ls *.html`将匹配所有以html结尾的文件,`ls b*.png`将匹配所有以b开头，png结尾的文件；
+      * `?`：匹配任意一个字符,如`ls abc?.png` 可匹配abcd.png/abce.png
+      * `[list]` # 匹配 list 中的任意单一字符
+      * `[!list]`:匹配 除list 中的任意单一字符以外的字符
+      * `[c1-c2]`:匹配 c1-c2 中的任意单一字符 如：[0-9] [a-z]
+      * `{string1,string2,...}`:匹配 string1 或 string2 (或更多)其一字符串，如 `{css,html}`， `ls app.{html.css}`将匹配app.css 和app.html;
+      * `{c1..c2}`:匹配 c1-c2 中全部字符 如{1..10}
+      * 通配符大小写敏感
+    + 结果
+      * 斜杠（/）表示目录（或“文件夹”）。
+      * 星号（*）表示可执行文件。这包括二进制文件（编译代码）以及脚本（具有可执行权限的文本文件）。
+      * 符号（@）表示符号链接（或“别名”）。
+      * 等号（=）表示套接字。
+      * 在 BSD 上，百分号（%）表示涂改whiteout（某些文件系统上的文件删除方法）。
+      * 在 GNU 上，尖括号（>）表示门door（Illumos 和 Solaris上的进程间通信）。
+      * 竖线（|）表示 FIFO 管道。    这个选项的一个更简单的版本是 -p，它只区分文件和目录。
+  - cat:concatenate and write file(s) to your screen
+    + -b, --number-nonblank    number nonempty output lines, overrides -n
+    + -n, --number             number all output lines
+    + -s option saves screen space
+  - less [参数] 文件 # 上下滚动查看内容
+    + -c 从顶部（从上到下）刷新屏幕，并显示文件内容。而不是通过底部滚动完成刷新；
+    + -f 强制打开文件，二进制文件显示时，不提示警告；
+    + -i 搜索时忽略大小写；除非搜索串中包含大写字母；
+    + -I 搜索时忽略大小写，除非搜索串中包含小写字母；
+    + -m 显示读取文件的百分比；
+    + -M 显法读取文件的百分比、行号及总行数；
+    + -N 在每行前输出行号；
+    + -p pattern 搜索pattern；比如在/etc/profile搜索单词MAIL，就用 less -p MAIL /etc/profile
+    + -s 把连续多个空白行作为一个空白行显示；
+    + -Q 在终端下不响铃
+    + wenbenshou
+  - `more <filename>`
+    + 空格键 向下翻页
+    + q 退出
+    + / 字符并在其后加上想要查找的文字
+    + `ls | more`
+    + `grep ‘productivity’ core.md Dict.md lctt2014.md lctt2016.md lctt2018.md README.md | more`
 * 虚拟文件系统
   * 将各种不同文件系统的操作和管理纳入到一个统一的框架中，使得用户程序可以通过同一个文件系统界面，也就是同一组系统调用，对各种不同的文件系统以及文件进行操作；用户程序可以不关心不同文件系统的实现细节，而使用系统提供的统一、抽象、虚拟的文件系统界面；这种统一的框架就是所谓的虚拟文件系统转换，一般简称虚拟文件系统(VFS)；
   * VFS的对象类型包括：超级块(superblock)对象、索引节点(inode)对象、目录项(dentry)对象和文件(file)对象；
   * 虚拟文件系统界面是虚拟文件系统所提供的抽象界面，它主要由一组标准的、抽象的操作构成，这些函数(操作)以系统调用的形式供用户调用。
-* ln 主要用于在两个文件中创建链接，链接又分为 Hard Links (硬链接)和 Symbolic Links (符号链接或软链接)，其中默认为创建硬链接，使用 -s 参数指定创建软链接
-  * 硬链接（Hard Link）：硬链接是使用同一个索引节点（inode号）的链接， 即可以允许多个文件名指向同一个文件索引节点
+* ln 主要用于在两个文件中创建链接
+  * 硬链接（Hard Link）：默认 硬链接是使用同一个索引节点（inode号）的链接， 即可以允许多个文件名指向同一个文件索引节点
     - 原文件名和连接文件名都指向相同的物理地址
     - 目录不能有硬连接
     - 修改其中一个，与其连接的文件同时被修改
@@ -1283,7 +1438,7 @@ Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能
     - 删除一个硬链接，不会影响该索引节点的源文件以及其下的多个硬链接,可以防止不必要的误删除
     - 增加一个文件的链接数，只要该文件的链接数不为 0 ，该文件就不会被物理删除，所以删除一个具有多个硬链接数的文件，必须删除所有它的硬链接才可删除。
     - 由于删除文件要在同一个索引节点属于唯一的连接时才能成功，因此可以防止不必要的误删除
-  * 软连接（符号链接，Symbolic Link）：符号链接是以路径的形式创建的链接，类似于windows的快捷方式链接，符号链接允许创建多个文件名链接到同一个源文件，删除源文件，其下的所有软连接将不可用。（软连接支持目录，支持跨分区、跨文件系统）
+  * 软连接（符号链接，Symbolic Link）：符号链接是以路径的形式创建的链接，类似于windows的快捷方式链接，符号链接允许创建多个文件名链接到同一个源文件，删除源文件，其下的所有软连接将不可用。（软连接支持目录，支持跨分区、跨文件系统）使用 -s 参数
   * 区别
     - 硬链接原文件和新文件的inode编号一致。而软链接不一样。
     - 对原文件删除，会导致软链接不可用，而硬链接不受影响。
@@ -1293,13 +1448,13 @@ Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能
 * dd：默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
 * `dd if=/dev/stdin of=test bs=10 count=1 conv=ucase` 将输出的英文字符转换为大写再写入文件
 * sudo mount 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
-* 文件权限:一个目录同时具有读权限和执行权限才可以打开并查看内部文件，而一个目录要有写权限才允许在其中创建其它文件，这是因为目录文件实际保存着该目录里面的文件的列表等信息。
+* 权限:一个目录同时具有读权限和执行权限才可以打开并查看内部文件，而一个目录要有写权限才允许在其中创建其它文件，这是因为目录文件实际保存着该目录里面的文件的列表等信息。
   - 读权限：可以使用 `cat <file name>` 之类的命令来读取某个文件的内容; 读权限4：读取文件内容|查询目录下文件名 如：cat、more、head、tail ls
   - 写权限: 写权限2，编辑、新增、修改文件内容|修改目录结构的权限
   - 执行权限:通常指可以运行的二进制程序文件或者脚本文件(Linux 上不是通过文件后缀名来区分文件的类型);
   - 所有者权限，所属用户组权限，是指所在的用户组中的所有其它用户对于该文件的权限
   - chmod g+s: This means that all new files and subdirectories created within the current directory inherit the group ID of the directory, rather than the primary group ID of the user who created the file.  This will also be passed on to new subdirectories created in the current directory.
-* 文件压缩
+* 压缩
   - -r:表示递归打包包含子目录的全部内容
   - -q:表示为安静模式，即不向屏幕输出信息
   - -o:表示输出文件，需在其后紧跟打包输出文件名
@@ -1314,16 +1469,11 @@ Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能
   - -j 调用 bzip2 进行解压缩
   - -z 调用 gzip 进行解压缩
   - -t 列出归档中的文件
+* 一个块是 512 个字节大小，不足或正好 512 个字节将占据一个块
 
 ```sh
-du # 命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
-du -h 文件/目录 # 查看文件占据磁盘空间大小,命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`命令会生成相关文件和有关目录的空间使用情况的报告。它很容易使用，也可以递归地运行，会遍历每个子目录并且返回每个文件的单个大小。`du -sh *`
-
 ls -F # 查看目录中的文件
-# -a:列出所有文件，包括隐藏文件
-# -l:列出文件及其详细信息
-# -h:文件大小
-# -d:显示目录本身
+alias ls='ls -A -F -B --human --color'
 ls -a|l|h|d directory # list 列出某文件夹下的文件，添加参数可实现更细致的功能
 
 # -rw-------    1   root    root    1190    08-10 23:37     anaconda-ks.cfg 长格式实例： 权限位 引用计数 属主、组 大小 最后修改时间
@@ -1367,7 +1517,7 @@ mv  dir1/dir2  ./newdir           # dir2移动到 当前 目录下,并给改名�
 rmdir # remove empty directories 删除目录
 rm -rf directory # r递归删除，f参数表示强制
 rm -rf log/* # 方法二：删除logs文件夹下的所有文件，而不删除文件夹本身
-rm  filename      # 普通文件删除
+rm filename      # 普通文件删除
 rm dir # 删除目录
 rm -r dir         # 删除目录[无视层次]需要-r参数
 rm -rf  文件      # recursive force 递归强制删除文件,force 避免删除隐藏文件的提示
@@ -1415,22 +1565,9 @@ head  -n 20 file # 显示文件头几行(默认显示10行)
 tail -n 1 /etc/passwd # 查看文件的尾几行（默认10行）
 tail -f file
 
-
 # Enter 键向下滚动一行 Space 键向上滚动一屏 h 显示帮助 q 退出
 more +100 /etc/locale.gen       # 从 100 行开始显示
 more file # 分屏显示文件内容,终端底部显示当前阅读的进度 逐行显示内容
-
-less [参数] 文件 # 上下滚动查看内容
--c 从顶部（从上到下）刷新屏幕，并显示文件内容。而不是通过底部滚动完成刷新；
--f 强制打开文件，二进制文件显示时，不提示警告；
--i 搜索时忽略大小写；除非搜索串中包含大写字母；
--I 搜索时忽略大小写，除非搜索串中包含小写字母；
--m 显示读取文件的百分比；
--M 显法读取文件的百分比、行号及总行数；
--N 在每行前输出行号；
--p pattern 搜索pattern；比如在/etc/profile搜索单词MAIL，就用 less -p MAIL /etc/profile
--s 把连续多个空白行作为一个空白行显示；
--Q 在终端下不响铃；
 
 # 动作
 回车键 向下移动一行；
@@ -1467,14 +1604,6 @@ echo "127.0.0.1 foobar" | sudo tee -a /etc/hosts
 tree -d # Lists contents of a directory in tree-like format
 
 sudo mkfs.ext4 virtual.img # 格式化virtual.img为ext4格式
-
-find . -type f -name "*.css"  # List all CSS files (including subdirectories)
-find . -type f \( -name "*.css" -or -name "*.html" \) # List all CSS or HTML files:
-find / -user user1 搜索属于用户 'user1' 的文件和目录
-find /usr/bin -type f -atime +100 搜索在过去100天内未被使用过的执行文件
-find /usr/bin -type f -mtime -10 搜索在10天内被创建或者修改过的文件
-find / -name \*.rpm -exec chmod 755 '{}' \; 搜索以 '.rpm' 结尾的文件并定义其权限
-find / -xdev -name \*.rpm 搜索以 '.rpm' 结尾的文件，忽略光驱、捷盘等可移动设备
 
 cat $FILE | pbcopy # 将内容复制到粘贴板
 
@@ -1524,13 +1653,72 @@ type composer
 locate /etc/sh(查找 /etc 下所有以 sh 开头的文件)  # 通过/var/lib/mlocate/mlocate.db数据库查找，不过这个数据库也不是实时更新的，系统会使用定时任务每天自动执行 updatedb 命令更新一次，所以有时候你刚添加的文件，它可能会找不到
 locate /usr/share/\*.jpg # 注意要添加 * 号前面的反斜杠转义，否则会无法找到。
 which man # 使用 which 来确定是否安装了某个指定的软件，因为它只从 PATH 环境变量指定的路径中去搜索命令
+```
 
-sudo find /etc/ -name interfaces/ # 格式find [path] [option] [action];  不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索。
-find  ./  -size  +50c # 在当前目录下查找大小[大于]50个字节的文件
-find  ./  -size  -50c # 在当前目录下查找大小[小于]50个字节的文件
-find / -name passwd -mindepth 3 -maxdepth 4 # 在3到4个层次的目录里边定位passwd文件
+## 文件查找
+
+* `find [path] [option] [action]`: 不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索
+* 第一个参数：搜索的起点
+* 可选参数
+  - -name：按名称搜索
+  - 在末尾添加`-ls`会显示文件相关的详细信息
+  - `-size 189b`:找到 189 个块大小的文件，而不是 189 个字节
+    + 189c（字符）
+    + 200w：字
+  - -inum: 通过用于维护文件元数据（即除文件内容和文件名之外的所有内容）的索引节点来查找文件
+  - -group:用户组拥有的文件
+  - -nouser: 查找不属于当前系统上的任何用户的文件
+  - -mtime:查找在某个参考时间范围内状态（如权限）发生更改的文件
+  - -atime:查找在访问过的本地文件
+  - -newer:查找比其他文件更新的文件
+  - 过文件类型找到一个文件
+    + b      块特殊文件（缓冲的）
+    + c      字符特殊文件（无缓冲的）
+    + d      目录
+    + p      命名管道（FIFO）
+    + f      常规文件
+    + l      符号链接
+    + s      套接字
+  - -mindepth 和 -maxdepth 选项控制在文件系统中搜索的深度（从当前位置或起始点开始）
+  - -empty:寻找空文件，但不进入目录及其子目录
+  - -perm:查找具有特定权限集的文件
+  - -exec:执行命令
+    + {} 代表根据搜索条件找到的每个文件的名称
+    + -exec 替换为 -ok：会在删除任何文件之前要求确认
+* 通配符 `*` ，请将搜索字符串放到单引号或双引号内，以避免通配符被 shell 所解释
+
+```sh
 find  /  -name  passwd     # "递归遍历"系统全部目录查找名字等于passwd的文件
-find  目录 -name  "an*"     # 模糊查找文件名字以an开始的
+find . -type f -name "*.css"  # List all CSS files (including subdirectories)
+find . -type f \( -name "*.css" -or -name "*.html" \) # List all CSS or HTML files
+find . -name  "an*"  # 模糊查找文件名字以an开始
+
+find -size +1G -ls 2>/dev/null
+find  ./  -size  +50c # 在当前目录下查找大小[大于]50个字节的文件
+
+find -inum 919674 -ls 2>/dev/null
+
+find / -user user1 # 搜索属于用户 'user1' 的文件和目录
+find /tmp -group admins -ls
+find /tmp -nouser -ls
+
+find /usr/bin -type f -atime +100 # 搜索在过去100天内未被使用过的执行文件
+find /usr/bin -type f -mtime -10 # 搜索在10天内被创建或者修改过的文件
+find . -newer dig1 -ls
+
+find . -type l -ls
+
+find . -maxdepth 2 -empty -type f -ls
+
+find -perm 777 -type f -ls
+
+find / -name \*.rpm -exec chmod 755 '{}' \; # 搜索以 '.rpm' 结尾的文件并定义其权限 
+find . -name runme -exec rm {} \; # 定位并删除文件
+find . -name runme -ok rm -rf {} \;
+
+find / -xdev -name \*.rpm # 搜索以 '.rpm' # 结尾的文件，忽略光驱、捷盘等可移动设备
+
+find / -name passwd -mindepth 3 -maxdepth 4 # 在3到4个层次的目录里边定位passwd文件
 ```
 
 ### 用户管理
@@ -1540,82 +1728,89 @@ find  目录 -name  "an*"     # 模糊查找文件名字以an开始的
 * 创建用户时设置家目录，该目录会自动创建
 * 修改用户家目录时，该目录不会自动创建(需要手动创建)
 * 用户owner
-  - 用户帐号和其相关信息 (密码除外) 均是存放在 /etc/passwd 配置文件中
-  - 由于所有用户对 passwd 文件均有读取的权限，因此密码信息并未保存在该文件中，而是采用 MD5 加密算法加密 保存在了 /etc/shadow 的配置文件中，只有 root 用户可以读取
+  - 用户帐号和其相关信息 (密码除外) 是存放在 /etc/passwd  `用户名:未使用:UID:GID:备注:家目录:shell`
+  - 由于所有用户对 passwd 文件均有读取的权限，因此密码信息并未保存在该文件中，而是采用 MD5 加密算法加密 保存在了 /etc/shadow 中，只有 root 用户可以读取 `用户名:加密密码:上次修改时间:最短使用天数:最长使用天数间:修改前警示天数:过期后宽限时间:未使用`
     + passwd 文件中，一行定义一个用户帐号，每行均由多个不同的字段构成，各字段值间用 ":” 分隔，每个字段均代表该帐号某方面的信息
     + 系统自动创建了 linux 进程或部分服务程序正常工作所需要使用的账户，账户的最后一个字段的值一般为 /sbin/nologin，表示该帐号不能用来登录系统`account:password(用 x 占位):accountId:groupId:accountName:homeDir:shell`
-    + 让某用户没有 telnet 权限，即不允许该用户利用 telnet 远程登录和访问 linux 操作系统，则设置该用户所使用的 shell 为 / bin/true 即可。
+    + 让某用户没有 telnet 权限，即不允许该用户利用 telnet 远程登录和访问 linux 操作系统，则设置该用户所使用的 shell 为 / bin/true 即可
     + 让用户没有 telnet 和 ftp 登录权限，则可设置该用户的 shell 为 / bin/false
     + 每行定义和保存一个账户的相关信息。第一个字段为用户帐户名，第二个字段为账户的密码
     + 设置所有用户账户密码过期的时间，则可通过修改 / etc/login.defs 配置文件中的 PASS_MAX_DAYS 配置项的值来实现，其默认值为 99999，代表用户账户密码永不过期。其中 PASS_MIN_LEN 配置项用于指定账户密码的最小长度，默认为 5 个字符。
-  - 新建用户如果不指定用户组的话，默认会自动创建一个与用户名相同的用户组
-  - 创建用户账户时，系统会自动创建该用户对应的主目录，该目录默认放在 / home 目录下，若要改变位置，可以利用 - d 参数指定；对于用户登录时使用的 shell，默认为 / bin/bash，若要更改，则使用 - s 参数指定
+  - 新建用户 `useradd [option] username`
+    + 不指定用户组的话，默认会自动创建一个与用户名相同的用户组
+    + 系统会自动创建该用户对应的主目录，该目录默认放在 / home 目录下，若要改变位置，可以利用 -d 参数指定；
+    + 对于用户登录时使用的 shell，默认为 / bin/bash，若要更改，则使用 - s 参数指定
+    + 参数
+      * -c 注释      用户设置对账户的注释说明文字
+      * -b 设置另一个可以创建家目录的基础目录,指定 /home2 而不是 /home
+      * -d 主目录    指定用来取代默认的 / home/username 的主目录
+      * -k 会在创建新用户时，复制 /etc/skel 目录下的所有文件到用户的家目录中
+      * -m          若主目录不存在，则创建它。-r 与 - m 相结合，可为系统账户创建主目录
+      * -e YYYY-MM-DD 的格式指定一个用户的过期时间
+      * -M          不创建主目录
+      * -e date     指定账户过期的日期。日期格式为 MM/DD/YY
+      * -f days     帐号过期几日后永久停权。若指定为 0，则立即被停权，若为 -1，则关闭此功能
+      * -g 用户组     指定将用户加入到哪个用户组，该用户组必须存在
+      * -G 用户组列表 指定用户同时加入的用户组列表，各组用逗分隔
+      * -n          不为用户创建私有用户组
+      * -s shell    指定用户登录时使用的 shell，默认为 / bin/bash
+      * -r          创建一个用户 ID 小于 500 的系统账户，默认不创建对应的主目录
+      * -u 用户 ID    手动指定新用户的 ID 值，该值必须唯一，且大于 499
+      * -p password 为新建用户指定登录密码。此处的 password 是对应登录密码经 MD5 加密后所得到的密码值，不实真实密码原文，因此在实际应用中，该参数选项使用较少，通常单独使用 passwd 命令来为用户设置登录密码。
   - 锁定用户：通过在密码文件 shadow 的密码字段前加 “！” 来标识该用户被锁定
   - 除了用户账户可被锁定外，账户密码也可被锁定，任何一方被锁定后，都将无法登录系统。只有 root 用户才有权执行该命令
+  - LDAP
 * 用户组group
-  - 用户组帐号信息保存在 /etc/group 配置文件中，任何用户均可以读取。用户组的真实密码保存在 /etc/gshadow 配置文件中
+  - 用户组帐号信息保存在 /etc/group 配置文件中，任何用户均可以读取。用户组的真实密码保存在 /etc/gshadow 配置文件中 `组名:未使用:GID:成员列表`
   - /etc/group：第一个字段代表用户组的名称，第二个字段为 x，第三个为用户组的 ID 号，第四个为该用户组的用户成员列表，各用户名间用逗号分隔
   - 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限
   - others
   - nobody:nogroup
 * gid
+* [sudo](https://www.sudo.ws/): %wheel ALL=(ALL) ALL
+  - 第一个参数（%wheel）定义组的成员。 wheel 组的成员可以以所有主机上的所有用户身份运行所有应用程序
+  - 第二个参数（ALL）定义组成员可以在其上运行命令的主机。
+  - 第三个参数（(ALL)）定义了可以执行命令的用户名。
+  - 最后一个参数（ALL）定义可以运行的应用程序。
+* 系统管理员向其他用户发送消息 
+  - `wall file`,通过更新文件执行
+  - `write username`:交互实时执行
+  - `talk username`
 
 ```sh
-su <user> # 切换到用户user,执行时需要输入目标用户的密码；
-su - <user> # 切换用户，同时环境变量也会跟着改变成目标用户的环境变量。
-su -l <lilei> # </lilei>切换登录用户;
-sudo adduser <lilei>  # </lilei>新建一个叫做lilei的用户，添加用户到系统，同时也会默认为新用户创建 home目录：
-sudo <useradd>  # </useradd>只创建用户，创建完了需要用 passwd lilei 去设置新用户的密码;
-groups <zhangwang>  # </zhangwang>查看用户属于那些组（groups）   // 每
-cat /etc/group | sort 命令查看某组包含那些成员  # /etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
-sudo usermod -G sudo <student>  # </student>不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，我们可以使用usermod命令把它加入sudo组用以具备相应的权限。
-usermod -a -G sudo username
-sudo deluser student --remove-home：删除用户及用户相关文件；
-
 who # 查看谁在线
 last # 查看最近的登陆历史记录
 whoami # 只列出用户名 用于查询当前用户的名称
 who mom likes/who am i # 列出用户名，所使用终端的编号和开启时间
-# Show who is logged in and what they are doing.
-w
+w # Show who is logged in and what they are doing.
 finger # 列出当前用户的详细信息，需使用apt-get提前安装
 
 su <user> # 切换到用户user,执行时需要输入目标用户的密码
-su - <user> # 切换用户，同时环境变量也会跟着改变成目标用户的环境变量。
+su - <user> # 切换用户，同时环境变量也会跟着改变成目标用户的环境变量
 su -l lilei # 切换登录用户
-sudo adduser lilei # 新建一个叫做lilei的用户，添加用户到系统，同时也会默认为新用户创建 home目录
 su -
 su - root
-su henry
 
-useradd [option] username
-#  option
--c 注释      用户设置对账户的注释说明文字
--d 主目录    指定用来取代默认的 / home/username 的主目录
--m          若主目录不存在，则创建它。-r 与 - m 相结合，可为系统账户创建主目录
--M          不创建主目录
--e date     指定账户过期的日期。日期格式为 MM/DD/YY
--f days     帐号过期几日后永久停权。若指定为 -，则立即被停权，若为 - 1，则关闭此功能
--g 用户组     指定将用户加入到哪个用户组，该用户组必须存在
--G 用户组列表 指定用户同时加入的用户组列表，各组用逗分隔
--n          不为用户创建私有用户组
--s shell    指定用户登录时使用的 shell，默认为 / bin/bash
--r          创建一个用户 ID 小于 500 的系统账户，默认不创建对应的主目录
--u 用户 ID    手动指定新用户的 ID 值，该值必须唯一，且大于 499
--p password 为新建用户指定登录密码。此处的 password 是对应登录密码经 MD5 加密后所得到的密码值，不实真实密码原文，因此在实际应用中，该参数选项使用较少，通常单独使用 passwd 命令来为用户设置登录密码。
+useradd  username      # 创建用户会同时创建同名组
+sudo useradd -u 1020 -c "Perry Example" \
+-G tgroup -b /home2 \
+-s /usr/bin/zsh \
+-e 20201201 -f 5 perry
 
-sudo useradd # 只创建用户，创建完了需要用 passwd lilei 去设置新用户的密码
-useradd -m -g users -G audio -s /usr/bin/bash newuser ### -m 创建 home 目录， -g 所属的主组， -G 指定该用户在哪些附加组， -s 设定默认的 shell ，newuser 为新的用户名
+getent passwd perry; getent group perry; getent shadow perry; id perry
+
+useradd -m -g users -G tgroup,fgroup,libvirt milly -c "Bailey is cool" -s /usr/bin/bash newuser ### -m 创建 home 目录， -g 所属的主组， -G 指定该用户在哪些附加组， -s 设定默认的 shell ，newuser 为新的用户名
+useradd -g 组编号 -u 用户编号 -d 家目录 username # 创建用户同时，指定组别、用户编号、家目录
 useradd -d /var/vodup -s /sbin/nologin vodup
-useradd -g babyfish nisj
 id nisj # uid=502(nisj) gid=500(babyfish) groups=500(babyfish) id 命令用于显示当前用户的 uid，gid 和所属的用户组的列表
 tail -1 /etc/passwd # nisj:x:502:500::/home/nisj:/bin/bash
-useradd  username      # 创建用户会同时创建同名组
-useradd  -g  组编号   username # 创建用户的同时设置组别
-useradd  -g 组编号 -u 用户编号 -d 家目录 username # 创建用户同时，指定组别、用户编号、家目录
+sudo adduser lilei # 新建一个叫做lilei的用户，添加用户到系统，同时也会默认为新用户创建 home目录
+
+getent passwd sonny timmy
+getent group sonny timmy
 
 usermod  -g gid  username     # 修改组别是常见操作
-usermod  -g gid -u uid -d 家目录  -l  newname   username # 修改组别、用户编号、家目录、名字
+usermod  -g gid -u uid -d 家目录  -l newname username # 修改组别、用户编号、家目录、名字
 usermod techmoe -G sudo # 用户添加进sudo组
 usermod [option] username
 usermod -l nsj0820 nsj820 # -l newName oldName 改变用户帐户名，主目录仍为原来
@@ -1623,20 +1818,20 @@ usermod -d /home/nsj0820 nsj0820 # 修改主目录
 usermod -L user # 锁定账户
 usermod -U user # 接锁账户
 usermod -a -G group1,group2 username
-
-userdel username     # 删除用户(删除passwd文件对应信息)，此时其家目录需要手动删除
-userdel -r username  # 删除用户的同时也删除其“家目录”
+usermod -G sudo <student>  # </student>不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，我们可以使用usermod命令把它加入sudo组用以具备相应的权限。
 
 # 修改 user test to love
 usermod -l love -d /home/love -m test
 groupmod -n love test
 
+getent group 1001
 groups zhangwang # 查看用户属于那些组（groups）
-cat /etc/group | sort 命令查看某组包含那些成员 # /etc/group文件中分行显示了用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User）
+cat /etc/group | sort # 命令查看某组包含那些成员
 sudo usermod -G sudo student # 不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，可以使用usermod命令把它加入sudo组用以具备相应的权限。
 sudo usermod -aG sudo,root jacks # add the user 'jacks' to 'root' and 'sudo' group
 usermod -a -G groupA user # -a 代表 append， 将自己添加到 用户组 groupA 中，而不必离开其他用户组
 sudo deluser student --remove-home # 删除用户及用户相关文件；
+userdel username     # 删除用户(删除passwd文件对应信息)，此时其家目录需要手动删除
 userdel -r username # -r 在删除该账户的同时，一并删除该账户对应的主目录
 
 passwd 用户名  # 设定密码:只有 root 用户才有权设置指定账户的密码。一般用户只能设置或修改自己账户的密码（不带参数）
@@ -1662,7 +1857,7 @@ gpasswd -A 用户账户 要管理的用户组 # 将指定的用户设置为指�
 
 choot
 
-@ 修改用户
+# 修改用户
 henry:x:1000:1000:henry.li,,,:/home/henry:/bin/bash
 
 # 关掉sudo的密码:所有sudo组内的用户使用sudo时就不需要密码
@@ -1677,17 +1872,6 @@ PermitRootLogin no # 关闭root账号登陆
 PasswordAuthentication yes # 关闭密码登陆
 systemctl reload ssh.service
 ```
-
-### 匹配符
-
-- `*`：匹配 0 或多个字符，如`ls *.html`将匹配所有以html结尾的文件,`ls b*.png`将匹配所有以b开头，png结尾的文件；
-- `?`：匹配任意一个字符,如`ls abc?.png` 可匹配abcd.png/abce.png
-- `[list]` # 匹配 list 中的任意单一字符
-- `[!list]`:匹配 除list 中的任意单一字符以外的字符
-- `[c1-c2]`:匹配 c1-c2 中的任意单一字符 如：[0-9] [a-z]
-- `{string1,string2,...}`:匹配 string1 或 string2 (或更多)其一字符串，如 `{css,html}`， `ls app.{html.css}`将匹配app.css 和app.html;
-- `{c1..c2}`:匹配 c1-c2 中全部字符 如{1..10}
-- 注意通配符大小写敏感
 
 ### ssh
 
@@ -1786,20 +1970,6 @@ get /etc/group
 !less group # 参看本地文件
 ```
 
-## 终端命令
-
-* ssh:连接到一个远程主机，然后登录进入其 Unix shell。这就使得通过自己本地机器的终端在服务器上提交指令成为了可能。
-* grep:用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
-* 使用 alias 这个 bash 内置的命令来为它们创建一个短别名:alias server="python -m SimpleHTTPServer 9000"
-* Curl 是一个命令行工具，用来通过 HTTP（s），FTP 等其它几十种你可能尚未听说过的协议来发起网络请求。
-* Tree 用可视化的效果向你展示一个目录下的文件 tree -P '_.min._'
-* Tmux 是一个终端复用器,它是一个可以将多个终端连接到单个终端会话的工具。可以在一个终端中进行程序之间的切换，添加分屏窗格，还有就是将多个终端连接到同一个会话，使它们保持同步。 当你在远程服务器上工作时，Tmux 特别有用，因为它可以让你创建新的选项卡，然后在选项卡之间切换
-* du 命令会生成相关文件和有关目录的空间使用情况的报告。它很容易使用，也可以递归地运行，会遍历每个子目录并且返回每个文件的单个大小。`du -sh *`
-* tar:用来处理文件压缩的默认 Unix 工具.
-* md5sum:它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
-* Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程。
-* ln:unix 里面的链接同 Windows 中的快捷方式类似，允许你快速地访问到一个特定的文件。`sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
-
 ## 虚拟化
 
 * Hypervisor：Linux的最重要创新之一，引入Hypervisor，运行其他操作系统的操作系统，它们为执行提供独立的虚拟硬件平台，同时硬件虚拟平台可以提供对底层机器的虚拟的完整访问.在解决软件架构设计问题时，通常做法是引入一个抽象层来解决，其实这种做法是有点普世原理，同样适用于硬件封装，Hypervisor正是这样一种虚拟抽象层。 只有5%的时间在全负荷工作，其他时间则处于休眠或者空闲状态，虚拟化技术可以大大提升服务器的利用率，从而间接减少服务器数量，即成本！ ![](../_static/Hypervisor.jpg) Hypervisor作为虚拟技术的核心，抽象虚拟化硬件平台.它支持给每一个虚拟机分配内存，CPU， 网络和磁盘，并加载虚拟机的客户操作系统。当然，在获取到这么优秀功能（对硬件的虚拟化，并搭载操作系统）的代价，自然牺牲了启动速度及在资源利用率，性能的开销等。
@@ -1843,8 +2013,224 @@ smb://192.168.100.106
 # windows access internet \\192.168.1.13 share
 ```
 
+## I/O
+
+* 阻塞 I/O（blocking IO）:默认情况下所有的 socket 都是blocking
+  - 当用户进程调用了 recvfrom 这个系统调用，kernel 就开始了 IO 的第一个阶段
+    + 准备数据（对于网络IO来说，数据在一开始还没有到达。比如，还没有收到一个完整的 UDP 包。 kernel 就要等待足够的数据到来）。需要等待，也就是说数据被拷贝到操作系统内核的缓冲区中需要一个过程
+    + 在用户进程这边，整个进程会被阻塞（当然，是进程自己选择的阻塞）。当 kernel 一直等到数据准备好了，会将数据从kernel中拷贝到用户内存，然后kernel返回结果，用户进程才解除 block 的状态，重新运行起来
+* 非阻塞 I/O（nonblocking IO）
+  - 当用户进程发出read操作时，如果kernel中的数据还没有准备好，那么它并不会block用户进程，而是立刻返回一个error
+  - 用户进程判断结果是一个error时，就知道数据还没有准备好，于是可以再次发送read操作
+  - kernel中的数据准备好了，并且又再次收到了用户进程的system call，就将数据拷贝到了用户内存，然后返回
+* I/O 多路复用（ IO multiplexing）:也称为 event driven IO, select，poll，epoll这个function会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程
+  - 当用户进程调用了select，整个进程会被block，而同时，kernel会“监视”所有select负责的socket，当任何一个socket中的数据准备好了，select就会返回。这个时候用户进程再调用read操作，将数据从kernel拷贝到用户进程
+  - 特点:通过一种机制一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数就可以返回
+  - select
+    + 分3类，分别是writefds、readfds、和exceptfds,直到有描述副就绪（有数据 可读、可写、或者有except），或者超时（timeout指定等待时间，如果立即返回设为null即可），函数返回
+    + 当select函数返回后，通过遍历fdset，来找到就绪的描述符
+    + 缺点:单个进程能够监视的文件描述符的数量存在最大限制，在Linux上一般为1024，可以通过修改宏定义甚至重新编译内核的方式提升这一限制，但 是这样也会造成效率的降低
+  - poll
+    + 使用一个 pollfd的指针实现:包含了要监视的event和发生的event，不再使用select“参数-值”传递的方式
+    + pollfd并没有最大数量限制（数量过大后性能也是会下降）
+    + poll返回后，需要轮询pollfd来获取就绪的描述符
+    + select和poll都需要在返回后，通过遍历文件描述符来获取已经就绪的socket。事实上，同时连接的大量客户端在一时刻可能只有很少的处于就绪状态，因此随着监视的描述符数量的增长，其效率也会线性下降
+  - epoll:使用一个文件描述符管理多个描述符，将用户关系的文件描述符的事件存放到内核的一个事件表中，在用户空间和内核空间的copy只需一次
+    + int epoll_create(int size):创建一个epoll的句柄
+      * size用来告诉内核这个监听的数目一共有多大,参数size并不是限制了epoll所能监听的描述符最大个数，只是对内核初始分配内部数据结构的一个建议
+      * 当创建好epoll句柄后，它就会占用一个fd值，在linux下如果查看/proc/进程id/fd/，是能够看到这个fd的
+      * 在使用完epoll后，必须调用close()关闭，否则可能导致fd被耗尽
+    + int epoll_ctl(int epfd, int op, int fd, struct epoll_event event):对指定描述符fd执行op操作
+      * epfd：是epoll_create()的返回值
+      * op：表示op操作，用三个宏来表示：添加EPOLL_CTL_ADD，删除EPOLL_CTL_DEL，修改EPOLL_CTL_MOD。分别添加、删除和修改对fd的监听事件
+      * fd：是需要监听的fd（文件描述符）
+      * epoll_event：是告诉内核需要监听什么事
+    + int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout): 等待epfd上的io事件，最多返回maxevents个事件
+      * 参数events用来从内核得到事件的集合，maxevents告之内核这个events有多大，这个maxevents的值不能大于创建epoll_create()时的size，参数timeout是超时时间（毫秒，0会立即返回，-1将不确定，也有说法说是永久阻塞）
+      * 该函数返回需要处理的事件数目，如返回0表示已超时
+    + 工作模式
+      * LT（level trigger）:默认模式 当epoll_wait检测到描述符事件发生并将此事件通知应用程序，应用程序可以不立即处理该事件。下次调用epoll_wait时，会再次响应应用程序并通知此事件(状态保持)
+        - 
+      * ET（edge trigger）:当epoll_wait检测到描述符事件发生并将此事件通知应用程序，应用程序必须立即处理该事件。如果不处理，下次调用epoll_wait时，不会再次响应应用程序并通知此事件（不复现）
+        - 很大程度上减少了epoll事件被重复触发的次数，因此效率要比LT模式高
+    + 优点
+      * 监视的描述符数量不受限制
+  - select/poll中，进程只有在调用一定的方法后，内核才对所有监视的文件描述符进行扫描，而epoll事先通过epoll_ctl()来注册一 个文件描述符，一旦基于某个文件描述符就绪时，内核会采用类似callback的回调机制，迅速激活这个文件描述符，当进程调用epoll_wait() 时便得到通知。(此处去掉了遍历文件描述符，而是通过监听回调的的机制。这正是epoll的魅力所在。)
+  - 需要使用两个system call (select 和 recvfrom)，而blocking IO只调用了一个system call (recvfrom)。但是，用select的优势在于它可以同时处理多个connection
+  - 如果处理的连接数不是很高的话，使用select/epoll的web server不一定比使用multi-threading + blocking IO的web server性能更好，可能延迟还更大。优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。）
+  - 实际中，对于每一个socket，一般都设置成为non-blocking，但是整个用户的process其实是一直被block的。只不过process是被select这个函数block，而不是被socket IO给block
+* 信号驱动 I/O（ signal driven IO）
+* 异步 I/O（asynchronous IO）
+  - 用户进程发起read操作之后，立刻就可以开始去做其它的事
+  - 另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成
+* synchronous IO VS asynchronous IO
+  - A synchronous I/O operation causes the requesting process to be blocked until that I/O operation completes;
+  - An asynchronous I/O operation does not cause the requesting process to be blocked;
+
+```c
+int select (int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
+
+int poll (struct pollfd *fds, unsigned int nfds, int timeout);
+struct pollfd {
+    int fd; /* file descriptor */
+    short events; /* requested events to watch */
+    short revents; /* returned events witnessed */
+};
+
+int epoll_create(int size)；//创建一个epoll的句柄，size用来告诉内核这个监听的数目一共有多大
+int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
+int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
+
+struct epoll_event {
+  __uint32_t events;  /* Epoll events */
+  epoll_data_t data;  /* User data variable */
+};
+//events可以是以下几个宏的集合：
+EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）；
+EPOLLOUT：表示对应的文件描述符可以写；
+EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）；
+EPOLLERR：表示对应的文件描述符发生错误；
+EPOLLHUP：表示对应的文件描述符被挂断；
+EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。
+EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里
+
+while(rs){
+  buflen = recv(activeevents[i].data.fd, buf, sizeof(buf), 0);
+  if(buflen < 0){
+    // 由于是非阻塞的模式,所以当errno为EAGAIN时,表示当前缓冲区已无数据可读
+    // 在这里就当作是该次事件已处理处.
+    if(errno == EAGAIN){
+        break;
+    }
+    else{
+        return;
+    }
+  }
+  else if(buflen == 0){
+     // 这里表示对端的socket已正常关闭.
+  }
+ if(buflen == sizeof(buf){
+      rs = 1;   // 需要再次读取
+ }
+ else{
+      rs = 0;
+ }
+}
+
+    #define IPADDRESS   "127.0.0.1"
+    #define PORT        8787
+    #define MAXSIZE     1024
+    #define LISTENQ     5
+    #define FDSIZE      1000
+    #define EPOLLEVENTS 100
+    listenfd = socket_bind(IPADDRESS,PORT);
+    struct epoll_event events[EPOLLEVENTS];
+    //创建一个描述符
+    epollfd = epoll_create(FDSIZE);
+    //添加监听描述符事件
+    add_event(epollfd,listenfd,EPOLLIN);
+    //循环等待
+    for ( ; ; ){
+        //该函数返回已经准备好的描述符事件数目
+        ret = epoll_wait(epollfd,events,EPOLLEVENTS,-1);
+        //处理接收到的连接
+        handle_events(epollfd,events,ret,listenfd,buf);
+    }
+    //事件处理函数
+    static void handle_events(int epollfd,struct epoll_event *events,int num,int listenfd,char *buf)
+    {
+         int i;
+         int fd;
+         //进行遍历;这里只要遍历已经准备好的io事件。num并不是当初epoll_create时的FDSIZE。
+         for (i = 0;i < num;i++)
+         {
+             fd = events[i].data.fd;
+            //根据描述符的类型和事件类型进行处理
+             if ((fd == listenfd) &&(events[i].events & EPOLLIN))
+                handle_accpet(epollfd,listenfd);
+             else if (events[i].events & EPOLLIN)
+                do_read(epollfd,fd,buf);
+             else if (events[i].events & EPOLLOUT)
+                do_write(epollfd,fd,buf);
+         }
+    }
+    //添加事件
+    static void add_event(int epollfd,int fd,int state){
+        struct epoll_event ev;
+        ev.events = state;
+        ev.data.fd = fd;
+        epoll_ctl(epollfd,EPOLL_CTL_ADD,fd,&ev);
+    }
+    //处理接收到的连接
+    static void handle_accpet(int epollfd,int listenfd){
+         int clifd;     
+         struct sockaddr_in cliaddr;     
+         socklen_t  cliaddrlen;     
+         clifd = accept(listenfd,(struct sockaddr*)&cliaddr,&cliaddrlen);     
+         if (clifd == -1)         
+         perror("accpet error:");     
+         else {         
+             printf("accept a new client: %s:%d\n",inet_ntoa(cliaddr.sin_addr),cliaddr.sin_port);                       //添加一个客户描述符和事件         
+             add_event(epollfd,clifd,EPOLLIN);     
+         } 
+    }
+    //读处理
+    static void do_read(int epollfd,int fd,char *buf){
+        int nread;
+        nread = read(fd,buf,MAXSIZE);
+        if (nread == -1)     {         
+            perror("read error:");         
+            close(fd); //记住close fd        
+            delete_event(epollfd,fd,EPOLLIN); //删除监听 
+        }
+        else if (nread == 0)     {         
+            fprintf(stderr,"client close.\n");
+            close(fd); //记住close fd       
+            delete_event(epollfd,fd,EPOLLIN); //删除监听 
+        }     
+        else {         
+            printf("read message is : %s",buf);        
+            //修改描述符对应的事件，由读改为写         
+            modify_event(epollfd,fd,EPOLLOUT);     
+        } 
+    }
+    //写处理
+    static void do_write(int epollfd,int fd,char *buf) {     
+        int nwrite;     
+        nwrite = write(fd,buf,strlen(buf));     
+        if (nwrite == -1){         
+            perror("write error:");        
+            close(fd);   //记住close fd       
+            delete_event(epollfd,fd,EPOLLOUT);  //删除监听    
+        }else{
+            modify_event(epollfd,fd,EPOLLIN); 
+        }    
+        memset(buf,0,MAXSIZE); 
+    }
+    //删除事件
+    static void delete_event(int epollfd,int fd,int state) {
+        struct epoll_event ev;
+        ev.events = state;
+        ev.data.fd = fd;
+        epoll_ctl(epollfd,EPOLL_CTL_DEL,fd,&ev);
+    }
+    //修改事件
+    static void modify_event(int epollfd,int fd,int state){     
+        struct epoll_event ev;
+        ev.events = state;
+        ev.data.fd = fd;
+        epoll_ctl(epollfd,EPOLL_CTL_MOD,fd,&ev);
+    }
+    //注：另外一端我就省了
+
+```
+
 ## OS Page Cache和Buffer Cache
 
+* 缓存 I/O
+  - 缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O
+  - 在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。
+  - 缺点：数据在传输过程中需要在应用程序地址空间和内核进行多次数据拷贝操作，这些数据拷贝操作所带来的 CPU 以及内存开销是非常大的
 * pagecache：文件系统层级的缓存
   - 从磁盘里读取的内容是存储到这里，这样程序读取磁盘内容就会非常快，比如使用Linux的grep和find等命令查找内容和文件时，第一次会慢很多，再次执行就快好多倍，几乎是瞬间
   - page cache的数据被修改过后，也即脏数据，等到写入磁盘时机到来时，会转移到buffer cache 而不是直接写入到磁盘。
@@ -1876,19 +2262,24 @@ free -m
 ## 日志
 
 * Syslog
+* tracelog
+* logrotate
+  - 为系统监控和故障排查保留必要的日志内容，同时又防止过多的日志造成单个日志文件太大
+  - 在一组日志文件之中，编号最大的（最旧的）一个日志文件会被删除，其余的日志文件编号则依次增大并取代较旧的日志文件，而较新的文件则取代它作为当前的日志文件
+  - 配置路径：`/etc/logrotate.d`
+    + /usr/sbin/logrotate -- the logrotate command itself (the executable)
+    + /etc/cron.daily/logrotate -- the shell script that runs logrotate on a daily basis (note that it might be /etc/cron.daily/logrotate.cron on some systems)
+    + /etc/logrotate.conf -- the log rotation configuration file
+    + /var/lib/logrotate/status file -- created when /etc/cron.daily/logrotate runs, shows the date and time when each of the log files was last rotated
+  - 手动执行：`logrotate -f /etc/logrotate.d/rsyslog`
+  - `logrotate -f /etc/logrotate.d/nginx`
 
 ```sh
 journalctl -b -1 # 命令可以重现上一次启动时候的信息
 journalctl -b -2 # 可以重现倒数第 2 次启动
 systemd-analyze blame # 这个命令可以显示进程耗时
-```
 
-## logrotate
-
-* 增加配置/etc/logrotate.d
-* logrotate -f /etc/logrotate.d/nginx
-
-```
+# /etc/logrotate.d/nginx
 /var/log/nginx/*.log {
   # 打包日志频率 daily:每天 weekly:每周 monthly:每月
   daily
@@ -1950,10 +2341,10 @@ sudo apt-get install stacer
 
 ### sed
 
-* 主要用来自动编辑一个或多个文件，简化对文件的反复操作，编写转换程序等，且支持正则表达式！
+* 用来自动编辑一个或多个文件，简化对文件的反复操作，编写转换程序等，且支持正则表达式！
 * 一种流编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓存区中，称为"模式空间"(patternspace)
 * 接着用sed命令处理缓存区中的内容，处理完成后，把缓存区的内容送往屏幕。然后读入下一行，执行下一个循环。如果没有使用诸如'D'的特殊命令，那么会在两个循环之间清空模式空间，但不会清空保留空间。这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出
-* 地址定界：就是说明用来处理一行中的那个些部分的。
+* 地址定界：说明用来处理一行中的那个些部分的
   - 不给地址：对全文进行处理
   - # ：指定的行/pattern/能够被模式匹配到的每一行
   - # ,#：从第n行到第m行
@@ -1962,270 +2353,29 @@ sudo apt-get install stacer
   - # ,/pat1/：从第n行到符合 /pat1/ 这个模式的行
   - 1~2 ：~ 这个符号表示步进，1~2 表示的是奇数行
   - 2~2：表示的是偶数行
-
-## tracelog
-
-### 编辑命令
-
-地址定界后，对范围内的内容进行相关编辑。
-
-- d：删除模式空间匹配的行，并立即启用下一轮循环 `nl log.txt | sed '2,3d'`
-- p：打印当前模式空间内容，追加到默认输出之后
-- q：读取到指定行之后退出
-- `a [\]text`：在指定行后面追加文本支持使用\n 实现多行行后追加 `sed -e 4a\newline log.txt`
-- `i [\]text`：在行前面插入文本
-- `c [\]text`：替换行为单行或多行文本 `nl log.txt | sed '2,3c No 2-3 number'`
-- w /path/somefile：保存模式匹配的行至指定文件
-- r /path/somefile：读取指定文件的文本至模式空间中匹配到的行后
-- =：为模式空间中的行打印行号
-- !：模式空间中匹配行取反处理
-- s///：查找替换, 支持使用其它分隔符，s@@@ ，s### `nl log.txt | sed -e '3d' -e 's/test/TEST/'`
-- ；：对一行进行多次操作的命令的分割
-- &：配合s///使用，代表前面所查找到的字符等，&sm ；sm&。
-- g：行内全局替换。也可以指定行内的第几个符合要求的进行替换：2g,就表示第2个替换。
-- p：显示替换成功的行 `nl log.txt | sed -n '/is/p'` a替换A，多个用;分开`nl log.txt | sed -n '/is/{s/a/A/;p}'`
-- w /PATH/TO/SOMEFILE：将替换成功的行保存至文件中
-- -e
-
-vim config
-```
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 显示相关
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示
-winpos 5 5         " 设定窗口位置
-set lines=30 columns=85    " 设定窗口大小
-set nu              " 显示行号
-set go=             " 不要图形按钮
-"color asmanian2     " 设置背景主题
-set guifont=Courier_New:h10:cANSI   " 设置字体
-syntax on           " 语法高亮
-autocmd InsertLeave * se nocul  " 用浅色高亮当前行
-autocmd InsertEnter * se cul    " 用浅色高亮当前行
-set ruler           " 显示标尺
-set showcmd         " 输入的命令显示出来，看的清楚些
-set cmdheight=1     " 命令行（在状态行下）的高度，设置为1
-"set whichwrap+=<,>,h,l   " 允许backspace和光标键跨越行边界(不建议)
-set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离
-set novisualbell    " 不要闪烁(不明白)
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容
-set laststatus=1    " 启动显示状态行(1),总是显示状态行(2)
-set foldenable      " 允许折叠
-set foldmethod=manual   " 手动折叠
-set background=dark "背景使用黑色
-set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
-" 显示中文帮助
-if version >= 603
-    set helplang=cn
-    set encoding=utf-8
-endif
-" 设置配色方案
-"colorscheme murphy
-"字体
-"if (has("gui_running"))
-"   set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
-"endif
-
-
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp936
-set fileencoding=utf-8
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"新建.c,.h,.sh,.java文件，自动插入文件头
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
-""定义函数SetTitle，自动插入文件头
-func SetTitle()
-    "如果文件类型为.sh文件
-    if &filetype == 'sh'
-        call setline(1,"\#########################################################################")
-        call append(line("."), "\# File Name     : ".expand("%"))
-        call append(line(".")+1, "\# Author        : enjoy5512")
-        call append(line(".")+2, "\# mail          : enjoy5512@163.com")
-        call append(line(".")+3, "\# Created Time  : ".strftime("%c"))
-        call append(line(".")+4, "\#########################################################################")
-        call append(line(".")+5, "")
-        call append(line(".")+6, "\#!/bin/bash")
-    call append(line(".")+7, "")
-    call append(line(".")+8, "")
-    else
-        call setline(1, "/*************************************************************************")
-        call append(line("."), "    > File Name       : ".expand("%"))
-        call append(line(".")+1, "    > Author          : enjoy5512")
-        call append(line(".")+2, "    > Mail            : enjoy5512@163.com ")
-        call append(line(".")+3, "    > Created Time    : ".strftime("%c"))
-        call append(line(".")+4, " ************************************************************************/")
-        call append(line(".")+5, "")
-    endif
-    if &filetype == 'cpp'
-        call append(line(".")+6, "#include<iostream>")
-    call append(line(".")+7, "")
-        call append(line(".")+8, "using namespace std;")
-        call append(line(".")+9, "")
-        call append(line(".")+10, "int main(int argc,char *argv[])")
-        call append(line(".")+11, "{")
-        call append(line(".")+12, "     ")
-        call append(line(".")+13, "    return 0;")
-        call append(line(".")+14, "}")
-    endif
-    if &filetype == 'c'
-        call append(line(".")+6, "#include<stdio.h>")
-        call append(line(".")+7, "")
-        call append(line(".")+8, "int main(int argc,char *argv[])")
-        call append(line(".")+9, "{")
-        call append(line(".")+10, "     ")
-        call append(line(".")+11, "    return 0;")
-        call append(line(".")+12, "}")
-    autocmd BufNewFile * 12 j
-    endif
-endfunc
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"键盘命令
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"C，C++ 按F5编译运行
-map <F5> :call CompileRunGcc()<CR>
-func! CompileRunGcc()
-    exec "w"
-    if &filetype == 'c'
-        exec "!gcc % -o %<"
-        exec "! ./%<"
-    elseif &filetype == 'cpp'
-        exec "!g++ % -o %<"
-        exec "! ./%<"
-    elseif &filetype == 'sh'
-        :!./%
-    endif
-endfunc
-"C,C++的调试
-map <C-F5> :call Rungdb()<CR>
-func! Rungdb()
-    exec "w"
-    if &filetype == 'c'
-        exec "!gcc % -g -o %<"
-        exec "!gdb -tui ./%<"
-    elseif &filetype == 'cpp'
-        exec "!g++ % -g -o %<"
-        exec "!gdb -tui ./%<"
-    endif
-endfunc
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""实用设置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 设置当文件被改动时自动载入
-set autoread
-" quickfix模式
-autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
-"代码补全
-set completeopt=preview,menu
-"允许插件
-filetype plugin on
-"共享剪贴板
-set clipboard+=unnamed
-"从不备份
-set nobackup
-"自动保存
-set autowrite
-set ruler                   " 打开状态栏标尺
-set cursorline              " 突出显示当前行
-set magic                   " 设置魔术
-set guioptions-=T           " 隐藏工具栏
-set guioptions-=m           " 隐藏菜单栏
-set foldcolumn=0
-set foldmethod=indent
-set foldlevel=3
-set foldenable              " 开始折叠
-" 不要使用vi的键盘模式，而是vim自己的
-set nocompatible
-" 语法高亮
-set syntax=on
-" 去掉输入错误的提示声音
-set noeb
-" 在处理未保存或只读文件的时候，弹出确认
-set confirm
-" 自动缩进
-set autoindent
-set cindent
-" Tab键的宽度
-set tabstop=4
-" 统一缩进为4
-set softtabstop=4
-set shiftwidth=4
-"禁止生成临时文件
-set nobackup
-set noswapfile
-"搜索忽略大小写
-set ignorecase
-"搜索逐字符高亮
-set hlsearch
-set incsearch
-"行内替换
-set gdefault
-"编码设置
-set enc=utf-8
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
-"语言设置
-set langmenu=zh_CN.UTF-8
-set helplang=cn
-" 我的状态行显示的内容（包括文件类型和解码）
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
-"set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
-"set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
-" 总是显示状态行
-set laststatus=2
-" 命令行（在状态行下）的高度，默认为1，这里是2
-set cmdheight=2
-" 侦测文件类型
-filetype on
-" 载入文件类型插件
-filetype plugin on
-" 为特定文件类型载入相关缩进文件
-filetype indent on
-" 保存全局变量
-set viminfo+=!
-" 在被分割的窗口间显示空白，便于阅读
-set fillchars=vert:\ ,stl:\ ,stlnc:\
-" 高亮显示匹配的括号
-set showmatch
-" 匹配括号高亮的时间（单位是十分之一秒）
-set matchtime=1
-" 光标移动到buffer的顶部和底部时保持3行距离
-set scrolloff=3
-" 为C程序提供自动缩进
-set smartindent
-" 高亮显示普通txt文件（需要txt.vim脚本）
-au BufRead,BufNewFile *  setfiletype txt
-"自动补全
-":inoremap ( ()<ESC>i
-":inoremap ) <c-r>=ClosePair(')')<CR>
-:inoremap { {<CR>}<ESC>O
-:inoremap } <c-r>=ClosePair('}')<CR>
-":inoremap [ []<ESC>i
-":inoremap ] <c-r>=ClosePair(']')<CR>
-":inoremap " ""<ESC>i
-":inoremap ' ''<ESC>i
-function! ClosePair(char)
-    if getline('.')[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
-endfunction
-filetype plugin indent on
-"打开文件类型检测, 加了这句才可以用智能补全
-set completeopt=longest,menu
-```
+* 参数
+  - d：删除模式空间匹配的行，并立即启用下一轮循环 `nl log.txt | sed '2,3d'`
+  - p：打印当前模式空间内容，追加到默认输出之后
+  - q：读取到指定行之后退出
+  - `a [\]text`：在指定行后面追加文本支持使用\n 实现多行行后追加 `sed -e 4a\newline log.txt`
+  - `i [\]text`：在行前面插入文本
+  - `c [\]text`：替换行为单行或多行文本 `nl log.txt | sed '2,3c No 2-3 number'`
+  - w /path/somefile：保存模式匹配的行至指定文件
+  - r /path/somefile：读取指定文件的文本至模式空间中匹配到的行后
+  - =：为模式空间中的行打印行号
+  - !：模式空间中匹配行取反处理
+  - s///：查找替换, 支持使用其它分隔符，s@@@ ，s### `nl log.txt | sed -e '3d' -e 's/test/TEST/'`
+  - ；：对一行进行多次操作的命令的分割
+  - &：配合s///使用，代表前面所查找到的字符等，&sm ；sm&。
+  - g：行内全局替换。也可以指定行内的第几个符合要求的进行替换：2g,就表示第2个替换。
+  - p：显示替换成功的行 `nl log.txt | sed -n '/is/p'` a替换A，多个用;分开`nl log.txt | sed -n '/is/{s/a/A/;p}'`
+  - w /PATH/TO/SOMEFILE：将替换成功的行保存至文件中
+  - -e
 
 ## 镜像源
 
 * [USTC Mirror](http://mirrors.ustc.edu.cn/help/index.html#)
 * [阿里巴巴开源软件站](https://opsx.alibaba.com/)
-
-## 系统
-
-* [openwrt/openwrt](https://github.com/openwrt/openwrt)：This repository is a mirror of https://git.openwrt.org/openwrt/openwrt.git It is for reference only and is not active for check-ins or for reporting issues. We will continue to accept Pull Requests here. They will be merged via staging trees then into openwrt.git. All issues should be reported at: https://bugs.openwrt.org
 
 ## 图书
 
@@ -2252,6 +2402,7 @@ set completeopt=longest,menu
 * [Linuxbrew/brew](https://github.com/Linuxbrew/brew):🍺🐧 The Homebrew package manager for Linux https://linuxbrew.sh
 * [johnfactotum/foliate](https://github.com/johnfactotum/foliate):A simple and modern GTK eBook reader https://johnfactotum.github.io/foliate/
 * [systemd/systemd](https://github.com/systemd/systemd):systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic.
+* [AlternativeTo](https://alternativeto.net/)
 
 ## 参考
 

@@ -45,11 +45,150 @@ make && make install
 
 # (服务管理脚本)[../../Ops/nginx.service]
 chmod 775 /etc/rc.d/init.d/nginx #赋予文件执行权限
+##  /etc/init.d/nginx
+#!/bin/bash
+# chkconfig: - 30 21
+# description: http service.
+# Source Function Library
+. /etc/init.d/functions
+# Nginx Settings
+
+NGINX_SBIN="/usr/local/nginx/sbin/nginx"
+NGINX_CONF="/usr/local/nginx/conf/nginx.conf"
+NGINX_PID="/usr/local/nginx/logs/nginx.pid"
+RETVAL=0
+prog="Nginx"
+
+start() {
+        echo -n $"Starting $prog: "
+        mkdir -p /dev/shm/nginx_temp
+        daemon $NGINX_SBIN -c $NGINX_CONF
+        RETVAL=$?
+        echo
+        return $RETVAL
+}
+
+stop() {
+        echo -n $"Stopping $prog: "
+        killproc -p $NGINX_PID $NGINX_SBIN -TERM
+        rm -rf /dev/shm/nginx_temp
+        RETVAL=$?
+        echo
+        return $RETVAL
+}
+
+reload(){
+        echo -n $"Reloading $prog: "
+        killproc -p $NGINX_PID $NGINX_SBIN -HUP
+        RETVAL=$?
+        echo
+        return $RETVAL
+}
+
+restart(){
+        stop
+        start
+}
+
+configtest(){
+    $NGINX_SBIN -c $NGINX_CONF -t
+    return 0
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  reload)
+        reload
+        ;;
+  restart)
+        restart
+        ;;
+  configtest)
+        configtest
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|reload|restart|configtest}"
+        RETVAL=1
+esac
+
+exit $RETVAL
+
 chkconfig nginx on #设置开机启动
 sudo /sbin/chkconfig --list nginx
 /etc/rc.d/init.d/nginx restart # 重启
 
 /usr/local/nginx/sbin/nginx
+
+#  /usr/local/nginx/conf/nginx.conf
+user nobody nobody;
+worker_processes 2;
+error_log /usr/local/nginx/logs/nginx_error.log crit;
+pid /usr/local/nginx/logs/nginx.pid;
+worker_rlimit_nofile 51200;
+
+events
+{
+    use epoll;
+    worker_connections 6000;
+}
+
+http
+{
+    include mime.types;
+    default_type application/octet-stream;
+    server_names_hash_bucket_size 3526;
+    server_names_hash_max_size 4096;
+    log_format combined_realip '$remote_addr $http_x_forwarded_for [$time_local]'
+    '$host "$request_uri" $status'
+    '"$http_referer" "$http_user_agent"';
+    sendfile on;
+    tcp_nopush on;
+    keepalive_timeout 30;
+    client_header_timeout 3m;
+    client_body_timeout 3m;
+    send_timeout 3m;
+    connection_pool_size 256;
+    client_header_buffer_size 1k;
+    large_client_header_buffers 8 4k;
+    request_pool_size 4k;
+    output_buffers 4 32k;
+    postpone_output 1460;
+    client_max_body_size 10m;
+    client_body_buffer_size 256k;
+    client_body_temp_path /usr/local/nginx/client_body_temp;
+    proxy_temp_path /usr/local/nginx/proxy_temp;
+    fastcgi_temp_path /usr/local/nginx/fastcgi_temp;
+    fastcgi_intercept_errors on;
+    tcp_nodelay on;
+    gzip on;
+    gzip_min_length 1k;
+    gzip_buffers 4 8k;
+    gzip_comp_level 5;
+    gzip_http_version 1.1;
+    gzip_types text/plain application/x-javascript text/css text/htm application/xml;
+
+server
+{
+    listen 80;
+    server_name localhost;
+    index index.html index.htm index.php;
+    root /usr/local/nginx/html;
+
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass unix:/tmp/php-fcgi.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME /usr/local/nginx/html$fastcgi_script_name;
+    }
+
+}
+
+}
 
 # /usr/local/nginx/conf/nginx.conf
 user www www; # 首行user去掉注释,修改Nginx运行组为www www；必须与/usr/local/php/etc/php-fpm.conf中的user,group配置相同，否则php运行出错
@@ -85,29 +224,33 @@ sudo service mysql status
 sudo mysqladmin -p -u root version
 
 # 编译
+wget http://www.lishiming.net/data/at ... -icc-glibc23.tar.gz
+tar zxvf mysql-5.1.40-linux-i686-icc-glibc23.tar.gz
+mv mysql-5.1.40-linux-i686-icc-glibc23.tar.gz /usr/local/mysql
 groupadd mysql #添加mysql组
 useradd -g mysql mysql -s /bin/false #创建用户mysql并加入到mysql组，不允许mysql用户直接登录系统
+useradd -s /sbin/nologin mysql   # -s /sbin/nologin 表示mysql账号不能登陆linux
+
 mkdir -p /data/mysql #创建MySQL数据库存放目录
 chown -R mysql:mysql /data/mysql #设置MySQL数据库存放目录权限
 mkdir -p /usr/local/mysql #创建MySQL安装目录
 
-cd /usr/local/src #进入软件包存放目录
-tar zxvf mysql-5.6.19.tar.gz #解压
-cd mysql-5.6.19 #进入目录
 cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_DATADIR=/data/mysql -DSYSCONFDIR=/etc # 配置
 make && make install
 
 rm -rf /etc/my.cnf #删除系统默认的配置文件（如果默认没有就不用删除）
 cd /usr/local/mysql #进入MySQL安装目录
-./scripts/mysql_install_db --user=mysql --basedir=/usr/local/mysql --datadir=/data/mysql #生成mysql系统数据库
-ln -s /usr/local/mysql/my.cnf  /etc/my.cnf #添加到/etc目录的软连接
+./scripts/mysql_install_db --user=mysql --basedir=/usr/local/mysql --datadir=/data/mysql #--user定义所属主，datadir 为数据库存放路径；这一步若出现两个OK就说明进行正确。
+ln -s /usr/local/mysql/my.cnf  /etc/my.cnf # 添加到/etc目录的软连接
 cp ./support-files/mysql.server  /etc/rc.d/init.d/mysqld #把Mysql加入系统启动
 chmod 755 /etc/init.d/mysqld # 增加执行权限
-chkconfig mysqld on # 加入开机启动
-
-# /etc/rc.d/init.d/mysqld
+# /etc/init.d/mysqld /etc/rc.d/init.d/mysqld 找到“datadir=”改过 
+datadir=/data/mysql
 basedir=/usr/local/mysql #MySQL程序安装路径
 datadir=/data/mysql #MySQl数据库存放目录
+
+chkconfig -add mysqld
+chkconfig mysqld on # 加入开机启动
 
 # /etc/profile
 export PATH=$PATH:/usr/local/mysql/bin
@@ -198,7 +341,27 @@ opcache.enable_cli=0
 zend_extension=opcache.so #开启opcode缓存功能
 cgi.fix_pathinfo=0
 
+#  /usr/local/php/etc/php-fpm/conf
+[global]
+pid = /usr/local/php/var/run/php-fpm.pid
+error_log = /usr/local/php/var/log/php-fpm.log
+[www]
+listen = /tmp/php-fcgi.sock
+user = php-fpm
+group = php-fpm
+pm = dynamic
+pm.max_children = 50
+pm.start_servers = 20
+pm.min_spare_servers = 5
+pm.max_spare_servers = 35
+pm.max_requests = 500
+rlimit_files = 1024
+
+useradd -s /sbin/nologin php-fpm
+cp /usr/local/src/php-5.3.27/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+chmod 755 /etc/init.d/php-fpm
 /usr/local/bin/php-fpm
+chkconfig php-fpm on 
 sudo service php7.1-fpm restart
 ```
 

@@ -1114,6 +1114,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - [visualfc/liteide](https://github.com/visualfc/liteide)：LiteIDE is a simple, open source, cross-platform Go IDE.
   - VS Code Glide
 * [rodrigo-brito/gocity](https://github.com/rodrigo-brito/gocity):📊 Code City metaphor for visualizing Go source code in 3D https://go-city.github.io
+* [shirou / gopsutil](https://github.com/shirou/gopsutil):psutil for golang
 
 ## 参考
 
