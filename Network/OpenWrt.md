@@ -1,4 +1,4 @@
-# [OpenWrt](https://openwrt.org)
+# [openwrt/openwrt](https://github.com/openwrt/openwrt)： https://openwrt.org
 
 适用于路由器的Linux发行版
 

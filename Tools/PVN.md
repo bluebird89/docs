@@ -139,6 +139,14 @@ apt-get install python-pip
 pip install shadowsocks
 ```
 
+## [wireguard](https://www.wireguard.com/)
+
+一个易于配置、快速且安全的开源 VPN，它利用了最新的加密技术。目的是提供一种更快、更简单、更精简的通用 VPN，它可以轻松地在树莓派这类低端设备到高端服务器上部署
+
+* 跨平台
+* 易于[部署](https://www.linode.com/docs/networking/vpn/set-up-wireguard-vpn-on-ubuntu/)
+* 运行在内核空间(可以将 WireGuard 作为内核模块安装在 Linux 中)，因此可以高速提供安全的网络
+
 ### 服务
 
 * [StreisandEffect/streisand](https://github.com/StreisandEffect/streisand):Streisand sets up a new server running L2TP/IPsec, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, a Tor bridge, and WireGuard. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.
@@ -172,6 +180,8 @@ pip install shadowsocks
   - [Potatso lite](https://itunes.apple.com/us/app/potatso-lite/id1239860606)
   - [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
   - [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu https://shadowsocks.be
+* [Dreamacro / clash](https://github.com/Dreamacro/clash):A rule-based tunnel in Go.
+  - `go get -u -v github.com/Dreamacro/clash`
 
 ## 参考
 

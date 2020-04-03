@@ -467,6 +467,10 @@ bash <(curl -s https://gist.github.com/Jacksgong/9d0519f68b7940a07075a834b317897
 set completion-ignore-case on
 ```
 
+## [Coreutils - GNU core utilities](https://www.gnu.org/software/coreutils/)
+
+the basic file, shell and text manipulation utilities of the GNU operating system
+
 ## 语法
 
 * 应用
@@ -560,7 +564,9 @@ set completion-ignore-case on
     - 对于 rm -rf 这样的高危操作，需要检查后面的变量名是否为空，比如：rm -rf $MYDIDR/* 如果 $MYDIR为空，结果是灾难性的。
     - 考虑使用 “find/while” 而不是 “for/find”。如：for F in $(find . -type f) ; do echo $F; done 写成 find . -type f | while read F ; do echo $F ; done 不但可以容忍空格，而且还更快。
     - 防御式编程，在正式执行命令前，把相关的东西都检查好，比如，文件目录有没有存在。
-* 调试
+* 调试 
+* `前置 commands ; command1 && command2 || command3 ; 跟随 commands` 假如 command1 退出时返回码为零，就执行 command2，否则执行 command3
+    - command1 && command2 这样的控制语句能够运行的原因是，每条命令执行完毕时都会给 shell 发送一个返回码，用来表示它执行成功与否。默认情况下，返回码为 0 表示成功，其他任何正值表示失败
 
 ```sh
 type -a|t cd
@@ -716,7 +722,53 @@ echo $my_variable
 PATH=$PATH:/home/christine/Scripts
 ```
 
-## 端口
+## 进程管理
+
+* ps(process status):能够给出当前系统中进程的快照,捕获系统在某一事件的进程状态
+* 三种使用的语法格式
+    - UNIX 风格，选项可以组合在一起，并且选项前必须有“-”连字符
+    - BSD 风格，选项可以组合在一起，但是选项前不能有“-”连字符
+    - GNU 风格的长选项，选项前有两个“-”连字符
+* 信息
+    - PID: 运行着的命令(CMD)的进程编号
+    - TTY: 命令所运行的位置（终端）
+    - TIME: 运行着的该命令所占用的CPU处理时间
+    - CMD: 该进程所运行的命令
+* 参数
+    - -a 代表 all。同时加上x参数会显示没有控制终端的进程
+    - -u：查看特定用户进程的情况下
+    - -aux ：结果按照 CPU 或者内存用量来筛选
+    - --sort：来排序
+    - -C ：后面跟要找的进程的名字
+    - -f:查看格式化的信息列表
+    - -L 参数:后面加上特定的PID,知道特定进程的线程
+    - -axjf:以树形结构显示进程
+    - -e 显示所有进程信息
+    - -o 参数控制输出
+        + Pid显示PID
+        + User运行应用的用户
+        + Args:运行应用的应用
+    - -U 参数按真实用户ID(RUID)筛选进程，它会从用户列表中选择真实用户名或 ID。真实用户即实际创建该进程的用户。
+    - -u 参数用来筛选有效用户ID（EUID）
+
+```sh
+ps -aux --sort -pcpu | less
+ps -aux --sort -pmem | less
+ps -aux --sort -pcpu,+pmem | head -n 10
+ps -C getty
+ps -eo pid,user,args # 查看现在有谁登入了服务器
+ps -U root -u root u # 最后的u参数用来决定以针对用户的格式输出，由User, PID, %CPU, %MEM, VSZ, RSS, TTY, STAT, START, TIME 和 COMMAND这几列组成
+watch -n 1 ‘ps -aux --sort -pmem, -pcpu | head 20’ # 实时监控进程状态: 通过CPU和内存的使用率来筛选进程，并且结果能够每秒刷新一次
+```
+
+## 网络
+
+* netstat(show network status):列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字，另外还能列出处于监听状态（即等待接入请求）的套接字
+* 参数
+    - -a 列出所有当前的连接
+    - -t 列出 TCP 协议的连接
+    - -u 列出 UDP 协议的连接
+    - -n 禁用域名解析功能. 默认情况下 netstat 会通过反向域名解析技术查找每个 IP 地址对应的主机名,降低查找速度。如果觉没有必要知道主机名
 
 ```sh
 netstat -an | grep 3306
@@ -874,6 +926,7 @@ ls *.rmvb | xargs -n1 -i cp {} /mount/xiaodianying
         + [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
     - 工具
         + [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
+        + [zplug / zplug](https://github.com/zplug/zplug):🌺 A next-generation plugin manager for zsh
 
 ```sh
 cat /etc/shells
@@ -2104,6 +2157,8 @@ ccache gcc foo.c
 ## 工具
 
 * terminal
+    - ios
+        + [ish-app / ish](https://github.com/ish-app/ish):Linux shell for iOS https://ish.app
     - Mac
         + Iterm2
             * [mbadolato / iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes):Over 200 terminal color schemes/themes for iTerm/iTerm2. Includes ports to Terminal, Konsole, PuTTY, Xresources, XRDB, Remmina, Termite, XFCE, Tilda, FreeBSD VT, Terminator, Kitty, MobaXterm, LXTerminal, Microsoft's Windows Terminal, Visual Studio http://www.iterm2colorschemes.com
@@ -2205,7 +2260,7 @@ ccache gcc foo.c
     - cloc：代码统计工具，能够统计代码的空行数、注释行、编程语言。
 * benchmark
     - [sharkdp/hyperfine](https://github.com/sharkdp/hyperfine):A command-line benchmarking tool
-* [bash](http://ftp.gnu.org/gnu/bash/)
+* [bash](http://ftp.gnu.org/gnu/bash/) https://www.gnu.org/software/bash/manua
     - [Bash-it/bash-it](https://github.com/Bash-it/bash-it):A community Bash framework.
     - [dylanaraps/pure-bash-bible ](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
 * [svenstaro/genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator https://svenstaro.github.io/genact/
