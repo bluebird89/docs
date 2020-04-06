@@ -37,15 +37,16 @@ thread.exe  2016 Console    0    16,064 K
     - box版本号的问题
 
 ```sh
-vagrant box list              # 列表
+vagrant box list # 列表
 
-vagrant box add {title} {url}       # 添加镜像 title ubuntu/trusty64 [laravel/homestead](https://vagrantcloud.com/laravel/boxes/homestead/versions/3.0.0/providers/virtualbox.box)外网不稳定，可以试着换时间下载
+vagrant box add {title} {url} # 添加镜像 title ubuntu/trusty64 [laravel/homestead](https://vagrantcloud.com/laravel/boxes/homestead/versions/3.0.0/providers/virtualbox.box)外网不稳定，可以试着换时间下载
 vagrant box add ubuntu/trusty64 # 通过包名先去本地是否存在，没有去仓库下载，下载的版本在上述命令行下加入 --box-version=版本号
 vagrant box add hahaha ~/box/package.box # 加载本地文件(package包)
 vagrant box add precise64 http://files.vagrantup.com/precise64.box
 
 vagrant box remove ubuntu/trusty64  --box-version=20170810.0.0  # 移除镜像,指定版本
-vagrant box repackage         # 重新打包
+vagrant box repackage  # 重新打包
+vagant box update # 更新box
 
 vagrant plugin repair|update
 vagrant plugin expunge --reinstall
@@ -72,25 +73,27 @@ vagrant box add metadata.json
 
 ## 服务管理
 
-通常情况下Box只做最基本的设置，因此Vagrant通常使用Chef或者Puppet来做进一步的环境搭建.那么Chef或者Puppet称为provisioning，而该命令就是指定开启相应的provisioning。按照Vagrant作者的说法，所谓的provisioning就是"The problem of installing software on a booted system"的意思。
+通常情况下Box只做最基本的设置,使用Chef或者Puppet (provisioning)来做进一步的环境搭建,而该命令就是指定开启相应的provisioning
 
-* Chef
-* Puppet
-* Ansible
-* 使用Shell来编写安装脚本
+* 所谓的provisioning就是"The problem of installing software on a booted system"的意思。
+    - Chef
+    - Puppet
+    - Ansible
+    - 使用Shell来编写安装脚本
 
 ```sh
 vagrant -h
 
 vagrant init hashicorp/precise64  # 用 hashicorp/precise64 进行 box 初始化实例，自动帮你生成vagrantfile，默认base
 
+vagrant global-status --prune # 查看实例
 vagrant status  # 查看虚拟机运行状态
 vagrant up      # 启动配置虚拟机
 vagrant suspend
 vagrant resume
-vagrant halt      # 关闭虚拟机
+vagrant halt # 关闭虚拟机
 
-vagrant ssh      # SSH 至虚拟机
+vagrant ssh # SSH 至虚拟机
 vagrant ssh web/dbmaster
 vagrant ssh-config
 
@@ -285,13 +288,6 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-## 实例
-
-```sh
-# 查看实例
-vagrant global-status --prune
-```
-
 ## 网络
 
 * 端口映射(Forwarded port) ，顾名思义是指把宿主计算机的端口映射到虚拟机的某一个端口上，访问宿主计算机端口时，请求实际是被转发到虚拟机上指定端口的。Vagrantfile中设定语法为： `config.vm.forwarded_port 80, 8080` 以上将访问宿主计算机8080端口的请求都转发到虚拟机的80端口上进行处理。 默认只转发TCP包，UDP需要额外添加以下语句： `config.vm.forwarded_port 80, 8080, protocol: "udp"`
@@ -331,5 +327,5 @@ vagrant up
 
 * [Parallels/vagrant-parallels](https://github.com/Parallels/vagrant-parallels)Vagrant Parallels Provider
 * [Vagrant Documentation](https://www.vagrantup.com/docs/)
-* [官网](https://app.vagrantup.com/boxes/search?provider=virtualbox) 比如：https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.4/providers/virtualbox.boxes
+* [Vagrant cloud](https://app.vagrantup.com/boxes/search) 比如：https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.4/providers/virtualbox.boxes
 * [资源](http://www.vagrantbox.es/)

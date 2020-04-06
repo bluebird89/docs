@@ -205,6 +205,11 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
     -   所以Proxy不但解决了同一主宿机相同服务端口冲突的问题，还提供了Service转发服务端口对外提供服务的能力，Proxy后端使用了随机、轮循负载均衡算法。关于更多 [kube-proxy 的内容 KUBERNETES代码走读之MINION NODE 组件 KUBE-PROXY](http://www.sel.zju.edu.cn/?spm=5176.100239.blogcont47308.8.2bn7P0&p=484)
     -   Proxy是为了解决外部网络能够访问跨机器集群中容器提供的应用服务而设计的，运行在每个Node上。Proxy提供TCP/UDP sockets的proxy，每创建一种Service，Proxy主要从etcd获取Services和Endpoints的配置信息（也可以从file获取），然后根据配置信息在Minion上启动一个Proxy的进程并监听相应的服务端口，当外部请求发生时，Proxy会根据Load Balancer将请求分发到后端正确的容器处理。
     -   Proxy不但解决了同一主宿机相同服务端口冲突的问题，还提供了Service转发服务端口对外提供服务的能力，Proxy后端使用了随机、轮循负载均衡算法。
+* annotate命令：更新一个或多个资源的Annotations信息。也就是注解信息，可以方便的查看做了哪些操作。
+    - 由key/value组成。
+    - Annotations的目的是存储辅助数据，特别是通过工具和系统扩展操作的数据，更多介绍在这里。
+    - 如果--overwrite为true，现有的annotations可以被覆盖，否则试图覆盖annotations将会报错。
+    - 如果设置了--resource-version，则更新将使用此resource version，否则将使用原有的resource version。
 
 ![](../_static/constructor.png)
 ![](../_static/kubelet.png)
@@ -262,54 +267,126 @@ gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
+
 yum install -y kubectl
 
 swapoff -a
 
-kubectl config view
-kubectl config set-context my-context --namespace=mystuff --users xxx --clusters xxx
+# 在 bash 中设置当前 shell 的自动补全，要先安装 bash-completion 包
+source <(kubectl completion bash)
+echo"source <(kubectl completion bash)" >> ~/.bashrc # 在您的 bash shell 中永久的添加自动补全
+
+# 在 zsh 中设置当前 shell 的自动补全
+source <(kubectl completion zsh)
+echo"if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~/.zshrc # 在您的 zsh shell 中永久的添加自动补全
+
 kubectl version|cluster-info
 
-kubectl get pods --all-namespaces  // list two pods, one an ‘addon-manager’ and another a ‘dashboard’
-kubectl delete deployments hello-minikube1
-kubectl get pods -A
-kubectl get deployments|events|services
-
-kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=172.28.128.228 # 创建
+kubectl config view
+kubectl config set-context my-context --namespace=mystuff --users xxx --clusters xxx
+kubectl config set-cluster my-other-cluster --server=https://k8s.example.com:6443 --certificate-authority=path/to/the/cafile # 创建cluster
+kubectl config set-credentials foo --username=foo --password=pass # 创建用户
+kubectl config set-context some-context --cluster=my-other-cluster --user=foo --namespace=bar # 创建context
+kubectl config current-context # 获取current context
+kubectl config set-context --current --namespace [new namespace] # 切换namespace
+kubectl config use-context my-other-context # 切换current context
+kubectl config set-context minikube --namespace=another-namespace # 为context更改默认的namespace
+kubectl config get-clusters # 获取所有cluster
+kubectl config get-contexts # 查看所有context
 kubectl config use-context my-context # 使用
-kubectl create -f single-config-file.yaml
+
+KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view # 同时使用多个 kubeconfig 文件并查看合并的配置
+
+
+kubectl config view -o jsonpath='{.users[?(@.name == "e2e")].user.password}' # 获取 e2e 用户的密码
+kubectl config current-context # 展示当前所处的上下文
+kubectl config use-context my-cluster-name # 设置默认的上下文为 my-cluster-name
+kubectl config set-credentials kubeuser/foo.kubernetes.com --username=kubeuser --password=kubepassword # 添加新的集群配置到 kubeconf 中，使用 basic auth 进行鉴权
+kubectl config set-context gce --user=cluster-admin --namespace=foo \
+  && kubectl config use-context gce # 使用特定的用户名和命名空间设置上下文。
 
 kubectl get objecttyp # 获取某种obejct的列表
-
 kubectl get objecttype object-name # 获取某个object详情
+kubectl get all # 查看所有的资源信息
+kubectl get --all-namespaces
+kubectl get node # 查看node节点列表
+kubectl get node --show-labels # 显示node节点的标签信息
+kubectl get svc # 查看服务的详细信息，显示了服务名称，类型，集群ip，端口，时间等信息
+kubectl get svc -n kube-system
+kubectl get ns # 查看命名空间
+kubectl get namespaces
+kubectl get rs # 查看目前所有的replica set，显示了所有的pod的副本数，以及他们的可用数量以及状态等信息
+kubectl get deploy -o wide # 查看已经部署了的所有应用，可以看到容器，以及容器所用的镜像，标签等信息
+kubectl get deployments -o wide
+kubectl get pods -A
+kubectl get pod  # 查看pod列表
+kubectl get pod --show-labels # 显示pod节点的标签信息
+kubectl get pods -l app=example # 根据指定标签匹配到具体的pod
+kubectl get pod -o wide # 查看pod详细信息，也就是可以查看pod具体运行在哪个节点上（ip地址信息）
+kubectl get pod --all-namespaces # 查看所有pod所属的命名空间
+kubectl get pod --all-namespaces  -o wide # 查看所有pod所属的命名空间并且查看都在哪些节点上运行
+kubectl get deployments|events|services
 
+# 设置资源的一些范围限制
+kubectl set resources deployment nginx -c=nginx --limits=cpu=200m,memory=512Mi #  将deployment的nginx容器cpu限制为“200m”，将内存设置为“512Mi”
+kubectl set resources deployment nginx --limits=cpu=200m,memory=512Mi --requests=cpu=100m,memory=256Mi # 设置所有nginx容器中 Requests和Limits
+kubectl set resources deployment nginx --limits=cpu=0,memory=0 --requests=cpu=0,memory=0 # 删除nginx中容器的计算资源值
+
+# 更新现有资源的容器镜像
+kubectl set image deployment/nginx busybox=busybox nginx=nginx:1.9.1 # 将deployment中的nginx容器镜像设置为“nginx：1.9.1”
+kubectl set image deployments,rc nginx=nginx:1.9.1 --all # 所有deployment和rc的nginx容器镜像更新为“nginx：1.9.1”
+kubectl set image daemonset abc *=nginx:1.9.1 # 将daemonset abc的所有容器镜像更新为“nginx：1.9.1”
+kubectl set image -f path/to/file.yaml nginx=nginx:1.9.1 --local -o yaml # 从本地文件中更新nginx容器镜像
+
+kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=172.28.128.228 # 创建
+
+# create 命令：根据文件或者输入来创建资源
+kubectl create -f single-config-file.yaml
+kubectl run nginx --replicas=3 --labels="app=example" --image=nginx:1.10 --port=80
+kubectl expose deployment nginx --port=88 --type=NodePort --target-port=80 --name=nginx-service
+# Expose the Pod to the public internet
+kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+kubectl describe pod kubernetes-dashboard -n kube-system
+
+# 更新（增加、修改或删除）资源上的 label
+kubectl label pods foo unhealthy=true # 给名为foo的Pod添加label unhealthy=true
+kubectl label --overwrite pods foo status=unhealthy # 给名为foo的Pod修改label 为 'status' / value 'unhealthy'，且覆盖现有的value
+kubectl label pods --all status=unhealthy # 给 namespace 中的所有 pod 添加 label
+kubectl label pods foo status=unhealthy --resource-version=1 # 仅当resource-version=1时才更新 名为foo的Pod上的label
+kubectl label pods foo bar- # 删除名为“bar”的label 。（使用“ - ”减号相连）
+
+kubectl annotate pods foo description='my frontend' # 更新Pod“foo”，设置annotation “description”的value “my frontend”，如果同一个annotation多次设置，则只使用最后设置的value值
+kubectl annotate -f pod.json description='my frontend' # 根据“pod.json”中的type和name更新pod的annotation
+kubectl annotate --overwrite pods foo description='my frontend running nginx' # 更新Pod"foo"，设置annotation“description”的value“my frontend running nginx”，覆盖现有的值
+kubectl annotate pods --all description='my frontend running nginx' # 更新 namespace中的所有pod
+kubectl annotate pods foo description='my frontend running nginx' --resource-version=1 # 只有当resource-version为1时，才更新pod 'foo'
+kubectl annotate pods foo description- # 通过删除名为“description”的annotations来更新pod 'foo'。 不需要 -overwrite flag。
+
+# apply命令：通过文件名或者标准输入对资源应用配置
 # 部署weave网络
 sysctl net.bridge.bridge-nf-call-iptables=1 -w
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
-# Expose the Pod to the public internet
-kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10
-kubectl expose deployment hello-minikube --type=NodePort --port=8080
-
-kubectl describe pod kubernetes-dashboard -n kube-system
-
+# 删除资源
 kubectl delete services hello-minikube
 kubectl delete deployment hello-minikube
+kubectl delete -f demo-deployment.yaml
 
-kubectl config set-cluster my-other-cluster --server=https://k8s.example.com:6443 --certificate-authority=path/to/the/cafile # 创建cluster
-kubectl config set-credentials foo --username=foo --password=pass # 创建用户
+# patch命令：使用补丁修改，更新资源的字段，也就是修改资源的部分内容 语法：kubectl patch (-f FILENAME | TYPE NAME) -p PATCH
+kubectl patch node k8s-node-1 -p '{"spec":{"unschedulable":true}}' # Partially update a node using strategic merge patch
+kubectl patch pod valid-pod -p '{"spec":{"containers":[{"name":"kubernetes-serve-hostname","image":"new image"}]}}' # Update a container's image; spec.containers[*].name is required because it's a merge key
+# replace命令：通过文件或者标准输入替换原有资源
+kubectl replace -f ./pod.json # Replace a pod using the data in pod.json.
+cat pod.json | kubectl replace -f - # Replace a pod based on the JSON passed into stdin.
+kubectl get pod mypod -o yaml | sed 's/\(image: myimage\):.*$/\1:v4/' | kubectl replace -f - # Update a single-container pod's image version (tag) to v4
+kubectl replace --force -f ./pod.json # Force replace, delete and then re-create the resource
 
-kubectl config set-context some-context --cluster=my-other-cluster --user=foo --namespace=bar # 创建context
-kubectl config current-context # 获取current context
-kubectl config set-context --current --namespace [new namespace] # 切换namespace
-
-kubectl config use-context my-other-context # 切换current context
-kubectl config set-context minikube --namespace=another-namespace # 为context更改默认的namespace
+kubectl convert -f pod.yaml # Convert 'pod.yaml' to latest version and print to stdout.
+kubectl convert -f pod.yaml --local -o json # Convert the live state of the resource specified by 'pod.yaml' to the latest version and print to stdout in json format.
+kubectl convert -f . | kubectl create -f - # Convert all files under current directory to latest version and create them all.
 
 alias kcd='kubectl config set-context $(kubectl config current-context) --namespace ' # # To easily switch between namespaces, define an alias like this
-
-kubectl config get-clusters # 获取所有cluster
-kubectl config get-contexts # 查看所有context
 
 kubectl exec -it [pod-name] -- /bin/bash # 登录到pod中(pod只有一个container的情况)
 kubectl exec -it [pod-name] --container [container-name] -- /bin/bash # 登录到pod中的某个container中（pod包含多个container）
@@ -317,7 +394,56 @@ kubectl exec -it [pod-name] --container [container-name] -- /bin/bash # 登录�
 helm delete --purge [release name] # helm删除release(release name 可用于新的release)
 
 helm delete [release name] # helm删除release(release name将保留，即不能用于新的release)
-```
+
+## rollout 命令: 用于对资源进行管理
+kubectl rollout undo deployment/abc # 回滚到之前的deployment
+kubectl rollout status daemonset/foo # 查看daemonet的状态
+
+# rolling-update命令: 执行指定ReplicationController的滚动更新
+kubectl rolling-update frontend-v1 -f frontend-v2.json # 使用frontend-v2.json中的新RC数据更新frontend-v1的pod
+cat frontend-v2.json | kubectl rolling-update frontend-v1 -f - # 使用JSON数据更新frontend-v1的pod
+kubectl rolling-update frontend-v1 frontend-v2 --image=image:v2
+kubectl rolling-update frontend --image=image:v2
+kubectl rolling-update frontend-v1 frontend-v2 --rollback
+
+# scale命令：扩容或缩容 Deployment、ReplicaSet、Replication Controller或 Job 中Pod数量
+
+kubectl scale --replicas=3 rs/foo #  将名为foo中的pod副本数设置为3。
+kubectl scale deploy/nginx --replicas=30
+kubectl scale --replicas=3 -f foo.yaml # 将由“foo.yaml”配置文件中指定的资源对象和名称标识的Pod资源副本设为3
+kubectl scale --current-replicas=2 --replicas=3 deployment/mysql # 如果当前副本数为2，则将其扩展至3。
+kubectl scale --replicas=5 rc/foo rc/bar rc/baz # 设置多个RC中Pod副本数量
+
+# autoscale命令：弹性伸缩策略 ，它是根据流量的多少来自动进行扩展或者缩容。
+kubectl autoscale deployment foo --min=2 --max=10 # 使用 Deployment “foo”设定，使用默认的自动伸缩策略，指定目标CPU使用率，使其Pod数量在2到10之间
+kubectl autoscale rc foo --max=5 --cpu-percent=80 # 使用RC“foo”设定，使其Pod的数量介于1和5之间，CPU使用率维持在80％
+
+### 集群管理
+# certificate命令：用于证书资源管理，授权等
+kubectl certificate approve node-csr-81F5uBehyEyLWco5qavBsxc1GzFcZk3aFM3XW5rT3mw node-csr-Ed0kbFhc_q7qx14H3QpqLIUs0uKo036O2SnFpIheM18 # 例如，当有node节点要向master请求，那么是需要master节点授权的
+kubectl cluster-info # cluster-info 命令：显示集群信息
+
+# 以前需要heapster，后替换为metrics-server 
+kubectl top pod --all-namespaces # top 命令：用于查看资源的cpu，内存磁盘等资源的使用率
+cordon命令：用于标记某个节点不可调度
+uncordon命令：用于标签节点可以调度
+drain命令：用于在维护期间排除节点。
+taint命令：用于给某个Node节点设置污点
+
+
+kubectl logs nginx # 返回仅包含一个容器的pod nginx的日志快照
+kubectl logs -p -c ruby web-1 # 返回pod ruby中已经停止的容器web-1的日志快照
+kubectl logs -f -c ruby web-1 # 持续输出pod ruby中的容器web-1的日志
+kubectl logs --tail=20 nginx # 仅输出pod nginx中最近的20条日志
+kubectl logs --since=1h nginx # 输出pod nginx中最近一小时内产生的所有日志
+
+kubectl exec -it nginx-deployment-58d6d6ccb8-lc5fp bash # 进入nginx容器，执行一些命令操作
+kubectl attach 123456-7890 #  获取正在运行中的pod 123456-7890的输出，默认连接到第一个容器
+kubectl attach 123456-7890 -c ruby-container # 获取pod 123456-7890中ruby-container的输出
+kubectl attach 123456-7890 -c ruby-container -i -t # 切换到终端模式，将控制台输入发送到pod 123456-7890的ruby-container的“bash”命令，并将其输出到控制台/
+
+kubectl api-versions
+``` 
 
 ### etcd
 
