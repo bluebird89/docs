@@ -540,7 +540,7 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT $pagesize;
 select colname … from A表 Left join B表 on where a.id = b.id where b.id is null
 ```
 
-##  索引优化
+## 索引优化
 
 查询速度的提高是以插入、更新、删除的速度为代价的，这些写操作，增加了大量的I/O
 
@@ -583,7 +583,6 @@ select colname … from A表 Left join B表 on where a.id = b.id where b.id is n
 * 单表索引建议控制在5个以内,不允许超过5个：字段超过5个时，实际已经起不到有效过滤数据的作用了
 * 禁止在更新十分频繁、区分度不高的属性上建立索引，字段值离散度这么低,没必要加索引，比如性别
 * 对一个VARCHAR(N)列创建索引时，通常取其50%（甚至更小）左右长度创建前缀索引就足以满足80%以上的查询需求了，没必要创建整列的全长度索引；
-
 
 ```sql
 # actorid和filmid两个列上都建立了独立的索引,如下查询
@@ -808,8 +807,7 @@ ALTER TABLE tblname ENABLE KEYS;
 ## 批量更新
 
 * replace into 操作本质是对重复的记录先delete 后insert，如果更新的字段不全会将缺失的字段置为缺省值，用这个要悠着点！否则不小心清空大量数据可不是闹着玩的！！！
-* insert into 则是只update重复记录，不会改变其它字段。
-
+* insert into 则是只update重复记录，不会改变其它字段
 
 ```sql
 UPDATE categories

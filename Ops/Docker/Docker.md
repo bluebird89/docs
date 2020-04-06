@@ -1539,7 +1539,7 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 * GUI
   - [Shipyard](https://github.com/shipyard/shipyard)
   - https://www.portainer.io/
-  - https://kitematic.com/
+  - [docker / kitematic](https://github.com/docker/kitematic) Visual Docker Container Management on Mac & Windows https://kitematic.com/
   - https://dockstation.io/ 
   - Rancher is an open source software platform that enables organizations to run and manage Docker and Kubernetes in production. 
 

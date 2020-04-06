@@ -457,6 +457,7 @@ docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --name elk sebp/elk
 * [Yelp/elastalert](https://github.com/Yelp/elastalert):Easy & Flexible Alerting With ElasticSearch https://elastalert.readthedocs.org
 * UI
   - [appbaseio/dejavu](https://github.com/appbaseio/dejavu):The Missing Web UI for Elasticsearch: Import, browse and edit data with rich filters and query views, create search UIs visually. https://opensource.appbase.io/dejavu/
+* [deviantony / docker-elk](https://github.com/deviantony/docker-elk):The Elastic stack (ELK) powered by Docker and Compose.
 
 ## 参考
 
