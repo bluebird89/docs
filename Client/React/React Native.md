@@ -236,17 +236,13 @@ npm run eject #  导出配置文件
 * [uber/baseweb](https://github.com/uber/baseweb):A React Component library implementing the Base design language https://baseweb.design
 * [react-hook-form/react-hook-form](https://github.com/react-hook-form/react-hook-form):clipboard React hooks for form validation without the hassle. https://react-hook-form.com
 * JSX
-  
   - [developit/htm](https://github.com/developit/htm):Hyperscript Tagged Markup: JSX alternative using standard tagged templates, with compiler support.
 * [reactstudio](https://reactstudio.com)
 * Map
-  
   - [Coder-JJ/rc-leaflet](https://github.com/Coder-JJ/rc-leaflet):React Map Components of Leaflet.js
 * IDE
-    
     - [REACTIDE](http://reactide.io)
 * admin
-    
     - [marmelab/react-admin](https://github.com/marmelab/react-admin):A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, React and Material Design http://marmelab.com/react-admin
 * react
     
@@ -271,7 +267,6 @@ npm run eject #  导出配置文件
     - [gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby):Build blazing fast, modern apps and websites with React https://www.gatsbyjs.org
     - [transitive-bullshit/create-react-library](https://github.com/transitive-bullshit/create-react-library):⚡CLI for easily creating reusable react libraries.
 * Angular
-    
     - [ngrx/platform](https://github.com/ngrx/platform):Reactive libraries for Angular
 * 设计模式
     
@@ -289,7 +284,6 @@ npm run eject #  导出配置文件
     - [xiaolin/react-image-gallery](https://github.com/xiaolin/react-image-gallery):React carousel image gallery component with thumbnail and mobile support
     - [smooth-code/svgr](https://github.com/smooth-code/svgr):Transform SVGs into React components 🦁 https://svgr.now.sh/
 * 文件
-    
     - [diegomura/react-pdf](https://github.com/diegomura/react-pdf):📄 Create PDF files using React http://react-pdf.diegomura.com/repl
 * animations
     - [react-tools/react-move](https://github.com/react-tools/react-move):React Move 🌀 Beautiful, data-driven animations for React https://react-move.js.org
@@ -320,31 +314,23 @@ npm run eject #  导出配置文件
     - [transitive-bullshit/react-particle-effect-button](https://github.com/transitive-bullshit/react-particle-effect-button):Bursting particle effect buttons for React 🎉
     - [greena13/react-hotkeys](https://github.com/greena13/react-hotkeys):Declarative hotkey and focus area management for React
 * WEB
-    
     - [taobaofed/react-web](https://github.com/taobaofed/react-web):A framework for building web apps with React Native compatible API. http://taobaofed.github.io/react-web/
 * i18n
     - [lingui/js-lingui](https://github.com/lingui/js-lingui):🌍📖 A readable, automated, and optimized (5 kb) internationalization for JavaScript and React https://lingui.js.org/
     - [i18next/react-i18next](https://github.com/i18next/react-i18next):Internationalization for react done right. Using the i18next i18n ecosystem. https://react.i18next.com/
 * SPA
-    
     - [stereobooster/react-snap](https://github.com/stereobooster/react-snap):👻 Zero-configuration framework-agnostic static prerendering for SPAs
 * 代码展示
-    
     - [pomber/code-surfer](https://github.com/pomber/code-surfer):React component for scrolling, zooming and highlighting code <🏄/>
 * Docker
-    
     - [zzswang/docker-nginx-react](https://github.com/zzswang/docker-nginx-react):Run react single page app within a nginx server
 * Cookies
-    
     - [reactivestack/cookies](https://github.com/reactivestack/cookies):Load and save cookies within your React application
 * 地图
-    
     - [mariusandra/pigeon-maps](https://github.com/mariusandra/pigeon-maps):ReactJS Maps without external dependencies
 * 代码检测
-    
     - [facebook/prop-types](https://github.com/facebook/prop-types):Runtime type checking for React props and similar objects
 * 搜索
-    
     - [searchkit/searchkit](https://github.com/searchkit/searchkit):React UI components / widgets. The easiest way to build a great search experience with Elasticsearch. http://www.searchkit.co
 * 文档
     - [nfl/react-helmet](https://github.com/nfl/react-helmet):A document head manager for React
@@ -356,13 +342,10 @@ npm run eject #  导出配置文件
     - [jpuri/react-draft-wysiwyg](https://github.com/jpuri/react-draft-wysiwyg):A Wysiwyg editor build on top of ReactJS and DraftJS. https://jpuri.github.io/react-draft-wysiwyg
     - [rexxars/react-markdown](https://github.com/rexxars/react-markdown):Render Markdown as React components
 * Bundler
-    
     - [facebook/metro](https://github.com/facebook/metro):🚇 The JavaScript bundler for React Native. https://facebook.github.io/metro
-* 地图
-    
+* 地图 
     - [yezihaohao/react-qmap](https://github.com/yezihaohao/react-qmap):💡react腾讯地图开源组件 https://cheng_haohao.gitee.io/reactqmap
-* 测试
-    
+* 测试 
     - [kentcdodds/react-testing-library](https://github.com/kentcdodds/react-testing-library):🐐 Simple and complete React DOM testing utilities that encourage good testing practices. http://npm.im/react-testing-library
 * 路由
     - [reactjs/redux](https://github.com/reactjs/redux):Predictable state container for JavaScript apps http://redux.js.org
@@ -376,7 +359,6 @@ npm run eject #  导出配置文件
     - [erikras/react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example):A starter boilerplate for a universal webapp using express, react, redux, webpack, and react-transform
     - [maicki/react-native-router-bridge](https://github.com/maicki/react-native-router-bridge):Small module which bridges the navigation world between native and React Native.
 * gesture
-    
     - [kmagiera/react-native-gesture-handler](https://github.com/kmagiera/react-native-gesture-handler):Declarative API exposing platform native touch and gesture system to React Native.
 * Hooks
     - [rehooks/awesome-react-hooks](https://github.com/rehooks/awesome-react-hooks):Awesome React Hooks
@@ -441,6 +423,8 @@ npm run eject #  导出配置文件
 * [redux-saga/redux-saga](https://github.com/redux-saga/redux-saga):An alternative side effect model for Redux apps https://redux-saga.js.org/
 * [acdlite/recompose](https://github.com/acdlite/recompose):A React utility belt for function components and higher-order components.
 * [jamiebuilds/react-loadable](https://github.com/jamiebuilds/react-loadable):⏳ A higher order component for loading components with promises.
+* template
+  - [erikras / react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example)  A starter boilerplate for a universal webapp using express, react, redux, webpack, and react-transform
 
 ## UI
 

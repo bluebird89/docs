@@ -59,6 +59,8 @@ registry = "https://code.aliyun.com/rustcc/crates.io-index"
 * [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust heart Emacs
 * [rust-lang / rust-by-example](https://github.com/rust-lang/rust-by-example):Learn Rust with examples (Live code editor included) https://doc.rust-lang.org/stable/rust-by-example/
 * [zesterer / flume](https://github.com/zesterer/flume):A safe and fast multi-producer, single-consumer channel. https://crates.io/crates/flume
+* GUI
+    - [hecrj / iced](https://github.com/hecrj/iced):A cross-platform GUI library for Rust, inspired by Elm
 
 ## 参考
 

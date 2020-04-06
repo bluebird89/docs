@@ -1,17 +1,6 @@
 # Centos
 
 
-## 配置
-
-```sh
-yum-config-manager
-
-yum install vim
-yum install git
-yum provides ifconfig
-yum install net-tools
-sudo yum install epel-release # add the CentOS 7 EPEL repository
-```
 
 ## 自启服务
 
@@ -20,7 +9,7 @@ sudo yum install epel-release # add the CentOS 7 EPEL repository
 
 ## 防火墙
 
-* CentOS 7默认使用的是firewall作为防火墙，使用iptables必须重新设置一下
+* 默认使用的是firewall作为防火墙，使用iptables必须重新设置一下
 * iptables 设置端口暴露
 
 ```sh
@@ -105,37 +94,28 @@ enabled=1   #启用yum源，0为不启用，1为启用
 gpgcheck=1  #检查GPG-KEY，0为不检查，1为检查
 gpgkey=file:///media/cdrom/RPM-GPG-KEY-redhat-release   #GPG-KEY路径
 
-yum clean all   #清除yum缓存
+yum clean all   # 清除yum缓存
 yum makecache  #缓存本地yum源中的软件包信息
 
 yum install httpd   #安装apache
 rpm -ql httpd  #查询所有安装httpd的目录和文件
 
-systemctl start httpd.service  #启动apache
-systemctl stop httpd.service  #停止apache
-systemctl restart httpd.service  #重启apache
-systemctl enable httpd.service  #设置开机启动
+systemctl start|stop|restart|enable httpd.service  #设置开机启动
+```
+
+## 配置
+
+```sh
+yum-config-manager
+
+yum install vim
+yum install git
+yum provides ifconfig
+yum install net-tools
+sudo yum install epel-release # add the CentOS 7 EPEL repository
 ```
 
 ## nginx
-
-```
-//  编译后的说明
-nginx path prefix: "/usr/local/nginx"
-nginx binary file: "/usr/local/nginx/sbin/nginx"
-nginx modules path: "/usr/local/nginx/modules"
-nginx configuration prefix: "/usr/local/nginx/conf"
-nginx configuration file: "/usr/local/nginx/conf/nginx.conf"
-nginx pid file: "/usr/local/nginx/logs/nginx.pid"
-nginx error log file: "/usr/local/nginx/logs/error.log"
-nginx http access log file: "/usr/local/nginx/logs/access.log"
-nginx http client request body temporary files: "client_body_temp"
-nginx http proxy temporary files: "proxy_temp"
-nginx http fastcgi temporary files: "fastcgi_temp"
-nginx http uwsgi temporary files: "uwsgi_temp"
-nginx http scgi temporary files: "scgi_temp"
-```
-
 
 ```sh
 sudo su
@@ -151,6 +131,22 @@ tar -zxvf nginx-1.12.2.tar.gz # 解压文件，获得源码
 ./configure  # creating objs/Makefile
 make
 make install # 将译安装完的软件都会放在/usr/local下面
+
+//  编译后的说明
+nginx path prefix: "/usr/local/nginx"
+nginx binary file: "/usr/local/nginx/sbin/nginx"
+nginx modules path: "/usr/local/nginx/modules"
+nginx configuration prefix: "/usr/local/nginx/conf"
+nginx configuration file: "/usr/local/nginx/conf/nginx.conf"
+nginx pid file: "/usr/local/nginx/logs/nginx.pid"
+nginx error log file: "/usr/local/nginx/logs/error.log"
+nginx http access log file: "/usr/local/nginx/logs/access.log"
+nginx http client request body temporary files: "client_body_temp"
+nginx http proxy temporary files: "proxy_temp"
+nginx http fastcgi temporary files: "fastcgi_temp"
+nginx http uwsgi temporary files: "uwsgi_temp"
+nginx http scgi temporary files: "scgi_temp"
+
 whereis nginx
 
 cd /usr/local/nginx/sbin
@@ -290,6 +286,10 @@ tar xfz percona-server-5.7.18-14.tar.gz
 
 # CMake 安装
 yum install libaio-devel
+
+yum install https://www.percona.com/redir/downloads/percona-release/redhat/percona-release-0.1-4.noarch.rpm
+yum install Percona-Server-client-57 Percona-Server-server-57
+/usr/bin/mysql_secure_installation
 ```
 
 ### php
@@ -370,14 +370,5 @@ cd swoole-src-2.1.1　　#文件夹名称可能不一样
 /usr/local/php7/bin/phpize #用phpize生成configure配置文件
 ./configure --with-php-config=/usr/local/php7/bin/php-config
 make && make install
-```
-
-### Percona
-
-```sh
-yum install https://www.percona.com/redir/downloads/percona-release/redhat/percona-release-0.1-4.noarch.rpm
-
-yum install Percona-Server-client-57 Percona-Server-server-57
-/usr/bin/mysql_secure_installation
 ```
 

@@ -670,7 +670,7 @@ Python实现的数据库。
 
 用来进行标记的库。
 
-- django-taggit：简单的 Django 标记工具。[官网](https://github.com/alex/django-taggit)
+* django-taggit：简单的 Django 标记工具。[官网](https://github.com/alex/django-taggit)
 
 ## 管理面板
 
@@ -875,6 +875,7 @@ Python实现的数据库。
   - pylama：Python 和 JavaScript 的代码审查工具。[官网](https://pylama.readthedocs.org/en/latest/)
 * 代码格式化
   - autopep8：自动格式化 Python 代码，以使其符合 PEP8 规范。[官网](https://github.com/hhatto/autopep8)
+  - [psf / black](https://github.com/psf/black):The uncompromising Python code formatter https://black.readthedocs.io/en/stable/
 * 代码质量
   - Codacy：自动化代码审查，更加快速的发布高质量代码。对于开源项目是免费的。[官网](https://www.codacy.com/)
   - QuantifiedCode：一个数据驱动、自动、持续的代码审查工具。[官网](https://www.quantifiedcode.com/)

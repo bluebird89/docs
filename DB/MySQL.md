@@ -237,15 +237,15 @@ show variables like '%query_cache%'
 
 * 配置文件：/usr/local/etc/my.cnf或者 my.ini
 * 字符集: 客户端向MySQL服务器端请求和返加的数据的字符集
-    - 在选择数据库后使用:`set names gbk`;
+    - 在选择数据库后使用:`set names gbk`,相当于 client server connection 都设置;
     - 默认使用utf8mb4字符集,utf8mb4是utf8的超集，emoji表情以及部分不常见汉字在utf8下会表现为乱码，故需要升级至utf8mb4。
     + 数据库存储:一个汉字utf8下为两个长度,gbk下为一个长度
     + 正常一个汉字utf8下为三个字节,gbk下为两个字节
-    + 系统变量
+    + 系统变量 `SHOW VARIABLES LIKE 'character_set_%'`
         + character_set_server：默认的内部操作字符集
-        + character_set_client：客户端来源数据使用的字符集
+        + character_set_client：客户端向服务器发送数据时使用的编码
         + character_set_connection：连接层字符集
-        + character_set_results：查询结果字符集
+        + character_set_results：服务器端将结果返回给客户端所使用的编码
         + character_set_database：当前选中数据库的默认字符集
         + character_set_system：系统元数据(字段名等)字符集
 * 保证客户端使用字符集与服务端返回数据字符集编码一致(以适应客户端为主,修改服务器服务器端配置)
@@ -390,63 +390,15 @@ log-error=/data/3306/mysql_oldboy.err
 pid-file=/data/3306/mysqld
 ```
 
-```sh
-# 脚本文件
-#!/bin/sh
-init port=3307
-mysql_user="root"
-mysql_pwd="migongge"
-CmdPath="/application/mysql/bin"
-mysql_sock="/data/${port}/mysql.sock"
-#startup
-function_start_mysql() {
-    if [ ! -e "$mysql_sock" ];then
-     printf "Starting MySQL...\n"
-    /bin/sh ${CmdPath}/mysqld_safe --defaults-file=/data/${port}/my.cnf 2>&1 > /dev/null &
-    else
-      printf "MySQL is running...\n"
-    exit
-    fi
-}
-#stop function
-function_stop_mysql() {
-    if [ ! -e "$mysql_sock" ];then
-    printf "MySQL is stopped...\n"
-    exit
-    else
-    printf "Stoping MySQL...\n"
-    ${CmdPath}/mysqladmin -u ${mysql_user} -p${mysql_pwd} -S /data/${port}/mysql.sock shutdown
-    fi
-}
-#restart function
-function_restart_mysql() {
-   printf "Restarting MySQL...\n"
-   function_stop_mysql
-   sleep 2
-   function_start_mysql
-}
-
-case $1 in
-start)
-function_start_mysql
-;;
-stop)
-function_stop_mysql
-;;
-restart)
-function_restart_mysql
-;;
-*)
-printf "Usage: /data/${port}/mysql {start|stop|restart}\n"
-esac
-```
-
 ```sql
 status # 查看连接信息
 select version();
 SHOW VARIABLES LIKE "character_set%"; # character_set_client  接受的客户端编码  character_set_result # 返回结果集的编码
 SET character_set_client=GBK; # 不一致的话,修改
 set names gbk # 修改client connection results字符集
+
+SHOW CHARACTER SET [LIKE 'pattern']/SHOW CHARSET [LIKE 'pattern']    # 查看所有字符集
+SHOW COLLATION [LIKE 'pattern']        # 查看所有校对集
 
 # 出现ERROR 1040: Too many connections错误,修正max_connections的值
 show variables like 'max_connections';  # 最大连接数
@@ -490,7 +442,35 @@ mysqld --initialize
 
 ### 权限管理
 
-* all权限:`SELECT,INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER`
+* 权限列表
+    - ALL [PRIVILEGES]    -- 设置除GRANT OPTION之外的所有简单权限
+    - ALTER    -- 允许使用ALTER TABLE
+    - ALTER ROUTINE    -- 更改或取消已存储的子程序
+    - CREATE    -- 允许使用CREATE TABLE
+    - CREATE ROUTINE    -- 创建已存储的子程序
+    - CREATE TEMPORARY TABLES        -- 允许使用CREATE TEMPORARY TABLE
+    - CREATE USER        -- 允许使用CREATE USER, DROP USER, RENAME USER和REVOKE ALL PRIVILEGES。
+    - CREATE VIEW        -- 允许使用CREATE VIEW
+    - DELETE    -- 允许使用DELETE
+    - DROP    -- 允许使用DROP TABLE
+    - EXECUTE        -- 允许用户运行已存储的子程序
+    - FILE    -- 允许使用SELECT...INTO OUTFILE和LOAD DATA INFILE
+    - INDEX     -- 允许使用CREATE INDEX和DROP INDEX
+    - INSERT    -- 允许使用INSERT
+    - LOCK TABLES        -- 允许对您拥有SELECT权限的表使用LOCK TABLES
+    - PROCESS     -- 允许使用SHOW FULL PROCESSLIST
+    - REFERENCES    -- 未被实施
+    - RELOAD    -- 允许使用FLUSH
+    - REPLICATION CLIENT    -- 允许用户询问从属服务器或主服务器的地址
+    - REPLICATION SLAVE    -- 用于复制型从属服务器（从主服务器中读取二进制日志事件）
+    - SELECT    -- 允许使用SELECT
+    - SHOW DATABASES    -- 显示所有数据库
+    - SHOW VIEW    -- 允许使用SHOW CREATE VIEW
+    - SHUTDOWN    -- 允许使用mysqladmin shutdown
+    - SUPER    -- 允许使用CHANGE MASTER, KILL, PURGE MASTER LOGS和SET GLOBAL语句，mysqladmin debug命令；允许您连接（一次），即使已达到max_connections。
+    - UPDATE    -- 允许使用UPDATE
+    - USAGE    -- “无权限”的同义词
+    - GRANT OPTION    -- 允许授予权限
 * 插件
     - auth_socket plugin：　`sudo mysql` 直接登录
 
@@ -499,22 +479,24 @@ mysql -hlocalhost  -P 3306 -u root -p  # 生成用户root与空密码登陆,第�
 
 exit|quit| \q
 
+mysqld --skip-grant-tables /* 跳过权限验证登录MySQL */
+
 SELECT user,authentication_string,plugin,host FROM mysql.user;
-CREATE USER 'lee'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456Ac&' # 添加用户
-GRANT ALL PRIVILEGES ON test.*/user.*/ TO lee@'localhost';
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root密码' WITH GRANT OPTION;
+CREATE USER 'lee'@'localhost' IDENTIFIED [WITH mysql_native_password] BY '123456Ac&' # 添加用户
+GRANT ALL PRIVILEGES ON test.*/user.*/ TO lee@'localhost' [IDENTIFIED BY 'root密码' WITH GRANT OPTION];
 FLUSH PRIVILEGES;
 
-SELECT user,authentication_string,plugin,host FROM mysql.user; # msyql 8.0
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 ALTER USER `root`@`localhost` IDENTIFIED WITH caching_sha2_password BY 'password';
-FLUSH PRIVILEGES;
+RENAME USER old_user TO new_user;
 
 select user(); # 当前连接数据库的用户
 
 show grants for 'testuser'@'localhost';
+SHOW GRANTS FOR CURRENT_USER();
 
 # 更新密码
+SET PASSWORD = PASSWORD('密码')    -- 为当前用户设置密码
+SET PASSWORD FOR 用户名 = PASSWORD('密码')    -- 为指定用户设置密码
 update mysql.user SET Password = PASSWORD('密码') where User = 'root';
 FLUSH PRIVILEGES;
 
@@ -532,65 +514,94 @@ UPDATE mysql.user SET authentication_string = '' WHERE user = 'root';
 UPDATE mysql.user SET plugin = '' WHERE user = 'root';s
 sudo systemctl restart mariadb
 
-show processlist
+SHOW PROCESSLIST # 显示哪些线程正在运行
+SHOW VARIABLES
 ```
 
 ### 数据类型
 
 * 整型
-    - tinyint 0-255 或 -2^7~2^7-1 1个字节
-    - smallint -2^15~2^15-1 2个字节
-    - mediumint -2^23~2^23-1 3个字节
-    - int 0-2^32-1 4个字节
-    - bigint 0-2^64-1 8个字节
-    - unsigned:无符号数
+    - tinyint       0-255 或 -2^7~2^7-1 1个字节
+    - smallint      -2^15~2^15-1        2个字节
+    - mediumint     -2^23~2^23-1        3个字节
+    - int           0-2^32-1            4个字节
+    - bigint        0-2^64-1            8个字节
     - 显示宽度int(11):最小显示位数(默认不起作用),zerofill会用0填充,不决定数据大小
-* 浮点型(M代表总长度(不含小数点)，D代表小数位数),精度会丢失,不要作比较
-    - float(M,D) (论上可以保留7位小数) 3.4E+38~3.4E+38 4个字节
-    - double(M,D) (理论上保留15位小数) -1.8E+308~1.8E+308 8个字节
-* 定点数:decimal(M,D)，M的最大值是65，D的最大值是30，默认是（10,0）,用于保存精确的小数,使用二进制格式将9个十进制(基于10)数压缩为4个字节
+        + 默认存在符号位，unsigned 修改无符号数
+        + 如果某个数不够定义字段时设置的位数，则前面以0补填，zerofill 属性修改 例：int(5)    插入一个数'123'，补填后为'00123'
+* 浮点型:
+    - 单精度 float(M,D)  (论上可以保留7位小数) 3.4E+38~3.4E+38     4个字节
+    - 双精度 double(M,D) (理论上保留15位小数) -1.8E+308~1.8E+308  8个字节
+    - M表示总位数，D表示小数位数。M和D的大小会决定浮点数的范围,不同于整型的固定范围
+    - M既表示总位数（不包括小数点和正负号），也表示显示宽度（所有显示符号均包括）
+    - 表示近似值，精度会丢失,不要作比较
+    - 浮点数的执行效率要高于定点数
+    - 支持符号位 unsigned 属性，也支持显示宽度 zerofill 属性
+* 定点数:decimal(M,D)，M的最大值是65，D的最大值是30，默认是（10,0）
     - 使用二进制格式将9个十进制(基于10)数压缩为4个字节来表示DECIMAL列值
     - M整数与小数部分的总长度， D指的是小数部分的长度
-    - 注意:定点数的值是正确的，浮点数会失去精度。浮点数的执行效率要高于定点数。浮点数和定点数支持显示宽度，支持无符号
+    - 注意:定点数的值是精确的数值，浮点数会失去精度
+    - 支持显示宽度，支持无符号
 * **字符**
-    - 长度 指的 字符长度而不是字节数
-    - char(M) 固定长度 0-255个字符
+    - char(M) 定长字符串，速度快，但浪费空间
+        + 固定长度，范围0-255个字符，与编码无关
         + 不足的话右边填充空格以达到指定的长度
-        + 存取数度还是要比varchar要快得多，因为其长度固定，方便程序的存储与查找
+        + 存取速度比varchar要快得多，因为其长度固定，方便程序的存储与查找
         + 当检索/读取到CHAR值时，尾部的空格被删除掉
-        + 付出的是空间的代价，因为其长度固定，所以难免会有多余的空格占位符占据空间，可谓是以空间换取时间效率
-    - varchar(M) 自动伸缩型，varchar数据类型的长度支持到了65535字节
-        + M为最大字符个数
+        + 付出的是空间的代价，因为其长度固定，所以会有多余的空格占位符占据空间，可谓是以空间换取时间效率
+    - varchar(M) 自动伸缩型 变长字符串，速度慢，但节省空间
+        + 长度支持到了65535字节，与编码有关，M为最大字符个数
+            * 英文字符（ASCII）占用1个字节，汉字占用两个字节
+            * utf-8状态下，每个字符最多占3个字节，汉字最多可以存 21844个字符串,英文也为 21844个字符串
+            * 在gbk状态下，每个字符最多占2个字节，汉字最多可以存 32766个字符串，英文也为 32766个字符串
+            * latin1 最大为65532个字符
         + 占用需要的空间
         + 使用额外的1到2字节存储长度，列小于255使用1字节保存长度，大于255使用2字节保存
-        + 在5.0.3以下的版本中的最大长度限制为255，而在5.0.3及以上的版本中，
+        + 最大有效长度由最大行大小和使用的字符集确定
+        + 最大有效长度是65532字节，因为在varchar存字符串时，第一个字节是空的，不存在任何数据，然后还需两个字节来存放字符串的长度，所以有效长度是64432-1-2=65532字节
+        + 在5.0.3以下的版本中的最大长度限制为255，而在5.0.3及以上的版本中
         + 值保存和检索时尾部的空格仍保留
-    - 指定长度都为字符长度
-    - 长度
-        + 英文字符（ASCII）占用1个字节，对一个汉字占用两个字节
-        + 在utf-8状态下，每个字符最多占3个字节，汉字最多可以存 21844个字符串, 英文也为 21844个字符串
-        + 在gbk状态下，每个字符最多占2个字节，汉字最多可以存 32766个字符串，英文也为 32766个字符串
+    - M表示能存储的最大长度，此长度是字符数，非字节数
     - 分配给CHAR或VARCHAR列的值超过列的最大长度，则对值进行裁剪以使其适合。如果被裁掉的字符不是空格，则会产生一条警告
-    * 超过255字符的只能用varchar或者text
+    - 超过255字符的只能用varchar或者text
+    - blob 二进制字符串（字节字符串）
+        +  tinyblob
+        +  blob
+        +  mediumblob
+        +  longblob
+    - text 非二进制字符串（字符字符串）
+        + tinytext: 2^8-1
+        + text 2^16-1 不可以有默认值，能用varchar的地方不用text，占用字节比varchar大太多
+        + mediumtext 中型文本型 2^24-1 0－1677个字符
+        + longtext 大型文本 2^32-1 0-42亿个字符
     - blob和text唯一区别就是blob保存二进制数据、没有字符集和排序规则
-    - tinytext: 2^8-1
-    - text 2^16-1 不可以有默认值，能用varchar的地方不用text，占用字节比varchar大太多
-    - mediumtext 中型文本型 2^24-1 0－1677个字符
-    - longtext 大型文本 2^32-1 0-42亿个字符
 * 日期时间
-    - date 2015-10-20
-    - time 10:09:08 100908 9:5:0 CURRENT_TIME()
+    - date 3字节 1000-01-01 - 9999-12-31 current_date
+    - year 1字节 1901 - 2155
+    - time 3字节 -838:59:59 - 838:59:59 10:09:08  CURRENT_TIME() 
         +  ADDTIME(CURRENT_TIME(), 023000),  SUBTIME(CURRENT_TIME(), 023000);
         +  TIMEDIFF(end_at, start_at)
         +  TIME_FORMAT(start_at, '%h:%i %p') start_at
         +  UTC_TIME()
-    - datetime '1000-01-01 00:00:00' to '9999-12-31 23:59:59'，精度是秒，存储值为 2016-05-06 22:39:40
+    - datetime 8字节 '1000-01-01 00:00:00' - '9999-12-31 23:59:59'，精度是秒
         + Strict mode (and more specifically NO_ZERO_DATE which is part of strict mode) usually sets off that error if the table was created with an all zero default date
         + 查看 SELECT @@sql_mode，使用1970-01-01 00:00:01
-    - timestamp保存自 1970年1月1日午夜以来的秒数，和unix时间戳相同，提供4字节存储 只能表示1970年到2038年。默认timestamp值 为 NOT NULL。
+    - timestamp：4字节 自 1970年1月1日午夜以来的秒数，和unix时间戳相同，19700101000000 到 2038-01-19 03:14:07。默认timestamp值 为 NOT NULL， current_timestamp
     - 默认值：datetime or timestrap 默认值 CURRENT_TIMESTAMP
+* enum(val1, val2, val3...)
+    - 在已知的值中进行单选。最大数量为65535
+    - 枚举值在保存时，以2个字节的整型(smallint)保存。每个枚举值，按保存的位置顺序，从1开始逐一递增
+    - 表现为字符串类型，存储却是整型
+    - NULL值的索引是NULL
+    - 空字符串错误值的索引值是0
+* set(val1, val2, val3...)
+    - 最多可以有64个不同的成员。以bigint存储，共8个字节。采取位运算的形式
+    - 当创建表时，SET成员值的尾部空格将自动被删除
 * ip:通常使用varchar(15)保存IP地址
-    * inet_aton() inet_ntoa()用于转换
+    * INET_ATON('127.0.0.1') 将IP转为整型
+    * INET_NTOA(2130706433) 将整型转为IP
+    * ip2long可转换为整型，但会出现携带符号问题。需格式化为无符号的整型 `sprintf("%u", ip2long('192.168.3.134'));`
+    * long2ip将整型转回IP字符串
 * json
     - 不能有默认值
     - 添加
@@ -635,118 +646,142 @@ UPDATE lnmp SET category = JSON_SET(category, '$.host', 'www.lnmp.cn', '$.url','
 UPDATE lnmp SET category = JSON_REPLACE(category, '$.name', 'php', '$.url', 'http://www.php.net') WHERE id = 2;
 UPDATE lnmp SET category = JSON_REMOVE(category, '$.url', '$.host') WHERE id = 1;
 
-select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at) as time from tmo_loyalty_customersync_log  where  created_at > '2019-09-12 08:00:00' and created_at < '2019-09-12 09:00:00'
+select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at) as time from tmo_loyalty_customersync_log where created_at > '2019-09-12 08:00:00' and created_at < '2019-09-12 09:00:00'
 selECT * FROM cron_schedule  where job_code='tmo_sync_jde_customers';
 
-select day(timestamp) as Day, hour(timestamp) as Hour, count(*) as Count
-from MyTable
-where timestamp between :date1 and :date2
-group by day(timestamp), hour(timestamp)
+select day(timestamp) as Day, hour(timestamp) as Hour, count(*) as Count from MyTable where timestamp between :date1 and :date2 group by day(timestamp), hour(timestamp)
 
 select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at) as time from tmo_loyalty_customersync_log  group by year(created_at),month(created_at),day(created_at),hour(created_at)  order by begin desc limit 10;
 ```
 
-### 库表数据操作
+### 数据操作
 
-* DB|TABLE
-    - CREATE
-    - DROP
-* DATA
-    - INSERT
-    - DELETE
-    - UPDATE
-    - SELECT
-* 属性
-    - NOT NULL | NULL：字段值是否可以为空
-    - DEFAULT value：字段值是否有一个默认值
-        + DEFAULT 1 ，默认值为整型
-        + DEFAULT "男" ，默认值为字符型
-    - PRIMARY KEY：指定该列主键，值是唯一的，不能重复
-    - AUTO_INCREMENT，指定列的值是自动增长型。 注意：一个数据表，只能有一个主键和一个自动增长型。 提示：数据表的id字段，必须要有 not null primary key auto_incremtn 这三个属性。
+* 列属性
+    - 主键
+        + 能唯一标识记录的字段，可以作为主键
+        + 一个表只能有一个主键
+        + 主键具有唯一性
+        + 声明字段时，用 primary key 标识，也可以在字段列表之后声明`create table tab ( id int, stu varchar(10), primary key (id));`
+        + 主键字段的值不能为null
+        + 主键可以由多个字段共同组成。此时需要在字段列表后声明的方法 `create table tab ( id int, stu varchar(10), age int, primary key (stu, age));`
+    - unique 唯一索引（唯一约束） 使得某字段的值也不能重复
+    - NOT NULL | NULL(默认)：字段值是否可以为空
+    - DEFAULT value：默认值属性
+    - AUTO_INCREMENT，指定列的值是自动增长型
+        + 一个数据表，只能有一个主键和一个自动增长型
+        + 自动增长必须为索引（主键或unique）
+        + 默认为1开始自动增长。可以通过表属性 auto_increment = x进行设置，或 alter table tbl auto_increment = x
+        + 数据表的id字段，必须要有 not null primary key auto_incremtn 这三个属性
     - ALIAS:别名
         + 涉及超过一个表
         + 在查询中使用了函数
         + 列名称很长或者可读性差
         + 需要把两个列或者多个列结合在一起
     - COMMENT:注释
+    - foreign key 外键约束： 用于限制主表与从表数据完整性 `alter table t1 add constraint `t1_t2_fk` foreign key (t1_id) references t2(id);`
+        + 外键只被InnoDB存储引擎所支持。其他引擎是不支持的
+        + 存在外键的表，称之为从表（子表），外键指向的表，称之为主表（父表）
+        + 作用：保持数据一致性，完整性，主要目的是控制存储在外键表（从表）中的数据
+        + `foreign key (外键字段） references 主表名 (关联字段) [主表记录删除时的动作] [主表记录更新时的动作]`
+        + 定了 on update 或 on delete：在删除或更新时，有如下几个操作可以选择：
+            - cascade，级联操作。主表数据被更新（主键值更新），从表也被更新（外键值更新）。主表记录被删除，从表相关记录也被删除。
+            - set null，设置为null。主表数据被更新（主键值更新），从表的外键被设置为null。主表记录被删除，从表相关记录外键被设置成null。但注意，要求该外键列，没有not null属性约束。
+            - restrict，拒绝父表删除和更新
 
 ```sql
 SHOW DATABASES;
 CREATE DATABASE IF NOT EXISTS db_name [CHARACTER SET utf8 COLLATE utf8_unicode_ci];  # 特殊符号、关键字表名加``
 ALTER DATABASE db_name charset=utf8;
+alter database 库名 选项信息
 DROP DATABASE [IF EXISTS] db_name;
+show databases[ like 'pattern']
 SHOW CREATE DATABASE db_name;
-select database();  # 查看当前使用的数据库
-USE db_name;
 
-SHOW TABLES;
-# CREATE TABLE table_name(col_name  type  attribute , col_name  type  attribute,…… );
-CREATE TABLE test.news(
+USE db_name;
+select database();  # 查看当前使用的数据库
+SHOW TABLE STATUS [FROM db_name] [LIKE 'pattern'] # 查看数据库状态
+select now(), user(), version();
+
+SHOW TABLES [ LIKE 'pattern'];
+
+DESCRIBE|DESC|EXPLAIN news;
+show columns from news;
+show index from table_name;
+show keys from table_name;
+SHOW CREATE TABELE news\G;
+
+CREATE TABLE IF NOT EXISTS test.news(
+  # 字段名 数据类型 [NOT NULL | NULL] [DEFAULT default_value] [AUTO_INCREMENT] [UNIQUE [KEY] | [PRIMARY] KEY] [COMMENT 'string']
   id int NOT null AUTO_INCREMENT primary KEY,
   title varchar(100) not null comment '名称',
   author varchar(20) not null comment '作者',
+  sex bit(1) NOT NULL DEFAULT b'1',
   source varchar(30) not null comment '来源',
   hits int(5) not null DEFAULT 0 comment '点击率',
   context text null comment '内容',
   adddate int(16) not null comment '添加时间',
   PRIMARY KEY (Id)
-)charset=utf8 collate=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 collate=utf8_bin;
 CREATE TABLE table_name SELECT column1,cloumn2 FROM another_table: # 复制数据不复制主键
-CREATE TABLE table_name like another_table；  #  数据不复制，主键复制
+CREATE TABLE table_name like another_table；  #  复制表结构 数据不复制，主键复制
 INSERT office_dup SELECT * FROM offices;
-
-DESCRIBE|DESC news;
-show columns from news;
-SHOW CREATE TABELE news\G;
 
 ALTER TABLE table_name ADD address varchar(30) first| after name;
 ALTER TABLE table_name DROP address;
 ALTER TABLE table_name MODIFY address varchar(100);
 ALTER TABLE table_name CHANGE address add varchar(100) after id;
-ALTER TABLE table_name engine=myisam;
+ALTER TABLE table_name ENGINE=MYISAM;
 ALTER TABLE table_name rename to new_table_name;
 RENAME table table_name to new_table_name, tb3 TO tb4;
 ALTER TABLE table_name rename to another_DB.new_table_name; # 移动表
+
+CREATE [UNIQUE|FULLTEXT]  INDEX index_name on tbl_name (col_name [(length)] [ASC | DESC] , …..);
 ALTER TABLE 'table_name' ADD PRIMARY KEY'index_name' ('column');
 ALTER TABLE 'table_name' ADD UNIQUE 'index_name' ('column');
-ALTER TABLE 'table_name' ADD INDEX'index_name' ('column');
+ALTER TABLE 'table_name' ADD INDEX idx_user(name(10) , city , age); # 因为一般情况下名字的长度不会超过10，这样会加速索引查询速度，还会减少索引文件的大小，提高INSERT的更新速度。
+
 ALTER TABLE 'table_name' ADD FULLTEXT 'index_name' ('column');
 ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
+ALTER TABLE 'table_name' DROP PRIMARY KEY;    # 删除主键(删除主键前需删除其AUTO_INCREMENT属性)
+ALTER TABLE 'table_name' DROP INDEX 索引名;   # 删除索引
+ALTER TABLE 'table_name' DROP FOREIGN KEY 外键;  # 删除外键
+DROP INDEX index_name ON tbl_name;
 
-DROP TABLE [IF EXISTS] db_name;
-DELETE FROM table_name;  # 清空数据表：数据一条条删除
-TRUNCATE TABLE table_name;  # 删除表,重建同结构
-
-SELECT [DISTINCT] 字段列表|* FROM table_name [WHERE条件][ORDER BY排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
-SELECT id,title,author,hits,addate from news ORDER BY id DESC LIMIT 10,10; # limit [offset,]rowcount:offset 为偏移量，而非主键id
-SELECT * FROM rp_evaluate LIMIT 500 * $i, 500
-SELECT `rp_e_id`,`evaluate` FROM `rp_evaluate` WHERE `rp_e_id` > 0 LIMIT 500
-SELECT column_name AS alias_name FROM table_name;
-SELECT column_name(s) FROM table_name AS alias_name; SELECT w.name, w.url, a.count, a.date FROM Websites AS w, access_log AS a WHERE a.site_id=w.id and w.name="菜鸟教程";
-SELECT conact('a', 'b')
-SELECT conact_ws(',', 'a', 'b')
-SELECT GROUP_CONCAT(c_name) FROM categories WHERE school_id =1 # 字符拼接
-
-INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…),(值1,值2,值3,…);   # 记录操作：添加 更新与删除数据(新增与修改不用添加TABLE关键字)
-INSERT INTO table_name values (null,值,....); # 全字段插入，自动增长列用null
+INSERT INTO table_name values (null,值,default,....); # 全字段插入，自动增长列用null
 INSERT INTO table_name values (null,值,....),(null,值,....),(null,值,....); # 插入多条数据
+INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…),(值1,值2,值3,…);   # 记录操作：添加 更新与删除数据(新增与修改不用添加TABLE关键字)
 INSERT INTO table_name set volumn1=value1,volumn3=value3,volumn3=value3;
+insert into tbl_name select ...;
+insert into tbl_name values/set/select on duplicate key update 字段=值, …; # 可以指定在插入的值出现主键（或唯一索引）冲突时，更新其他非主键列的信息
 
 UPDATE table_name SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件]; # 更新记录
 UPDATE base SET `count` = `count` + 1；
 
-DELETE FROM table_name [WHERE条件];
+DROP TABLE [IF EXISTS] db_name;
+DELETE FROM table_name;  # 清空数据表：逐条删除
+TRUNCATE TABLE table_name;  # 删除表,重建同结构;重置auto_increment的值。而delete不会 不知道删除了几条，而delete知道;当被用于带分区的表时，truncate 会保留分区
+DELETE FROM tbl_name [WHERE where_definition] [ORDER BY ...] [LIMIT row_count]
+delete from 表1，表2 using 表连接操作 条件
+
+CHECK TABLE tbl_name [, tbl_name] ... option = {QUICK | FAST | MEDIUM | EXTENDED | CHANGED} # 检查表是否有错误
+OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 整理数据文件的碎片
+REPAIR [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... [QUICK] [EXTENDED] [USE_FRM] #修复表
+ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和存储表的关键字分布
 ```
 
 ## 表设计规范
 
 * 库名、表名、字段名：小写，下划线风格，不超过32个字符，必须见名知意，禁止拼音英文混用
 * 表名t_xxx，非唯一索引名idx_xxx，唯一索引名uniq_xxx
+* Normal Format, NF
+    - 每个表保存一个实体信息
+    - 每个具有一个ID字段作为主键
+    - ID主键 + 原子表
 * 数据库范式
     - 第一范式(1NF)：字段值具有原子性,不能再分(所有关系型数据库系统都满足第一范式); 例如：姓名字段,其中姓和名是一个整体,如果区分姓和名那么必须设立两个独立字段
-    - 第二范式(2NF)：一个表必须有主键,即每行数据都能被唯一的区分; 备注：必须先满足第一范式
-    - 第三范式(3NF)：一个表中不能包涵其他相关表中非关键字段的信息,即数据表不能有沉余字段;备注：必须先满足第二范式
-* 范式和反范式：对千任何给定的数据通常都有很多种表示方法， 从完全的范式化到完全的反范式化， 以及两者的折中。 在范式化的数据库中， 每个事实数据会出现并且只出现一次。 相反， 在反范式化的数据库中， 信息是冗余的， 可能会存储在多个地方。
+    - 第二范式(2NF)：满足第一范式的前提下，不能出现部分依赖。 消除符合主键就可以避免部分依赖。增加单列关键字
+    - 第三范式(3NF)：满足第二范式的前提下，不能出现传递依赖。 某个字段依赖于主键，而有其他字段依赖于该字段。这就是传递依赖。将一个实体信息的数据放在一个表内实现。
+* 范式和反范式：对千任何给定的数据通常都有很多种表示方法， 从完全的范式化到完全的反范式化， 以及两者的折中。 在范式化的数据库中， 每个事实数据会出现并且只出现一次。 相反， 在反范式化的数据库中， 信息是冗余的， 可能会存储在多个地方
     - 范式的优点和缺点：为性能提升考虑时，经常会被建议对 schema 进行范式化设计，尤其是写密集的场
     - 范式化的更新操作通常比反范式化要快
     - 当数据较好地范式化时，就只有很少或者没有重复数据，所以只需要修改更少的数据
@@ -760,63 +795,111 @@ DELETE FROM table_name [WHERE条件];
 
 ## 查询
 
-* 字段列表：指要显示指定列的数据，多个字段之间用逗号隔开，各字段之间没有顺序。*：显示所有字段的数据
-* 排序 ORDER BY
-* 限制返回数量 LIMIT
-* 条件：WHERE
+* `select [all|distinct] select_expr from -> where -> group by [合计函数] -> having -> order by -> limit`
+* distinct, all 选项: distinct 去除重复记录 默认为 all, 全部记录
+* 字段列表：指要显示指定列的数据
+    - 多个字段之间用逗号隔开，各字段之间没有顺序
+    - `*` 显示所有字段的数据
+    - 可以使用表达式（计算公式、函数调用、字段也是个表达式）
+    - 可以为每个列使用别名。适用于简化列标识，避免多个列标识符重复
+* from 子句:用于标识查询来源
+    - 可以为表起别名。使用as关键字`select * from tb1 as tt, tb2 as bb;`
+    - from子句后，可以同时出现多个表。 多个表会横向叠加到一起，而数据会形成一个笛卡尔积 `select * from tb1, tb2;`
+* where 子句
     - Index Key：用于确定SQL查询在索引中的连续范围(起始范围+结束范围)的查询条件，被称之为Index Key。由于一个范围，至少包含一个起始与一个终止，因此Index Key也被拆分为Index First Key和Index Last Key，分别用于定位索引查找的起始，以及索引查询的终止条件。
         + Index First Key：用于确定索引查询的起始范围。提取规则：从索引的第一个键值开始，检查其在where条件中是否存在，若存在并且条件是=、>=，则将对应的条件加入Index First Key之中，继续读取索引的下一个键值，使用同样的提取规则；若存在并且条件是>，则将对应的条件加入Index First Key中，同时终止Index First Key的提取；若不存在，同样终止Index First Key的提取。
         + Index Last Key：Index Last Key的功能与Index First Key正好相反，用于确定索引查询的终止范围。提取规则：从索引的第一个键值开始，检查其在where条件中是否存在，若存在并且条件是=、<=，则将对应条件加入到Index Last Key中，继续提取索引的下一个键值，使用同样的提取规则；若存在并且条件是 < ，则将条件加入到Index Last Key中，同时终止提取；若不存在，同样终止Index Last Key的提取。
     - Index Filter：根据where条件固定了索引的查询范围，但是此范围中的项，并不都是满足查询条件的项。提取规则：同样从索引列的第一列开始，检查其在where条件中是否存在：若存在并且where条件仅为 =，则跳过第一列继续检查索引下一列，下一索引列采取与索引第一列同样的提取规则；若where条件为 >=、>、<、<= 其中的几种，则跳过索引第一列，将其余where条件中索引相关列全部加入到Index Filter之中；若索引第一列的where条件包含 =、>=、>、<、<= 之外的条件，则将此条件以及其余where条件中索引相关列全部加入到Index Filter之中；若第一列不包含查询条件，则将所有索引相关条件均加入到Index Filter之中。
     - Table Filter:提取规则：所有不属于索引列的查询条件，均归为Table Filter之中。
-    - 运算符：＝ ＜ ＞ ＜＝ ＞＝ !＝ ＜＞ is not null IS NULL
-    - BETWEEN 1 AND 20:WHERE date BETWEEN '2016-05-10' AND '2016-05-14'
-    - IN / NOT IN
-    - LIKE('name%') NOT LIKE('name%')
-    - 逻辑运算: AND & OR(可以混合使用)
-* 匹配
-    - % 替代 0 个或多个字符
-    - _ 替代一个字符
-    - [charlist] 字符列中的任何单一字符
-    - [^charlist]或[!charlist] 不在字符列中的任何单一字符 WHERE name REGEXP '^[GFs]'；name REGEXP '^[^A-H]'
-* group by：ORDER BY 联合指的是如果 ORDER BY 后面的字段是联合索引覆盖 where 条件之后的一个字段，由于索引已经处于有序状态，MySQL 就会直接从索引上读取有序的数据，然后在磁盘上读取数据之后按照该顺序组织数据，从而减少了对磁盘数据进行排序的操作。
+    - 运算数：变量（字段）、值、函数返回值
+    - 运算符：!＝ =, <=>, <>, !=, <=, <, >=, >, !, &&, ||, in (not) null, (not) like, (not) in, (not) between and, is (not), and, or, not, xor is/is not 加上ture/false/unknown，检验某个值的真假 <=>与<>功能相同，<=>可用于null比较
+    - LIKE('name%') NOT LIKE('name%') 匹配
+        + % :0 个或多个字符
+        + _ :一个字符
+        + [charlist] 字符列中的任何单一字符
+        + [^charlist]或[!charlist] 不在字符列中的任何单一字符 WHERE name REGEXP '^[GFs]'；name REGEXP '^[^A-H]'
+* group by 子句:分组子句 `group by 字段/别名 ASC|DESC`, 以下[合计函数]配合 group by 使用
+    - count 返回不同的非NULL值数目    count(*)、count(字段)
+    - sum 求和
+    - max 求最大值
+    - min 求最小值
+    - avg 求平均值
+    - group_concat 返回带有来自一个组的连接的非NULL值的字符串结果。组内字符串连接。
+* having 子句，条件子句
+    - 与 where 功能、用法相同，执行时机不同。
+    - where 在开始时执行检测数据，对原数据进行过滤;having 对筛选出的结果再次进行过滤。
+    - having 字段必须是查询出来的，where 字段必须是数据表存在的。
+    - where 不可以使用字段的别名，having 可以。因为执行WHERE代码时，可能尚未确定列值。
+    - where 不可以使用合计函数。一般需用合计函数才会用 having
+    - SQL标准要求HAVING必须引用GROUP BY子句中的列或用于合计函数中的列。
+* ORDER BY `order by 排序字段/别名 ASC|DESC [,排序字段/别名 排序方式] ...`
+    - ORDER BY 联合指的是如果 ORDER BY 后面的字段是联合索引覆盖 where 条件之后的一个字段，由于索引已经处于有序状态，MySQL 就会直接从索引上读取有序的数据，然后在磁盘上读取数据之后按照该顺序组织数据，从而减少了对磁盘数据进行排序的操作。
     - 对于未覆盖 ORDER BY 的查询，其有一项 Creating sort index，即为磁盘数据进行排序的耗时最高；对于覆盖 ORDER BY 的查询，其就不需要进行排序，而其耗时主要体现在从磁盘上拉取数据的过程。
-* 联表：表与表之间通过公共字段建立关系
+* limit 子句，限制结果数量子句 `imit 起始位置, 获取条数`
+    - 仅对处理好的结果进行数量限制。将处理好的结果的看作是一个集合，按照记录出现的顺序，索引从0开始。
+    - 省略第一个参数，表示从索引0开始
+* UNION: 将多个select查询的结果组合成一个结果集合, `SELECT ... UNION [ALL|DISTINCT] SELECT ...`
+    - 默认 DISTINCT 方式，即所有返回的行都是唯一的
+    - 建议，对每个SELECT查询加上小括号包裹
+    - ORDER BY 排序时，需加上 LIMIT 进行结合
+    - 需要各select查询的字段数量一样
+    - 每个select查询的字段列表(数量、类型)应一致，因为结果中的字段名以第一条select语句为准
+* 连接查询(join)将多个表的字段通过指定连接条件进行连接
     - 公共字段名字可以不一样，但是数据类型必须一样
     - 联表查询降低查询速度
     - 数据冗余与查询速度的平衡
-* 子查询
+    - 内连接(inner join) 默认,可省略inner 
+        + 只有数据存在时才能发送连接。即连接结果不能出现空行
+        + on 表示连接条件。其条件表达式与where类似。也可以省略条件（表示条件永远为真）
+        + where表示连接条件 `select info.id, info.name, info.stu_num, extra_info.hobby, extra_info.sex from info, extra_info where info.stu_num = extra_info.stu_id;`
+        + `using(字段名)`:需字段名相同。
+        + 交叉连接 cross join 即没有条件的内连接  `select * from tb1 cross join tb2;`
+    - 外连接(outer join) 
+        + 如果数据不存在，也会出现在连接结果中
+        + 左外连接 left join 如果数据不存在，左表记录会出现，而右表为null填充
+        + 右外连接 right join 如果数据不存在，右表记录会出现，而左表为null填充
+    - 自然连接(natural join):自动判断连接条件完成连接, 相当于省略了using，会自动查找相同字段名
+* 子查询:用括号包裹
+    - from型:from后要求是一个表，必须给子查询结果取个别名 `select * from (select * from tb where id>0) as subfrom where id>1;`
+        + 简化每个查询内的条件
+        + from型需将结果生成一个临时表格，可用以原表的锁定的释放
+        + 子查询返回一个表，表型子查询
+    - where型 `select * from tb where money = (select max(money) from tb);`
+        + 子查询返回一个值，标量子查询
+        + 不需要给子查询取别名
+        + where子查询内的表，不能直接用以更新
+            * 列子查询
+                - 如果子查询结果返回的是一列,使用 in 或 not in 完成查询
+                - exists 和 not exists 条件 如果子查询返回数据，则返回1或0。常用于判断条件。`select column1 from t1 where exists (select * from t2);`
+            * 行子查询:用于与对能返回两个或两个以上列的子查询进行比较
+                - 查询条件是一个行。`select * from t1 where (id, gender) in (select id, gender from t2);`
+                - 行构造符：(col1, col2, ...) 或 ROW(col1, col2, ...)
+            * 特殊运算符
+                - != all()    相当于 not in
+                - = some()    相当于 in。any 是 some 的别名
+                - != some()    不等同于 not in，不等于其中某一个
+                - all, some 可以配合其他运算符一起使用
 
 ```sql
-CREATE [UNIQUE|FULLTEXT]  INDEX index_name on tbl_name (col_name [(length)] [ASC | DESC] , …..);
-alter table table_name ADD INDEX [index_name] (index_col_name,...);
-
-DROP INDEX index_name ON tbl_name;
-alter table table_name drop index index_name;
-alter table t_b drop primary key;
-
-show index from table_name;
-show keys from table_name;
-desc table_Name;
-
-CREATE TABLE user_test(
-  id int AUTO_INCREMENT PRIMARY KEY,
-  user_name varchar(30) NOT NULL,
-  sex bit(1) NOT NULL DEFAULT b'1',
-  city varchar(50) NOT NULL,
-  age int NOT NULL,
-  PRIMARY KEY(ID)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE user_test ADD INDEX idx_user(name(10) , city , age); # 因为一般情况下名字的长度不会超过10，这样会加速索引查询速度，还会减少索引文件的大小，提高INSERT的更新速度。
+SELECT [DISTINCT] 字段列表|* FROM table_name [WHERE条件][ORDER BY排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
+SELECT id,title,author,hits,addate from news ORDER BY id DESC LIMIT 10,10; # limit [offset,]rowcount:offset 为偏移量，而非主键id
+SELECT * FROM rp_evaluate LIMIT 500 * $i, 500
+SELECT `rp_e_id`,`evaluate` FROM `rp_evaluate` WHERE `rp_e_id` > 0 LIMIT 500
+SELECT column_name AS alias_name FROM table_name;
+SELECT column_name(s) FROM table_name AS alias_name; 
+SELECT w.name, w.url, a.count, a.date FROM Websites AS w, access_log AS a WHERE a.site_id=w.id and w.name="菜鸟教程";
+SELECT concat('a', 'b') # ab
+SELECT concat_ws(',', 'a', 'b') # e,t
+SELECT GROUP_CONCAT(c_name) FROM categories WHERE school_id =1 # 字符拼接
 
 SELECT COUNT(DISTINCT index_column)/COUNT(*) FROM table_name; -- index_column代表要添加前缀索引的列，前缀索引的选择性比值，比值越高说明索引的效率也就越高效。
 SELECT COUNT(DISTINCT LEFT(index_column,1))/COUNT(*),COUNT(DISTINCT LEFT(index_column,2))/COUNT(*),COUNT(DISTINCT LEFT(index_column,3))/COUNT(*) FROM table_name;
 ALTER TABLE table_name ADD INDEX index_name (index_column(length));
 
 #### 有效索引
-`SELECT * FROM user_test WHERE user_name = 'feinik' AND age = 26 AND city = '广州';` # 全值匹配
+SELECT * FROM user_test WHERE user_name = 'feinik' AND age = 26 AND city = '广州'; # 全值匹配
 （user_name ）、（user_name, city）、（user_name , city , age）  # 匹配最左前缀 满足最左前缀查询条件的顺序与索引列的顺序无关
-`SELECT * FROM user_test WHERE user_name LIKE 'feinik%';` # 匹配范围值
+SELECT * FROM user_test WHERE user_name LIKE 'feinik%'; # 匹配范围值
 
 #### 无效索引
 SELECT * FROM user_test WHERE city = '广州';
@@ -885,14 +968,7 @@ CREATE TABLE `test_number` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 # 创建测试数据
-insert into test_number values(1,1);
-insert into test_number values(2,2);
-insert into test_number values(3,3);
-insert into test_number values(4,5);
-insert into test_number values(5,7);
-insert into test_number values(6,8);
-insert into test_number values(7,10);
-insert into test_number values(8,11);
+insert into test_number values(1,1),(2,2),(3,3),(4,5),(5,7),(6,8),(7,10),(8,11);
 
 # 求数字的连续范围。
 select min(number) start_range,max(number) end_range
@@ -1108,14 +1184,14 @@ SELECT * FROM `表名` WHERE LOCATE('关键字', 字段名) # 表中某字段包
 
 # 表中多余的重复记录
 # 单个字段
-select * from 表名 where 字段名 in  (select 字段名 from 表名 group by 字段名 having count(字段名) > 1 )
+select * from 表名 where 字段名 in  (select 字段名 from 表名 group by 字段名 having count(字段名) > 1)
 # 多个字段
 select * from 表名 别名 where (别名.字段1,别名.字段2) in  (select 字段1,字段2 from 表名 group by 字段1,字段2 having count(*) > 1 )
 
 # 删除表中多余的重复记录(留id最小)
 # 单个字段
 delete from 表名 where 字段名 in  (select 字段名 from 表名 group by 字段名 having count(字段名) > 1)   and 主键ID not in  (select min(主键ID) from 表名 group by 字段名 having count(字段名 )>1)
-#多个字段
+# 多个字段
 delete from 表名 别名 where (别名.字段1,别名.字段2) in  (select 字段1,字段2 from 表名 group by 字段1,字段2 having count(*) > 1) and 主键ID not in (select min(主键ID) from 表名 group by 字段1,字段2 having count(*)>1)
 
 UPDATE categories SET
@@ -1132,38 +1208,18 @@ UPDATE categories SET
 WHERE id IN (1,2,3)
 ```
 
-## 函数
+## 事务
 
-* 字符串方法
-  - left()
-  - right()
-  - substr()
-  - instr()
-* count
-    - myisam 数据行数都会存储在存储引擎 Innodb中的count()会全表或索引扫描
-    - SELECT COUNT(country)统计某个列的数据的数量：如果有NULL值，在返回的结果中会被过滤掉
-    - SELECT COUNT(*)的处理是有点不同的，它会返回所有数据的数量，但是不会过滤其中的NULL值
-    - explain select * from table explain // 用并不真正执行查询，而是查询优化器【估算】的行数，返回值新的行数
-    - count(distinct …)会返回彼此不同但是非NULL的数据的行数
-
-```sql
-set @currenttime=(select UNIX_TIMESTAMP(current_timestamp()));
-```
-
-## 事物
-
-mysql有一个autocommit参数，默认是on，作用是每一条单独的查询都是一个事务，并且自动开始，自动提交（执行完以后就自动结束了，如果要适用select for update，而不手动调用 start transaction，这个for update的行锁机制等于没用，因为行锁在自动提交后就释放了），所以事务隔离级别和锁机制即使你不显式调用start transaction，这种机制在单独的一条查询语句中也是适用的
-
+* mysql有一个autocommit参数，默认是on，作用是每一条单独的查询都是一个事务，并且自动开始，自动提交（执行完以后就自动结束了，如果要适用select for update，而不手动调用 start transaction，这个for update的行锁机制等于没用，因为行锁在自动提交后就释放了）
+* 事务隔离级别和锁机制即使不显式调用start transaction，这种机制在单独的一条查询语句中也是适用的
+* 数据定义语言（DDL）语句不能被回滚，比如创建或取消数据库的语句，和创建、取消或更改表或存储的子程序的语句。
 * 加锁阶段
-    - 在对任何数据进行读操作之前要申请并获得S锁（共享锁，其它事务可以继续加共享锁，但不能加排它锁）
-    - 在进行写操作之前要申请并获得X锁（排它锁，其它事务不能再获得任何锁）。
-    - 加锁不成功，则事务进入等待状态，直到加锁成功才继续执行。
+    - 读操作之前要申请并获得S锁（共享锁，其它事务可以继续加共享锁，但不能加排它锁）
+    - 写操作之前要申请并获得X锁（排它锁，其它事务不能再获得任何锁）
+    - 加锁不成功，则事务进入等待状态，直到加锁成功才继续执行
 * 解锁阶段：当事务释放了一个封锁以后，事务进入解锁阶段
-* 两段锁协议可以保证事务的并发调度是串行化（串行化很重要，尤其是在数据恢复和备份的时候）的
-
-### 隔离
-
-* 事务的隔离级别对于读数据的定义。四个级别逐渐增强，每个级别解决一个问题。事务级别越高,性能越差,大多数环境read committed 可以用，四种隔离级别：
+* 两段锁协议可以保证事务的并发调度是串行化（串行化很重要，尤其是在数据恢复和备份的时候）
+* 事务的隔离级别对于读数据的定义。四个级别逐渐增强，每个级别解决一个问题。事务级别越高,性能越差,大多数环境read committed 可以用
     - 读未提交(Read Uncommitted)：允许脏读，也就是可能读取到其他会话中未提交事务修改的数据
         + 事物一可以获取事物二中未提交的修改
         + 事物一中未提交的修改事物（添加共享锁），事物二同样数据修改会被挂起，等待事物一commit
@@ -1179,7 +1235,6 @@ mysql有一个autocommit参数，默认是on，作用是每一条单独的查询
             * 始终都是查找的之前的那个快照
         + 只会查询创建时间的事务id小于等于当前事务id的行，这样可以确保这个行是在当前事务中创建，或者是之前创建的
         + 如果某个事务执行期间，别的事务更新了一条数据:插入了一行记录，然后将新插入的记录的创建时间设置为新的事务的id，同时将这条记录之前的那个版本的删除时间设置为新的事务的id
-        +
     - 串行读(Serializable)：完全串行化的读，每次读都需要获得表级共享锁，读写相互都会阻塞。
         + 读加共享锁，写加排他锁，读写互斥。使用的悲观锁的理论，实现简单，数据更加安全，但是并发能力非常差。如果你的业务并发的特别少或者没有并发，同时又要求数据及时可靠的话，可以使用这种模式。
         + 不要看到select就说不会加锁了，在Serializable这个级别，还是会加锁的
@@ -1196,6 +1251,10 @@ mysql有一个autocommit参数，默认是on，作用是每一条单独的查询
     - 幻读:事务A按照相同的查询条件，读取到了新增的数据
 
 ```sql
+START TRANSACTION; 或者 BEGIN;
+COMMIT;
+ROLLBACK;
+
 CREATE TABLE user (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `name` varchar(255) NOT NULL,
@@ -1242,17 +1301,17 @@ select id,class_name,teacher_id from class_teacher where teacher_id=30; #  2 初
     - 排它锁（X锁，MyISAM 叫做写锁）：由写表操作加上的锁，加锁后其他用户不能获取该表或行的任何锁，典型是mysql事务中
 * 颗粒度
     - 表锁（table-level locking）开销小，加锁快；不会出现死锁；锁定力度大，发生锁冲突概率高，并发度最低。MyISAM InnoDB 和 MEMORY
-        +   通过总是一次性同时获取所有需要的锁以及总是按相同的顺序获取表锁来避免死锁
-        +   表级锁更适合于以查询为主，并发用户少，只有少量按索引条件更新数据的应用，如Web 应用
+        + 通过总是一次性同时获取所有需要的锁以及总是按相同的顺序获取表锁来避免死锁
+        + 表级锁更适合于以查询为主，并发用户少，只有少量按索引条件更新数据的应用，如Web 应用
     - 行锁（page-level locking）开销大，加锁慢；会出现死锁；锁定粒度小，发生锁冲突的概率低，并发度高；BDB
-        +   最大程度的支持并发，同时也带来了最大的锁开销
-        +   在 InnoDB 中，除单个 SQL 组成的事务外， 锁是逐步获得的，这就决定了在 InnoDB 中发生死锁是可能的
-        +   行级锁只在存储引擎层实现，而Mysql服务器层没有实现
-        +   行级锁更适合于有大量按索引条件并发更新少量不同数据，同时又有并发查询的应用，如一些在线事务处理（OLTP）系统
-        +   优点
-            *   回滚时只有少量的更改
-            *   可以长时间锁定单一的行
-        +   缺点
+        + 最大程度的支持并发，同时也带来了最大的锁开销
+        + 在 InnoDB 中，除单个 SQL 组成的事务外， 锁是逐步获得的，这就决定了在 InnoDB 中发生死锁是可能的
+        + 行级锁只在存储引擎层实现，而Mysql服务器层没有实现
+        + 行级锁更适合于有大量按索引条件并发更新少量不同数据，同时又有并发查询的应用，如一些在线事务处理（OLTP）系统
+        + 优点
+            * 回滚时只有少量的更改
+            * 可以长时间锁定单一的行
+        + 缺点
             *  比页级或表级锁定占用更多的内存。
             *  当在表的大部分中使用时，比页级或表级锁定速度慢，因为你必须获取更多的锁。
             *  如果你在大部分数据上经常进行GROUP BY操作或者必须经常扫描整个表，比其它锁定明显慢很多。
@@ -1310,15 +1369,15 @@ select id,class_name,teacher_id from class_teacher where teacher_id=30; #  2 初
     - 场景
         + 同时取得所有涉及到表的锁，并且 MySQL 不支持锁升级
 * 建议
-    -   尽量使用较低的隔离级别；
-    -   精心设计索引， 并尽量使用索引访问数据， 使加锁更精确， 从而减少锁冲突的机会
-    -   选择合理的事务大小，小事务发生锁冲突的几率也更小
-    -   给记录集显示加锁时，最好一次性请求足够级别的锁。比如要修改数据的话，最好直接申请排他锁，而不是先申请共享锁，修改时再请求排他锁，这样容易产生死锁
-    -   不同的程序访问一组表时，应尽量约定以相同的顺序访问各表，对一个表而言，尽可能以固定的顺序存取表中的行。这样可以大大减少死锁的机会
-    -   尽量用相等条件访问数据，这样可以避免间隙锁对并发插入的影响
-    -   不要申请超过实际需要的锁级别
-    -   除非必须，查询时不要显示加锁。 MySQL的MVCC可以实现事务中的查询不用加锁，优化事务性能；MVCC只在COMMITTED READ（读提交）和REPEATABLE READ（可重复读）两种隔离级别下工作
-    -   对于一些特定的事务，可以使用表锁来提高处理速度或减少死锁的可能
+    - 尽量使用较低的隔离级别
+    - 精心设计索引， 并尽量使用索引访问数据， 使加锁更精确， 从而减少锁冲突的机会
+    - 选择合理的事务大小，小事务发生锁冲突的几率也更小
+    - 给记录集显示加锁时，最好一次性请求足够级别的锁。比如要修改数据的话，最好直接申请排他锁，而不是先申请共享锁，修改时再请求排他锁，这样容易产生死锁
+    - 不同的程序访问一组表时，应尽量约定以相同的顺序访问各表，对一个表而言，尽可能以固定的顺序存取表中的行。这样可以大大减少死锁的机会
+    - 尽量用相等条件访问数据，这样可以避免间隙锁对并发插入的影响
+    - 不要申请超过实际需要的锁级别
+    - 除非必须，查询时不要显示加锁。 MySQL的MVCC可以实现事务中的查询不用加锁，优化事务性能；MVCC只在COMMITTED READ（读提交）和REPEATABLE READ（可重复读）两种隔离级别下工作
+    - 对于一些特定的事务，可以使用表锁来提高处理速度或减少死锁的可能
 
 ```sql
 show OPEN TABLES where In_use > 0; # 查询是否锁表
@@ -1500,9 +1559,9 @@ CREATE TABLE  People (
 
 不同数据引擎数据的存储格式,数据结构的实现,数据行并不是存储引擎管理的最小存储单位，索引只能够帮助我们定位到某个数据页，每一次磁盘读写的最小单位为也是数据页，而一个数据页内存储了多个数据行，我们需要了解数据页的内部结构才能知道存储引擎怎么定位到某一个数据行
 
- + 堆表(所有的记录无序存储)
-        + 聚簇索引表(所有的记录，按照记录主键进行排序存储)
-
+* 存储格式
+    - 堆表(所有的记录无序存储)
+    - 聚簇索引表(所有的记录，按照记录主键进行排序存储)
 * MEMORY
     - 要求存储在Memory数据表里的数据用的是长度不变的格式，这意味着不能用BLOB和TEXT这样的长度可变的数据类型，VARCHAR是种长度可变的类型，但因为它在MySQL内部当做长度固定不变的CHAR类型，所以可以使用。
     - 特性
@@ -1516,8 +1575,8 @@ CREATE TABLE  People (
         + 用于查找（lookup）或者映射（mapping）表，例如将邮编和地址映射的表。
         + 用于保存数据分析中产生的中间数据。
         + 用于缓存周期性聚合数据的结果。
-* Myisam
-    - 数据结构：frm文件保存的是表的定义，MYD文件是表的内容，MYI是表的索引数据信息。三种存储格式分别为静态、动态和压缩。MyISAM 会根据表的定义自动选择存储格式。
+* MyISAM
+    - 数据结构：frm 表的定义，MYD文 表内容，MYI 表索引数据 三种存储格式分别为静态、动态和压缩。MyISAM 会根据表的定义自动选择存储格式。
         + 静态表：如果数据表中的各数据列的长度都是预先固定好的，服务器将自动选择这种表类型。因为数据表中每一条记录所占用的空间都是一样的，所以这种表存取和更新的效率非常高。当数据受损时，恢复工作也比较容易做。
         + 动态表：如果数据表中出现    varchar 、   *text 或 *BLOB 字段时，服务器将自动选择这种表类型。相对于静态MyISAM，这种表存储空间比较小，但由于每条记录的长度不一，所以多次修改数据后，数据表中的数据就可能离散的存储在内存中，进而导致执行效率下降。同时，内存中也可能会出现很多碎片。因此，这种类型的表要经常用 optimize table 命令或优化工具来进行碎片整理。
         + 压缩表：以上说到的两种类型的表都可以用myisamchk工具压缩。如果表在创建并导入数据后，不在进行修改操作，这样的表适合采用 MyISAM 压缩表。这种类型的表进一步减小了占用的存储，但是这种表压缩之后不能再被修改。另外，因为是压缩数据，所以这种表在读取的时候要先时行解压缩。
@@ -1530,10 +1589,10 @@ CREATE TABLE  People (
         + 写锁比读锁具有更高的优先级：当一个锁释放时，这个锁会优先给写锁队列中等候的获取锁请求，然后再给读锁队列中等候的获取锁请求。
         + 不太适合于有大量更新操作和查询操作应用：大量的更新操作会造成查询操作很难获得读锁，从而可能永远阻塞。同时，一些需要长时间运行的查询操作，也会使写线程“饿死” ，应用中应尽量避免出现长时间运行的查询操作（在可能的情况下可以通过使用中间表等措施对SQL语句做一定的“分解” ，使每一步查询都能在较短时间完成，从而减少锁冲突。如果复杂查询不可避免，应尽量安排在数据库空闲时段执行，比如一些定期统计可以安排在夜间执行）
         + 设置改变读锁和写锁的优先级
-            *   通过指定启动参数low-priority-updates，使MyISAM引擎默认给予读请求以优先的权利
-            *   通过执行命令SET LOW_PRIORITY_UPDATES=1，使该连接发出的更新请求优先级降低
-            *   通过指定INSERT、UPDATE、DELETE语句的LOW_PRIORITY属性，降低该语句的优先级
-            *   给系统参数max_write_lock_count设置一个合适的值，当一个表的读锁达到这个值后，MySQL就暂时将写请求的优先级降低，给读进程一定获得锁的机会
+            * 通过指定启动参数low-priority-updates，使MyISAM引擎默认给予读请求以优先的权利
+            * 通过执行命令SET LOW_PRIORITY_UPDATES=1，使该连接发出的更新请求优先级降低
+            * 通过指定INSERT、UPDATE、DELETE语句的LOW_PRIORITY属性，降低该语句的优先级
+            * 给系统参数max_write_lock_count设置一个合适的值，当一个表的读锁达到这个值后，MySQL就暂时将写请求的优先级降低，给读进程一定获得锁的机会
         + 不会存在死锁（Deadlock Free）:一次获得 SQL 语句所需要的全部锁
         + 查询表级锁争用情况： 通过检查 table_locks_waited 和 table_locks_immediate 状态变量来分析系统上的表锁的争夺
     - myisam不要使用查询时间太长的sql，如果策略使用不当，也会导致写饿死，所以尽量去拆分查询效率低的sql,
@@ -1548,9 +1607,9 @@ CREATE TABLE  People (
     - 场景
         + 查询密集型表：MyISAM 存储引擎在筛选大量数据时非常快，是它最突出的优点；
         + 插入密集型表：MyISAM 的并发插入特性允许同时选择、插入数据。例如：MyISAM存储引擎非常适合管理邮件或Web服务器日志数据。
-* Innodb
+* InnoDB
     - 综合一个文件,写满后递增文件
-        + 使用共享表空间存储：表结构保存在  .frm 文件中，数据和索引在 innodb_data_home_dir 和  innodb_data_file_path 定义的表空间中，可以是多个文件。
+        + 使用共享表空间存储：表结构保存在 .frm 文件中，数据和索引在 innodb_data_home_dir 和  innodb_data_file_path 定义的表空间中，可以是多个文件。
         + 使用多表空间存储：表结构保存在 .frm 文件中，每个表的数据和索引单独保存在 .ibd 中。
     - 用于在写操作比较多的时候
     - CPU及内存缓存页优化使得资源利用率更高（推荐）索引节点存的则是数据的主键，所以需要根据主键二次查找
@@ -1640,10 +1699,6 @@ CREATE TABLE  People (
     - InnoDB支持事务，MyISAM不支持。对于InnoDB每一条SQL语言都默认封装成事务，自动提交，这样会影响速度，所以最好把多条SQL语言放在begin和commit之间，组成一个事务
     - 大项目总量约几个亿的rows的某一类型（如日志等）业务表会使用MyISAM
     - 绝大多数都只是读查询，可以考虑MyISAM，如果既有读写也挺频繁，请使用InnoDB
-* 编码:一个汉字占多少长度与编码有关,最大长度64K，即65535个字节
-    - UTF-8：一个汉字 = 3个字节，英文是一个字节  (65535 - 2) / 3 = 21844
-    - GBK： 一个汉字 = 2个字节，英文是一个字节 (65535 - 2) / 2 = 32766
-    - varchar(n) 表示n个字节，无论汉字和英文，MySql都能存入 n 个字符，仅实际字节长度有所区别
 
 ```sql
 show engines; # 显示当前数据库支持的存储引擎情况
@@ -1662,6 +1717,7 @@ set global innodb_print_all_deadlocks=1; # 错误日志中查看历史发生过�
 select * from information_schema.innodb_lock_waits; # 查看等待中的锁
 select * from information_schema.innodb_trx; # 查看已开启的事务
 ```
+
 
 ## 索引
 
@@ -1697,7 +1753,7 @@ select * from information_schema.innodb_trx; # 查看已开启的事务
         + 无主键的表删除，在row模式的主从架构，会导致备库夯住
     - INDEX 索引:普通索引
         + 不是唯一的
-    - UNIQUE 索引:相当于INDEX + Unique,对数据会做强唯一限制
+    - UNIQUE 索引:会做强唯一限制
         + 插入和修改的时候会校验该索引对应的列的值是否已经存在
         + 唯一索引可以为空，但是空值只能有一个，主键不能为空
     - FULLTEXT索引:只在MYISAM 存储引擎支持, 目的是全文索引，在VARCHAR或者TEXT类型的列上创建，在内容系统中用的多， 在全英文网站用多(英文词独立). 中文数据不常用，意义不大 国内全文索引通常 使用 sphinx 来完成.全文索引:fulltext是Myisam表特殊索引，从文本中找关键字不是直接和索引中的值进行比较
@@ -1795,22 +1851,17 @@ select * from information_schema.innodb_trx; # 查看已开启的事务
 ![clustered-index](../_static/clustered-index.jpg "clustered-index")
 
 ```sql
-# 添加PRIMARY KEY（主键索引）
-ALTER TABLE `table_name` ADD PRIMARY KEY ( `column` )
-# 添加UNIQUE(唯一索引)
-ALTER TABLE `table_name` ADD UNIQUE ( `column` )
-# 添加INDEX(普通索引)
-ALTER TABLE `table_name` ADD INDEX index_name ( `column` )
-# 添加FULLTEXT(全文索引)
-ALTER TABLE `table_name` ADD FULLTEXT ( `column`)
-# 添加多列索引
-ALTER TABLE `table_name` ADD INDEX index_name ( `column1`, `column2`, `column3` )
+ALTER TABLE `table_name` ADD PRIMARY KEY ( `column` ) # 添加PRIMARY KEY（主键索引）
+ALTER TABLE `table_name` ADD UNIQUE ( `column` ) # 添加UNIQUE(唯一索引)
+ALTER TABLE `table_name` ADD INDEX index_name ( `column` ) # 添加INDEX(普通索引)
+ALTER TABLE `table_name` ADD FULLTEXT ( `column`) # 添加FULLTEXT(全文索引)
+ALTER TABLE `table_name` ADD INDEX index_name ( `A`, `B`, `C` ) # 添加多列索引
 
 # 使用索引
-A>5 AND A<10 - 最左前缀匹配
-A=5 AND B>6 - 最左前缀匹配
-A=5 AND B=6 AND C=7 - 全列匹配
-A=5 AND B IN (2,3) AND C>5 - 最左前缀匹配，填坑
+A>5 AND A<10 # 最左前缀匹配
+A=5 AND B>6 # 最左前缀匹配
+A=5 AND B=6 AND C=7 # 全列匹配
+A=5 AND B IN (2,3) AND C>5 # 最左前缀匹配，填坑
 
 # 不能使用索引
 B>5 # 没有包含最左前缀
@@ -1888,23 +1939,28 @@ pt-query-digest --type=genlog localhost.log
 
 ## 存储过程（Stored Procedure）
 
-* 一种在数据库中存储复杂程序，以便外部程序调用的一种数据库对象.数据库 SQL 语言层面的代码封装与重用
-* 为了完成特定功能的SQL语句集，经编译创建并保存在数据库中，用户可通过指定存储过程的名字并给定参数(需要时)来调用执行。
-* 可以回传值，并可以接受参数.
-    - inout参数就尽量的少用
+* 一种在数据库中存储复杂程序，以便外部程序调用的一种数据库对象. 数据库 SQL 语言层面的代码封装与重用
+* 为了完成特定功能的SQL语句集，经编译创建并保存在数据库中，用户可通过指定存储过程的名字并给定参数(需要时)来调用执行
+* 可以回传值，并可以接受参数
+    - in/out参数尽量少用
 * 存储过程和默认数据库相关联，如果想指定存储过程创建在某个特定的数据库下，那么在过程名前面加数据库名做前缀
-* 创建的存储过程保存在数据库的数据字典中。
+* 创建的存储过程保存在数据库的数据字典中
 * 过程体
     - dml、ddl语句，if-then-else和while-do语句、声明变量的declare语句
     - begin开始，以end结束(可嵌套)
-    - 表示过程体结束的begin-end块，则不需要分号。
+    - 表示过程体结束的begin-end块，则不需要分号
 * 变量
     - 用户变量名一般以@开头
     - 可以读写用户变量，全局可以读取到
     - 全局变量的值作为参数传入存储过程，修改的局部作用域的副本
     - 内部的变量在其作用域范围内享有更高的优先权
+*  参数 `IN|OUT|INOUT 参数名 数据类型`
+    - IN       输入：在调用过程中，将数据输入到过程体内部的参数
+    - OUT      输出：在调用过程中，将过程体处理完的结果返回到客户端
+    - INOUT    输入输出：既可输入，也可输出
 * 注释：--：该风格一般用于单行注释
 * 更改用 CREATE PROCEDURE 建立的预先指定的存储过程，其不会影响相关存储过程或存储功能
+* 存储函数
 
 ```sql
 SET @p_in=1
@@ -2000,7 +2056,6 @@ create procedure out_param(out|inout p_out int)
 delimiter ;
 
 set @p_out=1;
-
 call out_param(@p_out);
 
 DECLARE l_numeric number(8,2) DEFAULT 9.95;
@@ -2020,16 +2075,74 @@ select routine_name from information_schema.routines where routine_schema='数�
 showprocedure status where db='数据库名';
 SHOWCREATE PROCEDURE 数据库.存储过程名;
 
+SHOW FUNCTION STATUS LIKE 'partten'
+SHOW CREATE FUNCTION function_name;
 ALTER PROCEDURE
-DROP PROCEDURE
+ALTER FUNCTION function_name 函数选项
 ```
 
-## 查询技巧
-
-* 每门课都大于80的学生的名称
-
 ## 触发器
+
+* 触发程序是与表有关的命名数据库对象，当该表出现特定事件时，将激活该对象监听：记录的增加、修改、删除
+* 参数
+    - trigger_time是触发程序的动作时间。可以是 before 或 after，以指明触发程序是在激活它的语句之前或之后触发
+    - trigger_event指明了激活触发程序的语句的类型
+        + INSERT：将新行插入表时激活触发程序
+        + UPDATE：更改某一行时激活触发程序
+        + DELETE：从表中删除某一行时激活触发程序
+    - tbl_name：监听的表，必须是永久性的表，不能将触发程序与TEMPORARY表或视图关联起来。
+    - trigger_stmt：当触发程序激活时执行的语句。执行多个语句，可使用BEGIN...END复合语句结构
+* 对于具有相同触发程序动作时间和事件的给定表，不能有两个触发程序
+* 可以使用old和new代替旧的和新的数据
+    - 更新操作，更新前是old，更新后是new
+    - 删除操作，只有old
+    - 增加操作，只有new
+* Insert into on duplicate key update 语法会触发：
+    - 如果没有重复记录，会触发 before insert, after insert;
+    - 如果有重复记录并更新，会触发 before insert, before update, after update;
+    - 如果有重复记录但是没有发生更新，则触发 before insert, before update
+* Replace 语法 如果有记录，则执行 before insert, before delete, after delete, after insert
+
+```sql
+CREATE TRIGGER trigger_name trigger_time trigger_event ON tbl_name FOR EACH ROW trigger_stmt
+   
+DROP TRIGGER [schema_name.]trigger_name
+```
+
 ## 视图
+
+* 视图是一个虚拟表，其内容由查询定义。同真实的表一样，视图包含一系列带有名称的列和行数据
+* 视图并不在数据库中以存储的数据值集形式存在。行和列数据来自由定义视图的查询所引用的表，并且在引用视图时动态生成
+* 视图具有表结构文件，但不存在数据文件
+* 对其中所引用的基础表来说，视图的作用类似于筛选。定义视图的筛选可以来自当前或其它数据库的一个或多个表，或者其它视图
+* 通过视图进行查询没有任何限制，通过它们进行数据修改时的限制也很少
+* 视图是存储在数据库中的查询的sql语句，它主要出于两种原因
+    - 安全原因，视图可以隐藏一些数据，如：社会保险基金表，可以用视图只显示姓名，地址，而不显示社会保险号和工资数等
+    - 可使复杂的查询易于理解和使用
+* 一般不修改视图，因为不是所有的更新视图都会映射到表上
+* 删除视图后，数据依然存在
+* 语法
+    - 视图名必须唯一，同时不能与表重名
+    - 视图可以使用select语句查询到的列名，也可以自己指定相应的列名
+    - 可以指定视图执行的算法，通过ALGORITHM指定
+    - column_list如果存在，则数目必须等于SELECT语句检索的列数
+* 作用
+    - 简化业务逻辑
+    - 对客户端隐藏真实的表结构
+* 算法(ALGORITHM)
+    - MERGE        合并 将视图的查询语句，与外部查询需要先合并再执行
+    - TEMPTABLE    临时表 将视图执行完毕后，形成临时表，再做外层查询
+    - UNDEFINED    未定义(默认)，指的是MySQL自主去选择相应的算法
+
+```sh
+CREATE [OR REPLACE] [ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}] VIEW view_name [(column_list)] AS select_statement
+
+SHOW CREATE VIEW view_name；
+
+ALTER VIEW view_name [(column_list)] AS select_statement
+DROP VIEW [IF EXISTS] view_name
+```
+
 ## 影像复制
 
 ### 主从复制
@@ -2125,10 +2238,6 @@ mysql -u username –-password=your_password database_name < file.sql
     - 先写DB，再写缓存，等缓存过期的时候，数据同步已经完成
     - 同步做成提交（添加）与审核（同步）状态
 
-```shell
-sudo apt-get install mysql-proxy
-```
-
 ## 中间件
 
 * 优劣
@@ -2163,7 +2272,7 @@ sudo apt-get install mysql-proxy
 
 LVS、HAProxy、Nginx
 
-* MySQL Proxy的主要作用是用来做负载均衡，数据库读写分离的。但是需要注意的是，MySQL Proxy还有个强大的扩展功能就是支持Lua语言.
+* 作用是用来做负载均衡，数据库读写分离的。但是需要注意的是，MySQL Proxy还有个强大的扩展功能就是支持Lua语言
 * 启动MySQL Proxy的时候，加载一个Lua脚本，对每一个进入的query或者insert之类的语句做一次安全检查，甚至替换查询中的某些内容，这样在程序员的 程序中忘记了过滤参数的情况下，还有最后一道防线可用。而且由于是Lua这样的动态脚本语言，在开发，修正，部署方面都会有极大的灵活性。
     - connect_server() — 这个函数每次client连接的时候被调用，可以用这个函数来处理负载均衡，决定当前的请求发给那个后台的服务器，如果没有指定这个函数，那么就会采用简单的轮询机制。
     - read_handshake() — 这个函数在server返回初始握手信息时被调用，可以调用这个函数在验证信息发给服务器前进行额外的检查。
@@ -2171,8 +2280,6 @@ LVS、HAProxy、Nginx
     - read_auth_result() — 服务器验证信息返回后调用这个函数。
     - read_query() — 每次client发送查询请求函数的时候被调用，可以用这个函数进行查询语句的预处理，过滤掉非预期的查询等等，这个是最常用的函数。
     - read_query_result() — 查询结果返回是调用的函数，可以进行结果集处理。
-
-## 分库分表
 
 ## 分区、分表、分库
 
@@ -2251,12 +2358,112 @@ CREATE TABLE employees (
   store_id INT NOT NULL
   )
   partition BY RANGE (store_id) (
-  partition p0 VALUES LESS THAN (10000),
-  partition p1 VALUES LESS THAN (50000),
-  partition p2 VALUES LESS THAN (100000),
-  partition p3 VALUES LESS THAN (150000),
-  Partition p4 VALUES LESS THAN MAXVALUE
+      partition p0 VALUES LESS THAN (10000),
+      partition p1 VALUES LESS THAN (50000),
+      partition p2 VALUES LESS THAN (100000),
+      partition p3 VALUES LESS THAN (150000),
+      Partition p4 VALUES LESS THAN MAXVALUE
   );
+```
+
+## SQL编程
+
+* 用户自定义变量在变量名前使用@作为开始符号
+* 退出循环
+    - 退出整个循环 leave
+    - 退出当前循环 iterate
+    - 通过退出的标签决定退出哪个循环
+
+```sql
+declare var_name[,...] type [default value]  # 局部变量声明
+set @var = value; # 全局变量
+select @var:=20;
+select * from tbl_name where @var:=30;
+
+# 控制结构
+if search_condition then 
+    statement_list
+[elseif search_condition then
+    statement_list]
+...
+[else
+    statement_list]
+end if;
+
+# case语句
+CASE value WHEN [compare-value] THEN result
+[WHEN [compare-value] THEN result ...]
+[ELSE result]
+END
+
+# while循环
+[begin_label:] while search_condition do
+    statement_list
+end while [end_label];
+```
+
+## 函数
+
+* 数值函数
+    - abs(x)            -- 绝对值 abs(-10.9) = 10
+    - format(x, d)    -- 格式化千分位数值 format(1234567.456, 2) = 1,234,567.46
+    - ceil(x)            -- 向上取整 ceil(10.1) = 11
+    - floor(x)        -- 向下取整 floor (10.1) = 10
+    - round(x)        -- 四舍五入去整
+    - mod(m, n)        -- m%n m mod n 求余 10%3=1
+    - pi()            -- 获得圆周率
+    - pow(m, n)        -- m^n
+    - sqrt(x)            -- 算术平方根
+    - rand()            -- 随机数
+    - truncate(x, d)    -- 截取d位小数
+* 时间日期函数
+    - now(), current_timestamp();     -- 当前日期时间
+    - current_date();                    -- 当前日期
+    - current_time();                    -- 当前时间
+    - date('yyyy-mm-dd hh:ii:ss');    -- 获取日期部分
+    - time('yyyy-mm-dd hh:ii:ss');    -- 获取时间部分
+    - date_format('yyyy-mm-dd hh:ii:ss', '%d %y %a %d %m %b %j');    -- 格式化时间
+    - unix_timestamp();                -- 获得unix时间戳
+    - from_unixtime();                -- 从时间戳获得时间
+* 字符串函数
+    - length(string)            -- string长度，字节
+    - char_length(string)        -- string的字符个数
+    - substring(str, position [,length])        -- 从str的position开始,取length个字符
+    - replace(str ,search_str ,replace_str)    -- 在str中用replace_str替换search_str
+    - instr(string ,substring)    -- 返回substring首次在string中出现的位置
+    - concat(string [,...])    -- 连接字串
+    - charset(str)            -- 返回字串字符集
+    - lcase(string)            -- 转换成小写
+    - left(string, length)    -- 从string2中的左边起取length个字符
+    - load_file(file_name)    -- 从文件读取内容
+    - locate(substring, string [,start_position])    -- 同instr,但可指定开始位置
+    - lpad(string, length, pad)    -- 重复用pad加在string开头,直到字串长度为length
+    - ltrim(string)            -- 去除前端空格
+    - repeat(string, count)    -- 重复count次
+    - rpad(string, length, pad)    --在str后用pad补充,直到长度为length
+    - rtrim(string)            -- 去除后端空格
+    - strcmp(string1 ,string2)    -- 逐字符比较两字串大小
+    - left()
+    - right()
+* 流程函数
+    - case when [condition] then result [when [condition] then result ...] [else result] end   多分支
+    - if(expr1,expr2,expr3)  双分支。
+* 聚合函数
+    - count()
+        + SELECT COUNT(country)：如果有NULL值，在返回的结果中会被过滤掉
+        + SELECT COUNT(*):会返回所有数据的数量，不会过滤其中的NULL值
+        + count(distinct …)会返回彼此不同但是非NULL的数据的行数
+    - sum();
+    - max();
+    - min();
+    - avg();
+    - group_concat()
+* 其他常用函数
+    - md5();
+    - default();
+
+```sql
+set @currenttime=(select UNIX_TIMESTAMP(current_timestamp()));
 ```
 
 ## ShardingJDBC
@@ -2326,18 +2533,18 @@ innodb_monitor_enable = '%'
 performance_schema = ON
 ```
 
-### mysqladmin
+## mysqladmin
 
 
 ## 压力测试工具 mysqlslap
 
-mysqlslap 是 Mysql 自带的压力测试工具，可以模拟出大量客户端同时操作数据库的情况，通过结果信息来了解数据库的性能状况。mysqlslap 的一个主要工作场景就是对数据库服务器做基准测试
+Mysql 自带的压力测试工具，可以模拟出大量客户端同时操作数据库的情况，通过结果信息来了解数据库的性能状况。一个主要工作场景就是对数据库服务器做基准测试
 
-```
-`mysqlslap –user=root –password=111111 –auto-generate-sql`:自动生成测试SQL
-mysqlslap –user=root –password=111111 –concurrency=100 –number-of-queries=1000 –auto-generate-sql:添加并发 客户端连接 总查询次数
-mysqlslap –user=root –password=111111 –concurrency=50 –number-int-cols=5 –number-char-cols=20 –auto-generate-sql：自动生成复杂表
-mysqlslap –user=root –password=111111 –concurrency=50 –create-schema=employees –query="SELECT _FROM dept_emp;"：使用自己的测试库和测试语句 `echo "SELECT_ FROM employees;SELECT _FROM titles;SELECT_ FROM dept_emp;SELECT _FROM dept_manager;SELECT_ FROM departments;" > ~/select_query.sql`
+```sh
+mysqlslap –user=root –password=111111 –auto-generate-sql # 自动生成测试SQL
+mysqlslap –user=root –password=111111 –concurrency=100 –number-of-queries=1000 –auto-generate-sql # 添加并发 客户端连接 总查询次数
+mysqlslap –user=root –password=111111 –concurrency=50 –number-int-cols=5 –number-char-cols=20 –auto-generate-sql # 自动生成复杂表
+mysqlslap –user=root –password=111111 –concurrency=50 –create-schema=employees –query="SELECT _FROM dept_emp;" # 使用自己的测试库和测试语句 `echo "SELECT_ FROM employees;SELECT _FROM titles;SELECT_ FROM dept_emp;SELECT _FROM dept_manager;SELECT_ FROM departments;" > ~/select_query.sql`
 ```
 
 ## 维护
@@ -2353,39 +2560,60 @@ mysqlslap –user=root –password=111111 –concurrency=50 –create-schema=emp
 
 ## 备份
 
+* 语法
+    - 生成的数据默认的分隔符是制表符
+    - local未指定，则数据文件必须在服务器上
+    - replace 和 ignore 关键词控制对现有的唯一键记录的重复的处理
+    - 控制格式
+        + fields    控制字段格式
+            * 默认：fields terminated by '\t' enclosed by '' escaped by '\\'
+            * terminated by 'string'    -- 终止
+            * enclosed by 'char'        -- 包裹
+            * escaped by 'char'        -- 转义
+        + lines    控制行格式
+            * 默认：lines terminated by '\n'
+            * terminated by 'string'    -- 终止
 * 备份策略：每天做一次增量备份，每周做一次全量备份，通过定时任务做
-* 在二级复制服务器上进行备份。
-* 备份过程中停止数据的复制，以防止出现数据依赖和外键约束的不一致。
-* 彻底停止MySQL之后，再从数据文件进行备份。
-* 如果使用MySQL dump进行备份，请同时备份二进制日志 — 确保复制过程不被中断。
-* 不要信任 LVM 快照的备份 — 可能会创建不一致的数据，将来会因此产生问题。
-* 为每个表做一个备份，这样更容易实现单表的恢复 — 如果数据与其他表是相互独立的。
-* 使用 mysqldump 时，指定 -opt 参数。
-* 备份前检测和优化表。
-* 临时禁用外键约束，来提高导入的速度。
-* 临时禁用唯一性检查，来提高导入的速度。
-* 每次备份完后，计算数据库/表数据和索引的大小，监控其增长。
-* 使用定时任务（cron）脚本，来监控从库复制的错误和延迟。
-* 定期备份数据。
+* 在二级复制服务器上进行备份
+* 备份过程中停止数据的复制，以防止出现数据依赖和外键约束的不一致
+* 彻底停止MySQL之后，再从数据文件进行备份
+* 如果使用MySQL dump进行备份，请同时备份二进制日志 — 确保复制过程不被中断
+* 不要信任 LVM 快照的备份 — 可能会创建不一致的数据，将来会因此产生问题
+* 为每个表做一个备份，这样更容易实现单表的恢复 — 如果数据与其他表是相互独立的
+* 使用 mysqldump 时，指定 -opt 参数
+* 备份前检测和优化表
+* 临时禁用外键约束，来提高导入的速度
+* 临时禁用唯一性检查，来提高导入的速度
+* 每次备份完后，计算数据库/表数据和索引的大小，监控其增长
+* 使用定时任务（cron）脚本，来监控从库复制的错误和延迟
+* 定期备份数据
 * 定期测试备份的数据
 * mysqlcheck
 
-```sql
+```sh
+select * into outfile 文件地址 [控制格式] from 表名;   # 导出表数据
+SELECT a,b,a+b INTO OUTFILE '/tmp/result.text' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' FROM test_table;
+load data [local] infile 文件地址 [replace|ignore] into table 表名 [控制格式]; # 导入数据
+
 mysqldump [-h 主机名] -u 用户名 -p --all-databases > dump.sql
 mysqldump [-h 主机名] -u 用户名 -p --databases 库名1 [库名2 ...] > dump.sql
 mysqldump [-h 主机名] -u 用户名 -p 库名 表名1 [表名2 ...] > dump.sql
+
 mysqldump -u wcnc -p -d –add-drop-table smgp_apps_wcnc >d:wcnc_db.sql # 导出数据结构
-mysqldump -uroot -p test >/download/testbak_$(date +%F).sql
-mysqldump -uroot -p -B test mysql|gzip >/download/testbak_$(date +%F).sql.gz
+mysqldump -uroot -p test > /download/testbak_$(date +%F).sql
+mysqldump -uroot -p -B test mysql|gzip >/download/testbak_$(date +%F).sql.gz # 导出并压缩
+
+# 全量备份
+/usr/bin/mysqldump -uroot -p123456  --lock-all-tables --flush-logs test > /home/backup.sql # 参数 —flush-logs：使用一个新的日志文件来记录接下来的日志； —lock-all-tables：锁定所有数据库;
 
 # 恢复全量备份
-mysql -uroot -p < dump.sql
-source  dump.sql
+mysql -uroot -p < dump.sql # 不登录
+source  dump.sql # 登录
 
 ## 增量备份
 # 查看 log_bin 是否开启，因为要做增量备份要开启 log_bin
 show variables like '%log_bin%';
-# 修改配置文件，重启mysql服务，查看sql_log_bin 开启
+# 修改配置文件，重启mysql服务，保证 sql_log_bin 开启
 #/etc/mysql/mysql.conf.d/mysqld.cnf
 log-bin=/var/lib/mysql/mysql-bin
 server-id=123454
@@ -2400,77 +2628,6 @@ mysqladmin -uroot -123456 flush-logs
 # 将刚刚插入的数据删除
 # 恢复
 mysqlbinlog /var/lib/mysql/mysql-bin.000015 | mysql -uroot -p123456 zone;
-
-# 全量备份
-/usr/bin/mysqldump -uroot -p123456  --lock-all-tables --flush-logs test > /home/backup.sql # 参数 —flush-logs：使用一个新的日志文件来记录接下来的日志； —lock-all-tables：锁定所有数据库;
-
-## 脚本
-#!/bin/bash
-#在使用之前，请提前创建以下各个目录
-#获取当前时间
-date_now=$(date "+%Y%m%d-%H%M%S")
-backUpFolder=/home/db/backup/mysql
-username="root"
-password="123456"
-db_name="zone"
-#定义备份文件名
-fileName="${db_name}_${date_now}.sql"
-#定义备份文件目录
-backUpFileName="${backUpFolder}/${fileName}"
-echo "starting backup mysql ${db_name} at ${date_now}."
-/usr/bin/mysqldump -u${username} -p${password}  --lock-all-tables --flush-logs ${db_name} > ${backUpFileName}
-#进入到备份文件目录
-cd ${backUpFolder}
-#压缩备份文件
-tar zcvf ${fileName}.tar.gz ${fileName}
-​
-# use nodejs to upload backup file other place
-#NODE_ENV=$backUpFolder@$backUpFileName node /home/tasks/upload.js
-date_end=$(date "+%Y%m%d-%H%M%S")
-echo "finish backup mysql database ${db_name} at ${date_end}."
-
-## 增量备份脚本
-#!/bin/bash
-#在使用之前，请提前创建以下各个目录
-BakDir=/usr/local/work/backup/daily
-#增量备份时复制mysql-bin.00000*的目标目录，提前手动创建这个目录
-BinDir=/var/lib/mysql
-#mysql的数据目录
-LogFile=/usr/local/work/backup/bak.log
-BinFile=/var/lib/mysql/mysql-bin.index
-#mysql的index文件路径，放在数据目录下的
-​
-mysqladmin -uroot -p123456 flush-logs
-#这个是用于产生新的mysql-bin.00000*文件
-# wc -l 统计行数
-# awk 简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。
-Counter=`wc -l $BinFile |awk '{print $1}'`
-NextNum=0
-#这个for循环用于比对$Counter,$NextNum这两个值来确定文件是不是存在或最新的
-for file in `cat $BinFile`
-do
-    base=`basename $file`
-    echo $base
-    #basename用于截取mysql-bin.00000*文件名，去掉./mysql-bin.000005前面的./
-    NextNum=`expr $NextNum + 1`
-    if [ $NextNum -eq $Counter ]
-    then
-        echo $base skip! >> $LogFile
-    else
-        dest=$BakDir/$base
-        if(test -e $dest)
-        #test -e用于检测目标文件是否存在，存在就写exist!到$LogFile去
-        then
-            echo $base exist! >> $LogFile
-        else
-            cp $BinDir/$base $BakDir
-            echo $base copying >> $LogFile
-         fi
-     fi
-done
-echo `date +"%Y年%m月%d日 %H:%M:%S"` $Next Bakup succ! >> $LogFile
-​
-#NODE_ENV=$backUpFolder@$backUpFileName /root/.nvm/versions/node/v8.11.3/bin/node /usr/local/work/script/upload.js
 ```
 
 ### sysbench
@@ -2478,78 +2635,11 @@ echo `date +"%Y年%m月%d日 %H:%M:%S"` $Next Bakup succ! >> $LogFile
 ## Docker
 
 ```
-# mkdir -p ~/mysql/data ~/mysql/logs ~/mysql/conf`
-# Dockerfile
+mkdir -p ~/mysql/data ~/mysql/logs ~/mysql/conf`
 
-FROM debian:jessie
-
-# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN groupadd -r mysql && useradd -r -g mysql mysql
-
-# add gosu for easy step-down from root
-ENV GOSU_VERSION 1.7
-RUN set -x \
-    && apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
-    && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
-    && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
-    && export GNUPGHOME="$(mktemp -d)" \
-    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-    && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-    && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
-    && chmod +x /usr/local/bin/gosu \
-    && gosu nobody true \
-    && apt-get purge -y --auto-remove ca-certificates wget
-
-RUN mkdir /docker-entrypoint-initdb.d
-
-# FATAL ERROR: please install the following Perl modules before executing /usr/local/mysql/scripts/mysql_install_db:
-# File::Basename
-# File::Copy
-# Sys::Hostname
-# Data::Dumper
-RUN apt-get update && apt-get install -y perl pwgen --no-install-recommends && rm -rf /var/lib/apt/lists/*
-
-# gpg: key 5072E1F5: public key "MySQL Release Engineering <mysql-build@oss.oracle.com>" imported
-RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys A4A9406876FCBD3C456770C88C718D3B5072E1F5
-
-ENV MYSQL_MAJOR 5.6
-ENV MYSQL_VERSION 5.6.31-1debian8
-
-RUN echo "deb http://repo.mysql.com/apt/debian/ jessie mysql-${MYSQL_MAJOR}" > /etc/apt/sources.list.d/mysql.list
-
-# the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
-# also, we set debconf keys to make APT a little quieter
-RUN { \
-        echo mysql-community-server mysql-community-server/data-dir select ''; \
-        echo mysql-community-server mysql-community-server/root-pass password ''; \
-        echo mysql-community-server mysql-community-server/re-root-pass password ''; \
-        echo mysql-community-server mysql-community-server/remove-test-db select false; \
-    } | debconf-set-selections \
-    && apt-get update && apt-get install -y mysql-server="${MYSQL_VERSION}" && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql /var/run/mysqld \
-    && chown -R mysql:mysql /var/lib/mysql /var/run/mysqld \
-# ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
-    && chmod 777 /var/run/mysqld
-
-# comment out a few problematic configuration values
-# don't reverse lookup hostnames, they are usually another container
-RUN sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/my.cnf \
-    && echo 'skip-host-cache\nskip-name-resolve' | awk '{ print } $1 == "[mysqld]" && c == 0 { c = 1; system("cat") }' /etc/mysql/my.cnf > /tmp/my.cnf \
-    && mv /tmp/my.cnf /etc/mysql/my.cnf
-
-VOLUME /var/lib/mysql
-
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
-ENTRYPOINT ["docker-entrypoint.sh"]
-
-EXPOSE 3306
-CMD ["mysqld"]
-
-- docker build -t mysql .
-- docker run -p 3306:3306 --name mymysql -v $PWD/conf/my.cnf:/etc/mysql/my.cnf -v $PWD/logs:/logs -v $PWD/data:/mysql_data -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
+docker build -t mysql .
+docker run -p 3306:3306 --name mymysql -v $PWD/conf/my.cnf:/etc/mysql/my.cnf -v $PWD/logs:/logs -v $PWD/data:/mysql_data -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
 ```
-
 
 ### [o1lab/xmysql](https://github.com/o1lab/xmysql)
 
@@ -2614,7 +2704,6 @@ http://localhost:3000
 ## 参考
 
 * [shlomi-noach/awesome-mysql](https://github.com/shlomi-noach/awesome-mysql):A curated list of awesome MySQL software, libraries, tools and resources
-*
 * [HOW TO INSTALL MYSQL NDB CLUSTER ON LINUX](https://clusterengine.me/how-to-install-mysql-ndb-cluster-on-linux/)
 * [索引性能分析](http://draveness.me/sql-index-performance.html)
 * [MySQL主从同步](http://geek.csdn.net/news/detail/236754)

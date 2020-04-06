@@ -2,8 +2,8 @@
 
 The official Vim repository http://www.vim.org Vim的一个最大用途是批量修改文件，列模式，正则表达式替换，区域替换
 
-* 内置于任何类Unix系统上，可以直接在服务器上编辑文件
-* 与大多数文本编辑器和IDE相比，轻量级的，即使在性能较弱的硬件上运行速度也很快且高效
+* 内置于任何类Unix系统上，直接在服务器上编辑文件
+* 与大多数文本编辑器和IDE相比，轻量级，即使在性能较弱的硬件上运行速度快且高效
 * 完全由键盘驱动的，更有效率
 
 ## 安装
@@ -30,7 +30,6 @@ brew install vim
     - mesg：允许vi显示其他用户用write写到自己终端上的信息
 
 ```
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 显示相关
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -298,10 +297,47 @@ set wildmenu
 set wildmode=longest:list,full # 命令模式下，底部操作指令按下 Tab 键自动补全。第一次按下 Tab，会显示所有匹配的操作指令的清单；第二次按下 Tab，会依次选择各个指令。
 ```
 
+## 文件
+
+* :E Opens explorer for locating files and directories
+* :vi|open|o filename 打开或新建文件，并将光标置于第一行首
+* vim file1 file2 file3 ... 同时打开多个文件
+* :split file 在新窗口中打开文件
+* :close – close current window
+* 切换同时打开的文件
+    - :bn 切换到下一个文件
+    - :bp 切换到上一个文件
+* :args 查看当前打开的文件列表，当前正在编辑的文件会用[]括起来。
+* 打开远程文件，比如ftp或者share folder `:e ftp://192.168.10.76/abc.txt` `:e \\qadrive\test\1.txt`
+* :vi +n filename 打开文件，并将光标置于第n行首
+* :vi + filename 打开文件，并将光标置于最后一行首
+* :vi +/pattern filename 打开文件，并将光标置于第一个与pattern匹配的串处
+* :vi -r filename 在上次正用vi编辑时发生系统崩溃，恢复filename
+* :vi -o/O filename1 filename2 … ：打开多个文件，依次进行编辑
+* :w  保存文件
+* :w vpser.net 保存至vpser.net文件
+* `:saveas <path/to/file>` → 另存为 `<path/to/file>`
+* :q 退出编辑器
+* :x， ZZ 或 :wq  保存并退出 (:x 表示仅在需要时保存，ZZ不需要输入冒号并回车)
+* :q! 退出不保存
+* :qa! 强行退出所有的正在编辑的文件，就算别的文件有更改
+* `:e <path/to/file>` → 打开一个文件
+* :e! 放弃所有修改，并打开原来文件
+
 ## 使用
 
 * 模式
-    - Insert模式：按i键进入,左下角显示--INSERT--,可以输入字符，按ESC将回到命令模式
+    - Command mode
+    - Insert模式：左下角显示--INSERT--,按ESC会执行
+        + i：光标前插入
+        + a：光标后插入 3a！+ ESC:在当前位置后插入3个！
+        + I：当前行首
+        + A：当前行尾
+        + o：新起一个空白行
+        + O：当前行之前插入一行
+        + r：替换当前字符
+        + S 或 cc 删除当前行内容并进入插入模式
+        + C 删除从当前位置到行尾内容
     - Normal模式：按Esc或Ctrl+[进入, 左下角显示文件名或为空, 可以移动光标、删除字符等
     - Visual模式：左下角显示--VISUAL-- 可以对选定的文本运行命令操作并该命令仅仅作用于选定文本
 * 通用
@@ -385,68 +421,37 @@ ye Copy to end of word |
 * <C-w>_ (或 <C-w>|) : 最大化尺寸 (<C-w>| 垂直分屏)
 * <C-w>+ (或 <C-w>-) : 增加尺寸
 
-### 文件
-
-* vi filename :打开或新建文件，并将光标置于第一行首
-* :open|o file 在vim窗口中打开一个新文件
-* vim file1 file2 file3 ... 同时打开多个文件
-* :split file 在新窗口中打开文件
-* :close – close current window
-* 切换同时打开的文件
-    - :bn 切换到下一个文件
-    - :bp 切换到上一个文件
-* :args 查看当前打开的文件列表，当前正在编辑的文件会用[]括起来。
-* 打开远程文件，比如ftp或者share folder
-    - `:e ftp://192.168.10.76/abc.txt`
-    - `:e \\qadrive\test\1.txt`
-* vi +n filename ：打开文件，并将光标置于第n行首
-* vi + filename ：打开文件，并将光标置于最后一行首
-* vi +/pattern filename：打开文件，并将光标置于第一个与pattern匹配的串处
-* vi -r filename ：在上次正用vi编辑时发生系统崩溃，恢复filename
-* vi -o/O filename1 filename2 … ：打开多个文件，依次进行编辑
-* :w  保存文件
-* :w vpser.net 保存至vpser.net文件
-* `:saveas <path/to/file>` → 另存为 `<path/to/file>`
-* :q 退出编辑器
-* :x， ZZ 或 :wq  保存并退出 (:x 表示仅在需要时保存，ZZ不需要输入冒号并回车)
-* :q! 退出不保存
-* :qa! 强行退出所有的正在编辑的文件，就算别的文件有更改
-* `:e <path/to/file>` → 打开一个文件
-* :e! 放弃所有修改，并打开原来文件
-
 ### 移动
 
 * h|Backspace：光标左移一个字符
 * l|space|w：光标右移一个字符
 * k|Ctrl+p：光标上移一行
 * j|Ctrl+n|Enter：光标下移一行
-H – move to top of screen
-M – move to middle of screen
-L – move to bottom of screen
 * 30j:向下移动30行
 * w|W：向后移动一个单词（光标停在单词首部），如果已到行尾，则转至下一行行首。此命令快，可以代替l命令
-* e|E：光标右移一个单词至词尾
-* b|B：光向后移动一个单词至词首
+* e|E：光标后移一个单词至词尾
+* b|B：光标前移一个单词至词首
 * ge：光向后移动一个单词至词尾
 * )：光标移至句尾
 * (：光标移至句首
 * }：光标移至段落开头
 * {：光标移至段落结尾
 * :N 到第N行
+* gg|1G|[[:到文件头
 * G|]]: 文档尾行
-* nG：光标移至第n行首
+* nG：光标移至第n行首   
 * n+：光标下移n行
-* n-：光标上移n行
 * n$：光标移至下面n行行尾
-* gg | 1G|[[:到文件头
 * 0：（数字零）光标移至本行第一个字符上
 * `$|<HOME>`：光标移至当前行尾
+* % 匹配括号移动，包括(， [， { （需要把光标先移到括号上）
+* *(#) 移动到下(上)下一个当前光标所在的单词
 * ^ :到本行第一个不是blank字符(空格，tab，换行，回车等)的位置
 * g_ :到本行最后一个不是blank字符的位置
 * `f` 查找字符 ; f {char}会定位到第一个{char}出现的光标位置
-`F` 查找字符；与f类似，不过是向后查找
-`;` 重复上次搜索
-`, `如果重复上次搜索按多了，则可以通过`,`回退
+* `F` 查找字符；与f类似，不过是向后查找
+* `;` 重复上次搜索
+* `, `如果重复上次搜索按多了，则可以通过`,`回退
 * fa :光标后第一个为a的字符,3fa :在当前行查找第三个出现的a
 * t, :到逗号前的第一个字符
 * F 和 T :和 f 和 t 一样，只不过是相反方向
@@ -457,26 +462,10 @@ L – move to bottom of screen
     - H ：光标移至屏幕顶行
     - M ：光标移至屏幕中间行
     - L ：光标移至屏幕最后行
-    - Ctrl+u：向文件首翻半屏
+    - Ctrl+u：文件首翻半屏
     - Ctrl+d：向文件尾翻半屏
     - Ctrl+f：向文件尾翻一屏
-    - Ctrl＋b；向文件首翻一屏
-    - nz：将第n行滚至屏幕顶部，不指定n时将当前行滚至屏幕顶部。
-
-## 插入
-
-* i ：当前位置前插入，3a！:在当前位置后插入3个！
-* I ：在当前行首
-* a：光标后
-* A：在当前行尾
-* o：新起一个空白行
-* O：在当前行之前插入一行
-* r：替换当前字符
-* R：替换当前字符及其后的字符，直至按ESC键
-* s：从当前光标位置处开始，以输入的文本替代指定数目的字符
-* S：删除指定数目的行，并以所输入文本代替之
-* ncw或nCW：修改指定数目的字
-* nCC：修改指定数目的行
+    - Ctrl＋b:向文件首翻一屏
 
 ## 查找
 
@@ -513,13 +502,12 @@ L – move to bottom of screen
 
 ## 编辑
 
-* r 替换字符
 * ggVG 全选
 * u 撤销（Undo）
 * U 撤销对整行的操作
 * Ctrl + r 重做（Redo），即撤销的撤销
 * J 合并下一行
-* gU 光标处转大写
+* gU(u) 变大(小)写，需要接一个范围，gUl 大写当前字符， guu 当前单词后面 行全部变小写 gUw 当前位置到改单词末尾变为大写
 * ggguG 整篇文章大写转化为小写
 * % 跳转到下一个匹配,如在<div>上按%，则跳转到相应的</div>
 * 拷贝与复制
@@ -633,6 +621,10 @@ J       合并上下两行
 ### Visual
 
 * 普通模式下按v（逐字）或V（逐行）即可进入
+* ctrl + v 开始列操作, G 选中到最后一行
+* I ， 在选中的列前开始插入 ,
+* ESC 执行，为10行全部插入 ,
+* J 把所有行连接到一起
 * 命令格式：<action>a<object> 和 <action>i<object>
 * action：d (删除), y (拷贝), v (可以视模式选择)
 * object 可能是： w 一个单词， W 一个以空格为分隔的单词， s 一个句字， p 一个段落。也可以是一个特别的字符："、 '、 )、 }、 ]。
@@ -674,6 +666,12 @@ A, 输入字符串，按 ESC
 * 录制宏:按q键加任意字母开始录制，再按q键结束录制（这意味着vim中的宏不可嵌套）
 * 使用:@加宏名
 * @@ 是一个快捷键用来replay最新录制的宏
+* qa 开启录制
+* Yp 复制当前有数字1的行并粘贴
+* ctrl + a 当前数字 +1
+* @a replay被录制的宏
+* @@ replay最新录制的宏
+* 6@@ replay 6次
 
 ```
 在一个只有一行且这一行只有“1”的文本中，键入如下命令：
@@ -792,10 +790,13 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim.
 * [fatih/vim-go](https://github.com/fatih/vim-go):Go development plugin for Vim
 * [powerline/powerline](https://github.com/powerline/powerline):Powerline is a statusline plugin for vim, and provides statuslines and prompts for several other applications, including zsh, bash, tmux, IPython, Awesome and Qtile. https://powerline.readthedocs.io/en/latest/
-* NERDTree：可以在单独的window中浏览目录和文件，方便打开的选取文件。
 * taglist：可以通过ctags生成的tag文件索引定位代码中的常量、函数、类等结构，阅读代码和写代码必备。
-* powerline：在底部显示一个非常漂亮的状态条，还可以通过不同的颜色提醒用户当前处于什么状态（如normal、insert或visual）。
 * vim-colors-solarized：vim的solarized配色插件
+* Auto Pairs
+* [NERD Commenter](https://github.com/preservim/nerdcommenter):Vim plugin for intensely nerdy commenting powers
+* [airblade / vim-gitgutter](https://github.com/airblade/vim-gitgutter):A Vim plugin which shows a git diff in the sign column and stages/previews/undoes hunks and partial hunks.
+* VIM Fugitive
+* VIM Surround
 
 ## 工具
 
@@ -807,7 +808,8 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 
 ## 教程
 
+* [VIM Tutor](http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor)
 * [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)
-* <https://github.com/junegunn/vim-plug>: junegunn 是韩国的一个大牛，擅长写 Vim 插件，看起来总是令人赏心悦目
+* <https://github.com/junegunn/vim-plug>: junegunn 是韩国的一个大牛，擅长写 Vim 插件
 * [SpaceVim](https://github.com/SpaceVim/SpaceVim):一个开箱即用的 Vim 配置，对新手很友好，和 Spacemacs 一样
-* [reddit 的 Vim 频道](https://www.reddit.com/r/vim/):有很多最前沿的 Vim 技巧
+* [reddit 的 Vim 频道](https://www.reddit.com/r/vim/)

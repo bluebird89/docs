@@ -5,7 +5,7 @@ The official GitHub mirror of the Chromium source https://chromium.googlesource.
 ## 插件
 
 * AdBlock
-* Allow-Control-Allow-Origin: *
+* Allow-Control-Allow-Origin
 * Awesome Screenshot: Screen Video Recorder
 * Axure RP Extension for Chrome
 * ABP
