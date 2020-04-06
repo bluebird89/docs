@@ -162,6 +162,15 @@ The following packages have unmet dependencies:
 E: Unable to correct problems, you have held broken packages.
 
 apt-get install percona-server-server
+
+The GPG keys listed for the "Percona-Release YUM repository - x86_64" repository are already installed but they are not correct for this package.
+Check that the correct key URLs are configured for this repository.
+
+
+ Failing package is: Percona-Server-client-56-5.6.43-rel84.3.el7.x86_64
+ GPG Keys are configured as: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Percona
+
+yum update percona-release
 ```
 
 ## 参考

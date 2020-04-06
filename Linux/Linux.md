@@ -143,8 +143,6 @@ sudo dd bs=4M if=/home/hcf/dev/iso/ubuntu-16.04-desktop-amd64.iso of=/dev/sdb4
 
 ## 组成
 
-典型的Linux发行版包括
-
 * Linux内核处于用户进程和硬件之间，负责管理系统的进程、内存、设备驱动程序、文件和网络系统，决定着系统的性能和稳定性。除系统调用外，由五个主要的子系统组成：
   - 进程管理
     + 进程实际是某特定应用程序的一个运行实体
@@ -312,6 +310,93 @@ export EDITOR=vim
 * 文件描述符fd：用于表述指向文件的引用的抽象化概念，形式上是一个非负整数
   - 实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表
   - 当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符
+* 进程间通信（IPC）
+  - 共享文件
+    + 生产者应该在写入文件时获得一个文件的排斥锁。一个排斥锁最多被一个进程所拥有。这样就可以排除掉竞争条件的发生，因为在锁被释放之前没有其他的进程可以访问这个文件。
+    + 消费者应该在从文件中读取内容时得到至少一个共享锁。多个读取者可以同时保有一个共享锁，但是没有写入者可以获取到文件内容，甚至在当只有一个读取者保有一个共享锁时。
+    + 标准的 I/O 库中包含一个名为 fcntl 的实用函数，它可以被用来检查或者操作一个文件上的排斥锁和共享锁。该函数通过一个文件描述符（一个在进程中的非负整数值）来标记一个文件（在不同的进程中不同的文件描述符可能标记同一个物理文件）。对于文件的锁定， Linux 提供了名为 flock 的库函数，它是 fcntl 的一个精简包装
+  - 共享内存（使用信号量）
+  - 管道（命名的或非命名的管道）
+  - 消息队列
+  - 套接字
+  - 信号
+
+```c
+// 生产者
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
+#define FileName "data.dat"
+#define DataString "Now is the winter of our discontent\nMade glorious summer by this sun of York\n"
+void report_and_exit(const char* msg) {
+  perror(msg);
+  exit(-1); /* EXIT_FAILURE */
+}
+int main() {
+  struct flock lock;
+  lock.l_type = F_WRLCK;    /* read/write (exclusive versus shared) lock */
+  lock.l_whence = SEEK_SET; /* base for seek offsets */
+  lock.l_start = 0;         /* 1st byte in file */
+  lock.l_len = 0;           /* 0 here means 'until EOF' */
+  lock.l_pid = getpid();    /* process id */
+  int fd; /* file descriptor to identify a file within a process */
+  if ((fd = open(FileName, O_RDWR | O_CREAT, 0666)) < 0)  /* -1 signals an error */
+    report_and_exit("open failed...");
+  if (fcntl(fd, F_SETLK, &lock) < 0) /** F_SETLK doesn't block, F_SETLKW does **/
+    report_and_exit("fcntl failed to get lock...");
+  else {
+    write(fd, DataString, strlen(DataString)); /* populate data file */
+    fprintf(stderr, "Process %d has written to data file...\n", lock.l_pid);
+  }
+  /* Now release the lock explicitly. */
+  lock.l_type = F_UNLCK;
+  if (fcntl(fd, F_SETLK, &lock) < 0)
+    report_and_exit("explicit unlocking failed...");
+  close(fd); /* close the file: would unlock if needed */
+  return 0;  /* terminating the process would unlock as well */
+}
+
+// 消费者程序
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#define FileName "data.dat"
+void report_and_exit(const char* msg) {
+  perror(msg);
+  exit(-1); /* EXIT_FAILURE */
+}
+int main() {
+  struct flock lock;
+  lock.l_type = F_WRLCK;    /* read/write (exclusive) lock */
+  lock.l_whence = SEEK_SET; /* base for seek offsets */
+  lock.l_start = 0;         /* 1st byte in file */
+  lock.l_len = 0;           /* 0 here means 'until EOF' */
+  lock.l_pid = getpid();    /* process id */
+  int fd; /* file descriptor to identify a file within a process */
+  if ((fd = open(FileName, O_RDONLY)) < 0)  /* -1 signals an error */
+    report_and_exit("open to read failed...");
+  /* If the file is write-locked, we can't continue. */
+  fcntl(fd, F_GETLK, &lock); /* sets lock.l_type to F_UNLCK if no write lock */
+  if (lock.l_type != F_UNLCK)
+    report_and_exit("file is still write locked...");
+  lock.l_type = F_RDLCK; /* prevents any writing during the reading */
+  if (fcntl(fd, F_SETLK, &lock) < 0)
+    report_and_exit("can't get a read-only lock...");
+  /* Read the bytes (they happen to be ASCII codes) one at a time. */
+  int c; /* buffer for read bytes */
+  while (read(fd, &c, 1) > 0)    /* 0 signals EOF */
+    write(STDOUT_FILENO, &c, 1); /* write one byte to the standard output */
+  /* Release the lock explicitly. */
+  lock.l_type = F_UNLCK;
+  if (fcntl(fd, F_SETLK, &lock) < 0)
+    report_and_exit("explicit unlocking failed...");
+  close(fd);
+  return 0;
+}
+```
 
 ## 硬件
 
@@ -1069,18 +1154,21 @@ diff -Naur sources-orig/ sources-fixed/ >myfixes.patch # 参数 -N 代表如果�
 * 服务：封装的命令行，带有设定的参数、日志记录、运行监控
 * 启动服务会生成进程，端口占用
 * netstat:打印网络连接、路由表、连接的数据统计、伪装连接以及广播域成员
-  - -a 所有当前的连接
+  - -a 所有当前连接
   - -t 显示和tcp相关
   - -u 显示和udp相关
   - -x 显示和Unix sockets相关
-  - -n|numeric 禁用域名解析功能
-  - -l 显示处于Listen(监听)状态
-  - -p|program 显示建立连接的程序名与进程号
+  - -n|numeric 禁用域名解析功能  默认情况下 netstat 会通过反向域名解析技术查找每个 IP 地址对应的主机名
+  - -l 显示处于Listen(监听)状态,不要使用 -a 选项，否则 netstat 会列出所有连接(还有连接)，而不仅仅是监听端口
+  - -p|program 显示建立连接的程序名与进程号，必须运行在 root 权限之下，不然它就不能得到运行在 root 权限下的进程名
   - -s|statistics 网络统计数据，包括某个协议下的收发包数量
   - -r 选项打印内核路由信息
   - -ie 打印网络接口信息
   - -c 持续输出信息
+  - -ep 可以同时查看进程名和用户名
   - -g 输出 IPv4 和 IPv6 的多播组信息
+  - -g 输出 IPv4 和 IPv6 的多播组信息
+  - -i 打印网络接口信息
   - -v|verbose shows Active Internet connections and Active UNIX domain sockets without server information.
 
 ```sh
@@ -1208,11 +1296,11 @@ netstat -tunlp # 显示tcp，udp的端口和进程等相关
 sudo netstat -plunt
 netstat -tln | grep 8000
 netstat -tunlp|grep (port)  # 指定端口号进程情况
-netstat -anp | grep LISTEN
 netstat -anp | grep LISTEN # 通过进程id查看占用的端口
 netstat -atnp | grep ESTA # 查询建立连接状态
 sudo netstat -anp | grep 80 # 通过进程id查看占用的端口
 watch -d -n0 "netstat -atnp | grep ESTA" # watch 命令监视 active 状态的连接
+netstat -atnp | grep ESTA # 获得 active 状态的连接
 
 ip route | column -t # 显示默认网关和路由表：
 netstat -r
@@ -1407,7 +1495,7 @@ Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能
     + -b, --number-nonblank    number nonempty output lines, overrides -n
     + -n, --number             number all output lines
     + -s option saves screen space
-  - less [参数] 文件 # 上下滚动查看内容
+  - `less [参数] 文件` 上下滚动查看内容
     + -c 从顶部（从上到下）刷新屏幕，并显示文件内容。而不是通过底部滚动完成刷新；
     + -f 强制打开文件，二进制文件显示时，不提示警告；
     + -i 搜索时忽略大小写；除非搜索串中包含大写字母；
@@ -1425,6 +1513,11 @@ Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能
     + / 字符并在其后加上想要查找的文字
     + `ls | more`
     + `grep ‘productivity’ core.md Dict.md lctt2014.md lctt2016.md lctt2018.md README.md | more`
+  - head tail
+    + -n
+  - wc(word count)
+    + -l
+  - grep
 * 虚拟文件系统
   * 将各种不同文件系统的操作和管理纳入到一个统一的框架中，使得用户程序可以通过同一个文件系统界面，也就是同一组系统调用，对各种不同的文件系统以及文件进行操作；用户程序可以不关心不同文件系统的实现细节，而使用系统提供的统一、抽象、虚拟的文件系统界面；这种统一的框架就是所谓的虚拟文件系统转换，一般简称虚拟文件系统(VFS)；
   * VFS的对象类型包括：超级块(superblock)对象、索引节点(inode)对象、目录项(dentry)对象和文件(file)对象；
@@ -1548,11 +1641,8 @@ base64 -d inputfile output
 
 cat -n file # 查看文件内容，从头到尾的内容 -n:列出行号 当一个文档太长时， cat 只能展示最后布满屏幕的内容
 cat  filename   # 在终端显示文件全部内容,读取某一个文件内的内容,打印文件内容到标准输出(正序)
-more filename   # 通过"敲回车"方式从第一行逐行查看文件内容,不支持回看,q键退出查看
 less filename   # "上下左右"键方式查看文件各个部分内容,支持回看，q键退出查看
-head  -n  filename # 查看文件“前n行”内容
-tail  -n  filename # 查看文件“末尾n行”内容
-tail -n 1 /etc/passwd
+
 wc  filename     # 计算文件行数
 nl # 显示的时候，顺道输出行号
 umask # 档案预设权限
@@ -1566,8 +1656,8 @@ tail -n 1 /etc/passwd # 查看文件的尾几行（默认10行）
 tail -f file
 
 # Enter 键向下滚动一行 Space 键向上滚动一屏 h 显示帮助 q 退出
-more +100 /etc/locale.gen       # 从 100 行开始显示
 more file # 分屏显示文件内容,终端底部显示当前阅读的进度 逐行显示内容
+more +100 /etc/locale.gen       # 从 100 行开始显示
 
 # 动作
 回车键 向下移动一行；
@@ -1584,6 +1674,8 @@ p n% 跳到n%，比如 10%，也就是说比整个文件内容的10%处开始显
 /pattern 搜索pattern ，比如 /MAIL表示在文件中搜索MAIL单词；
 v 调用vi编辑器；
 q 退出less
+
+grep -i "security" jan2017articles.csv
 
 echo  内容 > filename    # 给文件“覆盖写”方式追加内容
 echo  内容 >> filename   # 给文件纯追加内容
@@ -1636,7 +1728,6 @@ unzip -q shiyanlou.zip -d ziptest   # 静默且指定解压目录，目录不存
 unzip -O GBK 中文压缩文件.zip # 使用 -O（英文字母，大写 o）参数指定编码类型
 gzip，zcat
 bzip2，bzcat
-tar
 
 tar -zcvf 压缩文件名 源文件 # 压缩/解压 同时打包 -z:识别.gz格式  -c:压缩  -v:显示压缩过程  -f:指定压缩包名
 tar -zxvf  压缩文件名   # 解压缩同时解打包
@@ -2324,36 +2415,365 @@ sudo apt-get install stacer
 
 ### grep：Global search REgrular expression and Print out the line
 
-- --color=auto：对匹配到的文本着色显示
-- -v：显示不被pattern 匹配到的行，反向选择 ,查找文件中不包含"test"内容的行 `grep -v test log.txt`
-- -i：忽略字符大小写
-- -n：显示匹配的行号
-- -c：统计匹配的行数
-- -o：仅显示匹配到的字符串
-- -q：静默模式，不输出任何信息
-- -A #：after，后#行 ,显示包含这行后续#行
-- -B #：before，前#行
-- -C #：context，前后各#行
-- -e：实现多个选项间的成逻辑or关系，grep –e 'cat ' -e 'dog' file
-- -w：匹配整个单词,（字母，数字，下划线不算单词边界）
-- -E：使用ERE
-- -r或--recursive 此参数的效果和指定"-d recurse"参数相同。
+* 参数
+  + --color=auto：对匹配到的文本着色显示
+  + -v：显示不被pattern 匹配到的行，反向选择 ,查找文件中不包含"test"内容的行 `grep -v test log.txt`
+  + -i：忽略字符大小写
+  + -n：显示匹配的行号
+  + -c：统计匹配的行数
+  + -o：仅显示匹配到的字符串
+  + -q：静默模式，不输出任何信息
+  + -A #：after，后#行 ,显示包含这行后续#行
+  + -B #：before，前#行
+  + -C #：context，前后各#行
+  + -e：实现多个选项间的成逻辑or关系，grep –e 'cat ' -e 'dog' file
+  + -w：匹配整个单词,（字母，数字，下划线不算单词边界）
+  + -E：使用ERE
+  + -r或--recursive 此参数的效果和指定"-d recurse"参数相同
 
-### sed
+## tr
 
+```sh
+grep "20 Jan 2017" jan2017articles.csv | tr ',' '\t' > jan20only.tsv
+```
+
+## sort
+
+```sh
+sort -nr -t$'\t' -k8 jan20only.tsv | head -n 1
+```
+
+## cut
+
+```sh
+cut -d',' -f3 jan17no_headers.csv > authors.txt
+```
+
+## uniq
+
+```sh
+sort authors.txt | uniq -c > authors-sorted.txt
+```
+
+## AWK
+
+* 命名得自于三个创始人姓别的首字母
+* 一种报表生成器，打印文件中的某一列 就是对文件进行格式化处理的，对文件内容进行各种“排版”，进而格式化显示
+* 在linux之上使用的是GNU awk简称gawk pattern scanning and processing language：（模式扫描和处理语言），并且gawk其实就是awk的链接文件，gawk是一种过程式编程语言，支持条件判断、数组、循环等各种编程语言中所有可以使用的功能
+* 同sed命令类似，只不过sed擅长取行，awk命令擅长取列
+* 语法
+
+  - 主程序部分使用单引号‘包围
+  - 列开始的index是0
+  - 格式：总的来说就最后一个
+      + `awk [options] -f progfile [--] file`
+      + `awk [options] [--] 'program' file`
+      + `awk [options] 'BEGIN{ action;… } pattern{ action;… } END{ action;… }' file` action：动作语言，由多种语句组成，语句间用分号分割 pattern：模式，对输入流进行操作，实际上paogram就代表这pattern部分
+  - options
+      + -f progfile，--file=progfile：read program file
+      + -F fs，--field-separator=fs： define input field separator by extended regex
+      + -v var=val，--assign=var=val：assign values to variables
+  - 原理
+      + 执行[option]相关内容
+      + 执行BEGIN{action;… } 语句块中的语句。在awk开始从输入流中读取行之前被执行，可选的语句块，比如变量初始化、打印输出表格的表头等语句
+      + 从文件或标准输入(stdin) 读取每一行，然后执行pattern{action;… }语句块，它逐行扫描文件，直到文件全部被读取完毕
+      + pattern语句块:可选的,如果没有提供pattern 语句块，则默认执行{ print } ，即打印每一个读取到的行
+      + 当读至输入流末尾时，也就是所有行都被读取完执行完后，再执行END{action;…} 语句块。在awk从输入流中读取完所有的行之后即被执行，比如打印所有行的分析结果这类信息汇总，可选语句块
+
+* 变量：分为内置变量和自定义变量，声明-v
+    - 内置变量
+        + FS：输入字段分隔符，默认为空白字符，这个想当于-F选项。分隔符可以是多个，用[]括起来表示,如：-v FS="[,./-:;]"
+        + OFS：输出字段分隔符，默认为空白字符，分隔符可以是多个，同上
+        + RS ：输入记录(所认为的行)分隔符，指定输入时的换行符，原换行符仍有效，分隔符可以是多个，同上
+        + ORS ：输出记录(所认为的行)分隔符，输出时用指定符号代替换行符，分隔符可以是多个，同上
+        + NF：字段数量
+        + NR：记录数(所认为的行)
+        + FNR ：各文件分别计数, 记录数（行号）
+        + FILENAME ：当前文件名
+        + ARGC：命令行参数的个数
+        + ARGV ：数组，保存的是命令行所给定的各参数
+    - 自定义变量(区分字符大小写)：
+        + 在'{...}'前，需要用-v var=value：awk -v var=value '{...}'
+        + 在program 中直接定义：awk '{var=vlue}'
+* print和printf:都是打印输出的，不过两者用法和显示上有些不同
+    - `print item1,item2, ...`
+    - `printf “FORMAT ”,item1,item2, ...`
+    - 要点：
+        + 逗号为分隔符时，显示的是空格
+        + 分隔符分隔的字段（域）标记称为域标识，用$0,$1,$2,...,$n表示，其中$0 为所有域，$1就是表示第一个字段（域），以此类推
+        + 输出的各item可以字符串，也可以是数值，当前记录的字段，变量或awk 的表达式等
+        + 如果省略了item ，相当于print $0
+        + 对于printf来说，必须指定FORMAT，即必须指出后面每个itemsN的输出格式，且还不会自动换行，需要显式则指明换行控制符"\n"
+    - printf的格式符和修饰符
+        + %c：显示字符的ASCII码
+        + %d, %i：显示十进制整数
+        + %e, %E：显示科学计数法数值
+        + %f：显示为浮点数
+        + %g, %G：以科学计数法或浮点形式显示数值
+        + %s：显示字符串
+        + %u：无符号整数
+        + %%：显示%自身
+        + #[.#]：第一个数字控制显示的宽度；第二个#表示小数点后精度，%3.1f
+        + -：左对齐（默认右对齐）；%-15s，就是以左对齐方式显示15个字符长度
+        + +：显示数值的正负符号 %+d
+* 操作符
+    - 算术操作符：x+y, x-y, x*y, x/y, x^y, x%y
+    - 赋值操作符：=, +=, -=, *=, /=, %=, ^=，++, --
+    - 比较操作符：==, !=, >, >=, <, <=
+    - 模式匹配符：~ ：左边是否和右边匹配包含；!~ ：是否不匹配
+    - 逻辑操作符：与:&& ；或:|| ；非:!
+    - 条件表达式（三目表达式）：selector ? if-true-expression : if-false-expression
+* pattern:根据pattern条件，过滤匹配的行，再做处理
+    - 未指定：表示空模式，匹配每一行
+    - /regular expression/：仅处理能够模式匹配到的行，支持正则表达式，需要用/ /括起来
+    - 关系表达式：结果为“真”才会被处理。真：结果为非0值，非空字符串。假：结果为空字符串或0值
+    - /pat1/,/pat2/：startline,endline ，行范围,支持正则表达式，不支持直接给出数字格式
+    - BEGIN{}和END{}：BEGIN{} 仅在开始处理文件中的文本之前执行一次。END{}仅在文本处理完成之后执行 一次
+* action分类
+    - 表达式：算术表达式和比较表达式
+    - 控制：进行控制
+        + if-else
+            * {if(condition){statement;…}}：条件满足就执行statement
+            * {if(condition){statement1;…}{else statement2}}：条件满足执行statement1，不满足执行statement2
+            * {if(condition1){statement1}else if(condition2){statement2}else{statement3}}：条件1满足执行statement2，不满足条件1但满足条件2执行statement2，所用条件都不满足就执行statement3
+        + switch
+            * switch(expr) {case VAL1 or /REGEXP/:statement1; case VAL2 or /REGEXP2/: statement2;...; default: statementn}：若expr满足 VAL1 or /REGEXP/就执行statement1，若expr满足VAL2 or /REGEXP2/就执行statement2，以此类推，执行statementN，都不满足就执行statement
+        + while和do-while
+            * while(condition){statement;…}：条件为“真”时，进入循环；条件为“假”时， 退出循环
+            * do {statement;…}while(condition)：无论真假，至少执行一次循环体。当条件为“真”时，退出循环；条件为“假”时，继续循环
+        + for
+            * for(expr1;expr2;expr3) {statement;…}：expr1为变量赋值，如var=value，初始进行变量赋值；expr2为条件判断语句，j<=10，满足条件就继续执行statement；expr3为迭代语句，如j++，每次执行完statement后就迭代增加
+            * for(var in array) {for-body}：变量var遍历数组，每个数组中的var都会执行一次for-body
+        + break 和continue，用于条件判断循环语句，next是用于awk自身循环的语句
+            * break[n]：当第n次循环到来后，结束整个循环，n=0就是指本次循环
+            * continue[n]：满足条件后，直接进行第n次循环，本次循环不在进行，n=0也就是提前结束本次循环而直接进入下一轮
+            * next：提前结束对本行的处理动作而直接进入下一行处理
+    - 输入：用来做为输入，变量赋值就算是
+    - 输出：用来输出显示的，典型的是print和printf
+* 数组：关联数组，格式为：`array[index-expression]：arry为数组名，index-expression为下标`
+    - 实际上index-expression可使用任意字符串，字符串要使用双引号括起来；如果某数组元素事先不存在，在引用时，awk 会自动创建此元素，并将其值初始化为“空串”。
+    - 若要判断数组中是否存在某元素，要使用“index in array”格式进行遍历
+    - 若要遍历数组中的每个元素，要使用for循环：for(var in array) {for-body array[var] }
+* 函数
+    - rand()：返回0 和1 之间一个随机数
+    - srand()：生成随机数种子
+    - int()：取整数
+    - length([s])：返回指定字符串的长度
+    - sub(r,s,[t])：对t字符串进行搜索，r表示的模式匹配的内容，并将第一个匹配的内容替换为s
+    - gsub(r,s,[t])：对t字符串进行搜索，r表示的模式匹配的内容，并全部替换为s所表示的内容
+    - split(s,array,[r])：以r为分隔符，切割字符串s，并将切割后的结果保存至array 所表示的数组中，第一个索引值为1, 第二个索引值为2,…也就是说awk的数组下标是从1开始编号的。
+    - substr(s,i,[n])：从s所表示的字符串中取子串，取法：从i表示的位置开始，取n个字符。
+    - systime()：取当前系统时间，结果形式为时间戳。
+    - system()：调用shell中的命令。空格是awk中的字符串连接符，如果system 中需要使用awk中的变量可以使用空格分隔，或者说除了awk的变量外其他一律用"" 引用 起来。
+
+```sh
+# 变量
+awk -v FS=':' '{print $1,FS,$3}' /etc/passwd
+awk –F: '{print $1,$3,$7}' /etc/passwd
+awk -v FS=':' -v OFS=':' '{print $1,$3,$7}' /etc/passwd
+awk -v RS=' ' '{print }' /etc/passwd
+awk -v RS="[[:space:]/=]" '{print }' /etc/fstab |sort
+awk -v RS=' ' -v ORS='###' '{print }' /etc/passwd
+awk -F： '{print NF}' /etc/fstab, 引用内置变量不用$
+awk -F: '{print $(NF-1)}' /etc/passwd
+awk '{print NR}' /etc/fstab
+awk 'END{print NR}' /etc/fstab
+awk '{print FNR}' /etc/fstab /etc/inittab
+awk '{print FILENAME}' /etc/fstab
+awk '{print ARGC}' /etc/fstab /etc/inittab
+awk 'BEGIN {print ARGC}' /etc/fstab /etc/inittab
+awk 'BEGIN {print ARGV[0]}' /etc/fstab   /etc/inittab
+awk 'BEGIN {print ARGV[1]}' /etc/fstab  /etc/inittab
+awk -v test='hello gawk' '{print test}' /etc/fstab
+awk -v test='hello gawk' 'BEGIN{print test}'
+awk 'BEGIN{test="hello,gawk";print test}'
+awk –F:'{sex=“male”;print $1,sex,age;age=18}' /etc/passwd
+awk -F: '{sex="male";age=18;print $1,sex,age}' /etc/passwd
+
+echo "{print script,\$1,\$2}"  > awkscript
+awk -F: -f awkscript script=“awk” /etc/passwd
+
+# print
+awk '{print "hello,awk"}'
+awk –F: '{print}' /etc/passwd
+awk –F: '{print “wang”}' /etc/passwd
+awk –F: '{print $1}' /etc/passwd
+awk –F: '{print $0}' /etc/passwd
+awk –F: '{print $1”\t”$3}' /etc/passwd
+tail –3 /etc/fstab |awk '{print $2,$4}'
+awk -F: '{printf "%s",$1}' /etc/passwd
+awk -F: '{printf "%s\n",$1}' /etc/passwd
+awk -F: '{printf "%-20s %10d\n",$1,$3}' /etc/passwd
+awk -F: '{printf "Username: %s\n",$1}' /etc/passwd
+awk -F: '{printf “Username: %s,UID:%d\n",$1,$3}' /etc/passwd
+awk -F: '{printf "Username: %15s,UID:%d\n",$1,$3}' /etc/passwd
+awk -F: '{printf "Username: %-15s,UID:%d\n",$1,$3}' /etc/passwd
+awk -v FS=" " 'BEGIN{printf "%s %26s %10s\n","Module","Size","Used by"}{printf "%-20s %13d %5s %s\n",$1,$2,$3,$4}' /proc/modules
+
+# 操作符
+awk –F: '$0 ~ /root/{print $1}' /etc/passwd
+awk '$0~“^root"' /etc/passwd
+awk '$0 !~ /root/' /etc/passwd
+awk –F: '$3==0' /etc/passwd
+awk –F: '$3>=0 && $3<=1000 {print $1}' /etc/passwd
+awk -F: '$3==0 || $3>=1000 {print $1}' /etc/passwd
+awk -F: '!($3==0) {print $1}' /etc/passwd
+awk -F: '!($3>=500) {print $3}' /etc/passwd
+awk -F: '{$3>=1000?usertype="Common User":usertype="Sysadmin or SySUSEr";printf "%15s:%-s\n",$1,usertype}' /etc/passwd
+
+# Pattern
+awk '/^UUID/{print $1}' /etc/fstab
+awk '!/^UUID/{print $1}' /etc/fstab
+awk -F: '/^root\>/,/^nobody\>/{print $1}' /etc/passwd
+awk -F: '(NR>=10&&NR<=20){print NR,$1}'  /etc/passw
+awk -F: 'i=1;j=1{print i,j}' /etc/passwd
+awk ‘!0’ /etc/passwd ; awk ‘!1’ /etc/passwd
+awk –F: '$3>=1000{print $1,$3}' /etc/passwd
+awk -F: '$3<1000{print $1,$3}' /etc/passwd
+awk -F: '$NF=="/bin/bash"{print $1,$NF}' /etc/passwd
+awk -F: '$NF ~ /bash$/{print $1,$NF}' /etc/passwd
+awk -F: 'BEGIN {print "USER USERID"} {print $1":"$3}END{print "end file"}' /etc/passwd
+awk -F: 'BEGIN{print "    USER     USERID"}{printf "|%8s| %10d|\n",$1,$3}END{print "END FILE"}' /etc/passwd
+awk -F: '{print "USER USERID“;print $1":"$3} END{print"end file"}' /etc/passwd
+awk -F: 'BEGIN{print " USER UID \n---------------"}{print $1,$3}' /etc/passwd
+awk -F: 'BEGIN{print "    USER     USERID\n----------------------"}{printf "|%8s| %10d|\n",$1,$3}END{print "----------------------\nEND FILE"}' /etc/passwd
+awk -F: 'BEGIN{print " USER UID \n---------------"}{print $1,$3}'END{print "=============="} /etc/passwd
+seq 10 |awk 'i=0'
+seq 10 |awk 'i=1'
+seq 10 | awk 'i=!i'
+seq 10 | awk '{i=!i;print i}'
+seq 10 | awk '!(i=!i)'
+seq 10 |awk -v i=1 'i=!i'
+
+# if-else
+awk -F: '{if($3>=1000)print $1,$3}' /etc/passwd
+awk -F: '{if($NF=="/bin/bash") print $1}' /etc/passwd
+awk '{if(NF>5) print $0}' /etc/fstab
+awk -F: '{if($3>=1000) {printf "Common user: %s\n",$1}else{printf "root or Sysuser: %s\n",$1}}' /etc/passwd
+awk -F: '{if($3>=1000) printf "Common user: %s\n",$1;else printf "root or Sysuser: %s\n",$1}' /etc/passwd
+df -h|awk -F% '/^\/dev/{print $1}'|awk '$NF>=80{print $1,$5}'
+awk 'BEGIN{ test=100;if(test>90){print "very good"}else if(test>60){ print "good"}else{print "no pass"}}'
+
+# while
+awk '/^[[:space:]]*linux16/{i=1;while(i<=NF){print $i,length($i); i++}}' /etc/grub2.cfg
+awk '/^[[:space:]]*linux16/{i=1;while(i<=NF) {if(length($i)>=10){print $i,length($i)}; i++}}' /etc/grub2.cfg
+awk 'BEGIN{ total=0;i=0;do{total+=i;i++}while(i<=100);print total}'
+
+# for
+awk '/^[[:space:]]*linux16/{for(i=1;i<=NF;i++) {print $i,length($i)}}' /etc/grub2.cfg
+awk '/^[^#]/{type[$3]++}END{for(i in type)print i,type[i]}' /etc/fstab
+awk -v RS="[[:space:]/=,-]" '/[[:alpha:]]/{ha[$0]++}END{for(i in ha)print i,ha[i]}' /etc/fstab
+
+awk 'BEGIN{sum=0;for(i=1;i<=100;i++){if(i%2==0)continue;sum+=i}print sum}'
+awk 'BEGIN{sum=0;for(i=1;i<=100;i++){if(i==66)break;sum+=i}print sum}'
+awk -F: '{if($3%2!=0) next; print $1,$3}' /etc/passwd
+
+# 数组
+awk 'BEGIN{weekdays["mon"]="Monday";weekdays["tue"]="Tuesday";print weekdays["mon"]}‘
+awk '!arr[$0]++' dupfile
+awk '{!arr[$0]++;print $0, arr[$0]}' dupfile
+awk 'BEGIN{weekdays["mon"]="Monday";weekdays["tue"]="Tuesday";for(i in weekdays) {print weekdays[i]}}‘
+netstat -tan | awk '/^tcp/{state[$NF]++}END{for(i in state) { print i,state[i]}}'
+awk '{ip[$1]++}END{for(i in ip) {print i,ip[i]}}'/var/log/httpd/access_log
+
+# 函数
+awk 'BEGIN{srand(); for (i=1;i<=10;i++)print int(rand()*100) }'
+echo "2008:08:08 08:08:08" | awk 'sub(/:/,“-",$1)'
+echo "2008:08:08 08:08:08" | awk 'gsub(/:/,“-",$0)'
+netstat -tan | awk '/^tcp\>/{split($5,ip,":");count[ip[1]]++}END{for (i in count) {print i,count[i]}}'
+awk BEGIN'{system("hostname") }'
+awk 'BEGIN{score=100; system("echo your score is " score) }'
+
+# 自定义函数
+function fname ( arg1,arg2 , ... ) {
+statements
+return expr
+}
+# 示例
+cat fun.awk
+    function max(v1,v2) {
+        v1>v2?var=v1:var=v2
+        return var
+    }
+      BEGIN{a=3;b=2;print max(a,b)}
+
+awk –f fun.awk
+
+# 脚本
+# f1.awk
+BEGIN{} pattern{} END{}
+
+awk [-v var=value] f1.awk [file]
+
+## f2.awk
+\#!/bin/awk  -f
+\#add 'x'  right 
+BEGIN{} pattern{} END{}
+
+f2.awk [-v var=value] [var1=value1] [file]
+
+cat f1.awk
+    {if($3>=1000)print $1,$3}
+awk -F: -f f1.awk /etc/passwd
+
+cat f2.awk
+    #!/bin/awk –f
+    #this is a awk script
+    {if($3>=1000)print $1,$3}
+    #chmod +x f2.awk
+f2.awk –F: /etc/passwd
+
+cat test.awk
+    #!/bin/awk –f
+    {if($3 >=min && $3<=max)print $1,$3}
+    #chmod +x test.awk
+test.awk -F: min=100 max=200 /etc/passwd
+
+# test.txt
+1.2.3.4
+4.5.6.7
+2.3.4.5
+1.2.3.4
+
+awk '{arr[$1]++;}END{for(i in arr){print i , arr[i] }}'
+
+awk -F "\t" '{print $3 "  " $NF}' jan20only.tsv
+```
+
+## sed
+
+一种流编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓存区中，称为"模式空间"(patternspace)，接着用sed命令处理缓存区中的内容，处理完成后，把缓存区的内容送往屏幕。然后读入下一行，执行下一个循环。如果没有使用诸如'D'的特殊命令，那么会在两个循环之间清空模式空间，但不会清空保留空间。这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出。 sed的功能：主要用来自动编辑一个或多个文件，简化对文件的反复操作，编写转换程序等，且支持正则表达式！
 * 用来自动编辑一个或多个文件，简化对文件的反复操作，编写转换程序等，且支持正则表达式！
 * 一种流编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓存区中，称为"模式空间"(patternspace)
 * 接着用sed命令处理缓存区中的内容，处理完成后，把缓存区的内容送往屏幕。然后读入下一行，执行下一个循环。如果没有使用诸如'D'的特殊命令，那么会在两个循环之间清空模式空间，但不会清空保留空间。这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出
-* 地址定界：说明用来处理一行中的那个些部分的
-  - 不给地址：对全文进行处理
-  - # ：指定的行/pattern/能够被模式匹配到的每一行
-  - # ,#：从第n行到第m行
-  - # ,+#：从第n行，加上其后面m行
-  - /pat1/,/pat2/：符合第一个模式和第二个模式的所有行
-  - # ,/pat1/：从第n行到符合 /pat1/ 这个模式的行
-  - 1~2 ：~ 这个符号表示步进，1~2 表示的是奇数行
-  - 2~2：表示的是偶数行
-* 参数
+
+* 地址定界：就是说明用来处理一行中的那个些部分的
+  + 不给地址：对全文进行处理
+  + `#` ：指定的行/pattern/能够被模式匹配到的每一行
+  + `# ,#`：从第n行到第m行
+  + `# ,+#`：从第n行，加上其后面m行
+  + `/pat1/,/pat2/`：符合第一个模式和第二个模式的所有行
+  + `# ,/pat1/`：从第n行到符合 /pat1/ 这个模式的行
+  + `1~2` ：~ 这个符号表示步进，1~2 表示的是奇数行
+  + `2~2`：表示的是偶数行
+* 编辑命令：地址定界后，对范围内的内容进行相关编辑
+  + d：删除模式空间匹配的行，并立即启用下一轮循环 `nl log.txt | sed '2,3d'`
+  + p：打印当前模式空间内容，追加到默认输出之后
+  + q：读取到指定行之后退出
+  + `a [\]text`：在指定行后面追加文本支持使用\n 实现多行行后追加 `sed -e 4a\newline log.txt`
+  + `i [\]text`：在行前面插入文本
+  + `c [\]text`：替换行为单行或多行文本 `nl log.txt | sed '2,3c No 2-3 number'`
+  + w /path/somefile：保存模式匹配的行至指定文件
+  + r /path/somefile：读取指定文件的文本至模式空间中匹配到的行后
+  + =：为模式空间中的行打印行号
+  + !：模式空间中匹配行取反处理
+  + s///：查找替换, 支持使用其它分隔符，s@@@ ，s### `nl log.txt | sed -e '3d' -e 's/test/TEST/'`
+  + ；：对一行进行多次操作的命令的分割
+  + &：配合s///使用，代表前面所查找到的字符等，&sm ；sm&。
+  + g：行内全局替换。也可以指定行内的第几个符合要求的进行替换：2g,就表示第2个替换。
+  + p：显示替换成功的行 `nl log.txt | sed -n '/is/p'` a替换A，多个用;分开`nl log.txt | sed -n '/is/{s/a/A/;p}'`
+  + w /PATH/TO/SOMEFILE：将替换成功的行保存至文件中
+
   - d：删除模式空间匹配的行，并立即启用下一轮循环 `nl log.txt | sed '2,3d'`
   - p：打印当前模式空间内容，追加到默认输出之后
   - q：读取到指定行之后退出
@@ -2371,6 +2791,470 @@ sudo apt-get install stacer
   - p：显示替换成功的行 `nl log.txt | sed -n '/is/p'` a替换A，多个用;分开`nl log.txt | sed -n '/is/{s/a/A/;p}'`
   - w /PATH/TO/SOMEFILE：将替换成功的行保存至文件中
   - -e
+
+* 参数
+  + P：打印模式空间开端至\n 内容，并追加到默认输出之前
+  + h：把模式空间中的内容覆盖至保持空间中；m &gt; b
+  + H：把模式空间中的内容追加至保持空间中; m&gt;&gt;b
+  + g：从保持空间取出数据覆盖至模式空间; b&gt;m
+  + G：从保持空间取出内容追加至模式空间; b&gt;&gt;m
+  + x：把模式空间中的内容与保持空间中的内容进行互换; m &lt;-&gt;b
+  + n：读取匹配到的行的下一行覆盖至模式空间; n&gt;m
+  + N：读取匹配到的行的下一行追加至模式空间; n&gt;&gt;m
+  + d：删除模式空间中的行; delete m
+  + D：如果模式空间包含换行符，则删除直到第一个换行符的模式空间中的文本，并不会读取新的 输入行，而使用合成的模式空间重新启动循环。如果模式空间不包含换行符，则会像发出d 命令那样启动正常的新循环
+
+
+```sh
+# 在每一行后面增加一空行
+sed G
+
+# 将原来的所有空行删除并在每一行后面增加一空行。
+# 这样在输出的文本中每一行后面将有且只有一空行。
+sed ‘/^$/d;G’
+
+# 在每一行后面增加两行空行
+sed ‘G;G’
+
+# 将第一个脚本所产生的所有空行删除（即删除所有偶数行）
+sed ‘n;d’
+
+# 在匹配式样“regex”的行之前插入一空行
+sed ‘/regex/{x;p;x;}’
+
+# 在匹配式样“regex”的行之后插入一空行
+sed ‘/regex/G’
+
+# 在匹配式样“regex”的行之前和之后各插入一空行
+sed ‘/regex/{x;p;x;G;}’
+
+编号：
+——–
+
+# 为文件中的每一行进行编号（简单的左对齐方式）。这里使用了“制表符”
+# （tab，见本文末尾关于’\t’的用法的描述）而不是空格来对齐边缘。
+sed = filename | sed ‘N;s/\n/\t/’
+
+# 对文件中的所有行编号（行号在左，文字右端对齐）。
+sed = filename | sed ‘N; s/^/ /; s/ *\(.\{6,\}\)\n/\1 /’
+
+# 对文件中的所有行编号，但只显示非空白行的行号。
+sed ‘/./=’ filename | sed ‘/./N; s/\n/ /’
+
+# 计算行数 （模拟 “wc -l”）
+sed -n ‘$=’
+
+文本转换和替代：
+——–
+
+# Unix环境：转换DOS的新行符（CR/LF）为Unix格式。
+sed ‘s/.$//’ # 假设所有行以CR/LF结束
+sed ‘s/^M$//’ # 在bash/tcsh中，将按Ctrl-M改为按Ctrl-V
+sed ‘s/\x0D$//’ # ssed、gsed 3.02.80，及更高版本
+
+# Unix环境：转换Unix的新行符（LF）为DOS格式。
+sed “s/$/`echo -e \\\r`/” # 在ksh下所使用的命令
+sed "s/$'"/`echo \\\r`/” # 在bash下所使用的命令
+sed “s/$/`echo \\\r`/” # 在zsh下所使用的命令
+sed ‘s/$/\r/’ # gsed 3.02.80 及更高版本
+
+# DOS环境：转换Unix新行符（LF）为DOS格式。
+sed “s/$//” # 方法 1
+sed -n p # 方法 2
+
+# DOS环境：转换DOS新行符（CR/LF）为Unix格式。
+# 下面的脚本只对UnxUtils sed 4.0.7 及更高版本有效。要识别UnxUtils版本的
+# sed可以通过其特有的“–text”选项。你可以使用帮助选项（“–help”）看
+# 其中有无一个“–text”项以此来判断所使用的是否是UnxUtils版本。其它DOS
+# 版本的的sed则无法进行这一转换。但可以用“tr”来实现这一转换。
+sed “s/\r//” infile >outfile # UnxUtils sed v4.0.7 或更高版本
+tr -d \r <infile >outfile # GNU tr 1.22 或更高版本
+
+# 将每一行前导的“空白字符”（空格，制表符）删除
+# 使之左对齐
+sed ‘s/^[ \t]*//’ # 见本文末尾关于’\t’用法的描述
+
+# 将每一行拖尾的“空白字符”（空格，制表符）删除
+sed ‘s/[ \t]*$//’ # 见本文末尾关于’\t’用法的描述
+
+# 将每一行中的前导和拖尾的空白字符删除
+sed ‘s/^[ \t]*//;s/[ \t]*$//’
+
+# 在每一行开头处插入5个空格（使全文向右移动5个字符的位置）
+sed ‘s/^/ /’
+
+# 以79个字符为宽度，将所有文本右对齐
+sed -e :a -e ‘s/^.\{1,78\}$/ &/;ta’ # 78个字符外加最后的一个空格
+
+# 以79个字符为宽度，使所有文本居中。在方法1中，为了让文本居中每一行的前
+# 头和后头都填充了空格。 在方法2中，在居中文本的过程中只在文本的前面填充
+# 空格，并且最终这些空格将有一半会被删除。此外每一行的后头并未填充空格。
+sed -e :a -e ‘s/^.\{1,77\}$/ & /;ta’ # 方法1
+sed -e :a -e ‘s/^.\{1,77\}$/ &/;ta’ -e ‘s/\( *\)\1/\1/’ # 方法2
+
+# 在每一行中查找字串“foo”，并将找到的“foo”替换为“bar”
+sed ‘s/foo/bar/’ # 只替换每一行中的第一个“foo”字串
+sed ‘s/foo/bar/4’ # 只替换每一行中的第四个“foo”字串
+sed ‘s/foo/bar/g’ # 将每一行中的所有“foo”都换成“bar”
+sed ‘s/\(.*\)foo\(.*foo\)/\1bar\2/’ # 替换倒数第二个“foo”
+sed ‘s/\(.*\)foo/\1bar/’ # 替换最后一个“foo”
+
+# 只在行中出现字串“baz”的情况下将“foo”替换成“bar”
+sed ‘/baz/s/foo/bar/g’
+
+# 将“foo”替换成“bar”，并且只在行中未出现字串“baz”的情况下替换
+sed ‘/baz/!s/foo/bar/g’
+
+# 不管是“scarlet”“ruby”还是“puce”，一律换成“red”
+sed ‘s/scarlet/red/g;s/ruby/red/g;s/puce/red/g’ #对多数的sed都有效
+gsed ‘s/scarlet\|ruby\|puce/red/g’ # 只对GNU sed有效
+
+# 倒置所有行，第一行成为最后一行，依次类推（模拟“tac”）。
+# 由于某些原因，使用下面命令时HHsed v1.5会将文件中的空行删除
+sed ‘1!G;h;$!d’ # 方法1
+sed -n ‘1!G;h;$p’ # 方法2
+
+# 将行中的字符逆序排列，第一个字成为最后一字，……（模拟“rev”）
+sed ‘/\n/!G;s/\(.\)\(.*\n\)/&\2\1/;//D;s/.//’
+
+# 将每两行连接成一行（类似“paste”）
+sed ‘$!N;s/\n/ /’
+
+# 如果当前行以反斜杠“\”结束，则将下一行并到当前行末尾
+# 并去掉原来行尾的反斜杠
+sed -e :a -e ‘/\\$/N; s/\\\n//; ta’
+
+# 如果当前行以等号开头，将当前行并到上一行末尾
+# 并以单个空格代替原来行头的“=”
+sed -e :a -e ‘$!N;s/\n=/ /;ta’ -e ‘P;D’
+
+# 为数字字串增加逗号分隔符号，将“1234567”改为“1,234,567”
+gsed ‘:a;s/\B[0-9]\{3\}\>/,&/;ta’ # GNU sed
+sed -e :a -e ‘s/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta’ # 其他sed
+
+# 为带有小数点和负号的数值增加逗号分隔符（GNU sed）
+gsed -r ‘:a;s/(^|[^0-9.])([0-9]+)([0-9]{3})/\1\2,\3/g;ta’
+
+# 在每5行后增加一空白行 （在第5，10，15，20，等行后增加一空白行）
+gsed ‘0~5G’ # 只对GNU sed有效
+sed ‘n;n;n;n;G;’ # 其他sed
+
+选择性地显示特定行：
+——–
+
+# 显示文件中的前10行 （模拟“head”的行为）
+sed 10q
+
+# 显示文件中的第一行 （模拟“head -1”命令）
+sed q
+
+# 显示文件中的最后10行 （模拟“tail”）
+sed -e :a -e ‘$q;N;11,$D;ba’
+
+# 显示文件中的最后2行（模拟“tail -2”命令）
+sed ‘$!N;$!D’
+
+# 显示文件中的最后一行（模拟“tail -1”）
+sed ‘$!d’ # 方法1
+sed -n ‘$p’ # 方法2
+
+# 显示文件中的倒数第二行
+sed -e ‘$!{h;d;}’ -e x # 当文件中只有一行时，输入空行
+sed -e ‘1{$q;}’ -e ‘$!{h;d;}’ -e x # 当文件中只有一行时，显示该行
+sed -e ‘1{$d;}’ -e ‘$!{h;d;}’ -e x # 当文件中只有一行时，不输出
+
+# 只显示匹配正则表达式的行（模拟“grep”）
+sed -n ‘/regexp/p’ # 方法1
+sed ‘/regexp/!d’ # 方法2
+
+# 只显示“不”匹配正则表达式的行（模拟“grep -v”）
+sed -n ‘/regexp/!p’ # 方法1，与前面的命令相对应
+sed ‘/regexp/d’ # 方法2，类似的语法
+
+# 查找“regexp”并将匹配行的上一行显示出来，但并不显示匹配行
+sed -n ‘/regexp/{g;1!p;};h’
+
+# 查找“regexp”并将匹配行的下一行显示出来，但并不显示匹配行
+sed -n ‘/regexp/{n;p;}’
+
+# 显示包含“regexp”的行及其前后行，并在第一行之前加上“regexp”所
+# 在行的行号 （类似“grep -A1 -B1”）
+sed -n -e ‘/regexp/{=;x;1!p;g;$!N;p;D;}’ -e h
+
+# 显示包含“AAA”、“BBB”或“CCC”的行（任意次序）
+sed ‘/AAA/!d; /BBB/!d; /CCC/!d’ # 字串的次序不影响结果
+
+# 显示包含“AAA”、“BBB”和“CCC”的行（固定次序）
+sed ‘/AAA.*BBB.*CCC/!d’
+
+# 显示包含“AAA”“BBB”或“CCC”的行 （模拟“egrep”）
+sed -e ‘/AAA/b’ -e ‘/BBB/b’ -e ‘/CCC/b’ -e d # 多数sed
+gsed ‘/AAA\|BBB\|CCC/!d’ # 对GNU sed有效
+
+# 显示包含“AAA”的段落 （段落间以空行分隔）
+# HHsed v1.5 必须在“x;”后加入“G;”，接下来的3个脚本都是这样
+sed -e ‘/./{H;$!d;}’ -e ‘x;/AAA/!d;’
+
+# 显示包含“AAA”“BBB”和“CCC”三个字串的段落 （任意次序）
+sed -e ‘/./{H;$!d;}’ -e ‘x;/AAA/!d;/BBB/!d;/CCC/!d’
+
+# 显示包含“AAA”、“BBB”、“CCC”三者中任一字串的段落 （任意次序）
+sed -e ‘/./{H;$!d;}’ -e ‘x;/AAA/b’ -e ‘/BBB/b’ -e ‘/CCC/b’ -e d
+gsed ‘/./{H;$!d;};x;/AAA\|BBB\|CCC/b;d’ # 只对GNU sed有效
+
+# 显示包含65个或以上字符的行
+sed -n ‘/^.\{65\}/p’
+
+# 显示包含65个以下字符的行
+sed -n ‘/^.\{65\}/!p’ # 方法1，与上面的脚本相对应
+sed ‘/^.\{65\}/d’ # 方法2，更简便一点的方法
+
+# 显示部分文本——从包含正则表达式的行开始到最后一行结束
+sed -n ‘/regexp/,$p’
+
+# 显示部分文本——指定行号范围（从第8至第12行，含8和12行）
+sed -n ‘8,12p’ # 方法1
+sed ‘8,12!d’ # 方法2
+
+# 显示第52行
+sed -n ’52p’ # 方法1
+sed ’52!d’ # 方法2
+sed ’52q;d’ # 方法3, 处理大文件时更有效率
+
+# 从第3行开始，每7行显示一次
+gsed -n ‘3~7p’ # 只对GNU sed有效
+sed -n ‘3,${p;n;n;n;n;n;n;}’ # 其他sed
+
+# 显示两个正则表达式之间的文本（包含）
+sed -n ‘/Iowa/,/Montana/p’ # 区分大小写方式
+
+选择性地删除特定行：
+——–
+
+# 显示通篇文档，除了两个正则表达式之间的内容
+sed ‘/Iowa/,/Montana/d’
+
+# 删除文件中相邻的重复行（模拟“uniq”）
+# 只保留重复行中的第一行，其他行删除
+sed ‘$!N; /^\(.*\)\n\1$/!P; D’
+
+# 删除文件中的重复行，不管有无相邻。注意hold space所能支持的缓存
+# 大小，或者使用GNU sed。
+sed -n ‘G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P’
+
+# 删除除重复行外的所有行（模拟“uniq -d”）
+sed ‘$!N; s/^\(.*\)\n\1$/\1/; t; D’
+
+# 删除文件中开头的10行
+sed ‘1,10d’
+
+# 删除文件中的最后一行
+sed ‘$d’
+
+# 删除文件中的最后两行
+sed ‘N;$!P;$!D;$d’
+
+# 删除文件中的最后10行
+sed -e :a -e ‘$d;N;2,10ba’ -e ‘P;D’ # 方法1
+sed -n -e :a -e ‘1,10!{P;N;D;};N;ba’ # 方法2
+
+# 删除8的倍数行
+gsed ‘0~8d’ # 只对GNU sed有效
+sed ‘n;n;n;n;n;n;n;d;’ # 其他sed
+
+# 删除匹配式样的行
+sed ‘/pattern/d’ # 删除含pattern的行。当然pattern
+# 可以换成任何有效的正则表达式
+
+# 删除文件中的所有空行（与“grep ‘.’ ”效果相同）
+sed ‘/^$/d’ # 方法1
+sed ‘/./!d’ # 方法2
+
+# 只保留多个相邻空行的第一行。并且删除文件顶部和尾部的空行。
+# （模拟“cat -s”）
+sed ‘/./,/^$/!d’ #方法1，删除文件顶部的空行，允许尾部保留一空行
+sed ‘/^$/N;/\n$/D’ #方法2，允许顶部保留一空行，尾部不留空行
+
+# 只保留多个相邻空行的前两行。
+sed ‘/^$/N;/\n$/N;//D’
+
+# 删除文件顶部的所有空行
+sed ‘/./,$!d’
+
+# 删除文件尾部的所有空行
+sed -e :a -e ‘/^\n*$/{$d;N;ba’ -e ‘}’ # 对所有sed有效
+sed -e :a -e ‘/^\n*$/N;/\n$/ba’ # 同上，但只对 gsed 3.02.*有效
+
+# 删除每个段落的最后一行
+sed -n ‘/^$/{p;h;};/./{x;/./p;}’
+
+特殊应用：
+——–
+
+# 移除手册页（man page）中的nroff标记。在Unix System V或bash shell下使
+# 用’echo’命令时可能需要加上 -e 选项。
+sed “s/.`echo \\\b`//g” # 外层的双括号是必须的（Unix环境）
+sed ‘s/.^H//g’ # 在bash或tcsh中, 按 Ctrl-V 再按 Ctrl-H
+sed ‘s/.\x08//g’ # sed 1.5，GNU sed，ssed所使用的十六进制的表示方法
+
+# 提取新闻组或 e-mail 的邮件头
+sed ‘/^$/q’ # 删除第一行空行后的所有内容
+
+# 提取新闻组或 e-mail 的正文部分
+sed ‘1,/^$/d’ # 删除第一行空行之前的所有内容
+
+# 从邮件头提取“Subject”（标题栏字段），并移除开头的“Subject:”字样
+sed ‘/^Subject: */!d; s///;q’
+
+# 从邮件头获得回复地址
+sed ‘/^Reply-To:/q; /^From:/h; /./d;g;q’
+
+# 获取邮件地址。在上一个脚本所产生的那一行邮件头的基础上进一步的将非电邮
+# 地址的部分剃除。（见上一脚本）
+sed ‘s/ *(.*)//; s/>.*//; s/.*[:<] *//’
+
+# 在每一行开头加上一个尖括号和空格（引用信息）
+sed ‘s/^/> /’
+
+# 将每一行开头处的尖括号和空格删除（解除引用）
+sed ‘s/^> //’
+
+# 移除大部分的HTML标签（包括跨行标签）
+sed -e :a -e ‘s/<[^>]*>//g;/</N;//ba’
+
+# 将分成多卷的uuencode文件解码。移除文件头信息，只保留uuencode编码部分。
+# 文件必须以特定顺序传给sed。下面第一种版本的脚本可以直接在命令行下输入；
+# 第二种版本则可以放入一个带执行权限的shell脚本中。（由Rahul Dhesi的一
+# 个脚本修改而来。）
+sed ‘/^end/,/^begin/d’ file1 file2 … fileX | uudecode # vers. 1
+sed ‘/^end/,/^begin/d’ “$@” | uudecode # vers. 2
+
+# 将文件中的段落以字母顺序排序。段落间以（一行或多行）空行分隔。GNU sed使用
+# 字元“\v”来表示垂直制表符，这里用它来作为换行符的占位符——当然你也可以
+# 用其他未在文件中使用的字符来代替它。
+sed ‘/./{H;d;};x;s/\n/={NL}=/g’ file | sort | sed ‘1s/={NL}=//;s/={NL}=/\n/g’
+gsed ‘/./{H;d};x;y/\n/\v/’ file | sort | sed ‘1s/\v//;y/\v/\n/’
+
+# 分别压缩每个.TXT文件，压缩后删除原来的文件并将压缩后的.ZIP文件
+# 命名为与原来相同的名字（只是扩展名不同）。（DOS环境：“dir /b”
+# 显示不带路径的文件名）。
+echo @echo off >zipup.bat
+dir /b *.txt | sed “s/^\(.*\)\.TXT/pkzip -mo \1 \1.TXT/” >>zipup.bat
+
+使用SED：Sed接受一个或多个编辑命令，并且每读入一行后就依次应用这些命令。
+当读入第一行输入后，sed对其应用所有的命令，然后将结果输出。接着再读入第二
+行输入，对其应用所有的命令……并重复这个过程。上一个例子中sed由标准输入设
+备（即命令解释器，通常是以管道输入的形式）获得输入。在命令行给出一个或多
+个文件名作为参数时，这些文件取代标准输入设备成为sed的输入。sed的输出将被
+送到标准输出（显示器）。因此：
+
+cat filename | sed ’10q’ # 使用管道输入
+sed ’10q’ filename # 同样效果，但不使用管道输入
+sed ’10q’ filename > newfile # 将输出转移（重定向）到磁盘上
+
+要了解sed命令的使用说明，包括如何通过脚本文件（而非从命令行）来使用这些命
+令，请参阅《sed & awk》第二版，作者Dale Dougherty和Arnold Robbins
+（O’Reilly，1997；http://www.ora.com），《UNIX Text Processing》，作者
+Dale Dougherty和Tim O’Reilly（Hayden Books，1987）或者是Mike Arst写的教
+程——压缩包的名称是“U-SEDIT2.ZIP”（在许多站点上都找得到）。要发掘sed
+的潜力，则必须对“正则表达式”有足够的理解。正则表达式的资料可以看
+《Mastering Regular Expressions》作者Jeffrey Friedl（O’reilly 1997）。
+Unix系统所提供的手册页（“man”）也会有所帮助（试一下这些命令
+“man sed”、“man regexp”，或者看“man ed”中关于正则表达式的部分），但
+手册提供的信息比较“抽象”——这也是它一直为人所诟病的。不过，它本来就不
+是用来教初学者如何使用sed或正则表达式的教材，而只是为那些熟悉这些工具的人
+提供的一些文本参考。
+
+括号语法：前面的例子对sed命令基本上都使用单引号（’…’）而非双引号
+（”…”）这是因为sed通常是在Unix平台上使用。单引号下，Unix的shell（命令
+解释器）不会对美元符（$）和后引号（`…`）进行解释和执行。而在双引号下
+美元符会被展开为变量或参数的值，后引号中的命令被执行并以输出的结果代替
+后引号中的内容。而在“csh”及其衍生的shell中使用感叹号（!）时需要在其前
+面加上转义用的反斜杠（就像这样：\!）以保证上面所使用的例子能正常运行
+（包括使用单引号的情况下）。DOS版本的Sed则一律使用双引号（”…”）而不是
+引号来圈起命令。
+
+‘\t’的用法：为了使本文保持行文简洁，我们在脚本中使用’\t’来表示一个制表
+符。但是现在大部分版本的sed还不能识别’\t’的简写方式，因此当在命令行中为
+脚本输入制表符时，你应该直接按TAB键来输入制表符而不是输入’\t’。下列的工
+具软件都支持’\t’做为一个正则表达式的字元来表示制表符：awk、perl、HHsed、
+sedmod以及GNU sed v3.02.80。
+
+不同版本的SED：不同的版本间的sed会有些不同之处，可以想象它们之间在语法上
+会有差异。具体而言，它们中大部分不支持在编辑命令中间使用标签（:name）或分
+支命令（b,t），除非是放在那些的末尾。这篇文档中我们尽量选用了可移植性较高
+的语法，以使大多数版本的sed的用户都能使用这些脚本。不过GNU版本的sed允许使
+用更简洁的语法。想像一下当读者看到一个很长的命令时的心情：
+
+sed -e ‘/AAA/b’ -e ‘/BBB/b’ -e ‘/CCC/b’ -e d
+
+好消息是GNU sed能让命令更紧凑：
+
+sed ‘/AAA/b;/BBB/b;/CCC/b;d’ # 甚至可以写成
+sed ‘/AAA\|BBB\|CCC/b;d’
+
+此外，请注意虽然许多版本的sed接受象“/one/ s/RE1/RE2/”这种在’s’前带有空
+格的命令，但这些版本中有些却不接受这样的命令:“/one/! s/RE1/RE2/”。这时
+只需要把中间的空格去掉就行了。
+
+速度优化：当由于某种原因（比如输入文件较大、处理器或硬盘较慢等）需要提高
+命令执行速度时，可以考虑在替换命令（“s/…/…/”）前面加上地址表达式来
+提高速度。举例来说：
+
+sed ‘s/foo/bar/g’ filename # 标准替换命令
+sed ‘/foo/ s/foo/bar/g’ filename # 速度更快
+sed ‘/foo/ s//bar/g’ filename # 简写形式
+
+当只需要显示文件的前面的部分或需要删除后面的内容时，可以在脚本中使用“q”
+命令（退出命令）。在处理大的文件时，这会节省大量时间。因此：
+
+sed -n ‘45,50p’ filename # 显示第45到50行
+sed -n ’51q;45,50p’ filename # 一样，但快得多
+```
+
+## 工具
+
+* [p-gen/smenu](https://github.com/p-gen/smenu):Terminal utility that allows you to use words coming from the standard input to create a nice selection window just below the cursor. Once done, your selection will be sent to standard output. More in the Wiki
+
+
+  或--expression=<script> 以选项中指定的script来处理输入的文本文件。
+  -f<script文件>或--file=<script文件> 以选项中指定的script文件来处理输入的文本文件。
+  -n或--quiet或--silent 仅显示script处理后的结果。
+  sed 可以直接修改文件的内容，不必使用管道命令或数据流重导向！ 不过，由於这个动作会直接修改到原始的文件，所以请你千万不要随便拿系统配置来测试！ 添加一行
+
+sed -i &#39;$aHow are you today&#39; log.txt
+
+```sh
+sed ‘2p’ /etc/passwd
+sed –n ‘2p’ /etc/passwd
+sed –n ‘1,4p’ /etc/passwd
+sed –n ‘/root/p’ /etc/passwd
+sed –n ‘2,/root/p’ /etc/passwd
+sed -n ‘/^$/=’ file
+sed –n –e ‘/^$/p’ –e ‘/^$/=’ file
+sed ‘/root/a\superman’ /etc/passwd
+sed ‘/root/i\superman’ /etc/passwd
+sed ‘/root/c\superman’ /etc/passwd
+sed ‘/^$/d’ file
+sed ‘1,10d’ file
+nl /etc/passwd | sed ‘2,5d’
+nl /etc/passwd | sed ‘2a tea’
+sed &#39;s/test/mytest/g&#39; example
+sed –n ‘s/root/&amp;superman/p’ /etc/passwd
+sed –n ‘s/root/superman&amp;/p’ /etc/passwd
+sed -e ‘s/dog/cat/’ -e ‘s/hi/lo/’ pets
+sed –i.bak ‘s/dog/cat/g’ pets
+sed -n &#39;n;p&#39; FILE
+sed &#39;1!G;h;$!d&#39; FILE
+sed &#39;N;D‘ FILE
+sed &#39;$!N;$!D&#39; FILE
+sed &#39;$!d&#39; FILE
+sed ‘G’ FILE
+sed ‘g’ FILE
+sed ‘/^$/d;G’ FILE
+sed &#39;n;d&#39; FILE
+sed -n &#39;1!G;h;$p&#39; FILE
+```
 
 ## 镜像源
 

@@ -3,7 +3,7 @@
 * 数据库
     - 数据存储
     - 数据检索
-* 数据库的理论基础是CAP 理论
+* CAP 理论
     + Consistency（强一致性）：系统在执行某项操作后仍然处于一致的状态
         * 强一致性：更新操作执行成功之后，所有的用户都能读取到最新的值，这样的系统被认为具有
         * 最终一致性：更新操作完成之后，用户最终会读取到数据更新之后的值，但是会存在一定的时间窗口，用户仍会读取到更新之前的旧数据；在一定的时间延迟之后，数据达到一致性。
@@ -49,37 +49,27 @@
     - 全连接（full join）:返回匹配的记录，以及表 A 和表 B 各自的多余记录
 
 ```sql
-SELECT * FROM A
-INNER JOIN B ON A.book_id=B.book_id;
+SELECT * FROM A INNER JOIN B ON A.book_id=B.book_id;
 
-SELECT * FROM A
-LEFT JOIN B ON A.book_id=B.book_id;
-SELECT * FROM A
-RIGHT JOIN B ON A.book_id=B.book_id;
-SELECT * FROM A
-FULL JOIN B ON A.book_id=B.book_id;
+SELECT * FROM A LEFT JOIN B ON A.book_id=B.book_id;
+SELECT * FROM A RIGHT JOIN B ON A.book_id=B.book_id;
+SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id;
 
 # 只返回表 A 里面不匹配表 B 的记录
-SELECT * FROM A
-LEFT JOIN B
-ON A.book_id=B.book_id
-WHERE B.id IS null;
+SELECT * FROM A LEFT JOIN B ON A.book_id=B.book_id WHERE B.id IS null;
 
 # 返回表 A 或表 B 所有不匹配的记录
-SELECT * FROM A
-FULL JOIN B
-ON A.book_id=B.book_id
-WHERE A.id IS null OR B.id IS null;
+SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS null;
 ```
 
 ## 备份
 
 在部署数据库的时候，不用于以前的单体应用，分布式下数据库部署包括多点部署，一套业务应用数据库被分布在多台数据库服务器上，分主从服务器。主服务器处理日常业务请求，从服务器在运行时不断的对主服务器进行备份，当主服务器出现宕机、或者运行不稳定的情况时，从服务器会立刻替换成主服务器，继续对外提供服务。此时，开发运维人员会对出现问题的服务器进行抢修、恢复，之后再把它投入到生产环境中。这样的构架也被称作为高可用构架，它支持了灾难恢复，为业务世界提供了可靠的支持，也是很多企业级应用采用的主流构架之一。
 
-* 从数据库常常被设计成只读，主数据库支持读写操作。
-* 一般会有一台主数据库连接若干台从数据库。
-* 互联网产品的应用中，人们大多数情况下会对应用服务器请求读操作，这样应用服务器可以把读操作请求分发到若干个从数据库中，这样就避免了主数据库的并发请求次数过高的问题。
-* 从数据库的内容基本上可以说是主数据库的一份全拷贝，这样的技术称之为Replication。Replication在实现主从数据同步时，通常采用Transaction Log的方式，比如，当一条数据插入到主数据库的时候，主数据库会像Trasaction Log中插入一条记录来声明这次数据库写纪录的操作。之后，一个Replication Process会被触发，这个进程会把Transaction Log中的内容同步到从数据库中。
+* 从数据库常常被设计成只读，主数据库支持读写操作
+* 一般会有一台主数据库连接若干台从数据库
+* 互联网产品的应用中，人们大多数情况下会对应用服务器请求读操作，这样应用服务器可以把读操作请求分发到若干个从数据库中，这样就避免了主数据库的并发请求次数过高的问题
+* 从数据库的内容基本上可以说是主数据库的一份全拷贝，这样的技术称之为Replication。Replication在实现主从数据同步时，通常采用Transaction Log的方式，比如，当一条数据插入到主数据库的时候，主数据库会像Trasaction Log中插入一条记录来声明这次数据库写纪录的操作。之后，一个Replication Process会被触发，这个进程会把Transaction Log中的内容同步到从数据库中
 
 ### 扩展
 
@@ -88,7 +78,7 @@ WHERE A.id IS null OR B.id IS null;
 
 ## NoSQL
 
-* 用于解决以下几种问题
+* 场景
     - 少量数据存储，高速读写访问。此类产品通过数据全部in-momery 的方式来保证高速访问，同时提供数据落地的功能，实际这正是Redis最主要的适用场景。
     - 海量数据存储，分布式系统支持，数据一致性保证，方便的集群节点添加/删除。
     - 这方面最具代表性的是dynamo和bigtable 2篇论文所阐述的思路。前者是一个完全无中心的设计，节点之间通过gossip方式传递集群信息，数据保证最终一致性，后者是一个中心化的方案设计，通过类似一个分布式锁服务来保证强一致性,数据写入先写内存和redo log，然后定期compat归并到磁盘上，将随机写优化为顺序写，提高写入性能。
@@ -99,7 +89,7 @@ WHERE A.id IS null OR B.id IS null;
 * 原子性 Atomic： 事务是最小的执行单位，不允许分割。确保动作要么全部完成，要么完全不起作用
 * 一致性 Consistency： 执行事务前后，数据保持一致，多个事务对同一个数据读取的结果是相同的
 * 隔离性 Isolation： 并发访问数据库时，一个用户的事务不被其他事务所干扰，各并发事务之间数据库是独立的
-* 持久性 Durability： 一个事务被提交之后。它对数据库中数据的改变是持久的，即使数据库发生故障也不应该对其有任何影响。
+* 持久性 Durability： 一个事务被提交之后。它对数据库中数据的改变是持久的，即使数据库发生故障也不应该对其有任何影响
 
 ## 分层数据库
 
