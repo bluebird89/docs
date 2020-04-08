@@ -619,11 +619,17 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * element
 * iView
 * [daneden/animate.css](https://github.com/daneden/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. http://daneden.github.io/animate.css
+* [Dogfalo/materialize](https://github.com/Dogfalo/materialize) Materialize, a CSS Framework based on Material Design https://materializecss.com
+* [milligram/milligram](https://github.com/milligram/milligram) A minimalist CSS framework. https://milligram.io
+* [kbrsh/moon](https://github.com/kbrsh/moon) 🌙 The minimal & fast UI library https://kbrsh.github.io/moon [moon](http://moonjs.ga/docs/getting-started.html)
+* [picturepan2/spectre](https://github.com/picturepan2/spectre) Spectre.css - A Lightweight, Responsive and Modern CSS Framework https://picturepan2.github.io/spectre/
+
 
 ## 实例
 
 * [chokcoco/CSS-Inspiration](https://github.com/chokcoco/CSS-Inspiration):CSS Inspiration，在这里找到写 CSS 的灵感！https://chokcoco.github.io/CSS-Inspiration/#/./init
 * [tobiasahlin/SpinKit](https://github.com/tobiasahlin/SpinKit):A collection of loading indicators animated with CSS http://tobiasahlin.com/spinkit/
+* [cssanimation/css-animation-101](https://github.com/cssanimation/css-animation-101):Learn how to bring animation to your web projects https://cssanimation.rocks
 
 ## 工具
 
@@ -637,6 +643,9 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * [matthiasmullie/minify](https://github.com/matthiasmullie/minify):CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns. https://www.minifier.org
 * [daneden/animate.css](https://github.com/daneden/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. http://daneden.github.io/animate.css
 * [IanLunn/Hover](https://github.com/IanLunn/Hover):A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS. http://ianlunn.github.io/Hover/
+* [styled-components/styled-components](https://github.com/styled-components/styled-components) Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
+*  [yui/yui3](https://github.com/yui/yui3) A library for building richly interactive web applications. http://yuilibrary.com/
+
 
 ## 参考
 

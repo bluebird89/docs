@@ -264,9 +264,14 @@ output {
 # 启动成功以后 打开刚才搭建的web服务器  es就能看到数据
 ```
 
-## Kibana
+## [elastic/kibana](https://github.com/elastic/kibana)
 
-数据的展示
+📊 Kibana analytics and search dashboard for Elasticsearch https://www.elastic.co/products/kibana
+
+## 工具
+
+* [deviantony/docker-elk](https://github.com/deviantony/docker-elk):The ELK stack powered by Docker and Compose.
+* [http://cwiki.apachecn.org/display/Kibana](http://cwiki.apachecn.org/display/Kibana)
 
 ```sh
 # 搭建

@@ -1529,7 +1529,6 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 
 ## 资源
 
-* [wurstmeister/kafka-docker](https://github.com/wurstmeister/kafka-docker):Dockerfile for Apache Kafka http://wurstmeister.github.io/kafka-d…
 * [vmware/photon](https://github.com/vmware/photon):Minimal Linux container host https://vmware.github.io/photon
 * [docker-library/official-images](https://github.com/docker-library/official-images):https://github.com/docker-library/official-images
 * [vagrant-libvirt/vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt):Vagrant provider for libvirt.
@@ -1537,7 +1536,8 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 * [jessfraz/dockerfiles](https://github.com/jessfraz/dockerfiles):Various Dockerfiles I use on the desktop and on servers. https://blog.jessfraz.com/post/docker-containers-on-the-desktop/
 * [yeszao/dnmp](https://github.com/yeszao/dnmp):Docker LNMP (Nginx, PHP7/PHP5, MySQL, Redis) https://www.awaimai.com/2120.html
 * GUI
-  - [Shipyard](https://github.com/shipyard/shipyard)
+  - [shipyard/shipyard](https://github.com/shipyard/shipyard) Composable Docker Management http://shipyard-project.com
+    + [shipyard](https://shipyard-project.com/):Built on Docker Swarm, Shipyard gives you the ability to manage Docker resources including containers, images, private registries and more.
   - https://www.portainer.io/
   - [docker / kitematic](https://github.com/docker/kitematic) Visual Docker Container Management on Mac & Windows https://kitematic.com/
   - https://dockstation.io/ 
@@ -1545,6 +1545,7 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 
 ## 工具
 
+* [docker/swarm](https://github.com/docker/swarm) Swarm: a Docker-native clustering system
 * [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
 * [openfaas/faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple for Docker & Kubernetes https://docs.openfaas.com/
 * [coreos/clair](https://github.com/coreos/clair):Vulnerability Static Analysis for Containers
@@ -1568,8 +1569,9 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 * [yeasy/docker_practice](https://github.com/yeasy/docker_practice):Learn and understand Docker technologies, with real DevOps practice! https://legacy.gitbook.com/book/yeasy/docker_practice/details
 * [中文文档](https://docker-doc.readthedocs.io/zh_CN/latest/index.html)
 * [中文文档](http://www.dockerinfo.net)
+
+
 * [LXC](https://stgraber.org/2013/12/20/lxc-1-0-blog-post-series/)
 * [每天5分钟玩转Docker容器技术](https://mp.weixin.qq.com/s/7o8QxGydMTUe4Q7Tz46Diw)
-
 * https://confluence.atlassian.com/bamboo/getting-started-with-docker-and-bamboo-687213473.html
 * [Docker](http://blog.csdn.net/erixhao/article/details/72762851)

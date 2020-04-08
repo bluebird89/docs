@@ -9,7 +9,7 @@
 * 打印调试：即可以用日志来记录变量或者某一段逻辑。记录程序运行的流程，即程序运行了哪些代码，方便排查逻辑问题
 * 问题定位：程序出异常或者出故障时快速的定位问题，方便后期解决问题。因为线上生产环境无法 debug，在测试环境去模拟一套生产环境，费时费力。所以依靠日志记录的信息定位问题，这点非常重要。还可以记录流量，后期可以通过 ELK（包括 EFK 进行流量统计）
 * 用户行为日志：记录用户的操作行为，用于大数据分析，比如监控、风控、推荐等等。这种日志，一般是给其他团队分析使用，而且可能是多个团队，因此一般会有一定的格式要求，开发者应该按照这个格式来记录，便于其他团队的使用。当然，要记录哪些行为、操作，一般也是约定好的，因此，开发者主要是执行的角色
-* 根因分析（甩锅必备*）：即在关键地方记录日志。方便在和各个终端定位问题时，别人说时你的程序问题，你可以理直气壮的拿出你的日志说，看，我这里运行了，状态也是对的。这样，对方就会乖乖去定位他的代码，而不是互相推脱
+* 根因分析：即在关键地方记录日志。方便在和各个终端定位问题时，别人说时你的程序问题，你可以理直气壮的拿出你的日志说，看，我这里运行了，状态也是对的。这样，对方就会乖乖去定位他的代码，而不是互相推脱
 
 ## 原理
 
@@ -71,7 +71,6 @@
    - 变参替换日志拼接
    - 输出日志的对象，应在其类中实现快速的 toString 方法，以便于在日志输出时仅输出这个对象类名和 hashCode
    - 预防空指针:不要在日志中调用对象的方法获取值，除非确保该对象肯定不为 null，否则很有可能会因为日志的问题而导致应用产生空指针异常
-* 
 
 ```
 // 正确示例，必须使用参数化信息的方式
@@ -94,6 +93,15 @@ log message，日志消息体
 
 2019-11-26 15:01:03.332|1543|INFO|[example-server-book-service,28f019d57b8336ab,630697c7f34ca4fa,105,45982043|XNIO-1 task-42]|c.p.f.w.pay.PayServiceImpl     : order is paying with userId: 105 and orderId: 45982043 # 固定分词索引，方便更快的查询分析
 ```
+
+## 基础工具
+
+* tail：Monitor Logs in Real Time `sudo tail -f /var/log/apache2/access.log` `sudo tailf /var/log/apache2/access.log`
+    - -F 会监控是否创建了新日志(所谓新日志指的是同一个名字，但是 fd 不一样的日志文件)，并且会转而显示新日志的内容
+    - 默认情况下 tail 命令只会显示文件最后 10 行的内容。如果只想在实时模式下查看最后两行的内容，那么可以连用 -n 和 -f 参数 `sudo tail -n2 -f /var/log/apache2/access.log`
+* Multitail:Monitor Multiple Log Files in Real Time  `sudo multitail /var/log/apache2/access.log /var/log/apache2/error.log`
+* lnav Command:Monitor Multiple Log Files in Real Time  `sudo lnav /var/log/apache2/access.log /var/log/apache2/error.log`
+* less Command:Display Real Time Output of Log Files  `sudo less +F /var/log/apache2/access.log`
 
 ## 日志分析
 
@@ -226,6 +234,103 @@ tail -f -n +0 access.log | grep -i --line-buffered 'firefox' | goaccess -o repor
 goaccess access.log access.log.1
 # 实时 HTML 输出 生成实时HTML报告的过程与创建静态报告的过程非常相似。只--real-time-html需要使其实时即可。
 goaccess --log-format=COMBINED access.log -o /usr/share/nginx/html/your_s
+```
+
+## Web Log
+
+* 作用
+    - 记录访问服务器的远程主机 IP 地址，可以得知浏览者来自何处
+    - 记录浏览者访问 web 资源，可以了解网站哪些部分最受欢迎
+    - 记录浏览者使用浏览器，可以根据大多数浏览者使用浏览器对站点进行优化
+    - 记录浏览者访问时间
+* Apache:在 httpd.conf 和引用的*.conf文件中查找 CustomLog "logs/access.log" combined
+    - CustomLog 访问日志配置指令
+    - logs/access.log 访问日志记录文件
+    - combined 日志格式
+* Nginx:在 nginx.conf 或引用的 *.conf 文件中查找 access_log logs/access.log main
+    - access_log 访问日志配置指令
+    - logs/access.log 访问日志记录文件
+    - main 日志格式
+
+```sh
+# Apache
+LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+
+# nginx
+log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+              '$status $body_bytes_sent "$http_referer" '
+              '"$http_user_agent" "$http_x_forwarded_for"';
+
+# 通用日志格式 common
+127.0.0.1 - - [14/May/2017:12:45:29 +0800] "GET /index.html HTTP/1.1" 200 4286
+远程主机IP            请求时间         时区  方法    资源      协议     状态码 发送字节
+
+# 组合日志格式 combined
+127.0.0.1 - - [14/May/2017:12:51:13 +0800] "GET /index.html HTTP/1.1" 200 4286 "http://127.0.0.1/" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36"
+远程主机IP            请求时间         时区  方法    资源      协议     状态码 发送字节    referer字符           浏览器信息
+
+# 日志状态码
+2XX:
+200: 请求成功
+201: 创建成功
+202: 接受请求
+204: 无内容
+
+3XX:
+301: 永远重定向
+302: 临时重定向
+303: 临时重定向(HTTP1.1 同302)
+307: 临时重定向(HTTP1.1 POST方法)
+
+4XX:
+400: 错误请求
+401: 访问拒绝
+403: 访问禁止
+404: 未找到
+405: 请求方法错误
+
+5XX:
+500: 服务器内部错误
+503: 服务不可用
+505: 网关超时
+
+
+## 统计
+# 查看访问 IP 地址
+cat access.log|awk '{print $1}'
+cat access.log|awk '{print $1}'|sort
+
+# 查看每个 IP 地址访问次数
+cat access.log|awk '{print $1}'|sort|uniq -c
+cat access.log|awk '{print $1}'|sort|uniq -c|sort -nr
+cat access.log|awk '{print $1}'|sort|uniq -c|sort -nr|head -10
+
+# 统计总访问 IP 数量
+cat access.log|awk '{print $1}'|sort|uniq -c|wc -l
+
+# 访问指定时间后的日志
+cat access.log|awk '$4>"[23/Aug/2014:23:58:00"'
+cat access.log|awk '($4>"[23/Aug/2014:23:58:00"){print $1}'
+cat access.log|awk '($4>"[23/Aug/2014:23:58:00"){print $1}'|sort|uniq -c|sort -nr
+
+# 访问指定资源的日志
+cat access.log|awk '$7 ~/.html$/'
+cat access.log|awk '($7 ~/.html$/){print $1 " " $7 " " $9}'
+cat access.log|awk '($7 ~/.js$/){print $10 " " $7}'|sort|uniq -c|sort -nr|head -10
+cat access.log|awk '($10 > 10000 && $7 ~/.js$/){print $10 " " $7}'|sort|uniq -c|sort -nr|head -10
+
+# 统计总流量
+cat access.log|awk '{sum+=$10}END{print sum}'
+cat access.log|awk '($7 ~/.css$/){sum+=$10}END{print sum}'
+grep "04/May/2017" access.log|awk '($7 ~/.css$/){sum+=$10}END{print sum}'
+
+# 状态码统计
+cat access.log|awk '{print $9}' |sort|uniq -c|sort -nr
+cat access.log|awk '($9 ~/^400$/)' | wc -l
+cat access.log | awk '($4 ~/^\[04\/May\/2017/){print $9}'|sort|uniq -c|sort -nr
+cat access.log | awk '$9 ~/400/ && $4 ~/^\[04\/May\/2017/'|wc -l
+grep "04/May/2017" access.log | awk '{print $9}'|sort|uniq -c|sort -nr
 ```
 
 ## 日志服务

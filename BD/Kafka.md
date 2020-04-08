@@ -536,14 +536,15 @@ larger than available brokers 0
     - [dpkp/kafka-python](https://github.com/dpkp/kafka-python):Python client for Apache Kafka http://kafka-python.readthedocs.io/
     - [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. https://shopify.github.io/sarama
 * [Cruise Control](http://www.infoq.com/cn/news/2017/09/LinkedIn-open-Cruise-Control-Kaf):一个Kafka集群自动化运维新利器
+* [wurstmeister/kafka-docker](https://github.com/wurstmeister/kafka-docker):Dockerfile for Apache Kafka http://wurstmeister.github.io/kafka-d…
 
 ## 参考
 
 * [Documentation](http://kafka.apache.org/documentation.html)
 * [apachecn/kafka-doc-zh](https://github.com/apachecn/kafka-doc-zh):Kafka 中文文档 http://kafka.apachecn.org
 * [Apache Kafka Foundation Course](https://www.learningjournal.guru/courses/kafka/kafka-foundation-training)
-* [Kafka知识点大全](https://mp.weixin.qq.com/s?__biz=MzAwNzA5MzA0NQ==&mid=2652151715&idx=2&sn=2f9124f7162e68a441def68af832becd)
 
+* [Kafka知识点大全](https://mp.weixin.qq.com/s?__biz=MzAwNzA5MzA0NQ==&mid=2652151715&idx=2&sn=2f9124f7162e68a441def68af832becd)
 https://juejin.im/post/5ba792f5e51d450e9e44184d
 * [重磅开源KSQL：用于Apache Kafka的流数据SQL引擎](http://www.infoq.com/cn/news/2017/08/KSQL-open-source-apache-kafka):一个基于流的SQL。推出KSQL是为了降低流式处理的门槛，为处理Kafka数据提供简单而完整的可交互式SQL接口。
 * <https://www.confluent.io/blog/publishing-apache-kafka-new-york-times/>
