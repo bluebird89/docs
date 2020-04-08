@@ -2,6 +2,20 @@
 
 组织制定的PHP语言开发规范，约定了很多方面的规则，如命名空间、类名 规范、编码风格标准、Autoload、公共接口等
 
+1   Basic Coding Standard   Paul M. Jones   N/A N/A
+3   Logger Interface    Jordi Boggiano  N/A N/A
+4   Autoloading Standard    Paul M. Jones   Phil Sturgeon   Larry Garfield
+6   Caching Interface   Larry Garfield  Paul Dragoonis  Robert Hafner
+7   HTTP Message Interface  Matthew Weier O’Phinney Beau Simensen   Paul M. Jones
+11  Container Interface Matthieu Napoli, David Négrier  Matthew Weier O’Phinney Korvin Szanto
+12  Extended Coding Style Guide Korvin Szanto   Alexander Makarov   Chris Tankersley
+13  Hypermedia Links    Larry Garfield  Matthew Weier O’Phinney Marc Alexander
+14  Event Dispatcher    Larry Garfield  N/A Cees-Jan Kiewiet
+15  HTTP Handlers   Woody Gilk  N/A Matthew Weier O’Phinney
+16  Simple Cache    Paul Dragoonis  Jordi Boggiano  Fabien Potencier
+17  HTTP Factories  Woody Gilk  N/A Matthew Weier O’Phinney
+18  HTTP Client Tobias Nyholm   N/A Sara Golemon
+
 ### PSR0
 
 类自动加载
@@ -55,4 +69,6 @@ spl_autoload_register('autoload');
 
 ### 自动加载
 
-- psr0 中类名的下划线将会转化为目录层级和相应的命名空间，如一个叫 Swift_mail 的类名存在于./Swift/Mail.php 文件中，并且命名空间为当前命名空间\Swift
+* psr0 中类名的下划线将会转化为目录层级和相应的命名空间，如一个叫 Swift_mail 的类名存在于./Swift/Mail.php 文件中，并且命名空间为当前命名空间\Swift
+
+### PSR-14 compatible event dispatcher provides an ability to dispatch events and listen to events dispatched

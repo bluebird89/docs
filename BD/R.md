@@ -7,7 +7,7 @@
 * 统计知识，包括了时间序列、一元线性回归、多元线性回归、自回归等统计和计量的模型算法。
 * IT技术，就是R语言相关的编程技术，金融量化程序包的使用，金融数据处理，金融数据模型的构建，量化策略的实现思路，R语言代码的编写等。
 
-## 必读书
+## 图书
 
 * R语言的学习者和使用者（必读）
 * 金融宽客(Quant)（必读）
@@ -28,6 +28,7 @@
 system('defaults write org.R-project.R force.LANG en_US.UTF-8')
 Restart R
 ```
+
 ## 参考
 
 * [安装](https://mirrors.tuna.tsinghua.edu.cn/CRAN/)

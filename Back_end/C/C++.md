@@ -30,7 +30,11 @@ gcc file.c # 编译
 
 ## 图书
 
-* 《C Primer Plus》
+* 《C++ Primer》
+* 《Effective C++》
+* 《C++ 标准程序库》
+* 《STL源码剖析》
+* 《深度探索C++对象模型》
 
 ## 工具
 

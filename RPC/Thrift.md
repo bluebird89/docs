@@ -23,7 +23,6 @@ sudo make install
 ./configure --prefix=/usr/local/ --with-boost=/usr/local --with-libevent=/usr/local
 ```
 
-
 ## 数据类型：
 
 * 基本

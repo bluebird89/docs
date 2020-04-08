@@ -3,7 +3,9 @@
 * Google基于Webkit
 * Safari Webkit内核
 * Firefox自己研制的Gecko内核
+    - [servo/servo](https://github.com/servo/servo) The Servo Browser Engine https://servo.org/ a modern, high-performance browser engine designed for both application and embedded use
 * IE 浏览器 (测试IE的兼容性你可以使用微软IE的 Application Compatibility VPC Images)
+    - 像JavaScript引发的alert窗口或file组件打开的窗口，都属于模态窗口，它们会阻塞所有主线程中正在执行的JavaScript代码
 * [browsershots](http://browsershots.org/) 
 * [brave/brave-browser](https://github.com/brave/brave-browser):Brave browser for Desktop and Laptop computers running Windows, OSX, and Linux <https://www.brave.com>
 * beaker
@@ -13,6 +15,11 @@
 * Tor
 * vivaldi
 * Edge
+* Onion
+    - [](https://onionbrowser.com/)
+    - [](https://tor-browser.en.softonic.com/mac)
+    - [Deep](https://github.com/mr-likar/DeepWeb)
+
 
 ## 工具
 

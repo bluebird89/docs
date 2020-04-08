@@ -48,13 +48,24 @@
     - 在本地优先应用中，我们可以做的只受物理定律的约束，而不受任何服务条款的约束。
     - 根据欧洲人权公约，自由的思想和观点是无条件的 — 国家永远不会干扰它，因为它是你自己的 — 而表达自由（包括言论自由），可以在某些方面受到限制，因为它影响到其他人。社交网络这样的传播服务传递着表达方式，但创意人的原始笔记和未发表的作品是一种发展思想和观点的方式，因此需要无条件的保护。
 
-
 ## 工具
 
 * [capstone](https://www.inkandswitch.com/capstone-manuscript.html):an experimental tool for creative professionals to develop their ideas
 * [softwarelibrary](https://archive.org/details/softwarelibrary)
 
 ## 服务商
+
+* [aliyun](https://www.aliyun.com/)
+    - 如果在意 “节点数量” 可选择安全宝。
+    - 如果在意 “节点稳定性及 SEO 优化” 可选择百度云加速。
+    - 如果在意 “是否免费” 可选择 360 卫士。
+    - 如果在意 “功能均衡” 可选择加速乐。
+* [Azure](https://www.azure.cn/en-us/)
+    - [feiskyer/azure-auth-go](https://github.com/feiskyer/azure-auth-go):Go library for authorizing with Azure
+    - [MicrosoftDocs/azure-docs](https://github.com/MicrosoftDocs/azure-docs):Open source documentation of Microsoft Azure https://docs.microsoft.com/azure
+* Google Cloud Platform
+    - [googleapis/google-cloud-python](https://github.com/googleapis/google-cloud-python):Google Cloud Client Library for Python https://googleapis.github.io/google-cloud-python/
+* [腾讯云](https://cloud.tencent.com/) `ssh -q -l ubuntu -p 22 IP`
 
 * [GetStream/awesome-saas-services](https://github.com/GetStream/awesome-saas-services):A curated list of the best in class SaaS services for developers and business owners.
 * [LeanCLoud](https://leancloud.cn/)
