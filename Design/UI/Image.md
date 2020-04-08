@@ -247,6 +247,7 @@ $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
 * [Find The Best Free Stock Photos For Your Project](https://www.mailomix.com/products/stock-photo-search/)
 * [ImageOptim/ImageOptim](https://github.com/ImageOptim/ImageOptim):GUI image optimizer for Mac https://imageoptim.com/mac
 * [illuminations](https://illuminations.nctm.org):在线画图网站
+* [uPic](link): Mac 图床 (文件) 上传客户端，它可以将图片、各种文件上传到配置好的指定对象存储中，然后即时生成可供互联网访问的文件 URL,支持图床： smms、 又拍云 USS、七牛云 KODO、 阿里云 OSS、 腾讯云 COS、微博、Github、 Gitee、 Amazon S3、自定义上传接口
 
 ## 资源
 

@@ -30,6 +30,9 @@ Ctrl+Shift+B
 
 ## 运行
 
+* Linux平台上的编译器更为重要，最典型的当属 GCC
+* 企业里实际项目的编译动作叫 make，编译的实际动作和过程都是写在 makefile文件里，所以makefile的书写规则建议学习！
+
 * -o 指定输出文件的文件名
 * -E：gcc -E test.c -o test.i  // 预处理
 * -S：gcc -S test.i  // 将预处理输出文件test.i汇编成test.s文件
@@ -43,6 +46,18 @@ gcc -c adder.c
 gcc -c name.c
 gcc name.o adder.o hello.c
 ```
+
+## 指针
+
+## 内存管理
+
+## 图书
+
+* 《C Primer Plus》
+* 《C和指针》
+* 《C专家编程》
+* 《debuging with gdb》（中文版）
+* 陈皓先生的《跟我一起写makefile》
 
 ## 工具
 

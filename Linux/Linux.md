@@ -232,8 +232,8 @@ export EDITOR=vim
 
 ## 进程&线程
 
-* 程序是一个普通文件，是机器代码指令和数据的集合，存储在磁盘上的一个可执行映像中，可执行映像(executable image)就是一个可执行文件的内容
-* 进程代表程序的执行过程，它是一个动态的实体，随着程序中指令的执行而不断地变化，在某个时刻进程的内容被称为进程映像(process image)
+* 程序是一些保存在磁盘上的指令的有序集合,是静态的的一个可执行映像中，可执行映像(executable image)就是一个可执行文件的内容
+* 进程代表程序的执行过程，它是一个动态的实体，包括了动态创建、调度和消亡的整个过程,随着程序中指令的执行而不断地变化，在某个时刻进程的内容被称为进程映像(process image),是程序资源管理的最小单位
   - 程序执行过程是一个执行环境的总和，除了包括程序中各种指令和数据外，还有一些额外数据
   - 执行环境的动态变化体现了程序的运行，为了对动态变化的过程进行描述，就引入了“进程”概念
 * 进程
@@ -302,10 +302,10 @@ export EDITOR=vim
   - 运行于用户空间，执行用户进程
   - 运行于内核空间，处于进程上下文，表示执行某个进程
   - 运行于内核空间，处于中断上下文，此时与任务进程都无关，它在处理某个中断
-* 线程是进程的活动对象，每个线程都拥有独立的程序计数器、进程栈和一组寄存器。
-  - 线程能在同一程序里面共享内存地址空间，共享文件和其它资源。
-  - 从内核角度来说linux并没有线程这个概念，它将线程当成是进程来看待。
-  - 内核线程没有独立的地址空间，只运行在内核空间，从不切换到用户空间。
+* 线程是进程的活动对象，每个线程都拥有独立的程序计数器、进程栈和一组寄存器。操作操作系统能够进行运算调度的最小单位
+  - 线程能在同一程序里面共享内存地址空间，共享文件和其它资源
+  - 从内核角度来说linux并没有线程这个概念，它将线程当成是进程来看待
+  - 内核线程没有独立的地址空间，只运行在内核空间，从不切换到用户空间
 * 放弃处理器时间 linux 通过sched_yield()系统调用来放弃当前进程的处理器时间，让给其他待执行进行，对于实时进程，它会将进程从活动队列中移到其优先级队列的后面。早期linux的yield语义不一样，只会将进程放到优先级队列的末尾，放弃的时间不会太长。
 * 文件描述符fd：用于表述指向文件的引用的抽象化概念，形式上是一个非负整数
   - 实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表
@@ -320,6 +320,36 @@ export EDITOR=vim
   - 消息队列
   - 套接字
   - 信号
+* 工具
+  - ps：report a snapshot of the current processes，PID ( Process IDentity )，pid唯一标识一个进程 `ps -ef|grep intresting`
+  - strace: trace system calls and signals   跟踪进程内部的系统调用和信号 `strace  -c ./tiem_test`
+    + 系统调用（system call），指运行在「用户态」的程序向操作系统「内核态」请求需要更高权限运行的服务，系统调用提供用户程序与操作系统之间的接口
+    + strace后面跟着启动一个进程，可以跟踪启动后进程的系统调用和信号，这个命令可以看到进程执行时候都调用了哪些系统调用，通过指定不同的选项可以输出系统调用发生的时间，精度可以精确到微秒，甚至还可以统计分析系统「调用的耗时」，这在排查进程假死问题的时候很有用，能帮你发现进程卡在哪个系统调用上
+  - pstack: print a stack trace of a running process 打印出运行中程序的堆栈信息,可以看到进程内启动的线程号，每个进程内线程的「堆栈」内容也能看到  `pstack pid`
+    +  LPW是指Light-weight process 轻量级线程:Linux中没有真正的线程
+    +  Linux中没有的线程Thread是由进程来模拟实现的所以称作：轻量级进程
+    +  进程是「资源管理」的最小单元，线程是「资源调度」的最小单元（这里不考虑协程）
+  -  pstree: display a tree of processes pstree按树形结构打印运行中进程结构信息 `pstree -p 11811`
+  -  gdb是GNU开发的gcc套件中Linux下程序调试工具，可以查看程序的堆栈、设置断点、打印程序运行时信息，甚至还能调试多线程程序，功能十分强大.
+    +  调试C/C++程序首先编译的时候要加-g选项
+    +  可以直接用gdb启动程序调试，命令：gdb prog
+    +  用gdb附着到一个已经启动的进程上调试也可以。命令：gdb prog pid
+    +  程序崩溃之后参数corefile也可以用gdb调试，看看程序死掉之前留了什么遗言（堆栈信息）给你。命令：gdb prog corefile，这里有一点需要注意，有些Linux系统默认程序崩溃不生成corefile，这时你需要ulimit -c unlimited这样就能生成corefile了。
+* 通过/proc/pid文件了解进程的运行时信息和统计信息。/proc系统是一个伪文件系统，它只存在内存当中，而不占用外存空间，以文件系统的方式为内核与进程提供通信的接口。
+  - /proc目录下有很多以数字命名的目录，每个数字代表进程号PID它们是进程目录。系统中当前运行的每一个进程在/proc下都对应一个以进程号为目录名的目录/proc/pid，它们是读取进程信息的接口，可以进到这个文件里面，了解进程的运行时信息和统计信息
+  - /proc/pid/environ 包含了进程的可用环境变量的列表 。程序出问题了如果不确定环境变量是否设置生效，可以cat这个文件出来查看确认一下
+  - /proc/pid/fd/ 这个目录包含了进程打开的每一个文件的链接。从这里可以查看进程打开的文件描述符信息，包括标准输入、输出、错误流，进程打开的socket连接文件描述符也能看到，lsof命令也有类似的作用
+  - /proc/pid/stat包含了进程的所有状态信息，进程号、父进程号、 线程组号、 该任务在用户态运行的时间 、 该任务在用内核态运行的时间、 虚拟地址空间的代码段、 阻塞信号的位图等等信息应有尽有
+  - /proc/pid/cmdline 该文件保存了进程的完整命令行
+  - /proc/pid/cwd一个符号连接, 指向进程当前的工作目录
+  - /proc/pid/exe包含了正在进程中运行的程序链接
+  - /proc/pid/mem包含了进程在内存中的内容
+  - /proc/pid/statm包含了进程的内存使用信息
+* 遇到了什么问题（崩溃coredump、假死、阻塞、系统调用超时、文件描述符异常）
+  - ps查看进程id，看看进程还在不在以及进程状态
+  - 如果在的话strace、psstack看下进程当前信息，是不是卡死在哪个位置，对比各帧最后调用信息找到异常点
+  - 如果进程不再了，如果有corefile文件，直接上gdb查看corefile信息
+  - 其他疑难杂症怀疑进程状态信息的时候，看看/proc/pid下面的进程状态信息，可能会给你启发
 
 ```c
 // 生产者
@@ -396,6 +426,7 @@ int main() {
   close(fd);
   return 0;
 }
+
 ```
 
 ## 硬件
@@ -1660,19 +1691,19 @@ more file # 分屏显示文件内容,终端底部显示当前阅读的进度 逐
 more +100 /etc/locale.gen       # 从 100 行开始显示
 
 # 动作
-回车键 向下移动一行；
-y 向上移动一行；
-空格键 向下滚动一屏；
-b 向上滚动一屏；
-d 向下滚动半屏；
-h less的帮助；
-u 向上洋动半屏；
-w 可以指定显示哪行开始显示，是从指定数字的下一行显示；比如指定的是6，那就从第7行显示；
-g 跳到第一行；
-G 跳到最后一行；
-p n% 跳到n%，比如 10%，也就是说比整个文件内容的10%处开始显示；
-/pattern 搜索pattern ，比如 /MAIL表示在文件中搜索MAIL单词；
-v 调用vi编辑器；
+回车键 向下移动一行
+y 向上移动一行
+空格键 向下滚动一屏
+b 向上滚动一屏
+d 向下滚动半屏
+h less的帮助
+u 向上洋动半屏
+w 可以指定显示哪行开始显示，是从指定数字的下一行显示 比如指定的是6，那就从第7行显示
+g 跳到第一行
+G 跳到最后一行
+p n% 跳到n%，比如 10%，也就是说比整个文件内容的10%处开始显示
+/pattern 搜索pattern ，比如 /MAIL表示在文件中搜索MAIL单词
+v 调用vi编辑器
 q 退出less
 
 grep -i "security" jan2017articles.csv
@@ -3210,21 +3241,14 @@ sed ‘/foo/ s//bar/g’ filename # 简写形式
 
 sed -n ‘45,50p’ filename # 显示第45到50行
 sed -n ’51q;45,50p’ filename # 一样，但快得多
-```
 
-## 工具
-
-* [p-gen/smenu](https://github.com/p-gen/smenu):Terminal utility that allows you to use words coming from the standard input to create a nice selection window just below the cursor. Once done, your selection will be sent to standard output. More in the Wiki
-
-
-  或--expression=<script> 以选项中指定的script来处理输入的文本文件。
+ 或--expression=<script> 以选项中指定的script来处理输入的文本文件。
   -f<script文件>或--file=<script文件> 以选项中指定的script文件来处理输入的文本文件。
   -n或--quiet或--silent 仅显示script处理后的结果。
   sed 可以直接修改文件的内容，不必使用管道命令或数据流重导向！ 不过，由於这个动作会直接修改到原始的文件，所以请你千万不要随便拿系统配置来测试！ 添加一行
 
 sed -i &#39;$aHow are you today&#39; log.txt
 
-```sh
 sed ‘2p’ /etc/passwd
 sed –n ‘2p’ /etc/passwd
 sed –n ‘1,4p’ /etc/passwd
@@ -3273,10 +3297,14 @@ sed -n &#39;1!G;h;$p&#39; FILE
 * Bash Pocket Reference: Help for Power Users and Sys Admins  By Armold Robbins
 * TCP/IP Network Administration (3rd Edition; O’Reilly Networking) by Craig Hunt
 * DNS and BIND byCricket Liu
+* 《Unix环境高级编程》
+* 《Linux高性能服务器编程》
+* 《POSIX多线程程序设计》
 
 ## 工具
 
 * [GNU](http://ftp.gnu.org/gnu/)
+* [p-gen/smenu](https://github.com/p-gen/smenu):Terminal utility that allows you to use words coming from the standard input to create a nice selection window just below the cursor. Once done, your selection will be sent to standard output. More in the Wiki
 * [backup/backup](https://github.com/backup/backup):Easy full stack backup operations on UNIX-like systems. http://backup.github.io/backup/v4/
 * [gopasspw/gopass](https://github.com/gopasspw/gopass):The slightly more awesome standard unix password manager for teams https://www.gopass.pw/
 * [trimstray/iptables-essentials](https://github.com/trimstray/iptables-essentials):Iptables Essentials: Common Firewall Rules and Commands.

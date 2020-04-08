@@ -27,11 +27,11 @@ script: phpunit -v
 * [NetEaseGame/git-webhook](https://github.com/NetEaseGame/git-webhook):使用 Python Flask + SQLAchemy + Celery + Redis + React 开发的用于迅速搭建并使用 WebHook 进行自动化部署和运维，支持 Github / GitLab / Gogs / GitOsc。
 * [sovereign/sovereign](https://github.com/sovereign/sovereign)
 
+## 教程
+
+* [dwyl/learn-travis](https://github.com/dwyl/learn-travis):A quick Travis CI (Continuous Integration) Tutorial for Node.js developers
+
 ## 工具
 
 * [TeamCity](https://www.jetbrains.com/teamcity/)
 * [danger/danger-js](https://github.com/danger/danger-js):⚠️ Stop saying "you forgot to …" in code review http://danger.systems/js/
-
-## 教程
-
-* [dwyl/learn-travis](https://github.com/dwyl/learn-travis):A quick Travis CI (Continuous Integration) Tutorial for Node.js developers

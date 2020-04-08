@@ -1,4 +1,3 @@
-
 # Courses
 
 * [prakhar1989/awesome-courses](https://github.com/prakhar1989/awesome-courses):List of awesome university courses for learning Computer Science!
@@ -94,3 +93,6 @@
     - ftp.ustclug.org； /ebook/USTC-CS-Courses-Resource； ftp@ftp
     - afp://ftp.ustclug.org/； /ebook/USTC-CS-Courses-Resource； Connect As Guest
 * Pluralsight
+* 逻辑推理
+    - [牛津大学公开课：批判性推理入门](https://www.bilibili.com/video/av2576527/)
+

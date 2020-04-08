@@ -34,6 +34,7 @@
     - [EagleGet](http://www.eagleget.com/cn/)
     - [agalwood / Motrix](https://github.com/agalwood/Motrix):A full-featured download manager. https://motrix.app/
     - [Algram/ytdl-webserver](https://github.com/Algram/ytdl-webserver):📻 Webserver for downloading youtube videos. Ready for docker.
+    - [Free Download Manager](https://www.freedownloadmanager.org/)
 
 ## md5 verdify
 
