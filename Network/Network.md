@@ -256,6 +256,7 @@ iperf -c 192.168.1.2 # substituting the IP address of your server machine for th
 * [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core):A platform for building proxies to bypass network restrictions. https://www.v2ray.com/
 * [librenms/librenms](https://github.com/librenms/librenms):Community-based GPL-licensed network monitoring system http://www.librenms.org/
 * [Zenmap](https://nmap.org/zenmap/):Nmap网络扫描器的官方前端程序
+* [IPv6 连接测试](https://test-ipv6.com/)
 
 ## 参考
 

@@ -11,6 +11,7 @@
 
 * [GoogleChrome/workbox](https://github.com/GoogleChrome/workbox):📦 Workbox: JavaScript libraries for Progressive Web Apps https://github.com/GoogleChrome/workbox
 * [lavas-project/lavas](https://github.com/lavas-project/lavas):基于 Vue 的 PWA 解决方案，帮助开发者快速搭建 PWA 应用，解决接入 PWA 的各种问题 https://lavas.baidu.com
+* [nicejade/quickapp-boilerplate-template](https://github.com/nicejade/quickapp-boilerplate-template):🔨致力于构建更为优雅的「快应用」开发脚手架模板。
 
 ## 参考
 

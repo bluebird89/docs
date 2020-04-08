@@ -2,6 +2,7 @@
 
 Yii 2: The Fast, Secure and Professional PHP Framework <http://www.yiiframework.com>
 
+* [yiisoft / yii2-app-basic](https://github.com/yiisoft/yii2-app-basic):Yii 2.0 Basic Application Template http://www.yiiframework.com
 * [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced):Yii 2.0 Advanced Application Template
 
 ```sh
@@ -16,12 +17,11 @@ php requirements.php
 
 php yii serve --docroot="@frontend/web" --port=8888
 ./yii serve
-vim common/config/main-local.php # components['db'] 配置
-yii migrate # 生成数据表
-# 断言测试
+# common/config/main-local.php 本地配置
+yii migrate # 生成数据
 ```
 
-## 搭建服务
+## 服务搭建
 
 ```sh
 DocumentRoot "path/to/basic/web"
@@ -88,64 +88,80 @@ server {
 
 ## 生命周期
 
-* 用户提交指向 入口脚本 web/index.php 的请求。
-* 入口脚本会加载 配置数组 并创建一个 应用 实例用于处理该请求。
-    - preInit()（预初始化）方法，配置一些高优先级的应用属性
-    - 注册yiibaseApplication::errorHandler。
-    - 通过给定的应用配置初始化应用的各属性。
-    - 通过调用 yiibaseApplication::init()（初始化）方法，它会顺次调用 yiibaseApplication::bootstrap() 从而运行引导组件。
-        + 加载扩展清单文件(extension manifest file) vendor/yiisoft/extensions.php。
-        + 创建并运行各个扩展声明的 引导组件（bootstrap components）。
-        + 创建并运行各个 应用组件 以及在应用的 Bootstrap 属性中声明的各个 模块（modules）组件（如果有）。
-* 应用会通过 request（请求） 应用组件解析被请求的 路由。
-* 应用创建一个 controller（控制器） 实例具体处理请求。
-* 控制器会创建一个 action（动作） 实例并为该动作执行相关的 Filters（访问过滤器）。
-* 如果任何一个过滤器验证失败，该动作会被取消。
-* 如果全部的过滤器都通过，该动作就会被执行。
-* 动作会加载一个数据模型，一般是从数据库中加载。
-* 动作会渲染一个 View（视图），并为其提供所需的数据模型。
-* 渲染得到的结果会返回给 response（响应） 应用组件。
-* 响应组件会把渲染结果发回给用户的浏览器。
+* 用户提交 指向入口脚本 web/index.php(负责启动一个请求处理周期) 的请求
+* 入口脚本会加载配置数组并创建一个 application (应用:能全局范围内访问的对象，管理协调组件来完成请求),实例用于处理该请求
+* 应用会通过 request（请求） 应用组件解析被请求的路由
+* 应用创建一个 controller（控制器） 实例具体处理请求
+* 控制器会创建一个 action（动作） 实例并为该动作执行相关的 Filters（控制器在处理请求之前或之后 需要触发执行的代码）
+* 如果任何一个过滤器验证失败，该动作会被取消,如果全部的过滤器都通过，该动作就会被执行
+* 动作会加载一个数据模型，一般是从数据库中加载
+* 动作会渲染一个 View（视图），并为其提供所需的数据模型
+    - 小部件（可嵌入到视图中的对象， 可包含控制器逻辑，可被不同视图重复调用）
+* 渲染得到的结果会返回给 response（响应） 应用组件
+* 响应组件会把渲染结果发回给用户的浏览器
 
 ## 原理
 
-* 入口文件
-* application:配置主体属性->init(bootstrap)->run
-* 主体属性
-    -   id：用来区分其他应用的唯一标识 ID
-    -   basePath：该应用的根目录
-    -   aliases:用一个数组定义多个 别名
-    -   bootstrap:
-        -   启动阶段组件或模块 ID,声明 module 的 key，modules 中声明详细加载的模块：如果模块 ID 和应用组件 ID 同名，优先使用应用组件 ID，如果你想用模块 ID，可以使用如下无名称函数返回模块 ID
-        -   类名
-        -   配置数组
-        -   匿名函数
-    -   catchAll：要处理所有用户请求的 控制器方法，通常在维护模式下使用，同一个方法处理所有用户请求。
-    -   components:注册多个在其他地方使用的 应用组件,注册过程.部署一组提供各种不同功能的 应用组件 来处理请求
-        -   每一个应用组件指定一个 key-value 对的数组，key 代表组件 ID， value 代表组件类名或 配置。
-        -   在应用中可以任意注册组件，并可以通过表达式 \\Yii::$app->ComponentID 全局访问。
-    -   controllerMap:指定一个控制器 ID 到任意控制器类,打破默认的控制器对应规则
-    -   controllerNamespace:指定控制器类默认的命名空间
-    -   sourceLanguage:该属性指定应用代码的语言
-    -   language：指定应用展示给终端用户的语言，默认为 en 标识英文
-    -   name:想展示给终端用户的应用名称，不同于需要唯一性的 yiibaseApplication::id 属性， 该属性可以不唯一，该属性用于显示应用的用途。
-    -   modules:指定应用所包含的模块配置
-    -   params:全局参数 \\Yii::$app->params['thumbnail.size']
-    -   version
-    -   charset
-    -   defaultRoute
-        -   web:site/index
-        -   console:help/index
-    -   extensions
-    -   layout:false 关闭 默认 main
-    -   layoutPath:默认的布局路径别名为@app/views/layouts
-    -   runtimePath
-    -   viewPath
-    -   vendorPath
-    -   enableCoreCommands
+* 入口脚本（Entry Scripts）
+    - 定义全局常量
+        + YII_DEBUG：标识应用是否运行在调试模式。当在调试模式下，应用会保留更多日志信息， 如果抛出异常，会显示详细的错误调用堆栈。 因此，调试模式主要适合在开发阶段使用，YII_DEBUG 默认值为 false
+        + YII_ENV：标识应用运行的环境，详情请查阅 配置章节。 YII_ENV 默认值为 'prod'，表示应用运行在线上产品环境
+        + YII_ENABLE_ERROR_HANDLER：标识是否启用 Yii 提供的错误处理， 默认为 true
+    - 注册 Composer 自动加载器
+    - 包含 Yii 类文件
+    - 加载应用配置
+    - 创建一个应用实例并配置 Bootstrapping
+            * preInit()（预初始化）方法，配置一些高优先级的应用属性
+            * 注册 errorHandler
+            * 配置应用主体属性
+            * 通过调用 yiibaseApplication::init()（初始化）方法，会顺次调用 yiibaseApplication::bootstrap() 从而运行引导组件
+                - 加载扩展清单文件(extension manifest file) vendor/yiisoft/extensions.php
+                - 创建并运行各个扩展声明的 引导组件（bootstrap components）
+                - 创建并运行各个 应用组件 以及在应用的 Bootstrap 属性中声明的各个模块（modules 包含完整 MVC 结构的独立包， 一个应用可以由多个模块组建）、组件（在应用中注册的对象， 提供不同的功能来完成请求）
+    - 调用 yii\base\Application::run() 来处理请求
+        + 触发 EVENT_BEFORE_REQUEST 事件
+        + 处理请求：解析请求 路由 和相关参数； 创建路由指定的模块、控制器和动作对应的类，并运行动作
+        + 触发 EVENT_AFTER_REQUEST 事件
+        + 发送响应到终端用户
+    - 入口脚本接收应用主体传来的退出状态并完成请求的处理
+*  应用（Applications）
+    - 属性 指定应用主体的运行环境
+        + id（必须）：用来区分其他应用的唯一标识 ID，主要给程序使用。 为了方便协作，最好使用数字作为应用主体ID， 但不强制要求为数字
+        + basePath（必须）：应用的根目录，常用于派生一些其他重要路径（如 runtime 路径）， 因此，系统预定义 @app 代表这个路径
+        + aliases:用一个数组定义多个别名
+        + bootstrap:用数组指定启动阶段 bootstrapping process 需要运行的组件
+            * 如果模块 ID 和应用组件 ID 同名，优先使用应用组件 ID，如果想用模块 ID，可以使用如下匿名函数返回模块 ID
+            * 类名
+            * 配置数组
+            * 匿名函数
+        + catchAll（仅 Web applications 网页应用支持）：要处理所有用户请求的 控制器方法，通常在维护模式下使用，同一个方法处理所有用户请求
+        + components:注册应用组件
+        + controllerMap:指定一个控制器 ID 到任意控制器类,打破默认的控制器对应规则
+        + controllerNamespace:指定控制器类默认的命名空间，默认为app\controllers
+        + sourceLanguage:指定应用代码的语言，默认为 'en-US' 标识英文（美国）
+        + language：指定应用展示给终端用户的语言，默认为 en 标识英文
+        + timeZone 提供一种方式修改 PHP 运行环境中的默认时区
+        + name: 展示给终端用户的应用名称，不同于需要唯一性的 yiibaseApplication::id 属性，该属性可以不唯一，该属性用于显示应用的用途
+        + modules:指定应用所包含的模块配置
+        + params:一个数组，指定可以全局访问的参数 `\Yii::$app->params['thumbnail.size']`
+        + version 指定应用的版本
+        + charset 指定应用使用的字符集，默认值为 'UTF-8'
+        + defaultRoute 未配置的请求的响应 路由 规则
+            * web:site/index
+            * console:help/index
+        + extensions:用数组列表指定应用安装和使用的 扩展,默认使用 @vendor/yiisoft/extensions.php 文件返回的数组
+        + layout: 指定渲染视图默认使用的布局名字， 默认值为 'main' 对应布局路径下的 main.php 文件
+            * false:关闭默认main,在具体的结构中重新声明
+        + layoutPath:指定查找布局文件的路径，默认值为视图路径下的 layouts 子目录，默认的布局路径别名为@app/views/layouts
+        + runtimePath 指定临时文件如日志文件、缓存文件等保存路径
+        + viewPath 指定视图文件的根目录
+        + vendorPath 指定 Composer 管理的vendor路径
+        + enableCoreCommands：仅 console applications 控制台应用支持， 用来指定是否启用 Yii 中的核心命令，默认值为 true
 * 事件属性
-    - on beforeRequest\\afterRequest
-    - on beforeAction\\afterAction
+    - `on beforeRequest\beforeRequest`
+    - `on beforeRequest\afterRequest`
+    - `on beforeAction\beforeAction`
+    - `on beforeAction\afterAction`
 
 ```php
 [
@@ -163,7 +179,7 @@ server {
             'level' => 3,
         ],
 
-        // 无名称函数
+        // 匿名函数
         function () {
             return new appcomponentsProfiler();
         }，
@@ -171,6 +187,12 @@ server {
         function () {
             return Yii::$app->getModule('user');
         },
+        #  log 组件一直被加载
+        'components' => [
+            'log' => [
+                    // "log" 组件的配置
+                ],
+         ],
 
         [
             'class' => ContentNegotiator::className(),
@@ -183,90 +205,89 @@ server {
                 'de',
             ],
         ],
+    ],
 
-        'defaultRoute' => 'main',
-        // 全拦截路由
-        'catchAll' => [
-            'offline/notice',
-            'param1' => 'value1',
-            'param2' => 'value2',
+    'defaultRoute' => 'main',
+    // 全拦截路由：第一项指定动作的路由，剩下的数组项(key-value 成对)指定传递给动作的参数
+    'catchAll' => [
+        'offline/notice',
+        'param1' => 'value1',
+        'param2' => 'value2',
+    ],
+
+    'components' => [
+        // 使用类名注册 "cache" 组件
+        'cache' => [
+            'class' => 'yiicachingFileCache',
+            // 'cache' => 'yiicachingApcCache',
+        ],
+        'user' => [
+            'identityClass' => 'appmodelsUser',
+            'enableAutoLogin' => true,
         ],
 
-        'components' => [
-            // 使用类名注册 "cache" 组件
-            'cache' => [
-                'class' => 'yiicachingFileCache',
-                // 'cache' => 'yiicachingApcCache',
-            ],
-            'user' => [
-                'identityClass' => 'appmodelsUser',
-                'enableAutoLogin' => true,
-            ],
-
-            // 使用配置数组注册 "db" 组件
-            'db' => [
-                'class' => 'yiidbConnection',
-                'dsn' => 'mysql:host=localhost;dbname=demo',
-                'username' => 'root',
-                'password' => '',
-            ],
-
-            // 使用函数注册"search" 组件
-            'search' => function () {
-                return new appcomponentsSolrService;
-            },
+        // 使用配置数组注册 "db" 组件
+        'db' => [
+            'class' => 'yiidbConnection',
+            'dsn' => 'mysql:host=localhost;dbname=demo',
+            'username' => 'root',
+            'password' => '',
         ],
 
-        'controllerMap' => [
-            [
-                'account' => 'appcontrollersUserController',
-                'article' => [
-                    'class' => 'appcontrollersPostController',
-                    'enableCsrfValidation' => false,
-                ],
-            ],
-        ],
+        // 使用函数注册"search" 组件
+        'search' => function () {
+            return new appcomponentsSolrService;
+        },
+    ],
 
-        'modules' => [
-            // "booking" 模块以及对应的类
-            'booking' => 'appmodulesbookingBookingModule',
-
-            // "comment" 模块以及对应的配置数组
-            'comment' => [
-                'class' => 'appmodulescommentCommentModule',
-                'db' => 'db',
-            ],
-        ],
-
-        'timeZone' => 'America/Los_Angeles',
-        'extensions' => [
+    'controllerMap' => [
         [
-            'name' => 'extension name',
-            'version' => 'version number',
-            'bootstrap' => 'BootstrapClassName',  // 可选配，可为配置数组
-            'alias' => [  // 可选配
-                '@alias1' => 'to/path1',
-                '@alias2' => 'to/path2',
+            'account' => 'app\controllers\UserController',
+            'article' => [
+                'class' => 'app\controllers\PostController',
+                'enableCsrfValidation' => false,
             ],
         ],
+    ],
 
-        // ... 更多像上面的扩展 ...
-        'on beforeRequest' => function ($event) {
-            // ...
-        },
-        'on beforeAction' => function ($event) {
-            if (some condition) {
-                $event->isValid = false;
-            } else {
-            }
-        },
-        'on afterAction' => function ($event) {
-            if (some condition) {
-                // 修改 $event->result
-            } else {
-            }
-        },
-    ]
+    'modules' => [
+        // "booking" 模块以及对应的类
+        'booking' => 'app\modules\booking\BookingModule',
+
+        // "comment" 模块以及对应的配置数组
+        'comment' => [
+            'class' => 'app\modules\comment\CommentModule',
+            'db' => 'db',
+        ],
+    ],
+
+    'timeZone' => 'America/Los_Angeles',
+    'extensions' => [
+    [
+        'name' => 'extension name',
+        'version' => 'version number',
+        'bootstrap' => 'BootstrapClassName',  // 可选配，可为配置数组
+        'alias' => [  // 可选配
+            '@alias1' => 'to/path1',
+            '@alias2' => 'to/path2',
+        ],
+    ],
+
+    // ... 更多像上面的扩展 ...
+    'on beforeRequest' => function ($event) {
+        // ...
+    },
+    'on beforeAction' => function ($event) {
+        if (some condition) {
+            $event->isValid = false;
+        } else {
+        }
+    },
+    # 
+    // \Yii::$app->on(\yii\base\Application::EVENT_BEFORE_REQUEST, function ($event) {
+    //     // ...
+    // });
+]
 
     if (YII_ENV_DEV) {
         // configuration adjustments for 'dev' environment
@@ -278,16 +299,59 @@ server {
     }
 ```
 
-## 模型
+## Component
 
-* 属性: 代表可像普通类属性或数组一样被访问的业务数据;yiibaseModel::attributes() 指定模型所拥有的属性。
-    - ContactForm 模型类有四个属性 name, email, subject and body， ContactForm 模型用来代表从 HTML 表单获取的输入数据
-* 属性标签: 指定属性显示出来的标签; username 转换为 Username， firstNam 转换为 First Name
+* Yii 的核心概念:注册 Component，实现一系列功能
+    - 每一个应用组件指定一个 key-value 对的数组，key 代表组件 ID， value 代表组件类名或配置
+    - 在应用中可以任意注册组件
+    - 服务定位器，它部署一组提供各种不同功能的应用组件来处理请求,通过表达式 `\Yii::$app->ComponentID` 全局访问
+    - 只会在第一次访问时实例化，如果处理请求过程没有访问的话就不实例化
+    - 如果像在每个请求处理过程都实例化某个组件即便不会被访问，将该组件ID加入到应用主体的 bootstrap 属性中
+* 三个用以区分它和其它类的主要功能有：比常规的对象（Object）稍微重量级一点，因为要使用额外的内存和 CPU 时间来处理 事件 和 行为 。 如果不需要这两项功能，可以继承 yii\base\Object
+    - 属性（Property）
+    - 事件（Event）将自定义代码“注入”到现有代码中的特定执行点
+        + 事件处理器是一个PHP 回调函数，当所附加到的事件被触发时它就会执行
+        + Triggering Events：通过调用 yii\base\Component::trigger() 方法触发，此方法须传递事件名
+        + Class-Level Event Handlers：通过调用静态方法 yii\base\Event::on() 在类级别附加处理器
+    - 行为（Behavior）
+        + 无须改变类继承关系即可增强一个已有的 组件 类功能。 当行为附加到组件后，它将“注入”它的方法和属性到组件， 然后可以像访问组件内定义的方法和属性一样访问它们
+        + 行为通过组件能响应被触发的事件，从而自定义或调整组件正常执行的代码
+        + 将行为中的事件handler绑定到类中去
+        + Behavior
+            * 行为类像普通类支持继承。另一方面，traits 可以视为 PHP 语言支持的复制粘贴功能， 它不支持继承。
+            * 行为无须修改组件类就可动态附加到组件或移除。 要使用 traits，必须修改使用它的类。
+            * 行为是可配置的，而 traits 则不可行。
+            * 行为可以通过响应事件来定制组件的代码执行。
+            * 当附属于同一组件的不同行为之间可能存在名称冲突时， 通过优先考虑附加到该组件的行为， 自动解决冲突。由不同 traits 引起的名称冲突需要通过 重命名受影响的属性或方法进行手动解决。
+        + Traits
+            * Traits 比行为更有效，因为行为是既需要时间又需要内存的对象。
+            * 因为 IDE 是一种本地语言结构，所以它们对 Traits 更友好。
+* 核心应用组件
+    - yii\i18n\Formatter: 格式化输出显示给终端用户的数据，例如数字可能要带分隔符， 日期使用长格式
+    - yii\i18n\I18N: 支持信息翻译和格式化
+    - yii\web\AssetManager: 管理资源包和资源发布
+    - yii\db\Connection: 代表一个可以执行数据库操作的数据库连接，注意配置该组件时必须指定组件类名和其他相关组件属性，如 yiidbConnection::dsn
+    - yii\web\ErrorHandler: 处理 PHP 错误和异常
+    - yii\log\Dispatcher: 管理日志对象
+    - yii\swiftmailer\Mailer: 支持生成邮件结构并发送
+    - yii\web\Request: 代表从终端用户处接收到的请求
+    - yii\web\Response: 代表发送给用户的响应
+    - yii\web\Session: 代表会话信息，仅在 yii\web\Application 网页应用中可用
+    - yii\web\UrlManager: 支持 URL 地址解析和创建
+    - yii\web\User: 代表认证登录用户信息，仅在 yii\web\Application 网页应用中可用
+    - yii\web\View: 支持渲染视图
+
+## Model
+
+* 代表业务数据、规则和逻辑的对象
+* 属性: 代表可像普通类属性或数组一样被访问的业务数据，yii\base\Model支持 ArrayAccess 数组访问 和 ArrayIterator 数组迭代器
+* 属性标签: 指定属性显示出来的标签 
+    - 默认情况下，属性标签通过yii\base\Model::generateAttributeLabel()方法自动从属性名生成. 它会自动将驼峰式大小写变量名转换为多个首字母大写的单词
+    - 自定义标签 可以覆盖 yii\base\Model::attributeLabels() 方法明确指定属性标签
 * 场景：模型支持的场景由模型中申明的 验证规则 来决定
-* 块赋值: 只用一行代码将用户所有输入填充到一个模型，将输入数据对应填充到 yiibaseModel::attributes 属性
-* 验证规则: 确保输入数据符合所申明的验证规则;
-* 数据导出: 允许模型数据导出为自定义格式的数组
-* ActiveRecord
+* 块赋值:一步给许多属性赋值，只应用在模型当前scenario 场景yii\base\Model::scenarios()方法 列出的称之为 安全属性 的属性上
+* 验证规则: 确保输入数据符合申明的验证规则
+* 数据导出: 模型数据导出为自定义格式的数组
 
 ```php
 namespace app/models;
@@ -350,6 +414,10 @@ class ContactForm extends Model
 }
 
 $model = new app/models/ContactForm;
+$model->scenario = 'login';
+
+// 场景通过构造初始化配置来设置
+$model = new User(['scenario' => 'login']);
 
 // 用户输入数据赋值到模型属性
 $model->attributes = Yii::$app->request->post('ContactForm');
@@ -366,44 +434,50 @@ if ($model->validate()) {
 2. use:$instance->newAttribute
 ```
 
-## component
+## Controller
 
-* yiiwebAssetManager: 管理资源包和资源发布
-* yiidbConnection: 代表一个可以执行数据库操作的数据库连接， 注意配置该组件时必须指定组件类名和其他相关组件属性，如 yiidbConnection::dsn
-* yiibaseApplication::errorHandler: 处理 PHP 错误和异常
-* yiii18nFormatter: 格式化输出显示给终端用户的数据，例如数字可能要带分隔符， 日期使用长格式
-* yiii18nI18N: 支持信息翻译和格式化
-* yiilogDispatcher: 管理日志对象
-* yiiswiftmailerMailer: 支持生成邮件结构并发送
-* yiibaseApplication::request: 代表从终端用户处接收到的请求
-* yiibaseApplication::response: 代表发送给用户的响应
-* yiiwebSession: 代表会话信息，仅在 yiiwebApplication 网页应用中可用
-* yiiwebUrlManager: 支持 URL 地址解析和创建
-* yiiwebUser: 代表认证登录用户信息，仅在 yiiwebApplication 网页应用中可用
-* yiiwebView: 支持渲染视图
-
-## 控制器
-
-*   控制器：很精练，包含的操作代码简短
-    -   article 对应 app/controllers/ArticleController;
-    -   post-comment 对应 app/controllers/PostCommentController;
-    -   admin/post-comment 对应 app/controllers/admin/PostCommentController;
-    -   adminPanels/post-comment 对应 app/controllers/adminPanels/PostCommentController.
-*   操作 ID：总是被以小写处理，如果一个操作 ID 由多个单词组成，单词之间将由连字符连接（如 create-comment）。
-    -   操作 ID 映射为方法名时移除了连字符，将每个单词首字母大写，并加上 action 前缀。 例子：操作 ID create-comment 相当于方法名 actionCreateComment。
-    -   默认操作默认为 index，如果想修改默认操作，只需简单地在控制器类中覆盖这个属性
-*   内联操作:独立操作通过继承 yiibaseAction 或它的子类来定义。 例如 Yii 发布的 yiiwebViewAction 和 yiiwebErrorAction 都是独立操作
-    -   通过控制器中覆盖 yiibaseController::actions()方法在 action map 中申明
-*   过滤器
-    -   beforeAction
-    -   afterAction
+* 控制器:从应用主体接管控制后会分析请求数据并传送到模型， 传送模型结果到视图，最后生成输出响应信息.逻辑实现层与展示层的结合
+    - post-comment:`app/controllers/PostCommentController`
+    - adminPanels/post-comment:`app/controllers/adminPanels/PostCommentController`
+* 路由 `ModuleID/ControllerID/ActionID`
+* ActionID：总是被以小写处理，如果由多个单词组成，单词之间将由连字符连接（如 create-comment）
+    - 操作 ID 映射为方法名时移除了连字符，将每个单词首字母大写，并加上 action 前缀。create-comment:actionCreateComment
+    - 默认操作为 index，如果想修改默认操作，只需简单地在控制器类中覆盖这个属性
+    - 参数类型限制路由中 id 数据类型
+* actions:继承yii\base\Action或它的子类来定义 覆盖 actions()方法
+* 过滤器: 控制器动作 执行之前或之后执行的对象. 在控制器类中覆盖它的 behaviors() 方法来声明过滤器
+    - 预过滤:按顺序执行应用主体中 behaviors()->模块中 behaviors()->控制器中 behaviors() 
+    - 成功通过预过滤后执行动作
+    - 后过滤:控制器中 behaviors() ->模块中 behaviors()->应用主体中 behaviors()
+    - 构建过滤器：继承 `yii\base\ActionFilter` 类并覆盖 beforeAction() 或 afterAction() 方法来创建动作的过滤器
+    - 常用过滤器
+        + AccessControl 提供基于 rules 规则的访问控制
+        +  HTTP Basic Auth\OAuth 2 认证一个用户
+        +  ContentNegotiator 支持响应内容格式处理和语言处理
+        +  PageCache 实现服务器端整个页面的缓存
+        +  RateLimiter 根据 漏桶算法 来实现速率限制,主要用在实现 RESTful APIs
+        +  VerbFilter 检查请求动作的 HTTP 请求方式是否允许执行
+        +  跨域资源共享 CORS 机制允许一个网页的许多资源（例如字体、JavaScript等）可以通过其他域名访问获取, Cors filter 应在授权/认证过滤器之前定义， 以保证 CORS 头部被发送
+* 周期
+    - 控制器创建和配置后，yii\base\Controller::init() 方法会被调用
+    - 控制器根据请求操作ID创建一个操作对象
+        + 如果操作ID没有指定，会使用default action ID默认操作ID
+        + 如果在action map找到操作ID， 会创建一个独立操作
+        + 如果操作ID对应操作方法，会创建一个内联操作
+        + 否则会抛出yii\base\InvalidRouteException异常
+    - 控制器按顺序调用应用主体、模块（如果控制器属于模块）、 控制器的 beforeAction() 方法
+        + 如果任意一个调用返回false，后面未调用的beforeAction()会跳过并且操作执行会被取消
+        + 默认情况下每个 beforeAction() 方法会触发一个 beforeAction 事件，在事件中你可以追加事件处理操作
+    - 控制器执行操作: 请求数据解析和填入到操作参数
+    - 控制器按顺序调用控制器、模块（如果控制器属于模块）、应用主体的 afterAction() 方法； 默认情况下每个 afterAction() 方法会触发一个 afterAction 事件， 在事件中可以追加事件处理操作
+    - 应用主体获取操作结果并赋值给响应 
 * yiifiltersCors 应在 授权 / 认证 过滤器之前定义，以保证CORS头部被发送。
 
 ```php
 namespace app/components;
 
 use Yii;
-use yiibaseActionFilter;
+use yii/baseAction/Filter;
 
 class ActionTimeFilter extends ActionFilter
 {
@@ -499,42 +573,50 @@ if ($model->load(Yii::$app->request->post()) && $model->save()) {
 }
 ```
 
-## 视图
+## View
 
-* 组织：@app/views/ControllerID 目录下
+* 通过 view 应用组件来管理 视图模板,配置
+    - 主题
+    - 片段缓存: 在Web页面中缓存片段；
+    - 客户脚本处理: 支持CSS 和 JavaScript 注册和渲染
+    - 资源包处理: 支持 资源包的注册和渲染
+    - 模板引擎: 允许使用其他模板引擎，如 Twig, Smarty
+* 组织：@app/views/ControllerID 目录下, 小部件 渲染的视图文件默认放在 WidgetPath/views 目录
 * 控制器中渲染
-    -   yiibaseController::render(): 渲染一个 视图名 并使用一个 布局 返回到渲染结果。
-    -   yiibaseController::renderPartial(): 渲染一个 视图名 并且不使用布局。
-    -   yiiwebController::renderAjax(): 渲染一个 视图名 并且不使用布局， 并注入所有注册的 JS/CSS 脚本和文件，通常使用在响应 AJAX 网页请求的情况下。
-    -   yiibaseController::renderFile(): 渲染一个视图文件目录或别名下的视图文件。
+    -   yiibaseController::render(): 渲染一个 视图名 并使用一个 布局 返回到渲染结果
+    -   yiibaseController::renderPartial(): 渲染一个视图名并且不使用布局
+    -   yiiwebController::renderAjax(): 渲染一个 视图名 并且不使用布局， 并注入所有注册的 JS/CSS 脚本和文件，通常使用在响应 AJAX 网页请求的情况下
+    -   yiibaseController::renderFile(): 渲染一个视图文件目录或别名下的视图文件
 * 视图中渲染
-    -   yiibaseView::render(): 渲染一个 视图名.
-    -   yiiwebView::renderAjax(): 渲染一个 视图名 并注入所有注册的 JS/CSS 脚本和文件，通常使用在响应 AJAX 网页请求的情况下。
+    -   yiibaseView::render(): 渲染一个 视图名
+    -   yiiwebView::renderAjax(): 渲染一个 视图名 并注入所有注册的 JS/CSS 脚本和文件，通常使用在响应 AJAX 网页请求的情况下
     -   yiibaseView::renderFile(): 渲染一个视图文件目录或别名下的视图文件。`<?= $this->render('_overview') ?>`
-*   视图名
+* 视图名
     -   视图名可省略文件扩展名，这种情况下使用 .php 作为扩展， 视图名 about 对应到 about.php 文件名
     -   视图名以双斜杠 // 开头，对应的视图文件路径为 @app/views/ViewName， 也就是说视图文件在 yiibaseApplication::viewPath 路径下找， 例如 //site/about 对应到 @app/views/site/about.php
     -   视图名以单斜杠/开始，视图文件路径以当前使用模块 的 yiibaseModule::viewPath 开始， 如果不存在模块，使用@app/views/ViewName 开始，例如，如果当前模块为 user， /user/create 对应成 @app/modules/user/views/user/create.php, 如果不在模块中，/user/create 对应@app/views/user/create.php
-*   数据
-    -   推送：渲染视图时传递参数
+* 数据
+    -   推送：通过视图渲染方法的第二个参数传递数据
     -   拉取：视图从 yiibaseView 视图组件或其他对象中主动获得数据(如 Yii::$app)， 在视图中使用如下表达式$this->context 可获取到控制器
     -   共享数据：视图组件提供 yiibaseView::params 参数属性来让不同视图共享数据
-*   布局
-    -   数据：
+* 布局: $content 变量代表当 `yii\base\Controller::render()` 控制器渲染方法调用时传递到布局的内容视图渲染结果
+    -   数据
         -   $this 对应和普通视图类似的 yiibaseView 视图组件
-        -   $content：包含调用 yiibaseController::render()方法渲染内容视图的结果。
-    -   嵌套布局
-*   视图事件
+        -   $content：包含调用 yiibaseController::render()方法渲染内容视图的结果
+    - 嵌套布局
+    - layout 可在不同层级（控制器、模块，应用）配置
+        + 如果控制器的 yii\base\Controller::$layout 属性不为空，使用它作为布局的值， 控制器的 module模块 作为上下文模块
+        + 如果 layout 为空，从控制器的祖先模块（包括应用） 开始找 第一个layout 属性不为空的模块，使用该模块作为上下文模块， 并将它的layout 的值作为布局的值， 如果都没有找到，表示不使用布局
+* 视图事件
     -   yiibaseView::EVENT_BEFORE_RENDER: 在控制器渲染文件开始时触发， 该事件可设置 yiibaseViewEvent::isValid 为 false 取消视图渲染。
     -   yiibaseView::EVENT_AFTER_RENDER: 在布局中调用 yiibaseView::beginPage() 时触发， 该事件可获取 yiibaseViewEvent::output 的渲染结果，可修改该属性来修改渲染结果。
     -   yiibaseView::EVENT_BEGIN_PAGE: 在布局调用 yiibaseView::beginPage() 时触发；
     -   yiibaseView::EVENT_END_PAGE: 在布局调用 yiibaseView::endPage() 是触发；
     -   yiiwebView::EVENT_BEGIN_BODY: 在布局调用 yiiwebView::beginBody() 时触发；
     -   yiiwebView::EVENT_END_BODY: 在布局调用 yiiwebView::endBody() 时触发。
-*   视图组件：components 中配置
-*   yiihelpersHtml
+* `yii\helpers\Html`
     -   encode:参数中可能隐含的恶意 JavaScript 代码导致跨站脚本（XSS）攻击,在页面进行处理
-    -   显示 HTML 内容，先调用 yiihelpersHtmlPurifier 过滤内容:保证输出数据安全上做的不错，但性能不佳，如果你的应用需要高性能可考虑 缓存 过滤后的结果。
+    -   显示 HTML 内容，先调用 yiihelpersHtmlPurifier 过滤内容:保证输出数据安全上做的不错，但性能不佳，如果你的应用需要高性能可考虑 缓存 过滤后的结果
 *   EntryForm：从用户那请求的数据
 
 ```php
@@ -550,6 +632,7 @@ if ($model->load(Yii::$app->request->post()) && $model->save()) {
 ...content of block1...
 
 <?php $this->endBlock(); ?>
+
 <?php if (isset($this->blocks['block2'])): ?>
     <?= $this->blocks['block2'] ?>
 <?php else: ?>
@@ -569,21 +652,17 @@ $this->registerLinkTag([
 ]);
 ```
 
-## 缓存
-
-* HttpCache利用Last-Modified 和 Etag HTTP头实现客户端缓存
-* PageCache实现服务器端整个页面的缓存
-
-## widget
+## Widget
 
 * 在 视图 中使用的可重用单元，使用面向对象方式创建复杂和可配置用户界面单元
-* 小部件是面向对象方式来重用视图代码
-* 创建小部件时仍需要遵循 MVC 模式，通常逻辑代码在小部件类，展示内容在视图中
-* 当小部件需要外部资源如 CSS, JavaScript图片等会比较棘手幸运的时候 Yii 提供资源包来解决这个问题
-* 小部件设计时应是独立的，也就是说使用一个小部件时候，可以直接丢弃它而不需要额外的处理
-
-ActiveForm
-Menu
+* 在视图中可调用 yii\base\Widget::widget() 方法使用小部件，使用 配置 数组初始化小部件并返回小部件渲染后的结果
+* 创建
+    - 继承 yii\base\Widget 类并覆盖 yii\base\Widget::init() 和/或 yii\base\Widget::run() 方法可创建小部件
+    - 通常 init() 方法处理小部件属性， run() 方法包含小部件生成渲染结果的代码
+    - 需要遵循 MVC 模式，通常逻辑代码在小部件类，展示内容在视图中
+* 需要外部资源如 CSS, JavaScript图片等会比较棘手幸运的时候 Yii 提供资源包来解决这个问题
+* 小部件设计时应是独立的：可以直接丢弃它而不需要额外的处理
+* `yii\widgets\ActiveForm`:能将在模型中声明的验证规则转化成客户端 JavaScript 脚本去执行验证
 
 ```php
 <?php
@@ -628,16 +707,14 @@ use appcomponentsHelloWidget;
 <?php HelloWidget::end(); ?>
 ```
 
-## Module
+## 模块（Modules）
 
-* 模块是独立的软件单元，由模型, 视图, 控制器和其他支持组件组成，
-* 终端用户可以访问在应用主体中已安装的模块的控制器，
-* 模块被当成小应用主体来看待，和应用主体不同的是， 模块不能单独部署，必须属于某个应用主体。
+* 模块是独立的软件单元，由模型, 视图, 控制器和其他支持组件组成
+* 终端用户可以访问在应用主体中已安装的模块的控制器
+* 模块被当成小应用主体来看待，和应用主体不同的是， 模块不能单独部署，必须属于某个应用主体
 * 模块中控制器的路由必须以模块ID开始，接下来为控制器ID和操作ID
-* 特性可分组，每个组包含一些强相关的特性， 每个特性组可以做成一个模块由特定的开发人员和开发组来开发和维护。
-
-* debug
-* gii
+* 特性可分组，每个组包含一些强相关的特性， 每个特性组可以做成一个模块由特定的开发人员和开发组来开发和维护
+* 模块可无限级嵌套，也就是说，模块可以包含另一个包含模块的模块
 
 ```php
 // 配置
@@ -654,33 +731,40 @@ $module = Yii::$app->getModule('forum');
 $module = Yii::$app->controller->module;
 ```
 
+## 缓存
+
+* HttpCache利用Last-Modified 和 Etag HTTP头实现客户端缓存
+* PageCache实现服务器端整个页面的缓存
+
 ## Asset
 
-* 前端资源管理：资源包指定为继承yiiwebAssetBundle的PHP类，要指定资源所在位置，包含哪些CSS和JavaScript文件以及和其他包的依赖关系。
-    - 源资源: 资源文件和PHP源代码放在一起，不能被Web直接访问.为了使用这些源资源，它们要拷贝到一个可Web访问的Web目录中 成为发布的资源,这个过程称为发布资源
+* 前端资源管理：资源包指定为继承 `yii\web\AssetBundle` 的PHP类，要指定资源所在位置，包含哪些CSS和JavaScript文件以及和其他包的依赖关系
+    - 源资源: 资源文件和PHP源代码放在一起，不能被Web直接访问
     - 发布资源: 资源文件放在可通过Web直接访问的Web目录中
     - 外部资源: 资源文件放在你的Web应用不同的Web服务器上
 * sourcePath: 指定包包含资源文件的根目录， 当资源文件不能被Web访问时该属性应设置
-* basePath: 指定包含资源包中资源文件并可Web访问的目录，当指定sourcePath 属性， 资源管理器 会发布包的资源到一个可Web访问并覆盖该属性
+* 
+* basePath: 指定包含资源包中资源文件并可Web访问的目录，当指定 sourcePath 属性， 资源管理器 会发布包的资源到一个可Web访问并覆盖该属性
 * baseUrl: 指定对应到yiiwebAssetBundle::basePath目录的URL
 * js: 一个包含该资源包JavaScript文件的数组
 * css: 一个包含该资源包JavaScript文件的数组
 * jsOptions: 当调用yiiwebView::registerJsFile()注册该包 每个 JavaScript文件时， 指定传递到该方法的选项。
 * cssOptions: 当调用yiiwebView::registerCssFile()注册该包 每个 css文件时， 指定传递到该方法的选项。
     - 有一定的先后顺序以避免属性覆盖
-* publish：发布该包资源文件到Web目录时 指定传递到该方法的选项，仅在指定了yiiwebAssetBundle::sourcePath属性时使用。
-* 使用包Bower 和/或 NPM管理
+* 发布资源:为了使用源资源，要拷贝到一个可Web访问的Web目录中 成为发布资源.发布该包资源文件到Web目录时 指定传递到该方法的选项，仅在指定了yiiwebAssetBundle::sourcePath属性时使用
+* 使用包 Bower 和/或 NPM管理
     - composer.json 文件将包列入require，应使用bower-asset/PackageName (Bower包) 或 npm-asset/PackageName (NPM包)来对应库
     - 创建一个资源包类并将你的应用或扩展要使用的JavaScript/CSS 文件列入到类中， 应设置 sourcePath 属性为@bower/jquery/dist
+* Composer asset 插件
 * 自定义：assetManager的应用组件实现[[yiiwebAssetManager] 来管理应用组件
-* 转换
+* 转换:对于 CSS 代码可使用 LESS 或 SCSS， 对于 JavaScript 可使用 TypeScript
 * 合并与压缩
-    - 找出应用中所有你想要合并和压缩的资源包，
-    - 将这些包分成一个或几个组，注意每个包只能属于其中一个组，
+    - 找出应用中所有想要合并和压缩的资源包
+    - 将这些包分成一个或几个组，注意每个包只能属于其中一个组
     - 合并/压缩每个组里CSS文件到一个文件，同样方式处理JavaScript文件，
-    - 为每个组定义新的资源包：
-        - 设置yiiwebAssetBundle::css 和 yiiwebAssetBundle::js 属性分别为压缩后的CSS和JavaScript文件；
-        - 自定义设置每个组内的资源包，设置资源包的yiiwebAssetBundle::css 和 yiiwebAssetBundle::js 属性为空, 并设置它们的 yiiwebAssetBundle::depends 属性为每个组新创建的资源包。
+    - 为每个组定义新的资源包
+        - 设置yiiwebAssetBundle::css 和 yiiwebAssetBundle::js 属性分别为压缩后的CSS和JavaScript文件
+        - 自定义设置每个组内的资源包，设置资源包的yiiwebAssetBundle::css 和 yiiwebAssetBundle::js 属性为空, 并设置它们的 yiiwebAssetBundle::depends 属性为每个组新创建的资源包
 * 命令：`yii asset/template assets.php`
 
 ```php
@@ -724,28 +808,41 @@ namespace frontend\assets;
 
 use yii\web\AssetBundle;
 
-/**
- * Main frontend application asset bundle.
- */
-class AppAsset extends AssetBundle
+class FontAwesomeAsset extends AssetBundle 
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
-    public $css = [
-        'css/site.css',
+    public $sourcePath = '@bower/font-awesome'; 
+    public $css = [ 
+        'css/font-awesome.min.css', 
     ];
-    public $js = [
-        'js/jquery.cookie.js',
+    public $publishOptions = [
+        'only' => [
+            'fonts/',
+            'css/',
+        ]
     ];
-    public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-    ];
-}
+} 
 
 // 使用
 use app/assets/AppAsset;
 AppAsset::register($this);  // $this 代表视图对象
+
+# 使用 asset-packagist 库
+#  composer.json
+"repositories": [
+    {
+        "type": "composer",
+        "url": "https://asset-packagist.org"
+    }
+]
+
+$config = [
+    ...
+    'aliases' => [
+        '@bower' => '@vendor/bower-asset',
+        '@npm'   => '@vendor/npm-asset',
+    ],
+    ...
+];
 ```
 
 ## RESTful
@@ -820,7 +917,37 @@ autoload -Uz compinit && compinit -i
 exec $SHELL -l
 ```
 
-## 数据库
+## DB
+
+* ActiveRecord：提供了一个面向对象的接口， 用以访问和操作数据库中的数据
+    - Active Record 类与数据库表关联， Active Record 实例对应于该表的一行， Active Record 实例的属性表示该行中特定列的值
+    - 可以访问 Active Record 属性并调用 Active Record 方法来访问和操作存储在数据库表中的数据， 而不用编写原始 SQL 语句
+    - Querying Data
+        +  yii\db\ActiveRecord::find() 方法创建一个新的查询生成器对象
+        +  查询生成器的构建方法来 构建查询
+        +  查询生成器的查询方法来取出数据到 Active Record 实例中
+            *  yii\db\ActiveRecord::findOne()：返回一个 Active Record 实例，填充于查询结果的第一行数据
+            *  yii\db\ActiveRecord::findAll()：返回一个 Active Record 实例的数据，填充于查询结果的全部数据
+            *  传参
+                -  标量值：当作主键去查询。 Yii 会通过读取数据库模式信息来识别主键列
+                -  标量值的数组：数组里的值都当作要查询的主键的值
+                -  关联数组：键值是表的列名，元素值是相应的要查询的条件值
+        +   yii\db\ActiveRecord::findBySql() 
+        +   批处理查询 来最小化内存使用
+    - Accessing Data:查询结果的每一行对应于单个 Active Record 实例,属性以表的列名命名
+        + Data Transformation：要输入或显示的数据是一种格式，而要将其存储在数据库中是另一种格式
+    - Saving Data
+    - Data Validation：因为 yii\db\ActiveRecord 继承于 yii\base\Model，共享相同的 输入验证 功能
+        + 可以通过重写 rules() 方法声明验证规则并执行
+        + 调用 save() 时，默认情况下会自动调用 validate()。 只有当验证通过时，它才会真正地保存数据; 否则将简单地返回 false， 您可以检查 errors 属性来获取验证过程的错误消息
+    - Massive Assignment
+    -  updateCounters() 更新一个或多个计数列
+    -  Dirty Attributes：如果一个属性的值已被修改，则会被认为是 脏，调用 save() 保存 Active Record 实例时，只有 脏属性 被保存
+*  transaction
+*  关联数据
+    -  声明关联关系（Declaring Relations）：关联方法必须这样命名：getXyz。然后通过 xyz（首字母小写）调用这个关联名
+    -  数组的值填的是主数据的列（当前要声明关联的 Active Record 类为主数据）， 而数组的键要填的是相关数据的列
+* JOIN 查询
 
 ```php
 self::find()
@@ -831,38 +958,74 @@ self::find()
     ->asArray()
     ->all();
 
-User::find()->one();  # 此方法返回一条数据；
-User::find()->all();  # 此方法返回所有数据；
-User::find()->count();  # 此方法返回记录的数量；
-User::find()->average();  # 此方法返回指定列的平均值；
-User::find()->min();  # 此方法返回指定列的最小值 ；
-User::find()->max();  # 此方法返回指定列的最大值 ；
-User::find()->scalar();  # 此方法返回值的第一行第一列的查询结果；
-User::find()->column();  # 此方法返回查询结果中的第一列的值；
-User::find()->exists();  # 此方法返回一个值指示是否包含查询结果的数据行；
-User::find()->batch(10);  # 每次取 10 条数据
-User::find()->each(10);  # 每次取 10 条数据， 迭代查询
-User::findOne($id);  # 此方法返回 主键 id=1 的一条数据(举个例子)；
+User::findOne(1);  # 返回 主键 id=1 的一条数据(举个例子)；
+User::findAll([100, 101, 123, 124]);
+User::findOne([
+    'id' => 123,
+    'status' => Customer::STATUS_ACTIVE,
+]);
 
-User::find()->where([‘name‘ => ‘小伙儿‘])->one();  # 此方法返回 [‘name‘ => ‘小伙儿‘] 的一条数据；
-User::find()->where([‘name‘ => ‘小伙儿‘])->all();  # 此方法返回 [‘name‘ => ‘小伙儿‘] 的所有数据；
-User::find()->andWhere([‘sex‘ => ‘男‘, ‘age‘ => ‘24‘])->count(‘id‘);  # 统计符合条件的总条数；
-User::find()->andFilterWhere([‘like‘, ‘name‘, ‘小伙儿‘]);  # 此方法是用 like 查询 name 等于 小伙儿的 数据
-User::find()->andFilterWhere(['>', 'id', 10]);  # 此方法是用 id > 10的 数据
+User::find()->count();  # 返回记录的数量；
+User::find()->average();  # 返回指定列的平均值；
+User::find()->min();  # 返回指定列的最小值 ；
+User::find()->max();  # 返回指定列的最大值 ；
+User::find()->scalar();  # 返回值的第一行第一列的查询结果；
+User::find()->column();  # 返回查询结果中的第一列的值；
+User::find()->exists();  # 返回一个值指示是否包含查询结果的数据行；
 
-User::find()->orderBy(‘id DESC‘)->all();  # 此方法是排序查询；
+// 每次获取 10 条客户数据
+foreach (Customer::find()->batch(10) as $customers) {
+    // $customers 是个最多拥有 10 条数据的数组
+}
+
+// 每次获取 10 条客户数据，然后一条一条迭代它们
+foreach (Customer::find()->each(10) as $customer) {
+    // $customer 是个 `Customer` 对象
+}
+
+// 贪婪加载模式的批处理查询
+foreach (Customer::find()->with('orders')->each() as $customer) {
+    // $customer 是个 `Customer` 对象，并附带关联的 `'orders'`
+}
+
+User::find()->where(['name' => '小伙儿'])->one();  # 返回 ['name' => '小伙儿'] 的一条数据；
+User::find()->where(['name' => '小伙儿'])->all();  # 返回 ['name' => '小伙儿'] 的所有数据；
+User::find()->andWhere(['sex' => '男', 'age' => '24'])->count('id');  # 统计符合条件的总条数；
+User::find()->andFilterWhere(['like', 'name', '小伙儿']);  # 用 like 查询 name 等于 小伙儿的 数据
+User::find()->andFilterWhere(['>', 'id', 10]);  # 用 id > 10的 数据
+
+User::find()->orderBy('id DESC')->all();  # 是排序查询；
 User::find()->select('count(*)')->where(['user_id' => $userId, 'status' => 0])->scalar();
 
-User::findBySql(‘SELECT * FROM user‘)->all();  # 此方法是用 sql 语句查询 user 表里面的所有数据；
-User::findBySql(‘SELECT * FROM user‘)->one();  # 此方法是用 sql 语句查询 user 表里面的一条数据；
+User::findBySql('SELECT * FROM user')->all();  # 是用 sql 语句查询 user 表里面的所有数据；
+User::findBySql('SELECT * FROM customer WHERE status=:user', [':status' => Customer::STATUS_INACTIVE])->all();
 
-geterrors
-save() # return bool
-```
+$values = [
+    'name' => 'James',
+    'email' => 'james@example.com',
+];
+$customer = new Customer();
+$customer->attributes = $values;
+$customer->save();
 
-### transaction
+save() 
+geterrors # return bool 获取错误信息
 
-```php
+// UPDATE `post` SET `view_count` = `view_count` + 1 WHERE `id` = 100
+$post->updateCounters(['view_count' => 1]);
+
+$customer = Customer::findOne(123);
+$customer->delete();
+
+
+$customer = Customer::findOne(123);
+
+Customer::getDb()->transaction(function($db) use ($customer) {
+    $customer->id = 200;
+    $customer->save();
+    // ...其他 DB 操作...
+});
+// 或者
 $transaction = $connection->beginTransaction();
 try {
     $connection->createCommand($sql1)->execute();
@@ -877,6 +1040,39 @@ try {
     throw $e;
 }
 # rollback 会占id
+
+# 一个客户可以有很多订单，而每个订单只有一个客户
+class Customer extends ActiveRecord
+{
+    // ...
+
+    public function getOrders()
+    {
+        return $this->hasMany(Order::className(), ['customer_id' => 'id']);
+    }
+
+    public function getBigOrders($threshold = 100) // 老司机的提醒：$threshold 参数一定一定要给个默认值
+    {
+        return $this->hasMany(Order::className(), ['customer_id' => 'id'])
+            ->where('subtotal > :threshold', [':threshold' => $threshold])
+            ->orderBy('id');
+    }
+}
+
+class Order extends ActiveRecord
+{
+    // ...
+
+    public function getCustomer()
+    {
+        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+    }
+}
+
+$customers = Customer::find()
+    ->joinWith('orders')
+    ->where(['order.status' => Order::STATUS_ACTIVE])
+    ->all();
 ```
 
 ## 安全
@@ -979,27 +1175,19 @@ browser reopen generate new cookie
 ## 源码
 
 * yii\base\Object:轻量级基类。表示基本的数据结构：init()
-* yii\base\Compontent：集成Object,进一步支持 事件与行为
+* yii\base\Compontent：继承Object,进一步支持 事件与行为
 * Path Alias:@开头
-* \yii\web\View:
+* \yii\web\View
 * yii\base\Model:rules scenarios
-* yii\web\Controller:return渲染内容，而非echo；
+* yii\web\Controller:return渲染内容，而非echo
 * yii\base\ActionFilter:动作过滤器
 * yii\base\Widget
-theme:
-console Application
 
 ```php
 $event = new \yii\base\Event;$compontent->trigger($eventName, $event);
 
 $compontent->on($eventName, $handler);
 ```
-
-## Yii1.1
-
-* route
-* cookie pass parameters
-* front get back parameters
 
 ## RBAC
 
@@ -1023,27 +1211,48 @@ $compontent->on($eventName, $handler);
 * config
 * use
 
-## 扩展
+## Extension
 
-* [yii2-httpclient](https://github.com/yiisoft/yii2-httpclient)
-* [yii2-authclient](https://github.com/yiisoft/yii2-authclient)
-* [yii2-queue](https://github.com/yiisoft/yii2-queue)
-* [yii2-coding-standards](https://github.com/yiisoft/yii2-coding-standards)
-* [yii2-collection](https://github.com/yiisoft/yii2-collection)
-* [yii2-redis](https://github.com/yiisoft/yii2-redis)
-* [yii2-bootstrap](https://github.com/yiisoft/yii2-bootstrap)
-* [yii2-shell](https://github.com/yiisoft/yii2-shell)
-* [yii2-bootstrap4](https://github.com/yiisoft/yii2-bootstrap4)
-* [yiisoft/log](https://github.com/yiisoft/log)
-* [yii2-elasticsearch](https://github.com/yiisoft/yii2-elasticsearch)
-* [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
-* [2amigos/yii2-file-upload-widget](https://github.com/2amigos/yii2-file-upload-widget):BlueImp File Upload Widget for Yii2
-* [yii2-ace-admin](https://github.com/myloveGy/yii2-ace-admin) `composer require dmstr/yii2-adminlte-asset`
-
+* 随时可拿来使用的， 并可重发布的软件包
+* 创建
+    - 按照 Composer package 的条款创建扩展
+    - 包名 myname/yii2-mywidget
+    - 包类型  yii2-extension
+    - 依赖: 肯定有 yiisoft/yii2
+* 列表
+    - [yiisoft / yii2-gii](https://github.com/yiisoft/yii2-gii):Yii 2 Gii Extension
+    - [yiisoft/yii2-debug](https://github.com/yiisoft/yii2-debug):Debug Extension for Yii 2 http://www.yiiframework.com
+    - [yii2-httpclient](https://github.com/yiisoft/yii2-httpclient)
+    - [yii2-authclient](https://github.com/yiisoft/yii2-authclient)
+    - [yii2-queue](https://github.com/yiisoft/yii2-queue)
+    - [yii2-coding-standards](https://github.com/yiisoft/yii2-coding-standards)
+    - [yii2-collection](https://github.com/yiisoft/yii2-collection)
+    - [yii2-redis](https://github.com/yiisoft/yii2-redis)
+    - [yii2-bootstrap](https://github.com/yiisoft/yii2-bootstrap)
+    - [yii2-shell](https://github.com/yiisoft/yii2-shell)
+    - [yii2-bootstrap4](https://github.com/yiisoft/yii2-bootstrap4)
+    - [yiisoft/log](https://github.com/yiisoft/log)
+    - [yii2-elasticsearch](https://github.com/yiisoft/yii2-elasticsearch)
+    - [yiisoft / yii2-sphinx](https://github.com/yiisoft/yii2-sphinx):Yii 2 Sphinx extension. http://www.yiiframework.com
+    - [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
+    - [2amigos/yii2-file-upload-widget](https://github.com/2amigos/yii2-file-upload-widget):BlueImp File Upload Widget for Yii2
+    - [yii2-ace-admin](https://github.com/myloveGy/yii2-ace-admin) `composer require dmstr/yii2-adminlte-asset`
+    - [yiisoft / yii2-docker](https://github.com/yiisoft/yii2-docker):Official Docker images suitable for Yii 2.0 https://www.yiiframework.com/
 
 ```sh
 composer require --prefer-dist yiisoft/yii2-sphinx
 ```
+
+## Yii1.1
+
+* route
+* cookie pass parameters
+* front get back parameters
+
+## Yii3
+
+* [yiisoft / yii-dev-tool](https://github.com/yiisoft/yii-dev-tool):Development environment for Yii 3 packages https://www.yiiframework.com/
+* [yiisoft / docs](https://github.com/yiisoft/docs):Various Yii 3.0 related documentation http://www.yiiframework.com
 
 ## 项目
 
@@ -1061,6 +1270,7 @@ composer require --prefer-dist yiisoft/yii2-sphinx
 * [深入理解 Yii2.0](http://www.digpage.com/index.html) https://www.kancloud.cn/kancloud/yii-in-depth
 * [CraryPrimitiveMan/yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
 * [CraryPrimitiveMan/OnlineCourses](https://github.com/CraryPrimitiveMan/OnlineCourses):An online courses website based on yii2
+
 * [多语言版本切换](https://blog.csdn.net/u012979009/article/details/51697969)
 * [RESTful API 快速搭建教程](https://www.yiichina.com/tutorial/1606)
 * [RESTful API 认证教程](https://www.yiichina.com/tutorial/1770)

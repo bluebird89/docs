@@ -47,6 +47,11 @@
 
 编程的核心在于通过各种各样的算法去实现具体的业务逻辑，把繁杂的过程抽象化、可计算化。从纯粹软件的角度讲，甚至可以说：算法 + 数据 == 计算机程序。
 
+* 数据结构和算法
+* 计算机网络
+* 操作系统
+* 设计模式
+
 ## 方法
 
 * 请千万不要用“复制”-“粘贴”把代码从页面粘贴到你自己的电脑上。写程序也讲究一个感觉，你需要一个字母一个字母地把代码自己敲进去，在敲代码的过程中，初学者经常会敲错代码：拼写不对，大小写不对，混用中英文标点，混用空格和Tab键，所以，你需要仔细地检查、对照，才能以最快的速度掌握如何写程序。
@@ -83,6 +88,10 @@
 * [unisonweb/unison](https://github.com/unisonweb/unison):Next generation programming language, currently in development http://unisonweb.org
 * [vlang/v](https://github.com/vlang/v):Simple, fast, safe, compiled language for developing maintainable software. Compiles itself in <1s with zero dependencies. 1.0 release in December 2019. https://vlang.io
 * [taichi-dev/taichi](https://github.com/taichi-dev/taichi):The Taichi programming language http://taichi.graphics
+* [cisco/ChezScheme](https://github.com/cisco/ChezScheme) Chez Scheme is both a programming language and an implementation of that language, with supporting tools and documentation.
+* [crystal-lang/crystal](https://github.com/crystal-lang/crystal) The Crystal Programming Language https://crystal-lang.org
+* [JuliaLang/julia](https://github.com/JuliaLang/julia) The Julia Language: A fresh approach to technical computing. https://julialang.org/
+
 
 ## 资源
 

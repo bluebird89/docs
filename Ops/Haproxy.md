@@ -2,7 +2,6 @@
 
 HAProxy Load Balancer's development branch http://www.haproxy.org
 
-
 ## docker
 
 ```

@@ -167,6 +167,7 @@ termianl1:bl + tab
 ## database
 
 * [bigchaindb/bigchaindb](https://github.com/bigchaindb/bigchaindb):Meet BigchainDB. The blockchain database. https://www.bigchaindb.com/
+* [EOSIO/eos](https://github.com/EOSIO/eos):An open source smart contract platform https://eosio.github.io/eos/
 
 ## 图书
 
