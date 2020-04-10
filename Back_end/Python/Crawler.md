@@ -2,12 +2,12 @@
 
 ## 知识点
 
-数据解析
-到数据存储
-模拟登陆
-验证码识别
-代理IP使用
-并发请求
+* 数据解析
+* 到数据存储
+* 模拟登陆
+* 验证码识别
+* 代理IP使用
+* 并发请求
 
 ### 爬虫协议
 
@@ -58,7 +58,8 @@ http://www.runoob.com/xpath/xpath-tutorial.html
 * [MontFerret/ferret](https://github.com/MontFerret/ferret):Declarative web scraping
 * [modood/Administrative-divisions-of-China](https://github.com/modood/Administrative-divisions-of-China):中华人民共和国行政区划：省级（省份直辖市自治区）、 地级（城市）、 县级（区县）、 乡级（乡镇街道）、 村级（村委会居委会） ，中国省市区镇村二级三级四级五级联动地址数据 Node.js 爬虫。
 * [XuefengHuang/lianjia-scrawler](https://github.com/XuefengHuang/lianjia-scrawler):链家二手房租房在线数据，存量房交易服务平台数据，详细数据分析教程 http://www.ershoufangdata.com
-* [wonderfulsuccess/weixin_crawler](https://github.com/wonderfulsuccess/weixin_crawler):高效微信公众号历史文章和阅读数据爬虫powered by scrapy 
+* [wonderfulsuccess/weixin_crawler](https://github.com/wonderfulsuccess/weixin_crawler):高效微信公众号历史文章和阅读数据爬虫powered by scrapy
+* [ hardikvasa / google-images-download ](https://github.com/hardikvasa/google-images-download):Python Script to download hundreds of images from 'Google Images'. It is a ready-to-run code!
 
 ## 工具
 

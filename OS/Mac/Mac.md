@@ -285,6 +285,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - strace在linux下用来跟踪某个进程的系统调用，dtruss
 * [JadenGeller/Helium](https://github.com/JadenGeller/Helium):A floating browser window for OS X <http://heliumfloats.com>
 * elpass
+* 迷你天气：macOS 天气应用，在 Dock 栏知实时天气
 
 ### screensavers
 

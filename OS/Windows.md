@@ -19,6 +19,7 @@ Windows是最烂的开发平台
 * 本地搜索
   - [Listary](https://www.listary.com/) :Windows 文件浏览增强工具 极速的文件和APP搜索工具，可大幅度提高打开文件和app的速度
   - Everything
+  - [火柴](https://huochaipro.com/)
 * Notepad++
 * 工具：ShareX
 * 同步工具：goodsync
@@ -65,6 +66,9 @@ Windows是最烂的开发平台
 * Media Player Classic 媒体播放
 * EasyBCD 2.3：多系统引导文件管理
 * [microsoft/PowerToys](https://github.com/microsoft/PowerToys):Windows system utilities to maximize productivity
+  - Window Walker 直接输入软件的名字来进行准确定位, Ctrl+Win 徽标键即可打开
+  - 批量调节图片尺寸
+* [xmeters](https://entropy6.com/xmeters/):Taskbar System Stats for Windows
 
 ```sh
 ## 安装 choco 以管理员运行cmd
