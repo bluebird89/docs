@@ -1644,6 +1644,7 @@ ccache gcc foo.c
     - [ack](https://beyondgrep.com/)、[ag](https://github.com/ggreer/the_silver_searcher)和 [rg](https://github.com/BurntSushi/ripgrep)是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到配置在 .gitignore 中的规则
     - [fzf](https://github.com/junegunn/fzf) cherry_blossom A command-line fuzzy finder `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install`
     - [fd](https://github.com/sharkdp/fd) A simple, fast and user-friendly alternative to 'find' 一个比 find 更简单更快的命令，会自动地忽略掉一些配置在 .gitignore 中的文件，以及 .git 下的文件
+    - [ ggreer / the_silver_searcher ](https://github.com/ggreer/the_silver_searcher):A code-searching tool similar to ack, but faster. http://geoff.greer.fm/ag/
 * monitor
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序的
     - [sqshq / sampler ](https://github.com/sqshq/sampler):Tool for shell commands execution, visualization and alerting. Configured with a simple YAML file. https://sampler.dev
@@ -1728,7 +1729,7 @@ ccache gcc foo.c
 * ccache：高速C/C++编译缓存工具，反复编译内核非常有用。使用起来也非常方便
 * neovim: 替代vim
 * script/scriptreplay: 终端会话录制
-* [Hyper](https://hyper.is)
+* [Hyper](https://hyper.is):create a beautiful and extensible experience for command-line interface users, built on open web standards
 * 配置
     - [direnv/direnv](https://github.com/direnv/direnv):Unclutter your .profile http://direnv.net
 
