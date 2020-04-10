@@ -219,6 +219,17 @@ const bgDataURL = $('#testCanvas-content')[0].value
 $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
 ```
 
+## 资源
+
+* [unsplash](https://unsplash.com/):Photos for everyone
+* [天空之城](https://www.skypixel.com/):一个专注于航拍影像的网站
+* [1x](https://1x.com/):摄影网站，作品质量极高。
+* [LFI](http://lfi-online.de/ceemes/en/gallery/):徕卡旗下的作品廊
+* [500px](https://500px.com/popular)
+* [Pixelmator](http://www.pixelmator.com):图像处理软件
+* [GIPHY](https://giphy.com/):寻找动图好去处。
+* [Beautiful Royalty-Free Photos Sorted By AI](https://www.pickpik.com)
+
 ## 工具
 
 * [IMageMagick](https://imagemagick.cn/)
@@ -248,17 +259,8 @@ $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
 * [ImageOptim/ImageOptim](https://github.com/ImageOptim/ImageOptim):GUI image optimizer for Mac https://imageoptim.com/mac
 * [illuminations](https://illuminations.nctm.org):在线画图网站
 * [uPic](link): Mac 图床 (文件) 上传客户端，它可以将图片、各种文件上传到配置好的指定对象存储中，然后即时生成可供互联网访问的文件 URL,支持图床： smms、 又拍云 USS、七牛云 KODO、 阿里云 OSS、 腾讯云 COS、微博、Github、 Gitee、 Amazon S3、自定义上传接口
-
-## 资源
-
-* [unsplash](https://unsplash.com/):Photos for everyone
-* [天空之城](https://www.skypixel.com/):一个专注于航拍影像的网站
-* [1x](https://1x.com/):摄影网站，作品质量极高。
-* [LFI](http://lfi-online.de/ceemes/en/gallery/):徕卡旗下的作品廊
-* [500px](https://500px.com/popular)
-* [Pixelmator](http://www.pixelmator.com):图像处理软件
-* [GIPHY](https://giphy.com/):寻找动图好去处。
-* [Beautiful Royalty-Free Photos Sorted By AI](https://www.pickpik.com)
+* Inpaint:图片去水印
+* [snipaste](https://www.snipaste.com/):a simple but powerful snipping tool, and also allows you to pin the screenshot back onto the screen
 
 ## 参考
 
