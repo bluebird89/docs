@@ -6,6 +6,10 @@
         +   [harababurel/gcsf](https://github.com/harababurel/gcsf):a FUSE file system based on Google Drive
     +   [icloud](https://www.icloud.com/)
     +   [juicefs](https://juicefs.io/):为云端设计的 POSIX 共享文件系统
+    +   40GB 空间以下选阿里云的 OSS
+    +   40GB 以上可以对比下腾讯云的 COS
+    +   华为云的 OBS。
+    +   国外服务商，请优先选择 BackBlaze，性价比完爆 AWS、MS、Google
     + 百度云
         * [Pan](https://pandownload.com)
         * [acgotaku/BaiduExporter](https://github.com/acgotaku/BaiduExporter):Assistant for Baidu to export download links to aria2/aria2-rpc
@@ -14,7 +18,7 @@
     + [坚果云](https://www.jianguoyun.com/)
     + [数蚁](https://teamyi.com)
     + [nextcloud/server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data https://nextcloud.com
-    - [Resilio](link)
+    - [Resilio](https://www.resilio.com/):在几台不同的设备之间同步文件,是一种分布式网盘  `config.getsync.com/sync.conf `
 * 服务
     - [syncthing/syncthing](https://github.com/syncthing/syncthing):Open Source Continuous File Synchronization https://forum.syncthing.net/
     - [chrislusf/seaweedfs](https://github.com/chrislusf/seaweedfs):SeaweedFS is a simple and highly scalable distributed file system. There are two objectives: to store billions of files! to serve the files fast! SeaweedFS implements an object store with O(1) disk seek, and an optional Filer with POSIX interface.
@@ -49,3 +53,4 @@ sha256sum /path/filename
 * [nextcloud/server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data https://nextcloud.com
 * [Unison ](https://www.cis.upenn.edu/~bcpierce/unison/):File Synchronizer
 * [minio/minio](https://github.com/minio/minio):MinIO is a high performance object storage server compatible with Amazon S3 APIs https://min.io/download
+* [openmediavault](https://www.openmediavault.org/): the next generation network attached storage (NAS) solution based on Debian Linux. It contains services like SSH, (S)FTP, SMB/CIFS, DAAP media server, RSync, BitTorrent client and many more.

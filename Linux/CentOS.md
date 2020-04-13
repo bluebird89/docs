@@ -11,16 +11,48 @@
 
 * 默认使用的是firewall作为防火墙，使用iptables必须重新设置一下
 * iptables 设置端口暴露
+* 参数
+  - –zone #作用域
+    + drop: 丢弃所有进入的包，而不给出任何响应
+    + block: 拒绝所有外部发起的连接，允许内部发起的连接
+    + public: 允许指定的进入连接
+    + external: 同上，对伪装的进入连接，一般用于路由转发
+    + dmz: 允许受限制的进入连接
+    + work: 允许受信任的计算机被限制的进入连接，类似 workgroup
+    + home: 同上，类似 homegroup
+    + internal: 同上，范围针对所有互联网用户
+    + trusted: 信任所有连接
+  - –add-port=80/tcp #添加端口，格式为：端口/通讯协议
+  - –permanent #永久生效，没有此参数重启后失效
+* 
 
 ```sh
 # Centos 7 firewall 命令
-systemctl status|stop|disable firewalld.service # 停止|禁止firewall开机启动
+systemctl status|start｜stop|enable|disable firewalld.service # 停止|禁止firewall开机启动
 
-firewall-cmd --list-ports # 查看端口
+firewall-cmd --list-ports|state # 查看
 firewall-cmd --zone=public --add-port=80/tcp --permanent # 永久生效(没有此参数重启后失效)
-–zone #作用域
-–add-port=80/tcp #添加端口，格式为：端口/通讯协议
-–permanent #永久生效，没有此参数重启后失效
+firewall-cmd --add-port=8181/tcp --permanent # 追加一个8181端口，永久有效
+firewall-cmd --add-port=6000-6600/tcp # 追加一段端口范围
+firewall-cmd --add-service=ftp # 开放 ftp 服务
+firewall-cmd --zone=public --add-interface=eth0 --permanent # 添加eth0 接口至 public 信任等级，永久有效
+# 配置 public zone 的端口转发
+firewall-cmd --zone=public --add-masquerade
+# 然后转发 tcp 22 端口至 9527
+firewall-cmd --zone=public --add-forward-port=port=22:proto=tcp:toport=9527
+# 转发 22 端口数据至另一个 ip 的相同端口上
+firewall-cmd --zone=public --add-forward-port=port=22:proto=tcp:toaddr=192.168.1.123
+# 转发 22 端口数据至另一 ip 的 9527 端口上
+firewall-cmd --zone=public --add-forward-port=port=22:proto=tcp:toport=9527:toaddr=192.168.1.100
+
+
+firewall-cmd --permanent --add-rich-rule="rule family='ipv4' source address='192.168.1.123' reject" # IP 封禁
+firewall-cmd --permanent --zone=public --new-ipset=blacklist --type=hash:ip # 通过 ipset 来封禁 ip
+firewall-cmd --permanent --zone=public --ipset=blacklist --add-entry=192.168.1.123
+firewall-cmd --permanent --zone=public --new-ipset=blacklist --type=hash:net # 封禁网段
+firewall-cmd --permanent --zone=public --ipset=blacklist --add-entry=192.168.1.0/24
+firewall-cmd --permanent --zone=public --new-ipset-from-file=/path/blacklist.xml # 倒入 ipset 规则 blacklist，然后封禁 blacklist
+firewall-cmd --permanent --zone=public --add-rich-rule='rule source ipset=blacklist drop'
 
 firewall-cmd --reload #重启firewall
 
@@ -108,11 +140,8 @@ systemctl start|stop|restart|enable httpd.service  #设置开机启动
 ```sh
 yum-config-manager
 
-yum install vim
-yum install git
+yum install vim git net-tools  epel-release
 yum provides ifconfig
-yum install net-tools
-sudo yum install epel-release # add the CentOS 7 EPEL repository
 ```
 
 ## nginx
@@ -372,3 +401,63 @@ cd swoole-src-2.1.1　　#文件夹名称可能不一样
 make && make install
 ```
 
+## BBR
+
+```sh
+cat /etc/redhat-release # 大于7.3即可
+
+# 自动脚本
+
+wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+curl -O https://raw.githubusercontent.com/teddysun/across/master/bbr.sh && sh bbr.sh
+wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+
+# 手动
+# yum install curl wget vim net-tools iproute2 openssh-server openssh python3 python3-pip -y
+rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org # 导入公钥
+rpm -Uvh https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm # 安装elrepo并升级内核
+yum --enablerepo=elrepo-kernel install kernel-ml -y # 安装内核
+
+rpm -qa | grep kernel # 查看已安装内核
+
+# 删除旧内核版本
+rpm -ev kernel-3.10.0-1062.el7.x86_64
+rpm -ev kernel-3.10.0-1062.12.1.el7.x86_64
+# rpm -ev kernel-3.10.0-1062.18.1.el7.x86_64
+rpm -ev kernel-devel-3.10.0-1062.18.1.el7.x86_64
+
+# /BOOT/GRUB/GRUB.CONF NOT FOUND   /BOOT/GRUB2/GRUB.CFG NOT FOUND
+yum install -y grub # /boot/grub/grub.conf 缺失
+grub-mkconfig -o /boot/grub/grub.conf
+
+yum install -y grub2 # /boot/grub2/grub.cfg 缺失
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \' 
+awk -F\' '$1=="menuentry " {print i++ " : " $2}' /etc/grub2.cfg
+
+0 : CentOS Linux (4.19.0-1.el7.elrepo.x86_64) 7 (Core)
+1 : CentOS Linux 7 Rescue ee7953a3b5944053a26f29daf8c71e2f (3.10.0-862.14.4.el7.x86_64)
+2 : CentOS Linux (3.10.0-862.14.4.el7.x86_64) 7 (Core)
+3 : CentOS Linux (3.10.0-862.3.2.el7.x86_64) 7 (Core)
+4 : CentOS Linux (3.10.0-862.el7.x86_64) 7 (Core)
+5 : CentOS Linux (0-rescue-4bbda2095d924b72b05507b68bd509f0) 7 (Core)
+
+grub2-set-default 0   # 更新grub文件并重启 由于序号从0开始，设置需要的内核为启动项
+reboot
+
+lsmod | grep bbr
+modprobe tcp_bbr
+
+uname -r # 是否已更换为4.9
+echo "tcp_bbr" >> /etc/modules-load.d/modules.conf
+echo 'net.core.default_qdisc=fq' >> /etc/sysctl.conf  
+echo 'net.ipv4.tcp_congestion_control=bbr' >> /etc/sysctl.conf  
+sysctl -p
+
+# 验证
+sysctl net.ipv4.tcp_available_congestion_control # net.ipv4.tcp_available_congestion_control = reno cubic bbr
+sysctl net.ipv4.tcp_congestion_control # net.ipv4.tcp_congestion_control = bbr
+
+dd if=/dev/zero of=500mb.zip bs=1024k count=500 # 访问 http://[your-server-IP]/500mb.zip 来测试下载速度
+```

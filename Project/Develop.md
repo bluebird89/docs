@@ -54,10 +54,6 @@
 * 培训工程师的生产技能。 我还不知道这样做能有多大的效果，但我认为，我们作为一个行业，甚至没有在这方面进行尝试（我也把自己包括在内）。
 * 生产力不能为不良行为开脱
 
-## 参考
-
-* [18F/development-guide](https://github.com/18F/development-guide):A set of guidelines and best practices for an awesome engineering team
-
 ## 开发
 
 * [easychen/howto-make-more-money](https://github.com/easychen/howto-make-more-money):程序员如何优雅的挣零花钱
@@ -70,3 +66,7 @@
 ## 工具
 
 * [Semantic Versioning](https://semver.org/)
+
+## 参考
+
+* [18F/development-guide](https://github.com/18F/development-guide):A set of guidelines and best practices for an awesome engineering team

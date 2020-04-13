@@ -1,4 +1,4 @@
-# PVN
+# PVN （Virtual Private Network）
 
 虚拟专用网络
 
@@ -36,6 +36,10 @@ brew cask install shadowsocksx
     "fast_open": false
 }
 ```
+
+## V2ray
+
+通过nginx的负载均衡功能，来自web访问的流量就直接访问到网站，而通过v2ray来的流量就通过v2ray的服务端转发，实现KX代理的功能
 
 ## OpenVPN
 
@@ -141,10 +145,10 @@ pip install shadowsocks
 
 ## [wireguard](https://www.wireguard.com/)
 
-一个易于配置、快速且安全的开源 VPN，它利用了最新的加密技术。目的是提供一种更快、更简单、更精简的通用 VPN，它可以轻松地在树莓派这类低端设备到高端服务器上部署
+一个易于配置、快速且安全的开源 VPN，利用了最新的加密技术。目的是提供一种更快、更简单、更精简的通用 VPN，可以轻松地在树莓派这类低端设备到高端服务器上部署
 
 * 跨平台
-* 易于[部署](https://www.linode.com/docs/networking/vpn/set-up-wireguard-vpn-on-ubuntu/)
+* 易于[部署](https://www.linode.com/docs/networking/vpn/set-up-wireguard-vpn-on-ubuntu/) <https://teddysun.com/554.html>
 * 运行在内核空间(可以将 WireGuard 作为内核模块安装在 Linux 中)，因此可以高速提供安全的网络
 
 ### 服务

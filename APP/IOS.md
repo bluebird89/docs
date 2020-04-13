@@ -39,6 +39,7 @@
     - 点击红点旁边那个箭头, 选择 iPhone
 * shortcut
     - https://shortcuts.sspai.com/#/main/workflow
+* 将 iPhone 转到横排模式就可以 科学计算器
 
 ## UI
 
