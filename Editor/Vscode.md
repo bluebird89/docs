@@ -287,6 +287,7 @@ code --disable-extensions . # disable all extensions
 ## 工具
 
 * [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/
+* [eclipse-theia / theia](https://github.com/eclipse-theia/theia):Eclipse Theia is a cloud & desktop IDE framework implemented in TypeScript. http://theia-ide.org
 
 ## 參考
 

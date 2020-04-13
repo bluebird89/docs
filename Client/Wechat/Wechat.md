@@ -1,12 +1,9 @@
 # wechat
 
 * 浏览器为单窗口
-
-同一个微信开放平台下的客户端（包括小程序），用户的unioId是唯一的，openId各不相同
+* 同一个微信开放平台下的客户端（包括小程序），用户的unioId是唯一的，openId各不相同
 
 ## git 服务器搭建
-
-git：git8899
 
 ## 配置开发者模式
 
@@ -90,8 +87,6 @@ echo $access_token_data->access_token;
 ```
 
 ## platform
-
-微信生态的构建
 
 * [开放平台](https://open.weixin.qq.com/)
 * [公众平台](https://mp.weixin.qq.com/):公众号、小程序

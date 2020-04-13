@@ -1201,6 +1201,18 @@ diff -Naur sources-orig/ sources-fixed/ >myfixes.patch # 参数 -N 代表如果�
   - -g 输出 IPv4 和 IPv6 的多播组信息
   - -i 打印网络接口信息
   - -v|verbose shows Active Internet connections and Active UNIX domain sockets without server information.
+* [google / bbr](https://github.com/google/bbr) TCP BBR（Bottleneck Bandwidth and Round-trip propagation time）由Google设计，于2016年发布的拥塞算法
+  - 传统 TCP 拥塞控制算法，基于丢包反馈的协议（基于丢包来作为降低传输速率的信号），而BBR则基于模型主动探测
+    + 基于「丢包反馈」的协议是一种 被动式 的拥塞控制机制，其依据网络中的丢包事件来做网络拥塞判断。即便网络中的负载很高时，只要没有产生拥塞丢包，协议就不会主动降低自己的发送速度。
+    + 这种协议可以最大程度的利用网络剩余带宽，提高吞吐量。然而，由于基于丢包反馈协议在网络近饱和状态下所表现出来的侵略性，一方面大大提高了网络的带宽利用率；但另一方面，对于基于丢包反馈的拥塞控制协议来说，大大提高网络利用率同时意味着下一次拥塞丢包事件为期不远了，所以这些协议在提高网络带宽利用率的同时也间接加大了网络的丢包率，造成整个网络的抖动性加剧
+    + 丢包并不总是拥塞导致，丢包可能原因是多方面，比如：
+      * 全球最牛的防火墙 GWF 的随机丢包策略
+      * 网路中由于多路径衰落（multi-path fading）所造成的信号衰减（signal degradation）
+      * 通道阻塞造成的丢包（packet drop），再者损坏的封包（corrupted packets）被拒绝通过
+      * 有缺陷的网路硬件、网路驱动软件发生故障
+      * 信号的信噪比（SNR）的影响
+  - 该算法使用网络最近出站数据分组当时的最大带宽和往返时间来创建网络的显式模型。数据包传输的每个累积或选择性确认用于生成记录在数据包传输过程和确认返回期间的时间内所传送数据量的采样率
+  - 从 4.9 开始，Linux 内核已经用上了该算法，并且对于QUIC可用
 
 ```sh
 # /etc/sysctl.conf
@@ -2042,6 +2054,12 @@ ChallengeResponseAuthentication no
 PermitRootLogin no|yes|without-password  ## restrict the root login to only be permitted via SSH keys, no:禁止root通过ssh登录
 
 sudo systemctl reload sshd.service
+
+# ~/.ssh/config  复用  SSH 连接
+Host *
+    ControlMaster auto
+    ControlPath /tmp/ssh_mux_%h_%p_%r
+    ControlPersist 86400
 ```
 
 ## [Openssl](https://www.openssl.org/)
@@ -3119,9 +3137,6 @@ sed -e :a -e ‘/^\n*$/N;/\n$/ba’ # 同上，但只对 gsed 3.02.*有效
 # 删除每个段落的最后一行
 sed -n ‘/^$/{p;h;};/./{x;/./p;}’
 
-特殊应用：
-——–
-
 # 移除手册页（man page）中的nroff标记。在Unix System V或bash shell下使
 # 用’echo’命令时可能需要加上 -e 选项。
 sed “s/.`echo \\\b`//g” # 外层的双括号是必须的（Unix环境）
@@ -3279,6 +3294,22 @@ sed ‘/^$/d;G’ FILE
 sed &#39;n;d&#39; FILE
 sed -n &#39;1!G;h;$p&#39; FILE
 ```
+
+## Keymap
+
+* ctrl+a 行首
+* ctrl+e 行尾
+* ctrl+f 右移一个单词
+* ctrl+b 左移一个单词
+* ctrl+insert 复制
+* shift+insert 粘贴
+* ctrl+k 剪切 光标到行尾
+* ctrl+d 剪切 光标到行首
+* ctrl+w 剪切 光标前一个单词
+* ctrl+y 粘贴
+* ctrl+c 中断 或者删除整行
+* ctrl+h 删除光标前一个字符 
+* !! 执行上一条
 
 ## 镜像源
 

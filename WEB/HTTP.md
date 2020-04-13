@@ -472,6 +472,17 @@ curl "http://127.0.0.1:8889/" -vv
 * 域名层次结构的顶级（相当于国际快递地址中的国家部分）由ICANN（互联网名称与数字地址分配机构）负责管理。目前，已经有超过250个顶级域名，每个顶级域名可以进一步划为一些子域（二级域名），这些子域可被再次划分（三级域名）
 * 域名空间划分为A, B, C, D, E, F, G七个DNS区域，每个DNS区域都有多个权威域名服务器，这些域名服务器里面保存了许多域名解析记录。
 * 根域名服务器，它保存了所有顶级区域的权威域名服务器记录。现在通过根域名服务器，我们可以找到所有的顶级区域的权威域名服务器，然后就可以往下一级一级找下去了
+* 资源
+    - [NameSilo](https://www.namesilo.com/)
+* 域名的NS记录（Name Server）是指处理域名解析的服务器
+    - [Cloudflare](https://dash.cloudflare.com/):国外站点解析加速
+    - [DNSpod](https://console.dnspod.cn/)
+
+```
+ns3.dnsowl.com # name silo default name server 
+ns3.dnsowl.com 
+ns3.dnsowl.com
+```
 
 ## 查询过程
 
@@ -899,7 +910,11 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
     - 解决方案
         + [certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx)
         + [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
-        + [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh)
+        + [acmesh-official / acme.sh](https://github.com/acmesh-official/acme.sh):A pure Unix shell script implementing ACME client protocol https://acme.sh
+* 验证域名的所有权
+    - http方式是将随机生成的验证文件放入网站的根目录,由机构扫描验证
+    - DNS方式则是将随机生成的验证码创建域名的TXT记录由机构扫描验证.验证通过即可颁发证书
+        + 通过使用域名服务商提供的 API 密钥,让acme.sh自动创建域名验证记录以申请域名证书. acme.sh 支持全球各种域名服务商的 API
 
 ![HTTPS签名和验证](../static/https-ac.png "HTTPS签名和验证")
 ![HTTP vs HTTPS](../static/https.png "HTTP与HTTPS区别")
@@ -928,8 +943,17 @@ sudo apt-get update
 sudo apt-get install python-certbot-apache
 sudo certbot --apache -d packagist.domain.com
 
+
+
+
 acme.sh --issue -d thinkphp.com -w /home/henry/Workspace/thinkphp/public
 acme.sh --issue --debug -d thinkphp.com -d henry.thinkphp.com -w /home/henry/Workspace/thinkphp/public
+
+export CF_Account_ID="c4bbc14be6b5bda9a3ef87c8f33dae26"
+export CF_Token="zBhjAVGezeA14q6Z8uxoJT1md8XxX1H2qUasvELn"
+
+export DP_Id="153073"
+export DP_Key="f338d4076f79bbbd56a9b8c206f85a70"
 ```
 
 ### CORS(跨域资源共享)

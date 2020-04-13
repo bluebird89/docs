@@ -1091,6 +1091,8 @@ app.listen(80, function () {
 * 业务处理的设计谁来主导
 * Cookie/Session 的方式虽然可用，但并不是特别合适，相对来说，基于 Token 的认证则更适合一些。采用基于 Token 的认证就意味着后端的认证部分需要重写
 
+Macro Task 和 Micro Task 
+
 ## 部署
 
 前后端不同端口

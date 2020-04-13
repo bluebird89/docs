@@ -19,13 +19,12 @@
 * 文件类型 keyword filetype:pdf
 * 短横（-）：排除你不想要的结果
 
-
 ## 工具
 
 * 引擎
     - [startpage](https://www.startpage.com/)
-    - [Bing](link)
+    - [Bing](https://cn.bing.com/)
+    - [大圣盘](https://www.dashengpan.com/)
 * [sourcegraph/sourcegraph](https://github.com/sourcegraph/sourcegraph):Code search and intelligence, self-hosted and scalable https://sourcegraph.com
 * [facebookresearch/LASER](https://github.com/facebookresearch/LASER):Language-Agnostic SEntence Representations
 * [asciimoo/searx](https://github.com/asciimoo/searx):Privacy-respecting metasearch engine https://asciimoo.github.io/searx/
-* wikihow.com
