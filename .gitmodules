@@ -17,9 +17,6 @@
 	path = Note/Interview-Notebook
 	url = git@github.com:CyC2018/Interview-Notebook.git
 	branch = master
-[submodule "Design/system-design-primer"]
-	path = Design/system-design-primer
-	url = git@github.com:donnemartin/system-design-primer.git
 [submodule "Back_end/PHP/awesome-php"]
 	path = Back_end/PHP/awesome-php
 	url = git@github.com:ziadoz/awesome-php.git

@@ -1,5 +1,3 @@
-
-
 ## 语法
 
 ```sh
@@ -617,3 +615,7 @@ if [ $ec -ne 0 ]; then
      exit 1
 fi
 
+
+## 资源
+
+[teddysun / across](https://github.com/teddysun/across)

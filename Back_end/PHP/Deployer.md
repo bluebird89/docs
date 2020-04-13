@@ -2,35 +2,44 @@
 
 A deployment tool written in PHP with support for popular frameworks out of the box <https://deployer.org>
 
+* 基于 SSH 协议的无侵入 web 项目部署工具
+
 ## 安装
 
 ```sh
-# 通过 Phar 存档
 curl -LO https://deployer.org/deployer.phar
 mv deployer.phar /usr/local/bin/dep
 chmod +x /usr/local/bin/dep
 
-# 通过 composer
 composer global require deployer/deployer -vvv
 
-# 通过github
 git clone https://github.com/deployphp/deployer.git
 php ./build
 
 dep --version
+
+# ~/.bash_profile
+export PATH=/usr/local/bin:/Users/overtrue/.composer/vendor/bin:$PATH
 ```
 
 ## 使用
 
+* 在 Linux 服务器添加账户与配置权限
+* 项目 git 仓库允许服务器访问（clone 代码）
+* 部署web 项目
+
 ```sh
-# 目标服务机
+# 目标机器
+## 用户添加
 sudo adduser deployer
 sudo usermod -aG www-data deployer
 su deployer
-echo "umask 022" >> ~/.bashrc
+echo "umask 022" >> ~/.bashrc # 用户权限分别设置为创建文件 644 与目录 755
 exit
 
-vim /etc/sudoers # 在最后加入 deployer ALL=(ALL) NOPASSWD: ALL
+# /etc/sudoers
+deployer ALL=(ALL) NOPASSWD: ALL
+
 sudo chown deployer:www-data /var/www/html
 sudo chmod g+s /var/www/html
 
@@ -39,18 +48,12 @@ cat ~/.ssh/id_rsa.pub # 添加到代码库公钥中
 
 # 本地机操作
 ssh-keygen -t rsa -b 4096 -f  ~/.ssh/deployerkey
-ssh-copy-id -i  ~/.ssh/deployerkey.pub deployer@123.45.67.89
-ssh-copy-id -i  ~/.ssh/deployerkey.pub deployer@123.45.67.89 # 测试免密钥登录
-
+ssh-copy-id -i  ~/.ssh/deployerkey.pub deployer@123.45.67.89 # 本地公钥保存到服务器
 
 ## 项目目录操作
-dep init # 配置 deployer.php 文件
+cd /www/demo-project
+dep init # 在当前目录生成一个 deploy.php  文件
 
-dep deploy -vvv # 准备 hook 文件 -> 在项目上添加一个 Webhook 并设置 hook 的网址
-```
-
-配置文件：dep deploy debug | production
-```php
 <?php
 
 namespace Deployer;
@@ -142,10 +145,14 @@ after('success', 'send_message');
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
+
+
+dep deploy -vvv # 准备 hook 文件 -> 在项目上添加一个 Webhook 并设置 hook 的网址
 ```
+
 ## 部署结构
 
-* current - 它是指向一个具体的版本的软链接，你的 nginx 配置中 root 应该指向它，比如 laravel 项目的话 root 就指向：/var/www/demo-app/current/public
+* current - 指向一个具体的版本的软链接，你的 nginx 配置中 root 应该指向它，比如 laravel 项目的话 root 就指向：/var/www/demo-app/current/public
 * releases - 部署的历史版本文件夹，里面可能有很多个最近部署的版本，可以根据你的配置来设置保留多少个版本，建议 5 个。保留版本可以让我们在上线出问题时使用 dep rollback 快速回滚项目到上一个版本。
 * shared - 共享文件夹，它的作用就是存储我们项目中版本间共享的文件
 

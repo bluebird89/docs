@@ -11,7 +11,7 @@
 * Google还有gRPC来进行微服务之间的调用，支持多语言，多种平台，并且面向HTTP/2.
 * Google提出的序列化协议是Protocol Buffers，这个序列化机制也是语言中立，平台中立的，性能高，数据传输过程中压缩得比较小。
 
-# 本地优先（local-first）
+## 本地优先（local-first）
 
 * 云应用（Cloud apps），也可以将它们称为“ SaaS ”或“基于 Web 的应用程序”。它们的共同点是，通常通过 Web 浏览器或移动应用访问它们，将数据存储在服务器上。
     - 投入了大量的创造力和努力去做某件事时，往往对它会有深刻的情感依恋。通常会生成文件和数据：文档、演示文稿、电子表格、代码、注释、绘图等。我们会保留这些数据作为参考和灵感包含在将来的产品组合中，或者只是因为感到自豪而进行归档。感受到数据的所有权非常重要，因为创造性的表达是非常个人化的。
@@ -66,6 +66,10 @@
 * Google Cloud Platform
     - [googleapis/google-cloud-python](https://github.com/googleapis/google-cloud-python):Google Cloud Client Library for Python https://googleapis.github.io/google-cloud-python/
 * [腾讯云](https://cloud.tencent.com/) `ssh -q -l ubuntu -p 22 IP`
+* [搬瓦工](https://bandwagonhost.cn/)
+* [Vultr](https://www.vultr.com/)
+* [CloudCone](https://app.cloudcone.com/)
+* [Oracle cloud](https://www.oraclecloud.com):免费资源 https://51.ruyo.net/14138.html
 
 * [GetStream/awesome-saas-services](https://github.com/GetStream/awesome-saas-services):A curated list of the best in class SaaS services for developers and business owners.
 * [LeanCLoud](https://leancloud.cn/)
