@@ -1290,7 +1290,6 @@ while [ "$1" != "" ]; do
     shift
 done
 
-# 命令行菜单的一个样例：
 #!/bin/bash
 # Bash Menu Script Example
 

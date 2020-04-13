@@ -237,6 +237,63 @@ sudo apt install iperf
 ip addr show | grep inet.*brd # Obtain the IP address of the server machine
 iperf -s # incoming connections from clients
 iperf -c 192.168.1.2 # substituting the IP address of your server machine for the sample one
+
+yum install -y python-setuptools
+easy_install pip
+pip install speedtest-cli
+speedtest-cli --list | grep China
+```
+
+## [fatedier / frp](https://github.com/fatedier/frp)
+
+A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet. 将内网资源映射到公网
+
+* 服务器端配置是Frps和Frps.ini
+* 客户端配置是Frpc和Frpc.ini
+
+```sh
+# Frps.ini文件最初配置 指定了当服务器端启动Frp后监听的端口是7000端口，也就是内网和服务器进行交互的端口，可以修改为其他的端口
+[common]
+bind_port = 8002 # 服务器端端口                                                                                                              
+privilege_token = fxl421125 # 客户端连接凭证                                                                                                                   
+max_pool_count = 5 # 最大连接数                                                                                                                         
+vhost_http_port = 8003 # 客户端映射的端口                                                                                                                           
+dashboard_port = 7500 # 服务器看板的访问端口                                                                                                                                
+dashboard_user = admin # 服务器看板账户                                                                                                     
+dashboard_pwd = fxl123    
+vhost_http_port = 8003 # 以后访问web服务需要用到的端口
+
+./frps -c frps.ini # 启动Frp服务
+
+# Frpc.ini初始配置 
+[common]
+server_addr = 188.45.34.21 # 公网服务器的公网IP
+server_port = 8002 # 服务器端Frp监听的端口 与Frps.ini中的配置端口一致
+privilege_token = fxl123 # 服务器连接凭证
+
+[ssh]
+type = tcp
+local_ip = 127.0.0.1 # 内网机器的IP
+local_port = 22
+remote_port = 8004 # 指定的需要映射到公网服务器上的端口
+
+[nas]
+type = http
+local_port = 5000
+custom_domains = no1.sunnyrx.com # 域名的A记录要解析到外网主机的IP
+
+[web]
+privilege_mode = true
+remote_port = 6000
+type = http
+local_port = 80 # 监视本地的http服务端口
+use_gzip = true
+custom_domains = manager.fanxl.cn # 绑定域名 域名需要配置好解析，解析到服务器
+
+./frpc -c frpc.ini
+
+# 通过服务器公网IP和8004端口来连接内网机器了（ssh）
+ssh -p remote_port username@server_addr
 ```
 
 ## 图书
@@ -252,7 +309,6 @@ iperf -c 192.168.1.2 # substituting the IP address of your server machine for th
 * [cisco/joy](https://github.com/cisco/joy):A package for capturing and analyzing network flow data and intraflow data, for network research, forensics, and security monitoring.
 * [SolarWinds](http://www.solarwinds.com):管理大小企业网络上的网络流量。网络设备监控器可监控你网络上的任何一个设备，查找各种提示或错误
 * [maxmcd/webtty](https://github.com/maxmcd/webtty):Share a terminal session over WebRTC https://maxmcd.github.io/webtty/
-* [fatedier/frp](https://github.com/fatedier/frp):A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet.
 * [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core):A platform for building proxies to bypass network restrictions. https://www.v2ray.com/
 * [librenms/librenms](https://github.com/librenms/librenms):Community-based GPL-licensed network monitoring system http://www.librenms.org/
 * [Zenmap](https://nmap.org/zenmap/):Nmap网络扫描器的官方前端程序

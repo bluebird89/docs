@@ -116,6 +116,10 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
     - [Get started](https://learn.hashicorp.com/vault)
 * [AWS Secrets Manager](link)
 
+## 图书
+
+* [sre](https://landing.google.com/sre/books/)
+
 ## 工具
 
 * [apex/up](https://github.com/apex/up):Deploy infinitely scalable serverless apps, apis, and sites in seconds. https://apex.github.io/up/
