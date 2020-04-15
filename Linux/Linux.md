@@ -2013,6 +2013,7 @@ systemctl reload ssh.service
 * SSH可以使用RSA(Rivest-Shamir-Adleman)或“DSA(数字签名算法)的钥匙。 这两个被认为是最先进的算法,当SSH发明,但DSA已经被视为近年来更不安全。 RSA是唯一推荐选择新钥匙,所以本指南使用RSA密钥”和“SSH密钥”可以互换使用。
 * 基于密钥的验证使用两个密钥,一个“公共”键,任何人都可以看到,和另一个“私人”键,只有老板是允许的。 安全通信使用的基于密钥的认证,需要创建一个密钥对,安全地存储私钥在电脑人想从登录,并存储公钥在电脑上一个想登录。
 * 使用基于密钥登录使用ssh通常被认为是比使用普通安全密码登录。 导的这个部分将解释的过程中生成的一组公共/私有RSA密钥,并将它们用于登录到你的Ubuntu电脑通过OpenSSH(s)。如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端，我们称为
+* 系统会试图通过DNS反查相对应的域名，如果DNS中没有这个IP的域名解析，则会等到DNS查询超时才会进行下一步
 
 ```sh
 sudo apt install sshd
@@ -2060,6 +2061,13 @@ Host *
     ControlMaster auto
     ControlPath /tmp/ssh_mux_%h_%p_%r
     ControlPersist 86400
+
+# mux_client_request_session: read from master failed: Broken pipe
+
+## 连接慢
+# /etc/ssh/sshd_config 添加
+UseDNS no
+service sshd restart
 ```
 
 ## [Openssl](https://www.openssl.org/)

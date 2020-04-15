@@ -1025,6 +1025,23 @@ public class UserController {
 
 java基础，设计模式，jvm原理，spring+springmvc原理及源码，linux，mysql事务隔离与锁机制，mongodb，http/tcp，多线程，分布式架构（dubbo，dubbox，spring cloud），弹性计算架构，微服务架构（springboot+zookeeper+docker+jenkins），java性能优化，以及相关的项目管理等等。
 
+## Lombok
+
+通过相关注解就可以不用再编写冗长的 getter 或者 equals 等方法
+
+* 注解解析方式
+  - 运行时解析，比如 Spring 配置的 AOP 切面这些注解都是在程序运行的时候通过反射来获取的注解值，但是只有在程序运行时才能获取到这些注解值，导致运行时代码效率很低，并且如果想在编译阶段利用这些注解来进行检查，比如对用户的不合理代码作出错误报告，反射的方法就行不通了。
+  - 编译时解析，Lombok 工具就是运行在编译时解析的
+* JSR 269 插入式注解处理器（Pluggable Annotation Processing API），它是实现了 JSR 269 的机制
+* 优点
+  - 通过注解自动生成样板代码，提高开发效率
+  - 代码简洁，只关注相关属性
+  - 新增属性后，无需刻意修改相关方法
+* 缺点：
+  - 降低了源代码的可读性和完整性
+  - 加大对问题排查的难度（可能问题定位到不存在的行，无从下手）
+  - 强 x 队友，因为需要 IDE 的相关插件的支持
+
 ## 客户端
 
 * JavaFX
@@ -1062,7 +1079,6 @@ JavaEE/JDBC/Weblogic
 
 * IDE
   - [Eclipse](https://www.eclipse.org/)
-  - IDEA
 * [插件库](https://plugins.jetbrains.com/idea)
   - [Cloud Toolkit](https://www.aliyun.com/product/cloudtoolkit): 一款 IDE 插件，可以帮助开发者更高效地开发、测试、诊断并部署应用
 * 测试

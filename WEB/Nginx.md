@@ -2006,6 +2006,155 @@ init_by_lua_file /etc/nginx/waf/init.lua;
 access_by_lua_file /etc/nginx/waf/waf.lua ;
 ```
 
+## acme
+
+* 一款方便,强大的 Let's Encrypt 域名证书申请续签程序
+* 验证方式
+    - http 验证: 会验证是否拥有当前域名，最基本的方式在网站根目录创建一个文件 /.well-known/acme-challenge/，并通过域名在外部进行请求，如能请求到则认为拥有该网站的控制权
+    - DNS 验证:通过使用域名服务商提供的 API 密钥,让acme.sh自动创建域名验证记录以申请域名证书,回生成一个txt的dns记录 _acme-challenge.domain，验证是否访问成功
+* 证书生成有限制：每个注册域名的证书数量（每周 50 张）
+
+```sh
+# 官方dnsapi获取阿里云的API
+export Ali_Key="LTAI4Fd8J9qs4fxxxxxxxxxx"
+export Ali_Secret="Xp3Z7NDOW0CJcPLKoUwqxxxxxxxxxx"
+# 腾讯云 dnspod.cn 管理控制台,右上角选择密钥管理,创建密钥并复制保存好生成的ID和Token
+export DP_Id="124xxx"
+export DP_Key="54ddaa41245837600ce713xxxxxxxxxx"
+# Cloudflare  创建 new api token
+export CF_Token="PfCA6tyLxxxxxxxx-sS6ANgqzuVexxxxxxx"
+export CF_Account_ID="1fs48ec7e2063cb70hacc3xxxxxxxxxx"
+# GoDaddy
+export GD_Key="xxxxxtpTEP3_xxxxxx9dn3Tdwv8PZxxxxx"
+export GD_Secret="xxxxxtmxxxxxZwuWrxxxxx"
+
+wget -O -  https://get.acme.sh | sh
+echo 'alias acme.sh=~/.acme.sh/acme.sh' >>/etc/profile
+acme.sh --upgrade # 手動更新
+acme.sh --upgrade --auto-upgrade # 啟用自動更新
+acme.sh --upgrade --auto-upgrade 0 # 禁用自動更新
+
+# ~/.acme.sh/account.conf
+
+mkdir -p /usr/share/nginx/.well-known/acme-challenge
+chown -R root:www-data /var/www/le_root
+
+# /etc/nginx/snippets/letsencrypt-webroot
+location ^~ /.well-known/acme-challenge/ {
+    alias /usr/share/nginx/.well-known/acme-challenge;
+}
+
+# API 签发
+acme.sh --issue --dns dns_dp -d bluebird89.online -d www.bluebird89.online --webroot /usr/share/nginx/www --nginx # dns_dp为 腾讯云DNSPod.cn 服务商, dns_ali为阿里云,dns_cf为CLoudflare
+# _acme-challenge.bluebird89.online Not valid yet, let\'s wait 10 seconds and check next one.
+
+# 手动签发
+acme.sh --issue -d www.bluebird89.online -w /usr/share/nginx/www --nginx  
+
+mkdir -p /etc/nginx/ssl
+mkdir -p /etc/nginx/ssl/www.bluebird89.online
+# ln -s /root/.acme.sh/www.bluebird89.online /etc/nginx/ssl/ # 安装时 会清空生成的证书文件
+
+# 自动部署 证书文件会被copy到相应的位置
+acme.sh --installcert -d www.bluebird89.online \
+--cert-file /etc/nginx/ssl//www.bluebird89.online/www.bluebird89.online.cert \ # nginx 不需要
+--key-file  /etc/nginx/ssl//www.bluebird89.online/www.bluebird89.online.key  \
+--fullchain-file /etc/nginx/ssl/www.bluebird89.online/fullchain.cer \
+--reloadcmd     "service nginx force-reload"
+
+# "ssl_stapling" ignored, issuer certificate not found for certificate
+server {
+    listen 80;
+    server_name www.bluebird89.online;
+
+    return 301 https://$server_name$request_uri;
+}
+
+server{
+    listen 443 ssl;
+    server_name www.bluebird89.online;
+    server_name bluebird89.online;
+
+    ssl_certificate /etc/nginx/ssl/www.bluebird89.online/www.bluebird89.online.cer;
+    ssl_certificate_key /etc/nginx/ssl/www.bluebird89.online/www.bluebird89.online.key;
+    
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
+    # ssl_dhparam /etc/ssl/certs/dhparam.pem;
+    ssl_ciphers
+    'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA';
+    ssl_session_timeout 1d;
+    #使用ssl_session_cache优化https下Nginx的性能
+    ssl_session_cache builtin:1000 shared:SSL:10m;
+    ssl_stapling on;
+    ssl_stapling_verify on;
+    add_header Strict-Transport-Security max-age=15768000;
+
+    access_log /var/log/nginx/www_access.log;
+    error_log /var/log/nginx/www_error.log;
+
+    location / {
+        root /usr/share/nginx/www;
+        index index.html index.htm index.php;
+    }
+
+    include /etc/nginx/snippets/letsencrypt-webroot;
+}
+
+server {
+  listen 80;  #如果硬性要求全部走https协议，这一行去除
+  listen       443 ssl http2;    #如果硬性要求全部走https协议，这里去除ssl
+  server_name chandao.test.com;
+  access_log off;
+  index index.html index.htm index.php;
+  root /data/wwwroot/chandao;
+
+  #ssl on;   #如果硬性要求全部走https协议，这里开启ssl on
+  ssl_certificate   /usr/local/nginx/ssl_cert/test.com/chandao.test.com.cer;
+  ssl_certificate_key  /usr/local/nginx/ssl_cert/test.com/chandao.test.com.key;
+
+  #ssl性能调优
+  #nginx 1.13.0支持了TLSv1.3,TLSv1.3相比之前的TLSv1.2、TLSv1.1等性能大幅提升
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+  ssl_prefer_server_ciphers on;
+  ssl_session_timeout 10m;
+  #使用ssl_session_cache优化https下Nginx的性能
+  ssl_session_cache builtin:1000 shared:SSL:10m;
+  #OCSP Stapling 开启。OCSP是用于在线查询证书吊销情况的服务，使用OCSP Stapling能将证书有效状态的信息缓存到服务器，提高 TLS 握手速度
+  ssl_stapling on;
+  #OCSP Stapling 验证开启
+  ssl_stapling_verify on; 
+
+  #error_page 404 /404.html;
+  #error_page 502 /502.html;
+
+  location ~ [^/]\.php(/|$) {
+    #fastcgi_pass remote_php_ip:9000;
+    fastcgi_pass unix:/dev/shm/php-cgi.sock;
+    fastcgi_index index.php;
+    include fastcgi.conf;
+  }
+
+  location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|mp4|ico)$ {
+    expires 30d;
+    access_log off;
+  }
+  location ~ .*\.(js|css)?$ {
+    expires 7d;
+    access_log off;
+  }
+  location ~ /\.ht {
+    deny all;
+  }
+}
+
+acme.sh --renew -d www.bluebird89.online --force --debug
+
+acme.sh --remove -d www.bluebird89.online # 停止自動續期憑證
+nginx -s reload
+```
+
 ## docker 配置
 
 * www目录将映射为nginx容器配置的虚拟目录

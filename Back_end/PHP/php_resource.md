@@ -597,7 +597,7 @@ open http://127.0.0.1:8000
     - (https://github.com/namshi/notificator)[Notificator]: 一个轻量级的通知库
     - (https://github.com/gomoob/php-pushwoosh)[Php-pushwoosh]: 一个使用Pushwoosh REST Web服务轻松推送通知的PHP库
 * 部署 Deployment 项目部署库
-    - (https://github.com/deployphp/deployer)[Deployer]: 一个部署工具
+    - (https://github.com/deployphp/deployer)[Deployer]: 一个部署工具 https://deployer.org/
     - (https://github.com/laravel/envoy)[Envoy]: 一个用PHP运行SSH任务的工具
     - (https://github.com/aerialls/Plum)[Plum]: 一个部署库
     - (https://github.com/tamagokun/pomander)[Pomander]: 一个PHP应用部署工具
