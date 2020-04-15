@@ -24,7 +24,6 @@
     + trusted: 信任所有连接
   - –add-port=80/tcp #添加端口，格式为：端口/通讯协议
   - –permanent #永久生效，没有此参数重启后失效
-* 
 
 ```sh
 # Centos 7 firewall 命令
@@ -44,7 +43,6 @@ firewall-cmd --zone=public --add-forward-port=port=22:proto=tcp:toport=9527
 firewall-cmd --zone=public --add-forward-port=port=22:proto=tcp:toaddr=192.168.1.123
 # 转发 22 端口数据至另一 ip 的 9527 端口上
 firewall-cmd --zone=public --add-forward-port=port=22:proto=tcp:toport=9527:toaddr=192.168.1.100
-
 
 firewall-cmd --permanent --add-rich-rule="rule family='ipv4' source address='192.168.1.123' reject" # IP 封禁
 firewall-cmd --permanent --zone=public --new-ipset=blacklist --type=hash:ip # 通过 ipset 来封禁 ip
@@ -135,6 +133,12 @@ rpm -ql httpd  #查询所有安装httpd的目录和文件
 systemctl start|stop|restart|enable httpd.service  #设置开机启动
 ```
 
+## 用户
+
+```sh
+sudo -i
+```
+
 ## 配置
 
 ```sh
@@ -161,7 +165,7 @@ tar -zxvf nginx-1.12.2.tar.gz # 解压文件，获得源码
 make
 make install # 将译安装完的软件都会放在/usr/local下面
 
-//  编译后的说明
+#  编译后的说明
 nginx path prefix: "/usr/local/nginx"
 nginx binary file: "/usr/local/nginx/sbin/nginx"
 nginx modules path: "/usr/local/nginx/modules"
@@ -324,6 +328,11 @@ yum install Percona-Server-client-57 Percona-Server-server-57
 ### php
 
 ```sh
+yum install epel-release yum-utils -y
+yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum-config-manager --enable remi-php74
+yum install php php-fpm php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysql -y
+
 sudo wget http://php.net/distributions/php-7.2.3.tar.bz2
 bzip2 -d php-7.2.3.tar.bz2
 tar xvf php-7.2.3.tar
@@ -387,6 +396,23 @@ cp /usr/local/src/php-7.2.3/php.ini-production /usr/local/php7/etc/php.ini
 cp /usr/local/php7/etc/php-fpm.conf.default /usr/local/php7/etc/php-fpm.conf
 cp /usr/local/php7/etc/php-fpm.d/www.conf.default /usr/local/php7/etc/php-fpm.d/www.conf
 cp /usr/local/src/php-7.2.3/sapi/fpm/php-fpm.service /lib/systemd/system/php-fpm.service
+
+# 文件有写入权限，但无法写入内容
+getenforce #查看
+setenforce 0 # 临时
+
+# 永久
+# etc/sysconfig/selinux
+SELINUX=disabled
+reboot
+
+## php-fpm 与nginx 配合
+## www.conf 用户与nginx配置一致
+listen.owner=nginx
+listen.group=nginx
+
+chown nginx php-fpm.sock
+chgrp nginx php-fpm.sock
 ```
 
 ### Swoole

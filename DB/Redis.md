@@ -75,6 +75,7 @@ daemonize no
 pidfile /var/run/redis.pid
 bind 127.0.0.1
 timeout 300 # 客户端闲置多长时间后关闭连接
+
 # 数据同步到数据文件 条件
 save 900 1
 save 300 10
@@ -1075,22 +1076,28 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
 
 ## 持久化
 
-* RDB：将内存数据全部快照然后存储到硬盘上
+* RDB：将内存数据全部快照,然后存储到硬盘上
     - 定时触发然后将redis存储在内存中的数据以快照的方式全量持久化到硬盘上
     - redis-cli控制台下输入命令save就可以实时触发这个操作，此时redis将会被阻塞，不会再响应客户端的其余任何请求
     - 为了避免这种被阻塞，可以用bgsave来触发rdb备份:redis的主进程会fork出一个子进程来做快照持久化，而主进程可以继续相应客户端的任何请求
     - 出发机制需要配置条件：数据频率
-* AOF（Append Only File）：类似于mysql的二进制日志方案
-    - aof文件中记录都是在redis中执行过的命令，并不记录数据本身。
+* AOF（Append Only File）：类似于mysql的二进制日志方案,默认是关闭的.需要修改配置文件中的 appendonly no 为 appendonly yes
+    - aof文件中记录都是在redis中执行过的命令，并不记录数据本身
     - 假如连续set了10000次，但是最后这10000个key我又全部删除了，aof文件岂不是会记录20000条命令？所以为了解决这个问题，针对aof还有个很重要的rewrite机制
     - 将命令追加到aof这个过程redis官方称之为fsync，fsync这个过程是子线程来做的，主线程依然用来处理客户端的请求
+    - 同步策略，可以通过 CONFIG GET appendfsync 查看当前配置
+        + appendfsync always，每次操作记录都同步到文件中，最低效最安全
+        + appendfsync everysec，每秒执行一次把操作记录同步到硬盘上，为默认选项
+        + appendfsync no，不执行 fysnc 调用，让操作系统自动操作把缓存数据写到硬盘上，不可靠但最快
+    - 时间久了，AOF 文件会越来越大。好在 Redis 提供了重写 AOF 功能，可以手动或者自动重写，压缩 AOF 文件
+    - auto-aof-rewrite-percentage 和 auto-aof-rewrite-min-size。当 AOF 文件超过 auto-aof-rewrite-min-size 时，且超过上次重写后的大小百分之 auto-aof-rewrite-percentage 时，会触发自动重写
 * 对比
     - rdb恢复速度快，aof恢复速度相对要慢一些。
     - 如果aof开启了，那么redis在启动时会选择根据aof文件恢复数据而不是rdb，所以一定要保存好rdb文件。
     - rdb和aof可以同时开启，最大可能地保证数据完整性。如果redis中的数据都是缓存类数据，可以考虑只选择一样即可。
     - 检测修复rdb文件的工具叫做redis-check-rdb，检测修复aof文件的工具叫做redis-check-aof。
     - 如果你有1G的redis数据，那么理论上讲做一次bgsave操作最大需要2G内存，但实际上得益于Copy-On-Write（写时拷贝，COW机制），并不一定会需要2G内存，只有在当主进程将所有的key全部修改过的情况下，才会需要2G内存。
-    - 建议redis内存使用量在30%-50%之间，超过50%这个限制就要留心注意下了。
+    - 建议redis内存使用量在30%-50%之间，超过50%这个限制就要留心注意下了
 
 ```
 # RDB 何时会触发持久化
@@ -1417,7 +1424,7 @@ public void delBigList(String host, int port, String password, String bigListKey
 
 ## 图书
 
-* 《Redis设计与实现》
+* [《Redis设计与实现》](http://redisbook.com/) <https://redisbook.readthedocs.io/en/latest/index.html>
 * Redis 4.X Cookbook
 
 ## [rdr](https://github.com/xueqiu/rdr)
@@ -1429,7 +1436,6 @@ public void delBigList(String host, int port, String password, String bigListKey
     - keys 从 rdbfile 获取所有 key
     - help 帮助
     - --version 显示版本信息
-
 
 ```sh
 # Linux amd64

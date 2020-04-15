@@ -331,3 +331,4 @@
 
 * [](https://www.atlassian.com/agile)
 * [Manifesto for Agile Software Development](https://agilemanifesto.org/)
+* [AGILE FLUENCY PROJECT](https://www.agilefluency.org/)

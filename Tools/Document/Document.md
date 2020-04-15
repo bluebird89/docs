@@ -158,4 +158,4 @@ asciidoctor -r asciidoctor-diagram xxx.adoc
 * [TryGhost/Ghost](https://github.com/TryGhost/Ghost):The platform for professional publishers https://ghost.org
 * [gsuitedevs/md2googleslides](https://github.com/gsuitedevs/md2googleslides):Generate Google Slides from markdown
 * [mailcow/mailcow-dockerized](https://github.com/mailcow/mailcow-dockerized):mailcow: dockerized - 🐮 + 🐋 = 💕 https://mailcow.email
-
+* [mylxsw / wizard](https://github.com/mylxsw/wizard):Wizard是一款开源的文档管理工具，支持Markdown/Swagger/Table类型的文档。 http://wizard.aicode.cc

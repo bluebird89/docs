@@ -977,6 +977,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
     - [Go Packages](https://godoc.org/)
     - [moovweb/gvm](https://github.com/moovweb/gvm):Go Version Manager http://github.com/moovweb/gvm
+* [golang / tools](https://github.com/golang/tools):[mirror] Go Tools https://godoc.org/golang.org/x/tools
 * TINYGO - A GO COMPILER FOR SMALL PLACES bring the Go programming language to microcontrollers and modern web browsers by creating a new compiler based on LLVM.
 * network
     - [davyxu/cellnet](https://github.com/davyxu/cellnet):High performance, simple, extensible golang open source network library
@@ -984,6 +985,8 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [zserge/lorca](https://github.com/zserge/lorca):Build cross-platform modern desktop apps in Go + HTML5
 * Cli
     - [spf13/cobra](https://github.com/spf13/cobra):A Commander for modern Go CLI interactions
+    - [magefile / mage](https://github.com/magefile/mage):a Make/rake-like dev tool using Go https://magefile.org
+    - [motemen / gore](https://github.com/motemen/gore):Yet another Go REPL that works nicely. Featured with line editing, code completion, and more.
 * 语法检测
     - [mgechev/revive](https://github.com/mgechev/revive):🔥 ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint. https://revive.run
 * ORM
@@ -1019,6 +1022,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [panjf2000/gnet](https://github.com/panjf2000/gnet):🌐🐳 A high-performance, lightweight, non-blocking, event-driven networking framework written in pure Go.
     - [xtaci/kcp-go](https://github.com/xtaci/kcp-go):A Production-Grade Reliable-UDP Library for golang
     - [valyala/fasthttp](https://github.com/valyala/fasthttp):Fast HTTP package for Go. Tuned for high performance. Zero memory allocations in hot paths. Up to 10x faster than net/http
+    - [parnurzeal / gorequest](https://github.com/parnurzeal/gorequest):GoRequest -- Simplified HTTP client ( inspired by nodejs SuperAgent ) http://parnurzeal.github.io/gorequest/
 * QUIC
     - [lucas-clemente / quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
 * excel
@@ -1115,6 +1119,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - VS Code Glide
 * [rodrigo-brito/gocity](https://github.com/rodrigo-brito/gocity):📊 Code City metaphor for visualizing Go source code in 3D https://go-city.github.io
 * [shirou / gopsutil](https://github.com/shirou/gopsutil):psutil for golang
+* [panjf2000 / ants](https://github.com/panjf2000/ants):🐜🐜🐜 ants is a high-performance and low-cost goroutine pool in Go, inspired by fasthttp./ ants 是一个高性能且低损耗的 goroutine 池。
 
 ## 参考
 

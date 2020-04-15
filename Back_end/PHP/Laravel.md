@@ -83,6 +83,8 @@ function homestead() {
 ```
 
 ```sh
+
+yum install php-mbstring php-dom php-zip php-posix php-simplexml php-bcmath php-ctype php-json php-openssl php-pdo php-tokenizer
 brew install php  # 确保 ~/.composer/vendor/bin
 brew install mysql # 安装MySQL
 brew services start mysql # 启动服务
@@ -256,7 +258,7 @@ php artisan serve # 在php开发服务器中服务这个应用
 php artisan tinker  # 在应用中交互
 php artisan app:name #  设置应用程序命名空间
 
-php artisan key:generate  # 设置程序密钥   No supported encrypter found. The cipher and / or key length are invalid.
+php artisan key:generate  # 设置程序密钥 The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. 不正确 500 错误，nginx 没有日志记录
 
 php artisan auth:clear-resets # 清除过期的密码重置密钥 未使用过
 
@@ -1687,14 +1689,6 @@ Laravel表单验证拥有标准且庞大的规则集，通过规则调用来完�
 
 下例中，附加bail规则至title属性，在第一次验证required失败后将立即停止验证；"."语法符号在Laravel中通常表示嵌套包含关系，这个在其他语言或框架语法中也比较常见
 
-```
-$this->validate($request, [
-    'title' => 'bail|required|unique:posts|max:255',
-    'author.name' => 'required',
-    'author.description' => 'required',
-]);
-```
-
 Laravel验证规则参考 <http://d.laravel-china.org/docs/5.4/validation#可用的验证规则> ；另外，在Laravel开发中还可采用如下扩展规则：
 
 - 自定义FormRequest (须继承自 Illuminate\Foundation\Http\FormRequest )
@@ -1703,6 +1697,14 @@ Laravel验证规则参考 <http://d.laravel-china.org/docs/5.4/validation#可用
 - 按条件增加规则
 - 数组验证
 - 自定义验证规则
+
+```
+$this->validate($request, [
+    'title' => 'bail|required|unique:posts|max:255',
+    'author.name' => 'required',
+    'author.description' => 'required',
+]);
+```
 
 ## 事件
 
@@ -2501,6 +2503,7 @@ php artisan make:test UserTest --unit
 
 ## 日志
 
+* 默认日志：storage/logs/laravel.log
 * 有效通道驱动列表
   - stack 用于创建「多通道」通道的聚合器
   - single  基于单文件/路径的日志通道（StreamHandler）
