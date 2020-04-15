@@ -1,5 +1,6 @@
 # CI
 
+代码仓库更新后，通过在 GitLab 设置的 CI-CD 配置，自动打包镜像，然后触发 WebHook 自动更新
 
 ## [travis-ci/travis-ci](https://github.com/travis-ci/travis-ci)
 

@@ -943,17 +943,8 @@ sudo apt-get update
 sudo apt-get install python-certbot-apache
 sudo certbot --apache -d packagist.domain.com
 
-
-
-
 acme.sh --issue -d thinkphp.com -w /home/henry/Workspace/thinkphp/public
 acme.sh --issue --debug -d thinkphp.com -d henry.thinkphp.com -w /home/henry/Workspace/thinkphp/public
-
-export CF_Account_ID="c4bbc14be6b5bda9a3ef87c8f33dae26"
-export CF_Token="zBhjAVGezeA14q6Z8uxoJT1md8XxX1H2qUasvELn"
-
-export DP_Id="153073"
-export DP_Key="f338d4076f79bbbd56a9b8c206f85a70"
 ```
 
 ### CORS(跨域资源共享)

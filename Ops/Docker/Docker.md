@@ -532,6 +532,7 @@ docker ps -a | grep 'weeks ago' | awk '{print $1}' | xargs docker rm
 docker kill $(docker ps -q) #Kill all running containers
 
 docker system prune -a # 清理整个docker的无用数据
+docker container prune --force
 docker system prune --volumes # 会清除volume，如果要同时清除无用的volume
 docker container prune  # 删除所有停止掉的container
 ```
@@ -1569,7 +1570,6 @@ docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\d
 * [yeasy/docker_practice](https://github.com/yeasy/docker_practice):Learn and understand Docker technologies, with real DevOps practice! https://legacy.gitbook.com/book/yeasy/docker_practice/details
 * [中文文档](https://docker-doc.readthedocs.io/zh_CN/latest/index.html)
 * [中文文档](http://www.dockerinfo.net)
-
 
 * [LXC](https://stgraber.org/2013/12/20/lxc-1-0-blog-post-series/)
 * [每天5分钟玩转Docker容器技术](https://mp.weixin.qq.com/s/7o8QxGydMTUe4Q7Tz46Diw)
