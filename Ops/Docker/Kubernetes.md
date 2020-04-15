@@ -9,6 +9,24 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
     + 解决Docker跨机器容器之间的通讯问题。
     + Kubernetes的自我修复机制使得容器集群总是运行在用户期望的状态。
 * 支持GCE、vShpere、CoreOS、OpenShift、Azure等平台
+* 功能
+    - 服务发现和负载均衡：Kubernetes 可以使用 DNS 名称或自己的 IP 地址公开容器，如果到容器的流量很大，Kubernetes 可以负载均衡并分配网络流量，从而使部署稳定。
+    - 存储编排：Kubernetes 允许您自动挂载您选择的存储系统，例如本地存储、公共云提供商等。
+    - 自动部署和回滚：您可以使用 Kubernetes 描述已部署容器的所需状态，它可以以受控的速率将实际状态更改为所需状态。例如，您可以自动化 Kubernetes 来为您的部署创建新容器，删除现有容器并将它们的所有资源用于新容器。
+    - 容器资源配额：Kubernetes 允许您指定每个容器所需 CPU 和内存（RAM）。当容器指定了资源请求时，Kubernetes 可以做出更好的决策来管理容器的资源。
+    - 自我修复：Kubernetes 重新启动失败的容器、替换容器、杀死不响应用户定义的运行状况检查的容器，并且在准备好服务之前不将其通告给客户端。
+    - 密钥与配置管理：Kubernetes 允许您存储和管理敏感信息，例如密码、OAuth 令牌和 ssh 密钥。您可以在不重建容器镜像的情况下部署和更新密钥和应用程序配置，也无需在堆栈配置中暴露密钥。
+    - 配置文件：Kubernetes 可以通过 ConfigMap 来存储配置
+* 方便
+    - 快速部署应用
+    - 很容易实现 水平伸缩 或 垂直伸缩
+    - 无缝发布新的应用版本
+    - 资源使用最大化
+    - 应用停止自动重启
+* 特点
+    - 可移植：支持公有云、私有云、混合云、多重云（multi-cloud）
+    - 可扩展：模块化、插件化、可挂载、可组合
+    - 自动化：自动部署、自动重启、自动复制、自动伸缩/扩展
 
 ## 原理
 
@@ -28,16 +46,39 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
 
 ![架构](../_static/kubernates_architect.png)
 
-## 概念
+## 基础资源
 
-* Pod:调度的最小颗粒不是单纯的容器，而是抽象成一个Pod，Pod是一个可以被创建、销毁、调度、管理的最小的部署单元
-    - 把相关的一个或多个容器（Container）构成一个Pod，通常Pod里的容器运行相同的应用
-    - Pod包含的容器运行在同一个Minion(Host)上，看作一个统一管理单元，共享相同的volumes和network namespace/IP和Port空间
-* Services:基本操作单元，是真实应用服务的抽象，每一个服务后面都有很多对应的容器来支持，通过Proxy的port和服务selector决定服务请求传递给后端提供服务的容器，对外表现为一个单一访问地址，外部不需要了解后端如何运行，这给扩展或维护后端带来很大的好处
+一切皆为资源，一切即可描述，一切皆可管理。
+
+* NameSpaces 命名空间，在一个 Kubernetes 集群中可以使用namespace创建多个“虚拟集群”，这些namespace之间可以完全隔离，也可以通过某种方式，让一个namespace中的service可以访问到其他的namespace中的服务。
+* Deployment 为 Pod 和 ReplicaSet 提供了一个声明式定义(declarative)方法，用来替代以前的 ReplicationController 来方便的管理应用。典型的应用场景包括：
+    - 定义Deployment来创建Pod和ReplicaSet
+    - 滚动升级和回滚应用
+    - 扩容和缩容
+    - 暂停和继续Deployment
+* Service Kubernetes Service 定义了这样一种抽象：一个 Pod 的逻辑分组，一种可以访问它们的策略 —— 通常称为微服务。这一组 Pod 能够被 Service 访问到，通常是通过 Label Selector实现的
+    - Services:基本操作单元，是真实应用服务的抽象，每一个服务后面都有很多对应的容器来支持，通过Proxy的port和服务selector决定服务请求传递给后端提供服务的容器，对外表现为一个单一访问地址，外部不需要了解后端如何运行，这给扩展或维护后端带来很大的好处
     - 定义一系列Pod以及访问这些Pod的策略的一层抽象。Service通过Label找到Pod组。因为Service是抽象的，所以在图表里通常看不到它们的存在，这也就让这一概念更难以理解。
     - 假定有2个后台Pod，并且定义后台Service的名称为‘backend-service’，lable选择器为（tier=backend, app=myapp）。backend-service 的Service会完成如下两件重要的事情：
         + 会为Service创建一个本地集群的DNS入口，因此前端Pod只需要DNS查找主机名为 ‘backend-service’，就能够解析出前端应用程序可用的IP地址。
         + 现在前端已经得到了后台服务的IP地址，但是它应该访问2个后台Pod的哪一个呢？Service在这2个后台Pod之间提供透明的负载均衡，会将请求分发给其中的任意一个（如下面的动画所示）。通过每个Node上运行的代理（kube-proxy）完成
+* Ingress 是从 Kubernetes集群外部访问集群内部服务的入口。比如官方维护的 Ingress Nginx。ingress traefik、ingress haproxy等。
+* Pod kubernetes 中可以创建和部署的最小也是最简的单位。Pod代表着集群中运行的进程。Pod中封装着应用的容器（有的情况下是好几个容器），存储、独立的网络IP，管理容器如何运行的策略选项。Pod代表着部署的一个单位：kubernetes中应用的一个实例，可能由一个或者多个容器组合在一起共享资源。
+    - Pod:调度的最小颗粒不是单纯的容器，而是抽象成一个Pod，Pod是一个可以被创建、销毁、调度、管理的最小的部署单元
+    - 把相关的一个或多个容器（Container）构成一个Pod，通常Pod里的容器运行相同的应用
+    - Pod包含的容器运行在同一个Minion(Host)上，看作一个统一管理单元，共享相同的volumes和network namespace/IP和Port空间
+* ConfigMap API 资源用来保存 key-value pair配置数据，这个数据可以在pods里使用，或者被用来为像controller一样的系统组件存储配置数据。虽然 ConfigMap 跟 Secrets 类似，但是ConfigMap更方便的处理不含敏感信息的字符串。注意：ConfigMaps不是属性配置文件的替代品。ConfigMaps只是作为多个properties文件的引用。你可以把它理解为Linux系统中的/etc目录，专门用来存储配置文件的目录。
+* Secret 解决了密码、token、密钥等敏感数据的配置问题，而不需要把这些敏感数据暴露到镜像或者Pod Spec中。Secret 可以以Volume或者环境变量的方式使用。 Secret有三种类型：
+    - Service Account ：用来访问Kubernetes API，由Kubernetes自动创建，并且会自动挂载到Pod的/run/secrets/kubernetes.io/serviceaccount目录中；
+    - Opaque ：base64编码格式的Secret，用来存储密码、密钥等；
+    - kubernetes.io/dockerconfigjson ：用来存储私有docker registry的认证信息。
+* PV 和 PVC 用于数据持续存储，Pod中，容器销毁，所有数据都会被销毁，如果需要保留数据，这里就需要用到 PV存储卷，PVC存储卷申明。
+    - PVC 常用于 Deployment 做数据持久存储。实现持久化存储还需要理解 Volume 概念。
+* Volume 容器磁盘上的文件的生命周期是短暂的，这就使得在容器中运行重要应用时会出现一些问题。首先，当容器崩溃时，kubelet 会重启它，但是容器中的文件将丢失——容器以干净的状态（镜像最初的状态）重新启动。其次，在 Pod 中同时运行多个容器时，这些容器之间通常需要共享文件。Kubernetes 中的 Volume 抽象就很好的解决了这些问题。
+* Labels 和 Selectors 标签 和 选择器。作用用于给每个容器打标签，然后各个控制器通过 Selector 匹配容器，并管理。比如 Deployment 或 Service 都是通过这种方式匹配相应的 Pod。
+    - Labels：service和replicationController只是建立在pod之上的抽象，最终是要作用于pod的，那么它们如何跟pod联系起来呢？这就引入了label的概念：就是为pod加上可用于搜索或关联的一组key/value标签，而service和replicationController正是通过label来与pod关联的。
+    - 为了将访问Service的请求转发给后端提供服务的多个容器，正是通过标识容器的labels来选择正确的容器；
+    - Replication Controller也使用labels来管理通过 pod 模板创建的一组容器，这样Replication Controller可以更加容易，方便地管理多个容器。
 * Replication Controllers:理解成更复杂形式的pods，它确保任何时候Kubernetes集群中有指定数量的pod副本(replicas)在运行，如果少于指定数量的pod副本(replicas)，Replication Controller会启动新的Container，反之会杀死多余的以保证数量不变
     - 使用预先定义的pod模板创建pods，一旦创建成功，pod 模板和创建的pods没有任何关联，可以修改 pod 模板而不会对已创建pods有任何影响，也可以直接更新通过Replication Controller创建的pods。
     - 创建Replication Controller时，需要指定两个东西：
@@ -50,9 +91,6 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
         + Rolling updates:Replication Controller的设计原则使得可以一个一个地替换pods来滚动更新（rolling updates）服务。
         + Multiple release tracks:如果需要在系统中运行multiple release的服务，Replication Controller使用labels来区分multiple release tracks。
     - 以上三个概念便是用户可操作的REST对象。Kubernetes以RESTfull API形式开放的接口来处理
-* Labels：service和replicationController只是建立在pod之上的抽象，最终是要作用于pod的，那么它们如何跟pod联系起来呢？这就引入了label的概念：就是为pod加上可用于搜索或关联的一组key/value标签，而service和replicationController正是通过label来与pod关联的。
-    - 为了将访问Service的请求转发给后端提供服务的多个容器，正是通过标识容器的labels来选择正确的容器；
-    - Replication Controller也使用labels来管理通过 pod 模板创建的一组容器，这样Replication Controller可以更加容易，方便地管理多个容器。
 * 如下图所示，有三个pod都有label为"app=backend"，创建service和replicationController时可以指定同样的label:"app=backend"，再通过label selector机制，就将它们与这三个pod关联起来了。例如，当有其他frontend pod访问该service时，自动会转发到其中的一个backend pod
 
 ![](../_static/labels.png)
@@ -187,7 +225,7 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
   - Scheduler也监测Minion节点信息，由于会频繁查找Minion节点，Scheduler会缓存一份最新的信息在本地。
   - 最后，Scheduler在分发Pod到指定的Minion节点后，会把Pod相关的信息Binding写回API Server。
 * Kubelet:Kubelet是Kubernetes集群中每个Minion和Master API Server的连接点，Kubelet运行在每个Minion上，是Master API Server和Minion之间的桥梁，接收Master API Server分配给它的commands和work，与持久性键值存储etcd、file、server和http进行交互，读取配置信息
-    - 主要工作是管理Pod和容器的生命周期，其包括Docker Client、Root Directory、Pod Workers、Etcd Client、Cadvisor Client以及Health Checker组件，
+    - 管理Pod和容器的生命周期，其包括Docker Client、Root Directory、Pod Workers、Etcd Client、Cadvisor Client以及Health Checker组件，
     - 具体工作如下：
         + 通过Worker给Pod异步运行特定的Action
         + 设置容器的环境变量

@@ -250,6 +250,15 @@ A fast reverse proxy to help you expose a local server behind a NAT or firewall 
 
 * 服务器端配置是Frps和Frps.ini
 * 客户端配置是Frpc和Frpc.ini
+* 隧道类型：
+    - TCP 映射 基础的 TCP 映射，适用于大多数服务，例如远程桌面、SSH、Minecraft、泰拉瑞亚等
+    - UDP 映射 基础的 UDP 映射，适用于域名解析、部分基于 UDP 协议的游戏等
+    - HTTP 映射 搭建网站专用映射，并通过 80 端口访问。
+    - HTTPS 映射 带有 SSL 加密的网站映射，通过 443 端口访问，服务器需要支持 SSL。
+    - XTCP 映射 客户端之间点对点 (P2P) 连接协议，流量不经过服务器，适合大流量传输的场景，需要两台设备之间都运行一个客户端
+    - STCP 映射 安全交换 TCP 连接协议，基于 TCP，访问此服务的用户也需要运行一个客户端，才能建立连接，流量由服务器转发
+* 参考
+    - [提供frp服务器](https://www.ioiox.com/frp.html)
 
 ```sh
 # Frps.ini文件最初配置 指定了当服务器端启动Frp后监听的端口是7000端口，也就是内网和服务器进行交互的端口，可以修改为其他的端口

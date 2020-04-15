@@ -13,8 +13,7 @@
 * [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
 * [theia-ide/theia](https://github.com/theia-ide/theia):Theia is a cloud & desktop IDE framework implemented in TypeScript. http://theia-ide.org
 
-
-## 说明
+## Tips
 
 * 打印统一 keyMap
 
@@ -266,15 +265,12 @@ livetemplate
 
 ## version control
 
-phpstrom 添加版本信息分组:名词，提交时添加动词
-
-## 参考
-
-
+* 添加版本信息分组:名词
+* 提交时添加动词
 
 ## IDEA
 
-* 就可以自动生成对应的Junit方法:  ALT+SHIFT+T
+* 可以自动生成对应的Junit方法:  ALT+SHIFT+T
 * 最近修改过的文件: Ctrl+E
 * 定位类: ctrl+n
 * 定位文件: ctrl + shift +n
@@ -282,10 +278,14 @@ phpstrom 添加版本信息分组:名词，提交时添加动词
 * 字符串 ctrl + shift + f
 * 大小写 ctrl+shift+u
 * 列操作 ctrl+shift+alt +j
+* 插件
+  - Lombok
 
 数据是统一的，能够实现批量处理
 
 ## live template
+
+
 ## postfix
 
 * ALT+ENTER

@@ -24,9 +24,17 @@ export PATH=/usr/local/bin:/Users/overtrue/.composer/vendor/bin:$PATH
 
 ## 使用
 
+* 服务器准备
+    - PHP 扩展
+    - git
+    - composer
+    - npm
 * 在 Linux 服务器添加账户与配置权限
 * 项目 git 仓库允许服务器访问（clone 代码）
-* 部署web 项目
+* 部署结构
+    - current - 指向一个具体的版本的软链接，你的 nginx 配置中 root 应该指向它，比如 laravel 项目的话 root 就指向：/var/www/demo-app/current/public
+    - releases - 部署的历史版本文件夹，里面可能有很多个最近部署的版本，可以根据你的配置来设置保留多少个版本，建议 5 个。保留版本可以让我们在上线出问题时使用 dep rollback 快速回滚项目到上一个版本。
+    - shared - 共享文件夹，它的作用就是存储我们项目中版本间共享的文件
 
 ```sh
 # 目标机器
@@ -38,19 +46,20 @@ echo "umask 022" >> ~/.bashrc # 用户权限分别设置为创建文件 644 与�
 exit
 
 # /etc/sudoers
-deployer ALL=(ALL) NOPASSWD: ALL
+deployer ALL=(ALL) NOPASSWD: ALL # wq!
 
 sudo chown deployer:www-data /var/www/html
-sudo chmod g+s /var/www/html
+sudo chmod g+s /var/www/html # 让 deployer 用户在 /var/www/html 下创建的文件与目录集成根目录的权限设定
 
+su - deployer
 ssh-keygen -t rsa -b 4096 -C "deployer"
 cat ~/.ssh/id_rsa.pub # 添加到代码库公钥中
 
 # 本地机操作
 ssh-keygen -t rsa -b 4096 -f  ~/.ssh/deployerkey
-ssh-copy-id -i  ~/.ssh/deployerkey.pub deployer@123.45.67.89 # 本地公钥保存到服务器
+ssh-copy-id -i  ~/.ssh/deployerkey.pub deployer@168.138.42.153 # 本地公钥保存到服务器
+ssh deployer@123.45.67.89 -i ~/.ssh/deployerkey
 
-## 项目目录操作
 cd /www/demo-project
 dep init # 在当前目录生成一个 deploy.php  文件
 
@@ -60,16 +69,12 @@ namespace Deployer;
 
 require 'recipe/laravel.php';
 
-// Project name
 set('application', 'xxx');
 
-// Project repository
 set('repository', 'git@github.com:tianyong90/xxx.git');
 
-// [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
 
-// Shared files/dirs between deploys
 add('shared_files', []);
 add('shared_dirs', []);
 
@@ -87,12 +92,12 @@ host('172.16.1.1')
     ->stage('production')
     ->user('root')
     ->port(22)
-    ->set('branch', 'master') // 最新的主分支部署到生产机
+    ->set('branch', 'master')
     ->set('deploy_path', '/data/wwwroot/xxx')
-    ->identityFile('/home/vagrant/.ssh/id_rsa')
+    ->identityFile('~/.ssh/deployerkey')
     ->forwardAgent(true)
     ->multiplexing(true)
-    ->set('http_user', 'www') // 这个与 nginx 里的配置一致
+    ->set('http_user', 'www')
     ->addSshOption('UserKnownHostsFile', '/dev/null')
     ->addSshOption('StrictHostKeyChecking', 'no');
 
@@ -101,9 +106,9 @@ host('172.16.3.2')
     ->stage('debug')
     ->user('root')
     ->port(22)
-    ->set('branch', 'develop') // 一般是把 develop 分支弄到测试机测试，没问题再合并
+    ->set('branch', 'develop')
     ->set('deploy_path', '/data/wwwroot/xxx')
-    ->identityFile('/home/vagrant/.ssh/id_rsa')
+    ->identityFile('~/.ssh/deployerkey')
     ->forwardAgent(true)
     ->multiplexing(true)
     ->set('http_user', 'www')
@@ -112,7 +117,7 @@ host('172.16.3.2')
 
 // 自定义任务：重置 opcache 缓存
 task('opcache_reset', function () {
-    run('{{bin/php}} -r \'opcache_reset();\'');
+    run('{{bin/php}} -r \'opcache_reset();\');
 });
 
 // 自定义任务：重启 php-fpm 服务
@@ -146,15 +151,10 @@ after('success', 'send_message');
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
 
-
 dep deploy -vvv # 准备 hook 文件 -> 在项目上添加一个 Webhook 并设置 hook 的网址
+
+Unable to prepare route [/] for serialization. Uses Closure.
 ```
-
-## 部署结构
-
-* current - 指向一个具体的版本的软链接，你的 nginx 配置中 root 应该指向它，比如 laravel 项目的话 root 就指向：/var/www/demo-app/current/public
-* releases - 部署的历史版本文件夹，里面可能有很多个最近部署的版本，可以根据你的配置来设置保留多少个版本，建议 5 个。保留版本可以让我们在上线出问题时使用 dep rollback 快速回滚项目到上一个版本。
-* shared - 共享文件夹，它的作用就是存储我们项目中版本间共享的文件
 
 ## 工具
 

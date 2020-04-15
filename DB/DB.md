@@ -20,6 +20,9 @@
     - 国际标准化组织 ISO 将图形数据库查询语言 GQL 通过为国际标准，这是继 SQL 以后第二种成为国际标准的数据库查询语言。
 * 结构化查询语言(SQL Structured Query Language)
 * 关系型数据库管理系统(RDBMS Relational Database Management System)
+* 类型
+    - OLTP（Online Transaction Processing）：就是传统的关系型数据库，主要用于处理基本的、日常的事务处理
+    - OLAP（Online Analytical Processing）：主要在数据仓库中使用，用于支持一些复杂的分析和决策
 
 ## 命名
 
