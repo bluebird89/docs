@@ -973,6 +973,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang http://go-colly.org/
     - [Gourouting/singo](https://github.com/Gourouting/singo):Gin+Gorm开发Golang API快速开发脚手架
     - [micro/go-micro](https://github.com/micro/go-micro):A Go microservices development framework https://go-micro.dev
+    - [Terry-Mao / goim](https://github.com/Terry-Mao/goim):goim https://goim.io/
 * 包管理
     - [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
     - [Go Packages](https://godoc.org/)

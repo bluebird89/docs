@@ -194,6 +194,10 @@ $sub = addcslashes(mysql_real_escape_string("%something_"), "%_");
 * [网站体检工具](https://ziyuan.baidu.com/safe/index)
 * [火绒](https://www.huorong.cn/)
 
+## 课程
+
+* [CS 253 Web Security](https://web.stanford.edu/class/cs253/)
+
 ## 工具
 
 * [rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework):Metasploit Framework https://www.metasploit.com/

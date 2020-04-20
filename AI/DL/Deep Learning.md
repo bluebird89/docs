@@ -20,6 +20,77 @@
     - [MUSE: Multilingual Unsupervised and Supervised Embeddings](link)
     - [Domain Transfer Network (DTN)](link)
 
+## 环境配置
+
+* 硬件配置： 超微塔式服务器
+    - 显卡 NVIDIA TITAN Xp *4
+    - 内存 128G
+    - CPU 2620V4* 2
+    - 电源 1600w *2
+    - 硬盘 256G*2+2T*2
+* 使用U盘进行Ubuntu操作系统的安装
+    - 一开始安装选择"Install Ubuntu"回车后过一会儿屏幕如果显示“输入不支持”，这和Ubuntu对显卡的支持有关，在安装主界面的F6，选择nomodeset，就可以进入下一步安装了
+* 安装ssh `sudo apt-get install openssh-server`
+
+```sh
+# 安装NVIDIA TITAN Xp显卡驱动 默认安装的显卡驱动不是英伟达的驱动，所以先把旧得驱动删除掉
+sudo apt-get purge nvidia*
+
+# 添加Graphic Drivers PPA
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt-get update
+
+# 查看合适的驱动版本： 
+ubuntu-drivers devices
+sudo apt-get install nvidia-driver-430
+sudo reboot
+nvidia-smi # 看看生效的显卡驱动
+
+# 安装依赖库
+sudo apt-get install freeglut3-dev build-essential libx11-dev libxmu-dev libxi-devli
+
+# GCC降低版本:CUDA9.0要求GCC版本是5.x或者6.x，其他版本不可以
+sudo apt-get install gcc-5
+sudo apt-get install g++-5
+
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 50
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 50
+
+# 安装Anaconda和tensorflow、keras和pytorch: 让conda自动安装cuda和cudnn
+bash Anaconda3-2019.03-Linux-x86_64.sh
+# 更改pip和conda为国内的源
+mkdir ~/.pip
+
+cat > ~/.pip/pip.conf << EOF
+[global]
+trusted-host=mirrors.aliyun.com
+index-url=https://mirrors.aliyun.com/pypi/simple/
+EOF
+
+# 在Anaconda中安装Python3.7的虚拟环境 创建一个Python的虚拟环境
+conda create --name tf python=3.7 #创建tf环境
+source activate tf #激活tf环境
+source deactivate tf #退出tf环境
+conda remove --name tf --all #删除tf环境（全部删除）
+
+# 在Anaconda中安装TensorFlow GPU 1.9
+conda install tensorflow-gpu==1.9
+
+# 测试安装正确性
+source activate tf
+python
+
+import tensorflowas tf
+hello= tf.constant('Hello, TensorFlow!')
+sess= tf.Session()
+print(sess.run(hello))
+
+# 安装Keras
+conda install pytorch torchvision -c pytorch
+import torch
+print(torch.cuda.is_available())
+```
+
 ## 课程
 
 * [深度学习](https://mooc.study.163.com/university/deeplearning_ai#/c)
