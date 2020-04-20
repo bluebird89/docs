@@ -42,3 +42,8 @@
 
 
 Grafana求，配合 Prometheus 以及 Prometheus 相关的 Exporter
+
+## 工具
+
+* [nicolargo / glances](https://github.com/nicolargo/glances):Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems. http://nicolargo.github.io/glances/
+* [plausible-insights / plausible](https://github.com/plausible-insights/plausible):Simple, lightweight analytics for your website https://plausible.io

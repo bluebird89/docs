@@ -77,6 +77,10 @@
     - 区块链：需求同比增长 517%：精通区块链的工程师通常拥有后端工程师、系统工程师或解决方案架构师等头衔
 * 结对编程（一种开发方式，两名程序员在一个工作站上工作）的工作方式能够提高自己在一家公司工作的意愿
 
+## 闭包
+
+* 变量的值始终保持在内存中
+
 ## 工具
 
 * [bazelbuild/bazel](https://github.com/bazelbuild/bazel):a fast, scalable, multi-language and extensible build system https://bazel.build

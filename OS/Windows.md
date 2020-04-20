@@ -69,6 +69,7 @@ Windows是最烂的开发平台
   - Window Walker 直接输入软件的名字来进行准确定位, Ctrl+Win 徽标键即可打开
   - 批量调节图片尺寸
 * [xmeters](https://entropy6.com/xmeters/):Taskbar System Stats for Windows
+* [Desktop Info](https://www.glenn.delahoy.com/desktopinfo/)
 
 ```sh
 ## 安装 choco 以管理员运行cmd
