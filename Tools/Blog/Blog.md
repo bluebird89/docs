@@ -101,6 +101,8 @@ jekyll serve
 
 ## [docsify](https://docsify.js.org/#/)
 
+## [Halo](https://github.com/halo-dev/halo)
+
 ## 博客资源
 
 * [Work life](https://www.atlassian.com/blog)

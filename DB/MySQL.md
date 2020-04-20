@@ -121,8 +121,8 @@ sudo apt-get --purge remove mariadb-server
 
 * server 层
     - 连接器:通信协议是“半双工”:在任一时刻，要么是服务器向客户端发送数据，要么是客户端向服务器发送数据，这两个动作不能同时发生
-        + 负责将 mysql 客户端和服务端建立连接，连接成功后，会获取当前连接用户的权限
-        + 获取到的权限对整个连接都有效，一旦连接成功后，如果使用管理员账号对该用户更改权限，当前连接中的拥有的权限保持不变，只有等到下次重新连接才会更新权限
+        + 连接处理：负责将 mysql 客户端和服务端建立连接，连接成功后，会获取当前连接用户的权限
+        + 授权认证：获取到的权限对整个连接都有效，一旦连接成功后，如果使用管理员账号对该用户更改权限，当前连接中的拥有的权限保持不变，只有等到下次重新连接才会更新权限
         + 客户端用一个单独的数据包将查询请求发送给服务器，所以当查询语句很长的时候，需要设置 max_allowed_packet参数。但是需要注意的是，如果查询实在是太大，服务端会拒绝接收更多数据并抛出异常。
         + 服务器响应给用户的数据通常会很多，由多个数据包组成。但是当服务器响应客户端请求时，客户端必须完整的接收整个返回结果，而不能简单的只取前面几条结果，然后让服务器停止发送。因而在实际开发中，尽量保持查询简单且只返回必需的数据，减小通信间数据包的大小和数量
         + 客户端如果太长时间没动静，连接器就会自动将它断开。这个时间是由参数 wait_timeout 控制的，默认值是 8 小时。
@@ -159,7 +159,7 @@ sudo apt-get --purge remove mariadb-server
             * 检查单词是否拼写错误
             * 检查要查询的表或字段是否存在。检测出有错误就会返回类似 "You have an error in your sql" 这样的错误信息，并结束查询操作
     - 优化器：对于一个 sql 语句，mysql 内部可能存在多种执行方案，结果都一样，但效率不一样，在执行之前需要尝试找出一个最优的执行计划.在表里面有多个索引的时候，决定使用哪个索引；或者在一个语句有多表关联（join）的时候，决定各个表的连接顺序。
-        + 基于成本的优化器:它尝试预测一个查询使用某种执行计划时的成本，并选择其中成本最小的一个。成本的最小单位是读取一个4K数据页的成本
+        + 基于成本的优化器:尝试预测一个查询使用某种执行计划时的成本，并选择其中成本最小的一个。成本的最小单位是读取一个4K数据页的成本
         + 在MySQL可以通过查询当前会话的 last_query_cost的值来得到其计算当前查询的成本 `show status like 'last_query_cost';` 结果为数据页的数量
         + 有非常多的原因会导致MySQL选择错误的执行计划
             * 比如统计信息不准确、不会考虑不受其控制的操作成本（用户自定义函数、存储过程）
@@ -168,7 +168,7 @@ sudo apt-get --purge remove mariadb-server
             * 多表关联的查询（INTER JOIN）:优化器会根据数据的选择性来重新决定关联的顺序，选择性高的会被置前。如果关联设计到N张表，优化器会尝试N！种的关联顺序，从中选出一种最优的排列顺序
             * 提前终止查询（比如：使用Limit时，查找到满足数量的结果集后会立即终止查询）
             * 将外连接转化成内连接
-            * 覆盖索引扫描：索引中的列包含所有查询中需要的列的时候，只需要使用索引返回数据，不需要搜索数据行
+            * 覆盖索引：索引中的列包含所有查询中需要的列的时候，只需要使用索引返回数据，不需要搜索数据行
             * 优化排序
                 - 在老版本MySQL会使用两次传输排序，即先读取行指针和需要排序的字段在内存中对其排序，然后再根据排序结果去读取数据行
                 - 新版本采用的是单次传输排序，也就是一次读取所有的数据行，然后根据给定的列排序,对于I/O密集型应用，效率会高很多）
@@ -578,7 +578,7 @@ SHOW VARIABLES
 * 日期时间
     - date 3字节 1000-01-01 - 9999-12-31 current_date
     - year 1字节 1901 - 2155
-    - time 3字节 -838:59:59 - 838:59:59 10:09:08  CURRENT_TIME() 
+    - time 3字节 -838:59:59 - 838:59:59 10:09:08  CURRENT_TIME()
         +  ADDTIME(CURRENT_TIME(), 023000),  SUBTIME(CURRENT_TIME(), 023000);
         +  TIMEDIFF(end_at, start_at)
         +  TIME_FORMAT(start_at, '%h:%i %p') start_at
@@ -848,13 +848,13 @@ ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和
     - 公共字段名字可以不一样，但是数据类型必须一样
     - 联表查询降低查询速度
     - 数据冗余与查询速度的平衡
-    - 内连接(inner join) 默认,可省略inner 
+    - 内连接(inner join) 默认,可省略inner
         + 只有数据存在时才能发送连接。即连接结果不能出现空行
         + on 表示连接条件。其条件表达式与where类似。也可以省略条件（表示条件永远为真）
         + where表示连接条件 `select info.id, info.name, info.stu_num, extra_info.hobby, extra_info.sex from info, extra_info where info.stu_num = extra_info.stu_id;`
         + `using(字段名)`:需字段名相同。
         + 交叉连接 cross join 即没有条件的内连接  `select * from tb1 cross join tb2;`
-    - 外连接(outer join) 
+    - 外连接(outer join)
         + 如果数据不存在，也会出现在连接结果中
         + 左外连接 left join 如果数据不存在，左表记录会出现，而右表为null填充
         + 右外连接 right join 如果数据不存在，右表记录会出现，而左表为null填充
@@ -886,7 +886,7 @@ SELECT id,title,author,hits,addate from news ORDER BY id DESC LIMIT 10,10; # lim
 SELECT * FROM rp_evaluate LIMIT 500 * $i, 500
 SELECT `rp_e_id`,`evaluate` FROM `rp_evaluate` WHERE `rp_e_id` > 0 LIMIT 500
 SELECT column_name AS alias_name FROM table_name;
-SELECT column_name(s) FROM table_name AS alias_name; 
+SELECT column_name(s) FROM table_name AS alias_name;
 SELECT w.name, w.url, a.count, a.date FROM Websites AS w, access_log AS a WHERE a.site_id=w.id and w.name="菜鸟教程";
 SELECT concat('a', 'b') # ab
 SELECT concat_ws(',', 'a', 'b') # e,t
@@ -1815,11 +1815,11 @@ select * from information_schema.innodb_trx; # 查看已开启的事务
     - InnoDB的二级索引的叶子节点包含主键值而不是行指针(Row Pointer)，这减小了移动数据或者数据页面分裂时维护二级索引的开销，因为InnoDB不需要更新索引的行指针
     - 根据申明这个索引时候的列来构建，叶子节点存放的是这一行记录对应的主键的值，根据普通索引查询需要先在普通索引上找到对应的主键的值，然后根据主键值去聚簇索引上查找记录，俗称回表
     - data 域存储相应记录主键的值而不是地址
-* 覆盖索引：普通索引（如：组合索引）中包含所有要查询的字段的值,不需要回表(回磁盘扫描相应的数据，从而避免了查询中最耗时的磁盘 I/O 读取)
+* 覆盖索引：普通索引（如：组合索引）中包含所有要查询的字段的值
+    - 不需要回表(读取行数据 回磁盘扫描相应的数据，从而避免了查询中最耗时的磁盘 I/O 读取)
     - 查看是否使用了覆盖索引可以通过执行计划中的Extra中的值为Using index
-    - 不用读取行数据，当发起一个被索引覆盖的查询,避免了读取磁盘数据文件中的行
     - Innodb的辅助索引叶子节点包含的是主键列，所以主键一定是被索引覆盖的
-    - 在一些情况中，可以对一个查询进行优化以便不用查询数据行即可以检索值。如果查询只使用来自某个表的数字型并且构成某些关键字的最左面前缀的列，为了更快，可以从索引树检索出值。`SELECT key_part3 FROM tb WHERE key_part1=1`
+    - 如果查询只使用来自某个表的数字型并且构成某些关键字的最左面前缀的列，为了更快，可以从索引树检索出值。`SELECT key_part3 FROM tb WHERE key_part1=1`
 * 三星索引指：是对于一个查询，设立了三个通用的索引条件满足的条件，建立的索引对于特定的查询每满足一个条件就表示该索引得到一颗星，当该索引得到三颗星时
     - 取出所有的等值谓词的列 （WHERE COL=…） 作为索引开头的列；
     - 将 ORDER BY 中的列加入到索引中；
@@ -1850,6 +1850,7 @@ select * from information_schema.innodb_trx; # 查看已开启的事务
         + 不支持索引完成排序
         + 不支持联合索引的最左前缀匹配规则
     - HEAP表中，如果存储的数据重复度很低（也就是说基数很大），对该列数据以等值查询为主，没有范围查询、没有排序的时候，特别适合采用哈希索引
+* Hash 和full-text索引不存储值，因此MySQL只能使用B-TREE
 
 ![clustered-index](../_static/clustered-index.jpg "clustered-index")
 
@@ -2108,7 +2109,7 @@ ALTER FUNCTION function_name 函数选项
 
 ```sql
 CREATE TRIGGER trigger_name trigger_time trigger_event ON tbl_name FOR EACH ROW trigger_stmt
-   
+
 DROP TRIGGER [schema_name.]trigger_name
 ```
 
@@ -2384,7 +2385,7 @@ select @var:=20;
 select * from tbl_name where @var:=30;
 
 # 控制结构
-if search_condition then 
+if search_condition then
     statement_list
 [elseif search_condition then
     statement_list]

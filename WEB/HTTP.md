@@ -1,6 +1,6 @@
-# HTTP
+# HTTP协议（HyperText Transfer Protocol，超文本传输协议）
 
-HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网上应用最为广泛的一种基于 TCP/IP 通信协议来传递数据的网络传输应用层协议。以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规范
+因特网上应用最为广泛的一种基于 TCP/IP 通信协议来传递数据的网络传输应用层协议。以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规范
 
 * TCP/IP协议是传输层协议，主要解决数据如何在网络中传输
 * HTTP是应用层协议，主要解决如何包装数据。详细规定了浏览器与服务器之间相互通信的规则，是万维网交换信息的基础
@@ -42,59 +42,61 @@ HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网�
 * URI 格式:router+search+hash `https://www.baidu.com?key1=vvalue1&key2=value2#test`
     - hash，哈希值或者称为锚，是#后面的字符串，一般作为单页应用的路由地址，或者文档的锚
 
-### 预检请求（preflight request）
+## CORS（cross-origin resource sharing） 跨源资源共享（俗称『跨域请求』）
 
-* 跨域资源共享 CROS (Cross-origin resource sharing)
-* 请求会先用 HTTP 的 OPTION 方法去另外一个域敲门，确认没问题后才会送出真正的请求
-* 新增了一组 HTTP 首部字段，允许服务器声明哪些源站有权限访问哪些资源。
-* 规范要求，对那些可能对服务器数据产生副作用的HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求）
-* 浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求
-* 服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 Cookies 和 HTTP 认证相关数据）
-* Content-Type不属于简单请求（MIME类型），都属于预检请求
-    - 使用下列方法之一：
-        + GET
-        + HEAD:获取http header
-        + POST
-    - Fetch 规范定义了对 CORS 安全的首部字段集合，不得人为设置该集合之外的其他首部字段。该集合为：
-        + Accept
-        + Accept-Language
-        + Content-Language
-        + Content-Type （需要注意额外的限制）
-        + DPR
-        + Downlink
-        + Save-Data
-        + Viewport-Width
-        + Width
-    - Content-Type 的值仅限于下列三者之一：
-        + text/plain
-        + multipart/form-data
-        + application/x-www-form-urlencoded
-    - 请求中的任意XMLHttpRequestUpload 对象均没有注册任何事件监听器；XMLHttpRequestUpload 对象可以使用 XMLHttpRequest.upload 属性访问。
-    - 请求中没有使用 ReadableStream 对象。
-* 满足下述任一条件时，即应首先发送预检请求,"预检"请求会带上头部信息 Access-Control-Request-Headers: Content-Type
-    - 使用了下面任一 HTTP 方法：
-        + PUT:资源更新
-        + DELETE
-        + CONNECT:建立隧道通信
-        + OPTIONS:获取支持的method
-        + TRACE:追踪，返回请求回环信息
-        + PATCH
-    - 人为设置了对 CORS 安全的首部字段集合之外的其他首部字段。该集合为：
-        + Accept
-        + Accept-Language
-        + Content-Language
-        + Content-Type (需要注意额外的限制)
-        + DPR
-        + Downlink
-        + Save-Data
-        + Viewport-Width
-        + Width
-    - Content-Type 的值不属于下列之一:
-        + application/x-www-form-urlencoded
-        + multipart/form-data
-        + text/plain
-    - 请求中的XMLHttpRequestUpload 对象注册了任意多个事件监听器。
-    - 请求中使用了ReadableStream对象
+* 简单请求:普通 HTML Form 在不依赖脚本的情况下可以发出的请求，比如表单的 method 如果指定为 POST ，可以用 enctype 属性指定用什么方式对表单内容进行编码，合法的值就是前述这三种
+* 非简单请求:普通 HTML Form 无法实现的请求
+* 预检请求（preflight request）
+    - 请求会先用 HTTP 的 OPTION 方法去另外一个域敲门，确认没问题后才会送出真正的请求
+    - 新增了一组 HTTP 首部字段，允许服务器声明哪些源站有权限访问哪些资源。
+    - 规范要求，对那些可能对服务器数据产生副作用的HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求）
+    - 浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求
+    - 服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 Cookies 和 HTTP 认证相关数据）
+    - Content-Type不属于简单请求（MIME类型），都属于预检请求
+        + 使用下列方法之一：
+            * GET
+            * HEAD:获取http header
+            * POST
+        + Fetch 规范定义了对 CORS 安全的首部字段集合，不得人为设置该集合之外的其他首部字段。该集合为：
+            * Accept
+            * Accept-Language
+            * Content-Language
+            * Content-Type （需要注意额外的限制）
+            * DPR
+            * Downlink
+            * Save-Data
+            * Viewport-Width
+            * Width
+        + Content-Type 的值仅限于下列三者之一：
+            * text/plain
+            * multipart/form-data
+            * application/x-www-form-urlencoded
+        + 请求中的任意XMLHttpRequestUpload 对象均没有注册任何事件监听器；XMLHttpRequestUpload 对象可以使用 XMLHttpRequest.upload 属性访问。
+        + 请求中没有使用 ReadableStream 对象。
+    - 满足下述任一条件时，即应首先发送预检请求,"预检"请求会带上头部信息 Access-Control-Request-Headers: Content-Type
+        + 使用了下面任一 HTTP 方法：
+            * PUT:资源更新
+            * DELETE
+            * CONNECT:建立隧道通信
+            * OPTIONS:获取支持的method
+            * TRACE:追踪，返回请求回环信息
+            * PATCH
+        + 人为设置了对 CORS 安全的首部字段集合之外的其他首部字段。该集合为：
+            * Accept
+            * Accept-Language
+            * Content-Language
+            * Content-Type (需要注意额外的限制)
+            * DPR
+            * Downlink
+            * Save-Data
+            * Viewport-Width
+            * Width
+        + Content-Type 的值不属于下列之一:
+            * application/x-www-form-urlencoded
+            * multipart/form-data
+            * text/plain
+        + 请求中的XMLHttpRequestUpload 对象注册了任意多个事件监听器。
+        + 请求中使用了ReadableStream对象
 
 ## 流程
 
@@ -477,11 +479,44 @@ curl "http://127.0.0.1:8889/" -vv
 * 域名的NS记录（Name Server）是指处理域名解析的服务器
     - [Cloudflare](https://dash.cloudflare.com/):国外站点解析加速
     - [DNSpod](https://console.dnspod.cn/)
+    - [NextDNS](https://nextdns.io/):Block ads, trackers and malicious websites on all your devices. Get in-depth analytics about your Internet traffic. Protect your privacy and bypass censorship. Shield your kids from adult content.
 
 ```
 ns3.dnsowl.com # name silo default name server 
 ns3.dnsowl.com 
 ns3.dnsowl.com
+
+```
+### 公共 DNS 服务
+# /etc/resolv.conf
+# Google Public DNS IP addresses
+8.8.8.8
+8.8.4.4
+
+2001:4860:4860::8888
+2001:4860:4860::8844
+
+Public DNS+ 
+119.29.29.29
+182.254.116.116
+
+#百度 BaiduDNS
+180.76.76.76
+
+# 114dns
+114.114.114.114
+114.114.114.115
+
+# Cloudflare
+1.1.1.1
+1.0.0.1
+
+# alidns 
+nameserver 223.5.5.5
+nameserver 223.6.6.6
+
+# tsinghua
+101.6.6.6 / 2001:da8::666
 ```
 
 ## 查询过程
@@ -561,40 +596,6 @@ sudo killall mDNSResponderHelper
 sudo dscacheutil -flushcache
 
 ifconfig /flushdns # 刷新DNS
-```
-
-### 公共 DNS 服务
-
-```
-# /etc/resolv.conf
-# Google Public DNS IP addresses
-8.8.8.8
-8.8.4.4
-
-2001:4860:4860::8888
-2001:4860:4860::8844
-
-Public DNS+ 
-119.29.29.29
-182.254.116.116
-
-#百度 BaiduDNS
-180.76.76.76
-
-# 114dns
-114.114.114.114
-114.114.114.115
-
-# Cloudflare
-1.1.1.1
-1.0.0.1
-
-# alidns 
-nameserver 223.5.5.5
-nameserver 223.6.6.6
-
-# tsinghua
-101.6.6.6 / 2001:da8::666
 ```
 
 ## HTTP控制常见特性
@@ -946,8 +947,6 @@ sudo certbot --apache -d packagist.domain.com
 acme.sh --issue -d thinkphp.com -w /home/henry/Workspace/thinkphp/public
 acme.sh --issue --debug -d thinkphp.com -d henry.thinkphp.com -w /home/henry/Workspace/thinkphp/public
 ```
-
-### CORS(跨域资源共享)
 
 ## 存储
 

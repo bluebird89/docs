@@ -43,6 +43,8 @@ vagrant box add {title} {url} # 添加镜像 title ubuntu/trusty64 [laravel/home
 vagrant box add ubuntu/trusty64 # 通过包名先去本地是否存在，没有去仓库下载，下载的版本在上述命令行下加入 --box-version=版本号
 vagrant box add hahaha ~/box/package.box # 加载本地文件(package包)
 vagrant box add precise64 http://files.vagrantup.com/precise64.box
+# The specified checksum type is not supported by Vagrant: sha512. Vagrant supports the following checksum types: md5, sha1, sha256
+# Upgrade vagrant version to 2.2.6 and up
 
 vagrant box remove ubuntu/trusty64  --box-version=20170810.0.0  # 移除镜像,指定版本
 vagrant box repackage  # 重新打包

@@ -2012,7 +2012,9 @@ access_by_lua_file /etc/nginx/waf/waf.lua ;
 * 验证方式
     - http 验证: 会验证是否拥有当前域名，最基本的方式在网站根目录创建一个文件 /.well-known/acme-challenge/，并通过域名在外部进行请求，如能请求到则认为拥有该网站的控制权
     - DNS 验证:通过使用域名服务商提供的 API 密钥,让acme.sh自动创建域名验证记录以申请域名证书,回生成一个txt的dns记录 _acme-challenge.domain，验证是否访问成功
+        + 使用 DNS TXT 记录验证方式
 * 证书生成有限制：每个注册域名的证书数量（每周 50 张）
+* 支持多个域名签发一张多域名证书
 
 ```sh
 # 官方dnsapi获取阿里云的API
@@ -2047,6 +2049,9 @@ location ^~ /.well-known/acme-challenge/ {
 # API 签发
 acme.sh --issue --dns dns_dp -d bluebird89.online -d www.bluebird89.online --webroot /usr/share/nginx/www --nginx # dns_dp为 腾讯云DNSPod.cn 服务商, dns_ali为阿里云,dns_cf为CLoudflare
 # _acme-challenge.bluebird89.online Not valid yet, let\'s wait 10 seconds and check next one.
+acme.sh --issue -d example.com -d '*.example.com' --dns # 通配符证书
+dig TXT _acme-challenge.example.com @9.9.9.9 +short
+acme.sh --renew -d example.com -d '*.example.com' # 生效后给证书续
 
 # 手动签发
 acme.sh --issue -d www.bluebird89.online -w /usr/share/nginx/www --nginx  
@@ -2062,6 +2067,9 @@ acme.sh --installcert -d www.bluebird89.online \
 --fullchain-file /etc/nginx/ssl/www.bluebird89.online/fullchain.cer \
 --reloadcmd     "service nginx force-reload"
 
+# 生成 DHE 参数文件，迪菲-赫尔曼密钥交换，一种灰常强大的安全协议
+openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048
+
 # "ssl_stapling" ignored, issuer certificate not found for certificate
 server {
     listen 80;
@@ -2071,32 +2079,50 @@ server {
 }
 
 server{
-    listen 443 ssl;
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
     server_name www.bluebird89.online;
     server_name bluebird89.online;
 
     ssl_certificate /etc/nginx/ssl/www.bluebird89.online/www.bluebird89.online.cer;
     ssl_certificate_key /etc/nginx/ssl/www.bluebird89.online/www.bluebird89.online.key;
     
+    ssl_dhparam /etc/nginx/ssl/dhparam.pem;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
     ssl_prefer_server_ciphers on;
-    # ssl_dhparam /etc/ssl/certs/dhparam.pem;
+
     ssl_ciphers
     'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA';
     ssl_session_timeout 1d;
-    #使用ssl_session_cache优化https下Nginx的性能
     ssl_session_cache builtin:1000 shared:SSL:10m;
-    ssl_stapling on;
-    ssl_stapling_verify on;
-    add_header Strict-Transport-Security max-age=15768000;
 
+# 如果需要开启 OSCP 功能，则需要加入
+#   ssl_stapling               on;
+#   ssl_stapling_verify        on;
+# ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates;
+#   resolver                   8.8.8.8 8.8.4.4 valid=300s;
+#   resolver_timeout           10s;
+
+# 如果 Nginx 配置了 SNI 即多个站点，多个证书，则需要用到如下配置，先生成文件 openssl rand 48 > /etc/nginx/ssl/session_ticket.key
+#   ssl_session_ticket_key     /etc/nginx/ssl/session_ticket.key;
+#   ssl_session_tickets        off;
+
+# 开启 HSTS Preload 支持
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"; 
+    add_header X-Frame-Options SAMEORIGIN;
+    add_header X-Content-Type-Options nosniff;
+    add_header X-XSS-Protection "1; mode=block";
     access_log /var/log/nginx/www_access.log;
     error_log /var/log/nginx/www_error.log;
 
-    location / {
-        root /usr/share/nginx/www;
-        index index.html index.htm index.php;
-    }
+    root /usr/share/nginx/www;
+    index index.html index.htm index.php;
+
+# 开启 PHP7.2-fpm 模式
+#   location ~ \.php$ {
+#     include snippets/fastcgi-php.conf;
+#    fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+#  }
 
     include /etc/nginx/snippets/letsencrypt-webroot;
 }
@@ -2148,6 +2174,44 @@ server {
     deny all;
   }
 }
+
+<VirtualHost *:80>
+
+  ServerName example.com
+  Redirect permanent / https://example.com/
+</VirtualHost>
+
+LoadModule headers_module modules/mod_headers.so
+
+<VirtualHost *:443>
+
+    SSLEngine on
+    SSLCertificateFile      /etc/apache2/ssl/example.com.crt
+    SSLCertificateKeyFile   /etc/apache2/ssl/example.com.key
+
+    # Uncomment the following directive when using client certificate authentication
+    #SSLCACertificateFile    /path/to/ca_certs_for_client_authentication
+
+
+    # HSTS (mod_headers is required) (15768000 seconds = 6 months)
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
+    Header always set X-Frame-Options SAMEORIGIN
+    Header always set X-Content-Type-Options nosniff
+    Header set X-XSS-Protection "1; mode=block"
+</VirtualHost>
+
+# intermediate configuration, tweak to your needs
+SSLProtocol             all -SSLv3
+SSLCipherSuite          ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS
+SSLHonorCipherOrder     on
+SSLCompression          off
+SSLSessionTickets       off
+
+# OCSP Stapling, only in httpd 2.3.3 and later
+# SSLUseStapling          on
+# SSLStaplingResponderTimeout 5
+# SSLStaplingReturnResponderErrors off
+# SSLStaplingCache        shmcb:/var/run/ocsp(128000)
 
 acme.sh --renew -d www.bluebird89.online --force --debug
 

@@ -75,8 +75,8 @@ pip install IPython
 * [初始教程](https://www.datacamp.com/community/tutorials/tensorflow-tutorial)
 * [tensorflow/models](https://github.com/tensorflow/models):Models and examples built with TensorFlow
 * [TensorFlow 官方 YouTube 频道](https://www.youtube.com/channel/UC0rqucBdTuFTjJiefW5t-IQ)
-* [博客](https://medium.com/tensorflow)
 * [TensorFlow教程](https://www.tensorflow.org/tutorials)
+* [简单粗暴 TensorFlow 2 | A Concise Handbook of TensorFlow 2](https://tf.wiki/index.html)
 
 ## 工具
 

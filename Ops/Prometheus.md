@@ -705,3 +705,4 @@ spec:
 ## 参考
 
 * [yunlzheng/prometheus-book](https://github.com/yunlzheng/prometheus-book):Prometheus操作指南  <https://yunlzheng.gitbook.io/prometheus-book/>
+* [Prometheus 中文文档](https://fuckcloudnative.io/prometheus/)

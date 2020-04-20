@@ -184,6 +184,8 @@ pip install shadowsocks
   - [Potatso lite](https://itunes.apple.com/us/app/potatso-lite/id1239860606)
   - [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
   - [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu https://shadowsocks.be
+  - [Qv2ray / Qv2ray](https://github.com/Qv2ray/Qv2ray):🌟 V2Ray/Trojan-GFW/SSR Linux/Windows/macOS 跨平台 GUI 🔨 使用 C++17/Qt5 ，支持订阅，扫描二维码，自定义路由编辑 🌟 https://qv2ray.github.io
+  - [mellow-io / mellow](https://github.com/mellow-io/mellow):Mellow is a rule-based global transparent proxy client for Windows, macOS and Linux.
 * [Dreamacro / clash](https://github.com/Dreamacro/clash):A rule-based tunnel in Go.
   - `go get -u -v github.com/Dreamacro/clash`
 
@@ -196,3 +198,4 @@ pip install shadowsocks
 * [max2max/freess](https://github.com/max2max/freess)
 * [haoel/haoel.github.io](https://github.com/haoel/haoel.github.io)
 * [JadaGates/ShadowsocksBio](https://github.com/JadaGates/ShadowsocksBio):SS的前世今生
+* [yangchuansheng / love-gfw](https://github.com/yangchuansheng/love-gfw):🔥以社会主义核心价值观为指导思想，实现 Linux 和 MacOS 设备的全局智能分流 https://fuckcloudnative.io/posts/linux-circumvent/
