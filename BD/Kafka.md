@@ -537,6 +537,7 @@ larger than available brokers 0
     - [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. https://shopify.github.io/sarama
 * [Cruise Control](http://www.infoq.com/cn/news/2017/09/LinkedIn-open-Cruise-Control-Kaf):一个Kafka集群自动化运维新利器
 * [wurstmeister/kafka-docker](https://github.com/wurstmeister/kafka-docker):Dockerfile for Apache Kafka http://wurstmeister.github.io/kafka-d…
+* [xaecbd / KafkaCenter](https://github.com/xaecbd/KafkaCenter):KafkaCenter is a unified one-stop platform for Kafka cluster management and maintenance, producer / consumer monitoring, and use of ecological components. https://xaecbd.github.io/KafkaCenter/
 
 ## 参考
 

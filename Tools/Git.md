@@ -1309,7 +1309,7 @@ git merge FETCH_HEAD
   - [GitHub规范](https://guides.github.com/)
   - [github/hub](https://github.com/github/hub):A command-line tool that makes git easier to use with GitHub. https://hub.github.com/
 * 技巧
-  - 源码浏览页面，按 t 可以快速进入模糊文件名搜索模式
+  - Fuzzy file finder: 按 t 可以快速进入模糊文件名搜索模式
   - 仓库主页，按 w 可以快速进行分支过滤
   - 任意 GitHub 页面中，按 ? 展示当前页面可用的快捷键
   - 在任意的 diff URL 添加 ?w=1 用来整理缩进
@@ -1319,7 +1319,8 @@ git merge FETCH_HEAD
   - 在比较页面、合并请求页面或者评论页面的URL后增加 .diff 或者 .patch，可以得到 diff 或者 patch 的文本格式。
   - 可以直接在收到的 GitHub 通知邮件进行评论，不必在网站页面中评论
   - 在文件展示页面，点击某行或者通过按 SHIFT 选择多行，URL 会有相应的改变。如果你要给你的队友分享一段代码是非常方便的：
-  - 在合并请求、问题或者任何评论中中提到用户会使用户关注全部的后续通知,sha和问题码(例如：#1)会被自动链接。并且也可以链接其它仓库的 sha 或者问题码，格式：user/repo@sha1 或者 user/repo#1。
+  - 在合并请求、问题或者任何评论中中提到用户会使用户关注全部的后续通知,sha和问题码(例如：#1)会被自动链接。并且也可以链接其它仓库的 sha 或者问题码，格式：user/repo@sha1 或者 user/repo#1
+  - 插件 Octotree
 * 速度慢
   - 添加本地dns， 通过[ipaddress](https://www.ipaddress.com/)查询ip
   - 先通过码云导入 GitHub 上项目；码云clone；修改 .git/config 替换为原来 github地址

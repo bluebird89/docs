@@ -2487,7 +2487,12 @@ function boot()
 * `storage/logs`中的日志文件
 * lavavel批量插入保证字段名称、数量一致，不要赛选数据
 
+```sh
+php artisan clear-compiled
+php artisan cache:clear
+php artisan route:clear
 $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
+```
 
 ## 任务调度
 
@@ -2737,6 +2742,7 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
 composer require encore/laravel-admin
 php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
 # config/admin.php，修改安装的地址、数据库连接、以及表名
+php artisan config:cache 
 php artisan admin:install
 # 查看版本
 composer show encore/laravel-admin
@@ -2849,17 +2855,6 @@ php artisan horizon
 php artisan horizon:pause|continue|terminate
 ```
 
-## 教程
-
-* [xiaohuilam/laravel](https://github.com/xiaohuilam/laravel/wiki):Laravel 深入浅出指南 —— Laravel 5.7 源代码解析，新手进阶指南。
-* [learning laravel](https://learninglaravel.net)
-* [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
-* [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart
-* [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
-* [laravel入门教程](https://d.laravel-china.org/docs/5.5)
-* [基于 Laravel + Vue 构建 API 驱动的前后端分离应用系列](https://laravelacademy.org/category/api-app)
-* [基于 Laravel 构建前后端分离应用系列教程](https://laravelacademy.org/api-driven-development-laravel-vue)
-
 ## 项目
 
 * [Laravel5.5 + Vue开发单页应用](http://www.laravel-vue.xyz/2018/03/22/laravel_vue_v2/)
@@ -2908,6 +2903,15 @@ password: password
 * [LeoYang90/laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis):详解 laravel 源码
 * [深入 Laravel 核心](https://learnku.com/docs/laravel-core-concept/5.5)
 * [Laravel 之道](https://learnku.com/docs/the-laravel-way/5.6)
+
+* [xiaohuilam/laravel](https://github.com/xiaohuilam/laravel/wiki):Laravel 深入浅出指南 —— Laravel 5.7 源代码解析，新手进阶指南。
+* [learning laravel](https://learninglaravel.net)
+* [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
+* [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart
+* [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
+* [laravel入门教程](https://d.laravel-china.org/docs/5.5)
+* [基于 Laravel + Vue 构建 API 驱动的前后端分离应用系列](https://laravelacademy.org/category/api-app)
+* [基于 Laravel 构建前后端分离应用系列教程](https://laravelacademy.org/api-driven-development-laravel-vue)
 
 ## 前后端分离
 

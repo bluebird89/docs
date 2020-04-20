@@ -24,14 +24,17 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
   - 轻便，移植性高
   - 不需要打包系统进镜像所以体积非常小
   - Dockerfile 镜像构建机制让镜像打包部署自动化
+* 场景
+  - Automating the packaging and deployment of applications
+  - Creation of lightweight, private PAAS environment
+  - Automated testing and continuous integration/deployment
+  - Deploying and scaling web apps, databases and backend services
+  - 统一、优化和加速本地开发和构建流程
+  - 保证不同的环境中可以得到相同的运行结果
+  - 创建隔离环境用于测试
 
 ![Docker的总体架构图](../_static/architect_docker.jpg)
 ![Docker vs VM](../_static/VMvsDocker.jpg)
-
-## 概念
-
-* Docker Engine：整个Docker的核心与基础，平时使用的docker命令，以及提供Docker核心功能的Docker守护进程（Docker Deamon）——包括管理Image、运行Contrainer等
-* Boot2Docker：Docker基于Linux内核特性，因此只能运行于Linux之上，为了能在Mac/Windows系统上运行，有了Boot2Docker。Boot2Docker会先启动一个VirtualBox虚拟机，然后在该虚拟机中运行一个Linux系统，再在Linux中运行Docker
 
 ## 虚拟化进程
 
@@ -259,65 +262,24 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
-## [docker/machine](https://github.com/docker/machine) 
-
-Machine management for a container-centric world 创建运行Docker的宿主机的，比如AWS、Azure上的虚拟机，也可以用来在本地创建VirtualBox等虚拟机.直接把Boot2Docker的功能也取代了，于是Boot2Docker成为了历史
-
-* config：查看当前激活状态 Docker 主机的连接信息
-* creat：创建 Docker 主机
-  - 需要 Boot2Docker ISO 支持
-* env：显示连接到某个主机需要的环境变量
-* inspect： 以 json 格式输出指定Docker的详细信息
-* ip： 获取指定 Docker 主机的地址
-* kill： 直接杀死指定的 Docker 主机
-* ls： 列出所有的管理主机
-* provision： 重新配置指定主机
-* regenerate-certs： 为某个主机重新生成 TLS 信息
-* restart： 重启指定的主机
-* rm： 删除某台 Docker 主机，对应的虚拟机也会被删除
-* ssh： 通过 SSH 连接到主机上，执行命令
-* scp： 在 Docker 主机之间以及 Docker 主机和本地主机之间通过 scp 远程复制数据
-* mount： 使用 SSHFS 从计算机装载或卸载目录
-* start： 启动一个指定的 Docker 主机，如果对象是个虚拟机，该虚拟机将被启动
-* status： 获取指定 Docker 主机的状态(包括：Running、Paused、Saved、Stopped、Stopping、Starting、Error)等
-* stop： 停止一个指定的 Docker 主机
-* upgrade： 将一个指定主机的 Docker 版本更新为最新
-* url： 获取指定 Docker 主机的监听 URL
-
-```sh
- base=https://github.com/docker/machine/releases/download/v0.16.0 &&
-  curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
-  sudo mv /tmp/docker-machine /usr/local/bin/docker-machine &&
-  chmod +x /usr/local/bin/docker-machine
-
-docker-machine ls
-docker-machine create --driver virtualbox test
-docker-machine ip test
-
-docker-machine start|stop test # Start virtual machine for docker
-docker-machine ssh test
-
-docker-machine active # 查看当前激活状态的 Docker 主机
-
-docker-machine env  test
-eval "$(docker-machine env default)" # Set environment variables
-```
-
 ### 核心技术
 
-* 隔离：
-  - 文件系统隔离：每个容器都有自己的 root 文件系统
+* 概念
+  - Docker Engine：整个Docker的核心与基础，平时使用的docker命令，以及提供Docker核心功能的Docker守护进程（Docker Deamon）——包括管理Image、运行Contrainer等
+  - Boot2Docker：Docker基于Linux内核特性，因此只能运行于Linux之上，为了能在Mac/Windows系统上运行，有了Boot2Docker。Boot2Docker会先启动一个VirtualBox虚拟机，然后在该虚拟机中运行一个Linux系统，再在Linux中运行Docker
+* 隔离
+  - 文件系统隔离 rootfs：每个容器都有自己的 root 文件系统
   - 进程隔离：每个容器都运行在自己的进程环境中
   - 网络隔离：容器间的虚拟网络接口和 IP 地址都是分开的
-  - 资源隔离和分组：使用 cgroups 将 CPU 和内存之类的资源独立分配给每个 Docker 容器
-* 隔离实现
-  - namespace，每个容器都有单独的名字空间，运行在其中的应用都像是在独立的操作系统中运行一样。名字空间保证了容器之间彼此互不影响。
-    + pid namespace：不同用户的进程就是通过pid隔离开的，且不同的namespace中可以有相同pid。所有LXC进程在Docker中的父进程为Docker进程，同时允许嵌套，实现Docker in Docker。
-    + net namespace:网络的隔离则通过net namespace实现，每个net namspace有独立的network device， IP, IP routing table， /proc/net目录等。默认采用 veth 的方式，将容器中的虚拟网卡同 host 上的一 个Docker 网桥 docker0 连接在一起。
-    + ipc namespace:Container中进程交互采用linux的进程间交互方法， Interprocess Communicaiton - IPC， 包括信号量，消息队列，共享内存等。容器的进程间交互实际上还是 host 上具有相同 pid 名字空间中的进程间交互，因此需要在 IPC 资源申请时加入名字空间信息，每个 IPC 资源有一个唯一的 32 位 id
-    + mnt namespace:允许不同namespace的进程看到的文件结构不同，即隔离文件系统
-    + uts namesapce:UTS - Unix Time-Sharing System namespace允许每个Container拥有独立的hostname和domain name，使其在网络上可以独立的节点而非 主机上的一个进程
-    + user namespace：每个Container拥有不同user和group id，可以在容器内用容器内部的用户执行程序而非主机上的用户
+  - 资源隔离和分组 namespace：使用 cgroups 将 CPU 和内存之类的资源独立分配给每个 Docker 容器
+    + namespace，每个容器都有单独的名字空间，运行在其中的应用都像是在独立的操作系统中运行一样。名字空间保证了容器之间彼此互不影响。
+      * pid namespace：不同用户的进程就是通过pid隔离开的，且不同的namespace中可以有相同pid。所有LXC进程在Docker中的父进程为Docker进程，同时允许嵌套，实现Docker in Docker。
+      * net namespace:网络的隔离则通过net namespace实现，每个net namspace有独立的network device， IP, IP routing table， /proc/net目录等。默认采用 veth 的方式，将容器中的虚拟网卡同 host 上的一 个Docker 网桥 docker0 连接在一起。
+      * ipc namespace:Container中进程交互采用linux的进程间交互方法， Interprocess Communicaiton - IPC， 包括信号量，消息队列，共享内存等。容器的进程间交互实际上还是 host 上具有相同 pid 名字空间中的进程间交互，因此需要在 IPC 资源申请时加入名字空间信息，每个 IPC 资源有一个唯一的 32 位 id
+      * mnt namespace:允许不同namespace的进程看到的文件结构不同，即隔离文件系统
+      * uts namesapce:UTS - Unix Time-Sharing System namespace允许每个Container拥有独立的hostname和domain name，使其在网络上可以独立的节点而非 主机上的一个进程
+      * user namespace：每个Container拥有不同user和group id，可以在容器内用容器内部的用户执行程序而非主机上的用户
+  - cgroups 资源限制
 * 可配额/可度量
   - Linux的控制组 cgroups（Control Groups）实现了对资源配额和度量,容器资源统计和隔离。可以限制、记录、隔离进程组（process groups）所使用的物理资源（如：cpu,memory, io 等等）的机制
   - 确保各个容器可以公平地分享主机的内存、CPU、磁盘 IO 等资源；当然，更重要的是，控制组确保了当容器内的资源使用产生压力时不会连累主机系统
@@ -334,7 +296,7 @@ eval "$(docker-machine env default)" # Set environment variables
 * LXC和容器技术
 * 架构
   - docker Client
-    + 通过命令行或者其他工具使用 Docker API (<https://docs.docker.com/reference/api/docker_remote_api>) 与 Docker 的守护进程通信
+    + 通过命令行或者其他工具使用 [Docker API](https://docs.docker.com/reference/api/docker_remote_api) 与 Docker 的守护进程通信
   - docker Server：一个物理或者虚拟的机器用于执行 Docker 守护进程和管理所有容器
     + 目前需要 root 权限，因此其安全性十分关键
       * 确保只有可信的用户才可以访问 Docker 服务。Docker 允许用户在主机和容器间共享文件夹，同时不需要限制容器的访问权限，这就容易让容器突破资源限制。
@@ -915,8 +877,8 @@ CMD [ "npm", "start" ]
 
 镜像的仓库，用来保存images
 
-* 创建了自己的image后可以用push把它上传到公有或者私有仓库，这样其他开发人员可以pull用来开发或者部署
-* 每个镜像支持tag标签
+* 创建了自己的image后可用 push 上传到公有或者私有仓库，这样其他开发人员可以 pull 用来开发或者部署
+* 支持tag标签
 * 仓库
   - [aliyun 容器镜像服务](https://cr.console.aliyun.com/cn-hangzhou/instances/repositories)
   - [daocloud](https://www.daocloud.io)
@@ -1431,6 +1393,50 @@ docker-compose kill -s SIGINT
 docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"
 ```
 
+## [docker/machine](https://github.com/docker/machine) 
+
+Machine management for a container-centric world 创建运行Docker的宿主机的，比如AWS、Azure上的虚拟机，也可以用来在本地创建VirtualBox等虚拟机.直接把Boot2Docker的功能也取代了，于是Boot2Docker成为了历史
+
+* config：查看当前激活状态 Docker 主机的连接信息
+* creat：创建 Docker 主机
+  - 需要 Boot2Docker ISO 支持
+* env：显示连接到某个主机需要的环境变量
+* inspect： 以 json 格式输出指定Docker的详细信息
+* ip： 获取指定 Docker 主机的地址
+* kill： 直接杀死指定的 Docker 主机
+* ls： 列出所有的管理主机
+* provision： 重新配置指定主机
+* regenerate-certs： 为某个主机重新生成 TLS 信息
+* restart： 重启指定的主机
+* rm： 删除某台 Docker 主机，对应的虚拟机也会被删除
+* ssh： 通过 SSH 连接到主机上，执行命令
+* scp： 在 Docker 主机之间以及 Docker 主机和本地主机之间通过 scp 远程复制数据
+* mount： 使用 SSHFS 从计算机装载或卸载目录
+* start： 启动一个指定的 Docker 主机，如果对象是个虚拟机，该虚拟机将被启动
+* status： 获取指定 Docker 主机的状态(包括：Running、Paused、Saved、Stopped、Stopping、Starting、Error)等
+* stop： 停止一个指定的 Docker 主机
+* upgrade： 将一个指定主机的 Docker 版本更新为最新
+* url： 获取指定 Docker 主机的监听 URL
+
+```sh
+base=https://github.com/docker/machine/releases/download/v0.16.0 &&
+curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+sudo mv /tmp/docker-machine /usr/local/bin/docker-machine &&
+chmod +x /usr/local/bin/docker-machine
+
+docker-machine ls
+docker-machine create --driver virtualbox test
+docker-machine ip test
+
+docker-machine start|stop test # Start virtual machine for docker
+docker-machine ssh test
+
+docker-machine active # 查看当前激活状态的 Docker 主机
+
+docker-machine env  test
+eval "$(docker-machine env default)" # Set environment variables
+```
+
 ## 容器资源限制
 
 * 拉取或新建服务，挂载目录与运行.应用一般包括三种文件：
@@ -1486,16 +1492,6 @@ docker service create --name portainer_agent --network portainer_agent_network -
 # Deploy Portainer Agent on a standalone Windows Server 2016 Docker Host
 docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\docker_engine:\\.\pipe\docker_engine portainer/agent
 ```
-
-### 应用场景
-
-* Automating the packaging and deployment of applications
-* Creation of lightweight, private PAAS environment
-* Automated testing and continuous integration/deployment
-* Deploying and scaling web apps, databases and backend services
-* 统一、优化和加速本地开发和构建流程
-* 保证不同的环境中可以得到相同的运行结果
-* 创建隔离环境用于测试
 
 ### 迁移docker
 

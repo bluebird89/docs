@@ -1,5 +1,6 @@
 # MySQL optimize
 
+* 一方面是找出系统的瓶颈,提高MySQL数据库的整体性能,而另一方面需要合理的结构设计和参数调整,以提高用户的相应速度,同时还要尽可能的节约系统资源,以便让系统提供更大的负荷
 * 不同的语句，根据选择的引擎、表中数据的分布情况、索引情况、数据库优化策略、查询中的锁策略等因素，最终查询的效率相差很大
 * 不要听信看到的关于优化的“绝对真理”，而应该是在实际的业务场景下通过测试来验证关于执行计划以及响应时间的假设
 
@@ -96,12 +97,13 @@ iostat -d -k 1 3
 ## 硬件优化
 
 * 专门用于数据库的服务器，并采用ssd
-* CPU相关：服务器的BIOS设置中，可调整下面的几个配置，目的是发挥CPU最大性能，或者避免经典的NUMA问题：
+* CPU：服务器的BIOS设置中，可调整下面的几个配置，目的是发挥CPU最大性能，或者避免经典的NUMA问题：
     - 选择Performance Per Watt Optimized(DAPC)模式，发挥CPU最大性能，跑DB这种通常需要高运算量的服务就不要考虑节电了；
     - 关闭C1E和C States等选项，目的也是为了提升CPU效率；
     - Memory Frequency（内存频率）选择Maximum Performance（最佳性能）；
     - 内存设置菜单中，启用Node Interleaving，避免NUMA问题；
     - 重点往往是吞吐量，性能优先:解放数据库CPU，把复杂逻辑计算放到服务层
+* 内存
 * 磁盘I/O
     - 使用SSD或者PCIe SSD设备，至少获得数百倍甚至万倍的IOPS提升；
     - 购置阵列卡同时配备CACHE及BBU模块，可明显提升IOPS（主要是指机械盘，SSD或PCIe SSD除外。同时需要定期检查CACHE及BBU模块的健康状况，确保意外时不至于丢失数据）；
@@ -132,6 +134,17 @@ iostat -d -k 1 3
     - 将使用 MySQL 的 host 和 MySQL自身的 host 都配置在一个 host 文件中 — 这样没有 DNS 查找。
     - 永远不要强制杀死一个MySQL进程 — 你将损坏数据库，并运行备份。
     - 让你的服务器只服务于MySQL — 后台处理程序和其他服务会占用数据库的 CPU 时间。
+* 参数设置
+    - 文件系统层
+        + 使用deadline/noop这两种I/O调度器，千万别用cfq（它不适合跑DB类服务）；
+        + 使用xfs文件系统，千万别用ext3；ext4勉强可用，但业务量很大的话，则一定要用xfs；
+        + 文件系统mount参数中增加：noatime, nodiratime, nobarrier几个选项（nobarrier是xfs文件系统特有的）；
+    - 内核参数优化：关键内核参数设定合适的值，目的是为了减少swap的倾向，并且让内存和磁盘I/O不会出现大幅波动，导致瞬间波峰负载
+        + 将vm.swappiness设置为5-10左右即可，甚至设置为0（RHEL 7以上则慎重设置为0，除非你允许OOM kill发生），以降低使用SWAP的机会；
+        + 将vm.dirty_background_ratio设置为5-10，将vm.dirty_ratio设置为它的两倍左右，以确保能持续将脏数据刷新到磁盘，避免瞬间I/O写，产生严重等待（和MySQL中的innodb_max_dirty_pages_pct类似）；
+        + 将net.ipv4.tcp_tw_recycle、net.ipv4.tcp_tw_reuse都设置为1，减少TIME_WAIT，提高TCP效率；
+        + 至于网传的read_ahead_kb、nr_requests这两个参数，我经过测试后，发现对读写混合为主的OLTP环境影响并不大（应该是对读敏感的场景更有效果），不过没准是我测试方法有问题，可自行斟酌是否调整；
+* 分库分表+读写分离
 
 ```
 # cpu方面
@@ -161,21 +174,6 @@ KB_wrtn/s：每秒向设备（drive expressed）写入的数据量；
 kB_read：读取的总数据量；
 kB_wrtn：写入的总数量数据量；这些单位都为Kilobytes。
 ```
-
-### 文件系统层优化
-
-* 使用deadline/noop这两种I/O调度器，千万别用cfq（它不适合跑DB类服务）；
-* 使用xfs文件系统，千万别用ext3；ext4勉强可用，但业务量很大的话，则一定要用xfs；
-* 文件系统mount参数中增加：noatime, nodiratime, nobarrier几个选项（nobarrier是xfs文件系统特有的）；
-
-### 其他内核参数优化
-
-关键内核参数设定合适的值，目的是为了减少swap的倾向，并且让内存和磁盘I/O不会出现大幅波动，导致瞬间波峰负载
-
-* 将vm.swappiness设置为5-10左右即可，甚至设置为0（RHEL 7以上则慎重设置为0，除非你允许OOM kill发生），以降低使用SWAP的机会；
-* 将vm.dirty_background_ratio设置为5-10，将vm.dirty_ratio设置为它的两倍左右，以确保能持续将脏数据刷新到磁盘，避免瞬间I/O写，产生严重等待（和MySQL中的innodb_max_dirty_pages_pct类似）；
-* 将net.ipv4.tcp_tw_recycle、net.ipv4.tcp_tw_reuse都设置为1，减少TIME_WAIT，提高TCP效率；
-* 至于网传的read_ahead_kb、nr_requests这两个参数，我经过测试后，发现对读写混合为主的OLTP环境影响并不大（应该是对读敏感的场景更有效果），不过没准是我测试方法有问题，可自行斟酌是否调整；
 
 ### MySQL 配置
 
@@ -827,7 +825,7 @@ replace into test_tbl (id,dr) values (1,'2'),(2,'3'),...(x,'y');
 insert into test_tbl (id,dr) values (1,'2'),(2,'3'),...(x,'y') on duplicate key update dr=values(dr);
 ```
 
-#### 维护优化
+## 维护优化
 
 * 定期分析和检查表
 * 定期优化表
@@ -859,6 +857,22 @@ optimize table tbl_name;
 
 ## 工具
 
+* [mysqltuner.pl](https://github.com/major/MySQLTuner-perl):主要检查参数设置的合理性包括日志文件、存储引擎、安全建议及性能分析
+    - `wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/mysqltuner.pl`
+    - `./mysqltuner.pl --socket /var/lib/mysql/mysql.sock`
+    - 重要关注[!!]（中括号有叹号的项）,关注最后给的建议 "Recommendations"
+* [tuning-primer.sh](https://github.com/BMDan/tuning-primer.sh):针于mysql的整体进行一个体检，对潜在的问题，给出优化的建议
+    - `wget https://launchpad.net/mysql-tuning-primer/trunk/1.6-r1/+download/tuning-primer.sh`
+    - `./tuning-primer.sh`
+    - 重点查看有红色告警的选项，根据建议结合自己系统的实际情况进行修改
+* pt-variable-advisor:分析MySQL变量并就可能出现的问题提出建议
+    - `wget https://www.percona.com/downloads/percona-toolkit/3.0.13/binary/redhat/7/x86_64/percona-toolkit-3.0.13-re85ce15-el7-x86_64-bundle.tar`
+    - `pt-variable-advisor localhost --socket /var/lib/mysql/mysql.sock`
+    - 重点关注有WARN的信息的条目
+* pt-query-digest 主要功能是从日志、进程列表和tcpdump分析MySQL查询.用来分析mysql的慢日志，与mysqldumpshow工具相比，py-query_digest 工具的分析结果更具体，更完善
+    - 分析指含有select语句的慢查询:`pt-query-digest --filter '$event-&gt;{fingerprint} =~ m/^select/i' /var/lib/mysql/slowtest-slow.log&gt; slow_report4.log`
+    - 分析指定时间范围内的查询:`pt-query-digest /var/lib/mysql/slowtest-slow.log --since '2017-01-07 09:30:00' --until '2017-01-07 10:00:00'&gt; &gt; slow_report3.log`
+    - 查询所有所有的全表扫描或full join的慢查询 `pt-query-digest --filter '(($event-&gt;{Full_scan} || "") eq "yes") ||(($event-&gt;{Full_join} || "") eq "yes")' /var/lib/mysql/slowtest-slow.log&gt; slow_report6.log`
 * sysbench：一个模块化，跨平台以及多线程的性能测试工具
 * iibench-mysql：基于 Java 的 MySQL/Percona/MariaDB 索引进行插入性能测试工具
 * tpcc-mysql：Percona开发的TPC-C测试工具
