@@ -84,11 +84,6 @@
     - 参数加密
         + hashids
 
-## 图标
-
-* [FontAwesome](http://fontawesome.io/)
-* [矢量图标库](http://www.iconfont.cn/)
-
 ## 扩展
 
 * [apache/mesos](https://github.com/apache/mesos):a cluster manager that provides efficient resource isolation and sharing across distributed applications, or frameworks. It can run Hadoop, Jenkins, Spark, Aurora, and other frameworks on a dynamically shared pool of nodes.

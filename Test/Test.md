@@ -352,6 +352,8 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 * Robot Framework
 * watir
 * [Airtest IDE](https://airtest.netease.com/):Cross platform UI automation IDE
+* [segmentio/nightmare](https://github.com/segmentio/nightmare) A high-level browser automation library. https://open.segment.com
+* [Charles](https://www.charlesproxy.com/)
 
 ## 参考
 

@@ -616,6 +616,3 @@ if [ $ec -ne 0 ]; then
 fi
 
 
-## 资源
-
-[teddysun / across](https://github.com/teddysun/across)

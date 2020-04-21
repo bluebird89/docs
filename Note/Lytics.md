@@ -2379,6 +2379,29 @@ AH 因你今晚共我唱
 
 父亲的草原母亲的河
 
+## 伍迪·艾伦
+ 
+* The key is, to not think of death as an end, but as more of a very effective way to cut down on your expenses. -- Love and Death (1975) 关键是，不要把死亡当作终结，把它当作一个削减开支的十分有效的方法。——《爱与死》1975
+* To love is to suffer. To avoid suffering, one must not love. But then, one suffers from not loving. Therefore, to love is to suffer; not to love is to suffer; to suffer is to suffer. To be happy is to love. To be happy, then, is to suffer, but suffering makes one unhappy. Therefore, to be unhappy, one must love or love to suffer or suffer from too much happiness. I hope you're getting this down. -- Love and Death (1975) 去爱就是去受罪。为了避免受罪，就必须不爱。但是，没有爱又会受罪。所以，去爱是受罪，不去爱也是受罪，受罪就是受罪。想幸福就要去爱，所以去幸福就是去受罪，受罪又让人不幸福。所以，想要不幸福就去爱，或者爱上受罪，或者因为太多幸福而受罪。我希望你听明白了。——《爱与死》1975
+* I never want to belong to any club that would have someone like me for a member. -- Annie Hall (1977) 我永远都不希望加入任何一个有像我这样的成员的俱乐部。——《安妮·霍尔》1977
+* I was thrown out of college for cheating on the metaphysics exam; I looked into the soul of the boy sitting next to me. -- Annie Hall (1977) 我因为在玄学考试上作弊而被大学开除了，因为我偷看了坐在我旁边的男生的灵魂。——《安妮·霍尔》1977
+* I feel that life is divided into the horrible and the miserable. That's the two categories. The horrible are like, terminal cases, and blind people, crippled. I don't know how they get through life. It's amazing to me. And the miserable is everyone else. So you should be thankful that you're miserable, because that's very lucky, to be miserable. -- Annie Hall (1977) 我觉得生活分为可怕和可悲这两类。“可怕”就像临终的病人、失明的人和残疾人。我不知道他们是怎么熬过来的，这对我来说太不可思议了。“可悲”就是其余所有人的生活。所以你应该庆幸你是可悲的，因为能成为“可悲”的人，是非常幸运的事。——《安妮·霍尔》1977
+* I bought her this handkerchief... and I didn't even know her size. -- Manhattan Murder Mystery (1993) 我给她买了这块手帕······但我连她的尺码都不知道。——《曼哈顿谋杀疑案》1993
+* The most beautiful words in the English language aren't "I love you" but "it's benign." -- Deconstructing Harry (1997) 英语中最动听的话不是“我爱你”，而是“（你的肿瘤）是良性的。” ——《解构爱情狂》1997
+* Tradition is the illusion of permanence. -- Deconstructing Harry (1997) 传统就是持久的幻觉。——《解构爱情狂》1997
+* The man who said "I'd rather be lucky than good" saw deeply into life. People are afraid to face how great a part of life is dependent on luck. It's scary to think so much is out of one's control. There are moments in a match when the ball hits the top of the net, and for a split second, it can either go forward or fall back. With a little luck, it goes forward, and you win. Or maybe it doesn't, and you lose. -- Match Point (2005) 说“我情愿做个幸运儿而不是优等生”的人才是把生活看透的人。人们怯于面对这一现实：生活中有太多事情依赖于运气了。一想到这么多事情无从把握就让人害怕。网球比赛中有“擦网”的情形，球打到网上的那一瞬间，它有可能过网，也可能会弹回。运气稍好，过网你就赢了，没过网你就输了。——《赛末点》2005
+* -You are a cynical crapehanger who always see the glass half-empty! -No, you're wrong. I see the glass half full, but of poison. -- Scoop (2006) - 你是个愤世嫉俗的悲观主义者，你总是把半杯水看作只剩一半！ - 不，你错了。我把半杯水看成还有一半，不过那是杯毒药。——《独家新闻》2006
+* I don't need to work out. My anxiety acts as aerobics. -- Scoop (2006) 我不需要锻炼。焦虑就是我的有氧运动。——《独家新闻》2006.
+* I don't know what I want. I only know what I don't want. -- Vicky Cristina Barcelona (2008) 我不知道我想要什么。我只知道我不想要什么。——《午夜巴塞罗那》2008
+* Whatever love you can get and give, whatever happiness you can filch or provide, every temporary measure of grace, whatever works. And don't kid yourself, it's by no means all up to your own human ingenuity. A bigger part of your existence is luck than you'd like to admit. -- Whatever Works (2009) 无论你得到或给予了怎样的爱，无论你获得或提供了怎样的快乐，在每一个短暂的恩典瞬间，怎么都行。不要欺骗你自己，这完全取决于你自己的小聪明。运气在人生中占据的分量比你愿意承认的要大得多。——《怎样都行》2009
+* Nostalgia is denial - denial of the painful present... The erroneous notion that a different time period is better than the one one's living in - it's a flaw in the romantic imagination of those people who find it difficult to cope with the present. -- Midnight in Paris (2011) 怀旧就是拒绝接受现在 — 是对痛苦现在的否定。认为别的时代比自己现在生活的时代更好，这是那些无法应对当前生活的人所想象出来的浪漫主义的缺陷。——《午夜巴黎》2011
+* We all fear death and question our place in the universe. The artist's job is not to succumb to despair, but to find an antidote for the emptiness of existence. -- Midnight in Paris (2011) 我们惧怕死亡，质问自身在浩瀚宇宙中的位置。艺术家的工作就是不屈服于绝望，并在存在的虚无中寻得解药。——《午夜巴黎》2011
+* Anxiety, nightmares and a nervous breakdown, there's only so many traumas a person can withstand until they take to the streets and start screaming. -- Blue Jasmine (2013) 焦虑、噩梦和精神崩溃，在一个人鬼哭狼嚎地去骂街之前，能抵挡的精神创伤只有这么多。——《蓝色茉莉》2013
+* I can't forgive you, only God can forgive you. - But you said there is no God. - Precisely my point. -- Magic in the Moonlight (2014) - 我不能原谅你，只有上帝能原谅你。 - 但你说过上帝是不存在的。 - 恰恰是我的观点。 ——《魔力月光》2014
+* You're born, you commit no crime, and then you're sentenced to death.-- Magic in the Moonlight (2014)     你来到人世，没犯过罪，然后被判了死刑。——《魔力月光》2014
+* Anxiety is the dizziness of freedom. -- Irrational Man (2015)    焦虑是自由的眩晕。——《无理之人》2015
+* Life is a comedy written by a sadistic comedy writer. -- Cafe Society (2016)      生活是一部由虐待狂的喜剧作家编写的喜剧。——《咖啡公社》2016
+
 ## 世界第一等
 ## 挪威的森林
 ## 梦醒时分

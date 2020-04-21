@@ -1154,6 +1154,9 @@ Node服务端渲染好处多多，但除了上述技术性的问题需要解决�
 * [前端性能优化之加载技术](https://juejin.im/post/59b73ef75188253db70acdb5)
 * [SSR VR CSR](https://medium.com/walmartlabs/the-benefits-of-server-side-rendering-over-client-side-rendering-5d07ff2cefe8) 什么是服务端渲染
 
+## [localForage/localForage](https://github.com/localForage/localForage)
+
+💾 Offline storage, improved. Wraps IndexedDB, WebSQL, or localStorage using a simple but powerful API.
 
 ## 实例
 
@@ -1190,6 +1193,8 @@ Node服务端渲染好处多多，但除了上述技术性的问题需要解决�
 * 富文本
     - [ckeditor/ckeditor5](https://github.com/ckeditor/ckeditor5):Development environment for CKEditor 5 – the best browser-based rich text editor. https://ckeditor.comv
 * [ymm-tech/gods-pen](https://github.com/ymm-tech/gods-pen):基于vue的高扩展在线网页制作平台，可自定义组件，可添加脚本，可数据统计。A mobile page builder/editor, similar with amolink. https://godspen.ymm56.com
+* [Polymer/polymer](https://github.com/Polymer/polymer) Our original Web Component library. https://polymer-library.polymer-project.org/
+* [Polymer / lit-element](https://github.com/polymer/lit-element):A simple base class for creating fast, lightweight web components https://lit-element.polymer-project.org
 
 ## 参考
 
