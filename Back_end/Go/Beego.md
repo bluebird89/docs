@@ -20,13 +20,10 @@ bee run hello // 打开 http://localhost:8080/
 
 export GOROOT=/usr/local/opt/go/libexec
 
-## 参考
-
-* [Beego Framework](https://beego.me/):一个使用 Go 的思维来帮助您构建并开发 Go 应用程序的开源框架
-
 ## 工具
 
 * [beego/admin](https://github.com/beego/admin):基于beego的后台管理系统
+
 ```go
 go get github.com/beego/admin
 bee new hello

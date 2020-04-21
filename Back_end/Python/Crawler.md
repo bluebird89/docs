@@ -67,3 +67,4 @@ http://www.runoob.com/xpath/xpath-tutorial.html
 * [IonicaBizau/scrape-it](https://github.com/IonicaBizau/scrape-it):🔮 A Node.js scraper for humans.  https://ionicabizau.net/blog/30-how-to-write-a-web-scraper-in-nodejs
 * [PuerkitoBio/gocrawl](https://github.com/PuerkitoBio/gocrawl):Polite, slim and concurrent web crawler.
 * [crawlab-team/crawlab](https://github.com/crawlab-team/crawlab):Distributed web crawler admin platform for spiders management regardless of languages and frameworks.
+* [binux/pyspider](https://github.com/binux/pyspider) A Powerful Spider(Web Crawler) System in Python. http://docs.pyspider.org/

@@ -8,6 +8,10 @@
 * types are not classes:类型实际上是一种接口，它是数据和数据可以产生的行为间的一座桥梁,「类」是「类型」的一种实现方式
     - 会飞（flyable） 是一个类型，「鸟」实现了 flyable，而「鸭子」无法实现 flyable，所以「鸭子」并不是「鸟」的子类型。
 
+# lambda
+
+* [lambci/docker-lambda](https://github.com/lambci/docker-lambda):Docker images and test runners that replicate the live AWS Lambda environment
+
 ## 资源
 
 * [MostlyAdequate/mostly-adequate-guide](https://github.com/MostlyAdequate/mostly-adequate-guide):Mostly adequate guide to FP (in javascript)

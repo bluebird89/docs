@@ -28,7 +28,6 @@ chmod 755 -R {path}
 www    ALL=(ALL)       ALL
 www ALL = (ALL) NOPASSWD: /usr/local/nginx/bin/nginx
 ```
-## 配置
 
 ### 宿主机
 
@@ -71,6 +70,7 @@ server {
     }
 }
 ```
+
 ## 过程
 
 部署是在一台宿主机拉取代码，做编译、配置后，向目标机群分发，执行相关目标机群任务。部署流程拆分为以下6个环节，其中1-5为在宿主机进行，6在目标机群执行。

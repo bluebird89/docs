@@ -20,6 +20,8 @@
     - [mattermost/mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost https://mattermost.com
     - [Slack](https://slack.com/)
     - [zulip / zulip](https://github.com/zulip/zulip):Zulip server - powerful open source team chat https://zulip.org/
+    - [RocketChat/Rocket.Chat](https://github.com/RocketChat/Rocket.Chat):Have your own Slack like online chat, built with Meteor. https://rocket.chat/
+    - [RocketChat/Rocket.Chat.Ansible](https://github.com/RocketChat/Rocket.Chat.Ansible):Deploy Rocket.Chat with Ansible!
 * [apache/incubator-superset](https://github.com/apache/incubator-superset):Apache Superset (incubating) is a modern, enterprise-ready business intelligence web application
 * [vitorfs/bootcamp](https://github.com/vitorfs/bootcamp):An enterprise social network http://trybootcamp.vitorfs.com
 * [reviewboard/reviewboard](https://github.com/reviewboard/reviewboard):An extensible and friendly code review tool for projects and companies of all sizes. https://www.reviewboard.org/

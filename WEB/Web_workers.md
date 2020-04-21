@@ -14,7 +14,6 @@ A web worker is a JavaScript program running on a different thread, in parallel 
 * Local database (indexedDB) operations
 * Computationally intensive data operations
 
-
 ## 原理
 
 * 在浏览器调试工具中sources中看到不同进程
