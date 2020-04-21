@@ -46,7 +46,7 @@
 
 ## 实践
 
-* 需要自适应的规划、演进式的开发和交付。多软件开发方法、框架和实践遵从敏捷的理念，包括：
+* 需要自适应的规划、演进式的开发和交付
 
 * 极限编程Xtreme Programming（XP）
 * 精益方法Lean
@@ -289,6 +289,10 @@
     - 以简洁为本，它是极力减少不必要工作量的艺术。
     - 最好的架构，需求和设计出自自组织团队
     - 团队定期地反思如何能提高成效，并依此调整自身的举止表现。
+
+## BDD behavior-driven development
+
+* [behave/behave](https://github.com/behave/behave):BDD, Python style.
 
 ## 图书
 

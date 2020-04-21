@@ -44,10 +44,10 @@
         + Servlet:会用一个线程来创建HttpRequest对象和HttpResponse对象
         + 从HttpRequest中获得Header, Cookie, QueryString 等信息， 从HttpResponse中获得输出流，直接向浏览器输出结果
     - WSGI （Web Service Gateway Interface）
-- Apache拥有丰富的模块组件支持，稳定性强，BUG少，动态内容处理强。
+* Apache拥有丰富的模块组件支持，稳定性强，BUG少，动态内容处理强
   + 运行数以万计的并发访问，会导致服务器消耗大量内存
   + 操作系统对其进行进程或线程间的切换也消耗了大量的 CPU 资源，导致 HTTP 请求的平均响应速度降低
-- Nginx轻量级，占用资源少，负载均衡，高并发处理强，静态内容处理高效。 Apache 是同步多进程模型，一个连接对应一个进程；Nginx是异步的，多个连接（万级别）可以对应一个进程。
+* Nginx轻量级，占用资源少，负载均衡，高并发处理强，静态内容处理高效。 Apache 是同步多进程模型，一个连接对应一个进程；Nginx是异步的，多个连接（万级别）可以对应一个进程。
 
 ## TCP/IP
 
@@ -300,6 +300,10 @@ location ~ \.php {
   + 一个线程处理一个连接，非阻塞IO:在一个进程中通过多个线程来处理多个连接，一个线程处理一个连接。Apache的worker模式就是这种典型例子，使其可支持更多的并发连接。不过这种模式的总体性能还不如prefork，所以一般不选用worker模式
   + 一个进程处理多个连接，异步I/O:潜在的前提条件就是使用IO多路复用就绪通知。这种情况下，将处理多个连接的进程叫做worker进程或服务进程。worker的数量可以配置，如Nginx中的worker_processes 4。
   + 一个线程处理多个连接，异步IO:即使有高性能的IO多路复用就绪通知，但磁盘IO的等待还是无法避免的。更加高效的方法是对磁盘文件使用异步IO，目前很少有Web服务器真正意义上支持这种异步IO。
+
+## [Lighttpd](https://www.lighttpd.net/)
+
+* [wiki](http://redmine.lighttpd.net/projects/lighttpd/wiki)
 
 ## 部署
 

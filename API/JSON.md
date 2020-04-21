@@ -2,6 +2,13 @@
 
 JSON.stringify
 
+## json_rpc
+
+json_rpc 提交formdata json字符串
+
+http://wiki.geekdream.com/Specification/json-rpc_2.0.html
+https://github.com/walkor/workerman-jsonrpc
+
 ## 服务
 
 * [typicode/json-server](https://github.com/typicode/json-server):Get a full fake REST API with zero coding in less than 30 seconds (seriously)

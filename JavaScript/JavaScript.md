@@ -3073,7 +3073,7 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
 * [kvz/locutus](https://github.com/kvz/locutus):All your standard libraries will be assimilated into our JavaScript collective. Resistance is futile. http://locutus.io
 * [panzerdp/voca](https://github.com/panzerdp/voca):The ultimate JavaScript string library https://vocajs.com
 * [kripken/emscripten](https://github.com/kripken/emscripten):Emscripten: An LLVM-to-JavaScript Compiler
-
+* [avajs/ava](https://github.com/avajs/ava) 🚀 Testing can be a drag. AVA helps you get it done.
 * [youzan/zan-tool](https://github.com/youzan/zan-tool):Zan Node Web 框架的配套开发工具，例如初始化一个新项目、新建一个 NPM 包、本地开发等。
 * [NodeOS](https://github.com/NodeOS/NodeOS)
 * [sindresorhus/awesome-electron](https://github.com/sindresorhus/awesome-electron)Useful resources for creating apps with Electron

@@ -1746,6 +1746,7 @@ ccache gcc foo.c
 * [Google’s Shell Style Guide](https://google.github.io/styleguide/shell.xml)
 * [jlevy/the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
 * [explainshell](https://explainshell.com)
+* [teddysun / across](https://github.com/teddysun/across)
 * 脚本参考
     - http://www.bashoneliners.com/
     - http://www.shell-fu.org/

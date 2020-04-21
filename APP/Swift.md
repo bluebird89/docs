@@ -4,6 +4,7 @@ The Swift Programming Language https://swift.org/
 
 ## 工具
 
+* [pujiaxin33/JXCategoryView](https://github.com/pujiaxin33/JXCategoryView):A powerful and easy to use category view (segmentedcontrol, segmentview, pagingview, pagerview, pagecontrol) 
 * [jpsim/SourceKitten](https://github.com/jpsim/SourceKitten):An adorable little framework and command line tool for interacting with SourceKit.
 * [thoughtbot/Argo](https://github.com/thoughtbot/Argo):Functional JSON parsing library for Swift https://thoughtbot.com/open-source
 * [vapor/vapor](https://github.com/vapor/vapor):💧 A server-side Swift web framework. https://vapor.codes

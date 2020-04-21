@@ -5,6 +5,10 @@
 brew install clisp
 ```
 
+## Tool
+
+* [Portacle](https://portacle.github.io/):a multiplatform, complete IDE for Common Lisp. It includes Emacs, SBCL, Git, Quicklisp, all configured and ready to use
+
 ## 参考
 
 * [官网](http://lisp-lang.org/)
@@ -13,7 +17,3 @@ brew install clisp
 * [kanaka/mal](https://github.com/kanaka/mal):mal - Make a Lisp
 * [Quickdocs](http://quickdocs.org)
 * [Practical Common Lisp](http://www.gigamonkeys.com/book/)
-
-## Tool
-
-* [Portacle](https://portacle.github.io/):a multiplatform, complete IDE for Common Lisp. It includes Emacs, SBCL, Git, Quicklisp, all configured and ready to use
