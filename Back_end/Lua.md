@@ -12,8 +12,6 @@ curl -R -O http://www.lua.org/ftp/lua-5.3.4.tar.gz
 tar zxf lua-5.3.4.tar.gz
 cd lua-5.3.4
 make linux test
-
-
 ```
 
 ## 数据
@@ -27,9 +25,7 @@ make linux test
 * thread	表示执行的独立线程，用于执行协同程序
 * table	表示一个关联数组，数组索引可以是数字或字符串
 
-## 编辑器
-
-* hammerspoon
+## 
 
 ## 框架
 
@@ -37,6 +33,8 @@ make linux test
 
 ## 工具
 
+* 编辑器
+    - hammerspoon
 * [Azure/golua](https://github.com/Azure/golua):A Lua 5.3 engine implemented in Go
 * [tboox/ltui](https://github.com/tboox/ltui):🍯A cross-platform terminal ui library based on Lua https://tboox.org
 * [tboox/xmake](https://github.com/tboox/xmake):🔥 A cross-platform build utility based on Lua https://xmake.io

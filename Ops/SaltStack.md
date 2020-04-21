@@ -12,7 +12,6 @@ Software to automate the management and configuration of any infrastructure or a
 * salt的事件驱动基础设施不仅让你能够自动化初始系统配置，也让你能够自动化扩展，修复和完成持续管理。salt用户自动部署和维护复杂的分布式网络应用程序和数据库，自定义应用程序，文件，用户帐户，标准包，云资源等。
 * salt的远程执行能力是CLI命令，状态系统使用YAML来描述系统的所需配置
 
-
 ## 参考
 
 * [THE SALT OPEN SOURCE SOFTWARE PROJECT](https://saltstack.com/community/)

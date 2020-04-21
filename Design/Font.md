@@ -5,6 +5,12 @@
 * [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
 * [rsms/inter](https://github.com/rsms/inter):The Inter UI font family http://rsms.me/inter/
 * [ryanoasis/nerd-fonts ](https://github.com/ryanoasis/nerd-fonts#option-3-install-script):Iconic font aggregator, collection, & patcher. 3,600+ icons, 50+ patched fonts: Hack, Source Code Pro, more. Glyph collections: Font Awesome, Material Design Icons, Octicons, & more https://NerdFonts.com
+* [FortAwesome/Font-Awesome](https://github.com/FortAwesome/Font-Awesome):The iconic font and CSS toolkit http://fontawesome.io
+* [powerline/fonts](https://github.com/powerline/fonts):Patched fonts for Powerline users.
+* [kiliman/operator-mono-lig](https://github.com/kiliman/operator-mono-lig):Add ligatures to Operator Mono similar to Fira Code
+* [google/fonts](https://github.com/google/fonts):Font files available from Google Fonts https://fonts.google.com
+* [ powerline / fonts ](https://github.com/powerline/fonts):Patched fonts for Powerline users.
+* [矢量图标库](http://www.iconfont.cn/)
 
 ```
 sudo apt install fonts-firacode
@@ -13,14 +19,6 @@ sudo apt install fonts-firacode
 ## 工具
 
 * [fonttools/fonttools](https://github.com/fonttools/fonttools):A library to manipulate font files from Python.
-
-## 参考
-
-* [FortAwesome/Font-Awesome](https://github.com/FortAwesome/Font-Awesome):The iconic font and CSS toolkit http://fontawesome.io
-* [powerline/fonts](https://github.com/powerline/fonts):Patched fonts for Powerline users.
-* [kiliman/operator-mono-lig](https://github.com/kiliman/operator-mono-lig):Add ligatures to Operator Mono similar to Fira Code
-* [google/fonts](https://github.com/google/fonts):Font files available from Google Fonts https://fonts.google.com
-* [ powerline / fonts ](https://github.com/powerline/fonts):Patched fonts for Powerline users.
 
 ## theme
 

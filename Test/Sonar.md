@@ -1,4 +1,4 @@
-# * [facebook/Sonar](https://github.com/facebook/Sonar)
+# [facebook/Sonar](https://github.com/facebook/Sonar)
 
 A desktop debugging platform for mobile developers. https://fbsonar.com
 
