@@ -222,6 +222,7 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [alibaba/druid](https://github.com/alibaba/druid):阿里巴巴数据库事业部出品，为监控而生的数据库连接池。阿里云Data Lake Analytics(https://www.aliyun.com/product/datalakeanalytics )、DRDS、TDDL 连接池powered by Druid https://github.com/alibaba/druid/wiki
 * [cloudera/hue](https://github.com/cloudera/hue):Hue is an open source SQL Cloud Assistant for developing and accessing SQL/Data Apps. http://gethue.com
 * [xo/usql](https://github.com/xo/usql):Universal command-line interface for SQL databases
+* [ ClickHouse / ClickHouse ](https://github.com/ClickHouse/ClickHouse):ClickHouse is a free analytics DBMS for big data https://clickhouse.tech
 
 ## 参考
 
