@@ -620,6 +620,10 @@ kubectl get statefulset web
 kubectl get pods -w -l app=nginx
 ```
 
+## [ coreos / flannel ](https://github.com/coreos/flannel)
+
+flannel is a network fabric for containers, designed for Kubernetes 
+
 ## 问题
 
 * [gotok8s / k8s-docker-desktop-for-mac](https://github.com/gotok8s/k8s-docker-desktop-for-mac):Docker Desktop for Mac 开启并使用 Kubernetes https://github.com/gotok8s/gotok8s
