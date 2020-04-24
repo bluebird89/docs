@@ -104,6 +104,10 @@ An open autonomous driving platform
     - 由意大利人埃多尔·布加迪（Ettore Bugatti）在1909年创造的，专门生产运动跑车和高级豪华轿车
     - 车辆的引擎全是由手工制造和调校，所有可以轻量化的零件都不放过，布加迪注重车辆的细节与平衡
 
+## 图书
+
+* Principles of Robot Motion Theory, Algorithms, and Implementations
+
 ## 参考
 
 * [nasa-jpl/open-source-rover](https://github.com/nasa-jpl/open-source-rover):A build-it-yourself, 6-wheel rover based on the rovers on Mars! https://opensourcerover.jpl.nasa.gov
