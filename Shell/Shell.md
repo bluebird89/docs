@@ -928,6 +928,7 @@ ls *.rmvb | xargs -n1 -i cp {} /mount/xiaodianying
         + [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
         + incr是一款自动提示插件
         + [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
+        + [git-open](https://github.com/paulirish/git-open)
     - Theme
         + agnoster
         + cloud
