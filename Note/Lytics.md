@@ -4,7 +4,38 @@
 * 音乐出版不受关注，但音乐秀盛行。音乐秀实质上是音乐萧条的表征
 * 大歌手未能沉淀大作，成就经典名作。未来的可能的大歌手未能引人注目，拥有舞台。好嗓子没有影响力，仅成为各类老歌、好听歌曲的复读机，为各“平行宇宙”的居民们提供情感抚慰。
 
-##   难念的经
+## blowin' in the wind
+
+```
+How many roads must a man walk down 一个男人要走多少路
+Beforethey call him a man? 才能称得上男子汉？
+How many seas must a white dove sail 一只白鸽要飞越多少片海
+Before she sleeps in the sand? 才能安歇在沙滩上？
+How many times must the cannon balls fly 炮弹要飞多少次
+Before they\'re forever banned? 才能将其永远禁止？
+The answer, my friend, is blowin\' in the wind, 朋友，答案在风中飘荡
+The answer is blowin\' in the wind. 答案在风中飘荡
+How many years can a mountain exist 一座山峰要屹立多久
+Before it\'s washed to the sea? 才能回归到大海？
+How many years can some people exist 那些人还要生存多少年
+Before they\'re allowed to be free? 才能最终获得自由？
+And how many times can a man turn his head, 一个人可以回首多少次
+pretending he just doesn\'t see? 只是假装他没有看到
+The answer, my friend, is blowin\' in the wind, 朋友，答案在风中飘荡
+The answer is blowin\' in the wind. 答案在风中飘荡
+How many times must a man look up 一个人要仰望多少次
+Before he can see the sky? 才能看见蓝天？
+How many ears must one person have 一个人要倾听多少次
+Before he can hear people cry? 才能听到人们的呼喊？
+And how many deaths will it take till he knows 要牺牲多少条生命他才知道
+That too many people have died? 太多的人已经死亡？
+The answer, my friend, is blowin\' in the wind, 朋友，答案在风中飘荡
+The answer is blowin\' in the wind. 答案在风中飘荡
+OH,the answer, my friend, is blowin\' in the wind, 朋友，答案在风中飘荡
+The answer is blowin\' in the wind. 答案在风中飘荡
+```
+
+## 难念的经
         演唱：周华健 作词：林夕  作曲：周华健
 
 ```

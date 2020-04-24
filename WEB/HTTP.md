@@ -44,35 +44,38 @@
 
 ## CORS（cross-origin resource sharing） 跨源资源共享（俗称『跨域请求』）
 
-* 简单请求:普通 HTML Form 在不依赖脚本的情况下可以发出的请求，比如表单的 method 如果指定为 POST ，可以用 enctype 属性指定用什么方式对表单内容进行编码，合法的值就是前述这三种
-* 非简单请求:普通 HTML Form 无法实现的请求
-* 预检请求（preflight request）
-    - 请求会先用 HTTP 的 OPTION 方法去另外一个域敲门，确认没问题后才会送出真正的请求
-    - 新增了一组 HTTP 首部字段，允许服务器声明哪些源站有权限访问哪些资源。
-    - 规范要求，对那些可能对服务器数据产生副作用的HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求）
-    - 浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求
-    - 服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 Cookies 和 HTTP 认证相关数据）
-    - Content-Type不属于简单请求（MIME类型），都属于预检请求
-        + 使用下列方法之一：
-            * GET
-            * HEAD:获取http header
-            * POST
-        + Fetch 规范定义了对 CORS 安全的首部字段集合，不得人为设置该集合之外的其他首部字段。该集合为：
-            * Accept
-            * Accept-Language
-            * Content-Language
-            * Content-Type （需要注意额外的限制）
-            * DPR
-            * Downlink
-            * Save-Data
-            * Viewport-Width
-            * Width
-        + Content-Type 的值仅限于下列三者之一：
+* 允许浏览器向跨源服务器，发出XMLHttpRequest请求，克服了AJAX只能同源使用的限制.浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉
+* 限制获取cookie，用iframe的方式放置了一个淘宝网页到真实页面中，获取淘宝密码信息
+* 同源策略/SOP（Same origin policy）：从一个域上加载的脚本不允许访问另外一个域的文档属性，只要协议、域名、端口有任何一个不同，都被当作是不同的域.除非两个网页是来自于统一‘源头’，否则不允许一个网页的JavaScript访问另外一个网页的内容，像Cookie，DOM，LocalStorage统统禁止访问
+    - `<script>、<img>、<iframe>、<link>、<script>`等标签都可以加载跨域资源，而不受同源限制
+    - 浏览器会限制脚本中发起的跨域请求。比如，使用 XMLHttpRequest 对象和Fetch发起 HTTP 请求就必须遵守同源策略
+    - 开个口子，对于使用`<script src='//static.store.com/jquery.js'>` 加载的JavaScript，我们认为它的源属于www.store.com， 而不属于static.store.com，这样就可以操作www.store.com的页面了
+    - 两个网页的一级域名是相同的，可以共享cookie, 不过cookie的domain一定要设置为那个一级域名才可以，例如：`document.cookie = 'test=true;path=/;domain=store.com'`
+    - 对XMLHttpReqeust对象施加同源策略
+        - 代理模式：通过服务器端中转，例如你是来自book.com的， 现在想访问movie.com，那可以让那个book.com把请求转发给movie.com嘛！人类好像给这种方式起了个名字
+        - 服务器(domain)可以设置一个白名单，里边列出它允许哪些服务器(domain)的AJAX请求
+* 简单请求（simple request）:普通 HTML Form 在不依赖脚本的情况下可以发出的请求，比如表单的 method 如果指定为 POST ，可以用 enctype 属性指定用什么方式对表单内容进行编码
+    - 自动在头信息之中，添加一个Origin字段
+    - 请求方法是以下三种方法之一：
+        + GET
+        + HEAD
+        + POST
+    - HTTP的头信息不超出以下几种字段：
+        + Accept
+        + Accept-Language
+        + Content-Language
+        + Last-Event-ID
+        + Content-Type (仅当POST方法)的值仅限于下列三者之一：
             * text/plain
             * multipart/form-data
             * application/x-www-form-urlencoded
-        + 请求中的任意XMLHttpRequestUpload 对象均没有注册任何事件监听器；XMLHttpRequestUpload 对象可以使用 XMLHttpRequest.upload 属性访问。
-        + 请求中没有使用 ReadableStream 对象。
+    - 请求中的任意XMLHttpRequestUpload 对象均没有注册任何事件监听器；XMLHttpRequestUpload 对象可以使用 XMLHttpRequest.upload 属性访问。
+    - 请求中没有使用 ReadableStream 对象
+* 非简单请求（not-so-simple request）:普通 HTML Form 无法实现的请求,比如 PUT 方法、需要其他的内容编码方式、自定义头之类的
+    - 浏览器先单独用 HTTP 的 OPTION 方法去另外一个域发起一个预检请求（preflight request），请求方法是OPTIONS，询问服务器某个资源是否可以跨源，如果不允许的话就不发实际的请求
+    - 服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 Cookies 和 HTTP 认证相关数据）
+    - 服务器通过了"预检"请求，以后每次浏览器正常的CORS请求，就都跟简单请求一样，会有一个Origin头信息字段。服务器的回应，也都会有一个Access-Control-Allow-Origin头信息字段
+    - 新增了一组 HTTP 首部字段，允许服务器声明哪些源站有权限访问哪些资源规范要求，对那些可能对服务器数据产生副作用的HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求）        
     - 满足下述任一条件时，即应首先发送预检请求,"预检"请求会带上头部信息 Access-Control-Request-Headers: Content-Type
         + 使用了下面任一 HTTP 方法：
             * PUT:资源更新
@@ -97,6 +100,133 @@
             * text/plain
         + 请求中的XMLHttpRequestUpload 对象注册了任意多个事件监听器。
         + 请求中使用了ReadableStream对象
+* 解决
+    - JSONP （无状态连接，不能获悉连接状态和错误事件，而且只能走GET的形式）通过script标签引入一个js文件，这个js文件载入成功后会执行在url参数中指定的函数，并且会把需要的json数据作为参数传入，有种回调
+        + 优点
+            * 不像XMLHttpRequest对象实现的Ajax请求那样受到同源策略的限制
+            * 兼容性更好，在更加古老的浏览器中都可以运行，不需要XMLHttpRequest或ActiveX的支持
+            * 在请求完毕后可以通过调用callback的方式回传结果
+        + 缺点
+            * 只支持GET请求而不支持POST等其它类型的HTTP请求
+            * 只支持跨域HTTP请求这种情况，不能解决不同域的两个页面之间如何进行JavaScript调用的问题
+    - iframe形式
+    - 服务器代理：页面直接向同域的服务端发请求，服务端进行跨域处理或爬虫后，再把数据返回给客户端页
+    - 服务器设置
+        + `Access-Control-Allow-Origin:<origin> | *` 允许哪个域的请求
+            * `*` 不允许携带认证头和cookies,即使XHR设置了withCredentials
+            * 指定域
+            * 动态设置
+        + `Access-Control-Allow-Credentials` 否允许发送Cookie
+            * 设置为true 表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器
+            * 当用在对preflight预检测请求的响应中时，指定了实际的请求是否可以使用credentials
+            * 简单 GET 请求不会被预检；如果对此类请求的响应中不包含该字段，这个响应将被忽略掉，并且浏览器也不会将相应内容返回给网页 Access-Control-Allow-Credentials: true
+        + 如果想跨域传输cookies
+            * 需要Access-Control-Allow-Credentials与XMLHttpRequest.withCredentials 或Fetch API中的Request() 构造器中的credentials 选项结合使用
+            * Credentials必须在前后端都被配置（即the Access-Control-Allow-Credentials header 和 XHR 或Fetch request中都要配置）才能使带credentials的CORS请求成功。
+        + `Access-Control-Request-Method: <method>` 指明了实际请求所允许使用的 HTTP 方法
+        + `Access-Control-Request-Headers: <field-name>[, <field-name>]`  用于 preflight request （即会在实际请求发送之前先发送一个option请求）中，列出了将会在正式请求的 Access-Control-Expose-Headers 字段中出现的首部信息
+            * XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定
+        + `Access-Control-Expose-Headers` 让服务器把允许浏览器访问的头放入白名单，例如：Access-Control-Expose-Headers: X-My-Custom-Header, X-Another-Custom-Header
+        + `Access-Control-Max-Age` 指定了preflight请求的结果能够被缓存多久 Access-Control-Max-Age: <delta-seconds>
+
+```
+# 简单请求
+GET /cors HTTP/1.1
+Origin: http://api.bob.com
+Host: api.alice.com
+Accept-Language: en-US
+Connection: keep-alive
+User-Agent: Mozilla/5.0...
+
+## Origin指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段
+Access-Control-Allow-Origin: http://api.bob.com
+Access-Control-Allow-Credentials: true
+Access-Control-Expose-Headers: FooBar
+Content-Type: text/html; charset=utf-8
+
+# 预检请求 
+OPTIONS /cors HTTP/1.1
+Origin: http://api.bob.com
+Access-Control-Request-Method: PUT
+Access-Control-Request-Headers: X-Custom-Header # 该次请求的自定义请求头字段
+Host: api.alice.com
+Accept-Language: en-US
+Connection: keep-alive
+User-Agent: Mozilla/5.0
+
+# 预检请求的响应
+HTTP/1.1 200 OK
+Date: Mon, 01 Dec 2008 01:15:39 GMT
+Server: Apache/2.0.61 (Unix)
+Access-Control-Allow-Origin: http://api.bob.com
+Access-Control-Allow-Methods: GET, POST, PUT // 必需，值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法
+Access-Control-Allow-Headers: X-Custom-Header
+Content-Type: text/html; charset=utf-8
+Content-TypeAccess-Control-Max-Age: 86400 // 预检结果缓存时间
+Access-Control-Allow-Credentials:true //是否允许后续请求携带认证信息（cookies）,该值只能是true,否则不返回
+Content-Encoding: gzip
+Content-Length: 0
+Keep-Alive: timeout=2, max=100
+Connection: Keep-Alive
+Content-Type: text/plain
+```
+
+```php
+// 后端返回代码中增加三个字段
+header(“Access-Control-Allow-Origin”:“”);           // 必选 允许所有来源访问
+header(“Access-Control-Allow-Credentials”:“true”);  //可选 是否允许发送cookie
+header(“Access-Control-Allow-Method”:“POST,GET”);   //可选 允许访问的方式
+
+// server
+$origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';
+if(in_array($origin, [
+    'http://client1.runoob.com',
+    'http://client2.runoob.com'
+])){
+    header('Access-Control-Allow-Origin:' . $origin);
+}
+
+if($_SERVER['REQUEST_METHOD'] == "GET") {
+    header('Content-Type: text/plain');
+    echo "This HTTP resource is designed to handle POSTed XML input from arunranga.com and not be retrieved with GET";
+} elseif ($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
+    // 告诉客户端我们支持来自 arunranga.com 的请求并且预请求有效期将仅有20天
+    if($_SERVER['HTTP_ORIGIN'] == "http://arunranga.com")
+    {
+        header('Access-Control-Allow-Origin: http://arunranga.com');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: X-PINGARUNER');
+        header('Access-Control-Max-Age: 1728000');
+        header("Content-Length: 0");
+        header("Content-Type: text/plain");
+        //exit(0);
+    } else {
+    header("HTTP/1.1 403 Access Forbidden");
+    header("Content-Type: text/plain");
+    echo "You cannot repeat this request";
+
+    }
+} elseif($_SERVER['REQUEST_METHOD'] == "POST"){
+    /* 通过首先获得XML传送过来的blob来处理POST请求，然后做一些处理, 最后将结果返回客户端
+    */
+    if($_SERVER['HTTP_ORIGIN'] == "http://arunranga.com")
+    {
+            $postData = file_get_contents('php://input');
+            $document = simplexml_load_string($postData);
+
+            // 对POST过来的数据进行一些处理
+            $ping = $_SERVER['HTTP_X_PINGARUNER'];
+
+            header('Access-Control-Allow-Origin: http://arunranga.com');
+            header('Content-Type: text/plain');
+            echo // 处理之后的一些响应
+    } else {
+        die("POSTing Only Allowed from arunranga.com");
+    }
+} else{
+    die("No Other Methods Allowed");
+}
+```
 
 ## 流程
 
@@ -458,6 +588,7 @@ curl "http://127.0.0.1:8889/" -vv
 
 因特网上作为域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过主机名，最终得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）。DNS协议运行在UDP协议之上，使用端口号53。
 
+* 互联网上几乎一切活动都以 DNS 请求开始。DNS 是 Internet 的目录,您的 ISP 以及在 Internet 上进行监听的其他任何人，都能够看到您访问的站点以及您使用的每个应用.一些 DNS 提供商会出售您的 Internet 活动相关数据，或是利用这些数据向您发送有针对性的广告
 * 域名与IP之间的对应关系，称为"记录"（record）。根据使用场景，"记录"可以分成不同的类型（type）
 * `Domain_name Time_to_live Class Type Value`
     - Domain_name：指出这条记录适用于哪个域名；
@@ -480,6 +611,8 @@ curl "http://127.0.0.1:8889/" -vv
     - [Cloudflare](https://dash.cloudflare.com/):国外站点解析加速
     - [DNSpod](https://console.dnspod.cn/)
     - [NextDNS](https://nextdns.io/):Block ads, trackers and malicious websites on all your devices. Get in-depth analytics about your Internet traffic. Protect your privacy and bypass censorship. Shield your kids from adult content.
+* DNS缓存污染，不是指域名被墙。墙，域名仍能被解析到正确的IP地址，只是客户端（指用户浏览器/服务请求端）不能与网站服务器握手，或通过技术阻断或干扰的方式阻止握手成功，以至达到超时、屏蔽、连接重置、服务中断的现象
+        + [检测](https://www.checkgfw.com/)
 
 ```
 ns3.dnsowl.com # name silo default name server 
@@ -500,7 +633,7 @@ Public DNS+
 119.29.29.29
 182.254.116.116
 
-#百度 BaiduDNS
+# 百度 BaiduDNS
 180.76.76.76
 
 # 114dns
@@ -766,100 +899,6 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     - HTTP响应头中不包含Last-Modified/Etag，也不包含Cache-Control/Expires的请求无法被缓存
 
 ![浏览器缓存](../_static/browser_cache.png "Optional title")
-
-## 跨域
-
-* 限制获取cookie，用iframe的方式放置了一个淘宝网页到真实页面中，获取淘宝密码信息
-* 同源策略/SOP（Same origin policy）：从一个域上加载的脚本不允许访问另外一个域的文档属性，只要协议、域名、端口有任何一个不同，都被当作是不同的域.除非两个网页是来自于统一‘源头’， 否则不允许一个网页的JavaScript访问另外一个网页的内容，像Cookie，DOM，LocalStorage统统禁止访问
-    - `<script>、<img>、<iframe>、<link>、<script>`等标签都可以加载跨域资源，而不受同源限制，
-    - 浏览器会限制脚本中发起的跨域请求。比如，使用 XMLHttpRequest 对象和Fetch发起 HTTP 请求就必须遵守同源策略。
-    - 协议(http/https) 相同 域名相同 端口相同
-    - 开个口子，对于使用`<script src='//static.store.com/jquery.js'>` 加载的JavaScript，我们认为它的源属于www.store.com， 而不属于static.store.com，这样就可以操作www.store.com的页面了
-    - 两个网页的一级域名是相同的，可以共享cookie, 不过cookie的domain一定要设置为那个一级域名才可以，例如：`document.cookie = 'test=true;path=/;domain=store.com'`
-    - 对XMLHttpReqeust对象施加同源策略
-        - 代理模式：通过服务器端中转，例如你是来自book.com的， 现在想访问movie.com，那可以让那个book.com把请求转发给movie.com嘛！人类好像给这种方式起了个名字
-        - 服务器(domain)可以设置一个白名单，里边列出它允许哪些服务器(domain)的AJAX请求
-* 解决
-    - JSONP （无状态连接，不能获悉连接状态和错误事件，而且只能走GET的形式）
-    - iframe形式
-    - 服务器代理：页面直接向同域的服务端发请求，服务端进行跨域处理或爬虫后，再把数据返回给客户端页
-    - CORS(Cross-Origin Resource Sharing)：定义了必须在访问跨域资源时，自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功还是失败
-        + 响应首部的字段是需要设置
-            * Access-Control-Allow-Origin:<origin> | *
-            * 如果想跨域传输cookies
-                - 需要Access-Control-Allow-Credentials与XMLHttpRequest.withCredentials 或Fetch API中的Request() 构造器中的credentials 选项结合使用。
-                - Credentials必须在前后端都被配置（即the Access-Control-Allow-Credentials header 和 XHR 或Fetch request中都要配置）才能使带credentials的CORS请求成功。
-            * Access-Control-Allow-Methods 首部字段用于预检请求的响应。其指明了实际请求所允许使用的 HTTP 方法。 Access-Control-Allow-Methods: <method>[, <method>]*
-            * Access-Control-Allow-Headers 用于 preflight request （即会在实际请求发送之前先发送一个option请求）中，列出了将会在正式请求的 Access-Control-Expose-Headers 字段中出现的首部信息
-            * Access-Control-Expose-Headers 头让服务器把允许浏览器访问的头放入白名单，例如：Access-Control-Expose-Headers: X-My-Custom-Header, X-Another-Custom-Header
-            * Access-Control-Max-Age 头指定了preflight请求的结果能够被缓存多久 Access-Control-Max-Age: <delta-seconds>
-            * Access-Control-Allow-Credentials 头指定了当浏览器的credentials设置为true时是否允许浏览器读取response的内容。
-                - 当用在对preflight预检测请求的响应中时，它指定了实际的请求是否可以使用credentials。
-                - 简单 GET 请求不会被预检；如果对此类请求的响应中不包含该字段，这个响应将被忽略掉，并且浏览器也不会将相应内容返回给网页 Access-Control-Allow-Credentials: true
-        + 请求首部字段
-        + Origin 首部字段表明预检请求或实际请求的源站 Origin: <origin>
-        + Access-Control-Request-Method 首部字段用于预检请求。其作用是，将实际请求所使用的 HTTP 方法告诉服务器。 Access-Control-Request-Method: <method>
-        + Access-Control-Request-Headers 首部字段用于预检请求。其作用是，将实际请求所携带的首部字段告诉服务器。Access-Control-Request-Headers: <field-name>[, <field-name>]*
-
-```php
-// 后端返回代码中增加三个字段
-header(“Access-Control-Allow-Origin”:“”);           // 必选 允许所有来源访问
-header(“Access-Control-Allow-Credentials”:“true”);  //可选 是否允许发送cookie
-header(“Access-Control-Allow-Method”:“POST,GET”);   //可选 允许访问的方式
-
-// server
-$origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';
-if(in_array($origin, [
-    'http://client1.runoob.com',
-    'http://client2.runoob.com'
-])){
-    header('Access-Control-Allow-Origin:' . $origin);
-}
-
-# 允许所有域名访问则只需在http://server.runoob.com/server.php文件头部添加如下代码：
-header('Access-Control-Allow-Origin:*');
-
-if($_SERVER['REQUEST_METHOD'] == "GET") {
-    header('Content-Type: text/plain');
-    echo "This HTTP resource is designed to handle POSTed XML input from arunranga.com and not be retrieved with GET";
-} elseif ($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
-    // 告诉客户端我们支持来自 arunranga.com 的请求并且预请求有效期将仅有20天
-    if($_SERVER['HTTP_ORIGIN'] == "http://arunranga.com")
-    {
-        header('Access-Control-Allow-Origin: http://arunranga.com');
-        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-        header('Access-Control-Allow-Headers: X-PINGARUNER');
-        header('Access-Control-Max-Age: 1728000');
-        header("Content-Length: 0");
-        header("Content-Type: text/plain");
-        //exit(0);
-    } else {
-    header("HTTP/1.1 403 Access Forbidden");
-    header("Content-Type: text/plain");
-    echo "You cannot repeat this request";
-
-    }
-} elseif($_SERVER['REQUEST_METHOD'] == "POST"){
-    /* 通过首先获得XML传送过来的blob来处理POST请求，然后做一些处理, 最后将结果返回客户端
-    */
-    if($_SERVER['HTTP_ORIGIN'] == "http://arunranga.com")
-    {
-            $postData = file_get_contents('php://input');
-            $document = simplexml_load_string($postData);
-
-            // 对POST过来的数据进行一些处理
-            $ping = $_SERVER['HTTP_X_PINGARUNER'];
-
-            header('Access-Control-Allow-Origin: http://arunranga.com');
-            header('Content-Type: text/plain');
-            echo // 处理之后的一些响应
-    } else {
-        die("POSTing Only Allowed from arunranga.com");
-    }
-} else{
-    die("No Other Methods Allowed");
-}
-```
 
 ## 附带身份凭证的请求
 
