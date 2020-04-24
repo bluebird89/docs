@@ -1493,6 +1493,53 @@ docker service create --name portainer_agent --network portainer_agent_network -
 docker run -d -p 9001:9001 --name portainer_agent --restart=always -v \\.\pipe\docker_engine:\\.\pipe\docker_engine portainer/agent
 ```
 
+## 容器诊断工具
+
+* netshoot 自我定位就是容器网络诊断的瑞士军刀，其实就是一个装满了各种工具的镜像
+* docker-debug 不仅可以进入目标容器的网络命名空间，还可以进入 pid,user,filesystem,ipc 的命名空间
+* kubectl-debug 在 某个 Pod 的节点上起一个容器，并将这个容器加入到目标容器的pid,network,user,icp 的命名空间
+  - 客户端：kubectl-debug 二进制文件 客户端通过控制 node 上的 agent 服务端与容器运行时通信，从而启动一个容器并进入到指定 Pod 的命名空间，可以说 agent 就是一个 debug 容器与客户端之间的中继。而从 kubectl-debug 的工作模式来看，可以分为两种模式：
+    + 非常驻服务端：agentless 只有在每次 kubectl-debug 进行调试 Pod 的时候才会启动一个 agent 服务端，调试完成后自动清理 agent 优点是不那么占用 kubernetes 集群资源
+    + 常驻服务端： DaemonSet 在每个节点上都会常驻一个 DaemonSet 的 agent， 好处就是启动快
+  - 服务端：agent 容器
+
+```sh
+docker run -it --net container:<container_name|container_id> nicolaka/netshoot
+
+kubectl run test-lab --generator=run-pod/v1 --rm -i --tty --overrides='{"spec": {"hostNetwork": true}}' --image nicolaka/netshoot -- /bin/bash
+
+docker-debug  wget docker-debug https://github.com/zeromake/docker-debug/releases/download/0.6.2/docker-debug-linux-amd64 -O docker-debug
+docker-debug  chmod +x docker-debug
+docker-debug  mv docker-debug /usr/bin
+docker-debug  docker-debug info
+
+docker-debug <CONTAINER_ID|CONTAINER_NAME> COMMAND
+
+# 客户端
+wget https://github.com/aylei/kubectl-debug/releases/download/v0.1.0/kubectl-debug_0.1.0_linux_amd64.tar.gz -O kubectl-debug.tar.gz
+tar -zxvf kubectl-debug.tar.gz kubectl-debug
+
+#  agent 服务端
+wget -f https://raw.githubusercontent.com/aylei/kubectl-debug/master/scripts/agent_daemonset.yml
+
+hostNetwork: true  # 需要加上 hostNetwork: true，hostPort：10027 才会生效
+hostPID: true
+tolerations:
+  - key: node-role.kubernetes.io/master
+    effect: NoSchedule
+containers:
+  - name: debug-agent
+    image: aylei/debug-agent:v0.1.1 # 老版本镜像有问题，使用 v0.1.1新版本
+
+    ports:
+      - containerPort: 10027
+        hostPort: 10027
+
+# 创建 DaemonSet
+kubectl apply -f agent_daemonset.yaml # 可以看到每个节点上都创建了 debug-agent 的 DaemonSet，并且宿主机上都监听了10027端口
+kubectl-debug <POD_NAME>
+```
+
 ### 迁移docker
 
 * 分解：通过设计和部署把这些服务拆分成为它们自己的容器。如果一个应用程序能够被拆分成为越多的分布式组件，那么应用程序扩展的选择则越多。但是，分布式组件越多也意味着管理的复杂性越高。
