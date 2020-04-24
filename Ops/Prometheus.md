@@ -701,6 +701,7 @@ spec:
 * [grafana/loki](https://github.com/grafana/loki):Like Prometheus, but for logs.
 * [improbable-eng/thanos](https://github.com/improbable-eng/thanos):Highly available Prometheus setup with long term storage capabilities.
 * [coreos/prometheus-operator](https://github.com/coreos/prometheus-operator):Prometheus Operator creates/configures/manages Prometheus clusters atop Kubernetes
+* [ cortexproject / cortex ](https://github.com/cortexproject/cortex):A horizontally scalable, highly available, multi-tenant, long term Prometheus. https://cortexmetrics.io/
 
 ## 参考
 
