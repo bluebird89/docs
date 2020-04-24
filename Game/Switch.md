@@ -422,7 +422,13 @@
 
 ## 账号/主机被 ban
 
+## 问题
+
+* 摇杆漂移
+    - wd40 黑的 清洗
+    - 拆卸清洗
 
 ## 工具
-    - [yuzu-emu/yuzu](https://github.com/yuzu-emu/yuzu):Nintendo Switch Emulator https://yuzu-emu.org/
-    - [价格比对](https://eshop-prices.com/)
+
+* [yuzu-emu/yuzu](https://github.com/yuzu-emu/yuzu):Nintendo Switch Emulator https://yuzu-emu.org/
+* [价格比对](https://eshop-prices.com/)

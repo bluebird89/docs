@@ -2,6 +2,26 @@
 
 虚拟专用网络
 
+## 概念
+
+* 中继/中转/落地：两个或多个服务器之间通过端口进行流量转发
+* IPLC 中继/中转：IPLC（点对点的内网专线），一台服务器在国外一台服务器在国内，所有的数据都是通过这两台服务器内网传输的
+  - 优势不过GFW（所以不会存在被封的情况），因为是内网，防火墙检测不到，所以在国内访问的就是国内的服务器，然后国内的服务器走内网传输到国外的服务器帮我们上网，所以其就是就是快，稳定，不会受高峰期影响
+  - 成本高，基本上是按照流量去卖的，所以这种是限制用户流量的
+* BGP 中继/中转：国内一台服务器，国外一台服务器，但是与IPLC不同的是走的是公网。使用了BGP一后对线路的优化是特别明显的，但给线路增加BGP服务器是花钱的，这也就增加了成本，所以一般不会给香港这么近的节点增加BGP服务器
+* BGP 协议/技术：通过BGP可以实现一个IP对应电信、联通、移动、长城、教育网等不同线路的带宽，而不需要服务器端配置多个IP
+  - BGP（边界网关协议）主要用于互联网AS（自治系统）之间的互联，BGP最主要的功能在于控制路由的传播和选择最好的路由。
+  - 中国网通、中国电信、中国铁通和一些大的民营IDC运营商都具有AS号，全国各大网络运营商多数都是通过BGP协议与自身的AS号来实现多线互联的
+  - 使用此方案来实现多线路互联，IDC需要在CNNIC（中国互联网信息中心）或APNIC（亚太网络信息中心）申请自己的IP地址段和AS号，然后通过BGP协议将此段IP地址广播到其它网络运营商的网络中。使用BGP协议互联后，网络运营商的所有骨干路由设备将会判断到IDC机房IP段的最佳路由，以保证不同网络运营商用户的高速访问。所以说BGP是目前全球最好的双线技术。
+  - BGP 线路
+    + 消除南北访问障碍。由于BGP可以将联通、电信、移动等运营商的线路“合并”，使得中国南北无障碍通讯成为可能。对接入层来说，可使“联通、电信”这类区别消失，更能使一个网站资源无限制的在全国范围内无障碍访问，而不需要在异地部署VPN或者异地加速站来实现异地无障碍访问
+    + 高速互联互通。原来，一条线路访问另一线路往往要经过很多层路由，但实现BGP以后就像进入了高速公路。 原来带宽的利用率一般在40%左右，实现BGP后能达到80%以上
+  - 用于BGP路由中的每个自治系统都被分配一个唯一的自治系统编号（ASN），通常以 AS 开头。 对BGP来说，因为ASN是区别整个相互连接的网络中的各个网络的唯一标识，所以这个自治系统编号非常重要。 互联网地址分派机构将64512到65535的ASN编号保留给（私有）专用网络使用
+* 分流规则（或出站模式）:即配置哪些网站走代理模式（Proxy），哪里网站走直连模式（Direct），哪些网站被拒绝访问（Reject）
+  - 国外的网站走代理模式（例如Twitter/YouTube/Pornhub/..）
+  - 打不开（被墙）的网站，走代理（Proxy）就打得开了
+  - 国内网站走直连模式（例如Baidu/Zhihu/Youku/...），正常打开
+
 ## shadowsocks
 
 [wiki](https://github.com/shadowsocks/shadowsocks/wiki)
@@ -43,9 +63,12 @@ brew cask install shadowsocksx
 
 ## OpenVPN
 
-### Ubunutu
+* 服务端配置,提供了两种认证方法：
+  * 基于用户名/密码的认证与SSL证书认证。用户名/密码的认证方法无法（或较难）限制一个账号同时连接多个客户端，
+  * 采用证书，则可保证同一证书同一时间只能有一个客户端连接。
 
 ```shell
+### Ubunutu
 sudo apt install openvpn easy-rsa # 服务端
 make-cadir ~/openvpn-ca
 
@@ -91,18 +114,7 @@ sudo systemctl start openvpn@server
 sudo systemctl status openvpn@server
 
 ifconfig tun0
-```
 
-#### 服务端配置
-
-OpenVPN提供了两种认证方法：
-
-* 基于用户名/密码的认证与SSL证书认证。用户名/密码的认证方法无法（或较难）限制一个账号同时连接多个客户端，
-* 采用证书，则可保证同一证书同一时间只能有一个客户端连接。
-
-提供客户端配置文件 client.ovpn
-
-```sh
 apt-get install openvpn # 客户端
 
 # 客户端默认配置文件放置服务端配置文件
@@ -149,7 +161,97 @@ pip install shadowsocks
 
 * 跨平台
 * 易于[部署](https://www.linode.com/docs/networking/vpn/set-up-wireguard-vpn-on-ubuntu/) <https://teddysun.com/554.html>
+* [Getting Started with WireGuard](https://miguelmota.com/blog/getting-started-with-wireguard/)
 * 运行在内核空间(可以将 WireGuard 作为内核模块安装在 Linux 中)，因此可以高速提供安全的网络
+
+```sh
+sudo add-apt-repository ppa:wireguard/wireguard
+sudo apt-get update
+sudo apt-get install wireguard
+
+sudo -s
+wg # for configuring WireGuard interfaces.
+wg-quick # for starting and stopping WireGuard VPN tunnels.
+
+mkdir /etc/wireguard/keys
+cd /etc/wireguard/keys
+umask 077 #  Set the directory user mask to 077 by running umask 077. A umask of 077 allows read, write, and execute permissions for the file’s owner (root in this case), but prohibits read, write, and execute permissions for everyone else and makes sure credentials don’t leak in a race condition
+wg genkey | tee privatekey | wg pubkey > publickey
+
+vim /etc/wireguard/wg0.conf
+[Interface]
+PrivateKey = <server private key>
+Address = 10.0.0.1/24
+ListenPort = 51820
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+# EC2 instance → Security groups → Click on security group → Edit inbound rules → Add rules → Custom UDP → Port range: 51820 → Source: Anywhere → Save rules
+
+# If your server is behind a NAT then all traffic needs to be forwarded from the default interface to the WireGuard interface. To find out the name of the default interface run ip route
+ip route | grep default | awk '{print $5}'
+
+# Enabling IP forwarding on server
+vim /etc/sysctl.conf
+net.ipv4.ip_forward=1
+
+sysctl -p # the changes to take effect without requiring a reboot
+
+## client
+sudo pacman -S wireguard-tools wireguard-dkms
+sudo -s
+mkdir /etc/wireguard/keys
+cd /etc/wireguard/keys
+umask 077
+wg genkey | tee privatekey | wg pubkey > publickey
+
+vim /etc/wireguard/wg0.conf
+[Interface]
+Address = 10.0.0.2/32
+PrivateKey = <client private key>
+DNS = 1.1.1.1
+
+[Peer]
+PublicKey = <server public key>
+Endpoint = <server public ip>:51820
+AllowedIPs = 0.0.0.0/0 
+PersistentKeepalive = 25 # If your server is behind a NAT and not accessible via a public IP, then under the peer section you’ll need to set PersistentKeepalive to keep the connection alive
+
+dig +short myip.opendns.com @resolver1.opendns.com # your server’s public address
+
+## server
+vim /etc/wireguard/wg0.conf
+[Peer]
+PublicKey = vi4TCAo8TNRkpf4ZpiMsp3YHaOLrcouSDkrm4wJxezw=
+AllowedIPs = 10.0.0.2/32
+
+wg-quick up wg0
+systemctl enable wg-quick@wg0.service
+systemctl status wg-quick@wg0.service
+
+ptables -L -n
+
+## client
+dig +short myip.opendns.com @resolver1.opendns.com # your current public IP address
+wg-quick up wg0
+
+## Connecting a mobile client to server Download the WireGuard app for iOS or Android on your device
+## wg genkey but specify different filenames this time to distinguish them from the server keys:
+wg genkey | tee iphone_privatekey | wg pubkey > iphone_publickey
+
+vim /etc/wireguard/wg0.conf # Add the second peer section and include the client’s public key and IP address
+[Peer]
+PublicKey = cKIxzfp5ESpdM34vT2Qk/S7yvprOff6Le4YnyOTI4B8=
+AllowedIPs = 10.0.0.3/32
+
+
+vim /etc/wireguard/wg0-iphone.conf
+
+[Peer]
+PublicKey = H6StMJOYIjfqhDvG9v46DSX9UlQl52hOoUm7F3COxC4=
+Endpoint = 54.225.123.18:51820
+AllowedIPs = 0.0.0.0/0
+```
 
 ### 服务
 
@@ -175,7 +277,7 @@ pip install shadowsocks
 * 私人互联网接入
 * PureVPN
 * 完美隐私
-- [txthinking/brook](https://github.com/txthinking/brook):Brook is a cross-platform(Linux/MacOS/Windows/Android/iOS) proxy/vpn software
+* [txthinking/brook](https://github.com/txthinking/brook):Brook is a cross-platform(Linux/MacOS/Windows/Android/iOS) proxy/vpn software
 * [Alvin9999/new-pac](https://github.com/Alvin9999/new-pac)
 * BT sync
 * [ShadowsocksR-Live/shadowsocksr-native](https://github.com/ShadowsocksR-Live/shadowsocksr-native):从容翻越党国敏感日 ShadowsocksR (SSR) native implementation for all platforms powered by libuv, GFW terminator
@@ -186,6 +288,20 @@ pip install shadowsocks
   - [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu https://shadowsocks.be
   - [Qv2ray / Qv2ray](https://github.com/Qv2ray/Qv2ray):🌟 V2Ray/Trojan-GFW/SSR Linux/Windows/macOS 跨平台 GUI 🔨 使用 C++17/Qt5 ，支持订阅，扫描二维码，自定义路由编辑 🌟 https://qv2ray.github.io
   - [mellow-io / mellow](https://github.com/mellow-io/mellow):Mellow is a rule-based global transparent proxy client for Windows, macOS and Linux.
+  - [Surge](https://www.nssurge.com/) https://www.newlearner.site/2018/08/29/surge-for-mac.html
+  - V2rayNG
+  - Quantumult
+    + 分流
+      * `https://raw.githubusercontent.com/limbopro/Profiles/master/Quantumult/Pro.conf`
+      * 链接阻止 `https://raw.githubusercontent.com/limbopro/Profiles/master/Quantumult/Rejection.conf`
+      * `HOST-SUFFIX,apoll.m.taobao.com,REJECT` 这是一条分流规则示例：即包含关键字为apoll.m.taobao.com的域名均拒绝；分流规则是要配合策略使用的；可以指定任意网站如apoll.m.taobao.com是走直连（Ddirect）还是走代理（Proxy）或者干脆拒绝（Reject）连接网络
+      * 匹配规则
+        - HOST （完整域名匹配，举例limbopro.xyz）
+        - HOST-SUFFIX（域名后缀匹配）
+        - HOST-KEYWORD（域名关键字匹配，举例limboppro）
+        - USER-AGENT（浏览器用户代理匹配，举例*abc?）
+        - IP-CIDR（无类别域间路由例如192.168.xx）
+        - GEOIP（GeoIP数据库IP匹配，参数填US，则为美国 ip 数据库匹配，所有美国IP匹配该规则则执行）
 * [Dreamacro / clash](https://github.com/Dreamacro/clash):A rule-based tunnel in Go.
   - `go get -u -v github.com/Dreamacro/clash`
 

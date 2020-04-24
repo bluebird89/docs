@@ -168,7 +168,7 @@ numactl --membind 1 --cpunodebind 1 --localalloc myapplication
     - Web Font 是否被正确优化：您使用的 Web Font 很可能包含未真正被使用的执行和额外的特性。制作字体的子集（译注：仅包含部分文字的字体，如 fontmin 等方案）。优先使用 WOFF2 并使用 WOFF 作为后备。立即使用后备字体显示文字、异步加载字体（例如，使用 loadCSS），然后再切换字体。同时也考虑本地操作系统中已经安装了的字体。不要忘记在 CSS 中写 font-display: optional；如果你无法从您的服务器加载字体，请记得使用 Font Load Events。
 * 分发优化
     - 快速推送核心 CSS：将所有首屏渲染所需要的 CSS 放在一起，然后放在 <head> 标签中。考虑有选择的内联的方法。或者，使用 HTTP/2 服务端推送；但这样你可能需要构建一个可感知缓存的 HTTP/2 服务端推送机制。
-    - 使用 babel-preset-env 以仅转译 ES2015+ 特性：由于 ES2015 已被广泛支持了，您可以考虑使用 babel-preset-env 以仅转译现代浏览器不支持的 ES2015+ 特性。然后你可以编译两份，一份是 ES6 ，另一份是 ES5。使用 <script type="module"> 使得有 ESM 支持的浏览器加载新文件，剩下的老的浏览器可以使用 <script nomodule> 来加载老的文件。
+    - 使用 babel-preset-env 以仅转译 ES2015+ 特性：由于 ES2015 已被广泛支持了，您可以考虑使用 babel-preset-env 以仅转译现代浏览器不支持的 ES2015+ 特性。然后你可以编译两份，一份是 ES6 ，另一份是 ES5。使用 `<script type="module">` 使得有 ESM 支持的浏览器加载新文件，剩下的老的浏览器可以使用 `<script nomodule>` 来加载老的文件。
     - 提升渲染性能：使用 CSS 包含（CSS Containment）隔离渲染十分耗时的组件。请保证在滑动页面或者元素动画的时候，页面不会卡顿，而且你的页面能持续以 60fps 的速度渲染。如果那不可能，那么至少也要把 fps 控制在 15~60 之间。使用 CSS 的 will-change 属性通知浏览器哪个元素将会变化。
     - 使用 Intersection Observer 懒加载大型脚本：Intersection Observer API 提供了异步监听目标元素与祖先元素或顶层文档视口交点中的更改的能力。浏览器支持？Chrome, Firefox, Edge 和三星浏览器都支持了。WebKit 还在开发。浏览器不支持？懒加载一个 polyfill。
     - 是否优化了渲染体验：不要低估感知性能的作用。在加载静态文件时，尽量始终领先用户一步，这样在后台发生很多事情时，会感觉体验上很快。例如，要让用户持续关注你的页面，请使用骨架屏幕而不是一些加载中的动画。
@@ -225,18 +225,15 @@ numactl --membind 1 --cpunodebind 1 --localalloc myapplication
     - 算法优化
 * 性能调优是一个循序渐进的过程，不可能一蹴而就，重在平时的点滴积累。
 
-## 性能测试
-
-
 ## 工具
 
-* [pagespeed](https://developers.google.com/speed/pagespeed/)
+* [pagespeed](https://developers.google.com/speed/pagespeed/) Analyze and optimize your website with PageSpeed tools
 * [元素加载时间具体耗时](http://www.webpagetest.org/)
-* [Speed](https://developers.google.com/speed/):Analyze and optimize your website with PageSpeed tools
 * Apache ab
 * Apache JMeter
 * LoadRunner
 * [wg / wrk](https://github.com/wg/wrk):Modern HTTP benchmarking tool
+* [k6](https://k6.io/):The best developer experience for load testing
 
 ## 参考
 

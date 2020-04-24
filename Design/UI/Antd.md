@@ -6,6 +6,7 @@
 
 * [vueComponent/ant-design-vue](https://github.com/vueComponent/ant-design-vue):An enterprise-class UI components based on Ant Design and Vue. 🐜 
 * [NG-ZORRO/ng-zorro-antd](https://github.com/NG-ZORRO/ng-zorro-antd):An enterprise-class UI components based on Ant Design and Angular 7. 🐜 https://ng.ant.design/docs/introduce/en
+* [zuiidea / antd-admin](https://github.com/zuiidea/antd-admin):An excellent front-end solution for enterprise applications built upon Ant Design and UmiJS http://antd-admin.zuiidea.com
 
 ## 参考
 

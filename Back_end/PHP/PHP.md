@@ -2703,6 +2703,26 @@ echo "Associative array always output as object: ", json_encode($d, JSON_FORCE_O
 ?>
 ```
 
+## 跨域请求
+
+* Access-Control-Allow-Origin 设置方法
+    - 设置*是最简单粗暴的，但是服务器出于安全考虑，肯定不会这么干，而且，如果是*的话，游览器将不会发送cookies，即使你的XHR设置了withCredentials
+    - 指定域，如上图中的http://172.20.0.206，一般的系统中间都有一个nginx，所以推荐这种,例如：'Access-Control-Allow-Origin:http://172.20.0.206'
+    - 动态设置为请求域，多人协作时，多个前端对接一个后台，这样很方便
+    - withCredentials：表示XHR是否接收cookies和发送cookies，也就是说如果该值是false，响应头的Set-Cookie，浏览器也不会理，并且即使有目标站点的cookies，浏览器也不会发送。
+* Access-Control-Allow-Credentials :是否允许后续请求携带认证信息（cookies）,该值只能是true,否则不返回            
+* option请求多了2个字段：
+    - Access-Control-Request-Method：该次请求的请求方式
+    - Access-Control-Request-Headers：该次请求的自定义请求头字段
+    - Access-Control-Max-Age 预检结果缓存时间 表明该响应的有效时间为 86400 秒，也就是 24 小时。在有效时间内，浏览器无须为同一请求再次发起预检请求。浏览器自身维护了一个最大有效时间，如果该首部字段的值超过了最大有效时间，将不会生效
+
+```php
+header('Access-Control-Allow-Origin: *');  
+header('Access-Control-Allow-Credentials: true'); 
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'); //允许的请求类型 
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"); // 允许的请求头字段
+```
+
 ## Docker
 
 * [docker-library/php](https://github.com/docker-library/php):Docker Official Image packaging for PHP https://php.net
@@ -2801,7 +2821,6 @@ EXPOSE 9000 CMD ["php-fpm"]
 docker build -t php:5.6-fpm .
 docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/local/etc/php -v $PWD/logs:/phplogs -d php:5.6-fpm
 ```
-
 
 ## [xhprof](https://github.com/phacility/xhprof)
 

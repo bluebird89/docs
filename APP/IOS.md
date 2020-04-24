@@ -67,3 +67,4 @@
 * [nikitavoloboev/my-ios](https://github.com/nikitavoloboev/my-ios):List of applications and tools that make my iOS experience even more amazing
 * [SwiftOldDriver/iOS-Weekly](https://github.com/SwiftOldDriver/iOS-Weekly):🇨🇳 老司机 iOS 周报
 * [微云IOS团队](https://iweiyun.github.io)
+* [Buyer's Guide](https://buyersguide.macrumors.com/)

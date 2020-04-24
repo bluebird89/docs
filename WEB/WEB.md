@@ -411,15 +411,16 @@ lsmod | grep bbr
 * [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning Area. https://developer.mozilla.org/en-US/docs/Learn
 
 
-* [WEB开发中需要了解的东西](https://coolshell.cn/articles/6043.html): [What technical details should a programmer of a web application consider before making the site public?](https://softwareengineering.stackexchange.com/questions/46716/what-technical-details-should-a-programmer-of-a-web-application-consider-before/46738#46738)
+* [WEB开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
+* [What technical details should a programmer of a web application consider before making the site public?](https://softwareengineering.stackexchange.com/questions/46716/what-technical-details-should-a-programmer-of-a-web-application-consider-before/46738#46738)
 * [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
 * [A Beginner’s Guide to Website Speed Optimization](https://kinsta.com/learn/page-speed/)
 * [关于大型网站技术演进的思考](http://blog.jobbole.com/84761/)
 * [大型WEB架构设计](https://mp.weixin.qq.com/s?__biz=MzAwNzY4OTgyNA==&mid=2651826002&idx=1&sn=237e6c340626171cf1f4eb6e0f19f182&chksm=8081445db7f6cd4bea29330141ac28228f09c024dd5671cb945171bf41a20d6f1386c455e330)
-- [PHP 进阶之路 - 亿级 pv 网站架构实战之性能压榨](https://segmentfault.com/a/1190000010455076)
-- [全站缓存](https://segmentfault.com/a/1190000005808789)
-- 《构建高性能Web站点》第12章 web负载均衡
-- 《大型网站技术架构：核心原理与案例分析》 6.2 应用服务器集群的伸缩性设计
+* [PHP 进阶之路 - 亿级 pv 网站架构实战之性能压榨](https://segmentfault.com/a/1190000010455076)
+* [全站缓存](https://segmentfault.com/a/1190000005808789)
+* 《构建高性能Web站点》第12章 web负载均衡
+* 《大型网站技术架构：核心原理与案例分析》 6.2 应用服务器集群的伸缩性设计
 
 <https://zhuanlan.zhihu.com/p/22360384>
 <http://tips.codekiller.cn/2017/05/17/maglev_describe/>
