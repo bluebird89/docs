@@ -149,6 +149,8 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [gruns/ImmortalDB](https://github.com/gruns/ImmortalDB):🔩 A relentless key-value store for the browser.
 * [cockroachdb/cockroach](https://github.com/cockroachdb/cockroach):CockroachDB - the open source, cloud-native SQL database. https://www.cockroachlabs.com
 * [dgraph-io/dgraph](https://github.com/dgraph-io/dgraph):Fast, Distributed Graph DB https://dgraph.io
+* [apache/hive](https://github.com/apache/hive) Mirror of Apache Hive
+* [google/leveldb](https://github.com/google/leveldb) LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.
 * [DCache](https://github.com/tencent/dcache):分布式 NoSQL 存储系统,基于 TARS 微服务治理方案，支持 k-v、k-k-row、list、set 与 zset 多种数据结构，数据基于内存存储，同时支持后接 DB 实现数据持久化。DCache 具备快速水平扩展能力，同时配套有 Web 运维平台实现高效的运维操作。
     - 对外提供服务的粒度是 group，一个 group 负责一部分的数据分片，至于每个 group 服务哪些数据，是根据数据的 key 做 hash 映射后所处的范围来确定的。
     - 自身会处理缓存与DB之间的数据一致性问题
@@ -183,6 +185,7 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
         + 列存：两个数组，一个存时间戳，一个存数值，如[ 2017-09-03-21:24:44, 2017-09-03-21:24:45], [0.1002,  0.1012]，一般情况下：列存能有更好的压缩率和查询性能
     - beringei：Facebook
     - TimeScaleDB：PostgreSQL
+    - [rethinkdb/rethinkdb](https://github.com/rethinkdb/rethinkdb) The open-source database for the realtime web. <https://rethinkdb.com>
     - [VividCortex](https://www.vividcortex.com)：MySQL
     -  [Graphite](https://graphiteapp.org/)
         +  [文档](https://graphite.readthedocs.io/en/latest/index.html)

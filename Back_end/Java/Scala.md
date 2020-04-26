@@ -16,6 +16,7 @@ echo '-J-Xmx2G' >> /usr/local/etc/sbtopts
 
 * [tonyskn/coursera-scala](https://github.com/tonyskn/coursera-scala)
 * [fpinscala/fpinscala](https://github.com/fpinscala/fpinscala):Code, exercises, answers, and hints to go along with the book "Functional Programming in Scala" http://manning.com/bjarnason
+* [Hands-on Scala Programming](https://www.handsonscala.com/)新加坡总理李显龙的儿子李浩毅，发布的 Scala 的英文教程。李浩毅生于1989年，是 Scala.js 的核心开发者，MIT 计算机专业毕业
 
 ## 工具
 

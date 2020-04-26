@@ -28,6 +28,34 @@ gcc file.c # 编译
 }
 ```
 
+## 编译
+
+* 预处理阶段
+* 编译阶段
+* 链接阶段
+
+## [细节](https://mp.weixin.qq.com/s/HLmZzFtNF9kVbIGS47E-BA)
+
+* 尽量以const，enum，inline 替换 #define
+    - #define 是不被视为语言的一部分，它在程序编译阶段中的预处理阶段的作用，就是做简单的替换
+    - 遇到了编译错误，那么这个错误信息也许会提到 3.14 而不是 PI
+    - 定义常量字符串，则必须要 const 两次，目的是为了防止指针所指内容和指针自身不能被改变     `const char* const myName = "小林coding";`
+    - 对于单纯常量，最好以 const 对象或 enum 替换 #define
+    - 对于形式函数的宏，最好改用 inline 函数替换 #define
+    - #define 不重视作用域，所以对于 class 的专属常量，应避免使用宏定义 `const std::string myName("小林coding");`
+* 尽可能使用 const:告诉编译器和其他程序员某值应该保持不变
+    - 面对指针，可以指定指针自身、指针所指物，或两者都（或都不）是 const
+    - 面对迭代器，你也指定迭代器自身或自迭代器所指物不可被改变
+    - 希望迭代器所指的物不可被改动，需要的是 const_iterator（即声明一个 const T* 指针）
+
+```c++
+char myName[] = "小林coding";
+char *p = myName;             // non-const pointer, non-const data 指针所指物是常量（不能改变 *p 的值）
+const char* p = myName;       // non-const pointer, const data 表示指针自身是常量（不能改变 p 的值）
+char* const p = myName;       // const pointer, non-const data
+const char* const p = myName; // const pointer, const data 表示指针所指物和指针自身都是常量
+```
+
 ## 图书
 
 * 《C++ Primer》

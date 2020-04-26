@@ -35,6 +35,7 @@
 * 《[计算机程序的构造和解释（Structure and Interpretation of Computer Programs）](https://www.amazon.cn/gp/product/B0011AP7RY)》
     * <https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html>
     * [SICP 解题集](https://sicp.readthedocs.io/en/latest/#)
+    * SICP视频 b站上发现 MIT 关于 SICP 的公开课
     * [huangz1990/SICP-answers](https://github.com/huangz1990/SICP-answers):我的 SICP 解题集 http://sicp.readthedocs.org/
 * 《[编码：隐匿在计算机软硬件背后的语言](https://www.amazon.cn/gp/product/B009RSXIB4)》
 * 《[性能之颠：洞悉系统、企业与云计算](https://www.amazon.cn/gp/product/B0140I5WPK)》
@@ -45,6 +46,7 @@
 * 《编译原理技术与工具》（龙书）（Compilers: Principles, Techniques, and Tools (the Dragon Book)）
 * 《编码:隐匿在计算机软硬件背后的语言(CODE: The Hidden Language of Computer Hardware and Software)》
 * 《现代操作系统(原书第3版) 》
+* 计算机编程艺术
 * 《操作系统:精髓与设计原理(原书第6版)》
 
 ## Linux / Unix
