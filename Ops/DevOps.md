@@ -118,7 +118,16 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 
 ## 图书
 
-* [sre](https://landing.google.com/sre/books/)
+* 文化
+    - 奈飞文化手册
+    - 第五项修炼: 学习组织的技术和实践
+    - 管理 3.0：培养和提升技术领导力
+* 流程
+    - 精益软件度量：实践者的观察与思考
+* 实施
+    - Java 持续交付
+* 实践
+    - [sre](https://landing.google.com/sre/books/)
 
 ## 工具
 
