@@ -1,6 +1,6 @@
 # Anaconda
 
-Anaconda(森蚺)是一个包含180+的科学包及其依赖项的发行版本。其包含的科学包包括：conda, numpy, scipy, ipython notebook等.
+Anaconda(森蚺)是一个包含180+的科学包及其依赖项的发行版本。其包含的科学包包括：conda, numpy, scipy, ipython notebook等
 
 * conda是包及其依赖项和环境的管理工具
     - 环境管理： 在conda中可以建立多个虚拟环境，用于隔离不同项目所需的不同版本的工具包，以防止版本上的冲突。
@@ -10,7 +10,7 @@ Anaconda(森蚺)是一个包含180+的科学包及其依赖项的发行版本。
 
 * Anaconda Navigator ：用于管理工具包和环境的图形用户界面，后续涉及的众多管理命令也可以在 Navigator 中手工实现。
 * qtconsole ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。
-* spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境。
+* spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境
 
 ## install
 
@@ -36,6 +36,24 @@ channels:
   - https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/
   - defaults
 show_channel_urls: true
+
+channels:
+  - defaults
+show_channel_urls: true
+channel_alias: https://mirrors.tuna.tsinghua.edu.cn/anaconda
+default_channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
 
 # 设置搜索时显示通道地址
 conda config --set show_channel_urls yes
