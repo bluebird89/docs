@@ -763,6 +763,17 @@ VOLUME /foo
     + The PATH is a directory on your local filesystem. The URL is a Git repository location.
     + -f :指定 Dockerfile 文件路径
     + -t ：指定要创建的目标镜像名
+* 多阶段构建:由多个 FROM 指令识别，每一个 FROM 语句表示一个新的构建阶段，阶段名称可以用 AS 参数指定
+  - 在声明构建阶段时，可以不必使用关键词 AS，最终阶段拷贝文件时可以直接使用序号表示之前的构建阶段（从零开始）
+  - 如果 Dockerfile 内容不是很复杂，构建阶段也不是很多，可以直接使用序号表示构建阶段。一旦 Dockerfile 变复杂了，构建阶段增多了，最好还是通过关键词 AS 为每个阶段命名，这样也便于后期维护
+  - 构建的第一阶段使用经典的基础镜像，经典的镜像指的是 CentOS，Debian，Fedora 和 Ubuntu 之类的镜像。可能还听说过 Alpine 镜像，不要用它！至少暂时不要用
+  - COPY --from 使用绝对路径:从上一个构建阶段拷贝文件时，使用的路径是相对于上一阶段的根目录的
+    + 如果后面基础镜像改变了 WORKDIR:在第一阶段指定 WORKDIR，在第二阶段使用绝对路径拷贝文件，这样即使基础镜像修改了 WORKDIR，也不会影响到镜像的构建
+  - 镜像缩减:将多阶段构建的第二阶段的基础镜像改为 scratch 就好了。scratch 是一个虚拟镜像，不能被 pull，也不能运行，因为它表示空、nothing！这就意味着新镜像的构建是从零开始，不存在其他的镜像层
+    + 使用 scratch 作为基础镜像时会带来很多的不便
+      * 没有 shell:使用 JSON 语法取代字符串语法。 例如，将 CMD ./hello 替换为 CMD ["./hello"]
+      * 缺少调试工具:选择 busybox 或 alpine 镜像来替代 scratch，虽然它们多了那么几 MB，但从整体来看，这只是牺牲了少量的空间来换取调试的便利性，还是很值得的
+      * 缺少 libc:
 * 最佳实践
   - 尽量将一些常用不变的指令放到前面
   - CMD和ENTRYPOINT尽量使用json数组方式

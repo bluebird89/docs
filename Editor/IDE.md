@@ -279,17 +279,18 @@ livetemplate
 * 大小写 ctrl+shift+u
 * 列操作 ctrl+shift+alt +j
 * 插件
-  - Lombok
-  - IDE Features Trainer—IDEA交互式教程
-  - RestfulToolkit—RESTful服务开发
-  - Key Promoter X—快捷键
-  - Presentation Assistant—快捷键展示
-  - Codota—代码智能提示
   - Alibaba Java Code Guidelines—阿里巴巴 Java 代码规范
+  - CamelCase-多种命名格式之间切换
+  - Codota—代码智能提示
   - GsonFormat+RoboPOJOGenerator—JSON转类对象
+  - IDE Features Trainer—IDEA交互式教程
+  - Key Promoter X—快捷键
+  - Lombok
+  - Presentation Assistant—快捷键展示
+  - RestfulToolkit—RESTful服务开发
+  - SequenceDiagram
   - Statistic—项目信息统计
   - Translation-必备的翻译插件
-  - CamelCase-多种命名格式之间切换
 
 数据是统一的，能够实现批量处理
 
