@@ -121,3 +121,4 @@ eter Deutsch 提出的分布式系统八大谬论概括了程序员新手可能�
 * [gdamdam/awesome-decentralized-web](https://github.com/gdamdam/awesome-decentralized-web):an awesome list of decentralized services
 * [wx-chevalier/Distributed-Infrastructure-Series](https://github.com/wx-chevalier/Distributed-Infrastructure-Series):📚 深入浅出分布式基础架构，Linux 与操作系统篇 | 分布式系统篇 | 分布式计算篇 | 数据库篇 | 网络篇 | 虚拟化与编排篇 | 大数据与云计算篇
 * [分布式系统架构经典资料](https://www.infoq.cn/article/2018/05/distributed-system-architecture/)
+* [MIT parallel and distributed Group](https://pdos.csail.mit.edu/)
