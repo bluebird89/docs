@@ -1,63 +1,26 @@
 ## music
 
-* Spotify
-* [Soundcloud](http://soundcloud.com)
-* [Musicbed](http://www.musicbed.com/):为视频寻找最优秀的配乐
-* [Lavaradio](http://www.lavaradio.com):环境音乐电台，按场景来选择音乐
-* [Garageband](https://www.apple.com/cn/ios/garageband/):非常强大的音乐软件，经常被忽视，可以自己摆弄着做音乐，做铃声等
-* 网易云音乐
-* [last.fm](https://www.last.fm/)
-* [nukeop/nuclear](https://github.com/nukeop/nuclear):Popcorn Time for music http://nuclear.gumblert.tech/
-
-## 人物
-
-* 王菲（Faye Wong），1969年8月8日出生于北京，中国流行乐女歌手、影视演员
-    - 1987年，王菲放弃厦门大学生物系的录取资格并跟随父亲移居香港；同年，她经朋友介绍拜戴思聪为师，并在他的指导下学习声乐
-    - 1989年，凭借歌曲《仍是旧句子》在香港歌坛出道  ，同年发行首张个人专辑《王靖雯》 。
-    - 1992年，因演唱歌曲《容易受伤的女人》而被听众所熟知。1993年，在专辑《十万个为什么？》 中尝试另类音乐的风格 。
-    - 1994年，发行专辑《天空》，并获得十大劲歌金曲最受欢迎女歌星奖；同年在香港红磡体育馆举办18场“最精彩演唱会”，打破中国香港歌手初次开演唱会的场次纪录
-    - 1999年，凭借歌曲《Eyes on Me》获得第41届日本唱片大奖亚洲音乐奖  ，同年在日本武道馆举行个人演唱会  。
-    - 2002年获得吉尼斯世界纪录大全颁发的“唱片销量最高的粤语女歌手”证书 。
-    - 2003年主演喜剧电影《天下无双》。2004年，凭借专辑《将爱》获得第15届台湾金曲奖最佳国语女演唱人奖 。
-    - 2005年，在结束“菲比寻常巡回演唱会”后淡出乐坛  。
-    - 2010年，复出乐坛并在央视春晚上演唱歌曲《传奇》，同年举办巡回演唱会 。
-    - 2016年，发行歌曲《尘埃》
-    - 给王菲录音的时候，张亚东发现她太牛了，好多歌一遍过，不用接不用修，不像后来那些包装出来的歌手，一首歌录20遍，一个字一个字拼出最好的效果。
-* 詹雯婷（Faye飞），1981年8月27日出生于台湾省台北市，中国台湾流行乐女歌手，前飞儿乐团（F.I.R.）女主唱，毕业于天主教辅仁大学英文系
-* 肖邦
-* 贝多芬
-
-## 民谣
-
-* 那个年代学生书包里都会有一两本诗集，最受追捧的是顾城和海子。高晓松把这些人当作灯塔。顾城去世时，高晓松清华大学肄业，转北影研究生未果。心绪波动之下，他写了一个长达15分钟的组曲。那是他写得最快的一次，虽然技术与节奏都欠缺，却充满了表达的欲望。 这个组曲一共有三首，分别是《白衣飘飘的年代》《月亮》和《回声》。这些歌化用了顾城的诗句，以示对精神偶像的纪念。
-* 在这一年，高晓松完成了《同桌的你》。他的作品被黄小茂发现，想买他的版权。高晓松不在乎钱，说签约的条件只有一个：他的歌必须老狼来唱。
-* 1995年老狼带着《同桌的你》登上春晚，接下来，这首歌在所有音乐奖上都拿了第一名。黄小茂说校园民谣这批歌手是真正开始表达的一拨人。“跟老一辈人不一样，这批人表达的是他们自己的年代。那个年代充满了这种气氛，单纯，有情怀。”
-* 九十年代的民谣圈，除了高晓松、老狼应该是朴树最耀眼。但朴树成名之后心情总是抑郁，写完《生如夏花》就离开圈子，一走十年。
-* 进入21世纪，同样发源于清华大学的水木年华进入公众视野，但很快李健退出，组合解散。校园民谣的时代不知不觉画上句号，一种新形式的民谣正慢慢展示出力量。
-* 2006年，在北京798的新民谣运动音乐节上，万晓利遇到老狼，给了他一张自己录的专辑，说可以听听。 老狼回家就把这件事忘了，几个月后的一个深夜，老狼翻出了万晓利的CD。老狼听傻了，一直听到天亮。早上6点他就想给万晓利打电话。他忍住了，反思完自己“荒废”的几年才拨通电话：“太好听了，太好听了，我帮你往外送一送。”
-* 在老狼的引荐下，万晓利签约音乐公司。2007年，万晓利凭借这张专辑获得第七届华语音乐传媒大奖“最佳民谣艺人”奖。 也是在这一年，读大一的宋冬野在中关村图书大厦买下这张专辑，第一首《陀螺》就把他听哭了。他单曲循环了 7 个小时，从下午 4 点半一直到晚上 11 点半。
-* 宋冬野开始逃课追巡演，决定做音乐。虽然万晓利成功留在了北京，但和老狼相比，他和他的朋友们都不算赶上了好时候。 盲人歌手周云蓬卖唱被抓去刁难盘问，他说自己是诗人又被要求查暂住证。
-* 宋冬野为了照顾奶奶，大专毕业后去了一家出版社工作。奶奶去世后，宋冬野辞了工作，专心玩起音乐。因为父母不支持，他赌气离家。在没有收入的日子里，朋友马頔每月接济他几百块，让他能吃饱肚子。这样吃了上顿没下顿的日子没过一年，宋冬野的作品《董小姐》火了。
-* 宋冬野对民谣仍有敬畏之心，所以演出时总自嘲是口水民谣歌手。只是第一张专辑之后，宋冬野一直写不出满意的作品，后来向毒品借灵感，把自己的前途毁了。
-* 成名之后，宋冬野一直为了作品拧巴纠结，然而半路出家的大老师早已洞穿一切——民谣，装门面用的。 大老师的全称是中国内地主持人、畅销书作家、油画画师、皮匠、银匠、背包客、制片人、酒吧掌柜、手鼓艺人、aka民谣歌手大冰。
-* 转向了下三路 花粥《老中医》，凭借大尺度的歌词，手捏四个和弦的花粥直接出道了。2012年，还在上大一的花粥凭借《老中医》霸占豆瓣排行榜。也许是文艺平台没见识过这种人设，花粥的《屌丝之歌》、《送我一个大西瓜》以及《妈妈要我出嫁》迅速征服了豆瓣。
-* 2014年，上大三的花粥受不了学校规则，选择退学。接下来的两年，她被陈粒、赵雷压过了风头。一位业内主办方说：“如今的民谣圈是长江后浪推前浪，只要你不持续的推出新歌，立马就会被大众遗忘。现在谁还记得花粥是谁？”
-* 2017年，花粥开始发力，一年在网易云音乐上传了13首歌，粉丝数量迅速压过其他民谣歌手，成为头部。
-* 《成都》唱火之后，赵雷演出增加不少，但每次都被点名只唱这一首。唱了几百次，赵雷终于忍不住了，在演唱会现场爆粗大骂主办方。
-
 ## 演奏
 
 * The Royal Philharmonic：英国皇家爱乐乐团1946年创立，1966年英国女王为乐团冠上“皇家”头衔，奠定了其在英国乐坛无可替代的地位。乐团以丰富、流畅的音色和近乎完美的配合以及对经典曲目的驾驭能力征服了世界。 
 
 ## 工具
 
+* Spotify
+* [Soundcloud](http://soundcloud.com)
+* [Musicbed](http://www.musicbed.com/):为视频寻找最优秀的配乐
+* [Lavaradio](http://www.lavaradio.com):环境音乐电台，按场景来选择音乐
+* [Garageband](https://www.apple.com/cn/ios/garageband/):非常强大的音乐软件，经常被忽视，可以自己摆弄着做音乐，做铃声等
+* 网易云音乐
+    - [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):网易云音乐第三方
+* [last.fm](https://www.last.fm/)
+* [nukeop/nuclear](https://github.com/nukeop/nuclear):Popcorn Time for music http://nuclear.gumblert.tech/
 * [YongHaoWu/NeteaseCloudMusicFlac](https://github.com/YongHaoWu/NeteaseCloudMusicFlac):根据网易云音乐的歌单, 下载flac无损音乐到本地. Download the FLAC music from Internet according to your NeteaseCloudMusic playlist.
-* [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):网易云音乐第三方
 * [hnarayanan/shpotify](https://github.com/hnarayanan/shpotify):A command-line interface to Spotify. https://harishnarayanan.org/projects/
 * [musicforprogramming](https://musicforprogramming.net/)
 * [MusicTools](http://tool.yijingying.com/musictools/)
 * [slsknet](http://www.slsknet.org/):1999年底由著名音乐分享平台Napster的程序员Nir Arbel所开发的P2P共享软件Soulseek(简称SLSK)正式出现，在历经13年多的时间内，这它成为音乐共享软件中口碑最好用户最多的软件之一
-* <http://www.qqyewu.com/>
 * [Digital Concert Hall](https://www.digitalconcerthall.com/)
 * [lyswhut / lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)
 * [Listen 1](https://listen1.github.io/listen1/):One for all free music in China
+* [ScorSer](http://en.scorser.com/D/Sheet+music.html):Search system for musicians

@@ -38,4 +38,6 @@
 ## 参考
 
 * [huaxz1986/APUE_notes](https://github.com/huaxz1986/APUE_notes):《UNIX环境高级编程》中文第三版笔记
-* [ ranxian / xv6-chinese ](https://github.com/ranxian/xv6-chinese):中文版的 MIT xv6 文档
+* [6.S081 Operating System Engineering](https://pdos.csail.mit.edu/6.828/2019/xv6.html)
+    - [mit-pdos / xv6-public](https://github.com/mit-pdos/xv6-public):xv6 OS http://pdos.csail.mit.edu/6.828/
+    - [ranxian / xv6-chinese ](https://github.com/ranxian/xv6-chinese):中文版的 MIT xv6 文档
