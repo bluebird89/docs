@@ -1375,8 +1375,8 @@ jobs:
 
 用来管理一些单向更新的公共模块或底层逻辑
 
-* 允许你的项目模块化成为每一个 Repository，最终汇聚成一个完整的项目
-* Git Submodule 可以别人的 Repo 挂到你自己的 Repo 中的任何位置，成为的 Repo 的一部分
+* 允许项目模块化成为每一个 Repository，最终汇聚成一个完整的项目
+* Git Submodule 可以别人的 Repo 挂到自己的 Repo 中的任何位置，成为的 Repo 的一部分
 * 在项目 Repository 下产生一个 .gitmodules 文件，记录 Submodule 信息，同时 another_project项目也clone下来
 * Git doesn't update submodules automatically when the SHA in them has changed.need to git submodule update  put the submodule back to the expected SHA
 

@@ -704,6 +704,8 @@ php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数
 # 第二种方法是首先运行chmod+x <要运行的脚本文件名>（UNIX/Linux环境），将该PHP文件置为可执行权限，然后在CLI脚本头部第一行加入声明（类似于#! /usr/bin/php或PHP CLI解释器位置），接着在命令行直接执行。这是CLI首选方法，建议采用
 
 # /usr/local/lib/php/pecl/20180731/swoole.so doesn't appear to be a valid Zend extension
+
+php -S localhost:8000 # 内置的 web 服务器
 ```
 
 ### [PECL](http://pecl.php.net/)

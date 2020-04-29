@@ -61,7 +61,7 @@
     - [pinguo/php-msf](https://github.com/pinguo/php-msf)PHP微服务框架即"Micro Service Framework For PHP"，是Camera360社区服务器端团队基于Swoole自主研发现代化的PHP协程服务框架，简称msf或者php-msf，是Swoole的工程级企业应用框架，经受了Camera360亿级用户高并发大流量的考验
     - [Youzan Zan Php Installer](https://github.com/youzan/zan-installer)Youzan Zan Php Installer
     - [tencent-php/tsf](https://github.com/tencent-php/tsf):coroutine and Swoole based php server framework in tencent
-    - [slimphp/Slim](https://github.com/slimphp/Slim):Slim Framework source code <http://slimframework.com>
+    - [slimphp/Slim](https://github.com/slimphp/Slim):Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs. http://slimframework.com
     - [nette/nette](https://github.com/nette/nette):METAPACKAGE for Nette Framework components https://nette.org
     - [Tencent/Biny](https://github.com/Tencent/Biny):Biny is a tiny, high-performance PHP framework for web applications
     - [amphp/amp](https://github.com/amphp/amp):A non-blocking concurrency framework for PHP applications. https://amphp.org/amp
@@ -788,7 +788,8 @@ open http://127.0.0.1:8000
 * [PHP: The Right Way](http://www.phptherightway.com/) [PHP: The Right Way](https://github.com/codeguy/php-the-right-way)
 * [reeze/tipi](https://github.com/reeze/tipi):Thinking In PHP Internals, An open book on PHP Internals http://www.php-internals.com/
 * [elarity/advanced-php](https://github.com/elarity/advanced-php):最近打算写一些php一些偏微妙的教程，比如关于多进程、socket等相关，都是自己的一些感悟心得
-* (php[architect] Magazine)[https://www.phparch.com/magazine/]
+* [php architect Magazine](https://www.phparch.com/magazine/)
+* [PHP Best Practices](https://phpbestpractices.org/)
 
 ## PHP内核
 

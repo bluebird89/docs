@@ -21,3 +21,5 @@ echo '-J-Xmx2G' >> /usr/local/etc/sbtopts
 ## 工具
 
 * [polynote/polynote](https://github.com/polynote/polynote):A better notebook for Scala (and more) https://polynote.org
+* 框架
+    - [playframework / playframework](https://github.com/playframework/playframework):Play Framework http://www.playframework.com/

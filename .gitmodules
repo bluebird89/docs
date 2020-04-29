@@ -182,9 +182,6 @@
 [submodule "Resource/English-level-up-tips-for-Chinese"]
 	path = Resource/English-level-up-tips-for-Chinese
 	url = git@github.com:byoungd/English-level-up-tips-for-Chinese.git
-[submodule "Interview/Algorithm_Interview_Notes-Chinese"]
-	path = Interview/Algorithm_Interview_Notes-Chinese
-	url = git@github.com:imhuay/Algorithm_Interview_Notes-Chinese.git
 [submodule "Nodejs/node-in-debugging"]
 	path = Nodejs/node-in-debugging
 	url = git@github.com:nswbmw/node-in-debugging.git
@@ -239,3 +236,6 @@
 [submodule "Shell/the-art-of-command-line"]
 	path = Shell/the-art-of-command-line
 	url = git@github.com:jlevy/the-art-of-command-line.git
+[submodule "Finance/awesome-quant"]
+	path = Finance/awesome-quant
+	url = git@github.com:thuquant/awesome-quant.git

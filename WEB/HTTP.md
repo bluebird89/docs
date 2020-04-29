@@ -650,6 +650,49 @@ nameserver 223.6.6.6
 
 # tsinghua
 101.6.6.6 / 2001:da8::666
+
+Google Public IPv6 DNS
+2001:4860:4860::8888
+2001:4860:4860::8844
+Cloudflare IPv6 DNS
+2606:4700:4700::1111
+2606:4700:4700::1001
+OpenDNS
+2620:0:ccc::2
+2620:0:ccd::2
+Neustar UltraDNS IPv6
+2610:a1:1018::1
+2610:a1:1019::1
+2610:a1:1018::5
+北京邮电大学 IPv6 DNS 服务器
+2001:da8:202:10::36
+2001:da8:202:10::37
+上海交通大学 IPv6 DNS 服务器
+2001:da8:8000:1:202:120:2:100
+2001:da8:8000:1:202:120:2:101
+中科院网络信息中心 IPv6 DNS 服务器
+Yeti DNS Project 注册的 IPv6 DNS 服务器
+2001:cc0:2fff:1::6666
+北京交通大学 IPv6 DNS 服务器
+Yeti DNS Project 注册的 IPv6 DNS 服务器
+2001:da8:205:2060::188
+清华大学 IPv6 DNS 服务器
+Yeti DNS Project 注册的 IPv6 DNS 服务器
+2001:da8:ff:305:20c:29ff:fe1f:a92a
+清华大学 TUNA 协会 IPv6 DNS 服务器
+2001:da8::666
+北京科技大学 IPv6 DNS 服务器
+2001:da8:208:10::6
+科技网 IPv6 DNS 服务器
+2001:cc0:2fff:2::6
+百度 IPv6 DNS
+2400:da00::6666
+下一代互联网北京研究中心
+Yeti DNS Project 注册的 IPv6 DNS 服务器
+240C::6666
+240C::6644
+CNNIC IPv6 DNS 服务器
+2001:dc7:1000::1
 ```
 
 ## 查询过程

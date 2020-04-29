@@ -5,3 +5,5 @@ Libra’s mission is to enable a simple global currency and financial infrastruc
 ## 参考
 
 * [Developer](https://developers.libra.org)
+* [Calibra](link)
+* [developers](https://developers.libra.org/docs/welcome-to-libra)
