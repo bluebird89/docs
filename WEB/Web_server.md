@@ -76,6 +76,7 @@ ifconfig # linux mac
 ## CGI(common gateway interface) 通用网关协议
 
 保证web server传递过来的数据是标准格式的
+* FastCGI则是一种常住进程的CGI模式程序
 
 ## PATH_INFO
 
