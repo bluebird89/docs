@@ -322,6 +322,7 @@ ssh -p remote_port username@server_addr
 * [librenms/librenms](https://github.com/librenms/librenms):Community-based GPL-licensed network monitoring system http://www.librenms.org/
 * [Zenmap](https://nmap.org/zenmap/):Nmap网络扫描器的官方前端程序
 * [IPv6 连接测试](https://test-ipv6.com/)
+* [speedtest](https://www.speedtest.net/zh-Hans/apps/cli)
 
 ## 参考
 

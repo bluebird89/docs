@@ -114,3 +114,4 @@ location ~ .*\.php(\/.*)*$ {
 ## 博客资源
 
 * [Work life](https://www.atlassian.com/blog)
+* [OpenWrite](https://openwrite.cn/):Blog 分发
