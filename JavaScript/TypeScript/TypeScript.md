@@ -42,6 +42,7 @@ superShout() {
 * [alexjoverm/typescript-library-starter](https://github.com/alexjoverm/typescript-library-starter):Starter kit with zero-config for building a library in TypeScript, featuring RollupJS, Jest, Prettier, TSLint, Semantic Release, and more!
 * [Microsoft/TypeScript-React-Native-Starter](https://github.com/Microsoft/TypeScript-React-Native-Starter):A starter template for TypeScript and React Native with a detailed README describing how to use the two together.
 * [](https://tutorialzine.com/2016/07/learn-typescript-in-30-minutes)
+* [typescript-tutorial](https://github.com/xcatliu/typescript-tutorial)
 
 ## 工具
 

@@ -253,6 +253,133 @@ Endpoint = 54.225.123.18:51820
 AllowedIPs = 0.0.0.0/0
 ```
 
+## [trojan-gfw / trojan](https://github.com/trojan-gfw/trojan)
+
+An unidentifiable mechanism that helps you bypass GFW. https://trojan-gfw.github.io/trojan/
+
+* 模仿了互联网上最常见的HTTPS协议，以诱骗GFW认为它就是HTTPS，从而不被识别
+* 需要一个域名用来做伪装 [freenom](linhttps://www.freenom.comk)
+
+```sh
+sudo useradd -m -s /bin/bash trojanuser
+sudo passwd trojanuser
+sudo usermod -G sudo trojanuser
+su -l trojanuser
+
+sudo groupadd certusers
+sudo useradd -r -M -G certusers trojan
+sudo useradd -r -m -G certusers acme
+
+sudo su -l -s /bin/bash acme
+curl  https://get.acme.sh | sh
+exit
+sudo su -l -s /bin/bash acme
+
+export CF_Key="<Your Global API Key>"
+export CF_Email="<Your cloudflare account Email>"
+
+acme.sh --issue --dns dns_cf -d <tdom.ml>
+acme.sh --install-cert -d <tdom.ml> --key-file /usr/local/etc/certfiles/private.key --fullchain-file /usr/local/etc/certfiles/certificate.crt
+acme.sh  --upgrade  --auto-upgrade
+
+chown -R acme:certusers /usr/local/etc/certfiles
+chmod -R 750 /usr/local/etc/certfiles
+exit
+
+sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/trojan-gfw/trojan-quickstart/master/trojan-quickstart.sh)"
+sudo chown -R trojan:trojan /usr/local/etc/trojan
+sudo cp /usr/local/etc/trojan/config.json /usr/local/etc/trojan/config.json.bak
+sudo nano /usr/local/etc/trojan/config.json
+password
+cert
+key
+
+# 配置Nginx
+# CentOS反向代理需要配置SELinux允许httpd模块可以联网，否则服务器会返回502错误
+sudo setsebool -P httpd_can_network_connect true
+
+# 接收来自Trojan的流量，与上面Trojan配置文件对应
+server {
+    listen 127.0.0.1:80 default_server;
+
+    server_name <tdom.ml>;
+
+    location / {
+        proxy_pass https://www.ietf.org;
+    }
+
+}
+# 接收来自Trojan的流量，但是这个流量尝试使用IP而不是域名访问服务器，所以将其认为是异常流量，并重定向到域名
+server {
+    listen 127.0.0.1:80;
+
+    server_name <10.10.10.10>;
+
+    return 301 https://<tdom.ml>$request_uri;
+}
+# 接收除127.0.0.1:80外的所有80端口的流量并重定向到443端口，这样便开启了全站https，可有效的防止恶意探测
+server {
+    listen 0.0.0.0:80;
+    listen [::]:80;
+
+    server_name _;
+
+    return 301 https://$host$request_uri;
+}
+
+
+cd /usr/src && wget https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-linux-amd64.tar.xz
+tar xvf trojan-1.15.1-linux-amd64.tar.xz
+
+# 配置
+
+# trojan service
+cat > /etc/systemd/system/trojan.service <<-EOF
+[Unit]
+Description=trojan
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/usr/src/trojan/trojan.pid
+ExecStart=/usr/src/trojan/trojan -c "/usr/src/trojan/config.json"
+ExecReload=/bin/kill -HUP \$MAINPID
+Restart=on-failure
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target
+
+EOF
+
+systemctl start|enable trojan
+
+# 开启转发
+echo net.ipv4.ip_forward=1 >> /etc/sysctl.conf
+sysctl -p
+
+# 配置本地地址不被代理
+# iptables -t nat -N trojan
+iptables -t nat -A trojan -d 0.0.0.0/8 -j RETURN
+iptables -t nat -A trojan -d 10.0.0.0/8 -j RETURN
+iptables -t nat -A trojan -d 127.0.0.0/8 -j RETURN
+iptables -t nat -A trojan -d 169.254.0.0/16 -j RETURN
+iptables -t nat -A trojan -d 172.16.0.0/12 -j RETURN
+iptables -t nat -A trojan -d 192.168.0.0/16 -j RETURN
+iptables -t nat -A trojan -d 224.0.0.0/4 -j RETURN
+iptables -t nat -A trojan -d 240.0.0.0/4 -j RETURN
+
+# 配置tcp和udp流量转发到trojan客户端
+iptables -t nat -A trojan -p tcp -j REDIRECT --to-ports 1080
+iptables -t nat -A trojan -p udp -j REDIRECT --to-ports 1080
+# 配置tcp和udp使用trojan chain规则
+iptables -t nat -A OUTPUT -p tcp -j trojan
+iptables -t nat -A OUTPUT -p udp -j trojan
+
+iptables-save > /etc/iptables-rules
+iptables-restore < /etc/iptables-rules # 手动加载
+```
+
 ### 服务
 
 * [StreisandEffect/streisand](https://github.com/StreisandEffect/streisand):Streisand sets up a new server running L2TP/IPsec, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, a Tor bridge, and WireGuard. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.
@@ -290,6 +417,9 @@ AllowedIPs = 0.0.0.0/0
   - [mellow-io / mellow](https://github.com/mellow-io/mellow):Mellow is a rule-based global transparent proxy client for Windows, macOS and Linux.
   - [Surge](https://www.nssurge.com/) https://www.newlearner.site/2018/08/29/surge-for-mac.html
   - V2rayNG
+  - pharos Pro:ios 付费
+  - [yanue / V2rayU](https://github.com/yanue/V2rayU)
+  - [Trojan-Qt5](https://github.com/TheWanderingCoel/Trojan-Qt5)
   - Quantumult
     + 分流
       * `https://raw.githubusercontent.com/limbopro/Profiles/master/Quantumult/Pro.conf`
@@ -302,8 +432,10 @@ AllowedIPs = 0.0.0.0/0
         - USER-AGENT（浏览器用户代理匹配，举例*abc?）
         - IP-CIDR（无类别域间路由例如192.168.xx）
         - GEOIP（GeoIP数据库IP匹配，参数填US，则为美国 ip 数据库匹配，所有美国IP匹配该规则则执行）
+  - [Qv2ray / Qv2ray](https://github.com/Qv2ray/Qv2ray/):🌟 支持 V2Ray/Trojan/SSR 的 Linux/Windows/macOS 跨平台 GUI 🔨 C++17/Qt5 ，支持订阅，自定义路由编辑，插件式设计 🌟 https://qv2ray.github.io
 * [Dreamacro / clash](https://github.com/Dreamacro/clash):A rule-based tunnel in Go.
   - `go get -u -v github.com/Dreamacro/clash`
+* [](https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt)
 
 ## 参考
 

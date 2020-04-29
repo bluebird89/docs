@@ -1219,6 +1219,7 @@ diff -Naur sources-orig/ sources-fixed/ >myfixes.patch # 参数 -N 代表如果�
   - 从 4.9 开始，Linux 内核已经用上了该算法，并且对于QUIC可用
 
 ```sh
+systemd-resolve --flush-caches # 清理缓存
 # /etc/sysctl.conf
 net.ipv4.ip_local_port_range = 1024 65535 # 用户端口范围
 net.ipv4.tcp_max_syn_backlog = 4096

@@ -989,6 +989,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 
 * [hajimehoshi/ebiten](https://github.com/hajimehoshi/ebiten):A dead simple 2D game library in Go https://hajimehoshi.github.io/ebiten/
 * [go-shiori/shiori](https://github.com/go-shiori/shiori):Simple bookmark manager built with Go
+* [maxence-charriere / go-app](https://github.com/maxence-charriere/go-app):A package to build progressive web apps with Go programming language and WebAssembly. https://luck.murlok.io
 
 ## 教程
 
@@ -1012,6 +1013,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [alco/gostart](https://github.com/alco/gostart):A getting started guide for Go newcomers
 * [geektutu / 7days-golang](https://github.com/geektutu/7days-golang):7 days golang apps from scratch (web framework Gee, distributed cache GeeCache, object relational mapping ORM framework GeeORM etc) 7天用Go动手写/从零实现系列 https://geektutu.com/post/gee.html
 * [go101 / go101](https://github.com/go101/go101):An online book focusing on Go syntax/semantics. https://go101.org
+* [《Go入门指南》](https://fuckcloudnative.io/the-way-to-go/)
 
 ## 扩展
 
@@ -1120,6 +1122,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * 代码规范
     - [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
     - [golang-standards / project-layout](https://github.com/golang-standards/project-layout):Standard Go Project Layout
+    - [CodeReviewComments](https://github.com/golang/go/wiki/CodeReviewComments)
 * file
     - [chrislusf/seaweedfs](https://github.com/chrislusf/seaweedfs):SeaweedFS is a simple and highly scalable distributed file system. There are two objectives: to store billions of files! to serve the files fast! SeaweedFS implements an object store with O(1) disk seek and an optional Filer with POSIX interface, supporting S3 API, Rack-Aware Erasure Coding for warm storage, FUSE mount, Hadoop compatible, WebDAV.
 * auth
@@ -1169,6 +1172,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [rodrigo-brito/gocity](https://github.com/rodrigo-brito/gocity):📊 Code City metaphor for visualizing Go source code in 3D https://go-city.github.io
 * [shirou / gopsutil](https://github.com/shirou/gopsutil):psutil for golang
 * [panjf2000 / ants](https://github.com/panjf2000/ants):🐜🐜🐜 ants is a high-performance and low-cost goroutine pool in Go, inspired by fasthttp./ ants 是一个高性能且低损耗的 goroutine 池。
+* [claudiodangelis / qrcp](https://github.com/claudiodangelis/qrcp):⚡ Transfer files over wifi from your computer to your mobile device by scanning a QR code without leaving the terminal. https://claudiodangelis.com/qrcp
 
 ## 参考
 
