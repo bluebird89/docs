@@ -1,7 +1,6 @@
 # Centos
 
 
-
 ## 自启服务
 
 * `/etc/rc.d/rc.local`
@@ -190,8 +189,6 @@ cd /usr/local/nginx/sbin
 
 ps aux|grep nginx
 
-# 访问测试
-
 # 防火墙设置
 firewall-cmd --state # 查看状态
 systemctl stop firewalld.service # 停止fireball
@@ -311,6 +308,51 @@ sudo yum install nginx
 sudo systemctl start nginx
 ```
 
+## MySQL
+
+```sh
+cd /data/mysql
+wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+sudo rpm -Uvh mysql80-community-release-el7-3.noarch.rpm
+
+# /etc/yum.repos.d/mysql-community.repo
+[mysql80-community]
+name=MySQL 8.0 Community Server
+baseurl=http://repo.mysql.com/yum/mysql-8.0-community/el/7/$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
+
+sudo yum install mysql-community-server
+# 下载 common --> libs --> libs-compat --> client --> server
+mysql-community-common
+mysql-community-libs
+mysql-community-libs-compat
+mysql-community-client
+mysql-community-server
+
+# 强制安装
+rpm -ivh mysql-community-common-8.0.18-1.el7.x86_64.rpm --force --nodeps
+rpm -ivh mysql-community-libs-8.0.18-1.el7.x86_64.rpm --force --nodeps
+rpm -ivh mysql-community-libs-compat-8.0.18-1.el7.x86_64.rpm --force --nodeps
+rpm -ivh mysql-community-client-8.0.18-1.el7.x86_64.rpm --force --nodeps
+rpm -ivh mysql-community-server-8.0.18-1.el7.x86_64.rpm --force --nodeps
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'QWqw12!@'; # 密码规则必须包含大小写字母、数字和特殊字符
+use mysql;
+UPDATE USER SET HOST = '%' WHERE USER = 'root';
+GRANT ALL PRIVILEGES ON . TO 'root'@'%';
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'QWqw12!@';
+SHOW VARIABLES LIKE '%bin%'; # 确认是否开启了binlog
+
+CREATE USER canal IDENTIFIED BY 'QWqw12!@'; # 新建一个用户名canal
+GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'canal'@'%';
+FLUSH PRIVILEGES;
+ALTER USER 'canal'@'%' IDENTIFIED WITH mysql_native_password BY 'QWqw12!@';
+
+CREATE DATABASE `test` CHARSET `utf8mb4` COLLATE `utf8mb4_unicode_ci`;
+```
+
 ### percona
 
 ```sh
@@ -323,6 +365,102 @@ yum install libaio-devel
 yum install https://www.percona.com/redir/downloads/percona-release/redhat/percona-release-0.1-4.noarch.rpm
 yum install Percona-Server-client-57 Percona-Server-server-57
 /usr/bin/mysql_secure_installation
+```
+
+## Zookeeper
+
+* 依赖 JDK8+
+
+```sh
+midkr /data/zk
+# 创建数据目录
+midkr /data/zk/data
+cd /data/zk
+wget http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.6.0/apache-zookeeper-3.6.0-bin.tar.gz
+tar -zxvf apache-zookeeper-3.6.0-bin.tar.gz
+cd apache-zookeeper-3.6.0-bin/conf
+cp zoo_sample.cfg zoo.cfg && vim zoo.cfg
+sh /data/zk/apache-zookeeper-3.6.0-bin/bin/zkServer.sh start
+```
+
+## Kafka
+
+* 依赖于Zookeeper
+
+```sh
+mkdir /data/kafka
+mkdir /data/kafka/data
+wget http://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.4.0/kafka_2.13-2.4.0.tgz
+tar -zxvf kafka_2.13-2.4.0.tgz
+
+sh /data/kafka/kafka_2.13-2.4.0/bin/kafka-server-start.sh /data/kafka/kafka_2.13-2.4.0/config/server.properties
+sh /data/kafka/kafka_2.13-2.4.0/bin/kafka-server-start.sh -daemon /data/kafka/kafka_2.13-2.4.0/config/server.properties
+```
+
+## Canal
+
+* 目录
+  - bin   # 运维脚本
+  - conf  # 配置文件
+    + canal_local.properties  # canal本地配置，一般不需要动
+    + canal.properties        # canal服务配置
+    + logback.xml             # logback日志配置
+    + metrics                 # 度量统计配置
+    + spring                  # spring-实例配置，主要和binlog位置计算、一些策略配置相关，可以在canal.properties选用其中的任意一个配置文件
+    + example                 # 实例配置文件夹，一般认为单个数据库对应一个独立的实例配置文件夹
+      * instance.properties   # 实例配置，一般指单个数据库的配置
+  - lib   # 服务依赖包
+  - logs  # 日志文件输出目录
+* 配置
+  - 在开发和测试环境建议把logback.xml的日志级别修改为DEBUG方便定位问题
+  - canal.serverMode 配置项指定为kafka，可选值有tcp、kafka和rocketmq（master分支或者最新的的v1.1.5-alpha-1版本，可以选用rabbitmq），默认是kafka
+
+```sh
+mkdir /data/canal
+cd /data/canal
+# 这里注意一点，Github在国内被墙，下载速度极慢，可以先用其他下载工具下载完再上传到服务器中
+wget https://github.com/alibaba/canal/releases/download/canal-1.1.4/canal.deployer-1.1.4.tar.gz
+tar -zxvf canal.deployer-1.1.4.tar.gz
+
+# canal.properties
+canal.instance.parser.parallelThreadSize = 16 # 和实例解析器的线程数相关，不配置会表现为阻塞或者不进行解析
+canal.serverMode 配置项指定为kafka
+canal.mq.servers 配置需要指定为Kafka服务或者集群Broker的地址，配置为127.0.0.1:9092
+
+# instance.properties
+canal.instance.mysql.slaveId # 需要配置一个和Master节点的服务ID完全不同的值，这里笔者配置为654321
+canal.instance.master.address # 指定为127.0.0.1:3306。
+canal.instance.dbUsername # 指定为canal。
+canal.instance.dbPassword # QWqw12!@。
+canal.instance.defaultDatabaseName # 新增 这里指定为test
+
+# Kafka相关配置，这里暂时使用静态topic和单个partition：
+canal.mq.topic # 指定为test，也就是解析完的binlog结构化数据会发送到Kafka的命名为test的topic中
+canal.mq.partition # 指定为0
+
+sh /data/canal/bin/startup.sh 
+# 查看服务日志
+tail -100f /data/canal/logs/canal/canal
+# 查看实例日志  -- 一般情况下，关注实例日志即可
+tail -100f /data/canal/logs/example/example.log
+
+use `test`;
+
+CREATE TABLE `order`
+(
+    id          BIGINT UNIQUE PRIMARY KEY AUTO_INCREMENT COMMENT '主键',
+    order_id    VARCHAR(64)    NOT NULL COMMENT '订单ID',
+    amount      DECIMAL(10, 2) NOT NULL DEFAULT 0 COMMENT '订单金额',
+    create_time DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    UNIQUE uniq_order_id (`order_id`)
+) COMMENT '订单表';
+
+INSERT INTO `order`(order_id, amount) VALUES ('10086', 999);
+UPDATE `order` SET amount = 10087 WHERE order_id = '10086';
+DELETE  FROM `order` WHERE order_id = '10086';
+
+# 用Kafka的kafka-console-consumer或者Kafka Tools查看test这个topic的数据
+sh /data/kafka/kafka_2.13-2.4.0/bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --from-beginning --topic test
 ```
 
 ### php

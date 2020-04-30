@@ -749,7 +749,7 @@ yarn install node-sass
 * [Node.js v8.x 中文文档](https://www.nodeapp.cn/)
 * [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list (November 2018) https://twitter.com/nodepractices/
 
-## 扩展
+## 工具
 
 * main
   - [nodesource/distributions](https://github.com/nodesource/distributions):NodeSource Node.js Binary Distributions
@@ -812,6 +812,7 @@ yarn install node-sass
   - [DevExpress/testcafe](https://github.com/DevExpress/testcafe):A Node.js tool to automate end-to-end web testing. https://devexpress.github.io/testcafe/
   - [visionmedia/supertest](https://github.com/visionmedia/supertest):🕷Super-agent driven library for testing node.js HTTP servers using a fluent API
 * [tj/co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)
+* [Unitech / pm2](https://github.com/Unitech/pm2):Node.js Production Process Manager with a built-in Load Balancer. https://pm2.io
 
 * [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window

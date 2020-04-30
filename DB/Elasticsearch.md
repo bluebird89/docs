@@ -456,6 +456,7 @@ docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --name elk sebp/elk
 * admin
   - [elastic/beats](https://github.com/elastic/beats):🐠 Beats - Lightweight shippers for Elasticsearch & Logstash https://www.elastic.co/products/beats
   - [elastic/kibana](https://github.com/elastic/kibana):📊 Kibana analytics and search dashboard for Elasticsearch https://www.elastic.co/products/kibana
+  - [ElasticHQ / elasticsearch-HQ](https://github.com/ElasticHQ/elasticsearch-HQ):Monitoring and Management Web Application for ElasticSearch instances and clusters. http://www.elastichq.org
 * sync
   - [siddontang/go-mysql-elasticsearch](https://github.com/siddontang/go-mysql-elasticsearch):Sync MySQL data into elasticsearch
 * [Elasticsearch的开源分发包](https://opendistro.github.io/for-elasticsearch/)

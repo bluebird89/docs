@@ -888,6 +888,8 @@ open http://127.0.0.1:8000
 
 * [Symplify/EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard):[READ-ONLY] Easiest way to start using PHP CS Fixer and PHP_CodeSniffer with 0-knowledge
 
+## [PacktPublishing / PHP7-Data-Structures-and-Algorithms](https://github.com/PacktPublishing/PHP7-Data-Structures-and-Algorithms):PHP 7 Data Structures and Algorithm, published by Packt
+
 ## 存储
 
 * [thephpleague/flysystem](https://github.com/thephpleague/flysystem):Abstraction for local and remote filesystems https://flysystem.thephpleague.com
