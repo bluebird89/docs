@@ -19,6 +19,7 @@
 * 沟通
     - [mattermost/mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost https://mattermost.com
     - [Slack](https://slack.com/)
+        + [Across](https://blog.acrossapp.com/): Scale high touch customer success in Slack
     - [zulip / zulip](https://github.com/zulip/zulip):Zulip server - powerful open source team chat https://zulip.org/
     - [RocketChat/Rocket.Chat](https://github.com/RocketChat/Rocket.Chat):Have your own Slack like online chat, built with Meteor. https://rocket.chat/
     - [RocketChat/Rocket.Chat.Ansible](https://github.com/RocketChat/Rocket.Chat.Ansible):Deploy Rocket.Chat with Ansible!
@@ -45,6 +46,42 @@
         + Wekan
 * SSO
     - [apereo/cas](apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
+
+## 工具
+
+* Productivity & Project Management
+    - GSuite ($12 / month) - Standard email, file storage in Drive, analysis in Sheets, and presentations in Slides
+    - Slack ($13 / month) - Internal communication and supporting customers in shared Slack channels
+    - Airtable (free) - CRM to track our sales funnel
+    - Notion ($16 / month) - Storing interview notes, brainstorming product and feature ideas
+* Development & Design
+    - GitHub ($7 / month) - Version control / source management
+    - Trello (free) - Product roadmap, issue tracking
+    - Figma ($24 / month) - Designing product mocks
+    - Miscellaneous IDEs (free) - Sublime, Vim, VSCode
+    - Robo 3T (free) - MongoDB GUI
+* Analytics
+    - Mixpanel (free) - Front and backend analytics. We are on a startup plan so receive Mixpanel for free for up to 250K MTUs
+    - Sentry ($26 / month) - Error logging and reporting
+    - Fullstory (free) - Session replay. We are on a startup plan so receive Fullstory for free
+* Payments, Hosting & Authentication
+    - Stripe (pricing depends on volume) - Accepting payments
+    - Heroku (free) - Hosting. We are still using free dynos
+    - Firebase (free) - Authentication. We are still on the free plan
+    - Cloudflare ($20 / month) - CDN + DNS
+* Sales & Marketing, Customer Support
+    - Hubspot ($45 per month) - Email outreach and contact management. We are on the Startup plan so receive Hubspot 90% off
+    - Drift (free) - Chat widget on our website. We've stuck with the basic free plan
+    - Mailchimp (free) - Automated emails on signups
+    - LinkedIn Sales Navigator ($80 / month) - Finding leads to contact
+    - SalesQL ($29 / month) - Finding email addresses for leads
+    - Zoom (free) - Web conferencing
+    - Twilio (pricing depends on volume) - Business phone number, used in conjunction with FounderPhone
+    - Boomerang (free) - Reminders to follow up with people in email
+    - FounderPhone (free) - Send and receive texts and calls directly in Slack. Free since we built it ourselves :)
+    - Whatsapp, Facebook, Twitter, Discord - Use these channels to communicate with customers
+* Finance & Legal
+    - Brex (free) - Business cash account and credit cards. Free until we scale
 
 ## 公司文化
 
@@ -431,3 +468,6 @@
 * 90年代末、21世纪初，在邵逸夫身体不适住院后，原本就斗得最凶的两派——曾励珍派和梁家树派，从暗斗走向明争，在资源、演员卡位、收视率上全方位阻击对方，也连累了各自器重的监制和艺人。
 * 2004年，一部讲述后宫众多女人争抢皇帝的《金枝欲孽》横空出世，竟从香港火到内地，成为两岸三地宫斗戏鼻祖，也让TVB暂回巅峰。
 * 2009年推出了另一部宫斗剧《宫心计》
+
+## 参考
+

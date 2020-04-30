@@ -13,9 +13,23 @@
         + 布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都远远超过一般的算法，缺点是有一定的误识别率和删除困难。
     - 访问或者修改一条数据的时间复杂度 O(1)
     - 对于处理范围查询或者排序性能会非常差，只能进行全表扫描并依次判断是否满足条件
-* 链表:物理存储单元上非连续的、非顺序的存储结构，由一个个结点，通过指针来联系起来的，其中每个结点包括数据和指针
-    - 查找：时间复杂度是O(n)
+* 链表:物理存储单元上非连续的、非顺序的存储结构，由一个个结点，通过指针来联系起来的，每个结点包括数据和指针(存放下一结点的地址)
+    - 查找：时间复杂度 O(n)
     - 插入删除：修改指针位置即可，其他元素无需做任何移动操作
+        + 头部
+        + 中间
+        + 尾部
+    - 边界条件
+        + 输入边界：用户输入参数
+        + 特殊边界
+    - 插入
+        + 保存临时地址
+        + 创建新结点，将新结点指针指向下一结点指针
+        + 恢复临时指针指向新节点
+    - 删除
+        + 断开删除结点指针
+        + 删除节点的前节点指针指向删除节点后节点
+        + 另一种思路：删除节点指针 换掉 删除节点的前节点指针
     - 场景
         + 大内存空间分配：数组空间的连续性，如果要为数组分配 500M 的空间，这 500M 的空间必须是连续的，未使用的，所以在内存空间的分配上数组的要求会比较严格，如果内存碎片太多，分配连续的大空间很可能导致失败。而链表由于是非连续的
         + 元素频繁删除和插入
@@ -55,6 +69,97 @@ publicclass LinkedList {
         length++
     }
 }
+
+class Node{
+    constructor(data){
+        this.data = data;
+        this.next = null;
+    }
+}
+
+//定义链表
+class LinkList{
+    constructor(){
+        //初始化头结点
+        this.head = new Node('head');
+    }
+
+    //根据 value 查找结点
+    findByValue = (value) =>{
+        let currentNode = this.head;
+        while(currentNode !== null && currentNode.data !== value){
+            currentNode = currentNode.next;
+        }
+        //判断该结点是否找到
+        console.log(currentNode)
+        return currentNode === null ? -1 : currentNode;
+    }
+
+    //根据 index 查找结点
+    findByIndex = (index) =>{
+        let pos = 0;
+        let currentNode = this.head;
+        while(currentNode !== null && pos !== index){
+            currentNode = currentNode.next;
+            pos++;
+        }
+        //判断是否找到该索引
+        console.log(currentNode)
+        return currentNode === null ? -1 : currentNode;
+    }
+
+    //插入元素(指定元素向后插入)
+    insert = (value,element) =>{
+        //先查找该元素
+        let currentNode = this.findByValue(element);
+        //如果没有找到
+        if(currentNode == -1){
+            console.log("未找到插入位置!")
+            return;
+        }
+        let newNode = new Node(value);
+        newNode.next = currentNode.next;
+        currentNode.next = newNode;
+    }
+
+    //根据值删除结点
+    delete = (value) =>{
+        let currentNode = this.head;
+        let preNode = null;
+        while(currentNode !== null && currentNode.data !== value){
+            preNode = currentNode;
+            currentNode = currentNode.next;
+        }
+        if(currentNode == null) return -1; 
+        preNode.next = currentNode.next;
+    }
+
+     //遍历所有结点
+    print = () =>{
+        let currentNode = this.head
+        //如果结点不为空
+        while(currentNode !== null){
+            console.log(currentNode.data)
+            currentNode = currentNode.next;
+        }
+    }
+}
+
+//测试
+const list = new LinkList()
+list.insert('xiao','head');
+list.insert('lu','xiao');
+list.insert('ni','head');
+list.insert('hellow','head');
+list.print()
+console.log('-------------删除元素------------')
+list.delete('ni')
+list.delete('xiao')
+list.print()
+console.log('-------------按值查找------------')
+list.findByValue('lu')
+console.log('-------------按索引查找------------')
+list.print()
 ```
 
 ### Array
