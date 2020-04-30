@@ -1691,11 +1691,11 @@ ccache gcc foo.c
         + Powerline a statusline plugin for vim, and provides statuslines and prompts for several other applications `pip install powerline-status`
     - [starship/starship](https://github.com/starship/starship):cometmilky_way The cross-shell prompt for astronauts https://starship.rs
 * sql
-    - mycli：mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令。
+    - mycli：mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令
 * json
-    - jq: json文件处理以及格式化显示，支持高亮，可以替换python -m json.tool。
+    - jq: json文件处理以及格式化显示，支持高亮，可以替换python -m json.tool
 * 代码统计
-    - cloc：代码统计工具，能够统计代码的空行数、注释行、编程语言。
+    - cloc：代码统计工具，能够统计代码的空行数、注释行、编程语言
 * benchmark
     - [sharkdp/hyperfine](https://github.com/sharkdp/hyperfine):A command-line benchmarking tool
 * [bash](http://ftp.gnu.org/gnu/bash/) https://www.gnu.org/software/bash/manua
@@ -1710,7 +1710,7 @@ ccache gcc foo.c
 * [niieani/bash-oo-framework](https://github.com/niieani/bash-oo-framework):Bash Infinity is a modern boilerplate / framework / standard library for bash
 * [ericfreese/rat](https://github.com/ericfreese/rat):Compose shell commands to build interactive terminal applications
 * [kovidgoyal/kitty](https://github.com/kovidgoyal/kitty):A cross-platform, fast, feature full, GPU based terminal emulator
-* [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
+* [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text [explainshell](https://explainshell.com)
 * [sindresorhus/fkill-cli](https://github.com/sindresorhus/fkill-cli):Fabulously kill processes. Cross-platform.
 * [tartley/colorama](https://github.com/tartley/colorama):Simple cross-platform colored terminal text in Python
 * [dylanaraps/fff](https://github.com/dylanaraps/fff):🚀 fucking fast file-manager
@@ -1727,7 +1727,6 @@ ccache gcc foo.c
 * PathPicker(fpp):在命令行输出中自动识别目录和文件，支持交互式，配合git非常有用
 * sz/rz：交互式文件传输，在多重跳板机下传输文件非常好用，不用一级一级传输。
 * ccache：高速C/C++编译缓存工具，反复编译内核非常有用。使用起来也非常方便
-* neovim: 替代vim
 * script/scriptreplay: 终端会话录制
 * [Hyper](https://hyper.is):create a beautiful and extensible experience for command-line interface users, built on open web standards
 * 配置
@@ -1746,7 +1745,6 @@ ccache gcc foo.c
 * [An A-Z Index of the Bash command line for Linux.](https://ss64.com/bash/)
 * [Google’s Shell Style Guide](https://google.github.io/styleguide/shell.xml)
 * [jlevy/the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
-* [explainshell](https://explainshell.com)
 * [teddysun / across](https://github.com/teddysun/across)
 * 脚本参考
     - http://www.bashoneliners.com/
@@ -1755,13 +1753,9 @@ ccache gcc foo.c
     - http://www.shelldorado.com/scripts/
     - https://snippets.siftie.com/public/tag/bash/
     - https://bash.cyberciti.biz/
-    - https://github.com/alexanderepstein/Bash-Snippets
     - https://github.com/miguelgfierro/scripts
     - https://github.com/epety/100-shell-script-examples
     - https://github.com/ruanyf/simple-bash-scripts
-    - 框架
-        - 写bash脚本的框架 https://github.com/Bash-it/bash-it
     - 和shell有关的索引资源
-        + https://github.com/alebcay/awesome-shell
         + https://github.com/awesome-lists/awesome-bash
         + https://terminalsare.sexy/
