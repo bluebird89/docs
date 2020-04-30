@@ -1227,6 +1227,29 @@ maxmemory-policy volatile-lru
         + persistent_id: string. identity for the requested persistent connection
         + retry_interval: int, value in milliseconds (optional)
 
+## 慢查询
+
+* 慢查询本身只记录了命令执行时间，不包括数据网络传输时间和命令排队时间
+* `slowlog get {n}`  命令可以获取最近的 n 条慢查询命令
+* slowlog的输出格式
+    - 第一个字段表示该条记录在所有慢日志中的序号，最新的记录被展示在最前面
+    - 第二个字段是这条记录被记录时的系统时间，可以用 date 命令来将其转换为友好的格式
+    - 第三个字段表示这条命令的响应时间，单位为 us (微秒)
+    - 第四个字段为对应的 Redis 操作
+* 不合理的命令或者数据结构:数据量比较大且命令算法复杂度是 O(n) `redis-cli-h host -p 12345 --bigkeys` 发现大对象的工具
+* 持久化阻塞
+    - fork 阻塞:产生共享内存的子进程(内存占用量表现为与父进程相同), Linux 具有写时复制技术 (copy-on-write)，父子进程会共享相同的物理内存页，当父进程处理写请求时会对需要修改的页复制出一份副本完成写操作，而子进程依然读取 fork 时整个父进程的内存快照
+    - AOF刷盘阻塞
+
+```
+# 超过 slowlog-log-slower-than 阈值的命令都会被记录到慢查询队列中
+
+# 队列最大长度为 slowlog-max-len
+
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+```
+
 ## 性能
 
 * 参数
@@ -1330,7 +1353,7 @@ redis-benchmark -h host -p port -k 0 -t get -n 100000  -c 8000
     - 卡顿的另一种原因是内存管理器需要频繁回收内存页，因此也会消耗一定的 CPU
 * 客户端使用优化
     - 尽量使用 Pipeline 的技术外
-    - 尽量使用 Redis 连接池，而不是频繁创建销毁 Redis 连接，可以有效控制连接，同时提高效率，减少网络传输次数和减少了非必要调用指令 
+    - 尽量使用 Redis 连接池，而不是频繁创建销毁 Redis 连接，可以有效控制连接，同时提高效率，减少网络传输次数和减少了非必要调用指令
 * 限制 Redis 内存大小
     - 64 位操作系统中 Redis 的内存大小是没有限制的，也就是配置项 maxmemory <bytes> 是被注释掉的，这样就会导致在物理内存不足时，使用 swap 空间既交换空间，而当操心系统将 Redis 所用的内存分页移至 swap 空间时，将会阻塞 Redis 进程，导致 Redis 出现延迟，从而影响 Redis 的整体性能
     - 需要限制 Redis 的内存大小为一个固定的值，当 Redis 的运行到达此值时会触发内存淘汰策略，内存淘汰策略在 Redis 4.0 之后有 8 种

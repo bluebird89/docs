@@ -73,6 +73,9 @@
 
 ## Xbox Series X
 
+* 《瘟疫公司》（Plague Inc）
+* 
+
 ### PC
 
 * PES

@@ -330,7 +330,7 @@ git cat-file -p 3b18e512dba79e4c8300dd08aeb37f8e728b8dad #  查看原文件内�
 
 .
 └── .git
-    ├── HEAD  # 存储的是当前所在的位置，其内容是分支的名称                                     
+    ├── HEAD  # 存储的是当前所在的位置，其内容是分支的名称
     ├── branches
     ├── config # 创建的远端，分支都在等信息都在配置文件里有表现；fetch 操作的行为也是在这里配置的
     ├── description
@@ -887,16 +887,33 @@ tar cJf .tar.xz / --exclude-vcs
 
 ### cherry-pick
 
-* picking a commit from a branch and applying it to another. 选择某一个分支中的一个或几个commit(s)来进行操作,当执行完 cherry-pick 以后，将会生成一个新的提交,这个新的提交的哈希值和原来的不同，但标识名 一样
+* 部分代码变动（某几个提交）转移到另一个分支,picking a commit from a branch and applying it to another. 选择某一个分支中的一个或几个commit(s)来进行操作,当执行完 cherry-pick 以后，将会生成一个新的提交,这个新的提交的哈希值和原来的不同，但 标识名 一样
 * 从develop分支新开分支fromdevelop-01，然后commit两次，这时候develop分支只需要第二次提交的信息，步骤：
-  - git checkout develop
-  - git cherry-pick 第二次commitID
-  - resolving the conflicts
-  - add ,commit
+  - `git checkout develop`
+  - `git cherry-pick 第二次commitID`
+  - `resolving the conflicts`
+  - `add ,commit`
+* 配置
+  - -e，--edit 打开外部编辑器，编辑提交信息
+  - -n，--no-commit 只更新工作区和暂存区，不产生新的提交。
+  - -x 在提交信息的末尾追加一行(cherry picked from commit ...)，方便以后查到这个提交是如何产生的。
+  - -s，--signoff 在提交信息的末尾追加一行操作者的签名，表示是谁进行了这个操作。
+  - -m parent-number，--mainline parent-number 如果原始提交是一个合并节点，来自于两个分支的合并，那么 Cherry pick 默认将失败，因为它不知道应该采用哪个分支的代码变动。 -m配置项告诉 Git，应该采用哪个分支的变动。它的参数parent-number是一个从1开始的整数，代表原始提交的父分支编号。
+* 代码冲突
+  - --continue 用户解决代码冲突后，第一步将修改的文件重新加入暂存区（git add .），第二步使用下面的命令，让 Cherry pick 过程继续执行
+  - --abort 发生代码冲突后，放弃合并，回到操作前的样子
+  - --quit 发生代码冲突后，退出 Cherry pick
+* 转移到另一个代码库
+  - `git remote add target git://gitUrl`
+  - `git fetch target`
+  - `git log target/master`
+  - `git cherry-pick <commitHash>`
 
 ```sh
 git cherry-pick [commit] # 选择一个commit，合并进当前分支
 git cherry-pick hash_commit_A hash_commit_B
+git cherry-pick feature # 上面代码表示将feature分支的最近一次提交，转移到当前分支
+git cherry-pick -m 1 <commitHash> # 采用提交commitHash来自编号1的父分支的变动
 ```
 
 ![cherry-pick](../_static/cherry-pick.svg "cherry-pick")
@@ -1333,7 +1350,7 @@ name: GitHub Actions Demo
 on: [push, pull_request]
 on:
   push:
-    branches:    
+    branches:
       - master
 
 jobs:
@@ -1432,6 +1449,36 @@ git subtree pull -P home/.bash bash master --squash
 对 git-subtree 下子项目有修改需求的，请先 git subtree pull
 
 git subtree add --prefix=client <https://github.com/example/project-client.git> master # 建立主项目里子树
+```
+
+## Git worktree
+
+为同一个仓库开多个工作目录，每个工作目录盛放不同的分支，同时它还可以自动的做好多分支的同步，在需要同时处理多个分支时，十分的便捷和好用
+
+* 命令
+  - list
+  - add:为当前所在仓库添加一个新的目录并迁出一个分支到其中
+  - remove:不再需要它时
+  - move
+* 配置: `/home/James/worktrees/`
+  - `.bare`
+  - `feature`
+  - `.git`
+  - `hostfix`
+  - `master`
+
+```sh
+git worktree add cake
+git worktree add -b hotfix ../temp master
+git worktree prune # 来清理已不存在的关联工作目录的记录文件
+
+git worktree add [-f] [--detach] [--checkout] [--lock] [-b <new-branch>] <path> [<commit-ish>]
+git worktree list [--porcelain]
+git worktree lock [--reason <string>] <worktree>
+git worktree move <worktree> <new-path>
+git worktree prune [-n] [-v] [--expire <expire>]
+git worktree remove [-f] <worktree>
+git worktree unlock <worktree>
 ```
 
 ### [git-lfs/git-lfs](https://github.com/git-lfs/git-lfs)
@@ -1681,7 +1728,7 @@ These features allow to pause a branch development and switch to another one (_"
 
 > error: insufficient permission for adding an object to repository database .git/objects
 > chown -R henry:henry .git/objects
-> 
+>
 > git clone:
 > error: object 3cb254d902a9b226bf95696af3a98839bb7797a4: badDate: invalid author/committer line - bad date
 > fatal: fsck error in packed object

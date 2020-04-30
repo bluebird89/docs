@@ -61,22 +61,22 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - Linux
 * BSD
   - Mac
-
 * 入门：类似Windows的体验；安装简单；可靠；“类似Linux”，且不自成一派；“恰好管用”；
-  - [Mint](https://linuxmint.com/)
-  - Debian
+  - [Linux Mint](https://linuxmint.com/)
+  - Debian 10
 * 进阶：完全掌控你的电脑和操作系统；了解Linux内部；精简的优化系统
   - Slackware Linux
   - [Arch Linux](https://www.archlinux.org/)
   - [Gentoo Linux](https://www.gentoo.org/)
 * 安全与稳定：为学习最新的东西而甘冒风险；最新和最伟大的功能；有趣的配置以便于处理重大更改
-  - OpenSuse Tumbleweed
-  - Fedora Rawhide
+  - Fedora 31 Workstation
   - [Kali](https://www.kali.org/)
     + [offensive-security/kali-linux-docker](https://github.com/offensive-security/kali-linux-docker):Kali Linux Docker
 * 正常：运行平稳，维护量低；最小配置；大部分事情可以自动完成；兼容硬件和软件
-  - openSuse Leap
-  - Ubuntu Studio
+  - [openSUSE](https://www.opensuse.org/)
+    + openSuse Leap
+    + OpenSuse Tumbleweed
+  - Ubuntu 20.04 LTS
 * 服务器：稳定性；安全；支持其他出于同样原因的程序员使用
   - [CentOS](https://www.centos.org/)
   - Red Hat Enterprise Linux (RHEL)
@@ -107,7 +107,9 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 * Icaros Desktop
 * [pop!_os](https://system76.com/pop)
 * [KDE Neon](https://neon.kde.org/):基于 Ubuntu 的轻量级 Linux 发行版,采用 KDE Plasma 桌面，看起来精美绝伦
-* [Nitrux](https://nxos.org/):
+* [Nitrux](https://nxos.org/)
+* [MX Linux](https://mxlinux.org/)
+* [AntiX](https://antixlinux.com/)
 
 ## 桌面环境
 
@@ -517,13 +519,13 @@ hwinfo --short
 lshw -short
 
 # cpu
-lscpu 
+lscpu
 lshw -C cpu
 lshw -C cpu | grep -i product # 只查看 CPU 品牌和型号
 lscpu | grep -i mhz # 查看 CPU 的速度（兆赫兹）
 lscpu | grep -i bogo # 或其 BogoMips 额定功率
 
-# memory 
+# memory
 dmidecode -t memory | grep -i size # 列出每根内存条和其容量
 lshw -short -C memory # 获取系统内存更多的信息，包括类型、容量、速度和电压
 dmidecode -t memory | grep -i max # 可以安装的最大内存
@@ -1851,7 +1853,7 @@ find . -maxdepth 2 -empty -type f -ls
 
 find -perm 777 -type f -ls
 
-find / -name \*.rpm -exec chmod 755 '{}' \; # 搜索以 '.rpm' 结尾的文件并定义其权限 
+find / -name \*.rpm -exec chmod 755 '{}' \; # 搜索以 '.rpm' 结尾的文件并定义其权限
 find . -name runme -exec rm {} \; # 定位并删除文件
 find . -name runme -ok rm -rf {} \;
 
@@ -1911,7 +1913,7 @@ find / -name passwd -mindepth 3 -maxdepth 4 # 在3到4个层次的目录里边�
   - 第二个参数（ALL）定义组成员可以在其上运行命令的主机。
   - 第三个参数（(ALL)）定义了可以执行命令的用户名。
   - 最后一个参数（ALL）定义可以运行的应用程序。
-* 系统管理员向其他用户发送消息 
+* 系统管理员向其他用户发送消息
   - `wall file`,通过更新文件执行
   - `write username`:交互实时执行
   - `talk username`
@@ -2203,7 +2205,7 @@ smb://192.168.100.106
       * 该函数返回需要处理的事件数目，如返回0表示已超时
     + 工作模式
       * LT（level trigger）:默认模式 当epoll_wait检测到描述符事件发生并将此事件通知应用程序，应用程序可以不立即处理该事件。下次调用epoll_wait时，会再次响应应用程序并通知此事件(状态保持)
-        - 
+        -
       * ET（edge trigger）:当epoll_wait检测到描述符事件发生并将此事件通知应用程序，应用程序必须立即处理该事件。如果不处理，下次调用epoll_wait时，不会再次响应应用程序并通知此事件（不复现）
         - 很大程度上减少了epoll事件被重复触发的次数，因此效率要比LT模式高
     + 优点
@@ -2316,49 +2318,49 @@ while(rs){
     }
     //处理接收到的连接
     static void handle_accpet(int epollfd,int listenfd){
-         int clifd;     
-         struct sockaddr_in cliaddr;     
-         socklen_t  cliaddrlen;     
-         clifd = accept(listenfd,(struct sockaddr*)&cliaddr,&cliaddrlen);     
-         if (clifd == -1)         
-         perror("accpet error:");     
-         else {         
-             printf("accept a new client: %s:%d\n",inet_ntoa(cliaddr.sin_addr),cliaddr.sin_port);                       //添加一个客户描述符和事件         
-             add_event(epollfd,clifd,EPOLLIN);     
-         } 
+         int clifd;
+         struct sockaddr_in cliaddr;
+         socklen_t  cliaddrlen;
+         clifd = accept(listenfd,(struct sockaddr*)&cliaddr,&cliaddrlen);
+         if (clifd == -1)
+         perror("accpet error:");
+         else {
+             printf("accept a new client: %s:%d\n",inet_ntoa(cliaddr.sin_addr),cliaddr.sin_port);                       //添加一个客户描述符和事件
+             add_event(epollfd,clifd,EPOLLIN);
+         }
     }
     //读处理
     static void do_read(int epollfd,int fd,char *buf){
         int nread;
         nread = read(fd,buf,MAXSIZE);
-        if (nread == -1)     {         
-            perror("read error:");         
-            close(fd); //记住close fd        
-            delete_event(epollfd,fd,EPOLLIN); //删除监听 
+        if (nread == -1)     {
+            perror("read error:");
+            close(fd); //记住close fd
+            delete_event(epollfd,fd,EPOLLIN); //删除监听
         }
-        else if (nread == 0)     {         
+        else if (nread == 0)     {
             fprintf(stderr,"client close.\n");
-            close(fd); //记住close fd       
-            delete_event(epollfd,fd,EPOLLIN); //删除监听 
-        }     
-        else {         
-            printf("read message is : %s",buf);        
-            //修改描述符对应的事件，由读改为写         
-            modify_event(epollfd,fd,EPOLLOUT);     
-        } 
+            close(fd); //记住close fd
+            delete_event(epollfd,fd,EPOLLIN); //删除监听
+        }
+        else {
+            printf("read message is : %s",buf);
+            //修改描述符对应的事件，由读改为写
+            modify_event(epollfd,fd,EPOLLOUT);
+        }
     }
     //写处理
-    static void do_write(int epollfd,int fd,char *buf) {     
-        int nwrite;     
-        nwrite = write(fd,buf,strlen(buf));     
-        if (nwrite == -1){         
-            perror("write error:");        
-            close(fd);   //记住close fd       
-            delete_event(epollfd,fd,EPOLLOUT);  //删除监听    
+    static void do_write(int epollfd,int fd,char *buf) {
+        int nwrite;
+        nwrite = write(fd,buf,strlen(buf));
+        if (nwrite == -1){
+            perror("write error:");
+            close(fd);   //记住close fd
+            delete_event(epollfd,fd,EPOLLOUT);  //删除监听
         }else{
-            modify_event(epollfd,fd,EPOLLIN); 
-        }    
-        memset(buf,0,MAXSIZE); 
+            modify_event(epollfd,fd,EPOLLIN);
+        }
+        memset(buf,0,MAXSIZE);
     }
     //删除事件
     static void delete_event(int epollfd,int fd,int state) {
@@ -2368,7 +2370,7 @@ while(rs){
         epoll_ctl(epollfd,EPOLL_CTL_DEL,fd,&ev);
     }
     //修改事件
-    static void modify_event(int epollfd,int fd,int state){     
+    static void modify_event(int epollfd,int fd,int state){
         struct epoll_event ev;
         ev.events = state;
         ev.data.fd = fd;
@@ -2769,7 +2771,7 @@ awk [-v var=value] f1.awk [file]
 
 ## f2.awk
 \#!/bin/awk  -f
-\#add 'x'  right 
+\#add 'x'  right
 BEGIN{} pattern{} END{}
 
 f2.awk [-v var=value] [var1=value1] [file]
@@ -3321,7 +3323,7 @@ sed -n &#39;1!G;h;$p&#39; FILE
 * ctrl+w 剪切 光标前一个单词
 * ctrl+y 粘贴
 * ctrl+c 中断 或者删除整行
-* ctrl+h 删除光标前一个字符 
+* ctrl+h 删除光标前一个字符
 * !! 执行上一条
 
 ## 求职问题
@@ -3476,7 +3478,7 @@ sed -n &#39;1!G;h;$p&#39; FILE
 * [trimstray/iptables-essentials](https://github.com/trimstray/iptables-essentials):Iptables Essentials: Common Firewall Rules and Commands.
 * [akavel/up](https://github.com/akavel/up):Ultimate Plumber is a tool for writing Linux pipes with instant live preview
 * [iovisor/bcc](https://github.com/iovisor/bcc):BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
-* [Monit](https://mmonit.com/monit/):功能异常强大的进程、文件、设备、系统监控软件，适用于Linux/Unix系统 With all features needed for system monitoring and error recovery. It's like having a watchdog with a toolbox on your server 
+* [Monit](https://mmonit.com/monit/):功能异常强大的进程、文件、设备、系统监控软件，适用于Linux/Unix系统 With all features needed for system monitoring and error recovery. It's like having a watchdog with a toolbox on your server
 * [Linuxbrew/brew](https://github.com/Linuxbrew/brew):🍺🐧 The Homebrew package manager for Linux https://linuxbrew.sh
 * [johnfactotum/foliate](https://github.com/johnfactotum/foliate):A simple and modern GTK eBook reader https://johnfactotum.github.io/foliate/
 * [systemd/systemd](https://github.com/systemd/systemd):systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic.
@@ -3507,4 +3509,4 @@ sed -n &#39;1!G;h;$p&#39; FILE
 * [十五分钟制作一个属于自己得Linux操作系统](https://mp.weixin.qq.com/s?__biz=MzA3OTgyMDcwNg==&mid=2650636229&idx=1&sn=5904d82ee06d0e78a6140e1905bd06f0&chksm=87a47d08b0d3f41e592774b07f2977876f42e4d14d7f148e53f0f805d249bd20cdd83495a337)
 * [VITUX](https://vitux.com) Linux Compendium
 * [judasn/Linux-Tutorial](https://github.com/judasn/Linux-Tutorial):《Java 程序员眼中的 Linux》 https://github.com/judasn/Linux-Tutorial
-* [Linux From Scratch]http://www.linuxfromscratch.org/)
+* [Linux From Scratch]http://www.linuxfromscratch.org/):a project that provides you with step-by-step instructions for building your own custom Linux system, entirely from source code

@@ -16,6 +16,10 @@
 ## 状态
 
 * 前后端分离，业界广泛采用token方式
+* 动态令牌
+  - OTP：One-Time Password 一次性密码
+  - HOTP：HMAC-based One-Time Password 基于HMAC算法加密的一次性密码
+  - TOTP：Time-based One-Time Password 基于时间戳算法的一次性密码
 * 初始
     - 第一次来登记的时候，服务器根据用户出具信息，在核验完毕身份证后（验证密码）后，发放token
     - 客户端保存token,后面访问接口时带上token
@@ -376,12 +380,12 @@ https://api.github.com/user
   - 一个公共的地方来放置预置的属性。toml
   - 配置文件可以重载（override）：系统提供一个公共的配置文件：default，然后各种运行时相关的配置文件继承并局部重载这个配置。在系统启动的时候，二者合并。
   - 运行的时候改写配置：像管理缓存一样去管理和配置相关的数据，将其封装在一个容器里：当配置被修改时，调用这个容器的 invalidate 方法 —— 这样，下次访问任意一个配置项时，会重新读入配置，并缓存起来
-* CLI：不是给用户用的，是给程序员用的。
+* CLI：不是给用户用的，是给程序员用的
   - 难点
     + CLI 的发现和自注册。你的 framework 的用户只要遵循某种 convention 撰写 CLI，这些 CLI 就会被自动集成到系统里。
     + CLI 的撰写者能够轻松地获取到系统的信息，也就是说，系统有自省（introspection）的能力。
 * 测试框架
-  -  functional testing 是可以全局考虑.
+  -  functional testing 是可以全局考虑
   -  ava 描述测试的 fixture
 
 ## 契约
@@ -664,12 +668,6 @@ dec_message = decrypt ( password, enc_message )
 print dec_message   // Hello World!
 ```
 
-## 动态令牌
-
-* OTP：One-Time Password 一次性密码
-* HOTP：HMAC-based One-Time Password 基于HMAC算法加密的一次性密码
-* TOTP：Time-based One-Time Password 基于时间戳算法的一次性密码
-
 ## 接口
 
 * [public-apis/public-apis](https://github.com/public-apis/public-apis):A collective list of free APIs for use in software and web development. https://ultimatecourses.com
@@ -761,7 +759,8 @@ print dec_message   // Hello World!
     - Spring Cloud Contract
     - Pact
     - Rest-Assured
-  * HoServer
+* HoServer
+* [APIJSON / APIJSON](https://github.com/APIJSON/APIJSON):🏆码云最有价值开源项目 🚀后端接口和文档自动化，前端(客户端) 定制返回 JSON 的数据和结构！🏆Gitee Most Valuable Project 🚀A JSON Transmission Protocol and an ORM Library for automatically providing APIs and Docs. http://apijson.org
 
 ## 参考
 

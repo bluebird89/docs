@@ -19,17 +19,22 @@ gorilla The Cloud-Native API Gateway & Service Mesh https://konghq.com
 
 * 两种方式:一种是没有数据库依赖的DB-less 模式，另一种是with a Database 模式
 * [Docker](https://docs.konghq.com/install/docker/)
+* 端口
+    - 8000：用来接收客户端的 HTTP 请求，并转发到 upstream
+    - 8443：用来接收客户端的 HTTPS 请求，并转发到 upstream
+    - 8001：HTTP 监听的 API 管理接口
+    - 8444：HTTPS 监听的 API 管理接口
 
 ```sh
 docker network create kong-net
 
-# 使用Cassandra：
+# 使用Cassandra
 docker run -d --name kong-database --network=kong-net -p 9042:9042 cassandra:3
-# 使用 PostgreSQL:
+# 使用 PostgreSQL
 docker run -d --name kong-database --network=kong-net -p 5432:5432 -e "POSTGRES_USER=kong" -e "POSTGRES_DB=kong" -e "POSTGRES_PASSWORD=kong" postgres:9.6
 # 初始化或迁移数据
 docker run --rm --network=kong-net -e "KONG_DATABASE=postgres" -e "KONG_PG_HOST=kong-database" -e "KONG_PG_PASSWORD=kong" -e "KONG_CASSANDRA_CONTACT_POINTS=kong-database" kong:1.5.1 kong migrations bootstrap
-# 启动容器 8000：用来接收客户端的 HTTP 请求，并转发到 upstream。 8443：用来接收客户端的 HTTPS 请求，并转发到 upstream。 8001：HTTP 监听的 API 管理接口。 8444：HTTPS 监听的 API 管理接口。 docker run -d --name kong \
+# 启动容器
 docker run -d --name kong --network=kong-net -e "KONG_DATABASE=postgres" -e "KONG_PG_HOST=kong-database" -e "KONG_PG_PASSWORD=kong" -e "KONG_CASSANDRA_CONTACT_POINTS=kong-database" -e "KONG_PROXY_ACCESS_LOG=/dev/stdout" -e "KONG_ADMIN_ACCESS_LOG=/dev/stdout" -e "KONG_PROXY_ERROR_LOG=/dev/stderr" -e "KONG_ADMIN_ERROR_LOG=/dev/stderr" -e "KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl" -p 8000:8000 -p 8443:8443 -p 8001:8001 -p 8444:8444 kong:1.5.1
 
 curl -i http://localhost:8001/
@@ -43,7 +48,7 @@ curl -i http://localhost:8001/
     - 数据中心：用于存储 Kong 集群节点信息、API、消费者、插件等信息，目前提供了PostgreSQL和Cassandra支持，如果需要高可用建议使用Cassandra
     - Kong 集群中的节点通过 Gossip 协议自动发现其他节点，当通过一个 Kong 节点的管理 API 进行一些变更时也会通知其他节点。每个 Kong 节点的配置信息是会缓存的，如插件，那么当在某一个 Kong 节点修改了插件配置时，需要通知其他节点配置的变更。
     - Kong 核心基于 OpenResty，实现了请求/响应的 Lua 处理化
-* Service是抽象层面的服务，可以直接映射到一个物理服务，也可以指向一个Upstream（同Nginx中的Upstream，是对上游服务器的抽象）
+* Service:抽象层面的服务，可以直接映射到一个物理服务，也可以指向一个Upstream（同Nginx中的Upstream，是对上游服务器的抽象）
 * Route是路由的抽象，负责将实际的请求映射到 Service
 * Tag
 * Consumer
@@ -51,22 +56,21 @@ curl -i http://localhost:8001/
 * Certificate
 * SNI
 * Upstream
-* Target
+* Target 代表了一个物理服务（IP地址/hostname + port的抽象），一个Upstream可以包含多个Targets
 
 ```sh
 # 添加 name为 hello-upstream 的 Upstream
-$ curl -i -X POST http://localhost:8001/upstreams  --data name=hello-upstream
+curl -i -X POST http://localhost:8001/upstreams  --data name=hello-upstream
 
-# 为 mock-upstream 添加 Target，Target 代表了一个物理服务（IP地址/hostname + port的抽象），一个Upstream可以包含多个Targets
-$ curl -i -X POST http://localhost:8001/upstreams/hello-upstream/targets --data target="xxx.xxx.xxx.xxx:8081"
+# 为 mock-upstream 添加 Target
+curl -i -X POST http://localhost:8001/upstreams/hello-upstream/targets --data target="xxx.xxx.xxx.xxx:8081"
 
 # 修改  hello-service，为其配置
-$ curl -i -X PATCH http://localhost:8001/services/hello-service --data url='http://hello-upstream/hello'
+curl -i -X PATCH http://localhost:8001/services/hello-service --data url='http://hello-upstream/hello'
 ```
 
 ## Kong Plugins
 
-* 实现日志记录、安全检测、性能监控和负载均衡等功能
 * key-auth
     - 接收config.key_names定义参数，默认参数名称 ['apikey']。在HTTP请求中 header和params参数中包含apikey参数，参数值必须apikey密钥，Kong网关将检查密钥，验证通过才可以访问后续服务
     - 为Service添加服务消费者（Consumer）定义消费者访问 API Key, 让他拥有访问hello-service的权限
@@ -92,7 +96,7 @@ curl -i -X POST http://localhost:8001/consumers/Hidden/key-auth/ --data key=ENTE
 * Admin
     - Kong 企业版提供了管理UI
     - [PGBI/kong-dashboard](https://github.com/PGBI/kong-dashboard):Dashboard for managing Kong gateway 当前最新版本（3.6.x）并不支持最新版本的 Kong，最后一次更新也要追溯到1年多以前了
-        + `docker run --rm   --network=kong-net -p 8080:8080  pgbi/kong-dashboard start --kong-url http://kong:8001`
+        + `docker run --rm --network=kong-net -p 8080:8080  pgbi/kong-dashboard start --kong-url http://kong:8001`
     - [pantsel/konga](https://github.com/pantsel/konga): More than just another GUI to Kong Admin API <https://pantsel.github.io/konga/> 观察到现在 Kong 的所有的配置，并且可以对于管理 Kong 节点情况进行查看、监控和预警。Konga 主要是用 AngularJS 写的，运行于nodejs服务端
         + 特点
             * 管理所有Kong Admin API对象。
@@ -104,9 +108,11 @@ curl -i -X POST http://localhost:8001/consumers/Hidden/key-auth/ --data key=ENTE
             * 易于数据库集成（MySQL，PostgresSQL，MongoDB，SQL Server
         + 安装：`docker run  -d -p 1337:1337 --network kong-net --name konga -e "DB_ADAPTER=postgres" -e "DB_URI=postgresql://kong:kong@kong-database/kong" pantsel/konga`
         + 通过 <http://localhost:1337/> 访问管理界面
+        + 在 CONNECTIONS 中添加 Kong 服务的管理路径 `http://xxx.xxx.xxx.xxx:8001`
 
 ## 参考
 
 * [RESTful API](https://docs.konghq.com/2.0.x/admin-api/):管理API的端口是8001
     - 添加一个Service:`curl -i -X POST http://localhost:8001/services  --data name=hello-service  --data url='http://xxx.xxx.xxx.xxx:8081/hello'`
     - Service 添加一个 Route:`curl -i -X POST --url http://localhost:8001/services/hello-service/routes --data 'paths[]=/hello' --data name=hello-route`
+    - 验证:`http://localhost:8000/hello`
