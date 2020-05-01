@@ -50,7 +50,8 @@ Windows是最烂的开发平台
 * VLC 媒体播放
 * 7-Zip 文件压缩
 * OpenOffice.org 办公
-* μTorrent BT下载
+* 下载
+  - μTorrent BT下载
 * GIMP 图像编辑 介绍文章
 * FileZilla FTP软件
 * Defraggler 系统优化-碎片整理

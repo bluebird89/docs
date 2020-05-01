@@ -552,7 +552,7 @@ http {
     fastcgi_busy_buffers_size 128k;
     fastcgi_temp_file_write_size 128k;
 
-    #gzip模块设置
+    # gzip模块设置
     gzip on; #开启gzip压缩输出
     gzip_static on;
     gzip_disable "msie6"; # IE6浏览器不启用压缩
@@ -575,8 +575,17 @@ http {
                       $status $body_bytes_sent $request_body "$http_referer"
                       "$http_user_agent" "$http_x_forwarded_for" "$request_time";
     log_format log404 '$status [$time_local] $remote_addr $host$request_uri $sent_http_location';
-    access_log  /usr/local/var/log/nginx/access.log main;
-    access_log  logs/host.access.404.log  log404;
+    map $status $loggable {
+        ~^[23] 0;
+        default 1;
+    }
+
+    access_log /var/log/nginx/access.log combined if=$loggable;
+
+    access_log /var/log/nginx/access.log combined buffer=512k flush=1m;
+
+    access_log /usr/local/var/log/nginx/access.log main;
+    access_log logs/host.access.404.log  log404;
     access_log off; #取消服务日志
 
     application/javascript application/x-javascript application/json
@@ -797,6 +806,14 @@ server {
         error_page 404 = @fetch;
     }
 
+    location /download/ {
+        limit_rate 50k;
+    }
+    location / {
+        limit_rate_after 500k;
+        limit_rate 50k;
+    }
+
     #本地动静分离反向代理配置
     #所有jsp的页面均交由tomcat或resin处理
     location ~ .(jsp|jspx|do)?$ {
@@ -810,6 +827,9 @@ server {
     location ~ .*.(gif|jpg|jpeg|png|bmp|swf)$
     {
         expires 10d;
+        expires 1M;
+        add_header Cache-Control "public";
+        access_log off;
     }
 
     #JS和CSS缓存时间设置

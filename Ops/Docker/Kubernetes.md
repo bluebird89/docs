@@ -1,4 +1,4 @@
-#  [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes)
+# [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes)
 
 Production-Grade Container Scheduling and Management http://kubernetes.io
 
@@ -48,7 +48,7 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
 
 ## 基础资源
 
-一切皆为资源，一切即可描述，一切皆可管理。
+一切皆为资源，一切即可描述，一切皆可管理
 
 * NameSpaces 命名空间，在一个 Kubernetes 集群中可以使用namespace创建多个“虚拟集群”，这些namespace之间可以完全隔离，也可以通过某种方式，让一个namespace中的service可以访问到其他的namespace中的服务。
 * Deployment 为 Pod 和 ReplicaSet 提供了一个声明式定义(declarative)方法，用来替代以前的 ReplicationController 来方便的管理应用。典型的应用场景包括：
@@ -461,7 +461,7 @@ kubectl autoscale rc foo --max=5 --cpu-percent=80 # 使用RC“foo”设定，�
 kubectl certificate approve node-csr-81F5uBehyEyLWco5qavBsxc1GzFcZk3aFM3XW5rT3mw node-csr-Ed0kbFhc_q7qx14H3QpqLIUs0uKo036O2SnFpIheM18 # 例如，当有node节点要向master请求，那么是需要master节点授权的
 kubectl cluster-info # cluster-info 命令：显示集群信息
 
-# 以前需要heapster，后替换为metrics-server 
+# 以前需要heapster，后替换为metrics-server
 kubectl top pod --all-namespaces # top 命令：用于查看资源的cpu，内存磁盘等资源的使用率
 cordon命令：用于标记某个节点不可调度
 uncordon命令：用于标签节点可以调度
@@ -481,11 +481,12 @@ kubectl attach 123456-7890 -c ruby-container # 获取pod 123456-7890中ruby-cont
 kubectl attach 123456-7890 -c ruby-container -i -t # 切换到终端模式，将控制台输入发送到pod 123456-7890的ruby-container的“bash”命令，并将其输出到控制台/
 
 kubectl api-versions
-``` 
+```
 
 ### etcd
 
-并不是kubernetes的一部分，它是 CoreOS 团队发起的一个管理配置信息和服务发现（service discovery）项目，目标是构建一个高可用的分布式键值（key-value）数据库。与kubernetes和docker一样还是在快速迭代开发中的产品，没有ZooKeeper那样成熟。
+* 并不是kubernetes的一部分，它是 CoreOS 团队发起的一个管理配置信息和服务发现（service discovery）项目，目标是构建一个高可用的分布式键值（key-value）数据库
+* 与kubernetes和docker一样还是在快速迭代开发中的产品，没有ZooKeeper那样成熟
 
 ### 熔断机制
 
@@ -496,24 +497,44 @@ kubectl api-versions
 
 服务降级也是服务治理策略中重要的一环。当业务出现流量峰值，或者系统中某个组成部分出现故障，保证系统整体功能仍然可用，我们可能需要停掉一些不太重要的周边系统，从而保证核心服务的 SLA。比如电商系统在进行大促时，往往会弃车保帅，优先选择停止"猜你喜欢"、"评论"等不那么重要的系统，保障购物车、支付系统可用。在微服务架构里，每个服务无论是服务提供方还是服务调用方，都应该围绕 SLA 制定不同的降级策略。按降级粒度粗细我们可以制定接口降级、功能降级、服务降级。
 
-- 接口降级：对于非核心接口，设置为直接返回空或异常，可以在高峰期有效减少接口逻辑对资源（CPU、内存、网络 I/O、磁盘 I/O 等）的占用和消耗。
-- 功能降级：对于非核心功能，可以设置该功能直接执行本地逻辑，不做跨服务、跨网络访问。也可以设置降级开关，一键关闭指定功能，保全系统稳定运行。
-- 服务降级：对于非核心服务，可以通过服务治理框架根据错误率或者响应时间自动触发降级策略。
+* 接口降级：对于非核心接口，设置为直接返回空或异常，可以在高峰期有效减少接口逻辑对资源（CPU、内存、网络 I/O、磁盘 I/O 等）的占用和消耗。
+* 功能降级：对于非核心功能，可以设置该功能直接执行本地逻辑，不做跨服务、跨网络访问。也可以设置降级开关，一键关闭指定功能，保全系统稳定运行。
+* 服务降级：对于非核心服务，可以通过服务治理框架根据错误率或者响应时间自动触发降级策略。
 * 功能降级和服务降级可以通过熔断机制和断路器实现
-    + 自动化容器的部署与复制
-    + 服务与命名发现
-    + 集群调度
-    + 自动扩展及收缩服务器规模
-    + 容器编排，负载均衡
-    + 应用升级部署
-    + 弹性容器及故障迁移
-    + 集群监控
+    - 自动化容器的部署与复制
+    - 服务与命名发现
+    - 集群调度
+    - 自动扩展及收缩服务器规模
+    - 容器编排，负载均衡
+    - 应用升级部署
+    - 弹性容器及故障迁移
+    - 集群监控
+
+## ingress controller
+
+* Ingress Controller是一个统称，并不是只有一个，有如下这些：
+    - Ingress NGINX: Kubernetes 官方维护的方案，也是本次安装使用的 Controller
+    - F5 BIG-IP Controller: F5 所开发的 Controller，它能够让管理员通过 CLI 或 API 让 Kubernetes 与 OpenShift 管理 F5 BIG-IP 设备
+    - Ingress Kong: 著名的开源 API Gateway 方案所维护的 Kubernetes Ingress Controller
+    - Traefik: 是一套开源的 HTTP 反向代理与负载均衡器，而它也支援了 Ingress
+    - Voyager: 一套以 HAProxy 为底的 Ingress Controller
+* 使用service或者pod的网络将它暴露在集群外，然后它反向代理集群内的七层服务，通过vhost子域名那样路由到后端的服务
+* 流量从入口到Ingress Controller的pod有下面几种方式：
+    - type为LoadBalancer的时候手写externalIPs很鸡肋，后面会再写文章去讲它
+    - type为LoadBalancer的时候只有云厂商支持分配公网ip来负载均衡，LoadBalancer 公开的每项服务都将获得自己的 IP 地址，但是需要收费，且自己建立集群无法使用
+    - 不创建service，pod直接用hostport，效率等同于hostNetwork，如果不代理四层端口还好，代理了需要修改pod的template来滚动更新来让nginx bind的四层端口能映射到宿主机上
+    - Nodeport，端口不是web端口（但是可以修改Nodeport的范围改成web端口），如果进来流量负载到Nodeport上可能某个流量路线到某个node上的时候因为Ingress Controller的pod不在这个node上，会走这个node的kube-proxy转发到Ingress Controller的pod上，多走一趟路
+    - 不创建service，效率最高，也能四层负载的时候不修改pod的template，唯一要注意的是hostNetwork下pod会继承宿主机的网络协议，也就是使用了主机的dns，会导致svc的请求直接走宿主机的上到公网的dns服务器而非集群里的dns server，需要设置pod的dnsPolicy: ClusterFirstWithHostNet即可解决
+
+```sh
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml
+```
 
 ### [kubernetes/minikube](https://github.com/kubernetes/minikube)
 
-Run Kubernetes locally Minikube is a small setup by Kubernetes guys, which will spawn a virtual machine and have a tiny (but fully functional) Kubernetes cluster inside the VM.
-kubectl is the command line client you’ll use to connect to the Kubernetes cluster
-
+* Run Kubernetes locally https://minikube.sigs.k8s.io/
+* Minikube is a small setup by Kubernetes guys, which will spawn a virtual machine and have a tiny (but fully functional) Kubernetes cluster inside the VM.
+* kubectl is the command line client you’ll use to connect to the Kubernetes cluster
 * config file: `~/.kube/`
 * all the virtual machine bits:`~/.minikube/`
 * 启动参数
@@ -523,6 +544,12 @@ kubectl is the command line client you’ll use to connect to the Kubernetes clu
     - --log_dir=tmp，设置minikube的日志存储位置，这里是当前目录下的tmp文件夹。该目录下会出现INFO和ERROR的日志，INFO是一定会有，ERROR是出错的时候才有。比如
     - --cpus 4，设置虚拟机的cpu核数
     - --memory 8192，设置虚拟机的内存大小，单位为M
+* start主要做了这些事：
+    - 创建了名为minikube的虚拟机，并在虚拟机中安装了Docker容器运行时。（实际就是Docker-machine）
+    - 下载了Kubeadm与Kubelet工具
+    - 通过Kubeadm部署Kubernetes集群
+    - 进行各组件间访问授权、健康检查等工作
+    - 在用户操作系统安装并配置kubectl
 * 参考
     - [Hello Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/)
 
@@ -537,9 +564,13 @@ brew install minikube
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64
 chmod +x minikube
 sudo mv minikube /usr/local/bin
+
+minikube start --registry-mirror=https://registry.docker-cn.com
 minikube start --vm-driver=virtualbox|parallels|vmwarefusion|hyperkit|vmware --disk-size='10g'  --image-mirror-country='cn' --image-repository='registry.cn-hangzhou.aliyuncs.com/google_containers'
 minikube start --registry-mirror=https://registry.docker-cn.com --kubernetes-version v1.12.1
 minikube start --memory=8192 --cpus=4 --disk-size=20g  --registry-mirror=https://docker.mirrors.ustc.edu.cn --kubernetes-version=v1.12.5 --docker-env http_proxy=http://192.168.0.40:8123 --docker-env https_proxy=http://192.168.0.40:8123 --docker-env no_proxy=localhost,127.0.0.1,::1,192.168.0.0/24,192.168.99.0/24
+minikube start --vm-driver=virtualbox --registry-mirror=https://registry.docker-cn.com --image-mirror-country=cn --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
+minikube start --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
 
 minikube docker-env|stop|status|delete
 rm -rf  ~/.minikube
@@ -557,7 +588,11 @@ minikube service hello-minikube --url
 
 minikube addons list
 minikube addons enable|disable heapster
-minikube addons  enable ingress
+minikube addons enable ingress
+
+kubectl cluster-info
+kubectl config view
+kubectl get node -o wide
 
 kubectl delete service hello-node
 kubectl delete deployment hello-node
@@ -586,6 +621,17 @@ for imageName in ${images[@]};do
     docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName k8s.gcr.io/$imageName
     docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName
 done
+
+# create
+kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10
+# access
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+
+kubectl get pod
+# Get the URL of the exposed Service to view the Service details
+minikube service hello-minikube --url
+kubectl delete services hello-minikube
+kubectl delete deployment hello-minikube
 ```
 
 ```
@@ -622,7 +668,7 @@ kubectl get pods -w -l app=nginx
 
 ## [ coreos / flannel ](https://github.com/coreos/flannel)
 
-flannel is a network fabric for containers, designed for Kubernetes 
+flannel is a network fabric for containers, designed for Kubernetes
 
 ## 问题
 
