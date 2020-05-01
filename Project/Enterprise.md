@@ -41,6 +41,8 @@
         + [trello](https://trello.com/):Bring the power of a visual perspective to your team
         + [Leangoo](https://www.leangoo.com):最敏捷的项目协作工具
         + [notion](https://www.notion.so/):All-in-one workspace
+            *  一般用toggle的功能划分出每周和每天，然后每天加todo做待办事项，bullet放一些重点
+            *  一些长期的项目就放table board按进度拖移
         + [Teambition](https://www.teambition.com):项目管理工具，聊天、文件、看板
         + [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software)
         + Wekan
@@ -50,16 +52,19 @@
 ## 工具
 
 * Productivity & Project Management
+    - Confluence
     - GSuite ($12 / month) - Standard email, file storage in Drive, analysis in Sheets, and presentations in Slides
     - Slack ($13 / month) - Internal communication and supporting customers in shared Slack channels
     - Airtable (free) - CRM to track our sales funnel
     - Notion ($16 / month) - Storing interview notes, brainstorming product and feature ideas
 * Development & Design
+    - Jira
     - GitHub ($7 / month) - Version control / source management
     - Trello (free) - Product roadmap, issue tracking
     - Figma ($24 / month) - Designing product mocks
     - Miscellaneous IDEs (free) - Sublime, Vim, VSCode
     - Robo 3T (free) - MongoDB GUI
+    - Jenkins
 * Analytics
     - Mixpanel (free) - Front and backend analytics. We are on a startup plan so receive Mixpanel for free for up to 250K MTUs
     - Sentry ($26 / month) - Error logging and reporting
@@ -471,3 +476,4 @@
 
 ## 参考
 
+*  《Remote》 37 Signals 的 David Heinemeier Hansson

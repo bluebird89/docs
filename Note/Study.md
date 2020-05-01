@@ -116,9 +116,32 @@
     - 具备强大的领导能力，深厚的基础和大量实际开发经验。
     - 能够带动整个技术的生态系统发展。
 
+## 开源
+
+* 开源软件:源代码可以任意获取的计算机软件，任何人都能查看、修改和分发他们认为合适的代码。开源软件依托同行评审和社区生产，皆以分散、协作的方式开发。—— 红帽官网
+* 开源:源于开源软件生产的运行和工作方式，它是一种基于去中心化、自组织式的软件开发模式运作的工作方式。它以社区作为根基，通过开放、透明、协作几项原则开展的活动
+    - 透明度
+    - 协作
+    - 迟早发布、持续发布。快速建立原型，发布第一个版本，并且不断地快速地迭代
+    - 精英制度。根据提出的最佳方案做决定的方式
+    - 社区。形成社区，提升社区参与度，转化为社区目标
+        + 生态建设
+        + 明确其带来的业务价值（如人才引进 、生态等）
+        + 专职的开发人员进行开源支持
+        + 开放式的开源团队组织结构
+        + 合理、适当地长期 KPI 考核机制
+        + 政策和流程支持。如专项鼓励奖金
+        + 明确地专利和知识产权机制
+* 运营一个开源项目
+    - 搭建原型
+    - 上线运营
+    - 收集反馈
+    - 调整产品
+    - 成长壮大
+
 ## 总结
 
-* 你不懂的，老师也没法回答你，只有靠自己慢慢地摸索，慢慢去领悟。
+* 你不懂的，老师也没法回答你，只有靠自己慢慢地摸索，慢慢去领悟
 * 前端编程，JavaScript从无知到觉醒：使用JS面向对象的功能，理解了JS中闭包的概念
 * 不管是React，微信小程序，Node.JS，本质上都是JavaScript，Html，CSS的组合使用，相似度很高，只是各自有各自特点的规范特色而已，学习难度是逐渐降低的
 * 每个人的知识，就如同是一个圆，圆内是你已经了解的知识，圆之外就是还不懂的知识，一个人掌握的知识越多，这个圆也就越大，而圆越大，圆周所接触的那些未知领域也就越多。
@@ -127,7 +150,7 @@
 
 ## 参考
 
-- [零基础小白如何入门 Python 编程](http://blog.csdn.net/gitchat/article/details/77506814)
-- [selfteaching/the-craft-of-selfteaching](https://github.com/selfteaching/the-craft-of-selfteaching):One has no future if one couldn't teach themself.
+* [零基础小白如何入门 Python 编程](http://blog.csdn.net/gitchat/article/details/77506814)
+* [selfteaching/the-craft-of-selfteaching](https://github.com/selfteaching/the-craft-of-selfteaching):One has no future if one couldn't teach themself.
 * [dipakkr/A-to-Z-Resources-for-Students](https://github.com/dipakkr/A-to-Z-Resources-for-Students):Curated list of resources for college students :octocat: Show your ❤️ by giving a ⭐️ https://gitter.im/a2z-resources
 * [sdmg15/Best-websites-a-programmer-should-visit](https://github.com/sdmg15/Best-websites-a-programmer-should-visit):🔗 Some useful websites for programmers.
