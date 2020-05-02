@@ -3,17 +3,17 @@
 Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
 
 * 基于 Go 语言 并遵从Apache2.0协议开源的应用容器引擎
-* 一个基于LXC技术之上构建的container容器引擎，通过内核虚拟化技术（namespace及cgroups）来提供容器的资源隔离与安全保障，KVM是通过硬件实现的虚拟化技术，它是通过系统来实现资源隔离与安全保障，占用系统资源比较小
-* 可以让开发者打包应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化
-* 容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低
-* 借鉴传统的虚拟及镜像机制，提供artifact集装箱能力，从而助力云计算，尤其是类似于提供了Web, Hadoop集群，消息队列等。
-* 镜像装箱机制：类似一个只读模版的文件结构，可以自定义及扩展，用来创建Docker容器。
+* 基于LXC技术之上构建的container容器引擎，通过内核虚拟化技术（namespace及cgroups）来提供容器的资源隔离与安全保障，KVM是通过硬件实现的虚拟化技术，它是通过系统来实现资源隔离与安全保障，占用系统资源比较小
+* 让开发者打包应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化
+* 容器是完全使用沙箱机制，相互之间不会有任何接口,更重要的是容器性能开销极低
+* 借鉴传统的虚拟及镜像机制，提供artifact集装箱能力，从而助力云计算，尤其是类似于提供了Web, Hadoop集群，消息队列等
+* 镜像装箱机制：类似一个只读模版的文件结构，可以自定义及扩展，用来创建Docker容器
 * 高效虚拟化
   - 借助LXC并进行革新提供了高效运行环境，而非类似VM的虚拟OS，GuestOS的弊端在于看起来够虚拟，隔离，然而使用起来又浪费资源，又难于管理
-  - 基于LXC的核心Linux Namespace,对cgroups/namespace机制及网络过封装，把隔离性，灵活性（资源分配），便携，安全性，最重要是其性能做到了极致。
+  - 基于LXC的核心Linux Namespace,对cgroups/namespace机制及网络过封装，把隔离性，灵活性（资源分配），便携，安全性，最重要是其性能做到了极致
   - 复用Host主机的OS, 抽象出Docker Engine层面实现调度与隔离，大大降低其负重级别
-  - Docker是在操作系统层面进行虚拟化，而传统VM则直接在硬件层面虚拟化。
-  - 底层实现则借助了LXC, 管理利用了namespace做全县控制和隔离，cgroup来进行资源配置，aufs（类似git的思想，把文件系统的修改当作一次代码commit进行叠加从而节省存储）提高文件系统资源利用率。
+  - Docker是在操作系统层面进行虚拟化，而传统VM则直接在硬件层面虚拟化
+  - 底层实现则借助了LXC, 管理利用了namespace做全县控制和隔离，cgroup来进行资源配置，aufs（类似git的思想，把文件系统的修改当作一次代码commit进行叠加从而节省存储）提高文件系统资源利用率
   - 提供了简洁易用的命令行和API
   - 基于联合文件系统的镜像分层技术，加上在线Docker Hub服务，容器迁移方便快捷
 * 优点
@@ -24,6 +24,12 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
   - 轻便，移植性高
   - 不需要打包系统进镜像所以体积非常小
   - Dockerfile 镜像构建机制让镜像打包部署自动化
+  - 灵活：即使是最复杂的应用也可以集装箱化
+  - 轻量级：利用并共享主机内核
+  - 可互换：即时部署更新和升级
+  - 便携式：本地构建，部署到云，并在任何地方运行
+  - 可扩展：增加并自动分发容器副本
+  - 可堆叠：垂直和即时堆叠服务
 * 场景
   - Automating the packaging and deployment of applications
   - Creation of lightweight, private PAAS environment
@@ -35,6 +41,11 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
 
 ![Docker的总体架构图](../_static/architect_docker.jpg)
 ![Docker vs VM](../_static/VMvsDocker.jpg)
+
+## 版本
+
+* Docker Community Edition（CE）社区版
+* Enterprise Edition(EE) 商业版
 
 ## 虚拟化进程
 
@@ -54,7 +65,20 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
   - Hypervisor抽象虚拟化硬件平台
   - VMWare, XEN抽象虚拟化操作系统
     + 进程隔离需要系统隔离
-  - LXC(Linux Container) 进程级别虚拟化
+
+## LXC(Linux Container)
+
+* 可以提供轻量级的虚拟化，以便隔离进程和资源，而且不需要提供指令解释机制以及全虚拟化的其他复杂性
+* 容器有效地将由单个操作系统管理的资源划分到孤立的组中，以更好地在孤立的组之间平衡有冲突的资源使用需求
+* 与传统虚拟化技术相比，优势在于：
+  - 与宿主机使用同一个内核，性能损耗小
+  - 不需要指令级模拟
+  - 不需要即时(Just-in-time)编译
+  - 容器可以在CPU核心的本地运行指令，不需要任何专门的解释机制
+  - 避免了准虚拟化和系统调用替换中的复杂性
+  - 轻量级隔离，在隔离的同时还提供共享机制，以实现容器与宿主机的资源共享
+* 提供了在单一可控主机节点上支持多个相互隔离的server container同时执行的机制。Linux Container有点像chroot，提供了一个拥有自己进程和网络空间的虚拟环境，但又有别于虚拟机，因为lxc是一种操作系统层次上的资源的虚拟化
+* 与docker关系:docker并不是LXC替代品，docker底层使用了LXC来实现，LXC将linux进程沙盒化，使得进程之间相互隔离，并且能够配置各进程的资源分配。在LXC的基础之上，docker提供了一系列更强大的功能
 
 ## Install
 
@@ -68,6 +92,49 @@ brew cask install docker-toolbox
 
 ## centos
 yum install docker
+
+#/usr/lib/systemd/system/docker.service
+[Unit]
+Description=Docker Application Container Engine
+Documentation=http://docs.docker.com
+After=network.target
+Wants=docker-storage-setup.service
+Requires=docker-cleanup.timer
+
+[Service]
+Type=notify
+NotifyAccess=main
+EnvironmentFile=-/run/containers/registries.conf
+EnvironmentFile=-/etc/sysconfig/docker
+EnvironmentFile=-/etc/sysconfig/docker-storage
+EnvironmentFile=-/etc/sysconfig/docker-network
+Environment=GOTRACEBACK=crash
+Environment=DOCKER_HTTP_HOST_COMPAT=1
+Environment=PATH=/usr/libexec/docker:/usr/bin:/usr/sbin
+ExecStart=/usr/bin/dockerd-current --registry-mirror=https://rfcod7oz.mirror.aliyuncs.com \ #这个值可以登陆阿里云账号请参考下图
+          --add-runtime docker-runc=/usr/libexec/docker/docker-runc-current \
+          --default-runtime=docker-runc \
+          --exec-opt native.cgroupdriver=systemd \
+          --userland-proxy-path=/usr/libexec/docker/docker-proxy-current \
+          --init-path=/usr/libexec/docker/docker-init-current \
+          --seccomp-profile=/etc/docker/seccomp.json \
+          $OPTIONS \
+          $DOCKER_STORAGE_OPTIONS \
+          $DOCKER_NETWORK_OPTIONS \
+          $ADD_REGISTRY \
+          $BLOCK_REGISTRY \
+          $INSECURE_REGISTRY \
+          $REGISTRIES
+ExecReload=/bin/kill -s HUP $MAINPID
+LimitNOFILE=1048576
+LimitNPROC=1048576
+LimitCORE=infinity
+TimeoutStartSec=0
+Restart=on-abnormal
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
 
 # Ubuntu
 sudo apt-get remove docker docker-engine docker.io containerd runc
@@ -145,10 +212,10 @@ ENV http_proxy http://proxy-chain.xxx.com:911/ 528
 ENV https_proxy http://proxy-chain.xxx.com:912/ 1
 {
     "authorization-plugins": [],
-    "data-root": "", 
+    "data-root": "",
      #Docker运行时使用的根路径,根路径下的内容稍后介绍，默认/var/lib/docker
     # Update the Docker daemon /etc/docker/daemon.json
-    "dns": ["192.168.210.2", "8.8.8.8"] 
+    "dns": ["192.168.210.2", "8.8.8.8"]
      #设定容器DNS的地址，在容器的 /etc/resolv.conf文件中可查看
     "dns-opts": [],
      #容器 /etc/resolv.conf 文件，其他设置
@@ -175,16 +242,16 @@ ENV https_proxy http://proxy-chain.xxx.com:912/ 1
     "max-concurrent-uploads": 5,
     "default-shm-size": "64M",
     "shutdown-timeout": 15,
-    "debug": true, 
+    "debug": true,
      #启用debug的模式，启用后，可以看到很多的启动信息。默认false
     "hosts": [],
     #设置容器hosts
     "log-level": "",
-    "tls": true,  
+    "tls": true,
      #默认 false, 启动TLS认证开关
-    "tlscacert": "", 
+    "tlscacert": "",
      #默认 ~/.docker/ca.pem，通过CA认证过的的certificate文件路径
-    "tlscert": "", 
+    "tlscert": "",
      #默认 ~/.docker/cert.pem ，TLS的certificate文件路径
     "tlskey": "",
      #默认~/.docker/key.pem，TLS的key文件路径
@@ -197,7 +264,7 @@ ENV https_proxy http://proxy-chain.xxx.com:912/ 1
     "tlskey": "",
     "swarm-default-advertise-addr": "",
     "api-cors-header": "",
-    "selinux-enabled": false, 
+    "selinux-enabled": false,
      #默认 false，启用selinux支持
     "userns-remap": "",
     "group": "",
@@ -268,18 +335,28 @@ sudo systemctl restart docker
   - Docker Engine：整个Docker的核心与基础，平时使用的docker命令，以及提供Docker核心功能的Docker守护进程（Docker Deamon）——包括管理Image、运行Contrainer等
   - Boot2Docker：Docker基于Linux内核特性，因此只能运行于Linux之上，为了能在Mac/Windows系统上运行，有了Boot2Docker。Boot2Docker会先启动一个VirtualBox虚拟机，然后在该虚拟机中运行一个Linux系统，再在Linux中运行Docker
 * 隔离
+  - docker本质就是宿主机的一个进程
   - 文件系统隔离 rootfs：每个容器都有自己的 root 文件系统
   - 进程隔离：每个容器都运行在自己的进程环境中
   - 网络隔离：容器间的虚拟网络接口和 IP 地址都是分开的
-  - 资源隔离和分组 namespace：使用 cgroups 将 CPU 和内存之类的资源独立分配给每个 Docker 容器
-    + namespace，每个容器都有单独的名字空间，运行在其中的应用都像是在独立的操作系统中运行一样。名字空间保证了容器之间彼此互不影响。
-      * pid namespace：不同用户的进程就是通过pid隔离开的，且不同的namespace中可以有相同pid。所有LXC进程在Docker中的父进程为Docker进程，同时允许嵌套，实现Docker in Docker。
-      * net namespace:网络的隔离则通过net namespace实现，每个net namspace有独立的network device， IP, IP routing table， /proc/net目录等。默认采用 veth 的方式，将容器中的虚拟网卡同 host 上的一 个Docker 网桥 docker0 连接在一起。
-      * ipc namespace:Container中进程交互采用linux的进程间交互方法， Interprocess Communicaiton - IPC， 包括信号量，消息队列，共享内存等。容器的进程间交互实际上还是 host 上具有相同 pid 名字空间中的进程间交互，因此需要在 IPC 资源申请时加入名字空间信息，每个 IPC 资源有一个唯一的 32 位 id
-      * mnt namespace:允许不同namespace的进程看到的文件结构不同，即隔离文件系统
-      * uts namesapce:UTS - Unix Time-Sharing System namespace允许每个Container拥有独立的hostname和domain name，使其在网络上可以独立的节点而非 主机上的一个进程
-      * user namespace：每个Container拥有不同user和group id，可以在容器内用容器内部的用户执行程序而非主机上的用户
-  - cgroups 资源限制
+  - 资源隔离和分组 namespace:每个容器都有单独的名字空间，运行在其中的应用都像是在独立的操作系统中运行一样。保证了容器之间彼此互不影响
+    + pid namespace：不同用户的进程就是通过pid隔离开的，且不同的namespace中可以有相同pid。所有LXC进程在Docker中的父进程为Docker进程，同时允许嵌套，实现Docker in Docker
+    + net namespace:网络的隔离则通过net namespace实现，每个net namspace有独立的network device， IP, IP routing table， /proc/net目录等。默认采用 veth 的方式，将容器中的虚拟网卡同 host 上的一 个Docker 网桥 docker0 连接在一起
+    + ipc namespace:Container中进程交互采用linux的进程间交互方法， Interprocess Communicaiton - IPC， 包括信号量，消息队列，共享内存等。容器的进程间交互实际上还是 host 上具有相同 pid 名字空间中的进程间交互，因此需要在 IPC 资源申请时加入名字空间信息，每个 IPC 资源有一个唯一的 32 位 id
+    + mnt namespace:允许不同namespace的进程看到的文件结构不同，即隔离文件系统
+    + uts namesapce:UTS(Unix Time-Sharing System) namespace允许每个Container拥有独立的hostname和domain name，使其在网络上可以独立的节点而非 主机上的一个进程
+    + user namespace：每个Container拥有不同 user 和group id，可以在容器内用容器内部的用户执行程序而非主机上的用户
+  - cgroups 资源限制:将 CPU 和内存之类的资源独立分配给每个 Docker 容器
+    + 功能
+      * 资源限制：可以对任务使用的资源总额进行限制
+      * 优先级分配：通过分配的cpu时间片数量以及磁盘IO带宽大小，实际上相当于控制了任务运行优先级
+      * 资源统计：可以统计系统的资源使用量，如cpu时长，内存用量等
+      * 任务控制：cgroup可以对任务执行挂起、恢复等操作
+    + 特点
+      * cgroup的api以一个伪文件系统的实现方式，用户的程序可以通过文件系统实现cgroup的组件管理
+      * cgroup的组件管理操作单元可以细粒度到线程级别，另外用户可以创建和销毁cgroup，从而实现资源载分配和再利用
+      * 所有资源管理的功能都以子系统的方式实现，接口统一子任务创建之初与其父任务处于同一个cgroup的控制组
+  - 通过写时复制技术（copy-on-write）实现了高效的文件操作（类似虚拟机的磁盘比如分配500g并不是实际占用物理磁盘500g）
 * 可配额/可度量
   - Linux的控制组 cgroups（Control Groups）实现了对资源配额和度量,容器资源统计和隔离。可以限制、记录、隔离进程组（process groups）所使用的物理资源（如：cpu,memory, io 等等）的机制
   - 确保各个容器可以公平地分享主机的内存、CPU、磁盘 IO 等资源；当然，更重要的是，控制组确保了当容器内的资源使用产生压力时不会连累主机系统
@@ -293,37 +370,47 @@ sudo systemctl restart docker
   - 借助linux的kernel namspace和cgroups实现
   - deamon的安全接口
   - linux本身提供的安全方案，apparmor，selinux
-* LXC和容器技术
 * 架构
-  - docker Client
-    + 通过命令行或者其他工具使用 [Docker API](https://docs.docker.com/reference/api/docker_remote_api) 与 Docker 的守护进程通信
+  - docker Client：通过命令行或者其他工具使用 [Docker API](https://docs.docker.com/reference/api/docker_remote_api) 与 Docker 的守护进程通信
+    + tcp://host:port
+    + unix:path_to_socket
+    + fd://socketfd
   - docker Server：一个物理或者虚拟的机器用于执行 Docker 守护进程和管理所有容器
-    + 目前需要 root 权限，因此其安全性十分关键
-      * 确保只有可信的用户才可以访问 Docker 服务。Docker 允许用户在主机和容器间共享文件夹，同时不需要限制容器的访问权限，这就容易让容器突破资源限制。
-      * Docker 的 REST API（客户端用来跟服务端通信）在 0.5.2 之后使用本地的 Unix 套接字机制替代了原先绑定在 127.0.0.1 上的 TCP 套接字，因为后者容易遭受跨站脚本攻击。现在用户使用 Unix 权限检查来加强套接字的访问安全
-    + Docker daemon 作为服务端接受来自客户的请求，并处理这些请求（创建、运行、分发容器）
-  - docker Registry 镜像存放的中央仓库
-  - 客户端和服务端既可以运行在一个机器上，也可通过 socket 或者RESTful API 来进行通信
+    + 确保只有可信的用户才可以访问 Docker 服务。Docker 允许用户在主机和容器间共享文件夹，同时不需要限制容器的访问权限，这就容易让容器突破资源限制
+    + Docker 的 REST API（客户端用来跟服务端通信）在 0.5.2 之后使用本地的 Unix 套接字机制替代了原先绑定在 127.0.0.1 上的 TCP 套接字，因为后者容易遭受跨站脚本攻击。现在用户使用 Unix 权限检查来加强套接字的访问安全
+    + image management
+      * distribution:负责与docker registry交互
+      * registry:负责docker registry有关的身份认证、镜像查找、镜像验证以及管理registry mirror等交互操作
+      * image 负责与镜像源数据有关的存储、查找，镜像层的索引、查找以及镜像tar包有关的导入、导出操作
+      * reference负责存储本地所有镜像的repository和tag名，并维护与镜像id之间的映射关系
+      * layer模块负责与镜像层和容器层源数据有关的增删改查，并负责将镜像层的增删改查映射到实际存储镜像层文件的graphdriver模块
+      * graghdriver是所有与容器镜像相关操作的执行者
+    + libcontainer是一项独立的容器管理包，networkdriver以及execdriver都是通过libcontainer来实现具体对容器进行的操作。当执行完运行容器的命令后，一个实际的Docker容器就处于运行状态，该容器拥有独立的文件系统，独立并且安全的运行环境等
+  - Docker daemon 作为服务端接受来自客户的请求，并处理这些请求（创建、运行、分发容器）
+    + Engine执行Docker内部的一系列工作，每一项工作都是以一个Job的形式的存在
+    + 当需要容器镜像时，则从Docker Registry中下载镜像，并通过镜像管理驱动graphdriver将下载镜像以Graph的形式存储
+    + 当需要为Docker创建网络环境时，通过网络管理驱动networkdriver创建并配置Docker容器网络环境
+    + 当需要限制Docker容器运行资源或执行用户指令等操作时，则通过execdriver来完成
 
 ![初始化](../_static/docker_init.jpg)
 ![Docker架构](../../_static/docker_structure.jpg "Docker架构")
 
 ## 镜像（Image）
 
-* 一个只读的模版，用来创建真正Docker容器。有点类似Java的类定义
+* 一个只读的模版，用来创建容器
 * 一个特殊的文件系统，提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）
 * 镜像是一种文件结构，Dockerfile中的命令都会在文件系统中创建一个新的层次结构，镜像则构建与这些文件系统之上
-* 一层层叠加，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。
-* 这些叠加的最后一层就是container，所以你在container里面改了文件，其实不会进image。
+* 一层层叠加，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层
+* 这些叠加的最后一层就是container，所以你在container里面改了文件，其实不会进image
 * 使用 Union FS 将这些不同的层结合到一个镜像中去,Union FS 有两个用途
   - 可以实现不借助 LVM、RAID 将多个 disk 挂到同一个目录下
   - 将一个只读的分支和一个可写的分支联合在一起，Live CD 正是基于此方法可以允许在镜像不变的基础上允许用户在其上进行一些写操作
-* `docker pull[选项] [Docker Registry地址]  <仓库名>:<标签名>`
-  - Docker 镜像仓库地址：地址的格式一般是 <域名/IP>[:端口号]。默认地址是 Docker Hub。
-  - 仓库名：两段式名称，即 <用户名>/<软件名>。对于 Docker Hub，如果不给出用户名，则默认为 library，也就是官方镜像。
-  - 标签名默认 latest
-* 虚悬镜像（dangling image）:既没有仓库名，也没有标签，均为<none>。这个镜像原本是有镜像名和标签的，随着官方镜像维护，发布了新版本后，重新 docker pull 时，旧的镜像名被转移到了新下载的镜像身上，而旧的镜像上的这个名称则被取消，从而成为了 <none>。
-  - 除了 docker pull 可能导致这种情况，docker build 也同样可以导致这种现象。由于新旧镜像同名，旧镜像名称被取消，从而出现仓库名、标签均为 <none> 的镜像。
+* `docker pull [选项] [Docker Registry地址]  <仓库名>:<标签名>`
+  - Docker 镜像仓库地址：地址的格式一般是 `<域名/IP>[:端口号]`,默认地址是 Docker Hub
+  - 仓库名：两段式名称，即 <用户名>/<软件名>。对于 Docker Hub，如果不给出用户名，则默认为 library，也就是官方镜像
+  - 标签名：默认 latest
+* 虚悬镜像（dangling image）:既没有仓库名，也没有标签，均为<none>。这个镜像原本是有镜像名和标签的，随着官方镜像维护，发布了新版本后，重新 docker pull 时，旧的镜像名被转移到了新下载的镜像身上，而旧的镜像上的这个名称则被取消，从而成为了 <none>
+  - 除了 docker pull 可能导致这种情况，docker build 也同样可以导致这种现象。由于新旧镜像同名，旧镜像名称被取消，从而出现仓库名、标签均为 <none> 的镜像
 * 中间层镜像:为了加速镜像构建、重复利用资源，Docker 会利用中间层镜像.`docker image ls` 列表中只会显示顶层镜像，如果希望显示包括中间层镜像在内的所有镜像的话，需要加 -a 参数
   - 看到很多无标签的镜像,这些无标签镜像不应该删除，否则会导致上层镜像因为依赖丢失而出错
 * 删除行为分为Untagged和Delete两类
@@ -377,16 +464,18 @@ docker tag image-id|image-name mynewtag # 会默认使用image-name:latest所指
 docker tag image-name:tag newname:newtag
 docker tag f2a91732366c myregistry:5000/username/repository:tag # 私有Registry打tag
 
-docker push username/repository:tag 
+docker push username/repository:tag
 docker push registry-host:5000/username/repository
 ```
 
 ## 容器(Container)
 
-* 容器是镜像创建的实例，类似对象Object,在启动的时候创建一层可写层作为最上层（因为镜像是只读的）.使用Copy-On-Write的方式完成对文件系统的修改， 这样对文件系统的修改将会作为一个新的层添加到既有层之上，而不是直接修改既有的层
+* 容器是镜像创建的实例,在启动的时候创建一层可写层作为最上层（因为镜像是只读的）.使用Copy-On-Write的方式完成对文件系统的修改， 这样对文件系统的修改将会作为一个新的层添加到既有层之上，而不是直接修改既有的层
+* 容器时在linux上本机运行，并与其他容器共享主机的内核，它运行的一个独立的进程，不占用其他任何可执行文件的内存，非常轻量
+  - 虚拟机运行的是一个完成的操作系统，通过虚拟机管理程序对主机资源进行虚拟访问，相比之下需要的资源更多
 * 连接：会创建一个父子关系，其中父容器可以看到子容器的信息
 * run 启动一个容器时，在后台 Docker 为容器创建了一个独立的名字空间和控制组集合
-  - 名字空间提供了最基础也是最直接的隔离，在容器中运行的进程不会被运行在主机上的进程和其它容器发现和作用。
+  - 名字空间提供了最基础也是最直接的隔离，在容器中运行的进程不会被运行在主机上的进程和其它容器发现和作用
   - 每个容器都有自己独有的网络栈，意味着它们不能访问其他容器的 sockets 或接口
   - 如果主机系统上做了相应的设置，容器可以像跟主机交互一样的和其他容器交互
   - 当指定公共端口或使用 links 来连接 2 个容器时，容器就可以相互通信了（可以根据配置来限制通信的策略）
@@ -399,8 +488,8 @@ docker push registry-host:5000/username/repository
   - 执行用户指定的应用程序
   - 执行完毕后容器被终止
 * 启动：基于镜像新建一个容器并启动或者将在终止状态（stopped）的容器重新启动
-  - --name标识来命名容器 
-  - -P:是容器内部端口随机映射到主机端口 
+  - --name标识来命名容器
+  - -P:是容器内部端口随机映射到主机端口
   - -p:是容器内部端口绑定到指定的主机端口
   - –name:给容器定义一个名称，名称是唯一的。如果已经命名了一个叫 web 的容器，当你要再次使用 web 这个名称的时候，需要先用docker rm 来删除之前创建的同名容器
   - -i:允许对容器内的标准输入 (STDIN) 进行交互
@@ -432,11 +521,12 @@ docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py
 # 查看端口
 docker port adoring_stonebraker 5002
 
-# 容器
+# 查看
 docker [container] ps # 列出正在运行的容器(containers)
 docker ps -a # 列出所有的容器
 docker-compose ps # 查看当前项目容器
 docker ps -l   # 查看最后一次创建的容器
+docker container ls --format "table\t\t"
 
 # 创建
 docker create ubuntu:14.04 #  创建容器
@@ -502,35 +592,35 @@ docker container prune  # 删除所有停止掉的container
 ## 网络 Network
 
 * libnetwork 是 docker 容器网络库，最核心的内容是其定义的 Container Network Model (CNM)，这个模型对容器网络进行了抽象，由以下三类组件组成：
-  - Sandbox 是容器的网络栈，包含容器的 interface、路由表和 DNS 设置。 Linux Network Namespace 是 Sandbox 的标准实现。Sandbox 可以包含来自不同 Network 的 Endpoint。也就是说Sandbox将一个容器与另一个容器通过Namespace进行隔离，一个容器包含一个sandbox，每一个sandbox可以有多个Endpoint隶属于不同的网络。
-  - Endpoint 的作用是将 Sandbox 接入 Network。Endpoint 的典型实现是 veth pair。一个 Endpoint 只能属于一个网络，也只能属于一个 Sandbox。
+  - Sandbox 是容器的网络栈，包含容器的 interface、路由表和 DNS 设置。 Linux Network Namespace 是 Sandbox 的标准实现。Sandbox 可以包含来自不同 Network 的 Endpoint。也就是说Sandbox将一个容器与另一个容器通过Namespace进行隔离，一个容器包含一个sandbox，每一个sandbox可以有多个Endpoint隶属于不同的网络
+  - Endpoint 的作用是将 Sandbox 接入 Network。Endpoint 的典型实现是 veth pair。一个 Endpoint 只能属于一个网络，也只能属于一个 Sandbox
   - Network 包含一组 Endpoint，同一 Network 的 Endpoint 可以直接通信。Network 的实现可以是 Linux Bridge、VLAN 等
 * 网络模型及工作原理
-  - 要实现网络通信，机器需要至少一个网络接口（物理接口或虚拟接口）来收发数据包；此外，如果不同子网之间要进行通信，需要路由机制。
-  - Docker 中的网络接口默认都是虚拟的接口。虚拟接口的优势之一是转发效率较高。 Linux 通过在内核中进行数据复制来实现虚拟接口之间的数据转发，发送接口的发送缓存中的数据包被直接复制到接收接口的接收缓存中。对于本地系统和容器内系统看来就像是一个正常的以太网卡，只是它不需要真正同外部网络设备通信，速度要快很多。
+  - 要实现网络通信，机器需要至少一个网络接口（物理接口或虚拟接口）来收发数据包；此外，如果不同子网之间要进行通信，需要路由机制
+  - Docker 中的网络接口默认都是虚拟的接口。虚拟接口的优势之一是转发效率较高。 Linux 通过在内核中进行数据复制来实现虚拟接口之间的数据转发，发送接口的发送缓存中的数据包被直接复制到接收接口的接收缓存中。对于本地系统和容器内系统看来就像是一个正常的以太网卡，只是它不需要真正同外部网络设备通信，速度要快很多
   - 访问外部网络，需要本地系统的转发支持
   - 默认情况下，所有容器都会被连接到 docker0 网桥上
     + 在内核层连通了其他的物理或虚拟网卡，这就将所有容器和本地主机都放到同一个物理网络
     + 主机和容器之间可以通过网桥相互通信，它还给出了 MTU（接口允许接收的最大传输单元），通常是 1500 Bytes
   - 通过本地主机的网桥接口相互通信，就像物理机器通过物理交换机通信一样
   - 创建
-    + 创建一对虚拟接口，分别放到本地主机和新容器中；
-    + 本地主机一端桥接到默认的 docker0 或指定网桥上，并具有一个唯一的名字，如 veth65f9；
-    + 容器一端放到新容器中，并修改名字作为 eth0，这个接口只在容器的名字空间可见；
-    + 从网桥可用地址段中获取一个空闲地址分配给容器的 eth0，并配置默认路由到桥接网卡 veth65f9。
+    + 创建一对虚拟接口，分别放到本地主机和新容器中
+    + 本地主机一端桥接到默认的 docker0 或指定网桥上，并具有一个唯一的名字，如 veth65f9
+    + 容器一端放到新容器中，并修改名字作为 eth0，这个接口只在容器的名字空间可；
+    + 从网桥可用地址段中获取一个空闲地址分配给容器的 eth0，并配置默认路由到桥接网卡 veth65f9
   - docker run 的时候通过 --net 参数来指定容器的网络配置，有4个可选值
     + --net=bridge 这个是默认值，连接到默认的网桥,独立container之间的通信
-    + --net=host 告诉 Docker 不要将容器网络放到隔离的名字空间中，即不要容器化容器内的网络。直接使用宿主机的网络，端口也使用宿主机的,容器进程可以跟主机其它 root 进程一样可以打开低范围的端口，可以访问本地网络服务比如 D-bus，还可以让容器做一些影响整个主机系统的事情，比如重启主机。因此使用这个选项的时候要非常小心。如果进一步的使用 --privileged=true，容器会被允许直接配置主机的网络堆栈。
-    + --net=container:NAME_or_ID 让 Docker 将新建容器的进程放到一个已存在容器的网络栈中，新容器进程有自己的文件系统、进程列表和资源限制，但会和已存在的容器共享 IP 地址和端口等网络资源，两者进程可以直接通过 lo 环回接口通信。
+    + --net=host 告诉 Docker 不要将容器网络放到隔离的名字空间中，即不要容器化容器内的网络。直接使用宿主机的网络，端口也使用宿主机的,容器进程可以跟主机其它 root 进程一样可以打开低范围的端口，可以访问本地网络服务比如 D-bus，还可以让容器做一些影响整个主机系统的事情，比如重启主机。因此使用这个选项的时候要非常小心。如果进一步的使用 --privileged=true，容器会被允许直接配置主机的网络堆栈
+    + --net=container:NAME_or_ID 让 Docker 将新建容器的进程放到一个已存在容器的网络栈中，新容器进程有自己的文件系统、进程列表和资源限制，但会和已存在的容器共享 IP 地址和端口等网络资源，两者进程可以直接通过 lo 环回接口通信
     + --net=none 禁用网络 让 Docker 将新容器放到隔离的网络栈中，但是不进行网络配置。之后，用户可以自己进行配置
     + overlay：当有多个docker主机时，跨主机的container通信
     + macvlan：每个container都有一个虚拟的MAC地址
 * 默认情况下，分别会建立一个bridge、一个host和一个none的网络.都是使用的这个bridge的网络，可以访问外网和其他container的（需要通过IP地址）
   - bridge(默认)的网络是有很多限制的，可以自行创建bridge类型的网络
     + Docker在安装时会在宿主机上创建名为docker0的网桥，所谓网桥相当于一个虚拟交换机,容器都会挂到docker0上
-    + 容器和docker0之间通过veth进行连接，veth相当于一根虚拟网线，连接容器和虚拟交换机，这样就使得docker0与容器连通了。
+    + 容器和docker0之间通过veth进行连接，veth相当于一根虚拟网线，连接容器和虚拟交换机，这样就使得docker0与容器连通了
     + 默认的bridge网络与自建bridge网络有以下区别：
-      * 端口不会自行发布，必须使用-p参数才能为外界访问，而使用自建的bridge网络时，container的端口可直接被相同网络下的其他container访问。
+      * 端口不会自行发布，必须使用-p参数才能为外界访问，而使用自建的bridge网络时，container的端口可直接被相同网络下的其他container访问
       * container之间的如果需要通过名字访问，需要--link参数，而如果使用自建的bridge网络，container之间可以通过名字互访
   - none:挂在这个网络下的容器除了lo，没有其他任何网卡。容器run时，可以通过添加--network=none参数来指定该容器使用none网络
   - host:共享Docker宿主机的网络栈，即容器的网络配置与host宿主机完全一样。可以通过添加--network=host参数来指定该容器使用host网络
@@ -1404,7 +1494,7 @@ docker-compose kill -s SIGINT
 docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"
 ```
 
-## [docker/machine](https://github.com/docker/machine) 
+## [docker/machine](https://github.com/docker/machine)
 
 Machine management for a container-centric world 创建运行Docker的宿主机的，比如AWS、Azure上的虚拟机，也可以用来在本地创建VirtualBox等虚拟机.直接把Boot2Docker的功能也取代了，于是Boot2Docker成为了历史
 
@@ -1595,8 +1685,8 @@ kubectl-debug <POD_NAME>
     + [shipyard](https://shipyard-project.com/):Built on Docker Swarm, Shipyard gives you the ability to manage Docker resources including containers, images, private registries and more.
   - https://www.portainer.io/
   - [docker / kitematic](https://github.com/docker/kitematic) Visual Docker Container Management on Mac & Windows https://kitematic.com/
-  - https://dockstation.io/ 
-  - Rancher is an open source software platform that enables organizations to run and manage Docker and Kubernetes in production. 
+  - https://dockstation.io/
+  - Rancher is an open source software platform that enables organizations to run and manage Docker and Kubernetes in production.
 
 ## 工具
 

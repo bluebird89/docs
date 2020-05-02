@@ -14,7 +14,7 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
 
 ## 原理
 
-* 不要用操作dom的思维去用Vue，用操作数据的思维去用吧
+* 不要用操作dom的思维去用Vue，用操作数据的思维去用
 
 ### 构造器
 
@@ -109,8 +109,8 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 
 ### webstrom设置
 
-- 添加vuejs插件
-- File Types配置 将.vue格式的文件注册为HTML文件类型
+* 添加vuejs插件
+* File Types配置 将.vue格式的文件注册为HTML文件类型
 
 ### 添加插件
 
@@ -124,6 +124,25 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 ## 组件
 
 组件系统:可扩展HTML元素，封装可重用代码。自定义的元素
+
+## 跨域
+
+```json
+// config/index.js的dev中添加配置项
+proxyTable
+
+dev: {
+  proxyTable: {
+    '/api':{
+      target:'www.baidu.com',
+      changeOrigin:true,
+      pathRewrite:{
+        '^/api':'/'
+      }
+    }
+  }
+}
+```
 
 ## 教程
 
