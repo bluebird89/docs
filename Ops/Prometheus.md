@@ -2,13 +2,13 @@
 
 The Prometheus monitoring system and time series database. https://prometheus.io/
 
-* SoundCloud开源的监控告警系统，使用Golang开发。2012年开始编码，2015年在Github上开源，2016年加入CNCF成为继K8s之后第二名成员。
-* 多维数据模型，时序数据由Metric和多个Label组成。
-* PromQL灵活的查询语法。
-* 无依赖存储，支持本地和远程存储。
-* 通过HTTP协议采用PULL的方式拉取数据。
-* 可以采用服务发现或者静态配置方式，来发现目标服务。
-* 支持多种统计数据模型，UI优化，Grafana也支持Prometheus。
+* SoundCloud开源的监控告警系统，使用Golang开发。2012年开始编码，2015年在Github上开源，2016年加入CNCF成为继K8s之后第二名成员
+* 多维数据模型，时序数据由Metric和多个Label组成
+* PromQL灵活的查询语法
+* 无依赖存储，支持本地和远程存储
+* 通过HTTP协议采用PULL的方式拉取数据
+* 可以采用服务发现或者静态配置方式，来发现目标服务
+* 支持多种统计数据模型，UI优化，Grafana也支持Prometheus
 
 ## 安装
 
@@ -698,7 +698,7 @@ spec:
 
 ## 工具
 
-* [grafana/loki](https://github.com/grafana/loki):Like Prometheus, but for logs.
+* [grafana/loki](https://github.com/grafana/loki):Like Prometheus, but for logs
 * [improbable-eng/thanos](https://github.com/improbable-eng/thanos):Highly available Prometheus setup with long term storage capabilities.
 * [coreos/prometheus-operator](https://github.com/coreos/prometheus-operator):Prometheus Operator creates/configures/manages Prometheus clusters atop Kubernetes
 * [ cortexproject / cortex ](https://github.com/cortexproject/cortex):A horizontally scalable, highly available, multi-tenant, long term Prometheus. https://cortexmetrics.io/

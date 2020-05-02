@@ -8,13 +8,13 @@
     - 内存消耗低：10000个keep-alive连接模式下的非活动连接仅消耗2.5M内存；
     - 非阻塞、高并发连接：官方测试能够支撑5万并发连接，在实际生产环境中跑到2～3万并发连接数
     - 事件驱动：通信机制采用 epoll 模型，支持更大的并发连接
-        - 支持event-driven事件驱动模型, aio异步驱动机制, mmap内存映射；
+        - 支持event-driven事件驱动模型, aio异步驱动机制, mmap内存映射
         - 新的epoll（Linux 2.6内核）和kqueue（freebsd）网络I/O模型
     - 节省带宽：支持 GZIP 压缩，可以添加浏览器本地缓存的 Header 头
 * 高可靠性：基于master/worker模式，一个 master 进程，生成一个或多个 worker 进程
     - 功能：如果 Nginx 代理的后端的某台 Web 服务器宕机了，不会影响前端访问
     - 用于反向代理，宕机的概率微乎其微
-* 热部署(平滑迁移)：不停机更新配置文件、更换日志、更新服务器程序版本；
+* 热部署(平滑迁移)：不停机更新配置文件、更换日志、更新服务器程序版本
 * 可扩展性好：高度模块化（非DSO机制）
 * 跨平台：Nginx 可以在大多数 Unix like OS编译运行，而且也有 Windows 的移植版本
 * 配置异常简单：非常容易上手
@@ -203,6 +203,7 @@ wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar
 --with-debug \
 --with-cc-opt='-g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2' \
 --with-ld-opt='-Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now'
+--add-module= "rtmp包的路径"
 
   nginx path prefix: "/usr/share/nginx"
   nginx binary file: "/usr/sbin/nginx"
@@ -1635,7 +1636,7 @@ for(i = random() % n; i != i || falg; i = (i + 1) % n) {
         best = &s[i];
     }
 }
- 
+
 best->cw -= tw;
 return best;
 ```
@@ -1643,7 +1644,7 @@ return best;
 
 ## TLS
 
-* The SSL key is kept secret on the server. It is used to encrypt content sent to clients. 
+* The SSL key is kept secret on the server. It is used to encrypt content sent to clients.
 * The SSL certificate is publicly shared with anyone requesting the content. It can be used to decrypt the content signed by the associated SSL key.
 * create a strong Diffie-Hellman group, which is used in negotiating Perfect Forward Secrecy with clients.
 
@@ -2074,7 +2075,7 @@ dig TXT _acme-challenge.example.com @9.9.9.9 +short
 acme.sh --renew -d example.com -d '*.example.com' # 生效后给证书续
 
 # 手动签发
-acme.sh --issue -d www.bluebird89.online -w /usr/share/nginx/www --nginx  
+acme.sh --issue -d www.bluebird89.online -w /usr/share/nginx/www --nginx
 
 mkdir -p /etc/nginx/ssl
 mkdir -p /etc/nginx/ssl/www.bluebird89.online
@@ -2106,7 +2107,7 @@ server{
 
     ssl_certificate /etc/nginx/ssl/www.bluebird89.online/www.bluebird89.online.cer;
     ssl_certificate_key /etc/nginx/ssl/www.bluebird89.online/www.bluebird89.online.key;
-    
+
     ssl_dhparam /etc/nginx/ssl/dhparam.pem;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
     ssl_prefer_server_ciphers on;
@@ -2128,7 +2129,7 @@ server{
 #   ssl_session_tickets        off;
 
 # 开启 HSTS Preload 支持
-    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"; 
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
     add_header X-Frame-Options SAMEORIGIN;
     add_header X-Content-Type-Options nosniff;
     add_header X-XSS-Protection "1; mode=block";
@@ -2170,7 +2171,7 @@ server {
   #OCSP Stapling 开启。OCSP是用于在线查询证书吊销情况的服务，使用OCSP Stapling能将证书有效状态的信息缓存到服务器，提高 TLS 握手速度
   ssl_stapling on;
   #OCSP Stapling 验证开启
-  ssl_stapling_verify on; 
+  ssl_stapling_verify on;
 
   #error_page 404 /404.html;
   #error_page 502 /502.html;

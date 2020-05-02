@@ -2,9 +2,12 @@
 
 Mirror of git://source.ffmpeg.org/ffmpeg.git  Fast Forward Moving Pictures Experts Group https://ffmpeg.org
 
+* 实现了对标准流媒体传输是一个为流媒体提供解决方案的跨平台的C++开源项目，实现了对标准流媒体传输协议如RTP/RTCP、RTSP、SIP等的支持
+* Live555实现了对多种音视频编码格式的音视频数据的流化、接收和处理等支持，包括MPEG、H.263+、DV、JPEG视频和多种音频编码
+
 ## 概念
 
-* 视频文件本身其实是一个容器（container），里面包括了视频和音频，也可能有字幕等其他内容
+* 视频文件本身是一个容器（container），里面包括了视频和音频，也可能有字幕等其他内容
 * 格式：`ffmpeg -formats`
   - MP4
   - MKV
@@ -31,6 +34,10 @@ Mirror of git://source.ffmpeg.org/ffmpeg.git  Fast Forward Moving Pictures Exper
   - 音频
     + libfdk-aac
     + aac
+* 解码(Decode)
+  - 音频和视频都是分开进行压缩的，因为音频和视频的压缩算法不一样，解码也不一样，所以需要对音频和视频分别进行解码
+  - 为了传输过程的方便，将压缩过的音频和视频捆绑在一起进行传输
+  - 解复用(Demux):绑在一起的音频和视频流分开来 Video Streams and Audio Streams
 
 ## use
 
@@ -63,7 +70,6 @@ Mirror of git://source.ffmpeg.org/ffmpeg.git  Fast Forward Moving Pictures Exper
 | file   |   muxer   | packets      |   encoder
 |________|           |______________|
 ```
-
 
 ## tool
 
@@ -187,11 +193,73 @@ ffmpeg \
 output.mp4
 ```
 
+## 推流
+
+* 把采集阶段封包好的内容传输到服务器的过程。其实就是将现场的视频信号传到网络的过程.把本地音视频数据通过网络上传到云端/后台服务器，所谓“采集阶段封包好”
+* 协议
+  - RTMP （Real Time Messaging Protocol实时消息传输协议）
+    + Adobe公司开发的一个基于TCP的应用层协议
+    + 在TCP通道上一般传输的是flv 格式流。请注意，RTMP是网络传输协议，而flv则是视频的封装格式
+    + 默认使用端口1935
+    + RTMPE在RTMP的基础上增加了加密功能
+    + RTMPT封装在HTTP请求之上，可穿透防火墙
+    + RTMPS类似RTMPT，增加了TLS/SSL的安全功能
+    + RTMFP使用UDP进行传输的RTMP
+  - HLS
+  - webRTC
+  - HTTP-FLV
+
+```sh
+# 查看电脑设备
+ffmpeg -list_devices true -f dshow -i dummy
+
+# 测试摄像头是否可用
+ffplay -f dshow -i video="USB2.0 PC CAMERA"
+ffplay -f vfwcap -i 0
+
+# 查看摄像头和麦克风信息
+ffmpeg -list_options true -f dshow -i video="USB2.0 PC CAMERA"
+# 查询麦克风信息
+ffmpeg -list_options true -f dshow -i audio="麦克风 (2- USB2.0 MIC)"
+
+# 本地视频推流
+ffmpeg -i ${input_video} -f flv rtmp://${server}/live/${streamName}
+ffmpeg.exe -re -i demo.wmv -f flv rtmp://127.0.0.1:1935/live/123
+# 摄像头推流
+ffmpeg -f dshow -i video="USB2.0 PC CAMERA" -vcodec libx264 -preset:v ultrafast -tune:v zerolatency -f flv rtmp://127.0.0.1:1935/live/123
+# 麦克风推流
+ffmpeg -f dshow -i audio="麦克风 (2- USB2.0 MIC)" -vcodec libx264 -preset:v ultrafast -tune:v zerolatency -f flv rtmp://127.0.0.1:1935/live/123
+
+# 只有音频
+ffmpeg -i ${input_video} -vcodec copy -an -f flv rtmp://${server}/live/${streamName} #  -vcodec：指定视频解码器 -acodec：指定音频解码器 copy表示不作解码  an 代表acodec none 去掉音频
+
+# 摄像头&麦克风推流
+ffmpeg -f dshow -i video="USB2.0 PC CAMERA" -f dshow -i audio="麦克风 (2- USB2.0 MIC)" -vcodec libx264 -preset:v ultrafast -tune:v zerolatency -f flv rtmp://127.0.0.1:1935/live/123
+ffmpeg -f dshow -i video="USB2.0 PC CAMERA":audio="麦克风 (2- USB2.0 MIC)" -vcodec libx264 -r 25 -preset:v ultrafast -tune:v zerolatency -f flv rtmp://127.0.0.1:1935/live/123
+```
+
+## 架设服务
+
+* 安装nginx-rtmp模块
+* 配置
+* VLC 播放 `rtmp://192.168.166.172:1935/rtmplive/`
+
+```
+rtmp {
+  server {
+    listen 1935;
+    application rtmplive {
+      live on;
+      record off;
+    }
+
+}
+```
+
 ## Tool
 
 * [PHP-FFMpeg/PHP-FFMpeg](https://github.com/PHP-FFmpeg/PHP-FFmpeg/): An object oriented PHP driver for FFMpeg binary
-    - API
-    - test
+* [ossrs / srs](https://github.com/ossrs/srs):SRS is a RTMP/HLS/WebRTC/SRT/GB28181 streaming cluster, high efficiency, stable and simple. https://ossrs.net
 
 ## reference
 
