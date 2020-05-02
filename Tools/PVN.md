@@ -408,6 +408,9 @@ iptables-restore < /etc/iptables-rules # 手动加载
 * [Alvin9999/new-pac](https://github.com/Alvin9999/new-pac)
 * BT sync
 * [ShadowsocksR-Live/shadowsocksr-native](https://github.com/ShadowsocksR-Live/shadowsocksr-native):从容翻越党国敏感日 ShadowsocksR (SSR) native implementation for all platforms powered by libuv, GFW terminator
+* [ Dreamacro / clash ](https://github.com/Dreamacro/clash):A rule-based tunnel in Go.
+  - 配置　｀/home/当前用户ID/.config/clash/config.yml`
+  - 访问：http://clash.razord.top/#/settings` 端口和口令按yml文件中的external-controller内容输入即可
 * 客户端
   - freevpn
   - [Potatso lite](https://itunes.apple.com/us/app/potatso-lite/id1239860606)
@@ -436,6 +439,18 @@ iptables-restore < /etc/iptables-rules # 手动加载
 * [Dreamacro / clash](https://github.com/Dreamacro/clash):A rule-based tunnel in Go.
   - `go get -u -v github.com/Dreamacro/clash`
 * [](https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt)
+
+```
+#  /usr/share/applications/clash.desktop
+[Desktop Entry]
+Version=0.10.2
+Name=Clash
+Comment=A rule-based tunnel in Go
+Exec=/full/path/to/clash-linux
+Icon=/full/path/to/clash-logo.png
+Terminal=false
+Type=Application
+```
 
 ## 参考
 

@@ -3,6 +3,7 @@
 The Prometheus monitoring system and time series database. https://prometheus.io/
 
 * SoundCloud开源的监控告警系统，使用Golang开发。2012年开始编码，2015年在Github上开源，2016年加入CNCF成为继K8s之后第二名成员
+* 一套开源的监控&报警&时间序列数据库的组合
 * 多维数据模型，时序数据由Metric和多个Label组成
 * PromQL灵活的查询语法
 * 无依赖存储，支持本地和远程存储
@@ -696,6 +697,97 @@ spec:
           servicePort: 9090
 ```
 
+## exporter
+
+* 服务状态：Status->Targets
+
+```sh
+wget https://github.com/prometheus/node_exporter/releases/download/v0.14.0/node_exporter-0.14.0.linux-amd64.tar.gz
+tar xvf node_exporter-0.14.0.linux-amd64.tar.gz /usr/local/
+nohup /usr/local/node_exporter-0.14.0.linux-amd64/node_exporter &
+
+wget https://github.com/prometheus/mysqld_exporter/releases/download/v0.10.0/mysqld_exporter-0.10.0.linux-amd64.tar.gz
+tar xvf mysqld_exporter-0.10.0.linux-amd64.tar.gz /usr/local/
+
+GRANT REPLICATION CLIENT,PROCESS ON *.* TO 'mysql_monitor'@'localhost' identified by 'mysql_monitor';
+GRANT SELECT ON *.* TO 'mysql_monitor'@'localhost';
+
+# /usr/local/mysqld_exporter-0.10.0.linux-amd64/.my.cnf
+[client]
+user=mysql_monitor
+password=mysql_monitor
+
+nohup /usr/local/mysqld_exporter-0.10.0.linux-amd64/mysqld_exporter --config.my-cnf="/usr/local/mysqld_exporter-0.10.0.linux-amd64/.my.cnf" &
+./mysqld_exporter --config.my-cnf=/usr/local/prometheus-2.17.2.linux-amd64/exporters/mysqld_exporter-0.12.1.linux-amd64/.my.conf 
+
+# /etc/systemd/system/mysql_exporter.service
+[Unit]
+Description=mysql Monitoring System
+Documentation=mysql Monitoring System
+
+[Service]
+ExecStart=/opt/mysqld_exporter-0.10.0.linux-amd64/mysqld_exporter \
+         -collect.info_schema.processlist \
+         -collect.info_schema.innodb_tablespaces \
+         -collect.info_schema.innodb_metrics  \
+         -collect.perf_schema.tableiowaits \
+         -collect.perf_schema.indexiowaits \
+         -collect.perf_schema.tablelocks \
+         -collect.engine_innodb_status \
+         -collect.perf_schema.file_events \
+         -collect.info_schema.processlist \
+         -collect.binlog_size \
+         -collect.info_schema.clientstats \
+         -collect.perf_schema.eventswaits \
+         -config.my-cnf=/opt/mysqld_exporter-0.10.0.linux-amd64/.my.cnf
+
+[Install]
+WantedBy=multi-user.target
+```
+
+## Grafana
+
+* `http://monitor_host:3000` 默认帐号/密码为admin/admin
+* Configuration->Data Resources
+* 导入[Dashboards](https://grafana.com/grafana/dashboards)
+  - [System_Overview](https://github.com/percona/grafana-dashboards/blob/master/dashboards/System_Overview.json)
+  - [MySQL_Overview](https://github.com/percona/grafana-dashboards/blob/master/dashboards/MySQL_Overview.json)
+  - `https://grafana.com/dashboards/928` ID 复制 load
+* metric
+  - $__timeGroup是聚合函数 以10分钟一组，group by求和
+  - $__timeFilter(inserttime)是时间区间函数，右上角时间选择筛选的是inserttime
+* 变量
+
+```sh
+wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-5.0.1-1.x86_64.rpm 
+sudo yum localinstall grafana-5.0.1-1.x86_64.rpm -y
+
+brew update 
+brew install grafana
+
+wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
+apt-cache policy grafana
+sudo apt install grafana
+sudo systemctl status grafana-server
+
+select $__timeGroup(inserttime, '10m') as time_sec, 
+      count(1) as call_num, 
+      sum(status=0) as success_num
+from credit_log where $__timeFilter(inserttime)
+group by time_sec
+```
+
+## 插件
+
+* `/var/lib/grafana/plugins/` `/usr/local/var/lib/grafana/plugins`
+
+```SH
+grafana-cli plugins install percona-percona-app
+
+
+```
+
 ## 工具
 
 * [grafana/loki](https://github.com/grafana/loki):Like Prometheus, but for logs
@@ -707,3 +799,4 @@ spec:
 
 * [yunlzheng/prometheus-book](https://github.com/yunlzheng/prometheus-book):Prometheus操作指南  <https://yunlzheng.gitbook.io/prometheus-book/>
 * [Prometheus 中文文档](https://fuckcloudnative.io/prometheus/)
+* [Prometheus 入门与实践](https://www.ibm.com/developerworks/cn/cloud/library/cl-lo-prometheus-getting-started-and-practice/index.html)
