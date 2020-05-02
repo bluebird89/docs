@@ -2651,6 +2651,60 @@ mysqlslap –user=root –password=111111 –concurrency=50 –number-int-cols=5
 mysqlslap –user=root –password=111111 –concurrency=50 –create-schema=employees –query="SELECT _FROM dept_emp;" # 使用自己的测试库和测试语句 `echo "SELECT_ FROM employees;SELECT _FROM titles;SELECT_ FROM dept_emp;SELECT _FROM dept_manager;SELECT_ FROM departments;" > ~/select_query.sql`
 ```
 
+## 监控平台
+
+* 安装 
+    - 安装exporter
+    - 配置prometheusgranafa
+* 指标
+    - 主从复制线程监控： show slave status\G  Slave_IO_Running、Slave_SQL_Running  mysql_slave_status_slave_sql_running{channel_name="",connection_name="",master_host="172.16.1.1",master_uuid=""} 1
+    - 主从复制落后时间： show slave status 里面还有一个关键的参数Seconds_Behind_Master：表示slave上SQL thread与IO thread之间的延迟，表示本地relaylog中未被执行完的那部分的差值 mysql_slave_status_seconds_behind_master
+    - 吞吐量：MySQL 有一个名为 Questions 的内部计数器，客户端每发送一个查询语句，其值就会加一。由 Questions 指标带来的以客户端为中心的视角常常比相关的Queries 计数器更容易解释 SHOW GLOBAL STATUS LIKE "Questions"; mysql_global_status_questions
+
+```sh
+wget https://github.com/prometheus/mysqld_exporter/releases/download/v0.10.0/mysqld_exporter-0.10.0.linux-amd64.tar.gz
+tar -xf mysqld_exporter-0.10.0.linux-amd64.tar.gz
+
+GRANT SELECT, PROCESS, SUPER, REPLICATION CLIENT, RELOAD ON *.* TO 'exporter'@'%' IDENTIFIED BY 'localhost';
+flush privileges;
+
+# /opt/mysqld_exporter-0.10.0.linux-amd64/.my.cnf
+[client]
+user=exporter
+password=123456
+
+# /etc/systemd/system/mysql_exporter.service
+[Unit]
+Description=mysql Monitoring System
+Documentation=mysql Monitoring System
+
+[Service]
+ExecStart=/opt/mysqld_exporter-0.10.0.linux-amd64/mysqld_exporter \
+         -collect.info_schema.processlist \
+         -collect.info_schema.innodb_tablespaces \
+         -collect.info_schema.innodb_metrics  \
+         -collect.perf_schema.tableiowaits \
+         -collect.perf_schema.indexiowaits \
+         -collect.perf_schema.tablelocks \
+         -collect.engine_innodb_status \
+         -collect.perf_schema.file_events \
+         -collect.info_schema.processlist \
+         -collect.binlog_size \
+         -collect.info_schema.clientstats \
+         -collect.perf_schema.eventswaits \
+         -config.my-cnf=/opt/mysqld_exporter-0.10.0.linux-amd64/.my.cnf
+
+[Install]
+WantedBy=multi-user.target
+
+# prometheus server
+  - job_name: 'mysql'
+    static_configs:
+     - targets: ['192.168.1.11:9104','192.168.1.12:9104']
+# http://192.168.1.12:9104/metrics
+```
+
+
 ## 维护
 
 * 通常地，单表物理大小不超过10GB，单表行数不超过1亿条，行平均长度不超过8KB，如果机器性能足够，这些数据量MySQL是完全能处理的过来的，不用担心性能问题，这么建议主要是考虑ONLINE DDL的代价较高；
