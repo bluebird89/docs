@@ -271,7 +271,6 @@ output {
 ## 工具
 
 * [deviantony/docker-elk](https://github.com/deviantony/docker-elk):The ELK stack powered by Docker and Compose.
-* [http://cwiki.apachecn.org/display/Kibana](http://cwiki.apachecn.org/display/Kibana)
 
 ```sh
 # 搭建
@@ -288,7 +287,6 @@ elasticsearch.url: #   只需要修改URL为ElasticSearch的IP地址
 # 可以用Kibana查看 地址 : 192.168.88.250:5601
 # create灰色的 说明没有创建索引  打开你的nginx服务器 刷新几下 采集一下数据 然后  选择 左上角的 Discover
 # 数据可能会出不来 那是因为 Kibana 是根据时间来匹配的 并且 因为 Logstash的采集时间使用的UTC  永远早8个小时 所以设置时间 要设置晚8个小时以后
-
 
 echo "kibanaadmin:`openssl passwd -apr1`" | sudo tee -a /etc/nginx/htpasswd.users
 kibanaadmin:$apr1$M2kx248q$TRbbkejn8bxFsdztudF6Z0

@@ -71,8 +71,8 @@ sudo apt-get install oracle-java8-installer
 javac -version
 
 sudo add-apt-repository ppa:linuxuprising/java
-sudo apt-get install oracle-java11-installer
-sudo apt-get install oracle-java11-set-default
+sudo apt install oracle-java14-installer
+sudo apt-get install oracle-java14-set-default
 
 ## JAVA_HOME Environment Variable配置 etc/environment # 添加 JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 source /etc/environment

@@ -1068,6 +1068,7 @@ halt｜reboot｜poweroff
     + -S 搜索已安装的软件包
     + -L 显示已安装软件包的目录信息
 * 从二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到/opt，建立软连接/usr/local/bin/
+* AppImage
 
 ```sh
 sudo apt-get install cowsay
@@ -1098,6 +1099,9 @@ sudo apt-get autoremove
 sudo apt-get clean
 
 ./configure -h # 完全自定义 参数
+
+sudo chmod +x ./Qv2ray-refs.tags.v1.99.6-linux.AppImage
+sudo ./Qv2ray-refs.tags.v1.99.6-linux.AppImage
 ```
 
 ## 指令
