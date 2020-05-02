@@ -279,8 +279,10 @@ list.print()
         + 一个有序序列。由于树的高度，区间查询需要中序遍历，都会导致查询效率很慢
     - 后序遍历（先水平后垂直）:从根节点出发，依次遍历各节点的左右子树，直到当前节点左右子树遍历完成后，才访问该节点元素 左子树->右子树->根结点 
     - 层次遍历:从上往下一层一层遍历
-* 广度优先:即是层次遍历，按一层一层地遍历
-* 深度优先
+* DFS（深度优先搜索）
+* BFS（广度优先搜索）
+    - LeetCode 102.Binary Tree Level Order Traversal:即逐层地、从左到右访问所有结点,返回二维数组
+    - LeetCode 1162. As Far from Land as Possible 离开陆地的最远距离（Medium）最短路径：结点之间最近路径
 * 哈夫曼树（Huffman Tree） 最优二叉树
     - 一种带权路径长度（树中所有的叶子节点的权值乘上其根节点的路径长度）最短的二叉树
     - 权值较大的结点离根较近
@@ -291,6 +293,57 @@ graph TD 3-->1 3-->5 1-->2 5-->4 5-->6
 前序遍历结果： 3 1 2 5 4 6
 中序遍历结果： 1 2 3 4 5 6
 后序遍历结果： 2 1 4 6 5 3
+
+# DFS 遍历使用递归
+void dfs(TreeNode root) {
+    if (root == null) {
+        return;
+    }
+    dfs(root.left);
+    dfs(root.right);
+}
+
+# BFS 遍历使用队列数据结构
+void bfs(TreeNode root) {
+    Queue<TreeNode> queue = new ArrayDeque<>();
+    queue.add(root);
+    while (!queue.isEmpty()) {
+        TreeNode node = queue.poll(); // Java 的 pop 写作 poll()
+        if (node.left != null) {
+            queue.add(node.left);
+        }
+        if (node.right != null) {
+            queue.add(node.right);
+        }
+    }
+}
+
+# 二叉树 层序遍历
+public List<List<Integer>> levelOrder(TreeNode root) {
+    List<List<Integer>> res = new ArrayList<>();
+
+    Queue<TreeNode> queue = new ArrayDeque<>();
+    if (root != null) {
+        queue.add(root);
+    }
+    while (!queue.isEmpty()) {
+        int n = queue.size();
+        List<Integer> level = new ArrayList<>();
+        for (int i = 0; i < n; i++) { 
+            TreeNode node = queue.poll();
+            level.add(node.val);
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+            }
+        }
+        res.add(level);
+    }
+
+    return res;
+}
 ```
 
 ### B树(B-tree)
@@ -416,8 +469,8 @@ AVL 是一种高度平衡的二叉树，所以通常的结果是，维护这种�
 
 * [grantjenks/python-sortedcontainers](https://github.com/grantjenks/python-sortedcontainers):Python Sorted Container Types: Sorted List, Sorted Dict, and Sorted Set
 * [Data Structure Visualizations](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
-* [elarity/data-structure-php](https://github.com/elarity/data-structure-php):对于数据结构和算法类的东西
-* [学好这13种数据结构，应对各种编程语言（C++版）](https://mp.weixin.qq.com/s/JxQjKWBe-Dg9aCyq-USPwA)
+* [elarity/data-structure-php](https://github.com/elarity/data-structure-php)
 
+* [学好这13种数据结构，应对各种编程语言（C++版）](https://mp.weixin.qq.com/s/JxQjKWBe-Dg9aCyq-USPwA)
 http://blog.csdn.net/mysteryhaohao/article/details/51719871
 https://guptavikas.wordpress.com/2012/12/17/b-tree-index-in-mysql/
