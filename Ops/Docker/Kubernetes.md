@@ -960,6 +960,7 @@ source ~/.bash_profile
 * [kubernetes/community](https://github.com/kubernetes/community):Kubernetes community content
 * [hjacobs/kubernetes-failure-stories](https://github.com/hjacobs/kubernetes-failure-stories):Compilation of public failure/horror stories related to Kubernetes https://k8s.af
 * [ContainerSolutions/k8s-deployment-strategies](https://github.com/ContainerSolutions/k8s-deployment-strategies):Kubernetes deployment strategies explained https://blog.container-solutions.com/kubernetes-deployment-strategies
+* [Kuboard for K8S](https://kuboard.cn/learning/)
 
 * [手动一步步搭建k8s(Kubernetes)高可用集群](https://www.centos.bz/2017/07/k8s-kubernetes-ha-cluster/)
 * [开源容器集群管理系统Kubernetes架构及组件介绍](https://yq.aliyun.com/articles/47308)
