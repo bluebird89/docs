@@ -30,6 +30,21 @@ Redis is an in-memory database that persists on disk. The data model is key-valu
 
 * 3.2
     - 地理信息：新增了地理信息相关的命令，可以将用户给定的地理位置信息（经纬度）存储起来，并对这些信息进行操作
+* 6.0
+    - SSL
+    - ACL: 更好，命令支持
+    - RESP3
+    - Client side caching:重新设计 `CLIENT TRACKING ON|OFF [REDIRECT client-id] [PREFIX prefix] [BCAST] [OPTIN] [OPTOUT] [NOLOOP]`
+    - Threaded I/O
+    - Diskless replication on replicas
+    - Cluster support in Redis-benchmark and improved redis-cli cluster support
+    - Disque in beta as a module of Redis: 开始侵入消息队列领域
+    - Redis Cluster Proxy
+    - 支持RDB不再使用时可立即删除，针对不落盘的场景
+    - PSYNC2: 优化的复制协议
+    - 超时设置支持更友好
+    - 更快的RDB加载，20% ~ 30%的提升
+    - STRALGO，新的字符串命令，目前只有一个实现LCS (longest common subsequence)
 
 ## 安装
 
