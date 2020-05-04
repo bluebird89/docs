@@ -1096,6 +1096,7 @@ JavaEE/JDBC/Weblogic
   - Mybatis：Configuration、SqlSession、Executor 、TypeHandler、动态sql、二级缓存
   - Netty：nio、拆念包、future、pipeline
   - [google/guava](https://github.com/google/guava):Google core libraries for Java 限流算法、布隆过滤器、JVM缓存
+  - [akka](https://akka.io/):Build powerful reactive, concurrent, and distributed applications more easily
   - Hystrix：隔离、熔断、降级
   - RPC框架：dubbo、motan、thrift、grpc
   - 搜索隐形：Lucene、Elasticsearch、Solr
