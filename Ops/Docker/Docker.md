@@ -1685,9 +1685,9 @@ kubectl-debug <POD_NAME>
     + [shipyard](https://shipyard-project.com/):Built on Docker Swarm, Shipyard gives you the ability to manage Docker resources including containers, images, private registries and more.
   - https://www.portainer.io/
   - [docker / kitematic](https://github.com/docker/kitematic) Visual Docker Container Management on Mac & Windows https://kitematic.com/
-  - https://dockstation.io/
-  - Rancher is an open source software platform that enables organizations to run and manage Docker and Kubernetes in production.
-
+  - [DockStation](https://dockstation.io/)
+  - [Rancher](https://rancher.com/)Rancher is an open source software platform that enables organizations to run and manage Docker and Kubernetes in production.
+  - [Portainer](link) `docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer`
 ## 工具
 
 * [docker/swarm](https://github.com/docker/swarm) Swarm: a Docker-native clustering system
@@ -1695,7 +1695,6 @@ kubectl-debug <POD_NAME>
 * [openfaas/faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple for Docker & Kubernetes https://docs.openfaas.com/
 * [coreos/clair](https://github.com/coreos/clair):Vulnerability Static Analysis for Containers
 * [tobegit3hub/seagull](https://github.com/tobegit3hub/seagull):Friendly Web UI to manage and monitor docker
-* [docker/kitematic](https://github.com/docker/kitematic):Visual Docker Container Management on Mac & Windows https://kitematic.com
 * [v2tec/watchtower](https://github.com/v2tec/watchtower):Automatically update running Docker containers
 * [docker/cli](https://github.com/docker/cli):The Docker CLI
 * [wagoodman/dive](https://github.com/wagoodman/dive):A tool for exploring each layer in a docker image
