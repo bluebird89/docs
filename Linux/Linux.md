@@ -3487,6 +3487,7 @@ sed -n &#39;1!G;h;$p&#39; FILE
 * [johnfactotum/foliate](https://github.com/johnfactotum/foliate):A simple and modern GTK eBook reader https://johnfactotum.github.io/foliate/
 * [systemd/systemd](https://github.com/systemd/systemd):systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic.
 * [AlternativeTo](https://alternativeto.net/)
+* bench.sh `wget -qO- bench.sh | bash` `curl -Lso- bench.sh | bash` 查看 Linux 系统信息，测试网络带宽及硬盘读写速率
 
 ## 参考
 
