@@ -23,3 +23,4 @@
 * [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):The most comprehensive database of Chinese poetry
 * [jnv/lists](https://github.com/jnv/lists):The definitive list of lists (of lists) curated on GitHub and elsewhere
 * [Awesome Open Source](https://awesomeopensource.com/):Find Open Source By Searching, Browsing and Combining 7,000 Topics Across 59 Categories And 310,836 Projects
+* [ kon9chunkit / GitHub-Chinese-Top-Charts ](https://github.com/kon9chunkit/GitHub-Chinese-Top-Charts):GitHub中文排行榜

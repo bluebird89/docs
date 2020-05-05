@@ -81,6 +81,16 @@
 
 * 变量的值始终保持在内存中
 
+## 学习
+
+* 快速预览技术整体
+* 积累案例库
+* 通过微服务融合
+* 技术难点
+    * 偏理论：碎片化
+    * 偏实践
+* 技术分享
+
 ## 工具
 
 * [bazelbuild/bazel](https://github.com/bazelbuild/bazel):a fast, scalable, multi-language and extensible build system https://bazel.build
