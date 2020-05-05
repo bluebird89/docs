@@ -56,6 +56,11 @@ pip install fabric
 docker pull jenkins/jenkins
 docker run -d -p 49001:8080 -v $PWD/jenkins:/var/jenkins_home --name jenkins -t jenkins/jenkins
 docker exec jenkins tail /var/jenkins_home/secrets/initialAdminPassword
+
+docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.dock -v $(which docker):$(which docker) --name jenkins jenkins/jenkins:lts
+
+docker exec -it --user root jenkins bash
+chmod 666 /var/run/docker.sock
 ```
 
 ## 配置
