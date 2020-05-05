@@ -20,6 +20,15 @@
 
 ![RPC 的调用过程](../_static/How_rpc_works.jpeg "Optional title")
 
+## 原理
+
+* 编写数据描述文件
+* 转换为特定语言数据结构
+* 翻译为二进制/字节/字节数组
+* socket 网络编程
+* 翻译为另一种语言数据结构
+* 调用本地方法
+
 ## HTTP vs RPC
 
 * 传输协议：

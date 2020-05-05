@@ -400,6 +400,11 @@ sudo chmod +x /etc/cron.daily/trim
 sudo apt install fonts-firacode virtualbox mysql-workbench-community preload compizconfig-settings-manager
 
 # [sougou pinyin](https://pinyin.sogou.com/linux/?r=pinyin)
+sudo apt-get remove ibus
+sudo apt-get purge ibus
+
+sudo apt install fcitx-table-wbpy fcitx-config-gtk　＃　安装fcitx输入法框架
+im-config -n fcitx　切换为 Fcitx输入法
 sudo apt install fcitx fcitx-table fcitx-googlepinyin im-config
 im-config # 查看配置
 
@@ -407,8 +412,12 @@ im-config # 查看配置
 sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb # 手动安装
 sudo apt-get install -f
 
+rm -rf ~/.config/SogouPY* ~/.config/sogou*
+
 # 配置
+fcitx-config-gtk3
 system setting->language support
+Configure>>  Addon  >>Advanced>>Classic
 choose language,key input method system: fcitx
 # fcitx add sogou pinyin
 Ctrl+Shift+F # trantional change simple
