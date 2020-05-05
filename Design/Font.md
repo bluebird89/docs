@@ -10,7 +10,8 @@
 * [kiliman/operator-mono-lig](https://github.com/kiliman/operator-mono-lig):Add ligatures to Operator Mono similar to Fira Code
 * [google/fonts](https://github.com/google/fonts):Font files available from Google Fonts https://fonts.google.com
 * [ powerline / fonts ](https://github.com/powerline/fonts):Patched fonts for Powerline users.
-* [矢量图标库](http://www.iconfont.cn/)
+* [iconfont](https://www.iconfont.cn/)
+* [visualhunt](https://visualhunt.com/)
 
 ```
 sudo apt install fonts-firacode

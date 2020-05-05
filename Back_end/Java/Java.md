@@ -1070,6 +1070,8 @@ JavaEE/JDBC/Weblogic
 * 《Java核心技术系列：Java多线程编程核心技术》
 * 《Java性能权威指南》
 * 《Java并发编程实战》
+* [Thinking In Java](https://www.codeguru.com/java/tij/tij_c.shtml)
+* [Introduction to Programming Using Java](http://math.hws.edu/javanotes/)
 
 ## 教程
 
@@ -1141,4 +1143,5 @@ JavaEE/JDBC/Weblogic
 * [ruibaby/halo](https://github.com/ruibaby/halo):Halo可能是最好的Java博客系统😉 https://docs.halo.run
 
 * http://ifeve.com/talk-concurrency/
-* [Java并发](https://mp.weixin.qq.com/s?__biz=MjM5MzA1Mzc3Nw==&mid=2247484908&idx=1&sn=fe9004cd8369cabf448c9f43466bad0f&chksm=a69da8d291ea21c493d82e63705604055e2bd4d09f42c5e835051e3187a9cfefa317e6484b65)
+* [ volatile](https://mp.weixin.qq.com/s/x78EZQ0E0fgKSwGdK5vtwg)
+* [Java并发](https://mp.weixin.qq.com/s?__biz=MjM5MzA1Mzc3Nw==&mid=2247484908&idx=1&sn=fe9004cd8369cabf448c9f43466bad0f)

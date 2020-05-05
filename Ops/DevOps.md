@@ -60,7 +60,6 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
 * CruiseControl：CuiseControl 是一个针对持续构建程序(项目持续集成)的框架，它包括一个email通知的插件，Ant和各种各样的CVS工具。CruiseControl提供了一个Web接口，可随时查看当前的编译状况和历史状况。
 * Integrity：Integrity 是 Ruby 开发的持续集成服务器。
 * Gump：Gump 是 Apache 的整合工具。它以 Python 写成、完全支持 Apache Ant、Apache Maven 等等软件组建工具。
-* Go：Go 是 Google 开发的一种编译型，并发型，并具有垃圾回收功能的编程语言。
 
 ## 部署工具
 
