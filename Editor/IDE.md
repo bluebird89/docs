@@ -291,6 +291,7 @@ livetemplate
   - SequenceDiagram
   - Statistic—项目信息统计
   - Translation-必备的翻译插件
+* [IntelliJ IDEA config](https://www.jianshu.com/p/320d82d405ad)
 
 数据是统一的，能够实现批量处理
 

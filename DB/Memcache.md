@@ -49,18 +49,19 @@ memcached -p 11211 -m 64m -vv # 显示了调试信息
 sudo pecl install memcached
 
 sudo systemctl restart|status memcached
+
+echo "stats settings" | nc localhost 11211
 ```
 
 ## 概念
 
-* Memcache 指定给已经存在的元素的一个唯一的64位值,全局唯一自增
+* 指定给已经存在的元素的一个唯一的64位值,全局唯一自增
 * 冷热数据
 
 ## 客户端
 
-* 两个memcache客户端：php memcache和php memcached
 * [memcache](http://pecl.php.net/package/memcache)    memcached extension
-    - 独立用php实现，是老客户端，从我们实践中已发现有多个问题，而且功能少，属性也可设置的少；
+    - 独立用php实现，是老客户端，从实践中已发现有多个问题，而且功能少，属性也可设置的少
 * [memcached](http://pecl.php.net/package/memcached)   PHP extension for interfacing with memcached via libmemcached library
     - 需要 libmemcached 客户端库
     - 基于原生的c的libmemcached的扩展，更加完善，建议替换为php memcached

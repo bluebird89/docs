@@ -144,6 +144,11 @@
 
 ![数仓建设](../_static/db.png "数仓建设")
 
+## [Wolfram](https://www.wolfram.com/)
+
+* [WOLFRAM DATA REPOSITORY](https://datarepository.wolframcloud.com/)
+* [The Wolfram Data Drop](https://datadrop.wolframcloud.com/):an open service that makes it easy to accumulate data of any kind, from anywhere—setting it up for immediate computation, visualization, analysis, querying, or other operations.
+
 ## 课程
 
 * 《数据科学导论》：数据科学的先导课和认知类课程。用形象生动的教学模式为学生普及数据挖掘、大数据相关的基础知识、核心概念和思维模式，从工程技术、法律规范、应用实践等不同角度描绘数据科学的美好蓝图

@@ -202,6 +202,8 @@ docker cp # 从容器里向外拷贝文件或目录
 
 ## 配置
 
+* `/etc/docker/daemon.json`
+
 ```sh
 docker build  --no-cache --build-arg HTTP_PROXY=http://xx.xx.xx.xx:xx --build-arg HTTPS_PROXY=http://xx.xx.xx.xx:xx -t elasticsearch-curator:5.4 .
 
@@ -297,10 +299,11 @@ ENV https_proxy http://proxy-chain.xxx.com:912/ 1
     "raw-logs": false,
     "allow-nondistributable-artifacts": [],
     "registry-mirrors": [
+      "https://docker.mirrors.ustc.edu.cn",
       "https://dockerhub.azk8s.cn",
       "https://hub-mirror.c.163.com",
       "https://registry.docker-cn.com",
-      http://docker.mirrors.ustc.edu.cn,
+      "http://docker.mirrors.ustc.edu.cn",
     ],
      #镜像加速的地址，增加后在 docker info中可查看。
     "seccomp-profile": "",
