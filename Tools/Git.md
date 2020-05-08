@@ -1339,7 +1339,8 @@ git merge FETCH_HEAD
   - 在合并请求、问题或者任何评论中中提到用户会使用户关注全部的后续通知,sha和问题码(例如：#1)会被自动链接。并且也可以链接其它仓库的 sha 或者问题码，格式：user/repo@sha1 或者 user/repo#1
   - 插件 Octotree
 * 速度慢
-  - 添加本地dns， 通过[ipaddress](https://www.ipaddress.com/)查询ip
+  - 添加本地dns， 通过[ipaddress](https://www.ipaddress.com/)查询ip,
+  - <raw.githubusercontent.com>, 同上
   - 先通过码云导入 GitHub 上项目；码云clone；修改 .git/config 替换为原来 github地址
 
 ![Git 使用规范流程](../_static/bg2015080501.png)

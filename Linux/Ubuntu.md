@@ -1,5 +1,7 @@
 # [Ubuntu](https://www.ubuntu.com)
 
+* GNOME是较新版本的Ubuntu中使用的桌面环境
+
 ## 安装
 
 * 虚拟机
@@ -26,8 +28,27 @@
     + 添加新条目 linux/BSD选项
     + 选中分区boot分区
   - 重启运行
+* grub
+  - `/etc/default/grub` 
+  - 重新生成GRUB的启动菜单配置文件(/boot/grub/grub.cfg):`sudo update-grub`
+  - `GRUB_THEME="/boot/grub/themes/fallout-grub-theme-master/theme.txt"`
+  - `sudo grub-set-default NUMBER`
+  - `sudo apt install grub-customizer`
+
+```sh
+sudo dd if=ubuntu-16.04-desktop-amd64.iso of=/dev/sdc bs=1M
+```
+
+## 版本
+
+* 20.04 LTS Focal Fossa
 
 ## hardware
+
+* AMD显卡驱动
+  - AMD官网 驱动与支持页 下载对应的[安装包](https://drivers.amd.com/drivers/linux/amdgpu-pro-20.10-1048554-ubuntu-18.04.tar.xz)
+  - `tar -Jxvf amdgpu-pro-20.10-1048554-ubuntu-18.04.tar.xz`
+  - `sudo -i && ./amdgpu-pro-install -y --opencl=pal,legacy`
 
 ```sh
 free -m
@@ -96,9 +117,22 @@ Acquire::Languages "none";
 # DNS /etc/resolv.conf
 nameserver 223.5.5.5
 nameserver 223.6.6.6
+
+sudo update-alternatives --config editor # 修改默认编辑器
+
+sudo visudo
+%sudo   ALL=(ALL:ALL) NOPASSWD:ALL
 ```
 
 ## 服务管理
+
+* ubuntu-16.10 开始不再使用initd管理系统，改用systemd,默认读取 /etc/systemd/system 下的配置文件，该目录下的文件会链接/lib/systemd/system/下的文件
+* 启动脚本
+  - [Unit] 段: 启动顺序与依赖关系
+  - [Service] 段: 启动行为,如何启动，启动类型
+  - [Install] 段: 定义如何安装这个配置文件，即怎样做到开机启动
+* `/etc/rc3.d/rc.local`
+* `/etc/init.d/`
 
 ```sh
 #  display Unneeded Startup Applications
@@ -108,12 +142,68 @@ service --status-all
 systemctl list-unit-files | grep enabled
 
 systemctl status|start|restart|reload|enable|disable nginx
+sudo systemctl edit snapd.service
 
 sudo uname --m
 
 Failed to start mysql.service: Unit mysql.service is masked.
 systemctl unmask mysql.service
 service mysql start
+
+# 启动脚本
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+
+# This unit gets pulled automatically into multi-user.target by
+# systemd-rc-local-generator if /etc/rc.local is executable.
+[Unit]
+Description=/etc/rc.local Compatibility
+ConditionFileIsExecutable=/etc/rc.local
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/etc/rc.local start
+TimeoutSec=0
+RemainAfterExit=yes
+
+sudo touch /etc/rc.local
+ln -s /lib/systemd/system/rc.local.service /etc/systemd/system/
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+exit 0
+
+# 自启动
+sudo vim /etc/init.d/myscript.sh
+### BEGIN INIT INFO
+# Provides:          svnd.sh
+# Required-start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: starts the svnd.sh daemon
+# Description:       starts svnd.sh using start-stop-daemon
+### END INIT INFO
+sudo fusuma
+
+sudo update-rc.d myscript.sh defaults 90
+reboot
+sudo update-rc.d -f mount_and_frpc.sh remove # 取消
 ```
 
 ### 软件
@@ -125,12 +215,25 @@ service mysql start
   - ubuntu.16替换apt-get为apt
 * 软件源管理
   - 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
-  - snap
+  - [snap](https://snapcraft.io/):The app store for Linux Publish your app for Linux users — for desktop, cloud, and Internet of Things.
+    + Channels:`<track>/<risk>/<branch>`
+      * snaps must have a default track, called latest
+      * Risk-levels
+        - stable: for the vast majority of users running on production environments
+        - candidate: for users who need to test updates prior to stable deployment, or those verifying whether a specific issue has been resolved.
+        - beta: for users wanting to test the latest features, typically outside of a production environment.
+        - edge: for users wanting to closely track development.
+    + update automatically, and by default, the snapd daemon checks for updates 4 times a day. Each update check is called a refresh
+    + [Snap Store](https://snapcraft.io/store)
   - 根据这些信息在相关的服务器上下载软件安装
-  - 安装某个软件时，如果该软件有其它依赖程序，系统会为我们自动安装所以来的程序；
-  - 如果本地的数据库不够新，可能就会发生搜索不到的情况，这时候需要我们更新本地的数据库，使用命令sudo apt-get update可执行更新；
-  - 软件源镜像服务器可能会有多个，有时候某些特定的软件需要我们添加特定的源；
+  - 安装某个软件时，如果该软件有其它依赖程序，系统会为我们自动安装所以来的程序
+  - 如果本地的数据库不够新，可能就会发生搜索不到的情况，需要更新本地的数据库，使用命令`sudo apt-get update`可执行更新
+  - 软件源镜像服务器可能会有多个，有时候某些特定的软件需要添加特定的源
+  - apt-fast 是一个为 apt-get 和 aptitude 做的 shell 脚本封装，通过对每个包进行并发下载的方式可以大大减少 APT 的下载时间 `sudo add-apt-repository -y ppa:apt-fast/stable && \
+sudo apt install -y apt-fast`
   - deb包是Debian，Ubuntu等Linux发行版的软件安装包，扩展名为.deb，是类似于rpm的软件包，Debian，Ubuntu系统不推荐使用deb软件包，因为要解决软件包依赖问题，安装也比较麻烦。下载相应deb软件包，使用dpkg命令来安装
+    + 用gdebi解决 不满足依赖还需要手动执行sudo apt install -f `sudo apt install gdebi`
+  - `application->Software&Update->download from`
   - 源管理
     + software & updates:select best server
     + 配置路径
@@ -146,6 +249,7 @@ service mysql start
   - KchmViewer:阅读CHM
   - LaTeX
   - Chromium
+  - [rime](https://rime.im/)
   - Nylas N1：超好用的跨平台电子邮件客户端
   - Thunderbird
   - Spotify for Linux：音乐流媒体服务
@@ -153,7 +257,7 @@ service mysql start
   - Viber：跨平台的 Skype 替代品
   - Vivaldi：功能强大的 web 浏览器
   - BleachBit: cleaner(softer center)
-  - albert
+  - [albert](https://albertlauncher.github.io/):Access everything with virtually zero effort
   - Vocal:听播客
   - Foxit Reader:PDF 阅读
   - 图片
@@ -242,6 +346,17 @@ sudo aptitude -f install <packagename> # Unable to correct problems, you have he
 sudo add-apt-repository ppa:nilarimogard/webupd8   # add source
 sudo add-apt-repository -r(--remove) ppa:nilarimogard/webupd8   # add source
 
+sudo apt install gnome-todo
+
+curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add -
+sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/home:manuelschneid3r.list"
+
+wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_18.04/Release.key -O Release.key
+sudo apt-key add - < Release.key
+
+sudo apt-get update
+sudo apt-get install albert
+
 ## error
 E: Could not get lock /var/lib/dpkg/lock – open (11: Resource temporarily unavailable)
 E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
@@ -253,6 +368,20 @@ cd xxx
 ./configure --help
 ./configure --prefix=/usr/local/libxml2
 make && sudo make install
+
+sudo apt-get install snapd|snapcraft
+sudo snap login # 通过Ubuntu One登陆
+sudo snap list|find
+snap install vlc --channel=latest/edge
+snap install skype --channel=insider/stable #  switch channel
+snap info skype
+snap refresh skype --channel=insider/stable
+snap switch --channel=stable vlc #  the risk-level being tracked can be changed
+
+sudo snap revert <snap name>
+sudo snap remove <snap name>
+snap refresh --time
+sudo snap set system refresh.timer=22:00-23:59
 ```
 
 ```
@@ -297,6 +426,45 @@ deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe 
 deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
 ```
 
+## [Gnome](https://extensions.gnome.org/)
+
+* 安装
+  - 下载 解压，apps-menugnome-shell-extensions.gcampax.github.com.v40.shell-extension
+  - 去掉后缀 .v40.shell-extension
+  - 把文件夹拷贝到 `~/.local/share/gnome-shell/extensions`，重启 Gnome-Tweaks
+  - `/usr/share/themes`
+* GNOME Tweaks Tool `sudo apt install gnome-tweaks`
+* 插件
+  - `sudo aptitude install gnome-shell-extension-ubuntu-dock`
+  - `sudo aptitude install gnome-shell-extension-system-monitor`
+  - Workspace Indicator：当前多窗口index
+  -  Open Weather
+* Theme
+  - [gnome-look](https://www.gnome-look.org/)
+  - [nana-4 / materia-theme](https://github.com/nana-4/materia-theme):A Material Design theme for GNOME/GTK based desktop environments
+  - [adapta-project / adapta-gtk-theme ](https://github.com/adapta-project/adapta-gtk-theme):An adaptive Gtk+ theme based on Material Design Guidelines
+  - [pop-os / gtk-theme](https://github.com/pop-os/gtk-theme):System76 Pop GTK+ Theme
+  - Communitheme `sudo snapinstall communitheme –edge`
+  - [vinceliuice / vimix-gtk-themes](https://github.com/vinceliuice/vimix-gtk-themes):Vimix is a flat Material Design theme for GTK 3, GTK 2 and Gnome-Shell etc. https://vinceliuice.github.io/
+  - sudo apt install sierra-gtk-theme
+
+* 重启： `Alt + F2`, r
+
+```sh
+sudo apt install gnome-tweak-tool gnome-shell-extensions chrome-gnome-shell
+gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
+#gsettings list-schemas             显示系统已安装的不可重定位的schema
+#gsettings list-relocatable-schemas 显示已安装的可重定位的schema
+#gsettings list-children SCHEMA     显示指定schema的children，其中SCHEMA指xml文件中schema的id属性值，例如实例中的"org.lili.test.app.testgsettings"
+#gsettings list-keys SCHEMA         显示指定schema的所有项(key)
+#gsettings range SCHEMA KEY         查询指定schema的指定项KEY的有效取值范围
+#gsettings get SCHEMA KEY           显示指定schema的指定项KEY的值
+#gsettings set SCHEMA KEY VALUE     设置指定schema的指定项KEY的值为VALUE
+#gsettings reset SCHEMA KEY         恢复指定schema的指定项KEY的值为默认值
+#gsettings reset-recursively SCHEMA 恢复指定schema的所有key的值为默认值
+#gsettings list-recursively [SCHEMA]如果有SCHEMA参数，则递归显示指定schema的所有项(key)和值(value)，如果没有SCHEMA参数，则递归显示所有schema的所有项(key)和值(value)
+```
+
 ## 用户管理
 
 ```sh
@@ -318,19 +486,6 @@ w --ip-addr
 # whoami
 # whoami --version
 # whoami --help
-```
-
-## [Gnome](https://wiki.gnome.org/)
-
-* Gnome Shell Extensions
-  -  Open Weather
-  -  [paradoxxxzero / gnome-shell-system-monitor-applet](https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet)Display system informations in gnome shell status bar, such as memory usage, cpu usage, network rates
-
-```sh
-# install broswer extension
-sudo apt install chrome-gnome-shell
-# https://extensions.gnome.org/  search for Gnome extensions you wish to install. Flip the ON switch to install the extension
-sudo apt install gnome-shell-extensions # config weather show
 ```
 
 ## keymap
@@ -361,6 +516,7 @@ sudo apt install gnome-shell-extensions # config weather show
   - shift+alt+Print:区域截取并添加到粘贴板
 * Ctrl+Alt+[F1~F6] ，切换到1~6号控制台
 * Ctrl+Alt+F7 可以返回图形界面
+* Ctrl+H 显示隐藏的文件夹
 
 ## 端口与进程管理
 
@@ -402,9 +558,10 @@ sudo apt install fonts-firacode virtualbox mysql-workbench-community preload com
 # [sougou pinyin](https://pinyin.sogou.com/linux/?r=pinyin)
 sudo apt-get remove ibus
 sudo apt-get purge ibus
+sudo  apt-get remove indicator-keyboard # 卸载顶部面板任务栏上的键盘指示.
 
 sudo apt install fcitx-table-wbpy fcitx-config-gtk　＃　安装fcitx输入法框架
-im-config -n fcitx　切换为 Fcitx输入法
+im-config -n fcitx　# 切换为 Fcitx输入法
 sudo apt install fcitx fcitx-table fcitx-googlepinyin im-config
 im-config # 查看配置
 
@@ -446,7 +603,6 @@ service mysql start
 sudo apt-add-repository ppa:umang/indicator-stickynotes
 sudo apt-get update && sudo apt-get install indicator-stickynotes
 
-
 sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
 sudo apt-get update && sudo apt-get install indicator-sysmonitor
 
@@ -455,8 +611,12 @@ sudo apt-get update && sudo apt-get install indicator-weather
 
 # 提高电池寿命并且减少过热
 sudo add-apt-repository ppa:linrunner/tlp
-sudo apt install tlp tlp-rdw
+sudo apt install tlp tlp-rdw # sudo nano /etc/tlp.conf
 sudo tlp start
+
+## laptop-mode-tools
+sudo apt-get install laptop-mode-tools
+pkexec /usr/sbin/lmt-config-gui
 
 ## [xflux-gui/fluxgui](https://github.com/xflux-gui/fluxgui):Better lighting for Linux. Open source GUI for xflux https://justgetflux.com/linux.html
 sudo add-apt-repository ppa:nathan-renniewaldock/flux
@@ -535,7 +695,7 @@ sudo cp ~/下载/desktops/postman.desktop /usr/share/applications/
 sudo apt-get install ubuntu-restricted-extras openssh-server filezilla vlc apt-transport-https unrar lnav cmake qtcreator
 
 # Guake一个比较酷的终端
-sudo apt install guake
+sudo apt install guake # F12 切换显示
 
 gsettings set com.canonical.indicator.datetime time-format 'custom' # 不要选择显示星期或者年份
 gsettings set com.canonical.indicator.datetime custom-time-format '%Y年%m月%d日 %A%H:%M:%S' # 手动设置显示格式
@@ -576,10 +736,18 @@ onboard \
 simple-scan \
 landscape-client-ui-install \
 deja-dup \
-totem \
-rhythmbox \
 empathy \
 brasero
+
+# 可选
+sudo apt-get remove libreoffice* #自带office,WPS代替
+sudo apt-get remove yelp #帮助
+sudo apt-get remove blue* #蓝牙
+sudo apt-get remove gnome-software #软件中心 apt够用
+sudo apt-get remove unity #换gnome
+sudo apt-get remove gnome-system-monitor #系统监视器
+sudo apt-get remove gnome-system-log #日志查看器
+sudo apt autoremove
 
 sudo apt-get autoremove
 sudo apt-get clean
@@ -614,6 +782,16 @@ sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser
 # Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程。
 sudo apt install htop
 htop
+
+# gluqlo
+sudo apt-get install -y xscreensaver xscreensaver-gl-extra xscreensaver-data-extra
+sudo apt-get remove gnome-screensaver
+sudo apt-add-repository ppa:alexanderk23/ppa
+sudo apt-get update && sudo apt-get install gluqlo
+vi ~/.xscreensaver
+gluqlo -root \n\
+# applications->xscreensaver 勾选
+＃　配置自启动
 ```
 
 ## [desktop-entry](https://specifications.freedesktop.org/desktop-entry-spec/latest/)
@@ -658,6 +836,22 @@ OnlyShowIn=Unity;
 Name=New File
 Exec=/opt/sublime_text/sublime_text --command new_file
 OnlyShowIn=Unity;
+
+sudo nona pycharm.desktop
+[Desktop Entry]
+ Version=1.0
+ Type=Application
+ Name=Pycharm
+ Icon=/home/linuxidc/www.linuxidc.com/pycharm-2019.3.2/bin/pycharm.png
+ Exec=sh /home/linuxidc/www.linuxidc.com/pycharm-2019.3.2/bin/pycharm.sh
+ MimeType=application/x-py;
+ Name[en_US]=pycharm
+```
+
+## log
+
+```SH
+journalctl -xeu kubelet
 ```
 
 ## top

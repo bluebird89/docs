@@ -57,9 +57,9 @@ brew cask install shadowsocksx
 }
 ```
 
-## V2ray
+## [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core)
 
-通过nginx的负载均衡功能，来自web访问的流量就直接访问到网站，而通过v2ray来的流量就通过v2ray的服务端转发，实现KX代理的功能
+A platform for building proxies to bypass network restrictions. <https://www.v2ray.com/> 通过nginx的负载均衡功能，来自web访问的流量就直接访问到网站，而通过v2ray来的流量就通过v2ray的服务端转发，实现KX代理的功能
 
 ## OpenVPN
 
@@ -392,9 +392,6 @@ iptables-restore < /etc/iptables-rules # 手动加载
 * [firefly-proxy](https://github.com/yinghuocho/firefly-proxy):A proxy software to help circumventing the Great Firewall.
 * [XX-net/XX-Net](https://github.com/XX-net/XX-Net)a web proxy tool
 * [googlehosts/hosts](https://github.com/googlehosts/hosts)
-* [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core):A platform for building proxies to bypass network restrictions. <https://www.v2ray.com/>
-    - [yanue/V2rayU](https://github.com/yanue/V2rayU):V2rayU,基于v2ray核心的mac版客户端,用于科学上网,使用swift编写,支持vmess,shadowsocks,socks5等服务协议,支持订阅, 支持二维码,剪贴板导入,手动配置,二维码分享等 https://github.com/yanue/V2rayU
-    - [jiangxufeng/v2rayL](https://github.com/jiangxufeng/v2rayL):v2ray linux GUI客户端，支持订阅、vemss、ss等协议，自动更新订阅、检查版本更新
 * [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
 * [iMeiji/shadowsocks_install](https://github.com/iMeiji/shadowsocks_install)
 * [trojan-gfw](https://github.com/trojan-gfw/trojan):An unidentifiable mechanism that helps you bypass GFW. https://trojan-gfw.github.io/trojan/
@@ -409,7 +406,7 @@ iptables-restore < /etc/iptables-rules # 手动加载
 * BT sync
 * [ShadowsocksR-Live/shadowsocksr-native](https://github.com/ShadowsocksR-Live/shadowsocksr-native):从容翻越党国敏感日 ShadowsocksR (SSR) native implementation for all platforms powered by libuv, GFW terminator
 * [ Dreamacro / clash ](https://github.com/Dreamacro/clash):A rule-based tunnel in Go.
-  - 配置　｀/home/当前用户ID/.config/clash/config.yml`
+  - 配置:｀/home/当前用户ID/.config/clash/config.yml`
   - 访问：http://clash.razord.top/#/settings` 端口和口令按yml文件中的external-controller内容输入即可
 * 客户端
   - freevpn
@@ -417,11 +414,13 @@ iptables-restore < /etc/iptables-rules # 手动加载
   - [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
   - [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu https://shadowsocks.be
   - [Qv2ray / Qv2ray](https://github.com/Qv2ray/Qv2ray):🌟 V2Ray/Trojan-GFW/SSR Linux/Windows/macOS 跨平台 GUI 🔨 使用 C++17/Qt5 ，支持订阅，扫描二维码，自定义路由编辑 🌟 https://qv2ray.github.io
+    + `snap install qv2ray`
   - [mellow-io / mellow](https://github.com/mellow-io/mellow):Mellow is a rule-based global transparent proxy client for Windows, macOS and Linux.
   - [Surge](https://www.nssurge.com/) https://www.newlearner.site/2018/08/29/surge-for-mac.html
   - V2rayNG
+  - [yanue/V2rayU](https://github.com/yanue/V2rayU):V2rayU,基于v2ray核心的mac版客户端,用于科学上网,使用swift编写,支持vmess,shadowsocks,socks5等服务协议,支持订阅, 支持二维码,剪贴板导入,手动配置,二维码分享等 https://github.com/yanue/V2rayU
+  - [jiangxufeng/v2rayL](https://github.com/jiangxufeng/v2rayL):v2ray linux GUI客户端，支持订阅、vemss、ss等协议，自动更新订阅、检查版本更新
   - pharos Pro:ios 付费
-  - [yanue / V2rayU](https://github.com/yanue/V2rayU)
   - [Trojan-Qt5](https://github.com/TheWanderingCoel/Trojan-Qt5)
   - Quantumult
     + 分流

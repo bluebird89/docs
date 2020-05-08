@@ -426,10 +426,6 @@ kubectl get pods -l ‘environment in (production),tier in (frontend)’
     - Prometheus及Grafana实现资源监控
     - Metrics-Server
     - HPA v2
-* helm及日志收集系统
-    - helm工作原理
-    - helm部署及其应用
-    - 部署efk日志收集系统
 
 ### kubectl（kubelet client）集群管理命令行工具集
 
@@ -608,10 +604,6 @@ alias kcd='kubectl config set-context $(kubectl config current-context) --namesp
 kubectl exec -it [pod-name] -- /bin/bash # 登录到pod中(pod只有一个container的情况)
 kubectl exec -it [pod-name] --container [container-name] -- /bin/bash # 登录到pod中的某个container中（pod包含多个container）
 
-helm delete --purge [release name] # helm删除release(release name 可用于新的release)
-
-helm delete [release name] # helm删除release(release name将保留，即不能用于新的release)
-
 ## rollout 命令: 用于对资源进行管理
 kubectl rollout undo deployment/abc # 回滚到之前的deployment
 kubectl rollout status daemonset/foo # 查看daemonet的状态
@@ -660,6 +652,17 @@ kubectl attach 123456-7890 -c ruby-container # 获取pod 123456-7890中ruby-cont
 kubectl attach 123456-7890 -c ruby-container -i -t # 切换到终端模式，将控制台输入发送到pod 123456-7890的ruby-container的“bash”命令，并将其输出到控制台/
 
 kubectl api-versions
+
+sudo kubeadm reset
+```
+
+```sh
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+# 用 kubeadm 部署一个单节点集群，默认情况下无法使用，请执行以下命令解除限制
+kubectl taint nodes --all node-role.kubernetes.io/master-
+# 恢复默认值
+kubectl taint nodes NODE_NAME node-role.kubernetes.io/master=true:NoSchedule
 ```
 
 ## kubernets-dashbord
@@ -672,11 +675,78 @@ kubectl api-versions
     - 获取secret中的token `kubectl -n kube-system get secret |grep admin-token` `kubectl -n kube-system describe secret admin-token-2s8jh | grep token`
 
 ```sh
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml
+
 kubectl proxy # 启动proxy
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
+
+# token create
+kubectl create sa dashboard-admin -n kube-system
+kubectl create clusterrolebinding dashboard-admin --clusterrole=cluster-admin --serviceaccount=kube-system:dashboard-admin
+ADMIN_SECRET=$(kubectl get secrets -n kube-system | grep dashboard-admin | awk '{print $1}')
+DASHBOARD_LOGIN_TOKEN=$(kubectl describe secret -n kube-system {ADMIN_SECRET} | grep -E '^token' | awk '{print $2}')
+echo ${DASHBOARD_LOGIN_TOKEN}
 
 kubectl delete deployment kubernetes-dashboard --namespace=kube-system
 kubectl delete service kubernetes-dashboard --namespace=kube-system
+```
+
+## [Helm](https://github.com/helm/helm)
+
+* The package manager for Kubernetes <https://helm.sh/>
+* [下载](https://github.com/helm/helm/releases)
+* [helm/charts](https://github.com/helm/charts):Curated applications for Kubernetes
+* 配置
+* 工作原理
+    - install A release name that you pick, and the name of the chart you want to install.
+* helm部署及其应用
+* 部署efk日志收集系统
+* 资源
+    - [Helm Hub ](https://hub.helm.sh/):Discover & launch great Kubernetes-ready apps
+
+| Linux            | $HOME/.cache/helm         | $HOME/.config/helm             | $HOME/.local/share/helm |
+| macOS            | $HOME/Library/Caches/helm | $HOME/Library/Preferences/helm | $HOME/Library/helm      |
+| Windows          | %TEMP%\helm               | %APPDATA%\helm                 | %APPDATA%\helm  
+
+```sh
+## install
+tar -zxvf helm-v3.0.0-linux-amd64.tar.gz
+mv linux-amd64/helm /usr/local/bin/helm
+brew install helm
+choco install kubernetes-helm
+sudo snap install helm --classic
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
+## config
+helm repo list
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo add stable http://mirror.azure.cn/kubernetes/charts/
+helm repo remove
+helm search repo stable
+helm search hub
+helm repo update
+
+helm install happy-panda stable/mariadb
+helm install stable/mysql --generate-name
+helm show chart stable/mysql
+helm ls # has been released using Helm
+helm uninstall mysql-1588737754  
+helm status mysql-1588737754  
+
+# custom
+helm show values stable/mariadb
+echo '{mariadbUser: user0, mariadbDatabase: user0db}' > config.yaml
+helm install -f config.yaml stable/mariadb --generate-name
+
+helm show values stable/mariadb
+helm get values key
+helm upgrade -f panda.yaml happy-panda stable/mariadb
+helm rollback happy-panda 1 # helm rollback [RELEASE] [REVISION]
+
+helm delete --purge [release name] # helm删除release(release name 可用于新的release)
+helm delete [release name] # helm删除release(release name将保留，即不能用于新的release)
 ```
 
 ### etcd
@@ -892,6 +962,7 @@ source ~/.bash_profile
 
 * 配置
     - [kubernetes-sigs/kustomize](https://github.com/kubernetes-sigs/kustomize):Customization of kubernetes YAML configurations
+    - [AliyunContainerService / k8s-for-docker-desktop](https://github.com/AliyunContainerService/k8s-for-docker-desktop):为Docker Desktop for Mac/Windows开启Kubernetes和Istio - Enable Kubernetes/Istio on Docker Desktop in China https://yq.aliyun.com/articles/672675
 * 部署
     - [kubernetes-incubator/kubespray](https://github.com/kubernetes-incubator/kubespray):Deploy a Production Ready Kubernetes Cluster
     - [kubernetes-sigs / kind](https://github.com/kubernetes-sigs/kind/):Kubernetes IN Docker - local clusters for testing Kubernetes https://kind.sigs.k8s.io/
@@ -911,7 +982,6 @@ source ~/.bash_profile
 * [coreos/flannel](https://github.com/coreos/flannel):flannel is a network fabric for containers, designed for Kubernetes
 * [argoproj/argo](https://github.com/argoproj/argo):Container-native workflows for Kubernetes. https://argoproj.github.io
 * [datawire/ambassador](https://github.com/datawire/ambassador):open source Kubernetes-native API gateway for microservices built on the Envoy Proxy https://www.getambassador.ios
-* [helm/charts](https://github.com/helm/charts):Curated applications for Kubernetes
 * [virtual-kubelet/virtual-kubelet](https://github.com/virtual-kubelet/virtual-kubelet):Virtual Kubelet is an open source Kubernetes kubelet implementation.
 * [operator-framework/operator-sdk](https://github.com/operator-framework/operator-sdk):SDK for building Kubernetes applications. Provides high level APIs, useful abstractions, and project scaffolding. https://coreos.com/operators
 * [kubeflow/kubeflow](https://github.com/kubeflow/kubeflow):Machine Learning Toolkit for Kubernetes
@@ -961,6 +1031,7 @@ source ~/.bash_profile
 * [hjacobs/kubernetes-failure-stories](https://github.com/hjacobs/kubernetes-failure-stories):Compilation of public failure/horror stories related to Kubernetes https://k8s.af
 * [ContainerSolutions/k8s-deployment-strategies](https://github.com/ContainerSolutions/k8s-deployment-strategies):Kubernetes deployment strategies explained https://blog.container-solutions.com/kubernetes-deployment-strategies
 * [Kuboard for K8S](https://kuboard.cn/learning/)
+* [opsnull / follow-me-install-kubernetes-cluster](https://github.com/opsnull/follow-me-install-kubernetes-cluster):和我一步步部署 kubernetes 集群
 
 * [手动一步步搭建k8s(Kubernetes)高可用集群](https://www.centos.bz/2017/07/k8s-kubernetes-ha-cluster/)
 * [开源容器集群管理系统Kubernetes架构及组件介绍](https://yq.aliyun.com/articles/47308)

@@ -52,6 +52,7 @@ Windows是最烂的开发平台
 * OpenOffice.org 办公
 * 下载
   - μTorrent BT下载
+  - IDM
 * GIMP 图像编辑 介绍文章
 * FileZilla FTP软件
 * Defraggler 系统优化-碎片整理
@@ -71,6 +72,9 @@ Windows是最烂的开发平台
   - 批量调节图片尺寸
 * [xmeters](https://entropy6.com/xmeters/):Taskbar System Stats for Windows
 * [Desktop Info](https://www.glenn.delahoy.com/desktopinfo/)
+* Geek卸载
+* 录屏
+  - Bandicam
 
 ```sh
 ## 安装 choco 以管理员运行cmd

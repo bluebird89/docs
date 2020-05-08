@@ -86,6 +86,7 @@
     - [bolt/bolt](https://github.com/bolt/bolt):Bolt is a simple CMS written in PHP. It is based on Silex and Symfony components, uses Twig and either SQLite, MySQL or PostgreSQL.
 * Wiki
     - [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki)
+    - [dokuwiki](https://www.dokuwiki.org/)
 * 框架组件
     - [CakePHP Plugins](https://plugins.cakephp.org/): CakePHP插件的目录
     - [Hoa Project](https://hoa-project.net/En/): 另一个PHP组件包
