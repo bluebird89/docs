@@ -1208,6 +1208,9 @@ Python 实现的算法和设计模式。
   - [kenwoodjw/python_interview_question](https://github.com/kenwoodjw/python_interview_question):关于python的面试题
 * 图书
   - [Test-Driven Web Development with Python](https://www.obeythetestinggoat.com/pages/book.html#toc)
+* More Python for Beginners
+* Even More Python for Beginners： Data Tools
+* [microsoft / c9-python-getting-started](https://github.com/microsoft/c9-python-getting-started):Sample code for Channel 9 Python for Beginners course
 
 ## Algorithmic Trading
 

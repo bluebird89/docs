@@ -12,20 +12,22 @@ The Python programming language,Guido van Rossum在1989年圣诞节期间，为�
 
 ## 解释器
 
-* 官方版本的解释器：CPython。这个解释器是用C语言开发的，所以叫CPython。在命令行下运行python就是启动CPython解释器。
-* Python是基于CPython之上的一个交互式解释器，也就是说，IPython只是在交互方式上有所增强，但是执行Python代码的功能和CPython是完全一样的。CPython用>>>作为提示符，而IPython用In [序号]:作为提示符。
-* 目标是执行速度。PyPy采用JIT技术，对Python代码进行动态编译（注意不是解释），所以可以显著提高Python代码的执行速度。绝大部分Python代码都可以在PyPy下运行，但是PyPy和CPython有一些是不同的，这就导致相同的Python代码在两种解释器下执行可能会有不同的结果。
+* CPython,官方版本的解释器,用C语言开发的，在命令行下运行python就是启动CPython解释器
+* IPython:基于CPython之上的一个交互式解释器.IPython只是在交互方式上有所增强，但是执行Python代码的功能和CPython是完全一样的。CPython用>>>作为提示符，而IPython用In [序号]:作为提示符
+* PyPy目标是执行速度。PyPy采用JIT技术，对Python代码进行动态编译（注意不是解释），所以可以显著提高Python代码的执行速度。绝大部分Python代码都可以在PyPy下运行，但是PyPy和CPython有一些是不同的，这就导致相同的Python代码在两种解释器下执行可能会有不同的结果。
 * Jython是运行在Java平台上的Python解释器，可以直接把Python代码编译成Java字节码执行。
 
 ### install
 
-* Mac下的python2.7 默认是安装在／System目录下的。但是～～～Mac有个Rootless机制，默认不允许直接在／System下作修改。所以要先关闭Rootless机制。关闭有风险
+* Mac下的python2.7 默认是安装在／System目录下的。Mac有个Rootless机制，默认不允许直接在／System下作修改。所以要先关闭Rootless机制。关闭有风险
     - 重启电脑, 重启过程中按住command+R, 进入恢复模式
     - 打开terminal，键入: csrutil disable
     - 重启电脑
 * 自带版本路径：/System/Library/Frameworks/Python.framework/Versions/Current
 * 安装的3.6版本：/usr/local/Cellar/python3/3.6.4_2
+* multial version python exist,use anaconda to set depend environment
 * Anaconda :/Users/henry/anaconda/bin
+* [Using Python on a Macintosh](https://docs.python.org/3/using/mac.html)
 
 ```sh
 brew install python3
@@ -68,16 +70,12 @@ ls -l /usr/bin | grep python
 wget https://www.python.org/ftp/python/3.7.6/Python-3.7.6.tgz
 tar -zxvf Python-3.7.6.tgz
 ./configure --prefix=/usr/local/python3.7.6  --with-ssl --enable-optimizations
-make 
+make
 sudo make install
-rm /usr/bin/python 
+rm /usr/bin/python
 
 ln -s /usr/local/python3.7.6/bin/python3.7 /usr/bin/python
-```
 
-[Using Python on a Macintosh](https://docs.python.org/3/using/mac.html)
-
-```sh
 # windows
 pip install scrapy
 C:\Users\Administrator\AppData\Local\Programs\Python\Python36 # 路径
@@ -137,7 +135,7 @@ virtualenv venv --system-site-packages # also inherit globally installed package
 source app_env/bin/activate
 deactivate
 
-brew install pyenv-virtualenv  #集成安装
+brew install pyenv-virtualenv  # 集成安装
 virtualenv
 virtualenv-delete
 virtualenv-init
