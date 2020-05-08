@@ -22,21 +22,12 @@ echo 'export PATH="/home/henry/anaconda3/bin:$PATH"' >> ~/.zshrc # bin目录加�
 source ~/.zshrc
 
 conda init zsh
+conda config --show
 # 更改镜像 可添加 Anaconda Python 免费仓库
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 
 # .condarc
-channels:
-  - https://mirrors.ustc.edu.cn/anaconda/pkgs/free/
-  - https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
-  - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
-  - https://mirrors.ustc.edu.cn/anaconda/cloud/msys2/
-  - https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda/
-  - https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/
-  - defaults
-show_channel_urls: true
-
 channels:
   - defaults
 show_channel_urls: true
@@ -47,6 +38,11 @@ default_channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+  
+  - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
+  - https://mirrors.ustc.edu.cn/anaconda/cloud/msys2/
+  - https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda/
+  - https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/
 custom_channels:
   conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
   msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
@@ -57,6 +53,7 @@ custom_channels:
 
 # 设置搜索时显示通道地址
 conda config --set show_channel_urls yes
+conda config --set auto_activate_base false
 ```
 
 ## 使用
@@ -72,15 +69,18 @@ conda search [--full-name] <package_full_name>
 conda env list # 显示所有的环境
 conda list [-n python34|--revisions] # 查看某个指定环境的已安装包
 conda create --name|n  py35 python=3.5 numpy pandas
+conda env create -f environment.yaml #  用对方分享的 YAML 文件来创建一摸一样的运行环境。
+conda create --name <new_env_name> --clone <copied_env_name> # 复制环境
+
 conda install|update|remove [--name | -n  py35] numpy=1.10 scipy pandas
 conda install --channel|-c conda-forge
 conda upgrade|update --all   # 升级all
 conda env export > environment.yaml  # 分享代码的时候，同时也需要将运行环境分享给大家，执行如下命令可以将当前环境下的 package 信息存入名为 environment 的 YAML 文件中
-conda env create -f environment.yaml #  用对方分享的 YAML 文件来创建一摸一样的运行环境。
-conda create --name <new_env_name> --clone <copied_env_name> # 复制环境
 
 conda activate env_name # 进入名为 env_name 的环境
+source activate <env_name>
 conda deactivate [env_name] # 退出当前环境
+source deactivate
 
 activate env_name # for Windows
 deactivate [env_name] # for Windows
@@ -92,6 +92,7 @@ which -a python
 
 # remove
 rm -rf ~/anaconda3
+rm -rf ~/.condarc ~/.conda ~/.continuum
 ```
 
 ## reference

@@ -19,6 +19,7 @@ sudo apt install fonts-firacode
 ## 工具
 
 * [fonttools/fonttools](https://github.com/fonttools/fonttools):A library to manipulate font files from Python.
+* [ powerline / fonts ](https://github.com/powerline/fonts):Patched fonts for Powerline users. 
 
 ## theme
 

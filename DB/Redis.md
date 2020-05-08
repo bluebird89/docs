@@ -1476,6 +1476,13 @@ public void delBigList(String host, int port, String password, String bigListKey
 
 user:sex 用户 10002232 的性别
 msg:achi 201712 的用户发言数量排行榜
+
+# /etc/redis/redis.conf
+rename-command FLUSHDB ""
+rename-command FLUSHALL ""
+rename-command DEBUG ""
+rename-command SHUTDOWN SHUTDOWN_MENOT
+rename-command CONFIG ASC12_CONFIG
 ```
 
 ## 注意

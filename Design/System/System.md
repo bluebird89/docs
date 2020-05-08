@@ -62,7 +62,7 @@ BO 是内存计算逻辑对象，不是业务逻辑层对象，不是只能给�
 
 ## 工具
 
-× [ nicolargo / glances ](https://github.com/nicolargo/glances):Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems. http://nicolargo.github.io/glances/
+* [ nicolargo / glances ](https://github.com/nicolargo/glances):Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems. http://nicolargo.github.io/glances/
 
 ## 参考
 
