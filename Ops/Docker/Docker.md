@@ -361,7 +361,9 @@ sudo systemctl restart docker
       * 所有资源管理的功能都以子系统的方式实现，接口统一子任务创建之初与其父任务处于同一个cgroup的控制组
   - 通过写时复制技术（copy-on-write）实现了高效的文件操作（类似虚拟机的磁盘比如分配500g并不是实际占用物理磁盘500g）
 * 可配额/可度量
-  - Linux的控制组 cgroups（Control Groups）实现了对资源配额和度量,容器资源统计和隔离。可以限制、记录、隔离进程组（process groups）所使用的物理资源（如：cpu,memory, io 等等）的机制
+  - Linux的控制组 cgroups（Control Groups）限制一个进程组能够使用的资源上限，包括 CPU、内存、磁盘、网络带宽等等,实现了对资源配额和度量,容器资源统计和隔离。可以限制、记录、隔离进程组（process groups）所使用的物理资源（如：cpu,memory, io 等等）的机制
+    + –cpu-period和–cpu-quota组合使用来限制容器使用的CPU时间。表示在–cpu-period的一段时间内，容器只能被分配到总量为 --cpu-quota 的 CPU 时间
+    + -m选项则限制了容器使用宿主机内存的上限
   - 确保各个容器可以公平地分享主机的内存、CPU、磁盘 IO 等资源；当然，更重要的是，控制组确保了当容器内的资源使用产生压力时不会连累主机系统
   - cgroups类似文件的接口，在/cgroups目录下新建一个group，在此文件夹新建task，并将pid写入即可实现对改进程的资源控制
   - blkio，cpu，devices，memory，net_cls, ns等9大子系统

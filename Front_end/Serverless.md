@@ -5,18 +5,6 @@
 * 想持久化的东西必须得保存到外部的系统或者存储中，例如Redis，MySQL等。 很明显，这些东西也应该以“服务”的方式来呈现，即Backend as a Service (BaaS)。
 * 公认的 Serverless 的定义，是 Serverless = FaaS + BaaS,FaaS 则让我们能够在云端编写、运行函数，并由这些云函数组成应用程序。
 * FaaS 本身提供的只有运行函数的功能，并且每个函数的执行都是孤立和短暂的。但我们的应用程序，往往还需要持久存储和临时存储，以及在存储中进行数据管理，所以我们需要 BaaS。BaaS 就是一些列后端的功能的集合，比如云数据库、对象存储、消息队列、通知服务。没有这些 BaaS，函数的能力是非常有限的。整个 BaaS 也都由云供应商厂商提供，开发者不需要关心具体细节、实现，只需要在 FaaS 中使用 BaaS，这样才能构建整个应用。
-
-## 发展
-
-* 最初的基于 JSP、PHP 等后端语言的模板渲染
-* 基于 AJAX 的前后端分离
-    - 前端的应用变得更加复杂，端也由 PC 端扩展到移动端、客户端甚至 IoT；
-    - 后端应用也由单体应用转变为了微服务应用，接口变得更加原子化，前后端接口协调开始变得困难。
-* BFF（Backend For Frontend）架构模式
-* 前后端基于 Serverless 函数的协调
-
-## 优缺点
-
 * 优点
     - 按需提供无限计算资源。
     - 消除云用户的前期承诺。
@@ -32,6 +20,15 @@
     - 基于 Serverless 的应用严重依赖云服务。云服务的稳定性直接决定了业务的稳定性。
     - 应用的多云部署或应用的迁移，也会比较麻烦。因为目前 Serverless 还没有一个统一标准，各个云供应商的 FaaS 和 BaaS 实现也不一样。所以当我们想要把 Serverless 应用从一个云服务迁移到另一个云服务，就会变得很困难。解决这个问题的方法，就是尽量让我们的业务代码和所依赖的云服务分离。这样迁移的时候，就只需要修改依赖云服务的相关代码。
     - 底层硬件资源的不确定性。由于云供应商可以灵活的选择底层服务器的规格和型号，这就导致了每个云函数运行的物理环境性能不尽相同。这种不确定性其实暴露了云供应商的背后的目的：他们想要最大化的平衡资源的使用和预算。
+
+## 发展
+
+* 最初的基于 JSP、PHP 等后端语言的模板渲染
+* 基于 AJAX 的前后端分离
+    - 前端的应用变得更加复杂，端也由 PC 端扩展到移动端、客户端甚至 IoT；
+    - 后端应用也由单体应用转变为了微服务应用，接口变得更加原子化，前后端接口协调开始变得困难。
+* BFF（Backend For Frontend）架构模式
+* 前后端基于 Serverless 函数的协调
 
 ## 流程
 
@@ -79,9 +76,18 @@ http://xyz.amazonaws.com/hello-world
 * [openfaas/faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple https://docs.openfaas.com/
 * [firecracker-microvm/firecracker](https://github.com/firecracker-microvm/firecracker):Secure and fast microVMs for serverless computing. http://firecracker-microvm.io
 * [awslabs/serverless-application-model](https://github.com/awslabs/serverless-application-model):AWS Serverless Application Model (AWS SAM) prescribes rules for expressing Serverless applications on AWS.
+* [Knative](https://knative.dev/)：
+    - Build：在实现时，是表现为 Kubernetes 的 CRD，通过 yaml 文件来定义构建过程。这里引入了很多概念如：Build，Builder，Step，Template，Source等。另外支持用 Service Account 做身份验证
+    - Serving：运行应用以对外提供服务，即提供服务、函数的运行时支撑
+        + Kubernetes-based：基于k8s，也仅支持k8s，好处是可以充分利用k8s平台的能力
+        + scale-to-zero：serverless 最重要的卖点之一，当然要强调
+        + request-driven compute：请求驱动的计算
+    - Eventing
+    - [Knative ](https://www.ibm.com/developerworks/cn/opensource/os-knative-what-is-it-why-you-should-care/index.html)
+    - [构建基于 Kubernetes 的现代化Serverless应用](https://www.servicemesher.com/getting-started-with-knative/knative-overview.html)
+* [serverless/serverless](https://github.com/serverless/serverless):Serverless Framework – Build web, mobile and IoT applications with serverless architectures using AWS Lambda, Azure Functions, Google CloudFunctions & more! – https://serverless.com
 
 ## 参考
 
 * [phodal/serverless](https://github.com/phodal/serverless/):Serverless 架构应用开发指南 - Serverless Architecture Application Development Guide with Serverless Framework. https://serverless.ink
-* [serverless/serverless](https://github.com/serverless/serverless):Serverless Framework – Build web, mobile and IoT applications with serverless architectures using AWS Lambda, Azure Functions, Google CloudFunctions & more! – https://serverless.com
 * [mnapoli/bref](https://github.com/mnapoli/bref):Serverless PHP on AWS Lambda https://bref.sh/

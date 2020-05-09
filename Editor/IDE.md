@@ -292,6 +292,7 @@ livetemplate
   - Statistic—项目信息统计
   - Translation-必备的翻译插件
 * [IntelliJ IDEA config](https://www.jianshu.com/p/320d82d405ad)
+* Diagrams
 
 数据是统一的，能够实现批量处理
 
@@ -317,4 +318,4 @@ livetemplate
 
 ## 参考
 
-* [](https://confluence.jetbrains.com/display/PhpStorm)
+* [confluence](https://confluence.jetbrains.com/display/PhpStorm)

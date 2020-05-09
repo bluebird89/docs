@@ -177,6 +177,49 @@ public int factorial(int n) {
 }
 ```
 
+## 回文数
+
+* 指正序（从左向右）和倒序（从右向左）读都是一样的整数
+* 方法
+    - 反转后是否相等
+    - 将整数转为字符串 ，然后将字符串分割为数组，只需要循环数组的一半长度进行判断对应元素是否相等即可
+    - 取整和取余操作获取整数中对应的数字进行比较
+    - 取出后半段数字进行翻转
+        + 长度是奇数时，那么它对折过来后，有一个的长度需要去掉一位数（除以 10 并取整）
+
+```
+class Solution {
+    public boolean isPalindrome(int x) {
+        //边界判断
+        if (x < 0) return false;
+        int div = 1;
+        //
+        while (x / div >= 10) div *= 10;
+        while (x > 0) {
+            int left = x / div;
+            int right = x % 10;
+            if (left != right) return false;
+            x = (x % div) / 10;
+            div /= 100;
+        }
+        return true;
+    }
+}
+
+class Solution {
+    public boolean isPalindrome(int x) {
+        //思考：这里大家可以思考一下，为什么末尾为 0 就可以直接返回 false
+        if (x < 0 || (x % 10 == 0 && x != 0)) return false;
+        int revertedNumber = 0;
+        while (x > revertedNumber) {
+            revertedNumber = revertedNumber * 10 + x % 10;
+            x /= 10;
+        }
+        return x == revertedNumber || x == revertedNumber / 10;
+    }
+}
+```
+
 ## 课程
 
 * [MIT](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-spring-2008/)
@@ -225,10 +268,14 @@ public int factorial(int n) {
 * [](https://visualgo.net/en):可视化
 * [algorithm004-01/algorithm004-01](https://github.com/algorithm004-01/algorithm004-01)
 * [labuladong / fucking-algorithm](https://github.com/labuladong/fucking-algorithm):手把手撕LeetCode题目，扒各种算法套路的裤子，not only how，but also why. English version supported! https://labuladong.gitbook.io/algo/
+* [TheAlgorithms / Go](https://github.com/TheAlgorithms/Go):Algorithms Implemented in GoLang
+* [TheAlgorithms / Python](https://github.com/TheAlgorithms/Python):All Algorithms implemented in Python
+* [TheAlgorithms / Java](https://github.com/TheAlgorithms/Java):All Algorithms implemented in Java
+* [TheAlgorithms / Javascript](https://github.com/TheAlgorithms/Javascript):A repository for All algorithms implemented in Javascript (for educational purposes only)
 
 * [leetcode](https://leetcode.com/) [leetcode-cn](https://leetcode-cn.com/)
 * collabedit.com
 * coderpad.io
 
-[动态规划解题技巧](https://mp.weixin.qq.com/s?__biz=MzI1MzYzMTI2Ng==&mid=2247484431&idx=3&sn=35abe41394f24167b78419edbc36fc7c)
+* [动态规划解题技巧](https://mp.weixin.qq.com/s?__biz=MzI1MzYzMTI2Ng==&mid=2247484431&idx=3&sn=35abe41394f24167b78419edbc36fc7c)
 * [我接触过的前端数据结构与算法](https://juejin.im/post/5958bac35188250d892f5c91)

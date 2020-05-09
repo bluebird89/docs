@@ -12,12 +12,10 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
     - 面对突发流量，已经无法通过扩容解决问题时，要启用流量控制，甚至服务降级
     - 随着业务持续发展，要提前进行容量规划，结合服务监控数据，以确认当前系统容量能否支撑更高水位的压力
     - 通过一系列的服务治理策略，最终通过数据证明系统对外承诺的 SLA
-* 使用Golang开发，其提供应用部署、维护、扩展机制等功能，利用Kubernetes能方便地管理跨机器运行容器化的应用，其主要功能如下：
-    + 使用Docker对应用程序包装(package)、实例化(instantiate)、运行(run)
-    + 以集群的方式运行、管理跨机器的容器
-    + 解决Docker跨机器容器之间的通讯问题
-    + 自我修复机制使得容器集群总是运行在用户期望的状态
-* 功能
+* 使用Golang开发，其提供应用部署、维护、扩展机制等功能，利用Kubernetes能方便地管理跨机器运行容器化的应用，主要功能如下：
+    - 使用Docker对应用程序包装(package)、实例化(instantiate)、运行(run)
+    - 以集群的方式运行、管理跨机器的容器
+    - 解决Docker跨机器容器之间的通讯问题
     - 服务发现和负载均衡：使用 DNS 名称或自己的 IP 地址公开容器，如果到容器的流量很大，Kubernetes 可以负载均衡并分配网络流量，从而使部署稳定
     - 存储编排：允许自动挂载选择的存储系统，例如本地存储、公共云提供商等
     - 自动部署和回滚：可以使用 Kubernetes 描述已部署容器的所需状态，可以以受控的速率将实际状态更改为所需状态。例如，可以自动化 Kubernetes 来为您的部署创建新容器，删除现有容器并将它们的所有资源用于新容器
@@ -124,11 +122,40 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
 
 * Cluster 集群：由K8s使用一序列的物理机、虚拟机和其它基础资源来运行你的应用程序
 * NameSpaces 命名空间：在集群中可以使用namespace创建多个“虚拟集群”，namespace之间可以完全隔离，也可以通过某种方式，让一个namespace中的service可以访问到其他的namespace中的服务
+    - 一组资源和对象的抽象集合，比如可以用来将系统内部的对象划分为不同的项目组或用户组
+    - 常见的Pods，Services，Replication Controllers和Deployments等都属于某一个Namespace，默认是default。而Node，PresistentVolumes等则不属于任何Namespace
+    - Namespace常用于隔离不同的用户，比如K8s自带的服务一般运行在Kube-system Namespace中
+    - 操作
+        + 查询namespace `kubectl get namespaces` namespace包含两种状态Active和Terminating，删除namespace的过程中namespace状态被设置为Terminating
+        + 创建namespace `kubectl create namespace new-namespace` namespace名称满足正则表达式[a-z0-9]([-a-z0-9]*[a-z0-9])?,最大长度为63位
+        + 删除namespace `kubectl delete namespaces new-namespace`
+            * 删除一个namespace会自动删除所有属于该namespace的资源
+            * default和kube-system命名空间不可删除
 * Deployment 为 Pod 和 ReplicaSet 提供了一个声明式定义(declarative)方法，用来替代以前的 ReplicationController 来方便的管理应用，应用场景
     - 定义Deployment来创建Pod和ReplicaSet
     - 滚动升级和回滚应用
     - 扩容和缩容
     - 暂停和继续Deployment
+    - 状态
+        + 无效的引用
+        + 不可读的probe failure
+        + 镜像拉取错误
+        + 权限不够
+        + 范围限制
+        + 程序运行时配置错误
+        + Deployment可用的Replica个数等于或者超过Deployment策略中期望的个数
+        + 所有与该Deployment相关的Replica都更新完成
+        + Deployment正在创建新的ReplicaSet
+        + Deployment正在扩容一个已有的ReplicaSet
+        + Deployment正在缩容一个已有的ReplicaSet
+        + Progressing: 进行中
+        + Complete: 完成
+        + Failed: 失败
+    - 使用
+        + 查询: `kubectl get deployments -o wide`
+        + 扩容: `kubectl scale deployment nginx-deployment –replicas 10`
+        + 更新镜像: `kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1`
+        + 回滚: `kubectl rollout undo deployment/nginx-deployment`
 * Service
     - 一个抽象的概念，定义了Pod的逻辑分组和一种可以访问它们的策略，这组Pod能被Service访问，使用YAML（优先）或JSON 来定义Service，Service所针对的一组Pod通常由LabelSelector实现
     - 一个抽象层，定义了一组逻辑的Pods，这些Pod提供了相同的功能，借助Service，应用可以方便的实现服务发现与负载均衡，可以把Service加上一组Pod称作是一个微服务
@@ -279,11 +306,15 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
         + Label：Replication Controller需要监控的Pod的标签
     - 对于利用 pod 模板创建的pods，Replication Controller根据 label selector 来关联，通过修改pods的label可以删除对应的pods
     - 用法：
-        + Rescheduling:Replication Controller会确保Kubernetes集群中指定的pod副本(replicas)在运行， 即使在节点出错时
+        + Rescheduling:保证足够数量的Pod运行，即使节点Node失败或者挂掉的情况
         + Scaling:通过修改Replication Controller的副本(replicas)数量来水平扩展或者缩小运行的pods
-        + Rolling updates:Replication Controller的设计原则使得可以一个一个地替换pods来滚动更新（rolling updates）服务
+        + Rolling updates:可以一个一个地替换pods来滚动更新（rolling updates）服务
         + Multiple release tracks:如果需要在系统中运行multiple release的服务，Replication Controller使用labels来区分multiple release tracks
     - 以上三个概念便是用户可操作的REST对象。Kubernetes以RESTfull API形式开放的接口来处理
+* ReplicaSet (RS):下一代Replication Controller，ReplicaSet和Replication Controller唯一的区别是现在的选择器支持不同，官方推荐使用ReplicaSet
+    - 大多数kubectl支持Replication Controller的命令也支持ReplicaSet
+    - ReplicaSet主要是被Deployment做为协调Pod创建、删除和更新的机制，当使用Deployment时，你不必担心创建Pod的ReplicaSets，因为可以通过Deployment实现管理ReplicaSets
+    - Deployment是一个更高层次的概念，管理ReplicaSet，并提供对pod的声明性更新以及许多其他的功能。因此，建议使用Deployment而不是直接使用ReplicaSet。这实际上意味着可能永远不需要操作ReplicaSet对象，而是直接使用Deployment并在规范部分定义应用程序
 * 如下图所示，有三个pod都有label为"app=backend"，创建service和replicationController时可以指定同样的label:"app=backend"，再通过label selector机制，就将它们与这三个pod关联起来了。例如，当有其他frontend pod访问该service时，自动会转发到其中的一个backend pod
 
 * Horizontal Pod Autoscaler （HPA）组件专门设计用于应用弹性扩容的控制器，通过定期轮询 Pod 的状态（CPU、内存、磁盘、网络，或者自定义的应用指标），当 Pod 的状态连续达到提前设置的阈值时，就会触发副本控制器，修改其应用副本数量，使得 Pod 的负载重新回归到正常范围之内
@@ -291,9 +322,9 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
 * annotate命令：更新一个或多个资源的Annotations信息。也就是注解信息，可以方便的查看做了哪些操作
     - 相对于label来说可以容纳更大的键值对，它对我们来说是不可读的数据，只是为了存储不可识别的辅助数据，尤其是一些被工具或系统扩展用来操作的数据
     - 由key/value组成
-    - Annotations的目的是存储辅助数据，特别是通过工具和系统扩展操作的数据，更多介绍在这里
-    - 如果--overwrite为true，现有的annotations可以被覆盖，否则试图覆盖annotations将会报错
-    - 如果设置了--resource-version，则更新将使用此resource version，否则将使用原有的resource version
+    - 目的是存储辅助数据，特别是通过工具和系统扩展操作的数据
+    - --overwrite为true，现有的annotations可以被覆盖，否则试图覆盖annotations将会报错
+    - --resource-version，则更新将使用此resource version，否则将使用原有的resource version
 
 ![](../_static/labels.png)
 
