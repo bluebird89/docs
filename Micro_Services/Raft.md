@@ -26,3 +26,7 @@ Consensus一致性:指多个服务器在状态达成一致，但是在一个分�
         + 原先的 Leader 独自在一个区，向它提交数据不可能复制到多数节点所以永远提交不成功
         + 向新的 Leader 提交数据可以提交成功
         + 网络恢复后旧的 Leader 发现集群中有更新任期（Term）的新 Leader 则自动降级为 Follower 并从新 Leader 处同步数据达成集群数据一致。
+
+## 参考
+
+* [maemual / raft-zh_cn](https://github.com/maemual/raft-zh_cn):Raft一致性算法论文的中文翻译

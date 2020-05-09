@@ -627,7 +627,7 @@ open http://127.0.0.1:8000
 * 机器学习
     - [PHP-ML](https://github.com/php-ai/php-ml): 一个机器学习的PHP库 PHP-ML - Machine Learning library for PHP
 * 杂项 Miscellaneous 创建一个开发环境的软件
-    - (https://github.com/doctrine/annotations)[Annotations]: 一个注释库(Doctrine的一部分)
+    - [Annotations](https://github.com/doctrine/annotations): 一个注释库(Doctrine的一部分)
     - (https://github.com/cakephp/utility)[Cake Utility]: 工具类如Inflector，字符串，哈希，安全和XML (CP)
     - (https://github.com/adamnicholson/Chief)[Chief]: 一个命令总线库
     - (https://github.com/ClassPreloader/ClassPreloader)[ClassPreloader]: 一个优化自动加载的库

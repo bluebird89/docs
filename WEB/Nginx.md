@@ -2326,3 +2326,5 @@ fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 * [Understanding the Nginx Configuration File Structure and Configuration Contexts](https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts)
 * [jaywcjlove/nginx-tutorial](https://github.com/jaywcjlove/nginx-tutorial):Nginx安装维护入门学习笔记，以及各种实例。
 * [chef-cookbooks/nginx](https://github.com/chef-cookbooks/nginx):Development repository for nginx cookbook https://supermarket.chef.io/cookbooks/nginx
+
+* [采集Nginx日志的几种方式](https://mp.weixin.qq.com/s/W6iSPTiy3Ul0JU9Q8T8YSA)
