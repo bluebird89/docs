@@ -728,7 +728,7 @@ CREATE TABLE IF NOT EXISTS test.news(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 collate=utf8_bin;
 CREATE TABLE table_name SELECT column1,cloumn2 FROM another_table: # 复制数据不复制主键
 CREATE TABLE table_name like another_table；  #  复制表结构 数据不复制，主键复制
-INSERT office_dup SELECT * FROM offices;
+INSERT office_dup SELECT * FROM offices; # 一定要确保table offices后面的where，order或者其他条件，都需要有对应的索引，来避免出现table offices 全部记录被锁定的情况
 
 ALTER TABLE table_name ADD address varchar(30) first| after name;
 ALTER TABLE table_name DROP address;

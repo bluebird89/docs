@@ -1211,6 +1211,7 @@ Python 实现的算法和设计模式。
 * More Python for Beginners
 * Even More Python for Beginners： Data Tools
 * [microsoft / c9-python-getting-started](https://github.com/microsoft/c9-python-getting-started):Sample code for Channel 9 Python for Beginners course
+* [essential-python-resources/](https://x-team.com/blog/essential-python-resources/)
 
 ## Algorithmic Trading
 
