@@ -197,6 +197,7 @@ $sub = addcslashes(mysql_real_escape_string("%something_"), "%_");
 ## 课程
 
 * [CS 253 Web Security](https://web.stanford.edu/class/cs253/)
+* The Web Application Hacker's Handbook: Finding and Exploiting Security Flaws 2nd Edition
 
 ## 工具
 
