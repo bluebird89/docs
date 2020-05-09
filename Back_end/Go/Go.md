@@ -977,7 +977,8 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 ## 图书
 
 * [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源图书，涵盖CGO、Go汇编语言、RPC实现、Protobuf插件实现、Web框架实现、分布式系统等高阶主题 https://legacy.gitbook.com/book/chai2010/advanced-go-programming-book/details
-* [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN)* 《Go 入门指南 The Way to Go》
+* [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN)
+* 《Go 入门指南 The Way to Go》
 * 《Go 并发编程实战》
 * [Mastering_Go_ZH_CN](https://wskdsgcf.gitbook.io/mastering-go-zh-cn/)
 * [Go 语言设计与实现](https://draveness.me/golang/)
