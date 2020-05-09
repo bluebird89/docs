@@ -497,8 +497,8 @@
 
 * 《[大教堂与集市](https://www.amazon.cn/gp/product/B00KQDTZ4S)》
 * 《卓有成效的程序员》
-* 《[程序员的职业素养（Pragmatic Programmer）](https://www.amazon.cn/gp/product/B01LZJ8L9J)》
 * 《[程序员修炼之道：从小工到专家《The Pragmatic Programmer》](https://www.amazon.cn/gp/product/B004GV08CY)》
+    - [caicaishmily / pragmatic-programmer-zh](https://github.com/caicaishmily/pragmatic-programmer-zh)
 * 程序员的自我修养
 * 《[软件开发者路线图：从学徒到高手](https://www.amazon.cn/gp/product/B00H6X6LD4)》
 * 《[我编程，我快乐: 程序员职业规划之道](https://www.amazon.cn/gp/product/B00CBBKDGM)》
@@ -1016,6 +1016,7 @@
     - [Calibre](https://calibre-ebook.com/)
     - <http://kmate.me/cn/>
     - <https://readfree.me/>
+    - [时钟](http://k.ilib.io/u/clock.html)
 
 ## 出版社
 

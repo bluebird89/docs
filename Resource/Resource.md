@@ -162,7 +162,6 @@
 * [asdf-vm/asdf](https://github.com/asdf-vm/asdf):Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more
 * [代码片段](http://www.phpxs.com/code/)
 * [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
-* [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
 * [chubin/cheat.sh](https://github.com/chubin/cheat.sh):the only cheat sheet you need https://cheat.sh/
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 * [DaveDavenport/rofi](https://github.com/DaveDavenport/rofi):Rofi: A window switcher, application launcher and dmenu replacement
@@ -188,9 +187,10 @@
 * 笔记
     - TickTick
     - [laurent22/joplin](https://github.com/laurent22/joplin):Joplin - an open source note taking and to-do application with synchronization capabilities for Windows, macOS, Linux, Android and iOS. Forum: https://discourse.joplinapp.org/ https://joplinapp.org
+        + `brew cask install joplin`
+        + `wget -O - https://raw.githubusercontent.com/laurent22/joplin/master/Joplin_install_and_update.sh | bash`
     - [P3X OneNote](link)： a cloud-based note-taking application and is considered as an exact alternative to the well known Microsoft OneNote application
     - [Notion](https://www.notion.so/):Work offline, collaborate in real-time, write without distractions.
-    - [laurent22 / joplin](https://github.com/laurent22/joplin):Joplin - an open source note taking and to-do application with synchronization capabilities for Windows, macOS, Linux, Android and iOS. Forum: https://discourse.joplinapp.org/ https://joplinapp.org
 * flowchart
     - [Zen Flowchart](https://www.zenflowchart.com)
 * 輸入法
@@ -218,6 +218,7 @@
     - [Redshift](http://jonls.dk/redshift/)
 * 白板
     - [excalidraw / excalidraw](https://github.com/excalidraw/excalidraw):Excalidraw is a whiteboard tool that lets you easily sketch diagrams that have a hand-drawn feel to them. https://excalidraw.com
+
 ## Language
 
 * [byoungd/English-level-up-tips-for-Chinese](https://github.com/byoungd/English-level-up-tips-for-Chinese)
