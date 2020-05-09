@@ -6,6 +6,7 @@ Jupyter metapackage for installation, docs and chat https://jupyter.readthedocs.
 
 ## 说明
 
+
 * 保存为后缀名为.ipynb的JSON格式文件，不仅便于版本控制，也方便与他人共享。
 * 可以导出为：HTML、LaTeX、PDF等格式
 * 编程时具有语法高亮、缩进、tab补全的功能。
@@ -52,7 +53,7 @@ c.InteractiveShell.ast_node_interactivity = "all"
 
 对conda环境和包进行一系列操作
 
-```
+```sh
 conda install nb_conda
 conda remove nb_conda
 ```
@@ -281,7 +282,7 @@ jupyter-nbextension enable rise --py --sys-prefix
 
 * Table of Contents(2):目录生成
     - 安装
-    - 页面中Nbextensions标签下勾选“Table of Contents(2)” 
+    - 页面中Nbextensions标签下勾选“Table of Contents(2)”
 
 ```
 # 添加
