@@ -202,6 +202,33 @@ public class CorsConfiguration {
 }
 ```
 
+## Flyway
+
+* 独立于数据库的应用、管理并跟踪数据库变更的数据库版本管理工具,实现自动化的数据库版本管理，并且能够记录数据库版本更新记录
+* resources/db/migration 目录下创建需要执行的 SQL 脚本即可。SQL 脚本命名规范
+    - Prefix 前缀：V 代表版本迁移，U 代表撤销迁移，R 代表可重复迁移
+    - Version 版本号：版本号通常 . 和整数组成
+    - Separator 分隔符：固定由两个下划线 __ 组成
+    - Description 描述：由下划线分隔的单词组成，用于描述本次迁移的目的
+    - Suffix 后缀：如果是 SQL 文件那么固定由 .sql 组成，如果是基于 Java 类则默认不需要后缀
+
+```
+# pom.xml 加入如下依赖集成 Flyway：
+<dependency>
+    <groupId>org.flywaydb</groupId>
+    <artifactId>flyway-core</artifactId>
+    <version>5.2.4</version>
+</dependency>
+
+# 在 application.yml 中写入 mysql 的配置及 Flyway 的相关配置(Flyway locations 默认读取当前项目下的 resources/db/migration 目录)
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=123
+
+spring.flyway.locations=classpath:/db/migration/
+```
+
 ## 问题
 
 ```

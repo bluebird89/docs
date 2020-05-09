@@ -361,6 +361,10 @@ lsmod | grep bbr
 * 网页消息推送
 * Flash的一个致命弱点是他无法在移动设备中使用，HTML播放器Chimee
 
+## 课程
+
+* [深入浅出现代Web编程](https://fullstackopen.com/zh)
+
 ## 工具
 
 * [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ https://codesandbox.io
@@ -409,7 +413,6 @@ lsmod | grep bbr
 * [Mozilla的安全编程规范](https://wiki.mozilla.org/WebAppSec/Secure_Coding_Guidelines)
 * [Ruby on Rails的Web安全的开发教程](https://guides.rubyonrails.org/security.html)
 * [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning Area. https://developer.mozilla.org/en-US/docs/Learn
-
 
 * [WEB开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
 * [What technical details should a programmer of a web application consider before making the site public?](https://softwareengineering.stackexchange.com/questions/46716/what-technical-details-should-a-programmer-of-a-web-application-consider-before/46738#46738)
