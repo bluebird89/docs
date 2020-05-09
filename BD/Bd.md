@@ -98,10 +98,14 @@
 
 ## 流程
 
-* 数据采集：数据来源主要是两类，第一类是各个业务系统的关系数据库，通过Sqoop或者Cannal等工具进行定时抽取或者实时同步；第二类是各种埋点日志，通过Flume进行实时收集
-* 数据存储：将这些数据存储在HDFS中，实时日志流情况下则通过Kafka输出给后面的流式计算引擎
-* 数据分析：数据处理最核心的环节，包括离线处理和流处理两种方式，对应的计算引擎包括MapReduce、Spark、Flink等，处理完的结果会保存到已经提前设计好的数据仓库中，或者HBase、Redis、RDBMS等各种存储系统上
+* 数据采集：从不同数据源收集数据获取数据到统一装置中 数据来源主要是两类，第一类是各个业务系统的关系数据库，通过Sqoop或者Cannal等工具进行定时抽取或者实时同步；第二类是各种埋点日志，通过Flume进行实时收集
+* 数据存储：借助存储介质将收集到的数据持久化保存，比如硬盘 将这些数据存储在HDFS中，实时日志流情况下则通过Kafka输出给后面的流式计算引擎
+* 数据清洗，将不符合规范的数据进行特定处理，使得数据达到准确完整一致等要求
+* 数据建模，定义满足业务所需要的数据要求的过程，一般需要业务建模师参与
+* 数据处理，对数据的采集、存储、检索、加工、变换、传输等操作，从海量数据中抽取提取有价值的数据
+* 数据分析，使用数据挖掘技术从海量数据中获取有价值的信息。 最核心的环节，包括离线处理和流处理两种方式，对应的计算引擎包括MapReduce、Spark、Flink等，处理完的结果会保存到已经提前设计好的数据仓库中，或者HBase、Redis、RDBMS等各种存储系统上
 * 数据应用：包括数据的可视化展现、业务决策、或者AI等各种数据应用场景
+* 数据可视化，将数据以直观的可视化方式展示给用户
 
 ## 大数据下的数仓体系架构
 
@@ -241,3 +245,22 @@
 * [hashicorp/consul](https://github.com/hashicorp/consul):Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure. https://www.consul.io/
 * [ag-grid/ag-grid](https://github.com/ag-grid/ag-grid):Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components http://www.ag-grid.com
 * [brendangregg / FlameGraph](https://github.com/brendangregg/FlameGraph):Stack trace visualizer http://www.brendangregg.com/flamegraphs.html
+* HDFS，分布式文件系统
+* HBase，分布式数据库
+* MapReduce，由用户编写的运行在hadoop集群上的并行程序
+* zookeeper，作为分布式程序的协调中心
+* hive，基于hadoop的数据仓库管理工具
+* pig，大数据分析工具
+* yarn，hadoop集群资源管理系统
+* sqoop，hadoop与传统数据库之间进行数据交换的工具
+* chukawa，分布式数据收集分析系统
+* hcatalog，管理hadoop产生的数据表存储管理系统
+* redis，分布式缓存系统
+* kafka，分布式消息系统
+* Cassandra，分布式结构和数据存储
+* neo4j，nosql图数据库
+* spark，分布式计算引擎
+* storm，分布式实时计算系统
+* elasticsearch，分布式全文搜索
+* flume，分布式日志采集系统
+* flink，分布式流处理引擎
