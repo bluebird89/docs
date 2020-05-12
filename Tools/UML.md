@@ -2,11 +2,11 @@
 
 [TOC]
 
-UML是一种开放的方法，用于说明、可视化、构建和编写一个正在开发的、面向对象的、软件密集系统的制品的开放方法。
+UML是一种开放的方法，用于说明、可视化、构建和编写一个正在开发的、面向对象的、软件密集系统的制品的开放方法
 
-- 功能模型：从用户的角度展示系统的功能，包括用例图。
-- 对象模型：采用对象，属性，操作，关联等概念展示系统的结构和基础，包括类别图、对象图。
-- 动态模型：展现系统的内部行为。包括序列图，活动图，状态图。
+* 功能模型：从用户的角度展示系统的功能，包括用例图
+* 对象模型：采用对象，属性，操作，关联等概念展示系统的结构和基础，包括类别图、对象图
+* 动态模型：展现系统的内部行为。包括序列图，活动图，状态图
 
 * 时序图:通过描述对象之间发送消息的时间顺序显示多个对象之间的动态协作。 ->表示消息传递，-->表示异步消息传递，note [left | right]对消息进行说明。
 
@@ -153,13 +153,13 @@ dot -Tpng first.dot -o first.png # 用的是dot布局 -T表示格式，即画成
     - 使用 == xxx == 来分隔时序图
     - 使用 ... 来表示延迟省略号
     - 节点可以给自己发送消息，方法是发送方和接收方使用同一个主体即可
-* 用例图 use case diagram  
+* 用例图 use case diagram
     - 用例图是指由参与者（Actor）、用例（Use Case）以及它们之间的关系构成的用于描述系统功能的静态视图
     - 百度百科上有简易的入门资料，其中用例之间的关系 (include, extends) 是关键
     - 使用 actor 来定义参与者
     - 使用括号 (xxx) 来表示用例，用例用椭圆形表达
     - 使用不同的线条表达不同的关系。包括参与者与用例的关系，用例与用例的关系
-* 流程图 activity diagram 
+* 流程图 activity diagram
     - 使用 start 来表示流程开始，使用 stop 来表示流程结束
     - 顺序流程使用冒号和分号 :xxx; 来表示
     - 条件语句使用 if ("condition 1") then (true/yes/false/no) 来表示
@@ -354,7 +354,6 @@ state Configuring {
 @enduml
 ```
 
-## 
 ## 工具
 
 * [bpmn-io/bpmn-js](https://github.com/bpmn-io/bpmn-js):A BPMN 2.0 rendering toolkit and web modeler. https://bpmn.io/toolkit/bpmn-js/
@@ -368,7 +367,7 @@ state Configuring {
   - [staruml](https://sourceforge.net/projects/staruml/)
   - Lucidchart
   - [diagram](https://webdemo.myscript.com)
-
+* [WebSequenceDiagrams](https://www.websequencediagrams.com/):Create sequence diagrams in seconds.
 
 ## 参考
 

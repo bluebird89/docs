@@ -8,19 +8,19 @@
 
 ## 架构
 
-* Make Fewer HTTP Requests 
+* Make Fewer HTTP Requests
 * Use a Content Delivery Network
 * Add an Expires Header
-* Gzip Components 
-* Put CSS at the Top 
+* Gzip Components
+* Put CSS at the Top
 * Move Scripts to the Bottom
-* Avoid CSS Expressions 
-* Make JavaScript and CSS External 
+* Avoid CSS Expressions
+* Make JavaScript and CSS External
 * Reduce DNS Lookups
-* Minify JavaScript 
-* Avoid Redirects 
+* Minify JavaScript
+* Avoid Redirects
 * Remove Duplicate Scripts
-* Configure ETags 
+* Configure ETags
 * Make Ajax Cacheable
 
 ## 压力测试
@@ -174,7 +174,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
     - 产生在包含这些方法的代码中，比如 curl、file_get_contents、fsockopen
         + curl 中 `http://www.xxx.com/demo.php?url=file:///etc/passwd`
     - 解决
-        + LFI （本地文件包含） 是一个用户未经验证从磁盘读取文件的漏洞 include 
+        + LFI （本地文件包含） 是一个用户未经验证从磁盘读取文件的漏洞 include
         + 对 curl、file_get_contents、fsockopen、这些方法中的参数进行严格验证！
         + 限制协议只能为HTTP或HTTPS，禁止进行跳转。
         + 如果有白名单，解析参数中的URL，判断是否在白名单内。
@@ -334,7 +334,7 @@ lsmod | grep bbr
 
 简单的浏览器 F12查看 Network 标签页就可以进行简单分析
 
-如果是加载前端资源太慢 比如图片、样式文件、脚本文件 可以考虑加带宽或者用 CDN 来加载这些静态资源 CDN 效果杠杠的 但是图片的压缩和缩略图还是要做 针对不同场景显示不同尺寸图片 不然 CDN 按流量收费 能省则省 样式文件或者脚本文件如果过大 则该拆分拆分 反之如果都是分散的小文件 则该合并合并 更深入点还可以通过设置请求头/响应头字段设置浏览器缓存 
+如果是加载前端资源太慢 比如图片、样式文件、脚本文件 可以考虑加带宽或者用 CDN 来加载这些静态资源 CDN 效果杠杠的 但是图片的压缩和缩略图还是要做 针对不同场景显示不同尺寸图片 不然 CDN 按流量收费 能省则省 样式文件或者脚本文件如果过大 则该拆分拆分 反之如果都是分散的小文件 则该合并合并 更深入点还可以通过设置请求头/响应头字段设置浏览器缓存
 
 如果是后端接口问题，则需要借助工具进行细分，基础设施方面，是否是 DNS 域名解析慢 网络请求时间长，通常这在服务器放在国外的情况下比较常见，排除了这个问题，还要看看服务器负载，CPU、内存、带宽、磁盘空间是否充沛，这些资源的不足或者打满都会造成服务器响应慢，这些东西不足则要补足，要查明原因，是否有异常或恶意攻击，如果是这种原因则要处理掉这些异常流量和问题，如果确实是用户请求量大，则要对服务器扩容，设置集群，当然这个服务器涉及多种应用，后面我们再细谈
 
@@ -351,6 +351,77 @@ lsmod | grep bbr
 * 使用单个页面的HTTP请求数最小化。
 * 为Javascript使用 Google Closure Compiler 或是 其它压缩工具（陈皓注：压缩Javascript代码可以让你的页面减少网络传输从而可以得到很快的喧染。注意，并不是所有的工具都可以正确压缩Javascript的，Google的这个工具甚至还可以帮你优化你的代码）
 * 确认你的网站有一个 favicon.ico 文件放在网站的根下，如 /favicon.ico. 浏览器会自动请求这个文件，就算这个图标文件没有在你的网页中明显说明，浏览器也会请求。如果你没有这个文件，就会出大量的404错误，这会消耗你的服务器带宽。（陈皓注：服务器返回404页面会比这个ico文件可能还大）
+
+## 建议
+
+* 界面和用户体验（Interface and User Experience）
+    - 知道各大浏览器执行Web标准的情况，保证你的站点在主要浏览器上都能正常运行。你至少要测试以下引擎：Gecko（用于Firefox）、Webkit（用于Safari、Chrome和一些手机浏览器）、IE（你可以利用微软发布的Application Compatibility VPC Images进行测试）和Opera。同时，不同的操作系统，可能也会影响浏览器如何呈现你的网站。
+    - 除了浏览器，网站还有其他使用方式：手机、屏幕朗读器、搜索引擎等等。你应该知道在这些情况下，你的网站的运行状况。MobiForge提供了手机网站开发的一些相关知识。
+    - 知道如何在基本不影响用户使用的情况下升级网站。通常来说，你必须有版本控制系统（CVS、Subversion、Git等等）和数据备份机制（backup）。
+    - 不要让用户看到那些不友好的出错提示。
+    - 不要直接显示用户的Email地址，至少不要用纯文本显示。
+    - 为你的网站设置一些合理的使用限制，一旦超过门槛值，就自动停止服务。（这也与网站安全相关。）
+    - 知道如何实现网页的渐进式增强（progressive enhancement）。
+    - 用户发出POST请求后，总是将其重导向（redirect）至另外一个网页。
+    - 不要忘记网站的可访问性（accessibility，即残疾人如何使用网站）。对于美国网站来说，有时这是法定要求。WAI-ARIA有一些这方面很好的参考资料。
+* 安全性（Security）
+    - 阅读《OWASP开发指南》，它提供了全面的网站安全指导。
+    - 了解SQL注入（SQL injection）及其预防方法。
+    - 永远不要信任用户提交的数据（cookie也是用户端提交的！）。
+    - 不要明文（plain-text）储存用户的密码，要hash处理后再储存。
+    - 不要对你的用户认证系统太自信，它可能很容易就被攻破，而你事先根本没意识到存在相关漏洞。
+    - 了解如何处理信用卡。
+    - 在登录页面及其他处理敏感信息的页面，使用SSL/HTTPS。
+    - 知道如何对付session劫持（session hijacking）。
+    - 避免"跨站点执行"（cross site scripting，XSS）。
+    - 避免"跨域伪造请求"（cross site request forgeries，XSRF）。
+    - 及时打上补丁，让你的系统始终跟上最新版本。
+    - 确认你的数据库连接信息的安全性。
+    - 跟踪攻击技术的最新发展，以及你使用的平台的最新安全漏洞。
+    - 阅读Google的《浏览器安全手册》（Browser Security Handbook）。
+    - 阅读《网络软件的黑客手册》（The Web Application Hackers Handbook）。
+* 性能（Performance）
+    - 只要有可能，就使用缓存（caching）。正确理解和使用HTTP caching与HTML5离线储存。
+    - 优化图片。不要把一个20KB的图片文件，作为重复出现的网页背景图案。
+    - 学习如何用gzip/deflate压缩内容（deflate方式更可取）。
+    - 将多个样式表文件或脚本文件，合为一个文件，这样可以减少浏览器的http请求数，以及减小gzip压缩后的文件总体积。
+    - 浏览Yahoo的Exceptional Performance网站，里面有大量提升前端性能的优秀建议，还有他们的YSlow工具。Google的page speed则是另一个用来分析网页性能的工具。两者都要求安装Firebug。
+    - 如果你的网页用到大量的小体积图片（比如工具栏），就应该使用CSS Image Sprite，目的是减少http请求数。
+    - 大流量的网站应该考虑将网页对象分散在多个域名（split components across domains）。
+    - 静态内容（比如图片、CSS、JavaScript、以及其他cookie无关的网页内容）都应该放在一个不需要使用cookie的独立域名之上。因为域名之下如果有cookie，那么客户端向该域名发出的每次http请求，都会附上cookie内容。这里的一个好方法就是使用"内容分发网络"（Content Delivery Network，CDN）。
+    - 将浏览器完成网页渲染所需要的http请求数最小化。
+    - 使用Google的Closure Compiler压缩JavaScript文件，YUI Compressor亦可。
+    - 确保网站根目录下有favicon.ico文件，因为即使网页中根本不包括这个文件，浏览器也会自动发出对它的请求。所以如果这个文件不存在，就会产生大量的404错误，消耗光你的服务器的带宽。
+* 搜索引擎优化（Search Engine Optimization，SEO）
+    - 使用"搜索引擎友好"的URL形式，比如example.com/pages/45-article-title，而不是example.com/index.php?page=45。
+    - 不要使用"点击这里"之类的超级链接，因为这样等于浪费了一个SEO机会，而且降低了"屏幕朗读器"（screen reader）的使用效果。
+    - 创建一个XML sitemap文件，它的缺省位置一般是/sitemap.xml（即放在网站根目录下）。
+    - 当你有多个URL指向同一个内容时，在网页代码中使用<link rel="canonical" ... />。
+    - 使用Google的Webmaster Tools和Yahoo的Site Explorer。
+    - 从一开始就使用Google Analytics（或者开源的访问量分析工具Piwik）。
+    - 知道robots.txt的作用，以及搜索引擎蜘蛛的工作原理。
+    - 将www.example.com的访问请求导向example.com（使用301 Moved Permanently重定向），或者采用相反的做法，目的是防止Google把它们当做两个网站，分开计算排名。
+    - 知道存在着恶意或行为不正当的网络蜘蛛。
+    - 如果你的网站有非文本的内容（比如视频、音频等等），你应该参考Google的sitemap扩展协议。
+* 技术（Technology）
+    - 理解HTTP协议，以及诸如GET、POST、sessions、cookies之类的概念，包括"无状态"（stateless）是什么意思。
+    - 确保你的XHTML/HTML和CSS符合W3C标准，使得它们能够通过检验。这可以使你的网页避免触发浏览器的古怪行为（quirk），而且使它在"屏幕朗读器"和手机上也能正常工作。
+    - 理解浏览器如何处理JavaScript脚本。
+    - 理解网页上的JavaScript文件、样式表文件和其他资源是如何装载及运行的，考虑它们对页面性能有何影响。在某些情况下，可能应该将脚本文件放置在网页的尾部。
+    - 理解JavaScript沙箱（Javascript sandbox）的工作原理，尤其是如果你打算使用iframe。
+    - 知道JavaScript可能无法使用或被禁用，以及Ajax并不是一定会运行。记住，"不允许脚本运行"（NoScript）正在某些用户中变得流行，手机浏览器对脚本的支持千差万别，而Google索引网页时不运行大部分的脚本文件。
+    - 了解301重定向和302重定向之间的区别（这也是一个SEO相关问题）。
+    - 尽可能多得了解你的部署平台（deployment platform）。
+    - 考虑使用样式表重置（Reset Style Sheet）。
+    - 考虑使用JavaScript框架（比如jQuery、MooTools、Prototype），它们可以使你不用考虑浏览器之间的差异。
+* 解决bug
+    - 理解程序员20%的时间用于编码，80%的时间用于维护，根据这一点相应安排时间。
+    - 建立一个有效的错误报告机制。
+    - 建立某些途径或系统，让用户可以与你接触，向你提出建议和批评。
+    - 为将来的维护和客服人员撰写文档，解释清楚系统是怎么运行的。
+    - 经常备份！（并且确保这些备份是有效的。）除了备份机制，你还必须有一个恢复机制。
+    - 使用某种版本控制系统储存你的文件，比如Subversion或Git。
+    - 不要忘记做单元测试（Unit Testing），Selenium之类的框架会对你有用。
 
 ## 趋势
 
@@ -398,7 +469,7 @@ lsmod | grep bbr
 ## 参考
 
 * [wx-chevalier/Web-Series](https://github.com/wx-chevalier/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
-* [Web](https://developers.google.com/web/) 
+* [Web](https://developers.google.com/web/)
 * [Web](https://developer.mozilla.org/zh-CN/docs/Web)
 * [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
 * [Web 开发](https://www.ibm.com/developerworks/cn/web/)

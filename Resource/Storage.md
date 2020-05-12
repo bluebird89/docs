@@ -39,6 +39,37 @@
     - [agalwood / Motrix](https://github.com/agalwood/Motrix):A full-featured download manager. https://motrix.app/
     - [Algram/ytdl-webserver](https://github.com/Algram/ytdl-webserver):📻 Webserver for downloading youtube videos. Ready for docker.
     - [Free Download Manager](https://www.freedownloadmanager.org/)
+    - qBittorrent
+        + `sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable`
+        + `sudo apt-get update && sudo apt-get install qbittorrent`
+        + 开启 UPnP / NAT-PMP 功能
+        + 添加 trackers 优化下载速度
+            - [ngosang / trackerslist](https://github.com/ngosang/trackerslist):Updated list of public BitTorrent trackers
+            - https://torrents.io/tracker-list/
+            - https://newtrackon.com/list
+        * 连接 DHT 节点
+    + C-torrent:最简单的命令行torrent下载工具
+    + [utorrent](https://www.utorrent.com/intl/zh_cn/)
+    + [Transmission](https://transmissionbt.com/):  a cross-platform BitTorrent client
+    + IDM
+    * axel:打开了多路http连接，可下载独立文件片段，因而文件下载起来更快速
+    - [aria2](https://aria2.github.io/) a lightweight multi-protocol & multi-source command-line download utility It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink. aria2 can be manipulated via built-in JSON-RPC and XML-RPC interfaces.
+      +  `sudo apt install aria2`
+        - `~/.aria2/aria2.conf`
+        - `aria2c 'magnet:xxxxxxx'`
+## wget
+
+*　参数
+    * -b :后台下载
+    * -o:
+    * -c:恢复下载
+
+* `curl https://yt-dl.org/latest/youtube-dl -o /usr/local/bin/youtube-dl `
+
+```sh
+wget http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4
+wget --ftp-user=<user_name> --ftp-password=<Give_password> Download-url-address
+```
 
 ## md5 verdify
 

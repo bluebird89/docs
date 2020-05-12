@@ -33,7 +33,6 @@ export PATH=$JAVA_HOME/bin:$PATH
 java -version
 
 wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.2.zip
-
 wget https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.1.0/elasticsearch-2.1.0.tar.gz
 unzip elasticsearch-5.5.2.zip
 tar xf elasticsearch-2.1.0.tar.gz
@@ -43,6 +42,7 @@ sudo dpkg -i elasticsearch-7.5.1-amd64.deb
 
 # ubuntu
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 sudo apt-get install apt-transport-https
 sudo apt-get update && sudo apt-get install elasticsearch
 sudo service elasticsearch start
@@ -56,23 +56,6 @@ cd elasticsearch-5.5.2/
 ./bin/elasticsearch
 ./elasticsearch  -Des.insecure.allow.root=true  #加这个参数才可以root启动
 ./bin/elasticsearch -d -p pid # 后台运行
-
-# 开启另一端开口,返回一个 JSON 对象，包含当前节点、集群、版本等信息
-curl localhost:9200
-curl -XGET 'localhost:9200/_cat/health?v&pretty'
-{
- "name" : "Reeva Payge",
- "cluster_name" : "elasticsearch",
- "version" : {
-   "number" : "2.1.0",
-   "build_hash" : "72cd1f1a3eee09505e036106146dc1949dc5dc87",
-   "build_timestamp" : "2015-11-18T22:40:03Z",
-   "build_snapshot" : false,
-   "lucene_version" : "5.3.1"
- },
- "tagline" : "You Know, for Search"
-}
-# web地址  http://192.168.88.250:9200/_plugin/head/
 ```
 
 ## 原理
@@ -167,8 +150,50 @@ curl -X DELETE 'localhost:9200/accounts/person/1'
 
 ## 配置
 
-* 默认情况下，Elastic 只允许本机访问，如果需要远程访问，可以修改 Elastic 安装目录的config/elasticsearch.yml文件，去掉network.host的注释，将它的值改成0.0.0.0，然后重新启动 Elastic
+* 默认情况下，Elastic 只允许本机访问
+* 需要远程访问，可以修改 Elastic 安装目录的config/elasticsearch.yml文件，去掉network.host的注释，将它的值改成0.0.0.0，然后重新启动 Elastic
 
+```yml
+# /etc/elasticsearch/elasticsearch.yml
+network.host: localhost
+
+sudo ufw allow from 198.51.100.0 to any port 9200
+sudo ufw enable
+```
+
+```
+# 开启另一端开口,返回一个 JSON 对象，包含当前节点、集群、版本等信息
+curl -X GET 'http://localhost:9200'
+curl -XGET 'http://localhost:9200/_nodes?pretty'
+
+# add
+curl -XPOST -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1' -d '{ "message": "Hello World!" }'
+
+# retrieve
+curl -X GET -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1' -d '{ "message": "Hello World!" }'
+
+# modify
+curl -X PUT -H "Content-Type: application/json"  'localhost:9200/tutorial/helloworld/1?pretty' -d '
+{
+  "message": "Hello, People!"
+}'
+curl -X GET -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1?pretty'
+
+curl -XGET 'localhost:9200/_cat/health?v&pretty'
+{
+ "name" : "Reeva Payge",
+ "cluster_name" : "elasticsearch",
+ "version" : {
+   "number" : "2.1.0",
+   "build_hash" : "72cd1f1a3eee09505e036106146dc1949dc5dc87",
+   "build_timestamp" : "2015-11-18T22:40:03Z",
+   "build_snapshot" : false,
+   "lucene_version" : "5.3.1"
+ },
+ "tagline" : "You Know, for Search"
+}
+# web地址  http://192.168.88.250:9200/_plugin/head/
+```
 ## ELK
 
 * 标准化:
@@ -208,7 +233,6 @@ elasticsearch -E node.name=node3 -E cluster.name=geektime -E path.data=node3_dat
 
 http://localhost:9200/_cat/nodes
 ```
-
 
 ## Logstash
 
@@ -370,6 +394,17 @@ server {
 
 ## BEATS
 
+* `More than one namespace configured accessing ‘output’` 只能有一个输出 elasticsearch 或者看板
+* 手动加载模板：`./filebeat setup --template -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["localhost:9200"]'`
+* 设置Kibana dashboards `filebeat setup --dashboards`
+* 启动Filebeat:`filebeat -e -c filebeat.yml -d "publish"`
+
+```
+# Error creating runner from config: Can only start an input when all related states are finished
+
+curl -XGET 'http://localhost:9200/filebeat-*/_search?pretty'
+```
+
 
 ## metrics
 
@@ -398,7 +433,6 @@ setup.kibana:
 ```
 
 ## X-Pack
-
 
 keyword类型是不会分词的，直接根据字符串内容建立反向索引
 text类型在存入elasticsearch的时候，会先分词，然后根据分词后的内容建立反向索引
@@ -438,6 +472,19 @@ docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --name elk sebp/elk
 # 修改 vim config/jvm.options
 -Xms512m
 -Xmx512m
+
+Exiting: Couldn't connect to any of the configured Elasticsearch hosts. Errors: [Error connection to Elasticsearch http://localhost:9200: Connection marked as failed because the onConnect callback failed: cannot retrieve the elasticsearch license from the /_xpack endpoint, Filebeat requires the default distribution of Elasticsearch. Please make the endpoint accessible to Filebeat so it can verify the license.: could not retrieve the license information from the cluster: 503 Service Unavailable: {"error":{"root_cause":[{"type":"master_not_discovered_exception","reason":null}],"type":"master_not_discovered_exception","reason":null},"status":503}]
+
+# [FORBIDDEN/12/index read-only / allow delete (api)] - read only elasticsearch indices
+curl -XPUT -H "Content-Type: application/json" http://localhost:9200/_all/_settings -d '{"index.blocks.read_only_allow_delete": null}'
+# free up disk space
+curl -XPUT -H "Content-Type: application/json" http://[YOUR_ELASTICSEARCH_ENDPOINT]:9200/_all/_settings -d '{"index.blocks.read_only_allow_delete": null}'
+
+# sudo filebeat setup   Overwriting ILM policy is disabled. Set `setup.ilm.overwrite:true` for enabling.
+
+setup.ilm.enabled: false
+setup.ilm.check_exists: false
+setup.ilm.overwrite: true
 ```
 
 ## 图书

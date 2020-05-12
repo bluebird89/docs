@@ -29,7 +29,7 @@
 * macbook pro 15
 * 戴尔27英寸XPS旗舰一体机
 * GPD p2 max 8.9英寸
-* MateBook X Pro 2020 
+* MateBook X Pro 2020
 
 ## 键盘
 
@@ -155,4 +155,8 @@
 
 * [Krog](https://www.korg.com)
 * [XOD](https://xod.io/):A VISUAL PROGRAMMING LANGUAGE FOR MICROCONTROLLERS
-* [](http://phoronix-test-suite.com/)
+* [Phoronix Test Suite](http://phoronix-test-suite.com/)：Open-Source, Automated Benchmarking
+
+## 资源
+
+* [装备前线](https://www.zfrontier.com/app/)

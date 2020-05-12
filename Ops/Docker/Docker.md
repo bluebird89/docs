@@ -1694,6 +1694,8 @@ kubectl-debug <POD_NAME>
   - [DockStation](https://dockstation.io/)
   - [Rancher](https://rancher.com/)Rancher is an open source software platform that enables organizations to run and manage Docker and Kubernetes in production.
   - [Portainer](link) `docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer`
+  - [ jesseduffield / lazydocker ](https://github.com/jesseduffield/lazydocker):The lazier way to manage everything docker
+
 ## 工具
 
 * [docker/swarm](https://github.com/docker/swarm) Swarm: a Docker-native clustering system
