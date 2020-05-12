@@ -439,7 +439,7 @@ ye Copy to end of word |
 * :N 到第N行
 * gg|1G|[[:到文件头
 * G|]]: 文档尾行
-* nG：光标移至第n行首   
+* nG：光标移至第n行首
 * n+：光标下移n行
 * n$：光标移至下面n行行尾
 * 0：（数字零）光标移至本行第一个字符上
@@ -652,8 +652,8 @@ $ 到行最后
 A, 输入字符串，按 ESC
 
 # 纵向编辑
-10.1.5.214 
-10.1.5.212 
+10.1.5.214
+10.1.5.212
 10.1.5.210
 
 游标定位第一行 IP 地址第二段的“5”->ctrl-v 进入纵向编辑模式->G 移动游标到最后一行->r 进入修改模式->修改目标值->esc
@@ -685,7 +685,7 @@ q 停止录制.
 @@ → 在2 正面写下3
 100@@ 会创建新的100行，并把数据增加到 103.
 
-# 
+#
 按下gg到行首
 按下qa进行宏录制，a是我们起的一个标记名称
 按I进入插入模式，输入list.add("
@@ -784,6 +784,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 
 ## 插件
 
+* [junegunn / vim-plug](https://github.com/junegunn/vim-plug):hibiscus Minimalist Vim Plugin Manager
 * [cknadler/vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
 * [rupa/z](https://github.com/rupa/z):z - jump around
 * [rupa/v](https://github.com/rupa/v):z for vim
@@ -801,7 +802,6 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 ## 工具
 
 * [coolwanglu/vim.js](https://github.com/coolwanglu/vim.js):JavaScript port of Vim http://coolwanglu.github.io/vim.js/emterpreter/vim.html
-* [junegunn/fzf](https://github.com/junegunn/fzf):🌸 A command-line fuzzy finder
 * [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar):vinegar.vim: Combine with netrw to create a delicious salad dressing https://www.vim.org/scripts/script.php?script_id=5671
 * [neoclide/coc.nvim](https://github.com/neoclide/coc.nvim):Intellisense engine for vim8 & neovim, full language server protocol support as VSCode https://salt.bountysource.com/teams/coc-nvim
 * [vimwiki / vimwiki](https://github.com/vimwiki/vimwiki):Personal Wiki for Vim http://vimwiki.github.io/

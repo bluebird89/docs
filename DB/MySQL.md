@@ -2657,7 +2657,7 @@ mysqlslap –user=root –password=111111 –concurrency=50 –create-schema=emp
 
 ## 监控平台
 
-* 安装 
+* 安装
     - 安装exporter
     - 配置prometheusgranafa
 * 指标
