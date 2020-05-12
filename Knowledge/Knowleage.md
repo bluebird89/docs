@@ -204,6 +204,23 @@
 * 高通跟华为撕逼了很多年，据说已经和解了，交叉授权，可能华为还是要支付给高通一笔钱，虽然华为构筑了足够的专利壁垒，有了足够讨价还价的底气，但高通还是优势方，这点要承认。如果没有足够的专利壁垒，那就完全没有讨价还价的资格了。
 * 华为花了差不多二十年时间，终于翻过了思科这座大山，中间又花了十来年时间，差不多可能快要翻过高通这座大山。这已经是非常非常了不起的成绩了，非常非常值得钦佩，但有一说一，ARM这座大山，Google这座大山，仅凭华为现有的力量，是翻越不过去的。更不用说产业链里还有诸如阿斯麦，赛灵思等等等等不同的山头。
 
+## 缩略语
+
+- GIYF: Google Is Your Friend, 请自己去谷歌
+- IIRC: If I Recall Correctly, 如果我记得没错的话
+- IMHO: In My Humble Opinion, 依我愚见
+- IMO: In My Opinion, 依我之见
+- LGTM: Looks Good To Me, 在我看起来还不错
+- LMGTFY: Let Me Google That For You, 让我为你谷歌一下（意思是问题太简单)
+- PR: Pull Request, 合并请求
+- RFC: Request For Comment, 征求意见
+- RTFM: Read The Fucking Manual, 请读文档
+- STFW: Search The Fucking Web, 自己去网上搜索
+- TIL: Today I Learned, 今天又学到了新知识
+- TL;DR: Too Long, Don’t Read，总结起来，就是
+- WIP: Work In Progress，未完成，还在进行中
+- WYSIWYG: What You See Is What You Get, 所见即所得
+
 ## 资源
 
 * [](https://www.nexthink.com/periodic-table/)

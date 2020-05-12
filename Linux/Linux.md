@@ -105,7 +105,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - [Zorin Grid](https://itsfoss.com/zorin-grid/)
 * Cub Linux
 * Icaros Desktop
-* [pop!_os](https://system76.com/pop)
+* [Pop!_os](https://system76.com/pop):an operating system for STEM and creative professionals who use their computer as a tool to discover and create
 * [KDE Neon](https://neon.kde.org/):基于 Ubuntu 的轻量级 Linux 发行版,采用 KDE Plasma 桌面，看起来精美绝伦
 * [Nitrux](https://nxos.org/)
 * [MX Linux](https://mxlinux.org/)
@@ -113,8 +113,9 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 
 ## 桌面环境
 
-* UNIX/Linux 本身是没有图形界面的，通常在 UNIX/Linux 发行版上看到的图形界面实际都只是运行在 Linux 系统之上的一套软件,以前是 XFree86，现在则是 xorg（X.Org），这套软件又是通过 X 窗口系统（X Window System，也常被称为 X11 或 X）实现的，X 本身只是工具包及架构协议，而 xorg 便是 X 架构规范的一个实现体，实现了 X 协议规范的一个提供图形界面服务的服务器，就像实现了 http 协议提供 web 服务的 Apache
-* 如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端 X Client，像如下几个熟知也最流行的实现了客户端功能的桌面环境
+* UNIX/Linux 本身是没有图形界面的，通常在 UNIX/Linux 发行版上看到的图形界面实际都只是运行在 Linux 系统之上的一套软件,以前是 XFree86，现在则是 xorg（X.Org）
+* 通过 X 窗口系统（X Window System，也常被称为 X11 或 X）实现的，X 本身只是工具包及架构协议，而 xorg 便是 X 架构规范的一个实现体，实现了 X 协议规范的一个提供图形界面服务的服务器，就像实现了 http 协议提供 web 服务的 Apache
+* 如果只有服务器也是不能实现一个完整的桌面环境的，还需要一个客户端 X Client，像如下几个熟知也最流行的实现了客户端功能的桌面环境
   - [KDE](https://kde.org/)
   - [Xfce](https://www.xfce.org/)
   - GNOME
@@ -512,6 +513,22 @@ int main() {
   - i-nex 收集硬件信息，并且类似于 Windows 下流行的 CPU-Z 的显示。
   - HardInfo 显示硬件具体信息，甚至包括一组八个的流行的性能基准程序，你可以用它们评估你的系统性能。
   - KInfoCenter 和 Lshw 也能够显示硬件的详细信息，并且可以从许多软件仓库中获取。
+* df：列出文件系统的整体磁盘使用量
+  - -a：列出所有的文件系统，包括系统特有的/proc等文件系统
+  - -k：以KB的容量显示各文件系统
+  - -m：以MB的容量显示各文件系统
+  - -h：以人们较易阅读的GB,MB,KB等格式自行显示
+  - -H：以M=1000K替代M=1024K的进位方式
+  - -T：连同该分区的文件系统名称（例如ext3）也列出
+  - -i：不用硬盘容量，而以inode的数量来显示
+* du：显示每个文件和目录的磁盘使用空间（评估目录所占容量）
+  - a : 列出所有的文件与目录容量，因为默认仅统计目录下面的文件量而已
+  - -b  显示目录中文件的大小，以字节byte为单位
+  - -h : 以人们较易读的容量格式（G/M）显示；
+  - -s : 列出总量，而不列出每个个别的目录占用了容量；
+  - -S : 不包括子目录下的总计，与-s有点差别；
+  - -k : 以KB列出容量显示
+  - -m : 以MB列出容量显示
 
 ```sh
 inxi -Fxz # 能够列出包括 CPU、图形、音频、网络、驱动、分区、传感器等详细信息 -F 参数意味着你将得到完整的输出，x 增加细节信息，z 参数隐藏像 MAC 和 IP 等私人身份信息
@@ -545,18 +562,20 @@ df -m # 列出已挂载的文件系统和它们的挂载点，以及已用的空
 lsusb|lspci # 列出已挂载的文件系统和它们的挂载点，以及已用的空间和可用的空间
 # 统计数据块使用情况
 df -Th
-df -T # 查看分区的文件系统
-df -h # Human-readable 显示目前所有文件系统的总容量，使用量，剩余容量
+df -aT # 查看分区的文件系统
+df -h  /etc # Human-readable 显示目前所有文件系统的总容量，使用量，剩余容量
 df -k
-du -b /home # 查看目前/HOME目录的容量(k)及子目录的容量(k)
 
-du # 命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`
-du -h 文件/目录 # 查看文件占据磁盘空间大小,命令可以查看目录的容量，-h #同--human-readable 以K，M，G为单位，提高信息的可读性；-a #同--all 显示目录中所有文件的大小 -d:指定查看目录的深度 `du -h -d 1 ~`命令会生成相关文件和有关目录的空间使用情况的报告。它很容易使用，也可以递归地运行，会遍历每个子目录并且返回每个文件的单个大小。`du -sh *`
+# 查看目录的容量
+# -h 同--human-readable 以K，M，G为单位，提高信息的可读性
+# -a 同--all 显示目录中所有文件的大小
+du -sh /* # 递归地运行，遍历每个子目录并且返回每个文件的单个大小
 du -h --max-depth=1 /home  # 文件大小相加
-du -h --max-depth=1 /home/*
-du -sm * | sort -n //统计当前目录大小 并安大小 排序
+du -h --max-depth=1 /var/log/*
+du -sm * | sort -n # /统计当前目录大小 并安大小 排序
 du -sk * | sort -n
-du -sk * | grep guojf //看一个人的大小
+du -sk * | grep guojf 看一个人的大小
+du -b /home # 查看目前/HOME目录的容量(k)及子目录的容量(k)
 
 # 分区
 sudo fdisk /dev/sdb # 硬盘进行分区
@@ -568,6 +587,8 @@ t # 更改分区类型
 L # 可查看所有分区类型的编号，根据个人需求，输入对应的分区类型编号
 w # 保存退出
 
+sudo growpart /dev/xvda 1 # 对磁盘 分区4扩容
+growpart /dev/sda 1 # Resize partition 1 on /dev/sda must supply disk and partition-number
 sudo mkfs.ext4 /dev/sdb1 # 格式化成ext4文件系统 （输入sudo mkfs，按两次tab键，会出现多种文件系统，根据需求选择）
 
 lshw -C network # 网卡硬件详细信息
@@ -622,6 +643,9 @@ iostat 1
 
 # Display the last 100 syslog messages  (Use /var/log/syslog for Debian based systems.)
 tail 100 /var/log/messages
+
+# bash: cannot create temp file for here-document: No space left on device
+# 该磁盘空间已满，可以进行扩容，或者将该磁盘的部分目录迁移到别的磁盘
 ```
 
 ## 内核同步
@@ -1068,6 +1092,7 @@ halt｜reboot｜poweroff
     + -S 搜索已安装的软件包
     + -L 显示已安装软件包的目录信息
 * 从二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到/opt，建立软连接/usr/local/bin/
+* [Pkgs](https://pkgs.org/):Packages Search for Linux and Unix
 * AppImage
 
 ```sh

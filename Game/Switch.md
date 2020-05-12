@@ -335,6 +335,10 @@
 * 主线
     - 种植
         + 前期10点前浇完地，下雨天去挖矿
+        + 每周五可以在那里找一个黑精灵买铱制洒水器，一个可以浇24格
+        + 远古种子：随机在种子制造机中放入任何种子都有小概率磨出的特殊种子。28天后出远古果子，之后每8天会收获一次，将收获得来的远古果实直接丢进种子制造机换取更多的远古种子。拿去酿酒
+        + 稀有种子(Wild Seeds)：稀有种子只有旅行商人会出售，24天后长成宝石甜莓（Sweet Gem Berry），送给秘密森林的老坎诺利大师以获得星之果实，将宝石甜莓放入种子生产器也可以获得稀有种子
+        + 老师傅香炸奶酪卷，追求最甜的味道：老师傅雕像需要用宝石甜莓献祭，获得星之果实，提高生命力上限制
     - 建设：建筑。获取木头 石头 杂草
     - 养殖
     - 钓鱼:
@@ -346,6 +350,15 @@
         + 安装洒水器：自动浇水，游戏中的洒水器分铜铁铱三种，最高级的铱洒水器可以给24格植物浇水
         + 建设水井：物资很少，游戏前期就能做。最神奇的是，水井建设完毕后还找木匠移动
         + 挖的矿能攒就攒攒，后期有个宝石复制机用的上
+        + 沙漠矿洞，准备好多好多组梯子，直接下到100—200层，直接拿炸弹炸，会出五彩碎片和很多铱矿石
+    - 送礼物不能停，获取好感：看商店公告，最近谁生日，尤其生日送
+        + 威利好感度达到九心后会给龙虾浓汤配方，能加3钓鱼，而且持续时间长，制造简单，简直就是钓鱼神器
+        + 纳斯三心好感会给生鱼片配方
+    - 动物早晚开关门（（冬季雨天除外）
+    - 每季最后一天把地整理出来
+    - 酿造
+        + 啤酒是一天一瓶，一瓶300金。啤酒的收益是全游戏最高的收益，不过要每天收，很累。后面可以慢慢换成上古水果
+        + 酒桶　放在牛棚里面
 * 策略
     - 优先生产物资
     - 不要全卖，合成箱子，存储
@@ -395,13 +408,296 @@
     - 星露谷这个游戏由作者一人制成！
     - 树种子别扔，全存着，后期有用而且钱买不来
     - 用斧子攒硬木，攒到100个，然后攒到一万块钱，去把马厩建好
+* 星之果实(stardrop)：玩家体力的最大值提升
+    - 用Token.png2,000在星露谷集市购买。
+    - 当你与伴侣的友谊达到13/14心时（只有结婚的对象会解锁14心友谊）。
+    - 矿洞一百层奖励获得。
+    - 科罗布斯以Coin Icon20,000g出售。
+    - 给秘密森林的老师傅香炸奶酪卷（石像）一个宝石甜莓。
+    - 完成成就垂钓大师（钓上所有品种的鱼）后，从威利的信中获得。
+    - 完成成就完整收藏（向博物馆捐出全部95种收藏）
+* 养殖好友度
+    - 影响因素：
+        +　爱抚（加15点，如果玩家选择牧羊人或制品生产家专精的话相应动物的爱抚友好值会增加30点）
+        +　挤奶或剪毛（加5点，如果没有挤奶或剪毛不会扣分）
+        +　去外面吃草（加8点）
+        +　没有喂食（减20点，当日结束后计算）
+        +　困在外面过夜（减20点，当日结束后计算）
+        +　没有抚摸/没有对话（减5至10，当日结束后计算，分值公式为：（10-（现有友好值/200）））
+* 地下室木桶
+* 结婚
+    -　好感度高了之后，去老皮那买花接着送直到心心满了，最后在下雨天水手那买个美人鱼项链，第二天就可以结婚了
 * 人物
-    - 艾米丽和谢恩
-    - 亚历克斯和海莉
-    - 艾利欧特和莉亚
-    - 哈维和玛鲁
-    - 山姆和潘妮
-    - 塞巴斯蒂安和阿比盖尔
+    - 亚历克斯 🎂 夏季 13 🎂
+        + Complete Breakfast.png 完美早餐
+        + Salmon Dinner.png 鲑鱼晚餐
+        + 所有蛋类物品（除了虚空蛋）
+        + 所有宝石类矿物（除了五彩碎片、石英）
+        + 所有烹饪美食（除了完美早餐、鲑鱼晚餐、蒜油、奇怪的小面包、荷包蛋、面包）
+        + 所有工匠物品（除了虚空蛋黄酱） 所有菜类作物（除了小麦、啤酒花）
+        + 所有花（除了虞美人）
+        + Coffee.png 咖啡
+        + Apple.png 苹果
+        + Apricot.png 杏子
+        + Orange.png 橙子
+        + Peach.png 桃子
+        + Pomegranate.png 石榴
+        + Cherry.png 樱桃
+        + Maple Syrup.png 枫糖浆
+    - Elliott.png 艾利欧特 🎂 秋季 5 🎂
+        + Crab Cakes.png 蟹黄糕
+        + Duck Feather.png 鸭毛
+        + Lobster.png 龙虾
+        + Pomegranate.png 石榴
+        + Tom Kha Soup.png 椰汁汤
+        + 所有水果（除了石榴、美洲大树莓）
+        + 所有宝石类矿物（除了五彩碎片、石英）
+        + 所有烹饪美食（除了蟹黄糕、椰汁汤、蒜油、奇怪的小面包、披萨、荷包蛋、面包）
+        + 所有工匠物品（除了虚空蛋黄酱）
+        + 所有菜类作物（除了苋菜、小麦、啤酒花）
+        + 所有花（除了虞美人）
+        + Octopus.png 章鱼
+        + Squid.png 鱿鱼
+        + Coffee.png 咖啡
+        + Maple Syrup.png 枫糖浆
+    - Harvey.png 哈维 🎂 冬季 14 🎂
+        + Coffee.png 咖啡
+        + Pickles.png 腌菜
+        + Super Meal.png 巨无霸餐
+        + Truffle Oil.png 松露油
+        + Wine.png 果酒
+        + 所有水果（除了美洲大树莓 & 香料果）
+        + 所有蘑菇（除了红蘑菇）
+        + Daffodil.png 水仙花
+        + Dandelion.png 蒲公英
+        + Duck Egg.png 鸭蛋
+        + Duck Feather.png 鸭毛
+        + Goat Milk.png 山羊奶
+        + Hazelnut.png 榛子
+        + Holly.png 冬青树
+        + Large Goat Milk.png 大瓶羊奶
+        + Leek.png 韭葱
+        + Quartz.png 石英
+        + Snow Yam.png 雪山药
+        + Spring Onion.png 大葱
+        + Wild Horseradish.png 野山葵
+        + Winter Root.png 冬根
+    - Sam.png 山姆 🎂 夏季 17 🎂
+        + Cactus Fruit.png 仙人掌果子
+        + Maple Bar.png 枫糖棒
+        + Pizza.png 披萨
+        + Tigerseye.png 虎眼石
+        + 所有鸡蛋（除了虚空鸡蛋）
+        + Joja Cola.png Joja可乐
+    - Sebastian.png 塞巴斯蒂安 🎂 冬季 10 🎂
+        + Frozen Tear.png 泪晶
+        + Obsidian.png 黑曜石
+        + Pumpkin Soup.png 南瓜汤
+        + Sashimi.png 生鱼片
+        + Void Egg.png 虚空鸡蛋
+        + Quartz.png 石英
+    - Shane.png 谢恩 🎂 春季 20 🎂
+        + Beer.png 啤酒
+        + Hot Pepper.png 辣椒
+        + Pepper Poppers.png 爆炒青椒
+        + Pizza.png 披萨
+        + 所有鸡蛋（除了虚空鸡蛋）
+        + 所有水果（除了辣椒）
+    - Abigail.png 阿比盖尔 🎂 秋季 13 🎂
+        + Amethyst.png 紫水晶
+        + Blackberry Cobbler.png 黑莓脆皮饼
+        + Chocolate Cake.png 巧克力蛋糕
+        + Pufferfish.png 河豚
+        + Pumpkin.png 南瓜
+        + Spicy Eel.png 香辣鳗鱼
+        + Quartz.png 石英
+        + - Emily.png 艾米丽 🎂 春季 27 🎂
+        + Amethyst.png 紫水晶
+        + Aquamarine.png 海蓝宝石
+        + Cloth.png 布料
+        + Emerald.png 绿宝石
+        + Jade.png 翡翠
+        + Ruby.png 红宝石
+        + Survival Burger.png 救生汉堡
+        + Topaz.png 黄水晶
+        + Wool.png 动物毛
+        + Daffodil.png 水仙花
+        + Quartz.png 石英
+    - Haley.png 海莉 🎂 春季 14 🎂
+        +　Coconut.png 椰子
+        +　Fruit Salad.png 水果沙拉
+        +　Pink Cake.png 粉红蛋糕
+        +　Sunflower.png 向日葵
+        +　Daffodil.png 水仙花
+    - Leah.png 莉亚 🎂 冬季 23 🎂
+        + Goat Cheese.png 山羊奶酪
+        + Poppyseed Muffin.png 虞美人籽松糕
+        + Salad.png 沙拉
+        + Stir Fry.png 蔬菜什锦盖饭
+        + Truffle.png 松露
+        + Vegetable Medley.png 蔬菜杂烩
+        + Wine.png 果酒
+    - Maru.png 玛鲁 🎂 夏季 10 🎂
+        + Battery Pack.png 电池组
+        + Cauliflower.png 花椰菜
+        + Cheese Cauliflower.png 乳酪花椰菜
+        + Diamond.png 钻石
+        + Gold Bar.png 金锭
+        + Iridium Bar.png 铱锭
+        + Miner's Treat.png 矿工特供
+        + Pepper Poppers.png 爆炒青椒
+        + Rhubarb Pie.png 大黄派
+        + Strawberry.png 草莓
+    - Penny.png 潘妮 🎂 秋季 2 🎂
+        +　Diamond.png 钻石
+        +　Emerald.png 绿宝石
+        +　Melon.png 甜瓜
+        +　Poppy.png 虞美人
+        +　Poppyseed Muffin.png 虞美人籽松糕
+        +　Red Plate.png 红之盛宴
+        +　Roots Platter.png 块茎拼盘
+        +　Sandfish.png 沙鱼
+        +　Tom Kha Soup.png 椰汁汤
+    - Caroline.png 卡洛琳 🎂 冬季 7 🎂
+        + Fish Taco.png 鱼肉卷
+        + Summer Spangle.png 夏季亮片
+        + Daffodil.png 水仙花
+    - Clint.png 克林特 🎂 冬季 26 🎂
+        + Amethyst.png 紫水晶
+        + Aquamarine.png 海蓝宝石
+        + Artichoke Dip.png 水煮洋蓟
+        + Emerald.png 绿宝石
+        + Fiddlehead Risotto.png 意式蕨菜炖饭
+        + Gold Bar.png 金锭
+        + Iridium Bar.png 铱锭
+        + Jade.png 翡翠
+        + Omni Geode.png 万象晶球
+        + Ruby.png 红宝石
+        + Topaz.png 黄水晶
+    - Demetrius.png 德米特里厄斯 🎂 夏季 19 🎂
+        + Bean Hotpot.png 豆类火锅
+        + Ice Cream.png 冰淇淋
+        + Rice Pudding.png 大米布丁
+        + Strawberry.png 草莓
+        + 所有鸡蛋（除了虚空鸡蛋）
+        + 所有水果（除了草莓）
+        + Purple Mushroom.png 紫蘑菇
+    - Dwarf.png 矮人 🎂 夏季 22 🎂
+        + Amethyst.png 紫水晶
+        + Aquamarine.png 海蓝宝石
+        + Emerald.png 绿宝石
+        + Jade.png 翡翠
+        + Omni Geode.png 万象晶球
+        + Ruby.png 红宝石
+        + Topaz.png 黄水晶
+        + Dwarvish Helm.png 矮人头盔
+    - Evelyn.png 艾芙琳 🎂 冬季 20 🎂
+        + Beet.png 甜菜
+        + Chocolate Cake.png 巧克力蛋糕
+        + Diamond.png 钻石
+        + Fairy Rose.png 玫瑰仙子
+        + Stuffing.png 塞料面包
+        + Tulip.png 郁金香
+    - George.png 乔治 🎂 秋季 24 🎂
+        + Fried Mushroom.png 炒蘑菇
+        + Leek.png 韭葱
+        + Daffodil.png 水仙花
+    - Gus.png 格斯 🎂 夏季 8 🎂
+        + Diamond.png 钻石
+        + Escargot.png 法式田螺
+        + Fish Taco.png 鱼肉卷
+        + Orange.png 橙子
+    - Jas.png 贾斯 🎂 夏季 4 🎂
+        + Fairy Rose.png 玫瑰仙子
+        + Pink Cake.png 粉红蛋糕
+        + Plum Pudding.png 葡萄干布丁
+        + Coconut.png 椰子
+        + Daffodil.png 水仙花
+    - Jodi.png 乔迪 🎂 秋季 11 🎂
+        + Chocolate Cake.png 巧克力蛋糕
+        + Crispy Bass.png 香酥鲈鱼
+        + Diamond.png 钻石
+        + Eggplant Parmesan.png 帕尔玛奶酪茄子
+        + Fried Eel.png 炒鳗鱼
+        + Pancakes.png 薄煎饼
+        + Rhubarb Pie.png 大黄派
+        + Vegetable Medley.png 蔬菜杂烩
+    - Kent.png 肯特 🎂 春季 4 🎂
+        + Fiddlehead Risotto.png 意式蕨菜炖饭
+        + Roasted Hazelnuts.png 烤榛子
+        + 所有鸡蛋（除了虚空鸡蛋）
+        + 所有水果
+        + Daffodil.png 水仙花
+    - Krobus.png 科罗布斯 🎂 冬季 1 🎂
+        + Diamond.png 钻石
+        + Iridium Bar.png 铱锭
+        + Pumpkin.png 南瓜
+        + Void Egg.png 虚空鸡蛋
+        + Void Mayonnaise.png 虚空蛋黄酱
+        + Wild Horseradish.png 野山葵
+    - Lewis.png 刘易斯 🎂 春季 7 🎂
+        + Autumn's Bounty.png 秋日恩赐
+        + Glazed Yams.png 琉璃山药
+        + Hot Pepper.png 辣椒
+        + Vegetable Medley.png 蔬菜杂烩
+        + Blueberry.png 蓝莓
+        + Cactus Fruit.png 仙人掌果子
+        + Coconut.png 椰子
+    - Linus.png 莱纳斯 🎂 冬季 3 🎂
+        + Blueberry Tart.png 蓝莓千层酥
+        + Cactus Fruit.png 仙人掌果子
+        + Coconut.png 椰子
+        + Dish o' The Sea.png 海之菜肴
+        + Yam.png 山药
+    - Marnie.png 玛妮 🎂 秋季 18 🎂
+        + Diamond.png 钻石
+        + Farmer's Lunch.png 农夫午餐
+        + Pink Cake.png 粉红蛋糕
+        + Pumpkin Pie.png 南瓜派
+    - Pam.png 潘姆 🎂 春季 18 🎂
+        + Beer.png 啤酒
+        + Cactus Fruit.png 仙人掌果子
+        + Glazed Yams.png 琉璃山药
+        + Mead.png 蜂蜜酒
+        + Pale Ale.png 淡啤酒
+        + Parsnip.png 防风草
+        + Parsnip Soup.png 防风草汤
+    - Pierre.png 皮埃尔 🎂 春季 26 🎂
+        + Fried Calamari.png 炸鱿鱼
+        + 所有鸡蛋（除了虚空鸡蛋）
+        + 所有奶类
+        + Daffodil.png 水仙花
+        + Dandelion.png 蒲公英
+    - Robin.png 罗宾 🎂 秋季 21 🎂
+        + Goat Cheese.png 山羊奶酪
+        + Peach.png 桃子
+        + Spaghetti.png 意大利面
+    - Sandy.png 桑迪 🎂 秋季 15 🎂
+        + Crocus.png 番红花
+        + Daffodil.png 水仙花
+        + Sweet Pea.png 甜豌豆
+    - Vincent.png 文森特 🎂 春季 10 🎂
+        - Cranberry Candy.png 蔓越莓糖果
+        - Grape.png 葡萄
+        - Pink Cake.png 粉红蛋糕
+    - Willy.png 威利 🎂 夏季 24 🎂
+        + Catfish.png 鲶鱼
+        + Diamond.png 钻石
+        + Iridium Bar.png 铱锭
+        + Mead.png 蜂蜜酒
+        + Octopus.png 章鱼
+        + Pumpkin.png 南瓜
+        + Sea Cucumber.png 海参
+        + Sturgeon.png 鲟鱼
+    - Wizard.png 法师 🎂 冬季 17 🎂
+        + Purple Mushroom.png 紫蘑菇
+        + Solar Essence.png 日光精华
+        + Super Cucumber.png 大海参
+        + Void Essence.png 虚空精华
+* 频道
+    - 酱料女皇：从春季第七天开始，前两年的每周日都会播出一个新食谱。每周三则会随机重播
+* bug
+    - 已修复：买动物时把动物的起名字为相应代码，比如： [163][645][499]（分别是：传说鱼王、铱制洒水器、远古种子，最多只能写三个代码而且要加方括号），名字起好后，店主会说「好的，现在就把 [163][645][499] 送到新家」
 * 任务
     - 罗宾的斧子在玛尼牧场的南边树林里的悬崖边上
     - 触发社区：在第十四天才有触发条件：从家里右方的小路切换到城镇的时候，萌新玩家就会触发进一个村长刘易斯带着你的剧情
@@ -409,12 +705,16 @@
         + 高级只收一个
     - 杀史莱姆：用镰刀
     - 村长的内裤:玛妮阿姨的房间
+    - 拿到超市会员卡，才可以进入沙漠商店内的二楼赌场
+    - 沿着公交车的路往左边一直走，两个路灯中间有一个配电箱，需要一个电池组放进去。把收集到的电池组x1放进去，下一个任务的提示就出来了
+    - 带一个彩虹贝壳放在火车站台的箱子里边彩虹贝壳只有在夏季的海滩捡到
+    - 在镇长的冰箱里边放置10个甜菜
+    - 给沙之巨龙最后一餐,坐车去沙漠。最后一餐原型x1，放进巨龙的嘴里就可以，任务已经完成，回家检查家旁边的木材堆，里边会有一张会员卡了
 * 时间段
-    - 春：春季就是种防风草，还有一些春季作物，卖出来的钱推荐留着等节日买草莓种子。其余时间就是钓鱼，尤其是下雨的时候记得去小河钓鲶鱼，至于鱼王，老手可以钓 新手就不推荐了。钓鱼推荐三级鱼竿，就是能上鱼饵的那个，没体力就去买鱼汤喝。钓鱼可以给我们带来钱，还有宝箱会给各种东西。（我就出过海王剑，下矿不愁了）
-    - 夏：夏季也是种献祭所需的农作物，其余全种蓝莓。推荐升级蝙蝠洞，这样能捡到各种水果，献祭所需。没有升级的话就要花10000G买个苹果和石榴树苗，这样秋天就可以拿去献祭了。还有二级鸡舍，二级牛棚都要安排上，晚点也行，最晚在秋天中期。这样有鸡蛋，鸭蛋，大牛奶，大羊奶，奶酪，山羊奶酪。其余时间推荐下矿洞，尽快下到80层，拿到金矿 ，这样就能在秋季做出洒水器，实现自动化。钓鱼去海边钓大海参，能卖点小钱，还能放在那个海滩节那个汤里面（金星大海参）。
-    - 秋：秋季因为前面两个季节的铺垫，就可以种秋季作物，完成茶水间献祭，其余种蔓越莓，温室开了之后可以先种杨桃 ，上古水果后面第二年可以慢慢攒。其余时间就是挖矿120层，升级工具，升级三级鸡舍，三级牛棚，钓钓鱼补贴家用
+    - 春：种防风草，还有一些春季作物，卖出来的钱推荐留着等节日买草莓种子。其余时间就是钓鱼，尤其是下雨的时候记得去小河钓鲶鱼，至于鱼王，老手可以钓 新手就不推荐了。钓鱼推荐三级鱼竿，就是能上鱼饵的那个，没体力就去买鱼汤喝。钓鱼可以带来钱，还有宝箱会给各种东西。（我就出过海王剑，下矿不愁了）
+    - 夏：夏季也是种献祭所需的农作物，其余全种蓝莓。推荐升级蝙蝠洞，捡到各种水果，献祭所需。没有升级的话就要花10000G买个苹果和石榴树苗，这样秋天就可以拿去献祭了。还有二级鸡舍，二级牛棚都要安排上，晚点也行，最晚在秋天中期。这样有鸡蛋，鸭蛋，大牛奶，大羊奶，奶酪，山羊奶酪。其余时间推荐下矿洞，尽快下到80层，拿到金矿 ，这样就能在秋季做出洒水器，实现自动化。钓鱼去海边钓大海参，能卖点小钱，还能放在那个海滩节那个汤里面（金星大海参）。
+    - 秋：因为前面两个季节的铺垫，就可以种秋季作物，完成茶水间献祭，其余种蔓越莓，温室开了之后可以先种杨桃，上古水果后面第二年可以慢慢攒。其余时间就是挖矿120层，升级工具，升级三级鸡舍，三级牛棚，钓钓鱼补贴家用
     - 冬：像挖人参一样在地面找东西，合成种子
-* 可以结婚、离婚
 
 ## 设置
 

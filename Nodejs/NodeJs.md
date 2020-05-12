@@ -37,11 +37,11 @@ sudo ln -s /opt/node/bin/npm /usr/local/bin/npm
 sudo visudo
 Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 
-# install compiled package 
+# install compiled package
 VERSION=v10.15.0
 DISTRO=linux-x64
 sudo mkdir -p /usr/local/lib/nodejs
-sudo tar -xJvf node-$VERSION-$DISTRO.tar.xz -C /usr/local/lib/nodejs 
+sudo tar -xJvf node-$VERSION-$DISTRO.tar.xz -C /usr/local/lib/nodejs
 Set the environment variable ~/.profile, add below to the end
 # Nodejs
 VERSION=v10.15.0
@@ -52,6 +52,8 @@ sudo ln -s /usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin/node /usr/bin/node
 sudo ln -s /usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin/npm /usr/bin/npm
 sudo ln -s /usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin/npx /usr/bin/npx
 
+# Error: EACCES: permission denied, access '/usr/local/lib/node_modules' react
+sudo chown -R henry:henry /usr/local/lib/nodejs/node-v12.16.1-linux-x64/lib/node_modules
 ## using PPA
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install -y nodejs npm

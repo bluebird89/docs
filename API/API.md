@@ -168,7 +168,7 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
         + 授权码（authorization code）方式：向第三方应用先申请一个授权码，然后再用该码获取令
             * 流程:前端跳转到第三方应用登录链接->用户点击链接跳转到第三方应用登录并进行授权->前端跳转到所指定应用回调资源地址并伴随用于交互 AccessToken 的 Code->后端根据请求第三方应用并使用 Code 获取该用户的 AccessToken->获取 AccessToken 之后的应用即可自主的从第三方应用中获取用户的资源信息
             * 应用登记：注册一个 Application,添加回调url,得到 ClientId 和 Client Secret
-            * 验证 access token 
+            * 验证 access token
                 - 在完成授权流程后，资源服务器可以使用 OAuth 服务器提供的 Introspection 接口来验证access token，OAuth服务器会返回 access token 的状态以及过期时间。在OAuth标准中验证 token 的术语是 Introspection。同时也需要注意 access token 是用户和资源服务器之间的凭证，不是资源服务器和授权服务器之间的凭证。资源服务器和授权服务器之间应该使用额外的认证（例如 Basic 认证）。
                 - 使用 JWT 验证。授权服务器使用私钥签发 JWT 形式的 access token，资源服务器需要使用预先配置的公钥校验 JWT token，并得到 token 状态和一些被包含在 access token 中信息。因此在 JWT 的方案下，资源服务器和授权服务器不再需要通信，在一些场景下带来巨大的优势。同时 JWT 也有一些弱点，我会在JWT 的部分解释。
         + 隐藏式（implicit）：直接向前端颁发令牌，跳回redirect_uri，令牌的位置是 URL 锚点（fragment），而不是查询字符串（querystring）。因为 OAuth 2.0 允许跳转网址是 HTTP 协议，因此存在"中间人攻击"的风险，而浏览器跳转时，锚点不会发到服务器，就减少了泄漏令牌的风险。
@@ -196,7 +196,7 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
   redirect: 'xxxxxxxxxxx'
 }
 
-前端             后端                       后端          后端 
+前端             后端                       后端          后端
 -—---------       --------------     -------------     ----------
 | Client ID | -->| code + state |-->|access_token |-->| user info |
 -----------       --------------     -------------     ----------
@@ -204,12 +204,12 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
 # 前端获取 code & state
 GET https://github.com/login/oauth/authorize?client_id=your_client_id&redirect_uri=your_callback_url&scope=user&state=random_string
 | name | type | description |
-| ------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |   
-| client_id | string | 第一步中注册得到的ClientID |    
-| redirect_uri | string | 第一步中设置的回调地址 |  
-| loin | string | 推荐登录的 Github 账户，一般不填 | 
+| ------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| client_id | string | 第一步中注册得到的ClientID |
+| redirect_uri | string | 第一步中设置的回调地址 |
+| loin | string | 推荐登录的 Github 账户，一般不填 |
 | scope | string | 这个参数指定了最后能获取到的信息，取值范围有 user 和 repo 等等,默认同时取 user 和 repo 的信息，详细取值范围见Github 文档 |
-| state | string | 你设定的一个随机值，用来防止 cross-sit 攻击 |   
+| state | string | 你设定的一个随机值，用来防止 cross-sit 攻击 |
 | allow_signup | string | 这个参数指定是否允许用户在认证的时候注册 Github 账号，默认是 true |
 ## 要求用户登录，然后询问是否同意给予授权
 ## 跳转到redirect_uri指定的跳转网址，并且带上授权码
@@ -219,7 +219,7 @@ http://localhost:8080/oauth/callback?code=859310e7cecc9196f4af
 POST https://github.com/login/oauth/access_token
 
 | Name | Type | Description |
-| ------------- | ------ | ----------------------------- | 
+| ------------- | ------ | ----------------------------- |
 | client_id | string | 第一步中获取到的 ClientID |
 | cleint_secret | string | 第一步中获取到的 ClientSecret |
 | code | string | 第二步中前端获取到的 code |
@@ -622,7 +622,7 @@ apidoc -i myapp/ -o apidoc/ -t mytemplate/
     - 契约敲定之后，要生成 Mock Server，前后端同学就要依照契约各自开发。Mock Server 可暂时替代后台服务，帮组前端开发，同时，测试同学也可以依照契约文档来编写测试脚本，使用 Mock Server 进行脚本验证。
     - 后端接口发生变化除了口头通知以外必须修改契约：修改契约的成本变高
 
-## [raml-mocker](https://github.com/xbl/raml-mocker) 
+## [raml-mocker](https://github.com/xbl/raml-mocker)
 
 基于 Raml 使用 Nodejs 开发的 Mock Server 工具，使用 Raml 描述接口中设置 response 的 example 指令即可，raml-mocker 会解析 Raml 文件，并启动一个 Mock Server，将  example 的内容返回给浏览器。
 
@@ -717,10 +717,17 @@ print dec_message   // Hello World!
     - [google/tink](https://github.com/google/tink):Tink is a multi-language, cross-platform library that provides cryptographic APIs that are secure, easy to use correctly, and hard(er) to misuse.
     - [JSEncrypt](https://github.com/travist/jsencrypt):用于执行OpenSSL RSA加密、解密和密钥生成的Javascript库。WEB 的登录功能时一般是通过 Form 提交或 Ajax 方式提交到服务器进行验证的。为了防止抓包，登录密码肯定要先进行一次加密（RSA），再提交到服务器进行验证
 * 测试
+  - Poster 火狐浏览器的一个插件
     - postman
     - [liyasthomas/postwoman](https://github.com/liyasthomas/postwoman):https://github.com/liyasthomas/postwoman
     - [apiaryio/dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool https://dredd.org
     - [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
+    - RESTClient是用java Swing编写的基于http协议的接口测试工具
+    - Fiddler是一个http协议调试代理工具，它能够记录并检查所有你的电脑和互联网之间的http通讯，设置断点，查看所有的“进出”Fiddler的数据（指cookie,html,js,css等文件，这些都可以胡乱修改的意思）,测试的数据都可以保存,但测试记录不方便查询
+    - SoapUI是一个免费、开源、跨平台的功能测试解决方案。一个易于使用的图形界面，和企业级功能，让你轻松和soapUI迅速创建和执行自动化的功能，回归测试和负载测试
+    - Apache JMeter是Apache组织开发的基于Java的开源的测试工具， JMeter 可以用于对服务器、网络或对象模拟巨大的负载，来自不同压力类别下测试它们的强度和分析整体性能,对应用程序做功能/回归测试/接口测试，同时Jmeter+Ant+Jenkins也可以搭建接口和性能的持续集成测试平台
+    - WireMock是一个非常轻量级的支持HTTP mock的服务,可以用于单元测试或模拟测试环境服务端，它支持HTTP响应头，请求验证，代理/拦截，记录/回放存根和故障注入
+    - 冒烟测试用poster，集成测试用Jmeter
 * 文档
     - [swagger-api/swagger-ui](https://github.com/swagger-api/swagger-ui):Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. http://swagger.io
     - [YMFE/yapi](https://github.com/YMFE/yapi):YApi 是一个可本地部署的、打通前后端及QA的、可视化的接口管理平台 http://yapi.demo.qunar.com/

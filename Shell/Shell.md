@@ -40,7 +40,7 @@ echo $SHELL # 查看shell
 
 /* 如果vim还没有语法高亮，那么在/etc/profile 中添加以下语句 */
 export TERM=xterm-color
-// 注: 只对各个用户自己的主目录下的.vimrc修改的话，修改内容只对本用户有效,要想全部有效，可以修改 /etc/vimrc           
+// 注: 只对各个用户自己的主目录下的.vimrc修改的话，修改内容只对本用户有效,要想全部有效，可以修改 /etc/vimrc
 # 同样的 /etc/bashrc 是针对所有用户的启动文件
 
 # ~/.vimrc
@@ -109,7 +109,7 @@ if [ $UID -ne 0 ]; then
 fi
 ### Get os name via uname ###
 _myos="$(uname)"
- 
+
 ### add alias as per os using $_myos ###
 case $_myos in
    Linux) alias foo='/path/to/linux/bin/foo';;
@@ -195,7 +195,7 @@ alias wakeupnas02='/usr/bin/wakeonlan 00:11:32:11:15:FD'
 alias wakeupnas03='/usr/bin/wakeonlan 00:11:32:11:15:FE'
 ## shortcut  for iptables and pass it via sudo#
 alias ipt='sudo /sbin/iptables'
- 
+
 # display all rules #
 alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
 alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
@@ -204,7 +204,7 @@ alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
 alias firewall=iptlist
 # get web server headers #
 alias header='curl -I'
- 
+
 # find out if remote server supports gzip / mod_deflate or not #
 alias headerc='curl -I --compress'
 
@@ -267,17 +267,17 @@ alias amazonbackup=s3backup
 # playavi or vlc
 alias playavi='mplayer *.avi'
 alias vlc='vlc *.avi'
- 
+
 # play all music files from the current directory #
 alias playwave='for i in *.wav; do mplayer "$i"; done'
 alias playogg='for i in *.ogg; do mplayer "$i"; done'
 alias playmp3='for i in *.mp3; do mplayer "$i"; done'
- 
+
 # play files from nas devices #
 alias nplaywave='for i in /nas/multimedia/wave/*.wav; do mplayer "$i"; done'
 alias nplayogg='for i in /nas/multimedia/ogg/*.ogg; do mplayer "$i"; done'
 alias nplaymp3='for i in /nas/multimedia/mp3/*.mp3; do mplayer "$i"; done'
- 
+
 # shuffle mp3/ogg etc by default #
 alias music='mplayer --shuffle *'
 
@@ -287,25 +287,25 @@ alias vnstat='vnstat -i eth1'
 alias iftop='iftop -i eth1'
 alias tcpdump='tcpdump -i eth1'
 alias ethtool='ethtool eth1'
- 
+
 # work on wlan0 by default #
 # Only useful for laptop as all servers are without wireless interface
 alias iwconfig='iwconfig wlan0'
 
 ## pass options to free ##
 alias meminfo='free -m -l -t'
- 
+
 ## get top process eating memory
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
- 
+
 ## get top process eating cpu ##
 alias pscpu='ps auxf | sort -nr -k 3'
 alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
- 
+
 ## Get server cpu info ##
 alias cpuinfo='lscpu'
- 
+
 #copy output of last command to clipboard
 alias cl="fc -e -|pbcopy"
 
@@ -324,13 +324,13 @@ alias ip="curl icanhazip.com"
 
 ## older system use /proc/cpuinfo ##
 ##alias cpuinfo='less /proc/cpuinfo' ##
- 
+
 ## get GPU ram on desktop / laptop##
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 
 # Reboot my home Linksys WAG160N / WAG54 / WAG320 / WAG120N Router / Gateway from *nix.
 alias rebootlinksys="curl -u 'admin:my-super-password' 'http://192.168.1.2/setup.cgi?todo=reboot'"
- 
+
 # Reboot tomato based Asus NT16 wireless bridge
 alias reboottomato="ssh admin@192.168.1.1 /sbin/reboot"
 
@@ -342,17 +342,17 @@ alias ff4='/opt/firefox4/firefox'
 alias ff13='/opt/firefox13/firefox'
 alias chrome='/opt/google/chrome/chrome'
 alias opera='/opt/opera/opera'
- 
+
 #default ff
 alias ff=ff13
- 
+
 #my default browser
 alias browser=chrome
 
 ## set some other defaults ##
 alias df='df -H'
 alias du='du -ch'
- 
+
 # top is atop, just like vi is vim
 alias top='sudo htop'
 alias cat='bat'
@@ -361,18 +361,18 @@ alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 ## nfsrestart  - must be root  ##
 ## refresh nfs mount / cache etc for Apache ##
 alias nfsrestart='sync && sleep 2 && /etc/init.d/httpd stop && umount netapp2:/exports/http && sleep 2 && mount -o rw,sync,rsize=32768,wsize=32768,intr,hard,proto=tcp,fsc natapp2:/exports /http/var/www/html &&  /etc/init.d/httpd start'
- 
+
 ## Memcached server status  ##
 alias mcdstats='/usr/bin/memcached-tool 10.10.27.11:11211 stats'
 alias mcdshow='/usr/bin/memcached-tool 10.10.27.11:11211 display'
- 
+
 ## quickly flush out memcached server ##
 alias flushmcd='echo "flush_all" | nc 10.10.27.11 11211'
- 
+
 ## Remove assets quickly from Akamai / Amazon cdn ##
 alias cdndel='/home/scripts/admin/cdn/purge_cdn_cache --profile akamai'
 alias amzcdndel='/home/scripts/admin/cdn/purge_cdn_cache --profile amazon'
- 
+
 ## supply list of urls via file or stdin
 alias cdnmdel='/home/scripts/admin/cdn/purge_cdn_cache --profile akamai --stdin'
 alias amzcdnmdel='/home/scripts/admin/cdn/purge_cdn_cache --profile amazon --stdin'
@@ -405,7 +405,7 @@ function nanobk() {
 alias flushdns="sudo /etc/init.d/dns-clean restart && echo DNS cache flushed"
 
 # Get IPs associated with this site
-# Work to dynamically list all interfaces. Will add later. 
+# Work to dynamically list all interfaces. Will add later.
 # Currently only uses the hardcoded interface names
 function myip()
 {
@@ -426,7 +426,7 @@ function myip()
 }
 
 # Syntax: "repeat [X] [command]"
-function repeat()      
+function repeat()
 {
     local i max
     max=$1; shift;
@@ -562,7 +562,7 @@ the basic file, shell and text manipulation utilities of the GNU operating syste
     - 对于 rm -rf 这样的高危操作，需要检查后面的变量名是否为空，比如：rm -rf $MYDIDR/* 如果 $MYDIR为空，结果是灾难性的。
     - 考虑使用 “find/while” 而不是 “for/find”。如：for F in $(find . -type f) ; do echo $F; done 写成 find . -type f | while read F ; do echo $F ; done 不但可以容忍空格，而且还更快。
     - 防御式编程，在正式执行命令前，把相关的东西都检查好，比如，文件目录有没有存在。
-* 调试 
+* 调试
 * `前置 commands ; command1 && command2 || command3 ; 跟随 commands` 假如 command1 退出时返回码为零，就执行 command2，否则执行 command3
     - command1 && command2 这样的控制语句能够运行的原因是，每条命令执行完毕时都会给 shell 发送一个返回码，用来表示它执行成功与否。默认情况下，返回码为 0 表示成功，其他任何正值表示失败
 
@@ -584,30 +584,30 @@ exit 0
 ## PS1
 
 ```
-\a    ASCII 响铃字符（也可以键入 \007） 
-\d    "Wed Sep 06" 格式的日期 
-\e    ASCII 转义字符（也可以键入 \033） 
-\h    主机名的第一部分（如 "mybox"） 
-\H    主机的全称（如 "mybox.mydomain.com"） 
-\j    在此 shell 中通过按 ^Z 挂起的进程数 
-\l    此 shell 的终端设备名（如 "ttyp4"） 
-\n    换行符 
-\r    回车符 
-\s    shell 的名称（如 "bash"） 
-\t    24 小时制时间（如 "23:01:01"） 
-\T    12 小时制时间（如 "11:01:01"） 
-\@    带有 am/pm 的 12 小时制时间 
-\u    用户名 
-\v    bash 的版本（如 2.04） 
-\V    Bash 版本（包括补丁级别） ?/td> 
-\w    当前工作目录（如 "/home/drobbins"） 
-\W    当前工作目录的“基名 (basename)”（如 "drobbins"） 
-\!    当前命令在历史缓冲区中的位置 
-\#    命令编号（只要您键入内容，它就会在每次提示时累加） 
-\$    如果您不是超级用户 (root)，则插入一个 "$"；如果您是超级用户，则显示一个 "#" 
-\xxx    插入一个用三位数 xxx（用零代替未使用的数字，如 "\007"）表示的 ASCII 字符 
-\\    反斜杠 
-\[    这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使 bash 能够正确计算自动换行。 
+\a    ASCII 响铃字符（也可以键入 \007）
+\d    "Wed Sep 06" 格式的日期
+\e    ASCII 转义字符（也可以键入 \033）
+\h    主机名的第一部分（如 "mybox"）
+\H    主机的全称（如 "mybox.mydomain.com"）
+\j    在此 shell 中通过按 ^Z 挂起的进程数
+\l    此 shell 的终端设备名（如 "ttyp4"）
+\n    换行符
+\r    回车符
+\s    shell 的名称（如 "bash"）
+\t    24 小时制时间（如 "23:01:01"）
+\T    12 小时制时间（如 "11:01:01"）
+\@    带有 am/pm 的 12 小时制时间
+\u    用户名
+\v    bash 的版本（如 2.04）
+\V    Bash 版本（包括补丁级别） ?/td>
+\w    当前工作目录（如 "/home/drobbins"）
+\W    当前工作目录的“基名 (basename)”（如 "drobbins"）
+\!    当前命令在历史缓冲区中的位置
+\#    命令编号（只要您键入内容，它就会在每次提示时累加）
+\$    如果您不是超级用户 (root)，则插入一个 "$"；如果您是超级用户，则显示一个 "#"
+\xxx    插入一个用三位数 xxx（用零代替未使用的数字，如 "\007"）表示的 ASCII 字符
+\\    反斜杠
+\[    这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使 bash 能够正确计算自动换行。
 \]    这个序列应该出现在非打印字符序列之后
 ```
 
@@ -791,11 +791,11 @@ lsof -i:80 # -i参数表示网络链接，:80指明端口号
         + -L|l num 从标准输入一次读取 num 行送给 command 命令。
         + -d delim 分隔符，默认的xargs分隔符是回车，argument的分隔符是空格，这里修改的是xargs的分隔符。
         + -x exit的意思，主要是配合-s使用。。
-        + -P 修改最大的进程数，默认是1，为0时候为as many as it can 
+        + -P 修改最大的进程数，默认是1，为0时候为as many as it can
 
 ```sh
 find . -name PATTERN    ### 从当前目录查找符合 PATTERN 的文件
-find /home -name PATTERN -exec ls -l {} \;  # 从 /home 文件查找所有符合 PATTERN 的文件，并交由 ls 输出详细信息 
+find /home -name PATTERN -exec ls -l {} \;  # 从 /home 文件查找所有符合 PATTERN 的文件，并交由 ls 输出详细信息
 find / -name *.conf -type f -print | xargs file
 find / -name *.conf -type f -print | xargs tar cjf test.tar.gz
 
@@ -890,7 +890,7 @@ ls -l my_script # 过滤输出列表
 
 ```sh
 ls /void 2> output.log
-wc < output.log 
+wc < output.log
 ```
 
 ## grep
@@ -1478,12 +1478,6 @@ exit 0
 # vim:set ts=4 sw=4 ft=sh et:
 ```
 
-### terminator
-
-```sh
-sudo apt-get install terminator #  depend python version too old
-```
-
 ### 跳板机
 
 ```sh
@@ -1556,6 +1550,77 @@ git clone git://github.com/joelthelion/autojump.git ./install.py
 j + 目录名
 ```
 
+###  [fzf](https://github.com/junegunn/fzf)
+
+* 🌸 A command-line fuzzy finder
+* `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install`
+* Use
+    - CTRL-J / CTRL-K (or CTRL-N / CTRL-P) to move cursor up and down
+    - Enter key to select the item, CTRL-C / CTRL-G / ESC to exit
+    - On multi-select mode (-m), TAB and Shift-TAB to mark multiple items
+    - Emacs style key bindings
+    - Mouse: scroll, click, double-click; shift-click and shift-scroll on multi-select mode
+
+## [tmux]()
+
+* 命令行的典型使用方式是，打开一个终端窗口（terminal window，以下简称"窗口"），在里面输入命令。用户与计算机的这种临时的交互，称为一次"会话"（session）
+    - 窗口与其中启动的进程是连在一起的。打开窗口，会话开始；关闭窗口，会话结束
+    - 会话与窗口可以"解绑"：窗口关闭时，会话并不终止，而是继续运行，等到以后需要的时候，再让会话"绑定"其他窗口
+* 终端复用器（terminal multiplexer）在需要经常登录远程服务器工作的时候会很有用，可以保持远程登录的会话，还可以在一个窗口中查看多个 shell 的状态 替代screen、nohup
+    - 允许在单个窗口中，同时访问多个会话。这对于同时运行多个命令行程序很有用
+    - 可以让新窗口"接入"已经存在的会话
+    - 允许每个会话有多个连接窗口，因此可以多人实时共享会话
+    - 还支持窗口任意的垂直和水平拆分
+* 快捷键都要通过前缀键唤起。默认的前缀键是Ctrl+b
+    - 查看 tmux ls|Ctrl+b s：列出所有会话
+    - 新建 tmux new -s <session-name>
+    - 分离: tmux detach|Ctrl+b d
+    - 接入 tmux attach -t <session-name>
+    - 杀死 tmux kill-session -t <session-name>
+    - 切换 tmux switch -t <session-name>
+    - 重命名 tmux rename-session -t 0 <new-name>|Ctrl+b $
+    - 划分窗格 tmux split-window|tmux split-window -h
+    - 移动光标 tmux select-pane -U|D|L|R
+    - 交换窗格 tmux swap-pane -U|D
+    - 新建窗口 `tmux new-window -n <window-name>`
+    - 切换 tmux select-window -t <window-number>|<window-name>
+    - 重命名窗口  tmux rename-window <new-name>
+    - Ctrl+b %：划分左右两个窗格。
+    - Ctrl+b "：划分上下两个窗格。
+    - Ctrl+b <arrow key>：光标切换到其他窗格。<arrow key>是指向要切换到的窗格的方向键，比如切换到下方窗格，就按方向键↓。
+    - Ctrl+b ;：光标切换到上一个窗格。
+    - Ctrl+b o：光标切换到下一个窗格。
+    - Ctrl+b {：当前窗格左移。
+    - Ctrl+b }：当前窗格右移。
+    - Ctrl+b Ctrl+o：当前窗格上移。
+    - Ctrl+b Alt+o：当前窗格下移。
+    - Ctrl+b x：关闭当前窗格。
+    - Ctrl+b !：将当前窗格拆分为一个独立窗口。
+    - Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
+    - Ctrl+b Ctrl+<arrow key>：按箭头方向调整窗格大小。
+    - Ctrl+b q：显示窗格编号
+    - Ctrl+b c：创建一个新窗口，状态栏会显示多个窗口的信息。
+    - Ctrl+b p：切换到上一个窗口（按照状态栏上的顺序）。
+    - Ctrl+b n：切换到下一个窗口。
+    - Ctrl+b <number>：切换到指定编号的窗口，其中的<number>是状态栏上的窗口编号。
+    - Ctrl+b w：从列表中选择窗口。
+    - Ctrl+b ,：窗口重命名。
+    - 列出所有快捷键 tmux list-keys
+    - 列出所有 Tmux 命令及其参数:tmux list-commands
+    - 列出当前所有 Tmux 会话的信息 tmux info
+    - 重新加载当前的 Tmux 配置tmux source-file ~/.tmux.conf
+* 第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推
+
+```sh
+sudo apt-get install tmux
+sudo yum install tmux
+brew install tmux
+
+tmux # into 底部有一个状态栏。状态栏的左侧是窗口信息（编号和名称），右侧是系统信息
+
+
+```
+
 ## 问题
 
 ```
@@ -1600,6 +1665,7 @@ ccache gcc foo.c
             * 易于选择和复制文本块
             * 简单选择屏幕滚动，使用CTRL + SHIFT + K清理缓冲区
             * 可自定义隐藏大部分不必要的细节(（)标签栏、菜单)，默认提供许多颜色主题
+        + [terminator](https://terminator-gtk3.readthedocs.io/en/latest/index.html):depend python2.7
     - Windows
         + WSL:提供了一个由微软开发的Linux兼容的内核接口(（)不包含Linux内核代码)，然后可以在其上运行GNU用户空间
             * WSL2
@@ -1637,12 +1703,10 @@ ccache gcc foo.c
 * [ncdu]()比 du 好用多了,另一个选择是 [nnn](https://github.com/jarun/nnn)
 * [asciinema](https://asciinema.org/)和 [svg-trem](https://github.com/marionebl/svg-term-cli) 如果想把的命令行操作建录制成一个 SVG 动图
 * [httpie](https://github.com/jakubroztocil/httpie) 是一个可以用来替代 curl 和 wget 的 http 客户端，httpie 支持 json 和语法高亮，可以使用简单的语法进行 http 访问: http -v github.com
-* [tmux]() 在需要经常登录远程服务器工作的时候会很有用，可以保持远程登录的会话，还可以在一个窗口中查看多个 shell 的状态 替代screen、nohup
 * [Taskbook](https://github.com/klaussinani/taskbook) 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级
 * [sshrc](https://github.com/Russell91/sshrc ) 在登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置
 * 搜索
     - [ack](https://beyondgrep.com/)、[ag](https://github.com/ggreer/the_silver_searcher)和 [rg](https://github.com/BurntSushi/ripgrep)是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到配置在 .gitignore 中的规则
-    - [fzf](https://github.com/junegunn/fzf) cherry_blossom A command-line fuzzy finder `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install`
     - [fd](https://github.com/sharkdp/fd) A simple, fast and user-friendly alternative to 'find' 一个比 find 更简单更快的命令，会自动地忽略掉一些配置在 .gitignore 中的文件，以及 .git 下的文件
     - [ ggreer / the_silver_searcher ](https://github.com/ggreer/the_silver_searcher):A code-searching tool similar to ack, but faster. http://geoff.greer.fm/ag/
 * monitor

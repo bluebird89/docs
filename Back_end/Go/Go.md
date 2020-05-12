@@ -925,7 +925,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 ├── handler                      # 类似MVC架构中的C，用来读取输入，并将处理流程转发给实际的处理函数，最后返回结果
 │   ├── handler.go
 │   ├── sd                       # 健康检查handler
-│   │   └── check.go 
+│   │   └── check.go
 │   └── user                     # 核心：账号业务逻辑handler
 │       ├── create.go            # 新增账号
 │       ├── delete.go            # 删除账号
@@ -957,7 +957,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 ├── README.md                    # API目录README
 ├── router                       # 路由相关处理
 │   ├── middleware               # API服务器用的是Gin Web框架，Gin中间件存放位置
-│   │   ├── auth.go 
+│   │   ├── auth.go
 │   │   ├── header.go
 │   │   ├── logging.go
 │   │   └── requestid.go
@@ -965,7 +965,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 ├── service                      # 实际业务处理函数存放位置
 │   └── service.go
 ├── util                         # 工具类函数存放目录
-│   ├── util.go 
+│   ├── util.go
 │   └── util_test.go
 └── vendor                         # vendor目录用来管理依赖包
     ├── github.com
@@ -1005,7 +1005,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [astaxie/go-best-practice](https://github.com/astaxie/go-best-practice):Trying to complete over 100 projects in various categories in golang.
 * [Unknwon/go-fundamental-programming](https://github.com/Unknwon/go-fundamental-programming):《Go 编程基础》是一套针对 Google 出品的 Go 语言的视频语音教程，主要面向新手级别的学习者。
 * [Alikhll/golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
-* [go_command_tutorial](https://github.com/hyper0x/go_command_tutorial):Golang command tutorial in Chinese. 
+* [go_command_tutorial](https://github.com/hyper0x/go_command_tutorial):Golang command tutorial in Chinese.
 * [hyper0x/Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers/tree/master/src/puzzlers):An example project, for my column named "Core Golang - 36 lessons"
 * [hoanhan101/ultimate-go](https://github.com/hoanhan101/ultimate-go):Ultimate Go study guide, with heavily documented code and programs analysis all in 1 place →
 * [ardanlabs/gotraining](https://github.com/ardanlabs/gotraining):Go Training Class Material
@@ -1198,6 +1198,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - `go get golang.org/x/tools/cmd/godoc`
   - `godoc -http=:6060` 访问`http://localhost:6060/`
 * [deanishe/awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
+* [ hackstoic / golang-open-source-projects ](https://github.com/hackstoic/golang-open-source-projects):为互联网IT人打造的中文版awesome-go
 
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>
