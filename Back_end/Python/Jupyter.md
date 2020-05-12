@@ -17,9 +17,6 @@ Jupyter metapackage for installation, docs and chat https://jupyter.readthedocs.
 
 ## Install
 
-* windows: `C:\Users\<user_name>\.jupyter\jupyter_notebook_config.py`
-* Linux/macOS：`/Users/<user_name>/.jupyter/jupyter_notebook_config.py` 或 ` ~/.jupyter/jupyter_notebook_config.py`
-
 ```sh
 conda install jupyter notebook
 pip install jupyter
@@ -29,18 +26,21 @@ jupyter notebook
 --port <port_number> # set port
 --no-browser # 启动Jupyter Notebook的服务器但不打算立刻进入到主页面
 
-# 命令虽然可以用于查看配置文件所在的路径，但主要用途是是否将这个路径下的配置文件替换为默认配置文件
+# 可以用于查看配置文件所在的路径，主要用途是是否将这个路径下的配置文件替换为默认配置文件
 jupyter notebook --generate-config
+jupyter notebook --port <port_number>
+jupyter notebook --no-browser
 ```
 
 ## config
 
-/home/henry/.ipython/profile_default
-
+* windows: `C:\Users\<user_name>\.jupyter\jupyter_notebook_config.py`
+* Linux/macOS：`/Users/<user_name>/.jupyter/jupyter_notebook_config.py` 或 ` ~/.jupyter/jupyter_notebook_config.py`
+* `/home/henry/.ipython/profile_default`
 * 把变量名称或没有定义输出结果的语句放在cell的最后一行，无需print语句，Jupyter也会显示变量值。当使用Pandas DataFrames时这一点尤其有用，因为输出结果为整齐的表格
+* `~/.jupyter/nbconfig/notebook.json`
 
 ```py
-jupyter notebook --generate-config # 获取配置文件所在路径
 vim ~/.jupyter/jupyter_notebook_config.py
 
 # ~/.ipython/profile_default/ipython_config.py
@@ -49,13 +49,88 @@ c = get_config()
 c.InteractiveShell.ast_node_interactivity = "all"
 ```
 
-## 关联Jupyter Notebook和conda的环境和包
+## 使用
 
-对conda环境和包进行一系列操作
+* 文件
+    - Terminal:支持 bash
+    - Markdown
+* 与　vim 类似
+* 命令模式:当前cell侧边为蓝色时
+    - H：显示快捷键帮助
+    - F：查找和替换
+    - P：打开命令面板
+    - Enter切换为编辑模式
+    - Ctrl-Enter：运行当前cell
+    - Shift-Enter：运行当前cell并跳转到下一cell
+    - Alt-Enter：运行当前cell并在下方新建cell
+    - Y：把当前cell内容转换为代码形式
+    - M：把当前cell内容转换为markdown形式
+    - R 将单元格切换至raw状态
+    - 1~6：把当前cell内容设置为标题1~6格式
+    - Shift+上下键|K|J：按住Shift进行上下键操作可复选多个cell
+    - ↑|K   选中上方单元格
+    - ↓|J   选中下方单元格
+    - A：在上方新建cell
+    - B：在下方新建cell
+    - X/C/Shift-V/V：剪切/复制/上方粘贴/下方粘贴
+    - D, D：删除当前cell
+    - ⇧M    合并选中单元格，若直选中一个则与下一个单元格合并
+    - Z：撤销删除
+    - S：保存notebook
+    - L   转换行号
+    - O   转换输出 在cell和输出结果间切换
+    - ⇧O  转换滚动输出
+    - H   显示快捷键帮助
+    - I, I    中断Notebook内核
+    - O, O    重启Notebook内核
+    - Shift-L：为所有cell的代码添加行编号
+    - Shift-M：合并所选cell或合并当前cell和下方的cell
+    - Q 关闭页面
+* 编辑模式：前cell侧边为绿色
+    - Esc 切换为命令模式
+    - Tab：代码补全
+    - Ctrl-A：全选
+    - Ctrl-Z：撤销
+    - Ctrl-Home：将光标移至cell最前端
+    - Ctrl-End：将光标移至cell末端
+    - Ctrl + /  为一行或者多行添加/取消注释
+    - Alt Multicursor support
+* 修改之前的单元格，对其重新计算，这样就可以更新整个文档
+* 主题:重启生效
+* 扩展: 通过　NJupyter-contrib extensions　安装
+    -　Hinterland功能可以让你每敲完一个键，就出现下拉菜单，可以直接选中你需要的词汇
+    -　Snippets在工具栏里加了一个下拉菜单，可以非常方便的直接插入代码段，完全不用手动敲
+    -　拆分笔记本中的单元格，改成相邻的模式，看起来就像分了两栏
+    -　目录可以自动找到所有的标题，生成目录
+    -　折叠一个标题下的全部内容
+    -　Autopep8 一键美化代码
 
 ```sh
-conda install nb_conda
-conda remove nb_conda
+conda install|remove nb_conda　# conda创建的环境与Jupyter Notebook相关联，便于在Jupyter Notebook的使用中，在不同的环境下创建笔记本进行工作
+pip install jupyterthemes
+jt -l
+jt -t chesterish
+jt -r # 恢复默认
+
+conda install -c conda-forge jupyter_nbextensions_configurator
+pip install jupyter_nbextensions_configurator
+jupyter contrib nbextension install --user
+jupyter nbextensions_configurator enable --user
+
+conda install -c conda-forge jupyter_contrib_nbextensions
+pip install https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master
+pip install jupyter_contrib_nbextensions && jupyter contrib nbextension install
+# pip
+pip install ipywidgets
+jupyter nbextension enable --py widgetsnbextension
+
+# Conda
+conda install -c conda-forge ipywidgets
+
+pip install qgrid
+jupyter nbextension enable --py --sys-prefix qgrid
+# only required if you have not enabled the ipywidgets nbextension yet
+jupyter nbextension enable --py --sys-prefix widgetsnbextension
 ```
 
 ## content
@@ -96,7 +171,9 @@ Notebook 文档是由一系列单元（Cell）构成，主要有两种形式的�
 * 查看python版本：!python --version
 * 运行python文件：!python myfile.py
 * current_path = %pwd
+* %load URL
 
+```
 # one file
 data = 'this is the string I want to pass to different notebook'
 %store data
@@ -114,71 +191,6 @@ for _ in range(1000):
 import numpy
 %timeit numpy.random.normal(size=100)
 ```
-
-## shortcut
-
-Help > Keyboard Shortcuts
-
-* 修改之前的单元格，对其重新计算，这样就可以更新整个文档
-* Shift-Enter run cell,自动跳到下一个cell
-* Ctrl-Enter  run cell in-place 不自动调转到下一个cell
-* Enter: 当前cell进入编辑模式
-* ESC: 退出当前cell的编辑模式
-* dd:删除当前的cell
-* z: 撤销对某个cell的删除
-* l:为当前的cell加入line number
-* 单1|2|3:当前的cell转化为具有一|二｜三级标题的maskdown
-* Alt-Enter   run cell, insert below
-* Ctrl-m x    cut cell
-* Ctrl-m c    copy cell
-* Ctrl-m v    paste cell
-* Ctrl-m d    delete cell
-* Ctrl-m z    undo last cell deletion
-* Ctrl-m –    split cell
-* Ctrl-m a    insert cell above
-* Ctrl-m b    insert cell below
-* Ctrl-m o    toggle output
-* Ctrl-m O    toggle output scroll
-* Ctrl-m l    toggle line numbers
-* Ctrl-m s    save notebook
-* Ctrl-m j    move cell down
-* Ctrl-m k    move cell up
-* Ctrl-m y    code cell
-* Ctrl-m m    markdown cell
-* Ctrl-m t    raw cell
-* Ctrl-m 1-6  heading 1-6 cell
-* Ctrl-m p    select previous
-* Ctrl-m n    select next
-* Ctrl-m i    interrupt kernel
-* Ctrl-m .    restart kernel
-* Ctrl-m h    show keyboard shortcuts
-* Ctrl + /  为一行或者多行添加/取消注释
-* Crtl PgUp和Crtl PgDn 浏览器的各个Tab之间切换
-* Crtl Home: 快速跳转到首个cell
-* Crtl End: 快速跳转到最后一个cell
-* Esc R Y  will discard the output
-* Esc + F 在代码中查找、替换，忽略输出。
-* Esc + O 在cell和输出结果间切换。
-* 选择多个cell:一旦选定cell，可以批量删除/拷贝/剪切/粘贴/运行
-    - Shift + J 或 Shift + Down 选择下一个cell。
-    - Shift + K 或 Shift + Up 选择上一个cell。
-* Shift + M 合并cell
-* 执行当前cell，并自动跳到下一个cell：Shift Enter
-* 执行当前cell，执行后不自动调转到下一个cell：Ctrl-Enter
-* 当前的cell进入编辑模式：Enter
-* 退出当前cell的编辑模式：Esc
-* 删除当前的cell：双D
-* 为当前的cell加入line number：单L
-* 将当前的cell转化为具有一级标题的maskdown：单1
-* 将当前的cell转化为具有二级标题的maskdown：单2
-* 将当前的cell转化为具有三级标题的maskdown：单3
-* 为一行或者多行添加/取消注释：Crtl /
-* 撤销对某个cell的删除：z
-* 浏览器的各个Tab之间切换：Crtl PgUp和Crtl PgDn
-* 快速跳转到首个cell：Crtl Home
-* 快速跳转到最后一个cell：Crtl End
-* Help 菜单下，可以找到常见库的在线文档链接，包括Numpy，Pandas，Scipy和Matplotlib
-* 库、方法或变量的前面打上?，即可打开相关语法的帮助文档
 
 ## terminal
 
@@ -202,7 +214,7 @@ names[:5]
 
 ## LaTex
 
-* 一个Markdown单元格里写LaTex时，它将用MathJax呈现公式：如 $$ P(A \mid B) = \frac{P(B \mid A) , P(A)}{P(B)} $$
+* 一个Markdown单元格里写LaTex时，它将用MathJax呈现公式：如` $$ P(A \mid B) = \frac{P(B \mid A) , P(A)}{P(B)} $$`
 
 ## kernal
 
@@ -251,7 +263,6 @@ $$\int_0^{+\infty} x^2 dx$$ # 公式
 
 RISE: "Live" Reveal.js Jupyter/IPython Slideshow Extension
 
-
 ```
 # install
 
@@ -278,23 +289,6 @@ jupyter-nbextension enable rise --py --sys-prefix
 * pyspark
 * spark-sql magic %%sql
 
-## Jupyter-contrib extensions
-
-* Table of Contents(2):目录生成
-    - 安装
-    - 页面中Nbextensions标签下勾选“Table of Contents(2)”
-
-```
-# 添加
-conda install -c conda-forge jupyter_contrib_nbextensions
-
-!pip install https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master
-!pip install jupyter_nbextensions_configurator
-
-!jupyter contrib nbextension install --user
-!jupyter nbextensions_configurator enable --user
-```
-
 ## 参考
 
 * [markusschanta/awesome-jupyter](https://github.com/markusschanta/awesome-jupyter):A curated list of awesome Jupyter projects, libraries and resources
@@ -303,3 +297,4 @@ conda install -c conda-forge jupyter_contrib_nbextensions
 ## 工具
 
 * [jupyter/notebook](https://github.com/jupyter/notebook):Jupyter Interactive Notebook https://jupyter-notebook.readthedocs.io/
+* [Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb)

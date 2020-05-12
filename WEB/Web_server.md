@@ -350,6 +350,60 @@ location ~ \.php {
   ssl_prefer_server_ciphers on;
 ```
 
+## 服务器初步配置
+
+```sh
+ssh root@128.199.209.242
+passwd
+
+addgroup admin
+useradd -d /home/bill -s /bin/bash -m bill
+passwd bill
+usermod -a -G admin bill
+apt-get update && apt-get upgrade
+apt-get install sudo
+visudo # 打开sudo设置文件/etc/sudoers
+root    ALL=(ALL:ALL) ALL
+bill    ALL=(ALL) NOPASSWD: ALL # 切换sudo的时候，不需要输入密码
+
+# SSH
+cat ~/.ssh/id_rsa.pub | ssh bill@128.199.209.242 'mkdir -p .ssh && cat - >> ~/.ssh/authorized_keys'
+# 或者在服务器端，运行下面命令
+echo "ssh-rsa [your public key]" > ~/.ssh/authorized_keys
+
+sudo cp /etc/ssh/sshd_config ~
+sudo nano /etc/ssh/sshd_config
+Port 25000
+Protocol 2
+
+PermitRootLogin no
+PermitEmptyPasswords no
+PasswordAuthentication no
+
+RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+
+UseDNS no
+AllowUsers bill
+
+sudo chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh/
+sudo service ssh restart
+sudo /etc/init.d/ssh restart
+
+# client
+Host s1
+HostName 128.199.209.242
+User bill
+Port 25000
+
+ssh s1
+
+locale
+udo locale-gen en_US en_US.UTF-8 en_CA.UTF-8
+sudo dpkg-reconfigure locales
+```
+
 ## 演化
 
 * Everything On One Server：Web Application Database

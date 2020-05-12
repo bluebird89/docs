@@ -155,6 +155,7 @@
 
 ## 工具
 
+* [AlternativeTo](https://alternativeto.net/)
 * [iawia002/annie](https://github.com/iawia002/annie):👾 Fast, simple and clean video downloader
 * [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
 * [rg3/youtube-dl](https://github.com/rg3/youtube-dl):Command-line program to download videos from YouTube.com and other video sites http://rg3.github.io/youtube-dl/
@@ -238,7 +239,7 @@
     - [Cold Turky](https://getcoldturkey.com/):Meet your match, Zuckerberg. Reclaim your free time and boost your productivity by blocking time-wasting websites and applications.
 * 资源
     - [helloacm](https://helloacm.com/crontab-generator/): 集成工具集
-    - [scottslowe/learning-tools](https://github.com/scottslowe/learning-tools):A collection of tools and files for learning new technologies 
+    - [scottslowe/learning-tools](https://github.com/scottslowe/learning-tools):A collection of tools and files for learning new technologies
 * 生活
     - [testerSunshine/12306](https://github.com/testerSunshine/12306):12306智能刷票，订票
 * 资源

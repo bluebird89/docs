@@ -60,16 +60,17 @@ sudo apt-get install code
 * Minify
 * Markdownlint
 * npm Intellisense
+* Open-In-Browser
 * Path Intellisense
 * Prettier
 * Polacode 可以把代码生成图片
-* Open-In-Browser
 * PHP IntelliSense
 * [prettier/prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. https://prettier.io
 * Quokka.js
 * React Native Tools
 * Reactjs code snippets
 * Regex Previewer
+* Remote
 * Settings Sync
 * snippets
 * Stylelint

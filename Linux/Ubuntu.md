@@ -29,7 +29,7 @@
     + 选中分区boot分区
   - 重启运行
 * grub
-  - `/etc/default/grub` 
+  - `/etc/default/grub`
   - 重新生成GRUB的启动菜单配置文件(/boot/grub/grub.cfg):`sudo update-grub`
   - `GRUB_THEME="/boot/grub/themes/fallout-grub-theme-master/theme.txt"`
   - `sudo grub-set-default NUMBER`
@@ -37,6 +37,10 @@
 
 ```sh
 sudo dd if=ubuntu-16.04-desktop-amd64.iso of=/dev/sdc bs=1M
+
+# Could not install packages due to an EnvironmentError: [Errno 28] No space left on device
+mkdir ~/tmp
+export TMPDIR=$HOME/tmp
 ```
 
 ## 版本
@@ -216,6 +220,7 @@ sudo update-rc.d -f mount_and_frpc.sh remove # 取消
 * 软件源管理
   - 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
   - [snap](https://snapcraft.io/):The app store for Linux Publish your app for Linux users — for desktop, cloud, and Internet of Things.
+    + install direct in `/`
     + Channels:`<track>/<risk>/<branch>`
       * snaps must have a default track, called latest
       * Risk-levels
@@ -282,6 +287,9 @@ sudo apt install -y apt-fast`
   - 贴纸
     + indicator-stickynotes
     + Xpad:`sudo apt-get install xpad`
+* 下载
+  - `sudo apt-get install ktorrent`
+  - `sudo apt-get install amule`
 
 ```sh
 do-release-upgrade

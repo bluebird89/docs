@@ -20,7 +20,7 @@ curl is used in command lines or scripts to transfer data.发出网络请求，�
 * -G 用来构造 URL 的查询字符串
 * -k参数指定跳过 SSL 检测
 * --limit-rate用来限制 HTTP 请求和回应的带宽，模拟慢网速的环境
-* -o 参数将服务器的回应保存成文件，等同于wget命令
+* -o 将服务器的回应保存成文件，等同于wget命令
 * -O 将服务器回应保存成文件，并将 URL 的最后部分当作文件名
 * -s 将不输出错误和进度信息
 * -u 用来设置服务器认证的用户名和密码
@@ -57,7 +57,7 @@ curl -F 'file=@photo.png' https://google.com/profile #  MIME 类型设为applica
 curl -F 'file=@photo.png;type=image/png' https://google.com/profile
 
 curl -i  http://www.baidu.com  # 显示http response的头信息
-curl -I https://www.example.com 
+curl -I https://www.example.com
 curl -v www.baidu.com #  -v参数可以显示一次http通信的整个过程，包括端口连接和http request头信息
 curl --trace output.txt www.baidu.com # 查看更详细的通信过程
 curl --trace-ascii output.txt www.baidu.com
