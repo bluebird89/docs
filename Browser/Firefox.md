@@ -2,7 +2,7 @@
 
 * 中文与[英文](https://accounts.firefox.com)两套数据
 * Servo 引擎:用 Rust 编程语言开发的
-* 在 Windows 10 上面默认开启了 WebRender，使用 GPU 渲染网页，而不是传统的 CPU。这将大大改善网页的渲染性能，页面滚动和动画都会有更好的表现。 
+* 在 Windows 10 上面默认开启了 WebRender，使用 GPU 渲染网页，而不是传统的 CPU。大大改善网页的渲染性能，页面滚动和动画都会有更好的表现。
 
 ## Hotkey
 
@@ -88,6 +88,7 @@
 ## 插件
 
 * RESTClient
+* [ mozilla / send ](https://github.com/mozilla/send):Simple, private file sharing from the makers of Firefox https://send.firefox.com
 
 ## 功能
 

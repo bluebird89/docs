@@ -4,8 +4,7 @@ Jupyter metapackage for installation, docs and chat https://jupyter.readthedocs.
 
 以网页的形式打开，可以在网页页面中直接编写代码和运行代码，代码的运行结果也会直接在代码块下显示。如在编程过程中需要编写说明文档，可在同一个页面中直接编写，便于作及时的说明和解释
 
-## 说明
-
+## notebook
 
 * 保存为后缀名为.ipynb的JSON格式文件，不仅便于版本控制，也方便与他人共享。
 * 可以导出为：HTML、LaTeX、PDF等格式
@@ -101,9 +100,13 @@ c.InteractiveShell.ast_node_interactivity = "all"
     -　Hinterland功能可以让你每敲完一个键，就出现下拉菜单，可以直接选中你需要的词汇
     -　Snippets在工具栏里加了一个下拉菜单，可以非常方便的直接插入代码段，完全不用手动敲
     -　拆分笔记本中的单元格，改成相邻的模式，看起来就像分了两栏
-    -　目录可以自动找到所有的标题，生成目录
+    -　Table of Contents：可以自动找到所有的标题，生成目录
     -　折叠一个标题下的全部内容
-    -　Autopep8 一键美化代码
+    -　Autopep8:顶部工具栏 "木槌"按钮",可以修改快捷键
+    -　Variable inspector：显示在Notebook中创建的所有变量的名称，以及类型、大小、形状和值
+    -　ExecuteTime
+    -　Hide input
+*　shift+tab: 查看函数解释
 
 ```sh
 conda install|remove nb_conda　# conda创建的环境与Jupyter Notebook相关联，便于在Jupyter Notebook的使用中，在不同的环境下创建笔记本进行工作
@@ -288,6 +291,12 @@ jupyter-nbextension enable rise --py --sys-prefix
 * ipyparallel（之前叫 ipython cluster） 是一个在python中进行简单的map-reduce运算的良好选择。我们在rep中使用它来并行训练很多机器学习模型。
 * pyspark
 * spark-sql magic %%sql
+
+## [jupyterlab](https://jupyterlab.readthedocs.io/en/latest/)
+
+```sh
+conda install -c conda-forge jupyterlab
+```
 
 ## 参考
 

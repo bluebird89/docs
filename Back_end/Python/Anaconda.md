@@ -54,6 +54,13 @@ custom_channels:
 # 设置搜索时显示通道地址
 conda config --set show_channel_urls yes
 conda config --set auto_activate_base false
+
+# The environment is inconsistent, please check the package plan carefully
+conda install anaconda
+conda update --all
+
+# 10 possible package resolutions (only showing differing packages)
+conda update conda
 ```
 
 ## 使用

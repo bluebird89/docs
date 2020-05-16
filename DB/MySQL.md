@@ -852,16 +852,14 @@ ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和
     - 公共字段名字可以不一样，但是数据类型必须一样
     - 联表查询降低查询速度
     - 数据冗余与查询速度的平衡
-    - 内连接(inner join) 默认,可省略inner
-        + 只有数据存在时才能发送连接。即连接结果不能出现空行
+    - 内连接(inner join) 默认,可省略inner：以两个表的交集为主，只有数据存在时才能发送连接。即连接结果不能出现空行
         + on 表示连接条件。其条件表达式与where类似。也可以省略条件（表示条件永远为真）
         + where表示连接条件 `select info.id, info.name, info.stu_num, extra_info.hobby, extra_info.sex from info, extra_info where info.stu_num = extra_info.stu_id;`
         + `using(字段名)`:需字段名相同。
         + 交叉连接 cross join 即没有条件的内连接  `select * from tb1 cross join tb2;`
     - 外连接(outer join)
-        + 如果数据不存在，也会出现在连接结果中
-        + 左外连接 left join 如果数据不存在，左表记录会出现，而右表为null填充
-        + 右外连接 right join 如果数据不存在，右表记录会出现，而左表为null填充
+        + 左连接 left join：表1左连接表2，以左为主，表示以表1为主，关联上表2的数据。结果：显示左边的所有数据，然后右边显示的是和左边有交集部分的数据，如果数据不存在，左表记录会出现，而右表为null填充
+        + 右连接 right join：表1右连接表2，以右为主，表示以表2为主，关联查询表1的数据，查出表2所有数据以及表1和表2有交集的数据。如果数据不存在，右表记录会出现，而左表为null填充
     - 自然连接(natural join):自动判断连接条件完成连接, 相当于省略了using，会自动查找相同字段名
 * 子查询:用括号包裹
     - from型:from后要求是一个表，必须给子查询结果取个别名 `select * from (select * from tb where id>0) as subfrom where id>1;`
@@ -1940,7 +1938,7 @@ select count(*) as cnt, left(first_name, 4) as perf from actor group by perf ORD
 
 # 覆盖索引：建立联合索引(a, b, c)
 select a, b, c from t where a='a' and b='b';
-
+select * from tba1 FORCE INDEX('idx_end_time') # 强制使用索引
 ## 三星索引
 SELECT first_name, last_name, email FROM user WHERE first_name = 'aa' ORDER BY last_name;
 

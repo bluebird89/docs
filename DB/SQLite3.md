@@ -21,3 +21,7 @@ grant select,update on testDB.* to test@"%" identified by '1234';
 ## 工具
 
 * [kripken/sql.js](https://github.com/kripken/sql.js):SQLite compiled to JavaScript through Emscripten
+
+## 参考
+
+* [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)

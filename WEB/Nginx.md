@@ -2075,7 +2075,7 @@ dig TXT _acme-challenge.example.com @9.9.9.9 +short
 acme.sh --renew -d example.com -d '*.example.com' # 生效后给证书续
 
 # 手动签发
-acme.sh --issue -d www.bluebird89.online -w /usr/share/nginx/www --nginx
+acme.sh --debug --issue -d www.bluebird89.online -w /usr/share/nginx/www --nginx
 
 mkdir -p /etc/nginx/ssl
 mkdir -p /etc/nginx/ssl/www.bluebird89.online
@@ -2083,7 +2083,6 @@ mkdir -p /etc/nginx/ssl/www.bluebird89.online
 
 # 自动部署 证书文件会被copy到相应的位置
 acme.sh --installcert -d www.bluebird89.online \
---cert-file /etc/nginx/ssl//www.bluebird89.online/www.bluebird89.online.cert \ # nginx 不需要
 --key-file  /etc/nginx/ssl//www.bluebird89.online/www.bluebird89.online.key  \
 --fullchain-file /etc/nginx/ssl/www.bluebird89.online/fullchain.cer \
 --reloadcmd     "service nginx force-reload"

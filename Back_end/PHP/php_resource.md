@@ -424,6 +424,7 @@ open http://127.0.0.1:8000
     - [Shopware](https://github.com/shopware/shopware): 一个可高度定制的电子商务软件
     - [Swap](https://github.com/florianv/swap): 一个汇率库
     - [Sylius](http://sylius.org/): 一个开源的电子商务解决方案
+    - [ invoiceninja / invoiceninja ](https://github.com/invoiceninja/invoiceninja):Invoices, Expenses and Tasks built with Laravel and Flutter https://invoiceninja.com
 * PDF 处理PDF文件的库和软件
     - (https://github.com/dompdf/dompdf)[Dompdf]: 一个将HTML转换为PDF的工具
     - (https://github.com/psliwa/PHPPdf)[PHPPdf]: 一个将XML文件转换为PDF和图片的库

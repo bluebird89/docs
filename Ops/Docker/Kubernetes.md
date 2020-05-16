@@ -83,7 +83,7 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
         + Kubernetes Client将请求发送给API server
 
 * worker节点组件：运行在每个k8s Node上，提供K8s运行时环境，以及管理Pod和容器的生命周期
-    - Kubelet: 运行在每一个worker节点上的Agent，监听Etcd中的Pod信息，运行分配给它所在节点的Pod，并把状态更新回Etcd。通过docker部署
+    - [Kubelet](https://github.com/kubernetes/kubelet): 运行在每一个worker节点上的Agent，监听Etcd中的Pod信息，运行分配给它所在节点的Pod，并把状态更新回Etcd。通过docker部署
         + Kubelet是集群中每个Minion和Master API Server的连接点，运行在每个Minion上，接收Master API Server分配给它的commands和work，与持久性键值存储etcd、file、server和http进行交互，读取配置信息
         + 包括Docker Client、Root Directory、Pod Workers、Etcd Client、Cadvisor Client以及Health Checker组件
         + 具体工作如下：
@@ -728,6 +728,8 @@ kubectl delete service kubernetes-dashboard --namespace=kube-system
 * [helm/charts](https://github.com/helm/charts):Curated applications for Kubernetes
 * 配置
 * 工作原理
+    - 使用的是一种叫做charts的yaml文件
+    - charts被设计的便于创建和维护，它们可以互相共享并用于发布Kubernetes。charts包含说明文件以及至少一个模板，其中模板包含了Kubernetes清单文件。它们可以多次部署重复使用。如果多次安装同一个charts，则将创建一个新的版本
     - install A release name that you pick, and the name of the chart you want to install.
 * helm部署及其应用
 * 部署efk日志收集系统
@@ -736,7 +738,7 @@ kubectl delete service kubernetes-dashboard --namespace=kube-system
 
 | Linux            | $HOME/.cache/helm         | $HOME/.config/helm             | $HOME/.local/share/helm |
 | macOS            | $HOME/Library/Caches/helm | $HOME/Library/Preferences/helm | $HOME/Library/helm      |
-| Windows          | %TEMP%\helm               | %APPDATA%\helm                 | %APPDATA%\helm  
+| Windows          | %TEMP%\helm               | %APPDATA%\helm                 | %APPDATA%\helm
 
 ```sh
 ## install
@@ -763,8 +765,8 @@ helm install happy-panda stable/mariadb
 helm install stable/mysql --generate-name
 helm show chart stable/mysql
 helm ls # has been released using Helm
-helm uninstall mysql-1588737754  
-helm status mysql-1588737754  
+helm uninstall mysql-1588737754
+helm status mysql-1588737754
 
 # custom
 helm show values stable/mariadb
@@ -998,10 +1000,29 @@ source ~/.bash_profile
     - [kubernetes-incubator/kubespray](https://github.com/kubernetes-incubator/kubespray):Deploy a Production Ready Kubernetes Cluster
     - [kubernetes-sigs / kind](https://github.com/kubernetes-sigs/kind/):Kubernetes IN Docker - local clusters for testing Kubernetes https://kind.sigs.k8s.io/
     -  [fanux / sealos](https://github.com/fanux/sealos):只能用丝滑一词形容的kubernetes高可用安装（kubernetes install）工具，一条命令，离线安装，包含所有依赖，内核负载不依赖haproxy keepalived,纯golang开发,99年证书,支持v1.16.8 v1.15.11 v1.17.4 v1.18.0! https://sealyun.com
+    -  [Apollo](https://github.com/logzio/apollo/wiki/Getting-Started-with-Apollo):提供自助UI，用于部署和创建Kubernetes服务，Apollo允许管理员单击一下即可查看日志并且可以将部署恢复到任何时间点
 * UI
     - [Qihoo360/wayne](https://github.com/Qihoo360/wayne):Web UI for Kubernetes multi-clusters
+    - [K9s](https://github.com/derailed/k9s)
+    - [Tubectl](https://github.com/reconquest/tubekit)
+    - [Web Kubectl](https://github.com/KubeOperator/webkubectl) `docker run --name='webkubectl' -p 8080:8080 -d --privileged kubeoperator/webkubectl`
+    - [kube-prompt](https://github.com/c-bata/kube-prompt)
+    - [kubectl-tree](https://github.com/ahmetb/kubectl-tree)
 * Chaos
     -  [ChaosBlade](https://github.com/chaosblade-io/chaosblade)
+*  监控
+    -  [cAdvisor](https://github.com/google/cadvisor):开源的Kubernetes监控工具，由Google维护。主要用于监视资源使用情况和性能
+*  安全
+    -  [Twistlock](https://www.twistlock.com/):全生命周期的容器安全解决方案。它具有VMS，可持续扫描Kubernetes以及任何易受攻击的区域
+    -  [Falco](https://falco.org/):行为活动监视器，用于检测应用程序异常。它源自Sysdig项目，目前已经成为一款商业产品。Falco通过跟踪内核系统调用来监控容器性能。Falco允许使用一组规则持续监视和检测容器、应用程序、主机和网络活动
+    -  [Aqua Security](https://www.aquasec.com/):在部署之前扫描镜像，会把镜像设置成只读，这样一来镜像不容易受到威胁
+*  Cli
+    -  [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+    -  [kubectx](https://github.com/ahmetb/kubectx)
+    -  [Kube-shell](https://github.com/cloudnativelabs/kube-shell)
+*  Serverless
+    -  [Kubeless](https://kubeless.io/):用于部署小型应用程序的本地Kubernetes工具。它使用Kubernetes资源来执行许多任务，这有利于自动扩容、路由API、监控以及故障排查
+    -  [IronFunction：](https://open.iron.io/):用Golang编写的开源Serverless工具。它支持任何编程语言。支持AWS Lambda函数
 * [kubesphere/kubesphere](https://github.com/kubesphere/kubesphere):Easy-to-use Production Ready Container Platform https://kubesphere.io
 * [openshift/origin](https://github.com/openshift/origin):Enterprise Kubernetes for Developers http://www.openshift.org
 * [kubernetes/kops](https://github.com/kubernetes/kops):Kubernetes Operations (kops) - Production Grade K8s Installation, Upgrades, and Management

@@ -155,6 +155,13 @@ java HelloWorld // 运行
 * 文件操作
 * Lambda语法
 
+## JVM
+
+* 记录好日志；
+* 对程序做好性能监控；
+* 根据日志和性能监控数据修改程序；
+* 使用专业工具通过不同的JVM参数进行压测并获得最佳配置
+
 ## 基础
 
 * 大小写敏感：Java是大小写敏感的
@@ -944,6 +951,18 @@ public class UserController {
 }
 ```
 
+## Exception
+
+* 在Finally块中清理资源或者使用try-with-resource语句
+* 尽可能的使用最具体的异常来声明方法，这样才能使得代码更容易理解
+* 在Javadoc中加入throws声明，并且描述抛出异常的场景
+* 抛出异常的时候包含描述信息
+* 首先捕获最具体的异常
+* 不要捕获Throwable:Throwable是所有异常和错误的父类,如果catch了throwable，那么不仅仅会捕获所有exception，还会捕获error
+* 不要忽略异常:写了一个catch块，少要记录异常的信息
+* 不要记录并抛出异常：仅仅当想要处理异常时才去捕获，否则只需要在方法签名中声明让调用者去处理
+* 包装异常时不要抛弃原始的异常：一定要把原始的异常设置为cause(Exception有构造方法可以传入cause)
+
 ## 并发编程
 
 * 线程安全
@@ -1104,6 +1123,8 @@ JavaEE/JDBC/Weblogic
   - 搜索隐形：Lucene、Elasticsearch、Solr
 * Admin
   - [elunez/eladmin](https://github.com/elunez/eladmin):项目基于 Spring Boot 2.1.0 、 Jpa、 Spring Security、redis、Vue的前后端分离的后台管理系统，项目采用分模块开发方式， 权限控制采用 RBAC，支持数据字典与数据权限管理，支持一键生成前后端代码，支持动态路由 https://auauz.net
+* 优化
+  - [ looly / hutool ](https://github.com/looly/hutool):A set of tools that keep Java sweet. http://www.hutool.cn
 * [Java SE](https://www.oracle.com/technetwork/java/javase)
 * [OpenJDK](http://openjdk.java.net)
 * [apache/httpcomponents-core](https://github.com/apache/httpcomponents-core)
