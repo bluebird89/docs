@@ -233,6 +233,16 @@ export EDITOR=vim
 * Buffer和Cache
   - Cache（缓存）位于CPU与内存之间的临时存储器，缓存容量比内存小的多但交换速度比内存要快得多。Cache通过缓存文件数据块，解决CPU运算速度与内存读写速度不匹配的矛盾，提高CPU和内存之间的数据交换速度。Cache缓存越大，CPU处理速度越快。
   - Buffer（缓冲）高速缓冲存储器，通过缓存磁盘（I/O设备）数据块，加快对磁盘上数据的访问，减少I/O，提高内存和硬盘（或其他I/O设备）之间的数据交换速度。Buffer是即将要被写入磁盘的，而Cache是被从磁盘中读出来的。
+* overcommit_memory
+  - 0:表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程。
+  - 1:表示内核允许分配所有的物理内存，而不管当前的内存状态如何
+  - 2:表示内核允许分配超过所有物理内存和交换空间总和的内存
+
+```sh
+# /etc/sysctl.conf ，改vm.overcommit_memory=1，然后sysctl -p 使配置文件生效
+sysctl vm.overcommit_memory=1
+echo 1 > /proc/sys/vm/overcommit_memory
+```
 
 ## 进程&线程
 
@@ -529,6 +539,12 @@ int main() {
   - -S : 不包括子目录下的总计，与-s有点差别；
   - -k : 以KB列出容量显示
   - -m : 以MB列出容量显示
+* rm:删除文件之后，空间就被释放了吗
+  - 只有当一个文件的引用计数为0（包括硬链接数）的时候，才可能调用unlink删除，只要它不是0，那么就不会被删除
+  - 删除：文件名到 inode 的链接删除，只要不被重新写入新的数据，磁盘上的block数据块不会被删除
+  - 如何释放： `lsof |grep deleted` 被标记为deleted的文件
+* 工具
+  - gparted
 
 ```sh
 inxi -Fxz # 能够列出包括 CPU、图形、音频、网络、驱动、分区、传感器等详细信息 -F 参数意味着你将得到完整的输出，x 增加细节信息，z 参数隐藏像 MAC 和 IP 等私人身份信息
@@ -553,6 +569,9 @@ lspci | grep -i vga
 lspci -v -s 00:02.0 #  加上视频设备号
 
 # 磁盘文件系统和设备
+sudo file -s /dev/nvme?n*
+lsblk # shows the volumes
+sudo growpart /dev/nvme0n1 1
 lshw -short -C disk # 显示每个磁盘设备的描述信息
 hdparm -i /dev/sda # 获取任何指定的 SATA 磁盘详细信息，例如其型号、序列号以及支持的模式和扇区数量等
 lsblk # 列出所有磁盘及其分区和大小
@@ -565,12 +584,18 @@ df -Th
 df -aT # 查看分区的文件系统
 df -h  /etc # Human-readable 显示目前所有文件系统的总容量，使用量，剩余容量
 df -k
+df -h /
+sudo du -h --max-depth=1 / | grep '[0-9]G\>'
+dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -n
+
+# cannot create temp file for here-document: No space left on device  mounting a tmpfs to /tmp
 
 # 查看目录的容量
 # -h 同--human-readable 以K，M，G为单位，提高信息的可读性
 # -a 同--all 显示目录中所有文件的大小
 du -sh /* # 递归地运行，遍历每个子目录并且返回每个文件的单个大小
 du -h --max-depth=1 /home  # 文件大小相加
+du -sh /*
 du -h --max-depth=1 /var/log/*
 du -sm * | sort -n # /统计当前目录大小 并安大小 排序
 du -sk * | sort -n
@@ -646,6 +671,8 @@ tail 100 /var/log/messages
 
 # bash: cannot create temp file for here-document: No space left on device
 # 该磁盘空间已满，可以进行扩容，或者将该磁盘的部分目录迁移到别的磁盘
+
+dd if=/dev/urandom of=/boot/test.txt bs=50M count=1 # 生成文件 挂载
 ```
 
 ## 内核同步
@@ -3507,7 +3534,9 @@ sed -n &#39;1!G;h;$p&#39; FILE
 * [trimstray/iptables-essentials](https://github.com/trimstray/iptables-essentials):Iptables Essentials: Common Firewall Rules and Commands.
 * [akavel/up](https://github.com/akavel/up):Ultimate Plumber is a tool for writing Linux pipes with instant live preview
 * [iovisor/bcc](https://github.com/iovisor/bcc):BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
-* [Monit](https://mmonit.com/monit/):功能异常强大的进程、文件、设备、系统监控软件，适用于Linux/Unix系统 With all features needed for system monitoring and error recovery. It's like having a watchdog with a toolbox on your server
+* Monitor
+  - [Monit](https://mmonit.com/monit/):功能异常强大的进程、文件、设备、系统监控软件，适用于Linux/Unix系统 With all features needed for system monitoring and error recovery. It's like having a watchdog with a toolbox on your server
+  - [ aristocratos / bashtop ](https://github.com/aristocratos/bashtop):Linux resource monitor
 * [Linuxbrew/brew](https://github.com/Linuxbrew/brew):🍺🐧 The Homebrew package manager for Linux https://linuxbrew.sh
 * [johnfactotum/foliate](https://github.com/johnfactotum/foliate):A simple and modern GTK eBook reader https://johnfactotum.github.io/foliate/
 * [systemd/systemd](https://github.com/systemd/systemd):systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic.

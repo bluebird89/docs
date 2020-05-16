@@ -322,34 +322,37 @@ struct sdshdr {
     - 多慢才叫慢 slowlog-log-slower-than 10000，来指定（单位为微秒）
     - 服务器存储多少条慢查询记录 由slowlog-max-len 128，来做限制
 
-### String
+### string(字符串)
 
-* 简单的key-value类型，value可以是String或者数字。其它数据结构也是在字符串的基础上设计的
-* 值可以是任何各种类的字符串（包括二进制数据），如：简单的字符串、JSON、XML、二进制等，注意：在 Redis 中字符串类型的值最大只能保存 512 MB
-* 例如可以在一个键下保存一副jpeg图片.即可以完全实现目前 Memcached 的功能，并且效率更高。还可以享受Redis的定时持久化，操作日志及 Replication等功能
+* 动态字符串,可以修改，它的底层实现有点类似于 Java 中的ArrayList，有一个字符数组.简单的key-value类型，value可以是String或者数字
+* 值可以是任何各种类的字符串（包括二进制数据），如：简单的字符串、JSON、XML、二进制等 例如可以在一个键下保存一副jpeg图片
 * 方法
-    - 设置 `set key value [EX seconds] [PX milliseconds] [NX|XX]`
+    - 设置 `set key value [EX seconds] [PX milliseconds] [NX|XX]` 当 key 存在时，SET 命令会覆盖掉上一次设置的值：
         + EX seconds：为键设置秒级过期时间
         + PX milliseconds：为键设置毫秒级过期时间
         + NX：键不存在，才可以设置成功，用于添加
             * 同一个 key 在执行 setnx 命令时，只能成功一次，并且由于 Redis 的单线程命令处理机制，即使多个客户端同时执行 setnx 命令，也只有一个客户端执行成功。
         + XX：键已存在，才可以设置成功，用于更新
-            * 多次更新，跟原来值一样？
+            * 多次更新，跟原来值一样
     - 获取 `get key`
+    - EXPIRE name 5    # 5s 后过期
     - 批量设置值  `mset key value [key value]`
     - 批量获取值 `mget key [key1 key2]`,键不存在，值将为 nil,并且返回结果的顺序与传入时相同
     - 对值做自增操作 `incr key`
         + 如果值不是整数，返回错误
         + 如果值是整数，返回自增结果
         + 如果键不存在，创建此键，然后按照值为 0 自增(1)
+    - `incrby key increment` 自增指定数字
     - `decr key` 自减
-    - `incrby kek increment` 自增指定数字
     - `decrby key decrement` 自减指定数字
     - `incrbyfloat key increment 0.7`
     - `strlen key` 获取字符串长度
         + 每个中文占用 3 个字节
     - `append key value` 往字符串append内容
     - `getset key value` 设置并返回原值
+    - EXISTS key
+    - DEL key
+    - SETEX key value1  # 如果 key 不存在则 SET 成功,如果 key 存在则 SET 失败
     - `getrange key start end` 获取字符串的某一段内容 O(n) n是字符长度,字符串的下标，左数从0开始，右数从-1开始
         + 当start>length，则返回空字符串
         + 当stop>=length，则截取至字符串尾
@@ -358,8 +361,6 @@ struct sdshdr {
     - 获取指定偏移量上的位 `GETBIT key offset`
     - 设置offset对应二进制上的值，返回该位上的旧值 `setbit key offset value`：如果offset过大，则会在中间填充0,offset最大到多少：2^32-1，即可推出最大的字符串为512M
     - bitop AND|OR|NOT|XOR destkey key1 [key2..] 对key1 key2做opecation并将结果保存在destkey上
-    - setex key time value：设置key对应的值value，并设置有效期为time秒
-    - MSET key value [key value ...] 批量设置一系列字符串的内容
 * 编码：长度不能超过512MB
     - 内部存储默认就是一个字符串，被redisObject所引用，当遇到incr,decr等操作时会转成数值型进行计算，此时redisObject的encoding字段为int
     - int：8个字节的长整型。字符串值是整型时，这个值使用long整型表示，当int数据不再是整数，或大小超过了long的范围时，自动转化为raw。
@@ -404,20 +405,28 @@ if ( get( ip:1517207868 ) > 3 ) {
 }
 ```
 
-### Hash
+### hash(字典)
 
 * 在Memcached中，将一些结构化的信息打包成HashMap
     - 在客户端序列化后存储为一个字符串的值，比如用户的昵称、年龄、性别、积分等，需要修改其中某一项时，通常需要将所有值取出反序列化后，修改某一项的值，再序列化存储回去。这样不仅增大了开销，也不适用于一些可能并发操作的场合（比如两个并发的操作都需要修改积分）,引入CAS等复杂问题。而Redis的Hash结构可以使像在数据库中Update一个属性一样只修改某一项属性值。要存储一个用户信息对象数据:
     - 这个用户信息对象有多少成员就存成多少个key-value对儿，用用户ID+对应属性的名称作为唯一标识来取得对应属性的值，虽然省去了序列化开销和并发问题，但是用户ID为重复存储，如果存在大量这样的数据，内存浪费还是非常可观的
 * Redis的Hash实际是内部存储的Value为一个HashMap，并提供了直接存取这个Map成员的接口
     - Key仍然是用户ID, value是一个Map，这个Map的key是成员的属性名，value是属性值，这样对数据的修改和存取都可以直接通过其内部Map的Key(Redis里称内部Map的key为field), 也就是通过 key(用户ID) + field(属性标签) 就可以操作对应属性数据了，既不需要重复存储数据，也不会带来序列化和并发修改控制的问题。
-    - Redis提供了接口(hgetall)可以直接取到全部的属性数据,但是如果内部Map的成员很多，那么涉及到遍历整个内部Map的操作，由于Redis单线程模型的缘故，这个遍历操作可能会比较耗时，而另其它客户端的请求完全不响应
+    - 提供了接口(hgetall)可以直接取到全部的属性数据,但是如果内部Map的成员很多，那么涉及到遍历整个内部Map的操作，由于Redis单线程模型的缘故，这个遍历操作可能会比较耗时，而另其它客户端的请求完全不响应
+    - 通过 “数组 + 链表” 的链地址法来解决部分 哈希冲突
 * HashMap有2种不同实现
     - 成员比较少时:为了节省内存会采用类似一维数组的方式来紧凑存储，而不会采用真正的HashMap结构，对应的value redisObject的encoding为zipmap
     - 当成员数量增大时会自动转成真正的HashMap,此时encoding为ht
+* 渐进式 rehash
+    - 大字典的扩容是比较耗时间的，需要重新申请新的数组，然后将旧字典所有链表中的元素重新挂接到新的数组下面，这是一个 O(n) 级别的操作，作为单线程的 Redis 很难承受这样耗时的过程，所以 Redis 使用 渐进式 rehash 小步搬迁
+    - 会在 rehash 的同时，保留新旧两个 hash 结构,查询时会同时查询两个 hash 结构，然后在后续的定时任务以及 hash 操作指令中，循序渐进的把旧字典的内容迁移到新字典中。当搬迁完成了，就会使用新的 hash 结构取而代之
+    - 正常情况下，当 hash 表中 元素的个数等于第一维数组的长度时，就会开始扩容，扩容的新数组是 原数组大小的 2 倍
+    - 如果 Redis 正在做 bgsave(持久化命令)，为了减少内存也得过多分离，Redis 尽量不去扩容，如果 hash 表非常满了，达到了第一维数组长度的 5 倍了，这个时候就会 强制扩容
+    - 当 hash 表因为元素逐渐被删除变得越来越稀疏时，Redis 会对 hash 表进行缩容来减少 hash 表的第一维数组空间占用。所用的条件是 元素个数低于数组长度的 10%，缩容不会考虑 Redis 是否在做 bgsave
 * 方法
     - 判断 field 是否存在 `hexists key field`
-    - 设置值 `hset key field value` 有返回值的。如果 hset 命令设置成功，则返回 1，否则返回 0
+    - 设置值 `hset key field value` 有返回值。如果 hset 命令设置成功，则返回 1，否则返回 0
+        + 命令行的字符串如果包含空格则需要使用引号包裹
         + hsetnx:在 field 不存在的时候，才能设置成功
     - 获取值:`hget key field`
     - 删除 field `hdel key field [field ...]`,返回就是成功删除 field 的个数,field 不存在时，并不会报错，而是直接返回 0
@@ -508,26 +517,24 @@ typedef struct dict{
 } dict;
 ```
 
-### List
+###  list(列表)
 
 * 用来存储多个有序的字符串，每个字符串称为元素；一个列表可以存储2^32-1个元素
     - 所有的元素都是有序的，可以通过索引获取的，也就是 lindex 命令。索引是从 0 开始的
     - 元素是可以重复
 * 实现:一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销
-* 用数组实现的List和Linked List实现的list，在属性方面大不相同
-    - 基于Linked list实现。意味着即使在一个list中有数百万个元素，在头部或尾部添加一个元素的操作，其时间复杂度也是常数级别的。用LPUSH命令在十个元素的list头部添加新元素，和在千万元素的list头部添加新元素的速度相同
-    - 用linked list实现的原因：对于数据库系统来说，重要的特性是：能非常快的在很大的列表上添加元素，lists能在常数时间取得常数长度
-    - 数组实现的List中利用索引访问元素的速度极快，而同样的操作在linked list实现的list上没有那么快
+* 相当于 Java 语言中的 LinkedList，注意是链表而不是数组,
+    - Linked list:插入和删除操作非常快，时间复杂度为 O(1)，但是索引定位很慢，时间复杂度为 O(n),用linked list实现的原因：对于数据库系统来说，重要的特性是：能非常快的在很大的列表上添加元素，lists能在常数时间取得常数长度
+    - 数组List:利用索引访问元素的速度极快
 * 方法
-    - 查看元素 `lrange key 0 -1`,没有 rrange
-    - 从右边插入元素 `rpush key value [value ...]`, 多个值依次操作,返回key中全部元素个数
-    - 从左边插入元素 `lpush key value [value ...]`, 多个值依次操作,返回key中全部元素个数
+    - 右边插入元素 `rpush key value [value ...]`, 多个值依次操作,返回key中全部元素个数
+    - 左边插入元素 `lpush key value [value ...]`, 多个值依次操作,返回key中全部元素个数
     - 向某个元素前或者后插入元素 `linsert key BEFORE|AFTER pivot value`,返回key中全部元素个数
-    - 插入位置在重复元素第二个的位置？
-    - 获取指定范围内的元素列表 `lrange key start stop`
+    - 获取指定范围内的元素列表 `lrange key start stop` 没有 rrange
         + 索引下标从左到右分别是 0 到 N-1，从右到左是 -1 到 -N
         + stop 参数在执行时会包括当前元素，并不是所有的语言都是这样的
-    - 获取列表中指定索引下标的元素 `lindex key index`
+        + `lrange key 0 -1`
+    - 获取列表中指定索引下标元素 `lindex key index`
     - 获取列表长度 `llen key`
     - 从列表左侧弹出元素 `lpop key`
     - 从列表右侧弹出元素 `rpop key`
@@ -555,9 +562,10 @@ typedef struct dict{
     - 编码转换
         + 单个字符串不能超过64字节，是为了便于统一分配每个节点的长度；这里的64字节是指字符串的长度，不包括SDS结构，因为压缩列表使用连续、定长内存块存储字符串，不需要SDS结构指明长度
 * 场景
-    - 消息队列：右侧当作队尾，将左侧当作队头，Rpush 生产消息，LPOP 消费消息
+    - 队列：右侧当作队尾，将左侧当作队头，Rpush 生产消息，LPOP 消费消息
         + LPOP 不会等待队列中有值之后再消费，而是直接进行消费。可以通过在应用层引入 Sleep 机制去调用 LPOP 重试
         + BLPOP key [key …] timeout：阻塞直到队列有消息或者超时
+    - 栈:Rpush 生产消息，RPOP 消费消息
     - 社交网络中获取关注人时间轴列表、帖子、评论系统
     - 新闻的分页列表
     - 并发限制
@@ -574,9 +582,9 @@ lrem set -5 new
 lrem set 0 new
 ```
 
-### Set
+### set(集合)
 
-* 存储一些无序的集合，不能通过索引来操作元素；元素不能重复。其元素是二进制安全的字符串，最多可以存储2^32-1个元素
+* 存储一些无序、唯一的键值对，不能通过索引来操作元素其元素是二进制安全的字符串，最多可以存储2^32-1个元素
 * 通过哈希表实现（增删改查时间复杂度为 O(1)）
 * 适用于集合所有元素都是整数且集合元素数量较小的时候，与哈希表相比，整数集合的优势在于集中存储，节省空间；同时，虽然对于元素的操作复杂度也由O(n)变为了O(1)，但由于集合数量较少，因此操作的时间并没有明显劣势
 * set vs list
@@ -634,9 +642,9 @@ typedef struct intset{
 } intset;
 ```
 
-### Sorted set
+### zset(有序集合 Sorted set)
 
-* 可以通过用户额外提供一个优先级(score)的参数来为成员排序，并且是插入有序的，即自动排序
+* 通过用户额外提供一个优先级(score)的参数来为成员排序，并且是插入有序的，即自动排序
 * 实现：内部使用HashMap和跳跃表(SkipList)来保证数据的存储和有序
     - HashMap里放的是成员到score的映射，而跳跃表里存放的是所有的成员
     - 排序依据是HashMap里存的score,使用跳跃表的结构可以获得比较高的查找效率，并且在实现上比较简单
@@ -832,8 +840,12 @@ SCRIPT LOAD "return 1"
         + 用一个hash函数将key转换为一个数字，比如使用crc32 hash函数
         + 对这个整数取模，将其转化为0-3之间的数字，就可以将这个整数映射到4个Redis实例中的一个了
 
-## 主从同步
+## 主从复制
 
+* 配置:开启，完全是从节点发起的，不需要在主节点做任何事情
+    - 配置文件：在从服务器的配置文件中加入：slaveof <masterip> <masterport>
+    - 启动命令：redis-server 启动命令后加入 --slaveof <masterip> <masterport>
+    - 客户端命令：Redis 服务器启动后，直接通过客户端执行命令：slaveof <masterip> <masterport>，让该 Redis 实例成为从节点
 * 复制过程
     - 从节点执行 slaveof 命令
     - 从节点只是保存了 slaveof 命令中主节点的信息，并没有立即发起复制
@@ -925,6 +937,27 @@ SCRIPT LOAD "return 1"
     - 主机宕机，宕机前有部分数据未能及时同步到从机，切换IP后还会引入数据不一致的问题，降低了系统的可用性。
     - Redis较难支持在线扩容，在集群容量达到上限时在线扩容会变得很复杂。
     - 不管是Master还是Slave，每个节点都必须保存完整的数据，如果在数据量很大的情况下，集群的扩展能力还是受限于单个节点的存储能力，而且对于Write-intensive类型的应用，读写分离架构并不适合
+
+```sh
+# Opening the temp file needed for MASTER <-> SLAVE synchronization: Permission denied
+Check your redis.conf   the dir setting (search for "The working directory")  is writeable by the user running redis-server
+
+# Master is currently unable to PSYNC but should be in the future: -NOMASTERLINK Can't SYNC while not connected with my master
+#  Failed opening the RDB file dump.rdb (in server root dir /usr/local/lib) for saving: Permission denied
+
+#  Can't chdir to '/home/henry/data/redis': Permission denied
+# /etc/systemd/system/redis.service including ProtectHome=yes and limiting the directories that can be written to. I have modified this file to comment out ProtectHome=yes and to add a line ReadWriteDirectories=-/home/redis/server
+
+# WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128 高负载的环境来说tcp设置128这个值，太小
+echo 511 > /proc/sys/net/core/somaxconn # 暂时
+# vi /etc/sysctl.conf 添加 永久
+net.core.somaxconn= 1024
+sysctl -p
+
+# redis-server Short read or OOM loading DB. Unrecoverable error, aborting now
+rm -rf /var/lib/redis/dump.rdb
+rm -rf /var/run/redis.pid
+```
 
 ## Redis Sentinel（哨兵）
 
@@ -1101,7 +1134,7 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
         + 主从复制时，主节点自动触发
         + 执行 Debug Reload
         + 执行 Shutdown 且没有开启 AOF 持久化
-    - `save` 手动触发，阻塞 Redis 的服务器进程，直到 RDB 文件被创建完毕，不会再响应客户端的其余任何请求
+    - `save` 手动触发，调度rdbSave函数，阻塞 Redis 的服务器进程，直到 RDB 文件被创建完毕
     - BGSAVE:主进程会fork出一个子进程来做快照持久化，而主进程可以继续相应客户端的任何请求
         + fork() 在 Linux 中创建子进程采用 Copy-On-Write（写时拷贝技术），即如果有多个调用者同时要求相同资源（如内存或磁盘上的数据存储）。 他们会共同获取相同的指针指向相同的资源，直到某个调用者试图修改资源的内容时，系统才会真正复制一份专用副本给调用者，而其他调用者所见到的最初的资源仍然保持不变
     - 缺点：
@@ -1109,13 +1142,15 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
         + 导致一定时间内的数据丢失:可能会因为 Redis 宕机而丢失从当前至最近一次快照期间的数据
 * AOF（Append Only File，文件追加方式）：类似于mysql的二进制日志方案,默认是关闭的.需要修改配置文件中的 appendonly no 为 appendonly yes
     - 通过保存 Redis 的写状态来记录数据库的，文件中记录除了查询以外的所有变更数据库状态的指令，并不记录数据本身
-    - 将命令以增量文本的形式追加保存到 AOF 文件中（fsync），是子线程来做的，主线程依然用来处理客户端的请求。
+    - 将命令以增量文本的形式追加保存到 AOF 文件中（fsync），是子线程来做的，主线程依然用来处理客户端的请求
+    - 如果不重写AOF文件，这个持久化方式对性能的影响是最小的，但是AOF文件会不断增大，AOF文件过大会影响Master重启的恢复速度
     - 同步策略，通过 CONFIG GET appendfsync 查看当前配置
         + appendfsync always，即时将缓冲区内容写入 AOF 文件当中，最低效最安全
         + appendfsync everysec，每隔一秒将缓冲区内容写入 AOF 文件（默认）
         + appendfsync no，不执行 fysnc 调用，让操作系统自动操作把缓存数据写到硬盘上，不可靠但最快。操作系统考虑效率问题，会等待缓冲区被填满再将缓冲区数据写入 AOF 文件中
     - 重写 rewrite 机制：手动或者自动重写，压缩 AOF 文件
-        + 时间久了，AOF 文件会越来越大
+        + 时间久了，里面会有大部分是重复命令或者可以合并的命令 AOF 文件会越来越大
+        + 好处：减少AOF日志尺寸，减少内存占用，加快数据库恢复时间
         + 假如连续set了10000次，但是最后key又删除了，aof文件会记录20000条命令
         + 过程：
                 * 调用 fork()，创建一个子进程
@@ -1135,7 +1170,7 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
     - 如果aof开启了，那么redis在启动时会选择根据aof文件恢复数据而不是rdb，所以一定要保存好rdb文件
     - rdb和aof可以同时开启，最大可能地保证数据完整性。如果redis中的数据都是缓存类数据，可以考虑只选择一样即可
     - 检测修复rdb文件的工具叫做redis-check-rdb，检测修复aof文件的工具叫做redis-check-aof
-    - 如果你有1G的redis数据，那么理论上讲做一次bgsave操作最大需要2G内存，但实际上得益于Copy-On-Write（写时拷贝，COW机制），并不一定会需要2G内存，只有在当主进程将所有的key全部修改过的情况下，才会需要2G内存。
+    - 如果有1G的redis数据，那么理论上讲做一次bgsave操作最大需要2G内存，但实际上得益于Copy-On-Write（写时拷贝，COW机制），并不一定会需要2G内存，只有在当主进程将所有的key全部修改过的情况下，才会需要2G内存。
     - 建议redis内存使用量在30%-50%之间，超过50%这个限制就要留心注意下了
 * RDB-AOF 混合持久化方式：4.0 之后推出了此种持久化方式，RDB 作为全量备份，AOF 作为增量备份，并且将此种方式作为默认方式使用
     - 写入的时候，先把当前的数据以 RDB 的形式写入文件的开头
@@ -1148,6 +1183,7 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
     - 使用命令 `config set aof-use-rdb-preamble yes`
     - redis.conf 文件，把配置文件中的 aof-use-rdb-preamble no 改为 aof-use-rdb-preamble yes
 * 数据恢复：Redis 启动时会先检查 AOF 是否存在，如果 AOF 存在则直接加载 AOF，如果不存在 AOF，则直接加载 RDB 文件
+* BGREWRITEAOF重写AOF文件，AOF在重写的时候会占大量的CPU和内存资源，导致服务load过高，出现短暂服务暂停现象
 
 ```
 # redis.conf

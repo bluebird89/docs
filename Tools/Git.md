@@ -1309,7 +1309,7 @@ git merge FETCH_HEAD
     + action （动作）：每个 step 可以依次执行一个或多个命令（action）
   - starter
     + [actions/starter-workflows](https://github.com/actions/starter-workflows):Accelerating new GitHub Actions workflows https://github.com/features/actions
-* [CLi](https://github.com/cli/cli)
+* [CLi](https://github.com/cli/cli) GitHub’s official command line tool https://cli.github.com
   - `brew install github/gh/gh`
   - `scoop bucket add github-gh https:scoop install gh`
   - `gh pr [status, list, view, checkout, create]gh issue [status, list, view, create]gh help`

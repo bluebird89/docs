@@ -182,6 +182,32 @@ source ~/.bashrc
 
 ## 流量管理
 
+## Enovy
+
+* [Envoy 中文指南 ](https://fuckcloudnative.io/envoy-handbook/)
+
+```sh
+apt update
+apt-get install -y \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  gnupg2 \
+  software-properties-common
+curl -sL 'https://getenvoy.io/gpg' | sudo apt-key add -
+apt-key fingerprint 6FF974DB
+
+add-apt-repository \
+  "deb [arch=amd64] https://dl.bintray.com/tetrate/getenvoy-deb \
+  $(lsb_release -cs) \
+  stable"
+apt-get update && apt-get install -y getenvoy-envo
+
+wget https://getenvoy.io/samples/basic-front-proxy.yaml
+envoy -c ./basic-front-proxy.yaml
+curl -s -o /dev/null -vvv -H 'Host: bing.com' localhost:15001
+```
+
 ## 图书
 
 * [Istio 服务网格进阶实战](https://www.bookstack.cn/books/istio-handbook)

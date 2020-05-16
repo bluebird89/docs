@@ -1425,8 +1425,10 @@ Namespaces are one honking great idea -- let's do more of those!
 
 * [Automate the Boring Stuff with Python](https://automatetheboringstuff.com)
 * [Learning with Python 3](http://openbookproject.net/thinkcs/python/english3e/)
-* [learnpythonthehardway](https://learnpythonthehardway.org/python3/)
+* [learn python the hardway](https://learnpythonthehardway.org/python3/)
 * [Think Python: How to Think Like a Computer Scientist](http://greenteapress.com/thinkpython2/html/index.html)
+* Python性能分析与优化
+* Python高性能编程
 
 ## 教程
 

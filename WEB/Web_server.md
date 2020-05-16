@@ -400,7 +400,7 @@ Port 25000
 ssh s1
 
 locale
-udo locale-gen en_US en_US.UTF-8 en_CA.UTF-8
+sudo locale-gen en_US en_US.UTF-8 en_CA.UTF-8
 sudo dpkg-reconfigure locales
 ```
 

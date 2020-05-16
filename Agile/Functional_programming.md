@@ -8,7 +8,10 @@
 * types are not classes:类型实际上是一种接口，它是数据和数据可以产生的行为间的一座桥梁,「类」是「类型」的一种实现方式
     - 会飞（flyable） 是一个类型，「鸟」实现了 flyable，而「鸭子」无法实现 flyable，所以「鸭子」并不是「鸟」的子类型。
 
-# lambda
+* 可以把函数作为参数传递给另一个函数，也就是所谓的高阶函数
+* 可以返回一个函数，这样就可以实现闭包或者惰性计算
+
+## lambda
 
 * [lambci/docker-lambda](https://github.com/lambci/docker-lambda):Docker images and test runners that replicate the live AWS Lambda environment
 
