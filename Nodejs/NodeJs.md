@@ -13,7 +13,7 @@ Node.js JavaScript runtime ✨🐢🚀✨ <https://nodejs.org>
 * 面向企业开发的 Web 框架
 * Node 最新技术与性能调优
 
-## 安装
+## [安装](https://github.com/nodesource/distributions)
 
 ```sh
 # ubuntu
@@ -98,7 +98,7 @@ n stable
 # Error: EACCES: permission denied, access '/usr/lib/node_modules'
 mkdir ~/.npm-global
 npm config set prefix '~/.npm-global'
-~/.profile
+# ~/.profile
 export PATH=~/.npm-global/bin:$PATH
 source ~/.profile
 sudo npm install -g jshint

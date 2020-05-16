@@ -178,3 +178,7 @@
 * 不同国家在面临不同时代的经济萧条，都在消费观上出现了追捧国潮、折扣零售的相通性
     - 日本在“失去二十年”里孕育出的优衣库
     - 美国石油危机里诞生了最大的折扣零售T.J.MAXX
+
+## 项目
+
+* [ linlinjava / litemall ](https://github.com/linlinjava/litemall): 又一个小商城。litemall = Spring Boot后端 + Vue管理员前端 + 微信小程序用户前端 + Vue用户移动端

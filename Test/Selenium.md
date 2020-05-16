@@ -13,31 +13,27 @@ brew install chromedriver
 selenium-server -port 4444 # 启动服务
 ```
 
-## 组成
-
 ### selenium IDE
 
-　　selenium IDE 是嵌入到Firefox浏览器中的一个插件，实现简单的浏览器操作的录制与回放功能。那么什么情况下用到它呢？
-
-　　快速的创建bug重现脚本，在测试人员的测试过程中，发现了bug之后可以通过IDE将重现的步骤录制下来，以帮助开发人员更容易的重现bug。
-
-　　IDE录制的脚本可以可以转换成多种语言，从而帮助我们快速的开发脚本，关于这个功能后而用到时再详细介绍。
+* 嵌入到Firefox浏览器中的一个插件，实现简单的浏览器操作的录制与回放功能
+* 快速的创建bug重现脚本，在测试人员的测试过程中，发现了bug之后可以通过IDE将重现的步骤录制下来，以帮助开发人员更容易的重现bug。
+* IDE录制的脚本可以可以转换成多种语言，从而帮助我们快速的开发脚本
 
 ### selenium Grid
 
-Selenium Grid是一种自动化的测试辅助工具，Grid通过利用现有的计算机基础设施，能加快Web-app的功能测试。利用Grid，可以很方便地同时在多台机器上和异构环境中并行运行多个测试事例。其特点为：
-
-- 并行执行
-- 通过一个主机统一控制用例在不同环境、不同浏览器下运行。
-- 灵活添加变动测试机
+* 一种自动化的测试辅助工具，Grid通过利用现有的计算机基础设施，能加快Web-app的功能测试
+* 利用Grid，可以很方便地同时在多台机器上和异构环境中并行运行多个测试事例。其特点为：
+	+ 并行执行
+	+ 通过一个主机统一控制用例在不同环境、不同浏览器下运行。
+	+ 灵活添加变动测试机
 
 ### selenium RC
 
-　　selenium RC 是selenium 家族的核心工具，selenium RC 支持多种不同的语言编写自动化测试脚本，通过selenium RC 的服务器作为代理服务器去访问应用从而达到测试的目的。
-
-　　selenium RC 使用分Client Libraries和selenium Server，Client Libraries库主要主要用于编写测试脚本，用来控制selenium Server的库。
-
-　　Selenium Server负责控制浏览器行为，总的来说，Selenium Server主要包括3个部分：Launcher、Http Proxy、Core。其中Selenium Core是被Selenium Server嵌入到浏览器页面中的。其实Selenium Core就是一堆JS函数的集合，就是通过这些JS函数，我们才可以实现用程序对浏览器进行操作。Launcher用于启动浏览器，把selnium Core加载到浏览器页面当中，并把浏览器的代理设置为Selenium Server 的Http Proxy。
+* 核心工具，selenium RC 支持多种不同的语言编写自动化测试脚本，通过selenium RC 的服务器作为代理服务器去访问应用从而达到测试的目的。
+	- Client Libraries库主要主要用于编写测试脚本，用来控制selenium Server的库。
+	- Selenium Server负责控制浏览器行为
+		+ Selenium Core是被Selenium Server嵌入到浏览器页面中的。其实Selenium Core就是一堆JS函数的集合，就是通过这些JS函数，才可以实现用程序对浏览器进行操作。
+		+ Launcher用于启动浏览器，把selnium Core加载到浏览器页面当中，并把浏览器的代理设置为Selenium Server 的Http Proxy。
 
 ### selenium 2.0
 
@@ -53,10 +49,7 @@ Selenium Grid是一种自动化的测试辅助工具，Grid通过利用现有的
 
 ## 学习路线
 
-需要熟悉webdriver API
-先学习元素的定位，selenium 提供了id、name、class name、 tag name、link text、partial link text、 xpath、css、等定位方法。xpath和css 功能强大语法稍微复杂，在这其间你可能还需要了解更多的前端知识。xml ,javascript 等。
-
-定位元素的目的是为了操作元素，接就要学习各种元素有操作，输入框，下拉框，按钮点击，文件上传、下载，分页，对话框，警告框...等等。
-
-你需要做的就是学习并使用单元测试框架，单元测试框架本身就解决了用例的组织与运行。
-
+* 需要熟悉webdriver API
+* 先学习元素的定位，selenium 提供了id、name、class name、 tag name、link text、partial link text、 xpath、css、等定位方法。xpath和css 功能强大语法稍微复杂，在这其间你可能还需要了解更多的前端知识。xml ,javascript 等。
+* 定位元素的目的是为了操作元素，接就要学习各种元素有操作，输入框，下拉框，按钮点击，文件上传、下载，分页，对话框，警告框...等等
+* 需要做的就是学习并使用单元测试框架，单元测试框架本身就解决了用例的组织与运行

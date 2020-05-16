@@ -17,7 +17,7 @@
   - 启动通过U盘
     + 安装类型：其他选项
     + 磁盘空间分区
-        * 根分区 /：主分区 系统文件，20GB；  挂载点 /  /dev/sda
+        * 根分区 /：主分区 系统文件，20GB(根本不够)；  挂载点 /  /dev/sda
         * /swap：逻辑分区 交换分区（虚拟内存），建议是当前 RAM(或者两倍)
         * /boot：逻辑分区 引导分区 安装启动引导器的设备,包含系统内核和系统启动所需的文件，实现双系统的关键所在，建议500M 挂载点 /boot
         * /home：逻辑分区 home目录，存放音乐、图片及下载等文件的空间，建议最后分配所有剩下的空间 挂载点 /home
@@ -208,6 +208,25 @@ sudo fusuma
 sudo update-rc.d myscript.sh defaults 90
 reboot
 sudo update-rc.d -f mount_and_frpc.sh remove # 取消
+```
+
+## 语言
+
+* GUI:`sudo dpkg-reconfigure locales`
+
+```sh
+# /etc/environment 追加：
+LANG="zh_CN.UTF-8"
+LANGUAGE="zh_CN:zh:en_US:en"
+
+# /var/lib/locales/supported.d/local z追加
+en_US.UTF-8 UTF-8
+zh_CN.UTF-8 UTF-8
+zh_CN.GBK GBK
+zh_CN GB2312
+sudo locale-gen
+
+
 ```
 
 ### 软件
