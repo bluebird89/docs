@@ -18,7 +18,7 @@ PUB_HOSTED_URL: https://dart-pub.mirrors.sjtug.sjtu.edu.cn/
 git clone -b beta https://github.com/flutter/flutter.git
 export PATH=`pwd`/flutter/bin:$PATH
 
-export PUB_HOSTED_URL=https://pub.flutter-io.cn  # if you’re installing or using Flutter in China, it may be helpful to use a trustworthy local mirror site that hosts Flutter’s dependencies. 
+export PUB_HOSTED_URL=https://pub.flutter-io.cn  # if you’re installing or using Flutter in China, it may be helpful to use a trustworthy local mirror site that hosts Flutter’s dependencies.
 export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
 
 flutter doctor  # 安装相关依赖，可重复执行
@@ -97,6 +97,7 @@ pod setup
     - [mitesh77/Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
 * [mitesh77 / Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
 * [cloudwebrtc / flutter-webrtc](https://github.com/cloudwebrtc/flutter-webrtc):WebRTC plugin for Flutter Mobile/Desktop/Web
+* [ zino-app / graphql-flutter ](https://github.com/zino-app/graphql-flutter):A GraphQL client for Flutter, bringing all the features from a modern GraphQL client to one easy to use package.
 
 ## 参考
 
@@ -108,5 +109,5 @@ pod setup
 * [Solido/awesome-flutter](https://github.com/Solido/awesome-flutters):A curated list of awesome Flutter components, frameworks, libraries, and softwares
 * [flutter_gallery](https://github.com/flutter/flutter/tree/master/examples/flutter_gallery)
 * [AweiLoveAndroid/Flutter-learning](https://github.com/AweiLoveAndroid/Flutter-learning)::octocat:🔥 👍 🌟 ⭐️ ⭐️⭐️ Flutter从配置安装到填坑指南详解，Flutter相关Demo解读，项目实例，Dart语法详解
-* [alibaba/flutter-common-widgets-app](https://github.com/alibaba/flutter-common-widgets-app):flutter 菜鸟 APP，包含常用 flutter 组件的中文文档与 demo 演示 
+* [alibaba/flutter-common-widgets-app](https://github.com/alibaba/flutter-common-widgets-app):flutter 菜鸟 APP，包含常用 flutter 组件的中文文档与 demo 演示
 * [alibaba/flutter-go](https://github.com/alibaba/flutter-go):flutter 开发者帮助 APP，包含 flutter 常用 130+ 组件的中文文档与 demo 演示

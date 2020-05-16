@@ -35,13 +35,16 @@
         + 元素频繁删除和插入
     - 如果数据以查为主，很少涉及到增和删，选择数组，如果数据涉及到频繁的插入和删除，或元素所需分配空间过大，倾向于选择链表
     - 以一个虚拟的节点作为头结点（哨兵）
-        + 
+        +
     - 链表(Singly-linked List)
     - 双向链表(Doubly-Linked List)
         + 支持顺序查找和逆序查找
         + 不支持按某个值或区间的快速查找
         + 不支持数据的快速插入
-* 跳跃表：在链表之上加上多层索引构成
+* 跳跃表（skiplist)：在链表之上加上多层索引构成
+    - 可以与平衡树媲美的层次化链表结构，查找、删除、添加等操作都可以在对数期望时间下完成
+    - 受多层链表（通过对一个元素添加多个指针）启发：为每个节点随机出一个层数(level)
+    - 新插入一个节点并不会影响到其他节点的层数，因此，插入操作只需要修改节点前后的指针，而不需要对多个节点都进行调整，这就降低了插入操作的复杂度
 * 并查集
 
 ```java
@@ -59,7 +62,7 @@ class Node {
 publicclass LinkedList {
     int length = 0; // 链表长度，非必须，可不加
     Node head = new Node(0); // 哨兵结点
-    
+
     public void addNode(int val) {
         Node tmp = head;
         while (tmp.next != null) {
@@ -130,7 +133,7 @@ class LinkList{
             preNode = currentNode;
             currentNode = currentNode.next;
         }
-        if(currentNode == null) return -1; 
+        if(currentNode == null) return -1;
         preNode.next = currentNode.next;
     }
 
@@ -277,7 +280,7 @@ list.print()
     - 前序遍历(自上而下)：根节点->当前节点的左子树->当前节点的右子树(当前节点无左子树)
     - 中序遍历（由下向上）: 当前节点的左子树->根节点->当前节点的右子树
         + 一个有序序列。由于树的高度，区间查询需要中序遍历，都会导致查询效率很慢
-    - 后序遍历（先水平后垂直）:从根节点出发，依次遍历各节点的左右子树，直到当前节点左右子树遍历完成后，才访问该节点元素 左子树->右子树->根结点 
+    - 后序遍历（先水平后垂直）:从根节点出发，依次遍历各节点的左右子树，直到当前节点左右子树遍历完成后，才访问该节点元素 左子树->右子树->根结点
     - 层次遍历:从上往下一层一层遍历
 * DFS（深度优先搜索）
 * BFS（广度优先搜索）
@@ -329,7 +332,7 @@ public List<List<Integer>> levelOrder(TreeNode root) {
     while (!queue.isEmpty()) {
         int n = queue.size();
         List<Integer> level = new ArrayList<>();
-        for (int i = 0; i < n; i++) { 
+        for (int i = 0; i < n; i++) {
             TreeNode node = queue.poll();
             level.add(node.val);
             if (node.left != null) {
