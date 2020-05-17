@@ -122,7 +122,11 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 
 ## Stickies
 
-系统自带的便利贴
+* notes
+    - 通过Web
+    - Create a Progressive Web App (PWA) :More Tools-> Create Shortcut
+    - More Tools, and then click Create Shortcut.
+* 系统自带的便利贴
 
 ## 软件
 

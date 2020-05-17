@@ -47,6 +47,12 @@ export TMPDIR=$HOME/tmp
 
 * 20.04 LTS Focal Fossa
 
+```sh
+cat /proc/version
+uname -a
+lsb_release -a
+```
+
 ## hardware
 
 * AMD显卡驱动
