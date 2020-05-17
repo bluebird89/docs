@@ -14,7 +14,10 @@ Windows是最烂的开发平台
   - launchy
   - [Wox-launcher/Wox](https://github.com/Wox-launcher/Wox):Launcher for Windows, an alternative to Alfred and Launchy. http://wox.one
   - Rolan 轻量级桌面启动器
-* 资源管理器: Clover Total Commander
+* 资源管理器
+  - Clover
+  - Total Commander
+  - [Explorer++](https://explorerplusplus.com/): a lightweight and fast file manager for Windows
 * 快捷键：AutoHotKey
 * 本地搜索
   - [Listary](https://www.listary.com/) :Windows 文件浏览增强工具 极速的文件和APP搜索工具，可大幅度提高打开文件和app的速度
@@ -120,6 +123,8 @@ FTYPE pngfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo V
 ## 快捷键
 
 * alt+tab：长按为显示任务列表，短切为与上次任务切换
+*  Windows Key + Tab will bring up the task view
+*  Windows Key + Ctrl + D to create a whole new virtual desktop
 * WIN+D：显示桌面，再按一次还原桌面
 * WIN+R：打开运行，输入命令可以执行相应操作，输入路径可以打开对应路径，输入程序名称可以打开对应程序（前提是你打开的是windows下面的程序）;输入cmd打- 开DOS窗口，输入notepad打开记事本，输入calc打开计算器等
 * WIN+E：打开我的电脑
@@ -135,12 +140,12 @@ FTYPE pngfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo V
 * 在桌面或者任何文件夹下，CTRL+鼠标左键，拖动文件、文件夹都可以立马生成文件对应的副本
 * 新建只有扩展名的文件的方法：".suffix."，·比如创建.gitignore，正常情况下windows是不允许创建的，但在扩展名后面加点，即.gitignore.就可以正常创建了
 * CTRL+SHIFT+ESC/Ctrl+Alt+Del：打开进程管理器
-* 分屏
+* 分屏:支持组合操作
   * WIN+左箭头：当前窗口缩放为屏幕的一半，靠屏幕左侧显示
   * WIN+右箭头：当前窗口缩放为屏幕的一半，靠屏幕右侧显示
   * WIN+上箭头：最大化当前窗口|缩放为屏幕的一半，靠屏幕上侧
   * WIN+下箭头：还原和最小化当前窗口|缩放为屏幕的一半，靠屏幕下侧
-* 虚拟桌面
+* 虚拟桌面 virtual desktop
   * 「Win+Ctrl+D」：创建新的虚拟桌面
   * 「Win+Ctrl+F4」：删除当前虚拟桌面
   * Win+Shift+左箭头：移动到左边屏幕
