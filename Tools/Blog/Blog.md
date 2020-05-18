@@ -114,4 +114,6 @@ location ~ .*\.php(\/.*)*$ {
 ## 博客资源
 
 * [Work life](https://www.atlassian.com/blog)
-* [OpenWrite](https://openwrite.cn/):Blog 分发
+* 分发
+    - [OpenWrite](https://openwrite.cn/)
+    - [ crawlab-team / artipub ](https://github.com/crawlab-team/artipub):Article publishing platform that automatically distributes your articles to various media channels
