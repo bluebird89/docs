@@ -77,6 +77,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
     + openSuse Leap
     + OpenSuse Tumbleweed
   - Ubuntu 20.04 LTS
+  - [UbuntuDDE](https://ubuntudde.com/): Powerful Ubuntu with the most beautiful desktop environment.
 * 服务器：稳定性；安全；支持其他出于同样原因的程序员使用
   - [CentOS](https://www.centos.org/)
   - Red Hat Enterprise Linux (RHEL)
@@ -2214,7 +2215,7 @@ public = yes
 available = yes
 writable = yes
 
-sudo service samba|smbd status | start | stop | restart
+sudo service samba|smbd status|start|stop|restart
 
 # mac 链接 finder中com＋K
 smb://192.168.100.106

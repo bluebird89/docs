@@ -827,6 +827,14 @@ gluqlo -root \n\
 ＃　配置自启动
 ```
 
+## ssh
+
+```sh
+sudo apt-get install openssh-server
+sudo /etc/init.d/ssh start
+# /etc/ssh/sshd_config
+```
+
 ## [desktop-entry](https://specifications.freedesktop.org/desktop-entry-spec/latest/)
 
 * `~/.local/share/applications/`

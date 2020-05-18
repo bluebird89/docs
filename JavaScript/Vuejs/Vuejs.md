@@ -18,7 +18,7 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
 
 ### 构造器
 
-Vue实例实质上就是MVVM模式（Model-View-ViewModel），每个Vue实例在创建时都会经历一系列实例化步骤，例如，需要设置数据观察、编译模板、以及创建必要的数据绑定。在这个过程中，还会调用生命周期钩子，从而方便我们执行自定义逻辑.该对象含有以下参数：
+Vue实例实质上就是MVVM模式（Model-View-ViewModel），每个Vue实例在创建时都会经历一系列实例化步骤，例如，需要设置数据观察、编译模板、以及创建必要的数据绑定。在这个过程中，还会调用生命周期钩子，从而方便执行自定义逻辑.该对象含有以下参数：
 
 * 数据:Vue实例都会代理其data对象中的所有属性.代理属性是反应式的，如果在实例创建之后添加一个新的属性到实例上，将不会触发任何视图更新。
 * 模板
@@ -201,6 +201,9 @@ dev: {
   - 3.0:图形化界面
   - `vue list`
   - `vue init <template-name> <project-name>` # vue init webpack my-project  vue init Plortinus/vue-multiple-pages new-project
+* 模板
+  - [ SimulatedGREG /
+electron-vue ](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack. <https://simulatedgreg.gitbooks.io/electron-vue/content/>
 * [mimecorg/vuido](https://github.com/mimecorg/vuido):Native desktop applications using Vue.js.
 * [halfrost/vue-objccn](https://github.com/halfrost/vue-objccn):🔥 用 Vue.js 开发的跨三端应用 / Use Vue.js to develop a cross-platform full stack application
 * [SimulatedGREG/electron-vue](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack.
