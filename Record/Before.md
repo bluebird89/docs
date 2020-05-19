@@ -1699,8 +1699,21 @@
 * 荒蛮故事
 * 勇闯夺命岛
 * 杀死比尔
-* 两杆大烟枪
+* 两杆大烟枪 Lock, Stock and Two Smoking Barrels (1998)
+    - Lock, Stock and Barrel是一个在英国和北美非常流行的俗语，意思是“全部、所有、从头到脚一网打尽”。因为一把枪的最关键组件包括三个部分：1）Lock，枪的点火装置，2）stock，枪托，3）barrel，枪筒。这三个组件合二为一，就组成了一把完整的枪支，所以暗指“万事俱备、一网打尽”的意思
+    - Two Barrels指的是老式双筒猎枪，也就是片中两把价值连城的古董枪，都是双筒的。Two Smoking Barrels则是指刚刚发射或正在发射的冒着烟的猎枪
+    - Lock在英文俗语中有“大麻”的意思，Stock指代钱，Barrel则仍然是枪膛的意思，由此组成这部电影的三个最关键元素
+    - 艾迪玩牌失败欠赌资（老板找人抢古董枪）-》购买了两杆老式烟枪（办事的人不知道给卖了），打算抢劫烟贩子（在隔壁听到计划）-》烟贩子抢劫制造商-》被艾迪劫了，找尼克想出货-》被买货人发现是自己的货，上门抢货-》与潜伏的烟贩子遇上，两帮火拼，唯一的烟贩子被打手抢了钱与抢-》抢枪人跟踪去债主，双双亡故-》艾迪去找债主解释-》烟贩子威胁打手，撞了在路上的艾迪，拿到了钱
+    - 配乐。开场的英式摇滚（Hundred Mile High City）；汤姆一伙和邻居一伙各自出场时的配乐；白雪公主和三个小科学家的“警察与小偷”（Police & Thieves）；打手的儿子蹲点四顾时的音乐（The Boss）；当然Dusty Springfield 的Spooky；玩纸牌（Liar,Liar）；惨败之后的精神恍惚（Wanna Be Your Dog）；向同伴说明大事不妙的状况（Why Did You Do It）；大捞了一笔后狂欢的一宿（Walk This Land）；蓄势待发的火并（Zorba the Greek）；从赌场老大手里拿回英镑（The Payback）；开始放高利贷的日子（Fools Gold）；假如我有第三只手（With a Bullet）。最完美的是那首Why Did You Do It，歌词对四个人的处境搭配的天意无缝
+* 阅后即焚
+* 偷拐抢骗
+* 低俗小说
+* 逃狱三王
+* 你丫闭嘴
 * 虎胆龙威
+* 赛末点 Match Point (2005)
+    - 一旦女人开始歇斯底里，失去了情欲以外的气息，男人的耐心就耗尽，他要的只是那个性感迷人，乖巧中带一些欲拒还休的你，对他来说，位高权重和金钱是敌不过爱情的，何况是快速消耗殆尽的激情
+    - There are moments in a tennis match where the ball hits the top of the net, and for a split second, remains in mid-air. With a litte luck, the ball goes over, and you win. Or maybe it doesn't, and you lose.
 * 怒火攻心 1 2
 * 黑天鹅
 * 血色将至

@@ -29,7 +29,6 @@
     - [UZER.ME](https://uzer.me/)
 * 下载
     - [proxyee-down-org/proxyee-down](https://github.com/proxyee-down-org/proxyee-down):http下载工具，基于http代理，支持多连接分块下载
-    - [yangshun1029/aria2gui](https://github.com/yangshun1029/aria2gui):Aria2GUI for macOS
     - [webtorrent/webtorrent-desktop](https://github.com/webtorrent/webtorrent-desktop):❤️ Streaming torrent app for Mac, Windows, and Linux https://webtorrent.io/desktop
     - [agalwood/Motrix](https://github.com/agalwood/Motrix):A full-featured download manger. https://motrix.app/
     - [Downie](https://software.charliemonroe.net/downie/):YouTube Video Downloader for macOS - Charlie
@@ -57,6 +56,11 @@
       +  `sudo apt install aria2`
         - `~/.aria2/aria2.conf`
         - `aria2c 'magnet:xxxxxxx'`
+        + [yangshun1029/aria2gui](https://github.com/yangshun1029/aria2gui):Aria2GUI for macOS
+    - [iawia002/annie](https://github.com/iawia002/annie):👾 Fast, simple and clean video downloader
+    - [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
+    - [rg3/youtube-dl](https://github.com/rg3/youtube-dl):Command-line program to download videos from YouTube.com and other video sites http://rg3.github.io/youtube-dl/
+
 ## wget
 
 *　参数
