@@ -94,6 +94,8 @@ c.InteractiveShell.ast_node_interactivity = "all"
     - Ctrl-End：将光标移至cell末端
     - Ctrl + /  为一行或者多行添加/取消注释
     - Alt Multicursor support
+* 输出
+    - 只执行到光标处，print 可以执行多行
 * 修改之前的单元格，对其重新计算，这样就可以更新整个文档
 * 主题:重启生效
 * 扩展: 通过　NJupyter-contrib extensions　安装
@@ -135,6 +137,10 @@ jupyter nbextension enable --py --sys-prefix qgrid
 # only required if you have not enabled the ipywidgets nbextension yet
 jupyter nbextension enable --py --sys-prefix widgetsnbextension
 ```
+
+## 公式
+
+## 幻灯片
 
 ## content
 
