@@ -21,10 +21,6 @@
     - Chromebook
 * 耳机
     - Libratone小鸟音响
-        + TRACK+无线智能降噪耳机：1498
-        + TRACK入耳式无线耳机：698元
-        + 1098元的TRACK Air无线耳机
-        + 1698元的TRACK Air+无线降噪耳机
 
 ### 设计
 
@@ -155,19 +151,15 @@
 
 ## 工具
 
-* [AlternativeTo](https://alternativeto.net/)
-* [iawia002/annie](https://github.com/iawia002/annie):👾 Fast, simple and clean video downloader
-* [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
-* [rg3/youtube-dl](https://github.com/rg3/youtube-dl):Command-line program to download videos from YouTube.com and other video sites http://rg3.github.io/youtube-dl/
-* [aria2/aria2](https://github.com/aria2/aria2):aria2 is a lightweight multi-protocol & multi-source, cross platform download utility operated in command-line. It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink. https://aria2.github.io/
+* 软件
+    - [AlternativeTo](https://alternativeto.net/):软件替代
 * [asdf-vm/asdf](https://github.com/asdf-vm/asdf):Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more
 * [代码片段](http://www.phpxs.com/code/)
-* [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
-* [chubin/cheat.sh](https://github.com/chubin/cheat.sh):the only cheat sheet you need https://cheat.sh/
+* cheatsheet
+    - [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
+    - [chubin/cheat.sh](https://github.com/chubin/cheat.sh):the only cheat sheet you need https://cheat.sh/
+    * [Rico's cheatsheets](https://devhints.io/)
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
-* [DaveDavenport/rofi](https://github.com/DaveDavenport/rofi):Rofi: A window switcher, application launcher and dmenu replacement
-* [keeweb/keeweb](https://github.com/keeweb/keeweb):Free cross-platform password manager compatible with KeePass https://keeweb.info
-* [KeeWeb](https://keeweb.info):Free cross-platform password manager compatible with KeePass
 * barcode
     - [zxing/zxing](https://github.com/zxing/zxing):ZXing ("Zebra Crossing") barcode scanning library for Java, Android
 * ReCaptcha
@@ -175,16 +167,13 @@
 * record
     - [ShareX/ShareX](https://github.com/ShareX/ShareX):ShareX is a free and open source program that lets you capture or record any area of your screen and share it with a single press of a key. It also allows uploading images, text or other types of files to over 80 supported destinations you can choose from. https://getsharex.com
 * phone
-    - [VincentSit/ChinaMobilePhoneNumberRegex](https://github.com/VincentSit/ChinaMobilePhoneNumberRegex):Regular expressions that match the mobile phone number in mainland China. / 一组匹配中国大陆手机号码的正则表达式。
+    - [VincentSit/ChinaMobilePhoneNumberRegex](https://github.com/VincentSit/ChinaMobilePhoneNumberRegex):Regular expressions that match the mobile phone number in mainland China. / 一组匹配中国大陆手机号码的正则表达式
 * window
     - [DaveDavenport/rofi](https://github.com/DaveDavenport/rofi):Rofi: A window switcher, application launcher and dmenu replacement
 * instant Messaging
     - [processone/ejabberd](https://github.com/processone/ejabberd):Robust, ubiquitous and massively scalable Jabber / XMPP Instant Messaging platform https://www.process-one.net/en/ejabberd/
 * table
     - [Table Convert Online](https://tableconvert.com/)
-* monitor
-    - [huginn/huginn](https://github.com/huginn/huginn):Create agents that monitor and act on your behalf. Your agents are standing by!
-* [yehuio/Coot](https://github.com/yehuio/Coot):玩转 IFTTT 体验极客生活，互联网自动化神器 https://coot.io
 * 笔记
     - TickTick
     - [laurent22/joplin](https://github.com/laurent22/joplin):Joplin - an open source note taking and to-do application with synchronization capabilities for Windows, macOS, Linux, Android and iOS. Forum: https://discourse.joplinapp.org/ https://joplinapp.org
@@ -199,9 +188,6 @@
 * task
     - todolist
     - any do
-* cheatsheets
-    - [Rico's cheatsheets](https://devhints.io/)
-    - [wtfutil/wtf](https://github.com/wtfutil/wtf):The personal information dashboard for your terminal. http://wtfutil.com
 * Rss
     - [NetNewsWire5](https://github.com/brentsimmons/NetNewsWire/releases/download/mac-5.0.2/NetNewsWire5.0.2.zip)
     - [theoldreader](https://theoldreader.com/)
@@ -213,6 +199,7 @@
     - [hashicorp/vault](https://github.com/hashicorp/vault):A tool for secrets management, encryption as a service, and privileged access management https://www.vaultproject.io/
 * 密码管理
     - [Bitwarden](https://bitwarden.com/):Solve your password management problems
+    - [keeweb/keeweb](https://github.com/keeweb/keeweb):Free cross-platform password manager compatible with KeePass https://keeweb.info
 * Sass
     - [Atarity/deploy-your-own-saas](https://github.com/Atarity/deploy-your-own-saas):List of "only yours" cloud services for everyday needs 🏴
 * 亮度管理
@@ -288,7 +275,6 @@
 ## 参考
 
 * [2017 杭州云栖大会](https://github.com/Alimei/hangzhouYunQi2017ppt?files=1)
-* [Google Developer Documentation Style Guide](https://developers.google.com/style/)
 * [sindresorhus/awesome](https://github.com/sindresorhus/awesome) Curated list of awesome lists
 * [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books)Freely available programming books
 * [justjavac/free-programming-books-zh_CN](https://github.com/justjavac/free-programming-books-zh_CN)
@@ -296,7 +282,6 @@
 * [kdeldycke/awesome-falsehood](https://github.com/kdeldycke/awesome-falsehood):Curated list of falsehoods programmers believe in.
 * [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV\* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 * [oldratlee/translations](https://github.com/oldratlee/translations):Chinese translations for classic IT resources
-* [ossu/computer-science](https://github.com/ossu/computer-science):Path to a free self-taught education in Computer Science!
 * [bmorelli25/Become-A-Full-Stack-Web-Developer](https://github.com/bmorelli25/Become-A-Full-Stack-Web-Developer):Free resources for learning Full Stack Web Development
 * [gothinkster/realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 https://realworld.io/
 * [CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers):aka "Bayesian Methods for Hackers": An introduction to Bayesian methods + probabilistic programming with a computation/understanding-first, mathematics-second point of view. All in pure Python ;)
@@ -306,7 +291,6 @@
 * [be-a-professional-programmer](https://github.com/stanzhai/be-a-professional-programmer)
 * [TECHNOLOGY RADAR](https://www.thoughtworks.com/radar)
 * [Personal wiki](https://wiki.nikitavoloboev.xyz)
-* [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets)My cheatsheets https://devhints.io
 * [Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
 * [learnbyexample/curated_resources](https://github.com/learnbyexample/curated_resources):📚 Curated lists for programming, books, movies, music, games, etc
 * [stanzhai/be-a-professional-programmer](https://github.com/stanzhai/be-a-professional-programmer):成为专业程序员路上用到的各种优秀资料、神器及框架 http://tools.stanzhai.site

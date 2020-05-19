@@ -25,12 +25,14 @@ Go 编译器支持交叉编译，可以在一台机器上构建运行在具有�
         * src：存放go的源文件 import 包时的搜索路径
 
 ```sh
+sudo snap install go --classic
+
 ### linux
 wget  https://redirector.gvt1.com/edgedl/go/go$VERSION.$OS-$ARCH.tar.gz
 sudo tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
-echo 'export PATH="/home/dnt/go/bin:$PATH"' >> ~/.bashrc
-
-export PATH=$PATH:/usr/local/go/bin # 默认安装路径 /usr/local/go (c:\Go under Windows)添加到/etc/profile (for a system-wide installation) or $HOME/.profile
+# /etc/profile or $HOME/.profile or ~/.bashrc
+echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
+echo 'export PATH=$PATH:$HOME/go/bin' >> ~/.profile
 
 mkdir -p ~/projects/{bin,pkg,src}
 
@@ -74,6 +76,8 @@ go env
 
 # $GOPATH/src是 Go 源码存放的目录，所以在正式开始编码前要先确保 $GOPATH/src目录存在
 mkdir -p $GOPATH/src
+
+go get -v -u golang.org/x/tools/...
 ```
 
 ## 组织
