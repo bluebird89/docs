@@ -81,7 +81,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 * 服务器：稳定性；安全；支持其他出于同样原因的程序员使用
   - [CentOS](https://www.centos.org/)
   - Red Hat Enterprise Linux (RHEL)
-  - FreeBSD
+  - [FreeBSD](https://www.freebsd.org/)
 * 性能：显著的性能提升；高负载计算
   - Clear Linux  (For Intel CPUS, by Intel)
 * 桌面：安全性；匿名性
@@ -90,7 +90,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - CoreOS
   - TENS Linux (DOD Project)
   - Tin Hat Linux
-  - OpenBSD
+  - [OpenBSD](http://www.openbsd.org/)
   - [Manjaro](https://manjaro.org/):基于 Arch 的 Linux 发行版,安装是一件稍微复杂的工作
   - [Elementary OS](https://elementary.io/)
   - [openEuler](https://openeuler.org/):
@@ -571,11 +571,11 @@ lspci -v -s 00:02.0 #  加上视频设备号
 
 # 磁盘文件系统和设备
 sudo file -s /dev/nvme?n*
-lsblk # shows the volumes
+lsblk # shows the volumes 列出所有磁盘及其分区和大小
 sudo growpart /dev/nvme0n1 1
+sudo resize2fs /dev/xvda1
 lshw -short -C disk # 显示每个磁盘设备的描述信息
 hdparm -i /dev/sda # 获取任何指定的 SATA 磁盘详细信息，例如其型号、序列号以及支持的模式和扇区数量等
-lsblk # 列出所有磁盘及其分区和大小
 fdisk -l # 获取更多有关扇区数量、大小、文件系统 ID 和 类型以及分区开始和结束扇区
 blkid # 列出了每个分区的唯一标识符（UUID）及其文件系统类型
 df -m # 列出已挂载的文件系统和它们的挂载点，以及已用的空间和可用的空间

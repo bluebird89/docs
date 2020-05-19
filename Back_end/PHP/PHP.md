@@ -2619,6 +2619,18 @@ var_dump(iterator_to_array($iterator, true));
 var_dump(iterator_to_array($iterator, false));
 ```
 
+## 调用外部命令
+
+* 能执行linux系统的shell命令:可以获得命令执行的状态码
+    - system() 输出并返回最后一行shell结果
+        + 关掉 安全模式 safe_mode = off
+        + 禁用函数列表 disable_functions = proc_open, popen, exec, system, shell_exec, passthru 把 exec 去掉
+    - exec() 不输出结果，返回最后一行shell结果，所有结果可以保存到一个返回的数组里面。
+    - passthru() 只调用命令，把命令的运行结果原样地直接输出到标准输出设备上。
+```sh
+system("/usr/a.sh");
+```
+
 ## 异常
 
 
@@ -2712,16 +2724,16 @@ echo "Associative array always output as object: ", json_encode($d, JSON_FORCE_O
     - 指定域，如上图中的http://172.20.0.206，一般的系统中间都有一个nginx，所以推荐这种,例如：'Access-Control-Allow-Origin:http://172.20.0.206'
     - 动态设置为请求域，多人协作时，多个前端对接一个后台，这样很方便
     - withCredentials：表示XHR是否接收cookies和发送cookies，也就是说如果该值是false，响应头的Set-Cookie，浏览器也不会理，并且即使有目标站点的cookies，浏览器也不会发送。
-* Access-Control-Allow-Credentials :是否允许后续请求携带认证信息（cookies）,该值只能是true,否则不返回            
+* Access-Control-Allow-Credentials :是否允许后续请求携带认证信息（cookies）,该值只能是true,否则不返回
 * option请求多了2个字段：
     - Access-Control-Request-Method：该次请求的请求方式
     - Access-Control-Request-Headers：该次请求的自定义请求头字段
     - Access-Control-Max-Age 预检结果缓存时间 表明该响应的有效时间为 86400 秒，也就是 24 小时。在有效时间内，浏览器无须为同一请求再次发起预检请求。浏览器自身维护了一个最大有效时间，如果该首部字段的值超过了最大有效时间，将不会生效
 
 ```php
-header('Access-Control-Allow-Origin: *');  
-header('Access-Control-Allow-Credentials: true'); 
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'); //允许的请求类型 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'); //允许的请求类型
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"); // 允许的请求头字段
 ```
 
@@ -3340,11 +3352,11 @@ $order->add();//正常的使用业务
     -   \nm 标识一个八进制转义值或一个向后引用。如果 \nm 之前至少有 nm 个获得子表达式，则 nm 为向后引用。如果 \nm 之前至少有 n 个获取，则 n 为一个后跟文字 m 的向后引用。如果前面的条件都不满足，若 n 和 m 均为八进制数字 (0-7)，则 \nm 将匹配八进制转义值 nm。
     -   \nml    如果 n 为八进制数字 (0-3)，且 m 和 l 均为八进制数字 (0-7)，则匹配八进制转义值 nml。
     -   \un 匹配 n，其中 n 是一个用四个十六进制数字表示的 Unicode 字符。例如， \u00A9 匹配版权符号 (?)。
-    -   \(pattern\) 匹配pattern 并获取这一匹配。所获取的匹配可以从产生的Matches集合得到，在VBScript 中使用SubMatches集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 '\(' 或 '\)'。        - 
+    -   \(pattern\) 匹配pattern 并获取这一匹配。所获取的匹配可以从产生的Matches集合得到，在VBScript 中使用SubMatches集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 '\(' 或 '\)'。        -
     -   \(?:pattern\) 匹配pattern但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 "或" 字符“|”来组合一个模式的各个部分是很有用。
-    -   例如，“industr\(?:y|ies\)”就是一个比 “industry|industries” 更简略的表达式。     - 
-    -   \(?=pattern\) 正向预查，在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，'Windows (?=95|98|NT|2000)' 能匹配 "Windows 2000" 中的 "Windows" ，但不能匹配"Windows 3.1" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。     - 
-    -   (?!pattern) 负向预查，在任何不匹配 pattern 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如'Windows (?!95|98|NT|2000)' 能匹配 "Windows 3.1" 中的 "Windows"，但不能匹配 "Windows 2000" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。     - 
+    -   例如，“industr\(?:y|ies\)”就是一个比 “industry|industries” 更简略的表达式。     -
+    -   \(?=pattern\) 正向预查，在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，'Windows (?=95|98|NT|2000)' 能匹配 "Windows 2000" 中的 "Windows" ，但不能匹配"Windows 3.1" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。     -
+    -   (?!pattern) 负向预查，在任何不匹配 pattern 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如'Windows (?!95|98|NT|2000)' 能匹配 "Windows 3.1" 中的 "Windows"，但不能匹配 "Windows 2000" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。     -
     -   x|y 匹配x或y。例如，'z|food' 能匹配 "z" 或 "food"。'(z|f)ood' 则匹配 "zood" 或 "food"。
 
 如果你认真去看例4-1，发现那个表达式也能匹配010)12345678或(022-87654321这样的“不正确”的格式。要解决这个问题，我们需要用到分枝条件。
@@ -3420,10 +3432,10 @@ $order->add();//正常的使用业务
 ```
 <?php
 $string = "上飞机离开我<img border='0' alt='' src='/uploadfile/2009/0921/20090921091612567.jpg' border='0' />sdfsdf";
- 
+
 $su = preg_match("/ \<[ ]*img.*src[ ]*\=[ ]*[\"|\'](.+?)[\"|\'] /", $string,$match); // 匹配src=的内容
 print_r($match[1]); // 输出 /uploadfile/2009/0921/20090921091612567.jpg
- 
+
 $su = preg_match("/ \<[ ]*img.*src[ ]*\=[ ]*[\"|\'](.+)[\"|\'] /", $string,$match);
 print_r($match[1]); // 输出 /uploadfile/2009/0921/20090921091612567.jpg' border='
 ?>
@@ -3749,7 +3761,7 @@ crc32
 * MySQL请购买《MySQL技术内幕：innodb存储引擎》和《高性能MySQL》两本书，Redis请购买《Redis设计与实现》
 * 《C Primer Plus》和《Unix环境高级编程》。这地方有一个巨大的错觉，就是读完一遍《C Primer Plus》后就觉得自己会CLang了，有这种优越感的，请你尝试用CLang做个什么东西出来？然后你发现似乎真的什么也做不了，这会儿就可以步入到《Unix环境高级编程》的节奏
 * 一切基于基础之上的上层应用都是海市蜃楼，犹如过眼云烟。不变的永远是基于事件监听的异步非阻塞IO
-* 技术 
+* 技术
     - 分布式配置中心
     - 服务熔断、限流、降级
     - 异步框架
@@ -3975,7 +3987,7 @@ pecl channel-update pecl.php.net
         + http://localhost:8888/MAMP/
         + /Applications/MAMP/htdocs
         + MySQL port：8889
-    - Wnmp:Version of nginx for Windows uses the native Win32 API (not the Cygwin emulation layer). Only the select() connection processing method is currently used, so high performance and scalability should not be expected. 
+    - Wnmp:Version of nginx for Windows uses the native Win32 API (not the Cygwin emulation layer). Only the select() connection processing method is currently used, so high performance and scalability should not be expected.
         + `tasklist /fi "imagename eq nginx.exe" # 查看进程，没有查看error.log`
 
 ## 参考
