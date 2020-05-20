@@ -6,8 +6,8 @@ Empowering everyone to build reliable and efficient software. https://www.rust-l
 
 ```sh
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
 brew install rustup
+
 rustup update # 更新
 rustup self uninstall
 
@@ -17,7 +17,7 @@ rustc --version
 ## 配置
 
 * `$HOME/.cargo/env` 或者 `export PATH="$HOME/.cargo/bin:$PATH"`
-* 所有工具都安装到 ~/.cargo/bin 目录， 并且您能够在这里找到 Rust 工具链，包括 rustc、cargo 及 rustup。
+* 所有工具安装 ~/.cargo/bin 目录， 并且能够找到 Rust 工具链，包括 rustc、cargo 及 rustup
 
 ```sh
 # $HOME/.cargo/config
