@@ -71,6 +71,9 @@ systemd-analyze blame | head -n 10
 # /etc/sysctl.conf Add
 vm.swappiness = 10
 sudo sysctl vm.swappiness=10
+
+sudo add-apt-repository ppa:oibaf/graphics-drivers
+sudo apt-get update
 ```
 
 ### 网络配置
@@ -231,8 +234,6 @@ zh_CN.UTF-8 UTF-8
 zh_CN.GBK GBK
 zh_CN GB2312
 sudo locale-gen
-
-
 ```
 
 ### 软件
@@ -273,45 +274,57 @@ sudo apt install -y apt-fast`
 * 从二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到合适的目录，然后将包含可执行的主程序文件的目录添加进PATH环境变量即可
 * 源码编译安装
 * 列表
-  - simplenote
-  - VLC
-  - oh my zsh
-  - KchmViewer:阅读CHM
+  - 笔记
+    + simplenote
+    + [cherrytree](www.giuspen.com/cherrytree/):note
+  - 音视频
+    + VLC
+    + Lightworks Free：专业的非线视频编辑器
+    + Spotify for Linux
+    + Clementine
+    + [Cloud music](http://d1.music.126.net/dmusic/netease-cloud-music_1.2.0_amd64_ubuntu_20190424_1.deb)
+    + Vocal:听播客
+    + Shotcut 是一个 Meltytech, LLC 在 MLT 多媒体框架下开发的自由开源的跨平台视频编辑应用。你会发现它是 Linux 发行版上最强大的视频编辑器之一，它支持所有主要的音频、视频、图片格式
+    + [Sayonara Player](https://sayonara-player.com/index.php)
+  - 阅读
+    + KchmViewer:阅读CHM
+    + xchm:`sudo apt-get install xchm`
+    + Foxit Reader
   - LaTeX
-  - Chromium
-  - [rime](https://rime.im/)
-  - Nylas N1：超好用的跨平台电子邮件客户端
-  - Thunderbird
-  - Spotify for Linux：音乐流媒体服务
-  - Lightworks Free：专业的非线视频编辑器
-  - Viber：跨平台的 Skype 替代品
-  - Vivaldi：功能强大的 web 浏览器
-  - BleachBit: cleaner(softer center)
-  - [albert](https://albertlauncher.github.io/):Access everything with virtually zero effort
-  - Vocal:听播客
-  - Foxit Reader:PDF 阅读
+  - 浏览器
+    + Chromium
+    + Vivaldi
+  - 输入法
+    + [rime](https://rime.im/)
+  - 邮箱
+    + Nylas N1：超好用的跨平台电子邮件客户端
+    + Thunderbird：can  add addon to manage rss
+  - 系统
+    + [albert](https://albertlauncher.github.io/):Access everything with virtually zero effort
+    + Gtile:分屏工具
+    + shadowshocks
+    + Disk Usage Analyzer
   - 图片
     + gnome-screenshot:`sudo apt-get install gnome-screenshot`
     + Gimp
     + Shutter
     + Imagemagick
     + Kazam
-  - Gtile:分屏工具
-  - [Cloud music](http://d1.music.126.net/dmusic/netease-cloud-music_1.2.0_amd64_ubuntu_20190424_1.deb)
-  - shadowshocks
-  - Jitsy:通讯工具
+  - 社交
+    + Franz 是一个即时消息客户端，它将聊天和信息服务结合到了一个应用中。它是一个现代化的即时消息平台，在单个应用中支持了 Facebook Messenger、WhatsApp、Telegram、微信、Google Hangouts、 Skype
+    + Jitsy
+    + Viber：跨平台的 Skype 替代品
+    + [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
   - Synaptic：软件管理
-  - thunderbird mail: can  add addon to manage rss
-  - xchm:`sudo apt-get install xchm`
-  - [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
-  - [cherrytree](www.giuspen.com/cherrytree/):note
+  - 清理工具
+    + Ubuntu Cleaner `sudo add-apt-repository ppa:gerardpuig/ppa && sudo apt-get install ubuntu-cleaner`
+    + [BleachBit](https://www.bleachbit.org/download)
   - [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite
-  - [Sayonara Player](https://sayonara-player.com/index.php)
-  - Disk Usage Analyzer
   - [Pomodoro](https://gnomepomodoro.org/) `sudo apt-get install gnome-shell-pomodoro`
   - 贴纸
     + indicator-stickynotes
     + Xpad:`sudo apt-get install xpad`
+    + liferea:一个自由开源的新闻聚合工具，用于在线新闻订阅
 * 下载
   - `sudo apt-get install ktorrent`
   - `sudo apt-get install amule`
@@ -333,7 +346,7 @@ sudo apt[-get] upgrade # 从软件源镜像服务器上下载/更新用于更新
 sudo apt[-get] dist-upgrade # 解决依赖关系并升级(存在一定危险性)
 sudo apt --fix-broken install # continue install
 
-sudo apt-get remove netease-cloud-music # 移除已安装的软件包，包括与被移除软件包有依赖关系的软件包，但不包含软件包的配置文件
+sudo apt-get remove netease-cloud-music #移除已安装的软件包，包括与被移除软件包有依赖关系的软件包，但不包含软件包的配置文件
 sudo apt-get autoremove # 移除之前被其他软件包依赖，但现在不再被使用的软件包  purge 与remove相同，但会完全移除软件包，包含其配置文件
 sudo apt-get clean # 删除所有已下载的包文件，默认保存在/var/cache/apt/archives/
 sudo apt-get autoclean # 移除已安装的软件的旧版本软件包
@@ -415,11 +428,13 @@ sudo snap revert <snap name>
 sudo snap remove <snap name>
 snap refresh --time
 sudo snap set system refresh.timer=22:00-23:59
+
+sudo apt install texlive-latex-extra
 ```
 
 ```
 ## 替换源
-sudo mv /etc/apt/sources.list /etc/apt/sources.list.backup #备份系统默认的软件源
+sudo mv /etc/apt/sources.list /etc/apt/sources.list.backup # 备份默认源
 
 ## /etc/apt/sources.list.d
 # 清华源
@@ -466,11 +481,11 @@ deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe
   - 去掉后缀 .v40.shell-extension
   - 把文件夹拷贝到 `~/.local/share/gnome-shell/extensions`，重启 Gnome-Tweaks
   - `/usr/share/themes`
+  - /usr/share/gnome-shell/extensions/
 * GNOME Tweaks Tool `sudo apt install gnome-tweaks`
 * 插件
   - `sudo aptitude install gnome-shell-extension-ubuntu-dock`
   - `sudo aptitude install gnome-shell-extension-system-monitor`
-  - Workspace Indicator：当前多窗口index
   -  Open Weather
 * Theme
   - [gnome-look](https://www.gnome-look.org/)
@@ -480,22 +495,25 @@ deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe
   - Communitheme `sudo snapinstall communitheme –edge`
   - [vinceliuice / vimix-gtk-themes](https://github.com/vinceliuice/vimix-gtk-themes):Vimix is a flat Material Design theme for GTK 3, GTK 2 and Gnome-Shell etc. https://vinceliuice.github.io/
   - sudo apt install sierra-gtk-theme
-
 * 重启： `Alt + F2`, r
 
 ```sh
 sudo apt install gnome-tweak-tool gnome-shell-extensions chrome-gnome-shell
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
-#gsettings list-schemas             显示系统已安装的不可重定位的schema
-#gsettings list-relocatable-schemas 显示已安装的可重定位的schema
-#gsettings list-children SCHEMA     显示指定schema的children，其中SCHEMA指xml文件中schema的id属性值，例如实例中的"org.lili.test.app.testgsettings"
-#gsettings list-keys SCHEMA         显示指定schema的所有项(key)
-#gsettings range SCHEMA KEY         查询指定schema的指定项KEY的有效取值范围
-#gsettings get SCHEMA KEY           显示指定schema的指定项KEY的值
-#gsettings set SCHEMA KEY VALUE     设置指定schema的指定项KEY的值为VALUE
-#gsettings reset SCHEMA KEY         恢复指定schema的指定项KEY的值为默认值
-#gsettings reset-recursively SCHEMA 恢复指定schema的所有key的值为默认值
-#gsettings list-recursively [SCHEMA]如果有SCHEMA参数，则递归显示指定schema的所有项(key)和值(value)，如果没有SCHEMA参数，则递归显示所有schema的所有项(key)和值(value)
+
+gsettings list-schemas             显示系统已安装的不可重定位的schema
+gsettings list-relocatable-schemas 显示已安装的可重定位的schema
+gsettings list-children SCHEMA   显示指定schema的children，其中SCHEMA指xml文件中schema的id属性值，例如实例中的"org.lili.test.app.testgsettings"
+gsettings list-keys SCHEMA         显示指定schema的所有项(key)
+gsettings range SCHEMA KEY         查询指定schema的指定项KEY的有效取值范围
+gsettings get SCHEMA KEY           显示指定schema的指定项KEY的值
+gsettings set SCHEMA KEY VALUE     设置指定schema的指定项KEY的值为VALUE
+gsettings reset SCHEMA KEY         恢复指定schema的指定项KEY的值为默认值
+gsettings reset-recursively SCHEMA 恢复指定schema的所有key的值为默认值
+gsettings list-recursively [SCHEMA] 如果有SCHEMA参数，则递归显示指定schema的所有项(key)和值(value)，如果没有SCHEMA参数，则递归显示所有schema的所有项(key)和值(value)
+
+# 软件托盘不显示问题
+
 ```
 
 ## 用户管理
@@ -575,6 +593,14 @@ ps aux | grep nginx
 lsof -Pni4 | grep LISTEN | grep php
 # 关闭进程
 kill -9 pid
+```
+
+## perf
+
+```sh
+sudo apt install linux-tools-common linux-tools-5.3.0-51-generic
+sudo perf record -g -a sleep 10 # 录制
+sudo perf report # 回放
 ```
 
 ### 优化

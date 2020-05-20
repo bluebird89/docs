@@ -212,7 +212,12 @@ export EDITOR=vim
 
 ## 内核
 
+* [kernal](https://www.kernel.org/)
 * 操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限
+
+```sh
+uname -sr
+```
 
 ## 内存
 
