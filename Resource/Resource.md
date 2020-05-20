@@ -207,6 +207,16 @@
 * 白板
     - [excalidraw / excalidraw](https://github.com/excalidraw/excalidraw):Excalidraw is a whiteboard tool that lets you easily sketch diagrams that have a hand-drawn feel to them. https://excalidraw.com
 
+## [IFTTT(if this then that)](https://ifttt.com/)
+
+* 打通两种服务：trigger->actino
+* 不同服务提供不同触发器接口
+* 开启 webhooks 服务:会生成一个key
+* new Applet:定义触发事件发送HTTP请求，推送notification
+    - this:create triggers:service webhooks-》Receive a web request-》eventName（不可修改）
+    - that:service:notification(mutal-media)->add intergedient(通过请求参数或者全局参数 event name(可修改) OccurredAt)
+    - test: 发送http请求
+
 ## Language
 
 * [byoungd/English-level-up-tips-for-Chinese](https://github.com/byoungd/English-level-up-tips-for-Chinese)

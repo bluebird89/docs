@@ -30,6 +30,24 @@
 * 戴尔27英寸XPS旗舰一体机
 * GPD p2 max 8.9英寸
 * MateBook X Pro 2020
+* 荣耀笔记本Pro 锐龙版16.1英寸笔记本电脑 Ryzen 5 3550H 8GB 512GB（冰河银）MagicBook Pro
+    - [AMD Ryzen™ 5 Mobile Processors with Radeon™ Vega Graphics驱动](https://www.amd.com/zh-hans/support/apu/amd-ryzen-processors/amd-ryzen-5-mobile-processors-radeon-vega-graphics/amd-ryzen-5-2)
+
+```sh
+tar -xJvf amdgpu-pro_*.tar.xz
+
+./amdgpu-pro-install -y
+
+sudo add-apt-repository ppa:oibaf/graphics-drivers
+sudo apt-get update
+# /etc/X11/xorg.conf
+Section "Device"
+    Identifier "AMDGPU"
+    Driver "amdgpu"
+    Option "AccelMethod" "glamor"
+    Option "DRI" "3"
+EndSection
+```
 
 ## 键盘
 
