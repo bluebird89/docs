@@ -45,6 +45,7 @@
 * https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/
 * Gilbert Strang教授的MIT公开课：数据分析、信号处理和机器学习中的矩阵方法 Matrix Methods in Data Analysis, Signal Processing, and Machine Learning
     - [课程主页] (https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/)
+    - [A 2020 Vision of Linear Algebra](https://ocw.mit.edu/resources/res-18-010-a-2020-vision-of-linear-algebra-spring-2020/index.htm)
     - [课程官方视频](https://www.youtube.com/playlist?list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k)
     - [爱可可老师B站搬运链接](https://www.bilibili.com/video/av53055190/)
 
