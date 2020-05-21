@@ -457,6 +457,28 @@ It is not worth an intelligent man’s time to be in the majority. By definition
 * 人生本是本无意义，但是怎样摆脱虚无却是有意义的。一切的意义只在时间的流动的河中。
 * 学校
     - 中国民航大学（CAUC）
+* 核心课程”的说明：“The philosophy of the Core Curriculum rests on the conviction that every Harvard graduate should be broadly educated，as well as trained in a particular academic specialty or concentration. It assumes that students need some guidance in achieving this goal，and that the faculty has an obligation to direct them toward the knowledge，intellectual skills，and habits of thought that are the hallmarks of educated men and women.” 哈佛的“核心课程”分成七个板块：
+    - Foreign Cultures；
+    - Historical Study；
+    - Literature and Arts；
+    - Moral Reasoning；
+        + 民主与平等
+        + 正义
+        + 国际关系与伦理
+        + 伦理学中的基本问题
+        + 儒家人文主义
+        + 有神论与道德观念
+        + 自我，自由与存在
+        + 西方政治思想中的奴隶制
+        + 社会反抗的道德基础
+        + 共和政府的理论与实践
+        + 比较宗教论理
+        + 传统中国的伦理和政治理论
+        + 古代与中世纪政治哲学史
+        + 现代政治哲学史
+    - Quantitative Reasoning；
+    - Science；
+    - Social Analysis.
 
 ```
 清华的第一年，我开始痛苦地感受到，在这个藏龙卧虎的地方，自己真的就是一个普通智商的人而
