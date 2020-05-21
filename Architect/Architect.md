@@ -256,6 +256,10 @@
     - 业务类书籍，建议多读些具有多年从业经验的人写的具有一定“感受”性特点的书籍，单纯的教材类书籍可能代入感稍微有些欠缺
     - 历史、军事、经济、哲学类书籍其实很有助于从更宏观、更本质的层面了解社会的运行，有助于从更开阔的视角理解业
 
+## 实例
+
+* [ alibaba /COLA ](https://github.com/alibaba/COLA):Clean Object-oriented & Layered Architecture
+
 ## 参考
 
 * [xingshaocheng/architect-awesome](https://github.com/xingshaocheng/architect-awesome)

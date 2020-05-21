@@ -1,14 +1,11 @@
 # Shell
 
-Shell是Linux/Unix的一个外壳。隐藏了操作系统底层的细节,作为命令解析器负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序。
-
+* 之所以叫Shell,因为隐藏了操作系统底层的细节,是Linux/Unix的一个外壳。作为命令解析器负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序
 * 支持模糊匹配符
 * 每次bash会生成子shell进程，只有部分父进程的环境被复制到子shell环境中
 * 利用exit命令有条不紊地退出子shell
 * 命令列 表要想成为进程列表，这些命令必须包含在括号里 `(pwd ; ls ; cd /etc ; pwd ; cd ; pwd ; ls)` 生成了一个子shell来执行对应的命令
-* 要想知道是否生成了子shell，得借助一个使用了环境变量的命令。这个命令就是echo $BASH_SUBSHELL。如果该命令返回0，就表明没有子shell。如果返回 1或者其他更大的数字，就表明存在子shell。 `( pwd ; echo $BASH_SUBSHELL)`
-* sleep命令会在后台(&)睡眠3000秒(50分钟)。当它被置入后台，在shell CLI提示符返回 之前，会出现两条信息。第一条信息是显示在方括号中的后台作业(background job)号(1)。 第二条是后台作业的进程ID(2396)。
-* `jobs -l`:将进程列表置入后台模式。你既可以在子shell中 进行繁重的处理工作，同时也不会让子shell的I/O受制于终端
+* 要想知道是否生成了子shell，借助一个使用了环境变量的命令。`echo $BASH_SUBSHELL` 如果该命令返回0，就表明没有子shell。如果返回 1 或者其他更大的数字，就表明存在子shell。 `( pwd ; echo $BASH_SUBSHELL)`
 * 生成子shell的成本不低，而且速度还慢。创建嵌套子shell更是火上浇油
 
 ## 配置
@@ -21,8 +18,14 @@ Shell是Linux/Unix的一个外壳。隐藏了操作系统底层的细节,作为�
 * ~/.zshrc：zsh配置文件
 * `echo PATH="$PATH:/my_new_path"`:临时添加，关闭后失效
 * 选项如果单字符选项前使用一个减号-。单词选项前使用两个减号--
+* alias
+	- `alias c='clear'`
+	- disable
+		+ /usr/bin/clear
+		+ \c
+		+ command ls
+	- `unalias aliasname`
 * alias参考
-    - https://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html
     - https://www.digitalocean.com/community/questions/what-are-your-favorite-bash-aliases
     - https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/
     - https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/
@@ -43,28 +46,6 @@ export TERM=xterm-color
 // 注: 只对各个用户自己的主目录下的.vimrc修改的话，修改内容只对本用户有效,要想全部有效，可以修改 /etc/vimrc
 # 同样的 /etc/bashrc 是针对所有用户的启动文件
 
-# ~/.vimrc
-set nonumber # 不设置行号
-set shell=/bin/bash     # 设置shell环境
-syntax on     # 开启vim语法高亮
-colorscheme desert     # 设置主题色
-set background=dark
-set autoindent     # 设置自动缩进
-set nocompatible     # 不向下兼容vi
-set showmatch      # 开启括号匹配
-set cursorline     # 光标所在行高亮
-set ruler     # 设置标尺
-set laststatus=2     # 开启状态栏(默认是1)
-set smartindent     # 开启新航时使用智能自动缩进
-set hlsearch     # 搜索时高亮显示找到的文本
-set wrap     # 设置自动换行
-set tabstop=4     # 设置缩进为4个空格
-set softtabstop=4
-set shiftwidth=4
-filetype on     # 检测文件类型
-set history=500     # 设置历史行数
-set smartindent     # 理想添加 依据上面的格式自动对齐
-
 ls /usr/share/vim/vim72/colors/  # 可以查看vim支持的主题色
 
 /* 目录配色方案(将/etc中的DIR_COLORS文件复制到自己主目录中，并重命名为.dir_colors) */
@@ -79,27 +60,6 @@ export PS1="\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h: \[\e[0;35m\]\W\[\e[m\] \\$"
 
 // 另外种主提示符样式(（)对CentOS默认的主提示符加颜色标识)
 # export PS1="[\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h \[\e[0;35m\]\W\[\e[m\]]\\$  "
-
-alias # list
-
-alias amazonbackup='s3backup'
-alias apt='sudo apt-get'
-
-alias name=value
-alias name='command'
-alias name='command arg1 arg2'
-alias name='/path/to/script'
-alias name='/path/to/script.pl arg1'
-unalias aliasname
-unalias foo
-
-# disable a bash alias temporarily
-## path/to/full/command
-/usr/bin/clear
-## call alias with a backslash ##
-\c
-## use /bin/ls command and avoid ls alias ##
-command ls
 
 # .bashrc
 # if user is not root, pass all commands via sudo #
@@ -117,344 +77,6 @@ case $_myos in
    SunOS) alias foo='/path/to/sunos/bin/foo' ;;
    *) ;;
 esac
-
-# alias
-## Colorize the ls output ##
-alias ls='ls --color=auto'
-## Use a long listing format ##
-alias ll='ls -la'
-## Show hidden files ##
-alias cls='clear'   #DOS风格的清空
-# Clear the screen of your clutter
-alias c="clear"
-alias cl="clear;ls;pwd"
-# ls better
-alias la="ls -aF"
-alias ld="ls -ld"
-alias ll="ls -l"
-alias lt='ls -At1 && echo "------Oldest--"'
-alias ltr='ls -Art1 && echo "------Newest--"'
-
-alias h='history | tail'
-alias hg='history | grep'
-alias hl='history | less'
-# share history between terminal sessions
-alias he="history -a" # export history
-alias hi="history -n" # import history
-alias nis="npm install --save "
-alias svim='sudo vim'
-alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
-alias install='sudo apt get install'
-
-## get rid of command not found ##
-alias cd..='cd ..'
-
-## a quick way to get out of current directory ##
-alias ..='cd ..'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
-alias .....='cd ../../../../'
-alias .4='cd ../../../../'
-alias .5='cd ../../../../..'
-alias www='python -m SimpleHTTPServer 8000'
-## Colorize the grep command output for ease of use (good for log files)##
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias sha1='openssl sha1'
-# install  colordiff package :)
-alias diff='colordiff'
-alias mount='mount |column -t'
-# handy short cuts #
-alias j='jobs -l'
-alias path='echo -e ${PATH//:/\\n}'
-alias now='date +"%T"'
-alias nowtime=now
-alias nowdate='date +"%d-%m-%Y"'
-alias vi=vim
-alias svi='sudo vi'
-alias vis='vim "+set si"'
-alias edit='vim'
-
-# add and remove new/deleted files from git index automatically
-alias gitar="git ls-files -d -m -o -z --exclude-standard | xargs -0 git update-index --add --remove"
-# git push
-alias gpd="git push origin develop"
-alias gpm="git push origin master"
-# Remove git from a project
-alias ungit="find . -name '.git' -exec rm -rf {} \;"
-
-# Stop after sending count ECHO_REQUEST packets #
-alias ping='ping -c 5'
-# Do not wait interval 1 second, go fast #
-alias fastping='ping -c 100 -s.2'
-alias ports='netstat -tulanp'
-## replace mac with your actual server mac address #
-alias wakeupnas01='/usr/bin/wakeonlan 00:11:32:11:15:FC'
-alias wakeupnas02='/usr/bin/wakeonlan 00:11:32:11:15:FD'
-alias wakeupnas03='/usr/bin/wakeonlan 00:11:32:11:15:FE'
-## shortcut  for iptables and pass it via sudo#
-alias ipt='sudo /sbin/iptables'
-
-# display all rules #
-alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
-alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
-alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
-alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
-alias firewall=iptlist
-# get web server headers #
-alias header='curl -I'
-
-# find out if remote server supports gzip / mod_deflate or not #
-alias headerc='curl -I --compress'
-
-# do not delete / or prompt if deleting more than 3 files at a time #
-alias rm='rm -I --preserve-root'
-
-# confirmation #
-alias mv='mv -i'
-alias cp='cp -i'
-alias ln='ln -i'
-# Make some of the file manipulation programs verbose
-alias mv="mv -v"
-alias rm="rm -vi"
-alias cp="cp -v"
-
-# Parenting changing perms on / #
-alias chown='chown --preserve-root'
-alias chmod='chmod --preserve-root'
-alias chgrp='chgrp --preserve-root'
-
- # distro specific  - Debian / Ubuntu and friends #
-# install with apt-get
-alias apt-get="sudo apt-get"
-alias updatey="sudo apt-get --yes"
- ## distrp specifc RHEL/CentOS ##
-alias update='yum update'
-alias updatey='yum -y update'
-
-# reboot / halt / poweroff
-alias reboot='sudo /sbin/reboot'
-alias poweroff='sudo /sbin/poweroff'
-alias halt='sudo /sbin/halt'
-alias shutdown='sudo /sbin/shutdown'
-
-# update on one command
-alias update='sudo apt-get update && sudo apt-get upgrade'
-
-# also pass it via sudo so whoever is admin can reload it without calling you #
-alias nginxreload='sudo /usr/local/nginx/sbin/nginx -s reload'
-alias nginxtest='sudo /usr/local/nginx/sbin/nginx -t'
-alias lightyload='sudo /etc/init.d/lighttpd reload'
-alias lightytest='sudo /usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf -t'
-alias httpdreload='sudo /usr/sbin/apachectl -k graceful'
-alias httpdtest='sudo /usr/sbin/apachectl -t && /usr/sbin/apachectl -t -D DUMP_VHOSTS'
-
-# if cron fails or if you want backup on demand just run these commands #
-# again pass it via sudo so whoever is in admin group can start the job #
-# Backup scripts #
-alias backup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type local --taget /raid1/backups'
-alias nasbackup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type nas --target nas01'
-alias s3backup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type nas --target nas01 --auth /home/scripts/admin/.authdata/amazon.keys'
-alias rsnapshothourly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys --config /home/scripts/admin/scripts/backup/config/adsl.conf'
-alias rsnapshotdaily='sudo  /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
-alias rsnapshotweekly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
-alias rsnapshotmonthly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
-alias amazonbackup=s3backup
-
-## play video files in a current directory ##
-# cd ~/Download/movie-name
-# playavi or vlc
-alias playavi='mplayer *.avi'
-alias vlc='vlc *.avi'
-
-# play all music files from the current directory #
-alias playwave='for i in *.wav; do mplayer "$i"; done'
-alias playogg='for i in *.ogg; do mplayer "$i"; done'
-alias playmp3='for i in *.mp3; do mplayer "$i"; done'
-
-# play files from nas devices #
-alias nplaywave='for i in /nas/multimedia/wave/*.wav; do mplayer "$i"; done'
-alias nplayogg='for i in /nas/multimedia/ogg/*.ogg; do mplayer "$i"; done'
-alias nplaymp3='for i in /nas/multimedia/mp3/*.mp3; do mplayer "$i"; done'
-
-# shuffle mp3/ogg etc by default #
-alias music='mplayer --shuffle *'
-
-## All of our servers eth1 is connected to the Internets via vlan / router etc  ##
-alias dnstop='dnstop -l 5  eth1'
-alias vnstat='vnstat -i eth1'
-alias iftop='iftop -i eth1'
-alias tcpdump='tcpdump -i eth1'
-alias ethtool='ethtool eth1'
-
-# work on wlan0 by default #
-# Only useful for laptop as all servers are without wireless interface
-alias iwconfig='iwconfig wlan0'
-
-## pass options to free ##
-alias meminfo='free -m -l -t'
-
-## get top process eating memory
-alias psmem='ps auxf | sort -nr -k 4'
-alias psmem10='ps auxf | sort -nr -k 4 | head -10'
-
-## get top process eating cpu ##
-alias pscpu='ps auxf | sort -nr -k 3'
-alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
-
-## Get server cpu info ##
-alias cpuinfo='lscpu'
-
-#copy output of last command to clipboard
-alias cl="fc -e -|pbcopy"
-
-# top
-alias cpu='top -o cpu'
-alias mem='top -o rsize' # memory
-
-# copy the working directory path
-alias cpwd='pwd|tr -d "\n"|pbcopy'
-
-# DNS (with update thanks to @blanco)
-alias flush="sudo killall -HUP mDNSResponder"
-
-# Get your current public IP
-alias ip="curl icanhazip.com"
-
-## older system use /proc/cpuinfo ##
-##alias cpuinfo='less /proc/cpuinfo' ##
-
-## get GPU ram on desktop / laptop##
-alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
-
-# Reboot my home Linksys WAG160N / WAG54 / WAG320 / WAG120N Router / Gateway from *nix.
-alias rebootlinksys="curl -u 'admin:my-super-password' 'http://192.168.1.2/setup.cgi?todo=reboot'"
-
-# Reboot tomato based Asus NT16 wireless bridge
-alias reboottomato="ssh admin@192.168.1.1 /sbin/reboot"
-
-## this one saved by butt so many times ##
-alias wget='wget -c'
-
-## this one saved by butt so many times ##
-alias ff4='/opt/firefox4/firefox'
-alias ff13='/opt/firefox13/firefox'
-alias chrome='/opt/google/chrome/chrome'
-alias opera='/opt/opera/opera'
-
-#default ff
-alias ff=ff13
-
-#my default browser
-alias browser=chrome
-
-## set some other defaults ##
-alias df='df -H'
-alias du='du -ch'
-
-# top is atop, just like vi is vim
-alias top='sudo htop'
-alias cat='bat'
-alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
-
-## nfsrestart  - must be root  ##
-## refresh nfs mount / cache etc for Apache ##
-alias nfsrestart='sync && sleep 2 && /etc/init.d/httpd stop && umount netapp2:/exports/http && sleep 2 && mount -o rw,sync,rsize=32768,wsize=32768,intr,hard,proto=tcp,fsc natapp2:/exports /http/var/www/html &&  /etc/init.d/httpd start'
-
-## Memcached server status  ##
-alias mcdstats='/usr/bin/memcached-tool 10.10.27.11:11211 stats'
-alias mcdshow='/usr/bin/memcached-tool 10.10.27.11:11211 display'
-
-## quickly flush out memcached server ##
-alias flushmcd='echo "flush_all" | nc 10.10.27.11 11211'
-
-## Remove assets quickly from Akamai / Amazon cdn ##
-alias cdndel='/home/scripts/admin/cdn/purge_cdn_cache --profile akamai'
-alias amzcdndel='/home/scripts/admin/cdn/purge_cdn_cache --profile amazon'
-
-## supply list of urls via file or stdin
-alias cdnmdel='/home/scripts/admin/cdn/purge_cdn_cache --profile akamai --stdin'
-alias amzcdnmdel='/home/scripts/admin/cdn/purge_cdn_cache --profile amazon --stdin'
-
-# time machine log
-alias tmlog="syslog -F '\$Time \$Message' -k Sender com.apple.backupd-auto -k Time ge -30m | tail -n 1"
-
-# trim newlines
-alias tn='tr -d "\n"'
-
-# list TODO/FIX lines from the current project
-alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
-
-# create a Taskpaper todo file in the current folder
-alias tp='touch todo.taskpaper && open -a "Taskpaper" todo.taskpaper'
-
-# Reloads the bashrc file
-alias bashreload="source ~/.bashrc && echo Bash config reloaded"
-
-# Open nano and make backup of original file. Useful for config files and things you don't want to edit the original
-function nanobk() {
-    echo "You are making a copy of $1 before you open it. Press enter to continue."
-    read nul
-    cp $1 $1.bak
-    nano $1
-}
-
-# Clear DNS Cache
-# Still need testing on this one
-alias flushdns="sudo /etc/init.d/dns-clean restart && echo DNS cache flushed"
-
-# Get IPs associated with this site
-# Work to dynamically list all interfaces. Will add later.
-# Currently only uses the hardcoded interface names
-function myip()
-{
-    extIp=$(dig +short myip.opendns.com @resolver1.opendns.com)
-
-    printf "Wireless IP: "
-    MY_IP=$(/sbin/ifconfig wlp4s0 | awk '/inet/ { print $2 } ' |
-      sed -e s/addr://)
-    echo ${MY_IP:-"Not connected"}
-
-    printf "Wired IP: "
-    MY_IP=$(/sbin/ifconfig enp0s25 | awk '/inet/ { print $2 } ' |
-      sed -e s/addr://)
-    echo ${MY_IP:-"Not connected"}
-
-    echo ""
-    echo "WAN IP: $extIp"
-}
-
-# Syntax: "repeat [X] [command]"
-function repeat()
-{
-    local i max
-    max=$1; shift;
-    for ((i=1; i <= max ; i++)); do  # --> C-like syntax
-        eval "$@";
-    done
-}
-
-# Prints disk usage in human readable form
-alias d="du -sh"
-
-# GREP Motifications
-alias grep="grep --color"
-alias grepp="grep -P --color"
-
-# Json tools (pipe unformatted to these to nicely format the JSON)
-alias json="python -m json.tool"
-alias jsonf="python -m json.tool"
-
-# Edit shortcuts for config files
-alias sshconfig="${EDITOR:-nano} ~/.ssh/config"
-alias bashrc="${EDITOR:-nano} +120 ~/.bashrc && source ~/.bashrc && echo Bash config edited and reloaded."
-
-# SSH helper
-alias sshclear="rm ~/.ssh/multiplex/* -f && echo SSH connection cache cleared;"
-alias sshlist="echo Currently open ssh connections && echo && l ~/.ssh/multiplex/"
-
-stty erase ^H        #清除退格 (这个很有必要)
 
 # /etc/profile
 export PATH=$PATH:/opt/perl/site/bin:/opt/perl/bin
@@ -658,7 +280,6 @@ mktemp -t mytemp.XXXXXXX
 trap 'rm -f "$TMPFILE"' EXIT # 遇到EXIT信号时，就会执行rm -f "$TMPFILE"
 
 #!/bin/bash
-
 trap 'rm -f "$TMPFILE"' EXIT
 
 ls /etc > $TMPFILE
@@ -723,7 +344,7 @@ PATH=$PATH:/home/christine/Scripts
 ## 进程管理
 
 * ps(process status):能够给出当前系统中进程的快照,捕获系统在某一事件的进程状态
-* 三种使用的语法格式
+* 语法格式
     - UNIX 风格，选项可以组合在一起，并且选项前必须有“-”连字符
     - BSD 风格，选项可以组合在一起，但是选项前不能有“-”连字符
     - GNU 风格的长选项，选项前有两个“-”连字符
@@ -748,6 +369,10 @@ PATH=$PATH:/home/christine/Scripts
         + Args:运行应用的应用
     - -U 参数按真实用户ID(RUID)筛选进程，它会从用户列表中选择真实用户名或 ID。真实用户即实际创建该进程的用户。
     - -u 参数用来筛选有效用户ID（EUID）
+* sleep命令会在后台(&)睡眠3000秒(50分钟)。当被置入后台，在shell CLI提示符返回 之前，会出现两条信息
+	- 第一条信息是显示在方括号中的后台作业(background job)号(1)
+	- 第二条是后台作业的进程ID(2396)
+* `jobs -l`:将进程列表置入后台模式。既可以在子shell中 进行繁重的处理工作，同时也不会让子shell的I/O受制于终端
 
 ```sh
 ps -aux --sort -pcpu | less
@@ -1071,15 +696,15 @@ else
 end
 
 switch (uname)
-case Linux
-    echo Hi Tux!
-case Darwin
-    echo Hi Hexley!
-case FreeBSD NetBSD DragonFly
-    echo Hi Beastie!
-case '*'
-    echo Hi, stranger!
-end
+	case Linux
+	    echo Hi Tux!
+	case Darwin
+	    echo Hi Hexley!
+	case FreeBSD NetBSD DragonFly
+	    echo Hi Beastie!
+	case '*'
+	    echo Hi, stranger!
+	end
 
 while true
   echo "Loop forever"
@@ -1159,100 +784,53 @@ sudo apt-get install xmobar dmenu
 
 ### Terminal 快捷键
 
-* Shell之所以叫Shell 是因为它隐藏了操作系统底层的细节
 * 终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
 * 默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
 * 快捷键
-  - Tab 点击Tab键可以实现命令补全,目录补全、命令参数补全;
-  - Ctrl+c:强行终止当前程序（常用）;
-  - Ctrl+d:键盘输入结束或退出终端（常用）;
-  - Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行;
-  - Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg;
-  - Ctrl+a:将光标移至输入行头，相当于Home键;
-  - Ctrl+e:将光标移至输入行末，相当于End键;
-  - Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用;
-  - Alt+Backspace:向前删除一个单词，常配合ctrl+e使用;
-  - Shift+PgUp:将终端显示向上滚动;
-  - Shift+PgDn:将终端显示向下滚动;
-  - Ctrl+d:键盘输入结束或退出终端
-  - Ctrl+a 光标移动到开始位置
-  - Ctrl+e 光标移动到最末尾
-  - Ctrl+k 删除此处至末尾的所有内容
-  - Ctrl+u 删除此处至开始的所有内容
-  - Ctrl+d 删除当前字符
-  - Ctrl+h 删除当前字符前一个字符
-  - Ctrl+w 删除此处到左边的单词
-  - Ctrl+y 粘贴由 Ctrl+u ， Ctrl+d ， Ctrl+w 删除的单词
-  - Ctrl+l 相当于clear，即清屏
-  - Ctrl+r 查找历史命令
-  - Ctrl+b 向回移动光标
-  - Ctrl+f 向前移动光标
-  - Ctrl+t 将光标位置的字符和前一个字符进行位置交换
-  - Ctrl+& 恢复 ctrl+h 或者 ctrl+d 或者 ctrl+w 删除的内容
-  - Ctrl+S 暂停屏幕输出
-  - Ctrl+Q 继续屏幕输出
-  - Ctrl+Left-Arrow 光标移动到上一个单词的词首
-  - Ctrl+Right-Arrow 光标移动到下一个单词的词尾
-  - Ctrl+p 向上显示缓存命令
-  - Ctrl+n 向下显示缓存命令
-  - Ctrl+d 关闭终端
-  - Ctrl+xx 在EOL和当前光标位置移动
-  - Ctrl+x@ 显示可能hostname补全
-  - Ctrl+c 终止进程/命令
-  - Shift +上或下 终端上下滚动
-  - Shift+PgUp/PgDn 终端上下翻页滚动
-  - Ctrl+Shift+n 新终端
-  - alt+F2 输入gnome-terminal打开终端
-  - Shift+Ctrl+T 打开新的标签页
-  - Shift+Ctrl+W 关闭标签页
-  - Shift+Ctrl+C 复制
-  - Shift+Ctrl+V 粘贴
-  - Alt+数字 切换至对应的标签页
-  - Shift+Ctrl+N 打开新的终端窗口
-  - Shift+Ctrl+Q 管壁终端窗口
-  - Shift+Ctrl+PgUp/PgDn 左移右移标签页
-  - Ctrl+PgUp/PgDn 切换标签页
-  - F1 打开帮助指南
-  - F10 激活菜单栏
-  - F11 全屏切换
-  - Alt+F 打开 “文件” 菜单（file）
-  - Alt+E 打开 “编辑” 菜单（edit）
-  - Alt+V 打开 “查看” 菜单（view）
-  - Alt+S 打开 “搜索” 菜单（search）
-  - Alt+T 打开 “终端” 菜单（terminal）
-  - Alt+H 打开 “帮助” 菜单（help）
-  - cmmand + d:新开同框分屏
-  - Ctrl+d:键盘输入结束或退出终端
-  - Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行
-  - Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg
-  - Ctrl+a:将光标移至输入行头，相当于Home键
-  - Ctrl+e:将光标移至输入行末，相当于End键
-  - Ctrl + K :删除从光标所在位置到行末,常配合ctrl+a使用
-  - Alt+Backspace:向前删除一个单词，常配合ctrl+e使用
-  - Shift+PgUp:将终端显示向上滚动
-  - Shift+PgDn:将终端显示向下滚动
-  - clear|ctrl+l :清屏
-  - Ctrl + U 删除光标之前的全部内容
-  - Ctrl + Y 撤销之前的删除操作
-  - Ctrl + W 删除之前的一个参数
-
-* Tab:点击Tab键可以实现命令补全,目录补全、命令参数补全
-* Ctrl+c:强行终止当前程序(（)常用)
-* Ctrl+d:键盘输入结束或退出终端(（)常用)
-* Ctrl+s:暂停当前程序，暂停后按下任意键恢复运行
-* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg
-* Ctrl+a:将光标移至输入行头，相当于Home键
-* Ctrl+e:将光标移至输入行末，相当于End键
-* Ctrl+k:删除从光标所在位置到行末,常配合ctrl+a使用
-* Ctrl+u  删除光标之前到剪贴板
-* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用
-* Shift+PgUp:将终端显示向上滚动
-* Shift+PgDn:将终端显示向下滚动
-* Ctrl+y  粘贴
-* Ctrl+l  清屏
-* Ctrl+r  查询命令(多次按)
-* Ctrl+/  撤销
-* Alt–.   使用前一次命令的最后一个词(命令本身也是一个词)
+	- Ctrl+Shift+n 新终端
+	- Shift+Ctrl+t 打开新的标签页
+	- Shift+Ctrl+w|q 关闭标签页
+	- Tab 实现命令补全,目录补全、命令参数补全
+	- Ctrl+c:强行终止当前程序
+	- Ctrl + d ：删除光标处的字符，同Del键。没有命令是表示注销用户
+	- Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg
+	- Ctrl+a:将光标移至输入行头，相当于Home键
+  	+ Ctrl + K :删除从光标所在位置到行末,常配合ctrl+a使用
+	- Ctrl+e:将光标移至输入行末，相当于End键
+  	+ Alt+Backspace:向前删除一个单词，常配合ctrl+e使用
+	- Shift+PgUp:将终端显示向上滚动
+	- Shift+PgDn:将终端显示向下滚动
+	- Ctrl+k 剪切此光标后内容
+	- Ctrl+u 剪切此光标之前内容,输错命令或密码
+	- Ctrl+d 剪切当前字符
+	- Ctrl+h 剪切当前字符前一个字符
+	- Ctrl+w 剪切光标左边的参数（选项）或内容（实际是以空格为单位向前剪切一个word）
+	- Ctrl+y 粘贴由 Ctrl+u ， Ctrl+d ， Ctrl+w 剪切内容
+	- Ctrl+l 相当于clear，即清屏
+	- Ctrl+r 查找历史命令
+	- Ctrl + g ：从历史搜索模式退出，同ESC
+	- Ctrl+b 向回移动光标
+	- Ctrl+f 向前移动光标
+	- Ctrl+t 将光标位置的字符和前一个字符进行位置交换
+	- Ctrl+S 暂停屏幕输出
+	- Ctrl+Q 继续屏幕输出
+	- Ctrl + f ：按字符前移（右向），同→
+	- Ctrl + b ：按字符后移（左向），同←
+	- Alt + d ：从光标处删除至字尾。可以Ctrl+y粘贴回来
+	- Ctrl+Left-Arrow|Alt + b ：按单词后移（左向）
+	- Ctrl+Right-Arrow|Alt + f ：按单词前移，标点等特殊字符与空格一样分隔单词（右向）
+	- Ctrl + p ：历史中的上一条命令，同↑
+	- Ctrl + n ：历史中的下一条命令，同↓
+	- Ctrl+xx 在行头和当前光标位置切换
+	- Shift+Ctrl+C 复制
+	- Shift+Ctrl+V 粘贴
+	- Ctrl+/|Ctrl+x + Ctrl+u  撤销
+	- Alt + .：同!$，输出上一个命令的最后一个参数（选项or单词）
+	- Alt + \ ：删除当前光标前面所有的空白字符
+	- Ctrl + ]　c ：从当前光标处向右定位到字符 c 处
+	- Esc　Ctrl + ]　c ：从当前光标向左定位到字符 c 处。（ bind -P 可以看到绑定信息）
+	- Ctrl + r　str ：可以搜索历史，也可以当前光标处向左定位到字符串 str，Esc后可定位继续编辑
+	- Ctrl -s　str ：从当前光标处向右定位到字符串 str 处，Esc 退出
 
 ```sh
 dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on command-line
@@ -1260,7 +838,8 @@ dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on com
 
 ### 脚本
 
-shell 是可以与计算机进行高效交互的文本接口。shell 提供了一套交互式的编程语言(（)脚本)，shell的种类很多，比如 sh、bash、zsh 等。shell 的生命力很强，在各种高级编程语言大行其道的今天，很多的任务依然离不开 shell。比如可以使用 shell 来执行一些编译任务，或者做一些批处理任务，初始化数据、打包程序等等。
+* shell 是可以与计算机进行高效交互的文本接口,提供了一套交互式的编程语言
+* shell 的生命力很强，在各种高级编程语言大行其道的今天，很多的任务依然离不开 shell。比如可以使用 shell 来执行一些编译任务，或者做一些批处理任务，初始化数据、打包程序等等。
 
 ```sh
 touch zsh-script.sh
@@ -1564,7 +1143,7 @@ j + 目录名
 
 ## [tmux]()
 
-* 命令行的典型使用方式是，打开一个终端窗口（terminal window，以下简称"窗口"），在里面输入命令。用户与计算机的这种临时的交互，称为一次"会话"（session）
+* 命令行的典型使用方式:打开一个终端窗口（terminal window，以下简称"窗口"），在里面输入命令。用户与计算机的这种临时的交互，称为一次"会话"（session）
     - 窗口与其中启动的进程是连在一起的。打开窗口，会话开始；关闭窗口，会话结束
     - 会话与窗口可以"解绑"：窗口关闭时，会话并不终止，而是继续运行，等到以后需要的时候，再让会话"绑定"其他窗口
 * 终端复用器（terminal multiplexer）在需要经常登录远程服务器工作的时候会很有用，可以保持远程登录的会话，还可以在一个窗口中查看多个 shell 的状态 替代screen、nohup
@@ -1618,8 +1197,6 @@ sudo yum install tmux
 brew install tmux
 
 tmux # into 底部有一个状态栏。状态栏的左侧是窗口信息（编号和名称），右侧是系统信息
-
-
 ```
 
 ## 问题
@@ -1645,8 +1222,6 @@ henry ALL=(ALL) NOPASSWD:ALL
 * [Idnan / bash-guide](https://github.com/Idnan/bash-guide):A guide to learn bash
 
 ```sh
-cat demo.json | jq '.id,.name,.status,.attachments'
-
 axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso
 ccache gcc foo.c
 ```
@@ -1682,7 +1257,9 @@ ccache gcc foo.c
         + ConEmu
         + [PowerShell](https://github.com/PowerShell/PowerShell):PowerShell for every system! https://microsoft.com/PowerShell
         + [Babun](http://babun.github.io/)
-        + [Terminal](https://github.com/microsoft/terminal):The new Windows Terminal, and the original Windows console host -- all in the same place!
+        + [microsoft/terminal](https://github.com/microsoft/terminal):The new Windows Terminal, and the original Windows console host -- all in the same place!
+        + [Hyper](https://hyper.is):create a beautiful and extensible experience for command-line interface users, built on open web standards
+    - mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连
     - [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
     - [msys2](http://www.msys2.org/)
     - powercmd
@@ -1694,7 +1271,7 @@ ccache gcc foo.c
     - [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/
     - [jaywcjlove / linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
 * 查看
-    - [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings.
+    - [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings
 * [lynx](link):终端构建的Web浏览应用程序
 * [fasd](https://github.com/clvv/fasd) 增强cd命令
 * [ogham/exa](https://github.com/ogham/exa):A modern version of ‘ls’. https://the.exa.website/
@@ -1736,7 +1313,7 @@ ccache gcc foo.c
     - [IPTState](http://www.phildev.net/iptstate/index.shtml) 可以让你观察流量是如何通过 iptables，并通过你指定的条件来进行排序。该工具还允许你从 iptables 的表中删除状态信息。
     - [darkstat](https://unix4lyfe.org/darkstat/) 能捕获网络流量并计算使用情况的统计数据。该报告保存在一个简单的 HTTP 服务器中，它为你提供了一个非常棒的图形用户界面。
     - [vnStat]( http://humdi.net/vnstat/) 是一个网络流量监控工具，它的数据统计是由内核进行提供的，其消耗的系统资源非常少。系统重新启动后，它收集的数据仍然存在。有艺术感的系统管理员可以使用它的颜色选项。
-    - netstat 是一个内置的工具，显示 TCP 网络连接，路由表和网络接口数量，被用来在网络中查找问题。
+    - netstat 是一个内置的工具，显示 TCP 网络连接，路由表和网络接口数量，被用来在网络中查找问题
     - ss:iproute2 包附带的另一个工具，允许查询 socket 的有关统计信息,显示的信息比 netstat 更多，也更快。如果想查看统计结果的总信息，你可以使用命令 ss -s
     - [Nmap](http://nmap.org/) 可以扫描你服务器开放的端口并且可以检测正在使用哪个操作系统。但你也可以将其用于 SQL 注入漏洞、网络发现和渗透测试相关的其他用途。
     - [MTR](http://www.bitwizard.nl/mtr/) 将 traceroute 和 ping 的功能结合到了一个网络诊断工具上。当使用该工具时，它会限制单个数据包的跳数，然后监视它们的到期时到达的位置。然后每秒进行重复。
@@ -1747,9 +1324,6 @@ ccache gcc foo.c
     - [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
     - [magicmonty/bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):An informative and fancy bash prompt for Git users
     - tig：字符模式下交互查看git项目，可以替代git命令
-* download
-    - you-get: 非常强大的媒体下载工具，支持youtube、google+、优酷、芒果TV、腾讯视频、秒拍等视频下载。
-    - axel：多线程下载工具，下载文件时可以替代curl、wget
 * prompt
     - [b-ryan/powerline-shell](https://github.com/b-ryan/powerline-shell):A beautiful and useful prompt for your shell
         + pre-patched and adjusted fonts for usage with the Powerline statusline plugin `sudo apt-get install fonts-powerline`
@@ -1784,16 +1358,12 @@ ccache gcc foo.c
 * [amanusk/s-tui](https://github.com/amanusk/s-tui):Terminal based CPU stress and monitoring utility https://amanusk.github.io/s-tui/
 * [GitSquared/edex-ui](https://github.com/GitSquared/edex-ui):A science fiction terminal emulator designed for large touchscreens that runs on all major OSs.
 * [rupa/z](https://github.com/rupa/z):z - jump around
-* [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
 * [jwilm/alacritty](https://github.com/jwilm/alacritty):A cross-platform, GPU-accelerated terminal emulator
 * [koalaman / shellcheck](https://github.com/koalaman/shellcheck)：ShellCheck, a static analysis tool for shell scripts https://www.shellcheck.net
-* yapf：Google开发的python代码格式规范化工具，支持pep8以及Google代码风格。
-* mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连。
+* yapf：Google开发的python代码格式规范化工具，支持pep8以及Google代码风格
 * PathPicker(fpp):在命令行输出中自动识别目录和文件，支持交互式，配合git非常有用
-* sz/rz：交互式文件传输，在多重跳板机下传输文件非常好用，不用一级一级传输。
-* ccache：高速C/C++编译缓存工具，反复编译内核非常有用。使用起来也非常方便
+* sz/rz：交互式文件传输，在多重跳板机下传输文件非常好用，不用一级一级传输
 * script/scriptreplay: 终端会话录制
-* [Hyper](https://hyper.is):create a beautiful and extensible experience for command-line interface users, built on open web standards
 * 配置
     - [direnv/direnv](https://github.com/direnv/direnv):Unclutter your .profile http://direnv.net
 
@@ -1801,7 +1371,6 @@ ccache gcc foo.c
 
 * [dylanaraps/pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):📖 A collection of pure bash alternatives to external processes.
 * [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)：A curated list of awesome command-line frameworks, toolkits, guides and gizmos. Inspired by awesome-php.
-* [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
 * [fengyuhetao/shell](https://github.com/fengyuhetao/shell):Linux命令行与shell脚本编程大全案例
 * [Bash Guide for Beginners](https://www.tldp.org/LDP/Bash-Beginners-Guide/html/)
 * [Bash Reference Manual](https://tiswww.case.edu/php/chet/bash/bashref.html)
@@ -1810,6 +1379,7 @@ ccache gcc foo.c
 * [An A-Z Index of the Bash command line for Linux.](https://ss64.com/bash/)
 * [Google’s Shell Style Guide](https://google.github.io/styleguide/shell.xml)
 * [jlevy/the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
+
 * [teddysun / across](https://github.com/teddysun/across)
 * 脚本参考
     - http://www.bashoneliners.com/
@@ -1824,3 +1394,5 @@ ccache gcc foo.c
     - 和shell有关的索引资源
         + https://github.com/awesome-lists/awesome-bash
         + https://terminalsare.sexy/
+
+* [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
