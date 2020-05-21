@@ -1,5 +1,13 @@
 # Ops
 
+* Configuration Management:统一使用 Kubernetes 提供的 configmap 和 secret 资源对象来实现，对于一般的应用配置使用 configmap 管理，对于敏感数据使用 secret 存储
+* Release Management:用 Helm 工具统一以 Chart 的方式打包并发布应用，维护每个微服务的历史版本，可以按需回滚。应用的镜像版本统一存储到一个 Docker 私服
+* Continuous Integration:一套完全开源的工具链：Gitlab + Maven + Jenkins + TestNg + SonarQuebe + Allure
+* Continuous Deployment
+* Infrastructure as Code:所有软件基础设施的管理维护都以代码的方式管理起来，对于基础设施资源的创建、销毁、变更，不再是人工通过界面化点触式管理，所有这些更改都基于代码的提交变更和一套自动化框架
+* Test Automation:有三种类型的测试：单元测试、后端接口测试、UI 自动化测试。所有的这些测试都集成在 Jenkins pipeline 中。后端接口测试和 UI 测试除了在自动化 Pipeline 中运行，还会每天定时跑测试，最终的测试报告统一收集到 Reportportal 报表平台
+* Application Performance Monitoring:Prometheus 监控栈
+
 ## 概念
 
 * 全链路：用于端到端的调用访问范畴，一般是往网关到下游若干服务的链路拓扑结构。例如，网关 -> A服务 -> B服务 ->……的调用和访问

@@ -1,18 +1,23 @@
 # [jupyter/jupyter](https://github.com/jupyter/jupyter)
 
-Jupyter metapackage for installation, docs and chat https://jupyter.readthedocs.io/ http://jupyter.org/
+* Jupyter metapackage for installation, docs and chat https://jupyter.readthedocs.io/ http://jupyter.org/
+* 以网页的形式打开，可以在网页页面中直接编写代码和运行代码，代码的运行结果也会直接在代码块下显示。如在编程过程中需要编写说明文档，可在同一个页面中直接编写，便于作及时的说明和解释
 
-以网页的形式打开，可以在网页页面中直接编写代码和运行代码，代码的运行结果也会直接在代码块下显示。如在编程过程中需要编写说明文档，可在同一个页面中直接编写，便于作及时的说明和解释
+## [jupyter/notebook](https://github.com/jupyter/notebook)
 
-## notebook
-
-* 保存为后缀名为.ipynb的JSON格式文件，不仅便于版本控制，也方便与他人共享。
+* Jupyter Interactive Notebook https://jupyter-notebook.readthedocs.io/
+* 保存为后缀名为.ipynb的JSON格式文件，便于版本控制，方便与他人共享
 * 可以导出为：HTML、LaTeX、PDF等格式
 * 编程时具有语法高亮、缩进、tab补全的功能。
-* 可直接通过浏览器运行代码，同时在代码块下方展示运行结果。
-* 以富媒体格式展示计算结果。富媒体格式包括：HTML，LaTeX，PNG，SVG等。
+* 可直接通过浏览器运行代码，同时在代码块下方展示运行结果
+* 以富媒体格式展示计算结果。富媒体格式包括：HTML，LaTeX，PNG，SVG等
 * 对代码编写说明文档或语句时，支持Markdown语法。
 * 支持使用LaTeX编写数学性说明
+* Notebook 文档是由一系列单元（Cell）构成，主要有两种形式的单元：
+    - code：这里是你编写代码的地方，通过按 Shift + Enter 运行代码，其结果显示在本单元下方。代码单元左边有 In [1]: 这样的序列标记，方便人们查看代码的执行次序。
+    - Markdown 单元：在这里对文本进行编辑，采用 markdown 的语法规范，可以设置文本格式、插入链接、图片甚至数学公式。同样使用 Shift + Enter 运行 markdown 单元来显示格式化的文本。
+        * 编辑数学公式：LaTeX `$$ z = \frac{x}{y} $$`
+        * 幻灯片
 
 ## Install
 
@@ -142,15 +147,6 @@ jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
 ## 幻灯片
 
-## content
-
-Notebook 文档是由一系列单元（Cell）构成，主要有两种形式的单元：
-
-* code：这里是你编写代码的地方，通过按 Shift + Enter 运行代码，其结果显示在本单元下方。代码单元左边有 In [1]: 这样的序列标记，方便人们查看代码的执行次序。
-* Markdown 单元：在这里对文本进行编辑，采用 markdown 的语法规范，可以设置文本格式、插入链接、图片甚至数学公式。同样使用 Shift + Enter 运行 markdown 单元来显示格式化的文本。
-    + 编辑数学公式：LaTeX `$$ z = \frac{x}{y} $$`
-    + 幻灯片
-
 ## plot
 
 * tool
@@ -273,8 +269,6 @@ $$\int_0^{+\infty} x^2 dx$$ # 公式
 RISE: "Live" Reveal.js Jupyter/IPython Slideshow Extension
 
 ```
-# install
-
 conda install -c damianavila82 rise
 pip install RISE  # install
 
@@ -304,6 +298,17 @@ jupyter-nbextension enable rise --py --sys-prefix
 conda install -c conda-forge jupyterlab
 ```
 
+## Debugger
+
+* Xeus 是 Jupyter kernel protocol 的 C++实现，它本身并不是一个内核，而是能帮助构建内核的库。当开发者希望构建 Python、Lua 等拥有 C、C++ API 的语言内核时，它非常有用
+    - 具有可插拔的并发模型，它允许在不同的线程中运行 Control channel 的处理过程
+    - 有非常轻量级的代码库，因此迭代与更新都非常方便
+
+```sh
+jupyter labextension install @jupyterlab/debugger
+conda install xeus-python -c conda-forge #  kernel 需要实现 Jupyter Debug Protocol，因此暂时只能用xeus-python
+```
+
 ## 参考
 
 * [markusschanta/awesome-jupyter](https://github.com/markusschanta/awesome-jupyter):A curated list of awesome Jupyter projects, libraries and resources
@@ -311,5 +316,4 @@ conda install -c conda-forge jupyterlab
 
 ## 工具
 
-* [jupyter/notebook](https://github.com/jupyter/notebook):Jupyter Interactive Notebook https://jupyter-notebook.readthedocs.io/
 * [Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb)

@@ -19,6 +19,7 @@
 * GFS系统架构
 * MapReduce系统架构
 * BigTable系统架构
+* [USENIX](：https://www.usenix.org/conference/nsdi18/presentation/dalton)
 
 ## 工具
 
