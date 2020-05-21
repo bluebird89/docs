@@ -13,8 +13,7 @@
 ## 版本
 
 * JRE(Java Runtime Environment) 就是运行Java字节码的虚拟机JVM
-* 要编译成Java字节码，就需要JDK(Java Development Kit)，因为JDK除了包含JRE，还提供了编译器、调试器等开发工具。
-
+* 要编译成Java字节码，就需要JDK(Java Development Kit)，因为JDK除了包含JRE，还提供了编译器、调试器等开发工具
 * Java EE：Enterprise Edition 在Java SE的基础上加上了大量的API和库，以便方便开发Web应用、数据库、消息服务等 从2018年2月26日开始，J2EE改名为Jakarta EE
 * Java SE：Standard Edition 包含标准的JVM和标准库
   - Open JDK:免费的开源实现,GPL License发布，很多Linux发行版中都会包含这个Open JDK
@@ -896,12 +895,44 @@ public class Puppy{
 * LinkedList 底层就是链表
 * HashMap 底层就是散列表
 
-## 异常
+## 异常 Exceptio
 
-通过 throws 声明函数抛出异常，通过 try-catch-finally 语句来捕获异常
+* 位于 java.lang 包下，它是一种顶级接口，继承于 Throwable 类，Exception 类及其子类都是 Throwable 的组成条件，是程序出现的合理情况
+* Throwable 类是 Java 语言中所有错误(errors)和异常(exceptions)的父类。只有继承于 Throwable 的类或者其子类才能够被抛出，还有一种方式是带有 Java 中的 @throw 注解的类也可以抛出
+* 通过 throws 声明函数抛出异常，通过 try-catch-finally 语句来捕获异常
+* RuntimeException
+  - ArrayIndexOutOfBoundsException  数组越界异常
+  - NullPointerException  空指针异常
+  - IllegalArgumentException  非法参数异常
+  - NegativeArraySizeException  数组长度为负异常
+  - IllegalStateException 非法状态异常
+  - ClassCastException  类型转换异常
+* UncheckedException
+  - NoSuchFieldException  表示该类没有指定名称抛出来的异常
+  - NoSuchMethodException 表示该类没有指定方法抛出来的异常
+  - IllegalAccessException  不允许访问某个类的异常
+  - ClassNotFoundException  类没有找到抛出异常
+* Error 是程序无法处理的错误，表示运行应用程序中较严重问题。大多数错误与代码编写者执行的操作无关，而表示代码运行时 JVM（Java 虚拟机）出现的问题
+* 规范
+  - 在Finally块中清理资源或者使用try-with-resource语句
+  - 尽可能的使用最具体的异常来声明方法，这样才能使得代码更容易理解
+  - 在Javadoc中加入throws声明，并且描述抛出异常的场景
+  - 抛出异常的时候包含描述信息
+  - 首先捕获最具体的异常
+  - 不要捕获Throwable:Throwable是所有异常和错误的父类,如果catch了throwable，那么不仅仅会捕获所有exception，还会捕获error
+  - 不要忽略异常:写了一个catch块，少要记录异常的信息
+  - 不要记录并抛出异常：仅仅当想要处理异常时才去捕获，否则只需要在方法签名中声明让调用者去处理
+  - 包装异常时不要抛弃原始的异常：一定要把原始的异常设置为cause(Exception有构造方法可以传入cause)
+  - 不要捕获类似 Exception 之类的异常，而应该捕获类似特定的异常，比如 InterruptedException，方便排查问题，而且也能够让其他人接手你的代码时，会减少骂你的次数
+  - 不要在函数式编程中使用 checkedException
+* NoClassDefFoundError 和 ClassNotFoundException 区别
+  - 类的加载过程中， JVM 或者 ClassLoader 无法找到对应的类时，都可能会引起这两种异常/错误，由于不同的 ClassLoader 会从不同的地方加载类，有时是错误的 CLASSPATH 类路径导致的这类错误，有时是某个库的 jar 包缺失引发这类错误
+  - NoClassDefFoundError 表示这个类在编译时期存在，但是在运行时却找不到此类，有时静态初始化块也会导致 NoClassDefFoundError 错误
+  - ClassNotFoundException 和 NoClassDefFoundError 都是由 CLASSPATH 中缺少类引起的，通常是由于缺少 JAR 文件而引起的，但是如果 JVM 认为应用运行时找不到相应的引用，就会抛出 NoClassDefFoundError 错误；当你在代码中显示的加载类比如 Class.forName() 调用时却没有找到相应的类，就会抛出 java.lang.ClassNotFoundException
+    + NoClassDefFoundError 是 JVM 引起的错误，是 unchecked，未经检查的。因此不会使用 try-catch 或者 finally 语句块；另外，ClassNotFoundException 是受检异常，因此需要 try-catch 语句块或者 try-finally 语句块包围，否则会导致编译错误
+    + 用 Class.forName()、ClassLoader.findClass() 和 ClassLoader.loadClass() 等方法时可能会引起 java.lang.ClassNotFoundException
 
 ```java
-
 public class UserNotFoundException extends Exception { // 自定义一个异常
   public UserNotFoundException() {
     super();
@@ -949,19 +980,27 @@ public class UserController {
     return user;
   }
 }
+
+static void cacheException() throws Exception{
+  for (int i = 0; i < 5; i++) {
+    System.out.println("enter: i=" + i);
+    try {
+      System.out.println("execute: i=" + i);
+      continue;
+    } finally {
+      System.out.println("leave: i=" + i);
+    }
+  }
+}
 ```
 
-## Exception
+## 类加载
 
-* 在Finally块中清理资源或者使用try-with-resource语句
-* 尽可能的使用最具体的异常来声明方法，这样才能使得代码更容易理解
-* 在Javadoc中加入throws声明，并且描述抛出异常的场景
-* 抛出异常的时候包含描述信息
-* 首先捕获最具体的异常
-* 不要捕获Throwable:Throwable是所有异常和错误的父类,如果catch了throwable，那么不仅仅会捕获所有exception，还会捕获error
-* 不要忽略异常:写了一个catch块，少要记录异常的信息
-* 不要记录并抛出异常：仅仅当想要处理异常时才去捕获，否则只需要在方法签名中声明让调用者去处理
-* 包装异常时不要抛弃原始的异常：一定要把原始的异常设置为cause(Exception有构造方法可以传入cause)
+* ClassLoader 是类路径装载器，在Java 中，类路径装载器一共有三种两类一种是虚拟机自带的 ClassLoader，分为三种
+  - 启动类加载器(Bootstrap) ，负责加载 $JAVAHOME/jre/lib/rt.jar
+  - 扩展类加载器(Extension)，负责加载 $JAVAHOME/jre/lib/ext/*.jar
+  - 应用程序类加载器(AppClassLoader)，加载当前应用的 classpath 的所有类
+* 用户自定义类加载器：Java.lang.ClassLoader 的子类，用户可以定制类的加载方式
 
 ## 并发编程
 
