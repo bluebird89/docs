@@ -1,5 +1,6 @@
-# [Junit](https://junit.org)
+# [Junit](https://github.com/junit-team/junit5)
 
+* The next generation of JUnit. https://junit.org
 * 测试方法使用@Test修饰
 * 使用public void修饰，不带任何参数
 * 新建源代码目录存放测试代码
@@ -14,7 +15,7 @@ Error:代码异常引起
 
 ## 版本
 
-JUnit5=Platform+Jupiter+Vintage
+* JUnit5=Platform+Jupiter+Vintage
 
 ## 工具
 

@@ -8,17 +8,24 @@ Adaptable, fast automation for all https://gradle.org
 java -version
 
 brew install gradle
-export PATH=$PATH:/opt/gradle/gradle-4.4/bin
-
 scoop install gradle # Scoop is a command-line installer for Windows inspired by Homebrew.
 choco install gradle # Chocolatey is “the package manager for Windows”.
+
+# mkdir /opt/gradle
+unzip -d /opt/gradle gradle-6.4.1-bin.zip
+ls /opt/gradle/gradle-6.4.1
+
+export GRADLE_HOME=/opt/gradle/gradle-6.4.1
+export PATH=$PATH:${GRADLE_HOME}/bin
 
 gradle -v
 ```
 
 ## 配置
 
-```sh
+* IDEA: gradle home
+
+```
 # 项目配置 build.gradle
 repositories {
     maven {
