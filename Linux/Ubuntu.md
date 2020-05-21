@@ -102,8 +102,9 @@ HWADDR="00:0C:29:EB:F2:B3"
 IPV6_PEERDNS="yes"
 IPV6_PEERROUTES="yes"
 
-service network restart   #重启网络
-ping www.baidu.com  #测试网络是否正常
+sudo service network restart   #重启网络
+sudo /etc/init.d/networking restart
+ping www.baidu.com  #测试网络
 
 ip addr # 查看IP地址
 
@@ -115,7 +116,6 @@ www   localhost.localdomain  #修改localhost.localdomain为www
 sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
 
 host xx.xxx.com： # 显示某域名相关托管服务器/邮件服务器
-ping 8.8.8.8检测连接
 
 # host  文件修改 以Ubuntu为主要使用系统，不用修改hosts can access google
 sudo su # switch root
@@ -127,9 +127,11 @@ sudo dpkg-reconfigure tzdata
 # /etc/apt/apt.conf.d/00aptitude append this line of code to the end
 Acquire::Languages "none";
 
+sudo apt install resolvconf
 # DNS /etc/resolv.conf
 nameserver 223.5.5.5
 nameserver 223.6.6.6
+resolvconf -u
 
 sudo update-alternatives --config editor # 修改默认编辑器
 

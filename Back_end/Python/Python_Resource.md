@@ -867,14 +867,14 @@ Python实现的数据库。
 * 代码分析
   - coala：语言独立和易于扩展的代码分析应用程序。[官网](http://coala-analyzer.org/)
   - code2flow：把你的 Python 和 JavaScript 代码转换为流程图。[官网](https://github.com/scottrogowski/code2flow)
-  - pycallgraph：这个库可以把你的Python 应用的流程(调用图)进行可视化。[官网](https://github.com/gak/pycallgraph)
+  - [pycallgraph](https://github.com/gak/pycallgraph)：这个库可以把你的Python 应用的流程(调用图)进行可视化
   - pysonar2：Python 类型推断和检索工具。[官网](https://github.com/yinwang0/pysonar2)
 * Lint工具
   - Flake8：模块化源码检查工具: pep8, pyflakes 以及 co。[官网](https://pypi.python.org/pypi/flake8)
-  - Pylint：一个完全可定制的源码分析器。[官网](https://www.pylint.org/)
+  - [Pylint](https://www.pylint.org/)：一个完全可定制的源码分析器 `sudo apt-get install pylint`
   - pylama：Python 和 JavaScript 的代码审查工具。[官网](https://pylama.readthedocs.org/en/latest/)
 * 代码格式化
-  - autopep8：自动格式化 Python 代码，以使其符合 PEP8 规范。[官网](https://github.com/hhatto/autopep8)
+  - [autopep8](https://github.com/hhatto/autopep8)：自动格式化 Python 代码，以使其符合 PEP8 规范。
   - [psf / black](https://github.com/psf/black):The uncompromising Python code formatter https://black.readthedocs.io/en/stable/
 * 代码质量
   - Codacy：自动化代码审查，更加快速的发布高质量代码。对于开源项目是免费的。[官网](https://www.codacy.com/)
