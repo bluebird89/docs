@@ -1046,6 +1046,7 @@ The user-friendly command line shell. http://fishshell.com
 * 光标会给提示:→(选中) 只采纳一部分，可以按下(Alt + →)
 * 补全存在的历史记录或猜测可能性(tab选择)
 * [fisherman/fisherman](https://github.com/fisherman/fisherman):The fish-shell plugin manager.
+* https://wiki.archlinux.org/index.php/Fish
 
 ```sh
 # 安装

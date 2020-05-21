@@ -286,7 +286,8 @@ sudo apt install -y apt-fast`
     + Vocal:听播客
     + Shotcut 是一个 Meltytech, LLC 在 MLT 多媒体框架下开发的自由开源的跨平台视频编辑应用。你会发现它是 Linux 发行版上最强大的视频编辑器之一，它支持所有主要的音频、视频、图片格式
     + [Sayonara Player](https://sayonara-player.com/index.php)
-  - 阅读
+    + Blender
+  - 阅读写作
     + KchmViewer:阅读CHM
     + xchm:`sudo apt-get install xchm`
     + Foxit Reader
@@ -325,6 +326,9 @@ sudo apt install -y apt-fast`
     + indicator-stickynotes
     + Xpad:`sudo apt-get install xpad`
     + liferea:一个自由开源的新闻聚合工具，用于在线新闻订阅
+  - 系统工具
+    + Redshift
+    + flux
 * 下载
   - `sudo apt-get install ktorrent`
   - `sudo apt-get install amule`
@@ -430,6 +434,9 @@ snap refresh --time
 sudo snap set system refresh.timer=22:00-23:59
 
 sudo apt install texlive-latex-extra
+
+# 系统监视插件
+sudo apt install indicator-multiload
 ```
 
 ```
@@ -612,8 +619,10 @@ Now change “errors=remount-ro” to “noatime,errors=remount-ro”.
 echo -e "#\x21/bin/sh\\nfstrim -v /" | sudo tee /etc/cron.daily/trim
 sudo chmod +x /etc/cron.daily/trim
 
-sudo apt install fonts-firacode virtualbox mysql-workbench-community preload compizconfig-settings-manager
+sudo apt install fonts-firacode virtualbox mysql-workbench-community preload
 
+sudo apt-get install compizconfig-settings-manager
+sudo apt-get install compiz-plugins
 # [sougou pinyin](https://pinyin.sogou.com/linux/?r=pinyin)
 sudo apt-get remove ibus
 sudo apt-get purge ibus
@@ -767,6 +776,20 @@ sudo apt-get install unity-tweak-tool
 
 sudo apt install materia-gtk-theme
 sudo apt install papirus-icon-theme #  Applications: Materia-light  Icons: Papirus
+
+# ultra-flat-icons
+sudo add-apt-repository ppa:noobslab/icons
+sudo apt-get update
+sudo apt-get install ultra-flat-icons
+
+
+sudo add-apt-repository ppa:noobslab/themes
+sudo apt-get update
+sudo apt-get install arc-theme
+
+sudo add-apt-repository ppa:noobslab/icons
+sudo apt-get update
+sudo apt-get install arc-icons
 
 sudo apt install net-tools iputils-ping # ifconfig 必备
 
