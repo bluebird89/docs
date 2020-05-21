@@ -51,7 +51,7 @@
     + [utorrent](https://www.utorrent.com/intl/zh_cn/)
     + [Transmission](https://transmissionbt.com/):  a cross-platform BitTorrent client
     + IDM
-    * axel:打开了多路http连接，可下载独立文件片段，因而文件下载起来更快速 `sudo apt install axel`
+    * axel:多线程下载工具，可下载独立文件片段，因而文件下载起来更快速 `sudo apt install axel`
     - [aria2](https://aria2.github.io/) a lightweight multi-protocol & multi-source command-line download utility It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink. aria2 can be manipulated via built-in JSON-RPC and XML-RPC interfaces.
       +  `sudo apt install aria2`
         - `~/.aria2/aria2.conf`
