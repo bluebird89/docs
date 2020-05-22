@@ -551,6 +551,7 @@ int main() {
   - 如何释放： `lsof |grep deleted` 被标记为deleted的文件
 * 工具
   - gparted
+  - pydf:Colourised Filesystem Disk Space Usage
 
 ```sh
 inxi -Fxz # 能够列出包括 CPU、图形、音频、网络、驱动、分区、传感器等详细信息 -F 参数意味着你将得到完整的输出，x 增加细节信息，z 参数隐藏像 MAC 和 IP 等私人身份信息
@@ -921,6 +922,30 @@ mount -t iso9660 -o loop /usr/local/src/rhel-server-7.0-x86_64-dvd.iso  /media/c
 cd  /media/cdrom  #进入挂载目录，使用ls命令可以看到已经有文件存在
 
 umount  /media/cdrom  # 卸载系统镜像 退出挂载目录，才能卸载
+```
+
+## Network File System (NFS)
+
+* 访问限制
+	- 单个客户端： `/mnt/linuxidc clientIP(rw,sync,no_subtree_check)`
+	- 多个客户端： `/mnt/linuxidc client1IP(rw,sync,no_subtree_check)`
+	- 多个客户端，通过指定客户端所属的整个子网： `/mnt/linuxidc 192.168.182.0/24(rw,sync,no_subtree_check)`
+
+```sh
+sudo apt-get install -y nfs-kernel-server
+
+cd ~
+mkdir nfs
+# vi /etc/exports 添加
+/home/erick/nfs *(rw,sync,no_root_squash,no_subtree_check)
+
+sudo /etc/init.d/rpcbind restart
+sudo /etc/init.d/nfs-kernel-server restart
+
+sudo apt-get install -y nfs-common
+showmount -e 172.16.36.25
+sudo mount -t nfs 172.16.36.25:/home/erick/nfs /mnt
+sudo umount /mnt
 ```
 
 ## 信号量
