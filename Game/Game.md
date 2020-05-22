@@ -104,7 +104,6 @@
 
 ### 手游
 
-*   [ ] 堡垒之夜
 *   [ ] ring
 *   [ ] 纪念碑谷
 *   [ ] Alliance: Air War by Art of the State LLC
@@ -116,6 +115,11 @@
 *   [ ] Counter-Strike: Global Offensive
 *   [ ] Frostpunk
 *   [ ] 双点医生
+
+## [Epic](https://www.epicgames.com/store/zh-CN/)
+
+* 免费领取：对IP有限制
+* 堡垒之夜 Fortnite
 
 ## 游戏
 

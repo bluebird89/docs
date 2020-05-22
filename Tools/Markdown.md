@@ -218,7 +218,7 @@ __This will also be bold__
 * ![GitHub set up](https://help.github.com/assets/images/site/set-up-git.gif)
 * ![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
 * ![tully](../_static/tully.jpg)
-* 插入图片![有道云笔记logo](http://note.youdao.com/favicon.ico)  
+* 插入图片![有道云笔记logo](http://note.youdao.com/favicon.ico)
 * ![爱情](http://i.imgur.com/zjwDS9u.jpg)
 
 ## 链接 Links
@@ -236,12 +236,12 @@ autolink  <http://www.github.com/>
 
 **Result:**
 
-* Email 连接： <example@example.com>  
-* 自动生成连接像： <http://www.github.com/>  
-* An email <example@example.com> link.  
-* Automatic linking for URLs  
-* Any URL (like <http://www.github.com/>) will be automatically converted into a clickable link.  
-* [连接标题Github网站](http://github.com)  
+* Email 连接： <example@example.com>
+* 自动生成连接像： <http://www.github.com/>
+* An email <example@example.com> link.
+* Automatic linking for URLs
+* Any URL (like <http://www.github.com/>) will be automatically converted into a clickable link.
+* [连接标题Github网站](http://github.com)
 * [another one with a title](http://lmgtfy.com/ "Hello, world")
 * 插入超链接 [直播吧](http://www.zhibo8.com)
 * [本地链接](../Tools/Document/Document.md#使用)
@@ -654,6 +654,9 @@ Actions->Insert Read More Comment *或者* `Command + .`
 ## 编辑器
 
 * [typora](https://www.typora.io/)
+	- `sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE` `wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -`
+	- `sudo add-apt-repository 'deb https://typora.io/linux ./'`
+	- `sudo apt-get install typora`
 * [marktext/marktext](https://github.com/marktext/marktext):📝A simple and elegant markdown editor, available for Linux, macOS and Windows. https://marktext.app
 * [Haroopad](http://pad.haroopress.com/user.html):a markdown enabled document processor for creating web-friendly documents
 * [notable/notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. https://notable.md
