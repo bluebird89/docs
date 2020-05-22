@@ -1027,6 +1027,7 @@
 
 * [javiereguiluz/easybook](https://github.com/javiereguiluz/easybook):Book publishing as easy as it should be (built with Symfony components) https://easycorp.io/EasyBook
 * 支付宝-》浙江图书馆-〉阅读证（无押金，无外借功能……）->(http://www.zjlib.cn)->数据库文献
+* Klib 高级版:支持Kindle、Apple Books、多看标注都可以轻松管理
 
 ## 参考
 
