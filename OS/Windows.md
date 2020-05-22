@@ -8,7 +8,7 @@ Windows是最烂的开发平台
   - [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation https://chocolatey.org/
     + 程序安装位置：`~\AppData\Local\Packages\`
   - [Scoop](https://scoop.sh)
-    + 在用户根目录（一般`是 C:\Users\用户名）下创建了一个名为 scoop 的文件夹，并默认将软件下载安装到这个文件夹下
+    + 在用户根目录（C:\Users\用户名）下创建了一个名为 scoop 的文件夹，并默认将软件下载安装到这个文件夹下
     + 软件安装到一个相对隔离的环境下（Each program you install is isolated and independent），从而保证环境的统一和路径不被污染
 * 快速启动
   - launchy
@@ -18,6 +18,7 @@ Windows是最烂的开发平台
   - Clover
   - Total Commander
   - [Explorer++](https://explorerplusplus.com/): a lightweight and fast file manager for Windows
+  - Tabbles:灵活、精准的标签工具
 * 快捷键：AutoHotKey
 * 本地搜索
   - [Listary](https://www.listary.com/) :Windows 文件浏览增强工具 极速的文件和APP搜索工具，可大幅度提高打开文件和app的速度
@@ -27,8 +28,6 @@ Windows是最烂的开发平台
 * 工具：ShareX
 * 同步工具：goodsync
 * 词典：GoldenDict
-* 虚拟机
-    - VirtualBox
 * VistaSwitcher：程序切换工具
 * StrokeIt:让鼠标手势无处不在
 * f.lux 随时间改变屏幕色温
@@ -36,7 +35,7 @@ Windows是最烂的开发平台
 * 字体渲染增强：MacType
 * 任务栏透明化：TranslucentTB
 * RSS:深蓝阅读 theoldreader
-* Sumatra PDF PDF阅读
+* Sumatra PDF
 * Foxit Reader
 * editor：Visual Studio Code
 * 电子书管理神器：Calibre
@@ -46,10 +45,6 @@ Windows是最烂的开发平台
 * RTX
 * TIM
 * Youdao
-* Firefox 浏览器
-    - AdBlock Plus Firefox扩展
-* Opera 浏览器
-* Google Chrome 浏览器
 * VLC 媒体播放
 * 7-Zip 文件压缩
 * OpenOffice.org 办公
@@ -60,13 +55,11 @@ Windows是最烂的开发平台
 * FileZilla FTP软件
 * Defraggler 系统优化-碎片整理
 * Winamp 媒体播放
-* Eclipse IDE 开发环境
 * PuTTY Telnet远程连接
 * Rainmeter 桌面增强
-* AutoHotkey 脚本工具
 * MediaMonkey 媒体管理
 * Quicksilver Mac下的程序快速启动工具
-* WinSCP FTP客户羰
+* WinSCP FTP客户
 * Boxee 媒体中心
 * Media Player Classic 媒体播放
 * EasyBCD 2.3：多系统引导文件管理
@@ -106,7 +99,7 @@ scoop + search|install|status|uninstall|home + 对象
 ## 配置
 
 * 添加自启动 文件位置：`C:\Users\henryli\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
-  - get location cmd: shell:startup  
+  - get location cmd: shell:startup
   - add shortcuts into folder
   - Sticky Notes
 * 默认图片 Windows Photo Viewer 恢复
@@ -188,7 +181,7 @@ ipconfig /flushdns # 刷新域名
 * 如何添加启动脚本
 
 ```
-# 
+#
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 Install-Module posh-git [-Scope CurrentUser]
 Install-Module oh-my-posh [-Scope CurrentUser]

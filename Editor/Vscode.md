@@ -77,6 +77,8 @@ sudo apt-get install code
 * Sublime Text Keymap and Settings Importer
 * SVG Viewer
 * TODO Highlight
+* Todo Tree
+- Trello Viewer
 * Trailing Spaces
 * TSLint
 * TypeScript Hero
@@ -258,6 +260,7 @@ sudo apt-get install code
     - PgUp / PgDn Scroll page up/down
     - ⌘Home / End Scroll to top/bottom
     - ⇧⌥⌘↓, ⇧⌥⌘→, ⇧⌥⌘↑, ⇧⌥⌘← Box Selection
+    - ctrl+K ctrl+s 进入快捷键设置界面
 
 ### CLI tool
 
@@ -274,6 +277,19 @@ code --diff <file1> <file2> # open diff editor
 code --disable-extensions . # disable all extensions
 ```
 
+## Configure User Snippets
+
+```
+"Print to console": {
+    "prefix": "log",
+    "body": [
+        "console.log('$1');",
+        "$2"
+    ],
+    "description": "Log output to console"
+}
+```
+
 ## 扩展
 
 *   [VSCodium/vscodium](https://github.com/VSCodium/vscodium):binary releases of VS Code without MS branding/telemetry/licensing
@@ -281,7 +297,7 @@ code --disable-extensions . # disable all extensions
 *   [Microsoft/vscode-tips-and-tricks](https://github.com/Microsoft/vscode-tips-and-tricks):Collection of helpful tips and tricks for VS Code.
 *   [vscode-element-helper](https://github.com/ElemeFE/vscode-element-helper)
 *   [keyboard-shortcuts-macos](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
-*   https://code.visualstudio.com/
+*
 *   [octref/polacode](https://github.com/octref/polacode):📸 Polaroid for your code
 *   [shanalikhan/code-settings-sync](https://github.com/shanalikhan/code-settings-sync):🌴💪 Synchronize your Visual Studio Code Settings Across Multiple Machines using Github GIST 💪🌴
 
