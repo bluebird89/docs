@@ -216,7 +216,7 @@ alias browser=chrome
 alias ff=ff
 
 ## set some other defaults ##
-alias df='df -H'
+alias df='pydf'
 alias du='du -sch'
 alias du="ncdu dark -rr -x --exclude .git --exclude node_modules"
 

@@ -124,8 +124,6 @@ $sub = addcslashes(mysql_real_escape_string("%something_"), "%_");
     - HTMLPurifier.auto.php插件
     - RemoveXss函数（百度可以查到）
 
-## cors
-
 ## 储存用户数据
 
 * 后端不应该以任何明文或可以转换回明文（如可逆的加密）的形式储存密码。由于储存的信息并不是明文，所以大多数网站的「找回密码」功能并不能真的告诉你密码，只能让你重新设置一次。
@@ -163,6 +161,17 @@ $sub = addcslashes(mysql_real_escape_string("%something_"), "%_");
     - 加密认证：先从客户端获取用户信息，然后根据这个信息和用户请求的文件名 字一起加密成字符串 (Session ID) 作为身份验证。只有当认证成功以后，服务端才会把用户需要的文件传送给客户。一般我们会把加密的 Session ID 作为 URL 参数的一部分传递给服务器，由于这个 Session ID 和用户的信息挂钩，所以别人就算是盗取了链接，该 Session ID 也无法通过身份认证，从而达到反盗链的目的。这种方式对于分布式盗链非常有效。
     - 随机附加码：每次，在页面里生成一个附加码，并存在数据库里，和对应的图片相关，访问图片时和此附加码对比，相同则输出图片，否则输出 404 图片
     - 加入水印
+
+## GPG
+
+```sh
+sudo apt install gpg
+gpg --gen-key
+gpg --list-keys
+gpg --export -a > public_key.rsa  # 导出公钥到文件中 -a为ascii模式
+gpg -r amrzs -e hello.c
+gpg -d hello.c.gpg
+```
 
 ## 案例
 

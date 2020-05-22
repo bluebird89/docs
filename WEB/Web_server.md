@@ -477,6 +477,15 @@ sudo dpkg-reconfigure locales
     + 接口超时:过长，那么有可能会过多地占用服务端的 tcp 连接。而过短，接口超时就会非常频繁
     + 服务端接口明明 rt 降低，但客户端仍然一直超时又是另一个问题。这个问题其实很简单，客户端到服务端的链路包括网络传输、排队以及服务处理等，每一个环节都可能是耗时的原因
 
+* 后端挂载了nfs的网络共享，被程序读取。而程序释放之后，在正常背景的硬盘文件是没有缓存的。但是在nfs挂载的环境下，缓存并没有得到释放
+
+```sh
+netstat -anp |grep tcp |wc -l # 统计tcp连接数
+cat /proc/sys/fs/file-nr
+
+echo 3 > /proc/sys/vm/drop_caches # 释放内存
+```
+
 ## 演化
 
 * Everything On One Server：Web Application Database
