@@ -358,9 +358,11 @@ struct sdshdr {
         + 当stop>=length，则截取至字符串尾
         + 如果start所处位置在stop右边，则返回空字符串
     - `setrange key offeset values`
-    - 获取指定偏移量上的位 `GETBIT key offset`
-    - 设置offset对应二进制上的值，返回该位上的旧值 `setbit key offset value`：如果offset过大，则会在中间填充0,offset最大到多少：2^32-1，即可推出最大的字符串为512M
-    - bitop AND|OR|NOT|XOR destkey key1 [key2..] 对key1 key2做opecation并将结果保存在destkey上
+    - 位操作
+        + 获取指定偏移量上的位 `GETBIT key offset`
+        + 设置offset对应二进制上的值，返回该位上的旧值 `SETBIT key offset value`：如果offset过大，则会在中间填充0,offset最大到多少：2^32-1，即可推出最大的字符串为512M
+        + bitop AND|OR|NOT|XOR destkey key1 [key2..] 对key1 key2做opecation并将结果保存在destkey上
+        + BITCOUNT bitkey:返回bitkey 数量
 * 编码：长度不能超过512MB
     - 内部存储默认就是一个字符串，被redisObject所引用，当遇到incr,decr等操作时会转成数值型进行计算，此时redisObject的encoding字段为int
     - int：8个字节的长整型。字符串值是整型时，这个值使用long整型表示，当int数据不再是整数，或大小超过了long的范围时，自动转化为raw。
@@ -371,13 +373,24 @@ struct sdshdr {
         + embstr的使用只分配一次内存空间（因此redisObject和sds是连续的）
         + raw需要分配两次内存空间（分别为redisObject和sds分配空间）
         + 因此与raw相比，embstr的好处在于创建时少分配一次空间，删除时少释放一次空间，以及对象的所有数据连在一起，寻找方便。
-        + embstr的坏处也很明显，如果字符串的长度增加需要重新分配内存时，整个redisObject和sds都需要重新分配空间，因此redis中的embstr实现为只读。
+        + embstr的坏处也很明显，如果字符串的长度增加需要重新分配内存时，整个redisObject和sds都需要重新分配空间，因此redis中的embstr实现为只读
+    - 简单动态字符串 SDS（Simple Dynamic String）：字符串都用SDS来存储
+        + 时间复杂度为O(1)
+        + 杜绝缓冲区溢出
+        + 减少修改字符串长度时候所需的内存重分配次数
+        + 二进制安全的API操作
+        + 兼容部分C字符串函数
 * 场景
     - 缓存
     - 分布式Session：存储用户token和用户uid `set token user_id`
     - 计数器：投票、计数 `incr vote:1`
     - 限流：对ip开启访问流量限制，假入ip为 211.101.111.111 ， 一秒钟内该ip最多允许访问三次
     - 分布式锁
+    - 位操作
+        + 用户签到场景 每天的日期字符串作为一个key，用户Id作为offset，统计每天用户的签到情况，总的用户签到数
+        + 活跃用户数统计 用户日活、月活、留存率等均可以用redis位数组来存储，还是以每天的日期作为key，用户活跃了就写入offset为用户id的位值1。
+        + 用户是否在线以及总在线人数统计 同样是使用一个位数组，用户的id映射偏移量，在线标识为1，下线标识为0。即可实现用户上下线查询和总在线人数的统计
+        + APP内用户的全局消息提示小红点 现在大多数的APP里都有站内信的功能，当有消息的时候，则提示一个小红点，代表用户有新的消息。
 
 ```sh
 exists name # 0
