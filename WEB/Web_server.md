@@ -404,6 +404,79 @@ sudo locale-gen en_US en_US.UTF-8 en_CA.UTF-8
 sudo dpkg-reconfigure locales
 ```
 
+## 故障处理
+
+* 方法：df、free、top 三连，然后依次 jstack、jmap 伺候
+* CPU：
+  - 业务逻辑问题(死循环):stack 分析分析对应的堆栈情况
+    + 用 ps 命令找到对应进程的 pid
+    + 用top -H -p pid来找到 CPU 使用率比较高的一些线程
+    + 将占用最高的 pid 转换为 16 进制`printf '%x\n' pid`得到 nid
+    + 直接在 jstack 中找到相应的堆栈信息 `jstack pid |grep 'nid' -C5 –color`
+    + 会比较关注 WAITING 和 TIMED_WAITING 的部分，BLOCKED 就不用说了。可以使用命令cat jstack.log | grep "java.lang.Thread.State" | sort -nr | uniq -c来对 jstack 的状态有一个整体的把握，如果 WAITING 之类的特别多，那么多半是有问题啦
+  - 频繁 gc
+    + `jstat -gc pid 1000`命令来对 gc 分代变化情况进行观察，1000 表示采样间隔(ms)
+    + S0C/S1C、S0U/S1U、EC/EU、OC/OU、MC/MU 分别代表两个 Survivor 区、Eden 区、老年代、元数据区的容量和使用量
+    + YGC/YGT、FGC/FGCT、GCT 则代表 YoungGc、FullGc 的耗时和次数以及总耗时
+  - 上下文切换过多:使用vmstat命令来进行查看
+    + cs(context switch)一列则代表了上下文切换的次数
+    + 对特定的 pid 进行监控那么可以使用 `pidstat -w pid` 命令，cswch 和 nvcswch 表示自愿及非自愿切换
+* 磁盘
+  - 磁盘空间方面 `df -hl` 来查看文件系统状态
+  - 性能问题
+    + 通过 `iostatiostat -d -k -x` 来进行分析,最后一列%util可以看到每块磁盘写入的程度，而rrqpm/s以及wrqm/s分别表示读写速度，一般就能帮助定位到具体哪块磁盘出现问题了
+    + 拿到的是 tid，要转换成 pid，可以通过 readlink 来找到 `pidreadlink -f /proc/*/task/tid/../..`
+    + 找到 pid 之后就可以看这个进程具体的读写情况 cat /proc/pid/io
+    + 通过 lsof 命令来确定具体的文件读写情况lsof -p pid
+* 内存:用free命令先来检查一发内存的各种情况
+  - OOM
+    + 类型
+      * Exception in thread "main" java.lang.OutOfMemoryError: unable to create new native thread：没有足够的内存空间给线程分配 Java 栈，基本上还是线程池代码写的有问题，比如说忘记 shutdown，所以说应该首先从代码层面来寻找问题，使用 jstack 或者 jmap。如果一切都正常，JVM 方面可以通过指定Xss来减少单个 thread stack 的大小。另外也可以在系统层面，可以通过修改/etc/security/limits.confnofile 和 nproc 来增大 os 对线程的限制
+      * Exception in thread "main" java.lang.OutOfMemoryError: Java heap space：堆的内存占用已经达到-Xmx 设置的最大值，应该是最常见的 OOM 错误了。解决思路仍然是先应该在代码中找，怀疑存在内存泄漏，通过 jstack 和 jmap 去定位问题。如果说一切都正常，才需要通过调整Xmx的值来扩大内存。
+      * Caused by: java.lang.OutOfMemoryError: Meta space：元数据区的内存占用已经达到XX:MaxMetaspaceSize设置的最大值，排查思路和上面的一致，参数方面可以通过XX:MaxPermSize来进行调整(这里就不说 1.8 以前的永久代了)。
+      * Stack Overflow： 栈内存溢出
+      * Exception in thread "main" java.lang.StackOverflowError 表示线程栈需要的内存大于 Xss 值，同样也是先进行排查，参数方面通过Xss来调整，但调整的太大可能又会引起 OOM
+    + 关于 OOM 和 Stack Overflo 的代码排查方面：使用 JMAPjmap -dump:format=b,file=filename pid来导出 dump 文件
+      * 通过 mat(Eclipse Memory Analysis Tools)导入 dump 文件进行分析，内存泄漏问题一般直接选 Leak Suspects 即可，mat 给出了内存泄漏的建议
+      * 也可以选择 Top Consumers 来查看最大对象报告
+    + 和线程相关的问题可以选择 thread overview 进行分析
+    + 除此之外就是选择 Histogram 类概览来自己慢慢分析
+    + 在启动参数中指定-XX:+HeapDumpOnOutOfMemoryError来保存 OOM 时的 dump 文件
+    + 先使用 jstat 来查看分代变化情况，比如 youngGC 或者 fullGC 次数是不是太多呀；EU、OU 等指标增长是不是异常呀等
+    + 线程的话太多而且不被及时 gc 也会引发 oom，大部分就是之前说的unable to create new native thread
+    + 先会看下总体线程：通过pstreee -p pid |wc -l 通过查看/proc/pid/task的数量即为线程数量
+  - GC:堆内内存泄漏总是和 GC 异常相伴。不过 GC 问题不只是和内存问题相关，还有可能引起 CPU 负载、网络问题等系列并发症，只是相对来说和内存联系紧密些
+    + 在启动参数中加上-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps来开启 GC 日志. 对 G1 垃圾收集器来做分析 建议大家使用 G1-XX:+UseG1GC
+    + youngGC 过频繁:一般是短周期小对象较多，先考虑是不是 Eden 区/新生代设置的太小了，看能否通过调整-Xmn、-XX:SurvivorRatio 等参数设置来解决问题。如果参数正常，但是 young gc 频率还是太高，就需要使用 Jmap 和 MAT 对 dump 文件进行进一步排查了。
+    + youngGC 耗时过长:要看 GC 日志里耗时耗在哪一块了。以 G1 日志为例，可以关注 Root Scanning、Object Copy、Ref Proc 等阶段。Ref Proc 耗时长，就要注意引用相关的对象。Root Scanning 耗时长，就要注意线程数、跨代引用。Object Copy 则需要关注对象生存周期。而且耗时分析它需要横向比较，就是和其他项目或者正常时间段的耗时比较。比如说图中的 Root Scanning 和正常时间段比增长较多，那就是起的线程太多了
+    + 触发 fullGC: G1 中更多的还是 mixedGC，但 mixedGC 可以和 youngGC 思路一样去排查。触发 fullGC 了一般都会有问题，G1 会退化使用 Serial 收集器来完成垃圾的清理工作，暂停时长达到秒级别，可以说是半跪了.原因可能包括以下这些，以及参数调整方面的一些思路
+      * 并发阶段失败：在并发标记阶段，MixGC 之前老年代就被填满了，那么这时候 G1 就会放弃标记周期。这种情况，可能就需要增加堆大小，或者调整并发标记线程数-XX:ConcGCThreads。
+      * 晋升失败：在 GC 的时候没有足够的内存供存活/晋升对象使用，所以触发了 Full GC。这时候可以通过-XX:G1ReservePercent来增加预留内存百分比，减少-XX:InitiatingHeapOccupancyPercent来提前启动标记，-XX:ConcGCThreads来增加标记线程数也是可以的。
+      * 大对象分配失败：大对象找不到合适的 region 空间进行分配，就会进行 fullGC，这种情况下可以增大内存或者增大-XX:G1HeapRegionSize。
+      * 程序主动执行 System.gc()：不要随便写就对了
+    + 在启动参数中配置-XX:HeapDumpPath=/xxx/dump.hprof来 dump fullGC 相关的文件，并通过 jinfo 来进行 gc 前后的 dump
+      * `jinfo -flag +HeapDumpBeforeFullGC pid`
+      * jinfo -flag +HeapDumpAfterFullGC pid
+      * jinfo -flag +HeapDumpBeforeFullGC pid
+      * jinfo -flag +HeapDumpAfterFullGC pid
+  - 堆外内存:大多情况
+    + 表现就是物理常驻内存增长快，报错的话视使用方式都不确定，如果由于使用 Netty 导致的，那错误日志里可能会出现OutOfDirectMemoryError错误，如果直接是 DirectByteBuffer，那会报OutOfMemoryError: Direct buffer memory
+    + 往往是和 NIO 的使用相关，一般先通过 pmap 来查看下进程占用的内存情况`pmap -x pid | sort -rn -k3 | head -30`，这段意思是查看对应 pid 倒序前 30 大的内存段。这边可以再一段时间后再跑一次命令看看内存增长情况，或者和正常机器比较可疑的内存段在哪里
+    + 确定有可疑的内存端，需要通过 gdb 来分析gdb --batch --pid {pid} -ex "dump memory filename.dump {内存起始地址} {内存起始地址+内存块大小}"
+    + 获取 dump 文件后可用 heaxdump 进行查看hexdump -C filename | less，不过大多数看到的都是二进制乱码
+    + NMT 是 Java7U40 引入的 HotSpot 新特性，配合 jcmd 命令可以看到具体内存组成了。需要在启动参数中加入 -XX:NativeMemoryTracking=summary 或者 -XX:NativeMemoryTracking=detail，会有略微性能损耗
+    + 可以先设一个基线jcmd pid VM.native_memory baseline.等放一段时间后再去看看内存增长的情况，通过jcmd pid VM.native_memory detail.diff(summary.diff)做一下 summary 或者 detail 级别的 diff.分析出来的内存十分详细，包括堆内、线程以及 gc(所以上述其他内存异常其实都可以用 nmt 来分析)，这边堆外内存我们重点关注 Internal 的内存增长，如果增长十分明显的话那就是有问题了
+    + 使用 strace 命令来监控内存分配 strace -f -e "brk,mmap,munmap" -p pid
+    + 上面那些操作也很难定位到具体的问题点，关键还是要看错误日志栈，找到可疑的对象，搞清楚它的回收机制，然后去分析对应的对象
+    + 通过jmap -histo:live pid手动触发 fullGC 来看看堆外内存有没有被回收。如果被回收了，那么大概率是堆外内存本身分配的太小了，通过-XX:MaxDirectMemorySize进行调整。如果没有什么变化，那就要使用 jmap 去分析那些不能被 gc 的对象，以及和 DirectByteBuffer 之间的引用关系了
+* 网络
+  - 超时:错误大部分处在应用层面,使用连接池的客户端框架还会存在获取连接超时和空闲连接清理超时
+    + 读写超时:readTimeout/writeTimeout，有些框架叫做 so_timeout 或者 socketTimeout，均指的是数据读写超时。注意这边的超时大部分是指逻辑上的超时。soa 的超时指的也是读超时。读写超时一般都只针对客户端设置。
+    + 连接超时:connectionTimeout，客户端通常指与服务端建立连接的最大时间。服务端这边 connectionTimeout 就有些五花八门了，Jetty 中表示空闲连接清理时间，Tomcat 则表示连接维持的最大时间
+    + 设置各种超时时间中，需要确认的是尽量保持客户端的超时小于服务端的超时，以保证连接正常结束
+    + 接口超时:过长，那么有可能会过多地占用服务端的 tcp 连接。而过短，接口超时就会非常频繁
+    + 服务端接口明明 rt 降低，但客户端仍然一直超时又是另一个问题。这个问题其实很简单，客户端到服务端的链路包括网络传输、排队以及服务处理等，每一个环节都可能是耗时的原因
+
 ## 演化
 
 * Everything On One Server：Web Application Database

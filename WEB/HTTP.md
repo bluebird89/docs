@@ -304,6 +304,14 @@ Content-Type: text/html
 
 ![ HTTP 请求处理流程](../_static/http_request.jpg "Optional title")
 
+## 报文
+
+* 请求报文
+    - 起始行：描述请求或者响应的基本信息
+    - 头部字段集合：key-value形式说明报文
+    - 消息正文：实际传输诸如图片等信息。具体如下图试试
+* 响应报文
+
 ## 标头
 
 * 通用标头
@@ -668,9 +676,9 @@ curl "http://127.0.0.1:8889/" -vv
         + PTR：逆向查询记录（Pointer Record），只用于从IP地址查询域名
     - Value：记录的值，如果是A记录，则value是一个IPv4地址
 * 层次
-    - 根域名服务器：保存了所有顶级区域的权威域名服务器记录。现在通过根域名服务器，我们可以找到所有的顶级区域的权威域名服务器，然后就可以往下一级一级找下去了
-    - 顶级域名服务器：由ICANN（互联网名称与数字地址分配机构）负责管理。目前已经有超过250个顶级域名，每个顶级域名可以进一步划为一些子域（二级域名），这些子域可被再次划分（三级域名）
-    - 权威 DNS 服务器
+    - 根域名服务器（Root DNS Server）：保存了所有顶级区域的权威域名服务器记录。现在通过根域名服务器，我们可以找到所有的顶级区域的权威域名服务器，然后就可以往下一级一级找下去了
+    - 顶级域名服务器（Top-level DNS Server）：由ICANN（互联网名称与数字地址分配机构）负责管理。目前已经有超过250个顶级域名，每个顶级域名可以进一步划为一些子域（二级域名），这些子域可被再次划分（三级域名）
+    - 权威 DNS 服务器（Authoritative DNS Server
     - 本地 DNS 服务器(local DNS server)：每个 ISP(Internet Service Provider) 都有一台本地 DNS 服务器，起着代理的作用，并将该请求转发到 DNS 服务器层次系统中
 * 域名空间划分为A, B, C, D, E, F, G七个DNS区域，每个DNS区域都有多个权威域名服务器，这些域名服务器里面保存了许多域名解析记录
 * 查询方式
@@ -759,6 +767,20 @@ nameserver 223.6.6.6
 2001:dc7:1000::1
 ```
 
+### [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest)
+
+DNS Performance test
+
+```sh
+sudo apt-get install bc dnsutils
+
+git clone --depth=1 https://github.com/cleanbrowsing/dnsperftest/
+cd dnsperftest
+
+bash ./dnstest.sh
+bash ./dnstest.sh |sort -k 22 -n
+```
+
 ## 查询过程
 
 dig可以显示整个查询过程
@@ -844,20 +866,6 @@ ifconfig /flushdns # 刷新DNS
 * 认证：一些页面能够被保护起来，仅让特定的用户进行访问。基本的认证功能可以直接通过HTTP提供，使用Authenticate相似的头部即可，或用HTTP Cookies来设置指定的会话。
 * 代理和隧道：通常情况下，服务器和/或客户端是处于内网的，对外网隐藏真实 IP 地址。因此 HTTP 请求就要通过代理越过这个网络屏障。但并非所有的代理都是 HTTP 代理。例如，SOCKS协议的代理就运作在更底层，一些像 FTP 这样的协议也能够被它们处理。
 * 会话：使用HTTP Cookies允许你用一个服务端的状态发起请求，这就创建了会话。虽然基本的HTTP是无状态协议。这很有用，不仅是因为这能应用到像购物车这样的电商业务上，更是因为这使得任何网站都能轻松为用户定制展示内容了。
-
-### [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest)
-
-DNS Performance test
-
-```sh
-sudo apt-get install bc dnsutils
-
-git clone --depth=1 https://github.com/cleanbrowsing/dnsperftest/
-cd dnsperftest
-
-bash ./dnstest.sh
-bash ./dnstest.sh |sort -k 22 -n
-```
 
 ## Socket
 
@@ -1029,7 +1037,7 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     - ClientHello：客户端通过向服务器发送 hello 消息来发起握手过程。这个消息中会夹带着客户端支持的 TLS 版本号(TLS1.0 、TLS1.2、TLS1.3) 、客户端支持的密码套件、以及一串 客户端随机数。
     - ServerHello：在客户端发送 hello 消息后，服务器会发送一条消息，这条消息包含了服务器的 SSL 证书、服务器选择的密码套件和服务器生成的随机数。
     - 认证(Authentication)：客户端的证书颁发机构会认证 SSL 证书，然后发送 Certificate 报文，报文中包含公开密钥证书。最后服务器发送 ServerHelloDone 作为 hello 请求的响应。第一部分握手阶段结束。
-    - 加密阶段：在第一个阶段握手完成后，客户端会发送 ClientKeyExchange 作为响应，这个响应中包含了一种称为 The premaster secret 的密钥字符串，这个字符串就是使用上面公开密钥证书进行加密的字符串。随后客户端会发送 ChangeCipherSpec，告诉服务端使用私钥解密这个 premaster secret 的字符串，然后客户端发送 Finished 告诉服务端自己发送完成了
+    - 加密阶段：在第一个阶段握手完成后，客户端会发送 ClientKeyExchange 作为响应，响应中包含了一种称为 The premaster secret 的密钥字符串，这个字符串就是使用上面公开密钥证书进行加密的字符串。随后客户端会发送 ChangeCipherSpec，告诉服务端使用私钥解密这个 premaster secret 的字符串，然后客户端发送 Finished 告诉服务端自己发送完成了
     - Session key 其实就是用公钥证书加密的公钥。
     - 实现了安全的非对称加密：然后，服务器再发送 ChangeCipherSpec 和 Finished 告诉客户端解密完成，至此实现了 RSA 的非对称加密。
 * 作用
@@ -1111,7 +1119,10 @@ acme.sh --issue --debug -d thinkphp.com -d henry.thinkphp.com -w /home/henry/Wor
     - 向服务端发送请求时，服务端会发送一个认证信息，服务器第一次接收到请求时，开辟了一块 Session 空间（创建了Session对象），同时生成一个 sessionId ，并通过响应头的 Set-Cookie：JSESSIONID=XXXXXXX 命令，向客户端发送要求设置 Cookie 的响应；客户端收到响应后，在本机客户端设置了一个 JSESSIONID=XXXXXXX 的 Cookie 信息，该 Cookie 的过期时间为浏览器会话结束
     - 客户端每次向同一个网站发送请求时，请求头都会带上该 Cookie信息（包含 sessionId ）， 然后，服务器通过读取请求头中的 Cookie 信息，获取名称为 JSESSIONID 的值，得到此次请求的 sessionId
     - 存在客户端上的，所以浏览器加入了一些限制确保cookie不会被恶意使用，同时不会占据太多磁盘空间，所以每个域的cookie数量是有限的
-    - 服务端Set-Cookie字段中新增httpOnly属性，当服务端在返回的Cookie信息中含有httpOnly字段时，开发者是不能通过JavaScript来操纵该条Cookie字符串的。这样做的好处主要在于面对XSS（Cross-site scripting）攻击时，黑客无法拿到设置httpOnly字段的Cookie信息。
+    - 服务端Set-Cookie字段中新增httpOnly属性，当服务端在返回的Cookie信息中含有httpOnly字段时，开发者是不能通过JavaScript来操纵该条Cookie字符串的。这样做的好处主要在于面对XSS（Cross-site scripting）攻击时，黑客无法拿到设置httpOnly字段的Cookie信息
+    - 场景
+        + 身份识别
+        + 广告追踪
 * Session:由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户
     - Session是保存在服务端的，有一个唯一标识 会话标识(session id)
     - 在服务端保存Session的方法很多，内存、数据库、文件都有
@@ -1236,7 +1247,7 @@ $un_data = unserialize_php($data);
     - 当有多个请求同时被挂起的时候 就会拥塞请求通道，导致后面请求无法发送
     - 臃肿的消息首部:HTTP/1.1能压缩请求内容,但是消息首部不能压缩;在现今请求中,消息首部占请求绝大部分(甚至是全部)也较为常见
 
-## HTTP 2.0
+## HTTP /2
 
 * 2015 年开发出来的标准 基于Google的SPDY,从2012年诞生到2016停止维护
 * 头部压缩（Header Compression），由于 HTTP 1.1 经常会出现 User-Agent、Cookie、Accept、Server、Range 等字段可能会占用几百甚至几千字节，而 Body 却经常只有几十字节，所以导致头部偏重。HTTP 2.0 使用 HPACK 算法进行压缩
@@ -1257,7 +1268,6 @@ $un_data = unserialize_php($data);
     - HTTP/1.x 虽然通过 pipeline 也能并发请求，但是多个请求之间的响应会被阻塞的，所以 pipeline 至今也没有被普及应用，而 HTTP/2 做到了真正的并发请求
     - 把数据流分解为多个帧，多个数据流的帧混合之后以同一个TCP连接来发送
     - 流还支持优先级和流量控制。当流并发时，就会涉及到流的优先级和依赖。即：HTTP2.0对于同一域名下所有请求都是基于流的，不管对于同一域名访问多少文件，优先级高的流会被优先发送。图片请求的优先级要低于 CSS 和 SCRIPT，这个设计可以确保重要的东西可以被优先加载完
-
 * 全双工通信
 * 必须https：HTTP+ 加密 + 认证 + 完整性保护
 * 流量控制算法优化
