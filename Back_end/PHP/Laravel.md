@@ -3,7 +3,7 @@
 A PHP Framework For Web Artisans https://laravel.com
 
 ## 安装
- 
+
 * [laravel/homestead](https://github.com/laravel/homestead):an official, pre-packaged Vagrant box that provides you a wonderful development environment without requiring you to install PHP, a web server, and any other server software on your local machine
   - 安装virtualbox vagrant
   - parallels `vagrant plugin install vagrant-parallels`
@@ -32,7 +32,7 @@ A PHP Framework For Web Artisans https://laravel.com
   - 为 Mac 设置了启动后始终在后台运行 Nginx
   - Valet 使用 DnsMasq 将所有指向安装在本地计算机的站点的请求代理到 *.test 域上
 * 通过composer 安装:`composer create-project --prefer-dist laravel/laravel blog`
-* [Laragon](https://sourceforge.net/projects/laragon/)
+* [Laragon](https://sourceforge.net/projects/laragon/):适用于 Windows 的轻量级开发环境
 * [laradock/laradock](https://github.com/laradock/laradock):Docker PHP development environment. http://laradock.io
 
 ```yaml
@@ -111,7 +111,7 @@ valet stop|uninstall|restart
 
 composer global require laravel/installer
 # $HOME/.config/composer/vendor/bin
-laravel new blog # 访问 http://blog.test 
+laravel new blog # 访问 http://blog.test
 #  99160 segmentation fault
 
 valet links # 查看所有目录链接的列表
@@ -542,13 +542,13 @@ class RiakServiceProvider extends ServiceProvider
 }
 
 # 反射
-class User 
+class User
 {
     protected $log;
 
     public function __construct(FileLog $log)
     {
-        $this->log = $log;   
+        $this->log = $log;
     }
 
     public function login()
@@ -2684,7 +2684,7 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
   - [z-song/laravel-admin](https://github.com/z-song/laravel-admin):Build a full-featured administrative interface in ten minutes http://laravel-admin.org
   - [the-control-group/voyager](https://github.com/the-control-group/voyager):Voyager - The Missing Laravel Admin https://laravelvoyager.com
   - [LaraAdmin](https://laraadmin.com/)
-  - [Laravel Nova](https://nova.laravel.com):a beautifully designed administration panel for Laravel. Carefully crafted by the creators of Laravel to make you the most productive developer in the galaxy.  
+  - [Laravel Nova](https://nova.laravel.com):a beautifully designed administration panel for Laravel. Carefully crafted by the creators of Laravel to make you the most productive developer in the galaxy.
 * pay
   - [laravel/cashier](https://github.com/laravel/cashier):provides an expressive, fluent interface to Stripe's subscription billing services.
 * [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
@@ -2742,7 +2742,7 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
 composer require encore/laravel-admin
 php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
 # config/admin.php，修改安装的地址、数据库连接、以及表名
-php artisan config:cache 
+php artisan config:cache
 php artisan admin:install
 # 查看版本
 composer show encore/laravel-admin
@@ -2894,7 +2894,7 @@ password: password
 * [laravel/spark-docs](https://github.com/laravel/spark-docs)
 * [summerblue/laravel5-cheatsheet](https://github.com/summerblue/laravel5-cheatsheet):A quick reference guide (cheat sheet) for Laravel 5.1 LTS, listing artisan, composer, routes and other useful bits of information. https://cs.laravel-china.org/
 * [samedreams/artisan-road](https://github.com/samedreams/artisan-road):Programmers are artisans （This book is a guide for artisans）
-* [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习 
+* [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
 
 * [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
 * [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)

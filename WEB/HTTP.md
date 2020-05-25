@@ -654,6 +654,11 @@ curl "http://127.0.0.1:8889/" -vv
         + 向本网络内的所有设备发送数据包，对比接收者mac地址，不是丢包，是接受
 * 物理层
 
+```sh
+
+curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" -so /dev/null https://www.gemini.com
+```
+
 ![TCP状态转换图](../_static/tcp_status.jpg "Optional title")
 ![TCP与UDP对比](../_static/TCPvsUDP.png)
 

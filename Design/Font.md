@@ -16,6 +16,17 @@
 
 ```
 sudo apt install fonts-firacode
+
+# validate font support
+echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"
+
+# somre font not support powerline
+wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+
+mv PowerlineSymbols.otf ~/.local/share/fonts/
+fc-cache -vf ~/.local/share/fonts/
+mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 ```
 
 ## 工具

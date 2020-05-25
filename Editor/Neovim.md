@@ -6,6 +6,7 @@ Vim-fork focused on extensibility and usability https://salt.bountysource.com/te
 
 ```sh
 brew install neovim
+sudo apt-get install neovim
 
 nvim # 启动
 ```

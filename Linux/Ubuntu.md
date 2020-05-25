@@ -276,6 +276,8 @@ sudo apt install -y apt-fast`
 * 从二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到合适的目录，然后将包含可执行的主程序文件的目录添加进PATH环境变量即可
 * 源码编译安装
 * 列表
+  - golddict `sudo apt install goldendict`
+    +
   - 笔记
     + simplenote
     + [cherrytree](www.giuspen.com/cherrytree/):note
@@ -498,12 +500,16 @@ deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe
   -  Open Weather
 * Theme
   - [gnome-look](https://www.gnome-look.org/)
+    + 需要选择 GTK3 分类下的主题
+    + file download(~/.themes) or isntall
   - [nana-4 / materia-theme](https://github.com/nana-4/materia-theme):A Material Design theme for GNOME/GTK based desktop environments
   - [adapta-project / adapta-gtk-theme ](https://github.com/adapta-project/adapta-gtk-theme):An adaptive Gtk+ theme based on Material Design Guidelines
   - [pop-os / gtk-theme](https://github.com/pop-os/gtk-theme):System76 Pop GTK+ Theme
   - Communitheme `sudo snapinstall communitheme –edge`
   - [vinceliuice / vimix-gtk-themes](https://github.com/vinceliuice/vimix-gtk-themes):Vimix is a flat Material Design theme for GTK 3, GTK 2 and Gnome-Shell etc. https://vinceliuice.github.io/
   - sudo apt install sierra-gtk-theme
+* icons
+  - `~/.icons`
 * 重启： `Alt + F2`, r
 
 ```sh
@@ -521,8 +527,9 @@ gsettings reset SCHEMA KEY         恢复指定schema的指定项KEY的值为默
 gsettings reset-recursively SCHEMA 恢复指定schema的所有key的值为默认值
 gsettings list-recursively [SCHEMA] 如果有SCHEMA参数，则递归显示指定schema的所有项(key)和值(value)，如果没有SCHEMA参数，则递归显示所有schema的所有项(key)和值(value)
 
-# 软件托盘不显示问题
 
+# Although GNOME Shell integration extension is running, native host connector is not detected. Refer documentation for instructions about installing connector
+sudo apt install chrome-gnome-shell
 ```
 
 ## 用户管理
@@ -625,20 +632,18 @@ sudo apt install fonts-firacode virtualbox mysql-workbench-community preload
 
 sudo apt-get install compizconfig-settings-manager
 sudo apt-get install compiz-plugins
-# [sougou pinyin](https://pinyin.sogou.com/linux/?r=pinyin)
-sudo apt-get remove ibus
-sudo apt-get purge ibus
-sudo  apt-get remove indicator-keyboard # 卸载顶部面板任务栏上的键盘指示.
 
-sudo apt install fcitx-table-wbpy fcitx-config-gtk　＃　安装fcitx输入法框架
+# [sougou pinyin](https://pinyin.sogou.com/linux/?r=pinyin)
+sudo apt-get remove --purge ibus indicator-keyboard # 卸载顶部面板任务栏上的键盘指示.
+
+sudo apt install fcitx-table-wbpy fcitx-config-gtk # 安装fcitx输入法框架
 im-config -n fcitx　# 切换为 Fcitx输入法
-sudo apt install fcitx fcitx-table fcitx-googlepinyin im-config
-im-config # 查看配置
 
 # download sogoupinyin_2.2.0.0108_amd64.deb
 sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb # 手动安装
 sudo apt-get install -f
 
+# 不提示待选词
 rm -rf ~/.config/SogouPY* ~/.config/sogou*
 
 # 配置
@@ -1080,6 +1085,11 @@ ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib # configure: error: Cannot fi
 #  修复grub/etc/default/grub
 add GRUB_DISABLE_OS_PROBER=true
 sudo update-grub
+
+## icon not show
+sudo apt reinstall gnome-shell-extension-appindicator
+sudo apt install libappindicator-dev
+sudo cpan -i Gtk2:AppIndicator
 ```
 
 ## 参考

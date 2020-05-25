@@ -1,16 +1,17 @@
 # REST(Representational State Transfer）
 
-* 由 Roy Fielding 在他2000年的博士论文中提出。是HTTP协议（1.0版和1.1版）的主要设计者、Apache服务器软件的作者之一、Apache基金会的第一任主席。
-* REST 是一种软件架构风格，不是技术框架，REST 有一系列规范，满足这些规范的 API 均可称为 RESTful API。REST 规范中有如下几个核心：
-    - REST 中一切实体都被抽象成资源，每个资源有一个唯一的标识 —— URI，所有的行为都应该是在资源上的 CRUD 操作
+* 由 Roy Fielding 在他2000年的博士论文中提出。是HTTP协议（1.0版和1.1版）的主要设计者、Apache服务器软件的作者之一、Apache基金会的第一任主席
+* REST 是一种软件架构风格，不是技术框架，有一系列规范，满足这些规范的 API 均可称为 RESTful API。有如下几个核心：
+    - 一切实体都被抽象成资源，每个资源有一个唯一的标识 —— URI，所有的行为都应该是在资源上的 CRUD 操作
     - 状态转化（State Transfer）:使用标准的方法来更改资源的状态，常见的操作有：资源的增删改查操作
-    - 无状态：每个 RESTful API 请求都包含了所有足够完成本次操作的信息，服务器端无须保持 Session,不会为任何客户端保持状态。一个请求不应该依赖过去的请求，服务对待每个请求都是独立的。
+    - 无状态：每个 RESTful API 请求都包含了所有足够完成本次操作的信息，服务器端无须保持 Session,不会为任何客户端保持状态。一个请求不应该依赖过去的请求，服务对待每个请求都是独立的
 * 服务的目的是提供一个窗口给客户端以便客户端能访问这些资源。服务架构师和开发人员想要这些服务变得易于实现、维护、扩展、伸缩。RESTful 服务应该有下面的属性和特征：
     - 表现层（Representations）:网络上的一个实体，或者说是网络上的一个具体信息。可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。URI就成了每一个资源的地址或独一无二的识别符。URI只代表资源的实体，不代表它的形式。它的具体表现形式，应该在HTTP请求的头信息中用Accept和Content-Type字段指定，这两个字段才是对"表现层"的描述。
     - 消息（Messages）
     - URIs:只是表达被操作的资源位置，因此不应该使用动词，且注意单复数区分 动词在http协议中
     - 一致接口（Uniform interface） -（无状态）Stateless
     - 缓存（Caching）:客户端可以缓存
+* 一个 HTTP 请求完成一次完整操作
 * 指南：
     - 域名部署： <https://api.example.com/v1/> 或者 <https://example.org/api/v1/> 或者将版本号放在HTTP头信息中
     - 路径endpoint：每个网址代表一种资源（resource），所以网址中不能有动词，只能有名词，而且所用的名词往往与数据库的表格名对应。一般来说，数据库中的表都是同种记录的"集合"（collection），所以API中的名词也应该使用复数
@@ -18,7 +19,7 @@
     - GET（SELECT） /zoos：列出所有动物园 从服务器取出资源（一项或多项）
     - POST（CREATE） /zoos：新建一个动物园 在服务器新建一个资源
     - GET /zoos/ID：获取某个指定动物园的信息
-    - PUT (replace）/zoos/ID：更新某个指定动物园的信息（提供该动物园的全部信息） 在服务器更新资源（客户端提供改变后的完整资源）
+    - PUT (replace）/zoos/ID：更新某个指定动物园的信息（提供该动物园的全部信息）在服务器更新资源（客户端提供改变后的完整资源）
     - PATCH （update）/zoos/ID：更新某个指定动物园的信息（提供该动物园的部分信息） 在服务器更新资源（客户端提供改变的属性）
     - DELETE（remove） /zoos/ID：删除某个动物园 从服务器删除资源
     - GET /zoos/ID/animals：列出某个指定动物园的所有动物
@@ -116,7 +117,7 @@
 * Erlang/Elixir: webmachine/ewebmachine
 * Ruby: webmachine-ruby
 * Clojure：liberator
-* REST Client:VS code 插件 
+* REST Client:VS code 插件
 
 ## 参考
 

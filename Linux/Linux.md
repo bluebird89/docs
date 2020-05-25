@@ -74,8 +74,6 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
     + [offensive-security/kali-linux-docker](https://github.com/offensive-security/kali-linux-docker):Kali Linux Docker
 * 正常：运行平稳，维护量低；最小配置；大部分事情可以自动完成；兼容硬件和软件
   - [openSUSE](https://www.opensuse.org/)
-    + openSuse Leap
-    + OpenSuse Tumbleweed
   - Ubuntu 20.04 LTS
   - [UbuntuDDE](https://ubuntudde.com/): Powerful Ubuntu with the most beautiful desktop environment.
 * 服务器：稳定性；安全；支持其他出于同样原因的程序员使用
@@ -91,7 +89,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - TENS Linux (DOD Project)
   - Tin Hat Linux
   - [OpenBSD](http://www.openbsd.org/)
-  - [Manjaro](https://manjaro.org/):基于 Arch 的 Linux 发行版,安装是一件稍微复杂的工作
+  - [Manjaro](https://manjaro.org/):anjaro is a professionally made Linux based operating system that is a suitable replacement for Windows or MacOS. Multiple Desktop Environments are available through our Official and Community editions. We also work with manufacturers to design dedicated hardware. Visit the shop for more information 基于 Arch 的 Linux 发行版,安装是一件稍微复杂的工作
   - [Elementary OS](https://elementary.io/)
   - [openEuler](https://openeuler.org/):
 * 最小化：将在旧的硬件上运行；尽可能最小化
@@ -1875,6 +1873,9 @@ tar -jxvf aa.tar.bz2  /tmp/ # 解打包同时解压缩
 tar -ztvf aa.tar.gz  # 查看不解压
 tar -jtvf aa.tar.bz2 # -t  只查看，不解压
 
+rar a all *.jpg
+unrar e all.rar
+
 whereis who  # 只能搜索二进制文件(-b)，man 帮助文件(-m)和源代码文件(-s)。
 where composer
 type composer
@@ -2108,6 +2109,7 @@ systemctl reload ssh.service
 * 基于密钥的验证使用两个密钥,一个“公共”键,任何人都可以看到,和另一个“私人”键,只有老板是允许的。 安全通信使用的基于密钥的认证,需要创建一个密钥对,安全地存储私钥在电脑人想从登录,并存储公钥在电脑上一个想登录。
 * 使用基于密钥登录使用ssh通常被认为是比使用普通安全密码登录。 导的这个部分将解释的过程中生成的一组公共/私有RSA密钥,并将它们用于登录到你的Ubuntu电脑通过OpenSSH(s)。如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端，我们称为
 * 系统会试图通过DNS反查相对应的域名，如果DNS中没有这个IP的域名解析，则会等到DNS查询超时才会进行下一步
+* SKM(SSH Key Manager):一个在命令行下帮助管理和切换多个SSH key的工具
 
 ```sh
 sudo apt install sshd
