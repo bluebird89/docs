@@ -540,28 +540,42 @@ ls *.rmvb | xargs -n1 -i cp {} /mount/xiaodianying
 
 ### [zsh-users/zsh](https://github.com/zsh-users/zsh)
 
-* [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)：A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
+* [ ohmyzsh / ohmyzsh ](https://github.com/ohmyzsh/ohmyzsh)：A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
     - 兼容bash
     - 自动cd：只需输入目录名称
     - 命令选项补齐，比如输入 git，然后按 Tab，即可显示出 git都有哪些命令
     - 目录一次性补全：比如输入 Doc/doc按 Tab键会自动变成 Documents/document/
-    - 组件
-        + [plugin](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins)
-        + [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
-        + [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
-        + [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
-        + [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
-        + incr是一款自动提示插件
-        + [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
-        + [git-open](https://github.com/paulirish/git-open)
-    - Theme
-        + agnoster
-        + cloud
-        + wedisagree
-        + [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
-    - 工具
-        + [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
-        + [zplug / zplug](https://github.com/zplug/zplug):🌺 A next-generation plugin manager for zsh
+* powerline: need font support
+* [plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins)
+    - autojump:访问 ~/workspace/src ，只需要输入 j src
+    - sublime:st README.md 就可以调用机器上安装的Sublime Text打开当前目录的README.md文件进行编辑操作
+    - web-search:baidu hhkb pro2 直接在浏览器打开百度搜索关键字”hhkb pro2”
+    - [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
+    - [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh.记录平时输入过的命令，下次再输入的时候，它会提前提示，方便懒人。如果是需要的命令，直接 Ctrl+F 搞定
+    - extract:所有类型的文件解压通过一个命令x全搞定
+    - [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
+    - [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
+    - incr是一款自动提示插件
+    - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
+    - [git-open](https://github.com/paulirish/git-open)
+* [Theme](~/.oh-my-zsh/themes )
+    - agnoster
+    - cloud
+    - wedisagree
+    - ambda-mod
+    - [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
+* use
+    - 路径别名
+    - 进程id补全
+    - 快速跳转:d + enter，列出最近访问过的各个目录，然后选择目录前面的数字进行快速跳转
+    - 目录名简写与补全:只需要输入每个目录的首字母就行，然后再TAB键补全
+    - 命令参数补全
+    - r :重复执行上一条命令
+    - zsh-autosuggestions:记录平时输入过的命令，下次再输入的时候，它会提前提示
+    - extract:功能强大的解压插件，所有类型的文件解压通过一个命令x全搞定
+* 工具
+    - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
+    - [zplug / zplug](https://github.com/zplug/zplug):🌺 A next-generation plugin manager for zsh
 
 ```sh
 cat /etc/shells
@@ -570,18 +584,19 @@ echo $SHELL/bin/bash
 
 sudo yum install zsh
 sudo apt-get install zsh git wget
-
-brew install zsh zsh-completions # Mac
+brew install zsh zsh-completions
+sudo apt-get install powerline fonts-powerline
 
 wget --no-check-certificate 。![]https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
 
 chsh -s /bin/zsh
 source ~/.bashrc # 运行
+sudo usermod -s /usr/bin/zsh $(whoami) # set ZSH as the default login shell for the user
 
 # oh-my-zsh
 # 自动安装
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
 # 手动
@@ -650,7 +665,7 @@ alias c='clear'
 ZSH_THEME="robbyrussell" # 主题设置(（)文件在~/.oh-my-zsh/themes)
 
 # 插件
-plugins=(git textmate ruby autojump osx mvn gradle autojump)
+plugins=(git textmate ruby autojump osx mvn gradle)
 
 export DEFAULT_USER="henry" # hide username
 
@@ -1120,12 +1135,15 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 ssh-keygen -R <IP_ADDRESS>
 ```
 
-## autojump
+## [autojump](https://github.com/joelthelion/autojump)
+
+* 记得之前某个访问过的目录的大概名字，配合autojump，就能快速的跳转过去
 
 ```sh
 brew install autojump
-
-git clone git://github.com/joelthelion/autojump.git ./install.py
+sudo apt-get install autojump
+. /usr/share/autojump/autojump.sh # 以使得qutojump生效，
+source ~/.zshrc
 
 j + 目录名
 ```
@@ -1143,6 +1161,7 @@ j + 目录名
 
 ## [tmux]()
 
+* 基于session概念的多终端窗口管理功能:用户随时可以通过命令行恢复上次的会话
 * 命令行的典型使用方式:打开一个终端窗口（terminal window，以下简称"窗口"），在里面输入命令。用户与计算机的这种临时的交互，称为一次"会话"（session）
     - 窗口与其中启动的进程是连在一起的。打开窗口，会话开始；关闭窗口，会话结束
     - 会话与窗口可以"解绑"：窗口关闭时，会话并不终止，而是继续运行，等到以后需要的时候，再让会话"绑定"其他窗口
@@ -1151,9 +1170,10 @@ j + 目录名
     - 可以让新窗口"接入"已经存在的会话
     - 允许每个会话有多个连接窗口，因此可以多人实时共享会话
     - 还支持窗口任意的垂直和水平拆分
+* session->windows->panel
 * 快捷键都要通过前缀键唤起。默认的前缀键是Ctrl+b
     - 查看 tmux ls|Ctrl+b s：列出所有会话
-    - 新建 tmux new -s <session-name>
+    - 新建 tmux new -s <session-name>|
     - 分离: tmux detach|Ctrl+b d
     - 接入 tmux attach -t <session-name>
     - 杀死 tmux kill-session -t <session-name>
@@ -1226,6 +1246,50 @@ axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minima
 ccache gcc foo.c
 ```
 
+## [terminator](https://terminator-gtk3.readthedocs.io/en/latest/index.html)
+
+* depend python2.7
+* config: right click->prefermance or  `cd ~/.config/terminator/ && sudo vi config`
+
+```
+[global_config]
+  enabled_plugins = CustomCommandsMenu, TestPlugin, ActivityWatch, TerminalShot, MavenPluginURLHandler
+  title_inactive_bg_color = "#820f49"
+[keybindings]
+[layouts]
+  [[default]]
+
+    [[[child1]]]
+
+      parent = window0
+
+      profile = default
+
+      type = Terminal
+
+    [[[window0]]]
+
+      parent = ""
+
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#2e2f31"
+    background_darkness = 0.86
+    background_image = /home/taowang/桌面/earth.jpg
+    background_type = image
+    copy_on_selection = True
+    cursor_color = "#eee8d5"
+    font = Monospace 12
+    foreground_color = "#f3f0e7"
+    scroll_on_output = False
+    scrollback_lines = 50000
+    use_system_font = False
+  [[New Profile]]
+    background_image = None
+```
+
 ## 工具
 
 * terminal
@@ -1241,7 +1305,6 @@ ccache gcc foo.c
             * 易于选择和复制文本块
             * 简单选择屏幕滚动，使用CTRL + SHIFT + K清理缓冲区
             * 可自定义隐藏大部分不必要的细节(（)标签栏、菜单)，默认提供许多颜色主题
-        + [terminator](https://terminator-gtk3.readthedocs.io/en/latest/index.html):depend python2.7
     - Windows
         + WSL:提供了一个由微软开发的Linux兼容的内核接口(（)不包含Linux内核代码)，然后可以在其上运行GNU用户空间
             * WSL2

@@ -40,7 +40,7 @@ sudo apt-get purge nvidia*
 sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt-get update
 
-# 查看合适的驱动版本： 
+# 查看合适的驱动版本：
 ubuntu-drivers devices
 sudo apt-get install nvidia-driver-430
 sudo reboot
@@ -137,6 +137,7 @@ print(torch.cuda.is_available())
 * [jhfjhfj1/autokeras](https://github.com/jhfjhfj1/autokeras):accessible AutoML for deep learning. http://autokeras.com/
 * [cmusatyalab/openface](https://github.com/cmusatyalab/openface):Face recognition with deep neural networks. http://cmusatyalab.github.io/openface/
 * [PaddlePaddle](https://github.com/PaddlePaddle):百度自主研发、集深度学习训练和预测框架、模型库、工具组件、服务平台等为一体的开源深度学习平台 http://paddlepaddle.org/
+* [ ufoym / deepo ](https://github.com/ufoym/deepo):Set up deep learning environment in a single command line. http://ufoym.com/deepo
 
 ## 参考
 

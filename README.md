@@ -19,6 +19,10 @@
 
 * 早上手写 todo list，帮助自己清理思绪 focus on what’s important
 
+## project
+
+* Instead of just scraping the data, why not build a website with that data:elect the most popular posts. From there it could copy the title, along with a few sentences, and then create a post that it shares online
+
 ## 推荐
 
 * [wx-chevalier/Awesome-Lists](https://github.com/wx-chevalier/Awesome-Lists):📚 Guide to Galaxy, curated, worthy and up-to-date links/reading list for ITCS-Coding/Algorithm/SoftwareArchitecture/AI. 💫 ITCS-编程/算法/软件架构/人工智能等领域的文章/书籍/资料/项目链接精选，岁月沉淀的美好
