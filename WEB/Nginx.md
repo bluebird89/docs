@@ -2307,6 +2307,8 @@ fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 * [openresty/openresty](https://github.com/openresty/openresty):Turning Nginx into a Full-Fledged Scriptable Web Platform https://openresty.org
 * [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes https://kubernetes.github.io/ingress-nginx/
 * [valentinxxx/nginxconfig.io](https://github.com/valentinxxx/nginxconfig.io):⚙️ NGiИX config generator generator on steroids 💉 https://nginxconfig.io
+* [NGINX Config](https://www.digitalocean.com/community/tools/nginx):The easiest way to configure a performant, secure,
+and stable NGINX server.
 * [lebinh/ngxtop](https://github.com/lebinh/ngxtop):Real-time metrics for nginx server
     - `pip install ngxtop`
     - `ngxtop [选项]（print | top | avg | sum） <var>`

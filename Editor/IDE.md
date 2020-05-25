@@ -1,8 +1,5 @@
 # IDE
 
-* IntelliJ IDEA:业界被公认为最好的java开发工具之一
-* PyCharm
-* WebStorm:一款JavaScript 开发工具
 * CLion:专为C/C++所创建的跨平台IDE
 * AppCode:用于帮助开发 Mac、iPhone 和 iPad 的应用程序
 * RubyMine:供了一个综合的Ruby编码编辑器
@@ -13,29 +10,18 @@
 * [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
 * [theia-ide/theia](https://github.com/theia-ide/theia):Theia is a cloud & desktop IDE framework implemented in TypeScript. http://theia-ide.org
 
+generate:Alt+ins
+
 ## Tips
 
 * 打印统一 keyMap
 
 ## PHPStrom
 
-ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/local/bin/pstorm,IDE启动需要占用单独进程终端，可以`pstorm&`启动
-
-## 配置文件
-
-会在根目录下生成文件夹./php，其中有config and system, 自定义配置：Create the file "idea.properties" and open it in an editor. Set theidea.system.path and/or idea.config.path variables as desired, for example:
-
-* new project
-  - Drual
-  - Joomla
-  - Wordpress
-  - Angular
-  - Foundation
-  - HTML5Boilerpalte
-  - Nodejs
-  - react App
-  - React native
-  - twitter bootstrap
+* ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/local/bin/pstorm,IDE启动需要占用单独进程终端，可以`pstorm&`启动
+* 配置文件: 会在根目录下生成文件夹./php，其中有config and system, 自定义配置：Create the file "idea.properties" and open it in an editor. Set theidea.system.path and/or idea.config.path variables as desired, for example:
+* plugin
+  - Save Actions
 
 ## 快捷键
 
@@ -171,6 +157,11 @@ ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/loca
 * 选择编码规范:IDE settings->Editor->Inspections->PHP->PHP Code Sniffer validation(打钩) ->Coding Standard 选择规范（PEAR）。
 * 下载地址:http://pear.php.net/package/PHP_CodeSniffer/
 
+* double shift：搜索文件
+* alt + 1:项目试图切换
+* command + shift + n：打开输入的文件
+* command + e :最近文件
+
 ## 编辑
 
 * Command+alt+T 用 (if..else, try..catch, for, etc.)包住
@@ -228,16 +219,15 @@ ubuntu 下载文件含有安装文档,安装文件会自动启动脚本/usr/loca
 * Command+T 更新项目
 * alt+shift+C 打开最近修改列表
 
+* 添加版本信息分组:名词
+* 提交时添加动词
+
 ## 重构
 
 * F5 复制文件到某个目录
 * F6 移动文件到某个目录
 * Command+delete 安全删除
 * shift+F6 重命名
-
-## 模版
-
-livetemplate
 
 ## 功能
 
@@ -255,18 +245,6 @@ livetemplate
 * vagrant
     - Init in Project Root
     - Start SSH session
-
-## key
-
-* double shift：搜索文件
-* alt + 1:项目试图切换
-* command + shift + n：打开输入的文件
-* command + e :最近文件
-
-## version control
-
-* 添加版本信息分组:名词
-* 提交时添加动词
 
 ## IDEA
 
@@ -307,13 +285,21 @@ livetemplate
 * 格式化输出数据
 * 修正单词拼写
 
+## macro
+
+* selects all the lines (Ctrl+A), formats (Ctrl+Alt+L), deselect all (Up and Down arrow) and saves a file (Ctrl+S), and bind this macro to Ctrl+S.
+  - Edit > Macros > Start Macro recording
+  - Press Ctrl+A, then Ctrl+Alt+L, then Up arrow, then Down arrow, and finally then Ctrl+Alt+Shift+S
+  - Stop recording the macro clicking on the Stop button on the bottom right of the page.
+  Give this macro a name like "Format and Save"
+
 ## 工具
 
 * [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/
 * [cdoco/jetbrains-license-server](https://github.com/cdoco/jetbrains-license-server):已废弃
 * [激活](https://www.jianshu.com/p/133af2e4fe3f): 修改host 0.0.0.0 account.jetbrains.com  去http://idea.lanyus.com/ 生存激活码
 * [LightTable/LightTable](https://github.com/LightTable/LightTable):The Light Table IDE ⛺ http://www.lighttable.com
-* [申请免费使用](https://www.jetbrains.com/shop/eform/opensource?product=ALL) 
+* [申请免费使用](https://www.jetbrains.com/shop/eform/opensource?product=ALL)
 * [ChrisRM/material-theme-jetbrains](https://github.com/ChrisRM/material-theme-jetbrains#installation):JetBrains theme of Material Theme
 
 ## 参考

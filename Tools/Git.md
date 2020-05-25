@@ -1725,6 +1725,23 @@ These features allow to pause a branch development and switch to another one (_"
 * Use Branches:Branching is one of Git’s most powerful features – and this is not by accident: quick and easy branching was a central requirement from day one. Branches are the perfect tool to help you avoid mixing up different lines of development. You should use branches extensively in your development workflows: for new features, bug fixes, experiments, ideas…
 * Agree on a Workflow:Git lets you pick from a lot of different workflows: long-running branches, topic branches, merge or rebase, git-flow… Which one you choose depends on a couple of factors: your project, your overall development and deployment workflows and (maybe most importantly) on your and your teammates’ personal preferences. However you choose to work, just make sure to agree on a common workflow that everyone follows.
 
+## [jonas/tig](https://github.com/jonas/tig)
+
+text-mode interface for git
+
+```sh
+ brew install tig
+
+tig        [options] [revisions] [--] [paths]
+tig log    [options] [revisions] [--] [paths]
+tig show   [options] [revisions] [--] [paths]
+tig blame  [options] [rev] [--] path
+tig grep   [options] [pattern]
+tig refs
+tig stash
+tig status
+```
+
 ## 问题
 
 > error: insufficient permission for adding an object to repository database .git/objects
@@ -1739,7 +1756,7 @@ These features allow to pause a branch development and switch to another one (_"
 
 * [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
 * [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
-* [jonas/tig](https://github.com/jonas/tig):text-mode interface for git
+  - `git summary`
 * [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
 * [kennethreitz/legit](https://github.com/kennethreitz/legit):Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
 * [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
