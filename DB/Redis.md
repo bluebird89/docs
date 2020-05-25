@@ -1612,7 +1612,7 @@ rdr keys FILE1 [FILE2] [FILE3]...
 * [twitter/twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
 * [CodisLabs/codis](https://github.com/CodisLabs/codis):Proxy based Redis cluster solution supporting pipeline and scaling dynamically
 * [erikdubbelboer/phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. http://dubbelboer.com/phpRedisAdmin/
-* [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis
+* [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis `pcel install redis`
 * [redis-port](link):redis 间数据同步
 * [laixintao / iredis](https://github.com/laixintao/iredis):Interactive Redis: A Terminal Client for Redis with AutoCompletion and Syntax Highlighting. https://iredis.io/show
 * [redis-faina](https://github.com/facebookarchive/redis-faina):热点 key 寻找 (内部实现使用 monitor，所以建议短时间使用)

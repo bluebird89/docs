@@ -705,7 +705,7 @@ php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数
 
 # /usr/local/lib/php/pecl/20180731/swoole.so doesn't appear to be a valid Zend extension
 
-php -S localhost:8000 # 内置的 web 服务器
+php -S localhost:8000 # 内置 web 服务器
 ```
 
 ### [PECL](http://pecl.php.net/)
@@ -761,6 +761,10 @@ Errors were encountered while processing:
 
 pecl install channel://pecl.php.net/vld-0.16.0
 php -dvld.active=1 -dvld.excute=0 at.php # excute =0 opcode在么 并不执行
+# Invalid argument supplied for foreach() in Command.php on line 249
+sudo apt isntall php7.4-xml
+# Trying to access array offset on value of type bool in PEAR/REST.php
+mkdir -p /tmp/pear/cache
 ```
 
 ## 配置
