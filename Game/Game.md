@@ -75,9 +75,26 @@
 
 * 《瘟疫公司》（Plague Inc）
 
+## 手柄
+
+* Switch pro
+- 索尼按键：B Button T Trigger S Stick
+    - LB 
+    - LT 
+    - RB 
+    - RT 
+    - LS 
+    - RS
+    - △ （PLAY）象征视角，代表一个人的头或者前进的方向，是绿色 X
+    - □  (STOP)象征一张纸，代表菜单或者文档，是粉色 Y
+    - O (select)代表决策里的是，红色 A
+    - X (cancel)代表决策里的否，蓝色 B
+* 八位堂SN30 pro+
+* 盖世小鸡T4
+
+
 ### PC
 
-* PES
 * 战地
 * 使命召唤
 * [diasurgical/devilution](https://github.com/diasurgical/devilution):Diablo devolved - magic behind the 1996 computer game
@@ -109,12 +126,15 @@
 *   [ ] Alliance: Air War by Art of the State LLC
 *   [ ] 王权 Reigns
 
-### [steam](https://store.steampowered.com/)
+### [Steam](https://store.steampowered.com/)
 
 *   [ ] PLAYERUNKNOWN'S BATTLEGROUNDS 绝地求生
 *   [ ] Counter-Strike: Global Offensive
 *   [ ] Frostpunk
 *   [ ] 双点医生
+*   PES2020
+	- PS4 CONTROLLER NOT WORKING
+        - Steam > Library > Right Click PES > Properties>;steam input per-game settings  and use bpm overlay when steam input is active both off
 
 ## [Epic](https://www.epicgames.com/store/zh-CN/)
 
