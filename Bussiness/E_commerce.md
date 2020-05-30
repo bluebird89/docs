@@ -182,3 +182,9 @@
 ## 项目
 
 * [ linlinjava / litemall ](https://github.com/linlinjava/litemall): 又一个小商城。litemall = Spring Boot后端 + Vue管理员前端 + 微信小程序用户前端 + Vue用户移动端
+
+
+## 工具
+
+* pay
+    - [ Exrick / xpay ](https://github.com/Exrick/xpay):XPay个人免签收款支付系统 完全免费 资金直接到达本人账号 支持 支付宝 微信 QQ 云闪付 无需备案 无需签约 无需挂机监控APP 无需插件 无需第三方支付SDK 无需营业执照身份证 只需收款码 搞定支付流程 现已支持移动端支付 http://xpay.exrick.cn/

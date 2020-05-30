@@ -25,6 +25,7 @@ Dependency Manager for PHP https://getcomposer.org/
 ## 安装
 
 * window配置：`C:\Users\XXX\AppData\Roaming\Composer\config.json`
+* composer config composer_home
 
 ```sh
 # method 1
@@ -55,11 +56,14 @@ sudo chown -R $USER .composer/
 ### 卸载composer:找到文件删除即可
 # config
 composer config -l # 查看
+composer config --list --global
 composer config -g repo.packagist composer https://packagist.phpcomposer.com # 全局配置
 composer config repo.packagist composer https://packagist.phpcomposer.com # 项目配置
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 composer config -g --unset repos.packagist
+
+composer config --global --auth github-oauth.github.com myCorrectLongToken
 ```
 
 ## package
@@ -154,9 +158,9 @@ composer config -g --unset repos.packagist
     ]
 ```
 
-* PSR-0: $student = new \Bpp\Student(); 时，对于 PSR-0 代码目录结构是： bpp/Bpp/Student.php 。即目录包含了最外层的命名空间 Bpp 
+* PSR-0: $student = new \Bpp\Student(); 时，对于 PSR-0 代码目录结构是： bpp/Bpp/Student.php 。即目录包含了最外层的命名空间 Bpp
   - 目录名称与命名空间层层对应，类名中的下划线_会被转化成目录分隔符，会导致目录结构变得比较深,加载”Foo\Bar\Baz”这个class时，会去寻找“src\Foo\Bar\Baz.php”这个文件，这个配置会以map的形式写入生成的vendor/composer/autoload_namespaces.php中。
-* PSR-4: $user = new \App\User(); 时，对于 PSR-4 代码目录结构是： app/User.php 。即目录不需要包含最外层的命名空间 App 
+* PSR-4: $user = new \App\User(); 时，对于 PSR-4 代码目录结构是： app/User.php 。即目录不需要包含最外层的命名空间 App
   - 去加载”Foo\Bar\Baz”这个class时，会去寻找“src\Bar\Baz.php”这个文件，对应的会写入到vendor/composer/autoload_psr4.php 这个文件中
 * classmap:通过配置指定的目录或者文件，然后在composer安装或者更新的时，它会扫描指定目录下以.php和.inc结尾的文件中的class，生成class到指定file path的映射，并加入到新生成的vendor/composer/autoload_classmap.php 文件 所以通过 classmap 的类即使不遵循 PSR-0 和 PSR-4 规范也可以自动加载成功。
 * files:手动指定供直接加载的文件（相对于 vendor 目录）所以也不需要满足 PSR-0 和 PSR-4 规范。
@@ -204,7 +208,7 @@ composer init  # 新建文件 composer.json
 composer init --require=foo/bar:1.0.0 -n
 composer init --require="twig/twig:1.*" -n --profile # 显示执行时间
 
-composer require /repo:dev-branchname
+composer require --dev /repo:dev-branchname
 
 composer why vlucas/phpdotenv # 确定哪些依赖项需要它
 composer search monolog

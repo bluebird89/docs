@@ -1027,7 +1027,6 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [micro/go-micro](https://github.com/micro/go-micro):A Go microservices development framework https://go-micro.dev
     - [Terry-Mao / goim](https://github.com/Terry-Mao/goim):goim https://goim.io/
     - [ gofiber / fiber ](https://github.com/gofiber/fiber): zap Fiber is an Express inspired web framework written in Go with coffee https://gofiber.io
-
 * 包管理
     - [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
     - [Go Packages](https://godoc.org/)
@@ -1080,6 +1079,9 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [parnurzeal / gorequest](https://github.com/parnurzeal/gorequest):GoRequest -- Simplified HTTP client ( inspired by nodejs SuperAgent ) http://parnurzeal.github.io/gorequest/
 * QUIC
     - [lucas-clemente / quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
+* load
+    - [ tsenart /
+vegeta ](https://github.com/tsenart/vegeta):HTTP load testing tool and library. It's over 9000!
 * excel
     - [360EntSecGroup-Skylar/excelizes](https://github.com/360EntSecGroup-Skylar/excelize):Golang library for reading and writing Microsoft Excel™ (XLSX) files.
 * event-loop
