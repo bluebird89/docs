@@ -1018,6 +1018,7 @@
     - <http://kmate.me/cn/>
     - <https://readfree.me/>
     - [时钟](http://k.ilib.io/u/clock.html)
+    - Knotes:Kindle 标注管理器
 
 ## 出版社
 

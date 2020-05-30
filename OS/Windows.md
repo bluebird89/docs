@@ -1,6 +1,17 @@
 # Windows
 
 * window 10  2004:开启预览计划
+  - 云重置
+  - 更新限速
+  - 重命名虚拟桌面
+    + Win 键 + Tba 键打开时间轴
+    + Ctrl + Win + 方向键 ← → 快速切换虚拟桌面
+  - 任务管理器新增两项信息，独立 GPU 温度和磁盘类型
+  - 可以卸载记事本
+  - 更新了小娜界面
+  - 开机重启上次未关闭的应用
+  - 新的内置应用图标
+  - 升级沙盒
 
 ## 安装
 
@@ -11,13 +22,14 @@
 
 ## 配置
 
-* 添加自启动 文件位置：`C:\Users\henryli\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
+* 添加自启动:`C:\Users\henryli\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
   - get location cmd: shell:startup
   - add shortcuts into folder
   - Sticky Notes
 * 默认图片 Windows Photo Viewer 恢复
 * 睡眠(Sleep):把当前操作系统的状态保存在内存中，除内存电源外，切断笔记本所有其他电源 启动时，从内存读取上次保存的系统状态，直接恢复使用。
-* 休眠(Hibernate):把当前操作系统的状态保存到硬盘中，然后切断笔记本所有电源。启动时，从硬盘读取上次保存的系统状态，直接恢复使用。
+* 休眠(Hibernate):把当前操作系统的状态保存到硬盘中，然后切断笔记本所有电源。启动时，从硬盘读取上次保存的系统状态，直接恢复使用
+* 控制面板→程序和功能→启用或关闭Windows功能→勾选Windows Sandbox
 
 ```
 # Windows Photo Viewer 恢复 cmd 打开命令提示符，输入以下内容
