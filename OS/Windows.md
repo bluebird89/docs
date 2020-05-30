@@ -1,6 +1,34 @@
 # Windows
 
-Windows是最烂的开发平台
+* window 10  2004:开启预览计划
+
+## 安装
+
+* 先分区格式化，主分区激活
+    - 主分区
+    - 逻辑分区
+* 更新引导记录
+
+## 配置
+
+* 添加自启动 文件位置：`C:\Users\henryli\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
+  - get location cmd: shell:startup
+  - add shortcuts into folder
+  - Sticky Notes
+* 默认图片 Windows Photo Viewer 恢复
+* 睡眠(Sleep):把当前操作系统的状态保存在内存中，除内存电源外，切断笔记本所有其他电源 启动时，从内存读取上次保存的系统状态，直接恢复使用。
+* 休眠(Hibernate):把当前操作系统的状态保存到硬盘中，然后切断笔记本所有电源。启动时，从硬盘读取上次保存的系统状态，直接恢复使用。
+
+```
+# Windows Photo Viewer 恢复 cmd 打开命令提示符，输入以下内容
+FTYPE Paint.Picture=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1
+FTYPE jpegfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1
+FTYPE pngfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1
+
+## 版本号
+Win + R winver
+systeminfo | findstr Build
+```
 
 ## 工具
 
@@ -70,9 +98,9 @@ Windows是最烂的开发平台
   - 批量调节图片尺寸
 * [xmeters](https://entropy6.com/xmeters/):Taskbar System Stats for Windows
 * [Desktop Info](https://www.glenn.delahoy.com/desktopinfo/)
-* Geek卸载
 * 录屏
   - Bandicam
+* Microsoft to do
 
 ```sh
 ## 安装 choco 以管理员运行cmd
@@ -89,30 +117,6 @@ set-executionpolicy remotesigned -scope currentuser # 保证允许本地脚本�
 iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 scoop help|update|info
 scoop + search|install|status|uninstall|home + 对象
-```
-
-## 安装
-
-* 先分区格式化，主分区激活
-    - 主分区
-    - 逻辑分区
-* 更新引导记录
-
-## 配置
-
-* 添加自启动 文件位置：`C:\Users\henryli\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
-  - get location cmd: shell:startup
-  - add shortcuts into folder
-  - Sticky Notes
-* 默认图片 Windows Photo Viewer 恢复
-* 睡眠(Sleep):把当前操作系统的状态保存在内存中，除内存电源外，切断笔记本所有其他电源 启动时，从内存读取上次保存的系统状态，直接恢复使用。
-* 休眠(Hibernate):把当前操作系统的状态保存到硬盘中，然后切断笔记本所有电源。启动时，从硬盘读取上次保存的系统状态，直接恢复使用。
-
-```
-# Windows Photo Viewer 恢复 cmd 打开命令提示符，输入以下内容
-FTYPE Paint.Picture=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1
-FTYPE jpegfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1
-FTYPE pngfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1
 ```
 
 ## 快捷键
