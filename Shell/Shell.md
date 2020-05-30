@@ -29,6 +29,7 @@
     - https://www.digitalocean.com/community/questions/what-are-your-favorite-bash-aliases
     - https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/
     - https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/
+    - [ gto76 / standard-aliases ](https://github.com/gto76/standard-aliases):Attempt at defining a standard extension to Linux in form of Bash functions
 * 参考
     - https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4
     - https://dev.to/_darrenburns/tools-to-power-up-your-command-line-part-2-2737
@@ -587,43 +588,32 @@ sudo apt-get install zsh git wget
 brew install zsh zsh-completions
 sudo apt-get install powerline fonts-powerline
 
-wget --no-check-certificate 。![]https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-
-chsh -s /bin/zsh
-source ~/.bashrc # 运行
-sudo usermod -s /usr/bin/zsh $(whoami) # set ZSH as the default login shell for the user
-
 # oh-my-zsh
 # 自动安装
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+wget --no-check-certificate 。![]https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
 
 # 手动
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
-chsh -s /bin/zsh # 修改系统bash
+chsh -s /bin/zsh
 source ~/.bashrc # 运行
-
-zsh # 切换zsh
-bash # 切换 bash
+sudo usermod -s /usr/bin/zsh $(whoami) # set ZSH as the default login shell for the user
 
 cd ~/.oh-my-zsh/custom/plugins
 git clone git://github.com/zsh-users/zsh-syntax-highlighting.git # add to .zshrc plugin
 
-echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.zshrc
-
 ## 配置：home目录的.zshrc(不用单配，插件配置有)
-
-# install fonts-powerline
-`sudo apt-get install fonts-powerline`
+sudo apt-get install zsh-theme-powerlevel9k
+echo "source /usr/share/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
 
 # config
 ZSH_THEME="agnoster"
 
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 # alias
 alias cls='clear'
@@ -671,6 +661,7 @@ export DEFAULT_USER="henry" # hide username
 
 PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}>'
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # 更新
 upgrade_oh_my_zsh
@@ -1158,66 +1149,6 @@ j + 目录名
     - On multi-select mode (-m), TAB and Shift-TAB to mark multiple items
     - Emacs style key bindings
     - Mouse: scroll, click, double-click; shift-click and shift-scroll on multi-select mode
-
-## [tmux]()
-
-* 基于session概念的多终端窗口管理功能:用户随时可以通过命令行恢复上次的会话
-* 命令行的典型使用方式:打开一个终端窗口（terminal window，以下简称"窗口"），在里面输入命令。用户与计算机的这种临时的交互，称为一次"会话"（session）
-    - 窗口与其中启动的进程是连在一起的。打开窗口，会话开始；关闭窗口，会话结束
-    - 会话与窗口可以"解绑"：窗口关闭时，会话并不终止，而是继续运行，等到以后需要的时候，再让会话"绑定"其他窗口
-* 终端复用器（terminal multiplexer）在需要经常登录远程服务器工作的时候会很有用，可以保持远程登录的会话，还可以在一个窗口中查看多个 shell 的状态 替代screen、nohup
-    - 允许在单个窗口中，同时访问多个会话。这对于同时运行多个命令行程序很有用
-    - 可以让新窗口"接入"已经存在的会话
-    - 允许每个会话有多个连接窗口，因此可以多人实时共享会话
-    - 还支持窗口任意的垂直和水平拆分
-* session->windows->panel
-* 快捷键都要通过前缀键唤起。默认的前缀键是Ctrl+b
-    - 查看 tmux ls|Ctrl+b s：列出所有会话
-    - 新建 tmux new -s <session-name>|
-    - 分离: tmux detach|Ctrl+b d
-    - 接入 tmux attach -t <session-name>
-    - 杀死 tmux kill-session -t <session-name>
-    - 切换 tmux switch -t <session-name>
-    - 重命名 tmux rename-session -t 0 <new-name>|Ctrl+b $
-    - 划分窗格 tmux split-window|tmux split-window -h
-    - 移动光标 tmux select-pane -U|D|L|R
-    - 交换窗格 tmux swap-pane -U|D
-    - 新建窗口 `tmux new-window -n <window-name>`
-    - 切换 tmux select-window -t <window-number>|<window-name>
-    - 重命名窗口  tmux rename-window <new-name>
-    - Ctrl+b %：划分左右两个窗格。
-    - Ctrl+b "：划分上下两个窗格。
-    - Ctrl+b <arrow key>：光标切换到其他窗格。<arrow key>是指向要切换到的窗格的方向键，比如切换到下方窗格，就按方向键↓。
-    - Ctrl+b ;：光标切换到上一个窗格。
-    - Ctrl+b o：光标切换到下一个窗格。
-    - Ctrl+b {：当前窗格左移。
-    - Ctrl+b }：当前窗格右移。
-    - Ctrl+b Ctrl+o：当前窗格上移。
-    - Ctrl+b Alt+o：当前窗格下移。
-    - Ctrl+b x：关闭当前窗格。
-    - Ctrl+b !：将当前窗格拆分为一个独立窗口。
-    - Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
-    - Ctrl+b Ctrl+<arrow key>：按箭头方向调整窗格大小。
-    - Ctrl+b q：显示窗格编号
-    - Ctrl+b c：创建一个新窗口，状态栏会显示多个窗口的信息。
-    - Ctrl+b p：切换到上一个窗口（按照状态栏上的顺序）。
-    - Ctrl+b n：切换到下一个窗口。
-    - Ctrl+b <number>：切换到指定编号的窗口，其中的<number>是状态栏上的窗口编号。
-    - Ctrl+b w：从列表中选择窗口。
-    - Ctrl+b ,：窗口重命名。
-    - 列出所有快捷键 tmux list-keys
-    - 列出所有 Tmux 命令及其参数:tmux list-commands
-    - 列出当前所有 Tmux 会话的信息 tmux info
-    - 重新加载当前的 Tmux 配置tmux source-file ~/.tmux.conf
-* 第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推
-
-```sh
-sudo apt-get install tmux
-sudo yum install tmux
-brew install tmux
-
-tmux # into 底部有一个状态栏。状态栏的左侧是窗口信息（编号和名称），右侧是系统信息
-```
 
 ## 问题
 

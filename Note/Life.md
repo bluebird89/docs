@@ -237,6 +237,12 @@
     - 微波炉
     - 蒸烤微一体机
     - 空气炸锅
+        + Philips HD9641/96
+        + SimpleTaste 1400W Multi-function
+        + T-fal Actifry
+        + Cuisinart T0A-60
+        + Power Air Fryer XL
+        + Alvon Bay Air Fryer
 * 家具
     - 黑胡桃木一体桌，良禽佳木家的罗胖桌，2.2*80的尺寸，5950
     - IKEA

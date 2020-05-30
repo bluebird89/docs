@@ -5,7 +5,7 @@ The MongoDB Database https://www.mongodb.com/
 * 由C＋＋写就，其名字来自humongous这个单词的中间部分。关于它的一个最简洁描述为：scalable, high-performance, open source, schema-free, document-oriented database。MongoDB的主要目标是在键/值存储方式（提供了高性能和高度伸缩性）以及传统的RDBMS系统（丰富的功能）架起一座桥梁，集两者的优势于一身。
 * 数据结构：db->collection->document（BSON（binary json）存放于硬盘）,BSON是Binary JSON 的简称，是一个JSON文档对象的二进制编码格式。BSON同JSON一样支持往其它文档对象和数组中再插入文档对象和数组，同时扩展了JSON的数据类型。如：BSON有Date类型和BinDate类型。
 * BSON被比作二进制的交换格式，如同Protocol Buffers，但BSON比它更“schema-less”，非常好的灵活性但空间占用稍微大一点
-  - 
+  -
 * 跟一般的key-value数据库不一样的是，它的value中存储了结构信息,以单文档为单位存储的，可以任意给一个或一批文档新增或删除字段，而不会对其它文档造成影响，这就是所谓的schema-free，这也是文档型数据库最主要的优点。
 * 最大的特点是支持的查询语言非常强大，其语法有点类似于面向对象的查询语言，几乎可以实现类似关系数据库单表查询的绝大部分功能，而且还支持对数据建立索引。Mongo还可以解决海量数据的查询效率，根据官方文档，当数据量达到50GB以上数据时，Mongo数据库访问速度是MySQL10 倍以上。
 
@@ -461,28 +461,28 @@ MongoDB 中的 Sharding 正式为了水平扩展而设计的。MongoDB 中通过
 * 将数据库表中的数据按照一定的边界分成若干组，每一组放到一台 MongoDB 服务器上。以用户年龄age为进行Sharding（切分）的Shard Key。每一个 Shard 服务器存储数据的一个子集，
 * 查询时通过mongos，它可以被称为 Shard 集群中的路由器。处理来自应用服务器的请求，它是在应用服务器和Shard 集群之间的一个接口。
 * config server，它存储 Shard 集群中所有其他成员的配置信息，mongos会到这台config server查看集群中其他服务器的地址，这是一台不需要太高性能的服务器，因为它不会用来做复杂的查询计算，值得注意的是，在 MongoDB3.4 以后，config server必须是一个replica set。存储 shard 集群的配置信息，通常部署在一个 replica set 上。
-* mtools。他是用来创建各种 MongoDB 环境的命令行工具，代码使用python写的，可以通过pip install安装到你的环境上
-
-## 客户端
-
-* [Robo 3T](https://robomongo.org/):Robo 3T (formerly Robomongo) is the free lightweight GUI for MongoDB enthusiasts.
-* [Studio3T/robomongo](https://github.com/Studio3T/robomongo):Native cross-platform MongoDB management tool http://robomongo.org
-* [Studio 3T](https://studio3t.com/):Studio 3T is the GUI that makes working with MongoDB easy.Available for Windows, Mac, and Linux.
-* [NoSQLBooster](https://nosqlbooster.com/):NoSQLBooster for MongoDB (formerly MongoBooster) is a shell-centric cross-platform GUI tool for MongoDB v2.6-3.6, which provides fluent query builder, SQL query SQL Query, update-in-place, ES2017 syntax support and true intellisense experience.
-* [Automattic/mongoose](https://github.com/Automattic/mongoose):MongoDB object modeling designed to work in an asynchronous environment. http://mongoosejs.com
-* [mongo-express/mongo-express](https://github.com/mongo-express/mongo-express):Web-based MongoDB admin interface, written with Node.js and express
-
-## 工具
-
-* [dylang/shortid](https://github.com/dylang/shortid):Short id generator. Url-friendly. Non-predictable. Cluster-compatible. https://www.npmjs.org/package/shortid
+* mtools。是用来创建各种 MongoDB 环境的命令行工具，代码使用python写的，可以通过pip install安装到你的环境上
 
 ## 图书
 
 * 《MongoDB The Definitive Guide》
 
+## 工具
+
+* [dylang/shortid](https://github.com/dylang/shortid):Short id generator. Url-friendly. Non-predictable. Cluster-compatible. https://www.npmjs.org/package/shortid
+* 客户端
+  - [Robo 3T](https://robomongo.org/):Robo 3T (formerly Robomongo) is the free lightweight GUI for MongoDB enthusiasts.
+  - [Studio3T/robomongo](https://github.com/Studio3T/robomongo):Native cross-platform MongoDB management tool http://robomongo.org
+  - [Studio 3T](https://studio3t.com/):Studio 3T is the GUI that makes working with MongoDB easy.Available for Windows, Mac, and Linux.
+  - [NoSQLBooster](https://nosqlbooster.com/):NoSQLBooster for MongoDB (formerly MongoBooster) is a shell-centric cross-platform GUI tool for MongoDB v2.6-3.6, which provides fluent query builder, SQL query SQL Query, update-in-place, ES2017 syntax support and true intellisense experience.
+  - [Automattic/mongoose](https://github.com/Automattic/mongoose):MongoDB object modeling designed to work in an asynchronous environment. http://mongoosejs.com
+  - [mongo-express/mongo-express](https://github.com/mongo-express/mongo-express):Web-based MongoDB admin interface, written with Node.js and express
+* 云服务
+  - [mlab](https://mlab.com/):Database-as-a-Service for MongoDB
+
 ## 参考
 
-* [MongoDB Docs](https://docs.mongodb.com/) 
+* [MongoDB Docs](https://docs.mongodb.com/)
 * [senssei/mongo-cluster-docker](https://github.com/senssei/mongo-cluster-docker):Docker compose config for mongodb cluster
 * [MongoDB的水平扩展，你做对了吗？](https://juejin.im/entry/5a0266a76fb9a0450908ec76)
 * [rueckstiess/mtools](https://github.com/rueckstiess/mtools):A collection of scripts to set up MongoDB test environments and parse and visualize MongoDB log files.

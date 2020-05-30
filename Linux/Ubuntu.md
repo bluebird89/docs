@@ -51,6 +51,14 @@ export TMPDIR=$HOME/tmp
 cat /proc/version
 uname -a
 lsb_release -a
+
+sudo apt install update-manager-core
+sudo do-release-upgrade -m desktop -d
+
+sudo dpkg --get-selections |grep linux-image
+sudo apt-get install linux-image-4.4.0-75-generic
+sudo apt-get remove linux-image-4.4.0-75-generic
+sudo update-grub
 ```
 
 ## hardware
@@ -221,7 +229,7 @@ reboot
 sudo update-rc.d -f mount_and_frpc.sh remove # 取消
 ```
 
-## 语言
+## Environment
 
 * GUI:`sudo dpkg-reconfigure locales`
 
@@ -317,10 +325,11 @@ sudo apt install -y apt-fast`
     + Kazam
   - 社交
     + Franz 是一个即时消息客户端，它将聊天和信息服务结合到了一个应用中。它是一个现代化的即时消息平台，在单个应用中支持了 Facebook Messenger、WhatsApp、Telegram、微信、Google Hangouts、 Skype
-    + Jitsy
+    + [Jitsy](https://jitsi.org/):More secure, more flexible, and
+completely free video conferencing
     + Viber：跨平台的 Skype 替代品
     + [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
-  - Synaptic：软件管理
+  - [Synaptic](http://www.nongnu.org/synaptic/)： a graphical package management program for apt  `sudo apt install synaptic`
   - 清理工具
     + Ubuntu Cleaner `sudo add-apt-repository ppa:gerardpuig/ppa && sudo apt-get install ubuntu-cleaner`
     + [BleachBit](https://www.bleachbit.org/download)
@@ -345,11 +354,12 @@ sudo rm/var/lib/apt/lists/lock
 sudo rm/var/lib/dpkg/lock
 sudo rm/var/lib/dpkg/lock-frontend
 
-sudo apt-cache search softname1 softname2 softname3...... # 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
+sudo apt list --installed
+sudo apt search softname1 softname2 softname3...... # 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
+apt show postgresql
 sudo apt[-get] install [packagename] # 其后加上软件包名，用于安装一个软件包
 sudo apt[-get] -f install # 解决依赖问题
 sudo apt update --fix-missing
-sudo apt update
 sudo apt[-get] upgrade # 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表 升级本地可更新的全部软件包，但存在依赖问题时将不会升级，通常会在更新之前执行一次update
 sudo apt[-get] dist-upgrade # 解决依赖关系并升级(存在一定危险性)
 sudo apt --fix-broken install # continue install
@@ -410,6 +420,9 @@ sudo apt-key add - < Release.key
 
 sudo apt-get update
 sudo apt-get install albert
+
+sudo apt-key list
+sudo apt-key del KEYFROMABOVE
 
 ## error
 E: Could not get lock /var/lib/dpkg/lock – open (11: Resource temporarily unavailable)
@@ -491,14 +504,16 @@ deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe
   - 下载 解压，apps-menugnome-shell-extensions.gcampax.github.com.v40.shell-extension
   - 去掉后缀 .v40.shell-extension
   - 把文件夹拷贝到 `~/.local/share/gnome-shell/extensions`，重启 Gnome-Tweaks
-  - `/usr/share/themes`
   - /usr/share/gnome-shell/extensions/
 * GNOME Tweaks Tool `sudo apt install gnome-tweaks`
 * 插件
   - `sudo aptitude install gnome-shell-extension-ubuntu-dock`
   - `sudo aptitude install gnome-shell-extension-system-monitor`
   -  Open Weather
-* Theme
+  -  dash to dock
+* Theme `/usr/share/themes`
+  - [Yaru-Colors](https://www.pling.com/s/Gnome/p/1299514/)
+  - [](https://www.pling.com/s/Gnome)
   - [gnome-look](https://www.gnome-look.org/)
     + 需要选择 GTK3 分类下的主题
     + file download(~/.themes) or isntall
@@ -508,28 +523,31 @@ deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe
   - Communitheme `sudo snapinstall communitheme –edge`
   - [vinceliuice / vimix-gtk-themes](https://github.com/vinceliuice/vimix-gtk-themes):Vimix is a flat Material Design theme for GTK 3, GTK 2 and Gnome-Shell etc. https://vinceliuice.github.io/
   - sudo apt install sierra-gtk-theme
-* icons
-  - `~/.icons`
+* icons: `/usr/share/icons` > `~/.icons`
+* [Grub-theme-stylish ](https://www.pling.com/s/Gnome/p/1009237/)
 * 重启： `Alt + F2`, r
 
 ```sh
 sudo apt install gnome-tweak-tool gnome-shell-extensions chrome-gnome-shell
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 
-gsettings list-schemas             显示系统已安装的不可重定位的schema
-gsettings list-relocatable-schemas 显示已安装的可重定位的schema
-gsettings list-children SCHEMA   显示指定schema的children，其中SCHEMA指xml文件中schema的id属性值，例如实例中的"org.lili.test.app.testgsettings"
-gsettings list-keys SCHEMA         显示指定schema的所有项(key)
-gsettings range SCHEMA KEY         查询指定schema的指定项KEY的有效取值范围
-gsettings get SCHEMA KEY           显示指定schema的指定项KEY的值
-gsettings set SCHEMA KEY VALUE     设置指定schema的指定项KEY的值为VALUE
-gsettings reset SCHEMA KEY         恢复指定schema的指定项KEY的值为默认值
-gsettings reset-recursively SCHEMA 恢复指定schema的所有key的值为默认值
-gsettings list-recursively [SCHEMA] 如果有SCHEMA参数，则递归显示指定schema的所有项(key)和值(value)，如果没有SCHEMA参数，则递归显示所有schema的所有项(key)和值(value)
-
+gsettings list-schemas             # 显示系统已安装的不可重定位的schema
+gsettings list-relocatable-schemas #显示已安装的可重定位的schema
+gsettings list-children SCHEMA # 显示指定schema的children，其中SCHEMA指xml文件中schema的id属性值，例如实例中的"org.lili.test.app.testgsettings"
+gsettings list-keys SCHEMA         # 显示指定schema的所有项(key)
+gsettings range SCHEMA KEY         # 查询指定schema的指定项KEY的有效取值范围
+gsettings get SCHEMA KEY           # 显示指定schema的指定项KEY的值
+gsettings set SCHEMA KEY VALUE     #设置指定schema的指定项KEY的值为VALUE
+gsettings reset SCHEMA KEY         # 恢复指定schema的指定项KEY的值为默认值
+gsettings reset-recursively SCHEMA # 恢复指定schema的所有key的值为默认值
+gsettings list-recursively [SCHEMA] # 如果有SCHEMA参数，则递归显示指定schema的所有项(key)和值(value)，如果没有SCHEMA参数，则递归显示所有schema的所有项(key)和值(value)
 
 # Although GNOME Shell integration extension is running, native host connector is not detected. Refer documentation for instructions about installing connector
 sudo apt install chrome-gnome-shell
+sudo apt install gnome-tweak-tool
+
+gsettings set org.gnome.desktop.interface gtk-theme Ant
+gsettings set org.gnome.desktop.wm.preferences theme Ant
 ```
 
 ## 用户管理
@@ -553,6 +571,13 @@ w --ip-addr
 # whoami
 # whoami --version
 # whoami --help
+```
+
+## 日志
+
+```SH
+journalctl --disk-usage
+sudo journalctl --vacuum-time=3d
 ```
 
 ## keymap

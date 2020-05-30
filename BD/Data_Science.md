@@ -114,6 +114,7 @@ SAS网站的Eight levels of analytics
 * [metabase/metabase](https://github.com/metabase/metabase):The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 https://metabase.com
 * [EasyExcel](https://github.com/alibaba/easyexcel):一个用来对 Java 进行解析、生成 Excel 的框架
 * [bokeh/bokeh](https://github.com/bokeh/bokeh):Interactive Data Visualization in the browser, from Python https://bokeh.org
+* [ alibaba / DataX ](https://github.com/alibaba/DataX):阿里巴巴集团内被广泛使用的离线数据同步工具/平台
 
 ## 参考
 

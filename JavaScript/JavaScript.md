@@ -2776,7 +2776,7 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
 
 * 《JavaScript高级程序设计》（第3版）
 * 《JavaScript权威指南》
-* [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter.
+* [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter
 
 ## 资源
 
@@ -2844,6 +2844,8 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
   - [jashkenas/underscore](https://github.com/jashkenas/underscore):JavaScript's utility _ belt http://underscorejs.org
   - [handsontable/handsontable](https://github.com/handsontable/handsontable):handsontable/handsontable
   - [NorthwoodsSoftware/GoJS](https://github.com/NorthwoodsSoftware/GoJS):JavaScript diagramming library for interactive flowcharts, org charts, design tools, planning tools, visual languages. http://gojs.net
+  - [ jwilber / roughViz ](https://github.com/jwilber/roughViz#Scatter):Reusable JavaScript library for creating sketchy/hand-drawn styled charts in the browser.
+  - [ alyssaxuu / flowy ](https://github.com/alyssaxuu/flowy):The minimal javascript library to create flowcharts sparkles
 * fingerprinting
   - [Valve/fingerprintjs2](https://github.com/Valve/fingerprintjs2):Modern & flexible browser fingerprinting library http://valve.github.io/fingerprintjs2/
 * Animations

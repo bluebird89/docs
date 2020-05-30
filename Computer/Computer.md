@@ -119,6 +119,10 @@ total = *p + 200;
 * 《深入理解计算机系统》
 * 《Unix网络编程》
 
+## 项目
+
+* [ gto76 / comp-m2 ](https://github.com/gto76/comp-m2):Comp Mark II – Simple 4-bit virtual computer
+
 ## 课程
 
 * [DeathKing/Learning-SICP](https://github.com/DeathKing/Learning-SICP):MIT视频公开课《计算机程序的构造和解释》中文化项目及课程学习资料搜集。 https://learningsicp.github.io

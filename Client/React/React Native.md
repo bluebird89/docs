@@ -230,6 +230,10 @@ npm run eject #  导出配置文件
 * UI 抽象层翻译出来的 iOS 和安卓原生页面，做不到完全一致，尤其是复杂页面，样式或功能存在差异
 * 想用 React Native 做到 iOS 和安卓体验一致，并且充分发挥原生控件的功能，就需要同时熟悉 React Native、iOS、安卓三个平台，这对开发者的要求实在太高了Airbnb 公司在使用 React Native 两年后，宣布放弃，改用原生技术栈
 
+## 教程
+
+× [ necolas / react-native-web ](https://github.com/necolas/react-native-web):React Native for Web https://necolas.github.io/react-native-web/docs/?path=/docs/*
+
 ## 工具
 
 * [Expo](https://expo.io/):The fastest way to build an app
@@ -245,7 +249,7 @@ npm run eject #  导出配置文件
 * admin
     - [marmelab/react-admin](https://github.com/marmelab/react-admin):A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, React and Material Design http://marmelab.com/react-admin
 * react
-    
+
     - [facebook/react](https://github.com/facebook/react):A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
 * 状态
     - [jamiebuilds/unstated](https://github.com/jamiebuilds/unstated):State so simple, it goes without saying https://unstated.io
@@ -269,7 +273,7 @@ npm run eject #  导出配置文件
 * Angular
     - [ngrx/platform](https://github.com/ngrx/platform):Reactive libraries for Angular
 * 设计模式
-    
+
     - [chantastic/reactpatterns.com](https://github.com/chantastic/reactpatterns.com):Patterns for React Developers http://reactpatterns.com
 * 图表
     - [hshoff/vx](https://github.com/hshoff/vx):🐯react + d3 = vx | visualization components https://vx-demo.now.sh/
@@ -291,9 +295,9 @@ npm run eject #  导出配置文件
     - [react-spring/react-spring](https://github.com/react-spring/react-spring):✌️ A spring physics based React animation library https://react-spring.github.iov
 * 脚手架
   - [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
-  
+
   - [gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby):Build blazing fast, modern apps and websites with React https://www.gatsbyjs.org
-  
+
     * # [rekit](https://github.com/rekit/rekit):IDE and toolkit for building scalable web applications with React, Redux and React-router [http://rekit.js.org](http://rekit.js.org/)
 * firebase
     - [invertase/react-native-firebase](https://github.com/invertase/react-native-firebase):🔥 A well tested feature rich modular Firebase implementation for React Native. Supports both iOS & Android platforms for over 15 Firebase services.https://rnfirebase.io/
@@ -343,9 +347,9 @@ npm run eject #  导出配置文件
     - [rexxars/react-markdown](https://github.com/rexxars/react-markdown):Render Markdown as React components
 * Bundler
     - [facebook/metro](https://github.com/facebook/metro):🚇 The JavaScript bundler for React Native. https://facebook.github.io/metro
-* 地图 
+* 地图
     - [yezihaohao/react-qmap](https://github.com/yezihaohao/react-qmap):💡react腾讯地图开源组件 https://cheng_haohao.gitee.io/reactqmap
-* 测试 
+* 测试
     - [kentcdodds/react-testing-library](https://github.com/kentcdodds/react-testing-library):🐐 Simple and complete React DOM testing utilities that encourage good testing practices. http://npm.im/react-testing-library
 * 路由
     - [reactjs/redux](https://github.com/reactjs/redux):Predictable state container for JavaScript apps http://redux.js.org
@@ -470,7 +474,7 @@ npm run eject #  导出配置文件
 * [fbsamples/f8app](https://github.com/fbsamples/f8app):Source code of the official F8 app of 2017, powered by React Native and other Facebook open source projects. http://makeitopen.com
 * [EleTeam/Shop-React-Native](https://github.com/EleTeam/Shop-React-Native):EleTeam开源项目 - 电商全套解决方案之 React Native 版 - Shop-React-Native。一个类似京东/天猫/淘宝的商城，有对应的服务端支持，由EleTeam团队维护！
 * [tyroprogrammer/learn-react-app](https://github.com/tyroprogrammer/learn-react-app):Application that will help you learn React fundamentals. Install this application locally - there's tutorial, code snippets and exercises. The main objective of this project is to help you get off the ground with React!
-* [microsoft/TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter):A starter template for TypeScript and React with a detailed README describing how to use the two together. 
+* [microsoft/TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter):A starter template for TypeScript and React with a detailed README describing how to use the two together.
 * [CarGuo/GSYGithubAPP](https://github.com/CarGuo/GSYGithubApp)
 
 ## 参考

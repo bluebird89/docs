@@ -239,6 +239,7 @@ brew install pipenv
   - pgcli：Postgres 命令行工具，具有自动补全和语法高亮功能。[官网](https://github.com/dbcli/pgcli)
   - try：一个从来没有更简单的命令行工具，用来试用python库。[官网](https://github.com/timofurrer/try)
 * [tqdm / tqdm](https://github.com/tqdm/tqdm)：A Fast, Extensible Progress Bar for Python and CLI https://tqdm.github.io
+* [ willmcgugan / rich ](https://github.com/willmcgugan/rich): a Python library for rich text and beautiful formatting in the terminal. https://rich.readthedocs.io/en/latest/
 
 ## 下载器
 

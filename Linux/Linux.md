@@ -200,6 +200,26 @@ sudo dd bs=4M if=/home/hcf/dev/iso/ubuntu-16.04-desktop-amd64.iso of=/dev/sdb4
   - Korn Shell：是对Bourne SHell的发展，在大部分内容上与Bourne Shell兼容。
   - C Shell：是SUN公司Shell的BSD版本。
 
+```sh
+# 查看
+free -h
+# swap文件位置
+swapon -s
+# 新增
+dd if=/dev/zero of=/swapmem bs=1G count=2
+#　使用
+mkswap -f swapmem
+chmod 0600 swapmem
+#　关闭
+swapoff /swapfile
+swapon /swapmem
+
+# 开机启动 /etc/fstab
+ UUID=fa207ef7-79a7-4092-8381-98c2a5143c74 /               ext4    errors=remount-ro 0       1
+ 10 /swapmem                                 none            swap    sw              0       0
+ 11 /dev/fd0        /media/floppy0  auto    rw,user,noauto,exec,utf8 0       0
+```
+
 ## 配置
 
 ```sh
@@ -590,6 +610,7 @@ df -aT # 查看分区的文件系统
 df -h  /etc # Human-readable 显示目前所有文件系统的总容量，使用量，剩余容量
 df -k
 df -h /
+df -h .
 sudo du -h --max-depth=1 / | grep '[0-9]G\>'
 dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -n
 
@@ -606,7 +627,10 @@ du -sm * | sort -n # /统计当前目录大小 并安大小 排序
 du -sk * | sort -n
 du -sk * | grep guojf 看一个人的大小
 du -b /home # 查看目前/HOME目录的容量(k)及子目录的容量(k)
-
+du -hd 1 .
+du -hd 1 . | sort -n
+du -kd 1 . | sort -n
+du -hd 1 . | sort -hr
 # 分区
 sudo fdisk /dev/sdb # 硬盘进行分区
 m # 查看所有命令的菜单及帮助信息

@@ -63,7 +63,7 @@ visudo # 编辑sudoers文件专用命令
 useradd -d /home/myuser -m myuser -g wheel
 su myuser
 mkdir ~/.ssh && cd ~
-chmod 700 .ssh # SSH对权限很敏感，设置不正确可能导致无法登录 
+chmod 700 .ssh # SSH对权限很敏感，设置不正确可能导致无法登录
 cd .ssh
 touch authorized_keys
 chmod 600 authorized_keys # 用户的公钥文件的内容拷贝到authorized_keys
@@ -74,7 +74,7 @@ PubkeyAuthentication yes
 systemctl restart sshd
 ssh myuser@虚拟机IP
 
-# /etc/ssh/sshd_config 
+# /etc/ssh/sshd_config
 PasswordAuthentication no # 禁用SSH密码登录
 PermitRootLogin no # 禁止root用户登录
 
@@ -86,3 +86,4 @@ systemctl restart sshd
 * Mac
     - Parallels Desktop
     - Vmvare Fusion
+* [ myspaghetti / macos-virtualbox ](https://github.com/myspaghetti/macos-virtualbox):Push-button installer of macOS Catalina, Mojave, and High Sierra guests in Virtualbox for Windows, Linux, and macOS
