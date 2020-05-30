@@ -29,274 +29,6 @@ brew install vim
     - nowrapscan：禁止vi在搜索到达文件两端时，又从另一端开始
     - mesg：允许vi显示其他用户用write写到自己终端上的信息
 
-```
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 显示相关
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示
-winpos 5 5         " 设定窗口位置
-set lines=30 columns=85    " 设定窗口大小
-
-set nu|number            " 显示行号
-set relativenumber " 显示光标所在的当前行的行号，其他行都为相对于该行的相对行号
-set cursorline " 光标所在的当前行高亮
-
-set wrap|nowrap # 自动折行
-set linebreak # 只有遇到指定的符号（比如空格、连词号和其他标点符号），才发生折行
-set wrapmargin=2 # 指定折行处与编辑窗口的右边缘之间空出的字符数。
-set scrolloff=5 # 垂直滚动时，光标距离顶部/底部的位置（单位：行）
-set sidescrolloff=15 # 水平滚动时，光标距离行首或行尾的位置（单位：字符）。该配置在不折行时比较有用。
-set laststatus=2 # 是否显示状态栏。0 表示不显示，1 表示只在多窗口时显示，2 表示显示。
-set ruler # 在状态栏显示光标的当前位置（位于哪一行哪一列）。
-
-set go=             " 不要图形按钮
-"color asmanian2     " 设置背景主题
-set guifont=Courier_New:h10:cANSI   " 设置字体
-syntax on           " 语法高亮
-autocmd InsertLeave * se nocul  " 用浅色高亮当前行
-autocmd InsertEnter * se cul    " 用浅色高亮当前行
-
-set showcmd         " 输入的命令显示出来，看的清楚些
-set mouse=a   " 支持使用鼠标
-set showmode " 在底部显示，当前处于命令模式还是插入模式。
-set cmdheight=1     " 命令行（在状态行下）的高度，设置为1
-"set whichwrap+=<,>,h,l   " 允许backspace和光标键跨越行边界(不建议)
-set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离
-set novisualbell    " 不要闪烁(不明白)
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容
-set laststatus=1    " 启动显示状态行(1),总是显示状态行(2)
-set foldenable      " 允许折叠
-set foldmethod=manual   " 手动折叠
-set background=dark "背景使用黑色
-
-" 显示中文帮助
-if version >= 603
-    set helplang=cn
-    set encoding=utf-8 " 使用 utf-8 编码
-endif
-
-" 设置配色方案
-"colorscheme murphy
-
-"字体
-"if (has("gui_running"))
-"   set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
-"endif
-
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp936
-set fileencoding=utf-8
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"新建.c,.h,.sh,.java文件，自动插入文件头
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
-""定义函数SetTitle，自动插入文件头
-func SetTitle()
-    "如果文件类型为.sh文件
-    if &filetype == 'sh'
-        call setline(1,"\#########################################################################")
-        call append(line("."), "\# File Name     : ".expand("%"))
-        call append(line(".")+1, "\# Author        : enjoy5512")
-        call append(line(".")+2, "\# mail          : enjoy5512@163.com")
-        call append(line(".")+3, "\# Created Time  : ".strftime("%c"))
-        call append(line(".")+4, "\#########################################################################")
-        call append(line(".")+5, "")
-        call append(line(".")+6, "\#!/bin/bash")
-    call append(line(".")+7, "")
-    call append(line(".")+8, "")
-    else
-        call setline(1, "/*************************************************************************")
-        call append(line("."), "    > File Name       : ".expand("%"))
-        call append(line(".")+1, "    > Author          : enjoy5512")
-        call append(line(".")+2, "    > Mail            : enjoy5512@163.com ")
-        call append(line(".")+3, "    > Created Time    : ".strftime("%c"))
-        call append(line(".")+4, " ************************************************************************/")
-        call append(line(".")+5, "")
-    endif
-    if &filetype == 'cpp'
-        call append(line(".")+6, "#include<iostream>")
-    call append(line(".")+7, "")
-        call append(line(".")+8, "using namespace std;")
-        call append(line(".")+9, "")
-        call append(line(".")+10, "int main(int argc,char *argv[])")
-        call append(line(".")+11, "{")
-        call append(line(".")+12, "     ")
-        call append(line(".")+13, "    return 0;")
-        call append(line(".")+14, "}")
-    endif
-    if &filetype == 'c'
-        call append(line(".")+6, "#include<stdio.h>")
-        call append(line(".")+7, "")
-        call append(line(".")+8, "int main(int argc,char *argv[])")
-        call append(line(".")+9, "{")
-        call append(line(".")+10, "     ")
-        call append(line(".")+11, "    return 0;")
-        call append(line(".")+12, "}")
-    autocmd BufNewFile * 12 j
-    endif
-endfunc
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"键盘命令
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"C，C++ 按F5编译运行
-map <F5> :call CompileRunGcc()<CR>
-func! CompileRunGcc()
-    exec "w"
-    if &filetype == 'c'
-        exec "!gcc % -o %<"
-        exec "! ./%<"
-    elseif &filetype == 'cpp'
-        exec "!g++ % -o %<"
-        exec "! ./%<"
-    elseif &filetype == 'sh'
-        :!./%
-    endif
-endfunc
-"C,C++的调试
-map <C-F5> :call Rungdb()<CR>
-func! Rungdb()
-    exec "w"
-    if &filetype == 'c'
-        exec "!gcc % -g -o %<"
-        exec "!gdb -tui ./%<"
-    elseif &filetype == 'cpp'
-        exec "!g++ % -g -o %<"
-        exec "!gdb -tui ./%<"
-    endif
-endfunc
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""实用设置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 设置当文件被改动时自动载入
-set autoread
-" quickfix模式
-autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
-"代码补全
-set completeopt=preview,menu
-"允许插件
-filetype plugin on
-"共享剪贴板
-set clipboard+=unnamed
-"从不备份
-set nobackup
-"自动保存
-set autowrite
-set ruler                   " 打开状态栏标尺
-set cursorline              " 突出显示当前行
-set magic                   " 设置魔术
-set guioptions-=T           " 隐藏工具栏
-set guioptions-=m           " 隐藏菜单栏
-set foldcolumn=0
-set foldmethod=indent
-set foldlevel=3
-set foldenable              " 开始折叠
-
-set nocompatible " 不与 Vi 兼容（采用 Vim 自己的操作命令）
-set syntax=on " 语法高亮
-set noeb " 去掉输入错误的提示声音
-set confirm " 在处理未保存或只读文件的时候，弹出确认
-
-set autoindent " 自动缩进
-set cindent
-set tabstop=4 " Tab键的宽度
-set expandtab " 由于 Tab 键在不同的编辑器缩进不一致，该设置自动将 Tab 转为空格
-set softtabstop=4 " Tab 转为多少个空格\
-set shiftwidth=4 " 在文本上按下>>（增加一级缩进）、<<（取消一级缩进）或者==（取消全部缩进）时，每一级的字符数。
-
-set nobackup
-set noswapfile "禁止生成临时文件
-
-set ignorecase "搜索忽略大小写
-
-set hlsearch "搜索逐字符高亮
-set incsearch
-"行内替换
-set gdefault
-"编码设置
-set enc=utf-8
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
-"语言设置
-set langmenu=zh_CN.UTF-8
-set helplang=cn
-" 状态行显示的内容（包括文件类型和解码）
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
-"set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
-"set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
-" 总是显示状态行
-set laststatus=2
-" 命令行（在状态行下）的高度，默认为1，这里是2
-set cmdheight=2
-" 侦测文件类型
-filetype on " 载入文件类型插件
-filetype plugin on " 为特定文件类型载入相关缩进文件
-filetype indent on " 开启文件类型检查，并且载入与该类型对应的缩进规则。
-" 保存全局变量
-set viminfo+=!
-" 在被分割的窗口间显示空白，便于阅读
-set fillchars=vert:\ ,stl:\ ,stlnc:\
-" 高亮显示匹配的括号
-set showmatch
-" 匹配括号高亮的时间（单位是十分之一秒）
-set matchtime=1
-" 光标移动到buffer的顶部和底部时保持3行距离
-set scrolloff=3
-" 为C程序提供自动缩进
-set smartindent
-" 高亮显示普通txt文件（需要txt.vim脚本）
-au BufRead,BufNewFile *  setfiletype txt
-"自动补全
-":inoremap ( ()<ESC>i
-":inoremap ) <c-r>=ClosePair(')')<CR>
-:inoremap { {<CR>}<ESC>O
-:inoremap } <c-r>=ClosePair('}')<CR>
-":inoremap [ []<ESC>i
-":inoremap ] <c-r>=ClosePair(']')<CR>
-":inoremap " ""<ESC>i
-":inoremap ' ''<ESC>i
-function! ClosePair(char)
-    if getline('.')[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
-endfunction
-filetype plugin indent on
-"打开文件类型检测, 加了这句才可以用智能补全
-set completeopt=longest,menu
-
-set showmatch # 光标遇到圆括号、方括号、大括号时，自动高亮对应的另一个圆括号、方括号和大括号。
-
-set hlsearch # 搜索时，高亮显示匹配结果。
-set incsearch # 输入搜索模式时，每输入一个字符，就自动跳到第一个匹配的结果。
-
-set ignorecase # 搜索时忽略大小写。
-
-set smartcase # 如果同时打开了ignorecase，那么对于只有一个大写字母的搜索词，将大小写敏感；其他情况都是大小写不敏感。比如，搜索Test时，将不匹配test；搜索test时，将匹配Test。
-
-set spell spelllang=en_us 打开英语单词的拼写检查。
-set nobackup # 不创建备份文件。默认情况下，文件保存时，会额外创建一个备份文件，它的文件名是在原文件名的末尾，再添加一个波浪号（〜）。
-set noswapfile # 不创建交换文件。交换文件主要用于系统崩溃时恢复文件，文件名的开头是.、结尾是.swp。
-
-set undofile # 保留撤销历史。
-set backupdir=~/.vim/.backup//
-set directory=~/.vim/.swp//
-set undodir=~/.vim/.undo// 设置备份文件、交换文件、操作历史文件的保存位置。  结尾的//表示生成的文件名带有绝对路径，路径中用%替换目录分隔符，这样可以防止文件重名。
-set autochdir # 自动切换工作目录。这主要用在一个 Vim 会话之中打开多个文件的情况，默认的工作目录是打开的第一个文件的目录。该配置可以将工作目录自动切换到，正在编辑的文件的目录。
-
-set noerrorbells # 出错时，不要发出响声。
-set visualbell # 出错时，发出视觉提示，通常是屏幕闪烁。
-
-set autoread # 打开文件监视。如果在编辑过程中文件发生外部改变（比如被别的编辑器编辑了），就会发出提示
-set listchars=tab:»■,trail:■
-set list # 如果行尾有多余的空格（包括 Tab 键），该配置将让这些空格显示成可见的小方块。
-
-set wildmenu
-set wildmode=longest:list,full # 命令模式下，底部操作指令按下 Tab 键自动补全。第一次按下 Tab，会显示所有匹配的操作指令的清单；第二次按下 Tab，会依次选择各个指令。
-```
-
 ## 文件
 
 * :E Opens explorer for locating files and directories
@@ -760,7 +492,6 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 
 ## 配置
 
-* vimtutor
 * [qvacua / vimr](https://github.com/qvacua/vimr):VimR — Neovim GUI for macOS http://vimr.org
 * [amix/vimrc](https://github.com/amix/vimrc):The ultimate Vim configuration: vimrc
 * [Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe):A code-completion engine for Vim http://valloric.github.io/YouCompleteMe/
@@ -781,23 +512,51 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
     - <F9> 生成供函数跳转的 tag
     - <F2> 打开目录窗口，再按会关闭目录窗口
     - <F6> 添加函数注释
+* [SpaceVim](https://github.com/SpaceVim/SpaceVim):一个开箱即用的 Vim 配置，对新手很友好，和 Spacemacs 一样
+
+## 教程
+
+* vimtutor
+* [Vim 互动式教程](https://www.openvim.com/)
+* [VIM Tutor](http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor)
+* [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)
+* [reddit 的 Vim 频道](https://www.reddit.com/r/vim/)
+
+## 图书
+
+* 《 Vim实用技巧 Pratical Vim》
 
 ## 插件
 
-* [junegunn / vim-plug](https://github.com/junegunn/vim-plug):hibiscus Minimalist Vim Plugin Manager
 * [cknadler/vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
 * [rupa/z](https://github.com/rupa/z):z - jump around
 * [rupa/v](https://github.com/rupa/v):z for vim
 * [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim.
 * [fatih/vim-go](https://github.com/fatih/vim-go):Go development plugin for Vim
 * [powerline/powerline](https://github.com/powerline/powerline):Powerline is a statusline plugin for vim, and provides statuslines and prompts for several other applications, including zsh, bash, tmux, IPython, Awesome and Qtile. https://powerline.readthedocs.io/en/latest/
-* taglist：可以通过ctags生成的tag文件索引定位代码中的常量、函数、类等结构，阅读代码和写代码必备。
+* taglist：可以通过ctags生成的tag文件索引定位代码中的常量、函数、类等结构，阅读代码和写代码必备
 * vim-colors-solarized：vim的solarized配色插件
 * Auto Pairs
 * [NERD Commenter](https://github.com/preservim/nerdcommenter):Vim plugin for intensely nerdy commenting powers
 * [airblade / vim-gitgutter](https://github.com/airblade/vim-gitgutter):A Vim plugin which shows a git diff in the sign column and stages/previews/undoes hunks and partial hunks.
 * VIM Fugitive
-* VIM Surround
+* [junegunn / vim-plug](https://github.com/junegunn/vim-plug):hibiscus Minimalist Vim Plugin Manager Vim的插件管理器，支持并发安装和更新
+* Ack 全文搜索插件，可以在当前打开的项目中进行源码的全文搜索，并可以在搜索结果中方便的切换和打开源码文件，十分方便。
+* NERDTree Vim中的文件管理器，方便编辑文件，创建目录，删除和修改文件等等……
+* NERDTreeCommenter 方便的用来注释代码的插件
+* TagBar 查看当前代码文件中的变量和函数列表的插件，可以切换和跳转到代码中对应的变量和函数的位置
+* CtrlP 不可缺少的快速跳转插件，它可以快速的帮助我们找到项目中的文件。在normal模式下，按下ctrl+p，然后输入你要寻找的文件就行了
+* AutoPairs 自动补全括号的插件，包括小括号，中括号，以及花括号，可以提升编码效率
+* Surround 快速给词加环绕符号,例如单引号/双引号/括号/成对标签等的插件
+* [ vim-airline / vim-airline ](https://github.com/vim-airline/vim-airline):lean & mean status/tabline for vim that's light as air Vim状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
+* EasyMotion 在当前文件中快速移动光标到指定查找位置的插件，十分方便和高效
+* deoplete 自动补全插件，写代码必备，有了这个插件，就有了IDE的感觉
+* Vim-Startify Vim启动首屏自定义插件，让你的Vim启动后显示别具一格的首屏样式
+* Vim-Indent-Guides 显示代码对齐的引导条
+* Accelerated-Smooth-Scroll 顾名思义，让Ctrl+F,Ctrl+B的滚屏来得更顺滑一些……
+* YouDao-Translater Vim中的有道翻译插件
+* Matrix-ScreenSaver Vim中的黑客帝国屏幕保护插件，很酷很炫
+* vim-go 搞Go开发必备的插件，集成了很多Go的相关功能
 
 ## 工具
 
@@ -805,11 +564,3 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar):vinegar.vim: Combine with netrw to create a delicious salad dressing https://www.vim.org/scripts/script.php?script_id=5671
 * [neoclide/coc.nvim](https://github.com/neoclide/coc.nvim):Intellisense engine for vim8 & neovim, full language server protocol support as VSCode https://salt.bountysource.com/teams/coc-nvim
 * [vimwiki / vimwiki](https://github.com/vimwiki/vimwiki):Personal Wiki for Vim http://vimwiki.github.io/
-
-## 教程
-
-* [VIM Tutor](http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor)
-* [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)
-* <https://github.com/junegunn/vim-plug>: junegunn 是韩国的一个大牛，擅长写 Vim 插件
-* [SpaceVim](https://github.com/SpaceVim/SpaceVim):一个开箱即用的 Vim 配置，对新手很友好，和 Spacemacs 一样
-* [reddit 的 Vim 频道](https://www.reddit.com/r/vim/)

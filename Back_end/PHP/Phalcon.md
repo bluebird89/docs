@@ -5,6 +5,9 @@ High performance, full-stack PHP framework delivered as a C extension. <https://
 ## Add extension phalcon
 
 ```sh
+pecl channel-update pecl.php.net
+pecl install phalcon
+
 ### Ubuntu
 curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
 
@@ -20,6 +23,8 @@ brew install php71-phalcon
 ## Phalcon Developer Tools
 
 ```sh
+composer global require phalcon/devtools
+
 git clone git://github.com/phalcon/phalcon-devtools.git
 cd phalcon-devtools/
 ./phalcon.sh

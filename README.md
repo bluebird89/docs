@@ -17,7 +17,11 @@
 
 ## 习惯
 
-* 早上手写 todo list，帮助自己清理思绪 focus on what’s important
+* 早上手写 todo list，帮助清理思绪 focus on what’s important
+* 晚上回顾内容
+* 周
+	- 复盘所作事情
+	- 打扫卫生
 
 ## project
 

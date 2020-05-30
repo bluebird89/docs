@@ -509,6 +509,9 @@ $b = array_map(fn($n) => $n * $n * $n, [1, 2, 3, 4, 5]);
 ## 替换use
 $factor = 10;
 $calc = fn($num) => $num * $factor;
+
+# ibraries/DisplayResults.php#1229  Trying to access array offset on value of type bool
+ $str {0}这种写法被废弃了
 ```
 
 ## 原理
@@ -581,6 +584,10 @@ Hugepagesize:       2048 kB
 
 ## 安装
 
+* php-dev
+    - phpize
+    - php-config
+* php-cgi
 * 程序路径：`/usr/local/Cellar/php71/7.1.12_23`
 * 配置文件: `/usr/local/etc/php/7.1/` The php.ini and php-fpm.ini file
 * 通过php-fpm进程运行 `/usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx`
@@ -590,6 +597,28 @@ Hugepagesize:       2048 kB
     - phpize有版本号，依赖安装指定目录
         + mac:`/usr/local/lib/php/pecl/20180731/`
     - 需要php7.*-dev 支持
+    - fileinfo
+    - gettext
+    - gd2
+    - imagick
+    - libpcre3-dev
+    - OpenSSL
+    - PDO
+    - Mbstring
+    - php7.2-common
+        + php7.2-cli
+        + php7.2-common
+        + php7.2-curl
+        + php7.2-fpm
+        + php7.2-gd
+        + php7.2-json
+        + php7.2-mbstring
+        + php7.2-opcache
+        + php7.2-readline
+        + php7.2-soap
+        + php7.2-sqlite3
+        + php7.2-xml
+        + php7.2-zip
 * [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only.
 
 ```sh
@@ -665,6 +694,11 @@ apt-get update && apt-get upgrade
 apt-get install software-properties-common
 sudo add-apt-repository ppa:ondrej/php
 apt-get install php
+apt install php7.4-{bz2,json,mbstring,zip,gd,curl,xml,common,opcache,imagick}
+
+## ubuntu
+sudo systemctl start php7.0-fpm.service
+sudo service php7.0-fpm start|stop|restart|reload
 ```
 
 ### 扩展安装
@@ -743,6 +777,12 @@ sudo apt install php7.3-dev # to use phpize 生成编译检测脚本
 pecl channel-update pecl.php.net
 pecl uninstall redis
 
+Installing '/usr/include/php/20190902/ext/swoole/config.h'
+Installing '/usr/lib/php/20190902/swoole.so'
+install ok: channel://pecl.php.net/swoole-4.5.1
+configuration option "php_ini" is not set to php.ini location
+You should add "extension=swoole.so" to php.ini
+
 HP Warning:  PHP Startup: redis: Unable to initialize module
 Module compiled with module API=20170718
 PHP    compiled with module API=20180731
@@ -763,7 +803,7 @@ pecl install channel://pecl.php.net/vld-0.16.0
 php -dvld.active=1 -dvld.excute=0 at.php # excute =0 opcode在么 并不执行
 # Invalid argument supplied for foreach() in Command.php on line 249
 sudo apt isntall php7.4-xml
-# Trying to access array offset on value of type bool in PEAR/REST.php
+# Trying to access array offset on value of type bool in PEAR/REST.php on line 187
 mkdir -p /tmp/pear/cache
 ```
 

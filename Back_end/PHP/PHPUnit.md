@@ -153,7 +153,7 @@ public function testSum() {
         - string getActualOutput()    获取实际输出。
     * 错误相关信息的输出:测试失败时，PHPUnit 全力提供尽可能多的有助于找出问题所在的上下文信息
 * 命令行测试执行器
-    - `phpunit ArrayTest`:在当前工作目录中寻找 ArrayTest.php 
+    - `phpunit ArrayTest`:在当前工作目录中寻找 ArrayTest.php
     - `phpunit UnitTest UnitTest.php`:源文件并加载之,类必须满足以下二个条件之一
         - 要么它继承自 PHPUnit\Framework\TestCase
         - 要么它提供 public static suite() 方法，这个方法返回一个 PHPUnit_Framework_Test 对象
@@ -162,7 +162,7 @@ public function testSum() {
     - 运行某个测试方法前，会调用一个名叫 setUp() 的模板方法。setUp() 是创建测试所用对象的地方。
     - 当测试方法运行结束后，不管是成功还是失败，都会调用另外一个名叫 tearDown() 的模板方法。tearDown() 是清理测试所用对象的地方。
     - setUpBeforeClass() 与 tearDownAfterClass() 模板方法将分别在测试用例类的第一个测试运行之前和测试用例类的最后一个测试运行之后调用
-    - 只有在 setUp() 中分配了诸如文件或套接字之类的外部资源时才需要实现 tearDown() 
+    - 只有在 setUp() 中分配了诸如文件或套接字之类的外部资源时才需要实现 tearDown()
     - 如果 setUp() 中只创建纯 PHP 对象，通常可以略过 tearDown()。不过，如果在 setUp() 中创建了大量对象，可能想要在 tearDown() 中 unset() 指向这些对象的变量，这样它们就可以被垃圾回收机制回收掉。对测试用例对象的垃圾回收动作则是不可预知的。
     - 基境共享:在测试之间共享基境的需求都源于某个未解决的设计问题。一个有实际意义的例子是数据库连接：只登录数据库一次，然后重用此连接，而不是每个测试都建立一个新的数据库连接。这样能加快测试的运行。
     - 会降低测试的价值。潜在的设计问题是对象之间并非松散耦合。如果解决掉潜在的设计问题并使用桩件(stub)来编写测试，就能达成更好的结果，而不是在测试之间产生运行时依赖并错过改进设计的机会。
@@ -198,8 +198,15 @@ public function testSum() {
     </testsuite>
   </testsuites>
 </phpunit>
+
+ ./vendor/bin/phpunit
+ --testsuite=Unit  # 指定套件
+ --coverage-html . # 在根目录下生成 HTML 格式的测试覆盖率报告文档
 ```
 
+## 工具
+
+* [semaphore](https://semaphoreci.com/):Hosted CI/CD for teams that don’t like bottlenecks
 
 ## 参考
 

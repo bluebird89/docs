@@ -8,6 +8,10 @@ sudo apt-get install emacs
 
 brew install emacs-mac
 brew linkapps emacs-mac # 无效
+
+sudo add-apt-repository ppa:kelleyk/emacs
+sudo apt update
+sudo apt install emacs26
 ```
 
 ## 配置(使用 purcell)
@@ -31,7 +35,27 @@ emacs --insecure
 /usr/local/opt/emacs-plus # Emacs.app was installed to
 brew linkapps  # To link the application to default Homebrew App location:
 ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications
+
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
+emacs --insecure # 初始化
+# 换为国内源
+# .spacemacs   defun dotspacemacs/user-init ()
+(defun dotspacemacs/user-init ()
+ "Initialization for user code:
+This function is called immediately after `dotspacemacs/init', before layer
+configuration.
+It is mostly for variables that should be set before packages are loaded.
+If you are unsure, try setting them in `dotspacemacs/user-config' first."
+    (setq configuration-layer-elpa-archives
+       '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+        ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+        ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
 ```
+
+## [ purcell / emacs.d ](https://github.com/purcell/emacs.d)
+
+An Emacs configuration bundle with batteries included
 
 ## 快捷键
 
@@ -281,7 +305,6 @@ M-g                    设置字体
 
 ## 参考
 
-* [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs#macos):A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! http://spacemacs.org
 * [joaotavora/yasnippet](https://github.com/joaotavora/yasnippet):A template system for Emacs http://joaotavora.github.com/yasnippet/
 * Config
     - [purcell/emacs.d](https://github.com/purcell/emacs.d):An Emacs configuration bundle with batteries included

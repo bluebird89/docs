@@ -98,6 +98,7 @@ pod setup
 * [mitesh77 / Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
 * [cloudwebrtc / flutter-webrtc](https://github.com/cloudwebrtc/flutter-webrtc):WebRTC plugin for Flutter Mobile/Desktop/Web
 * [ zino-app / graphql-flutter ](https://github.com/zino-app/graphql-flutter):A GraphQL client for Flutter, bringing all the features from a modern GraphQL client to one easy to use package.
+* [ alibaba / fish-redux ](https://github.com/alibaba/fish-redux):An assembled flutter application framework. https://github.com/alibaba/fish-redux
 
 ## 参考
 

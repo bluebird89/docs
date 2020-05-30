@@ -545,7 +545,8 @@ ssh -p remote_port username@server_addr
 * 《Unix网络编程：卷一》
 * 《TCP/IP网络编程》
     - [chankeh/net-lenrning-reference](https://github.com/chankeh/net-lenrning-reference):TCP/IP网络编程笔记
-* 计算机网络：自顶向下方法
+* Computer Networking: A Top Down Approach 计算机网络：自顶向下方法
+    - [PPT](https://gaia.cs.umass.edu/kurose_ross/ppt.htm)
 
 ## 工具
 

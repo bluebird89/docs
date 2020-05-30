@@ -10,6 +10,8 @@ Windows是最烂的开发平台
   - [Scoop](https://scoop.sh)
     + 在用户根目录（C:\Users\用户名）下创建了一个名为 scoop 的文件夹，并默认将软件下载安装到这个文件夹下
     + 软件安装到一个相对隔离的环境下（Each program you install is isolated and independent），从而保证环境的统一和路径不被污染
+  - [ microsoft / winget-cli ](https://github.com/microsoft/winget-cli):Windows Package Manager CLI (aka winget)
+  - [GEEK UNINSTALLER](https://geekuninstaller.com/):Efficient and Fast, Small and Portabl
 * 快速启动
   - launchy
   - [Wox-launcher/Wox](https://github.com/Wox-launcher/Wox):Launcher for Windows, an alternative to Alfred and Launchy. http://wox.one
@@ -264,6 +266,7 @@ sudo apt-get install zeal
 
 * 支持bash：在启用或关闭 Windows 功能，开启Windows Subsystem for linux (Beta) [参考](https://blog.jessfraz.com/post/windows-for-linux-nerds/)
 * [Dev on Windows with WSL](https://dowww.spencerwoo.com/)
+* 添加 Linux GUI 支持，即 Windows 原生支持 Linux 图形界面程序。意味着，大部分 Linux 应用将可以在 Windows 运行
 
 ```
 # PowerShell as Administrator
