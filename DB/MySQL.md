@@ -497,7 +497,7 @@ select user(); # 当前连接数据库的用户
 
 show grants for 'testuser'@'localhost';
 SHOW GRANTS FOR CURRENT_USER();
-
+revoke select |delete|insert|update on test.* from 'jack'@'localhost';
 # 更新密码
 SET PASSWORD = PASSWORD('密码')    -- 为当前用户设置密码
 SET PASSWORD FOR 用户名 = PASSWORD('密码')    -- 为指定用户设置密码
@@ -2706,7 +2706,6 @@ WantedBy=multi-user.target
 # http://192.168.1.12:9104/metrics
 ```
 
-
 ## 维护
 
 * 通常地，单表物理大小不超过10GB，单表行数不超过1亿条，行平均长度不超过8KB，如果机器性能足够，这些数据量MySQL是完全能处理的过来的，不用担心性能问题，这么建议主要是考虑ONLINE DDL的代价较高；
@@ -2717,6 +2716,10 @@ WantedBy=multi-user.target
 * 可使用pt-kill杀掉超长时间的SQL请求，Percona版本中有个选项 innodb_kill_idle_transaction 也可实现该功能；
 * 使用pt-online-schema-change来完成大表的ONLINE DDL需求；
 * 定期使用pt-table-checksum、pt-table-sync来检查并修复mysql主从复制的数据差异；
+
+## 迁移
+
+* [ github / gh-ost ](https://github.com/github/gh-ost):GitHub's Online Schema Migrations for MySQL
 
 ## 备份
 
@@ -3707,6 +3710,38 @@ http://localhost:3000
 - GET      /api/tableName/describe
 - GET      /api/tables
 ```
+## [phpmyadmin/phpmyadmin](https://github.com/phpmyadmin/phpmyadmin)
+
+A web interface for MySQL and MariaDB https://www.phpmyadmin.net/
+
+```sh
+sudo add-apt-repository ppa:phpmyadmin/ppa
+export DEBIAN_FRONTEND=noninteractive`
+sudo apt-get -yq install phpmyadmin
+# no select server
+CREATE USER 'padmin'@'localhost' IDENTIFIED BY 'change-with-your-secure-password';
+GRANT ALL PRIVILEGES ON *.* TO 'padmin'@'localhost' WITH GRANT OPTION;
+
+# /etc/nginx/snippets/phpmyadmin.conf
+location /phpmyadmin {
+    root /usr/share/;
+    index index.php index.html index.htm;
+    location ~ ^/phpmyadmin/(.+\.php)$ {
+        try_files $uri =404;
+        root /usr/share/;
+        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include /etc/nginx/fastcgi_params;
+    }
+
+    location ~* ^/phpmyadmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
+        root /usr/share/;
+    }
+}
+
+include snippets/phpmyadmin.conf; # add to one domain
+```
 
 ## 图书
 
@@ -3720,12 +3755,8 @@ http://localhost:3000
     + 命令行
     + [MySQL Workbench](https://www.mysql.com/products/workbench/)
         * 会显示执行计划
-    + [phpmyadmin/phpmyadmin](https://github.com/phpmyadmin/phpmyadmin):A web interface for MySQL and MariaDB https://www.phpmyadmin.net/
-        * `sudo add-apt-repository ppa:phpmyadmin/ppa`
-        * `export DEBIAN_FRONTEND=noninteractive`
-        * `sudo apt-get -yq install phpmyadmin`
     + SQLyog:`ttrar`  `59adfdfe-bcb0-4762-8267-d7fccf16beda`
-    + Sequel Pro
+    + [Sequel Pro](https://github.com/sequelpro/sequelpro):MySQL/MariaDB database management for macOS https://sequelpro.com/
     + navicat
         * [DoubleLabyrinth/navicat-keygen](https://github.com/DoubleLabyrinth/navicat-keygen):A keygen for Navicat
         * Navicat Premium for Mac

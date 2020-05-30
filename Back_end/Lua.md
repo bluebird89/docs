@@ -6,12 +6,21 @@ Lua 的环境有两种： Lua
 LuaJIT:实行效率提升几十倍
 
 ```sh
+sudo apt install build-essential libreadline-dev
 apt-get install lua5.2
 
-curl -R -O http://www.lua.org/ftp/lua-5.3.4.tar.gz
-tar zxf lua-5.3.4.tar.gz
-cd lua-5.3.4
+curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
+tar -zxf lua-5.3.5.tar.gz
+cd lua-5.3.5
 make linux test
+sudo make install
+
+wget https://luarocks.org/releases/luarocks-3.3.1.tar.gz
+tar zxpf luarocks-3.3.1.tar.gz
+cd luarocks-3.3.1
+./configure.
+make
+sudo make install
 ```
 
 ## 数据
@@ -25,14 +34,13 @@ make linux test
 * thread	表示执行的独立线程，用于执行协同程序
 * table	表示一个关联数组，数组索引可以是数字或字符串
 
-## 
-
 ## 框架
 
 * [torch/torch7](https://github.com/torch/torch7):Torch is a scientific computing framework with wide support for machine learning algorithms that puts GPUs first. It is easy to use and efficient, thanks to an easy and fast scripting language, LuaJIT, and an underlying C/CUDA implementation. http://torch.ch/
 
 ## 工具
 
+* [LuaRocks ](https://luarocks.org/):the package manager for Lua modules
 * 编辑器
     - hammerspoon
 * [Azure/golua](https://github.com/Azure/golua):A Lua 5.3 engine implemented in Go

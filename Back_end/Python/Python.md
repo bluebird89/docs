@@ -1429,6 +1429,7 @@ Namespaces are one honking great idea -- let's do more of those!
 * [Think Python: How to Think Like a Computer Scientist](http://greenteapress.com/thinkpython2/html/index.html)
 * Python性能分析与优化
 * Python高性能编程
+* [pythonbook](https://python.cs.southern.edu/pythonbook/pythonbook.pdf)
 
 ## 教程
 
@@ -1482,12 +1483,11 @@ Namespaces are one honking great idea -- let's do more of those!
 * [vinta/awesome-python](https://github.com/vinta/awesome-python):A curated list of awesome Python frameworks, libraries, software and resources https://awesome-python.com/
 * [jobbole/awesome-python-cn](https://github.com/jobbole/awesome-python-cn):Python资源大全中文版，包括：Web框架、网络爬虫、模板引擎、数据库、数据可视化、图片处理等，由伯乐在线持续更新。
 * [mahmoud/awesome-python-applications](https://github.com/mahmoud/awesome-python-applications):cd Free software that works great, and also happens to be open-source Python. ftp://you:relookin@it.example.com#readme
+* [ gto76 / python-cheatsheet ](https://github.com/gto76/python-cheatsheet):Comprehensive Python Cheatsheet https://gto76.github.io/python-cheatsheet/
 * [中文文档](https://docs.python.org/zh-cn/3/)
 * [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide)
 * [faif/python-patterns](https://github.com/faif/python-patterns):A collection of design patterns/idioms in Python
-* [requests/requests](https://github.com/requests/requests):Python HTTP Requests for Humans™ ✨🍰✨ http://python-requests.org
 * [Python 开源库及示例代码](https://github.com/programthink/opensource/blob/master/libs/python.wiki)
 * [kriadmin/30-seconds-of-python-code](https://github.com/kriadmin/30-seconds-of-python-code)
 * [coodict/python3-in-one-pic](https://github.com/coodict/python3-in-one-pic):Learn python3 in one picture. https://git.io/Coo-py3
 * [lijin-THU/notes-python](https://github.com/lijin-THU/notes-python):中文 Python 笔记
-* [pythonbook](https://python.cs.southern.edu/pythonbook/pythonbook.pdf)

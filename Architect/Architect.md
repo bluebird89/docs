@@ -90,7 +90,7 @@
     - 分层的效果需要让整个团队都接受
     - 各个层职责边界清晰
 * MVC
-    - controller， 此层只负责功能的调度，参数的控制，结果的输出
+    - controller:此层只负责功能的调度(更适合承担角色是负责对 HTTP 请求进行路由)，参数的控制，结果的输出
     - service，此层负责业务逻辑相关的开发BLL(业务逻辑层):类内聚，OOP的抽象
         + 属性
         + 业务逻辑
@@ -104,7 +104,7 @@
             * 如果能接受 CQ 两端数据的最终一致性，则可以使用异步。
             * C端可以采用Event Sourcing（简称ES）模式，所有C端的最新数据全部用 Domain Event 表达即可
             * 查询显示用的数据，则从Q端的 ReadDB（关系型数据库）查询即可
-    - 
+    -
 * 阿里分层
     - 开放接口层：可直接封装 Service 方法暴露成 RPC 接口;通过 Web 封装成 http 接口;进行 网关安全控制、流量控制等。
     - 终端显示层：各个端的模板渲染并执行显示的层。当前主要是 velocity 渲染，JS 渲染， JSP 渲染，移动端展示等。
@@ -118,15 +118,15 @@
         + 与DAO层交互，对多个DAO的组合复用
     - DAO 层：数据访问层，与底层 MySQL、Oracle、Hbase 进行数据交互。
     - 原则
-        + 允许Service/Manager可以操作数据领域模型，对于这个层级来说，本来自己做的工作也是做的是业务逻辑处理和数据组装。 
-        + Controller/TService层的领域模型不允许传入DAO层，这样就不符合职责划分了。 
+        + 允许Service/Manager可以操作数据领域模型，对于这个层级来说，本来自己做的工作也是做的是业务逻辑处理和数据组装。
+        + Controller/TService层的领域模型不允许传入DAO层，这样就不符合职责划分了。
         + 同理，不允许DAO层的数据传入到Controller/TService。
 * 领域模型的转换：每一个层基本都自己对应的领域模型
-    - DO（Data Object）：与数据库表结构一一对应，通过DAO层向上传输数据源对象。 
-    - DTO（Data Transfer Object）：数据传输对象，Service或Manager向外传输的对象。 
-    - BO（Business Object）：业务对象。由Service层输出的封装业务逻辑的对象。 
-    - AO（Application Object）：应用对象。在Web层与Service层之间抽象的复用对象模型，极为贴近展示层，复用度不高。 
-    - VO（View Object）：显示层对象，通常是Web向模板渲染引擎层传输的对象。 
+    - DO（Data Object）：与数据库表结构一一对应，通过DAO层向上传输数据源对象。
+    - DTO（Data Transfer Object）：数据传输对象，Service或Manager向外传输的对象。
+    - BO（Business Object）：业务对象。由Service层输出的封装业务逻辑的对象。
+    - AO（Application Object）：应用对象。在Web层与Service层之间抽象的复用对象模型，极为贴近展示层，复用度不高。
+    - VO（View Object）：显示层对象，通常是Web向模板渲染引擎层传输的对象。
     - Query：数据查询对象，各层接收上层的查询请求。注意超过2个参数的查询封装，禁止使用Map类来传输。
     - 边界条件
     - 输入复杂性与不可预测

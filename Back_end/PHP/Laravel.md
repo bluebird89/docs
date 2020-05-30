@@ -5,7 +5,7 @@ A PHP Framework For Web Artisans https://laravel.com
 ## 安装
 
 * [laravel/homestead](https://github.com/laravel/homestead):an official, pre-packaged Vagrant box that provides you a wonderful development environment without requiring you to install PHP, a web server, and any other server software on your local machine
-  - 安装virtualbox vagrant
+  - 安装 virtualbox vagrant
   - parallels `vagrant plugin install vagrant-parallels`
   - vagrant box add [--name] laravel\homestead [homestead.box] <https://atlas.hashicorp.com/laravel/boxes/homestead> <https://atlas.hashicorp.com/laravel/boxes/homestead/versions/2.1.0/providers/virtualbox.box>
   - `vagrant list`
@@ -57,7 +57,8 @@ sites:
     - map: another.app
       to: /home/vagrant/Code/another/public
       type: symfony2
-      # 向你的站点添加其他 Nginx fastcgi_param 值
+
+      # 向站点添加其他 Nginx fastcgi_param 值
       params:
           - key: FOO
             value: BAR
@@ -83,7 +84,6 @@ function homestead() {
 ```
 
 ```sh
-
 yum install php-mbstring php-dom php-zip php-posix php-simplexml php-bcmath php-ctype php-json php-openssl php-pdo php-tokenizer
 brew install php  # 确保 ~/.composer/vendor/bin
 brew install mysql # 安装MySQL
@@ -208,17 +208,17 @@ docker-compose up --build # 会构建所有容器：Service 'aws' failed to buil
 
 启动时会加载项目中的.env文件的所有变量,bootstrap过程中的LoadEnvironmentVariables.超级全局变量 `$_ENV` 中或者 `env` 函数检索变量值
 
-* 开发、测试、生产三套环境 项目中应该有三个`.env.dev`、`.env.test`、`.env.prod`
+* 开发、测试、生产三套环境:.env.dev`、`.env.test`、`.env.prod`
   - nginx配置文件里设置APP_ENV环境变量fastcgi_param APP_ENV dev;
   - 设置服务器上运行PHP的用户的环境变量，比如在www用户的/home/www/.bashrc中添加export APP_ENV dev
   - 在部署项目的持续集成任务或者部署脚本里执行`cp .env.dev .env`
 * `APP_ENV` 通过 `App::environment` 方法来访问此值
 * 使用全局 config 函数来访问配置值 `$value = config('app.timezone');`,临时设置配置值，传递一个数组给 config 函数
     - 需要config/app.php 配置
-* 存储会话 config/session.php `'driver' => 'memcached',`
-* 缓存驱动器 config/cache.php `'default' => 'redis',`
+* 存储会话 config/session.php `'driver' => 'memcached'`
+* 缓存驱动器 config/cache.php `'default' => 'redis'`
 
-```
+```php
 'debug' => env('APP_DEBUG', false),
 
 # 自定义env文件的路径与文件名
@@ -339,6 +339,8 @@ exit
 
 ## 概念
 
+* MVC
+  - 控制器更适合承担的角色其实是负责对 HTTP 请求进行路由，因为还有很多其他访问应用的方式，比如 Artisan 命令、队列、调度任务等等，控制器并非唯一入口，所以不适合也不应该将所有业务逻辑封装于此，过度依赖控制器会对以后应用的扩展带来麻烦。所以，应该具备这样的意识：控制器的主要职责就是获取 HTTP 请求，进行一些简单处理（如验证）后将其传递给真正处理业务逻辑的职能部门，如 Service
 * 没有模型：概念不清楚
     - 所有业务逻辑的总体
     - 与关系数据库交互的类
@@ -358,7 +360,8 @@ exit
 * Mix是Laravel Elixir的精神继承者，完全基于Webpack而不是Gulp。Laravel Mix为使用通用CSS和JavaScript预处理器定义Laravel应用的Webpack构建步骤提供了流式API。通过简单的方法链，你可以定义流式资源管道
 * Blade组件和插槽为section和layout提供了类似的好处
 * 目前支持高阶消息传递的集合方法有：contains、each、every、filter、first、 map、 partition、 reject、sortBy、 sortByDesc和 sum。
-* Eloquent事件处理器现在可以被映射到事件对象上，这为我们处理Eloquent事件并让其变得易于测试提供了一种直观的方式
+* Eloquent事件处理器现在可以被映射到事件对象上，这为处理Eloquent事件并让其变得易于测试提供了一种直观的方式
+  - 门面仅仅是静态代理，底层调用的还是 $request->input 方法，语法糖而已，建议大家还是用 $request 来获取
 * CSRF保护
 * tinker：所有的 Laravel 应用都提供了 Tinker ---- 一个由 PsySH 扩展包驱动的REPL（Read-Eval-Print Loop，即终端命令行"读取-求值-输出"循环工具）。Tinker 允许你通过命令行与整个 Laravel 应用进行交互，包括 Eloquent ORM、任务、事件等等。
 * Laravel Elixir
@@ -413,7 +416,8 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
       + 构造函数注入
       + 方法注入：在控制器方法中类型提示依赖项，常见的用法就是将 Illuminate\Http\Request 实例注入到控制器方法
     - 容器事件：当服务容器解析一个对象时触发一个事件。你可以使用 resolving 方法监听这个事件，被解析的对象会被传递给回调中，让你在对象被传递出去之前可以在对象上设置任何属性
-    - 服务容器实现了 PSR-11 接口：可以对 PSR-11 容器接口类型提示来获取 Laravel 容器的实例：
+    - 服务容器实现了 PSR-11 接口：可以对 PSR-11 容器接口类型提示来获取 Laravel 容器的实例
+    - 可以用门面调用的方法肯定可以用依赖注入来实现，而可以通过依赖注入实现的功能不一定可以通过门面来调用，除非你自定义实现这个门面
 
 ```php
 namespace App\Providers;
@@ -591,7 +595,7 @@ $user->login();
 
 ## 门面（Facades）
 
-为应用程序的 服务容器 中可用的类提供了一个「静态」接口. 是服务容器中底层类的「静态代理」，提供了简洁而富有表现力的语法，甚至比传统的静态方法更具可测试性和扩展性。
+为应用程序的 服务容器 中可用的类提供了一个「静态」接口. 是服务容器中底层类的「静态代理」，提供了简洁而富有表现力的语法，甚至比传统的静态方法更具可测试性和扩展性
 
 * 原理
     - 继承自 Illuminate\Support\Facades\Facade 类。使用了 __callStatic() 魔术方法将的 Facades 的调用延迟，直到对象从容器中被解析出来
@@ -2673,6 +2677,7 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
   - [overtrue/laravel-query-logger](https://github.com/overtrue/laravel-query-logger):📝 A dev tool to log all queries for laravel application.
   - [andersao/laravel-request-logger](https://github.com/andersao/laravel-request-logger):HTTP request logger middleware for Laravel
   - [antonioribeiro/tracker](https://github.com/antonioribeiro/tracker):Laravel Stats Tracker
+* [ livewire / livewire ](https://github.com/livewire/livewire):A full-stack framework for Laravel that takes the pain out of building dynamic UIs.
 * Oauth
   - [laravel/socialite](https://github.com/laravel/socialite):an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub, GitLab and Bitbucket
   - [overtrue/socialite](https://github.com/overtrue/socialite)::octocat: Socialite is an OAuth2 Authentication tool. It is inspired by laravel/socialite, you can easily use it without Laravel.

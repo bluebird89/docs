@@ -1752,8 +1752,9 @@ tig status
 > fatal: fsck error in packed object
 > fatal: index-pack failed
 
-## 工具
 
+* highlighter
+  - [ dandavison / delta ](https://github.com/dandavison/delta):A syntax-highlighter for git and diff output
 * [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
 * [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
   - `git summary`

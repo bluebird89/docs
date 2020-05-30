@@ -1,6 +1,6 @@
 ## [Atom](https://github.com/atom/atom)
 
-:atom: The hackable text editor https://atom.io GitHub推出的一款编辑器,现代, 易用, 可定制,只关注最重要的定制，不要在无关紧要的细节上浪费生命。
+:atom: The hackable text editor https://atom.io GitHub推出的一款编辑器,
 
 ## 安装
 
@@ -293,5 +293,6 @@ sudo pip install --upgrade autopep8
 
 * [Atom Flight Manual](http://flight-manual.atom.io/)
 * [awesome-atom](https://github.com/mehcode/awesome-atom)
+
 * 代码片段:~/.atom/snippets.cson <http://blog.csdn.net/u010494080/article/details/50993771>
 * git <http://blog.csdn.net/u010494080/article/details/51229211>

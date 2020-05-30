@@ -174,20 +174,25 @@
     - [processone/ejabberd](https://github.com/processone/ejabberd):Robust, ubiquitous and massively scalable Jabber / XMPP Instant Messaging platform https://www.process-one.net/en/ejabberd/
 * table
     - [Table Convert Online](https://tableconvert.com/)
-* 笔记
-    - TickTick
-    - [laurent22/joplin](https://github.com/laurent22/joplin):Joplin - an open source note taking and to-do application with synchronization capabilities for Windows, macOS, Linux, Android and iOS. Forum: https://discourse.joplinapp.org/ https://joplinapp.org
+* 笔记:全平台
+    - simple
+    - [laurent22/joplin](https://github.com/laurent22/joplin):Joplin - an open source note taking and to-do application with synchronization capabilities for Windows, macOS, Linux, Android and iOS. Forum: https://discourse.joplinapp.org/ https://joplinapp.org,需要自己搭建存储
         + `brew cask install joplin`
         + `wget -O - https://raw.githubusercontent.com/laurent22/joplin/master/Joplin_install_and_update.sh | bash`
     - [P3X OneNote](link)： a cloud-based note-taking application and is considered as an exact alternative to the well known Microsoft OneNote application
     - [Notion](https://www.notion.so/):Work offline, collaborate in real-time, write without distractions.
+    - [Roam Research](https://roamresearch.com/)
+    - [Simple note](https://standardnotes.org):收费
 * flowchart
     - [Zen Flowchart](https://www.zenflowchart.com)
 * 輸入法
     - [Rime](https://rime.im)
-* task
+* task:带日历与todo功能，全平台
     - todolist
-    - any do
+    - TickTick
+    - [any do](https://www.any.do)
+    - [Microsoft To Do](https://todo.microsoft.com/tasks/)
+    - [calcurse](http://calcurse.org/):a calendar and scheduling application for the command line
 * Rss
     - [NetNewsWire5](https://github.com/brentsimmons/NetNewsWire/releases/download/mac-5.0.2/NetNewsWire5.0.2.zip)
     - [theoldreader](https://theoldreader.com/)
