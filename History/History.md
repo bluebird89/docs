@@ -107,6 +107,7 @@
 * History of Imperial China
 * 古史辩
 * 1913 世纪之夏的浪荡子们
+* 中国人史纲
 
 ## 项目
 

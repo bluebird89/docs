@@ -578,6 +578,7 @@
 * 《翻译例句词典》 W.Brian Arthur
 * 斯坦福算法博弈论二十讲
 * IT 之火
+* 天才在左，疯子在右
 
 
 * Evolutionary Architecture

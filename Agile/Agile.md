@@ -270,13 +270,13 @@
     - Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.
     - The most efficient and effective method of conveying information to and within a development team is face-to-face conversation.
     - Working software is the primary measure of progress.
-    - Agile processes promote sustainable development. 
+    - Agile processes promote sustainable development.
     - The sponsors, developers, and users should be able to maintain a constant pace indefinitely.
     - Continuous attention to technical excellence and good design enhances agility.
     - Simplicity--the art of maximizing the amount of work not done--is essential.
     - The best architectures, requirements, and designs emerge from self-organizing teams.
     - At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.
-    
+
     - 我们最重要的目标，是通过持续不断地及早交付有价值的软件使客户满意。
     - 欣然面对需求变化，即使在开发后期也一样。
     - 经常交付可工作的软件，相隔几星期或一两个月，倾向于采取较短的周期。
@@ -292,7 +292,22 @@
 
 ## BDD behavior-driven development
 
+* 工具
+    - [Cucumber](https://cucumber.io/) 背后是一个名为 Gherkin 的 DSL，它用于描述需求及测试
 * [behave/behave](https://github.com/behave/behave):BDD, Python style.
+
+```
+功能:
+场景:
+假设:
+当:
+并且:
+那么:
+
+SEE HomePage
+DO [Click] "Login".Button
+REACT Success: SHOW "Login Success".Toast with ANIMATE(bounce)
+```
 
 ## 图书
 
@@ -304,6 +319,7 @@
 * [Google工作法](https://www.yuque.com/heqingbao/msfy2c/zg56gm)
 * 《Clean Agile》
 * The Unicorn Project
+* 软件需求与可视化模型
 
 ## 工具
 
