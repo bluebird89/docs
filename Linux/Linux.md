@@ -72,6 +72,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - Fedora 31 Workstation
   - [Kali](https://www.kali.org/)
     + [offensive-security/kali-linux-docker](https://github.com/offensive-security/kali-linux-docker):Kali Linux Docker
+    + [ Jack-Liang / kalitools ](https://github.com/Jack-Liang/kalitools):Kali Linux工具清单
 * 正常：运行平稳，维护量低；最小配置；大部分事情可以自动完成；兼容硬件和软件
   - [openSUSE](https://www.opensuse.org/)
   - Ubuntu 20.04 LTS
