@@ -293,7 +293,6 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 ## Web UI自动化测试
 
 * Cypress
-  -
 * TestCafe
   - 支持采纳JavaScript或TypeScript来编写测试，并在浏览器中运行测试
   - 提供了开箱即用的并行执行、HTTP请求模拟等有用的功能

@@ -386,3 +386,4 @@
 * [](https://github.com/apache/predictionio)
 * [Bilibili-机器学习白板系列](https://www.yuque.com/bystander-wg876/yc5f72)
 * [](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)
+* [Support Vector Machine](https://mp.weixin.qq.com/s/SackOqskC88pB0582bDg8A)
