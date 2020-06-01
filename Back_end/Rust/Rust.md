@@ -35,6 +35,10 @@ replace-with = "rustcc"
 registry = "https://code.aliyun.com/rustcc/crates.io-index"
 ```
 
+## 教程
+
+* [rust-lang-cn / rust-by-example-cn ](https://github.com/rust-lang-cn/rust-by-example-cn):Rust By Example 中文版
+
 ## 工具
 
 * 包资源
