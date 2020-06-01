@@ -2411,7 +2411,7 @@ AH 因你今晚共我唱
 父亲的草原母亲的河
 
 ## 伍迪·艾伦
- 
+
 * The key is, to not think of death as an end, but as more of a very effective way to cut down on your expenses. -- Love and Death (1975) 关键是，不要把死亡当作终结，把它当作一个削减开支的十分有效的方法。——《爱与死》1975
 * To love is to suffer. To avoid suffering, one must not love. But then, one suffers from not loving. Therefore, to love is to suffer; not to love is to suffer; to suffer is to suffer. To be happy is to love. To be happy, then, is to suffer, but suffering makes one unhappy. Therefore, to be unhappy, one must love or love to suffer or suffer from too much happiness. I hope you're getting this down. -- Love and Death (1975) 去爱就是去受罪。为了避免受罪，就必须不爱。但是，没有爱又会受罪。所以，去爱是受罪，不去爱也是受罪，受罪就是受罪。想幸福就要去爱，所以去幸福就是去受罪，受罪又让人不幸福。所以，想要不幸福就去爱，或者爱上受罪，或者因为太多幸福而受罪。我希望你听明白了。——《爱与死》1975
 * I never want to belong to any club that would have someone like me for a member. -- Annie Hall (1977) 我永远都不希望加入任何一个有像我这样的成员的俱乐部。——《安妮·霍尔》1977
@@ -2465,6 +2465,7 @@ AH 因你今晚共我唱
 * wildest dreams
 * 肥宅群侠传 彩虹合唱团
 * 坚强的理由
+* 陈升  牡丹亭外
 
 ## 作词
 
