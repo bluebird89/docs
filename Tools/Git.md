@@ -518,17 +518,18 @@ git update-index --no-assume-unchanged <file>
     + fix: 修改问题
     + refactor: 代码重构
     + docs: 文档修改
-    + style: 代码格式修改, 注意不是 css 修改
-    + test: 测试用例修改
+    + style: 不影响代码含义的变化（空白，格式化，缺少分号等）, 不仅是 css 修改
+    + test: 添加缺失测试或更正现有测试
     + chore: 其他修改, 比如构建流程, 依赖管理.
-    + build
-    + ci
-    + perf
+    + build:影响构建系统或外部依赖关系的更改（示例范围：gulp，broccoli，npm）
+    + ci:更改持续集成文件和脚本（示例范围：Travis，Circle，BrowserStack，SauceLabs）
+    + perf:改进性能代码更改
   - scope: commit 影响的范围, 比如: route, component, utils, build...
   - subject: commit 的概述, 建议符合  50/72 formatting
   - body: commit 具体修改内容, 可以分为多行, 建议符合 50/72 formatting
   - footer: 一些备注, 通常是 BREAKING CHANGE 或修复的 bug 的链接
   - [Conventional Commits](https://conventionalcommits.org/)
+  - git-cz：在本地进行提交信息的规范化
 
 ```sh
 # 每个 commit 都是一份完整的代码状态，用一个 commitID 来唯一标志.进行一次包含最后一次提交加上工作目录中文件快照的提交
@@ -1094,6 +1095,11 @@ echo "end"
 #!/bin/bash
 git --work-tree=/home/www checkout -f
 ```
+
+## 代码规范
+
+* 确保每一个进入主分支的commit都达到了一定的质量标准，例如：
+  - 编译必须通过，单元测试和接口测试必须通过，新代码的覆盖率不能低于某个水平，静态代码扫描必须通过
 
 ## 工作流
 

@@ -1967,11 +1967,11 @@ window.location = “http:/example.com/”
 * mysqli
 * PDO
     - 提供预处理语句查询
-        + 位置参数
-            * `$tis = $conn->prepare("INSERT INTO STUDENTS(name, age) values(?, ?)"); $tis->bindParam(1,$name); $tis->bindParam(2,$age);`
-            * `$tis = $conn->prepare("INSERT INTO STUDENTS(name, age) values(?, ?)"); $tis->bindValue(1,'mike'); $tis->bindValue(2,22);`
+        + 位置参数`$tis = $conn->prepare("INSERT INTO STUDENTS(name, age) values(?, ?)"); $tis->bindParam(1,$name); $tis->bindParam(2,$age);`
         + 命名参数 `$tis = $conn->prepare("INSERT INTO STUDENTS(name, age) values(:name, :age)"); $tis->bindParam(':name', $name); $tis->bindParam(':age', $age);`
     - 错误异常处理、灵活取得查询结果（返回数组、字符串、对象、回调函数）、字符过滤防止 SQL 攻击、事务处理、存储过程
+        - errorCode errotInfo
+
 
 ## 面向对象(OOP)
 
