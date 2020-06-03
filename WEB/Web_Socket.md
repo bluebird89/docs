@@ -32,7 +32,7 @@ websocket通信协议实现的是基于浏览器的原生socket，这样原先�
     * 实现实时信息传递
     * 双通道
     * multiplexing
-* polling :是指从客户端（一般就是浏览器）不断主动的向服务器发 HTTP 请求查询是否有新数据 
+* polling :是指从客户端（一般就是浏览器）不断主动的向服务器发 HTTP 请求查询是否有新数据
 
 ## 头信息
 
@@ -260,6 +260,46 @@ curl -H "Content-Type: application/json" \
    -X POST \
    -d 'Hello from Scaledrone' \
    https://api2.scaledrone.com/KtJ2qzn3CF3svSFe/notifications/publish
+```
+
+### [joewalnes/websocketd](https://github.com/joewalnes/websocketd)
+
+Turn any program that uses STDIN/STDOUT into a WebSocket server. Like inetd, but for WebSockets. http://websocketd.com/
+
+```sh
+#!/bin/bash
+# count.sh:
+for ((COUNT = 1; COUNT <= 10; COUNT++)); do
+  echo $COUNT
+  sleep 1
+done
+
+chmod +x count.sh
+./count.sh
+
+websocketd --port=8080 ./count.sh // 建立server
+
+# client side
+<!DOCTYPE html>
+<pre id="log"></pre>
+<script>
+  // helper function: log message to screen
+  function log(msg) {
+    document.getElementById('log').textContent += msg + '\n';
+  }
+
+  // setup websocket with callbacks
+  var ws = new WebSocket('ws://localhost:8080/');
+  ws.onopen = function() {
+    log('CONNECT');
+  };
+  ws.onclose = function() {
+    log('DISCONNECT');
+  };
+  ws.onmessage = function(event) {
+    log('MESSAGE: ' + event.data);
+  };
+</script>
 ```
 
 ## 工具
