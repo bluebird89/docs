@@ -180,7 +180,6 @@ dev: {
 * [ElemeFE/vue-amap](https://github.com/ElemeFE/vue-amap):vue-amap - 基于 Vue 2.x 和高德地图的地图组件 https://elemefe.github.io/vue-amap/
 * [vuejs/vetur](https://github.com/vuejs/vetur)：Vue tooling for VSCode.
 * [vuejs/vue-loader](https://github.com/vuejs/vue-loader):Webpack loader for Vue.js components
-* [vuejs/vue-test-utils](https://github.com/vuejs/vue-test-utils):Utilities for testing Vue components https://vue-test-utils.vuejs.org
 * [vuejs/vue-class-component](https://github.com/vuejs/vue-class-component):ES / TypeScript decorator for class-style Vue components.
 * [vuejs/vue-router](https://github.com/vuejs/vue-router):The official router for Vue.js.https://router.vuejs.org/zh-cn/
 * [pagekit/vue-resource](https://github.com/pagekit/vue-resource):The HTTP client for Vue.js
@@ -202,8 +201,8 @@ dev: {
   - `vue list`
   - `vue init <template-name> <project-name>` # vue init webpack my-project  vue init Plortinus/vue-multiple-pages new-project
 * 模板
-  - [ SimulatedGREG /
-electron-vue ](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack. <https://simulatedgreg.gitbooks.io/electron-vue/content/>
+  - [ SimulatedGREG / electron-vue ](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack. <https://simulatedgreg.gitbooks.io/electron-vue/content/>
+    - [ epicmaxco / vuestic-admin ](https://github.com/epicmaxco/vuestic-admin):Free and Beautiful Vue.js Admin Template http://vuestic.epicmax.co
 * [mimecorg/vuido](https://github.com/mimecorg/vuido):Native desktop applications using Vue.js.
 * [halfrost/vue-objccn](https://github.com/halfrost/vue-objccn):🔥 用 Vue.js 开发的跨三端应用 / Use Vue.js to develop a cross-platform full stack application
 * [SimulatedGREG/electron-vue](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack.
@@ -252,17 +251,19 @@ electron-vue ](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.
 
 ## 参考
 
-* [Vue.js——60分钟快速入门](http://www.cnblogs.com/keepfool/p/5619070.html)
+* [ vuejs / vue-next ](https://github.com/vuejs/vue-next):Repo for Vue 3.0 (currently in beta)
 * [vuejs/vue-docs-zh-cn](https://github.com/vuejs/vue-docs-zh-cn)
 * [NLRX-WJC/Learn-Vue-Source-Code](https://github.com/NLRX-WJC/Learn-Vue-Source-Code):🔥 🔥逐行剖析Vue.js源码 在线阅读地址https://nlrx-wjc.github.io/Learn-Vue-Source-Code/
 * [官方文档](https://cn.vuejs.org/v2/guide/)
 * [文档](https://vuejs.org/v2/guide/)
 * [vuejs/awesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
-* [Vue2+VueRouter2+webpack 构建项目实战](http://blog.csdn.net/fungleo/article/details/53171052)
-* [Vue 脱坑记 - 查漏补缺](https://juejin.im/post/59fa9257f265da43062a1b0e)
-* [Vue.js 2.0 快速上手精华梳理](https://juejin.im/post/59aa1248518825392656a86a)
 * [JavaScript 进阶之 Vue.js + Node.js 入门实战开发](http://blog.csdn.net/gitchat/article/details/77931664)
 * [HcySunYang/vue-design](https://github.com/HcySunYang/vue-design):📖逐行级别的源码分析 http://hcysun.me/vue-design/
+
 * [Vue.js 技术揭秘](https://ustbhuangyi.github.io/vue-analysis/)
 * [开发技巧](https://segmentfault.com/a/1190000020620972)
 * http://www.cnblogs.com/keepfool/
+* [Vue.js——60分钟快速入门](http://www.cnblogs.com/keepfool/p/5619070.html)
+* [Vue2+VueRouter2+webpack 构建项目实战](http://blog.csdn.net/fungleo/article/details/53171052)
+* [Vue 脱坑记 - 查漏补缺](https://juejin.im/post/59fa9257f265da43062a1b0e)
+* [Vue.js 2.0 快速上手精华梳理](https://juejin.im/post/59aa1248518825392656a86a)

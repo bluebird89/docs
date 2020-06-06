@@ -26,8 +26,16 @@ npm config set registry http://registry.cnpmjs.org # Unexpected end of JSON inpu
 
 ```sh
 npm -v
+
+npm list                ##List all locally installed packages
+npm list -a             ##List all globally installed packages
+npm list oauth # ind the version of a specific package
+npm list --depth=0
+npm outdated --depth=0             ##For locally installed packages
+npm outdated -g --depth=0   ##For  globally installed packages
+
 npm init  # 创建一个npm项目,配置项目信息，在package.json文件
-npm install react react-dom --save # 安装依赖
+npm install react react-dom --save # 安装本地依赖
 npm i -g npm # npm更新
 ```
 

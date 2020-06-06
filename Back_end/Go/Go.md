@@ -65,9 +65,8 @@ echo 'export PATH=$PATH:$HOME/go/bin' >> ~/.profile
 mkdir -p ~/projects/{bin,pkg,src}
 
 export GOROOT=/usr/local/go # Installing to a custom location.install the Go tools to a different location. In this case you must set the GOROOT environment variable to point to the directory in which it was installed.
-export GOPATH=$HOME/projects #默认安装包的路径
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
+export GOPATH=$HOME/projects # 默认安装包的路径
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 source ~/.zshrc
 
@@ -88,7 +87,7 @@ go env
 mkdir -p $GOPATH/src
 
 go get -v -u golang.org/x/tools/...
-
+strace -f -e trace=network go get github.com/GoAdminGroup/go-admin/adm 2>&1 | pv -i 0.05 > /dev/null
 GOOS=linux GOARCH=amd64 go build main.go
 ```
 
