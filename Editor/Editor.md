@@ -14,7 +14,6 @@
 * [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor):gem A fast, open source text processor and publishing toolchain, written in Ruby, for converting AsciiDoc content to HTML5, DocBook 5 (or 4.5) and other formats. https://asciidoctor.org
 * [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
 * [textmate/textmate](https://github.com/textmate/textmate):TextMate is a graphical text editor for macOS 10.10 or later https://macromates.com/
-* [zyedidia / micro](https://github.com/zyedidia/micro):A modern and intuitive terminal-based text editor https://micro-editor.github.io
 
 ### EditPlus
 
