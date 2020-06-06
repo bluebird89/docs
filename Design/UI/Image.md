@@ -240,13 +240,14 @@ $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
 * [google/filament](https://github.com/google/filament):Filament is a real-time physically based rendering engine for Android, Windows, Linux, macOS and WASM/WebGL
 * [Gimp](https://www.gimp.org)
 * [muukii/Pixel](https://github.com/muukii/Pixel):🎨🖼 An image editor and engine using CoreImage
-* [GoogleChromeLabs/squoosh](https://github.com/GoogleChromeLabs/squoosh):Make images smaller using best-in-class codecs, right in the browser. https://squoosh.app
 * [fengyuanchen/compressorjs](https://github.com/fengyuanchen/compressorjs):JavaScript image compressor.
 * 看图
     - FastStone Image Viewer
 * 截图
-    - Snipaste
+    - [snipaste](https://www.snipaste.com/):a simple but powerful snipping tool, and also allows you to pin the screenshot back onto the screen
     - Xnip
+* 压缩
+    - [GoogleChromeLabs/squoosh](https://github.com/GoogleChromeLabs/squoosh):Make images smaller using best-in-class codecs, right in the browser. https://squoosh.app
 * [libvips/libvips](https://github.com/libvips/libvips):A fast image processing library with low memory needs. https://libvips.github.io/libvips/
 * [AlloyImage](https://github.com/AlloyTeam/AlloyImage)基于HTML5技术的专业图像处理库
 * [DmitryUlyanov/deep-image-prior](https://github.com/DmitryUlyanov/deep-image-prior):Image restoration with neural networks but without learning. https://dmitryulyanov.github.io/deep_image_prior
@@ -260,7 +261,6 @@ $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
 * [illuminations](https://illuminations.nctm.org):在线画图网站
 * [uPic](link): Mac 图床 (文件) 上传客户端，它可以将图片、各种文件上传到配置好的指定对象存储中，然后即时生成可供互联网访问的文件 URL,支持图床： smms、 又拍云 USS、七牛云 KODO、 阿里云 OSS、 腾讯云 COS、微博、Github、 Gitee、 Amazon S3、自定义上传接口
 * Inpaint:图片去水印
-* [snipaste](https://www.snipaste.com/):a simple but powerful snipping tool, and also allows you to pin the screenshot back onto the screen
 
 ## 参考
 

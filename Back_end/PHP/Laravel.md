@@ -2716,6 +2716,7 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
   - [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
   - [stefanzweifel/laravel-stats](https://github.com/stefanzweifel/laravel-stats):📈 Get insights about your Laravel or Lumen Project
   - [wujunze/laravel-debug-helper](https://github.com/wujunze/laravel-debug-helper):Laravel package to help debug
+  - [beyondcode/laravel-dump-server](link)
 * [codex-project/codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! http://codex-project.ninja
 * [laravelshift](https://laravelshift.com/):laravel upgrade
 * [Laravel Analyzer](link)

@@ -30,7 +30,18 @@ parted /dev/nvmeOn1 set 1 bios_grub on
 parted /dev/nvmeOn1 print
 
 sudo grub-install /dev/nvmeOn1
+
+
+# 禁用第三方显卡驱动
+nano /etc/modprobe.d/blacklist-nouveau.conf
+
+blacklist nouveau
+options nouveau modeset=0
+
+sudo update-initramfs -u
+reboot
 ```
+
 
 ## 参考
 
