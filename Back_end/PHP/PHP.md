@@ -602,6 +602,7 @@ Hugepagesize:       2048 kB
     - gd2
     - imagick
     - libpcre3-dev
+    - php7.4
     - OpenSSL
     - PDO
     - Mbstring
@@ -699,6 +700,8 @@ apt install php7.4-{bz2,json,mbstring,zip,gd,curl,xml,common,opcache,imagick}
 ## ubuntu
 sudo systemctl start php7.0-fpm.service
 sudo service php7.0-fpm start|stop|restart|reload
+
+update-alternatives --config php
 ```
 
 ### 扩展安装
@@ -728,6 +731,7 @@ apt-get install -y php5-memcached
 * linux下用php编写shell脚本
 * [ircmaxell/phpvm](https://github.com/ircmaxell/phpvm):A PHP version manager for CLI PHP
 * 配置
+    - The configuration is loaded fresh each time you invoke PHP from the CLI.
     - 配置比较长的max_execution_time
 
 ```sh

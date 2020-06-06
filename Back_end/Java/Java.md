@@ -1128,6 +1128,8 @@ JavaEE/JDBC/Weblogic
 * 《Java核心技术系列：Java多线程编程核心技术》
 * 《Java性能权威指南》
 * 《Java并发编程实战》
+* Java核心技术卷Ⅰ基础知识
+* Java核心技术卷Ⅱ高级特性
 * [Thinking In Java](https://www.codeguru.com/java/tij/tij_c.shtml)
 * [Introduction to Programming Using Java](http://math.hws.edu/javanotes/)
 

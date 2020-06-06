@@ -438,10 +438,13 @@ make && sudo make install
 
 sudo apt-get install snapd|snapcraft
 sudo snap login # 通过Ubuntu One登陆
-sudo snap list|find
+sudo snap list # view all the installed snaps
+snap find skype
 snap install vlc --channel=latest/edge
 snap install skype --channel=insider/stable #  switch channel
+
 snap info skype
+sudo snap refresh --list # find out the available updates for the packages,
 snap refresh skype --channel=insider/stable
 snap switch --channel=stable vlc #  the risk-level being tracked can be changed
 

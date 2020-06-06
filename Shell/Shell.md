@@ -1139,6 +1139,8 @@ source ~/.zshrc
 j + 目录名
 ```
 
+## [ bats-core / bats-core ](https://github.com/bats-core/bats-core):Bash Automated Testing System
+
 ###  [fzf](https://github.com/junegunn/fzf)
 
 * 🌸 A command-line fuzzy finder
