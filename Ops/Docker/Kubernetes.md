@@ -458,6 +458,30 @@ kubectl get pods -l ‘environment in (production),tier in (frontend)’
     - Metrics-Server
     - HPA v2
 
+## 网络
+
+* 模型
+    - IP-per-Pod，每个 Pod 都拥有一个独立 IP 地址，Pod 内所有容器共享一个网络命名空间
+    - 集群内所有 Pod 都在一个直接连通的扁平网络中，可通过 IP 直接访问
+    - Service cluster IP 仅可在集群内部访问，外部请求需要通过 NodePort、LoadBalance 或者 Ingress 来访问
+    - 除此之外，Pod 的网络都是通过 CNI 网络插件和一系列的网络扩展来配置的，比如 Calico、Flannel 等网络插件，CoreDNS 扩展，Nginx ingress 控制器扩展，Ambassador API 网关，还有 Linkerd、Istio 等服务网格等。所有这些服务组合起来，构成了一个强大的容器网络，当然同时也增加了网络的复杂度
+* 服务发现,为了实现服务发现和负载均衡就需要一下几个组件协同：
+    - 用户通过 API 创建一个 Service
+    - kube-controller-manager 通过 Label 绑定 Pod 并创建同名 Endpoints 对象
+    - 每个 Node 上面的 kube-proxy 为 Service 和 Endpoints 创建 iptables 规则，实现负载均衡和 DNAT
+    - kube-proxy 如何实现了服务发现和负载均衡。默认 iptables 模式的工作流程如下图所示，掌握这个流程是理解 Kubernetes 网络的工作原理以及日常网络排错的关键
+* 排错
+    - Pod 访问容器外部网络
+    - 从容器外部访问 Pod 网络
+    - Pod 之间相互访问
+    - 常见的网络问题有
+        + CNI 网络插件配置错误；
+        + Pod 网络路由丢失；
+        + Service 端口冲突、NetworkPolicy 策略配置错误；
+        + 主机或云平台安全组、防火墙或安全策略阻止了容器网络。
+
+![Alt text](../_static/kubernates_proxy.png "Optional title")
+
 ### kubectl（kubelet client）集群管理命令行工具集
 
 通过客户端的kubectl命令集操作，API Server响应对应的命令结果，从而达到对kubernetes集群的管理

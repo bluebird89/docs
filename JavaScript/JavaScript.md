@@ -2792,6 +2792,7 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
   - [retejs/rete](https://github.com/retejs/rete):JavaScript framework for visual programming and creating node editor https://rete.js.org
   - [Tencent/omi](https://github.com/Tencent/omi):Next generation web framework in 4KB javascript(Web Components + JSX + Proxy + Path Updating) http://omijs.org
   - https://github.com/knockout/knockout
+  - [Foundation](https://get.foundation/): The most advanced responsive front-end framework in the world.
 * 包管理
   - [JedWatson/classnames](https://github.com/JedWatson/classnames):A simple javascript utility for conditionally joining classNames together
   - [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
@@ -3089,6 +3090,10 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
 * [expressjs/multer](https://github.com/expressjs/multer):Node.js middleware for handling `multipart/form-data`.
 * [Microsoft/napajs](https://github.com/Microsoft/napajs):Napa.js: a multi-threaded JavaScript runtime
 * [cheeriojs / cheerio](https://github.com/cheeriojs/cheerio):Fast, flexible, and lean implementation of core jQuery designed specifically for the server. https://cheerio.js.org/
+* Test
+  - [jasmine / jasmine ](https://github.com/jasmine/jasmine):
+Simple JavaScript testing framework for browsers and node.js http://jasmine.github.io/
+
 
 ## 教程
 

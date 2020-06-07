@@ -218,6 +218,10 @@ $('#setDataURLInLinkBtn').click(function() {
 const bgDataURL = $('#testCanvas-content')[0].value
 $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
 ```
+## 图集
+
+* 《你好小朋友》
+* 《光景宛如昨》
 
 ## 资源
 

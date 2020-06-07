@@ -1,4 +1,4 @@
-## Raft 
+## Raft
 
 分布式一致性算法的主流，业界的 TiDB、CockroachDB、etcd、consul 等一系列流行的组件和服务都在使用它
 
@@ -26,6 +26,18 @@ Consensus一致性:指多个服务器在状态达成一致，但是在一个分�
         + 原先的 Leader 独自在一个区，向它提交数据不可能复制到多数节点所以永远提交不成功
         + 向新的 Leader 提交数据可以提交成功
         + 网络恢复后旧的 Leader 发现集群中有更新任期（Term）的新 Leader 则自动降级为 Follower 并从新 Leader 处同步数据达成集群数据一致。
+
+## paxos vs raft
+
+* paxos 和 raft 的区别
+* paxos/raft 属于什么协议，分布式共识协议和分布式一致性协议有什么区别？
+* paxos/raft 有哪些表示时间的方式，分别是什么？
+* raft 为什么需要 preVote，没有 preVote 会怎么样？
+* 一致性有哪些级别，分别是什么，有什么区别？追问：如何验证这些一致性？
+* TLA+ 是什么？会使用 TLA+ 验证分布式协议的正确性吗？为什么用 TLA+ 可以验证分布式问题，如果不使用 TLA+还有别的方法验证吗？
+* paxos 和 raft 是 write wait(写等待) 协议，那么有没有 read wait(读等待) 协议，写等待和读等待分别适合什么场景？
+* 什么场景不适合用 raft 而只适合用 paxos？
+* paxos 的常见优化有哪些？为什么优化后的 paxos 依然可以保证正确性，优化牺牲了什么？
 
 ## 参考
 
