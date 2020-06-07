@@ -281,7 +281,6 @@
         + [《非暴力沟通》](https://book.douban.com/subject/3533221/)，（美）马歇尔·卢森堡 学会科学地沟通
         + [《亲密关系》](https://book.douban.com/subject/5952488/)，（美）罗兰•米勒等 汇集了有关亲密关系的研究，爱也是一门学问
     - 视频
-        + [哈佛大学公开课：幸福课](http://open.163.com/special/positivepsychology/)
         + [幸福的学问-加州大学伯克利分校](http://www.xuetangx.com/courses/course-v1:BerkeleyX+GG101x+3T2015/about)
         + [bilibili up主](https://m.bilibili.com/space/1950746) 翻译了大量10分钟速成课的字幕，在这里你可以看到社会学、哲学、心理学、历史等各学科的免费科普视频，中文字幕。
 * 博雅教育
