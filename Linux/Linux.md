@@ -3628,3 +3628,5 @@ sed -n &#39;1!G;h;$p&#39; FILE
 * [VITUX](https://vitux.com) Linux Compendium
 * [judasn/Linux-Tutorial](https://github.com/judasn/Linux-Tutorial):《Java 程序员眼中的 Linux》 https://github.com/judasn/Linux-Tutorial
 * [Linux From Scratch]http://www.linuxfromscratch.org/):a project that provides you with step-by-step instructions for building your own custom Linux system, entirely from source code
+
+* [全面理解Linux性能优化](https://mp.weixin.qq.com/s/C7KDLcHUhr7QR2hq_pm4kA)
