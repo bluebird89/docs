@@ -22,7 +22,7 @@ Event-driven asynchronous & concurrent & coroutine networking engine with high p
 * 优点
     - Node.js 的异步回调
     - Go语言的协程
-    - 可以实现常驻内存的 Server 程序
+    - 可以实现常驻内存的 Server 程序:在每个 Worker 进程中，应用启动及之前的环境初始化工作只执行一次，请求结束后，应用实例不会回收，后续发给该 Worker 进程处理的请求会复用之前已经启动的 应用实例，再结合 MySQL、Redis 长连接，从而极大提高了应用性能
     - 可以实现 TCP 、 UDP 异步网络通信的编程开发
 * 缺点
     - 无法做密集计算。当然这一点是php甚至是所有动态语言都存在的问题
@@ -128,41 +128,26 @@ kill -USR1 主进程PID
 kill -USR2 主进程PID
 ```
 
-## Server
+## 原理
 
-* 强大的TCP/UDP Server框架，支持多线程，EventLoop，事件驱动，异步，Worker进程组，Task异步任务，毫秒定时器，SSL/TLS隧道加密
-* 类型
-    - swoole_http_server是swoole_server的子类，内置了Http的支持
-        + 采用优秀的 Reactor 模型，处理速度可逼进 NGINX 处理静态页面的 速度
-    - swoole_websocket_server是swoole_http_server的子类，内置了WebSocket的支持
-    - swoole_redis_server是swoole_server的子类，内置了Redis服务器端协议的支持
-* 默认使用SWOOLE_PROCESS模式，因此会额外创建Master和Manager两个进程。
-* TCP协议:流式的，数据包没有边界.在接收1个大数据包时，可能会被拆分成多个数据包发送。多次Send底层也可能会合并成一次进行发送。这里就需要2个操作来解决：
-    - 分包：Server收到了多个数据包，需要拆分数据包
-    - 合包：Server收到的数据只是包的一部分，需要缓存数据，合并成完整的包
-    - 基于TCP的协议：HTTP、HTTPS、FTP、SMTP、POP3、IMAP、SSH、Redis、Memcache、MySQL
-    - 自定义网络通信协议
-        + EOF协议:每个数据包结尾加一串特殊字符表示包已结束。如memcache、ftp、stmp都使用\r\n作为结束符。发送数据时只需要在包末尾增加\r\n即可。使用EOF协议处理，一定要确保数据包中间不会出现EOF，否则会造成分包错误。
-        + 固定包头+包体协议:一个数据包总是由包头+包体2部分组成。包头由一个字段指定了包体或整个包的长度，长度一般是使用2字节/4字节整数来表示。服务器收到包头后，可以根据长度值来精确控制需要再接收多少数据就是完整的数据包。
-            * Swoole的Server和异步Client都是在onReceive回调函数中处理数据包，当设置了协议处理后，只有收到一个完整数据包时才会触发onReceive事件
-            * 同步客户端在设置了协议处理后，调用 $client->recv() 不再需要传入长度，recv函数在收到完整数据包或发生错误后返回。
-* master进程：是一个包含多线程的进程
-    - main线程在Accept新的连接后，会将这个连接分配给一个固定的Reactor线程，并由这个线程负责监听此socket
-        + 主要用于accept链接、接受响应信号
-        + Main线程会将accept的链接按照一定算法分配给Reactor线程
-        + 后面的网络数据IO则靠Reactor线程与客户端完成
-        + Reactor线程会将收到的数据通过管道的方式传递给Worker进程(注意不包括Tasker进程)
-    - Reactor线程组
-        + 以多线程的方式运行
-        + 负责维护客户端TCP连接、处理网络IO、处理协议、收发数据
-        + 完全是异步非阻塞的模式
-            * socket可读时读取数据，并进行协议解析，将请求投递到Worker进程
-            * socket可写时将数据发送给TCP客户端
-        + 全部为C代码，除Start/Shudown事件回调外，不执行任何PHP代码
-        + 将TCP客户端发来的数据缓冲、拼接、拆分成完整的一个请求数据包
-    - 方法
-        + onStart
-        + onShutdown
+* master进程：是一个包含多线程进程，运行启动 Swoole 的 PHP 脚本时，首先会创建该进程（整个应用的 root 进程），然后由该进程 fork 出 Reactor 线程和 Manager 进程
+* Reactor：Reactor 是包含在 Master 进程中的多线程程序，用来处理 TCP 连接和数据收发（异步非阻塞方式），Reactor 主线程在 Accept 新的连接后，会将这个连接分配给一个固定的 Reactor 线程，并由这个线程负责监听此 socket
+    - 主要用于accept链接、接受响应信号
+    - Main线程会将accept的链接按照一定算法分配给Reactor线程
+    - 后面的网络数据IO则靠Reactor线程与客户端完成
+    - Reactor线程会将收到的数据通过管道的方式传递给Worker进程(注意不包括Tasker进程)
+* Reactor线程组
+    - 以多线程的方式运行
+    - 负责维护客户端TCP连接、处理网络IO、处理协议、收发数据
+    - 完全是异步非阻塞的模式
+        + socket可读时读取数据，并进行协议解析，将请求投递到Worker进程
+        + socket可写时将数据发送给TCP客户端
+    - 全部为C代码，除Start/Shudown事件回调外，不执行任何PHP代码
+    - 将TCP客户端发来的数据缓冲、拼接、拆分成完整的一个请求数据包
+    - 在 socket 可读时读取数据，并进行协议解析，将请求投递到 Worker 进程；在 socket 可写时将数据发送给 TCP 客户端。
+* 方法
+    - onStart
+    - onShutdown
 * manager进程：由Master进程fork出来的，主要负责管理Worker进程,包括fork worker进程、监控worker进程状态、重新拉起新的worker进程等等。
     - 方法
         + onManagerStart
@@ -172,34 +157,30 @@ kill -USR2 主进程PID
         + 服务器关闭时，manager进程将发送信号给所有子进程，通知子进程关闭服务
         + 服务器reload时，manager进程会逐个关闭/重启子进程
         + Master进程是多线程的，不能安全的执行fork操作
-    - worker进程
-        + 由Manager进程fork而出
-        + 以多进程方式运行
-            * 当Worker进程异常退出，如发生PHP的致命错误、被其他程序误杀，或达到max_request次数之后正常退出。主进程会重新拉起新的Worker进程
-        + 接受由Reactor线程投递的请求数据包，并执行PHP回调函数处理数据
-        + 响应
-            * TCP客户端，Worker进程处理完请求后，调用$server->send会将数据发给Reactor线程，由Reactor线程再发给客户端
-            * UDP客户端，Worker进程处理完请求后，调用$server->sendto会直接发给客户端，无需经过Reactor线程
-        + 可以是异步非阻塞模式，也可以是同步阻塞模式
-        + 方法
-            * onWorkerStart
-            * onWorkerStop
-            * onConnect
-            * onClose
-            * onReceive
-            * onFinish
-    - TaskWorker进程
-        + 以多进程方式运行
-        + 支持定时器
-        + 做一些异步的慢速任务，比如webim中发广播，发送邮件
-        + 接受由Worker进程通过swoole_server->task/taskwait方法投递的任务
-        + 处理任务，并将结果数据返回（使用swoole_server->finish）给Worker进程
-        + 实现PHP的数据库连接池，异步队列等
-        + 完全是同步阻塞模式
-        + 方法
-            * onTask
-            * finsh
-            * onWorkerStart
+* worker进程：以多进程方式运行，每个子进程负责接受由 Reactor 线程投递的请求数据包，并执行 PHP 回调函数处理数据，然后生成响应数据并发给 Reactor 线程，由 Reactor 线程发送给 TCP 客户端。所有请求的处理逻辑都是在 Worker 子进程中完成
+    - 由Manager进程fork而出
+    - 当Worker进程异常退出，如发生PHP的致命错误、被其他程序误杀，或达到max_request次数之后正常退出。主进程会重新拉起新的Worker进程
+    - 响应
+        + TCP客户端，Worker进程处理完请求后，调用$server->send会将数据发给Reactor线程，由Reactor线程再发给客户端
+        + UDP客户端，Worker进程处理完请求后，调用$server->sendto会直接发给客户端，无需经过Reactor线程
+    - 可以是异步非阻塞模式，也可以是同步阻塞模式
+    - 方法
+        + onWorkerStart
+        + onWorkerStop
+        + onConnect
+        + onClose
+        + onReceive
+        + onFinish
+* TaskWorker进程：以多进程方式运行，仅用于任务分发，当 Worker 进程将任务异步分发到任务队列时，Task Worker 负责从队列中消费这些任务（同步阻塞方式处理），处理完成后将结果返回给 Worker 进程
+    - 支持定时器
+    - 做一些异步的慢速任务，比如webim中发广播，发送邮件
+    - 接受由Worker进程通过swoole_server->task/taskwait方法投递的任务
+    - 处理任务，并将结果数据返回（使用swoole_server->finish）给Worker进程
+    - 实现PHP的数据库连接池，异步队列等
+    - 完全是同步阻塞模式
+    - 方法
+        + onTask
+        + onWorkerStart
     - 底层会为Worker进程、TaskWorker进程分配一个唯一的ID
     - 不同的Worker和TaskWorker进程之间可以通过sendMessage接口(unix socket)进行通信
 * 关系
@@ -209,6 +190,26 @@ kill -USR2 主进程PID
     - Server就是一个工厂，那Reactor就是销售，接受客户订单
     - Worker就是工人，当销售接到订单后，Worker去工作生产出客户要的东西
     - TaskWorker可以理解为行政人员，可以帮助Worker干些杂事，让Worker专心工作
+* 一个形象的比喻，如果把基于 Swoole 的 Web 服务器比作一个工厂，那么 Reactor 就是这个工厂的销售员，Worker 是负责生产的工人，销售员负责接订单，然后交给工人生产，而 Task Worker 可以理解为行政人员，负责提工人处理生产以外的杂事，比如订盒饭、收快递，让工人可以安心生产
+
+## Server
+
+* 强大的TCP/UDP Server框架，支持多线程，EventLoop，事件驱动，异步，Worker进程组，Task异步任务，毫秒定时器，SSL/TLS隧道加密
+* 类型
+    - swoole_http_server是swoole_server的子类，内置了Http的支持
+        + 采用优秀的 Reactor 模型，处理速度可逼进 NGINX 处理静态页面的 速度
+    - swoole_websocket_server是swoole_http_server的子类，内置了WebSocket的支持
+    - swoole_redis_server是swoole_server的子类，内置了Redis服务器端协议的支持
+* 默认使用SWOOLE_PROCESS模式，因此会额外创建Master和Manager两个进程。
+* TCP协议:流式的，数据包没有边界.在接收1个大数据包时，可能会被拆分成多个数据包发送。多次Send底层也可能会合并成一次进行发送。需要2个操作来解决：
+    - 分包：Server收到了多个数据包，需要拆分数据包
+    - 合包：Server收到的数据只是包的一部分，需要缓存数据，合并成完整的包
+    - 基于TCP的协议：HTTP、HTTPS、FTP、SMTP、POP3、IMAP、SSH、Redis、Memcache、MySQL
+    - 自定义网络通信协议
+        + EOF协议:每个数据包结尾加一串特殊字符表示包已结束。如memcache、ftp、stmp都使用\r\n作为结束符。发送数据时只需要在包末尾增加\r\n即可。使用EOF协议处理，一定要确保数据包中间不会出现EOF，否则会造成分包错误。
+        + 固定包头+包体协议:一个数据包总是由包头+包体2部分组成。包头由一个字段指定了包体或整个包的长度，长度一般是使用2字节/4字节整数来表示。服务器收到包头后，可以根据长度值来精确控制需要再接收多少数据就是完整的数据包。
+            * Swoole的Server和异步Client都是在onReceive回调函数中处理数据包，当设置了协议处理后，只有收到一个完整数据包时才会触发onReceive事件
+            * 同步客户端在设置了协议处理后，调用 $client->recv() 不再需要传入长度，recv函数在收到完整数据包或发生错误后返回
 * 多进程使用fork()系统调用
 * 多线程使用pthread线程库
 * 使用了eventfd作为线程/进程间消息通知的机制
@@ -314,7 +315,7 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
     - 性能： 用 swoole 达不到的性能, 换个语言, 呵呵呵. 难易程度排行: 加机器 < 加程序员 < 加语言.
 * 注意事项
     - 不能存在阻塞代码:Swoole 提供的异步函数的 MySQL、Redis、Memcache、MongoDB、HTTP、Socket等客户端，文件操作、sleep/usleep 等均为阻塞函数
-        + Swoole 提供了 MySQL、PostgreSQL、Redis、HTTP、Socket 的协程客户端可以使用，同时 Swoole 4.1 之后提供了一键协程化的方法 \Swoole\Coroutine::enableCoroutine()，只需在使用协程前运行这一行代码，Swoole 会将 所有使用 php_stream 进行 socket 操作均变成协程调度的异步 I/O 
+        + Swoole 提供了 MySQL、PostgreSQL、Redis、HTTP、Socket 的协程客户端可以使用，同时 Swoole 4.1 之后提供了一键协程化的方法 \Swoole\Coroutine::enableCoroutine()，只需在使用协程前运行这一行代码，Swoole 会将 所有使用 php_stream 进行 socket 操作均变成协程调度的异步 I/O
     - 不能通过全局变量储存状态:`$_GET/$_POST/$_REQUEST/$_SESSION/$_COOKIE/$_SERVER`等$_开头的变量、global 变量，以及 static 静态属性
         + 同一个 Worker 内还会存在多个协程并存在协程切换，也就意味着一个 Worker 会在一个时间周期内同时处理多个协程（或直接理解为请求）的代码，也就意味着如果使用了全局变量来储存状态可能会被多个协程所使用，也就是说不同的请求之间可能会混淆数据
         + 对于全局变量，均是跟随着一个 请求(Request) 而产生的,CLI 应用，会存在 全局周期 和 请求周期(协程周期) 两种长生命周期
@@ -412,7 +413,7 @@ for ($i = 0; $i < 3; $i++) {
 
 ## Buffer
 
-强大的内存区管理工具，像C一样进行指针计算，又无需关心内存的申请和释放，而且不用担心内存越界，底层全部做好了。
+强大的内存区管理工具，像C一样进行指针计算，又无需关心内存的申请和释放，而且不用担心内存越界，底层全部做好了
 
 ## Memory
 
@@ -659,7 +660,7 @@ ps aux | grep swoole_process_server_master | awk '{print $2}'| xargs kill - USR1
     - [bingcool/swoolefy](https://github.com/bingcool/swoolefy):swoolefy是一个基于swoole扩展实现的轻量级高性能的API和MVC应用服务框架
     - [hyperf-cloud/hyperf](https://github.com/hyperf-cloud/hyperf):🚀 A coroutine framework that focuses on hyperspeed and flexibility, specifically used for build microservices or middlewares. https://www.hyperf.io
 * [eaglewu/swoole-ide-helper](Auto completion, trigger suggest and view docs for Swoole in editor):Put the source code path into Include Path in IDE.
-* [swlib/saber](https://github.com/swlib/saber):Saber, 高性能高可用HTTP客户端 - Swoole人性化组件库 | High performance and high availability HTTP client - Swoole Humanization Component Library 
+* [swlib/saber](https://github.com/swlib/saber):Saber, 高性能高可用HTTP客户端 - Swoole人性化组件库 | High performance and high availability HTTP client - Swoole Humanization Component Library
 * [LinkedDestiny/swoole-yaf](https://github.com/LinkedDestiny/swoole-yaf)
 * [LinkedDestiny/swoole-thinkphp](https://github.com/LinkedDestiny/swoole-thinkphp)
 * [youzan/yz_swoole](https://github.com/youzan/yz_swoole)youzan swoole branch
