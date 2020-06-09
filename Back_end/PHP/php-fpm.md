@@ -1,14 +1,11 @@
 # PHP-FPM (PHP-FastCGI Process Manager)
 
 * 多进程的 FastCGI 管理程序
-* FastCGI 应用速度很快是因为持久稳定。不必对每一个请求都启动和初始化。提升 PHP 脚本运行速度
-* PHP 解释程序被载入内存而不用每次需要时从存储器读取，极大的提升了依靠脚本运行的站点的性能；同时速度的提升并不会增加 CPU 的负担
-* 常驻内存启动一些PHP进程待命，当请求进入时分配一个进程进行处理，PHP进程处理完毕后回收进程，但并不销毁进程，这让PHP也能应对高流量的访问请求
-* PHP-FPM会通过用户配置来管理一批FastCGI进程
-* PHP-FPM 是 FastCGI 的实现，并提供了进程管理的功能。进程包含两种
-    - master 进程只有一个，负责监听端口，接收来自服务器的请求
-    - worker 进程则一般有多个（具体数量根据实际需要进行配置），每个进程内部都会嵌入一个 PHP 解释器，是代码真正执行的地方
-* Nginx 通过 FastCGI 协议将请求转发给 PHP-FPM 处理，PHP-FPM 的 Worker 进程 会抢占式的获得 CGI 请求进行处理，这个处理指的就是，等待 PHP 脚本的解析，等待业务处理的结果返回，完成后回收子进程，这整个的过程是阻塞等待的，也就意味着 PHP-FPM 的进程数有多少能处理的请求也就是多少
+* 常驻内存启动一些PHP进程待命，当请求进入时分配一个进程进行处理，PHP进程处理完毕后回收进程，并不销毁进程，让PHP也能应对高流量的访问请求
+* PHP-FPM 是 FastCGI 的实现，提供了进程管理功能
+    - master 进程负责与 Web 服务器进行通信，接收 HTTP 请求，再将请求转发给 worker 进程进行处理
+    - worker 进程负责动态执行 PHP 代码，处理完成后，将处理结果返回给 Web 服务器，再由 Web 服务器将结果发送给客户端
+* Nginx 通过 FastCGI 协议将请求转发给 PHP-FPM 处理，PHP-FPM 的 Worker 进程会抢占式的获得 CGI 请求进行处理，整个的过程是阻塞等待的，也就意味着 PHP-FPM 的进程数有多少能处理的请求也就是多少
 * 高并发的场景下，异步非阻塞就显得优势明显
     - Worker 进程 不再同步阻塞的去处理一个请求，而是可以同时处理多个请求，无需 I/O 等待，并发能力极强，可以同时发起或维护大量的请求
     - 缺点大家可能也都知道，就是永无止境的回调
@@ -75,7 +72,7 @@ brew services start php
 ## 服务
 
 ```sh
-#测试php-fpm配置
+# 测试php-fpm配置
 /usr/local/php/sbin/php-fpm -t
 /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf -t
 
@@ -84,7 +81,7 @@ brew services start php
 /usr/local/Cellar/php71/7.1.10_21/sbin/php-fpm --daemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf --pid /usr/local/var/run/php-fpm.pid`
 
 ps aux | grep -c php-fpm # 查看php-fpm进程数
-ps aux |grep php-fpm 查看php-fpm的master进程号
+ps aux | grep php-fpm 查看php-fpm的master进程号
 
 ## Mac
 php-fpm -D # 启动
@@ -109,13 +106,12 @@ killall php-fpm
 * 动态：开始的时候开启一定数量的php-fpm进程，当请求量变大的时候，动态的增加php-fpm进程数到上限，当空闲的时候自动释放空闲的进程数到一个下限。
 * 通信方式
     - Unix socket:又叫 IPC(inter-process communication 进程间通信) socket，用于实现同一主机上的进程间通信，这种方式需要在 nginx配置文件中填写 php-fpm 的 socket 文件位置。
-        + 与管道相比，Unix domain sockets 既可以使用字节流和数据队列，而管道通信则只能通过字节流。
-        + Unix domain sockets的接口和Internet socket很像，但它不使用网络底层协议来通信。
-        + Unix domain socket 的功能是POSIX操作系统里的一种组件。Unix domain sockets 使用系统文件的地址来作为自己的身份。它可以被系统进程引用。所以两个进程可以同时打开一个Unix domain sockets来进行通信。不过这种通信方式是发生在系统内核里而不会在网络里传播。压力比较满的时候，用套接字方式，效果确实比较好
+        + 与管道相比，Unix domain sockets 既可以使用字节流和数据队列，而管道通信则只能通过字节流
+        + Unix domain socket 的功能是POSIX操作系统里的一种组件。Unix domain sockets 使用系统文件的地址来作为自己的身份。可以被系统进程引用。所以两个进程可以同时打开一个Unix domain sockets来进行通信。不过这种通信方式是发生在系统内核里而不会在网络里传播。压力比较满的时候，用套接字方式，效果确实比较好
+        - Unix domain sockets的接口和Internet socket很像，但不使用网络底层协议来通信,不需要经过网络协议栈，不需要打包拆包、计算校验和、维护序号和应答等，只是将应用层数据从一个进程拷贝到另一个进程。所以其效率比 tcp socket 的方式要高，可减少不必要的 tcp 开销。
+        - unix socket 高并发时不稳定，连接数爆发时，会产生大量的长时缓存，在没有面向连接协议的支撑下，大数据包可能会直接出错不返回异常。而 tcp 这样的面向连接的协议，可以更好的保证通信的正确性和完整性。
+        - 由于 socket 文件本质上是一个文件，存在权限控制的问题，所以需要注意 nginx 进程的权限与 php-fpm 的权限问题，不然会提示无权限访问
     - TCP sockets:使用TCP端口连接127.0.0.1:9000，可以跨服务器，当 nginx 和 php-fpm 不在同一台机器上时，只能使用这种方式
-    - Unix socket 不需要经过网络协议栈，不需要打包拆包、计算校验和、维护序号和应答等，只是将应用层数据从一个进程拷贝到另一个进程。所以其效率比 tcp socket 的方式要高，可减少不必要的 tcp 开销。
-    - unix socket 高并发时不稳定，连接数爆发时，会产生大量的长时缓存，在没有面向连接协议的支撑下，大数据包可能会直接出错不返回异常。而 tcp 这样的面向连接的协议，可以更好的保证通信的正确性和完整性。
-    - 由于 socket 文件本质上是一个文件，存在权限控制的问题，所以需要注意 nginx 进程的权限与 php-fpm 的权限问题，不然会提示无权限访问
 
 ```
 listen = 127.0.0.1:9000
