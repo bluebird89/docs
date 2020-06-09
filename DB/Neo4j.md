@@ -24,3 +24,23 @@ Neo4j是一个图形数据库，这也就意味着它的数据并非保存在表
 * 对大规模分布式数据进行处理，类似于Hadoop
 * 二进制数据存储
 * 适合于保存在关系型数据库中的结构化数据
+
+## Cypher
+
+* Neo4j的图形查询语言，允许用户存储和检索图形数据库中的数据
+
+```
+# 查找Joe的所以二度好友
+MATCH
+  (person:Person)-[:KNOWS]-(friend:Person)-[:KNOWS]-
+  (foaf:Person)
+WHERE
+  person.name = "Joe"
+  AND NOT (person)-[:KNOWS]-(foaf)
+RETURN
+  foaf
+```
+
+## 图书
+
+* 《Neo4j in Action》

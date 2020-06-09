@@ -2,7 +2,7 @@
 
 * HTML5出的东西（协议），也就是说HTTP协议没有变化，或者说没关系，但HTTP是不支持持久连接的（长连接，循环连接的不算）首先HTTP有1.1和1.0之说，也就是所谓的keep-alive，把多个HTTP请求合并为一个
 * Websocket其实是一个新协议，跟HTTP协议基本没有关系，只是为了兼容现有浏览器的握手规范而已，也就是说它是HTTP协议上的一种补充
-* Websocket是一个持久化的协议，相对于HTTP这种非持久的协议来说。简单的举个例子吧，用目前应用比较广泛的PHP生命周期来解释。1) HTTP的生命周期通过Request来界定，也就是一个Request 一个Response，那么在HTTP1.0中，这次HTTP请求就结束了。在HTTP1.1中进行了改进，使得有一个keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request，接收多个Response。但是请记住 Request = Response ， 在HTTP中永远是这样，也就是说一个request只能有一个response。而且这个response也是被动的，不能主动发起。
+* Websocket是一个持久化的协议，相对于HTTP这种非持久的协议来说。简单的举个例子吧，用目前应用比较广泛的PHP生命周期来解释。1) HTTP的生命周期通过Request来界定，也就是一个Request 一个Response，那么在HTTP1.0中，这次HTTP请求就结束了。在HTTP1.1中进行了改进，使得有一个keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request，接收多个Response。但是请记住 Request = Response，在HTTP中永远是这样，也就是说一个request只能有一个response。而且这个response也是被动的，不能主动发起。
     - 基于HTTP协议的，或者说借用了HTTP的协议来完成一部分握手。
 * Websocket只需要一次HTTP握手，所以说整个通讯过程是建立在一次连接/状态中，也就避免了HTTP的非状态性，服务端会一直知道你的信息，直到你关闭请求，这样就解决了接线员要反复解析HTTP协议，还要查看identity info的信息。
 
@@ -33,6 +33,35 @@ websocket通信协议实现的是基于浏览器的原生socket，这样原先�
     * 双通道
     * multiplexing
 * polling :是指从客户端（一般就是浏览器）不断主动的向服务器发 HTTP 请求查询是否有新数据
+
+一种连接模式，实现通信协议的通信过程而建立成来的通信管道，其真实的代表是客户端和服务器端的一个通信进程，双方进程通过socket进行通信，而通信的规则采用指定的协议。可以创建任何协议的连接，因为其它协议都是基于此的
+
+* 应用层与TCP/IP协议族通信的中间软件抽象层，它是一组接口。在设计模式中，Socket其实就是一个门面模式，对TCP/IP协议的封装，它把复杂的TCP/IP协议族隐藏在Socket接口后面，对用户来说，一组简单的接口就是全部，让Socket去组织数据，以符合指定的协议。
+* socket就是一个 五元组 [180.172.35.150:45678, tcp, 180.97.33.108:80] ，包括：
+    - 源IP
+    - 源端口
+    - 目的IP
+    - 目的端口
+    - 类型：TCP or UDP
+* 优点
+    - 传输数据为字节级，传输数据可自定义，数据量小（对于手机应用讲：费用低）
+    - 传输数据时间短，性能高
+    - 适合于客户端和服务器端之间信息实时交互
+    - 可以加密,数据安全性强
+* 缺点
+    - 需对传输的数据进行解析，转化成应用级的数据
+    - 对开发人员的开发水平要求高
+    - 相对于Http协议传输，增加了开发量
+
+```C
+SOCKET SocketListen =socket(AF_INET,SOCK_STREAM, IPPROTO_TCP);
+SOCKET_ERROR = bind(SocketListen,(const sockaddr*)&addr,sizeof(addr))
+SOCKET_ERROR == listen(SocketListen,2)
+SOCKET SocketWaiter = accept(SocketListen, _Out_    struct sockaddr *addr _Inout_  int *addrlen);
+closesocket(SocketListen);closesocket(SocketWaiter);
+
+socket(PF_INET, SOCK_DGRAM, 0)
+```
 
 ## 头信息
 

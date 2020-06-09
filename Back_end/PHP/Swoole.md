@@ -5,8 +5,8 @@ Event-driven asynchronous & concurrent & coroutine networking engine with high p
 * 一个异步并行的通信引擎，作为 PHP 的扩展来运行
 * 其进程模型的设计，既解决了异步问题，又解决了并行
 * 常驻内存，避免重复加载带来的性能损耗，提升海量性能
-    - 进程都是常驻内存的，包括解析过后的PHP代码也会常驻内存，不会反复解析
-    - PHP代码解析后都是常驻内存的，意味着mysql和redis等连接将会是长连接
+    - 进程常驻内存
+    - PHP代码解析后是常驻内存的，不会反复解析,意味着mysql和redis等连接将会是长连接
 * 协程异步，提高对 I/O 密集型场景并发处理能力
     - redis
 * 方便地开发Http、WebSocket、TCP、UDP 等应用，可以与硬件通信
@@ -22,28 +22,34 @@ Event-driven asynchronous & concurrent & coroutine networking engine with high p
 * 优点
     - Node.js 的异步回调
     - Go语言的协程
-    - 可以实现常驻内存的 Server 程序:在每个 Worker 进程中，应用启动及之前的环境初始化工作只执行一次，请求结束后，应用实例不会回收，后续发给该 Worker 进程处理的请求会复用之前已经启动的 应用实例，再结合 MySQL、Redis 长连接，从而极大提高了应用性能
-    - 可以实现 TCP 、 UDP 异步网络通信的编程开发
+    - 实现常驻内存的 Server 程序:在每个 Worker 进程中，应用启动及之前的环境初始化工作只执行一次，请求结束后，应用实例不会回收，后续发给该 Worker 进程处理的请求会复用之前已经启动的 应用实例，再结合 MySQL、Redis 长连接，从而极大提高了应用性能
+    - 实现 TCP 、 UDP 异步网络通信的编程开发
 * 缺点
-    - 无法做密集计算。当然这一点是php甚至是所有动态语言都存在的问题
-    - 更容易内存泄露。在处理全局变量，静态变量的时候一定要小心，这种不会被GC清理的变量会存在整个生命周期中，如果没有正确的处理，很容易消耗完所有的内存
+    - 无法做密集计算:php甚至是所有动态语言都存在的问题
+    - 更容易内存泄露。在处理全局变量，静态变量的时候一定要小心，不会被GC清理的变量会存在整个生命周期中，如果没有正确的处理，很容易消耗完所有的内存
 * 场景：WebSocket 即时通信、聊天、推送服务器、RPC 远程调用服务、网关、代理、游戏服务器等
 
 ## 版本
 
 * 4.0
-    - 提供了完整的协程(Coroutine)+通道(Channel)特性，带来全的CSP编程模型。应用层可使用完全同步的编程方式，底层自动实现异步IO
+    - 提供了完整的协程(Coroutine)+通道(Channel)特性，带来全的CSP编程模型。应用层使用完全同步的编程方式，底层自动实现异步IO
     - 底层加入 Hook 机制，使原生的 Mysql PDO、Redis 操作协程化
 * 4.3
-    - 异步回调模块已过时，目前仅修复 BUG，不再进行维护, 且在4.3版本中移除了异步模块。请使用 Coroutine 协程模块。
+    - 异步回调模块已过时，目前仅修复 BUG，不再进行维护, 且在4.3版本中移除了异步模块。使用 Coroutine 协程模块
 * 4.4
     - 支持 CURL 协程化
 
 ## 安装
 
 ```sh
+
+cp -R /usr/local/Cellar/openssl/1.0.2o_1/include/openssl /usr/local/include # fatal error: 'openssl/ssl.h' file not found #include <openssl/ssl.h>
+# Enable http2 support, require nghttp2 library.
+brew install hiredis # fatal error: 'hiredis/hiredis.h'
+
 brew install openssl
 brew install nghttp2
+brew install swoole
 
 wget https://github.com/swoole/swoole-src/archive/v1.10.2.zip
 tar zxvf v1.10.2.zip
@@ -56,27 +62,19 @@ phpize
 --enable-http2  \
 --enable-async-redis \
 --enable-sockets \
---enable-mysqlnd
-
-// Enable openssl support, require openssl library
-sudo pecl download swoole
-./configure --enable-openssl --enable-http2 --enable-sockets --enable-mysqlnd -with-openssl-dir=/usr/local/Cellar/openssl/1.0.2s/
+--enable-mysqlnd \
+with-openssl-dir=/usr/local/Cellar/openssl/1.0.2s
 
 make clean && make && sudo make install  # 编译后的模块在 /modules 中，将swoole.so添加到php.ini中
-
-# php.ini
-extension=swoole.so
 
 # ubuntu
 sudo apt install php-pear
 sudo pecl channel-update pecl.php.net
-sudo pecl install swoole
+// Enable openssl support, require openssl library
+sudo pecl download swoole
 
-cp -R /usr/local/Cellar/openssl/1.0.2o_1/include/openssl /usr/local/include # fatal error: 'openssl/ssl.h' file not found #include <openssl/ssl.h>
-    # Enable http2 support, require nghttp2 library.
-brew install hiredis # fatal error: 'hiredis/hiredis.h'
-
-brew install swoole
+# php.ini
+extension=swoole.so
 
 # add swoole.ini
 sudo ln -s  /etc/php/7.2/mods-available/swoole.ini 20-swoole.ini
@@ -87,68 +85,33 @@ php -m | grep swoole
 php --ri swoole
 ```
 
-## 基础
-
-* 多进程/多线程
-    - 了解Linux操作系统进程和线程的概念
-    - 了解Linux进程/线程切换调度的基本知识
-    - 了解进程间通信的基本知识，如管道、UnixSocket、消息队列、共享内存
-* SOCKET
-    - 了解SOCKET的基本操作如accept/connect、send/recv、close、listen、bind
-    - 了解SOCKET的接收缓存区、发送缓存区、阻塞/非阻塞、超时等概念
-* IO复用
-    - 了解select/poll/epoll
-    - 了解基于select/epoll实现的事件循环，Reactor模型
-    - 了解可读事件、可写事件
-* TCP/IP网络协议
-    - 了解TCP/IP协议
-    - 了解TCP、UDP传输协议
-* 调试工具
-    - 使用 gdb 调试Linux程序
-    - 使用 strace 跟踪进程的系统调用
-    - 使用 tcpdump 跟踪网络通信过程
-    - 其他Linux系统工具，如ps、lsof、top、vmstat、netstat、sar、ss等
-* 信号
-    - SIGTERM: 向主进程 / 管理进程发送此信号服务器将安全终止
-    - 在 PHP 代码中可以调用 $serv->shutdown() 完成此操作
-    - SIGUSR1: 向主进程 / 管理进程发送 SIGUSR1 信号，将平稳地 restart 所有 Worker 进程
-    - SIGUSR2: 向主进程 / 管理进程发送 SIGUSR2 信号，将平稳地重启所有 Task 进程
-
 * 回调
     - 匿名函数
     - 函数
     - 类静态方法
     - 对象方法
 
-```
-# 重启所有worker进程
-kill -USR1 主进程PID
-
-# 仅重启task进程
-kill -USR2 主进程PID
-```
-
 ## 原理
 
 * master进程：是一个包含多线程进程，运行启动 Swoole 的 PHP 脚本时，首先会创建该进程（整个应用的 root 进程），然后由该进程 fork 出 Reactor 线程和 Manager 进程
-* Reactor：Reactor 是包含在 Master 进程中的多线程程序，用来处理 TCP 连接和数据收发（异步非阻塞方式），Reactor 主线程在 Accept 新的连接后，会将这个连接分配给一个固定的 Reactor 线程，并由这个线程负责监听此 socket
-    - 主要用于accept链接、接受响应信号
-    - Main线程会将accept的链接按照一定算法分配给Reactor线程
-    - 后面的网络数据IO则靠Reactor线程与客户端完成
-    - Reactor线程会将收到的数据通过管道的方式传递给Worker进程(注意不包括Tasker进程)
-* Reactor线程组
+* Reactor线程组：Reactor 是包含在 Master 进程中的多线程程序，用来处理 TCP 连接和数据收发（异步非阻塞方式）
     - 以多线程的方式运行
     - 负责维护客户端TCP连接、处理网络IO、处理协议、收发数据
+    - Main线程用于accept链接、接受响应信号
+    - 按照一定算法分配给Reactor线程,并由这个线程负责监听此 socket
+    - 后面的网络数据IO则靠Reactor线程与客户端完成
+        + 将TCP客户端发来的数据缓冲、拼接、拆分成完整的一个请求数据包
+        + 在 socket 可读时读取数据，并进行协议解析，将请求投递到 Worker 进程
+        + 在 socket 可写时将数据发送给 TCP 客户端
+    - Reactor线程会将收到的数据通过管道的方式传递给Worker进程(注意不包括Tasker进程)
     - 完全是异步非阻塞的模式
         + socket可读时读取数据，并进行协议解析，将请求投递到Worker进程
         + socket可写时将数据发送给TCP客户端
     - 全部为C代码，除Start/Shudown事件回调外，不执行任何PHP代码
-    - 将TCP客户端发来的数据缓冲、拼接、拆分成完整的一个请求数据包
-    - 在 socket 可读时读取数据，并进行协议解析，将请求投递到 Worker 进程；在 socket 可写时将数据发送给 TCP 客户端。
-* 方法
-    - onStart
-    - onShutdown
-* manager进程：由Master进程fork出来的，主要负责管理Worker进程,包括fork worker进程、监控worker进程状态、重新拉起新的worker进程等等。
+    - 方法
+        + onStart
+        + onShutdown
+* manager进程：由Master进程fork出来，主要负责管理 Worker 进程,包括fork worker进程、监控worker进程状态、重新拉起新的worker进程等等
     - 方法
         + onManagerStart
         + onManagerStop
@@ -156,7 +119,7 @@ kill -USR2 主进程PID
         + 子进程结束运行时，manager进程负责回收此子进程，避免成为僵尸进程。并创建新的子进程
         + 服务器关闭时，manager进程将发送信号给所有子进程，通知子进程关闭服务
         + 服务器reload时，manager进程会逐个关闭/重启子进程
-        + Master进程是多线程的，不能安全的执行fork操作
+        + Master进程是多线程，不能安全的执行fork操作
 * worker进程：以多进程方式运行，每个子进程负责接受由 Reactor 线程投递的请求数据包，并执行 PHP 回调函数处理数据，然后生成响应数据并发给 Reactor 线程，由 Reactor 线程发送给 TCP 客户端。所有请求的处理逻辑都是在 Worker 子进程中完成
     - 由Manager进程fork而出
     - 当Worker进程异常退出，如发生PHP的致命错误、被其他程序误杀，或达到max_request次数之后正常退出。主进程会重新拉起新的Worker进程
@@ -192,15 +155,20 @@ kill -USR2 主进程PID
     - TaskWorker可以理解为行政人员，可以帮助Worker干些杂事，让Worker专心工作
 * 一个形象的比喻，如果把基于 Swoole 的 Web 服务器比作一个工厂，那么 Reactor 就是这个工厂的销售员，Worker 是负责生产的工人，销售员负责接订单，然后交给工人生产，而 Task Worker 可以理解为行政人员，负责提工人处理生产以外的杂事，比如订盒饭、收快递，让工人可以安心生产
 
+![运行流程图](../../_static/swoole_run_cycle.jpg "Optional title")
+![运行流程图](../../_static/swoole_model.jpg "Optional title")
+![进程/线程结构图](../../_static/swoole_server_model.jpg "Optional title")
+![进程/线程结构图](../../_static/process.jpg "Optional title")
+
 ## Server
 
 * 强大的TCP/UDP Server框架，支持多线程，EventLoop，事件驱动，异步，Worker进程组，Task异步任务，毫秒定时器，SSL/TLS隧道加密
 * 类型
-    - swoole_http_server是swoole_server的子类，内置了Http的支持
-        + 采用优秀的 Reactor 模型，处理速度可逼进 NGINX 处理静态页面的 速度
-    - swoole_websocket_server是swoole_http_server的子类，内置了WebSocket的支持
-    - swoole_redis_server是swoole_server的子类，内置了Redis服务器端协议的支持
-* 默认使用SWOOLE_PROCESS模式，因此会额外创建Master和Manager两个进程。
+    - `swoole_http_server`是swoole_server的子类，内置了Http的支持
+        + 采用优秀的 Reactor 模型，处理速度可逼进 NGINX 处理静态页面速度
+    - `swoole_websocket_server`是swoole_http_server的子类，内置了WebSocket的支持
+    - `swoole_redis_server`是swoole_server的子类，内置了Redis服务器端协议的支持
+* 默认使用SWOOLE_PROCESS模式，因此会额外创建Master和Manager两个进程
 * TCP协议:流式的，数据包没有边界.在接收1个大数据包时，可能会被拆分成多个数据包发送。多次Send底层也可能会合并成一次进行发送。需要2个操作来解决：
     - 分包：Server收到了多个数据包，需要拆分数据包
     - 合包：Server收到的数据只是包的一部分，需要缓存数据，合并成完整的包
@@ -216,20 +184,13 @@ kill -USR2 主进程PID
 * 用了signalfd来实现对信号的屏蔽和处理。可以有效地避免线程/进程被信号打断，系统调用restart的问题。在主进程中Reactor/AIO线程不会接受任何信号
 * 进程错误后会继续重启
 
-![运行流程图](../../_static/swoole_run_cycle.jpg "Optional title")
-![运行流程图](../../_static/swoole_model.jpg "Optional title")
-![进程/线程结构图](../../_static/swoole_server_model.jpg "Optional title")
-![进程/线程结构图](../../_static/process.jpg "Optional title")
-
 ```php
 # tcp/udp server,可封装rpc
 $s = new \Swoole\Server();
 
 //http server,替代fpm
 $s = new \Swoole\Http\Server()
-
 // 开启http2 支持,实现基于http2 的grpc
-$s = new \Swoole\Http\Server()
 $s->set(['open_http2_protocol' => true]);
 
 // websocket
@@ -250,23 +211,21 @@ dtruss|strace -f -p masterPid
 
 ## Client
 
-TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支持SSL双向证书，支持同步并发调用，支持异步事件驱动编程。
+* TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支持SSL双向证书，支持同步并发调用，支持异步事件驱动编程。
 
 ## Event
 
-* EventLoop API，让用户可以直接操作底层的事件循环，将socket，stream，管道等Linux文件加入到事件循环中。
+* EventLoop API，让用户可以直接操作底层的事件循环，将socket，stream，管道等Linux文件加入到事件循环中
 * eventloop接口仅可用于socket类型的文件描述符，不能用于磁盘文件读写
 
 ## Async
 
-异步IO接口，提供了异步文件系统IO，定时器，异步DNS查询，异步MySQL等API，异步Http客户端，异步Redis客户端
-
+* 异步IO接口，提供了异步文件系统IO，定时器，异步DNS查询，异步MySQL等API，异步Http客户端，异步Redis客户端
 * swoole_timer 异步毫秒定时器，可以实现间隔时间或一次性的定时任务
-    - swoole_timer_tick 间隔的时钟控制器
-    - swoole_timer_after 指定的时间后执行
-    - swoole_timer_clear 删除定时器
-* swoole_async_read/swoole_async_write 文件系统操作的异步接口
-    - 4.3 已放弃，用协程实现
+    - `swoole_timer_tick` 间隔时钟控制器
+    - `swoole_timer_after` 指定的时间后执行
+    - `swoole_timer_clear` 删除定时器
+* `swoole_async_read/swoole_async_write` 文件系统操作的异步接口,4.3 已放弃，用协程实现
 * MySQL
     - 勿同时使用异步回调和协程MySQL
     - swoole_mysql 已移除
@@ -275,30 +234,29 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
 ## 协程 Coroutine
 
 * 异步回调的一种解决方案,非标准的线程实现
-* 在2.0开始内置协程(Coroutine)的能力，提供了具备协程能力IO接口（统一在命名空间Swoole\Coroutine*）
-    - 在4.4之前的版本中，Swoole一直不支持CURL协程化，在代码中无法使用curl。由于curl使用了libcurl库实现，无法直接hook它的socket，4.4版本使用Swoole\Coroutine\Http\Client模拟实现了curl的API，并在底层替换了curl_init等函数的C Handler。
+* 在2.0开始内置协程(Coroutine)能力，提供了具备协程能力IO接口（统一在命名空间Swoole\Coroutine*）
+    - 在4.4之前的版本中，Swoole一直不支持CURL协程化，在代码中无法使用curl。由于curl使用了libcurl库实现，无法直接hook它的socket，4.4版本使用Swoole\Coroutine\Http\Client模拟实现了curl的API，并在底层替换了curl_init等函数的C Handler
 * 协程是子程序的一种，可以通过yield的方式转移程序控制权，协程之间不是调用者与被调用者的关系，而是彼此对称、平等的
-* 每个 Worker 进程 会存在一个协程调度器来调度协程，协程切换的时机就是遇到 I/O 操作或代码显性切换时，进程内以单线程的形式运行协程，也就意味着一个进程内同一时间只会有一个协程在运行且切换时机明确，也就无需处理像多线程编程下的各种同步锁的问题
+* 每个 Worker 进程会存在一个协程调度器来调度协程，协程切换的时机就是遇到 I/O 操作或代码显性切换时，进程内以单线程的形式运行协程，也就意味着一个进程内同一时间只会有一个协程在运行且切换时机明确，也就无需处理像多线程编程下的各种同步锁的问题
 * 有轻量，高效，快速等特点
     - 用户态线程，遇到 IO 主动让出
     - PHP 代码依然是串行执行的，无需加锁
     - 开销极低，仅占用内存，不存在进程/线程切换开销
     - 并发量大，单个进程可开启 50W 个协程
     - 随时随地，只要想并发，就调用 go 创建新协程
-* 开发者可以无感知的用同步的代码编写方式达到异步IO的效果和性能，避免了传统异步回调所带来的离散的代码逻辑和陷入多层回调中导致代码无法维护
-* 由于底层封装了协程，所以对比传统的PHP层协程框架，开发者不需要使用yield关键词来标识一个协程IO操作，所以不再需要对yield的语义进行深入理解以及对每一级的调用都修改为yield，这极大的提高了开发效率
-* 完全有用户态程序控制，也被称为用户态的线程,由用户以非抢占的方式调度，所有的操作都可以在用户态完成，创建和切换的消耗更低。而不是操作系统，没有系统调度上下文切换的开销
-* 实现
-    - 基于PHP生成器Generators\Yield的方式实现
-        + 所有主动让出的逻辑都需要yield关键字。这会给程序员带来极大的概率犯错，导致大家对协程的理解转移到了对Generators语法的原理的理解。
-        + 由于语法无法兼容老的项目，改造老的项目工程复杂度巨大，成本太高。
+* 底层封装了协程，对比传统的PHP层协程框架，开发者不需要使用yield关键词来标识一个协程IO操作，所以不再需要对yield的语义进行深入理解以及对每一级的调用都修改为yield，极大提高了开发效率
+* 完全有用户态程序控制，也被称为用户态的线程,由用户以非抢占的方式调度，所有的操作都可以在用户态完成，创建和切换的消耗更低。而不是操作系统，没有系统调度上下文切换的开销.开发者可以无感知的用同步的代码编写方式达到异步IO的效果和性能，避免了传统异步回调所带来的离散的代码逻辑和陷入多层回调中导致代码无法维护
+* 缺点
+    - 基于PHP生成器Generators\Yield方式实现
+        + 所有主动让出的逻辑都需要yield关键字。给程序员带来极大的概率犯错，导致大家对协程的理解转移到了对Generators语法的原理的理解
+        + 由于语法无法兼容老的项目，改造老的项目工程复杂度巨大，成本太高
     - PHP执行需要的所有状态都保存在一个个通过链表结构关联的VM栈里，每个栈默认会初始化为256K，Swoole可以单独定制这个栈的大小(协程默认为8k),当栈容量不足的时候，会自动扩容，仍然以链表的关系关联每个栈。在每次函数调用的时候，都会在VM Stack空间上申请一块新的栈帧来容纳当前作用域执行所需。
     - 改变原本php的运行方式，不是在函数运行结束切换栈帧，而是在函数执行当前op_array中间任意时候（swoole内部控制为遇到IO等待），可以灵活切换到其他栈帧。
 * 使用go函数可以让一个函数并发地去执行
-    - 使用 go()(\Swoole\Coroutine::create() 的简写) 创建一个协程
-    - 在 go() 的回调函数中, 加入协程需要执行的代码(非阻塞代码)
+    - 使用 `go()(\Swoole\Coroutine::create() 的简写)` 创建一个协程
+    - 在 go() 的回调函数中, 加入协程需要执行代码(非阻塞代码)
 * 协程通信
-    - 通道（Channel）:在Swoole4协程中使用new chan就可以创建一个通道。通道可以理解为自带协程调度的队列。两个接口push和pop
+    - 通道（Channel）:在Swoole4协程中使用`new chan`创建一个通道。通道可以理解为自带协程调度的队列，两个接口
         + push：向通道中写入内容，如果已满，它会进入等待状态，有空间时自动恢复
         + pop：从通道中读取内容，如果为空，它会进入等待状态，有数据时自动恢复
 * 延时任务：用defer实现
@@ -309,9 +267,11 @@ TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支�
 * 内部调用redis mysql,执行时间为 max(redis, mysql)
 * swoole 的协程 vs go 的协程
     - swoole 的协程 和 golang的调度方式完全不同，每一个进程里面的协程都是串行执行所以无需担心访问资源加锁问题
-    - 利用多进程实现并行
-    - 基础知识: 网络编程 + 协程, 不会因为你是用 swoole 还是 go 而有所减少, 基础不大好, 表现出来了就是学着学着就容易卡住, 效率上不来
-    - 以为写的是 swoole, 不不不, 写的是一个又一个功能的 API, go 也同样(要用到 redis/mysql/mq, 相应的 API 你还是得学得会), 区别在于, swoole 趋势是在底层实现支持(比如 协程runtime), 这样 PHPer 可以无缝切换过来, 而 Gopher 则需要学习一个又一个基于 go 协程封装好的 API. 当初在 PHP 中学习的这些 API, 到 go 里面, 一样需要再熟悉一遍
+    - 都是利用多进程实现并行
+    - 基础知识: 网络编程 + 协程, 不会因为是用 swoole 还是 go 而有所减少, 基础不大好, 表现出来了就是学着学着就容易卡住, 效率上不来
+    - 以为写的是 swoole, 不不不, 写的是一个又一个功能的 API, go 也同样(要用到 redis/mysql/mq, 相应的 API 还是得学得会), 区别在于
+        + swoole 趋势是在底层实现支持(比如 协程runtime), 这样 PHPer 可以无缝切换过来
+        + Gopher 则需要学习一个又一个基于 go 协程封装好的 API. 当初在 PHP 中学习的这些 API, 到 go 里面, 一样需要再熟悉一遍
     - 性能： 用 swoole 达不到的性能, 换个语言, 呵呵呵. 难易程度排行: 加机器 < 加程序员 < 加语言.
 * 注意事项
     - 不能存在阻塞代码:Swoole 提供的异步函数的 MySQL、Redis、Memcache、MongoDB、HTTP、Socket等客户端，文件操作、sleep/usleep 等均为阻塞函数
@@ -382,16 +342,16 @@ function go(callable $function, ...$args) : int|false; // 短名API
 * 场景
     - 多进程并行
 * `Swoole\Process::__construct(callable $function, $redirect_stdin_stdout = false, $create_pipe = true)`
-    - $function，子进程创建成功后要执行的函数，底层会自动将函数保存到对象的callback属性上。如果希望更改执行的函数，可赋值新的函数到对象的callback属性
-    - $redirect_stdin_stdout，重定向子进程的标准输入和输出。启用此选项后，在子进程内输出内容将不是打印屏幕，而是写入到主进程管道。读取键盘输入将变为从管道中读取数据。默认为阻塞读取。
-    - $create_pipe，是否创建管道，启用$redirect_stdin_stdout后，此选项将忽略用户参数，强制为true。如果子进程内没有进程间通信，可以设置为 false。
+    - `$function`：子进程创建成功后要执行的函数，底层会自动将函数保存到对象的callback属性上。如果希望更改执行的函数，可赋值新的函数到对象的callback属性
+    - `$redirect_stdin_stdout`，重定向子进程的标准输入和输出。启用此选项后，在子进程内输出内容将不是打印屏幕，而是写入到主进程管道。读取键盘输入将变为从管道中读取数据。默认为阻塞读取。
+    - `$create_pipe`：是否创建管道，启用$redirect_stdin_stdout后，此选项将忽略用户参数，强制为true。如果子进程内没有进程间通信，可以设置为 false。
 * 进程间的通讯
     - 管道pipe：每次创建一个进程后，就会随之创建一个管道
         + 半双工: 数据单向流动, 一端只读, 一端只写
         + 同步 vs 异步: 默认为同步阻塞模式, 可以使用 swoole_event_add() 添加管道到 swoole 的 event loop 中, 实现异步IO
     - 消息队列
 
-```sh
+```php
 pstree -p pid
 
 $process = new Swoole\Process('callback_function', false, true);
@@ -442,7 +402,7 @@ php run.php -c 100 -n 10000 -s tcp://127.0.0.1:9501 -f long_tc
 
 ## 服务保持
 
-* 使用下面的脚本需要将Server程序的进程名称设置为master，如 cli_set_process_title("php server.php: master")
+* 使用下面的脚本需要将Server程序的进程名称设置为master，如 `cli_set_process_title("php server.php: master")`
 * 可以通过netstat -lnp 检测端口是否在监听，如果未在监听，则执行restart
 * 通过一个check.php发送一段带有逻辑的请求，试探服务器是否可以正常工作，如果无法工作，执行restart
 * 使用supervisor监控进程的工具
@@ -467,11 +427,11 @@ fi
 
 ## MySQL
 
-* 长连接就可以避免每次请求都创建连接的开销，节省了时间和IO消耗。提升了PHP程序的性能。
+* 长连接就可以避免每次请求都创建连接的开销，节省了时间和IO消耗。提升了PHP程序的性能
 * 断线重连
     - mysql_query执行后检测返回值
-    - 如果mysql_query返回失败，检测错误码发现为2006/2013（这2个错误表示连接失败），再执行一次mysql_connect
-    - 执行mysql_connect后，重新执行mysql_query，这时必然会成功，因为已经重新建立了连接
+    - 如果`mysql_query`返回失败，检测错误码发现为2006/2013（这2个错误表示连接失败），再执行一次`mysql_connect`
+    - 执行`mysql_connect`后，重新执行`mysql_query`，这时必然会成功，因为已经重新建立了连接
     - 如果mysql_query返回成功，那么连接是有效的，这是一次正常的调用
 * 异步
     - MySQL是根据连接数分配资源的，一个MySQL连接同时只能执行1个SQL线程，如果异步MySQL存在并发那么必须创建多个MySQL连接。1000连接那么需要维持1000线程才可以。线程数量增加后，线程间切换会占用大量CPU资源。
@@ -588,12 +548,12 @@ $list->insert(36);
     - Swoole\Coroutine::set静态方法
     - Swoole\Async::set静态方法
 * 等级
-    - SWOOLE_LOG_DEBUG：调试日志，仅作为内核开发调试使用
-    - SWOOLE_LOG_TRACE：跟踪日志，可用于跟踪系统问题，调试日志是经过精心设置的，会携带关键性信息
-    - SWOOLE_LOG_INFO：普通信息，仅作为信息展示
-    - SWOOLE_LOG_NOTICE：提示信息，系统可能存在某些行为，如重启、关闭
-    - SWOOLE_LOG_WARNING：警告信息，系统可能存在某些问题
-    - SWOOLE_LOG_ERROR：错误信息，系统发生了某些关键性的错误，需要即时解决
+    - `SWOOLE_LOG_DEBUG`：调试日志，仅作为内核开发调试使用
+    - `SWOOLE_LOG_TRACE`：跟踪日志，可用于跟踪系统问题，调试日志是经过精心设置的，会携带关键性信息
+    - `SWOOLE_LOG_INFO`：普通信息，仅作为信息展示
+    - `SWOOLE_LOG_NOTICE`：提示信息，系统可能存在某些行为，如重启、关闭
+    - `SWOOLE_LOG_WARNING`：警告信息，系统可能存在某些问题
+    - `SWOOLE_LOG_ERROR`：错误信息，系统发生了某些关键性的错误，需要即时解决
 
 ```php
 $serv->set([

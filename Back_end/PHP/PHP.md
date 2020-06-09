@@ -14,6 +14,22 @@ The PHP Interpreter <http://www.php.net>
     - 不可以直接操作底层，需要依赖扩展库来提供 API 实现
     - **可控**：常驻内存运行环境的缺失
     - 不可控：进程的入口点和退出时机由额外的程序控制，执行PHP脚本的时机仍然由外部驱动
+* 方向
+    - SPL库系列请仔细研究
+    - PHP的socket模块以及pcntl模块
+    - 从工程代码组织角度去理解和学习设计模式和面向对象OOP
+    - 接纳一门新的语言。推荐Golang。对自己足够狠，请深入研究C语言
+    - MySQL请购买《MySQL技术内幕：innodb存储引擎》和《高性能MySQL》两本书，Redis请购买《Redis设计与实现》
+    - 《C Primer Plus》和《Unix环境高级编程》。这地方有一个巨大的错觉，就是读完一遍《C Primer Plus》后就觉得自己会CLang了，有这种优越感的，请你尝试用CLang做个什么东西出来？然后你发现似乎真的什么也做不了，这会儿就可以步入到《Unix环境高级编程》的节奏
+    - 一切基于基础之上的上层应用都是海市蜃楼，犹如过眼云烟。不变的永远是基于事件监听的异步非阻塞IO
+    - 技术
+        + 分布式配置中心
+        + 服务熔断、限流、降级
+        + 异步框架
+        + 分布式KV数据库
+        + 微服务架构
+        + Docker发布代码
+
 
 ## 发展
 
@@ -136,383 +152,6 @@ The PHP Interpreter <http://www.php.net>
     - 协变量返回和协变量参数
 * 8
     - 实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
-
-```php
-// Strict mode
-declare(strict_types=1);
-function sum(int ...$ints)
-{
-   return array_sum($ints);
-}
-print(sum(2, '3', 4.1)); # Fatal error
-
-declare(strict_types=1);
-function returnIntValue(int $value): int
-{
-   return $value + 1.0;
-}
-print(returnIntValue(5));
-
-$username = $_GET['username'] ?? $_POST['username'] ?? 'not passed'; # null合并运算符
-
-print( 1 <=> 1);print("<br/>"); // 0
-print( 1 <=> 2);print("<br/>"); // -1
-print( 2 <=> 1);print("<br/>"); // 1
-
-define('ALLOWED_IMAGE_EXTENSIONS', ['jpg', 'jpeg', 'gif', 'png']);
-
-interface Logger {
-   public function log(string $msg);
-}
-class Application {
-   private $logger;
-
-   public function getLogger(): Logger {
-      return $this->logger;
-   }
-
-   public function setLogger(Logger $logger) {
-      $this->logger = $logger;
-   }
-}
-
-$app = new Application;
-$app->setLogger(new class implements Logger {
-   public function log(string $msg) {
-      print($msg);
-   }
-});
-$app->getLogger()->log("My first Log Message");
-
-class A {
-   private $x = 1;
-}
-$value = function() {
-   return $this->x;
-};
-print($value->call(new A));
-
-class MyClass1 {
-   public $obj1prop;
-}
-class MyClass2 {
-   public $obj2prop;
-}
-$obj1 = new MyClass1();
-$obj1->obj1prop = 1;
-$obj2 = new MyClass2();
-$obj2->obj2prop = 2;
-$serializedObj1 = serialize($obj1);
-$serializedObj2 = serialize($obj2);
-$data = unserialize($serializedObj1 , ["allowed_classes" => true]); // 不允许将所有的对象都转换为 __PHP_Incomplete_Class 对象
-$data2 = unserialize($serializedObj2 , ["allowed_classes" => ["MyClass1", "MyClass2"]]); // 将除 MyClass 和 MyClass2 之外的所有对象都转换为 __PHP_Incomplete_Class 对象
-
-$bytes = random_bytes(5);
-print(bin2hex($bytes));
-print(random_int(-1000, 0));
-
-printf('%x', IntlChar::CODEPOINT_MAX);
-echo IntlChar::charName('@');
-var_dump(IntlChar::ispunct('!'));
-
-ini_set('assert.exception', 1);
-class CustomError extends AssertionError {}
-assert(false, new CustomError('Custom Error Message!'));
-
-use com\yiibai\{ClassA, ClassB, ClassC as C};
-use function com\yiibai\{fn_a, fn_b, fn_c};
-use const com\yiibai\{ConstA, ConstB, ConstC};
-
-$gen = (function() {
-    yield 1;
-    yield 2;
-
-    return 3;
-})();
-foreach ($gen as $val) {
-    echo $val, PHP_EOL;
-}
-echo $gen->getReturn(), PHP_EOL;
-# output
-//1
-//2
-//3
-
-function gen()
-{
-    yield 1;
-    yield 2;
-
-    yield from gen2();
-}
-function gen2()
-{
-    yield 3;
-    yield 4;
-}
-foreach (gen() as $val)
-{
-    echo $val, PHP_EOL;
-}
-var_dump(intdiv(10,3)) //3
-
-session_start([
-    'cache_limiter' => 'private',
-    'read_and_close' => true,
-]);
-
-class MathOperations
-{
-   protected $n = 10;
-
-   // Try to get the Division by Zero error object and display as Exception
-   public function doOperation(): string
-   {
-      try {
-         $value = $this->n % 0;
-         return $value;
-      } catch (DivisionByZeroError $e) {
-         return $e->getMessage();
-      }
-   }
-}
-$mathOperationsObj = new MathOperations();
-print($mathOperationsObj->doOperation());
-
-echo "\u{aa}";// ª
-echo "\u{0000aa}";// ª
-echo "\u{9999}";// 香
-
-string preg_replace_callback_array(array $regexesAndCallbacks, string $input);
-$tokenStream = []; // [tokenName, lexeme] pairs
-
-$input = <<<'end'
-$a = 3; // variable initialisation
-end;
-
-// Pre PHP 7 code
-preg_replace_callback(
-    [
-        '~\$[a-z_][a-z\d_]*~i',
-        '~=~',
-        '~[\d]+~',
-        '~;~',
-        '~//.*~'
-    ],
-    function ($match) use (&$tokenStream) {
-        if (strpos($match[0], '$') === 0) {
-            $tokenStream[] = ['T_VARIABLE', $match[0]];
-        } elseif (strpos($match[0], '=') === 0) {
-            $tokenStream[] = ['T_ASSIGN', $match[0]];
-        } elseif (ctype_digit($match[0])) {
-            $tokenStream[] = ['T_NUM', $match[0]];
-        } elseif (strpos($match[0], ';') === 0) {
-            $tokenStream[] = ['T_TERMINATE_STMT', $match[0]];
-        } elseif (strpos($match[0], '//') === 0) {
-            $tokenStream[] = ['T_COMMENT', $match[0]];
-        }
-    },
-    $input
-);
-
-// PHP 7+ code
-preg_replace_callback_array(
-    [
-        '~\$[a-z_][a-z\d_]*~i' => function ($match) use (&$tokenStream) {
-            $tokenStream[] = ['T_VARIABLE', $match[0]];
-        },
-        '~=~' => function ($match) use (&$tokenStream) {
-            $tokenStream[] = ['T_ASSIGN', $match[0]];
-        },
-        '~[\d]+~' => function ($match) use (&$tokenStream) {
-            $tokenStream[] = ['T_NUM', $match[0]];
-        },
-        '~;~' => function ($match) use (&$tokenStream) {
-            $tokenStream[] = ['T_TERMINATE_STMT', $match[0]];
-        },
-        '~//.*~' => function ($match) use (&$tokenStream) {
-            $tokenStream[] = ['T_COMMENT', $match[0]];
-        }
-    ],
-    $input
-);
-
-interface Throwable
-    |- Exception implements Throwable
-        |- ...
-    |- Error implements Throwable
-        |- TypeError extends Error
-        |- ParseError extends Error
-        |- AssertionError extends Error
-        |- ArithmeticError extends Error
-            |- DivisionByZeroError extends ArithmeticError
-function handler(Exception $e) { ... }
-set_exception_handler('handler');
-
-// 兼容 PHP 5 和 7
-function handler($e) { ... }
-
-// 仅支持 PHP 7
-function handler(Throwable $e) { ... }
-
-list($a,$b,$c) = [1,2,3];
-var_dump($a);//1
-var_dump($b);//2
-var_dump($c);//3
-
-$array = [0, 1, 2];
-foreach ($array as &$val) {
-    var_dump(current($array));
-}
-?>
-#php 5
-int(1)
-int(2)
-bool(false)
-#php7
-int(0)
-int(0)
-int(0)
-
-var_dump("0x123" == "291");
-#php5
-true
-#php7
-false
-
-function fun() :?string
-{
-  return null;
-}
-
-function fun1(?$a)
-{
-  var_dump($a);
-}
-fun1(null);//null
-fun1('1');//1
-
-function fun() :void
-{
-  echo "hello world";
-}
-
-function fun() :void
-{
-  echo "hello world";
-}
-
-class Something
-{
-    const PUBLIC_CONST_A = 1;
-    public const PUBLIC_CONST_B = 2;
-    protected const PROTECTED_CONST = 3;
-    private const PRIVATE_CONST = 4;
-}
-
-function iterator(iterable $iter)
-{
-    foreach ($iter as $val) {
-        //
-    }
-}
-
-try {
-    // some code
-} catch (FirstException | SecondException $e) {
-    // handle first and second exceptions
-}
-
-$data = [
-    ["id" => 1, "name" => 'Tom'],
-    ["id" => 2, "name" => 'Fred'],
-];
-
-// list() style
-list("id" => $id1, "name" => $name1) = $data[0];
-var_dump($id1);//1
-
-$a= "hello";
-$a[-2];//l
-
-<?php
-class Test
-{
-    public function exposeFunction()
-    {
-        return Closure::fromCallable([$this, 'privateFunction']);
-    }
-
-    private function privateFunction($param)
-    {
-        var_dump($param);
-    }
-}
-
-$privFunc = (new Test)->exposeFunction();
-$privFunc('some value');
-
-function test(object $obj) : object
-{
-    return new SplQueue();
-}
-test(new StdClass());
-
-; ini file
-extension=php-ast
-zend_extension=opcache
-
-abstract class A
-{
-    abstract function test(string $s);
-}
-abstract class B extends A
-{
-    // overridden - still maintaining contravariance for parameters and covariance for return
-    abstract function test($s) : int;
-}
-
-use Foo\Bar\{
-    Foo,
-    Bar,
-    Baz,
-};
-
-var_dump(number_format(-0.01)); // now outputs string(1) "0" instead of string(2) "-0"
-
-var_dump(get_class(null))// warning
-
-count(1), // integers are not countable
-
-// array to object
-$arr = [0 => 1];
-$obj = (object)$arr;
-var_dump(
-    $obj,
-    $obj->{'0'}, // now accessible
-    $obj->{0} // now accessible
-);
-
-array_map(fn(User $user) => $user->id, $users)
-
-```
-
-```php
-$username = $_GET['user'] ?? 'nobody'
-
-# 7.4
-$parts = ['apple', 'pear'];
-$fruits = ['banana', 'orange', ...$parts, 'watermelon'];
-var_dump($fruits);
-
-$b = array_map(fn($n) => $n * $n * $n, [1, 2, 3, 4, 5]);
-## 替换use
-$factor = 10;
-$calc = fn($num) => $num * $factor;
-
-# ibraries/DisplayResults.php#1229  Trying to access array offset on value of type bool
- $str {0}这种写法被废弃了
-```
 
 ## 原理
 
@@ -813,6 +452,14 @@ mkdir -p /tmp/pear/cache
 
 ## 配置
 
+* `short_open_tag` 设为0，即永远使用PHP的长标签形式：`<?php echo "hello world"; ?>`，不用短标签形式<`?= "hello world" ?>`
+* `asp_tags` 设为0，不使用ASP标签`<% echo "hello world"; %>`
+* `magic_quotes_gpc`: 建议在脚本中包含一个全局文件，负责在读取`$_GET、$_POST、$_COOKIE`变量之前，首先检查这个设置是否打开，如果打开了，这对这些变量应用stripslashes函数
+* `register_globals`: 不要依赖这个设置，永远通过全局变量`$_GET、$_POST、$_COOKIE`去读取GET、POST和COOKIE的值。为了方便起见，建议声明`$PHP_SELF = $_SERVER['PHP_SELF']`
+* `file_uploads`:上传文件的最大大小，由下面的设置决定
+    - `file_uploads`必须设为1（默认值），表示允许上传
+    - `memory_limit`必须略大于`post_max_size`和`upload_max_filesize`
+    - `post_max_size`和`upload_max_filesize`要足够大，能满足上传的需要
 * memory_limit:设定单个 PHP 进程可以使用的系统内存最大值
     - PHP 操作 Redis Set 集合。修改配置
     - 如果项目中每页页面使用的内存不大，建议改成小一些，这样可以承载更多的并发处理
@@ -932,86 +579,6 @@ HTTPS下提高安全性： session.cookie_secure=1
         + `__METHOD__`  表示使用它的类方法的名称。方法名称在有声明时返回。
         + `__NAMESPACE__`   表示当前命名空间的名称。
 
-```php
-# 变量
-$variablename = value;
-
-$x=5;
-$y=10;
-function myTest()
-{
-    global $x,$y;
-    $y=$x+$y;
-    echo $y;
-}
-myTest(); // 15
-
-function myTest()
-{
-    static $x=0;
-    echo $x;
-    $x++;
-}
-myTest(); // 0
-myTest(); // 1
-myTest(); // 2
-
-function myTest($x)
-{
-    echo $x;
-}
-myTest(5); # 5
-
-// 函数内销毁全局变量$foo是无效的,应使用 $GLOBALS 数组来实现
-function destroy_foo() {
-    global $foo;
-    // unset($foo);
-    unset($GLOBALS['bar']);
-    echo $foo;//Notice: Undefined variable: foo
-}
-$foo = 'bar';
-destroy_foo();
-echo $foo;//bar
-
-# 常量
-define("MESSAGE", "Hello YiiBai PHP");
-const MESSAGE = "Hello const by YiiBai PHP";
-
-require('./ShopProduct.php'); # 加载文件
-
-# __clone实现真正深拷贝
-class Test{
-    public $a=1;
-}
-
-class TestOne{
-    public $b=1;
-    public $obj;
-    //包含了一个对象属性，clone时，它会是浅拷贝
-    public function __construct(){
-        $this->obj = new Test();
-    }
-
-    //  方法一 重写clone函数
-    public function __clone(){
-        $this->obj = clone $this->obj;
-    }
-}
-
-$m = new TestOne();
-
-//方法二，序列化反序列化实现对象深拷贝
-$n = serialize($m);
-$n = unserialize($n);
-
-$n->b = 2;
-echo $m->b;//输出原来的1
-echo PHP_EOL;
-//普通属性实现了深拷贝，改变普通属性b，不会对源对象有影响
-$n->obj->a = 3;
-echo $m->obj->a;//输出1，不随新对象改变，还是保持了原来的属性,可以看到，序列化和反序列化可以实现对象的深拷贝
-```
-
 ### 数据类型
 
 * 标量
@@ -1066,48 +633,6 @@ echo $m->obj->a;//输出1，不随新对象改变，还是保持了原来的属�
             - 比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值
         * unset 变量与给变量赋值NULL不同，变量赋值NULL直接对相应变量容器refcount = 0
 
-```php
-$a = 1234; // 十进制数
-$a = -123; // 负数
-$a = 0123; // 八进制数 (等于十进制 83)
-$a = 0x1A; // 十六进制数 (等于十进制 26)
-$a = 0b11111111; // 二进制数字 (等于十进制 255)
-
-$str='Hello text within single quote';
-$str2="Using double \"quote\" with backslash inside double quoted string";
-echo 'You can also have embedded newlines in
-strings this way as it is
-okay to do';
-
-$bar = <<<EOT
-bar
-    EOT;
-
-$str=strtolower("My name is Yiibai");
-$str=ucwords("My name is Yiibai");
-$str=ucfirst("My name is Yiibai");
-$str=strrev("My name is Yiibai");
-
-$len=strlen("My name is Yiibai");
-
-$str = preg_replace_callback(
-    '/([a-z]*)([A-Z]*)/',
-    function($matchs){
-        return strtoupper($matchs[1]).strtolower($matchs[2]);
-    },
-$str
-);
-
-echo ord("S") # 83
-echo ord("Shanghai") # 83
-substr()
-htmlentities(string)
-addslashes(str)
-html_entity_decode(string)
-
-print # 一个语法结构(language constructs), 并不是一个函数, 参数的list并不要求有括号
-```
-
 #### 复合
 
 * Array（数组）:一个有序映射
@@ -1147,164 +672,6 @@ print # 一个语法结构(language constructs), 并不是一个函数, 参数�
     - `boolean()`
     - `is_numeric()`
 
-```php
-# 声明
-$season=array("summer","winter","spring","autumn");
-$season[0]="summer";
-$season[1]="winter";
-$season[2]="spring";
-$season[3]="autumn";
-
-$salary=array("Hema"=>"350000","John"=>"450000","Kartik"=>"200000");
-$salary["Hema"]="350000";
-$salary["John"]="450000";
-$salary["Kartik"]="200000";
-
-echo count($salary);
-foreach($salary as $k => $v) {
-    echo "Key: ".$k." Value: ".$v."<br/>";
-}
-
-$emp = array (
-  array(1,"sonoo",400000),
-  array(2,"john",450000),
-  array(3,"rahul",300000)
-  );
-for ($row = 0; $row < 3; $row++) {
-    for ($col = 0; $col < 3; $col++) {
-        echo $emp[$row][$col]."  ";
-    }
-  echo "<br/>";
-}
-
-$salary=array("Maxsu"=>"550000","Vimal"=>"250000","Ratan"=>"200000");
-print_r(array_change_key_case($salary,CASE_UPPER)); # Array ( [SONOO] => 550000 [VIMAL] => 250000 [RATAN] => 200000 )
-print_r(array_chunk($salary,2, $preserve_keys = false));
-
-$season=array("summer","winter","spring","autumn");
-
-sort($season);# 自身操作
-foreach( $season as $s )
-{
-    echo "$s <br/>";
-}
-
-print_r(array_reverse($season)); # 赋值新变量
-
-echo array_search("spring", $season);
-
-$name1=array("maxsu","john","vivek","minsu");
-$name2=array("umesh","maxsu","kartik","minsu");
-print_r(array_intersect($name1,$name2)); # 交集
-
-
-$arr = array(
-    array(
-        'name'=>'sadas',
-        'norder'=>1
-    ),
-    array(
-        'name'=>'sadas',
-        'norder'=>11
-    ),
-    array(
-        'name'=>'sadas',
-        'norder'=>123
-    ),
-    array(
-        'name'=>'sadas',
-        'norder'=>11
-    )
-);
-array_multisort(array_column($arr, 'norder'), SORT_ASC, $arr);
-
-array_map(function($element){return strtotime($element['add_time']);}, $datas);
-
-## 数组合并
-# 索引数组 + 会保留第一个值，后面同样key舍弃，merge不会覆盖掉原来的值
-# 关联数组：+ 会保留第一个值，merge会保留保留后者
-$arr1 = ['PHP', 'apache'];
-$arr2 = ['PHP', 'MySQl', 'HTML', 'CSS'];
-$mergeArr = array_merge($arr1, $arr2);
-$plusArr = $arr1 + $arr2;
-print_r(($mergeArr);
-print_r(($plusArr);
-
-$items = array(
-    [
-        "uid"=>1,
-        "pid"=>0,
-        "views"=>100
-    ],
-    [
-        "uid"=>2,
-        "pid"=>1,
-        "views"=>200
-    ],
-    [
-        "uid"=>3,
-        "pid"=>0,
-        "views"=>300
-    ],
-    [
-        "uid"=>4,
-        "pid"=>0,
-        "views"=>400
-    ],
-    [
-        "uid"=>5,
-        "pid"=>3,
-        "views"=>500
-    ]
-);
-
-array_column($items,'uid'); # [1,2,3,4,5];
-array_column($items,'uid','view'); # [100=>1,200=>2,300=>3,400=>4,500=>5];
-
-array_combine();
-array_walk(array, funcname)
-function my_callback_function() {
-    echo 'hello world!';
-}
-
-// callback
-call_user_func('my_callback_function');
-
-$foo = $foo * 1.3;  // $foo 现在是一个浮点数 (2.6)
-$foo = 5 * "10 Little Piggies"; // $foo 是整数 (50)
-$foo = 5 * "10 Small Pigs";     // $foo 是整数 (50)
-
-function array2gbk($array)
-{
-    array_walk($array, function(&$value) {
-        $value = iconv('utf-8', 'gbk', $value);
-    });
-
-    return $array;
-}
-
-function array2gbk1($array)
-{
-    $array = array_map(function($value){
-        return iconv('utf-8', 'gbk', $value);
-    }, $array);
-
-    return $array;
-}
-
-$user = array(
-    '0' => array('id' => 100, 'username' => 'a1'),
-    '1' => array('id' => 101, 'username' => 'a2'),
-    '2' => array('id' => 102, 'username' => 'a3'),
-    '3' => array('id' => 103, 'username' => 'a4'),
-    '4' => array('id' => 104, 'username' => 'a5'),
-);
-$username = array();
-array_walk($user, function($value, $key) use (&$username){
-    $username[] = $value['username'];
-});
-```
-
 ### 控制语句
 
 * 表达式：任何有值的东西
@@ -1342,71 +709,6 @@ array_walk($user, function($value, $key) use (&$username){
 * 替代语法
 * 嵌套使用
 
-```php
-#!/usr/bin/env php
-print "Hello, Red Hat Developers World from PHP " . PHP_VERSION . "\n";
-echo "<h2>Hello First PHP</h2>";
-printf('(%1$2d = %1$04b) = (%2$2d = %2$04b)' . ' %3$s (%4$2d = %4$04b)' . "\n", $result, $value, '&', $test);
-
-$num=12;
-if ($num % 2 == 0) {
-    echo "$num is even number";
-} else {
-    echo "$num is odd number";
-}
-
-if($a > $b):
-    echo $a." is greater than ".$b;
-elseif($a == $b): // 注意使用了一个单词的 elseif
-    echo $a." equals ".$b;
-else:
-    echo $a." is neither greater than or equal to ".$b;
-endif;
-
-switch($num){
-    case 10:
-        echo("number is equals to 10");
-        break;
-    case 20:
-        echo("number is equal to 20");
-        break;
-    case 30:
-        echo("number is equal to 30");
-        break;
-    default:
-        echo("number is not equal to 10, 20 or 30");
-}
-
-for($n=1;$n<=10;$n++){
-    echo "$n<br/>";
-}
-
-$season=array("summer","winter","spring","autumn");
-foreach( $season as $key => $value ){
-    echo "Season is: $value<br />";
-}
-
-$n=1;
-while($n<=10){
-    echo "$n<br/>";
-    $n++;
-}
-
-$n = 1;
-do{
-    echo "$n<br/>";
-    $n++;
-}while($n<=10);
-
-<?php
-goto a;
-echo 'Foo';
-
-a:
-echo 'Bar';
-?>
-```
-
 #### 运算符
 
 用于对操作数执行操作
@@ -1441,64 +743,6 @@ echo 'Bar';
 * 错误控制操作符:@,当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉
 * 三元运算符：`$first ? $second : $third`
 
-```php
-// 涉及数字比较，优先转化为数字
-var_dump('abcd' == 0);
-var_dump(0 == 'abcd');
-var_dump('0' == 'abcd');
-
-define("READ", 1);
-define("WRITE", 2);
-define("DELETE", 4);
-define("UPDATE", 8);
-
-$permission = READ|WRITE; // 赋予权限 加法
-$permission = READ & ~WRITE; // 禁止写权限 反向全量的选法
-
-# 做权限验证
-echo 2 & 10; // 输出：2
-echo 2 | 10; // 输出结果：10
-echo 1 ^ 1; // 输出结果：0
-echo 1 ^ 0; // 输出结果：1
-
-if( READ & $permission ){ //判断权限
-　　echo "ok";
-}
-
-E_ALL & ~E_NOTICE # 除了提示级别
-E_ALL ^ E_NOTICE #
-E_ERROR | E_RECOVERABLE_ERROR # 只显示错误和可恢复
-
-# 异或运算同样的值两次能还原为原理的值
-$arr=[6,8];
-$arr[0] = $arr[0] ^ $arr[1];
-var_dump($arr); # array(2) { [0]=> int(14) [1]=> int(8) }
-$arr[1] = $arr[0] ^ $arr[1];
-var_dump($arr); # array(2) { [0]=> int(14) [1]=> int(6) }
-$arr[0] = $arr[0] ^ $arr[1];
-var_dump($arr); # array(2) { [0]=> int(8) [1]=> int(6) }
-
-echo 1 <=> 1; // 0
-echo 1 <=> 2; // -1
-echo 2 <=> 1; // 1
-
-$my_file = @file ('non_existent_file') or die ("Failed opening file: error was '$php_errormsg'");
-
-$output = `ls -al`;
-echo "<pre>$output</pre>";
-
-$a = array("a" => "apple", "b" => "banana");
-$b = array("a" => "pear", "b" => "strawberry", "c" => "cherry");
-$c = $a + $b; // Union of $a and $b
-
-class MyClass
-{
-}
-
-$a = new MyClass;
-var_dump(!($a instanceof stdClass)); # true
-```
-
 ### 函数
 
 一段可以重复使用多次的代码
@@ -1519,203 +763,6 @@ var_dump(!($a instanceof stdClass)); # true
     - 闭包在匿名函数的基础上增加了与外部环境的变量交互，通过 use 子句中指定要导入的外部环境变量
 * 返回值
 * 递归函数
-
-```php
-function sayHello($name,$age = 28){
-    echo "Hello $name, you are $age years old<br/>";
-}
-sayHello("Maxsu",27);
-sayHello("Henry");
-
-function add_some_extra(&$string)
-{
-    $string .= 'and something extra.';
-    echo $string;
-}
-$str = 'This is a string, ';
-add_some_extra($str); # This is a string, and something extra.
-
-function makecoffee($types = array("cappuccino"), $coffeeMaker = NULL)
-{
-    $device = is_null($coffeeMaker) ? "hands" : $coffeeMaker;
-    return "Making a cup of ".join(", ", $types)." with $device.\n";
-}
-echo makecoffee();
-echo makecoffee(array("cappuccino", "lavazza"), "teapot");
-
-function increment($i)
-{
-    echo $i++;
-}
-$i = 10;
-increment($i); # 10
-
-function increment(&$i)
-{
-    echo $i++;
-}
-$i = 10;
-increment($i);
-echo $i; # 10 11
-
-function sum(...$numbers) {
-    $acc = 0;
-    foreach ($numbers as $n) {
-        $acc += $n;
-    }
-    return $acc;
-}
-echo sum(1, 2, 3, 4);
-
-function small_numbers()
-{
-    return array (0, 1, 2);
-}
-list ($zero, $one, $two) = small_numbers();
-
-function add(...$numbers) {
-    $sum = 0;
-    foreach ($numbers as $n) {
-        $sum += $n;
-    }
-    return $sum;
-}
-echo add(1, 2, 3, 4);
-
-function display($number) {
-    if($number<=5){
-     echo "$number <br/>";
-     display($number+1);
-    }
-}
-display(1);
-
-function factorial($n)
-{
-    if ($n < 0)
-        return -1; /*Wrong value*/
-    if ($n == 0)
-        return 1; /*Terminating condition*/
-    return ($n * factorial ($n -1));
-}
-echo factorial(5);
-
-function foo() {
-    echo "In foo()<br />\n";
-}
-
-function bar($arg = '') {
-    echo "In bar(); argument was '$arg'.<br />\n";
-}
-
-// 使用 echo 的包装函数
-function echoit($string)
-{
-    echo $string;
-}
-
-$func = 'foo';
-$func();        // This calls foo()
-
-$func = 'bar';
-$func('test');  // This calls bar()
-
-$func = 'echoit';
-$func('test');  // This calls echoit()
-
-echo preg_replace_callback('~-([a-z])~', function ($match) {
-    return strtoupper($match[1]);
-}, 'hello-world');// 输出 helloWorld
-$greet = function($name)
-{
-    printf("Hello %s\r\n", $name);
-};
-
-$greet('World');
-$greet('PHP');
-
-$message = 'hello';
-$example = function () use ($message) {
-    var_dump($message);
-};
-echo $example();
-
-function getClosure($n)
-{
-  $a = 100;
-  return function($m) use ($n, &$a) {
-        $a += $n + $m;
-        echo $a."\n";
-    };
-}
-$fn = getClosure(1);
-$fn(1);//102
-$fn(2);//105
-$fn(3);//109
-echo $a;//Notice: Undefined variable
-
-class Dog
-{
-    private $_name;
-    protected $_color;
-
-    public function __construct($name, $color)
-    {
-         $this->_name = $name;
-         $this->_color = $color;
-    }
-
-    public function greet($greeting)
-    {
-         return function() use ($greeting) {
-            //类中闭包可通过 $this 变量导入对象
-            echo "$greeting, I am a {$this->_color} dog named {$this->_name}.\n";
-         };
-    }
-
-    public function swim()
-     {
-         return static function() {
-            //类中静态闭包不可通过 $this 变量导入对象，由于无需将对象导入闭包中，
-            //因此可以节省大量内存，尤其是在拥有许多不需要此功能的闭包时。
-            echo "swimming....\n";
-         };
-     }
-
-     private function privateMethod()
-     {
-        echo "You have accessed to {$this->_name}'s privateMethod().\n";
-     }
-
-     public function __invoke()
-    {
-         //此方法允许对象本身被调用为闭包
-         echo "I am a dog!\n";
-    }
-}
-
-$dog = new Dog("Rover","red");
-$dog->greet("Hello")();
-$dog->swim()();
-$dog();
-//通过ReflectionClass、ReflectionMethod来动态创建闭包，并实现直接调用非公开方法。
-$class = new ReflectionClass('Dog');
-$closure = $class->getMethod('privateMethod')->getClosure($dog);
-$closure();
-
-$username = $_GET['user'] ?? 'nobody';
-
-$a < $b ($a <=> $b) === -1
-$a <= $b    ($a <=> $b) === -1 || ($a <=> $b) === 0
-$a == $b    ($a <=> $b) === 0
-$a != $b    ($a <=> $b) !== 0
-$a >= $b    ($a <=> $b) === 1 || ($a <=> $b) === 0
-$a > $b ($a <=> $b) === 1
-
-$bytes = random_bytes(5);
-print_r(bin2hex($bytes));//string(10) "385e33f741"
-print_r(random_int(100, 999));//int(248)
-```
 
 ### 状态管理
 
@@ -1740,43 +787,6 @@ setcookie("CookieName", "CookieValue", time()+1*60*60);//using expiry in 1 hour(
 setcookie("CookieName", "CookieValue", time()+1*60*60, "/mypath/", "yiibai.com", 1);
 
 $value=$_COOKIE["CookieName"];//returns cookie value
-
-# session1.php
-<?php
-session_start();
-?>
-
-<html>
-    <body>
-    <?php
-        $_SESSION["user"] = "Maxsu";
-        echo "Session information are set successfully.<br/>";
-    ?>
-    <a href="session2.php">Visit next page</a>
-    </body>
-</html>
-
-# session2.php
-<?php
-session_start();
-?>
-<html>
-<body>
-<?php
-echo "User is: ".$_SESSION["user"];
-?>
-</body>
-</html>
-
-<?php
-session_start();
-
-if (!isset($_SESSION['counter'])) {
-    $_SESSION['counter'] = 1;
-} else {
-    $_SESSION['counter']++;
-}
-echo ("Page Views: ".$_SESSION['counter']);
 ```
 
 ## IO
@@ -1792,7 +802,6 @@ echo ("Page Views: ".$_SESSION['counter']);
 * 方法
     - fputs
     - fwrite
-
 
 ### 文件操作
 
@@ -1844,76 +853,6 @@ echo ("Page Views: ".$_SESSION['counter']);
 * 方法：
     - basename:返回路径中的文件名部分
 
-```php
-# 读取
-$filename = "c:\\myfile.txt";
-$handle = fopen($filename, "r");//open file in read mode
-$contents = fread($handle, filesize($filename));//read file
-echo $contents;//printing data of file
-fclose($handle);//close file
-
-# 写入并加
-$fp  = fopen(dirname(__FILE__) . '/lock.txt', 'w+');
-if (flock($fp, LOCK_EX)) {
-    fwrite($fp, 'write something');
-    flock($fp, LOCK_UN);
-} else {
-    echo "file is locking...";
-}
-fclose($fp);
-
-# 追加
-$fp = fopen(dirname(__FILE__) . '/data.txt', 'a');//opens file in append mode
-fwrite($fp, ' this is additional text ');
-fwrite($fp, 'appending data');
-fclose($fp);
-echo "File appended successfully";
-
-# 删除
-$status=unlink(dirname(__FILE__) . '/data.txt');
-if($status){
-    echo "File deleted successfully";
-}else{
-    echo "Sorry!";
-}
-
-$fp = fopen("c:\\file1.txt", "r");//open file in read mode
-while(!feof($fp)) {
-  echo fgetc($fp);
-}
-fclose($fp);
-
-# uploadform.html
-<form action="uploader.php" method="post" enctype="multipart/form-data">
-    选择上传的文件:
-    <input type="file" name="fileToUpload"/>
-    <input type="submit" value="Upload Image" name="submit"/>
-</form>
-
-<?php
-$target_path = "D:/";
-$target_path = $target_path.basename( $_FILES['fileToUpload']['name']);
-
-if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_path)) {
-    echo "File uploaded successfully!";
-} else{
-    echo "Sorry, file not uploaded, please try again!";
-}
-?>
-
-$file_url = 'http://www.myremoteserver.com/file.exe';
-header('Content-Type: application/octet-stream');
-header("Content-Transfer-Encoding: Binary");
-header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");
-readfile($file_url);
-
-echo "1) ".basename("/etc/sudoers.d", ".d").PHP_EOL;
-echo "2) ".basename("/etc/passwd").PHP_EOL;
-echo "3) ".basename("/etc/").PHP_EOL;
-echo "4) ".basename(".").PHP_EOL;
-echo "5) ".basename("/");
-```
-
 ### php://input
 
 * Coentent-Type仅在取值为application/x-www-data-urlencoded和multipart/form-data两种情况下，PHP才会将http请求数据包中相应的数据填入全局变量$_POST
@@ -1929,41 +868,6 @@ echo "5) ".basename("/");
 * `header ( string $header [, bool $replace = TRUE [, int $http_response_code ]] ) : void`
 * `using ob_start() and ob_end_flush()`
 * 通过 javascript
-
-```php
-header(“Location: http://example.com”[,TRUE,301]);
-exit;
-
-header(“Location: /page2.php”);
-exit;
-
-$url = ‘http://’ . $_SERVER[‘HTTP_HOST’]; // Get server
-$url .= rtrim(dirname($_SERVER[‘PHP_SELF’]), ‘/\\’); // Get current directory
-$url .= ‘/relative/path/to/page/’; // relative path
-header(‘Location: ‘ . $url, TRUE, 302);
-
-session_start();
-if (!isset( $_SESSION[“authorized-user”]))
-{
-header(“location:../”);
-exit();
-}
-
-header(“location: page1.php”);
-echo “moving to page 2”
-header(“location: page2.php”); //replaces page1.php
-
-header( “refresh:5;url=/page6.php” );
-echo ‘Redirecting in 5 secs. Click here to go directly <a href=”/page6.php”>here</a>.’;
-
-ob_start(); //this has to be the first line of your page
-header(‘Location: page2.php’);
-ob_end_flush(); //this has to be the last line of your page
-
-echo ‘<script type=”text/javascript”>
-window.location = “http:/example.com/”
-</script>’;
-```
 
 ### MySQL
 
@@ -2028,77 +932,6 @@ window.location = “http:/example.com/”
     + 正则匹配src标签
     + 处理回文字符
 
-```php
-class A {
-    public static function who() {
-        echo __CLASS__;
-    }
-    public static function test() {
-        self::who();
-    }
-}
-
-class B extends A {
-    public static function who() {
-        echo __CLASS__;
-    }
-}
-
-B::test(); # A
-
-class Base {
-    public function __construct() {
-        echo "Base constructor!", PHP_EOL;
-    }
-
-    public static function getSelf() {
-        return new self();
-    }
-
-    public static function getInstance() {
-        return new static();
-    }
-
-    public function selfFoo() {
-        return self::foo();
-    }
-
-    public function staticFoo() {
-        return static::foo();
-    }
-
-    public function thisFoo() {
-        return $this->foo();
-    }
-
-    public function foo() {
-        echo  "Base Foo!", PHP_EOL;
-    }
-}
-
-class Child extends Base {
-    public function __construct() {
-        echo "Child constructor!", PHP_EOL;
-    }
-
-    public function foo() {
-        echo "Child Foo!", PHP_EOL;
-    }
-}
-
-$base = Child::getSelf();
-$child = Child::getInstance();
-
-$child->selfFoo();
-$child->staticFoo();
-$child->thisFoo();
-// Base constructor!
-// Child constructor!
-// Base Foo!
-// Child Foo!
-// Child Foo!
-```
-
 #### 访问控制(可见性)
 
 * public:类成员在任何地方可见
@@ -2123,84 +956,6 @@ $child->thisFoo();
     - 在非静态成员函数内使用，self抑制多态行为，引用当前类的函数；而this引用调用类的重写(override)函数（如果有的话）
 * static:调用类里面的静态属性与静态方法
 
-```php
-class Test
-{
-    private $foo;
-
-    public function __construct($foo)
-    {
-        $this->foo = $foo;
-    }
-
-    private function bar()
-    {
-        echo 'Accessed the private method.';
-    }
-
-    public function baz(Test $other)
-    {
-        // We can change the private property:
-        $other->foo = 'hello';
-        var_dump($other->foo);
-
-        // We can also call the private method:
-        $other->bar();
-    }
-}
-
-$test = new Test('test');
-$test->baz(new Test('other'));
-
-# 延迟绑定
-class A
-{
-    public static $proPublic = "public of A";
-
-    public function myMethod()
-    {
-        echo static::$proPublic."\n";
-    }
-
-    public function test()
-    {
-        echo "Class A:\n";
-        echo self::$proPublic."\n";
-        echo __CLASS__."\n";
-        //echo parent::$proPublic."\n";
-        self::myMethod();
-        static::myMethod();
-    }
-}
-
-class B extends A
-{
-   public static $proPublic = "public of B";
-
-   public function test()
-    {
-        echo "\n\nClass B:\n";
-        echo self::$proPublic."\n";
-        echo __CLASS__."\n";
-        echo parent::$proPublic."\n";
-        self::myMethod();
-        static::myMethod();
-    }
-}
-
-class C extends B
-{
-    public static $proPublic = "public of C";
-}
-
-$t1 = new A();
-$t1->test();
-$t2 = new B();
-$t2->test();
-$t3 = new C();
-$t3->test();
-```
-
 #### 多态
 
 多态性是指相同的操作或函数、过程可作用于多种类型的对象上并获得不同的结果
@@ -2211,41 +966,6 @@ $t3->test();
 * 主要在于可以将不同的子类对象都当作一个父类来处理，并且可以屏蔽不同子类对象之间所存在的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化
 * 通常为了使项目能够在以后的时间里的轻松实现扩展与升级，需要通过继承实现可复用模块进行轻松升级
 * 在进行可复用模块设计时，就需要尽可能的减少使用流程控制语句。此时就可以采用多态实现该类设计。
-
-```php
-<?php
-class employee{//定义员工父类
-    protected function working(){//定义员工工作，需要在子类的实现
-        echo "本方法需要在子类中重载!";
-    }
-}
-class painter extends employee{//定义油漆工类
-    public function working(){//实现继承的工作方法
-        echo "油漆工正在刷漆！/n";
-    }
-}
-class typist extends employee{//定义打字员类
-    public function working(){
-        echo "打字员正在打字！/n";
-    }
-}
-class manager extends employee{//定义经理类
-    public function working(){
-        echo "经理正在开会！";
-    }
-}
-function printworking($obj){//定义处理方法
-    if($obj instanceof employee){//若是员工对象，则显示其工作状态
-        $obj->working();
-    }else{//否则显示错误信息
-        echo "Error: 对象错误！";
-    }
-}
-printworking(new painter());//显示油漆工的工作
-printworking(new typist());//显示打字员的工作
-printworking(new manager());//显示经理的工作
-?>
-```
 
 #### 接口与抽象类
 
@@ -2313,36 +1033,6 @@ $controller->register();
 * Trait 和 Class 相似，但仅旨在用细粒度和一致的方式来组合功能。它为传统继承增加了水平特性的组合；应用的几个 Class 之间不需要继承
 * 无法通过 trait 自身来实例化
 
-```php
-class Base {
-    public function sayHi() {
-        echo 'Hello ';
-    }
-}
-
-trait SayWorld {
-    public function sayHello() {
-        parent::sayHello();
-        echo 'World!';
-    }
-}
-
-trait World {
-    public function sayWorld() {
-        echo ' I am coming';
-    }
-}
-
-class MyHelloWorld extends Base {
-    use SayHello, SayWorld;
-}
-
-$o = new MyHelloWorld();
-$o->sayHi();
-$o->sayHello();
-$o->SayWorld();
-```
-
 ### 匿名类
 
 * 匿名类被嵌套进普通 Class 后，不能访问这个外部类（Outer class）的 private（私有）、protected（受保护）方法或者属性
@@ -2406,40 +1096,9 @@ echo (new Outer)->func2()->func3(); # 6
 * `__invoke()`:以调用函数的方式访问一个对象时， __invoke () 方法将首先被调用
 * `__set_state()`:当调用 var_export () 方法时，__set_state () 方法将被调用
 * `__autoload($className)`   试图载入一个未定义的类时调用。
-* `__debugInfo()`   输出 debug 信息。
-
-```php
-class CallableClass
-{
-    function __invoke($x) {
-        var_dump($x);
-    }
-}
-$obj = new CallableClass;
-$obj(5);
-var_dump(is_callable($obj));
-
-function __call($function, $args){
-    array_unshift($args, $this->value);
-    $this->value = call_user_func_array($function, $args);
-    return $this;
-}
-
-function __call($function, $args){
-    $this->value = call_user_func($function, $this->value, $args[0]);
-    return $this;
-}
-```
+* `__debugInfo()`   输出 debug 信息
 
 ## 反射
-
-```php
-# 利用反射机制创建实例
-$reflector = new reflectionClass(User::class);
-$constructor = $reflector->getConstructor();
-$dependencies = $constructor->getParameters();
-$user = $reflector->newInstanceArgs($dependencies = []);
-```
 
 ## 杂项
 
@@ -2635,38 +1294,6 @@ $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 * 方法
     - array iterator_to_array ( Traversable $iterator [, bool $use_keys = true ] )
 
-```php
-function xrange($start, $limit, $step = 1) {
-    if ($start < $limit) {
-        if ($step <= 0) {
-            throw new LogicException('Step must be +ve');
-        }
-
-        for ($i = $start; $i <= $limit; $i += $step) {
-            yield $i;
-        }
-    } else {
-        if ($step >= 0) {
-            throw new LogicException('Step must be -ve');
-        }
-
-        for ($i = $start; $i >= $limit; $i += $step) {
-            yield $i;
-        }
-    }
-}
-
-foreach (xrange(1, 9, 2) as $number) {
-    echo "$number ";
-}
-
-$data = (yield $value);
-
-$iterator = new ArrayIterator(array('recipe'=>'pancakes', 'egg', 'milk', 'flour'));
-var_dump(iterator_to_array($iterator, true));
-var_dump(iterator_to_array($iterator, false));
-```
-
 ## 调用外部命令
 
 * 能执行linux系统的shell命令:可以获得命令执行的状态码
@@ -2680,15 +1307,6 @@ system("/usr/a.sh");
 ```
 
 ## 异常
-
-
-## 重定向
-
-```
-header('Location: http://www.baidu.com') ;
-echo '<meta http-equiv="Refresh" content="0;url=http://www.baidu.com" >';
-echo '<script>window.location.href="www.baidu.com"</script>';
-```
 
 ## 序列化
 
@@ -2738,32 +1356,7 @@ echo '<script>window.location.href="www.baidu.com"</script>';
         + JSON_ERROR_INF_OR_NAN   One or more NAN or INF values in the value to be encoded    PHP 5.5.0
         + JSON_ERROR_UNSUPPORTED_TYPE 指定的类型，值无法编码。    PHP 5.5.0
         + JSON_ERROR_INVALID_PROPERTY_NAME    指定的属性名无法编码。 PHP 7.0.0
-        + JSON_ERROR_UTF16    畸形的 UTF-16 字符，可能因为字符编码不正确。
-
-```php
-<?php
-$a = array('<foo>',"'bar'",'"baz"','&blong&', "\xc3\xa9");
-echo "Normal: ",  json_encode($a), "\n"; # Normal: ["<foo>","'bar'","\"baz\"","&blong&","\u00e9"]
-echo "Tags: ",    json_encode($a, JSON_HEX_TAG), "\n"; # Tags: ["\u003Cfoo\u003E","'bar'","\"baz\"","&blong&","\u00e9"]
-echo "Apos: ",    json_encode($a, JSON_HEX_APOS), "\n"; # Apos: ["<foo>","\u0027bar\u0027","\"baz\"","&blong&","\u00e9"]
-echo "Quot: ",    json_encode($a, JSON_HEX_QUOT), "\n"; # Quot: ["<foo>","'bar'","\u0022baz\u0022","&blong&","\u00e9"]
-echo "Amp: ",     json_encode($a, JSON_HEX_AMP), "\n"; # Amp: ["<foo>","'bar'","\"baz\"","\u0026blong\u0026","\u00e9"]
-echo "Unicode: ", json_encode($a, JSON_UNESCAPED_UNICODE), "\n"; # Unicode: ["<foo>","'bar'","\"baz\"","&blong&","é"]
-echo "All: ",     json_encode($a, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE), "\n\n"; # All: ["\u003Cfoo\u003E","\u0027bar\u0027","\u0022baz\u0022","\u0026blong\u0026","é"]
-
-$b = array();
-echo "Empty array output as array: ", json_encode($b), "\n"; # Empty array output as array: []
-echo "Empty array output as object: ", json_encode($b, JSON_FORCE_OBJECT), "\n\n"; # Empty array output as object: {}
-
-$c = array(array(1,2,3));
-echo "Non-associative array output as array: ", json_encode($c), "\n"; # Non-associative array output as array: [[1,2,3]]
-echo "Non-associative array output as object: ", json_encode($c, JSON_FORCE_OBJECT), "\n\n"; # Non-associative array output as object: {"0":{"0":1,"1":2,"2":3}}
-
-$d = array('foo' => 'bar', 'baz' => 'long');
-echo "Associative array always output as object: ", json_encode($d), "\n"; # Associative array always output as object: {"foo":"bar","baz":"long"}
-echo "Associative array always output as object: ", json_encode($d, JSON_FORCE_OBJECT), "\n\n"; # Associative array always output as object: {"foo":"bar","baz":"long"}
-?>
-```
+        + JSON_ERROR_UTF16    畸形的 UTF-16 字符，可能因为字符编码不正确
 
 ## 跨域请求
 
@@ -3090,211 +1683,6 @@ class backendBaseController extends baseController
     - 再需要使用依赖的时候自动的为我们注入所需依赖
     - 管理对象的声明周期
     - 利用反射类来完成容器的自动注入
-
-```php
-interface DbDrive
-{
-    public function insert();
-}
-
-/**
- * Class MysqlDb
- *
- * @since 2.0
- */
-class MysqlDb implements DbDrive
-{
-    public function insert()
-    {
-        //TODO::插入一些数据
-    }
-}
-
-/**
- * Class MongoDb
- *
- * @since 2.0
- */
-class MongoDb implements DbDrive
-{
-    public function insert()
-    {
-        //TODO::插入一些数据
-    }
-}
-
-/**
- * Class Order
- *
- * @since 2.0
- */
-class Order
-{
-    /**
-     * @var DbDrive
-     */
-    private $db;
-
-    /**
-     * Order constructor.
-     *
-     * @param DbDrive $driver
-     */
-    public function __construct(DbDrive $driver)
-    {
-        $this->db = $driver;
-    }
-
-    public function add()
-    {
-        //TODO::订单业务
-        $this->db->insert();//执行入库操作
-    }
-}
-
-$db = new MysqlDb();//创建一个依赖
-$order = new Order($db);//将需要依赖的对象通过构造函数传递进去
-$order->add();//正常的去调用业务
-
-# IOC 容器
-<?php
-
-/**
- * Class Container
- */
-class Container
-{
-    /**
-     * 容器内所管理的所有实例
-     * @var array
-     */
-    protected $instances = [];
-
-    /**
-     * @param $class
-     * @param null $concrete
-     */
-    public function set($class, $concrete = null)
-    {
-        if ($concrete === null) {
-            $concrete = $class;
-        }
-        $this->instances[$class] = $concrete;
-    }
-
-    /**
-     * 获取目标实例
-     *
-     * @param $class
-     * @param array $param
-     *
-     * @return mixed|null|object
-     * @throws Exception
-     */
-    public function get($class, ...$param)
-    {
-        // 如果容器中不存在则注册到容器
-        if (!isset($this->instances[$class])) {
-            $this->set($class);
-        }
-        //解决依赖并返回实例
-        return $this->resolve($this->instances[$class], $param);
-    }
-
-    /**
-     * 解决依赖
-     *
-     * @param $class
-     * @param $param
-     *
-     * @return mixed|object
-     * @throws ReflectionException
-     * @throws Exception
-     */
-    public function resolve($class, $param)
-    {
-        if ($class instanceof Closure) {
-            return $class($this, $param);
-        }
-        $reflector = new ReflectionClass($class);
-        // 检查类是否可以实例化
-        if (!$reflector->isInstantiable()) {
-            throw new Exception("{$class} 不能被实例化");
-        }
-        // 通过反射获取到目标类的构造函数
-        $constructor = $reflector->getConstructor();
-        if (is_null($constructor)) {
-            // 如果目标没有构造函数则直接返回实例化对象
-            return $reflector->newInstance();
-        }
-
-        // 获取构造函数参数
-        $parameters = $constructor->getParameters();
-        //获取到构造函数中的依赖
-        $dependencies = $this->getDependencies($parameters);
-        // 解决掉所有依赖问题并返回实例
-        return $reflector->newInstanceArgs($dependencies);
-    }
-
-    /**
-     * 解决依赖关系
-     *
-     * @param $parameters
-     *
-     * @return array
-     * @throws Exception
-     */
-    public function getDependencies($parameters)
-    {
-        $dependencies = [];
-        foreach ($parameters as $parameter) {
-            $dependency = $parameter->getClass();
-            if ($dependency === null) {
-                // 检查是否有默认值
-                if ($parameter->isDefaultValueAvailable()) {
-                    // 获取参数默认值
-                    $dependencies[] = $parameter->getDefaultValue();
-                } else {
-                    throw new Exception("无法解析依赖关系 {$parameter->name}");
-                }
-            } else {
-                // 重新调用get() 方法获取需要依赖的类到容器中。
-                $dependencies[] = $this->get($dependency->name);
-            }
-        }
-
-        return $dependencies;
-    }
-}
-
-class MysqlDb
-{
-    public function insert()
-    {
-        echo 'mysql';
-    }
-}
-
-class Order
-{
-    private $db;
-
-    public function __construct(MysqlDb $db)
-    {
-        $this->db = $db;
-    }
-
-    public function add()
-    {
-        $this->db->insert();
-    }
-
-}
-
-$container = new Container();//使用容器
-$order = $container->get('Order');//通过容器拿到我们的Order类
-$order->add();//正常的使用业务
-```
 
 ## curl
 
@@ -3711,7 +2099,7 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 
 ### PHP：
 
-作为基础核心技能，我们在第二阶段的基础上面，需要有更深入的学习和应用。
+作为基础核心技能，在第二阶段的基础上面，需要有更深入的学习和应用
 
 从基本代码应用上面来说，能够解决在PHP开发中遇到95%的问题，了解大部分PHP的技巧；
 对大部分的PHP框架能够迅速在一天内上手使用，并且了解各个主流PHP框架的优缺点，能够迅速方便项目开发中做技术选型；
@@ -3799,23 +2187,6 @@ crc32
 * 如果正在做SQL查询，然后获得结果，并把很多数字弄到一起，看看能不能使用像SUM（）和AVG（）之类的函数调用GROUP BY语句
     - 跟普遍的情况下，让数据库处理尽量多的计算。一点很重要的提示是：（至少在MySQL里是这样）布尔表达式的值为0或1，如果有创意的话，可以使用SUM（）和它的小伙伴们做些很让人惊讶的事情。
 * 是不是把这些同样很耗费时间的数字计算了很多遍。例如，假设1000袋土豆的成本是昂贵的计算，但并不需要把这个成本计算500次，然后才把1000袋土豆的成本存储在一个数组或其他类似的地方，所以你不必把同样的东西翻来覆去的计算。这个技术叫做记忆术，在像你这样的报告中使用往往会带来奇迹般的效果
-
-## 方向
-
-* SPL库系列请仔细研究
-* PHP的socket模块以及pcntl模块
-* 从工程代码组织角度去理解和学习设计模式和面向对象OOP
-* 接纳一门新的语言。推荐Golang。对自己足够狠，请深入研究C语言
-* MySQL请购买《MySQL技术内幕：innodb存储引擎》和《高性能MySQL》两本书，Redis请购买《Redis设计与实现》
-* 《C Primer Plus》和《Unix环境高级编程》。这地方有一个巨大的错觉，就是读完一遍《C Primer Plus》后就觉得自己会CLang了，有这种优越感的，请你尝试用CLang做个什么东西出来？然后你发现似乎真的什么也做不了，这会儿就可以步入到《Unix环境高级编程》的节奏
-* 一切基于基础之上的上层应用都是海市蜃楼，犹如过眼云烟。不变的永远是基于事件监听的异步非阻塞IO
-* 技术
-    - 分布式配置中心
-    - 服务熔断、限流、降级
-    - 异步框架
-    - 分布式KV数据库
-    - 微服务架构
-    - Docker发布代码
 
 ## 安全
 
@@ -4020,6 +2391,51 @@ phpcs --config-set
 
 pecl channel-update pecl.php.net
 ```
+
+## 最佳实践
+
+*  配置文件（configuration file）:写在一个文件里。方便地适应开发环境的变化。配置文件通常包含以下信息：数据库参数、email地址、各类选项、debug和logging输出开关、应用程序常数
+* 名称空间（namespace）: 选择类和函数名的时候，必须很小心，避免出现重名。尽可能不要在类以外，放置全局性函数，类对内部的属性和方法，相当于有一层名称空间保护。如果你确实有必要声明全局性函数，那么使用一个前缀，比如dao_factory()、db_getConnection()、text_parseDate()等等
+* 数据库抽象层: PHP不提供数据库操作的通用函数，每种数据库都有一套自己的函数,不应该直接使用这些函数.数据库抽象层通常比系统本身的数据库函数，更易用一些
+* "值对象"（Value Object, VO）: 值对象（VO）在形式上，就像C语言的struct结构。它是一个只包含属性、不包含任何方法（或只包含很少方法）的类。一个值对象，就对应一个实体。它的属性，通常应该与数据库的字段名保持相同。此外，还应该有一个ID属性
+* 数据访问对象（Data Access Object, DAO）: 数据访问对象（DAO）的作用，主要是将数据库访问与其他代码相隔离。DAO应该是可以叠加（stacked）的，这样就有利于将来你再添加数据库缓存。每一个值对象的类，都应该有自己的DAO
+    -  save：插入或更新一条记录
+    -  get：取出一条记录
+    -  delete：删除一条记录
+* 自动生成代码: 99%的值对象和DAO代码，可以根据数据库模式（schema）自动生成，前提是你的表和列使用约定的方式进行命名。如果你修改数据库模式，一个自动生成代码的脚本将大大节省你的时间
+* 业务逻辑直接反映使用者的需要。它们处理值对象，根据业务需要修改值对象的属性，使用DAO与数据库层交互
+* 页逻辑（控制器）:当一个网页被请求时，页控制器（page controller）就会运行，然后产生输出。控制器的任务，就是将HTTP请求转化成业务对象（business object），然后调用相应的业务逻辑，最后生成一个"展示输出"的对象。页逻辑依次执行以下步骤（请参照后面的PageController类的代码）：
+    - 假定页面请求之中，包含一个cmd参数。
+    - 根据cmd参数的值，执行相应的动作。
+    - 验证页面返回的值，生成一个值对象。
+    - 针对值对象，执行业务逻辑。
+    - 如果有必要，可以导向另一个页面。
+    - 收集必要的数据，输出结果。
+    - 可以编写一个工具函数（utility function），处理GET或POST值，当有的变量没有赋值时，提供一个默认值。页逻辑不包含HTML代码
+* 表现层（Presentation Layer）: 最顶层的页面包含实际的HTML代码。这个页面需要的所有业务对象（business object），由页逻辑提供。这个页面先读取业务对象的属性，然后将它们转换成HTML格式
+* 本地化（Localization）
+    - 准备多重页面。
+    - HTML页面中去除特定语言相关的内容
+    - 保存用户语言
+        + 将语言设定保存在一个session变量或cookie之中
+        + 从HTTP头中读取locale值
+        + 把语言设定作为一个参数，追加在每个URL后面
+* 可以定义一个全局变量$ROOT，值就是程序的根目录，然后把它包含在每一个脚本文件中。那么，你要包含某个文件，就这样写require_once("$ROOT/lib/base.inc.php");
+* 目录结构:每个类都应该有自己的独立文件，还必须有一套文件名的命名规则（naming convention）
+    - 目录结构可以采用如下形式
+        +　/ 根目录。浏览器从这个页面开始访问
+        +　/lib/ 包含全局变量（base.inc.php）和配置文件（config.inc.php）
+        +　/lib/common/ 包含其他项目也可以共用的库，比如数据库抽象层
+        +　/lib/model/ 包含值对象类
+        +　/lib/dao/ 包含数据访问对象（DAO）类，以及DAO工厂函数
+        +　/lib/logic/ 包含业务逻辑类
+        +　/parts/ 包含HTML模板文件
+        +　/control/ 包含页逻辑。对于大型程序来说，这个目录下面可能还有子目录（比如admin/, /pub/）
+    - base.inc.php文件中，应该按照以下顺序添加包含文件：
+        + /lib/common之中经常使用的类（比如数据库层）
+        + 配置文件
+        + /lib/model之中所有类
+        + /lib/dao的之中所有类
 
 ## 工具
 
