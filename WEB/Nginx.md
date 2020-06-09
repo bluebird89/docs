@@ -39,12 +39,12 @@
 
 ## 功能
 
-* 由内核和一系列模块组成，内核提供 Web 服务的基本功能，如启用网络协议，创建运行环境，接收和分配客户端请求，处理模块之间的交互。
-* 模块从结构上分为：
+* 由内核和一系列模块组成，内核提供 Web 服务的基本功能，如启用网络协议，创建运行环境，接收和分配客户端请求，处理模块之间的交互
+* 模块结构：
     - 核心模块 core module：HTTP 模块、EVENT 模块和 MAIL 模块
     - 基础模块 Standard HTTP  modules：HTTP Access 模块、HTTP FastCGI 模块、HTTP Proxy 模块和 HTTP Rewrite 模块。
     - Optional HTTP  modules：可选HTTP模块
-    - 第三方模块 3rd party modules：HTTP Upstream Request Hash 模块、Notice 模块和 HTTP Access Key 模块及用户自己开发的模块。
+    - 第三方模块 3rd party modules：HTTP Upstream Request Hash 模块、Notice 模块和 HTTP Access Key 模块及用户自己开发的模块
 * Web 服务器，以 B/S（Browser/Server）方式提供服务
     - 静态资源服务
     - 支持 CGI 协议的动态语言，比如 Perl、PHP 等，但是不支持 Java。将处理过的内容通过 HTTP Server 分发
@@ -57,8 +57,8 @@
     - 支持速率限制及并发数限制
     - 能缓存打开的文件（元数据：文件的描述符等等信息）
 * 动静分离：让动态程序（Java、PHP）去访问应用服务器，让缓存、图片、JS、CSS 等去访问 Nginx
-    - 纯粹把静态文件独立成单独的域名，放在独立的服务器上，也是目前主流推崇的方案；
-    - 动态跟静态文件混合在一起发布，通过 Nginx 来分开。
+    - 纯粹把静态文件独立成单独的域名，放在独立的服务器上，也是目前主流推崇的方案
+    - 动态跟静态文件混合在一起发布，通过 Nginx 来分开
 * 反向代理
     * pop3, smpt,imap4等邮件协议的反向代理，应用服务集群扩展，动态扩容
     * 缓存：是边缘节点，减少时间延迟
@@ -69,41 +69,42 @@
 
 ## 进程模型
 
-* 多进程模型 架构设计是采用模块化的、基于事件驱动、异步、单线程且非阻塞
-* 大量使用多路复用和事件通知，Nginx 启动以后，会在系统中以 daemon 的方式在后台运行，其中包括一个 master 进程，n(n>=1) 个 worker 进程。所有的进程都是单线程（即只有一个主线程）的，且进程间通信主要使用共享内存的方式。
-* master/worker模型
-    - 一个master进程:充当整个进程组与用户的交互接口，同时对进程进行监护，管理 Worker 进程来实现重启服务、平滑升级、更换日志文件、配置文件实时生效等功能
-        + 主要负责收集、分发请求
-        + fork Worker进程：按照配置fork出N个Worker进程，一般说来配置推荐Worker进程数量和CPU核数保持一致即可
-        + 监控Worker进程，当某个Worker异常挂了后，Master进程负责重新拉起一个
-        + 每当一个请求过来时，Master 就拉起一个 Worker 进程负责处理这个请求。同时 Master 进程也负责监控 Woker 的状态，保证高可靠性。
-        + 接受外界信号，进行启动、重启、停止
-        + 可以给Worker进程发信号
+* 多进程模型,采用模块化的、基于事件驱动、异步、单线程且非阻塞,使用多路复用和事件通知
+* Nginx 启动以后，会在系统中以 daemon 的方式在后台运行，包括一个 master 进程，n(n>=1) 个 worker 进程。所有的进程都是单线程（即只有一个主线程），进程间通信主要使用共享内存方式
+    - master进程:充当整个进程组与用户的交互接口
+        + 接受外界信号,负责处理 Nginx 主服务的启动、关闭与重载,管理 Worker 进程(给Worker进程发信号)来实现重启服务、平滑升级、更换日志文件、配置文件实时生效等功能
+        + 负责收集、分发请求:在接收客户端连接信号后会将这个网络事件发送给某个 worker 进程，由该 worker 进程来接管后续的连接建立和请求处理
+        + 维护 worker 进程的运行状态
+            * fork Worker进程：按照配置fork出N个Worker进程，一般说来配置推荐Worker进程数量和CPU核数保持一致即可
+            * 监控Worker进程，当某个Worker异常挂了后，Master进程负责重新拉起一个
     - 多个worker进程:用来处理基本的网络事件，每个 worker 请求相互独立且平等的竞争来自客户端的请求，共同竞争来处理来自客户端的请求
+        + 具体的 HTTP 连接与请求处理工作由 worker 进程来完成
         + 请求只能在一个 worker 进程中被处理，且一个 worker 进程只有一个主线程，所以同时只能处理一个请求
-        + 为了减少进程切换（需要系统调用）的性能损耗，一般设置 Worker 进程数量和 CPU 数量一致。
-        + 每个worker基于时间驱动机制可以并行响应多个请求
-        + 采取了 Reactor 模型（也就是 I/O 多路复用，NIO）
+        + 为了减少进程切换（需要系统调用）的性能损耗，一般设置 Worker 进程数量和 CPU 数量一致
+        + 每个worker基于时间驱动机制可以并行响应多个请求,底层实现的原理是事件驱动和多路 IO 复用,采取了 Reactor 模型（也就是 I/O 多路复用，NIO）
             * I/O 多路复用模型：最重要的系统调用函数就是 Select（其他的还有 epoll 等）
-            * 该方法能够同时监控多个文件描述符的可读可写情况（每一个网络连接其实都对应一个文件描述符），当其中的某些文件描述符可读或者可写时，Select 方法就会返回可读以及可写的文件描述符个数。
-            * Work 进程使用 I/O 多路复用模块同时监听多个 FD（文件描述符），当 Accept、Read、Write 和 Close 事件产生时，操作系统就会回调 FD 绑定的事件处理器。这时候 Work 进程再去处理相应事件，而不是阻塞在某个请求连接上等待。
-            * 这样就可以实现一个进程同时处理多个连接。每一个 Worker 进程通过 I/O 多路复用处理多个连接请求。
-        + accept客户端请求，完成请求，数据返回给客户端
-        + http服务，http代理，fastcgi代理
-    - 设置 Worker数量：Nginx 同 Redis 类似都采用了 IO 多路复用机制，每个 Worker 都是一个独立的进程，但每个进程里只有一个主线程，通过异步非阻塞的方式来处理请求，即使是成千上万个请求也不在话下。
-        + 每个 Worker 的线程可以把一个 CPU 的性能发挥到极致。所以 Worker 数和服务器的 CPU 数相等是最为适宜的。设少了会浪费 CPU，设多了会造成 CPU 频繁切换上下文带来的损耗。
-        + 连接数 worker_connection：这个值是表示每个 Worker 进程所能建立连接的最大值。
-        + 一个 Nginx 能建立的最大连接数，应该是 worker_connections*worker_processes
-            * 对于 HTTP 请 求 本 地 资 源 来 说 ， 能 够 支 持 的 最 大 并 发 数 量 是 worker_connections*worker_processes
-            * 如果是支持 http1.1 的浏览器每次访问要占两个连接。所以普通的静态访问最大并发数是：worker_connections*worker_processes /2。
-            * 如果是 HTTP 作为反向代理来说，最大并发数量应该是 worker_connections*worker_processes/4。作为反向代理服务器，每个并发会建立与客户端的连接和与后端服务的连接，会占用两个连接
+            * 该方法能够同时监控多个文件描述符的可读可写情况（每一个网络连接其实都对应一个文件描述符），当其中的某些文件描述符可读或者可写时，Select 方法就会返回可读以及可写的文件描述符个数
+            * Work 进程使用 I/O 多路复用模块同时监听多个 FD（文件描述符），当 Accept、Read、Write 和 Close 事件产生时，操作系统就会回调 FD 绑定的事件处理器。这时 Worker 进程去处理相应事件，而不是阻塞在某个请求连接上等待
+        + accept 客户端请求,建立链接，从连接上读取请求报文数据并进行解析
+        + http服务：遵循 HTTP 协议对起始行、报文首部及报文主体进行进行解析，并获取请求方法、请求 URL、请求参数、HTTP 协议版本等信息，然后将解析出来的请求数据保存到 Nginx 对应的数据结构 ngx_http_request_s 中
+        + Nginx 能映射到对应的虚拟主机配置文件，主要依靠 Nginx 将从请求首部解析出来的 Host 字段值与所有虚拟主机配置文件中的 server_name 配置项做对比
+        + 通过 `ngx_http_send_header` 方法构造 HTTP 响应的起始行、响应首部，并将响应头信息保存在 `ngx_http_request_s` 的 `headers_out` 数据结构中，然后通过 `ngx_http_header_filter` 方法按照 HTTP 规范将其序列化为字节流缓冲区，最后通过 `ngx_http_write_filter` 方法将响应头部发送出去
+    - 设置 Worker数量：Nginx 同 Redis 类似都采用了 IO 多路复用机制，每个 Worker 都是一个独立的进程，但每个进程里只有一个主线程，通过异步非阻塞的方式来处理请求
+        + 每个 Worker 的线程可以把一个 CPU 的性能发挥到极致。所以 Worker 数和服务器的 CPU 数相等是最为适宜的。设少了会浪费 CPU，设多了会造成 CPU 频繁切换上下文带来的损耗
+        + 连接数 worker_connection：表示每个 Worker 进程所能建立连接的最大值。
+        + 一个 Nginx 能建立的最大连接数
+            * 对于 HTTP 请求本地资源来说， 能够支持的最大并发数量是 `worker_connections*worker_processes`
+            * 如果是支持 http1.1 的浏览器每次访问要占两个连接。所以普通的静态访问最大并发数是：`worker_connections*worker_processes /2`
+            * 如果是 HTTP 作为反向代理来说，最大并发数量应该是 `worker_connections*worker_processes/4`。作为反向代理服务器，每个并发会建立与客户端的连接和与后端服务的连接，会占用两个连接
     - 优点
-        + 可以使用 nginx-s reload 热部署。
-        + 每个 Worker 是独立的进程，不需要加锁，省掉了锁带来的开销。采用独立的进程，可以让互相之间不会影响，一个进程退出后，其他进程还在工作，服务不会中断，Master 进程则很快启动新的 Worker 进程。
+        + 可以使用 nginx-s reload 热部署
+        + 每个 Worker 是独立的进程，不需要加锁，省掉了锁带来的开销
+        + 采用独立的进程，互相之间不会影响，一个进程退出后，其他进程还在工作，服务不会中断，Master 进程则很快启动新的 Worker 进程
 * fast-CGI：一个协议
     - CGI不涉及进程管理，PHP解析器被调用完一次后，就销毁掉了，下次调用需要重新初始化
     - fastCGI涉及到了进程管理，携带着PHP解析器功能的FPM进程是常驻内存的，解析完毕后就一直静静地还在那里，等待请求
 * PHP-FPM（PHP FastCGI Process Manager）PHP对于fast-CGI协议具体实现
+    - 配置其实是个反向代理配置，Nginx 本身的高性能高并发设计更适用于作为静态资源服务器，对应 PHP 脚本文件这种动态资源请求，Nginx 的处理方式是通过反向代理的方式将其转发给真正的 PHP 脚本处理进程，通常是 PHP-FPM
     - php-fpm的进程模型和nginx一模一样，就是一个Master进程按照配置fork出Worker进程
     - 不同的是，fpm的worker进程没有“powered by epoll”，每个worker进程内都内嵌了php解析器用来解析php代码，一个fpm进程在已经干活的时候拒绝接受新的请求，是完完全全的基于同步阻塞的工作方式，只有活干完了才会接受新的请求
     - Nginx和php-FPM之间是如何通信的？其实就是靠socket

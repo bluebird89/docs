@@ -146,7 +146,6 @@ dev: {
 
 ## 教程
 
-* https://learnku.com/docs/learn-vue2
 
 ## 项目
 
