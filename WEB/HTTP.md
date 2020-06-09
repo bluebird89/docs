@@ -21,6 +21,8 @@
 
 ## 概念
 
+* Web 服务器会为每种要通过 MIME（Multipurpose Internet Mail Extension，多用途互联网邮件扩展） 传输的资源对象都打上了 MIME 类型的数据格式标签
+* Web 浏览器从服务器取回一个对象时，会去查看相关的 MIME 类型(响应头的 Content-Type 字段)，看看它能否处理
 * 连接(Connection)：一个传输层的实际环流，它是建立在两个相互通讯的应用程序之间
     - 长连接：只需一次建立就可以传输多次数据，传输完成后，只需要一次切断连接即可。在连接保持期间，如果没有数据包发送，需要双方发链路检测包。长连接的连接时长可以通过请求头中的 keep-alive 来设置
         + 用于操作频繁，点对点的通讯，而且连接数不能太多情况。数据库的连接用长连接， 如果用短连接频繁的通信会造成socket错误，而且频繁的socket 创建也是对资源的浪费
@@ -46,7 +48,11 @@
     - 一旦激活，通道便被认为不属于HTTP通讯，尽管通道可能是被一个HTTP请求初始化的
     - 当被中继的连接两端关闭时，通道便消失。当一个门户(Portal)必须存在或中介(Intermediary)不能解释中继的通讯时通道被经常使用。
 * 缓存(Cache)：反应信息的局域存储
-* URL（Uniform Resource Locator，统一资源定位符）也就是俗称的网址，它表示某一网络资源存在于所在计算机网络上的位置，同时也是用于检索该资源的机制。
+* URL（Uniform Resource Locator，统一资源定位符）也就是俗称的网址，表示某一网络资源存在于所在计算机网络上的位置，同时也是用于检索该资源的机制 `<scheme>://<user>:<password>@<host>:<port>/<path>;<params>?<query>#<frag>`
+    - 第一部分称为方案（scheme），说明了访问资源所使用的协议类型，通常是 http:// 或 https://
+    - 第二部分给出了服务器的域名/IP地址和端口号（不指定默认为80）
+    - 其余部分指定的是 URI 的路径信息，比如 /wp-statics/images/carousel/LaravelAcademy.jpg
+    - 使用 ASCII 字符集，对于不安全的字符则使用「%+两个ASCII码的十六进制数」进行编码
 * URI 格式:router+search+hash `https://www.baidu.com?key1=vvalue1&key2=value2#test`
     - hash，哈希值或者称为锚，是#后面的字符串，一般作为单页应用的路由地址，或者文档的锚
 
@@ -238,30 +244,48 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
 
 ## 地址栏输入 URL
 
-* 域名解析
-    - 根据输入 URL 地址，去查找域名是否被本地 DNS 缓存，不同浏览器对 DNS 的设置不同，如果浏览器缓存了 URL 地址，那就直接返回 ip
+* 浏览器从 URL 中解析出服务器的域名
+    + 根据输入 URL 地址，去查找域名是否被本地 DNS 缓存，不同浏览器对 DNS 的设置不同，如果浏览器缓存了 URL 地址，那就直接返回 ip
     - 如果没有缓存 URL 地址，浏览器就会发起系统调用来查询本机 hosts 文件是否有配置 ip 地址，如果找到，直接返回
     - 如果找不到，就向网络中发起一个 DNS 查询
-* 浏览器需要和目标服务器建立 TCP 连接：TCP连接被用来发送一条或多条请求，以及接受响应消息。客户端可能打开一条新的连接，或重用一个已经存在的连接，或者也可能开几个新的TCP连接连向服务端
-* 发送一个HTTP 请求报文：HTTP报文（在HTTP/2之前）是语义可读的。在HTTP/2中，这些简单的消息被封装在了帧中，这使得报文不能被直接读取，但是原理仍是相同的
+* 浏览器将服务器的域名替换为服务器的 IP 地址（通过 DNS 获取）
+* 浏览器将端口号从 URL 中解析出来（默认是 80）
+* 浏览器需要和目标服务器建立 TCP 连接:TCP连接被用来发送一条或多条请求，以及接受响应消息。客户端可能打开一条新的连接，或重用一个已经存在的连接，或者也可能开几个新的TCP连接连向服务端
+* 浏览器向服务器发送一条 HTTP 请求报文:HTTP报文（在HTTP/2之前）是语义可读的。在HTTP/2中，这些简单的消息被封装在了帧中，这使得报文不能被直接读取，但是原理仍是相同的
+* 服务器收到浏览器请求后进行处理并回送一条 HTTP 响应报文
+* 浏览器收到响应后将其显示出来
+* 关闭连接或者为后续请求重用连接
+
+* 报文:用于 HTTP 协议交互的信息,本身是由多行（用CR+LF作换行符，即\r\n）数据构成的字符串文本
+    - HTTP/1.1以及更早的HTTP协议报文都是语义可读的
+    - HTTP/2中，报文被嵌入到了一个新的二进制结构帧,帧允许实现很多优化，比如报文头部的压缩和复用。即使只有原始HTTP报文的一部分以HTTP/2发送出来，每条报文的语义依旧不变，客户端会重组原始HTTP/1.1请求。因此用HTTP/1.1格式来理解HTTP/2报文仍旧有效
+    - 分为报文首部和报文主体两块，两者由首次出现的空行来分隔
+* 请求报文
     - 状态行(request line)
-        + 一个HTTP的method，经常是由一个动词像GET, POST 或者一个名词像OPTIONS，HEAD来定义客户端的动作行为。通常客户端的操作都是获取资源（GET方法）或者发送HTML form表单值（POST方法），虽然在一些情况下也会有其他操作。
-        + 要获取的资源的路径，通常是上下文中就很明显的元素资源的URL，它没有protocol （http://），domain（developer.mozilla.org），或是TCP的port（HTTP一般在80端口）。
-        + HTTP协议版本号
+        + 方法（method）:由一个动词像GET, POST 或者一个名词像OPTIONS，HEAD 来定义客户端的动作行为。通常客户端操作都是获取资源（GET方法）或者发送HTML form表单值（POST方法），在一些情况下也会有其他操作
+        + 请求 URL（request-URL）:通常是上下文中元素资源的URL
+        + HTTP 协议版本号
     - 请求头 HTTP Request Header
     - 空行
     - 消息主体（entity-body）请求数据
     - HTTP 1.1 后默认使用长连接，只需要一次握手即可多次传输数据
-* 读取服务端返回报文信息
+* 响应报文
     - 状态行(request line)
-        + HTTP协议版本号。
-        + 一个状态码（status code），来告知对应请求执行成功或失败，以及失败的原因。
-        + 一个状态信息，这个信息是非权威的状态码描述信息，可以由服务端自行设定。
+        + HTTP协议版本号
+        + 状态码（status code）:来告知对应请求执行成功或失败，以及失败的原因
+        + 状态信息:非权威的状态码描述信息，可以由服务端自行设定
     - 响应头
-* 关闭连接或者为后续请求重用连接
-* 报文
-    - HTTP/1.1以及更早的HTTP协议报文都是语义可读的
-    - HTTP/2中，这些报文被嵌入到了一个新的二进制结构帧,帧允许实现很多优化，比如报文头部的压缩和复用。即使只有原始HTTP报文的一部分以HTTP/2发送出来，每条报文的语义依旧不变，客户端会重组原始HTTP/1.1请求。因此用HTTP/1.1格式来理解HTTP/2报文仍旧有效
+* 格式
+    - 起始行：报文的第一行,在请求报文中用来说明要做什么，在响应报文中说明出现了什么情况
+    - 首部字段：起始行后面有零个或多个首部字段，每个首部字段包含一个名字和对应的值，为了便于解析，两者之间用冒号分隔,最后是一个 CR+LF（即\r\n）.在请求报文中将其称作请求头，在响应报文中将其称作响应头
+        + 请求首部字段
+        + 响应首部字段
+        + 通用首部字段
+        + 实体首部字段
+        + 扩展首部字段：非 HTTP 协议标准规定的首部字段，通常由开发者创建，用于某些特殊用途，比如 Cookie、Set-Cookie
+    - 报文主体和首部字段之间通过一个空行分隔
+    - 字段可以有多个值，不同值之间通过逗号分隔
+    - 主体：请求主体中包含了要发送给 Web 服务器的数据（一般 POST 请求都会包含请求主体，GET 请求参数都在 URL 里面，请求主体一般为空），响应主体中包含了服务器返回给客户端的数据，一般是 HTML 文档或者 JSON 格式数据
 
 ```
 // 源生的form提交可设置enctype="multipart/form-data"，一般表单中有文件会自动设为该值
@@ -280,6 +304,12 @@ headers: {
 ...
 })
 
+## 请求报文
+<method> <request-URL> <version>（请求行）
+<headers>
+
+<entity-body>
+
 GET / HTTP/1.1
 Host: developer.mozilla.org
 Accept-Language: fr
@@ -292,6 +322,7 @@ title=test&sub%5B%5D=1&sub%5B%5D=2&sub%5B%5D=3
 POST http://www.example.com HTTP/1.1
 Content-Type: application/json;charset=utf-8
 
+## 响应报文
 HTTP/1.1 200 OK
 Date: Sat, 09 Oct 2010 14:28:02 GMT
 Server: Apache
@@ -304,14 +335,6 @@ Content-Type: text/html
 
 ![ HTTP 请求处理流程](../_static/http_request.jpg "Optional title")
 
-## 报文
-
-* 请求报文
-    - 起始行：描述请求或者响应的基本信息
-    - 头部字段集合：key-value形式说明报文
-    - 消息正文：实际传输诸如图片等信息。具体如下图试试
-* 响应报文
-
 ## 标头
 
 * 通用标头
@@ -321,25 +344,52 @@ Content-Type: text/html
         + 持久性连接:一次事务完成后不关闭网络连接 `Connection: keep-alive`
         + 非持久性连接:即一次事务完成后关闭网络连接 `Connection: close`
     - HTTP1.1 其他通用标头
-        + Pragma
-        + Trailer
-        + Transfer-Encoding
-        + Upgrade
-        + Via
-        + Warning
-* 实体标头:描述消息正文内容的 HTTP 标头。实体标头用于 HTTP 请求和响应中
-    - Content-Length:指示实体主体的大小，以字节为单位，发送到接收方
-    - Content-Language:描述了客户端或者服务端能够接受的语言
-    - Content-Encoding:指示对实体应用了何种编码,用来压缩媒体类型,常见的内容编码有这几种： gzip、compress、deflate、identity
+        + Pragma: no-cache HTTP/1.1 之前版本的历史遗留字段，仅作为与 HTTP/1.0 的向后兼容而定义,HTTP/1.1 中使用 Cache-Control: no-cache 来替代该字段的功能
+        + Trailer:事先说明在报文主体后记录了哪些首部字段，可应用于 HTTP/1.1 版本的分块传输编码
+        + `Transfer-Encoding: chunked`:规定了传输报文主体时采用的编码方式,HTTP/1.1 版本的传输编码方式仅对分块传输编码有效
+        + Upgrade:用于检测 HTTP 协议及其他协议是否可使用更高的版本进行通信，其参数值可以用来指定一个完全不同的通信协议
+        + Via:用于追踪客户端与服务器之间的请求和响应报文的传输路径,报文经过代理或网关时，会先在首部字段 Via 中附加该服务器的信息，然后再进行转发
+        + Warning:从 HTTP/1.0 的响应首部字段 Retry-After 演变而来，通常会告知用户一些与缓存相关的问题的警告
+* 实体标头:含在请求报文和响应报文中实体部分所使用的首部，用于补充内容的更新时间等与实体相关的信息
+    - Allow:用于通知客户端能够服务器针对 Request URL 指定资源能够支持的所有 HTTP 请求方法，当服务器接收到不支持的 HTTP 方法时，会以状态码 405 Method Not Allowed 作为响应返回，与此同时还会把所有能支持的 HTTP 方法写入首部字段 Allow 后返回
+    - Content-Length:表明实体主体部分的大小（单位是字节），对实体主体进行分块内容编码传输时，不能再使用 Content-Length 首部字段，即使用了 Transfer-Encoding: chunked 编码，否则其他情况下必须在响应首部中包含此字段
+    - Content-Language:用于告知客户端实体主体使用的自然语言
+    - Content-Encoding:用于告知客户端服务器对实体的主体部分选用的内容编码方式（一般都是数据压缩方式）。主要有以下几种内容编码方式
+        +  gzip
+        +  compress
+        +  deflate
+        +  identity
+        +  br
         + Accept-Encoding: gzip, deflate //请求头
         + Content-Encoding: gzip  //响应头
+        + 服务器端并不强制要求一定使用哪种内容编码方式。具体采用哪种内容编码方式高度依赖于服务器端的设置，及其所采用的模块
+        + Transfer-Encoding 与 Content-Encoding 之间的区别
+            * Transfer-Encoding 也是用于指定报文主体传输编码方式，但是逐跳首部，即只在两个相邻节点间有效，跟前面介绍的 TE 首部字段是一对，TE 也是逐跳首部，用于告知服务器客户端能够处理的编码方式和相对优先级
+            * Content-Encoding 和 Accept-Encoding 是一对，都是端到端首部，在整个传输过程中有效
+    - Content-Location 该字段用于给出与报文主体部分相对应的 URL，和首部字段 Location 不同，Content-Location 表示的是报文主体返回资源对应的 URL
+    - Content-MD5 该字段用于检查报文主体在传输过程中是否保持完整，以及确认传输到达。 其实现过程如下：对报文主体执行 MD5 算法得到 128 位二进制数，再通过普通 Base64 编码后将结果写入 Content-MD5 字段值（由于 HTTP 首部无法记录二进制值，所以要通过 Base64 编码处理）
+    - `Content-Range: bytes 5001-10000/10000` 针对范围请求，在响应首部中使用该字段能告知客户端作为响应返回的实体的哪个部分符合范围请求，字段值以字节为单位，表示当前发送部分及整个实体大小
+    - Content-Type 该字段表示实体主体内对象的媒体类型，和首部字段 Accept 一样，字段值用 type/subtype 形式赋值
+    - Expires:该字段将资源失效日期告知客户端，缓存服务器在接收到含有首部字段 Expires 的响应后，会以缓存来应答请求，在 Expires 字段值指定的时间之前，响应的副本会一直保存。当超过指定时间后，缓存服务器在请求发送过来时，会转向源服务器请求资源
+        + 当首部字段 Cache-Control 有指定 max-age 指令时，比起首部字段 Expires，会优先处理 max-age 指令
+    - Last-Modified:该字段指明资源最新修改的时间，一般来说，这个值就是请求 URL 指定资源被修改的时间。常常与 If-Modified-Since 字段结合使用
 * 请求标头
     - Host 请求头指明了服务器的域名（对于虚拟主机来说），以及（可选的）服务器监听的 TCP 端口号。如果没有给定端口号，会自动使用被请求服务的默认端口（比如请求一个 HTTP 的 URL 会自动使用 80 作为端口）`Host: developer.mozilla.org`
     - Accpet、 Accept-Language、Accept-Encoding 都是属于内容协商的请求标头
     - Accept:  会通告客户端其能够理解的 MIME 类型
-    - Accept-Charset:规定服务器处理表单数据所接受的字符集,常用的字符集有：UTF-8 - Unicode 字符编码 ；ISO-8859-1 - 拉丁字母表的字符编码
-    - Accept-Language:告知服务器用户代理能够处理的自然语言集（指中文或英文等），以及自然语言集的相对优先级。可一次指定多种自然语言集
-    - Authorization
+        + 文本文件：text/html、text/plain、text/css、application/json...
+          + 图片文件：image/jpeg、image/gif、image/png...
+          + 视频文件：video/mpeg、video/quicktime...
+          + 应用程序使用的二进制文件：application/octet-stream、application/zip...
+    - `Accept-Charset: utf-8,iso-8859-1;q=0.5`:用来告知服务器用户代理支持的字符集及字符集的相对优先顺序,常用的字符集有：UTF-8 - Unicode 字符编码 ；ISO-8859-1 - 拉丁字母表的字符编码
+    - `Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7`:告知服务器用户代理能够处理的自然语言集（指中文或英文等），以及自然语言集的相对优先级。可一次指定多种自然语言集
+    - `Accept-Encoding: gzip, deflate, br`:告知服务器用户代理支持的内容编码及内容编码的优先级顺序。常见的内容编码如下
+        +  gzip：由文件压缩程序 gzip（GNU zip）生成的编码格式（RFC1952），采用 Lempel-Ziv 算法及 32 位循环冗余校验（CRC）；
+        +  compress：由 UNIX 文件压缩程序 compress 生成的编码格式，采用 Lempel-Ziv-Welch 算法；
+        +  deflate：组合使用 zlib 格式（RFC1950）及由 deflate 压缩算法（RFC1951）生成的编码格式；
+        +  br：表示采用 Brotli 算法的编码方式；
+        +  identify：不执行压缩或不会变化的默认编码格式
+    - Authorization 用来告知服务器用户代理的认证信息。通常，想要通过服务器认证的用户代理会在接收到返回的 401 状态码响应后，把首部字段 Authorization 加入请求
     - Referer: 请求从哪发起的原始资源URI `Referer: https://developer.mozilla.org/testpage.html`
     - Cache-Control 控制缓存具体的行为
         + no-cache    无   强制源服务器再次验证
@@ -381,24 +431,37 @@ Content-Type: text/html
             * .xhtml  text/html
     - Date：创建报文的日期时间(启发式缓存阶段会用到这个字段)
     - Expires：告知客户端资源缓存失效的绝对时间
+    - Expect 该字段用于告知服务器期望出现的某种特定行为，因服务器无法理解客户端的期望作出回应而发生错误时，会返回状态码 417 Expectation Failed
     - Last-Modified：文档的最后改动时间。客户可以通过 If-Modified-Since 请求头提供一个日期，服务器端的资源没有变化,只有改动时间迟于指定时间的文档才会返回，否则返回一个 304(Not Modified) 状态
-    - If-Match  条件请求，携带上一次请求中资源的ETag，服务器根据这个字段判断文件是否有新的修改
-    - If-None-Match   和If-Match作用相反，服务器根据这个字段判断文件是否有新的修改.  使请求成为条件请求。对于 GET 和 HEAD 方法，仅当服务器没有与给定资源匹配的 ETag 时，服务器才会以 200 状态发送回请求的资源。对于其他方法，仅当最终现有资源的ETag与列出的任何值都不匹配时，才会处理请求。`If-None-Match: "c561c68d0ba92bbeb8b0fff2a9199f722e3a621a"`
-    - If-Modified-Since   比较资源前后两次访问最后的修改时间是否一致 通常会与 If-None-Match 搭配使用，用于确认代理或客户端拥有的本地资源的有效性。获取资源的更新日期时间，可通过确认首部字段 Last-Modified 来确定 `If-Modified-Since: Mon, 18 Jul 2016 02:36:04 GMT`
+    - If-Match  条件请求，服务器收到携带上一次请求中资源的ETag，只有判断指定条件为真时，才会执行请求，常用于实现缓存相关功能
+        + 首部字段 If-Match 属于附带条件之一，会告知服务器匹配资源所用的实体标记（ETag）值，这时的服务器无法使用弱 ETag 值（以 W/ 开头）
+        + 服务器会对比 If-Match 字段值和资源的 ETag 值，仅当两者一致时，才会执行请求，反之，则返回状态码 412 Precondition Failed 响应。
+        + 可以使用星号 * 指定 If-Match 的字段值，针对这种情况，服务器将会忽略 ETag 的值，只要资源存在就处理请求
+    - If-None-Match   和If-Match作用相反，服务器根据这个字段判断文件是否有新的修改.使请求成为条件请求。对于 GET 和 HEAD 方法，仅当服务器没有与给定资源匹配的 ETag 时，服务器才会以 200 状态发送回请求的资源。对于其他方法，仅当最终现有资源的ETag与列出的任何值都不匹配时，才会处理请求。`If-None-Match: "c561c68d0ba92bbeb8b0fff2a9199f722e3a621a"`
+    - If-Modified-Since:该字段会告知服务器若 If-Modified-Since 字段值早于资源的更新时间，则希望能够处理该请求。反之则返回状态码 304 Not Modified 响应.比较资源前后两次访问最后的修改时间是否一致 通常会与 If-None-Match 搭配使用，用于确认代理或客户端拥有的本地资源的有效性。获取资源的更新日期时间，可通过确认首部字段 Last-Modified 来确定 `If-Modified-Since: Mon, 18 Jul 2016 02:36:04 GMT`
         + 如果在 Last-Modified 之后更新了服务器资源，那么服务器会响应 200，如果在 Last-Modified 之后没有更新过资源，则返回 304
     - If-Unmodified-Since 比较资源前后两次访问最后的修改时间是否一致
+    - If-Range:该字段用于告知告知服务器若指定的 If-Range 字段值（ETag 值或时间）和请求资源的 ETag 值或时间相一致，则作为范围请求处理，否则返回全体资源
+    - Max-Forwards:通过 TRACE 方法或 OPTIONS 方法发送包含首部字段 Max-Forwards 的请求时，该字段以十进制整数形式指定可经过的服务器最大数目。服务器在往下一个服务器转发请求之前，Max-Forwards 的值减1后重新赋值。当服务器接收到 Max-Forwards 值为 0 的请求时，不再进行转发，而是直接返回响应
+    - Proxy-Authorization:接收到从代理服务器发来的认证质询时，客户端会发送包含首部字段 Proxy-Authorization 的请求，以告知服务器认证所需要的信息。该行为和客户端与服务器之间的 HTTP 访问认证相似（对应的首部字段是 Authorization），不过认证行为是发生在客户端与代理之间
     - Location：表示客户应当到哪里去提取文档
     - Refresh：表示浏览器应该在多少时间之后刷新文档，以秒计
         + 通过设置 HTML 页面 HEAD 区的 `＜META HTTP-EQUIV=”Refresh” CONTENT=”5;URL=http://host/path"＞`实现
         + 意义是”N秒之后刷新本页面或访问指定页面”，而不是”每隔N秒刷新本页面或访问指定页面”。因此，连续刷新要求每次都发送一个Refresh头，而发送204状态代码则可以阻止浏览器继续刷新，不管是使用Refresh头还是`＜META HTTP-EQUIV=”Refresh” …＞`
         + 不属于 HTTP 1.1 正式规范的一部分，而是一个扩展
+    - Range 对于只需要获取部分资源的范围请求，包含首部字段 Range 即可告知服务器资源的指定范围。 接收到附带 Range 首部字段请求的服务器，会在处理请求之后返回状态码 206 Partial Content 的响应。无法处理该范围请求时，则会返回状态码 200 OK 的响应及全部资源
+    - Referer 该字段用于告知服务器当前请求的上一个请求对应资源的 URL
     - Server：服务器名字
     - Set-Cookie：设置和页面关联的 Cookie
-    - User-Agent: HTTP 客户端程序信息
+    - 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36': 会将创建请求的浏览器和用户代理名称等信息传达给服务器
     - WWW-Authenticate：客户应该在 Authorization 头中提供什么类型的授权信息？在包含401(Unauthorized) 状态行的应答中这个头是必需的
 * 响应标头
+    - Accept-Ranges 该字段用来告知客户端服务器是否能处理范围请求，以指定获取服务器端某个部分的资源。可指定的字段值有两种，可处理范围请求时指定其为 bytes，反之指定其为 none
     - Access-Control-Allow-Origin:指定一个来源，告诉浏览器允许该来源进行资源访问
     - Keep-Alive: Connection 非持续连接的存活时间，可以进行指定
+    - Server:用于告知客户端当前服务器上安装的 HTTP 服务器应用程序的信息，字段值中不仅会标出 HTTP 服务器软件应用名称，还会包含版本号和安装时启用的可选项
+    - Proxy-Authenticate 该字段会把由代理服务器所要求的认证信息发送给客户端。它与客户端和服务器之间的 HTTP 访问认证的行为相似，不同之处在于其认证行为是在客户端与代理之间进行的，而客户端与服务器之间进行认证时，首部字段 WWW-Authorization 有着相同的作用
+    - Retry-After:该字段用于告知客户端应该在多久之后再次发送请求，主要配合状态码 503 Service Unavailable 响应，或 3XX Redirect 响应一起使用。字段值可以是具体的日期时间，也就是创建响应后的秒数
     - Cache-Control 控制缓存具体的行为
         + public    无   任意一方都能缓存该资源(客户端、代理服务器等)
         + private 可省略 只能特定用户缓存该资源
@@ -410,27 +473,37 @@ Content-Type: text/html
         + max-age=[秒] 缓存时长，单位是秒   缓存的时长，也是响应的最大的Age值
         + s-maxage=[秒]    必需  公共缓存服务器响应的最大Age值
         + cache-extension -   新指令标记(token)
-    - Location: 重定向地址
+    - Location: 可以将响应接收方引导至某个与请求 URL 位置不同的资源,会配合 3XX：Redirection 响应，提供重定向的 URL
     - Server: 被请求的服务web server的信息,含有关原始服务器用来处理请求的软件的信息,含有关原始服务器用来处理请求的软件的信息 `Server: Apache/2.4.1 (Unix)`
     - Set-Cookie: 服务器向客户端发送 sessionID
     - Transfer-Encoding 规定了传输报文主体时采用的编码方式,HTTP /1.1 的传输编码方式仅对分块传输编码有效
     - X-Frame-Options:HTTP 首部字段是可以自行扩展的。所以在 Web 服务器和浏览器的应用上，会出现各种非标准的首部字段. 用于控制网站内容在其他 Web 网站的 Frame 标签内的显示问题。其主要目的是为了防止点击劫持（clickjacking）攻击
     - NAME: 要设置的键值对
-    - expires: cookie过期时间
-    - Expires：告知客户端资源缓存失效的绝对时间
-    - path: 指定发送cookie的目录
-    - domain: 指定发送cookie的域名
-    - Secure: 指定之后只有https下才发送cookie
-    - HostOnly: 指定之后javascript无法读取cookie
-    - ETag    服务器生成资源的唯一标识
-    - Vary    代理服务器缓存的管理信息
-    - Age 资源在缓存代理中存贮的时长(取决于max-age和s-maxage的大小)
+    - WWW-Authenticate:该字段用于 HTTP 访问认证，它会告知客户端适用于访问请求 URL 所指定资源的认证方案（Basic 或 Digest）和带参数提示的质询。状态码 401 Unauthorized 响应中，肯定带有首部字段 WWW-Authenticate
+    - ETag:用于告知客户端服务器资源的实体标识，它是一种可将资源以字符串做唯一性标识的方式。服务器会为每份资源分配对应的 ETag 值
+        + 当资源更新时，ETag 值也需要更新，生成 ETag 值时，并没有统一的算法规则，而仅仅是由服务器来分配
+        + 字段值有强弱之分：
+            * 强 ETag 值：不论实体发生多么细微的变化都会改变其值；
+           * 弱 ETag 值：只用于提示资源是否相同，只有资源发生了根本变化，产生差异时才会改变 ETag 值，这时，会在字段值开头附加 W/，例如：ETag: W/"usagi-1234"
+    - Vary :可对缓存进行控制，源服务器会向代理服务器传达关于本地缓存使用方法的命令。从代理服务器接收到源服务器返回包含 Vary 指定项的响应之后，若再要进行缓存，仅对请求中含有相同 Vary 指定首部字段的请求返回缓存
+    - Age 资源在缓存代理中存贮的时长(取决于max-age和s-maxage的大小) 用于告知客户端源服务器在多久前创建了响应，字段值的单位为秒。若创建该响应的服务器是缓存服务器，Age 值是指缓存后的响应再次发起认证到认证完成的时间值，代理创建响应时必须加上首部字段 Age
     - Allow：服务器支持哪些请求方法（如GET、POST等）
-
+* 扩展字段:引入 Cookie 的初衷就是实现客户端用户识别和状态管理
+    - 调用 Cookie 时，由于可以校验 Cookie 的有效期，以及发送方的域（Domain）、路径（URL Path）、协议等信息，所以正规发布的 Cookie 内的数据不会因来自其它 Web 站点和攻击者的攻击而泄露
+    - Set-Cookie:该字段用于响应首部，服务器通过该字段将需要设置的 Cookie 信息告知客户端，客户端接收到响应后将相应的 Cookie 信息存储到本地 `Set-Cookie: laravel_session=eyJpdiI6InpDTWIxczdmK2hJZ1hPcWVsRU9uRUE9PSIsInZhbHVlIjoib244YVppNWFWdU04K3kxT3pUM3FmTWVqNkYxQXo3QUJHRzV0OWZnOEE1TzZKZGxxNHlpaXZnNlwvYzRrZ0RcL1lrIiwibWFjIjoiODZlZDgzNzlmNmNkZTJhNGFmNThmYTE2NGYxMTIyM2EwNGY5ZThkZmQ5MDU0NWQ0ZTJlY2M1ZTJmNjJmNDIzMiJ9; expires=Wed, 24-Apr-2019 04:03:23 GMT; Max-Age=7200; path=/; httponly`
+        + expires: 指定 Cookie 的有效期，省略的话默认在浏览器会话时间内有效（浏览器关闭失效），Cookie 一旦发送至客户端，就不能在服务器端显式删除，只能通过覆盖实现对客户端 Cookie 的「删除」
+        + Max-Age：和 expires 作用类似，用于指定从现在开始该 Cookie 存在的秒数，如果同时指定了 expires 和 Max-Age，那么 Max-Age 的值将优先生效
+        + path: 指定 Cookie 生效的路径，默认路径是根路径 /
+        + domain: 指定 Cookie 所属的域名，省略的话默认是当前域名，Cookie 只有在所属域名下才能获取，不能跨域名获取 Cookie
+        + Secure: 限制浏览器只有在页面启用 HTTPS 安全连接时才可以发送 Cookie
+        + httponly: 指定之后javascript无法读取cookie,主要目的是为了防止跨站脚本攻击（XSS）对 Cookie 信息的窃取
+    - Cookie 该字段用于请求首部，客户端通过该字段告知服务器当客户端想要获取 HTTP 状态管理支持时，就会在请求中包含从服务器接收到的 Cookie `Cookie: hello=eyJpdiI6IktlV2RlQUhnbDBJN2Z0UUhFSHl3bkE9PSIsInZhbHVlIjoieElBdFpOV3crNm5IZytnRzlJUW1LUT09IiwibWFjIjoiNzFiZGEzMzg1MzgyYTMyYjM0YzcyNTViZWU2NGI2MDM2NzJhMGEwNmFkYWE5ZGY4N2I5ZDA4ZWQ0NmVkZjcyOCJ9; XSRF-TOKEN=eyJpdiI6IndOeWNWVmxXVEdpZkdlWFFkMENtckE9PSIsInZhbHVlIjoiYWJNb28yMlROWE1YOEVyTnhrbmJwYjRpdHB3S2diUDBcLzI2d1ViNXpRYkxzb2pMZEZWVll0cVFoejhlNG1jdEwiLCJtYWMiOiI1NzUwMWRjYzhjMjAwMDkwMWI4NDY0ZTIzMzY2NDYwMDY1NmYzZmMyOTA3ZjM2YTRmN2FmM2U1OGU3MWQyNTVkIn0%3D; laravel_session=eyJpdiI6ImpwcWx6SGttbUlCU2dCREVyRWp1WFE9PSIsInZhbHVlIjoiU0djd0Vjc3JRZzNuWUgyUWlRSStiUURcL2RPWFpxdjBjdXRrdVRjZ1hzdDZpTGNzZWtKNXpVTTJlXC9Fbms3ZWpqIiwibWFjIjoiMmI0NmJiZWYyOGViOGI5ZDVhY2EwMjI4NjAwODYwMzg1ZGZlODY0NjExNzIzMjczMGRiMjdjNDIyMTdiNzQ1MCJ9`
 ### 请求方式
 
-* GET：从指定的资源请求数据，只应当用于取回数据，查询字符串（名称/值对）是在 GET 请求的 URL 中发送
-* POST: 向指定的资源提交要被处理的数据，查询字符串（名称/值对）是在 POST 请求的 HTTP 消息主体中发送(对用户不可见)
+* GET：从服务器上获取指定的 URL 资源，只应当用于取回数据，查询字符串（名称/值对）是在请求 URL 中发送
+    - 不会对服务器资源产生副作用（只是获取资源，不会对资源进行变更
+    - 通过 GET 请求变更服务器资源有重大安全隐患，在开发过程中要避免
+* POST: 向指定资源提交被处理数据，查询字符串（名称/值对）是在 POST 请求的 HTTP 消息主体中发送(对用户不可见)
     - application/x-www-form-urlencoded：原生 form 表单
     - multipart/form-data：用于上传文件,生成了一个 boundary 用于分割不同的字段，为了避免与正文内容重复，boundary 很长很复杂
     - application/json:支持比键值对复杂得多的结构化数据:php 就无法通过 `$_POST` 对象从上面的请求中获得内容,从 `php://input` 里获得原始输入流，再 json_decode 成对象
@@ -447,15 +520,17 @@ Content-Type: text/html
     - 浏览器限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担:GET产生一个TCP数据包；POST产生两个TCP数据包
         + GET请求:浏览器会把http header和data一并发送出去，服务器响应200（返回数据）
         + POST请求:浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok
-* HEAD  与 GET 相同，但只返回 HTTP 报头，不返回文档主体
-* PUT 从客户端向服务器传送的数据取代指定的文档的内容
+* HEAD  与 GET 相同，但只返回 HTTP 报头，不返回文档主体,用于确认 URL 的有效性及资源更新的日期时间
+* PUT:设计的初衷是用来传输文件, 要求在报文的主体中包含文件内容，然后保存到请求 URI 指定的位置.由于 PUT 方法自身不带验证机制，任何人都可以上传文件，存在安全性问题.让服务器用请求主体部分来创建|更新一个由请求的 URL 命令的新文档
+* PATCH 方法，用于对指定资源进行部分修改（PUT 方法用于整体覆盖）
 * DELETE  删除指定资源
     - 200（OK）——删除成功，同时返回已经删除的资源
     - 202（Accepted）——删除请求已经接受，但没有被立即执行（资源也许已经被转移到了待删除区域）
     - 204（No Content）——删除请求已经被执行，但是没有返回资源（也许是请求删除不存在的资源造成的）
-* OPTIONS 返回服务器支持的 HTTP 方法
+* OPTIONS 查询针对请求 URL 指定的资源支持的所有 HTTP 方法
 * CONNECT 把请求连接转换到透明的 TCP/IP 通道
-* TRACE 返回显服务器收到的请求，主要用于测试或诊断
+* TRACE 允许客户端在最终请求发送给服务器时，看看它变成了什么样子。主要用于 HTTP 通信的诊断和调试
+    - 会在目标服务器端发起一个「环回」诊断，行程最后一站的服务器会返回一条 TRACE 响应，并在响应主体中携带它收到的原始请求报文，这样，客户端就可以查看在所有中间 HTTP 应用程序组成的请求/响应链上，原始报文是否以及如何被修改过
 
 ```
 POST http://www.example.com HTTP/1.1
@@ -478,6 +553,12 @@ curl "http://127.0.0.1:8889/" -vv
 
 ## TCP/IP 传输控制协议/网际协议 (Transmission Control Protocol / Internet Protocol)
 
+* 过程
+    - 应用层：打包请求，根据传输数据加密与否分为 HTTP 请求和 HTTPS 请求，封装请求头和请求参数，应用层的包通过 Socket 编程交个下一层去完成
+    - 传输层：封装客户端与服务端端口
+    - 网络层：封装客户与服务IP地址
+    - 数据链路层：本地客户端MAC 本地网关MAC
+    - 物理层
 * TCP/IP 网络模型
 * OSI 七层网络模型，它就是在五层协议之上加了表示层和会话层
 * 通信的过程其实就对应着数据入栈与出栈的过程,供已连接因特网的计算机进行通信的通信协议,定义了电子设备（比如计算机）如何连入因特网，以及数据如何在它们之间传输的标准。包含了一系列构成互联网基础的网络协议，是Internet的核心协议
@@ -633,7 +714,6 @@ curl "http://127.0.0.1:8889/" -vv
                 - DDos攻击防御： 网站收到DDos攻击之后，将域名A记录到127.0.0.1，即让攻击者自己攻击自己。
                 - 大部分Web容器测试的时候绑定的本机地址。
             * localhost:一个域名，用于指代this computer或者this host,可以用它来获取运行在本机上的网络服务
-                -
         + IP协议头：八位的TTL字段。这个字段规定该数据包在穿过多少个路由之后才会被抛弃。某个IP数据包每穿过一个路由器，该数据包的TTL数值就会减少1，当该数据包的TTL成为零，它就会被自动抛弃。这个字段的最大值也就是255，也就是说一个协议包也就在路由器里面穿行255次就会被抛弃了，根据系统的不同，这个数字也不一样，一般是32或者是64。
     - ICMP (因特网消息控制协议)：针对错误和状态
     - DHCP (动态主机配置协议)：针对动态寻址
@@ -661,6 +741,10 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
 
 ![TCP状态转换图](../_static/tcp_status.jpg "Optional title")
 ![TCP与UDP对比](../_static/TCPvsUDP.png)
+
+## 以太网（Ethernet）
+
+* 目标MAC地址(6个字节)：源MAC地址(6个字节)：类型(2个字节)：数据：FCS帧检验序列（4个字节）
 
 ## DNS（Domain Name System 域名系统）
 
@@ -872,26 +956,7 @@ ifconfig /flushdns # 刷新DNS
 * 代理和隧道：通常情况下，服务器和/或客户端是处于内网的，对外网隐藏真实 IP 地址。因此 HTTP 请求就要通过代理越过这个网络屏障。但并非所有的代理都是 HTTP 代理。例如，SOCKS协议的代理就运作在更底层，一些像 FTP 这样的协议也能够被它们处理。
 * 会话：使用HTTP Cookies允许你用一个服务端的状态发起请求，这就创建了会话。虽然基本的HTTP是无状态协议。这很有用，不仅是因为这能应用到像购物车这样的电商业务上，更是因为这使得任何网站都能轻松为用户定制展示内容了。
 
-## Socket
 
-一种连接模式，实现通信协议的通信过程而建立成来的通信管道，其真实的代表是客户端和服务器端的一个通信进程，双方进程通过socket进行通信，而通信的规则采用指定的协议。可以创建任何协议的连接，因为其它协议都是基于此的
-
-* 应用层与TCP/IP协议族通信的中间软件抽象层，它是一组接口。在设计模式中，Socket其实就是一个门面模式，对TCP/IP协议的封装，它把复杂的TCP/IP协议族隐藏在Socket接口后面，对用户来说，一组简单的接口就是全部，让Socket去组织数据，以符合指定的协议。
-* socket就是一个 五元组 [180.172.35.150:45678, tcp, 180.97.33.108:80] ，包括：
-    - 源IP
-    - 源端口
-    - 目的IP
-    - 目的端口
-    - 类型：TCP or UDP
-* 优点
-    - 传输数据为字节级，传输数据可自定义，数据量小（对于手机应用讲：费用低）
-    - 传输数据时间短，性能高
-    - 适合于客户端和服务器端之间信息实时交互
-    - 可以加密,数据安全性强
-* 缺点
-    - 需对传输的数据进行解析，转化成应用级的数据
-    - 对开发人员的开发水平要求高
-    - 相对于Http协议传输，增加了开发量
 * TCP编程步骤
     - 服务器端： 
         + 创建一个socket，用函数socket()； 
@@ -924,16 +989,6 @@ ifconfig /flushdns # 刷新DNS
         + 设置对方的IP地址和端口等属性
         + 发送数据，用函数sendto()
         + 关闭网络连接
-
-```C
-SOCKET SocketListen =socket(AF_INET,SOCK_STREAM, IPPROTO_TCP);
-SOCKET_ERROR = bind(SocketListen,(const sockaddr*)&addr,sizeof(addr))
-SOCKET_ERROR == listen(SocketListen,2)
-SOCKET SocketWaiter = accept(SocketListen, _Out_    struct sockaddr *addr _Inout_  int *addrlen);
-closesocket(SocketListen);closesocket(SocketWaiter);
-
-socket(PF_INET, SOCK_DGRAM, 0)
-```
 
 ### 状态码 Status Code
 
@@ -989,21 +1044,47 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 
 ## 缓存
 
-* Expires->Etag->Last-Modified
-* Expires：响应头，代表该资源的过期时间。服务端返回。时间是 GMT 格式的标准时间，如 Fri, 01 Jan 1990 00:00:00 GMT。单独的过期时间机制，浏览器端可以随意修改时间，导致缓存使用不精准
-* Cache-Control：请求/响应头，缓存控制字段，精确控制缓存策略。对缓存的控制粒度更细，包括缓存代理服务器的缓存控制。
-    - max-age=10秒。意思是在10秒以内，使用缓存到浏览器的 a.js 资源。果没有 Cache-Control，则以 Expires 为准。
-    - public，资源允许被中间服务器缓存。
-    - private，资源不允许被中间代理服务器缓存。
-    - no-cache，浏览器不做缓存检查。
-    - no-store，浏览器和中间代理服务器都不能缓存资源。
-    - must-revalidate，可以缓存，但是使用之前必须先向源服务器确认。
-    - proxy-revalidate，要求缓存服务器针对缓存资源向源服务器进行确认。
-    - s-maxage：缓存服务器对资源缓存的最大时间。
-* Etag：响应头，资源标识，由服务器告诉浏览器。内容变了，Etag 才变。内容不变，Etag 不变，可以理解为 Etag 是文件内容的唯一 ID。
-    - If-None-Match：请求头，缓存资源标识，由浏览器告诉服务器。发现有If-None-Match，则比较 If-None-Match 和文件的 Etag 值，忽略If-Modified-Since的比较。
-* Last-Modified：响应头，资源最近修改时间，由服务器告诉浏览器。
-    - If-Modified-Since：请求头，资源最近修改时间，由浏览器告诉服务器。过期策略有效后，携带该字段（等于上一次请求的Last-Modified）发起请求，服务器比较请求头里的时间和服务器上文件的 Last-Modified，一致，返回304继续本地缓存，否则重新返回。只能精确到秒（妙极内变动，不会重新发）
+* 基于 HTTP 协议实现的缓存，存储在 HTTP 客户端，通过请求头或响应头来协商和标识
+* 原因：同一个客户端发起多次请求返回的都是同一个文件，这样就会对服务器的带宽造成浪费，同时也会加重 Web 服务器的负载，降低 Web 服务器的性能
+* 种类
+    - 私有缓存：作用于单个用户，通常就是浏览器缓存；
+    - 共享缓存：往往存放在可以被多个用户共享的代理之中，所以有时候也叫代理缓存
+* 原理
+    - 接收：读取请求报文
+    - 解析：对请求报文进行解析，提取 URL 和各种首部字段
+    - 查询：查看是否有本地缓存可用，如果没有，则从服务器获取相应的资源并存储到本地
+    - 新鲜度检查：缓存不会一直有效，所谓的「新鲜度」指的是和食品的保质期类似，缓存是有有效期的，在有效期之内才可以使用，否则需要向服务器查询对应资源是否有更新
+    - 创建响应：缓存会用新的首部和缓存的响应主体来构建响应报文
+    - 发送：将响应发送给客户端
+    - 日志：缓存可以创建一条日志来记录这个 HTTP 事务
+* 通常只会对 GET 请求资源进行缓存，因为只有 GET 请求不会对资源实体的状态进行改变，OPTIONS 请求不返回响应实体没有缓存的意义，而其他诸如 POST、PUT、DELETE、PATCH 这些会改变资源状态的请求则不能进行缓存
+* 策略
+    - 强制缓存：Expires->Cache-Control
+    - 对比缓存：如果响应头 Cache-Control 中设置了 no-cache，则需要客户端发送相应的请求协商头（If-Modified-Since/If-None-Match），与服务端对应字段（Last-Modified/Etag）对比验证缓存是否过期来实现 HTTP 缓存。返回的响应状态码是 304
+* Expires：值为服务端返回的缓存资源到期时间（绝对时间），即下一次请求时，请求时间小于服务端返回的到期时间，直接使用缓存数据
+    - 时间由服务端生成,是 GMT 格式的标准时间，如 Fri, 01 Jan 1990 00:00:00 GMT
+    - 单独的过期时间机制，浏览器端可以随意修改时间，导致缓存使用不精准
+    - 是 HTTP/1.0 的东西，现在浏览器均默认使用 HTTP/1.1，所以它的作用基本忽略
+    - 客户端时间可能跟服务端时间有误差，这就会导致缓存命中的误差, HTTP/1.1 使用 Cache-Control 替代该字段
+    - 如果在 Cache-Control 响应头设置了 max-age 或者 s-max-age 指令，那么 Expires 头也会被忽略
+* Cache-Control：通用首部字段,可以设置多个属性值，不同属性值之间通过逗号分隔.缓存控制字段，精确控制缓存策略。对缓存的控制粒度更细，包括缓存代理服务器的缓存控制
+    - no-store:浏览器和中间代理服务器禁止进行缓存，缓存中不得存储任何关于客户端请求和服务端响应的内容，每次由客户端发起的请求都会从服务端下载完整的响应内容
+    - no-cache:强制确认缓存，每次有请求发出时，缓存会将此请求发到服务器（该请求应该会带有与本地缓存相关的验证字段），服务器端会验证请求中所描述的缓存是否过期，若未过期，则缓存才使用本地缓存副本。该属性和 HTTP/1.0 中的 Pragma: no-cache 等效。
+    - public:用于共享缓存，任何中间代理都可以缓存响应
+    - private:用于私有缓存，只有客户端浏览器才可以缓存响应，没有指定 public 时，默认为 private
+    - must-revalidate:在考虑使用一个陈旧的资源时，必须先验证它的状态，已过期的缓存将不被使用
+        + 与 no-cache 的区别在于，使用 no-cache 时，不管本地资源缓存副本是否过期，使用资源缓存副本前，一定要到源服务器进行副本有效性校验
+        + must-revalidate 则不然，只有在本地资源缓存副本过期后，才去源服务器进行有效性检测
+    - proxy-revalidate，要求缓存服务器针对缓存资源向源服务器进行确认
+    - max-age=10秒:是距离请求发起时间的秒数，是一个相对值，从而可以避免客户端与服务端时间不一致导致的误差，如果在响应头中两者都存在，则以 max-age 为准，Expires 自动失效
+    - s-maxage：缓存服务器对资源缓存的最大时间
+* Last-Modified:响应头，告知客户端资源的最后修改时间
+    - 客户端再次请求该资源时，会在 If-Modified-Since 请求头字段中带上上次请求返回的最后修改时间，服务器收到请求报文后发现请求头包含 If-Modified-Since 字段，则与被请求资源的最后修改时间进行对比
+    - 如果资源的最后修改时间大于 If-Modified-Since 字段值，说明资源又被改动过，则返回完整的资源内容，对应响应状态码为 200
+    - 如果资源的最后修改时间小于或等于 If-Modified-Since 字段值，说明资源没有做新的修改，则返回状态码 304，告知浏览器使用本地保存的缓存作为响应实体
+* Etag：响应头，告知客户端资源在服务器的唯一标识（生成规则由服务器指定，每当资源发生修改后 Etag 值会变化），是文件内容的唯一 ID
+    - 当客户端再次请求该资源时，通过 If-None-Match 字段通知服务器客户段缓存资源数据的唯一标识。服务器收到请求报文后发现请求头包含 If-None-Match 字段，则与被请求资源的唯一标识进行对比，如果不同，说明资源又被改动过，则返回完整的资源内容，对应响应状态码为 200；如果相同，说明资源没有做新的修改，则返回状态码 304，告知浏览器使用本地保存的缓存作为响应实体
+    - Etag/If-None-Match 的优先级要高于 Last-Modified/If-Modified-Since
 * 主动通知
     - 添加版本号
     - 以 MD5hash 值来区分
@@ -1017,6 +1098,9 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     - 经过HTTPS安全加密的请求（有人也经过测试发现，ie其实在头部加入Cache-Control：max-age信息，firefox在头部加入Cache-Control:Public之后，能够对HTTPS的资源进行缓存，参考《HTTPS的七个误解》）
     - POST请求无法被缓存
     - HTTP响应头中不包含Last-Modified/Etag，也不包含Cache-Control/Expires的请求无法被缓存
+* 网关缓存：存放在服务器网关而非客户端浏览器或中间代理中，Cache-Control 响应头中需要设置 public 属性
+    - 反向代理缓存：反向代理服务器有 Nginx、Squid、Varnish 等
+    - [CDN 缓存](CDN.md)
 
 ![浏览器缓存](../_static/browser_cache.png "Optional title")
 
@@ -1308,6 +1392,19 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 * 每个连接都有一组连接ID。连接各端可以设定自己的连接ID，同时认可对方的连接ID。连接ID的作用在于从逻辑上标识当前连接。所以，如果用户的IP发生变化而连接ID没有变化，因为packet包含了网络ID标识符，所以只需要继续发送数据包就可以重新建立连接
 * QPACK：所有的header必须通过同一数据流来传输，而且必须严格有序。但是这样一来，从HTTP 1.1开始就困扰HTTP已久的队头阻塞又出现了
 * [lucas-clemente/quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
+
+## 长连接
+
+* 应用在消息提醒、即时通讯、推送、直播弹幕、游戏、共享定位、股票行情等等场景
+* 分开设计长连接会导致研发和维护成本陡增、浪费基础设施、增加客户端耗电、无法复用已有经验等等问题
+* 共享长连接系统又需要协调好不同系统间的认证、鉴权、数据隔离、协议拓展、消息送达保证等等需求
+* 系统主要由四个主要组件组成：
+    - 接入层使用 OpenResty 实现
+        + 负载均衡，保证各长连接 Broker 实例上连接数相对均衡
+        + 会话保持，单个客户端每次连接到同一个 Broker，用来提供消息传输可靠性保证
+    - 长连接 Broker，部署在容器中，负责协议解析、认证与鉴权、会话、发布订阅等逻辑
+    - Redis 存储，持久化会话数据
+    - Kafka 消息队列，分发消息给 Broker 或 业务方
 
 ## [Wireshark](https://www.wireshark.org) <https://github.com/dafang/notebook/issues/114>
 

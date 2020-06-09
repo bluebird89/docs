@@ -143,6 +143,11 @@ java HelloWorld // 运行
 * JVM并发
 * JIT
 
+* 记录好日志；
+* 对程序做好性能监控；
+* 根据日志和性能监控数据修改程序；
+* 使用专业工具通过不同的JVM参数进行压测并获得最佳配置
+
 ## JDK
 
 一套依据jvm规范实现的一套API
@@ -153,13 +158,6 @@ java HelloWorld // 运行
 * 反射
 * 文件操作
 * Lambda语法
-
-## JVM
-
-* 记录好日志；
-* 对程序做好性能监控；
-* 根据日志和性能监控数据修改程序；
-* 使用专业工具通过不同的JVM参数进行压测并获得最佳配置
 
 ## 基础
 
@@ -757,6 +755,16 @@ str1.compareTo( str2 ); // 0
 str2.compareTo( str3 ); // -3
 str3.compareTo( str1 ); // 3
 ```
+
+## 泛型 generics
+
+* 提供了编译时类型安全检测机制，该机制允许开发者在编译时检测到非法的类型
+* 本质是参数化类型
+* 通配符
+  - ？表示不确定的 java 类型
+  - T (type) 表示具体的一个java类型
+  - K V (key value) 分别代表java键值中的Key Value
+  - E (element) 代表Element
 
 ## OOP
 
