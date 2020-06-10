@@ -1,5 +1,6 @@
 # RPC（Remote Procedure Call Protocol）远程过程调用协议
 
+* 现有 RPC 框架都是基于 Andrew D. Birrell 和 Bruce Jay Nelson 的论文实现的：[Implementing Remote Procedure Calls](http://www.cs.cmu.edu/~dga/15-712/F07/papers/birrell842.pdf)， [中文](https://www.jianshu.com/p/91be39f72c74)该论文定义了 RPC 的调用标准
 * 让一个应用调用另一个应用中方法的一种实现方式
 * 服务端实现了一个函数，客户端使用 RPC 框架提供的接口，调用这个函数的实现，并获取返回值
 * RPC 屏蔽了底层的网络通信细节，使得开发人员无须关注网络编程的细节，而将更多的时间和精力放在业务逻辑本身的实现上，从而提高开发效率
@@ -8,15 +9,11 @@
 * 在OSI网络通信模型中，RPC跨越了传输层和应用层
 * RPC使得开发包括网络分布式多程序在内的应用程序更加容易
 
-## 原理
+## 流程
 
-* Client 通过本地调用，调用 Client Stub
-* Client Stub 将参数打包（也叫 Marshalling）成一个消息，然后发送这个消息
-* Client 所在的 OS 将消息发送给 Server
-* Server 端接收到消息后，将消息传递给 Server Stub
-* Server Stub 将消息解包（也叫 Unmarshalling）得到参数
-* Server Stub 调用服务端的子程序（函数），处理完后，将最终结果按照相反的步骤返回给 Client
-* Stub 负责调用参数和返回值的流化（serialization）、参数的打包解包，以及负责网络层的通信。Client 端一般叫 Stub，Server 端一般叫 Skeleton。
+* 客户端应用（服务消费方）想发起一个远程调用:通过本地调用客户端 Stub，将调用的接口、方法和参数，通过约定的协议规范进行编码（也叫 Marshalling）成一个消息，并通过本地的 RPCRuntime（RPC 通信包） 进行传输，将调用网络包发送到服务器
+* 服务器端 RPCRuntime 收到请求后，交给服务提供方 Stub 将消息解包（也叫 Unmarshalling）得到参数 ，然后调用服务端对应的方法，方法执行后返回结果，服务提供方 Stub 将返回的结果编码后，再发送给客户端
+* 客户端的RPCRuntime 收到结果，发给调用方 Stub 解码得到结果，返回给客户端
 
 ![RPC 的调用过程](../_static/How_rpc_works.jpeg "Optional title")
 

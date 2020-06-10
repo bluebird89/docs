@@ -884,6 +884,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [Mastering_Go_ZH_CN](https://wskdsgcf.gitbook.io/mastering-go-zh-cn/)
 * [Go 语言设计与实现](https://draveness.me/golang/)
 * Go 语言学习笔记
+* [ chai2010 / go-ast-book ](https://github.com/chai2010/go-ast-book/):books 《Go语法树入门》(开源免费图书/Go语言进阶/掌握抽象语法树/Go语言AST/LLVM/LLIR/凹语言)
 
 ## 项目
 
@@ -920,7 +921,8 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     + [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
     - [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang http://go-colly.org/
     - [Gourouting/singo](https://github.com/Gourouting/singo):Gin+Gorm开发Golang API快速开发脚手架
-    - [micro/go-micro](https://github.com/micro/go-micro):A Go microservices development framework https://go-micro.dev
+    - [micro/go-micro](https://github.com/micro/go-micro):A distributed systems development framework https://go-micro.dev
+    - [ micro / micro ](https://github.com/micro/micro):Micro is a cloud native development platform
     - [Terry-Mao / goim](https://github.com/Terry-Mao/goim):goim https://goim.io/
     - [ gofiber / fiber ](https://github.com/gofiber/fiber): zap Fiber is an Express inspired web framework written in Go with coffee https://gofiber.io
     -  [go-martini/martini](https://github.com/go-martini/martini):Classy web framework for Go http://martini.codegangsta.io
@@ -936,6 +938,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [spf13/cobra](https://github.com/spf13/cobra):A Commander for modern Go CLI interactions
     - [magefile / mage](https://github.com/magefile/mage):a Make/rake-like dev tool using Go https://magefile.org
     - [motemen / gore](https://github.com/motemen/gore):Yet another Go REPL that works nicely. Featured with line editing, code completion, and more.
+    - [ urfave / cli ](https://github.com/urfave/cli):A simple, fast, and fun package for building command line apps in Go
 * 语法检测
     - [mgechev/revive](https://github.com/mgechev/revive):🔥 ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint. https://revive.run
 * ORM

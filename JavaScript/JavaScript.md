@@ -2153,10 +2153,13 @@ fileInput.addEventListener('change', function () {
 
 ### AJAX Asynchronous JavaScript and XML
 
-用JavaScript执行异步网络请求。AJAX请求是异步执行的，也就是说，要通过回调函数获得响应。早大规模使用AJAX的就是Gmail，Gmail的页面在首次加载后，剩下的所有数据都依赖于AJAX来更新。
+用JavaScript执行异步网络请求。AJAX请求是异步执行的，也就是说，要通过回调函数获得响应。早大规模使用AJAX的就是Gmail，Gmail的页面在首次加载后，剩下的所有数据都依赖于AJAX来更新
+
+* 一种可以有效利用 JavaScript 与 DOM 操作，实现 Web 页面局部刷新，而不用重新加载页面的异步通信技术
+* 核心技术是一个名为 XMLHttpRequest 的 API， 通过 JavaScript 的调用就可以实现与服务器的通信，以便在已加载成功的页面发起请求，再通过 DOM 操作实现页面的局部刷新，在早期返回的数据格式是 XML，但是随着更加轻量级的 JSON 出现，现在 Ajax 调用多返回 JSON 格式数据，与返回完整 HTML 文档不同，局部刷新返回的数据体量更小
 
 * 一次HTTP请求对应一个页面
-* 如果要让用户留在当前页面中，同时发出新的HTTP请求，就必须用JavaScript发送这个新请求，接收到数据后，再用JavaScript更新页面，这样一来，用户就感觉自己仍然停留在当前页面，但是数据却可以不断地更新。
+* 如果要让用户留在当前页面中，同时发出新的HTTP请求，就必须用JavaScript发送这个新请求，接收到数据后，再用JavaScript更新页面，这样一来，用户就感觉自己仍然停留在当前页面，但是数据却可以不断地更新
 * 通过检测window对象是否有XMLHttpRequest属性来确定浏览器是否支持标准的XMLHttpRequest。注意，不要根据浏览器的navigator.userAgent来检测浏览器是否支持某个JavaScript特性，一是因为这个字符串本身可以伪造，二是通过IE版本判断JavaScript特性将非常复杂。
 * 当创建了XMLHttpRequest对象后，要先设置onreadystatechange的回调函数。在回调函数中，通常我们只需通过readyState === 4判断请求是否完成，如果已完成，再根据status === 200判断是否是一个成功的响应。
 * XMLHttpRequest对象的open()方法有3个参数，第一个参数指定是GET还是POST，第二个参数指定URL地址，第三个参数指定是否使用异步，默认是true，所以不用写。
