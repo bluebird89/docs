@@ -48,6 +48,8 @@
         + Wekan
 * SSO
     - [apereo/cas](apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
+* 会议
+    - [jitsi/jitsi-meet ](https://github.com/jitsi/jitsi-meet):Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application. https://jitsi.org/meet
 
 ## 工具
 
