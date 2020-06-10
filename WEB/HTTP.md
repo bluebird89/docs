@@ -498,6 +498,7 @@ Content-Type: text/html
         + Secure: 限制浏览器只有在页面启用 HTTPS 安全连接时才可以发送 Cookie
         + httponly: 指定之后javascript无法读取cookie,主要目的是为了防止跨站脚本攻击（XSS）对 Cookie 信息的窃取
     - Cookie 该字段用于请求首部，客户端通过该字段告知服务器当客户端想要获取 HTTP 状态管理支持时，就会在请求中包含从服务器接收到的 Cookie `Cookie: hello=eyJpdiI6IktlV2RlQUhnbDBJN2Z0UUhFSHl3bkE9PSIsInZhbHVlIjoieElBdFpOV3crNm5IZytnRzlJUW1LUT09IiwibWFjIjoiNzFiZGEzMzg1MzgyYTMyYjM0YzcyNTViZWU2NGI2MDM2NzJhMGEwNmFkYWE5ZGY4N2I5ZDA4ZWQ0NmVkZjcyOCJ9; XSRF-TOKEN=eyJpdiI6IndOeWNWVmxXVEdpZkdlWFFkMENtckE9PSIsInZhbHVlIjoiYWJNb28yMlROWE1YOEVyTnhrbmJwYjRpdHB3S2diUDBcLzI2d1ViNXpRYkxzb2pMZEZWVll0cVFoejhlNG1jdEwiLCJtYWMiOiI1NzUwMWRjYzhjMjAwMDkwMWI4NDY0ZTIzMzY2NDYwMDY1NmYzZmMyOTA3ZjM2YTRmN2FmM2U1OGU3MWQyNTVkIn0%3D; laravel_session=eyJpdiI6ImpwcWx6SGttbUlCU2dCREVyRWp1WFE9PSIsInZhbHVlIjoiU0djd0Vjc3JRZzNuWUgyUWlRSStiUURcL2RPWFpxdjBjdXRrdVRjZ1hzdDZpTGNzZWtKNXpVTTJlXC9Fbms3ZWpqIiwibWFjIjoiMmI0NmJiZWYyOGViOGI5ZDVhY2EwMjI4NjAwODYwMzg1ZGZlODY0NjExNzIzMjczMGRiMjdjNDIyMTdiNzQ1MCJ9`
+
 ### 请求方式
 
 * GET：从服务器上获取指定的 URL 资源，只应当用于取回数据，查询字符串（名称/值对）是在请求 URL 中发送
@@ -577,7 +578,25 @@ curl "http://127.0.0.1:8889/" -vv
             * 支持错误重传机制
             * 支持拥塞控制，能够在网络拥堵的情况下延迟发送
             * 能够提供错误校验和，甄别有害的数据包
-        + TCP头部：20个字节的固定首部
+            * TCP头部：20个字节的固定首部
+            * 编程步骤
+                - 服务器端： 
+                    + 创建一个socket，用函数socket()； 
+                    + 设置socket属性，用函数setsockopt(); *可选*
+                    + 绑定IP地址、端口等信息到socket上，用函数bind(); 
+                    + 开启监听，用函数listen()； 
+                    + 接收客户端上来的连接，用函数accept()； 
+                    + 收发数据，用函数send()和recv()，或者read()和write(); 
+                    + 通过函数断开连接； 
+                    + 关闭监听； 
+                + 客户端： 
+                    + 创建一个socket，用函数socket()； 
+                    + 设置socket属性，用函数setsockopt();* 可选 
+                    + 绑定IP地址、端口等信息到socket上，用函数bind();* 可选 
+                    + 设置要连接的对方的IP地址和端口等属性； 
+                    + 连接服务器，用函数connect()； 
+                    + 收发数据，用函数send()和recv()，或者read()和write(); 
+                    + 关闭网络连接；
             * 源端口和目的端口字段—— socket（IP+端口号）。TCP的包是没有IP地址的，那是IP层上的事。但是有源端口和目标端口
                 - 本地端口由16位组成,因此本地端口的最多数量为 2^16 = 65535个。 远端端口由16位组成,因此远端端口的最多数量为 2^16 = 65535个
                 - 本地的最大HTTP连接数为： 本地最大端口数65535 * 本地ip数1 = 65535 个。远端的最大HTTP连接数为：远端最大端口数65535 * 远端(客户端)ip数+∞ = 无限制
@@ -637,6 +656,20 @@ curl "http://127.0.0.1:8889/" -vv
         + TCP支持的应用协议主要有：HTTP、HTTPS、FTP等传输文件的协议，POP、SMTP等邮件传输的协议。 TELENT：远程终端接入 WebRTC
         + TCP的协议栈中维护着两个队列。一个是半连接队列(服务端收到请求未收到客户收到响应)，一个是全链接队列(服务端收到请求且收到客户收到响应)
     - UDP（User Data Protocol，用户数据报协议）
+        + 编程步骤
+            * 服务器端： 
+                - 创建一个socket，用函数socket() 
+                - 设置socket属性，用函数setsockopt(),可选 
+                - 绑定IP地址、端口等信息到socket上，用函数bind() 
+                - 循环接收数据，用函数recvfrom() 
+                - 关闭网络连接 
+            * 客户端： 
+                - 创建一个socket，用函数socket() 
+                - 设置socket属性，用函数setsockopt() 可选 
+                - 绑定IP地址、端口等信息到socket上，用函数bind() 可选 
+                - 设置对方的IP地址和端口等属性
+                - 发送数据，用函数sendto()
+                - 关闭网络连接
         + 特点
             * 面向非连接的协议，不可靠的传输层协议
             * 提供了有限的差错检验功能
@@ -748,7 +781,7 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
 
 ## DNS（Domain Name System 域名系统）
 
-因特网上作为域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过主机名，最终得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）。DNS协议运行在UDP协议之上，使用端口号53。
+因特网上作为域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过主机名，最终得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）。DNS协议运行在UDP协议之上，使用端口号53
 
 * 由分层的 DNS 服务器实现的分布式数据库。运行在 UDP 上，使用 53 端口
 * 互联网上几乎一切活动都以 DNS 请求开始。DNS 是 Internet 的目录,您的 ISP (Internet Service Provider) 以及在 Internet 上进行监听的其他任何人，都能够看到访问的站点以及您使用的每个应用.一些 DNS 提供商会出售个人 Internet 活动相关数据，或是利用这些数据向您发送有针对性的广告
@@ -781,9 +814,9 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
     - [NextDNS](https://nextdns.io/):Block ads, trackers and malicious websites on all your devices. Get in-depth analytics about your Internet traffic. Protect your privacy and bypass censorship. Shield your kids from adult content.
 * DNS缓存污染，不是指域名被墙。墙，域名仍能被解析到正确的IP地址，只是客户端（指用户浏览器/服务请求端）不能与网站服务器握手，或通过技术阻断或干扰的方式阻止握手成功，以至达到超时、屏蔽、连接重置、服务中断的现象
         + [检测](https://www.checkgfw.com/)
-* `/etc/resolv.conf`
 
 ```
+## `/etc/resolv.conf`
 ns3.dnsowl.com # name silo default name server
 ns3.dnsowl.com
 ns3.dnsowl.com
@@ -951,44 +984,10 @@ ifconfig /flushdns # 刷新DNS
 ## HTTP控制常见特性
 
 * 缓存：文档如何缓存能通过HTTP来控制。服务端能告诉代理和客户端哪些文档需要被缓存，缓存多久，而客户端也能够命令中间的缓存代理来忽略存储的文档。
-* 开放同源限制：为了防止网络窥听和其它隐私泄漏，浏览器强制对Web网站做了分割限制。只有来自于相同来源的网页才能够获取网站的全部信息。这样的限制有时反而成了负担，HTTP可以通过修改头部来开放这样的限制，因此Web文档可以是由不同域下的信息拼接成的（某些情况下，这样做还有安全因素考虑）。
+* 开放同源限制：为了防止网络窥听和其它隐私泄漏，浏览器强制对Web网站做了分割限制。只有来自于相同来源的网页才能够获取网站的全部信息。这样的限制有时反而成了负担，HTTP可以通过修改头部来开放这样的限制，因此Web文档可以是由不同域下的信息拼接成的（某些情况下，这样做还有安全因素考虑）
 * 认证：一些页面能够被保护起来，仅让特定的用户进行访问。基本的认证功能可以直接通过HTTP提供，使用Authenticate相似的头部即可，或用HTTP Cookies来设置指定的会话。
 * 代理和隧道：通常情况下，服务器和/或客户端是处于内网的，对外网隐藏真实 IP 地址。因此 HTTP 请求就要通过代理越过这个网络屏障。但并非所有的代理都是 HTTP 代理。例如，SOCKS协议的代理就运作在更底层，一些像 FTP 这样的协议也能够被它们处理。
 * 会话：使用HTTP Cookies允许你用一个服务端的状态发起请求，这就创建了会话。虽然基本的HTTP是无状态协议。这很有用，不仅是因为这能应用到像购物车这样的电商业务上，更是因为这使得任何网站都能轻松为用户定制展示内容了。
-
-
-* TCP编程步骤
-    - 服务器端： 
-        + 创建一个socket，用函数socket()； 
-        + 设置socket属性，用函数setsockopt(); *可选*
-        + 绑定IP地址、端口等信息到socket上，用函数bind(); 
-        + 开启监听，用函数listen()； 
-        + 接收客户端上来的连接，用函数accept()； 
-        + 收发数据，用函数send()和recv()，或者read()和write(); 
-        + 通过函数断开连接； 
-        + 关闭监听； 
-    + 客户端： 
-        + 创建一个socket，用函数socket()； 
-        + 设置socket属性，用函数setsockopt();* 可选 
-        + 绑定IP地址、端口等信息到socket上，用函数bind();* 可选 
-        + 设置要连接的对方的IP地址和端口等属性； 
-        + 连接服务器，用函数connect()； 
-        + 收发数据，用函数send()和recv()，或者read()和write(); 
-        + 关闭网络连接；
-* UDP编程步骤
-    - 服务器端： 
-        + 创建一个socket，用函数socket() 
-        + 设置socket属性，用函数setsockopt(),可选 
-        + 绑定IP地址、端口等信息到socket上，用函数bind() 
-        + 循环接收数据，用函数recvfrom() 
-        + 关闭网络连接 
-    - 客户端： 
-        + 创建一个socket，用函数socket() 
-        + 设置socket属性，用函数setsockopt() 可选 
-        + 绑定IP地址、端口等信息到socket上，用函数bind() 可选 
-        + 设置对方的IP地址和端口等属性
-        + 发送数据，用函数sendto()
-        + 关闭网络连接
 
 ### 状态码 Status Code
 
@@ -1116,19 +1115,40 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 
 ## HTTPS（HyperText Transfer Protocol over Secure Socket Layer）
 
-* HTTP下加入SSL(Secure Sockets Layer 安全套接层)，因此加密的详细内容就需要SSL
+* HTTP缺点
+    - 通信使用明文，内容可能会被窃听：HTTP 协议本身不具备加密功能，所以无法对通信整体（请求和响应的内容）进行加密，即 HTTP 报文使用明文方式发送。按照 TCP/IP 协议族的工作机制，通信内容在所有线路上都有可能被窃听。
+    - 不验证通信方的身份，因此有可能遭遇伪装：HTTP 协议中的请求和响应不会对通信方进行确认，所以任何人都可以发起请求，另外，服务器只要接收到请求，不管对方是谁都会返回一个响应，即使是伪装的客户端。另外，即使是无意义的请求也会处理，无法阻止海量请求下的 DoS 攻击。
+    - 无法证明报文的完整性，所以有可能已遭篡改：没有任何办法确认发出的请求/响应和接收到的请求/响应是前后相同的，请求或响应在传输途中，遭攻击者拦截并篡改内容的攻击称为中间人攻击（Main-in-the-Middle attack，MITM）
+* HTTP下加入SSL(Secure Sockets Layer 安全套接层),将 HTTP 通信接口部分用 SSL 协议代替,身披 SSL 协议外壳的 HTTP 而已.SSL 会建立一个安全的通信线路，在此线路上传输的内容都会经过加密处理，此外 SSL 还通过证书的方式来确认通信双方的身份，这样就可以从源头上杜绝了通信方被伪装以及信息被窃听和篡改的可能性，从而确保 HTTP 通信的安全
 * HTTPS = HTTP 协议(进行通信) + SSL/TLS 协议（加密数据包），增加的 S 代表 Secure
     - SSL（Secure Sockets Layer 安全套接字层）:一项标准技术，用于在客户端与服务器之间进行加密通信，可确保互联网连接安全，防止网络犯罪分子读取和修改任何传输信息，包括个人资料。使用40 位关键字作为RC4流加密算法
-    - TSL（Transport Layer Security 传输层安全）:是 SSL 的继承协议，它建立在 SSL 3.0 协议规范之上，是更为安全的升级版 SSL
-* TLS 握手
-    - 启动和使用 TLS 加密的通信会话的过程。在 TLS 握手期间，Internet 中的通信双方会彼此交换信息，验证密码套件，交换会话密钥
-    - 会根据所使用的密钥交换算法的类型和双方支持的密码套件而不同
-    - ClientHello：客户端通过向服务器发送 hello 消息来发起握手过程。这个消息中会夹带着客户端支持的 TLS 版本号(TLS1.0 、TLS1.2、TLS1.3) 、客户端支持的密码套件、以及一串 客户端随机数。
-    - ServerHello：在客户端发送 hello 消息后，服务器会发送一条消息，这条消息包含了服务器的 SSL 证书、服务器选择的密码套件和服务器生成的随机数。
-    - 认证(Authentication)：客户端的证书颁发机构会认证 SSL 证书，然后发送 Certificate 报文，报文中包含公开密钥证书。最后服务器发送 ServerHelloDone 作为 hello 请求的响应。第一部分握手阶段结束。
+    - TSL（Transport Layer Security 传输层安全）:是 SSL 的继承协议，建立在 SSL 3.0 协议规范之上，是更为安全的升级版 SSL
+    - 采用 SSL 后，HTTP 就拥有了 HTTPS 的加密、证书和完整性保护等功能
+    - 其它运行在应用层的 SMTP 和 Telnet 等协议均可配合 SSL 协议使用
+* 数字证书
+    - 通过 OpenSSL 提供的命令就可以生成私钥和公钥，但是需要权威机构颁发证书（Certificate）才能被承认，否则无法判断通信中传递的公钥是否是目标服务器返回的
+    - 生成证书需要发起一个证书请求，然后将这个请求发给一个权威机构（客户端和服务端都信任的第三方结构）去认证，这个权威机构称之为 CA（Certificate Authority）。权威机构会给证书敲一个章，也就是所谓的签名算法
+    - 签名算法大概是这样工作的：一般是对信息做一个 Hash 计算，得到一个 Hash 值，这个过程是不可逆的，也就是说无法通过 Hash 值得出原来的信息内容。在把信息发送出去时，把这个 Hash 值通过 CA 的私钥加密后，作为一个签名和信息一起发出去
+    - CA 用自己的私钥给网站的公钥签名，就相当于给网站背书，形成了网站的证书
+    - CA 的公钥需要更牛的 CA 给它签名，形成 CA 的证书，要想看 CA 的证书是否可靠，要看 CA 的上级证书的公钥，能不能解开这个 CA 的签名。这样层层上去，直到全球皆知的几个著名大 CA，称为 root CA，做最后的背书。通过这种层层授信背书的方式，从而保证了非对称加密模式的正常运转
+    - 服务器会将这份 CA 颁发的公钥证书（也可以叫做数字证书）发送给客户端，以进行非对称加密方式通信
+    - 接到证书的客户端可使用 CA 提供的公钥，对那张证书上的数字签名进行验证，一旦验证通过，客户端便可明确两件事：
+        + 认证服务器公钥的是真实有效的数字证书认证机构
+        + 服务器的公钥是值得信赖的
+* HTTPS 综合运用了这两种加密方式的优势:使用非对称加密传输对称加密需要用到的密钥，而真正的双方大数据量的通信都是通过对称加密进行的，结合数字证书（包含公钥信息）验证服务端公钥的真实性
+    - 启动和使用 TLS 加密的通信会话的过程。在 TLS 握手期间，Internet 中的通信双方会彼此交换信息，验证密码套件，交换会话密钥,会根据所使用的密钥交换算法的类型和双方支持的密码套件而不同
+    - ClientHello：客户端通过向服务器发送 hello 消息开始建立与服务器的 SSL 通信。报文中包含了 客户端支持的 TLS 版本号(TLS1.0 、TLS1.2、TLS1.3) 、客户端支持的密码套件、加密组件、压缩算法等信息，另外，还有一个随机数，用于后续对称加密密钥的协商
+    - ServerHello：服务器可以进行 SSL 通信时，会以 Server Hello 报文作为应答，含 SSL 协议版本、加密组件、压缩算法等信息，同时还有一个随机数，用于后续对称加密密钥的协商
+    - 服务器会以 Certificate 报文的形式给客户端发送服务端的数字证书，其中包含了非对称加密用到的公钥信息。最后，服务器还会发送 Server Hello Done 报文告知客户端，最初阶段的 SSL 握手协商部分结束
+    - 认证(Authentication)：客户端的证书颁发机构会认证 SSL 证书，然后发送 Certificate 报文，报文中包含公开密钥证书。最后服务器发送 ServerHelloDone 作为 hello 请求的响应。第一部分握手阶段结束
+    - 客户端从自己信任的 CA 仓库中，拿 CA 证书里面的公钥去解密 HTTPS 网站的数字证书（证书是通过 CA 私钥加密的，所以要用公钥解密），如果能够成功，则说明 HTTPS 网站是可信的
+    - 证书验证完毕之后，觉得这个 HTTPS 网站可信，于是客户端计算产生随机数字 Pre-master，用服务器返回的数字证书中的公钥加密该随机数字，再通过 Client Key Exchange 报文发送给服务器，服务器可以通过对应的私钥解密出 Pre-master。到目前为止，无论是客户端还是服务器，都有了三个随机数，分别是：自己的、对端的，以及刚生成的 Pre-Master 随机数。通过这三个随机数，可以在客户端和服务器生成相同的对称加密密钥
+    - 有了对称加密密钥，客户端就可以通过 Change Cipher Spec 报文告知服务器以后都采用该密钥和协商的加密算法进行加密通信了
+    - 客户端还会发送一个 Encrypted Handshake Message 报文，将已经商定好的参数，采用对称加密密钥进行加密，发送给服务器用于数据与握手验证
+    - 服务器也可以发送 Change Cipher Spec 报文，告知客户端以后都采用协商的对称加密密钥和加密算法进行加密通信了，并且也发送 Encrypted Handshake Message 报文进行测试。当双方握手结束之后，就可以通过对称加密密钥进行加密传输了
     - 加密阶段：在第一个阶段握手完成后，客户端会发送 ClientKeyExchange 作为响应，响应中包含了一种称为 The premaster secret 的密钥字符串，这个字符串就是使用上面公开密钥证书进行加密的字符串。随后客户端会发送 ChangeCipherSpec，告诉服务端使用私钥解密这个 premaster secret 的字符串，然后客户端发送 Finished 告诉服务端自己发送完成了
-    - Session key 其实就是用公钥证书加密的公钥。
-    - 实现了安全的非对称加密：然后，服务器再发送 ChangeCipherSpec 和 Finished 告诉客户端解密完成，至此实现了 RSA 的非对称加密。
+    - Session key 其实就是用公钥证书加密的公钥
+    - 实现了安全的非对称加密：然后，服务器再发送 ChangeCipherSpec 和 Finished 告诉客户端解密完成，至此实现了 RSA 的非对称加密
 * 作用
     - 内容加密：建立一个信息安全通道，来保证数据传输的安全
         + HTTPS 采用共享密钥加密和公开密钥加密两者并用的混合加密机制
@@ -1201,6 +1221,15 @@ sudo certbot --apache -d packagist.domain.com
 acme.sh --issue -d thinkphp.com -w /home/henry/Workspace/thinkphp/public
 acme.sh --issue --debug -d thinkphp.com -d henry.thinkphp.com -w /home/henry/Workspace/thinkphp/public
 ```
+
+## 认证
+
+* 基本认证:返回 401 Unauthorized 响应,会在请求头中设置 Authorization 字段，字段值是认证方式和认证凭证：｀Authorization: Basic eWFvamluYnVAMTYzLmNvbTp0ZXN0MTIzNDU2`
+    - 凭证信息是用户名和密码通过冒号拼接起来，然后通过 Base64 进行编码，可以通过 Base64 解码即可还原，所以基本等同于明文传输
+* 摘要（Digest）认证
+* SSL 客户端认证：借助 HTTPS 的客户端证书完成认证的方式，就像 HTTPS 的服务端证书可以确保服务器的合法性一样，HTTPS 的客户端证书可以确保登录设备是经过认证的合法设备
+    - 需要先将客户端证书颁发给客户端，且客户端必须安装此证书才能进行认证，客户端认证虽然安全，但操作更加繁琐，一般用于对安全性要求比较高的系统认证
+* 表单认证：客户端通过表单向服务器上的 Web 应用程序发送登录凭证（Credential），服务端按登录凭证的验证结果对用户进行认证
 
 ## 存储
 
@@ -1331,16 +1360,21 @@ $un_data = unserialize_php($data);
 * 浏览器客户端在同一时间，针对同一域名下的请求有一定数量限制。超过限制数目的请求会被阻塞 通常一次只能有 6 个连接。例如，如果其中一个请求由于服务器上的某些复杂逻辑而卡住，那么它们中的每一个都可以一次处理一个请求，整个连接就会冻结并等待响应。这个问题称为前端阻塞
     - 为何一些站点会有多个静态资源 CDN 域名的原因
 * 缺点
+    - 一条连接同时只能发送一个请求
+    - 请求只能从客户端发起
+    - 请求/响应首部未经压缩就直接发送，首部信息越多延迟越大
+
     - 明文传输
     - 没有解决无状态连接的
     - 当有多个请求同时被挂起的时候 就会拥塞请求通道，导致后面请求无法发送
-    - 臃肿的消息首部:HTTP/1.1能压缩请求内容,但是消息首部不能压缩;在现今请求中,消息首部占请求绝大部分(甚至是全部)也较为常见
+    - 臃肿的消息首部:HTTP/1.1能压缩请求内容,但是消息首部不能压缩;在现今请求中,消息首部占请求绝大部分(甚至是全部)也较为常见,造成通信的浪费
 
 ## HTTP /2
 
 * 2015 年开发出来的标准 基于Google的SPDY,从2012年诞生到2016停止维护
-* 头部压缩（Header Compression），由于 HTTP 1.1 经常会出现 User-Agent、Cookie、Accept、Server、Range 等字段可能会占用几百甚至几千字节，而 Body 却经常只有几十字节，所以导致头部偏重。HTTP 2.0 使用 HPACK 算法进行压缩
-  - 在客户端和服务器端使用“首部表”来跟踪和存储之前发送的键-值对，对于相同的数据，不再通过每次请求和响应发送
+* 头部压缩（Header Compression）:由于 HTTP 1.1 经常会出现 User-Agent、Cookie、Accept、Server、Range 等字段可能会占用几百甚至几千字节，而 Body 却经常只有几十字节，所以导致头部偏重。HTTP 2.0 使用 HPACK 算法进行压缩
+    - 头信息（键值对）在两端建立一个索引表，对相同的头只发送索引表中的索引
+    - 在客户端和服务器端使用“首部表”来跟踪和存储之前发送的键-值对，对于相同的数据，不再通过每次请求和响应发送
     - 通信期间几乎不会改变的通用键-值对(用户代理、可接受的媒体类型,等等)只需发送一次
     - 如果请求中不包含首部(例如对同一资源的轮询请求),那么 首部开销就是零字节。此时所有首部都自动使用之前请求发送的首部。
     - 如果首部发生变化了，那么只需要发送变化了数据在Headers帧里面，新增或修改的首部帧会被追加到“首部表”。首部表在 HTTP 2.0 的连接存续期内始终存在,由客户端和服务器共同渐进地更新 。数据被称为帧（Frames）
@@ -1352,13 +1386,16 @@ $un_data = unserialize_php($data);
     - 在 应用层(HTTP/2)和传输层(TCP or UDP)之间增加一个二进制分帧层
         + 会将所有传输的信息分割为更小的消息和帧，然后采用二进制的格式进行编码
 * 强化安全，由于安全已经成为重中之重，所以 HTTP2.0 一般都跑在 HTTPS 上
-* 多路复用 (Multiplexing)，即每一个请求都是是用作连接共享。一个请求对应一个id，这样一个连接上可以有多个请求
+* 多路复用 (Multiplexing):即每一个请求都是是用作连接共享。一个请求对应一个id，这样一个连接上可以有多个请求
     - 同时通过单一的 HTTP/2 连接发起多重的请求-响应消息
     - HTTP/1.x 虽然通过 pipeline 也能并发请求，但是多个请求之间的响应会被阻塞的，所以 pipeline 至今也没有被普及应用，而 HTTP/2 做到了真正的并发请求
     - 把数据流分解为多个帧，多个数据流的帧混合之后以同一个TCP连接来发送
     - 流还支持优先级和流量控制。当流并发时，就会涉及到流的优先级和依赖。即：HTTP2.0对于同一域名下所有请求都是基于流的，不管对于同一域名访问多少文件，优先级高的流会被优先发送。图片请求的优先级要低于 CSS 和 SCRIPT，这个设计可以确保重要的东西可以被优先加载完
 * 全双工通信
 * 必须https：HTTP+ 加密 + 认证 + 完整性保护
+* 将一个 TCP 连接切分成多个流，每个流都有自己的 ID，而且流可以是客户端发往服务端，也可以是服务端发往客户端，为了解决并发请求导致响应慢的问题，还可以为流设置优先级
+* 将所有的传输信息分割为更小的消息和帧，并对它们采用二进制格式编码，常见的帧有 Header 帧，用于传输 HTTP 头信息，并且会开启一个新的流；再就是 Data 帧，用来传输 HTTP 报文实体，多个 Data 帧属于同一个流
+* 通过这两种机制，HTTP/2.0 的客户端可以将多个请求分到不同的流中，以实现在一个 TCP 连接上处理所有请求，然后将请求内容拆分成帧，进行二进制传输，这些帧可以打散乱序发送，然后根据每个帧首部的流标识符重新组装，并且可以根据优先级，决定优先处理哪个流的数据。成功消除了 HTTP/1.1 的性能瓶颈和限制，减少了 TCP 连接数对服务器性能的影响，同时可以将页面的多个 css、js、 图片等资源通过一个数据链接进行传输，能够加快页面组件的传输速度
 * 流量控制算法优化
     - TCP协议通过sliding window的算法来做流量控制。发送方有个sending window，接收方有receive window
     - http2.0的flow control是类似receive window的做法，数据的接收方通过告知对方自己的flow window大小表明自己还能接收多少数据。只有Data类型的frame才有flow control的功能
