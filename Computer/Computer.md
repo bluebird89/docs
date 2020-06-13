@@ -124,6 +124,7 @@ total = *p + 200;
 ## 项目
 
 * [ gto76 / comp-m2 ](https://github.com/gto76/comp-m2):Comp Mark II – Simple 4-bit virtual computer
+* [Chip-8 Technical Reference v1.0](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM)
 
 ## 课程
 
