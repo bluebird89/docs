@@ -813,6 +813,7 @@ brew switch icu4c 62.1
 
 * [basecamp/pow](https://github.com/basecamp/pow):Zero-configuration Rack server for Mac OS X http://pow.cx/v
 * macOS Server拥有众多强大工具可以让整个团队更高效地分享信息，分工合理第一合作
+* [ sickcodes / Docker-OSX ](https://github.com/sickcodes/Docker-OSX):Mac in Docker! Run near native OSX-KVM in Docker! X11 Forwarding!
 
 ## 参考
 

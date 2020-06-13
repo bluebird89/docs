@@ -57,7 +57,8 @@ gcc name.o adder.o hello.c
 * 《C和指针》
 * 《C专家编程》
 * 《debuging with gdb》（中文版）
-* 陈皓先生的《跟我一起写makefile》
+* 陈皓 《跟我一起写makefile》
+* [C Internals](http://www.avabodh.com/cin/cin.html)
 
 ## 工具
 

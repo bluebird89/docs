@@ -525,6 +525,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 ## 图书
 
 * 《 Vim实用技巧 Pratical Vim》
+* [Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/)
 
 ## 插件
 

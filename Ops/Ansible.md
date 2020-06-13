@@ -520,6 +520,10 @@ ansible-vault view foo.yml # 查看
 ansible-galaxy init my-role  # 创建一个role
 ```
 
+## 工具
+
+* [ansistrano / deploy](https://github.com/ansistrano/deploy#installation):Ansible role to deploy scripting applications like PHP, Python, Ruby, etc. in a capistrano style https://ansistrano.com
+
 ## 参考
 
 * [文档](http://docs.ansible.com/ansible/latest/)
