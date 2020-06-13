@@ -96,3 +96,14 @@
 * 逻辑推理
     - [牛津大学公开课：批判性推理入门](https://www.bilibili.com/video/av2576527/)
 
+## Data Scientist
+
+* [Introduction to Computer Science and Programming Using Python](https://www.edx.org/course/introduction-to-computer-science-and-programming-7)
+* [Introduction to Computational Thinking and Data Science](https://www.edx.org/course/introduction-to-computational-thinking-and-data-4)
+* [The Analytics Edge](https://www.edx.org/course/the-analytics-edge)
+* [Machine Learning](https://www.coursera.org/learn/machine-learning)
+* [Learning From Data](https://www.edx.org/course/learning-from-data-introductory-machine-learning)
+* [Deep Learning Specialization](https://www.coursera.org/specializations/deep-learning)
+* [Introduction to Deep Learning](https://www.coursera.org/learn/intro-to-deep-learning)
+* [How to Win a Data Science Competition: Learn from Top Kagglers](How to Win a Data Science Competition: Learn from Top Kagglers)
+* [AI for Medicine Specialization](https://www.coursera.org/specializations/ai-for-medicine)

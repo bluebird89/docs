@@ -90,6 +90,7 @@ http://xyz.amazonaws.com/hello-world
 * [serverless/serverless](https://github.com/serverless/serverless):Serverless Framework – Build web, mobile and IoT applications with serverless architectures using AWS Lambda, Azure Functions, Google CloudFunctions & more! – https://serverless.com
 * provider
     - AWS, Microsoft Azure, Google Cloud, IBM Cloud,
+* [Cloudflare Workers](https://workers.cloudflare.com/)
 
 ## 参考
 

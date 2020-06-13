@@ -290,6 +290,10 @@ code --disable-extensions . # disable all extensions
 }
 ```
 
+## [Set Up Remote Development Workflow With VS Code in Your Browser](https://hackernoon.com/how-you-can-set-up-remote-development-workflow-with-vs-code-in-your-browser-3y3q3wu9)
+
+* [ cdr / code-server ](https://github.com/cdr/code-server):VS Code in the browser https://coder.com
+
 ## 扩展
 
 *   [VSCodium/vscodium](https://github.com/VSCodium/vscodium):binary releases of VS Code without MS branding/telemetry/licensing

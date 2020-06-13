@@ -63,6 +63,8 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 * 《C++ 标准程序库》
 * 《STL源码剖析》
 * 《深度探索C++对象模型》
+* Modern C++ Tutorial
+    - [changkun / modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial)
 
 ## 工具
 
