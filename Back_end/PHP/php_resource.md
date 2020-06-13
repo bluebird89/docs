@@ -87,6 +87,7 @@
 * Wiki
     - [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki)
     - [dokuwiki](https://www.dokuwiki.org/)
+    - [BookStack](https://www.bookstackapp.com/):a simple, self-hosted, easy-to-use platform for organising and storing information
 * 框架组件
     - [CakePHP Plugins](https://plugins.cakephp.org/): CakePHP插件的目录
     - [Hoa Project](https://hoa-project.net/En/): 另一个PHP组件包

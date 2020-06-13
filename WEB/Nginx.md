@@ -26,7 +26,8 @@
 
 ## 版本
 
-* Nginx 从 1.7.11 开始实现了线程池机制，大部分场景中可以避免使用阻塞，整体性能有了数倍提升。https://www.nginx.com/blog/thread-pools-boost-performance-9x/
+*  1.7.11
+    - [多线程特性（multi-threading）](https://www.nginx.com/blog/thread-pools-boost-performance-9x/)开始实现了线程池机制，大部分场景中可以避免使用阻塞，整体性能有了数倍提升.仅用在aio模型中对本地文件的操作上，出发点就是以非阻塞模式，来提高文件IO的效率和并发能力
 * NGINX Plus 由 Web 服务器、内容缓存和负载均衡器组成。流行的开源 NGINX Web 服务器的商业版本。NGINX Web 应用程序防火墙（WAF）是一款基于开源 ModSecurity 研发的商业软件，为针对七层的攻击提供保护，例如 SQL 注入或跨站脚本攻击，并根据如 IP 地址或者报头之类的规则阻止或放行， NGNX WAF 作为 NGINX Plus 的动态模块运行，部署在网络的边缘，以保护内部的 Web 服务和应用程序免受 DDoS 攻击和骇客入侵。
     - NGINX Unit 是 Igor Sysoev 设计的新型开源应用服务器，由核心 NGINX 软件开发团队实施。可运行 PHP、Python 和 Go 的新型开源应用服务器。Unit 是"完全动态的"，并允许以蓝绿部署的方式无缝重启新版本的应用程序，而无需重启任何进程。所有的 Unit 配置都通过使用 JSON 配置语法的内置 REST API 进行处理，并没有配置文件。目前 Unit 可运行由最近版本的 PHP、Python 和 Go 编写的代码。在同一台服务器上可以支持多语言的不同版本混合运行。即将推出更多语言的支持，包括 Java 和 Node.JS。
     - NGINX Controller 是 NGINX Plus 的中央集中式监控和管理平台。Controller 充当控制面板，并允许用户通过使用图形用户界面"在单一位置管理数百个 NGINX Plus 服务器"。该界面可以创建 NGINX Plus 服务器的新实例，并实现负载平衡、 URL 路由和 SSL 终端的中央集中配置。Controller 还具备监控功能，可观察应用程序的健壮性和性能。
@@ -128,6 +129,11 @@
     - 日志与服务器文件 /usr/local/var/log/nginx/
     - Severs config:/usr/local/etc/nginx/servers/
     - Docroot is: /usr/local/Cellar/nginx/1.12.2_1/html /usr/local/var/www, 软件更新后版本号会发生变化，默认也会失效
+* 组成
+    - nginx 二进制可执行文件
+    - nginx.conf 配置文件
+    - accedd.log 访问日志
+    - error.log 错误日志
 
 ```sh
 brew info nginx
@@ -287,12 +293,37 @@ sudo kill -s WINCH `cat /run/nginx.pid.oldbin`
 sudo kill -s QUIT `cat /run/nginx.pid.oldbin` # Follow it by killing the old master process.
 ```
 
-## 组成
+## 本地文件操作
 
-* nginx 二进制可执行文件
-* nginx.conf 配置文件
-* accedd.log 访问日志
-* error.log 错误日志
+* sendfile:也叫零拷贝，提高本地文件通过socket发送的效率
+    - 从本地读取一个文件并通过socket发送出去步骤
+        + 根据CPU的调度，从磁盘读取一定长度（chunk）的字节数据 copy到内核内存中
+        + 将内核内存中的数据copy到进程工作区内存
+        + 进程通过socket将数据copy到网络驱动器缓存， 并通过相应的传输协议发送出去
+    - sendfile是linux系统级的调用，socket可以通过DMA（直接内存访问）方式直接访问文件数据，并通过传输协议发送，减少了2次数据copy（磁盘到内核，内核到工作区）
+    - `sendfile_max_chunk`参数用于限定每次sendfile()调用发送的最大数据尺寸，如果不限制大小的话，将会独占整个worker进程，默认为“无限制”
+    - 对于nginx而言，代理静态本地的静态文件资源（通常是小文件）将是非常高效的，建议对一些静态文件比如html、图片等，开启此参数
+* aio:异步文件IO，nginx默认关闭此特性，它需要在高版本的linux平台上才支持（2.6.22+）
+    - 在linux上，directio只能读取基于512字节边界对齐的blocks，文件结束的那些未对齐的block将使用阻塞模式读取
+    - 如果文件在开头没有对齐，整个文件都将阻塞式读取。这里所谓的对齐，就是文件数据在内存页中的cache情况
+    - 当aio和sendfile都开启时，将会对那些size大于directio设定值的文件使用aio机制：即当小于directio设定值的文件将直接使用sendfile（aio不参与）
+    - 使用多线程异步模式读取较大的文件，以提高IO效率，但是事实上可能并没有任何提高。因为大文件的读取，并不能使用cache、而且本身也是耗时的，即使是多线程，对于request的等待时间也是无法预估的，特别是并发请求较高的时候。但是aio能够提高IO的并发能力，这个是确定的
+    - 默认情况下，多线程模式是关闭的，我们需要通过--with-threads配置来开启，此特性尽在支持epoll、kqueue的平台上兼容。对于线程池的设置，我们可以通过thread_pool来声明，并在aio指令中指定
+* directio:用于开启对O_DIRECT标记（BSD，linux）的使用，对应directio()这个系统调用
+    - 针对大文件而设定的,通过directio可以指定限定的尺寸大小，对于超过此size的文件，将会使用directio（而不再使用sendfile）
+    - 根据directio的设计初衷，它具备sendfile的基本原理，只是不使用内核cache，而是直接使用DMA，而且使用之后内存cache（页对齐部分）也将被释放
+    - 常适用于大文件读取，而且通常读取频率很低。因为对于高频的读取，它并不能提高效率（因为它不会重用cache，而是每次都DMA）。由于存在性能权衡问题，此参数默认为off
+
+```
+thread_pool default_pool threads=16;##main上下文
+
+location /video {
+    sendfile on;
+    sendfile_max_chunk 128k;
+    directio 8m;
+    aio threads=default_pool;
+}
+```
 
 ### 配置
 

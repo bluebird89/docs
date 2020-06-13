@@ -2779,6 +2779,7 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
 
 * 《JavaScript高级程序设计》（第3版）
 * 《JavaScript权威指南》
+* JavaScript 语言精髓与编程实践
 * [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter
 
 ## 资源
@@ -3096,7 +3097,6 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
 * Test
   - [jasmine / jasmine ](https://github.com/jasmine/jasmine):
 Simple JavaScript testing framework for browsers and node.js http://jasmine.github.io/
-
 
 ## 教程
 

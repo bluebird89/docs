@@ -2458,3 +2458,4 @@ pecl channel-update pecl.php.net
 
 * [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
 * [tpunt/PHP7-Reference](tpunt/PHP7-Reference):An overview of the features, changes, and backward compatibility breakages in PHP 7
+* [PHP 25周年纪事](https://www.jetbrains.com/lp/php-25/)
