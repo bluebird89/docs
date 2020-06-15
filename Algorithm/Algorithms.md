@@ -266,7 +266,7 @@ class Solution {
 * [apachecn/awesome-algorithm](https://github.com/apachecn/awesome-algorithm):Leetcode 题解 (跟随思路一步一步撸出代码) 及经典算法实现
 * [ChrisKnott/Algojammer](https://github.com/ChrisKnott/Algojammer):An experimental code editor for writing algorithms
 * [algorithm-visualizer/algorithm-visualizer](https://github.com/algorithm-visualizer/algorithm-visualizer):🎆Interactive Online Platform that Visualizes Algorithms from Code https://algorithm-visualizer.org/
-* [](https://visualgo.net/en):可视化
+* [VisuAlgo](https://visualgo.net/en):visualising data structures and algorithms through animation
 * [algorithm004-01/algorithm004-01](https://github.com/algorithm004-01/algorithm004-01)
 * [leetcode](https://leetcode.com/) [leetcode-cn](https://leetcode-cn.com/)
     - [azl397985856/leetcode](https://github.com/azl397985856/leetcode):LeetCode Solutions: A Record of My Problem Solving Journey

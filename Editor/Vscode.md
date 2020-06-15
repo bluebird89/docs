@@ -207,6 +207,7 @@ sudo apt-get install code
     - ⌃⇧Tab Navigate editor group history
     - ⌃- / ⌃⇧- Go back/forward
     - ⌃⇧M Toggle Tab moves focus
+    - ctrl+b:toggle sidebar
 * Editor management
     - ⌘W Close editor
     - ⌘K F Close folder

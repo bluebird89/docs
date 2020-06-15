@@ -60,6 +60,8 @@ http://www.runoob.com/xpath/xpath-tutorial.html
 * [XuefengHuang/lianjia-scrawler](https://github.com/XuefengHuang/lianjia-scrawler):链家二手房租房在线数据，存量房交易服务平台数据，详细数据分析教程 http://www.ershoufangdata.com
 * [wonderfulsuccess/weixin_crawler](https://github.com/wonderfulsuccess/weixin_crawler):高效微信公众号历史文章和阅读数据爬虫powered by scrapy
 * [ hardikvasa / google-images-download ](https://github.com/hardikvasa/google-images-download):Python Script to download hundreds of images from 'Google Images'. It is a ready-to-run code!
+* [Jack-Cherish / python-spider ](https://github.com/Jack-Cherish/python-spider/tree/master/2020):
+rainbowPython3网络爬虫实战：淘宝、京东、网易云、B站、12306、抖音、笔趣阁、漫画小说下载、音乐电影下载等 https://cuijiahua.com/blog/spider/
 
 ## 工具
 
