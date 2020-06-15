@@ -292,10 +292,15 @@ jupyter-nbextension enable rise --py --sys-prefix
 * pyspark
 * spark-sql magic %%sql
 
-## [jupyterlab](https://jupyterlab.readthedocs.io/en/latest/)
+## [ jupyterlab / jupyterlab ](https://github.com/jupyterlab/jupyterlab)
+
+JupyterLab computational environment. https://jupyterlab.readthedocs.io/
 
 ```sh
 conda install -c conda-forge jupyterlab
+jupyter serverextension enable --py jupyterlab --sys-prefix
+
+jupyter lab
 ```
 
 ## Debugger

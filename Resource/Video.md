@@ -189,3 +189,7 @@ rtmp://localhost/vod/out.mp4
 * 录屏
     - Ocam:录屏软件
     - Quicktime:切分音视频，可以录屏
+
+## 参考
+
+* [leandromoreira / digital_video_introduction ](https://github.com/leandromoreira/digital_video_introduction):A hands-on introduction to video technology: image, video, codec (av1, vp9, h265) and more (ffmpeg encoding).
