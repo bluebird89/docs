@@ -63,6 +63,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - Mac
 * 入门：类似Windows的体验；安装简单；可靠；“类似Linux”，且不自成一派；“恰好管用”；
   - [Linux Mint](https://linuxmint.com/)
+    + [Duter2016 / Guide-for-linuxmint](https://github.com/Duter2016/Guide-for-linuxmint)
   - Debian 10
 * 进阶：完全掌控你的电脑和操作系统；了解Linux内部；精简的优化系统
   - Slackware Linux
@@ -1201,6 +1202,8 @@ halt｜reboot｜poweroff
 * 从二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到/opt，建立软连接/usr/local/bin/
 * [Pkgs](https://pkgs.org/):Packages Search for Linux and Unix
 * AppImage
+* [flatpak](https://www.flatpak.org/):The Future of　Apps On linux
+  - [Flathub](https://flathub.org/home):the home of hundreds of apps which can be easily installed on any Linux distribution
 
 ```sh
 sudo apt-get install cowsay
@@ -3621,6 +3624,7 @@ sed -n &#39;1!G;h;$p&#39; FILE
 * Monitor
   - [Monit](https://mmonit.com/monit/):功能异常强大的进程、文件、设备、系统监控软件，适用于Linux/Unix系统 With all features needed for system monitoring and error recovery. It's like having a watchdog with a toolbox on your server
   - [ aristocratos / bashtop ](https://github.com/aristocratos/bashtop):Linux resource monitor
+  - [Cockpit](https://cockpit-project.org/):The easy-to-use, integrated, glanceable, and open web-based interface for your servers
 * [Linuxbrew/brew](https://github.com/Linuxbrew/brew):🍺🐧 The Homebrew package manager for Linux https://linuxbrew.sh
 * [johnfactotum/foliate](https://github.com/johnfactotum/foliate):A simple and modern GTK eBook reader https://johnfactotum.github.io/foliate/
 * [systemd/systemd](https://github.com/systemd/systemd):systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic.
@@ -3657,3 +3661,4 @@ sed -n &#39;1!G;h;$p&#39; FILE
 
 * [全面理解Linux性能优化](https://mp.weixin.qq.com/s/C7KDLcHUhr7QR2hq_pm4kA)
 * [Borg+Vorta is finally a usable backup solution for Linux desktop](https://simon-frey.com/blog/borgvorta-is-finally-a-usable-backup-solution-for-linux-desktop/)
+* [nevermosby / linux-bpf-learning](https://github.com/nevermosby/linux-bpf-learning):learn how to use BPF/eBPF

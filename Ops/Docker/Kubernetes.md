@@ -39,6 +39,14 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
 
 ## 架构
 
+* 6 层抽象
+    - Deployment:创建和管理 ReplicaSet
+    - ReplicaSet:创建和管理 Pod
+    - Pod:运行于 Node 中，一个 Node 中通常会运行多个 Pod
+    - Node 中有 Container 运行时环境，并运行放置在 Docker 镜像中的应用程序
+    - Node Cluster
+    - Node Processes
+    - Docker Container
 * 一切皆为资源，一切即可描述，一切皆可管理
 * Master节点组件:提供集群的管理控制中心，通常在一台VM/机器上启动所有Master组件，并且不会在此VM/机器上运行用户容器  kubecfg、Minion(Host)以及Proxy
     - 定义了Kubernetes 集群Master/API Server的主要声明  RESTStorage以及Client
@@ -1009,6 +1017,7 @@ source ~/.bash_profile
 ## 图书
 
 * 《[Kubernetes权威指南 : 从Docker到Kubernetes实践全接触（第2版）](https://book.douban.com/subject/26902153/)》
+* Kubernates in action
 
 ## 实例
 

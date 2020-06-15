@@ -326,6 +326,7 @@ sudo apt install -y apt-fast`
   - 社交
     + Franz 是一个即时消息客户端，它将聊天和信息服务结合到了一个应用中。它是一个现代化的即时消息平台，在单个应用中支持了 Facebook Messenger、WhatsApp、Telegram、微信、Google Hangouts、 Skype
     + [Jitsy](https://jitsi.org/):More secure, more flexible, and
+  - Remmina：Remote Desktop Client
 completely free video conferencing
     + Viber：跨平台的 Skype 替代品
     + [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
@@ -551,6 +552,10 @@ sudo apt install gnome-tweak-tool
 
 gsettings set org.gnome.desktop.interface gtk-theme Ant
 gsettings set org.gnome.desktop.wm.preferences theme Ant
+
+
+gsettings set org.gnome.settings-daemon.plugins.orientation active false # 禁止屏幕自动旋转
+gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
 ```
 
 ## 用户管理
@@ -612,6 +617,10 @@ sudo journalctl --vacuum-time=3d
 * Ctrl+Alt+[F1~F6] ，切换到1~6号控制台
 * Ctrl+Alt+F7 可以返回图形界面
 * Ctrl+H 显示隐藏的文件夹
+* Super Key + A:applications Menu
+* Super Key + M|V:Toggle the notification tray
+* CTRL + ALT +DEL:Logging out
+* Alt + F4' |'CTRL + Q':Closing a window
 
 ## 端口与进程管理
 

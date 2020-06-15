@@ -26,30 +26,6 @@ Vue实例实质上就是MVVM模式（Model-View-ViewModel），每个Vue实例�
 * 方法
 * 生命周期回调
 
-```js
-var data = { a: 1 }
-var vm = new Vue({
-    el:'#example',
-    data: data,
-     created: function () {
-        // `this` points to the vm instance
-        console.log('a is: ' + this.a)
-    }
-})
-vm.a === data.a
-vm.$data === data
-vm.$el === document.getElementById('example')
-
-// Vue实例可以通过预定义选项进行扩展，从而创建可复用的组件构造器
-var MyComponent = Vue.extend({
-  // extension options
-})
-
-// all instances of `MyComponent` are created with
-// the pre-defined extension options
-var myComponentInstance = new MyComponent()
-```
-
 ![生命周期](./../../_static/lifecycle.png "Optional title")
 
 ## 语法
@@ -84,20 +60,6 @@ var myComponentInstance = new MyComponent()
 * 定义Model
 * 创建一个Vue实例或"ViewModel"，它用于连接View和Model
 
-### 语法
-
-```html
-<input type="text" v-model="message"/>  //创建双向数据绑定
-<h1 v-if="age >= 25">Age: {{ age }}</h1> //  条件渲染指令，它根据表达式的真假来删除和插入元素
-<h1 v-show="age >= 25">Age: {{ age }}</h1> //  指令的元素始终会被渲染到HTML，它只是简单地为元素设置CSS的style属性。
-用v-else指令为v-if或v-show添加一个“else块”。v-else元素必须立即跟在v-if或v-show元素的后面——否则它不能被识别。
-v-for="item in items" // v-for指令基于一个数组渲染一个列表
-v-bind:argument="expression"  // 指令可以在其名称后面带一个参数，中间放一个冒号隔开，这个参数通常是HTML元素的特性（attribute） 简写为 ：
-<a v-on:click="doSomething">   // v-on指令用于给监听DOM事件，它的用语法和v-bind是类似的，例如监听<a>元素的点击事件   简写为@
-```
-
-数据绑定最常见的形式就是使用 "Mustache" 语法：{{}}
-
 ### 特点
 
 - 数据驱动
@@ -116,10 +78,7 @@ v-bind:argument="expression"  // 指令可以在其名称后面带一个参数�
 
 - package.json中添加"stylus-loader": "^1.4.0"，npm install安装插件
 
-## 渲染
-
-### [服务器端渲染（Server side rendering SSR）](https://github.com/vuejs/vue-ssr-docs)
-
+## [服务器端渲染（Server side rendering SSR）](https://github.com/vuejs/vue-ssr-docs)
 
 ## 组件
 
@@ -253,8 +212,7 @@ dev: {
 * [ vuejs / vue-next ](https://github.com/vuejs/vue-next):Repo for Vue 3.0 (currently in beta)
 * [vuejs/vue-docs-zh-cn](https://github.com/vuejs/vue-docs-zh-cn)
 * [NLRX-WJC/Learn-Vue-Source-Code](https://github.com/NLRX-WJC/Learn-Vue-Source-Code):🔥 🔥逐行剖析Vue.js源码 在线阅读地址https://nlrx-wjc.github.io/Learn-Vue-Source-Code/
-* [官方文档](https://cn.vuejs.org/v2/guide/)
-* [文档](https://vuejs.org/v2/guide/)
+* [官方文档](https://cn.vuejs.org/v2/guide/) [文档](https://vuejs.org/v2/guide/)
 * [vuejs/awesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
 * [JavaScript 进阶之 Vue.js + Node.js 入门实战开发](http://blog.csdn.net/gitchat/article/details/77931664)
 * [HcySunYang/vue-design](https://github.com/HcySunYang/vue-design):📖逐行级别的源码分析 http://hcysun.me/vue-design/
