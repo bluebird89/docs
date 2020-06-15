@@ -213,7 +213,7 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 ## 工具
 
 * [harelba/q](https://github.com/harelba/q):Run SQL directly on CSV or TSV files http://harelba.github.io/q/
-* [yandex/ClickHouse](https://github.com/yandex/ClickHouse):ClickHouse is a free analytic DBMS for big data. https://clickhouse.yandex
+* [ClickHouse / ClickHouse](https://github.com/yandex/ClickHouse):ClickHouse is a free analytic DBMS for big data. https://clickhouse.tech
 * [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. https://osquery.io
     - [Docs](https://osquery.readthedocs.io)
 * [vrana/adminer](https://github.com/vrana/adminer):Database management in a single PHP file https://www.adminer.org/

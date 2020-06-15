@@ -277,6 +277,7 @@ url: jdbc:mysql://localhost:13306/ecommerce_order_mysql?allowMultiQueries=true&u
 ## 工具
 
 * JaCoCo 一款代码测试覆盖率统计工具
+* [JApiDocs](https://github.com/YeDaxia/JApiDocs):无需额外注解、开箱即用的SpringBoot接口文档生成工具 https://japidocs.agilestudio.cn/#/zh-cn/
 
 ## 参考
 
