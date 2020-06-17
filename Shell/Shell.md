@@ -1243,8 +1243,6 @@ ccache gcc foo.c
             * 简单选择屏幕滚动，使用CTRL + SHIFT + K清理缓冲区
             * 可自定义隐藏大部分不必要的细节(（)标签栏、菜单)，默认提供许多颜色主题
     - Windows
-        + WSL:提供了一个由微软开发的Linux兼容的内核接口(（)不包含Linux内核代码)，然后可以在其上运行GNU用户空间
-            * WSL2
         + [putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
         + xshell6
         + [FinalShell](http://www.hostbuf.com/)
@@ -1255,10 +1253,8 @@ ccache gcc foo.c
         + Console2
         + [cmder + gow](http://bliker.github.io/cmder/)
         + ConEmu
-        + [PowerShell](https://github.com/PowerShell/PowerShell):PowerShell for every system! https://microsoft.com/PowerShell
         + [Babun](http://babun.github.io/)
-        + [microsoft/terminal](https://github.com/microsoft/terminal):The new Windows Terminal, and the original Windows console host -- all in the same place!
-        + [Hyper](https://hyper.is):create a beautiful and extensible experience for command-line interface users, built on open web standards
+    - [Hyper](https://hyper.is):create a beautiful and extensible experience for command-line interface users, built on open web standards
     - mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连
     - [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
     - [msys2](http://www.msys2.org/)
