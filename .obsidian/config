@@ -1,0 +1,89 @@
+{
+  "theme": "obsidian",
+  "pluginEnabledStatus": {
+    "File explorer": true,
+    "Search": true,
+    "Quick switcher": true,
+    "Graph view": true,
+    "Backlinks": true,
+    "Command palette": true,
+    "Markdown format importer": true,
+    "Word count": true
+  },
+  "workspaceLayout": {
+    "id": "aa27e98523b7f1ad",
+    "type": "split",
+    "children": [
+      {
+        "id": "6c949e94e991b4c6",
+        "type": "leaf",
+        "active": true,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Blockchain/Libra.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "leftSidedock": {
+    "id": "8fed24ddb26d099f",
+    "type": "split",
+    "children": [
+      {
+        "id": "bbcaa69300f33165",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "968fd6de145f115b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "1a575b908247ef09",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "rightSidedock": {
+    "id": "1137e51bdd031a1a",
+    "type": "split",
+    "children": [
+      {
+        "id": "d189300afbabacdb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0650561e69d6dfc0",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "lastOpenFiles": [
+    "Blockchain/Libra.md",
+    "Algorithm/Algorithms.md"
+  ]
+}

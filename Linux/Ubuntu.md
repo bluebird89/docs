@@ -147,6 +147,30 @@ sudo visudo
 %sudo   ALL=(ALL:ALL) NOPASSWD:ALL
 ```
 
+## DNS
+
+* 默认使用一个名为 systemd-resolved 的系统服务接管本机的 DNS 查询，它默认是启动的且监听 53 端口
+* 配置文件 /etc/systemd/resolved.conf
+* 系统已经弃用 /etc/resolv.conf 并且将其转移到 /etc/systemd/resolved.conf
+
+```sh
+# /etc/resolv.conf
+
+# /etc/systemd/resolved.conf
+systemd-resolve --status
+systemctl restart systemd-resolved.service
+
+# 刷新dns缓存
+sudo /etc/init.d/nscd restart
+# 重启网络
+sudo /etc/init.d/networking restart
+
+# sudo nano /etc/netplan/01-netcfg.yam
+sudo netplan apply
+
+systemd-resolve --status | grep 'DNS Servers' -A2l
+```
+
 ## 服务管理
 
 * ubuntu-16.10 开始不再使用initd管理系统，改用systemd,默认读取 /etc/systemd/system 下的配置文件，该目录下的文件会链接/lib/systemd/system/下的文件

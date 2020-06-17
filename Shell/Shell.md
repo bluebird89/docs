@@ -1185,6 +1185,8 @@ ccache gcc foo.c
 
 * depend python2.7
 * config: right click->prefermance or  `cd ~/.config/terminator/ && sudo vi config`
+* Theme
+    - [](https://atomcorp.github.io/themes/)
 
 ```
 [global_config]
