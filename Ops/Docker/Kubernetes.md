@@ -753,67 +753,6 @@ kubectl delete deployment kubernetes-dashboard --namespace=kube-system
 kubectl delete service kubernetes-dashboard --namespace=kube-system
 ```
 
-## [Helm](https://github.com/helm/helm)
-
-* The package manager for Kubernetes <https://helm.sh/>
-* [下载](https://github.com/helm/helm/releases)
-* [helm/charts](https://github.com/helm/charts):Curated applications for Kubernetes
-* 配置
-* 工作原理
-    - 使用的是一种叫做charts的yaml文件
-    - charts被设计的便于创建和维护，它们可以互相共享并用于发布Kubernetes。charts包含说明文件以及至少一个模板，其中模板包含了Kubernetes清单文件。它们可以多次部署重复使用。如果多次安装同一个charts，则将创建一个新的版本
-    - install A release name that you pick, and the name of the chart you want to install.
-* helm部署及其应用
-* 部署efk日志收集系统
-* 资源
-    - [Helm Hub ](https://hub.helm.sh/):Discover & launch great Kubernetes-ready apps
-
-| Linux            | $HOME/.cache/helm         | $HOME/.config/helm             | $HOME/.local/share/helm |
-| macOS            | $HOME/Library/Caches/helm | $HOME/Library/Preferences/helm | $HOME/Library/helm      |
-| Windows          | %TEMP%\helm               | %APPDATA%\helm                 | %APPDATA%\helm
-
-```sh
-## install
-tar -zxvf helm-v3.0.0-linux-amd64.tar.gz
-mv linux-amd64/helm /usr/local/bin/helm
-brew install helm
-choco install kubernetes-helm
-sudo snap install helm --classic
-
-curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-chmod 700 get_helm.sh
-./get_helm.sh
-
-## config
-helm repo list
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-helm repo add stable http://mirror.azure.cn/kubernetes/charts/
-helm repo remove
-helm search repo stable
-helm search hub
-helm repo update
-
-helm install happy-panda stable/mariadb
-helm install stable/mysql --generate-name
-helm show chart stable/mysql
-helm ls # has been released using Helm
-helm uninstall mysql-1588737754
-helm status mysql-1588737754
-
-# custom
-helm show values stable/mariadb
-echo '{mariadbUser: user0, mariadbDatabase: user0db}' > config.yaml
-helm install -f config.yaml stable/mariadb --generate-name
-
-helm show values stable/mariadb
-helm get values key
-helm upgrade -f panda.yaml happy-panda stable/mariadb
-helm rollback happy-panda 1 # helm rollback [RELEASE] [REVISION]
-
-helm delete --purge [release name] # helm删除release(release name 可用于新的release)
-helm delete [release name] # helm删除release(release name将保留，即不能用于新的release)
-```
-
 ### etcd
 
 * 并不是kubernetes的一部分，它是 CoreOS 团队发起的一个管理配置信息和服务发现（service discovery）项目，目标是构建一个高可用的分布式键值（key-value）数据库
@@ -1056,8 +995,10 @@ source ~/.bash_profile
 *  Serverless
     -  [Kubeless](https://kubeless.io/):用于部署小型应用程序的本地Kubernetes工具。它使用Kubernetes资源来执行许多任务，这有利于自动扩容、路由API、监控以及故障排查
     -  [IronFunction：](https://open.iron.io/):用Golang编写的开源Serverless工具。它支持任何编程语言。支持AWS Lambda函数
-*  KDE
-    -  [ lensapp / lens ](https://github.com/lensapp/lens):Lens - The Kubernetes IDE https://k8slens.dev/
+*  IDE
+    -  [lensapp / lens ](https://github.com/lensapp/lens):Lens - The Kubernetes IDE https://k8slens.dev/
+        +  `sudo snap install kontena-lens --classic`
+    - [Kubernetic](https://kubernetic.com/)The Kubernetes Desktop Client
 * [kubesphere/kubesphere](https://github.com/kubesphere/kubesphere):Easy-to-use Production Ready Container Platform https://kubesphere.io
 * [openshift/origin](https://github.com/openshift/origin):Enterprise Kubernetes for Developers http://www.openshift.org
 * [kubernetes/kops](https://github.com/kubernetes/kops):Kubernetes Operations (kops) - Production Grade K8s Installation, Upgrades, and Management

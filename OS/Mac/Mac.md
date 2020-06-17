@@ -50,6 +50,11 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * [Mac OS X 配置指南](https://wild-flame.github.io/guides/)
 * [phodal/setup.guide](https://github.com/phodal/setup.guide)
 
+```sh
+# 开启 SSD 的 Trim 模式
+sudo trimforce enable
+```
+
 ## 启动项
 
 * 配置目录
@@ -290,6 +295,9 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * [JadenGeller/Helium](https://github.com/JadenGeller/Helium):A floating browser window for OS X <http://heliumfloats.com>
 * elpass
 * 迷你天气：macOS 天气应用，在 Dock 栏知实时天气
+* Things 3
+* [mind node](https://mindnode.com/)
+
 
 ### screensavers
 

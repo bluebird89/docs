@@ -368,6 +368,8 @@ state Configuring {
   - Lucidchart
   - [diagram](https://webdemo.myscript.com)
 * [WebSequenceDiagrams](https://www.websequencediagrams.com/):Create sequence diagrams in seconds.
+* [edraw-max](https://www.edrawsoft.com/edraw-max/):All-in-One
+Diagram Software
 
 ## 参考
 
