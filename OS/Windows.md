@@ -194,9 +194,11 @@ scoop + search|install|status|uninstall|home + 对象
 ipconfig /flushdns # 刷新域名
 ```
 
-## 改造PowerShell
+## [PowerShell](https://github.com/PowerShell/PowerShell)
 
-* 如何添加启动脚本
+PowerShell for every system! https://microsoft.com/PowerShell
+
+* 添加启动脚本
 
 ```
 #
@@ -280,6 +282,8 @@ sudo apt-get install zeal
 
 ## WSL(Windows Subsystem for Linux)
 
+* 提供了一个由微软开发的Linux兼容的内核接口(（)不包含Linux内核代码)，然后可以在其上运行GNU用户空间
+* WSL2
 * 支持bash：在启用或关闭 Windows 功能，开启Windows Subsystem for linux (Beta) [参考](https://blog.jessfraz.com/post/windows-for-linux-nerds/)
 * [Dev on Windows with WSL](https://dowww.spencerwoo.com/)
 * 添加 Linux GUI 支持，即 Windows 原生支持 Linux 图形界面程序。意味着，大部分 Linux 应用将可以在 Windows 运行
@@ -290,6 +294,17 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 restart system
 cmd + r input:bash download ubuntu
 ```
+
+## [ microsoft/terminal](https://github.com/microsoft/terminal)
+
+The new Windows Terminal and the original Windows console host, all in the same place! 
+
+* Theme
+    - [](https://aka.ms/terminal-profiles-schema)
+    - [](https://atomcorp.github.io/themes/)
+    - 使用
+        + add theme(s) to schemes
+        + in profiles, find the shell you're using (eg cmd, powershell, ubuntu) and replace colorScheme with the name of the theme
 
 ## 系统
 
