@@ -5,6 +5,7 @@ Dependency Manager for PHP https://getcomposer.org/
 * 自动加载可以使用__autoload()和sql_autoload_register()两种机制
   - _autoload()有个缺点就是一个进程中只能定义一次
   - sql_autoload_register()不存在这个问题，它可以把函数注册到__autoload队列中
+* 底层也是通过 spl_autoload_register 函数实现类的自动加载的，只是在此之前，还会建立命令空间与类脚本路径的映射
 
 ## 原理
 
@@ -487,4 +488,4 @@ $cat = new \Animal\Cat();
 ## 工具
 
 * [Ocramius/PackageVersions](https://github.com/Ocramius/PackageVersions):📦 Composer addon to efficiently get installed packages' version numbers
-* [satis](https://github.com/composer/satis)
+* [satis](https://github.com/composer/satis):Simple static Composer repository generator - For a full private Composer repo use Private Packagist

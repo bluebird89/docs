@@ -3,7 +3,7 @@
 ## 准备
 
 * 型号：Raspberry Pi 3代 B 型 Raspberry Pi zero
-* 电源：输出必须是 5V 电压、至少 2A 电流 Micro SD 卡就是硬盘，推荐使用16G和32G的卡; 
+* 电源：输出必须是 5V 电压、至少 2A 电流 Micro SD 卡就是硬盘，推荐使用16G和32G的卡;
 * 显示器只在安装系统时需要，后面可以 SSH 登录，就不需要了，HDMI 输出
 * 鼠键:蓝牙或USB
 * 系统安装：通过NOOBs安装Raspbian
@@ -43,6 +43,10 @@ server({ port: 8080 }, [
 
 console.log('server starts on 8080 port');}
 ```
+
+## HomeAssistant和Homebridge
+
+## Homekit
 
 ## 工具
 

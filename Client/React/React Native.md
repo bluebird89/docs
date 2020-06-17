@@ -230,10 +230,6 @@ npm run eject #  导出配置文件
 * UI 抽象层翻译出来的 iOS 和安卓原生页面，做不到完全一致，尤其是复杂页面，样式或功能存在差异
 * 想用 React Native 做到 iOS 和安卓体验一致，并且充分发挥原生控件的功能，就需要同时熟悉 React Native、iOS、安卓三个平台，这对开发者的要求实在太高了Airbnb 公司在使用 React Native 两年后，宣布放弃，改用原生技术栈
 
-## 教程
-
-× [ necolas / react-native-web ](https://github.com/necolas/react-native-web):React Native for Web https://necolas.github.io/react-native-web/docs/?path=/docs/*
-
 ## 工具
 
 * [Expo](https://expo.io/):The fastest way to build an app
@@ -241,16 +237,11 @@ npm run eject #  导出配置文件
 * [react-hook-form/react-hook-form](https://github.com/react-hook-form/react-hook-form):clipboard React hooks for form validation without the hassle. https://react-hook-form.com
 * JSX
   - [developit/htm](https://github.com/developit/htm):Hyperscript Tagged Markup: JSX alternative using standard tagged templates, with compiler support.
-* [reactstudio](https://reactstudio.com)
 * Map
   - [Coder-JJ/rc-leaflet](https://github.com/Coder-JJ/rc-leaflet):React Map Components of Leaflet.js
 * IDE
     - [REACTIDE](http://reactide.io)
-* admin
-    - [marmelab/react-admin](https://github.com/marmelab/react-admin):A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, React and Material Design http://marmelab.com/react-admin
-* react
-
-    - [facebook/react](https://github.com/facebook/react):A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
+    - [reactstudio](https://reactstudio.com)
 * 状态
     - [jamiebuilds/unstated](https://github.com/jamiebuilds/unstated):State so simple, it goes without saying https://unstated.io
     - [mweststrate/immer](https://github.com/mweststrate/immer):Create the next immutable state by mutating the current one
@@ -268,12 +259,10 @@ npm run eject #  导出配置文件
 * 开发工具
     - [facebook/react-devtools](https://github.com/facebook/react-devtools):An extension that allows inspection of React component hierarchy in the Chrome and Firefox Developer Tools.
     - [gaearon/redux-devtools](https://github.com/gaearon/redux-devtools):DevTools for Redux with hot reloading, action replay, and customizable UI http://youtube.com/watch?v=xsSnOQynTHs
-    - [gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby):Build blazing fast, modern apps and websites with React https://www.gatsbyjs.org
     - [transitive-bullshit/create-react-library](https://github.com/transitive-bullshit/create-react-library):⚡CLI for easily creating reusable react libraries.
 * Angular
     - [ngrx/platform](https://github.com/ngrx/platform):Reactive libraries for Angular
 * 设计模式
-
     - [chantastic/reactpatterns.com](https://github.com/chantastic/reactpatterns.com):Patterns for React Developers http://reactpatterns.com
 * 图表
     - [hshoff/vx](https://github.com/hshoff/vx):🐯react + d3 = vx | visualization components https://vx-demo.now.sh/
@@ -295,22 +284,13 @@ npm run eject #  导出配置文件
     - [react-spring/react-spring](https://github.com/react-spring/react-spring):✌️ A spring physics based React animation library https://react-spring.github.iov
 * 脚手架
   - [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架
-
-  - [gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby):Build blazing fast, modern apps and websites with React https://www.gatsbyjs.org
-
-    * # [rekit](https://github.com/rekit/rekit):IDE and toolkit for building scalable web applications with React, Redux and React-router [http://rekit.js.org](http://rekit.js.org/)
+  - [rekit](https://github.com/rekit/rekit):IDE and toolkit for building scalable web applications with React, Redux and React-router [http://rekit.js.org](http://rekit.js.org/)
 * firebase
     - [invertase/react-native-firebase](https://github.com/invertase/react-native-firebase):🔥 A well tested feature rich modular Firebase implementation for React Native. Supports both iOS & Android platforms for over 15 Firebase services.https://rnfirebase.io/
     - [kriasoft/react-firebase-starter](https://github.com/kriasoft/react-firebase-starter)：Boilerplate (seed) project for creating web apps with React.js, GraphQL.js and Relay https://firebase.reactstarter.com
 * 渲染
     - [stereobooster/react-snap](https://github.com/stereobooster/react-snap):👻 Zero-configuration framework-agnostic static prerendering for SPAs
     - [renatorib/react-powerplug](https://github.com/renatorib/react-powerplug):🔌 Renderless Containers
-* Redux
-    - [reduxjs/react-redux](https://github.com/reduxjs/react-redux):Official React bindings for Redux https://redux.js.org/basics/usagewithreact
-    - [reduxjs/redux](https://github.com/reduxjs/redux):Predictable state container for JavaScript apps http://redux.js.org
-    - [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
-    - [rt2zz/redux-persist](https://github.com/rt2zz/redux-persist):persist and rehydrate a redux store
-    - [piotrwitek/react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide):The complete guide to static typing in "React & Redux" apps using TypeScript https://piotrwitek.github.io/react-redux-typescript-guide/
 * 命令行
     - [maicki/why-did-you-update](https://github.com/maicki/why-did-you-update):💥 Puts your console on blast when React is making unnecessary updates.
     - [vadimdemedes/ink](https://github.com/vadimdemedes/ink):🌈 React for interactive command-line apps
@@ -479,23 +459,18 @@ npm run eject #  导出配置文件
 
 ## 参考
 
-* [Reactjs docs](https://reactjs.org/docs/hello-world.html)
-* [React Native的极简手册](http://www.jianshu.com/p/318342e139c7) 没看懂
+* [React Native的极简手册](http://www.jianshu.com/p/318342e139c7)
 * [reactnativecn/react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
-* [react-native-guide](https://github.com/reactnativecn/react-native-guide)
 * [styleguidist/react-styleguidist](https://github.com/styleguidist/react-styleguidist):Isolated React component development environment with a living style guide https://react-styleguidist.js.org/
 * [wojtekmaj/react-lifecycle-methods-diagram](https://github.com/wojtekmaj/react-lifecycle-methods-diagram):Interactive React lifecycle methods diagram. http://projects.wojtekmaj.pl/react-li…
 * [react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit https://react-native-training.github.…
 * [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native):Awesome React Native components, news, tools, and learning material! http://www.awesome-react-native.com
 * [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
-* [xgrommx/awesome-redux](https://github.com/xgrommx/awesome-redux):Awesome list of Redux examples and middlewares
 
-* [kay-is/react-from-zero](https://github.com/kay-is/react-from-zero):A simple (99% ES2015 less) tutorial for React
 * [fangwei716/30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
-* [kdchang/reactjs101](https://github.com/kdchang/reactjs101):從零開始學 ReactJS（ReactJS 101）是一本希望讓初學者一看就懂的 ReactJS 中文入門教學書，由淺入深學習 ReactJS 生態系 (Flux, Redux, React Router, ImmutableJS, React Native, Relay/GraphQL etc.)。 https://www.gitbook.com/book/kdchang/…
 * [reactjs/react-basic](https://github.com/reactjs/react-basic):A description of the conceptual model of React without implementation burden.
 * [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
-* [piotrwitek/react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide):The complete guide to static typing in "React & Redux" apps using TypeScript https://piotrwitek.github.io/react-redux-typescript-guide/
+
 * [streamich/react-use](https://github.com/streamich/react-use):React Hooks — future of React 👍 react-use http://streamich.github.io/react-use
 * [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit):Get started with React, Redux, and React-Router.
 * [kriasoft/react-starter-kit](https://github.com/kriasoft/react-starter-kit):React Starter Kit — isomorphic web app boilerplate (Node.js, Express, GraphQL, React.js, Babel, PostCSS, Webpack, Browsersync) https://reactstarter.com
