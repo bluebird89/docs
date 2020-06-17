@@ -655,6 +655,7 @@ int execve(const char *pathname, char *const argv[], char *const envp[]);
 ## 测速
 
 * [speedtest](https://www.speedtest.net/zh-Hans/apps/cli)
+* [BOCE](https://www.boce.com/):通过该工具可实时获取网站的当前响应状态，检测各种网站请求错误，记录整体响应时间
 
 ```sh
 # Speedtest

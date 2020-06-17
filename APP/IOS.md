@@ -108,6 +108,7 @@
 ## 课程
 
 * [eseedo/iOSCourse](https://github.com/eseedo/iOSCourse):iOS开发初学者入门 http://icode.fun/
+* 斯坦福大学的 iOS 开发公开课
 
 ## 工具
 

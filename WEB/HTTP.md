@@ -1444,7 +1444,26 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
     - Redis 存储，持久化会话数据
     - Kafka 消息队列，分发消息给 Broker 或 业务方
 
+## 端到端加密
+
 ## [Wireshark](https://www.wireshark.org) <https://github.com/dafang/notebook/issues/114>
+
+* CTRL 按钮: 捕获多个网卡
+* save 捕获数据
+
+```sh
+sudo apt install wireshark
+# 是否允许非超级用户捕获数据包。选择“Yes”允许，选择“No”限制非超级用户捕获数据包
+sudo dpkg-reconfigure wireshark-common
+# 允许非超级用户捕获数据包，因此你必须将该用户添加到 wireshark 组
+sudo usermod -aG wireshark $(whoami)
+sudo wireshark
+```
+
+## load test
+
+* [JoeDog/siege](https://github.com/JoeDog/siege):Siege is an http load tester and benchmarking utility
+* [tsenart/vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. https://godoc.org/github.com/tsenart/vegeta/lib
 
 ## 图书
 
@@ -1485,9 +1504,6 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 * certificates
     - [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
     - [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh):A pure Unix shell script implementing ACME client protocol https://acme.sh
-* test
-    - [JoeDog/siege](https://github.com/JoeDog/siege):Siege is an http load tester and benchmarking utility
-    - [tsenart/vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. https://godoc.org/github.com/tsenart/vegeta/lib
 * 抓包
     - [httpwatch](https://www.httpwatch.com/)
 * DNS
@@ -1503,5 +1519,5 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 
 * [bolasblack/http-api-guide](https://github.com/bolasblack/http-api-guide)
 * [HTTPS explained with carrier pigeons](https://medium.freecodecamp.org/https-explained-with-carrier-pigeons-7029d2193351)
-* [HTTP API 认证授权术](https://coolshell.cn/articles/19395.html)
+ [HTTP API 认证授权术](https://coolshell.cn/articles/19395.html)
 * [面试 HTTP](https://mp.weixin.qq.com/s/OE7wz7k9YEIF_Ivtt5Cu8A)

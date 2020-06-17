@@ -701,9 +701,11 @@ HTTPS下提高安全性： session.cookie_secure=1
     - 如果没有给出目录（只有文件名）时则按照 include_path 指定的目录寻找
     - 如果在 include_path 下没找到该文件则 include 最后才在调用脚本文件所在的目录和当前工作目录下寻找
     - 如果最后仍未找到文件则 include 结构会发出一条警告
-    - include_once 语句在脚本执行期间包含并运行指定文件。此行为和 include 语句类似，唯一区别是如果该文件中已经被包含过，则不会再次包含。如同此语句名字暗示的那样，只会包含一次。
-* require 在出错时产生 E_COMPILE_ERROR 级别的错误
+    - include_once 语句在脚本执行期间包含并运行指定文件。此行为和 include 语句类似，唯一区别是如果该文件中已经被包含过，则不会再次包含。如同此语句名字暗示的那样，只会包含一次
+    - require 在出错时产生 E_COMPILE_ERROR 级别的错误,include 没有找到对应路径脚本时发出警告（E_WARNING）
     - require_once 语句和 require 语句完全相同，唯一区别是 PHP 会检查该文件是否已经被包含过，如果是则不会再次包含
+    - include_once/require_once 与 include/require 的区别是如果指定路径已经包含过，不会再次包含，只会包含一次同一路径脚本
+    - include_once/require_once 性能更好一些,至于使用 include_once 还是 require_once，取决于你对指定路径 PHP 脚本不存在的预期处理
 * goto:跳转到程序中的另一位置
     - 该目标位置可以用目标名称加上冒号来标记，而跳转指令是 goto 之后接上目标位置的标记
 * 替代语法
@@ -879,7 +881,6 @@ $value=$_COOKIE["CookieName"];//returns cookie value
         + 命名参数 `$tis = $conn->prepare("INSERT INTO STUDENTS(name, age) values(:name, :age)"); $tis->bindParam(':name', $name); $tis->bindParam(':age', $age);`
     - 错误异常处理、灵活取得查询结果（返回数组、字符串、对象、回调函数）、字符过滤防止 SQL 攻击、事务处理、存储过程
         - errorCode errotInfo
-
 
 ## 面向对象(OOP)
 
@@ -1077,6 +1078,14 @@ class Outer
 
 echo (new Outer)->func2()->func3(); # 6
 ```
+
+## 命名空间
+
+* 借助 spl_auto_register 函数注册自动加载器，实现系统未定义类或接口的自动加载
+    - 存在一个问题:不同库/组件类名冲突问题
+* 声明后
+    - 手动加载
+    - 通过Composer classmap
 
 ## 魔术方法
 
