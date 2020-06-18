@@ -10,7 +10,9 @@ The Ruby Programming Language https://www.ruby-lang.org/
 
 ## [安装](https://gorails.com/setup/ubuntu/14.04)
 
-```sh
+* [rbenv/rbenv](https://github.com/rbenv/rbenv):Groom your app’s Ruby environment
+
+```
 # ubuntu
 sudo apt-get install ruby-full
 
@@ -34,6 +36,7 @@ exec $SHELL
 rbenv install -l
 rbenv install 2.7.0
 rbenv global 2.7.0
+
 #  卸载
 rbenv uninstall 2.1.3
 # 卸载 rbenv,屏蔽~/.bashrc
@@ -49,9 +52,10 @@ rvm use 2.4.0 --default
 
 # Mac
 brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
-# echo 'eval "$(rbenv init -)"' >> ~/Projects/config/env.sh
+echo 'eval "$(rbenv init -)"' >> ~/Projects/config/env.sh
 rbenv install 2.1.1
 rbenv global 2.1.1
+
 # rbenv works by creating a directory of shims, which point to the files used by the Ruby version that's currently enabled. Through the rehash sub-command, rbenv maintains shims in that directory to match every Ruby command across every installed version of Ruby on your server.
 rbenv rehash
 
@@ -98,21 +102,22 @@ gem search '^rails$' --all
 gem install rails -v 4.2.7
 
 rails -v
-
-gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
 ```
 
-## gem
+## [Gems](https://rubygems.org)
+
+Find, install, and publish RubyGems.
 
 ```
 gem sources -l
+gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
 gem sources --remove https://rubygems.org/
 gem sources -a https://mirrors.aliyun.com/rubygems/
 ```
 
 ### SQL
 
-```sh
+```
 #### MySQL
 sudo apt-get install mysql-server mysql-client libmysqlclient-dev
 
@@ -126,38 +131,17 @@ sudo -u postgres createuser chris -s
 sudo -u postgres psql
 postgres=# \password chris
 
-#### If you want to use SQLite (not recommended)
+#### SQLite (not recommended)
 rails new myapp
-
-#### If you want to use MySQL
+####  MySQL
 rails new myapp -d mysql
-```
-
-#### If you want to use Postgres
-
-# Note that this will expect a postgres user with the same username
-
-# as your app, you may need to edit config/database.yml to match the
-
-# user you created earlier
-
-```
+#### If you want to use Postgres:Note that this will expect a postgres user with the same username as your app, you may need to edit config/database.yml to match the user you created earlier
 rails new myapp -d postgresql
-```
 
-# Move into the application directory
-
-```
 cd myapp
-```
-
-# If you setup MySQL or Postgres with a username/password, modify the
 
 # config/database.yml file to contain the username/password that you specified
-
 # Create the database
-
-```
 rake db:create
 
 rails server
@@ -170,13 +154,10 @@ rails server
 ##  项目
 
 * [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. https://www.discourse.org
-* [mame/quine-relay](https://github.com/mame/quine-relay):An uroboros program with 100+ programming languages 
+* [mame/quine-relay](https://github.com/mame/quine-relay):An uroboros program with 100+ programming languages
 
 ## 工具
 
-* 包管理
-    - [Gems](https://rubygems.org):Find, install, and publish RubyGems.
-* [rbenv/rbenv](https://github.com/rbenv/rbenv):Groom your app’s Ruby environment
 * [Bundler](https://bundler.io/)
 * [activeadmin/activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. https://activeadmin.info
 * [tj/commander](https://github.com/tj/commander):The complete solution for Ruby command-line executables http://visionmedia.github.com/commander
