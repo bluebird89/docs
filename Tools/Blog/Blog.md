@@ -45,7 +45,10 @@ The world’s fastest framework for building websites. https://gohugo.io
 
 * deploy 通过Aerobatic[<https://gohugo.io/hosting-and-deployment/hosting-on-bitbucket/>]
 * [gcushen/hugo-academic](https://github.com/gcushen/hugo-academic):📝 The website builder for Hugo. Build and deploy a beautiful website in minutes! https://sourcethemes.com/academic/
+* Theme
+    - [Hugo Themes](https://themes.gohugo.io)
 * https://jimmysong.io/hugo-handbook
+
 
 ```sh
 brew install hugo

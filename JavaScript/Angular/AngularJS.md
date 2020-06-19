@@ -35,6 +35,8 @@ npm test # 单元测试
 npm run e2e  # E2E测试End-to-end
 ```
 
+## [](link)
+
 ### 结构
 
 * app/app.components.ts, 一个自定义组件，Typescript代码。
@@ -100,6 +102,10 @@ ng generate module my-module # 模块Modulew
 
 * [angular/material](https://github.com/angular/material):Material design for AngularJS https://material.angularjs.org/
 * [angular/material2](https://github.com/angular/material2):Material Design components for Angular https://material.angular.io
+
+## 图书
+
+* Angular 权威教程
 
 ## 工具
 
