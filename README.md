@@ -4,32 +4,29 @@
 
 ## 原则
 
-* 自己知识获取效率：看过的东西想清楚、能讲清楚
-* 知识体系的构建
-* 博客问题:知识点比较散
-* 看书确实是一件很费力的事，但长期来看对知识体系的构建大有裨益
-* 舍弃的艺术
+* 效率
+* 体系构建
+    - 看书
+    - 做思维导图
+* 舍弃
+* 反思
 * 知行合一
+* 学习》加班
 
 ## 错误
 
-* 知识是一个风口，很多转载，互联网内容参差不齐
-* 自己贪多，不求甚解
-* 不同网络、不同搜索引擎的 搜索结果不一样
+* 知识是一个风口，很多转载，以及内容参差不齐
+* 贪多，不求甚解。看过东西想清楚、能讲清楚
+* 不同网络、不同搜索引擎，搜索结果不一样
+* 博客问题:知识点比较散
 
-## 习惯：每个周期的克制
+## 习惯
 
-* 早上手写 todo list，帮助清理思绪 focus on what’s important
-* 晚上回顾内容
-* 周
-	- 复盘所作事情
-	- 打扫卫生
+* 周期时间内的克制
+* 开始写 todo list，理清 focus on what’s important；结束写反思。应用到每天、月、季以及每一件事
 * 每月读一本书或一个框架
-* 学习》加班
 
 ## project
-
-* Instead of just scraping the data, why not build a website with that data:elect the most popular posts. From there it could copy the title, along with a few sentences, and then create a post that it shares online
 
 ## 推荐
 
