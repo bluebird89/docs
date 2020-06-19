@@ -20,6 +20,7 @@ npm config set registry https://registry.npm.taobao.org --global
 npm config set disturl https://npm.taobao.org/dist --global
 
 npm config set registry http://registry.cnpmjs.org # Unexpected end of JSON input while parsing near '...p":false,"directories'
+npm config set proxy null
 ```
 
 ## 使用
@@ -27,16 +28,26 @@ npm config set registry http://registry.cnpmjs.org # Unexpected end of JSON inpu
 ```sh
 npm -v
 
-npm list                ##List all locally installed packages
-npm list -a             ##List all globally installed packages
+npm list moduleName               ##List all locally installed packages
+npm list -a|g             ##List all globally installed packages
 npm list oauth # ind the version of a specific package
 npm list --depth=0
+
+npm search express
+
 npm outdated --depth=0             ##For locally installed packages
 npm outdated -g --depth=0   ##For  globally installed packages
 
 npm init  # 创建一个npm项目,配置项目信息，在package.json文件
+
 npm install react react-dom --save # 安装本地依赖
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+
 npm i -g npm # npm更新
+
+npm uninstall express
+npm update express
+npm ls
 ```
 
 ## Package
