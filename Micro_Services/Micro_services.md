@@ -165,7 +165,6 @@
 
 ![micro.png](../_static/micro.png "micro.png")
 
-##
 ## 分布式事务
 
 * 服务进行了分布式，随着各个数据库也随着变成分布式每个数据库不一定存在相同的物理机中。追求集群的 ACID 会导致系统变得很差，就需要引入一个新的理论原则来适应这种集群的情况，就是 CAP。
@@ -356,6 +355,11 @@ APP要符合12因子（Twelve-Factor）的规范：
     - soul 是基于webflux的， 依赖rxJava ,其实高性能的，响应式的网关
 * [Tars](https://github.com/tarsCloud): 高性能、多语言的微服务治理框架
 * [keycloak/keycloak](https://github.com/keycloak/keycloak) Open Source Identity and Access Management For Modern Applications and Services http://www.keycloak.org
+* 服务发现
+    - Zookeeper
+    - Consul 在设计上把很多分布式服务治理上要用到的功能都包含在内，可以支持服务注册、健康检查、配置管理、Service Mesh 等
+    - Eureka 则借着微服务概念的流行，与 SpringCloud 生态的深度结合，也获取了大量的用户
+    - [Nacos](https://www.infoq.cn/article/B*6vyMIKao9vAKIsJYpE)
 * 技术支撑
     - Kubernetes
     - Mesos+Docker
@@ -384,4 +388,6 @@ APP要符合12因子（Twelve-Factor）的规范：
 * [罗辑思维Go语言微服务改造实践](http://www.techug.com/post/luo-ji-si-wei-go-service-upgrade.html)
 * [一篇文章带你了解Cloud Native](https://blog.csdn.net/u011537073/article/details/72360966)
 * [B 站在微服务治理中的探索与实践](https://www.infoq.cn/article/zRuGHM_SsQ0lk7gWyBgG)
+* [微服务架构体系的深度治理](https://www.infoq.cn/article/q65dDiRTdSbF*E6Ki2P4)
+
 * [PHP微服务练兵](https://blog.csdn.net/donjan/article/details/103005084)
