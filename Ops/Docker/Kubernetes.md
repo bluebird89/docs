@@ -958,6 +958,10 @@ source ~/.bash_profile
 * 《[Kubernetes权威指南 : 从Docker到Kubernetes实践全接触（第2版）](https://book.douban.com/subject/26902153/)》
 * Kubernates in action
 
+## 课程
+
+* [kube.academy](https://kube.academy):Your Kubernetes Journey Starts Here
+
 ## 实例
 
 * [rootsongjc/kubernetes-vagrant-centos-cluster](https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster):Setting up a distributed Kubernetes cluster along with Istio service mesh locally with Vagrant and VirtualBox, only PoC or Demo use. https://jimmysong.io

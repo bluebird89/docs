@@ -13,4 +13,4 @@ package-lock.json
 npm-shrinkwrap.json
 .imdone
 
-.obsidian/
+.obsidian
