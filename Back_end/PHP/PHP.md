@@ -30,7 +30,6 @@ The PHP Interpreter <http://www.php.net>
         + 微服务架构
         + Docker发布代码
 
-
 ## 发展
 
 * Phar：PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar。可以像 Java 一样方便地实现应用程序打包和组件化，一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行。配合 Swoole，可以在命令行下执行 php server.phar 一键启动服务器
@@ -325,7 +324,8 @@ date.timezone = Asia/Shanghai
 
 brew install brew-php-switcher
 brew-php-switcher 5.6
-
+brew unlink php 
+brew link php
 # virtual memory exhausted: Cannot allocate memory
 # 编译调整虚拟机内存大小
 
@@ -357,6 +357,12 @@ ln -s /etc/php5/mods-available/redis.ini /etc/php5/apache2/conf.d/10-redis.ini
 
 apt-cache search memcached
 apt-get install -y php5-memcached
+
+# Mac
+curl -O https://pear.php.net/go-pear.phar
+sudo php -d detect_unicode=0 go-pear.phar
+#  1 Installation base /usr/local/pear
+#  4 Binaries directory usr/local/bin
 ```
 
 ### Cli
