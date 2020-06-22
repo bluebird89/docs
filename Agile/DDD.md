@@ -286,7 +286,7 @@ public class OrderCreatedEvent extends OrderEvent {
 
 * 《领域特定语言》
 * 《测试驱动开发》Kent Beck
-* [gdut-yy/Domain-Driven-Design-zh](https://github.com/gdut-yy/Domain-Driven-Design-zh): 《领域驱动设计》
+* [gdut-yy/Domain-Driven-Design-zh](https://github.com/gdut-yy/Domain-Driven-Design-zh):DDD《领域驱动设计》中文翻译 http://gdut_yy.gitee.io/doc-ddd/
 * 《实现领域驱动设计》 Vaughn Vernon
 
 ## 参考
