@@ -110,6 +110,42 @@ alias jn='jupyter notebook'
 alias wget='aria2c'
 alias tail='sudo tail -f -n 20'
 
+alias cls='clear'
+alias ll='ls -l'
+alias la='ls -a'
+alias vi='vim'
+alias javac="javac -J-Dfile.encoding=utf8"
+alias grep="grep --color=auto"
+alias -s html=mate   # 在命令行直接输入后缀为 html 的文件名，会在 TextMate 中打开
+alias -s rb=mate     # 在命令行直接输入 ruby 文件，会在 TextMate 中打开
+alias -s py=vi       # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
+alias -s js=vi
+alias -s c=vi
+alias -s java=vi
+alias -s txt=vi
+alias -s gz='tar -xzvf'
+alias -s tgz='tar -xzvf'
+alias -s zip='unzip'
+alias -s bz2='tar -xjvf'
+alias cdhome='cd ~'
+alias cdroot='cd /'
+alias gpull='git pull'
+alias gci='git commit -a'
+alias gpush='git push origin HEAD:refs/for/master'
+alias gst='git status'
+alias sublime='open -a "Sublime Text"' # 加入Sublime Text
+
+alias untar='tar -zxvf '
+alias wget='wget -c ' # 下载的东西，但如果出现问题可以恢复
+alias getpass="openssl rand -base64 20" # 新的网络帐户生成随机的 20 个字符的密码
+alias sha='shasum -a 256 ' # 下载文件并需要测试校验和
+alias ping='ping -c 5' #  限制在五个 ping
+alias www='python -m SimpleHTTPServer 8000' # 在任何你想要的文件夹中启动 Web 服务器。
+alias speed='speedtest-cli --server 2406 --simple' # 网络有多快？只需下载 Speedtest-cli 并使用此别名即可。你可以使用 speedtest-cli --list 命令选择离你所在位置更近的服务器。
+alias ipe='curl ipinfo.io/ip' # 需要知道你的外部 IP 地址
+alias ipi='ipconfig getifaddr en0' # 知道你的本地 IP 地址
+alias c='clear'
+
 ## npm
 alias nis="npm install --save "
 

@@ -155,6 +155,10 @@ total = *p + 200;
 * [Yorgey's cis194](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
 * [卡梅隆大学CS课件](http://www.cs.cmu.edu/~aada/courses/15251f16/www/schedule.html)
 
+## 工具
+
+* [giampaolo / psutil](https://github.com/giampaolo/psutil):Cross-platform lib for process and system monitoring in Python
+
 ## 参考
 
 * [Udacity](https://www.udacity.com/)
