@@ -132,6 +132,11 @@
 
 ## 培训
 
+* 设计课程
+* 开始演讲概略与时间
+* 分段总结
+* 课件材料准备
+
 ## 管理
 
 * 熟悉自己的业务，知道问题在哪里，怎样可以解决。领导者是给大家指方向的，你必须先知道要走哪个方向，才能带领别人，这是领导力的基础。
@@ -144,13 +149,13 @@
 > 程序员修炼之道
 
 * Care About Your Craft关心你的技艺:我其实一直没有想明白这句话是什么意思. 我的理解是, 我们现在所学所掌握的技艺最后可能是要过时的, 要时刻关心最新的技术并尝试去学习. 不过虽然这么说, 但是如何做就是见仁见智了, 我在最近可能看了看 shell 编程, 学了学 Node.js, 还看了两眼 Golang, 最终我真正吸收的还是 Node.js, 对于 shell 和 Golang 看的我实在提不起兴趣. 不过我也没有强求, 毕竟不是靠这个吃饭的, 而且自己也没有什么兴趣, 索性就放弃了. 不过对于 Node 我还是巨有兴趣的. 这个月我都在为 SportJoin 编写 Node API.
-* Think! About Your Work思考! 你的工作
-* Provide Options, Don’t Make Lame Excuses提供这种选择, 不要找蹩脚的借口
-* Don’t Live with Brokwn Windows不要容忍破窗户
-* Be a Catalyst for Change做变化的催化剂
-* Remember the Big Picture记住大图景
-* Make Quality a Requirements Issue使质量成为需求问题
-* Invert Regularly inYour Knowledge Portfolio定期为你的知识资产投资
+* Think! About Your Work 思考! 你的工作
+* Provide Options, Don’t Make Lame Excuses 提供这种选择, 不要找蹩脚的借口
+* Don’t Live with Brokwn Windows  不要容忍破窗户
+* Be a Catalyst for Change 做变化的催化剂
+* Remember the Big Picture 记住大图景
+* Make Quality a Requirements Issue 使质量成为需求问题
+* Invert Regularly inYour Knowledge Portfolio 定期为你的知识资产投资
 * Critically Analyze What You Read and Hear批判地分析你读到的和听到的
 * It’s Both What You Say and the Way You Say it你说什么和你怎么说同样重要
 * DRY — Don’t Repeat Yourself不要重复你自己
