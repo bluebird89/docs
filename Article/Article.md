@@ -29,7 +29,7 @@
 ## 登高
 
 ## 满江红 岳飞
- 
+
 ```
 怒发冲冠，凭栏处、潇潇雨歇。
 抬望眼、仰天长啸，壮怀激烈。
@@ -138,18 +138,6 @@
 
 > I Meghan, take you, Harry, to be my husband, to have and to hold from this day forward; for better,for worse, for richer, for poorer, in sickness and in health, to love and to cherish, till death us do part; according to God’s holy law. In the presence of God I make this vow.
 > 在上帝的见证下、神的律法的指引下，我，梅根，愿意嫁给你，哈里，作为我的丈夫。从此刻到永远，无论顺境或逆境、富有或贫穷、健康或疾病，我都将爱着你、珍惜你，直到死亡将我们分开。
-
-
-《青青陵上柏》   无名氏汉
-
-> 青青陵上柏，磊磊涧中石。
-> 人生天地间，忽如远行客。
-> 斗酒相娱乐，聊厚不为薄。
-> 驱车策驽马，游戏宛与洛。
-> 洛中何郁郁，冠带自相索。
-> 长衢罗夹巷，王侯多第宅。
-> 两宫遥相望，双阙百馀尺。
-> 极宴娱心意，戚戚何所迫？
 
 有人说
 落叶寄相思，三叶不言中
@@ -515,7 +503,7 @@ Since there your elements assemble. 因为那才是你本来的面目。
 
 酒吧高尔夫是个激烈的游戏。去一家酒吧，比赛的双方直接喝一瓶啤酒，加一杯纯的洋酒，叫一杆一球，喝完代表打完一个洞，然后迅速赶往下一家。九洞的意思，就是要喝掉九家，谁先完成，回到起始酒吧，就算嬴了。
 
- 
+
 
 江洁盯看她，说：“好啊，就从这里开始。”接看她点了根烟，报了另外八个酒吧的名字。
 

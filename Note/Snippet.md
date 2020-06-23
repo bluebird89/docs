@@ -9,6 +9,9 @@
 * 宁可十年不将军，不可一日不拱卒
 * 日拱一卒，功不唐捐
 * 人生如逆旅，我亦是行人
+* 热爱可抵岁月漫长。——出自豆瓣“小北爱吃肉”
+* 你是我疲惫生活中唯一的英雄梦想
+* 万物皆有罅隙，那是光透过来的地方。 There's a crack in everything, that's how the light gets in. ——Leonard Cohen 《Anthem》
 * All work and no play makes Jack a dull boy,All play and no work makes Greg a playboy”
 * Stay hungry. Stay foolish.
 * 生活是属于每个人自己的感受， 不属于任何别人的看法。
@@ -465,7 +468,6 @@
 * 愿你垂垂老矣，我可明我心。
 * 你踏万千星河而来，有乘舟奔赴远方。
 * 沧海明月，何尝不是一滴相思泪。
-* 人生天地间，忽如远行客。
 * 青丝蘸白雪，来路生云烟。
 * 你没有如期归来，而这正是离别的意义。
 * 山外青山楼外楼 , 江山不及你温柔 。

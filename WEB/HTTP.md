@@ -1183,7 +1183,7 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
         + 服务端用私钥解密后，得到了客户端传过来的随机值(私钥)，然后把内容通过该值进行对称加密
         + 对称加密就是，将信息和私钥通过某种算法混合在一起，这样除非知道私钥，不然无法获取内容
     - 解决方案
-        + [certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx)
+        + [certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx) <https://certbot.eff.org/>
         + [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
         + [acmesh-official / acme.sh](https://github.com/acmesh-official/acme.sh):A pure Unix shell script implementing ACME client protocol https://acme.sh
 * 验证域名的所有权
@@ -1210,7 +1210,6 @@ client(内置证书机构证书) <---------------------------   证书机构
                             共享秘钥加密 HTTP
                      --------------------------->　　server(对称加密)
 
-
 adduser letsencrypt
 usermod -aG sudo letsencrypt
 sudo add-apt-repository ppa:certbot/certbot
@@ -1220,6 +1219,11 @@ sudo certbot --apache -d packagist.domain.com
 
 acme.sh --issue -d thinkphp.com -w /home/henry/Workspace/thinkphp/public
 acme.sh --issue --debug -d thinkphp.com -d henry.thinkphp.com -w /home/henry/Workspace/thinkphp/public
+
+sudo yum install certbot python2-certbot-nginx
+sudo certbot --nginx
+sudo certbot certonly --nginx
+echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew -q" | sudo tee -a /etc/crontab > /dev/null
 ```
 
 ## 认证

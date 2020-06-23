@@ -2468,6 +2468,7 @@ pecl channel-update pecl.php.net
         + MySQL port：8889
     - Wnmp:Version of nginx for Windows uses the native Win32 API (not the Cygwin emulation layer). Only the select() connection processing method is currently used, so high performance and scalability should not be expected.
         + `tasklist /fi "imagename eq nginx.exe" # 查看进程，没有查看error.log`
+* [ beyondcode / expose ](https://github.com/beyondcode/expose): A beautiful, fully open-source, tunneling service - written in pure PHP https://beyondco.de  expose features, like sharing your local sites, out of the box - without any additional setup required
 
 ## 参考
 

@@ -283,7 +283,7 @@ server {
         } else {
         }
     },
-    # 
+    #
     // \Yii::$app->on(\yii\base\Application::EVENT_BEFORE_REQUEST, function ($event) {
     //     // ...
     // });
@@ -345,7 +345,7 @@ server {
 
 * 代表业务数据、规则和逻辑的对象
 * 属性: 代表可像普通类属性或数组一样被访问的业务数据，yii\base\Model支持 ArrayAccess 数组访问 和 ArrayIterator 数组迭代器
-* 属性标签: 指定属性显示出来的标签 
+* 属性标签: 指定属性显示出来的标签
     - 默认情况下，属性标签通过yii\base\Model::generateAttributeLabel()方法自动从属性名生成. 它会自动将驼峰式大小写变量名转换为多个首字母大写的单词
     - 自定义标签 可以覆盖 yii\base\Model::attributeLabels() 方法明确指定属性标签
 * 场景：模型支持的场景由模型中申明的 验证规则 来决定
@@ -446,7 +446,7 @@ if ($model->validate()) {
     - 参数类型限制路由中 id 数据类型
 * actions:继承yii\base\Action或它的子类来定义 覆盖 actions()方法
 * 过滤器: 控制器动作 执行之前或之后执行的对象. 在控制器类中覆盖它的 behaviors() 方法来声明过滤器
-    - 预过滤:按顺序执行应用主体中 behaviors()->模块中 behaviors()->控制器中 behaviors() 
+    - 预过滤:按顺序执行应用主体中 behaviors()->模块中 behaviors()->控制器中 behaviors()
     - 成功通过预过滤后执行动作
     - 后过滤:控制器中 behaviors() ->模块中 behaviors()->应用主体中 behaviors()
     - 构建过滤器：继承 `yii\base\ActionFilter` 类并覆盖 beforeAction() 或 afterAction() 方法来创建动作的过滤器
@@ -470,7 +470,7 @@ if ($model->validate()) {
         + 默认情况下每个 beforeAction() 方法会触发一个 beforeAction 事件，在事件中你可以追加事件处理操作
     - 控制器执行操作: 请求数据解析和填入到操作参数
     - 控制器按顺序调用控制器、模块（如果控制器属于模块）、应用主体的 afterAction() 方法； 默认情况下每个 afterAction() 方法会触发一个 afterAction 事件， 在事件中可以追加事件处理操作
-    - 应用主体获取操作结果并赋值给响应 
+    - 应用主体获取操作结果并赋值给响应
 * yiifiltersCors 应在 授权 / 认证 过滤器之前定义，以保证CORS头部被发送。
 
 ```php
@@ -743,7 +743,7 @@ $module = Yii::$app->controller->module;
     - 发布资源: 资源文件放在可通过Web直接访问的Web目录中
     - 外部资源: 资源文件放在你的Web应用不同的Web服务器上
 * sourcePath: 指定包包含资源文件的根目录， 当资源文件不能被Web访问时该属性应设置
-* 
+*
 * basePath: 指定包含资源包中资源文件并可Web访问的目录，当指定 sourcePath 属性， 资源管理器 会发布包的资源到一个可Web访问并覆盖该属性
 * baseUrl: 指定对应到yiiwebAssetBundle::basePath目录的URL
 * js: 一个包含该资源包JavaScript文件的数组
@@ -808,11 +808,11 @@ namespace frontend\assets;
 
 use yii\web\AssetBundle;
 
-class FontAwesomeAsset extends AssetBundle 
+class FontAwesomeAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/font-awesome'; 
-    public $css = [ 
-        'css/font-awesome.min.css', 
+    public $sourcePath = '@bower/font-awesome';
+    public $css = [
+        'css/font-awesome.min.css',
     ];
     public $publishOptions = [
         'only' => [
@@ -820,7 +820,7 @@ class FontAwesomeAsset extends AssetBundle
             'css/',
         ]
     ];
-} 
+}
 
 // 使用
 use app/assets/AppAsset;
@@ -932,7 +932,7 @@ exec $SHELL -l
                 -  标量值：当作主键去查询。 Yii 会通过读取数据库模式信息来识别主键列
                 -  标量值的数组：数组里的值都当作要查询的主键的值
                 -  关联数组：键值是表的列名，元素值是相应的要查询的条件值
-        +   yii\db\ActiveRecord::findBySql() 
+        +   yii\db\ActiveRecord::findBySql()
         +   批处理查询 来最小化内存使用
     - Accessing Data:查询结果的每一行对应于单个 Active Record 实例,属性以表的列名命名
         + Data Transformation：要输入或显示的数据是一种格式，而要将其存储在数据库中是另一种格式
@@ -1008,7 +1008,7 @@ $customer = new Customer();
 $customer->attributes = $values;
 $customer->save();
 
-save() 
+save()
 geterrors # return bool 获取错误信息
 
 // UPDATE `post` SET `view_count` = `view_count` + 1 WHERE `id` = 100
@@ -1219,25 +1219,25 @@ $compontent->on($eventName, $handler);
     - 包名 myname/yii2-mywidget
     - 包类型  yii2-extension
     - 依赖: 肯定有 yiisoft/yii2
-* 列表
-    - [yiisoft / yii2-gii](https://github.com/yiisoft/yii2-gii):Yii 2 Gii Extension
-    - [yiisoft/yii2-debug](https://github.com/yiisoft/yii2-debug):Debug Extension for Yii 2 http://www.yiiframework.com
-    - [yii2-httpclient](https://github.com/yiisoft/yii2-httpclient)
-    - [yii2-authclient](https://github.com/yiisoft/yii2-authclient)
-    - [yii2-queue](https://github.com/yiisoft/yii2-queue)
-    - [yii2-coding-standards](https://github.com/yiisoft/yii2-coding-standards)
-    - [yii2-collection](https://github.com/yiisoft/yii2-collection)
-    - [yii2-redis](https://github.com/yiisoft/yii2-redis)
-    - [yii2-bootstrap](https://github.com/yiisoft/yii2-bootstrap)
-    - [yii2-shell](https://github.com/yiisoft/yii2-shell)
-    - [yii2-bootstrap4](https://github.com/yiisoft/yii2-bootstrap4)
-    - [yiisoft/log](https://github.com/yiisoft/log)
-    - [yii2-elasticsearch](https://github.com/yiisoft/yii2-elasticsearch)
-    - [yiisoft / yii2-sphinx](https://github.com/yiisoft/yii2-sphinx):Yii 2 Sphinx extension. http://www.yiiframework.com
-    - [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
-    - [2amigos/yii2-file-upload-widget](https://github.com/2amigos/yii2-file-upload-widget):BlueImp File Upload Widget for Yii2
-    - [yii2-ace-admin](https://github.com/myloveGy/yii2-ace-admin) `composer require dmstr/yii2-adminlte-asset`
-    - [yiisoft / yii2-docker](https://github.com/yiisoft/yii2-docker):Official Docker images suitable for Yii 2.0 https://www.yiiframework.com/
+
+* [yiisoft / yii2-gii](https://github.com/yiisoft/yii2-gii):Yii 2 Gii Extension
+* [yiisoft/yii2-debug](https://github.com/yiisoft/yii2-debug):Debug Extension for Yii 2 http://www.yiiframework.com
+* [yii2-httpclient](https://github.com/yiisoft/yii2-httpclient)
+* [yii2-authclient](https://github.com/yiisoft/yii2-authclient)
+* [yii2-queue](https://github.com/yiisoft/yii2-queue)
+* [yii2-coding-standards](https://github.com/yiisoft/yii2-coding-standards)
+* [yii2-collection](https://github.com/yiisoft/yii2-collection)
+* [yii2-redis](https://github.com/yiisoft/yii2-redis)
+* [yii2-bootstrap](https://github.com/yiisoft/yii2-bootstrap)
+* [yii2-shell](https://github.com/yiisoft/yii2-shell)
+* [yii2-bootstrap4](https://github.com/yiisoft/yii2-bootstrap4)
+* [yiisoft/log](https://github.com/yiisoft/log)
+* [yii2-elasticsearch](https://github.com/yiisoft/yii2-elasticsearch)
+* [yiisoft / yii2-sphinx](https://github.com/yiisoft/yii2-sphinx):Yii 2 Sphinx extension. http://www.yiiframework.com
+* [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
+* [2amigos/yii2-file-upload-widget](https://github.com/2amigos/yii2-file-upload-widget):BlueImp File Upload Widget for Yii2
+* [yii2-ace-admin](https://github.com/myloveGy/yii2-ace-admin) `composer require dmstr/yii2-adminlte-asset`
+* [yiisoft / yii2-docker](https://github.com/yiisoft/yii2-docker):Official Docker images suitable for Yii 2.0 https://www.yiiframework.com/
 
 ```sh
 composer require --prefer-dist yiisoft/yii2-sphinx
@@ -1256,6 +1256,8 @@ composer require --prefer-dist yiisoft/yii2-sphinx
 
 ## 项目
 
+* [ jianyan74 /
+rageframe2 ](https://github.com/jianyan74/rageframe2):一个基于Yii2高级框架的快速开发应用引擎 www.rageframe.com
 * [yiisoft/yii2-app-basic](https://github.com/yiisoft/yii2-app-basic):Yii 2.0 Basic Application Template http://www.yiiframework.com
 * [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced):Yii 2.0 Advanced Application Template http://www.yiiframework.com
 * [fecshop/yii2_fecshop](https://github.com/fecshop/yii2_fecshop):yii2 ( PHP ) fecshop core code used for ecommerce shop 多语言多货币多入口的开源电商 B2C 商城，支持移动端vue, app, html5 http://www.fecshop.com

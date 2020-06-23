@@ -214,7 +214,7 @@ DNS = 1.1.1.1
 [Peer]
 PublicKey = <server public key>
 Endpoint = <server public ip>:51820
-AllowedIPs = 0.0.0.0/0 
+AllowedIPs = 0.0.0.0/0
 PersistentKeepalive = 25 # If your server is behind a NAT and not accessible via a public IP, then under the peer section you’ll need to set PersistentKeepalive to keep the connection alive
 
 dig +short myip.opendns.com @resolver1.opendns.com # your server’s public address
@@ -385,6 +385,9 @@ iptables-restore < /etc/iptables-rules # 手动加载
 * [StreisandEffect/streisand](https://github.com/StreisandEffect/streisand):Streisand sets up a new server running L2TP/IPsec, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, a Tor bridge, and WireGuard. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.
 * [Nyr/openvpn-install](https://github.com/Nyr/openvpn-install):OpenVPN road warrior installer for Debian, Ubuntu and CentOS
 * [trailofbits/algo](https://github.com/trailofbits/algo):Set up a personal IPSEC VPN in the cloud
+* 三方
+  - blinkload
+  - ndss
 
 ## 工具
 

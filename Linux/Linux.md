@@ -92,6 +92,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - Tin Hat Linux
   - [OpenBSD](http://www.openbsd.org/)
   - [Manjaro](https://manjaro.org/):anjaro is a professionally made Linux based operating system that is a suitable replacement for Windows or MacOS. Multiple Desktop Environments are available through our Official and Community editions. We also work with manufacturers to design dedicated hardware. Visit the shop for more information 基于 Arch 的 Linux 发行版,安装是一件稍微复杂的工作
+    + [Manjaro 配置记录](https://10101.io/2020/05/24/manjaro-configuration)
   - [Elementary OS](https://elementary.io/)
   - [openEuler](https://openeuler.org/):
 * 最小化：将在旧的硬件上运行；尽可能最小化

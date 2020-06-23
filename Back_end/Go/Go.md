@@ -1067,7 +1067,9 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [gopls](https://github.com/golang/tools/blob/master/gopls/doc/user.md) cannot use path@version syntax in GOPATH mode `GO111MODULE=on go get golang.org/x/tools/gopls@latest`
 * Raft
   - [lni/dragonboat](https://github.com/lni/dragonboat):A feature complete and high performance multi-group Raft library in Go.
-* [go-swagger/go-swagger](https://github.com/go-swagger/go-swagger):Swagger 2.0 implementation for go https://goswagger.io
+* API
+    - [go-swagger/go-swagger](https://github.com/go-swagger/go-swagger):Swagger 2.0 implementation for go https://goswagger.io
+    - [ swaggo / swag ](https://github.com/swaggo/swag):Automatically generate RESTful API documentation with Swagger 2.0 for Go.
 * 编辑器
   - [visualfc/liteide](https://github.com/visualfc/liteide)：LiteIDE is a simple, open source, cross-platform Go IDE.
   - VS Code Glide
