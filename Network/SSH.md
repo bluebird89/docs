@@ -154,3 +154,34 @@ git config --global user.signingkey 3AA5C34371567BD2
 git config --global commit.gpgsign true
 git commit -S -m your commit message
 ```
+
+## 免密码登录
+
+* ~/.ssh/authorized_keys:存放远程免密登录的公钥,主要通过这个文件记录多台机器的公钥
+* ~/.ssh/id_rsa : 生成的私钥文件
+* ~/.ssh/id_rsa.pub ： 生成的公钥文件
+* ~/.ssh/know_hosts : 已知的主机公钥清单　
+* 如果希望ssh公钥生效需满足至少下面两个条件：
+    - .ssh目录的权限必须是700
+    - .ssh/authorized_keys文件权限必须是600
+
+```sh
+ssh-keygen -t rsa # 生成.ssh文件目录
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub <romte_ip>
+scp -p ~/.ssh/id_rsa.pub root@<remote_ip>:/root/.ssh/authorized_keys
+
+scp ~/.ssh/id_rsa.pub root@<remote_ip>:pub_key //将文件拷贝至远程服务器
+cat ~/pub_key >>~/.ssh/authorized_keys //将内容追加到authorized_keys文件中， 不过要登录远程服务器来执行这条命令
+
+# 通过ansible,将需要做免密操作的机器hosts添加到/etc/ansible/hosts下：
+[Avoid close]
+192.168.91.132
+192.168.91.133
+192.168.91.134
+
+ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root/.ssh/id_rsa.pub') }}'" -k
+
+# have SSH host keys for those IPs in your ~/.ssh/known_hosts
+ssh-keygen -R <IP_ADDRESS>
+```

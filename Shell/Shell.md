@@ -92,6 +92,80 @@ set completion-ignore-case on
 
 the basic file, shell and text manipulation utilities of the GNU operating system
 
+## 变量
+
+* 命名
+    - 只能由大小写字母，数字和下划线组成。
+    - 变量名称不能以数字开头。
+    - 以存储数字类型或者字符串类型。
+    - 赋值等号两边不能有空格。
+    - 字符串的变量可以用单引号或者双引号括起来
+* 调用：使用$符号或者$符号加上花括号。一般来讲使用花括号的用法
+* 分类
+    - 环境变量：保存操作系统运行时使用的参数,长期使用，可以把它们写在配置文件中。 /etc/profile 或者 用户家目录的.bash_profile
+        + `printenv`
+        + `export kaka="kaka"`
+        + `unset kaka`
+    - 位置变量：传递脚本参数时使用
+    - 预定义变量：类似于环境变量，不同是它是不能重定义的
+        + `$0`  脚本名称
+        + `$n`  传给脚本/函数的第n个参数
+        + `$$`  脚本的PID
+        + `$!`  上一个被执行的命令的PID(后台运行的进程)
+        + `$?`  上一个命令的退出状态(管道命令使用${PIPESTATUS})
+        + `$#`  传递给脚本/函数的参数个数 能够处理空格参数，而且参数间的空格也能正确的处理
+        + `$@`  传递给脚本/函数的所有参数(识别每个参数) 用双引号括起来
+        + `$*`  传递给脚本/函数的所有参数(把所有参数当成一个字符串)
+        + `${10}`   在超过两位数的参数时，使用大括号限定起来
+    - 自定义变量：由用户自定义,可用于用户编写的脚
+
+## 运算符
+
+* 算数运算符
+    - 规则：`expr 表达式`
+        + 运算符号两边要有空格
+        + 遇到特殊符号如*号需要在前面加反斜杠
+        + 空格和特殊字符串需要用引号括起来
+        + 操作:(先编写一个运算相关的shell脚本)
+* 关系运算符
+    - `-eq` 相等
+    - `-ne` 不等
+    - `-gt` d大于
+    - `-lt` 小于
+    - `-gt` 大于等于
+    - `-le` 小于等于
+* 布尔运算符
+    - `!` 非运算
+    - `-O` 或
+    - `-a` 与
+* 逻辑运算符
+    - `&&` and
+    - `||` or
+* 字符串运算符
+    - `=` 是否相等
+    - `！=` 不相等
+    - `-z` 长度为0
+    - `-n` 长度不为0
+    - `str` 是否为空
+* 文件测试运算符
+    - -b 是否块设备
+    - -c 是否字符设备
+    - -d 是否目录
+    - -e 文件、目录是否存在
+    - -f 是否普通文件
+    - -g 是否设置SGID
+    - -k 是否设置粘着位
+    - -p 是否具名管道
+    - -u 是否设置SUID
+    - -r 是否可读
+    - -w 是否可写
+    - -s 文件是否为空
+    - -x 文件是否可执行
+
+* `<`   字符串比较(双中括号里不需要转移)
+* `==`  以Globbing方式进行字符串比较(仅双中括号里使用，参考下文)
+* `=~`  用正则表达式进行字符串比较(仅双中括号里使用，参考下文)
+
 ## 语法
 
 * 应用
@@ -100,33 +174,10 @@ the basic file, shell and text manipulation utilities of the GNU operating syste
         + 出现了复杂的转义问题
         + 有太多的字符串操作
         + 不太需要调用其它程序和跟其它程序管道交互
-* 变量
     - 从bash 3.2版开始，正则表达式和globbing表达式都不能用引号包裹。如果表达式里有空格，可以把它存储到一个变量里
     - local:函数内部变量
     - readonly:只读变量
     - 尽量对bash脚本里的所有变量使用local或readonly进行注解
-* 操作符
-    - `||`  逻辑or(仅双中括号里使用)
-    - `&&`  逻辑and(仅双中括号里使用)
-    - `<`   字符串比较(双中括号里不需要转移)
-    - `-lt` 数字比较
-    - `=`   字符串相等
-    - `==`  以Globbing方式进行字符串比较(仅双中括号里使用，参考下文)
-    - `=~`  用正则表达式进行字符串比较(仅双中括号里使用，参考下文)
-    - `-n`  非空字符串
-    - `-z`  空字符串
-    - `-eq` 数字相等
-    - `-ne` 数字不等
-* 内置变量
-    - `$0`  脚本名称
-    - `$n`  传给脚本/函数的第n个参数
-    - `$$`  脚本的PID
-    - `$!`  上一个被执行的命令的PID(后台运行的进程)
-    - `$?`  上一个命令的退出状态(管道命令使用${PIPESTATUS})
-    - `$#`  传递给脚本/函数的参数个数 能够处理空格参数，而且参数间的空格也能正确的处理
-    - `$@`  传递给脚本/函数的所有参数(识别每个参数) 用双引号括起来
-    - `$*`  传递给脚本/函数的所有参数(把所有参数当成一个字符串)
-    - `${10}`   在超过两位数的参数时，使用大括号限定起来
 * bash shell 内置了一个type命令会根据输入的单词来显示此命令的类型，主要有以下五种类型：
     - 别名
         + 创建：`alias li='ls -li'`
@@ -613,48 +664,8 @@ sudo apt-get install zsh-theme-powerlevel9k
 echo "source /usr/share/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
 
 # config
-ZSH_THEME="agnoster"
-
+ZSH_THEME="agnoster"  |robbyrussell" # 主题设置(（)文件在~/.oh-my-zsh/themes)
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-
-# alias
-alias cls='clear'
-alias ll='ls -l'
-alias la='ls -a'
-alias vi='vim'
-alias javac="javac -J-Dfile.encoding=utf8"
-alias grep="grep --color=auto"
-alias -s html=mate   # 在命令行直接输入后缀为 html 的文件名，会在 TextMate 中打开
-alias -s rb=mate     # 在命令行直接输入 ruby 文件，会在 TextMate 中打开
-alias -s py=vi       # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
-alias -s js=vi
-alias -s c=vi
-alias -s java=vi
-alias -s txt=vi
-alias -s gz='tar -xzvf'
-alias -s tgz='tar -xzvf'
-alias -s zip='unzip'
-alias -s bz2='tar -xjvf'
-alias cdhome='cd ~'
-alias cdroot='cd /'
-alias gpull='git pull'
-alias gci='git commit -a'
-alias gpush='git push origin HEAD:refs/for/master'
-alias gst='git status'
-alias sublime='open -a "Sublime Text"' # 加入Sublime Text
-
-alias untar='tar -zxvf '
-alias wget='wget -c ' # 下载的东西，但如果出现问题可以恢复
-alias getpass="openssl rand -base64 20" # 新的网络帐户生成随机的 20 个字符的密码
-alias sha='shasum -a 256 ' # 下载文件并需要测试校验和
-alias ping='ping -c 5' #  限制在五个 ping
-alias www='python -m SimpleHTTPServer 8000' # 在任何你想要的文件夹中启动 Web 服务器。
-alias speed='speedtest-cli --server 2406 --simple' # 网络有多快？只需下载 Speedtest-cli 并使用此别名即可。你可以使用 speedtest-cli --list 命令选择离你所在位置更近的服务器。
-alias ipe='curl ipinfo.io/ip' # 需要知道你的外部 IP 地址
-alias ipi='ipconfig getifaddr en0' # 知道你的本地 IP 地址
-alias c='clear'
-
-ZSH_THEME="robbyrussell" # 主题设置(（)文件在~/.oh-my-zsh/themes)
 
 # 插件
 plugins=(git textmate ruby autojump osx mvn gradle)
@@ -1095,37 +1106,6 @@ Host 10.10.0.*      #可以用*通配符
 ```sh
 brew install coreutils
 ln -s /usr/local/bin/gtac /usr/local/bin/tac
-```
-
-## 免密码登录
-
-* ~/.ssh/authorized_keys:存放远程免密登录的公钥,主要通过这个文件记录多台机器的公钥
-* ~/.ssh/id_rsa : 生成的私钥文件
-* ~/.ssh/id_rsa.pub ： 生成的公钥文件
-* ~/.ssh/know_hosts : 已知的主机公钥清单　
-* 如果希望ssh公钥生效需满足至少下面两个条件：
-    - .ssh目录的权限必须是700
-    - .ssh/authorized_keys文件权限必须是600
-
-```sh
-ssh-keygen -t rsa # 生成.ssh文件目录
-
-ssh-copy-id -i ~/.ssh/id_rsa.pub <romte_ip>
-scp -p ~/.ssh/id_rsa.pub root@<remote_ip>:/root/.ssh/authorized_keys
-
-scp ~/.ssh/id_rsa.pub root@<remote_ip>:pub_key //将文件拷贝至远程服务器
-cat ~/pub_key >>~/.ssh/authorized_keys //将内容追加到authorized_keys文件中， 不过要登录远程服务器来执行这条命令
-
-# 通过ansible,将需要做免密操作的机器hosts添加到/etc/ansible/hosts下：
-[Avoid close]
-192.168.91.132
-192.168.91.133
-192.168.91.134
-
-ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root/.ssh/id_rsa.pub') }}'" -k
-
-# have SSH host keys for those IPs in your ~/.ssh/known_hosts
-ssh-keygen -R <IP_ADDRESS>
 ```
 
 ## [autojump](https://github.com/joelthelion/autojump)
