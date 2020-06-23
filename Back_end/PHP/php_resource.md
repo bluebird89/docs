@@ -79,6 +79,7 @@
 * 电商
     - [magento/magento2](https://github.com/magento/magento2): a cutting edge, feature-rich eCommerce solution that gets results.
     - [drupal/drupal](https://github.com/drupal/drupal):Verbatim mirror of the git.drupal.org repository for Drupal core. Changes will not be pulled, and merge requests will not be accepted, if you want to contribute, go to Drupal.org: https://drupal.org/project/drupal
+        + [install](https://github.com/drupal/drupal/blob/9.0.x/core/INSTALL.txt)
     - [https://github.com/Sylius/Sylius](https://github.com/Sylius/Sylius): Open Source eCommerce Framework on top of Symfony https://sylius.com
         + [Documentation](https://sylius.readthedocs.io/en/latest/)
         + [Sylius/Sylius-Standard](https://github.com/Sylius/Sylius-Standard)

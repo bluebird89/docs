@@ -1348,6 +1348,7 @@ git merge FETCH_HEAD
   - 添加本地dns， 通过[ipaddress](https://www.ipaddress.com/)查询ip,
   - <raw.githubusercontent.com>, 同上
   - 先通过码云导入 GitHub 上项目；码云clone；修改 .git/config 替换为原来 github地址
+  - [GitHub 加速下载](https://toolwa.com/github/)
 
 ![Git 使用规范流程](../_static/bg2015080501.png)
 

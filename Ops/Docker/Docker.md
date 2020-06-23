@@ -38,6 +38,11 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
   - 统一、优化和加速本地开发和构建流程
   - 保证不同的环境中可以得到相同的运行结果
   - 创建隔离环境用于测试
+* 历史
+  - 2010年，在美国旧金山成立了一家名叫“dotCloud”的公司,主要提供基于PaaS的云计算技术服务。具体来说，是和LXC有关的容器技术
+  - dotCloud公司将自己的容器技术进行了简化和标准化，并命名为——Docker
+  - 2013年3月，dotCloud公司的创始人之一，Docker之父，28岁的Solomon Hykes正式决定，将Docker项目开源.当月，Docker 0.1 版本发布。此后的每一个月，Docker都会发布一个版本。到2014年6月9日，Docker 1.0 版本正式发布
+  - Docker火了之后，dotCloud公司干脆把公司名字也改成了Docker Inc.
 
 ![Docker的总体架构图](../_static/architect_docker.jpg)
 ![Docker vs VM](../_static/VMvsDocker.jpg)
