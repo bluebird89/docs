@@ -744,6 +744,107 @@ ssh -p remote_port username@server_addr
 
 Introspected tunnels to localhost
 
+## 工具集
+
+* nc:快速构建网络链接
+* ping:网路连通性探测
+    - [-l] :定义所发送数据包的大小，默认为32字节
+    - [-n] :定义所发数据包的次数，默认为3次
+    - [-t] :表示不间断向目标IP发送数据包
+* ifconfig/ipaddr:查看服务器网卡，IP等信息
+    - CIDR 地址中包含标准的32位IP地址和有关网络前缀位数的信息。比如10.172.100.3/24，IP地址斜杠后面数字24，代表24位是网络号，后面八位为主机号
+    - 使用IP地址和子网掩码进行AND计算得到网络号
+* tcpdump:和它类似的工具在windows中是wireshark，其采用底层库winpcap/libpcap实现。采用了bpf过滤机制
+* lsof 列出当前系统打开的文件描述符工具
+* netstat:一个网络信息统计工具。可以得到网卡接口上全部了解，路由表信息，网卡接口信息
+* dpkt定义包packet类，网络报文类型的基础类
+    - IP，ICMP等继承于dpkt class，每一个子类有一个_ hdr_ 结构，此结构定义了不同报文的头部，方便取出相应的控制字段
+* scapy:这个是嗅探包不是爬虫框架scrapy
+
+```sh
+# 扫描机器A端口号在30-40的服务
+nc -z A 30-40
+# 连接服务器A 端口号为5000
+nc -C A 5000
+#传送文件
+MachineA:nc -v -n ip portE:\a.exe
+
+#列出所有连接
+netstat -a
+#只列出TCP或者UDP
+netstat -at/netstat -au
+#列出监听中的连接
+netstat -tnl
+#获取进程名、进程号以及用户 ID
+nestat  -nlpt
+#打印统计信息
+netstat -s
+#netstat持续输出
+netstat -ct
+#打印active状态的连接
+netstat -atnp | grep ESTA
+#查看服务是否运行(npt)
+netstat -aple| grep ntp
+
+#列出所有的网络链接
+lsof -i
+#列出所有udp的网络链接
+lsof -i udp
+#列出谁在使用某个端口
+lsof -i :3306
+#列出谁在使用特定的tcp端口
+lsof -i tcp:80
+#根据文件描述范围列出文件信息
+lsof -d 2-3
+udp 命令
+#列出谁在使用某个端口
+lsof -i :3306
+#列出谁在使用特定的tcp端口
+lsof -i tcp:80
+#根据文件描述范围列出文件信息
+lsof -d 2-3
+
+# 捕获特定网口数据包
+tcpdump -i eth0
+# 捕获特定个数(1000)的包
+tcpdump -c 1000 -i eth0
+# 将捕获的包保存到文件
+tcpdump -w a.pcap -i eth0
+# 读取pcap格式的包
+tcpdump -r a.pcap
+# 增加捕获包的时间戳
+tcpdump -n -ttt -i eth0
+# 指定捕获包的协议类型
+tcpdump -i eth0 arp
+# 捕获指定端口
+tcpdump -i eth0 post 22
+# 捕获特定目标ip+port的包
+tcpdump -i eth0 dst address and port 22
+# 捕获DNS请求和响应
+tcpdump -i eth0 -s0 port 53
+# 匹配Http请求头
+tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
+# 捕获特定网口数据包
+tcpdump -i eth0
+# 捕获特定个数(1000)的包
+tcpdump -c 1000 -i eth0
+# 将捕获的包保存到文件
+tcpdump -w a.pcap -i eth0
+# 读取pcap格式的包
+tcpdump -r a.pcap
+# 增加捕获包的时间戳
+tcpdump -n -ttt -i eth0
+# 指定捕获包的协议类型
+tcpdump -i eth0 arp
+# 捕获指定端口
+tcpdump -i eth0 post 22
+# 捕获特定目标ip+port的包
+tcpdump -i eth0 dst address and port 22
+# 捕获DNS请求和响应
+tcpdump -i eth0 -s0 port 53
+# 匹配Http请求头
+tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
+```
 
 ## 图书
 
@@ -767,10 +868,14 @@ Introspected tunnels to localhost
 * [Zenmap](https://nmap.org/zenmap/):Nmap网络扫描器的官方前端程序
 * [IPv6 连接测试](https://test-ipv6.com/)
 * [henrylee2cn/teleport](https://github.com/henrylee2cn/teleport):Teleport is a versatile, high-performance and flexible socket framework. It can be used for RPC, micro services, peer-peer, push services, game services and so on. https://github.com/henrylee2cn/tpdoc
+* [tailscale / tailscale](https://github.com/tailscale/tailscale):The easiest, most secure way to use WireGuard and 2FA.https://tailscale.com/
+
+
 
 ## 参考
 
 * [SystemsApproach/book](https://github.com/SystemsApproach/book):Meta-data and Makefile needed to build the book. Main starting point.
+* [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
 * [TCP/IP 视频讲解 计算机网络](https://www.bilibili.com/video/av10610680)
 
 <http://blog.csdn.net/hguisu/article/details/7445768/>

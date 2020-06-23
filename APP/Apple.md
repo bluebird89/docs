@@ -37,6 +37,28 @@
 * Restrictions:Screen Time->Content & Privacy Restrictions
 	- Prevent explicit content and content ratings
 
+## 芯片
+
+* iPhone 和 iPad 的芯片是 ARM 架构，Mac 电脑的芯片是 x86 架构，这导致 iPhone 的 App 无法在 Mac 电脑运行.
+* 近几年，x86 架构发展迟缓，ARM 架构则进步显著，已经从移动设备向桌面电脑和服务器进军了
+* 1984年，第一代 Macintosh 问世，CPU 是摩托罗拉公司的68000芯片
+* 1994年，摩托罗拉将68000芯片升级为 PowerPC 芯片，Mac 电脑跟着升级
+* 2005年，乔布斯宣布，Mac 电脑将放弃 PowerPC 芯片，改用 Intel 公司的 x86 CPU
+	- Intel 的 CPU 比 PowerPC 性能强，并且由于产量大，价格也便宜
+	- Windows 电脑使用的是 x86 芯片，改了架构以后，Mac 电脑就也能安装 Windows，做到"一机双系统"
+	- 乔布斯用特有的极具煽动力的语言，解释："最重要的原因是，向前看时......我们想象了各种我们希望为你打造的惊人产品，但是我们不知道如何使用 PowerPC 来实现它们。"
+* 大多数用户购买 Mac 电脑，根本没想过安装 Windows，或者运行 Windows 特有的软件。此外，虽然 CPU 架构一致，但是 Windows 的游戏软件并没有移植到 Mac 电脑，游戏开发商依然不支持 Mac。更大的市场变化是，消费者和技术投资的主流已经转向了移动设备， 桌面设备已经不那么重要了
+* 苹果公司的主要业务和利润来源，现在都来自移动领域。苹果正在围绕移动设备，重塑它的战略。它的软件工具（LLVM 编译器、Swift 语言、Xcode 开发工具、App Store 商店）和硬件设备（Apple Watch、AirPods 等），都是围绕 iPhone 开发的。
+* 2007年推出 iPhone 之前，苹果曾希望使用 Intel 的 ARM 芯片 XScale 作为手机的 CPU。但是，英特尔当时的 CEO 保罗·欧德宁，不看好苹果的这个项目，而且也不愿意在 ARM 芯片上投资，最后不仅放过了 iPhone，还将 XScale 产品线卖给了 Marvell 公司。iPhone 取得了辉煌的成功。英特尔这下急了，又反过来开发基于 x86 架构的移动设备 CPU，就是 Atom 芯片。但是，苹果没有在手机上再给 Intel 机会，x86 架构也被证明不适合手机，Atom 没有成功
+* Intel 在手机业务上失败，在桌面业务上则陷入停滞。MacBook Pro 的 CPU， 2010年是2核的 2.66 GHz 的 i7，2020年是8核的 2.6 GHz 的 i9，过去10年基本上只是改进了工艺，增加了核心数量，没有实质的重大突破。除了性能以外，苹果最在意的两点----功率和散热---- Intel 也没有解决
+* 2010年发布的 iPhone 4，第一次采用苹果自己设计的 CPU，名称是 Apple A4。当年推出的 Apple TV 第二代，也用了 A4 芯片
+* 每一代 iPhone 用的都是苹果自己的 CPU，从 iPhone 4S 的 A5 到最新 iPhone 11 的 A13。现在的苹果芯片在效能、功耗和功能各方面，都属于世界顶尖级别的 ARM 芯片。目前，Mac 电脑是唯一使用 x86 芯片的苹果设备，其他的所有设备（iPhone、iPad、Apple TV、Apple Watch、Airpods）用的都是苹果自己设计的 ARM 芯片
+* 苹果早就尝试在 MacBook 里面加入 ARM 芯片，把自己在 iPhone 的技术积累引入 Mac
+	- 2016年，苹果在 MacBook Pro 里面加了一块自己设计的 Apple T1 芯片，把 TouchID、FaceTime、TouchBar 等功都做进去了，让这块 ARM 芯片分担一些 Intel CPU 的工作
+	- 2018年，苹果又推出了 Apple T2。这块芯片跟 iPhone 7 的 A10 基本一致，比上一代有更强的运算能力，加入了更多的功能，比如硬件加速、媒体编解码、Siri 支持等
+* 如果笔记本的整个 CPU 都由苹果自己设计，一定会有更多的功能集成进来，苹果手机的安全特性、图形支持、视频处理、音频处理、加密解密、人工智能都可以放进桌面设备。苹果也能对它进行更好的优化，批量生产，降低成本。一旦苹果可以控制芯片、硬件、软件整个堆栈，就能让它们更好的协同，创造出更多多令人激动的新功能
+* Mac 电脑采用 ARM 架构后，还能实现统一的 Apple 生态，而不是现在分隔开来的 Mac 生态和 iPhone/iPad 生态
+
 ## 参考
 
 * [从 Macintosh 到 Mac OS：Mac 操作系统视觉史 ](https://sspai.com/post/60484)

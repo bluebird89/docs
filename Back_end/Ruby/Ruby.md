@@ -114,6 +114,15 @@ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
 gem sources --remove https://rubygems.org/
 gem sources -a https://mirrors.aliyun.com/rubygems/
 ```
+## * [Bundler](https://bundler.io/)
+
+provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
+
+```sh
+bundle init # reates a simple Gemfile which you can edit
+bundle install|update|check
+bundle install --deployment
+```
 
 ### SQL
 
@@ -158,7 +167,6 @@ rails server
 
 ## 工具
 
-* [Bundler](https://bundler.io/)
 * [activeadmin/activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. https://activeadmin.info
 * [tj/commander](https://github.com/tj/commander):The complete solution for Ruby command-line executables http://visionmedia.github.com/commander
 * [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. https://www.discourse.org
