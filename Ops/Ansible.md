@@ -284,6 +284,7 @@ cp /etc/ansible/roles/nginx01/templates/nginx.conf  /etc/ansible/roles/nginx02/t
   - cron:远程主机crontab配置
   - service:远程主机系统服务管理
   - user:用户管理
+
 ```sh
 ansible all -m ping # 检查所有机器是否能ping通
 ansible -i inventory.ini node1 -m command -a "whoami"  -u aUser --private-key key/ansible_id_rsa  -k  -b --become-user user0 --become-method sudo -K  # 用ansible在远程机器上执行whoami命令

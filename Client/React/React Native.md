@@ -204,27 +204,6 @@ Flexbox 是css3 里面引入的布局模型－弹性盒子模型，旨在通过�
 架构图
 ![架构图](../_static/front_back_seperate.png)
 
-## [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app)
-
-Create React apps with no build configuration.
-
-```sh
-npm install -g create-react-app
-
-npx create-react-app my-app
-npm init react-app my-app
-yarn create react-app my-app
-
-create-react-app my-app
-cd my-app
-
-npm|yarn start
-npm|yarn test
-npm run build | yarn build
-
-npm run eject #  导出配置文件
-```
-
 ## 问题
 
 * UI 抽象层翻译出来的 iOS 和安卓原生页面，做不到完全一致，尤其是复杂页面，样式或功能存在差异

@@ -132,3 +132,5 @@
 
 * [飞行模拟器](https://www.geo-fs.com/int/cn/)
 * [stellarium](https://stellarium.org/en/):s a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.
+* [ r-spacex / SpaceX-API ](https://github.com/r-spacex/SpaceX-API):
+rocket Open Source REST API for rocket, core, capsule, pad, and launch data https://docs.spacexdata.com

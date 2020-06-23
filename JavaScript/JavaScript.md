@@ -3116,6 +3116,9 @@ Simple JavaScript testing framework for browsers and node.js http://jasmine.gith
 * [verekia/js-stack-from-scratch](https://github.com/verekia/js-stack-from-scratch):🛠️⚡ Step-by-step tutorial to build a modern JavaScript stack.
 * [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 
+* [ teambit / bit ](https://github.com/teambit/bit): Build, distribute and collaborate on components.
+https://bit.dev/  Get your enterprise-grade component cloud
+
 ## 参考
 
 * [stephentian/33-js-concepts](https://github.com/stephentian/33-js-concepts):📜 每个 JavaScript 工程师都应懂的33个概念 @leonardomso

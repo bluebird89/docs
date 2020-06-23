@@ -1,6 +1,7 @@
 # TDD 测试驱动开发
 
-* 软件认知的能力
+* 正确软件的开发套路
+* 提高软件认知能力的方法
 * 敏捷开发中的一项核心实践和技术，也是一种设计方法论
 * 原理是在开发功能代码之前，先编写单元测试用例代码，测试代码确定需要编写什么产品代码
     - 分离关注点，一次只戴一顶帽子
@@ -32,13 +33,14 @@
 
 ## 流程
 
-* 需求分析和设计
+* 需求分析
     - 协作需求梳理：澄清-》验收条件-》测试案例
     - Alice (actor) liked (verb) photo ... (object) on Cynthia's album (target). 从中抽取出四个要素：actor，verb，object，target(optional)，通过这四个要素，我们可以描述一个用户的行为
     - 系统分成几个部分：
         + activity receive and persistence - 当一个行为产生后，外部系统会调用 news feed 来创建 activity；
         + feed generator - 当 activity 创建成功后，它会扩散到所有 subscribers 那里生成 feed；
         + subscription generator - 当 activity 是某种特定 verb 的 activity， 我们维护 object 的 subscription 表（添加/删除）
+* 代码设计
     - 定义接口
     - interface review
     - 开发：需要不断地为更加细分的接口设计添加新的测试例

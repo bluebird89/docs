@@ -41,15 +41,29 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
 
 * 6 层抽象
     - Deployment:创建和管理 ReplicaSet
-    - ReplicaSet:创建和管理 Pod
+        + 无缝升级运行中的应用。指定了 Pod 死掉后重启的策略
+        + 通过命令行|配置文件 创建
+    - ReplicaSet:确保  APP 具有指定数量的 Pod,根据 Deployment 中设定的指标来创建和扩展
     - Pod:运行于 Node 中，一个 Node 中通常会运行多个 Pod
+        +  K8s 中的基本构建单元
+        + 一个 Pod 中可以包含多个 Container，但通常是包含一个
+        + 一个 Pod 就是一个最小单元，其中的内容绝对不会被分割在2个Node上，一个 Pod 中的内容始终作为一个整体
+        + 责处理容器的数据卷、密钥、配置
+        + 生命周期是不确定
+        + 生存在 Worker Node 上
     - Node 中有 Container 运行时环境，并运行放置在 Docker 镜像中的应用程序
     - Node Cluster
     - Node Processes
     - Docker Container
 * 一切皆为资源，一切即可描述，一切皆可管理
-* Master节点组件:提供集群的管理控制中心，通常在一台VM/机器上启动所有Master组件，并且不会在此VM/机器上运行用户容器  kubecfg、Minion(Host)以及Proxy
-    - 定义了Kubernetes 集群Master/API Server的主要声明  RESTStorage以及Client
+* Master Node 组件:提供集群的管理控制中心，通常在一台VM/机器上启动所有Master组件，并且不会在此VM/机器上运行用户容器  kubecfg、Minion(Host)以及Proxy,子进程组件
+    - API server：K8s 的 API 接口
+    - etcd：分布式 key-value 存储，保存集群的状态数据。
+    - scheduler：为新的 Pod 选择合适的 Node。
+    - kube-controller-manager：集群的控制器，处理集群的后台任务。
+    - cloud-controller-manager：与云环境提供商交互的接口
+    - 负责做调度决策、响应事件、实现变更、监控集群
+    - 定义了 Kubernetes 集群 Master/API Server的主要声明  RESTStorage以及Client
     - client(Kubecfg)调用Kubernetes API，管理Kubernetes主要构件Pods、Services、Minions、容器的入口
     - Etcd
         + 用来存储所有Kubernetes集群状态
@@ -68,7 +82,7 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
     - Controller manager: 负责任务调度，简单说直接请求Kubernetes做调度的都是任务，例如Deployment 、DeamonSet、Pod等等
         + 每一个任务请求发送给Kubernetes之后，都是由Controller Manager来处理的，每一种任务类型对应一个Controller Manager，比如Deployment对应一个叫做Deployment Controller，DaemonSet对应一个DaemonSet Controller
         + 实现集群故障检测和恢复的自动化工作，负责执行各种控制器，主要有： endpoint-controller：定期关联service和pod(关联信息由endpoint对象维护)，保证service到pod的映射总是最新的
-    - replication-controller：定期关联replicationController和pod，保证replicationController定义的复制数量与实际运行pod的数量总是一致的
+        + replication-controller：定期关联replicationController和pod，保证replicationController定义的复制数量与实际运行pod的数量总是一致的
     - Scheduler: 负责资源调度
         + Controller Manager 会把Pod对资源要求写入到Etcd里面，Scheduler监听到有新的Pod需要调度，就会根据整个集群的状态，把Pod分配到具体的worker节点上
         + 由于一旦Minion节点的资源被分配给Pod，那这些资源就不能再分配给其他Pod， 除非这些Pod被删除或者退出， 因此，Kubernetes需要分析集群中所有Minion的资源使用情况，保证分发的工作负载不会超出当前该Minion节点的可用资源范围
@@ -90,7 +104,11 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
         + Kubecfg将特定的请求，比如创建Pod，发送给Kubernetes Client
         + Kubernetes Client将请求发送给API server
 
-* worker节点组件：运行在每个k8s Node上，提供K8s运行时环境，以及管理Pod和容器的生命周期
+* Worker Node 组件：运行在每个k8s Node上，提供K8s运行时环境，以及管理Pod和容器的生命周期,称为 Node
+    - 一个 Node 表示一台机器,N 个 Pod 跑在一个 Node 上
+    -  kubelet：负责管理 Node 上的一切事物，与 Master 的 API server 沟通，可以说是 Worker Node 的大脑
+    -  kube-proxy：把连接路由到正确的 Pod，负责负载均衡的工作，就像一个交通警察。
+    -  Container Runtime：下载镜像、运行容器，例如，Docker 就是一个 Container Runtime，所以为了方便记忆，可以把 Container Runtime 理解为就是 Docker
     - [Kubelet](https://github.com/kubernetes/kubelet): 运行在每一个worker节点上的Agent，监听Etcd中的Pod信息，运行分配给它所在节点的Pod，并把状态更新回Etcd。通过docker部署
         + Kubelet是集群中每个Minion和Master API Server的连接点，运行在每个Minion上，接收Master API Server分配给它的commands和work，与持久性键值存储etcd、file、server和http进行交互，读取配置信息
         + 包括Docker Client、Root Directory、Pod Workers、Etcd Client、Cadvisor Client以及Health Checker组件
@@ -111,8 +129,7 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
         + Proxy提供TCP/UDP sockets的proxy，每创建一种Service，Proxy主要从etcd获取Services和Endpoints的配置信息（也可以从file获取），然后根据配置信息在Minion上启动一个Proxy的进程并监听相应的服务端口，当外部请求发生时，Proxy会根据Load Balancer将请求分发到后端正确的容器处理
         + 解决了同一主宿机相同服务端口冲突的问题
         + 提供了Service转发服务端口对外提供服务的能力，Proxy后端使用了随机、轮循负载均衡算法 [kube-proxy 的内容 KUBERNETES代码走读之MINION NODE 组件 KUBE-PROXY](http://www.sel.zju.edu.cn/?spm=5176.100239.blogcont47308.8.2bn7P0&p=484)
-    - Docker: Docker引擎，负责容器运行
-    - Container: 负责镜像管理以及Pod和容器的真正运行（CRI）
+    - Container: 负责镜像管理以及Pod和容器的真正运行（CRI） Docker引擎，负责容器运行
 * 实践
     - 创建一个nginx_deployment.yaml配置文件
     - 通过kubectl命令行创建一个包含Nginx的Deployment对象，kubectl会调用API Server往Etcd里面写入一个Deployment对象。
@@ -128,6 +145,23 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
 
 ## 核心概念
 
+* 对象：负责管理和运行用于创建和运行容器的 Pod
+    - ReplicaSet 创建和管理 Pod。 如果一个 Pod 因为 Node 故障而关闭，ReplicaSet 会自动在其他 Node 中启动这个 Pod。 ReplicaSet 由 Deployment 创建，可以通过 Deployment 非常方便的升级应用
+    - StatefulSet 就助跟踪应用状态,据规范管理一组 Pod 的部署和缩放
+        + StatefulSet 的 Pod 都有一个唯一的、持久的标识，控制器在进行任何重新调度时都会维护该标识。对于数据库等有状态的持久化后端服务非常有用。 Pod 中的状态信息就是保存在与 StatefulSet 关联的数据卷中
+    - DaemonSet 用于持续的进程，每当一个 Node 加入到集群中时，DaemonSet 都会在其中自动启动一个 Pod。适用于一直运行的后台任务，例如监控、日志收集。
+    - StatefulSet 和 DaemonSet 虽然与 ReplicaSet 在一个层级中，但不受 Deployment 控制
+    - Job 负责监督管理那些运行批处理作业的 Pod
+        + 会创建 Pod，并通过跟踪 Pod 成功完成的数量来确保他们完成任务
+        + 一旦容器内部的作业成功完成，容器就不会重新启动.
+        + 一次性的做一个任务的时候
+    - CronJob:在指定的时间运行作业.计划以固定的时间间隔或固定的时间重复执行
+    - Service 为一组 Pod 创建单个访问点, 提供一致的 IP 地址和端口，以访问其中的 Pod
+        + 外部用户和内部 Pod 都使用服务与其他 Pod 通信
+    - Volume 是一个可以保存数据的目录
+        + 一个 Pod 的组件，在 Pod 中创建，不能单独删除
+        + Pod 中的容器都可以访问 Volume，只要这些容器都挂载了这 Volume 即可
+        + 生命周期是独立于容器的，与 Pod 相关
 * Cluster 集群：由K8s使用一序列的物理机、虚拟机和其它基础资源来运行你的应用程序
 * NameSpaces 命名空间：在集群中可以使用namespace创建多个“虚拟集群”，namespace之间可以完全隔离，也可以通过某种方式，让一个namespace中的service可以访问到其他的namespace中的服务
     - 一组资源和对象的抽象集合，比如可以用来将系统内部的对象划分为不同的项目组或用户组
@@ -1044,6 +1078,8 @@ source ~/.bash_profile
 * Marmot是一个来自于谷歌的工作流执行引擎，用于处理SRE和Ops需要的工作流。它被设计为处理基础架构变更的工具，但它可以和Kubernetes一起使用
 * Ark 是一个用于管理从你的Kubernetes资源和卷做灾难恢复的工具。Ark提供一个简单并且鲁棒的方式来备份和从系列的检查点恢复Kubernetes资源和持久化的卷。备份文件被存储在一个对象存储服务
 * Sysdig是一个容器排错工具，它可以捕获系统调用和来自于Linux内核的事件。简单的说，对于整个集群，Sysdig就是strace + tcpdump + htop + iftop + lsof + wireshark。
+* [rancher / k3s](https://github.com/rancher/k3s):Lightweight Kubernetes https://k3s.io/
+    - `curl -sfL https://get.k3s.io | sh -`
 
 ## 参考
 

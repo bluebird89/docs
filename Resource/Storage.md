@@ -59,8 +59,9 @@
         + [yangshun1029/aria2gui](https://github.com/yangshun1029/aria2gui):Aria2GUI for macOS
     - [iawia002/annie](https://github.com/iawia002/annie):👾 Fast, simple and clean video downloader
     - [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
-    - [rg3/youtube-dl](https://github.com/rg3/youtube-dl):Command-line program to download videos from YouTube.com and other video sites http://rg3.github.io/youtube-dl/
+    - [rg3/youtube-dl](https://github.com/rg3/youtube-dl):Command-line program to download videos from YouTube.com and other video sites http://rg3.github.io/youtube-dl/ `curl https://yt-dl.org/latest/youtube-dl -o /usr/local/bin/youtube-dl `
     - [ popcorn-official / popcorn-desktop ](https://github.com/popcorn-official/popcorn-desktop):Popcorn Time is a multi-platform, free software BitTorrent client that includes an integrated media player. Desktop ( Windows / Mac / Linux ) a Butter-Project Fork https://popcorntime.app
+    - [ xiandanin / magnetW ](https://github.com/xiandanin/magnetW):磁力链接聚合搜索
 
 ## wget
 
@@ -68,8 +69,6 @@
     * -b :后台下载
     * -o:
     * -c:恢复下载
-
-* `curl https://yt-dl.org/latest/youtube-dl -o /usr/local/bin/youtube-dl `
 
 ```sh
 wget http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4
@@ -87,6 +86,6 @@ sha256sum /path/filename
 
 * [rook/rook](https://github.com/rook/rook):Storage Orchestration for Kubernetes https://rook.io
 * [nextcloud/server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data https://nextcloud.com
-* [Unison ](https://www.cis.upenn.edu/~bcpierce/unison/):File Synchronizer
+* [Unison](https://www.cis.upenn.edu/~bcpierce/unison/):File Synchronizer
 * [minio/minio](https://github.com/minio/minio):MinIO is a high performance object storage server compatible with Amazon S3 APIs https://min.io/download
 * [openmediavault](https://www.openmediavault.org/): the next generation network attached storage (NAS) solution based on Debian Linux. It contains services like SSH, (S)FTP, SMB/CIFS, DAAP media server, RSync, BitTorrent client and many more.
