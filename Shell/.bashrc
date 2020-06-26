@@ -16,6 +16,12 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+bind '"\e[A"':history-search-backward # Use up and down arrow to search
+bind '"\e[B"':history-search-forward # the history. Invaluable!
+set -o emacs
+ # Set emacs mode in bash (see below)
+set bell-style visible
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -101,6 +107,12 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+ # Do not beep, inverse colors
+# Set a nice prompt like [user@host]/path/todir>
+PS1="\[\033[1;30m\][\[\033[1;34m\]\u\[\033[1;30m\]"
+PS1="$PS1@\[\033[0;33m\]\h\[\033[1;30m\]]\[\033[0;37m\]"
+PS1="$PS1\w\[\033[1;30m\]>\[\033[0m\]"
+
 
 export PS1="\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h: \[\e[0;35m\]\W\[\e[m\] \\$"
 

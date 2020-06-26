@@ -63,7 +63,7 @@ systeminfo | findstr Build
   - Tabbles:灵活、精准的标签工具
 * 快捷键：AutoHotKey
 * 本地搜索
-  - [Listary](https://www.listary.com/) :Windows 文件浏览增强工具 极速的文件和APP搜索工具，可大幅度提高打开文件和app的速度
+  - [Listary](https://www.listary.com/) :Windows 文件浏览增强工具极速的文件和APP搜索工具，可大幅度提高打开文件和app的速度
   - Everything
   - [火柴](https://huochaipro.com/)
 * Notepad++
@@ -105,6 +105,7 @@ systeminfo | findstr Build
 * Boxee 媒体中心
 * Media Player Classic 媒体播放
 * EasyBCD 2.3：多系统引导文件管理
+* [阿呆猫](http://www.admflt.com/)
 * [microsoft/PowerToys](https://github.com/microsoft/PowerToys):Windows system utilities to maximize productivity
   - Window Walker 直接输入软件的名字来进行准确定位, Ctrl+Win 徽标键即可打开
   - 批量调节图片尺寸
@@ -297,7 +298,7 @@ cmd + r input:bash download ubuntu
 
 ## [ microsoft/terminal](https://github.com/microsoft/terminal)
 
-The new Windows Terminal and the original Windows console host, all in the same place! 
+The new Windows Terminal and the original Windows console host, all in the same place!
 
 * Theme
     - [](https://aka.ms/terminal-profiles-schema)

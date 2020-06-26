@@ -324,7 +324,7 @@ date.timezone = Asia/Shanghai
 
 brew install brew-php-switcher
 brew-php-switcher 5.6
-brew unlink php 
+brew unlink php
 brew link php
 # virtual memory exhausted: Cannot allocate memory
 # 编译调整虚拟机内存大小
@@ -1536,7 +1536,7 @@ docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/l
 * 黄色最耗时路径
 * 红色是瓶颈
 
-```sh
+```
 git clone https://github.com/longxinH/xhprof
 cd xhprof/extension/
 /usr/local/php/bin/phpize
@@ -1558,7 +1558,6 @@ yum install graphviz # 性能图渲染
 xhprof_enable(); # 需要分析的代码
 
 ##  Code
-
 $xhprof_data = xhprof_disable();
 include_once ROOT_PATH.'/xhprof_lib/utils/xhprof_lib.php';
 include_once ROOT_PATH . '/xhprof_lib/utils/xhprof_runs.php';
@@ -1567,52 +1566,6 @@ $run_id = $xhprof_runs->save_run($xhprof_data, "xhprof_test"); # 将run_id保存
 
 # 查看结果
 $host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
-
-# 项目中
-<?php
-namespace backend\component;
-
-use Yii;
-use common\component\baseController;
-
-class backendBaseController extends baseController
-{
-    public $layout = "/content";
-    public $enableCsrfValidation = false;
-
-    public static $profiling = 0;
-
-    public function init(){
-        parent::init();
-
-        self::$profiling = 1;// !(mt_rand() % 9);
-        if  (self::$profiling) {
-            xhprof_enable(XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
-        }
-    }
-
-    public function __destruct()
-    {
-        if(self::$profiling){
-            $data = xhprof_disable();
-            //$_SERVER['XHPROF_ROOT_PATH'] 该环境变量由第3步得来
-            include_once $_SERVER['XHPROF_ROOT_PATH'] . "/xhprof_lib/utils/xhprof_lib.php";
-            include_once $_SERVER['XHPROF_ROOT_PATH'] . "/xhprof_lib/utils/xhprof_runs.php";
-            $x = new XHProfRuns_Default();
-
-            //当前路由
-            $routeName = Yii::$app->requestedRoute;
-            //路由为空，则说明是首页
-            if (empty($routeName)){
-                $routeName = Yii::$app->defaultRoute;
-            }
-
-            //拼接xhprof分析结果保存文件名
-            $xhprofFilename = str_replace('/', '_', $routeName).'_'.date('Ymd_His');
-            $x->save_run($data, $xhprofFilename);
-        }
-    }
-}
 ```
 
 ## 性能
@@ -1757,8 +1710,8 @@ class backendBaseController extends baseController
     - $   匹配字符串的结束
 * 字符转义:要查找特殊意义字符`.`，或者`*`,使用\来取消。使用`\\.` `\\\*` `\\\`
 * 重复
-    - `*`   重复零次或更多次
-    - `+`   重复一次或更多次
+    - `*` 重复零次或更多次
+    - `+` 重复一次或更多次
     - ?   重复零次或一次
     - {n} 重复n次
     - {n,}    重复n次或更多次
@@ -1771,15 +1724,8 @@ class backendBaseController extends baseController
     -  \ 将下一个字符标记为一个特殊字符、或一个原义字符、或一个 向后引用、或一个八进制转义符。例如，'n' 匹配字符 "n"。'\n' 匹配一个换行符。序列 '\' 匹配 "" 而 "\(" 则匹配 "("。
     -   ^   匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 '\n' 或 '\r' 之后的位置。
     -   $   匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 '\n' 或 '\r' 之前的位置。
-    -   *   匹配前面的子表达式零次或多次。例如，zo* 能匹配 "z" 以及 "zoo"。* 等价于{0,}。
-    -   +   匹配前面的子表达式一次或多次。例如，'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。
-    -   ?   匹配前面的子表达式零次或一次。例如，"do(es)?" 可以匹配 "do" 或 "does" 中的"do" 。? 等价于 {0,1}。
-    -   {n} n 是一个非负整数。匹配确定的 n 次。例如，'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。
-    -   {n,}    n 是一个非负整数。至少匹配n 次。例如，'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。
-    -   {n,m}   m 和 n 均为非负整数，其中n <= m。最少匹配 n 次且最多匹配 m 次。例如，"o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。
-    -   ?   当该字符紧跟在任何一个其他限制符 (*, +, ?, {n}, {n,}, {n,m}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 "oooo"，'o+?' 将匹配单个 "o"，而 'o+' 将匹配所有 'o'。
-    -   .   匹配除 "\n" 之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用象 '[.\n]' 的模式。
-    -   [xyz]   字符集合。匹配所包含的任意一个字符。例如， '[abc]' 可以匹配 "plain" 中的 'a'。
+非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 "oooo"，'o+?'
+    -   [xyz]   字符集合。匹配所包含的任意一个字符。例如， '[abc]' 可以匹配 "plain" 中的 'a'
     -   [^xyz]  负值字符集合。匹配未包含的任意字符。例如， '[^abc]' 可以匹配 "plain" 中的'p'、'l'、'i'、'n'。
     -   [a-z]   字符范围。匹配指定范围内的任意字符。例如，'[a-z]' 可以匹配 'a' 到 'z' 范围内的任意小写字母字符。
     -   [^a-z]  负值字符范围。匹配任何不在指定范围内的任意字符。例如，'[^a-z]' 可以匹配任何不在 'a' 到 'z' 范围内的任意字符。
@@ -1807,45 +1753,8 @@ class backendBaseController extends baseController
     -   \(?:pattern\) 匹配pattern但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 "或" 字符“|”来组合一个模式的各个部分是很有用。
     -   例如，“industr\(?:y|ies\)”就是一个比 “industry|industries” 更简略的表达式。     -
     -   \(?=pattern\) 正向预查，在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，'Windows (?=95|98|NT|2000)' 能匹配 "Windows 2000" 中的 "Windows" ，但不能匹配"Windows 3.1" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。     -
-    -   (?!pattern) 负向预查，在任何不匹配 pattern 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如'Windows (?!95|98|NT|2000)' 能匹配 "Windows 3.1" 中的 "Windows"，但不能匹配 "Windows 2000" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。     -
+    -   (?!pattern) 负向预查，在任何不匹配 pattern 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如'Windows (?!95|98|NT|2000)' 能匹配 "Windows 3.1" 中的 "Windows"，但不能匹配 "Windows 2000" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
     -   x|y 匹配x或y。例如，'z|food' 能匹配 "z" 或 "food"。'(z|f)ood' 则匹配 "zood" 或 "food"。
-
-如果你认真去看例4-1，发现那个表达式也能匹配010)12345678或(022-87654321这样的“不正确”的格式。要解决这个问题，我们需要用到分枝条件。
-
-正则表达式里的分枝条件指的是有几种规则，如果满足其中任意一种规则都应该当成匹配，具体方法是用|（竖线）把不同的规则分隔开
-
-例5-1：0\d{2}-\d{8}|0\d{3}-\d{7}
-
-分析：这个表达式能匹配两种以连字号分隔的电话号码：一种是三位区号，8位本地号(如：010-12345678)，一种是4位区号，7位本地号(如：0376-2233445)，0\d{2}-\d{8}表示“0”加两数字加“-”加8个数字，0\d{3}-\d{7}表示“0”加三数字加“-”加7个数字，|可理解为“或”。就是查找与前者相匹配或者与后者相匹配的内容。
-
-注意：使用分枝条件时，要注意各个条件的顺序。因为匹配分枝条件时，将会从左到右地测试每个条件，如果满足了某个分枝的话，就不会去再管其它的条件了。如：\d{5}-\d{4}|\d{5}和\d{5}|\d{5}-\d{4}是不同的。
-
-* 分组：用小括号来指定子表达式，然后就可以指定这个子表达式的重复次数了 `(\d{1,3}.){3}\d{1,3}`
-
-分析：这是一个简单的IP地址匹配表达式。要理解这个表达式，请按下列顺序分析它：\d{1,3}匹配1到3位的数字，(\d{1,3}\.) {3}匹配三位数字加上一个英文句号(这个整体也就是这个分组)重复3次，最后再加上一个一到三位的数字\d{1,3}。
-
-不幸的是，它也将匹配256.300.888.999这种不可能存在的IP地址。如果能使用算术比较的话，或许能简单地解决这个问题，但是正则表达式中并不提供关于数学的任何功能，所以只能使用冗长的分组，选择，字符类来描述一个正确的IP地址：((2[0-4]\d|25[0-5]|[01]?\d\d?).){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)。
-
-* 反义
-    - \W  匹配任意不是字母，数字，下划线，汉字的字符
-    - \S  匹配任意不是空白符的字符
-    - \D  匹配任意非数字的字符
-    - \B  匹配不是单词开头或结束的位置
-    - [^x]    匹配除了x以外的任意字符
-    - [^aeiou]    匹配除了aeiou这几个字母以外的任意字符
-* 后向引用：使用小括号指定一个子表达式后，匹配这个子表达式的文本(也就是此分组捕获的内容)可以在表达式或其它程序中作进一步的处理
-    - 默认情况下，每个分组会自动拥有一个组号，规则是：从左向右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。
-    - 后向引用用于重复搜索前面某个分组匹配的文本。例如，\1代表分组1匹配的文本。
-
-例8-1：\b(\w+)\b\s+\1\b
-
-分析：可以匹配重复的单词，像go go, 或者kitty kitty。这个表达式首先是一个单词，也就是单词开始处和结束处之间的多于一个的字母或数字\b(\w+)\b，这个单词会被捕获到编号为1的分组中，然后是1个或几个空白符\s+，最后是分组1中捕获的内容（也就是前面匹配的那个单词）\1。
-
-
-对一个正则表达式模式或部分模式两边添加圆括号将导致相关匹配存储到一个临时缓冲区中，所捕获的每个子匹配都按照在正则表达式模式中从左至右所遇到的内容存储。存储子匹配的缓冲区编号从 1 开始，连续编号直至最大 99 个子表达式。每个缓冲区都可以使用 '\n' 访问，其中 n 为一个标识特定缓冲区的一位或两位十进制数。
-
-可以使用非捕获元字符 '?:', '?=', or '?!' 来忽略对相关匹配的保存。
-
 * 常用分组语法
     - 捕获  (exp)   匹配exp,并捕获文本到自动命名的组里
     - (?<name>exp)    匹配exp,并捕获文本到名称为name的组里，也可以写成(?'name'exp)
@@ -1859,9 +1768,9 @@ class backendBaseController extends baseController
     当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配尽可能多的字符。以这个表达式为例：a.\*b，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串aabab。这被称为贪婪匹配。
     有时，我们更需要懒惰匹配，也就是匹配尽可能少的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号?。这样.\*?就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。现在看看懒惰版的例子吧：
     a.*?b匹配最短的，以a开始，以b结束的字符串。如果把它应用于aabab的话，它会匹配aab（第一到第三个字符）和ab（第四到第五个字符）。注意：最先开始的匹配拥有最高的优先权
-    - *?  重复任意次，但尽可能少重复
-    - +?  重复1次或更多次，但尽可能少重复
-    - ??  重复0次或1次，但尽可能少重复
+    - *  重复任意次，但尽可能少重复
+    - +  重复1次或更多次，但尽可能少重复
+    - ?  重复0次或1次，但尽可能少重复
     - {n,m}?  重复n到m次，但尽可能少重复
     - {n,}?   重复n次以上，但尽可能少重复
 * 模式修正符
@@ -1879,58 +1788,6 @@ class backendBaseController extends baseController
     - https://blog.csdn.net/kkobebryant/article/details/267527
     - http://www.jb51.net/article/77428.htm
     - https://www.cnblogs.com/hellohell/p/5718319.html
-
-```
-<?php
-$string = "上飞机离开我<img border='0' alt='' src='/uploadfile/2009/0921/20090921091612567.jpg' border='0' />sdfsdf";
-
-$su = preg_match("/ \<[ ]*img.*src[ ]*\=[ ]*[\"|\'](.+?)[\"|\'] /", $string,$match); // 匹配src=的内容
-print_r($match[1]); // 输出 /uploadfile/2009/0921/20090921091612567.jpg
-
-$su = preg_match("/ \<[ ]*img.*src[ ]*\=[ ]*[\"|\'](.+)[\"|\'] /", $string,$match);
-print_r($match[1]); // 输出 /uploadfile/2009/0921/20090921091612567.jpg' border='
-?>
-
-用户名: ^[a-z0-9_-]{3,16}$
-密码: ^[a-z0-9_-]{6,18}$
-十六进制值: ^#?([a-f0-9]{6}|[a-f0-9]{3})$
-电子邮箱: ^([a-z0-9_.-]+)@([\da-z.-]+).([a-z.]{2,6})$
-URL: ^(https?://)?([\da-z.-]+).([a-z.]{2,6})([/\w .-]*)*/?$
-IP 地址: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
-HTML 标签: <([a-z]+)([<]+)*(?:>(.*)</\1>|\s+/>)$
-Unicode编码中的汉字范围： ^[u4e00-u9fa5],{0,}$
-匹配中文字符的正则表达式： [\u4e00-\u9fa5]
-匹配双字节字符(包括汉字在内)： [^\x00-\xff]
-匹配空白行的正则表达式： \n\s*\r
-匹配HTML标记的正则表达式： <(\S*?)[^>]*>.*?</\1>|<.*? />
-匹配首尾空白字符的正则表达式： ^\s*|\s*$
-匹配Email地址的正则表达式： \w+([-+.]\w+)*@\w+([-.]\w+)*.\w+([-.]\w+)*
-匹配网址URL的正则表达式： [a-zA-z]+://[^\s]*
-匹配帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)： ^[a-zA-Z][a-zA-Z0-9_]{4,15}$
-匹配国内电话号码： \d{3}-\d{8}|\d{4}-\d{7}
-匹配腾讯QQ号： [1-9][0-9]{4,}
-匹配中国大陆邮政编码： [1-9]\d{5}(?!\d)
-匹配身份证： \d{15}|\d{18}
-匹配ip地址： ((2[0-4]\d|25[0-5]|[01]?\d\d?).){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)
-
-^[1-9]\d*$　 　 //匹配正整数
-^-[1-9]\d*$ 　 //匹配负整数
-^-?[1-9]\d*$　　 //匹配整数
-^[1-9]\d*|0$　 //匹配非负整数（正整数 + 0）
-^-[1-9]\d*|0$　　 //匹配非正整数（负整数 + 0）
-^[1-9]\d*.\d*|0.\d*[1-9]\d*$　　 //匹配正浮点数
-^-([1-9]\d*.\d*|0.\d*[1-9]\d*)$　 //匹配负浮点数
-^-?([1-9]\d*.\d*|0.\d*[1-9]\d*|0?.0+|0)$　 //匹配浮点数
-^[1-9]\d*.\d*|0.\d*[1-9]\d*|0?.0+|0$　　 //匹配非负浮点数（正浮点数 + 0）
-^(-([1-9]\d*.\d*|0.\d*[1-9]\d*))|0?.0+|0$　　//匹配非正浮点数（负浮点数 + 0）
-评注：处理大量数据时有用，具体应用时注意修正
-
-^[A-Za-z]+$　　//匹配由26个英文字母组成的字符串
-^[A-Z]+$　　//匹配由26个英文字母的大写组成的字符串
-^[a-z]+$　　//匹配由26个英文字母的小写组成的字符串
-^[A-Za-z0-9]+$　　//匹配由数字和26个英文字母组成的字符串
-^\w+$　　//匹配由数字、26个英文字母或者下划线组成的字符串
-```
 
 ## 禁止
 
@@ -2263,6 +2120,24 @@ else {
   echo "验证数据签名失败".PHP_EOL;
 }
 exit;
+```
+
+## 错误
+
+* `E_ALL & ~E_NOTICE` # 除了提示级别
+* `E_ALL ^ E_NOTICE` #
+* `E_ERROR | E_RECOVERABLE_ERROR` # 只显示错误和可恢复
+
+```
+    |- Exception implements Throwable
+        |- ...
+    |- Error implements Throwable
+        |- TypeError extends Error
+        |- ParseError extends Error
+        |- AssertionError extends Error
+        |- ArithmeticError extends Error
+            |- DivisionByZeroError extends ArithmeticError
+
 ```
 
 ## [xdebug](https://xdebug.org/)

@@ -266,6 +266,8 @@ url: jdbc:mysql://localhost:13306/ecommerce_order_mysql?allowMultiQueries=true&u
 * [ityouknow/spring-boot-examples](https://github.com/ityouknow/spring-boot-examples):about learning Spring Boot via examples. Spring Boot 技术栈示例代码，快速简单上手教程。 http://www.ityouknow.com/
 * [Spring Boot中文文档](http://cwiki.apachecn.org/display/SpringBoot)
 * [eugenp/tutorials](https://github.com/eugenp/tutorials):The "REST With Spring" Course: http://bit.ly/restwithspring
+* [spring-boot-demo](https://github.com/xkcoding/spring-boot-demo)
+* [SpringBoot-Labs](https://github.com/YunaiV/SpringBoot-Labs)
 
 ## 项目
 
@@ -273,11 +275,15 @@ url: jdbc:mysql://localhost:13306/ecommerce_order_mysql?allowMultiQueries=true&u
 * [ityouknow/spring-boot-examples](https://github.com/ityouknow/spring-boot-examples):about learning Spring Boot via examples. Spring Boot 教程、技术栈示例代码，快速简单上手教程。 http://www.ityouknow.com/
 * admin
     - [codecentric/spring-boot-admin](https://github.com/codecentric/spring-boot-admin):Admin UI for administration of spring boot applications
+* [macrozheng/mall](https://github.com/macrozheng/mall):mall项目是一套电商系统，包括前台商城系统及后台管理系统，基于SpringBoot+MyBatis实现。 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、设置等模块。 http://39.98.69.210/index.html
+* [vhr](https://github.com/lenve/vhr)
 
 ## 工具
 
 * JaCoCo 一款代码测试覆盖率统计工具
 * [JApiDocs](https://github.com/YeDaxia/JApiDocs):无需额外注解、开箱即用的SpringBoot接口文档生成工具 https://japidocs.agilestudio.cn/#/zh-cn/
+* admin
+    - [eladmin](https://github.com/elunez/eladmin)
 
 ## 参考
 

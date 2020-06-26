@@ -470,7 +470,6 @@ int main() {
   close(fd);
   return 0;
 }
-
 ```
 
 ## 硬件
@@ -585,6 +584,8 @@ lshw -C cpu
 lshw -C cpu | grep -i product # 只查看 CPU 品牌和型号
 lscpu | grep -i mhz # 查看 CPU 的速度（兆赫兹）
 lscpu | grep -i bogo # 或其 BogoMips 额定功率
+cat /proc/cpuinfo |grep "model name"|uniq|cut -f2 -d:
+time echo "scale=500;4*a(1)"|bc -l -q # 计算时间越短越好
 
 # memory
 dmidecode -t memory | grep -i size # 列出每根内存条和其容量
@@ -616,6 +617,10 @@ df -h /
 df -h .
 sudo du -h --max-depth=1 / | grep '[0-9]G\>'
 dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -n
+
+sync; echo 3 > /proc/sys/vm/drop_caches # 清空缓存
+hdparm -t /dev/sda # 测试读性能 选择测试磁盘，建议做 2-3 组取平均值
+time dd if=/dev/zero of=/tmp/speed bs=1M count=2K conv=fsync;rm /tmp/speed # 测试写入性能 根据业务选择不同的 BlockSize 大小按需多次测试取平均值
 
 # cannot create temp file for here-document: No space left on device  mounting a tmpfs to /tmp
 
@@ -705,6 +710,25 @@ tail 100 /var/log/messages
 # 该磁盘空间已满，可以进行扩容，或者将该磁盘的部分目录迁移到别的磁盘
 
 dd if=/dev/urandom of=/boot/test.txt bs=50M count=1 # 生成文件 挂载
+```
+
+## nmon
+
+建议根据实际需求配置间隔时间和次数，配合 nmon Analyser 可以显示直观的图表数据
+
+```
+#author: OX
+#function: monitor system information
+#time:2015/03/06
+#crontab -e
+#0 0 * * * sh /tmp/nmon/nmon.sh >/dev/null 2>&1
+npath=/tmp/nmon/log
+# monitoring per 120 senonds
+#nmon -s 120 -c 720 -f -m $npath
+# monitoring per 300 senonds
+/tmp/nmon/nmon_x86_sles11 -s 300 -c 288 -f -m $npath
+#delete file before 365 day
+#find /tmp -name *.nmon  -mtime +365 -exec rm {} \;
 ```
 
 ## 内核同步

@@ -1115,7 +1115,7 @@ location / {
 
 ## [鉴权配置](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/)
 
-http basic auth
+* http basic auth
 
 ```sh
 htpasswd -cb your/path/to/api_project_accounts.db admin password_for_admin
@@ -1185,70 +1185,20 @@ CREATE TABLE log (
      PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-vim nginx_log_to_mysql.sh
-
-#!/bin/bash
-# 处理时间[14/Mar/2015:01:12:59成2015-Mar-14 01:12:59
-function unixtime()
-{
-    if [ -n "$!"] ;
-    then
-        TIME=`echo ${1:1} | awk -F'[:\b/]' '{print $3"-"$2"-"$1" "$4":"$5":"$6}'`
-        echo $TIME
-    fi
-}
-
-#存放日志的路径
-LOG_PATH='/var/log/nginx/'
-
-#有那些日志
-LOGS=('test')
-
-#处理昨天的日志
-YESTERDAY=`date -d "yesterday" +"%Y-%m-%d"`
-
-#连接数据库的账号密码及其数据库
-SQLCNT='/usr/local/mysql/bin/mysql -uroot -p123456 test'
-SQL="INSERT INTO log(ip,url,time,date)VALUES"
-
-#获取当前的时间
-DATE=`date -d "yesterday" +"%Y%m%d"`
-
-#循环读取所有的日志 ， 并进行读取
-for LOG in ${LOGS[@]} ;
-do
-    #读取后缀为/ .或者.html 或php的访问文件
-    DATA=`/bin/cat "$LOG_PATH$LOG-$YESTERDAY.log" | awk '$7 ~ /(\/$|\.html.*|\.php.*)/ {print $1"--"$4"--"$7}'  `
-    #计算器 , 插入的数据超过1000条先提前插入
-    I=1
-    QRYSQL=''
-    for D in ${DATA[@]} ;
-    do
-          #将上面时间获取ip—时间—访问的url进行转化为数组
-          DD=(`echo ${D//--/ }`)
-          QRYSQL=$QRYSQL"('${DD[0]}','${DD[2]}','`unixtime ${DD[1]}`','$DATE'),"
-          #超过1000条先插入
-          if [ $I == 1000 ] ;
-          then
-                QRYSQL=$SQL${QRYSQL%%,}";"
-                echo $QRYSQL | $SQLCNT &> /dev/null
-                I=0
-                QRYSQL=''
-          fi
-          I=`expr $I+1`
-    done
-    if [ -n $WRYSQL ] ; then
-          QRYSQL=$SQL${QRYSQL%%,}";"
-          echo $QRYSQL | $SQLCNT &> /dev/null
-    fi
-done
-
 chmod +x /root/shell/nginx_log_to_mysql.sh
 crontab –e
 # 凌晨0时15分执行
 15 0 * * * /root/shell/nginx_log_to_mysql.sh &> /var/log/nginx_sh.log
 
 sudo goaccess logs/access.log  -o html/report.html --real-time-html --time-format='%H:%M:%S' --date-format='%d/%b/%Y' --log-format=COMBINED
+
+# 按日期查找时间段
+sed -n "/30\/Aug\/2015:00:00:01/,/30\/Aug\/2015:23:59:59/"p access.log > time_access.log
+# 查找 504 错误的页面和数量
+awk '($9 ~ /504/)' time_access.log | awk '{print $7}' | sort | uniq -c | sort -rn > 504.log
+# 查找访问最多的 20 个 IP 及访问次数
+awk '{print $1}' time_access.log | sort | uniq -c | sort -n -k 1 -r | head -n 20 > top.log
+
 ```
 
 ## 优化
