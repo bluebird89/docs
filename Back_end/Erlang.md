@@ -14,6 +14,8 @@ sudo apt install esl-erlang=1:20.0
 erl --version
 ```
 
+用 6 个函数涵盖
+
 ## 参考
 
 * [官方文档](http://erlang.org/doc/)

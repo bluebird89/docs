@@ -718,7 +718,7 @@ user=mysql_monitor
 password=mysql_monitor
 
 nohup /usr/local/mysqld_exporter-0.10.0.linux-amd64/mysqld_exporter --config.my-cnf="/usr/local/mysqld_exporter-0.10.0.linux-amd64/.my.cnf" &
-./mysqld_exporter --config.my-cnf=/usr/local/prometheus-2.17.2.linux-amd64/exporters/mysqld_exporter-0.12.1.linux-amd64/.my.conf 
+./mysqld_exporter --config.my-cnf=/usr/local/prometheus-2.17.2.linux-amd64/exporters/mysqld_exporter-0.12.1.linux-amd64/.my.conf
 
 # /etc/systemd/system/mysql_exporter.service
 [Unit]
@@ -745,52 +745,8 @@ ExecStart=/opt/mysqld_exporter-0.10.0.linux-amd64/mysqld_exporter \
 WantedBy=multi-user.target
 ```
 
-## Grafana
-
-* `http://monitor_host:3000` 默认帐号/密码为admin/admin
-* Configuration->Data Resources
-* 导入[Dashboards](https://grafana.com/grafana/dashboards)
-  - [System_Overview](https://github.com/percona/grafana-dashboards/blob/master/dashboards/System_Overview.json)
-  - [MySQL_Overview](https://github.com/percona/grafana-dashboards/blob/master/dashboards/MySQL_Overview.json)
-  - `https://grafana.com/dashboards/928` ID 复制 load
-* metric
-  - $__timeGroup是聚合函数 以10分钟一组，group by求和
-  - $__timeFilter(inserttime)是时间区间函数，右上角时间选择筛选的是inserttime
-* 变量
-
-```sh
-wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-5.0.1-1.x86_64.rpm 
-sudo yum localinstall grafana-5.0.1-1.x86_64.rpm -y
-
-brew update 
-brew install grafana
-
-wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
-sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
-apt-cache policy grafana
-sudo apt install grafana
-sudo systemctl status grafana-server
-
-select $__timeGroup(inserttime, '10m') as time_sec, 
-      count(1) as call_num, 
-      sum(status=0) as success_num
-from credit_log where $__timeFilter(inserttime)
-group by time_sec
-```
-
-## 插件
-
-* `/var/lib/grafana/plugins/` `/usr/local/var/lib/grafana/plugins`
-
-```SH
-grafana-cli plugins install percona-percona-app
-
-
-```
-
 ## 工具
 
-* [grafana/loki](https://github.com/grafana/loki):Like Prometheus, but for logs
 * [improbable-eng/thanos](https://github.com/improbable-eng/thanos):Highly available Prometheus setup with long term storage capabilities.
 * [coreos/prometheus-operator](https://github.com/coreos/prometheus-operator):Prometheus Operator creates/configures/manages Prometheus clusters atop Kubernetes
 * [ cortexproject / cortex ](https://github.com/cortexproject/cortex):A horizontally scalable, highly available, multi-tenant, long term Prometheus. https://cortexmetrics.io/

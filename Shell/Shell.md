@@ -92,22 +92,34 @@ set completion-ignore-case on
 
 the basic file, shell and text manipulation utilities of the GNU operating system
 
+## 文件描述符
+
+* 命令行都会打开三个文件
+* 标准输入文件:stdin文件描述符为0
+* 标准输出文件:stdout文件描述符为1
+* 标准错误文件:stderr文件描述符2
+
 ## 变量
 
 * 命名
-    - 只能由大小写字母，数字和下划线组成。
-    - 变量名称不能以数字开头。
-    - 以存储数字类型或者字符串类型。
-    - 赋值等号两边不能有空格。
-    - 字符串的变量可以用单引号或者双引号括起来
+    - 只能由大小写字母，数字和下划线组成
+    - 变量名称不能以数字开头
+    - 以存储数字类型或者字符串类型
+    - 赋值等号两边不能有空格
+    - 字符串的变量可以用单引号或者双引号括起来,单引号内容原样输出，不能包含变量.双引号 可以出现转义字符
 * 调用：使用$符号或者$符号加上花括号。一般来讲使用花括号的用法
+* 使用readonly将变量定义为只读，只读意味着不能改变
 * 分类
     - 环境变量：保存操作系统运行时使用的参数,长期使用，可以把它们写在配置文件中。 /etc/profile 或者 用户家目录的.bash_profile
+        + 基本上都是使用全大写字母，以区别于普通用户的环境变量
+        + set命令会显示为某个特定进程设置的所有环境变量，包括局部变量、全局变量以及用户定义变量
+        + 引用某个环境变量的时候，必须在变量前面加上一个美元符`($)`.显示变量当前值、让变量作为命令行参数.如果要用到变量，使用$;如果要操作变量，不使用$
+        + 可作为数组使用
         + `printenv`
         + `export kaka="kaka"`
         + `unset kaka`
     - 位置变量：传递脚本参数时使用
-    - 预定义变量：类似于环境变量，不同是它是不能重定义的
+    - 预定义变量：类似于环境变量，不同是不能重定义
         + `$0`  脚本名称
         + `$n`  传给脚本/函数的第n个参数
         + `$$`  脚本的PID
@@ -117,7 +129,53 @@ the basic file, shell and text manipulation utilities of the GNU operating syste
         + `$@`  传递给脚本/函数的所有参数(识别每个参数) 用双引号括起来
         + `$*`  传递给脚本/函数的所有参数(把所有参数当成一个字符串)
         + `${10}`   在超过两位数的参数时，使用大括号限定起来
+        + `@`与`"*"`区别:在使用双引号的时候。如果脚本运行时两个参数为a,b，则"*"等价于"ab",而"@"等价于"a","b"
     - 自定义变量：由用户自定义,可用于用户编写的脚
+* 全局变量：对于shell会话和所有生成的子shell都是可见的
+    - 创建全局环境变量的方法是先创建一个局部环境变量，然后再把它导出到全局环境中
+    - 修改/删除子shell中全局环境变量并不会影响到父shell中该变量的值
+    - 子shell甚至无法使用export命令改变父shell中全局环境变量的值
+    - unset命令中引用环境变量时，记住不要使用$.在子进程中删除了一个全局环境变量， 这只对子进程有效。该全局环境变量在父进程中依然可用
+* 局部变量：对创建它们的 shell可见
+    - 要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾
+    - 变量名、等号和值之间没有空格
+    - 如果生成了另外一个shell，它在子shell中就不可用,退出了子进程，那个局部环境变量就不可用
+    - 回到父shell时，子shell中设置的局部变量就不存在
+* PATH环境变量:定义了用于进行命令和程序查找的目录,如果命令或者程序的位置没有包括在PATH变量中，那么如果不使用绝对路径的话，shell是没法找到的
+    - 目录使用冒号分隔
+    - PATH变量的修改只能持续到退出或重启系统
+    - 登入Linux系统启动一个bash shell时，默认情况下bash会在几个文件中查找命令。这些文件叫作启动文件或环境文件
+    - 启动bash shell有3种方式
+        + 登录时作为默认登录shell:
+            * $HOME/.bashrc
+            * /etc/profile:系统上默认的bash shell的主启动文件,系统上的每个用户登录时都会执行这个启动文件.按照下列顺序运行第一个被找到的文件，余下的则被忽略
+            * $HOME/.bash_profile:会先去检查HOME目录中是不是还有一个叫.bashrc的启动文件。如果有 的话，会先执行启动文件里面的命令
+            * $HOME/.bash_login
+            * $HOME/.profile
+        + 作为非登录shell的交互式shell,不会访问/etc/profile文件，只会检查用户HOME目录 中的.bashrc文件
+        + 作为运行脚本的非交互shell
+            * 如果父shell是登录shell，在/etc/profile、/etc/profile.d/*.sh和$HOME/.bashrc文件中 设置并导出了变量，用于执行脚本的子shell就能够继承这些变量
+            * 由父shell设置但并未导出的变量都是局部变量。子shell无法继承局部变量。
+
+```sh
+printenv HOME
+
+# 局部用户定义变量
+my_variable=Hello
+echo $my_variable
+
+mytest=(one two three four five)
+echo ${mytest[2]}
+mytest[2]=seven
+unset mytest[2]
+echo ${mytest[*]}
+
+my_variable="I am Global now"
+export my_variable
+echo $my_variable
+
+PATH=$PATH:/home/christine/Scripts
+```
 
 ## 运算符
 
@@ -147,6 +205,9 @@ the basic file, shell and text manipulation utilities of the GNU operating syste
     - `-z` 长度为0
     - `-n` 长度不为0
     - `str` 是否为空
+    - `<`   字符串比较(双中括号里不需要转移)
+    - `==`  以Globbing方式进行字符串比较(仅双中括号里使用，参考下文)
+    - `=~`  用正则表达式进行字符串比较(仅双中括号里使用，参考下文)
 * 文件测试运算符
     - -b 是否块设备
     - -c 是否字符设备
@@ -161,10 +222,6 @@ the basic file, shell and text manipulation utilities of the GNU operating syste
     - -w 是否可写
     - -s 文件是否为空
     - -x 文件是否可执行
-
-* `<`   字符串比较(双中括号里不需要转移)
-* `==`  以Globbing方式进行字符串比较(仅双中括号里使用，参考下文)
-* `=~`  用正则表达式进行字符串比较(仅双中括号里使用，参考下文)
 
 ## 语法
 
@@ -255,6 +312,28 @@ echo "Args count: $#"
 exit 0
 ```
 
+## 重定向
+
+* /dev/null文件:写入到它的内容都会被丢弃，会起到"禁止输出"的效果，如果希望屏蔽stdout和stderr
+* redirect output：[number]>
+* redirect input: [number]<
+* error messages go to a stream called stderr, which is designated as 2>
+
+```sh
+ls /void 2> output.log
+wc < output.log
+
+command > /dev/null 2>&1
+```
+
+* uniq - 删除排序文件中的重复行
+* sort对于文本进行排序
+    - -l 按照当前环境排序.
+    - -m 合并已经排序好的文件,不排序.
+    - -n 按照字符串的数值顺序比较,暗含-b
+    - -r 颠倒比较的结果.
+* “&” 脚本在后台运行时使用它。“&&”当前一个脚本成功完成才执行后面的命令
+
 ## PS1
 
 ```
@@ -284,11 +363,6 @@ exit 0
 \[    这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使 bash 能够正确计算自动换行。
 \]    这个序列应该出现在非打印字符序列之后
 ```
-
-## 协程
-
-* 在后台生成一个子shell，并在这个子shell中执行命令 `coproc My_Job { sleep 10; }`
-* 扩展语法:必须确保在第一个花括号({)和命令名之间有一个空格。还必须保证命令以分号(;)结 尾。另外，分号和闭花括号(})之间也得有一个空格
 
 ## 文件管理
 
@@ -340,59 +414,6 @@ if grep -qi "kernel" $TMPFILE; then
 fi
 ```
 
-## 环境变量
-
-* 系统环境变量
-    - 基本上都是使用全大写字母，以区别于普通用户的环境变量
-    - set命令会显示为某个特定进程设置的所有环境变量，包括局部变量、全局变量以及用户定义变量
-    - 引用某个环境变量的时候，必须在变量前面加上一个美元符`($)`.显示变量当前值、让变量作为命令行参数.如果要用到变量，使用$;如果要操作变量，不使用$
-    - 可作为数组使用
-* 全局变量：对于shell会话和所有生成的子shell都是可见的
-    - 创建全局环境变量的方法是先创建一个局部环境变量，然后再把它导出到全局环境中
-    - 修改/删除子shell中全局环境变量并不会影响到父shell中该变量的值
-    - 子shell甚至无法使用export命令改变父shell中全局环境变量的值
-    - unset命令中引用环境变量时，记住不要使用$.在子进程中删除了一个全局环境变量， 这只对子进程有效。该全局环境变量在父进程中依然可用
-* 局部变量：对创建它们的 shell可见
-    - 要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾
-    - 变量名、等号和值之间没有空格
-    - 如果生成了另外一个shell，它在子shell中就不可用,退出了子进程，那个局部环境变量就不可用
-    - 回到父shell时，子shell中设置的局部变量就不存在
-* PATH环境变量:定义了用于进行命令和程序查找的目录,如果命令或者程序的位置没有包括在PATH变量中，那么如果不使用绝对路径的话，shell是没法找到的
-    - 目录使用冒号分隔
-    - PATH变量的修改只能持续到退出或重启系统
-    - 登入Linux系统启动一个bash shell时，默认情况下bash会在几个文件中查找命令。这些文件叫作启动文件或环境文件
-    - 启动bash shell有3种方式
-        + 登录时作为默认登录shell:
-            * $HOME/.bashrc
-            * /etc/profile:系统上默认的bash shell的主启动文件,系统上的每个用户登录时都会执行这个启动文件.按照下列顺序运行第一个被找到的文件，余下的则被忽略
-            * $HOME/.bash_profile:会先去检查HOME目录中是不是还有一个叫.bashrc的启动文件。如果有 的话，会先执行启动文件里面的命令
-            * $HOME/.bash_login
-            * $HOME/.profile
-        + 作为非登录shell的交互式shell,不会访问/etc/profile文件，只会检查用户HOME目录 中的.bashrc文件
-        + 作为运行脚本的非交互shell
-            * 如果父shell是登录shell，在/etc/profile、/etc/profile.d/*.sh和$HOME/.bashrc文件中 设置并导出了变量，用于执行脚本的子shell就能够继承这些变量
-            * 由父shell设置但并未导出的变量都是局部变量。子shell无法继承局部变量。
-
-```sh
-printenv HOME
-
-# 局部用户定义变量
-my_variable=Hello
-echo $my_variable
-
-mytest=(one two three four five)
-echo ${mytest[2]}
-mytest[2]=seven
-unset mytest[2]
-echo ${mytest[*]}
-
-my_variable="I am Global now"
-export my_variable
-echo $my_variable
-
-PATH=$PATH:/home/christine/Scripts
-```
-
 ## 进程管理
 
 * ps(process status):能够给出当前系统中进程的快照,捕获系统在某一事件的进程状态
@@ -425,6 +446,9 @@ PATH=$PATH:/home/christine/Scripts
 	- 第一条信息是显示在方括号中的后台作业(background job)号(1)
 	- 第二条是后台作业的进程ID(2396)
 * `jobs -l`:将进程列表置入后台模式。既可以在子shell中 进行繁重的处理工作，同时也不会让子shell的I/O受制于终端
+* 协程
+    - 在后台生成一个子shell，并在这个子shell中执行命令 `coproc My_Job { sleep 10; }`
+    - 扩展语法:必须确保在第一个花括号({)和命令名之间有一个空格。还必须保证命令以分号(;)结尾。另外，分号和闭花括号(})之间也得有一个空格
 
 ```sh
 ps -aux --sort -pcpu | less
@@ -561,17 +585,6 @@ python3 duu.py /home/sk/Downloads/
 ls -l my_script # 过滤输出列表
 ```
 
-## 重定向
-
-* redirect output：[number]>
-* redirect input: [number]<
-* error messages go to a stream called stderr, which is designated as 2>
-
-```sh
-ls /void 2> output.log
-wc < output.log
-```
-
 ## grep
 
 全局搜索正则表达式并打印出匹配的行
@@ -663,8 +676,8 @@ git clone git://github.com/zsh-users/zsh-syntax-highlighting.git # add to .zshrc
 sudo apt-get install zsh-theme-powerlevel9k
 echo "source /usr/share/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
 
-# config
-ZSH_THEME="agnoster"  |robbyrussell" # 主题设置(（)文件在~/.oh-my-zsh/themes)
+# config 主题设置(（)文件在~/.oh-my-zsh/themes)
+ZSH_THEME="agnoster"  |robbyrussell
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 # 插件
@@ -706,44 +719,6 @@ fish # 启动
 help # 手册
 
 ## 配置文件：~/.config/fish/config.fish或者fish_config
-if grep fish /etc/shells
-    echo Found fish
-else if grep bash /etc/shells
-    echo Found bash
-else
-    echo Got nothing
-end
-
-switch (uname)
-	case Linux
-	    echo Hi Tux!
-	case Darwin
-	    echo Hi Hexley!
-	case FreeBSD NetBSD DragonFly
-	    echo Hi Beastie!
-	case '*'
-	    echo Hi, stranger!
-	end
-
-while true
-  echo "Loop forever"
-end
-
-for file in *.txt
-  cp $file $file.bak
-end
-
-function ll
-  ls -lhG $argv
-end
-
-function fish_prompt
-  set_color purple
-  date "+%m/%d/%y"
-  set_color FF0
-  echo (pwd) '>'
-  set_color normal
-end
 ```
 
 ### xmonad
@@ -781,6 +756,7 @@ end
     + 按下ESC键可以退出
     + 方向键用来选择应用程序
     + return键用来启动
+* [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)
 
 ```sh
 sudo apt-get install xmonad
@@ -861,219 +837,6 @@ dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on com
 * shell 的生命力很强，在各种高级编程语言大行其道的今天，很多的任务依然离不开 shell。比如可以使用 shell 来执行一些编译任务，或者做一些批处理任务，初始化数据、打包程序等等。
 
 ```sh
-touch zsh-script.sh
-
-#!/bin/zsh
-echo Hello shell
-
-# 给脚本执行的权限
-chmod +x zsh-script.sh
-# 执行脚本
-./zsh-script.sh
-# 后台运行
-./zsh-script.sh &
-
-# 处理命令行参数的一个样例：
-while [ "$1" != "" ]; do
-    case $1 in
-        -s  )   shift
-    SERVER=$1 ;;
-        -d  )   shift
-    DATE=$1 ;;
-  --paramter|p ) shift
-    PARAMETER=$1;;
-        -h|help  )   usage # function call
-                exit ;;
-        * )     usage # All other parameters
-                exit 1
-    esac
-    shift
-done
-
-#!/bin/bash
-# Bash Menu Script Example
-
-PS3='Please enter your choice: '
-options=("Option 1" "Option 2" "Option 3" "Quit")
-select opt in "${options[@]}"
-do
-    case $opt in
-        "Option 1")
-            echo "you chose choice 1"
-            ;;
-        "Option 2")
-            echo "you chose choice 2"
-            ;;
-        "Option 3")
-            echo "you chose choice $REPLY which is $opt"
-            ;;
-        "Quit")
-            break
-            ;;
-        *) echo "invalid option $REPLY";;
-    esac
-done
-
-#!/bin/bash
-#
-
-#==================
-start_mysql() {
-    printf "Starting MySQL...\n"
-    /etc/rc.d/mysqld start
-}
-stop_mysql() {
-    printf "Stopping MySQL...\n"
-    /etc/rc.d/mysqld stop
-}
-restart_mysql() {
-    printf "Restarting MySQL...\n"
-    /etc/rc.d/mysqld restart
-}
-start_php() {
-    printf "Starting PHP-FPM...\n"
-    ulimit -SHn 65535
-    /etc/rc.d/php-fpm start
-}
-stop_php() {
-    printf "Stopping PHP-FPM...\n"
-    /etc/rc.d/php-fpm stop
-}
-restart_php() {
-    printf "Restarting PHP-FPM...\n"
-    /etc/rc.d/php-fpm restart
-}
-start_apache2() {
-    printf "Starting Apache2...\n"
-    /etc/rc.d/httpd start
-}
-stop_apache2() {
-    printf "Stopping Apache2...\n"
-    /etc/rc.d/httpd stop
-}
-restart_apache2() {
-    printf "Restarting Apache2...\n"
-    /etc/rc.d/httpd restart
-}
-start_nginx() {
-    printf "Starting Nginx...\n"
-    /etc/rc.d/nginx start
-}
-stop_nginx() {
-    printf "Stopping Nginx...\n"
-    /etc/rc.d/nginx stop
-}
-restart_nginx() {
-    printf "Restarting Nginx...\n"
-    /etc/rc.d/nginx restart
-}
-start_lighttpd() {
-    printf "Starting LigHttpd...\n"
-    /etc/rc.d/lighttpd start
-}
-stop_lighttpd() {
-    printf "Stopping LigHttpd...\n"
-    /etc/rc.d/lighttpd stop
-}
-restart_lighttpd() {
-    printf "Restarting LigHttpd...\n"
-    /etc/rc.d/lighttpd restart
-}
-#==================
-
-echo "Choose instance:"
-echo "1. nginx + php-fpm + mysqld + postfix"
-echo "2. lighttpd + php-fpm + mysqld + postfix"
-echo "3. apache2 + php + mysql + postfix"
-read num
-    case $num in
-        1)
-            echo "nginx + php-fpm + mysqld"
-            echo "Choose instance:"
-            echo "1. start"
-            echo "2. stop"
-            echo "3. restart"
-            read num
-                case $num in
-                    1)
-                        start_mysql
-                        start_php
-                        start_nginx
-                        ;;
-                    2)
-                        stop_mysql
-                        stop_php
-                        stop_nginx
-                        ;;
-                    3)
-                        restart_mysql
-                        restart_php
-                        restart_nginx
-                        ;;
-                    *)
-                        echo "Wrong number, please re-run and choose again."
-                        ;;
-                esac
-            exit 0
-            ;;
-        2)
-            echo "lighttpd + php-fastcgi + mysqld"
-            echo "Choose instance:"
-            echo "1. start"
-            echo "2. stop"
-            echo "3. restart"
-            read num
-                case $num in
-                    1)
-                        start_mysql
-                        start_lighttpd
-                        ;;
-                    2)
-                        stop_mysql
-                        stop_lighttpd
-                        ;;
-                    3)
-                        restart_mysql
-                        restart_lighttpd
-                        ;;
-                    *)
-                        echo "Wrong number, please re-run and choose again."
-                        ;;
-                esac
-            exit 0
-            ;;
-        3)
-            echo "apache2 + php + mysqld"
-            echo "Choose instance:"
-            echo "1. start"
-            echo "2. stop"
-            echo "3. restart"
-            read num
-                case $num in
-                    1)
-                        start_mysql
-                        start_apache2
-                        ;;
-                    2)
-                        stop_mysql
-                        stop_apache2
-                        ;;
-                    3)
-                        restart_mysql
-                        restart_apache2
-                        ;;
-                    *)
-                        echo "Wrong number, please re-run and choose again."
-                        ;;
-                esac
-            exit 0
-            ;;
-        *)
-            echo " Wrong number, please re-run and choose again."
-            ;;
-    esac
-exit 0
-
 # vim:set ts=4 sw=4 ft=sh et:
 ```
 
@@ -1110,7 +873,7 @@ ln -s /usr/local/bin/gtac /usr/local/bin/tac
 
 ## [autojump](https://github.com/joelthelion/autojump)
 
-* 记得之前某个访问过的目录的大概名字，配合autojump，就能快速的跳转过去
+* 记得之前某个访问过的目录的大概名字，配合autojump，就能快速跳转过去
 
 ```sh
 brew install autojump
@@ -1121,7 +884,9 @@ source ~/.zshrc
 j + 目录名
 ```
 
-## [ bats-core / bats-core ](https://github.com/bats-core/bats-core):Bash Automated Testing System
+## [ bats-core / bats-core ](https://github.com/bats-core/bats-core)
+
+Bash Automated Testing System
 
 ###  [fzf](https://github.com/junegunn/fzf)
 
@@ -1370,5 +1135,3 @@ ccache gcc foo.c
     - 和shell有关的索引资源
         + https://github.com/awesome-lists/awesome-bash
         + https://terminalsare.sexy/
-
-* [窗口管理器 xmonad 教程](http://www.ruanyifeng.com/blog/2017/07/xmonad.html)

@@ -39,6 +39,16 @@ Please make sure to update tests as appropriate.
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
+## 原则
+
+* 元素
+	- 一句话简介。这个项目做什么？
+	- 项目介绍。解决了什么问题
+	- 特性。包含已完成和待办
+	- 使用指南。如何一步步使用这个项目
+	- 示例。hello, world 示例
+	- 开源协议。
+
 ## 参考
 
 * [Make a README:Because no one can read your mind](https://github.com/dguo/make-a-readme)

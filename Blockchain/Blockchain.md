@@ -16,6 +16,8 @@ A distributed database that is used to maintain a continuously growing list of r
 * 单点无法修改数据，单点操作（按时间戳）同步到整个区块
 * 技术理想主义（严格限定的区块生成与新币发行机制）
 
+p2p 网络，数字签名和共识算法
+
 ## 区块
 
 区块链由一个个区块（block）组成。区块很像数据库的记录，每次写入数据，就是创建一个区块。每个区块的 Hash 都是不一样的，可以通过 Hash 标识区块。如果区块的内容变了，它的 Hash 一定会改变。（区块内容与hash唯一对应关系）

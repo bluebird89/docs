@@ -189,6 +189,7 @@ rtmp://localhost/vod/out.mp4
 * 录屏
     - Ocam:录屏软件
     - Quicktime:切分音视频，可以录屏
+* [Hunlongyu / ZY-Player](https://github.com/Hunlongyu/ZY-Player):arrow_forward 跨跨平台桌面端视频资源播放器.简洁无广告.免费高颜值. film_strip
 
 ## 参考
 

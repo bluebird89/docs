@@ -404,6 +404,10 @@ https://api.github.com/user
   - API blueprint：更偏向 API 的文档化，所以它选择的描述语言是 markdown。validation 相关的内容用 markdown 描述不是很舒服，看别人写的文档很容易明白，自己写起来就会错漏百出。API blueprint 的工具链也是个薄弱环节，很多工具都没有或者不成熟
   - RAML
 
+## 权限控制
+
+*
+
 ## 文档
 
 * 格式
