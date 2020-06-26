@@ -16,23 +16,26 @@ The official GitHub mirror of the Chromium source https://chromium.googlesource.
 * crxMouse Chrome Gestures:用鼠标操作Chrome
 * Enhanced Github:下载Github单个文件
 * Firebug Lite 程序调试工具
-* [gongjunhao/seckill](https://github.com/gongjunhao/seckill):Chrome浏览器 抢购、秒杀插件，秒杀助手，定时自动点击
-* Infinity New Tab：基于Chrome的云应用服务
+* [gongjunhao/seckill](https://github.com/gongjunhao/seckill):Chrome浏览器 抢购、秒杀插件，秒杀助手，定时自动点击 * Infinity New Tab：基于Chrome的云应用服务
 * JSONView
 * [markdown-here](https://github.com/adam-p/markdown-here) Markdown一键转换到"富文本格式"
 * Marmoset代码特效图
 * Momentum ：一款清新的新标签页插件，具有待办、天气、搜索功能，最最重要的是，插件的大背景，非常具有创意和艺术气息
-* OneTab：所有标签页转换成一个列表
+* OneTab：所有标签页转换成一个列表,节约 95% 内存的前提是静态网页
 * [Octotree](https://github.com/ovity/octotree)：GitHub code tree on steroids  github目录工具 Code tree for GitHub
 * OurStickys:Chrome特色网页便签纸
 * Print Friendly & PDF：用户自定义打印内容
 * Postman：接口调试
+* Unblock Youku
 * SimilarSites:一键查找姊妹网站
+* 简悦 - SimpRead - 沉浸式阅读模式，还支持丰富的导出功能比如 Markdown/PDF
+* 彩云小译 - 网页翻译插件 - 号称超越 Google 翻译和 DeepL
+* Awesome screenshot and screen video - 网页截图 + 录屏，代替 FireShot
+* 为什么你们就是不能加个空格呢
+* v2ex plus
+* FeHelper - WEB 前端助手，All In One 的一个工具，包含多个独立小应用，比如：Json 工具、代码美化、代码压缩、二维码、Postman、markdown、网页油猴、便签笔记、信息加密与解密、随机密码生成、Crontab 等等
 * speedtest:网络测速插件
 * [deanoemcke/thegreatsuspender](https://github.com/deanoemcke/thegreatsuspender):A chrome extension for suspending all tabs to free up memory
-* [Tampermonkey](https://www.tampermonkey.net/)
-    - [Greasyfork](https://greasyfork.org/zh-CN)
-    - https://openuserjs.org
 * 批量打开多个链接 LinkClump
 * XML Tree
 * User-Agent Switcher for Chrome
@@ -116,6 +119,18 @@ zL      scroll all the way right
 v       enter visual mode; use p/P to paste-and-go, use y to yank
 V       enter visual line mode
 ```
+
+## [Tampermonkey](https://www.tampermonkey.net/)
+
+- [Greasyfork](https://greasyfork.org/zh-CN)
+- https://openuserjs.org
+    + [xthexder / Wide Github](https://openuserjs.org/scripts/xthexder/Wide_Github)
+    + 豆瓣资源下载大师
+    + 计时器掌控者 - 控制网页计时器速度 | 加速跳过页面计时广告 | 视频快进（慢放）| 跳过广告 | 支持几乎所有网页
+    + Bilibili Evolved
+    + YAWF - 新浪微博根据关键词、作者、话题、来源等过滤微博，清理版面，以及其他改造功能
+    + anti-redirect - 去除各搜索引擎 / 常用网站的重定向
+    + 知乎、简书、csdn、实验楼剪切板消毒 - 去除剪贴板小尾巴
 
 ## 配置
 
@@ -296,4 +311,4 @@ console.dir(document)
 
 * [ChromeDevTools/awesome-chrome-devtools](https://github.com/ChromeDevTools/awesome-chrome-devtools):Awesome tooling and resources in the Chrome DevTools & DevTools Protocol ecosystem
 * [Chrome 开发者工具](https://developers.google.com/web/tools/chrome-devtools/)
-* [ChromeDevTools/devtools-protocol](https://github.com/ChromeDevTools/devtools-protocol):Chrome DevTools Protocol 
+* [ChromeDevTools/devtools-protocol](https://github.com/ChromeDevTools/devtools-protocol):Chrome DevTools Protocol

@@ -22,7 +22,7 @@
 * 函数：把长长的代码封装起来，这样就写一次，就可以到处调用了
 * 数据结构：把参数组织起来，以后就传递这个数据结构
 * Objec：数据和操作给结合起来，形成Objec，以后Object的属性数据不允许直接访问，只能通过这个Object的函数来操作
-* Object的方法都是相同的，他们被重复地放在一个个对象当中，Class！把这些重复的方法代码从对象中剥离出来，放到一个公共的Class中！用new 这个关键字： Stack object1 = new Stack(); 
+* Object的方法都是相同的，他们被重复地放在一个个对象当中，Class！把这些重复的方法代码从对象中剥离出来，放到一个公共的Class中！用new 这个关键字： Stack object1 = new Stack();
 * Stack类的函数定义只有一份，但是Stack类生成的Object有很多份。 人类在写push()函数，pop()函数的时候，要操作Object的数据， 到底操作的是哪一个Object？ 上帝说：“ 要有this !”
 * 有继承！把那些类似的、重复代码放到父类当中去，这样子类就可以直接使用，不用重新再写一遍了。
 * 要有多态！就是对同一个接口，使用不同的实例而执行不同操作。
@@ -115,3 +115,4 @@
 * [sdmg15/Best-websites-a-programmer-should-visit](https://github.com/sdmg15/Best-websites-a-programmer-should-visit):🔗 Some useful websites for programmers.
 * [wx-chevalier/ProgrammingLanguage-Series](https://github.com/wx-chevalier/ProgrammingLanguage-Series📚 编程语言语法基础与工程实践，JavaScript | Java | Python | Go | Rust | CPP | Swift)
 * [KeKe-Li/book](https://github.com/KeKe-Li/book):📚 All programming languages books https://github.com/KeKe-Li/book
+* [Learn X in Y minutes](https://learnxinyminutes.com/)

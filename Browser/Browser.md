@@ -34,6 +34,7 @@
 * [brave/muon](https://github.com/brave/muon):Build browsers and browser like applications with HTML, CSS, and JavaScript https://discord.gg/TcT5tX2w
 * [kalcaddle/KodExplorer](https://github.com/kalcaddle/KodExplorer):A web based file manager,web IDE / browser based code editor http://kodcloud.com
 * [BrowserSync/browser-sync](https://github.com/BrowserSync/browser-sync):Keep multiple browsers & devices in sync when building websites. http://browsersync.io
+* [marcelklehr/floccus](https://github.com/marcelklehr/floccus):Sync your bookmarks across browsers via Nextcloud, WebDAV or a local file (and thus any file sync solution)
 
 ## 参考
 

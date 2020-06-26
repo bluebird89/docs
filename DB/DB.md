@@ -129,7 +129,6 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [tgriesser/knex](https://github.com/tgriesser/knex):A query builder for PostgreSQL, MySQL and SQLite3, designed to be flexible, portable, and fun to use. http://knexjs.org
 * [alibaba/otter](https://github.com/alibaba/otter)：阿里巴巴分布式数据库同步系统(解决中美异地机房)
 * [Nozbe/WatermelonDB](https://github.com/Nozbe/WatermelonDB):🍉 Next-gen database for powerful React and React Native apps that scales to 10,000s of records and remains fast ⚡️
-* [grafana/grafana](https://github.com/grafana/grafana):The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More https://grafana.com
 * [getredash/redash](https://github.com/getredash/redash) Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. <http://redash.io/>
 * [pingcap/tidb](https://github.com/pingcap/tidb)TiDB is a distributed NewSQL database compatible with MySQL protocol
 * [apache/incubator-superset](https://github.com/apache/incubator-superset): a modern, enterprise-ready business intelligence web application. a data exploration and visualization web application.

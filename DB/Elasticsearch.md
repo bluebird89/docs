@@ -194,6 +194,12 @@ curl -XGET 'localhost:9200/_cat/health?v&pretty'
 }
 # web地址  http://192.168.88.250:9200/_plugin/head/
 ```
+
+## 性能
+
+* filesystem cache:查询的时候，操作系统会将磁盘文件里的数据自动缓存到 filesystem cache 里面去
+  - es 的搜索引擎严重依赖于底层的 filesystem cache，你如果给 filesystem cache 更多的内存，尽量让内存可以容纳所有的 idx segment file 索引数据文件，那么你搜索的时候就基本都是走内存的，性能会非常高
+
 ## ELK
 
 * 标准化:
@@ -292,9 +298,9 @@ output {
 
 📊 Kibana analytics and search dashboard for Elasticsearch https://www.elastic.co/products/kibana
 
-## 工具
+## [deviantony/docker-elk](https://github.com/deviantony/docker-elk)
 
-* [deviantony/docker-elk](https://github.com/deviantony/docker-elk):The ELK stack powered by Docker and Compose.
+The ELK stack powered by Docker and Compose.
 
 ```sh
 # 搭建
@@ -404,7 +410,6 @@ server {
 
 curl -XGET 'http://localhost:9200/filebeat-*/_search?pretty'
 ```
-
 
 ## metrics
 
@@ -516,4 +521,3 @@ setup.ilm.overwrite: true
 * [elastic/elasticsearch-definitive-guide](https://github.com/elastic/elasticsearch-definitive-guide):The Definitive Guide to Elasticsearch https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html
 * [Elasticsearch 权威指南](https://fuxiaopang.gitbooks.io/learnelasticsearch/)
 * [Kibana User Guide](https://www.elastic.co/guide/en/kibana/current/index.html)
-* [Logstash 参考文档](https://www.elastic.co/guide/e...

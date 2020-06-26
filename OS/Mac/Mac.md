@@ -264,6 +264,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - [Noizio](http://noiz.io/):turn on the sound and allow yourself to become engulfed in the tranquil sounds of nature.
 * 图片
     - 修图Snapseed
+    - iShot
     - [Pixave](http://www.littlehj.com/mac/) - Image/GIF/Video organizer
 * 录屏
     - [wulkano/kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology https://getkap.co
@@ -297,7 +298,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * 迷你天气：macOS 天气应用，在 Dock 栏知实时天气
 * Things 3
 * [mind node](https://mindnode.com/)
-
+* Clearview - 支持 PDF, EPUB, CHM, MOBI 的免费阅读器
 
 ### screensavers
 
