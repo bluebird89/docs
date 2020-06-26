@@ -47,7 +47,6 @@
 ## 实践
 
 * 需要自适应的规划、演进式的开发和交付
-
 * 极限编程Xtreme Programming（XP）
 * 精益方法Lean
 * DevOps:基于其它两个领域的实践: 精益和敏捷。不是一个公司内的岗位或角色；它是一个组织或团队对持续交付、持续部署和持续集成的坚持不懈的追求
@@ -189,7 +188,33 @@
 * 本质问题并不是阶段，而是批量。需求批量地在一起进行设计，然后是批量地开发，批量地测试、交付等等
     - 批量让价值交付延迟，所有需求在最后的阶段才能交付，价值交付比较晚
 
-## 原则
+## 坏习惯
+
+* 不会划分优先级：如果认为所有任务都很重要，也就意味着所有任务都不重要
+    - 每次仅完成一件事，并将其做到最好
+* 祥林嫂式的抱怨：一方面他们往往散发着浓郁的负能量，看着什么都充满怨念，另一方面，不愿意或者不能够提出任何有效的改进方法。
+* 眼高手低：缺少的不是用简笔画画出几个圆圈，而正是那些被轻视的细节。用相同的方法和原则把复杂的业务逻辑抽象并归类.技巧是：
+    - Code kata
+    - 用脚本来自动化一些常见任务
+    - 重构复杂的业务代码
+    - 通过刻意训练保持动手能力
+* 致命的舒适区
+    - 大多数情况下，是他们没有勇气走出“舒适区”。他们误以为目前已经熟练掌握的技术永不过期，且是解决手头问题的最佳方案
+    - 追逐一切新奇的事物:会浪费你大量的时间和精力在那些可能永远不会涉及的技术上。
+    - 对新技术保持好奇和新鲜的态度，同时与其保持一定的距离.花一些时间来保证自己了解其与同类产品的优劣对比，以及主要的应用场景等可以使你不至于在做技术决策时过于盲目和偏颇。
+* 后端返回的数据不对
+    - 不应该作为一个问题的结论，恰恰相反，它应该是进一步探索的开端：一个更系统的，更端到端的解决问题的方案的开端
+    - 这个描述可以指导物理上分离的两组同事一起面对问题，并找出适合当前架构的方案。
+* 历史遗留问题
+    - 尝试将自己置身事外，并将问题归因到另一些人
+    - 当你决定要写点代码出来的那个时刻起，代码和架构就已经在准备腐坏了，除非你花费足够多的时间和精力去将其不断完善和修葺。而这正是事物的本性，并不随着人的客观意志为转移。
+    - 压根不存在历史遗留问题这回事儿，它们只是普通问题。解决问题的第一步，永远是直面问题，认识到所谓的历史遗留问题是和我们将要开发的新需求，或者要修复的线上defect，以及刚刚sign off的卡上的一个微小的需求变更并无二致
+    - 可以像故事墙那样维护一个技术债务板，并定期维护，按照工作量和价值来划分优先级，然后按部就班的将其消除。
+    - **建立测试以形成安全网，做适度的重构（小到重命名一个变量，大到删除一个模块），并让代码比之前变好一点点。**
+
+敏捷阶梯模型，表示团队在互信的基础上，以消除“价值最大、质量最差”这个最大瓶颈为愿景，“尽早、频繁、小批”地进行PDCA（Plan/Do/Check/Adjust）迭代，一个迭代进步一点地进行改进
+
+## 经验
 
 1、清晰的变量名和方法名
 2、能提取成公共组件/方法/类的的绝不复制粘贴
@@ -227,33 +252,6 @@
 
 1.凝聚人的力量，紧密协（合）作。包括业务负责人、开发团队、客户、管理者之间的关系，所有这些关系在以前都是造成项目危机的原因之一，那么，在敏捷时代，我们需要这些角色 紧密合作，最大限度的发挥各个角色的力量.
 2.聚焦客户价值，消除浪费（如何聚焦用户价值，即频繁的交付用户可工作的软件，快速收到用户反馈）
-
-## 坏习惯
-
-* 不会划分优先级：如果认为所有任务都很重要，也就意味着所有任务都不重要
-    - 每次仅完成一件事，并将其做到最好
-* 祥林嫂式的抱怨：一方面他们往往散发着浓郁的负能量，看着什么都充满怨念，另一方面，不愿意或者不能够提出任何有效的改进方法。
-* 眼高手低：缺少的不是用简笔画画出几个圆圈，而正是那些被轻视的细节。用相同的方法和原则把复杂的业务逻辑抽象并归类.技巧是：
-    - Code kata
-    - 用脚本来自动化一些常见任务
-    - 重构复杂的业务代码
-    - 通过刻意训练保持动手能力
-* 致命的舒适区
-    - 大多数情况下，是他们没有勇气走出“舒适区”。他们误以为目前已经熟练掌握的技术永不过期，且是解决手头问题的最佳方案
-    - 追逐一切新奇的事物:会浪费你大量的时间和精力在那些可能永远不会涉及的技术上。
-    - 对新技术保持好奇和新鲜的态度，同时与其保持一定的距离.花一些时间来保证自己了解其与同类产品的优劣对比，以及主要的应用场景等可以使你不至于在做技术决策时过于盲目和偏颇。
-* 后端返回的数据不对
-    - 不应该作为一个问题的结论，恰恰相反，它应该是进一步探索的开端：一个更系统的，更端到端的解决问题的方案的开端
-    - 这个描述可以指导物理上分离的两组同事一起面对问题，并找出适合当前架构的方案。
-* 历史遗留问题
-    - 尝试将自己置身事外，并将问题归因到另一些人
-    - 当你决定要写点代码出来的那个时刻起，代码和架构就已经在准备腐坏了，除非你花费足够多的时间和精力去将其不断完善和修葺。而这正是事物的本性，并不随着人的客观意志为转移。
-    - 压根不存在历史遗留问题这回事儿，它们只是普通问题。解决问题的第一步，永远是直面问题，认识到所谓的历史遗留问题是和我们将要开发的新需求，或者要修复的线上defect，以及刚刚sign off的卡上的一个微小的需求变更并无二致
-    - 可以像故事墙那样维护一个技术债务板，并定期维护，按照工作量和价值来划分优先级，然后按部就班的将其消除。
-    - **建立测试以形成安全网，做适度的重构（小到重命名一个变量，大到删除一个模块），并让代码比之前变好一点点。**
-
-## 经验
-
 * Upgrade early and upgrade often. The closer you are to a new version of Rails, the easier upgrades will be. This encourages your team to fix bugs in Rails instead of monkey-patching the application or reinventing features that exist upstream.
 * Keep upgrade infrastructure in place. There will always be a new version to upgrade to, so once you’re on a modern version of Rails add a build to run against the master branch. This will catch bugs in Rails and your application early, make upgrades easier, and increase your upstream contributions.
 * Upstream your tooling instead of rolling your own. The more you push upstream to gems or Rails, the less logic you need in your application. Save your application code for what truly makes your company special (i.e. Pull Requests), instead of tools to make your application run smoothly (i.e. concurrent testing libraries)
@@ -263,51 +261,20 @@
 * Keep up the momentum. Rails upgrades can seem daunting. Create ways in which your team can have quick wins to keep momentum going. Share the responsibility across teams so that everyone is familiar with the new version of the framework and prevent burnout. Once you’re on the newest version add a build to your app that periodically runs your suite against edge Rails so you can catch bugs in your code or your framework early.
 * Expect things to break. Upgrades are hard and in an application as large as GitHub things are bound to break. While we didn’t take the site down during the upgrade we had issues with CI, local development, slow queries, and other problems that didn’t show up in our CI builds or click testing.
 * Principles behind the Agile Manifesto,We follow these principles:
-    - Our highest priority is to satisfy the customer through early and continuous delivery of valuable software.
-    - Welcome changing requirements, even late in development. Agile processes harness change for the customer's competitive advantage.
-    - Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale.
-    - Business people and developers must work together daily throughout the project.
-    - Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.
-    - The most efficient and effective method of conveying information to and within a development team is face-to-face conversation.
-    - Working software is the primary measure of progress.
-    - Agile processes promote sustainable development.
-    - The sponsors, developers, and users should be able to maintain a constant pace indefinitely.
-    - Continuous attention to technical excellence and good design enhances agility.
-    - Simplicity--the art of maximizing the amount of work not done--is essential.
-    - The best architectures, requirements, and designs emerge from self-organizing teams.
-    - At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.
+    - Our highest priority is to satisfy the customer through early and continuous delivery of valuable software. 我们最重要的目标，是通过持续不断地及早交付有价值的软件使客户满意
+    - Welcome changing requirements, even late in development. Agile processes harness change for the customer's competitive advantage. 欣然面对需求变化，即使在开发后期也一样
+    - Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale. 经常交付可工作的软件，相隔几星期或一两个月，倾向于采取较短的周期
+    - Business people and developers must work together daily throughout the project. 业务人员和开发人员必须相互合作，项目中的每一天都不例外
+    - Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done. 激发个体的斗志，以他们为核心搭建项目。提供所需的环境和支援，辅以信任，从而达成目标
+    - The most efficient and effective method of conveying information to and within a development team is face-to-face conversation. 面对面沟通是传递信息的最佳的也是效率最高的方法
+    - Working software is the primary measure of progress. 可工作的软件是进度的首要度量标准
+    - Agile processes promote sustainable development. The sponsors, developers, and users should be able to maintain a constant pace indefinitely.敏捷流程倡导可持续的开发，责任人、开发人员和用户要能够共同维持其步调稳定延续
+    - Continuous attention to technical excellence and good design enhances agility.坚持不懈地追求技术卓越和良好设计，敏捷能力由此增强
+    - Simplicity--the art of maximizing the amount of work not done--is essential. 以简洁为本，它是极力减少不必要工作量的艺术
+    - The best architectures, requirements, and designs emerge from self-organizing teams. 最好的架构，需求和设计出自自组织团队
+    - At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly. 团队定期地反思如何能提高成效，并依此调整自身的举止表现
 
-    - 我们最重要的目标，是通过持续不断地及早交付有价值的软件使客户满意。
-    - 欣然面对需求变化，即使在开发后期也一样。
-    - 经常交付可工作的软件，相隔几星期或一两个月，倾向于采取较短的周期。
-    - 业务人员和开发人员必须相互合作，项目中的每一天都不例外。
-    - 激发个体的斗志，以他们为核心搭建项目。提供所需的环境和支援，辅以信任，从而达成目标。
-    - 面对面沟通是传递信息的最佳的也是效率最高的方法。
-    - 可工作的软件是进度的首要度量标准。
-    - 敏捷流程倡导可持续的开发，责任人、开发人员和用户要能够共同维持其步调稳定延续。
-    - 坚持不懈地追求技术卓越和良好设计，敏捷能力由此增强。
-    - 以简洁为本，它是极力减少不必要工作量的艺术。
-    - 最好的架构，需求和设计出自自组织团队
-    - 团队定期地反思如何能提高成效，并依此调整自身的举止表现。
-
-## BDD behavior-driven development
-
-* 工具
-    - [Cucumber](https://cucumber.io/) 背后是一个名为 Gherkin 的 DSL，它用于描述需求及测试
-* [behave/behave](https://github.com/behave/behave):BDD, Python style.
-
-```
-功能:
-场景:
-假设:
-当:
-并且:
-那么:
-
-SEE HomePage
-DO [Click] "Login".Button
-REACT Success: SHOW "Login Success".Toast with ANIMATE(bounce)
-```
+## ATDD(Acceptance test driven development)
 
 ## 图书
 

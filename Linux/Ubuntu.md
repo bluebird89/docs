@@ -343,8 +343,9 @@ sudo apt install -y apt-fast`
     + Disk Usage Analyzer
   - 图片
     + gnome-screenshot:`sudo apt-get install gnome-screenshot`
-    + Gimp
     + Shutter
+    + [Flameshot](https://github.com/lupoDharkael/flameshot)：Powerful yet simple to use screenshot software
+    + Gimp
     + Imagemagick
     + Kazam
   - 社交
@@ -461,6 +462,7 @@ cd xxx
 ./configure --prefix=/usr/local/libxml2
 make && sudo make install
 
+sudo snap install snap-store
 sudo apt-get install snapd|snapcraft
 sudo snap login # 通过Ubuntu One登陆
 sudo snap list # view all the installed snaps
@@ -635,9 +637,12 @@ sudo journalctl --vacuum-time=3d
 * Super+Tab Switch between windows from the same application, or from the selected application after Super+Tab.This shortcut uses ` on US keyboards, where the ` key is above Tab. On all other keyboards, the shortcut is Superplus the key above Tab.
 * Super+A Show the list of applications
 * Screenshots
-  - ctrl+Print：复制截图到窗口
-  - ctrl+alt+Print：窗口截取并添加到粘贴板
-  - shift+alt+Print:区域截取并添加到粘贴板
+  - PrtSc – 获取整个屏幕的截图并保存到 Pictures 目录。
+  - Shift + PrtSc – 获取屏幕的某个区域截图并保存到 Pictures 目录。
+  - Alt + PrtSc –获取当前窗口的截图并保存到 Pictures 目录。
+  - Ctrl + PrtSc – 获取整个屏幕的截图并存放到剪贴板。
+  - Shift + Ctrl + PrtSc – 获取屏幕的某个区域截图并存放到剪贴板。
+  - Ctrl + Alt + PrtSc – 获取当前窗口的 截图并存放到剪贴板
 * Ctrl+Alt+[F1~F6] ，切换到1~6号控制台
 * Ctrl+Alt+F7 可以返回图形界面
 * Ctrl+H 显示隐藏的文件夹

@@ -131,7 +131,9 @@ log message，日志消息体
 </dependency>
 ```
 
-## [allinurl / goaccess](https://github.com/allinurl/goaccess):GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. https://goaccess.io
+## [allinurl / goaccess](https://github.com/allinurl/goaccess)
+
+GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. https://goaccess.io
 
 * 完全实时 终端每200毫秒更新一次，HTML每秒更新一次。
 * 需要最少的配置 直接接日志文件并运行，选择日志格式，然后让GoAccess解析访问日志并向您显示统计信息。
@@ -216,7 +218,7 @@ yum install goaccess -y
 brew install goaccess
 
 # 要输出到终端并生成交互式报告
-goaccess access.log
+goaccess -f access.log
 
 # 生成 HTML 报告
 goaccess --log-format=COMBINED access.log -a > report.html
@@ -234,6 +236,16 @@ tail -f -n +0 access.log | grep -i --line-buffered 'firefox' | goaccess -o repor
 goaccess access.log access.log.1
 # 实时 HTML 输出 生成实时HTML报告的过程与创建静态报告的过程非常相似。只--real-time-html需要使其实时即可。
 goaccess --log-format=COMBINED access.log -o /usr/share/nginx/html/your_s
+
+# 添加配置文件
+vi ~/.goaccessrc
+
+time-format %T
+date-format %d/%b/%Y
+log-format %h %^[%d:%t %^] "%r" %s %b "%R" "%u"
+
+# 重新指定配置文件后执行
+goaccess -f time_access.log -p ~/.goaccessrc -a > report.html
 ```
 
 ## Web Log
@@ -352,3 +364,6 @@ grep "04/May/2017" access.log | awk '{print $9}'|sort|uniq -c|sort -nr
 * [Fluentd](https://www.fluentd.org)
 * [rsyslog/rsyslog](https://github.com/rsyslog/rsyslog):a Rocket-fast SYStem for LOG processing http://www.rsyslog.com
 
+## 参考
+
+* [日志采集系统都用到哪些技术](https://mp.weixin.qq.com/s/QOQ6MWPLpiHsmRBdd14Mmg)

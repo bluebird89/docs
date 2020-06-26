@@ -1,23 +1,22 @@
 # [Notion](https://www.notion.so/)
 
-* 万物皆块（block）:可以基于模板
-* page:自定义icon
-*     workspace：工作空间
+* workspace：工作空间
+* page：页面,自定义icon
+* notion的页面是无限层级的，一个页面能够添加多个页面，页面中的页面也可以继续添加页面。
+* block：万物皆块（block） 块一个标题、一张图表都被定义为块，块具备在页面中随意拖拽的特性。
+* database：数据库，database也是block的一种，它主要包含图表、看板等。
+* view：视图，database可以用不同视图切换展示，例如表格可以切换为看板。
+* template：模版，可以直接复用的样式。
 
-    page：页面
 
-    notion的页面是无限层级的，一个页面能够添加多个页面，页面中的页面也可以继续添加页面。
-
-    block：块一个标题、一张图表都被定义为块，块具备在页面中随意拖拽的特性。
-
-    database：数据库，database也是block的一种，它主要包含图表、看板等。
-
-    view：视图，database可以用不同视图切换展示，例如表格可以切换为看板。
-
-    template：模版，可以直接复用的样式。
 
 ## 页面 Pages
 
+* 如何多人编辑
+	- Operational Transformation。因为 Notion 引入了 block 的概念，它做协同的方法可以来的简单很多：在页面一级，只有调整 block 的位置才需要使用 OT 协同。一个用户调整页面的结构，并不会影响另一个用户修改受影响的 block 本身。而两个用户之间同时对一个 block 进行修改，也需要做 OT
+	- 因为 block 的粒度很细，整个多人协作编辑时不用 OT，使用乐观锁（optimistic locking）也可以达到目的
+	- 某个用户对文档某部分的编辑，可以通过 CQRS（Command and Query Responsibility Segregation）/ Event Sourcing 的方式来在各个客户端，各个共享用户间进行同步：用户的行为触发事件，各个平台接收事件，然后本地进行事件的处理和状态的更新。只要大家的更新算法一致，事件的顺序保持一致，那么所有人可以得到同样的状态
+* 版本控制
 * Ctrl + N：创建新页面
 * Ctrl + Shift + N ：打开一个新的 Notion 窗口
 * Ctrl + P ：快速查找页面（可用于快速跳转到其他页面）
@@ -30,6 +29,19 @@
 
 ## Block
 
+* block 的概念非常类似 unix 文件系统中的 inode，但比 inode 丰富得多。一个 block，包含两部分内容
+	- content 是用户在这个 block 里输入的内容 — 但不全是。我很怀疑 Notion 内部有一套类似 Markdown 的标记语言（但从 API 上没有体现出来），甚至就是一个 Markdown 的超集，通过一个 parser，来将 block 的 content 渲染成最终的展现形式。比如说，page block 就是一个对子页面的引用，渲染出来就是一个点击进入子页面的链接。
+	- block 有一些属性（attribute）或者元数据（metadata）。里面涵盖 block 的颜色，样式，父页面的引用，等等。
+	- 一个 block 只能属于一个页面（page）。如果需要同样内容的 block 被包含在不同的页面，只能通过复制。但这种复制产生的是一个完整的副本。
+* 如何组织成 page
+	- 一个页面下的所有的 block 通过 btree（或者其他类似的结构）组织起来。btree 可以在插入效率和有序遍历间达到一个不错的平衡
+	- 如果使用 btree，那么每个 block 都有一个唯一可变的序号，代表其在文章中的位置。添加或者移动 block 时按照这个序号来插入。如果用户把一个 block 拽到两个 block 之间，那么这个 block 先被删除，然后再插入到两个已有的 block 之间（比如 block 1 和 block 2 之间，那么新的序号是 1.5）
+	- 因为 page 可以支持多栏的版式，所以 block 仅仅有一个维度的序号还不够，它需要两个维度的序号，水平方向和垂直方向。
+	- page 在渲染的时候，按照序号的顺序遍历 blocks，然后依次调用 block 的 render 方法，把 block 渲染出来 — 这个渲染的结果可能还是个中间过程，因为 page 还有自己的样式和 attributes，最后再附上 page 自己的样式，得到最终在不同端上的渲染结果
+* 版本控制
+	- 在一处修改一下，修改立刻展示在其他平台:每次修改的时候，web 立即得到通知，然后去主动 post 到 Notion 的 syncRecordValues REST API 上。即使仅仅修改一两个字，这个 API 每次都返回完整的 block 的内容。从这里我们能确定的是每次修改，block 的版本一直在增长。
+	- API 并不是描述事件，而在描述状态,弊端是随着数据的增多，API 里要描绘的状态就会越来越多，从而拖累整个系统运行的效率。
+	- 创建了一个 hello world 的 block，然后将其拖拽到上一个 block 上面。Notion API 返回这样的数据：除了 hello world block 本身，还有整个 page 的 block 的列表.每次在 page 里插入 block 的时候，Notion 都会发回整个 page 的 block 的列表，然后客户端按照这个列表更新
 * Basic
 	- 标题
 	- 引用
