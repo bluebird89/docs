@@ -1316,24 +1316,61 @@ slowlog-max-len 128
 
 ## 性能
 
-* 参数
-    - -h  指定服务器主机名    127.0.0.1
-    - -p  指定服务器端口 6379
-    - -s  指定服务器 socket
-    - -c  指定并发连接数 50
-    - -n  指定请求数   10000
-    - -d  以字节的形式指定 SET/GET 值的数据大小 2
-    - -k  1=keep alive 0=reconnect    1
-    - -r  SET/GET/INCR 使用随机 key, SADD 使用随机值
-    - -P  通过管道传输 <numreq> 请求  1
-    + -q  强制退出 redis。仅显示 query/sec 值
-    +  --csv   以 CSV 格式输出
-    +  -l  生成循环，永久执行测试
-    +  -t  仅运行以逗号分隔的测试命令列表
+* 性能指标：Performance
+    - latency   Redis 响应一个请求的时间
+    - instantaneous_ops_per_sec   平均每秒处理请求总数
+    - hi rate(calculated) 缓存命中率（计算出来的
+* 内存指标: Memory
+    - used_memory   已使用内存
+    - mem_fragmentation_ratio 内存碎片率
+    - evicted_keys    由于最大内存限制被移除的 key 的数量
+    - blocked_clients 由于 BLPOP,BRPOP,or BRPOPLPUSH 而备阻塞的客户端
+* 基本活动指标：Basic activity
+    - connected_clients 客户端连接数
+    - conected_laves  slave 数量
+    - master_last_io_seconds_ago  最近一次主从交互之后的秒数
+    - keyspace    数据库中的 key 值总数
+* 持久性指标: Persistence
+    - rdb_last_save_time    最后一次持久化保存磁盘的时间戳
+    - rdb_changes_sice_last_save  自最后一次持久化以来数据库的更改数
+* 错误指标：Error
+    - rejected_connections  由于达到 maxclient 限制而被拒绝的连接数
+    - keyspace_misses key 值查找失败 (没有命中) 次数
+    - master_link_down_since_seconds  主从断开的持续时间（以秒为单位)
+- 监控方式
+    - redis-benchmark
+        + -h  指定服务器主机名    127.0.0.1
+        + -p  指定服务器端口 6379
+        + -s  指定服务器 socket
+        + -c  指定并发连接数
+        + -n  指定请求数
+        + -d  以字节的形式指定 SET/GET 值的数据大小 2
+        + -k  1=keep alive 0=reconnect    1
+        + -r  SET/GET/INCR 使用随机 key, SADD 使用随机值
+        + -P  通过管道传输 <numreq> 请求  1
+        * -q  强制退出 redis。仅显示 query/sec 值
+        *  --csv   以 CSV 格式输出
+        *  -l  生成循环，永久执行测试
+        *  -t  仅运行以逗号分隔的测试命令列表
     +  -I  Idle 模式。仅打开 N 个 idle 连接并等待。
+    - redis-stat
+    - redis-faina
+    - redislive
+    - `redis-cli info stats`
+    - monitor
+    - showlog
+        + get：获取慢查询日志
+        + len：获取慢查询日志条目数
+        + reset：重置慢查询日志
 
 ```sh
 redis-benchmark -h host -p port -k 0 -t get -n 100000  -c 8000
+
+redis-cli info | grep ops # 每秒操作数
+./redis-cli info | grep used | grep human
+./redis-cli info | grep connected|blocked_clients|connected_clients
+
+./redis-cli info | grep rdb_last_save_time|rdb_changes_since_last_save
 ```
 
 ## 规范
@@ -1623,4 +1660,3 @@ rdr keys FILE1 [FILE2] [FILE3]...
 
 ## 参考
 
-* [Redis面试全攻略](https://mp.weixin.qq.com/s?__biz=MzI1MzYzMTI2Ng==&mid=2247484439&idx=1&sn=2b1199ccb150c99b4efea45e2a5f49d5&chksm=e9d0ca5adea7434cb5f525a53fe258180fe70a48c649cc2939bcc5a71d9e786c224a84ab5558)

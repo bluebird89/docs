@@ -745,6 +745,10 @@ ExecStart=/opt/mysqld_exporter-0.10.0.linux-amd64/mysqld_exporter \
 WantedBy=multi-user.target
 ```
 
+## 插件
+
+* [knyar / nginx-lua-prometheus](https://github.com/knyar/nginx-lua-prometheus):Prometheus metric library for Nginx written in Lua
+
 ## 工具
 
 * [improbable-eng/thanos](https://github.com/improbable-eng/thanos):Highly available Prometheus setup with long term storage capabilities.

@@ -25,7 +25,7 @@ git clone https://github.com/purcell/emacs.d.git ~/.emacs.d
 
 A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! http://spacemacs.org
 
-```sh
+```
 brew tap d12frosted/emacs-plus
 brew install emacs-plus
 brew linkapps emacs-plus
@@ -312,11 +312,11 @@ M-g                    设置字体
 * [emacs-tw/awesome-emacs](https://github.com/emacs-tw/awesome-emacs):A community driven list of useful Emacs packages, libraries and others.
 * [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust ❤️ Emacs
 * [abo-abo/hydra](https://github.com/abo-abo/hydra):make Emacs bindings that stick around
+* [Spacemacs Rocks](http://book.emacs-china.org/):用 21 天学习 Emacs 以及 Spacemacs 的使用
 
 * [redguardtoo / mastering-emacs-in-one-year-guide](https://github.com/redguardtoo/mastering-emacs-in-one-year-guide)Be great at emacs in one year
 * 陈斌的 Emacs 配置 https://github.com/redguardtoo/emacs.d
 
-* Spacemacs 配置，适合新手，有着非常完善的文档：https://github.com/syl20bnr/spacemacs
 * reddit 的 Emacs 频道，最前沿的 Emacs 技巧：https://www.reddit.com/r/emacs/
 * Emacs org-mode 的文档，从这个文档中你可以发现纯文本的魔力：https://orgmode.org/
 * Emacs Wiki，上面有大量的 Emacs 插件的实践，虽然质量参差不齐，但是也有很多优秀的插件 https://www.emacswiki.org/emacs/EmacsWiki

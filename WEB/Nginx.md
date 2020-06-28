@@ -521,6 +521,60 @@ $document_uri # 同 $uri
     - 浏览器缓存，静态资源缓存用：`expires 7d;`
     - 代理层缓存
 
+* location 匹配规则 语法规则：location [=|~|~*|^~] /uri/ { … }
+    - location = /uri \= 表示精确匹配，只有完全匹配上才能生效
+    - location ^~ /uri    ^~ 开头对 URL 路径进行前缀匹配，并且在正则之前。
+    - location ~ pattern  开头表示区分大小写的正则匹配
+    - location ~* pattern 开头表示不区分大小写的正则匹配
+    - location /uri   不带任何修饰符，也表示前缀匹配，但是在正则匹配之后
+    - location /  通用匹配，任何未匹配到其它 location 的请求都会匹配到，相当于 switch 中的 default
+    - 前缀匹配时，Nginx 不对 url 做编码，因此请求为 /static/20%/aa，可以被规则 ^~ /static/ /aa 匹配到（注意是空格）
+* 多个 location 配置的情况下匹配顺序为:
+    - 首先精确匹配 =
+    - 其次前缀匹配 ^~
+    - 其次是按文件中顺序的正则匹配
+    - 然后匹配不带任何修饰的前缀匹配
+    - 最后是交给 / 通用匹配
+    - 当有匹配成功时候，停止匹配，按当前匹配规则处理请求
+    - 意：前缀匹配，如果有包含关系时，按最大匹配原则进行匹配。比如在前缀匹配：location /dir01 与 location /dir01/dir02，如有请求 http://localhost/dir01/dir02/file 将最终匹配到 location /dir01/dir02
+
+```
+location = / {
+   echo "规则 A";
+}
+location = /login {
+   echo "规则 B";
+}
+location ^~ /static/ {
+   echo "规则 C";
+}
+location ^~ /static/files {
+    echo "规则 X";
+}
+location ~ \.(gif|jpg|png|js|css)$ {
+   echo "规则 D";
+}
+location ~* \.png$ {
+   echo "规则 E";
+}
+location /img {
+    echo "规则 Y";
+}
+location / {
+   echo "规则 F";
+}
+```
+
+访问根目录 /，比如 http://localhost/ 将匹配 规则 A
+访问 http://localhost/login 将匹配 规则 B，http://localhost/register 则匹配 规则 F
+访问 http://localhost/static/a.html 将匹配 规则 C
+访问 http://localhost/static/files/a.exe 将匹配 规则 X，虽然 规则 C 也能匹配到，但因为最大匹配原则，最终选中了 规则 X。你可以测试下，去掉规则 X ，则当前 URL 会匹配上 规则 C。
+访问 http://localhost/a.gif, http://localhost/b.jpg 将匹配 规则 D 和 规则 E ，但是 规则 D 顺序优先，规则 E 不起作用，而 http://localhost/static/c.png 则优先匹配到 规则 C
+访问 http://localhost/a.PNG 则匹配 规则 E ，而不会匹配 规则 D ，因为 规则 E 不区分大小写。
+访问 http://localhost/img/a.gif 会匹配上 规则 D, 虽然 规则 Y 也可以匹配上，但是因为正则匹配优先，而忽略了 规则 Y。
+访问 http://localhost/img/a.tiff 会匹配上 规则 Y。
+访问 http://localhost/category/id/1111 则最终匹配到规则 F ，因为以上规则都不匹配，这个时候应该是 Nginx 转发请求给后端应用服务器，比如 FastCGI（php），tomcat（jsp），Nginx 作为反向代理服务器存在。
+
 ### 伪静态
 
 用 rewrite 来实现，通过 Nginx 提供的变量或自己设置的变量，配合正则与标志位来进行 URL 重写。实现 URL 重写和重定向功能
@@ -1141,6 +1195,10 @@ sticky learn
 
 ## 日志
 
+* `access_log `主要记录客户端访问 Nginx 的每一个请求，格式可以自定义。可以得到用户地域来源、跳转来源、使用终端、某个 URL 访问量等相关信息。
+    - `log_format` 指令用于定义日志的格式，语法: `log_format name string;` 其中 name 表示格式名称，string 表示定义的格式字符串。log_format 有一个默认的无需设置的组合日志格式.`log_format` 配置必须放在 http 内，否则会出现警告
+    - `access_log `指令用来指定访问日志文件的存放路径（包含日志文件名）、格式和缓存大小
+* error_log 主要记录客户端访问 Nginx 出错时的日志，格式不支持自定义.语法: `error_log path [level]`; 其中 path 表示错误日志存放路径，level 表示错误日志等级，日志等级包括 debug、info、notice、warn、error、crit、alert、emerg，从左至右，日志详细程度逐级递减
 * gnuplot:生成png
 * [allinurl / goaccess](https://github.com/allinurl/goaccess):GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. https://goaccess.io
 * ngxtop 统计实时数据
@@ -1150,6 +1208,10 @@ sticky learn
 * 直接安装openresty的话，就方便了，内嵌了lua，不需要重新编译nginx了
 
 ```sh
+log_format myformat '$remote_addr  $status  $time_local';
+access_log logs/access.log  myformat;
+
+
 awk '{print $11}' access.log | sort | uniq -c | sort -rn # Processing log file group by HTTP Status Code
 awk '($11 ~ /502/)' access.log | awk '{print $4, $9}' | sort | uniq -c | sort -rn # Getting All URL's in log file of specific Status Code, below example 502
 awk '($11 ~ /502/)' access.log | awk '{print $9}' | sed '/^$/d' | sed 's/\?.*//g' | sort | uniq -c | sort -rn  #  To group by request_uri's excluding query string params below is the command
