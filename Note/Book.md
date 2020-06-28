@@ -1023,7 +1023,7 @@
 
 ## 出版社
 
-* 企鹅出版社：1935年，一位名叫艾伦·莱恩Allen Lane的英国人在买烟时偶然得到灵感： 为什么不能把书做得和香烟一样“便于携带”和“触手可及”？ 后来，他创办企鹅出版社，大量出版小开本的平装书，让精英文化进入人们的口袋。 2013 年企鹅与兰登书屋合并为“企鹅兰登”，成为世界上最大最高端的出版集团之一。 1 年卖出 7 亿册书，出品诸多诺贝尔文学奖作品。 对于全球文艺青年来说，定期查看和购买企鹅出版的产品，是理想中必备的文艺生活方式之一。
+* 企鹅出版社：1935年，一位名叫艾伦·莱恩Allen Lane的英国人在买烟时偶然得到灵感：为什么不能把书做得和香烟一样“便于携带”和“触手可及”？后来，他创办企鹅出版社，大量出版小开本的平装书，让精英文化进入人们的口袋。2013年企鹅与兰登书屋合并为“企鹅兰登”，成为世界上最大最高端的出版集团之一。1年卖出7亿册书，出品诸多诺贝尔文学奖作品。对于全球文艺青年来说，定期查看和购买企鹅出版的产品，是理想中必备的文艺生活方式之一。
 
 ## 工具
 
@@ -1041,3 +1041,4 @@
 * [waylau/books-collection](https://github.com/waylau/books-collection):To the programmer's open source and free books collection 给程序员的开源、免费书籍收集，图书集合。
 * [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books)
 * [itbook.store](https://itbook.store/)
+* [free books from Springer](https://hnarayanan.github.io/springer-books/): support everyone during Covid-19, Springer has released a ton of free textbooks

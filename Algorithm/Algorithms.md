@@ -316,11 +316,11 @@ class Solution {
 
 * [OpenGenus/cosmos](https://github.com/OpenGenus/cosmos):[Show ❤️ love by 🌟] Your personal library of every algorithm and data structure code that you will ever encounter
 * [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges):Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
-* [python](https://github.com/ssjssh/algorithm)
 * [keon/algorithms](https://github.com/keon/algorithms)Minimal examples of data structures and algorithms in Python
 * [LeuisKen/algorithm](https://github.com/LeuisKen/algorithm)
 * [Dictionary of Algorithms and Data Structures](https://xlinux.nist.gov/dads/)
 * [frowhy/Algorithm](https://github.com/frowhy/Algorithm)
+* [python](https://github.com/ssjssh/algorithm)
 * [TheAlgorithms/Python](https://github.com/TheAlgorithms/Python):All Algorithms implemented in Python
 * [TheAlgorithms/Java](https://github.com/TheAlgorithms/Java):All Algorithms implemented in Java
 * [TheAlgorithms / Go](https://github.com/TheAlgorithms/Go):Algorithms Implemented in GoLang

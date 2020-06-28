@@ -1913,7 +1913,7 @@ sudo mkfs.ext4 virtual.img # 格式化virtual.img为ext4格式
 
 cat $FILE | pbcopy # 将内容复制到粘贴板
 
-# 复制本地到远程
+# 复制
 scp foobar.txt your_username@remotehost.edu:/some/remote/directory
 scp foo.txt bar.txt your_username@remotehost.edu:~
 scp -r foo your_username@remotehost.edu:/some/remote/directory/bar

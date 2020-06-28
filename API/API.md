@@ -696,6 +696,8 @@ print dec_message   // Hello World!
   - [电影详情](https://api.douban.com/v2/movie/subject/26942674)
 * [r/SpaceX ](https://docs.spacexdata.com/?version=latest)
 * [RollToolsApi](https://www.mxnzp.com/):开放易用的接口服务
+* [ chubin / wttr.in ](https://github.com/chubin/wttr.in): partly_sunny The right way to check the weather https://wttr.in
+
 
 ## 工具
 

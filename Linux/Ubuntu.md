@@ -273,7 +273,7 @@ sudo locale-gen
 ### 软件
 
 * 在线安装:通过软件包管理工具
-  - sudo gedit /etc/apt/sources.list
+  - `sudo gedit /etc/apt/sources.list`
   - 程序安装有home路径
   - bin路径
   - ubuntu.16替换apt-get为apt
@@ -309,10 +309,9 @@ sudo apt install -y apt-fast`
 * 源码编译安装
 * 列表
   - golddict `sudo apt install goldendict`
-    +
   - 笔记
     + simplenote
-    + [cherrytree](www.giuspen.com/cherrytree/):note
+    + [cherrytree](www.giuspen.com/cherrytree/)
   - 音视频
     + VLC
     + Lightworks Free：专业的非线视频编辑器
@@ -327,6 +326,7 @@ sudo apt install -y apt-fast`
     + KchmViewer:阅读CHM
     + xchm:`sudo apt-get install xchm`
     + Foxit Reader
+    + okular
   - LaTeX
   - 浏览器
     + Chromium
@@ -443,7 +443,8 @@ sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschn
 
 wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_18.04/Release.key -O Release.key
 sudo apt-key add - < Release.key
-
+curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add -
+sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/home:manuelschneid3r.list"
 sudo apt-get update
 sudo apt-get install albert
 
@@ -578,7 +579,6 @@ sudo apt install gnome-tweak-tool
 
 gsettings set org.gnome.desktop.interface gtk-theme Ant
 gsettings set org.gnome.desktop.wm.preferences theme Ant
-
 
 gsettings set org.gnome.settings-daemon.plugins.orientation active false # 禁止屏幕自动旋转
 gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
@@ -895,7 +895,6 @@ empathy \
 brasero
 
 # 可选
-sudo apt-get remove libreoffice* #自带office,WPS代替
 sudo apt-get remove yelp #帮助
 sudo apt-get remove blue* #蓝牙
 sudo apt-get remove gnome-software #软件中心 apt够用
@@ -903,8 +902,6 @@ sudo apt-get remove unity #换gnome
 sudo apt-get remove gnome-system-monitor #系统监视器
 sudo apt-get remove gnome-system-log #日志查看器
 sudo apt autoremove
-
-sudo apt-get autoremove
 sudo apt-get clean
 sudo apt-get autoclean
 

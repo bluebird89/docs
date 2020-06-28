@@ -134,6 +134,7 @@ dev: {
 
 * vue-resource
 * better-scroll
+* [ vitejs / vite ](https://github.com/vitejs/vite):Native-ESM powered web dev build tool. It's fast.
 * [vuejs/vuex](https://vuex.vuejs.org/zh-cn/):Centralized State Management for Vue.js.
 * [ElemeFE/vue-amap](https://github.com/ElemeFE/vue-amap):vue-amap - 基于 Vue 2.x 和高德地图的地图组件 https://elemefe.github.io/vue-amap/
 * [vuejs/vetur](https://github.com/vuejs/vetur)：Vue tooling for VSCode.
