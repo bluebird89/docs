@@ -2,8 +2,9 @@
 
 ## install
 
-Lua 的环境有两种： Lua
-LuaJIT:实行效率提升几十倍
+* Lua:静态编译的程序在执行前全部被翻译为机器码
+* 动态直译执行的则是一句一句边运行边翻译
+* 即时编译 (Just-In-Time Compiler) 则混合了这二者，一句一句编译源代码，但是会将翻译过的代码缓存起来以降低性能损耗
 
 ```sh
 sudo apt install build-essential libreadline-dev
@@ -19,6 +20,10 @@ wget https://luarocks.org/releases/luarocks-3.3.1.tar.gz
 tar zxpf luarocks-3.3.1.tar.gz
 cd luarocks-3.3.1
 ./configure.
+make
+sudo make install
+
+wget https://luajit.org/download/LuaJIT-2.0.5.tar.gz
 make
 sudo make install
 ```

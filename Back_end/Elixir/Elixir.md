@@ -17,7 +17,7 @@ sudo apt-get install elixir
 
 ## 特点
 
-* erlang VM 自带的 observer 是个非常棒的工具，能够帮助我们了解系统运行的状态
+* erlang VM 自带的 observer 是个非常棒的工具，能够帮助了解系统运行的状态
     - 服务在 epmd 注册的端口是动态的:需要保持一个范围内的端口全开，但是必须限制访问的源 IP
 * shell 也可以用来做运行系统的 introspection
 
@@ -94,6 +94,12 @@ GIT_VERSION=$(strip $(shell git rev-parse --short HEAD))
 version-bump:
   @git tag -a $(RELEASE_VERSION) -m "bump to $(RELEASE_VERSION) on $(GIT_VERSION)"
   @git push origin $(RELEASE_VERSION)
+```
+
+## 使用
+
+```
+iex
 ```
 
 ## 类库

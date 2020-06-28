@@ -13,6 +13,7 @@
 * [ powerline / fonts ](https://github.com/powerline/fonts):Patched fonts for Powerline users.
 * [iconfont](https://www.iconfont.cn/)
 * [visualhunt](https://visualhunt.com/)
+* [ adobe-fonts / source-code-pro ](https://github.com/adobe-fonts/source-code-pro/):Monospaced font family for user interface and coding environments
 
 ```
 sudo apt install fonts-firacode
