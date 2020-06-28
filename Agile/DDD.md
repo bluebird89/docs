@@ -212,6 +212,18 @@ public interface PersistenceOrientedUserRepository {
 }
 ```
 
+## 步骤
+
+* 对齐：业务模型对齐需求
+    -
+* 发现：对领域实现可视化和协作
+* 解耦：将领域分为子域
+* 连接：将子域形成为一种松耦合架构
+* 战略：专攻业务差异化的核心子域
+* 组织：按照有界上下文组织团队
+* 定义：定义每个有界上下文的角色和职责
+* 编码：使用战术模式实现有界上下文
+
 ## 读写
 
 * 写操作：严格地按照“应用服务 -> 聚合根 -> 资源库”
@@ -326,6 +338,7 @@ public class OrderCreatedEvent extends OrderEvent {
 ## 参考
 
 * [citerus/dddsample-core](https://github.com/citerus/dddsample-core):This is the new home of the original DDD Sample app (previously hosted at sf.net)..
+* [heynickc/awesome-ddd](https://github.com/heynickc/awesome-ddd):A curated list of Domain-Driven Design (DDD), Command Query Responsibility Segregation (CQRS), Event Sourcing, and Event Storming resources
 
 * [领域驱动设计(DDD)实现之路](https://www.jianshu.com/p/cdbefdd55b99)
 * [领域驱动设计(DDD)编码实践](https://www.jianshu.com/p/84f1d922a6d4)

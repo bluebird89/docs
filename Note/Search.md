@@ -8,6 +8,19 @@
 
 ## 搜索引擎
 
+* 一个文档处理器
+	- 将文档流规范化为预定义格式。
+	- 将文档流分解为所需的可检索单元。
+	- 隔离和元标记每个子文档块。
+	- 标识文档中潜在的可索引元素。
+	- 删除停用词。
+	- 词根化检索词。
+	- 提取索引条目。
+	- 计算权重。
+	- 创建并更新搜索引擎搜索的主要倒排索引文件，以便将查询与文档进行匹配。
+* 一个查询处理器
+* 一个搜索和匹配功能
+* 一个排名能力
 * 爬取内容
 * 进行分词
 * 建立反向索引
@@ -32,3 +45,7 @@
 * [facebookresearch/LASER](https://github.com/facebookresearch/LASER):Language-Agnostic SEntence Representations
 * [asciimoo/searx](https://github.com/asciimoo/searx):Privacy-respecting metasearch engine https://asciimoo.github.io/searx/
 * [OKlog](https://github.com/oklog/oklog)
+
+## 参考
+
+* [搜索引擎是如何工作的](https://mp.weixin.qq.com/s/BBGBnuYcoRAr8YNm-Yj_WQ)

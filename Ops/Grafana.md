@@ -21,9 +21,11 @@ brew update
 brew install grafana
 
 wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+
 sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
 apt-cache policy grafana
 sudo apt install grafana
+
 sudo systemctl status grafana-server
 
 select $__timeGroup(inserttime, '10m') as time_sec,

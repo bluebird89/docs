@@ -178,18 +178,14 @@ npm install postcss-modules autoprefixer -S
  "modules": true,
  "plugins": {
  "autoprefixer": {
-"grid": true
- }
+  "grid": true
+   }
  }
 }
 ```
 
-## rollup
+## [rollup](https://rollupjs.org/)
 
 ## [ pikapkg / snowpack ](https://github.com/pikapkg/snowpack)
 
 ☶ A faster build system for the modern web. https://www.snowpack.dev
-
-## 工具
-
-* [ pikapkg / snowpack ](https://github.com/pikapkg/snowpack):☶ A faster dev environment for modern web apps. https://www.snowpack.dev
