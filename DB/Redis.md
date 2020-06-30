@@ -1660,3 +1660,4 @@ rdr keys FILE1 [FILE2] [FILE3]...
 
 ## 参考
 
+* [Redis 面试全攻略](https://mp.weixin.qq.com/s?__biz=MzI1MzYzMTI2Ng==&mid=2247484439&idx=1&sn=2b1199ccb150c99b4efea45e2a5f49d5)

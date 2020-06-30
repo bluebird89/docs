@@ -394,7 +394,7 @@ iptables-restore < /etc/iptables-rules # 手动加载
 * [Lantern](https://github.com/getlantern/lantern)
 * [firefly-proxy](https://github.com/yinghuocho/firefly-proxy):A proxy software to help circumventing the Great Firewall.
 * [XX-net/XX-Net](https://github.com/XX-net/XX-Net)a web proxy tool
-* [googlehosts/hosts](https://github.com/googlehosts/hosts)
+* [googlehosts/hosts](https://github.com/googlehosts/hosts) https://scaffrey.coding.net/p/hosts/git / https://git.qvq.network/googlehosts/hosts
 * [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
 * [iMeiji/shadowsocks_install](https://github.com/iMeiji/shadowsocks_install)
 * [trojan-gfw](https://github.com/trojan-gfw/trojan):An unidentifiable mechanism that helps you bypass GFW. https://trojan-gfw.github.io/trojan/

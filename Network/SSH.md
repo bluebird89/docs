@@ -1,6 +1,67 @@
 ## SSH
 
+* 基于密钥的验证是最安全的几个身份验证模式 使用OpenSSH,如普通密码和Kerberos票据。基于密钥的验证密码身份验证有几个优点,例如键值更难以蛮力,比普通密码或者猜测,提供充足的密钥长度。其他身份验证方法仅在非常特殊的情况下使用。
+* SSH可以使用RSA(Rivest-Shamir-Adleman)或“DSA(数字签名算法)的钥匙。这两个被认为是最先进的算法,当SSH发明,但DSA已经被视为近年来更不安全。RSA是唯一推荐选择新钥匙,所以本指南使用RSA密钥”和“SSH密钥”可以互换使用。
+* 基于密钥的验证使用两个密钥,一个“公共”键,任何人都可以看到,和另一个“私人”键,只有老板是允许的。安全通信使用的基于密钥的认证,需要创建一个密钥对,安全地存储私钥在电脑人想从登录,并存储公钥在电脑上一个想登录。
+* 使用基于密钥登录使用ssh通常被认为是比使用普通安全密码登录。 导的这个部分将解释的过程中生成的一组公共/私有RSA密钥,并将它们用于登录到你的Ubuntu电脑通过OpenSSH(s)。如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端
+* 系统会试图通过DNS反查相对应的域名，如果DNS中没有这个IP的域名解析，则会等到DNS查询超时才会进行下一步
+* SKM(SSH Key Manager):一个在命令行下帮助管理和切换多个SSH key的工具
 * `ls -l /etc/init.d/sshd`
+
+```sh
+sudo apt install sshd
+service sshd restart
+
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+
+# SSH配置文件 uncomment
+authorizedKeyFile
+
+service sshd restart
+
+### 密钥生成
+ssh-keygen -t rsa -b 4096
+ssh-copy-id <username>@<host> # install your public key to any user that you have login credentials for.
+
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+
+scp ~/.ssh/id_rsa.pub hadoop@192.168.1.134:~/
+cat ~/id_rsa.pub >> ~/.ssh/authorized_keys
+cat ~/.ssh/id_rsa.pub | ssh demo@198.51.100.0 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >>  ~/.ssh/authorized_keys"
+
+# 传输文件通过ssh
+scp id_rsa.pub git@172.26.186.117:/home/git/
+scp -P 1101 username@servername:/remote_path/filename  ~/local_destination   # 源文件  目标文件
+
+## 服务器登陆
+ssh -p 2222 user@host   # 登陆服务器
+ssh username@remote_host ls /var/www
+ssh -i ~/.ssh/my_key root@$YOU_SERVER_IP
+
+# /etc/ssh/sshd_config
+PasswordAuthentication no  # Disable Password Authentication
+PubkeyAuthentication yes
+ChallengeResponseAuthentication no
+
+PermitRootLogin no|yes|without-password  ## restrict the root login to only be permitted via SSH keys, no:禁止root通过ssh登录
+
+sudo systemctl reload sshd.service
+
+# ~/.ssh/config  复用  SSH 连接
+Host *
+    ControlMaster auto
+    ControlPath /tmp/ssh_mux_%h_%p_%r
+    ControlPersist 86400
+
+# mux_client_request_session: read from master failed: Broken pipe
+
+## 连接慢
+# /etc/ssh/sshd_config 添加
+UseDNS no
+service sshd restart
+```
 
 ## sshd_config
 
