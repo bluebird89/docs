@@ -250,12 +250,12 @@ uname -sr
   - 分页机制是把一个线性地址转换为物理地址
   - 32位线性地址空间要采用两级页表：页表是把线性地址映射到物理地址的一种数据结构，4GB的线性空间可以被划分为1M个4KB大小的页，每个页表项占4字节，则1M个页表项的页表就需要占用4MB空间，而且还要求是连续的，于是采用两级页表来实现；两级页表就是对页表再进行分页，第一级称为页目录，其中存放关于页表的信息；4MB的页表再次分页，可以分为1K个4KB大小的页
 * 页面高速缓存自动保留处理器最近使用的32项页表项，因此可以覆盖128KB范围的内存
-* Linux主要采用分页机制来实现虚拟存储器管理，因为：
+* 采用分页机制来实现虚拟存储器管理
   - Linux的分段机制使得所有的进程都使用相同的段寄存器，这使得内存管理变得简单
   - Linux的设计目标之一就是能够被移植到绝大多数流行的处理平台上，但许多RISC处理器支持的分段功能非常有限；为了保证可移植性，Linux采用三级分页模式，因为许多处理器都采用64位结构；Linux定义了三种类型的页表：页目录(PGD)、中间目录(PMD)和页表(PT)。
 * 请求调页
-  - 如果被访问的页不在内存，也就是说，这个页还没有被存放在任何一个物理页面中，那么，内核分配一个新的页面并将其适当地初始化，这种技术称为“请求调页”；
-  - “请求调页”是一种动态内存分配技术，它将页面的分配推迟到不能再推迟为止，也就是说，一直推迟到进程要访问的页不在物理内存时为止，由此引起一个缺页异常；该技术的引入主要是因为进程开始运行时并不访问其地址空间中的全部地址。
+  - 如果被访问的页不在内存，也就是这个页还没有被存放在任何一个物理页面中内核分配一个新的页面并将其适当地初始化，这种技术称为“请求调页”；
+  - “请求调页”是一种动态内存分配技术，将页面的分配推迟到不能再推迟为止，一直推迟到进程要访问的页不在物理内存时为止，由此引起一个缺页异常；该技术的引入主要是因为进程开始运行时并不访问其地址空间中的全部地址
 * `free -m`: 可用的memory=free memory+buffers+cached
 * Buffer和Cache
   - Cache（缓存）位于CPU与内存之间的临时存储器，缓存容量比内存小的多但交换速度比内存要快得多。Cache通过缓存文件数据块，解决CPU运算速度与内存读写速度不匹配的矛盾，提高CPU和内存之间的数据交换速度。Cache缓存越大，CPU处理速度越快。
@@ -264,11 +264,62 @@ uname -sr
   - 0:表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程。
   - 1:表示内核允许分配所有的物理内存，而不管当前的内存状态如何
   - 2:表示内核允许分配超过所有物理内存和交换空间总和的内存
+* 零拷贝 zero-copy:避免 CPU 将数据从一块存储拷贝到另外一块存储
+  - 服务端：文件内容是否缓存在内核缓冲区->循环的从磁盘读入文件内容->(DMA)内核缓冲区->用户空间缓冲区->网络堆栈相关内核缓冲区->已连接的 Socket
+  - 让数据传输不需要经过 user space
+  - mmap
+    + 用 mmap () 来代替 read 调用:磁盘上的数据会通过 DMA 被拷贝的内核缓冲区，接着操作系统会把这段内核缓冲区与应用程序共享
+    + 调用 write ()，操作系统直接将内核缓冲区的内容拷贝到 Socket 缓冲区中，这一切都发生在内核态，最后，Socket 缓冲区再把数据发到网卡去
+    + 隐藏陷阱:当程序 map 了一个文件，但是当这个文件被另一个进程截断 (truncate) 时，Write 系统调用会因为访问非法地址而被 SIGBUS 信号终止。SIGBUS 信号默认会杀死你的进程并产生一个 coredump，如果你的服务器这样被中止了，那会产生一笔损失
+    + 解决方案
+      * 为 SIGBUS 信号建立信号处理程序:遇到 SIGBUS 信号时，信号处理程序简单地返回，Write 系统调用在被中断之前会返回已经写入的字节数，并且 errno 会被设置成 success
+      * 使用文件租借锁:在文件描述符上使用租借锁，我们为文件向内核申请一个租借锁.当其他进程想要截断这个文件时，内核会向我们发送一个实时的 RTSIGNALLEASE 信号，告诉我们内核正在破坏加持在文件上的读写锁.这样在程序访问非法内存并且被 SIGBUS 杀死之前，你的 Write 系统调用会被中断。Write 会返回已经写入的字节数，并且置 errno 为 success
+  - 从 2.1 版内核开始，Linux 引入了 sendfile 来简化操作：利用 DMA 引擎将文件内容拷贝到内核缓冲区去，然后将带有文件位置和长度信息的缓冲区描述符添加 Socket 缓冲区去
+    + 系统调用 sendfile () 在代表输入文件的描述符 infd 和代表输出文件的描述符 outfd 之间传送文件内容（字节）
+    + 描述符 outfd 必须指向一个套接字，而 infd 指向的文件必须是可以 mmap 的.这些局限限制了 sendfile 的使用，使 sendfile 只能将数据从文件传递到套接字上，反之则不行。
+    +  不仅减少了数据拷贝的次数，还减少了上下文切换，数据传送始终只发生在 kernel space
+    +  调用 sendfile 时，如果有其它进程截断了文件会发生什么:仅仅返回它在被中断之前已经传输的字节数，errno 会被置为 success
+    +  在调用 sendfile 之前给文件加了锁，sendfile 的行为仍然和之前相同，我们还会收到 RTSIGNALLEASE 的信号
+    +  省略页缓存数据拷贝到 Socket 缓存中：仅仅需要把缓冲区描述符传到 Socket 缓冲区，再把数据长度传过去，这样 DMA 控制器直接将页缓存中的数据打包发送到网络中就可以
+    +  需要硬件以及驱动程序支持
+    +  只适用于将数据从文件拷贝到套接字上
+  - 2.6.17 版本引入 splice 系统调用，用于在两个文件描述符中移动数据
+    + 调用在两个文件描述符之间移动数据，而不需要数据在内核空间和用户空间来回拷贝
+    + 从 fdin 拷贝 len 长度的数据到 fdout，但是有一方必须是管道设备， splice 的一些局限性
+    + flags 参数有以下几种取值：
+      * SPLICEFMOVE：尝试去移动数据而不是拷贝数据。这仅仅是对内核的一个小提示：如果内核不能从 pipe 移动数据或者 pipe 的缓存不是一个整页面，仍然需要拷贝数据。
+      * Linux 最初的实现有些问题，所以从 2.6.21 开始这个选项不起作用，后面的 Linux 版本应该会实现。
+      * SPLICEFNONBLOCK：splice 操作不会被阻塞。然而，如果文件描述符没有被设置为不可被阻塞方式的 I/O ，那么调用 splice 有可能仍然被阻塞
+      * SPLICEFMORE：后面的 splice 调用会有更多的数据
+    + 数据必须在用户空间和内核空间之间拷贝
+      * Linux 通常利用写时复制（copy on write）来减少系统开销，这个技术又时常称作 COW.多个程序同时访问同一块数据,只有当程序需要对数据内容进行修改时，才会把数据内容拷贝到程序自己的应用空间里去
 
 ```sh
 # /etc/sysctl.conf ，改vm.overcommit_memory=1，然后sysctl -p 使配置文件生效
 sysctl vm.overcommit_memory=1
 echo 1 > /proc/sys/vm/overcommit_memory
+
+buf = mmap(diskfd, len);
+write(sockfd, buf, len);
+
+## 应该在 mmap 文件之前加锁，并且在操作完文件后解锁
+if(fcntl(diskfd, F_SETSIG, RT_SIGNAL_LEASE) == -1) {
+    perror("kernel lease set signal");
+    return -1;
+}
+/* l_type can be F_RDLCK F_WRLCK  加锁*/
+/* l_type can be  F_UNLCK 解锁*/
+if(fcntl(diskfd, F_SETLEASE, l_type)){
+    perror("kernel lease set type");
+    return -1;
+}
+
+#include<sys/sendfile.h>
+ssize_t sendfile(int out_fd, int in_fd, off_t *offset, size_t count);
+
+#define _GNU_SOURCE         /* See feature_test_macros(7) */
+#include <fcntl.h>
+ssize_t splice(int fd_in, loff_t *off_in, int fd_out, loff_t *off_out, size_t len, unsigned int flags);
 ```
 
 ## 进程&线程
@@ -1279,7 +1330,19 @@ sudo ./Qv2ray-refs.tags.v1.99.6-linux.AppImage
 * tar:用来处理文件压缩的默认 Unix 工具
 * md5sum:它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
 * Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程。
-* ln:unix 里面的链接同 Windows 中的快捷方式类似，允许你快速地访问到一个特定的文件。`sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
+* ln:unix 里面的链接同 Windows 中的快捷方式类似，允许快速地访问到一个特定的文件。`sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
+* nohup:不挂断地运行命令 `nohup Command [Arg …] [　& ]`
+  - 无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中
+  - 如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中
+  - 如果没有文件能创建或打开以用于追加，那么 Command 参数指定的命令不可调用
+  - 输出重定向，默认重定向到当前目录下 nohup.out 文件
+  - 使用 Ctrl + C 发送 SIGINT 信号，程序关闭
+  - 关闭 Shell Session 发送 SIGHUP 信号，程序免疫
+* 使用 & 运行程序：
+  - 程序转入后台运行
+  - 结果会输出到终端
+  - 使用 Ctrl + C 发送 SIGINT 信号，程序免疫
+  - 关闭 Shell session 发送 SIGHUP 信号，程序关闭
 
 ```sh
 date # 获取当前时间
@@ -1303,7 +1366,8 @@ date # 获取当前时间
 
 --version/-V # 查看某个程序的版本
 grep  # 用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
-alias server="python -m SimpleHTTPServer 9000" # 使用 alias 这个 bash 内置的命令来为它们创建一个短别名
+# 使用 alias 这个 bash 内置的命令来为它们创建一个短别名
+alias server="python -m SimpleHTTPServer 9000"
 
 tar # 用来处理文件压缩的默认 Unix 工具.
 md5sum  # 它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
@@ -1331,6 +1395,32 @@ sudo !! # 将之前的命令加上sudo
 screen # 固定屏
 
 diff -Naur sources-orig/ sources-fixed/ >myfixes.patch # 参数 -N 代表如果比较的文件不存在，则认为是个空文件， -a 代表将所有文件都作为文本文件对待，-u 代表使用合并格式并输出上下文，-r 代表递归比较目录
+
+# 自定义输出文件 (标准输出和错误输出合并到 main.log)
+nohup python main.py >> main.log 2>&1 &
+# 不记录输出信息
+nohup python main.py &> /dev/null &
+# 不记录输出信息并将程序的进程号写入 pidfile.txt 文件中，方便后续杀死进程
+nohup python main.py &> /dev/null & echo $! > pidfile.txt
+```
+
+## 重定向
+
+* 0 标准输入
+* 1 标准输出
+* 2 标准错误输出 2>&1 是 将错误信息重定向到标准输出
+* kill 可将指定的信息送至程序。预设的信息为 SIGTERM (15), 可将指定程序终止
+* 若仍无法终止该程序，可使用 SIGKILL (9) 信息尝试强制删除程序，即 kill -9.可以无条件终止进程，其他信号进程都有权利忽略
+  - HUP     1    终端断线
+  - INT     2    中断（同 Ctrl + C）
+  - QUIT    3    退出（同 Ctrl + \）
+  - TERM   15    终止
+  - KILL    9    强制终止
+  - CONT   18    继续（与 STOP 相反， fg/bg 命令）
+  - STOP   19    暂停（同 Ctrl + Z）
+
+```sh
+kill -l
 ```
 
 ### Network
@@ -1541,7 +1631,7 @@ pkill -f nginx
 ctrl+c   ## 有些程序也可以用q键
 ctrl+z   ## 进程会挂起到后台
 
-jobs # 后台列表
+jobs -l # 后台列表
 fg %3   ## 让进程回到前台
 bg jobid  ## 让进程在后台继续执行
 kill -STOP %job_id
@@ -2181,70 +2271,6 @@ PasswordAuthentication yes # 关闭密码登陆
 systemctl reload ssh.service
 ```
 
-### ssh
-
-* 基于密钥的验证是最安全的几个身份验证模式 使用OpenSSH,如普通密码和Kerberos票据。 基于密钥的验证密码身份验证有几个优点,例如键值更难以蛮力,比普通密码或者猜测,提供充足的密钥长度。 其他身份验证方法仅在非常特殊的情况下使用。
-* SSH可以使用RSA(Rivest-Shamir-Adleman)或“DSA(数字签名算法)的钥匙。 这两个被认为是最先进的算法,当SSH发明,但DSA已经被视为近年来更不安全。 RSA是唯一推荐选择新钥匙,所以本指南使用RSA密钥”和“SSH密钥”可以互换使用。
-* 基于密钥的验证使用两个密钥,一个“公共”键,任何人都可以看到,和另一个“私人”键,只有老板是允许的。 安全通信使用的基于密钥的认证,需要创建一个密钥对,安全地存储私钥在电脑人想从登录,并存储公钥在电脑上一个想登录。
-* 使用基于密钥登录使用ssh通常被认为是比使用普通安全密码登录。 导的这个部分将解释的过程中生成的一组公共/私有RSA密钥,并将它们用于登录到你的Ubuntu电脑通过OpenSSH(s)。如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端，我们称为
-* 系统会试图通过DNS反查相对应的域名，如果DNS中没有这个IP的域名解析，则会等到DNS查询超时才会进行下一步
-* SKM(SSH Key Manager):一个在命令行下帮助管理和切换多个SSH key的工具
-
-```sh
-sudo apt install sshd
-service sshd restart
-
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-chmod 600 ~/.ssh/authorized_keys
-
-# SSH配置文件 uncomment
-authorizedKeyFile
-
-service sshd restart
-
-### 密钥生成
-ssh-keygen -t rsa -b 4096
-ssh-copy-id <username>@<host> # install your public key to any user that you have login credentials for.
-
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-
-scp ~/.ssh/id_rsa.pub hadoop@192.168.1.134:~/
-cat ~/id_rsa.pub >> ~/.ssh/authorized_keys
-cat ~/.ssh/id_rsa.pub | ssh demo@198.51.100.0 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >>  ~/.ssh/authorized_keys"
-
-# 传输文件通过ssh
-scp id_rsa.pub git@172.26.186.117:/home/git/
-scp -P 1101 username@servername:/remote_path/filename  ~/local_destination   # 源文件  目标文件
-
-## 服务器登陆
-ssh -p 2222 user@host   # 登陆服务器
-ssh username@remote_host ls /var/www
-ssh -i ~/.ssh/my_key root@$YOU_SERVER_IP
-
-# /etc/ssh/sshd_config
-PasswordAuthentication no  # Disable Password Authentication
-PubkeyAuthentication yes
-ChallengeResponseAuthentication no
-
-PermitRootLogin no|yes|without-password  ## restrict the root login to only be permitted via SSH keys, no:禁止root通过ssh登录
-
-sudo systemctl reload sshd.service
-
-# ~/.ssh/config  复用  SSH 连接
-Host *
-    ControlMaster auto
-    ControlPath /tmp/ssh_mux_%h_%p_%r
-    ControlPersist 86400
-
-# mux_client_request_session: read from master failed: Broken pipe
-
-## 连接慢
-# /etc/ssh/sshd_config 添加
-UseDNS no
-service sshd restart
-```
-
 ## [Openssl](https://www.openssl.org/)
 
 a robust, commercial-grade, and full-featured toolkit for the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols. It is also a general-purpose cryptography library
@@ -2589,6 +2615,8 @@ free -m
 * logrotate
   - 为系统监控和故障排查保留必要的日志内容，同时又防止过多的日志造成单个日志文件太大
   - 在一组日志文件之中，编号最大的（最旧的）一个日志文件会被删除，其余的日志文件编号则依次增大并取代较旧的日志文件，而较新的文件则取代它作为当前的日志文件
+  - crontab 会每天定时执行 /etc/cron.daily 目录下的脚本  logrotate
+  -
   - 配置路径：`/etc/logrotate.d`
     + /usr/sbin/logrotate -- the logrotate command itself (the executable)
     + /etc/cron.daily/logrotate -- the shell script that runs logrotate on a daily basis (note that it might be /etc/cron.daily/logrotate.cron on some systems)
@@ -2596,6 +2624,7 @@ free -m
     + /var/lib/logrotate/status file -- created when /etc/cron.daily/logrotate runs, shows the date and time when each of the log files was last rotated
   - 手动执行：`logrotate -f /etc/logrotate.d/rsyslog`
   - `logrotate -f /etc/logrotate.d/nginx`
+  - [Linux 日志切割神器 logrotate 原理介绍和配置详解](https://wsgzao.github.io/post/logrotate/)
 
 ```
 journalctl -b -1 # 命令可以重现上一次启动时候的信息

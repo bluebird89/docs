@@ -292,7 +292,7 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 
 ## Web UI自动化测试
 
-* Cypress
+* [cypress-io / cypress](https://github.com/cypress-io/cypress):Fast, easy and reliable testing for anything that runs in a browser. https://www.cypress.io
 * TestCafe
   - 支持采纳JavaScript或TypeScript来编写测试，并在浏览器中运行测试
   - 提供了开箱即用的并行执行、HTTP请求模拟等有用的功能
@@ -348,7 +348,6 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 * Meissa
 * EasyMock
 * jmockit
-* [cypress-io / cypress](https://github.com/cypress-io/cypress):Fast, easy and reliable testing for anything that runs in a browser. https://www.cypress.io
 * [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev):A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev
 * [getgauge/gauge](https://github.com/getgauge/gauge):Light weight cross-platform test automation https://gauge.org
 * [abseil/googletest](https://github.com/abseil/googletest):Google Test

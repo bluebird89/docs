@@ -1513,11 +1513,12 @@ acme.sh --remove -d www.bluebird89.online # 停止自動續期憑證
 nginx -s reload
 ```
 
-## docker 配置
+## docker
 
 * www目录将映射为nginx容器配置的虚拟目录
 * logs目录将映射为nginx容器的日志目录
 * conf目录里的配置文件将映射为nginx容器的配置文件
+* [ nginx-proxy / nginx-proxy ](https://github.com/nginx-proxy/nginx-proxy):Automated nginx proxy for Docker containers using docker-gen
 
 ```
 mkdir -p ~/nginx/www ~/nginx/logs ~/nginx/conf
