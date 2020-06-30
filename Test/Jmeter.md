@@ -1,6 +1,6 @@
-# JMeter
+# [apache/jmeter](https://github.com/apache/jmeter)
 
-Apache JMeter是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，它最初被设计用于Web应用测试，但后来扩展到其他测试领域。 
+a 100% pure Java application designed to test and measure performance. It may be used as a highly portable server benchmark as well as multi-client load generator. Apache JMeter是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，最初被设计用于Web应用测试，但后来扩展到其他测试领域。
 
 * 用于测试静态和动态资源，例如静态文件、Java小服务程序、CGI 脚本、Java 对象、数据库、FTP 服务器等,测试数据库
 * JMeter 可以用于对服务器、网络或对象模拟巨大的负载，来自不同压力类别下测试它们的强度和分析整体性能
@@ -9,7 +9,7 @@ Apache JMeter是Apache组织开发的基于Java的压力测试工具。用于对
 
 ## 安装
 
-* 下载[链接](http://jmeter.apache.org/download_jmeter.cgi)
+* [下载](http://jmeter.apache.org/download_jmeter.cgi)
 * 解压文件
 * 运行：'sh bin/jmeter'(linux) 或 运行 bin/jmeter.bat(windows)
 

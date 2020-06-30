@@ -1,22 +1,22 @@
 # Java
 
-* Java是由Sun Microsystems公司于1995年5月推出的Java面向对象程序设计语言和Java平台的总称。由James Gosling和同事们共同研发，并在1995年正式推出
-* Java编程语言的风格十分接近C++语言。继承了C++语言面向对象技术的核心，Java舍弃了C++语言中容易引起错误的指针，改以引用取代，同时移除原C++与原来运算符重载，也移除多重继承特性，改用接口取代，增加垃圾回收器功能。
-* 在Java SE 1.5版本中引入了泛型编程、类型安全的枚举、不定长参数和自动装/拆箱特性。太阳微系统对Java语言的解释是："Java编程语言是个简单、面向对象、分布式、解释性、健壮、安全与系统无关、可移植、高性能、多线程和动态的语言"。
+* 由Sun Microsystems公司于1995年5月推出的Java面向对象程序设计语言和Java平台的总称。由James Gosling和同事们共同研发，并在1995年正式推出
+* 风格十分接近C++语言。继承了C++语言面向对象技术的核心，Java舍弃了C++语言中容易引起错误的指针，改以引用取代，同时移除原C++与原来运算符重载，也移除多重继承特性，改用接口取代，增加垃圾回收器功能。
+* 在Java SE 1.5版本中引入了泛型编程、类型安全的枚举、不定长参数和自动装/拆箱特性。Sun 对Java语言的解释是："Java编程语言是个简单、面向对象、分布式、解释性、健壮、安全与系统无关、可移植、高性能、多线程和动态的语言"。
 * Java不同于一般的编译语言或直译语言
-  - 将源代码编译成字节码，然后依赖各种不同平台上的虚拟机来解释执行字节码，从而实现了"一次编写，到处运行"的跨平台特性。在早期JVM中，这在一定程度上降低了Java程序的运行效率。但在J2SE1.4.2发布后，Java的运行速度有了大幅提升。执行Java应用程序必须安装爪哇运行环境（Java Runtime Environment，JRE），JRE内部有一个Java虚拟机（Java Virtual Machine，JVM）以及一些标准的类库（Class Library）。通过JVM才能在电脑系统执行Java应用程序（Java Application）
+  - 将源代码编译成字节码，依赖各种不同平台上的虚拟机来解释执行字节码，从而实现了"一次编写，到处运行"的跨平台特性。在早期JVM中，一定程度上降低了Java程序的运行效率。但在J2SE1.4.2发布后，Java的运行速度有了大幅提升。执行Java应用程序必须安装 Java Runtime Environment，JRE，JRE内部有一个Java虚拟机（Java Virtual Machine，JVM）以及一些标准的类库（Class Library）。通过JVM才能在电脑系统执行Java应用程序（Java Application）
   - 实现跨平台性的方法是大多数编译器在进行Java语言程序的编码时候会生成一个用字节码写成的"半成品"，这个"半成品"会在Java虚拟机（解释层）的帮助下运行，虚拟机会把它转换成当前所处硬件平台的原始代码
   - Java虚拟机会打开标准库，进行数据（图片、线程和网络）的访问工作
   - 注意，尽管已经存在一个进行代码翻译的解释层，有些时候Java的字节码代码还是会被JIT编译器进行二次编译。 C++语言被用户诟病的原因之一是大多数C++编译器不支持垃圾收集机制。通常使用C++编程的时候，程序员于程序中初始化对象时，会在主机内存堆栈上分配一块内存与地址，当不需要此对象时，进行析构或者删除的时候再释放分配的内存地址。如果对象是在堆栈上分配的，而程序员又忘记进行删除，那么就会造成内存泄漏（Memory Leak）。长此以往，程序运行的时候可能会生成很多不清除的垃圾，浪费了不必要的内存空间。而且如果同一内存地址被删除两次的话，程序会变得不稳定，甚至崩溃。因此有经验的C++程序员都会在删除之后将指针重置为NULL，然后在删除之前先判断指针是否为NULL。 C++中也可以使用"智能指针"（Smart Pointer）或者使用C++托管扩展编译器的方法来实现自动化内存释放，智能指针可以在标准类库中找到，而C++托管扩展被微软的Visual C++ 7.0及以上版本所支持。智能指针的优点是不需引入缓慢的垃圾收集机制，而且可以不考虑线程安全的问题，但是缺点是如果不善使用智能指针的话，性能有可能不如垃圾收集机制，而且不断地分配和释放内存可能造成内存碎片，需要手动对堆进行压缩。除此之外，由于智能指针是一个基于模板的功能，所以没有经验的程序员在需要使用多态特性进行自动清理时也可能束手无策。 Java语言则不同，上述的情况被自动垃圾收集功能自动处理。对象的创建和放置都是在内存堆栈上面进行的。当一个对象没有任何引用的时候，Java的自动垃圾收集机制就发挥作用，自动删除这个对象所占用的空间，释放内存以避免内存泄漏。
-* 甲骨文与该平台的另外两大贡献者IBM 和 Red Hat 共同做出了这个决定:Oracle 已选择 Eclipse 基金会作为 Java EE 的新东家
+* 甲骨文与该平台的另外两大贡献者IBM 和 Red Hat 共同做出了这个决定:选择 Eclipse 基金会作为 Java EE 的新东家
 
 ## 版本
 
 * 要编译成Java字节码，就需要JDK(Java Development Kit)，因为JDK除了包含JRE，还提供了编译器、调试器等开发工具
   - JRE(Java Runtime Environment) 运行Java字节码的虚拟机JVM
 * Java EE：Enterprise Edition 在Java SE的基础上加上了大量的API和库，以便方便开发Web应用、数据库、消息服务等 从2018年2月26日开始，J2EE改名为Jakarta EE
-* Java SE：Standard Edition 包含标准的JVM和标准库
-  - Open JDK:免费的开源实现,GPL License发布，很多Linux发行版中都会包含这个Open JDK
+* [Java SE](https://www.oracle.com/technetwork/java/javase)：Standard Edition 包含标准的JVM和标准库
+  - [OpenJDK](http://openjdk.java.net):免费的开源实现,GPL License发布，很多Linux发行版中都会包含这个Open JDK
   - Oracle JDK
     + JavaSE(J2SE)(Java2 Platform Standard Edition，java平台标准版）:从JDK 5.0开始，改名为Java SE
       - Java SE 5.0 (1.5.0)
@@ -177,13 +177,9 @@ java HelloWorld // 运行
   - 首字符之后可以是字母（A-Z或者a-z）,美元符（$）、下划线（_）或数字的任何字符组合
   - 关键字不能用作标识符
   - 标识符是大小写敏感
-* 三种注释方法
-  - `\\` `
-  - `/* */`
-  - `/**开头，以*/`
 
 ```java
-/* 这是第一个Java程序
+/** 这是第一个Java程序
 *它将打印Hello World
 * 这是一个多行注释的示例
 */
@@ -229,7 +225,7 @@ String a = "\u0001";
 
 ## 变量
 
-* 当创建变量时，需要在内存中申请空间。变量为地址别名，值为存储内容。内存管理系统根据变量的类型为变量分配存储空间，分配的空间只能用来储存该类型数据
+* 创建变量时，需在内存中申请空间。变量为地址别名，值为存储内容。内存管理系统根据变量的类型为变量分配存储空间，分配的空间只能用来储存该类型数据
 * 可以重新赋值，还可以赋值给其他变量 `= `是赋值语句
 - 成员变量（非静态变量）：声明在类中，方法体之外的变量。在创建对象的时候实例化。可以被类中方法、构造方法和特定类的语句块访问
   - 当一个对象被实例化之后，每个实例变量的值就跟着确定
@@ -258,7 +254,6 @@ String a = "\u0001";
 
 * 基本数据类型：CPU可以直接进行运算的类型
   - 字面量可以赋给任何内置类型变量
-  -
   - 整数类型：byte、int、long、和short 都可以用十进制、16进制以及8进制方式来表示
   * byte（字节）
     - 8位、有符号的，以二进制补码表示整数
@@ -433,65 +428,9 @@ boolean result = name instanceof String;
   - continue 适用于任何循环控制结构中。作用是让程序立刻跳转到下一次循环的迭代。
   - return
 
-```java
-int x = 30;
-
-if( x == 10 ){
-   System.out.print("Value of X is 10");
-}else if( x == 20 ){
-   System.out.print("Value of X is 20");
-}else if( x == 30 ){
-   System.out.print("Value of X is 30");
-}else{
-   System.out.print("这是 else 语句");
-}
-
-char grade = 'C';
-switch(grade)
-{
-   case 'A' :
-      System.out.println("优秀");
-      break;
-   case 'B' :
-   case 'C' :
-      System.out.println("良好");
-      break;
-   case 'D' :
-      System.out.println("及格");
-   case 'F' :
-      System.out.println("你需要再努力努力");
-      break;
-   default :
-      System.out.println("未知等级");
-}
-
-while( x < 20 ) {
-   System.out.print("value of x : " + x );
-   x++;
-   System.out.print("\n");
-}
-
-do{
-   System.out.print("value of x : " + x );
-   x++;
-   System.out.print("\n");
-}while( x < 20 );
-
-for(int x = 10; x < 20; x = x+1) {
-   System.out.print("value of x : " + x );
-   System.out.print("\n");
-}
-
-String [] names ={"James", "Larry", "Tom", "Lacy"};
-for( String name : names ) {
-   System.out.print( name );
-   System.out.print(",");
-}
-```
-
 ### Number and Math
 
-* Java 语言为每一个内置数据类型提供了对应的包装类。
+* Java 语言为每一个内置数据类型提供了对应的包装类
   - 由编译器特别支持的包装称为装箱，所以当内置数据类型被当作对象使用的时候，编译器会把内置类型装箱为包装类。
   - 相似的，编译器也可以把一个对象拆箱为内置类型。Number 类属于 java.lang 包。
 * 所有的包装类（Integer、Long、Byte、Double、Float、Short）都是抽象类 Number 的子类
@@ -523,102 +462,6 @@ for( String name : names ) {
   - atan2() 方法用于将矩形坐标 (x, y) 转换成极坐标 (r, theta)，返回所得角 theta。该方法通过计算 y/x 的反正切值来计算相角 theta，范围为从 -pi 到 pi。
   - toDegrees() 将参数转化为角度
   - toRadians() 将角度转换为弧度
-
-```java
-Integer i1 = 128;  // 装箱，相当于 Integer.valueOf(128);
-int t = i1; //相当于 i1.intValue() 拆箱
-
-// 当两个 Integer 变量的数值超出 -128 ~ 127 范围时, 变量使用了不同地址：
-Integer a=123;
-Integer b=123;
-a==b;        // 输出 true
-a.equals(b);  // 输出 true
-
-a=1230;
-b=1230;
-a==b;        // 输出 false
-a.equals(b);  // 输出 true
-
-System.out.println("90 度的正弦值：" + Math.sin(Math.PI/2)); // 1.0
-System.out.println("0度的余弦值：" + Math.cos(0)); // 1.0
-System.out.println("60度的正切值：" + Math.tan(Math.PI/3)); // 1.7320508075688767
-System.out.println("1的反正切值： " + Math.atan(1)); // 0.7853981633974483
-System.out.println("π/2的角度值：" + Math.toDegrees(Math.PI/2)); // 90.0
-System.out.println(Math.PI);
-
-Integer x = 5;
-x.byteValue(); // 5
-x.doubleValue(); // 5.0
-x.longValue(); // 5
-
-Math.random();
-
-x.compareTo(3); // 1
-x.compareTo(5); // 0
-x.compareTo(8); // -1
-
-Integer x = 5;
-Integer y = 10;
-Integer z =5;
-Short a = 5;
-x.equals(y); // false
-x.equals(z); // true
-x.equals(a); // false
-
-Integer x =Integer.valueOf(9);
-Double c = Double.valueOf(5);
-Float a = Float.valueOf("80");
-Integer b = Integer.valueOf("444",16);   // 使用 16 进制
-System.out.println(x); // 9
-System.out.println(c); // 5.0
-System.out.println(a); // 80.0
-System.out.println(b); // 1092
-
-x.toString() // 5
-Integer.toString(12) // 12
-
-int x =Integer.parseInt("9"); // 9
-double c = Double.parseDouble("5"); // 5.0
-int b = Integer.parseInt("444",16); // 1092
-
-Integer a = -8;
-double d = -100;
-float f = -90;
-System.out.println(Math.abs(a));
-System.out.println(Math.abs(d));
-System.out.println(Math.abs(f));
-
-Math.floor(-1.5)=-2.0
-Math.round(-1.5)=-1
-Math.ceil(-1.5)=-1.0
-Math.floor(-1.6)=-2.0
-Math.round(-1.6)=-2
-Math.ceil(-1.6)=-1.0
-
-double d = 100.675;
-double e = 100.500;
-double f = 100.200;
-Math.rint(d); // 101.0
-Math.rint(e); // 100.0
-Math.rint(f); // 100.0
-Math.min(12.123, 12.456) // 12.123
-Math.max(12.123, 12.456) // 12.456
-
-Math.E // 2.7183
-Math.exp(11.635) // 112983.831
-Math.log(11.635) // 2.454
-Math.pow(11.635, 2.760) // 874.008
-Math.sqrt(11.635) // 3.411
-Math.sin(45.0) // 0.7071
-Math.tan(45.0) // 1.0000
-Math.atan2(45.0, 30.0) // 0.982793723247329
-Math.toDegrees(30.0) // 1718.8733853924698
-Math.toRadians(30.0) // 0.5235987755982988
-System.out.printf("浮点型变量的值为 " +
-                  "%f, 整型变量的值为 " +
-                  " %d, 字符串变量的值为 " +
-                  "is %s", floatVar, intVar, stringVar);
-```
 
 ### Character 类
 
@@ -904,7 +747,7 @@ public class Puppy{
 * LinkedList 底层就是链表
 * HashMap 底层就是散列表
 
-## 异常 Exceptio
+## 异常 Exception
 
 * 位于 java.lang 包下，它是一种顶级接口，继承于 Throwable 类，Exception 类及其子类都是 Throwable 的组成条件，是程序出现的合理情况
 * Throwable 类是 Java 语言中所有错误(errors)和异常(exceptions)的父类。只有继承于 Throwable 的类或者其子类才能够被抛出，还有一种方式是带有 Java 中的 @throw 注解的类也可以抛出
@@ -1077,6 +920,9 @@ static void cacheException() throws Exception{
     + 看JVM源码
     + 看CPU架构
     + 在技术点逐渐深度研究的过程中，广度也得到了完善
+  - 参考
+    +  http://ifeve.com/talk-concurrency/
+    + [Java并发](https://mp.weixin.qq.com/s?__biz=MjM5MzA1Mzc3Nw==&mid=2247484908&idx=1&sn=fe9004cd8369cabf448c9f43466bad0f)
 * 高可用：
   - 负载均衡：算法、动静分离、切换、检测
   - 超时重试：超时时间、重试机制和策略
@@ -1089,8 +935,9 @@ static void cacheException() throws Exception{
   2.如何保证数据安全性；(热备、冷备、异地多活)
   3.如何解决检索难题；(数据库代理中间件：mysql-proxy、Cobar、MaxScale等;)
   4.如何解决统计分析问题；(离线、近实时)
+* [volatile](https://mp.weixin.qq.com/s/x78EZQ0E0fgKSwGdK5vtwg)
 
-java基础，设计模式，jvm原理，spring+springmvc原理及源码，linux，mysql事务隔离与锁机制，mongodb，http/tcp，多线程，分布式架构（dubbo，dubbox，spring cloud），弹性计算架构，微服务架构（springboot+zookeeper+docker+jenkins），java性能优化，以及相关的项目管理等等。
+jvm原理，spring+springmvc原理及源码，linux，mysql事务隔离与锁机制，mongodb，http/tcp，多线程，分布式架构（dubbo，dubbox，spring cloud），弹性计算架构，微服务架构（springboot+zookeeper+docker+jenkins），java性能优化，以及相关的项目管理等等。
 
 ## Lombok
 
@@ -1121,6 +968,7 @@ JavaEE/JDBC/Weblogic
 
 * [b3log/symphony](https://github.com/b3log/symphony):🎶 一款用 Java 实现的现代化社区（论坛/BBS/社交网络/博客）平台。https://hacpai.com https://sym.b3log.org
 * [zhanglei-workspace/shopping-management-system](https://github.com/zhanglei-workspace/shopping-management-system)
+* [shuzheng/zheng](https://github.com/shuzheng/zheng):基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、支付中心、用户管理（支持第三方登录）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。 http://47.93.195.63/zheng-upms-server
 
 ## 面试
 
@@ -1144,12 +992,13 @@ JavaEE/JDBC/Weblogic
 ## 教程
 
 * [Java教程](https://www.liaoxuefeng.com/wiki/1252599548343744)
+* [docs4dev](https://www.docs4dev.com)
 
 ## 工具
 
 * IDE
   - [Eclipse](https://www.eclipse.org/)
-* [插件库](https://plugins.jetbrains.com/idea)
+  - [插件库](https://plugins.jetbrains.com/idea)
   - [Cloud Toolkit](https://www.aliyun.com/product/cloudtoolkit): 一款 IDE 插件，可以帮助开发者更高效地开发、测试、诊断并部署应用
 * 测试
   - [alibaba/arthas](https://github.com/alibaba/arthas):Alibaba Java Diagnostic Tool Arthas/Alibaba Java诊断利器Arthas https://alibaba.github.io/arthas/
@@ -1169,20 +1018,18 @@ JavaEE/JDBC/Weblogic
   - [akka](https://akka.io/):Build powerful reactive, concurrent, and distributed applications more easily
   - Hystrix：隔离、熔断、降级
   - RPC框架：dubbo、motan、thrift、grpc
-  - 搜索隐形：Lucene、Elasticsearch、Solr
+    + [grpc/grpc-java](https://github.com/grpc/grpc-java)The Java gRPC implementation. HTTP/2 based RPC https://grpc.io
+  - 搜索引擎：Lucene、Elasticsearch、Solr
+* 规范
+  - Alibaba Java Code Guidelines
+  - [alibaba/p3c](https://github.com/alibaba/p3c):Alibaba Java Coding Guidelines pmd implements and IDE plugin https://github.com/alibaba/p3c/wiki
 * Admin
   - [elunez/eladmin](https://github.com/elunez/eladmin):项目基于 Spring Boot 2.1.0 、 Jpa、 Spring Security、redis、Vue的前后端分离的后台管理系统，项目采用分模块开发方式， 权限控制采用 RBAC，支持数据字典与数据权限管理，支持一键生成前后端代码，支持动态路由 https://auauz.net
 * 优化
   - [ looly / hutool ](https://github.com/looly/hutool):A set of tools that keep Java sweet. http://www.hutool.cn
-* [Java SE](https://www.oracle.com/technetwork/java/javase)
-* [OpenJDK](http://openjdk.java.net)
 * [apache/httpcomponents-core](https://github.com/apache/httpcomponents-core)
-* [apache/tomcat](https://github.com/apache/tomcat)
-* [apache/jmeter](https://github.com/apache/jmeter)a 100% pure Java application designed to test and measure performance. It may be used as a highly portable server benchmark as well as multi-client load generator.
 * [alibaba/fastjson](https://github.com/alibaba/fastjson)A fast JSON parser/generator for Java
 * [Apache Camel](https://github.com/apache/camel) is a powerful open source integration framework based on known Enterprise Integration Patterns with powerful Bean Integration.
-* [grpc/grpc-java](https://github.com/grpc/grpc-java)The Java gRPC implementation. HTTP/2 based RPC https://grpc.io
-* [alibaba/p3c](https://github.com/alibaba/p3c):Alibaba Java Coding Guidelines pmd implements and IDE plugin https://github.com/alibaba/p3c/wiki
 * [vipshop/vjtools](https://github.com/vipshop/vjtools):The vip.com's java coding standard, libraries and tools
 * [oracle/opengrok](https://github.com/oracle/opengrok):OpenGrok is a fast and usable source code search and cross reference engine, written in Java http://oracle.github.io/opengrok/
 * [kevinsawicki/http-request](https://github.com/kevinsawicki/http-request):Java HTTP Request Library
@@ -1194,16 +1041,13 @@ JavaEE/JDBC/Weblogic
   - `curl -s "https://get.sdkman.io" | bash`
   - `source "$HOME/.sdkman/bin/sdkman-init.sh"`
 * [liuanxin/api-document](https://github.com/liuanxin/api-document):java spring-mvc document collect
-* [eclipse-vertx/vert.x](https://github.com/eclipse-vertx/vert.x/):Vert.x is a tool-kit for building reactive applications on the JVM http://vertx.io
 * [jenv/jenv](https://github.com/jenv/jenv):Manage your Java environment http://www.jenv.be
 
 ## 参考
 
-* [shuzheng/zheng](https://github.com/shuzheng/zheng):基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、支付中心、用户管理（支持第三方登录）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。 http://47.93.195.63/zheng-upms-server
 * [apachecn/thinking-in-java-zh](https://github.com/apachecn/thinking-in-java-zh):📖 Java 编程思想
 * [doocs/advanced-java](https://github.com/doocs/advanced-java):😮 互联网 Java 工程师进阶知识完全扫盲 https://doocs.github.io/advanced-java
-* [docs4dev](https://www.docs4dev.com)
-* Alibaba Java Code Guidelines
+* [hollischuang / toBeTopJavaer](https://github.com/hollischuang/toBeTopJavaer):To Be Top Javaer - Java 工程师成神之路 www.hollischuang.com
 * [aalansehaiyang/technology-talk](https://github.com/aalansehaiyang/technology-talk)：汇总java生态圈常用技术框架、开源中间件，系统架构、项目管理、经典架构案例、数据库、常用三方库、线上运维等知识
 * [java-design-patterns](https://java-design-patterns.com/patterns/)
 * [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns):Design patterns implemented in Java http://java-design-patterns.com
@@ -1211,7 +1055,3 @@ JavaEE/JDBC/Weblogic
 * [Snailclimb/JavaGuide](https://github.com/Snailclimb/JavaGuide):A core knowledge that most Java programmers need to master https://github.com/Snailclimb/JavaGuide
 * [crossoverJie/JCSprout](https://github.com/crossoverJie/JCSprout):👨‍🎓 Java Core Sprout : basic, concurrent, algorithm
 * [ruibaby/halo](https://github.com/ruibaby/halo):Halo可能是最好的Java博客系统😉 https://docs.halo.run
-
-* http://ifeve.com/talk-concurrency/
-* [ volatile](https://mp.weixin.qq.com/s/x78EZQ0E0fgKSwGdK5vtwg)
-* [Java并发](https://mp.weixin.qq.com/s?__biz=MjM5MzA1Mzc3Nw==&mid=2247484908&idx=1&sn=fe9004cd8369cabf448c9f43466bad0f)
