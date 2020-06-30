@@ -30,6 +30,7 @@
 
 ## 推荐
 
+* [Trending](https://github.com/trending):See what the GitHub community is most excited about today.
 * [wx-chevalier/Awesome-Lists](https://github.com/wx-chevalier/Awesome-Lists):📚 Guide to Galaxy, curated, worthy and up-to-date links/reading list for ITCS-Coding/Algorithm/SoftwareArchitecture/AI. 💫 ITCS-编程/算法/软件架构/人工智能等领域的文章/书籍/资料/项目链接精选，岁月沉淀的美好
 * [wx-chevalier/Developer-Zero-To-Mastery](https://github.com/wx-chevalier/Developer-Zero-To-Mastery):📚 To Be Professional Developer From Zero To Mastery, Interactive MindMap, RoadMap(Learning Path/Interview Questions), xCompass, Weekly for Developer, to Learn Everything in ITCS 💫 程序员的技术视野、知识管理与职业规划，提高个人与团队的研发效能
 * [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub):octocat: Find pearls on open-source seashore 分享 GitHub 上有趣、入门级的开源项目 https://hellogithub.com/
@@ -38,6 +39,3 @@
 * [jnv/lists](https://github.com/jnv/lists):The definitive list of lists (of lists) curated on GitHub and elsewhere
 * [Awesome Open Source](https://awesomeopensource.com/):Find Open Source By Searching, Browsing and Combining 7,000 Topics Across 59 Categories And 310,836 Projects
 * [ kon9chunkit / GitHub-Chinese-Top-Charts ](https://github.com/kon9chunkit/GitHub-Chinese-Top-Charts):GitHub中文排行榜
-
-
-www.latexlive.com

@@ -151,8 +151,7 @@
 
 ## 工具
 
-* 软件
-    - [AlternativeTo](https://alternativeto.net/):软件替代
+* [AlternativeTo](https://alternativeto.net/):软件替代
 * [asdf-vm/asdf](https://github.com/asdf-vm/asdf):Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more
 * [代码片段](http://www.phpxs.com/code/)
 * cheatsheet
@@ -227,6 +226,8 @@
 * [Simple note](https://standardnotes.org):收费
 * [Grace Note](https://grace-note.app/#/)
 * [Obsidian](https://obsidian.md/):A second brain, for you, forever.
+* evernote
+    - dunk
 
 ## [IFTTT(if this then that)](https://ifttt.com/)
 
