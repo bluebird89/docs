@@ -1,6 +1,8 @@
-# [facebook/graphql](https://github.com/facebook/graphql)
+# [ graphql / graphiql ](https://github.com/graphql/graphiql)
 
-GraphQL is a query language and execution engine tied to any backend service. https://graphql.org/
+GraphiQL & the GraphQL LSP Reference Ecosystem for building browser & IDE tools.
+
+
 
 ## 请求与响应
 
@@ -70,6 +72,7 @@ query myQry ($name: String!) {
 ## 参考
 
 * [教程](https://www.howtographql.com/)
+* [ graphql / graphql-spec ](https://github.com/graphql/graphql-spec);GraphQL is a query language and execution engine tied to any backend service. https://spec.graphql.org
 * 《GraphQL 学习之道》
 * [chentsulin/awesome-graphql](https://github.com/chentsulin/awesome-graphql):Awesome list of GraphQL & Relay## 实例
 * [learnapollo/learnapollo](https://github.com/learnapollo/learnapollo)

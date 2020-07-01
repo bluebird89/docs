@@ -66,7 +66,7 @@ mkdir -p ~/projects/{bin,pkg,src}
 
 export GOROOT=/usr/local/go # Installing to a custom location.install the Go tools to a different location. In this case you must set the GOROOT environment variable to point to the directory in which it was installed.
 export GOPATH=$HOME/projects # 默认安装包的路径
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export PATH=$GOPATH/bin:$PATH:$GOROOT/bin
 
 source ~/.zshrc
 
@@ -77,7 +77,7 @@ export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
 export GOPROXY=https://goproxy.cn
 export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+export PATH=$GOPATH/bin:$PATH:$GOROOT/bin
 source .bash_profile # 使修改立刻生效
 
 go version
@@ -410,6 +410,8 @@ git clone https://github.com/golang/net.git
 # /etc/hosts
 192.30.253.112 github.com
 151.101.185.194 github.global.ssl.fastly.net
+
+go: cannot use path@version syntax in GOPATH mode # export GO111MODULE=on
 ```
 
 ## 面向对象
@@ -596,6 +598,7 @@ func Benchmark_TimeConsumingFunction(b *testing.B) {
 * 代理并缓存go模块。可以利用该代理来避免DNS污染导致的模块拉取缓慢或失败的问题，加速构建
 * 构建或运行应用时，Go 将会通过 goproxy.cn 获取依赖
 * docker->performence->damon=>+
+* https://g.widora.cn/
 
 ```
 go env -w GOPROXY=https://goproxy.cn,direct # windows
@@ -631,6 +634,7 @@ go env -w GOSUMDB="sum.golang.google.cn"
     *  gopath 查找包，按照 goroot 和多 gopath 目录下 src/xxx 依次查找
     *  gomod 下查找包，解析 go.mod 文件查找包，mod 包名就是包的前缀，里面的目录就后续路径了。 在 gomod 模式下，查找包就不会去 gopath 查找，只是 gomod 包缓存在 gopath/pkg/mod 里面
 +  `package animal is not in GOROOT (/usr/local/go/src/animal)`  将 GO111MODULE 设置为 off
+* indirect
 
 ```
 # 开启
@@ -640,6 +644,8 @@ export GO111MODULE=on
 go list -m -json all
 # 查看所有以升级依赖版本
 go list -u -m all
+
+go get -u .　# 更新一下项目依赖
 
 'go mod init example.com/m' to initialize a v0 or v1 module
 'go mod init example.com/m/v2' to initialize a v2 module
@@ -651,16 +657,19 @@ go mod init     # 初始化当前文件夹，创建 go.mod 文件
 go mod tidy     # 增加缺少的包，删除无用的包
 go mod vendor   # 将依赖复制到 vendor 目录下
 go mod verify  # 校验依赖
-go mod why  # 解释为什么需要依赖
+go mod why github.com/coreos/etcd  # 解释为什么需要依赖
 
 go mod edit --module=github.com/islishude/gomodtest/v2
 go mod edit -require github.com/cnwyt/mytest@latest
 go mod edit -replace=google.golang.org/grpc=github.com/grpc/grpc-go@latest　# 源替换
 go mod edit -replace=golang.org/x/tools@v0.0.0-20190524140312-2c0ae7006135=github.com/golang/tools@v0.0.0-20190524140312-2c0ae70
 
-go mod tidy　＃　自动下载依赖包
+go mod tidy　＃　自动声明依赖包
 go mod vendor
 go build -mod=vendor
+
+replace github.com/coreos/bbolt v1.3.4 => go.etcd.io/bbolt v1.3.4
+replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
 ```
 
 ### GoSublime
@@ -921,8 +930,6 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     + [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
     - [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang http://go-colly.org/
     - [Gourouting/singo](https://github.com/Gourouting/singo):Gin+Gorm开发Golang API快速开发脚手架
-    - [micro/go-micro](https://github.com/micro/go-micro):A distributed systems development framework https://go-micro.dev
-    - [ micro / micro ](https://github.com/micro/micro):Micro is a cloud native development platform
     - [Terry-Mao / goim](https://github.com/Terry-Mao/goim):goim https://goim.io/
     - [ gofiber / fiber ](https://github.com/gofiber/fiber): zap Fiber is an Express inspired web framework written in Go with coffee https://gofiber.io
     -  [go-martini/martini](https://github.com/go-martini/martini):Classy web framework for Go http://martini.codegangsta.io

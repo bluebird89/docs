@@ -157,7 +157,7 @@ tests["Valid Data2"] = tv4.validate(data2, schema);
 
 ## headersnre
 
-## 构建mock
+## Newman
 
 ## 接口实例
 
