@@ -6,15 +6,13 @@
     - 状态转化（State Transfer）:使用标准的方法来更改资源的状态，常见的操作有：资源的增删改查操作
     - 无状态：每个 RESTful API 请求都包含了所有足够完成本次操作的信息，服务器端无须保持 Session,不会为任何客户端保持状态。一个请求不应该依赖过去的请求，服务对待每个请求都是独立的
 * 服务的目的是提供一个窗口给客户端以便客户端能访问这些资源。服务架构师和开发人员想要这些服务变得易于实现、维护、扩展、伸缩。RESTful 服务应该有下面的属性和特征：
-    - 表现层（Representations）:网络上的一个实体，或者说是网络上的一个具体信息。可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。URI就成了每一个资源的地址或独一无二的识别符。URI只代表资源的实体，不代表它的形式。它的具体表现形式，应该在HTTP请求的头信息中用Accept和Content-Type字段指定，这两个字段才是对"表现层"的描述。
+    - 表现层（Representations）:网络上的一个实体，或者说是网络上的一个具体信息。可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。URI就成了每一个资源的地址或独一无二的识别符。URI只代表资源的实体，不代表它的形式的具体表现形式，应该在HTTP请求的头信息中用Accept和Content-Type字段指定，这两个字段才是对"表现层"的描述。
     - 消息（Messages）
     - URIs:只是表达被操作的资源位置，因此不应该使用动词，且注意单复数区分 动词在http协议中
     - 一致接口（Uniform interface） -（无状态）Stateless
     - 缓存（Caching）:客户端可以缓存
+* 通过请求方法实现状态转化
 * 一个 HTTP 请求完成一次完整操作
-* 指南：
-    - 域名部署： <https://api.example.com/v1/> 或者 <https://example.org/api/v1/> 或者将版本号放在HTTP头信息中
-    - 路径endpoint：每个网址代表一种资源（resource），所以网址中不能有动词，只能有名词，而且所用的名词往往与数据库的表格名对应。一般来说，数据库中的表都是同种记录的"集合"（collection），所以API中的名词也应该使用复数
 * HTTP动词：
     - GET（SELECT） /zoos：列出所有动物园 从服务器取出资源（一项或多项）
     - POST（CREATE） /zoos：新建一个动物园 在服务器新建一个资源
@@ -97,16 +95,26 @@
 
 ## 功能
 
-* rate limiting：访问限制。
+* rate limiting：访问限制
 * metrics：服务器应该收集每个请求的访问时间，到达时间，处理时间，latency，便于了解API的性能和客户端的访问分布，以便更好地优化性能和应对突发请求。
 * docs：丰富的接口文档 - API的调用者需要详尽的文档来正确调用API，可以用swagger来实现。
 * hooks/event propogation：其他系统能够比较方便地与该API集成。比如说添加了某资源后，通过kafka或者rabbitMQ向外界暴露某个消息，相应的subscribers可以进行必要的处理。不过要注意的是，hooks/event propogation可能会破坏REST API的幂等性，需要小心使用。
 
+## 最佳实践
+
+- 域名部署： <https://api.example.com/v1/> 或者 <https://example.org/api/v1/> 或者将版本号放在HTTP头信息中
+- 路径endpoint：每个网址代表一种资源（resource），所以网址中不能有动词，只能有名词，而且所用的名词往往与数据库的表格名对应。一般来说，数据库中的表都是同种记录的"集合"（collection），所以API中的名词也应该使用复数
+- 围绕「资源」展开，且这些资源通过 URL 进行标识，比如 /posts 用于表示所有文章，/posts/15 用于表示 ID 为 15 的文章，至于资源名称用单数还是复数，没有统一规定，但通常我们使用复数，另外 URL 要尽可能简单，不要拖泥带水；
+- 与资源的交互通过 HTTP 请求方法来实现，而不是将操作动作包含到 URL 中，比如 GET /posts/15 用于获取 ID 为 15 的文章，DELETE /posts/15 用于删除 ID 为 15 的文章；
+- 接口的设计需要遵循无状态原则，不同的接口请求之间不要有持久化的 Session 认证，每个接口请求都需要自己独自去认证；
+- 返回的响应状态码尽可能精准描述服务器处理结果，比如成功用 2XX 状态码，重定向用 3XX 状态码，资源不存在用 404，没有权限用 403，需要认证用 401，服务器错误用 5XX 状态码，并且对异常情况尽可能在响应实体中予以说明；
+- 约定在客户端与服务器交互过程中以 JSON 格式传递数据，即资源的外在表现形式是 JSON。
+
 ## 实例
 
 * <https://api.github.com/>
-* [yahoo天气api](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json)
 * https://developer.github.com/v3/
+* [yahoo天气api](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json)
 
 ## 工具
 

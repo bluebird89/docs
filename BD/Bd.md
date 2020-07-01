@@ -265,3 +265,4 @@
 * elasticsearch，分布式全文搜索
 * flume，分布式日志采集系统
 * flink，分布式流处理引擎
+* [ darktable-org / darktable ](https://github.com/darktable-org/darktable): darktable is an open source photography workflow application and raw developer https://www.darktable.org
