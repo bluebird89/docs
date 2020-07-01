@@ -1614,12 +1614,17 @@
 * 《廊桥遗梦》
 * 美国X档案
 * 《乱世佳人》
-* 《英国病人》
+*  英国病人 The English Patient (1996)
+    -  他为了救人，担当了卖国罪名，惹来了杀身之祸，最终他没有违背诺言，可是，凯瑟琳已在寒冷中永远地离开了他……艾马殊将凯瑟琳的遗体放上飞机，在飞越撒哈拉沙漠时被德军击落
+    -  拉尔夫·费因斯 Ralph Fiennes
+    -  艾马殊伯爵是匈牙利人。因为艾马殊的奇怪的名字和他的近乎疯狂的态度，英军认定艾马殊是德国人，于是艾马殊被囚。艾马殊逃出囚车之后，用自己绘制的北非地图与德军交换了一架飞机（德军缴获的英国飞机），飞回沙漠山洞，只是为了履行自己对凯瑟琳的诺言：我会回来，我永远也不离开你。
+    - 艾马殊架着飞机，带着凯瑟琳的遗体离开沙漠，却因为机身的英国标签，遭德军机枪扫射
 * 《四月三周两天》
 * 十二怒汉
 * 卡罗尔
 * 筋疲力尽
     - 帕萃西娅问作家：“您这一生最大的野心是什么？”作家回答：“先成为不朽，然后死去！”
+
 * 百万美元宝贝
 * 桂河大桥
 * 博物馆奇妙夜
@@ -1656,6 +1661,7 @@
 * 《飞越疯人院》
 * 《遗愿清单》
 * 《伴我同行》
+*  苦月亮 Bitter Moon (1992)
 * 蓝白红三部曲之蓝 Trois couleurs: Bleu (1993)
 * 蓝白红三部曲之红 Trois couleurs: Rouge (1994)
 * 永恒和一日 Μια αιωνιότητα και μια μερα (1998)
@@ -1683,7 +1689,6 @@
     -  答应了汤姆的求婚，以此作为孤注一掷，得到却是史帝文斯的淡淡祝福。还有什么可试的理由？没了
     -  一切，就像石黑一雄借《无可慰藉》说的：我认为人的一生中总会有某个时刻，需要坚守自己的决定，一个说“这就是我，这就是我的选择”的时候。
     -  他偎着昏暗阅读爱情小说，他独品红酒欣赏音乐。这是他迟到的回应，也是他最柔软的时光。
-* 《蓝白红三部曲之红》
 * 《因父之名》
 * 《关于我母亲的一切》
 * 《巴比龙》
@@ -2283,6 +2288,40 @@
     - The Bourne Supremacy (2004)
     - The Bourne Ultimatum (2007)
     - The Bourne Legacy (2012)
+*  土拨鼠之日 Groundhog Day (1993)
+*
+*  四个婚礼和一个葬礼 Four Weddings and a Funeral (1994)
+    -  她第一眼就喜欢上了他，多年后清楚地记得当时的场景。她对查尔斯说，在拥挤的房间里，或者是在草坪上。
+    第一眼，从看到他，她眼中就只有他
+    - I've got a new theory about marriage. Two people are in love, they live together,and one day they run out of conversation.Totally. They can't think of a single thing to say to each other.That's it. Panic.Then suddenly, it occurs to the chapthat there is a way out of the deadlock.He'll ask her to marry him.
+    - Charles刚巧被安排在满桌都是他曾经约会的女人的座位上
+    - 罗温·艾金森 Rowan Atkinson
+    - 安迪·麦克道威尔 Andie MacDowell
+    - 克里斯汀·斯科特·托马斯 Kristin Scott Thomas
+
+```
+Funeral Blues by W. H. Auden
+
+Stop all the clocks, cut off the telephone,
+Prevent the dog from barking with a juicy bone,
+Silence the pianos and with muffled drum
+Bring out the coffin, let the mourners come.
+
+Let aeroplanes circle moaning overhead
+Scribbling on the sky the message He Is Dead,
+Put crepe bows round the white necks of the public doves,
+Let the traffic policemen wear black cotton gloves.
+
+He was my North, my South, my East and West,
+My working week and my Sunday rest,
+My noon, my midnight, my talk, my song;
+I thought that love would last for ever; I was wrong.
+
+The stars are not wanted now: put out every one;
+Pack up the moon and dismantle the sun;
+Pour away the ocean and sweep up the wood,
+For nothing now can ever come to any good.
+```
 
 ## 印度
 
