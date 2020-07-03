@@ -1278,8 +1278,6 @@ halt｜reboot｜poweroff
 * 从二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到/opt，建立软连接/usr/local/bin/
 * [Pkgs](https://pkgs.org/):Packages Search for Linux and Unix
 * AppImage
-* [flatpak](https://www.flatpak.org/):The Future of　Apps On linux
-  - [Flathub](https://flathub.org/home):the home of hundreds of apps which can be easily installed on any Linux distribution
 
 ```sh
 sudo apt-get install cowsay
@@ -1314,6 +1312,21 @@ sudo apt-get clean
 sudo chmod +x ./Qv2ray-refs.tags.v1.99.6-linux.AppImage
 sudo ./Qv2ray-refs.tags.v1.99.6-linux.AppImage
 ```
+
+## [flatpak](https://www.flatpak.org/)
+
+The Future of　Apps On linux
+
+* a universal package management system to build and distribute applications on any Linux distros
+* [Flathub](https://flathub.org/home):the home of hundreds of apps which can be easily installed on any Linux distribution
+
+```sh
+sudo apt install flatpak
+sudo apt install gnome-software-plugin-flatpak
+
+flatpak install --from /path/to/<app-id>.flatpakref
+```
+
 
 ## 指令
 

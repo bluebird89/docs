@@ -21,7 +21,6 @@
         * /swap：逻辑分区 交换分区（虚拟内存），建议是当前 RAM(或者两倍)
         * /boot：逻辑分区 引导分区 安装启动引导器的设备,包含系统内核和系统启动所需的文件，实现双系统的关键所在，建议500M 挂载点 /boot
         * /home：逻辑分区 home目录，存放音乐、图片及下载等文件的空间，建议最后分配所有剩下的空间 挂载点 /home
-        * /usr 大一点
         * 生产服务器建议单独再划分一个/data分区存放数据
     + 安装系统
   - 通过EASYCD配置启动
@@ -87,6 +86,8 @@ sudo apt-get update
 ### 网络配置
 
 ```sh
+sudo apt install net-tools iputils-ping # ifconfig 必备
+
 cd  /etc/sysconfig/network-scripts/
 vi  ifcfg-eno16777736  #编辑配置文件，添加修改以下内容
 
@@ -142,9 +143,6 @@ nameserver 223.6.6.6
 resolvconf -u
 
 sudo update-alternatives --config editor # 修改默认编辑器
-
-sudo visudo
-%sudo   ALL=(ALL:ALL) NOPASSWD:ALL
 ```
 
 ## DNS
@@ -274,11 +272,9 @@ sudo locale-gen
 
 * 在线安装:通过软件包管理工具
   - `sudo gedit /etc/apt/sources.list`
-  - 程序安装有home路径
-  - bin路径
   - ubuntu.16替换apt-get为apt
 * 软件源管理
-  - 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
+  - 本地数据库中搜索关于 cowsay 软件的相关信息
   - [snap](https://snapcraft.io/):The app store for Linux Publish your app for Linux users — for desktop, cloud, and Internet of Things.
     + install direct in `/`
     + Channels:`<track>/<risk>/<branch>`
@@ -290,22 +286,24 @@ sudo locale-gen
         - edge: for users wanting to closely track development.
     + update automatically, and by default, the snapd daemon checks for updates 4 times a day. Each update check is called a refresh
     + [Snap Store](https://snapcraft.io/store)
-  - 根据这些信息在相关的服务器上下载软件安装
-  - 安装某个软件时，如果该软件有其它依赖程序，系统会为我们自动安装所以来的程序
+  - 根据信息在相关服务器上下载软件安装
+  - 安装某个软件时，如果该软件有其它依赖程序，系统会为自动安装所以来的程序
   - 如果本地的数据库不够新，可能就会发生搜索不到的情况，需要更新本地的数据库，使用命令`sudo apt-get update`可执行更新
   - 软件源镜像服务器可能会有多个，有时候某些特定的软件需要添加特定的源
-  - apt-fast 是一个为 apt-get 和 aptitude 做的 shell 脚本封装，通过对每个包进行并发下载的方式可以大大减少 APT 的下载时间 `sudo add-apt-repository -y ppa:apt-fast/stable && \
-sudo apt install -y apt-fast`
+  - apt-fast 是一个为 apt-get 和 aptitude 做的 shell 脚本封装，通过对每个包进行并发下载的方式可以大大减少 APT 的下载时间
+    +  `sudo add-apt-repository -y ppa:apt-fast/stable && \ sudo apt install -y apt-fast`
   - deb包是Debian，Ubuntu等Linux发行版的软件安装包，扩展名为.deb，是类似于rpm的软件包，Debian，Ubuntu系统不推荐使用deb软件包，因为要解决软件包依赖问题，安装也比较麻烦。下载相应deb软件包，使用dpkg命令来安装
     + 用gdebi解决 不满足依赖还需要手动执行sudo apt install -f `sudo apt install gdebi`
   - `application->Software&Update->download from`
   - 源管理
-    + software & updates:select best server
+    + software & updates:select->best_server
     + 配置路径
       * /etc/apt/sources.list
       * /etc/apt/sources.list.d
     - [Aliyun](http://mirrors.aliyun.com)
-* 从二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到合适的目录，然后将包含可执行的主程序文件的目录添加进PATH环境变量即可
+    - [ustc](https://mirrors.ustc.edu.cn/ubuntu/)
+    - [tsinghua](https://mirrors.tuna.tsinghua.edu.cn/ubuntu/)
+* 二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到合适的目录，然后将包含可执行的主程序文件的目录添加进PATH环境变量即可
 * 源码编译安装
 * 列表
   - golddict `sudo apt install goldendict`
@@ -318,19 +316,25 @@ sudo apt install -y apt-fast`
     + Spotify for Linux
     + Clementine
     + [Cloud music](http://d1.music.126.net/dmusic/netease-cloud-music_1.2.0_amd64_ubuntu_20190424_1.deb)
-    + Vocal:听播客
-    + Shotcut 是一个 Meltytech, LLC 在 MLT 多媒体框架下开发的自由开源的跨平台视频编辑应用。你会发现它是 Linux 发行版上最强大的视频编辑器之一，它支持所有主要的音频、视频、图片格式
+    + Shotcut 是一个 Meltytech, LLC 在 MLT 多媒体框架下开发的自由开源的跨平台视频编辑应用。Linux 发行版上最强大的视频编辑器之一，支持所有主要的音频、视频、图片格式
     + [Sayonara Player](https://sayonara-player.com/index.php)
     + Blender
+  - Torrent
+    + Fragments — A BitTorrent Client
   - 阅读写作
     + KchmViewer:阅读CHM
     + xchm:`sudo apt-get install xchm`
     + Foxit Reader
     + okular
+    + Foliate
+    + Bookworm
+    + [Calibre](https://calibre-ebook.com/) — E-book Manager `sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin`
+  - RSS
+    + Liferea — Feed Reader 一个自由开源的新闻聚合工具，用于在线新闻订阅
+  - Podcasts
+    + Podcasts — GNOME Podcast Client `flatpak install flathub org.gnome.Podcasts`
+    + Vocal:听播客
   - LaTeX
-  - 浏览器
-    + Chromium
-    + Vivaldi
   - 输入法
     + [rime](https://rime.im/)
   - 邮箱
@@ -341,13 +345,15 @@ sudo apt install -y apt-fast`
     + Gtile:分屏工具
     + shadowshocks
     + Disk Usage Analyzer
+    + GNOME Boxes — Virtual Machine Solution
   - 图片
-    + gnome-screenshot:`sudo apt-get install gnome-screenshot`
     + Shutter
     + [Flameshot](https://github.com/lupoDharkael/flameshot)：Powerful yet simple to use screenshot software
     + Gimp
     + Imagemagick
     + Kazam
+  - Painting
+    + [Krita](https://download.kde.org/stable/krita/4.3.0/krita-4.3.0-x86_64.appimage) — A Digital Painting App
   - 社交
     + Franz 是一个即时消息客户端，它将聊天和信息服务结合到了一个应用中。它是一个现代化的即时消息平台，在单个应用中支持了 Facebook Messenger、WhatsApp、Telegram、微信、Google Hangouts、 Skype
     + [Jitsy](https://jitsi.org/):More secure, more flexible, and
@@ -360,14 +366,14 @@ completely free video conferencing
     + Ubuntu Cleaner `sudo add-apt-repository ppa:gerardpuig/ppa && sudo apt-get install ubuntu-cleaner`
     + [BleachBit](https://www.bleachbit.org/download)
   - [seamonkey](https://www.seamonkey-project.org/):develop the SeaMonkey all-in-one internet application suite
-  - [Pomodoro](https://gnomepomodoro.org/) `sudo apt-get install gnome-shell-pomodoro`
   - 贴纸
     + indicator-stickynotes
     + Xpad:`sudo apt-get install xpad`
-    + liferea:一个自由开源的新闻聚合工具，用于在线新闻订阅
   - 系统工具
     + Redshift
-    + flux
+    + Octave
+    + stacer `sudo apt install stacer` the most beautiful free and open-source application for Linux system optimizing and monitoring
+    + Déjà Dup — A Backup Tool
 * 下载
   - `sudo apt-get install ktorrent`
   - `sudo apt-get install amule`
@@ -436,8 +442,6 @@ sudo aptitude -f install <packagename> # Unable to correct problems, you have he
 sudo add-apt-repository ppa:nilarimogard/webupd8   # add source
 sudo add-apt-repository -r(--remove) ppa:nilarimogard/webupd8   # add source
 
-sudo apt install gnome-todo
-
 curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add -
 sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/home:manuelschneid3r.list"
 
@@ -445,8 +449,12 @@ wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu
 sudo apt-key add - < Release.key
 curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add -
 sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/home:manuelschneid3r.list"
-sudo apt-get update
-sudo apt-get install albert
+
+curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add -
+echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_20.04/ /' | sudo tee /etc/apt/sources.list.d/home:manuelschneid3r.list
+sudo wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_20.04/Release.key -O "/etc/apt/trusted.gpg.d/home:manuelschneid3r.asc"
+sudo apt update
+sudo apt install albert
 
 sudo apt-key list
 sudo apt-key del KEYFROMABOVE
@@ -485,48 +493,9 @@ sudo apt install texlive-latex-extra
 
 # 系统监视插件
 sudo apt install indicator-multiload
-```
 
-```
-## 替换源
-sudo mv /etc/apt/sources.list /etc/apt/sources.list.backup # 备份默认源
-
-## /etc/apt/sources.list.d
-# 清华源
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
-deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
-deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
-deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
-deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
-deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
-
-# 中科大源
-deb https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
-deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
-deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
-deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
-deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
-deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
-deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
-deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
-deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
-deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
-
-# 163源
-deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
+sudo apt-add-repository ppa:umang/indicator-stickynotes
+sudo apt-get update && sudo apt-get install indicator-stickynotes
 ```
 
 ## [Gnome](https://extensions.gnome.org/)
@@ -540,7 +509,10 @@ deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe
 * 插件
   - `sudo aptitude install gnome-shell-extension-ubuntu-dock`
   - `sudo aptitude install gnome-shell-extension-system-monitor`
+  * [Pomodoro](https://gnomepomodoro.org/) `sudo apt install gnome-todo` indeiect not use gnome
+  - gnome-screenshot:`sudo apt-get install gnome-screenshot`
   -  Open Weather
+  -  [system-monitor](https://extensions.gnome.org/extension/120/system-monitor/)
   -  dash to dock
 * Theme `/usr/share/themes`
   - [Yaru-Colors](https://www.pling.com/s/Gnome/p/1299514/)
@@ -559,7 +531,8 @@ deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe
 * 重启： `Alt + F2`, r
 
 ```sh
-sudo apt install gnome-tweak-tool gnome-shell-extensions chrome-gnome-shell
+sudo apt install gnome-shell-extensions
+
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 
 gsettings list-schemas             # 显示系统已安装的不可重定位的schema
@@ -582,6 +555,18 @@ gsettings set org.gnome.desktop.wm.preferences theme Ant
 
 gsettings set org.gnome.settings-daemon.plugins.orientation active false # 禁止屏幕自动旋转
 gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
+
+sudo apt install materia-gtk-theme
+sudo apt install papirus-icon-theme #  Applications: Materia-light  Icons: Papirus
+
+# ultra-flat-icons
+sudo add-apt-repository ppa:noobslab/icons
+sudo apt-get update
+sudo apt-get install ultra-flat-icons
+
+sudo add-apt-repository ppa:noobslab/themes
+sudo apt-get update
+sudo apt-get install arc-theme
 ```
 
 ## 用户管理
@@ -680,7 +665,7 @@ kill -9 pid
 ## perf
 
 ```sh
-sudo apt install linux-tools-common linux-tools-5.3.0-51-generic
+sudo apt install linux-tools-common
 sudo perf record -g -a sleep 10 # 录制
 sudo perf report # 回放
 ```
@@ -694,7 +679,8 @@ Now change “errors=remount-ro” to “noatime,errors=remount-ro”.
 echo -e "#\x21/bin/sh\\nfstrim -v /" | sudo tee /etc/cron.daily/trim
 sudo chmod +x /etc/cron.daily/trim
 
-sudo apt install fonts-firacode virtualbox mysql-workbench-community preload
+sudo apt install fonts-firacode virtualbox  preload
+mysql-workbench-community
 
 sudo apt-get install compizconfig-settings-manager
 sudo apt-get install compiz-plugins
@@ -741,14 +727,8 @@ sudo apt-get update
 systemctl unmask mysql.service
 service mysql start
 
-sudo apt-add-repository ppa:umang/indicator-stickynotes
-sudo apt-get update && sudo apt-get install indicator-stickynotes
-
 sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
 sudo apt-get update && sudo apt-get install indicator-sysmonitor
-
-sudo add-apt-repository ppa:kasra-mp/ubuntu-indicator-weather
-sudo apt-get update && sudo apt-get install indicator-weather
 
 # 提高电池寿命并且减少过热
 sudo add-apt-repository ppa:linrunner/tlp
@@ -774,7 +754,6 @@ sudo ./VMware-Workstation-Full-12.1.1-3770994.x86_64.bundle
 # VMware =》 菜单选中VM =》点击 Install VMware Tools
 sudo apt-get install lamp-server
 
-sudo apt install gnome-tweak-tool
 ## [fusuma](https://github.com/iberianpig/fusuma):Multitouch gestures with libinput driver on X11, Linux
 sudo gpasswd -a $USER input # 重新登录账户
 sudo apt-get install libinput-tools  xdotool
@@ -843,29 +822,6 @@ gsettings set com.canonical.indicator.datetime custom-time-format '%Y年%m月%d�
 gsettings set com.canonical.Unity.Launcher launcher-position Bottom|Left # unity Unity显示位置
 gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true # 点击图标最小化
 
-# Tweak tool优化工具
-sudo apt-get install gnome-tweak-tool # 应用有 Tweaks配置界面
-sudo apt-get install unity-tweak-tool
-
-sudo apt install materia-gtk-theme
-sudo apt install papirus-icon-theme #  Applications: Materia-light  Icons: Papirus
-
-# ultra-flat-icons
-sudo add-apt-repository ppa:noobslab/icons
-sudo apt-get update
-sudo apt-get install ultra-flat-icons
-
-
-sudo add-apt-repository ppa:noobslab/themes
-sudo apt-get update
-sudo apt-get install arc-theme
-
-sudo add-apt-repository ppa:noobslab/icons
-sudo apt-get update
-sudo apt-get install arc-icons
-
-sudo apt install net-tools iputils-ping # ifconfig 必备
-
 # 记录下网卡名字，比如我的，有enp4s0f2、lo、wlp9s0b1三个 /etc/sysctl.conf 追加
 net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
@@ -877,28 +833,18 @@ sudo sysctl -p
 xset m 0 0 # 设置鼠标加速度
 
 sudo apt-get remove totem \
-rhythmbox \
 gnome-mahjongg \
 aisleriot \
-gnome-mines \
 cheese \
 transmission-common \
-gnome-orca \
-webbrowser-app \
-unity-webapps-common \
 gnome-sudoku \
-onboard \
 simple-scan \
-landscape-client-ui-install \
-deja-dup \
-empathy \
-brasero
+gnome-mines
 
 # 可选
 sudo apt-get remove yelp #帮助
 sudo apt-get remove blue* #蓝牙
 sudo apt-get remove gnome-software #软件中心 apt够用
-sudo apt-get remove unity #换gnome
 sudo apt-get remove gnome-system-monitor #系统监视器
 sudo apt-get remove gnome-system-log #日志查看器
 sudo apt autoremove

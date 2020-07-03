@@ -277,15 +277,17 @@ $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
 
 ## 工具
 
-* [IMageMagick](https://imagemagick.cn/)
-    - convert:转换图像格式，调整图像大小、模糊、裁剪、去斑、抖动、绘图、翻转、加入、重新采样等等
-    - mogrify:批量缩放大小
+* 转换
+    - [IMageMagick](https://imagemagick.cn/)
+        + convert:转换图像格式，调整图像大小、模糊、裁剪、去斑、抖动、绘图、翻转、加入、重新采样等等
+        + mogrify:批量缩放大小
+    - [ renzhezhilu / webp2jpg-online ](https://github.com/renzhezhilu/webp2jpg-online):在线图片格式转化器,纯前端实现，无需上传文件,可将jpeg、jpg、png、gif、webp、svg、ico、bmp文件转化为jpeg、png、webp动画、ico、gif文件。本地即可完成转换。Online picture format converter, can convert jpeg, jpg, png, gif, webp, svg, ico, bmp files into jpeg, png, webp animation,gif, ico files. No need to upload files, conversion can be done locally。 https://renzhezhilu.github.io/webp2jpg-online/
 * [nagadomi/waifu2x](https://github.com/nagadomi/waifu2x):Image Super-Resolution for Anime-Style Art
 * [photoprism/photoprism](https://github.com/photoprism/photoprism):Personal photo management powered by Go and Google TensorFlow https://photoprism.org/
 * [google/filament](https://github.com/google/filament):Filament is a real-time physically based rendering engine for Android, Windows, Linux, macOS and WASM/WebGL
 * [Gimp](https://www.gimp.org)
 * [muukii/Pixel](https://github.com/muukii/Pixel):🎨🖼 An image editor and engine using CoreImage
-* [fengyuanchen/compressorjs](https://github.com/fengyuanchen/compressorjs):JavaScript image compressor.
+
 * 看图
     - FastStone Image Viewer
 * 截图
@@ -293,6 +295,7 @@ $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
     - Xnip
 * 压缩
     - [GoogleChromeLabs/squoosh](https://github.com/GoogleChromeLabs/squoosh):Make images smaller using best-in-class codecs, right in the browser. https://squoosh.app
+    - [fengyuanchen/compressorjs](https://github.com/fengyuanchen/compressorjs):JavaScript image compressor.
 * [libvips/libvips](https://github.com/libvips/libvips):A fast image processing library with low memory needs. https://libvips.github.io/libvips/
 * [AlloyImage](https://github.com/AlloyTeam/AlloyImage)基于HTML5技术的专业图像处理库
 * [DmitryUlyanov/deep-image-prior](https://github.com/DmitryUlyanov/deep-image-prior):Image restoration with neural networks but without learning. https://dmitryulyanov.github.io/deep_image_prior

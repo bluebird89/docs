@@ -86,4 +86,5 @@ systemctl restart sshd
 * Mac
     - Parallels Desktop
     - Vmvare Fusion
+    - GNOME Boxes
 * [ myspaghetti / macos-virtualbox ](https://github.com/myspaghetti/macos-virtualbox):Push-button installer of macOS Catalina, Mojave, and High Sierra guests in Virtualbox for Windows, Linux, and macOS

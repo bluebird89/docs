@@ -143,6 +143,7 @@ WantedBy=multi-user.target
 
 # Ubuntu
 sudo apt-get remove docker docker-engine docker.io containerd runc
+
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 
@@ -161,6 +162,7 @@ apt-get update && apt-get install -y \
   containerd.io=1.2.10-3 \
   docker-ce=5:19.03.4~3-0~ubuntu-$(lsb_release -cs) \
   docker-ce-cli=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)
+
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 # Setup daemon.

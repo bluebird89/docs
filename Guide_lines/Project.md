@@ -857,3 +857,8 @@ _注意：尽可能保持安全异常消息的通用性。例如，别说`不正
 资源: [RisingStack Engineering](https://blog.risingstack.com/), [Mozilla Developer Network](https://developer.mozilla.org/), [Heroku Dev Center](https://devcenter.heroku.com), [Airbnb/javascript](https://github.com/airbnb/javascript), [Atlassian Git tutorials](https://www.atlassian.com/git/tutorials), [Apigee](https://apigee.com/about/blog), [Wishtack](https://blog.wishtack.com)
 
 本文件图标来自 [icons8](https://icons8.com/)
+
+## 参考
+
+* [ google / styleguide ](https://github.com/google/styleguide)  Style guides for Google-originated open-source projects https://google.github.io/styleguide/
+  - [ zh-google-styleguide / zh-google-styleguide ](https://github.com/zh-google-styleguide/zh-google-styleguide):Google 开源项目风格指南 (中文版)

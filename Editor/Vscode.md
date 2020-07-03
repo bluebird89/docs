@@ -37,9 +37,10 @@ sudo apt-get install code
 * Emmet
 * ESLint
 * Eva Theme
-* Faker：
+* Faker
 * File Utils
 * Flutter
+* [foambubble / foam ](https://github.com/foambubble/foam):A personal knowledge management and sharing system for VSCode
 * gi:给 .gitignore 文件添加各种语言忽略文件配置
 * Git Blame
 * Git History
