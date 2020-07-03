@@ -44,7 +44,7 @@
     - 八方旅人（OCTOPATH TRAVELER）
     - 噗呦噗呦VS俄罗斯方块
     - oxenfree
-    - 巫师3
+    - 巫师3·狂猎
     - 煮糊了/分手厨房 Overcooked
     - 星际战甲
     - 猎天使魔女

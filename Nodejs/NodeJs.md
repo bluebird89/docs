@@ -57,10 +57,10 @@ sudo ln -s /usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin/npx /usr/bin/npx
 
 # Error: EACCES: permission denied, access '/usr/local/lib/node_modules' react
 sudo chown -R henry:henry /usr/local/lib/nodejs/node-v12.16.1-linux-x64/lib/node_modules
+
 ## using PPA
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt-get install -y nodejs npm
-sudo apt-get install -y build-essential
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
 nodejs -v
 npm -v
@@ -800,8 +800,6 @@ yarn install node-sass
   - [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
 * Kafka
   - [SOHU-Co/kafka-node](https://github.com/SOHU-Co/kafka-node):Node.js client for Apache Kafka 0.8 and later.
-* cli
-  * [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
 * compression
   - [expressjs/compression](https://github.com/expressjs/compression):Node.js compression middleware
 * hooks
@@ -817,6 +815,8 @@ yarn install node-sass
   - [DevExpress/testcafe](https://github.com/DevExpress/testcafe):A Node.js tool to automate end-to-end web testing. https://devexpress.github.io/testcafe/
   - [visionmedia/supertest](https://github.com/visionmedia/supertest):🕷Super-agent driven library for testing node.js HTTP servers using a fluent API
   - [ getgauge / taiko ](https://github.com/getgauge/taiko):A node.js library for testing modern web applications https://taiko.dev
+  - [ mcollina / autocannon ](https://github.com/mcollina/autocannon):fast HTTP/1.1 benchmarking tool written in Node.js
+  - [ octalmage / robotjs ](https://github.com/octalmage/robotjs):Node.js Desktop Automation. http://robotjs.io/
 * [tj/co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)
 * [Unitech / pm2](https://github.com/Unitech/pm2):Node.js Production Process Manager with a built-in Load Balancer. https://pm2.io
 

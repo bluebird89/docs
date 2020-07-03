@@ -4,6 +4,7 @@
 * [atlassian](https://www.atlassian.com/)
     - stride
     - [Jira](https://www.atlassian.com/software/jira)：敏捷开发，处理项目中的多个步骤,用于规划和跟踪工作，并确定优先级，处理产品发布，产品交付后监控性能
+    - [Linear](https://linear.app/):Linear helps streamline software projects, sprints, tasks, and bug tracking. It's built for high-performance teams.
     - [confluence](https://www.atlassian.com/software/confluence)
     - [sourcetree](https://www.sourcetreeapp.com/)：Simplicity and power in a beautiful Git GUI
     - [asana](https://asana.com/)
