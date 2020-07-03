@@ -174,6 +174,7 @@
 * 《事务处理：概念与技术》 Jim Gray, Andreas Reuter
 * 《Designing Data-Intensive Applications》 Martin Kleppmann
 * 《Streaming Systems》 Tyler Akidau, Slava Chernyak, Reuven Lax
+* [ Vonng / ddia ](https://github.com/Vonng/ddia):《Designing Data-Intensive Application》DDIA中文翻译
 
 ## Visualization
 

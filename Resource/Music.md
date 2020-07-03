@@ -2,7 +2,7 @@
 
 ## 演奏
 
-* The Royal Philharmonic：英国皇家爱乐乐团1946年创立，1966年英国女王为乐团冠上“皇家”头衔，奠定了其在英国乐坛无可替代的地位。乐团以丰富、流畅的音色和近乎完美的配合以及对经典曲目的驾驭能力征服了世界。 
+* The Royal Philharmonic：英国皇家爱乐乐团1946年创立，1966年英国女王为乐团冠上“皇家”头衔，奠定了其在英国乐坛无可替代的地位。乐团以丰富、流畅的音色和近乎完美的配合以及对经典曲目的驾驭能力征服了世界。
 
 ## 工具
 
@@ -24,3 +24,10 @@
 * [lyswhut / lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)
 * [Listen 1](https://listen1.github.io/listen1/):One for all free music in China
 * [ScorSer](http://en.scorser.com/D/Sheet+music.html):Search system for musicians
+
+
+```sh
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 4773BD5E130D1D45
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt update && sudo apt install spotify-client
+```

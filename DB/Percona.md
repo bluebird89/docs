@@ -11,7 +11,9 @@ Percona Server https://www.percona.com/software/mysql-database/percona-server
 
 ## 安装
 
-安装不要制定版本,会有合适版本安装.下载
+* 安装不要制定版本,会有合适版本安装.下载
+*
+配置文件 /etc/mysql/my.cnf
 
 ```sh
 wget https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.18-14/binary/tarball/Percona-Server-5.7.18-14-Linux.x86_64.ssl100.tar.gz
@@ -19,86 +21,31 @@ wget https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.
 wget https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.18-14/source/tarball/percona-server-5.7.18-14.tar.gz
 tar xfz percona-server-5.7.18-14.tar.gz
 
-mysql-common, libjemalloc1, libaio1 and libmecab2
-
 wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
 dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
 sudo apt update
-sudo apt install percona-server-server-5.7
 
-wget https://www.percona.com/downloads/Percona-Server-5.6/Percona-Server-5.6.25-73.1/binary/debian/jessie/x86_64/Percona-Server-5.6.25-73.1-r07b797f-jessie-x86_64-bundle.tar
-tar xvf Percona-Server-5.6.25-73.1-r07b797f-jessie-x86_64-bundle.tar
+sudo apt install libfile-fnmatch-perl debsums  zlib1g-dev libaio1 libmecab2
+sudo dpkg -i *.deb\
 
-sudo dpkg -i *.deb
-
-sudo apt install libfile-fnmatch-perl
-sudo apt install debsums
-sudo dpkg -i percona-server-common-5.7_5.7.21-21-3.bionic_amd64.deb
-sudo apt install zlib1g-dev
-sudo dpkg -i percona-server-server-5.7_5.7.21-21-3.bionic_amd64.deb
-sudo dpkg -i percona-server-client-5.7_5.7.21-21-3.bionic_amd64.deb
-sudo apt intall libaio1 libmecab2
 sudo apt --fix-broken install
 
-wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
-dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
-apt-get update
-apt-get install percona-server-server-5.7
-```
+mysql -e "CREATE FUNCTION fnv1a_64 RETURNS INTEGER SONAME 'libfnv1a_udf.so'" -u USER -pPASSWORD
+mysql -e "CREATE FUNCTION fnv_64 RETURNS INTEGER SONAME 'libfnv_udf.so'" -u USER -pPASSWORD
+mysql -e "CREATE FUNCTION murmur_hash RETURNS INTEGER SONAME 'libmurmur_udf.so'" -u USER -pPASSWORD
 
-```sh
-service mysql stop
-apt-get purge -y mysql-*
+ps-admin --enable-rocksdb -u <mysql_admin_user> -p[mysql_admin_pass] [-S <socket>] [-h
+ <host> -P <port>]
 
 service mysql stop
 mkdir /usr/local/src/mysql_backup
 cp -R /var/lib/mysql /usr/local/src/mysql_backup
-
-service mysql stop
 apt-get purge -y mysql-*
 
-cd /usr/local/src
-wget https://repo.percona.com/apt/percona-release_0.1-3.$(lsb_release -sc)_all.deb
-`dpkg -i percona-release_0.1-3.$(lsb_release -sc)_all.deb `
-apt-get update
-
-apt-get install -y percona-server-server-5.5
-
-mysql -e "CREATE FUNCTION fnv1a_64 RETURNS INTEGER SONAME 'libfnv1a_udf.so'"
-mysql -e "CREATE FUNCTION fnv_64 RETURNS INTEGER SONAME 'libfnv_udf.so'"
-mysql -e "CREATE FUNCTION murmur_hash RETURNS INTEGER SONAME 'libmurm'"
-
-mysql -u USER -pPASSWORD -e "CREATE FUNCTION fnv1a_64 RETURNS INTEGER SONAME 'libfnv1a_udf.so'"
-mysql -u USER -pPASSWORD -e "CREATE FUNCTION fnv_64 RETURNS INTEGER SONAME 'libfnv_udf.so'"
-mysql -u USER -pPASSWORD -e "CREATE FUNCTION murmur_hash RETURNS INTEGER SONAME 'libmurmur_udf.so'"
-
-# install has problem
-
-sudo apt-get install -y mysql-server
-
-service mysql stop && sudo apt-get purge -y mysql-*
-
-sudo apt-get purge -y mysql-server
-sudo apt-get update && sudo apt-get upgrade -y
-```
-
-编译安装
-```sh
+#编译安装
 cmake . -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_CONFIG=mysql_release -DFEATURE_SET=community -DWITH_EMBEDDED_SERVER=OFF
 make
 make install
-
-```
-
-配置文件 /etc/mysql/my.cnf
-
-```shell
-sudo service mysql start
-service mysql status
-sudo service mysql stop
-sudo service mysql restart
-
-systemctl unmask mysql.service
 ```
 
 ## 重置root密码
@@ -136,41 +83,6 @@ innobackupex --user=root --password='Passw0rd!' --parallel=8 /backups/
 innobackupex --user=root --password='Passw0rd!' --parallel=8 --compress --compress-threads=8 /backups/
 innobackupex --decompress /backups/2017-04-29_21-18-04/
 innobackupex --apply-log --use-memory=4G /backups/2017-04-29_21-18-04
-```
-
-## problem
-
-Errors were encountered while processing:
- percona-server-server-5.6
-E: Sub-process /usr/bin/dpkg returned an error code (1)
-
-```language
-dpkg --get-selections | grep -i percona
-percona-server-client-5.6            deinstall -- this one
-
-# purge all old entries (deinstall) from the dpkg list
-sudo dpkg --purge percona-server-server-5.6
-
-sudo apt-get autoremove
-sudo apt-get autoclean
-
-sudo apt-get -f install
-
-The following packages have unmet dependencies:
- percona-server-server-5.7 : PreDepends: percona-server-common-5.7 (= 5.7.20-18-1.xenial)
-                             Depends: percona-server-client-5.7 (= 5.7.20-18-1.xenial) but it is not going to be installed
-E: Unable to correct problems, you have held broken packages.
-
-apt-get install percona-server-server
-
-The GPG keys listed for the "Percona-Release YUM repository - x86_64" repository are already installed but they are not correct for this package.
-Check that the correct key URLs are configured for this repository.
-
-
- Failing package is: Percona-Server-client-56-5.6.43-rel84.3.el7.x86_64
- GPG Keys are configured as: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Percona
-
-yum update percona-release
 ```
 
 ## 参考

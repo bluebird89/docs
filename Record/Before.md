@@ -1615,16 +1615,24 @@
 * 美国X档案
 * 《乱世佳人》
 *  英国病人 The English Patient (1996)
-    -  他为了救人，担当了卖国罪名，惹来了杀身之祸，最终他没有违背诺言，可是，凯瑟琳已在寒冷中永远地离开了他……艾马殊将凯瑟琳的遗体放上飞机，在飞越撒哈拉沙漠时被德军击落
-    -  拉尔夫·费因斯 Ralph Fiennes
-    -  艾马殊伯爵是匈牙利人。因为艾马殊的奇怪的名字和他的近乎疯狂的态度，英军认定艾马殊是德国人，于是艾马殊被囚。艾马殊逃出囚车之后，用自己绘制的北非地图与德军交换了一架飞机（德军缴获的英国飞机），飞回沙漠山洞，只是为了履行自己对凯瑟琳的诺言：我会回来，我永远也不离开你。
+    -  Almásy(拉尔夫·费因斯 Ralph Fiennes)为了救人，担当了卖国罪名，惹来了杀身之祸，最终他没有违背诺言，可是，Katharine 已在寒冷中永远地离开了他
+    -  艾马殊伯爵是匈牙利人。因为奇怪名字和近乎疯狂的态度，英军认定艾马殊是德国人，于是艾马殊被囚。逃出囚车之后，用自己绘制的北非地图与德军交换了一架飞机（德军缴获的英国飞机），飞回沙漠山洞，只是为了履行自己对凯瑟琳的诺言：我会回来，我永远也不离开你
     - 艾马殊架着飞机，带着凯瑟琳的遗体离开沙漠，却因为机身的英国标签，遭德军机枪扫射
+    - 汉娜的留下”得知了其痛苦的战争经历:爱她的人总是一个接一个的死去
+    - 女主在沙漠中讲的那个故事：盖吉杀了国王取而代之，娶了皇后
+    - My darling, I'm waiting for you. How long is a day in the dark, or a week？The fire is gone now and I'm cold, horribly cold .
+    - I really ought to drag myself outside, but then there'd be the sun. I'm afraid I’ll waste the light on the paintings and on writing these words. We die. We die, We die rich with lovers and tribes. Tastes we have swallowed. Bodies we have entered and swum up like rivers. Fears we have hidden in, like this wretched cave. I want all this marked on my body.
+    - We're the real countries, not the boundaries drawn on maps, the names of powerful men. I know you will come and carry me out into the palace of winds. That's all I have wanted to walk in such a palace with you, with friends, an earth without maps. The lamps gone out and I'm writing in the darkness.
+    - New lovers are nervous and tender, but smash everything. For the heart is an organ of fire.
+    - You’re wering the thimble,（你还戴着那个我送你的挂饰？） —Of course,you idiot, （当然，傻瓜） I always wear it , I’ve always worn it（我一直戴着它，我会永远戴着它的） I’ve always love you…（我永远都爱你）
+    - I’ll always go back to that church , look at my paintings.（我会经常回那个教堂，去看我
+钟爱的那些绘画） —I’ll always go back that church （我也会经常去那） —So , one day we’ll meet.（那，我们总有一天还会相遇）
+    - 影片结尾和开始呼应，但基调已然不同。Almásy载着Katharine的尸体驾驶飞机在大漠中翱翔，但是沙漠不再是分隔爱人的Villain，而是Palace of Winds风的宫殿。Almásy在这一刻活过，永远活在了这一刻，他好像可以永远这么飞下去，和心爱的人一起飞向彼岸
 * 《四月三周两天》
 * 十二怒汉
 * 卡罗尔
 * 筋疲力尽
     - 帕萃西娅问作家：“您这一生最大的野心是什么？”作家回答：“先成为不朽，然后死去！”
-
 * 百万美元宝贝
 * 桂河大桥
 * 博物馆奇妙夜

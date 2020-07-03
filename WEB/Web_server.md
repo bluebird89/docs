@@ -370,9 +370,11 @@ passwd bill
 usermod -a -G admin bill
 apt-get update && apt-get upgrade
 apt-get install sudo
+
 visudo # 打开sudo设置文件/etc/sudoers
 root    ALL=(ALL:ALL) ALL
 bill    ALL=(ALL) NOPASSWD: ALL # 切换sudo的时候，不需要输入密码
+%sudo ALL=(ALL:ALL) NOPASSWD:ALL
 
 # SSH
 cat ~/.ssh/id_rsa.pub | ssh bill@128.199.209.242 'mkdir -p .ssh && cat - >> ~/.ssh/authorized_keys'

@@ -235,29 +235,8 @@ Hugepagesize:       2048 kB
     - phpize有版本号，依赖安装指定目录
         + mac:`/usr/local/lib/php/pecl/20180731/`
     - 需要php7.*-dev 支持
-    - fileinfo
-    - gettext
-    - gd2
-    - imagick
-    - libpcre3-dev
-    - php7.4
-    - OpenSSL
-    - PDO
-    - Mbstring
-    - php7.2-common
-        + php7.2-cli
-        + php7.2-common
-        + php7.2-curl
-        + php7.2-fpm
-        + php7.2-gd
-        + php7.2-json
-        + php7.2-mbstring
-        + php7.2-opcache
-        + php7.2-readline
-        + php7.2-soap
-        + php7.2-sqlite3
-        + php7.2-xml
-        + php7.2-zip
+
+
 * [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only.
 
 ```sh
@@ -333,8 +312,12 @@ brew link php
 apt-get update && apt-get upgrade
 apt-get install software-properties-common
 sudo add-apt-repository ppa:ondrej/php
-apt-get install php
-apt install php7.4-{bz2,json,mbstring,zip,gd,curl,xml,common,opcache,imagick}
+apt-get install php7.4 php7.4-{bz2,json,zip,mbstring,gd,curl,xml,common,opcache,imagick,fpm,mysqli,cli,bcmath,intl,soap,xdebug,xsl,xmlrpc,dev,pdo}  php-pear
+    + php7.2-sqlite3
+    - fileinfo
+    - gettext
+    - libpcre3-dev
+    - OpenSSL
 
 ## ubuntu
 sudo systemctl start php7.0-fpm.service

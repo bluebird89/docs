@@ -183,3 +183,4 @@
 * [tron1991/open-product-management](https://github.com/tron1991/open-product-management):A curated list of product management advice for technical people.
 * [basecamp/sub](https://github.com/basecamp/sub):a delicious way to organize programs
 * [一篇文章读懂项目管理中的精髓](http://blog.csdn.net/gitchat/article/details/77688870)
+* [ ksindi / managers-playbook ](https://github.com/ksindi/managers-playbook#principles):book Heuristics for effective management

@@ -24,6 +24,21 @@ docker run -it b.gcr.io/tensorflow/tensorflow
 virtualenv my-venv
 source my-venv/bin/activate
 pip install IPython
+
+mkdir my_tensorflow
+cd my_tensorflow
+
+#  creates a directory named venv, that contains a copy of the Python binary, the Pip package manager, the standard Python library, and other supporting files
+# second venv is the name of the virtual environment
+python3 -m venv venv
+# the virtual environment’s bin directory will be added at the beginning of the system $PATH variable. Also, the shell’s prompt will change, and it will show the name of the virtual environment you’re currently in. In this example, that is (venv)
+source venv/bin/activate
+pip install --upgrade pip
+pip install --upgrade tensorflow
+
+python -c 'import tensorflow as tf; print(tf.__version__)'
+
+deactivate
 ```
 
 ## 组件
