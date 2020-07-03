@@ -61,6 +61,8 @@ brew cask install shadowsocksx
 
 A platform for building proxies to bypass network restrictions. <https://www.v2ray.com/> 通过nginx的负载均衡功能，来自web访问的流量就直接访问到网站，而通过v2ray来的流量就通过v2ray的服务端转发，实现KX代理的功能
 
+* [ jiangxufeng / v2rayL ](https://github.com/jiangxufeng/v2rayL):v2ray linux GUI客户端，支持订阅、vemss、ss等协议，自动更新订阅、检查版本更新
+
 ## OpenVPN
 
 * 服务端配置,提供了两种认证方法：

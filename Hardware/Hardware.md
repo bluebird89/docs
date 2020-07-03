@@ -22,6 +22,11 @@
 
 * B&O PLAY by BANG & OLUFSEN - BeoPlay H6 Over-Ear Headphones, Natural (1642003)
 
+## 显示器
+
+* 明基 EW2780
+* 明基 E540 投影仪
+
 ## 电脑
 
 * macbook pro 15

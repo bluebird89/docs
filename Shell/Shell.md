@@ -952,6 +952,12 @@ source ~/.zshrc
 j + 目录名
 ```
 
+## [nvbn / thefuck](https://github.com/nvbn/thefuck)
+
+```sh
+sudo pip3 install thefuck
+```
+
 ## [ bats-core / bats-core ](https://github.com/bats-core/bats-core)
 
 Bash Automated Testing System
@@ -1002,6 +1008,11 @@ ccache gcc foo.c
     - [](https://atomcorp.github.io/themes/)
 
 ```
+
+sudo add-apt-repository ppa:gnome-terminator
+sudo apt update
+sudo apt install terminator
+
 [global_config]
   enabled_plugins = CustomCommandsMenu, TestPlugin, ActivityWatch, TerminalShot, MavenPluginURLHandler
   title_inactive_bg_color = "#820f49"

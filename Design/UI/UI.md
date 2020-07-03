@@ -34,7 +34,7 @@ getstorybook
 
 * [frozenui/frozenui](https://github.com/frozenui/frozenui)FrozenUI的CSS组件库,基于腾讯手Q样式规范 http://frozenui.github.io/
 * [zurb/foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. http://foundation.zurb.com
-* [froala/design-blocks](https://github.com/froala/design-blocks):A set of 170+ Bootstrap based design blocks ready to be used to create clean modern websites. https://www.froala.com/design-blocks 
+* [froala/design-blocks](https://github.com/froala/design-blocks):A set of 170+ Bootstrap based design blocks ready to be used to create clean modern websites. https://www.froala.com/design-blocks
 * [designmodo/Flat-UI](https://github.com/designmodo/Flat-UI):Flat UI Free - Design Framework (html/css3/less/js). Flat UI is based on Bootstrap, a comfortable, responsive, and functional framework that simplifies the development of websites. https://designmodo.com/flat-free/
 * [airbnb/airpal](https://github.com/airbnb/airpal):Web UI for PrestoDB. http://airbnb.github.io/airpal
 * [iview/iview](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
@@ -61,6 +61,7 @@ getstorybook
 * [Brackets](http://brackets.io/):A modern, open source text editor that understands web design.
 * [dropbox/lepton](https://github.com/dropbox/lepton):Lepton is a tool and file format for losslessly compressing JPEGs by an average of 22%.
 * [Figma](https://www.figma.com/):在线工具
+	- [使用 Figma + GitHub Actions 完成 SVG 图标的完全自动化交付](https://sspai.com/post/61182)
 * [botui/botui](https://github.com/botui/botui):🤖 A JavaScript framework to create conversational UIs https://botui.org
 * [wiredjs/wired-elements](https://github.com/wiredjs/wired-elements):Collection of elements that appear hand drawn. Great for wireframes. https://wiredjs.com
 * [alibaba/ice](https://github.com/alibaba/ice/): 🚀 （邀请公测）赋能中后台建设 - 海量可复用物料，通过 GUI 工具极速构建中后台应用 https://alibaba.github.io/ice/
