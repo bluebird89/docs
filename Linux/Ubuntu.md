@@ -28,11 +28,7 @@
     + 选中分区boot分区
   - 重启运行
 * grub
-  - `/etc/default/grub`
-  - 重新生成GRUB的启动菜单配置文件(/boot/grub/grub.cfg):`sudo update-grub`
-  - `GRUB_THEME="/boot/grub/themes/fallout-grub-theme-master/theme.txt"`
-  - `sudo grub-set-default NUMBER`
-  - `sudo apt install grub-customizer`
+  - [Tela grub theme ](https://www.gnome-look.org/p/1307852/)
 
 ```sh
 sudo dd if=ubuntu-16.04-desktop-amd64.iso of=/dev/sdc bs=1M
@@ -40,11 +36,26 @@ sudo dd if=ubuntu-16.04-desktop-amd64.iso of=/dev/sdc bs=1M
 # Could not install packages due to an EnvironmentError: [Errno 28] No space left on device
 mkdir ~/tmp
 export TMPDIR=$HOME/tmp
+
+# 下载 theme
+./install.sh
+# /etc/default/grub
+
+# /boot/grub/grub.cfg
+GRUB_TIMEOUT=3
+GRUB_GFXMODE=1920x1080x32
+
+GRUB_THEME="/usr/share/grub/themes/vimix/theme.txt"
+
+sudo grub-set-default NUMBER
+sudo apt install grub-customizer
+sudo update-grub
 ```
 
 ## 版本
 
 * 20.04 LTS Focal Fossa
+  - Wireguard 已被移植到 Linux 内核5.4
 
 ```sh
 cat /proc/version
@@ -60,6 +71,24 @@ sudo apt-get remove linux-image-4.4.0-75-generic
 sudo update-grub
 ```
 
+## 环境
+
+* /root/ 目录下 .bashrc，.dircolors 和 .condarc 三个配置文件均使用 /home/user/ 目录下同名文件的软连接
+* 优化 Terminal 窗口
+  - 右上角设置:置文件首选项
+  - 关闭 启用菜单快捷键（影响 htop 退出）
+  - 配置文件 文本外观终端起始尺寸 140 列 40 行
+  - 颜色:关闭 使用系统主题中的颜色,置方案 -> Tango 暗色
+  - 关闭 使用系统主题的透明度,开启 使用透明背景 ，将其调整为约 15%
+
+
+```
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[38;5;39m\]\w\[\033[00m\]\$ '
+
+dircolors -p > ~/.dircolors
+sed -ie 's/DIR 01;34/DIR 38;5;39/g' ~/.dircolors
+```
+
 ## hardware
 
 * AMD显卡驱动
@@ -68,6 +97,7 @@ sudo update-grub
   - `sudo -i && ./amdgpu-pro-install -y --opencl=pal,legacy`
 
 ```sh
+sudo apt install hwinfo
 free -m
 sudo lshw -c memory
 
@@ -266,6 +296,9 @@ zh_CN.UTF-8 UTF-8
 zh_CN.GBK GBK
 zh_CN GB2312
 sudo locale-gen
+
+sudo visudo
+%sudo ALL=(ALL:ALL) NOPASSWD:ALL
 ```
 
 ### 软件
@@ -340,6 +373,8 @@ sudo locale-gen
   - 邮箱
     + Nylas N1：超好用的跨平台电子邮件客户端
     + Thunderbird：can  add addon to manage rss
+      * Lightning Calendar
+      *
   - 系统
     + [albert](https://albertlauncher.github.io/):Access everything with virtually zero effort
     + Gtile:分屏工具
@@ -374,6 +409,8 @@ completely free video conferencing
     + Octave
     + stacer `sudo apt install stacer` the most beautiful free and open-source application for Linux system optimizing and monitoring
     + Déjà Dup — A Backup Tool
+  - appimage
+    + [ TheAssassin / AppImageLauncher ](https://github.com/TheAssassin/AppImageLauncher):Helper application for Linux distributions serving as a kind of "entry point" for running and integrating AppImages
 * 下载
   - `sudo apt-get install ktorrent`
   - `sudo apt-get install amule`
@@ -567,6 +604,12 @@ sudo apt-get install ultra-flat-icons
 sudo add-apt-repository ppa:noobslab/themes
 sudo apt-get update
 sudo apt-get install arc-theme
+
+sudo add-apt-repository ppa:daniruiz/flat-remix
+sudo apt update
+sudo apt install flat-remix-gnome
+
+sudo add-apt-repository -u ppa:snwh/ppa
 ```
 
 ## 用户管理
@@ -641,11 +684,46 @@ sudo journalctl --vacuum-time=3d
 ```sh
 # 防火墙
 sudo ufw status
+
+
+sudo ufw enable/disable|reset
 sudo ufw app list
+sudo ufw app info 'Nginx Full'
+
 sudo ufw allow 'Nginx HTTP'
-sudo ufw allow https
+sudo ufw allow https|ssh
 sudo ufw allow 443
-sudo ufw enable/disable
+sudo ufw allow 7722/tcp
+sudo ufw allow proto tcp to any port 80
+sudo ufw allow 7100:7200/udp
+
+sudo ufw allow from 64.63.62.61
+sudo ufw allow from 64.63.62.61 to any port 22
+sudo ufw allow from 192.168.1.0/24 to any port 3306
+sudo ufw allow in on eth2 to any port 3306
+
+sudo ufw deny from 23.24.25.0/24
+sudo ufw deny proto tcp from 23.24.25.0/24 to any port 80,443
+
+sudo ufw status numbered
+sudo ufw delete 3
+sudo ufw delete allow 8069
+
+# /etc/ufw/sysctl.conf
+net/ipv4/ip_forward=1
+DEFAULT_FORWARD_POLICY="ACCEPT"
+
+# /etc/ufw/before.rules
+#NAT table rules
+*nat
+:POSTROUTING ACCEPT [0:0]
+
+# Forward traffic through eth0 - Change to public network interface
+-A POSTROUTING -s 10.8.0.0/16 -o eth0 -j MASQUERADE
+
+# don't delete the 'COMMIT' line or these rules won't be processed
+COMMIT
+
 bash <(curl -s https://git.jacksgong.com/Jacksgong/script/raw/master/firewall.sh)
 
 # 查看某一端口的占用情况
@@ -660,6 +738,27 @@ ps aux | grep nginx
 lsof -Pni4 | grep LISTEN | grep php
 # 关闭进程
 kill -9 pid
+```
+
+## UFW
+
+* default polices are defined in the /etc/default/ufw file
+* can be changed either by manually modifying the file or with the sudo ufw default <policy> <chain> command
+  - ufw allow port_number/protocol
+  -
+
+```sh
+sudo apt install ufw
+sudo ufw status verbose
+sudo ufw app list
+sudo ufw app info 'Nginx Full'
+sudo ufw allow ssh
+sudo ufw allow 7722/tcp
+sudo ufw allow 7100:7200/tcp
+
+sudo ufw enable
+
+
 ```
 
 ## perf

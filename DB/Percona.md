@@ -16,16 +16,17 @@ Percona Server https://www.percona.com/software/mysql-database/percona-server
 配置文件 /etc/mysql/my.cnf
 
 ```sh
-wget https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.18-14/binary/tarball/Percona-Server-5.7.18-14-Linux.x86_64.ssl100.tar.gz
-
-wget https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-5.7.18-14/source/tarball/percona-server-5.7.18-14.tar.gz
-tar xfz percona-server-5.7.18-14.tar.gz
-
-wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
-dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
-sudo apt update
-
 sudo apt install libfile-fnmatch-perl debsums  zlib1g-dev libaio1 libmecab2
+
+wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
+sudo dpkg -i percona-release_0.1-6.$(lsb_release -sc)_all.deb
+sudo apt-get update
+sudo apt-get install percona-xtrabackup
+
+# 下载
+wget https://www.percona.com/downloads/Percona-Server-LATEST/Percona-Server-8.0.19-10/binary/debian/focal/x86_64/Percona-Server-8.0.19-10-rf446c04-focal-x86_64-bundle.tar
+wget https://www.percona.com/downloads/XtraBackup/Percona-XtraBackup-2.3.5/\
+binary/debian/jessie/x86_64/percona-xtrabackup_2.3.5-1.jessie_amd64.deb
 sudo dpkg -i *.deb\
 
 sudo apt --fix-broken install
@@ -85,10 +86,17 @@ innobackupex --decompress /backups/2017-04-29_21-18-04/
 innobackupex --apply-log --use-memory=4G /backups/2017-04-29_21-18-04
 ```
 
-## 参考
+## XtraBackup
 
-* [Percona Toolkit Documentation](https://www.percona.com/doc/percona-toolkit/2.1/index.html)
-* [downloads](https://www.percona.com/downloads/Percona-Server-5.7/)
+* 一款基于MySQL的服务器的开源热备份实用程序，在备份过程中不会锁定数据库
+* 可以备份来自MySQL5.1，5.5，5.6和5.7服务器上的InnoDB，XtraDB和MyISAM表的数据，以及带有XtraDB的Percona服务器
+* 功能：
+	- 在不暂停数据库的情况下创建热的InnoDB备份
+	- 进行MySQL的增量备份
+	- 将压缩的MySQL备份传输到另一台服务器
+	- 在MySQL服务器之间移动表格
+	- 轻松创建新的MySQL复制从站
+	- 在不增加服务器负载的情况下备份MySQL
 
 ## 扩展
 

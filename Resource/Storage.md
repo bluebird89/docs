@@ -18,6 +18,7 @@
     + [坚果云](https://www.jianguoyun.com/)
     + [数蚁](https://teamyi.com)
     + [nextcloud/server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data https://nextcloud.com
+        * `sudo -u www-data php occ maintenance:install --database "mysql" --database-name "henry" --database-user "nextcloud" --database-port:"33060" --database-pass "henry" --admin-user "admin" --admin-pass "admin"`
     - [Resilio](https://www.resilio.com/):在几台不同的设备之间同步文件,是一种分布式网盘  `config.getsync.com/sync.conf `
 * 服务
     - [syncthing/syncthing](https://github.com/syncthing/syncthing):Open Source Continuous File Synchronization https://forum.syncthing.net/
