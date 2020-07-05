@@ -65,8 +65,7 @@ Path %JAVA_HOME%\bin;%JAVA_HOME%\jre\bin\; # win10 path 分条添加
 # ubuntu
 # using the version packaged with Debian：OpenJDK 8
 sudo apt-get update
-sudo apt-get install default-jre # JDK 包含JRE(**推荐**)
-sudo apt-get install default-jdk
+sudo apt install openjdk-11-jdk
 
 # Installing the Oracle JDK
 sudo apt-get install software-properties-common

@@ -14,7 +14,9 @@ The Prometheus monitoring system and time series database. https://prometheus.io
 ## 安装
 
 ```sh
-wget https://github.com/prometheus/prometheus/releases/download/v2.14.0/prometheus-2.14.0.linux-amd64.tar.gz
+sudo apt install prometheus
+
+wget https://github.com/prometheus/prometheus/releases/download/v2.19.2/prometheus-2.14.0.linux-amd64.tar.gz
 tar xvfz prometheus-*.tar.gz
 cd prometheus-*
 

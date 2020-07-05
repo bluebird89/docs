@@ -28,6 +28,11 @@ brew install vim
     - nomagic：允许在搜索模式中，使用前面不带“/”的特殊字符
     - nowrapscan：禁止vi在搜索到达文件两端时，又从另一端开始
     - mesg：允许vi显示其他用户用write写到自己终端上的信息
+* [SpaceVim/SpaceVim](https://github.com/SpaceVim/SpaceVim):A community-driven modular vim distribution - The ultimate vim configuration https://spacevim.org
+
+```sh
+curl -sLf https://spacevim.org/install.sh | bash
+```
 
 ## 文件
 
@@ -498,7 +503,6 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [philc/vimium](https://github.com/philc/vimium):The hacker's browser.
 * [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen):pathogen.vim: manage your runtimepath
 * [square/maximum-awesome](https://github.com/square/maximum-awesome):Config files for vim and tmux.
-* [SpaceVim/SpaceVim](https://github.com/SpaceVim/SpaceVim):A community-driven modular vim distribution - The ultimate vim configuration https://spacevim.org
 * [ericzhang-cn/maximum-awesome-linux](https://github.com/ericzhang-cn/maximum-awesome-linux):Config files for vim and tmux.
     - ,d brings up NERDTree, a sidebar buffer for navigating and manipulating files
     - ,t brings up ctrlp.vim, a project file filter for easily opening specific files
@@ -561,6 +565,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 
 ## 工具
 
+* [neovim](https://neovim.io/):hyperextensible Vim-based text editor `sudo apt-get install neovim`
 * [coolwanglu/vim.js](https://github.com/coolwanglu/vim.js):JavaScript port of Vim http://coolwanglu.github.io/vim.js/emterpreter/vim.html
 * [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar):vinegar.vim: Combine with netrw to create a delicious salad dressing https://www.vim.org/scripts/script.php?script_id=5671
 * [neoclide/coc.nvim](https://github.com/neoclide/coc.nvim):Intellisense engine for vim8 & neovim, full language server protocol support as VSCode https://salt.bountysource.com/teams/coc-nvim
