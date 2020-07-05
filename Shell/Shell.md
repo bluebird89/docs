@@ -693,7 +693,8 @@ ls *.rmvb | xargs -n1 -i cp {} /mount/xiaodianying
     - incr是一款自动提示插件
     - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
     - [git-open](https://github.com/paulirish/git-open)
-* [Theme](~/.oh-my-zsh/themes )
+    - [sindresorhus / quick-look-plugins](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
+* [Theme](~/.oh-my-zsh/themes )hibiscus A next-generation plugin manager for zsh `curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh`
     - agnoster
     - cloud
     - wedisagree
@@ -1053,6 +1054,7 @@ sudo apt install terminator
 
 ## 工具
 
+* [ GitSquared / edex-ui ](https://github.com/GitSquared/edex-ui):A cross-platform, customizable science fiction terminal emulator with advanced monitoring & touchscreen support.
 * terminal
     - ios
         + [ish-app / ish](https://github.com/ish-app/ish):Linux shell for iOS https://ish.app
@@ -1088,7 +1090,7 @@ sudo apt install terminator
     - [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
 * help
     - [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
-    - [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/
+    - [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/ `npm install -g tldr`
     - [jaywcjlove / linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
 * 查看
     - [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings

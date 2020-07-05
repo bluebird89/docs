@@ -117,11 +117,16 @@ killall php-fpm
 listen = 127.0.0.1:9000
 listen = /var/run/php-fpm.sock
 
-location ~ \.php$ {
-    include /usr/local/etc/nginx/fastcgi.conf; #加载 nginx 的 fastcgi 模块
-    fastcgi_intercept_errors on;
+location ~ \.php(.*)$ {
     fastcgi_pass   127.0.0.1:9000; # tcp 方式，php-fpm 监听的 IP 地址和端口
    # fasrcgi_pass /usr/run/php-fpm.sock # unix socket 连接方式
+    fastcgi_index        index.php;
+    fastcgi_split_path_info    ^(.+\.php)(.*)$;
+    fastcgi_param        PATH_INFO  $fastcgi_path_info;
+    fastcgi_param        SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    fastcgi_param        PATH_TRANSLATED  $document_root$fastcgi_path_info;
+    fastcgi_intercept_errors on;
+    include              fastcgi_params;
 }
 
 [global]

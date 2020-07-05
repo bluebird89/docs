@@ -17,7 +17,6 @@ Node.js JavaScript runtime ✨🐢🚀✨ <https://nodejs.org>
 
 * [ pnpm / pnpm ](https://github.com/pnpm/pnpm): packagerocket Fast, disk space efficient package manager https://pnpm.js.org
 
-
 ```sh
 # ubuntu
 wget https://nodejs.org/dist/v8.11.1/node-v8.11.1.tar.gz

@@ -157,104 +157,6 @@ apt-get install python-pip
 pip install shadowsocks
 ```
 
-## [wireguard](https://www.wireguard.com/)
-
-一个易于配置、快速且安全的开源 VPN，利用了最新的加密技术。目的是提供一种更快、更简单、更精简的通用 VPN，可以轻松地在树莓派这类低端设备到高端服务器上部署
-
-* 跨平台
-* 易于[部署](https://www.linode.com/docs/networking/vpn/set-up-wireguard-vpn-on-ubuntu/) <https://teddysun.com/554.html>
-* [Getting Started with WireGuard](https://miguelmota.com/blog/getting-started-with-wireguard/)
-* 运行在内核空间(可以将 WireGuard 作为内核模块安装在 Linux 中)，因此可以高速提供安全的网络
-
-```sh
-sudo add-apt-repository ppa:wireguard/wireguard
-sudo apt-get update
-sudo apt-get install wireguard
-
-sudo -s
-wg # for configuring WireGuard interfaces.
-wg-quick # for starting and stopping WireGuard VPN tunnels.
-
-mkdir /etc/wireguard/keys
-cd /etc/wireguard/keys
-umask 077 #  Set the directory user mask to 077 by running umask 077. A umask of 077 allows read, write, and execute permissions for the file’s owner (root in this case), but prohibits read, write, and execute permissions for everyone else and makes sure credentials don’t leak in a race condition
-wg genkey | tee privatekey | wg pubkey > publickey
-
-vim /etc/wireguard/wg0.conf
-[Interface]
-PrivateKey = <server private key>
-Address = 10.0.0.1/24
-ListenPort = 51820
-PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
-
-# EC2 instance → Security groups → Click on security group → Edit inbound rules → Add rules → Custom UDP → Port range: 51820 → Source: Anywhere → Save rules
-
-# If your server is behind a NAT then all traffic needs to be forwarded from the default interface to the WireGuard interface. To find out the name of the default interface run ip route
-ip route | grep default | awk '{print $5}'
-
-# Enabling IP forwarding on server
-vim /etc/sysctl.conf
-net.ipv4.ip_forward=1
-
-sysctl -p # the changes to take effect without requiring a reboot
-
-## client
-sudo pacman -S wireguard-tools wireguard-dkms
-sudo -s
-mkdir /etc/wireguard/keys
-cd /etc/wireguard/keys
-umask 077
-wg genkey | tee privatekey | wg pubkey > publickey
-
-vim /etc/wireguard/wg0.conf
-[Interface]
-Address = 10.0.0.2/32
-PrivateKey = <client private key>
-DNS = 1.1.1.1
-
-[Peer]
-PublicKey = <server public key>
-Endpoint = <server public ip>:51820
-AllowedIPs = 0.0.0.0/0
-PersistentKeepalive = 25 # If your server is behind a NAT and not accessible via a public IP, then under the peer section you’ll need to set PersistentKeepalive to keep the connection alive
-
-dig +short myip.opendns.com @resolver1.opendns.com # your server’s public address
-
-## server
-vim /etc/wireguard/wg0.conf
-[Peer]
-PublicKey = vi4TCAo8TNRkpf4ZpiMsp3YHaOLrcouSDkrm4wJxezw=
-AllowedIPs = 10.0.0.2/32
-
-wg-quick up wg0
-systemctl enable wg-quick@wg0.service
-systemctl status wg-quick@wg0.service
-
-ptables -L -n
-
-## client
-dig +short myip.opendns.com @resolver1.opendns.com # your current public IP address
-wg-quick up wg0
-
-## Connecting a mobile client to server Download the WireGuard app for iOS or Android on your device
-## wg genkey but specify different filenames this time to distinguish them from the server keys:
-wg genkey | tee iphone_privatekey | wg pubkey > iphone_publickey
-
-vim /etc/wireguard/wg0.conf # Add the second peer section and include the client’s public key and IP address
-[Peer]
-PublicKey = cKIxzfp5ESpdM34vT2Qk/S7yvprOff6Le4YnyOTI4B8=
-AllowedIPs = 10.0.0.3/32
-
-
-vim /etc/wireguard/wg0-iphone.conf
-
-[Peer]
-PublicKey = H6StMJOYIjfqhDvG9v46DSX9UlQl52hOoUm7F3COxC4=
-Endpoint = 54.225.123.18:51820
-AllowedIPs = 0.0.0.0/0
-```
-
 ## [trojan-gfw / trojan](https://github.com/trojan-gfw/trojan)
 
 An unidentifiable mechanism that helps you bypass GFW. https://trojan-gfw.github.io/trojan/
@@ -262,7 +164,7 @@ An unidentifiable mechanism that helps you bypass GFW. https://trojan-gfw.github
 * 模仿了互联网上最常见的HTTPS协议，以诱骗GFW认为它就是HTTPS，从而不被识别
 * 需要一个域名用来做伪装 [freenom](linhttps://www.freenom.comk)
 
-```sh
+```
 sudo useradd -m -s /bin/bash trojanuser
 sudo passwd trojanuser
 sudo usermod -G sudo trojanuser
@@ -380,6 +282,65 @@ iptables -t nat -A OUTPUT -p udp -j trojan
 
 iptables-save > /etc/iptables-rules
 iptables-restore < /etc/iptables-rules # 手动加载
+```
+
+## clash
+
+```
+mv clash-linux-amd64-vx.xx.x clash
+chmod +x clash
+Country.mmdb # https://github.com/Dreamacro/maxmind-geoip
+config.yaml
+icon https://raw.githubusercontent.com/Dreamacro/clash/master/docs/logo.png
+// /usr/local/clash/
+
+# clash_startup.sh
+#!/bin/bash
+CLASH_APP_NAME="clash"
+CLASH_APP_PATH="/usr/local/clash"
+CLASH_CONFIG_PATH="/usr/local/clash"
+CLASH_LOG_PATH="/usr/local/clash/log"
+LOG_DATE=$(date +'%Y%m%d')
+CHECK_CLASH_PID=$(ps aux | grep "./$CLASH_APP_NAME -d $CLASH_CONFIG_PATH" | grep -v grep | awk '{print $2}')
+
+mkdir -p $CLASH_LOG_PATH
+
+LOG_NUM=$(ls -lR $CLASH_LOG_PATH | wc -l)
+LOG_NUM_MAX=15
+
+if [ -n "$CHECK_CLASH_PID" ]; then
+    for clash_pid in $CHECK_CLASH_PID; do
+        kill -9 $clash_pid
+    done
+fi
+
+cd $CLASH_APP_PATH && nohup ./$CLASH_APP_NAME -d $CLASH_CONFIG_PATH 2>&1 >>$CLASH_LOG_PATH/$CLASH_APP_NAME-$LOG_DATE.log &
+
+if [ $LOG_NUM -gt $LOG_NUM_MAX ]; then
+    for i in $(seq 1 $(($LOG_NUM-$LOG_NUM_MAX))); do
+        log_old=$(ls $CLASH_LOG_PATH | sort -n | head -1)
+        rm -f $CLASH_LOG_PATH/$log_old
+    done
+fi
+
+chmod +x clash_startup.sh
+
+/usr/share/applications/clash.desktop
+[Desktop Entry]
+Version=1.0
+Name=Clash
+GenericName=Clash
+Comment=Clash
+Exec=/usr/local/clash/clash_startup.sh
+Terminal=false
+Icon=/usr/local/clash/logo.png
+Type=Application
+Categories=Network
+
+# 系统设置 -> 网络 -> 网络代理 -> 手动 ，设置为如下值
+HTTP 代理 127.0.0.1 7890
+HTTPS 代理 127.0.0.1 7890
+Socks 主机 127.0.0.1 7891
 ```
 
 ### 服务

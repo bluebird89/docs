@@ -115,6 +115,8 @@ sudo apt-get remove --purge mysql
 sudo apt-get remove --purge mariadb
 sudo apt-get remove --purge mariadb*
 sudo apt-get --purge remove mariadb-server
+
+mysql_config --include
 ```
 
 ## 原理

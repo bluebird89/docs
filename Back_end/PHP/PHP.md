@@ -235,8 +235,9 @@ Hugepagesize:       2048 kB
     - phpize有版本号，依赖安装指定目录
         + mac:`/usr/local/lib/php/pecl/20180731/`
     - 需要php7.*-dev 支持
-
-
+* 准备
+    - libpcre3-dev: Perl 5 Compatible Regular Expression Library
+    - gettext
 * [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only.
 
 ```sh
@@ -292,13 +293,11 @@ echo 'export PATH="/usr/local/opt/php@7.1/sbin:$PATH"' >> ~/.zshrc
 ### linux源码安装
 lsb_release -a # 系统环境查看
 
-cd /etc/httpd/
-vim httpd.conf
+vim /etc/httpd/httpd.conf
 AddType application/x-httpd-php .php
 AddType application/x-httpd-source .phps
 
-cd /usr/local/php/etc/
-vim php.ini
+vim  /usr/local/php/etc/php.ini
 date.timezone = Asia/Shanghai
 
 brew install brew-php-switcher
@@ -312,11 +311,8 @@ brew link php
 apt-get update && apt-get upgrade
 apt-get install software-properties-common
 sudo add-apt-repository ppa:ondrej/php
-apt-get install php7.4 php7.4-{bz2,json,zip,mbstring,gd,curl,xml,common,opcache,imagick,fpm,mysqli,cli,bcmath,intl,soap,xdebug,xsl,xmlrpc,dev,pdo}  php-pear
-    + php7.2-sqlite3
+apt-get install php7.4 php7.4-{bz2,json,zip,mbstring,gd,curl,xml,common,opcache,imagick,fpm,mysqli,cli,bcmath,intl,soap,xdebug,xsl,xmlrpc,dev,pdo,sqlite3}  php-pear
     - fileinfo
-    - gettext
-    - libpcre3-dev
     - OpenSSL
 
 ## ubuntu
@@ -326,10 +322,16 @@ sudo service php7.0-fpm start|stop|restart|reload
 update-alternatives --config php
 ```
 
-### 扩展安装
+### 扩展
 
-* 用apt或者yum命令安装
-* 用pecl安装
+* apt或者yum命令安装
+* [PECL](http://pecl.php.net/):PHP Extension Community Library，管理着最底层的PHP扩展。用 C 写的
+* [PEAR](http://pear.php.net/)：PHP Extension and Application Repository，管理着项目环境的扩展。用 PHP 写的
+    - 编译好的依赖：/usr/lib/php
+* Composer：和PEAR都管理着项目环境的依赖，这些依赖也是用 PHP 写的，区别不大。但 composer 却比 PEAR 更受欢迎
+* 扩展
+    - vld:查看代码opcache
+
 
 ```sh
 php -m # 查看添加扩展
@@ -341,11 +343,44 @@ ln -s /etc/php5/mods-available/redis.ini /etc/php5/apache2/conf.d/10-redis.ini
 apt-cache search memcached
 apt-get install -y php5-memcached
 
-# Mac
+sudo apt-get install php-xml php7.*-xml php-dev php7.*-dev
+
+# Invalid argument supplied for foreach() in Command.php on line 249
+sudo apt isntall php7.4-xml
+# Trying to access array offset on value of type bool in PEAR/REST.php on line 187
+mkdir -p /tmp/pear/cache
+
+sudo apt install php-pear
+
 curl -O https://pear.php.net/go-pear.phar
 sudo php -d detect_unicode=0 go-pear.phar
 #  1 Installation base /usr/local/pear
-#  4 Binaries directory usr/local/bin
+#  4 Binaries directory /usr/local/bin
+
+phpize -v # 需要安装php7.*-dev
+cd extname
+phpize
+./configure
+make
+make install
+# 配置文件添加扩展
+extension="swoole.so"
+
+sudo pecl channel-update pecl.php.net
+sudo pecl update-channels
+sudo pecl search|install|uninstall memcached
+sudo pecl install mcrypt
+
+sudo vim /etc/php/7.4/cli/php.ini
+extension=mcrypt.so
+
+php -m | grep mcrypt
+
+pear update-channels
+pear upgrade
+
+pecl install channel://pecl.php.net/vld-0.16.0
+php -dvld.active=1 -dvld.excute=0 at.php # excute =0 opcode在么 并不执行
 ```
 
 ### Cli
@@ -372,71 +407,6 @@ php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数
 # /usr/local/lib/php/pecl/20180731/swoole.so doesn't appear to be a valid Zend extension
 
 php -S localhost:8000 # 内置 web 服务器
-```
-
-### [PECL](http://pecl.php.net/)
-
-PHP Extension Community Library，管理着最底层的PHP扩展。用 C 写的
-
-* [PEAR](http://pear.php.net/)：PHP Extension and Application Repository，管理着项目环境的扩展。用 PHP 写的
-    - 编译好的依赖：/usr/lib/php
-* Composer：和PEAR都管理着项目环境的依赖，这些依赖也是用 PHP 写的，区别不大。但 composer 却比 PEAR 更受欢迎
-* 扩展
-    - vld:查看代码opcache
-
-```sh
-sudo apt install php-pear
-pecl install memcached
-
-phpize -v # 需要安装php7.*-dev
-cd extname
-phpize
-./configure
-make
-make install
-# 配置文件添加扩展
-extension="swoole.so"
-
-sudo apt-get install php-xml php7.3-xml php-dev php7.3-dev
-
-wget http://pear.php.net/go-pear.phar
-php go-pear.phar
-
-# 修改bin路径
-pear version
-sudo apt install php7.3-dev # to use phpize 生成编译检测脚本
-
-pecl channel-update pecl.php.net
-pecl uninstall redis
-
-Installing '/usr/include/php/20190902/ext/swoole/config.h'
-Installing '/usr/lib/php/20190902/swoole.so'
-install ok: channel://pecl.php.net/swoole-4.5.1
-configuration option "php_ini" is not set to php.ini location
-You should add "extension=swoole.so" to php.ini
-
-HP Warning:  PHP Startup: redis: Unable to initialize module
-Module compiled with module API=20170718
-PHP    compiled with module API=20180731
-
-pear.php.net is using a unsupported protocol - This should never happen.
-
-pear update-channels
-pear upgrade
-
-Setting up php7.3-fpm (7.3.5-1+ubuntu18.04.1+deb.sury.org+1) ...
-Error: The new file /usr/lib/php/7.3/php.ini-production does not exist!
-dpkg: error processing package php7.3-fpm (--configure):
- installed php7.3-fpm package post-installation script subprocess returned error exit status 1
-Errors were encountered while processing:
- php7.3-fpm
-
-pecl install channel://pecl.php.net/vld-0.16.0
-php -dvld.active=1 -dvld.excute=0 at.php # excute =0 opcode在么 并不执行
-# Invalid argument supplied for foreach() in Command.php on line 249
-sudo apt isntall php7.4-xml
-# Trying to access array offset on value of type bool in PEAR/REST.php on line 187
-mkdir -p /tmp/pear/cache
 ```
 
 ## 配置
