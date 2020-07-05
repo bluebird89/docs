@@ -246,3 +246,14 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 # have SSH host keys for those IPs in your ~/.ssh/known_hosts
 ssh-keygen -R <IP_ADDRESS>
 ```
+
+## 命令行代理
+
+```sh
+sudo apt install proxychains
+
+#/etc/proxychains.conf add
+socks5 127.0.0.1 7891
+
+proxychains curl google.com
+```

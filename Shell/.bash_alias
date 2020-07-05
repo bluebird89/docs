@@ -383,3 +383,77 @@ else
 	fi
 fi
 }
+
+alias mysql='/usr/local/opt/mysql/bin/mysql'
+alias mysqladmin='/usr/local/opt/mysql/bin/mysqladmin'
+
+alias code="/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin/code"
+alias y="ydict"
+alias vi="nvim"
+alias vim="nvim"
+alias tmux="tmux -2"
+alias ssh="ssh -X"
+alias s="ssh -X"
+alias md="mkdir -p"
+alias rd="rmdir"
+alias df="df -h"
+alias mv="mv -i"
+alias slink="link -s"
+alias l="ls -l"
+alias la="ls -a"
+alias ll="ls -la"
+alias lt="ls -lhtrF"
+alias l.="ls -lhtrdF .*"
+alias grep="grep --color=auto"
+alias cd..="cd .."
+alias cd...="cd ../.."
+alias cd....="cd ../../.."
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias zb="cat /dev/urandom | hexdump -C | grep --color=auto \"ca fe\""
+alias mtr="/usr/local/bin/mtr"
+alias gs="git status"
+alias gsm="git summary"
+alias ga='git add'
+alias gd='git diff'
+alias gf='git fetch'
+alias grv='git remote -v'
+alias grb='git rebase'
+alias gbr='git branch'
+alias gpl="git pull"
+alias gps="git push"
+alias gco="git checkout"
+alias gl="git log"
+alias gc="git commit -m"
+alias gm="git merge"
+alias pro="proxychains4"
+alias gb="go build"
+
+#For docker
+alias dm="docker-machine"
+alias di="docker images"
+alias dps="docker ps"
+alias dsp="docker stop"
+alias ds="docker start"
+alias dl="docker logs --tail=50"
+alias drm="docker rm"
+alias drmi="docker rmi $(docker images --filter "dangling=true" -q --no-trunc)"
+alias kc="kubectl"
+
+
+alias -s go=vi
+alias -s html=vi
+alias -s rb=vi
+alias -s py=vi
+alias -s txt=vi
+alias -s ex=vi
+alias -s exs=vi
+alias -s js=vi
+alias -s json=vi
+
+# alias for proxy
+alias proxy="export ALL_PROXY=socks5://127.0.0.1:7070"
+alias unproxy="unset ALL_PROXY"
+alias ip="curl -4 ip.sb"
+alias ipv6="curl -6 ip.sb"

@@ -49,11 +49,11 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gitfast autojump sublime web-search zsh-autosuggestions extract kubectl)
+plugins=(autojump colored-man-pages extract git gitfast kubectl sublime web-search zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME//.rvm/bin:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin:$HOME/.composer/vendor/bin:$HOME/.symfony/bin:/snap/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-export PATH="/usr/local/Cellar/mysql/5.7.13/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/Timothy/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -62,107 +62,71 @@ source $ZSH/oh-my-zsh.sh
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-
 unset GEM_HOME
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+#[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+. /usr/share/autojump/autojump.sh
 
-export DYLD_LIBRARY_PATH=/usr/local/opt/mysql/lib:$DYLD_LIBRARY_PATH
-export EDITOR="/usr/local/bin/nvim"
-export VISUAL="/usr/local/bin/nvim"
+# export DYLD_LIBRARY_PATH=/usr/local/opt/mysql/lib:$DYLD_LIBRARY_PATH
+export EDITOR="/usr/bin/nvim"
+export VISUAL="/usr/bin/nvim"
 
 #ENV parameters for golang
-export GOPATH=$HOME/workspace
-export GOBIN=$HOME/workspace/bin
-export GOROOT=/usr/local/Cellar/go/1.14.1/libexec
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export GOROOT=/usr/local/go
+# export GOROOT=/usr/local/Cellar/go/1.14.1/libexec
+export GO111MODULE=auto
 export GOPROXY=direct
-export GOPRIVATE="*.garena.com"
-export PATH=$PATH:$GOPATH/bin:/usr/local/Cellar/go/1.14.1/bin:~/.mix:/usr/local/share/dotnet:/usr/local/opt/postgresql@10/bin:$HOME/.cargo/bin
+export GOPROXY=https://goproxy.io
+# export GOPRIVATE="*.garena.com"
+export PATH=$GOBIN:$PATH:$GOROOT/bin
+# export PATH=$PATH::~/.mix:/usr/local/share/dotnet:/usr/local/opt/postgresql@10/bin:$HOME/.cargo/bin
 
 #Java ENV
 JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home
 PATH=$PATH:$JAVA_HOME/bin
 
+export MAVEN_HOME=/usr/local/apache-maven-3.6.3
+export PATH=${MAVEN_HOME}/bin:$PATH
+
+export GRADLE_HOME=/opt/gradle/gradle-6.4.1
+export PATH=$PATH:${GRADLE_HOME}/bin
+
 #Env configuration for anaconda
-export PATH=$PATH:~/anaconda2/bin
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/henry/anaconda3/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/henry/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/henry/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/henry/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+export PATH="$HOME/anaconda3/bin:$PATH"
+
+## flutter
+export PATH="$PATH:/opt/flutter/bin"
+export ENABLE_FLUTTER_DESKTOP=true
+export FLUTTER_STORAGE_BASE_URL="https://mirrors.tuna.tsinghua.edu.cn/flutter"
+export PUB_HOSTED_URL="https://mirrors.tuna.tsinghua.edu.cn/dart-pub"
+
+export ANDROID_HOME="/home/henry/Android/Sdk"
+export PATH=${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:$PATH
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 eval "$(thefuck --alias)"
-alias mysql='/usr/local/opt/mysql/bin/mysql'
-alias mysqladmin='/usr/local/opt/mysql/bin/mysqladmin'
 
-alias code="/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin/code"
-alias y="ydict"
-alias vi="nvim"
-alias vim="nvim"
-alias tmux="tmux -2"
-alias ssh="ssh -X"
-alias s="ssh -X"
-alias md="mkdir -p"
-alias rd="rmdir"
-alias df="df -h"
-alias mv="mv -i"
-alias slink="link -s"
-alias l="ls -l"
-alias la="ls -a"
-alias ll="ls -la"
-alias lt="ls -lhtrF"
-alias l.="ls -lhtrdF .*"
-alias grep="grep --color=auto"
-alias cd..="cd .."
-alias cd...="cd ../.."
-alias cd....="cd ../../.."
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias zb="cat /dev/urandom | hexdump -C | grep --color=auto \"ca fe\""
-alias mtr="/usr/local/bin/mtr"
-alias gs="git status"
-alias gsm="git summary"
-alias ga='git add'
-alias gd='git diff'
-alias gf='git fetch'
-alias grv='git remote -v'
-alias grb='git rebase'
-alias gbr='git branch'
-alias gpl="git pull"
-alias gps="git push"
-alias gco="git checkout"
-alias gl="git log"
-alias gc="git commit -m"
-alias gm="git merge"
-alias pro="proxychains4"
-alias gb="go build"
-
-#For docker
-alias dm="docker-machine"
-alias di="docker images"
-alias dps="docker ps"
-alias dsp="docker stop"
-alias ds="docker start"
-alias dl="docker logs --tail=50"
-alias drm="docker rm"
-alias drmi="docker rmi $(docker images --filter "dangling=true" -q --no-trunc)"
-alias kc="kubectl"
-
-
-alias -s go=vi
-alias -s html=vi
-alias -s rb=vi
-alias -s py=vi
-alias -s txt=vi
-alias -s ex=vi
-alias -s exs=vi
-alias -s js=vi
-alias -s json=vi
-
-# alias for proxy
-alias proxy="export ALL_PROXY=socks5://127.0.0.1:7070"
-alias unproxy="unset ALL_PROXY"
-alias ip="curl -4 ip.sb"
-alias ipv6="curl -6 ip.sb"
+if [ -f ~/.zsh_aliases ]; then
+    . ~/.zsh_aliases
+fi
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -233,14 +197,119 @@ echo " "
 
 # Load zsh-syntax-highlighting.
 source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#
 # Load zsh-autosuggestions.
 source ~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#
+source ~/.oh-my-git/prompt.sh
+source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 
 # Enable autosuggestions automatically.
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=10"
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=247'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# fzf settings. Uses sharkdp/fd for a faster alternative to `find`.
+FZF_CTRL_T_COMMAND='fd --type f --hidden --exclude .git --exclude .cache'
+FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+function homestead() {
+    (cd ~/container/Homestead && vagrant $*)
+}
+
+export PATH="$HOME/go/tools:$PATH"
+export MICRO_REGISTRY=consul
+export PATH="$HOME/program/etcd-v3.4.9-linux-amd64:$PATH"
+
+if [[ ! -d ~/.zplug ]];then
+  git clone https://github.com/zplug/zplug ~/.zplug
+fi
+
+source ~/.zplug/init.zsh
+zplug "plugins/sudo", from:oh-my-zsh
+zplug "plugins/command-not-found", from:oh-my-zsh
+
+zplug "zsh-users/zsh-history-substring-search", defer:3
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+# Defers the loading of a package
+# e.g., zsh-syntax-highlighting must be loaded
+# after executing compinit command and sourcing other plugins
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
+
+zplug "woefe/wbase.zsh"
+
+# Prohibit updates to a plugin by using the "frozen:" tag
+zplug "k4rthik/git-cal", as:command, frozen:1
+# Support oh-my-zsh plugins and the like
+zplug "plugins/git",   from:oh-my-zsh, if:"(( $+commands[git] ))"
+zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/wprompt.zsh}"
+# Support checking out a specific branch/tag/commit of a plugin
+zplug "b4b4r07/enhancd", at:v1
+zplug "mollifier/anyframe", commit:4c23cb60
+
+zplug "junegunn/fzf", use:"shell/*.zsh"
+# Grab binaries from GitHub Releases
+# and rename using the "rename-to:" tag
+zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf, use:"*linux*amd64*"
+zplug "sharkdp/fd", from:gh-r, as:command, rename-to:fd, use:"*x86_64-unknown-linux-gnu.tar.gz"
+
+# Can manage a plugin as a command And accept glob patterns (e.g., brace, wildcard, ...)
+zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
+# Can manage everything e.g., other person´s zshrc
+zplug "tcnksm/docker-alias", use:zshrc
+
+zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+# Also supports prezto plugins
+zplug "modules/osx", from:prezto, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "modules/prompt", from:prezto
+# Set zstyle before zplug load
+zstyle ´:prezto:module:prompt´ theme ´sorin´
+
+# Run a command after a plugin is installed/updated
+zplug "tj/n", hook-build:"make install"
+
+# Install if "if:" tag returns true
+zplug "hchbaw/opp.zsh", if:"(( ${ZSH_VERSION%%.*} < 5 ))"
+
+# Can manage gist file just like other plugins
+zplug "b4b4r07/79ee61f7c140c63d2786", \
+   as:command, \
+   from:gist, \
+   use:get_last_pane_path.sh
+
+# Support bitbucket
+zplug "b4b4r07/hello_bitbucket", \
+   as:command, \
+   from:bitbucket, \
+   hook-build:"chmod 755 *.sh", \
+   use:"*.sh"
+
+# Support Gitlab
+zplug "willemmali-sh/chegit", \
+   as:command, \
+   from:gitlab
+
+# Group dependencies, emoji-cli depends on jq in this example
+zplug "stedolan/jq", \
+   as:command, \
+   from:gh-r \
+   rename-to:jq, \
+   on:"b4b4r07/emoji-cli"
+
+# Can manage local plugins
+zplug "~/.zsh", from:local
+
+# Load theme file
+#zplug "themes/robbyrussell", from:oh-my-zsh, as:theme
+#zplug ´dracula/zsh´, as:theme
+zplug "themes/duellj", from:oh-my-zsh, as:theme
+
+# Then, source plugins and add commands to $PATH
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi

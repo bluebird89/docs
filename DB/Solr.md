@@ -11,11 +11,14 @@
 ## 安装
 
 * startup configuration in /etc/default/solr.in.sh
+* localhost:8983
 
 ```
-wget http://mirror.bit.edu.cn/apache/lucene/solr/8.4.1/solr-8.4.1.tgz
+wget https://mirrors.tuna.tsinghua.edu.cn/apache/lucene/solr/8.5.2/solr-8.5.2.tgz
 tar xzf solr-8.4.1.tgz solr-8.4.1/bin/install_solr_service.sh --strip-components=2
-sudo ./install_solr_service.sh solr-8.4.1.tgz
+
+sudo bash bin/install_solr_service.sh /opt/solr-8.5.2.tgz
+sudo su - solr -c "/opt/solr/bin/solr create -c mycollection -n data_driven_schema_configs"
 ```
 
 ## 原理
