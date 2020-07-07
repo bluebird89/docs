@@ -110,6 +110,7 @@ sudo npm install -g jshint
 
 ```sh
 nrm ls
+
 npm ---- https://registry.npmjs.org/
 cnpm --- http://r.cnpmjs.org/
 taobao - http://registry.npm.taobao.org/

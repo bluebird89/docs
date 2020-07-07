@@ -229,6 +229,8 @@ swapon /swapmem
 ## ~/.bashrc:
 # set default editor to Vim
 export EDITOR=vim
+
+lshw -class disk -class storage -short
 ```
 
 ## 内核

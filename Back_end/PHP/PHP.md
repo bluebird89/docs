@@ -248,7 +248,7 @@ LoadModule php5_module modules/libphp5.so # httpd.conf中添加
 
 extension_dir = "/usr/local/lib/php/pecl/20180731"
 
-cgi.fix_pathinfo=0 #  php.ini 文件中的配置项  如果文件不存在，则阻止 Nginx 将请求发送到后端的 PHP-FPM 模块， 以避免遭受恶意脚本注入的攻击
+cgi.fix_pathinfo=0 #  php.ini:如果文件不存在，则阻止 Nginx 将请求发送到后端的 PHP-FPM 模块， 以避免遭受恶意脚本注入的攻击
 # 确保 php-fpm 模块使用 www-data 用户和 www-data 用户组的身份运行
 # This is an extremely insecure setting because it tells PHP to attempt to execute the closest file it can find if a PHP file does not match exactly. This basically would allow users to craft PHP requests in a way that would allow them to execute scripts that they shouldn't be allowed to execute.
 

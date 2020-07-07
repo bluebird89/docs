@@ -16,6 +16,9 @@
 * [LuaJIT](http://luajit.org):利用即时编译（Just-in Time）技术把 Lua 代码编译成本地机器码后交由 CPU 直接执行
 	- 一句一句编译源代码，但是会将翻译过的代码缓存起来以降低性能损耗
 	- 采用 C 和汇编语言编写的 Lua 解释器与即时编译器。LuaJIT 被设计成全兼容标准的 Lua 5.1 语言，同时可选地支持 Lua 5.2 和 Lua 5.3 中的一些不破坏向后兼容性的有用特性
+	- 运行时环境包括一个用手写汇编实现的 Lua 解释器和一个可以直接生成机器代码的 JIT 编译器.代码在被执行之前总是会先被 lfn 成 LuaJIT 自己定义的字节码（Byte Code）
+	- 开始的时候，Lua 字节码总是被 LuaJIT 的解释器解释执行。LuaJIT 的解释器会在执行字节码时同时记录一些运行时的统计信息，比如每个 Lua 函数调用入口的实际运行次数，还有每个 Lua 循环的实际执行次数。当这些次数超过某个预设的阈值时，便认为对应的 Lua 函数入口或者对应的 Lua 循环足够的“热”，这时便会触发 JIT 编译器开始工作
+	- JIT 编译器会从热函数的入口或者热循环的某个位置开始尝试编译对应的 Lua 代码路径。编译的过程是把 LuaJIT 字节码先转换成 LuaJIT 自己定义的中间码（IR），然后再生成针对目标体系结构的机器码
 
 ## install
 
@@ -71,10 +74,6 @@ sudo make install
 	- 一定不要使用 # 操作符或 table.getn 来计算包含 nil 的数组长度，这是一个未定义的操作，不一定报错，但不能保证结果如你所想
 	- 要删除一个数组中的元素，请使用 remove 函数，而不是用 nil 赋值
 	- 值可能是 {}，这时它不等于 nil
-* function	表示 C 或 Lua 编写的函
-	- 可以存储在变量中，可以通过参数传递给其他函数，还可以作为其他函数的返回值
-	- 有名函数定义本质上是匿名函数对变量赋值
-
 * userdata	表示任意存储在变量中的 C 数据结
 * thread	表示执行的独立线程，用于执行协同程序
 
@@ -103,6 +102,7 @@ sudo make install
 	- < > <=  >=  ==  ~=
 	- and
 	- or
+* 冒号操作会带入一个 self 参数，用来代表 自己。而点号操作，只是 内容 的展开
 
 ## 控制
 
@@ -113,8 +113,12 @@ sudo make install
 	- 在 LuaJIT 2.1 中，ipairs() 内建函数是可以被 JIT 编译的，而 pairs() 则只能被解释执行。因此在性能敏感的场景，应当合理安排数据结构，避免对哈希表进行遍历
 * goto 一项用途，就是简化错误处理的流程。直接 goto 到函数末尾统一的错误处理过程，是更为清晰的写
 
-## 函数
+## 函数 function
 
+* 可以存储在变量中，可以通过参数传递给其他函数，还可以作为其他函数的返回值
+* 有名函数定义本质上是匿名函数对变量赋值:在函数定义之前使用函数相当于在变量赋值之前使用变量，Lua 世界对于没有赋值的变量，默认都是 nil
+* 函数必须放在调用的代码之前
+* 由于全局变量是每个请求的生命期，因此以此种方式定义的函数的生命期也是每个请求的。为了避免每个请求创建和销毁 Lua closure 的开销，建议将函数的定义都放置在自己的 Lua module 中
 * 优点
 	- 降低程序的复杂性
 	- 增加程序的可读性
@@ -146,6 +150,10 @@ sudo make install
 	- 可以使用内建函数 require() 来加载和缓存模块
 	- 模块加载后的结果通过是一个 Lua table，这个表就像是一个命名空间，其内容就是模块中导出的所有东西，比如函数和变量。require 函数会返回 Lua 模块加载后的结果，即用于表示该 Lua 模块的 Lua 值。
 * 需要导出给外部使用的公共模块，处于安全考虑，是要避免全局变量的出现
+* 不推荐再使用 `module("filename"[,package.seeall])*`
+	- package.seeall 破坏了模块的高内聚，原本引入 "filename" 模块只想调用它的 foobar() 函数，但是它却可以读写全局属性，例如 "filename.os"
+	- module 函数压栈操作引发的副作用，污染了全局环境变量。例如 module("filename") 会创建一个 filename 的 table，并将这个 table 注入全局环境变量中，这样使得没有引用它的文件也能调用 filename 模块的方法
+* 当 `lua_code_cache` on 开启时，require 加载的模块是会被缓存下来的，这样我们的模块就会以最高效的方式运行，直到被显式地调用如下语句 `package.loaded["square"] = nil`
 
 ## String
 
@@ -226,10 +234,31 @@ sudo make install
 		+ 在 error_log 指令中指定日志级别为 debug
 		+ 运行正则匹配代码，查看日志中是否有 pcre JIT compiling result: 1
 
+## FFI
 
-## 框架
+* 允许从纯 Lua 代码调用外部 C 函数，使用 C 数据结构
+* C 函数:它的接口必须遵循 Lua 要求的形式，就是 `typedef int (*lua_CFunction)(lua_State* L)`
+	- 参数是 lua_State 类型的指针 L 。可以通过这个指针进一步获取通过 Lua 代码传入的参数
+	- 返回值类型是一个整型，表示返回值的数量。需要注意的是，用 C 编写的函数无法把返回值返回给 Lua 代码，而是通过虚拟栈来传递 Lua 和 C 之间的调用参数和返回值。不仅在编程上开发效率变低，而且性能上比不上 FFI 库调用 C 函数
+* ffi.load 会通过给定的 name 加载动态库，返回一个绑定到这个库符号的新的 C 库命名空间，在 POSIX 系统中，如果 global 被设置为 ture，这个库符号被加载到一个全局命名空间。另外这个 name 可以是一个动态库的路径，那么会根据路径来查找，否则的话会在默认的搜索路径中去找动态库。在 POSIX 系统中，如果在 name 这个字段中没有写上点符号 .，那么 .so 将会被自动添加进去
+* 使用 ffi.new 分配的 cdata 对象指向的内存块是由垃圾回收器 LuaJIT GC 自动管理的，所以不需要用户去释放内存。
+* 使用 ffi.C.malloc 分配的空间便不再使用 LuaJIT 自己的分配器了，所以不是由 LuaJIT GC 来管理的，但是，要注意的是 ffi.C.malloc 返回的指针本身所对应的 cdata 对象还是由 LuaJIT GC 来管理的，也就是这个指针的 cdata 对象指向的是用 ffi.C.malloc 分配的内存空间。这个时候，你应该通过 ffi.gc() 函数在这个 C 指针的 cdata 对象上面注册自己的析构函数，这个析构函数里面可以再调用 ffi.C.free，这样的话当 C 指针所对应的 cdata 对象被 Luajit GC 管理器垃圾回收时候，也会自动调用你注册的那个析构函数来执行 C 级别的内存释放
+* 调用 C 函数
+	- 加载 FFI 库
+	- 为函数增加一个函数声明。这个包含在 中括号 对之间的部分，是标准 C 语法
+	- 调用命名的 C 函数
+* cdata 类型用来将任意 C 数据保存在 Lua 变量中。这个类型相当于一块原生的内存，除了赋值和相同性判断，Lua 没有为之预定义任何操作。然而，通过使用 metatable（元表），程序员可以为 cdata 自定义一组操作。cdata 不能在 Lua 中创建出来，也不能在 Lua 中修改。这样的操作只能通过 C API。这一点保证了宿主程序完全掌管其中的数据
+	- C 语言类型与 metamethod（元方法）关联起来，这个操作只用做一次。ffi.metatype 会返回一个该类型的构造函数。原始 C 类型也可以被用来创建数组，元方法会被自动地应用到每个元素。
+	- metatable 与 C 类型的关联是永久的，而且不允许被修改
 
-* [torch/torch7](https://github.com/torch/torch7):Torch is a scientific computing framework with wide support for machine learning algorithms that puts GPUs first. It is easy to use and efficient, thanks to an easy and fast scripting language, LuaJIT, and an underlying C/CUDA implementation. http://torch.ch/
+```
+gcc -g -o libmyffi.so -fpic -shared myffi.c
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/henry/Workspace/Code/C
+
+ffi.load(name [,global])
+
+local ffi = require "ffi"
+```
 
 ## 工具
 
@@ -237,6 +266,8 @@ sudo make install
 * 编辑器
     - hammerspoon
     - idea　插件　emmylua
+* 框架
+	- [torch/torch7](https://github.com/torch/torch7):Torch is a scientific computing framework with wide support for machine learning algorithms that puts GPUs first. It is easy to use and efficient, thanks to an easy and fast scripting language, LuaJIT, and an underlying C/CUDA implementation. http://torch.ch/
 * [Azure/golua](https://github.com/Azure/golua):A Lua 5.3 engine implemented in Go
 * [tboox/ltui](https://github.com/tboox/ltui):🍯A cross-platform terminal ui library based on Lua https://tboox.org
 * [tboox/xmake](https://github.com/tboox/xmake):🔥 A cross-platform build utility based on Lua https://xmake.io

@@ -81,6 +81,12 @@ PermitRootLogin no # 禁止root用户登录
 systemctl restart sshd
 ```
 
+## Signing VirtualBox Kernel Modules
+
+* install virtualbox
+
+```
+
 ## 工具
 
 * Mac
