@@ -285,6 +285,7 @@
 * [《面向机器学习的特征工程》](https://github.com/apachecn/feature-engineering-for-ml-zh)
 * [Model-Based Machine Learning](http://mbmlbook.com/index.html)
 * [Evolutionary Learning: Advances in Theories and Algorithms）](https://www.springer.com/cn/book/9789811359552)
+* [ chiphuyen / machine-learning-systems-design ](https://github.com/chiphuyen/machine-learning-systems-design):A booklet on machine learning systems design with exercises
 
 ## 教程
 

@@ -1,6 +1,6 @@
 # [flutter/flutter](https://github.com/flutter/flutter)
 
-Flutter makes it easy and fast to build beautiful mobile apps. https://flutter.io
+Flutter makes it easy and fast to build beautiful mobile apps. https://flutter.dev https://flutter.cn
 
 Flutter是一个移动应用程序的软件开发工具包（SDK），用一个代码库构建高性能、高保真的iOS和Android应用程序。目标是使开发人员能够为Android和iOS提供自然的高质量的应用，在滚动行为、排版、图标等方面实现零差异。Flutter 是 Fuchsia 的开发框架，支持导出 Android iOS 和 Fuchsia 三个平台的安装包
 
@@ -11,15 +11,12 @@ Flutter是一个移动应用程序的软件开发工具包（SDK），用一个�
 
 ## 安装
 
-FLUTTER_STORAGE_BASE_URL: https://mirrors.sjtug.sjtu.edu.cn/
-PUB_HOSTED_URL: https://dart-pub.mirrors.sjtug.sjtu.edu.cn/
-
 ```sh
 git clone -b beta https://github.com/flutter/flutter.git
 export PATH=`pwd`/flutter/bin:$PATH
 
-export PUB_HOSTED_URL=https://pub.flutter-io.cn  # if you’re installing or using Flutter in China, it may be helpful to use a trustworthy local mirror site that hosts Flutter’s dependencies.
-export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+export PUB_HOSTED_URL=https://pub.flutter-io.cn  # if you’re installing or using Flutter in China, it may be helpful to use a trustworthy local mirror site that hosts Flutter’s dependencies. https://dart-pub.mirrors.sjtug.sjtu.edu.cn/
+export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn # https://mirrors.sjtug.sjtu.edu.cn/
 
 flutter doctor  # 安装相关依赖，可重复执行
 
@@ -89,22 +86,17 @@ pod setup
 
 ## 工具
 
-* vscode 插件
 * [google/flutter-desktop-embedding](https://github.com/google/flutter-desktop-embedding):Desktop implementations of the Flutter embedding API
 * [Drakirus/go-flutter-desktop-embedder](https://github.com/Drakirus/go-flutter-desktop-embedder):A Go (golang) Custom Flutter Engine Embedder for desktop
 * [fish-redux](https://github.com/alibaba/fish-redux):Fish Redux 是一个基于 Redux 数据管理的组装式 flutter 应用框架， 特别适用于构建中大型的复杂应用，它最显著的特征是函数式的编程模型、可预测的状态管理、可插拔的组件体系、最佳的性能表现
 * UI
     - [mitesh77/Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
-* [mitesh77 / Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
+    - [mitesh77 / Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
 * [cloudwebrtc / flutter-webrtc](https://github.com/cloudwebrtc/flutter-webrtc):WebRTC plugin for Flutter Mobile/Desktop/Web
 * [ zino-app / graphql-flutter ](https://github.com/zino-app/graphql-flutter):A GraphQL client for Flutter, bringing all the features from a modern GraphQL client to one easy to use package.
-* [ alibaba / fish-redux ](https://github.com/alibaba/fish-redux):An assembled flutter application framework. https://github.com/alibaba/fish-redux
 
 ## 参考
 
-* [文档](https://flutter-io.cn/)
-* [官网](https://flutter.io/)
-* [](https://flutter.dev/docs)
 * [](https://flutter.dev/docs/cookbook)
 * [](https://flutter.dev/docs/get-started/codelab)
 * [Solido/awesome-flutter](https://github.com/Solido/awesome-flutters):A curated list of awesome Flutter components, frameworks, libraries, and softwares

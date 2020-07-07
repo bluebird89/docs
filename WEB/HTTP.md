@@ -1602,6 +1602,7 @@ sudo wireshark
     - [coredns/coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins https://coredns.io
 * 广告
     - [ pi-hole / pi-hole ](https://github.com/pi-hole/pi-hole):A black hole for Internet advertisements https://pi-hole.net
+    - [ AdguardTeam / AdGuardHome ](https://github.com/AdguardTeam/AdGuardHome):Network-wide ads & trackers blocking DNS server https://adguard.com/adguard-home.html
 
 ## 参考
 
