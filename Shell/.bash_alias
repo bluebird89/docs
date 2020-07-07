@@ -244,6 +244,16 @@ alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 ## this one saved by butt so many times ##
 alias wget='wget -c'
 
+alias f='fasd -f'          # 文件
+alias d='fasd -d'        # 目录
+alias a='fasd -a'        # 任意
+alias s='fasd -si'       # 显示并选择
+
+alias sd='fasd -sid'        # 选择目录
+alias sf='fasd -sif'          # 选择文件
+alias z='fasd_cd -d'       # 跳转至目录
+alias zz='fasd_cd -d -i'  # 选择并跳转至目录
+
 ## browser ##
 alias ff='/opt/firefox13/firefox'
 alias chrome='/opt/google/chrome/chrome'

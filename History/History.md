@@ -237,6 +237,7 @@
 * 徐中约《中国近代史1600至2000中国的奋斗(第6版)》
 * 中国历代政治得失
 *  《希波战争史》 希罗多德(Herodotus)
+*  The Story of the World: History for the Classical Child
 
 ## 项目
 

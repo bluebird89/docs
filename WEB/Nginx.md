@@ -157,6 +157,16 @@ wget http://zlib.net/zlib-1.2.11.tar.gz && tar -zxf zlib-1.2.11.tar.gz
 wget http://www.openssl.org/source/openssl-1.1.1f.tar.gz && tar -zxf openssl-1.1.1f.tar.gz
 wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar.gz
 
+
+sudo apt install gcc libpcre3-dev zlib1g-dev libssl-dev libxml2-dev libxslt1-dev  libgd-dev google-perftools libgoogle-perftools-dev libperl-dev # the Google perftools module requires the Google perftools library
+
+sudo apt install libgeoip-dev  # the GeoIP module requires the GeoIP library
+# --with-ld-opt=-ltcmalloc   checking for --with-ld-opt="-ljemalloc" ... not found
+
+./configure --user=www-data --group=www-data --prefix=/opt/nginx --with-http_auth_request_module --with-http_realip_module --with-http_v2_module --with-debug  --with-http_random_index_module --with-http_sub_module --with-http_addition_module --with-http_secure_link_module --with-http_geoip_module --with-http_ssl_module --with-stream_ssl_module --with-stream_realip_module --with-stream_ssl_preread_module --with-stream  --with-http_slice_module --with-google_perftools_module --with-threads  --with-http_gzip_static_module --with-http_gunzip_module --with-http_stub_status_module  --with-ld-opt=-ltcmalloc  --add-module=/home/henry/src/nginx_module/echo-nginx-module --add-module=/home/henry/src/nginx_module/nginx-http-concat/ --add-module=/home/henry/src/nginx_module/ngx_cache_purge/
+
+sudo ./configure --user=nginx --group=nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --with-select_module --with-poll_module --with-threads --with-file-aio --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_addition_module --with-http_xslt_module --with-http_xslt_module=dynamic --with-http_image_filter_module --with-http_image_filter_module=dynamic --with-http_geoip_module --with-http_geoip_module=dynamic --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_auth_request_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_slice_module --with-http_stub_status_module --with-http_perl_module --with-http_perl_module=dynamic --with-mail --with-mail=dynamic --with-mail_ssl_module --with-stream --with-stream=dynamic --with-stream_ssl_module --with-stream_realip_module --with-stream_geoip_module --with-stream_geoip_module=dynamic --with-stream_ssl_preread_module --with-google_perftools_module --with-cpp_test_module --with-compat --with-pcre --with-pcre-jit  --with-zlib-asm=CPU --with-libatomic --with-debug --with-ld-opt="-Wl,-E"
+
 ./configure \
 --prefix=/usr/share/nginx \
 --sbin-path=/usr/sbin/nginx \
@@ -212,6 +222,8 @@ wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar
 --with-ld-opt='-Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now'
 --add-module= "rtmp包的路径"
 
+./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -fPIC' --with-ld-opt='-Wl,-z,relro -Wl,-z,now -pie' --add-module=/opt/download/ngx_devel_kit-0.3.0 --add-module=/opt/download/lua-nginx-module-0.10.9rc7
+
   nginx path prefix: "/usr/share/nginx"
   nginx binary file: "/usr/sbin/nginx"
   nginx modules path: "/usr/share/nginx/modules"
@@ -226,29 +238,12 @@ wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar
   nginx http uwsgi temporary files: "/var/lib/nginx/uwsgi"
   nginx http scgi temporary files: "/var/lib/nginx/scgi"
 
-./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -fPIC' --with-ld-opt='-Wl,-z,relro -Wl,-z,now -pie' --add-module=/opt/download/ngx_devel_kit-0.3.0 --add-module=/opt/download/lua-nginx-module-0.10.9rc7
 make && sudo make install
 
 echo "/usr/local/LuaJIT/lib" >> /etc/ld.so.conf
 ldconfig
 
 # /etc/systemd/system/nginx.service
-[Unit]
-Description=A high performance web server and a reverse proxy server
-After=network.target
-
-[Service]
-Type=forking
-PIDFile=/run/nginx.pid
-ExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'
-ExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'
-ExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload
-ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid
-TimeoutStopSec=5
-KillMode=mixed
-
-[Install]
-WantedBy=multi-user.target
 
 sudo systemctl start nginx.service && sudo systemctl enable nginx.service
 
@@ -510,7 +505,7 @@ $document_uri # 同 $uri
             * last 停止处理后续rewrite指令集，然后对当前重写的新URI在rewrite指令集上重新查找。
             * break 停止处理后续rewrite指令集，并不在重新查找,但是当前location内剩余非rewrite语句和location外的的非rewrite语句可以执行。
             * redirect 如果replacement不是以http:// 或https://开始，返回302临时重定向
-            * permant 返回301永久重定向
+            * permanent 返回301永久重定向
             * last和break标记的区别在于，last标记在本条rewrite规则执行完后，会对其所在的server { … } 标签重新发起请求，而break标记则在本条规则匹配完成后，停止匹配，不再做后续的匹配。另外有些时候必须使用last，比如在使用alias指令时，而 使用proxy_pass指令时则必须使用break。
             * rewrite 规则优先级要高于location，在nginx配置文件中，nginx会先用rewrite来处理url，最后再用处理后的url匹配location
 * alias指令来更改location接收到的URI请求路径
@@ -713,6 +708,20 @@ location ~ \.(htm|html)?$ {
 }
 ```
 
+## Cache
+
+* `proxy_cache_path` 参数及对应配置说明如下：
+    - 用于缓存的本地磁盘目录是 /path/to/cache/
+    -levels 在 /path/to/cache/ 设置了一个两级层次结构的目录。将大量的文件放置在单个目录中会导致文件访问缓慢，所以针对大多数部署，我们推荐使用两级目录层次结构。如果 levels 参数没有配置，则 Nginx 会将所有的文件放到同一个目录中。
+    - `keys_zone `设置一个共享内存区，该内存区用于存储缓存键和元数据，有些类似计时器的用途。将键的拷贝放入内存可以使 Nginx 在不检索磁盘的情况下快速决定一个请求是 HIT 还是 MISS，这样大大提高了检索速度。一个 1MB 的内存空间可以存储大约 8000 个 key，那么上面配置的 10MB 内存空间可以存储差不多 80000 个 key
+    - max_size 设置了缓存的上限（在上面的例子中是 10G）。这是一个可选项；如果不指定具体值，那就是允许缓存不断增长，占用所有可用的磁盘空间。当缓存达到这个上限，处理器便调用 cache manager 来移除最近最少被使用的文件，这样把缓存的空间降低至这个限制之下。
+    - inactive 指定了项目在不被访问的情况下能够在内存中保持的时间。在上面的例子中，如果一个文件在 60 分钟之内没有被请求，则缓存管理将会自动将其在内存中删除，不管该文件是否过期。该参数默认值为 10 分钟（10m）。注意，非活动内容有别于过期内容。Nginx 不会自动删除由缓存控制头部指定的过期内容（本例中 Cache-Control:max-age=120）。过期内容只有在 inactive 指定时间内没有被访问的情况下才会被删除。如果过期内容被访问了，那么 Nginx 就会将其从原服务器上刷新，并更新对应的 inactive 计时器。
+    - Nginx 最初会将注定写入缓存的文件先放入一个临时存储区域，use_temp_path=off 命令指示 Nginx 将在缓存这些文件时将它们写入同一个目录下。我们强烈建议你将参数设置为 off 来避免在文件系统中不必要的数据拷贝
+    - proxy_cache_revalidate 指示 Nginx 在刷新来自服务器的内容时使用 GET 请求。如果客户端的请求项已经被缓存过了，但是在缓存控制头部中定义为过期，那么 Nginx 就会在 GET 请求中包含 If-Modified-Since 字段，发送至服务器端。这项配置可以节约带宽，因为对于 Nginx 已经缓存过的文件，服务器只会在该文件请求头中 Last-Modified 记录的时间内被修改时才将全部文件一起发送。
+    - proxy_cache_min_uses 该指令设置同一链接请求达到几次即被缓存，默认值为 1 。当缓存不断被填满时，这项设置便十分有用，因为这确保了只有那些被经常访问的内容会被缓存。
+    - proxy_cache_use_stale 中的 updating 参数告知 Nginx 在客户端请求的项目的更新正在原服务器中下载时发送旧内容，而不是向服务器转发重复的请求。第一个请求陈旧文件的用户不得不等待文件在原服务器中更新完毕。陈旧的文件会返回给随后的请求直到更新后的文件被全部下载。
+    - 当 proxy_cache_lock 被启用时，当多个客户端请求一个缓存中不存在的文件（或称之为一个 MISS），只有这些请求中的第一个被允许发送至服务器。其他请求在第一个请求得到满意结果之后在缓存中得到文件。如果不启用 proxy_cache_lock，则所有在缓存中找不到文件的请求都会直接与服务器通信
+
 ## 代理
 
 * 正向代理:位于客户端和原始服务器(origin server)之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。“代理”的是客户端
@@ -723,7 +732,8 @@ location ~ \.(htm|html)?$ {
     - 代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息
     - 静态代理：可以做缓存，加速访问资源
     - 对客户端访问授权，上网进行认证
-* 反向代理（Reverse Proxy）:以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端。“代理”的是服务端。
+* 反向代理（Reverse Proxy）:以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端。“代理”的是服务端
+    - 典型用途是将防火墙后面的服务器提供给 Internet 用户访问，加强安全防护
     - 简单来说就是真实的服务器不能直接被外部网络访问，所以需要一台代理服务器，而代理服务器能被外部网络访问的同时又跟真实服务器在同一个网络环境，当然也可能是同一台服务器，端口不同而已。
     - 保护和隐藏原始资源服务器 保证内网的安全，通常将反向代理作为公网访问地址，Web 服务器是内网
     - 加密和 SSL 加速
@@ -1261,6 +1271,17 @@ awk '($9 ~ /504/)' time_access.log | awk '{print $7}' | sort | uniq -c | sort -r
 # 查找访问最多的 20 个 IP 及访问次数
 awk '{print $1}' time_access.log | sort | uniq -c | sort -n -k 1 -r | head -n 20 > top.log
 
+```
+
+## 日志
+
+* access_log 主要记录客户端访问 Nginx 的每一个请求，格式可以自定义 `log_format name string;`
+* error_log 主要记录客户端访问 Nginx 出错时的日志，格式不支持自定义
+
+```
+log_format combined '$remote_addr - $remote_user  [$time_local]  '
+                    ' "$request"  $status  $body_bytes_sent  '
+                    ' "$http_referer"  "$http_user_agent" ';
 ```
 
 ## 优化

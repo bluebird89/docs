@@ -16,24 +16,43 @@
   - JRE(Java Runtime Environment) 运行Java字节码的虚拟机JVM
 * Java EE：Enterprise Edition 在Java SE的基础上加上了大量的API和库，以便方便开发Web应用、数据库、消息服务等 从2018年2月26日开始，J2EE改名为Jakarta EE
 * [Java SE](https://www.oracle.com/technetwork/java/javase)：Standard Edition 包含标准的JVM和标准库
-  - [OpenJDK](http://openjdk.java.net):免费的开源实现,GPL License发布，很多Linux发行版中都会包含这个Open JDK
-  - Oracle JDK
-    + JavaSE(J2SE)(Java2 Platform Standard Edition，java平台标准版）:从JDK 5.0开始，改名为Java SE
-      - Java SE 5.0 (1.5.0)
-      - Java SE 8.0 (1.8.0):从2019年1月 后续的update 开始就要收费 8u191, 8u192这样的东西，191,192就是update 的编号
-      - Java SE 9
-      - Java SE 10
-    + 组件
-      * java:其实就是JVM，运行Java程序，就是启动JVM，然后让JVM执行指定的编译后的代码
-      * javac:编译器，把Java源码文件（以.java后缀结尾）编译为Java字节码文件（以.class后缀结尾）
-      * jar:打包工具，把一组.class文件打包成一个.jar文件，便于发布
-      * javadoc:文档生成器，从Java源码中自动提取注释并生成文档
-      * jdb:debugger，用于开发阶段的运行调试
-      * appletviewer：小程序浏览器，一种执行HTML文件上的Java小程序的Java浏览器。
-      * Javah：产生可以调用Java过程的C过程，或建立能被Java程序调用的C过程的头文件。
-      * Javap：Java反汇编器，显示编译类文件中的可访问功能和数据，同时显示字节代码含义。
-      * Jconsole: Java进行系统调试和监控的工具
-  - Oracle Java SE Advanced, Java  SE Advanced Desktop, Java SE Suite:为企业级用户提供的高级工具和功能，可以监控、部署、管理企业级的Java程序
+* [OpenJDK](http://openjdk.java.net):免费的开源实现,GPL License发布，很多Linux发行版中都会包含这个Open JDK
+* Oracle JDK
+  - JavaSE(J2SE)(Java2 Platform Standard Edition，java平台标准版）:从JDK 5.0开始，改名为Java SE
+    * Java SE 5.0 (1.5.0)
+    * Java SE 8.0 (1.8.0):从2019年1月 后续的update 开始就要收费 8u191, 8u192这样的东西，191,192就是update 的编号
+    * Java SE 9
+    * Java SE 10
+  - 组件
+    + java:其实就是JVM，运行Java程序，就是启动JVM，然后让JVM执行指定的编译后的代码
+    + javac:编译器，把Java源码文件（以.java后缀结尾）编译为Java字节码文件（以.class后缀结尾）
+    + jar:打包工具，把一组.class文件打包成一个.jar文件，便于发布
+    + javadoc:文档生成器，从Java源码中自动提取注释并生成文档
+    + jdb:debugger，用于开发阶段的运行调试
+    + appletviewer：小程序浏览器，一种执行HTML文件上的Java小程序的Java浏览器。
+    + Javah：产生可以调用Java过程的C过程，或建立能被Java程序调用的C过程的头文件。
+    + Javap：Java反汇编器，显示编译类文件中的可访问功能和数据，同时显示字节代码含义。
+    + Jconsole: Java进行系统调试和监控的工具
+* Oracle与OpenJDK
+  - Oracle JDK版本将每三年发布一次，而OpenJDK版本每三个月发布一次。
+  - Oracle JDK将更多地关注稳定性，它重视更多的企业级用户，而OpenJDK经常发布以支持其他性能，这可能会导致不稳定。
+  - Oracle JDK支持长期发布的更改，而Open JDK仅支持计划和完成下一个发行版。
+  - Oracle JDK根据二进制代码许可协议获得许可，而OpenJDK根据GPL v2许可获得许可。使用Oracle平台时会产生一些许可影响。如Oracle 宣布的那样，在没有商业许可的情况下，在2019年1月之后发布的Oracle Java SE 8的公开更新将无法用于商业，商业或生产用途。但是，OpenJDK是完全开源的，可以自由使用。
+  - Oracle JDK的构建过程基于OpenJDK，因此OpenJDK与Oracle JDK之间没有技术差异。
+  - 顶级公司正在使用Oracle JDK，例如Android Studio，Minecraft和IntelliJ IDEA开发工具，其中Open JDK不太受欢迎。
+  - Oracle JDK具有Flight Recorder，Java Mission Control和Application Class-Data Sharing功能，Open JDK具有Font Renderer功能，这是OpenJDK与Oracle JDK之间的显着差异。
+  - Oracle JDK具有良好的GC选项和更好的渲染器，而OpenJDK具有更少的GC选项，并且由于其包含自己的渲染器的分布，因此具有较慢的图形渲染器选项。
+  - 在响应性和JVM性能方面，Oracle JDK与OpenJDK相比提供了更好的性能。
+  - 与OpenJDK相比，Oracle JDK的开源社区较少，OpenJDK社区用户的表现优于Oracle JDK发布的功能，以提高性能。
+  - 如果使用Oracle JDK会产生许可影响，而OpenJDK没有这样的问题，并且可以以任何方式使用，以满足完全开源和免费使用。
+  - Oracle JDK在运行JDK时不会产生任何问题，而OpenJDK在为某些用户运行JDK时会产生一些问题。
+  - 根据使用方的使用和许可协议，现有应用程序可以从Oracle JDK迁移到Open JDK，反之亦然。
+  - Oracle JDK将从其10.0.X版本将收费，用户必须付费或必须依赖OpenJDK才能使用其免费版本。
+  - Oracle JDK不会为即将发布的版本提供长期支持，用户每次都必须通过更新到最新版本获得支持来获取最新版本。
+  - Oracle JDK以前的1.0版以前的版本是由Sun开发的，后来被Oracle收购并为其他版本维护，而OpenJDK最初只基于Java SDK或JDK版本7。
+  - Oracle JDK发布时大多数功能都是开源的，其中一些功能免于开源，并且根据Sun的许可授权，而OpenJDK发布了所有功能，如开源和免费。
+  - Oracle JDK完全由Oracle公司开发，而Open JDK项目由IBM，Apple，SAP AG，Redhat等顶级公司加入和合作
+* Oracle Java SE Advanced, Java  SE Advanced Desktop, Java SE Suite:为企业级用户提供的高级工具和功能，可以监控、部署、管理企业级的Java程序
 * Java ME：Micro Edition 针对嵌入式设备的“瘦身版”，Java SE的标准库无法在Java ME上使用，Java ME的虚拟机也是“瘦身版”
 * 路线图如下：
   - 学习Java SE，掌握Java语言本身、Java核心开发技术以及Java标准库的使用
