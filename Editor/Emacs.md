@@ -14,13 +14,6 @@ sudo apt update
 sudo apt install emacs26
 ```
 
-## 配置(使用 purcell)
-
-```
-sudo rm ~/.emacs.d/
-git clone https://github.com/purcell/emacs.d.git ~/.emacs.d
-```
-
 ### [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs)
 
 A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! http://spacemacs.org
@@ -56,6 +49,11 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 ## [ purcell / emacs.d ](https://github.com/purcell/emacs.d)
 
 An Emacs configuration bundle with batteries included
+
+```
+sudo rm ~/.emacs.d/
+git clone https://github.com/purcell/emacs.d.git ~/.emacs.d
+```
 
 ## 快捷键
 
@@ -297,7 +295,8 @@ M-g                    设置字体
     - helm 比较重量级一些，如果一个项目的代码量比较大时，文件的切换和搜索就没那么快
     - 轻量级的 ivy
 * evil 可以让 Emacs 变身成为一个 Vim，大多数的 Vim 操作都可以覆盖上
-* magit 是一个可以使 Emacs 变身成为 Git 的插件。
+* magit 是一个可以使 Emacs 变身成为 Git 的插件
+* [ for-GET / know-your-http-well ](https://github.com/for-GET/know-your-http-well):HTTP headers, media-types, methods, relations and status codes, all summarized and linking to their specification.
 
 ## 框架
 

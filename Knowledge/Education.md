@@ -562,6 +562,7 @@ It is not worth an intelligent man’s time to be in the majority. By definition
 *  《什么是数学：对思想和方法的基本研究》 Richard Courant
 * 《代数》Serge Lang
 *  Basher Science
+*  The Well-Trained Mind
 
 ## 工具
 

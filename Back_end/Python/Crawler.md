@@ -55,6 +55,7 @@ http://www.runoob.com/xpath/xpath-tutorial.html
 ## 教程
 
 * [Kr1s77/Python-crawler-tutorial-starts-from-zero](https://github.com/Kr1s77/Python-crawler-tutorial-starts-from-zero):python爬虫教程，带你从零到一，包含js逆向，selenium, tesseract OCR识别,mongodb的使用，以及scrapy框架
+* [ Ehco1996 / Python-crawler ](https://github.com/Ehco1996/Python-crawler):从头开始 系统化的 学习如何写Python爬虫。 Python版本 3.6
 
 ## 实例
 

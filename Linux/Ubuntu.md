@@ -27,6 +27,7 @@
     + 添加新条目 linux/BSD选项
     + 选中分区boot分区
   - 重启运行
+* [ubuntudde](https://ubuntudde.com):Powerful Ubuntu with the most beautiful desktop environment.
 * grub
   - [Tela grub theme ](https://www.gnome-look.org/p/1307852/)
 
@@ -56,6 +57,7 @@ sudo update-grub
 
 * 20.04 LTS Focal Fossa
   - Wireguard 已被移植到 Linux 内核5.4
+  - zfs
 
 ```sh
 cat /proc/version
@@ -69,6 +71,10 @@ sudo dpkg --get-selections |grep linux-image
 sudo apt-get install linux-image-4.4.0-75-generic
 sudo apt-get remove linux-image-4.4.0-75-generic
 sudo update-grub
+
+zpool status
+zpool add -n mainpool /dev/sdc
+zpool add mainpool /dev/sdc
 ```
 
 ## 环境
@@ -80,7 +86,6 @@ sudo update-grub
   - 配置文件 文本外观终端起始尺寸 140 列 40 行
   - 颜色:关闭 使用系统主题中的颜色,置方案 -> Tango 暗色
   - 关闭 使用系统主题的透明度,开启 使用透明背景 ，将其调整为约 15%
-
 
 ```
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[38;5;39m\]\w\[\033[00m\]\$ '
@@ -408,7 +413,7 @@ completely free video conferencing
     + Redshift
     + Octave
     + stacer `sudo apt install stacer` the most beautiful free and open-source application for Linux system optimizing and monitoring
-    + Déjà Dup — A Backup Tool
+    + Déjà Dup — A Backup Tool `sudo snap install deja-dup --classic`
   - appimage
     + [ TheAssassin / AppImageLauncher ](https://github.com/TheAssassin/AppImageLauncher):Helper application for Linux distributions serving as a kind of "entry point" for running and integrating AppImages
 * 下载
@@ -510,6 +515,7 @@ make && sudo make install
 
 sudo snap install snap-store
 sudo apt-get install snapd|snapcraft
+
 sudo snap login # 通过Ubuntu One登陆
 sudo snap list # view all the installed snaps
 snap find skype
@@ -771,6 +777,16 @@ sudo perf report # 回放
 
 ### 优化
 
+* 中文输入法
+  - citx-rime
+  - 20 内部中文输入法 ibus
+    + 设置->区域与语言
+    + 中文（简体）
+    + 选择输入源 ->汉语->智能拼音
+    + win图标和空格键切换
+  - 搜狗 fcitx
+  - [](https://srf.baidu.com/site/guanwang_linux/index.html)
+
 ```sh
 # /etc/fstab
 Now change “errors=remount-ro” to “noatime,errors=remount-ro”.
@@ -804,6 +820,16 @@ Configure>>  Addon  >>Advanced>>Classic
 choose language,key input method system: fcitx
 # fcitx add sogou pinyin
 Ctrl+Shift+F # trantional change simple
+
+## google pinyin
+sudo apt-get install language-pack-zh-hans fcitx-googlepinyin # restart
+
+# 添加优麒麟仓库源进行安装
+curl -sL 'https://keyserver.ubuntu.com/pks/lookup?&op=get&search=0x73BC8FBCF5DE40C6ADFCFFFA9C949F2093F565FF' | sudo apt-key add
+sudo apt-add-repository 'deb http://archive.ubuntukylin.com/ukui focal main'
+sudo apt upgrade
+sudo apt install sogouimebs
+sudo dpkg-divert --package im-config --rename /usr/bin/ibus-daemon
 
 # chrome(firefox 禁用console.log)
 sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
