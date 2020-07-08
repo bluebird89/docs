@@ -40,12 +40,19 @@
 * Manjaro InfinityBook S 14 v5
 
 ```sh
-tar -xJvf amdgpu-pro_*.tar.xz
+sudo lshw -c video
+lsmod | grep amd
 
+tar -xJvf amdgpu-pro_*.tar.xz
 ./amdgpu-pro-install -y
+amdgpu-pro-uninstall
 
 sudo add-apt-repository ppa:oibaf/graphics-drivers
 sudo apt-get update
+
+sudo apt install ppa-purge
+sudo ppa-purge ppa:oibaf/graphics-drivers
+
 # /etc/X11/xorg.conf
 Section "Device"
     Identifier "AMDGPU"

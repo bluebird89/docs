@@ -7,6 +7,8 @@ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/miniku
 sudo install minikube /usr/local/bin/
 
 minikube start --vm-driver=virtualbox
+minikube stop|delete
 
-sudo /sbin/vboxconfig
+
+# t ofix sudo /sbin/vboxconfig
 ```

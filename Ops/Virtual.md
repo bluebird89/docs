@@ -84,8 +84,16 @@ systemctl restart sshd
 ## Signing VirtualBox Kernel Modules
 
 * install virtualbox
-
-```
+* [Create an RSA key pair to sign kernel modules](./vm/create_rsa_pair.sh)
+* Import the MOK ("Machine Owner Key") so it can be trusted by the system `sudo mokutil --import /root/module-signing/MOK.der` will prompt for a password
+* Reboot your machine,enter the MOK manager EFI utility
+    - Select Enroll MOK
+    - Select Continue
+    - Select Yes to enroll the keys
+    - 输入密码
+    -  选择 OK to reboot.
+    -  Verify `dmesg | grep '[U]EFI.*cert'`
+* `sudo modprobe vboxdrv`
 
 ## 工具
 

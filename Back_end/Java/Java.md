@@ -1005,6 +1005,7 @@ JavaEE/JDBC/Weblogic
 * Java核心技术卷Ⅰ基础知识
 * Java核心技术卷Ⅱ高级特性
 * [Thinking In Java](https://www.codeguru.com/java/tij/tij_c.shtml)
+*  《Java 编程思想》第五版 [on Java8](https://lingcoder.github.io/OnJava8/#/)
 * [Introduction to Programming Using Java](http://math.hws.edu/javanotes/)
 
 ## 教程
