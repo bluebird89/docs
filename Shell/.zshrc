@@ -1,6 +1,10 @@
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
 # Path to your oh-my-zsh installation.
 
-export ZSH=/Users/timothy.ye/.oh-my-zsh
+export ZSH=/Users/henry/.oh-my-zsh
+source $ZSH/oh-my-zsh.sh
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -54,9 +58,12 @@ plugins=(autojump colored-man-pages extract git gitfast kubectl sublime web-sear
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME//.rvm/bin:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin:$HOME/.composer/vendor/bin:$HOME/.symfony/bin:/snap/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# >  History config
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
 
-source $ZSH/oh-my-zsh.sh
+# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 export LC_ALL=en_US.UTF-8
@@ -245,6 +252,7 @@ zplug "k4rthik/git-cal", as:command, frozen:1
 # Support oh-my-zsh plugins and the like
 zplug "plugins/git",   from:oh-my-zsh, if:"(( $+commands[git] ))"
 zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/wprompt.zsh}"
+zplug "plugins/git-open",   from:oh-my-zsh
 # Support checking out a specific branch/tag/commit of a plugin
 zplug "b4b4r07/enhancd", at:v1
 zplug "mollifier/anyframe", commit:4c23cb60
@@ -266,6 +274,21 @@ zplug "modules/osx", from:prezto, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "modules/prompt", from:prezto
 # Set zstyle before zplug load
 zstyle ´:prezto:module:prompt´ theme ´sorin´
+zplug "themes/duellj", from:oh-my-zsh, as:theme
+zplug "powerlevel9k/powerlevel9k", as:theme, depth:1
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug "plugins/osx",   from:oh-my-zsh
+zplug "plugins/vscode",   from:oh-my-zsh
+zplug "plugins/z",   from:oh-my-zsh
+zplug "plugins/d",   from:oh-my-zsh
+zplug "plugins/extract",   from:oh-my-zsh
+
+zplug "plugins/sudo",   from:oh-my-zsh
+zplug "plugins/cp",   from:oh-my-zsh
+zplug "plugins/web-search",   from:oh-my-zsh
+zplug "plugins/rand-quote", from:oh-my-zsh
+zplug "zsh-users/zsh-autosuggestions"
+zplug "voronkovich/gitignore.plugin.zsh"
 
 # Run a command after a plugin is installed/updated
 zplug "tj/n", hook-build:"make install"
@@ -304,7 +327,18 @@ zplug "~/.zsh", from:local
 # Load theme file
 #zplug "themes/robbyrussell", from:oh-my-zsh, as:theme
 #zplug ´dracula/zsh´, as:theme
-zplug "themes/duellj", from:oh-my-zsh, as:theme
+
+# > Key binds 键盘绑定
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+bindkey ';' autosuggest-accept
+
+# > 主题 powerlevel9k
+ZSH_THEME="powerlevel9k/powerlevel9k"
+# > 配置主题
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=( os_icon ssh dir  dir_writable  newline  vcs  )
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history time)
 
 # Then, source plugins and add commands to $PATH
 if ! zplug check --verbose; then
@@ -313,3 +347,5 @@ if ! zplug check --verbose; then
         echo; zplug install
     fi
 fi
+# > zplug 安装
+zplug load

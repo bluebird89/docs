@@ -550,6 +550,7 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/l
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 
+snap install kubectl --classic
 brew install kubectl
 
 # ubuntu
@@ -580,7 +581,7 @@ EOF
 
 yum install -y kubectl
 
-swapoff -a
+sudo swapoff -a
 
 # 在 bash 中设置当前 shell 的自动补全，要先安装 bash-completion 包
 source <(kubectl completion bash)

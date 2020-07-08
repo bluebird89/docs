@@ -137,6 +137,9 @@
 *   PES2020
 	- PS4 CONTROLLER NOT WORKING
         - Steam > Library > Right Click PES > Properties>;steam input per-game settings  and use bpm overlay when steam input is active both off
++ Gris:类似纪念碑谷那样作画唯美，难度不高的独立游
++ Dark Soul 系列
+* Total War 系列
 
 ## [Epic Games](https://www.epicgames.com/store/zh-CN/)
 
@@ -204,7 +207,6 @@
 - 游戏不能脱离游戏平台，目前主要有三种游戏平台：PC、手机和游戏主机。一般来说，只有得到平台制造商的允许，游戏才能在该平台上发行。这是需要缴费的，常见的提成比例是30%，苹果商店、谷歌 Play 商店、索尼的 PlayStation 都是这个比例。100元的游戏，平台会拿走30元。
 - 唯一的例外大概就是 Windows，任何人都可以在 Windows 上销售软件，而无需向微软公司支付任何费用。正是由于这一点，2003年一家美国游戏公司 Valve 在 Windows 上建立了一个自己的游戏商店 Steam。Valve 建这个商店，最初的想法是为了发行自家的游戏《Half Life 2》，后来变成了一个通用的游戏商店，其他公司的游戏也可以在上面出售。
 - Steam 商店跟其他平台一样，也会收取30％的交易费。蒂姆·斯维尼认为这非常不合理，多次公开呼吁，这个提成比例过高了，因为 Valve 公司不是平台制造商，并不生产硬件，也不需要维护操作系统，收取这么高的比例是不合理的。他说，即使交易费降低到8%，Valve 公司仍能获利，现在的费率不公平地剥夺了游戏开发者应得的利润，减少了他们对业务再投资的资金。
--
 
 ### 人物
 
