@@ -723,6 +723,8 @@ sudo apt-get install zsh git wget
 brew install zsh zsh-completions
 sudo apt-get install powerline fonts-powerline
 
+brew install zplug
+
 # oh-my-zsh
 # 自动安装
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
