@@ -1622,6 +1622,14 @@
 
 ## 欧美
 
+*  白日梦想家 The Secret Life of Walter Mitty (2013)
+    - 沃特.密提（本·斯蒂勒 Ben Stiller 饰）是一名在《生活》杂志工作了16年的胶片洗印经理，他性格内向，甚至无法跟心仪的同事谢莉尔（克里斯汀·韦格 Kristen Wiig 饰）开口搭讪，面对生活他像个旁观者，时常“放空”做白日英雄梦。直到有一天公司被并购，杂志需要做最后一期的封面，而封面成功与否的关键是找到狂野摄影师尚恩（西恩·潘 Sean Penn）的一卷胶片，沃特终于开口搭讪谢莉尔，并在她和母亲（雪莉·麦克雷恩 Shirley MacLaine 饰）的鼓励下踏上真正的冒险之旅，冰原、大海、喜马拉雅山……沃特的白日梦远不及现实壮丽。
+    - 加缪说：“人生的意义，在于承担人生无意义的勇气。如果你一直在找人生的意义，你永远不会生活。”自勉。To see the world, things dangerous to come to. To see behind walls, to draw closer. To find each other and to feel. That is the purpose of life.
+    - Space Oddity
+    - 旅行途中的摄影和配乐
+    - 看到雪豹时不急着拍下，而是享受那一刻的美妙
+    - TO SEE THE WORLD, THINGS DANGEROUS TO COME TO, TO SEE BEHIND WALLS, TO DRAW CLOSER, TO FIND EACH OTHER AND TO FEEL. THAT IS THE PURPOSE OF LIFE.
+    - Beautiful things do not ask for attentions.
 * 阿甘正传
     - 我不觉得心智成熟是越来越宽容，什么都可以接受。相反，我觉得那应该是一个逐渐剔除的过程，知道自己最重要的是什么，知道不重要的是什么，然后做一个简单的人
 * 银河系漫游指南　The Hitchhiker's Guide to the Galaxy

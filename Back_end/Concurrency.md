@@ -3,6 +3,9 @@
 * C10K 瓶颈(同时连接到服务器的客户达到了一万个):很多代码跑崩了，进程上下文切换占用了大量的资源，线程也顶不住如此巨大的压力. NGINX 带着事件循环出来拯救世界了
 * 一台服务器在单位时间里能处理的请求越多，服务器的能力越高，也就是服务器并发处理能力越强
 * 基于机械磁盘或SSD的数据库系统，读写的速度远慢于内存，因此单纯磁盘介质的数据库无法支撑C50K
+* 当今无数的 Web 服务和互联网服务，本质上大部分都是 IO 密集型服务:任务大多是和网络连接或读写相关的高耗时(相对 CPU)任务,瓶颈在于尽可能快速的完成高并发、多连接下的数据读写
+  - 用多线程，高并发场景的大量 IO 等待会导致多线程被频繁挂起和切换，非常消耗系统资源，同时多线程访问共享资源存在竞争问题。
+  - 用多进程，不仅存在频繁调度切换问题，同时还会存在每个进程资源不共享的问题，需要额外引入进程间通信机制来解决。
 
 ## 高并发
 
@@ -231,7 +234,6 @@ update item  set quantity=quantity - 1  where id = 1 and quantity - 1 > 0
   - 服务器平均请求处理的时间:吞吐率的倒数
   - 硬件环境
 * 工具
-  - [https:/httpd.apache.org/docs/2.4/programs/ab.html) :Apache Benchmark - 是一款有 Apache 基金会提供的简单的压测工具 `ab -n 5000 -c 50 https://www.baodu.com`
   - [wrk](https://github.com/wg/wrk): Modern HTTP benchmarking tool
   - [gatling](https://github.com/gatling/gatling) Async Scala-Akka-Netty based Load Test Tool http://gatling.io
   - [sniper](https://github.com/btfak/sniper): A powerful & high-performance http load tester
@@ -244,6 +246,49 @@ update item  set quantity=quantity - 1  where id = 1 and quantity - 1 > 0
   - [tcpcopy](https://github.com/session-replay-tools/tcpcopy): An online request replication tool, also a tcp stream replay tool, fit for real testing, performance testing, stability testing, stress testing, load testing, smoke testing, etc
   - [gryphon](https://github.com/wslfa/gryphon): Gryphon是由网易自主研发的能够模拟千万级别并发用户的一个软件，目的是能够用较少的资源来模拟出大量并发用户，并且能够更加真实地进行压力测试， 以解决网络消息推送服务方面的压力测试的问题和传统压力测试的问题。Gryphon分为两个程序，一个运行gryphon，用来模拟用户，一个是 intercept，用来截获响应包信息给gryphon。Gryphon模拟用户的本质是用一个连接来模拟一个用户，所以有多少个连接，就有多少个用户，而用户的素材则取自于pcap抓包文件。值得注意的是，Gryphon架构类似于tcpcopy，也可以采用传统使用方式和高级使用方式。
   - [locust.io](http://locust.io/): An open source load testing tool. Define user behaviour with Python code, and swarm your system with millions of simultaneous users.
+
+## [Apache Benchmarking tool](https://httpd.apache.org/docs/2.4/programs/ab.html)
+
+The simplest tool to perform a load testing.
+
+* -A auth-username:password
+* -b windowsize Size of TCP send/receive buffer, in bytes.
+* -B local-address Address to bind to when making outgoing connections.
+* -c concurrency Number of multiple requests to perform at a time. Default is one request at a time.
+* -C cookie-name=value Add a Cookie: line to the request. The argument is typically in the form of a name=value pair. This field is repeatable.
+* -d     Do not display the "percentage served within XX  [ms]  table".  (legacy  sup‐ port).
+* -e csv-file Write  a  Comma separated value (CSV) file which contains for each percentage (from 1% to 100%) the time (in milliseconds) it took to serve that percentage of  the requests. This is usually more useful than the 'gnuplot' file; as the results are already 'binned'.
+* -E client-certificate-file When connecting to an SSL website, use the provided client certificate in PEM format  to  authenticate with the server. The file is expected to contain the client certificate, followed by intermediate certificates,  followed  by  the private key. Available in 2.4.36 and later.
+* -f protocol Specify  SSL/TLS  protocol (SSL2, SSL3, TLS1, TLS1.1, TLS1.2, or ALL). TLS1.1 and TLS1.2 support available in 2.4.4 and later.
+* -g gnuplot-file Write all measured values out as a 'gnuplot' or  TSV  (Tab  separate  values) file. This file can easily be imported into packages like Gnuplot, IDL, Math‐ ematica, Igor or even Excel. The labels are on the first line of the file.
+* -h     Display usage information.
+* -H custom-header Append extra headers to the request. The argument is typically in the form of a  valid  header  line,  containing a colon-separated field-value pair (i.e., "Accept-Encoding: zip/zop;8bit").
+* -i     Do HEAD requests instead of GET.
+* -k     Enable the HTTP KeepAlive feature, i.e., perform multiple requests within one HTTP session. Default is no KeepAlive.
+* -l     Do not report errors if the length of the responses is not constant. This can be useful for dynamic pages. Available in 2.4.7 and later.
+* -m HTTP-method Custom HTTP method for the requests. Available in 2.4.10 and later.
+* -n requests Number of requests to perform for the benchmarking session. The default is to just  perform  a  single  request  which  usually leads to non-representative benchmarking results.
+* -p POST-file File containing data to POST. Remember to also set -T.
+* -P proxy-auth-username:password Supply BASIC Authentication credentials to a proxy en-route. The username and password are separated by a single : and sent on the wire base64 encoded. The string is sent regardless of whether the proxy needs it (i.e.,  has  sent  an 407 proxy authentication needed).
+* -q     When processing more than 150 requests, ab outputs a progress count on stderr every 10% or 100 requests or so. The -q flag will suppress these messages.
+* -r     Don't exit on socket receive errors.
+* -s timeout
+* -S Do  not  display  the  median  and standard deviation values, nor display the warning/error messages when the average and median are more than one  or  two times  the  standard  deviation apart. And default to the min/avg/max values. (legacy support).
+* -t timelimit Maximum number of seconds to spend for benchmarking. This implies a -n  50000 internally.  Use  this to benchmark the server within a fixed total amount of time. Per default there is no timelimit.
+* -T content-type Content-type header to use for POST/PUT data, eg.  application/x-www-form-ur‐ lencoded. Default is text/plain.
+* -u PUT-file File containing data to PUT. Remember to also set -T.
+* -v verbosity Set  verbosity level - 4 and above prints information on headers, 3 and above prints response codes (404, 200, etc.), 2 and above prints warnings and info.
+*  -V     Display version number and exit.
+* -w     Print out results in HTML tables. Default table is two columns wide,  with  a white background.
+* -x <table>-attributes String  to use as attributes for <table>. Attributes are inserted <table here >.
+* -X proxy[:port] Use a proxy server for the requests.
+* -y <tr>-attributes String to use as attributes for <tr>.
+* -z <td>-attributes String to use as attributes for <td>.
+* -Z ciphersuite Specify SSL/TLS cipher suite (See openssl ciphers)
+
+```
+ab -n 5000 -c 50 https://www.baodu.com
+```
 
 ## 思路
 

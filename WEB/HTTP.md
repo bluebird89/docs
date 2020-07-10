@@ -1299,8 +1299,24 @@ sudo apt-get update
 sudo apt-get install python-certbot-apache
 sudo certbot --apache -d packagist.domain.com
 
+
+curl https://get.acme.sh | sh
+alias acme.sh=~/.acme.sh/acme.sh
+
+# 生成证书
+acme.sh --issue -d mydomain.com -d www.mydomain.com --webroot /home/wwwroot/mydomain.com/
+acme.sh --issue -d mydomain.com --apache|nginx
+
 acme.sh --issue -d thinkphp.com -w /home/henry/Workspace/thinkphp/public
 acme.sh --issue --debug -d thinkphp.com -d henry.thinkphp.com -w /home/henry/Workspace/thinkphp/public
+
+## copy/安装 证书
+acme.sh --installcert -d <domain>.com \
+--key-file /etc/nginx/ssl/<domain>.key \
+--fullchain-file /etc/nginx/ssl/fullchain.cer \
+--reloadcmd "service nginx force-reload"
+
+acme.sh --upgrade --auto-upgrade
 
 sudo yum install certbot python2-certbot-nginx
 sudo certbot --nginx

@@ -1,11 +1,10 @@
-## Raft
+## [Raft](https://raft.github.io/raft.pdf)
 
-分布式一致性算法的主流，业界的 TiDB、CockroachDB、etcd、consul 等一系列流行的组件和服务都在使用它
-
-
-此外，Raft 基于日志的连续提交的设定，和 multi-paxos 的乱序提交相比，在写入性能上相比会有些差距。这对于 Raft 协议来讲没有太多的改进空间，但是如果 braft 要做一个理想的 Raft 库实现的话，依然需要不断的改进和优化。
-
-Consensus一致性:指多个服务器在状态达成一致，但是在一个分布式系统中，因为各种意外可能，有的服务器可能会崩溃或变得不可靠，它就不能和其他服务器达成一致状态。这样就需要一种Consensus协议，一致性协议是为了确保容错性，也就是即使系统中有一两个服务器当机，也不会影响其处理过程。
+* a protocol for implementing distributed consensus
+* 分布式一致性算法的主流，业界的 TiDB、CockroachDB、etcd、consul 等一系列流行的组件和服务都在使用它
+* 基于日志的连续提交的设定，和 multi-paxos 的乱序提交相比，在写入性能上相比会有些差距。这对于 Raft 协议来讲没有太多的改进空间，但是如果 braft 要做一个理想的 Raft 库实现的话，依然需要不断的改进和优化。
+* Consensus一致性:指多个服务器在状态达成一致，但是在一个分布式系统中，因为各种意外可能，有的服务器可能会崩溃或变得不可靠，它就不能和其他服务器达成一致状态。这样就需要一种Consensus协议，一致性协议是为了确保容错性，也就是即使系统中有一两个服务器当机，也不会影响其处理过程。
+* foller 有自计时机制,收取 leader 心跳.心跳信号会重置计时
 
 * 强依赖 Leader 节点的可用性来确保集群数据的一致性。
 * 数据的流向只能从 Leader 节点向 Follower 节点转移
@@ -39,6 +38,44 @@ Consensus一致性:指多个服务器在状态达成一致，但是在一个分�
 * 什么场景不适合用 raft 而只适合用 paxos？
 * paxos 的常见优化有哪些？为什么优化后的 paxos 依然可以保证正确性，优化牺牲了什么？
 
+## Leader Election
+
+* In Raft there are two timeout settings which control elections
+* First is the election timeout:The election timeout is the amount of time a follower waits until becoming a candidate
+    - The election timeout is randomized to be between 150ms and 300ms
+* After the election timeout the follower becomes a candidate and starts a new election terminate
+* sends out Request Vote messages to other nodes
+    - and the node resets its election timeout.
+    - Once a candidate has a majority of votes it becomes leader.
+* The leader begins sending out Append Entries messages to its followers
+    - These messages are sent in intervals specified by the heartbeat timeout
+    - Followers then respond to each Append Entries message.
+* This election term will continue until a follower stops receiving heartbeats and becomes a candidate.
+* Requiring a majority of votes guarantees that only one leader can be elected per term.
+* If two nodes become candidates at the same time then a split vote can occur.
+    - Two nodes both start an election for the same term and each reaches a single follower node before the other
+    - Now each candidate has 2 votes and can receive no more for this term
+    - The nodes will wait for a new election and try again.
+
+## Log Replication
+
+* Once we have a leader elected we need to replicate all changes to our system to all nodes.
+* All changes to the system now go through the leader.
+* Each change is added as an entry in the node's log.  the change is sent to the followers on the next heartbeat.
+* To commit the entry the node first replicates it to the follower nodes,the leader waits until a majority of nodes have written the entry,An entry is committed once a majority of followers acknowledge it.and a response is sent to the client.
+* The entry is now committed on the leader node and the node state is "5".
+* The leader then notifies the followers that the entry is committed
+
+## partition
+
+* have two leaders in different terms: 3->2
+* another client and try to update both leaders
+    - 2 Node:a client senf a messages,but cannot replicate to a majority so its log entry stays uncommitted
+    - 3 node:because it can replicate to a majority
+* heal
+    - 2 Node nodes A & B will roll back their uncommitted entries and match the new leader's log.
+
 ## 参考
 
+* [Understandable Distributed Consensus](http://thesecretlivesofdata.com/raft/)
 * [maemual / raft-zh_cn](https://github.com/maemual/raft-zh_cn):Raft一致性算法论文的中文翻译
