@@ -32,21 +32,13 @@ The PHP Interpreter <http://www.php.net>
 
 ## 发展
 
-* Phar：PHP5.3 之后支持了类似 Java 的 jar 包，名为 phar。可以像 Java 一样方便地实现应用程序打包和组件化，一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行。配合 Swoole，可以在命令行下执行 php server.phar 一键启动服务器
-* 7:PHP是以多进程模型设计的，好处是请求之间互不干涉，一个请求失败也不会对其他进程造成影响
+* PHP5.3
+    - 支持了类似 Java 的 jar 包，名为 phar。可以像 Java 一样方便地实现应用程序打包和组件化，一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行
+* 7
     - 变量标量类型声明：标量类型声明与返回类型声明
-        + int
-        + float
-        + bool
-        + string
-        + interfaces
-        + array
-        + callable
     - 短闭包
     - null合并运算符（??）的新空合并运算符被加入 用来与isset（）函数函数一起替换三元操作
-    - Trait
     - 属性类型
-    - 扩散运算符
     - JIT 编译器
     - FFI
     - 匿名类
@@ -66,7 +58,7 @@ The PHP Interpreter <http://www.php.net>
     +   Closure::call() 方法加入到临时绑定（bindTo）的对象范围
     +   引入了过滤 unserialize（）函数以在反序列化不受信任的数据对象时提供更好的安全性。它可以防止可能的代码注入，使开发人员能够使用序列化白名单类。
     +   IntlChar类：这个类自身定义了许多静态方法用于操作多字符集的 unicode 字符。需要安装intl拓展
-    +   两个新的函数引入以产生一个跨平台的方式加密安全整数和字符串。
+    +   两个新的函数引入以产生一个跨平台的方式加密安全整数和字符串
         +   random_bytes() - 生成加密安全伪随机字节。
         +   random_int() - 生成加密安全伪随机整数。
     +   期望是向后兼容的增强到旧 assert() 函数。期望允许在生产代码零成本的断言，并提供在断言失败时抛出自定义异常的能力。assert() 不是一种语言构建体，其中第一个参数是一个表达式的比较字符串或布尔用于测试。
@@ -78,7 +70,6 @@ The PHP Interpreter <http://www.php.net>
     +   错误处理：传统的错误报告机制的错误：通过抛出异常错误处理。类似于异常，这些错误异常会冒泡，直到它们到达第一个匹配的catch块。如果没有匹配的块，那么会使用 set_exception_handler() 安装一个默认的异常处理并被调用，并在情况下，如果没有默认的异常处理程序，那么该异常将被转换为一个致命的错误，并会像传统错误那样处理。
         +   由于 Error 层次结构不是从异常（Exception），代码扩展使用catch (Exception $e) { ... } 块来处理未捕获的异常，PHP5中将不会处理这样的错误。  catch (Error $e) { ... } 块或 set_exception_handler（）处理程序需要处理的致命错误。
     +   引入了intdiv()的新函数，它执行操作数的整数除法并返回结果为 int 类型
-    +   null合并运算符
     +   Unicode codepoint 转译语法:接受一个以16进制形式的 Unicode codepoint，并打印出一个双引号或heredoc包围的 UTF-8 编码格式的字符串。 可以接受任何有效的 codepoint，并且开头的 0 是可以省略的
     + preg_replace_callback_array：可以使用一个关联数组来对每个正则表达式注册回调函数， 正则表达式本身作为关联数组的键， 而对应的回调函数就是关联数组的值
     - 改变了大多数错误的报告方式。不同于传统（PHP 5）的错误报告机制，大多数错误被作为 Error 异常抛出。
@@ -105,10 +96,9 @@ The PHP Interpreter <http://www.php.net>
     - 传递参数过少时将抛出错误:过去我们传递参数过少 会产生warning。php7.1开始会抛出error
     - 移除了ext/mcrypt拓展
 * 7.2
-    - JIT(JUST_IN_TIME)
-    - 增加新的类型object
+    - 增加新类型object
     - 通过名称加载扩展:扩展文件不再需要通过文件加载 (Unix下以.so为文件扩展名，在Windows下以 .dll 为文件扩展名) 进行指定。可以在php.ini配置文件进行启用
-    - 允许重写抽象方法:当一个抽象类继承于另外一个抽象类的时候，继承后的抽象类可以重写被继承的抽象类的抽象方法。
+    - 允许重写抽象方法:当一个抽象类继承于另外一个抽象类的时候，继承后的抽象类可以重写被继承的抽象类的抽象方法
     - 使用Argon2算法生成密码散列:Argon2 已经被加入到密码散列（password hashing） API (这些函数以 password_ 开头), 以下是暴露出来的常量
     - 新增 PDO 字符串扩展类型,准备支持多语言字符集，PDO的字符串类型已经扩展支持国际化的字符集。以下是扩展的常量：
         + PDO::PARAM_STR_NATL
@@ -116,11 +106,11 @@ The PHP Interpreter <http://www.php.net>
         + PDO::ATTR_DEFAULT_STR_PARAM
     - 命名分组命名空间支持尾部逗号
     - number_format 返回值
-    - get_class()不再允许null。
+    - get_class()不再允许null
     - count 作用在不是 Countable Types 将发生warning
-    - 不带引号的字符串:在之前不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。现在将会产生waring。
+    - 不带引号的字符串:在之前不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。现在将会产生waring
     - __autoload 被废弃
-    -  each 被废弃:使用此函数遍历时，比普通的 foreach 更慢， 并且给新语法的变化带来实现问题。因此它被废弃了。
+    -  each 被废弃:使用此函数遍历时，比普通的 foreach 更慢，并且给新语法的变化带来实现问题。因此它被废弃了。
     - is_object、gettype修正:is_object 作用在**__PHP_Incomplete_Class** 将反正 true;gettype作用在闭包在将正确返回resource
     - Convert Numeric Keys in Object/Array Casts:把数组转对象的时候，可以访问到整型键的值。
 * 7.3
@@ -129,12 +119,11 @@ The PHP Interpreter <http://www.php.net>
     - 添加了几个FPM的配置项, 用来控制日志单行最大字符数, 日志缓冲等: log_limit, log_buffering, decorate_workers_output
     - libcurl >= 7.15.5 is now required
     - curl 添加了一堆常量
-    - json_decode 添加了一个常量, JSON_THROW_ON_ERROR, 如果解析失败可以抛出异常, 而不是通过之前的方法 json_last_error() 去获取
+    - `json_decode `添加了一个常量`, JSON_THROW_ON_ERROR`,如果解析失败可以抛出异常,而不是通过之前的方法 `json_last_error()` 去获取
     - spl autoloader: 如果一个加载失败, 剩下的都不再执行
     - 说明了一些循环引用的情况会得到怎样的结果
-    - heredoc/nowdoc  中如果遇到跟定界符相同的字符串就认为结束了,  而最后真正的结束符则会被认为是语法错误;
-    - 在 循环+switch-case 语句的case 中使用continue 会报warning
-    - 说明了, 静态变量在被继承时, 如果在子类里发生了循环引用, 父类里的静态变量会跟着变
+    - heredoc/nowdoc 中如果遇到跟定界符相同的字符串就认为结束了,而最后真正的结束符则会被认为是语法错误;
+    - 在 循环+switch-case 语句的case 中使用continue 会报warning,说明了, 静态变量在被继承时, 如果在子类里发生了循环引用, 父类里的静态变量会跟着变
 * 7.4
     - 短闭包函数
     - 预加载:框架启动时在内存中加载文件，而且在后续请求中永久有效,每次预加载的文件发生改变时，框架需要重新启动
@@ -150,11 +139,17 @@ The PHP Interpreter <http://www.php.net>
     - 箭头函数
     - 协变量返回和协变量参数
 * 8
-    - 实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
+    - JIT:主要针对 CPU 密集型操作优化效果明显, IO 密集型操作的 Web 应用中，启用 JIT 与不启用相比，性能不但没有提升，反而有 10% 左右的损耗，至少在 Laravel 应用中是如此
+        + 在 Opcache 优化的基础上结合 Runtime 信息将字节码编译为机器码缓存起来
+        + 现有的 Opcache 优化不受任何影响，并且 PHP 的 JIT 是在 Opcache 中提供的
+        + JIT 不是对 Opcache 替代，而是增强，在启用 JIT 的情况下，如果 Zend 底层发现特定字节码已经编译为机器码，则可以绕过 Zend VM 直接让 CPU 执行机器码，从而提高代码性能
+    -
 
 ## 原理
 
+* PHP是以多进程模型设计的，好处是请求之间互不干涉，一个请求失败也不会对其他进程造成影响
 * Zend引擎读取.php文件
+* 实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
 * PHP 代码 => Token => 抽象语法树 => Opcodes => 执行
     - 源代码通过词法分析得到 Token： Token 是 PHP 代码被切割成的有意义的标识。PHP7 一共有 137 种 Token，在 zend_language_parser.h 文件中做了定义
     - 基于语法分析器将 Token 转换成抽象语法树（AST）：Token 就是一个个的词块，但是单独的词块不能表达完整的语义，还需要借助一定的规则进行组织串联。所以就需要语法分析器根据语法匹配 Token，将 Token 进行串联。语法分析器串联完 Token 后的产物就是抽象语法树（AST，Abstract Syntax Tree）。 AST 是 PHP7 版本的新特性，之前版本的 PHP 代码的执行过程中是没有生成 AST 这一步的。它的作用主要是实现了 PHP 编译器和解释器的解耦，提升了可维护性。
@@ -315,15 +310,46 @@ apt-get install php7.4 php7.4-{bz2,json,zip,mbstring,gd,curl,xml,common,opcache,
     - fileinfo
     - OpenSSL
 
-## ubuntu
 sudo systemctl start php7.0-fpm.service
 sudo service php7.0-fpm start|stop|restart|reload
 
 update-alternatives --config php
+
+sudo apt install -y pkg-config build-essential autoconf bison re2c libxml2-dev \
+libsqlite3-dev libssl-dev libcurl4-openssl-dev libpng-dev libonig-dev libzip-dev
+./buildconf --force
+./configure --prefix=/usr/local/php8 \
+--with-config-file-path=/usr/local/php8 \
+--enable-mbstring  \
+--enable-ftp  \
+--enable-gd   \
+--enable-mysqlnd \
+--enable-pdo   \
+--enable-sockets   \
+--enable-fpm   \
+--enable-xml  \
+--enable-soap  \
+--enable-pcntl   \
+--enable-cli   \
+--enable-json  \
+--enable-tokenizer \
+--enable-ctype \
+--enable-bcmath  \
+--with-openssl  \
+--with-pear   \
+--with-zlib  \
+--with-iconv  \
+--with-curl  \
+--with-zip
+
+# 源码中提供了一个基准测试文件
+/usr/local/php8/bin/php -d opcache.jit_buffer_size=0 Zend/bench.php
+/usr/local/php8/bin/php -d opcache.jit_buffer_size=64M -d opcache.jit=1205 Zend/bench.php
 ```
 
 ### 扩展
 
+* `php-config --extension-dir`
 * apt或者yum命令安装
 * [PECL](http://pecl.php.net/):PHP Extension Community Library，管理着最底层的PHP扩展。用 C 写的
 * [PEAR](http://pear.php.net/)：PHP Extension and Application Repository，管理着项目环境的扩展。用 PHP 写的
@@ -331,7 +357,6 @@ update-alternatives --config php
 * Composer：和PEAR都管理着项目环境的依赖，这些依赖也是用 PHP 写的，区别不大。但 composer 却比 PEAR 更受欢迎
 * 扩展
     - vld:查看代码opcache
-
 
 ```sh
 php -m # 查看添加扩展
@@ -392,12 +417,16 @@ php -dvld.active=1 -dvld.excute=0 at.php # excute =0 opcode在么 并不执行
 * 实现定时任务
 * 开发桌面应用就是使用PHP-CLI和GTK包
 * linux下用php编写shell脚本
+* 内置的Web服务器不能在生成环境使用，只能在本地开发环境中使用
+    - 性能不佳。一次只能处理一个请求，其他请求会受到阻塞。如果某个进程耗时较长（数据库查询、远程API调用），则整个Web应用会陷入停顿状态。
+    - 支持媒体类型较少（PHP 5.5.7以后有较大改进）
+    - 路由脚本仅支持少量的URL重写
 * [ircmaxell/phpvm](https://github.com/ircmaxell/phpvm):A PHP version manager for CLI PHP
 * 配置
     - The configuration is loaded fresh each time you invoke PHP from the CLI.
     - 配置比较长的max_execution_time
 
-```sh
+```
 php --ini　# 查找PHP CLI的ini文件位置
 php -r "echo php_sapi_name();" # 判断当前执行的php是什么模式下 R RUN
 php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数。这种方法首先要设置php解释器的路径，Windows平台在运行CLI之前，需设置类似path c:\php的命令，也失去了CLI脚本第一行的意义，因此不建议使用该方法。
@@ -406,7 +435,13 @@ php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数
 
 # /usr/local/lib/php/pecl/20180731/swoole.so doesn't appear to be a valid Zend extension
 
-php -S localhost:8000 # 内置 web 服务器
+php -S localhost:8000 -c app/config/php.ini  # 内置 web 服务器
+
+if (php_sapi_name() == ‘cli-server') {
+    // PHP 内置 Web 服务器
+} else {
+    // 其他Web服务器
+}
 ```
 
 ## 配置
@@ -422,7 +457,7 @@ php -S localhost:8000 # 内置 web 服务器
 * memory_limit:设定单个 PHP 进程可以使用的系统内存最大值
     - PHP 操作 Redis Set 集合。修改配置
     - 如果项目中每页页面使用的内存不大，建议改成小一些，这样可以承载更多的并发处理
-    - PHP 脚本中调用 memory_get_peak_usage()函数多次测试自己项目脚本
+    - 命令行命令 top 或者 PHP 脚本中调用 memory_get_peak_usage() 函数多次运行同一个脚本，然后取内存消耗的平均
 * Zend OPcache 扩展
     - PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列[Zend操作码](http://php.net/manual/zh/internals2.opcodes.php)，由于每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行
     - 每次请求PHP文件都是这样，这会消耗很多资源，如果每次HTTP请求都必须不断解析、编译和执行PHP脚本，消耗的资源更多
@@ -443,7 +478,7 @@ php -S localhost:8000 # 内置 web 服务器
     - PHP 会把这个文件当成 cgi 脚本执行，并赋值路径给 CGI 环境变量——SCRIPT_FILENAME，也就是 `$_SERVER['SCRIPT_FILENAME']` 的值了。
         + PHP的cgi SAPI中的参数fix_pathinfo
 
-```
+```sh
 # 查看
 php-config
 php-config --extension-dir # PHP扩展目录
@@ -454,25 +489,7 @@ session.save_path = '127.0.0.1:11211'
 
 expose_php = Off # X-Powered-By的配置
 
-opcache.enable=1 # 开关打开
-opcache.validate_timestamps=1    # 生产环境中配置为0：因为Zend Opcache将不能觉察PHP脚本的变化，必须手动清空Zend OPcache缓存的字节码，才能让它发现PHP文件的变动。这个配置适合在生产环境中设置为0，但在开发环境设置为1
-opcache.revalidate_freq=240   # 检查脚本时间戳是否有更新时间
-opcache.memory_consumption=64    # Opcache的共享内存大小，以M为单位
-opcache.interned_strings_buffer=16    # 用来存储临时字符串的内存大小，以M为单位
-opcache.max_accelerated_files=4000    # Opcache哈希表可以存储的脚本文件数量上限 对多缓存文件限制, 命中率不到 100% 的话, 可以试着提高这个值
-opcache.fast_shutdown=1         # 使用快速停止续发事件
-
 php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
-
-防止变量覆盖： register_globals=off
-防止越权访问目录： open_basedir=/var/www/html（指定目录）
-防止远程文件包含： allow_url_include=off and allow_url_fopen=off
-防止显示详细的错误信息： display_errors=off
-记录错误在日志文件中： log_errors=on
-关闭不安全的字符串转义处理函数（防SQLi和XSS）： magic_quotes_gpc=off
-如果PHP以CGI方式安装则需要关闭： cgi.fix_pathinfo=0
-防御XSS（开启HttpOnly） session.cookie_httponly=1
-HTTPS下提高安全性： session.cookie_secure=1
 ```
 
 ## 基础
@@ -580,6 +597,8 @@ HTTPS下提高安全性： session.cookie_secure=1
             - %x hexadecimal representation (lower-case)
             - %X hexadecimal representation (upper-case)
             - %+d  sign specifier on a positive or negative integer
+        * 多字节:多字节字符指的是不在传统的 128 个 ASCII 字符集中的字符，比如中文字符,使用这些 PHP 原生的字符串处理函数处理包含多字节字符的 Unicode 字符串，会得到意料之外的错误结果
+            - 安装 mbstring 扩展
     + Integer（整型）
     + Float（浮点型）
         * NaN:代表着任何不同值，不应拿 NAN 去和其它值进行比较，包括其自身，应该用 is_nan() 来检查
@@ -634,7 +653,7 @@ HTTPS下提高安全性： session.cookie_secure=1
 ### 控制语句
 
 * 表达式：任何有值的东西
-* echo：是一个语言结构(语句)，不是一个函数，所以不需要使用括号。但是如果要使用多个参数，则需要使用括号。打印字符串，多行字符串，转义字符，变量，数组等。
+* echo：是一个语言结构(语句)，不是一个函数，所以不需要使用括号。但是如果要使用多个参数，则需要使用括号。打印字符串，多行字符串，转义字符，变量，数组等
 * print
 * print_r
 * printf()
@@ -717,11 +736,17 @@ HTTPS下提高安全性： session.cookie_secure=1
     - 可变数量的参数列表:`...`
 * 可变函数：一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数
 * 匿名函数（Anonymous functions），也叫闭包函数（Closure），允许 临时创建一个没有指定名称的函数
-    - 经常用作回调函数（callback）
-    - 不能直接访问闭包外的变量，通过 use 关键字来调用上下文变量
+    - 变量值是一个闭包，闭包对象实现了`__invoke()`魔术方法，只要变量名后有()，PHP就会查找并调用__invoke方法
+    - 闭包在匿名函数的基础上增加了与外部环境的变量交互，通过 use 子句中指定要导入的外部环境变量
+    - 闭包和普通的PHP函数很像：常用的句法相同，也接受参数，而且能返回值。不过闭包没有函数名
+    - 5.3.0中引入
+    - 经常作回调函数（callback）使用
+    - 不能直接访问闭包外的变量，通过 use 关键字把父作用域变量及状态附加到PHP闭包中
     - 闭包内所引用的变量不能被外部所访问,在闭包内对变量的改变从而影响到上下文变量的值，使用&的引用传参
     - Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态
-    - 闭包在匿名函数的基础上增加了与外部环境的变量交互，通过 use 子句中指定要导入的外部环境变量
+    - 在闭包中使用$this关键字获取闭包内部状态
+        + bindTo:可以把闭包的内部状态绑定到其他对象上。方法第二个参数作用是指定绑定闭包的那个对象所属的PHP类.闭包就可以在其他地方访问邦定闭包的对象中受保护和私有的成员变量
+        + 框架经常使用bindTo方法把路由URL映射到匿名回调函数上，框架会把匿名回调函数绑定到应用对象上，这样在匿名函数中就可以使用$this关键字引用重要的应用对象
 * 返回值
 * 递归函数
 
@@ -752,14 +777,24 @@ $value=$_COOKIE["CookieName"];//returns cookie value
 
 ## IO
 
-* 本质上是 “流(stream)” ，通过流操作文件、内存、网络等设备的数据。查看PHP 源代码
-* 读写文件
-* 命令行输入和输出:php_sapi_name返回值为cli，标准输入输出均指向终端
+* 本质上是 “流(stream)” ，通过流操作文件、命令行进程、网络连接、ZIP 或 TAR 压缩文件、临时内存、标准输入或输出，或者是通过 PHP 流封装协议实现的任何其他资源
+* 流的作用是提供统一的公共函数来处理文件、网络和数据压缩等操作。简单而言，流是具有流式行为的资源对象，流可以线性读写，并且可以通过 fseek() 之类的函数定位到流中的任何位置
+* 命令行输入和输出:`php_sapi_name`返回值为cli，标准输入输出均指向终端
     - STDIN: 标准输入，只读，等同于用fopen打开”php://stdin”;
     - STDOUT: 标准输出，只写，等同于用fopen打开”php://stdout”;
-    - STDERR: 标准错误输出，只写，等同于fopen打开”php://stderr”。
+    - STDERR: 标准错误输出，只写，等同于fopen打开”php://stderr”
+    -  php://memory：从系统内存中读取数据，或者把数据写入系统内存。缺点是系统内存有限，所有使用 php://temp 更安全
+    -  php://temp：和 php://memory 类似，不过，没有可用内存时，PHP 会把数据写入这个临时文件。
+* 流封装协议
+    - 开始通信
+    - 读取数据
+    - 写入数据
+    - 结束通信
+* 流真正强大的地方在于过滤、转换、添加或删除流中传输的数据
+    - `stream_filter_append()` 过滤器附加到现有的流上
+    - 使用 php://filter 流封装协议把过滤器附加到流上
 * 与远程网址交互:curl
-* file_get_contents
+* `file_get_contents`
 * 方法
     - fputs
     - fwrite
@@ -835,6 +870,11 @@ $value=$_COOKIE["CookieName"];//returns cookie value
 * mysql:PHP 5.5以来扩展已被弃用，建议使用以下2种替代方法之一
 * mysqli
 * PDO
+    - fetch() 方法时，传入了 PDO::FETCH_ASSOC 参数，该参数决定如何返回查询结果，该参数支持以下常量：
+        + PDO::FETCH_ASSOC：返回关联数组，数组的键是数据表的列名
+        + PDO::FETCH_NUM：返回键为数字的数组
+        + PDO::FETCH_BOTH：顾名思义，返回一个既有键为列名又有键为数字的数组
+        + PDO::FETCH_OBJ：返回一个对象，对象的属性是数据表的列名
     - 提供预处理语句查询
         + 位置参数`$tis = $conn->prepare("INSERT INTO STUDENTS(name, age) values(?, ?)"); $tis->bindParam(1,$name); $tis->bindParam(2,$age);`
         + 命名参数 `$tis = $conn->prepare("INSERT INTO STUDENTS(name, age) values(:name, :age)"); $tis->bindParam(':name', $name); $tis->bindParam(':age', $age);`
@@ -880,7 +920,7 @@ $value=$_COOKIE["CookieName"];//returns cookie value
         + 当进行非静态方法调用时，即为该对象所属的类
     - self 只引用声明，static 执行当前对象.static 指的调用上下文，self 解析上下文
     - 静态方法可以在非静态上下文调用
-* 对象复制：对对象的所有属性执行一个浅复制（shallow copy）。所有的引用属性 仍然会是一个指向原来的变量的引用
+* 对象复制：对对象的所有属性执行一个浅复制（shallow copy）。所有的引用属性仍然会是一个指向原来的变量的引用
     - 赋值与传递通过引用进行
     - 获取副本用clone，只复制引用，不复制引用的对象
     - `__clone()` 在复制得到的对象上运行
@@ -930,10 +970,11 @@ $value=$_COOKIE["CookieName"];//returns cookie value
 #### 接口与抽象类
 
 * 接口
-    - 通过interface关键字来定义的，但其中定义所有的方法都是空的，访问控制必须是public。
-    - 接口可以如类一样定义常量，可以使用extends来继承其他接口
-    - 接口中的每个方法，继承类里面都要去实现
-    - 接口中的方法后面不要跟大口号{},因为接口只是定义需要有这个函数，并不是自己去实现
+    - 通过interface关键字来定义，定义所有的方法都是空的，访问控制必须是public
+    - 可以如类一样定义常量，可以使用extends来继承其他接口
+    - 每个方法，继承类里面都要去实现
+    - 方法后面不要跟大口号{},因为接口只是定义函数，并不实现
+    - 两个PHP对象之间契约（Contract）:将代码和依赖解耦，而且允许依赖任何实现了预期接口的第三方代码，不管第三方代码是如何实现接口的，只关心第三方代码是否实现了指定的接口
     - 不能实例化，抽象类中 abstract 的方法，强制要求子类定义这些方法，也可以理解成接口中的每个方法都是 abstract 方法
 * 抽象类
     - abstract 的方法，继承类不必非要写那个方法
@@ -986,12 +1027,16 @@ $controller = new UsersController(new FileLog());
 $controller->register();
 ```
 
-#### trait
+### trait
 
+* PHP 5.4引入
+* 看做类的部分实现，可以混入一个或多个现有的PHP类中，其作用有两个：表明类可以做什么；提供模块化实现
 * 减少单继承语言的限制，自由地在不同层次结构内独立的类中复用 method
 * 优先级:当前类的成员 > trait 的方法 > 被继承的方法
-* Trait 和 Class 相似，但仅旨在用细粒度和一致的方式来组合功能。它为传统继承增加了水平特性的组合；应用的几个 Class 之间不需要继承
+* 和 Class 相似，但仅旨在用细粒度和一致的方式来组合功能
+* 让两个无关的PHP类具有类似的行为:为传统继承增加了水平特性的组合；应用的Class 之间不需要继承
 * 无法通过 trait 自身来实例化
+* 命名冲突问题：使用insteadof关键字
 
 ### 匿名类
 
@@ -1040,11 +1085,23 @@ echo (new Outer)->func2()->func3(); # 6
 
 ## 命名空间
 
+* 出现之前，PHP开发者使用Zend风格的类名解决命名冲突问题:在PHP类名中使用下划线的方式表示文件系统的目录分隔符。这种约定有两个作用：其一，确保类名是唯一的；其二，原生的自动加载器会把类名中的下划线替换成文件系统的目录分隔符，从而确定文件的路径。例如，`Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query`类对应的文件是Zend/Cloud/DocumentService/Adapter/WindowsAzure/Query.php.类名特别长
+* PHP5.3.0中引入，其作用是按照一种虚拟的层次结构组织PHP代码,现代的PHP组件框架代码都是放在各自全局唯一的厂商命名空间中，以免和其他厂商使用的常见类名冲突
+* 5.6开始还可以导入函数和常量
+* 将代码放到唯一的厂商命名空间，代码就可以和其他开发者使用相同的类名、接口名、函数或常量名
+* 声明命名空间的代码始终应该放在<?php  标签后的第一行 `namespace LaravelAcademy\ModernPHP;`
+* 作用是封装和组织相关的PHP类
+* 多重导入
+* 一个文件使用多个命名空间
+* 如果引用的类、接口、函数和常量没有指定命名空间，PHP假定引用的类、接口、函数和常量在当前的命名空间中。如果要使用其他命名空间的类、接口、函数或常量，需要使用完全限定的PHP类名（命名空间+类名）
+* 导入和别名:`use Illuminate\Http\Response as Res;`
 * 借助 spl_auto_register 函数注册自动加载器，实现系统未定义类或接口的自动加载
     - 存在一个问题:不同库/组件类名冲突问题
 * 声明后
     - 手动加载
-    - 通过Composer classmap
+    - 通过`Composer classmap`
+* 使用的PSR-4自动加载标准，会把命名空间放到对应文件系统的子目录中
+*
 
 ## 魔术方法
 
@@ -1073,6 +1130,8 @@ echo (new Outer)->func2()->func3(); # 6
 * 数学函数
 * 电子邮件
 * 时间
+    - `date.timezone = 'Asia/Shanghai';`
+    - `date_default_timezone_set('Asia/Shanghai');`
 * XML
     - simplexml_load_file
 * 网络
@@ -1246,21 +1305,28 @@ var_dump(date("Y-m-d", strtotime("first day of +1 month", strtotime("2017-08-31"
 $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 ```
 
-### 生成器
+### 生成器 iterator
 
-提供了一种更容易的方法来实现简单的对象迭代，性能开销和复杂性大大降低
 
+* 提供了一种更容易的方法来实现简单的对象迭代，性能开销和复杂性大大降低
 * 一个生成器函数看起来像一个普通的函数，不同的是普通函数返回一个值，而一个生成器可以yield生成许多它所需要的值
 * 一个简单的例子就是使用生成器来重新实现 range() 函数。 标准的 range() 函数需要在内存中生成一个数组包含每一个在它范围内的值，然后返回该数组, 结果就是会产生多个很大的数组。 比如，调用 range(0, 1000000) 将导致内存占用超过 100 MB。
-* 当一个生成器被调用的时候，它返回一个可以被遍历的对象.当遍历这个对象的时候(例如通过一个foreach循环)，PHP 将会在每次需要值的时候调用生成器函数，并在产生一个值之后保存生成器的状态，这样它就可以在需要产生下一个值的时候恢复调用状态。
+* 当一个生成器被调用的时候，返回一个可以被遍历的对象.当遍历这个对象的时候(例如通过一个foreach循环)，PHP 将会在每次需要值的时候调用生成器函数，并在产生一个值之后保存生成器的状态，这样它就可以在需要产生下一个值的时候恢复调用状态。
 * 一旦不再需要产生更多的值，生成器函数可以简单退出，而调用生成器的代码还可以继续执行，就像一个数组已经被遍历完了
-* 生成器函数的核心是yield关键字。它最简单的调用形式看起来像一个return申明，不同之处在于普通return会返回值并终止函数的执行，而yield会返回一个值给循环调用此生成器的代码并且只是暂停执行生成器函数。
+* 生成器函数核心是 yield 关键字。最简单的调用形式看起来像一个return申明，不同之处在于普通return会返回值并终止函数的执行，而yield会返回一个值给循环调用此生成器的代码并且只是暂停执行生成器函数。
 * 在一个表达式上下文(例如在一个赋值表达式的右侧)中使用yield，你必须使用圆括号把yield申明包围起来
 * 使用，函数yield返回，遍历获取值
 * 支持关联键值对,制定键名
 * 在没有参数传入的情况下被调用来生成一个 NULL值并配对一个自动的键名
 * 方法
     - array iterator_to_array ( Traversable $iterator [, bool $use_keys = true ] )
+
+## 生成器
+
+*  PHP 5.5 引入
+*  生成器不要求类实现Iterator接口，从而减轻了类的开销和负担。生成器会根据需求每次计算并产出需要迭代的值，对应用的性能有很大的影响：试想假如标准的PHP迭代器经常在内存中执行迭代操作，这要预先计算出数据集，性能低下；如果要使用特定方式计算大量数据，如操作Excel表数据，对性能影响更甚。使用生成器，即时计算并产出后续值，不占用宝贵的内存空间
+*  使用生成器迭代流资源（文件、音频等）
+*  生成器只是向前进的迭代器，这意味着不能使用生成器在数据集中执行后退、快进或查找操作，只能让生成器计算并产出下一个值
 
 ## 调用外部命令
 
@@ -1274,7 +1340,64 @@ $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 system("/usr/a.sh");
 ```
 
+## 过滤
+
+* 所有外部源都可能是攻击媒介，可能会（有意或无意）把恶意数据注入PHP脚本
+* 过滤输入:转义或删除不安全的字符
+    - HTML
+        + 使用htmlentities函数过滤HTML，该函数会将所有HTML标签字符（&、<、>等）转化为对应的HTML实体，以便在应用存储层取出后安全渲染,htmlentities的第一个参数表示要处理的HTML字符串，第二个参数表示要转义单引号，第三个参数表示输入字符串的字符集编码
+        + `html_entity_decode`:将所有HTML实体转化为对应的HTML标签
+        + 强大的过滤HTML功能，可以使用HTML Purifier库，这是一个很强健且安全的PHP库，专门用于使用指定规则过滤HTML输入
+    - SQL:SQL查询中一定不能使用未过滤的输入数据，如果要在SQL查询中使用输入数据，一定要使用PDO预处理语句
+* 验证数据
+    - 把`FILTER_VALIDATE_*`标识传递给filter_var函数，PHP提供了验证布尔值、电子邮件地址、浮点数、整数、IP、正则表达式和URL的标识
+    - 框架中的数据验证
+
+## 转义
+
+* htmlentities函数转移输出，该函数的第二个参数一定要使用ENT_QUOTES，让这个函数转义单引号和双引号，而且，还要在第三个参数中指定合适的字符编码（通常是UTF-8）
+
 ## 异常
+
+* PHP 的错误处理系统向面向对象演进后的产物。异常要先实例化，然后抛出，最后再捕获
+* 异常是 Exception 类的对象，在遇到无法修复的状况时抛出（例如，远程 API 无响应，数据库查询失败等），使用 try catch 代码块预测第三方代码可能抛出的异常
+* 出现问题时,预期并处理问题更为灵活的方式
+    - 可以主动出击，委托职责 抛出异常，把不知道怎么处理的特定情况交给上层开发者来处理
+    - 用于防守，预测潜在的问题，减轻其影响
+    - 可以就地处理，无需停止执行脚本
+* 内置的异常类及其子类如下：
+    - Exception
+    - ErrorException
+    - LogicException
+        + BadFunctionCallException
+        + BadMethodCallException
+        + DomainException
+        + InvalidArgumentException
+        + LengthException
+        + OutOfRangeException
+    - RuntimeException
+        + OutOfBoundsException
+        + OverflowException
+        + RangeException
+        + UnderflowException
+        + UnExpectedValueException
+* 异常处理: 允许注册一个全局异常处理程序，捕获所有未被捕获的异常。一定要设置一个全局异常处理程序，它是最后的安全保障。如果没有成功捕获并处理异常，通过这个措施可以给 PHP 应用的用户显示合适的错误信息。一般会在开发环境显示调试信息，而在线上环境显示对用户友好的提示信息
+* 使用自定义的异常处理程序替换现有的全局异常处理程序，代码执行完毕后，PHP 会礼貌性地建议你还原现有的异常处理程序，还原的方式是调用 `restore_exception_handler()` 函数
+
+## 错误
+
+* 级别:致命错误、运行时错误、编译时错误、启动错误和用户触发的错误等,最常见错误是由语法错误或未捕获异常导致的错误,使用 `error_reporting()` 函数或者在 php.ini 文件中使用` error_reporting` 指令
+* 使用 trigger_error 函数自己触发错误，然后使用自定义的错误处理程序进行处理
+* 编写运行在用户空间里的代码时最好使用异常。与错误不同的是，PHP 异常可以在 PHP 应用的任何层级抛出和捕获。异常提供的上下文信息比错误多，而且可以扩展最顶层的 Exception 类，创建自定义的异常子类。异常加上一个好的日志记录器（如 Monolog）比错误能解决更多的问题
+* 开发环境中，倾向于让 PHP 显示并记录所有错误信息，而在生产环境中我们会让 PHP 记录大部分错误信息，但不显示出来.规则：
+    - 一定要让 PHP 报告错误
+    - 在开发环境中要显示错误
+    - 在生产环境中不能显示错误
+    - 在开发环境和生成环境中都要记录错误
+* 使用自定义错误处理程序时需要注意的是 PHP 会把所有错误都交给错误处理程序处理，甚至包括错误报告（php.ini 中 error_reporting 设置）中排除的错误，因此，要在检查错误代码之后进行处理
+* 处理完成后，可以使用 `restore_error_handler()` 函数还原错误处理程序
+* 工具
+    - `composer require filp/whoops`
 
 ## 序列化
 
@@ -1325,6 +1448,17 @@ system("/usr/a.sh");
         + JSON_ERROR_UNSUPPORTED_TYPE 指定的类型，值无法编码。    PHP 5.5.0
         + JSON_ERROR_INVALID_PROPERTY_NAME    指定的属性名无法编码。 PHP 7.0.0
         + JSON_ERROR_UTF16    畸形的 UTF-16 字符，可能因为字符编码不正确
+
+## 安全
+
+* 原则
+    - 绝对不能知道用户的密码
+    - 绝对不要约束用户的密码
+    - 绝对不能通过电子邮件发送用户密码
+* 存储算法
+    - 最佳实践是计算密码的哈希值
+    - 加密和哈希不是一回事，加密事双向算法，加密的数据可以解密，而哈希是单向算法，哈希后的数据不能再还原成原始值，而且相同的数据得到的哈希值始终相同
+* 最安全的算法当属bcrypt，与md5和SHA1不同，bcrypt故意设计得很慢，bcrypt会自动加盐（salt），防止潜在的彩虹表攻击，bcrypt算法会花费大量时间反复处理数据，生成特别安全的哈希值。在这个过程中，处理数据的次数叫工作因子，工作因子的值越高，破解密码所需的时间越长，安全性越好。bcrypt算法永不过时，如果计算机运算速度变快了，我们只需提高工作因子的值
 
 ## 跨域请求
 
@@ -2163,8 +2297,12 @@ URL # 实际URL
     - memcache提供了面向过程及面向对象的接口，memached只支持面向对象的接口。 memcached 实现了更多的 memcached 协议。
     - memcached 支持 Binary Protocol，而 memcache 不支持，意味着 memcached 会有更高的性能。不过，还需要注意的是，memcached 目前还不支持长连接。
 * mongodb
-* Opcache:通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能，省去了每次加载和解析 PHP 脚本的开销，但是对于I/O开销如读写磁盘文件、读写数据库等并无影响
-    - 字节码(Byte Code)：一种包含执行程序比机器码更抽象的中间码，由一序列 op代码/数据对组成的二进制文件。 比如Java源码经编译后生成的字节码在运行时通过JVM(JVM针对不同平台有不同版本，Java程序在JVM中运行而称 为解释性语言Interpreted)再做一次转换生成机器码，才能够跨平台运行；C#也类似，EXE文件的执行依赖.NET Framework；HHVM(HipHop Virtual Machine，Facebook开源的PHP虚拟机)采用了JIT(Just In Time Just Compiling，即时编译)技术，在运行时编译字节码为机器码，让他们的PHP性能测试提升了一个数量级。 唯有C/C++编译生成的二进制文件可直接运行。
+* Opcache
+    - PHP 5.5.0开始，PHP内置了字节码缓存功能，名为Zend Opcache
+    - PHP是解释型语言，构建在Zend 虚拟机之上，PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码,每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码
+    - 通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能，省去了每次加载和解析 PHP 脚本的开销，对于I/O开销如读写磁盘文件、读写数据库等并无影响
+    - 字节码(Byte Code)：一种包含执行程序比机器码更抽象的中间码，由一序列 op代码/数据对组成的二进制文件
+    - HHVM(HipHop Virtual Machine，Facebook开源的PHP虚拟机)采用了JIT(Just In Time Just Compiling，即时编译)技术，在运行时编译字节码为机器码，让性能测试提升了一个数量级。 唯有C/C++编译生成的二进制文件可直接运行。
     - 机器码(Machine Code)：也被称为原生码(Native Code)，用二进制代码表示的计算机能直接识别和执行的一种机器指令的集合，它是计算机硬件结构赋予的操作功能。
 * pdo-pgsql
 * phalcon
@@ -2237,7 +2375,7 @@ pecl channel-update pecl.php.net
 
 ## 最佳实践
 
-*  配置文件（configuration file）:写在一个文件里。方便地适应开发环境的变化。配置文件通常包含以下信息：数据库参数、email地址、各类选项、debug和logging输出开关、应用程序常数
+*  配置文件（configuration file）:写在一个文件里,方便地适应开发环境的变化。配置文件通常包含以下信息：数据库参数、email地址、各类选项、debug和logging输出开关、应用程序常数
 * 名称空间（namespace）: 选择类和函数名的时候，必须很小心，避免出现重名。尽可能不要在类以外，放置全局性函数，类对内部的属性和方法，相当于有一层名称空间保护。如果你确实有必要声明全局性函数，那么使用一个前缀，比如dao_factory()、db_getConnection()、text_parseDate()等等
 * 数据库抽象层: PHP不提供数据库操作的通用函数，每种数据库都有一套自己的函数,不应该直接使用这些函数.数据库抽象层通常比系统本身的数据库函数，更易用一些
 * "值对象"（Value Object, VO）: 值对象（VO）在形式上，就像C语言的struct结构。它是一个只包含属性、不包含任何方法（或只包含很少方法）的类。一个值对象，就对应一个实体。它的属性，通常应该与数据库的字段名保持相同。此外，还应该有一个ID属性

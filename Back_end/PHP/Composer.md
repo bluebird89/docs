@@ -1,6 +1,6 @@
 # [composer/composer](https://github.com/composer/composer)
 
-Dependency Manager for PHP https://getcomposer.org/
+Dependency Manager for PHP https://getcomposer.org/  [中文](https://www.phpcomposer.com/)
 
 * 自动加载可以使用__autoload()和sql_autoload_register()两种机制
   - _autoload()有个缺点就是一个进程中只能定义一次
@@ -27,6 +27,12 @@ Dependency Manager for PHP https://getcomposer.org/
 
 * window配置：`C:\Users\XXX\AppData\Roaming\Composer\config.json`
 * composer config composer_home
+* 源
+  - [aliyun](https://mirrors.aliyun.com/composer/)
+  - [tencent](https://mirrors.cloud.tencent.com/composer/)
+  - [huaweicloud](https://mirrors.huaweicloud.com/repository/php/)
+  - [cnpkg.org](https://php.cnpkg.org)
+  - [laravel-china](https://packagist.laravel-china.org)
 
 ```sh
 # method 1
@@ -55,7 +61,7 @@ yum install composer
 sudo chown -R $USER .composer/
 
 ### 卸载composer:找到文件删除即可
-# config
+# ~/.composer/auth.json
 composer config -l # 查看
 composer config --list --global
 composer config -g repo.packagist composer https://packagist.phpcomposer.com # 全局配置
@@ -63,7 +69,6 @@ composer config repo.packagist composer https://packagist.phpcomposer.com # 项�
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 composer config -g --unset repos.packagist
-
 composer config --global --auth github-oauth.github.com myCorrectLongToken
 ```
 
@@ -189,7 +194,7 @@ composer config -g  repositories.tmo composer https://packages.tmogroup.asia/
 
 ## 使用
 
-* global 命令允许你在 COMPOSER_HOME 目录下执行命令
+* global 命令允许在 COMPOSER_HOME 目录下执行命令
 * 精确版本：示例： 1.0.2
 * 使用比较操作符可以指定包的范围。这些操作符包括：>，>=，<，<=，!=
 * 使用空格 或者逗号,表示逻辑上的与，使用双竖线||表示逻辑上的或。其中与的优先级会大于或
@@ -197,9 +202,9 @@ composer config -g  repositories.tmo composer https://packages.tmogroup.asia/
 * 可以使用通配符去定义版本: 1.0.*
 * 下一个重要版本操作符：使用波浪号~ : `~1.2`
 * 折音号^：例如，^1.2.3相当于>=1.2.3 <2.0.0
-* 镜像：安装包的数据（主要是 zip 文件）一般是从 github.com 上下载的，安装包的元数据是从 packagist.org 上下载的。
-* 考虑缓存，dist包优先:Composer会自动存档你下载的dist包(`~/.composer/cache/files/`)。默认设置下，dist包用于加了tag的版本，例如"symfony/symfony": "v2.1.4"，或者是通配符或版本区间，"2.1.\*"或">=2.2,<2.3-dev"
-* Github允许你下载某个git引用的压缩包。为了强制使用压缩包，而不是克隆源代码，可以使用install和update的--prefer-dist选项。
+* 镜像：安装包的数据（主要是 zip 文件）一般是从 github.com 上下载的，安装包的元数据是从 packagist.org 上下载的
+* 考虑缓存，dist包优先:Composer会自动存档下载dist包(`~/.composer/cache/files/`)。默认设置下，dist包用于加了tag的版本，例如"symfony/symfony": "v2.1.4"，或者是通配符或版本区间，"2.1.\*"或">=2.2,<2.3-dev"
+* Github允许下载某个git引用的压缩包。为了强制使用压缩包，而不是克隆源代码，可以使用install和update的--prefer-dist选项
 * 考虑修改，源代码优先:--prefer-source
 * composer remove 更新很多版本库
 
@@ -247,10 +252,6 @@ use Cocur\Slugify\Slugify;
 $slugify = new Slugify();
 echo $slugify->slugify('Hello World, this is a long sentence and I need to make a slug from it!');
 ```
-
-## [PSR(PHP Standards Recommendations)](http://www.php-fig.org/)
-
-组织制定的PHP语言开发规范，约定了很多方面的规则，如命名空间、类名 规范、编码风格标准、Autoload、公共接口等
 
 ## question
 
@@ -471,19 +472,46 @@ $dog = new Dog();
 $cat = new \Animal\Cat();
 ```
 
-## 源
+## 创建组件
 
-* [aliyun](https://mirrors.aliyun.com/composer/)
-* [tencent](https://mirrors.cloud.tencent.com/composer/)
-* [huaweicloud](https://mirrors.huaweicloud.com/repository/php/)
-* [cnpkg.org](https://php.cnpkg.org)
-* [laravel-china](https://packagist.laravel-china.org)
+* 确定厂商名称和包名，即形如laravel/framework这样，要确保其全局唯一性，在Packagist中不存在
+* 系统结构基本上是确定的：
+  - src：存放组件源代码
+  - tests：存放组件测试代码
+  - composer.json：Composer配置文件，用于描述组件，声明组件依赖以及自动加载配置等
+    + name：组件的厂商名和包名，也是Packagist中的组件名
+    + description：简要说明组件
+    + keywords：描述属性的关键字
+    + homepage：组件网站URL
+    + license：PHP组件采用的软件许可证（更多软件许可证参考：http://choosealicense.com/）
+    + authors：作者信息数组
+    + support：组件用户获取技术支持的方式
+    + require：组件自身依赖的组件
+    + require-dev：开发这个组件所需的依赖
+    + suggest：建议安装的组件
+    + autoload：告诉Composer自动加载器如何自动加载这个组件
+  - README.md：关于组件的相关信息、使用文档说明、软件许可证等
+    + 组件的名称和描述
+    + 安装说明
+    + 使用说明
+    + 测试说明
+    + 贡献方式
+    + 支持资源
+    + 作者信息
+    + 软件许可证
+
+  - CONTRIBUTING.md：告知别人如何为这个组件做贡献
+  - LICENSE：纯文本文件，声明组件的软件许可证
+  - CHANGELOG.md：列出组件在每个版本中引入的改动
+
+```sh
+composer init
+```
 
 ## 参考
 
-* [官网](https://getcomposer.org/)
-* [中文](https://www.phpcomposer.com/)
 * [Packagist](https://packagist.org):The PHP Package Repository
+* [PSR(PHP Standards Recommendations)](http://www.php-fig.org/):组织制定的PHP语言开发规范，约定了很多方面的规则，如命名空间、类名规范、编码风格标准、Autoload、公共接口等
 
 ## 工具
 
