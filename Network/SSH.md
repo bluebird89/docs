@@ -28,6 +28,8 @@ chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys
 
 scp ~/.ssh/id_rsa.pub hadoop@192.168.1.134:~/
+scp ~/.ssh/id_rsa.pub deploy@your_server_ip_address:
+
 cat ~/id_rsa.pub >> ~/.ssh/authorized_keys
 cat ~/.ssh/id_rsa.pub | ssh demo@198.51.100.0 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >>  ~/.ssh/authorized_keys"
 

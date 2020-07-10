@@ -64,8 +64,9 @@
 
 * [下载JDK(Java Development Kit)](https://www.oracle.com/java/technologies/javase-downloads.html)
 * 目录
-    - CLASS_PATH JVM用到的一个环境变量，用来指示JVM如何搜索class,保证class文件能够在任意目录下运行.启动JVM时设置classpath才是推荐的做法,java命令传入-classpath或-cp参数,默认classpath为
+    - CLASS_PATH JVM用到的一个环境变量，用来指示JVM如何搜索class,保证class文件能够在任意目录下运行.启动JVM时设置classpath才是推荐的做法,java命令传入-classpath或-cp参数
     - PATH 保证javac可以在任意目录下运行
+    - 强烈不推荐在系统环境变量中设置classpath，那样会污染整个系统环境。在启动JVM时设置classpath才是推荐的做法。实际上就是给java命令传入-classpath或-cp参数
 * Mac
     - 默认安装目录 `/Library/Java/JavaVirtualMachines/`
 * bin目录下可执行文件：
@@ -96,6 +97,12 @@ javac -version
 sudo add-apt-repository ppa:linuxuprising/java
 sudo apt install oracle-java14-installer
 sudo apt-get install oracle-java14-set-default
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+# export JRE_HOME==${JAVA_HOME}/jre
+export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+# export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$PATH
 
 ## JAVA_HOME Environment Variable配置 etc/environment # 添加 JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 source /etc/environment
@@ -1020,7 +1027,8 @@ JavaEE/JDBC/Weblogic
   - [插件库](https://plugins.jetbrains.com/idea)
   - [Cloud Toolkit](https://www.aliyun.com/product/cloudtoolkit): 一款 IDE 插件，可以帮助开发者更高效地开发、测试、诊断并部署应用
 * 测试
-  - [alibaba/arthas](https://github.com/alibaba/arthas):Alibaba Java Diagnostic Tool Arthas/Alibaba Java诊断利器Arthas https://alibaba.github.io/arthas/
+  - [alibaba/arthas](https://github.com/alibaba/arthas):Alibaba Java Diagnostic Tool Arthas/Alibaba Java诊断利器 Arthas https://alibaba.github.io/arthas/
+    +
   - [mockito/mockito](https://github.com/mockito/mockito):Most popular Mocking framework for unit tests written in Java http://mockito.org
 * datetime
   - [JodaOrg/joda-time](https://github.com/JodaOrg/joda-time):Joda-Time is the widely used replacement for the Java date and time classes prior to Java SE 8. http://www.joda.org/joda-time/

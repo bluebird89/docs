@@ -681,6 +681,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * 开源
 	- [CherryTree](http://www.giuspen.com/cherrytree/):A hierarchical note taking application, featuring rich text and syntax highlighting, storing data in a single XML or SQLite file
 * Apostrophe:An elegant, distraction-free markdown editor
+* [ Zettlr / Zettlr ](https://github.com/Zettlr/Zettlr): A Markdown Editor for the 21st century. www.zettlr.com/
 
 ## 工具
 
