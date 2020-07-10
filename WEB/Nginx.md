@@ -222,6 +222,41 @@ sudo ./configure --user=nginx --group=nginx --sbin-path=/usr/sbin/nginx --conf-p
 --with-ld-opt='-Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now'
 --add-module= "rtmp包的路径"
 
+./configure \
+--prefix=/data/service/nginx \
+--sbin-path=/data/service/nginx/sbin/nginx \
+--conf-path=/data/service/nginx/conf/nginx.conf \
+--pid-path=/data/service/nginx/logs/nginx.pid \
+--lock-path=/data/service/nginx/lock/nginx.lock \
+--error-log-path=/data/service/nginx/logs/error.log \
+--http-log-path=/data/service/nginx/logs/access.log \
+--http-scgi-temp-path=/data/service/nginx/scgi \
+--http-uwsgi-temp-path=/data/service/nginx/uwsgi \
+--http-proxy-temp-path=/data/service/nginx/proxy \
+--http-fastcgi-temp-path=/data/service/nginx/fastcig \
+--http-client-body-temp-path=/data/service/nginx/body \
+--user=www-data \
+--group=www-data \
+--with-ipv6 \
+--with-debug \
+--with-file-aio \
+--with-rtsig_module \
+--with-http_ssl_module \
+--with-http_flv_module \
+--with-http_mp4_module \
+--with-http_sub_module \
+--with-http_dav_module \
+--with-http_xslt_module \
+--with-http_geoip_module \
+--with-http_realip_module \
+--with-http_addition_module \
+--with-http_gzip_static_module \
+--with-http_secure_link_module \
+--with-http_degradation_module \
+--with-http_stub_status_module \
+--with-http_random_index_module \
+--with-http_image_filter_module
+
 ./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -fPIC' --with-ld-opt='-Wl,-z,relro -Wl,-z,now -pie' --add-module=/opt/download/ngx_devel_kit-0.3.0 --add-module=/opt/download/lua-nginx-module-0.10.9rc7
 
   nginx path prefix: "/usr/share/nginx"

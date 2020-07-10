@@ -53,7 +53,7 @@ sudo apt install mysql-server
 ## 卸载
 sudo apt remove mysql-server mysql-common
 sudo apt autoremove mysql-server
-sudo mysql_ssl_rsa_setup --uid=mysql #
+sudo mysql_ssl_rsa_setup --uid=mysql
 sudo rm /var/lib/mysql/ -R
 sudo rm /etc/mysql/ -R
 
@@ -112,6 +112,7 @@ cp support-files/mysql.server /data/3307/mysql
 # dpkg: error processing package mariadb-server-10.0 (--configure):subprocess installed post-installation script returned error exit status 1
 sudo apt-get remove --purge mysql*
 sudo apt-get remove --purge mysql
+
 sudo apt-get remove --purge mariadb
 sudo apt-get remove --purge mariadb*
 sudo apt-get --purge remove mariadb-server
@@ -321,7 +322,6 @@ bind-address = 127.0.0.1 # 将限制来自远程机器的访问，只接受来�
 local-infile=0 # 使用下面的指令以防止在 [mysqld] 部分从 MySQL 中访问底层文件系统。
 
 [client]
-datadir="F:/wamp/mysql/data"
 default-character-set = utf8
 default-collation=utf8_general_ci
 port = 3306

@@ -49,6 +49,22 @@ make
 make install
 ```
 
+## 配置
+
+```sh
+echo ulimit -n 65535 >>/etc/profile
+source /etc/profile
+
+ulimit -n
+
+# IO调度器
+cat /sys/block/nvme0n1/queue/scheduler
+
+# /etc/sysctl.conf
+vm.swappiness = 0
+sysctl -
+```
+
 ## 重置root密码
 
 ```sh
@@ -68,7 +84,22 @@ ps -ef |grep mysql  ##显示mysql现有的进程
 kill pid  ##删除mysql现有进程
 ```
 
-## innobackupex
+##  XtraBackup
+
+* an open-source hot backup utility for MySQL that doesn't lock your database during the backup. It can back up data from InnoDB, XtraDB and MyISAM tables on MySQL/Percona Server/MariaDB servers, and has many advanced features.
+* 一款基于MySQL的服务器的开源热备份实用程序，在备份过程中不会锁定数据库
+* 可以备份来自MySQL5.1，5.5，5.6和5.7服务器上的InnoDB，XtraDB和MyISAM表的数据，以及带有XtraDB的Percona服务器
+* /usr/share/percona-xtrabackup-test-24
+* 功能：
+	- 在不暂停数据库的情况下创建热的InnoDB备份
+	- 进行MySQL的增量备份
+	- 将压缩的MySQL备份传输到另一台服务器
+	- 在MySQL服务器之间移动表格
+	- 轻松创建新的MySQL复制从站
+	- 在不增加服务器负载的情况下备份MySQL
+* 包含两个工具：
+	- xtrabackup：是用于热备份innodb, xtradb表中数据的工具，不能备份其他类型的表(Myisam表)，也不能备份数据表结构。
+	- innobackupex：是将xtrabackup进行封装的perl脚本，可以备份和恢复MyISAM表以及数据表结构
 
 ```sh
 sudo yum install http://www.percona.com/downloads/percona-release/redhat/0.1-4/percona-release-0.1-4.noarch.rpm
@@ -82,21 +113,12 @@ sudo apt-get install percona-xtrabackup-24
 innobackupex --user=root --password='Passw0rd!' /backups/
 innobackupex --user=root --password='Passw0rd!' --parallel=8 /backups/
 innobackupex --user=root --password='Passw0rd!' --parallel=8 --compress --compress-threads=8 /backups/
+innobackupex --defaults-file=/etc/my.cnf --user=root --password='password' /backup/20180423/
 innobackupex --decompress /backups/2017-04-29_21-18-04/
 innobackupex --apply-log --use-memory=4G /backups/2017-04-29_21-18-04
+innobackupex --defaults-file=/etc/my.cnf  --apply-log /backup/20180423/2018-04-18_00-58-36/
+innobackupex --defaults-file=/etc/my.cnf  --copy-back /backup/20180423/2018-04-18_00-58-36/
 ```
-
-## XtraBackup
-
-* 一款基于MySQL的服务器的开源热备份实用程序，在备份过程中不会锁定数据库
-* 可以备份来自MySQL5.1，5.5，5.6和5.7服务器上的InnoDB，XtraDB和MyISAM表的数据，以及带有XtraDB的Percona服务器
-* 功能：
-	- 在不暂停数据库的情况下创建热的InnoDB备份
-	- 进行MySQL的增量备份
-	- 将压缩的MySQL备份传输到另一台服务器
-	- 在MySQL服务器之间移动表格
-	- 轻松创建新的MySQL复制从站
-	- 在不增加服务器负载的情况下备份MySQL
 
 ## 扩展
 

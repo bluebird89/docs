@@ -10,7 +10,28 @@
 来我的怀里 或者 让我住进你的心里 默然 相爱 寂静 欢喜
 ```
 
+## 给你 文/余秀华
 
+```
+一家朴素的茶馆， 面前目光朴素的你皆为我喜欢
+你的胡子，昨夜辗转的面色让我忧伤
+我想带给你的，一路已经丢失得差不多
+除了窗外凋谢的春色
+遇见你以后，你不停地爱别人，一个接一个
+我没有资格吃醋，只能一次次逃亡
+所以一直活着，是为等你年暮
+等人群散尽，等你灵魂的火焰变为灰烬
+我爱你。我想抱着你
+抱你在人世里被销蚀的肉体
+我原谅你为了她们一次次伤害我
+
+因为我爱你
+我也有过欲望的盛年， 有过身心俱裂的许多夜晚
+
+但是我从未放逐过自己
+我要我的身体和心一样干净
+尽管这样，并不是为了见到你
+```
 
 ```
 I went to the woods because I wished to live deliberately, to front only the essential facts of life, and see if I could not learn what it had to teach, and not, when I came to die, discover that I had not lived. I did not wish to live what was not life, living is so dear; nor did I wish to practise resignation, unless it was quite necessary. I wanted to live deep and suck out all the marrow of life, to live so sturdily and Spartan-like as to put to rout all that was not life, to cut a broad swath and shave close, to drive life into a corner, and reduce it to its lowest terms, and, if it proved to be mean, why then to get the whole and genuine meanness of it, and publish its meanness to the world; or if it were sublime, to know it by experience, and be able to give a true account of it in my next excursion. For most men, it appears to me, are in a strange uncertainty about it, whether it is of the devil or of God, and have somewhat hastily concluded that it is the chief end of man here to "glorify God and enjoy him forever."

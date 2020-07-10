@@ -606,6 +606,7 @@ open http://127.0.0.1:8000
     - (https://github.com/aerialls/Plum)[Plum]: 一个部署库
     - (https://github.com/tamagokun/pomander)[Pomander]: 一个PHP应用部署工具
     - (https://github.com/rocketeers/rocketeer)[Rocketeer]: PHP世界里的一个快速简单的部署器
+    - [Capistrano](link)
 * 国际化和本地化 Internationalisation and Localisation 国际化(I18n)和本地化(L10n)的库
     - [Cake I18n](https://github.com/cakephp/i18n): 消息国际化和日期和数字的本地化 (CP)
 * 第三方API Third Party APIs 访问第三方API的库

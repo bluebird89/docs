@@ -63,6 +63,13 @@ kubectl
 export KUBECONFIG=~/.kube/config
 ```
 
+## kubeadm
+
+```sh
+kubeadmin init
+
+kubeadm reset
+```
 
 
 ```
