@@ -96,6 +96,12 @@ launchctl unload com.philandro.anydesk
 
 # 添加服务
 launchctl load -w ~/Library/LaunchAgents/memcached.plist
+
+## sudo免输入密码
+sudo chmod u+w /etc/sudoers
+sudo vi /etc/sudoers
+%admin ALL=(ALL) NOPASSWD: ALL
+sudo chmod u-w /etc/sudoers
 ```
 
 ### 命令行
