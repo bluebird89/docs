@@ -1,11 +1,35 @@
 # Service Mesh 服务网格
 
-* Service Mesh 本质上就是微服务的动态链接器（Dynamic Linker）。它的基础是一个网络代理，这个网络代理会接管微服务的网络流量，然后通过一个中央控制面板进行管理，将这些流量转发到该去的地方，并在这个代理的基础之上，扩展出一系列的流量监控、限流、熔断甚至是灰度发布、分布式跟踪等能力，而不需要应用本身做出任何修改，让开发者摆脱了 SDK 之苦，也避免了由于 SDK 使用不当造成的一系列问题。同时，这个代理工作是在网络层，一般情况下也不会成为性能瓶颈。
+* Service Mesh 本质上就是微服务的动态链接器（Dynamic Linker）。基础是一个网络代理，这个网络代理会接管微服务的网络流量，然后通过一个中央控制面板进行管理，将这些流量转发到该去的地方，并在这个代理的基础之上，扩展出一系列的流量监控、限流、熔断甚至是灰度发布、分布式跟踪等能力，而不需要应用本身做出任何修改，让开发者摆脱了 SDK 之苦，也避免了由于 SDK 使用不当造成的一系列问题。同时，这个代理工作是在网络层，一般情况下也不会成为性能瓶颈。
+* A service mesh is a dedicated infrastructure layer for handling
+service-to-service communication. It’s responsible for the
+reliable delivery of requests through the complex topology of
+services that comprise a modern, cloud native application. In
+practice, the service mesh is typically implemented as an array
+of lightweight network proxies that are deployed alongside
+application code, without the application needing to be
+aware
 * 服务网格（ Service Mesh ）是解决微服务之间的网络问题和可观测性问题的(事实)标准，并且正在走向标准化
-    - 应用程序间通讯的中间层
+    - 应用程序间通讯中间层
     - 轻量级网络代理
     - 应用程序无感知
     - 解耦应用程序的重试/超时、监控、追踪和服务发现
+* control plane
+* 功能
+    - 流量控制: (路由,流量转移,超时重试, 熔断,故障注入,流量镜像)
+    - 策略 (限流、黑白名单)
+    - 网络安全 (授权与身份认证)
+    - 可观察性 (指标、日志、追踪)
+* 和 Kubernetes 关系
+* 和API 网关
+* 标准
+    - UDPA
+    - SMI
+* 产品
+    - linkerd
+    - envoy:数据平面
+    - lstio：增加控制平面，收购enovy
+    - AWS：App Mesh
 
 ## 历程
 
@@ -100,3 +124,5 @@
 ## 参考
 
 * [ServicemeshCN/awesome-servicemesh](https://github.com/ServicemeshCN/awesome-servicemesh):A curated list for awesome service mesh architectures https://servicemesh.gitbooks.io/aweso…
+* [ geektime-geekbang / geektime-servicemesh ](https://github.com/geektime-geekbang/geektime-servicemesh)
+* Pattern:service Mesh
