@@ -66,6 +66,7 @@ deactivate
 
 * [深度学习框架Tensorflow学习与应用](https://www.bilibili.com/video/av20542427)
 * [sjchoi86/Tensorflow-101](https://github.com/sjchoi86/Tensorflow-101):TensorFlow Tutorials
+* [ DjangoPeng / tensorflow-101 ](https://github.com/DjangoPeng/tensorflow-101):《TensorFlow 快速入门与实战》和《TensorFlow 2 项目进阶实战》课程代码与课件
 * [Kyubyong/transformer](https://github.com/Kyubyong/transformer):A TensorFlow Implementation of the Transformer: Attention Is All You Need
 * [aymericdamien/TensorFlow-Examples](https://github.com/aymericdamien/TensorFlow-Examples):TensorFlow Tutorial and Examples for Beginners with Latest APIs https://tensorflow.org
 * [osforscience/TensorFlow-Course](https://github.com/osforscience/TensorFlow-Course):Simple and ready-to-use tutorials for TensorFlow

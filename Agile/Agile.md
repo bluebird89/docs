@@ -290,6 +290,8 @@
 * 《Clean Agile》
 * The Unicorn Project
 * 软件需求与可视化模型
+* 精益创业
+    - MVP：优先最小化可行产品
 
 ## 工具
 
