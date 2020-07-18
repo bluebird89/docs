@@ -245,11 +245,13 @@ ssb   4096R/42B317FD4BA89E7A 2016-03-10
 
 git config --global user.signingkey 3AA5C34371567BD2 # git配置,commit生效
 git config --global commit.gpgsign true
+git config --global user.email "kend56@qq.com"
 
 gpg --armor --export 3AA5C34371567BD2 | Hubot  # get the public key,add to github
 
 git commit -S -m your commit message
 git tag -s -m "GPG-sign tag"
+git tag -u "886C8FB9" -s v0.0.1 -m "说明"
 
 git log --show-signature # 查看本地commit有签名
 

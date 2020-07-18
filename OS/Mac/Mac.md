@@ -304,6 +304,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * elpass
 * 迷你天气：macOS 天气应用，在 Dock 栏知实时天气
 * Things 3
+* [ MonitorControl / MonitorControl ](https://github.com/MonitorControl/MonitorControl):desktop_computer Control your external monitor brightness & volume on your Mac
 * [mind node](https://mindnode.com/)
 * Clearview - 支持 PDF, EPUB, CHM, MOBI 的免费阅读器
 * Moment：常驻于 macOS 菜单栏和通知中心的倒数日工具，又不止于倒数日。我们还支持了纪念日、时间进度条、你关心的人的年龄，每一个事件都支持单独添加到菜单栏
