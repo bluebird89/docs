@@ -3762,6 +3762,7 @@ include snippets/phpmyadmin.conf; # add to one domain
     + navicat
         * [DoubleLabyrinth/navicat-keygen](https://github.com/DoubleLabyrinth/navicat-keygen):A keygen for Navicat
         * Navicat Premium for Mac
+    + [TablePlus](https://tableplus.com/)
 * ER图
     - PowerDesigner
 * [dbcli/mycli](https://github.com/dbcli/mycli):A Terminal Client for MySQL with AutoCompletion and Syntax Highlighting. http://mycli.net

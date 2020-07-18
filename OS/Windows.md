@@ -291,9 +291,11 @@ sudo apt-get install zeal
 
 ```
 # PowerShell as Administrator
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-restart system
-cmd + r input:bash download ubuntu
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+wsl --set-default-version 2
+wsl -l -v
+wsl --set-version Ubuntu-18.04 2 # reboot
 ```
 
 ## [ microsoft/terminal](https://github.com/microsoft/terminal)
