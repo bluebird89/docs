@@ -2,9 +2,9 @@
 
 Vagrant is a tool for building and distributing development environments. https://www.vagrantup.com
 
-* 统一开发环境。一次配置打包，统一分发给团队成员，统一团队开发环境
-* 多个相互隔离开发环境。可以在不用box里跑不同的语言，或者编译安装同一语言不同版本，搭建多个相互隔离的开发环境，卸载清除时也很快捷轻松。
-* windows下避免虚拟机安装的麻烦
+* 统一开发环境：一次配置打包，统一分发给团队成员，统一团队开发环境
+* 多个相互隔离开发环境：可以在不用box里跑不同的语言，或者编译安装同一语言不同版本，搭建多个相互隔离的开发环境，卸载清除时也很快捷轻松
+* windows下避免虚拟机安
 
 ## 安装
 
@@ -27,6 +27,9 @@ TCP  127.0.0.1:80   0.0.0.0:0   LISTENING      2448
 # 看到了吗，端口被进程号为2448的进程占用，继续执行下面命令
 C:\>tasklist|findstr "2448"
 thread.exe  2016 Console    0    16,064 K
+
+vagrant plugin install --plugin-clean-sources --plugin-source https://gems.ruby-china.com/ vagrant-disksize
+alias vagrant-plugin-install='vagrant plugin install --plugin-clean-sources --plugin-source'
 ```
 
 ## box管理
@@ -45,6 +48,9 @@ vagrant box add hahaha ~/box/package.box # 加载本地文件(package包)
 vagrant box add precise64 http://files.vagrantup.com/precise64.box
 # The specified checksum type is not supported by Vagrant: sha512. Vagrant supports the following checksum types: md5, sha1, sha256
 # Upgrade vagrant version to 2.2.6 and up
+
+# ubuntu 18.04 LTS:
+vagrant box add https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cloud-images/bionic/current/bionic-server-cloudimg-amd64-vagrant.box --name ubuntu18
 
 vagrant box remove ubuntu/trusty64  --box-version=20170810.0.0  # 移除镜像,指定版本
 vagrant box repackage  # 重新打包
@@ -87,6 +93,10 @@ vagrant box add metadata.json
 vagrant -h
 
 vagrant init hashicorp/precise64  # 用 hashicorp/precise64 进行 box 初始化实例，自动帮你生成vagrantfile，默认base
+vagrant init ubuntu-bionic https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cloud-images/bionic/current/bionic-server-cloudimg-amd64-vagrant.box
+vagrant init centos7 https://mirrors.ustc.edu.cn/centos-cloud/centos/7/vagrant/x86_64/images/CentOS-7.box
+
+config.vbguest.iso_path = "https://mirrors.tuna.tsinghua.edu.cn/virtualbox/%{version}/VBoxGuestAdditions_%{version}.iso"
 
 vagrant global-status --prune # 查看实例
 vagrant status  # 查看虚拟机运行状态
@@ -109,6 +119,8 @@ vagrant package (--base web --output web.box --vagrantfile Vagrantfile) # 打包
 vagrant provision --provision-with chef
 
 vagrant plugin install vagrant-vbguest # 插件安装
+
+vagrant global-status --prune
 ```
 
 ## 配置
@@ -323,7 +335,7 @@ vagrant up
 
 * [dotless-de/vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest):A Vagrant plugin to keep your VirtualBox Guest Additions up to date
 * [scourgen/Vagrant-PHP-Stack](https://github.com/scourgen/Vagrant-PHP-Stack):A kick-ass Vagrant Stack for PHP developer
-* puphpet: 图形化脚本生成
+* [puphpet](https://github.com/puphpet/puphpet): Vagrant/Puppet GUI
 
 ## 参考
 

@@ -950,6 +950,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [ urfave / cli ](https://github.com/urfave/cli):A simple, fast, and fun package for building command line apps in Go
 * 语法检测
     - [mgechev/revive](https://github.com/mgechev/revive):🔥 ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint. https://revive.run
+    - [ golangci / golangci-lint ](https://github.com/golangci/golangci-lint):Fast linters Runner for Go
 * ORM
     - [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io
     - [jinzhu/gorm](https://github.com/jinzhu/gorm):The fantastic ORM library for Golang, aims to be developer friendly https://gorm.io

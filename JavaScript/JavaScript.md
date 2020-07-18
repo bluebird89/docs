@@ -3042,6 +3042,7 @@ console.dir()   // 打印一条以三角形符号开头的语句，可以点击�
   - [js-cookie/js-cookie](https://github.com/js-cookie/js-cookie):A simple, lightweight JavaScript API for handling browser cookies
 * spreadsheet
   - [myliang/x-spreadsheet](https://github.com/myliang/x-spreadsheet):a javascript spreadsheet for web
+  - [ handsontable / handsontable ](https://github.com/handsontable/handsontable):Handsontable is a JavaScript/HTML5 data grid with spreadsheet look & feel. Available for React, Vue and Angular. https://handsontable.com
 * money
   - [sarahdayan/dinero.js](https://github.com/sarahdayan/dinero.js):💸 An immutable library to create, calculate and format money. https://sarahdayan.github.io/dinero.js
 * clipboard

@@ -318,6 +318,8 @@ ipconfig # 显示每个已经配置了的接口的IP地址、子网掩码和缺�
 ipconfig /all # 为DNS和WINS服务器显示它已配置且所有使用的附加信息，并且能够显示内置于本地网卡中的物理地址（MAC）
 
 traceroute google.com
+
+nsloop
 ```
 
 ## Socket 套接字
