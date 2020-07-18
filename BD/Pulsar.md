@@ -23,3 +23,5 @@ Apache Pulsar is an open-source distributed pub-sub messaging system originally 
 * 简单的跨域复制:跨域复制是 Pulsar 的拿手好戏。Pulsar 在设计之初就考虑到了这个特性，配置也很容易。要搭建一个全球化的分布式 Pulsar 集群，并不需要你拥有博士学位。
 * 稳定的表现:一些基准测试表明，Pulsar 可以在提供较高吞吐量的同时保持较低的延迟。
 * 完全开源:Pulsar 提供了很多与 Kafka 相似的特性，比如跨域复制、流式消息处理（Pulsar Function）、连接器（Pulsar IO）、基于 SQL 的主题查询（Pulsar SQL）、schema registry，还有一些 Kafka 没有的特性，比如分层存储和多租户，所有这些特性都是开源的。
+
+* [streamnative](https://streamnative.io/):Cloud-Native Event Streaming powered by Apache Pulsar

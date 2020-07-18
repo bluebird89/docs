@@ -1082,6 +1082,7 @@ source ~/.bash_profile
 * Sysdig是一个容器排错工具，它可以捕获系统调用和来自于Linux内核的事件。简单的说，对于整个集群，Sysdig就是strace + tcpdump + htop + iftop + lsof + wireshark。
 * [rancher / k3s](https://github.com/rancher/k3s):Lightweight Kubernetes https://k3s.io/
     - `curl -sfL https://get.k3s.io | sh -`
+* [ crossplane / crossplane ](https://github.com/crossplane/crossplane):Manage any infrastructure your applications need directly from Kubernetes https://crossplane.io
 
 ## 参考
 

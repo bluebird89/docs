@@ -41,16 +41,12 @@ Connect, secure, control, and observe services. https://istio.io
 cd /usr/local/src/
 wget https://github.com/istio/istio/releases/download/1.5.1/istio-1.5.1-linux.tar.gz
 tar xf istio-1.5.1-linux.tar.gz
-
-cd istio-1.5.1
+#  ~/.bashrc
+PATH="$PATH:/usr/local/src/istio-1.5.1/bin"
+source /usr/local/src/istio-1.5.1/tools/istioctl.bash # 参数自动补全
+source ~/.bashrc
 
 curl -L https://istio.io/downloadIstio | sh -
-
-#  ~/.bashrc
-PATH="$PATH:/usr/local/src/istio-1.5.1/bin" # 将 istioctl 命令添加到环境变量中
-source /usr/local/src/istio-1.5.1/tools/istioctl.bash # 参数自动补全
-
-source ~/.bashrc
 ```
 
 ## 原理
