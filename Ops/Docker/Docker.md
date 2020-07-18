@@ -149,26 +149,27 @@ sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent softwa
 
 # Add Docker's official GPG key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs)   stable"
+
 curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
-
-# set up the stable repository
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs)   stable"
 sudo add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+
 sudo add-apt-repository "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"  # aliyun
 
+sudo apt-get install docker-ce docker-ce-cli containerd.io
 ## Install Docker CE.
 apt-get update && apt-get install -y \
   containerd.io=1.2.10-3 \
   docker-ce=5:19.03.4~3-0~ubuntu-$(lsb_release -cs) \
   docker-ce-cli=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)
 
-sudo apt-get install docker-ce docker-ce-cli containerd.io
-
 # Setup daemon.
 cat > /etc/docker/daemon.json <<EOF
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
+  "registry-mirrors": ["https://usydjf4t.mirror.aliyuncs.com",
+"https://registry.docker-cn.com"]
   "log-driver": "json-file",
   "log-opts": {
     "max-size": "100m"
@@ -177,11 +178,7 @@ cat > /etc/docker/daemon.json <<EOF
 }
 EOF
 
-sudo systemctl start docker
-
 mkdir -p /etc/systemd/system/docker.service.d
-
-# Restart docker.
 systemctl daemon-reload
 systemctl restart docker
 

@@ -379,7 +379,6 @@ sudo visudo
     + Nylas N1：超好用的跨平台电子邮件客户端
     + Thunderbird：can  add addon to manage rss
       * Lightning Calendar
-      *
   - 系统
     + [albert](https://albertlauncher.github.io/):Access everything with virtually zero effort
     + Gtile:分屏工具
@@ -396,9 +395,8 @@ sudo visudo
     + [Krita](https://download.kde.org/stable/krita/4.3.0/krita-4.3.0-x86_64.appimage) — A Digital Painting App
   - 社交
     + Franz 是一个即时消息客户端，它将聊天和信息服务结合到了一个应用中。它是一个现代化的即时消息平台，在单个应用中支持了 Facebook Messenger、WhatsApp、Telegram、微信、Google Hangouts、 Skype
-    + [Jitsy](https://jitsi.org/):More secure, more flexible, and
+    + [Jitsy](https://jitsi.org/):More secure, more flexible, and completely free video conferencing
   - Remmina：Remote Desktop Client
-completely free video conferencing
     + Viber：跨平台的 Skype 替代品
     + [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
   - [Synaptic](http://www.nongnu.org/synaptic/)： a graphical package management program for apt  `sudo apt install synaptic`

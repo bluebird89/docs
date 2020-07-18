@@ -1036,7 +1036,7 @@ Hybrid App开发
     - OAuth 的认证方案：要注意的是首次认证不是使用已注册的 AppID 和 AppToken，而是使用用户名和密码。
     - 基于 Token/JWT 的认证方案：JWT 是相对较为成熟，也得到多数人认可的一种。从 jwt.io 上可以找到各种技术栈的 JWT 实现，应用起来也比较方便。
 
-```js
+```
 var express = require('express')
 var proxy = require('http-proxy-middleware')
 var app = express()
@@ -1091,28 +1091,20 @@ app.listen(80, function () {
 * 业务处理的设计谁来主导
 * Cookie/Session 的方式虽然可用，但并不是特别合适，相对来说，基于 Token 的认证则更适合一些。采用基于 Token 的认证就意味着后端的认证部分需要重写
 
-Macro Task 和 Micro Task 
+Macro Task 和 Micro Task
 
 ## 部署
 
 前后端不同端口
 后端允许跨域
 
-## 服务端渲染
+## 服务端渲染 SSR(Server Side Render)
 
-服务端渲染也称作 SSR(Server Side Render) 。不同于客户端渲染，服务端渲染会在后端把页面 DOM 的结构树转成 String 吐出来，然后到前端（如浏览器）解析渲染。
-
-优势
-
-SEO
-
-现在单页面应用由于体验好，广泛流行。但单页应用的做法往往是后端只吐出一个页面的框架，里面没有具体内容，然后前端通过 Ajax 动态拉取内容。这就导致爬虫去访问你的站点时，服务端返回给爬虫的只有一个架子，爬虫无法抓取页面关键词之类等信息。
-
-首屏直出
-
-意思很好理解，就是在用户首次访问的时候不用再看到菊花在那里转呀转 (Loading...) ，首屏就可以看到页面所有内容。另外可以在服务端通过 HTTP 接口合并请求等方式，让页面打开的首屏时间缩短。
-
-Node 服务端渲染有什么特别？
+* 不同于客户端渲染，服务端渲染会在后端把页面 DOM 的结构树转成 String 吐出来，然后到前端（如浏览器）解析渲染。
+* 优势
+    - SEO: 现在单页面应用由于体验好，广泛流行。但单页应用的做法往往是后端只吐出一个页面的框架，里面没有具体内容，然后前端通过 Ajax 动态拉取内容。这就导致爬虫去访问你的站点时，服务端返回给爬虫的只有一个架子，爬虫无法抓取页面关键词之类等信息。
+    - 首屏直出:在用户首次访问的时候不用再看到菊花在那里转呀转 (Loading...) ，首屏就可以看到页面所有内容。另外可以在服务端通过 HTTP 接口合并请求等方式，让页面打开的首屏时间缩短。
+* Node 服务端渲染有什么特别？
 
 同构（isomorphic）！我想这个应该是用 Node 做服务端渲染最大的优势。那么什么是同构呢？
 
@@ -1140,17 +1132,10 @@ node require 默认就只支持加载 .json .js 等几种文件，所以如何�
 
 png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scss/css的话，用 css in js 的方式写。
 
-总结
-
-Node服务端渲染好处多多，但除了上述技术性的问题需要解决外，仍然有些线上问题需要注意。
-
-首当其冲的就是服务器 cpu 过高问题，因为现在页面结构是在服务端以 renderToString 的方式输出，所以页面请求路由会涉及到大量的计算。这就会导致如果页面并发高一点的话，会出现 cpu 过高的问题。
-
-另外在服务端可没有什么 window 、 document 对象，这些东西也需要去 hook 掉；在 React 应用中，componentDidMount 等生命周期函数也不会在服务端触发；定时器记得及时释放，否则可能会导致内存泄露的风险！
-
-如果你确定要用 node 做服务端渲染的话，建议你应该用一些开源成熟的框架。比如在 react 体系下比较有代表性的 next.js， vue 体系下的 Nuxt.js。
-
-
+* 总结:Node服务端渲染好处多多，但除了上述技术性的问题需要解决外，仍然有些线上问题需要注意。
+    - 服务器 cpu 过高问题，因为现在页面结构是在服务端以 renderToString 的方式输出，所以页面请求路由会涉及到大量的计算。这就会导致如果页面并发高一点的话，会出现 cpu 过高的问题。
+    - 在服务端可没有什么 window 、 document 对象，这些东西也需要去 hook 掉；在 React 应用中，componentDidMount 等生命周期函数也不会在服务端触发；定时器记得及时释放，否则可能会导致内存泄露的风险！
+    - 确定要用 node 做服务端渲染的话，建议应该用一些开源成熟的框架。比如在 react 体系下比较有代表性的 next.js， vue 体系下的 Nuxt.js
 * [前端性能优化之加载技术](https://juejin.im/post/59b73ef75188253db70acdb5)
 * [SSR VR CSR](https://medium.com/walmartlabs/the-benefits-of-server-side-rendering-over-client-side-rendering-5d07ff2cefe8) 什么是服务端渲染
 
@@ -1195,6 +1180,7 @@ Node服务端渲染好处多多，但除了上述技术性的问题需要解决�
 * [ymm-tech/gods-pen](https://github.com/ymm-tech/gods-pen):基于vue的高扩展在线网页制作平台，可自定义组件，可添加脚本，可数据统计。A mobile page builder/editor, similar with amolink. https://godspen.ymm56.com
 * [Polymer/polymer](https://github.com/Polymer/polymer) Our original Web Component library. https://polymer-library.polymer-project.org/
 * [Polymer / lit-element](https://github.com/polymer/lit-element):A simple base class for creating fast, lightweight web components https://lit-element.polymer-project.org
+* [ romefrontend / rome ](https://github.com/romefrontend/rome):The Rome Frontend Toolchain. A linter, compiler, bundler, and more for JavaScript, TypeScript, HTML, Markdown, and CSS.
 
 ## 参考
 
