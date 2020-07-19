@@ -364,6 +364,7 @@
 * [apple / turicreate](https://github.com/apple/turicreate):Turi Create simplifies the development of custom machine learning models.
 * [Microsoft/onnxjs](https://github.com/Microsoft/onnxjs)：ONNX.js: run ONNX models using JavaScript
 * [Kubeflow](https://www.kubeflow.org/):The Machine Learning Toolkit for Kubernetes
+* [ deezer / spleeter ](https://github.com/deezer/spleeter):Deezer source separation library including pretrained models. https://research.deezer.com/projects/spleeter.html
 
 ## 参考
 

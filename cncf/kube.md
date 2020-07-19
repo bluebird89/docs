@@ -38,6 +38,27 @@
 * PV
 	- PVC 和 PV 的设计，实际上类似于“接口”和“实现”的思想。开发者只要知道并会使用“接口”，即：PVC；而运维人员则负责给“接口”绑定具体的实现，即：PV
 	- PVC 其实就是一种特殊的 Volume。只不过一个 PVC 具体是什么类型的 Volume，要在跟某个 PV 绑定之后才知道
+* DaemonSet
+	- 在 Kubernetes 集群里，运行一个 Daemon Pod。这个 Pod 有如下三个特征：
+		+ 这个 Pod 运行在 Kubernetes 集群里的每一个节点（Node）上
+		+ 每个节点上只有一个这样的 Pod 实例
+		+ 当有新的节点加入 Kubernetes 集群后，该 Pod 会自动地在新节点上被创建出来；而当旧节点被删除后，它上面的 Pod 也相应地会被回收掉
+	- 实例：网络插件、存储插件 监控组件和日志组件
+	- 保证每个 Node 上有且只有一个被管理的 Pod
+	- DaemonSet Controller 会在创建 Pod 的时候，自动在这个 Pod 的 API 对象里，加上这样一个 nodeAffinity 定义
+	- 并不需要修改用户提交的 YAML 文件里的 Pod 模板，而是在向 Kubernetes 发起请求之前，直接修改根据模板生成的 Pod 对象
+	- 会给这个 Pod 自动加上另外一个与调度相关的字段，叫作 tolerations。这个字段意味着这个 Pod，会“容忍”（Toleration）某些 Node 的“污点”（Taint）
+* Job
+	- 对象在创建后，Pod 模板，被自动加上了一个 controller-uid=< 一个随机字符串 > 这样的 Label。而这个 Job 对象本身，则被自动加上了这个 Label 对应的 Selector，从而 保证了 Job 与它所管理的 Pod 之间的匹配关系
+	- 定义的 restartPolicy=OnFailure，那么离线作业失败后，Job Controller 就不会去尝试创建新的 Pod。但是，会不断地尝试重启 Pod 里的容器
+	- spec.backoffLimit 字段里定义了重试次数为 4，而这个字段的默认值是 6,重新创建 Pod 的间隔是呈指数增加的，即下一次重新创建 Pod 的动作会分别发生在 10 s、20 s、40 s …后
+	- spec.activeDeadlineSeconds 字段可以设置最长运行时间
+	- spec.parallelism，定义的是一个 Job 在任意时间最多可以启动多少个 Pod 同时运行
+	- spec.completions，定义的是 Job 至少要完成的 Pod 数目，即 Job 的最小完成数
+	- 用法
+		+ 外部管理器 +Job 模板
+		+ 拥有固定任务数目的并行 Job
+		+ 指定并行度（parallelism），但不设置固定的 completions 的值
 
 ```sh
 kubectl get rs
@@ -53,6 +74,7 @@ echo "source <(kubectl completion bash)" >> ~/.bash_profile
 		+ 网络标识
 	- 存储状态：多个实例分别绑定了不同的存储数据
 * StatefulSet 的核心功能，就是通过某种方式记录这些状态，然后在 Pod 被重新创建时，能够为新 Pod 恢复这些状态
+* 滚动更新”（rolling update): kubectl patch 会按照与 Pod 编号相反的顺序，从最后一个 Pod 开始，逐一更新这个 StatefulSet 管理的每个 Pod
 
 ## 创建与修改
 
@@ -76,6 +98,7 @@ echo "source <(kubectl completion bash)" >> ~/.bash_profile
 	- 集群中每个非 master 节点都运行两个进程：
 		+ kubelet，和 master 节点进行通信
 		+ kube-proxy：一种网络代理，将 Kubernetes 的网络服务代理到每个节点上
+* Dynamic Admission Control
 
 ## [对象](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/)
 
