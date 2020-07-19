@@ -611,7 +611,7 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * Flat UI
 * Semantic UI
 * BootMetro
-* Pure
+* [ pure-css / pure ](https://github.com/pure-css/pure):A set of small, responsive CSS modules that you can use in every web project. https://purecss.io/
 * Metro UI CSS
 * Bootswatch
 * jQuery UI Bootstrap
@@ -629,7 +629,8 @@ tada Ready-to-use Tailwind CSS blocks. https://mertjf.github.io/tailblocks/
 * [kbrsh/moon](https://github.com/kbrsh/moon) 🌙 The minimal & fast UI library https://kbrsh.github.io/moon [moon](http://moonjs.ga/docs/getting-started.html)
 * [picturepan2/spectre](https://github.com/picturepan2/spectre) Spectre.css - A Lightweight, Responsive and Modern CSS Framework https://picturepan2.github.io/spectre/
 * [UIkit](https://getuikit.com/):A lightweight and modular front-end framework
-for developing fast and powerful web interfaces. ;
+for developing fast and powerful web interfaces.
+* [ shoelace-style / shoelace ](https://github.com/shoelace-style/shoelace):A collection of professionally designed, every day UI components built on a framework-agnostic technology. https://shoelace.style/
 
 ## 实例
 
