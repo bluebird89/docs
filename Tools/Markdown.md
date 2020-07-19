@@ -660,7 +660,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * [marktext/marktext](https://github.com/marktext/marktext):📝A simple and elegant markdown editor, available for Linux, macOS and Windows. https://marktext.app
 * [ zadam / trilium ](https://github.com/zadam/trilium):Build your personal knowledge base with Trilium Notes
 * [Haroopad](http://pad.haroopress.com/user.html):a markdown enabled document processor for creating web-friendly documents
-* [notable/notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. https://notable.md
+* [notable/notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. https://notable.app/
 * [Cmd Markdown](https://www.zybuluo.com/cmd/):网页版
 * Mac
 	- [Mou](http://25.io/mou/):Markdown editor for developers.
