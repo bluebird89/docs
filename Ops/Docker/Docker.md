@@ -534,7 +534,6 @@ docker port adoring_stonebraker 5002
 # 查看
 docker [container] ps # 列出正在运行的容器(containers)
 docker ps -a # 列出所有的容器
-docker-compose ps # 查看当前项目容器
 docker ps -l   # 查看最后一次创建的容器
 docker container ls --format "table\t\t"
 
@@ -1488,6 +1487,7 @@ docker-compose --compatibility up
 docker build -t my-image .
 docker run my-image
 
+docker-compose ps # 查看当前项目容器
 docker-compose build
 docker-compose up -d --force-recreate
 docker-compose up 启动所有容器

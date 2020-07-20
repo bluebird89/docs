@@ -143,7 +143,6 @@ The PHP Interpreter <http://www.php.net>
         + 在 Opcache 优化的基础上结合 Runtime 信息将字节码编译为机器码缓存起来
         + 现有的 Opcache 优化不受任何影响，并且 PHP 的 JIT 是在 Opcache 中提供的
         + JIT 不是对 Opcache 替代，而是增强，在启用 JIT 的情况下，如果 Zend 底层发现特定字节码已经编译为机器码，则可以绕过 Zend VM 直接让 CPU 执行机器码，从而提高代码性能
-    -
 
 ## 原理
 
@@ -345,6 +344,11 @@ libsqlite3-dev libssl-dev libcurl4-openssl-dev libpng-dev libonig-dev libzip-dev
 # 源码中提供了一个基准测试文件
 /usr/local/php8/bin/php -d opcache.jit_buffer_size=0 Zend/bench.php
 /usr/local/php8/bin/php -d opcache.jit_buffer_size=64M -d opcache.jit=1205 Zend/bench.php
+
+## windows wsl
+PhpStorm: Settings -> Language & Frameworks -> PHP->CLI Interpreter->From Docker, Vagrant, VM, WSL, Remote...
+Composer
+TestFramework -> PHPUnit
 ```
 
 ### 扩展
@@ -361,6 +365,7 @@ libsqlite3-dev libssl-dev libcurl4-openssl-dev libpng-dev libonig-dev libzip-dev
 ```sh
 php -m # 查看添加扩展
 php --ri xhprof
+php --ini
 
 ln -s /etc/php5/mods-available/redis.ini /etc/php5/cli/conf.d/10-redis.ini
 ln -s /etc/php5/mods-available/redis.ini /etc/php5/apache2/conf.d/10-redis.ini

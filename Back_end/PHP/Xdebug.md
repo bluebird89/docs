@@ -11,4 +11,8 @@ Xdebug — Step Debugger and Debugging Aid for PHP https://xdebug.org
 brew install php71-xdebug
 
 pecl install xdebug
+
+## 	Cannot accept external Xdebug connection: Cannot evaluate expression 'isset($_SERVER['PHP_IDE_CONFIG'])
 ```
+
+## remote debug

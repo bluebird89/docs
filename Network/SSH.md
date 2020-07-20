@@ -7,6 +7,18 @@
 * 系统会试图通过DNS反查相对应的域名，如果DNS中没有这个IP的域名解析，则会等到DNS查询超时才会进行下一步
 * SKM(SSH Key Manager):一个在命令行下帮助管理和切换多个SSH key的工具
 * `ls -l /etc/init.d/sshd`
+* ssh-keygen
+	- -t rsa：指定密钥算法 RSA。
+	- -b 4096：指定密钥的位数是4096位。安全性要求不高的场合，这个值可以小一点，但是不应小于1024。
+	- -f ~/.ssh/user_ca：指定生成密钥的位置和文件名。
+	- -C user_ca：指定密钥的识别字符串，相当于注释
+	- -I：身份字符串，可以随便设置，相当于注释，方便区分证书，将来可以使用这个字符串撤销证书。
+	- -h：指定该证书是服务器证书，而不是用户证书。
+	- -n host.example.com：指定服务器的域名，表示证书仅对该域名有效。如果有多个域名，则使用逗号分隔。用户登录该域名服务器时，SSH 通过证书的这个值，分辨应该使用哪张证书发给用户，用来证明服务器的可信性。
+		+ user：指定用户名，表示证书仅对该用户名有效。如果有多个用户名，使用逗号分隔。用户以该用户名登录服务器时，SSH 通过这个值，分辨应该使用哪张证书，证明自己的身份，发给服务器
+	- -V +52w：指定证书的有效期，这里为52周（一年）。默认情况下，证书是永远有效的。建议使用该参数指定有效期，并且有效期最好短一点，最长不超过52周。
+	- ssh_host_rsa_key.pub：服务器公钥
+	- -s：指定 CA 签发证书的密钥
 
 ```sh
 sudo apt install sshd
@@ -223,7 +235,42 @@ AllowUsers henry@192.168.0.100
 ```sh
 # 生成 CA 签发用户证书的密钥
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/user_ca -C user_ca
-ssh-keygen -t rsa -b 4096 -f host_ca -C host_ca
+sudo ssh-keygen -f /etc/ssh/ssh_host_rsa_key -b 4096 -t rsa
+# 使用密钥host_ca为服务器的公钥ssh_host_rsa_key.pub签发服务器证书 会生成服务器证书ssh_host_rsa_key-cert.pub
+ssh-keygen -s host_ca -I host.example.com -h -n host.example.com -V +52w ssh_host_rsa_key.pub
+# 查看证书的细节
+ ssh-keygen -L -f ssh_host_rsa_key-cert.pub
+ chmod 600 ssh_host_rsa_key-cert.pub
+
+# CA 签发用户证书
+ssh-keygen -f ~/.ssh/user_key -b 4096 -t rsa
+# 将用户公钥user_key.pub，上传或复制到 CA 服务器。使用 CA 的密钥user_ca为用户公钥user_key.pub签发用户证书
+ssh-keygen -s user_ca -I user@example.com -n user -V +1d user_key.pub
+# 查看证书的细节。
+ssh-keygen -L -f user_key-cert.pub
+chmod 600 user_key-cert.pub
+
+# 服务器安装证书
+scp ~/.ssh/ssh_host_rsa_key-cert.pub root@host.example.com:/etc/ssh/
+# 添加到服务器配置文件/etc/ssh/sshd_config。
+HostCertificate /etc/ssh/ssh_host_rsa_key-cert.pub
+sudo systemctl restart sshd
+sudo service sshd restart
+
+# 将 CA 签发用户证书的公钥user_ca.pub，拷贝到服务器
+scp ~/.ssh/user_ca.pub root@host.example.com:/etc/ssh/
+# 添加到服务器配置文件/etc/ssh/sshd_config。
+TrustedUserCAKeys /etc/ssh/user_ca.pub
+
+# 客户端安装 CA 公钥
+# ssh_known_hosts或known_hosts
+@cert-authority *.example.com ssh-rsa AAAAB3Nz...XNRM1EX2gQ==
+
+ssh -i ~/.ssh/user_key user@host.example.com
+
+# 用户证书的废除，需要在服务器新建一个/etc/ssh/revoked_keys文件，然后在配置文件sshd_config添加
+RevokedKeys /etc/ssh/revoked_keys
+ssh-keygen -kf /etc/ssh/revoked_keys -z 1 ~/.ssh/user1_key.pub # -z参数用来指定用户公钥保存在revoked_keys文件的哪一行
 ```
 
 ## Git commit with gpg
