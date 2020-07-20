@@ -277,6 +277,18 @@ PASS ********  # 通过 PASS 指令设置 FTP 用户密码
     - 使用可变长度的子网掩码来划分地址块,N 表示前缀长度，可以是从 0 到 32 的任意值 A.B.C.D/N
     - 回收不再使用的 IP 资源并投入再利用
 
+```sh
+apt-get  install bridge-utils
+
+brctl addbr br0
+sudo brctl show [br0]
+
+brctl delbr br1
+
+brctl addif br0 eth0
+brctl delif br0 eth0
+```
+
 ## 数据链路
 
 * MAC 地址:用来识别同一链路中的不同计算机
