@@ -3,7 +3,7 @@
 * PHP 程序员可以学习一门静态编译语言作为补充实现动静互补，C/C++/Go 都是不错的选择。
 * 静态语言的编程体验与动态语言完全不同，学习过程可以让你得到更大的提升
 * 掌握 C/C++ 语言后，还可以阅读 PHP 、 Swoole 、 Nginx 、Redis 、 Linux内核 等开源软件的源码，了解其底层运行原理
-* 现在最新版本的Swoole提供了C++扩展模块的支持，封装了Zend API，用C++操作PHP变得很简单，可以用C++实现PHP扩展函数和类
+* 现在最新版本Swoole提供了C++扩展模块的支持，封装了Zend API，用C++操作PHP变得很简单，可以用C++实现PHP扩展函数和类
 
 ## 包管理
 
@@ -43,7 +43,7 @@
     - 不但节省开发时间，有助于建立更稳定的应用，而且减少了重复编码的开发
     - 可以帮助初学者建立更稳定的应用服务，这可以让你花更多的时间去创建实际的Web应用程序，而不是花时间写重复的代码
 * 通用
-    - [Laravel 5](https://laravel.com/): 另一个PHP框架 (L5)
+    - [Laravel](https://laravel.com/): 另一个PHP框架 (L5)
     - [Symfony](https://symfony.com/): 一个独立组件组成的框架 (SF)
     - [Aura PHP](http://auraphp.com/): 一个独立的组件框架
     - [CakePHP](https://cakephp.org/): 一个快速应用程序开发框架 (CP)
