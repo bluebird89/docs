@@ -761,8 +761,6 @@ sudo ufw allow 7722/tcp
 sudo ufw allow 7100:7200/tcp
 
 sudo ufw enable
-
-
 ```
 
 ## perf

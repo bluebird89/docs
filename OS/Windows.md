@@ -61,6 +61,7 @@ systeminfo | findstr Build
   - Total Commander
   - [Explorer++](https://explorerplusplus.com/): a lightweight and fast file manager for Windows
   - Tabbles:灵活、精准的标签工具
+  - [Process Explorer](https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer#download)
 * 快捷键：AutoHotKey
 * 本地搜索
   - [Listary](https://www.listary.com/) :Windows 文件浏览增强工具极速的文件和APP搜索工具，可大幅度提高打开文件和app的速度
