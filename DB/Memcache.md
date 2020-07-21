@@ -29,6 +29,7 @@ yum install memcached
 
 # ubuntu
 sudo apt-get install memcached libmemcached-tools php-memcached
+sudo pecl install memcache
 
 wget http://memcached.org/latest
 tar -zxvf memcached-1.x.x.tar.gz
@@ -82,7 +83,7 @@ echo "stats settings" | nc localhost 11211
 -l 127.0.0.1 # bind Memcached to the local interface to avoid potential DDOS attacks
 -U 0 # restrict UDP  sudo netstat -plunt
 
-memcstat --servers="localhost" 
+memcstat --servers="localhost"
 ```
 
 ## 方法
