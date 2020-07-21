@@ -219,3 +219,4 @@ brew update --force
 ## 工具
 
 * [Homebrew/homebrew-core](https://github.com/Homebrew/homebrew-core):🍻 Default formulae for the missing package manager for macOS https://brew.sh
+* [kuaibiancheng/axe.store](https://github.com/kuaibiancheng/axe.store):一款 Mac 下的包管理工具，同时支持命令行软件和图形界面软件安装

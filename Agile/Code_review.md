@@ -28,7 +28,6 @@
     - 针对代码变更写好提交注释，明确交待变更的目的
 * 快速完成功能，大家写代码的时候都没有思考太多 =》 自己的代码马上就要被别人审视， 就像开源软件一样，写得小心翼翼了
 
-
 ```md
 XXX：添加一些新功能（简短的说明）
 
@@ -65,6 +64,7 @@ XXX：添加一些新功能（简短的说明）
 * Codacy
 * RhodeCode
 * Gerrit
+* [ reviewdog / reviewdog ](https://github.com/reviewdog/reviewdog):dog Automated code review tool integrated with any code analysis tools regardless of programming language https://medium.com/@haya14busa/reviewdog-a-code-review-dog-who-keeps-your-codebase-healthy-d957c471938b#.8xctbaw5u
 
 ## 方法
 
