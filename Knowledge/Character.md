@@ -2428,6 +2428,7 @@
     - 08年11月10日，恩雅推出新专辑[And Winter Came]冬季降临
 * 莎拉·布莱曼（Sarah Brightman）
     - 巅峰之作《LA LUNA》
+* 玉置浩二
 * 班得瑞(Bandari)
     - 情境音乐 –《仙境Wonderland》（1990年1月）
     - 优美名曲 –《寂静山林Silence with Sound from Nature》（1990年1月）

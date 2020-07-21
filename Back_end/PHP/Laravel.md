@@ -2294,6 +2294,10 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
+## [Laravel Mix](https://laravel-mix.com/)
+
+An elegant wrapper around Webpack for the 80% use case.
+
 ## Mail
 
 * `Swift_TransportException with message 'Expected response code 250 but got code "530", with message "530 5.7.1 Authentication required`
