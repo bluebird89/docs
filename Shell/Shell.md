@@ -1099,12 +1099,15 @@ sudo apt install terminator
 * 查看
     - [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings
 * [lynx](link):终端构建的Web浏览应用程序
-* [fasd](https://github.com/clvv/fasd) 增强cd命令
-* [ogham/exa](https://github.com/ogham/exa):A modern version of ‘ls’. https://the.exa.website/
-* [alexanderepstein/Bash-Snippets](https://github.com/alexanderepstein/Bash-Snippets):A collection of small bash scripts for heavy terminal users
-* [ranger](https://github.com/ranger/ranger) 在多目录上浏览各种文件 比 cd 和 cat 更有效率，甚至可以在终端预览图片
+* cd
+    - [fasd](https://github.com/clvv/fasd) 增强cd命令
+    - [ranger](https://github.com/ranger/ranger) 在多目录上浏览各种文件 比 cd 和 cat 更有效率，甚至可以在终端预览图片
+* ls
+    - [ogham/exa](https://github.com/ogham/exa):A modern version of ‘ls’. https://the.exa.website/
 * [prettyping](https://github.com/denilsonsa/prettyping) 图示化的ping
-* [ncdu]()比 du 好用多了,另一个选择是 [nnn](https://github.com/jarun/nnn)
+* du
+    - [ncdu](https;//dev.yorhel.nl/ncdu)
+    - [nnn](https://github.com/jarun/nnn)
 * [asciinema](https://asciinema.org/)和 [svg-trem](https://github.com/marionebl/svg-term-cli) 如果想把的命令行操作建录制成一个 SVG 动图
 * [httpie](https://github.com/jakubroztocil/httpie) 是一个可以用来替代 curl 和 wget 的 http 客户端，httpie 支持 json 和语法高亮，可以使用简单的语法进行 http 访问: http -v github.com
 * [Taskbook](https://github.com/klaussinani/taskbook) 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级
@@ -1116,7 +1119,7 @@ sudo apt install terminator
     - [fd](https://github.com/sharkdp/fd) A simple, fast and user-friendly alternative to 'find' 一个比 find 更简单更快的命令，会自动地忽略掉一些配置在 .gitignore 中的文件，以及 .git 下的文件
     - [ ggreer / the_silver_searcher ](https://github.com/ggreer/the_silver_searcher):A code-searching tool similar to ack, but faster. http://geoff.greer.fm/ag/
 * monitor
-    - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序的
+    - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序
     - [sqshq / sampler ](https://github.com/sqshq/sampler):Tool for shell commands execution, visualization and alerting. Configured with a simple YAML file. https://sampler.dev
     - nslookup:指定查询的类型，可以查到DNS记录的生存时间还可以指定使用哪个DNS服务器进行解释
     - [htop](http://hisham.hm/htop/): 提供更美观、更方便的进程监控工具
@@ -1194,6 +1197,10 @@ sudo apt install terminator
 * script/scriptreplay: 终端会话录制
 * 配置
     - [direnv/direnv](https://github.com/direnv/direnv):Unclutter your .profile http://direnv.net
+
+## snippets
+
+* [alexanderepstein/Bash-Snippets](https://github.com/alexanderepstein/Bash-Snippets):A collection of small bash scripts for heavy terminal users
 
 ## 参考
 
