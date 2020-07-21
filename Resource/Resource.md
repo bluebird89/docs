@@ -98,6 +98,7 @@
 * 开发者头条
 * 码农头条
 * 伯乐在线
+* [网站 任意门](https://gate.ofo.moe/)
 
 ## 管理与沟通
 
@@ -214,6 +215,13 @@
 * 白板
     - [excalidraw / excalidraw](https://github.com/excalidraw/excalidraw):Excalidraw is a whiteboard tool that lets you easily sketch diagrams that have a hand-drawn feel to them. https://excalidraw.com
 * Station
+* 专注
+    - [Cold Turky](https://getcoldturkey.com/):Meet your match, Zuckerberg. Reclaim your free time and boost your productivity by blocking time-wasting websites and applications.
+* 资源
+    - [helloacm](https://helloacm.com/crontab-generator/): 集成工具集
+    - [scottslowe/learning-tools](https://github.com/scottslowe/learning-tools):A collection of tools and files for learning new technologies
+* 生活
+    - [testerSunshine/12306](https://github.com/testerSunshine/12306):12306智能刷票，订票
 
 ## 笔记:全平台
 
@@ -240,70 +248,34 @@
     - that:service:notification(mutal-media)->add intergedient(通过请求参数或者全局参数 event name(可修改) OccurredAt)
     - test: 发送http请求
 
-## Language
+## 镜像
 
-* [byoungd/English-level-up-tips-for-Chinese](https://github.com/byoungd/English-level-up-tips-for-Chinese)
-* 习惯
-    - 用英文思考，将「思维的语言」和外语对应起来，
-    - 大量阅读
-    - 写：写下来的东西一定要清楚明白。开始的时候请少用，甚至不用从句，永远不用自己不认识的词
-    - 模仿写作。模仿写作类似于、但不同于汉译英。模仿写作要求文章本身是原汁原味的英语文章，同时有比较地道的汉语翻译。我们在训练的时候，先不要看英语原文，而是看着翻译过来的汉语，先把它翻回英文。之后再和英语原文对照。有比较就有鉴别。通过这种比较，我们就能够感觉出，同样一个意思，人家用那个词，那样的句型表达，为什么比自己写的好。这比单纯的背诵人家写好的英语范文，或者自己埋头苦写，不去积累，效果要好很多。这个方法很简单，但对于提高写作水平非常有效。
-    - 基本
-        + 不要使用隐喻、明喻，以及其他你从报刊上看到的比喻手法。
-        + 在能用小词的地方绝不使用大词。
-        + 如果可以剔除一个词，剔除之。
-        + 能用主动语态的不用被动语态。
-        + 如果你能从日常英语中找到合适的对应的词，绝不使用外国短语、科学词语和一些专门的行话。
-        + 如果按规则会说出粗野的话，立即打破上述规则。
-* 专注
-    - [Cold Turky](https://getcoldturkey.com/):Meet your match, Zuckerberg. Reclaim your free time and boost your productivity by blocking time-wasting websites and applications.
-* 资源
-    - [helloacm](https://helloacm.com/crontab-generator/): 集成工具集
-    - [scottslowe/learning-tools](https://github.com/scottslowe/learning-tools):A collection of tools and files for learning new technologies
-* 生活
-    - [testerSunshine/12306](https://github.com/testerSunshine/12306):12306智能刷票，订票
-* 资源
-    - [facebook/watchman](https://github.com/facebook/watchman):Watches files and records, or triggers actions, when they change. https://facebook.github.io/watchman/
-    - [阿里镜像](https://opsx.alibaba.com/mirror)
-    - [腾讯软件源](https://mirrors.cloud.tencent.com)
-    - [](https://bitnami.com)
-    - 国内
-        + 清华大学  mirrors.tuna.tsinghua.edu.cn
-        + 中国科学技术大学    mirrors.ustc.edu.cn
-        + 上海交通大学  ftp.sjtu.edu.cn
-        + 上海大学    mirrors.shu.edu.cn
-    - 企业开源镜像站：
-        + 阿里云 mirrors.aliyun.com
-        + 腾讯云 mirrors.cloud.tencent.com
-        + 华为云 mirrors.huaweicloud.com
-        + 网易  mirrors.cn99.com
-        + 首都在线    mirrors.yun-idc.com
-    - 国外高校开源镜像站：
-        + [The Chinese University of Hong Kong ](ftp.cuhk.edu.hk)
-        + [元智大學](ftp.yzu.edu.tw)
-        + [Massachusetts Institute of Technology](mirrors.mit.edu)
-    - 国外云服务商开源镜像站：
-        + Digital Ocean   mirrors.digitalocean.com
-        + Linode  mirrors.linode.com
-        + Cat Networks    mirrors.cat.net
-    - 国外公益开源镜像站：
-        + Kernel ORG  mirrors.kernel.org
-        + Yandex  mirror.yandex.ru
-
-## 开源
-
-* [freedesktop.org](https://www.freedesktop.org/wiki/):hosts the development of free and open source software, focused on interoperability and shared technology for open-source graphical and desktop systems.
-* [Huawei](https://code.opensource.huaweicloud.com/home)
-* https://github.com/uber/makisu
-* https://github.com/uber/prototool#quick-start
-* https://github.com/uber/RIBs
-* https://github.com/zhangdaiscott/jeecg-boot
-* https://github.com/didi/DoraemonKit
-* https://github.com/didi/chameleon
-* https://github.com/uber/deck.gl
-* https://github.com/uber/react-vis
-* https://github.com/uber/kraken
-* https://github.com/uber/ludwig
+- [facebook/watchman](https://github.com/facebook/watchman):Watches files and records, or triggers actions, when they change. https://facebook.github.io/watchman/
+- [阿里镜像](https://opsx.alibaba.com/mirror)
+- [腾讯软件源](https://mirrors.cloud.tencent.com)
+- [](https://bitnami.com)
+- 国内
+    + 清华大学  mirrors.tuna.tsinghua.edu.cn
+    + 中国科学技术大学    mirrors.ustc.edu.cn
+    + 上海交通大学  ftp.sjtu.edu.cn
+    + 上海大学    mirrors.shu.edu.cn
+- 企业开源镜像站：
+    + 阿里云 mirrors.aliyun.com
+    + 腾讯云 mirrors.cloud.tencent.com
+    + 华为云 mirrors.huaweicloud.com
+    + 网易  mirrors.cn99.com
+    + 首都在线    mirrors.yun-idc.com
+- 国外高校开源镜像站：
+    + [The Chinese University of Hong Kong ](ftp.cuhk.edu.hk)
+    + [元智大學](ftp.yzu.edu.tw)
+    + [Massachusetts Institute of Technology](mirrors.mit.edu)
+- 国外云服务商开源镜像站：
+    + Digital Ocean   mirrors.digitalocean.com
+    + Linode  mirrors.linode.com
+    + Cat Networks    mirrors.cat.net
+- 国外公益开源镜像站：
+    + Kernel ORG  mirrors.kernel.org
+    + Yandex  mirror.yandex.ru
 
 ## 参考
 

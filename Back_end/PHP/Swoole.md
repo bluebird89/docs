@@ -34,6 +34,7 @@ Event-driven asynchronous & concurrent & coroutine networking engine with high p
 * 4.0
     - 提供了完整的协程(Coroutine)+通道(Channel)特性，带来全的CSP编程模型。应用层使用完全同步的编程方式，底层自动实现异步IO
     - 底层加入 Hook 机制，使原生的 Mysql PDO、Redis 操作协程化
+    - 协程（Coroutine）取代了异步回调，成为 Swoole 官方推荐的编程方式：解决了异步回调编程困难的问题，使用协程可以以传统同步编程的方法编写代码，底层自动切换为异步 IO，既保证了编程的简单性，又可借助异步 IO，提升系统的并发能力
 * 4.3
     - 异步回调模块已过时，目前仅修复 BUG，不再进行维护, 且在4.3版本中移除了异步模块。使用 Coroutine 协程模块
 * 4.4
@@ -85,11 +86,27 @@ php -m | grep swoole
 php --ri swoole
 ```
 
-* 回调
-    - 匿名函数
-    - 函数
-    - 类静态方法
-    - 对象方法
+## 知识储备：
+
+* 多进程/多线程
+    - 了解 Linux 操作系统进程和线程的概念
+    - 了解 Linux 进程/线程切换调度的基本知识
+    - 了解进程间通信的基本知识，如管道、UnixSocket、消息队列、共享内存
+* SOCKET
+    - 了解 SOCKET 的基本操作如 accept/connect、send/recv、close、listen、bind
+    - 了解 SOCKET 的接收缓存区、发送缓存区、阻塞/非阻塞、超时等概念
+* IO复用
+    - 了解 select/poll/epoll
+    - 了解基于 select/epoll 实现的事件循环，Reactor 模型
+    - 了解可读事件、可写事件
+* TCP/IP网络协议
+    - 了解 TCP/IP 协议
+    - 了解 TCP、UDP 传输协议
+* 调试工具
+    - 使用 gdb 调试 Linux 程序
+    - 使用 strace 跟踪进程的系统调用
+    - 使用 tcpdump 跟踪网络通信过程
+    - 其他 Linux 系统工具，如 ps、lsof、top、vmstat、netstat、sar、ss 等
 
 ## 原理
 
@@ -97,13 +114,11 @@ php --ri swoole
 * Reactor线程组：Reactor 是包含在 Master 进程中的多线程程序，用来处理 TCP 连接和数据收发（异步非阻塞方式）
     - 以多线程的方式运行
     - 负责维护客户端TCP连接、处理网络IO、处理协议、收发数据
-    - Main线程用于accept链接、接受响应信号
-    - 按照一定算法分配给Reactor线程,并由这个线程负责监听此 socket
+    - Reactor 主线程用于accept在 Accept 新的连接后,会将这个连接分配给一个固定的 Reactor 线程，并由这个线程负责监听此 socket。在 socket 可读时读取数据，并进行协议解析，将请求通过管道的方式传递给Worker进程(不包括Tasker进程)；在 socket 可写时将数据发送给 TCP 客户端。
     - 后面的网络数据IO则靠Reactor线程与客户端完成
         + 将TCP客户端发来的数据缓冲、拼接、拆分成完整的一个请求数据包
         + 在 socket 可读时读取数据，并进行协议解析，将请求投递到 Worker 进程
         + 在 socket 可写时将数据发送给 TCP 客户端
-    - Reactor线程会将收到的数据通过管道的方式传递给Worker进程(注意不包括Tasker进程)
     - 完全是异步非阻塞的模式
         + socket可读时读取数据，并进行协议解析，将请求投递到Worker进程
         + socket可写时将数据发送给TCP客户端
@@ -221,15 +236,20 @@ dtruss|strace -f -p masterPid
 ## Async
 
 * 异步IO接口，提供了异步文件系统IO，定时器，异步DNS查询，异步MySQL等API，异步Http客户端，异步Redis客户端
-* swoole_timer 异步毫秒定时器，可以实现间隔时间或一次性的定时任务
-    - `swoole_timer_tick` 间隔时钟控制器
-    - `swoole_timer_after` 指定的时间后执行
-    - `swoole_timer_clear` 删除定时器
 * `swoole_async_read/swoole_async_write` 文件系统操作的异步接口,4.3 已放弃，用协程实现
 * MySQL
     - 勿同时使用异步回调和协程MySQL
     - swoole_mysql 已移除
     - Swoole\Redis 移除
+
+## swoole_timer
+
+异步毫秒定时器，可以实现间隔时间或一次性的定时任务
+
+* 底层基于 epoll_wait（异步）和 setitimer（同步）实现，数据结构使用最小堆。定时器的添加和删除，全部为内存操作，无 IO 消耗，因此性能是非常高
+* `swoole_timer_tick` 间隔时钟控制器
+* `swoole_timer_after` 指定的时间后执行
+* `swoole_timer_clear` 删除定时器
 
 ## 协程 Coroutine
 
@@ -260,6 +280,7 @@ dtruss|strace -f -p masterPid
         + push：向通道中写入内容，如果已满，它会进入等待状态，有空间时自动恢复
         + pop：从通道中读取内容，如果为空，它会进入等待状态，有数据时自动恢复
 * 延时任务：用defer实现
+    - 可以将请求响应式的接口拆分为两个步骤：先发送数据, 再并发收取响应结果
 * 需要的功能协程 runtime 下还没支持
     - 官方和社区已经贡献了很多协程版 API 可供使用
     - 可以使用 swoole 提供的协程版 client 进行封装, 可以参考 官方 amqp client 封装, 将 socket() 函数实现的 tcp client, 使用 swoole 协程版 tcp client 实现即可
@@ -281,6 +302,22 @@ dtruss|strace -f -p masterPid
         + 对于全局变量，均是跟随着一个 请求(Request) 而产生的,CLI 应用，会存在 全局周期 和 请求周期(协程周期) 两种长生命周期
             * 全局周期，我们只需要创建一个静态变量供全局调用即可，静态变量意味着在服务启动后，任意协程和代码逻辑均共享此静态变量内的数据，也就意味着存放的数据不能是特别服务于某一个请求或某一个协程；
             * 协程周期，由于 Hyperf 会为每个请求自动创建一个协程来处理，那么一个协程周期在此也可以理解为一个请求周期，在协程内，所有的状态数据均应存放于 Hyperf\Utils\Context 类中，通过该类的 get、set 来读取和存储任意结构的数据，这个 Context(协程上下文) 类在执行任意协程时读取或存储的数据都是仅限对应的协程的，同时在协程结束时也会自动销毁相关的上下文数据。
+* 适用场景：
+    - 高并发服务，如秒杀系统、高性能 API 接口、RPC 服务器，使用协程模式，服务的容错率会大大增加，某些接口出现故障时，不会导致整个服务崩溃
+    - 爬虫，可实现非常强大的并发能力，即使是非常慢速的网络环境，也可以高效地利用带宽
+    - 即时通信服务，如 IM 聊天、游戏服务器、物联网、消息服务器等等，可以确保消息通信完全无阻塞，每个消息包均可即时地被处理
+* 问题：
+    - 需要为每个并发保存栈内存并维护对应的虚拟机状态，如果程序并发很大可能会占用大量内存
+    - 调度会增加额外的一些 CPU 开销
+* 协程在底层实现上是单线程的，因此同一时间只有一个协程在工作，协程的执行是串行的，与线程不同，多个线程会被操作系统调度到多个 CPU 并行执行
+    - 一个协程正在运行时，其他协程会停止工作。当前协程执行阻塞 IO 操作时会挂起，底层调度器会进入事件循环。当有 IO 完成事件时，底层调度器恢复事件对应的协程的执行。
+    - 在 Swoole 中对 CPU 多核的利用，仍然依赖于 Swoole 引擎的多进程机制
+* 编程范式
+    - 协程之间通讯不要使用全局变量或者引用外部变量到当前作用域，而要使用 Channel
+    - 项目中如果有扩展 hook 了 zend_execute_ex 或者 zend_execute_internal 这两个函数，需要特别注意一下 C 栈，可以使用 co::set 重新设置 C 栈大小
+*  Swoole 会在 TCP Server 和 HTTP Server 回调函数中会自动开启协程，所以不需要显式通过 go 关键字启动协程，可以在回调函数中使用 MySQL 和 Redis 客户端协程组件发起请求
+
+
 
 |    多进程 |多线程 |协程|
 | ------------- | ------------- |------------- |
@@ -330,11 +367,11 @@ function go(callable $function, ...$args) : int|false; // 短名API
 
 * 进程管理模块，可以方便的创建子进程，进程间通信，进程管理
 * PHP自带的pcntl，存在很多不足
-    - pcntl没有提供进程间通信的功能
-    - pcntl不支持重定向标准输入和输出
-    - pcntl只提供了fork这样原始的接口，容易使用错误
+    - 没有提供进程间通信的功能
+    - 不支持重定向标准输入和输出
+    - 只提供了fork这样原始的接口，容易使用错误
     - swoole_process提供了比pcntl更强大的功能，更易用的API，使PHP在多进程编程方面更加轻松
-* 特性：
+* 特性
     - 基于Unix Socket和sysvmsg消息队列的进程间通信，只需调用write/read或者push/pop即可
     - 支持重定向标准输入和输出，在子进程内echo不会打印屏幕，而是写入管道，读键盘输入可以重定向为管道读取数据
     - 配合Event模块，创建的PHP子进程可以异步的事件驱动模式
@@ -388,6 +425,32 @@ for ($i = 0; $i < 3; $i++) {
     - 使用行锁，而不是全局锁，仅当2个进程在同一CPU时间，并发读取同一条数据才会进行发生抢锁
 * 优点
     - 进程间共享
+
+## SMProxy
+
+一个基于 Swoole 开发的 MySQL 数据库连接池
+
+* 将数据库连接作为对象实例存储在内存中，当用户需要访问数据库时，第一次会建立连接，后面并不会建立新的连接，而是从连接池中取出一个已建立的空闲连接对象。使用完毕后，也不会将连接关闭，而是将连接放回连接池中，以供下一个请求访问使用。连接的建立、断开都由连接池自身来管理。
+* 可以通过设置连接池的参数来控制连接池中的初始连接数、连接的上下限数以及每个连接的最大使用次数、最大空闲时间等等。也可以通过其自身的管理机制来监视数据库连接的数量、使用情况等。超出最大连接数会采用协程挂起，等到有连接关闭再恢复协程继续操作。
+* 特性
+    - 支持读写分离
+    - 支持数据库连接池，能够有效解决 PHP 带来的数据库连接瓶颈
+    - 支持 SQL92 标准
+    - 采用协程调度
+    - 支持多个数据库连接，多个数据库，多个用户，灵活搭配
+    - 遵守 MySQL 原生协议，跨语言，跨平台的通用中间件代理
+    - 支持 MySQL 事务
+    - 支持 HandshakeV10 协议版本
+    - 完美兼容 MySQL5.5 - 8.0
+    - 兼容各大框架，无缝提升性能
+
+```sh
+git clone https://github.com/louislivi/SMProxy.git
+cd SMProxy
+composer install --no-dev
+
+./bin/SMProxy start
+```
 
 ## 压测
 
@@ -568,7 +631,6 @@ $serv->set([
 
 ```
 # enable-swoole-php.conf
-
 location ~ [^ /]\.php(/ | $ ) {
 	proxy_http_version 1.1 ;
     proxy_set_header Connection "keep-alive";
