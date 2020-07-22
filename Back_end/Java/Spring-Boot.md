@@ -291,4 +291,5 @@ url: jdbc:mysql://localhost:13306/ecommerce_order_mysql?allowMultiQueries=true&u
 * [qibaoguang / Spring-Boot-Reference-Guide](https://github.com/qibaoguang/Spring-Boot-Reference-Guide):Spring Boot Reference Guide 中文翻译 -《Spring Boot 参考指南》
 
 * [Spring Boot 系列教程](https://www.cnblogs.com/vipstone/p/9967649.html)
+* [最棒 Spring Boot 干货总结](https://mp.weixin.qq.com/s/tWV8lUznOIJwSUPPQlKJUg)
 * https://blog.csdn.net/weixin_39800144/category_9271492.html
