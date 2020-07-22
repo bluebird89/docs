@@ -124,6 +124,7 @@
 * [cisco/ChezScheme](https://github.com/cisco/ChezScheme) Chez Scheme is both a programming language and an implementation of that language, with supporting tools and documentation.
 * [crystal-lang/crystal](https://github.com/crystal-lang/crystal) The Crystal Programming Language https://crystal-lang.org
 * [JuliaLang/julia](https://github.com/JuliaLang/julia) The Julia Language: A fresh approach to technical computing. https://julialang.org/
+* [skiplang/skip](https://github.com/skiplang/skip):A programming language to skip the things you have already computed http://www.skiplang.com
 
 ## 资源
 

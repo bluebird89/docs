@@ -95,10 +95,21 @@ systemctl restart sshd
     -  Verify `dmesg | grep '[U]EFI.*cert'`
 * `sudo modprobe vboxdrv`
 
+## VMware Fusion
+
+* VMware Workstation 是专为 Linux 和 Windows 系统设计的，为了照顾 Mac 平台的用户，VMware 原班人马又打造的
+* 可以直接使用 Docker 镜像启动容器，还可以构建镜像、推送镜像到镜像仓库，不需要安装 Docker Desktop。创建了一个新的 CLI 工具：vctl，它包含在 VMware Fusion 中，安装好了之后就有这个命令了
+* 相关的二进制文件/组件捆绑在 Fusion 应用程序中，可在 Applications/VMware Fusion.app/Contents/Library/vkd/ 文件夹中找到
+    - bin/containerd： 这是一个在后台运行的容器运行时守护进程。必须先启动 containerd 守护进程，然后才能运行任何与容器相关的操作。要启动该守护进程，请使用 vctl system start 命令，要停止该守护进程，请使用 vctl system stop 命令。
+    - bin/containerd-shim-crx-v2 启动新容器时，将启动一个新的 containerd-shim-crx-v2 进程，该进程将充当 CRX 虚拟机中的容器与 containerd 守护进程之间的适配器。
+    - bin/vctl 这是一个在前台运行的命令行实用程序，它可以将用户输入转发到 containerd 守护进程，和 containerd 进程进行交互，类似于 crictl 的功能。
+* 启动 Containerd：
+
+
+
 ## 工具
 
 * Mac
     - Parallels Desktop
-    - Vmvare Fusion
     - GNOME Boxes
 * [ myspaghetti / macos-virtualbox ](https://github.com/myspaghetti/macos-virtualbox):Push-button installer of macOS Catalina, Mojave, and High Sierra guests in Virtualbox for Windows, Linux, and macOS

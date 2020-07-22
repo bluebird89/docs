@@ -263,6 +263,7 @@
 * Do incremental upgrades. Each minor version of Rails provides the deprecation warnings for the next version. By upgrading from 3.2 to 4.0, 4.0 to 4.1, etc we were able to identify problems in the next version early and define clear milestones.
 * Keep up the momentum. Rails upgrades can seem daunting. Create ways in which your team can have quick wins to keep momentum going. Share the responsibility across teams so that everyone is familiar with the new version of the framework and prevent burnout. Once you’re on the newest version add a build to your app that periodically runs your suite against edge Rails so you can catch bugs in your code or your framework early.
 * Expect things to break. Upgrades are hard and in an application as large as GitHub things are bound to break. While we didn’t take the site down during the upgrade we had issues with CI, local development, slow queries, and other problems that didn’t show up in our CI builds or click testing.
+
 * Principles behind the Agile Manifesto,We follow these principles:
     - Our highest priority is to satisfy the customer through early and continuous delivery of valuable software. 我们最重要的目标，是通过持续不断地及早交付有价值的软件使客户满意
     - Welcome changing requirements, even late in development. Agile processes harness change for the customer's competitive advantage. 欣然面对需求变化，即使在开发后期也一样
@@ -278,6 +279,47 @@
     - At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly. 团队定期地反思如何能提高成效，并依此调整自身的举止表现
 
 ## ATDD(Acceptance test driven development)
+
+## 敏捷测试
+
+* 宣言
+    - 全程的测试介入
+        + 敏捷测试提倡测试左移和右移，从软件生命周期的早期（左侧）一直到产品发布上线后的生产环境，都需要有测试的介入和测试活动的开展。
+        + 左移是为了更好的理解和澄清需求，以减少需求理解不一致导致的浪费；而右移是充分利用生产环境的数据来优化开发和测试流程，以增强软件系统应对各种不可预测性的能力。
+        + 左移和右移并不仅仅是将测试活动移到两侧端点，更强调的是每个环节的参与，也就是全程测试介入，这是从流程上保障高质量软件交付的关键。
+    - 团队整体对质量负责
+        + 敏捷提倡全功能团队，团队的角色之间分工不再那么明确，不同角色间的协作更加密切，团队一起为质量负责，是敏捷测试需要遵循的指导性原则。
+        + 团队需要对质量目标有统一认识，在敏捷软件生命周期的每个环节有不同角色的共同参与，实现质量目标是每个角色的职责。
+    - 持续性的精准自动化测试
+        + 自动化测试是敏捷测试的基础，是快速反馈的必要手段。自动化测试不能一味的追求覆盖率，而是要追求有目的的精准覆盖。也就是说，自动化测试首先必须是有效的，是基于业务风险考虑的，才能真正实现快速反馈。
+        + 自动化测试需要能够在持续集成流水线上持续的运行，为每次代码提交提供反馈，以确保系统功能不会因为新代码的提交而被破坏；同时，随着功能的不断迭代，自动化测试需要相应的更新、增加，确保新功能是有有效自动化测试覆盖的。
+    - 质量内建
+        + 质量内建是敏捷测试的核心，需要将测试全程介入、团队为质量负责和持续精准的自动化测试结合起来，在敏捷软件生命周期的每个环节做好缺陷的预防，把质量融入到产品的开发构建中。
+* 原则
+    - 目标在于和团队一起尽快地交付高质量软件。
+    - 测试人员尽早参与软件早期阶段，与所有团队角色合作，通过实例化需求，确保对业务价值理解的一致性。
+        + 测试左移
+    - 测试人员关注生产环境状态，收集数据，指导和优化前期的分析、开发和测试。
+        + 测试右移:由于生产环境的特殊性，并不能将测试活动简单右移到生产环境，只能通过收集和分析生产环境的数据，利用这些数据来优化开发、测试和业务价值，让生产环境和开发过程形成良性环路
+    - 测试人员和开发人员同处一个产品项目团队，而不是独立的测试团队或部门。
+    - 测试人员负责探索性测试，和开发人员结对，设计、实现和维护自动化测试。
+        + 单元测试和接口测试主要由开发人员负责
+        + 界面层自动化测试同样需要开发人员一起参与设计、实现和维护，这样才更高效
+        + 可以让测试人员抽离出来去做更有价值的事情——探索性测试。
+    - 自动化测试在流水线中持续精准执行，快速发现每次代码提交对于已有功能的影响。
+    - 测试数据对于自动化测试是充分的，并能按需获得。
+        + 包括正常和异常情况的覆盖、满足不同环境或不同平台的执行要求等
+        + 需要有完善的数据创建和管理方案，确保不同需求下的自动化测试能够获得相应的测试数据。
+    - 测试活文档化，和代码一起，作为知识资产进行版本化管理。
+    - 自动化测试需要有效的分层。
+        + 根据不同的测试对象进行有效分层。
+        + 越往底层的测试实现成本更低、执行更高效、定位更准确，但覆盖范围有限，不能跟业务很好的关联；
+        + 越往顶层的测试越接近业务、更能体现业务价值，但是执行速度、稳定性较差、定位问题较难。
+        + 需要根据系统要求、技术架构等项目具体情况规划每层测试的合理占比，不能盲目的追求多而全的覆盖
+    - 预防缺陷，而不是关注缺陷的数量。
+        + 质量内建是敏捷测试追求的核心价值观，而质量内建本质上就是缺陷预防。
+        + 敏捷测试需要团队把重心放在预防缺陷上，提高软件的内建质量，而只关注缺陷数量、甚至把缺陷数量当做考核指标的情况是违背这一核心价值观的
+        + 对缺陷数量趋势的正确跟踪和对缺陷根因的深入分析，是帮助预防缺陷的有效手段，是值得推荐的。
 
 ## 图书
 
