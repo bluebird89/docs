@@ -1,16 +1,42 @@
 # Kube
 
-* 声明式 API
-	- 所谓“声明式”，指的就是只需要提交一个定义好的 API 对象来“声明”，所期望的状态是什么样子
-	- “声明式 API”允许有多个 API 写端，以 PATCH 的方式对 API 对象进行修改，而无需关心本地原始 YAML 文件的内容
-	- 最重要的，有了上述两个能力，Kubernetes 项目才可以基于对 API 对象的增、删、改、查，在完全无需外界干预的情况下，完成对“实际状态”和“期望状态”的调谐（Reconcile）过程。
-	- controller通过解读结构化的resource数据，获得期望状态，从而不断的调协期望状态和实际状态
-* kubectl replace 的执行过程，是使用新的 YAML 文件中的 API 对象，替换原有的 API 对象
-	- kube-apiserver 在响应命令式请求（比如，kubectl replace）的时候，一次只能处理一个写请求，否则会有产生冲突的可能
-* kubectl apply，则是执行了一个对原有 API 对象的 PATCH 操作
-	- 一次能处理多个写操作，并且具备 Merge 能力
+* Kubernetes 名字源于希腊语，是舵手的意思
+* 源自Google内部大规模集群管理系统——Borg，也是CNCF（Cloud Native Computing Foundation，今属Linux基金会）最重要的解决方案之一，旨在让部署容器化的应用简单并且高效
+* 用于管理容器化应用程序集群的工具,自动执行应用程序部署的系统。在计算机领域中，此过程通常称为编排
+* 具备完善的集群管理能力，包括多层次的安全防护和准入机制、多租户应用支撑能力、透明的服务注册和服务发现机制、内建负载均衡器、故障发现和自我修复能力、服务滚动升级和线上扩容、可扩充套件的资源自动调度机制、多粒度的资源配额管理能力。还提供完善的管理工具，涵盖开发、部署测试、运维监控等各个环节
+* 将虚拟机和物理机转换为统一的API切面。然后，开发人员可以使用Kubernetes API来部署，扩展和管理容器化的应用程序
+* 集群采用Master/Node 结构,可以通过命令列或者Web页面的方式来操作集群
+* Master（主节点）控制整个集群
+	- etcd： 由CoreOS开发，是一个高可用、强一致性的服务发现储存仓库，为Kubernetes集群提供储存服务.用来备份所有集群数据的数据库。它存储集群的整个配置和状态。主节点查询etcd以检索节点，容器和容器的状态参数
+	- API Server： 控制程序的前端，也是用户唯一可以直接进行交互的Kubernetes组件，内部系统组件以及外部用户组件均通过相同的API进行通信.提供资源操作的唯一入口（其他模组通过API Server查询或修改资料，只有API Server才能直接操作etcd），并提供认证、授权、访问控制、API注册和发现等机制
+	- Scheduler： 负责资源的调度，按照预定的调度策略将Pod（k8s中调度的基本单位）调度到相应的Node上.会监视来自API Server的新请求，并将其分配给运行状况良好的节点。对节点的质量进行排名，并将Pod部署到最适合的节点。如果没有合适的节点，则将Pod置于挂起状态，直到出现合适的节点
+	- Controller： 从API Server获得所需状态。检查要控制的节点的当前状态，确定是否与所需状态存在任何差异，确保集群处于预期的工作状态，比如故障检测、自动扩充套件、滚动更新等
+* Node（从节点）为集群提供计算能力.可以是物理机也可以是虚拟机器。监听API Server发送过来的新的工作分配；他们会执行分配给他们的工作，然后将结果报告给Kubernetes主节点
+	- kubelet： 维护容器的生命周期，同时也负责Volume（CVI）和网络（CNI）的管理。每个节点上都会执行一个kubelet服务程序，接收并执行Master发来的指令，管理Pod及Pod中的容器。每个kubelet程序会在API Server上注册节点自身的信息，定期向Master节点汇报自身节点的资源使用情况，并通过cAdvisor监控节点和容器的资源
+		+ 在群集中的每个节点上运行。是Kubernetes内部的主要代理。
+		+ 通过安装kubelet，节点的CPU，RAM和存储成为所处集群的一部分。
+		+ 监视从API  Server发送来的任务，执行任务，并报告给主节点。
+		+ 会监视Pod，如果Pod不能完全正常运行，则会向控制程序报告。然后，基于该信息，主服务器可以决定如何分配任务和资源以达到所需状态
+	- kube-proxy： 为Service提供集群内部的服务发现和负载均衡，监听API Server中service和endpoint的变化情况，确保每个节点都获得其IP地址，实现本地iptables和规则以处理路由和流量负载均衡
+	- Container Runtime:从容器镜像库中拉取镜像，然后启动和停止容器。容器运行时由第三方软件或插件（例如Docker）担当
 
-## 概念
+## 过程
+
+* 管理员创建应用程序的所需状态并将其放入清单文件manifest.yml中
+* 使用CLI或提供的用户界面将清单文件提供给Kubernetes API Server。Kubernetes的默认命令行工具称为kubectl
+* Kubernetes将清单文件（描述了应用程序的期望状态）存储在称为键值存储（etcd）的数据库中
+* Kubernetes随后在集群内的所有相关应用程序上实现所需的状态
+* Kubernetes持续监控集群的元素，以确保应用程序的当前状态不会与所需状态有所不同
+
+## Pod
+
+* 一个抽象化概念，由一个或多个容器组合在一起的共享资源。根据资源的可用性，主节点会把Pod调度到特定工作节点上，并与容器运行时协调以启动容器
+* 业务型别可以分为长期伺服型（long-running）、批处理型（batch）、节点后台支撑型（node-daemon）和有状态应用型（stateful application）这四种类型.可以由不同类别的Pod控制器来完成，分别为：Deployment、Job、DaemonSet和StatefulSet。
+* Deployment: 复制控制器（Replication Controller，RC）是集群中最早的保证Pod高可用的API物件，副本集（Replica Set，RS）是它的升级，能支援更多种类的匹配模式。部署(Deployment)又是比RS应用模式更广的API物件，以Kubernetes的发展方向，未来对所有长期伺服型的的业务的管理，都会通过Deployment来管理。
+	- Service： Deployment保证了Pod的数量，但是没有解决如何访问Pod的问题，一个Pod只是一个执行服务的选项，随时可能在一个节点上停止，在另一个节点以一个新的IP启动一个新的Pod ，因此不能以确定的IP和端口号提供服务。要稳定地提供服务需要服务发现和负载均衡能力，Service可以稳定为使用者提供服务。
+* Job：用来控制批处理型任务，Job管理的Pod根据使用者的设定把任务成功完成就自动退出了。
+* DaemonSet：后台支撑型服务的核心关注点在集群中的Node，要保证每个Node上都有一个此类Pod在运行。比如用来收集日志的Pod。
+* StatefulSet： 不同于RC和RS，StatefulSet主要提供有状态的服务，StatefulSet中Pod的名字都是事先确定的，不能更改，每个Pod挂载自己独立的储存，如果一个Pod出现故障，从其他节点启动一个同样名字的Pod，要挂载上原来Pod的储存继续以它的状态提供服务。比如数据库服务MySQL，我们不希望一个Pod故障后，MySQL中的数据即丢失。
 
 * Pod:最小编排单位,里的所有容器，共享的是同一个 Network Namespace，并且可以声明共享同一个 Volume
 	- 应用，哪怕再简单，也是被管理在 systemd 或者 supervisord 之下的一组进程，而不是一个进程
@@ -26,8 +52,26 @@
 		+ NodeSelector：是一个供用户将 Pod 与 Node 进行绑定的字段
 		+ NodeName：一旦 Pod 的这个字段被赋值，Kubernetes 项目就会被认为这个 Pod 已经经过了调度，调度的结果就是赋值的节点名字
 		+ HostAliases：定义了 Pod 的 hosts 文件（比如 /etc/hosts）里的内容
-* PodPreset 里定义的内容，只会在 Pod API 对象被创建之前追加在这个对象本身上，而不会影响任何 Pod 的控制器的定义
-	- 多个 PodPreset:合并（Merge）这两个 PodPreset 要做的修改。而如果它们要做的修改有冲突的话，这些冲突字段就不会被修改
+
+
+## Service
+
+* 将稳定的IP地址和DNS名称引入到不稳定的Pod世界中,提供可靠的网络连接
+* 通过控制进出Pod的流量，Service提供了稳定的网络终结点-固定的IP，DNS和端口。有了Service，可以添加或删除任何Pod，而不必担心基本网络信息会改变
+* Pod通过称为标签（Label）和选择器（Selector）的键值对与Service相关联。Service会自动发现带有与选择器匹配的标签的新Pod
+* Service ：来将一组 Pod 暴露给外界访问的一种机制
+	- 访问
+		+ 以 Service 的 VIP（Virtual IP，即：虚拟 IP）方式
+		+ 以 Service 的 DNS 方式
+			* Normal Servic：访问“my-svc.my-namespace.svc.cluster.local”解析到的正是 my-svc 这个 Service 的 VIP，后面的流程就跟 VIP 方式一致了
+			* Headless Service：访问“my-svc.my-namespace.svc.cluster.local”解析到的，直接就是 my-svc 代理的某一个 Pod 的 IP 地址。不需要分配一个 VIP，而是可以直接以 DNS 记录的方式解析出被代理 Pod 的 IP 地址
+	- Headless Service 所代理的所有 Pod 的 IP 地址，都会被绑定一个格式 `<pod-name>.<svc-name>.<namespace>.svc.cluster.local>` DNS
+
+
+## Deployment
+
+* 虚拟化部署:允许在单个物理服务器上创建隔离的虚拟环境，即虚拟机（VM）。该解决方案隔离了VM中的应用程序，限制了资源的使用并提高了安全性。一个应用程序不能再自由访问另一个应用程序处理的信息.快速扩展并分散单个物理服务器的资源，随意更新并控制硬件成本。每个VM都有其操作系统，并且可以在虚拟化硬件之上运行所有必要的系统
+* 容器化部署:多个应用程序可以共享相同的基础操作系统,
 * Deployment
 	- 操纵 ReplicaSet 对象，而不是 Pod,实现版本更新,两层控制器
 		+ 通过 ReplicaSet 的个数来描述应用的版本
@@ -36,13 +80,12 @@
 	- 滚动更新
 	- template :PodTemplate（Pod 模板）
 	- 怎么多版本共存
-* Service ：来将一组 Pod 暴露给外界访问的一种机制
-	- 访问
-		+ 以 Service 的 VIP（Virtual IP，即：虚拟 IP）方式
-		+ 以 Service 的 DNS 方式
-			* Normal Servic：访问“my-svc.my-namespace.svc.cluster.local”解析到的正是 my-svc 这个 Service 的 VIP，后面的流程就跟 VIP 方式一致了
-			* Headless Service：访问“my-svc.my-namespace.svc.cluster.local”解析到的，直接就是 my-svc 代理的某一个 Pod 的 IP 地址。不需要分配一个 VIP，而是可以直接以 DNS 记录的方式解析出被代理 Pod 的 IP 地址
-	- Headless Service 所代理的所有 Pod 的 IP 地址，都会被绑定一个格式 `<pod-name>.<svc-name>.<namespace>.svc.cluster.local>` DNS
+
+## 概念
+
+* PodPreset 里定义的内容，只会在 Pod API 对象被创建之前追加在这个对象本身上，而不会影响任何 Pod 的控制器的定义
+	- 多个 PodPreset:合并（Merge）这两个 PodPreset 要做的修改。而如果它们要做的修改有冲突的话，这些冲突字段就不会被修改
+
 * StatefulSet
 	- 一种特殊的 Deployment，而其独特之处在于，它的每个 Pod 都被编号了。而且，这个编号会体现在 Pod 的名字和 hostname 等标识信息上，这不仅代表了 Pod 的创建顺序，也是 Pod 的重要网络标识（即：在整个集群里唯一的、可被访问的身份
 * PV 持久化存储数据卷
@@ -96,6 +139,20 @@ echo "source <(kubectl completion bash)" >> ~/.bash_profile
 
 ## API 对象
 
+* 基于声明性模型运行并实现"所需状态"的概念
+* API物件是Kubernetes集群中的管理操作单元。集群中的众多技术概念分别对应着API物件，每个API物件都有3大类属性：
+	- metadata（元资料）：用来标识API物件，包含namespace、name、uid等
+	- spec（规范）：描述使用者期望达到的理想状态，所有的操作都是宣告式（Declarative）的而不是命令式（Imperative），在分布式系统中的好处是稳定，不怕丢操作或执行多次。比如设定期望3个执行Nginx的Pod，执行多次也还是一个结果，而给副本数加1的操作就不是宣告式的，执行多次结果就错了。
+	- status（状态）：描述系统当前实际达到的状态，比如期望3个Pod，现在实际建立好了2个。
+* 声明式 API
+	- 所谓“声明式”，指的就是只需要提交一个定义好的 API 对象来“声明”，所期望的状态是什么样子
+	- “声明式 API”允许有多个 API 写端，以 PATCH 的方式对 API 对象进行修改，而无需关心本地原始 YAML 文件的内容
+	- 最重要的，有了上述两个能力，Kubernetes 项目才可以基于对 API 对象的增、删、改、查，在完全无需外界干预的情况下，完成对“实际状态”和“期望状态”的调谐（Reconcile）过程。
+	- controller通过解读结构化的resource数据，获得期望状态，从而不断的调协期望状态和实际状态
+* kubectl replace 的执行过程，是使用新的 YAML 文件中的 API 对象，替换原有的 API 对象
+	- kube-apiserver 在响应命令式请求（比如，kubectl replace）的时候，一次只能处理一个写请求，否则会有产生冲突的可能
+* kubectl apply，则是执行了一个对原有 API 对象的 PATCH 操作
+	- 一次能处理多个写操作，并且具备 Merge 能力
 * 在 Etcd 里的完整资源路径，是由：Group（API 组）、Version（API 版本）和 Resource（API 资源类型）三个部分组成
 	-  会匹配 API 对象的组
 		+  对于 Kubernetes 里的核心 API 对象，比如：Pod、Node 等，是不需要 Group 的（即：它们的 Group 是“”）。所以，对于这些 API 对象来说，Kubernetes 会直接在 /api 这个层级进行下一步的匹配过程

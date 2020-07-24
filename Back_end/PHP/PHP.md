@@ -140,9 +140,27 @@ The PHP Interpreter <http://www.php.net>
     - 协变量返回和协变量参数
 * 8
     - JIT:主要针对 CPU 密集型操作优化效果明显, IO 密集型操作的 Web 应用中，启用 JIT 与不启用相比，性能不但没有提升，反而有 10% 左右的损耗，至少在 Laravel 应用中是如此
-        + 在 Opcache 优化的基础上结合 Runtime 信息将字节码编译为机器码缓存起来
-        + 现有的 Opcache 优化不受任何影响，并且 PHP 的 JIT 是在 Opcache 中提供的
+        + 在 Opcache 之中提供,结合 Runtime 信息将字节码编译为机器码缓存起来
+        + 在原来Opcache优化的优化基础之上进行优化
+        + 只支持x86架构的CPU
         + JIT 不是对 Opcache 替代，而是增强，在启用 JIT 的情况下，如果 Zend 底层发现特定字节码已经编译为机器码，则可以绕过 Zend VM 直接让 CPU 执行机器码，从而提高代码性能
+        + `opcache.jit_buffer_size`是定义分配多少内存给生成的机器码，这个看情况吧，一般测试就64M就行了
+        + `opcache.jit`:配置由4个独立的数字组成，从左到右分别
+            * 是否在生成机器码点时候使用AVX指令, 需要CPU支持
+            * 寄存器分配策略： 0: 不使用寄存器分配 1: 局部(block)域分配 2: 全局(function)域分配
+            * JIT触发策略: 0: PHP脚本载入的时候就JIT 1: 当函数第一次被执行时JIT 2: 在一次运行后，JIT调用次数最多的百分之(`opcache.prof_threshold` * 100)的函数 3: 当函数/方法执行超过N(N和opcache.jit_hot_func相关)次以后JIT 4: 当函数方法的注释中含有@jit的时候对它进行JIT 5: 当一个Trace执行超过N次（和`opcache.jit_hot_loop`, `jit_hot_return`等有关)以后JIT
+            * JIT优化策略，数值越大优化力度越大: 0: 不JIT 1: 做opline之间的跳转部分的JIT 2: 内敛opcode handler调用 3: 基于类型推断做函数级别的JIT 4: 基于类型推断，过程调用图做函数级别JIT 5: 基于类型推断，过程调用图做脚本级别的JIT
+        + 尽量使用12X5型的配置，此时应该是效果最优的
+        + 对于上面的X，如果是脚本级别的，推荐使用0，如果是Web服务型的，可以根据测试结果选择3或5
+        + @jit的形式，在有了attributes以后，可能变为<<jit>>
+
+```sh
+php -d opcache.jit_buffer_size=0 Zend/bench.php
+# 启用
+php -d opcache.jit_buffer_size=64M -d opcache.jit=1205 Zend/bench.php
+# 观测JIT后生成的汇编结果
+php -d opcache.jit=1205 -dopcache.jit_debug=0x01
+```
 
 ## 原理
 
