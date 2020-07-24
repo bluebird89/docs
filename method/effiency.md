@@ -1,5 +1,7 @@
 # 效率
 
+* smart（specific、measurable、attainable、relevant、time-bound）
+
 ## Rest: Why You Get More Done When You Work Less (Alex Soojung-Kim Pang; Penguin, 2018)
 
 * 方法

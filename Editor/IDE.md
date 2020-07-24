@@ -22,6 +22,8 @@ generate:Alt+ins
 * 配置文件: 会在根目录下生成文件夹./php，其中有config and system, 自定义配置：Create the file "idea.properties" and open it in an editor. Set theidea.system.path and/or idea.config.path variables as desired, for example:
 * plugin
   - Save Actions
+* Diagrams
+  - Project tool window->right-click ->Diagrams | Show Diagram
 
 ## 快捷键
 

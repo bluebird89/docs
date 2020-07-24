@@ -2284,6 +2284,8 @@ mysql -u username –-password=your_password database_name < file.sql
     - 先写DB，再写缓存，等缓存过期的时候，数据同步已经完成
     - 同步做成提交（添加）与审核（同步）状态
 
+* Sharding Key
+
 ## 中间件
 
 * 优劣
@@ -3695,7 +3697,7 @@ One command to generate REST APIs for any MySql Database.
 * Sorting: `/api/payments?_sort=column1` `/api/payments?_sort=-column1` `/api/payments?_sort=column1,-column2`
 * Fields `/api/payments?_fields=customerNumber,checkNumber` `/api/payments?_fields=-checkNumber`
 
-```shell
+```
 npm install -g xmysql
 xmysql -h localhost -u mysqlUsername -p mysqlPassword -d databaseName
 http://localhost:3000
@@ -3712,11 +3714,12 @@ http://localhost:3000
 - GET      /api/tableName/describe
 - GET      /api/tables
 ```
+
 ## [phpmyadmin/phpmyadmin](https://github.com/phpmyadmin/phpmyadmin)
 
 A web interface for MySQL and MariaDB https://www.phpmyadmin.net/
 
-```sh
+```
 sudo add-apt-repository ppa:phpmyadmin/ppa
 export DEBIAN_FRONTEND=noninteractive`
 sudo apt-get -yq install phpmyadmin

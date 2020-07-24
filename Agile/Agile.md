@@ -2,10 +2,10 @@
 
 * 一种不停尝试、不停调整、不停优化的状态
 * 产品和业务开发本来就是一个探索的过程，开始时一定是最无知的时刻。项目中的大部分决策也一定是在项目开始的时刻做出的，这将有一个重大的悖论，在最无知的时刻，做出了最重要而且是绝大部分的决策，并把它作为随后执行的依据。
-    - 通过迭代应对这一问题，只做初始决策，定大致的方向。通过市场反馈不断修正对产品的认知，增量的决策和调整。
-
-* 通过迭代将瀑布模型分隔成更小的周期，从而实现迭代
-* 每一次迭代时间可能是2周。每个迭代都能都有交付的工件，如果交付物不能满足市场或客户需求。可以在下一个迭代再一次进行分析、调整和开发，从而响应变化
+    - 通过迭代应对这一问题，只做初始决策，定大致的方向
+    - 通过市场反馈不断修正对产品的认知，增量的决策和调整
+* 通过迭代将瀑布模型分隔成更小的周期，从而实现迭代.每一次迭代时间可能是2周。每个迭代都能都有交付的工件，如果交付物不能满足市场或客户需求。可以在下一个迭代再一次进行分析、调整和开发，从而响应变化
+* 敏捷开发:“60% Scrum + 40% XP
 
 ## 目的
 
@@ -143,10 +143,24 @@
 * 精益创业、黑客营销
 * 项目组合的敏捷管理
 * 预算与绩效管理的敏捷
-* 会议
-    - 每日例会：每日5分钟左右的一个简单例会，尽可能多的开发人员参与进来对紧要问题的讨论。
-    - 评审会：需要在迭代周期的最后一天召开，1个小时左右就可以了，需要客户出席，如果客户不能出席，则需要产品经理出席
-    - 迭代回顾会：迭代回顾会是在每个迭代结束时进行，总结工作中的经验和教训，时间维持在30-60分钟内，整个团队都需要参加（Scrum Master、Product Owner、开发团队以及客户）。迭代回顾会包括两部分，第一部分是定量分析，第二部分是定性分析。其中定量分析又包含团队是否完成了迭代目标，收集并评审迭代度量指标（包括速率、迭代燃尽图、迭代计划故事和实际完成故事、计划发布日期与实际发布日期、客户满意度、团队满意度、生产环境Bug数、生产Bug解决时间、用户故事等）。定性分析包含哪些工作良好（应该继续保持），哪些做的不好（应该停止）？哪些可以改进（团队选出１－２条在下一个迭代实现）？
+
+## 敏捷开发
+
+* 核心原则
+    - 价值驱动
+    - 技术卓越
+* 实践
+    - 基于统一迭代节奏的全功能团队:为了交付软件所需要的技能都应该在一个团队里
+        + dev
+        + BA：分析下一个迭代卡，验收当前完成的卡
+        + QA：给下一个迭代卡片写AC，测试当前迭代卡
+        + UX：
+    - 基于Story的需求及范围实时管理
+        + Story是开发团队的最小工作单元
+        + 工具是燃起图（Burn-Up）和累积流量图（CFD来至于Kanban）
+    - 基于持续集成和测试前置的质量内建
+        + 持续集成纪律有两条核心，第一是必须每次提交触发构建；第二是每次提交必须基于上次的成功构建
+    - 基于Velocity和Cycle Time的持续改进
 
 ## DevOps vs 敏捷
 
@@ -165,6 +179,17 @@
     - 较小的发布周期 较小的发布周期，立即反馈
     - 聚焦于速度   聚焦于速度和自动化
     - 对业务不是最好 对业务最好
+
+## 会议
+
+* 每日例会：每日5分钟左右的一个简单例会，尽可能多的开发人员参与进来对紧要问题的讨论。目的是更新进度和暴露开发中遇到的问题，不应该讨论具体的问题。 15min
+* 评审会：需要在迭代周期的最后一天召开，1个小时左右就可以了，需要客户出席，如果客户不能出席，则需要产品经理出席.在开迭代计划会议之前应该准备好所有的需求分析，如果遇到需求不合理应该及时跳过，不应该在会议中寻求解决方案。 2h
+* 回顾会（Retro）：在每个迭代结束时进行，总结工作中的经验和教训，时间维持在30-60分钟内，整个团队都需要参加（Scrum Master、Product Owner、开发团队以及客户）。把重点放到上一次行动是否明确执行以及需要改进点上。可以通过投票讨论优先级高的改进点
+    - 定量分析:包含团队是否完成了迭代目标，收集并评审迭代度量指标（包括速率、迭代燃尽图、迭代计划故事和实际完成故事、计划发布日期与实际发布日期、客户满意度、团队满意度、生产环境Bug数、生产Bug解决时间、用户故事等）
+    - 定性分析:包含哪些工作良好（应该继续保持），哪些做的不好（应该停止）？哪些可以改进（团队选出１－２条在下一个迭代实现）
+* 产品展示会议 30min
+* 每个会议必须有主持人、会议目标、会议准备，否则会议是冗长而无效的
+* 参会人员应该准时到达:对迟到的容忍就是对准时到的人惩罚
 
 ## 问题
 
@@ -240,18 +265,6 @@
 4:六大原则和设计模式：工厂、策略、代理等用起来会让人感觉很爽，再次来修改代码的时候会比较得心应手。
 5:适当运动。在努力的同时，请保持一个好身体。
 
-1.通过尽早的、不断地提交有价值的软件来使客户满意。
-2.即使到了开发的后期，也欢迎改变需求。敏捷过程利用变化来为客户创造竞争优势。
-3.以从几个星期到几个月为周期，尽快、不断地提交可运行的软件。
-4.在整个项目开发期间，业务人员和开发人员必须天天都在一起工作。
-5.以积极向上的员工为中心，建立项目组，给他们提供所需的环境和支持，并对他们的工作予以充分的信任。
-6.在团队内部，最有效、效率最高的传递信息的方法，就是面对面的交流。
-7.测量项目进展的首要依据是可运行软件。
-8.敏捷过程提倡可持续的开发，责任人、开发者和用户应该为能够保持一个长期的、恒定的开发速度而努力。
-9.时刻关注技术上的精益求精和好的设计，以增强敏捷能力。
-10.简单是最根本的。
-11.最好的构架、需求和设计出于自组织的团队。
-12.每隔一定时间，团队要反省如何才能更有效地工作，然后相应地调整自己的行为。
 
 1.凝聚人的力量，紧密协（合）作。包括业务负责人、开发团队、客户、管理者之间的关系，所有这些关系在以前都是造成项目危机的原因之一，那么，在敏捷时代，我们需要这些角色 紧密合作，最大限度的发挥各个角色的力量.
 2.聚焦客户价值，消除浪费（如何聚焦用户价值，即频繁的交付用户可工作的软件，快速收到用户反馈）
@@ -264,21 +277,25 @@
 * Keep up the momentum. Rails upgrades can seem daunting. Create ways in which your team can have quick wins to keep momentum going. Share the responsibility across teams so that everyone is familiar with the new version of the framework and prevent burnout. Once you’re on the newest version add a build to your app that periodically runs your suite against edge Rails so you can catch bugs in your code or your framework early.
 * Expect things to break. Upgrades are hard and in an application as large as GitHub things are bound to break. While we didn’t take the site down during the upgrade we had issues with CI, local development, slow queries, and other problems that didn’t show up in our CI builds or click testing.
 
-* Principles behind the Agile Manifesto,We follow these principles:
-    - Our highest priority is to satisfy the customer through early and continuous delivery of valuable software. 我们最重要的目标，是通过持续不断地及早交付有价值的软件使客户满意
-    - Welcome changing requirements, even late in development. Agile processes harness change for the customer's competitive advantage. 欣然面对需求变化，即使在开发后期也一样
-    - Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale. 经常交付可工作的软件，相隔几星期或一两个月，倾向于采取较短的周期
-    - Business people and developers must work together daily throughout the project. 业务人员和开发人员必须相互合作，项目中的每一天都不例外
-    - Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done. 激发个体的斗志，以他们为核心搭建项目。提供所需的环境和支援，辅以信任，从而达成目标
-    - The most efficient and effective method of conveying information to and within a development team is face-to-face conversation. 面对面沟通是传递信息的最佳的也是效率最高的方法
-    - Working software is the primary measure of progress. 可工作的软件是进度的首要度量标准
-    - Agile processes promote sustainable development. The sponsors, developers, and users should be able to maintain a constant pace indefinitely.敏捷流程倡导可持续的开发，责任人、开发人员和用户要能够共同维持其步调稳定延续
-    - Continuous attention to technical excellence and good design enhances agility.坚持不懈地追求技术卓越和良好设计，敏捷能力由此增强
-    - Simplicity--the art of maximizing the amount of work not done--is essential. 以简洁为本，它是极力减少不必要工作量的艺术
-    - The best architectures, requirements, and designs emerge from self-organizing teams. 最好的架构，需求和设计出自自组织团队
-    - At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly. 团队定期地反思如何能提高成效，并依此调整自身的举止表现
+## 敏捷开发十二原则
 
-## ATDD(Acceptance test driven development)
+* Our highest priority is to satisfy the customer through early and continuous delivery of valuable software. 我们最重要的目标，是通过持续不断地及早交付有价值的软件使客户满意
+* Welcome changing requirements, even late in development. Agile processes harness change for the customer's competitive advantage. 欣然面对需求变化，即使在开发后期也一样
+* Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale. 经常交付可工作的软件，相隔几星期或一两个月，倾向于采取较短的周期
+* Business people and developers must work together daily throughout the project. 业务人员和开发人员必须相互合作，项目中的每一天都不例外
+* Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done. 激发个体的斗志，以他们为核心搭建项目。提供所需的环境和支援，辅以信任，从而达成目标
+* The most efficient and effective method of conveying information to and within a development team is face-to-face conversation. 面对面沟通是传递信息的最佳的也是效率最高的方法
+* Working software is the primary measure of progress. 可工作的软件是进度的首要度量标准
+* Agile processes promote sustainable development. The sponsors, developers, and users should be able to maintain a constant pace indefinitely.敏捷流程倡导可持续的开发，责任人、开发人员和用户要能够共同维持其步调稳定延续
+* Continuous attention to technical excellence and good design enhances agility.坚持不懈地追求技术卓越和良好设计，敏捷能力由此增强
+* Simplicity--the art of maximizing the amount of work not done--is essential. 以简洁为本，它是极力减少不必要工作量的艺术
+* The best architectures, requirements, and designs emerge from self-organizing teams. 最好的架构，需求和设计出自自组织团队
+* At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly. 团队定期地反思如何能提高成效，并依此调整自身的举止表现
+
+## 缺点
+
+* 敏捷软件开发的特征是增量的，因此每个迭代都会有新的业务分析，新的开发工作在进行。这带来的一个问题是，不会有一个统一的 PRD 文档出现，最后在项目结束时候，交付物中没有好的文档。所以敏捷往往强调可交付的软件更为重要，在代码质量上下功夫，做到代码即文档
+* 参与人员都是根据团队划分的，例如独立的 PM、BA、DEV，不再存在管理部分、研发部门。带来的矛盾是对个体的要求变高了，有时候往往一个团队中只有一个 BA 或者 UI，对新人挑战较大
 
 ## 敏捷测试
 
@@ -321,6 +338,15 @@
         + 敏捷测试需要团队把重心放在预防缺陷上，提高软件的内建质量，而只关注缺陷数量、甚至把缺陷数量当做考核指标的情况是违背这一核心价值观的
         + 对缺陷数量趋势的正确跟踪和对缺陷根因的深入分析，是帮助预防缺陷的有效手段，是值得推荐的。
 
+## [Manifesto for Agile Software Development](https://agilemanifesto.org/)
+
+```
+Individuals and interactions over processes and tools
+Working software over comprehensive documentation
+Customer collaboration over contract negotiation
+Responding to change over following a plan
+```
+
 ## 图书
 
 * 解析极限编程
@@ -334,6 +360,7 @@
 * 软件需求与可视化模型
 * 精益创业
     - MVP：优先最小化可行产品
+* 大教堂与集市
 
 ## 工具
 
@@ -364,5 +391,4 @@
 ## 参考
 
 * [](https://www.atlassian.com/agile)
-* [Manifesto for Agile Software Development](https://agilemanifesto.org/)
 * [AGILE FLUENCY PROJECT](https://www.agilefluency.org/)

@@ -10,7 +10,7 @@ A PHP Framework For Web Artisans https://laravel.com
   - vagrant box add [--name] laravel\homestead [homestead.box] <https://atlas.hashicorp.com/laravel/boxes/homestead> <https://atlas.hashicorp.com/laravel/boxes/homestead/versions/2.1.0/providers/virtualbox.box>
   - `vagrant list`
   - git clone <https://github.com/laravel/homestead.git> Homestead
-  - bash init.sh
+  - `bash init.sh`
   - 修改.homestread\Homestead.yaml
   - 修改scripts/homestead.rb
   - vagrant provision
@@ -35,56 +35,9 @@ A PHP Framework For Web Artisans https://laravel.com
 * [Laragon](https://sourceforge.net/projects/laragon/):适用于 Windows 的轻量级开发环境
 * [laradock/laradock](https://github.com/laradock/laradock):Docker PHP development environment. http://laradock.io
 
-```yaml
-box: laravel/homestead
-ip: "192.168.20.20"
-memory: 2048
-cpus: 4
-provider: virtualbox
-mariadb: true
-# 共享目录
-folders:
-    * map: D:\Code    <!-- 项目地址 -->
-      to: /home/vagrant/Code   <!-- 虚拟机的项目地址 -->
-      type: "rsync"
-      options:
-          rsync__args: ["--verbose", "--archive", "--delete", "-zz"]
-          rsync__exclude: ["node_modules"]
-# 站点
-sites:
-    * map: laravel.app  <!-- 添加的站点名称 -->
-      to: /home/vagrant/Code/Laravel/public <<!-- 站点对应的虚拟机文件 -->
-    - map: another.app
-      to: /home/vagrant/Code/another/public
-      type: symfony2
-
-      # 向站点添加其他 Nginx fastcgi_param 值
-      params:
-          - key: FOO
-            value: BAR
-      schedule: true
-      php: "5.6"
-ports:
-    - send: 50000
-      to: 5000
-    - send: 7777
-      to: 777
-      protocol: udp
-networks:
-    - type: "private_network"
-      ip: "192.168.10.20"
-    - type: "public_network"
-      ip: "192.168.10.20"
-      bridge: "en1: Wi-Fi (AirPort)"
-
-## 配置脚本 homestead up
-function homestead() {
-    ( cd ~/Homestead && vagrant $* )
-}
 ```
-
-```sh
 yum install php-mbstring php-dom php-zip php-posix php-simplexml php-bcmath php-ctype php-json php-openssl php-pdo php-tokenizer
+
 brew install php  # 确保 ~/.composer/vendor/bin
 brew install mysql # 安装MySQL
 brew services start mysql # 启动服务
@@ -192,12 +145,6 @@ laravel new blog
 php artisan key:generate
 php artisan serve
 
-# laradock
-git clone https://github.com/Laradock/laradock.git
-cp env-example .env
-docker-compose up -d nginx mysql phpmyadmin redis workspace #
-docker-compose up --build # 会构建所有容器：Service 'aws' failed to build: COPY failed: stat /var/lib/docker/tmp/docker-builder279203978/ssh_keys: no such file or directory
-
 ## 问题
 > No such file or directory: u'./docker-compose.dev.yml'
 
@@ -236,26 +183,27 @@ if (App::environment(['local', 'staging'])) {
 }
 
 # 清除配置缓存
-php artisan cache:clear
-php artisan config:clear
+php artisan config:cache  # 所有配置信息合并到一个文件里，减少运行时文件的载入数量
+php artisan config:clear  # 删除配置的缓存文件
 ```
 
 ## Artisan
 
-利用PHP的CLI构建了强大的Console工具artisan，几乎能够创建任何想要的模板类以及管理配置应用
+利用PHP的CLI构建了强大Console工具，创建想要的模板类以及管理配置应用
 
 ```sh
-php artisan --version # 显示目前的Laravel版本
+php artisan --version
 php artisan help [name]  # 显示命令行帮助
 php artisan list  # 列出命令
+
+php artisan env # 显示当前框架环境
 php artisan down --message="Upgrading Database" --retry=60 # 进入维护模式
 php artisan up # 退出维护模式
-php artisan env # 显示当前框架环境
+
 php artisan fresh # 清除包含框架外的支架
 php artisan migrate # 运行数据库迁移
 php artisan optimize # 为了更好的框架去优化性能
-php artisan serve # 在php开发服务器中服务这个应用
-php artisan tinker  # 在应用中交互
+php artisan serve
 php artisan app:name #  设置应用程序命名空间
 
 php artisan key:generate  # 设置程序密钥 The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. 不正确 500 错误，nginx 没有日志记录
@@ -265,9 +213,8 @@ php artisan auth:clear-resets # 清除过期的密码重置密钥 未使用过
 php artisan cache:clear # 清除应用程序缓存
 php artisan cache:table # 创建一个缓存数据库表的迁移
 
-php artisan config:cache  # 所有配置信息合并到一个文件里，减少运行时文件的载入数量
-php artisan config:clear  # 删除配置的缓存文件
 php artisan db:seed # 数据库生成模拟数据
+
 php artisan event:generate  # 生成event和listen  需要实现配置eventserviceprivoder
 
 php artisan make:controller App\TestController # 指定创建位置 在app目录下创建TestController
@@ -284,8 +231,7 @@ php artisan make:request #  生成一个表单消息类
 php artisan vendor:publish # 发布来自插件包的资源:
 php artisan vendor:publish # 发表一些可以发布的有用的资源来自提供商的插件包
 
-php artisan make:migration create_users_table --create=users
-php artisan make:migration #  生成一个迁移文件
+php artisan make:migration create_users_table --create=users #  生成一个迁移文件
 php artisan migrate:install # 创建一个迁移库文件
 php artisan migrate:refresh # 复位并重新运行所有的迁移
 php artisan migrate:reset # 回滚全部数据库迁移
@@ -320,7 +266,8 @@ php artisan baum:install # Scaffolds a new migration and model suitable for Baum
 ```php
 //生成30条数据
 factory(App\User::class,30)->create()
-// tinker的使用
+
+// 交互 tinker使用
 php artisan tinker
 Psy Shell v0.7.2 (PHP 5.6.19 鈥?cli) by Justin Hileman
 $user = new App\User;
@@ -340,9 +287,10 @@ exit
 ## 概念
 
 * MVC
-  - 控制器更适合承担的角色其实是负责对 HTTP 请求进行路由，因为还有很多其他访问应用的方式，比如 Artisan 命令、队列、调度任务等等，控制器并非唯一入口，所以不适合也不应该将所有业务逻辑封装于此，过度依赖控制器会对以后应用的扩展带来麻烦。所以，应该具备这样的意识：控制器的主要职责就是获取 HTTP 请求，进行一些简单处理（如验证）后将其传递给真正处理业务逻辑的职能部门，如 Service
+  - 控制器适合承担的角色其实是负责对 HTTP 请求进行路由，因为还有很多其他访问应用方式，比如 Artisan 命令、队列、调度任务等等，控制器并非唯一入口，所以不适合也不应该将所有业务逻辑封装于此，过度依赖控制器会对以后应用的扩展带来麻烦
+  - 控制器的主要职责就是获取 HTTP 请求，进行一些简单处理（如验证）后将其传递给真正处理业务逻辑的职能部门，如 Service
 * 没有模型：概念不清楚
-    - 所有业务逻辑的总体
+    - 所有业务逻辑总体
     - 与关系数据库交互的类
 * Console 包含了所有自定义的 Artisan 命令。通过 make:command 来生成,包含了控制台内核，可以用来注册你的自定义 Artisan 命令和你定义的 计划任务 的地方
 * Event:通过 event:generate 或 event:make 时生成。Events 目录存放了 事件类。可以使用事件来提醒应用其他部分发生了特定的操作，为应用提供了大量的灵活性和解耦。
@@ -380,31 +328,13 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
 
 * `.env`
 
-```php
-# 时区
-# config/app.php
- 'timezone' => 'PRC|UTC+8', # UTC(Coordinated Universal  Time)  UTC+8
-```
+## 服务容器(IocContainer)
 
-## 服务容器
-
-管理类依赖和运行依赖注入工具
-
-* 编写
-    - `php artisan make:provider HelperServiceProvider`
-    - 继承 `Illuminate\Support\ServiceProvider` 类。大多数服务提供器都包含 register 和 boot 方法。
-    - 注册：在 register 方法中，只需要绑定类到 服务容器中。而不需要尝试在 register 方法中注册任何事件监听器、路由或任何其他功能
-    - 引导：服务提供器中注册一个视图组件呢？这应该在 boot 方法中完成。此方法在所有其他服务提供器都注册之后才能调用，可以访问已经被框架注册的所有服务
-        + 引导方法依赖注入：可以为服务提供器的 boot 方法设置类型提示
-    - 延迟提供器：提供器仅在服务容器中注册绑定，直到真正需要注册绑定，提高应用程序的性能，因为它不会在每次请求时都从文件系统中加载
-* 服务提供者是 Laravel 应用程序引导启动的中心，所有核心服务都是通过服务提供器进行引导。注册服务容器绑定、事件监听器、中间件，甚至是路由的注册
-    - `config/app.php` 中的providers数组中进行注册
-    - 注册的路由:`RouteServiceProvider`实例来加载
-    - 事件监听器:`EventServiceProvider`类中进行注册
-    - 中间件（路由中间件）：在app/Http/Kernel.php类文件中注册，调用时与路由进行绑定
-    - 在新创建的应用中，AppServiceProvider 文件中方法实现都是空的，这个提供者是你添加应用专属的引导和服务的最佳位置，当然，对于大型应用你可能希望创建几个服务提供者，每个都具有粒度更精细的引导
-* 依赖注入
-    - 简单绑定:在类中可通过 $this->app 来访问容器，在类之外通过 $app 来访问容器.通过 bind 方法注册绑定，传递我们想要注册的类或接口名称再返回类的实例的 Closure
+* 用于管理类依赖和执行依赖注入的工具
+* 依赖注入（DI）:应用程序依赖容器创建并注入它所需要的外部资源
+  - 由内部生产（比如初始化、构造函数 __construct 中通过工厂方法、自行手动 new 的）
+  - 由外部以参数或其他形式注入
+* 简单绑定:在类中可通过 $this->app 来访问容器，在类之外通过 $app 来访问容器.通过 bind 方法注册绑定，传递想要注册的类或接口名称再返回类的实例的 Closure
     - 绑定一个单例:将类或接口绑定到只能解析一次的容器中。绑定的单例被解析后，相同的对象实例会在随后的调用中返回到容器中
     - 绑定实例:使用 instance 方法将现有对象实例绑定到容器中。给定的实例会始终在随后的调用中返回到容器中
     - 绑定初始数据:需要注入一个基本值
@@ -417,67 +347,61 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
       + 方法注入：在控制器方法中类型提示依赖项，常见的用法就是将 Illuminate\Http\Request 实例注入到控制器方法
     - 容器事件：当服务容器解析一个对象时触发一个事件。你可以使用 resolving 方法监听这个事件，被解析的对象会被传递给回调中，让你在对象被传递出去之前可以在对象上设置任何属性
     - 服务容器实现了 PSR-11 接口：可以对 PSR-11 容器接口类型提示来获取 Laravel 容器的实例
-    - 可以用门面调用的方法肯定可以用依赖注入来实现，而可以通过依赖注入实现的功能不一定可以通过门面来调用，除非你自定义实现这个门面
+    - 用门面调用的方法肯定可以用依赖注入来实现，而可以通过依赖注入实现的功能不一定可以通过门面来调用，除非你自定义实现这个门面
+* 控制反转（IoC）：依赖接口而非实现，由外部负责其依赖需求行为
+  - 容器控制应用程序，由容器反向的向应用程序注入应用程序所需要的外部资源
+* laravel 自动搜寻依赖需求的功能，是通过 反射（Reflection） 实现
+* 服务提供者（ServiceProvider）
+  - register（注册）：不要有对未知事物的依赖，如果有，就要移步至 boot 部分,不需要尝试在 register 方法中注册任何事件监听器、路由或任何其他功能
+  - boot（引导、初始化）:此方法在所有其他服务提供器都注册之后才能调用，可以访问已经被框架注册的所有服务
+* 引导方法依赖注入：可以为服务提供器的 boot 方法设置类型提示
+  * 延迟提供器：提供器仅在服务容器中注册绑定，直到真正需要注册绑定，提高应用程序的性能，因为它不会在每次请求时都从文件系统中加载
+* 服务提供者是 Laravel 应用程序引导启动的中心，所有核心服务都是通过服务提供器进行引导。注册服务容器绑定、事件监听器、中间件，甚至是路由的注册
+    - `config/app.php` 中的providers数组中进行注册
+    - 注册的路由:`RouteServiceProvider`实例来加载
+    - 事件监听器:`EventServiceProvider`类中进行注册
+    - 中间件（路由中间件）：在app/Http/Kernel.php类文件中注册，调用时与路由进行绑定
+    - 在新创建的应用中，AppServiceProvider 文件中方法实现都是空的，这个提供者是你添加应用专属的引导和服务的最佳位置，当然，对于大型应用你可能希望创建几个服务提供者，每个都具有粒度更精细的引导
+* 绑定
+  - instance:将一个已存在对象绑定到服务容器里，随后通过名称解析该服务时，容器将总返回这个绑定的实例,把对象注册到服务容器的$instances属性
+  - bind:把服务注册到服务容器的$bindings属性里
+    + 绑定自身:bind方法内部会在绑定服务之前通过getClosure()为服务生成闭包
+    + 绑定闭包
+    + 绑定接口和实现
+  - singleton:绑定一个只需要解析一次的类或接口到容器，然后接下来对于容器的调用该服务将会返回同一个实例
+  - alias:把服务和服务别名注册到容器
+* 解析
+  - make:从服务容器中解析出服务对象，该方法接收想要解析的类名或接口名作为参数
+  - build:职能是构建解析出来的服务的对象
 
-```php
-namespace App\Providers;
+```sh
+php artisan make:provider HelperServiceProvider
 
-use Riak\Connection;
-use Illuminate\Support\ServiceProvider;
+## instance
+api = new HelpSpot\API(new HttpClient);
+$this->app->instance('HelpSpot\API', $api);
 
-class RiakServiceProvider extends ServiceProvider
-{
-    /**
-     * 是否延时加载提供器。
-     *
-     * @var bool
-     */
-    protected $defer = true;
+## bind
+this->app->bind('HelpSpot\API', null);
 
-    /**
-     * 注册服务提供器。
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->app->singleton(Connection::class, function ($app) {
-            return new Connection($app['config']['riak']);
-        });
-    }
-
-    /**
-     * 获取提供器提供的服务。
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [Connection::class];
-    }
-
-}
-
-$this->app->bind('HelpSpot\API', function ($app) {
-    return new HelpSpot\API($app->make('HttpClient'));
+# 闭包直接提供类实现方式
+$this->app->bind('HelpSpot\API', function () {
+  return new HelpSpot\API();
 });
+# 闭包直接提供类实现方式
+$this->app->bind('HelpSpot\API', function ($app) {
+  return new HelpSpot\API($app->make('HttpClient'));
+});//闭包返回需要依赖注入的类
+
+$this->app->bind('Illuminate\Tests\Container\IContainerContractStub', 'Illuminate\Tests\Container\ContainerImplementationStub');
 
 $this->app->singleton('HelpSpot\API', function ($app) {
     return new HelpSpot\API($app->make('HttpClient'));
 });
 
-api = new HelpSpot\API(new HttpClient);
-$this->app->instance('HelpSpot\API', $api);
-
 $this->app->when('App\Http\Controllers\UserController')
           ->needs('$variableName')
           ->give($value);
-
-# 当一个类需要实现 EventPusher 时，应该注入 RedisEventPusher
-$this->app->bind(
-    'App\Contracts\EventPusher',
-    'App\Services\RedisEventPusher'
-);
 
 $this->app->when(PhotoController::class)
           ->needs(Filesystem::class)
@@ -485,24 +409,7 @@ $this->app->when(PhotoController::class)
               return Storage::disk('local');
           });
 
-$this->app->when(VideoController::class)
-          ->needs(Filesystem::class)
-          ->give(function () {
-              return Storage::disk('s3');
-          });
-# 标记
-$this->app->bind('SpeedReport', function () {
-    //
-});
-
-$this->app->bind('MemoryReport', function () {
-    //
-});
-
 $this->app->tag(['SpeedReport', 'MemoryReport'], 'reports');
-$this->app->bind('ReportAggregator', function ($app) {
-    return new ReportAggregator($app->tagged('reports'));
-});
 
 $api = $this->app->make('HelpSpot\API');
 $api = resolve('HelpSpot\API'); # 用全局的辅助函数 resolve
@@ -515,82 +422,6 @@ $this->app->resolving(function ($object, $app) {
 $this->app->resolving(HelpSpot\API::class, function ($api, $app) {
     // 当容器解析类型为「HelpSpot\API」的对象时调用...
 });
-
-use Psr\Container\ContainerInterface;
-
-# PSR-11
-Route::get('/', function (ContainerInterface $container) {
-    $service = $container->get('Service');
-
-    //
-});
-
-namespace App\Providers;
-
-use Riak\Connection;
-use Illuminate\Support\ServiceProvider;
-
-class RiakServiceProvider extends ServiceProvider
-{
-    /**
-     * 在容器中注册绑定
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->app->singleton(Connection::class, function ($app) {
-            return new Connection(config('riak'));
-        });
-    }
-}
-
-# 反射
-class User
-{
-    protected $log;
-
-    public function __construct(FileLog $log)
-    {
-        $this->log = $log;
-    }
-
-    public function login()
-    {
-        // 登录成功，记录登录日志
-        echo 'login success...';
-        $this->log->write();
-    }
-
-}
-
-function make($concrete){
-
-    $reflector = new ReflectionClass($concrete);
-    $constructor = $reflector->getConstructor();
-    // 为什么这样写的? 主要是递归。比如创建FileLog不需要传入参数。
-    if(is_null($constructor)) {
-        return $reflector->newInstance();
-    }else {
-        // 构造函数依赖的参数
-        $dependencies = $constructor->getParameters();
-        // 根据参数返回实例，如FileLog
-        $instances = getDependencies($dependencies);
-        return $reflector->newInstanceArgs($instances);
-    }
-
-}
-
-function getDependencies($paramters) {
-    $dependencies = [];
-    foreach ($paramters as $paramter) {
-        $dependencies[] = make($paramter->getClass()->name);
-    }
-    return $dependencies;
-}
-
-$user = make('User');
-$user->login();
 ```
 
 ## 门面（Facades）
@@ -868,8 +699,6 @@ Route::put('post/{id}', function ($id) {
 * 外键：数据类型一致 `unsignedInteger`
 
 ```php
-// 数据迁移
-php artisan migrate
 // 创建迁移
 php artisan make:migration create_users_table
 // 指定路径
@@ -1689,11 +1518,9 @@ flat map
 
 ## 表单验证
 
-Laravel表单验证拥有标准且庞大的规则集，通过规则调用来完成数据验证，多个规则组合调用须以"|"符号连接，一旦验证失败将自动回退并可自动绑定视图。
-
-下例中，附加bail规则至title属性，在第一次验证required失败后将立即停止验证；"."语法符号在Laravel中通常表示嵌套包含关系，这个在其他语言或框架语法中也比较常见
-
-Laravel验证规则参考 <http://d.laravel-china.org/docs/5.4/validation#可用的验证规则> ；另外，在Laravel开发中还可采用如下扩展规则：
+* Laravel表单验证拥有标准且庞大的[规则集]( <http://d.laravel-china.org/docs/5.4/validation#可用的验证规则)，通过规则调用来完成数据验证
+* 多个规则组合调用须以"|"符号连接，一次验证required失败后将立即停止验证,自动回退并可自动绑定视图
+* "."语法符号在Laravel中通常表示嵌套包含关系，这个在其他语言或框架语法中也比较常见
 
 - 自定义FormRequest (须继承自 Illuminate\Foundation\Http\FormRequest )
 - Validator::make()手动创建validator实例
@@ -2487,8 +2314,6 @@ function boot()
 }
 ```
 
-## traits
-
 ## 调试
 
 * 配置文件:`APP_DEBUG`
@@ -2573,61 +2398,6 @@ composer require tymon/jwt-auth # 修改app.php 添加到providers
 
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider" # 生成配置文件
 php artisan jwt:secret # 使用
-```
-
-## Ioc
-
-```php
-class Ioc
-{
-    public $binding = [];
-
-    public function bind($abstract, $concrete)
-    {
-        //这里为什么要返回一个closure呢？因为bind的时候还不需要创建User对象，所以采用closure等make的时候再创建FileLog;
-        $this->binding[$abstract]['concrete'] = function ($ioc) use ($concrete) {
-            return $ioc->build($concrete);
-        };
-
-    }
-
-    public function make($abstract)
-    {
-        // 根据key获取binding的值
-        $concrete = $this->binding[$abstract]['concrete'];
-        return $concrete($this);
-    }
-
-    // 创建对象
-    public function build($concrete) {
-        $reflector = new ReflectionClass($concrete);
-        $constructor = $reflector->getConstructor();
-        if(is_null($constructor)) {
-            return $reflector->newInstance();
-        }else {
-            $dependencies = $constructor->getParameters();
-            $instances = $this->getDependencies($dependencies);
-            return $reflector->newInstanceArgs($instances);
-        }
-    }
-
-    // 获取参数的依赖
-    protected function getDependencies($paramters) {
-        $dependencies = [];
-        foreach ($paramters as $paramter) {
-            $dependencies[] = $this->make($paramter->getClass()->name);
-        }
-        return $dependencies;
-    }
-
-}
-
-//实例化IoC容器
-$ioc = new Ioc();
-$ioc->bind('log','FileLog');
-$ioc->bind('user','User');
-$user = $ioc->make('user');
-$user->login();
 ```
 
 ## 部署
@@ -2861,7 +2631,7 @@ php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
 # horizon
 composer require laravel/horizon
 php artisan horizon:install
-php artisan queue:failed-table // 存储任何 失败的队列任务
+php artisan queue:failed-table
 php artisan migrate
 
 php artisan horizon
@@ -2900,25 +2670,18 @@ password: password
 ## 参考
 
 * [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
-* [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel) 来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
+* [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
 * [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
-* [laravel/docs](https://github.com/laravel/docs)
 * [laravel-china/laravel-docs](https://github.com/laravel-china/laravel-docs):Laravel 中文文档 https://d.laravel-china.org
 * [laravel/spark-docs](https://github.com/laravel/spark-docs)
-* [summerblue/laravel5-cheatsheet](https://github.com/summerblue/laravel5-cheatsheet):A quick reference guide (cheat sheet) for Laravel 5.1 LTS, listing artisan, composer, routes and other useful bits of information. https://cs.laravel-china.org/
 * [samedreams/artisan-road](https://github.com/samedreams/artisan-road):Programmers are artisans （This book is a guide for artisans）
 * [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
 
-* [Laravel 5.1 LTS 中文文档](https://docs.golaravel.com/docs/5.4/installation/)
-* [Laravel 5.4 中文文档](http://laravelacademy.org/laravel-docs-5_4)
 * [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
-* [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
 * [LeoYang90/laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis):详解 laravel 源码
 * [深入 Laravel 核心](https://learnku.com/docs/laravel-core-concept/5.5)
 * [Laravel 之道](https://learnku.com/docs/the-laravel-way/5.6)
-
 * [xiaohuilam/laravel](https://github.com/xiaohuilam/laravel/wiki):Laravel 深入浅出指南 —— Laravel 5.7 源代码解析，新手进阶指南。
-* [learning laravel](https://learninglaravel.net)
 * [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
 * [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart
 * [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
@@ -2951,8 +2714,8 @@ password: password
 
 <https://d.laravel-china.org/docs/5.3/facades#how-facades-work>
 <https://d.laravel-china.org/docs/5.5/container>
-<http://www.jb51.net/article/73462.htm> <
-http://blog.csdn.net/u013474436/article/details/52847326>
+<http://www.jb51.net/article/73462.htm>
+<http://blog.csdn.net/u013474436/article/details/52847326>
 <http://www.cnblogs.com/lyzg/p/6181055.html>
 <http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html>
 <http://laravel-china.github.io/php-the-right-way/>
