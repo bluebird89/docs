@@ -20,16 +20,6 @@ aware
     - 策略 (限流、黑白名单)
     - 网络安全 (授权与身份认证)
     - 可观察性 (指标、日志、追踪)
-* 和 Kubernetes 关系
-* 和API 网关
-* 标准
-    - UDPA
-    - SMI
-* 产品
-    - linkerd
-    - envoy:数据平面
-    - lstio：增加控制平面，收购enovy
-    - AWS：App Mesh
 
 ## 历程
 
@@ -81,6 +71,8 @@ aware
         + nat 用于 网络地址转换（例如：端口转发）
         + mangle 用于对特定数据包的修改（参考损坏数据包）
         + security 用于强制访问控制 网络规则
+    - 东西向通讯：指服务间的相互访问，其通讯流量在服务间流转，流量都位于系统内部；
+    - 南北向通讯：指服务对外部提供访问，通常是通过 API Gateway 提供的 API 对外部暴露，其通讯流量是从系统外部进入系统内部
 * 步骤：
     - Kubernetes 需要了解待注入的 sidecar 所连接的 Istio 集群及其配置
     - Kubernetes 需要了解待注入的 sidecar 容器本身的配置，如镜像地址、启动参数等
@@ -119,9 +111,30 @@ aware
 * 加快新服务的上线时间。过去的库解决方案，如Finagle，Hystrix和Stubby，需要开发人员长时间的介入并且迫使开发人员将冗余功能编码到每一个服务中。另一个更简单的方法是在每个微服务中放置一个sidecar代理并将它们连接在一起，这正是服务网格所擅长的，因此未来将会有更多的云应用选择服务网格架构。简而言之，服务网格保证了开发者的生产力，使他们能够更快地将更多的服务推向市场。
 * 保障服务间的通信安全。服务之间通信有可能跨云，跨数据中心，或者跨大陆，而服务网格保障了这些通信的安全，它封装了所有的通信，并且在控制器层面协调这些通信，通过管道内加密，联系人策略和服务权限解决了安全问题。
 
+## Service Mesh vs API Gateway
+
+* 功能定位和承担的职责：
+    - 位于最底层的是拆分好的原子微服务，以服务的形式提供各种能力；
+    - 在原子微服务上是（可选的）组合服务，某些场景下需要将若干微服务的能力组合起来形成新的服务；
+    - 原子微服务和组合服务部署于 系统内部，在采用 Service Mesh 的情况下，由 Service Mesh 提供服务间通讯的能力；
+    - API Gateway 用于将系统内部的这些服务暴露给 系统外部，以 API 的形式接受外部请求
+* 部署：
+    - Service Mesh 部署在系统内部：因为原子微服务和组合服务通常不会直接暴露给外部系统；
+    - API Gateway 部署在系统的边缘：一方面暴露在系统之外，对外提供 API 供外部系统访问；一方面部署在系统内部，以访问内部的各种服务；
+* 当 Service Mesh 产品和 API Gateway 产品开始出现相互渗透时，两者的关系就开始变得暧昧.在 Service Mesh 出现之后，如何为基于 Service Mesh 的服务选择合适的 API Gateway 方案，就慢慢开始提上日程，而其中选择重用 Service Mesh 的能力也自然成为一个探索的方向，并逐步出现新式 API Gateway 产品
+
+## 标准
+
+* UDPA
+* SMI
+
 ## 工具
 
 * [rootsongjc / kubernetes-vagrant-centos-cluster](https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster):Setting up a distributed Kubernetes cluster along with Istio service mesh locally with Vagrant and VirtualBox, only PoC or Demo use. https://jimmysong.io
+* linkerd
+* envoy:数据平面
+* lstio：增加控制平面，收购enovy
+* AWS：App Mesh
 
 ## 参考
 
