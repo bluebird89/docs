@@ -1,5 +1,6 @@
 ## [Raft](https://raft.github.io/raft.pdf)
 
+* 一个来自Stanford的新的一致性算法，适用于分布式系统的日志复制，Raft通过选举的方式来实现一致性，在Raft中，任何一个节点都可能成为Leader
 * a protocol for implementing distributed consensus
 * 分布式一致性算法的主流，业界的 TiDB、CockroachDB、etcd、consul 等一系列流行的组件和服务都在使用它
 * 基于日志的连续提交的设定，和 multi-paxos 的乱序提交相比，在写入性能上相比会有些差距。这对于 Raft 协议来讲没有太多的改进空间，但是如果 braft 要做一个理想的 Raft 库实现的话，依然需要不断的改进和优化。

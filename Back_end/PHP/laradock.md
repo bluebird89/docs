@@ -6,6 +6,8 @@ git submodule add https://github.com/Laradock/laradock.git # exist project
 
 cp env-example .env
 docker-compose up -d nginx mysql phpmyadmin redis workspace
+
+docker-compose up --build # 会构建所有容器：Service 'aws' failed to build: COPY failed: stat /var/lib/docker/tmp/docker-builder279203978/ssh_keys: no such file or directory
 ```
 
 ```

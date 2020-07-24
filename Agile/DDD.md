@@ -344,3 +344,5 @@ public class OrderCreatedEvent extends OrderEvent {
 * [领域驱动设计(DDD)编码实践](https://www.jianshu.com/p/84f1d922a6d4)
 * [事件驱动架构(EDA)编码实践](https://www.jianshu.com/p/fbd3951259eb)
 * [简单可用的CQRS编码实践](https://www.jianshu.com/p/d5e344ccf62a)
+* [后端开发实践系列——领域驱动设计(DDD)编码实践](https://insights.thoughtworks.cn/backend-development-ddd)
+* [后端开发实践](https://insights.thoughtworks.cn/tag/backend-development/)
