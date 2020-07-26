@@ -208,6 +208,7 @@
 * 密码管理
     - [Bitwarden](https://bitwarden.com/):Solve your password management problems
     - [keeweb/keeweb](https://github.com/keeweb/keeweb):Free cross-platform password manager compatible with KeePass https://keeweb.info
+    - [Passbolt](https://www.passbolt.com/)
 * Sass
     - [Atarity/deploy-your-own-saas](https://github.com/Atarity/deploy-your-own-saas):List of "only yours" cloud services for everyday needs 🏴
 * 亮度管理

@@ -100,6 +100,36 @@ jobs:
   - [github actions marketpalce](https://github.com/marketplace?type=actions)
   - [ github / super-linter ](https://github.com/github/super-linter):Combination of multiple linters to install as a GitHub Action
 
+## [521xueweihan / GitHub520](https://github.com/521xueweihan/GitHub520)
+
+kissing_heart让你“爱”上 GitHub，解决访问时图裂、加载慢的问题。 hellogithub.com
+
+```
+/etc/hosts
+# GitHub520 Host Start
+185.199.108.154               github.githubassets.com
+199.232.68.133                camo.githubusercontent.com
+13.68.241.146                 github.map.fastly.net
+199.232.69.194                github.global.ssl.fastly.net
+140.82.113.4                  github.com
+140.82.114.6                  api.github.com
+199.232.68.133                raw.githubusercontent.com
+199.232.68.133                user-images.githubusercontent.com
+199.232.68.133                favicons.githubusercontent.com
+199.232.68.133                avatars5.githubusercontent.com
+199.232.68.133                avatars4.githubusercontent.com
+199.232.68.133                avatars3.githubusercontent.com
+199.232.68.133                avatars2.githubusercontent.com
+199.232.68.133                avatars1.githubusercontent.com
+199.232.68.133                avatars0.githubusercontent.com
+# Star me GitHub url: https://github.com/521xueweihan/GitHub520
+# GitHub520 Host End
+
+ipconfig /flushdns
+sudo rcnscd restart
+sudo killall -HUP mDNSResponder
+```
+
 ## 参考
 
 * [gitalk/gitalk](https://github.com/gitalk/gitalk):Gitalk is a modern comment component based on Github Issue and Preact. https://gitalk.github.io

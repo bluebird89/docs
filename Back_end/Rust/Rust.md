@@ -14,6 +14,9 @@ rustup self uninstall
 rustc --version
 
 rustup doc # 本地阅读核心文档
+
+rustc  main.rs
+./main
 ```
 
 ## 配置
@@ -52,6 +55,8 @@ registry = "https://code.aliyun.com/rustcc/crates.io-index"
 	- [rust-lang-cn / rust-by-example-cn ](https://github.com/rust-lang-cn/rust-by-example-cn):Rust By Example 中文版
 * [The Rust Reference](https://doc.rust-lang.org/reference/index.html)
 * [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html):The Dark Arts of Unsafe Rust
+* [richardanaya / tour_of_rust](https://github.com/richardanaya/tour_of_rust):A tour of rust's language features https://tourofrust.com/
+* [Command line apps in Rust](https://rust-cli.github.io/book/index.html)
 
 ## 工具
 
