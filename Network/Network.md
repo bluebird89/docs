@@ -900,8 +900,8 @@ tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
 * [IPv6 连接测试](https://test-ipv6.com/)
 * [henrylee2cn/teleport](https://github.com/henrylee2cn/teleport):Teleport is a versatile, high-performance and flexible socket framework. It can be used for RPC, micro services, peer-peer, push services, game services and so on. https://github.com/henrylee2cn/tpdoc
 * [tailscale / tailscale](https://github.com/tailscale/tailscale):The easiest, most secure way to use WireGuard and 2FA.https://tailscale.com/
-
-
+* [chiakge / Linux-NetSpeed](https://github.com/chiakge/Linux-NetSpeed):将Linux现常用的网络加速集成在一起
+* [ehang-io / nps](https://github.com/ehang-io/nps):一款轻量级、高性能、功能强大的内网穿透代理服务器。支持tcp、udp、socks5、http等几乎所有流量转发，可用来访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析、内网socks5代理等等……，并带有功能强大的web管理端。a lightweight, high-performance, powerful intranet penetration proxy server, with a powerful web management terminal.https://ehang.io/nps/documents
 
 ## 参考
 

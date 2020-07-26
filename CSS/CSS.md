@@ -623,7 +623,7 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
   - [ mertJF / tailblocks ](https://github.com/mertJF/tailblocks):
 tada Ready-to-use Tailwind CSS blocks. https://mertjf.github.io/tailblocks/
 * iView
-* [daneden/animate.css](https://github.com/daneden/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. http://daneden.github.io/animate.css
+* [animate-css/animate.css](https://github.com/animate-css/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. https://animate.style/
 * [Dogfalo/materialize](https://github.com/Dogfalo/materialize) Materialize, a CSS Framework based on Material Design https://materializecss.com
 * [milligram/milligram](https://github.com/milligram/milligram) A minimalist CSS framework. https://milligram.io
 * [kbrsh/moon](https://github.com/kbrsh/moon) 🌙 The minimal & fast UI library https://kbrsh.github.io/moon [moon](http://moonjs.ga/docs/getting-started.html)
@@ -648,7 +648,6 @@ for developing fast and powerful web interfaces.
 * [nzbin/three-dots](https://github.com/nzbin/three-dots):🔮 CSS loading animations made by single element. https://nzbin.github.io/three-dots/
 * [ConnorAtherton/loaders.css](https://github.com/ConnorAtherton/loaders.css):Delightful, performance-focused pure css loading animations. https://connoratherton.com/loaders
 * [matthiasmullie/minify](https://github.com/matthiasmullie/minify):CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns. https://www.minifier.org
-* [daneden/animate.css](https://github.com/daneden/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. http://daneden.github.io/animate.css
 * [IanLunn/Hover](https://github.com/IanLunn/Hover):A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS. http://ianlunn.github.io/Hover/
 * [styled-components/styled-components](https://github.com/styled-components/styled-components) Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
 *  [yui/yui3](https://github.com/yui/yui3) A library for building richly interactive web applications. http://yuilibrary.com/
