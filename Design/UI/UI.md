@@ -6,16 +6,6 @@
 * 交互
 * 习惯
 
-### [storybooks/storybook](https://github.com/storybooks/storybook)
-
-Interactive UI component dev & test: React, React Native, Vue, Angular https://storybook.js.org
-
-```sh
-npm i -g @storybook/cli
-cd my-react-app
-getstorybook
-```
-
 ## 颜色
 
 * 蓝色用于科技

@@ -166,3 +166,6 @@ pmm-admin config --server 47.92.131.xxx:80
 ```
 
 ## Perfermace Schema
+
+* 单表数据量尽量控制在千万级别
+* 关系型数据库在TPS上的瓶颈往往会比其他瓶颈更容易暴露出来,常用的MySQL数据库为例，常规情况下的TPS大概只有1500左右
