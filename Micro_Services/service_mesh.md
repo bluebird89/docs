@@ -1,25 +1,29 @@
 # Service Mesh 服务网格
 
 * Service Mesh 本质上就是微服务的动态链接器（Dynamic Linker）。基础是一个网络代理，这个网络代理会接管微服务的网络流量，然后通过一个中央控制面板进行管理，将这些流量转发到该去的地方，并在这个代理的基础之上，扩展出一系列的流量监控、限流、熔断甚至是灰度发布、分布式跟踪等能力，而不需要应用本身做出任何修改，让开发者摆脱了 SDK 之苦，也避免了由于 SDK 使用不当造成的一系列问题。同时，这个代理工作是在网络层，一般情况下也不会成为性能瓶颈。
-* A service mesh is a dedicated infrastructure layer for handling
-service-to-service communication. It’s responsible for the
-reliable delivery of requests through the complex topology of
-services that comprise a modern, cloud native application. In
-practice, the service mesh is typically implemented as an array
-of lightweight network proxies that are deployed alongside
-application code, without the application needing to be
-aware
+* 由开发 Linkerd 的 Buoyant 公司提出，并于 2016 年 9 月29 日第一次公开使用了这一术语。William Morgan，Buoyant CEO，对 Service Mesh 这一概念定义如下
+    - A service mesh is a dedicated infrastructure layer for handling service-to-service communication. It’s responsible for the reliable delivery of requests through the complex topology of services that comprise a modern, cloud native application.
+    - In practice, the service mesh is typically implemented as an array of lightweight network proxies that are deployed alongside application code, without the application needing to be aware
 * 服务网格（ Service Mesh ）是解决微服务之间的网络问题和可观测性问题的(事实)标准，并且正在走向标准化
     - 应用程序间通讯中间层
     - 轻量级网络代理
     - 应用程序无感知
     - 解耦应用程序的重试/超时、监控、追踪和服务发现
-* control plane
+* 特点
+    - 本质：基础设施层；
+    - 功能：请求分发；
+    - 部署形式：网络代理；
+    - 特点：透明；
 * 功能
     - 流量控制: (路由,流量转移,超时重试, 熔断,故障注入,流量镜像)
     - 策略 (限流、黑白名单)
     - 网络安全 (授权与身份认证)
     - 可观察性 (指标、日志、追踪)
+* 局限性。
+    - 增加了复杂度。服务网格将 sidecar 代理和其它组件引入到已经很复杂的分布式环境中，会极大地增加整体链路和操作运维的复杂性。
+    - 运维人员需要更专业。在容器编排器（如 Kubernetes）上添加 Istio 之类的服务网格，通常需要运维人员成为这两种技术的专家，以便充分使用二者的功能以及定位环境中遇到的问题。
+    - 延迟。从链路层面来讲，服务网格是一种侵入性的、复杂的技术，可以为系统调用增加显著的延迟。这个延迟是毫秒级别的，但是在特殊业务场景下，这个延迟可能也是难以容忍的。
+    - 平台的适配。服务网格的侵入性迫使开发人员和运维人员适应高度自治的平台并遵守平台的规
 
 ## 历程
 
@@ -99,6 +103,27 @@ aware
     - 通常是按照无状态目标设计的，但实际上为了提高流量转发性能，需要缓存一些数据，因此无状态也是有争议的
     - 直接处理入站和出站数据包，转发、路由、健康检查、负载均衡、认证、鉴权、产生监控数据等
     - 对应用来说透明，即可以做到无感知部署
+
+## 服务网格
+
+* 从总体架构上来讲比较简单，不过是一堆紧挨着各项服务的用户代理，外加一组任务管理流程组成。代理在服务网格中被称为数据层或数据平面（data plane），管理流程被称为控制层或控制平面（control plane）。数据层截获不同服务之间的调用并对其进行“处理”；控制层协调代理的行为，并为运维人员提供 API，用来操控和测量整个网络
+* 一个专用的基础设施层，旨在“在微服务架构中实现可靠、快速和安全的服务间调用”。它不是一个“服务”的网格，而是一个“代理”的网格，服务可以插入这个代理，从而使网络抽象化
+* 典型的服务网格中，这些代理作为一个 sidecar（边车）被注入到每个服务部署中。服务不直接通过网络调用服务，而是调用它们本地的 sidecar 代理，而 sidecar 代理又代表服务管理请求，从而封装了服务间通信的复杂性。相互连接的 sidecar 代理集实现了所谓的数据平面，这与用于配置代理和收集指标的服务网格组件（控制平面）形成对比
+* 控制平面
+    - 特点：
+        + 不直接解析数据包；
+        + 与控制平面中的代理通信，下发策略和配置；
+        + 负责网络行为的可视化；
+        + 通常提供 API 或者命令行工具可用于配置版本化管理，便于持续集成和部署；
+* 数据平面
+    - 特点：
+        + 通常是按照无状态目标设计的，但实际上为了提高流量转发性能，需要缓存一些数据，因此无状态也是有争议的；
+        + 直接处理入站和出站数据包，转发、路由、健康检查、负载均衡、认证、鉴权、产生监控数据等；
+        + 对应用来说透明，即可以做到无感知部署；
+* 带来变革
+    - 微服务治理与业务逻辑的解耦
+    - 异构系统的统一治理
+
 
 ## 实现服务网格的方法
 

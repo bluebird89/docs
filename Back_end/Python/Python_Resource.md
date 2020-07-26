@@ -933,8 +933,6 @@ Python实现的数据库。
 
 ## 数据可视化
 
-进行数据可视化的库。 参见: [awesome-javascript](https://github.com/sorrycc/awesome-javascript#data-visualization)。
-
 * matplotlib：一个 Python 2D 绘图库。[官网](http://matplotlib.org/)
 * bokeh：用 Python 进行交互式 web 绘图。[官网](https://github.com/bokeh/bokeh)
 * ggplot：ggplot2 给 R 提供的 API 的 Python 版本。[官网](https://github.com/yhat/ggplot)

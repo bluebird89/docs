@@ -36,6 +36,8 @@
 * [jacobeisenstein/gt-nlp-class](https://github.com/jacobeisenstein/gt-nlp-class):Course materials for Georgia Tech CS 4650 and 7650, "Natural Language"
 * [yandexdataschool/nlp_course](https://github.com/yandexdataschool/nlp_course):YSDA course in Natural Language Processing
 * [nlp-beginner](https://github.com/FudanNLP/nlp-beginner):复旦NLP实验室NLP上手教程 https://nndl.github.io/
+* [lyeoni/nlp-tutorial](https://github.com/lyeoni/nlp-tutorial)
+* [graykode / nlp-tutorial](https://github.com/graykode/nlp-tutorial):Natural Language Processing Tutorial for Deep Learning Researchers https://www.reddit.com/r/MachineLearning/comments/amfinl/project_nlptutoral_repository_who_is_studying/
 
 ```sh
 git clone https://github.com/DSKSD/cs-224n-Pytorch.git
@@ -69,10 +71,9 @@ docker-compose up -d
 * [facebookresearch/InferSent](https://github.com/facebookresearch/InferSent):Sentence embeddings (InferSent) and training code for NLI.
 * [explosion/spaCy](https://github.com/explosion/spaCy):💫 Industrial-strength Natural Language Processing (NLP) with Python and Cython https://spacy.io
 * [facebookresearch/pytext](https://github.com/facebookresearch/pytext):A natural language modeling framework based on PyTorch https://fb.me/pytextdocs
-* [salesforce/decaNLP](https://github.com/salesforce/decaNLP):The Natural Language Decathlon: A Multitask Challenge for NLP 
+* [salesforce/decaNLP](https://github.com/salesforce/decaNLP):The Natural Language Decathlon: A Multitask Challenge for NLP
 * [Separius/awesome-sentence-embedding](https://github.com/Separius/awesome-sentence-embedding):A curated list of pretrained sentence(and word) embedding models
 * [crownpku/Awesome-Chinese-NLP](https://github.com/crownpku/Awesome-Chinese-NLP):A curated list of resources for Chinese NLP 中文自然语言处理相关资料
-* [lyeoni/nlp-tutorial](https://github.com/lyeoni/nlp-tutorial)
 * [Understanding LSTM Networks](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
 * [我爱自然语言处理](http://www.52nlp.cn/)
 * [](https://github.com/facebookresearch/fastText)
