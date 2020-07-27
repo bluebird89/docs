@@ -265,6 +265,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - [TRANSMIT 5](https://www.panic.com/transmit/):Upload, download, and manage files on tons of servers with an easy, familiar, and powerful UI. It’s quite good.
     - Cloud Outline
     - iCHM
+    * Clearview - 支持 PDF, EPUB, CHM, MOBI 的免费阅读器
 * 音乐
     - 播放器：MPlayerX
     - [beardedspice/beardedspice](https://github.com/beardedspice/beardedspice):Mac Media Keys for the Masses <http://beardedspice.github.io>
@@ -306,10 +307,11 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * Things 3
 * [ MonitorControl / MonitorControl ](https://github.com/MonitorControl/MonitorControl):desktop_computer Control your external monitor brightness & volume on your Mac
 * [mind node](https://mindnode.com/)
-* Clearview - 支持 PDF, EPUB, CHM, MOBI 的免费阅读器
+
 * Moment：常驻于 macOS 菜单栏和通知中心的倒数日工具，又不止于倒数日。我们还支持了纪念日、时间进度条、你关心的人的年龄，每一个事件都支持单独添加到菜单栏
 * Dropzone 就是这样一款，既能给你带来键盘上如同 Launch Center Pro 体验同时，也提供了通过鼠标拖拽这样的操作，实现鼠标操作的肌肉记忆的应用
 * [Here](https://here.app/)
+* [glushchenko/fsnotes](https://github.com/glushchenko/fsnotes):Notes manager for macOS/iOS
 
 ### screensavers
 
