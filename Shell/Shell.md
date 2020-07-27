@@ -848,55 +848,56 @@ sudo apt-get install xmobar dmenu
 | 可以搜索全屏展示所有的 tab | ⌘+Option+e         |
 | 全屏                       | command+enter      |
 
-### Terminal 快捷键
+### Terminal Keymap
 
 * 终端本质上是对应着 Linux 上的 /dev/tty 设备，Linux 的多用户登陆就是通过不同的 /dev/tty 设备完成的
 * 默认提供七个终端，其中第一个到第六个虚拟控制台是全屏的字符终端，第七个虚拟控制台是图形终端，用来运行GUI程序，按快捷键CTRL+ALT+F1，或CTRL+ALT+F2.......CTRL+ALT+F6，CTRL+ALT+F7可完成对应的切换
-* 快捷键
-	- Ctrl+Shift+n 新终端
-	- Shift+Ctrl+t 打开新的标签页
-	- Shift+Ctrl+w|q 关闭标签页
-	- Tab 实现命令补全,目录补全、命令参数补全
-	- Ctrl+c:强行终止当前程序
-	- Ctrl + d ：删除光标处的字符，同Del键。没有命令是表示注销用户
-	- Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg
-	- Ctrl+a:将光标移至输入行头，相当于Home键
-  	+ Ctrl + K :删除从光标所在位置到行末,常配合ctrl+a使用
-	- Ctrl+e:将光标移至输入行末，相当于End键
-  	+ Alt+Backspace:向前删除一个单词，常配合ctrl+e使用
-	- Shift+PgUp:将终端显示向上滚动
-	- Shift+PgDn:将终端显示向下滚动
-	- Ctrl+k 剪切此光标后内容
-	- Ctrl+u 剪切此光标之前内容,输错命令或密码
-	- Ctrl+d 剪切当前字符
-	- Ctrl+h 剪切当前字符前一个字符
-	- Ctrl+w 剪切光标左边的参数（选项）或内容（实际是以空格为单位向前剪切一个word）
-	- Ctrl+y 粘贴由 Ctrl+u ， Ctrl+d ， Ctrl+w 剪切内容
-	- Ctrl+l 相当于clear，即清屏
-	- Ctrl+r 查找历史命令
-	- Ctrl + g ：从历史搜索模式退出，同ESC
-	- Ctrl+b 向回移动光标
-	- Ctrl+f 向前移动光标
-	- Ctrl+t 将光标位置的字符和前一个字符进行位置交换
-	- Ctrl+S 暂停屏幕输出
-	- Ctrl+Q 继续屏幕输出
-	- Ctrl + f ：按字符前移（右向），同→
-	- Ctrl + b ：按字符后移（左向），同←
-	- Alt + d ：从光标处删除至字尾。可以Ctrl+y粘贴回来
-	- Ctrl+Left-Arrow|Alt + b ：按单词后移（左向）
-	- Ctrl+Right-Arrow|Alt + f ：按单词前移，标点等特殊字符与空格一样分隔单词（右向）
-	- Ctrl + p ：历史中的上一条命令，同↑
-	- Ctrl + n ：历史中的下一条命令，同↓
-	- Ctrl+xx 在行头和当前光标位置切换
-	- Shift+Ctrl+C 复制
-	- Shift+Ctrl+V 粘贴
-	- Ctrl+/|Ctrl+x + Ctrl+u  撤销
-	- Alt + .：同!$，输出上一个命令的最后一个参数（选项or单词）
-	- Alt + \ ：删除当前光标前面所有的空白字符
-	- Ctrl + ]　c ：从当前光标处向右定位到字符 c 处
-	- Esc　Ctrl + ]　c ：从当前光标向左定位到字符 c 处。（ bind -P 可以看到绑定信息）
-	- Ctrl + r　str ：可以搜索历史，也可以当前光标处向左定位到字符串 str，Esc后可定位继续编辑
-	- Ctrl -s　str ：从当前光标处向右定位到字符串 str 处，Esc 退出
+
+* Ctrl+Shift+n 新终端
+* Shift+Ctrl+t 打开新的标签页
+* Shift+Ctrl+w|q 关闭标签页
+* Tab 实现命令补全,目录补全、命令参数补全
+* Ctrl+c:强行终止当前程序 或者删除整行
+* Ctrl + d ：删除光标处的字符，同Del键。没有命令是表示注销用户
+* Ctrl+z:将当前程序放到后台运行，恢复到前台为命令fg
+* Ctrl+a:将光标移至输入行头，相当于Home键
+* Ctrl+e:将光标移至输入行末，相当于End键
+* Ctrl + K :删除从光标所在位置到行末,常配合ctrl+a使用
+* Alt+Backspace:向前删除一个单词，常配合ctrl+e使用
+* Shift+PgUp:将终端显示向上滚动
+* Shift+PgDn:将终端显示向下滚动
+* 复制粘贴
+    - Ctrl+y 粘贴由 Ctrl+u ， Ctrl+d ， Ctrl+w,Ctrl+k 剪切内容
+    - Ctrl+k 剪切此光标后内容
+    - Ctrl+u 剪切此光标之前内容,输错命令或密码
+    - Ctrl+d 剪切当前字符
+    - Ctrl+h 剪切当前字符前一个字符
+    - Ctrl+w 剪切光标左边的参数（选项）或内容（实际是以空格为单位向前剪切一个word）
+
+* Ctrl+l 相当于clear，即清屏
+* Ctrl+r 查找历史命令
+* Ctrl + g ：从历史搜索模式退出，同ESC
+* Ctrl+t 将光标位置的字符和前一个字符进行位置交换
+* Ctrl+S 暂停屏幕输出
+* Ctrl+Q 继续屏幕输出
+* Ctrl + f ：按字符前移（右向），同→
+* Ctrl + b ：按字符后移（左向），同←
+* Alt + d ：从光标处删除至字尾。可以Ctrl+y粘贴回来
+* Ctrl+Left-Arrow|Alt + b ：按单词后移（左向）
+* Ctrl+Right-Arrow|Alt + f ：按单词前移，标点等特殊字符与空格一样分隔单词（右向）
+* Ctrl + p ：历史中的上一条命令，同↑
+* Ctrl + n ：历史中的下一条命令，同↓
+* Ctrl+xx 在行头和当前光标位置切换
+* Shift+Ctrl+C 复制
+* Shift+Ctrl+V 粘贴
+* Ctrl+/|Ctrl+x + Ctrl+u  撤销
+* Alt + .：同!$，输出上一个命令的最后一个参数（选项or单词）
+* Alt + \ ：删除当前光标前面所有的空白字符
+* Ctrl + ]　c ：从当前光标处向右定位到字符 c 处
+* Esc　Ctrl + ]　c ：从当前光标向左定位到字符 c 处。（ bind -P 可以看到绑定信息）
+* Ctrl + r　str ：可以搜索历史，也可以当前光标处向左定位到字符串 str，Esc后可定位继续编辑
+* Ctrl -s　str ：从当前光标处向右定位到字符串 str 处，Esc 退出
+* !! 执行上一条
 
 ```sh
 dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on command-line
