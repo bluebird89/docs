@@ -6,9 +6,10 @@
 
 ## 环境搭建
 
-### Mac
-
 ```sh
+
+sudo apt install gcc g++ gdb
+
 gcc file.c # 编译
 
 ## sublime  C++.sublime-build

@@ -525,6 +525,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [VIM Tutor](http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor)
 * [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)
 * [reddit 的 Vim 频道](https://www.reddit.com/r/vim/)
+* [vim-adventures](https://vim-adventures.com/)
 
 ## 图书
 
@@ -570,3 +571,7 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
 * [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar):vinegar.vim: Combine with netrw to create a delicious salad dressing https://www.vim.org/scripts/script.php?script_id=5671
 * [neoclide/coc.nvim](https://github.com/neoclide/coc.nvim):Intellisense engine for vim8 & neovim, full language server protocol support as VSCode https://salt.bountysource.com/teams/coc-nvim
 * [vimwiki / vimwiki](https://github.com/vimwiki/vimwiki):Personal Wiki for Vim http://vimwiki.github.io/
+
+## 参考
+
+* [Vim教程](https://vimjc.com/)
