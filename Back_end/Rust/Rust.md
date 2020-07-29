@@ -2,6 +2,21 @@
 
 Empowering everyone to build reliable and efficient software. https://www.rust-lang.org
 
+* 由 Mozilla 主导开发的通用、编译型编程语言。设计准则为“安全、并发、实用”，支持函数式、并发式、过程式以及面向对象的编程风格。Rust 语言原本是 Mozilla 员工 Graydon Hoare 的私人项目，而 Mozilla 于 2009 年开始赞助这个项目，并且在 2010 年首次揭露了它的存在
+* 全新的开源系统编程语言，由 Mozilla 和社区的义务劳动者创造，它帮助开发者创造高速与安全的应用，同时能享受到现代多核处理器的强大特性。Rust 使用易懂的语法避免了段错误 (segmentation faults) 并保证了线程安全
+* 提供了零成本抽象，更多语义，内存安全保证，不会发生竞争的线程，基于特性 (trait) 的泛型，模式匹配，类型推导，高效的 C 绑定，和最小运行时大小
+* 方向
+    - 高性能 Web。Rust + WASM
+    - 更高性能地跨平台应用。Rust + Electron + Node.js，结合 Neon Binding，可以编译为 Node.js 的模块，并在 Electron 应用中调用，开发跨平台桌面应用。
+* 优点：
+    - 优秀的 Macro 宏定义机制
+    - 可 OO。基于 Traits 的简洁而强大的范型系统
+    - 错误处理。基于 Option & Result 的空值和错误处理
+    - 防 OOM。基于 Ownership、Borrowing、Lifetime 的内存管理机制
+* 缺点
+    - 处理更多的细节
+    - 复杂的所有权机制:在没有垃圾回收机制的前提下保障内存安全。这是一个相当复杂的概念
+
 ## 安装
 
 ```sh
@@ -86,6 +101,8 @@ registry = "https://code.aliyun.com/rustcc/crates.io-index"
 	- [zesterer / flume](https://github.com/zesterer/flume):A safe and fast multi-producer, single-consumer channel. https://crates.io/crates/flume
 * GUI
     - [hecrj / iced](https://github.com/hecrj/iced):A cross-platform GUI library for Rust, inspired by Elm
+* IDE
+    - Clion + Rust 插件
 
 ## 参考
 

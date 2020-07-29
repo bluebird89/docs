@@ -123,8 +123,6 @@ sudo apt-get install code
 }
 ```
 
-## 使用
-
 ### 左边列表
 
 -   File explorer: `command + shift + E`
@@ -292,6 +290,10 @@ code --disable-extensions . # disable all extensions
     "description": "Log output to console"
 }
 ```
+
+## launch
+
+## task 构建（编译、链接等）任务
 
 ## [Set Up Remote Development Workflow With VS Code in Your Browser](https://hackernoon.com/how-you-can-set-up-remote-development-workflow-with-vs-code-in-your-browser-3y3q3wu9)
 

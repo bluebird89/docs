@@ -67,6 +67,7 @@ composer config --list --global
 composer config -g repo.packagist composer https://packagist.phpcomposer.com # 全局配置
 composer config repo.packagist composer https://packagist.phpcomposer.com # 项目配置
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+composer config -g repo.packagist composer https://mirrors.huaweicloud.com/repository/php/
 
 composer config -g --unset repos.packagist
 composer config --global --auth github-oauth.github.com myCorrectLongToken

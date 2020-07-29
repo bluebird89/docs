@@ -951,9 +951,6 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * 语法检测
     - [mgechev/revive](https://github.com/mgechev/revive):🔥 ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint. https://revive.run
     - [ golangci / golangci-lint ](https://github.com/golangci/golangci-lint):Fast linters Runner for Go
-* ORM
-    - [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io
-    - [jinzhu/gorm](https://github.com/jinzhu/gorm):The fantastic ORM library for Golang, aims to be developer friendly https://gorm.io
 * 路由
     - [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
 * error
@@ -980,12 +977,17 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [upper/db](https://github.com/upper/db):Productive data access layer for Go. https://upper.io/db.v3
     - [jmoiron/sqlx](https://github.com/jmoiron/sqlx):general purpose extensions to golang's database/sql http://jmoiron.github.io/sqlx/
     - [globalsign/mgo](https://github.com/globalsign/mgo):The MongoDB driver for God
+    - `go get -u github.com/go-sql-driver/mysql`
+    - [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io
+    - [jinzhu/gorm](https://github.com/jinzhu/gorm):The fantastic ORM library for Golang, aims to be developer friendly https://gorm.io `go get -u github.com/jinzhu/gorm`
 * Http
     - [panjf2000/gnet](https://github.com/panjf2000/gnet):🌐🐳 A high-performance, lightweight, non-blocking, event-driven networking framework written in pure Go.
     - [xtaci/kcp-go](https://github.com/xtaci/kcp-go):A Production-Grade Reliable-UDP Library for golang
     - [valyala/fasthttp](https://github.com/valyala/fasthttp):Fast HTTP package for Go. Tuned for high performance. Zero memory allocations in hot paths. Up to 10x faster than net/http
     - [parnurzeal / gorequest](https://github.com/parnurzeal/gorequest):GoRequest -- Simplified HTTP client ( inspired by nodejs SuperAgent ) http://parnurzeal.github.io/gorequest/
     - [davyxu/cellnet](https://github.com/davyxu/cellnet):High performance, simple, extensible golang open source network library
+* graphql
+	- [graphql-go/graphql](https://github.com/graphql-go/graphql):An implementation of GraphQL for Go / Golang
 * QUIC
     - [lucas-clemente / quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
 * load
@@ -1113,6 +1115,9 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [deanishe/awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
 * [ hackstoic / golang-open-source-projects ](https://github.com/hackstoic/golang-open-source-projects):为互联网IT人打造的中文版awesome-go
 * [effective_go](https://go-zh.org/doc/effective_go.html)
+* https://learn.go.dev/
 
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>
+
+[](https://mp.weixin.qq.com/s?__biz=MzUzNTY5MzU2MA==&mid=2247484112&idx=1&sn=79d0d3167d0d962fe41ec00cdafffbb0)
