@@ -86,7 +86,7 @@ php -m | grep swoole
 php --ri swoole
 ```
 
-## 知识储备：
+## 知识储备
 
 * 多进程/多线程
     - 了解 Linux 操作系统进程和线程的概念
@@ -110,6 +110,8 @@ php --ri swoole
 
 ## 原理
 
+* 上下文:存在不同的生命周期，就有了不同的上下文 Context
+    - 上下文对象都实现了基础的 ContextInterface 接口，因此可以使用上下文存取当前请求生命周期的数据
 * master进程：是一个包含多线程进程，运行启动 Swoole 的 PHP 脚本时，首先会创建该进程（整个应用的 root 进程），然后由该进程 fork 出 Reactor 线程和 Manager 进程
 * Reactor线程组：Reactor 是包含在 Master 进程中的多线程程序，用来处理 TCP 连接和数据收发（异步非阻塞方式）
     - 以多线程的方式运行
@@ -288,7 +290,7 @@ dtruss|strace -f -p masterPid
 * 内部调用redis mysql,执行时间为 max(redis, mysql)
 * swoole 的协程 vs go 的协程
     - swoole 的协程 和 golang的调度方式完全不同，每一个进程里面的协程都是串行执行所以无需担心访问资源加锁问题
-    - 都是利用多进程实现并行
+    - 都是利用多进程实现并行: 进程的协程是串行执行.如何利用 多核 CPU 实现并行呢。答案是利用多进程实现。现在 task 也可以开启协程
     - 基础知识: 网络编程 + 协程, 不会因为是用 swoole 还是 go 而有所减少, 基础不大好, 表现出来了就是学着学着就容易卡住, 效率上不来
     - 以为写的是 swoole, 不不不, 写的是一个又一个功能的 API, go 也同样(要用到 redis/mysql/mq, 相应的 API 还是得学得会), 区别在于
         + swoole 趋势是在底层实现支持(比如 协程runtime), 这样 PHPer 可以无缝切换过来

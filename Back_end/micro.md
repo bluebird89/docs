@@ -1,18 +1,47 @@
 # [micro/go-micro](https://github.com/micro/go-micro):A distributed systems development framework https://go-micro.dev
 
 ```sh
+go run main.go --registry=etcd
+
 micro --registry=etcd api --namespace='' --handler=rpc
+
+# WEb dashboard
+micro web # http://localhost:8082/
+
+# 启动 API 网关
+micro api --handler=api
+
+curl -H 'Content-Type: application/json' \
+    -d '{"service": "go.micro.srv.greeter", "method": "Greeter.Hello", "request": {"name": "学院君"}}' \
+    http://localhost:8080/rpc
+
+go run client.go
+
+
+
+micro proxy go.micro.srv.greeter
+curl \
+-H 'Content-Type: application/json' \
+-H 'Micro-Service: go.micro.srv.greeter' \
+-H 'Micro-Endpoint: Greeter.Hello' \
+-d '{"name": "学院君"}' \
+http://localhost:8081
+
+
+micro cli
+micro list services
+micro get service  go.micro.srv.greeter
+micro status|health go.micro.srv.greeter
+micro call go.micro.srv.greeter Greeter.Hello '{"name":"henry"}'
+micro logs example-service
+
+micro bot --inputs=slack --slack_token=SLACK_TOKEN
 ```
 
 
-## [ micro / micro ](https://github.com/micro/micro):Micro is a cloud native development platform
+## 工具
 
-
-```sh
-micro --registry=etcd api --namespace=' ' --handler=rpc
-
-micro web
-```
+* [ micro / micro ](https://github.com/micro/micro):Micro is a cloud native development platform
 
 ## 问题
 

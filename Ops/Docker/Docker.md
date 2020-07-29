@@ -164,6 +164,8 @@ apt-get update && apt-get install -y \
   docker-ce=5:19.03.4~3-0~ubuntu-$(lsb_release -cs) \
   docker-ce-cli=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)
 
+# /etc/default/docker
+DOCKER_OPTS="--registry-mirror=https://registry.docker-cn.com"
 # Setup daemon.
 cat > /etc/docker/daemon.json <<EOF
 {
