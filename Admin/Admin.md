@@ -132,4 +132,5 @@ npm run serve
 * [marmelab/react-admin](https://github.com/marmelab/react-admin):A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, React and Material Design http://marmelab.com/react-admin
 * [](https://github.com/puikinsh/gentelella)
 * [d2-projects/d2-admin](https://github.com/d2-projects/d2-admin):🌈 An elegant dashboard https://d2admin.fairyever.com
+* [jqhph/dcat-admin](https://github.com/jqhph/dcat-admin) http://www.dcatadmin.com/
 * [](https://github.com/iview/iview-admin)

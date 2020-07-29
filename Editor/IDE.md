@@ -24,6 +24,12 @@ generate:Alt+ins
   - Save Actions
 * Diagrams
   - Project tool window->right-click ->Diagrams | Show Diagram
+*  Navigate
+  -  Class 代表类
+  -  File 代表文件
+  -  Symbol 代表符号/标记（可用于导航到指定变量、方法）
+  -  Line
+
 
 ## 快捷键
 
@@ -294,6 +300,14 @@ generate:Alt+ins
   - Press Ctrl+A, then Ctrl+Alt+L, then Up arrow, then Down arrow, and finally then Ctrl+Alt+Shift+S
   - Stop recording the macro clicking on the Stop button on the bottom right of the page.
   Give this macro a name like "Format and Save"
+
+## 问题
+
+```
+# The current inotify(7) watch limit is too low
+#  /etc/sysctl.conf
+fs.inotify.max_user_watches = 524288
+```
 
 ## 工具
 

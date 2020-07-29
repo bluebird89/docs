@@ -1,6 +1,0 @@
-version: '3'
-services:
-    whoami:
-        image: containous/whoami
-        labels:
-            - 'traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)'
