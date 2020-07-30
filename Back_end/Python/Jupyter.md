@@ -322,3 +322,4 @@ conda install xeus-python -c conda-forge #  kernel 需要实现 Jupyter Debug Pr
 ## 工具
 
 * [Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb)
+* [deepnote](https://beta.deepnote.com)

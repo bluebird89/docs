@@ -175,6 +175,10 @@
     - 若干 broker（Kafka 支持水平扩展，一般 broker 数量越多，集群吞吐率越高）
     - 若干 Consumer Group
     - 一个 Zookeeper 集群:Broker 列表管理、Partition 与 Broker 的关系、Partition 与 Consumer 的关系、Producer 与 Consumer 负载均衡、消费进度 Offset 记录、消费者注册
+* 一个分区一个文件
+* 消息写入对于单分区来说也是顺序写，如果分区不多的话从整体上看也算顺序写，它的日志文件并没有用到 mmap，而索引文件用了 mmap。但发消息 Kafka 用到了零拷贝
+* 对于消息的写入来说 mmap 其实没什么用，因为消息是从网络中来。而对于发消息来说 sendfile 对比 mmap+write 觉得效率更高，因为少了一次页缓存到 SocketBuffer 中的拷贝
+* 分区多了的话，写入需要频繁的在多个文件之间来回切换，对于每个文件来说是顺序写入的，但是从全局看其实算随机写入，并且读取的时候也是一样，算随机读
 
 ## API
 
