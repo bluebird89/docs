@@ -336,6 +336,8 @@ nsloop
 
 ## Socket 套接字
 
+* 在同一台机器上进程间的通信（IPC）有多种方式，可以是通过消息队列、FIFO、共享内存等方式。
+* 网络编程套接字是指：分布在不同机器上的程序通过系统提供的网络通信接口，跨越网络将不同机器上的进程连接起来，实现跨机器的网络通信。一般有UDP套接字、TCP套接字、Unix Domain
 * 应用层的应用程序在基于 TCP 协议或 UDP 协议进行通信时，需要用到操作系统提供的类库，这种类库一般称为 API（Application Programming Interface，应用编程接口）
 * 使用 TCP 或 UDP 时，又会广泛使用到 Socket（套接字）API，Socket 原本是由 BSD UNIX 开发的，但是后来被移植到 Windows 的 Winsock 以及嵌入式系统中。应用程序利用 Socket，可以设置对端的 IP 地址、端口号，并实现数据的接收和发送
 * TCP
@@ -881,57 +883,13 @@ lsof -i :3306
 lsof -i tcp:80
 #根据文件描述范围列出文件信息
 lsof -d 2-3
-
-# 捕获特定网口数据包
-tcpdump -i eth0
-# 捕获特定个数(1000)的包
-tcpdump -c 1000 -i eth0
-# 将捕获的包保存到文件
-tcpdump -w a.pcap -i eth0
-# 读取pcap格式的包
-tcpdump -r a.pcap
-# 增加捕获包的时间戳
-tcpdump -n -ttt -i eth0
-# 指定捕获包的协议类型
-tcpdump -i eth0 arp
-# 捕获指定端口
-tcpdump -i eth0 post 22
-# 捕获特定目标ip+port的包
-tcpdump -i eth0 dst address and port 22
-# 捕获DNS请求和响应
-tcpdump -i eth0 -s0 port 53
-# 匹配Http请求头
-tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
-# 捕获特定网口数据包
-tcpdump -i eth0
-# 捕获特定个数(1000)的包
-tcpdump -c 1000 -i eth0
-# 将捕获的包保存到文件
-tcpdump -w a.pcap -i eth0
-# 读取pcap格式的包
-tcpdump -r a.pcap
-# 增加捕获包的时间戳
-tcpdump -n -ttt -i eth0
-# 指定捕获包的协议类型
-tcpdump -i eth0 arp
-# 捕获指定端口
-tcpdump -i eth0 post 22
-# 捕获特定目标ip+port的包
-tcpdump -i eth0 dst address and port 22
-# 捕获DNS请求和响应
-tcpdump -i eth0 -s0 port 53
-# 匹配Http请求头
-tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
 ```
 
 ## 图书
 
-* 《TCP/IP 协议详解》
-* 《TCP/IP高效编程：改善网络程序的44个技巧》
 * 《Unix环境高级编程》Unix Network Programming
-* 《Unix网络编程：卷一》
-* 《TCP/IP网络编程》
-    - [chankeh/net-lenrning-reference](https://github.com/chankeh/net-lenrning-reference):TCP/IP网络编程笔记
+* 《UNIX网络编程 卷1：套接字联网API（第3版）》
+* 《UNIX网络编程 卷2：进程间通信（第2版）》
 * Computer Networking: A Top Down Approach 计算机网络：自顶向下方法
     - [PPT](https://gaia.cs.umass.edu/kurose_ross/ppt.htm)
 

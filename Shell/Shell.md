@@ -1055,6 +1055,18 @@ sudo apt install terminator
     background_image = None
 ```
 
+## Linux环境高级编程
+
+* 学习系统编程接口、系统调用 API 、内存管理、进程间通信（ IPC ）
+
+## 图书
+
+* 《鸟哥的Linux私房菜基础学习篇》 —— 这个系列还有一个服务器架设篇，前期学习个人感觉没必要看
+* 《Linux Shell脚本攻略》
+* 《Shell脚本学习指南》
+* **《UNIX环境高级编程》**
+* 《Linux/UNIX系统编程手册》
+
 ## 工具
 
 * [ GitSquared / edex-ui ](https://github.com/GitSquared/edex-ui):A cross-platform, customizable science fiction terminal emulator with advanced monitoring & touchscreen support.

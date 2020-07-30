@@ -378,6 +378,97 @@ byte b = (byte)i1;
 int a[] = new int[10]; //定义了一个长度是10的int类型数组
 ```
 
+## HashMap
+
+* TreeMap<K,V>
+  - Key值是要求实现java.lang.Comparable，所以迭代的时候TreeMap默认是按照Key值升序排序的
+  - 实现是基于红黑树结构,没有调优选项，因为该树总处于平衡状态
+    + TreeMap()：构建一个空的映像树
+    + TreeMap(Map m): 构建一个映像树，并且添加映像m中所有元素
+    + TreeMap(Comparator c): 构建一个映像树，并且使用特定的比较器对关键字进行排序
+    + TreeMap(SortedMap s): 构建一个映像树，添加映像树s中所有映射，并且使用与有序映像s相同的比较器排序
+  - 适用于按自然顺序或自定义顺序遍历键（key）
+  - 通过自定义的比较器来实现降序：实现Comparator接口，重写compare方法，有两个参数，这两个参数通过调用compareTo进行比较，而compareTo默认规则是：
+    + 如果参数字符串等于此字符串，则返回 0 值；
+    + 如果此字符串小于字符串参数，则返回一个小于 0 的值；
+    + 如果此字符串大于字符串参数，则返回一个大于 0 的值
+    + 在返回时多添加了个负号，就将比较的结果以相反的形式返回
+* HashMap<K,V>
+  - Key值实现散列hashCode()，分布是散列的、均匀的，不支持排序
+  - 数据结构主要是桶(数组)，链表或红黑树
+  -  基于哈希表实现。使用HashMap要求添加的键类明确定义了hashCode()和equals()[可以重写hashCode()和equals()]，为了优化HashMap空间的使用，可以调优初始容量和负载因子
+    + HashMap(): 构建一个空的哈希映像
+    + HashMap(Map m): 构建一个哈希映像，并且添加映像m的所有映射
+    + HashMap(int initialCapacity): 构建一个拥有特定容量的空的哈希映像
+    + HashMap(int initialCapacity, float loadFactor): 构建一个拥有特定容量和加载因子的空的哈希映像
+  - 适用于在Map中插入、删除和定位元素
+* 线程安全
+  - HashMap继承AbstractMap抽象类。 AbstractMap抽象类： 覆盖了equals()和hashCode()方法以确保两个相等映射返回相同的哈希码。如果两个映射大小相等、包含同样的键且每个键在这两个映射中对应的值都相同，则这两个映射相等。映射的哈希码是映射元素哈希码的总和，其中每个元素是Map.Entry接口的一个实现。因此，不论映射内部顺序如何，两个相等映射会报告相同的哈希码。
+  - TreeMap继承自SortedMap接口。SortedMap接口： 它用来保持键的有序顺序。SortedMap接口为映像的视图(子集)，包括两个端点提供了访问方法。除了排序是作用于映射的键以外，处理SortedMap和处理SortedSet一样。添加到SortedMap实现类的元素必须实现Comparable接口，否则您必须给它的构造函数提供一个Comparator接口的实现。TreeMap类是它的唯一一个实现。
+
+```java
+public class MapTest {
+
+    public static void main(String[] args) {
+        //初始化自定义比较器
+        MyComparator comparator = new MyComparator();
+        //初始化一个map集合
+        Map<String,String> map = new TreeMap<String,String>(comparator);
+        //存入数据
+        map.put("a", "a");
+        map.put("b", "b");
+        map.put("f", "f");
+        map.put("d", "d");
+        map.put("c", "c");
+        map.put("g", "g");
+        //遍历输出
+        Iterator iterator = map.keySet().iterator();
+        while(iterator.hasNext()){
+            String key = (String)iterator.next();
+            System.out.println(map.get(key));
+        }
+    }
+
+    static class MyComparator implements Comparator{
+
+        @Override
+        public int compare(Object o1, Object o2) {
+            // TODO Auto-generated method stub
+            String param1 = (String)o1;
+            String param2 = (String)o2;
+            return -param1.compareTo(param2);
+        }
+
+    }
+
+}
+```
+## DelayQueue 延时任务
+
+* 定时任务 vs 延时任务
+  - 定时任务有固定的触发时间（比如每天的凌晨2点执行），延迟任务的执行时间不固定，严格依赖于业务事件的触发时间（比如：自动确认收货是在卖家发货那个时刻往后延15天）
+  - 定时任务有执行周期，而延迟任务在某事件触发后一段时间内执行，一般是一次性的，没有执行周期
+  - 定时任务一般执行的是批处理操作多个任务，而延迟任务一般是单个任务
+* JDK 延迟队列
+  - 无界阻塞队列，支持延时获取元素，队列中的元素必须实现 Delayed 接口，并重写 getDelay(TimeUnit) 和 compareTo(Delayed) 方法
+    + 由于采用无界阻塞队列，占用本地内存，如果任务太多的话，很容易产生内存溢出（OOM）的风险
+    + 发生系统重启等情况会导致内存数据丢失，需要考虑将数据重新预热到缓存的操作，有额外实现成本
+  - 基于调度的线程池ScheduledExecutorService
+    + schedule。单次延迟任务。
+    + scheduleAtFixedRate。基于固定时间间隔进行循环延迟任务。如果上一次任务还没有结束，会等它结束后，才执行下一次任务，取间隔时间和任务执行时间的最大值。
+    + scheduleWithFixedDelay。取决于每次任务执行的时间长短，是基于不固定时间间隔进行循环延迟任务，每次执行时间为上一次任务结束起向后推一个时间间隔，即每次执行时间为：initialDelay, initialDelay+executeTime+delay, initialDelay+2executeTime+2delay
+* 数据库轮询
+  - 创建一个超时记录表，当业务执行时会插入一条记录到mysql表，并指定目标执行时间
+  - 启动一个定时任务，一般会采用 Quartz 框架来实现， 无限循环扫描该表记录，如果发现目标执行时间小于当前时间，会提取记录执行并修改状态。为什么要先修改状态呢？主要是考虑多线程并发问题，毕竟执行超时任务（如：自动确认收货）也要花费时间，待超时任务执行结束后，再修改状态标记为“已完成”。
+  - 缺点：采用主动发现机制，执行时间严重依赖扫描频率，如果定时任务配置的时间周期太长，那么任务真正执行时间可能会有较大延迟。反之，如果扫描周期时间太短，扫描频率过快，数据库的压力会比较大，还存在较大的系统资源浪费
+* Redis 有序集合
+  - Zset支持按score对value值排序，这里的score可以采用超时记录的目标执行时间。也就是说集合列表中的记录是按执行时间排好序，只需要取小于当前时间的即可。
+* pulsa 消息
+* ActiveMQ作为一个开箱即用的中间件，提供了扩展配置属性支持延迟消息
+* Netty
+  - 时间轮是一种高效来利用线程资源来进行批量化调度的一种调度模型。把大批量的调度任务全部都绑定到同一个的调度器上面，使用这一个调度器来进行所有任务的管理（manager），触发（trigger）以及运行（runnable）。能够高效的管理各种延时任务，周期任务，通知任务等等。
+  - 时间轮调度器的时间精度可能不是很高，对于精度要求特别高的调度任务可能不太适合。因为时间轮算法的精度取决于，时间段“指针”单元的最小粒度大小
+
 ## 运算符
 
 * 算术运算符：用在数学表达式 + - * / % ++ --

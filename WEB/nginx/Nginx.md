@@ -569,6 +569,8 @@ $document_uri # 同 $uri
     - 意：前缀匹配，如果有包含关系时，按最大匹配原则进行匹配。比如在前缀匹配：location /dir01 与 location /dir01/dir02，如有请求 http://localhost/dir01/dir02/file 将最终匹配到 location /dir01/dir02
 
 ```
+
+listen 8080 default backlog=5000;
 location = / {
    echo "规则 A";
 }

@@ -90,10 +90,22 @@ md5sum /path/filename
 sha256sum /path/filename
 ```
 
+## [minio/minio](https://github.com/minio/minio)
+
+MinIO is a high performance object storage server compatible with Amazon S3 APIs https://min.io/download  https://docs.min.io/cn/
+
+* 最适合存储非结构化数据，如照片，视频，日志文件，备份和容器/ VM 映像
+* 采用了纠删码技术，即便您丢失一半数量（N/2）的硬盘，您仍然可以恢复数据
+* 在分布式和单机模式下，所有读写操作都严格遵守read-after-write一致性模型
+* 使用s3cmd来操作Minio
+
+```sh
+code
+```
+
 ## Tool
 
 * [rook/rook](https://github.com/rook/rook):Storage Orchestration for Kubernetes https://rook.io
 * [nextcloud/server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data https://nextcloud.com
 * [Unison](https://www.cis.upenn.edu/~bcpierce/unison/):File Synchronizer
-* [minio/minio](https://github.com/minio/minio):MinIO is a high performance object storage server compatible with Amazon S3 APIs https://min.io/download
 * [openmediavault](https://www.openmediavault.org/): the next generation network attached storage (NAS) solution based on Debian Linux. It contains services like SSH, (S)FTP, SMB/CIFS, DAAP media server, RSync, BitTorrent client and many more.

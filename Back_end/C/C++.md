@@ -29,6 +29,10 @@ gcc file.c # 编译
 }
 ```
 
+## 标准库STL
+
+* 提供了丰富的算法库支持和各种容器。 C++ 标准库提供了包括最基础的标准输入输出iostrem、各种容器vector、set、string ，熟练掌握标准库，不用重复造轮子
+
 ## 编译
 
 * 预处理阶段
@@ -56,6 +60,10 @@ const char* p = myName;       // non-const pointer, const data 表示指针自�
 char* const p = myName;       // const pointer, non-const data
 const char* const p = myName; // const pointer, const data 表示指针所指物和指针自身都是常量
 ```
+
+## C++11新标准
+
+* 新标准提供了解决现有问题更优雅、更 C++ 的实现。现行的大部分 C++ 软件还是 C++98 的标准，C++98 是 C++ 的第一个标准，经历这么多年的发展，从前你需要从Boost库（一个在 C++98 年代的准 C++ 标准）获得的对 C++ 的扩充支持的大部分功能已经纳入了 C++11 和甚至 C++2X 更新的标准当中，与时俱进拿起更先进的生产工具，工具就是效率
 
 ## 面试
 
@@ -160,14 +168,16 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 
 ## 图书
 
-* 《C++ Primer》
+* **《C++ Primer》**
 * 《Effective C++》
+* 《More Effective C++（中文版）》
 * 《C++ 标准程序库》
 * 《STL源码剖析》
 * 《深度探索C++对象模型》
 * Think in C++
 * Modern C++ Tutorial
     - [changkun / modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial)
+* 《深入理解C++11》
 
 ## 工具
 
@@ -193,6 +203,7 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 ## 参考
 
 * [C/C++ 开源库及示例代码](https://github.com/programthink/opensource/blob/master/libs/cpp.wiki)
+* [cppreference](https://en.cppreference.com/)
 * [isocpp/CppCoreGuidelines](https://github.com/isocpp/CppCoreGuidelines):The C++ Core Guidelines are a set of tried-and-true guidelines, rules, and best practices about coding in C++http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines
 * [fffaraz/awesome-cpp](https://github.com/fffaraz/awesome-cpp):A curated list of awesome C++ (or C) frameworks, libraries, resources, and shiny things. Inspired by awesome-... stuff. http://fffaraz.github.io/awesome-cpp/
 * [changkun/modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial):📚 C++11/14/17 On the Fly https://changkun.de/modern-cpp/
