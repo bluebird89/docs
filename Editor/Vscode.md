@@ -19,6 +19,7 @@ sudo apt-get install code
 
 ## 插件
 
+* advanced-new-file
 * Apollo GraphQL
 * Auto Close Tag
 * Auto Import:自动去查找、分析、然后提供代码补全。对于TypeScript和TSX
@@ -34,6 +35,7 @@ sudo apt-get install code
 * Code Spell Checker
 * Debugger for Chrome
 * Document This
+* advanced-new-file
 * EditorConfig for VS Code
 * Emmet
 * ESLint
@@ -55,6 +57,7 @@ sudo apt-get install code
 * Language and Framework Packs
     - React Native Tools
     - Vue 2 Snippets
+* Laravel Blade Snippets
 * Indent-Rainbow:使得对齐更加具有可读性
 * IntelliCode, Microsoft’s tool for AI-assisted coding
 * JavaScript (ES6) code snippets

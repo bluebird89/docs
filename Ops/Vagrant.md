@@ -304,10 +304,10 @@ end
 
 ## 网络
 
-* 端口映射(Forwarded port) ，顾名思义是指把宿主计算机的端口映射到虚拟机的某一个端口上，访问宿主计算机端口时，请求实际是被转发到虚拟机上指定端口的。Vagrantfile中设定语法为： `config.vm.forwarded_port 80, 8080` 以上将访问宿主计算机8080端口的请求都转发到虚拟机的80端口上进行处理。 默认只转发TCP包，UDP需要额外添加以下语句： `config.vm.forwarded_port 80, 8080, protocol: "udp"`
+* 端口映射(Forwarded port):把宿主计算机的端口映射到虚拟机的某一个端口上，访问宿主计算机端口时，请求实际是被转发到虚拟机上指定端口的。Vagrantfile中设定语法为： `config.vm.forwarded_port 80, 8080` 以上将访问宿主计算机8080端口的请求都转发到虚拟机的80端口上进行处理。 默认只转发TCP包，UDP需要额外添加以下语句： `config.vm.forwarded_port 80, 8080, protocol: "udp"`
   - 简单易理解:容易实现外网访问虚拟机
   - 如果一两个端口需要映射很容易，但是如果有有很多端口，比如MySQL，MongoDB，tomcat等服务，端口比较多时，就比较麻烦;不支持在宿主机器上使用小于1024的端口来转发。比如：不能使用SSL的443端口来进行https连接。
-* 私有网络（Private network） ，只有主机可以访问虚拟机，如果多个虚拟机设定在同一个网段也可以互相访问，当然虚拟机是可以访问外部网络的。设定语法为： `config.vm.network "private_network", ip: "192.168.50.4"`
+* 私有网络（Private network）:只有主机可以访问虚拟机，如果多个虚拟机设定在同一个网段也可以互相访问，当然虚拟机是可以访问外部网络的。设定语法为： `config.vm.network "private_network", ip: "192.168.50.4"`
   - 安全，只有自己能访问
   - 因为私有的原因，所以团队成员其他人不能和你写作
 * 公有网络（Public network） ，虚拟机享受实体机器一样的待遇，一样的网络配置，vagrant1.3版本之后也可以设定静态IP。设定语法如下： `config.vm.network "public_network", ip: "192.168.1.120"` 公有网络中还可以设置桥接的网卡，语法如下 `config.vm.network "public_network", :bridge => 'en1: Wi-Fi (AirPort)'`
