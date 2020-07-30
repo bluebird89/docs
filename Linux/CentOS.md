@@ -130,6 +130,11 @@ yum install httpd   #安装apache
 rpm -ql httpd  #查询所有安装httpd的目录和文件
 
 systemctl start|stop|restart|enable httpd.service  #设置开机启动
+
+# 配置 EPEL源
+sudo yum install -y epel-release
+sudo yum -y update
+
 ```
 
 ## 用户
@@ -143,7 +148,7 @@ sudo -i
 ```sh
 yum-config-manager
 
-yum install vim git net-tools  epel-release
+sudo yum install -y vim git net-tools  epel-release
 yum provides ifconfig
 ```
 
@@ -438,7 +443,7 @@ canal.instance.defaultDatabaseName # 新增 这里指定为test
 canal.mq.topic # 指定为test，也就是解析完的binlog结构化数据会发送到Kafka的命名为test的topic中
 canal.mq.partition # 指定为0
 
-sh /data/canal/bin/startup.sh 
+sh /data/canal/bin/startup.sh
 # 查看服务日志
 tail -100f /data/canal/logs/canal/canal
 # 查看实例日志  -- 一般情况下，关注实例日志即可
@@ -597,7 +602,7 @@ grub-mkconfig -o /boot/grub/grub.conf
 yum install -y grub2 # /boot/grub2/grub.cfg 缺失
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
-egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \' 
+egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'
 awk -F\' '$1=="menuentry " {print i++ " : " $2}' /etc/grub2.cfg
 
 0 : CentOS Linux (4.19.0-1.el7.elrepo.x86_64) 7 (Core)
@@ -615,8 +620,8 @@ modprobe tcp_bbr
 
 uname -r # 是否已更换为4.9
 echo "tcp_bbr" >> /etc/modules-load.d/modules.conf
-echo 'net.core.default_qdisc=fq' >> /etc/sysctl.conf  
-echo 'net.ipv4.tcp_congestion_control=bbr' >> /etc/sysctl.conf  
+echo 'net.core.default_qdisc=fq' >> /etc/sysctl.conf
+echo 'net.ipv4.tcp_congestion_control=bbr' >> /etc/sysctl.conf
 sysctl -p
 
 # 验证

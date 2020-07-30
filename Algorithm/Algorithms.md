@@ -46,6 +46,8 @@
         + 二叉树是最容易培养框架思维的，而且大部分算法技巧，本质上都是树的遍历问题
         + 刚开始刷二叉树的题目，前 10 道也许有点难受；结合框架再做 20 道，也许你就有点自己的理解了；刷完整个专题，再去做什么回溯动规分治专题，你就会发现只要涉及递归的问题，都是树的问题
         + 很多动态规划问题就是在遍历一棵树，你如果对树的遍历操作烂熟于心，起码知道怎么把思路转化成代码，也知道如何提取别人解法的核心思路
+* 看书的同时结合刷在线编程算法题的方式
+    - 边看数据结构或算法导论，同时在牛客或者 leetcode 上刷题，因为看书太枯燥很容易失去耐心，在线刷题的好处是你可以每天定目标，享受每个题目通过的快感，有正向反馈更容易坚持下来
 
 ```
 # 几乎所有二叉树的题目都是一套这个框架就出来了
@@ -256,6 +258,10 @@ public int factorial(int n) {
 }
 ```
 
+## bitmap
+
+
+
 ## 回文数
 
 * 指正序（从左向右）和倒序（从右向左）读都是一样的整数
@@ -272,7 +278,7 @@ class Solution {
         //边界判断
         if (x < 0) return false;
         int div = 1;
-        //
+
         while (x / div >= 10) div *= 10;
         while (x > 0) {
             int left = x / div;
@@ -308,6 +314,7 @@ class Solution {
 * [Erickson 算法](http://jeffe.cs.illinois.edu/teaching/algorithms/)
     - [jeffgerickson/algorithms](https://github.com/jeffgerickson/algorithms):Bug-tracking for Jeff's algorithms book, notes, etc.
     - [作业](http://jeffe.cs.illinois.edu/teaching/algorithms/hwex.html)
+* leetcode刷题班
 
 ## 图书
 
