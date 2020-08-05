@@ -479,23 +479,28 @@ git commit -m "fix(core): remove deprecated and defunct wtf* apis" -m "These api
 # 在开发中的时候尽量保持一个较高频率的代码提交，这样可以避免不小心代码丢失。但是真正合并代码的时候，我们并不希望有太多冗余的提交记录.压缩日志之后不经能让 commit 记录非常整洁，同时也便于使用 rebase 合并代码。
 git log -p --submodule <file> # 跟踪查看某个文件的历史修改记录 每一次提交是一个快照，会计算每次提交的diff，作为一个patch显示
 git log [branchname]
+master..develop
 --oneline #  --pretty only show the commit id and comment per-commit
 --graph # gives you that visual representation The * indicates that there is a commit on the line
+--pretty=format:"%Cred%an - %ar%n %Cblue %h -%Cgreen %s %n"
 --decorate # 显示tag信息
 --reverse # 逆向显示
 --all
 --author="Linus"
---oneline
 --since="yesterday"
 --before={3.weeks.ago}
 --after={2010-04-18}
 --grep="day of week" # 根据commit过滤log，与其它选项是or的关系，如果and关系 --all-match的选项
 --stat # 查看改动的相对信息
 -G "chef-client" # Regex on Commits
+-p # show the log with the diff changes
 --no-merges # 显示当前分支的版本历史
 --abbrev-commit  # （仅展示commit信息的图形化分支）
 -S[keyword]  # 搜索提交历史，根据关键词 git log -Smethodname
 --name-status
+--merges
+-i # show the log with the diff changes
+
 git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%an, %cr)' --abbrev-commit --name-status --oneline --decorate --all
 git config --global alias.ll "log --graph --pretty=format:'%C(yellow)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%an, %cr)' --abbrev-commit"
 %H  commit hash

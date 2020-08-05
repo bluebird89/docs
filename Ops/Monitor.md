@@ -49,3 +49,4 @@ Grafana求，配合 Prometheus 以及 Prometheus 相关的 Exporter
 * [usefathom/fathom](https://github.com/usefathom/fathom):Fathom. Simple, trustworthy website analytics. Built with Golang & Preact. https://usefathom.com/
 * [Countly/countly-server](https://github.com/Countly/countly-server):Countly helps you get insights from your application. Available self-hosted or on private cloud. https://count.ly
 * [ openspug / spug ](https://github.com/openspug/spug):开源运维平台：面向中小型企业设计的轻量级无Agent的自动化运维平台，整合了主机管理、主机批量执行、主机在线终端、应用发布部署、在线任务计划、配置中心、监控、报警等一系列功能。 https://spug.dev
+* [simpleops](https://simpleops.io/):Performance monitoring simplified

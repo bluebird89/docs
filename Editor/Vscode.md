@@ -281,7 +281,9 @@ code --diff <file1> <file2> # open diff editor
 code --disable-extensions . # disable all extensions
 ```
 
-## Configure User Snippets
+## 代码片段
+
+## 代码片段 User Snippets
 
 ```
 "Print to console": {
