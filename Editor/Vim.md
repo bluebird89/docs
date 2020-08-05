@@ -1,6 +1,6 @@
 # [vim/vim](https://github.com/vim/vim)
 
-The official Vim repository http://www.vim.org Vim的一个最大用途是批量修改文件，列模式，正则表达式替换，区域替换
+The official Vim repository http://www.vim.org
 
 * 内置于任何类Unix系统上，直接在服务器上编辑文件
 * 与大多数文本编辑器和IDE相比，轻量级，即使在性能较弱的硬件上运行速度快且高效
@@ -14,8 +14,8 @@ brew install vim
 
 ## 配置
 
-* 全局配置：/etc/vim/vimrc或者/etc/vimrc
-* 用户配置：~/.vimrc
+* 全局配置：`/etc/vim/vimrc` 或者 `/etc/vimrc`
+* 用户配置：`~/.vimrc`
 * 选项
     - all：列出所有选项设置情况
     - term：设置终端类型
@@ -28,6 +28,15 @@ brew install vim
     - nomagic：允许在搜索模式中，使用前面不带“/”的特殊字符
     - nowrapscan：禁止vi在搜索到达文件两端时，又从另一端开始
     - mesg：允许vi显示其他用户用write写到自己终端上的信息
+    - :set nu|nonu 开启行号
+    - :set ignorecase　　忽略大小写的查找
+    - :set noignorecase　　不忽略大小写的查找
+    - :set hlsearch　　高亮搜索结果，所有结果都高亮显示，而不是只显示一个匹配。
+    - :set nohlsearch　　关闭高亮搜索显示
+    - :nohlsearch　　关闭当前的高亮显示，如果再次搜索或者按下n或N键，则会再次高亮。
+    - :set incsearch　　逐步搜索模式，对当前键入的字符进行搜索而不必等待键入完成。
+    - :set wrapscan　　重新搜索，在搜索到文件头或尾时，返回继续搜索，默认开启。
+
 * [SpaceVim/SpaceVim](https://github.com/SpaceVim/SpaceVim):A community-driven modular vim distribution - The ultimate vim configuration https://spacevim.org
 
 ```sh
@@ -39,7 +48,7 @@ curl -sLf https://spacevim.org/install.sh | bash
 * :E Opens explorer for locating files and directories
 * :vi|open|o filename 打开或新建文件，并将光标置于第一行首
 * vim file1 file2 file3 ... 同时打开多个文件
-* :split file 在新窗口中打开文件
+* :split|sp file 在新窗口中打开文件
 * :close – close current window
 * 切换同时打开的文件
     - :bn 切换到下一个文件
@@ -61,22 +70,22 @@ curl -sLf https://spacevim.org/install.sh | bash
 * `:e <path/to/file>` → 打开一个文件
 * :e! 放弃所有修改，并打开原来文件
 
-## 使用
+## 模式
 
-* 模式
-    - Command mode
-    - Insert模式：左下角显示--INSERT--,按ESC会执行
-        + i：光标前插入
-        + a：光标后插入 3a！+ ESC:在当前位置后插入3个！
-        + I：当前行首
-        + A：当前行尾
-        + o：新起一个空白行
-        + O：当前行之前插入一行
-        + r：替换当前字符
-        + S 或 cc 删除当前行内容并进入插入模式
-        + C 删除从当前位置到行尾内容
-    - Normal模式：按Esc或Ctrl+[进入, 左下角显示文件名或为空, 可以移动光标、删除字符等
-    - Visual模式：左下角显示--VISUAL-- 可以对选定的文本运行命令操作并该命令仅仅作用于选定文本
+- Command mode(默认)
+- Insert模式：左下角显示--INSERT--,按ESC会执行
+    + i：光标前插入
+    + a：光标后插入 3a！+ ESC:在当前位置后插入3个！
+    + I：当前行首
+    + A：当前行尾
+    + o：新起一个空白行
+    + O：当前行之前插入一行
+    + r：替换当前字符
+    + S 或 cc 删除当前行内容并进入插入模式
+    + C 删除从当前位置到行尾内容
+- Normal模式：按Esc或Ctrl+[进入, 左下角显示文件名或为空, 可以移动光标、删除字符等
+- Visual模式：左下角显示--VISUAL-- 可以对选定的文本运行命令操作并该命令仅仅作用于选定文本
+
 * 通用
     - `N<command>`:重复某个命令N次,命令都可以配合数字使用.Esc是必须的，否则命令不生效
     - . 重复前一次命令
@@ -153,10 +162,11 @@ ye Copy to end of word |
 
 ### 显示
 
-* :split → 创建分屏 (:vsplit创建垂直分屏)
-* <C-w><dir> : dir就是方向，可以是 hjkl 或是 ←↓↑→ 中的一个，其用来切换分屏。
-* <C-w>_ (或 <C-w>|) : 最大化尺寸 (<C-w>| 垂直分屏)
-* <C-w>+ (或 <C-w>-) : 增加尺寸
+* 创建分屏:`:split` `:vsplit`垂直分屏
+* 轮换切分屏:C-w
+* 切换分屏:<C-w><dir> : dir: hjkl  ←↓↑→
+* <C-w>_ (或 <C-w>|) : 最大化尺寸
+* 修改屏尺寸:<C-w>+ (或 <C-w>-)
 
 ### 移动
 
@@ -208,17 +218,9 @@ ye Copy to end of word |
 
 * /text　　查找text，按n健查找下一个，按N健查找前一个
 * ?text　　查找text，反向查找，按n健查找下一个，按N健查找前一个
-* 有一些特殊字符在查找时需要转义　　.*[]^%/?~$
+* 特殊字符在查找时需要转义　`.*[]^%/?~$`
 * - * 和 #: 匹配光标当前所在的单词，移动光标到下一个（或上一个）匹配单词（*是下一个，#是上一个）
 * 2n 查找下面第二个匹配
-* :set nu 开启行号
-* :set ignorecase　　忽略大小写的查找
-* :set noignorecase　　不忽略大小写的查找
-* :set hlsearch　　高亮搜索结果，所有结果都高亮显示，而不是只显示一个匹配。
-* :set nohlsearch　　关闭高亮搜索显示
-* :nohlsearch　　关闭当前的高亮显示，如果再次搜索或者按下n或N键，则会再次高亮。
-* :set incsearch　　逐步搜索模式，对当前键入的字符进行搜索而不必等待键入完成。
-* :set wrapscan　　重新搜索，在搜索到文件头或尾时，返回继续搜索，默认开启。
 
 ## 替换
 
@@ -516,11 +518,10 @@ Vundle, the plug-in manager for Vim http://github.com/VundleVim/Vundle.Vim
     - <F9> 生成供函数跳转的 tag
     - <F2> 打开目录窗口，再按会关闭目录窗口
     - <F6> 添加函数注释
-* [SpaceVim](https://github.com/SpaceVim/SpaceVim):一个开箱即用的 Vim 配置，对新手很友好，和 Spacemacs 一样
 
 ## 教程
 
-* vimtutor
+* [vimtutor](./vim_tutor)
 * [Vim 互动式教程](https://www.openvim.com/)
 * [VIM Tutor](http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor)
 * [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)

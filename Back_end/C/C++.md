@@ -2,15 +2,18 @@
 
 ## 学习
 
-学好C++，一定要学习C++11，搞懂内存管理，熟悉智能指针和RAII等基本内存管理原则，搞懂虚函数和继承，函数重载与重写，熟悉C++调试等。推荐阅读《The C++ Programming Language》和Effect C++系列。不要死抠语法细节，了解Big picture，从做项目中去掌握和理解C++的这些特性。这些书的阅读也是有技巧的，不要一开始试图把整本书看完再去写代码，看完基本的C++语法，类，继承之后就可以开始写代码了。遇到模板或者STL容器不懂的时候，再去针对性地阅读相关的章节和Google查找资料来学习。Effective C++系列书籍，再你写过几万行C++代码之后，再去阅读会更好。而且推荐每年都至少读一遍。
+* 学好C++，一定要学习C++11，搞懂内存管理，
+* 熟悉智能指针和RAII等基本内存管理原则，
+* 搞懂虚函数和继承，函数重载与重写，
+* 熟悉C++调试等
+* 不要死抠语法细节
+* 了解Big picture，从做项目中去掌握和理解C++的这些特性
+* 看完基本的C++语法，类，继承之后就可以开始写代码了。遇到模板或者STL容器不懂的时候，再去针对性地阅读相关的章节和Google查找资料来学习
 
 ## 环境搭建
 
 ```sh
-
 sudo apt install gcc g++ gdb
-
-gcc file.c # 编译
 
 ## sublime  C++.sublime-build
 {
@@ -27,17 +30,139 @@ gcc file.c # 编译
         }
     ]
 }
+
+cc -v
+
+# IDE
+sudo apt intall kdevelop
 ```
+
+## 变量
+
+* 局部变量：函数内的作用域
+    - 如果定义了与全局变量一致，比全局变量 优先级高
+* 全局变量：函数外的变量
+* {} 标志一个作用域
+* 静态变量：程序运行期间分配固定的存储空间， `static`
+    - 分配在一块静态存储区的内存，调用结束后,不会回收
+* `extern`
+    - 提前声明全局变量，避免 使用未声明变量报错
+    - 多文件共享
+
+## 结构体(struct)
+
+* 由一系列具有相同类型或不同类型的数据构成的数据集合
+* 每一个成员可以是一个基本数据类型或者又是一个构造类型
+* 结构即是一种“构造”而成的数据类型， 那么在说明和使用之前必须先定义它，也就是构造它
+* 作用
+    - 封装一些属性来组成新的类型
+* 大小与内存对齐
+    - 各成员变量在存放的时候根据在结构中出现的顺序依次申请空间
+    - 同时按照前面的数据结构对齐方式调整位置，空缺的字节会自动填充
+    - 为了确保结构的大小为结构的字节边界数（即该结构中占用最大空间的类型所占用的字节数）的倍数，所以在为最后一个成员变量申请空间后，还会根据需要自动填充空缺的字节
+
+## 数组
+
+* 字符串是用字符数组来存储.系统自动分配 `\0` 表示字符串的结束
+* 数组是指向数组第一个元素的指针，在指针上进行数学运算指向数组中的元素
+
+## 指针
+
+* `char *p = &c`:定义了一个指向char类型变量指针
+* p：存放变量地址，做数学运算
+    - *p++: a[i++]:先取指向的变量值 `(*p)` p =p+1
+    - *p--: a[i--]
+    - *--p: a[--i]：先运算，再取值
+    - *++p: a[++i]
+* &c 取地址操作
+* `*p +1`: *p 取得指针所指向的变量值
+* 生命时为指针标识符，使用时为取值操作
+
+## 运算符
+
+* short char 自动转换 int
+* float 自动转换double
+
+## 引用
+
+* 方法在单独文件中声明，编译时需要加上该文件
+* 使用 #include "max.c"
 
 ## 标准库STL
 
-* 提供了丰富的算法库支持和各种容器。 C++ 标准库提供了包括最基础的标准输入输出iostrem、各种容器vector、set、string ，熟练掌握标准库，不用重复造轮子
+* 提供了丰富的算法库支持和各种容器
+* C++ 标准库提供了包括最基础的标准输入输出iostrem、各种容器vector、set、string ，熟练掌握标准库
+* queue
+    - front():队列头部
+    - pop():从头部开始
+    - push();压人尾部
+    - back():队列尾部
+* stack
+* priority_queue:二叉堆，最大（小）值先出
+    - pop()：弹出栈顶元素（最大值）
+
+## 标准化输入输出
+
+* printf
+    - d 十进制 5d 设定对齐长度
+    - o 八进制
+    - x 十六进制
+    - u 无符号
+    - c 字符
+    - s 字符串
+    - f 浮点
+    - e 科学计数法
+* scanf
+    - 定义了输入格式
+    -  一次输入多个变量：遇到 空格 制表符 enter 为变量结束
+
+## 控制
+
+* 分支
+    - 关系运算符
+    - 逻辑运算符
+    - 条件运算符（三元）
+    - switch
+        + 没有break,会执行所以分支
+        + 符合条件的作处理
 
 ## 编译
 
-* 预处理阶段
-* 编译阶段
-* 链接阶段
+* 多个文件，必须有且只有一个main函数
+* 预处理 Pre-Process：处理源文件中 #ifdef #include #define,生成中间文件`*.i`
+    - #include <myinc.h> 在预装的库里查找 /usr/include，/usr/local/include，/usr/lib/gcc-lib/i386-linux/2.95.2/include /usr/include/c++/9
+    - #include "myinc.h" 在当前目录内查找文件
+* 编译 Compiling：输入中间文件，生成汇编语言文件 *.s
+* 汇编 Asssembling:将汇编 转换回二进制机器代码
+    - main 函数不是必须的
+* 链接 Linking：将二进制机器代码文件生成可执行文件
+* gcc 参数
+    - -c 只编译，不链接
+    - -g 产生调试器 gdb,用于对源代码调试
+    - -O 优化编译、链接
+    - -O2 更好的优化
+    - -Wall 输出警告信息
+    - -w 关闭警告信息
+
+```sh
+gcc -E file.c -o test.i # 预处理
+gcc -S test.i -o test.s # 编译
+gcc  -c test.s -o test.o # 汇编
+gcc test.o -o test
+gcc -o test test2.c test3.c test2.c
+```
+
+## 头文件与函数定义分离
+
+* 函数声明和定义分离开来
+* 加快编译速度:未修改的函数，公共框架和公共类编译生成静态库
+
+## main函数中的参数
+
+```sh
+// 将输出保存到t.txt.错误保存到f.txt.从input.txt读入数据
+./main.out 1>true.txt 2>false.txt < input.txt
+```
 
 ## [细节](https://mp.weixin.qq.com/s/HLmZzFtNF9kVbIGS47E-BA)
 
@@ -166,10 +291,15 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 * 单链表快排
 * 写一下反转单链表
 
+## 教程
+
+* [changkun/modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial):📚 C++11/14/17 On the Fly https://changkun.de/modern-cpp/
+
 ## 图书
 
+* 《The C++ Programming Language》
 * **《C++ Primer》**
-* 《Effective C++》
+* 《Effective C++》：写过几万行C++代码之后，再去阅读会更好。而且推荐每年都至少读一遍。
 * 《More Effective C++（中文版）》
 * 《C++ 标准程序库》
 * 《STL源码剖析》
@@ -182,7 +312,10 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 ## 工具
 
 * IDE
-    - [Code::Blocks](http://www.codeblocks.org)
+    - [Code::Blocks](http://www.codeblocks.org) <https://launchpad.net/~codeblocks-devs/+archive/ubuntu/release>
+        + `sudo add-apt-repository ppa:codeblocks-devs/release`
+        + sudo apt-get update
+        + `sudo apt-get install codeblocks codeblocks-contrib`
     - Qtcreator
 * 队列
     - [cameron314/concurrentqueue](https://github.com/cameron314/concurrentqueue):A fast multi-producer, multi-consumer lock-free concurrent queue for C++11
@@ -204,11 +337,12 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 
 * [C/C++ 开源库及示例代码](https://github.com/programthink/opensource/blob/master/libs/cpp.wiki)
 * [cppreference](https://en.cppreference.com/)
-* [isocpp/CppCoreGuidelines](https://github.com/isocpp/CppCoreGuidelines):The C++ Core Guidelines are a set of tried-and-true guidelines, rules, and best practices about coding in C++http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines
+* Guidelines
+    - [isocpp/CppCoreGuidelines](https://github.com/isocpp/CppCoreGuidelines):The C++ Core Guidelines are a set of tried-and-true guidelines, rules, and best practices about coding in C++http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines
+    - [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
 * [fffaraz/awesome-cpp](https://github.com/fffaraz/awesome-cpp):A curated list of awesome C++ (or C) frameworks, libraries, resources, and shiny things. Inspired by awesome-... stuff. http://fffaraz.github.io/awesome-cpp/
-* [changkun/modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial):📚 C++11/14/17 On the Fly https://changkun.de/modern-cpp/
-* [huihut/interview](https://github.com/huihut/interview):📚 C/C++面试知识总结
-* [cppreference](http://en.cppreference.com/book/)：`C++`官方参考文档
 * [Awesome C/C++](https://fffaraz.github.io/awesome-cpp/)：一系列优秀的`C/C++`框架、库和资源
-* [Awesome Qt](https://github.com/fffaraz/awesome-qt)：一系列优秀的`Qt`库和资源
-* [3rd-party-applications](https://github.com/Razor-qt/razor-qt/wiki/3rd-party-applications)：一系列优秀的`Qt`第三方程序
+* [huihut/interview](https://github.com/huihut/interview):📚 C/C++面试知识总结
+* Qt
+    - [Awesome Qt](https://github.com/fffaraz/awesome-qt)：一系列优秀的`Qt`库和资源
+    - [3rd-party-applications](https://github.com/Razor-qt/razor-qt/wiki/3rd-party-applications)：一系列优秀的`Qt`第三方程序

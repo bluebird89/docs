@@ -2,7 +2,6 @@
 
 A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
 
-
 ## [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app)
 
 Create React apps with no build configuration. https://create-react-app.dev/
@@ -45,6 +44,7 @@ npm run eject #  导出配置文件
     - [reduxjs/redux](https://github.com/reduxjs/redux):Predictable state container for JavaScript apps http://redux.js.org
     - [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
     - [rt2zz/redux-persist](https://github.com/rt2zz/redux-persist):persist and rehydrate a redux store
+* [react-query)](https://github.com/tannerlinsley/react-query):atom_symbol Hooks for fetching, caching and updating asynchronous data in React
 
 ## 参考
 
