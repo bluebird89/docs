@@ -1097,7 +1097,7 @@ sudo apt install terminator
         + [Babun](http://babun.github.io/)
         + [ nushell / nushell ](https://github.com/nushell/nushell): A new type of shell www.nushell.sh/ `cargo install nu --features=stable`
             * The goal of this project is to take the Unix philosophy of shells, where pipes connect simple commands together, and bring it to the modern style of development
-    - [Hyper](https://hyper.is):create a beautiful and extensible experience for command-line interface users, built on open web standards
+    - [Hyper](https://github.com/zeit/hyper):A terminal built on web technologies create a beautiful and extensible experience for command-line interface users, built on open web standards https://hyper.is
     - mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连
     - [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
     - [msys2](http://www.msys2.org/)
