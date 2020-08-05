@@ -29,7 +29,9 @@ generate:Alt+ins
   -  File 代表文件
   -  Symbol 代表符号/标记（可用于导航到指定变量、方法）
   -  Line
-
+  -  自定义搜索作用域
+*  Command + Shift + A 调出 Action 导航界面，在输入框输入 templates，在下拉列表中选中「File and Code Templates」
+*  Option 键（Windows 系统是 Alt 键:锚定多个光标的方式同时编辑多处文本,  Ctrl + G
 
 ## 快捷键
 
@@ -300,6 +302,10 @@ generate:Alt+ins
   - Press Ctrl+A, then Ctrl+Alt+L, then Up arrow, then Down arrow, and finally then Ctrl+Alt+Shift+S
   - Stop recording the macro clicking on the Stop button on the bottom right of the page.
   Give this macro a name like "Format and Save"
+
+## plugin
+
+* IdeaVim
 
 ## 问题
 
