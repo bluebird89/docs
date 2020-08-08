@@ -1033,48 +1033,55 @@ git --work-tree=/home/www checkout -f
 ## 工作流
 
 * **集中式工作流**：维护一个master分支，开发者提交功能修改到中央库前，需要先fetch在中央库的新增提交，rebase自己提交到中央库提交历史之上
-* **功能性分支**：每个 feature 分支都是用来开发某个新功能，以便与项目的其他部分隔离。
+* **功能性分支**：每个 feature 分支都是用来开发某个新功能，以便与项目的其他部分隔离
   - 开发者每次在开始新功能前先创建一个新分支，功能分支应该有个有描述性的名字，比如animated-menu-items或issue-#1061，隔离功能的开发
   - 功能分支也可以（且应该）push到中央仓库中 `git push -u origin animated-menu-items`
   - 合并：push到中央仓库的功能分支上并发起一个Pull Request请求去合并修改到master
   - 做Code Review，并修改，合格后合并
 * **Gitflow工作流**：通过为功能开发、发布准备和维护分配独立的分支，让发布迭代过程更流畅
-  - 分支：分支的名字是一种共识，更重要的是它承担的责任
-    + master分支（production分支）：存放的是随时可供在生产环境中部署的代码。只能从其他分支合并，不能在这个分支直接修改
-      * 仅在发布新的可供部署的代码时才更新master分支上的代码
-      * 每一次更新，添加对应的版本号标签（TAG）
-      * master分支存储了正式发布的历史：
-    - develop分支:功能的集成分支，包含了项目的全部历史。用于整合 Feature 分支
-        - 功能开发完毕等待最后QA的验收
-        - 可进行每日夜间发布的代码
-        - 用于生成提测分支release，始终保持最新
-    - feature分支:用于开发新需求和需要较长时间的BUG修改
-      + 使用develop分支作为父分支
-      + 当新功能完成时，合并回develop分支，不直接和 Master 分支交互
-      + Merge Master 分支上的最新代码 git merge --no-ff origin/master ，使得 Master 分支上的变更更新到迭代开发分支上面
-    - 发布分支（release）：清理发布、执行所有测试、更新文档和其它为下个发布做准备操作的地方，像是一个专门用于改善发布的功能分支
-      + 对应一个迭代，基于Develop分支创建一个Release分支
-      + release 为预上线分支，如果上线前发现了bug，在 release 上进行修改提交，这样就可以允许其他团队在不干扰发布工作的情况下处理新功能。
-      + 当 release 确定发布时，要合并到 master 和 developer 分支。
-      * 发起 pull request 请求，并指定 Code Review 人，请求的分支选择本次上线的 release 分支，即 release20150730
-      * 被指定 Code Review 的人，对发起者的代码 Review 后，决定是否可以提交测试，若有问题，评论注释代码后，提交者对代码进行进行修改，重复上面，直到代码 Review 者认为 Ok，对这些代码发布到测试环境验证
-      + 重复多次后，就会达到一个稳定可发布的版本，即上线版本，上线后，将 release 版本上面最后的提交合并到 Master 分支上面，并打 Tag0.3
-      + 测试并且bug修改结束后生成该版本tag，后续可以使用git show tagname来查看版本信息或者回滚
-      - 原则
-        * 只要创建这个分支并push到中央仓库，这个发布就是功能冻结的
-        * 任何不在develop分支中的新功能都推到下个发布循环中（自动化脚本执行）
-        * 这个分支不在追加新需求，可以完成 bug 修复、完善文档等工作
-      + 合并修改到master分支和develop分支上，删除发布分支
-    - Hotfix维护分支：生成快速给产品发布版本（production releases）打补丁，基于master生成，bug修正后自动合并到master和develop并且生成tag；
-      + 修复完成，修改应该马上合并回master分支和develop分支（当前的发布分支），master分支应该用新的版本号打好Tag。
-      + 从 Tag 处新开分支 release_bugfix_20150731、dev_bugfix_20150731 ，开发人员从 dev_bugfix_20150731分支上进行开发，提测code review在 release_bugfix_20150731 分支上
-      * 测试环境验证通过后，发布到线上，验证OK，合并到 Master 分支，并打 Tag0.2.3，此次 Bug 修复完毕，删除release_bugfix_20150731、dev_bugfix_20150731两分支即可
+  - master分支（production分支）：存放的是随时可供在生产环境中部署的代码。只能从其他分支合并，不能在这个分支直接修改
+    + 仅在发布新的可供部署的代码时才更新master分支上的代码
+    + 每一次更新，添加对应的版本号标签（TAG）
+    + master分支存储了正式发布的历史：
+  * develop分支:功能的集成分支，包含了项目的全部历史。用于整合 Feature 分支
+      * 功能开发完毕等待最后QA的验收
+      * 可进行每日夜间发布的代码
+      * 用于生成提测分支release，始终保持最新
+  * feature分支:用于开发新需求和需要较长时间的BUG修改
+    - 使用develop分支作为父分支
+    - 当新功能完成时，合并回develop分支，不直接和 Master 分支交互
+    - Merge Master 分支上的最新代码 git merge --no-ff origin/master ，使得 Master 分支上的变更更新到迭代开发分支上面
+  * 发布分支（release）：清理发布、执行所有测试、更新文档和其它为下个发布做准备操作的地方，像是一个专门用于改善发布的功能分支
+    - 对应一个迭代，基于Develop分支创建一个Release分支
+    - release 为预上线分支，如果上线前发现了bug，在 release 上进行修改提交，这样就可以允许其他团队在不干扰发布工作的情况下处理新功能。
+    - 当 release 确定发布时，要合并到 master 和 develope 分支
+    + 发起 pull request 请求，并指定 Code Review 人，请求的分支选择本次上线的 release 分支，即 release20150730
+    + 被指定 Code Review 的人，对发起者的代码 Review 后，决定是否可以提交测试，若有问题，评论注释代码后，提交者对代码进行进行修改，重复上面，直到代码 Review 者认为 Ok，对这些代码发布到测试环境验证
+    - 重复多次后，就会达到一个稳定可发布的版本，即上线版本，上线后，将 release 版本上面最后的提交合并到 Master 分支上面，并打 Tag0.3
+    - 测试并且bug修改结束后生成该版本tag，后续可以使用git show tagname来查看版本信息或者回滚
+    * 原则
+      + 只要创建这个分支并push到中央仓库，这个发布就是功能冻结的
+      + 任何不在develop分支中的新功能都推到下个发布循环中（自动化脚本执行）
+      + 这个分支不在追加新需求，可以完成 bug 修复、完善文档等工作
+    - 合并修改到master分支和develop分支上，删除发布分支
+  * Hotfix维护分支：生成快速给产品发布版本（production releases）打补丁，
+    - 基于master生成，bug修正后自动合并到master和develop并且生成tag
+    - 修复完成，修改应该马上合并回master分支和develop分支（当前的发布分支），master分支应该用新的版本号打好Tag。
+    - 从 Tag 处新开分支 release_bugfix_20150731、dev_bugfix_20150731 ，开发人员从 dev_bugfix_20150731分支上进行开发，提测code review在 release_bugfix_20150731 分支上
+    + 测试环境验证通过后，发布到线上，验证OK，合并到 Master 分支，并打 Tag0.2.3，此次 Bug 修复完毕，删除release_bugfix_20150731、dev_bugfix_20150731两分支即可
   - 流程
     + hotfix|feature-develop->release->master
     + develop分支上有了做一次发布（或者说快到了既定的发布日）的足够功能，就从develop分支上checkout一个发布分支
     + 新建的分支用于开始发布循环，所以从这个时间点开始之后新的功能不能再加到这个分支上---- 这个分支只应该做Bug修复、文档生成和其它面向发布任务
     + 一旦对外发布的工作都完成了，发布分支合并到master分支并分配一个版本号打好Tag
-    + 这些从新建发布分支以来的做的修改要合并回develop分支
+    +  这些从新建发布分支以来的做的修改要合并回develop分支
+    +  The developer forks the open-source software’s official repository. A copy of this repository is created in their account.
+    +  The developer then clones the repository from their account to their local system.
+    +  A remote path for the official repository is added to the repository that is cloned to the local system.
+    +  The developer creates a new feature branch is created in their local system, makes changes, and commits them.
+    +  These changes along with the branch are pushed to the developer’s copy of the repository on their account.
+    +  A pull request from the branch is opened to the official repository.
+    +  The official repository’s manager checks the changes and approves the changes to get merged into the official repository
   - 利用Git有提供各种勾子（hook），即仓库有事件发生时触发执行的脚本
     + 配置一个勾子，在push中央仓库的master分支时，自动构建好对外发布
   - [nvie/gitflow](https://github.com/nvie/gitflow)：Git extensions to provide high-level repository operations for Vincent Driessen's branching model.

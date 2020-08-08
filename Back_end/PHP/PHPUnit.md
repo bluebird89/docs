@@ -2,7 +2,8 @@
 
 The PHP Unit Testing framework. https://phpunit.de/
 
-* 单元测试主要是作为一种良好实践来编写的，它能帮助开发人员识别并修复 bug、重构代码，还可以看作被测软件单元的文档。要实现这些好处，理想的单元测试应当覆盖程序中所有可能的路径。
+* 单元测试主要是作为一种良好实践来编写的，能帮助开发人员识别并修复 bug、重构代码，还可以看作被测软件单元的文档
+* 理想的单元测试应当覆盖程序中所有可能的路径
 
 ## 安装
 
@@ -11,6 +12,8 @@ wget https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
 sudo mv phpunit.phar /usr/local/bin/phpunit
 phpunit --version
+
+sudo pear install pear.phpunit.de/PHPUnit
 ```
 
 ## 使用
@@ -20,8 +23,10 @@ phpunit --version
 * 测试都是命名为 test* 的公用方法
 * 测试方法内，类似于 assertSame() 这样的断言方法用来对实际值与预期值的匹配做出断言
 * 提供了 @test 的注解，如果一个测试函数添加了 @test 注解，那么测试函数名字就不必以 test 开头
-* PHPUnit\Framework\TestCase 有一个 setUp 函数，如果自己编写的测试类重写了这个函数，那么每次在开始执行测试函数之前，会先执行 setUp 进行测试之前的初始化。同样，也有一个 tearDown 的函数，如果重写，那么在测试函数执行完毕之后调用 tearDown 函数
-* Mock 测试:虚拟出一个 调用
+* `PHPUnit\Framework\TestCase`
+    - setUp 函数，如果自己编写的测试类重写了这个函数，那么每次在开始执行测试函数之前，会先执行 setUp 进行测试之前的初始化
+    -  tearDown 函数，如果重写，那么在测试函数执行完毕之后调用 tearDown 函数
+* Mock 测试:虚拟出一个调用
 * 执行单个文件
     - Phpstorm 下 当前测试类右键Run即可
     - `phpunit tests/ArraysTest.php`
