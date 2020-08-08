@@ -2441,6 +2441,11 @@ pecl channel-update pecl.php.net
         + /lib/model之中所有类
         + /lib/dao的之中所有类
 
+## 图书
+
+* [The Best PHP Books](https://github.com/manithchhuon/the-best-php-books)
+* [php-objects-patterns-practice-13](https://github.com/apress/php-objects-patterns-practice-13):Source code for 'PHP Objects, Patterns, and Practice' by Matt Zandstra
+
 ## 工具
 
 * [https://phar.io](https://phar.io):The PHAR Installation and Verification Environment (PHIVE)

@@ -274,6 +274,7 @@ $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
 * [Pixelmator](http://www.pixelmator.com):图像处理软件
 * [GIPHY](https://giphy.com/):寻找动图好去处。
 * [Beautiful Royalty-Free Photos Sorted By AI](https://www.pickpik.com)
+* [yandex search](https://yandex.com/images/)
 
 ## 工具
 

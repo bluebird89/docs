@@ -197,7 +197,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - UI:sketch sketch box
     - Axure：原型工具
     - CmapTools：概念图
-    - UML:staruml
     - 截图
 * 写作
     - Latex
