@@ -300,13 +300,17 @@ class Captain
     - 控制组件——选择、配置和执行模块
 * 解释器模式
 
-## 工厂
+## 简单工厂
+
+## 工厂方法
 
 * 定义一个用于创建对象的接口，让接口子类通过工厂方法决定实例化哪一个类
 * 工厂（Factory）负责生产（Create）产品，提供一个工厂抽象基类，该抽象基类提供生产的接口，为每一类图形，提供一个对应的工厂子类，生产对应的产品
     - 抽象工厂定义Create接口，返回Shape指针
     - 具象工厂（CircleFactory等）从抽象工厂派生，实现Create接口，并定义具象工厂的唯一变量，该全局变量的构造函数里，会将形状类型到对应工厂对象的对应关系注册到FactoryManager的map中。
 * 一个工厂管理器（FactoryManager），在工厂管理器里维护这个对应关系（map很容易做映射），然后创建该工厂管理器的唯一实例（单例）
+
+## 抽象工厂
 
 ## 原型
 
@@ -385,7 +389,7 @@ class Captain
 * [hoohack/DesignPattern](https://github.com/hoohack/DesignPattern):设计模式：PHP和Go语言实现
 * [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns)
 * [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
-* [kamranahmedse/design-patterns-for-humans](https://github.com/kamranahmedse/design-patterns-for-humans):Design Patterns for Humans™ - An ultra-simplified explanation 
+* [kamranahmedse/design-patterns-for-humans](https://github.com/kamranahmedse/design-patterns-for-humans):Design Patterns for Humans™ - An ultra-simplified explanation
 
 * [设计模式](http://laravelacademy.org/resources/design-patterns)
 * [Repository 模式](http://laravelacademy.org/post/3063.html)

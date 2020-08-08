@@ -223,6 +223,8 @@
     - [scottslowe/learning-tools](https://github.com/scottslowe/learning-tools):A collection of tools and files for learning new technologies
 * 生活
     - [testerSunshine/12306](https://github.com/testerSunshine/12306):12306智能刷票，订票
+* 分享
+    - [kosmi](https://kosmi.io/):Watch videos together, play games, or simply chat with friends or strangers all from within your browser!
 
 ## 笔记:全平台
 
