@@ -108,11 +108,19 @@
 ## app
 
 * Launch Center Pro
+* 时光进度 bProgress：一个简单的 iOS 进度管理 App
 
 ## 课程
 
 * [eseedo/iOSCourse](https://github.com/eseedo/iOSCourse):iOS开发初学者入门 http://icode.fun/
 * 斯坦福大学的 iOS 开发公开课
+
+## 图书
+
+* 《[iOS编程实战](https://www.amazon.cn/gp/product/B00NKZCM3U)》
+* 《[iOS编程（第4版）](https://www.amazon.cn/gp/product/B013UG2ULW)》
+* 《[Objective-C高级编程](https://www.amazon.cn/gp/product/B00DE60G3S)》
+* 《[Effective Objective-C 2.0：编写高质量iOS与OS X代码的52个有效方法](https://www.amazon.cn/gp/product/B00IDSGY06)》
 
 ## 工具
 

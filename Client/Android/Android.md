@@ -113,6 +113,12 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 * [JakeWharton/butterknife](https://github.com/JakeWharton/butterknife):Bind Android views and callbacks to fields and methods. http://jakewharton.github.io/butterkn…
 * [robolectric/robolectric](https://github.com/robolectric/robolectric):Android Unit Testing Framework http://robolectric.org
 
+## 图书
+
+* 《[Android编程权威指南（第2版）](https://www.amazon.cn/gp/product/B01FSXCBOQ)》
+* 《[移动应用UI设计模式（第2版）](https://www.amazon.cn/gp/product/B00SFZGX08)》
+* 《Android开发艺术探索》
+
 ## 工具
 
 * [iBotPeaches/Apktool](https://github.com/iBotPeaches/Apktool):A tool for reverse engineering Android apk files https://ibotpeaches.github.io/Apktool

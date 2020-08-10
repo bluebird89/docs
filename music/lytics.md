@@ -35,11 +35,23 @@ OH,the answer, my friend, is blowin\' in the wind, 朋友，答案在风中飘�
 The answer is blowin\' in the wind. 答案在风中飘荡
 ```
 
-## 《爱你一万年》 [1]
-唱：伍佰&China blue
-词：林莉
-曲：大野克夫
-编曲：伍佰&China blue
+```
+Hell no
+I can't complain about my problems
+I'm okay the way things are
+I pull my stool up to the bar
+At Horace and Pete's
+Sometimes I wonder
+Why do we tear ourselves to pieces
+I just need some time to think
+Or maybe I just need a drink
+At Horace and Pete's
+Horace and Pete
+```
+
+## 《爱你一万年》
+
+唱：伍佰&China blue 词：林莉 曲：大野克夫 编曲：伍佰&China blue
 
 ```
 啊...啊...啊...啊...

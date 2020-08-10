@@ -4,6 +4,8 @@
 * [linuxjourney](https://linuxjourney.com)
 * [bmorelli25 / Become-A-Full-Stack-Web-Developer](https://github.com/bmorelli25/Become-A-Full-Stack-Web-Developer):Free resources for learning Full Stack Web Development
 * [Tinywan/lua-nginx-redis](https://github.com/Tinywan/lua-nginx-redis):🌺 Redis、Lua、Nginx、OpenResty笔记
+* 秦汉的方术与儒生
+* 九个汉字里的中国
 
 ## project
 

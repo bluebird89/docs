@@ -145,6 +145,8 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
     - Java 持续交付
 * 实践
     - [sre](https://landing.google.com/sre/books/)
+* DevOps实践指南
+* 构建高可用Linux服务器（第3版）
 
 ## 工具
 

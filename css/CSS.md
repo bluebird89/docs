@@ -606,6 +606,19 @@ Transforming styles with JS plugins https://postcss.org/ <https://www.postcss.co
 https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,300italic
 ```
 
+## 图书
+
+* 《[CSS 揭秘](https://www.amazon.cn/gp/product/B01ET3FO86)》
+* 《CSS 世界》
+* 《[CSS 设计指南（第3版）](https://www.amazon.cn/gp/product/B00M2DKZ1W)》
+* 《[CSS 权威指南（第3版）](https://www.amazon.cn/gp/product/B0011F5SIC)》
+* 《CSS 禅意花园(修订版)》[css zen garden禅意花园](http://www.csszengarden.com/)
+* 《精通 CSS: 高级 Web 标准解决方案(第2版)》
+* 《众妙之门: 精通 CSS3》
+* 《[深入浅出 HTML 与 CSS](https://www.amazon.cn/gp/product/B01LXL42O5)》
+* 《[点石成金 : 访客至上的网页设计秘笈](https://www.amazon.cn/gp/product/B00QGA04RM)》
+* 超越css
+
 ## framework
 
 * Flat UI
@@ -651,7 +664,6 @@ for developing fast and powerful web interfaces.
 * [IanLunn/Hover](https://github.com/IanLunn/Hover):A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS. http://ianlunn.github.io/Hover/
 * [styled-components/styled-components](https://github.com/styled-components/styled-components) Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
 *  [yui/yui3](https://github.com/yui/yui3) A library for building richly interactive web applications. http://yuilibrary.com/
-
 
 ## 参考
 

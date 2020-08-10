@@ -24,7 +24,7 @@
 * [lyswhut / lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)
 * [Listen 1](https://listen1.github.io/listen1/):One for all free music in China
 * [ScorSer](http://en.scorser.com/D/Sheet+music.html):Search system for musicians
-
+* [](https://github.com/ix64/unlock-music/):Unlock encrypted music file in browser. 在浏览器中解锁加密的音乐文件。https://ix64.github.io/unlock-music/
 
 ```sh
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 4773BD5E130D1D45

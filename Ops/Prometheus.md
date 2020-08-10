@@ -11,6 +11,16 @@ The Prometheus monitoring system and time series database. https://prometheus.io
 * 可以采用服务发现或者静态配置方式，来发现目标服务
 * 支持多种统计数据模型，UI优化，Grafana也支持Prometheus
 
+* 监控是基础设施，目的是为了解决问题，不要只朝着大而全去做，尤其是不必要的指标采集，浪费人力和存储资源（To B商业产品例外）。
+* 需要处理的告警才发出来，发出来的告警必须得到处理。
+* 简单的架构就是最好的架构，业务系统都挂了，监控也不能挂。Google SRE 里面也说避免使用 Magic 系统，例如机器学习报警阈值、自动修复之类。这一点见仁见智吧，感觉很多公司都在搞智能 AI 运维。
+* 局限
+  - Prometheus 是基于 Metric 的监控，不适用于日志（Logs）、事件（Event）、调用链（Tracing）。
+  - Prometheus 默认是 Pull 模型，合理规划你的网络，尽量不要转发。
+  - 对于集群化和水平扩展，官方和社区都没有银弹，需要合理选择 Federate、Cortex、Thanos 等方案。
+  - 监控系统一般情况下可用性大于一致性，容忍部分副本数据丢失，保证查询请求成功。这个后面说 Thanos 去重的时候会提到。
+  - Prometheus 不一定保证数据准确，这里的不准确一是指 rate、histogram_quantile 等函数会做统计和推断，产生一些反直觉的结果，这个后面会详细展开。二来查询范围过长要做降采样，势必会造成数据精度丢失，不过这是时序数据的特点，也是不同于日志系统的地方。
+
 ## 安装
 
 ```sh
@@ -65,7 +75,7 @@ curl -X POST http://localhost:9090/-/reload
 
 ## 架构
 
-* Prometheus Server: 负责采集和存储监控数据，并且对外提供PromQL实现监控数据的查询、聚合分析，以及告警规则管理。
+* Prometheus Server:负责采集和存储监控数据，并且对外提供PromQL实现监控数据的查询、聚合分析，以及告警规则管理。
     - Retrieval: 负责定时去暴露的目标服务上去拉取监控Metrics指标数据
     - TSDB: Prometheus 2.0版本起使用的底层存储, 它的数据块编码使用了facebook的gorilla，具备了完整的持久化方案
     - HTTP Server: 提供HTTP API接口查询监控Metrics数据
@@ -699,7 +709,27 @@ spec:
           servicePort: 9090
 ```
 
-## exporter
+## 常用Exporter
+
+* Kubernetes 生态的组件都会提供 /metric 接口以提供自监控，这里列下：
+  - cAdvisor：集成在 Kubelet 中。
+  - kubelet：10255 为非认证端口，10250 为认证端口。
+  - apiserver：6443 端口，关心请求数、延迟等。
+  - scheduler：10251 端口。
+  - controller-manager：10252 端口。
+  - etcd：如 etcd 写入读取延迟、存储容量等。
+  - Docker：需要开启 experimental 实验特性，配置 metrics-addr，如容器创建耗时等指标。
+  -
+kube-proxy：默认 127 暴露，10249 端口。外部采集时可以修改为 0.0.0.0 监听，会暴露：写入 iptables
+  - 规则的耗时等指标。
+  - kube-state-metrics：Kubernetes 官方项目，采集 Pod、Deployment 等资源的元信息。
+  - node-exporter：Prometheus 官方项目，采集机器指标如 CPU、内存、磁盘。
+  - blackbox_exporter：Prometheus 官方项目，网络探测，DNS、ping、http 监控。
+  - process-exporter：采集进程指标。
+  - NVIDIA Exporter：我们有 GPU 任务，需要 GPU 数据监控。
+  - node-problem-detector：即 NPD，准确的说不是 Exporter，但也会监测机器状态，上报节点异常打 taint。
+  - 应用层 Exporter：MySQL、Nginx、MQ 等，看业务需求。
+
 
 * 服务状态：Status->Targets
 
@@ -747,6 +777,19 @@ ExecStart=/opt/mysqld_exporter-0.10.0.linux-amd64/mysqld_exporter \
 WantedBy=multi-user.target
 ```
 
+* Kubernetes 集群运行中需要关注核心组件的状态、性能。如 kubelet、apiserver 等，基于上面提到的 Exporter 的指标，可以在 Grafana 中绘制图表 Grafana Dashboards for Kubernetes Administrators
+* 采集组件 All in One： Prometheus 体系中 Exporter 都是独立的，每个组件各司其职，如机器资源用 Node-Exporter，GPU 有Nvidia Exporter等等。但是 Exporter 越多，运维压力越大，尤其是对 Agent 做资源控制、版本升级。我们尝试对一些 Exporter 进行组合，方案有二：
+  - 通过主进程拉起 N 个 Exporter 进程，仍然可以跟着社区版本做更新、bug fix。
+  - 用Telegraf来支持各种类型的 Input，N 合 1。
+  - 另外，Node-Exporter 不支持进程监控，可以加一个 Process-Exporter，也可以用上边提到的 Telegraf，使用 procstat 的 input 来采集进程指标。
+* 合理选择黄金指标： 采集的指标有很多，我们应该关注哪些？Google 在“SRE Handbook”中提出了“四个黄金信号”：延迟、流量、错误数、饱和度。实际操作中可以使用 Use 或 Red 方法作为指导，Use 用于资源，Red 用于服务。
+  - Use 方法：Utilization、Saturation、Errors。如 Cadvisor 数据
+  - Red 方法：Rate、Errors、Duration。如 Apiserver 性能指标
+* 常见的服务分三种：
+  - 在线服务：如 Web 服务、数据库等，一般关心请求速率，延迟和错误率即 RED 方法
+  - 离线服务：如日志处理、消息队列等，一般关注队列数量、进行中的数量，处理速度以及发生的错误即 Use 方法
+  - 批处理任务：和离线任务很像，但是离线任务是长期运行的，批处理任务是按计划运行的，如持续集成就是批处理任务，对应 Kubernetes 中的 Job 或 CronJob，一般关注所花的时间、错误数等，因为运行周期短，很可能还没采集到就运行结束了，所以一般使用 Pushgateway，改拉为推。
+
 ## 插件
 
 * [knyar / nginx-lua-prometheus](https://github.com/knyar/nginx-lua-prometheus):Prometheus metric library for Nginx written in Lua
@@ -756,6 +799,7 @@ WantedBy=multi-user.target
 * [improbable-eng/thanos](https://github.com/improbable-eng/thanos):Highly available Prometheus setup with long term storage capabilities.
 * [coreos/prometheus-operator](https://github.com/coreos/prometheus-operator):Prometheus Operator creates/configures/manages Prometheus clusters atop Kubernetes
 * [ cortexproject / cortex ](https://github.com/cortexproject/cortex):A horizontally scalable, highly available, multi-tenant, long term Prometheus. https://cortexmetrics.io/
+* [doraemon](link)
 
 ## 参考
 

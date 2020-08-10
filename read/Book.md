@@ -49,33 +49,6 @@
 * 计算机编程艺术
 * 《操作系统:精髓与设计原理(原书第6版)》
 
-## Linux / Unix
-
-* 《[UNIX网络编程 卷1：套接字联网API（第3版）](https://www.amazon.cn/gp/product/B011S72JB6)》
-* 《[UNIX网络编程 卷2：进程间通信](https://www.amazon.cn/gp/product/B012R5A29O)》
-* 《[UNIX编程环境](https://www.amazon.cn/gp/product/B00IYTQBYS/)》
-* 《[Unix 环境高级编程(第3版)](https://www.amazon.cn/gp/product/B00KMR129E)》
-* 《Unix网络高级编程》
-* 《Unix/Linux 编程实践教程》
-* 《UNIX操作系统设计》
-* 《[UNIX编程艺术](https://www.amazon.cn/gp/product/B008Z1IEQ8)》
-* 《Linux/Unix 系统编程手册》
-* 《[深入理解Linux内核](https://www.amazon.cn/gp/product/B0011F5RYM)》
-* 《[深入Linux内核架构](https://www.amazon.cn/gp/product/B003QN7J7U)》
-* 《[Linux系统编程（第2版）](https://www.amazon.cn/gp/product/B00JUM2ML4)》
-* 《[Linux内核设计与实现（第3版）](https://www.amazon.cn/gp/product/B004X3Z3D4)》奠定基础的书籍
-* LINUX操作系统(第2版)
-* 《Linux多线程服务端编程》
-* 《鸟哥的Linux私房菜:服务器架设篇(第3版)》
-* 《鸟哥的Linux私房菜:基础学习篇(第3版)》
-* Linux运维之道
-* 嵌入式Linux基础教程(第2版)
-* 精通Linux设备驱动程序开发
-* Linux命令行与shell脚本编程大全（第3版）
-* 《只是为了好玩 : Linux 之父林纳斯自传》
-* 《Linux Shell 脚本攻略》
-* 《Linux内核设计的艺术》
-
 ## 编程通用
 
 * 《[编程原本](https://www.amazon.cn/gp/product/B006P7V73G)》
@@ -103,86 +76,6 @@
 * 分布式系统原理与范型
 * 《Working Effectively With Legacy Code》
 
-## 算法与数据结构
-
-* 《[算法（第4版）](https://www.amazon.cn/gp/product/B009OCFQ0O)》todo
-* 《[算法导论（原书第2版)(Introduction to Algorithms）](https://www.amazon.cn/gp/product/B00AK7BYJY)》
-* 《[Python算法教程](https://www.amazon.cn/gp/product/B019NB0VCI)》
-* 《[算法设计与分析基础（第3版）](https://www.amazon.cn/gp/product/B00S4HCQUI)》
-* 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
-* 《[数据结构与算法分析 : C++描述（第4版）](https://www.amazon.cn/gp/product/B01LDG2DSG)》
-* 《[数据结构与算法分析 : C语言描述（第2版）](https://www.amazon.cn/gp/product/B002WC7NGS)》
-* 《[数据结构与算法分析 : Java语言描述（第2版）](https://www.amazon.cn/gp/product/B01CNP0CG6)》
-* 《数据结构与算法 JavaScript 描述》
-* 算法图解
-* 大话数据结构
-* 《Redis设计与实现》
-* 剑指 offer
-
-## 设计
-
-* 《设计原本》
-* 《写给大家看的设计书》：界面设计
-* 通用设计法则：交互设计
-* 《[精益设计：设计团队如何改善用户体验](https://book.douban.com/subject/24896848/)》
-* 《[用户体验草图设计](https://book.douban.com/subject/10542579/)》
-* 《[About Face 4: 交互设计精髓](https://book.douban.com/subject/26642302/)》
-* 《[移动优先+响应式Web设计](https://book.douban.com/subject/26291332/)》
-* 《[交互设计指南](https://book.douban.com/subject/4881989/)》
-* 《设计心理学》系列
-* 《交互设计之路：让高科技产品回归人性（The Inmates Are Running The Asylum: Why High Tech Products Drive Us Crazy and How to Restore the Sanity）》
-* 《简约至上》
-* 《用户体验的要素》
-* 《人人都是产品经理》
-* 可士和式
-* 设计中的设计
-* 设计师要懂心理学
-* 移动交互设计精髓：设计完美的移动用户界面
-* 交互设计那些事儿
-* 无懈可击的web设计
-* 无界面交互
-* 非设计人员的设计
-* 产品经理手册
-* 上瘾：让用户养成使用习惯的四大产品逻辑
-
-## 产品
-
-* 《客户驱动的产品开发》
-* 《数据驱动设计：A/B测试提升用户体验》
-* 启示录 Marty Cagan
-
-## OO
-
-* 《Elegant Objects》
-* 《Object Thinking》
-* 《Practical Object-Oriented Design in Ruby》
-* 《Design Patterns Explained》
-* 《Python 3 Object-oriented Programming》
-
-## HTTP
-
-* 图解HTTP
-* HTTP权威指南：需要理解HTTP的本质复杂度，并且避免被作者引入的非本质复杂度的干扰。
-* 计算机网络 自顶向下方法
-
-## Web前端
-
-* [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
-* Web开发权威指南
-* 《Web 可用性设计》
-* 《DOM 启蒙》
-* Web性能权威指南
-* 《大型网站技术架构》
-* 七周七Web开发框架
-* Web性能权威指南
-* 《DOM 启蒙》
-* 《Web风格：用户体验设计基本原则及实践(原书第4版)》
-* 《RESTful Web Clients：基于超媒体的可复用客户端》
-
-## PWA
-
-* [PWA实战：面向下一代的Progressive Web APP](https://github.com/SangKa/PWA-Book-CN):第一本 PWA 中文书 https://item.jd.com/12365091.html
-
 ### HTML
 
 * 《[HTML5 权威指南](https://www.amazon.cn/gp/product/B00H706BIG)》
@@ -192,93 +85,13 @@
 * 《Head First HTML 与 CSS (第2版)》
 * 《深入浅出 HTML 与 CSS》
 
-### Javascript
-
-* 《Javascript高级编程》
-* 《JavaScript高级程序设计(第3版)》
-* 《编写可维护的 JavaScript》
-* 《ES6 标准入门(第3版)》
-* 《深入理解ES6》
-* 《JavaScript设计模式》
-* 《JavaScript开发框架权威指南》
-* JavaScript函数式编程
-* JS高级程序设计
-* 《JavaScript 框架设计》
-* 《单页 Web 应用: JavaScript 从前端到后端》
-* 《基于 MVC 的 JavaScript Web 富应用开发》
-* 你不知道的javascript
-* 《[高性能 JavaScript](https://www.amazon.cn/gp/product/B013SGB2AO)》
-* 《[锋利的 jQuery（第2版）](https://www.amazon.cn/gp/product/B0089TDFNS)》
-* 《[JavaScript 忍者秘籍](https://www.amazon.cn/gp/product/B016DWSEWO)》（感谢[@joker-danta](https://github.com/jobbole/awesome-programming-books/issues?q=is%3Aissue+is%3Aopen+author%3Ajoker-danta) 补充推荐）
-* 《[编写可维护的 JavaScript](https://www.amazon.cn/gp/product/B00BQ7RMW0)》
-* 《[你不知道的 JavaScript（上）](https://www.amazon.cn/gp/product/B00W34DZ8K)》
-* 《[JavaScript 权威指南（第6版）](https://www.amazon.cn/gp/product/B007VISQ1Y)》
-* 《[JavaScript 语言精粹](https://www.amazon.cn/gp/product/B0097CON2S)》
-* 《[JavaScript DOM编程艺术 （第2版）](https://www.amazon.cn/gp/product/B004VJM5KE)》
-* 《[JavaScript 高级程序设计（第3版）](https://www.amazon.cn/gp/product/B007OQQVMY)》
-* 《[JavaScript 异步编程：设计快速响应的网络应用](https://www.amazon.cn/gp/product/B00JVLEYY2)》
-* 《[Effective JavaScript：编写高质量JavaScript代码的68个有效方法](https://www.amazon.cn/gp/product/B00GMXI1QY)》
-* 《JavaScript设计模式与开发实践》
-* 《Effective JavaScript：编写高质量JavaScript代码的68个有效方法》
-
-### CSS
-
-* 《[CSS 揭秘](https://www.amazon.cn/gp/product/B01ET3FO86)》
-* 《CSS 世界》
-* 《[CSS 设计指南（第3版）](https://www.amazon.cn/gp/product/B00M2DKZ1W)》
-* 《[CSS 权威指南（第3版）](https://www.amazon.cn/gp/product/B0011F5SIC)》
-* 《CSS 禅意花园(修订版)》[css zen garden禅意花园](http://www.csszengarden.com/)
-* 《精通 CSS: 高级 Web 标准解决方案(第2版)》
-* 《众妙之门: 精通 CSS3》
-* 《[深入浅出 HTML 与 CSS](https://www.amazon.cn/gp/product/B01LXL42O5)》
-* 《[点石成金 : 访客至上的网页设计秘笈](https://www.amazon.cn/gp/product/B00QGA04RM)》
-* 超越css
-
 ### 客户端
 
 * 《深入 React 技术栈》
 * 《Vue.js 权威指南》
 * 《Angular 权威教程》
 * 《深入浅出 Node.js》
-
-## 测试
-
-* 《[探索式软件测试](https://www.amazon.cn/gp/product/B003JBIV0S)》
-* 《[有效的单元测试](https://www.amazon.cn/gp/product/B00PVOND2W)》
-* 《[Google软件测试之道](https://www.amazon.cn/gp/product/B00FH36R6G)》
-*  How to Break Software
-* 《测试驱动开发》
-*  测试驱动的面向对象软件开发
-* 《Growing Object-Oriented Software, Guided by Tests》
-* 《Python测试驱动开发（第2版）》 Harry J.W.Percival
-
-## Java
-
-* 《[Java8 实战](https://www.amazon.cn/gp/product/B01ER75QC8)》
-* 《[Java并发编程实战](https://www.amazon.cn/gp/product/B0077K9XHW)》
-* 《[Java性能权威指南](https://www.amazon.cn/gp/product/B01DLB7Z66)》
-* 《[Java程序员修炼之道](https://www.amazon.cn/gp/product/B00E0D2OX4)》
-* 《[实战Java高并发程序设计 Java concurrency in practice](https://www.amazon.cn/gp/product/B017MEN094)》
-* 《[Java编程思想 （第4版）](https://www.amazon.cn/gp/product/B0011F7WU4)》：todo
-* 《[深入理解Java虚拟机（第2版）](https://www.amazon.cn/gp/product/B01HI0BUF8)》
-* 《[Effective java 中文版（第2版）](https://www.amazon.cn/gp/product/B001PTGR52)》
-* 《[Java核心技术·卷1：基础知识（原书第9版）](https://www.amazon.cn/gp/product/B01M22BGUQ)》
-* 《[Java核心技术·卷2：高级特性（原书第9版）](https://www.amazon.cn/gp/product/B00IK7SM6O)》
-* Spring实战（第4版）
-* 《大型网站系统与 Java 中间件实践》
-* Head First Java
-* Tomcat架构解析
-* Java虚拟机
-* 《Java多线程编程核心技术》
-* 《Java并发编程的艺术》
-
-## PHP
-
-* 《[Head First PHP & MySQL（中文版）](https://www.amazon.cn/gp/product/B004R1QIJU)》
-* 《[深入PHP：面向对象、模式与实践（第3版）](https://www.amazon.cn/gp/product/B005D6IRRY)》
-* 《PHP and MySQL Web Development PHP与MySQL程序设计(第5版)》
-* Modern PHP(中文版)
-* 深入理解PHP:高级技巧、面向对象与核心技术(原书第3版)
+* [PWA实战：面向下一代的Progressive Web APP](https://github.com/SangKa/PWA-Book-CN):第一本 PWA 中文书 https://item.jd.com/12365091.html
 
 ## C语言
 
@@ -291,50 +104,11 @@
 * 《C语言参考手册（第5版）》
 * 《C程序设计语言》：C 编程语言；如何像程序员一样思考；底层计算模型
 
-## C++
-
-* 《[C++标准库](https://www.amazon.cn/gp/product/B00YLZIRHI)》
-* 《[C++编程思想](https://www.amazon.cn/gp/product/B005CFUQR0)》
-* 《C++语言的设计与演化》
-* 《[C++程序设计原理与实践](https://www.amazon.cn/gp/product/B003VPX6YS)》
-* 《[C++ Primer （中文第5版）](https://www.amazon.cn/gp/product/B00ESUIL0O)》
-* 《[C++ Primer习题集(第5版)](https://www.amazon.cn/gp/product/B00S6U4C6E) 》
-* 《[C++程序设计语言(The C++ Programming Language)(原书第4版)](https://www.amazon.cn/gp/product/B01I9BNASA) 》
-* 《[Effective C++:改善程序与设计的55个具体做法(第3版)(中文版)](https://www.amazon.cn/gp/product/B004G72P24) 》 todo
-* 《[More Effective C++:35个改善编程与设计的有效方法(中文版)](https://www.amazon.cn/gp/product/B004IP8BD6) 》
-* C++沉思录
-
 ## .NET
 
 * 《[精通C#（第6版）](https://www.amazon.cn/gp/product/B00DVDDP0K)》
 * 《[深入理解C#（第3版）](https://www.amazon.cn/gp/product/B00J94AG2A)》
 * 《[CLR via C#（第4版）](https://www.amazon.cn/gp/product/B00P8VZ8T4)》
-
-## Python
-
-* 《[集体智慧编程](https://www.amazon.cn/gp/product/B00UI93JD8)》
-* 《[笨办法学Python](https://www.amazon.cn/gp/product/B00P6OJ0TC)》
-* 《[Python基础教程(第3版)](https://www.amazon.cn/Python基础教程-Magnus-Lie-Hetland/dp/B079BJPVFL/ref=dp_ob_title_bk)》
-* 《Python源码剖析》
-* 《[Head First Python](https://www.amazon.cn/gp/product/B007NB2B4M)》
-* 《[与孩子一起学编程](https://www.amazon.cn/gp/product/B00HECW20S)》
-* 《[Python学习手册（第4版）](https://www.amazon.cn/gp/product/B004TUJ7A6)》
-* 《[Python Cookbook（第3版）](https://www.amazon.cn/gp/product/B00WKR1OKG)》
-* 《[Python参考手册（第4版）](https://www.amazon.cn/gp/product/B01MCUN37Y)》
-* 《[Python核心编程（第3版）](https://www.amazon.cn/gp/product/B01FQAS0KK)》
-* 《[Python科学计算（第2版）](https://www.amazon.cn/gp/product/B01HCVUJFA)》
-* 《[利用 Python 进行数据分析](https://www.amazon.cn/gp/product/B00GHGZLWS)》
-* 《[Think Python：像计算机科学家一样思考Python（第2版）](https://www.amazon.cn/gp/product/B01ION3W54)》
-* 《[Python编程实战:运用设计模式、并发和程序库创建高质量程序](https://www.amazon.cn/gp/product/B00MHDPIJ6)》
-* 《[Python绝技：运用Python成为顶级黑客](https://www.amazon.cn/gp/product/B019ZRGBVU)》
-* 《[Flask Web开发:基于Python的Web应用开发实战](https://www.amazon.cn/gp/product/B0153177A6)》
-* 《用 Python 写网络爬虫》
-* 《[深度学习:基于Keras的Python实践](https://www.amazon.cn/gp/product/B07D5855F4)》
-* Python与量化投资从基础到实践
-* Learning Python, 5th Edition
-* Python编程 从入门到实践
-* 流畅的Python Fluent Python
-* [Flask Web开发实战：入门、进阶与原理解析](https://item.jd.com/12430774.html)
 
 ## Go
 
@@ -350,89 +124,9 @@
 * MongoDB大数据处理权威指南（第2版）
 * NoSQL数据库技术实战
 
-## 架构/性能
-
-* 《架构即未来》
-* 《[微服务设计](https://www.amazon.cn/gp/product/B01ER75V6O)》
-* 《[大数据日知录](https://www.amazon.cn/gp/product/B00NGW4EAG)》
-* 《[企业应用架构模式 Patterns of Enterprise Application Architecture](https://www.amazon.cn/gp/product/B003LBSRDM)》
-* 《[Web性能权威指南](https://www.amazon.cn/gp/product/B00JMKWHFU)》
-* 《[SRE：Google运维解密](https://www.amazon.cn/gp/product/B01M0EHQ43)》
-* 《[发布！软件的设计与部署](https://www.amazon.cn/gp/product/B0153178XM)》
-* 《[高扩展性网站的 50 条原则](https://www.amazon.cn/gp/product/B01HZFHQQI)》
-* 《[大型网站技术架构:核心原理与案例分析](https://www.amazon.cn/gp/product/B00F3Z26G8)》
-* 《[恰如其分的软件架构：风险驱动的设计方法](https://www.amazon.cn/gp/product/B00EP6TGAU)》
-* 《[软件系统架构：使用视点和视角与利益相关者合作（第2版）](https://www.amazon.cn/gp/product/B00CMMUXC4)》
-* 《图解服务器端网络架构》
-* 《大型分布式网站架构设计与实践》
-* 《企业应用架构模式》 Martin Fowler
-* 《分析模式》，《UML精粹》，《领域特定语言》
-
-## Docker
-
-* Docker 容器与容器云
-
-## 客户端
-
-### Android
-
-* 《[Android编程权威指南（第2版）](https://www.amazon.cn/gp/product/B01FSXCBOQ)》
-* 《[移动应用UI设计模式（第2版）](https://www.amazon.cn/gp/product/B00SFZGX08)》
-* 《Android开发艺术探索》
-
-### iOS
-
-* 《[iOS编程实战](https://www.amazon.cn/gp/product/B00NKZCM3U)》
-* 《[iOS编程（第4版）](https://www.amazon.cn/gp/product/B013UG2ULW)》
-* 《[Objective-C高级编程](https://www.amazon.cn/gp/product/B00DE60G3S)》
-* 《[Effective Objective-C 2.0：编写高质量iOS与OS X代码的52个有效方法](https://www.amazon.cn/gp/product/B00IDSGY06)》
-
-### React Native
-
-* React Native入门与实战
-* React Native开发指南
-* React Native精解与实战
-
-## 网站
-
-* 深入分布式缓存：从原理到实践
-
-## 微服务
-
-## 领域驱动设计（Domain-Driven Design）
-
-* 《Patterns, Principles and Practices of Domain-Driven Design》
-* 领域驱动设计
-* 《领域驱动设计精粹》
-* Domain-driven Design
-
 ## Serverless
 
 * 《Serverless架构：无服务器应用与AWS Lambda》
-
-## DevOps
-
-* DevOps实践指南
-* 构建高可用Linux服务器（第3版）
-
-## 机器学习
-
-* 《[数据之巅](https://www.amazon.cn/gp/product/B00JUE9DXW)》
-* 《[矩阵分析](https://www.amazon.cn/gp/product/B00NTM5GK0)》
-* 《[机器学习](https://www.amazon.cn/gp/product/B002WC7NH2)》
-* 《[统计学习方法](https://www.amazon.cn/gp/product/B007TSFMTA)》
-* 《[机器学习导论](https://www.amazon.cn/gp/product/B01AG3ZV9K)》
-* 《[推荐系统实践](https://www.amazon.cn/gp/product/B008AK5YJO)》
-* 《[机器学习实战](https://www.amazon.cn/gp/product/B00D747PTK)》
-* TensorFlow：实战Google深度学习框架
-* 《机器学习实战：基于Scikit-Learn和TensorFlow》
-* 《机器学习》  周志华
-* 《漫谈人工智能》 集智俱乐部
-* 《机器学习实战》  Peter Harrington
-* 《TensorFlow 技术解析与实战》  李嘉璇
-* 《统计学习方法》  李航
-* 《Python深度学习（Keras）》
-* 《深度学习入门：基于Python的理论与实现》
 
 ## 数据挖掘
 
@@ -456,10 +150,6 @@
 * 《Hadoop深度学习》 Dipayan Dev
 * 《R数据科学》 哈德利•威克姆、加勒特•格罗勒芒德
 * 深入浅出数据分析 Michael Milton
-
-## ML
-
-* 深入理解Tensor Flow：架构
 
 ## 区块链
 
@@ -488,10 +178,6 @@
 * 浮现式设计 专业软件开发的演进本质
 * 《软件工程》
 * 《精益思想(白金版)》
-
-## TDD
-
-* Grow Object-Oriented Software Guided by Tests
 
 ## 职业修炼与规划
 
@@ -580,18 +266,12 @@
 * IT 之火
 * 天才在左，疯子在右
 
-
 * Evolutionary Architecture
 * Clean Code, Design Patterns, DDD
 * Lean manufacturing principles
 * Fault Tolerance Patterns
 * Continuous Delivery
 * HTTP and REST
-
-## 数学
-
-* 数学分析
-* 万物皆数：从史前时期到人工智能，跨越千年的数学之旅
 
 ## 国家
 
@@ -603,22 +283,6 @@
     - 所有的美国公司，都在为美国政府分享信息
         + 如果孟晚舟被引渡到美国，那么将会极为不利，美国的司法体系设计就对被告极为不利，尤其是对弱者，可以说是任人宰割。
         + 美国企业执行美国政府的法律是非常坚决的，响应速度非常快，完全的执行美国的长臂管辖。
-
-## 数据
-
-* 干净的数据：数据清洗入门与实践
-* 数据科学入门
-* Python网络数据采集
-* 洞悉数据：用可视化方法发掘数据真义
-* 决策知识自动化：大数据时代的商业决策分析方法
-* 社会媒体挖掘
-* 云数据中心网络技术
-* 人人都是数据分析师：Tableau应用实战
-* Spark快速大数据分析
-* 《Spark高级数据分析（第2版）》 作者：[美] 桑迪·里扎 , [美] 于里·莱瑟森 , [英] 肖恩·欧文 , [美] 乔希·威尔斯 译者：龚少成 , 邱鑫 * 数据科学家修炼之道
-* 编程谜题
-* 《Flink基础教程》 作者：埃伦·弗里德曼 , 科斯塔斯·宙马斯 译者：王绍翾
-* Spark机器学习（第2版）》 作者：[印]拉结帝普·杜瓦 , [印]曼普利特·辛格·古特拉 , [南非]尼克·彭特里思 译者：蔡立宇 , 黄章帅 , 周济民
 
 ## 逻辑
 
@@ -638,149 +302,6 @@
 * 拖延心理学
 * 先发影响力 罗伯特·西奥迪尼
 * 灰犀牛：如何应对大概率危机
-
-## 经济
-
-* 《经济学》保罗·萨缪尔森（Paul A. Samuelson）
-* 《Essentials of Accounting》 Robert N. Anthony, Leslie K. Breitner
-* 《财务管理分析》Analysis for Financial Management by Robert Higgins
-* 《竞争战略》迈克尔·波特 (Michael Porter)
-* 《自由选择》米尔顿·弗里德曼（Milton Friedman）
-* 巴菲特致股东的一封信
-
-## 投资
-
-* Python与量化投资从基础到实践
-* 穷查理宝典：查理·芒格的智慧箴言录
-
-## 作家
-
-* 夏目漱石
-* 伍尔夫
-* 莫言
-* 路遥
-* 罗素
-* 普鲁斯特
-* 罗兰
-* 卡尔维诺
-* 郁达夫
-
-## 人文
-
-* 王小波
-    - 黄金时代
-    - 白银时代
-    - 青铜时代
-    - 黑铁时代
-    * 万寿寺
-    * 《我的师承》《寻找无双》
-    * 一只特立独行的猪
-    * 《我的精神家园》
-    * 《沉默的大多数》
-* 加西亚·马尔克斯
-    * 《百年孤独》讲述了孤独是几代人命中注定的结局。无论走到哪里，都应该记住，过去都是假的，回忆是一条没有尽头的路，一切以往的春天都不复存在，就连那最坚韧而又狂乱的爱情归根结底也不过是一种转瞬即逝的现实。
-* 《城市发展史》
-* 《美国大城市的死与生》
-* 那些忧伤的年轻人
-* 鼠人
-* 追忆逝水年华
-* 地下室手记
-* 局外人
-* 木心
-    - 文学回忆录
-* 史铁生：
-    - 《病隙碎笔》
-    - 《灵魂的事》
-* 周国平：
-    - 《人与永恒》
-    - 《守望的距离》
-    - 《灵魂只能独行》
-* 乔斯坦·贾德：《苏菲的世界》
-* 威尔·杜兰特：《哲学的故事》
-* 柏拉图：《理想国》《苏格拉底之死》
-* 叔本华：《人生的智慧》《叔本华思想随笔》
-* 蝇王
-* 遥远的救世主
-* 美丽新世界 阿道司·赫胥黎
-* 张嘉佳
-    * 从你的全世界路过
-* 王朔
-    - 玩的就是心跳
-    - 看上去很美
-    - 动物凶猛
-    - 无知者无畏
-    - 致女儿书
-    - 我的千岁寒
-* 卡夫卡
-* 沈从文
-    - 边城
-        + 爱情的选择 翠翠 大佬 二佬
-    - 春风沉醉的晚上
-* 了不起的盖茨比：浮华时代的苍凉爱情。
-    - 如果说《百年孤独》写到生命本身就是幻梦，那这本书写的就是爱情也不过是梦一场。毛姆好像和菲茨杰拉德是同一个时代。毛姆写到的那句如上，黛西爱的不是盖茨比，而是虚荣。五年时间，黛西没变，盖茨比也没变。那个镜头又浮现在我眼前:
-    - 盖茨比望着黛西家码头上那盏绿色的灯，他守望的不过是一场梦。
-* to kill a mockingbird
-* 动物农场
-* 道德经
-* 保罗·奥斯特
-    - 《斯通纳》
-
-## 政治
-
-* 旧制度与大革命
-* 约翰·威廉斯
-* 汉密尔顿等《联邦党人文集》1980年版；
-* 塞西尔《保守主义》1986年版；
-* 托克维尔《论美国的民主》1989年版；
-* 托克维尔《旧制度与大革命》1992年版；
-* 萨托利《民主新论》1993年版；
-* 休谟《休谟政治论文选》1993年版；
-* 哈耶克《通往奴役之路》1997年版；
-* 哈耶克《自由秩序原理》1997年版；
-* 韦伯《学术与政治》1998年版；
-* 柏克《法国革命论》1998年版；
-* 勒庞《乌合之众》1998年版；
-* 贡斯当《古代人的自由和现代人的自由》1999年版；
-* 丘吉尔《丘吉尔文集：思想与经历》1999年版；
-* 奥斯特罗姆《复合共和制的政治理论》1999年版；
-* 哈耶克《致命的自负》2000年版；
-* 克莱·瑞恩《异中求同》2001年版；
-* 曼海姆《保守主义》2002年版；
-* 柏克《美洲三书》2003年版；
-* 哈耶克《科学的反革命》2003年版；
-* 哈耶克《个人主义与经济秩序》2003年版；
-* 帕累托《精英的兴衰》2003年版；
-* 施特劳斯《自然权利与历史》2003年版；
-* 凯克斯《为保守主义辩护》2003年版；
-* 欧克肖特《政治中的理性主义》2004年版；
-* 加塞特《大众的反叛》2004年版；
-* 雷蒙·阿隆《知识分子的鸦片》2005年版；
-* 斯克拉顿《保守主义的含义》2005年版；
-* 休谟《人性论》2007年版；
-* 斯蒂芬《自由·平等·博爱》2007年版；
-* 沃格林《没有约束的现代性》2007年版；
-* 克莱·瑞恩《道德自负的美国》2008年版；
-* 欧克肖特《信念论政治与怀疑论政治》2009年版；
-* 赫尔德《反纯粹理性》，2010年版；
-* 迈斯特《信仰与传统》2010年版；
-* 杰里·马勒《保守主义：从休谟到当前的社会政治思想文集》2010年版；
-* 汉密尔顿等《联邦论》（尹宣 译）2010年版；
-* 白璧德《民主与领袖》2011年版；
-* 阿克顿《自由与权力》2011年版；
-* 梅因《民众政府》2012年版；
-* 艾略特《传统与个人才能》2012年版；
-* 赫希曼《反动的修辞》2012年版；
-* 柏克《自由与传统》2012年版；
-* 沃尔特·李普曼《幻影公众》2013年版；
-* 哈耶克《哈耶克文选》2015年版；
-* 巴克利《耶鲁的上帝与人》2015版；
-* 柏克《法国大革命反思录》2015版；
-* 维沃《思想的后果》2015年版；
-* 艾尔伯特·诺克《我们的敌人：国家》2015年版；
-* 艾尔伯特·诺克《多余的人》2015年版；
-* 罗伯特·希格斯《反利维坦：政府权力与自由社会》2017年版；
-* 拉塞尔·柯克《美国秩序的根基》2018年版；
-* 拉塞尔·柯克《保守主义思想》2019年版；
 
 ## 科幻
 
@@ -811,40 +332,6 @@
     - 临界·爵迹Ⅰ 雾雪零尘
     - 临界·爵迹Ⅱ 永生之海
 
-## 小说
-
-* 翻云覆雨
-* 黑塞的《玻璃球游戏》
-* 坎贝尔
-    - 《千面英雄》
-* 五智喇嘛弥伴传奇
-* 亦舒
-    - 天亦有情
-    - 纵横四海
-    - 我的前半生
-* 阿特拉斯耸耸肩
-* 巴浦洛夫的狗
-* 天下归元
-    - 凰权(电视 天盛长歌)
-    - 扶摇皇后
-    - 帝凰
-* 丁丁张
-    - 人生需要揭穿
-* 冯唐
-    - 《欢喜》
-    - 《十八岁给我一个姑娘》
-    - 《万物生长》
-    - 《北京，北京》
-* KEN FOLLETT
-    - 《圣殿春秋》
-        + 王桥修道院 亨利二世国王  托马斯主教被国王杀害
-    - 无尽世界 World Without End
-    - Fall of Giants 巨人的陨落
-* 1984
-    - 纳粹 苏联大清洗 文革
-* 远大前程
-* 熊镇
-
 ## 文学
 
 * 《中国现代文学三十年》
@@ -863,27 +350,6 @@
 
 《[洞察：精确观察和有效沟通的艺术](https://book.douban.com/subject/30047160/)》
 
-## 历史
-
-* 康熙王朝
-* 明朝那些事儿
-* 阿克顿《自由史论》2001年版；
-* 斯宾格勒《西方的没落》2001年版；
-* 阿克顿《法国大革命讲稿》2004年版；
-* 傅勒《思考法国大革命》2005年版；
-* 托克维尔《回忆录》，2005年版；
-* 威廉·本内特《美国通史》2009年版；
-* 保罗·约翰逊《美国人的历史》2010年版；
-* 休谟《英国史》2012年版；
-* 根茨《美法革命比较》2014年版；
-* 泰纳《现代法国的起源》2014年版；
-* 麦迪逊《辩论：美国制宪会议记录》2014年版；
-* 布尔斯廷《美国人：从殖民到民主的历程》2014年版；
-* 沃尔特·米德《上帝与黄金：英国、美国与现代世界的形成》2014年版；
-* 杜兰特《历史的教训》2015年版；
-* 丹尼尔 ·汉南《自由的基因》2015年版；
-* 雷蒙·阿隆《雷蒙·阿隆回忆录》2017年版；
-
 ## 杂项
 
 * 槽边往事
@@ -894,44 +360,6 @@
 * 最好的告别
 * 中国国家治理制度逻辑 周雪光 作者的斯坦福主页上也提供了PDF文档
 * 王阳明  传习录
-
-## 心理
-
-* 这才是心理学
-* 作为意志和表象的世界
-* 梦的解析
-* 自我分析（荣格）
-* 怪诞行为学
-* 安静:内向性格的竞争力
-* 暗时间
-* 心理学与生活
-* 自私的基因
-* 进化心理学
-* 查拉图斯特拉如是说
-* 张方宇《单独中的洞见》
-    - 当一个人爱上了另一个人，也许是因为另一个人满足了他的某个需要，一旦那个人不再能够满足他的那个需要，或者他自己的需要或趣味发生了变化，那么这种所谓的爱就消失了。所以，一个人真正爱的是自己的需要和趣味，而不是其他什么东西或什么人。人们所大肆谈论的爱就建立...
-    - 一个人坚持独处、单身的深层次原因，也许就是为了抵御平庸和粗俗。如果说寻求关系主要是为了趋利，那么坚持单独更多是为了避害。
-
-## 教育
-
-* 加涅的《学习的条件》
-* 《过剩时代的学习》
-* 同理心
-* 驱动力
-* 好奇心
-* 《精要主义》
-* 《坚毅》
-* 《仙踪原理》
-* 《创新的扩散》
-* 影响力
-* 先发影响力
-* 《怦然心动的人生整理魔法》
-* 《完美的混乱》
-* 《认识媒体：人的延伸》
-* 《活动理论面面观》
-* 《异类：不一样的成功启示录》
-* 《粘得住的学习》
-* 《人的学习》
 
 ## 科技
 
@@ -947,9 +375,6 @@
 
 * 叔本华哲言录
 * 浮士德
-
-## 政治学
-
 
 ## 经济学
 

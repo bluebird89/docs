@@ -175,6 +175,20 @@
 * 《Designing Data-Intensive Applications》 Martin Kleppmann
 * 《Streaming Systems》 Tyler Akidau, Slava Chernyak, Reuven Lax
 * [ Vonng / ddia ](https://github.com/Vonng/ddia):《Designing Data-Intensive Application》DDIA中文翻译
+* 干净的数据：数据清洗入门与实践
+* 数据科学入门
+* Python网络数据采集
+* 洞悉数据：用可视化方法发掘数据真义
+* 决策知识自动化：大数据时代的商业决策分析方法
+* 社会媒体挖掘
+* 云数据中心网络技术
+* 人人都是数据分析师：Tableau应用实战
+* Spark快速大数据分析
+* 《Spark高级数据分析（第2版）》 作者：[美] 桑迪·里扎 , [美] 于里·莱瑟森 , [英] 肖恩·欧文 , [美] 乔希·威尔斯 译者：龚少成 , 邱鑫 * 数据科学家修炼之道
+* 编程谜题
+* 《Flink基础教程》 作者：埃伦·弗里德曼 , 科斯塔斯·宙马斯 译者：王绍翾
+* Spark机器学习（第2版）》 作者：[印]拉结帝普·杜瓦 , [印]曼普利特·辛格·古特拉 , [南非]尼克·彭特里思 译者：蔡立宇 , 黄章帅 , 周济民
+
 
 ## Visualization
 

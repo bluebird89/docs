@@ -1301,10 +1301,31 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 
 ## 图书
 
-* 《JavaScript高级程序设计》（第3版）
-* 《JavaScript权威指南》
 * JavaScript 语言精髓与编程实践
 * [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter
+* 《Javascript高级编程》
+* 《ES6 标准入门(第3版)》
+* 《深入理解ES6》
+* 《JavaScript设计模式》
+* 《JavaScript开发框架权威指南》
+* JavaScript函数式编程
+* 《JavaScript 框架设计》
+* 《单页 Web 应用: JavaScript 从前端到后端》
+* 《基于 MVC 的 JavaScript Web 富应用开发》
+* 你不知道的javascript
+* 《[高性能 JavaScript](https://www.amazon.cn/gp/product/B013SGB2AO)》
+* 《[锋利的 jQuery（第2版）](https://www.amazon.cn/gp/product/B0089TDFNS)》
+* 《[JavaScript 忍者秘籍](https://www.amazon.cn/gp/product/B016DWSEWO)》（感谢[@joker-danta](https://github.com/jobbole/awesome-programming-books/issues?q=is%3Aissue+is%3Aopen+author%3Ajoker-danta) 补充推荐）
+* 《[编写可维护的 JavaScript](https://www.amazon.cn/gp/product/B00BQ7RMW0)》
+* 《[你不知道的 JavaScript（上）](https://www.amazon.cn/gp/product/B00W34DZ8K)》
+* 《[JavaScript 权威指南（第6版）](https://www.amazon.cn/gp/product/B007VISQ1Y)》
+* 《[JavaScript 语言精粹](https://www.amazon.cn/gp/product/B0097CON2S)》
+* 《[JavaScript DOM编程艺术 （第2版）](https://www.amazon.cn/gp/product/B004VJM5KE)》
+* 《[JavaScript 高级程序设计（第3版）](https://www.amazon.cn/gp/product/B007OQQVMY)》
+* 《[JavaScript 异步编程：设计快速响应的网络应用](https://www.amazon.cn/gp/product/B00JVLEYY2)》
+* 《[Effective JavaScript：编写高质量JavaScript代码的68个有效方法](https://www.amazon.cn/gp/product/B00GMXI1QY)》
+* 《JavaScript设计模式与开发实践》
+* 《Effective JavaScript：编写高质量JavaScript代码的68个有效方法》
 
 ## 资源
 

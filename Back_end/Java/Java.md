@@ -1094,17 +1094,26 @@ JavaEE/JDBC/Weblogic
 
 ## 图书
 
-* 《深入理解Java虚拟机》
-* 《Effective Java 中文版》
-* 《数据结构与算法分析：Java语言描述》
+* 《[深入理解Java虚拟机（第2版）](https://www.amazon.cn/gp/product/B01HI0BUF8)》
+* Java虚拟机
 * 《Java核心技术系列：Java多线程编程核心技术》
-* 《Java性能权威指南》
-* 《Java并发编程实战》
-* Java核心技术卷Ⅰ基础知识
-* Java核心技术卷Ⅱ高级特性
 * [Thinking In Java](https://www.codeguru.com/java/tij/tij_c.shtml)
 *  《Java 编程思想》第五版 [on Java8](https://lingcoder.github.io/OnJava8/#/)
 * [Introduction to Programming Using Java](http://math.hws.edu/javanotes/)
+* 《[Java8 实战](https://www.amazon.cn/gp/product/B01ER75QC8)》
+* 《[Java并发编程实战](https://www.amazon.cn/gp/product/B0077K9XHW)》
+* 《Java并发编程的艺术》
+* 《[Java性能权威指南](https://www.amazon.cn/gp/product/B01DLB7Z66)》
+* 《[Java程序员修炼之道](https://www.amazon.cn/gp/product/B00E0D2OX4)》
+* 《[实战Java高并发程序设计 Java concurrency in practice](https://www.amazon.cn/gp/product/B017MEN094)》
+* 《[Java编程思想 （第4版）](https://www.amazon.cn/gp/product/B0011F7WU4)》：todo
+* 《[Effective java 中文版（第2版）](https://www.amazon.cn/gp/product/B001PTGR52)》
+* 《[Java核心技术·卷1：基础知识（原书第9版）](https://www.amazon.cn/gp/product/B01M22BGUQ)》
+* 《[Java核心技术·卷2：高级特性（原书第9版）](https://www.amazon.cn/gp/product/B00IK7SM6O)》
+* Spring实战（第4版）
+* 《大型网站系统与 Java 中间件实践》
+* Head First Java
+* Tomcat架构解析
 
 ## 教程
 
