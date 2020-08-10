@@ -60,6 +60,31 @@ The Open Organization
 
 * [USTC Mirror](http://mirrors.ustc.edu.cn/help/index.html#)
 * [阿里巴巴开源软件站](https://opsx.alibaba.com/)
+* [facebook/watchman](https://github.com/facebook/watchman):Watches files and records, or triggers actions, when they change. https://facebook.github.io/watchman/
+* [腾讯软件源](https://mirrors.cloud.tencent.com)
+* [](https://bitnami.com)
+* 国内
+    + 清华大学  mirrors.tuna.tsinghua.edu.cn
+    + 中国科学技术大学    mirrors.ustc.edu.cn
+    + 上海交通大学  ftp.sjtu.edu.cn
+    + 上海大学    mirrors.shu.edu.cn
+- 企业开源镜像站：
+    + 阿里云 mirrors.aliyun.com
+    + 腾讯云 mirrors.cloud.tencent.com
+    + 华为云 mirrors.huaweicloud.com
+    + 网易  mirrors.cn99.com
+    + 首都在线    mirrors.yun-idc.com
+- 国外高校开源镜像站：
+    + [The Chinese University of Hong Kong ](ftp.cuhk.edu.hk)
+    + [元智大學](ftp.yzu.edu.tw)
+    + [Massachusetts Institute of Technology](mirrors.mit.edu)
+- 国外云服务商开源镜像站：
+    + Digital Ocean   mirrors.digitalocean.com
+    + Linode  mirrors.linode.com
+    + Cat Networks    mirrors.cat.net
+- 国外公益开源镜像站：
+    + Kernel ORG  mirrors.kernel.org
+    + Yandex  mirror.yandex.ru
 
 ## 工具
 

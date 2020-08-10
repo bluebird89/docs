@@ -59,3 +59,20 @@
 * [happo](https://happo.io/)
 * [imgcook](https://imgcook.taobao.org)
 * [设计工具](https://www.canva.cn)
+
+## 资源
+
+* [Canva](https://www.canva.com/):在线设计平台，预置了很多精美的模版，设计个海报什么的，分分钟的事儿，大大提好工作效率。在线设计绝对是个趋势，借助人工智能，设计的技术门槛肯定会越来越低，这时候，你的审美就越发重要
+* [dribbble](https://dribbble.com/)
+* [behance](https://www.behance.net/)：全球最优秀设计师的集中地，涵盖摄影、设计、插画等多个领域
+* [Fwa](https://thefwa.com/):世界上最有创意，最优秀的网站和媒体艺术
+* [Webby Awards](https://www.webbyawards.com/):互联网界的奥斯卡
+* [lapa](http://www.lapa.ninja):优秀网站集合
+* [Siteinspire](https://www.siteinspire.com/):收录了很多设计优秀的网站，种类丰富，有产品、设计、摄影等。不止能提高审美，还能发现很多优秀的产品和创意
+* [Adobe Spark Page]():在极短的时间内做出优雅炫酷的交互式网页
+* [Nounproject](https://thenounproject.com/):非常优质的图标网站
+* [Adobe color cc](https://color.adobe.com/):Aobe 旗下的配色网站，你可以在线配色，选择配色方案。不论是摄影还是设计，你都需要对颜色有足够的了解。
+* [Steller](https://steller.co/):展示自己的作品，比如摄影、绘画或其他创作，用 Steller 会显得特别优雅有格调
+* [设计百宝箱](https://uirush.com/)
+* [Arctime](http://www.arctime.org/):字幕制作神器
+* [iconfont](http://iconfont.cn/)

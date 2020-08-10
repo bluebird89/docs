@@ -124,6 +124,15 @@
 	- 波兰尼认为这个两难问题的产生根源在于经济自由主义者对 “自由” 定义方向的错误。试图找出超越这一困境的其他出路，也就是他所定义下非马克思主义的社会主义：“社会主义是工业文明的内在倾向，这种倾向有意识地试图使市场从属于一个民主社会，从而超越自发调节的市场”。
 	- 维护个人自由应该不惜任何代价 —— 哪怕是以生产效率、消费经济和管理理性作为代价。工业社会能够承受自由。
 
+## 图书
+
+* 《经济学》保罗·萨缪尔森（Paul A. Samuelson）
+* 《Essentials of Accounting》 Robert N. Anthony, Leslie K. Breitner
+* 《财务管理分析》Analysis for Financial Management by Robert Higgins
+* 《竞争战略》迈克尔·波特 (Michael Porter)
+* 《自由选择》米尔顿·弗里德曼（Milton Friedman）
+* 巴菲特致股东的一封信
+
 ## 工具
 
 * [waditu/tushare](https://github.com/waditu/tushare):TuShare is a utility for crawling historical data of China stocks

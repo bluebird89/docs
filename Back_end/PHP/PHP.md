@@ -2445,6 +2445,11 @@ pecl channel-update pecl.php.net
 
 * [The Best PHP Books](https://github.com/manithchhuon/the-best-php-books)
 * [php-objects-patterns-practice-13](https://github.com/apress/php-objects-patterns-practice-13):Source code for 'PHP Objects, Patterns, and Practice' by Matt Zandstra
+    - 《[深入PHP：面向对象、模式与实践（第3版）](https://www.amazon.cn/gp/product/B005D6IRRY)》
+* 《[Head First PHP & MySQL（中文版）](https://www.amazon.cn/gp/product/B004R1QIJU)》
+* 《PHP and MySQL Web Development PHP与MySQL程序设计(第5版)》
+* Modern PHP(中文版)
+* 深入理解PHP:高级技巧、面向对象与核心技术(原书第3版)
 
 ## 工具
 

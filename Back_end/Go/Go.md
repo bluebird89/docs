@@ -1071,7 +1071,6 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [dgryski/go-perfbook](https://github.com/dgryski/go-perfbook):Thoughts on Go performance optimization
 * [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. https://shopify.github.io/sarama
 * [alecthomas/participle](https://github.com/alecthomas/participle):A parser library for Go
-* [zserge/lorca](https://github.com/zserge/lorca):Build cross-platform modern desktop apps in Go + HTML5
 * [ginuerzh/gost](https://github.com/ginuerzh/gost):GO Simple Tunnel - a simple tunnel written in golang
 * [rakyll/statik](https://github.com/rakyll/statik):Embed files into a Go executable
 * [ry/v8worker](https://github.com/ry/v8worker):Minimal golang binding to V8

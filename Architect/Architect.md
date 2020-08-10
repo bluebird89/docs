@@ -318,6 +318,23 @@
     - 业务类书籍，建议多读些具有多年从业经验的人写的具有一定“感受”性特点的书籍，单纯的教材类书籍可能代入感稍微有些欠缺
     - 历史、军事、经济、哲学类书籍其实很有助于从更宏观、更本质的层面了解社会的运行，有助于从更开阔的视角理解业
 
+* 《架构即未来》
+* 《[微服务设计](https://www.amazon.cn/gp/product/B01ER75V6O)》
+* 《[大数据日知录](https://www.amazon.cn/gp/product/B00NGW4EAG)》
+* 《[企业应用架构模式 Patterns of Enterprise Application Architecture](https://www.amazon.cn/gp/product/B003LBSRDM)》
+* 《[Web性能权威指南](https://www.amazon.cn/gp/product/B00JMKWHFU)》
+* 《[SRE：Google运维解密](https://www.amazon.cn/gp/product/B01M0EHQ43)》
+* 《[发布！软件的设计与部署](https://www.amazon.cn/gp/product/B0153178XM)》
+* 《[高扩展性网站的 50 条原则](https://www.amazon.cn/gp/product/B01HZFHQQI)》
+* 《[大型网站技术架构:核心原理与案例分析](https://www.amazon.cn/gp/product/B00F3Z26G8)》
+* 《[恰如其分的软件架构：风险驱动的设计方法](https://www.amazon.cn/gp/product/B00EP6TGAU)》
+* 《[软件系统架构：使用视点和视角与利益相关者合作（第2版）](https://www.amazon.cn/gp/product/B00CMMUXC4)》
+* 《图解服务器端网络架构》
+* 《大型分布式网站架构设计与实践》
+* 《企业应用架构模式》 Martin Fowler
+* 《分析模式》，《UML精粹》，《领域特定语言》
+
+
 ## 实例
 
 * [ alibaba /COLA ](https://github.com/alibaba/COLA):Clean Object-oriented & Layered Architecture

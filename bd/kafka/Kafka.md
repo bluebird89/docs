@@ -485,16 +485,18 @@ Topic: cxuantopic Partition: 0 Leader: 1 Replicas: 1,2 Isr: 1,2 # 主题 cxuanto
         + Client 先请求 Transaction Coordinator 记录的事务状态，初始状态是 Begin，如果是该事务中第一个到达的，同时会对事务进行计时。Client 输出数据到相关的 Partition 中；Client 再请求 Transaction Coordinator 记录 Offset 的事务状态；Client 发送 Offset Commit 到对应 Offset Partition。
         + Client 发送 Commit 请求，Transaction Coordinator 记录 Prepare Commit/Abort，然后发送 Marker 给相关的 Partition。全部成功后，记录 Commit/Abort 的状态，最后这个记录不需要等待其他 Replica 的 ACK，因为 Prepare 不丢就能保证最终的正确性了。
 
-## 网络设计三层架构
+## Kafka Broker 网络通信模型
 
+* Broker 中有个Acceptor(mainReactor)监听新连接的到来，与新连接建连之后轮询选择一个Processor(subReactor)管理这个连接
+    - 每个listener只有一个Acceptor线程，因为它只是作为新连接建连再分发，没有过多的逻辑，很轻量，一个足矣
+* Processor会监听其管理的连接，当事件到达之后，读取封装成Request，并将Request放入共享请求队列中
+    - Processor 在Kafka中称之为网络线程，默认网络线程池有3个线程，对应的参数是num.network.threads。并且可以根据实际的业务动态增减
+* IO线程池不断的从该队列中取出请求，执行真正的处理。处理完之后将响应发送到对应的Processor的响应队列中，然后由Processor将Response返还给客户端
+    -  IO 线程池，即KafkaRequestHandlerPool，执行真正的处理，对应的参数是num.io.threads，默认值是 8。IO线程处理完之后会将Response放入对应的Processor中，由Processor将响应返还给客户端
+*  网络线程和IO线程之间利用的经典的生产者 - 消费者模式，不论是用于处理Request的共享请求队列，还是IO处理完返回的Response
+    -  生产者和消费者之间解耦了，可以对生产者或者消费者做独立的变更和扩展
 
-* 生产者发送请求全部会先发送给一个 Acceptor，Acceptor 不会对客户端的请求做任何的处理，直接封装成一个个 socketChannel 发送给这些 Processor 形成一个队列，发送的方式是轮询
-* Broker 里面会存在 3 个线程（默认是 3 个）,3 个线程都是叫做 Processor
-* 消费者线程（落盘）去消费这些 socketChannel 时，会获取一个个 Request 请求，Request 请求中就会伴随着数据
-    - 线程池里面默认有 8 个线程，这些线程是用来处理 Request 的，解析请求，如果 Request 是写请求，就写到磁盘里。读的话返回结果
-* Processor 会从 Response 中读取响应数据，然后再返回给客户端
-* 增强调优，增加 Processor 并增加线程池里面的处理线程，就可以达到效果。
-* Request 和 Response 那一块部分其实就是起到了一个缓存的效果，是考虑到 Processor 们生成请求太快，线程数不够不能及时处理的问题。是一个加强版的 Reactor 网络线程模型
+![Alt text](../_static/kafka_network.png "Optional title")
 
 ## 问题
 

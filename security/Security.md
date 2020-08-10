@@ -173,6 +173,12 @@ $sub = addcslashes(mysql_real_escape_string("%something_"), "%_");
 * 在RSA（非对称加密算法）中，加密的模数通常是2次方，解密的模数通常是3次方，这意味着如果将密码长度增加一倍（比如从2048增加至4096），加密成本增加4倍，解密成本增加8倍，但在现在计算机的算力下，这只是毫秒级别的差别。笔者为了验证这一理论，亲测了用2048位和4096位的密钥加密了一个1GB的文件，所需时间基本一致（70秒左右）
 * 密钥长度:一个保持前瞻的安全性与足够安全之间的选择，目前RSA破解记录为768位，1024位密钥正处于危险的边缘，而2048位的密钥已经足够安全
 
+## 密码管理
+
+- [Bitwarden](https://bitwarden.com/):Solve your password management problems
+- [keeweb/keeweb](https://github.com/keeweb/keeweb):Free cross-platform password manager compatible with KeePass https://keeweb.info
+- [Passbolt](https://www.passbolt.com/)
+
 ## 案例
 
 * [710leo/ZVulDrill](https://github.com/710leo/ZVulDrill):Web漏洞演练平台
