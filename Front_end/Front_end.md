@@ -1197,6 +1197,20 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * [haizlin/fe-interview](https://github.com/haizlin/fe-interview):前端面试每日 3+1，以面试题来驱动学习，提倡每日学习与思考，每天进步一点
 * [ponkans / F2E](https://github.com/ponkans/F2E):【互联网一线大厂面试+学习指南】大前端进阶知识扫盲
 
+## 图书
+
+* [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
+* Web开发权威指南
+* 《Web 可用性设计》
+* 《DOM 启蒙》
+* Web性能权威指南
+* 《大型网站技术架构》
+* 七周七Web开发框架
+* Web性能权威指南
+* 《DOM 启蒙》
+* 《Web风格：用户体验设计基本原则及实践(原书第4版)》
+* 《RESTful Web Clients：基于超媒体的可复用客户端》
+
 ## 工具
 
 * 框架

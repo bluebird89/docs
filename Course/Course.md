@@ -95,6 +95,14 @@
 * Pluralsight
 * 逻辑推理
     - [牛津大学公开课：批判性推理入门](https://www.bilibili.com/video/av2576527/)
+* 《现代操作系统》：https://www.bilibili.com/video/av9555596?from=search&seid=8107077283516919308
+* 《算法导论》https://www.bilibili.com/video/av48922404?from=search&seid=10653982037326460685
+* 《深入理解计算机系统》https://www.bilibili.com/video/av31289365?from=search&seid=16298868573410423104
+* 《计算机网络：自顶向下方法》：https://www.bilibili.com/video/av41404195?from=search&seid=15854652450440912260
+* 《计算机程序的构造和解释》：https://www.bilibili.com/video/av8515129?from=search&seid=537958487190286356
+* 《编译原理》：https://www.bilibili.com/video/av17649289?from=search&seid=5673462623145874347
+* 《数据库系统概念》：https://www.bilibili.com/video/av52007695?from=search&seid=9723583724024090244
+
 
 ## Data Scientist
 
@@ -107,3 +115,16 @@
 * [Introduction to Deep Learning](https://www.coursera.org/learn/intro-to-deep-learning)
 * [How to Win a Data Science Competition: Learn from Top Kagglers](How to Win a Data Science Competition: Learn from Top Kagglers)
 * [AI for Medicine Specialization](https://www.coursera.org/specializations/ai-for-medicine)
+
+## 资源
+
+* [studytonight](https://www.studytonight.com/)
+* [udacity](https://www.udacity.com/)
+* [tutorialspoint](https://www.tutorialspoint.com/index.htm)
+* [classcentral](https://www.classcentral.com/)
+* [nptel](https://nptel.ac.in/):印度的国家增强型学习计划，也就是说，印度的各大名校联合推出的免费学习计划
+* [codescracker](link)
+* [sciencedirect](link)
+* [homepage](https://homepage.cs.uri.edu/faculty/wolfe/book/Readings/Reading01.htm)
+* [computer.howstuffworks.com](link)
+* [tldp.org](link)

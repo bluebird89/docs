@@ -15,27 +15,27 @@
 
 ## 技能
 
-* 后端语言
+* 掌握好语言基础
     - PHP内核
-* 语言生态：apache+php 常用的PHP和apache模块
-* 框架：LN(A)MP架构
-* 项目扩展
-    - restful
-    - MQ
-        + RabbitMQ
-    - solr
-* OOP
-* 前端：Javascript、XHTML、CSS、DIV ，Javascript 框架
-* HTTP协议
-* 数据库：Mysql 优化、能创建高效的索引
-* nosql
+    - OOP
+* 语言生态
+    - apache+php 常用的PHP和apache模块
+    - 框架：LN(A)MP架构
+* 算法与数据结构
+* 计算机网络
+* 数据库
+    - Mysql 优化、能创建高效的索引
+    - nosql
 * 消息中间件
-* 模版引擎
 * Linux与应用部署，Shell脚本
 * 缓存：
     * Memcache
     * Redis
 * 服务化
+* 项目扩展
+    - restful
+    - solr
+* 模版引擎
 
 ## 业务
 

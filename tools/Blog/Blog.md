@@ -120,3 +120,11 @@ location ~ .*\.php(\/.*)*$ {
 * 分发
     - [OpenWrite](https://openwrite.cn/)
     - [ crawlab-team / artipub ](https://github.com/crawlab-team/artipub):Article publishing platform that automatically distributes your articles to various media channels
+
+* [没有了老师，该如何学习？](http://www.cnblogs.com/qianqian-li/p/6028745.html)
+* [How To Ask Questions The Smart Way](http://www.catb.org/esr/faqs/smart-questions.html)
+* [lifesinger](https://github.com/lifesinger/blog):岁月如歌
+* [oldratlee/translations](https://github.com/oldratlee/translations):🐼 Chinese translations for classic IT resources https://github.com/oldratlee/translations/blob/master/README.md
+* [ProtoTeam/blog](https://github.com/ProtoTeam/blog):蚂蚁数据体验技术团队的文章仓库
+* [zenany/weekly](https://github.com/zenany/weekly):汇总平时看到的好文章，技术、产品、管理均有，尽量保证一周汇总一篇
+* [thepracticaldev/dev.to](https://github.com/thepracticaldev/dev.to):Where programmers share ideas and help each other grow https://dev.to

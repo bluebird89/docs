@@ -271,7 +271,6 @@
   - 工具：将你的machine learning知识应用于实际业务的工具
   - 逻辑：你的举一反三的能力，你解决问题的条理性，你发散思维的能力，你的聪明程度
   - 业务：深入理解所在行业的商业模式，从业务中发现motivation并进而改进模型算法的能力
-* 李航老师的《统计学习方法》
 * 周志华老师的《机器学习》,又称之为西瓜书。基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等。
   - [西瓜书](https://github.com/datawhalechina/pumpkin-book) 《机器学习》（西瓜书）公式推导解析，在线阅读地址：https://datawhalechina.github.io/pumpkin-book
   - [在线阅读](https://datawhalechina.github.io/pumpkin-book/)
@@ -286,6 +285,21 @@
 * [Model-Based Machine Learning](http://mbmlbook.com/index.html)
 * [Evolutionary Learning: Advances in Theories and Algorithms）](https://www.springer.com/cn/book/9789811359552)
 * [ chiphuyen / machine-learning-systems-design ](https://github.com/chiphuyen/machine-learning-systems-design):A booklet on machine learning systems design with exercises
+* 《[数据之巅](https://www.amazon.cn/gp/product/B00JUE9DXW)》
+* 《[矩阵分析](https://www.amazon.cn/gp/product/B00NTM5GK0)》
+* 《[机器学习](https://www.amazon.cn/gp/product/B002WC7NH2)》
+* 《[统计学习方法](https://www.amazon.cn/gp/product/B007TSFMTA)》
+* 《[机器学习导论](https://www.amazon.cn/gp/product/B01AG3ZV9K)》
+* 《[推荐系统实践](https://www.amazon.cn/gp/product/B008AK5YJO)》
+* 《[机器学习实战](https://www.amazon.cn/gp/product/B00D747PTK)》
+* TensorFlow：实战Google深度学习框架
+* 《漫谈人工智能》 集智俱乐部
+* 《机器学习实战》  Peter Harrington
+* 《TensorFlow 技术解析与实战》  李嘉璇
+* 《统计学习方法》  李航
+* 《Python深度学习（Keras）》
+* 《深度学习入门：基于Python的理论与实现》
+* 深入理解Tensor Flow：架构
 
 ## 教程
 

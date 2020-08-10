@@ -4,6 +4,7 @@
 
 * 在计算机的层次上，CPU执行的是加减乘除的指令代码，以及各种条件判断和跳转指令，所以，汇编语言是最贴近计算机的语言。
 * 计算则指数学意义上的计算，越是抽象的计算，离计算机硬件越远。
+* 两门以上编程语言（强类型+弱类型)
 
 ## 类型
 
@@ -97,7 +98,8 @@
         + 能用主动语态的不用被动语态。
         + 如果你能从日常英语中找到合适的对应的词，绝不使用外国短语、科学词语和一些专门的行话。
         + 如果按规则会说出粗野的话，立即打破上述规则。
-
+* [byoungd/English-level-up-tips-for-Chinese](https://github.com/byoungd/English-level-up-tips-for-Chinese):可能是让你受益匪浅的英语进阶指南
+* [yujiangshui/An-English-Guide-for-Programmers](https://github.com/yujiangshui/An-English-Guide-for-Programmers):专为程序员编写的英语学习指南。v1.0
 
 ## 学习
 

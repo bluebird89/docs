@@ -110,6 +110,10 @@ sudo service apache2 restart
 sudo vi /etc/hosts
 
 # tomcat服务我影响Apache 服务开启
+
+# To enable PHP 7.4 FPM in Apache2 do:
+a2enmod proxy_fcgi setenvif
+a2enconf php7.4-fpm
 ```
 
 ### 配置

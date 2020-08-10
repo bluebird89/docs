@@ -2,9 +2,9 @@
 
 ## 学习
 
-* 学好C++，一定要学习C++11，搞懂内存管理，
-* 熟悉智能指针和RAII等基本内存管理原则，
-* 搞懂虚函数和继承，函数重载与重写，
+* 学好C++，一定要学习C++11，搞懂内存管理
+* 熟悉智能指针和RAII等基本内存管理原则
+* 搞懂虚函数和继承，函数重载与重写
 * 熟悉C++调试等
 * 不要死抠语法细节
 * 了解Big picture，从做项目中去掌握和理解C++的这些特性
@@ -36,6 +36,27 @@ cc -v
 # IDE
 sudo apt intall kdevelop
 ```
+
+## 语法基础
+
+* 指针和引用的概念
+* 指针与内存关系
+* 程序编译过程
+* static、const、#define的用法和区别
+* C和C++区别
+* 内存模型
+* 内存中的栈和堆分配
+
+## 语法进阶
+
+* 智能指针
+* 左值、右值引用和move语义
+* 类型转换方式
+* 常用的设计模式
+* 线程安全的单例模式
+* 内存溢出和内存泄漏
+* C++11新特性
+* 静态链接库和动态链接库
 
 ## 变量
 
@@ -91,6 +112,8 @@ sudo apt intall kdevelop
 ## 标准库STL
 
 * 提供了丰富的算法库支持和各种容器
+* 迭代器、空间配置器理解
+* 常用容器特点、用法以及底层实现vector、list、deque、set、map、unorderedmap
 * C++ 标准库提供了包括最基础的标准输入输出iostrem、各种容器vector、set、string ，熟练掌握标准库
 * queue
     - front():队列头部
@@ -163,6 +186,22 @@ gcc -o test test2.c test3.c test2.c
 // 将输出保存到t.txt.错误保存到f.txt.从input.txt读入数据
 ./main.out 1>true.txt 2>false.txt < input.txt
 ```
+
+## 面对对象基础
+
+* 面向对象理解
+* 析构函数
+* 构造函数
+* 拷贝构造
+* 多态
+* 纯虚函数和虚函数
+* 虚函数实现机制
+* 虚函数表
+* 访问限定符 public、private、protected
+* 继承原理、虚继承、菱形继承
+* 静态绑定和动态绑定
+* new/delete和malloc/free
+* 重载、重写和隐藏
 
 ## [细节](https://mp.weixin.qq.com/s/HLmZzFtNF9kVbIGS47E-BA)
 
@@ -308,6 +347,17 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 * Modern C++ Tutorial
     - [changkun / modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial)
 * 《深入理解C++11》
+
+* 《[C++标准库](https://www.amazon.cn/gp/product/B00YLZIRHI)》
+* 《[C++编程思想](https://www.amazon.cn/gp/product/B005CFUQR0)》
+* 《C++语言的设计与演化》
+* 《[C++程序设计原理与实践](https://www.amazon.cn/gp/product/B003VPX6YS)》
+* 《[C++ Primer （中文第5版）](https://www.amazon.cn/gp/product/B00ESUIL0O)》
+* 《[C++ Primer习题集(第5版)](https://www.amazon.cn/gp/product/B00S6U4C6E) 》
+* 《[C++程序设计语言(The C++ Programming Language)(原书第4版)](https://www.amazon.cn/gp/product/B01I9BNASA) 》
+* 《[Effective C++:改善程序与设计的55个具体做法(第3版)(中文版)](https://www.amazon.cn/gp/product/B004G72P24) 》 todo
+* 《[More Effective C++:35个改善编程与设计的有效方法(中文版)](https://www.amazon.cn/gp/product/B004IP8BD6) 》
+* C++沉思录
 
 ## 工具
 

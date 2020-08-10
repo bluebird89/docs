@@ -12,6 +12,7 @@
 * 人生如逆旅，我亦是行人
 * 热爱可抵岁月漫长。——出自豆瓣“小北爱吃肉”
 * 你是我疲惫生活中唯一的英雄梦想
+* 纷纷万事，直道而行:有时候觉得生活经不起细究，人想着想着就会觉得失望或者没有意义。但这句话特别好。讲的是这个世界很乱，啥困惑都有，不过没关系，直道而行，你总能到达终点
 * 慢节奏中蕴藏着专注感与主动的沉浸感，慢慢来，是因为我们心存敬畏，愿意在不可逆转的时间里，在与时间的化合当中积蓄能量，最终变成时间的果实。
 * 万物皆有罅隙，那是光透过来的地方。 There's a crack in everything, that's how the light gets in. ——Leonard Cohen 《Anthem》
 * All work and no play makes Jack a dull boy,All play and no work makes Greg a playboy”

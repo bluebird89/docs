@@ -1,5 +1,34 @@
 # Database
 
+* 数据库类别
+* 关系型数据库和非关系型数据库区别
+* SQL常见语句
+* MySQL内链接，外链接（左链接、右链接、全链接）
+* MySQL索引类型和原理
+* MySQL事务实现原理ACID
+* MySQL数据存储引擎
+* MySQL主从复制原理、作用和实现
+* MySQL日记系统redo log、binlog、undo log
+* MVCC实现原理
+* Sql优化思路
+* 范式理论
+* 数据库高并发解决方法
+* Redis支持的数据类型
+* Redis持久化
+* Redis 架构模式
+* 主从复制
+* 一致性哈希算法
+
+
+* InnoDB B+树
+* MyISAM
+* 字符集
+* 索引
+* 数据库范式
+* 事务及其隔离级别
+* MVCC
+* 数据库锁
+
 * 数据库
     - 数据存储
     - 数据检索

@@ -88,7 +88,6 @@ void traverse(TreeNode root) {
 * 适用于变动不是很频繁的静态序列集，如果序列集变动很频繁，经常进行插入删除操作，那么就要不断维护这个序列集的排序，这个成本也很高
 * 变形版本
     - 从给定序列中查找第一个或最后一个匹配元素
-    -
 * 假设表中元素是按升序排列，将表中间位置记录的关键字与查找关键字比较，如果两者相等，则查找成功
 * 否则利用中间位置记录将表分成前、后两个子表，如果中间位置记录的关键字大于查找关键字，
 * 则进一步查找前一子表，否则进一步查找后一子表。重复以上过程，直到找到满足条件的记录，使查找成功，或直到子表不存在为止，此时查找不成功
@@ -120,7 +119,7 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 #define    PAGE_CUR_LE         4        <=查询
 ```
 
-* LRU（Least Recently Used，最近最少使用）
+## LRU（Least Recently Used，最近最少使用）
 
 ## 排序
 
@@ -172,6 +171,8 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * 贪心
 * 剪枝
 * 图算法
+
+字符串操作、数组操作、递归、回溯、分治、动态规划
 
 ## 图论
 
@@ -322,12 +323,20 @@ class Solution {
 
 * 《数据结构与算法分析：C语言描述版》
 * 《大话数据结构》
-* 《算法》
 * 《剑指offer》
 * 《LeetCode刷题》
-* 算法导论
+* 《[算法导论（原书第2版)(Introduction to Algorithms）](https://www.amazon.cn/gp/product/B00AK7BYJY)》
     - [huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms](huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms):《算法导论》第三版中算法的C++实现
 * 数论
+* 《[算法（第4版）](https://www.amazon.cn/gp/product/B009OCFQ0O)》todo
+* 《[Python算法教程](https://www.amazon.cn/gp/product/B019NB0VCI)》
+* 《[算法设计与分析基础（第3版）](https://www.amazon.cn/gp/product/B00S4HCQUI)》
+* 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
+* 《[数据结构与算法分析 : C++描述（第4版）](https://www.amazon.cn/gp/product/B01LDG2DSG)》
+* 《[数据结构与算法分析 : C语言描述（第2版）](https://www.amazon.cn/gp/product/B002WC7NGS)》
+* 《[数据结构与算法分析 : Java语言描述（第2版）](https://www.amazon.cn/gp/product/B01CNP0CG6)》
+* 《数据结构与算法 JavaScript 描述》
+* 算法图解
 
 ## 工具
 
@@ -360,6 +369,7 @@ class Solution {
     - [azl397985856/leetcode](https://github.com/azl397985856/leetcode):LeetCode Solutions: A Record of My Problem Solving Journey
     - [MisterBooo/LeetCodeAnimation](https://github.com/MisterBooo/LeetCodeAnimation):Demonstrate all the questions on LeetCode in the form of animation.（用动画的形式呈现解LeetCode题目的思路）
     - [labuladong / fucking-algorithm](https://github.com/labuladong/fucking-algorithm):手把手撕LeetCode题目，扒各种算法套路的裤子，not only how，but also why. English version supported! https://labuladong.gitbook.io/algo/
+    - [little-algorithm](https://github.com/nettee/little-algorithm):LeetCode 题目参考代码与详细讲解，公众号《面向大象编程》文章整理
 * https://www.geekxh.com/
 
 * [动态规划解题技巧](https://mp.weixin.qq.com/s?__biz=MzI1MzYzMTI2Ng==&mid=2247484431&idx=3&sn=35abe41394f24167b78419edbc36fc7c)
