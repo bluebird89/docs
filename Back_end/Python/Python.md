@@ -1431,6 +1431,30 @@ Namespaces are one honking great idea -- let's do more of those!
 * Python高性能编程
 * [pythonbook](https://python.cs.southern.edu/pythonbook/pythonbook.pdf)
 
+* 《[集体智慧编程](https://www.amazon.cn/gp/product/B00UI93JD8)》
+* 《[笨办法学Python](https://www.amazon.cn/gp/product/B00P6OJ0TC)》
+* 《[Python基础教程(第3版)](https://www.amazon.cn/Python基础教程-Magnus-Lie-Hetland/dp/B079BJPVFL/ref=dp_ob_title_bk)》
+* 《Python源码剖析》
+* 《[Head First Python](https://www.amazon.cn/gp/product/B007NB2B4M)》
+* 《[与孩子一起学编程](https://www.amazon.cn/gp/product/B00HECW20S)》
+* 《[Python学习手册（第4版）](https://www.amazon.cn/gp/product/B004TUJ7A6)》
+* 《[Python Cookbook（第3版）](https://www.amazon.cn/gp/product/B00WKR1OKG)》
+* 《[Python参考手册（第4版）](https://www.amazon.cn/gp/product/B01MCUN37Y)》
+* 《[Python核心编程（第3版）](https://www.amazon.cn/gp/product/B01FQAS0KK)》
+* 《[Python科学计算（第2版）](https://www.amazon.cn/gp/product/B01HCVUJFA)》
+* 《[利用 Python 进行数据分析](https://www.amazon.cn/gp/product/B00GHGZLWS)》
+* 《[Think Python：像计算机科学家一样思考Python（第2版）](https://www.amazon.cn/gp/product/B01ION3W54)》
+* 《[Python编程实战:运用设计模式、并发和程序库创建高质量程序](https://www.amazon.cn/gp/product/B00MHDPIJ6)》
+* 《[Python绝技：运用Python成为顶级黑客](https://www.amazon.cn/gp/product/B019ZRGBVU)》
+* 《[Flask Web开发:基于Python的Web应用开发实战](https://www.amazon.cn/gp/product/B0153177A6)》
+* 《用 Python 写网络爬虫》
+* 《[深度学习:基于Keras的Python实践](https://www.amazon.cn/gp/product/B07D5855F4)》
+* Python与量化投资从基础到实践
+* Learning Python, 5th Edition
+* Python编程 从入门到实践
+* 流畅的Python Fluent Python
+* [Flask Web开发实战：入门、进阶与原理解析](https://item.jd.com/12430774.html)
+
 ## 教程
 
 * [jackfrued/Python-100-Days](https://github.com/jackfrued/Python-100-Days):Python - 100天从新手到大师

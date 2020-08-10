@@ -472,3 +472,11 @@ notification.sendMessage("13918942177", "短信验证码：2346");
 * 逻辑重复的应该合并
 * 语义不重复：从代码实现逻辑上看起来是重复的，从功能上来看，两个函数干的是完全不重复的两件事情
 * 执行重复的应该合并
+
+## 图书
+
+* 《Elegant Objects》
+* 《Object Thinking》
+* 《Practical Object-Oriented Design in Ruby》
+* 《Design Patterns Explained》
+* 《Python 3 Object-oriented Programming》

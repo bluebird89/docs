@@ -211,6 +211,12 @@ Flexbox 是css3 里面引入的布局模型－弹性盒子模型，旨在通过�
 * UI 抽象层翻译出来的 iOS 和安卓原生页面，做不到完全一致，尤其是复杂页面，样式或功能存在差异
 * 想用 React Native 做到 iOS 和安卓体验一致，并且充分发挥原生控件的功能，就需要同时熟悉 React Native、iOS、安卓三个平台，这对开发者的要求实在太高了Airbnb 公司在使用 React Native 两年后，宣布放弃，改用原生技术栈
 
+## 图书
+
+* React Native入门与实战
+* React Native开发指南
+* React Native精解与实战
+
 ## 工具
 
 * [Expo](https://expo.io/):The fastest way to build an app

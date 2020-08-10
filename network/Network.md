@@ -1,4 +1,47 @@
-# NetWork
+# NetWork 计算机网络
+
+
+* 网络协议
+    - DHCP，UDP, ARP, DNS
+    - 一个客户端如何在接入网络以后，通过这些协议，跨域网络和服务器通信的
+* HTTP/S
+    - TCP可靠性传输原理，TCP/IP的协议细节， 三次握手，四次挥手，TCP状态转换
+* 网络状态
+* 长连接
+* 网络握手
+* 滑动窗口
+* 网络参数
+    - 和应用层结合非常紧密的Socket知识和网络安全（对称加密，非对称加密，Hash, 数字签名，以及集大成者Https）
+* 通信模型
+* 序列化
+* 分组交换
+* 网络层的路由选择算法，链路层的各种协议
+* I/O多路复用，涉及到同步/异步，阻塞/非阻塞，select/epoll
+
+* OSI七层模型
+* TCP/IP五层模型
+* TCP/IP协议总结
+* TCP、UDP区别
+* TCP三次握手、四次挥手
+* TCP状态转换
+* TCP状态中TIME_WAIT
+* TCP连接建立需要为什么不是两次握手
+* TCP第三次握手失败会出现什么
+* TCP长连接和短链接及优缺点
+* TCP拥塞控制-慢启动、拥塞避免、快重传、快启动
+* TCP如何保证可靠性传输
+* TCP如何解决粘包、拆包问题
+* TCP为什么可靠
+* UDP如何实现TCP可靠传输
+* IP地址和子网掩码
+* ARP解析过程
+* DNS原理
+* HTTP状态码
+* HTTP1.0、HTTP1.1、HTTP2.0区别
+* HTTP和HTTPS区别
+* HTTPS加密过程
+* 非对称加密和对称加密算法
+* Nagle算法
 
 ## 基础
 
@@ -890,8 +933,13 @@ lsof -d 2-3
 * 《Unix环境高级编程》Unix Network Programming
 * 《UNIX网络编程 卷1：套接字联网API（第3版）》
 * 《UNIX网络编程 卷2：进程间通信（第2版）》
+* 《Linux多线程服务器端编程》
 * Computer Networking: A Top Down Approach 计算机网络：自顶向下方法
     - [PPT](https://gaia.cs.umass.edu/kurose_ross/ppt.htm)
+* 《计算机网络自顶向下方法》教材书，可放手边查阅
+* 《TCP/IP详解》重点了解TCP、IP、UDP协议实现
+* 图解HTTP
+* HTTP权威指南：需要理解HTTP的本质复杂度，并且避免被作者引入的非本质复杂度的干扰。
 
 ## 工具
 

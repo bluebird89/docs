@@ -2348,6 +2348,13 @@ LVS、HAProxy、Nginx
     - Canal模拟MySQL Slave的交互协议，伪装自己为MySQL Slave，向MySQL Master发送dump协议
     - MySQL Master收到dump请求，开始推送binary log给Slave（即Canal）
     - Canal解析binary log对象（原始为byte流），并且可以通过连接器发送到对应的消息队列等中间件中
+* parser过程
+    - Connection获取上一次解析成功的位置（如果第一次启动，则获取初始制定的位置或者是当前数据库的binlog位点）
+    - Connection建立连接，发生BINLOG_DUMP命令
+    - Mysql开始推送Binary Log
+    - 接收到的Binary Log通过Binlog parser进行协议解析，补充一些特定信息
+    - 传递给EventSink模块进行数据存储，是一个阻塞操作，直到存储成功
+    - 存储成功后，定时记录Binary Log位置
 * 版本
     - v1.1.4：添加了鉴权、监控的功能，并且做了一些列的性能优化，此版本集成的连接器是Tcp、Kafka和RockerMQ
 * 部件：

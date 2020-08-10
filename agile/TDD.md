@@ -123,7 +123,8 @@
 
 ## 图书
 
-* 测试驱动开发
+* 《测试驱动开发》Kent Beck
+* Grow Object-Oriented Software Guided by Tests
 
 ## 工具
 

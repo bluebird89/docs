@@ -623,6 +623,25 @@ It is not worth an intelligent man’s time to be in the majority. By definition
 *  Basher Science
 *  The Well-Trained Mind
 
+* 加涅的《学习的条件》
+* 《过剩时代的学习》
+* 同理心
+* 驱动力
+* 好奇心
+* 《精要主义》
+* 《坚毅》
+* 《仙踪原理》
+* 《创新的扩散》
+* 影响力
+* 先发影响力
+* 《怦然心动的人生整理魔法》
+* 《完美的混乱》
+* 《认识媒体：人的延伸》
+* 《活动理论面面观》
+* 《异类：不一样的成功启示录》
+* 《粘得住的学习》
+* 《人的学习》
+
 ## 工具
 
 * [colorables](https://www.colorabl.es/all)

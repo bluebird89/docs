@@ -33,98 +33,10 @@ sudo pear install pear.phpunit.de/PHPUnit
 * 全局单元测试:一次性执行所有的单元测试，可以编写 phpunit.xml 文件来实现
     - `<directory>test</directory>` 指定了测试代码都放在 test 目录下
 
-```php
-# 功能代码 src/Email.php
-declare(strict_types=1);
-
-final class Email
-{
-    private $email;
-
-    private function \__construct(string $email)
-    {
-        $this->ensureIsValidEmail($email);
-
-        $this->email = $email;
-    }
-
-    public static function fromString(string $email): self
-    {
-        return new self($email);
-    }
-
-    public function \__toString(): string
-    {
-        return $this->email;
-    }
-
-    private function ensureIsValidEmail(string $email): void
-    {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    '"%s" is not a valid email address',
-                    $email
-                )
-            );
-        }
-    }
-}
-
-# 测试用例 tests/EmailTest.php
-declare(strict_types=1);
-
-use PHPUnit\Framework\TestCase;
-
-/**
-* @covers Email
-*/
-final class EmailTest extends TestCase
-{
-    public function testCanBeCreatedFromValidEmailAddress(): void
-    {
-        $this->assertInstanceOf(
-            Email::class,
-            Email::fromString('user@example.com')
-        );
-    }
-
-    public function testCannotBeCreatedFromInvalidEmailAddress(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        Email::fromString('invalid');
-    }
-
-    public function testCanBeUsedAsString(): void
-    {
-        $this->assertEquals(
-            'user@example.com',
-            Email::fromString('user@example.com')
-        );
-    }
-}
-
-# `phpunit --bootstrap src/Email.php tests/EmailTest`
-
-/**
- * Generated from @assert (0, 0) == 0.
- */
-public function testSum() {
-    $obj = new Calculator;
-    $this->assertEquals(0, $obj->sum(0, 0));
-}
-
-<?xml version="1.0" encoding="UTF-8"?>
-<phpunit>
-    <testsuites>
-        <testsuite>
-            <directory>test</directory>
-        </testsuite>
-    </testsuites>
-    <logging>
-        <log type="testdox-html" target="tmp/log.html"/>
-    </logging>
-</phpunit>
+```sh
+phpunit --colors -stop-on-error -stop-on-failure --denug --strict
+phpunit -c phpunit.xml --testsuite=Unit  # 指定套件
+ --coverage-html . # 在根目录下生成 HTML 格式的测试覆盖率报告文档
 ```
 
 ## 配置使用
@@ -162,15 +74,21 @@ public function testSum() {
     - `phpunit UnitTest UnitTest.php`:源文件并加载之,类必须满足以下二个条件之一
         - 要么它继承自 PHPUnit\Framework\TestCase
         - 要么它提供 public static suite() 方法，这个方法返回一个 PHPUnit_Framework_Test 对象
-* 基境(fixture):将整个场景设置成某个已知的状态，并在测试结束后将其复原到初始状态。这个已知的状态称为测试的 基境(fixture)
-    - 基境(fixture)是对开始执行某个测试时应用程序和数据库所处初始状态的描述
-    - 运行某个测试方法前，会调用一个名叫 setUp() 的模板方法。setUp() 是创建测试所用对象的地方。
-    - 当测试方法运行结束后，不管是成功还是失败，都会调用另外一个名叫 tearDown() 的模板方法。tearDown() 是清理测试所用对象的地方。
-    - setUpBeforeClass() 与 tearDownAfterClass() 模板方法将分别在测试用例类的第一个测试运行之前和测试用例类的最后一个测试运行之后调用
-    - 只有在 setUp() 中分配了诸如文件或套接字之类的外部资源时才需要实现 tearDown()
-    - 如果 setUp() 中只创建纯 PHP 对象，通常可以略过 tearDown()。不过，如果在 setUp() 中创建了大量对象，可能想要在 tearDown() 中 unset() 指向这些对象的变量，这样它们就可以被垃圾回收机制回收掉。对测试用例对象的垃圾回收动作则是不可预知的。
-    - 基境共享:在测试之间共享基境的需求都源于某个未解决的设计问题。一个有实际意义的例子是数据库连接：只登录数据库一次，然后重用此连接，而不是每个测试都建立一个新的数据库连接。这样能加快测试的运行。
-    - 会降低测试的价值。潜在的设计问题是对象之间并非松散耦合。如果解决掉潜在的设计问题并使用桩件(stub)来编写测试，就能达成更好的结果，而不是在测试之间产生运行时依赖并错过改进设计的机会。
+
+
+## 基境(fixture):
+
+将整个场景设置成某个已知的状态，并在测试结束后将其复原到初始状态。这个已知的状态称为测试的 基境(fixture)
+
+* 基境(fixture)是对开始执行某个测试时应用程序和数据库所处初始状态的描述
+* 运行某个测试方法前，会调用一个名叫 setUp() 的模板方法。setUp() 是创建测试所用对象的地方。
+* 当测试方法运行结束后，不管是成功还是失败，都会调用另外一个名叫 tearDown() 的模板方法。tearDown() 是清理测试所用对象的地方。
+* setUpBeforeClass() 与 tearDownAfterClass() 模板方法将分别在测试用例类的第一个测试运行之前和测试用例类的最后一个测试运行之后调用
+* 只有在 setUp() 中分配了诸如文件或套接字之类的外部资源时才需要实现 tearDown()
+* 如果 setUp() 中只创建纯 PHP 对象，通常可以略过 tearDown()。不过，如果在 setUp() 中创建了大量对象，可能想要在 tearDown() 中 unset() 指向这些对象的变量，这样它们就可以被垃圾回收机制回收掉。对测试用例对象的垃圾回收动作则是不可预知的。
+* 基境共享:在测试之间共享基境的需求都源于某个未解决的设计问题。一个有实际意义的例子是数据库连接：只登录数据库一次，然后重用此连接，而不是每个测试都建立一个新的数据库连接。这样能加快测试的运行。
+* 会降低测试的价值。潜在的设计问题是对象之间并非松散耦合。如果解决掉潜在的设计问题并使用桩件(stub)来编写测试，就能达成更好的结果，而不是在测试之间产生运行时依赖并错过改进设计的机会。
+
 * 全局状态:使用单件(singleton)的代码很难测试,使用全局变量的代码也一样。通常情况下，欲测代码和全局变量之间会强烈耦合，并且其创建无法控制。另外一个问题是，一个测试对全局变量的改变可能会破坏另外一个测试。
     - 全局变量 $foo = 'bar'; 实际上是存储为 $GLOBALS['foo'] = 'bar'; 的。
     - ``$GLOBALS``这个变量是一种被称为*超全局*变量的变量。
@@ -192,22 +110,6 @@ public function testSum() {
     -　保持每个测试所使用的数据量较小并且尽可能用非数据库测试来对代码进行测试，即使很大的测试套件也能轻松在一分钟内跑完。
     - todo
 * 测试替身
-
-```
-<phpunit bootstrap="src/autoload.php">
-  <testsuites>
-    <testsuite name="money">
-      <file>tests/IntlFormatterTest.php</file>
-      <file>tests/MoneyTest.php</file>
-      <file>tests/CurrencyTest.php</file>
-    </testsuite>
-  </testsuites>
-</phpunit>
-
- ./vendor/bin/phpunit
- --testsuite=Unit  # 指定套件
- --coverage-html . # 在根目录下生成 HTML 格式的测试覆盖率报告文档
-```
 
 ## 工具
 

@@ -373,6 +373,14 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 
 * 《全程软件测试（第三版）》
 * 《测试架构师修炼之道》
+* 《[探索式软件测试](https://www.amazon.cn/gp/product/B003JBIV0S)》
+* 《[有效的单元测试](https://www.amazon.cn/gp/product/B00PVOND2W)》
+* 《[Google软件测试之道](https://www.amazon.cn/gp/product/B00FH36R6G)》
+*  How to Break Software
+* 《测试驱动开发》
+*  测试驱动的面向对象软件开发
+* 《Growing Object-Oriented Software, Guided by Tests》
+* 《Python测试驱动开发（第2版）》 Harry J.W.Percival
 
 ## 工具
 

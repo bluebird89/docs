@@ -1,4 +1,4 @@
-# 领域驱动设计
+#  领域驱动设计（Domain-Driven Design）
 
 软件开发中困难的部分是规格说明，设计和测试这些概念上的结构，而不是对概念进行表达和对实现逼真程度进行验证
 
@@ -331,9 +331,10 @@ public class OrderCreatedEvent extends OrderEvent {
 ## 图书
 
 * 《领域特定语言》
-* 《实现领域驱动设计》 Vaughn Vernon
-    - [gdut-yy/Domain-Driven-Design-zh](https://github.com/gdut-yy/Domain-Driven-Design-zh):DDD《领域驱动设计》中文翻译 http://gdut_yy.gitee.io/doc-ddd/
-* 《测试驱动开发》Kent Beck
+* 《领域驱动设计 Domain-driven Design》 Vaughn Vernon
+    - [gdut-yy/Domain-Driven-Design-zh](https://github.com/gdut-yy/Domain-Driven-Design-zh):中文翻译 http://gdut_yy.gitee.io/doc-ddd/
+* 《Patterns, Principles and Practices of Domain-Driven Design》
+* 《领域驱动设计精粹》
 
 ## 参考
 

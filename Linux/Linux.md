@@ -9,6 +9,28 @@
   - 抢占式多任务操作系统，内核对进程的调度属于抢占式
   - 支持内核线程，但不区分线程与进程，所有进程都一样
 
+* top命令
+* ps命令
+* netstat命令
+* awk命令
+* find命令
+* grep命令
+* wc命令
+* sed命令
+* head和tail命令
+* 正则表达式
+* 如何查找出现频率最高的100个IP地址
+* linux如何统计文件中某个字符串出现的频率
+* linux启动的第一个进程
+* linux查看端口占用
+* linux查看CPU和内存使用
+* Linux查看系统负载命令
+* Linux调试程序
+* Linux硬链接和软连接
+* core dump
+* cmake和makefile
+* Shell脚本基本语法和使用
+
 ## Linux vs Unix
 
 Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任务、多线程和支持多种CPU架构的操作系统。Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。
@@ -575,6 +597,18 @@ ssize_t sendfile(int out_fd, int in_fd, off_t *offset, size_t count);
 #include <fcntl.h>
 ssize_t splice(int fd_in, loff_t *off_in, int fd_out, loff_t *off_out, size_t len, unsigned int flags);
 ```
+
+* 孤儿进程、僵尸进程和守护进程
+* 进程间通信方式signal、file、pipe、shm、sem、msg、socket
+* 线程同步机制线程：互斥量、锁机制、条件变量、信号量、读写锁
+* fork返回值
+* 五大IO模型：阻塞I/O、非阻塞I/O、I/O复用、信号驱动I/O、异步I/O
+* IO复用机制
+* epoll与select/poll
+* LT水平触发和ET边缘触发
+* Reactor和Proactor模式
+* 反向代理、负载均衡
+
 
 ## 进程&线程
 
@@ -3356,10 +3390,32 @@ sed -n &#39;1!G;h;$p&#39; FILE
 * Bash Pocket Reference: Help for Power Users and Sys Admins  By Armold Robbins
 * TCP/IP Network Administration (3rd Edition; O’Reilly Networking) by Craig Hunt
 * DNS and BIND byCricket Liu
-* 《Unix环境高级编程》
 * 《Linux高性能服务器编程》
 * 《POSIX多线程程序设计》
-* 深入Linux内核架构
+* 《[UNIX网络编程 卷1：套接字联网API（第3版）](https://www.amazon.cn/gp/product/B011S72JB6)》
+* 《[UNIX网络编程 卷2：进程间通信](https://www.amazon.cn/gp/product/B012R5A29O)》
+* 《[UNIX编程环境](https://www.amazon.cn/gp/product/B00IYTQBYS/)》
+* 《[Unix 环境高级编程(第3版)](https://www.amazon.cn/gp/product/B00KMR129E)》
+* 《Unix网络高级编程》
+* 《Unix/Linux 编程实践教程》
+* 《UNIX操作系统设计》
+* 《[UNIX编程艺术](https://www.amazon.cn/gp/product/B008Z1IEQ8)》
+* 《Linux/Unix 系统编程手册》
+* 《[深入理解Linux内核](https://www.amazon.cn/gp/product/B0011F5RYM)》
+* 《[深入Linux内核架构](https://www.amazon.cn/gp/product/B003QN7J7U)》
+* 《[Linux系统编程（第2版）](https://www.amazon.cn/gp/product/B00JUM2ML4)》
+* 《[Linux内核设计与实现（第3版）](https://www.amazon.cn/gp/product/B004X3Z3D4)》奠定基础的书籍
+* LINUX操作系统(第2版)
+* 《Linux多线程服务端编程》
+* 《鸟哥的Linux私房菜:服务器架设篇(第3版)》
+* 《鸟哥的Linux私房菜:基础学习篇(第3版)》
+* Linux运维之道
+* 嵌入式Linux基础教程(第2版)
+* 精通Linux设备驱动程序开发
+* Linux命令行与shell脚本编程大全（第3版）
+* 《只是为了好玩 : Linux 之父林纳斯自传》
+* 《Linux Shell 脚本攻略》
+* 《Linux内核设计的艺术》
 
 ## 工具
 
