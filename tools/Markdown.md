@@ -674,7 +674,6 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * Windows
 	- MarkdownPad(需要浏览器渲染插件awesome)
 	- MarkPad
-* [fabiospampinato/notable](https://github.com/fabiospampinato/notable):The markdown-based note-taking app that doesn't suck.
 * [GitNote](https://www.gitnoteapp.com)
 * [MedleyText](https://medleytext.net/):reate stylish and meaningful programming notes, blogs with ease
 * [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io

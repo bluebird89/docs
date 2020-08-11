@@ -178,6 +178,17 @@ $sub = addcslashes(mysql_real_escape_string("%something_"), "%_");
 - [Bitwarden](https://bitwarden.com/):Solve your password management problems
 - [keeweb/keeweb](https://github.com/keeweb/keeweb):Free cross-platform password manager compatible with KeePass https://keeweb.info
 - [Passbolt](https://www.passbolt.com/)
+- Enpass
+
+```sh
+sudo -i
+echo "deb https://apt.enpass.io/ stable main" > \
+  /etc/apt/sources.list.d/enpass.list
+wget -O - https://apt.enpass.io/keys/enpass-linux.key | apt-key add -
+apt-get update
+apt-get install enpass
+exit
+```
 
 ## 案例
 
