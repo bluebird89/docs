@@ -1084,6 +1084,23 @@ sudo dpkg -i
 
 ```
 
+## [ripgrep]](https://github.com/BurntSushi/ripgrep)
+
+更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到配置在 .gitignore 中的规则
+
+* 跟 fd 一样默认忽略隐藏目录和文件，遵守 .gitignore
+* 比 grep 快得多
+
+```sh
+sudo apt-get install ripgrep
+
+rg -n -w '[A-Z]+_SUSPEND'
+rg -uuu -tc -n -w '[A-Z]+_SUSPEND'
+rg -w 'Sherlock [A-Z]\w+'
+rg fast README.md
+rg 'fast\w+' README.md
+```
+
 ## Linux环境高级编程
 
 * 学习系统编程接口、系统调用 API 、内存管理、进程间通信（ IPC ）
@@ -1155,7 +1172,6 @@ sudo dpkg -i
 * 搜索
     - [ack](https://beyondgrep.com/)
     - [ ggreer / the_silver_searcher ](https://github.com/ggreer/the_silver_searcher)A code-searching tool similar to ack, but faster.
-    - [rg](https://github.com/BurntSushi/ripgrep)是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到配置在 .gitignore 中的规则
     - [ ggreer / the_silver_searcher ](https://github.com/ggreer/the_silver_searcher):A code-searching tool similar to ack, but faster. http://geoff.greer.fm/ag/
 * monitor
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序

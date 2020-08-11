@@ -218,6 +218,33 @@ $('#setDataURLInLinkBtn').click(function() {
 const bgDataURL = $('#testCanvas-content')[0].value
 $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
 ```
+
+## convert
+
+* 在 Linux 或者 MacOS 的命令行里做图片转换，用到的命令叫做 convert，是属于 ImageMagick 套件里的一个工具
+* identify 命令也属于 ImageMagick 套件，作用是查看图片文件的属性
+
+```sh
+identify original.jpg
+convert original.png original.jpg
+
+convert original.jpg -resize 900x800 out1.jpg
+convert original.jpg -resize 900 out2.jpg
+convert original.jpg -resize x400 out2.1.jpg
+convert original.jpg -resize 900x800! out3.jpg # 强制得到
+convert original.jpg -resize 50% out4.jpg
+
+convert original.jpg -crop 900x300+0+0 out5.jpg # 图片大小是 900x300。命令中的 +0+0 是指相对图片最左上角在 X 轴和 Y 轴上的偏移量
+
+onvert original.jpg -crop 900x+0+0 out7.jpg #
+convert original.jpg -crop 900x+10+30 out8.jpg # 输出图片的高度是原图高度减去偏移量
+onvert original.jpg -crop 50%x+0+0 out8.jpg
+convert original.jpg -crop 50%x60%+0+0 out10.jpg
+convert original.jpg -crop 900x60%+0+0 out11.jpg
+
+md5sum out11.jpg
+```
+
 ## 图集
 
 * 《你好小朋友》
