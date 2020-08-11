@@ -96,6 +96,8 @@
     - [testerSunshine/12306](https://github.com/testerSunshine/12306):12306智能刷票，订票
 * 分享
     - [kosmi](https://kosmi.io/):Watch videos together, play games, or simply chat with friends or strangers all from within your browser!
+* 剪贴板
+    - [CopyQ](https://github.com/hluk/CopyQ)
 
 ## [IFTTT(if this then that)](https://ifttt.com/)
 

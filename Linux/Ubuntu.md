@@ -547,9 +547,9 @@ sudo apt-get update && sudo apt-get install indicator-stickynotes
   - `sudo aptitude install gnome-shell-extension-system-monitor`
   * [Pomodoro](https://gnomepomodoro.org/) `sudo apt install gnome-todo` indeiect not use gnome
   - gnome-screenshot:`sudo apt-get install gnome-screenshot`
-  -  Open Weather
-  -  [system-monitor](https://extensions.gnome.org/extension/120/system-monitor/)
-  -  dash to dock
+  - Open Weather
+  - [system-monitor](https://extensions.gnome.org/extension/120/system-monitor/)
+  - dash to dock
 * Theme `/usr/share/themes`
   - [Yaru-Colors](https://www.pling.com/s/Gnome/p/1299514/)
   - [](https://www.pling.com/s/Gnome)
@@ -558,11 +558,16 @@ sudo apt-get update && sudo apt-get install indicator-stickynotes
     + file download(~/.themes) or isntall
   - [nana-4 / materia-theme](https://github.com/nana-4/materia-theme):A Material Design theme for GNOME/GTK based desktop environments
   - [adapta-project / adapta-gtk-theme ](https://github.com/adapta-project/adapta-gtk-theme):An adaptive Gtk+ theme based on Material Design Guidelines
+    + `git clone git@github.com:adapta-project/adapta-gtk-theme.git`
+    + `sudo apt install autoconf automake inkscape libgdk-pixbuf2.0-dev libglib2.0-dev libxml2-utils pkg-config  sassc`
+    + `./autogen.sh --prefix=/usr`
+    + `make && sudo make install`
   - [pop-os / gtk-theme](https://github.com/pop-os/gtk-theme):System76 Pop GTK+ Theme
   - Communitheme `sudo snapinstall communitheme –edge`
   - [vinceliuice / vimix-gtk-themes](https://github.com/vinceliuice/vimix-gtk-themes):Vimix is a flat Material Design theme for GTK 3, GTK 2 and Gnome-Shell etc. https://vinceliuice.github.io/
   - sudo apt install sierra-gtk-theme
 * icons: `/usr/share/icons` > `~/.icons`
+  - [paper-icon-theme](https://snwh.org/)
 * [Grub-theme-stylish ](https://www.pling.com/s/Gnome/p/1009237/)
 * 重启： `Alt + F2`, r
 
@@ -821,6 +826,10 @@ sudo apt-add-repository 'deb http://archive.ubuntukylin.com/ukui focal main'
 sudo apt upgrade
 sudo apt install sogouimebs
 sudo dpkg-divert --package im-config --rename /usr/bin/ibus-daemon
+
+#  rime 小鹤双拼
+sudo apt install ibus-rime librime-data-double-pinyin
+
 
 # chrome(firefox 禁用console.log)
 sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
