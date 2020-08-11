@@ -66,6 +66,7 @@ lsb_release -a
 
 sudo apt install update-manager-core
 sudo do-release-upgrade -m desktop -d
+sudo do-release-upgrade -c
 
 sudo dpkg --get-selections |grep linux-image
 sudo apt-get install linux-image-4.4.0-75-generic
@@ -303,7 +304,7 @@ zh_CN GB2312
 sudo locale-gen
 
 sudo visudo
-%sudo ALL=(ALL:ALL) NOPASSWD:ALL
+sudo ALL=(ALL:ALL) NOPASSWD:ALL
 ```
 
 ### 软件
@@ -414,13 +415,12 @@ sudo visudo
     + Déjà Dup — A Backup Tool `sudo snap install deja-dup --classic`
   - appimage
     + [ TheAssassin / AppImageLauncher ](https://github.com/TheAssassin/AppImageLauncher):Helper application for Linux distributions serving as a kind of "entry point" for running and integrating AppImages
+  - 空格键预览 `sudo apt install gnome-sushi`
 * 下载
   - `sudo apt-get install ktorrent`
   - `sudo apt-get install amule`
 
 ```sh
-do-release-upgrade
-
 # fix ubuntu
 sudo rm/var/lib/apt/lists/lock
 sudo rm/var/lib/dpkg/lock
@@ -485,11 +485,6 @@ sudo add-apt-repository -r(--remove) ppa:nilarimogard/webupd8   # add source
 curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add -
 sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/home:manuelschneid3r.list"
 
-wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_18.04/Release.key -O Release.key
-sudo apt-key add - < Release.key
-curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add -
-sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/home:manuelschneid3r.list"
-
 curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add -
 echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_20.04/ /' | sudo tee /etc/apt/sources.list.d/home:manuelschneid3r.list
 sudo wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_20.04/Release.key -O "/etc/apt/trusted.gpg.d/home:manuelschneid3r.asc"
@@ -511,8 +506,8 @@ cd xxx
 ./configure --prefix=/usr/local/libxml2
 make && sudo make install
 
-sudo snap install snap-store
 sudo apt-get install snapd|snapcraft
+sudo snap install snap-store
 
 sudo snap login # 通过Ubuntu One登陆
 sudo snap list # view all the installed snaps

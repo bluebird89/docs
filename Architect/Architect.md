@@ -334,7 +334,6 @@
 * 《企业应用架构模式》 Martin Fowler
 * 《分析模式》，《UML精粹》，《领域特定语言》
 
-
 ## 实例
 
 * [ alibaba /COLA ](https://github.com/alibaba/COLA):Clean Object-oriented & Layered Architecture
@@ -351,3 +350,4 @@
 * [alexpate/awesome-design-systems](https://github.com/alexpate/awesome-design-systems):💅🏻 ⚒ A collection of awesome design systems
 * [0voice/from_coder_to_expert](https://github.com/0voice/from_coder_to_expert):2019年最新总结，从程序员到CTO，从专业走向卓越，分享大牛企业内部pdf与PPT
 * [Software Architecture is Overrated, Clear and Simple Design is Underrated](https://blog.pragmaticengineer.com/software-architecture-is-overrated/)
+* [](https://refactoring.guru/)
