@@ -390,8 +390,10 @@ class Captain
 * [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns)
 * [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
 * [kamranahmedse/design-patterns-for-humans](https://github.com/kamranahmedse/design-patterns-for-humans):Design Patterns for Humans™ - An ultra-simplified explanation
+* [](https://github.com/RefactoringGuru/design-patterns-php) https://refactoringguru.cn/design-patterns
 
 * [设计模式](http://laravelacademy.org/resources/design-patterns)
 * [Repository 模式](http://laravelacademy.org/post/3063.html)
 * [教程](http://www.runoob.com/design-pattern/design-pattern-tutorial.html)
 * [常见设计模式的定义，应用场景和方法](http://www.jianshu.com/p/f3c76b695167)
+* https://hulin.gitbook.io/design-patterns-by-php/zu-he-mo-shi
