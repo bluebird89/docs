@@ -75,6 +75,16 @@ brew install curl-openssl
 echo ‘export PATH="/usr/local/opt/curl-openssl/bin:$PATH"’ >> ~/.bash_profile
 
 curl --http2 -I https://nghttp2.org/
+
+# application/x-www-form-urlencoded
+curl localhost:3000/api/basic -X POST -d 'hello=world&xxx=yyy&a[]=ooo&a[]=mmm'
+
+# multipart/form-data
+curl localhost:3000/api/multipart -F raw=@raw.data -F hello=world
+
+# application/json
+curl localhost:3000/api/json -X POST -d '{"hello": "world"}' --header "Content-Type: application/json"
+curl localhost:3000/api/json -X POST -d @data.json --header "Content-Type: application/json"
 ```
 
 ## Notice

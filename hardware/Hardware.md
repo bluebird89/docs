@@ -22,10 +22,8 @@
 
 * B&O PLAY by BANG & OLUFSEN - BeoPlay H6 Over-Ear Headphones, Natural (1642003)
 * Libratone小鸟音响
-
 * Computer（大尺寸屏幕,甚至两块屏幕）
 
-* 耳机
 
 ## 显示器
 
@@ -45,7 +43,7 @@
     - 3月21日，AMD在游戏开发者大会上正式公布自家的实时光线追踪技术，说白了就是和N卡旗下RTX显卡抗衡的自家技术。该解决方案是基于Raden Rays构建的，是一个开源的GPU光追引擎，支持OpenCL等技术
 * Manjaro InfinityBook S 14 v5
 * Intel® NUC Mini PC
-* MacBook Pro:15 寸，16G
+* MBP 16
 * Acer Chromebook R11
 * Chromebook
 
