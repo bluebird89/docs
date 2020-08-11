@@ -1566,7 +1566,8 @@ These features allow to pause a branch development and switch to another one (_"
 text-mode interface for git
 
 ```sh
- brew install tig
+brew install tig
+sudo apt-get install tig
 
 tig        [options] [revisions] [--] [paths]
 tig log    [options] [revisions] [--] [paths]

@@ -1055,6 +1055,35 @@ sudo apt install terminator
     background_image = None
 ```
 
+## [sharkdp/bat](https://github.com/sharkdp/bat)
+
+A cat(1) clone with wings
+
+```sh
+wget https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.deb
+```
+
+## [fd](https://github.com/sharkdp/fd)
+
+A simple, fast and user-friendly alternative to 'find'
+
+* 方便语法: fd PATTERN而不是find -iname '*PATTERN*'.
+* 彩色终端输出 (类似于ls)
+* 它是快速的 (见基准下面) .
+* 聪明案例: 默认情况下,搜索不区分大小写. 如果模式包含大写字符*, 则切换为区分大小写字符. .
+* 默认情况下,忽略隐藏的目录和文件.
+* 忽略匹配.gitignore文件中的模式,默认情况.
+* 正则表达式.
+* Unicode感知.
+* 命令输入量*50%*优于*find: -)
+* 用类似于GNU穿行的语法，执行并行命令.
+
+```sh
+wget https://github.com/sharkdp/fd/releases/download/v8.1.1/fd_8.1.1_amd64.deb
+sudo dpkg -i
+
+```
+
 ## Linux环境高级编程
 
 * 学习系统编程接口、系统调用 API 、内存管理、进程间通信（ IPC ）
@@ -1109,8 +1138,6 @@ sudo apt install terminator
     - [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
     - [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/ `npm install -g tldr`
     - [jaywcjlove / linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
-* 查看
-    - [sharkdp/bat](https://github.com/sharkdp/bat):A cat(1) clone with wings
 * [lynx](link):终端构建的Web浏览应用程序
 * cd
     - [fasd](https://github.com/clvv/fasd) 增强cd命令
@@ -1129,7 +1156,6 @@ sudo apt install terminator
     - [ack](https://beyondgrep.com/)
     - [ ggreer / the_silver_searcher ](https://github.com/ggreer/the_silver_searcher)A code-searching tool similar to ack, but faster.
     - [rg](https://github.com/BurntSushi/ripgrep)是更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到配置在 .gitignore 中的规则
-    - [fd](https://github.com/sharkdp/fd) A simple, fast and user-friendly alternative to 'find' 一个比 find 更简单更快的命令，会自动地忽略掉一些配置在 .gitignore 中的文件，以及 .git 下的文件
     - [ ggreer / the_silver_searcher ](https://github.com/ggreer/the_silver_searcher):A code-searching tool similar to ack, but faster. http://geoff.greer.fm/ag/
 * monitor
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序
