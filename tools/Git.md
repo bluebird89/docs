@@ -1565,6 +1565,18 @@ These features allow to pause a branch development and switch to another one (_"
 
 text-mode interface for git
 
+* [Tig: text-mode interface for Git](https://jonas.github.io/tig/)
+*  l:全屏查看 commit 记录
+*  r:进入 refs view 模式，查看所有分支
+*  s:进入 status view，效果同 git status 命令，会展示所有 Untracked 和 UnStaged 文件
+*  选中 Unstaged 的文件键入【 u 】效果同 git add
+*  选中 staged 的文件键入 【 u 】效果同 git reset，即撤销 add 操作
+*  status view 模式
+  -  C 进入 vim 编辑器，
+  -  i 进入编辑模式，在第一行输入 commit 信息
+  -  :x 退出并保存
+  -  m 查看 commit 记录
+
 ```sh
 brew install tig
 sudo apt-get install tig
@@ -1577,6 +1589,120 @@ tig grep   [options] [pattern]
 tig refs
 tig stash
 tig status
+
+m view-main           Show main view
+d view-diff           Show diff view
+l view-log            Show log view
+t view-tree           Show tree view
+f view-blob           Show blob view
+b view-blame          Show blame view
+r view-refs           Show refs view
+s,S view-status         Show status view
+c view-stage          Show stage view
+y view-stash          Show stash view
+g view-grep           Show grep view
+p view-pager          Show pager view
+h view-help           Show help view
+
+View manipulation
+                     <Enter> enter               Enter and open selected line
+                           < back                Go back to the previous view state
+         <Down>, <Ctrl-N>, J next                Move to next
+           <Up>, <Ctrl-P>, K previous            Move to previous
+                         ',' parent              Move to parent
+                       <Tab> view-next           Move focus to the next view
+                     R, <F5> refresh             Reload and refresh view
+                           O maximize            Maximize the current view
+                           q view-close          Close the current view
+                 Q, <Ctrl-C> quit                Close all views and quit
+Cursor navigation
+                           k move-up             Move cursor one line up
+                           j move-down           Move cursor one line down
+         <PageDown>, <Space> move-page-down      Move cursor one page down
+                 <PageUp>, - move-page-up        Move cursor half a page up
+                    <Ctrl-D> move-half-page-down Move cursor half a page down
+                    <Ctrl-U> move-half-page-up   Move cursor one page up
+                      <Home> move-first-line     Move cursor to first line
+                       <End> move-last-line      Move cursor to last line
+
+Scrolling
+          <Insert>, <Ctrl-Y> scroll-line-up      Scroll one line up
+          <Delete>, <Ctrl-E> scroll-line-down    Scroll one line down
+                <ScrollBack> scroll-page-up      Scroll one page up
+                 <ScrollFwd> scroll-page-down    Scroll one page down
+                           | scroll-first-col    Scroll to the first line columns
+                      <Left> scroll-left         Scroll two columns left
+                     <Right> scroll-right        Scroll two columns right
+Searching
+                           / search              Search the view
+                           ? search-back         Search backwards in the view
+                           n find-next           Find next search match
+                           N find-prev           Find previous search match
+Misc
+                           e edit                Open in editor
+                           : prompt              Open the prompt
+                           o options             Open the options menu
+                    <Ctrl-L> screen-redraw       Redraw the screen
+                           z stop-loading        Stop all loading views
+                           v show-version        Show version information
+
+Option toggling:
+                           I :toggle sort-order
+                           i :toggle sort-field
+                           # :toggle line-number
+                           D :toggle date
+                           A :toggle author
+                           ~ :toggle line-graphics
+                           F :toggle file-name
+                           W :toggle ignore-space
+                           X :toggle id
+                           $ :toggle commit-title-overflow
+                           % :toggle file-filter
+[-] search bindings
+View manipulation
+                    <Ctrl-C> view-close          Close the current view
+Searching
+  <Down>, <Ctrl-N>, <Ctrl-J> find-next           Find next search match
+    <Up>, <Ctrl-P>, <Ctrl-K> find-prev           Find previous search match
+
+[-] main bindings
+Option toggling:
+                           G :toggle commit-title-graph
+                           F :toggle commit-title-refs
+External commands:
+                           C ?git cherry-pick %(commit)
+[-] diff bindings
+Option toggling:
+                           [ :toggle diff-context -1
+                           ] :toggle diff-context +1
+Internal commands:
+                           @ :/^@@
+[-] refs bindings
+External commands:
+                           C ?git checkout %(branch)
+                           ! ?git branch -D %(branch)
+[-] status bindings
+View-specific actions
+                           u status-update       Stage/unstage chunk or file changes
+                           ! status-revert       Revert chunk or file changes
+                           M status-merge        Merge file using external tool
+                       C !git commit
+[-] stage bindings
+View-specific actions
+                           u status-update       Stage/unstage chunk or file changes
+                           ! status-revert       Revert chunk or file changes
+                           1 stage-update-line   Stage/unstage single line
+                           \ stage-split-chunk   Split current diff chunk
+Option toggling:
+                           [ :toggle diff-context -1
+                           ] :toggle diff-context +1
+Internal commands:
+                           @ :/^@@
+[-] stash bindings
+External commands:
+                           A ?git stash apply %(stash)
+                           P ?git stash pop %(stash)
+                           ! ?git stash drop %(stash)
 ```
 
 ## 问题
@@ -1589,6 +1715,7 @@ tig status
 > fatal: fsck error in packed object
 > fatal: index-pack failed
 
+## 工具
 
 * highlighter
   - [ dandavison / delta ](https://github.com/dandavison/delta):A syntax-highlighter for git and diff output
@@ -1648,7 +1775,7 @@ tig status
 * [git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
 * [Git Immersion](http://gitimmersion.com/):The surest path to mastering Git is to immerse oneself in its utilities and operations, to experience it first-hand
 * [k88hudson/git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
-* [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate!
+* [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate! https://learngitbranching.js.org/
 * [Magit](https://magit.vc/) Git 在 Emacs 上的打开方式
 * [learn-git-with-bitbucket-cloud](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
 * [Vim-fugitive](https://github.com/tpope/vim-fugitive) : Git 在 Vim 上的打开方式
