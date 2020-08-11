@@ -1064,9 +1064,30 @@ sudo wireshark
 
 * [kjj6198/cors_example](https://github.com/kjj6198/cors_example)
 
+## [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie)
+
+As easy as httpie /aitch-tee-tee-pie/ 🥧 Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, https://httpie.org
+
+```sh
+# installed on any operating system.
+<tool> install httpie
+
+http PUT httpbin.org/put X-API-Token:123 name=John
+http -f POST httpbin.org/post hello=World
+http -v httpbin.org/get
+http -a USERNAME POST https://api.github.com/repos/jakubroztocil/httpie/issues/83/comments body='HTTPie is awesome! :heart:'
+http httpbin.org/post < files/data.json
+http httpbin.org/image/png > image.png
+http --download httpbin.org/image/png
+http --session=logged-in -a username:password httpbin.org/get API-Key:123
+
+http --session=logged-in httpbin.org/headers
+http localhost:8000 Host:example.com
+```
+
+
 ## 工具
 
-* [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie):As easy as httpie /aitch-tee-tee-pie/ 🥧 Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc. https://twitter.com/clihttp https://httpie.org
 * [eliangcs /http-prompt ](https://github.com/eliangcs/http-prompt):HTTPie + prompt_toolkit = an interactive command-line HTTP client featuring autocomplete and syntax highlighting http://http-prompt.com
 * [snail007/goproxy](https://github.com/snail007/goproxy):Proxy is a high performance HTTP(S), websocket, TCP, UDP,Secure DNS, Socks5 proxy server implemented by golang. Now, it supports chain-style proxies,nat forwarding in different lan,TCP/UDP port forwarding, SSH forwarding.Proxy是golang实现的高性能http,https,websocket,tcp,防污染DNS,socks5代理服务器,支持内网穿透,链式代理,通讯加密,智能HTTP,SOCKS5代理,域名黑白名单,跨平台,KCP协议支持,集成外部API。
 * [ProxymanApp / Proxyman](https://github.com/ProxymanApp/Proxyman):Modern and Delightful HTTP Debugging Proxy for macOS, iOS and Android ⚡️ https://proxyman.io
