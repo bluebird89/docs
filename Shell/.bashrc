@@ -231,3 +231,19 @@ export PATH=${MAVEN_HOME}/bin:$PATH
 
 export GRADLE_HOME=/opt/gradle/gradle-6.4.1
 export PATH=$PATH:${GRADLE_HOME}/bin
+
+proxy () {
+  export ALL_PROXY="socks5://127.0.0.1:1080"
+  export all_proxy="socks5://127.0.0.1:1080"
+  echo -e "Acquire::http::Proxy \"http://127.0.0.1:1090\";" | sudo tee -a /etc/apt/apt.conf > /dev/null
+  echo -e "Acquire::https::Proxy \"http://127.0.0.1:1090\";" | sudo tee -a /etc/apt/apt.conf > /dev/null
+  curl https://ip.gs
+}
+
+noproxy () {
+  unset ALL_PROXY
+  unset all_proxy
+  sudo sed -i -e '/Acquire::http::Proxy/d' /etc/apt/apt.conf
+  sudo sed -i -e '/Acquire::https::Proxy/d' /etc/apt/apt.conf
+  curl https://ip.gs
+}

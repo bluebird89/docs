@@ -374,8 +374,6 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
     + Podcasts — GNOME Podcast Client `flatpak install flathub org.gnome.Podcasts`
     + Vocal:听播客
   - LaTeX
-  - 输入法
-    + [rime](https://rime.im/)
   - 邮箱
     + Nylas N1：超好用的跨平台电子邮件客户端
     + Thunderbird：can  add addon to manage rss
@@ -779,7 +777,7 @@ sudo perf report # 回放
 ### 优化
 
 * 中文输入法
-  - citx-rime
+  - [rime](https://rime.im/)
   - 20 内部中文输入法 ibus
     + 设置->区域与语言
     + 中文（简体）
@@ -834,7 +832,6 @@ sudo dpkg-divert --package im-config --rename /usr/bin/ibus-daemon
 
 #  rime 小鹤双拼
 sudo apt install ibus-rime librime-data-double-pinyin
-
 
 # chrome(firefox 禁用console.log)
 sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/

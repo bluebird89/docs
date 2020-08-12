@@ -289,6 +289,8 @@ sudo apt-get install zeal
 * 支持bash：在启用或关闭 Windows 功能，开启Windows Subsystem for linux (Beta) [参考](https://blog.jessfraz.com/post/windows-for-linux-nerds/)
 * [Dev on Windows with WSL](https://dowww.spencerwoo.com/)
 * 添加 Linux GUI 支持，即 Windows 原生支持 Linux 图形界面程序。意味着，大部分 Linux 应用将可以在 Windows 运行
+* 版本
+  - WLinux+  X410 作为 X Server
 
 ```
 # PowerShell as Administrator

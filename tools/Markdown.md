@@ -657,6 +657,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
 	- `sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE` `wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -`
 	- `sudo add-apt-repository 'deb https://typora.io/linux ./'`
 	- `sudo apt-get install typora`
+    - PicGo 是一款免费的图床管理应用，支持拖拽上传，剪切板上传等方式。你可以用它快捷地将图片上传到图床并获得网络链接。
 * [marktext/marktext](https://github.com/marktext/marktext):📝A simple and elegant markdown editor, available for Linux, macOS and Windows. https://marktext.app
 * [ zadam / trilium ](https://github.com/zadam/trilium):Build your personal knowledge base with Trilium Notes
 * [Haroopad](http://pad.haroopress.com/user.html):a markdown enabled document processor for creating web-friendly documents
@@ -671,6 +672,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
 	- [Quiver](http://happenapps.com/):a notebook built for programmers. It lets you easily mix text, code, Markdown and LaTeX within one note, edit code with an awesome code editor, live preview Markdown and LaTeX, and find any note instantly via the full-text search.收费
 	- [幕布](https://mubu.com/):极简大纲笔记 | 一键生成思维导图
 	- [MWeb](https://zh.mweb.im/):是专业的 Markdown 写作、记笔记、静态博客生成软件。
+    - Mark Text
 * Windows
 	- MarkdownPad(需要浏览器渲染插件awesome)
 	- MarkPad

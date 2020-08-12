@@ -682,15 +682,16 @@ ls *.rmvb | xargs -n1 -i cp {} /mount/xiaodianying
     - 目录一次性补全：比如输入 Doc/doc按 Tab键会自动变成 Documents/document/
 * powerline: need font support
 * [plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins)
-    - autojump:访问 ~/workspace/src ，只需要输入 j src
+    - [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
+    - [zplug / zplug](https://github.com/zplug/zplug):🌺 A next-generation plugin manager for zsh
+    - autojump:访问 ~/workspace/src ，输入 j src
     - sublime:st README.md 就可以调用机器上安装的Sublime Text打开当前目录的README.md文件进行编辑操作
     - web-search:baidu hhkb pro2 直接在浏览器打开百度搜索关键字”hhkb pro2”
     - [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
-    - [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh.记录平时输入过的命令，下次再输入的时候，它会提前提示，方便懒人。如果是需要的命令，直接 Ctrl+F 搞定
+    - [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh.记录平时输入过的命令，下次再输入的时候，会提前提示，方便懒人。如果是需要的命令，直接 Ctrl+F 搞定
     - extract:所有类型的文件解压通过一个命令x全搞定
-    - [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
     - [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
-    - incr是一款自动提示插件
+    - incr 一款自动提示插件
     - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
     - [git-open](https://github.com/paulirish/git-open)
     - [sindresorhus / quick-look-plugins](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
@@ -705,13 +706,15 @@ ls *.rmvb | xargs -n1 -i cp {} /mount/xiaodianying
     - 进程id补全
     - 快速跳转:d + enter，列出最近访问过的各个目录，然后选择目录前面的数字进行快速跳转
     - 目录名简写与补全:只需要输入每个目录的首字母就行，然后再TAB键补全
-    - 命令参数补全
     - r :重复执行上一条命令
-    - zsh-autosuggestions:记录平时输入过的命令，下次再输入的时候，它会提前提示
-    - extract:功能强大的解压插件，所有类型的文件解压通过一个命令x全搞定
-* 工具
-    - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
-    - [zplug / zplug](https://github.com/zplug/zplug):🌺 A next-generation plugin manager for zsh
+* lazyload 的特点是启动时快，首次使用时慢，因此很适合用于优化不常用而且初始化非常耗时的功能
+* 优化
+    - 禁用多余插件
+    - 避免产生子进程:常见的会产生子进程的语法有是 eval 和 Command substitution，在编写 .zshrc 时应该尽量避免使用它们
+    - 启用 ZSH_DISABLE_COMPFIX
+*  macOS
+    -  zsh 启动序列的第一项为 /etc/zprofile 而不是 ~/.zprofile。macOS 通过 /etc/zprofile 来调用 path_helper。path_helper 又会读取 /etc/paths 、/etc/paths/d、etc/manpaths 和 etc/manpaths.d、并将其添加到 $PATH 和 $MANPATH 变量中。通过 path_helper macOS 提供了一种快速在不同 shell 中共享 $PATH 和 $MANPATH 的方法。过去，path_helper 是一个 运行速度很慢的 shell 脚本[6] 以至于有人制作了 专门的 patch[7]、甚至 使用 Perl[8] 重写了一个替代品。不过 macOS 意识到了这个问题，现在 path_helper 不再是一个脚本而是一个预编译好的二进制文件。如果你通过 profiling 发现 path_helper 有在拖累 zsh 启动，那么可以考虑放弃使用 /etc/paths/d、而是在 .zshrc 中直接维护 $PATH
+    -  login process： 默认在启动、终端登陆 shell 时会触发 macOS 的 login -fp username。这一操作会调用 syslog() 函数向 /var/log/asl 写入日志、并读取上一次登录记录、以 Last login 的形式显示出来。可以修改 etc/asl.conf 配置文件中定义的日志等级。修改 iTerm2 设置中的 Login Command 为 /bin/zsh 可以加快 zsh 启动速度，本质上也是绕过了上述读取和写入日志的环节
 
 ```sh
 cat /etc/shells
@@ -763,6 +766,37 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # 更新
 upgrade_oh_my_zsh
 uninstall_oh_my_zsh
+
+# zsh 启动耗时测量
+/usr/bin/time /bin/zsh -i -c exit
+for i in $(seq 1 5); do /usr/bin/time /bin/zsh -i -c exit; done
+for i in $(seq 1 20); do /usr/bin/time /bin/zsh --no-rcs -i -c exit; done
+
+# profiling 模块 zprof 用于衡量 zsh 各个函数的执行用时
+zmodload zsh/zprof
+# 获取各函数用时数据
+zprof
+
+# 获取完整的 .zshrc 性能分析，应该使用 xtrace
+chmod +x format_profile.zsh
+./format_profile.zsh zsh_profile.123456 | head -n 30
+
+# 封装好的 lazyload 函数
+
+# 判断命令是否存在
+[[ command -v node &>/dev/null ]] && node -v
+[[ which -a node &>/dev/null ]] && node -v
+[[ type node &>/dev/null ]] && node -v
+(( $+commands[node] )) && node -v
+
+# 变量字符串查找:$variable[(i)keyword] 和 $variable[(I)keyword]，前者是从左往右寻找、后者是从右往左寻找，返回值为第一个匹配的首字符位置，当没有匹配时返回值则是变量的最终位置，也就是说当找不到匹配时 (i) 会返回字符串的长度、而 (I) 会返回 0
+[[ $(echo $FPATH | grep "/usr/local/share/zsh/site-functions") ]] && echo "homebrew exists in fpath"
+(( $FPATH[(I)/usr/local/share/zsh/site-functions] )) && echo "homebrew exists in fpath"
+
+# 变量字符串替换
+echo $HOST | sed -e "s/.local//"
+echo ${HOST/.local/}
+echo ${HOST/.local/.foxtail}
 ```
 
 ### [fish-shell/fish-shell](https://github.com/fish-shell/fish-shell)
