@@ -259,8 +259,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - Kanban
 * 文档
     - [dash](https://kapeli.com/dash):语言文档
-    - [apidoc](http://apidocjs.com/)
-    - [jgm/pandoc](https://github.com/jgm/pandoc):Universal markup converter <http://johnmacfarlane.net/pandoc>
     - [TRANSMIT 5](https://www.panic.com/transmit/):Upload, download, and manage files on tons of servers with an easy, familiar, and powerful UI. It’s quite good.
     - Cloud Outline
     - iCHM

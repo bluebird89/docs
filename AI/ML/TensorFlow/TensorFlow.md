@@ -43,7 +43,7 @@ deactivate
 
 ## 组件
 
-* Tensorboard：帮助使用数据流图进行有效的数据可视化
+* [Tensorboard](https://github.com/tensorflow/tensorboard)：TensorFlow's Visualization Toolkit 帮助使用数据流图进行有效的数据可视化
 * TensorFlow：用于快速部署新算法/试验
 
 ## 应用
@@ -75,6 +75,14 @@ deactivate
 * [Hvass-Labs/TensorFlow-Tutorials](https://github.com/Hvass-Labs/TensorFlow-Tutorials):TensorFlow Tutorials with YouTube Videos
 * [TensorFlow for Deep Learning Research](http://web.stanford.edu/class/cs20si/)
 
+## 工具
+
+* [tensorflow/tfjs-models](https://github.com/tensorflow/tfjs-models):Pretrained models for TensorFlow.js https://js.tensorflow.org
+* [TensorFlow Lite](link)
+* [TensorFlow Hub](link)
+* [](https://js.tensorflow.org/)
+* [deepmind/graph_nets](https://github.com/deepmind/graph_nets):Build Graph Nets in Tensorflow https://arxiv.org/abs/1806.01261
+
 ## 参考
 
 * [TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
@@ -93,11 +101,3 @@ deactivate
 * [TensorFlow 官方 YouTube 频道](https://www.youtube.com/channel/UC0rqucBdTuFTjJiefW5t-IQ)
 * [TensorFlow教程](https://www.tensorflow.org/tutorials)
 * [简单粗暴 TensorFlow 2 | A Concise Handbook of TensorFlow 2](https://tf.wiki/index.html)
-
-## 工具
-
-* [tensorflow/tfjs-models](https://github.com/tensorflow/tfjs-models):Pretrained models for TensorFlow.js https://js.tensorflow.org
-* [TensorFlow Lite](link)
-* [TensorFlow Hub](link)
-* [](https://js.tensorflow.org/)
-* [deepmind/graph_nets](https://github.com/deepmind/graph_nets):Build Graph Nets in Tensorflow https://arxiv.org/abs/1806.01261
