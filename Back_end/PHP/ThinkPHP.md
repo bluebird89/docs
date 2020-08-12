@@ -34,7 +34,7 @@ php think run
 
 php -S localhost:8888 route/route.php
 
-location / { // …..省略部分代码
+location / {
    if (!-e $request_filename) {
         rewrite  ^(.*)$  /index.php?s=/$1  last;
     }
@@ -75,5 +75,5 @@ php public/index.php index/Demon/start # 命令行运行
 
 ## 参考
 
-* [ThinkPHP5.1完全开发手册](https://www.kancloud.cn/manual/thinkphp5_1)
+* [ThinkPHP5.1完全开发手册](https://www.kancloud.cn/manual/thinkphp6.0)
 * [top-think/thinkng](https://github.com/top-think/thinkng):基于 ThinkPHP 5 框架核心重写的下一代 ThinkPHP

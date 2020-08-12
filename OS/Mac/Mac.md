@@ -65,6 +65,67 @@ sudo trimforce enable
     - /System/Library/LaunchAgents/ – （Mac操作系统提供的用户进程）
     - /System/Library/LaunchDaemons/ – （Mac操作系统提供的系统守护进程）
 
+* 在 Mac 设备启动时通过 Command + V 或者 Command +S 这类快捷键改变启动行为。但是除此以外，通过 NVRAM 或第三方引导程序（如 Clover）中也可以设置启动参数。macOS 内置了许多启动参数，可以用于专业用户调试或排除故障。可以通过 nvram 工具设置启动参数： `sudo nvram boot-args="-v"`
+* 对于使用第三方引导程序（如 Clover 等）的用户来说，可以在 config.plist 文件、或者在启动菜单中设置引导参数。
+
+-   - v：以「啰嗦模式」启动，等价于 Mac 设备上的快捷键 Command + V。
+    - -x：以「安全模式」启动，等价于 Mac 设备上的长按 Shift 键。在这一模式下 macOS 会加载尽可能少的内核扩展（kext）文件。
+    - -s：以「单用户模式」启动，等价于 Mac 设备上的快捷键 Command + S。这一模式将会启动终端模式，你可以用这种方式修复你的系统。
+    - f：旧版的「安全模式」。
+    - -f：启动时强制重建内核扩展（kext）缓存。
+    - config：指定用于代替 com.apple.Boot.plist 的配置文件。config=sukka 将会加载 /Library/Preferences/SystemConfiguration/sukka.plist
+    - arch=x86_64：在 OS X Snow Leopard 中，即使已经内置了 64 位内核，系统也依然默认启动 32 位内核。这个启动参数可以使系统强制使用 64 位内核。如果要使系统总是以 32 位内核启动，请将 x86_64 部分替换为 i386。在某些情况下，第三方 kext 可能只有 32 位或 64 位，需要启动到相应的内核类型才能加载。
+    - -legacy：启动到 32 位内核。
+    - maxmem=32：将可寻址内存限制为指定的容量，本例中为 32 GB。如果没有这一启动参数，macOS 会将内存限制设置为硬件可以寻址的最大容量、亦或是安装的内存容量。
+    - cpus=1：限制系统中活动 CPU 的数量。苹果的开发者工具有一个选项用于启用或禁用系统中的一些 CPU，但你也可以通过这个参数指定要使用的 CPU 数量。在某些情况下，这也许有助于省电、或者你正在调试 X86 电源驱动，否则这一选项真的没什么别的作用。
+    - rd=disk0s1：强制指定启动分区。
+    - rp：根目录位置。
+    - trace：Kernel Trace 缓冲区大小。
+    - iog=0x0：这一参数强制 macOS 在笔记本上 不使用 Clamshell 模式。此时当你外接了显示器和键盘，合盖后笔记本不会睡眠、但内置显示器将会关闭。
+    - serverperfmode：为 macOS Server 开启 性能模式
+    - _panicd_ip=11.4.5.14：设置一个 Kernel Panic 收集服务器的 IP 地址，日志将会通过 UDP 协议发送给这个 IP 的 1069 端口。
+    - panicd_port：修改日志发送端口（默认为 1069）。
+    - debug=0x144：这一参数结合了内核调试功能来显示内核进程的额外信息，这在 Kernel Panic 时很有用。可用的参数包括以下这些：
+    - 0x1：DB_HALT，在引导时暂停，直到外部调试串口已经连接并被识别
+    - 0x2：DB_PRT，将内核的 printf() 函数输出的信息打印到 Console.app
+    - 0x4：DB_NMI，启用内核调试功能，包括生成非屏蔽中断（NMI）。在 Power Mac 上，只需简单地按下电源键就能产生 NMI。在笔记本电脑上，在按下电源键时必须按住命令键。如果按住电源键超过五秒钟，系统将关闭电源。在「系统偏好设置」中更改启动盘时 DB_NMI 位将被清除。
+    - 0x8：DB_KPRT，将 kprintf() 产生的内核调试输出发送到远程输出设备，通常是一个调试串口（如果有的话）。注意， kprintf() 的输出是同步的。
+    - 0x10：DB_KDB，使用 KDB 代替 GDB 作为默认的内核调试器。与 GDB 不同，KDB 必须被显式编译到内核中。此外，基于 KDB 的调试需要原生的串口硬件（而不是基于 USB 的串口适配器）。
+    - 0x20：SB_SLOG，启用将杂项诊断记录到系统日志中。设置了这个位后，load_shared_file() 内核函数会记录额外的信息。
+    - 0x40：DB_ARP，允许跨局域网调试内核。
+    - 0x80：DB_KDP_BP_DIS，已经被弃用，用于支持旧版的 GDB。
+    - 0x100：DB_LOG_PI_SCRN，禁用五国、而把 Kernel Panic 的相关数据直接打印在屏幕上。这一参数还可以用于 Core Dump。
+    - 0x200：DB_KDP_GETC_ENA，在 Kernel Panic 后启用快捷键（c 继续，r 重启，k 进入 KDB）
+    - 0x400：DB_KERN_DUMP_ON_PANIC，当 Kernel Panic 时触发一次 Core Dump。
+    - 0x800：DB_KERN_DUMP_ON_NMI，当产生 NMI 时触发一次 Core Dump。
+    - 0x1000：DB_DBG_POST_CORE，等待调试器连接（如果使用 GDB）或在 NMI 触发的内核转储后等待调试器（如果使用 KDB）。如果没有设置 DB_DBG_POST_CORE，内核在 Core Dump 后继续运行。
+    - 0x2000：只生成并发送 Kernel Panic Log，不生成完整的 Core Dump。
+    - artsize：指定要用于地址解析表（ART）的页数。
+    - BootCacheOverride：BootCache 驱动程序被加载，但从网络启动时不会运行。设置 BootCacheOverride=1 可以覆盖此行为。
+    - dart：设置 dart=0 会关闭 64 位硬件上的系统 PCI 地址映射器（DART）。DART 在拥有 2GB 以上物理内存的机器上是必需的，但在所有机器上无论内存大小，默认情况下都会启用 DART
+    - diag：启用内核的内置诊断接口及其特定功能。
+    - fill：指定一个整数值，在启动是将会用这个整数填充所有内存。
+    - fn：改变处理器的强制休眠行为。设置 fn=1 将关闭强制休眠；设置 fn=2 将开启强制休眠。
+    - _fpu：禁用x86上的FPU功能。_fpu=387 将禁用 FXSR/SSE/SSE2，而字符串值为 _fpu=se 的字符串值将禁用 SSE2。
+    - hfile：休眠文件的名称（这一参数也会修改 sysctl 中的 kern.hibernatefile 变量）。
+    - io：I/O Kit 驱动调试位。设置为 0x00200000 （即 kIOLogSynchronous）时会使 IOLog() 函数同步执行。
+    - novmx=1：禁用 AltiVec。
+    - pcata=0：禁用板载 PC ATA 驱动器。
+    - pmsx=1：在 OS X 10.4.3 上启用实验性电源管理（PMS）。
+    - _router_ip=11.4.5.14：使用跨局域网内核调试时指定网关 IP。
+    - serial=1，启用串口调试。
+    - smbios=1：在 SMBIOS 驱动中启用详细的日志信息，仅限于 32 位机器。
+    - vmdx 和pmdx：内核启动时在内存中创建一个分区，参数格式为 base.size，其中 base 是对齐的内存地址、size 是内存页面大小的倍数。vmdx 指虚拟内存、pmdx 指物理内存。创建成功后将会被分别挂载在 dev/mdx 和 dev/emdx 下。
+    - -b：不执行 /etc/rc.boot。
+    - -l：日志中输出内存泄漏相关记录。
+    - srv=1：如果你在 X Servers 或 macOS Server 系统中使用这一参数，macOS 会修改内核的电源和网络参数，提升作为服务器的性能。
+    - nvram_paniclog：将 Kernel Panic 日志写入 NVRAM。
+    - acpi：启用 AppleACPIPlatform 调试。
+    - acpi_level：ACPI 调试等级。
+    - idlehalt=1：无视所有空闲进程、使 CPU 进入低功率模式。
+    - platform：platform=X86PC 强制禁用 ACPI 电源管理；platform=ACPI 强制启用 ACPI 电源管理。
+    - keepsyms=1：保留 KLD/Address-Symbol 翻译
+
 ```sh
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -156,7 +217,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - [Hazel](https://www.noodlesoft.com/):Automated Organization for Your Mac.
     - [Gemini](https://macpaw.com/gemini):The intelligent duplicate file finder
     - BTT(BetterTouchTool) 触控板手势增强
-    - htop:运行于 Linux 系统监控与进程管理软件，用于取代 Unix 下传统的 top。与 top 只提供最消耗资源的进程列表不同，htop 提供所有进程的列表，并且使用彩色标识出处理器、swap 和内存状态
     - CleanMyMac（需购买解说功能）
     - [Little Snitch 4](https://www.obdev.at/products/littlesnitch/index.html):makes these Internet connections visible and puts you back in control!
     - [Dropzone](https://aptonic.com/):makes it faster and easier to move and copy files, launch applications, upload to many different services, and more.
@@ -164,7 +224,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - [Fantastical 2](https://flexibits.com/fantastical):The calendar app 收费
     - [Hammerspoon](http://www.hammerspoon.org/): a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
     - SwitchHosts
-    - f.lux 屏幕颜色控制
     - manico
     - [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
     - [MrRio/vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. <http://parall.ax/vtop>
@@ -182,7 +241,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
         + control+option+command + 方向键右键 ： 使当前窗口占用当前屏幕右半部分
         + control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
         + control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
-    - [Spectacle](link):控制窗口
     - [chunkwm](https://koekeishiya.github.io/chunkwm/index.html):a tiling window manager for macOS
     - [onmyway133/FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
     - [sveinbjornt/Sloth](https://github.com/sveinbjornt/Sloth):Mac app that shows all open files and sockets in use by all running processes. Nice GUI for lsof. https://sveinbjorn.org/sloth
@@ -191,6 +249,8 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - [QSpace](link)一个国产软件，MacOS 系统的多视图文件管理器，支持很多特色功能。让你摆脱多窗口来回切换的繁琐，和拖拽时找不准目标的尴尬
     - [Ityscal](https://www.mowglii.com/itsycal/)  日历
     - [ sindresorhus / quick-look-plugins ](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
+    - TotalFinder - macOS 上最强的 Finder 增强软件
+    - uTools - 比 Alfred 更简洁的工作流
 * vpn
     - Tunnelblick_3.7.2_build_4850：点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
 * 设计
@@ -198,6 +258,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - Axure：原型工具
     - CmapTools：概念图
     - 截图
+    - Snipaste - 灵活的截图 + 贴图软件
 * 写作
     - Latex
     - Alternote(evernote简单客户端)
@@ -214,14 +275,16 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - [CodeTips/BaiduNetdiskPlugin-macOS](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~
 * 工具
     - [CheatSheet] 长按⌘键可以显示当前程序快捷键
-    - [flux](https://justgetflux.com/)
-    - [moom](https://manytricks.com/moom/)
+    - [flux](https://justgetflux.com/) 屏幕颜色控制
+    - [moom](https://manytricks.com/moom/)使用体验优异的窗口管理软件
+    - [Spectacle](link):控制窗口
     - [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
     - [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):essentially an IDE for automation
     - [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
     - [beaker](https://beakerbrowser.com/):Beaker is a peer-to-peer browser with tools to create and host websites.
     - [Helium](http://heliumfloats.com/):A floating browser window for OS X
     - Android file transfer
+    - SensibleSideButtons - 在 macOS 上使用鼠标上的前进后退按键
 * Pod
     - [insidegui/PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
 * Web开发
@@ -309,6 +372,10 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * Dropzone 就是这样一款，既能给你带来键盘上如同 Launch Center Pro 体验同时，也提供了通过鼠标拖拽这样的操作，实现鼠标操作的肌肉记忆的应用
 * [Here](https://here.app/)
 * [glushchenko/fsnotes](https://github.com/glushchenko/fsnotes):Notes manager for macOS/iOS
+* AutoSwitchInput - 自动切换输入法
+* Bartender 3 - 通知栏折叠工具 $15
+* Hidden Bar - 另一款通知栏折叠工具
+* eZip - 优秀的 macOS 压缩软件
 
 ### screensavers
 

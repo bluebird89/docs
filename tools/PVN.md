@@ -404,6 +404,7 @@ Socks 主机 127.0.0.1 7891
 * [Dreamacro / clash](https://github.com/Dreamacro/clash):A rule-based tunnel in Go.
   - `go get -u -v github.com/Dreamacro/clash`
 * [](https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt)
+*　KoolClash*
 
 ```
 #  /usr/share/applications/clash.desktop
