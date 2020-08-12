@@ -315,7 +315,6 @@ md5sum out11.jpg
 * [google/filament](https://github.com/google/filament):Filament is a real-time physically based rendering engine for Android, Windows, Linux, macOS and WASM/WebGL
 * [Gimp](https://www.gimp.org)
 * [muukii/Pixel](https://github.com/muukii/Pixel):🎨🖼 An image editor and engine using CoreImage
-
 * 看图
     - FastStone Image Viewer
 * 截图
@@ -335,7 +334,9 @@ md5sum out11.jpg
 * [Find The Best Free Stock Photos For Your Project](https://www.mailomix.com/products/stock-photo-search/)
 * [ImageOptim/ImageOptim](https://github.com/ImageOptim/ImageOptim):GUI image optimizer for Mac https://imageoptim.com/mac
 * [illuminations](https://illuminations.nctm.org):在线画图网站
-* [uPic](link): Mac 图床 (文件) 上传客户端，它可以将图片、各种文件上传到配置好的指定对象存储中，然后即时生成可供互联网访问的文件 URL,支持图床： smms、 又拍云 USS、七牛云 KODO、 阿里云 OSS、 腾讯云 COS、微博、Github、 Gitee、 Amazon S3、自定义上传接口
+* 图床
+    - [uPic](link): Mac 图床 (文件) 上传客户端，它可以将图片、各种文件上传到配置好的指定对象存储中，然后即时生成可供互联网访问的文件 URL,支持图床： smms、 又拍云 USS、七牛云 KODO、 阿里云 OSS、 腾讯云 COS、微博、Github、 Gitee、 Amazon S3、自定义上传接口
+    - PicGo
 * Inpaint:图片去水印
 
 ## 参考

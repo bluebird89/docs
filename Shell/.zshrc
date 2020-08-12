@@ -1,3 +1,16 @@
+
+# .zshrc 性能分析
+zmodload zsh/datetime
+setopt PROMPT_SUBST
+PS4='+$EPOCHREALTIME %N:%i> '
+
+logfile=$(mktemp zsh_profile.7Pw1Ny0G)
+echo "Logging to $logfile"
+exec 3>&2 2>$logfile
+
+setopt XTRACE
+# .zshrc 性能分析
+
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
@@ -233,6 +246,62 @@ if [[ ! -d ~/.zplug ]];then
   git clone https://github.com/zplug/zplug ~/.zplug
 fi
 
+sukka_lazyload_add_command() {
+    eval "$1() { \
+        unfunction $1 \
+        _sukka_lazyload__command_$1 \
+        $1 \$@ \
+    }"
+}
+
+sukka_lazyload_add_completion() {
+    local comp_
+    eval "${comp_name}() { \
+        compdef -d $1; \
+        _sukka_lazyload_completion_$1; \
+    }"
+    compdef $comp_name $1
+}
+
+sukka_lazyload__command_pyenv() {
+
+  eval "$(command pyenv init -)"
+}
+_sukka_lazyload__compfunc_pyenv() {
+
+  source "$(brew --prefix pyenv)/completions/pyenv.zsh"
+}
+
+sukka_lazyload_add_command pyenv
+sukka_lazyload_add_completion pyenv
+
+_sukka_lazyload__command_fuck() {
+
+  eval $(thefuck --alias)
+}
+
+sukka_lazyload_add_command fuck
+
+_sukka_lazyload__completion_hexo() {
+
+  eval $(hexo --completion=zsh)
+}
+
+sukka_lazyload_add_completion hexo
+
+lg()
+{
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+
+    lazygit "$@"
+
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+}
+
+
 source ~/.zplug/init.zsh
 zplug "plugins/sudo", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
@@ -349,3 +418,9 @@ if ! zplug check --verbose; then
 fi
 # > zplug 安装
 zplug load
+
+
+# .zshrc 性能分析
+unsetopt XTRACE
+exec 2>&3 3>&-
+# .zshrc 性能分析

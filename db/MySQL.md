@@ -1379,6 +1379,9 @@ select id,class_name,teacher_id from class_teacher where teacher_id=30; #  2 初
         + COMMIT 或 ROLLBACK 并不能释放用 LOCK TABLES 加的表级锁，必须用UNLOCK TABLES 释放表锁
     - 场景
         + 同时取得所有涉及到表的锁，并且 MySQL 不支持锁升级
+* GAP lock (间隙索引，针对非唯一索引)
+    - 事物commit 未完成时，会利用行锁锁住满足where条件的行，并且对满足where条件的行的两边数据加上间隙锁。
+    - 这时候另一个事物操作前面已经上了间隙锁的行就会Lock wait timeout exceeded
 * 建议
     - 尽量使用较低的隔离级别
     - 精心设计索引， 并尽量使用索引访问数据， 使加锁更精确， 从而减少锁冲突的机会
