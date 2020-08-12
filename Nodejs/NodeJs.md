@@ -15,7 +15,8 @@ Node.js JavaScript runtime ✨🐢🚀✨ <https://nodejs.org>
 
 ## [安装](https://github.com/nodesource/distributions)
 
-* [ pnpm / pnpm ](https://github.com/pnpm/pnpm): packagerocket Fast, disk space efficient package manager https://pnpm.js.org
+* [tj/n](https://github.com/tj/n):Node version management
+* [creationix/nvm](https://github.com/creationix/nvm):Node Version Manager - Simple bash script to manage multiple active node.js versions
 
 ```sh
 # ubuntu
@@ -80,22 +81,79 @@ nvm ls                  # list installed Node version
 nvm use node            # use stable as current version
 nvm ls-remote           # list all the Node versions you can install
 nvm alias default node # set the installed stable version as the default Node
+```
 
-sudo npm cache clean -f # 清除node.js的cache
-sudo npm install -g n # 安装 n 工具，这个工具是专门用来管理node.js版本
-sudo n stable
-sudo npm install npm@latest -g
+# [npm (node package manager)](https://github.com/npm/npm)
+
+a package manager for javascript <http://www.npmjs.com/>
+
+* Node的包描述文件是一个JSON文件，用于描述非代码相关的信息。而NPM则是一个根据包规范来提供Node服务的Node包管理器。它解决了依赖包安装的问题，却面临着两个新的问题：
+    - 安装的时候无法保证速度和一致性。
+    - 安全问题，因为NPM安装时允许运行代码。
+* 大家都把自己开发的模块打包后放到npm官网上，如果要使用，直接通过npm安装就可以直接用，不用管代码存在哪，应该从哪下载。
+* npm可以根据依赖关系，把所有依赖的包都下载下来并管理起来。
+* [ pnpm / pnpm ](https://github.com/pnpm/pnpm):packagerocket Fast, disk space efficient package manager https://pnpm.js.org
+* Packages
+    - [rlidwka/sinopia](https://github.com/rlidwka/sinopia):Private npm repository server
+    - [request/request](https://github.com/request/request):🏊🏾 Simplified HTTP request client.
+    - [ksky521/nodeppt](https://github.com/ksky521/nodePPT):This is probably the best web presentation tool so far! http://js8.in/nodeppt
+* 配置文件`package.json`
+    - scripts：script会安装一定顺序寻找命令对应位置，本地的node_modules/.bin路径就在这个寻找清单中.`npm run {script name}`,将构建命令提到外部指令来
+
+```sh
+# 镜像加速设置
+npm -v
+npm config set registry https://registry.npm.taobao.org --global
+npm config set registry "http://registry.npmjs.org/"
+npm config set registry http://registry.cnpmjs.org # Unexpected end of JSON input while parsing near '...p":false,"directories'
+npm root -g
+
+npm config set disturl https://npm.taobao.org/dist --global
+
+npm config set proxy null
+npm config set proxy http://server:port
+npm config set https-proxy http://server:port
+
+# 镜像配置 NPM registry manager
+nrm ls
+    npm ---- https://registry.npmjs.org/
+    cnpm --- http://r.cnpmjs.org/
+    taobao - http://registry.npm.taobao.org/
+    eu ----- http://registry.npmjs.eu/
+    au ----- http://registry.npmjs.org.au/
+    sl ----- http://npm.strongloop.com/
+    nj ----- https://registry.nodejitsu.com/
+    pt ----- http://registry.npmjs.pt/
+nrm add <registry> <url> [home]
+nrm del <registry>
+nrm test
+nrm use taobao
+
+npm list moduleName               ##List all locally installed packages
+npm list -a|g             ##List all globally installed packages
+npm list oauth # ind the version of a specific package
+npm list --depth=0
+
+npm search express
+
+npm outdated --depth=0             ##For locally installed packages
+npm outdated -g --depth=0   ##For  globally installed packages
+
+npm init  # 创建一个npm项目,配置项目信息，在package.json文件
+npm ls
 
 npm install <package> # Install locally
-npm install -g <package> # Install globally
+npm install|i -g <package> cnpm --registry=https://registry.npm.taobao.org # Install globally
 npm install <package> --save # To install a package and save it in your project's package.json file
-npm list [-g]
-npm outdated [-g]
+npm install npm@latest -g
+
+sudo npm cache clean -f # 清除node.js的cache
+
+npm install -g n  安装 n 工具，这个工具是专门用来管理node.js版本
+n stable
+
 npm update [-g] [<package>]
 npm uninstall [-g] <package>
-
-npm install -g n  # node版本更新
-n stable
 
 # Error: EACCES: permission denied, access '/usr/lib/node_modules'
 mkdir ~/.npm-global
@@ -103,33 +161,45 @@ npm config set prefix '~/.npm-global'
 # ~/.profile
 export PATH=~/.npm-global/bin:$PATH
 source ~/.profile
-sudo npm install -g jshint
+
+npm install -g pnpm
+curl -L https://raw.githubusercontent.com/pnpm/self-installer/master/install.js | node
+# No write access to the found global executable directories
+pnpm add -g pnpm
 ```
 
-## 配置
+## [yarnpkg/yarn](https://github.com/yarnpkg/yarn)
+
+Fast, reliable, and secure dependency management. <https://yarnpkg.com>
+
+Facebook提供的替代npm的工具，可以加速node模块的下载 与react-native-cli（React Native的命令行工具用于执行创建、初始化、更新项目、运行打包服务（packager）等任务）。快速(缓存它下载的每个包，所以不需要重复下载)、可靠(每个安装包的代码执行前使用校验码验证包的完整性)、安全的依赖管理(用一个格式详尽但简洁的 lockfile 和一个精确的算法来安装)
+
+* 开始新项目:yarn init 打开一个交互式表单天剑项目信息,生成package.json信息文件
+* 添加依赖包: yarn add [package] yarn add [package]@[version] 1.2.3 ^1.0.0 yarn add [package]@[tag]
+* 分别添加到 devDependencies、peerDependencies 和 optionalDependencies： yarn add [package] --dev yarn add [package] --peer yarn add [package] --optional
+* 升级依赖包: yarn upgrade [package] yarn upgrade [package]@[version] yarn upgrade [package]@[tag]
+* 移除依赖包: yarn remove [package]
+* 安装项目的全部依赖:yarn || yarn install --flat 安装一个包的单一版本 --force 强制重新下载所有包 --production 只安装生产环境依赖
+* [中文文档](https://yarnpkg.com/zh-Hans/) https://yarn.bootcss.com/docs/
 
 ```sh
-nrm ls
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update && sudo apt-get install yarn
 
-npm ---- https://registry.npmjs.org/
-cnpm --- http://r.cnpmjs.org/
-taobao - http://registry.npm.taobao.org/
-eu ----- http://registry.npmjs.eu/
-au ----- http://registry.npmjs.org.au/
-sl ----- http://npm.strongloop.com/
-nj ----- https://registry.nodejitsu.com/
-pt ----- http://registry.npmjs.pt/
+npm install -g yarn
+brew install yarn
 
-nrm add <registry> <url> [home]
-nrm del <registry>
-nrm test
-nrm use taobao
+### 镜像源配置
+yarn config set registry https://registry.npm.taobao.org --global
+yarn config set disturl https://npm.taobao.org/dist --global
 
-npm config set registry "http://registry.npmjs.org/"
-npm config set registry https://registry.npm.taobao.org
-
-npm config set proxy http://server:port
-npm config set https-proxy http://server:port
+## The engine "node" is incompatible with this module. Expected version ">=4 <=9".
+ yarn config set ignore-engines true
+## Failed to fetch https://dl.yarnpkg.com/debian/dists/stable/InRelease  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY E074D16EB6FF4DE3
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+## Yarn, node-gyp rebuild compile error, node_modules/fsevents: Command failed
+sudo rm -r node_modules && rm yarn.lock && yarn install
 ```
 
 ## 环境
@@ -756,19 +826,20 @@ yarn install node-sass
 
 ## 工具
 
-* [tj/n](https://github.com/tj/n):Node version management
 * main
   - [nodesource/distributions](https://github.com/nodesource/distributions):NodeSource Node.js Binary Distributions
+  - [Dist](http://nodejs.org/dist/)
+  - [motdotla/dotenv](https://github.com/motdotla/dotenv):Loads environment variables from .env for nodejs projects.
 * 框架
     - [fastify/fastify](https://github.com/fastify/fastify) Fast and low overhead web framework, for Node.js https://www.fastify.io/
-* 三方库
-  - [Dist](http://nodejs.org/dist/)
+    - [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications
+    - [balderdashy/sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js https://sailsjs.com
+    - [nestjs/nest](https://github.com/nestjs/nest):A progressive Node.js framework for building efficient, scalable, and enterprise-grade server-side applications on top of TypeScript & JavaScript (ES6, ES7, ES8) rocket https://nestjs.com/
+    - [NodeBB/NodeBB](https://github.com/NodeBB/NodeBB):Node.js based forum software built for the modern web https://nodebb.org
 * Compiler
   - [zeit/ncc](https://github.com/zeit/ncc):Node.js Compiler Collection
 * Weibo
   - [node-modules/weibo](https://github.com/node-modules/weibo):weibo nodejs sdk http://github.com/fengmk2/node-weibo
-* 输入
-  - [sindresorhus/ow](https://github.com/sindresorhus/ow):Function argument validation for humans
 * 缓存
   - [isaacs/node-lru-cache](https://github.com/isaacs/node-lru-cache)
 * Error
@@ -776,12 +847,7 @@ yarn install node-sass
 * Proxy
   - [OptimalBits/redbird](https://github.com/OptimalBits/redbird):A modern reverse proxy for node
   - [alibaba/anyproxy](https://github.com/alibaba/anyproxy):A fully configurable http/https proxy in NodeJS http://anyproxy.io
-* 框架
-  - [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications
-  - [balderdashy/sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js https://sailsjs.com
-  - [nestjs/nest](https://github.com/nestjs/nest):A progressive Node.js framework for building efficient, scalable, and enterprise-grade server-side applications on top of TypeScript & JavaScript (ES6, ES7, ES8) rocket https://nestjs.com/
-  - [NodeBB/NodeBB](https://github.com/NodeBB/NodeBB):Node.js based forum software built for the modern web https://nodebb.org
-    - [ fastify / fastify ](https://github.com/fastify/fastify):Fast and low overhead web framework, for Node.js https://www.fastify.io/
+    - [chimurai/http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware):⚡️ The one-liner node.js http-proxy middleware for connect, express and browser-sync
 * db
   - [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis):redis client for node http://redis.js.org/
   - [luin/ioredis](https://github.com/luin/ioredis):🚀A robust, performance-focused and full-featured Redis client for Node.js.
@@ -789,6 +855,7 @@ yarn install node-sass
   - [sequelize/sequelize](https://github.com/sequelize/sequelize):An easy-to-use multi SQL dialect ORM for Node.js https://sequelize.org
 * HTTP
     - [sindresorhus / got](https://github.com/sindresorhus/got):🌐 Human-friendly and powerful HTTP request library for Node.js
+    - [tj/co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)
 * Logger
   - [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
   - [expressjs/morgan](https://github.com/expressjs/morgan):HTTP request logger middleware for node.js
@@ -821,16 +888,14 @@ yarn install node-sass
   - [ getgauge / taiko ](https://github.com/getgauge/taiko):A node.js library for testing modern web applications https://taiko.dev
   - [ mcollina / autocannon ](https://github.com/mcollina/autocannon):fast HTTP/1.1 benchmarking tool written in Node.js
   - [ octalmage / robotjs ](https://github.com/octalmage/robotjs):Node.js Desktop Automation. http://robotjs.io/
-* [tj/co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)
+  - [Marak/faker.js](https://github.com/Marak/faker.js):generate massive amounts of realistic fake data in Node.js and the browser
 * [Unitech / pm2](https://github.com/Unitech/pm2):Node.js Production Process Manager with a built-in Load Balancer. https://pm2.io
 * date
     - [](https://github.com/date-fns/date-fns): hourglass_flowing_sand Modern JavaScript date utility library hourglass
-
 * [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 * [noble/bleno](https://github.com/noble/bleno):A Node.js module for implementing BLE (Bluetooth Low Energy) peripherals
 * [octalmage/robotjs](https://github.com/octalmage/robotjs):Node.js Desktop Automation. http://robotjs.io
-* [sveltejs/svelte](https://github.com/sveltejs/svelte):Cybernetically enhanced web apps https://svelte.dev
 
 ## reference
 

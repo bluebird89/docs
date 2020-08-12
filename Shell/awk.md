@@ -1,4 +1,3 @@
-
 ## AWK
 
 * 命名得自于三个创始人姓别的首字母
@@ -6,7 +5,6 @@
 * 在linux之上使用的是GNU awk简称gawk pattern scanning and processing language：（模式扫描和处理语言），并且gawk其实就是awk的链接文件，gawk是一种过程式编程语言，支持条件判断、数组、循环等各种编程语言中所有可以使用的功能
 * 同sed命令类似，只不过sed擅长取行，awk命令擅长取列
 * 语法
-
   - 主程序部分使用单引号‘包围
   - 列开始的index是0
   - 格式：总的来说就最后一个

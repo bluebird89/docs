@@ -72,3 +72,8 @@ spl_autoload_register('autoload');
 * psr0 中类名的下划线将会转化为目录层级和相应的命名空间，如一个叫 Swift_mail 的类名存在于./Swift/Mail.php 文件中，并且命名空间为当前命名空间\Swift
 
 ### PSR-14 compatible event dispatcher provides an ability to dispatch events and listen to events dispatched
+
+## 实践
+
+* 通过配置实现根命名空间与指定目录的映射，进而在创建 PHP 类时通过 PSR-4 自动载入标准根据类所在的目录路径生成对应的命名空间
+* 通过外部 PHP Code Sniffer 工具对代码进行自动修复从而使其遵循 PSR-2 编码风格，提升工作效率

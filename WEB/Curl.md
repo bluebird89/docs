@@ -93,10 +93,6 @@ curl localhost:3000/api/json -X POST -d @data.json --header "Content-Type: appli
     - ping
     - network timeout
 
-## tool
-
-* [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie)Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc. <https://httpie.org> <https://twitter.com/clihttp>
-
 ## 参考
 
 * [文档](https://ec.haxx.se/)

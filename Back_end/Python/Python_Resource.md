@@ -230,7 +230,6 @@ brew install pipenv
   - cookiecutter：从 cookiecutters（项目模板）创建项目的一个命令行工具。[官网](https://github.com/audreyr/cookiecutter)
   - doitlive：一个用来在终端中进行现场演示的工具。[官网](https://github.com/sloria/doitlive)
   - howdoi：通过命令行获取即时的编程问题解答。[官网](https://github.com/gleitz/howdoi)
-  - httpie：一个命令行HTTP 客户端，cURL 的替代品，易用性更好。[官网](https://github.com/jkbrzt/httpie)
   - PathPicker：从bash输出中选出文件。[官网](https://github.com/facebook/PathPicker)
   - percol：向UNIX shell 传统管道概念中加入交互式选择功能。[官网](https://github.com/mooz/percol)
   - SAWS：一个加强版的 AWS 命令行。[官网](https://github.com/donnemartin/saws)
