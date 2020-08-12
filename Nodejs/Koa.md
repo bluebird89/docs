@@ -13,7 +13,7 @@ koa是Express的下一代基于Node.js的web框架.新版Node.js开始支持ES6�
 * 首先用await next();处理下一个异步函数，然后，设置response的Content-Type和内容。
 * 由async标记的函数称为异步函数，在异步函数中，可以用await调用另一个异步函数
 * 每收到一个http请求，koa就会调用通过app.use()注册的async函数，并传入ctx和next参数。
-* 要调用await next():koa把很多async函数组成一个处理链，每个async函数都可以做一些自己的事情，然后用await next()来调用下一个async函数。我们把每个async函数称为middleware，这些middleware可以组合起来，完成很多有用的功能。
+* 要调用await next():koa把很多async函数组成一个处理链，每个async函数都可以做一些自己的事情，然后用 await next()来调用下一个async函数。我们把每个async函数称为middleware，这些middleware可以组合起来，完成很多有用的功能。
 
 ```js
 var koa = require('koa');
@@ -68,10 +68,10 @@ serve
 
 ## 工具
 
-- [chentsulin/koa-graphql](https://github.com/chentsulin/koa-graphql):Create a GraphQL HTTP server with Koa.
+* [chentsulin/koa-graphql](https://github.com/chentsulin/koa-graphql):Create a GraphQL HTTP server with Koa.
 
 ## 教程
 
-- [17koa/koa-generator-examples](https://github.com/17koa/koa-generator-examples):
-- [koajs/workshop](https://github.com/koajs/workshop):Koa Training Workshop
-- [koajs/examples](https://github.com/koajs/examples):Example Koa apps
+* [17koa/koa-generator-examples](https://github.com/17koa/koa-generator-examples):
+* [koajs/workshop](https://github.com/koajs/workshop):Koa Training Workshop
+* [koajs/examples](https://github.com/koajs/examples):Example Koa apps

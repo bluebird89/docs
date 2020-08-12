@@ -419,6 +419,11 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
 * 下载
   - `sudo apt-get install ktorrent`
   - `sudo apt-get install amule`
+* xclip:在终端窗口中运行的命令与 Linux 图形桌面环境中的剪贴板之间的管道
+  - `xclip file_name` 使用鼠标中键粘贴
+  - `xclip -sel clip file_name` 使用右键单击菜单或按 Ctrl+V 粘贴
+  - `tail -n 30 logfile.log | xclip -sel clip`
+  - `pandoc -t html file.md | xclip -sel clip`
 
 ```sh
 # fix ubuntu

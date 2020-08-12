@@ -1166,7 +1166,6 @@ rg 'fast\w+' README.md
     - [ncdu](https;//dev.yorhel.nl/ncdu)
     - [nnn](https://github.com/jarun/nnn)
 * [asciinema](https://asciinema.org/)和 [svg-trem](https://github.com/marionebl/svg-term-cli) 如果想把的命令行操作建录制成一个 SVG 动图
-* [httpie](https://github.com/jakubroztocil/httpie) 是一个可以用来替代 curl 和 wget 的 http 客户端，httpie 支持 json 和语法高亮，可以使用简单的语法进行 http 访问: http -v github.com
 * [Taskbook](https://github.com/klaussinani/taskbook) 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级
 * [sshrc](https://github.com/Russell91/sshrc ) 在登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置
 * 搜索

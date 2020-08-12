@@ -32,6 +32,19 @@ generate:Alt+ins
   -  自定义搜索作用域
 *  Command + Shift + A 调出 Action 导航界面，在输入框输入 templates，在下拉列表中选中「File and Code Templates」
 *  Option 键（Windows 系统是 Alt 键:锚定多个光标的方式同时编辑多处文本,  Ctrl + G
+*  debug
+  -  F7:step into 单步执行
+  -  在 variable  添加 Watch
+* Xdebug 进行断点调试
+  - 配置:以便可以接收到服务端的远程调试连接，首先在 Preferences | Languages & Frameworks | PHP | Debug 中配置 Debug 端口与 Xdebug 扩展配置保持一致
+  - 在 Preferences | Languages & Frameworks | PHP | Servers 中新增服务器配置（域名和端口与对应的 PHP Web 应用保持一致即可）
+  - Run 下拉菜单中点击「Start Listening for PHP Debug Connections」启动监听
+  - f8
+* Preferences | Directories:根命名空间与指定目录的映射
+* PHP CS Fixer批量修正
+  - Preferences | Tools | External Tools 界面点击「+」
+  - fix $FileDir$ --rules=@PSR2
+  - $ProjectFileDir$
 
 ## 快捷键
 
