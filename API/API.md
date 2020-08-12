@@ -580,7 +580,7 @@ if __name__ == '__main__':
     app.serve('127.0.0.1', 5000, debug=True)
 ```
 
-### apidoc
+### [apidoc](http://apidocjs.com/)
 
 * 每次导出接口文档都必须要让apidoc读取到apidoc.json文件(如果未添加配置文件，导出报错)，可以在项目的根目录下添加apidoc.json文件
 * 项目中使用了package.json文件(例如:node.js工程)，可以将apidoc.json文件中的所有配置信息放到package.json文件中的apidoc参数中

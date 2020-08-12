@@ -63,11 +63,26 @@ http://www.runoob.com/xpath/xpath-tutorial.html
 * [waditu/tushare](https://github.com/waditu/tushare):TuShare is a utility for crawling historical data of China stocks
 * [MontFerret/ferret](https://github.com/MontFerret/ferret):Declarative web scraping
 * [modood/Administrative-divisions-of-China](https://github.com/modood/Administrative-divisions-of-China):中华人民共和国行政区划：省级（省份直辖市自治区）、 地级（城市）、 县级（区县）、 乡级（乡镇街道）、 村级（村委会居委会） ，中国省市区镇村二级三级四级五级联动地址数据 Node.js 爬虫。
-* [XuefengHuang/lianjia-scrawler](https://github.com/XuefengHuang/lianjia-scrawler):链家二手房租房在线数据，存量房交易服务平台数据，详细数据分析教程 http://www.ershoufangdata.com
 * [wonderfulsuccess/weixin_crawler](https://github.com/wonderfulsuccess/weixin_crawler):高效微信公众号历史文章和阅读数据爬虫powered by scrapy
 * [ hardikvasa / google-images-download ](https://github.com/hardikvasa/google-images-download):Python Script to download hundreds of images from 'Google Images'. It is a ready-to-run code!
 * [Jack-Cherish / python-spider ](https://github.com/Jack-Cherish/python-spider/tree/master/2020):
 rainbowPython3网络爬虫实战：淘宝、京东、网易云、B站、12306、抖音、笔趣阁、漫画小说下载、音乐电影下载等 https://cuijiahua.com/blog/spider/
+
+##  [XuefengHuang/lianjia-scrawler](https://github.com/XuefengHuang/lianjia-scrawler)
+
+链家二手房租房在线数据，存量房交易服务平台数据，详细数据分析教程 http://www.ershoufangdata.com
+
+```sh
+1. git clone https://github.com/XuefengHuang/lianjia-scrawler.git
+2. cd lianjia-scrawler
+# If you'd like not to use [virtualenv](https://virtualenv.pypa.io/en/stable/), please skip step 3 and 4.
+3. virtualenv lianjia
+4. source lianjia/bin/activate
+5. pip install -r requirements.txt
+6. python scrawl.py
+
+# ModuleNotFoundError: No module named 'ConfigParser'
+```
 
 ## 工具
 

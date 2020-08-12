@@ -1290,6 +1290,16 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 * Agile（敏捷）这个术语，但它比 Git 或 Redux 被提及的频率更高，这说明 JS 开发者们除了要获得开发岗位必须的硬技能，软技能同样不可忽视。UX 也是如此
 * 作为一个前端开发者，你需要知道如何在技术层面为用户提供更流畅的体验，而不是在设计层面。
 
+## [facebookexperimental / rome](https://github.com/facebookexperimental/rome)
+
+The Rome Frontend Toolchain. A linter, compiler, bundler, and more for JavaScript, TypeScript, HTML, Markdown, and CSS. https://romejs.dev
+
+```sh
+npm install rome
+rome init
+rome check
+```
+
 ## 项目
 
 * [bailicangdu/node-elm](https://github.com/bailicangdu/node-elm):基于 node.js + Mongodb 构建的后台系统
@@ -1330,10 +1340,8 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 ## 资源
 
 * [Marionette](https://marionettejs.com/)
-* [Foundation](http://foundation.zurb.com/)
 * [Meteor](https://www.meteor.com/)
-* 环境
-  - [motdotla/dotenv](https://github.com/motdotla/dotenv):Loads environment variables from .env for nodejs projects.
+
 * 框架
   - [Requarks/wiki](https://github.com/Requarks/wiki):Wiki.js | A modern, lightweight and powerful wiki app built on NodeJS, Git and Markdown https://wiki.js.org
   - [tj/should.js](https://github.com/tj/should.js):BDD style assertions for node.js -- test framework agnostic
@@ -1341,7 +1349,7 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
   - [retejs/rete](https://github.com/retejs/rete):JavaScript framework for visual programming and creating node editor https://rete.js.org
   - [Tencent/omi](https://github.com/Tencent/omi):Next generation web framework in 4KB javascript(Web Components + JSX + Proxy + Path Updating) http://omijs.org
   - https://github.com/knockout/knockout
-  - [Foundation](https://get.foundation/): The most advanced responsive front-end framework in the world.
+  - [Foundation](https://get.foundation/): The most advanced responsive front-end framework in the world. <http://foundation.zurb.com/>
 * 包管理
   - [JedWatson/classnames](https://github.com/JedWatson/classnames):A simple javascript utility for conditionally joining classNames together
   - [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
@@ -1403,7 +1411,8 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
   - [Popmotion/popmotion](https://github.com/Popmotion/popmotion):Simple animation libraries for delightful user interfaces https://popmotion.io
 * Canvas
   - [spritejs/spritejs](https://github.com/spritejs/spritejs):A cross-platform lightweight 2D render object model. http://spritejs.org
-* 插件
+  - [blueimp/JavaScript-Canvas-to-Blob](https://github.com/blueimp/JavaScript-Canvas-to-Blob):JavaScript Canvas to Blob is a function to convert canvas elements into Blob objects.
+* dialog
   - [zewish/rmodal.js](https://github.com/zewish/rmodal.js):A simple 1.2 KB modal dialog with no dependencies https://rmodal.js.org/
 * trace
   - [stacktracejs/stacktrace.js](https://github.com/stacktracejs/stacktrace.js):Generate, parse, and enhance JavaScript stack traces in all web browsers https://www.stacktracejs.com/
@@ -1429,6 +1438,7 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 * Cli
   - [nexe/nexe](https://github.com/nexe/nexe):🎉 create a single executable out of your node.js apps
   - [chalk/chalk](https://github.com/chalk/chalk):🖍 Terminal string styling done right
+  - [SBoudrias/Inquirer.js](https://github.com/SBoudrias/Inquirer.js):A collection of common interactive command line user interfaces.
 * HTTP
   - [visionmedia/superagent](https://github.com/visionmedia/superagent):Ajax with less suck - (and node.js HTTP client to match) http://visionmedia.github.io/superagent/
   - [alibaba/anyproxy](https://github.com/alibaba/anyproxy):A fully configurable http/https proxy in NodeJS http://anyproxy.io
@@ -1448,6 +1458,7 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
   - [jaywcjlove/validator.js](https://github.com/jaywcjlove/validator.js):⁉️轻量级的JavaScript表单验证，字符串验证。没有依赖，支持UMD，~3kb。 https://git.io/validatorjs
   - [yiminghe/async-validator](https://github.com/yiminghe/async-validator):validate form asynchronous
   - [imbrn/v8n](https://github.com/imbrn/v8n):☑️ JavaScript fluent validation library.
+  - [sindresorhus/ow](https://github.com/sindresorhus/ow):Function argument validation for humans
 * 网页
   - [jiahaog/nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
   - [palmerhq/the-platform](https://github.com/palmerhq/the-platform):Web. Components.
@@ -1455,6 +1466,7 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
   - [bfirsh/jsnes](https://github.com/bfirsh/jsnes):A JavaScript NES emulator. https://jsnes.org
 * 播放器
   - [jwplayer/jwplayer](https://github.com/jwplayer/jwplayer):JW Player is the world's most popular embeddable media player. https://developer.jwplayer.com/
+  - [videojs/video.js](https://github.com/videojs/video.js):Video.js - open source HTML5 & Flash video player http://www.videojs.com
 * css
   - [webpack-contrib/mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin):Lightweight CSS extraction plugin
 * 写作
@@ -1482,22 +1494,17 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
   - [nodeca/js-yaml](https://github.com/nodeca/js-yaml):JavaScript YAML parser and dumper. Very fast. http://nodeca.github.com/js-yaml/
 * DOM
   - [jsdom/jsdom](https://github.com/jsdom/jsdom):A JavaScript implementation of the WHATWG DOM and HTML standards, for use with node.js
-* 视频
-  - [videojs/video.js](https://github.com/videojs/video.js):Video.js - open source HTML5 & Flash video player http://www.videojs.com
 * 文件
   - [mholt/PapaParse](https://github.com/mholt/PapaParse):Fast and powerful CSV (delimited text) parser that gracefully handles large files and malformed input http://PapaParse.com
   - [jprichardson/node-fs-extra](https://github.com/jprichardson/node-fs-extra):Node.js: extra methods for the fs object like copy(), remove(), mkdirs()
 * qrcode
   - [kciter/qart.js](https://github.com/kciter/qart.js):Generate artistic QR code. 🎨 https://kciter.github.io/qart.js/
+  - [soldair/node-qrcode](https://github.com/soldair/node-qrcode):qr code generator
 * 正则
   - [gskinner/regexr](https://github.com/gskinner/regexr):RegExr is a HTML/JS based tool for creating, testing, and learning about Regular Expressions. http://regexr.com/
 * logger
   - [klauscfhq/signale](https://github.com/klauscfhq/signale):👋 Hackable console logger
   - [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
-* 测试
-  - [intuit/karate](https://github.com/intuit/karate):Web-Services Testing Made Simple
-  - [minimaxir/big-list-of-naughty-strings](https://github.com/minimaxir/big-list-of-naughty-strings):The Big List of Naughty Strings is a list of strings which have a high probability of causing issues when used as user-input data.
-* i18n
 * Parser
     - [acornjs/acorn](https://github.com/acornjs/acorn):A small, fast, JavaScript-based JavaScript parser
 * debounce
@@ -1517,58 +1524,6 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
     - [origamitower/folktale](https://github.com/origamitower/folktale):A standard library for functional programming in JavaScript https://folktale.origamitower.com/
 * git
     - [isomorphic-git/isomorphic-git](https://github.com/isomorphic-git/isomorphic-git):A pure JavaScript implementation of git for node and browsers! https://isomorphic-git.org/
-* 机器学习
-  - [junku901/machine_learning](https://github.com/junku901/machine_learning):Machine learning library for Node.js http://joonku.com/project/machine_learning
-  - [janhuenermann/neurojs](https://github.com/janhuenermann/neurojs):A javascript deep learning and reinforcement learning library. https://janhuenermann.com/projects/learning-to-drive
-  - [dmotz/thing-translator](https://github.com/dmotz/thing-translator):Point your camera at things to hear how to say them in a different language https://thing-translator.appspot.com/
-  - [karpathy/convnetjs](https://github.com/karpathy/convnetjs):Deep Learning in Javascript. Train Convolutional Neural Networks (or ordinary ones) in your browser.
-  - [cazala/synaptic](https://github.com/cazala/synaptic):architecture-free neural network library for node.js and the browser http://caza.la/synaptic
-  - [BrainJS/brain.js](https://github.com/BrainJS/brain.js):🤖 Neural networks in JavaScript http://brain.js.org
-  - [xviniette/FlappyLearning](https://github.com/xviniette/FlappyLearning):Program learning to play Flappy Bird by machine learning (Neuroevolution)http://xviniette.github.io/FlappyLearning/
-  - [tensorflow/playground](https://github.com/tensorflow/playground):Play with neural networks! http://playground.tensorflow.org
-  - [deepforge-dev/deepforge](https://github.com/deepforge-dev/deepforge):A modern development environment for deep learning http://deepforge.org
-
-* [tj/n](https://github.com/tj/n):Node version management
-* [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
-* [sequelize/sequelize](https://github.com/sequelize/sequelize):An easy-to-use multi SQL dialect ORM for Node.js <http://docs.sequelizejs.com>
-* [creationix/nvm](https://github.com/creationix/nvm):Node Version Manager - Simple bash script to manage multiple active node.js versions
-* [caolan/async](https://github.com/caolan/async):Async utilities for node and the browser <http://caolan.github.io/async/>
-* [tj/dox](https://github.com/tj/dox):JavaScript documentation generator for node using markdown and jsdoc
-* [tj/should.js](https://github.com/tj/should.js):BDD style assertions for node.js -- test framework agnostic
-* [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
-* [tldr-pages/tldr](https://github.com/tldr-pages/tldr):Simplified and community-driven man pages http://tldr-pages.github.io/
-* [mapbox/flamebearer](https://github.com/mapbox/flamebearer):Blazing fast flame graph tool for V8 and Node 🔥
-* [hapijs/hapi](https://github.com/hapijs/hapi):Server Framework for Node.js http://hapijs.com
-* [fgnass/spin.js](https://github.com/fgnass/spin.js):A spinning activity indicator http://spin.js.org
-* [tj/co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)
-* [nodejs/docker-node](https://github.com/nodejs/docker-node):Official Docker Image for Node.js 🐳 🐢 🚀 https://hub.docker.com/_/node/
-* [systemjs/systemjs](https://github.com/systemjs/systemjs):Dynamic ES module loader
-* [soldair/node-qrcode](https://github.com/soldair/node-qrcode):qr code generator
-* [github/fetch](https://github.com/github/fetch):A window.fetch JavaScript polyfill. http://github.github.io/fetch/
-* [FezVrasta/popper.js](https://github.com/FezVrasta/popper.js):A kickass library to manage your poppers https://popper.js.org
-* [zeit/pkg](https://github.com/zeit/pkg):Package your Node.js project into an executable https://npmjs.com/pkg
-* [kpdecker/jsdiff](https://github.com/kpdecker/jsdiff):A javascript text differencing implementation.
-* [t4t5/sweetalert](https://github.com/t4t5/sweetalert):A beautiful replacement for JavaScript's "alert" https://sweetalert.js.org
-* [Modernizr/Modernizr](https://github.com/Modernizr/Modernizr):Modernizr is a JavaScript library that detects HTML5 and CSS3 features in the user’s browser. https://modernizr.com
-* [mozilla-neutrino/neutrino-dev](https://github.com/mozilla-neutrino/neutrino-dev):Create and build modern JavaScript applications with zero initial configuration. https://neutrino.js.org
-* [facebook/immutable-js](https://github.com/facebook/immutable-js):Immutable persistent data collections for Javascript which increase efficiency and simplicity. http://facebook.github.io/immutable-js/
-* [yaronn/blessed-contrib](https://github.com/yaronn/blessed-contrib):Build terminal dashboards using ascii/ansi art and javascript
-* [antvis/g6](https://github.com/antvis/g6):A Graph Visualization Framework in JavaScript https://antv.alipay.com/zh-cn/g6/1.x/index.html
-* [nolanlawson/optimize-js](https://github.com/nolanlawson/optimize-js):Optimize a JavaScript file for faster initial load by wrapping eagerly-invoked functions
-* [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
-* [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
-* [es-analysis/plato](https://github.com/es-analysis/plato):JavaScript source code visualization, static analysis, and complexity tool
-* [dollarshaveclub/shave](https://github.com/dollarshaveclub/shave/):💈 Shave is a 0 dep JS plugin that truncates text to fit within an element based on a set max-height ✁ https://dollarshaveclub.github.io/shave/
-* [usablica/intro.js](https://github.com/usablica/intro.js):A better way for new feature introduction and step-by-step users guide for your website and project. http://introjs.com
-* [rndme/download](https://github.com/rndme/download):file downloading using client-side javascript
-* [Shopify/draggable](https://github.com/Shopify/draggable)：The JavaScript Drag & Drop library your grandparents warned you about. https://shopify.github.io/draggable
-* [cferdinandi/smooth-scroll](https://github.com/cferdinandi/smooth-scroll):A lightweight script to animate scrolling to anchor links.
-* [space10-community/conversational-form](https://github.com/space10-community/conversational-form):Turning web forms into conversations https://space10-community.github.io/conversational-form/landingpage/
-* [benjamn/recast](https://github.com/benjamn/recast):JavaScript syntax tree transformer, nondestructive pretty-printer, and automatic source map generator
-* [swc-project/swc](https://github.com/swc-project/swc):Super-fast javascript to javascript compiler written in rust https://swc-project.github.io
-* [github/fetch](https://github.com/github/fetch):A window.fetch JavaScript polyfill. http://github.github.io/fetch/
-* [developit/greenlet](https://github.com/developit/greenlet):🦎 Move an async function into its own thread. https://npm.im/greenlet
-* [blueimp/JavaScript-Canvas-to-Blob](https://github.com/blueimp/JavaScript-Canvas-to-Blob):JavaScript Canvas to Blob is a function to convert canvas elements into Blob objects.
 * object
   - [oussamahamdaoui/forgJs](https://github.com/oussamahamdaoui/forgJs):ForgJs is a javascript lightweight object validator. Go check the Quick start section and start coding with love
 * validate
@@ -1606,8 +1561,61 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
   - [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis):redis client for node http://redis.js.org/
   - [tgriesser/knex](https://github.com/tgriesser/knex):A query builder for PostgreSQL, MySQL and SQLite3, designed to be flexible, portable, and fun to use. http://knexjs.org
   - [typeorm/typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. http://typeorm.io
-* live-server
-* [facebookexperimental / rome](https://github.com/facebookexperimental/rome):An experimental JavaScript toolchain https://romejs.dev
+* test
+  - live-server
+  - [avajs/ava](https://github.com/avajs/ava) 🚀 Testing can be a drag. AVA helps you get it done.
+  - [jasmine / jasmine ](https://github.com/jasmine/jasmine): Simple JavaScript testing framework for browsers and node.js http://jasmine.github.io/
+  - [intuit/karate](https://github.com/intuit/karate):Web-Services Testing Made Simple
+  - [minimaxir/big-list-of-naughty-strings](https://github.com/minimaxir/big-list-of-naughty-strings):The Big List of Naughty Strings is a list of strings which have a high probability of causing issues when used as user-input data.
+* 机器学习
+  - [junku901/machine_learning](https://github.com/junku901/machine_learning):Machine learning library for Node.js http://joonku.com/project/machine_learning
+  - [janhuenermann/neurojs](https://github.com/janhuenermann/neurojs):A javascript deep learning and reinforcement learning library. https://janhuenermann.com/projects/learning-to-drive
+  - [dmotz/thing-translator](https://github.com/dmotz/thing-translator):Point your camera at things to hear how to say them in a different language https://thing-translator.appspot.com/
+  - [karpathy/convnetjs](https://github.com/karpathy/convnetjs):Deep Learning in Javascript. Train Convolutional Neural Networks (or ordinary ones) in your browser.
+  - [cazala/synaptic](https://github.com/cazala/synaptic):architecture-free neural network library for node.js and the browser http://caza.la/synaptic
+  - [BrainJS/brain.js](https://github.com/BrainJS/brain.js):🤖 Neural networks in JavaScript http://brain.js.org
+  - [xviniette/FlappyLearning](https://github.com/xviniette/FlappyLearning):Program learning to play Flappy Bird by machine learning (Neuroevolution)http://xviniette.github.io/FlappyLearning/
+  - [tensorflow/playground](https://github.com/tensorflow/playground):Play with neural networks! http://playground.tensorflow.org
+  - [deepforge-dev/deepforge](https://github.com/deepforge-dev/deepforge):A modern development environment for deep learning http://deepforge.org
+* [sindresorhus/screenfull.js](https://github.com/sindresorhus/screenfull.js):Simple wrapper for cross-browser usage of the JavaScript Fullscreen API https://sindresorhus.com/screenfull.js/
+
+* [caolan/async](https://github.com/caolan/async):Async utilities for node and the browser <http://caolan.github.io/async/>
+* [tj/dox](https://github.com/tj/dox):JavaScript documentation generator for node using markdown and jsdoc
+* [tj/should.js](https://github.com/tj/should.js):BDD style assertions for node.js -- test framework agnostic
+* [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
+* [tldr-pages/tldr](https://github.com/tldr-pages/tldr):Simplified and community-driven man pages http://tldr-pages.github.io/
+* [mapbox/flamebearer](https://github.com/mapbox/flamebearer):Blazing fast flame graph tool for V8 and Node 🔥
+* [hapijs/hapi](https://github.com/hapijs/hapi):Server Framework for Node.js http://hapijs.com
+* [fgnass/spin.js](https://github.com/fgnass/spin.js):A spinning activity indicator http://spin.js.org
+* [tj/co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)
+* [nodejs/docker-node](https://github.com/nodejs/docker-node):Official Docker Image for Node.js 🐳 🐢 🚀 https://hub.docker.com/_/node/
+* [systemjs/systemjs](https://github.com/systemjs/systemjs):Dynamic ES module loader
+* [github/fetch](https://github.com/github/fetch):A window.fetch JavaScript polyfill. http://github.github.io/fetch/
+* [FezVrasta/popper.js](https://github.com/FezVrasta/popper.js):A kickass library to manage your poppers https://popper.js.org
+* [zeit/pkg](https://github.com/zeit/pkg):Package your Node.js project into an executable https://npmjs.com/pkg
+* [kpdecker/jsdiff](https://github.com/kpdecker/jsdiff):A javascript text differencing implementation.
+* [t4t5/sweetalert](https://github.com/t4t5/sweetalert):A beautiful replacement for JavaScript's "alert" https://sweetalert.js.org
+* [Modernizr/Modernizr](https://github.com/Modernizr/Modernizr):Modernizr is a JavaScript library that detects HTML5 and CSS3 features in the user’s browser. https://modernizr.com
+* [mozilla-neutrino/neutrino-dev](https://github.com/mozilla-neutrino/neutrino-dev):Create and build modern JavaScript applications with zero initial configuration. https://neutrino.js.org
+* [facebook/immutable-js](https://github.com/facebook/immutable-js):Immutable persistent data collections for Javascript which increase efficiency and simplicity. http://facebook.github.io/immutable-js/
+* [yaronn/blessed-contrib](https://github.com/yaronn/blessed-contrib):Build terminal dashboards using ascii/ansi art and javascript
+* [antvis/g6](https://github.com/antvis/g6):A Graph Visualization Framework in JavaScript https://antv.alipay.com/zh-cn/g6/1.x/index.html
+* [nolanlawson/optimize-js](https://github.com/nolanlawson/optimize-js):Optimize a JavaScript file for faster initial load by wrapping eagerly-invoked functions
+* [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
+* [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
+* [es-analysis/plato](https://github.com/es-analysis/plato):JavaScript source code visualization, static analysis, and complexity tool
+* [dollarshaveclub/shave](https://github.com/dollarshaveclub/shave/):💈 Shave is a 0 dep JS plugin that truncates text to fit within an element based on a set max-height ✁ https://dollarshaveclub.github.io/shave/
+* [usablica/intro.js](https://github.com/usablica/intro.js):A better way for new feature introduction and step-by-step users guide for your website and project. http://introjs.com
+* [rndme/download](https://github.com/rndme/download):file downloading using client-side javascript
+* [Shopify/draggable](https://github.com/Shopify/draggable)：The JavaScript Drag & Drop library your grandparents warned you about. https://shopify.github.io/draggable
+* [cferdinandi/smooth-scroll](https://github.com/cferdinandi/smooth-scroll):A lightweight script to animate scrolling to anchor links.
+* [space10-community/conversational-form](https://github.com/space10-community/conversational-form):Turning web forms into conversations https://space10-community.github.io/conversational-form/landingpage/
+* [benjamn/recast](https://github.com/benjamn/recast):JavaScript syntax tree transformer, nondestructive pretty-printer, and automatic source map generator
+* compiler
+  - [swc-project/swc](https://github.com/swc-project/swc):Super-fast javascript to javascript compiler written in rust https://swc-project.github.io
+* [github/fetch](https://github.com/github/fetch):A window.fetch JavaScript polyfill. http://github.github.io/fetch/
+* [developit/greenlet](https://github.com/developit/greenlet):🦎 Move an async function into its own thread. https://npm.im/greenlet
+
 * [Underscore](https://github.com/jashkenas/underscore):为 JavaScript 中的常见任务提供实用的函数
 * [Ramda](https://github.com/ramda/ramda):为函数式编程而设计，可以轻松创建不改变用户数据状态的函数式管道。Ramda 的核心设计理念是创建具有不变性和无副作用的函数。所有的函数会被自动柯里化，并根据易用性安排参数的顺序。
 * [MathJS](https://github.com/josdejong/mathjs):JavaScript 和 Node.js 的数学扩展库，与 JavaScript 内置的 Math 库兼容。该库包含一个灵活的表达式解析器，能够运行符号计算，并提供了一系列内置函数和常量。
@@ -1616,18 +1624,16 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 * [Sugar](https://github.com/andrewplummer/Sugar):主要用于处理本地对象。这个库支持自定义构建，还提供了模块化的 npm 包，因此可以只使用其中必要的部分模块（也可以与 Bit 结合使用），用户还可以通过自定义方法或使用插件来应对特定的使用场景。
 * [Lazy](https://github.com/dtao/lazy.js):Like Underscore, but lazier http://danieltao.com/lazy.js/
 * [CollectJS](https://github.com/ecrmnn/collect.js):一个简单的随机对象生成器，用于生成随机的字符串、数字等。在编写自动化测试代码或任何需要随机对象的地方，可以用它来减少单调的工作。
-* [ChartJS](https://github.com/chartjs/Chart.js):提供了 8 种不同类型的数据可视化，每种类型都支持动画和定制。借助 Chart.js，我们可以使用canvas 标签创建简单的 HTML5 图表，而且在所有现代浏览器中都具有出色的渲染性能。
+* [ChartJS](https://github.com/chartjs/Chart.js):提供了 8 种不同类型的数据可视化，每种类型都支持动画和定制。借助 Chart.js，可以使用canvas 标签创建简单的 HTML5 图表，而且在所有现代浏览器中都具有出色的渲染性能。
 * [Polished](https://github.com/styled-components/polishedBit ):支持使用 JavaScript 编写具有 SASS 风格辅助函数和 mixin 的样式。该库与 styled-components、Aphrodite、Radium 或简单的内联样式兼容。
 * [Mout](https://github.com/mout/mout):Modular JavaScript Utilities http://moutjs.com/
 * [Bit utils](https://bitsrc.io/bit/utils):一个模块化和高性能的库，已经被用在 Bit 的 web hub 中。这些函数可使用 NPM/Yarn 进行单独安装，用户也可以创建自己的集合，并从不同的库和项目中收集有用的功能。
 * [Voca](https://github.com/panzerdp/voca):一个用于操作字符串的 JavaScript 库。它提供的功能包括大小写转换、trim、pad、slugify、latinise、sprintf、truncate、escape 等。用户可以加载单个函数，以便最小化应用程序的构建。
 * [liriliri/licia](https://github.com/liriliri/licia):Useful utility collection with zero dependencies https://eustia.liriliri.io/module.html
-* [SBoudrias/Inquirer.js](https://github.com/SBoudrias/Inquirer.js):A collection of common interactive command line user interfaces.
 * [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
 * [kvz/locutus](https://github.com/kvz/locutus):All your standard libraries will be assimilated into our JavaScript collective. Resistance is futile. http://locutus.io
 * [panzerdp/voca](https://github.com/panzerdp/voca):The ultimate JavaScript string library https://vocajs.com
 * [kripken/emscripten](https://github.com/kripken/emscripten):Emscripten: An LLVM-to-JavaScript Compiler
-* [avajs/ava](https://github.com/avajs/ava) 🚀 Testing can be a drag. AVA helps you get it done.
 * [youzan/zan-tool](https://github.com/youzan/zan-tool):Zan Node Web 框架的配套开发工具，例如初始化一个新项目、新建一个 NPM 包、本地开发等。
 * [NodeOS](https://github.com/NodeOS/NodeOS)
 * [sindresorhus/awesome-electron](https://github.com/sindresorhus/awesome-electron)Useful resources for creating apps with Electron
@@ -1640,9 +1646,6 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 * [expressjs/multer](https://github.com/expressjs/multer):Node.js middleware for handling `multipart/form-data`.
 * [Microsoft/napajs](https://github.com/Microsoft/napajs):Napa.js: a multi-threaded JavaScript runtime
 * [cheeriojs / cheerio](https://github.com/cheeriojs/cheerio):Fast, flexible, and lean implementation of core jQuery designed specifically for the server. https://cheerio.js.org/
-* Test
-  - [jasmine / jasmine ](https://github.com/jasmine/jasmine):
-Simple JavaScript testing framework for browsers and node.js http://jasmine.github.io/
 
 * [Leaflet](https://leafletjs.com)
 * [fullPage.js]()

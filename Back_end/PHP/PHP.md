@@ -2254,12 +2254,12 @@ exit;
 
 * 浏览器扩展：xdebug helper(非必须)
 * [原理](https://xdebug.org/docs/remote)
-    - PHP Xdebug 插件起了9000端口（server）
+    - PHP Xdebug 插件起了9001端口（server）
         + 浏览器向服务器发送一个带有 XDEBUG_SESSION_START 参数的请求，服务器收到这个请求之后交给后端的 PHP（已开启 xdebug 模块）处理
-        + Php 接受带了 XDEBUG_SESSION_START 参数的请求，Xdebug 会向来源 ip 客户端(IDE)的 9000 端口（默认是 9000 端口）发送一个 debug 请求，然后客户端的 9000 端口响应这个请求，那么 debug 就开始了
+        + Php 接受带了 XDEBUG_SESSION_START 参数的请求，Xdebug 会向来源 ip 客户端(IDE)的 9001 端口（默认是 9000 端口）发送一个 debug 请求，然后客户端的 9001 端口响应这个请求，那么 debug 就开始了
         + 客户端（IDE）收到 Xdebug 发送过来的执行情况，把这些信息展示给开发者
         + Php 知道 Xdebug 已经准备好了，那么就开始开始一行一行的执行代码，但是每执行一行都会让 Xdebug 过滤一下，Xdebug 在过滤每一行代码的时候，都会暂停代码的执行，然后向客户端的 9000 端口发送该行代码的执行情况，等待客户端的决策
-  - IDE监听9000端口(client):集成了一个遵循 BGDp 的 Xdebug 插件
+  - IDE监听9001端口(client):集成了一个遵循 BGDp 的 Xdebug 插件
         + 启动插件:会启动一个 9000 的端口监听远程服务器发过来的 debug 信息
     - servers:实际服务起的端口号，脚本运行需要的地址
   - 通信协议 DBGp:端口意义不大,加了一层代理
