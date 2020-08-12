@@ -1729,7 +1729,7 @@ External commands:
 * [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
 * [conventional-changelog/conventional-changelog](https://github.com/conventional-changelog/conventional-changelog):Generate a changelog from git metadata.
 * [pstadler/keybase-gpg-github](https://github.com/pstadler/keybase-gpg-github):Step-by-step guide on how to create a GPG key on keybase.io, adding it to a local GPG setup and use it with Git and GitHub.
-* [jesseduffield/lazygit](https://github.com/jesseduffield/lazygit):simple terminal UI for git commands
+* [jesseduffield/lazygit](https://github.com/jesseduffield/lazygit):simple terminal UI for git commands `sudo add-apt-repository ppa:lazygit-team/release` `sudo apt-get install lazygit`
 * [isomorphic-git/isomorphic-git](https://github.com/isomorphic-git/isomorphic-git):A pure JavaScript implementation of git for node and browsers! https://isomorphic-git.org/
 * [Fakerr/git-recall](https://github.com/Fakerr/git-recall):An interactive way to peruse your git history from the terminal
 * [rgburke/grv](https://github.com/rgburke/grv):GRV is a terminal interface for viewing git repositories

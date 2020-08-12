@@ -122,7 +122,6 @@ So long lives this, and this gives life to thee.
 ## She Walks In Beauty George Gorden Byron
 
 ```
-
 She walks in beauty,like the night
 Of cloudless climes and starry skies;
 And all that’s best of dark and bright
@@ -143,4 +142,25 @@ The smiles thatv win,the tints that glow,
 But tell of days in goodness spent,
 A mind at peace with all below,
 A heart whose love is innocent!
+```
+
+```
+我想写一个故事
+一个只关于你和我的故事
+开始
+于某年某月的那个点头微笑
+枫叶羞红了脸
+不经意 洒了几缕阳光
+剧情被时间斟得满满当当
+平凡 但不平淡
+简单 却也揪心
+早在一开始就注定的结局里
+终于逃不开樊笼
+败给了光年
+我也走了 悄悄把门关上
+月亮怎么也留不住自己的影子
+结束
+在某年某月的一个微笑表情
+我想写一个故事
+一个只留给我和你的故事
 ```

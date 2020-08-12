@@ -1,6 +1,6 @@
 # [neovim/neovim](https://github.com/neovim/neovim)
 
-Vim-fork focused on extensibility and usability https://salt.bountysource.com/teams/n…
+Vim-fork focused on extensibility and usability https://salt.bountysource.com/teams/n… (https://neovim.io/) hyperextensible Vim-based text editor
 
 ## 安装
 
