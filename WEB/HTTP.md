@@ -1002,6 +1002,8 @@ $un_data = unserialize_php($data);
     - 无法避免队头阻塞的情况出现
         + 因为TCP是需要保证有序的，假如单个TCP连接同时承载了四路逻辑连接，其中某个逻辑连接丢包了，则其它三路都会受影响，都必须从丢包的时刻开始重传，这无疑是极大的浪费
         + 测试表明，如果丢包率超过2%，那么HTTP/2甚至不如HTTP 1.1，因为HTTP 1.1中各连接物理隔离，不会互相影响。
+* 参考
+    - [静态资源递送优化：HTTP/2 和 Server Push](https://blog.skk.moe/post/http2-server-push/)
 
 ```sh
 pear install HTTP2
@@ -1023,6 +1025,7 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 * QPACK：所有的header必须通过同一数据流来传输，而且必须严格有序。但是这样一来，从HTTP 1.1开始就困扰HTTP已久的队头阻塞又出现了
 * [lucas-clemente/quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
 * [cloudflare / quiche](https://github.com/cloudflare/quiche):pie Savoury implementation of the QUIC transport protocol and HTTP/3 https://docs.quic.tech/quiche/
+* [HTTP/3：从 SPDY 到 QUIC](https://blog.skk.moe/post/http3-from-spdy-to-quic/)
 
 ## 长连接
 

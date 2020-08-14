@@ -30,6 +30,8 @@
 * [ubuntudde](https://ubuntudde.com):Powerful Ubuntu with the most beautiful desktop environment.
 * grub
   - [Tela grub theme ](https://www.gnome-look.org/p/1307852/)
+* 工具
+  - [Etcher](https://www.balena.io/etcher/)
 
 ```sh
 sudo dd if=ubuntu-16.04-desktop-amd64.iso of=/dev/sdc bs=1M
@@ -314,6 +316,7 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
   - ubuntu.16替换apt-get为apt
 * 软件源管理
   - 本地数据库中搜索关于 cowsay 软件的相关信息
+  - Synaptic:大多数 Linux 发行版的默认 GUI 软件包管理器
   - [snap](https://snapcraft.io/):The app store for Linux Publish your app for Linux users — for desktop, cloud, and Internet of Things.
     + install direct in `/`
     + Channels:`<track>/<risk>/<branch>`
@@ -332,7 +335,8 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
   - apt-fast 是一个为 apt-get 和 aptitude 做的 shell 脚本封装，通过对每个包进行并发下载的方式可以大大减少 APT 的下载时间
     +  `sudo add-apt-repository -y ppa:apt-fast/stable && \ sudo apt install -y apt-fast`
   - deb包是Debian，Ubuntu等Linux发行版的软件安装包，扩展名为.deb，是类似于rpm的软件包，Debian，Ubuntu系统不推荐使用deb软件包，因为要解决软件包依赖问题，安装也比较麻烦。下载相应deb软件包，使用dpkg命令来安装
-    + 用gdebi解决 不满足依赖还需要手动执行sudo apt install -f `sudo apt install gdebi`
+    + gdebi:比软件中心更快，而且还能处理依赖问题。不满足依赖还需要手动执行`sudo apt install -f`
+      * `sudo apt install gdebi`
   - `application->Software&Update->download from`
   - 源管理
     + software & updates:select->best_server
@@ -384,7 +388,7 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
     + shadowshocks
     + Disk Usage Analyzer
     + GNOME Boxes — Virtual Machine Solution
-  - 图片
+  - 截图和录屏
     + Shutter
     + [Flameshot](https://github.com/lupoDharkael/flameshot)：Powerful yet simple to use screenshot software
     + Gimp
@@ -422,6 +426,19 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
   - `xclip -sel clip file_name` 使用右键单击菜单或按 Ctrl+V 粘贴
   - `tail -n 30 logfile.log | xclip -sel clip`
   - `pandoc -t html file.md | xclip -sel clip`
+* 音乐
+  - [Sayonara Player](https://sayonara-player.com/)`sudo apt-add-repository ppa:lucioc/sayonara && sudo apt-get install sayonara`
+    + `snap install sayonara`
+  - Picard :一个音乐播放器，而是个音乐标签软件。如果你有大量本地音乐文件，Picard 可以帮助你自动更新音乐文件的正确的曲目、专辑、艺人资料和专辑封面
+* Paint
+  - Krita
+  - Pinta
+* Video editors
+  - Kdenlive
+  - Shotcut
+* Image and video converter
+  - Xnconvert
+  - Handbrake
 
 ```sh
 # fix ubuntu
@@ -535,6 +552,13 @@ sudo apt install indicator-multiload
 
 sudo apt-add-repository ppa:umang/indicator-stickynotes
 sudo apt-get update && sudo apt-get install indicator-stickynotes
+
+sudo apt install neofetch
+
+# 录音器
+sudo apt-add-repository ppa:audio-recorder/ppa
+sudo apt-get update
+sudo apt-get install audio-recorder
 ```
 
 ## [Gnome](https://extensions.gnome.org/)

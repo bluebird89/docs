@@ -2,12 +2,14 @@
 
 ## Saas
 
-*   [腾讯微云](https://www.weiyun.com/)
-*   [Google Drive](https://drive.google.com/drive/)
-    -   [harababurel/gcsf](https://github.com/harababurel/gcsf):a FUSE file system based on Google Drive
-*   华为云 OBS
-*   [icloud](https://www.icloud.com/)
-*   [juicefs](https://juicefs.io/):为云端设计的 POSIX 共享文件系统
+* [腾讯微云](https://www.weiyun.com/)
+* [Google Drive](https://drive.google.com/drive/)
+    - [harababurel/gcsf](https://github.com/harababurel/gcsf):a FUSE file system based on Google Drive
+* 华为云 OBS
+* [icloud](https://www.icloud.com/)
+* [juicefs](https://juicefs.io/):为云端设计的 POSIX 共享文件系统
+* dropbox
+* [pCloud](https://www.pcloud.com/zh/)
 * 百度云
     - [Pan](https://pandownload.com)
     - [acgotaku/BaiduExporter](https://github.com/acgotaku/BaiduExporter):Assistant for Baidu to export download links to aria2/aria2-rpc
@@ -60,16 +62,16 @@
 + [Transmission](https://transmissionbt.com/):  a cross-platform BitTorrent client
 + IDM
 * axel:多线程下载工具，可下载独立文件片段，因而文件下载起来更快速 `sudo apt install axel`
-- [aria2](https://aria2.github.io/) a lightweight multi-protocol & multi-source command-line download utility It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink. aria2 can be manipulated via built-in JSON-RPC and XML-RPC interfaces.
-  +  `sudo apt install aria2`
+* [aria2](https://aria2.github.io/) a lightweight multi-protocol & multi-source command-line download utility It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink. aria2 can be manipulated via built-in JSON-RPC and XML-RPC interfaces.
+    -  `sudo apt install aria2`
     - `~/.aria2/aria2.conf`
     - `aria2c 'magnet:xxxxxxx'`
-    + [yangshun1029/aria2gui](https://github.com/yangshun1029/aria2gui):Aria2GUI for macOS
-- [iawia002/annie](https://github.com/iawia002/annie):👾 Fast, simple and clean video downloader
-- [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
-- [rg3/youtube-dl](https://github.com/rg3/youtube-dl):Command-line program to download videos from YouTube.com and other video sites http://rg3.github.io/youtube-dl/ `curl https://yt-dl.org/latest/youtube-dl -o /usr/local/bin/youtube-dl `
-- [ popcorn-official / popcorn-desktop ](https://github.com/popcorn-official/popcorn-desktop):Popcorn Time is a multi-platform, free software BitTorrent client that includes an integrated media player. Desktop ( Windows / Mac / Linux ) a Butter-Project Fork https://popcorntime.app
-- [ xiandanin / magnetW ](https://github.com/xiandanin/magnetW):磁力链接聚合搜索
+    - [yangshun1029/aria2gui](https://github.com/yangshun1029/aria2gui):Aria2GUI for macOS
+* [iawia002/annie](https://github.com/iawia002/annie):👾 Fast, simple and clean video downloader
+* [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
+* [rg3/youtube-dl](https://github.com/rg3/youtube-dl):Command-line program to download videos from YouTube.com and other video sites http://rg3.github.io/youtube-dl/ `curl https://yt-dl.org/latest/youtube-dl -o /usr/local/bin/youtube-dl `
+* [ popcorn-official / popcorn-desktop ](https://github.com/popcorn-official/popcorn-desktop):Popcorn Time is a multi-platform, free software BitTorrent client that includes an integrated media player. Desktop ( Windows / Mac / Linux ) a Butter-Project Fork https://popcorntime.app
+* [ xiandanin / magnetW ](https://github.com/xiandanin/magnetW):磁力链接聚合搜索
 
 ## wget
 
