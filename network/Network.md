@@ -718,14 +718,32 @@ int execve(const char *pathname, char *const argv[], char *const envp[]);
 
 ## Overlay 网络
 
+* 构建在另一个网络上的计算机网络,一种网络虚拟化技术的形式,不能独立出现，Overlay 底层依赖的网络就是 Underlay 网络
+* Underlay 网络是专门用来承载用户 IP 流量的基础架构层，它与 Overlay 网络之间的关系有点类似物理机和虚拟机。Underlay 网络和物理机都是真正存在的实体，它们分别对应着真实存在的网络设备和计算设备，而 Overlay 网络和虚拟机都是依托在下层实体使用软件虚拟出来的层级。
+* 使用虚拟局域网扩展技术（Virtual Extensible LAN，VxLAN）组建 Overlay 网络
+    - 使用虚拟隧道端点（Virtual Tunnel End Point、VTEP）设备对服务器发出和收到的数据包进行二次封装和解封
+    - 数据包的传输过程中，通信的双方都不知道底层网络做的这些转换，认为两者可以通过二层的网络互相访问，但是实际上经过了三层 IP 网络的中转，通过 VTEP 之间建立的隧道实现了连通
+* 利用底层网络在多数据中心之间组成二层网络，但是它的封包和拆包过程也会带来额外开销
 * 组成：
     - 边缘设备：是指与虚拟机直接相连的设备
     - 控制平面：主要负责虚拟隧道的建立维护以及主机可达性信息的通告
     - 转发平面：承载 Overlay 报文的物理网络
-* 采用TRILL、VxLan、GRE、NVGRE等隧道技术
+* 基于隧道封装技术
+    - VXLAN（Virtual eXtensible LAN）
     - TRILL（Transparent InterconnecTIon of Lots of Links）技术是电信设备厂商主推的新型环网技术
-    - NVGRE（Network VirtualizaTIon using Generic RouTIng EncapsulaTIon）STT（Stateless Transport Tunneling Protocol）是IT厂商主推的Overlay技术；
-    - 非常熟悉的VXLAN（Virtual eXtensible LAN）等基于隧道的封装技术
+    - NVGRE（Network VirtualizaTIon using Generic RouTIng EncapsulaTIon）
+    - STT（Stateless Transport Tunneling Protocol）
+* 解决问题
+    - 云计算中集群内的、跨集群的或者数据中心间的虚拟机和实例的迁移比较常见；
+        + 保证业务不中断，需要保证迁移过程中的 IP 地址不变，因为 Overlay 是在网络层实现二层网络，所以多个物理机之间只要网络层可达就能组建虚拟的局域网，虚拟机或者容器迁移后仍然处于同一个二层网络，也就不需要改变 IP 地址
+        + 使用 VxLAN 构成二层网络中，虚拟机在不同集群、不同可用区和不同数据中心迁移后，仍然可以保证二层网络的可达性，这能够帮助我们保证线上业务的可用性、提升集群的资源利用率、容忍虚拟机和节点的故障
+    - 单个集群中的虚拟机规模可能非常大，大量的 MAC 地址和 ARP 请求会为网络设备带来巨大的压力
+        + 网络只需要知道不同 VTEP 的 MAC 地址，由此可以将 MAC 地址表项中的几十万条数据降低到几千条，ARP 请求也只会在集群中的 VTEP 之间扩散，远端的 VTEP 将数据拆包后也仅会在本地广播，不会影响其他的 VTEP，虽然这对于集群中的网络设备仍然有较高的要求，但是已经极大地降低了核心网络设备的压力
+        + 集群中虚拟机的规模可能是物理机是几十倍，与物理机构成的传统集群相比，虚拟机构成的集群包含的 MAC 地址数量可能多一两个数量级，网络设备很难承担如此大规模的二层网络请求，Overlay 网络通过 IP 封包和控制平面可以减少集群中的 MAC 地址表项和 ARP 请求
+    - 传统的网络隔离技术 VLAN 只能建立 4096 个虚拟网络，公有云以及大规模的虚拟化集群需要更多的虚拟网络才能满足网络隔离的需求
+        + 大规模的数据中心往往都会对外提供云计算服务，同一个物理集群可能会被拆分成多个小块分配给不同的租户（Tenant），因为二层网络的数据帧可能会进行广播，所以出于安全的考虑这些不同的租户之间需要进行网络隔离，避免租户之间的流量互相影响甚至恶意攻击
+        + 传统的网络隔离会使用虚拟局域网技术（Virtual LAN、VLAN），VLAN 会使用 12 比特表示虚拟网络 ID，虚拟网络的上限是 4096 个
+        + VxLAN 使用 24 比特的 VNI 表示虚拟网络个数，总共可以表示 16,777,216 个虚拟网络
 
 ## 测速
 

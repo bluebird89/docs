@@ -173,6 +173,7 @@ rtmp://localhost/vod/out.mp4
 * [MoePlayer/DPlayer](https://github.com/MoePlayer/DPlayer):🍭 Wow, such a lovely HTML5 danmaku video player http://dplayer.js.org
 * [iina/iina](https://github.com/iina/iina):The modern video player for macOS. https://iina.io
 * [kodi](https://kodi.tv/):
+* [mpv](https://mpv.io/):别致轻量的界面和丰富的功能，MPV 拥有对一个好的视频播放器的一切期望。甚至可以在命令行使用它
 * [mifi/lossless-cut](https://github.com/mifi/lossless-cut):Save space by quickly and losslessly trimming video and audio files
 * [asdjgfr/operationRecord](https://github.com/asdjgfr/operationRecord):记录产品，测试的沙雕操作，方便debugger
 * [daniulive/SmarterStreaming](https://github.com/daniulive/SmarterStreaming):国内外为数不多致力于极致体验的超强全自研跨平台(windows/android/iOS)流媒体内核，通过模块化自由组合，支持实时RTMP推流、RTSP推流、RTMP播放器、RTSP播放器、录像、多路流媒体转发、音视频导播、动态视频合成、音频混音、直播互动、内置轻量级RTSP服务等，比快更快，业界真正靠谱的超低延迟直播SDK(1秒内，低延迟模式下200~400ms)。 https://www.daniulive.com

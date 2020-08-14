@@ -1,34 +1,34 @@
-# Computer
+# Computer组成原理
 
 * 最原始的部件——晶体管。晶体管是一种半导体材料，其最重要的作用就是半导：可以通过电流的变化，实现电路的切换。比如计算机最基础的与或非运算，都可以通过晶体管组成的电子元件实现。而通过晶体管的电位差不同，就可以体现"二进制数据"，即0和1。再加上电容和电阻，就能把这种二进制数据临时保存起来。综合这些特性，大牛们发现把晶体管用作精密的数学计算，可以极大的提高运算的效率。比如有2个电容，分别是充满电和没有电，对他们同时释放电信号，电容就会把其中的电子放出来，经过特定的逻辑电路，如与门，得到了0的结果。要计算1+1，实际上也是类似的原理。先设计一个加法电路，把若干电容组合成的"数字"流过这个电路，把结果存入目标电容，就得到了结果。大规模的复杂运算以此类推。最早期的计算机真的就是用许多结晶体管实现的复杂电路结构，通过控制输入电流得到希望的输出结果。后来人们发现，这种计算可以用某些形式抽象成多种指令，不用针对每次计算设计复杂的电路，只要调用指令就可以实现任何一种计算组合，于是诞生了cpu。只有cpu，每次都要自己配置输入信号，实在太痛苦，就做了纸带输入给计算机。后来又发现纸带还是很麻烦，于是发明了输入终端和对应的存储设备。后来又发现很多数据要临时保存起来，供连续计算使用，于是发明了内存
 
 * 形式语言与自动机
 
-## 组成原理
-
 * 理解冯诺依曼体系的结构，CPU和内存，硬盘，各种外设之间的关系，寄存器、缓存等知识
 * CPU有哪些指令，如何执行这些指令，如果实现数组，结构体，函数调用，这就涉及到汇编的知识。像原码，反码，补码，定点数、浮点数的表示和运算也是编程中必备的知识，几乎每种语言都要涉及。
 * CPU中的缓存，缓存一致性协议，DMA的异步思想都会在应用层中有所体现
-* 磁道 扇区
-* CPU即处理器，是计算机中控制数据操控的电路
-    - 物理 CPU 核心数指的是真正插在物理插槽上 CPU 的核心数
-    - 逻辑 CPU 核心数指的是结合 CPU 多核以及超线程技术得到的 CPU 核心数，最终核心数以逻辑 CPU 核心数为准
-    - 算术/逻辑单元:执行运算
-    - 控制单元:协调机器活动
-    - 寄存器单元:临时存储,分为通用寄存器和专用寄存器
-        + 通用寄存器用于临时存放CPU正在使用的数据
-        + 专用寄存器用于CPU专有用途，比如指令寄存器和程序计数器
-    - 通过控制单元能够操作主存中的数据
-    - CPU将主存的指令加载进来解码并执行，其中涉及两个重要寄存器：指令寄存器与程序计数器。指令寄存器用于存储正在执行的指令，而程序计数器则保持下一个待执行的指令地址。
-    - CPU向主存请求加载程序计数器指定的地址的指令，将其存放到指令寄存器中，加载后将程序计数器的值加2（假如指令长度为2个字节）。
-    - 与其他设备的通信一般通过控制器来实现，控制器可能在主板上，也可能以电路板形式插到主板.现在随着通用串行总线（USB）成为通用的标准，很多外设都可以直接用USB控制器作为通信接口。每个控制器都连接在总线上，通过总线进行通信。
-    - 直接存储器存取（DMA）是一种提升外设通信性能的措施，CPU并非总是需要使用总线，在总线空闲的时间里控制器能够充分利用起来。因为控制器都与总线相连接，而控制器又有执行指令的能力，所以可以将CPU的一些工作分给控制器来完成。比如在磁盘中检索数据时，CPU可以将告知控制器，然后由控制器找到数据并放到主存上，期间CPU可以去执行其他任务。这样能节省CPU资源。不过DMA会使总线通信更加复杂，而且会导致总线竞争问题。总线瓶颈源自冯诺依曼体系结构
-    - CPU缓存:新的CPU会有三级内存（L1，L2，L3）
 
 ## CPU
 
-* 不同的 CPU 设计实现，就称为" CPU 架构"（CPU architecture）.不同的 CPU 架构有不同的指令集，彼此不通用，这导致运行在上面的软件也不兼容，必须重新编译
+* CPU即处理器，是计算机中控制数据操控的电路
 * CPU内部封装了1个或者多个物理核，物理核有独立的各级缓存和电路结构，如果只有1个物理核心就是单核CPU，有多个物理核心就是多核CPU `物理核心数=总CPU数*单CPU中物理核心数`
+    - 物理 CPU 核心数：真正插在物理插槽上 CPU 的核心数
+    - 逻辑 CPU 核心数：结合 CPU 多核以及超线程技术得到的 CPU 核心数，最终核心数以逻辑 CPU 核心数为准
+* 算术/逻辑单元:执行运算
+* 控制单元:协调机器活动 操作主存中的数据
+* 寄存器单元:临时存储
+    - 通用寄存器用于临时存放CPU正在使用的数据
+    - 专用寄存器用于CPU专有用途，比如指令寄存器和程序计数器
+* CPU将主存的指令加载进来解码并执行，其中涉及两个重要寄存器
+    - 指令寄存器与程序计数器。指令寄存器用于存储正在执行的指令
+    - 程序计数器则保持下一个待执行的指令地址。
+* CPU向主存请求加载程序计数器指定的地址的指令，将其存放到指令寄存器中，加载后将程序计数器的值加2（假如指令长度为2个字节）
+* 与其他设备的通信一般通过控制器来实现，控制器可能在主板上，也可能以电路板形式插到主板.现在随着通用串行总线（USB）成为通用的标准，很多外设都可以直接用USB控制器作为通信接口。每个控制器都连接在总线上，通过总线进行通信
+* 直接存储器存取（DMA）是一种提升外设通信性能的措施，CPU并非总是需要使用总线，在总线空闲的时间里控制器能够充分利用起来。因为控制器都与总线相连接，而控制器又有执行指令的能力，所以可以将CPU的一些工作分给控制器来完成。比如在磁盘中检索数据时，CPU可以将告知控制器，然后由控制器找到数据并放到主存上，期间CPU可以去执行其他任务。这样能节省CPU资源。不过DMA会使总线通信更加复杂，而且会导致总线竞争问题。总线瓶颈源自冯诺依曼体系结构
+
+* 不同的 CPU 设计实现，就称为" CPU 架构"（CPU architecture）.不同的 CPU 架构有不同的指令集，彼此不通用，这导致运行在上面的软件也不兼容，必须重新编译
+    - x86:性能好，但是耗电多、电压高，主要用于桌面电脑和服务器，生产厂商为 Intel 公司和 AMD 公司
+    - ARM:耗电小、电压低，但是单核性能不如 x86，主要用于移动设备。商业模式是授权制。英国的 ARM 公司出售指令集的授权，购买授权的公司可以基于公版的设计，开发自己的 ARM 芯片。高通、三星、华为、苹果等公司的芯片，都属于这个模式
 * 超线程是intel于2002年发布的一种技术，全名为Hyper-Threading，简写为HT技术，超线程技术最初只是应用于至强系列处理器中，之后陆续应用在奔腾系列中并将技术主流化，业界对于HT的评价不一，但是官方并未放弃超线程技术
     - HT技术可使处理器中的1颗物理核，如同2颗物理核那样发挥作用，从而提高了系统的整体性能，但是肯定也不会真的像2颗物理核那样，要不然就违背物理规律了，只是说借助于某些技术将1颗物理核的性能发挥地更好而已
     - `开启HT: 逻辑核心数=总CPU数*单CPU中物理核心数*2`
@@ -44,10 +44,7 @@
         + 缺陷，由于访问远地内存的延时远远超过本地内存，当 CPU 数量增加时，系统性能无法线性增加，换句话说增加1倍的CPU数量并不能获得1倍的性能提升，因此仍然存在扩展限制区
     - 海量并行处理结构 MPP Massive Parallel Processing:由多个 SMP 服务器通过一定的节点互联网络进行连接，完成相同的任务，可以看作是SMP的水平扩展
         + 多个 SMP 服务器是一种完全无共享Share Nothing)结构，因而扩展能力最好，典型的就是刀片服务器
-* x86:性能好，但是耗电多、电压高，主要用于桌面电脑和服务器，生产厂商为 Intel 公司和 AMD 公司
-* ARM:耗电小、电压低，但是单核性能不如 x86，主要用于移动设备
-    - 商业模式是授权制。英国的 ARM 公司出售指令集的授权，购买授权的公司可以基于公版的设计，开发自己的 ARM 芯片。高通、三星、华为、苹果等公司的芯片，都属于这个模式
-* 缓存
+* CPU缓存:新的CPU会有三级内存（L1，L2，L3）
     - L3，多核共享
 * 局部性原理
     - CPU 与内存之间往往集成了挺多层级的缓存，这些缓存越接近CPU，速度越快，所以如果能提前把内存中的数据加载到如下图中的 L1, L2, L3 缓存中，那么下一次 CPU 取数的话直接从这些缓存里取即可，能让CPU执行速度加快
@@ -75,6 +72,14 @@ total = *p + 200;
 
 ## 磁盘
 
+* 计算机上的外部存储设备，可以持久存储大量数据，然而 CPU 无法直接访问硬盘中的数据，当计算机启动时操作系统会将硬盘中的数据加载到内存中以便 CPU 访问，但是如果 CPU 要访问的数据不在内存中，那么需要花费几千倍甚至几十万倍的时间来读取数据
+    - CPU 访问硬盘数据的过程比较复杂，会先通过 I/O 操作将磁盘中的数据读入内存，再访问内存的数据
+    - 机械硬盘在访问磁盘中的数据依赖的是机械结构，需要移动磁盘中的机械臂
+* 机械硬盘（Hard Disk Drive、HDD）：基于电子的、非易失的机械数据存储设备，使用磁性存储器存储并查找磁盘上的数据，在读取和写入数据的过程中，硬盘机械臂连接的磁头会读写磁盘表面的位。正是因为磁盘具有比较复杂的机械结构，所以磁盘的读取和写入都要花费很多时间，数据库的读写性能也基本都依赖于磁盘的性能
+    - 随机 I/O：随机查询一条数据，这可能会触发磁盘的随机 I/O：将数据从磁盘读取到内存中所需要的成本是非常大的，普通磁盘（非 SSD）加载数据需要经过队列、寻道、旋转以及传输的这些过程，大概要花费 10ms 左右的时间
+    - 可以使用 10ms 这个数量级对随机 I/O 占用的时间进行估算，这里想要说的是随机 I/O 对于数据库的查询性能影响会非常大，而顺序读取磁盘中的数据时速度可以达到 40MB/s
+* 固态硬盘（Solid State Drive、SSD）：以闪存作为持久存储器的电脑存储设备。读取或者存储数据时不会使用到任何的机械结构，因为一切过程都是由电路完成的，所以 SSD 的读写速度比 HDD 快很多
+* 磁道 扇区
 * 页缓存：操作系统用来作为磁盘的一种缓存，减少磁盘的I/O操作
     - 写入磁盘：其实是写入页缓存中，使得对磁盘的写入变成对内存的写入。写入的页变成脏页，然后操作系统会在合适的时候将脏页写入磁盘中
         + 后写：写入的页缓存，这样存着可以将一些小的写入操作合并成大的写入，然后再刷盘
@@ -84,6 +89,17 @@ total = *p + 200;
     - 顺序写盘的速度比随机写内存还要快
     - 当然这样的写入存在数据丢失的风险，例如机器突然断电，那些还未刷盘的脏页就丢失了。不过可以调用 fsync 强制刷盘，但是这样对于性能的损耗较大
     - 建议通过多副本机制来保证消息的可靠，而不是同步刷盘
+
+## I/O 操作
+
+* 编程 I/O（Programmed I/O）：CPU 会负责全部的工作，如果想要在屏幕上输出 Hello World，CPU 每次都会向 I/O 设备中写入一个新字符，写入后会轮询设备的状态等待它完成工作后写入新的字符。这种方式虽然简单，但是它会占用全部的 CPU 资源，在某些复杂的系统中会造成计算资源的严重浪费
+* 中断驱动 I/O（Interrupt-driven I/O）：执行 I/O 操作的一种更高效方式，在编程 I/O 中，CPU 会主动获取设备的状态并等待设备闲置，但是如果使用了中断驱动 I/O，设备会在闲置时主动发起中断暂停当前进程并保存上下文，而操作系统会执行 I/O 设备的中断处理程序：
+    - 如果当前不包含待打印的字符，停止中断处理程序并恢复暂停的进程；
+    - 如果当前包含待打印的字符，将下一个字符拷贝到设备中并恢复暂停的进程；
+    - 使用中断驱动 I/O 可以在设备繁忙时，让 CPU 能够处理其它任务，尽可能地提高 CPU 的利用率，不再浪费珍贵的计算资源。与编程 I/O 相比，中断驱动 I/O 将一部分工作交给了 I/O 设备，所以能够提高资源的利用率。
+* 直接内存访问（Direct Memory Access)：利用 DMA 控制器来执行 I/O 操作，中断驱动 I/O 需要为每个字符触发操作系统中断，这会消耗一定的 CPU 时间。当我们使用 DMA 控制器时，CPU 会一次将缓冲区中的数据全部读到 DMA 控制器中，DMA 控制器会负责将数据按字符写入 I/O 设备
+    - DMA 控制器可以解放 CPU 并减少中断次数，但是它的执行速度与 CPU 相比却很慢，如果 DMA 控制器不能快速驱动 I/O 设备，CPU 可能就会等待 DMA 控制器触发中断，在这种情况下，中断驱动 I/O 或者编程 I/O 可以提供更快的访问速度
+* 在默认情况下，会使用 DMA 控制器来执行 I/O 任务，不过编程 I/O 和中断驱动 I/O 也不是不能接受的选项。当 CPU 经常需要等待 DMA 控制器执行 I/O 任务时，使用中断驱动 I/O 甚至轮询的编程 I/O 都可以得到更高的吞吐量，然而无论使用哪种方式，I/O 都是程序中比较耗时的复杂操作
 
 ## 图书
 
@@ -106,11 +122,12 @@ total = *p + 200;
 * [PKUanonym / REKCARC-TSC-UHT](https://github.com/PKUanonym/REKCARC-TSC-UHT):清华大学计算机系课程攻略 Guidance for courses in Department of Computer Science and Technology, Tsinghua University https://rekcarc-tsc-uht.readthedocs.io/
 * [USTC-Resource/USTC-CS-Courses-Resource](https://github.com/USTC-Resource/USTC-Course):❤️中国科学技术大学计算机学院课程资源 https://mbinary.coding.me/ustc-cs/
 * [tongtzeho / PKUCourse](https://github.com/tongtzeho/PKUCourse):北大计算机课程大作业
+* [wxwmd/HIT-Computer-Courses](https://github.com/wxwmd/HIT-Computer-Courses):哈工大计算机课程资料，包含计算机系统等多个科目
 * [InterviewMap/CS-Interview-Knowledge-Map](https://github.com/InterviewMap/CS-Interview-Knowledge-Map):Build the best interview map. The current content includes JS, network, browser related, performance optimization, security, framework, Git, data structure, algorithm, etc. https://yuchengkai.cn/docs/zh/frontend/
 * [CS50's Introduction to Computer Science](https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x)
 * [数据结构(上)(自主模式)](http://www.xuetangx.com/courses/course-v1:TsinghuaX+30240184+sp/about)
 * [数据结构(下)](http://www.xuetangx.com/courses/course-v1:TsinghuaX+30240184_2X+sp)
-* [1c7/crash-course-computer-science-chinese](https://github.com/1c7/crash-course-computer-science-chinese):💻 计算机速成课 | Crash Course 字幕组 (全40集 2018-5-1 精校完成) https://www.bilibili.com/video/av21376839/
+* [1c7/crash-course-computer-science-chinese](https://github.com/1c7/crash-course-computer-science-chinese):💻 计算机速成课 | Crash Course 字幕组 (全40集 2018-5-1 精校完成)https://www.bilibili.com/video/av21376839/
 * [Berkeley CS61B](http://datastructur.es/sp17/)
 * [Yorgey's cis194](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
 * [卡梅隆大学CS课件](http://www.cs.cmu.edu/~aada/courses/15251f16/www/schedule.html)
@@ -143,17 +160,11 @@ total = *p + 200;
 
 ## 参考
 
-* [Udacity](https://www.udacity.com/)
-* [edX](https://www.edx.org/)
-* [codecademy](https://www.codecademy.com/)
-* [LeetCode](http://leetcode.com/):[中文](https://leetcode-cn.com/)
 * [ossu/computer-science](https://github.com/ossu/computer-science):Path to a free self-taught education in Computer Science!
 * Apple Developer Site — 学习开发 IOS、Mac OS、Safari 环境下的 app
 * Google Code — 学习开发安卓 app
 * Code.org — 编程一小时活动的大本营
 * Mozilla Developer Network
-* Learnable
-* Pluralsight
 * CodeHS
 * Aquent Gymnasium
 * [Parallel & Distributed Operating Systems Group ](https://pdos.csail.mit.edu/)
@@ -161,6 +172,6 @@ total = *p + 200;
 * [Playground](https://www.apple.com/swift/playgrounds/):ipad 上学习 swift 的游戏
 * [freecodecamp](https://www.freecodecamp.org/):Learn to code for free.
 * [scratch](https://scratch.mit.edu/)
-* [wxwmd/HIT-Computer-Courses](https://github.com/wxwmd/HIT-Computer-Courses):哈工大计算机课程资料，包含计算机系统等多个科目
 * [ianw / bottomupcs](https://github.com/ianw/bottomupcs):Bottom Up Computer Science http://www.bottomupcs.com
 * [wolverinn / Waking-Up](https://github.com/wolverinn/Waking-Up):计算机基础（计算机网络/操作系统/数据库/Git...）面试问题全面总结，包含详细的follow-up question以及答案
+* [Introduction: A Guide To The Tech Tree](https://github.com/github/archive-program/blob/master/TheTechTree.md)

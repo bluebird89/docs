@@ -3,6 +3,7 @@
 
 * 一知半解 FM
 * 翻转电台Filpradio
+* 随即波动
 * http://www.wtfpod.com/
 
 ## client

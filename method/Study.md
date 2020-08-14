@@ -7,6 +7,10 @@
 * 很多文章有隐形基础的，不知道基础，学习的是片面的东西
 * 需要跨语言学习，有些语言有不同的机制，相互借鉴与概念的由来
 
+* “守”：最初阶段须遵从老师教诲，认真练习基础，达到熟练的境界。
+* “破”：基础熟练后，试着突破原有规范让自己得到更高层次的进化。
+* “离”：在更高层次得到新的认识并总结，自创新招数另辟出新境界。
+
 ### 概念
 
 学习编程最大的悲剧 —— 就是明明自己的目的是模仿逐步形成自己的技能，而误以为自己要去创造新事物。所以学习编程之前需要搞懂 —— 做创造性的工作；还是做模仿性的工作。模仿类型的工作时不需要从理论开始的，而是从练习开始的。  一开始就模仿写代码。
@@ -23,7 +27,6 @@
 * 需求驱动，一个是兴趣驱动，具体学习的路径是文档+书，快速过一遍所有的知识点、原理，然后做实际项目练手，在做的过程中遇到的各种问题，Google 之，Google 不到的从错误信息、日志、原理入手，解决之，然后再写技术教程分享出来，这相当于整体复习一遍。随着你的经验和视野越来越光，底层原理越来越扎实，学习新东西会越来越快
 * 任务/兴趣是原动力，项目驱动学习，在解决问题中进步，Google 是最好的老师，分享即学习
 * 大部分图书除了那些经典，真不如Google+文档,经典作为打下计算机底层理论和原理的武器，一定要多拜读
-
 
 ## 总结
 
@@ -144,7 +147,6 @@
 
 ## 参考
 
-* [零基础小白如何入门 Python 编程](http://blog.csdn.net/gitchat/article/details/77506814)
 * [selfteaching/the-craft-of-selfteaching](https://github.com/selfteaching/the-craft-of-selfteaching):One has no future if one couldn't teach themself.
 * [dipakkr/A-to-Z-Resources-for-Students](https://github.com/dipakkr/A-to-Z-Resources-for-Students):Curated list of resources for college students :octocat: Show your ❤️ by giving a ⭐️ https://gitter.im/a2z-resources
 * [sdmg15/Best-websites-a-programmer-should-visit](https://github.com/sdmg15/Best-websites-a-programmer-should-visit):🔗 Some useful websites for programmers.
