@@ -358,6 +358,21 @@ location ~ \.php {
   ssl_prefer_server_ciphers on;
 ```
 
+## keepAlive
+
+* KeepAlived 主要是通过VRRP协议实现高可用功能
+  - 具有配置管理LVS的功能，同时还具有对LVS下面节点进行健康检查的功能
+  - 实现系统网络服务的高可用功能
+  - VRRP(Virtual Router RedundancyProtocol 虚拟路由器冗余协议) 目的就是为了解决静态路由单点故障问题的，能够保证当个别节点宕机时，整个网络可以不间断地运行所以
+* 作用
+  - 管理LVS负载均衡软件
+  - 实现LVS集群节点的健康检查中
+  - 作为系统网络服务的高可用性(failover)
+* 如何实现高可用
+  - 通过VRRP来实现高可用服务对之间的故障切换转移
+  - 在Keepalived服务正常工作时，主Master节点会不断地向备节点发送( 多播的方式)心跳消息，用以告诉备Backup节点自己还活看，当主Master节点发生故障时，就无法发送心跳消息，备节点也就因此无法继续检测到来自主Master节点的心跳了，于是调用自身的接管程序，接管主Master节点的IP资源及服务
+  - 当主Master节点恢复时备Backup节点又会释放主节点故障时自身接管的IP资源及服务，恢复到原来的备用角色
+
 ## 服务器初步配置
 
 ```sh

@@ -361,6 +361,16 @@ Customer collaboration over contract negotiation
 Responding to change over following a plan
 ```
 
+## 习惯
+
+* 物理墙：看到要做的事情、正在做的事情和已经搞定的事情，并且要有owner
+* 以周为一个迭代，大概经过n个迭代就可以顺利release了
+* 做记录量化统计
+* 重构
+* Retro
+    - 一定要可视化出来
+    - 年初时都做过展望与总结
+
 ## 图书
 
 * 解析极限编程
