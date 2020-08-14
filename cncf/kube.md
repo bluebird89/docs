@@ -52,7 +52,53 @@
 		+ NodeSelector：是一个供用户将 Pod 与 Node 进行绑定的字段
 		+ NodeName：一旦 Pod 的这个字段被赋值，Kubernetes 项目就会被认为这个 Pod 已经经过了调度，调度的结果就是赋值的节点名字
 		+ HostAliases：定义了 Pod 的 hosts 文件（比如 /etc/hosts）里的内容
+* 重启策略 restartPolicy:Pod 的Spec部分的一个标准字段（pod.spec.restartPolicy），默认值是Always
+	- Always：在任何情况下，只要容器不在运行状态，就自动重启容器；
+	- OnFailure: 只在容器 异常时才自动重启容器；
+	- Never: 从来不重启容器。
+* 实现自我修复:放在Pod里的健康检查处理程序叫做探针（Probe）
+	- Liveness：活性检查，kubelet使用活性探针（livenessProbe）的返回状态作为重新启动容器的依据。一个Liveness探针用于在应用运行时检测容器的问题。容器进入此状态后，Pod所在节点的kubelet可以通过Pod策略来重启容器。
+	- Readiness：就绪检查，这种类型的探测（readinessProbe）用于检测容器是否准备好接受流量。可以使用这种探针来管理哪些Pod会被用作服务的后端。如果Pod尚未准备就绪，则将其从服务的后端列表中删除。
+* 探针处理程序
+	- Exec：在容器内执行命令。
+	- TCPSocket：对指定端口上，容器的IP地址执行TCP检查。
+	- HTTPGet：在容器的IP上执行HTTP GET请求
+* 返回状态也分为三种：
+	- Success：容器通过诊断。
+	- Failed：容器无法通过诊断。
+	- Unknown：诊断失败，状态不确定，将不采取任何措施。
 
+```yaml
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5
+
+     livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+        httpHeaders:
+        - name: Custom-Header
+          value: Awesome
+      initialDelaySeconds: 3
+      periodSeconds: 3
+
+     livenessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 20
+
+    readinessProbe:
+       httpGet:
+         path: /
+         port: 8080
+       timeoutSeconds: 2
+```
 
 ## Service
 
@@ -85,7 +131,6 @@
 
 * PodPreset 里定义的内容，只会在 Pod API 对象被创建之前追加在这个对象本身上，而不会影响任何 Pod 的控制器的定义
 	- 多个 PodPreset:合并（Merge）这两个 PodPreset 要做的修改。而如果它们要做的修改有冲突的话，这些冲突字段就不会被修改
-
 * StatefulSet
 	- 一种特殊的 Deployment，而其独特之处在于，它的每个 Pod 都被编号了。而且，这个编号会体现在 Pod 的名字和 hostname 等标识信息上，这不仅代表了 Pod 的创建顺序，也是 Pod 的重要网络标识（即：在整个集群里唯一的、可被访问的身份
 * PV 持久化存储数据卷

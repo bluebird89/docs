@@ -11,6 +11,7 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
 * 模块化
 * 组件化
 * 数据驱动
+* 典型的 MVVM（Model-View-ViewModel）模型框架,View 的变动，会自动更新到 ViewModel，反之亦然，这种机制叫做双向绑定
 
 ## 原理
 

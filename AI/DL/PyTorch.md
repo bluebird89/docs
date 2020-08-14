@@ -12,6 +12,10 @@ Tensors and Dynamic neural networks in Python with strong GPU acceleration http:
 
 * [facebookresearch/maskrcnn-benchmark](https://github.com/facebookresearch/maskrcnn-benchmark):Fast, modular reference implementation of Instance Segmentation and Object Detection algorithms in PyTorch.
 
+## 工具
+
+* [zasdfgbnm/TorchSnooper](https://github.com/zasdfgbnm/TorchSnooper):Debug PyTorch code using PySnooper
+
 ## 参考
 
 * [pytorch/tutorials](https://github.com/pytorch/tutorials) <https://pytorch.org/tutorials/>
@@ -22,7 +26,4 @@ Tensors and Dynamic neural networks in Python with strong GPU acceleration http:
 * [tensor-yu/PyTorch_Tutorial](https://github.com/tensor-yu/PyTorch_Tutorial):《Pytorch模型训练实用教程》中配套代码
 * [yuanlairuci110/pytorch-best-practice-master](https://github.com/yuanlairuci110/PyTorch-best-practice-master)
 * [zergtant/pytorch-handbook](https://github.com/zergtant/pytorch-handbook):pytorch handbook是一本开源的书籍，目标是帮助那些希望和使用PyTorch进行深度学习开发和研究的朋友快速入门
-
-## 工具
-
-* [zasdfgbnm/TorchSnooper](https://github.com/zasdfgbnm/TorchSnooper):Debug PyTorch code using PySnooper
+* [全面解读 PyTorch 内部机制](https://mp.weixin.qq.com/s/q2vdZS6exGZvi75E846xdw)

@@ -15,7 +15,7 @@
 * [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/index.php)
 * [AWS开放数据](https://registry.opendata.aws/)
 * [Google数据集搜索引擎](https://toolbox.google.com/datasetsearch)
-* [Google Trends](https://trends.google.com/trends/explore):按照时间的搜索热度,按照地区的搜索热度 相关主题 相关搜索 
+* [Google Trends](https://trends.google.com/trends/explore):按照时间的搜索热度,按照地区的搜索热度 相关主题 相关搜索
 * [微软数据集](https://msropendata.com/)
 * [Awesom Public Datasets](https://github.com/awesomedata/awesome-public-datasets):按主题整理了大量的数据集内容，例如：生物学、经济学、教育等。其中列出的大多数数据集都是免费的，但在使用任何数据集之前，均需检查数据集的许可要求。
 * [VisualData数据集](https://www.visualdata.io/https://www.visualdata.io/)
@@ -144,3 +144,4 @@
 ## 参考
 
 * [41 Places to Find Free Images Online That You Will Actually Want to Use](https://www.searchenginejournal.com/find-free-images-online/298887/)
+* [在哪些网站找数据](https://www.zhihu.com/question/27692329/answer/1323609882)

@@ -103,7 +103,6 @@
 * 《编译原理》：https://www.bilibili.com/video/av17649289?from=search&seid=5673462623145874347
 * 《数据库系统概念》：https://www.bilibili.com/video/av52007695?from=search&seid=9723583724024090244
 
-
 ## Data Scientist
 
 * [Introduction to Computer Science and Programming Using Python](https://www.edx.org/course/introduction-to-computer-science-and-programming-7)
@@ -118,8 +117,12 @@
 
 ## 资源
 
+* [Udacity](https://www.udacity.com/)
+* [edX](https://www.edx.org/)
+* [codecademy](https://www.codecademy.com/)
 * [studytonight](https://www.studytonight.com/)
-* [udacity](https://www.udacity.com/)
+* Learnable
+* Pluralsight
 * [tutorialspoint](https://www.tutorialspoint.com/index.htm)
 * [classcentral](https://www.classcentral.com/)
 * [nptel](https://nptel.ac.in/):印度的国家增强型学习计划，也就是说，印度的各大名校联合推出的免费学习计划

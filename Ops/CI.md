@@ -1,5 +1,7 @@
 # CI
 
+持续集成（CI）是每次团队成员提交版本控制更改时自动构建和测试代码的过程。这鼓励开发人员通过在每个小任务完成后将更改合并到共享版本控制存储库来共享代码和单元测试。
+
 代码仓库更新后，通过在 GitLab 设置的 CI-CD 配置，自动打包镜像，然后触发 WebHook 自动更新
 
 ## [travis-ci/travis-ci](https://github.com/travis-ci/travis-ci)
