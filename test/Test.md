@@ -339,6 +339,8 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
   - 提供了开箱即用的并行执行、HTTP请求模拟等有用的功能
   - 使用异步执行模型而无需指定等待时间，有效提升了测试套件的稳定性
 * Puppeteer:谷歌出品的一个通过Devtools 协议控制Chromium或Chrome的Node库。由于其只支持Chrome，无法进行跨浏览器的兼容性测试
+* CodeceptJS
+  -
 
 ## 总结
 

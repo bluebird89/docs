@@ -112,3 +112,4 @@ registry = "https://code.aliyun.com/rustcc/crates.io-index"
 * [rust-unofficial/awesome-rust](https://github.com/rust-unofficial/awesome-rust):A curated list of Rust code and resources.
 * [rust-lang-nursery/futures-rs](https://github.com/rust-lang-nursery/futures-rs):Zero-cost asynchronous programming in Rust http://rust-lang-nursery.github.io/futures-rs
 * [flosse/rust-web-framework-comparison](https://github.com/flosse/rust-web-framework-comparison):A comparison of some web frameworks and libs written in Rust
+* [RUST语言的编程范式](https://coolshell.cn/articles/20845.html)
