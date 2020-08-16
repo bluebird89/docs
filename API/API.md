@@ -12,6 +12,23 @@
 * Introspection
     - API 系统自动收集 metrics，自我监控
     - 无论是撰写者，还是调用者，都很很方便的获取想要获取的信息
+* API风格考虑问题：
+    - 选择支持哪种风格，才能更好地体现业务特性，让客户操作起来更加方便；
+    - 设计API时能否面向资源设计，相应的工程人员是否具备做这种设计的能力；
+    - 针对这种风格工具链的支持是否到位，投入产出比如何；
+    - 业界流行的趋势如何，是否需要考虑与其他系统体系的互操作。
+* 用户使用API来访问 Service，本质上是想通过对某种资源执行特定的操作来完成一个业务动作。对于资源有两个关键点：一是要有统一的资源模型；二是要明确资源关系。统一的资源模型
+    - 可以使API具有更清晰的结构，帮助用户理解；
+    - 可以帮助对比API与后台实体关系模型，更容易提供更完整的API服务；
+    - 可以使产品协作更加顺畅，对资源的操作也更加规范化；
+    - 可以使云服务底层平台实现起来更统一、更方便；
+    - 可以使围绕API的生态集成起来更加简单、高效。
+* 其它考虑
+    - 在API命名的时候，遵循什么样的范式来确保大体风格相似？动词、名词、介词如何组合才能保持API风格看起来比较统一，降低理解成本？
+    - 对于类似的操作，有没有使用规范？有哪些公共的标准词汇使得同类型的操作可以比较容易理解，避免使用晦涩奇怪的词汇（例如读操作，Read/Query/Describe/List/Get中都在什么场合使用什么动词）？
+    - 被广泛使用的参数如何尽可能保持一致，避免不同产品的表达混乱的情况（例如分页参数用PageNumber还是PageNum）？
+    - 对于常用的场景，例如幂等、分页、异步API的设计有没有统一的规范，避免使用体验不一致？
+    - 错误码应该怎么设计？公共错误码怎么统一，业务错误码怎么表达？
 
 ## 状态
 
@@ -327,6 +344,8 @@ https://api.github.com/user
   refresh_token=REFRESH_TOKEN
 ```
 
+## 注意
+
 * 使用 cookie 时需要考虑的问题
 	- 因为存储在客户端，容易被客户端篡改，使用前需要验证合法性
 	- 不要存储敏感数据，比如用户密码，账户余额
@@ -531,6 +550,64 @@ https://api.github.com/user
 
 ## 权限控制
 
+## 设计
+
+* 好的标准
+    - 平台独立性。任何客户端都能消费 API，而不需要关注系统内部实现。API 应该使用标准的协议和消息格式对外部提供服务。传输协议和传输格式不应该侵入到业务逻辑中，也就是系统应该具备随时支持不同传输协议和消息格式的能力。
+    - 系统可靠性。在 API 已经被发布和非 API 版本改变的情况下，API 应该对契约负责，不应该导致数据格式发生破坏性的修改。在 API 需要重大更新时，使用版本升级的方式修改，并对旧版本预留下线时间窗口。
+* 实践
+    - 避免简单封装：API应该服务业务能力的封装，避免简单封装让API彻底变成了数据库操作接口
+    - 关注点分离:不多东西，不少东西
+    - 完全穷尽,彼此独立:不应该提供相互叠加的 API
+    - 版本化,可以通过下面几种方式
+        + URI 前缀
+        + Header
+        + Query
+    - 合理命名
+        + 尽可能和领域名词保持一致，例如聚合根、实体、事件等
+        + RESTful 设计的 URI 中使用名词复数
+        + 尽可能不要过度简写，例如将 user 简写成usr
+        + 尽可能使用不需要编码的字符
+    - 安全
+        + 内部系统，更多的是考虑是否足够健壮。对接收的数据有足够的验证，并给出错误信息，而不是什么信息都接收，然后内部业务逻辑应该边界值的影响变得莫名其妙
+        + 外部系统的 API 则有更多的挑战。
+            * 错误的调用方式
+            * 接口滥用
+            * 浏览器消费 API 时因安全漏洞导致的非法访问
+
+## 评审清单
+
+* URI 命名是否通过聚合根和实体统一
+* URI 命名是否采用名词复数和连接线
+* URI 命名是否都是单词小写
+* URI 是否暴露了不必要的信息，例如/cgi-bin
+* URI 规则是否统一
+* 资源提供的能力是否彼此独立
+* URI 是否存在需要编码的字符
+* 请求和返回的参数是否不多不少
+* 资源的 ID 参数是否通过 PATH 参数传递
+* 认证和授权信息是否暴露到 query 参数中
+* 参数是否使用奇怪的缩写
+* 参数和响应数据中的字段命名统一
+* 是否存在无意义的对象包装 例如{"data":{}'}
+* 出错时是否破坏约定的数据结构
+* 是否使用合适的状态码
+* 是否使用合适的媒体类型
+* 响应数据的单复是否和数据内容一致
+* 响应头中是否有缓存信息
+* 是否进行了版本管理
+* 版本信息是否作为 URI 的前缀存在
+* 是否提供 API 服务期限
+* 是否提供了 API 返回所有 API 的索引
+* 是否进行了认证和授权
+* 是否采用 HTTPS
+* 是否检查了非法参数
+* 是否增加安全性的头部
+* 是否有限流策略
+* 是否支持 CORS
+* 响应中的时间格式是否采用ISO 8601标准
+* 是否存在越权访问
+
 ## 文档
 
 * 格式
@@ -672,6 +749,57 @@ print dec_message   // Hello World!
 
 ##  [OpenAPI 标准规范](https://mp.weixin.qq.com/s/Ow7tkcnpY37faHYHd12ENQ)
 
+* 协议: API 与用户的通信协议，总是使用 HTTPS 协议。这个和 RESTful API 本身没有很大的关系，但是对于增加网站的安全是非常重要的。特别如果提供的是公开 API，用户的信息泄露或者被攻击会严重影响网站的信誉
+* 版本（Version）
+    - 版本号放入 URL 中，如：`http://api.example.com/v1`，这样方便和直观；
+    - 版本号记录在 url query中，如：`http://api.example.com?param1=val&version=1.0`中的 version 参数。
+    - 版本号放在 HTTP 头信息中，基于的准则是：不同的版本，可以理解成同一种资源的不同形式，所以应该采用同一个URL。如：`Accept: application/json; version=1.0`
+* Schema
+    - URI的格式定义如下：`URI = scheme "://" authority "/" path \[ "?" query \] \[ "#" fragment \]`
+    - URL 是 URI 的一个子集(一种具体实现)，对于 REST API 来说一个资源一般对应一个唯一的 URI（URL
+    - "/"分隔符一般用来对资源层级的划分。对于 RESTful API 来说，"/"只是一个分隔符，并无其他含义。为了避免混淆，"/"不应该出现在URL的末尾
+    - URL 中尽量使用连字符"-"代替下划线`"_"`的使用。 连字符"-"一般用来分割 URL 中出现的字符串(单词)，来提高 URL 的可读性，例如：http://api.example.restapi.org/blogs/mark-masse/entries/this-is-my-first-post。使用下划线"_"来分割字符串(单词)可能会和链接的样式冲突重叠，而影响阅读性。但实际上，"-"和"_"对URL 中字符串的分割语意上还是有些差异的："-"分割的字符串(单词)一般各自都具有独立的含义，可参见上面的例子。而"_"一般用于对一个整体含义的字符串做了层级的分割，方便阅读，例如你想在 URL 中体现一个 IP 地址的信息：210_110_25_88
+    - URL应该统一使用小写字母
+    - URL中不要包含文件(脚本)的扩展名。例如 .json 之内的就不要出现了，对于接口来说没有任何实际的意义。如果是想对返回的数据内容格式标示的话，通过 HTTP Header 中的 Content-Type 字段更好一些。
+    - 对于响应返回的格式，JSON 因为它的可读性、紧凑性以及多种语言支持等优点，成为了 HTTP API 最常用的返回格式。因此，最好采用 JSON 作为返回内容的格式。如果用户需要其他格式，比如 xml，应该在请求头部 Accept 中指定。对于不支持的格式，服务端需要返回正确的 status code，并给出详细的说明。
+    - JSON中的所有字段都应该用小写的蛇形命名形式，而不是采用驼峰命名。
+* 以资源为中心的 URL 设计
+    - 资源是 Restful API 的核心元素，所有的操作都是针对特定资源进行的。而资源就是 URL（Uniform Resoure Locator）表示的，所以简洁、清晰、结构化的 URL 设计是至关重要的
+        + 资源分为单个文档和集合，尽量使用复数来表示资源，单个资源通过添加 id 或者 name 等来表示
+        + 一个资源可以有多个不同的 URL
+        + 资源可以嵌套，通过类似目录路径的方式来表示，以体现它们之间的关系
+    - 最常见的一种设计错误，就是URL包含动词。 因为"资源"表示一种实体，所以应该是名词，URL 不应该有动词，动词应该放在 HTTP Method （参考下一条）中
+    - 如果某些动作是HTTP 动词表示不了的,把动作看成是一种资源,把动词 transfer 改成transaction，资源不能是动词，但是可以是一种服务
+* 正确使用 HTTP Method
+    - GET：从服务器取出资源（一项或多项）。
+    - POST：在服务器新建一个资源。
+    - PUT：在服务器更新资源（客户端提供改变后的完整资源）。
+    - PATCH：在服务器更新资源（更新资源的部分属性）。
+    - DELETE：从服务器删除资源。
+* 状态码 （Status Code）
+    - 2XX：请求正常处理并返回
+    - 3XX：重定向，请求的资源位置发生变化
+    - 4XX：客户端发送的请求有错误
+    - 5XX：服务器端错误
+* 错误处理（Error Handling）
+    - 出错，应该在 response body 中通过 message 给出明确的错误信息（一般来说，返回的信息中将 message 作为键名，出错详情作为键值即可）
+    - 编写错误详情时请考虑以下准则：
+        + 不要假设用户是您 API 的专家用户。用户可能是客户端开发人员、操作人员、IT 人员或应用的最终用户。
+        + 不要假设用户了解有关服务实现的任何信息，或者熟悉错误的上下文（例如日志分析）。
+        + 如果可能，应构建错误详情，以便技术用户（但不一定是 API 开发人员）可以响应错误并改正。
+        + 确保错误详情内容简洁。如果需要，请提供一个链接，便于有疑问的读者提问、提供反馈或详细了解错误详情中不方便说明的信息。此外，可使用详细信息字段来提供更多信息。
+* 命名规则
+    - 简单
+    - 直观
+    - 一致
+* 认证和授权（Authentication & Authorization）
+    - 验证（Authentication）是为了确定用户是其申明的身份，比如提供账户的密码。不然的话，任何人伪造成其他身份（比如其他用户或者管理员）是非常危险的。没有通过验证（提供的用户名和密码不匹配，token 不正确等），需要返回 401 Unauthorized[9]状态码
+    - 授权（Authorization）是为了保证用户有对请求资源特定操作的权限。比如用户的私人信息只能自己能访问，其他人无法看到；有些特殊的操作只能管理员可以操作，其他用户有只读的权限等等。有被授权访问的资源操作，需要返回 403 Forbidden[10] 状态码
+* 限流（RateLimit）：对于超过流量的请求，可以返回 429 Too many requests[13] 状态码
+    - X-RateLimit-Limit: 用户每个小时允许发送请求的最大值
+    - X-RateLimit-Remaining：当前时间窗口剩下的可用请求数目
+    - X-RateLimit-Rest: 时间窗口重置的时候，到这个时间点可用的请求数量就会变成 X-RateLimit-Limit 的值
+
 ## 接口
 
 * [public-apis/public-apis](https://github.com/public-apis/public-apis):A collective list of free APIs for use in software and web development. https://ultimatecourses.com
@@ -779,7 +907,8 @@ print dec_message   // Hello World!
 
 ## 参考
 
-* [OAI/OpenAPI-Specification](https://github.com/OAI/OpenAPI-Specification):The OpenAPI Specification Repository https://openapis.org
+* [OAI/OpenAPI-Specification](https://github.com/OAI/OpenAPI-Specification):The OpenAPI Specification Repository https://openapis.org 针对 RESTful API 设计在细节层面给出了非常具体的规定，已经成为 RESTful API 设计领域的事实标准
+* [Google API Design Guide](https://cloud.google.com/apis/design)从云厂商的角度提出许多最佳实践性质的规范与建议，这些原则不仅仅适用于 RESTful API，也适合其他类型API设计。
 * [jsonapi](https://jsonapi.org/format/)
 * [shieldfy/API-Security-Checklist](https://github.com/shieldfy/API-Security-Checklist):Checklist of the most important security countermeasures when designing, testing, and releasing your API
 * [microsoft/api-guidelines](https://github.com/microsoft/api-guidelines):Microsoft REST API Guidelines

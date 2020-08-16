@@ -2,18 +2,12 @@
 
 Open Source, Distributed, RESTful Search Engine，一个基于Lucene的实时的分布式搜索和分析全文搜索引擎
 
-* 设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便
 * 基于RESTful接口
 * 面向文档型数据库，一条数据在这里就是一个文档，用JSON作为文档序列化的格式
-* 分布式搜索引擎
-* 实时数据分析
-
-## 功能
-
-* 存储
-  - 搜索
-  - 聚合
-* 日志
+* 场景
+  - 搜索领域，相对于solr，真正的后起之秀，成为很多搜索系统的不二之选。
+  - Json文档数据库，相对于MongoDB，读写性能更佳，而且支持更丰富的地理位置查询以及数字、文本的混合查询等。
+  - 时序数据分析处理，目前是日志处理、监控数据的存储、分析和可视化方面做得非常好，可以说是该领域的引领者了
 
 ## 安装
 
@@ -56,6 +50,113 @@ cd elasticsearch-5.5.2/
 ./bin/elasticsearch
 ./elasticsearch  -Des.insecure.allow.root=true  #加这个参数才可以root启动
 ./bin/elasticsearch -d -p pid # 后台运行
+```
+
+## 配置
+
+* 默认情况下，Elastic 只允许本机访问
+* 需要远程访问，可以修改 Elastic 安装目录的config/elasticsearch.yml文件，去掉network.host的注释，将它的值改成0.0.0.0，然后重新启动 Elastic
+
+```sh
+# /etc/elasticsearch/elasticsearch.yml
+network.host: localhost
+
+sudo ufw allow from 198.51.100.0 to any port 9200
+sudo ufw enable
+
+# 开启另一端开口,返回一个 JSON 对象，包含当前节点、集群、版本等信息
+curl -X GET 'http://localhost:9200'
+curl -XGET 'http://localhost:9200/_nodes?pretty'
+
+# add
+curl -XPOST -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1' -d '{ "message": "Hello World!" }'
+
+# retrieve
+curl -X GET -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1' -d '{ "message": "Hello World!" }'
+
+# modify
+curl -X PUT -H "Content-Type: application/json"  'localhost:9200/tutorial/helloworld/1?pretty' -d '
+{
+  "message": "Hello, People!"
+}'
+curl -X GET -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1?pretty'
+
+curl -XGET 'localhost:9200/_cat/health?v&pretty'
+{
+ "name" : "Reeva Payge",
+ "cluster_name" : "elasticsearch",
+ "version" : {
+   "number" : "2.1.0",
+   "build_hash" : "72cd1f1a3eee09505e036106146dc1949dc5dc87",
+   "build_timestamp" : "2015-11-18T22:40:03Z",
+   "build_snapshot" : false,
+   "lucene_version" : "5.3.1"
+ },
+ "tagline" : "You Know, for Search"
+}
+# web地址  http://192.168.88.250:9200/_plugin/head/
+```
+
+## 概念
+
+* Elastic 本质上是一个分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个 Elastic 实例
+* 集群（Cluster）：物理概念，由多个节点组成Es集群
+* 节点（Node）：物理概念，一个运行的Elasticearch实例，一般是一台机器上的一个进程
+  - 主节点（master node）:只参与元数据管理，整个集群只有一个唯一主节点，多个主节点会参与竞选为唯一主节点。
+    + 有多台保证高可用
+    + 选举机制保证主节点只能有一台运行时管理集群
+  - 数据节点（data node）:保存数据，完成本节点数据查询的功能
+  - 协调节点或客户端节点（client node）：数据分片到不同datanode后，分布式查询分为：查询阶段+取回阶段。该节点接受客户端请求并路由到各datanode完成数据查询，在协调节点完成数据合并取回阶段的功能
+* 对应关系
+  - 关系数据库：数据库 ⇒ 表 ⇒ 行 ⇒ 列(Columns)
+  - Elasticsearch：索引 ⇒ 类型 ⇒ 文档 ⇒ 字段(Fields)
+* 索引（Index）：逻辑概念，包括配置信息mapping和倒排正排数据文件，一个索引的数据文件可能会分布于一台机器，也有可能分布于多台机器。索引的另外一层意思是倒排索引文件。索引中数据是保存在datanode，但是mapping等元数据是保存在master主节点。
+  - Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）,查找数据的时候，直接查找该索引
+  - Elastic 数据管理的顶层单位就叫做 Index（索引）,它是单个数据库的同义词
+  - 每个 Index （即数据库）的名字必须是小写
+* 分片（Shard）
+  - 为了支持更大量的数据，索引一般会按某个维度分成多个部分，每个部分就是一个分片，分片被数据节点(dataNode)管理。
+  - 一个节点(Node)一般会管理多个分片，这些分片可能是属于同一份索引，也有可能属于不同索引，但是为了可靠性和可用性，同一个索引的分片尽量会分布在不同节点(Node)上。
+  - 分片有两种，主分片和副本分片。
+    + 主分片（Primary）：每个索引必须包含1个主分片，也可以多个主分片。按照mysql概念理解的话，一个表=一个index， 这表水平拆分为能n个分表，相当于这个index有n个分片。 主分片可以在同一个物理datanode上，也可以在不同datanode，没有强制要求。为了性能，最好分散开来。
+    + 副本（Replica）：同一个分片(Shard)的备份数据，一个分片可能会有0个或多个副本，这些副本中的数据保证强一致或最终一致（可配置）。**副本分片必须和相同数据的主分片不在同一个datanode，是强制要求**。如果datanode不够，副本分片将不工作。 副本分片不工作，不影响正常数据存储和读取，只是index状态为红色。
+* 特点
+  - 通过数据分片技术，分区存储数据。（水平分表）
+  - 通过副本技术冗余保存数据，es副本可以提供查询（读写分离）
+  - 分片有自我调配能力，主分片挂掉，副本选举为主分片，可以跨node存储。（分库分表、高性能弹性扩容）
+  - 主分片和副本分片数据同步es内部提供机制。（可配置异步、同步）
+  - 当节点变更或故障，带来主分片、副本分片的调配恢复，es主节点完成管理，节点恢复，自动恢复同步数据。（高可用、容错、恢复）
+* 服务
+  - 分布式存储都支持数据分片存储，分片储存需要两阶段查询。查询阶段+结果合并阶段。
+  - 分布式存储都支持分片的副本存储，数据写入主分片后，需要同步、异步机制同步数据到副本分片，冗余保存。
+  - 数据分片需要有路由规则，内部叫route table，存储在主节点中，作为整个集群元数据一部分。
+* type:相当于表结构的描述
+  - Document 可以分组，比如weather这个 Index 里面，可以按城市分组（北京和上海），也可以按气候分组（晴天和雨天）。这种分组就叫做 Type，它是虚拟的逻辑分组，用来过滤 Document
+  - 类型是通过mapping来定义每个字段的类型
+  - 不同的 Type 应该有相似的结构（schema），举例来说，id字段不能在这个组是字符串，在另一个组是数值。这是与关系型数据库的表的一个区别。性质完全不同的数据（比如products和logs）应该存成两个 Index，而不是一个 Index 里面的两个 Type（虽然可以做到）
+* document：Index 里面单条的记录称为 Document（文档）
+  - 多条 Document 构成了一个 Index
+  - Document 使用 JSON 格式表示，同一个 Index 里面的 Document，不要求有相同的结构（scheme），但是最好保持相同，这样有利于提高搜索效率
+
+```sh
+# 查看当前节点的所有 Index
+curl -X GET 'http://localhost:9200/_cat/indices?v'
+
+# 列出每个 Index 所包含的 Type
+curl 'localhost:9200/_mapping?pretty=true'
+
+# 新建一个名叫weather的 Index
+curl -X PUT 'localhost:9200/accounts/person/1' -d'
+{
+  "user": "张三",
+  "title": "工程师",
+  "desc": "数据库管理"
+}'
+
+curl 'localhost:9200/accounts/person/_search'
+
+# 删除
+curl -X DELETE 'localhost:9200/accounts/person/1'
 ```
 
 ## 原理
@@ -105,95 +206,6 @@ cd elasticsearch-5.5.2/
 ![Roaringbitmaps](../../_static/Roaringbitmaps.png "Roaringbitmaps")
 ![skiplist](../../_static/skiplist.png "skiplist")
 ![combineIndex](../../_static/combineIndex.png "combineIndex")
-
-## 概念
-
-* node和cluster
-  - Elastic 本质上是一个分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个 Elastic 实例
-  - 单个 Elastic 实例称为一个节点（node）
-  - 一组节点构成一个集群（cluster）
-* 对应关系
-  - 关系数据库 ⇒ 数据库 ⇒ 表 ⇒ 行 ⇒ 列(Columns)
-  - Elasticsearch ⇒ 索引 ⇒ 类型 ⇒ 文档 ⇒ 字段(Fields)
-* index
-  - Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）,查找数据的时候，直接查找该索引
-  - Elastic 数据管理的顶层单位就叫做 Index（索引）,它是单个数据库的同义词
-  - 每个 Index （即数据库）的名字必须是小写
-* type:相当于表结构的描述
-  - Document 可以分组，比如weather这个 Index 里面，可以按城市分组（北京和上海），也可以按气候分组（晴天和雨天）。这种分组就叫做 Type，它是虚拟的逻辑分组，用来过滤 Document
-  - 类型是通过mapping来定义每个字段的类型
-  - 不同的 Type 应该有相似的结构（schema），举例来说，id字段不能在这个组是字符串，在另一个组是数值。这是与关系型数据库的表的一个区别。性质完全不同的数据（比如products和logs）应该存成两个 Index，而不是一个 Index 里面的两个 Type（虽然可以做到）
-* document：Index 里面单条的记录称为 Document（文档）
-  - 多条 Document 构成了一个 Index
-  - Document 使用 JSON 格式表示，同一个 Index 里面的 Document，不要求有相同的结构（scheme），但是最好保持相同，这样有利于提高搜索效率
-
-```sh
-# 查看当前节点的所有 Index
-curl -X GET 'http://localhost:9200/_cat/indices?v'
-
-# 列出每个 Index 所包含的 Type
-curl 'localhost:9200/_mapping?pretty=true'
-
-# 新建一个名叫weather的 Index
-curl -X PUT 'localhost:9200/accounts/person/1' -d'
-{
-  "user": "张三",
-  "title": "工程师",
-  "desc": "数据库管理"
-}'
-
-curl 'localhost:9200/accounts/person/_search'
-
-# 删除
-curl -X DELETE 'localhost:9200/accounts/person/1'
-```
-
-## 配置
-
-* 默认情况下，Elastic 只允许本机访问
-* 需要远程访问，可以修改 Elastic 安装目录的config/elasticsearch.yml文件，去掉network.host的注释，将它的值改成0.0.0.0，然后重新启动 Elastic
-
-```yml
-# /etc/elasticsearch/elasticsearch.yml
-network.host: localhost
-
-sudo ufw allow from 198.51.100.0 to any port 9200
-sudo ufw enable
-```
-
-```
-# 开启另一端开口,返回一个 JSON 对象，包含当前节点、集群、版本等信息
-curl -X GET 'http://localhost:9200'
-curl -XGET 'http://localhost:9200/_nodes?pretty'
-
-# add
-curl -XPOST -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1' -d '{ "message": "Hello World!" }'
-
-# retrieve
-curl -X GET -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1' -d '{ "message": "Hello World!" }'
-
-# modify
-curl -X PUT -H "Content-Type: application/json"  'localhost:9200/tutorial/helloworld/1?pretty' -d '
-{
-  "message": "Hello, People!"
-}'
-curl -X GET -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1?pretty'
-
-curl -XGET 'localhost:9200/_cat/health?v&pretty'
-{
- "name" : "Reeva Payge",
- "cluster_name" : "elasticsearch",
- "version" : {
-   "number" : "2.1.0",
-   "build_hash" : "72cd1f1a3eee09505e036106146dc1949dc5dc87",
-   "build_timestamp" : "2015-11-18T22:40:03Z",
-   "build_snapshot" : false,
-   "lucene_version" : "5.3.1"
- },
- "tagline" : "You Know, for Search"
-}
-# web地址  http://192.168.88.250:9200/_plugin/head/
-```
 
 ## 性能
 
@@ -297,10 +309,6 @@ output {
 ## [elastic/kibana](https://github.com/elastic/kibana)
 
 📊 Kibana analytics and search dashboard for Elasticsearch https://www.elastic.co/products/kibana
-
-## [deviantony/docker-elk](https://github.com/deviantony/docker-elk)
-
-The ELK stack powered by Docker and Compose.
 
 ```sh
 # 搭建
@@ -463,7 +471,9 @@ text类型在存入elasticsearch的时候，会先分词，然后根据分词后
   - es json
 * 近实时搜索
 
-## docker
+## [deviantony/docker-elk](https://github.com/deviantony/docker-elk)
+
+The ELK stack powered by Docker and Compose.
 
 ```sh
 docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --name elk sebp/elk
