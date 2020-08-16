@@ -256,7 +256,6 @@ swapon /swapmem
  11 /dev/fd0        /media/floppy0  auto    rw,user,noauto,exec,utf8 0       0
 ```
 
-
 ## 硬件
 
 * 磁盘分区
@@ -941,6 +940,8 @@ perf record -e context-switches -ag
 
 perf report # 查看相关结果
 ```
+
+## GDB
 
 ## 文件系统
 

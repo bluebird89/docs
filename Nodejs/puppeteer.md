@@ -2,6 +2,10 @@
 
 Headless Chrome Node API https://pptr.dev
 
+```sh
+npm i puppeteer
+```
+
 ## 工具
 
 * [GoogleChrome/rendertron](https://github.com/GoogleChrome/rendertron):A Headless Chrome rendering solution https://render-tron.appspot.com/

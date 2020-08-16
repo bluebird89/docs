@@ -36,12 +36,12 @@ fi
 
 ## 配置
 
-* 全局配置
-  - `/etc/gitconfig`
-  - ubuntu:`~/.gitconfig`
-* 系统配置：`git config --system`
-* 项目配置：`git local --system` project/.git/config   `git config`
 * 优先级：local > global(用户) > system
+  - 全局配置
+    + `/etc/gitconfig`
+    + ubuntu:`~/.gitconfig`
+  - 系统配置：`git config --system`
+  - 项目配置：`git local --system` project/.git/config   `git config`
 * alias
   + prune = fetch --prune - 当在其他人将分支推送到远程仓库时，我也会得到了大量的本地分支。Prune可以删除远端已经删除的任何本地分支。
   + undo = reset --soft HEAD ^ - 如果我在做出提交时犯了一个错误，这个命令会把代码恢复到提交之前的样子。通常我只是在这种情况下修改现有的提交，因为它保留了提交信息。
@@ -187,17 +187,18 @@ gpg --sign demo.txt #签名
 
 ## Git VS SVN
 
-* 版本控制系统（VCS: Version Control System），为提供这种记录和追溯变更的能力。但是图片，视频这些二进制文件，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是知道图片从1kb变成2kb，但是到底改的内容没法记录
-* SVN是集中式版本控制系统，版本库是集中放在中央服务器
-  - 每次次记录哪些文件作了更新、更新哪些行的内容
-  - 要从中央服务器哪里得到最新的版本
-  - 把自己做完的活推送到中央服务器
+* 版本控制系统（VCS: Version Control System）：提供记录和追溯变更的能力
+  - 图片，视频这些二进制文件，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是知道图片从1kb变成2kb，但是到底改的内容没法记录
+* SVN：集中式版本控制系统，版本库是集中放在中央服务器
+  - 每次记录哪些文件作了更新、更新哪些行的内容
+  - 要从中央服务器得到最新的版本
+  - 做完的活推送到中央服务器
   - 有本地仓库，必须联网才能工作
   - 每个分支都要放在不同的目录中
-* Git是分布式版本控制系统
+* Git 分布式版本控制系统
   - 记录文件快照
-  - 没有中央服务器的，每个人的电脑就是一个完整的版本库
-  - 可以在同一个目录中切换不同的分支
+  - 没有中央服务器，每个人电脑就是一个完整的版本库
+  - 可以在同一个目录中切换不同分支
 
 ## 原理
 
@@ -205,38 +206,24 @@ gpg --sign demo.txt #签名
 * HEAD:的是当前分支最末梢最新的一个提交
 * 对代码的任何修改，最终都会反映到 commit 上面去。创建和保存项目的快照及与之后的快照进行对比
 * 维护的就是一个commitID树，分别保存着不同状态下的代码
-* 保存对象
-  - `git add all`
-    + `git hash-object -w test.txt`:每次add的文件中的每一个文件压缩成二进制文件，存入 Git。压缩后的二进制文件，称为一个 Git 对象，保存在.git/objects目录
-    + `git cat-file -p hashId`: 查看 hash 文件内内容
-    + 暂存区:`git update-index`:在暂存区记录一个发生变动的文件
-    + `git ls-files --stage`:显示暂存区当前的内容
-    + 相同的文件只会存一个blob，不同的commit的区别是commit、tree和有差异的blob
-  - `git commit`
-    + `git write-tree`:将当前的目录结构，生成一个 Git 对象,目录结构也是作为二进制对象保存的，也保存在.git/objects目录里面
-    + `echo "first commit" | git commit-tree hashId`  将目录树对象写入版本历史, 生成hashId
-      * `echo "second commit" | git commit-tree 1552fd52bc14497c11313aa91547255c95728f37 -p c9053865e9dff393fd2f7a92a18f9bd7f2caa7fa`: 更新需要关系父节点
-    + `git log --stat hashID` 查看某个快照信息,没有记录这个快照属于哪个分支
-    + 更新分支指针 `echo 785f188674ef3c6ddc5b516307884e1d551f53ca > .git/refs/heads/master`
-* 分支（branch）
-  - 指向某个快照的指针，分支名就是指针名
-  - 分支会自动更新，如果当前分支有新的快照，指针就会自动指向它
-  - 特殊指针HEAD， 总是指向当前分支的最近一次快照
-* 工作区（Workspace）:开发改动的地方，任何对象都是在工作区中诞生和被修改；文件状态：modified:working directory
-* 暂存区（Index/Stage）:.git目录下的index文件, 暂存区会索引git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。任何修改都是从进入index区才开始被版本控制；文件状态：staged:Stage(Index)
-* 版本库|本地仓库（Repository）
-  - `.git`文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；包括git自动创建的master分支，并且将HEAD指针指向master分支。文件状态：committed:History,这部分是仓库的控制中心
 * objects 目录下有 3 种类型的数据： `git cat-file -p`
   - Blob 文件
   - Tree 文件夹
   - Commit 创建的提交节点 整合了 tree 和 blob 类型，保存了当前的所有变化
+* sdf
+  - `config` 配置文件
+  - `description` 仅供 Git Web 程序使用的描述
+  - `HEAD`  当前被检出分支
+  - `index` 暂存区信息
+  - `hooks/`  客户端或服务端的钩子脚本（hook scripts）
+  - `info/` 全局性排除（global exclude）文件，不希望被记录在 .gitignore 文件中的忽略模式（ignored patterns）
+  - `objects/`  所有数据内容
+  - `refs/` 数据（分支）的提交对象的指针
 
 ![Git原理-1](../_static/bg2015120901.png)
 ![Git原理-2](../_static/git_2.png)
-
-commit、tree和blob三个对象之间的关系
 ![object structure](../_static/object_struct.png)
-![tree](../_static/tree.jpg)
+![commit、tree和blob三个对象之间的关系](../_static/tree.jpg)
 <!-- ![Git原理-3](../_static/git_3.jpg) 图片待修复-->
 
 ```sh
@@ -282,37 +269,34 @@ git cat-file -p 3b18e512dba79e4c8300dd08aeb37f8e728b8dad #  查看原文件内�
         └── tags
 ```
 
-### 工作区 working tree
+### 工作区（Workspace）working directory
 
-* 仓库元数据
-  - `config` 配置文件
-  - `description` 仅供 Git Web 程序使用的描述
-  - `HEAD`  当前被检出分支
-  - `index` 暂存区信息
-  - `hooks/`  客户端或服务端的钩子脚本（hook scripts）
-  - `info/` 全局性排除（global exclude）文件，不希望被记录在 .gitignore 文件中的忽略模式（ignored patterns）
-  - `objects/`  所有数据内容
-  - `refs/` 数据（分支）的提交对象的指针
+* 开发改动的地方，任何对象都是在工作区中诞生和被修改
+* 文件状态：modified
+* git add 保存对象
+  - git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体
+  - `git hash-object -w test.txt`:每次add的文件中的每一个文件压缩成二进制文件，存入 Git。压缩后的二进制文件，称为一个 Git 对象，保存在.git/objects目录
+  - `git cat-file -p hashId`: 查看 hash 文件内内容
+  - 暂存区:`git update-index`:在暂存区记录一个发生变动的文件
+  - `git ls-files --stage`:显示暂存区当前的内容
+  - 相同的文件只会存一个blob，不同的commit的区别是commit、tree和有差异的blob
 * 数据结构
   - 绿色的5位字符表示提交的ID，分别指向父节点
   - 分支用橘色显示，分别指向特定的提交。当前分支由附在其上的HEAD标识
-* 撤销工作区的文件修改:`git checkout -- [filename]` 用于从历史提交（或者暂存区域）中拷贝文件到工作目录,工作区的文件变化一旦被撤销，就无法找回了;切换分支
+* 撤销工作区文件修改:
+  - git checkout -- [filename]`用于从历史提交（或者暂存区域）中拷贝文件到工作目录,工作区的文件变化一旦被撤销，就无法找回了
+  - `git checkout .` 把被「修改」的文件恢复成stage的状态. 如果新增了新文件，是不会删除新文件的
   - `git checkout HEAD -- files`:回滚到最后一次提交。跳过暂存区域直接从仓库取出文件
   - `git checkout HEAD~ foo.c`:会将提交节点HEAD~中的foo.c复制到工作目录并且加到暂存区域中
-  - 切换分支:当不指定文件名，给出一个（本地）分支时，那么HEAD标识会移动到那个分支，暂存区域和工作目录中的内容会和HEAD对应的提交节点一致
-    + 新提交节点（下图中的a47c3）中的所有文件都会被复制（到暂存区域和工作目录中）
-    + 只存在于老提交节点（ed489）中的文件会被删除
-    + 不属于上述两者的文件会被忽略，不受影响保留
   - detached HEAD（被分离的HEAD标识）:既没有指定文件名，也没有指定分支名，而是一个标签、远程分支、SHA-1值或者是像master~3类似的东西，就得到一个匿名分支
     + 方便地在历史版本之间互相切换。`git checkout v1.6.6.1`
     + 当HEAD处于分离状态（不依附于任一分支）时，提交操作可以正常进行，但是不会更新任何已命名的分支.一旦此后切换到别的分支，比如说master，那么这个提交节点（可能）再也不会被引用到，然后就会被丢弃掉
     + 如果想保存这个状态，可以用命令git checkout -b name来创建一个新的分支
-* 更改上次提交：`git commit --amend ""`,会使用与当前提交相同的父节点进行一次新提交，旧的提交会被取消
 * 撤销提交:`git revert HEAD`:在当前提交后面，新增一次提交，抵消掉上一次提交导致的所有变化。它不会改变过去的历史，所以是首选方式，没有任何丢失代码的风险
   - 想抵消多个提交，必须在命令行依次指定这些提交
   - `--no-edit`：执行时不打开默认编辑器，直接使用 Git 自动生成的提交信息
   - `--no-commit`：只抵消暂存区和工作区的文件变化，不产生新的提交
-* 丢弃提交:`git reset [last good SHA]` 让最新提交的指针回到以前某个时点，该时点之后的提交都从历史中消失
+* 从stage区还原出来:`git reset [last good SHA]` 让最新提交的指针回到以前某个时点，该时点之后的提交都从历史中消失
   - `--mixed`（默认）：更改引用的指向，不改变工作区的文件（但会改变暂存区）.想找回那些丢弃掉的提交，可以使用`git reflog`
   - `--hard`:更改引用的指向;替换暂存区内容和引用指向的目录树一致;替换工作区内容和暂存区一致，也和HEAD所指向的目录树内容相同
   - `--soft`:更改引用的指向，不改变暂存区和工作区
@@ -419,9 +403,19 @@ git update-index --assume-unchanged <file>Resume tracking files with:
 git update-index --no-assume-unchanged <file>
 ```
 
-### 暂存区 Index
+### 暂存区（Index/Stage）:
 
-* commit:生成上次提交的状态与当前状态的差异记录（也被称为revision）,系统会根据修改的内容计算出没有重复的40位英文及数字来给提交命名
+* 任何修改都是从进入index区才开始被版本控制
+* .git目录下的index文件, 暂存区会索引
+* reset:重置 commit 版本
+* 文件状态：staged:Stage(Index)
+* `git commit`
+  - `git write-tree`:将当前的目录结构，生成一个 Git 对象,目录结构也是作为二进制对象保存的，也保存在.git/objects目录里面
+  - `echo "first commit" | git commit-tree hashId`  将目录树对象写入版本历史, 生成hashId
+    + `echo "second commit" | git commit-tree 1552fd52bc14497c11313aa91547255c95728f37 -p c9053865e9dff393fd2f7a92a18f9bd7f2caa7fa`: 更新需要关系父节点
+  - `git log --stat hashID` 查看某个快照信息,没有记录这个快照属于哪个分支
+  - 更新分支指针 `echo 785f188674ef3c6ddc5b516307884e1d551f53ca > .git/refs/heads/master`
+* commit:提交到history，生成上次提交的状态与当前状态的差异记录（也被称为revision）,系统会根据修改的内容计算出没有重复的40位英文及数字来给提交命名
   - p, pick = use commit
   - r, reword = use commit, but edit the commit message
   - e, edit = use commit, but stop for amending
@@ -429,6 +423,8 @@ git update-index --no-assume-unchanged <file>
   - f, fixup = like "squash", but discard this commit's log message
   - x, exec = run command (the rest of the line) using shell
   - d, drop = remove commit
+* 更改上次提交：`git commit --amend ""`,会使用与当前提交相同的父节点进行一次新提交，旧的提交会被取消
+* 合并多个commit：把 HEAD 移到了17bd20c这个commit（reset），而且不会修改work dir中的数据，add再commit
 * stash:还未提交的修改内容以及新添加的文件，留在索引区域或工作树的情况下切换到其他的分支时，修改内容会从原来的分支移动到目标分支
   - 如果在checkout的目标分支中相同的文件也有修改，checkout会失败的。这时要么先提交修改内容，要么用stash暂时保存修改内容后再checkout
 * merge 命令把不同分支合并起来。合并前，索引必须和当前提交相同。
@@ -594,7 +590,13 @@ squash 9eb3188 update
 squash 7d33868 update
 ```
 
-### 本地分支
+### 版本库|本地仓库（commit history）
+
+* `.git`文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；
+* 包括git自动创建的master分支，并且将HEAD指针指向master分支
+* 文件状态：committed
+* 每个commit都有一个唯一的 Hash 值
+* 通过git log命令来查看
 
 * merge:保持修改内容的历史记录，但是历史记录会很复杂
   - fast-forward:bugfix分支的历史记录包含master分支所有的历史记录，所以通过把master分支的位置移动到bugfix的最新分支上，Git 就会合并
@@ -640,6 +642,16 @@ git rm –cached FILE # 这个命令只删除远程文件
 
 ![merge](../_static/merge.svg "merge")
 ![rebase](../_static/rebase.svg "rebase")
+
+## 分支（branch）
+
+* 指向某个快照的指针，分支名就是指针名
+* 分支会自动更新，如果当前分支有新的快照，指针就会自动指向它
+* HEAD:总是指向当前分支的最近一次快照
+* 切换分支:当不指定文件名，给出一个（本地）分支时，那么HEAD标识会移动到那个分支，暂存区域和工作目录中的内容会和HEAD对应的提交节点一致
+  - 新提交节点（下图中的a47c3）中的所有文件都会被复制（到暂存区域和工作目录中）
+  - 只存在于老提交节点（ed489）中的文件会被删除
+  - 不属于上述两者的文件会被忽略，不受影响保留
 
 ### 远程分支
 
