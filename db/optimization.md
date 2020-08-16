@@ -126,6 +126,33 @@ LIMIT
     - 备份：先用mv重命名文件（不要跨分区），然后执行flush logs（必须的）
 * profiling:准确的SQL执行消耗系统资源的信息
 * DESCRIBE：可以放在SELECT, INSERT, UPDATE, REPLACE 和 DELETE语句前边使用
+* [`OPTIMIZER_TRACE`](https://mp.weixin.qq.com/s/QO_EVtpvCiYPdtDFOWWXhg):一个跟踪功能，跟踪执行的语句的解析优化执行的过程，并将跟踪到的信息记录到I`NFORMATION_SCHEMA.OPTIMIZER_TRACE`表中
+    - 从5.6开始提供了相关的功能，但是MySQL默认是关闭它的,在需要使用的时候才会手动去开启
+    - 通过optimizer_trace系统变量启停跟踪功能
+    - 可跟踪语句对象：
+        + SELECT/INSERT/REPLACE/UPDATE/DELETE
+        + EXPLAIN
+        + SET
+        + DO
+        + DECLARE/CASE/IF/RETURN
+        + CALL
+    - `show variables like '%optimizer_trace%';`
+        + enabled：启用/禁用optimizer_trace功能。
+        + one_line：决定了跟踪信息的存储方式，为on表示使用单行存储，否则以JSON树的标准展示形式存储。单行存储中跟踪结果中没有空格，造成可读性极差，但对于JSON解析器来说是可以解析的，将该参数打开唯一的优势就是节省空间，一般不建议开启。
+        + `optimizer_trace_features`：该变量中存储了跟踪信息中可控的打印项，可以通过调整该变量，控制在INFORMATION_SCHEMA.OPTIMIZER_TRACE表中的trace列需要打印的JSON项和不需要打印的JSON项。默认打开该参数下的所有项。
+        + optimizer_trace_max_mem_size ：optimizer_trace内存的大小，如果跟踪信息超过这个大小，信息将会被截断。
+        + optimizer_trace_limit  & optimizer_trace_offset 这两个参数神似于SELECT语句中的“LIMIT offset, row_count”，optimizer_trace_limit 约束的是跟踪信息存储的个数，optimizer_trace_offset 则是约束偏移量。和 LIMIT 一样，optimizer_trace_offset 从0开始计算（最老的一个查询记录的偏移量为0）。
+        + optimizer_trace_offset 的正负值，不需要太过于去纠结，如下表所示，其实offset 0 = offset -5 ，它们是一个等价的关系，仅仅是表述方式不同。这样的表述方式和python中的切片的表述是一致的，了解python的童鞋们都知道，切片的时候经常用到-1取列表中最后一个数值或者是反向取值。
+    - 使用
+        + 打开optimizer_trace参数
+        + 执行要分析的查询
+        + 查看INFORMATION_SCHEMA.OPTIMIZER_TRACE表中跟踪结果
+        + 循环2、3步骤
+        + 当不再需要分析的时候，关闭参数
+    - SELECT * FROM INFORMATION_SCHEMA.OPTIMIZER_TRACE;三个步骤构成
+        + join_preparation（准备阶段）
+        + join_optimization（优化阶段）
+        + join_execution（执行阶段）
 
 ![优化策略](../_static/index.jpeg "Optional title")
 
@@ -171,6 +198,12 @@ SHOW VARIABLES LIKE 'long_query_time%';
 
 SET GLOABL SLOW_QUERY_LOG=on; # 临时设置
 set long_query_time=1;
+
+SET optimizer_trace="enabled=on";
+show variables like '%optimizer_trace%';
+
+SELECT * FROM INFORMATION_SCHEMA.OPTIMIZER_TRACE;
+SET optimizer_trace="enabled=off";
 
 top #  查看进程消耗
 threads_running/QPS/TPS
