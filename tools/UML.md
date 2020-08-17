@@ -157,6 +157,10 @@ https://graphviz.gitlab.io/
 * [使用graphviz绘制流程图](http://icodeit.org/2012/01/%E4%BD%BF%E7%94%A8graphviz%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/)
 
 ```sh
+sudo apt install graphviz
+
+touch example.npl
+
 # first.dot
 digraph first2{
 a;
@@ -181,6 +185,10 @@ dot -Tpng first.dot -o first.png # 用的是dot布局 -T表示格式，即画成
   - 安装 graphviz `brew install graphviz`
   - 安装插件 sublime_diagram_plugin
   - Alt + d 来生成 PlantUML 图片
+* vscode:PlantUML、Graphviz Preview
+  - 文件格式:.wsd, .pu, .puml, .plantuml, .iuml
+  - 预览:Alt+D
+  - 导出 F1/ctrl+shift+p; PlantUML:导出当前图表；选择导出格式png；导出即可
 
 ```plantuml
 // 时序图

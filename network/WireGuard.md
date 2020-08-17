@@ -20,13 +20,31 @@
 	- 通过中央服务器自动分配和撤销密钥。
 	- 发送原始的二层以太网帧。
 
-
 ## 安装
 
-```
-sudo add-apt-repository ppa:wireguard/wireguard
-sudo apt-get update
-sudo apt-get install wireguard
+* 配置 /etc/wireguard/wg0.conf
+
+```sh
+# CentOS7
+$ yum install epel-release https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
+$ yum install yum-plugin-elrepo
+$ yum install kmod-wireguard wireguard-tools
+
+# 如果使用的是非标准内核，需要安装 DKMS 包
+$ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ curl -o /etc/yum.repos.d/jdoss-wireguard-epel-7.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-7/jdoss-wireguard-epel-7.repo
+$ yum install wireguard-dkms wireguard-tools
+
+# Ubuntu ≥ 18.04
+$ apt install wireguard
+
+# Ubuntu ≤ 16.04
+$ add-apt-repository ppa:wireguard/wireguard
+$ apt-get update
+$ apt-get install wireguard
+
+# MacOS
+$ brew install wireguard-tools
 
 sudo -s
 wg # for configuring WireGuard interfaces.
@@ -36,6 +54,11 @@ mkdir /etc/wireguard/keys
 cd /etc/wireguard/keys
 umask 077 #  Set the directory user mask to 077 by running umask 077. A umask of 077 allows read, write, and execute permissions for the file’s owner (root in this case), but prohibits read, write, and execute permissions for everyone else and makes sure credentials don’t leak in a race condition
 wg genkey | tee privatekey | wg pubkey > publickey
+
+# 生成私钥
+wg genkey > example.key
+# 生成公钥
+wg pubkey < example.key > example.key.pub
 
 vim /etc/wireguard/wg0.conf
 [Interface]
@@ -50,11 +73,20 @@ PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACC
 # If your server is behind a NAT then all traffic needs to be forwarded from the default interface to the WireGuard interface. To find out the name of the default interface run ip route
 ip route | grep default | awk '{print $5}'
 
-# Enabling IP forwarding on server
-vim /etc/sysctl.conf
-net.ipv4.ip_forward=1
-
+# Enabling IP forwarding on server 中继服务器上开启 IP 地址转发
+echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+echo "net.ipv4.conf.all.proxy_arp = 1" >> /etc/sysctl.conf
 sysctl -p # the changes to take effect without requiring a reboot
+
+# 添加 iptables 规则，允许本机的 NAT 转换： 需要把 eth0 改成你实际使用的网卡接口名称
+$ iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+$ iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+$ iptables -A FORWARD -i wg0 -o wg0 -m conntrack --ctstate NEW -j ACCEPT
+$ iptables -t nat -A POSTROUTING -s 192.0.2.0/24 -o eth0 -j MASQUERADE
+
+# 启动与停止
+wg-quick up /full/path/to/wg0.conf
+wg-quick down /full/path/to/wg0.conf
 
 ## client
 sudo pacman -S wireguard-tools wireguard-dkms
@@ -160,3 +192,5 @@ AllowedIPs = 0.0.0.0/0
 * [部署](https://www.linode.com/docs/networking/vpn/set-up-wireguard-vpn-on-ubuntu/) <https://teddysun.com/554.html>
 * [Getting Started with WireGuard](https://miguelmota.com/blog/getting-started-with-wireguard/)
 * [WireGuard 的工作原理](https://fuckcloudnative.io/posts/wireguard-docs-theory/)
+* [Some Unofficial WireGuard Documentation](https://github.com/pirate/wireguard-docs)
+* [WireGuard 的搭建使用与配置详解](https://fuckcloudnative.io/posts/wireguard-docs-practice/)
