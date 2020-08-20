@@ -1182,3 +1182,4 @@ JavaEE/JDBC/Weblogic
 * [Snailclimb/JavaGuide](https://github.com/Snailclimb/JavaGuide):A core knowledge that most Java programmers need to master https://github.com/Snailclimb/JavaGuide
 * [crossoverJie/JCSprout](https://github.com/crossoverJie/JCSprout):👨‍🎓 Java Core Sprout : basic, concurrent, algorithm
 * [ruibaby/halo](https://github.com/ruibaby/halo):Halo可能是最好的Java博客系统😉 https://docs.halo.run
+* [精简之道](https://mp.weixin.qq.com/s/Icn5_RZzFHB9WsKip2ZZ6g)

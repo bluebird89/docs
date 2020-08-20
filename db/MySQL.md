@@ -151,6 +151,8 @@ mysql_config --include
             * 定期断开长连接。使用一段时间或者程序里面判断执行过一个占用内存的大查询后，断开连接，之后要查询再重连
             * 如果你用的是 MySQL 5.7 或更新版本，可以在每次执行一个比较大的操作后，通过执行 mysql_reset_connection 来重新初始化连接资源。这个过程不需要重连和重新做权限验证，但是会将连接恢复到刚刚创建完时的状态。
     - 查询缓存
+        + MySQL 8.0 版本开始将不再支持查询缓存功能
+        + `show variables like '%query_cache%';`
         + 在执行查询之前，如果查询缓存是打开的，会检查这个查询语句是否命中查询缓存中的数据，之前执行过的语句及其结果可能会以 key-value 对的形式，被直接缓存在内存中。key 是查询的语句，value 是查询的结果。如果有缓存直接从缓存中读取并返回数据，不再执行后面的步骤了，结束查询操作
         + 如果没有缓存则继续往后执行，并将执行结果和语句保存在缓存中
         + 将缓存存放在一个引用表（不要理解成 table，可以认为是类似于 HashMap的数据结构）
@@ -174,14 +176,13 @@ mysql_config --include
             * 不要轻易打开查询缓存，特别是写密集型应用。如果想用，可以将 query_cache_type设置为 DEMAND，这时只有加入 SQL_CACHE 的查询才会走缓存
         + 注意:在 mysql8 后已经没有这个功能了，因为这个缓存非常容易被清空掉，命中率比较低。只要对表有一个更新，这个表上的所有缓存就会被清空，因此刚缓存下来的内容，还没来得及用就被另一个更新给清空了
         + 按需使用：可以将参数 query_cache_type 设置成 DEMAND，这样对于默认的 SQL 语句都不使用查询缓存。而对于确定要使用查询缓存的语句，可以用 SQL_CACHE 显式指定
-    - 分析器
-        + 词法分析：通过关键字将SQL语句进行解析，并生成一颗对应的解析树,预处理器会校验“解析树”是否合法(主要校验数据列和表明是否存在，别名是否有歧义等)，
-            * 检查单词是否拼写错误
-            * 检查要查询的表或字段是否存在。检测出有错误就会返回类似 "You have an error in your sql" 这样的错误信息，并结束查询操作
+    - 分析器:词法分析,通过关键字将SQL语句进行解析，并生成一颗对应的解析树,预处理器会校验“解析树”是否合法(主要校验数据列和表明是否存在，别名是否有歧义等)，
+        + 检查单词是否拼写错误
+        + 检查要查询的表或字段是否存在。检测出有错误就会返回类似 "You have an error in your sql" 这样的错误信息，并结束查询操作
     - 优化器：对于一个 sql 语句，mysql 内部可能存在多种执行方案，结果都一样，但效率不一样，在执行之前需要尝试找出一个最优的执行计划.在表里面有多个索引的时候，决定使用哪个索引；或者在一个语句有多表关联（join）的时候，决定各个表的连接顺序。
         + 基于成本的优化器:尝试预测一个查询使用某种执行计划时的成本，并选择其中成本最小的一个。成本的最小单位是读取一个4K数据页的成本
         + 在MySQL可以通过查询当前会话的 last_query_cost的值来得到其计算当前查询的成本 `show status like 'last_query_cost';` 结果为数据页的数量
-        + 有非常多的原因会导致MySQL选择错误的执行计划
+        + 有非常多原因会导致MySQL选择错误的执行计划
             * 比如统计信息不准确、不会考虑不受其控制的操作成本（用户自定义函数、存储过程）
             * MySQL认为的最优跟我们想的不一样（我们希望执行时间尽可能短，但MySQL值选择它认为成本小的，但成本小并不意味着执行时间短）
         + 优化策略
@@ -218,7 +219,7 @@ mysql_config --include
         + 在查询优化阶段就为每一张表创建了一个 handler 实例，优化器可以根据这些实例的接口来获取表的相关信息，包括表的所有列名、索引统计信息等
         + 存储引擎接口提供了非常丰富的功能，但其底层仅有几十个接口，这些接口像搭积木一样完成了一次查询的大部分操作
         + 在数据库的慢查询日志中看到一个 rows_examined 的字段，表示这个语句执行过程中扫描了多少行,这个值是在执行器每次调用引擎获取数据行的时候累加的
-* 存储层：用来存储和查询数据
+* 存储层：负责数据的存储和提取，其架构模式是插件式的，支持 InnoDB、MyISAM、Memory 等多个存储引擎
 
 * 更新流程
     - 物理日志 redo log（重做日志）
@@ -773,9 +774,16 @@ select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at
     - MD5(str) 返回字符串 str 的 MD5 值
     - INET_ATON(192.168.1.11)   返回 IP 地址的数字表示
     - INET_NTOA(3232235777)  返回数字代表的 IP 地址
+    - COALESCE 返回参数中的第一个非空表达式
 
 ```sql
 set @currenttime=(select UNIX_TIMESTAMP(current_timestamp()));
+
+# 展示结果的时候不想展示 null，而想展示 'N/A'
+SELECT
+    COALESCE(city, 'N/A')
+  FROM
+    customers;
 ```
 
 ## SQL Structure Query Language
@@ -1360,6 +1368,24 @@ WHERE id IN (1,2,3)
 * 自连接查询就是当前表与自身的连接查询，关键点在于虚拟化出一张表给一个别名 `SELECT e.empName,b.empName from t_employee e LEFT JOIN t_employee b ON e.bossId = b.id`
 * 交叉连接 -- 笛卡尔乘积  cross join  n*n `select * from tch_teacher cross join tch_contact`
 
+```sql
+# 删除重复行
+DELETE FROM Products P1
+ WHERE id < ( SELECT MAX(P2.id)
+                   FROM Products P2
+                  WHERE P1.name = P2.name
+                    AND P1.price = P2.price );
+
+-- 排序-- 排序从 1 开始。如果已出现相同位次，则跳过之后的位次
+SELECT P1.name,
+       P1.price,
+       (SELECT COUNT(P2.price)
+          FROM Products P2
+         WHERE P2.price > P1.price) + 1 AS rank_1
+  FROM Products P1
+  ORDER BY rank_1;
+```
+
 ## 联合查询
 
 * UNION:将多个select查询结果组合成一个结果集合, `SELECT ... UNION [ALL|DISTINCT] SELECT ...`
@@ -1486,10 +1512,10 @@ COMMIT;
         + 通过总是一次性同时获取所有需要的锁以及总是按相同的顺序获取表锁来避免死锁
         + 表级锁更适合于以查询为主，并发用户少，只有少量按索引条件更新数据的应用，如Web 应用
     - 行锁（page-level locking）开销大，加锁慢；会出现死锁；锁定粒度小，发生锁冲突的概率低，并发度高；BDB
-        + 最大程度的支持并发，同时也带来了最大的锁开销
-        + 在 InnoDB 中，除单个 SQL 组成的事务外， 锁是逐步获得的，这就决定了在 InnoDB 中发生死锁是可能的
+        + 最大程度支持并发，同时也带来了大的锁开销
+        + 在 InnoDB 中，除单个 SQL 组成的事务外，锁是逐步获得的，这就决定了在 InnoDB 中发生死锁是可能的
         + 行级锁只在存储引擎层实现，而Mysql服务器层没有实现
-        + 行级锁更适合于有大量按索引条件并发更新少量不同数据，同时又有并发查询的应用，如一些在线事务处理（OLTP）系统
+        + 适合于有大量按索引条件并发更新少量不同数据，同时又有并发查询的应用，如一些在线事务处理（OLTP）系统
         + 优点
             * 回滚时只有少量的更改
             * 可以长时间锁定单一的行
@@ -1500,11 +1526,11 @@ COMMIT;
             *  用高级别锁定，通过支持不同的类型锁定，你也可以很容易地调节应用程序，因为其锁成本小于行级锁定。
     - 页锁开销和加锁速度介于表锁和行锁之间；会出现死锁；锁定粒度介于表锁和行锁之间，并发度一般。InnoDB
 * 抽象锁(不真实存在)
-    - 悲观锁（又名“悲观锁”，Pessimistic Concurrency Control，缩写“PCC”）是一种并发控制的方法。在整个数据处理过程中，将数据处于锁定状态，阻止一个事务以影响其他用户的方式来修改数据
+    - 悲观锁 Pessimistic Concurrency Control PCC：一种并发控制的方法。在整个数据处理过程中，将数据处于锁定状态，阻止一个事务以影响其他用户的方式来修改数据
         + 先获取锁，再操作修改，数据库级别
         + 如果一个事务执行的操作都某行数据应用了锁，那只有当这个事务把锁释放，其他事务才能够执行与该锁冲突的操作
         + 条件
-            * 要使用悲观锁，必须关闭mysql数据库的自动提交属性，因为MySQL默认使用autocommit模式 `set autocommit=0`
+            * 要使用悲观锁，必须关闭mysql数据库自动提交属性，因为MySQL默认使用autocommit模式 `set autocommit=0`
         + 实现
             * 依靠数据库的锁机制实现，以保证操作最大程度的独占性
             * 通过常用的select … for update操作来实现悲观锁，在当前事务结束时自动释放，因此必须在事务中使用
@@ -1517,7 +1543,7 @@ COMMIT;
         + 场景
             * 用于数据争用激烈的环境，以及发生并发冲突时使用锁保护数据的成本要低于回滚事务的成本的环境中。
             * 在只读型事务处理中由于不会产生冲突，也没必要使用锁，这样做只能增加系统负载；还有会降低了并行性，一个事务如果锁定了某行数据，其他事务就必须等待该事务处理完才可以处理那行数
-    - 乐观锁（Optimistic Concurrency Control，缩写“OCC”），假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据
+    - 乐观锁 Optimistic Concurrency Control OCC：假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据
         + 先修改，保存时判断是够被更新过，应用级别
         + 实现
             - 当读取数据时，将版本标识的值一同读出，数据每更新一次，同时对版本标识进行更新
@@ -1525,15 +1551,17 @@ COMMIT;
             - 如果数据库表当前版本号与第一次取出来的版本标识值相等，则予以更新
             - 如果不一致，即可认为老版本的数据已经被并发修改掉而不存在了，此时认为获取锁失败，需要回滚整个业务操作并可根据需要重试整个过程
         + 方法
-            * 使用版本号version：为数据增加的一个版本标识
+            * 使用版本号version：为数据增加一个版本标识
                 - SELECT时，读取创建版本号<=当前事务版本号，删除版本号为空或>当前事务版本号
                 - INSERT时，保存当前事务版本号为行的创建版本号
                 - DELETE时，保存当前事务版本号为行的删除版本号
                 - UPDATE时，插入一条新纪录，保存当前事务版本号为行创建版本号，同时保存当前事务版本号到原来删除的行
+            * `update total_amount = total_amount - amount where total_amount > amount`
             * 使用时间戳timestamp
+            * 通过CAS算法实现
         + 适合
-            * 用在取锁失败概率比较小的场景，可以提升系统并发性能
-            * 用于写比较少的情况下
+            * 在取锁失败概率比较小的场景，可以提升系统并发性能
+            * 写比较少的情况下
         + MVCC并发控制中，读操作可以分成两类：
             * 快照读 (snapshot read)：读取的是记录的可见版本 (有可能是历史版本)，不用加锁（共享读锁s锁也不加，所以不会阻塞其他事务的写）
             * 当前读 (current read)：读取的是记录的最新版本，并且，当前读返回的记录，都会加上锁，保证其他事务不会再并发修改这条记录
@@ -2183,13 +2211,19 @@ select staff_id , customer_id from demo where date = '2015-06-01'order by staff_
 
 ## 慢日志 slow log
 
-* 使用慢查询日志，设置相应的阈值（比如超过3秒就是慢SQL），在生产环境跑上个一天过后，看看哪些SQL比较慢
-* 使用MySQL自带的mysqldumpslow命令可以非常明确的得到各种我们需要的查询语句，对MySQL查询语句的监控、分析、优化是MySQL优化非常重要的一步。
-    - 开启慢查询日志后，由于日志记录操作，在一定程度上会占用CPU资源影响mysql的性能，但是可以阶段性开启来定位性能瓶颈。
-    - -s, 是表示按照何种方式排序，c、t、l、r分别是按照记录次数、时间、查询时间、返回的记录数来排序，ac、at、al、ar，表示相应的倒序
-    - -t, 是top n的意思，即为返回前面多少条的数据；
-    - -g, 后边可以写一个正则匹配模式，大小写不敏感的；
-* percona公司的pt-query-digest工具，日志分析功能全面，可分析slow log、binlog、general log
+* 知道哪些SQL语句执行效率低下.在MySQL中响应时间超过`long_query_time` 阀值的语句，会被记录到慢查询日志中
+    - `long_query_time`的默认值为10，意思是运行10s以上的语句
+* 使用:设置相应的阈值（比如超过3秒就是慢SQL），在生产环境跑上个一天过后，看看哪些SQL比较慢
+* 备份：先用mv重命名文件（不要跨分区），然后执行flush logs（必须的）
+* 删除：执行flush logs（必须的）
+* 工具
+    - percona公司的pt-query-digest工具，日志分析功能全面，具体逻辑可以看SlowLogParser这个函数。可分析slow log、binlog、general log
+    - 开源工具：mysqlsla
+    - MySQL自带mysqldumpslow命令可以非常明确的得到各种需要查询语句，对MySQL查询语句的监控、分析、优化是MySQL优化非常重要的一步。
+        + 开启慢查询日志后，由于日志记录操作，在一定程度上会占用CPU资源影响mysql的性能，可以阶段性开启来定位性能瓶颈。
+        + -s, 是表示按照何种方式排序，c、t、l、r分别是按照记录次数、时间、查询时间、返回的记录数来排序，ac、at、al、ar，表示相应的倒序
+        + -t, 是top n的意思，即为返回前面多少条的数据
+        + -g, 后边可以写一个正则匹配模式，大小写不敏感的
 
 ```sql
 # 修改配置文件，服务重启
@@ -2810,6 +2844,23 @@ END
 [begin_label:] while search_condition do
     statement_list
 end while [end_label];
+
+SELECT CASE pref_name
+      WHEN '长沙' THEN '湖南'
+      WHEN '衡阳' THEN '湖南'
+      WHEN '海口' THEN '海南'
+      WHEN '三亚' THEN '海南'
+    ELSE '其他' END AS district,
+    SUM(population)
+FROM PopTbl
+GROUP BY district;
+
+UPDATE Salaries
+SET salary = CASE WHEN salary >= 10000 THEN salary * 0.9
+WHEN salary < 10000 THEN salary * 1.2
+ELSE salary END;
+
+SELECT '存在缺失的编号' AS post FROM post HAVING COUNT(*) <> MAX(id);
 ```
 
 ## ShardingJDBC

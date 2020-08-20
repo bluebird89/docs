@@ -2,8 +2,9 @@
 
 Empowering everyone to build reliable and efficient software. https://www.rust-lang.org
 
-* 由 Mozilla 主导开发的通用、编译型编程语言。设计准则为“安全、并发、实用”，支持函数式、并发式、过程式以及面向对象的编程风格。Rust 语言原本是 Mozilla 员工 Graydon Hoare 的私人项目，而 Mozilla 于 2009 年开始赞助这个项目，并且在 2010 年首次揭露了它的存在
-* 全新的开源系统编程语言，由 Mozilla 和社区的义务劳动者创造，它帮助开发者创造高速与安全的应用，同时能享受到现代多核处理器的强大特性。Rust 使用易懂的语法避免了段错误 (segmentation faults) 并保证了线程安全
+* 由 Mozilla 主导开发的通用、编译型编程语言。设计准则为“安全、并发、实用”，支持函数式、并发式、过程式以及面向对象的编程风格。帮助开发者创造高速与安全的应用，同时能享受到现代多核处理器的强大特性
+* Rust 语言原本是 Mozilla 员工 Graydon Hoare 的私人项目，而 Mozilla 于 2009 年开始赞助这个项目，并且在 2010 年首次揭露了它的存在.全新的开源系统编程语言
+* 易懂的语法避免了段错误 (segmentation faults) 并保证了线程安全
 * 提供了零成本抽象，更多语义，内存安全保证，不会发生竞争的线程，基于特性 (trait) 的泛型，模式匹配，类型推导，高效的 C 绑定，和最小运行时大小
 * 方向
     - 高性能 Web。Rust + WASM
@@ -13,9 +14,17 @@ Empowering everyone to build reliable and efficient software. https://www.rust-l
     - 可 OO。基于 Traits 的简洁而强大的范型系统
     - 错误处理。基于 Option & Result 的空值和错误处理
     - 防 OOM。基于 Ownership、Borrowing、Lifetime 的内存管理机制
+    - 新的范式（paramdigm）。子曾经曰过：如果一门编程语言没有带给你新的 paradigm，就不一定值得学，就好像学了 .net 再去学 java，或者学了 python 再学 ruby，从拓宽边界的角度，意义不大。
+    - 可以编译成 webassembly —— 未来的也许会真正实现「一次编译到处运行」的可执行体：浏览器内，IoT 设备，各种服务器，手机等。
+    - 接近于 C/C++ 性能，不输于 ruby / elixir 表现力的语言。
 * 缺点
     - 处理更多的细节
     - 复杂的所有权机制:在没有垃圾回收机制的前提下保障内存安全。这是一个相当复杂的概念
+* 原因
+    - 未来几年的软件开发，protable binary（平台无关的受控可执行代码）会越来越重要，而 webassembly 似乎是目前唯一受到几大厂商全力支持的方向。
+    - webassembly 的应用场景不仅仅是 web（比如大型游戏的 web 化），更是服务端虚拟化的一个新的，也许是更优的解决方案
+    - 随着 5G 时代的到来，高带宽会带来网络边界的模糊：数据变得灵动起来，从而带动计算会时而发生在客户端，时而发生在服务端。当越来越多的计算可以直接发生在客户端时，一个平台无关的，安全的代码运行环境就变得至关重要，这也是 webassembly 的机会
+    - webassebmly 目前支持最好的语言是什么？Rust
 
 ## 安装
 

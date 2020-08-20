@@ -763,6 +763,10 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     - http方式是将随机生成的验证文件放入网站的根目录,由机构扫描验证
     - DNS方式则是将随机生成的验证码创建域名的TXT记录由机构扫描验证.验证通过即可颁发证书
         + 通过使用域名服务商提供的 API 密钥,让acme.sh自动创建域名验证记录以申请域名证书. acme.sh 支持全球各种域名服务商的 API
+* 优化SSL/TLS
+    - 会话缓存。使用ssl_session_cache指令开启缓存，缓存每次SSL/STL连接时用到的参数。
+    - 会话票或ID。把特定SSL/TLS会话的信息保存为一个会话票或ID，以便连接重用，而不必重新握手。
+    - OCSP封套。通过缓存SSL/TLS证书信息减少握手时间。
 
 ![HTTPS签名和验证](../static/https-ac.png "HTTPS签名和验证")
 ![HTTP vs HTTPS](../static/https.png "HTTP与HTTPS区别")

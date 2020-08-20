@@ -15,7 +15,6 @@
     - metrics 的支持（Rest、Prometheus、Datalog、Statsd、InfluxDB）
     - 支持K8S、docker swarm等，和容器结合比较紧密
 
-
 ## 概念
 
 * Providers：用来自动发现平台上的服务，可以是编排工具、容器引擎或者 key-value 存储等，比如 Docker、Kubernetes、File

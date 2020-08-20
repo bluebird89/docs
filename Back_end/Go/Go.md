@@ -718,6 +718,16 @@ replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
 * 节制是一种美德
 * 可维护性
 
+## 实践
+
+* 尽量使用结构体切片代替字典
+    - 很多时候都是用结构体以及结构体切片的
+* 零值陷阱：slice，map，chan和*T类型对应的零值是nil
+* 使用error返回函数错误
+* 谨慎使用map[string]interface{}做参数
+    - 最像PHP数组的可能就是map[string]interface{}了
+    - 用Go的时候，针对比较复杂的代表一类事物的参数，我们也是应该先定义结构体，然后使用结构体指针或者结构体指针切片作为参数。尽量不使用map[string]interface{}这种类型的参数
+
 ## 问题
 
 ```
