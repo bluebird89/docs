@@ -1575,9 +1575,8 @@ These features allow to pause a branch development and switch to another one (_"
 
 ## [jonas/tig](https://github.com/jonas/tig)
 
-text-mode interface for git
+[Tig: text-mode interface for Git](https://jonas.github.io/tig/) 字符模式下交互查看git项目，可以替代git命令
 
-* [Tig: text-mode interface for Git](https://jonas.github.io/tig/)
 *  l:全屏查看 commit 记录
 *  r:进入 refs view 模式，查看所有分支
 *  s:进入 status view，效果同 git status 命令，会展示所有 Untracked 和 UnStaged 文件
@@ -1757,8 +1756,11 @@ External commands:
 * [scmmanager](https://www.scm-manager.org/):The easiest way to share and manage your Git, Mercurial and Subversion repositories over http
 * [marionebl/commitlint](https://github.com/marionebl/commitlint):📓 Lint commit messages https://marionebl.github.io/commitlint/
 * [pomber/git-history](https://github.com/pomber/git-history)：Quickly browse the history of a file from any git repository https://githistory.xyz/
-* [Bash提示](https://github.com/magicmonty/bash-git-prompt)
 * [okonet/lint-staged](https://github.com/okonet/lint-staged):🚫💩 — Run linters on git staged files
+
+* [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
+* [magicmonty/bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):An informative and fancy bash prompt for Git users
+
 * 客户端
   - msysgit
   - sourcetree

@@ -2,32 +2,39 @@
 
 A progressive, incrementally-adoptable JavaScript framework for building UI on the web. http://vuejs.org
 
-* 全局安装脚手架：sudo npm install -g vue-cli vue-router vuex vue-resource vue-loader webpack
-* 以webpack模板初始化项目： vue init webpack sell：程序文件名称
-* 模块安装：npm insall
-* 运行开发者模式：npm run dev(代码实时更新)
-* 打包文件：npm run build，包含index文件与dist资源包
 * 工程化
 * 模块化
 * 组件化
 * 数据驱动
-* 典型的 MVVM（Model-View-ViewModel）模型框架,View 的变动，会自动更新到 ViewModel，反之亦然，这种机制叫做双向绑定
 
 ## 原理
 
 * 不要用操作dom的思维去用Vue，用操作数据的思维去用
-
-### 构造器
-
-Vue实例实质上就是MVVM模式（Model-View-ViewModel），每个Vue实例在创建时都会经历一系列实例化步骤，例如，需要设置数据观察、编译模板、以及创建必要的数据绑定。在这个过程中，还会调用生命周期钩子，从而方便执行自定义逻辑.该对象含有以下参数：
-
-* 数据:Vue实例都会代理其data对象中的所有属性.代理属性是反应式的，如果在实例创建之后添加一个新的属性到实例上，将不会触发任何视图更新。
+* MVVM模式（Model-View-ViewModel）：view 变动自动更新到 ViewModel，反之亦然，这种机制叫做双向绑定
+  - 每个Vue实例在创建时都会经历一系列实例化步骤，例如，需要设置数据观察、编译模板、以及创建必要的数据绑定
+* 数据:Vue实例都会代理其data对象中的所有属性.代理属性是反应式的，如果在实例创建之后添加一个新的属性到实例上，将不会触发任何视图更新
 * 模板
-* 要挂载的元素
+* 要挂载元素
 * 方法
+* 属性
+  - computed：通过函数来定义，函数体中是该属性的计算逻辑，在初次访问该计算属性时，通过对应函数体计算属性值并缓存起来，以后每次计算属性依赖的普通属性值发生变更，才会重新计算
 * 生命周期回调
 
 ![生命周期](./../../_static/lifecycle.png "Optional title")
+
+## 安装
+
+```sh
+sudo npm install -g vue-cli vue-router vuex vue-resource vue-loader webpack
+#  webpack模板初始化项目：
+ vue init webpack sell：程序文件名称
+# 模块安装
+npm insall
+# 运行开发者模式
+npm run dev(代码实时更新)
+# 打包文件
+npm run build，包含index文件与dist资源包
+```
 
 ## 语法
 
@@ -36,44 +43,18 @@ Vue实例实质上就是MVVM模式（Model-View-ViewModel），每个Vue实例�
 * v-show：根据表达式的值切换displayCSS属性
 * v-if：跟据值是否渲染元素
 * v-for：根据数据多次渲染数据
-* v-on：绑定事件监听器
-* v-bind：动态绑定一个或多个特性，或一个组件prop表达式
+* v-on：绑定事件监听器,简写 @click
+* v-bind：动态绑定一个或多个特性，或一个组件prop表达式 简写 ：title
 * v-model:数据动态绑定
 * v-pre：模版中跳过vue编译，直接输出原始值
 * v-cloak：刷新活着加载出现闪缩
 * v-once：自渲染组件一次
-
-### App 流程
-
-* 需求分析
-* 脚手架工具
-* 数据mock
-* 架构设计
-  - 模块拆分
-  - 组件抽象
-* 代码编写
-* 自测
-* 编译打包
 
 ## 使用
 
 * 定义View
 * 定义Model
 * 创建一个Vue实例或"ViewModel"，它用于连接View和Model
-
-### 特点
-
-- 数据驱动
-- 组件化
-
-### npm源替换
-
-`nmp install -g --registery= https://registery.npm.taobao.org`
-
-### webstrom设置
-
-* 添加vuejs插件
-* File Types配置 将.vue格式的文件注册为HTML文件类型
 
 ### 添加插件
 
