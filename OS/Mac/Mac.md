@@ -376,6 +376,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * Bartender 3 - 通知栏折叠工具 $15
 * Hidden Bar - 另一款通知栏折叠工具
 * eZip - 优秀的 macOS 压缩软件
+* [poolside-fm](https://apps.apple.com/us/app/poolside-fm/id1514817810?mt=12)
 
 ### screensavers
 

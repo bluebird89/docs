@@ -13,7 +13,7 @@ The C based gRPC (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)
 
 * 下载[Protocol Buffers v3.8.0](https://github.com/protocolbuffers/protobuf/releases)
 
-```
+```sh
 ./configure --prefix=your_pb_install_path
 
 brew install protobuf
@@ -253,6 +253,10 @@ grpc_cli call localhost:50051 SayHello "name: 'gRPC CLI'"
 Received an error when querying services endpoint.
 Reflection request not implemented; is the ServerReflection service enabled?
 ```
+
+## grpc-gateway
+
+* 提供了很好地扩展 protobuf/gRPC，用代码生成代码的方向和蓝图。这也是 protobuf 这样的语言的魅力所在：它足够简单，可以很容易被解析，从而生成不同角度的工具
 
 ## 工具
 
