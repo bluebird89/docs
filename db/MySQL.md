@@ -223,13 +223,18 @@ mysql_config --include
 
 * 更新流程
     - 物理日志 redo log（重做日志）
-        + WAL（Write-Ahead Logging）：关键点就是先写日志，再写磁盘。当有一条记录需要更新的时候，InnoDB 引擎就会先把记录写到 redo log 里面，并更新内存，这个时候更新就算完成了。同时，InnoDB 引擎会在适当的时候，将这个操作记录更新到磁盘里面，而这个更新往往是在系统比较空闲的时候做
+        + redo log 是 InnoDB 引擎提供的日志系统，最开始 MySQL 里并没有 InnoDB 引擎。MySQL 自带引擎是 MyISAM，但是 MyISAM 没有 crash-safe 的能力，binlog 日志只能用于归档，不具备数据库崩溃重启后的数据恢复功能。而 InnoDB 是另一个公司以插件形式引入 MySQL 的，既然只依靠 binlog 是没有 crash-safe 能力的，所以 InnoDB 使用另外一套日志系统——也就是 redo log 来实现 crash-safe 能力。
+        + redo log 的写入拆成了两个步骤：prepare 和 commit，这就是「两阶段提交
+            * 不使用两阶段提交，会导致两份日志恢复的数据不一致：比如先写 redo log，binlog 还没有写入，数据库崩溃重启；或者先写 binlog，redo 还没有写入数据库崩溃重启，都将造成恢复数据的不一致
+            * 使用两阶段提交后，就可以保证两份日志恢复的数据一致：只有 binlog 写入成功的情况下，才会提交 redo log，否则 redo log 处于 prepare 状态，事务会回滚，这样一来，就保证了数据的一致性
+        + WAL（Write-Ahead Logging）：先写日志，再写磁盘。
+            * 当有一条记录需要更新的时候，InnoDB 引擎就会先把记录写到 redo log 里面，并更新内存，这个时候更新就算完成了。
+            * 同时，InnoDB 引擎会在适当的时候，将这个操作记录更新到磁盘里面，而这个更新往往是在系统比较空闲的时候做
         + 有固定大小的，比如可以配置为一组 4 个文件，每个文件的大小是 1GB，那么总共就可以记录 4GB 的操作。从头开始写，写到末尾就又回到开头循环写
         + write pos 是当前记录的位置，一边写一边后移，写到第 3 号文件末尾后就回到 0 号文件开头。checkpoint 是当前要擦除的位置，也是往后推移并且循环的，擦除记录前要把记录更新到数据文件。
         + write pos 和 checkpoint 之间的是“粉板”上还空着的部分，可以用来记录新的操作。如果 write pos 追上 checkpoint，表示“粉板”满了，这时候不能再执行新的更新，得停下来先擦掉一些记录，把 checkpoint 推进一下。
-        + 可以保证即使数据库发生异常重启，之前提交的记录都不会丢失，这个能力称为 crash-safe
+        + 保证即使数据库发生异常崩溃或者重启，之前提交的记录都不会丢失，可以根据这个日志记录的步骤完成未持久化到磁盘的数据更新操作，从而保证数据的一致性。这个能力称为 crash-safe
     - 逻辑日志 binlog（归档日志）
-        + 最开始 MySQL 里并没有 InnoDB 引擎。MySQL 自带的引擎是 MyISAM，但是 MyISAM 没有 crash-safe 的能力，binlog 日志只能用于归档。而 InnoDB 是另一个公司以插件形式引入 MySQL 的，既然只依靠 binlog 是没有 crash-safe 能力的，所以 InnoDB 使用另外一套日志系统——也就是 redo log 来实现 crash-safe 能力。
         + 数量
             * binlog的最大序号是 pow(2,31)-1 = 2147483647。
             * 当序号接近这个值，且差距小于 1000 时（也就是序号大于 2147482647 时），就开始向error log中写入警告。
@@ -241,12 +246,14 @@ mysql_config --include
             * redo log 是 InnoDB 引擎特有的；binlog 是 MySQL 的 Server 层实现的，所有引擎都可以使用。
             * redo log 是物理日志，记录的是“在某个数据页上做了什么修改”；binlog 是逻辑日志，记录的是这个语句的原始逻辑，比如“给 ID=2 这一行的 c 字段加 1 ”。
             * redo log 是循环写的，空间固定会用完；binlog 是可以追加写入的。“追加写”是指 binlog 文件写到一定大小后会切换到下一个，并不会覆盖以前的日志
-    - `update T set c=c+1 where ID=2;`
-        + 执行器先找引擎取 ID=2 这一行。ID 是主键，引擎直接用树搜索找到这一行。如果 ID=2 这一行所在的数据页本来就在内存中，就直接返回给执行器；否则，需要先从磁盘读入内存，然后再返回。
+    - 两个日志是如何写入 `update T set c=c+1 where ID=2;`
+        + 执行器先找引擎取 ID=2 这一行。ID 是主键，引擎直接用树搜索找到这一行。
+        + 如果 ID=2 这一行所在的数据页本来就在内存中，就直接返回给执行器；否则，需要先从磁盘读入内存，然后再返回。
         + 执行器拿到引擎给的行数据，把这个值加上 1，比如原来是 N，现在就是 N+1，得到新的一行数据，再调用引擎接口写入这行新数据。
         + 引擎将这行新数据更新到内存中，同时将这个更新操作记录到 redo log 里面，此时 redo log 处于 prepare 状态。然后告知执行器执行完成了，随时可以提交事务
         + 执行器生成这个操作的 binlog，并把 binlog 写入磁盘
         + 执行器调用引擎的提交事务接口，引擎把刚刚写入的 redo log 改成提交（commit）状态，更新完成
+    - redo log 是循环写（后面的记录会覆盖前面的），不能持久保存全量日志，binlog 是增量写（一直追加写入），可以保存全部归档日志，因此，redo log 主要适用于数据库崩溃后重启的数据恢复，而 binlog 可用于全量备份，以及创建「数据库分身」，实现主从同步
     - 让数据库恢复到半个月内任意一秒的状态
         + binlog 会记录所有的逻辑操作，并且是采用“追加写”的形式。如果你的 DBA 承诺说半个月内可以恢复，那么备份系统中一定会保存最近半个月的所有 binlog
         + 系统会定期做整库备份。这里的“定期”取决于系统的重要性，可以是一天一备，也可以是一周一备
@@ -257,6 +264,8 @@ mysql_config --include
         + 如果不使用“两阶段提交”，那么数据库的状态就有可能和用它的日志恢复出来的库的状态不一致
 
 [MySQL查询](../_static/mysql_query.png)
+[MySQL查询](../_static/innodb_log.png)
+
 
 ```sh
 show variables like '%query_cache%'
@@ -2140,11 +2149,24 @@ select * from information_schema.innodb_trx; # 查看已开启的事务
     - InnoDB 引擎中，有一种特殊的功能叫「自适应哈希索引」，如果 InnoDB 注意到某些索引列值被频繁使用时，它会在内存基于 B+ 树索引之上再创建一个哈希索引，这样就能让 B+树也具有哈希索引的优点
     - HEAP表中，如果存储的数据重复度很低（也就是说基数很大），对该列数据以等值查询为主，没有范围查询、没有排序的时候，特别适合采用哈希索引
 * Hash 和full-text索引不存储值，因此MySQL只能使用B-TREE
+* 不可见索引
+    - 不可见是针对优化器而言的，优化器在做执行计划分析的时候(默认情况下)是会忽略设置了不可见属性的索引
+    - 可以继续使用不可见索引：optimizer_switch use_invisible_indexes=ON
+    - 作用
+        + 可以一边设置索引为不可见，一边观察数据库的慢查询记录和thread running 状态。如果数据库长时间没有相关慢查询 ，thread_running比较稳定，就可以下线该索引
+        + 反之，则可以迅速将索引设置为可见，恢复业务访问
+    - 注意
+        + 针对非主键索引的。主键不能设置为不可见，这里的 主键 包括显式的主键或者隐式主键(不存在主键时，被提升为主键的唯一索引)
+        + force /ignore index(index_name) 不能访问不可见索引，否则报错
+        + 设置索引为不可见需要获取MDL锁，遇到长事务会引发数据库抖动
+        + 唯一索引被设置为不可见，不代表索引本身唯一性的约束失效
 * 一千万条数据 插入统计数据
     - 无主键|无索引 test_primary_b 数据长度  960MB 65分钟插入 平均一万条数据插入 4.2秒
     - 自增主键:test_primary_a 数据长度  960MB 62分钟插入 平均一万条数据插入 4秒
     - 自增主键/有索引 test_primary_d  数据长度  1GB  索引长度 1.36GB 75分钟插入 平均一万条数据插入 4.5秒
     - 复合主键 无索引 test_primary_c 数据长度  1.54GB 219分钟插入 平均一万条数据插入 8秒
+
+
 
 ![clustered-index](../_static/clustered-index.jpg "clustered-index")
 
@@ -2160,6 +2182,17 @@ CREATE TABLE `inventory` (
   CONSTRAINT `fk_inventory_film` FOREIGN KEY (`film_id`) REFERENCES `film` (`film_id`) ON UPDATE CASCADE,
   CONSTRAINT `fk_inventory_store` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4582 DEFAULT CHARSET=utf8 |
+
+
+create table t1 (i int,
+    j int,
+    k int,
+    index i_idx (i) invisible
+) engine=innodb;
+create index j_idx on t1 (j) invisible;
+alter table t1 add index k_idx (k) invisible;
+select index_name,is_visible from information_schema.statistics where table_schema='test'  and table_name='t1';
+alter table t1 alter index i_idx visible;
 
 ALTER TABLE `table_name` ADD PRIMARY KEY ( `column` ) # 添加PRIMARY KEY（主键索引）
 ALTER TABLE `table_name` ADD UNIQUE ( `column` ) # 添加UNIQUE(唯一索引)

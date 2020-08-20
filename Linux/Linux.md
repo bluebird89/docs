@@ -10,9 +10,7 @@
   - 支持内核线程，但不区分线程与进程，所有进程都一样
 
 * ps命令
-* netstat命令
 * find命令
-* grep命令
 * wc命令
 * head和tail命令
 * 正则表达式
@@ -23,10 +21,8 @@
 * linux查看CPU和内存使用
 * Linux查看系统负载命令
 * Linux调试程序
-* Linux硬链接和软连接
 * core dump
 * cmake和makefile
-* Shell脚本基本语法和使用
 
 ## Linux vs Unix
 
@@ -155,6 +151,16 @@ sudo update-grub
   - GNOME
   - LXDE
 
+## 配置
+
+```sh
+## ~/.bashrc:
+# set default editor to Vim
+export EDITOR=vim
+
+lshw -class disk -class storage -short
+```
+
 ## 启动
 
 * 初始：BIOS -> MBR -> 引导加载程序 -> 内核
@@ -173,10 +179,137 @@ sudo update-grub
   - GRUB是一个支持多种操作系统的启动引导管理器，在一台有多个操作系统的计算机中，可以通过GRUB在计算机启动时选择用户希望运行的操作系统。
   - 同时GRUB可以引导Linux系统分区上的不同内核，也可用于向内核传递启动参数，如进入单用户模式。
   - 同时支持EFI和BIOS方式的启动
+* 启动项
+
+  - 启动目录： /etc/rc.d/rc[0~6].d
+  - 命令行脚本文件：/etc/init.d/ 查看系统引导时启动的服务项
+  - 本地文件：/etc/rc.local
+  - 添加 /etc/init.d/nginx start
 
 ```sh
 # 启动盘制作
 sudo dd bs=4M if=/home/hcf/dev/iso/ubuntu-16.04-desktop-amd64.iso of=/dev/sdb4
+
+sudo dmidecode
+
+# 界面切换
+init 3
+init 5
+--run level 0 :关机
+--run level 3 :纯文本模式
+--run level 5 :含有图形接口模式
+--run level 6 :重新启动
+
+chkconfig --list sshd
+
+## 修改时区
+sudo tzselect
+sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+# /etc/timezone 改为Asia/Shanghai
+
+# 关机（必须用root用户）
+shutdown -h now  ## 立刻关机
+shutdown -h 10  ##  10分钟以后关机
+shutdown -h 12:00:00  ##12点整的时候关机
+shutdown -h # 关机后关闭电源
+shutdown -r now  # 关机/重启 -h:关机 -r:重启
+halt｜reboot｜poweroff
+```
+
+## 环境变量
+
+每个进程都有其各自环境变量设置，且默认情况下，当一个进程被创建时，处理创建过程中明确指定的话，将继承其父进程的绝大部分环境设置。Shell 程序也作为一个进程运行在操作系统之上，而在 Shell 中运行的大部分命令都将以 Shell 的子进程的方式运行
+
+* 永久的：需要修改配置文件，变量永久生效； /etc/bashrc 存放的是 shell 变量 `echo "PATH=$PATH:/home/shiyanlou/mybin" >> .zshrc`
+* .profile（不是/etc/profile） 只对当前用户永久生效，所以如果想要添加一个永久生效的环境变量，只需要打开 /etc/profile
+* 环境变量理解生效 `source .zshrc` `. ./.zshrc`
+* 临时的：使用 export 命令行声明即可，变量在关闭 shell 时失效。`PATH=$PATH:/home/zhangwang/mybin`给 PATH 环境变量追加了一个路径，它也只是在当前 Shell 有效，一旦退出终端，再打开就会发现又失效了。
+* 当前 Shell 进程私有用户自定义变量，如上面我们创建的 tmp 变量，只在当前 Shell 中有效。
+* ${变量名#匹配字串}: 从头向后开始匹配，删除符合匹配字串的最短数据
+* ${变量名##匹配字串}: 从头向后开始匹配，删除符合匹配字串的最长数据
+* ${变量名%匹配字串}: 从尾向前开始匹配，删除符合匹配字串的最短数据
+* ${变量名%%匹配字串}: 从尾向前开始匹配，删除符合匹配字串的最长数据
+* ${变量名/旧的字串/新的字串}:将符合旧字串的第一个字串替换为新的字串
+* ${变量名//旧的字串/新的字串}: 将符合旧字串的全部字串替换为新的字串
+
+```sh
+declare tmp # 使用 declare 命令创建一个变量名为 tmp 的变量
+tmp=God # 使用 = 号赋值运算符，将变量 tmp 赋值为 God
+echo $tmp # 读取变量的值：使用 echo 命令和 $ 符号（$ 符号用于表示引用一个变量的值）
+set:显示当前 Shell 所有变量，包括其内建环境变量（与 Shell 外观等相关），用户自定义变量及导出的环境变量。
+env:显示与当前用户相关的环境变量，还可以让命令在指定环境中运行
+export：显示从 Shell 中导出成环境变量的变量
+unset temp : 删除变量temp
+
+source ~/.zshrc
+
+sudo update-alternatives --config editor # 修改默认编辑器
+```
+
+## 服务
+
+```sh
+# /lib/systemd/system/goweb.service
+[Unit]
+Description=goweb
+
+[Service]
+Type=simple
+Restart=always # ensures that systemd will always try to restart the program if it stops
+RestartSec=5s # wait time between restart attempts
+ExecStart=/home/user/go/go-web/main #  the point of entry for this service
+
+[Install]
+WantedBy=multi-user.target
+
+systemctl --version
+whereis systemd|whereis systemctl
+ps -eaf | grep [s]ystemd # 检查systemd是否运行
+systemd-analyze blame #  分析启动时各个进程花费的时间
+systemd-analyze critical-chain # 分析启动时的关键链
+systemctl list-unit-files --type=service | grep enabled # 展示开机启动时的进程项
+
+sudo systemctl is-active|stop|enable|disable|status|restart|start|reload|kill|is-enabled bluetooth.service
+sudo systemctl mask|unmask bluetooth.service # 如何屏蔽（让它不能启动）或显示服务
+
+## 禁用服务列表
+accounts-daemon.service # AccountsService 的一部分，AccountsService 允许程序获得或操作用户账户信息
+avahi-daemon.service # 用于零配置网络发现，使电脑超容易发现网络中打印机或其他的主机
+brltty.service # 提供布莱叶盲文设备支持，例如布莱叶盲文显示器。
+debug-shell.service # 开放了一个巨大的安全漏洞（该服务提供了一个无密码的 root shell ，用于帮助 调试 systemd 问题），除非你正在使用该服务，否则永远不要启动服务。
+ModemManager.service # 该服务是一个被 dbus 激活的守护进程，用于提供移动
+pppd-dns.service # 是一个计算机发展的遗物，如果你使用拨号接入互联网的话，保留它，否则你不需要它。
+rtkit-daemon.service # 一个 实时内核调度器real-time kernel scheduler
+whoopsie.service # 是 Ubuntu 错误报告服务。它用于收集 Ubuntu 系统崩溃报告，并发送报告到 https://daisy.ubuntu.com 。 可以放心地禁止其启动，或者永久的卸载它。
+wpa_supplicant.service # 仅在你使用 Wi-Fi 连接时需要
+
+systemctl list-units # 列出所有运行中单元
+systemctl --failed # 列出所有失败单元
+
+systemctl list-unit-files --type=mount # 列出所有系统挂载点
+systemctl start|stop|restart|reload|status|is-active|enable|disable|mask|unmask tmp.mount # 挂载、卸载、重新挂载、重载系统挂载点并检查系统中挂载点状态
+
+systemctl list-unit-files --type=socket # 列出所有可用系统套接口
+systemctl start|restart|stop|reload|status|is-active|enable|disable|mask|unmask cups.socket
+
+systemctl show -p CPUShares httpd.service # 获取当前某个服务的CPU分配额
+systemctl set-property httpd.service CPUShares=2000 # 将某个服务（httpd.service）的CPU分配份额限制为2000 CPUShares/
+# vi /etc/systemd/system/httpd.service.d/90-CPUShares.conf
+[Service]
+CPUShares=2000
+
+systemctl show httpd # 检查某个服务的所有配置细节
+systemd-analyze critical-chain httpd.service # 分析某个服务（httpd）的关键链
+systemctl list-dependencies httpd.service # 获取某个服务（httpd）的依赖性列表
+systemd-cgls # 按等级列出控制组
+systemd-cgtop # 按CPU、内存、输入和输出列出控制组
+systemctl get-default # 列出当前使用的运行等级
+systemctl rescue # 启动系统救援模式
+systemctl isolate runlevel5.target|graphical.target # 启动运行等级5，即图形模式
+systemctl emergency # 进入紧急模式
+systemctl isolate runlevel3.target|multiuser.target # 启动运行等级3，即多用户模式（命令行）
+systemctl set-default runlevel3.target|runlevel5.target # 设置默认运行等级
+systemctl reboot|halt|suspend|hibernate|hybrid-sleep # 重启、停止、挂起、休眠系统或使系统进入混合睡眠
 ```
 
 ## 组成
@@ -255,6 +388,15 @@ swapon /swapmem
  11 /dev/fd0        /media/floppy0  auto    rw,user,noauto,exec,utf8 0       0
 ```
 
+## 内核
+
+* [kernal](https://www.kernel.org/)
+* 操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限
+
+```sh
+uname -sr
+```
+
 ## CPU
 
 * 芯片制作
@@ -287,7 +429,7 @@ swapon /swapmem
   - si/so 显示了交换分区的现状，有时候会造成cpu问题，一并关注
 * [sar](https://github.com/vlsi/ksar) 最为全面的系统性能分析工具之一
   - `yum install sysstat -y`
-  -  sar -u  默认
+  - sar -u  默认
   - sar -P ALL 每颗cpu的使用状态信息
   - sar -q  cpu队列的长度，runq-sz>cpu count就表明有瓶颈了
   - sar -w  每秒上下文交换
@@ -313,6 +455,24 @@ swapon /swapmem
     + 解决方式2: 更换网卡
     + 通常修改的方式还是有些复杂了，比如，修改 /proc/irq/{seq}/smp_affinity,可以直接安装irqbalance，然后执行就可以了。`yum install irqbalance -y ` `service irqbalance start`
   - cpu使用率低，但负载高:cpu id%高，也就是空闲，比如90%。但 load average非常高.load average高，说明其任务已经排队，许多任务正在等待。出现此种情况，可能存在大量不可中断的进程
+
+## 中断
+
+* 中断是向处理器发送的输入信号，能够表示某个时间需要操作系统立刻处理，如果操作系统接收了中断，那么处理器会暂停当前的任务、存储上下文状态、并执行中断处理器处理发生的事件，在中断处理器结束后，当前处理器会恢复上下文继续完成之前的工作
+* 硬件中断是由处理器外部的设备触发的电子信号
+* 软件中断是由处理器在执行特定指令时触发的，某些特殊的指令也可以故意触发软件中断
+  - 应用程序通过调用 C 语言库中的函数发起系统调用；
+  - C 语言函数通过栈收到调用方传入的参数并将系统调用需要的参数拷贝到寄存器；
+  - Linux 中的每一个系统调用都有特定的序号，函数会将系统调用的编号拷贝到 eax 寄存器；
+  - 函数执行 INT 0x80 指令，处理器会从用户态切换到内核态并执行预先定义好的处理器；
+  - 执行中断处理器 entry_INT80_32 处理系统调用；
+    + 执行 SAVE_ALL 将寄存器的值存储到内核栈上并调用 do_int80_syscall_32；
+    + 调用 do_syscall_32_irqs_on 检查系统调用的序号是否合法；
+    + 在系统调用表 ia32_sys_call_table 中查找对应的系统调用实现并传入寄存器的值；
+    + 系统调用在执行期间会检查参数的合法性、在用户态内存和内核态内存之间传输数据，系统调用的结果会被存储到 eax 寄存器中；
+    + 从内核栈中恢复寄存器的值并将返回值放到栈上；
+    + 系统调用会返回 C 函数，包装函数会将结果返回给应用程序；
+  - 如果系统调用服务在执行过程中出现了错误，C 语言函数会将错误存储在全局变量 errno 中并根据系统调用的结果返回一个用整数 int 表示的状态
 
 ## 磁盘
 
@@ -557,44 +717,10 @@ tail 100 /var/log/messages
 # 该磁盘空间已满，可以进行扩容，或者将该磁盘的部分目录迁移到别的磁盘
 
 dd if=/dev/urandom of=/boot/test.txt bs=50M count=1 # 生成文件 挂载
+
+# 文件置空
+cat /dev/null > calatina.out
 ```
-
-## 配置
-
-```sh
-## ~/.bashrc:
-# set default editor to Vim
-export EDITOR=vim
-
-lshw -class disk -class storage -short
-```
-
-## 内核
-
-* [kernal](https://www.kernel.org/)
-* 操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限
-
-```sh
-uname -sr
-```
-
-## 中断
-
-* 中断是向处理器发送的输入信号，它能够表示某个时间需要操作系统立刻处理，如果操作系统接收了中断，那么处理器会暂停当前的任务、存储上下文状态、并执行中断处理器处理发生的事件，在中断处理器结束后，当前处理器会恢复上下文继续完成之前的工作
-* 硬件中断是由处理器外部的设备触发的电子信号
-* 软件中断是由处理器在执行特定指令时触发的，某些特殊的指令也可以故意触发软件中断
-  - 应用程序通过调用 C 语言库中的函数发起系统调用；
-  - C 语言函数通过栈收到调用方传入的参数并将系统调用需要的参数拷贝到寄存器；
-  - Linux 中的每一个系统调用都有特定的序号，函数会将系统调用的编号拷贝到 eax 寄存器；
-  - 函数执行 INT 0x80 指令，处理器会从用户态切换到内核态并执行预先定义好的处理器；
-  - 执行中断处理器 entry_INT80_32 处理系统调用；
-    + 执行 SAVE_ALL 将寄存器的值存储到内核栈上并调用 do_int80_syscall_32；
-    + 调用 do_syscall_32_irqs_on 检查系统调用的序号是否合法；
-    + 在系统调用表 ia32_sys_call_table 中查找对应的系统调用实现并传入寄存器的值；
-    + 系统调用在执行期间会检查参数的合法性、在用户态内存和内核态内存之间传输数据，系统调用的结果会被存储到 eax 寄存器中；
-    + 从内核栈中恢复寄存器的值并将返回值放到栈上；
-    + 系统调用会返回 C 函数，包装函数会将结果返回给应用程序；
-  - 如果系统调用服务在执行过程中出现了错误，C 语言函数会将错误存储在全局变量 errno 中并根据系统调用的结果返回一个用整数 int 表示的状态
 
 ## 系统调用
 
@@ -687,7 +813,7 @@ uname -sr
   - 应用真正的高并发了，swap绝对能体验到它魔鬼性的一面：进程倒是死不了了，但GC时间长的无法忍受
 * 采用分页机制来实现虚拟存储器管理
   - Linux的分段机制使得所有的进程都使用相同的段寄存器，使得内存管理变得简单
-  - Linux的设计目标之一就是能够被移植到绝大多数流行的处理平台上，但许多RISC处理器支持的分段功能非常有限；为了保证可移植性，Linux采用三级分页模式，因为许多处理器都采用64位结构；Linux定义了三种类型的页表：页目录(PGD)、中间目录(PMD)和页表(PT)。
+  - Linux的设计目标之一就是能够被移植到绝大多数流行的处理平台上，但许多RISC处理器支持的分段功能非常有限；为了保证可移植性，Linux采用三级分页模式，因为许多处理器都采用64位结构；Linux定义了三种类型的页表：页目录(PGD)、中间目录(PMD)和页表(PT)
 * 内存分配算法
   - 内存碎片
     + 产生原因：内存分配较小，并且分配的这些小的内存生存周期又较长，反复申请后将产生内存碎片的出现
@@ -787,11 +913,11 @@ uname -sr
     + 数据必须在用户空间和内核空间之间拷贝
       * Linux 通常利用写时复制（copy on write）来减少系统开销，这个技术又时常称作 COW.多个程序同时访问同一块数据,只有当程序需要对数据内容进行修改时，才会把数据内容拷贝到程序自己的应用空间里去
 * top展示的字段，RES才是真正的物理内存占用
-* 系统的可用内存，包括：free + buffers + cached，因为后两者可以自动释放。但不要迷信，有很大一部分，你是释放不了的
+* 系统可用内存，包括：free + buffers + cached，因为后两者可以自动释放。但不要迷信，有很大一部分，你是释放不了的
 * slab 算法
   - 基本概念
     + Linux 所使用的 slab 分配器的基础是 Jeff Bonwick 为 SunOS 操作系统首次引入的一种算法
-    + 它的基本思想是将内核中经常使用的对象放到高速缓存中，并且由系统保持为初始的可利用状态。比如进程描述符，内核中会频繁对此数据进行申请和释放
+    + 基本思想是将内核中经常使用的对象放到高速缓存中，并且由系统保持为初始的可利用状态。比如进程描述符，内核中会频繁对此数据进行申请和释放
   - 内部碎片
     + 已经被分配出去的的内存空间大于请求所需的内存空间3)    基本目标
     + 减少伙伴算法在分配小块连续内存时所产生的内部碎片
@@ -821,7 +947,6 @@ uname -sr
     + mempool_alloc 分配函数获得该对象
     + mempool_free 释放一个对象
     + mempool_destroy 销毁内存池
-* 用户态内存池
 * DMA 内存
   - 什么是 DMA
     + 直接内存访问是一种硬件机制，允许外围设备和主内存之间直接传输它们的 I/O数据，而不需要系统处理器的参与
@@ -982,6 +1107,253 @@ gdb --batch --pid 75 -ex "dump memory a.dump 0x7f2bceda1000 0x7f2bcef2b000"
 dmesg -T
 ```
 
+## I/O
+
+* I/O不仅仅是硬盘，还包括外围的所有设备，比如键盘鼠标，比如1.44M的3.5英寸软盘（还有人记得么）。但服务器环境，泛指硬盘
+* 普通磁盘的随机写和顺序写相差是非常大的。而随机写完全和cpu内存不在一个数量级。缓冲区依然是解决速度差异的唯一工具，所以在极端情况比如断电等，就产生了太多的不确定性。这些缓冲区，都容易丢
+* 消除这些性能差异，软件方面都做了哪些权衡。
+  - 数据库设计，采用BTree结构组织数据，通过减少对磁盘的访问和随机读取，来提高性能
+  - Postgres通过顺序写WAL日志、ES通过写translog等，通过预写，避免断电后数据丢失问题
+  - Kafka通过顺序写来增加性能，但在topic非常多的情况下性能弱化为随机写
+  - Kafka通过零拷贝技术，利用DMA绕过内存直接发送数据
+  - Redis使用内存模拟存储，它流行的主要原因就是和硬盘打交道的传统DB速度太慢
+  - 回忆一下内存篇的buffer区，是用来缓冲写入硬盘的数据的。linux的sync命令可以将buffer的数据刷到硬盘上，突然断电的话，就不好说了
+* iostat：查看的是硬盘整体的状况
+  - %util 最重要的判断参数。一般地，如果该参数是100%表示设备已经接近满负荷运行了
+  - Device 表示发生在哪块硬盘。如果你有多快，则会显示多行
+  - avgqu-sz 还记得准备篇里提到的么？这个值是请求队列的饱和度，也就是平均请求队列的长度。毫无疑问，队列长度越短越好
+  - await 响应时间应该低于5ms，如果大于10ms就比较大了。这个时间包括了队列时间和服务时间
+  - svctm   表示平均每次设备I/O操作的服务时间。如果svctm的值与await很接近，表示几乎没有I/O等待，磁盘性能很好，如果await的值远高于svctm的值，则表示I/O队列等待太长，系统上运行的应用程序将变慢
+* iotop 看到占用I/O最多的应用。本质是一个python脚本，从proc目录中获取thread的IO信息，进行汇总
+* 通过ps命令或者top命令得到状态为D的进程 `for x in `seq 1 1 10`; do ps -eo state,pid,cmd | grep "^D"; echo "----"$x; sleep 5; done`
+* zero copy
+  - 少了内核缓存向用户空间的拷贝的过程
+* 同步阻塞IO（Blocking IO） 传统的IO模型:默认情况下所有的 socket 都是blocking
+  - 当用户进程调用了 recvfrom 这个系统调用，kernel 就开始了 IO 的第一个阶段
+    + 准备数据（对于网络IO来说，数据在一开始还没有到达。比如，还没有收到一个完整的 UDP 包。 kernel 就要等待足够的数据到来）。需要等待，也就是说数据被拷贝到操作系统内核的缓冲区中需要一个过程
+    + 在用户进程这边，整个进程会被阻塞（当然，是进程自己选择的阻塞）。当 kernel 一直等到数据准备好了，会将数据从kernel中拷贝到用户内存，然后kernel返回结果，用户进程才解除 block 的状态，重新运行起来
+* 同步非阻塞IO（Non-blocking IO） 非阻塞IO要求socket被设置为NONBLOCK
+  - 当用户进程发出read操作时，如果kernel中的数据还没有准备好，那么它并不会block用户进程，而是立刻返回一个error
+  - 用户进程判断结果是一个error时，就知道数据还没有准备好，于是可以再次发送read操作
+  - kernel中的数据准备好了，并且又再次收到了用户进程的system call，就将数据拷贝到了用户内存，然后返回
+* IO多路复用（IO Multiplexing） 即经典的Reactor设计模式:也称为 event driven IO, select，poll，epoll这个function会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程
+  - 当用户进程调用了select，整个进程会被block，而同时，kernel会“监视”所有select负责的socket，当任何一个socket中的数据准备好了，select就会返回。这个时候用户进程再调用read操作，将数据从kernel拷贝到用户进程
+  - 特点:通过一种机制一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数就可以返回
+  - select
+    + 分3类，分别是writefds、readfds、和exceptfds,直到有描述副就绪（有数据 可读、可写、或者有except），或者超时（timeout指定等待时间，如果立即返回设为null即可），函数返回
+    + 当select函数返回后，通过遍历fdset，来找到就绪的描述符
+    + 缺点:单个进程能够监视的文件描述符的数量存在最大限制，在Linux上一般为1024，可以通过修改宏定义甚至重新编译内核的方式提升这一限制，但 是这样也会造成效率的降低
+  - poll
+    + 使用一个 pollfd的指针实现:包含了要监视的event和发生的event，不再使用select“参数-值”传递的方式
+    + pollfd并没有最大数量限制（数量过大后性能也是会下降）
+    + poll返回后，需要轮询pollfd来获取就绪的描述符
+    + select和poll都需要在返回后，通过遍历文件描述符来获取已经就绪的socket。事实上，同时连接的大量客户端在一时刻可能只有很少的处于就绪状态，因此随着监视的描述符数量的增长，其效率也会线性下降
+  - epoll:使用一个文件描述符管理多个描述符，将用户关系的文件描述符的事件存放到内核的一个事件表中，在用户空间和内核空间的copy只需一次
+    + int epoll_create(int size):创建一个epoll的句柄
+      * size用来告诉内核这个监听的数目一共有多大,参数size并不是限制了epoll所能监听的描述符最大个数，只是对内核初始分配内部数据结构的一个建议
+      * 当创建好epoll句柄后，它就会占用一个fd值，在linux下如果查看/proc/进程id/fd/，是能够看到这个fd的
+      * 在使用完epoll后，必须调用close()关闭，否则可能导致fd被耗尽
+    + int epoll_ctl(int epfd, int op, int fd, struct epoll_event event):对指定描述符fd执行op操作
+      * epfd：是epoll_create()的返回值
+      * op：表示op操作，用三个宏来表示：添加EPOLL_CTL_ADD，删除EPOLL_CTL_DEL，修改EPOLL_CTL_MOD。分别添加、删除和修改对fd的监听事件
+      * fd：是需要监听的fd（文件描述符）
+      * epoll_event：是告诉内核需要监听什么事
+    + int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout): 等待epfd上的io事件，最多返回maxevents个事件
+      * 参数events用来从内核得到事件的集合，maxevents告之内核这个events有多大，这个maxevents的值不能大于创建epoll_create()时的size，参数timeout是超时时间（毫秒，0会立即返回，-1将不确定，也有说法说是永久阻塞）
+      * 该函数返回需要处理的事件数目，如返回0表示已超时
+    + 工作模式
+      * LT（level trigger）:默认模式 当epoll_wait检测到描述符事件发生并将此事件通知应用程序，应用程序可以不立即处理该事件。下次调用epoll_wait时，会再次响应应用程序并通知此事件(状态保持)
+        -
+      * ET（edge trigger）:当epoll_wait检测到描述符事件发生并将此事件通知应用程序，应用程序必须立即处理该事件。如果不处理，下次调用epoll_wait时，不会再次响应应用程序并通知此事件（不复现）
+        - 很大程度上减少了epoll事件被重复触发的次数，因此效率要比LT模式高
+    + 优点
+      * 监视的描述符数量不受限制
+  - select/poll中，进程只有在调用一定的方法后，内核才对所有监视的文件描述符进行扫描，而epoll事先通过epoll_ctl()来注册一 个文件描述符，一旦基于某个文件描述符就绪时，内核会采用类似callback的回调机制，迅速激活这个文件描述符，当进程调用epoll_wait() 时便得到通知。(此处去掉了遍历文件描述符，而是通过监听回调的的机制。这正是epoll的魅力所在。)
+  - 需要使用两个system call (select 和 recvfrom)，而blocking IO只调用了一个system call (recvfrom)。但是，用select的优势在于它可以同时处理多个connection
+  - 如果处理的连接数不是很高的话，使用select/epoll的web server不一定比使用multi-threading + blocking IO的web server性能更好，可能延迟还更大。优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。）
+  - 实际中，对于每一个socket，一般都设置成为non-blocking，但是整个用户的process其实是一直被block的。只不过process是被select这个函数block，而不是被socket IO给block
+  - events可以是以下几个宏的集合：
+    + EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）
+    + EPOLLOUT：表示对应的文件描述符可以写
+    + EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）
+    + EPOLLERR：表示对应的文件描述符发生错误
+    + EPOLLHUP：表示对应的文件描述符被挂断
+    + EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。
+    + EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里
+* 信号驱动 I/O（ signal driven IO）
+* 异步IO（Asynchronous IO） 即经典的Proactor设计模式
+  - 用户进程发起read操作之后，立刻就可以开始去做其它的事
+  - 另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成
+* synchronous IO VS asynchronous IO
+  - A synchronous I/O operation causes the requesting process to be blocked until that I/O operation completes;
+  - An asynchronous I/O operation does not cause the requesting process to be blocked;
+
+```sh
+# 内存够大，那么可以做一个内存盘
+mkdir /memdisk
+mount  -t tmpfs -o size=1024m  tmpfs /memdisk/
+time dd if=/dev/zero of=test.file bs=4k count=200000
+
+#查看wa
+top
+#查看wa和io(bi、bo)
+vmstat 1
+#查看性能相关i/o详情
+sar -b 1 2
+# 查看问题相关i/o详情
+iostat -x 1
+# 查看使用i/o最多的进程
+iotop
+```
+
+```
+int select(int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds,
+           struct timeval *timeout);
+
+int poll(struct pollfd *fds, unsigned int nfds, int timeout);
+struct pollfd {
+  int fd;        /* file descriptor */
+  short events;  /* requested events to watch */
+  short revents; /* returned events witnessed */
+};
+
+int epoll_create(int size) ；
+#创建一个epoll的句柄，size用来告诉内核这个监听的数目一共有多大
+    int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event) ；
+    int epoll_wait(int epfd, struct epoll_event *events, int maxevents,
+                   int timeout);
+
+struct epoll_event {
+  __uint32_t events; /* Epoll events */
+  epoll_data_t data; /* User data variable */
+};
+
+while (rs) {
+  buflen = recv(activeevents[i].data.fd, buf, sizeof(buf), 0);
+  if (buflen < 0) {
+    // 由于是非阻塞的模式,所以当errno为EAGAIN时,表示当前缓冲区已无数据可读
+    // 在这里就当作是该次事件已处理处.
+    if (errno == EAGAIN) {
+      break;
+    } else {
+      return;
+    }
+  } else if (buflen == 0) {
+    // 这里表示对端的socket已正常关闭.
+  }
+ if(buflen == sizeof(buf){
+    rs = 1;  // 需要再次读取
+ }
+ else{
+    rs = 0;
+ }
+}
+
+#define IPADDRESS "127.0.0.1"
+#define PORT 8787
+#define MAXSIZE 1024
+#define LISTENQ 5
+#define FDSIZE 1000
+#define EPOLLEVENTS 100
+listenfd = socket_bind(IPADDRESS, PORT);
+struct epoll_event events[EPOLLEVENTS];
+//创建一个描述符
+epollfd = epoll_create(FDSIZE);
+//添加监听描述符事件
+add_event(epollfd, listenfd, EPOLLIN);
+//循环等待
+for (;;) {
+  //该函数返回已经准备好的描述符事件数目
+  ret = epoll_wait(epollfd, events, EPOLLEVENTS, -1);
+  //处理接收到的连接
+  handle_events(epollfd, events, ret, listenfd, buf);
+}
+//事件处理函数
+static void handle_events(int epollfd, struct epoll_event *events, int num,
+                          int listenfd, char *buf) {
+  int i;
+  int fd;
+  //进行遍历;这里只要遍历已经准备好的io事件。num并不是当初epoll_create时的FDSIZE。
+  for (i = 0; i < num; i++) {
+    fd = events[i].data.fd;
+    //根据描述符的类型和事件类型进行处理
+    if ((fd == listenfd) && (events[i].events & EPOLLIN))
+      handle_accpet(epollfd, listenfd);
+    else if (events[i].events & EPOLLIN)
+      do_read(epollfd, fd, buf);
+    else if (events[i].events & EPOLLOUT)
+      do_write(epollfd, fd, buf);
+  }
+}
+
+//添加事件
+static void add_event(int epollfd, int fd, int state) {
+  struct epoll_event ev;
+  ev.events = state;
+  ev.data.fd = fd;
+  epoll_ctl(epollfd, EPOLL_CTL_ADD, fd, &ev);
+}
+//处理接收到的连接
+static void handle_accpet(int epollfd, int listenfd) {
+  int clifd;
+  struct sockaddr_in cliaddr;
+  socklen_t cliaddrlen;
+  clifd = accept(listenfd, (struct sockaddr *)&cliaddr, &cliaddrlen);
+  if (clifd == -1)
+    perror("accpet error:");
+  else {
+    printf("accept a new client: %s:%d\n", inet_ntoa(cliaddr.sin_addr),
+           cliaddr.sin_port);  //添加一个客户描述符和事件
+    add_event(epollfd, clifd, EPOLLIN);
+  }
+}
+//读处理
+static void do_read(int epollfd, int fd, char *buf) {
+  int nread;
+  nread = read(fd, buf, MAXSIZE);
+  if (nread == -1) {
+    perror("read error:");
+    close(fd);                           //记住close fd
+    delete_event(epollfd, fd, EPOLLIN);  //删除监听
+  } else if (nread == 0) {
+    fprintf(stderr, "client close.\n");
+    close(fd);                           //记住close fd
+    delete_event(epollfd, fd, EPOLLIN);  //删除监听
+  } else {
+    printf("read message is : %s", buf);
+    //修改描述符对应的事件，由读改为写
+    modify_event(epollfd, fd, EPOLLOUT);
+  }
+}
+//写处理
+static void do_write(int epollfd, int fd, char *buf) {
+  int nwrite;
+  nwrite = write(fd, buf, strlen(buf));
+  if (nwrite == -1) {
+    perror("write error:");
+    close(fd);                            //记住close fd
+    delete_event(epollfd, fd, EPOLLOUT);  //删除监听
+  } else {
+    modify_event(epollfd, fd, EPOLLIN);
+  }
+  memset(buf, 0, MAXSIZE);
+}
+//删除事件
+static void delete_event(int epollfd, int fd, int state) {
+  struct epoll_event ev;
+  ev.events = state;
+  ev.data.fd = fd;
+  epoll_ctl(epollfd, EPOLL_CTL_DEL, fd, &ev);
+}
+//修改事件
+static void modify_event(int epollfd, int fd, int state) {
+  struct epoll_event ev;
+  ev.events = state;
+  ev.data.fd = fd;
+  epoll_ctl(epollfd, EPOLL_CTL_MOD, fd, &ev);
+}
+```
+
 ## 进程&线程
 
 * 程序是一些保存在磁盘上的指令的有序集合,是静态的的一个可执行映像中，可执行映像(executable image)就是一个可执行文件的内容
@@ -1042,7 +1414,7 @@ dmesg -T
       * 内核提供了need_resched标志来表明是否需要重新执行一次调度，内核无论是咋中断处理程序还是在系统调用后返回都会检查这个歌表示，如果被设置了则内核会选择一个更适合的进程投入运行。
     + 多级反馈队列调度算法
     + 实时调度算法：linux提供了两种实时调度策略：`SCHED_FIFO`和`SCHED_RR`
-      * 前者是一种简单的先入先出调度算法，它不使用时间片。处于SCHED_FIFO级别的进程会比任何SCHED_NORMAL级别的进程先得到调度。一旦某个SCHED_FIFO级别的进程处于可执行状态，它将会一直执行，直到它自己阻塞或显示释放CPU。只有更高优先级的SCHED_FIFO或SCHED_RR进程才能抢占它。两个相同优先级的SCHED_FIFO级别的进程会轮流执行，其它普通进程只能等它变为不可运行状态后才有机会执行。
+      * 前者是一种简单的先入先出调度算法，它不使用时间片。处于`SCHED_FIFO`级别的进程会比任何`SCHED_NORMAL`级别的进程先得到调度。一旦某个SCHED_FIFO级别的进程处于可执行状态，它将会一直执行，直到它自己阻塞或显示释放CPU。只有更高优先级的SCHED_FIFO或SCHED_RR进程才能抢占它。两个相同优先级的SCHED_FIFO级别的进程会轮流执行，其它普通进程只能等它变为不可运行状态后才有机会执行。
       * SCHED_RR大致与SCHED_FIFO相同，但它是耗尽事先分配的时间后就不再继续执行，即SCHED_RR是带了时间片的SCHED_FIFO。时间片只是相对于同一优先级的进程，低优先级的进程无法抢占SCHED_RR任务，即使它的时间片耗尽也不行。
     + 考虑因素：考虑五个方面：公平、高效、响应时间、周转时间和吞吐量
 * 为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分
@@ -1237,9 +1609,6 @@ int main() {
 * 同步机制
   - 考虑一家租用自行车的商店，在它的库存中有 100 辆自行车，还有一个供职员用于租赁的程序。每当一辆自行车被租出去，信号量就增加 1；当一辆自行车被还回来，信号量就减 1。在信号量的值为 100 之前都还可以进行租赁业务，但如果等于 100 时，就必须停止业务，直到至少有一辆自行车被还回来，从而信号量减为 99。
   - 二元信号量是一个特例，它只有两个值：0 和 1。在这种情况下，信号量的表现为互斥量（一个互斥的构造）。
-
-## 信号
-
 * 不同信号用不同的值表示，每个信号设置相应的函数，一旦进程发送某一个信号给另一个进程，另一进程将执行相应的函数进行处理。也就是说先把可能出现的异常等问题准备好，一旦信号产生就执行相应的逻辑即可
 
 ## 线程
@@ -1278,9 +1647,9 @@ npath=/tmp/nmon/log
 
 ## 内核同步
 
-* 临界区(critical regions)就是访问和操作共享数据的代码段，多个内核任务并发访问同一个资源通常是不安全的；
-* 如果两个内核任务可能处于同一个临界区，就是一种错误现象；如果确实发生了这种情况，就称它为竞争状态；
-* 避免并发和防止竞争状态称为同步(synchronization)。
+* 临界区(critical regions)就是访问和操作共享数据的代码段，多个内核任务并发访问同一个资源通常是不安全的
+* 如果两个内核任务可能处于同一个临界区，就是一种错误现象；如果确实发生了这种情况，就称它为竞争状态
+* 避免并发和防止竞争状态称为同步(synchronization)
 * 死锁
   - 包括自死锁和ABBA死锁，
   - 产生死锁有四个原因：互斥使用、不可抢占、请求和保持，以及循环等待；
@@ -1584,136 +1953,6 @@ sudo mount -t nfs 172.16.36.25:/home/erick/nfs /mnt
 sudo umount /mnt
 ```
 
-## 环境变量
-
-每个进程都有其各自的环境变量设置，且默认情况下，当一个进程被创建时，处理创建过程中明确指定的话，它将继承其父进程的绝大部分环境设置。Shell 程序也作为一个进程运行在操作系统之上，而我们在 Shell 中运行的大部分命令都将以 Shell 的子进程的方式运行。
-
-* 永久的：需要修改配置文件，变量永久生效； /etc/bashrc 存放的是 shell 变量 `echo "PATH=$PATH:/home/shiyanlou/mybin" >> .zshrc`
-* .profile（不是/etc/profile） 只对当前用户永久生效，所以如果想要添加一个永久生效的环境变量，只需要打开 /etc/profile
-* 环境变量理解生效 `source .zshrc` `. ./.zshrc`
-* 临时的：使用 export 命令行声明即可，变量在关闭 shell 时失效。`PATH=$PATH:/home/zhangwang/mybin`给 PATH 环境变量追加了一个路径，它也只是在当前 Shell 有效，一旦退出终端，再打开就会发现又失效了。
-* 当前 Shell 进程私有用户自定义变量，如上面我们创建的 tmp 变量，只在当前 Shell 中有效。
-* ${变量名#匹配字串}: 从头向后开始匹配，删除符合匹配字串的最短数据
-* ${变量名##匹配字串}: 从头向后开始匹配，删除符合匹配字串的最长数据
-* ${变量名%匹配字串}: 从尾向前开始匹配，删除符合匹配字串的最短数据
-* ${变量名%%匹配字串}: 从尾向前开始匹配，删除符合匹配字串的最长数据
-* ${变量名/旧的字串/新的字串}:将符合旧字串的第一个字串替换为新的字串
-* ${变量名//旧的字串/新的字串}: 将符合旧字串的全部字串替换为新的字串
-
-```sh
-declare tmp # 使用 declare 命令创建一个变量名为 tmp 的变量
-tmp=God # 使用 = 号赋值运算符，将变量 tmp 赋值为 God
-echo $tmp # 读取变量的值：使用 echo 命令和 $ 符号（$ 符号用于表示引用一个变量的值）
-set:显示当前 Shell 所有变量，包括其内建环境变量（与 Shell 外观等相关），用户自定义变量及导出的环境变量。
-env:显示与当前用户相关的环境变量，还可以让命令在指定环境中运行
-export：显示从 Shell 中导出成环境变量的变量
-unset temp : 删除变量temp
-
-source ~/.zshrc
-
-sudo update-alternatives --config editor # 修改默认编辑器
-```
-
-## 服务
-
-```sh
-# /lib/systemd/system/goweb.service
-[Unit]
-Description=goweb
-
-[Service]
-Type=simple
-Restart=always # ensures that systemd will always try to restart the program if it stops
-RestartSec=5s # wait time between restart attempts
-ExecStart=/home/user/go/go-web/main #  the point of entry for this service
-
-[Install]
-WantedBy=multi-user.target
-
-systemctl --version
-whereis systemd|whereis systemctl
-ps -eaf | grep [s]ystemd # 检查systemd是否运行
-systemd-analyze blame #  分析启动时各个进程花费的时间
-systemd-analyze critical-chain # 分析启动时的关键链
-systemctl list-unit-files --type=service | grep enabled # 展示开机启动时的进程项
-
-sudo systemctl is-active|stop|enable|disable|status|restart|start|reload|kill|is-enabled bluetooth.service
-sudo systemctl mask|unmask bluetooth.service # 如何屏蔽（让它不能启动）或显示服务
-
-## 禁用服务列表
-accounts-daemon.service # AccountsService 的一部分，AccountsService 允许程序获得或操作用户账户信息
-avahi-daemon.service # 用于零配置网络发现，使电脑超容易发现网络中打印机或其他的主机
-brltty.service # 提供布莱叶盲文设备支持，例如布莱叶盲文显示器。
-debug-shell.service # 开放了一个巨大的安全漏洞（该服务提供了一个无密码的 root shell ，用于帮助 调试 systemd 问题），除非你正在使用该服务，否则永远不要启动服务。
-ModemManager.service # 该服务是一个被 dbus 激活的守护进程，用于提供移动
-pppd-dns.service # 是一个计算机发展的遗物，如果你使用拨号接入互联网的话，保留它，否则你不需要它。
-rtkit-daemon.service # 一个 实时内核调度器real-time kernel scheduler
-whoopsie.service # 是 Ubuntu 错误报告服务。它用于收集 Ubuntu 系统崩溃报告，并发送报告到 https://daisy.ubuntu.com 。 可以放心地禁止其启动，或者永久的卸载它。
-wpa_supplicant.service # 仅在你使用 Wi-Fi 连接时需要
-
-systemctl list-units # 列出所有运行中单元
-systemctl --failed # 列出所有失败单元
-
-systemctl list-unit-files --type=mount # 列出所有系统挂载点
-systemctl start|stop|restart|reload|status|is-active|enable|disable|mask|unmask tmp.mount # 挂载、卸载、重新挂载、重载系统挂载点并检查系统中挂载点状态
-
-systemctl list-unit-files --type=socket # 列出所有可用系统套接口
-systemctl start|restart|stop|reload|status|is-active|enable|disable|mask|unmask cups.socket
-
-systemctl show -p CPUShares httpd.service # 获取当前某个服务的CPU分配额
-systemctl set-property httpd.service CPUShares=2000 # 将某个服务（httpd.service）的CPU分配份额限制为2000 CPUShares/
-# vi /etc/systemd/system/httpd.service.d/90-CPUShares.conf
-[Service]
-CPUShares=2000
-
-systemctl show httpd # 检查某个服务的所有配置细节
-systemd-analyze critical-chain httpd.service # 分析某个服务（httpd）的关键链
-systemctl list-dependencies httpd.service # 获取某个服务（httpd）的依赖性列表
-systemd-cgls # 按等级列出控制组
-systemd-cgtop # 按CPU、内存、输入和输出列出控制组
-systemctl get-default # 列出当前使用的运行等级
-systemctl rescue # 启动系统救援模式
-systemctl isolate runlevel5.target|graphical.target # 启动运行等级5，即图形模式
-systemctl emergency # 进入紧急模式
-systemctl isolate runlevel3.target|multiuser.target # 启动运行等级3，即多用户模式（命令行）
-systemctl set-default runlevel3.target|runlevel5.target # 设置默认运行等级
-systemctl reboot|halt|suspend|hibernate|hybrid-sleep # 重启、停止、挂起、休眠系统或使系统进入混合睡眠
-```
-
-## 启动项
-
-* 启动目录： /etc/rc.d/rc[0~6].d
-* 命令行脚本文件：/etc/init.d/ 查看系统引导时启动的服务项
-* 本地文件：/etc/rc.local
-* 添加 /etc/init.d/nginx start
-
-```sh
-sudo dmidecode
-
-# 界面切换
-init 3
-init 5
---run level 0 :关机
---run level 3 :纯文本模式
---run level 5 :含有图形接口模式
---run level 6 :重新启动
-
-chkconfig --list sshd
-
-## 修改时区
-sudo tzselect
-sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
-# /etc/timezone 改为Asia/Shanghai
-
-# 关机（必须用root用户）
-shutdown -h now  ## 立刻关机
-shutdown -h 10  ##  10分钟以后关机
-shutdown -h 12:00:00  ##12点整的时候关机
-shutdown -h # 关机后关闭电源
-shutdown -r now  # 关机/重启 -h:关机 -r:重启
-halt｜reboot｜poweroff
-```
-
 ## 软件
 
 * 包管理：apt|yum
@@ -1842,7 +2081,7 @@ flatpak run com.netease.CloudMusic
 * /sbin/
 * ssh:连接到一个远程主机，然后登录进入其 Unix shell。通过本地机器的终端在服务器上提交指令
 * grep:用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入, 通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
-* alias 这个 bash 内置的命令来为它们创建一个短别名:alias server="python -m SimpleHTTPServer 9000"
+* alias bash 内置的命令来为它们创建一个短别名:alias server="python -m SimpleHTTPServer 9000"
 * Curl 是一个命令行工具，用来通过 HTTP（s），FTP 等其它几十种你可能尚未听说过的协议来发起网络请求
 * Tree 用可视化的效果向你展示一个目录下的文件 tree -P '_.min._'
 * Tmux 是一个终端复用器,它是一个可以将多个终端连接到单个终端会话的工具。可以在一个终端中进行程序之间的切换，添加分屏窗格，还有就是将多个终端连接到同一个会话，使它们保持同步。 当你在远程服务器上工作时，Tmux 特别有用，因为它可以让你创建新的选项卡，然后在选项卡之间切换
@@ -1858,7 +2097,7 @@ flatpak run com.netease.CloudMusic
   - 输出重定向，默认重定向到当前目录下 nohup.out 文件
   - 使用 Ctrl + C 发送 SIGINT 信号，程序关闭
   - 关闭 Shell Session 发送 SIGHUP 信号，程序免疫
-* 使用 & 运行程序：
+* 使用 & 运行程序
   - 程序转入后台运行
   - 结果会输出到终端
   - 使用 Ctrl + C 发送 SIGINT 信号，程序免疫
@@ -1981,6 +2220,30 @@ kill -l
   - -g 输出 IPv4 和 IPv6 的多播组信息
   - -i 打印网络接口信息
   - -v|verbose shows Active Internet connections and Active UNIX domain sockets without server information.
+  - 查看当前系统连接`netstat -antp | awk '{a[$6]++}END{ for(x in a)print x,a[x]}'`
+* `ss -s`
+  - 查看TCP sockets，使用-ta选项
+  - 查看UDP sockets，使用-ua选项
+  - 查看RAW sockets，使用-wa选项
+  - 查看UNIX sockets，使用-xa选项
+* netstat属于net-tools工具集，而ss属于iproute
+  - 统计  ifconfig  ss
+  - 地址  netstat ip addr
+  - 路由  route ip route
+  - 邻居  arp ip neigh
+  - VPN iptunnel  ip tunnel
+  - VLAN  vconfig ip link
+  - 组播  ipmaddr ip maddr
+* LISTEN状态
+  - Recv-Q：代表建立的连接还有多少没有被accept，比如Nginx接受新连接变的很慢
+  - Send-Q：代表listen backlog值
+* ESTAB状态
+  - Recv-Q：内核中的数据还有多少(bytes)没有被应用程序读取，发生了一定程度的阻塞
+  - Send-Q：代表内核中发送队列里还有多少(bytes)数据没有收到ack，对端的接收处理能力不强
+* sar是linux上功能最全的监控软件
+  - `sar -n DEV 1 `即可每秒刷新一次网络流量
+  - `watch cat /proc/net/dev`
+  - iftop
 * [google / bbr](https://github.com/google/bbr) TCP BBR（Bottleneck Bandwidth and Round-trip propagation time）由Google设计，于2016年发布的拥塞算法
   - 传统 TCP 拥塞控制算法，基于丢包反馈的协议（基于丢包来作为降低传输速率的信号），而BBR则基于模型主动探测
     + 基于「丢包反馈」的协议是一种 被动式 的拥塞控制机制，其依据网络中的丢包事件来做网络拥塞判断。即便网络中的负载很高时，只要没有产生拥塞丢包，协议就不会主动降低自己的发送速度。
@@ -1993,6 +2256,41 @@ kill -l
       * 信号的信噪比（SNR）的影响
   - 该算法使用网络最近出站数据分组当时的最大带宽和往返时间来创建网络的显式模型。数据包传输的每个累积或选择性确认用于生成记录在数据包传输过程和确认返回期间的时间内所传送数据量的采样率
   - 从 4.9 开始，Linux 内核已经用上了该算法，并且对于QUIC可用
+* 抓取的数据，使用wireshark查看即可
+* http抓包:将自身当作代理，能够抓取你的浏览器到服务器之间的通讯，并提供修改、重放、批量执行的功能。是发现问题，分析协议，攻击站点的利器
+  - Burpsuite （跨平台)
+  - Fiddle2 (Win)
+  - Charles (Mac)
+* 流量复制
+  - Gor(推荐)
+  - TCPReplay
+  - TCPCopy
+* 异常
+  - TIME_WAIT一般通过优化内核参数能够解决
+    + 主动关闭连接的一方保持的状态，像nginx、爬虫服务器，经常发生大量处于`time_wait`状态的连接。TCP一般在主动关闭连接后，会等待2MS，然后彻底关闭连接。由于HTTP使用了TCP协议，所以在这些频繁开关连接的服务器上，就积压了非常多的TIME_WAIT状态连接
+    + dmesg `ss -s`
+  - CLOSE_WAIT一般是由于程序编写不合理造成的，更应该引起开发者注意
+    + 由于对端主动关闭，而我方没有正确处理的原因引起的。说白了，就是程序写的有问题，属于危害比较大的一种
+* 到对端路由检测 tracepath google.com
+* 域名检测
+  - dig google.com
+  - nslookup google.com
+* 网络扫描工具
+  - nmap
+* 压力测试
+  - iperf
+  - wrk
+  - ab
+  - webbench
+  - http_load
+* 全方位监控工具
+  - nmon
+* 远程登录
+  - telnet
+  - ssh
+  - nc
+# 防火墙
+  - iptables -L
 
 ```sh
 systemd-resolve --flush-caches # 清理缓存
@@ -2021,6 +2319,13 @@ ping host
 ifconfig -a
 # Display eth0 address and details
 ifconfig eth0
+
+# 停止某个网卡
+ifdown
+# 开启某个网卡
+ifup
+# 多功能管理工具
+ethtool
 
 # iwconfig command is very similar to ifconfig, except the fact that it is only for configuring wireless interfaces.
 # iwconfig
@@ -2176,6 +2481,42 @@ htop # Famous process monitor. It has a nice, colorful command-line UI. Some use
 # 下载工具
 wget -O newname.md https://github.com/LCTT/TranslateProject/blob/master/README.md     ### 下载 README 文件并重命名为 newname.md
 wget -c url     ### 下载 url 并开启断点续传
+
+# 查看系统正在监听的tcp连接
+ss -atr
+ss -atn #仅ip
+# 查看系统中所有连接
+ss -alt
+
+# 查看监听444端口的进程pid
+ss -ltp | grep 444
+
+#查看进程555占用了哪些端口
+ss -ltp | grep 555
+# 显示所有udp连接
+ss -u -a
+# 和某个ip的所有连接
+ss dst 10.66.224.130
+ss dst 10.66.224.130:http
+ss dst 10.66.224.130:smtp
+ss dst 10.66.224.130:443
+# 显示所有的http连接
+ss  dport = :http
+# 查看连接本机最多的前10个ip地址
+netstat -antp | awk '{print $4}' | cut -d ':' -f1 | sort | uniq -c  | sort -n -k1 -r | head -n 10
+
+ss -t -o state established
+
+# sysctl命令可以设置这些参数，如果想要重启生效的话，加入/etc/sysctl.conf文件中
+# 修改阈值
+net.ipv4.tcp_max_tw_buckets = 50000
+# 表示开启TCP连接中TIME-WAIT sockets的快速回收
+net.ipv4.tcp_tw_reuse = 1
+#启用timewait 快速回收。这个一定要开启，默认是关闭的。
+net.ipv4.tcp_tw_recycle= 1
+# 修改系統默认的TIMEOUT时间,默认是60s
+net.ipv4.tcp_fin_timeout = 10
+#测试参数的话，可以使用 sysctl -w net.ipv4.tcp_tw_reuse = 1 这样的命令。如果是写入进文件的，则使用sysctl -p生效。
 ```
 
 ### [Tcpdump](http://www.tcpdump.org/)
@@ -2188,33 +2529,40 @@ wget -c url     ### 下载 url 并开启断点续传
   - 网络过滤
   - 协议过滤
 * 参数
-  - -a 　　　将网络地址和广播地址转变成名字；
-  - -d 　　　将匹配信息包的代码以人们能够理解的汇编格式给出；
-  - -dd 　　　将匹配信息包的代码以c语言程序段的格式给出；
-  - -ddd 　　　将匹配信息包的代码以十进制的形式给出；
-  - -e 　　　在输出行打印出数据链路层的头部信息；
-  - -f 　　　将外部的Internet地址以数字的形式打印出来；
-  - -l 　　　使标准输出变为缓冲行形式；
-  - -n 　　　不把网络地址转换成名字；
-  - -t 　　　在输出的每一行不打印时间戳；
-  - -v 　　　输出一个稍微详细的信息，例如在ip包中可以包括ttl和服务类型的信息；
-  - -vv 　　　输出详细的报文信息；
-  - -c 　　　在收到指定的包的数目后，tcpdump就会停止；
-  - -F 　　　从指定的文件中读取表达式,忽略其它的表达式；
-  - -i 　　　指定监听的网络接口；
-  - -r 　　　从指定的文件中读取包(这些包一般通过-w选项产生)；
-  - -w 　　　直接将包写入文件中，并不分析和打印出来；
-  - -T 　　　将监听到的包直接解释为指定的类型的报文，常见的类型有rpc（远程过程调用）和snmp（简单网络管理协议）
+  - -a 　　　将网络地址和广播地址转变成名字
+  - -d 　　　将匹配信息包的代码以人们能够理解的汇编格式给出
+  - -dd 　　　将匹配信息包的代码以c语言程序段的格式给出
+  - -ddd 　　　将匹配信息包的代码以十进制的形式给出
+  - -e 　　　在输出行打印出数据链路层的头部信息
+  - -f 　　　将外部的Internet地址以数字的形式打印出来
+  - -l 　　　使标准输出变为缓冲行形式
+  - -n 　不解析域名
+  - -nn 表示端口也是数字，否则解析成服务名
+  - -s 设置抓包长度，0表示不限制
+  - -t 　　　在输出的每一行不打印时间戳
+  - -v 　　　输出一个稍微详细的信息，例如在ip包中可以包括ttl和服务类型的信息
+  - -vv 　　　输出详细的报文信息
+  - -c 　　　在收到指定的包的数目后，tcpdump就会停止
+  - -F 　　　从指定的文件中读取表达式,忽略其它的表达式
+  - -i 指定网卡进行抓包
+  - -r 　　　从指定的文件中读取包(这些包一般通过-w选项产生)
+  - -w 将抓取的包写入到某个文件中
+  - -A 打印ascii
+  - -X 打印hex码
+  - -T  将监听到的包直接解释为指定的类型的报文，常见的类型有rpc（远程过程调用）和snmp（简单网络管理协议）
 * 表达式
   - 非 : ! or "not" (去掉双引号)
   - 且 : && or "and"
   - 或 : || or "or"
+* 参考
+  - [](https://hackertarget.com/tcpdump-examples/)
 
 ```sh
 # 抓取所有经过网卡1，目的或源地址IP为172.16.7.206的网络数据
 tcpdump -i eth1 [src|dst] host 172.16.7.206
 # 抓取所有经过网卡1，目的或源端口为1234的网络数据
 tcpdump -i eth1 [src|dst] port 1234
+tcpdump -i eth0 host 10.10.1.1
 
 tcpdump -i eth1 [src|dst] net 192.168
 # 抓取所有经过网卡1，协议类型为UDP的网络数据
@@ -2259,6 +2607,9 @@ tcpdump -i eth0 '((port 8000) and (tcp[(tcp[12]>>2):4]=0x47455420))' -nnAl -w /t
 
 # 抓 DNS 请求数据
 tcpdump -i eth1 udp dst port 53
+
+# 抓取系统中的get,post请求（非https)
+tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
 ```
 
 ### 文件
@@ -2583,75 +2934,9 @@ locate /usr/share/\*.jpg # 注意要添加 * 号前面的反斜杠转义，否�
 which man # 使用 which 来确定是否安装了某个指定的软件，因为它只从 PATH 环境变量指定的路径中去搜索命令
 ```
 
-## 文件查找
-
-* `find [path] [option] [action]`: 不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索
-* 第一个参数：搜索的起点
-* 可选参数
-  - -name：按名称搜索
-  - 在末尾添加`-ls`会显示文件相关的详细信息
-  - `-size 189b`:找到 189 个块大小的文件，而不是 189 个字节
-    + 189c（字符）
-    + 200w：字
-  - -inum: 通过用于维护文件元数据（即除文件内容和文件名之外的所有内容）的索引节点来查找文件
-  - -group:用户组拥有的文件
-  - -nouser: 查找不属于当前系统上的任何用户的文件
-  - -mtime:查找在某个参考时间范围内状态（如权限）发生更改的文件
-  - -atime:查找在访问过的本地文件
-  - -newer:查找比其他文件更新的文件
-  - 过文件类型找到一个文件
-    + b      块特殊文件（缓冲的）
-    + c      字符特殊文件（无缓冲的）
-    + d      目录
-    + p      命名管道（FIFO）
-    + f      常规文件
-    + l      符号链接
-    + s      套接字
-  - -mindepth 和 -maxdepth 选项控制在文件系统中搜索的深度（从当前位置或起始点开始）
-  - -empty:寻找空文件，但不进入目录及其子目录
-  - -perm:查找具有特定权限集的文件
-  - -exec:执行命令
-    + {} 代表根据搜索条件找到的每个文件的名称
-    + -exec 替换为 -ok：会在删除任何文件之前要求确认
-* 通配符 `*` ，请将搜索字符串放到单引号或双引号内，以避免通配符被 shell 所解释
-
-```sh
-find  /  -name  passwd     # "递归遍历"系统全部目录查找名字等于passwd的文件
-find . -type f -name "*.css"  # List all CSS files (including subdirectories)
-find . -type f \( -name "*.css" -or -name "*.html" \) # List all CSS or HTML files
-find . -name  "an*"  # 模糊查找文件名字以an开始
-
-find -size +1G -ls 2>/dev/null
-find  ./  -size  +50c # 在当前目录下查找大小[大于]50个字节的文件
-
-find -inum 919674 -ls 2>/dev/null
-
-find / -user user1 # 搜索属于用户 'user1' 的文件和目录
-find /tmp -group admins -ls
-find /tmp -nouser -ls
-
-find /usr/bin -type f -atime +100 # 搜索在过去100天内未被使用过的执行文件
-find /usr/bin -type f -mtime -10 # 搜索在10天内被创建或者修改过的文件
-find . -newer dig1 -ls
-
-find . -type l -ls
-
-find . -maxdepth 2 -empty -type f -ls
-
-find -perm 777 -type f -ls
-
-find / -name \*.rpm -exec chmod 755 '{}' \; # 搜索以 '.rpm' 结尾的文件并定义其权限
-find . -name runme -exec rm {} \; # 定位并删除文件
-find . -name runme -ok rm -rf {} \;
-
-find / -xdev -name \*.rpm # 搜索以 '.rpm' # 结尾的文件，忽略光驱、捷盘等可移动设备
-
-find / -name passwd -mindepth 3 -maxdepth 4 # 在3到4个层次的目录里边定位passwd文件
-```
-
 ### 用户管理
 
-* 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限。
+* 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限
 * 家目录修改后需要手动创建，不同于创建用户家目录设置
 * 创建用户时设置家目录，该目录会自动创建
 * 修改用户家目录时，该目录不会自动创建(需要手动创建)
@@ -2896,216 +3181,6 @@ smb://192.168.100.106
 \\192.168.182.188
 
 # windows access internet \\192.168.1.13 share
-```
-
-## I/O
-
-* 阻塞 I/O（blocking IO）:默认情况下所有的 socket 都是blocking
-  - 当用户进程调用了 recvfrom 这个系统调用，kernel 就开始了 IO 的第一个阶段
-    + 准备数据（对于网络IO来说，数据在一开始还没有到达。比如，还没有收到一个完整的 UDP 包。 kernel 就要等待足够的数据到来）。需要等待，也就是说数据被拷贝到操作系统内核的缓冲区中需要一个过程
-    + 在用户进程这边，整个进程会被阻塞（当然，是进程自己选择的阻塞）。当 kernel 一直等到数据准备好了，会将数据从kernel中拷贝到用户内存，然后kernel返回结果，用户进程才解除 block 的状态，重新运行起来
-* 非阻塞 I/O（nonblocking IO）
-  - 当用户进程发出read操作时，如果kernel中的数据还没有准备好，那么它并不会block用户进程，而是立刻返回一个error
-  - 用户进程判断结果是一个error时，就知道数据还没有准备好，于是可以再次发送read操作
-  - kernel中的数据准备好了，并且又再次收到了用户进程的system call，就将数据拷贝到了用户内存，然后返回
-* I/O 多路复用（ IO multiplexing）:也称为 event driven IO, select，poll，epoll这个function会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程
-  - 当用户进程调用了select，整个进程会被block，而同时，kernel会“监视”所有select负责的socket，当任何一个socket中的数据准备好了，select就会返回。这个时候用户进程再调用read操作，将数据从kernel拷贝到用户进程
-  - 特点:通过一种机制一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数就可以返回
-  - select
-    + 分3类，分别是writefds、readfds、和exceptfds,直到有描述副就绪（有数据 可读、可写、或者有except），或者超时（timeout指定等待时间，如果立即返回设为null即可），函数返回
-    + 当select函数返回后，通过遍历fdset，来找到就绪的描述符
-    + 缺点:单个进程能够监视的文件描述符的数量存在最大限制，在Linux上一般为1024，可以通过修改宏定义甚至重新编译内核的方式提升这一限制，但 是这样也会造成效率的降低
-  - poll
-    + 使用一个 pollfd的指针实现:包含了要监视的event和发生的event，不再使用select“参数-值”传递的方式
-    + pollfd并没有最大数量限制（数量过大后性能也是会下降）
-    + poll返回后，需要轮询pollfd来获取就绪的描述符
-    + select和poll都需要在返回后，通过遍历文件描述符来获取已经就绪的socket。事实上，同时连接的大量客户端在一时刻可能只有很少的处于就绪状态，因此随着监视的描述符数量的增长，其效率也会线性下降
-  - epoll:使用一个文件描述符管理多个描述符，将用户关系的文件描述符的事件存放到内核的一个事件表中，在用户空间和内核空间的copy只需一次
-    + int epoll_create(int size):创建一个epoll的句柄
-      * size用来告诉内核这个监听的数目一共有多大,参数size并不是限制了epoll所能监听的描述符最大个数，只是对内核初始分配内部数据结构的一个建议
-      * 当创建好epoll句柄后，它就会占用一个fd值，在linux下如果查看/proc/进程id/fd/，是能够看到这个fd的
-      * 在使用完epoll后，必须调用close()关闭，否则可能导致fd被耗尽
-    + int epoll_ctl(int epfd, int op, int fd, struct epoll_event event):对指定描述符fd执行op操作
-      * epfd：是epoll_create()的返回值
-      * op：表示op操作，用三个宏来表示：添加EPOLL_CTL_ADD，删除EPOLL_CTL_DEL，修改EPOLL_CTL_MOD。分别添加、删除和修改对fd的监听事件
-      * fd：是需要监听的fd（文件描述符）
-      * epoll_event：是告诉内核需要监听什么事
-    + int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout): 等待epfd上的io事件，最多返回maxevents个事件
-      * 参数events用来从内核得到事件的集合，maxevents告之内核这个events有多大，这个maxevents的值不能大于创建epoll_create()时的size，参数timeout是超时时间（毫秒，0会立即返回，-1将不确定，也有说法说是永久阻塞）
-      * 该函数返回需要处理的事件数目，如返回0表示已超时
-    + 工作模式
-      * LT（level trigger）:默认模式 当epoll_wait检测到描述符事件发生并将此事件通知应用程序，应用程序可以不立即处理该事件。下次调用epoll_wait时，会再次响应应用程序并通知此事件(状态保持)
-        -
-      * ET（edge trigger）:当epoll_wait检测到描述符事件发生并将此事件通知应用程序，应用程序必须立即处理该事件。如果不处理，下次调用epoll_wait时，不会再次响应应用程序并通知此事件（不复现）
-        - 很大程度上减少了epoll事件被重复触发的次数，因此效率要比LT模式高
-    + 优点
-      * 监视的描述符数量不受限制
-  - select/poll中，进程只有在调用一定的方法后，内核才对所有监视的文件描述符进行扫描，而epoll事先通过epoll_ctl()来注册一 个文件描述符，一旦基于某个文件描述符就绪时，内核会采用类似callback的回调机制，迅速激活这个文件描述符，当进程调用epoll_wait() 时便得到通知。(此处去掉了遍历文件描述符，而是通过监听回调的的机制。这正是epoll的魅力所在。)
-  - 需要使用两个system call (select 和 recvfrom)，而blocking IO只调用了一个system call (recvfrom)。但是，用select的优势在于它可以同时处理多个connection
-  - 如果处理的连接数不是很高的话，使用select/epoll的web server不一定比使用multi-threading + blocking IO的web server性能更好，可能延迟还更大。优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。）
-  - 实际中，对于每一个socket，一般都设置成为non-blocking，但是整个用户的process其实是一直被block的。只不过process是被select这个函数block，而不是被socket IO给block
-* 信号驱动 I/O（ signal driven IO）
-* 异步 I/O（asynchronous IO）
-  - 用户进程发起read操作之后，立刻就可以开始去做其它的事
-  - 另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成
-* synchronous IO VS asynchronous IO
-  - A synchronous I/O operation causes the requesting process to be blocked until that I/O operation completes;
-  - An asynchronous I/O operation does not cause the requesting process to be blocked;
-
-```c
-int select (int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
-
-int poll (struct pollfd *fds, unsigned int nfds, int timeout);
-struct pollfd {
-    int fd; /* file descriptor */
-    short events; /* requested events to watch */
-    short revents; /* returned events witnessed */
-};
-
-int epoll_create(int size)；//创建一个epoll的句柄，size用来告诉内核这个监听的数目一共有多大
-int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
-int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
-
-struct epoll_event {
-  __uint32_t events;  /* Epoll events */
-  epoll_data_t data;  /* User data variable */
-};
-//events可以是以下几个宏的集合：
-// EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）；
-// EPOLLOUT：表示对应的文件描述符可以写；
-// EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）；
-// EPOLLERR：表示对应的文件描述符发生错误；
-// EPOLLHUP：表示对应的文件描述符被挂断；
-// EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。
-// EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里
-
-while(rs){
-  buflen = recv(activeevents[i].data.fd, buf, sizeof(buf), 0);
-  if(buflen < 0){
-    // 由于是非阻塞的模式,所以当errno为EAGAIN时,表示当前缓冲区已无数据可读
-    // 在这里就当作是该次事件已处理处.
-    if(errno == EAGAIN){
-        break;
-    }
-    else{
-        return;
-    }
-  }
-  else if(buflen == 0){
-     // 这里表示对端的socket已正常关闭.
-  }
- if(buflen == sizeof(buf){
-      rs = 1;   // 需要再次读取
- }
- else{
-      rs = 0;
- }
-}
-
-    #define IPADDRESS   "127.0.0.1"
-    #define PORT        8787
-    #define MAXSIZE     1024
-    #define LISTENQ     5
-    #define FDSIZE      1000
-    #define EPOLLEVENTS 100
-    listenfd = socket_bind(IPADDRESS,PORT);
-    struct epoll_event events[EPOLLEVENTS];
-    //创建一个描述符
-    epollfd = epoll_create(FDSIZE);
-    //添加监听描述符事件
-    add_event(epollfd,listenfd,EPOLLIN);
-    //循环等待
-    for ( ; ; ){
-        //该函数返回已经准备好的描述符事件数目
-        ret = epoll_wait(epollfd,events,EPOLLEVENTS,-1);
-        //处理接收到的连接
-        handle_events(epollfd,events,ret,listenfd,buf);
-    }
-    //事件处理函数
-    static void handle_events(int epollfd,struct epoll_event *events,int num,int listenfd,char *buf)
-    {
-         int i;
-         int fd;
-         //进行遍历;这里只要遍历已经准备好的io事件。num并不是当初epoll_create时的FDSIZE。
-         for (i = 0;i < num;i++)
-         {
-             fd = events[i].data.fd;
-            //根据描述符的类型和事件类型进行处理
-             if ((fd == listenfd) &&(events[i].events & EPOLLIN))
-                handle_accpet(epollfd,listenfd);
-             else if (events[i].events & EPOLLIN)
-                do_read(epollfd,fd,buf);
-             else if (events[i].events & EPOLLOUT)
-                do_write(epollfd,fd,buf);
-         }
-    }
-    //添加事件
-    static void add_event(int epollfd,int fd,int state){
-        struct epoll_event ev;
-        ev.events = state;
-        ev.data.fd = fd;
-        epoll_ctl(epollfd,EPOLL_CTL_ADD,fd,&ev);
-    }
-    //处理接收到的连接
-    static void handle_accpet(int epollfd,int listenfd){
-         int clifd;
-         struct sockaddr_in cliaddr;
-         socklen_t  cliaddrlen;
-         clifd = accept(listenfd,(struct sockaddr*)&cliaddr,&cliaddrlen);
-         if (clifd == -1)
-         perror("accpet error:");
-         else {
-             printf("accept a new client: %s:%d\n",inet_ntoa(cliaddr.sin_addr),cliaddr.sin_port);                       //添加一个客户描述符和事件
-             add_event(epollfd,clifd,EPOLLIN);
-         }
-    }
-    //读处理
-    static void do_read(int epollfd,int fd,char *buf){
-        int nread;
-        nread = read(fd,buf,MAXSIZE);
-        if (nread == -1)     {
-            perror("read error:");
-            close(fd); //记住close fd
-            delete_event(epollfd,fd,EPOLLIN); //删除监听
-        }
-        else if (nread == 0)     {
-            fprintf(stderr,"client close.\n");
-            close(fd); //记住close fd
-            delete_event(epollfd,fd,EPOLLIN); //删除监听
-        }
-        else {
-            printf("read message is : %s",buf);
-            //修改描述符对应的事件，由读改为写
-            modify_event(epollfd,fd,EPOLLOUT);
-        }
-    }
-    //写处理
-    static void do_write(int epollfd,int fd,char *buf) {
-        int nwrite;
-        nwrite = write(fd,buf,strlen(buf));
-        if (nwrite == -1){
-            perror("write error:");
-            close(fd);   //记住close fd
-            delete_event(epollfd,fd,EPOLLOUT);  //删除监听
-        }else{
-            modify_event(epollfd,fd,EPOLLIN);
-        }
-        memset(buf,0,MAXSIZE);
-    }
-    //删除事件
-    static void delete_event(int epollfd,int fd,int state) {
-        struct epoll_event ev;
-        ev.events = state;
-        ev.data.fd = fd;
-        epoll_ctl(epollfd,EPOLL_CTL_DEL,fd,&ev);
-    }
-    //修改事件
-    static void modify_event(int epollfd,int fd,int state){
-        struct epoll_event ev;
-        ev.events = state;
-        ev.data.fd = fd;
-        epoll_ctl(epollfd,EPOLL_CTL_MOD,fd,&ev);
-    }
 ```
 
 ## OS Page Cache和Buffer Cache

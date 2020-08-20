@@ -110,6 +110,12 @@ mysql_query("SELECT * FROM users WHERE name='{$name}'");
 $sub = addcslashes(mysql_real_escape_string("%something_"), "%_");
 ```
 
+## [TCP 重置攻击](https://mp.weixin.qq.com/s/crgraQv6qQ-aVJd9L2u1eg)
+
+* 正常情况下，如果客户端收发现到达的报文段对于相关连接而言是不正确的，TCP 就会发送一个重置报文段，从而导致 TCP 连接的快速拆卸
+* 在 TCP 重置攻击中，攻击者通过向通信的一方或双方发送伪造的消息，告诉它们立即断开连接，从而使通信双方连接中断
+* 一般情况下这种攻击只对长连接有杀伤力
+
 ## XSS (Cross Site Script)跨站脚本攻击
 
 * 恶意攻击者往 Web 页面里插入恶意 html 代码，当用户浏览该页之时，嵌入的恶意 html 代码会被执行，从而达到恶意用户的特殊 目的

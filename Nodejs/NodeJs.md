@@ -105,6 +105,7 @@ a package manager for javascript <http://www.npmjs.com/>
 npm -v
 npm config set registry https://registry.npm.taobao.org --global
 npm config set registry "http://registry.npmjs.org/"
+
 npm config set registry http://registry.cnpmjs.org # Unexpected end of JSON input while parsing near '...p":false,"directories'
 npm root -g
 
@@ -144,6 +145,7 @@ npm ls
 
 npm install <package> # Install locally
 npm install|i -g <package> cnpm --registry=https://registry.npm.taobao.org # Install globally
+nmp install -g --registery= https://registery.npm.taobao.org
 npm install <package> --save # To install a package and save it in your project's package.json file
 npm install npm@latest -g
 

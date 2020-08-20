@@ -110,6 +110,19 @@ onHide  当 uni-app 从前台进入后台
 * [framework7io/framework7](https://github.com/framework7io/framework7) Full featured HTML framework for building iOS & Android apps http://framework7.io
 * [NativeScript/NativeScript](https://github.com/NativeScript/NativeScript) NativeScript is an open source framework for building truly native mobile apps with JavaScript. Use web skills, like Angular and Vue.js, FlexBox and CSS, and get native UI and performance on iOS and Android. https://www.nativescript.org
 
+### App 流程
+
+* 需求分析
+* 脚手架工具
+* 数据mock
+* 架构设计
+  - 模块拆分
+  - 组件抽象
+* 代码编写
+* 自测
+* 编译打包
+
+
 ## 工具
 
 * [fastlane/fastlane](https://github.com/fastlane/fastlane):🚀 The easiest way to automate building and releasing your iOS and Android apps https://fastlane.tools

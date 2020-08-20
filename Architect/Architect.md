@@ -570,3 +570,4 @@ service UserService {
 * [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer):Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.
 * [binhnguyennus/awesome-scalability](https://github.com/binhnguyennus/awesome-scalability):An updated and curated list of selected readings to illustrate Scalability, Availability, and Stability Design Patterns in Back-end Development.
 * [microsoft/fast](https://github.com/microsoft/fast):The adaptive interface system  for modern web experiences. https://www.fast.design/
+* [“构建”世界的能力-架构能力](https://mp.weixin.qq.com/s/Qw8TEIssMwrE9l2Y8BzjaA)
