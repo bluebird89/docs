@@ -87,6 +87,15 @@ curl localhost:3000/api/json -X POST -d '{"hello": "world"}' --header "Content-T
 curl localhost:3000/api/json -X POST -d @data.json --header "Content-Type: application/json"
 ```
 
+## wget
+
+```sh
+# 断点续传下载文件
+wget -c $url
+# 下载整站
+wget -r -p -np -k $url
+```
+
 ## Notice
 
 * network

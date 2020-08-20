@@ -1,6 +1,5 @@
 # 笔记
 
-
 * [laurent22/joplin](https://github.com/laurent22/joplin):Joplin - an open source note taking and to-do application with synchronization capabilities for Windows, macOS, Linux, Android and iOS. Forum: https://discourse.joplinapp.org/ https://joplinapp.org,需要自己搭建存储
     + `brew cask install joplin`
     + `wget -O - https://raw.githubusercontent.com/laurent22/joplin/master/Joplin_install_and_update.sh | bash`

@@ -648,26 +648,6 @@ python3 duu.py /home/sk/Downloads/
 ls -l my_script # 过滤输出列表
 ```
 
-## grep
-
-全局搜索正则表达式并打印出匹配的行
-
-```sh
-grep “string” filename
-grep “string” filenameKeyword*
-grep 'Ubuntu' *.txt
-grep “startingKeyword.*endingKeyword” filename
-grep -i “string” filename # 不会考虑搜索字符串是大写还是小写
-grep -rn --color POST access.log # n则输出具体的行数
-
-grep -rn --color Exception -A10 -B2   error.log # A  after  内容后n行 B  before  内容前n行 C  count?  内容前后n行
-
-# 删除目录中的所有class文件
-find . | grep .class$ | xargs rm -rvf
-#把所有的rmvb文件拷贝到目录
-ls *.rmvb | xargs -n1 -i cp {} /mount/xiaodianying
-```
-
 ### [zsh-users/zsh](https://github.com/zsh-users/zsh)
 
 * [ ohmyzsh / ohmyzsh ](https://github.com/ohmyzsh/ohmyzsh)：A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
@@ -1081,30 +1061,13 @@ A cat(1) clone with wings
 wget https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.deb
 ```
 
-## [ripgrep]](https://github.com/BurntSushi/ripgrep)
-
-更好的grep，和上面的fd一样，在递归目录匹配的时候，会忽略到配置在 .gitignore 中的规则
-
-* 跟 fd 一样默认忽略隐藏目录和文件，遵守 .gitignore
-* 比 grep 快得多
-
-```sh
-sudo apt-get install ripgrep
-
-rg -n -w '[A-Z]+_SUSPEND'
-rg -uuu -tc -n -w '[A-Z]+_SUSPEND'
-rg -w 'Sherlock [A-Z]\w+'
-rg fast README.md
-rg 'fast\w+' README.md
-```
-
 ## Linux环境高级编程
 
 * 学习系统编程接口、系统调用 API 、内存管理、进程间通信（ IPC ）
 
 ## 图书
 
-* 《鸟哥的Linux私房菜基础学习篇》 —— 这个系列还有一个服务器架设篇，前期学习个人感觉没必要看
+* 《鸟哥的Linux私房菜基础学习篇》
 * 《Linux Shell脚本攻略》
 * 《Shell脚本学习指南》
 * **《UNIX环境高级编程》**
@@ -1165,10 +1128,6 @@ rg 'fast\w+' README.md
 * [asciinema](https://asciinema.org/)和 [svg-trem](https://github.com/marionebl/svg-term-cli) 如果想把的命令行操作建录制成一个 SVG 动图
 * [Taskbook](https://github.com/klaussinani/taskbook) 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级
 * [sshrc](https://github.com/Russell91/sshrc ) 在登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置
-* 搜索
-    - [ack](https://beyondgrep.com/)
-    - [ ggreer / the_silver_searcher ](https://github.com/ggreer/the_silver_searcher)A code-searching tool similar to ack, but faster.
-    - [ ggreer / the_silver_searcher ](https://github.com/ggreer/the_silver_searcher):A code-searching tool similar to ack, but faster. http://geoff.greer.fm/ag/
 * monitor
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序
     - [sqshq / sampler ](https://github.com/sqshq/sampler):Tool for shell commands execution, visualization and alerting. Configured with a simple YAML file. https://sampler.dev
@@ -1188,7 +1147,7 @@ rg 'fast\w+' README.md
     - [ethtool](https://www.kernel.org/pub/software/network/ethtool/) 用于显示和修改网络接口控制器的一些参数。它也可以用来诊断以太网设备，并获得更多的统计数据。
     - [NetHogs]( http://nethogs.sourceforge.net/) 打破了网络流量按协议或子网进行统计的惯例，它以进程来分组。所以，当网络流量猛增时，你可以使用 NetHogs 查看是由哪个进程造成的。
     - [iptraf](http://iptraf.seul.org/) 收集的各种指标，如 TCP 连接数据包和字节数，端口统计和活动指标，TCP/UDP 通信故障，站内数据包和字节数。
-    - [ngrep](http://ngrep.sourceforge.net/) 就是网络层的 grep。它使用 pcap ，允许通过指定扩展正则表达式或十六进制表达式来匹配数据包。
+    - [ngrep](http://ngrep.sourceforge.net/) 就是网络层的 grep。使用 pcap ，允许通过指定扩展正则表达式或十六进制表达式来匹配数据包。
     - [MRTG](http://oss.oetiker.ch/mrtg/) 最初被开发来监控路由器的流量，但现在它也能够监控网络相关的东西。它每五分钟收集一次，然后产生一个 HTML 页面。它还具有发送邮件报警的能力。
     - [bmon](https://github.com/tgraf/bmon/) 能监控并帮助你调试网络。它能捕获网络相关的统计数据，并以友好的方式进行展示。你还可以与 bmon 通过脚本进行交互。
     - traceroute是一个内置工具，能显示路由和测量数据包在网络中的延迟,数据包在IP网络经过的路由器的IP地址
@@ -1202,10 +1161,6 @@ rg 'fast\w+' README.md
     - [Justniffer](http://justniffer.sourceforge.net/) 是 tcp 数据包嗅探器。使用此嗅探器你可以选择收集低级别的数据还是高级别的数据。它也可以让你以自定义方式生成日志。比如模仿 Apache 的访问日志。
 * hex
     - [sharkdp/hexyl](https://github.com/sharkdp/hexyl):A command-line hex viewer
-* git
-    - [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
-    - [magicmonty/bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):An informative and fancy bash prompt for Git users
-    - tig：字符模式下交互查看git项目，可以替代git命令
 * prompt
     - [b-ryan/powerline-shell](https://github.com/b-ryan/powerline-shell):A beautiful and useful prompt for your shell
         + pre-patched and adjusted fonts for usage with the Powerline statusline plugin `sudo apt-get install fonts-powerline`
