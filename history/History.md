@@ -220,6 +220,25 @@
 * 《万古江河：中国历史文化的转折与开展》
 * 《枪炮、病菌与钢铁：人类社会的命运》
 * 《新全球史：文明的传承与交流》
+* 剑桥中国史
+    - The.Cambridge.History.of.China,.Vol.01：The.Ch’in.and.Han.Empires,.221.B.C.-A.D.220.pdf
+    - The.Cambridge.History.of.China,.Vol.02：（未出版）
+    - The.Cambridge.History.of.China,.Vol.03：Sui.and.T’ang,.589-906,.Part.1.pdf
+    - The.Cambridge.History.of.China,.Vol.04：Sui.and.T’ang,.589-906,.Part.2.pdf （未出版）
+    - The.Cambridge.History.of.China,.Vol.05：The.Sung.Dynasty.and.Its.Precursors,.907–1279,.Part.1.pdf
+    - The.Cambridge.History.of.China,.Vol.05：The.Sung.Dynasty.and.Its.Precursors,.907–1279,.Part.2.pdf （未出版）
+    - The.Cambridge.History.of.China,.Vol.06：Alien.Regimes.and.Border.States,.907-1368.pdf
+    - The.Cambridge.History.of.China,.Vol.07：The.Ming.Dynasty,.1368-1644,.Part.1.pdf
+    - The.Cambridge.History.of.China,.Vol.08：The.Ming.Dynasty,.1368-1644,.Part.2.pdf
+    - The.Cambridge.History.of.China,.Vol.09：The.Ch’ing.Empire.to.1800,.Part.1.pdf
+    - The.Cambridge.History.of.China,.Vol.09：The.Ch’ing.Empire.to.1800,.Part.2.pdf  （未出版）
+    - The.Cambridge.History.of.China,.Vol.10：Late.Ch’ing,.1800-1911,.Part.1.pdf
+    - The.Cambridge.History.of.China,.Vol.11：Late.Ch’ing,.1800-1911,.Part.2.pdf
+    - The.Cambridge.History.of.China,.Vol.12：Republican.China,.1912-1949,.Part.1.pdf
+    - The.Cambridge.History.of.China,.Vol.13：Republican.China.1912-1949,.Part.2.pdf
+    - The.Cambridge.History.of.China,.Vol.14：The.People’s.Republic,.Part.1：The.Emergence.of.Revolutionary.China,.1949-1965.pdf
+    - The.Cambridge.History.of.China,.Vol.15：The.People’s.Republic,.Part.2：Revolutions.within.the.Chinese.Revolution,.1966-1982.pdf
+    - The.Cambridge.History.of.Ancient.China：From.the.Origins.of.Civilization.to.221.B.C.
 * 史记
 * 资治通鉴
 * 二十四史
@@ -252,7 +271,6 @@
     - 新元史
 * History of Imperial China
 * 古史辩
-* 1913 世纪之夏的浪荡子们
 * 中国人史纲
 * 徐中约《中国近代史1600至2000中国的奋斗(第6版)》
 * 中国历代政治得失
@@ -277,6 +295,7 @@
 * 杜兰特《历史的教训》2015年版；
 * 丹尼尔 ·汉南《自由的基因》2015年版；
 * 雷蒙·阿隆《雷蒙·阿隆回忆录》2017年版；
+* 《陈寅恪的最后20年》
 
 ## 项目
 

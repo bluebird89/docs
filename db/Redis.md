@@ -2,13 +2,11 @@
 
 Redis is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. http://redis.io
 
-## 原理
-
 * 一种基于客户端-服务端模型以及请求/响应协议的TCP服务
     - 客户端向服务端发送一个查询请求，并监听Socket返回，通常是以阻塞模式，等待服务端响应
     - 服务端处理命令，并将结果返回给客户端
 * 性能：纯内存操作，单线程操作，避免了线程切换和锁的性能消耗，10万次读写操作
-    - 将数据都读到内存中，通过异步的方式将数据写入磁盘
+    - 将数据都读到内存中，通过异步方式将数据写入磁盘
     - 利用队列技术将并发访问变为串行访问，消除了传统数据库串行控制的开销
     - 单线程简化数据结构和算法的实现：要多核运行可以启动多个实例
 * 单个value的最大限制是1GB(memcached 是1MB)
@@ -24,6 +22,11 @@ Redis is an in-memory database that persists on disk. The data model is key-valu
     - vm 字段，只有打开了Redis的虚拟内存功能，此字段才会真正的分配内存
 * 支持Lua脚本
 * 分布式
+* 特点
+    - 异常快 - Redis 非常快，每秒可执行大约 110000 次的设置(SET)操作，每秒大约可执行 81000 次的读取/获取(GET)操作。
+    - 支持丰富的数据类型 - Redis 支持开发人员常用的大多数数据类型，例如列表，集合，排序集和散列等等。这使得 Redis 很容易被用来解决各种问题，因为我们知道哪些问题可以更好使用地哪些数据类型来处理解决。
+    - 操作具有原子性 - 所有 Redis 操作都是原子操作，这确保如果两个客户端并发访问，Redis 服务器能接收更新的值。
+    - 多实用工具 - Redis 是一个多实用工具，可用于多种用例，如：缓存，消息队列(Redis 本地支持发布/订阅)，应用程序中的任何短期数据，例如，web应用程序中的会话，网页命中计数等。
 * 缺点：容量受到物理内存的限制，不能用作海量数据的高性能读写，局限在较小数据量的高性能操作和运算上
 
 ### 版本
@@ -306,37 +309,39 @@ struct sdshdr {
     - 多慢才叫慢 slowlog-log-slower-than 10000，来指定（单位为微秒）
     - 服务器存储多少条慢查询记录 由slowlog-max-len 128，来做限制
 
-### string(字符串)
+## string(字符串)
 
-* 动态字符串,可以修改，它的底层实现有点类似于 Java 中的ArrayList，有一个字符数组.简单的key-value类型，value可以是String或者数字
-* 值可以是任何各种类的字符串（包括二进制数据），如：简单的字符串、JSON、XML、二进制等 例如可以在一个键下保存一副jpeg图片
+* 动态字符串，意味着使用者可以修改，底层实现有点类似于 Java 中的ArrayList，有一个字符数组.简单的key-value类型
+* 字符串的长度不得超过 512 MB值，可以是String或者数字，任何各种类的字符串（包括二进制数据），如：简单的字符串、JSON、XML、二进制、jpeg图片
 * 方法
-    - 设置 `set key value [EX seconds] [PX milliseconds] [NX|XX]` 当 key 存在时，SET 命令会覆盖掉上一次设置的值：
+    - 设置 `SET key value [EX seconds] [PX milliseconds] [NX|XX]` 当 key 存在时，SET 命令会覆盖掉上一次设置的值：
         + EX seconds：为键设置秒级过期时间
         + PX milliseconds：为键设置毫秒级过期时间
         + NX：键不存在，才可以设置成功，用于添加
             * 同一个 key 在执行 setnx 命令时，只能成功一次，并且由于 Redis 的单线程命令处理机制，即使多个客户端同时执行 setnx 命令，也只有一个客户端执行成功。
         + XX：键已存在，才可以设置成功，用于更新
             * 多次更新，跟原来值一样
-    - 获取 `get key`
+    - 获取 `GET key`
     - EXPIRE name 5    # 5s 后过期
-    - 批量设置值  `mset key value [key value]`
-    - 批量获取值 `mget key [key1 key2]`,键不存在，值将为 nil,并且返回结果的顺序与传入时相同
-    - 对值做自增操作 `incr key`
+    - EXISTS key
+    - DEL key
+    - 批量设置值 `MSET key value [key value]`
+    - 批量获取值 `MGET key [key1 key2]`,键不存在，值将为 nil,并且返回结果的顺序与传入时相同
+    - 值自增操作 `incr key`
         + 如果值不是整数，返回错误
         + 如果值是整数，返回自增结果
         + 如果键不存在，创建此键，然后按照值为 0 自增(1)
-    - `incrby key increment` 自增指定数字
+        + `incrby key increment` 自增指定数字
+        + `incrbyfloat key increment 0.7`
     - `decr key` 自减
-    - `decrby key decrement` 自减指定数字
-    - `incrbyfloat key increment 0.7`
+        + `decrby key decrement` 自减指定数字
     - `strlen key` 获取字符串长度
         + 每个中文占用 3 个字节
     - `append key value` 往字符串append内容
-    - `getset key value` 设置并返回原值
-    - EXISTS key
-    - DEL key
-    - SETEX key value1  # 如果 key 不存在则 SET 成功,如果 key 存在则 SET 失败
+    - `getset key value` 设置新值并返回原值
+    - SETNX key value1
+        + 如果 key 不存在 则 SET 成功
+        + 如果 key 存在 则 SET 失败
     - `getrange key start end` 获取字符串的某一段内容 O(n) n是字符长度,字符串的下标，左数从0开始，右数从-1开始
         + 当start>length，则返回空字符串
         + 当stop>=length，则截取至字符串尾
@@ -347,8 +352,9 @@ struct sdshdr {
         + 设置offset对应二进制上的值，返回该位上的旧值 `SETBIT key offset value`：如果offset过大，则会在中间填充0,offset最大到多少：2^32-1，即可推出最大的字符串为512M
         + bitop AND|OR|NOT|XOR destkey key1 [key2..] 对key1 key2做opecation并将结果保存在destkey上
         + BITCOUNT bitkey:返回bitkey 数量
-* 编码：长度不能超过512MB
+* 编码
     - 内部存储默认就是一个字符串，被redisObject所引用，当遇到incr,decr等操作时会转成数值型进行计算，此时redisObject的encoding字段为int
+    - 为了对内存做极致的优化，不同长度的字符串使用不同的结构体来表示：字符串比较短的时候，len 和 alloc 可以使用 byte 和 short 来表示
     - int：8个字节的长整型。字符串值是整型时，这个值使用long整型表示，当int数据不再是整数，或大小超过了long的范围时，自动转化为raw。
     - embstr（动态字符串编码）：<=39字节的字符串：redisObject的长度是16字节，sds的长度是9+字符串长度；因此当字符串长度是39时，embstr的长度正好是16+9+39=64，jemalloc正好可以分配64字节的内存单元。
         + 由于其实现是只读的，因此在对embstr对象进行修改时，都会先转化为raw再进行修改，因此，只要是修改embstr对象，修改后的对象一定是raw的，无论是否达到了39个字节
@@ -364,6 +370,11 @@ struct sdshdr {
         + 减少修改字符串长度时候所需的内存重分配次数
         + 二进制安全的API操作
         + 兼容部分C字符串函数
+    - SDS 与 C 字符串的区别
+        + C 语言这种简单的字符串表示方式不符合 Redis 对字符串在安全性、效率以及功能方面的要求。C 语言使用了一个长度为 N+1 的字符数组来表示长度为 N 的字符串，并且字符数组最后一个元素总是 '\0'
+            * 获取字符串长度为 O(N) 级别的操作 → 因为 C 不保存数组的长度，每次都需要遍历一遍整个数组；
+            * 不能很好的杜绝 缓冲区溢出/内存泄漏 的问题 → 跟上述问题原因一样，如果执行拼接 or 缩短字符串的操作，如果操作不当就很容易造成上述问题；
+            * C 字符串 只能保存文本数据 → 因为 C 语言中的字符串必须符合某种编码（比如 ASCII），例如中间出现的 '\0' 可能会被判定为提前结束的字符串而识别不了；
 * 场景
     - 缓存
     - 分布式Session：存储用户token和用户uid `set token user_id`
@@ -402,8 +413,202 @@ if ( get( ip:1517207868 ) > 3 ) {
 }
 ```
 
+## list(列表)
+
+* 用来存储多个有序字符串，每个字符串称为元素；一个列表可以存储2^32-1个元素
+    - 所有的元素都是有序的，可以通过索引获取，也就是 lindex 命令。索引是从 0 开始的
+    - 元素是可以重复
+* 实现:一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销
+* 相当于 Java 语言中的 LinkedList
+    - Linked list:插入和删除操作非常快，时间复杂度为 O(1)，但是索引定位很慢，时间复杂度为 O(n),用linked list实现的原因：对于数据库系统来说，重要的特性是：能非常快的在很大的列表上添加元素，lists能在常数时间取得常数长度
+    - 数组List:利用索引访问元素的速度极快
+* 方法
+    - 右边插入元素 `RPUSH key value [value ...]`, 多个值依次操作,返回key中全部元素个数
+    - 左边插入元素 `LPUSH key value [value ...]`, 多个值依次操作,返回key中全部元素个数
+    - 向某个元素前或者后插入元素 `linsert key BEFORE|AFTER pivot value`,返回key中全部元素个数
+    - 获取指定范围内的元素列表 `LRANGE key start stop` 没有 rrange
+        + 索引下标从左到右分别是 0 到 N-1，从右到左是 -1 到 -N
+        + stop 参数在执行时会包括当前元素，并不是所有的语言都是这样的
+        + `lrange key 0 -1`
+    - 获取列表中指定索引下标元素 `LINDEX key index`
+    - 获取列表长度 `llen key`
+    - 从列表左侧弹出元素 `lpop key`
+    - 从列表右侧弹出元素 `rpop key`
+    - 删除指定元素 `lrem key count value`
+        + count > 0 表示从左到右，最多删除 count 个值为value元素，返回成功删除元素的个数
+        + count < 0：从右到左，最多删除 count 个值为value元素
+        + count = 0：删除所有值为value元素
+    - 按照索引范围修剪列表 `ltrim key start stop`: 直接保留 start 索引到 stop 索引的之间的元素，并包括当前元素，而之外的元素则都会删除掉,返回改命令是否成功的状态
+    - 修改指定索引下标的元素 `lset key index value`
+    - 阻塞操作：blpop 和 brpop 命令是 lpop 和 rpop 命令的阻塞版本，可以指定多个列表的键.如果 timeout=3，则表示客户端等待 3 秒后才能返回结果，如果 timeout=0，则表示客户端会一直等待，也就是会阻塞,取消不支持
+        + 多个客户端都对同一个键执行 blpop 或者 brpop 命令，则最先执行该命令的客户端会获取到该键的元素。
+        + blpop key [key ...] timeout
+        + brpop key [key ...] timeout
+    - rpoplpush source dest：把source 的末尾拿出，放到dest头部，并返回单元值
+* 编码
+    - ziplist（压缩列表）
+        + 当列表中元素个数小于 512（默认）个，并且列表中每个元素的值都小于 64（默认）个字节时，当然上述默认值也可以通过相关参数修改：list-max-ziplist-entried（元素个数）、list-max-ziplist-value(元素值)。
+        + 为了节约内存而开发的，是由一系列特殊编码的连续内存块(而不是像双端链表一样每个节点是指针)组成的顺序型数据结构
+        + 与双端链表相比，压缩列表可以节省内存空间，但是进行修改或增删操作时，复杂度较高
+        + 因此当节点数量较少时，可以使用压缩列表；但是节点数量多时，还是使用双端链表划算
+    - linkedlist（链表）：当列表类型无法满足 ziplist 条件时，会选择用 linkedlist 作为列表的内部实现
+        + 由一个list结构和多个listNode结构组成
+        + list结构保存了表头指针、列表的长度和表尾指针，dup、free和match为节点值设置类型特定函数
+        + 而链表中每个节点指向的是type为字符串的redisObject，每个节点都有指向前和指向后的指针
+    - 编码转换
+        + 单个字符串不能超过64字节，是为了便于统一分配每个节点的长度；这里的64字节是指字符串的长度，不包括SDS结构，因为压缩列表使用连续、定长内存块存储字符串，不需要SDS结构指明长度
+* 场景
+    - 队列：右侧当作队尾，将左侧当作队头，Rpush 生产消息，LPOP 消费消息
+        + LPOP 不会等待队列中有值之后再消费，而是直接进行消费。可以通过在应用层引入 Sleep 机制去调用 LPOP 重试
+        + BLPOP key [key …] timeout：阻塞直到队列有消息或者超时
+    - 栈:Rpush 生产消息，RPOP 消费消息
+    - 社交网络中获取关注人时间轴列表、帖子、评论系统
+    - 新闻的分页列表
+    - 并发限制
+
+```sh
+LPUSH list1 1 2 3 4 5 # 5 4 3 2 1
+RPUSH list1 55 66 77 # 5 4 3 2 1 55 66 77
+LRANGE list1 0 3    # 取范围值 1 2 3
+LRANGE list1 0 -1    # 取全部
+
+linsert set after 55 new
+lrem set 5 new
+lrem set -5 new
+lrem set 0 new
+```
+
+### set(集合)
+
+* 存储一些无序、唯一的键值对，不能通过索引来操作元素,其元素是二进制安全的字符串，最多可以存储2^32-1个元素
+* 通过哈希表实现（增删改查时间复杂度为 O(1)）
+* 适用于集合所有元素都是整数且集合元素数量较小的时候，与哈希表相比，整数集合的优势在于集中存储，节省空间；同时，虽然对于元素的操作复杂度也由O(n)变为了O(1)，但由于集合数量较少，因此操作的时间并没有明显劣势
+* set vs list
+    - set 中的元素是不可以重复的，而 list 是可以保存重复元素的
+    - set 中的元素是无序的，而 list 中的元素是有序的
+    - set 中的元素不能通过索引下标获取元素，而 list 中的元素则可以通过索引下标获取元素
+    - 除此之外 set 还支持更高级的功能，例如多个 set 取交集、并集、差集等
+* 实现:一个 value永远为null的HashMap，实际就是通过计算hash的方式来快速排重的，这也是set能提供判断一个成员是否在集合内的原因
+* 方法
+    - 获取所有元素 `smembers key`
+    - 添加元素:`sadd key member [member ...]` 返回值就是当前执行 sadd 命令成功添加元素的个数
+    - 删除元素:`srem key member [member ...]` 返回值就是当前删除元素的个数
+    - 计算元素个数:`scard key` 复杂度为O(1) 不会遍历 set 中的所有元素，而是直接使用 Redis 中的内部变量
+    - 判读元素是否在集合中 `sismember key member` 复杂度为O(1) 回值为1则表示当前元素在当前 set 中，如果返回 0 则表示当前元素不在 set 中
+    - spop key：返回并删除集合中1个随机元素（可以坐抽奖，不会重复抽到某人）
+    - smove source dest value：把source的value移动到dest集合中
+    - 随机从 set 中返回指定count个数元素 `srandmember key [count]`  复杂度为O(n) 可选参数 count
+        + count 参数指的是返回元素的个数，如果当前 set 中的元素个数小于 count，则 srandmember 命令返回当前 set 中的所有元素
+        + 如果 count 参数等于 0，则不返回任何数据
+        + 如果 count 参数小于 0，则随机返回当前 count 个数的元素
+    - 从集合中随机弹出元素 `spop key [count]`,也支持 count 可选参数, 和 srandmember 命令不同。spop 命令在随机弹出元素之后，会将弹出的元素从 set 中删除
+    - 集合的交集 `sinter key [key ...]` 复杂度为O(m*k) k是多个集合中元素最少的个数，m是键个数
+    - 集合的并集 `sunion key [key ...]` 复杂度为O(K) k是多个元素个数和
+    - 集合的差集 `sdiff key [key ...]`
+    - 集合的交集、并集、差集的结果保存,在进行上述比较时，会比较耗费时间，所以为了提高性能可以将交集、并集、差集的结果提前保存起来，在需要使用时可以直接通过 smembers 命令获取
+        + sinterstore destination key [key ...]
+        + sunionstore destination key [key ...]
+        + sdiffstore destination key [key ...]
+* 编码
+    - intset(整数集合)：当集合中的元素都是整数，并且集合中的元素个数小于 512 个时
+        + encoding代表contents中存储内容的类型
+        + contents（存储集合中的元素）是int8_t类型，但实际上其存储的值是int16_t、int32_t或int64_t，具体的类型便是由encoding决定的；
+        + length表示元素个数
+    - hashtable(哈希表)：当上述条件不满足时，Redis 会采用 hashtable 作为底层实现。
+* 场景
+    - 自动去重
+    - 标签
+    - 粉丝/关注列表
+    - 通过交集获取不同用户共同关注用户
+    - 好友关系：共同喜好、二度好友
+    - 赞、踩
+
+```
+SADD myset guan
+SMEMBERS myset
+SISMEMBER myset guan
+spop
+sunion
+
+# intset
+typedef struct intset{
+    uint32_t encoding;
+    uint32_t length;
+    int8_t contents[];
+} intset;
+```
+
+### zset(有序集合 Sorted set)
+
+* 通过额外提供一个优先级(score)参数来为成员排序，并且是插入有序的，即自动排序
+* 实现：内部使用HashMap和跳跃表(SkipList)来保证数据的存储和有序
+    - HashMap里放的是成员到score的映射，而跳跃表里存放的是所有的成员
+    - 排序依据是HashMap里存的score,使用跳跃表的结构可以获得比较高的查找效率，并且在实现上比较简单
+* 方法
+    - 添加元素 `zadd key [NX|XX] [CH] [INCR] score member [score member ...]` 返回值就是当前 zadd 命令成功添加元素的个数。zadd 命令有很多选填参数,时间复杂度为O(log(n))
+        + nx: 元素必须不存在时，才可以设置成功。
+        + xx: 元素必须存在时，才可以设置成功。
+        + ch: 返回此命令执行完成后，有序集合元素和分数发生变化的个数
+        + incr: 对 score 做增加
+    - 成员个数 `zcard key`
+    - 某个成员的分数 `zscore key member` 如果 key 不存在，或者元素不存在时，该命令返回的都是(nil)
+    - 成员的排名
+        + 从分数低到高排名:`zrank key member`
+        + 从分数高到低排名:`zrevrank key member`
+        + 增加元素分数 也可以指定负数，这样当前元素的分数，则会相减 `zincrby key increment member`
+    - 返回指定排名范围的元素,添加了 WITHSCORES 可选参数，则返回数据时会返回当前元素的分数
+        + 返回名次[start,stop]的元素  默认是升续排列 `zrange key start stop [WITHSCORES]`
+        + `zrevrange key start stop [WITHSCORES]`
+    - 返回指定分数范围的元素,可以用 -inf 和 +inf 参数代表无限小和无限大,min 和 max 参数还支持开区间(小括号)和闭区间(中括号 无效)
+        + `zrangebyscore key min max [WITHSCORES] [LIMIT offset count]`
+        + 集合（升序）排序后取score在[min, max]内的元素，并跳过offset个，取出N个 zrangebyscore key min max [withscores] limit offset N
+        + 降序 0名开始 `zrevrangebyscore key max min [WITHSCORES] [LIMIT offset count]`
+    - 返回指定分数范围元素个数 `zcount key min max`
+    - 删除指定排名内的升序元素 `zremrangebyrank key start stop`
+    - 删除指定分数范围元素 `zremrangebyscore key min max`
+    - 交集 `zinterstore destination numkeys key [key ...] [WEIGHTS weight] [AGGREGATE SUM|MIN|MAX]`
+        + destination：将交集的计算结果，保存到这个键中。
+        + numkeys：需要做交集计算键的个数。
+        + key [key …]：需要做交集计算的键。
+        + WEIGHTS weight：每个键的权重，在做交集计算时，每个键中的分数值都会乘以这个权重，默认每个键的权重为 1。
+        + AGGREGATE SUM|MIN|MAX：计算成员交集后，分值可以按照 sum(和)、min(最小值)、max(最大值)做汇总，默认值为  sum
+    - 并集 `zunionstore destination numkeys key [key ...] [WEIGHTS weight] [AGGREGATE SUM|MIN|MAX]`
+* 编码
+    - ziplist(压缩列表)：当有序集合的元素个数小于 128 个(默认设置)，同时每个元素的值都小于 64 字节(默认设置)，Redis 会采用 ziplist 作为有序集合的内部实现。
+    - skiplist(跳跃表)：当上述条件不满足时，Redis 会采用 skiplist 作为内部编码
+        + 一种有序数据结构，通过在每个节点中维持多个指向其他节点的指针，从而达到快速访问节点的目的。
+        + 除了跳跃表，实现有序数据结构的另一种典型实现是平衡树；大多数情况下，跳跃表的效率可以和平衡树媲美，且跳跃表实现比平衡树简单很多，因此redis中选用跳跃表代替平衡树。
+        + 跳跃表支持平均O(logN)、最坏O(N)的复杂点进行节点查找，并支持顺序操作。
+        + Redis的跳跃表实现由zskiplist和zskiplistNode两个结构组成：前者用于保存跳跃表信息（如头结点、尾节点、长度等），后者用于表示跳跃表节点。
+* 场景：排序功能
+    - 有序的且不重复的集合列表，比如twitter 的public timeline可以以发表时间作为score来存储，这样获取时就是自动按时间排好序的
+    - 带权重的消息队列，比如普通消息的score为1，重要消息的score为2，然后工作线程可以选择按score的倒序来获取工作任务。让重要的任务优先执行
+    - 排行榜：取TOP N操作
+    - 延时任务
+    - 范围查找
+
+```
+ZADD books 9.0 "think in java"
+ZADD books 8.9 "java concurrency"
+ZADD books 8.6 "java cookbook"
+
+ZCARD books           # 相当于 count()
+
+ZRANGE books 0 -1 WITHSCORES
+ZREVRANGE books 0 -1  # 按 score 逆序列出，参数区间为排名范围
+ZSCORE books "java concurrency"   # 获取指定 value 的 score
+ZRANK books "java concurrency"    # 排名
+ZRANGEBYSCORE books 0 8.91        # 根据分值区间遍历 zset
+ZRANGEBYSCORE books -inf 8.91 withscores  # 根据分值区间 (-∞, 8.91] 遍历 zset，同时返回分值。inf 代表 infinite，无穷大的意思。
+ZREM books "java concurrency"             # 删除 value
+
+zinterstore destination 2 zsetkey1 zsetkey2 WEIGHTS 1 0.5 AGGREGATE max # key1 权重 1 key2 权重 0.5 ，取大值
+```
+
 ### hash(字典)
 
+* 通过 "数组 + 链表" 的链地址法来解决部分 哈希冲突,table 属性是一个数组，数组中的每个元素都是一个指向 dict.h/dictEntry 结构的指针，而每个 dictEntry 结构保存着一个键值对
+    - 实际上字典结构的内部包含两个 hashtable，通常情况下只有一个 hashtable 是有值的，但是在字典扩容缩容时，需要分配新的 hashtable，然后进行 渐进式搬迁
 * 在Memcached中，将一些结构化的信息打包成HashMap
     - 在客户端序列化后存储为一个字符串的值，比如用户的昵称、年龄、性别、积分等，需要修改其中某一项时，通常需要将所有值取出反序列化后，修改某一项的值，再序列化存储回去。这样不仅增大了开销，也不适用于一些可能并发操作的场合（比如两个并发的操作都需要修改积分）,引入CAS等复杂问题。而Redis的Hash结构可以使像在数据库中Update一个属性一样只修改某一项属性值。要存储一个用户信息对象数据:
     - 这个用户信息对象有多少成员就存成多少个key-value对儿，用用户ID+对应属性的名称作为唯一标识来取得对应属性的值，虽然省去了序列化开销和并发问题，但是用户ID为重复存储，如果存在大量这样的数据，内存浪费还是非常可观的
@@ -415,7 +620,7 @@ if ( get( ip:1517207868 ) > 3 ) {
     - 成员比较少时:为了节省内存会采用类似一维数组的方式来紧凑存储，而不会采用真正的HashMap结构，对应的value redisObject的encoding为zipmap
     - 当成员数量增大时会自动转成真正的HashMap,此时encoding为ht
 * 渐进式 rehash
-    - 大字典的扩容是比较耗时间的，需要重新申请新的数组，然后将旧字典所有链表中的元素重新挂接到新的数组下面，这是一个 O(n) 级别的操作，作为单线程的 Redis 很难承受这样耗时的过程，所以 Redis 使用 渐进式 rehash 小步搬迁
+    - 大字典扩容是比较耗时间的，需要重新申请新的数组，然后将旧字典所有链表中的元素重新挂接到新的数组下面，一个 O(n) 级别的操作，作为单线程的 Redis 很难承受这样耗时的过程，所以 Redis 使用 渐进式 rehash 小步搬迁
     - 会在 rehash 的同时，保留新旧两个 hash 结构,查询时会同时查询两个 hash 结构，然后在后续的定时任务以及 hash 操作指令中，循序渐进的把旧字典的内容迁移到新字典中。当搬迁完成了，就会使用新的 hash 结构取而代之
     - 正常情况下，当 hash 表中 元素的个数等于第一维数组的长度时，就会开始扩容，扩容的新数组是 原数组大小的 2 倍
     - 如果 Redis 正在做 bgsave(持久化命令)，为了减少内存也得过多分离，Redis 尽量不去扩容，如果 hash 表非常满了，达到了第一维数组长度的 5 倍了，这个时候就会 强制扩容
@@ -514,216 +719,169 @@ typedef struct dict{
 } dict;
 ```
 
-###  list(列表)
-
-* 用来存储多个有序的字符串，每个字符串称为元素；一个列表可以存储2^32-1个元素
-    - 所有的元素都是有序的，可以通过索引获取的，也就是 lindex 命令。索引是从 0 开始的
-    - 元素是可以重复
-* 实现:一个双向链表，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销
-* 相当于 Java 语言中的 LinkedList，注意是链表而不是数组,
-    - Linked list:插入和删除操作非常快，时间复杂度为 O(1)，但是索引定位很慢，时间复杂度为 O(n),用linked list实现的原因：对于数据库系统来说，重要的特性是：能非常快的在很大的列表上添加元素，lists能在常数时间取得常数长度
-    - 数组List:利用索引访问元素的速度极快
-* 方法
-    - 右边插入元素 `rpush key value [value ...]`, 多个值依次操作,返回key中全部元素个数
-    - 左边插入元素 `lpush key value [value ...]`, 多个值依次操作,返回key中全部元素个数
-    - 向某个元素前或者后插入元素 `linsert key BEFORE|AFTER pivot value`,返回key中全部元素个数
-    - 获取指定范围内的元素列表 `lrange key start stop` 没有 rrange
-        + 索引下标从左到右分别是 0 到 N-1，从右到左是 -1 到 -N
-        + stop 参数在执行时会包括当前元素，并不是所有的语言都是这样的
-        + `lrange key 0 -1`
-    - 获取列表中指定索引下标元素 `lindex key index`
-    - 获取列表长度 `llen key`
-    - 从列表左侧弹出元素 `lpop key`
-    - 从列表右侧弹出元素 `rpop key`
-    - 删除指定元素 `lrem key count value`
-        + count > 0 表示从左到右，最多删除 count 个值为value元素，返回成功删除元素的个数
-        + count < 0：从右到左，最多删除 count 个值为value元素
-        + count = 0：删除所有值为value元素
-    - 按照索引范围修剪列表 `ltrim key start stop`: 直接保留 start 索引到 stop 索引的之间的元素，并包括当前元素，而之外的元素则都会删除掉,返回改命令是否成功的状态
-    - 修改指定索引下标的元素 `lset key index value`
-    - 阻塞操作：blpop 和 brpop 命令是 lpop 和 rpop 命令的阻塞版本，可以指定多个列表的键.如果 timeout=3，则表示客户端等待 3 秒后才能返回结果，如果 timeout=0，则表示客户端会一直等待，也就是会阻塞,取消不支持
-        + 多个客户端都对同一个键执行 blpop 或者 brpop 命令，则最先执行该命令的客户端会获取到该键的元素。
-        + blpop key [key ...] timeout
-        + brpop key [key ...] timeout
-    - rpoplpush source dest：把source 的末尾拿出，放到dest头部，并返回单元值
-* 编码
-    - ziplist（压缩列表）
-        + 当列表中元素个数小于 512（默认）个，并且列表中每个元素的值都小于 64（默认）个字节时，当然上述默认值也可以通过相关参数修改：list-max-ziplist-entried（元素个数）、list-max-ziplist-value(元素值)。
-        + 为了节约内存而开发的，是由一系列特殊编码的连续内存块(而不是像双端链表一样每个节点是指针)组成的顺序型数据结构
-        + 与双端链表相比，压缩列表可以节省内存空间，但是进行修改或增删操作时，复杂度较高
-        + 因此当节点数量较少时，可以使用压缩列表；但是节点数量多时，还是使用双端链表划算
-    - linkedlist（链表）：当列表类型无法满足 ziplist 条件时，会选择用 linkedlist 作为列表的内部实现
-        + 由一个list结构和多个listNode结构组成
-        + list结构保存了表头指针、列表的长度和表尾指针，dup、free和match为节点值设置类型特定函数
-        + 而链表中每个节点指向的是type为字符串的redisObject，每个节点都有指向前和指向后的指针
-    - 编码转换
-        + 单个字符串不能超过64字节，是为了便于统一分配每个节点的长度；这里的64字节是指字符串的长度，不包括SDS结构，因为压缩列表使用连续、定长内存块存储字符串，不需要SDS结构指明长度
-* 场景
-    - 队列：右侧当作队尾，将左侧当作队头，Rpush 生产消息，LPOP 消费消息
-        + LPOP 不会等待队列中有值之后再消费，而是直接进行消费。可以通过在应用层引入 Sleep 机制去调用 LPOP 重试
-        + BLPOP key [key …] timeout：阻塞直到队列有消息或者超时
-    - 栈:Rpush 生产消息，RPOP 消费消息
-    - 社交网络中获取关注人时间轴列表、帖子、评论系统
-    - 新闻的分页列表
-    - 并发限制
-
-```sh
-LPUSH list1 1 2 3 4 5 # 5 4 3 2 1
-RPUSH list1 55 66 77 # 5 4 3 2 1 55 66 77
-LRANGE list1 0 3    # 取范围值 1 2 3
-LRANGE list1 0 -1    # 取全部
-
-linsert set after 55 new
-lrem set 5 new
-lrem set -5 new
-lrem set 0 new
-```
-
-### set(集合)
-
-* 存储一些无序、唯一的键值对，不能通过索引来操作元素其元素是二进制安全的字符串，最多可以存储2^32-1个元素
-* 通过哈希表实现（增删改查时间复杂度为 O(1)）
-* 适用于集合所有元素都是整数且集合元素数量较小的时候，与哈希表相比，整数集合的优势在于集中存储，节省空间；同时，虽然对于元素的操作复杂度也由O(n)变为了O(1)，但由于集合数量较少，因此操作的时间并没有明显劣势
-* set vs list
-    - set 中的元素是不可以重复的，而 list 是可以保存重复元素的
-    - set 中的元素是无序的，而 list 中的元素是有序的
-    - set 中的元素不能通过索引下标获取元素，而 list 中的元素则可以通过索引下标获取元素
-    - 除此之外 set 还支持更高级的功能，例如多个 set 取交集、并集、差集等
-* 实现:一个 value永远为null的HashMap，实际就是通过计算hash的方式来快速排重的，这也是set能提供判断一个成员是否在集合内的原因
-* 方法
-    - 获取所有元素 `smembers key`
-    - 添加元素:`sadd key member [member ...]` 返回值就是当前执行 sadd 命令成功添加元素的个数
-    - 删除元素:`srem key member [member ...]` 返回值就是当前删除元素的个数
-    - 计算元素个数:`scard key` 复杂度为O(1) 不会遍历 set 中的所有元素，而是直接使用 Redis 中的内部变量
-    - 判读元素是否在集合中 `sismember key member` 复杂度为O(1) 回值为1则表示当前元素在当前 set 中，如果返回 0 则表示当前元素不在 set 中
-    - spop key：返回并删除集合中1个随机元素（可以坐抽奖，不会重复抽到某人）
-    - smove source dest value：把source的value移动到dest集合中
-    - 随机从 set 中返回指定count个数元素 `srandmember key [count]`  复杂度为O(n) 可选参数 count
-        + count 参数指的是返回元素的个数，如果当前 set 中的元素个数小于 count，则 srandmember 命令返回当前 set 中的所有元素
-        + 如果 count 参数等于 0，则不返回任何数据
-        + 如果 count 参数小于 0，则随机返回当前 count 个数的元素
-    - 从集合中随机弹出元素 `spop key [count]`,也支持 count 可选参数, 和 srandmember 命令不同。spop 命令在随机弹出元素之后，会将弹出的元素从 set 中删除
-    - 集合的交集 `sinter key [key ...]` 复杂度为O(m*k) k是多个集合中元素最少的个数，m是键个数
-    - 集合的并集 `sunion key [key ...]` 复杂度为O(K) k是多个元素个数和
-    - 集合的差集 `sdiff key [key ...]`
-    - 集合的交集、并集、差集的结果保存,在进行上述比较时，会比较耗费时间，所以为了提高性能可以将交集、并集、差集的结果提前保存起来，在需要使用时可以直接通过 smembers 命令获取
-        + sinterstore destination key [key ...]
-        + sunionstore destination key [key ...]
-        + sdiffstore destination key [key ...]
-* 编码
-    - intset(整数集合)：当集合中的元素都是整数，并且集合中的元素个数小于 512 个时
-        + encoding代表contents中存储内容的类型
-        + contents（存储集合中的元素）是int8_t类型，但实际上其存储的值是int16_t、int32_t或int64_t，具体的类型便是由encoding决定的；
-        + length表示元素个数
-    - hashtable(哈希表)：当上述条件不满足时，Redis 会采用 hashtable 作为底层实现。
-* 场景
-    - 自动去重
-    - 标签
-    - 粉丝/关注列表
-    - 通过交集获取不同用户共同关注用户
-    - 好友关系：共同喜好、二度好友
-    - 赞、踩
-
-```
-SADD myset guan
-SMEMBERS myset
-SISMEMBER myset guan
-spop
-sunion
-
-# intset
-typedef struct intset{
-    uint32_t encoding;
-    uint32_t length;
-    int8_t contents[];
-} intset;
-```
-
-### zset(有序集合 Sorted set)
-
-* 通过用户额外提供一个优先级(score)的参数来为成员排序，并且是插入有序的，即自动排序
-* 实现：内部使用HashMap和跳跃表(SkipList)来保证数据的存储和有序
-    - HashMap里放的是成员到score的映射，而跳跃表里存放的是所有的成员
-    - 排序依据是HashMap里存的score,使用跳跃表的结构可以获得比较高的查找效率，并且在实现上比较简单
-* 方法
-    - 添加元素 `zadd key [NX|XX] [CH] [INCR] score member [score member ...]` 返回值就是当前 zadd 命令成功添加元素的个数。zadd 命令有很多选填参数,时间复杂度为O(log(n))
-        + nx: 元素必须不存在时，才可以设置成功。
-        + xx: 元素必须存在时，才可以设置成功。
-        + ch: 返回此命令执行完成后，有序集合元素和分数发生变化的个数
-        + incr: 对 score 做增加
-    - 成员个数 `zcard key`
-    - 某个成员的分数 `zscore key member` 如果 key 不存在，或者元素不存在时，该命令返回的都是(nil)
-    - 成员的排名
-        + 从分数低到高排名:`zrank key member`
-        + 从分数高到低排名:`zrevrank key member`
-        + 增加元素分数 也可以指定负数，这样当前元素的分数，则会相减 `zincrby key increment member`
-    - 返回指定排名范围的元素,添加了 WITHSCORES 可选参数，则返回数据时会返回当前元素的分数
-        + 返回名次[start,stop]的元素  默认是升续排列 `zrange key start stop [WITHSCORES]`
-        + `zrevrange key start stop [WITHSCORES]`
-    - 返回指定分数范围的元素,可以用 -inf 和 +inf 参数代表无限小和无限大,min 和 max 参数还支持开区间(小括号)和闭区间(中括号 无效)
-        + `zrangebyscore key min max [WITHSCORES] [LIMIT offset count]`
-        + 集合（升序）排序后取score在[min, max]内的元素，并跳过offset个，取出N个 zrangebyscore key min max [withscores] limit offset N
-        + 降序 0名开始 `zrevrangebyscore key max min [WITHSCORES] [LIMIT offset count]`
-    - 返回指定分数范围元素个数 `zcount key min max`
-    - 删除指定排名内的升序元素 `zremrangebyrank key start stop`
-    - 删除指定分数范围元素 `zremrangebyscore key min max`
-    - 交集 `zinterstore destination numkeys key [key ...] [WEIGHTS weight] [AGGREGATE SUM|MIN|MAX]`
-        + destination：将交集的计算结果，保存到这个键中。
-        + numkeys：需要做交集计算键的个数。
-        + key [key …]：需要做交集计算的键。
-        + WEIGHTS weight：每个键的权重，在做交集计算时，每个键中的分数值都会乘以这个权重，默认每个键的权重为 1。
-        + AGGREGATE SUM|MIN|MAX：计算成员交集后，分值可以按照 sum(和)、min(最小值)、max(最大值)做汇总，默认值为  sum
-    - 并集 `zunionstore destination numkeys key [key ...] [WEIGHTS weight] [AGGREGATE SUM|MIN|MAX]`
-* 编码
-    - ziplist(压缩列表)：当有序集合的元素个数小于 128 个(默认设置)，同时每个元素的值都小于 64 字节(默认设置)，Redis 会采用 ziplist 作为有序集合的内部实现。
-    - skiplist(跳跃表)：当上述条件不满足时，Redis 会采用 skiplist 作为内部编码
-        + 一种有序数据结构，通过在每个节点中维持多个指向其他节点的指针，从而达到快速访问节点的目的。
-        + 除了跳跃表，实现有序数据结构的另一种典型实现是平衡树；大多数情况下，跳跃表的效率可以和平衡树媲美，且跳跃表实现比平衡树简单很多，因此redis中选用跳跃表代替平衡树。
-        + 跳跃表支持平均O(logN)、最坏O(N)的复杂点进行节点查找，并支持顺序操作。
-        + Redis的跳跃表实现由zskiplist和zskiplistNode两个结构组成：前者用于保存跳跃表信息（如头结点、尾节点、长度等），后者用于表示跳跃表节点。
-* 场景：排序功能
-    - 有序的且不重复的集合列表，比如twitter 的public timeline可以以发表时间作为score来存储，这样获取时就是自动按时间排好序的
-    - 带权重的消息队列，比如普通消息的score为1，重要消息的score为2，然后工作线程可以选择按score的倒序来获取工作任务。让重要的任务优先执行
-    - 排行榜：取TOP N操作
-    - 延时任务
-    - 范围查找
-
-```
-zadd zsetkey 1 a 2 b 3 c
-zrank zsetkey a
-
-zincrby zsetkey 5 a
-
-zrange zsetkey 0 2 WITHSCORES
-zrangebyscore zsetkey 4 8 WITHSCORES
-zrangebyscore zsetkey -inf  +inf WITHSCORES
-zrangebyscore zsetkey (3 6 WITHSCORES # <3 <6
-
-zinterstore destination 2 zsetkey1 zsetkey2 WEIGHTS 1 0.5 AGGREGATE max # key1 权重 1 key2 权重 0.5 ，取大值
-```
-
 ### 发布（Publish）与订阅（Subscribe）
 
-* 设定对某一个key值进行消息发布及消息订阅，当一个key值上进行了消息发布后，所有订阅它的客户端都会收到相应的消息
-* 缺点：消息的发布是无状态的，无法保证可达。对于发布者来说，消息是“即发即失”的
+* 当 Publisher 往 channel 中发布消息时，关注了指定 channel 的 Consumer 就能够同时受到消息
+* 为了简化订阅的繁琐操作，Redis 提供了 模式订阅 的功能 Pattern Subscribe，这样就可以 一次性关注多个频道 了，即使生产者新增了同模式的频道，消费者也可以立即受到消息
+* 原理
+    - 每个 Redis 服务器进程维持着一个标识服务器状态 的 redis.h/redisServer 结构，其中就 保存着有订阅的频道 以及 订阅模式 的信息
+    - 当客户端订阅某一个频道之后，Redis 就会往 `pubsub_channels` 这个字典中新添加一条数据，实际上这个 dict 字典维护的是一张链表
+* 缺点
+    - 没有 Ack 机制，也不保证数据的连续.PubSub 的生产者传递过来一个消息，Redis 会直接找到相应的消费者传递过去。如果没有一个消费者，那么消息会被直接丢弃。如果开始有三个消费者，其中一个突然挂掉了，过了一会儿等它再重连时，那么重连期间的消息对于这个消费者来说就彻底丢失了。
+    - 不持久化消息： 如果 Redis 停机重启，PubSub 的消息是不会持久化的，毕竟 Redis 宕机就相当于一个消费者都没有，所有的消息都会被直接丢弃。
 * 场景
     - 实时消息系统，比如普通的即时聊天，群聊等功能
 
 ```sh
-SUBSCRIBE redisChat
-PSUBSCRIBE redisChat # 订阅一个或多个符合给定模式 每个模式以 * 作为匹配符，比如 it* 匹配所有以 it 开头的频道( it.news 、 it.blog 、 it.tweets 等等)。 news.* 匹配所有以 news. 开头的频道
-
-PUBLISH redisChat "Redis is a great caching technique"
-
 PUBSUB CHANNELS # 查看订阅与发布系统状态
-PUNSUBSCRIBE mychannel # 退订所有给定模式的频道
+
+# 订阅频道：
+SUBSCRIBE channel [channel ....]   # 订阅给定的一个或多个频道的信息
+PSUBSCRIBE pattern [pattern ....]  # 订阅一个或多个符合给定模式的频道式以 * 作为匹配符，比如 it* 匹配所有以 it 开头的频道( it.news 、 it.blog 、 it.tweets 等等)。 news.* 匹配所有以 news. 开头的频道
+
+# 发布频道：
+PUBLISH channel message  # 将消息发送到指定的频道
+
+# 退订频道：
+UNSUBSCRIBE [channel [channel ....]]   # 退订指定的频道
+PUNSUBSCRIBE [pattern [pattern ....]]  #退订所有给定模式的频道
+```
+
+## Redis Stream
+
+* 概念
+    - Consumer Group：消费者组，可以简单看成记录流状态的一种数据结构。
+        + 消费者既可以选择使用 XREAD 命令进行独立消费，也可以多个消费者同时加入一个消费者组进行组内消费。
+        + 同一个消费者组内的消费者共享所有的 Stream 信息，同一条消息只会有一个消费者消费到，这样就可以应用在分布式的应用场景中来保证消息的唯一性。
+    - last_delivered_id：用来表示消费者组消费在 Stream 上 消费位置 的游标信息。每个消费者组都有一个 Stream 内 唯一的名称，消费者组不会自动创建，需要使用`XGROUP CREATE`指令来显式创建，并且需要指定从哪一个消息 ID 开始消费，用来初始化 last_delivered_id 这个变量。
+    - pending_ids：每个消费者内部都有的一个状态变量，用来表示已经被客户端获取，但是还没有 ack 的消息。记录目的是为了保证客户端至少消费了消息一次，而不会在网络传输的中途丢失而没有对消息进行处理。如果客户端没有 ack，那么这个变量里面的消息 ID 就会越来越多，一旦某个消息被 ack，它就会对应开始减少。这个变量也被 Redis 官方称为 PEL  (Pending Entries List)。
+* 像是一个 仅追加内容 的 消息链表，把所有加入的消息都一个一个串起来，每个消息都有一个唯一的 ID 和内容，这很简单，让它复杂的是从 Kafka 借鉴的另一种概念：消费者组(Consumer Group)
+* 每个 Stream 都有唯一的名称，就是 Redis 的 key，首次使用 xadd 指令追加消息时自动创建
+    - 在 xadd 的指令提供一个定长长度 maxlen，就可以将老的消息干掉，确保最多不超过指定长度
+* 消息 ID
+    - 如果是由 XADD 命令返回自动创建的话，那么格式会像这样：timestampInMillis-sequence (毫秒时间戳-序列号)，例如 1527846880585-5，表示当前的消息是在毫秒时间戳 1527846880585 时产生的，并且是该毫秒内产生的第 5 条消息。
+    - 这些 ID 的格式看起来有一些奇怪，为什么要使用时间来当做 ID 的一部分呢？ 一方面，要满足 ID 自增 的属性，另一方面，也是为了 支持范围查找 的功能。由于 ID 和生成消息的时间有关，这样就使得在根据时间范围内查找时基本上是没有额外损耗的。
+    - 当然消息 ID 也可以由客户端自定义，但是形式必须是 "整数-整数"，而且后面加入的消息的 ID 必须要大于前面的消息 ID。
+* 消息内容就是普通的键值对，形如 hash 结构的键值对
+* 独立消费:当 Stream 没有新消息时，甚至可以阻塞等待。Redis 设计了一个单独的消费指令 xread，可以将 Stream 当成普通的消息队列(list)来使用。使用 xread 时，可以完全忽略消费组(Consumer Group) 的存在，就好比 Stream 就是一个普通的列表(list)
+    - 客户端如果想要使用 xread 进行 顺序消费，一定要 记住当前消费 到哪里了，也就是返回的消息 ID。下次继续调用 xread 时，将上次返回的最后一个消息 ID 作为参数传递进去，就可以继续消费后续的消息
+* 通过 xgroup create 指令创建消费组(Consumer Group)，需要传递起始消息 ID 参数用来初始化 last_delivered_id 变量
+* 组内消费示例: Stream 提供了 xreadgroup 指令可以进行消费组的组内消费，需要提供 消费组名称、消费者名称和起始消息 ID。它同 xread 一样，也可以阻塞等待新消息。读到新消息后，对应的消息 ID 就会进入消费者的 PEL (正在处理的消息) 结构里，客户端处理完毕后使用 xack 指令通知服务器，本条消息已经处理完毕，该消息 ID 就会从 PEL 中移除
+* PEL 是如何避免消息丢失
+    - 在客户端消费者读取 Stream 消息时，Redis 服务器将消息回复给客户端的过程中，客户端突然断开了连接，消息就丢失了。但是 PEL 里已经保存了发出去的消息 ID，待客户端重新连上之后，可以再次收到 PEL 中的消息 ID 列表。不过此时 xreadgroup 的起始消息 ID 不能为参数 > ，而必须是任意有效的消息 ID，一般将参数设为 0-0，表示读取所有的 PEL 消息以及自 last_delivered_id 之后的新消息。
+* Redis Stream Vs Kafka
+    - Redis 基于内存存储，这意味着它会比基于磁盘的 Kafka 快上一些，也意味着使用 Redis 不能长时间存储大量数据
+    - 不过如果想以最小延迟 实时处理消息的话，可以考虑 Redis，但是如果消息很大并且应该重用数据 的话，则应该首先考虑使用 Kafka。
+
+```sh
+XADD mystream MAXLEN 2 * value 2
+# *号表示服务器自动生成ID，后面顺序跟着一堆key/value
+xadd codehole * name laoqian age 30  #  名字叫laoqian，年龄30岁
+1527849609889-0  # 生成的消息ID
+
+xlen codehole
+(integer) 3
+
+xrange codehole - +  # -表示最小值, +表示最大值
+1) 1) 1527849609889-0
+   2) 1) "name"
+      2) "laoqian"
+      3) "age"
+      4) "30"
+2) 1) 1527849629172-0
+   2) 1) "name"
+      2) "xiaoyu"
+      3) "age"
+      4) "29"
+3) 1) 1527849637634-0
+   2) 1) "name"
+      2) "xiaoqian"
+      3) "age"
+      4) "1"
+
+xrange codehole 1527849629172-0 +  # 指定最小消息ID的列表
+1) 1) 1527849629172-0
+   2) 1) "name"
+      2) "xiaoyu"
+      3) "age"
+      4) "29"
+2) 1) 1527849637634-0
+   2) 1) "name"
+      2) "xiaoqian"
+      3) "age"
+      4) "1"
+xrange codehole - 1527849629172-0  # 指定最大消息ID的列表
+1) 1) 1527849609889-0
+   2) 1) "name"
+      2) "laoqian"
+      3) "age"
+      4) "30"
+2) 1) 1527849629172-0
+   2) 1) "name"
+      2) "xiaoyu"
+      3) "age"
+      4) "29"
+
+# xdel：删除消息，这里的删除仅仅是设置了标志位，不影响消息总长度
+xdel codehole 1527849609889-0
+(integer) 1
+xlen codehole  # 长度不受影响
+(integer) 3
+xrange codehole - +  # 被删除的消息没了
+1) 1) 1527849629172-0
+   2) 1) "name"
+      2) "xiaoyu"
+      3) "age"
+      4) "29"
+2) 1) 1527849637634-0
+   2) 1) "name"
+      2) "xiaoqian"
+      3) "age"
+      4) "1"
+el codehole  # 删除整个Stream
+(integer) 1
+
+# block 0 表示永远阻塞，直到消息到来，block 1000 表示阻塞 1s，如果 1s 内没有任何消息到来，就返回 nil
+xread block 1000 count 1 streams codehole $
+
+xgroup create codehole cg1 0-0  #  表示从头开始消费
+# $表示从尾部开始消费，只接受新消息，当前Stream消息会全部忽略
+xgroup create codehole cg2 $
+xinfo codehole # 获取Stream信息
+xinfo groups codehole  # 获取Stream的消费组信息
+
+# >号表示从当前消费组的last_delivered_id后面开始读
+# 每当消费者读取一条消息，last_delivered_id变量就会前进.读取完后就返回nil
+xreadgroup GROUP cg1 c1 count 1 streams codehole >
+# 阻塞等待
+xreadgroup GROUP cg1 c1 block 0 count 1 streams codehole >
+
+# 开启另一个窗口，往里塞消息
+xadd codehole * name lanying age 61
+
+# 如果同一个消费组有多个消费者，可以通过xinfo consumers指令观察每个消费者的状态
+xinfo consumers codehole cg1
+# 接下ack一条消息
+xack codehole cg1 1527851486781-0
+xinfo consumers codehole cg1
+# ack所有消息
+xack codehole cg1 1527851493405-0 1527851498956-0 1527852774092-0 1527854062442-0
 ```
 
 ## HyperLogLog
 
-* 来做基数统计的算法
+* 做基数统计的算法
+* 基数统计(Cardinality Counting) 通常是用来统计一个集合中不重复的元素个数。
+* 基数统计常用方法
+    - B 树最大的优势就是插入和查找效率很高，如果用 B 树存储要统计的数据，可以快速判断新来的数据是否存在，并快速将元素插入 B 树。要计算基础值，只需要计算 B 树的节点个数就行了。不过将 B 树结构维护到内存中，能够解决统计和计算的问题，但是 并没有节省内存。
+    - bitmap 可以理解为通过一个 bit 数组来存储特定数据的一种数据结构，每一个 bit 位都能独立包含信息，bit 是数据的最小存储单位，因此能大量节省空间，也可以将整个 bit 数据一次性 load 到内存计算。
+        + 如果定义一个很大的 bit 数组，基础统计中 每一个元素对应到 bit 数组中的一位。bitmap 还有一个明显的优势是可以轻松合并多个统计结果，只需要对多个结果求异或就可以了，也可以大大减少存储内存。
+    - 概率算法 不直接存储 数据集合本身，通过一定的 概率统计方法预估基数值，这种方法可以大大节省内存，同时保证误差控制在一定范围内。目前用于基数计数的概率算法包括:
+        + Linear Counting(LC)：早期的基数估计算法，LC 在空间复杂度方面并不算优秀，实际上 LC 的空间复杂度与上文中简单 bitmap 方法是一样的（但是有个常数项级别的降低），都是 O(Nmax)
+       + LogLog Counting(LLC)：LogLog Counting 相比于 LC 更加节省内存，空间复杂度只有 O(log2(log2(Nmax)))
+       + HyperLogLog Counting(HLL)：HyperLogLog Counting 是基于 LLC 的优化和改进，在同样空间复杂度情况下，能够比 LLC 的基数估计误差更小。用 bitmap 存储 1 个亿 统计数据大概需要 12 M 内存，而在 HyperLoglog 中，只需要不到 1 K 内存就能够做到
 * 优点：在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的
-* *每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。 比如数据集 {1, 3, 5, 7, 5, 7, 8}， 那么这个数据集的基数集为 {1, 3, 5 ,7, 8}, 基数(不重复元素)为5。 基数估计就是在误差可接受的范围内，快速计算基数
+* 每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。 比如数据集 {1, 3, 5, 7, 5, 7, 8}， 那么这个数据集的基数集为 {1, 3, 5 ,7, 8}, 基数(不重复元素)为5。 基数估计就是在误差可接受的范围内，快速计算基数
 
 ```
 PFADD runoobkey "redis"
@@ -810,13 +968,20 @@ SCRIPT LOAD "return 1"
     - 注意watch的key是对整个连接有效的，事务也一样。
     - 如果连接断开，监视和事务都会被自动清除。当然了exec，discard，unwatch命令都会清除连接中的所有监视。
 * 分布式锁
+    - 场景：
+        + 避免不同节点重复相同的工作：比如用户执行了某个操作有可能不同节点会发送多封邮件；
+        + 避免破坏数据的正确性：如果两个节点在同一条数据上同时进行操作，可能会造成数据错误或不一致的情况出现；
     - 控制分布式系统之间同步访问共享资源的一种方式，互斥来防止彼此干扰来保证一致性
         + 互斥性。在任意时刻，只有一个客户端能持有锁
         + 不会发生死锁。即使有一个客户端在持有锁的期间崩溃而没有主动解锁，也能保证后续其他客户端能加锁
         + 容错性。只要大部分的Redis节点正常运行，客户端就可以加锁和解锁
         + 解铃还须系铃人。加锁和解锁必须是同一个客户端，客户端自己不能把别人加的锁给解了
+    - 问题
+        + 锁超时:设置一个超时时间，来保证服务的可用性(避免挂了还持续等待)
+        + 如果在加锁和释放锁之间的逻辑执行得太长，以至于超出了锁的超时限制：不要用于较长时间的任务
     - 实现
-        + 使用 SETNX 实现，`SETNX key value`：如果 Key 不存在，则创建并赋值。时间复杂度为 O(1)，如果设置成功，则返回 1，否则返回 0
+        + 使用 SETNX(SET if Not eXists)实现，`SETNX key value` 只允许被一个客户端占有
+            * 如果 Key 不存在，则创建并赋值。时间复杂度为 O(1)，如果设置成功，则返回 1，否则返回 0
             * 因为 SETNX 是长久存在的，所以假设一个客户端正在访问资源，并且上锁，那么当这个客户端结束访问时，该锁依旧存在，后来者也无法成功获取锁，这个该如何解决呢？ 由于 SETNX 并不支持传入 EXPIRE 参数，所以使用 `EXPIRE testlock 0` 指令来对特定的 Key 来设置过期时间
 
 ## 分区
@@ -1208,7 +1373,7 @@ aof-user-rdb-preamble no // 这是redis 4.0出现的新特性，集成了rdb和a
 
 ## 缓存
 
-* 缓存和数据库双写一致性问题:一致性问题是分布式常见问题，还可以再分为最终一致性和强一致性,先明白一个前提：如果对数据有强一致性要求，就不能放缓存。我们所做的一切，只能保证最终一致性。
+* 缓存和数据库双写一致性问题:一致性问题是分布式常见问题，还可以再分为最终一致性和强一致性,先明白一个前提：如果对数据有强一致性要求，就不能放缓存。所做的一切，只能保证最终一致性。
     - 采取正确更新策略，先更新数据库，再删缓存
     - 因为可能存在删除缓存失败的问题，提供一个补偿措施即可，例如利用消息队列。
 * 缓存雪崩问题:缓存同一时间大面积的失效，这个时候又来了一波请求，结果请求都怼到数据库上，从而导致数据库连接异常

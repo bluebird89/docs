@@ -281,9 +281,11 @@ generate:Alt+ins
 * 列操作 ctrl+shift+alt +j
 * 插件
   - Alibaba Java Code Guidelines—阿里巴巴 Java 代码规范
+  - Alibaba Cloud Toolkit
   - CamelCase-多种命名格式之间切换
   - Codota—代码智能提示
   - GsonFormat+RoboPOJOGenerator—JSON转类对象
+  - GitToolBox
   - IDE Features Trainer—IDEA交互式教程
   - Key Promoter X—快捷键
   - Lombok
@@ -294,6 +296,13 @@ generate:Alt+ins
   - Translation-必备的翻译插件
 * [IntelliJ IDEA config](https://www.jianshu.com/p/320d82d405ad)
 * Diagrams
+* theme
+  - Dark Purple Theme
+  -  Cyan Light Theme
+* ctrl + `
+  - 5 switch theme
+  - 1 Editor Color Scheme
+  - 3 keymap
 
 数据是统一的，能够实现批量处理
 

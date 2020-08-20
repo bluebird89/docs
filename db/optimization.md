@@ -84,75 +84,169 @@ LIMIT
 
 ## 检测
 
-* EXPLAIN：获取查询语句的执行计划，索引使用、扫描范围
-    - select_type:表示查询的类型
-        + SIMPLE： 简单查询:不包含 UNION 查询或子查询
-        + PRIMARY： 主查询，或者是最外面的查询语句
-        + SUBQUERY： 子查询中的第一个
-        + UNION： 表示此查询是 UNION 的第二或后面的查询语句
-        + DEPENDENT UNION： UNION 中的第二个或后面的查询语句, 取决于外面的查询
-        + UNION RESULT, UNION 的结果
-        + DEPENDENT SUBQUERY: 子查询中的第一个 SELECT, 取决于外面的查询. 即子查询依赖于外层查询的结果.
-        + DERIVED：衍生，表示导出表的SELECT（FROM子句的子查询）
-    - table:查询的表
-    - type:在表中找到所需行的方式，或者叫访问类型. 从下到上，性能越来越差
-        + system,const：只有一行记录,可以将查询的变量转为常量. 如id=1; id为 主键或唯一键
-        + const: 针对主键或唯一索引的等值查询扫描，最多只返回一行数据。 const 查询速度非常快， 因为它仅仅读取一次即可。例如下面的这个查询，它使用了主键索引，因此 type 就是 const 类型的：explain select * from user_info where id = 2；
-        + eq_ref：唯一性索引扫描，对于每个索引键，表中只有一条记录与之匹配,此类型通常出现在多表的 join 查询，表示对于前表的每一个结果，都只能匹配到后表的一行结果。并且查询的比较操作通常是 =，查询效率较高.(通常在联接时出现，查询使用的索引为主键或惟一键)
-        + ref：非唯一性索引扫描，返回匹配某个单独值的所有行，本质上也是一种索引访问，它返回所有匹配某个单独值的行，然而，它可能会找到多个符合条件的行，属于查找和扫描的混合体。
-        + range：检索给定范围的行，使用一个索引来选择行，key列显示使用了哪个索引
-            * 范围扫描索引比全表扫描要好，因为它只需要开始于索引的某一点，而结束于另一点，不用扫描全部索引
-        + index 全索引扫描(full index scan):只遍历索引树. 优点：比ALL快、不用排序,缺点是还要全表扫描
-        + ALL：全表扫描，从内存读取整张表，增加I/O的速度并在CPU上加载
-    - possible_keys:表示查询时，可能使用的索引
-    - key:表示实际使用的索引
-    - key_len:表示查询优化器使用了索引的字节数，这个字段可以评估组合索引是否完全被使用
-    - ref:这个表示显示索引的哪一列被使用了，如果可能的话,是一个常量
-    - rows:扫描行数
-    - Extra:执行情况的描述和说明
-        + using index：使用了覆盖索引，避免访问了表的数据行，效率不错
-        + 同时出现using where，表明索引被用来执行索引键值的查找；没有出现using where，表明索引用来读取数据而非执行查找动作
-        + using tmporary：用到临时表
-        + using filesort：对数据使用一个外部的索引排序，而不是按照表内的索引顺序进行读取. (当使用order by v1,而没用到索引时,就会使用额外的排序)
-        + range checked for eache record(index map:N)：没有好的索引
+## [EXPLAIN](https://mp.weixin.qq.com/s/YkichgBT7TGNraus1sRO-w)
+
+* 获取查询语句的执行计划，索引使用、扫描范围
+* id：该语句的唯一标识。如果explain的结果包括多个id值，则数字越大越先执行；而对于相同id的行，则表示从上往下依次执行
+- select_type:查询类型
+    + SIMPLE： 简单查询，不包含 UNION 查询或子查询
+    + PRIMARY： 主查询，或者最外层的查询
+    + SUBQUERY：子查询中的第一个 SELECT
+    + UNION：在UNION中的第二个和随后的SELECT被标记为UNION。如果UNION被FROM子句中的子查询包含，那么它的第一个SELECT会被标记为DERIVED
+    + DEPENDENT UNION：UNION中的第二个或后面的查询，依赖了外面的查询
+    + UNION RESULT：UNION 的结果
+    + DEPENDENT SUBQUERY: 子查询中的第一个 SELECT，依赖了外面的查询. 即子查询依赖于外层查询的结果.
+    + DERIVED：表示包含在FROM子句的子查询中的SELECT，MySQL会递归执行并将结果放到一个临时表中。MySQL内部将其称为是Derived table（派生表），因为该临时表是从子查询派生出来的
+    + DEPENDENT DERIVED 派生表，依赖了其他的表
+    + MATERIALIZED  物化子查询
+    + UNCACHEABLE SUBQUERY  子查询，结果无法缓存，必须针对外部查询的每一行重新评估
+    + UNCACHEABLE UNION：UNION属于UNCACHEABLE SUBQUERY的第二个或后面的查询
+- table:表示当前这一行正在访问哪张表，如果SQL定义了别名，则展示表的别名
+- partitions 当前查询匹配记录的分区。对于未分区的表，返回null
+- type:在表中找到所需行的方式，或者叫访问类型. 从下到上，性能越来越差
+    + system：该表只有一行（相当于系统表），system是const类型的特例
+    + const：针对主键或唯一索引的等值查询扫描, 最多只返回一行数据. const 查询速度非常快, 因为它仅仅读取一次即可。例如：explain select * from user_info where id = 2；
+    + eq_ref
+        * 唯一性索引扫描，对于每个索引键，表中只有一条记录与之匹配,此类型通常出现在多表的 join 查询，表示对于前表的每一个结果，都只能匹配到后表的一行结果。并且查询的比较操作通常是 =，查询效率较高.(通常在联接时出现，查询使用索引为主键或惟一键)
+        * 当使用了索引的全部组成部分，并且索引是PRIMARY KEY或UNIQUE NOT NULL 才会使用该类型
+    + ref：非唯一性索引扫描，返回匹配某个单独值的所有行，本质上也是一种索引访问，返回所有匹配某个单独值的行，可能会找到多个符合条件的行，属于查找和扫描的混合体。当满足索引的最左前缀规则，或者索引不是主键也不是唯一索引时才会发生
+    + fulltext：全文索引
+    + `ref_or_null`：该类型类似于ref，但是MySQL会额外搜索哪些行包含了NULL。常见于解析子查询
+    + index_merge：此类型表示使用了索引合并优化，表示一个查询里面用到了多个索引
+    + `unique_subquery`：该类型和eq_ref类似，但是使用了IN查询，且子查询是主键或者唯一索引
+    + `index_subquery`：和unique_subquery类似，只是子查询使用的是非唯一索引
+    + range：范围扫描，表示检索了指定范围的行，主要用于有限制的索引扫描。比较常见的范围扫描是带有BETWEEN子句或WHERE子句里有>、>=、<、<=、IS NULL、<=>、BETWEEN、LIKE、IN()等操作符.key列显示使用了哪个索引
+        * 比全表扫描要好，因为只需要开始于索引的某一点，而结束于另一点，不用扫描全部索引
+    + index 全索引扫描(full index scan):只遍历索引树.和ALL类似，只不过index是全盘扫描了索引的数据。当查询仅使用索引中的一部分列时，可使用此类型。有两种场景会触发
+        * 索引是查询的覆盖索引，并且索引查询的数据就可以满足查询中所需的所有数据，则只扫描索引树。此时，explain的Extra 列的结果是Using index。index通常比ALL快，因为索引的大小通常小于表数据。
+        * 按索引的顺序来查找数据行，执行了全表扫描。此时，explain的Extra列的结果不会出现Uses index。
+        * 优点：比ALL快、不用排序
+        * 缺点:全表扫描
+    + ALL：全表扫描，从内存读取整张表，增加I/O的速度并在CPU上加载
+- possible_keys:当前查询可以使用哪些索引，这一列的数据是在优化过程的早期创建的，因此有些索引可能对于后续优化过程是没用的
+- key:表示实际使用的索引
+- `key_len`:表示查询优化器使用了索引的字节数，这个字段可以评估组合索引是否完全被使用.由于存储格式，当字段允许为NULL时，key_len比不允许为空时大1字节。
+- ref:表示将哪个字段或常量和key列所使用的字段进行比较.如果ref是一个函数，则使用的值是函数的结果。要想查看是哪个函数，可在EXPLAIN语句之后紧跟一个SHOW WARNING语句
+- rows:估算会扫描的行数，数值越小越好
+- filtered:表示符合查询条件的数据百分比，最大100。用rows × filtered可获得和下一张表连接的行数
+- Extra:执行情况的描述和说明
+    + using index：使用了覆盖索引，避免访问了表的数据行，效率不错
+        * 仅使用索引树中的信息从表中检索列信息，而不必进行其他查找以读取实际行。当查询仅使用属于单个索引的列时，可以使用此策略
+    + 同时出现using where，表明索引被用来执行索引键值的查找；没有出现using where，表明索引用来读取数据而非执行查找动作
+    + Using index condition 表示先按条件过滤索引，过滤完索引后找到所有符合索引条件的数据行，随后用 WHERE 子句中的其他条件去过滤这些数据行。通过这种方式，除非有必要，否则索引信息将可以延迟“下推(下推指的是将请求交给引擎层处理)”读取整个行的数据
+    + Using index for group-by 数据访问和 Using index 一样，所需数据只须要读取索引，当Query 中使用GROUP BY或DISTINCT 子句时，如果分组字段也在索引中
+    + using tmporary：创建一个临时表来保存结果。如果查询包含不同列的GROUP BY和 ORDER BY子句，通常会发生这种情况
+    + using filesort：对数据使用一个外部的索引排序，而不是按照表内的索引顺序进行读取. (当使用order by v1,而没用到索引时,就会使用额外的排序)
+        * 当Query 中包含 ORDER BY 操作，而且无法利用索引完成排序操作的时候，MySQL Query Optimizer 不得不选择相应的排序算法来实现。数据较少时从内存排序，否则从磁盘排序。Explain不会显示的告诉客户端用哪种排序。官方解释：“MySQL需要额外的一次传递，以找出如何按排序顺序检索行。通过根据联接类型浏览所有行并为所有匹配WHERE子句的行保存排序关键字和行的指针来完成排序。然后关键字被排序，并按排序顺序检索行”
+* EXPLAIN可产生额外的扩展信息，可通过在EXPLAIN语句后紧跟一条SHOW WARNING语句查看扩展信息
+    - 在MySQL 8.0.12及更高版本，扩展信息可用于SELECT、DELETE、INSERT、REPLACE、UPDATE语句；在MySQL 8.0.12之前，扩展信息仅适用于SELECT语句；
+    - 在MySQL 5.6及更低版本，需使用EXPLAIN EXTENDED xxx语句；而从MySQL 5.7开始，无需添加EXTENDED关键词。
+* 估计查询性能:通过计算磁盘的搜索次数来估算查询性能 `log(row_count) / log(index_block_length / 3 * 2 / (index_length + data_pointer_length)) + 1`
+    - index_block_length通常是1024字节，数据指针一般是4字节
+    - 对于写操作，需要四个搜索请求来查找在何处放置新的索引值，然后通常需要2次搜索来更新索引并写入行
+
+```sql
+
+{EXPLAIN | DESCRIBE | DESC}
+    tbl_name [col_name | wild]
+
+{EXPLAIN | DESCRIBE | DESC}
+    [explain_type]
+    {explainable_stmt | FOR CONNECTION connection_id}
+
+{EXPLAIN | DESCRIBE | DESC} ANALYZE select_statement
+
+explain_type: {
+    FORMAT = format_name
+}
+
+format_name: {
+    TRADITIONAL
+  | JSON
+  | TREE
+}
+
+explainable_stmt: {
+    SELECT statement
+  | TABLE statement
+  | DELETE statement
+  | INSERT statement
+  | REPLACE statement
+  | UPDATE statement
+}
+
+EXPLAIN format = TRADITIONAL json SELECT tt.TicketNumber, tt.TimeIn,
+               tt.ProjectReference, tt.EstimatedShipDate,
+               tt.ActualShipDate, tt.ClientID,
+               tt.ServiceCodes, tt.RepetitiveID,
+               tt.CurrentProcess, tt.CurrentDPPerson,
+               tt.RecordVolume, tt.DPPrinted, et.COUNTRY,
+               et_1.COUNTRY, do.CUSTNAME
+        FROM tt, et, et AS et_1, do
+        WHERE tt.SubmitTime IS NULL
+          AND tt.ActualPC = et.EMPLOYID
+          AND tt.AssignedPC = et_1.EMPLOYID
+          AND tt.ClientID = do.CUSTNMBR;
+
+## 结果
+id  select_id   该语句的唯一标识
+select_type 无   查询类型
+table   table_name  表名
+partitions  partitions  匹配的分区
+type    access_type 联接类型
+possible_keys   possible_keys   可能的索引选择
+key key 实际选择的索引
+key_len key_length  索引的长度
+ref ref 索引的哪一列被引用了
+rows    rows    估计要扫描的行
+filtered    filtered    表示符合查询条件的数据百分比
+Extra   没有  附加信息
+
+EXPLAIN SELECT t1.a, t1.a IN (SELECT t2.a FROM t2) FROM t1\G
+SHOW WARNINGS\G
+
+EXPLAIN SELECT * FROM order_copy WHERE id=12345\G; # 给id添加了索引，才使得rows的结果为1
+```
+
 * show [SESSION | GLOBAL] variables          查看数据库参数信息
 * SHOW [SESSION | GLOBAL] STATUS             查看数据库的状态信息
+
 * PROCEDURE ANALYSE() 分析字段和其实际的数据，并会给一些有用的建议。只有表中有实际的数据，这些建议才会变得有用，因为要做一些大的决定是需要有数据作为基础的
-* 慢查询:知道哪些SQL语句执行效率低下,mysql支持把慢查询语句记录到日志文件中.用来记录在MySQL中响应时间超过阀值的语句，具体指运行时间超过long_query_time值的SQL，则会被记录到慢查询日志中。long_query_time的默认值为10，意思是运行10s以上的语句
-    - 官方自带工具： mysqldumpslow
-    - 开源工具：mysqlsla
-    - percona-toolkit：工具包中的pt-query-digest工具可以分析汇总慢查询信息，具体逻辑可以看SlowLogParser这个函数
-    - 接删除慢日志文件，执行flush logs（必须的）
-    - 备份：先用mv重命名文件（不要跨分区），然后执行flush logs（必须的）
+
 * profiling:准确的SQL执行消耗系统资源的信息
+
 * DESCRIBE：可以放在SELECT, INSERT, UPDATE, REPLACE 和 DELETE语句前边使用
-* [`OPTIMIZER_TRACE`](https://mp.weixin.qq.com/s/QO_EVtpvCiYPdtDFOWWXhg):一个跟踪功能，跟踪执行的语句的解析优化执行的过程，并将跟踪到的信息记录到I`NFORMATION_SCHEMA.OPTIMIZER_TRACE`表中
-    - 从5.6开始提供了相关的功能，但是MySQL默认是关闭它的,在需要使用的时候才会手动去开启
-    - 通过optimizer_trace系统变量启停跟踪功能
-    - 可跟踪语句对象：
-        + SELECT/INSERT/REPLACE/UPDATE/DELETE
-        + EXPLAIN
-        + SET
-        + DO
-        + DECLARE/CASE/IF/RETURN
-        + CALL
-    - `show variables like '%optimizer_trace%';`
-        + enabled：启用/禁用optimizer_trace功能。
-        + one_line：决定了跟踪信息的存储方式，为on表示使用单行存储，否则以JSON树的标准展示形式存储。单行存储中跟踪结果中没有空格，造成可读性极差，但对于JSON解析器来说是可以解析的，将该参数打开唯一的优势就是节省空间，一般不建议开启。
-        + `optimizer_trace_features`：该变量中存储了跟踪信息中可控的打印项，可以通过调整该变量，控制在INFORMATION_SCHEMA.OPTIMIZER_TRACE表中的trace列需要打印的JSON项和不需要打印的JSON项。默认打开该参数下的所有项。
-        + optimizer_trace_max_mem_size ：optimizer_trace内存的大小，如果跟踪信息超过这个大小，信息将会被截断。
-        + optimizer_trace_limit  & optimizer_trace_offset 这两个参数神似于SELECT语句中的“LIMIT offset, row_count”，optimizer_trace_limit 约束的是跟踪信息存储的个数，optimizer_trace_offset 则是约束偏移量。和 LIMIT 一样，optimizer_trace_offset 从0开始计算（最老的一个查询记录的偏移量为0）。
-        + optimizer_trace_offset 的正负值，不需要太过于去纠结，如下表所示，其实offset 0 = offset -5 ，它们是一个等价的关系，仅仅是表述方式不同。这样的表述方式和python中的切片的表述是一致的，了解python的童鞋们都知道，切片的时候经常用到-1取列表中最后一个数值或者是反向取值。
-    - 使用
-        + 打开optimizer_trace参数
-        + 执行要分析的查询
-        + 查看INFORMATION_SCHEMA.OPTIMIZER_TRACE表中跟踪结果
-        + 循环2、3步骤
-        + 当不再需要分析的时候，关闭参数
-    - SELECT * FROM INFORMATION_SCHEMA.OPTIMIZER_TRACE;三个步骤构成
-        + join_preparation（准备阶段）
-        + join_optimization（优化阶段）
-        + join_execution（执行阶段）
+
+## [`OPTIMIZER_TRACE`](https://mp.weixin.qq.com/s/QO_EVtpvCiYPdtDFOWWXhg)
+
+一个跟踪功能，跟踪执行的语句的解析优化执行的过程，并将跟踪到的信息记录到`INFORMATION_SCHEMA.OPTIMIZER_TRACE`表中
+
+- 从5.6开始提供了相关的功能，但是MySQL默认是关闭它的,在需要使用的时候才会手动去开启
+- 通过optimizer_trace系统变量启停跟踪功能
+- 可跟踪语句对象：
+    + SELECT/INSERT/REPLACE/UPDATE/DELETE
+    + EXPLAIN
+    + SET
+    + DO
+    + DECLARE/CASE/IF/RETURN
+    + CALL
+- `show variables like '%optimizer_trace%';`
+    + enabled：启用/禁用optimizer_trace功能。
+    + one_line：决定了跟踪信息的存储方式，为on表示使用单行存储，否则以JSON树的标准展示形式存储。单行存储中跟踪结果中没有空格，造成可读性极差，但对于JSON解析器来说是可以解析的，将该参数打开唯一的优势就是节省空间，一般不建议开启。
+    + `optimizer_trace_features`：该变量中存储了跟踪信息中可控的打印项，可以通过调整该变量，控制在INFORMATION_SCHEMA.OPTIMIZER_TRACE表中的trace列需要打印的JSON项和不需要打印的JSON项。默认打开该参数下的所有项。
+    + optimizer_trace_max_mem_size ：optimizer_trace内存的大小，如果跟踪信息超过这个大小，信息将会被截断。
+    + optimizer_trace_limit  & optimizer_trace_offset 这两个参数神似于SELECT语句中的“LIMIT offset, row_count”，optimizer_trace_limit 约束的是跟踪信息存储的个数，optimizer_trace_offset 则是约束偏移量。和 LIMIT 一样，optimizer_trace_offset 从0开始计算（最老的一个查询记录的偏移量为0）。
+    + optimizer_trace_offset 的正负值，不需要太过于去纠结，如下表所示，其实offset 0 = offset -5 ，它们是一个等价的关系，仅仅是表述方式不同。这样的表述方式和python中的切片的表述是一致的，了解python的童鞋们都知道，切片的时候经常用到-1取列表中最后一个数值或者是反向取值。
+- 使用
+    + 打开optimizer_trace参数
+    + 执行要分析的查询
+    + 查看INFORMATION_SCHEMA.OPTIMIZER_TRACE表中跟踪结果
+    + 循环2、3步骤
+    + 当不再需要分析的时候，关闭参数
+- SELECT * FROM INFORMATION_SCHEMA.OPTIMIZER_TRACE;三个步骤构成
+    + join_preparation（准备阶段）
+    + join_optimization（优化阶段）
+    + join_execution（执行阶段）
 
 ![优化策略](../_static/index.jpeg "Optional title")
 
@@ -168,7 +262,6 @@ vmstat 1 3 #  pay attentin to cpu
 iostat -d -k 1 3
 
 ALTER TABLE order_copy ADD PRIMARY KEY(id); # 给1千万的数据添加primary key 需要耗时： 428秒（7分钟）
-EXPLAIN SELECT * FROM order_copy WHERE id=12345\G; # 给id添加了索引，才使得rows的结果为1
 
 show session status like 'Com%'; # 显示当前的连接的统计结果
 show global status like 'Com%';  # 显示自数据库上次启动至今的统计结果
@@ -1122,3 +1215,5 @@ pmm-admin config --server 47.92.131.xxx:80
 
 * 单表数据量尽量控制在千万级别
 * 关系型数据库在TPS上的瓶颈往往会比其他瓶颈更容易暴露出来,常用的MySQL数据库为例，常规情况下的TPS大概只有1500左右
+
+## [MySQL 8.0 PFS histogram解析与优化](https://mp.weixin.qq.com/s/Bjv4rrSvDRQNEbjKgZdOjA)

@@ -40,13 +40,6 @@
     - MQTT 允许客户端动态的创建主题，发布者与服务端建立会话（session）后，可以通过 Publish 方法发送数据到服务端的对应主题
     - 订阅者通过 Subscribe 订阅主题后，服务端就会将主题中的消息推送给对应的订阅者。
 
-## 模型
-
-* 队列模型(一对一聊天)：生产者往某个队列里面发送消息，一个队列可以存储多个生产者的消息，一个队列也可以有多个消费者， 但是消费者之间是竞争关系，即每条消息只能被一个消费者消费。
-* 发布/订阅模型(群聊)：将消息发往一个Topic即主题中，所有订阅了这个 Topic 的订阅者都能消费这条消息
-* 通过多队列全量存储相同的消息，即数据的冗余可以实现一条消息被多个消费者消费。RabbitMQ 就是采用队列模型，通过 Exchange 模块来将消息发送至多个队列，解决一条消息需要被多个消费者消费问题。
-* RabbitMQ 采用队列模型，RocketMQ和Kafka 采用发布/订阅模型。
-
 ## 术语
 
 * 发送消息方为生产者 Producer
@@ -58,7 +51,26 @@
     - 假设现在有两个消费组分别是Group 1 和 Group 2，它们都订阅了Topic-a。此时有一条消息发往Topic-a，那么这两个消费组都能接收到这条消息。
     - 这条消息实际是写入Topic某个队列中，消费组中的某个消费者对应消费一个队列的消息。
 * 在物理上除了副本拷贝之外，一条消息在Broker中只会有一份，每个消费组会有自己的offset即消费点位来标识消费到的位置。在消费点位之前的消息表明已经消费过了。当然这个offset是队列级别的。每个消费组都会维护订阅的Topic下的每个队列的offset
-*
+
+## 异步消息
+
+* 可以作为解耦消息的生产和处理的一种解决方案。两种主要的消息模式——消息队列和发布/订阅模式
+* 队列模型
+    - 多个生产者可以向同一个消息队列发送消息
+    - 一个队列也可以有多个消费者,消费者之间是竞争关系，即每条消息只能被一个消费者消费
+    - 消息在队列上会被锁住或者被移除并且其他消费者无法处理该消息。也就是说**一个具体的消息只能由一个消费者消费**
+    - 如果消费者处理一个消息失败了，消息系统一般会把这个消息放回队列，这样其他消费者可以继续处理
+    - 能够对生产者和消费者进行独立的伸缩（scale），以及提供对错误处理的容错能力
+* 发布/订阅模型(群聊)
+    - **单个消息可以被多个订阅者并发的获取和处理**
+    - 在许多队列系统中常常用主题（topics）指代发布/订阅模式
+    - 将消息发往一个Topic即主题中，所有订阅了这个 Topic 的订阅者都能消费这条消息
+    - 类型：
+        + 临时（ephemeral）订阅:只有在消费者启动并且运行的时候才存在。一旦消费者退出，相应的订阅以及尚未处理的消息就会丢失。
+        + 持久（durable）订阅:会一直存在，除非主动去删除。消费者退出后，消息系统会继续维护该订阅，并且后续消息可以被继续处理
+* 通过多队列全量存储相同的消息，即数据的冗余可以实现一条消息被多个消费者消费。RabbitMQ 就是采用队列模型，通过 Exchange 模块来将消息发送至多个队列，解决一条消息需要被多个消费者消费问题。
+* RabbitMQ 采用队列模型，RocketMQ和Kafka 采用发布/订阅模型。
+    - RabbitMQ中，主题就是发布/订阅模式的一种具体实现（更准确点说是交换器（exchange）的一种）
 
 ## 推 / 拉模式
 
@@ -79,7 +91,6 @@
     - 以消费者的消费能力以适当的速率消费消息
     - 一旦产生新的消息则会同步到本地，并且修改和记录offset，服务端可以辅助存储offset，但是不会主动记录和校验offset的合理性，同时Consumer可以完全自主的维护offset以便实现自定义的信息读取
     - 消息处理可能有延迟，不过可以通过长轮询的方式来提高实时性
-
 
 ## 消息不丢失
 
@@ -236,21 +247,20 @@
 
 ## 对比
 
-- 从社区活跃度：按照目前网络上的资料，RabbitMQ 、activeM 、ZeroMQ 三者中，综合来看，RabbitMQ 是首选。
-- 持久化消息比较：ZeroMq 不支持，ActiveMq 和RabbitMq 都支持。持久化消息主要是指我们机器在不可抗力因素等情况下挂掉了，消息不会丢失的机制。
-- 综合技术实现：可靠性、灵活的路由、集群、事务、高可用的队列、消息排序、问题追踪、可视化管理工具、插件系统等等。RabbitMq / Kafka 最好，ActiveMq 次之，ZeroMq 最差。当然ZeroMq 也可以做到，不过自己必须手动写代码实现，代码量不小。尤其是可靠性中的：持久性、投递确认、发布者证实和高可用性。
-- 高并发：毋庸置疑，RabbitMQ 最高，原因是它的实现语言是天生具备高并发高可用的erlang 语言。
-- 比较关注的比较， RabbitMQ 和 Kafka
+* 社区活跃度：按照目前网络上的资料，RabbitMQ 、activeM 、ZeroMQ 三者中，综合来看，RabbitMQ 是首选。
+* 持久化消息比较：ZeroMq 不支持，ActiveMq 和RabbitMq 都支持。持久化消息主要是指我们机器在不可抗力因素等情况下挂掉了，消息不会丢失的机制。
+* 综合技术实现
+    - 可靠性、灵活的路由、集群、事务、高可用的队列、消息排序、问题追踪、可视化管理工具、插件系统等等。RabbitMq / Kafka 最好，ActiveMq 次之，ZeroMq 最差。当然ZeroMq 也可以做到，不过自己必须手动写代码实现，代码量不小。尤其是可靠性中的：持久性、投递确认、发布者证实和高可用性。
+* 高并发：毋庸置疑，RabbitMQ 最高，原因是它的实现语言是天生具备高并发高可用的erlang 语言。
+* RabbitMQ vs Kafka
     + RabbitMq 比Kafka 成熟，在可用性上，稳定性上，可靠性上，  RabbitMq  胜于  Kafka  （理论上）。
     + Kafka 的定位主要在日志等方面， 因为Kafka 设计的初衷就是处理日志的，可以看做是一个日志（消息）系统一个重要组件，针对性很强，所以 如果业务方面还是建议选择 RabbitMq 。
     + Kafka 的性能（吞吐量、TPS ）比RabbitMq 要高出来很多
-
 
 ## 产品
 
 * [PhxQueue](https://github.com/Tencent/phxqueue):[介绍](https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&mid=2650997820&idx=1&sn=c21021580f5474e6f570d1a1eada22bd&chksm=bdbefc6f8ac975791c85d2e9e8cb58a2c384d3daf29c4ac808789aa2281d2dd53c4d2baaf33d&mpshare=1&scene=1&srcid=09141b12nitpm39kMwTLxSIg&pass_ticket=T61h6XjBkARmtNGuhNVdyhTXYAlGFU%2Brx%2FhZrUNp8OOKx9ul0UwejPXkjaJ%2F3yFI#rd)
 * [nsqio/nsq](https://github.com/nsqio/nsq)[文档](http://nsq.io/overview/quick_start.html)
-* [apache/incubator-rocketmq](https://github.com/apache/incubator-rocketmq) a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability.
 * [Apache ActiveMQ](link)
 * [Celery](http://www.celeryproject.org):Distributed Task Queue
 * [kr/beanstalkd](https://github.com/kr/beanstalkd):Beanstalk is a simple, fast work queue. http://kr.github.io/beanstalkd/
