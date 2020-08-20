@@ -370,7 +370,7 @@ open http://127.0.0.1:8000
     - (https://github.com/box-project/box2)[Box]: 一个构建PHAR文件的工具
     - (https://github.com/jonathantorres/construct)[Construct]: 一个PHP项目的生成器
     - (https://github.com/jaz303/phake)[Phake]: 一个PHP克隆库
-    - (https://www.phing.info/)[Phing]: 一个灵感来自于Apache Ant的PHP项目构建系统
+    - [Phing](https://www.phing.info/): 一个灵感来自于Apache Ant的PHP项目构建系统
 * 任务运行器 Task Runners 自动运行任务的库
     - (http://bldr.io/)[Bldr]: 一个构建在Symfony组件上的PHP任务运行器
     - (https://github.com/jobbyphp/jobby)[Jobby]: 一个没有修改crontab的PHP定时任务管理器
