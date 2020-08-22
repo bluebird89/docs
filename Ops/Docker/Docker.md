@@ -2,10 +2,10 @@
 
 Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
 
-* 基于 Go 语言 并遵从Apache2.0协议开源的应用容器引擎
+* 基于 Go 语言并遵从Apache2.0协议开源的应用容器引擎
 * 基于LXC技术之上构建的container容器引擎，通过内核虚拟化技术（namespace及cgroups）来提供容器的资源隔离与安全保障，KVM是通过硬件实现的虚拟化技术，它是通过系统来实现资源隔离与安全保障，占用系统资源比较小
 * 让开发者打包应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化
-* 容器是完全使用沙箱机制，相互之间不会有任何接口,更重要的是容器性能开销极低
+* 容器是完全使用沙箱机制，保证不同服务之间环境隔离,提高了安全性,更重要的是容器性能开销极低
 * 借鉴传统的虚拟及镜像机制，提供artifact集装箱能力，从而助力云计算，尤其是类似于提供了Web, Hadoop集群，消息队列等
 * 镜像装箱机制：类似一个只读模版的文件结构，可以自定义及扩展，用来创建Docker容器
 * 高效虚拟化
@@ -17,23 +17,16 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
   - 提供了简洁易用的命令行和API
   - 基于联合文件系统的镜像分层技术，加上在线Docker Hub服务，容器迁移方便快捷
 * 优点
-  - 不需要等待虚拟系统启动所以启动快速资源占用低，启动速度快
-  - 更高效的利用系统资源，一个PC可以跑上千个容器。沙箱机制保证不同服务之间环境隔离
-  - 性能开销小
+  - 更高效的利用系统资源，不需要等待虚拟系统启动所以启动快速资源占用低，启动速度快
   - 面向软件开发者而非硬件运维
-  - 更轻松的迁移
-  - 不需要打包系统进镜像所以体积非常小
-  - 保证环境一致性
-  - 提升复用性，降低耦合性，维护和扩展更轻松
-  - 实现沙盒机制，提高了安全性
-  - 持续交付和部署
+  - 不需要打包系统进镜像所以体积非常小,性能开销小
   - Dockerfile 镜像构建机制让镜像打包部署自动化
   - 灵活：即使是最复杂的应用也可以集装箱化
-  - 轻量级：利用并共享主机内核
-  - 可互换：即时部署更新和升级
+  - 轻量级：共享主机内核
+  - 可互换：保证环境一致性,提升复用性
   - 便携式：本地构建，部署到云，并在任何地方运行
-  - 可扩展：增加并自动分发容器副本
-  - 可堆叠：垂直和即时堆叠服务
+  - 可扩展：增加并自动分发容器副本,持续交付和部署更新升级
+  - 可堆叠：垂直和即时堆叠服务,降低耦合性，维护和扩展更轻松 轻松迁移
 * 场景
   - Automating the packaging and deployment of applications
   - Creation of lightweight, private PAAS environment
@@ -100,6 +93,7 @@ brew install boot2docker
 brew cask install docker-toolbox
 
 ## centos
+sudo wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 yum install docker
 
 #/usr/lib/systemd/system/docker.service
@@ -418,14 +412,14 @@ sudo systemctl restart docker
 * 镜像是一种文件结构，Dockerfile中的命令都会在文件系统中创建一个新的层次结构，镜像则构建与这些文件系统之上
 * 一层层叠加，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层
 * 这些叠加的最后一层就是container，所以你在container里面改了文件，其实不会进image
-* 使用 Union FS 将这些不同的层结合到一个镜像中去,Union FS 有两个用途
+* 一种UnionFS（联合文件系统），是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem),Union FS 有两个用途
   - 可以实现不借助 LVM、RAID 将多个 disk 挂到同一个目录下
   - 将一个只读的分支和一个可写的分支联合在一起，Live CD 正是基于此方法可以允许在镜像不变的基础上允许用户在其上进行一些写操作
 * `docker pull [选项] [Docker Registry地址]  <仓库名>:<标签名>`
-  - Docker 镜像仓库地址：地址的格式一般是 `<域名/IP>[:端口号]`,默认地址是 Docker Hub
+  - Docker 镜像仓库地址：地址的格式 `<域名/IP>[:端口号]`,默认地址是 Docker Hub
   - 仓库名：两段式名称，即 <用户名>/<软件名>。对于 Docker Hub，如果不给出用户名，则默认为 library，也就是官方镜像
   - 标签名：默认 latest
-* 虚悬镜像（dangling image）:既没有仓库名，也没有标签，均为<none>。这个镜像原本是有镜像名和标签的，随着官方镜像维护，发布了新版本后，重新 docker pull 时，旧的镜像名被转移到了新下载的镜像身上，而旧的镜像上的这个名称则被取消，从而成为了 <none>
+* 虚悬镜像（dangling image）:既没有仓库名，也没有标签，均为<none>。原本是有镜像名和标签的，随着官方镜像维护，发布了新版本后，重新 docker pull 时，旧的镜像名被转移到了新下载的镜像身上，而旧的镜像上的这个名称则被取消，从而成为了 <none>
   - 除了 docker pull 可能导致这种情况，docker build 也同样可以导致这种现象。由于新旧镜像同名，旧镜像名称被取消，从而出现仓库名、标签均为 <none> 的镜像
 * 中间层镜像:为了加速镜像构建、重复利用资源，Docker 会利用中间层镜像.`docker image ls` 列表中只会显示顶层镜像，如果希望显示包括中间层镜像在内的所有镜像的话，需要加 -a 参数
   - 看到很多无标签的镜像,这些无标签镜像不应该删除，否则会导致上层镜像因为依赖丢失而出错

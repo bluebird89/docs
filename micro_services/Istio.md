@@ -152,6 +152,8 @@ curl -L https://istio.io/downloadIstio | sh -
 istioctl manifest apply --set profile=demo
 ```
 
+## [Istio 中的授权策略详解](https://mp.weixin.qq.com/s/xbGG9ZWc63Zce24dBYhvrQ)
+
 ## 图书
 
 * [Istio 服务网格进阶实战](https://www.bookstack.cn/books/istio-handbook)

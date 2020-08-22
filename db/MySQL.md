@@ -406,6 +406,7 @@ set global time_zone = '+8:00';
 flush privileges;
 # 8.0 GA版本开始支持将参数写入并且持久化：
 set persist time_zone='+0:00';
+show variables like 'datadir';
 
 select now();
 select curtime();
@@ -1572,8 +1573,16 @@ COMMIT;
             * 在取锁失败概率比较小的场景，可以提升系统并发性能
             * 写比较少的情况下
         + MVCC并发控制中，读操作可以分成两类：
-            * 快照读 (snapshot read)：读取的是记录的可见版本 (有可能是历史版本)，不用加锁（共享读锁s锁也不加，所以不会阻塞其他事务的写）
+            * 快照读 (snapshot read)：读取的是记录的可见版本 (有可能是历史版本)，不用加锁（共享读锁s锁也不加，所以不会阻塞其他事务的写）,执行select的时候，innodb默认会执行
+                - 数据虽然是一致的，但是数据是历史数据
+                - 只是简单的 select ，不包括 select … lock in share mode, select … for update
             * 当前读 (current read)：读取的是记录的最新版本，并且，当前读返回的记录，都会加上锁，保证其他事务不会再并发修改这条记录
+                - 默认会执行当前读会加锁，也就是会读取最新的记录，也就是别的事务提交的数据你也可以看到
+                - select … lock in share mode
+                - select … for update
+                - insert
+                - update：执行当前读，然后把返回的数据加锁
+                - delete
         + 优缺点
             * 通过MVCC (Multi-Version Concurrency Control) ，虽然每行记录都需要额外的存储空间，更多的行检查工作以及一些额外的维护工作，但可以减少锁的使用，大多数读操作都不用加锁，读数据操作很简单，性能很好，并且也能保证只会读取到符合标准的行，也只锁住必要行。
                 - 读不加锁，读写不冲突。在读多写少的OLTP应用中，读写不冲突是非常重要的，极大的增加了系统的并发性能
@@ -1971,6 +1980,7 @@ CREATE TABLE  People (
 ```sql
 show engines; # 显示当前数据库支持的存储引擎情况
 show variables like '%storage_engine%';
+show variables like 'innodb_data%'; #  ibdata1:12M:autoextend 第一部分 ibdata1 就是系统表空间的路径（相对于 MySQL 数据目录根目录，这里是 /usr/local/var/mysql），第二部分表示初识空间大小是 12M，最后的 autoextend 表示表空间会自动扩展
 
 select * from o_order where order_sn = '201912102322' for update;
 # order_sn 是主键索引，这种情况将在主键索引上的 order_sn = 201912102322 这条记录上加排他锁。
@@ -2166,8 +2176,6 @@ select * from information_schema.innodb_trx; # 查看已开启的事务
     - 自增主键/有索引 test_primary_d  数据长度  1GB  索引长度 1.36GB 75分钟插入 平均一万条数据插入 4.5秒
     - 复合主键 无索引 test_primary_c 数据长度  1.54GB 219分钟插入 平均一万条数据插入 8秒
 
-
-
 ![clustered-index](../_static/clustered-index.jpg "clustered-index")
 
 ```sql
@@ -2244,8 +2252,8 @@ select staff_id , customer_id from demo where date = '2015-06-01'order by staff_
 
 ## 慢日志 slow log
 
-* 知道哪些SQL语句执行效率低下.在MySQL中响应时间超过`long_query_time` 阀值的语句，会被记录到慢查询日志中
-    - `long_query_time`的默认值为10，意思是运行10s以上的语句
+* 知道哪些SQL语句执行效率低下.在MySQL中响应时间超过`long_query_time`阀值的语句，会被记录到慢查询日志中
+    - `long_query_time`默认值为10，意思运行10s以上的语句
 * 使用:设置相应的阈值（比如超过3秒就是慢SQL），在生产环境跑上个一天过后，看看哪些SQL比较慢
 * 备份：先用mv重命名文件（不要跨分区），然后执行flush logs（必须的）
 * 删除：执行flush logs（必须的）
@@ -2523,6 +2531,28 @@ ALTER VIEW view_name [(column_list)] AS select_statement
 DROP VIEW [IF EXISTS] view_name
 ```
 
+## mysqldump
+
+* 一致性热备
+    - 热备的一个关键点是保证数据的一致性，即在备份进行时发生的数据更改，不会在备份结果中出现。
+* 从库mysqldump会导致复制中断
+    - 分析
+        + mysqldump 不加任何参数去执行，会对备份的表加表级锁。
+        + 从库需要执行从主库同步过来的 update 语句，因为 mysqldump 表锁的存在，该语句会处理等待状态。
+        + update 等待超时，这个错误我们在上面的 error log 里可以看到（Lock wait timeout exceeded）。
+        + 因为在5.6.26版本下，在使用 MTS 的情况下，slave_transaction_retries 是不生效的。所以当 update 语句超时后，它没有重试机制，导致整个 SQL threads 都停掉了（这也就是为什么 Slave_IO_Running 显示YES，而 Slave_SQL_Running 显示NO）
+    - 总结
+        + mysqldump 即使在从库中执行，也必须加上 --single-transcation 等参数，直接执行会上表锁，成本大大。
+        + 部分mysql工具，如 navicat 直接使用它自带的导出功能，也会锁住全表。所以尽量不要使用工具去处理导出工作。
+        + 5.6 的主从的坑已经踩了很多了，大多是由于自身的bug，而且在 5.6 下根本体现不出 MTS 的优势。把 5.6 升级至 5.7 或 8.0 是非常有必要的，之前测试的 8.0 的复制稳定性和性能的提升非常大，推荐直接升级至 8.0 版本。
+
+```sh
+mysqldump -uXXX -p osdc osdc_XXX > /tmp/osdc_info.sql；
+show variables like '%slave_parallel_workers%';
+show variables like '%innodb_lock_wait_timeout%';
+show variables like '%slave_transaction_retries%';
+```
+
 ## 影像复制
 
 ## 主从复制
@@ -2618,15 +2648,15 @@ mysql -u username –-password=your_password database_name < file.sql
 ## 中间件
 
 * 优劣
-    - 一些通用的指标
+    - 一些通用指标
     - 要结合业务特点，包括业务的读写 qps ，涉及的库表结构和SQL语句，来进行综合的判断
 * 中间件产品发展至今，分为两代
-    - 传统的中间件软件，如mysql proxy， mycat， oneproxy，atlas，kingshard等.使用这些中间件，你还是需要部署中间件模块，做各种配置，系统扩容是还需要停服做数据迁移，需要比较多的时间投入
+    - 传统中间件软件，如mysql proxy， mycat， oneproxy，atlas，kingshard等.使用这些中间件，你还是需要部署中间件模块，做各种配置，系统扩容是还需要停服做数据迁移，需要比较多的时间投入
     - 和公有云结合的，基于中间件的分布式数据库，如阿里DRDS、UCloud UDDB，腾讯云DCDB For TDSQL等,对用户呈现的，是一个类似单机数据库一样的操作和管理界面，管理简单，使用方便
         + 以UCloud 的UDDB为例
             * 在Web控制台上，一步即可创建并配置好中间件和数据库节点，搭建出一个完整的分布式数据库；
             * 通过特殊的建表语句， 即可以配置表的水平划分方式。
-    - 对于中间件复杂的水平扩容问题，可以通过一个按钮即可完成水平扩容操作，期间不停服，只是每隔一段时间有几毫秒到零点几秒的访问中断
+    - 中间件复杂水平扩容问题，可以通过一个按钮即可完成水平扩容操作，期间不停服，只是每隔一段时间有几毫秒到零点几秒的访问中断
 - 功能
     + 分库分表
         * 能够做到一级划分（只根据一个字段来做分区），还是能够做到二级划分（能够根据两个字段来做分区）
@@ -2637,13 +2667,23 @@ mysql -u username –-password=your_password database_name < file.sql
         * 透明的读写分离，能够100%兼容 Mysql 或其他数据库的 SQL 语法，同时对于事务也能够正确处理（事务的 SQL 能够路由到主节点，而不是分散到主节点和只读节点）
         * 简单的读写分离，对 SQL 的支持范围，只限于数据库中间件内置的 SQL 解释器，有些复杂 SQL 是支持不了的，同时对于事务，也做不到很好的支持。简单的读写分离功能只是把写发往主节点，读都发往从节点
         * 读写分离功能做得细致的话，数据库中间件会能够提供对分流策略的自定义。比如设置为：把30%的读流量，分流到主节点，70%的读流量分流到只读节点
-* 产品的成熟度、用户的使用情况和社区（商业公司）支持程度。 数据库中间件虽然本身不做存储，但是每条数据都是要从中经过的，一旦出错，可能对业务造成灾难性的影响，所以软件的正确性和稳定性非常重要。中间件的成熟度、已经使用的客户的使用情况、数量、用户的口碑，以及开源社区或者商业公司对该产品的支持程度，就非常重要。一般来说，发布时间越长而且在持续迭代、用户使用数量众多，且有大规模业务使用，社区（包括 QQ 群）比较活跃，文档完善，bug 解决及时的产品，更值得信赖。
-* 产品的易用性，是否配置方便，部署容易，系统管理不会有太大负担。有些中间件模块众多，配置复杂，虽然表面上看起来功能丰富，但业务用到的可能还是最基本的几个功能。选择这样的中间件，即显得不够划算，不仅加重运维负担，同时后续系统的扩展，新业务的支持，也不够敏捷。
-* 是否满足自身业务目前的需求，和潜在的需求:必须根据自己业务的库表结构，分库分表/读写分离需求，业务的SQL语句，读写qps，来判断中间件产品的优劣。 比如，绝大部分中间件，目前都不能支持分布式事务和多表join，但是除了对这两种sql不支持，不少中间件，其实在一些基本的sql，比如带系统函数的sql、聚合类sql上，也支持不够好。
+* 选择考虑
+    - 产品的成熟度、用户的使用情况和社区（商业公司）支持程度。
+        + 数据库中间件虽然本身不做存储，但是每条数据都是要从中经过的，一旦出错，可能对业务造成灾难性的影响，所以软件的正确性和稳定性非常重要。
+        + 中间件的成熟度、已经使用的客户的使用情况、数量、用户的口碑，以及开源社区或者商业公司对该产品的支持程度，就非常重要。一般来说，发布时间越长而且在持续迭代、用户使用数量众多，且有大规模业务使用，社区（包括 QQ 群）比较活跃，文档完善，bug 解决及时的产品，更值得信赖。
+    - 产品的易用性，是否配置方便，部署容易，系统管理不会有太大负担。
+        + 有些中间件模块众多，配置复杂，虽然表面上看起来功能丰富，但业务用到的可能还是最基本的几个功能。选择这样的中间件，即显得不够划算，不仅加重运维负担，同时后续系统的扩展，新业务的支持，也不够敏捷。
+    - 是否满足自身业务目前的需求，和潜在的需求:必须根据自己业务的库表结构，分库分表/读写分离需求，业务的SQL语句，读写qps，来判断中间件产品的优劣。 比如，绝大部分中间件，目前都不能支持分布式事务和多表join，但是除了对这两种sql不支持，不少中间件，其实在一些基本的sql，比如带系统函数的sql、聚合类sql上，也支持不够好。
 * 选择:
     - 需要根据业务的库表结构，sql语句，以及业务特点，去检查中间件是否对业务的目前sql和潜在sql，能够做到比较好的支持。
     - 选择中间件时，一定要自己做性能测试和压力测试，实事求是地自身业务特点来测定中间件的性能和稳定性情况，不要轻信官方或者第三方发布的一些性能数据
 * 中间件产品的最高境界:不需要特别关注中间件，从而可以把精力放在数据库架构、优化和数据库本身的管理上
+
+## 编程
+
+```sh
+select a into @a from t1 where a=2;
+```
 
 ### MySQL Proxy
 
@@ -2924,7 +2964,64 @@ mysqlslap –user=root –password=111111 –concurrency=50 –number-int-cols=5
 mysqlslap –user=root –password=111111 –concurrency=50 –create-schema=employees –query="SELECT _FROM dept_emp;" # 使用自己的测试库和测试语句 `echo "SELECT_ FROM employees;SELECT _FROM titles;SELECT_ FROM dept_emp;SELECT _FROM dept_manager;SELECT_ FROM departments;" > ~/select_query.sql`
 ```
 
-## 监控平台
+##  Group Replication
+
+* 组复制以插件的形式提供给MySQL Server使用，MGR 是MySQL Server 8.0提供的内置MySQL插件，因此不需要额外安装
+* 配置
+    - 数据必须存储在InnoDB事务引擎中 `disabled_storage_engines="MyISAM,BLACKHOLE,FEDERATED,ARCHIVE,MEMORY"`
+    - 基于主从复制的基础架构实现
+    - 组复制参数简介
+        + plugin_load_add='group_replication.so'：用于在MySQL Server启动时加载相应的插件（这里使用plugin_load_add插件在启动MySQL Server时，自动加载MGR插件，配合后续的一些组复制系统变量，可以省去繁琐的手工配置组复制的步骤）。
+        + group_replication_group_name="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"：给定一个组的组名称（必须是有效的UUID格式，因为在组复制中，binlog中记录的GTID是使用这个UUID来进行构造的，如果不知道如何制定，可以使用select uuid();语句来生成）。
+        + group_replication_start_on_boot=off：是否需要随着MySQL Server一并启动MGR插件，在你想手工配置组复制时，就将该系统变量的值设置为off即可。但要注意，一旦将组成功初始化安装完成之后，就需要将该系统变量设置为on（默认为on），以便让MGR插件每次都可以随着MySQL Server自动启动。
+        + group_replication_local_address= "s1:33061"：组复制中该成员用于与其他成员之间通讯的地址和端口（s1可以使用IP代替），组会将此地址用于与组内其他成员之间为组通讯引擎（XCom，Paxos变体）建立远程连接，要注意，该系统变量中涉及的端口不能与MySQL Server的运行端口冲突，也不能将此端口它用，它只能用于组成员之间的内部通信。另外，如果不使用IP而是使用的主机名，该主机名需要让组内的所有成员都能够正常解析，以便找到有效的IP地址（可以通过DNS或者所有成员上配置相同的hosts解析记录），从MySQL 8.0.14开始，可以使用IPV6地址，一个组中可以包含使用IPv6和IPv4的成员的组合，更多有关对IPv6网络和混合IPv4和IPv6的信息，请参见"4.5. 配置支持IPv6和混合IPv6与IPv4地址的组"。
+        + group_replication_group_seeds= "s1:33061,s2:33061,s3:33061"
+            * 指定组复制中有效组成员的地址集合，多个成员地址之间使用逗号分隔。这些成员称为种子成员，其作用只是让joiner节点能够使用这些地址和端口与组建立连接，因此，不需要把所有的成员地址都列出，但要求至少有一个地址有效（可以将组中所有成员的地址和端口都列出，但这不是必须的，如果要列出组中所有成员的地址和端口信息，则建议按照组中成员的启动顺序列出）。一旦joiner节点与组成功建立了连接，则在组内所有成员的performance_schema.replication_group_members表中都会列出组成员的信息。
+            * 组内第一个启动的成员，需要负责引导组启动，由于是第一个组成员，所以，在引导组启动时会忽略该系统变量的值。引导组的成员中的任何现有数据都将作用于下一个加入组的成员。即，第二个加入组的成员中任何缺失的数据都将以第一个成员作为数据的提供者（donor节点）执行数据复制（因为此时第一个启动的组成员是唯一一个可以提供差异数据的节点）。后续第三个加入组的成员中任何缺失的数据可以选择第一个成员或者第二个成员作为数据的提供者，以此类推，后续joiner节点都可以在之前已经成功加入组内的成员中任意选择一个作为数据的提供者。
+        + 注：通常，组成员之间内部通讯的端口建议设置为33061，但是，如果所有的组成员都部署在同一台主机中，则为了避免端口冲突，需要配置为其他端口。
+        + group_replication_bootstrap_group=off：
+            * 设置是否使用这个Server来引导组，对于该系统变量的设置，建议在所有Server中都设置为off（默认为off），然后，根据需要人工选择一个Server来引导组，以便确保始终只有一个Server来引导组启动。
+            * 在任何时候，该系统变量都只能在一个Server上启用，通常是在第一个启动的Server上启用，且是在第一次引导组时启用（或者在整个组被关闭，然后需要重新引导组时启用，就算是第一个启动的Server，在第一次引导组完成之后，也需要及时关闭该参数），如果多个Server同时启用了这个系统变量，将会造成人为的脑裂场景。
+    - 尽管组复制的组成员之间相互通信使用的本地地址和端口与MySQL Server用于SQL访问的地址和端口不同，但是如果MySQL Server不能够正确识别其他组成员的SQL访问地址和端口，则组复制中有Server加入组时的分布式恢复过程可能会失败。因此，建议运行MySQL的主机操作系统配置正确的且唯一的主机名(可以为组复制的所有成员统一配置DNS或统一配置本地hosts解析记录)。主机名信息可以通过performance_schema.replication_group_members表的Member_host列查看。如果组中存在多个成员的操作系统都使用了默认的主机名，则成员有可能因为无法解析到正确的成员地址而无法成功加入组。在这种情况下，建议在每个成员的数据库my.cnf配置文件中使用report_host系统变量各自配置一个惟一的主机名。
+    - group_replication_group_seeds系统变量中列出的是组内种子成员的内部网络通讯地址和端口，该地址和端口由每个组成员的系统变量group_replication_local_address指定，而不是客户端用于MySQL Server的SQL访问的地址和端口，另外，要注意，在performance_schema.replication_group_members表中MEMBER_PORT列的值，是SQL访问的端口（而不是组成员之间内部通讯的端口），它来自于组成员的port系统变量。
+    - 启动组复制，需要先使用一个Server引导组启动完成，然后将第一个组成员作为种子成员，其余Server依次串行申请加入组（一个组复制集群中，不支持在没有任何活跃节点的情况下，将第一个引导组启动的Server和其他申请加入组的Server同时启动，这可能导致所有申请加入组的Server都失败），如果有特殊需求需要在同一时刻申请加入组，则group_replication_group_seeds系统变量中不要列出还未成功加入组的Server作为种子成员，否则可能导致某些Server申请加入组失败。
+    - joiner节点在其group_replication_group_seeds系统变量中指定的种子成员的地址（IPV6或IPV4），必须与该变量所指向的种子成员中的group_replication_local_address系统变量指定的地址相匹配（IPV6或IPV4），即种子成员中group_replication_local_address指定的是IPV4地址，那么，在joiner节点中的group_replication_group_seeds系统变量中也要指定IPV4地址，不能使用IPV6地址，否则地址协议不匹配会导致joiner节点申请加入组失败。另外，所有成员（包括已加入组的成员和待加入组的成员）中的白名单必须允许相互之间的访问，否则将会拒绝白名单之外的网络地址的连接尝试。有关更多白名单的信息，请参见"5.1. 组复制的IP地址白名单"。
+* 参考
+    - [全方位认识 MySQL 8.0 Group Replication](https://mp.weixin.qq.com/s/sydu0alXDECcHm5GNMvtdA)
+
+```
+# Server 实例级别的唯一标志
+server_id=1
+# 启用GTID
+gtid_mode=ON
+# 只允许执行GTID模式下被认为安全的语句
+enforce_gtid_consistency=ON
+# 禁用二进制日志中的事件数据校验
+binlog_checksum=NONE
+# 启用二进制日志记录功能
+log_bin=binlog
+# 启用SQL线程回放之后将二进制写入自身的binlog中，在组复制中，依赖于每个成员持久化的binlog来实现一些数据自动平衡的特性
+log_slave_updates=ON
+# 启用ROW格式复制，增强数据一致性
+binlog_format=ROW
+# 启用双TABLE，使用InnoDB引擎表来保存IO和SQL线程的位置信息（复制元数据），以增强复制状态的安全性
+master_info_repository=TABLE
+relay_log_info_repository=TABLE
+
+plugin_load_add='group_replication.so'
+group_replication_group_name="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+group_replication_start_on_boot=off
+group_replication_local_address= "s1:33061"
+group_replication_group_seeds= "s1:33061,s2:33061,s3:33061"
+group_replication_bootstrap_group=off
+
+## /etc/hosts
+10.10.30.162 s1 mysql1
+10.10.30.163 s2 mysql2
+10.10.30.164 s3 mysql3
+```
+
+## 监控
 
 * 安装
     - 安装exporter

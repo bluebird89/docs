@@ -20,3 +20,7 @@ Archaius：外部化配置组件。
 * Spring Cloud Sleuth：Spring Cloud 应用的分布式跟踪实现，可以完美整合 Zipkin。
 * Spring Cloud ZooKeeper：基于ZooKeeper 的服务发现与配置管理组件。
 * Spring Cloud Starters：Spring Cloud 的基础组件，它是基于Spring Boot 风格项目的基础依赖模块。
+
+## 参考
+
+* [基于Spring Cloud项目实战](https://mp.weixin.qq.com/s/59LcJfOUXOjfUPzVyMvsvg)
