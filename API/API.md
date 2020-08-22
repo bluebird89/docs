@@ -874,7 +874,7 @@ print dec_message   // Hello World!
     - YUI doc
     - eolinker
     - Apizza
-    - Yapi
+    - [Redocly/redoc](https://github.com/Redocly/redoc)blue_book OpenAPI/Swagger-generated API Reference Documentation https://redocly.github.io/redoc/
     - [RAP2](http://rap2.taobao.org)
     - DOClever
     - [insomnia](https://insomnia.rest/):Design and debug APIs like a human, not a robot.
@@ -885,8 +885,6 @@ print dec_message   // Hello World!
     - [Wireshark](https://www.wireshark.org)
     - [avwo/whistle](https://github.com/avwo/whistle):HTTP, HTTP2, HTTPS, Websocket debugging proxy https://wproxy.org/
 * API 文档/契约生成工具
-    - apidoc
-    - swagger
     - blue sprint
     - RAML
 * mock

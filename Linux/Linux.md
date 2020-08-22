@@ -720,6 +720,8 @@ dd if=/dev/urandom of=/boot/test.txt bs=50M count=1 # 生成文件 挂载
 
 # 文件置空
 cat /dev/null > calatina.out
+
+sync # 将所有未写的系统缓冲区写到磁盘中
 ```
 
 ## 系统调用
@@ -2288,7 +2290,7 @@ kill -l
 * 远程登录
   - telnet
   - ssh
-  - nc
+  - nc:ncat：Concatenate and redirect sockets
 # 防火墙
   - iptables -L
 
@@ -2517,6 +2519,21 @@ net.ipv4.tcp_tw_recycle= 1
 # 修改系統默认的TIMEOUT时间,默认是60s
 net.ipv4.tcp_fin_timeout = 10
 #测试参数的话，可以使用 sysctl -w net.ipv4.tcp_tw_reuse = 1 这样的命令。如果是写入进文件的，则使用sysctl -p生效。
+
+# 在机器上开放5879端口 server
+nc -l -vv -p 5879 -e /bin/bash # 在机器上开放5879端口
+# 构造了一个循环
+rm -f /tmp/f; mkfifo /tmp/f
+cat /tmp/f | /bin/bash -i 2>&1 | nc -l  5879 > /tmp/f
+
+# client
+nc -v 192.16.1.54 5879
+
+nc -l 5879 > file
+nc -v 192.16.1.54 5879 < redis-5.0.5.tar.gz
+
+nc -vvv baidu.com 443
+nc -vzw 2 192.16.1.54 8888-9999 # 扫描主机的端口
 ```
 
 ### [Tcpdump](http://www.tcpdump.org/)
@@ -3410,6 +3427,7 @@ sort authors.txt | uniq -c > authors-sorted.txt
 * [aleksandar-todorovic/awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
 * [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
 * [面向 Linux 程序员和系统管理员的技术资源](https://www.ibm.com/developerworks/cn/linux/)
+* [0xAX/linux-insides)](https://github.com/0xAX/linux-insides) A little bit about a linux kernel https://0xax.gitbooks.io/linux-insides/content/index.html
 * [Linux 内核揭密](https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html)
 * [trimstray/the-practical-linux-hardening-guide](https://github.com/trimstray/the-practical-linux-hardening-guide):🔥 This guide details the planning and the tools involved in creating a secure Linux production systems - work in progress.
 * [linux 内存管理初探](https://mp.weixin.qq.com/s?__biz=MzA3OTgyMDcwNg==&mid=2650636296&idx=1&sn=48ca904ca1e71ffb467fb0befdd39853&chksm=87a482c5b0d30bd3da8d6fba90d8eb17438103806bb99d20c8713dd67af7929833ceea7502ab)
