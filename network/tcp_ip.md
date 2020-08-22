@@ -577,7 +577,8 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
     - [DNSpod](https://console.dnspod.cn/)
     - [NextDNS](https://nextdns.io/):Block ads, trackers and malicious websites on all your devices. Get in-depth analytics about your Internet traffic. Protect your privacy and bypass censorship. Shield your kids from adult content.
 * DNS缓存污染，不是指域名被墙。墙，域名仍能被解析到正确的IP地址，只是客户端（指用户浏览器/服务请求端）不能与网站服务器握手，或通过技术阻断或干扰的方式阻止握手成功，以至达到超时、屏蔽、连接重置、服务中断的现象
-        + [检测](https://www.checkgfw.com/)
+    - [检测](https://www.checkgfw.com/)
+* DNS 请求是可以被抢答 `dig www.bennythink.com +short`
 
 ```
 ## `/etc/resolv.conf`

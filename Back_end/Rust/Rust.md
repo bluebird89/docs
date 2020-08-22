@@ -70,6 +70,13 @@ registry = "git://crates.rustcc.cn/crates.io-index"
 registry = "https://code.aliyun.com/rustcc/crates.io-index"
 ```
 
+```sh
+cargo install wasm-pack          # Compile Rust to Wasm and generate JS interop code
+cargo install cargo-make         # Task runner
+cargo install simple-http-server # Simple server to serve assets
+cargo new --lib rustmart && cd rustmart
+```
+
 ## 教程
 
 * [rust-lang/book](https://github.com/rust-lang/book):The Rust Programming Language https://doc.rust-lang.org/book/

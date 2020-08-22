@@ -124,7 +124,7 @@ gpgcheck=1  #检查GPG-KEY，0为不检查，1为检查
 gpgkey=file:///media/cdrom/RPM-GPG-KEY-redhat-release   #GPG-KEY路径
 
 yum clean all   # 清除yum缓存
-yum makecache  #缓存本地yum源中的软件包信息
+sudo yum makecache fast  # 缓存本地yum源中的软件包信息
 
 yum install httpd   #安装apache
 rpm -ql httpd  #查询所有安装httpd的目录和文件

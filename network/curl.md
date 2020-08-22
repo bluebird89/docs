@@ -13,8 +13,9 @@ curl is used in command lines or scripts to transfer data.发出网络请求，�
 * -u/--user                             指定账号、密码
 * -b/--cookie                           读取 cookie
 * -i:--include  打印出服务器回应的 HTTP 标头
-* -I参数向服务器发出 HEAD 请求，然会将服务器返回的 HTTP 标头打印出来
+* -I 向服务器发出 HEAD 请求，然会将服务器返回的 HTTP 标头打印出来
 * -v:--verbose   输出通信的整个过程，用于调试
+* -m 设置最大传输时间
 * -e 用来设置 HTTP 的标头Referer，表示请求的来源
 * -F 用来向服务器上传二进制文件
 * -G 用来构造 URL 的查询字符串
