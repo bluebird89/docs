@@ -86,6 +86,30 @@ The Open Organization
     + Kernel ORG  mirrors.kernel.org
     + Yandex  mirror.yandex.ru
 
+
+## 开源 vs 开源软件
+
+* 开源软件:源代码可以任意获取的计算机软件，任何人都能查看、修改和分发他们认为合适的代码。开源软件依托同行评审和社区生产，皆以分散、协作的方式开发。—— 红帽官网
+* 开源:源于开源软件生产的运行和工作方式，它是一种基于去中心化、自组织式的软件开发模式运作的工作方式。它以社区作为根基，通过开放、透明、协作几项原则开展的活动
+    - 透明度
+    - 协作
+    - 迟早发布、持续发布。快速建立原型，发布第一个版本，并且不断地快速地迭代
+    - 精英制度。根据提出的最佳方案做决定的方式
+    - 社区。形成社区，提升社区参与度，转化为社区目标
+        + 生态建设
+        + 明确其带来的业务价值（如人才引进 、生态等）
+        + 专职的开发人员进行开源支持
+        + 开放式的开源团队组织结构
+        + 合理、适当地长期 KPI 考核机制
+        + 政策和流程支持。如专项鼓励奖金
+        + 明确地专利和知识产权机制
+* 运营一个开源项目
+    - 搭建原型
+    - 上线运营
+    - 收集反馈
+    - 调整产品
+    - 成长壮大
+
 ## 工具
 
 * [ odoo / odoo ](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business.
@@ -101,3 +125,7 @@ The Open Organization
 * https://github.com/uber/react-vis
 * https://github.com/uber/kraken
 * https://github.com/uber/ludwig
+
+## 参考
+
+* [阿里开源](http://1024.yuque.com/)
