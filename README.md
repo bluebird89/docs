@@ -30,6 +30,7 @@
 * 周期时间内的克制
 * 开始写 todo list，理清 focus on what’s important；结束写反思。应用到每天、月、季以及每一件事
 * 每月读一本书或一个框架
+* 知识复习有路径可寻
 
 ## project
 

@@ -2,6 +2,10 @@
 
 A PHP Framework For Web Artisans https://laravel.com
 
+* 8.0
+  - php artisan serve 命令增强:更新 .env 文件后不再需要运行 php artisan serve 手动重启 Web 服务器，Laravel 会监听 .env 文件的修改并自动替你重启
+  - 初始化项目后在代码骨架中提供了 app/Models 目录，并将新建的模型类默认存放到这个目录
+
 ## 安装
 
 * [laravel/homestead](https://github.com/laravel/homestead):an official, pre-packaged Vagrant box that provides you a wonderful development environment without requiring you to install PHP, a web server, and any other server software on your local machine
