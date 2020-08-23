@@ -355,37 +355,6 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
         + --cloud_provider=: 云服务商地址，用于获取自身的metadata；
         + --register-node=: 设置为true表示自动注册到apiserver。
     - 手动管理Node:将Kubelet启动参数中的--register-node参数的值设置为false
-* Pod:创建和部署最小也是最简的单位，代表着集群中运行的进程，封装着应用的容器，存储、独立的网络IP，管理容器如何运行的策略选项
-    - 调度最小颗粒不是容器，而是Pod
-    - 一个可以被创建、销毁、调度、管理的最小的部署单元,一个Pod对应一个由相关容器和卷组成的容器组,通常Pod里的容器运行相同的应用
-    - 运行在同一个Minion(Host)上，看作一个统一管理单元
-    - 本身不具备自愈能力，一般情况下使用Deployment、ReplicaSet、Replication Controller等来创建和管理Pod，保证有足够的Pod副本在运行
-    - 重启Pod中的容器和重启Pod不是一回事，Pod只提供容器的运行环境并保持容器的运行状态，重启容器不会造成Pod重启
-    - Pod是一种相对短暂的存在，而不是持久存在的。每个Pod将被绑定调度到Node节点上，当一个Node节点销毁或挂掉之后，上面的所有Pod都会被删除
-    - 运行方式
-        + 运行一个容器:这是K8s中最常见的用法。可以将Pod视为单个封装的容器，只是K8s是直接管理Pod而不是容器
-        + 运行多个容器:多个容器共享Pod资源。这些容器可以形成单一的内部Service
-    - 共享资源
-        + 网络: 每个Pod被分配一个独立的IP地址，Pod中的每个容器共享网络命名空间，包括IP地址和网络端口
-            * Pod内的容器可以使用localhost相互通信
-            * 与Pod外部通信时，必须协调如何使用共享网络资源
-        + 存储: Pod可以指定一组共享存储Volumes，Pod中的所有容器都可以访问共享Volumes允许这些容器共享数据。Volumes还用于Pod中的数据持久化，以防其中一个容器需要重新启动而丢失数据
-    - 状态
-        + Pending: 挂起, Pod已经被K8s系统接受，但有一个或者多个容器镜像尚未创建，等待时间包括下载镜像时间和Pod调度时间
-        + Running: 运行中，该Pod已经绑定到一个Node上，Pod中所有容器都已被创建，至少有一个容器正在运行，或者正处于启动或重启状态
-        + Succeed: 成功，Pod中所有容器都被成功结束，并且不会再重启
-        + Failed: 失败，Pod中所有容器都终止了，并且至少有一个容器因为失败而终止
-        + Unknown: 未知，因为某些原因无法取得Pod的状态，通常是因为Pod与所在Node通信失败
-    - 创建
-        + 因为Pod不会自愈，如果Node节点有故障这个Pod就会被删除，或者Node节点缺少资源情况下Pod也会被删除
-        + 建议采用相关Controller来创建Pod而不是直接创建Pod，因为单独的Pod没有办法自愈，而Controller却可以，可用的Controller
-            * Job: 使用Job运行预期会结束的Pod，例如批量计算，Job仅适用于重启策略为OnFailure或Never的Pod。
-            * Deployment、ReplicaSet、Replication Controller: 预期不会终止的Pod使用这3个Controller来创建，Replication Controller仅适用于具有restartPolicy为Always的Pod。
-            * DaemonSet: 提供特定于机器的系统服务，DaemonSet为每台机器运行一个Pod
-    - Pod容器重启：Pod YAML配置文件Spec中有一个restartPolicy字段，适用于Pod中的所有容器，restartPolicy仅指通过同一节点上的kubelet重新启动容器。
-        + Always（默认）：失败的容器由kubelet以五分钟为上限的指数退避延迟（10秒，20秒，40秒…）重新启动，并在成功执行十分钟后重置
-        + OnFailure
-        + Never
 * ConfigMap API 资源用来保存 key-value pair配置数据，这个数据可以在pods里使用，或者被用来为像controller一样的系统组件存储配置数据。虽然 ConfigMap 跟 Secrets 类似，但是ConfigMap更方便的处理不含敏感信息的字符串。注意：ConfigMaps不是属性配置文件的替代品。ConfigMaps只是作为多个properties文件的引用。你可以把它理解为Linux系统中的/etc目录，专门用来存储配置文件的目录。
 * Secret 存储了敏感数据,解决了密码、token、密钥等敏感数据的配置问题，而不需要把这些敏感数据暴露到镜像或者Pod Spec中。Secret 可以以Volume或者环境变量的方式使用。 Secret有三种类型：
     - Service Account ：用来访问Kubernetes API，由Kubernetes自动创建，并且会自动挂载到Pod的/run/secrets/kubernetes.io/serviceaccount目录中
@@ -461,10 +430,6 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
         + Rolling updates:可以一个一个地替换pods来滚动更新（rolling updates）服务
         + Multiple release tracks:如果需要在系统中运行multiple release的服务，Replication Controller使用labels来区分multiple release tracks
     - 以上三个概念便是用户可操作的REST对象。Kubernetes以RESTfull API形式开放的接口来处理
-* ReplicaSet (RS):下一代Replication Controller，ReplicaSet和Replication Controller唯一的区别是现在的选择器支持不同，官方推荐使用ReplicaSet
-    - 大多数kubectl支持Replication Controller的命令也支持ReplicaSet
-    - ReplicaSet主要是被Deployment做为协调Pod创建、删除和更新的机制，当使用Deployment时，你不必担心创建Pod的ReplicaSets，因为可以通过Deployment实现管理ReplicaSets
-    - Deployment是一个更高层次的概念，管理ReplicaSet，并提供对pod的声明性更新以及许多其他的功能。因此，建议使用Deployment而不是直接使用ReplicaSet。这实际上意味着可能永远不需要操作ReplicaSet对象，而是直接使用Deployment并在规范部分定义应用程序
 * 如下图所示，有三个pod都有label为"app=backend"，创建service和replicationController时可以指定同样的label:"app=backend"，再通过label selector机制，就将它们与这三个pod关联起来了。例如，当有其他frontend pod访问该service时，自动会转发到其中的一个backend pod
 
 * Horizontal Pod Autoscaler （HPA）组件专门设计用于应用弹性扩容的控制器，通过定期轮询 Pod 的状态（CPU、内存、磁盘、网络，或者自定义的应用指标），当 Pod 的状态连续达到提前设置的阈值时，就会触发副本控制器，修改其应用副本数量，使得 Pod 的负载重新回归到正常范围之内
@@ -668,14 +633,35 @@ kubectl get pvc -n namespace_name
 
 ## Pod
 
-* 一个抽象化概念，由一个或多个容器组合在一起的共享资源。根据资源的可用性，主节点会把Pod调度到特定工作节点上，并与容器运行时协调以启动容器
-* 业务型别可以分为长期伺服型（long-running）、批处理型（batch）、节点后台支撑型（node-daemon）和有状态应用型（stateful application）这四种类型.可以由不同类别的Pod控制器来完成，分别为：Deployment、Job、DaemonSet和StatefulSet。
-* Deployment: 复制控制器（Replication Controller，RC）是集群中最早的保证Pod高可用的API物件，副本集（Replica Set，RS）是它的升级，能支援更多种类的匹配模式。部署(Deployment)又是比RS应用模式更广的API物件，以Kubernetes的发展方向，未来对所有长期伺服型的的业务的管理，都会通过Deployment来管理。
-    - Service： Deployment保证了Pod的数量，但是没有解决如何访问Pod的问题，一个Pod只是一个执行服务的选项，随时可能在一个节点上停止，在另一个节点以一个新的IP启动一个新的Pod ，因此不能以确定的IP和端口号提供服务。要稳定地提供服务需要服务发现和负载均衡能力，Service可以稳定为使用者提供服务。
-* Job：用来控制批处理型任务，Job管理的Pod根据使用者的设定把任务成功完成就自动退出了。
-* DaemonSet：后台支撑型服务的核心关注点在集群中的Node，要保证每个Node上都有一个此类Pod在运行。比如用来收集日志的Pod。
-* StatefulSet： 不同于RC和RS，StatefulSet主要提供有状态的服务，StatefulSet中Pod的名字都是事先确定的，不能更改，每个Pod挂载自己独立的储存，如果一个Pod出现故障，从其他节点启动一个同样名字的Pod，要挂载上原来Pod的储存继续以它的状态提供服务。比如数据库服务MySQL，我们不希望一个Pod故障后，MySQL中的数据即丢失。
+- 一个可以被创建、销毁、调度、管理的最小的部署单元（调度最小颗粒）,对应一个由相关容器和卷组成的容器组,通常Pod里的容器运行相同应用。对应用程序抽象的逻辑概念
+- 运行在同一个Minion(Host)上，看作一个统一管理单元
+- 本身不具备自愈能力，一般情况下使用Deployment、ReplicaSet、Replication Controller等来创建和管理Pod，保证有足够的Pod副本在运行
+- 重启Pod中的容器和重启Pod不是一回事，Pod只提供容器的运行环境并保持容器的运行状态，重启容器不会造成Pod重启
+- 重启策略 restartPolicy:Pod 的Spec部分的一个标准字段（pod.spec.restartPolicy），适用于Pod中的所有容器，restartPolicy仅指通过同一节点上的kubelet重新启动容器
+    + Always（默认）：在任何情况下，只要容器不在运行状态，就自动重启容器，失败的容器由kubelet以五分钟为上限的指数退避延迟（10秒，20秒，40秒…）重新启动，并在成功执行十分钟后重置
+    + OnFailure: 只在容器 异常时才自动重启容器
+    + Never: 从来不重启容器
+- 一种相对短暂而不是持久存在的。每个Pod将被绑定调度到Node节点上，当一个Node节点销毁或挂掉之后，上面的所有Pod都会被删除
+- 类型
+    + 单容器模型。由于Pod是Kubernetes可识别的最小对象，Kubernetes管理调度Pod而不是直接管理容器，所以即使只有一个容器也需要封装到Pod里。
+    + 多容器模型：Pod可以容纳多个紧密关联的容器以共享Pod里的资源。这些容器作为单一的，凝聚在一起的服务单元工作。可以形成单一的内部Service
+- 共享资源
+    + 网络资源:每个Pod被分配一个独立的IP地址，Pod中的每个容器共享网络命名空间，包括IP地址和网络端口
+        * Pod内的容器可以使用localhost相互通信
+        * 与Pod外部通信时，必须协调如何使用共享网络资源
+        * 相同的IP
+    + 存储: Pod可以指定一组共享存储Volumes，Pod中的所有容器都可以访问共享Volumes允许这些容器共享数据。Volumes还用于Pod中的数据持久化，以防其中一个容器需要重新启动而丢失数据
+    + 应用到Pod上的自定义配置
+- 创建
+    + 因为Pod不会自愈，如果Node节点有故障这个Pod就会被删除，或者Node节点缺少资源情况下Pod也会被删除
+    + 建议采用相关Controller来创建Pod而不是直接创建Pod，因为单独的Pod没有办法自愈，而Controller却可以，可用Controller
+        * Job: 使用Job运行预期会结束的Pod，例如批量计算，Job仅适用于重启策略为OnFailure或Never的Pod。
+        * Deployment、ReplicaSet、Replication Controller:预期不会终止的Pod使用这3个Controller来创建，Replication Controller仅适用于具有restartPolicy为Always的Pod。
+        * DaemonSet: 提供特定于机器的系统服务，DaemonSet为每台机器运行一个Pod
+- Pod本身不具有调度功能。如果所在的节点发生故障或者你要维护节点，则Pod是不会自动调度到其他节点了。Kubernetes用一系列控制器来解决Pod的调度问题，Deployment就是最基础的控制器。通常都是在定义的控制器的配置里通过PodTemplate定义要控制的Pod，让控制器和所管控的Pod一起被创建出来
+- spec.initContainers定义容器，都会比spec.containers定义的用户容器先启动。并且，Init容器会按顺序逐一启动，直到它们都启动并且退出了，用户容器才会启动
 
+* 一个抽象化概念，由一个或多个容器组合在一起的共享资源。根据资源的可用性，主节点会把Pod调度到特定工作节点上，并与容器运行时协调以启动容器
 * Pod:最小编排单位,里的所有容器，共享的是同一个 Network Namespace，并且可以声明共享同一个 Volume
     - 应用，哪怕再简单，也是被管理在 systemd 或者 supervisord 之下的一组进程，而不是一个进程
     - 一个容器，就是一个进程
@@ -690,10 +676,6 @@ kubectl get pvc -n namespace_name
         + NodeSelector：是一个供用户将 Pod 与 Node 进行绑定的字段
         + NodeName：一旦 Pod 的这个字段被赋值，Kubernetes 项目就会被认为这个 Pod 已经经过了调度，调度的结果就是赋值的节点名字
         + HostAliases：定义了 Pod 的 hosts 文件（比如 /etc/hosts）里的内容
-* 重启策略 restartPolicy:Pod 的Spec部分的一个标准字段（pod.spec.restartPolicy），默认值是Always
-    - Always：在任何情况下，只要容器不在运行状态，就自动重启容器；
-    - OnFailure: 只在容器 异常时才自动重启容器；
-    - Never: 从来不重启容器。
 * 实现自我修复:放在Pod里的健康检查处理程序叫做探针（Probe）
     - Liveness：活性检查，kubelet使用活性探针（livenessProbe）的返回状态作为重新启动容器的依据。一个Liveness探针用于在应用运行时检测容器的问题。容器进入此状态后，Pod所在节点的kubelet可以通过Pod策略来重启容器。
     - Readiness：就绪检查，这种类型的探测（readinessProbe）用于检测容器是否准备好接受流量。可以使用这种探针来管理哪些Pod会被用作服务的后端。如果Pod尚未准备就绪，则将其从服务的后端列表中删除。
@@ -701,12 +683,55 @@ kubectl get pvc -n namespace_name
     - Exec：在容器内执行命令。
     - TCPSocket：对指定端口上，容器的IP地址执行TCP检查。
     - HTTPGet：在容器的IP上执行HTTP GET请求
-* 返回状态也分为三种：
-    - Success：容器通过诊断。
-    - Failed：容器无法通过诊断。
-    - Unknown：诊断失败，状态不确定，将不采取任何措施。
+* 生命周期
+    - Pending: 挂起,Pod已经被K8s系统接受，但有一个或者多个容器镜像尚未创建，等待时间包括下载镜像时间和Pod调度时间
+    - Running: 运行中，该Pod已经绑定到一个Node上，Pod中所有容器都已被创建，至少有一个容器正在运行，或者正处于启动或重启状态
+    - Succeed: 成功，Pod中所有容器都被成功结束，并且不会再重启
+    - Failed: 失败，Pod中所有容器都终止了，并且至少有一个容器因为失败而终止
+    - Unknown: 未知，因为某些原因无法取得Pod的状态，通常是因为Pod与所在Node通信失败
+* 业务型别可以分为长期伺服型（long-running）、批处理型（batch）、节点后台支撑型（node-daemon）和有状态应用型（stateful application）四种类型，由不同类别的Pod控制器来完成
+    - Deployment: 复制控制器（Replication Controller，RC）是集群中最早的保证Pod高可用的API物件，副本集（Replica Set，RS）是它的升级，能支援更多种类的匹配模式。部署(Deployment)又是比RS应用模式更广的API物件，以Kubernetes的发展方向，未来对所有长期伺服型的的业务的管理，都会通过Deployment来管理。
+        + Service： Deployment保证了Pod的数量，但是没有解决如何访问Pod的问题，一个Pod只是一个执行服务的选项，随时可能在一个节点上停止，在另一个节点以一个新的IP启动一个新的Pod ，因此不能以确定的IP和端口号提供服务。要稳定地提供服务需要服务发现和负载均衡能力，Service可以稳定为使用者提供服务。
+    - Job：用来控制批处理型任务，Job管理的Pod根据使用者的设定把任务成功完成就自动退出了。
+    - DaemonSet：后台支撑型服务的核心关注点在集群中的Node，要保证每个Node上都有一个此类Pod在运行。比如用来收集日志的Pod
+    - StatefulSet： 提供有状态的服务，StatefulSet中Pod的名字都是事先确定的，不能更改，每个Pod挂载自己独立的储存，如果一个Pod出现故障，从其他节点启动一个同样名字的Pod，要挂载上原来Pod的储存继续以它的状态提供服务。比如数据库服务MySQL，不希望一个Pod故障后，MySQL中的数据即丢失
+
 
 ```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-2
+spec:
+  initContainers:
+  - image: kevinyan/front-app:v2
+    name: front
+    command: ["cp", "/www/application/*", "/app"]
+    volumeMounts:
+    - mountPath: /app
+      name: app-volume
+  containers:
+
+    name: container-writing-dates # 第一个容器的名称
+    image: alpine # 容器的镜像
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do date >> /var/log/output.txt; sleep 10;done"] # 每10秒写入当前时间
+    volumeMounts:
+    - name: shared-date-logs
+      mountPath: /var/log # 将数据卷挂在到容器的/var/log目录
+
+-   name: container-serving-dates
+  - image: nginx:1.7.9
+    name: nginx
+    ports:
+      - containerPort: 80 # 定义容器提供服务的端口
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: app-volume
+  volumes:
+  - name: app-volume
+    emptyDir: {}
+
     livenessProbe:
       exec:
         command:
@@ -736,7 +761,64 @@ kubectl get pvc -n namespace_name
          path: /
          port: 8080
        timeoutSeconds: 2
+
+kubectl get pods
+kubectl describe pod podName
+
+kubectl exec first-pod -- service nginx status
+kubectl delete pod first-pod
+kubectl exec -it multi-container-pod -c container-serving-dates -- bash
 ```
+
+## ReplicaSet (RS):下一代Replication Controller
+
+* ReplicaSet和Replication Controller唯一区别是现在选择器支持不同，官方推荐ReplicaSet,大多数kubectl支持Replication Controller的命令也支持ReplicaSet
+* 保证系统当前正在运行Pod数等于期望状态里指定Pod数目
+* 主要是被Deployment做为协调Pod创建、删除和更新的机制，建议使用Deployment控制器而不是直接使用ReplicaSet
+* 管理Pod:通过标签选择器（Label-Selector）管理所有带有与选择器匹配的标签的容器
+    - 如果使用相同的标签选择器创建另一个ReplicaSet，则之前的ReplicaSet会认为是它创建了这些Pod，会触发控制循环里的逻辑删掉多余的Pod，新的ReplicSet又会再次创建Pod。双方的当前状态始终不等于期望状态，这就会引发问题，因此**确保ReplicaSet标签选择器的唯一性**这一点很重要
+    - 在.spec.selector中定义的标签选择器必须能够匹配到spec.template.metadata.labels里定义的Pod标签，否则Kubernetes将不允许创建ReplicaSet
+* 一个 ReplicaSet 对象，由副本数目定义和一个 Pod 模板组成
+    - 滚动更新
+    - template :PodTemplate（Pod 模板）
+    - 怎么多版本共存
+
+```
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: some-name
+  labels:
+    app: some-App
+    tier: some-Tier
+spec:
+  replicas: 3 # 告诉k8s需要多少副本
+  Selector: # 用于匹配Pod的标签选择器
+    matchLabels:
+      tier: someTier
+  template:
+    metadata:
+      labels:
+        app: some-App
+        tier: someTier
+    spec: # 与Pod对象的spec定义类似
+      Containers:
+
+kubectl create -f replica.yaml
+kubectl get replicaset
+kubectl get pod
+kubectl describe replicaset myapp-replicas
+```
+
+## Deployment
+
+* 一个管理ReplicaSet并提供Pod声明式更新、应用的版本管理以及许多其他功能的更高级的控制器
+* 虚拟化部署:允许在单个物理服务器上创建隔离的虚拟环境，即虚拟机（VM）。该解决方案隔离了VM中的应用程序，限制了资源的使用并提高了安全性。一个应用程序不能再自由访问另一个应用程序处理的信息.快速扩展并分散单个物理服务器的资源，随意更新并控制硬件成本。每个VM都有其操作系统，并且可以在虚拟化硬件之上运行所有必要的系统
+* 容器化部署:多个应用程序可以共享相同的基础操作系统
+* Deployment控制器不直接管理Pod对象，而是由 Deployment 管理ReplicaSet，再由ReplicaSet负责管理Pod对象
+    - 通过 ReplicaSet 的个数来描述应用的版本
+    - 通过 ReplicaSet 的属性（比如 replicas 的值），来保证 Pod 的副本数量
+* Deployment是一个更高层次的概念，管理ReplicaSet，并提供对pod的声明性更新以及许多其他的功能。因此，建议使用Deployment而不是直接使用ReplicaSet。这实际上意味着可能永远不需要操作ReplicaSet对象，而是直接使用Deployment并在规范部分定义应用程序
 
 ## Service
 
@@ -751,19 +833,6 @@ kubectl get pvc -n namespace_name
             * Headless Service：访问“my-svc.my-namespace.svc.cluster.local”解析到的，直接就是 my-svc 代理的某一个 Pod 的 IP 地址。不需要分配一个 VIP，而是可以直接以 DNS 记录的方式解析出被代理 Pod 的 IP 地址
     - Headless Service 所代理的所有 Pod 的 IP 地址，都会被绑定一个格式 `<pod-name>.<svc-name>.<namespace>.svc.cluster.local>` DNS
 
-
-## Deployment
-
-* 虚拟化部署:允许在单个物理服务器上创建隔离的虚拟环境，即虚拟机（VM）。该解决方案隔离了VM中的应用程序，限制了资源的使用并提高了安全性。一个应用程序不能再自由访问另一个应用程序处理的信息.快速扩展并分散单个物理服务器的资源，随意更新并控制硬件成本。每个VM都有其操作系统，并且可以在虚拟化硬件之上运行所有必要的系统
-* 容器化部署:多个应用程序可以共享相同的基础操作系统,
-* Deployment
-    - 操纵 ReplicaSet 对象，而不是 Pod,实现版本更新,两层控制器
-        + 通过 ReplicaSet 的个数来描述应用的版本
-        + 通过 ReplicaSet 的属性（比如 replicas 的值），来保证 Pod 的副本数量
-    - 一个 ReplicaSet 对象，由副本数目的定义和一个 Pod 模板组成的
-    - 滚动更新
-    - template :PodTemplate（Pod 模板）
-    - 怎么多版本共存
 
 ## API 对象
 
@@ -1134,6 +1203,8 @@ alias kcd='kubectl config set-context $(kubectl config current-context) --namesp
 
 kubectl exec -it [pod-name] -- /bin/bash # 登录到pod中(pod只有一个container的情况)
 kubectl exec -it [pod-name] --container [container-name] -- /bin/bash # 登录到pod中的某个container中（pod包含多个container）
+kubectl exec first-pod -- service nginx status
+kubectl exec -it multi-container-pod -c container-serving-dates -- bash # 进入到pod 中指定容器
 
 ## rollout 命令: 用于对资源进行管理
 kubectl rollout undo deployment/abc # 回滚到之前的deployment
