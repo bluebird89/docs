@@ -1808,7 +1808,7 @@ CREATE TABLE  People (
     - 堆表(所有的记录无序存储)
     - 聚簇索引表(所有的记录，按照记录主键进行排序存储)
 * MEMORY
-    - 存储在Memory数据表里的数据用的是长度不变的格式，意味着不能用BLOB和TEXT这样的长度可变的数据类型，VARCHAR是种长度可变的类型，但因为在MySQL内部当做长度固定不变的CHAR类型，所以可以使用
+    - 存储在Memory数据表里数据用的是长度不变的格式，意味着不能用BLOB和TEXT这样的长度可变的数据类型，VARCHAR是种长度可变的类型，但因为在MySQL内部当做长度固定不变的CHAR类型，所以可以使用
     - 特性
         + 数据都保存在内存中，不需要进行磁盘I/O
         + 支持 Hash 索引和B树索引
@@ -1875,14 +1875,19 @@ CREATE TABLE  People (
         + 共享表空间存储
             * 表结构保存在 .frm 文件中
             * 数据和索引在 `innodb_data_home_dir` 和 ` innodb_data_file_path`定义的表空间中，可以是多个文件
-        + 多表空间存储：
+        + 多表空间存储
             * 表结构保存在 .frm 文件中
-            * 每个表的数据和索引单独保存在 .ibd 中
+            * 每个表的数据和索引单独保存在 .ibd 中,这个文件被分为N个段。每个段都与一个索引相关联
+                - 文件不会因删除数据而收缩，段本身会增长或收缩
+                - 下一级为区。一个区仅存在一个段中，并且固定尺寸为1MB（在默认页大小的情况下）。
+                - 页是区的下一级，默认大小为16KB
+                - 一个区最多可包含64页。一个页可以包含2到N行。一个页可以容纳的行数与行大小有关，这是表结构设计时定义的。
+                - InnoDB中有一个规则，至少要在一个页中容纳两行。因此，行大小限制为8000字节
         +  InnoDB 会根据主键 ID 作为 KEY 建立索引 B+树，B+树的叶子节点存储的是主键 ID 对应的数据。建表的时候 InnoDB 就会自动建立好主键 ID 索引树。是为什么 Mysql 在建表时要求必须指定主键的原因
     - 特点
-        + 插入缓冲（Insert buffer): Insert Buffer 用于非聚集索引的插入和更新操作。先判断插入的非聚集索引是否在缓存池中，如果在则直接插入，否则插入到 Insert Buffer 对象里。再以一定的频率进行 Insert Buffer 和辅助索引叶子节点的 merge 操作，将多次插入合并到一个操作中，提高对非聚集索引的插入性能。
+        + 插入缓冲（Insert buffer): Insert Buffer 用于非聚集索引的插入和更新操作。先判断插入的非聚集索引是否在缓存池中，如果在则直接插入，否则插入到 Insert Buffer 对象里。再以一定的频率进行 Insert Buffer 和辅助索引叶子节点的 merge 操作，将多次插入合并到一个操作中，提高对非聚集索引的插入性能
         + 二次写 (Double write): Double Write由两部分组成，一部分是内存中的double write buffer，大小为2MB，另一部分是物理磁盘上共享表空间连续的128个页，大小也为 2MB。在对缓冲池的脏页进行刷新时，并不直接写磁盘，而是通过 memcpy 函数将脏页先复制到内存中的该区域，之后通过doublewrite buffer再分两次，每次1MB顺序地写入共享表空间的物理磁盘上，然后马上调用fsync函数，同步磁盘，避免操作系统缓冲写带来的问题。
-        + 自适应哈希索引 (Adaptive Hash Index): InnoDB会根据访问的频率和模式，为热点页建立哈希索引，来提高查询效率。索引通过缓存池的 B+ 树页构造而来，因此建立速度很快，InnoDB存储引擎会监控对表上各个索引页的查询，如果观察到建立哈希索引可以带来速度上的提升，则建立哈希索引，所以叫做自适应哈希索引。
+        + 自适应哈希索引 (Adaptive Hash Index):InnoDB会根据访问的频率和模式，为热点页建立哈希索引，来提高查询效率。索引通过缓存池的 B+ 树页构造而来，因此建立速度很快，InnoDB存储引擎会监控对表上各个索引页的查询，如果观察到建立哈希索引可以带来速度上的提升，则建立哈希索引，所以叫做自适应哈希索引。
             * 默认开启自适应哈希索引：如果认为建立哈希索引可以提高查询效率，则自动在内存中的“自适应哈希索引缓冲区”建立哈希索引.优化的缓存：Innodb把数据和内存缓存到缓冲池 自动构建哈希索引
             * 通过观察搜索模式，MySQL会利用index key的前缀建立哈希索引，如果一个表几乎大部分都在缓冲池中，那么建立一个哈希索引能够加快等值查询
             * 在负载高的情况下，自适应哈希索引中添加的read/write锁也会带来竞争，比如高并发的join操作。like操作和%的通配符操作也不适用于自适应哈希索引，可能要关闭自适应哈希索引
@@ -1891,7 +1896,7 @@ CREATE TABLE  People (
         + 支持事务和四种事务隔离级别
         + 支持崩溃后的安全恢复:Innodb在做任何操作时，会做一个日志操作，便于恢复
         + 外键：Innodb唯一支持外键的存储引擎 create table 命令接受外键
-    - 用于在写操作比较多的时候
+    - 用于在写操作比较多
     - CPU及内存缓存页优化使得资源利用率更高（推荐）索引节点存的则是数据的主键，所以需要根据主键二次查找
     - 行级锁
         + 默认行级锁,通过给索引上的索引项加锁来实现的
@@ -1913,6 +1918,27 @@ CREATE TABLE  People (
     - 在聚集索引（主键索引）中，如果有唯一性约束，InnoDB会将默认的next-key lock降级为record lock。
     - 磁盘读取数据方式采用的可预测性预读、自动在内存中创建hash索引以加速读操作的自适应哈希索引（adaptive hash index)，以及能够加速插入操作的插入缓冲区（insert buffer)等
     - 通过一些机制和工具支持真正的热备份，MySQL 的其他存储引擎不支持热备份，要获取一致性视图需要停止对所有表的写入，而在读写混合场景中，停止写入可能也意味着停止读取。备份方式稍微复杂一点。xtradb是innodb存储引擎的增强版本，更高性能环境下的新特性。
+    - 不能以单行基础上工作(合并的基础)。InnoDB总是在页上操作。一旦页被加载，它就会扫描页以寻找所请求的行/记录
+    - [页合并和页分裂](https://mp.weixin.qq.com/s/uCtEqI9woo1_urdz9lxGCg)
+        + 删除数据时，相应的数据是先打上删除标签（deleted mark），而后再由purge线程执行清理工作。这个工作是InnoDB后台线程自动完成的，无需人为干预、控制。
+        + 页可以是空，也可以是被填充满（100%）。行记录由主键组织
+        + 页合并阈值 MERGE_THRESHOLD (默认值是页的50%)
+            * 辅助索引页：能在创建索引时一次性指定，不能中途修改
+            * 聚集索引页：表级别的合并阈值则可以在运行时修改
+            * 阈值 MERGE_THRESHOLD 无法全局设定
+        + 合并数据页
+            * 经过多次长度变小的UPDATE操作后（将varchar列长度更新变短）
+            * 如果两个相邻数据页存储填充率低于合并阈值，就会尝试合并页，以降低碎片率，提高存储效率
+            * 空出来的页就会被标记为空闲页，等待再分配
+            * 页合并的统计情况，通过查询 INNODB_METRICS 表获取到
+                - 启用metric：`set global innodb_monitor_enable="module_index";`
+                - 页合并之后查询：`SELECT NAME,COUNT,STATUS,COMMENT from INFORMATION_SCHEMA.INNODB_METRICS WHERE NAME LIKE 'index_page%merge%';`
+                - 通过监控这个metric，如果发现页合并非常频繁的话，可以考虑把 MERGE_THRESHOLD 阈值调低。但是设置太低也有风险，因为合并频率降低了，结果会导致更高的数据页碎片率
+                - 通过 INNODB_METRICS 也无法监控到具体是哪些表上的合并操作最多。因此当发现有很高合并频率时，可能需要扫描所有表，找到那些碎片率较高的表，其产生合并的"嫌疑"应该也较高。
+        + 页分裂
+            * 如果插入的记录可以容纳在该页内，则按顺序填充该页。当页已经满时，下一条记录将插入到下一页
+        + 参考
+            * [InnoDB数据页什么时候合并](https://mp.weixin.qq.com/s/jcjwWwTrRbhb-mv8D2NPKg)
     - 未压缩的索引：索引没有使用前缀压缩，阻塞auto_increment:Innodb使用表级锁产生新的auto_increment
     - 没有缓存count()
     - 不支持全文索引
@@ -1994,6 +2020,48 @@ show engine innodb status # 存储引擎的运行状态
 set global innodb_print_all_deadlocks=1; # 错误日志中查看历史发生过的死锁
 select * from information_schema.innodb_lock_waits; # 查看等待中的锁
 select * from information_schema.innodb_trx; # 查看已开启的事务
+
+ROOT NODE #3: 4 records, 68 bytes
+ NODE POINTER RECORD ≥ (id=2) → #197
+ INTERNAL NODE #197: 464 records, 7888 bytes
+ NODE POINTER RECORD ≥ (id=2) → #5
+ LEAF NODE #5: 57 records, 7524 bytes
+ RECORD: (id=2) → (uuid="884e471c-0e82-11e7-8bf6-08002734ed50", millid=139, kwatts_s=1956, date="2017-05-01", location="For beauty's pattern to succeeding men.Yet do thy", active=1, time="2017-03-21 22:05:45", strrecordtype="Wit")
+
+# 聚集索引页设置合并阈值
+ALTER TABLE t_sk COMMENT 'MERGE_THRESHOLD=40';
+# 辅助索引页指定合并阈值
+ALTER TABLE t_sk ADD INDEX k1(c1) COMMENT 'MERGE_THRESHOLD=20';
+# 查看合并阈值
+SELECT * FROM INFORMATION_SCHEMA.INNODB_SYS_INDEXES WHERE select * from information_schema.innodb_sys_Indexes where TABLE_ID = 66\G
+SHOW INDEX FROM t_sk\G；
+
+# 测试页合并
+mysql_random_data_load # 灌入一些测试数据
+# 让填充率低于30%，删除数据
+# 用 innodb_ruby 工具扫描这两个page中的数据
+innodb_space -s ibdata1 -T test/t_sk -p 7 page-records > recs-no7.txt
+Record 128: (id=252)...
+...
+Record 15143: (id=351) # 共有100条记录，其ID值从 252 ~ 351
+
+innodb_space -s ibdata1 -T test/t_sk -p 7 page-dump > dump-no7.txt
+sizes:
+  header           120
+  trailer            8
+  directory         52
+  free            1054
+  used           15330
+  record         15150
+  per record     151.00
+# 当前的数据所占字节数是：15150
+# 只剩30%填充率的字节数是：16384 * 0.3
+# 每条记录平均长度字节数是：151
+ceil((15150 - 16384 * 0.3) / 151) = 68
+
+innblock test/t_sk.ibd 7 16 | grep n_rows; innblock test/t_sk.ibd 8 16 | grep n_rows
+# 每页再删除一条，合并，8号page因为已经被合并了，被标记为空闲page，从索引树里被摘掉了
+innodb_space -s ibdata1 -T test/t_sk -I PRIMARY -l 0 index-level-summary
 ```
 
 ## 索引
@@ -2535,6 +2603,21 @@ DROP VIEW [IF EXISTS] view_name
 
 * 一致性热备
     - 热备的一个关键点是保证数据的一致性，即在备份进行时发生的数据更改，不会在备份结果中出现。
+* 执行完成后可以得到mysqld生成的general log，里面记录了mysqldump在备份过程中传给server的指令
+* 流程
+    - 连接server
+    - 两次关闭所有表，第二次关表同时加读锁
+        + 通过--lock-all-tables选项显式要求给所有表加锁。对MyISAM的表备份
+        + 通过--master-data选项要求dump出来的结果中包含binlog位置。
+        + 通过--single-transaction指定了进行单事务的一致性备份，同时通过--flush-logs要求刷新log文件。
+        + 在Percona发行版的mysqldump中，执行时可以传入一个--lock-for-backup选项，这个选项会使得mysqldump在dump之前，执行一个LOCK TABLES FOR BACKUP语句，这是一个Percona独有的query，其主要做以下几件事情：
+            * 阻塞对MyISAM, MEMORY, CSV, ARCHIVE表的更新操作；
+            * 阻塞对任何表的DDL操作；
+            * 不阻塞对临时表与log表的更新操作。
+    - 设置隔离级别为“可重复读”，开始事务并创建快照
+    - 获取当前binlog位置
+    - 解锁所有表
+    - 对指定的库与表进行dump
 * 从库mysqldump会导致复制中断
     - 分析
         + mysqldump 不加任何参数去执行，会对备份的表加表级锁。
@@ -2551,6 +2634,9 @@ mysqldump -uXXX -p osdc osdc_XXX > /tmp/osdc_info.sql；
 show variables like '%slave_parallel_workers%';
 show variables like '%innodb_lock_wait_timeout%';
 show variables like '%slave_transaction_retries%';
+
+#
+mysqldump -uroot -p --skip-opt --default-character-set=utf8  --single-transaction --master-data=2 --no-autocommit -B d1> backup.sql
 ```
 
 ## 影像复制
