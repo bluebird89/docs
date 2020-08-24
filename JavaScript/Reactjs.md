@@ -45,6 +45,8 @@ npm run eject #  导出配置文件
     - [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 http://cn.redux.js.org/
     - [rt2zz/redux-persist](https://github.com/rt2zz/redux-persist):persist and rehydrate a redux store
 * [react-query)](https://github.com/tannerlinsley/react-query):atom_symbol Hooks for fetching, caching and updating asynchronous data in React
+* Hooks
+    - [alibaba/hooks](https://github.com/alibaba/hooks):React Hooks Library https://ahooks.js.org/
 
 ## 参考
 

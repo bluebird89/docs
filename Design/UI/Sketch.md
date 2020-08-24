@@ -28,10 +28,14 @@
 * [User Flows](https://abynim.github.io/UserFlows/)Generating user flow diagrams
 * [Looper](http://sureskumar.com/looper/)generates mind-bending illustrations by duplicating shapes and groups. -
 
+## 图书
+
+* Sketch中文手册
+
 ## 工具
 
 * [lllyasviel/style2paints](https://github.com/lllyasviel/style2paints):sketch + style = paints 🎨 https://s2p.moe/
 
 ## 参考
 
-Daily UI - 100 Days of UI Challenge
+* Daily UI - 100 Days of UI Challenge

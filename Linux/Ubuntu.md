@@ -577,6 +577,7 @@ sudo apt-get install audio-recorder
   - Open Weather
   - [system-monitor](https://extensions.gnome.org/extension/120/system-monitor/)
   - dash to dock
+  - [home-sweet-gnome/dash-to-panel](https://github.com/home-sweet-gnome/dash-to-panel):An icon taskbar for the Gnome Shell. This extension moves the dash into the gnome main panel so that the application launchers and system tray are combined into a single panel, similar to that found in KDE Plasma and Windows 7+. A separate dock is no longer needed for easy access to running and favorited applications.
 * Theme `/usr/share/themes`
   - [Yaru-Colors](https://www.pling.com/s/Gnome/p/1299514/)
   - [](https://www.pling.com/s/Gnome)

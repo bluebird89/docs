@@ -2290,7 +2290,11 @@ kill -l
 * 远程登录
   - telnet
   - ssh
-  - nc:ncat：Concatenate and redirect sockets
+  - nc netcat：Concatenate and redirect sockets
+    + 实现任意 TCP/UDP 端口的侦听，增加-l 参数后，nc 可以作为 server 以 TCP 或 UDP 方式侦听指定端口
+    + 端口的扫描，nc 可以作为 client 发起 TCP 或 UDP 连接
+    + 机器之间传输文件
+    + 机器之间网络测速
 # 防火墙
   - iptables -L
 
