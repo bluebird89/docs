@@ -893,12 +893,16 @@ PFCOUNT runoobkey
 
 * 批量执行指令：客户端可以将多个命令一次性发送到服务器，然后由服务器一次性返回所有结果
 * 基于请求/响应模型，单个请求处理需要一一应答。如果需要同时执行大量命令，则每条命令都需要等待上一条命令执行完毕后才能继续执行，中间不仅仅多了 RTT，还多次使用了系统 IO
-* 批量执行命令的时候可以大大减少网络传输的开销 节省多次 IO 和请求响应往返的时间，提高性能
-* 如果指令之间存在依赖关系，则建议分批发送指令
+* 批量执行命令大大减少网络传输的开销 节省多次 IO 和请求响应往返的时间，提高性能
+* 如果指令之间存在依赖关系，建议分批发送指令
+* 实现原理是采用 FIFO(先进先出)的队列来保证数据的顺序性
 * 在RedisCluster中使用pipeline时必须满足pipeline打包的所有命令key在RedisCluster的同一个slot上
 
 ```sh
 (echo -en "PING\r\n SET w3ckey redis\r\nGET w3ckey\r\nINCR visitor\r\nINCR visitor\r\nINCR visitor\r\n"; sleep 10) | nc localhost 6379
+
+(cat data.txt| nc localhost 6379)
+cat data.txt | redis-cli --pipe
 ```
 
 ### 事务 Transactions
@@ -1221,9 +1225,99 @@ redis-server /usr/local/redis-cluster/800*/redis.conf
 /usr/local/redis/src/redis-cli -a xxx -c -h 192.168.0.60 -p 8001 shutdown # 逐个进行关闭
 ```
 
+## 协议
+
+* 客户机使用一种称为 RESP (Redis 序列化协议)的协议与 Redis 服务器通信.在发送数据的同时，它同样会去读取响应，尝试去解析
+* 一旦输入流中没有读取到更多的数据之后，就会发送一个特殊的 20 比特的 echo 命令，标识最后一个命令已经发送完毕如果在响应结果中匹配到这个相同数据后，说明本次批量发送是成功的。使用这个技巧，不需要解析发送给服务器的协议来了解我们发送了多少命令，只需要解析应答即可。
+* 在解析应答时，redis 会对解析的应答进行一个计数，在最后能够告诉用户大量插入会话向服务器传输的命令的数量。也就是上面我们使用 pipe 模式实际操作的响应结果
+
+```
+*<参数数量>  \r\n
+$<参数 1 的字节数量>  \r\n
+<参数 1 的数据> \r\n
+...
+$<参数 N 的字节数量> \r\n
+<参数 N 的数据> \r\n
+
+HSET  id  book1  book_description1
+*4\r\n
+$4\r\n
+HSET\r\n
+$2\r\n
+id\r\n
+$5\r\n
+book1\r\n
+$17\r\n
+book_description1\r\n
+```
+
+## MySQL 百万数据量级数据快速导入 Redis
+
+```sql
+DELIMITER $$
+USE `cb_mon`$$
+
+DROP PROCEDURE IF EXISTS `test_insert`$$
+CREATE DEFINER=`root`@`%` PROCEDURE `test_insert`()
+BEGIN
+
+        DECLARE i INT DEFAULT 1;
+        WHILE i<= 1000000
+            DO
+            INSERT INTO t_book(id,number,NAME,descrition)
+            VALUES (i, CONCAT("00000",i) , CONCAT('book',i)
+            , CONCAT('book_description',i));
+            SET i=i+1;
+        END WHILE ;
+        COMMIT;
+    END$$
+
+DELIMITER ;
+
+CALL test_insert();
+
+SELECT
+  CONCAT(
+    "*4\r\n",
+    "$",
+    LENGTH(redis_cmd),
+    "\r\n",
+    redis_cmd,
+    "\r\n",
+    "$",
+    LENGTH(redis_key),
+    "\r\n",
+    redis_key,
+    "\r\n",
+    "$",
+    LENGTH(hkey),
+    "\r\n",
+    hkey,
+    "\r\n",
+    "$",
+    LENGTH(hval),
+    "\r\n",
+    hval,
+    "\r"
+  )
+FROM
+  (SELECT
+    "HSET" AS redis_cmd,
+    id AS redis_key,
+    NAME AS hkey,
+    descrition AS hval
+  FROM
+    cb_mon.t_book
+  ) AS t limit 1000000
+
+docker exec -i 899fe01d4dbc mysql --default-character-set=utf8
+--skip-column-names --raw < ./redis.sql
+| docker exec -i 4c90ef506acd redis-cli --pipe
+```
+
 ## 场景
 
-* 删除与过滤:用LREM来删除评论 或者 为每个不同的过滤器使用不同的Redis列表。毕竟每个列表只有5000条项目，但Redis却能够使用非常少的内存来处理几百万条项目。
+* 删除与过滤:用LREM来删除评论或者为每个不同的过滤器使用不同的Redis列表。毕竟每个列表只有5000条项目，但Redis却能够使用非常少的内存来处理几百万条项目。
 * 按照用户投票和时间排序:`score = points / time^alpha`.每次新的新闻贴上来后，将ID添加到列表中，使用LPUSH + LTRIM，确保只取出最新的1000条项目。有一项后台任务获取这个列表，并且持续的计算这1000条新闻中每条新闻的最终得分。计算结果由ZADD命令按照新的顺序填充生成列表，老新闻则被清除。这里的关键思路是排序工作是由后台任务来完成的。
 * 当服务器处在高并发操作的时候，比如频繁地写入日志文件。可以利用消息队列实现异步处理。从而实现高性能的并发操作
 * 实时分析正在发生的情况，用于数据统计与防止垃圾邮件等

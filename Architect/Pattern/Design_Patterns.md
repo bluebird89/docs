@@ -390,7 +390,7 @@ class Captain
 * [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns)
 * [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
 * [kamranahmedse/design-patterns-for-humans](https://github.com/kamranahmedse/design-patterns-for-humans):Design Patterns for Humans™ - An ultra-simplified explanation
-* [](https://github.com/RefactoringGuru/design-patterns-php) https://refactoringguru.cn/design-patterns
+* [RefactoringGuru/design-patterns-php](https://github.com/RefactoringGuru/design-patterns-php) https://refactoringguru.cn/design-patterns
 
 * [设计模式](http://laravelacademy.org/resources/design-patterns)
 * [Repository 模式](http://laravelacademy.org/post/3063.html)

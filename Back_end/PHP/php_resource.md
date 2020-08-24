@@ -552,7 +552,7 @@ open http://127.0.0.1:8000
     - (https://github.com/ircmaxell/filterus)[Filterus]: 一个简单的PHP过滤库
     - (https://github.com/ronanguilloux/IsoCodes)[ISO-codes]: 一个验证各种ISO和ZIP编码的库(IBAN, SWIFT/BIC, BBAN, VAT, SSN, UKNIN)
     - (https://github.com/romaricdrigon/MetaYaml)[MetaYaml]: 一个支持YAML,JSON和XML的模式验证库
-    - (https://github.com/Respect/Validation)[Respect Validation]: 一个简单的验证库
+    - [Respect Validation](https://github.com/Respect/Validation): The most awesome validation engine ever created for PHP https://respect-validation.readthedocs.io/
     - (https://github.com/brandonsavage/Upload)[Upload]: 一个处理文件上传和验证的库
     - (https://github.com/vlucas/valitron)[Valitron]: 另一个验证库
     - (https://github.com/serkin/Volan)[Volan]: 另一个简单的验证库

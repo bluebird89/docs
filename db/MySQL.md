@@ -189,7 +189,11 @@ mysql_config --include
             * 多表关联的查询（INTER JOIN）:优化器会根据数据的选择性来重新决定关联的顺序，选择性高的会被置前。如果关联设计到N张表，优化器会尝试N！种的关联顺序，从中选出一种最优的排列顺序
             * 提前终止查询（比如：使用Limit时，查找到满足数量的结果集后会立即终止查询）
             * 将外连接转化成内连接
-            * 覆盖索引：索引中的列包含所有查询中需要的列的时候，只需要使用索引返回数据，不需要搜索数据行
+            * 覆盖索引：索引包含 (或覆盖) 所有需要查询的字段的值
+                - 索引条目通常远小于数据行大小，只需要读取索引，则mysql会极大地减少数据访问量
+                - 索引是按照列值顺序存储的，所以对于IO密集的范围查找会比随机从磁盘读取每一行数据的IO少很多
+                - 一些存储引擎如myisam在内存中只缓存索引，数据则依赖于操作系统来缓存，因此要访问数据需要一次系统调用
+                - innodb的聚簇索引，覆盖索引对innodb表特别有用
             * 优化排序
                 - 在老版本MySQL会使用两次传输排序，即先读取行指针和需要排序的字段在内存中对其排序，然后再根据排序结果去读取数据行
                 - 新版本采用的是单次传输排序，也就是一次读取所有的数据行，然后根据给定的列排序,对于I/O密集型应用，效率会高很多）
@@ -220,56 +224,91 @@ mysql_config --include
         + 存储引擎接口提供了非常丰富的功能，但其底层仅有几十个接口，这些接口像搭积木一样完成了一次查询的大部分操作
         + 在数据库的慢查询日志中看到一个 rows_examined 的字段，表示这个语句执行过程中扫描了多少行,这个值是在执行器每次调用引擎获取数据行的时候累加的
 * 存储层：负责数据的存储和提取，其架构模式是插件式的，支持 InnoDB、MyISAM、Memory 等多个存储引擎
-
-* 更新流程
-    - 物理日志 redo log（重做日志）
-        + redo log 是 InnoDB 引擎提供的日志系统，最开始 MySQL 里并没有 InnoDB 引擎。MySQL 自带引擎是 MyISAM，但是 MyISAM 没有 crash-safe 的能力，binlog 日志只能用于归档，不具备数据库崩溃重启后的数据恢复功能。而 InnoDB 是另一个公司以插件形式引入 MySQL 的，既然只依靠 binlog 是没有 crash-safe 能力的，所以 InnoDB 使用另外一套日志系统——也就是 redo log 来实现 crash-safe 能力。
-        + redo log 的写入拆成了两个步骤：prepare 和 commit，这就是「两阶段提交
-            * 不使用两阶段提交，会导致两份日志恢复的数据不一致：比如先写 redo log，binlog 还没有写入，数据库崩溃重启；或者先写 binlog，redo 还没有写入数据库崩溃重启，都将造成恢复数据的不一致
-            * 使用两阶段提交后，就可以保证两份日志恢复的数据一致：只有 binlog 写入成功的情况下，才会提交 redo log，否则 redo log 处于 prepare 状态，事务会回滚，这样一来，就保证了数据的一致性
-        + WAL（Write-Ahead Logging）：先写日志，再写磁盘。
-            * 当有一条记录需要更新的时候，InnoDB 引擎就会先把记录写到 redo log 里面，并更新内存，这个时候更新就算完成了。
-            * 同时，InnoDB 引擎会在适当的时候，将这个操作记录更新到磁盘里面，而这个更新往往是在系统比较空闲的时候做
-        + 有固定大小的，比如可以配置为一组 4 个文件，每个文件的大小是 1GB，那么总共就可以记录 4GB 的操作。从头开始写，写到末尾就又回到开头循环写
-        + write pos 是当前记录的位置，一边写一边后移，写到第 3 号文件末尾后就回到 0 号文件开头。checkpoint 是当前要擦除的位置，也是往后推移并且循环的，擦除记录前要把记录更新到数据文件。
-        + write pos 和 checkpoint 之间的是“粉板”上还空着的部分，可以用来记录新的操作。如果 write pos 追上 checkpoint，表示“粉板”满了，这时候不能再执行新的更新，得停下来先擦掉一些记录，把 checkpoint 推进一下。
-        + 保证即使数据库发生异常崩溃或者重启，之前提交的记录都不会丢失，可以根据这个日志记录的步骤完成未持久化到磁盘的数据更新操作，从而保证数据的一致性。这个能力称为 crash-safe
-    - 逻辑日志 binlog（归档日志）
-        + 数量
-            * binlog的最大序号是 pow(2,31)-1 = 2147483647。
-            * 当序号接近这个值，且差距小于 1000 时（也就是序号大于 2147482647 时），就开始向error log中写入警告。
-            * 当序号达到最大值时，mysqld 进程直接退出。
-            * 生成新的binlog时，会扫描当前已存在的binlog文件，最终取得最大序号值。因此，如果binlog文件数目特别多的话，是会影响MySQL的启动及日志切换效率的。
-            * 由此可见有两个隐患，当binlog文件数目过大，会导致binlog切换效率较低。当binlog文件最大序号快达到最大值时，离mysqld进程挂掉就不远了，需要加急处理。
-            * 因此，除了要监控binlog文件数目、最大序号外，还应该再error log的内容，都予以足够重视
-        + 区别
-            * redo log 是 InnoDB 引擎特有的；binlog 是 MySQL 的 Server 层实现的，所有引擎都可以使用。
-            * redo log 是物理日志，记录的是“在某个数据页上做了什么修改”；binlog 是逻辑日志，记录的是这个语句的原始逻辑，比如“给 ID=2 这一行的 c 字段加 1 ”。
-            * redo log 是循环写的，空间固定会用完；binlog 是可以追加写入的。“追加写”是指 binlog 文件写到一定大小后会切换到下一个，并不会覆盖以前的日志
-    - 两个日志是如何写入 `update T set c=c+1 where ID=2;`
-        + 执行器先找引擎取 ID=2 这一行。ID 是主键，引擎直接用树搜索找到这一行。
-        + 如果 ID=2 这一行所在的数据页本来就在内存中，就直接返回给执行器；否则，需要先从磁盘读入内存，然后再返回。
-        + 执行器拿到引擎给的行数据，把这个值加上 1，比如原来是 N，现在就是 N+1，得到新的一行数据，再调用引擎接口写入这行新数据。
-        + 引擎将这行新数据更新到内存中，同时将这个更新操作记录到 redo log 里面，此时 redo log 处于 prepare 状态。然后告知执行器执行完成了，随时可以提交事务
-        + 执行器生成这个操作的 binlog，并把 binlog 写入磁盘
-        + 执行器调用引擎的提交事务接口，引擎把刚刚写入的 redo log 改成提交（commit）状态，更新完成
-    - redo log 是循环写（后面的记录会覆盖前面的），不能持久保存全量日志，binlog 是增量写（一直追加写入），可以保存全部归档日志，因此，redo log 主要适用于数据库崩溃后重启的数据恢复，而 binlog 可用于全量备份，以及创建「数据库分身」，实现主从同步
-    - 让数据库恢复到半个月内任意一秒的状态
-        + binlog 会记录所有的逻辑操作，并且是采用“追加写”的形式。如果你的 DBA 承诺说半个月内可以恢复，那么备份系统中一定会保存最近半个月的所有 binlog
-        + 系统会定期做整库备份。这里的“定期”取决于系统的重要性，可以是一天一备，也可以是一周一备
-        + 恢复过程
-            * 找到最近的一次全量备份，如果运气好，可能就是昨天晚上的一个备份，从这个备份恢复到临时库
-            * 从备份的时间点开始，将备份的 binlog 依次取出来，重放到中午误删表之前的那个时刻
-            * 临时库就跟误删之前的线上库一样了，然后你可以把表数据从临时库取出来，按需要恢复到线上库去
-        + 如果不使用“两阶段提交”，那么数据库的状态就有可能和用它的日志恢复出来的库的状态不一致
+    - 各个数据页可以组成一个双向链表
+    - 记录都存在页里边,每个数据页中的记录又可以组成一个单向链表
+    - 每个数据页都会为存储在它里边儿的记录生成一个页目录，在通过主键查找某条记录的时候可以在页目录中使用二分法快速定位到对应的槽，然后再遍历该槽对应分组中的记录即可快速找到指定的记录
+    - 以其他列(非主键)作为搜索条件：只能从最小记录开始依次遍历单链表中的每条记录。
 
 [MySQL查询](../_static/mysql_query.png)
 [MySQL查询](../_static/innodb_log.png)
 
-
 ```sh
 show variables like '%query_cache%'
 ```
+
+## [日志实现](https://mp.weixin.qq.com/s/SVbLDtr0lGGwfKcj4O6XFg)
+
+- 物理日志 redo log（重做日志）
+    + 先写入log buffer，之后才会被刷新到磁盘的redo日志文件
+    + redo log 是 InnoDB 引擎提供的日志系统，最开始 MySQL 里并没有 InnoDB 引擎。MySQL 自带引擎是 MyISAM，但是 MyISAM 没有 crash-safe 的能力，binlog 日志只能用于归档，不具备数据库崩溃重启后的数据恢复功能。而 InnoDB 是另一个公司以插件形式引入 MySQL 的，既然只依靠 binlog 是没有 crash-safe 能力的，所以 InnoDB 使用另外一套日志系统——也就是 redo log 来实现 crash-safe 能力。
+    + 保存了对 InnoDB 表中数据的修改记录,所以也叫日志文件
+    + 在 InnoDB 存储引擎中，一般默认包括 2 个日志文件，新建数据库之后，会有名为 ib_logfile0 和 ib_logfile1 的两个文件，如果在启动数据库时，这两个文件不存在，则 InnoDB 会根据配置参数或默认值，重新创建日志文件
+    + LSN Log Sequence Number:用来精确记录日志位置信息，且是连续增长的。在 InnoDB 中，大小为 8 个字节的值，它的增长量是根据一个 MTR（mini-transaction）写入的日志量来计算的，写多少日志（单位字节），LSN 就增长多少。日志文件轮循一圈（所有日志文件是以循环方式使用的），那么 LSN 的增长量大约就是整个日志文件的大小（日志文件存在文件头等会占用一部分空间）。它是一个集逻辑意义与物理意义于一身的概念。而在有些数据库中，LSN 是一个完全逻辑的概念，每提交一个物理事务，LSN 就加 1
+    + 通过日志组来管理日志文件，是一个逻辑定义，包含若干个日志文件，一个组中的日志文件大小相等，大小通过参数来设置。现在 InnoDB 只⽀持一个日志组。在 MySQL5.5 及之前的版本中，整个日志组的容量不能大于 4GB（实际上是 3.9GB 多，因为还有一些文件头信息等），到了 MySQL 5.6.3 版本之后，整个日志组的容量可以设置得很大，最大可以达到 512GB
+        * show variables like 'datadir'
+        * 将缓冲区log buffer里面的redo日志刷新到这个两个文件里面，写入的方式 是循环写入的
+    + REDO 日志的写入，都是字节连续的，虽然看上去是多个日志文件，但理解的时候，完全可以把它想象成一个文件，对每一文件掐头去尾，把剩下的空间连接起来，就是总的日志空间了。
+    + 日志组中的每一个日志文件，都有自己的格式，内部也是按照大小相等的页面切割，但这里的页面大小是 512 个字节，由于历史的原因，考虑到机械硬盘的块大小是 512 字节，日志块大小也如此设计。这是因为写日志其实就是为了提高数据库写入吞吐量，如果每次写入是磁盘块大小的倍数，效率才是最高的，并且日志将逻辑事务对数据库的分散随机写入转化成了顺序的 512 字节整数倍数据的写入，这样就大大提高了数据库的效率。正是因为这个原因，REDO 日志才可以说是数据库管理系统与通过直接写文件来管理数据的最根本的区别之一。
+    + 普通页面中，都会有 12 个字节用来存储页面头信息，这些信息主要用于管理这个页面本身的数据存储方式。
+        - LOG_BLOCK_HDR_NO：4 个字节，一个与 LSN 有关系的块号。
+        - LOG_BLOCK_HDR_DATA_LEN：2 个字节，表示当前页面中存储的日志长度，这个值一般都等于 512-12（12 为页面头的大小），因为日志在相连的块中是连续存储的，中间不会存在空闲空间，所以如果这个长度不为 500，表示此时日志已经扫描完成（Crash Recovery 的工作）。
+        - LOG_BLOCK_FIRST_REC_GROUP：2 个字节，表示在当前块中是不是有一个 MTR（关于这个概念的意义，会在下一节中专门介绍）的开始位置。因为一个 MTR 所产生的日志量有可能是超过一个块大小的，那么如果一个 MTR 跨多个块时，这个值就表示了这个 MTR 的开始位置究竟是在哪一个块中。如果为 0，则表示当前块的日志都属于同一个 MTR；而如果其值大于 0 并且小于上面 LOG_BLOCK_HDR_DATA_LEN 所表示的值，则说明当前块中的日志是属于两个 MTR 的，后面 MTR 的开始位置就是 LOG_BLOCK_FIRST_REC_GROUP 所表示的位置。
+        - LOG_BLOCK_CHECKPOINT_NO：4 个字节，存储的是检查点的序号。具体什么是检查点，后面会详细介绍。
+    * MTR Mini-transaction: MTR，是因为它的意义相当于一个 Mini-transaction，用来保证物理页面写入操作完整性及持久性的机制
+        - 不管读还是写，只要使用到底层 Buffer Pool 的页面，都会使用到 MTR，它是上面逻辑层与下面物理层的交互窗口，同时也是用来保证下层物理数据正确性、完整性及持久性的机制。
+        - 在访问一个文件页面的时候，系统都会将要访问的页面载入到 Buffer Pool 中，然后才可以访问这个页面，此时可以读取或更新这个页面。在这个页面不断更新变化的过程中，有一个系统一直扮演着很重要的角色，那就是日志系统。因为 InnoDB 采用的也是 LOGWRITE-AHEAD，所以所有的写操作，都会有日志记录，这样才能保证数据库事务的 ACID 特性。
+        * redo log 的写入拆成了两个步骤：prepare 和 commit，这就是两阶段提交
+            - 提交主要是将所有这个物理事务产生的日志写入到 InnoDB 日志系统的日志缓冲区中，然后等待 srvmasterthread 线程定时将日志系统的日志缓冲区中的日志数据刷到日志文件中，这会涉及日志刷盘时机的问题
+            - 日志产生的作用，是将随机页面的写入变成顺序日志的写入，从而用一个速度更快的写入来保证速度较慢的写入的完整性，以提高整体数据库的性能。其根本目的是要将随机变成顺序，所以日志的量才是一个相对固定循环使用的空间
+            - 不使用两阶段提交，会导致两份日志恢复的数据不一致：比如先写 redo log，binlog 还没有写入，数据库崩溃重启；或者先写 binlog，redo 还没有写入数据库崩溃重启，都将造成恢复数据的不一致
+            - 使用两阶段提交后，就可以保证两份日志恢复的数据一致：只有 binlog 写入成功的情况下，才会提交 redo log，否则 redo log 处于 prepare 状态，事务会回滚，这样一来，就保证了数据的一致性
+    + WAL（Write-Ahead Logging）：先写日志，再写磁盘。
+        * 当有一条记录需要更新的时候，InnoDB 引擎就会先把记录写到 redo log 里面，并更新内存，这个时候更新就算完成了。
+        * 同时，InnoDB 引擎会在适当的时候，将这个操作记录更新到磁盘里面，而这个更新往往是在系统比较空闲的时候做
+    + 有固定大小的，比如可以配置为一组 4 个文件，每个文件的大小是 1GB，那么总共就可以记录 4GB 的操作。从头开始写，写到末尾就又回到开头循环写
+    + checkpoint
+        * write pos 是当前记录的位置，一边写一边后移，写到第 3 号文件末尾后就回到 0 号文件开头。checkpoint 是当前要擦除的位置，也是往后推移并且循环的，擦除记录前要把记录更新到数据文件。
+        * write pos 和 checkpoint 之间的是“粉板”上还空着的部分，可以用来记录新的操作。如果 write pos 追上 checkpoint，表示“粉板”满了，这时候不能再执行新的更新，得停下来先擦掉一些记录，把 checkpoint 推进一下。
+        * 保证即使数据库发生异常崩溃或者重启，之前提交的记录都不会丢失，可以根据这个日志记录的步骤完成未持久化到磁盘的数据更新操作，从而保证数据的一致性。这个能力称为 crash-safe
+        * 做一次checkpoint分为两步
+            - 计算当前系统可以被覆盖的redo日志对应的lsn最大值是多少。redo日志可以被覆盖，意味着他对应的脏页被刷新到磁盘上，只要我们计算出当前系统中最早被修改的oldest_modification, 只要系统中lsn小于该节点的oldest_modification值磁盘的redo日志都是可以被覆盖的。
+            - 将lsn过程中的一些数据统计。
+    + log buffer:
+        * `show VARIABLES like 'innodb_log_buffer_size'`
+        * 什么时候刷新到硬盘
+            - log buffer空间不足。上面有指定缓冲区的内存大小，MySQL认为日志量已经占了 总容量的一半左右，就需要将这些日志刷新到磁盘上。
+            - 事务提交时。使用redo日志的目的就是将未刷新到磁盘的记录保存起来，防止丢失，如果数据提交了，我们是可以不把数据提交到磁盘的，但为了保证持久性，必须 把修改这些页面的redo日志刷新到磁盘。
+            - 后台线程不同的刷新 后台有一个线程，大概每秒都会将log buffer里面的redo日志刷新到硬盘上。
+            - checkpoint
+- 逻辑日志 binlog（归档日志）
+    + 数量
+        * binlog的最大序号是 pow(2,31)-1 = 2147483647。
+        * 当序号接近这个值，且差距小于 1000 时（也就是序号大于 2147482647 时），就开始向error log中写入警告。
+        * 当序号达到最大值时，mysqld 进程直接退出。
+        * 生成新的binlog时，会扫描当前已存在的binlog文件，最终取得最大序号值。因此，如果binlog文件数目特别多的话，是会影响MySQL的启动及日志切换效率的。
+        * 由此可见有两个隐患，当binlog文件数目过大，会导致binlog切换效率较低。当binlog文件最大序号快达到最大值时，离mysqld进程挂掉就不远了，需要加急处理。
+        * 因此，除了要监控binlog文件数目、最大序号外，还应该再error log的内容，都予以足够重视
+    + 区别
+        * redo log 是 InnoDB 引擎特有的；binlog 是 MySQL 的 Server 层实现的，所有引擎都可以使用。
+        * redo log 是物理日志，记录的是“在某个数据页上做了什么修改”；binlog 是逻辑日志，记录的是这个语句的原始逻辑，比如“给 ID=2 这一行的 c 字段加 1 ”。
+        * redo log 是循环写的，空间固定会用完；binlog 是可以追加写入的。“追加写”是指 binlog 文件写到一定大小后会切换到下一个，并不会覆盖以前的日志
+- 两个日志是如何写入 `update T set c=c+1 where ID=2;`
+    + 执行器先找引擎取 ID=2 这一行。ID 是主键，引擎直接用树搜索找到这一行。
+    + 如果 ID=2 这一行所在的数据页本来就在内存中，就直接返回给执行器；否则，需要先从磁盘读入内存，然后再返回。
+    + 执行器拿到引擎给的行数据，把这个值加上 1，比如原来是 N，现在就是 N+1，得到新的一行数据，再调用引擎接口写入这行新数据。
+    + 引擎将这行新数据更新到内存中，同时将这个更新操作记录到 redo log 里面，此时 redo log 处于 prepare 状态。然后告知执行器执行完成了，随时可以提交事务
+    + 执行器生成这个操作的 binlog，并把 binlog 写入磁盘
+    + 执行器调用引擎的提交事务接口，引擎把刚刚写入的 redo log 改成提交（commit）状态，更新完成
+- redo log 是循环写（后面的记录会覆盖前面的），不能持久保存全量日志，binlog 是增量写（一直追加写入），可以保存全部归档日志，因此，redo log 主要适用于数据库崩溃后重启的数据恢复，而 binlog 可用于全量备份，以及创建「数据库分身」，实现主从同步
+- 让数据库恢复到半个月内任意一秒的状态
+    + binlog 会记录所有的逻辑操作，并且是采用“追加写”的形式。如果你的 DBA 承诺说半个月内可以恢复，那么备份系统中一定会保存最近半个月的所有 binlog
+    + 系统会定期做整库备份。这里的“定期”取决于系统的重要性，可以是一天一备，也可以是一周一备
+    + 恢复过程
+        * 找到最近的一次全量备份，如果运气好，可能就是昨天晚上的一个备份，从这个备份恢复到临时库
+        * 从备份的时间点开始，将备份的 binlog 依次取出来，重放到中午误删表之前的那个时刻
+        * 临时库就跟误删之前的线上库一样了，然后你可以把表数据从临时库取出来，按需要恢复到线上库去
+    + 如果不使用“两阶段提交”，那么数据库的状态就有可能和用它的日志恢复出来的库的状态不一致
+
 
 ### 配置
 
@@ -412,8 +451,16 @@ select now();
 select curtime();
 ```
 
-### 权限管理
+### 权限控制
 
+* 账户信息保存在 mysql.user
+* GRANT 和 REVOKE 可在几个层次上控制访问权限：
+    - 整个服务器，使用 GRANT ALL 和 REVOKE ALL；
+    - 整个数据库，使用 ON database.*；
+    - 特定的表，使用 ON database.table；
+    - 特定的列；
+    - 特定的存储过程。
+* 新创建的账户没有任何权限
 * 权限列表
     - ALL [PRIVILEGES]    -- 设置除GRANT OPTION之外的所有简单权限
     - ALTER    -- 允许使用ALTER TABLE
@@ -460,6 +507,8 @@ FLUSH PRIVILEGES;
 
 ALTER USER `root`@`localhost` IDENTIFIED WITH caching_sha2_password BY 'password';
 RENAME USER old_user TO new_user;
+UPDATE user SET user='newuser' WHERE user='myuser';
+FLUSH PRIVILEGES;
 
 select user(); # 当前连接数据库的用户
 
@@ -626,6 +675,7 @@ CREATE TABLE lnmp (
 );
 INSERT INTO `lnmp` (category, tags) VALUES ('{"id": 1, "name": "lnmp.cn"}', '[1, 2, 3]');
 INSERT INTO `lnmp` (category, tags) VALUES (JSON_OBJECT("id", 2, "name", "php.net"), JSON_ARRAY(1, 3, 5));
+INSERT INTO user(username) SELECT name FROM account;
 SELECT id, category->'$.id', category->'$.name', tags->'$[0]', tags->'$[2]' FROM lnmp;
 SELECT id, JSON_UNQUOTE(category->'$.name'), category->>'$.name' FROM lnmp;
 
@@ -825,9 +875,16 @@ SELECT
     + 声明字段时，用 primary key 标识，也可以在字段列表之后声明
         - `create table tab ( id int, stu varchar(10), primary key (id));`
         * 复合主键（联合主键）`create table tab ( id int, stu varchar(10), age int, primary key (stu, age));`每一条新增都需要判断是否重复，而数据量一旦增大，每次新增都需要全表筛查
-- unique 唯一索引（唯一约束） 使得某字段的值也不能重复
-- NOT NULL | NULL(默认)：字段值是否可以为空
-- DEFAULT value：默认值属性
+* 约束:SQL 约束用于规定表中的数据规则
+    - 如果存在违反约束的数据行为，行为会被约束终止。
+    - 约束可以在创建表时规定（通过 CREATE TABLE 语句），或者在表创建之后规定（通过 ALTER TABLE 语句）
+    - 类型
+        * unique 唯一索引（唯一约束） 使得某字段的值也不能重复
+        * NOT NULL | NULL(默认)：字段值是否可以为空
+        * PRIMARY KEY - NOT NULL 和 UNIQUE 的结合。确保某列（或两个列多个列的结合）有唯一标识，有助于更容易更快速地找到表中的一个特定的记录。
+        * FOREIGN KEY - 保证一个表中的数据匹配另一个表中的值的参照完整性。
+        * CHECK - 保证列中的值符合指定的条件。
+        * DEFAULT - 规定没有给列赋值时的默认值。
 - AUTO_INCREMENT，指定列的值是自动增长型
     + 一个数据表，只能有一个主键和一个自动增长型
     + 自动增长必须为索引（主键或unique）
@@ -885,13 +942,24 @@ CREATE TABLE IF NOT EXISTS test.news(
   adddate int(16) not null comment '添加时间',
   PRIMARY KEY (Id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 collate=utf8_bin;
+
+CREATE TABLE Users (
+  Id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增Id',
+  Username VARCHAR(64) NOT NULL UNIQUE DEFAULT 'default' COMMENT '用户名',
+  Password VARCHAR(64) NOT NULL DEFAULT 'default' COMMENT '密码',
+  Email VARCHAR(64) NOT NULL DEFAULT 'default' COMMENT '邮箱地址',
+  Enabled TINYINT(4) DEFAULT NULL COMMENT '是否有效',
+  PRIMARY KEY (Id)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+
 CREATE TABLE table_name SELECT column1,cloumn2 FROM another_table: # 复制数据不复制主键
 CREATE TABLE table_name like another_table；  #  复制表结构 数据不复制，主键复制
+CREATE TABLE vip_user AS SELECT * FROM user;
 INSERT office_dup SELECT * FROM offices; # 一定要确保table offices后面的where，order或者其他条件，都需要有对应的索引，来避免出现table offices 全部记录被锁定的情况
 
 ALTER TABLE table_name ADD address varchar(30) first| after name;
 ALTER TABLE table_name CHANGE address add varchar(100) after id;
-ALTER TABLE table_name MODIFY address varchar(100);
+ALTER TABLE table_name MODIFY COLUMN address varchar(100);
 ALTER TABLE table_name change wage salary decimal(10,2);
 ALTER TABLE table_name DROP column address;
 ALTER TABLE table_name ENGINE=MYISAM;
@@ -982,50 +1050,38 @@ ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和
         + _ :一个字符
         + [charlist] 字符列中的任何单一字符
         + [^charlist]或[!charlist] 不在字符列中的任何单一字符 WHERE name REGEXP '^[GFs]'；name REGEXP '^[^A-H]'
-* ORDER BY `order by 排序字段/别名 ASC|DESC [,排序字段/别名 排序方式] ...`
+* ORDER BY `order by 排序字段/别名 ASC|DESC [,排序字段/别名 排序方式] ...` 用于对结果集进行排序
     - DESC 会按照字段进行降序排列
     - ASC 会按照字段进行升序排列，默认会使用升序排列
+    - 以按多个列进行排序，并且为每个列指定不同的排序方式
     - ORDER BY 联合指的是如果 ORDER BY 后面的字段是联合索引覆盖 where 条件之后的一个字段，由于索引已经处于有序状态，MySQL 就会直接从索引上读取有序的数据，然后在磁盘上读取数据之后按照该顺序组织数据，从而减少了对磁盘数据进行排序的操作。
     - 对于未覆盖 ORDER BY 的查询，其有一项 Creating sort index，即为磁盘数据进行排序的耗时最高；对于覆盖 ORDER BY 的查询，其就不需要进行排序，而其耗时主要体现在从磁盘上拉取数据的过程
 * limit 子句，限制结果数量子句 `imit 起始位置, 获取条数` 从表记录的指定位置开始取
     - 仅对处理好的结果进行数量限制。将处理好的结果的看作是一个集合，按照记录出现的顺序，索引从0开始。
     - 省略第一个参数，表示从索引0开始
-* having 子句：条件子句 表示对分类后的结果再进行条件的过滤
+* having 子句：对汇总的 GROUP BY 结果进行过滤
     - 与 where 功能、用法相同，执行时机不同
-    - where 在开始时执行检测数据，对原数据进行过滤;having 对筛选出的结果再次进行过滤
-    - having 字段必须是查询出来的，where 字段必须是数据表存在的
-    - where 不可以使用字段别名，having 可以。因为执行WHERE代码时，可能尚未确定列值
-    - where 不可以使用合计函数。一般需用合计函数才会用 having
-    - SQL标准要求HAVING必须引用GROUP BY子句中的列或用于合计函数中的列
-* group by 子句:分组子句 表示对分类聚合的字段进行分组 `group by 字段/别名 ASC|DESC`, [合计函数]配合 group by 使用
-    - count 返回不同的非NULL值数目，count(*)、count(字段)
-    - sum 求和
-    - max 求最大值
-    - min 求最小值
-    - avg 求平均值
+        + WHERE 和 HAVING 都是用于过滤
+        + HAVING 适用于汇总的组记录；而 WHERE 适用于单个记录
+        + where 在开始时执行检测数据，对原数据进行过滤;having 对筛选出的结果再次进行过滤
+        + having 字段必须是查询出来的，where 字段必须是数据表存在的
+        + where 不可以使用字段别名，having 可以。因为执行WHERE代码时，可能尚未确定列值
+        + where 不可以使用合计函数。一般需用合计函数才会用 having
+    - 要求存在一个 GROUP BY 子句中的列或用于合计函数中的列
+* GROUP BY 子句:分组子句 表示对分类聚合的字段进行分组 `group by 字段/别名 ASC|DESC`,
+    - GROUP BY 子句将记录分组到汇总行中。
+    - GROUP BY 为每个组返回一个记录。
+    - 聚合
+        + count 返回不同的非NULL值数目，count(*)、count(字段)
+        + sum 求和
+        + max 求最大值
+        + min 求最小值
+        + avg 求平均值
+    - GROUP BY 可以按一列或多列进行分组。
+    - GROUP BY 按分组字段进行排序后，ORDER BY 可以以汇总字段来进行排序
     - group_concat 返回带有来自一个组的连接的非NULL值的字符串结果。组内字符串连接
+    - [合计函数]配合 group by 使用
 * with：表示对汇总之后的记录进行再次汇总
-
-* 子查询:查询条件是另一个 SQL 语句的查询结果，用括号包裹，子查询有一些关键字比如 「in、not in、=、!=、exists、not exists」
-    - from型:from后要求是一个表，必须给子查询结果取个别名 `select * from (select * from tb where id>0) as subfrom where id>1;`
-        + 简化每个查询内的条件
-        + from型需将结果生成一个临时表格，可用以原表的锁定的释放
-        + 子查询返回一个表，表型子查询
-    - where型 `select * from tb where money = (select max(money) from tb);`
-        + 子查询返回一个值，标量子查询
-        + 不需要给子查询取别名
-        + where子查询内的表，不能直接用以更新
-            * 列子查询
-                - 如果子查询结果返回的是一列,使用 in 或 not in 完成查询
-                - exists 和 not exists 条件 如果子查询返回数据，则返回1或0。常用于判断条件。`select column1 from t1 where exists (select * from t2);`
-            * 行子查询:用于与对能返回两个或两个以上列的子查询进行比较
-                - 查询条件是一个行。`select * from t1 where (id, gender) in (select id, gender from t2);`
-                - 行构造符：(col1, col2, ...) 或 ROW(col1, col2, ...)
-            * 特殊运算符
-                - != all()    相当于 not in
-                - = some()    相当于 in。any 是 some 的别名
-                - != some()    不等同于 not in，不等于其中某一个
-                - all, some 可以配合其他运算符一起使用
 
 ```sql
 SELECT [DISTINCT] 字段列表|* FROM table_name [WHERE条件][ORDER BY 排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
@@ -1109,6 +1165,12 @@ and 主键ID not in (select min(主键ID) from 表名 group by 字段名 having 
 # 多个字段
 delete from 表名 别名 where (别名.字段1,别名.字段2) in (select 字段1,字段2 from 表名 group by 字段1,字段2 having count(*) > 1)
 and 主键ID not in (select min(主键ID) from 表名 group by 字段1,字段2 having count(*)>1)
+
+SELECT * FROM products ORDER BY prod_price DESC, prod_name ASC;
+SELECT cust_name, COUNT(cust_address) AS addr_num FROM Customers GROUP BY cust_name;
+SELECT cust_name, COUNT(cust_address) AS addr_num FROM Customers GROUP BY cust_name ORDER BY cust_name DESC;
+
+SELECT cust_name, COUNT(*) AS num FROM Customers WHERE cust_email IS NOT NULL GROUP BY cust_name HAVING COUNT(*) >= 1;
 ```
 
 ```sql
@@ -1360,23 +1422,75 @@ UPDATE categories SET
 WHERE id IN (1,2,3)
 ```
 
-## 关联查询
+## 子查询
+
+* 嵌套在较大查询中的 SQL 查询.查询也称为内部查询或内部选择，而包含子查询的语句也称为外部查询或外部选择
+    - 可以嵌套在 SELECT，INSERT，UPDATE 或 DELETE 语句内或另一个子查询中。
+    - 通常会在另一个 SELECT 语句的 WHERE 子句中添加。
+    - 可以使用比较运算符，如 >，<，或 =。比较运算符也可以是多行运算符，如 IN，BETWEEN,ANY 或 ALL。
+    - 必须被圆括号 () 括起来
+    - 内部查询首先在其父查询之前执行，以便可以将内部查询的结果传递给外部查询
+* from型:from后要求是一个表，必须给子查询结果取个别名 `select * from (select * from tb where id>0) as subfrom where id>1;`
+    - 简化每个查询内的条件
+    - from型需将结果生成一个临时表格，可用以原表的锁定的释放
+    - 子查询返回一个表，表型子查询
+* where型 `select * from tb where money = (select max(money) from tb);`
+    - 用于过滤记录，即缩小访问数据的范围。
+    - 跟一个返回 true 或 false 的条件。
+    - 与 SELECT，UPDATE 和 DELETE 一起使用。
+    - 逻辑处理指令
+        + AND 优先级高于 OR，为了明确处理顺序，可以使用 ()。
+        + AND 操作符表示左右条件都要满足。
+        + OR 操作符表示左右条件满足任意一个即可。
+        + NOT 操作符用于否定一个条件。
+    - 运算符
+        + != all()    相当于 not in
+        + = some()    相当于 in。any 是 some 的别名
+        + != some()    不等同于 not in，不等于其中某一个
+        + all, some 可以配合其他运算符一起使用
+    - LIKE：确定字符串是否匹配模式
+        + 只有字段是文本值时才使用 LIKE。
+        + 支持两个通配符匹配选项：% 和 _。
+        + 不要滥用通配符，通配符位于开头处匹配会非常慢。
+        + % 表示任何字符出现任意次数。`WHERE prod_name LIKE '%bean bag%';`
+        + _ 表示任何字符出现一次 `WHERE prod_name LIKE '__ inch teddy bear';`
+    - 不需要给子查询取别名
+    - where子查询内的表，不能直接用以更新
+
+    - 标量子查询:子查询返回一个值
+    - 列子查询
+        + 如果子查询结果返回的是一列,使用 in 或 not in 完成查询
+        + exists 和 not exists 条件 如果子查询返回数据，则返回1或0。常用于判断条件。`select column1 from t1 where exists (select * from t2);`
+        + in｜not in：在指定的几个特定值中任选一个值
+        + BETWEEN 选取介于某个范围内的值
+    - 行子查询:用于与对能返回两个或两个以上列的子查询进行比较
+        + 查询条件是一个行`select * from t1 where (id, gender) in (select id, gender from t2);`
+        + 行构造符：(col1, col2, ...) 或 ROW(col1, col2, ...)
+
+## 连接
 
 * 连接查询：将多个表的字段通过指定连接条件进行连接
     - 公共字段名字可以不一样，数据类型必须一样
     - 联表查询降低查询速度
     - 数据冗余与查询速度的平衡
-* 内连接 (inner)join（默认）：两个表交集，只有数据存在时才能连接,不会出现空行
-    - on 表示连接条件。其条件表达式与where类似。也可以省略条件（表示条件永远为真）
+* 内连接 (inner)join（默认）：等值连接 两个表交集，只有数据存在时才能连接,不会出现空行,on 表示连接条件。其条件表达式与where类似。也可以省略条件（表示条件永远为真）
+    - `SELECT vend_name, prod_name, prod_price FROM vendors INNER JOIN products ON vendors.vend_id = products.vend_id;`
+    - 自然连接(natural join):把同名列通过 = 测试连接起来的，同名列可以有多个,自动判断连接条件完成连接, 相当于省略了using，会自动查找相同字段名
+        + `SELECT * FROM Products NATURAL JOIN Customers;`
+    - 自连接查询就是当前表与自身的连接查询，内连接的一种，只是连接的表是自身而已.关键点在于虚拟化出一张表给一个别名
+        + `SELECT e.empName,b.empName from t_employee e LEFT JOIN t_employee b ON e.bossId = b.id`
+        + `SELECT c1.cust_id, c1.cust_name, c1.cust_contact FROM customers c1, customers c2 WHERE c1.cust_name = c2.cust_name AND c2.cust_contact = 'Jim Jones';`
+    - 交叉连接 -- 笛卡尔乘积  cross join  n*n `select * from tch_teacher cross join tch_contact`,在没有条件语句的情况下返回笛卡尔积
+    - 内连接 vs 自然连接:内连接提供连接的列，而自然连接自动连接所有同名列。
     - where表示连接条件 `select info.id, info.name, info.stu_num, extra_info.hobby, extra_info.sex from info, extra_info where info.stu_num = extra_info.stu_id;`
     - `using(字段名)`:需字段名相同
     - 交叉连接 cross join：没有条件的内连接  `select * from tb1 cross join tb2;`
-* 外连接(outer join)
-    - 左连接 left join：以左边的表的数据为基准，去匹配右边的表的数据，如果匹配到就显示，匹配不到就显示为null，筛选出包含左表的记录并且右表没有和它匹配的记录
-    - 右连接 right join：以右边的表的数据为基准，去匹配左边的表的数据，如果匹配到就显示，匹配不到就显示为null，筛选出包含右表的记录甚至左表没有和它匹配的记录
-* 自然连接(natural join):自动判断连接条件完成连接, 相当于省略了using，会自动查找相同字段名
-* 自连接查询就是当前表与自身的连接查询，关键点在于虚拟化出一张表给一个别名 `SELECT e.empName,b.empName from t_employee e LEFT JOIN t_employee b ON e.bossId = b.id`
-* 交叉连接 -- 笛卡尔乘积  cross join  n*n `select * from tch_teacher cross join tch_contact`
+* 外连接(outer join):返回一个表中的所有行，并且仅返回来自次表中满足连接条件的那些行，即两个表中的列是相等的
+    - 左连接 left join：以左边的表的数据为基准，去匹配右边的表的数据，如果匹配到就显示，匹配不到就显示为null，保留左表没有关联的行
+        + `SELECT customers.cust_id, orders.order_num FROM customers LEFT JOIN orders ON customers.cust_id = orders.cust_id;`
+    - 右连接 right join：以右边的表的数据为基准，去匹配左边的表的数据，如果匹配到就显示，匹配不到就显示为null，保留右表没有关联的行
+        + `SELECT customers.cust_id, orders.order_num FROM customers RIGHT JOIN orders ON customers.cust_id = orders.cust_id;`
+* 连接 vs 子查询:连接可以替换子查询，并且比子查询的效率一般会更快
 
 ```sql
 # 删除重复行
@@ -1396,14 +1510,34 @@ SELECT P1.name,
   ORDER BY rank_1;
 ```
 
-## 联合查询
+## 组合（UNION）
 
-* UNION:将多个select查询结果组合成一个结果集合, `SELECT ... UNION [ALL|DISTINCT] SELECT ...`
-    - 默认 DISTINCT 方式，即所有返回行都是唯一的
-    - 建议，对每个SELECT查询加上小括号包裹
-    - ORDER BY 排序时，需加上 LIMIT 进行结合
-    - 需要各select查询的字段数量一样
-    - 每个select查询的字段列表(数量、类型)应一致，结果中字段名以第一条select语句为准
+* 将两个或更多查询的结果组合起来，并生成一个结果集，其中包含来自 UNION 中参与查询的提取行
+* 规则
+    - 所有查询的列数和列顺序必须相同。
+    - 每个查询中涉及表的列的数据类型必须相同或兼容
+    - 通常返回的列名取自第一个查询。
+* 默认会去除相同行，如果需要保留相同行，使用 UNION ALL
+* 默认 DISTINCT 方式，即所有返回行都是唯一的
+* 建议，对每个SELECT查询加上小括号包裹
+* ORDER BY 排序时，需加上 LIMIT 进行结合
+* 只能包含一个 ORDER BY 子句，并且必须位于语句的最后
+* 场景
+    - 在一个查询中从不同的表返回结构数据。
+    - 对一个表执行多个查询，按一个查询返回数据
+* JOIN vs UNION
+    - JOIN 中连接表的列可能不同，但在 UNION 中，所有查询的列数和列顺序必须相同。
+    - UNION 将查询之后的行放在一起（垂直放置），但 JOIN 将查询之后的列放在一起（水平放置），即它构成一个笛卡尔积。
+
+```sql
+SELECT cust_name, cust_contact, cust_email
+FROM customers
+WHERE cust_state IN ('IL', 'IN', 'MI')
+UNION
+SELECT cust_name, cust_contact, cust_email
+FROM customers
+WHERE cust_name = 'Fun4All';
+```
 
 ## 事务
 
@@ -1449,6 +1583,7 @@ SELECT P1.name,
 
 * MySQL默认采用自动提交AUTOCOMMIT模式（autocommit参数默认是on），作用是每一条单独的查询都是一个事务，并且自动开始，自动提交（执行完以后就自动结束了，如果要适用select for update，而不手动调用 start transaction，这个for update的行锁机制等于没用，因为行锁在自动提交后就释放了）
 * 事务隔离级别和锁机制即使不显式调用start transaction，这种机制在单独的一条查询语句中也是适用的
+* 通过 set autocommit=0 可以取消自动提交，直到 set autocommit=1 才会提交；autocommit 标记是针对每个连接而不是针对服务器的。
 * 数据定义语言（DDL）语句不能被回滚，比如创建或取消数据库的语句，和创建、取消或更改表或存储的子程序的语句
 * 两段锁协议可以保证事务的并发调度是串行化（串行化很重要，尤其是在数据恢复和备份的时候）
     - 加锁阶段
@@ -1457,6 +1592,11 @@ SELECT P1.name,
         + 加锁不成功，则事务进入等待状态，直到加锁成功才继续执行
     - 解锁阶段：当事务释放了一个封锁以后，事务进入解锁阶段
 * 尽量不要在同一个事务中使用多种存储引擎，MySQL服务器层不管理事务，事务是由下层的存储引擎实现的。如果在事务中混合使用了事务型和非事务型的表。需要回滚，非事务型的表上的变更就无法撤销，这会导致数据库处于不一致的状态，这种情况很难修复，事务的最终结果将无法确定
+* 指令
+    - START TRANSACTION - 指令用于标记事务的起始点。
+    - SAVEPOINT - 指令用于创建保留点。
+    - ROLLBACK TO - 指令用于回滚到指定的保留点；如果没有设置保留点，则回退到 START TRANSACTION 语句处。
+    - COMMIT - 提交事务。
 
 ```sql
 BEGIN | START TRANSACTION #显式地开启一个事务；
@@ -1507,6 +1647,19 @@ START TRANSACTION;
 SELECT balance FROM CMBC WHERE username='lemon';
 UPDATE CMBC SET balance = balance - 1000000.00 WHERE username = 'lemon';
 UPDATE ICBC SET balance = balance + 1000000.00 WHERE username = 'lemon';
+COMMIT;
+
+-- 开始事务
+START TRANSACTION;
+-- 插入操作 A
+INSERT INTO `user` VALUES (1, 'root1', 'root1', 'xxxx@163.com');
+-- 创建保留点 updateA
+SAVEPOINT updateA;
+-- 插入操作 B
+INSERT INTO `user` VALUES (2, 'root2', 'root2', 'xxxx@163.com');
+-- 回滚到保留点 updateA
+ROLLBACK TO updateA;
+-- 提交事务，只有操作 A 生效
 COMMIT;
 ```
 
@@ -1583,10 +1736,23 @@ COMMIT;
                 - insert
                 - update：执行当前读，然后把返回的数据加锁
                 - delete
+        + CAS compare and swap
+            * 需要读写的内存值 V
+            * 进行比较的值 A
+            * 拟写入的新值 B
         + 优缺点
             * 通过MVCC (Multi-Version Concurrency Control) ，虽然每行记录都需要额外的存储空间，更多的行检查工作以及一些额外的维护工作，但可以减少锁的使用，大多数读操作都不用加锁，读数据操作很简单，性能很好，并且也能保证只会读取到符合标准的行，也只锁住必要行。
                 - 读不加锁，读写不冲突。在读多写少的OLTP应用中，读写不冲突是非常重要的，极大的增加了系统的并发性能
             + 加大了系统的整个吞吐量。上层应用会不断的进行retry，这样反倒是降低了性能，所以这种情况下用悲观锁就比较合适
++ InnoDB存储引擎的锁的算法有三种：
+    - Record lock：单个行记录上的锁
+    - Gap lock：间隙锁，锁定一个范围，不包括记录本身
+    - Next-key lock：record+gap 锁定一个范围，包含记录本身
+    - Innodb对于行的查询使用next-key lock
+    - Next-locking keying为了解决Phantom Problem幻读问题
+    - 当查询的索引含有唯一属性时，将next-key lock降级为record key
+    - Gap锁设计的目的是为了阻止多个事务将记录插入到同一范围内，而这会导致幻读问题的产生
+    - 有两种方式显式关闭gap锁：（除了外键约束和唯一性检查外，其余情况仅使用record lock） A. 将事务隔离级别设置为RC B. 将参数innodb_locks_unsafe_for_binlog设置为1
 * LOCK TABLES 和 UNLOCK TABLES:服务器层（MySQL Server层）实现
     - LOCK TABLES 可以锁定用于当前线程的表。如果表被其他线程锁定，则当前线程会等待，直到可以获取所有锁定为止
     - UNLOCK TABLES 可以释放当前线程获得的任何锁定。当前线程执行另一个 LOCK TABLES 时，或当与服务器的连接被关闭时，所有由当前线程锁定的表被隐含地解锁
@@ -1713,17 +1879,6 @@ Unlock tables;
 * 使用B-tree索引的查询类型，很好用于全键值、键值范围或键前缀查找
     - 只有在使用了索引的最左前缀的时候才有用
     - 查找没有从索引列的最左边开始,没有什么用处;不能跳过索引的列
-* 前缀索引
-    - 索引很长的字符列，这会增加索引的存储空间以及降低索引的效率。选择字符列的前n个字符作为索引，这样可以大大节约索引空间，从而提高索引效率。
-    - 要选择足够长的前缀以保证高的选择性，同时又不能太长。
-    - 无法使用前缀索引做ORDER BY 和 GROUP BY以及使用前缀索引做覆盖扫描
-    - 索引选择性是不重复的索引值和全部行数的比值。高选择性的索引有好处，查找匹配过滤更多的行，唯一索引选择性为1最佳状态。
-    - blob列、text列及很长的varchar列，必须定义前缀索引，mysql不允许索引他们的全文
-* 联合索引：两个或更多个列上的索引
-    - 以索引 (name, city, gender) 为例，其首先是按照 name 字段顺序组织的，当 name 字段的值相同时（如 Bush），其按照 city 字段顺序组织，当 city 字段值相同时，其按照 gender 字段组织
-    - 创建索引列的顺序非常重要:正确的索引顺序依赖于使用该索引的查询方式.对于联合索引的索引顺序可以通过经验法则来帮助我们完成：将选择性最高的列放到索引最前列，该法则与前缀索引的选择性方法一致，但并不是说所有的组合索引的顺序都使用该法则就能确定，还需要根据具体的查询场景来确定具体的索引顺序。
-    - index[b,c,d]:idx_t1_bcd索引，首先按照b字段排序，b字段相同，则按照c字段排序，以此类推。记录在索引中按照[b,c,d]排序
-    - 利用索引中的附加列，可以缩小搜索的范围，但使用一个具有两列的索引不同于使用两个单独的索引。
 * B+tree,是 B 树的变体，也是一种多路平衡查找树
     - 从根节点到每个叶子节点的高度差值不超过1，而且同层级的节点间有指针相互链接，是有序的
     - 与 B 树的不同在于
@@ -1977,31 +2132,41 @@ CREATE TABLE  People (
     - 查询
         + 正常
             * 定位到记录所在的页：需要遍历双向链表，找到所在的页
-            * 从所在的页内中查找相应的记录：由于不是根据主键查询，只能遍历所在页的单链表了，在数据量很大的情况下这样查找会很慢！这样的时间复杂度为O（n）。
+            * 从所在的页内中查找相应的记录：由于不是根据主键查询，只能遍历所在页的单链表了，在数据量很大的情况下这样查找会很慢！这样的时间复杂度为O（n）
         + 索引
             * 通过 “目录” 就可以很快地定位到对应的页上了！（二分查找，时间复杂度近似为O(logn)）
 * 对比
-    - InnoDB支持事物，而MyISAM不支持事物
+    - InnoDB支持事务，而MyISAM不支持事务,查询的速度比 InnoDB 类型更快
     - InnoDB支持行级锁，而MyISAM支持表级锁
-        + InnoDB表的行锁也不是绝对的，假如在执行一个SQL语句时MySQL不能确定要扫描的范围，此时InnoDB依旧会锁全表，例如update table set num=1 where name like '%aaa%'
+        + InnoDB：支持行级锁和表级锁，默认是行级锁，行锁大幅度提高了多用户并发操作的性能。InnoDB 比较适合于插入和更新操作比较多的情况，而 MyISAM 则适用于频繁的查询的情况
+        + InnoDB 表的行锁也不是绝对的，如果在执行一个 SQL 语句时， MySQL 不能确定要扫描的范围，InnoDB 表同样会锁全表，例如： update table set num=1 where name like '%aaa%';
     - InnoDB支持MVCC, 而MyISAM不支持
     - InnoDB支持外键，而MyISAM不支持
     - InnoDB不支持全文索引，而MyISAM支持
+    - 表主键
+        + MyISAM：允许没有主键的表存在。
+        + InnoDB：如果没有主键，则会自动生成一个 6 字节的主键（用户不可见）
     - 系统奔溃后，MyISAM恢复起来更困难，能否接受
         + MyISAM最大的缺陷就是崩溃后无法安全恢复
         + 不小心update一个表的where语句写的范围不对，导致整张表都不能正常使用，这是MyISAM的优越性就体现出来了，随便从当天拷贝的压缩包中取出对应表的文件，随便放到一个数据库目录下，然后dump成SQL文件导回主库，并把对应的binlog补上
         + 如果是InnoDB就没有这么快的速度了。通常情况下一个数据库实例最小也有几个G大小
-    - MyISAM的索引和数据是分开的，索引保存的是数据文件的指针。主键索引和辅助索引是独立的。并且索引是有压缩的，这样内存使用率就提高了不少。能加载更多索引，而InnoDB是索引和数据紧密捆绑的，没有使用压缩从而会造成InnoDB比MyISAM的体积庞大不少
     - myiam索引按照行存储物理位置引用被索引的行，Innodb按照主键值引用行，通过主键索引效率很高。
+    - InnoDB 的数据文件本身就是索引文件。MyISAM 索引文件和数据文件是分离开的，索引文件仅保存数据记录的地址
+        + MyISAM 的索引文件中仅保存了数据的地址，所以在 MyISAM 中主索引和辅助索引在结构上没有本质的区别，只是主索引要求 key 的唯一性，而辅助索引的 key 是可以重复的
+        + MyISAM 的 data 域中保存的是数据记录的地址，所以 MyISAM 索引检索的算法为首先按照 B+Tree 搜索算法搜索索引，如果指定的 key 存在，则取出 data 域的值，然后以 data 域的值为地址，读取相应的数据记录
+        + MyISAM 主键索引和辅助索引是独立的，并且索引是有压缩的，这样内存使用率就提高了不少。能加载更多索引，而InnoDB是索引和数据紧密捆绑的，没有使用压缩从而会造成InnoDB比MyISAM的体积庞大不少
     - 定期导某些表的数据，用MyISAM的话会很方便，只需要发给他们对应表的frm、MYI、MYD文件，然后在对应版本的数据库中启动即可，而InnoDB则需要导出xxx.sql文件来执行
     - 对于AUTO_INCREMENT类型的字段，InnoDB中必须包含只有该字段的索引，而在MyISAM中可以和其他字段一起建立联合索引
     - DELETE FROM table时，InnoDB不会重新建立表，而是一行行删除
     - LOAD TABLE FROM MASTER操作对于InnoDB是不起作用的，解决方法是首先把InnoDB转换成MyISAM表，导入数据后再转成InnoDB表，但是对于额外的InnoDB特性（如外键）的表是不适用的
     - 和MyISAM比Insert操作的话，InnoDB还达不到MyISAM的写性能，如果是基于索引的update操作，虽然MyISAM会逊色与InnoDB，但是那么多高并发的写，从库能否追的上也是一个大问题。通常情况下会实现多实例分库分表架构来解决
     - MyISAM 查询性能更好，从索引文件数据文件的设计来看也可以看出原因：MyISAM 直接找到物理地址后就可以直接定位到数据记录，但是 InnoDB 查询到叶子节点后，还需要再查询一次主键索引树，才可以定位到具体数据
-    - SELECT COUNT(*) from table   常用于统计表的总行数，在 MyISAM  存储引擎中执行更快，前提是不能加有任何WHERE条件。包含where条件时两种表的操作是一致的
-        + 这是因为 MyISAM 对于表的行数做了优化，内部用一个变量存储了表的行数，如果查询条件没有 WHERE 条件则是查询表中一共有多少条数据，MyISAM 可以迅速返回结果，如果加 WHERE 条件就不行。
+    - SELECT COUNT(*) from table 常用于统计表的总行数，在 MyISAM  存储引擎中执行更快，前提是不能加有任何WHERE条件。包含where条件时两种表的操作是一致的
+        + 因为 MyISAM 对于表的行数做了优化，内部用一个变量存储了表的行数，如果查询条件没有 WHERE 条件则是查询表中一共有多少条数据，MyISAM 可以迅速返回结果，如果加 WHERE 条件就不行。只要简单的读出保存好的行数。因为 MyISAM 内置了一个计数器， count(*) 时它直接从计数器中读
         + InnoDB 的表也有一个存储了表行数的变量，但这个值是一个估计值，所以并没有太大实际意义。会扫描一遍整张表来计算有多少行
+* 通过记录头信息里面的nextRecord串成一条链表
+* 一页里面的很多条行记录，拆分成若干组，然后将每一组里面最后一条记录（也就是这一组内最大的那条记录）的在该页内的偏移量抽出来作为一个槽（slot），按顺序存储到当前页里面靠后的位置，作为一个页目录（page directory）
+* 页与页之间是通过双链表串起来，File header：里面有三个很重要的属性，FIL_PAGE_PREV(上一页的页号)，FIL_PAGE_NEXT(下一页的页号)，FIL_PAGE_OFFSET(页号)
 
 ```sql
 show engines; # 显示当前数据库支持的存储引擎情况
@@ -2123,23 +2288,6 @@ innodb_space -s ibdata1 -T test/t_sk -I PRIMARY -l 0 index-level-summary
     - 经常插入、删除、修改的表
     - 数据重复且分布平均的表字段，假如一个表有10万行记录，有一个字段A只有T和F两种值，且每个值的分布概率大约为50%，那么对这种表A字段建索引一般不会提高数据库的查询速度。
     - 经常和主字段一块查询但主字段索引值比较多的表字段
-* 前缀索引：一个索引可以包括15个列
-    - 两个列的值按照申明时候的顺序进行拼接后再构建索引
-    - 建立多个单列索引，查询时和上述的组合索引效率也会大不一样，远远低于我们的组合索引。虽然此时有了三个索引，但MySQL只能用到其中的那个它认为似乎是最有效率的单列索引
-    - 最左前缀（Leftmost Prefixing）。假如有一个多列索引为key(firstname lastname age)，当搜索条件是以下各种列的组合和顺序时，MySQL将使用该多列索引：firstname，lastname，age  firstname，lastname firstname
-    - (a,b,c)复合索引， ac 可以使用到索引a
-    - 联合索引前缀：在建立多列索引的时候，必须按照从左到右的顺序使用全部或部分的索引列，才能充分的使用联合索引，比如：(col1, col2, col3) 使用 (col1)、(col1, col2)、(col1, col2, col3) 有效。在查询语句中会一直向右匹配直到遇到范围查询 (>,<,BETWEEN,LIKE) 就停止匹配，其后的索引列将不会使用索引来优化查找了
-        + 以 (name, city, interest) 三个字段联合的索引为例，如果查询条件为 where name='Bush'; 那么就只需要根据 B+树定位到 name 字段第一个 Bush 所在的值，然后顺序扫描后续数据，直到找到第一个不为 Bush 的数据即可，扫描过程中将该索引片的数据 id 记录下来，最后根据 id 查询聚簇索引获取结果集。同理对于查询条件为 where name='Bush' and city='Chicago'; 的查询，MySQL 可以根据联合索引直接定位到中间灰色部分的索引片，然后获取该索引片的数据 id，最后根据 id 查询聚簇索引获取结果集。
-        + 无法跨越字段使用联合索引，如 where name='Bush' and interest='baseball';，对于该查询，name 字段是可以使用联合索引的第一个字段过滤大部分数据的，但是对于 interest 字段，其无法通过 B+ 树的特性直接定位第三个字段的索引片数据，比如这里的 baseball 可能分散在了第二条和第七条数据之中。最终，interest 字段其实进行的是覆盖索引扫描。
-        + 对于非等值条件，如 >、<、!= 等，联合索引前缀对于索引片的过滤只能到第一个使用非等值条件的字段为止，后续字段虽然在联合索引上也无法参与索引片的过滤。这里比如 where name='Bush' and city>'Chicago' and interest='baseball';，对于该查询条件，首先可以根据 name 字段过滤索引片中第一个字段的非 Bush 的数据，然后根据联合索引的第二个字段定位到索引片的 Chicago 位置，由于其是非等值条件，这里 MySQL 就会从定位的 Chicago 往下顺序扫描，由于 interest 字段是可能分散在索引第三个字段的任何位置的，因而第三个字段无法参与索引片的过滤。
-        + 使用索引对结果进行排序，需要索引的顺序和 ORDER BY 子句中的顺序一致，并且所有列的升降序一致(ASC/DESC)。如果查询连接了多个表，只有在 ORDER BY 的列引用的是第一个表才可以(需要按序 JOIN)。
-    - like 前缀:用的表达式为 `first_name like 'rMq%';`那么其是可以用到 first_name 字段的索引的
-        + 底层实际上是使用了一个补全策略来使用索引的，比如这里 first_name like 'rMq%';，MySQL 会将其补全为两条数据：rMqAAAAA 和 rMqzzzzz，后面补全部分的长度为当前字段的最大长度。在使用索引查询时，MySQL 就使用这两条数据进行索引定位，最后需要的结果集就是这两个定位点的中间部分的数据
-    - 字符串前缀:只取字符串前几个字符建立的索引。在进行查询时，如果一个字段值较长，那么为其建立索引的成本将非常高，并且查询效率也比较低，字符串前缀索引就是为了解决这一问题而存在的。字符串前缀索引主要应用在两个方面：
-        + 字段前缀部分的选择性比较高；
-        + 字段整体的选择性不太大（如果字段整体选择性比较大则可以使用哈希索引）
-        + 如何选择前缀的长度，长度选择合适时，前缀索引的过滤性将和对整个字段建立索引的选择性几乎相等。这里需要用到前面讲解的关于字段选择性的概念
-    - 如果是CHAR，VARCHAR类型，length可以小于字段实际长度；如果是BLOB和TEXT类型，必须指定 length
 * 聚簇索引(Clustered Index)
     - 聚集索引不是一种单独的索引类型，而是一种存储数据的方式."聚簇" 是指实际的数据行和相关的键值保存在一起
     - Innodb的数据文件本身就是索引文件,按 B+Tree 组织的一个索引结构，这棵树的叶节点 data 域保存了完整的数据记录,key 是数据表的主键，因此 InnoDB 表数据文件本身就是主索引
@@ -2148,7 +2296,7 @@ innodb_space -s ibdata1 -T test/t_sk -I PRIMARY -l 0 index-level-summary
         + 没有定义主键:非空的唯一索引（Unique NOT NULL）
         + 没有唯一的非空索引:自动创建一个 6 个字节大小的指针，用户不能查看或访问
     - 聚集索引可以很大程度的提高访问速度:找到了索引也就相应的找到了对应的行数据
-    - 主键的选择
+    - 主键选择
         + 最好是顺序递增
         + 注意避免随机的聚集索引（主键值不连续，且分布范围不均匀）
         + 如使用 UUID 来作为聚集索引性能会很差，因为 UUID 值的不连续会导致增加很多的索引碎片和随机I/O，最终导致查询的性能急剧下降。
@@ -2161,7 +2309,7 @@ innodb_space -s ibdata1 -T test/t_sk -I PRIMARY -l 0 index-level-summary
     - InnoDB的二级索引的叶子节点包含主键值而不是行指针(Row Pointer)，这减小了移动数据或者数据页面分裂时维护二级索引的开销，因为InnoDB不需要更新索引的行指针
     - 根据申明这个索引时候的列来构建，叶子节点存放的是这一行记录对应的主键的值，根据普通索引查询需要先在普通索引上找到对应的主键的值，然后根据主键值去聚簇索引上查找记录，俗称回表
     - data 域存储相应记录主键的值而不是地址
-* 覆盖索引(Covering Index)：如果索引包含所有满足查询需要的数据
+* 覆盖索引(Covering Index)：索引包含查询需要的数据
     - 不需要回表(读取行数据 回磁盘扫描相应的数据，从而避免了查询中最耗时的磁盘 I/O 读取)
     - InnoDB
         + 覆盖索引查询时除了索引本身的包含的列，还可以使用其默认的聚集索引列
@@ -2183,10 +2331,53 @@ innodb_space -s ibdata1 -T test/t_sk -I PRIMARY -l 0 index-level-summary
         + 不同的存储引擎实现覆盖索引不同
         + 并不是所有的存储引擎都支持它们
         + 如果要使用覆盖索引，一定要注意SELECT 列表值取出需要的列，不可以是SELECT *，因为如果将所有字段一起做索引会导致索引文件过大，查询性能下降，不能为了利用覆盖索引而这么做
+* 联合索引：两个或更多个列上的索引
+    - 以索引 (name, city, gender) 为例，其首先是按照 name 字段顺序组织的，当 name 字段的值相同时（如 Bush），其按照 city 字段顺序组织，当 city 字段值相同时，其按照 gender 字段组织
+    - 创建索引列的顺序非常重要:正确的索引顺序依赖于使用该索引的查询方式.对于联合索引的索引顺序可以通过经验法则来帮助我们完成：将选择性最高的列放到索引最前列，该法则与前缀索引的选择性方法一致，但并不是说所有的组合索引的顺序都使用该法则就能确定，还需要根据具体的查询场景来确定具体的索引顺序。
+    - index[b,c,d]:idx_t1_bcd索引，首先按照b字段排序，b字段相同，则按照c字段排序，以此类推。记录在索引中按照[b,c,d]排序
+    - 利用索引中的附加列，可以缩小搜索的范围，但使用一个具有两列的索引不同于使用两个单独的索引。
+    - 在建立多列索引的时候，必须按照从左到右的顺序使用全部或部分的索引列，才能充分的使用联合索引，比如：(col1, col2, col3) 使用 (col1)、(col1, col2)、(col1, col2, col3) 有效。在查询语句中会一直向右匹配直到遇到范围查询 (>,<,BETWEEN,LIKE) 就停止匹配，其后的索引列将不会使用索引来优化查找了
+    - 以 (name, city, interest) 三个字段联合的索引为例，如果查询条件为 where name='Bush'; 那么就只需要根据 B+树定位到 name 字段第一个 Bush 所在的值，然后顺序扫描后续数据，直到找到第一个不为 Bush 的数据即可，扫描过程中将该索引片的数据 id 记录下来，最后根据 id 查询聚簇索引获取结果集
+    - 查询条件为 where name='Bush' and city='Chicago'; 的查询，MySQL 可以根据联合索引直接定位到中间灰色部分的索引片，然后获取该索引片的数据 id，最后根据 id 查询聚簇索引获取结果集。
+    - 无法跨越字段使用联合索引，如 where name='Bush' and interest='baseball';，对于该查询，name 字段是可以使用联合索引的第一个字段过滤大部分数据的，但是对于 interest 字段，其无法通过 B+ 树的特性直接定位第三个字段的索引片数据，比如这里的 baseball 可能分散在了第二条和第七条数据之中。最终，interest 字段其实进行的是覆盖索引扫描。
+    - 对于非等值条件，如 >、<、!= 等，联合索引前缀对于索引片的过滤只能到第一个使用非等值条件的字段为止，后续字段虽然在联合索引上也无法参与索引片的过滤。这里比如 where name='Bush' and city>'Chicago' and interest='baseball';，对于该查询条件，首先可以根据 name 字段过滤索引片中第一个字段的非 Bush 的数据，然后根据联合索引的第二个字段定位到索引片的 Chicago 位置，由于其是非等值条件，这里 MySQL 就会从定位的 Chicago 往下顺序扫描，由于 interest 字段是可能分散在索引第三个字段的任何位置的，因而第三个字段无法参与索引片的过滤。
+    - 满足最左前缀，就可以利用索引来加速检索。
+        + 最左前缀可以是联合索引的最左N个字段
+        + 也可以是字符串索引的最左M个字符
+    - 使用索引对结果进行排序，需要索引的顺序和 ORDER BY 子句中的顺序一致，并且所有列的升降序一致(ASC/DESC)。如果查询连接了多个表，只有在 ORDER BY 的列引用的是第一个表才可以(需要按序 JOIN)。
+    - 索引字段的顺序需要考虑字段值去重之后的个数，较多的放前面。ORDER BY子句也遵循此规则
+    - 实例
+        + create table `geek` (`a` int(11) not null, `b` int(11) not null, `c` int(11) not null, `d` int(11) not null, primary key (`a`, `b`), key `c` (`c`), key `ca` (`c`, `a`), key `cb` (`c`, `b`), ) engine=InnoDB;
+        + 业务里面有这样的两种语句：select * from geek where c=N order by a limit 1;select * from geek where c=N order by b limit 1;
+        + 索引ca 的组织是先按 c 排序，再按 a 排序，同时记录主键，主键部分只有b，这个跟索引c的排序结果是一样的
+        + 索引cb 的组织是先按 c 排序，再按 b 排序，同时记录主键，主键部分只有a
+        + 所以，ca 可以去掉，cb 需要保留
+* 索引下推（index condition pushdown）
+    - 在索引遍历的过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，从而减少了回表的次数
+    - 表中有（name,age）索引，select * from tuser where name like '张%' and age=10 and ismale=1;
+    - 直接在索引中，直接过滤不满足条件
 * 三星索引：是对于一个查询，设立了三个通用的索引条件满足的条件，建立的索引对于特定的查询每满足一个条件就表示该索引得到一颗星，当该索引得到三颗星时
     - 取出所有的等值谓词的列 （WHERE COL=…） 作为索引开头的列；
     - 将 ORDER BY 中的列加入到索引中；
     - 将查询语句中剩余的列加入到索引中，将易变得列放到最后以降低更新成本。
+* 前缀索引：一个索引可以包括15个列
+    - 索引很长的字符列，这会增加索引的存储空间以及降低索引的效率。选择字符列的前n个字符作为索引，这样可以大大节约索引空间，从而提高索引效率。
+    - 要选择足够长的前缀以保证高的选择性，同时又不能太长。
+    - 无法使用前缀索引做ORDER BY 和 GROUP BY以及使用前缀索引做覆盖扫描
+    - 索引选择性是不重复的索引值和全部行数的比值。高选择性的索引有好处，查找匹配过滤更多的行，唯一索引选择性为1最佳状态。
+    - blob列、text列及很长的varchar列，必须定义前缀索引，mysql不允许索引他们的全文
+
+    - 两个列的值按照申明时候的顺序进行拼接后再构建索引
+    - 建立多个单列索引，查询时和上述的组合索引效率也会大不一样，远远低于我们的组合索引。虽然此时有了三个索引，但MySQL只能用到其中的那个它认为似乎是最有效率的单列索引
+    - 最左前缀（Leftmost Prefixing）。假如有一个多列索引为key(firstname lastname age)，当搜索条件是以下各种列的组合和顺序时，MySQL将使用该多列索引：firstname，lastname，age  firstname，lastname firstname
+    - (a,b,c)复合索引， ac 可以使用到索引a
+    - like 前缀:用的表达式为 `first_name like 'rMq%';`那么其是可以用到 first_name 字段的索引的
+        + 底层实际上是使用了一个补全策略来使用索引的，比如这里 first_name like 'rMq%';，MySQL 会将其补全为两条数据：rMqAAAAA 和 rMqzzzzz，后面补全部分的长度为当前字段的最大长度。在使用索引查询时，MySQL 就使用这两条数据进行索引定位，最后需要的结果集就是这两个定位点的中间部分的数据
+    - 字符串前缀:只取字符串前几个字符建立的索引。在进行查询时，如果一个字段值较长，那么为其建立索引的成本将非常高，并且查询效率也比较低，字符串前缀索引就是为了解决这一问题而存在的。字符串前缀索引主要应用在两个方面：
+        + 字段前缀部分的选择性比较高；
+        + 字段整体的选择性不太大（如果字段整体选择性比较大则可以使用哈希索引）
+        + 如何选择前缀的长度，长度选择合适时，前缀索引的过滤性将和对整个字段建立索引的选择性几乎相等。这里需要用到前面讲解的关于字段选择性的概念
+    - 如果是CHAR，VARCHAR类型，length可以小于字段实际长度；如果是BLOB和TEXT类型，必须指定 length
 * 排序：对结果集进行排序操作:每扫描一条索引记录就回表查询一次对应的行。读取操作基本上是随机I/O
     - 使用filesort
         + 排序算法
@@ -2243,6 +2434,8 @@ innodb_space -s ibdata1 -T test/t_sk -I PRIMARY -l 0 index-level-summary
     - 自增主键:test_primary_a 数据长度  960MB 62分钟插入 平均一万条数据插入 4秒
     - 自增主键/有索引 test_primary_d  数据长度  1GB  索引长度 1.36GB 75分钟插入 平均一万条数据插入 4.5秒
     - 复合主键 无索引 test_primary_c 数据长度  1.54GB 219分钟插入 平均一万条数据插入 8秒
+* 参考
+    - [MySQL实战45讲 索引部分整理](https://www.cnblogs.com/Jacian/p/12145696.html)
 
 ![clustered-index](../_static/clustered-index.jpg "clustered-index")
 
@@ -2364,12 +2557,23 @@ pt-query-digest --type=genlog localhost.log
 
 ## 存储过程（Stored Procedure）
 
-* 一种在数据库中存储复杂程序，以便外部程序调用的一种数据库对象. 数据库 SQL 语言层面的代码封装与重用
+* 对一系列 SQL 操作的批处理,一种在数据库中存储复杂程序，以便外部程序调用的一种数据库对象. 数据库 SQL 语言层面的代码封装与重用
 * 为了完成特定功能的SQL语句集，经编译创建并保存在数据库中，用户可通过指定存储过程的名字并给定参数(需要时)来调用执行
-* 可以回传值，并可以接受参数
-    - in/out参数尽量少用
 * 存储过程和默认数据库相关联，如果想指定存储过程创建在某个特定的数据库下，那么在过程名前面加数据库名做前缀
 * 创建的存储过程保存在数据库的数据字典中
+* 好处
+    - 代码封装，保证了一定的安全性；
+    - 代码复用；
+    - 由于是预先编译，因此具有很高的性能。
+    - 能实现较快的执行速度。
+    - 可以用流程控制语句编写，有很强的灵活性，可以完成复杂的判断和较复杂的运算。
+    - 可被作为一种安全机制来充分利用。
+    - 能够减少网络流量
+* 过程
+    - 命令行中创建存储过程需要自定义分隔符，因为命令行是以 ; 为结束符，而存储过程中也包含了分号，因此会错误把这部分分号当成是结束符，造成语法错误。
+    - 包含 in、out 和 inout 三种参数。
+    - 给变量赋值都需要用 select into 语句。
+    - 每次只能给一个变量赋值，不支持集合的操作
 * 过程体
     - dml、ddl语句，if-then-else和while-do语句、声明变量的declare语句
     - begin开始，以end结束(可嵌套)
@@ -2382,15 +2586,10 @@ pt-query-digest --type=genlog localhost.log
 * 参数 `IN|OUT|INOUT 参数名 数据类型`
     - IN       输入：在调用过程中，将数据输入到过程体内部的参数
     - OUT      输出：在调用过程中，将过程体处理完的结果返回到客户端
-    - INOUT    输入输出：既可输入，也可输出
+    - INOUT    输入输出：既可输入，也可输出,in/out参数尽量少用
 * 注释：--：该风格一般用于单行注释
 * 更改用 CREATE PROCEDURE 建立的预先指定的存储过程，其不会影响相关存储过程或存储功能
 * 存储函数
-* 特点
-    - 存储过程能实现较快的执行速度。
-    - 存储过程可以用流程控制语句编写，有很强的灵活性，可以完成复杂的判断和较复杂的运算。
-    - 存储过程可被作为一种安全机制来充分利用。
-    - 存储过程能够减少网络流量
 * vs 函数
     - 存储过程和函数是事先经过编译并存储在数据库中的一段 SQL 语句的集合，调用存储过程和函数可以简化应用开发人员的很多工作，减少数据在数据库和应用服务器之间的传输，对于提高数据处理的效率是有好处的。
     - 相同点
@@ -2521,18 +2720,51 @@ SHOW FUNCTION STATUS LIKE 'partten'
 SHOW CREATE FUNCTION function_name;
 ALTER PROCEDURE
 ALTER FUNCTION function_name 函数选项
+
+DROP PROCEDURE IF EXISTS `proc_adder`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_adder`(IN a int, IN b int, OUT sum int)
+BEGIN
+    DECLARE c int;
+    if a is null then set a = 0;
+    end if;
+
+    if b is null then set b = 0;
+    end if;
+
+    set sum  = a + b;
+END
+;;
+DELIMITER ;
+# 使用
+set @b=5;
+call proc_adder(2,@b,@s);
+select @s as sum;
 ```
 
 ## 触发器
 
-* 触发程序是与表有关的命名数据库对象，当该表出现特定事件时，将激活该对象监听：记录的增加、修改、删除
+* 一种与表操作有关的数据库对象，当触发器所在表上出现指定事件时，将调用该对象，即表的操作事件触发表上的触发器的执行
+* 使用触发器来进行审计跟踪，把修改记录到另外一张表中。
+* 不允许在触发器中使用 CALL 语句 ，也就是不能调用存储过程
+* 当触发器的触发条件满足时，将会执行 BEGIN 和 END 之间的触发器执行动作。
+    -  MySQL 中，分号 ; 是语句结束的标识符，遇到分号表示该段语句已经结束，MySQL 可以开始执行了。因此，解释器遇到触发器执行动作中的分号后就开始执行，然后会报错，因为没有找到和 BEGIN 匹配的 END。
+    - 这时就会用到 DELIMITER 命令（DELIMITER 是定界符，分隔符的意思）。它是一条命令，不需要语句结束标识，语法为：DELIMITER new_delemiter。new_delemiter 可以设为 1 个或多个长度的符号，默认的是分号 ;，我们可以把它修改为其他符号，如 $ - DELIMITER $ 。在这之后的语句，以分号结束，解释器不会有什么反应，只有遇到了 $，才认为是语句结束。注意，使用完之后，我们还应该记得把它给修改回来。
+* NEW 和 OLD
+    - MySQL 中定义了 NEW 和 OLD 关键字，用来表示触发器的所在表中，触发了触发器的那一行数据。
+    - 在 INSERT 型触发器中，NEW 用来表示将要（BEFORE）或已经（AFTER）插入的新数据；
+    - 在 UPDATE 型触发器中，OLD 用来表示将要或已经被修改的原数据，NEW 用来表示将要或已经修改为的新数据；
+    - 在 DELETE 型触发器中，OLD 用来表示将要或已经被删除的原数据；
+    - 使用方法： NEW.columnName （columnName 为相应数据表某一列名）
 * 参数
-    - trigger_time是触发程序的动作时间。可以是 before 或 after，以指明触发程序是在激活它的语句之前或之后触发
-    - trigger_event指明了激活触发程序的语句的类型
+    - trigger_name：触发器名
+    - trigger_time是触发程序的动作时间,before| after，指明触发程序是在激活它的语句之前或之后触发
+    - trigger_event指明了激活触发程序的语句类型
         + INSERT：将新行插入表时激活触发程序
         + UPDATE：更改某一行时激活触发程序
         + DELETE：从表中删除某一行时激活触发程序
-    - tbl_name：监听的表，必须是永久性的表，不能将触发程序与TEMPORARY表或视图关联起来。
+    - tbl_name：监听的表，必须是永久性的表，不能将触发程序与TEMPORARY表或视图关联起来
+    - FOR EACH ROW: 行级监视，Mysql 固定写法，其他 DBMS 不同。
     - trigger_stmt：当触发程序激活时执行的语句。执行多个语句，可使用BEGIN...END复合语句结构
 * 对于具有相同触发程序动作时间和事件的给定表，不能有两个触发程序
 * 可以使用old和new代替旧的和新的数据
@@ -2546,18 +2778,36 @@ ALTER FUNCTION function_name 函数选项
 * Replace 语法 如果有记录，则执行 before insert, before delete, after delete, after insert
 
 ```sql
+SHOW TRIGGERS;
 CREATE TRIGGER trigger_name trigger_time trigger_event ON tbl_name FOR EACH ROW trigger_stmt
 
 DROP TRIGGER [schema_name.]trigger_name
+
+CREATE TRIGGER trigger_name
+trigger_time
+trigger_event
+ON table_name
+FOR EACH ROW
+BEGIN
+  trigger_statements
+END;
 ```
 
 ## 视图
 
+* 定义
+    - 视图是基于 SQL 语句的结果集的可视化的表。
+    - 视图是虚拟的表，本身不包含数据，也就不能对其进行索引操作。对视图的操作和对普通表的操作一样。
 * 视图是一个虚拟表，其内容由查询定义。同真实的表一样，视图包含一系列带有名称的列和行数据,有表结构文件，并不储存数据，只包含定义时的语句的动态数据
 * 视图并不在数据库中以存储的数据值集形式存在。行和列数据来自由定义视图的查询所引用的表，并且在引用视图时动态生成
 * 对其中所引用的基础表来说，视图的作用类似于筛选。定义视图的筛选可以来自当前或其它数据库的一个或多个表，或者其它视图
+* 作用
+    - 简化复杂的 SQL 操作，比如复杂的联结；
+    - 只使用实际表的一部分数据；
+    - 通过只给用户访问视图的权限，保证数据的安全性；
+    - 更改数据格式和表示。
 * 通过视图进行查询没有任何限制，通过它们进行数据修改时的限制也很少
-* 视图是存储在数据库中的查询的sql语句，它主要出于两种原因
+* 视图是存储在数据库中的查询的sql语句，主要出于两种原因
     - 安全原因，视图可以隐藏一些数据，如：社会保险基金表，可以用视图只显示姓名，地址，而不显示社会保险号和工资数等
     - 可使复杂的查询易于理解和使用
 * 一般不修改视图，因为不是所有的更新视图都会映射到表上
@@ -2592,11 +2842,60 @@ CREATE
     AS select_statement
     [WITH [CASCADED | LOCAL] CHECK OPTION]
 
+CREATE VIEW top_10_user_view AS
+SELECT id, username
+FROM user
+WHERE id < 10;
 
 SHOW CREATE VIEW view_name；
 
 ALTER VIEW view_name [(column_list)] AS select_statement
 DROP VIEW [IF EXISTS] view_name
+```
+
+## 游标（cursor）
+
+* 一个存储在 DBMS 服务器上的数据库查询，它不是一条 SELECT 语句，而是被该语句检索出来的结果集
+* 在存储过程中使用游标可以对一个结果集进行移动遍历。
+* 游标主要用于交互式应用，其中用户需要对数据集中的任意行进行浏览和修改。
+* 步骤：
+    - 声明游标，这个过程没有实际检索出数据；
+    - 打开游标；
+    - 取出数据；
+    - 关闭游标；
+
+```sh
+DELIMITER $
+CREATE  PROCEDURE getTotal()
+BEGIN
+    DECLARE total INT;
+    -- 创建接收游标数据的变量
+    DECLARE sid INT;
+    DECLARE sname VARCHAR(10);
+    -- 创建总数变量
+    DECLARE sage INT;
+    -- 创建结束标志变量
+    DECLARE done INT DEFAULT false;
+    -- 创建游标
+    DECLARE cur CURSOR FOR SELECT id,name,age from cursor_table where age>30;
+    -- 指定游标循环结束时的返回值
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = true;
+    SET total = 0;
+    OPEN cur;
+    FETCH cur INTO sid, sname, sage;
+    WHILE(NOT done)
+    DO
+        SET total = total + 1;
+        FETCH cur INTO sid, sname, sage;
+    END WHILE;
+
+    CLOSE cur;
+    SELECT total;
+END $
+DELIMITER ;
+
+-- 调用存储过程
+call getTotal();
 ```
 
 ## mysqldump
@@ -3389,5 +3688,6 @@ include snippets/phpmyadmin.conf; # add to one domain
 * [MySQL数据库事务隔离级别介绍](http://www.jb51.net/article/49596.htm)
 * [使用 Docker 完成 MySQL 数据库主从配置](https://juejin.im/post/59fd71c25188254dfa1287a9)
 * [MySQL 学习笔记](https://notes.diguage.com/mysql/)
+* [学 SQL 就看这些了](https://mp.weixin.qq.com/s/GZW7RZTLEVGBCRS4b66kig)
 * [jaywcjlove/mysql-tutorial](https://github.com/jaywcjlove/mysql-tutorial):MySQL入门教程（MySQL tutorial book）
 * [SQL语句百万数据量优化方案](https://juejin.im/post/5a01257a6fb9a045211e1bdc)

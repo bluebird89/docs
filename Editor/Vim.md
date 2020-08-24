@@ -32,7 +32,8 @@ brew install vim
     - :set incsearch　　逐步搜索模式，对当前键入的字符进行搜索而不必等待键入完成
     - :set wrapscan　　重新搜索，在搜索到文件头或尾时，返回继续搜索，默认开启
     - :set ruler?　　查看是否设置了ruler，在.vimrc中，使用set命令设制的选项都可以通过这个命令查看
-    - :scriptnames　　查看vim脚本文件的位置，比如.vimrc文件，语法文件及plugin等。
+    - :scriptnames　　查看vim脚本文件的位置，比如.vimrc文件，语法文件及plugin等
+    - :set relativenumber 显示相对行号
     - :set list 显示非打印字符，如tab，空格，行尾等。如果tab无法显示，请确定用set lcs=tab:>-命令设置了.vimrc文件，并确保你的文件中的确有tab，如果开启了expendtab，那么tab将被扩展为空格
 * [SpaceVim/SpaceVim](https://github.com/SpaceVim/SpaceVim):A community-driven modular vim distribution - The ultimate vim configuration https://spacevim.org
 * [qvacua / vimr](https://github.com/qvacua/vimr):VimR — Neovim GUI for macOS http://vimr.org
@@ -69,13 +70,21 @@ curl -sLf https://spacevim.org/install.sh | bash
 * :开始的命令需要输入 <enter> 回车
 * `N<command>` 重复某个命令N次,命令都可以配合数字使用.Esc是必须的，否则命令不生效
 * . 重复前一次命令
+* ; 重复上一次的f查找操作
+* . 重复上一次的修改操作，跟;经常用来实现一些简单的重复操作
+* ;.,  重复操作
 * History  以:和/开头的命令都有历史纪录，可以首先键入:或/然后按上下箭头来选择某个历史命令
+* 命令类型
+    - action
+    - position
+    - object
 
 ![](../_static/vim.png)
 ![](../_static/vim_sheet.png)
+![](../_static/vi-vim-cheat-sheet-sch.gif)
 ![](../_static/vim_sheet_code.png)
 
-## Command mode 命令模式
+## Insert
 
 * 左下角显示--INSERT--,按Esc或Ctrl+[进入, 左下角显示文件名或为空, 可以移动光标、删除字符等
 * 普通模式下，输入:即可进入
@@ -101,6 +110,7 @@ curl -sLf https://spacevim.org/install.sh | bash
 * :close  close current window
 * :w  保存文件
 * :w vpser.net 保存至vpser.net文件
+* n1,n2 w [filename]    将 n1 到 n2 的内容储存成 filename 这个档案
 * `:saveas <path/to/file>` 另存为 `<path/to/file>`
 * :q 退出编辑器
 * :x :wq  保存并退出 (:x 表示仅在需要时保存)
@@ -110,6 +120,16 @@ curl -sLf https://spacevim.org/install.sh | bash
 * :wqa 保存所有文件并退出
 * :qa! 强行退出所有的正在编辑的文件，就算别的文件有更改
 * :e! 放弃所有修改，并打开原来文件
+* :r [filename] 读入另一个档案的数据。即将 『filename』 这个档案内容加到游标所在行后面
+
+* A 当前非blank字符行尾并进入insert模式
+* I 当前非blank字符行首并进入insert模式
+* i 光标前插入
+* a 光标后插入 3a！+ ESC:在当前位置后插入3个！
+* o 新起一个空白行
+* O 当前行之前插入一行
+* r 只会取代光标所在的那一个字符一次
+* R会一直取代光标所在的文字，直到按下 ESC 为止；
 
 * :args 查看当前正在编辑的文件,用[]括起来
 * 替换
@@ -117,21 +137,22 @@ curl -sLf https://spacevim.org/install.sh | bash
     - 用“<”来指定匹配单词开头
     - :s/old/new 用new替换行中首次出现的old
     - :s/old/new/g  用new替换行中所有的old
+        + :3,5s/^#//g 解除3-5行的注释
+        + :1,$s/^/#/g 注释整个文档
     - :%s/old/new/g 用new替换当前文件里所有的old
     - :n,m?s/old/new/g  用new替换从n到m行里所有的old
     - :n1,n2s/p1/p2/g：将第n1至n2行中所有p1均用p2替代
     - :g/p1/s//p2/g：将文件中所有p1均用p2替换
     - :%s/<four>/4/gc 只想替换注释中的 “four”，而保留代码中
-    - :%s/$/sth/ 在行尾追加sth
-    - %s/\^M//g 替换掉dos换行符，\^M使用ctrl+v  + Enter即可输入
-    - :g/\^\s*$/d 删除空行以及只有空格的行
-    - %s/#.*//g 删除#之后的字符
-    - 3,5 s/^#//g 解除3-5行的注释
-    - 1,$ s/^/#/g 注释整个文档
+    - :1,$s/word1/word2/g 或 :%s/word1/word2/g 从第一行到最后一行寻找 word1 字符串，并将该字符串取代为 word2
+        + :%s/$/sth/ 在行尾追加sth
+        + :%s/\^M//g 替换掉dos换行符，\^M使用ctrl+v  + Enter即可输入
+        + :%s/#.*//g 删除#之后的字符
     - :%s/^/#/g 注释整个文档
+    - :g/\^\s*$/d 删除空行以及只有空格的行
 * 查找字符串
     - /text　　查找text
-    - ?text　　查找text，反向查找
+    - ?text　　向光标之上寻找text
     - n 查找下一个匹配
     - N 查找上一个匹配
     - 2n 查找下面第二个匹配
@@ -144,26 +165,20 @@ curl -sLf https://spacevim.org/install.sh | bash
     - ：n1,n2 w!command 将文件中n1行至n2行内容作为command输入并执行，若不指定n1，n2，则表示将整个文件内容作为command的输入
     - ：r!command  命令command输出结果放到当前行
 * 编辑
-    - ：n1,n2 m n3 # 将n1行到n2行之间的内容移至到第n3行下
+    - :n1,n2 m n3 # 将n1行到n2行之间的内容移至到第n3行下
     - :1,10 co 20 将1-10行插入到第20行之后
     - :1,$ co $ 将整个文件复制一份并添加到文件尾部
     - ：n1,n2 d # 将n1行到n2行之间的内容删除
 
-## Normal(默认)
+## Command mode(默认) 命令模式
 
-* i 光标前插入
-* a 光标后插入 3a！+ ESC:在当前位置后插入3个！
-* I 当前行首
-* A 当前行尾
-* o 新起一个空白行
-* O 当前行之前插入一行
-* r 替换当前字符
+* rg 替换当前字符为g
 * S 或 cc 删除当前行内容并进入插入模式
 * C 删除从当前位置到行尾内容
 
 * 自动提示:输入一个词的开头，然后按 <C-p>或是<C-n>
 * ggVG 全选
-* u|<C-r> 撤销上一步操作
+* u 撤销上一步操作
 * U 撤销对当前行的所有操作
 * Ctrl + r 重做（Redo），即撤销的撤销
 * J 合并下一行
@@ -174,37 +189,52 @@ curl -sLf https://spacevim.org/install.sh | bash
     - ggguG 整篇文章大写转化为小写
 * 跳转到下一个匹配,如在<div>上按%，则跳转到相应的</div>
 * 100idesu [ESC] 重复100 `idesu `
+* c "," 修改 空格为 ","
 * 复制
-    - yy 复制当前行
-    - yw 复制光标开始的一个单词
-    - y^ 复制从光标到行首的内容
-    - y$  复制从光标到行尾的内容
-    - ye 当前位置拷贝到本单词的最后一个字符
-    - yfB 复制光标到第一个大写B中间内容
-        + y2fB 复制光标到第二个大写B中间的内容
-    - p 光标后粘贴,如果之前使用了yy命令来复制一行，那么就在当前行的下一行粘贴
-    - shift+p 在当前行前粘贴
-    - P 粘贴剪切板里内容在光标前，如果使用了前面的自定义缓冲区，建议使用”aP 进行粘贴
+    - y
+        + (n)yy 复制行
+        + yw 复制光标开始的一个单词
+        + y1G复制游标所在行到第一行的所有数据
+        + yG 复制游标所在行到最后一行的所有数据
+        + y^ 复制从光标到行首的内容
+        + y$  复制从光标到行尾的内容
+        + ye 当前位置拷贝到本单词的最后一个字符
+        + yfB 复制光标到第一个大写B中间内容
+            * y2fB 复制光标到第二个大写B中间的内容
+        + yi"：yank inside "
+        + ya"：yank around " 复制整个字符串，包括双引号
+        + yw、yaw
+    - p 光标后粘贴
+    - P 粘贴剪切板里内容在光标前
         + 3p 将复制或剪切的内容粘贴三次
-    - ddp交换当前行和其下一行
 * 剪切
     - ndw或ndW 删除光标处开始及其后的n-1个字
-    - df” 删除到出现的第一个双引号
-    - d0 删至行首
     - D|d$ 删除当前字符至行尾
 
     - x|dl 剪切一个字符，如果是在行尾，则为向前剪切
         + 3x 剪切三个字符
     - X|dh 剪切光标前一个字符
     - xp 非行尾与后一个字符交换，如从bs变成sb
-    - cw 光标所在字符删除至单词结尾(删除单词便捷方式)，同时会进入编辑模式
-
+* d
     - dj|k 删除上|下一行
-    - dgg 删除当前行之前所有行
-    - dG 删除当前行之后所有行
+    - dgg 删除光标所在到第一行的所有数据
+    - dG 删除光标所在到最后一行的所有数据
+    - d$    删除游标所在处，到该行的最后一个字符
+    - df” 删除到出现的第一个双引号
+    - d0 删至行首
+    - ddp交换当前行和其下一行
     - 5dd 剪切当前行之后5行
     - :1,10d 将1-10行剪切
     - :11,$d 删除11行及以后所有的行
+* c 删除数据
+    - 10cj 向下删除 10 行
+    - cw 光标所在字符删除至单词结尾(删除单词)，同时会进入编辑模式,常用于修改一个变量
+    - caw change a word 可以删除当前光标所在位置单词
+    - c^ 从当前位置删除到行首，并进入插入模式
+    - c$ 从当前位置删除到行尾，并进入插入模式
+    - ci" change inside " 可以用于修改当前位置附近，在相同配对的"中的内容。比如对于const char *str="hello world";。当在双引号中间的任意位置键入ci"可以直接清空字符串，并继续输入新的希望的字符串，ci(、ci[
+    - cit：可以直接编辑匹配的 xml 标签中的内容！经常编写 html 的童鞋可以熟悉一下
+
 * 窗口
     - 创建 `:[v]split|sp|new file`
     - 切换
@@ -218,16 +248,17 @@ curl -sLf https://spacevim.org/install.sh | bash
     - 修改尺寸:<C-w> +|-
 * 移动
     - h|Backspace 光标左移一个字符
-    - l|space|w 光标右移一个字符
-    - k|Ctrl+p 光标上移一行
+    - l|space 光标右移一个字符
+    - k|Ctrl+p|+ 光标上移一行
         + Ctrl + y 向上滚动一行(滚动条移动，保持位置不变)
-    - j|Ctrl+n|Enter 光标下移一行
+    - j|Ctrl+n|-|Enter 光标下移一行
         + Ctrl + e 向下滚动一行(滚动条移动，保持位置不变)
 
     - w|W 下一个单词词首，如果已到行尾，则转至下一行行首
-    - e|E 至词尾
-    - ge 光标向前移动一个单词至词尾
+    - e|E 下一个单词至词尾
+        + ge 光标向前移动一个单词至词尾
     - b|B 光标前移一个单词至词首
+    - n<Enter>  n 为数字。光标向下移动 n 行
 
     - gg|1G|[[:到文件头
         + 100G 光标移至第100行首
@@ -240,12 +271,12 @@ curl -sLf https://spacevim.org/install.sh | bash
     - ^|_  到本行第一个非blank字符(空格，tab，换行，回车等)
     - $ 至行尾
         + 5$ 下面5行行尾
-    - g_ :到本行最后一个不是blank字符的位置
+    - g_ 到本行最后一个不是blank字符的位置
 
     - :10 到第10行,绝对行
     - 5+|- 光标下|上移5行，相对行
 
-    - % 匹配括号移动，包括(， [， { （光标先移到括号上）
+    - % 移动到与当前括号匹配的括号处，包括(， [， {
     - `f` 查找字符,f {char}会定位到第一个{char}出现的光标位置
         + fa 光标后第一个为a的字符
         + 3fa 在当前行查找第三个出现的a
@@ -253,6 +284,7 @@ curl -sLf https://spacevim.org/install.sh | bash
     - t, 到逗号前的第一个字符， t|F 下一个， T 前一个
         + dt" :删除所有的内容，直到遇到双引号
     - F 和 T :和 f 和 t 一样，只不过是相反方向
+    - c
 
     - `;` 重复上次搜索
     - `, `如果重复上次搜索按多了，则可以通过`,`回退
@@ -262,8 +294,8 @@ curl -sLf https://spacevim.org/install.sh | bash
         + L  当前屏幕最后行
         + Ctrl+u 文件首翻半屏
         + Ctrl+d 向文件尾翻半屏
-        + Ctrl+f 向文件尾翻一屏
-        + Ctrl＋b:向文件首翻一屏
+        + Ctrl+f|Page Down 向文件尾翻一屏
+        + Ctrl+b|Page Up 向文件首翻一屏
     - <start position><command><end position>
         + 0y$
         + ye，当前位置拷贝到本单词的最后一个字符
@@ -340,7 +372,7 @@ ye Copy to end of word |
     - J 把所有的行连接起来（变成一行）
     - < 或 >  左右缩进
     - =  自动缩进
-* 区域选择：<action>a<object>  <action>i<object>
+* Block Visual 区域选择：<action>a<object>  <action>i<object>
     - action
         + d (删除)
         + v (可视化的选择)
@@ -379,6 +411,14 @@ ESC gg
 ctrl+v G
 I list.add("
 ESC
+
+one
+two
+three
+four
+Ctrl+v，3j，$，A，,，Esc，V，3j，J
+
+one, two, three, four,
 ```
 
 ## 宏录制
@@ -506,6 +546,14 @@ r       对单词字符进行替换
 * [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)
 * [reddit 的 Vim 频道](https://www.reddit.com/r/vim/)
 * [vim-adventures](https://vim-adventures.com/)
+
+![Alt text](../_static/vi-vim-tutorial-1.gif "Optional title")
+![Alt text](../_static/vi-vim-tutorial-2.gif "Optional title")
+![Alt text](../_static/vi-vim-tutorial-3.gif "Optional title")
+![Alt text](../_static/vi-vim-tutorial-4.gif "Optional title")
+![Alt text](../_static/vi-vim-tutorial-5.gif "Optional title")
+![Alt text](../_static/vi-vim-tutorial-6.gif "Optional title")
+![Alt text](../_static/vi-vim-tutorial-7.gif "Optional title")
 
 ## 图书
 

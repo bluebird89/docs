@@ -375,7 +375,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * AutoSwitchInput - 自动切换输入法
 * Bartender 3 - 通知栏折叠工具 $15
 * Hidden Bar - 另一款通知栏折叠工具
-* eZip - 优秀的 macOS 压缩软件
+* [eZip](https://ezip.awehunt.com/):优秀的 macOS 压缩软件
 * [poolside-fm](https://apps.apple.com/us/app/poolside-fm/id1514817810?mt=12)
 
 ### screensavers
@@ -478,6 +478,13 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 # [更换主题](https://github.com/tomislav/osx-terminal.app-colors-solarized)中的Solarized Dark.terminal，偏好导入并设置为默认，字体设为Courier New，20
 ```
 
+## Mission Control
+
+* 使用快速查看窗口
+* 同时移动所有的窗口
+* 使用键盘控制导航
+    - Control键和向上方向键来启用 Mission Control
+
 ### finder
 
 * Command-D 复制所选文件。
@@ -524,7 +531,7 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * Command–上箭头 打开包含当前文件夹的文件夹。
 * Command–Control–上箭头 在新窗口中打开包含当前文件夹的文件夹。
 * Command–下箭头 打开所选项。
-* Command–Mission Control 显示桌面。即使您未在 Finder 中，这个快捷键也有效。
+* Command–Mission Control 显示桌面。即使未在 Finder 中，这个快捷键也有效。
 * Command–调高亮度 开启或关闭目标显示器模式。
 * Command–调低亮度 当 Mac 连接到多个显示器时打开或关闭显示器镜像功能。
 * 右箭头 打开所选文件夹。这个快捷键仅在列表视图中有效。
@@ -897,6 +904,7 @@ brew switch icu4c 62.1
 ## 图书
 
 * [The Cult of Mac, 2nd Ed](link)
+* [碼農 codeMaker(](link)
 
 ## 工具
 
