@@ -783,12 +783,14 @@ explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by
         + 如果的表只有一个字段的话那count(*)就是最快的
         + `count(*)`只是返回表中行数，因此SQL Server在处理`count(*)`的时候只需要找到属于表的数据块块头，然后计算一下行数就行了，而不用去读取里面数据列的数据。而对于count(col)就不一样了，为了去除col列中包含的NULL行，SQL Server必须读取该col的每一行的值，然后确认下是否为NULL，然后在进行计数。
     - 分页
-        + `LIMIT M,N`:全表扫描,速度会很慢且结果集返回不稳定,`LIMIT 10000，20` 需要查询10020条记录然后只返回20条记录，前面的10000条都将被抛弃，这样的代价非常高
+        + `LIMIT M,N`:全表扫描,速度会很慢且结果集返回不稳定,`LIMIT 10000，20`需要查询10020条记录然后只返回20条记录，前面的10000条都将被抛弃，这样的代价非常高
+        + limit 语句的查询时间与起始记录的位置成正比
         + 避免使用 OFFSET `SELECT id FROM t WHERE id > 10000 LIMIT 10 ;`
         + `WHERE id_pk > (pageNum*10) ORDER BY id_pk ASC LIMIT M`:ORDER BY后的列对象是主键或唯一所以,使得ORDERBY操作能利用索引被消除但结果集是稳定的
             * 排序操作:只有ASC 没有DESC
         + `PREPARE stmt_name FROM SELECT * FROM 表名称 WHERE id_pk > (？* ？) ORDER BY id_pk ASC LIMIT M`
         + 尽可能的使用覆盖索引扫描，而不是查询所有的列。然后根据需要做一次关联查询再返回所有的列
+        + 利用表的覆盖索引来加速分页查询
 * 对于复杂的查询，可以使用中间临时表暂存数据
 * 拆分复杂 SQL 为多个小 SQL，避免大事务
 	- 简单的 SQL 容易使用到 MySQL 的 QUERY CACHE。
