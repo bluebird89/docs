@@ -529,6 +529,87 @@ func main() {
     - Unlock
 * 用 defer 语句来保证互斥锁一定会被解锁
 
+## 依赖
+
+* 接口:能够对接口进行 Mock 的 golang/mock 框架，能够根据接口生成 Mock 实现
+    - 在 test/mocks 目录中放置所有的 Mock 实现，子目录与接口所在文件的二级目录相同，在这里源文件的位置在 pkg/blog/blog.go，它的二级目录就是 blog/，所以对应的 Mock 实现会被生成到 test/mocks/blog/ 目录中；
+    - 指定 package 为 mxxx，默认的 mock_xxx 看起来非常冗余，上述 blog 包对应的 Mock 包也就是 mblog；
+    - mockgen 命令放置到 Makefile 中的 mock 下统一管理，减少祖传命令的出现；
+* 数据库:使用 sqlmock 来模拟数据库的连接
+    - ExpectQuery 用于模拟 SQL 的查询语句
+    - ExpectExec 用于模拟 SQL 的增删
+* HTTP 请求:httpmock 就是一个用于 Mock 所有 HTTP 依赖的包，它使用模式匹配的方式匹配 HTTP 请求的 URL，在匹配到特定的请求时就会返回预先设置好的响应
+* Redis、缓存以及其他依赖
+* bouk/monkey 能够通过替换函数指针的方式修改任意函数的实现，所以如果上述的几种方法都不能满足需求，就只能够通过猴子补丁这种比较 hack 的方法 Mock 依赖了
+    - 由于它是在运行时替换了函数的指针，所以如果遇到一些简单的函数，例如 rand.Int63n 和 time.Now，编译器可能会直接将这种函数内联到调用实际发生的代码处并不会调用原有的方法，所以使用这种方式往往需要我们在测试时额外指定 -gcflags=-l 禁止编译器的内联优化 `go test -gcflags=-l ./...`
+
+```
+package blog
+
+type Post struct {}
+
+type Blog interface {
+    ListPosts() []Post
+}
+
+type jekyll struct {}
+
+func (b *jekyll) ListPosts() []Post {
+    return []Post{}
+}
+
+type wordpress struct{}
+
+func (b *wordpress) ListPosts() []Post {
+    return []Post{}
+}
+
+package service
+
+type Service interface {
+    ListPosts() ([]Post, error)
+}
+
+type service struct {
+    blog blog.Blog
+}
+
+func NewService(b blog.Blog) *Service {
+    return &service{
+        blog: b,
+    }
+}
+
+func (s *service) ListPosts() ([]Post, error) {
+    return s.blog.ListPosts(), nil
+}
+
+mockgen -package=mblog -source=pkg/blog/blog.go > test/mocks/blog/blog.go
+
+func TestListPosts(t *testing.T) {
+    ctrl := gomock.NewController(t)
+    defer ctrl.Finish()
+
+    mockBlog := mblog.NewMockBlog(ctrl)
+    mockBlog.EXPECT().ListPosts().Return([]Post{})
+
+    service := NewService(mockBlog)
+
+    assert.Equal(t, []Post{}, service.ListPosts())
+}
+
+func main() {
+    monkey.Patch(fmt.Println, func(a ...interface{}) (n int, err error) {
+        s := make([]interface{}, len(a))
+        for i, v := range a {
+            s[i] = strings.Replace(fmt.Sprint(v), "hell", "*bleep*", -1)
+        }
+        return fmt.Fprintln(os.Stdout, s...)
+    })
+    fmt.Println("what the hell?") // what the *bleep*?
+}
+```
+
 ## 测试
 
 * 必须import testing包
@@ -546,6 +627,8 @@ func main() {
 * 用性能测试生成CPU状态图
     - 生成cpu profile文件`go test -bench=".*" -cpuprofile=cpu.prof -c`
     - 用go tool pprof工具 `go tool pprof *.test cpu.prof`
+* 辅助单元测试的 assert 包
+    -
 
 ```sh
 go test [-c] [-i] [build flags] [packages] [flags for test binary]
@@ -590,6 +673,18 @@ func Benchmark_TimeConsumingFunction(b *testing.B) {
     for i := 0; i < b.N; i++ {
         Division(4, 5)
     }
+}
+
+func TestSomething(t *testing.T) {
+  assert.Equal(t, 123, 123, "they should be equal")
+
+  assert.NotEqual(t, 123, 456, "they should not be equal")
+
+  assert.Nil(t, object)
+
+  if assert.NotNil(t, object) {
+    assert.Equal(t, "Something", object.Value)
+  }
 }
 ```
 
@@ -718,8 +813,68 @@ replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
 * 节制是一种美德
 * 可维护性
 
-## 实践
+## [实践](https://draveness.me/golang-101/)
 
+* 代码规范：使用辅助工具帮助我们在每次提交 PR 时自动化地对代码进行检查，减少工程师人工审查的工作量
+    - goimports 是 Go 语言官方提供的工具，它能够为我们自动格式化 Go 语言代码并对所有引入的包进行管理，包括自动增删依赖的包引用、将依赖包按字母序排序并分类。相信很多人使用的 IDE 都会将另一个官方提供的工具 gofmt 对代码进行格式化，而 goimports 就是等于 gofmt 加上依赖包管理
+    - golint:作为官方提供的工具，在可定制化上有着非常差的支持
+    - 自动化
+        + 在 GitHub 上我们可以使用 Travis CI 或者 CircleCI；
+        + 在 Gitlab 上我们可以使用 Gitlab CI
+* 目录结构: [golang-standards/project-layout](golang-standards/project-layout)
+    - /pkg 目录是 Go 语言项目中非常常见的目录，几乎能够在所有知名的开源项目（非框架）中找到它的身影，存放的就是项目中可以被外部应用使用的代码库，其他的项目可以直接通过 import 引入这里的代码.严格遵循公有和私有代码划分是非常好的做法
+        + 私有代码推荐放到 /internal 目录中，真正的项目代码应该写在 /internal/app 里
+        + 同时这些内部应用依赖的代码库应该在 /internal/pkg 子目录和 /pkg
+    - /src:项目最不应该有的目录结,最重要的原因其实是 Go 语言的项目在默认情况下都会被放置到 $GOPATH/src 目录下，这个目录中存储着我们开发和依赖的全部项目代码，如果在自己的项目中使用 /src 目录，该项目的 PATH 中就会出现两个 src
+    - /cmd 目录中存储的都是当前项目中的可执行文件，该目录下的每一个子目录都应该包含希望有的可执行文件
+        + 如果项目是一个 grpc 服务的话，可能在 /cmd/server/main.go 中就包含了启动服务进程的代码，编译后生成的可执行文件就是 server。
+        + 不应该在 /cmd 目录中放置太多的代码，应该将公有代码放置到 /pkg 中并将私有代码放置到 /internal 中并在 /cmd 中引入这些包，保证 main 函数中的代码尽可能简单和少
+    - /api 目录中存放的就是当前项目对外提供的各种不同类型的 API 接口定义文件了，其中可能包含类似 /api/protobuf-spec、/api/thrift-spec 或者 /api/http-spec 的目录，这些目录中包含了当前项目对外提供的和依赖的所有 API 文件.二级目录的主要作用就是在一个项目同时提供了多种不同的访问方式时，用这种办法避免可能存在的潜在冲突问题，也可以让项目结构的组织更加清晰
+    - Makefile 文件也非常值得被关注，在任何一个项目中都会存在一些需要运行的脚本，这些脚本文件应该被放到 /scripts 目录中并由 Makefile 触发，将这些经常需要运行的命令固化成脚本减少『祖传命令』的出现
+* 模块拆分
+    - 按层拆分 MVC
+        + MVC 本身就强调了按层划分职责的设计，所以遵循该模式设计的框架自然有着一脉相承的思路
+        + 扁平的命名空间 — 无论是 Spring MVC 还是 Rails，同一个项目中命名空间非常扁平，跨文件夹使用其他文件夹中定义的类或者方法不需要引入新的包，使用其他文件定义的类时也不需要增加额外的前缀，多个文件定义的类被『合并』到了同一个命名空间中
+        + 单体服务的场景 — Spring MVC 和 Rails 刚出现时，SOA 和微服务架构还不像今天这么普遍，绝大多数的场景也不需要通过拆分服务
+    - 按职责拆分
+        + 每一个文件目录都代表着一个独立的命名空间，也就是一个单独的包，想要引用其他文件夹的目录时，首先需要使用 import 关键字引入相应的文件目录，再通过 pkg.xxx 的形式引用其他目录定义的结构体、函数或者常量
+* 显式调用:Go 语言社区对于显式的初始化、方法调用和错误处理非常推崇，类似 Spring Boot 和 Rails 的框架其实都广泛地采纳了『约定优于配置』的中心思想，简化了开发者和工程师的工作量。
+    - init 函数其实隐式地初始化了 grpc 的连接资源，如果另一个 package 依赖了当前的包，那么引入这个依赖的工程师可能会在遇到错误时非常困惑，因为在 init 函数中做这种资源的初始化是非常耗时并且容易出现问题的。
+        + 更加合理的做法其实是这样的，首先定义一个新的 Client 结构体以及一个用于初始化结构的 NewClient 函数，这个函数接收了一个 grpc 连接作为入参返回一个用于获取 Post 资源的客户端，GetPost 成为了这个结构体的方法，每当调用 client.GetPost 时都会用到结构体中保存的 grpc 连接.初始化 grpc 连接的代码应该放到 main 函数或者 main 函数调用的其他函数中执行，如果在 main 函数中显式的初始化这种依赖，对于其他的工程师来说就非常易于理解，我们从 main 函数开始就能梳理出程序启动的整个过程.各个模块之间会构成一种树形的结构和依赖关系，上层的模块会持有下层模块中的接口或者结构体，不会存在孤立的、不被引用的对象
+    - errors
+        + 使用 error 实现错误处理 — 尽管这看起来非常啰嗦；
+        + 将错误抛给上层处理 — 对于一个方法是否需要返回 error 也需要我们仔细地思考，向上抛出错误时可以通过 errors.Wrap 携带一些额外的信息方便上层进行判断；
+        + 处理所有可能返回的错误 — 所有可能返回错误的地方最终一定会返回错误，考虑全面才能帮助我们构建更加健壮的项目；
+* 面向接口
+    - 接口的作用其实就是为不同层级的模块提供了一个定义好的中间层，上游不再需要依赖下游的具体实现，充分地对上下游进行了解耦
+    - 写出抽象良好的接口并通过接口隔离依赖能够帮助有效地提升项目的质量和可测试性
+        + 使用大写的 Service 对外暴露方法；
+        + 使用小写的 service 实现接口中定义的方法；
+        + 通过 func NewService(...) (Service, error) 函数初始化 Service 接口
+* 单元测试
+    - 一个代码质量和工程质量有保证的项目一定有比较合理的单元测试覆盖率，没有单元测试的项目一定是不合格的或者不重要的，单元测试应该是所有项目都必须有的代码，每一个单元测试都表示一个可能发生的情况，单元测试就是业务逻辑
+    - 单元测试的缺失不仅会意味着较低的工程质量，而且意味着重构的难以进行，一个有单元测试的项目尚且不能够保证重构前后的逻辑完全相同，一个没有单元测试的项目很可能本身的项目质量就堪忧，更不用说如何在不丢失业务逻辑的情况下进行重构了。
+    - 隔离依赖并验证输入和输出的正确性，Go 语言作为一个静态语言提供了比较少的运行时特性，这也让我们在 Go 语言中 Mock 依赖变得非常困难。
+    - 可测试:面向接口编程以及减少单个函数中包含的逻辑，使用『小方法』；
+        + 想要想清楚什么样的才是可测试的，首先要知道测试是什么？作者对于测试的理解就是控制变量，在隔离了待测试方法中一些依赖之后，当函数的入参确定时，就应该得到期望的返回值
+        + 如何控制待测试方法中依赖的模块是写单元测试时至关重要的，控制依赖也就是对目标函数的依赖进行 Mock 消灭不确定性，为了减少每一个单元测试的复杂度，需要：
+            * 尽可能减少目标方法的依赖，让目标方法只依赖必要的模块；
+            * 依赖的模块也应该非常容易地进行 Mock；
+        + 单元测试的执行不应该依赖于任何的外部模块，无论是调用外部的 HTTP 请求还是数据库中的数据，都应该想尽办法模拟可能出现的情况，因为单元测试不是集成测试的，它的运行不应该依赖除项目代码外的其他任何系统
+        + 接口
+            * 作为静态语言的 Go，只有使用接口才能脱离依赖具体实现的窘境，接口的使用能够为带来更清晰的抽象，帮助思考如何对代码进行设计，也能让更方便地对依赖进行 Mock。
+            * 对外暴露方法
+        + 函数简单:简单不止是指功能上的简单、单一，还意味着函数容易理解并且命名能够自解释
+            * 复杂度的限制都是为了保证函数的简单和容易理解。
+    - 组织方式:Go 语言中的单元测试文件和代码都是与源代码放在同一个目录下按照 package 进行组织的，server.go 文件对应的测试代码应该放在同一目录下的 server_test.go 文件中,如果文件不是以 _test.go 结尾，当我们运行 go test ./pkg 时就不会找到该文件中的测试用例，其中的代码也就不会被执行，这也是 Go 语言对于测试组织方法的一个约定。
+        + Test:单元测试的最常见以及默认组织方式就是写在以 _test.go 结尾的文件中，所有的测试方法也都是以 Test 开头并且只接受一个 testing.T 类型的参数
+        + Suite:按照簇进行组织，其实就是对 Go 语言默认的测试方式进行简单的封装，可以使用 stretchr/testify 中的 suite 包对测试进行组织
+        + BDD:ginkgo 就是 Go 语言社区最常见的 BDD 框架了，这里提到的行为驱动开发（BDD）和测试驱动开发（TDD）都是一种保证工程质量的方法论。想要在项目中实践这种思想还是需要一些思维上的转变和适应，也就是先通过写单元测试或者行为测试约定方法的 Spec，再实现方法让我们的测试通过，这是一种比较科学的方法，它能为我们带来比较强的信心。
+            * 使用 BDD 的风格方式组织非常易读的测试代码
+            * BDD 框架中一般都包含 Describe、Context 以及 It 等代码块，其中 Describe 的作用是描述代码的独立行为、Context 是在一个独立行为中的多个不同上下文，最后的 It 用于描述期望的行为，这些代码块最终都构成了类似『描述……，当……时，它应该……』的句式帮助我们快速地理解测试代码
+    - Mock 方法
+        + 需要在单元测试中对所有的第三方的不稳定依赖进行 Mock，也就是模拟这些第三方服务的接口；除此之外，为了简化一次单元测试的上下文，在同一个项目中我们也会对其他模块进行 Mock，模拟这些依赖模块的返回值。
+        + 主要作用就是保证待测试方法依赖的上下文固定，在这时无论对当前方法运行多少次单元测试，如果业务逻辑不改变，它都应该返回完全相同的结果
 * 尽量使用结构体切片代替字典
     - 很多时候都是用结构体以及结构体切片的
 * 零值陷阱：slice，map，chan和*T类型对应的零值是nil
@@ -727,6 +882,68 @@ replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
 * 谨慎使用map[string]interface{}做参数
     - 最像PHP数组的可能就是map[string]interface{}了
     - 用Go的时候，针对比较复杂的代表一类事物的参数，我们也是应该先定义结构体，然后使用结构体指针或者结构体指针切片作为参数。尽量不使用map[string]interface{}这种类型的参数
+* 参考
+    - [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
+
+```
+├── LICENSE.md
+├── Makefile
+├── README.md
+├── api
+├── assets
+├── build
+├── cmd
+├── configs
+├── deployments
+├── docs
+├── examples
+├── githooks
+├── init
+├── internal
+├── pkg
+├── scripts
+├── test
+├── third_party
+├── tools
+├── vendor
+├── web
+└── website
+
+var _ = Describe("Book", func() {
+    var (
+        book Book
+        err error
+    )
+
+    BeforeEach(func() {
+        book, err = NewBookFromJSON(`{
+            "title":"Les Miserables",
+            "author":"Victor Hugo",
+            "pages":1488
+        }`)
+    })
+
+    Describe("loading from JSON", func() {
+        Context("when the JSON fails to parse", func() {
+            BeforeEach(func() {
+                book, err = NewBookFromJSON(`{
+                    "title":"Les Miserables",
+                    "author":"Victor Hugo",
+                    "pages":1488oops
+                }`)
+            })
+
+            It("should return the zero-value for the book", func() {
+                Expect(book).To(BeZero())
+            })
+
+            It("should error", func() {
+                Expect(err).To(HaveOccurred())
+            })
+        })
+    })
+})
+```
 
 ## 问题
 
@@ -753,36 +970,24 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * 实现消息队列（多生产者，多消费者）
 * 大文件排序
 * 基本排序，哪些是稳定的
-* http get跟head
-* http 401,403
-* http keep-alive
-* http能不能一次连接多次请求，不等后端返回
-* tcp与udp区别，udp优点，适用场景
 * time-wait的作用
 * 数据库如何建索引
 * 孤儿进程，僵尸进程
 * 死锁条件，如何避免
 * linux命令，查看端口占用，cpu负载，内存占用，如何发送信号给一个进程
-* git文件版本，使用顺序，merge跟rebase
 * 项目实现爬虫的流程
 * 爬虫如何做的鉴权吗
 * 怎么实现的分布式爬虫
 * 电商系统图片多会造成带宽过高，如何解决
 * micro服务发现
-* mysql底层有哪几种实现方式
 * channel底层实现
 * java nio和go 区别
 * 读写锁底层是怎么实现的
 * go-micro 微服务架构怎么实现水平部署的，代码怎么实现
 * micro怎么用
 * 怎么做服务发现的
-* mysql索引为什么要用B+树？
-* mysql语句性能评测？
 * 服务发现有哪些机制
-* raft算法是那种一致性算法
-* raft有什么特点
 * 当go服务部署到线上了，发现有内存泄露，该怎么处理
-* 还有一些非常底层的问题
 
 ## 教程
 

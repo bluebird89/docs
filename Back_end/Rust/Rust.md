@@ -112,7 +112,8 @@ cargo new --lib rustmart && cd rustmart
     - [tantivy-search/tantivy](https://github.com/tantivy-search/tantivy):Tantivy is a full-text search engine library inspired by Apache Lucene and written in Rust
     - [toshi-search/Toshi](https://github.com/toshi-search/Toshi):A full-text search engine in rust
 * [pest-parser/pest](https://github.com/pest-parser/pest):The Elegant Parser https://pest.rs
-
+* http
+    - [hyperium/hyper](https://github.com/hyperium/hyper):An HTTP library for Rust https://hyper.rs/
 * MQ
 	- [zesterer / flume](https://github.com/zesterer/flume):A safe and fast multi-producer, single-consumer channel. https://crates.io/crates/flume
 * GUI
