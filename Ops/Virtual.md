@@ -104,7 +104,7 @@ systemctl restart sshd
     -  Verify `dmesg | grep '[U]EFI.*cert'`
 * `sudo modprobe vboxdrv`
 
-## VMware Fusion
+## [VMware Fusion](https://fuckcloudnative.io/posts/vmware-fusion-11-5-now-supports-containers/)
 
 * VMware Workstation 是专为 Linux 和 Windows 系统设计的，为了照顾 Mac 平台的用户，VMware 原班人马又打造的
 * 可以直接使用 Docker 镜像启动容器，还可以构建镜像、推送镜像到镜像仓库，不需要安装 Docker Desktop。创建了一个新的 CLI 工具：vctl，它包含在 VMware Fusion 中，安装好了之后就有这个命令了

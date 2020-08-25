@@ -310,7 +310,44 @@ show variables like '%query_cache%'
         * 从备份的时间点开始，将备份的 binlog 依次取出来，重放到中午误删表之前的那个时刻
         * 临时库就跟误删之前的线上库一样了，然后你可以把表数据从临时库取出来，按需要恢复到线上库去
     + 如果不使用“两阶段提交”，那么数据库的状态就有可能和用它的日志恢复出来的库的状态不一致
+* [基于日志还原数据](https://mp.weixin.qq.com/s/juX32qyu-k_vX6YrPt5bMA)
+    - 传统二进制文件
+    - GTID二进制文件
+        + --include-gtids:包含事务
+        + --exclude-gtids:排除事务
+        + --skip-gtids:跳过事务
 
+```sh
+svi /etc/my.cnf
+[server]
+server-id=1
+log-bin=binlog
+
+systemctl restart mysqld
+create database mydb charset utf8mb4;
+use mydb;
+create table test(id int)engine=innodb charset=utf8mb4;
+insert into test values(1),(2),(3),(4);
+
+show master status\G;
+# 查找起始点
+show binlog events in 'binlog.000001';
+
+mysqlbinlog --start-position=219 --stop-position=1868 /var/lib/mysql/binlog.000001 > /tmp/binlog.sql
+set sql_log_bin=0;
+source /tmp/binlog.sql
+set sql_log_bin=1;
+
+# 基于GTID
+server-id=1
+log-bin=binlog
+gtid_mode=ON
+enforce_gtid_consistency=true
+log_slave_updates=1
+
+insert into test values(1),(2),(3),(4),(11),(12);
+mysqlbinlog --skip-gtids --include-gtids='51d3db57-bf69-11ea-976c-000c2911a022:1-7' /var/lib/mysql/binlog.000003 >  /tmp/gtid.sql
+```
 
 ### 配置
 
@@ -1891,6 +1928,7 @@ Unlock tables;
         + 为所有叶子节点增加了一个链指针
     - 所有关键字存储在叶子节点,内部节点(非叶子节点并不存储真正的 data)
     - 为所有叶子结点增加了一个链指针
+    - 所有类型的B+树都有一个称为根节点的入口点,根页包含了索引ID、INodes数量等信息。INode页包含关于页本身、值的范围等信息。
     - B+树索引并不能找到一个给定键值的具体行，它找到的只是被查找数据行所在的页，接着数据库会把页读入到内存，再在内存中进行查找，最后得到要查找的数据。
     - 平衡二叉树的查找效率还不错，实现也非常简单，相应的维护成本还能接受，为什么MySQL索引不直接使用平衡二叉树？
         + 随着数据库中数据的增加，索引本身大小随之增加，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。 这样的话，索引查找过程中就要产生磁盘I/O消耗，相对于内存存取，I/O存取的消耗要高几个数量级。
@@ -1969,7 +2007,7 @@ where a.table_id=b.table_id and a.space <> 0;
 
 不同数据引擎数据的存储格式,数据结构的实现,数据行并不是存储引擎管理的最小存储单位，索引只能够帮助定位到某个数据页，每一次磁盘读写的最小单位为也是数据页，而一个数据页内存储了多个数据行，需要了解数据页的内部结构才能知道存储引擎怎么定位到某一个数据行
 
-*  InnoDB 选择B+ 树原因
+* InnoDB 选择 B+ 树原因
     - InnoDB 需要支持的场景和功能需要在特定查询上拥有较强的性能；
     - CPU 将磁盘上的数据加载到内存中需要花费大量的时间，这使得 B+ 树成为了非常好的选择
 * 存储格式
@@ -2043,14 +2081,11 @@ where a.table_id=b.table_id and a.space <> 0;
         + 共享表空间存储
             * 表结构保存在 .frm 文件中
             * 数据和索引在 `innodb_data_home_dir` 和 ` innodb_data_file_path`定义的表空间中，可以是多个文件
-        + 多表空间存储
-            * 表结构保存在 .frm 文件中
-            * 每个表的数据和索引单独保存在 .ibd 中,这个文件被分为N个段。每个段都与一个索引相关联
+        + 多表空间存储：段-》区（1M，最多可包含64页）->页（16k）
+            * 表结构保存在 .frm 文件中。
+            * `innodb_file_per_table` 从MySQL5.6开始已经设置为1。这样设置，schema中每个表都是一个文件（如果是分区表，则有多个文件），每个表的数据和索引单独保存在 .ibd 中,这个文件被分为N个段。每个段都与一个索引相关联
                 - 文件不会因删除数据而收缩，段本身会增长或收缩
-                - 下一级为区。一个区仅存在一个段中，并且固定尺寸为1MB（在默认页大小的情况下）。
-                - 页是区的下一级，默认大小为16KB
-                - 一个区最多可包含64页。一个页可以包含2到N行。一个页可以容纳的行数与行大小有关，这是表结构设计时定义的。
-                - InnoDB中有一个规则，至少要在一个页中容纳两行。因此，行大小限制为8000字节
+                - 一个页可以包含2到N行。一个页可以容纳的行数与行大小有关，这是表结构设计时定义的。InnoDB中有一个规则，至少要在一个页中容纳两行。因此，行大小限制为8000字节。
         +  InnoDB 会根据主键 ID 作为 KEY 建立索引 B+树，B+树的叶子节点存储的是主键 ID 对应的数据。建表的时候 InnoDB 就会自动建立好主键 ID 索引树。是为什么 Mysql 在建表时要求必须指定主键的原因
     - 特点
         + 插入缓冲（Insert buffer): Insert Buffer 用于非聚集索引的插入和更新操作。先判断插入的非聚集索引是否在缓存池中，如果在则直接插入，否则插入到 Insert Buffer 对象里。再以一定的频率进行 Insert Buffer 和辅助索引叶子节点的 merge 操作，将多次插入合并到一个操作中，提高对非聚集索引的插入性能
@@ -2105,6 +2140,8 @@ where a.table_id=b.table_id and a.space <> 0;
                 - 通过 INNODB_METRICS 也无法监控到具体是哪些表上的合并操作最多。因此当发现有很高合并频率时，可能需要扫描所有表，找到那些碎片率较高的表，其产生合并的"嫌疑"应该也较高。
         + 页分裂
             * 如果插入的记录可以容纳在该页内，则按顺序填充该页。当页已经满时，下一条记录将插入到下一页
+            * 发生在插入或者更新，并导致页错位.在INFORMATION_SCHEMA.INNODB_METRICS表中记录了页分裂的次数。查看index_page_splits和index_page_reorg_attempts/successful指标
+            * 一旦分裂的页创建，将其回收的唯一方法是将创建的页降至合并阈值下。当这发生时，InnoDB通过合并操作将数据从分裂页迁移走。
         + 参考
             * [InnoDB数据页什么时候合并](https://mp.weixin.qq.com/s/jcjwWwTrRbhb-mv8D2NPKg)
     - 未压缩的索引：索引没有使用前缀压缩，阻塞auto_increment:Innodb使用表级锁产生新的auto_increment
@@ -2126,7 +2163,7 @@ where a.table_id=b.table_id and a.space <> 0;
         + 表空间（tablespace）=>段（segment）=>区（extent）=>页（page）
             * 叶子节点用来记录数据，存储在数据段
             * 叶子节点用来构建索引，存储在索引段
-        + 区是由连续的页组成，任何情况下一个区都是 1MB，一个区中可以有多个页，每个页默认为 16KB ，所以默认情况下一个区中可以包含 64 个连续的页，页的大小是可以通过 innodb_page_size 设置，页中存储的是具体的行记录。一行记录最终以二进制的方式存储在文件里。
+        + 区是由连续的页组成，任何情况下一个区都是 1MB，一个区中可以有多个页，每个页默认为 16KB ，所以默认情况下一个区中最多可以包含 64 个连续的页，页的大小是可以通过 innodb_page_size 设置，页中存储的是具体的行记录。一行记录最终以二进制的方式存储在文件里。
         + 各个数据页可以组成一个双向链表,每个数据页中的记录又可以组成一个单向链表
         + 每个数据页都会为存储在它里边儿的记录生成一个页目录，在通过主键查找某条记录的时候可以在页目录中使用二分法快速定位到对应的槽，然后再遍历该槽对应分组中的记录即可快速找到指定的记录
         + 以其他列(非主键)作为搜索条件：只能从最小记录开始依次遍历单链表中的每条记录。
@@ -2180,6 +2217,15 @@ where a.table_id=b.table_id and a.space <> 0;
 * 通过记录头信息里面的nextRecord串成一条链表
 * 一页里面的很多条行记录，拆分成若干组，然后将每一组里面最后一条记录（也就是这一组内最大的那条记录）的在该页内的偏移量抽出来作为一个槽（slot），按顺序存储到当前页里面靠后的位置，作为一个页目录（page directory）
 * 页与页之间是通过双链表串起来，File header：里面有三个很重要的属性，FIL_PAGE_PREV(上一页的页号)，FIL_PAGE_NEXT(下一页的页号)，FIL_PAGE_OFFSET(页号)
+* 批量插入失败或者回滚时带来的MySQL表碎片
+    - 使用DELETE语句会产生表碎片。在大多数情况下，当执行大量的删除时，DBA总会重新构建表以回收磁盘空间
+    - 碎片：
+        + 在表中的InnoDB页完全空闲引起的碎片。
+        + InnoDB页未填充满（页中还有一些空闲空间）引起的碎片。
+    - 插入引起的碎片场景：
+        + 插入，然后回滚,回收：alter table ins_frag engine=innodb;
+        + 插入语句失败
+        + 页分裂引起的碎片
 
 ```sql
 show engines; # 显示当前数据库支持的存储引擎情况
@@ -2240,6 +2286,19 @@ ceil((15150 - 16384 * 0.3) / 151) = 68
 innblock test/t_sk.ibd 7 16 | grep n_rows; innblock test/t_sk.ibd 8 16 | grep n_rows
 # 每页再删除一条，合并，8号page因为已经被合并了，被标记为空闲page，从索引树里被摘掉了
 innodb_space -s ibdata1 -T test/t_sk -I PRIMARY -l 0 index-level-summary
+
+# 看看碎片空间
+SELECT
+table_schema as 'DATABASE',
+table_name as 'TABLE',
+CONCAT(ROUND(( data_length + index_length ) / ( 1024 * 1024 * 1024 ), 2), 'G') 'TOTAL',
+CONCAT(ROUND(data_free / ( 1024 * 1024 * 1024 ), 2), 'G') 'DATAFREE'
+FROM information_schema.TABLES
+where table_schema='percona' and table_name='ins_frag';
+
+SET GLOBAL innodb_monitor_enable=all;
+# 查看也分裂
+select name,count,type,status,comment from information_schema.innodb_metrics where name like '%index_page_spl%'G
 ```
 
 ## 索引
