@@ -20,6 +20,25 @@ cd openresty-VERSION/
             --without-http_redis2_module \
             --with-http_iconv_module \
             --with-http_postgres_module
+
+./configure --prefix=/usr/local/openresty \
+--sbin-path=/usr/local/openresty/nginx/sbin/nginx \
+--conf-path=/usr/local/openresty/nginx/conf/nginx.conf \
+--pid-path=/usr/local/openresty/nginx/run/nginx.pid \
+--error-log-path=/usr/local/openresty/nginx/logs/error.log \
+--http-log-path=/usr/local/openresty/nginx/logs/access.log \
+--user=nginx \
+--group=nginx \
+--with-pcre \
+--with-stream \
+--with-threads \
+--with-file-aio \
+--with-http_v2_module \
+--with-http_ssl_module \
+--with-http_realip_module \
+--with-http_gzip_static_module \
+--with-http_stub_status_module
+
 make
 sudo make install
 
@@ -38,7 +57,22 @@ echo "deb http://openresty.org/package/ubuntu $(lsb_release -sc) main" \
     | sudo tee /etc/apt/sources.list.d/openresty.list
 # to update the APT index:
 sudo apt-get update
+
+sudo netstat -ntlp | grep 80
+sudo killall -9 nginx
 ```
+
+## 原理
+
+* 实际上是Nginx+LuaJIT的完美组合
+* 每个worker使用一个LuaVM，每个请求被分配到worker时，将在这个LuaVM中创建一个coroutine协程。协程之间数据隔离，每个协程具有独立的全局变量_G
+* Lua中的协程和多线程下的线程类似，都有自己的堆栈、局部变量、指令指针...，但是和其他协程程序共享全局变量等信息。线程和协程主要不同在于：多处理器的情况下，概念上来说多线程是同时运行多个线程，而协程是通过代码来完成协程的切换，任何时刻只有一个协程程序在运行。并且这个在运行的协程只有明确被要求挂起时才会被挂起。
+* 负载均衡 LVS+HAProxy将流量转发给核心Nginx1和Nginx2，即实现了流量的负载均衡。
+* 单机闭环 所有想要的数据都能从本服务器直接获取，大多数时候无需通过网络或去其他服务器获取。
+	- 数据不一致 例如没有主从架构导致不同服务器数据不一致
+	- 遇到存储瓶颈 磁盘或内存遇到天花板
+	- 解决数据不一致比较好的办法是采用主从或分布式集中存储，而遇到存储瓶颈就需要进行按业务键进行分片，将数据分散到多台服务器。
+* 接入网关 接入网关又叫接入层，即接收流量的入口
 
 ## 语法
 

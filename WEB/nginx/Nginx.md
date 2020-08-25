@@ -134,6 +134,13 @@
     - nginx.conf 配置文件
     - accedd.log 访问日志
     - error.log 错误日志
+* ss命令可以查看系统中启动的端口信息，选项：
+    - -a显示所有端口的信息
+    - -n以数字格式显示端口号
+    - -t显示TCP连接的端口
+    - -u显示UDP连接的端口
+    - -l显示服务正在监听的端口信息，如httpd启动后，会一直监听80端口
+    - -p显示监听端口的服务名称是什么（也就是程序名称）
 
 ```sh
 brew info nginx
@@ -320,7 +327,9 @@ Your new Nginx binary should be ready by now. Spawn a new set of Nginx master/wo
 sudo kill -s USR2 `cat /run/nginx.pid` Now kill the worker processes used by the first master process using the following command.
 
 sudo kill -s WINCH `cat /run/nginx.pid.oldbin`
-sudo kill -s QUIT `cat /run/nginx.pid.oldbin` # Follow it by killing the old master process.
+sudo kill -s QUIT `cat /run/nginx.pid.oldbin` # Follow it by killing the old master process
+
+ss  -anptu  |  grep nginx
 ```
 
 ## 本地文件操作
@@ -454,6 +463,14 @@ location /video {
     - autoindex_exact_size off; 默认为on，显示出文件的确切大小，单位是bytes。改为off后，显示出文件的大概大小，单位是kB或者MB或者GB
     - autoindex_localtime on;默认为off，显示的文件时间为GMT时间。改为on后，显示的文件时间为文件的服务器时间
 * add_header并不享受Nginx的继承机制，意味着如果子context中有add_header，那么它将覆盖所有的父context中的add_header配置。比如，在http中配置了3个add_header，然后在server中配置了1个add_header，那么server中的add_header会将http中的所有3个add_header给覆盖掉
+*  /status
+    - Active connections：当前活动的连接数量。
+    - Accepts：已经接受客户端的连接总数量。
+    - Handled：已经处理客户端的连接总数量。 （一般与accepts一致，除非服务器限制了连接数量）。
+    - Requests：客户端发送的请求数量。
+    - Reading：当前服务器正在读取客户端请求头的数量。
+    - Writing：当前服务器正在写响应信息的数量。
+    - Waiting：当前多少客户端在等待服务器的响应。
 
 ```json
 $args # 请求中的参数
@@ -848,6 +865,10 @@ server
 
 ## 负载均衡
 
+* 链接
+    - ulimit -a                        //查看所有属性值
+    - ulimit -Hn 100000                //设置硬限制（临时规则）
+    - ulimit -Hn 100000                //设置硬限制（临时规则）
 * 分摊到多个操作单元上进行执行,共同完成工作任务，以反向代理的方式进行负载均衡的
 * 算法
     - Round Robin（默认）:轮询(weight=1):每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。

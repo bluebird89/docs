@@ -428,3 +428,4 @@ Type=Application
 * [haoel/haoel.github.io](https://github.com/haoel/haoel.github.io)
 * [JadaGates/ShadowsocksBio](https://github.com/JadaGates/ShadowsocksBio):SS的前世今生
 * [yangchuansheng / love-gfw](https://github.com/yangchuansheng/love-gfw):🔥以社会主义核心价值观为指导思想，实现 Linux 和 MacOS 设备的全局智能分流 https://fuckcloudnative.io/posts/linux-circumvent/
+* [Linux全局智能分流方案](https://fuckcloudnative.io/posts/linux-circumvent/)

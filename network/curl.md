@@ -4,8 +4,13 @@ curl is used in command lines or scripts to transfer data.发出网络请求，�
 
 ## 使用
 
+* ` curl  -X<VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>?<QUERY_STRING>' -d '<BODY>'`
 * -A 指定客户端的用户代理标头，即User-Agent
-* -X/--request [GET|POST|PUT|DELETE|…]  指定请求的 HTTP 方法
+* -X：指定请求方式
+* <PROTOCOL>：协议，一般为HTTP协议
+* <HOST>：主机，可为主机的IP地址或Hostname
+* <PORT>：主机端口
+*  <VERB>：GET,POST,PUT,DELETE   一般请求为GET、提交变更为POST、上传文件为PUT、删除操作为DELETE
 * -x参数指定 HTTP 请求的代理
 * -H/--header                           指定请求的 HTTP Header
 * -d/--data                             发送 POST 请求的数据体

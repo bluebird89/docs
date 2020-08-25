@@ -306,21 +306,6 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
         + 扩容: `kubectl scale deployment nginx-deployment –replicas 10`
         + 更新镜像: `kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1`
         + 回滚: `kubectl rollout undo deployment/nginx-deployment`
-* Service
-    - 一个抽象的概念，定义了Pod的逻辑分组和一种可以访问它们的策略，这组Pod能被Service访问，使用YAML（优先）或JSON 来定义Service，Service所针对的一组Pod通常由LabelSelector实现
-    - 一个抽象层，定义了一组逻辑的Pods，这些Pod提供了相同的功能，借助Service，应用可以方便的实现服务发现与负载均衡，可以把Service加上一组Pod称作是一个微服务
-    - 默认情况Pod只能通过K8s集群内部IP访问，要使Pod允许从K8s虚拟网络外部访问，须要使用K8s Service暴露Pod
-    - 创建一个Service的时候每个Service被分配一个唯一的IP地址，这个IP地址与一个Service的生命周期绑定在一起，当Service存在的时候它不会改变
-        + 可以指定IP地址，将spec.clusterIP的值设置为想要的IP地址即可
-    - 基本操作单元，是真实应用服务的抽象，每一个服务后面都有很多对应的容器来支持，通过Proxy的port和服务selector决定服务请求传递给后端提供服务的容器，对外表现为一个单一访问地址，外部不需要了解后端如何运行，给扩展或维护后端带来很大的好处
-    - 每个节点都运行了一个kube-proxy，kube-proxy监控着K8s增加和删除Service，对于每个Service kube-proxy会随机开启一个本机端口，任何向这个端口的请求都会被转发到一个后台的Pod中，如何选择哪一个后台Pod是基于SessionAffnity进行的分配
-    - 服务发现
-        + 当一个Pod在一个Node上运行的时候，Kubelet会针对运行的Service增加一序列的环境变量，支持Docker links compatible和普通环境变量
-        + 环境变量：所有想要被Pod访问的Service都需要在Pod创建之前创建，否则这个环境变量是没有的
-        + DNS：云平台插件，DNS服务器监控着API Server，当有Service被创建的时候，DNS服务器会为之创建相应的记录
-    - 假定有2个后台Pod，并且定义后台Service的名称为‘backend-service’，lable选择器为（tier=backend, app=myapp）。backend-service 的Service会完成如下两件重要的事情：
-        + 会为Service创建一个本地集群的DNS入口，因此前端Pod只需要DNS查找主机名为 ‘backend-service’，就能够解析出前端应用程序可用的IP地址。
-        + 现在前端已经得到了后台服务的IP地址，但是它应该访问2个后台Pod的哪一个呢？Service在这2个后台Pod之间提供透明的负载均衡，会将请求分发给其中的任意一个（如下面的动画所示）。通过每个Node上运行的代理（kube-proxy）完成
 * Ingress：从集群外部访问集群内部服务的入口。比如官方维护的 Ingress Nginx。ingress traefik、ingress haproxy等
 * Node（节点）
     - K8s中的工作节点，可以是虚拟机或物理机。每个Node由K8s Master管理，Node上可以有多个Pod，K8s Master会自动处理Node的Pod调度，同时Master的自动调度会考虑每个Node上的可用资源，为了管理Pod，每个Node上至少要运行Docker、kubelet和kube-proxy
@@ -355,7 +340,6 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
         + --cloud_provider=: 云服务商地址，用于获取自身的metadata；
         + --register-node=: 设置为true表示自动注册到apiserver。
     - 手动管理Node:将Kubelet启动参数中的--register-node参数的值设置为false
-* ConfigMap API 资源用来保存 key-value pair配置数据，这个数据可以在pods里使用，或者被用来为像controller一样的系统组件存储配置数据。虽然 ConfigMap 跟 Secrets 类似，但是ConfigMap更方便的处理不含敏感信息的字符串。注意：ConfigMaps不是属性配置文件的替代品。ConfigMaps只是作为多个properties文件的引用。你可以把它理解为Linux系统中的/etc目录，专门用来存储配置文件的目录。
 * Secret 存储了敏感数据,解决了密码、token、密钥等敏感数据的配置问题，而不需要把这些敏感数据暴露到镜像或者Pod Spec中。Secret 可以以Volume或者环境变量的方式使用。 Secret有三种类型：
     - Service Account ：用来访问Kubernetes API，由Kubernetes自动创建，并且会自动挂载到Pod的/run/secrets/kubernetes.io/serviceaccount目录中
     - Opaque ：base64编码格式的Secret，用来存储密码、密钥等
@@ -440,7 +424,6 @@ Production-Grade Container Scheduling and Management http://kubernetes.io
     - 目的是存储辅助数据，特别是通过工具和系统扩展操作的数据
     - --overwrite为true，现有的annotations可以被覆盖，否则试图覆盖annotations将会报错
     - --resource-version，则更新将使用此resource version，否则将使用原有的resource version
-
 
 * PodPreset 里定义的内容，只会在 Pod API 对象被创建之前追加在这个对象本身上，而不会影响任何 Pod 的控制器的定义
     - 多个 PodPreset:合并（Merge）这两个 PodPreset 要做的修改。而如果它们要做的修改有冲突的话，这些冲突字段就不会被修改
@@ -631,6 +614,32 @@ kubectl get pv                     #查看pv状态
 kubectl get pvc -n namespace_name
 ```
 
+## kubelet
+
+* 职责
+    - 向kube-apiserver注册节点
+    - watch kube-apiserver中已经调度完成的Pod，并在Pod被调度完成之后告诉容器运行时（例如Docker）启动容器
+    - 监视运行中容器并将其状态报告给kube-apiserver
+    - 执行活动性探针并在容器失败后重新启动容器
+    - 运行由kubelet直接管理的静态Pod
+    - 与Core Metrics Pipeline和容器运行时进行交互以收集容器和节点metrcis
+* [资源回收](https://mp.weixin.qq.com/s/BhxgEPk3vrnlrxEz5Ev81Q):节点资源（磁盘，RAM或CPU）耗尽时，“agent”具有将Pods逐出的功能
+* 确定资源不足:根据收回信号和收回阈值确定何时回收资源
+    - 驱逐信号是系统资源（如内存或存储器）的当前容量。驱逐阈值是kubelet应该维护的此资源的最小值。每个驱逐信号都与某个驱逐阈值相关联，该阈值告诉kubelet何时开始回收资源。目前，支持以下驱逐信号：
+    - memory.available — 描述集群内存状态的信号。内存的默认逐出阈值为100M
+    - nodefs.available — nodefs是kubelet用于卷，守护程序日志等的文件系统。默认逐出阈值为10％
+    - nodefs.inodesFree — 描述nodefs索引节点内存状态的信号。默认逐出阈值为5％
+    - imagefs.available:imagefs文件系统是容器运行时使用的可选文件系统，用于存储容器镜像和容器可写层。默认逐出阈值为15％
+    - imagefs.inodesFree — imagefs索引节点内存的状态。它没有默认驱逐阈值。
+    -　硬驱逐阈值，则kubelet将立即开始回收资源，而没有任何宽限期 `kubelet --eviction-hard = memory.available <1Gi`
+    -　软驱逐阈值包括用户定义的宽限期，该宽限期应在kubelet开始回收任何资源之前到期 `kubelet --eviction-soft=memory.available<2Gi` `kubelet --eviction-soft-grace-period=1m30s`
+* 如何回收用,以下规则对驱逐候选人进行排名
+    - Pod是否超出其资源请求。在Kubernetes中，Pod是根据其请求而不是限制进行调度的。因此，保证所有容器和Pod都具有它们所请求的RAM / CPU数量。但是，如果没有设置限制，并且Pod超出了其资源请求，则在保证Pod或某些系统任务需要受限资源的情况下，可以终止或限制该Pod。在某些情况下，甚至那些消耗少于要求量的Pod也会被杀死。例如，当系统任务内存严重不足并且没有较低优先级的Pod被杀死时。
+    - 按Pod优先级排列。如果没有Pod超出其请求，则kubelet会检查Pod Priority。它将尝试先驱逐优先级较低的Pod。注意：在Kubernetes 1.14中，Pod的优先级和抢占式迁移到了GA。从1.11开始默认启用它们。您可以在本文中了解有关Pod Priority的更多信息。根据这些规则，kubelet会按以下顺序驱逐用户Pod：
+    - 驱逐的第一个候选对象是Best-Effort 和/或 Burstable的Pod，其受限资源的使用超出了请求。如果有多个此类Pod，则kubelet会按优先级对它们进行排序，然后将资源消耗按指定的请求进行排序。
+    - 最后驱逐了资源使用量低于请求的Guaranteed 和 Burstable Pods的Pod。但是，如果某些系统任务（如kubelet或Docker）需要更大的资源，并且节点上没有Best-EffortPod，则kubelet可以驱逐消耗量低于其请求量的Guaranteed Pod。在这种情况下，它将首先以最低优先级驱逐Guaranteed 和 Burstable Pods。
+* 最低驱逐收回:如果kubelet回收的资源量很小，则系统可以反复达到驱逐阈值,eviction-minimum-reclaim标志设置每个资源的最小回收级别 `--eviction-hard=memory.available<1Gi,nodefs.available<2Gi,imagefs.available<200Gi --eviction-minimum-reclaim=memory.available=0Mi,nodefs.available=1Gi,imagefs.available=2Gi`
+
 ## Pod
 
 - 一个可以被创建、销毁、调度、管理的最小的部署单元（调度最小颗粒）,对应一个由相关容器和卷组成的容器组,通常Pod里的容器运行相同应用。对应用程序抽象的逻辑概念
@@ -679,10 +688,10 @@ kubectl get pvc -n namespace_name
 * 实现自我修复:放在Pod里的健康检查处理程序叫做探针（Probe）
     - Liveness：活性检查，kubelet使用活性探针（livenessProbe）的返回状态作为重新启动容器的依据。一个Liveness探针用于在应用运行时检测容器的问题。容器进入此状态后，Pod所在节点的kubelet可以通过Pod策略来重启容器。
     - Readiness：就绪检查，这种类型的探测（readinessProbe）用于检测容器是否准备好接受流量。可以使用这种探针来管理哪些Pod会被用作服务的后端。如果Pod尚未准备就绪，则将其从服务的后端列表中删除。
-* 探针处理程序
-    - Exec：在容器内执行命令。
-    - TCPSocket：对指定端口上，容器的IP地址执行TCP检查。
-    - HTTPGet：在容器的IP上执行HTTP GET请求
+* 探针处理程序:kubernetes会周期性地调用探针，并根据就绪探针的结果采取行动。如果某个pod报告它尚未准备就绪，则会从该服务中删除该pod。如果pod再次准备就绪，则重新添加pod；
+    - Exec：在容器内执行命令。执行进程的地方，容器的状态由进程的退出状态代码确认
+    - TCPSocket：对指定端口上，容器的IP地址执行TCP检查。如果连接己建立，则认为容器己准备就绪
+    - HTTPGet：在容器的IP上执行HTTP GET请求,通过响应的HTTP状态代码判断容器是否准备好
 * 生命周期
     - Pending: 挂起,Pod已经被K8s系统接受，但有一个或者多个容器镜像尚未创建，等待时间包括下载镜像时间和Pod调度时间
     - Running: 运行中，该Pod已经绑定到一个Node上，Pod中所有容器都已被创建，至少有一个容器正在运行，或者正处于启动或重启状态
@@ -695,7 +704,10 @@ kubectl get pvc -n namespace_name
     - Job：用来控制批处理型任务，Job管理的Pod根据使用者的设定把任务成功完成就自动退出了。
     - DaemonSet：后台支撑型服务的核心关注点在集群中的Node，要保证每个Node上都有一个此类Pod在运行。比如用来收集日志的Pod
     - StatefulSet： 提供有状态的服务，StatefulSet中Pod的名字都是事先确定的，不能更改，每个Pod挂载自己独立的储存，如果一个Pod出现故障，从其他节点启动一个同样名字的Pod，要挂载上原来Pod的储存继续以它的状态提供服务。比如数据库服务MySQL，不希望一个Pod故障后，MySQL中的数据即丢失
-
+* Qos
+    - Guaranteed : 在Pod的所有容器中都为CPU和RAM设置资源限制和请求，并且它们的值相等。
+    - Burstable Pod中一个或多个容器的资源（例如，CPU，RAM）设置了请求和限制的容器，它们不相等。
+    - Best-Effort Pod中的容器未设置资源限制。
 
 ```yaml
 apiVersion: v1
@@ -822,17 +834,151 @@ kubectl describe replicaset myapp-replicas
 
 ## Service
 
-* 将稳定的IP地址和DNS名称引入到不稳定的Pod世界中,提供可靠的网络连接
-* 通过控制进出Pod的流量，Service提供了稳定的网络终结点-固定的IP，DNS和端口。有了Service，可以添加或删除任何Pod，而不必担心基本网络信息会改变
-* Pod通过称为标签（Label）和选择器（Selector）的键值对与Service相关联。Service会自动发现带有与选择器匹配的标签的新Pod
-* Service ：来将一组 Pod 暴露给外界访问的一种机制
-    - 访问
-        + 以 Service 的 VIP（Virtual IP，即：虚拟 IP）方式
-        + 以 Service 的 DNS 方式
-            * Normal Servic：访问“my-svc.my-namespace.svc.cluster.local”解析到的正是 my-svc 这个 Service 的 VIP，后面的流程就跟 VIP 方式一致了
-            * Headless Service：访问“my-svc.my-namespace.svc.cluster.local”解析到的，直接就是 my-svc 代理的某一个 Pod 的 IP 地址。不需要分配一个 VIP，而是可以直接以 DNS 记录的方式解析出被代理 Pod 的 IP 地址
-    - Headless Service 所代理的所有 Pod 的 IP 地址，都会被绑定一个格式 `<pod-name>.<svc-name>.<namespace>.svc.cluster.local>` DNS
+* 四层调度器,将稳定的IP地址和DNS名称引入到不稳定的Pod世界中,提供可靠的网络连接
+    - 通过控制进出Pod的流量，Service提供了稳定的网络终结点-固定的IP，DNS和端口
+    - 有了Service，可以添加或删除任何Pod，而不必担心基本网络信息会改变
+* 一个抽象概念，定义了Pod的逻辑分组和一种可以访问策略，这组Pod能被Service访问，使用YAML或JSON 来定义Service
+    - 创建一个Service的时候每个Service被分配一个唯一的IP地址，这个IP地址与一个Service的生命周期绑定在一起，当Service存在的时候不会改变
+    - 可以指定IP地址，将spec.clusterIP的值设置为想要的IP地址即可
+    - Pod通过标签（Label）和选择器（Selector）的键值对与Service相关联。Service会自动发现带有与选择器匹配的标签的新Pod
+    - 真实应用服务的抽象，每一个服务后面都有很多对应的容器来支持,可以把Service加上一组Pod称作是一个微服务
+    - 通过Proxy的port和服务selector决定服务请求传递给后端提供服务的容器
+    - 对外表现为一个单一访问地址，外部不需要了解后端如何运行，给扩展或维护后端带来很大的好处
+    - 方便实现服务发现与负载均衡
+* 默认情况Pod只能通过K8s集群内部IP访问，要使Pod允许从K8s虚拟网络外部访问，使用Service暴露Pod,客户端向Service进行请求，而非目标Pod对象
+    - VIP（Virtual IP，即：虚拟 IP）方式:使用 iptables（Linux 中的数据包处理逻辑）来定义一个虚拟IP地址（VIP），可以根据需要透明地进行重定向.当客户端连接到 VIP 时，它们的流量会自动地传输到一个合适的 Endpoint
+    - 以 Service 的 DNS 方式
+        + Normal Servic：访问“my-svc.my-namespace.svc.cluster.local”解析到是 my-svc 这个 Service 的 VIP，后面的流程跟 VIP 方式一致
+        + Headless Service：访问“my-svc.my-namespace.svc.cluster.local”解析到的，直接就是 my-svc 代理的某一个 Pod 的 IP 地址。不需要分配一个 VIP，而是可以直接以 DNS 记录的方式解析出被代理 Pod 的 IP 地址,代理所有 Pod 的 IP 地址，都会被绑定一个格式 `<pod-name>.<svc-name>.<namespace>.svc.cluster.local>` DNS
+* 每个节点都运行了一个kube-proxy，kube-proxy监控着K8s增加和删除Service,代理模式
+    - 用户空间:对于每个Service，kube-proxy会随机开启一个本机端口，任何向这个端口的请求都会被转发到一个后台的Pod中，如何选择哪一个后台Pod是基于SessionAffnity进行分配
+        + 当一个客户端连接到一个 VIP，iptables 规则开始起作用，它会重定向该数据包到 Service代理 的端口。Service代理 选择一个 backend，并将客户端的流量代理到 backend 上。
+    - iptables代理模式:对于每个Service对象，kube-proxy会创建iptables规则直接捕获到达cluster ip和Port流量，并将其重定向至当前Service对象的后端Pod资源，对于每个Endpoint对象，Service资源会为其创建iptables规则并关联,从 VIP 重定向到 per-Service 规则。该 per-Service 规则连接到 per-Endpoint 规则，该 per-Endpoint 规则会重定向（目标 NAT）到 backend。
+        + 当一个客户端连接到一个 VIP，iptables 规则开始起作用。一个 backend 会被选择（或者根据会话亲和性，或者随机），数据包被重定向到这个 backend。不像 userspace 代理，数据包从来不拷贝到用户空间，kube-proxy 不是必须为该 VIP 工作而运行，并且客户端 IP 是不可更改的。当流量打到 Node 的端口上，或通过负载均衡器，会执行相同的基本流程，但是在那些案例中客户端 IP 是可以更改的。
+    - ipvs代理模式:kube-proxy 跟踪 API server上 Service 和 Endpoints(ip+port) 对象变动，调用 netlink 接口创建ipvs规则，并确保于API server中变动同步
+        + 在大规模集群（例如10,000个服务）中，iptables 操作会显着降低速度。IPVS 专为负载平衡而设计，并基于内核内哈希表。
+        + 可以通过基于 IPVS 的 kube-proxy 在大量服务中实现性能一致性。同时，基于 IPVS 的 kube-proxy 具有更复杂的负载平衡算法（最小连接，局部性，加权，持久性）
+        + 与iptables规则不同之处仅在处于其请求流量的调度功能有ipvs实现，余下的其他功仍然由iptables完成
 
+    - ClusterIP:其实就一个VIP。具体实现原理依靠kubeproxy组件，通过iptables或是ipvs实现。
+
+    - 当Service资源变动时，有kube-proxy控制器将规则应用至本机iptables或者ipvs规则
+    - 为 DaemonSet 控制器将会在集群中每个节点运行一个Pod或者守护进程如果需要转换ipvs规则，则需要手动加载ipvs模块进入内核
+* `kubectl get svc`
+    - clusterIP：为一个svc分配一个当前集群内的动态地址，客户端pod对象访问服务的Pod对象时不会进行源地址转换，且不会被外部地址访问，只能在集群内部被访问。
+    - NodePort：对于某svc来说会在每个节点生成一个ipvs规则打开节点端口，映射至svc ip的端口上。
+    - 手动创建endpoints资源将ip地址指向外部： 在线修改configmap文件 `kubectl edit cm kube-proxy -n kube-system`
+- 例子：有2个后台Pod，定义后台Service的名称为‘backend-service’，lable选择器为（tier=backend, app=myapp）。backend-service 的Service会完成如下两件重要的事情：
+    + 会为Service创建一个本地集群的DNS入口，因此前端Pod只需要DNS查找主机名为 ‘backend-service’，就能够解析出后端应用程序可用的IP地址
+    + 前端得到了后台服务的IP地址访问2个后台Pod的哪一个呢？Service在这2个后台Pod之间提供透明的负载均衡，会将请求分发给其中的任意一个。通过每个Node上运行的代理（kube-proxy）完成
+
+* 服务暴露给外部客户端
+    - NodePort服务:创建一个服务并将其类型设置为NodePort，通过创建NodePort服务，可以让kubernetes在其所有节点上保留一个端口（所有节点上都使用相同的端口号），然后将传入的连接转发给pod
+    - LoadBalance服务：拥有独一无二的可公开访问的IP地址；可以实现集群外部访问服务的另外一种解决方案。不过并不是所有的k8s集群都会支持，大多是在公有云托管集群中会支持该类型。负载均衡器是异步创建的，关于被提供的负载均衡器的信息将会通过Service的status.loadBalancer字段被发布出去。
+    - Ingress资源方式:7层代理|调度：标准的api对象，管理外部请求到内部流量。
+        + 协议为http，仅用定义流量转发和调度的通用格式的配置信息，需要转换为特定的具有http协议转发和调度功能的应用程序的配置文件，并由相应的应用程序生效，相应的配置后完成流量转发
+        + 只需要一个公网IP就能为许多服务提供访问；当客户端向Ingress发送HTTP请求时，Ingress会根据请求的主机名和路径转发到对应的服务；
+        + ules和paths是数组，可以配置多个
+* 服务发现
+    + service:当一个Pod在一个Node上运行的时候，Kubelet会针对运行的Service增加一序列的环境变量，支持Docker links compatible和普通环境变量
+    + 通过环境变量发现服务：pod开始运行的时候，Kubernets会初始化一系列的环境变量指向现在存在的服务；如果**创建的服务早于客户端pod的创建**（删除pod），pod上的进程可以根据环境变量获得服务的IP地址和端口号 `kubectl exec kubia-599v9 env`
+    + 通过DNS发现服务：插件，DNS服务器监控着API Server，当有Service被创建的时候，DNS服务器会为之创建相应记录
+        * 命名空间kube-system下有一个默认的服务kube-dns，其后端是一个coredns的pod `kubectl get svc --namespace kube-system`
+        * `kubectl get po -o wide --namespace kube-system`
+        * 运行在pod上的进程DNS查询都会被Kubernets自身的DNS服务器响应，该服务器知道系统中运行的所有服务；客户端的pod在知道服务名称的情况下可以通过全限定域名(FQDN)来访问
+        * `kubectl exec kubia-599v9 -- curl -s http://kubia.default.svc.cluster.local`
+            - kubia对应服务名称，default为服务所在的命名空间，svc.cluster.local是在所有集群本地服务名称中使用的可配置集群域后缀；如果两个pod在同一个命名空间下，可以省略svc.cluster.local和default，使用服务名即可
+            - `kubectl exec kubia-599v9 -- curl -s http://kubia.default`
+* 连接集群外部服务
+    - 通过Endpoint方式:服务并不是和pod直接相连的；有一种资源介于两者之间：Endpoint资源 `kubectl describe svc kubia`
+    - 手动配置服务的endpoint（内部）:如果创建了不包含pod选择器的服务，Kubernetes将不会创建Endpoint资源；这样就需要创建Endpoint资源来指定该服务的Endpoint列表
+    - 手动配置服务的endpoint（外部）:可以配置外部的ip端口,访问外部 `kubectl exec kubia-599v9 -- curl -s http://external-service`
+    - 创建外部服务别名
+
+```yaml
+# svc.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+  namespace: prod
+spec:
+  ports: #ports字段定义svc端口与后端哪个端口相关连
+  - name: http #ports字段名称
+    port: 80 #svc端口
+    targetPort: 80#目标后端端口
+    nodePort: 30080 #自定义nodePort端口
+  selector:#标签选择器
+    app: myapp
+    rel: stable
+   type: NodePort#NodePort可以定义一个端口给外部范围
+
+kubectl get svc
+kubectl get svc -n prod
+
+## https
+penssl genrsa -out myapp.key 2048 ##生成私钥
+openssl req -new -x509 -key myapp.key -out myapp.crt -subj /C=CN/ST=Beijing/L=Beijing/O=ops/CN=www.node.com -days 365 #自签名
+kubectl create secret tls ilinux-cert -n myns --cert=myapp.crt --key=myapp.key
+secret/ilinux-cert created #在集群中创建证书。
+
+kubectl get ingress -n myns
+```
+
+## [ConfigMap API 资源](https://mp.weixin.qq.com/s/vj9_DXM2hXWEkbunv5P6uQ)
+
+* 向容器提供配置信息
+    - 通过命令行参数进行配置 pods.spec.containers.command和pods.spec.containers.args
+    - 将配置文件载入镜像文件
+    - 通过环境变量向容器注入配置信息
+    - 通过存储卷向容器注入配置信息
+    - 借助Docker config进行容器配置
+* Kubernetes基于ConfigMap对象实现了将**配置文件从容器镜像中解耦**，从而增强了容器应用的可移植性。简单来说，一个ConfigMap对象就是一系列配置数据的集合，这些数据可“注入”到Pod对象中，并为容器应用所使用
+* ConfigMap对象将配置数据以键值对的形式进行存储，这些数据可以在Pod对象中使用或者为系统组件提供配置.可以通过在不同的环境中创建名称相同但内容不同的ConfigMap对象，从而为不同环境中同一功能的Pod资源提供不同的配置信息，实现应用与配置的灵活勾兑
+* 创建
+    - kubectl create configmap 命令直接创建.用户可以根据目录、文件或者直接创建ConfigMap对象`kubectl create configmap <map-name> <data-source>`
+        + --from-literal 通过键值创建
+        + --from-file 通过文件或者目录创建
+    - 通过资源配置清单创建
+* 注入方式
+    - 挂载为存储卷
+        + 可以引用部分 key
+    - 传递为环境变量:键值来源于较长的文件内容，那么使用环境变量将其导入会使得变量值占据过多的内存空间而不易清理.
+        + 传递ConfigMap中的单个Key
+        + 传递ConfigMap中的所有Key
+    - 上面的两种方式中，无论是装载所有文件还是部分文件，挂载点目录下原有的文件都会被隐藏或者称为覆盖
+        + 在没有挂载的时候，/etc/nginx/conf.d目录下有default.conf文件，当挂载之后default.conf就被隐藏或者说覆盖掉了
+        + 挂载进的文件不覆盖相应目录下的其它文件，可以通过volumeMounts属性中的subPath字段来解决，它可以支持用户从存储卷挂载单个文件或者单个目录而非整个存储卷
+* 注意
+    - 以存储卷访问引用的ConfigMap必须在Pod启动前存在，除非在Pod中将他们全部标记为optional，否则会导致Pod无法正常启动的错误，同样即使存在ConfigMap，在引用ConfigMap中的键不存在时，也会导致一样的错误。
+    - 以环境变量注入的ConfigMap中的键不存在时会被忽略，Pod可以正常启动，但错误引用的信息会以InvalidVariableNames事件记录于日志中。
+    - ConfigMap是名称空间级的资源，因此引用它的Pod必须处于同一名称空间中。
+    - kubelet不支持引用Kubernetes API Server上不存在的ConfigMap，这包括那些通过kubelet的--manifest-url或--config选项，以及 kubelet REST API 创建的Pod。
+* ConfigMap 跟 Secrets 类似，但是ConfigMap更方便的处理不含敏感信息的字符串
+
+```sh
+kubectl create configmap configmap_name --from-literal=key-name01=value-1 --from-literal=mysql_ip=172.16.0.3 --from-literal=mysql_port=3306
+kubectl get configmap
+kubectl describe configmap/special-config
+
+kubectl create configmap elastic-configmap --from-file=./elasticsearch.yaml
+# 指定键名称
+kubectl create configmap elastic-configmap --from-file=elastic=./elasticsearch.yaml
+# 以yaml格式显示configmap信息
+kubectl get configmap elastic-configmap -o yaml
+
+kubectl create configmap nginx-config-files --from-file=/data/configs/nginx/conf.d/
+
+kubectl create configmap nginx-config-files --from-file=./data/nginx/conf.d/
+kubectl get pods -o wide | grep configmap-volume-pod
+kubectl describe pods/configmap-volume-pod | grep -A 2  Mounts
+kubectl exec pods/configmap-volume-pod -- ls /etc/nginx/conf.d
+kubectl exec pods/configmap-volume-pod -- nginx -T
+kubectl exec pods/configmap-volume-pod -- curl 2>/dev/null  http://127.0.0.1/ngx_status
+
+kubectl create configmap nginx-config-files --from-file=./data/nginx/conf.d/
+kubectl create configmap nginx-html-files --from-file=./data/nginx/html/configmap.html
+```
 
 ## API 对象
 
@@ -886,7 +1032,6 @@ kubectl describe replicaset myapp-replicas
         + 主机或云平台安全组、防火墙或安全策略阻止了容器网络。
 
 ![Alt text](../_static/kubernates_proxy.png "Optional title")
-
 
 ## CRD Custom Resource Definition。
 
@@ -1329,7 +1474,6 @@ kubectl delete service kubernetes-dashboard --namespace=kube-system
 * weave
 
 ```sh
-
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
 deb http://apt.kubernetes.io/ kubernetes-xenial main
