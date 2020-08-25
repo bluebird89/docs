@@ -144,7 +144,6 @@ LIMIT
     - 对于写操作，需要四个搜索请求来查找在何处放置新的索引值，然后通常需要2次搜索来更新索引并写入行
 
 ```sql
-
 {EXPLAIN | DESCRIBE | DESC}
     tbl_name [col_name | wild]
 
@@ -206,10 +205,6 @@ SHOW WARNINGS\G
 EXPLAIN SELECT * FROM order_copy WHERE id=12345\G; # 给id添加了索引，才使得rows的结果为1
 ```
 
-* show [SESSION | GLOBAL] variables          查看数据库参数信息
-* SHOW [SESSION | GLOBAL] STATUS             查看数据库的状态信息
-
-
 ### PROCEDURE ANALYSE() 分析字段和其实际的数据，并会给一些有用的建议。只有表中有实际的数据，这些建议才会变得有用，因为要做一些大的决定是需要有数据作为基础的
 
 ### profiling:准确的SQL执行消耗系统资源的信息
@@ -250,6 +245,9 @@ EXPLAIN SELECT * FROM order_copy WHERE id=12345\G; # 给id添加了索引，才�
 ![优化策略](../_static/index.jpeg "Optional title")
 
 ```sql
+show [SESSION | GLOBAL] variables         # 查看数据库参数信息
+SHOW [SESSION | GLOBAL] STATUS            # 查看数据库的状态信息
+
 show global status like 'Questions';
 show global status like 'Uptime'; # QPS = Questions / Uptime
 
@@ -1231,3 +1229,8 @@ pmm-admin config --server 47.92.131.xxx:80
 * 关系型数据库在TPS上的瓶颈往往会比其他瓶颈更容易暴露出来,常用的MySQL数据库为例，常规情况下的TPS大概只有1500左右
 
 ## [MySQL 8.0 PFS histogram解析与优化](https://mp.weixin.qq.com/s/Bjv4rrSvDRQNEbjKgZdOjA)
+
+## 参考
+
+* [MySQL 设计总结](https://mp.weixin.qq.com/s?__biz=MzAwNzY4OTgyNA==&mid=2651827083&idx=1&sn=3f8b2a861f2d8df005e541600b276a20&chksm=80814884b7f6c192e1a3c6151b16129f936b3453eb7a6da3aee15815a763cf595cf0ccf9ff21)
+* [MySQL优化原理](https://mp.weixin.qq.com/s?__biz=MzAwNzA5MzA0NQ==&mid=2652151595&idx=1&sn=cd9c3764ba981b8d06e9b79022442574&chksm=80e35171b794d86754de840c510562888d45961c131ff034b5ae37dde14851226d4e0cda3329)
