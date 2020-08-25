@@ -196,6 +196,135 @@ apt-get install enpass
 exit
 ```
 
+## [WAF Web Application Firewall](https://mp.weixin.qq.com/s/fLaNHRCCA6rjYNdS3ww6IA)
+
+* 解析HTTP请求（协议解析模块），规则检测（规则模块），做不同的防御动作（动作模块），并将防御过程（日志模块）记录下来
+* 模块
+    - 配置模块
+    - 协议解析模块
+    - 规则模块
+    - 动作模块
+    - 错误处理模块
+* 实现
+    - 使用nginx+lua来实现WAF,须在编译nginx的时候配置上lua
+    - 部署OpenResty,不需要在编译nginx的时候指定lua
+* 功能
+    - 支持IP白名单和黑名单功能，直接将黑名单的IP访问拒绝。
+    - 支持URL白名单，将不需要过滤的URL进行定义。
+    - 支持User-Agent的过滤，匹配自定义规则中的条目，然后进行处理（返回403）。
+    - 支持CC攻击防护，单个URL指定时间的访问次数，超过设定值，直接返回403。
+    - 支持Cookie过滤，匹配自定义规则中的条目，然后进行处理（返回403）。
+    - 支持URL过滤，匹配自定义规则中的条目，如果用户请求的URL包含这些，返回403。
+    - 支持URL参数过滤，原理同上。
+    - 支持日志记录，将所有拒绝的操作，记录到日志中去。
+    - 日志记录为JSON格式，便于日志分析，例如使用ELKStack进行攻击日志收集、存储、搜索和展示。
+* 配置详解 `/usr/local/openresty/nginx/conf/waf/config.lua`
+    - config_waf_enable = "on"        --是否启用waf模块，值为 on 或 off
+    - config_log_dir = "/tmp"         --waf的日志位置，日志格式默认为json
+    - config_rule_dir = "/usr/local/openresty/nginx/conf/waf/rule-config" --策略规则目录位置，可根据情况变动
+    - config_white_url_check = "on"   --是否开启URL检测
+    - config_white_ip_check = "on"    --是否开启IP白名单检测
+        + 白名单配置: `/usr/local/openresty/nginx/conf/waf/rule-config/whiteip.rule`
+    - config_black_ip_check = "on"    --是否开启IP黑名单检测
+        + IP黑名单配置:`/usr/local/openresty/nginx/conf/waf/rule-config/blackip.rule`
+    - config_url_check = "on"         --是否开启URL过滤 `rule-config/url.rule`
+    - config_url_args_check = "on"    --是否开启Get参数过滤
+    - config_user_agent_check = "on"  --是否开启UserAgent客户端过滤,中默认封锁了以下UserAgent，如 HTTrack网站下载 namp网络扫描 audit网络审计 dirbuster网站目录扫描 pangolin SQL注入工具 scan网络扫描 hydra密码暴力破解 libwww漏洞工具 sqlmap自动SQL注入工具 w3af网络扫描 Nikto Web漏洞扫描 ... 等等
+    - config_cookie_check = "on"      --是否开启cookie过滤
+    - config_cc_check = "on"          --是否开启cc攻击过滤
+    - config_cc_rate = "10/60"        --cc攻击的速率/时间，单位为秒；默认示例中为单个IP地址在60秒内访问同一个页面次数超过10次则认为是cc攻击，则自动禁止此IP地址访问此页面60秒，60秒后解封(封禁过程中此IP地址依然可以访问其它页面，如果同一个页面访问次数超过10次依然会被禁止)
+    - config_post_check = "on"        --是否开启POST检测
+    - config_waf_output = "html"      --对于违反规则的请求则跳转到一个自定义html页面还是指定页面，值为 html 和 redirect
+    - config_waf_redirect_url = "https://www.unixhot.com"     --指定违反请求后跳转的指定html页面
+
+```sh
+git clone https://github.com/unixhot/waf.git
+cp -a ./waf/waf /usr/local/openresty/nginx/conf/
+
+
+# /usr/local/openresty/nginx/conf/nginx.conf
+...
+http {
+lua_shared_dict limit 10m;
+lua_package_path "/usr/local/openresty/nginx/conf/waf/?.lua";
+init_by_lua_file "/usr/local/openresty/nginx/conf/waf/init.lua";
+access_by_lua_file "/usr/local/openresty/nginx/conf/waf/access.lua";
+...
+}
+
+# failed to load the 'resty.core' module
+git clone https://github.com/openresty/lua-resty-core.git
+
+
+lua_shared_dict limit 10m;
+lua_package_path "/usr/local/openresty/nginx/conf/waf/?.lua;/usr/local/openresty/lua-resty-core/lib/?.lua;;";
+init_by_lua_file "/usr/local/openresty/nginx/conf/waf/init.lua";
+access_by_lua_file "/usr/local/openresty/nginx/conf/waf/access.lua";
+
+openresty -t && openresty -s reload
+
+# rule-config/url.rule
+\.(htaccess|bash_history)
+\.(bak|inc|old|mdb|sql|backup|java|class|tgz|gz|tar|zip)$
+(phpmyadmin|jmx-console|admin-console|jmxinvokerservlet)
+java\.lang
+\.svn\/
+/(attachments|upimg|images|css|uploadfiles|html|uploads|templets|static|template|data|inc|forumdata|upload|includes|cache|avatar)/(\\w+).(php|jsp)
+
+##  useragent.rule
+(HTTrack|harvest|audit|dirbuster|pangolin|nmap|sqln|-scan|hydra|Parser|libwww|BBBike|sqlmap|w3af|owasp|Nikto|fimap|havij|PycURL|zmeu|BabyKrokodil|netsparker|httperf|bench)
+#模拟网站下载
+curl http://192.168.31.219/ --user-agent 'HTTrack'
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+<title>网站防火墙</title>
+</head>
+<body>
+<h1 align="center"> 欢迎白帽子进行授权安全测试，安全漏洞请联系QQ：1111111。
+</body>
+</html>
+
+#模拟nmap网络扫描
+curl http://192.168.31.219/ --user-agent 'nmap'
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+<title>网站防火墙</title>
+</head>
+<body>
+<h1 align="center"> 欢迎白帽子进行授权安全测试，安全漏洞请联系QQ：1111111。
+</body>
+</html>
+
+# 异常Get参数策略配置
+cat args.rule
+\.\./
+\:\$
+\$\{
+select.+(from|limit)
+(?:(union(.*?)select))
+having|rongjitest
+sleep\((\s*)(\d*)(\s*)\)
+benchmark\((.*)\,(.*)\)
+base64_decode\(
+(?:from\W+information_schema\W)
+(?:(?:current_)user|database|schema|connection_id)\s*\(
+(?:etc\/\W*passwd)
+into(\s+)+(?:dump|out)file\s*
+group\s+by.+\(
+xwork.MethodAccessor
+(?:define|eval|file_get_contents|include|require|require_once|shell_exec|phpinfo|system|passthru|preg_\w+|execute|echo|print|print_r|var_dump|(fp)open|alert|showmodaldialog)\(
+xwork\.MethodAccessor
+(gopher|doc|php|glob|file|phar|zlib|ftp|ldap|dict|ogg|data)\:\/
+java\.lang
+\$_(GET|post|cookie|files|session|env|phplib|GLOBALS|SERVER)\[
+\<(iframe|script|body|img|layer|div|meta|style|base|object|input)
+(onmouseover|onerror|onload)\=
+```
+
 ## 案例
 
 * [710leo/ZVulDrill](https://github.com/710leo/ZVulDrill):Web漏洞演练平台

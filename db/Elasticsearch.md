@@ -251,6 +251,215 @@ curl -X DELETE 'localhost:9200/accounts/person/1'
   - query phase：每个 shard 将自己的搜索结果（其实就是一些 doc id ）返回给协调节点，由协调节点进行数据的合并、排序、分页等操作，产出最终结果。
   - fetch phase：接着由协调节点根据 doc id 去各个节点上拉取实际的 document 数据，最终返回给客户端
 
+## 集群
+
+## 节点
+
+## 索引
+
+## 分片
+
+```sh
+//查看_cat支持的信息
+kibana: GET /_cat
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat'
+
+
+//查看集群所有节点
+kibana: GET /_cat/nodes?v
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/nodes?v'
+
+//查看集群健康状态
+kibana: GET /_cat/health?v
+kibana: GET _cluster/health
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/health?v'
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cluster/health?pretty'
+
+//查看主节点信息
+kibana: GET /_cat/master?v
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/master?v'
+
+
+//查看所有索引信息
+kibana: GET /_cat/indices?v
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/indices?v'
+//查看单个索引信息
+kibana: GET /_cat/indices/movies?v
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/indices/movies?v'
+
+//查看所有索引文档总数
+kibana: GET _all/_count
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_all/_count?pretty'
+
+//查看所有分片信息
+kibana: GET /_cat/shards?v
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/shards?v'
+
+//查看单个索引分片信息
+kibana: GET /_cat/shards/movies?v
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/shards/movies?v'
+
+
+//查看插件
+kibana: GET /_cat/plugins?v
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/plugins?v'
+
+//查看指定索引文档总数
+kibana: GET movies/_count
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/movies/_count?pretty'
+
+//查看所有模板
+kibana: GET _cat/templates
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/templates?v'
+
+//查看状态为绿的索引
+kibana: GET /_cat/indices?v&health=green
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/indices?v&health=green'
+
+//查看movies索引元数据
+kibana: GET movies
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/movies?pretty'
+
+//按照文档数量排序索引
+kibana: GET _cat/indices?v&s=docs.count:desc
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/indices?v&s=docs.count:desc'
+
+//查看各个索引占用内存大小并进行排序
+kibana:
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/indices?v&h=i,tm&s=tm:desc'
+```
+
+## 操作
+
+* URL: `/index_name/_action/document_id`
+
+* 索引
+  - PUT|POST   /index/_create/id 指定Document ID，创建文档，如果ID已存在，则失败
+  - POST       /index/_doc       自动生成ID，不会重复，重复提交则创建多个文档，文档版本都为1
+  - Delete     /index            删除索引，索引内的文档也会被随之而删除,索引不存在返回 "404"
+* 文档
+  - PUT|POST   /index/_doc/id    如果ID不存在,则创建新的文档,如果ID存在,则删除现有文档后创建新的文档,版本+1,ID相同
+  - POST       /index/_update/id    文档必须存在,否则更新失败,只能增量修改字段,不能减少字段,字段值可以随意修改,版本加1（字段扩充）
+  - GET        /index/_doc/id    查看Document ID为1的文档
+  - Delete     /index/_doc/id 删除文档,否则返回"not_found"
+* Bulk API 批量操作，每条语句都会进行返回结果
+  - 支持在一次API调用中，对不同索引进行操作
+  - 支持四种操作 Index、Create、Update、Delete
+  - 可以在 URI 中指定 Index，也可以在请求的 Playoad 中进行
+  - 操作中单条语句操作失败，不会影响后续操作
+  - 返回结果包含了每一条的执行结果
+* mget 批量读取的方式，批量操作，减少了网络连接所产生的开销。提高性能
+* msearch Multi Serach：一个可以进行条件匹配查询的语法 GET /<index>/_msearch
+  - 从单个API中获取多个搜索结果，请求的格式类似于批量API格式，并使用换行符分隔的JSON（NDJSON）格式。最后一行数据必须以换行符 \n 结尾。每个换行符前面都可以有一个回车符 \r。向此端点发送请求时，Content-Type标头应设置为application/x-ndjson
+  - 路径参数：（可选，字符串）索引名称的逗号分隔列表或通配符表达式，用于限制请求
+  - 主体
+    + aggregations聚合 （可选，对象）指定聚合。
+    + from 来自 （可选，整数）起始文档偏移量。预设为0。
+    + max_concurrent_searches同时最多查询 （可选，整数）指定多重搜索API将执行的并发搜索的最大数量,此默认值基于数据节点的数量和默认搜索线程池大小。
+    + max_concurrent_shard_requests （可选，整数）指定每个子搜索请求将在每个节点上执行的并发分片请求的最大数量。此参数应用于保护单个请求，以防止集群过载（例如，默认请求将命中集群中的所有索引，如果每个节点的分片数量很高，则可能导致分片请求被拒绝）。默认为5。在某些情况下，并发请求无法实现并行性，因此这种保护将导致性能下降。例如，在仅期望很少数量的并发搜索请求的环境中，可能有助于将该值增加到更大的数目。
+    + preference （可选，字符串）指定应该对其执行操作的节点或分片。默认为随机。
+    + query （可选，查询对象）使用查询DSL定义搜索定义。
+    + routing （可选，字符串）以指定的主分片为目标。
+    + search_type （可选，字符串）搜索操作的类型。可用选项： `query_then_fetch` `dfs_query_then_fetch`
+    + size （可选，整数）要返回的点击数。默认为10。
+
+```
+### 创建
+## POST|PUT 请求指定 Document ID,id 存在创建失败
+POST|PUT /index/_create/1
+curl -XPOST -u elastic:26tBktGolYCyZD2pPISW -H "Content-Type:application/json" 'http://192.168.31.215:9201/index/_create/1?pretty' -d '
+{
+  "name": "WeiLiang Xu",
+  "Blogs": "abcops.cn",
+  "Is male": true,
+  "age": 25
+}'
+
+## 自动生成 Document ID
+POST /index/_doc
+curl -XPOST -u elastic:26tBktGolYCyZD2pPISW -H "Content-Type:application/json" 'http://192.168.31.215:9201/index/_doc?pretty' -d '
+{
+  "name": "WeiLiang Xu",
+  "Blogs": "abcops.cn",
+  "Is male": true,
+  "age": 25
+}‘
+
+### 创建或更新
+POST|PUT /index/_doc/6
+curl -XPUT -u elastic:26tBktGolYCyZD2pPISW -H "Content-Type:application/json" 'http://192.168.31.215:9201/index/_doc/6?pretty' -d '
+{
+  "name": "WeiLiang Xu",
+  "Blogs": "abcops.cn",
+  "Is male": true,
+  "age": 25
+}'
+
+GET /index/_doc/1                   #操作index索引中Document ID为1的文档
+curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/index/_doc/1?pretty'
+
+### 结构更新
+POST /weiliang/_update/1
+curl -XPOST -u elastic:26tBktGolYCyZD2pPISW -H "Content-Type:application/json" 'http://192.168.31.215:9201/weiliang/_update/1?pretty' -d '
+{
+  "doc": {
+  "name": ["weiliang Xu","xueiliang"],
+  "JobS": "Linux DevOps",
+  "Age": 25,
+  "gender": "man"
+  }
+}'
+
+DELETE /weiliang/_doc/1         #删除指定文档
+curl -XDELETE -u elastic:26tBktGolYCyZD2pPISW -H "Content-Type:application/json" 'http://192.168.31.215:9201/weiliang/_doc/1?pretty'
+DELETE /weiliang                #删除索引
+curl -XDELETE -u elastic:26tBktGolYCyZD2pPISW -H "Content-Type:application/json" 'http://192.168.31.215:9201/weiliang?pretty'
+
+POST _bulk
+{ "create" : { "_index" : "bulk_index", "_id" : "1" } }             //创建了索引为 bulk_index ，id为1的文档
+{ "Job" : "Linux Ops" }                                             //文档内容为字段 "Job" 值 "Linux Ops"
+{ "delete" : { "_index" : "bulk_index", "_id" : "2" } }             //删除索引为 bulk_index 中 id 为 2的文档，因为我们暂时还没有 id 为2的文档，所以此次执行返回 not_found，但是不影响后续语句执行
+{ "update" : { "_id": "1", "_index" : "bulk_index"  } }             //增量更新了 bulk_index 中 id 为 1 的文档，注意这里的写法是 _id 在前，_index 在后
+{ "doc" : {"name" : "xuweiliang"} }
+{ "index" : {"_index" : "bulk_index", "_id" : "1" } }               //Index方式操作了 bulk_index 索引的 id 为 1 的文档，把文档内容改了如下
+{ "name" : "xuweiliang" }
+{ "create" : { "_index" : "bulk_index", "_id" : "2" } }             //在 bulk_index 索引中 创建了一个 id 为 2 的文档
+{ "name" : "xuweiliang" , "Age" : 25 }
+{ "delete" : { "_index" : "bulk_index", "_id" : "2" } }             //删除了 bulk_index 索引中 id 为 2的文档
+
+GET _mget
+{
+  "docs":[                                  //docs为mget格式
+    {
+      "_index": "bulk_index",               //指定要读取文档的索引
+      "_id" : 1                             //指定读取文档的ID
+    },
+    {
+      "_index": "bulk_index",               //同一索引内的不同ID联合读取
+      "_id" : 2
+    },
+    {
+      "_index": "index",                    //不同索引中的不同ID联合读取
+      "_id" : 1
+    }
+  ]
+}
+
+{"index" : "test", "index"}
+{"query" : {"match_all" : {}}, "from" : 0, "size" : 10}
+
+{"index" : "test", "search_type" : "dfs_query_then_fetch"}
+{"query" : {"match_all" : {}}}
+
+{}
+{"query" : {"match_all" : {}}}
+
+{"query" : {"match_all" : {}}}
+{"search_type" : "dfs_query_then_fetch"}
+
+{"query" : {"match_all" : {}}}
+```
+
 ## 性能
 
 * filesystem cache:查询的时候，操作系统会将磁盘文件里的数据自动缓存到 filesystem cache 里面去
