@@ -803,6 +803,7 @@ sudo perf report # 回放
 
 * 中文输入法
   - [rime](https://rime.im/)
+    + ctrl + ` 配置
   - 20 内部中文输入法 ibus
     + 设置->区域与语言
     + 中文（简体）

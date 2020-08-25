@@ -42,6 +42,13 @@
 
 Grafana求，配合 Prometheus 以及 Prometheus 相关的 Exporter
 
+
+##  ELK （Elasticsearch、Logstash、Kibana） 做整体的监控基础组件，同时使用 Elastic 新推出的 beat 系列作为采集工具
+
+##  Zabbix、Open-Falcon 等运维监控工具进行系统基础组件的监控。同时利用自定义指标，进行数据的监控和告警。
+
+## TICK (Telegraph、InfluxDB、Chronograf、Kapacitor)
+
 ## 工具
 
 * [nicolargo / glances](https://github.com/nicolargo/glances):Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems. http://nicolargo.github.io/glances/
