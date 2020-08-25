@@ -115,6 +115,7 @@ systeminfo | findstr Build
 * 录屏
   - Bandicam
 * Microsoft to do
+* [seer](https://sourceforge.net/projects/ccseer/):Windows 下的文件预览工具
 
 ```sh
 ## 安装 choco 以管理员运行cmd
