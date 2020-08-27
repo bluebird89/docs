@@ -116,6 +116,7 @@ systeminfo | findstr Build
   - Bandicam
 * Microsoft to do
 * [seer](https://sourceforge.net/projects/ccseer/):Windows 下的文件预览工具
+* [Cygwin](https://cygwin.com/)：可以帮助在Windows下面使用强大的Bash，以及使用数量繁多的Linux命令，通过Scripts
 
 ```sh
 ## 安装 choco 以管理员运行cmd

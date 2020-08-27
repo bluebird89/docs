@@ -180,6 +180,12 @@ pbpaste
 
 for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World';done
 ```
+## 触控板
+
+*　轻拍来点按
+*　辅助点按
+*　查找
+*　三指拖移
 
 ### Spoitlight
 
@@ -555,6 +561,7 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * 选中一个文件按 enter 可以直接改名的...cmd+up是回到上一层文件夹cmd+ down 如果是文件夹就进入文件夹
 * 使用Finder登录FTP：打开Finder然后按Command+K
 * Fn+Delete键，就可以向后删除
+* Command(⌘)- 空格键   聚焦
 * Command+Shift+G 可以前往任何文件夹,包括隐藏文件夹
 * Command+Shift+. 显示或隐藏 隐藏文件
 * 修改DNS提高Apple Store 网速:打开：systerm Preferences > Network > Advanced > DNS

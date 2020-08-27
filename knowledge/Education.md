@@ -408,7 +408,6 @@ It is not worth an intelligent man’s time to be in the majority. By definition
 
 ## 培养
 
-
 * 如何表达反对孩子，而能不伤感情。避免犯不可挽回的错误
     + 孩子会有秘密的，会骗父母
     + 知道事情的结果，以及能否承担结果
@@ -423,7 +422,7 @@ It is not worth an intelligent man’s time to be in the majority. By definition
     + 责任：考虑后果
     + 勇气
     + 尊重
-    + 早点知道得不到是常态
+    + 早点知道得不到 失恋 是常态
 * 理解分手也是正常
 * 孩子可以自由选择自己的人生
 * 孩子知道什么事情发展不能控制，超出自己的控制范围

@@ -1766,7 +1766,7 @@ External commands:
   - sourcetree
   - [GitHawkApp/GitHawk](https://github.com/GitHawkApp/GitHawk):A GitHub project manager app for iOS. http://githawk.com
   - Linux
-    + SmartGit
+    + [SmartGit](https://www.syntevo.com/)
     + GitKraken
     + Git Cola
 

@@ -782,6 +782,21 @@ kubectl delete pod first-pod
 kubectl exec -it multi-container-pod -c container-serving-dates -- bash
 ```
 
+## Job
+
+* 用于Pod对象运行一次性任务，容器中的进程在正常运行结束后不会对其进行重启，而是将Pod对象置于"Completed"(完成)状态
+* 若容器中的进程因错误而终止，则需要按照重启策略配置确定是否重启，未运行完成的Pod对象因其所在的节点故障而意外终止后会被调度
+* 有的作业可能需要运行不止一次，用户可以配置它们以串行或者并行的方式运行。
+    - 单工作队列(work queue)：串行式Job，N个作业需要串行运行N次，直至满足期望的次数。如下图所示，这次Job也可以理解为并行度为1的作业执行方式，在某个时刻仅存在一个Pod资源对象。
+    - 多工作队列：并行式Job，这种方式可以设置工作队列数量，即为一次可以执行多个工作队列，每个队列负责一个运行作业，如下图所示，有五个作业，我们就启动五个工作队列去并行执行，当然五个作业，我们也可以只启动两个工作队列去串行执行，两个队列每次各执行一个作业，则一个队列需要执行三次，另一个执行两次。
+* backoffLimit：将作业标记为失败状态之前的重试次数，默认值为6
+* activeDeadlineSeconds：Job的deadline，用于为其指定最大活动时间长度，超出此时长的作业将被终止。
+
+```sh
+kubectl get job -o wide
+kubectl describe job -busybox-job
+```
+
 ## ReplicaSet (RS):下一代Replication Controller
 
 * ReplicaSet和Replication Controller唯一区别是现在选择器支持不同，官方推荐ReplicaSet,大多数kubectl支持Replication Controller的命令也支持ReplicaSet
