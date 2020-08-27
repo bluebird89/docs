@@ -2186,6 +2186,9 @@ kill -l
 
 ### Network
 
+* Linux内核是通过一个虚拟的网桥设备（Net Device）来实现桥接的。这个虚拟设备可以绑定若干个以太网接口，从而将它们连接起来
+  - 对于网络协议栈的上层来说，只看到br0。因为桥接是在数据链路层实现的，上层不需要关心桥接的细节，于是协议栈上层需要发送的报文被送到br0，网桥设备的处理代码判断报文被转发到eth0还是eth1，或者两者皆转发
+  - 从eth0或者从eth1接收到的报文被提交给网桥的处理代码，在这里判断报文应该被转发、丢弃或者提交到协议栈上层。
 * 类型
   - lo  回环接口
   - eth0 或 enp* 以太网接口
@@ -2206,10 +2209,20 @@ kill -l
 * 服务：封装的命令行，带有设定的参数、日志记录、运行监控
 * 启动服务会生成进程，端口占用
 * netstat:打印网络连接、路由表、连接的数据统计、伪装连接以及广播域成员
+  - `ss -s`
+  - 属于net-tools工具集，而ss属于iproute
+    + 统计  ifconfig  ss
+    + 地址  netstat ip addr
+    + 路由  route ip route
+    + 邻居  arp ip neigh
+    + VPN iptunnel  ip tunnel
+    + VLAN  vconfig ip link
+    + 组播  ipmaddr ip maddr
   - -a 所有当前连接
   - -t 显示和tcp相关
   - -u 显示和udp相关
   - -x 显示和Unix sockets相关
+  - -wa 查看RAW sockets
   - -n|numeric 禁用域名解析功能  默认情况下 netstat 会通过反向域名解析技术查找每个 IP 地址对应的主机名
   - -l 显示处于Listen(监听)状态,不要使用 -a 选项，否则 netstat 会列出所有连接(还有连接)，而不仅仅是监听端口
   - -p|program 显示建立连接的程序名与进程号，必须运行在 root 权限之下，不然它就不能得到运行在 root 权限下的进程名
@@ -2223,19 +2236,6 @@ kill -l
   - -i 打印网络接口信息
   - -v|verbose shows Active Internet connections and Active UNIX domain sockets without server information.
   - 查看当前系统连接`netstat -antp | awk '{a[$6]++}END{ for(x in a)print x,a[x]}'`
-* `ss -s`
-  - 查看TCP sockets，使用-ta选项
-  - 查看UDP sockets，使用-ua选项
-  - 查看RAW sockets，使用-wa选项
-  - 查看UNIX sockets，使用-xa选项
-* netstat属于net-tools工具集，而ss属于iproute
-  - 统计  ifconfig  ss
-  - 地址  netstat ip addr
-  - 路由  route ip route
-  - 邻居  arp ip neigh
-  - VPN iptunnel  ip tunnel
-  - VLAN  vconfig ip link
-  - 组播  ipmaddr ip maddr
 * LISTEN状态
   - Recv-Q：代表建立的连接还有多少没有被accept，比如Nginx接受新连接变的很慢
   - Send-Q：代表listen backlog值
@@ -2295,7 +2295,12 @@ kill -l
     + 端口的扫描，nc 可以作为 client 发起 TCP 或 UDP 连接
     + 机器之间传输文件
     + 机器之间网络测速
-# 防火墙
+*  网桥（Bridge）就起到相应的作用
+  -  一个数据链路层（data link）的设备，根据Mac地址的信息转发到网桥的不同端口上.网桥是一个二层的虚拟网络设备，把若干个网络接口“连接”起来，使得网口之间的报文可以转发
+  -  网桥能够解析收发的报文，读取目标的Mac地址信息，和自己的Mac地址表结合，来决策报文转发的目标网口
+  -  为了实现这些功能，网桥会学习源Mac地址。在转发报文时，网桥只需要向特定的端口转发，从而避免不必要的网络交互。如果它遇到了一个自己从未学过的地址，就无法知道这个报文应该向哪个网口转发，就将报文广播给除了报文来源之外的所有网口
+*  为了支持越来越多的网卡以及虚拟设备，所以使用网桥去提供这些设备之间转发数据的二层设备。Linux内核支持网口的桥接（以太网接口），这与单纯的交换机还是不太一样，交换机仅仅是一个二层设备
+* 防火墙
   - iptables -L
 
 ```sh

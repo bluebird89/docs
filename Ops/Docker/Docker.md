@@ -5,7 +5,7 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
 * 基于 Go 语言并遵从Apache2.0协议开源的应用容器引擎
 * 基于LXC技术之上构建的container容器引擎，通过内核虚拟化技术（namespace及cgroups）来提供容器的资源隔离与安全保障，KVM是通过硬件实现的虚拟化技术，它是通过系统来实现资源隔离与安全保障，占用系统资源比较小
 * 让开发者打包应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化
-* 容器是完全使用沙箱机制，保证不同服务之间环境隔离,提高了安全性,更重要的是容器性能开销极低
+* 完全使用沙箱机制，保证不同服务之间环境隔离,提高了安全性,更重要的是容器性能开销极低
 * 借鉴传统的虚拟及镜像机制，提供artifact集装箱能力，从而助力云计算，尤其是类似于提供了Web, Hadoop集群，消息队列等
 * 镜像装箱机制：类似一个只读模版的文件结构，可以自定义及扩展，用来创建Docker容器
 * 高效虚拟化
@@ -48,39 +48,6 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
 
 * Docker Community Edition（CE）社区版
 * Enterprise Edition(EE) 商业版
-
-## 虚拟化进程
-
-* 单应用单物理机
-* 应用虚拟化
-  - Virual Host:web 服务器和数据库这样的基础层应用，开始提供逻辑隔离功能，即允许在一个基础层上同时支撑多个用户应用
-  - 增加了程序架构和部署的复杂度
-* 虚拟机
-  - 一台物理机上的每个应用程序都可以拥有自己的操作系统和运行环境
-  - 通过逻辑上的隔离显著地简化了应用程序架构
-  - 虚拟机时代最具革命性的结果，是以 AWS 为主导的云计算业务
-* 容器:把进程“装箱”到了一个操作系统不同的资源子集当中
-  - 随着大量新功能的引入，也带来了服务部署和管理复杂度的挑战
-  - 服务扩容仍然需要依赖云计算厂商提供的特定方法来扩容底层的虚拟机。何时创建容器，将容器部署在何处也是非常复杂的问题
-* Kubernetes:基于容器的服务，提供了一种标准的、环境无关的方式来描述、管理和运行一个完整的可扩展的大型系统
-* 技术
-  - Hypervisor抽象虚拟化硬件平台
-  - VMWare, XEN抽象虚拟化操作系统
-    + 进程隔离需要系统隔离
-
-## LXC(Linux Container)
-
-* 可以提供轻量级的虚拟化，以便隔离进程和资源，而且不需要提供指令解释机制以及全虚拟化的其他复杂性
-* 容器有效地将由单个操作系统管理的资源划分到孤立的组中，以更好地在孤立的组之间平衡有冲突的资源使用需求
-* 与传统虚拟化技术相比，优势在于：
-  - 与宿主机使用同一个内核，性能损耗小
-  - 不需要指令级模拟
-  - 不需要即时(Just-in-time)编译
-  - 容器可以在CPU核心的本地运行指令，不需要任何专门的解释机制
-  - 避免了准虚拟化和系统调用替换中的复杂性
-  - 轻量级隔离，在隔离的同时还提供共享机制，以实现容器与宿主机的资源共享
-* 提供了在单一可控主机节点上支持多个相互隔离的server container同时执行的机制。Linux Container有点像chroot，提供了一个拥有自己进程和网络空间的虚拟环境，但又有别于虚拟机，因为lxc是一种操作系统层次上的资源的虚拟化
-* 与docker关系:docker并不是LXC替代品，docker底层使用了LXC来实现，LXC将linux进程沙盒化，使得进程之间相互隔离，并且能够配置各进程的资源分配。在LXC的基础之上，docker提供了一系列更强大的功能
 
 ## Install
 
@@ -342,6 +309,18 @@ sudo systemctl restart docker
 * 概念
   - Docker Engine：整个Docker的核心与基础，平时使用的docker命令，以及提供Docker核心功能的Docker守护进程（Docker Deamon）——包括管理Image、运行Contrainer等
   - Boot2Docker：Docker基于Linux内核特性，因此只能运行于Linux之上，为了能在Mac/Windows系统上运行，有了Boot2Docker。Boot2Docker会先启动一个VirtualBox虚拟机，然后在该虚拟机中运行一个Linux系统，再在Linux中运行Docker
+* LXC(Linux Container)
+  - 可以提供轻量级的虚拟化，以便隔离进程和资源，而且不需要提供指令解释机制以及全虚拟化的其他复杂性
+  - 容器有效地将由单个操作系统管理的资源划分到孤立的组中，以更好地在孤立的组之间平衡有冲突的资源使用需求
+  - 与传统虚拟化技术相比，优势在于：
+    + 与宿主机使用同一个内核，性能损耗小
+    + 不需要指令级模拟
+    + 不需要即时(Just-in-time)编译
+    + 容器可以在CPU核心的本地运行指令，不需要任何专门的解释机制
+    + 避免了准虚拟化和系统调用替换中的复杂性
+    + 轻量级隔离，在隔离的同时还提供共享机制，以实现容器与宿主机的资源共享
+  - 提供了在单一可控主机节点上支持多个相互隔离的server container同时执行的机制。Linux Container有点像chroot，提供了一个拥有自己进程和网络空间的虚拟环境，但又有别于虚拟机，因为lxc是一种操作系统层次上的资源的虚拟化
+  - 与docker关系:docker并不是LXC替代品，docker底层使用了LXC来实现，LXC将linux进程沙盒化，使得进程之间相互隔离，并且能够配置各进程的资源分配。在LXC的基础之上，docker提供了一系列更强大的功能
 * 隔离
   - docker本质就是宿主机的一个进程
   - 文件系统隔离 rootfs：每个容器都有自己的 root 文件系统
@@ -409,10 +388,8 @@ sudo systemctl restart docker
 
 * 一个只读的模版，用来创建容器
 * 一个特殊的文件系统，提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）
-* 镜像是一种文件结构，Dockerfile中的命令都会在文件系统中创建一个新的层次结构，镜像则构建与这些文件系统之上
-* 一层层叠加，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层
-* 这些叠加的最后一层就是container，所以你在container里面改了文件，其实不会进image
-* 一种UnionFS（联合文件系统），是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem),Union FS 有两个用途
+* Dockerfile中的命令都会在文件系统中创建一个新的层次结构，镜像则构建与这些文件系统之上.一层层叠加，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层.这些叠加的最后一层就是container，所以在container里面改了文件，其实不会进image
+* 一种UnionFS（联合文件系统），是一种分层、轻量级并且高性能的文件系统，支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem),Union FS 有两个用途
   - 可以实现不借助 LVM、RAID 将多个 disk 挂到同一个目录下
   - 将一个只读的分支和一个可写的分支联合在一起，Live CD 正是基于此方法可以允许在镜像不变的基础上允许用户在其上进行一些写操作
 * `docker pull [选项] [Docker Registry地址]  <仓库名>:<标签名>`
@@ -600,42 +577,63 @@ docker container prune  # 删除所有停止掉的container
 
 ## 网络 Network
 
-* libnetwork 是 docker 容器网络库，最核心的内容是其定义的 Container Network Model (CNM)，这个模型对容器网络进行了抽象，由以下三类组件组成：
-  - Sandbox 是容器的网络栈，包含容器的 interface、路由表和 DNS 设置。 Linux Network Namespace 是 Sandbox 的标准实现。Sandbox 可以包含来自不同 Network 的 Endpoint。也就是说Sandbox将一个容器与另一个容器通过Namespace进行隔离，一个容器包含一个sandbox，每一个sandbox可以有多个Endpoint隶属于不同的网络
-  - Endpoint 的作用是将 Sandbox 接入 Network。Endpoint 的典型实现是 veth pair。一个 Endpoint 只能属于一个网络，也只能属于一个 Sandbox
+* 为了支持网络协议栈的多个实例，Linux在网络栈引入了Network Namespace，这些独立的协议栈被隔离到不同的Namespace中，处于不同Namespace中的网络栈是完全隔离的，彼此无法通信
+* 为了支持独立的协议栈，相关的全局变量都必须修改为协议栈私有。Linux实现Network Namespace的核心就是让这些全局变量称为Network Namespace变量的成员，然后为协议栈的函数调用加入一个Namespace参数。与此同时，为了保证已开发程序及内核代码的兼容性，内核代码隐式地使用了Namespace空间内的变量。应用程序如果没有对Namespace有特殊需求，那么不需要额外的代码，Network Namespace对应用程序而言是透明的。
+* 在建立了新的Network Namespace，并将某个进程关联到这个网络命名空间后.所有网络栈变量都放入了Network Namespace的数据结构中，这个Network Namespace是属于它进程组私有的，与其他进程组不冲突。Docker正是利用了Network Namespace特性，实现了不同容器之间的网络隔离
+
+* libnetwork 是 docker 容器网络库，最核心内容是其定义的 Container Network Model (CNM)，这个模型对容器网络进行了抽象，由以下三类组件组成：
+  - Sandbox 容器的网络栈，包含容器的 interface、路由表和 DNS 设置。 Linux Network Namespace 是 Sandbox 的标准实现。Sandbox 可以包含来自不同 Network 的 Endpoint。也就是说Sandbox将一个容器与另一个容器通过Namespace进行隔离，一个容器包含一个sandbox，每一个sandbox可以有多个Endpoint隶属于不同的网络
+  - Endpoint 作用是将 Sandbox 接入 Network。Endpoint 的典型实现是 veth pair。一个 Endpoint 只能属于一个网络，也只能属于一个 Sandbox
   - Network 包含一组 Endpoint，同一 Network 的 Endpoint 可以直接通信。Network 的实现可以是 Linux Bridge、VLAN 等
+
 * 网络模型及工作原理
   - 要实现网络通信，机器需要至少一个网络接口（物理接口或虚拟接口）来收发数据包；此外，如果不同子网之间要进行通信，需要路由机制
   - Docker 中的网络接口默认都是虚拟的接口。虚拟接口的优势之一是转发效率较高。 Linux 通过在内核中进行数据复制来实现虚拟接口之间的数据转发，发送接口的发送缓存中的数据包被直接复制到接收接口的接收缓存中。对于本地系统和容器内系统看来就像是一个正常的以太网卡，只是它不需要真正同外部网络设备通信，速度要快很多
   - 访问外部网络，需要本地系统的转发支持
   - 默认情况下，所有容器都会被连接到 docker0 网桥上
-    + 在内核层连通了其他的物理或虚拟网卡，这就将所有容器和本地主机都放到同一个物理网络
-    + 主机和容器之间可以通过网桥相互通信，它还给出了 MTU（接口允许接收的最大传输单元），通常是 1500 Bytes
+    + 内核层连通了其他的物理或虚拟网卡，将所有容器和本地主机都放到同一个物理网络
+    + 主机和容器之间可以通过网桥相互通信，还给出了 MTU（接口允许接收的最大传输单元），通常是 1500 Bytes
   - 通过本地主机的网桥接口相互通信，就像物理机器通过物理交换机通信一样
   - 创建
     + 创建一对虚拟接口，分别放到本地主机和新容器中
     + 本地主机一端桥接到默认的 docker0 或指定网桥上，并具有一个唯一的名字，如 veth65f9
-    + 容器一端放到新容器中，并修改名字作为 eth0，这个接口只在容器的名字空间可；
+    + 一端放到新容器中，并修改名字作为 eth0，这个接口只在容器的名字空间可
     + 从网桥可用地址段中获取一个空闲地址分配给容器的 eth0，并配置默认路由到桥接网卡 veth65f9
-  - docker run 的时候通过 --net 参数来指定容器的网络配置，有4个可选值
-    + --net=bridge 这个是默认值，连接到默认的网桥,独立container之间的通信
-    + --net=host 告诉 Docker 不要将容器网络放到隔离的名字空间中，即不要容器化容器内的网络。直接使用宿主机的网络，端口也使用宿主机的,容器进程可以跟主机其它 root 进程一样可以打开低范围的端口，可以访问本地网络服务比如 D-bus，还可以让容器做一些影响整个主机系统的事情，比如重启主机。因此使用这个选项的时候要非常小心。如果进一步的使用 --privileged=true，容器会被允许直接配置主机的网络堆栈
+
+  - docker run 的时候通过 --net 参数来指定容器的网络配置
+    + --net=bridge（默认)，连接到默认的网桥,独立container之间的通信
+    + --net=host 告诉 Docker 不要将容器网络放到隔离的名字空间中，即不要容器化容器内的网络。直接使用宿主机的网络，端口也使用宿主机的,容器进程可以跟主机其它 root 进程一样可以打开低范围的端口，可以访问本地网络服务比如 D-bus，还可以让容器做一些影响整个主机系统的事情，比如重启主机。因此使用这个选项的时候要非常小心
+      * 如果进一步的使用 --privileged=true，容器会被允许直接配置主机的网络堆栈
     + --net=container:NAME_or_ID 让 Docker 将新建容器的进程放到一个已存在容器的网络栈中，新容器进程有自己的文件系统、进程列表和资源限制，但会和已存在的容器共享 IP 地址和端口等网络资源，两者进程可以直接通过 lo 环回接口通信
     + --net=none 禁用网络 让 Docker 将新容器放到隔离的网络栈中，但是不进行网络配置。之后，用户可以自己进行配置
     + overlay：当有多个docker主机时，跨主机的container通信
     + macvlan：每个container都有一个虚拟的MAC地址
+
 * 默认情况下，分别会建立一个bridge、一个host和一个none的网络.都是使用的这个bridge的网络，可以访问外网和其他container的（需要通过IP地址）
-  - bridge(默认)的网络是有很多限制的，可以自行创建bridge类型的网络
+  - bridge(默认)网络是有很多限制的，可以自行创建bridge类型的网络
+    + Docker就是在宿主机上默认创建一个docker0的网桥，凡是连接docker0的网桥，都可以用它来通信
     + Docker在安装时会在宿主机上创建名为docker0的网桥，所谓网桥相当于一个虚拟交换机,容器都会挂到docker0上
     + 容器和docker0之间通过veth进行连接，veth相当于一根虚拟网线，连接容器和虚拟交换机，这样就使得docker0与容器连通了
     + 默认的bridge网络与自建bridge网络有以下区别：
       * 端口不会自行发布，必须使用-p参数才能为外界访问，而使用自建的bridge网络时，container的端口可直接被相同网络下的其他container访问
       * container之间的如果需要通过名字访问，需要--link参数，而如果使用自建的bridge网络，container之间可以通过名字互访
+
+    + 容器执行：一张叫eth0的网卡，它正是一个Veth Pair设备在容器的这一端
+    + 通过 route 查看该容器的路由表，看到这个eth0是这个容器的默认路由设备
+    + Veth Pair 设备的另一端，则在宿主机上，容器对应的Veth Pair设备是一张虚拟网卡，再用brctl show命令查看网桥，清楚的看到Veth Pair的一端 vethd08be47 就插在 docker0 上
+    + 执行docker run 启动两个容器，就会发现docker0上插入两个容器的 Veth Pair的一端
+    + 在一个容器内部ping另外一个容器的ip，是可以ping通的。也就意味着，这两个容器是可以互相通信的
+    + 当在容器1里访问容器2的地址，目的IP地址会匹配到容器1的第二条路由规则，这条路由规则的Gateway是0.0.0.0，意味着这是一条直连规则，也就是说凡是匹配到这个路由规则的请求，会直接通过eth0网卡，通过二层网络发往目的主机。
+    + 要通过二层网络到达容器2，就需要172.17.0.3对应的MAC地址。所以，容器1的网络协议栈就需要通过eth0网卡来发送一个ARP广播，通过IP找到MAC地址。
+    + 所谓ARP（Address Resolution Protocol），就是通过三层IP地址找到二层的MAC地址的协议。这里说到的eth0，就是Veth Pair的一端，另一端则插在了宿主机的docker0网桥上。eth0这样的虚拟网卡插在docker0上，也就意味着eth0变成docker0网桥的“从设备”。从设备会降级成docker0设备的端口，而调用网络协议栈处理数据包的资格全部交给docker0网桥。
+    + 在收到ARP请求之后，docker0就会扮演二层交换机的角色，把ARP广播发给其它插在docker0网桥的虚拟网卡上，这样，172.17.0.3就会收到这个广播，并把其MAC地址返回给容器1。有了这个MAC地址，容器1的eth0的网卡就可以把数据包发送出去。这个数据包会经过Veth Pair在宿主机的另一端veth26cf2cc，直接交给docker0。
+    + docker0转发的过程，就是继续扮演二层交换机，docker0根据数据包的目标MAC地址，在CAM表查到对应的端口为veth8762ad2，然后把数据包发往这个端口。而这个端口，就是容器2的Veth Pair在宿主机的另一端，这样，数据包就进入了容器2的Network Namespace，最终容器2将响应（Ping）返回给容器1
   - none:挂在这个网络下的容器除了lo，没有其他任何网卡。容器run时，可以通过添加--network=none参数来指定该容器使用none网络
   - host:共享Docker宿主机的网络栈，即容器的网络配置与host宿主机完全一样。可以通过添加--network=host参数来指定该容器使用host网络
     + 直接使用Docker host的网络最大的好处就是性能，如果容器对网络传输效率有较高要求，则可以选择host网络
     + 不便之处就是牺牲一些灵活性,端口冲突
-* 跨主机网络方案
+  - container
+* 跨主机网络方案：节点与节点的通信往往可以通过NAT的方式
   - 自定义容器网络
     + bridge
     + overlay：创建跨主机的网络。需要一个 key-value 数据库用于保存网络状态信息，包括 Network、Endpoint、IP 等。Consul、Etcd 和 ZooKeeper 都是 Docker 支持的 key-vlaue 软件
@@ -644,13 +642,14 @@ docker container prune  # 删除所有停止掉的container
     + macvlan：创建跨主机的网络
   - 第三方方案：常用的包括 flannel、weave 和 calico
 * 网络模型验正
-* 暴露容器应用至节点外部
-  - 使用 -P 标记时，Docker 会随机映射一个 49000~49900 的端口到内部容器开放的网络端口
-  - -p（小写的）则可以指定要映射的端口，并且，在一个指定端口上只可以绑定一个容器。支持的格式
+* 暴露
+  - -P 随机映射一个 49000~49900 的端口到内部容器开放的网络端口
+  - -p 指定要映射的端口，在一个指定端口上只可以绑定一个容器
     + ip:hostPort:containerPort
     + ip::containerPort 绑定 localhost 的任意端口到容器的 5000 端口，本地主机会自动分配一个端口
     + hostPort:containerPort
   - 查看容器端口映射本地端口 `docker port`
+
 * 容器互联
   - 端口映射
   - --link name:alias，其中 name 是要链接的容器的名称，alias 是这个连接的别名
@@ -658,6 +657,7 @@ docker container prune  # 删除所有停止掉的container
   - 为容器公开连接信息
     + 环境变量
     + 更新 /etc/hosts 文件
+
 * 桥接式网络管理
   - -b BRIDGE or –bridge=BRIDGE –指定容器挂载的网桥 # 只有在 Docker 服务启动的时候才能配置，而且不能马上生效
   - –bip=CIDR –定制 docker0 的掩码
@@ -677,16 +677,17 @@ docker container prune  # 删除所有停止掉的container
   - -h HOSTNAME or --hostname=HOSTNAME 设定容器的主机名，它会被写到容器内的 /etc/hostname 和/etc/hosts。但它在容器外部看不到，既不会在 docker ps 中显示，也不会在其他的容器的 /etc/hosts 看到。
   - --link=CONTAINER_NAME:ALIAS 选项会在创建容器的时候，添加一个其他容器的主机名到 /etc/hosts 文件中，让新容器的进程可以使用主机名 ALIAS 就可以连接它。
   - --dns=IP_ADDRESS 添加 DNS 服务器到容器的 /etc/resolv.conf 中，让容器用这个服务器来解析所有不在/etc/hosts 中的主机名。
-  - --dns-search=DOMAIN 设定容器的搜索域，当设定搜索域为 .example.com 时，在搜索一个名为 host 的主机时，DNS 不仅搜索host，还会搜索 host.example.com。 注意：如果没有上述最后 2 个选项，Docker 会默认用主机上的 /etc/resolv.conf 来配置容器。
+  - --dns-search=DOMAIN 设定容器的搜索域，当设定搜索域为 .example.com 时，在搜索一个名为 host 的主机时，DNS 不仅搜索host，还会搜索 host.example.com。 注意：如果没有上述最后 2 个选项，Docker 会默认用主机上的 /etc/resolv.conf 来配置容器
 * 配置Docker进程的网络属性
-* 不同网络之间的容器由于网络独立性的要求是无法ping通的。原因是iptables-save DROP掉了docker之间的网络
 * 不同网络之间的docker通信
+  - 不同网络之间的容器由于网络独立性的要求是无法ping通的。原因是iptables-save DROP掉了docker之间的网络
   - 为其中一个容器添加另外一个容器的网络
   - Docker DNS Server：docker daemon 实现了一个内嵌的DNS server，使容器可以直接通过“容器名”通信。有个限制，只能在user-defined网络中使用。默认的bridge网络是无法使用的
   - joined 容器：可以使两个或多个容器共享一个网络栈，共享网卡和配置信息
     + 适合场景：
       * 不同容器中的程序希望通过loopback高效快速地通信，比如web server与app server
       * 希望监控其他容器的网络流量，比如运行在独立容器中的网络监控程序
+
 * The bridged network is the default choice unless otherwise specified. In this mode, the container has its own networking namespace and is then bridged via virtual interfaces to the host (or node in the case of K8s) network.
 * In a default Linux installation, the client talks to the daemon via a local IPC/Unix socket at /var/run/docker.sock.
 * runc is the reference implementation of the OCI container- runtime-spec,runc is a small, lightweight CLI wrapper for libcontainer
@@ -698,6 +699,8 @@ docker container prune  # 删除所有停止掉的container
 * In terms of Docker constructs, a Pod is modelled as a group of Docker containers with shared namespaces and shared filesystem volumes.
 * If that Pod is deleted for any reason, even if an identical replacement is created, the related thing (e.g. volume) is also destroyed and created anew.
 * Containers within the Pod see the system hostname as being the same as the configured name for the Pod.
+* 参考
+  - [Docker容器网络-基础篇](https://mp.weixin.qq.com/s/yWaMVm523C2KefNeFZZF8Q)
 
 ```sh
 docker run -d -P training/webapp python app.py
@@ -752,6 +755,13 @@ docker network create -d overlay ov_net2 # 在一个节点中进行上述创建�
 docker network create -d overlay ov_net3 --subnet 172.19.0.0/24 --gateway 172.19.0.1
 
 docker run --network ov_net2 busybox # 之后创建容器的时候只需要指定--network参数为ov_net2即可
+
+# 新增一个网桥
+brctl addbr xxxxx
+# 在新增网桥的基础上增加网口，在linux中，一个网口其实就是一个物理网卡。将物理网卡和网桥连接起来
+brctl addif xxxx ethx
+
+
 ```
 
 ## 持久化

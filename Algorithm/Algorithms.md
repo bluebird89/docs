@@ -432,3 +432,5 @@ class Solution {
 * [动态规划解题技巧](https://mp.weixin.qq.com/s?__biz=MzI1MzYzMTI2Ng==&mid=2247484431&idx=3&sn=35abe41394f24167b78419edbc36fc7c)
 * [我接触过的前端数据结构与算法](https://juejin.im/post/5958bac35188250d892f5c91)
 * [wangzheng0822/algo](https://github.com/wangzheng0822/algo):数据结构和算法必知必会的50个代码实现
+* [美国高薪计算机大公司流行算法面试题，LeetCode算法题成为破解高薪之道？ - ycombinator](https://www.jdon.com/54814)
+

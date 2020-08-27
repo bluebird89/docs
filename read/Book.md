@@ -435,17 +435,6 @@
 * Concurrency : The Works of Leslie Lamport
 * Distributed Computing
 
-## MOBI
-
-* kindle
-    - <http://kindle115.com/>
-    - [鸠摩搜书](https://www.jiumodiary.com/)
-    - [Calibre](https://calibre-ebook.com/) `sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin`
-    - <http://kmate.me/cn/>
-    - <https://readfree.me/>
-    - [时钟](http://k.ilib.io/u/clock.html)
-    - Knotes:Kindle 标注管理器
-
 ## 出版社
 
 * 企鹅出版社：1935年，一位名叫艾伦·莱恩Allen Lane的英国人在买烟时偶然得到灵感：为什么不能把书做得和香烟一样“便于携带”和“触手可及”？后来，他创办企鹅出版社，大量出版小开本的平装书，让精英文化进入人们的口袋。2013年企鹅与兰登书屋合并为“企鹅兰登”，成为世界上最大最高端的出版集团之一。1年卖出7亿册书，出品诸多诺贝尔文学奖作品。对于全球文艺青年来说，定期查看和购买企鹅出版的产品，是理想中必备的文艺生活方式之一。

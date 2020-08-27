@@ -23,7 +23,6 @@ The official GitHub mirror of the Chromium source https://chromium.googlesource.
 *  Lighthouse:automated tool for improving the performance, quality, and correctness of your web apps
 * [markdown-here](https://github.com/adam-p/markdown-here) Markdown一键转换到"富文本格式"
 * Marmoset代码特效图
-* Momentum：一款清新的新标签页插件，具有待办、天气、搜索功能，最最重要的是，插件的大背景，非常具有创意和艺术气息
 * OneTab：所有标签页转换成一个列表,节约 95% 内存的前提是静态网页
 * [Octotree](https://github.com/ovity/octotree)：GitHub code tree on steroids  github目录工具 Code tree for GitHub
 * OurStickys:Chrome特色网页便签纸
@@ -49,6 +48,9 @@ The official GitHub mirror of the Chromium source https://chromium.googlesource.
 * XML Tree
 * 眼不见心不烦：屏蔽微博
 * 网页截图:注释&批注：捕获整个页面或任何部分
+
+* Dream Afar New Tab
+* Momentum：一款清新的新标签页插件，具有待办、天气、搜索功能，最最重要的是，插件的大背景，非常具有创意和艺术气息
 
 ```
 Navigating the current page:

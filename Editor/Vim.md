@@ -494,6 +494,11 @@ r       对单词字符进行替换
 * YouDao-Translater Vim中的有道翻译插件
 * Matrix-ScreenSaver Vim中的黑客帝国屏幕保护插件，很酷很炫
 * vim-go 搞Go开发必备的插件，集成了很多Go的相关功能
+* [vim-surround](https://github.com/tpope/vim-surround):surround.vim: quoting/parenthesizing made simple
+    - d s <existing char>   删除两边的指定字符
+    - c s <existing char> <desired char>  修改两边的指定字符
+    - y s <motion> <desired char> 修改两边字符
+    - S <desired char>    visual modes 选中指定字符中间的内容
 
 ## 学习计划
 

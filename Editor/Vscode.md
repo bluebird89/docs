@@ -126,6 +126,17 @@ sudo apt-get install code
 }
 ```
 
+## vim
+
+* 编辑html
+    - dit 删除标签内部的内容。
+    - cit 删除 标签内部的内容并切换到insert模式。
+    - yit 复制 标签内部的内容。
+    - vit 选中标签内部的内容。
+    - vat 选中标签以及内部的内容。
+    - di) yi) ci):删除 修改 复制括号 () 引号内部的内容
+    - da) ya) ca) #通知删除 括号
+
 ### 左边列表
 
 -   File explorer: `command + shift + E`
