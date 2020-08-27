@@ -375,6 +375,10 @@ public class OrderCreatedEvent extends OrderEvent {
 * 微服务间的集成可以通过Context Map来完成，比如ACL（Anticorruption Layer，防腐层）。
 * 微服务间最好采用Domain Event（领域事件）来进行交互，使得微服务可以保持松耦合。
 
+## 项目
+
+* [jivejdon](https://github.com/banq/jivejdon):Jivejdon is a Domain Driven Design appication with CQRS/ES/Clean/Hexagonal architecture
+
 ## 图书
 
 * 《领域特定语言》
@@ -387,6 +391,7 @@ public class OrderCreatedEvent extends OrderEvent {
 
 * [citerus/dddsample-core](https://github.com/citerus/dddsample-core):This is the new home of the original DDD Sample app (previously hosted at sf.net)..
 * [heynickc/awesome-ddd](https://github.com/heynickc/awesome-ddd):A curated list of Domain-Driven Design (DDD), Command Query Responsibility Segregation (CQRS), Event Sourcing, and Event Storming resources
+* [使用什么样的开发流程才能更好实现DDD？不是敏捷！](https://www.jdon.com/54721)
 
 * [领域驱动设计(DDD)实现之路](https://www.jianshu.com/p/cdbefdd55b99)
 * [领域驱动设计(DDD)编码实践](https://www.jianshu.com/p/84f1d922a6d4)

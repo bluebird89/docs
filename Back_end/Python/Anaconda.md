@@ -65,6 +65,8 @@ conda update conda
 
 ## 使用
 
+*　虚拟环境：按需部署
+
 ```sh
 conda info -e|--envs # 显示已创建环境
 conda update conda|anaconda|python

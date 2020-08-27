@@ -1702,7 +1702,7 @@ ROLLBACK TO updateA;
 COMMIT;
 ```
 
-## 锁机制
+## 锁
 
 并发控制:确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性以及数据库的统一性
 
@@ -1764,17 +1764,9 @@ COMMIT;
         + 适合
             * 在取锁失败概率比较小的场景，可以提升系统并发性能
             * 写比较少的情况下
-        + MVCC并发控制中，读操作可以分成两类：
-            * 快照读 (snapshot read)：读取的是记录的可见版本 (有可能是历史版本)，不用加锁（共享读锁s锁也不加，所以不会阻塞其他事务的写）,执行select的时候，innodb默认会执行
-                - 数据虽然是一致的，但是数据是历史数据
-                - 只是简单的 select ，不包括 select … lock in share mode, select … for update
-            * 当前读 (current read)：读取的是记录的最新版本，并且，当前读返回的记录，都会加上锁，保证其他事务不会再并发修改这条记录
-                - 默认会执行当前读会加锁，也就是会读取最新的记录，也就是别的事务提交的数据你也可以看到
-                - select … lock in share mode
-                - select … for update
-                - insert
-                - update：执行当前读，然后把返回的数据加锁
-                - delete
+        + MVCC并发控制
+            * MVCC可以实现事务中的查询不用加锁，优化事务性能
+            * 只在COMMITTED READ（读提交）和REPEATABLE READ（可重复读）两种隔离级别下工作
         + CAS compare and swap
             * 需要读写的内存值 V
             * 进行比较的值 A
@@ -1783,15 +1775,17 @@ COMMIT;
             * 通过MVCC (Multi-Version Concurrency Control) ，虽然每行记录都需要额外的存储空间，更多的行检查工作以及一些额外的维护工作，但可以减少锁的使用，大多数读操作都不用加锁，读数据操作很简单，性能很好，并且也能保证只会读取到符合标准的行，也只锁住必要行。
                 - 读不加锁，读写不冲突。在读多写少的OLTP应用中，读写不冲突是非常重要的，极大的增加了系统的并发性能
             + 加大了系统的整个吞吐量。上层应用会不断的进行retry，这样反倒是降低了性能，所以这种情况下用悲观锁就比较合适
-+ InnoDB存储引擎的锁的算法有三种：
++ InnoDB存储引擎的锁算法：
     - Record lock：单个行记录上的锁
     - Gap lock：间隙锁，锁定一个范围，不包括记录本身
+        + 目的是为了阻止多个事务将记录插入到同一范围内，而这会导致幻读问题的产生
+        + 显式关闭gap锁：（除了外键约束和唯一性检查外，其余情况仅使用record lock）
+            * 将事务隔离级别设置为RC
+            * 将参数innodb_locks_unsafe_for_binlog设置为1
     - Next-key lock：record+gap 锁定一个范围，包含记录本身
-    - Innodb对于行的查询使用next-key lock
-    - Next-locking keying为了解决Phantom Problem幻读问题
-    - 当查询的索引含有唯一属性时，将next-key lock降级为record key
-    - Gap锁设计的目的是为了阻止多个事务将记录插入到同一范围内，而这会导致幻读问题的产生
-    - 有两种方式显式关闭gap锁：（除了外键约束和唯一性检查外，其余情况仅使用record lock） A. 将事务隔离级别设置为RC B. 将参数innodb_locks_unsafe_for_binlog设置为1
+        + Innodb对于行的查询使用next-key lock
+        + Next-locking keying为了解决Phantom Problem幻读问题
+        + 当查询的索引含有唯一属性时，将next-key lock降级为record key
 * LOCK TABLES 和 UNLOCK TABLES:服务器层（MySQL Server层）实现
     - LOCK TABLES 可以锁定用于当前线程的表。如果表被其他线程锁定，则当前线程会等待，直到可以获取所有锁定为止
     - UNLOCK TABLES 可以释放当前线程获得的任何锁定。当前线程执行另一个 LOCK TABLES 时，或当与服务器的连接被关闭时，所有由当前线程锁定的表被隐含地解锁
@@ -1801,14 +1795,22 @@ COMMIT;
         + COMMIT 或 ROLLBACK 并不能释放用 LOCK TABLES 加的表级锁，必须用UNLOCK TABLES 释放表锁
     - 场景
         + 同时取得所有涉及到表的锁，并且 MySQL 不支持锁升级
-* GAP lock (间隙索引，针对非唯一索引)
-    - 对索引前后的间隙上锁，不对索引本身上锁
-    - 目的为了防止幻读
-    - select称为快照读，不需要锁，而insert、update、delete与select for update则称为当前读，需要给数据加锁，幻读中的“读”即是针对当前读
-    - 事物commit 未完成时，会利用行锁锁住满足where条件的行，并且对满足where条件的行的两边数据加上间隙锁。
-    - 这时候另一个事物操作前面已经上了间隙锁的行就会Lock wait timeout exceeded
-    - 当select for update中的where条件无法筛选出记录时，这时在有多个线程执行上面的acquire方法时是可能会出现死锁
+* 读取方式
+    - 快照读 (snapshot read)：读取的是记录的可见版本 (有可能是历史版本)，不用加锁（共享读锁s锁也不加，所以不会阻塞其他事务的写）,执行select的时候，innodb默认会执行
+        + 数据虽然是一致的，但是数据是历史数据
+        + 只是简单的 select ，不包括 select … lock in share mode, select … for update
+        + 事物commit未完成时，会利用行锁锁住满足where条件的行，并且对满足where条件的行的两边数据加上间隙锁。
+        + 这时候另一个事物操作前面已经上了间隙锁的行就会Lock wait timeout exceeded
+    - 当前读 (current read)：读取的是记录的最新版本，并且，当前读返回的记录，都会加上锁，保证其他事务不会再并发修改这条记录
+        + 默认会执行当前读会加锁，也就是会读取最新的记录，也就是别的事务提交的数据也可以看到
+        + select … lock in share mode
+        + select … for update
+        + insert
+        + update：执行当前读，然后把返回的数据加锁
+        + delete
+        + 当select for update中的where条件无法筛选出记录时，这时在有多个线程执行上面的acquire方法时是可能会出现死锁
         + LOCK_GAP类型的锁只要不带有插入意向标识，不必等待其它锁（表锁除外）
+
         + 两个 session同时更新已存在数据，事务238434 事务(238435)
         + `show engine innodb status`
         + 事务238434 在尝试插入'ddd',1时，由于发现其他事务(238435)已经有这个区间的gap锁，因此innodb给事务238434上了插入意向锁，锁的模式为`LOCK_X | LOCK_GAP | LOCK_INSERT_`INTENTION，等待事务238435释放掉gap锁
@@ -1828,8 +1830,41 @@ COMMIT;
     - 尽量用相等条件访问数据，这样可以避免间隙锁对并发插入的影响
     - 不要申请超过实际需要的锁级别
     - 除非必须，查询时不要显示加锁
-    - MVCC可以实现事务中的查询不用加锁，优化事务性能；MVCC只在COMMITTED READ（读提交）和REPEATABLE READ（可重复读）两种隔离级别下工作
     - 对于一些特定的事务，可以使用表锁来提高处理速度或减少死锁的可能
+* [8.0行锁观测方式](https://mp.weixin.qq.com/s/p3vYV7sXvKGU_A689txnbQ)
+    - 8.0新增了全新的锁观测方式，在performance_schema下新增了data_locks表和data_lock_waits表
+    - data_locks
+        + ENGINE：持有或请求锁定的存储引擎
+        + ENGINE_LOCK_ID：存储引擎持有或请求的锁的ID，锁ID格式是内部的，随时可能更改。
+        + ENGINE_TRANSACTION_ID：请求锁定的事务存储引擎内部ID，可以将其视为锁的所有者
+        + THREAD_ID：对应事务的线程ID，如果需要获取更详细的信息，需要关联threads表的THREAD_ID
+        + EVENT_ID：指明造成锁的EVENT_ID，THREAD_ID+EVENT_ID对应parent EVENT，可以在以下几张表内获得信息
+            * events_waits_xx表查看等待事件
+            * events_stages_xxx查看到了哪个阶段
+            * events_statements_xx表查看对应的SQL语句
+            * events_transactions_current对应查看事务信息
+        + OBJECT_SCHEMA：对应锁表的schema名称
+        + OBJECT_NAME：对应锁的表名
+        + PARTITION_NAME：对应锁的分区名
+        + SUBPARTITION_NAME：对应锁的子分区名
+        + INDEX_NAME：锁对应的索引名称，InnoDB表不会为NULL
+        + OBJECT_INSTANCE_BEGIN：锁对应的内存地址
+        + LOCK_TYPE：对应的锁类型，对InnoDB而言，可为表锁或者行锁
+        + LOCK_MODE：锁模式，对应值可能为S[,GAP], X[, GAP], IS[,GAP], IX[,GAP], AUTO_INC和UNKNOWN
+        + LOCK_STATUS：锁状态，可能为GRANTED或者WAITING
+        + LOCK_DATA：锁对应的数据，例如如果锁定的是主键，那么该列对应的就是加锁的主键值
+    - data_lock_waits
+        + ENGINE：请求的锁的引擎
+        + REQUESTING_ENGINE_LOCK_ID：请求的锁在存储引擎中的锁ID
+        + REQUESTING_ENGINE_TRANSACTION_ID：请求锁的事务对应的事务ID
+        + REQUESTING_THREAD_ID：请求锁的线程ID
+        + REQUESTING_EVENT_ID：请求锁的EVENT ID
+        + REQUESTING_OBJECT_INSTANCE_BEGIN：请求的锁的内存地址
+        + BLOCKING_ENGINE_LOCK_ID：阻塞的锁的ID，对应data_locks表的ENGINE_LOCK_ID列
+        + BLOCKING_ENGINE_TRANSACTION_ID：锁阻塞的事务ID
+        + BLOCKING_THREAD_ID：锁阻塞的线程ID
+        + BLOCKING_EVENT_ID：锁阻塞的EVENT ID
+        + BLOCKING_OBJECT_INSTANCE_BEGIN：阻塞的锁内存地址
 
 ```sql
 show OPEN TABLES where In_use > 0; # 查询是否锁表

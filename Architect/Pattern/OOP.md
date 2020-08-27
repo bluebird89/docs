@@ -490,6 +490,5 @@ notification.sendMessage("13918942177", "短信验证码：2346");
 * 《Python 3 Object-oriented Programming》
 * 《设计模式解析》
 * 《敏捷软件开发——原则、模式与实践》
-* 《领域驱动设计》
+* 《领域驱动设计》Eric Evans
 * 《实现领域驱动设计》
-

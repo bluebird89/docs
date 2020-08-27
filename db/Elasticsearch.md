@@ -505,6 +505,8 @@ elasticsearch -E node.name=node3 -E cluster.name=geektime -E path.data=node3_dat
 http://localhost:9200/_cat/nodes
 ```
 
+## [ElasticSearch Operator 工作原理浅析](https://mp.weixin.qq.com/s/0ydcQthxAE_yWnQAjnIIOA)
+
 ## Logstash
 
 采集数据导入
