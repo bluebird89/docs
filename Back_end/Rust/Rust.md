@@ -70,11 +70,72 @@ registry = "git://crates.rustcc.cn/crates.io-index"
 registry = "https://code.aliyun.com/rustcc/crates.io-index"
 ```
 
+## Project Setup
+
 ```sh
+cargo new hello_rust
+
 cargo install wasm-pack          # Compile Rust to Wasm and generate JS interop code
 cargo install cargo-make         # Task runner
 cargo install simple-http-server # Simple server to serve assets
 cargo new --lib rustmart && cd rustmart
+```
+
+## Dependency
+
+* Cargo.toml
+
+## Tooling Ecosystem
+
+* Version Manager nvm rustup
+* Package Manager npm Cargo
+* Package Registry    npmjs.com   crates.io
+* Package Manifest    package.json    Cargo.toml
+* Dependency Lockfile package-lock.json   Cargo.lock
+* Task Runner npm scripts, gulp etc   make, cargo-make
+* Live Reload nodemon cargo-watch
+* Linter  ESLint, TSLint, JSLint  Clippy
+* Formatter   Prettier    rustfmt
+* Dependency Vulnerability Checker    npm audit   cargo-audit
+
+## Variables
+
+* let immutable:You won’t be able to change the value after it’s assigned.
+* want to make variable mutable, you need to explicitly mention it using the mut keyword `let mut a = 123;`
+* const:think of Rust’s const as a “label” to a constant value. During compile time they get replaced by their actual values in all the places they are used. It’s usually used for constants like port numbers, timeout values, error codes etc
+* Destructuring:extracting the inner fields of an array or struct into separate variables
+
+## Data Types
+
+* Numbers:for both integers (numbers without decimal point) and floats (numbers with decimal point).
+* Booleans
+* Strings
+    - String:growable whereas &str is immutable and fixed size
+    - &str
+* Arrays
+    - fixed size (simply referred to as “Array”)
+    - can grow/shrink in size (called “Vectors”)
+* Objects
+    - Bag of data:
+
+## function
+
+* return
+    - without an explicit return
+    - returning implicitly, make sure to remove the semicolon from that line
+* closure
+* Iterators
+    - & is the reference operator
+    - the * is the dereference operator
+
+## Pattern Matching
+
+```sh
+match VALUE {
+  PATTERN1 => EXPRESSION1,
+  PATTERN2 => EXPRESSION2,
+  PATTERN3 => EXPRESSION3,
+}
 ```
 
 ## 教程
@@ -105,6 +166,10 @@ cargo new --lib rustmart && cd rustmart
 * [clap-rs/clap](https://github.com/clap-rs/clap):A full featured, fast Command Line Argument Parser for Rust https://clap.rs
 * [crossbeam-rs/crossbeam](https://github.com/crossbeam-rs/crossbeam):Tools for concurrent programming in Rust
 * 工具
+    - Task Runner cargo-make
+    - Live Reload  cargo-watch
+    - Linter and Formatter cargo-husky
+    - Vulnerability Checking  cargo-audit
 	- [racer-rust/racer](https://github.com/racer-rust/racer):Rust Code Completion utility
 	- [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust heart Emacs
 	- [ rust-embedded / cross ](https://github.com/rust-embedded/cross):“Zero setup” cross compilation and “cross testing” of Rust crates

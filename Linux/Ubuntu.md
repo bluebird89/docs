@@ -57,6 +57,7 @@ sudo update-grub
 
 ## 版本
 
+* [Linux Lite](https://www.linuxliteos.com/index.html)
 * 20.04 LTS Focal Fossa
   - Wireguard 已被移植到 Linux 内核5.4
   - zfs

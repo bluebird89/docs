@@ -105,8 +105,6 @@ Examples:
 SEE HomePage
 DO [Click] "Login".Button
 REACT Success: SHOW "Login Success".Toast with ANIMATE(bounce)
-
-
 ```
 
 ## 好处
@@ -128,9 +126,9 @@ REACT Success: SHOW "Login Success".Toast with ANIMATE(bounce)
 * 业务复杂、团队成员较多的项目，沟通成本高，BDD很有必要。
 
 ## 痛点
-Cucumber框架实现Web自动化测试包括两个部分：Feature（特性）文件和Step Definition（测试实现），在实际应用中人们普遍感觉到它的复杂。
 
-* Cucumber特别强调的是协作，Feature文件通常由偏业务的人员来编写，要求遵循Given-When-Then的格式。这种固定的语法对编写人员要求较高，写起来比较费劲，尤其对新人不友好，很多团队反映要写出好的Feature文件特别费时费力。
+* Cucumber框架实现Web自动化测试包括两个部分：Feature（特性）文件和Step Definition（测试实现），在实际应用中人们普遍感觉到它的复杂。
+* Cucumber特别强调的是协作，Feature文件通常由偏业务的人员来编写，要求遵循Given-When-Then的格式。这种固定的语法对编写人员要求较高，写起来比较费劲，尤其对新人不友好，很多团队反映要写出好的Feature文件特别费时费力
 * Cucumber支持多种语言实现测试代码，但本身并不能实现自动化，对于Web自动化测试需要跟其他自动化工具结合，比如Selenium-WebDriver。实现代码不仅复杂，还有着元素定位难、执行时间长、不够稳定的痛点。
 
 ```
@@ -160,6 +158,10 @@ Then('the page title should start with {string}', {timeout: 60 * 1000}, async fu
 });
 ```
 
+## [behave/behave](https://github.com/behave/behave)
+
+BDD, Python style
+
 ## 问题
 
 * BDD与TDD/ATDD:TDD是测试驱动开发，ATDD是验收测试驱动开发，都是关于测试的，是与所开发的系统紧密联系的。而BDD则不同，前面提到过BDD不是关于测试的，着重关注需求、关注客户的业务价值，所描述的需求用例是可以独立于软件系统存在的，因为客户的业务是始终存在的，不取决于是否有软件系统来支撑。
@@ -172,7 +174,6 @@ Then('the page title should start with {string}', {timeout: 60 * 1000}, async fu
 ## 工具
 
 * [Cucumber](https://cucumber.io/) 背后是一个名为 Gherkin 的 DSL，它用于描述需求及测试
-* [behave/behave](https://github.com/behave/behave):BDD, Python style
 * Twist
 * Concordion
 

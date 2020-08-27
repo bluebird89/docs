@@ -96,7 +96,7 @@ var name="Gates", age=56, job="CEO";
 
 * 固定值称为字面量
 * 所有事物都为对象,JavaScript 本地对象和内置对象
-* 类型
+* 类型:all non-primitive types are “objects”
   - 值类型(基本类型 不可变类型)：固定值称为字面量
     + 字符串（String）
     + 数字(Number)
