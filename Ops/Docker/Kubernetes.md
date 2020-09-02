@@ -540,10 +540,14 @@ kubectl get pods -l ‘environment in (production),tier in (frontend)’
 ## 过程
 
 * 管理员创建应用程序的所需状态并将其放入清单文件manifest.yml中
-* 使用CLI或提供的用户界面将清单文件提供给Kubernetes API Server。Kubernetes的默认命令行工具称为kubectl
+* 使用CLI或提供的用户界面将清单文件提供给Kubernetes API Server。Kubernetes的默认命令行工具为kubectl
 * Kubernetes将清单文件（描述了应用程序的期望状态）存储在称为键值存储（etcd）的数据库中
 * Kubernetes随后在集群内的所有相关应用程序上实现所需的状态
 * Kubernetes持续监控集群的元素，以确保应用程序的当前状态不会与所需状态有所不同
+* 参考
+    - [kubectl 创建 Pod 背后到底发生了什么？](https://fuckcloudnative.io/posts/what-happens-when-k8s/)
+
+![Alt text](../_static/what-happens-when-k8s.svg "Optional title")
 
 ## [对象](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/)
 
@@ -837,8 +841,19 @@ kubectl get pod
 kubectl describe replicaset myapp-replicas
 ```
 
-## Deployment
+## [Deployment](https://mp.weixin.qq.com/s/XRp13zkoo94q31RO5zIfaA)
 
+* 功能
+    - 轻松部署RS（副本集）
+    - 清理不再需要的旧版RS
+    - 扩展/缩小RS里的Pod数量
+    - 动态更新Pod（根据Pod模板定义的更新用新Pod替换旧Pod）
+    - 回滚到以前的Deployment版本
+    - 保证服务的连续性
+* 原理：
+    - Deployment 控制器从 Etcd 中获取到所有携带了"app: nginx"标签 Pod，然后统计它们数量，这就是实际状态
+    - Deployment 对象的 Replicas 字段值就是期望状态，Deployment 控制器将两个状态做比较
+    - 根据比较结果，Deployment确定是创建 Pod，还是删除已有的 Pod，还是什么不干
 * 一个管理ReplicaSet并提供Pod声明式更新、应用的版本管理以及许多其他功能的更高级的控制器
 * 虚拟化部署:允许在单个物理服务器上创建隔离的虚拟环境，即虚拟机（VM）。该解决方案隔离了VM中的应用程序，限制了资源的使用并提高了安全性。一个应用程序不能再自由访问另一个应用程序处理的信息.快速扩展并分散单个物理服务器的资源，随意更新并控制硬件成本。每个VM都有其操作系统，并且可以在虚拟化硬件之上运行所有必要的系统
 * 容器化部署:多个应用程序可以共享相同的基础操作系统
@@ -846,6 +861,44 @@ kubectl describe replicaset myapp-replicas
     - 通过 ReplicaSet 的个数来描述应用的版本
     - 通过 ReplicaSet 的属性（比如 replicas 的值），来保证 Pod 的副本数量
 * Deployment是一个更高层次的概念，管理ReplicaSet，并提供对pod的声明性更新以及许多其他的功能。因此，建议使用Deployment而不是直接使用ReplicaSet。这实际上意味着可能永远不需要操作ReplicaSet对象，而是直接使用Deployment并在规范部分定义应用程序
+* Deployment 通过"控制器模式"，来操作ReplicaSet 的个数和属性，进而实现"水平扩展 / 收缩" 和 "滚动更新" 这两个编排动作
+* 水平扩展/收缩
+    - 是不会创建新的ReplicaSet的，但是涉及到Pod模板的更新后，比如更改容器的镜像，那么Deployment会用创建一个新版本的ReplicaSet用来替换旧版本
+* 滚动更新
+    - 更新deployment.yaml里的镜像名称，然后执行 kubectl apply -f deployment.yaml。一般公司里的Jenkins等持续继承工具用的就是这种方式
+    - 使用kubectl set image 命令
+        + 用新版本的ReplicaSet对象替换旧版本对象
+    - 修改了Deployment里的Pod定义之后，Deployment 会使用这个修改后的 Pod 模板，创建一个新的 ReplicaSet（hash=6749dbc697），这个新的ReplicaSet 的初始Pod副本数是：0。然后Deployment 开始将这个新的ReplicaSet所控制的Pod 副本数从 0 个变成 1 个，即："水平扩展"出一个副本。
+    - 紧接着Deployment又将旧的 ReplicaSet（hash=864496b67b）所控制的旧 Pod 副本数减少一个，即："水平收缩"成两个副本。如此交替进行就完成了这一组Pod 的版本升级过程。像这样，将一个集群中正在运行的多个 Pod 版本，交替地逐一升级的过程，就是 "滚动更新"
+* 为了保证服务的连续性，Deployment 还会确保，在任何时间窗口内，只有指定比例的Pod 处于离线状态。同时，它也会确保，在任何时间窗口内，只有指定比例的新 Pod 被创建出来。这两个比例的值都是可以配置的，默认都是期望状态里spec.relicas值的 25%。所以，在上面这个 Deployment 的例子中，它有 3 个 Pod 副本，那么控制器在“滚动更新”的过程中永远都会确保至少有 2 个Pod 处于可用状态，至多只有 4 个 Pod 同时存在于集群中。这个策略可以通过Deployment 对象的一个字段，RollingUpdateStrategy来设置
+* 回滚
+    - 执行变更命令的时候都使用了--record 参数，这个参数能让Kubernetes在这个Deployment的变更记录里记录上产生变更当时执行的命令
+    - 以前那个版本的ReplicaSet(hash=864496b67b)的Pod的数又变回了3，新ReplicaSet(hash=6749dbc697)的Pod数变成了0
+    - Deployment在上次滚动更新后并不会把旧版本的ReplicaSet删掉，而是留着回滚的时候用，所以ReplicaSet相当于一个基础设施层面的应用的版本管理
+    - 回滚后在看变更记录，发现已经没有修订号1的内容了，而是多了修订号为3的内容，这个版本的变更内容其实就是回滚前修订号1里的变更内容
+* 控制ReplicaSet的版本数量
+    - 对 Deployment 的多次更新操作，最后只生成一个ReplicaSet对象
+        + `kubectl rollout pause`这个Deployment进入了一个"暂停"状态。由于此时Deployment正处于“暂停”状态，所以对Deployment的所有修改，都不会触发新的“滚动更新”，也不会创建新的ReplicaSet。
+        + 等到对 Deployment 修改操作都完成之后，只需要再执行一条 kubectl rollout resume 指令，就可以把这个它恢复回来
+    - Deployment 对象有一个字段，叫作 spec.revisionHistoryLimit，就是 Kubernetes 为 Deployment 保留的"历史版本"个数。如果把它设置为 0，就再也不能做回滚操作了
+* Deployment 的设计，代替完成了对应用的抽象，可以用一个Deployment 对象来描述应用，使用 kubectl rollout 命令控制应用的版本
+* 会保证服务的连续性，确保滚动更新时在任何时间窗口内，只有指定比例的Pod 处于离线状态，同时也只有指定比例的新 Pod 被创建出来，这样就保证了服务能平滑更新
+
+```sh
+kubectl rollout status deployment my-go-app
+kubectl get deployment my-go-app
+kubectl get replicaset
+kubectl get pod
+
+kubectl scale --replicas=3 deployment my-go-app --record
+
+kubectl set image deployment my-go-app go-app-container=kevinyan001/kube-go-app:v0.1 --record
+
+kubectl rollout history deployment my-go-app
+kubectl rollout undo  deployment my-go-app --to-revision=1
+
+kubectl rollout pause deployment my-go-app
+```
 
 ## Service
 

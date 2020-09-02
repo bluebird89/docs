@@ -131,7 +131,7 @@
     - 单机高性能手段：可以上网查询 C10k 问题，获取相关文章。把进程、线程、池、IO 多路复用相关知识点弄清楚。
     - 分清楚 IO 密集型和 CPU 密集型场景：一般互联网应用多为 IO 密集型。但是类似：滴滴出行、股市量化投资、在线游戏之类，属于 IO 密集型和 CPU 密集型并存的场景，甚至对响应时间要求也很高。 幸好大多数 CPU 密集型应用也是多租户、区域独立性架构，容易扩展拆分。
     - 程序访问存储介质或链路快慢： 程序肯定要与存储进行消息交换。一定明白，CPU 高速存储器、内存、SSD 硬盘、机械硬盘、同交换机网络、同机房网络、同城网络、同运营商网络等。细节展开很多内容，包含缓存、cdn、多机房...从细节编程到部署架构的知识点。
-（2）集群：高性能、高并发相关
+* 集群：高性能、高并发相关
     - 负载均衡反向代理：其实把 nginx 了解就可以了。如果是初创小公司，基本使用云上 SLB 负载均衡(ServerLoadBalancer)就可以， 如果需要自建机房，有专门运维负责这些工作，到时候补补 LVS、F5 相关技术即可。
     - 服务无状态：以微服务为例来说，服务无状态会带来太多的好处，扩展冗余部署服务会很方便。不谈微服务，就说前后端分离，鉴权这块 token 的实现，其实根本目的也是把用户状态剥离出来，实现服务的无状态化。 （提个小插曲，估计老人才了解 j2ee EJB 规范，当初居然专门设计了一个 sessionBean 有状态的服务规范）
     - 任务（服务）拆分：可以理解为服务拆解、功能拆解。其实拆分准则很多，可以按照实际需求来权衡。比如：按照人头分、按照功能划分、按照数据库表划分、按照功能重要性划分、按照功能访问频度划分....。 不过，水平按照 gateway、逻辑层、数据层、存储层算基本规范了。
@@ -571,3 +571,5 @@ service UserService {
 * [binhnguyennus/awesome-scalability](https://github.com/binhnguyennus/awesome-scalability):An updated and curated list of selected readings to illustrate Scalability, Availability, and Stability Design Patterns in Back-end Development.
 * [microsoft/fast](https://github.com/microsoft/fast):The adaptive interface system  for modern web experiences. https://www.fast.design/
 * [“构建”世界的能力-架构能力](https://mp.weixin.qq.com/s/Qw8TEIssMwrE9l2Y8BzjaA)
+* [最小可用架构](https://mp.weixin.qq.com/s/rZWxtVyJjgiUBPeY5gPqOA)
+* [百万年薪架构师是如何炼成的？](https://mp.weixin.qq.com/s/D8-fdrJzggAFH-UbsLmjew)
