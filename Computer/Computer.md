@@ -120,6 +120,7 @@ total = *p + 200;
 
 * 《深入理解计算机系统》
 * 《异类》
+* Addison-Wesley professional computing series
 
 ## 项目
 
@@ -165,10 +166,11 @@ total = *p + 200;
         + 《计算机网络知识要点与习题解析》哈尔滨工程大学出版社 
     - 视频
         + 武汉大学 —— 数据结构 MOOC 网络课程
-        + 华中科技大学 —— 计算机组成原理
+        + 华中科技大学 —— 计算机组成原理palg
         + 电子科技大学 —— 计算机组成原理
         + 华中科技大学 —— 操作系统原理
         + 哈尔滨工业大学 —— 计算机网络
+* [LIFT-CS: Laboratory for Innovation for the Future of Teaching Computer Science](https://lift.cs.princeton.edu/)
 
 ## 工具
 

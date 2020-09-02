@@ -16,7 +16,7 @@ The official GitHub mirror of the Chromium source https://chromium.googlesource.
 * crxMouse Chrome Gestures:用鼠标操作Chrome
 * Enhanced Github:下载Github单个文件
 * FeHelper - WEB 前端助手，All In One 的一个工具，包含多个独立小应用，比如：Json 工具、代码美化、代码压缩、二维码、Postman、markdown、网页油猴、便签笔记、信息加密与解密、随机密码生成、Crontab 等等
-* speedtest:网络测速插件
+* Fika:排版更专注于阅读内容
 * Firebug Lite 程序调试工具
 * [gongjunhao/seckill](https://github.com/gongjunhao/seckill):Chrome浏览器 抢购、秒杀插件，秒杀助手，定时自动点击 * Infinity New Tab：基于Chrome的云应用服务
 * JSONView|JSON Viewer

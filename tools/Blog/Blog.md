@@ -108,6 +108,9 @@ jekyll serve
 
 ## [Typecho](http://typecho.org/)
 
+* 外观
+* 插件
+
 ```
 # 登录 typecho提示 URL 为 http://127.0.0.1/index.php/action/login?name=admin&password=admin&referer=http%3A%2F%2F127.0.0.1%2Fadmin%2Findex.php&_=a6ca5a4fff943b47824c6b1f8af93cde 页面为 404 Not Found
 # location ~ \.php$ {

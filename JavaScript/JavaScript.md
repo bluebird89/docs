@@ -4,6 +4,20 @@
 * 1995年，网景公司正凭借其Navigator浏览器成为Web时代开启时最著名的第一代互联网公司。由于网景公司希望能在静态HTML页面上添加一些动态效果，于是叫Brendan Eich这哥们在两周之内设计出了JavaScript语言。你没看错，这哥们只用了10天时间。为什么起名叫JavaScript？原因是当时Java语言非常红火，所以网景公司希望借Java的名气来推广，但事实上JavaScript除了语法上有点像Java，其他部分基本上没啥关系
 * 因为网景开发了JavaScript，一年后微软又模仿JavaScript开发了JScript，为了让JavaScript成为全球标准，几个公司联合ECMA（European Computer Manufacturers Association）组织定制了JavaScript语言的标准，被称为ECMAScript标准。
 * ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标准的一种实现。ECMAScript 6标准（简称ES6）已经在2015年6月正式发布了，所以，讲到JavaScript的版本，实际上就是说它实现了ECMAScript标准的哪个版本。
+* 生态
+  - TypeScript 对战 ES6
+    + 深入理解 ES6 中的基础语法非常重要
+    + 了解 JavaScript 的解释方式以及各种浏览器的局限性也很重要
+    + PWA 和服务工作者的崛起也值得关注。
+  - React 对战 Angular Vue
+  - Jest 对战 Mocha
+  - GraphQL,Apollo（GraphQL 的客户端）REST API 将会下降
+  - Parcel 和 Webpack
+  - TypeScript 可能超过 ECMAScript
+  - GraphQL + TypeScript 占据了 2020 年所需技能的列表。
+  - 预测像 Next.js、Nuxt.js 和 Gatsby.js 这样的混合框架将占据很大一部分项目，因此 JavaScript 开发人员必须了解这些工具。
+  - Agile（敏捷）这个术语，但它比 Git 或 Redux 被提及的频率更高，这说明 JS 开发者们除了要获得开发岗位必须的硬技能，软技能同样不可忽视。UX 也是如此
+  - 作为一个前端开发者，需要知道如何在技术层面为用户提供更流畅的体验，而不是在设计层面
 
 ## 功能
 
@@ -17,12 +31,14 @@
   - document.getElementById('myimage').src
   - document.getElementById('myimage').style.color
 
-## 引入方式
+## 引入
 
 * 默认的type就是JavaScript，所以不必显式地把type指定为JavaScript
 * 由`<script>...</script>`包含的代码就是JavaScript代码，它将直接被浏览器执行。JavaScript代码可以直接嵌在网页的任何地方，不过通常我们都把JavaScript代码放到`<body>`后
 * 把JavaScript代码放到一个单独的.js文件，然后在HTML中通过`<script src="..."></script>`引入这个文件
-  - 更利于维护代码，并且多个页面可以各自引用同一份.js文件。以在同一个页面中引入多个.js文件，还可以在页面中多次编写`<script> js代码... </script>`，浏览器按照顺序依次执行
+  - 更利于维护/复用
+  - 在同一个页面中引入多个.js文件
+  - 在页面中多次编写`<script> js代码... </script>`，浏览器按照顺序依次执行
 
 ```html
 <head>
@@ -69,22 +85,22 @@ PI; // 3.14
 
 ### 变量
 
-用于存储信息的"容器"，变量不仅可以是数字，还可以是任意数据类型。
+用于存储信息的"容器"，变量不仅可以是数字，还可以是任意数据类型
 
-* 变量名是大小写英文、数字、$和_的组合
+* 大小写英文、数字、$和_的组合
   - 不能用数字开头
   - 变量名也不能是JavaScript的关键字，如if、while等
   - 申明一个变量用var语句。变量名也可以用中文，但是，请不要给自己找麻烦。
-* 使用等号=对变量进行赋值。
+* 使用等号=对变量进行赋值
   - 可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量，但是要注意只能用var声明一次
 * 变量本身类型不固定的语言称之为动态语言
   - 静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。例如Java是静态语言
-* ECMA在后续规范中推出了strict模式，
+* ECMA在后续规范中推出了strict模式
   - 强制通过var申明变量，未使用var申明变量就使用的，将导致运行错误。在JavaScript代码的第一行写上：`'use strict';`
   - 同一个页面的不同的JavaScript文件中，如果都不用var申明，恰好都使用了变量i，将造成变量i互相影响，产生难以调试的错误结果。
   - 使用var申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内（函数的概念将稍后讲解），同名变量在不同的函数体内互不冲突。
 * 如果重新声明 JavaScript 变量，该变量的值不会丢失
-* 生命周期：在它声明时初始化，局部变量在函数执行完毕后销毁，全局变量在页面关闭后销毁
+* 生命周期：在声明时初始化，局部变量在函数执行完毕后销毁，全局变量在页面关闭后销毁
 
 ```js
 var carname; // 声明变量，值为undefined
@@ -94,7 +110,6 @@ var name="Gates", age=56, job="CEO";
 
 ### 数据类型
 
-* 固定值称为字面量
 * 所有事物都为对象,JavaScript 本地对象和内置对象
 * 类型:all non-primitive types are “objects”
   - 值类型(基本类型 不可变类型)：固定值称为字面量
@@ -110,6 +125,20 @@ var name="Gates", age=56, job="CEO";
     + 函数(Function)
     + 比较都是引用的比较，当且仅当它们引用同一个对象时才相等
     + 赋值是浅拷贝，仅仅是赋值的引用值，而不是对象本身，这样如果涉及到嵌套对象（对象属性值是也是对象），在修改一个对象时，会影响到引用的对象
+* 标准对象
+  - 在JavaScript的世界里，一切都是对象，用typeof操作符获取对象的类型.用typeof将无法区分出null、Array和通常意义上的object
+  - 包装对象：包装对象用new创建。看上去和原来的值一模一样，显示出来也是一模一样，但类型已经变为object了！所以，包装对象和原始值用===比较会返回false
+  - 不写new情况下，Number()、Boolean和String()被当做普通函数，把任何类型的数据转换为number、boolean和string类型
+  - 不要使用new Number()、new Boolean()、new String()创建包装对象
+  - 用parseInt()或parseFloat()来转换任意类型到number
+  - 用String()来转换任意类型到string，或者直接调用某个对象的toString()方法
+  - 通常不必把任意类型转换为boolean再判断，因为可以直接写if (myVar) {...}；
+  - typeof操作符可以判断出number、boolean、string、function和undefined
+  - 判断Array要使用Array.isArray(arr)
+  - 判断null请使用myVar === null
+  - 判断某个全局变量是否存在用typeof window.myVar === 'undefined'
+  - 函数内部判断某个变量是否存在用typeof myVar === 'undefined'
+  - null和undefined就没有toString()
 * Boolean:布尔值和布尔代数的表示完全一致，一个布尔值只有true、false两种值.常用在条件判断中
     - `&&` 与运算 `||`和运算 `!`非运算
     - null、undefined、0、NaN和空字符串''视为false，其他值一概视为true
@@ -181,6 +210,32 @@ var name="Gates", age=56, job="CEO";
   -  执行 typeof 计算返回「object」
   -  可以表示数字、字符串、对象是「无值」的
 * Undefined表示值未定义,仅仅在判断函数参数是否传递的情况下有用
+* 类型转化
+  - 值转化为另一个值并不意味着两个值是等价
+  - 自动类型转换
+  - 显式类型转化
+
+```javascript
+typeof 123; // 'number'
+typeof NaN; // 'number'
+typeof 'str'; // 'string'
+typeof true; // 'boolean'
+typeof undefined; // 'undefined'
+typeof Math.abs; // 'function'
+typeof null; // 'object'
+typeof []; // 'object'
+typeof {}; // 'object'
+
+typeof new Number(123); // 'object'
+new Number(123) === 123; // false
+typeof new Boolean(true); // 'object'
+new Boolean(true) === true; // false
+typeof new String('str'); // 'object'
+new String('str') === 'str'; // false
+
+123..toString(); // '123', 注意是两个点！
+(123).toString(); // '123'
+```
 
 ### 数组
 
@@ -256,7 +311,6 @@ var name="Gates", age=56, job="CEO";
 
 ## 函数
 
-
 * 事件驱动的或者当被调用时执行的可重复使用的代码块
 * 函数是“头等公民”，而且可以像变量一样使用，具有非常强大的抽象能力。
 * 最基本的一种代码抽象的方式。能不关心底层的具体计算过程，而直接在更高的层次上思考问题
@@ -276,12 +330,6 @@ var name="Gates", age=56, job="CEO";
 - 作用域：
     - 局部变量：只能在函数内部访问它
     - 全局变量：网页上的所有脚本和函数都能访问它
-
-## 类型转化
-
-* 值转化为另一个值并不意味着两个值是等价
-* 自动类型转换
-* 显式类型转化
 
 ### 运算符
 
@@ -428,7 +476,7 @@ function foo() {
 
 ## 高阶函数 Higher-order function
 
-函数其实都指向某个变量。既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数。
+函数其实都指向某个变量。既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数
 
 * arr.map(functionName):传入函数名字，array每一个元素经过函数处理
   - 返回一个新Array
@@ -484,44 +532,6 @@ ES6标准引入的新的数据类型。一个generator看上去像一个函数�
     - 不断地调用generator对象的next()方法：会执行generator的代码，然后，每次遇到yield x;就返回一个对象{value: x, done: true/false}，然后“暂停”。返回的value就是yield的返回值，done表示这个generator是否已经执行结束了。如果done为true，则value就是return的返回值
     - 直接用for ... of循环迭代generator对象，这种方式不需要我们自己判断done
 * 巨大的好处，就是把异步回调代码变成“同步”代码。这个好处要等到后面学了AJAX以后才能体会到。
-
-## 标准对象
-
-* 在JavaScript的世界里，一切都是对象，用typeof操作符获取对象的类型.用typeof将无法区分出null、Array和通常意义上的object
-* 包装对象：包装对象用new创建。看上去和原来的值一模一样，显示出来也是一模一样，但他们的类型已经变为object了！所以，包装对象和原始值用===比较会返回false。 所以闲的蛋疼也不要使用包装对象！尤其是针对string类型
-* 不写new情况下，Number()、Boolean和String()被当做普通函数，把任何类型的数据转换为number、boolean和string类型
-* 不要使用new Number()、new Boolean()、new String()创建包装对象；
-* 用parseInt()或parseFloat()来转换任意类型到number；
-* 用String()来转换任意类型到string，或者直接调用某个对象的toString()方法；
-* 通常不必把任意类型转换为boolean再判断，因为可以直接写if (myVar) {...}；
-* typeof操作符可以判断出number、boolean、string、function和undefined；
-* 判断Array要使用Array.isArray(arr)；
-* 判断null请使用myVar === null；
-* 判断某个全局变量是否存在用typeof window.myVar === 'undefined'；
-* 函数内部判断某个变量是否存在用typeof myVar === 'undefined'。
-* null和undefined就没有toString()
-
-```javascript
-typeof 123; // 'number'
-typeof NaN; // 'number'
-typeof 'str'; // 'string'
-typeof true; // 'boolean'
-typeof undefined; // 'undefined'
-typeof Math.abs; // 'function'
-typeof null; // 'object'
-typeof []; // 'object'
-typeof {}; // 'object'
-
-typeof new Number(123); // 'object'
-new Number(123) === 123; // false
-typeof new Boolean(true); // 'object'
-new Boolean(true) === true; // false
-typeof new String('str'); // 'object'
-new String('str') === 'str'; // false
-
-123..toString(); // '123', 注意是两个点！
-(123).toString(); // '123'
-```
 
 ### Date
 
@@ -654,11 +664,15 @@ JavaScript对每个创建的对象都会设置一个原型，指向它的原型�
 
 ### class继承
 
-关键字class从ES6开始正式被引入到JavaScript中。class的目的就是让定义类更简单。
+* 关键字class从ES6开始正式被引入到JavaScript中。class的目的就是让定义类更简单。
 * class的作用就是让JavaScript引擎去实现原来需要我们自己编写的原型链代码。简而言之，用class的好处就是极大地简化了原型链代码
 * class的定义包含了构造函数constructor与定义在原型对象上的函数hello()
 * 继承 extends更方便。需要通过super(name)来调用父类的构造函数，否则父类的name属性无法正常初始化。
 * 不是所有的主流浏览器都支持ES6的class。如果一定要现在就用上，就需要一个工具把class代码转换为传统的prototype代码，可以试试Babel这个工具
+* 原型继承的语法糖，使类声明和继承书写变的容易
+* 和对象的写法十分相似，花括号前面只多了 class Name,类方法我们将采用方法名简写的形式。contrustor 是构造函数，可在里面初始化我们想初始化的东西。
+* 类静态方法
+* 继承：当子类想要实现特有的构造函数 constructor 时，首行必须使用 super(...)调用父类的构造函数，先得到父类的this作为自己的 this
 
 ### 浏览器对象模型(BOM)
 
@@ -667,6 +681,7 @@ JavaScript对每个创建的对象都会设置一个原型，指向它的原型�
 document.write("你好 \
 世界!");
 ```
+
 JavaScript可以获取浏览器提供的很多对象，并进行操作。
 
 * window：不但充当全局作用域（所有 JavaScript 全局对象、函数以及变量均自动成为 window 对象的成员），而且表示浏览器窗口：
@@ -1004,9 +1019,8 @@ function getPrice() {
 
 #### 异步编程
 
-在JavaScript的世界中，所有代码都是单线程（single thread）执行的。一个浏览器进程中只有一个JS的执行线程，同一时刻内只会有一段代码在执行。
-
-异步机制是浏览器的两个或以上常驻线程共同完成的，例如异步请求是由两个常驻线程：JS执行线程和事件触发线程共同完成的，JS的执行线程发起异步请求（这时浏览器会开一条新的HTTP请求线程来执行请求，这时JS的任务已完成，继续执行线程队列中剩下的其他任务），然后在未来的某一时刻事件触发线程监视到之前的发起的HTTP请求已完成，它就会把完成事件插入到JS执行队列的尾部等待JS处理。又例如定时触发（settimeout和setinterval）是由浏览器的定时器线程执行的定时计数，然后在定时时间把定时处理函数的执行请求插入到JS执行队列的尾端（所以用这两个函数的时候，实际的执行时间是大于或等于指定时间的，不保证能准确定时的）。
+* 在JavaScript的世界中，所有代码都是单线程（single thread）执行的。一个浏览器进程中只有一个JS的执行线程，同一时刻内只会有一段代码在执行。
+* 异步机制是浏览器的两个或以上常驻线程共同完成的，例如异步请求是由两个常驻线程：JS执行线程和事件触发线程共同完成的，JS的执行线程发起异步请求（这时浏览器会开一条新的HTTP请求线程来执行请求，这时JS的任务已完成，继续执行线程队列中剩下的其他任务），然后在未来的某一时刻事件触发线程监视到之前的发起的HTTP请求已完成，它就会把完成事件插入到JS执行队列的尾部等待JS处理。又例如定时触发（settimeout和setinterval）是由浏览器的定时器线程执行的定时计数，然后在定时时间把定时处理函数的执行请求插入到JS执行队列的尾端（所以用这两个函数的时候，实际的执行时间是大于或等于指定时间的，不保证能准确定时的）。
 
 * 所谓的单线程就是一次只能完成一个任务，其任务的调度方式就是排队，这就和火车站洗手间门口的等待一样，前面的那个人没有搞定，你就只能站在后面排队等着.这种模式的好处是实现起来比较简单，执行环境相对单纯；坏处是只要有一个任务耗时很长，后面的任务都必须排队等着，会拖延整个程序的执行。常见的浏览器无响应（假死），往往就是因为某一段Javascript代码长时间运行（比如死循环），导致整个页面卡在这个地方，其他任务无法执行。
 * 由于这个“缺陷”，导致JavaScript的所有网络操作，浏览器事件，都必须是异步执行。
@@ -1225,14 +1239,6 @@ then(function( fromLatLng, toLatLng ) {
   - window.onpopstate
 * Event对象
 
-## Class
-
-是原型继承的语法糖，使类声明和继承书写变的容易
-
-* 和对象的写法十分相似，花括号前面只多了 class Name,类方法我们将采用方法名简写的形式。contrustor 是构造函数，可在里面初始化我们想初始化的东西。
-* 类静态方法
-* 继承：当子类想要实现特有的构造函数 constructor 时，首行必须使用 super(...)调用父类的构造函数，先得到父类的this作为自己的 this
-
 ## callback
 
 * [callbag/callbag](https://github.com/callbag/callbag):👜 A standard for JS callbacks that enables lightweight observables and iterables
@@ -1250,8 +1256,6 @@ then(function( fromLatLng, toLatLng ) {
 * 不必在每一个函数内部捕获错误，只需要在合适的地方来个统一捕获，一网打尽：在最终的调用捕获
 * 异步错误处理：JavaScript引擎是一个事件驱动的执行引擎，代码总是以单线程执行，而回调函数的执行需要等到下一个满足条件的事件出现后，才会被执行。
     - 原因就在于调用setTimeout()函数时，传入的printTime函数并未立刻执行！紧接着，JavaScript引擎会继续执行console.log('done');语句，而此时并没有错误发生。直到1秒钟后，执行printTime函数时才发生错误，但此时除了在printTime函数内部捕获错误外，外层代码并无法捕获。
-
-replaceWith
 
 ## 客户端存储
 
@@ -1274,21 +1278,23 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 
 ## Web API
 
-## 生态
+## 模块
 
-* TypeScript 对战 ES6
-  - 深入理解 ES6 中的基础语法非常重要
-  - 了解 JavaScript 的解释方式以及各种浏览器的局限性也很重要
-  - PWA 和服务工作者的崛起也值得关注。
-* React 对战 Angular Vue
-* Jest 对战 Mocha
-* GraphQL,Apollo（GraphQL 的客户端）REST API 将会下降
-* Parcel 和 Webpack
-* TypeScript 可能超过 ECMAScript
-* GraphQL + TypeScript 占据了 2020 年所需技能的列表。
-* 预测像 Next.js、Nuxt.js 和 Gatsby.js 这样的混合框架将占据很大一部分项目，因此 JavaScript 开发人员必须了解这些工具。
-* Agile（敏捷）这个术语，但它比 Git 或 Redux 被提及的频率更高，这说明 JS 开发者们除了要获得开发岗位必须的硬技能，软技能同样不可忽视。UX 也是如此
-* 作为一个前端开发者，你需要知道如何在技术层面为用户提供更流畅的体验，而不是在设计层面。
+* .mjs文件总是以 ES6 模块加载，.cjs文件总是以 CommonJS 模块加载，.js文件的加载取决于package.json里面type字段的设置
+* ES6 模块，简称 ESM
+  - 使用import和export
+  - import命令则是异步加载，或者更准确地说，ES6 模块有一个独立的静态解析阶段，依赖关系的分析是在那个阶段完成的，最底层的模块第一个执行
+  - import命令可以加载 CommonJS 模块，但是只能整体加载，不能只加载单一的输出项：因为 ES6 模块需要支持静态代码分析，而 CommonJS 模块的输出接口是module.exports，是一个对象，无法被静态分析，所以只能整体加载
+  -
+*  Node.js 专用的 CommonJS 模块，简称 CJS
+  -  使用require()加载和module.exports输出
+  -  require()是同步加载，后面的代码必须等待这个命令执行完，才会执行
+  -  要求 ES6 模块采用.mjs后缀文件名。只要脚本文件里面使用import或者export命令，那么就必须采用.mjs后缀名
+  -  Node.js 遇到.mjs文件，就认为它是 ES6 模块，默认启用严格模式，不必在每个模块文件顶部指定"use strict"
+  -  如果不希望将后缀名改成.mjs，可以在项目的package.json文件中，指定type字段为module。一旦设置了以后，该目录里面的 JS 脚本，就被解释用 ES6 模块。
+    +  如果这时还要使用 CommonJS 模块，那么需要将 CommonJS 脚本的后缀名都改成.cjs。如果没有type字段，或者type字段为commonjs，则.js脚本会被解释成 CommonJS 模块
+  -  require()命令不能加载 ES6 模块，会报错，只能使用import()这个方法加载
+    +  require()不支持 ES6 模块的一个原因是，它是同步加载，而 ES6 模块内部可以使用顶层await命令，导致无法被同步加载
 
 ## [facebookexperimental / rome](https://github.com/facebookexperimental/rome)
 
@@ -1305,18 +1311,14 @@ rome check
 * [bailicangdu/node-elm](https://github.com/bailicangdu/node-elm):基于 node.js + Mongodb 构建的后台系统
 * [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 
-## 面试
-
-* [原生JS(上)](https://juejin.im/post/5cab0c45f265da2513734390)
-
 ## 图书
 
 * JavaScript 语言精髓与编程实践
 * [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter
 * 《Javascript高级编程》
+* 《[JavaScript 权威指南（第6版）](https://www.amazon.cn/gp/product/B007VISQ1Y)》
 * 《ES6 标准入门(第3版)》
 * 《深入理解ES6》
-* 《JavaScript设计模式》
 * 《JavaScript开发框架权威指南》
 * JavaScript函数式编程
 * 《JavaScript 框架设计》
@@ -1324,16 +1326,14 @@ rome check
 * 《基于 MVC 的 JavaScript Web 富应用开发》
 * 你不知道的javascript
 * 《[高性能 JavaScript](https://www.amazon.cn/gp/product/B013SGB2AO)》
-* 《[锋利的 jQuery（第2版）](https://www.amazon.cn/gp/product/B0089TDFNS)》
 * 《[JavaScript 忍者秘籍](https://www.amazon.cn/gp/product/B016DWSEWO)》（感谢[@joker-danta](https://github.com/jobbole/awesome-programming-books/issues?q=is%3Aissue+is%3Aopen+author%3Ajoker-danta) 补充推荐）
 * 《[编写可维护的 JavaScript](https://www.amazon.cn/gp/product/B00BQ7RMW0)》
-* 《[你不知道的 JavaScript（上）](https://www.amazon.cn/gp/product/B00W34DZ8K)》
-* 《[JavaScript 权威指南（第6版）](https://www.amazon.cn/gp/product/B007VISQ1Y)》
 * 《[JavaScript 语言精粹](https://www.amazon.cn/gp/product/B0097CON2S)》
 * 《[JavaScript DOM编程艺术 （第2版）](https://www.amazon.cn/gp/product/B004VJM5KE)》
 * 《[JavaScript 高级程序设计（第3版）](https://www.amazon.cn/gp/product/B007OQQVMY)》
 * 《[JavaScript 异步编程：设计快速响应的网络应用](https://www.amazon.cn/gp/product/B00JVLEYY2)》
 * 《[Effective JavaScript：编写高质量JavaScript代码的68个有效方法](https://www.amazon.cn/gp/product/B00GMXI1QY)》
+* 《JavaScript设计模式》
 * 《JavaScript设计模式与开发实践》
 * 《Effective JavaScript：编写高质量JavaScript代码的68个有效方法》
 
@@ -1673,9 +1673,7 @@ rome check
 * [getify/You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter. https://www.kickstarter.com/projects/getify/you-dont-know-js-book-series
 * [verekia/js-stack-from-scratch](https://github.com/verekia/js-stack-from-scratch):🛠️⚡ Step-by-step tutorial to build a modern JavaScript stack.
 * [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
-
-* [ teambit / bit ](https://github.com/teambit/bit): Build, distribute and collaborate on components.
-https://bit.dev/  Get your enterprise-grade component cloud
+* [ teambit / bit ](https://github.com/teambit/bit): Build, distribute and collaborate on components. https://bit.dev/  Get your enterprise-grade component cloud
 
 ## 参考
 
@@ -1706,6 +1704,7 @@ https://bit.dev/  Get your enterprise-grade component cloud
 * [addyosmani/essential-js-design-patterns](https://github.com/addyosmani/essential-js-design-patterns):Repo for my 'Learning JavaScript Design Patterns' book https://addyosmani.com/resources/essentialjsdesignpatterns/book/
 * [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API)
 * [comparing-javascript-test-runners](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/README.md):Comparing AVA, Jest, Mocha, and mocha-parallel-tests testing frameworks
+* [原生JS(上)](https://juejin.im/post/5cab0c45f265da2513734390)
 
 ## 问题
 

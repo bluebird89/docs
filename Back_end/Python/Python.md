@@ -1429,6 +1429,7 @@ Namespaces are one honking great idea -- let's do more of those!
 * Python性能分析与优化
 * Python高性能编程
 * [pythonbook](https://python.cs.southern.edu/pythonbook/pythonbook.pdf)
+* [Introduction to Programming in Python: An Interdisciplinary Approach](https://introcs.cs.princeton.edu/python/home/)
 
 * 《[集体智慧编程](https://www.amazon.cn/gp/product/B00UI93JD8)》
 * 《[笨办法学Python](https://www.amazon.cn/gp/product/B00P6OJ0TC)》

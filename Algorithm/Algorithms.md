@@ -239,12 +239,64 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 * Shell Sort 希尔排序
 * Bucket Sort 桶排序
 * 基数排序 Dadix Sort
-* 计数排序（Counting Sort）是一种针对于特定范围之间的整数进行排序的算法。通过统计给定数组中不同元素的数量（类似于哈希映射），然后对映射后的数组进行排序输出即可
+
 * 贪心
 * 剪枝
 * 图算法
 
-字符串操作、数组操作、回溯、动态规划
+## 计数排序（Counting Sort）
+
+* 针对于特定范围之间的整数进行排序的算法。通过统计给定数组中不同元素的数量（类似于哈希映射），然后对映射后的数组进行排序输出即可
+* 步骤
+    - 给定一个数组 arr，生成一个以 arr 的 value 为下标范围的空数组（count）
+    - 计数：遍历 arr，value 存在,则 ++ count[value],得到所有 value 的 count，此时得到不稳定的排序结果
+    - 地址范围（位置信息）：遍历 count[i] = count[i] + count[i-1]。i 范围 [count[i-1],count[i - 1]]
+    - 从后向前遍历:output[arr[i]] = count[arr[i]] -1; --count[arr[i]];
+
+## 字符串操作
+
+## 数组操作
+
+## 回溯
+
+* 核心就是 for 循环里面的递归，在递归调用之前「做选择」，在递归调用之后「撤销选择」
+* backtrack函数其实就像一个指针，在这棵树上游走，同时要正确维护每个节点的属性，每当走到树的底层，其「路径」就是一个全排列
+* 路径：也就是已经做出的选择。
+* 选择列表：也就是当前可以做的选择。
+* 结束条件：也就是到达决策树底层，无法再做选择的条件。
+
+```
+void traverse(TreeNode root) {
+    for (TreeNode child : root.childern)
+        // 前序遍历需要的操作
+        traverse(child);
+        // 后序遍历需要的操作
+}
+
+result = []
+def backtrack(路径, 选择列表):
+    if 满足结束条件:
+        result.add(路径)
+        return
+    for 选择 in 选择列表:
+        # 做选择
+        将该选择从选择列表移除
+        路径.add(选择)
+        backtrack(路径, 选择列表)
+        # 撤销选择
+        路径.remove(选择)
+        将该选择再加入选择列表
+
+    void backtrack(int[] nums, int i, int rest) {
+        if (i == nums.length) {
+            return;
+        }
+        backtrack(nums, i + 1, rest - nums[i]);
+        backtrack(nums, i + 1, rest + nums[i]);
+    }
+```
+
+## 动态规划
 
 ## 图论
 
@@ -389,7 +441,8 @@ class Solution {
 * 《[算法导论（原书第2版)(Introduction to Algorithms）](https://www.amazon.cn/gp/product/B00AK7BYJY)》
     - [huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms](huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms):《算法导论》第三版中算法的C++实现
 * 数论
-* 《[算法（第4版）](https://www.amazon.cn/gp/product/B009OCFQ0O)》
+* [Algorithms, 4th Edition](https://algs4.cs.princeton.edu/home/)
+* [An Introduction to the Analysis of Algorithms](https://aofa.cs.princeton.edu/home/)
 * 《[Python算法教程](https://www.amazon.cn/gp/product/B019NB0VCI)》
 * 《[算法设计与分析基础（第3版）](https://www.amazon.cn/gp/product/B00S4HCQUI)》
 * 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
@@ -399,6 +452,7 @@ class Solution {
 * 《数据结构与算法 JavaScript 描述》
 * 算法图解
 * Algorithms to Live By
+* [Analytic Combinatorics](https://ac.cs.princeton.edu/home/)
 
 ## 工具
 

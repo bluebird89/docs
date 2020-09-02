@@ -386,6 +386,7 @@ public class OrderCreatedEvent extends OrderEvent {
     - [gdut-yy/Domain-Driven-Design-zh](https://github.com/gdut-yy/Domain-Driven-Design-zh):中文翻译 http://gdut_yy.gitee.io/doc-ddd/
 * 《Patterns, Principles and Practices of Domain-Driven Design》
 * 《领域驱动设计精粹》
+* 《复杂软件设计之道：领域驱动设计全面解析与实战》
 
 ## 参考
 

@@ -1760,6 +1760,7 @@ External commands:
 
 * [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
 * [magicmonty/bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):An informative and fancy bash prompt for Git users
+* [nosarthur/gita](https://github.com/nosarthur/gita):Manage many git repos with sanity 从容管理多个git库
 
 * 客户端
   - msysgit

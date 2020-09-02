@@ -359,6 +359,7 @@ java\.lang
 
 * [CS 253 Web Security](https://web.stanford.edu/class/cs253/)
 * The Web Application Hacker's Handbook: Finding and Exploiting Security Flaws 2nd Edition
+* [How to Build a Cybersecurity Career [ 2019 Update ]](https://danielmiessler.com/blog/build-successful-infosec-career/)
 
 ## 工具
 
