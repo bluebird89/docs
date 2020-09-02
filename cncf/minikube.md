@@ -21,7 +21,7 @@
 * 参考
     - [Hello Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/)
 
-```shell
+```sh
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew cask install virtualbox
 # To check if virtualization is supported on macOS, run the following command on your terminal
@@ -37,8 +37,7 @@ sudo install minikube /usr/local/bin/
 
 brew install minikube
 
-# t ofix sudo /sbin/vboxconfig
-
+# to fix sudo /sbin/vboxconfig
 minikube start --registry-mirror=https://registry.docker-cn.com
 minikube start --vm-driver=virtualbox|parallels|vmwarefusion|hyperkit|vmware --disk-size='10g'  --image-mirror-country='cn' --image-repository='registry.cn-hangzhou.aliyuncs.com/google_containers'
 minikube start --registry-mirror=https://registry.docker-cn.com --kubernetes-version v1.12.1

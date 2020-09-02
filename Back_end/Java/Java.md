@@ -12,53 +12,46 @@
 
 ## 版本
 
-* 要编译成Java字节码，就需要JDK(Java Development Kit)，因为JDK除了包含JRE，还提供了编译器、调试器等开发工具
-  - JRE(Java Runtime Environment) 运行Java字节码的虚拟机JVM
-* Java EE：Enterprise Edition 在Java SE的基础上加上了大量的API和库，以便方便开发Web应用、数据库、消息服务等 从2018年2月26日开始，J2EE改名为Jakarta EE
-* [Java SE](https://www.oracle.com/technetwork/java/javase)：Standard Edition 包含标准的JVM和标准库
-* [OpenJDK](http://openjdk.java.net):免费的开源实现,GPL License发布，很多Linux发行版中都会包含这个Open JDK
-* Oracle JDK
-  - JavaSE(J2SE)(Java2 Platform Standard Edition，java平台标准版）:从JDK 5.0开始，改名为Java SE
-    * Java SE 5.0 (1.5.0)
-    * Java SE 8.0 (1.8.0):从2019年1月 后续的update 开始就要收费 8u191, 8u192这样的东西，191,192就是update 的编号
-    * Java SE 9
-    * Java SE 10
-  - 组件
-    + java:其实就是JVM，运行Java程序，就是启动JVM，然后让JVM执行指定的编译后的代码
-    + javac:编译器，把Java源码文件（以.java后缀结尾）编译为Java字节码文件（以.class后缀结尾）
-    + jar:打包工具，把一组.class文件打包成一个.jar文件，便于发布
-    + javadoc:文档生成器，从Java源码中自动提取注释并生成文档
-    + jdb:debugger，用于开发阶段的运行调试
-    + appletviewer：小程序浏览器，一种执行HTML文件上的Java小程序的Java浏览器。
-    + Javah：产生可以调用Java过程的C过程，或建立能被Java程序调用的C过程的头文件。
-    + Javap：Java反汇编器，显示编译类文件中的可访问功能和数据，同时显示字节代码含义。
-    + Jconsole: Java进行系统调试和监控的工具
-* Oracle与OpenJDK
-  - Oracle JDK版本将每三年发布一次，而OpenJDK版本每三个月发布一次。
-  - Oracle JDK将更多地关注稳定性，它重视更多的企业级用户，而OpenJDK经常发布以支持其他性能，这可能会导致不稳定。
-  - Oracle JDK支持长期发布的更改，而Open JDK仅支持计划和完成下一个发行版。
-  - Oracle JDK根据二进制代码许可协议获得许可，而OpenJDK根据GPL v2许可获得许可。使用Oracle平台时会产生一些许可影响。如Oracle 宣布的那样，在没有商业许可的情况下，在2019年1月之后发布的Oracle Java SE 8的公开更新将无法用于商业，商业或生产用途。但是，OpenJDK是完全开源的，可以自由使用。
-  - Oracle JDK的构建过程基于OpenJDK，因此OpenJDK与Oracle JDK之间没有技术差异。
-  - 顶级公司正在使用Oracle JDK，例如Android Studio，Minecraft和IntelliJ IDEA开发工具，其中Open JDK不太受欢迎。
-  - Oracle JDK具有Flight Recorder，Java Mission Control和Application Class-Data Sharing功能，Open JDK具有Font Renderer功能，这是OpenJDK与Oracle JDK之间的显着差异。
-  - Oracle JDK具有良好的GC选项和更好的渲染器，而OpenJDK具有更少的GC选项，并且由于其包含自己的渲染器的分布，因此具有较慢的图形渲染器选项。
-  - 在响应性和JVM性能方面，Oracle JDK与OpenJDK相比提供了更好的性能。
-  - 与OpenJDK相比，Oracle JDK的开源社区较少，OpenJDK社区用户的表现优于Oracle JDK发布的功能，以提高性能。
-  - 如果使用Oracle JDK会产生许可影响，而OpenJDK没有这样的问题，并且可以以任何方式使用，以满足完全开源和免费使用。
-  - Oracle JDK在运行JDK时不会产生任何问题，而OpenJDK在为某些用户运行JDK时会产生一些问题。
-  - 根据使用方的使用和许可协议，现有应用程序可以从Oracle JDK迁移到Open JDK，反之亦然。
-  - Oracle JDK将从其10.0.X版本将收费，用户必须付费或必须依赖OpenJDK才能使用其免费版本。
-  - Oracle JDK不会为即将发布的版本提供长期支持，用户每次都必须通过更新到最新版本获得支持来获取最新版本。
-  - Oracle JDK以前的1.0版以前的版本是由Sun开发的，后来被Oracle收购并为其他版本维护，而OpenJDK最初只基于Java SDK或JDK版本7。
-  - Oracle JDK发布时大多数功能都是开源的，其中一些功能免于开源，并且根据Sun的许可授权，而OpenJDK发布了所有功能，如开源和免费。
-  - Oracle JDK完全由Oracle公司开发，而Open JDK项目由IBM，Apple，SAP AG，Redhat等顶级公司加入和合作
+* [Java SE](https://www.oracle.com/technetwork/java/javase)：Standard Edition 包含标准JVM和标准库
+  - [OpenJDK](http://openjdk.java.net):免费的开源实现,GPL License发布，很多Linux发行版中都会包含这个Open JDK
+  - Oracle JDK
+    + JavaSE(J2SE)(Java2 Platform Standard Edition，java平台标准版）:从JDK 5.0开始，改名为Java SE
+      - Java SE 5.0 (1.5.0)
+      - Java SE 8.0 (1.8.0):从2019年1月 后续的update 开始就要收费 8u191, 8u192这样的东西，191,192就是update 的编号
+      - Java SE 9
+      - Java SE 10
+    + 组件
+      * java:其实就是JVM，运行Java程序，就是启动JVM，然后让JVM执行指定的编译后的代码
+      * javac:编译器，把Java源码文件（以.java后缀结尾）编译为Java字节码文件（以.class后缀结尾）
+      * jar:打包工具，把一组.class文件打包成一个.jar文件，便于发布
+      * javadoc:文档生成器，从Java源码中自动提取注释并生成文档
+      * jdb:debugger，用于开发阶段的运行调试
+      * appletviewer：小程序浏览器，一种执行HTML文件上的Java小程序的Java浏览器。
+      * Javah：产生可以调用Java过程的C过程，或建立能被Java程序调用的C过程的头文件。
+      * Javap：Java反汇编器，显示编译类文件中的可访问功能和数据，同时显示字节代码含义。
+      * Jconsole: Java进行系统调试和监控的工具
+  - Oracle与OpenJDK
+    + Oracle JDK版本将每三年发布一次，而OpenJDK版本每三个月发布一次。
+    + Oracle JDK将更多地关注稳定性，它重视更多的企业级用户，而OpenJDK经常发布以支持其他性能，这可能会导致不稳定。
+    + Oracle JDK支持长期发布的更改，而Open JDK仅支持计划和完成下一个发行版。
+    + Oracle JDK根据二进制代码许可协议获得许可，而OpenJDK根据GPL v2许可获得许可。使用Oracle平台时会产生一些许可影响。如Oracle 宣布的那样，在没有商业许可的情况下，在2019年1月之后发布的Oracle Java SE 8的公开更新将无法用于商业，商业或生产用途。但是，OpenJDK是完全开源的，可以自由使用。
+    + Oracle JDK的构建过程基于OpenJDK，因此OpenJDK与Oracle JDK之间没有技术差异。
+    + 顶级公司正在使用Oracle JDK，例如Android Studio，Minecraft和IntelliJ IDEA开发工具，其中Open JDK不太受欢迎。
+    + Oracle JDK具有Flight Recorder，Java Mission Control和Application Class-Data Sharing功能，Open JDK具有Font Renderer功能，这是OpenJDK与Oracle JDK之间的显着差异。
+    + Oracle JDK具有良好的GC选项和更好的渲染器，而OpenJDK具有更少的GC选项，并且由于其包含自己的渲染器的分布，因此具有较慢的图形渲染器选项。
+    + 在响应性和JVM性能方面，Oracle JDK与OpenJDK相比提供了更好的性能。
+    + 与OpenJDK相比，Oracle JDK的开源社区较少，OpenJDK社区用户的表现优于Oracle JDK发布的功能，以提高性能。
+    + 如果使用Oracle JDK会产生许可影响，而OpenJDK没有这样的问题，并且可以以任何方式使用，以满足完全开源和免费使用。
+    + Oracle JDK在运行JDK时不会产生任何问题，而OpenJDK在为某些用户运行JDK时会产生一些问题。
+    + 根据使用方的使用和许可协议，现有应用程序可以从Oracle JDK迁移到Open JDK，反之亦然。
+    + Oracle JDK将从其10.0.X版本将收费，用户必须付费或必须依赖OpenJDK才能使用其免费版本。
+    + Oracle JDK不会为即将发布的版本提供长期支持，用户每次都必须通过更新到最新版本获得支持来获取最新版本。
+    + Oracle JDK以前的1.0版以前的版本是由Sun开发的，后来被Oracle收购并为其他版本维护，而OpenJDK最初只基于Java SDK或JDK版本7。
+    + Oracle JDK发布时大多数功能都是开源的，其中一些功能免于开源，并且根据Sun的许可授权，而OpenJDK发布了所有功能，如开源和免费。
+    + Oracle JDK完全由Oracle公司开发，而Open JDK项目由IBM，Apple，SAP AG，Redhat等顶级公司加入和合作
+* Java EE：Enterprise Edition Java SE的基础上加上了大量的API和库，以便方便开发Web应用、数据库、消息服务等 从2018年2月26日开始，J2EE改名为Jakarta EE
 * Oracle Java SE Advanced, Java  SE Advanced Desktop, Java SE Suite:为企业级用户提供的高级工具和功能，可以监控、部署、管理企业级的Java程序
 * Java ME：Micro Edition 针对嵌入式设备的“瘦身版”，Java SE的标准库无法在Java ME上使用，Java ME的虚拟机也是“瘦身版”
-* 路线图如下：
-  - 学习Java SE，掌握Java语言本身、Java核心开发技术以及Java标准库的使用
-  - 学习Java EE，那么Spring框架、数据库开发、分布式架构就是需要学习的
-  - 大数据开发，那么Hadoop、Spark、Flink这些大数据平台就是需要学习的，他们都基于Java或Scala开发
-  - 学习移动开发，那么就深入Android平台，掌握Android App开发
 
 ### 安装
 
@@ -134,8 +127,10 @@ java -version
 java -classpath|cp .;C:\work\project1\bin;C:\shared abc.xyz.Hello # 搜索Hello.class
 ```
 
-### Java 源程序与编译型运行
+### 执行
 
+* 编译成Java字节码需要JDK(Java Development Kit)，因为JDK除了包含JRE，还提供了编译器、调试器等开发工具
+  - JRE(Java Runtime Environment) 运行Java字节码的虚拟机JVM
 * 编译型源程序->可执行程序->操作系统执行
 * Java 源程序：源程序（.java）->字节码程序（.class）->**解释器执行**->操作系统执行,无法直接运行Java源码文件，原因是它需要依赖其他的库
   - 源文件:Javac 后面跟着的是java文件的文件名，例如 HelloWorld.java。 该命令用于将 java 源文件编译为 class 字节码文件
@@ -174,9 +169,9 @@ java HelloWorld // 运行
 * JVM并发
 * JIT
 
-* 记录好日志；
-* 对程序做好性能监控；
-* 根据日志和性能监控数据修改程序；
+* 记录好日志
+* 对程序做好性能监控
+* 根据日志和性能监控数据修改程序
 * 使用专业工具通过不同的JVM参数进行压测并获得最佳配置
 
 ## JDK
@@ -192,38 +187,23 @@ java HelloWorld // 运行
 
 ## 基础
 
-* 类名：对于所有的类来说，类名的首字母应该大写。如果类名由若干单词组成，那么每个单词的首字母应该大写，例如 MyFirstJavaClass
-* 方法名：所有的方法名都应该以小写字母开头。如果方法名含有若干单词，则后面的每个单词首字母大写
-* 源文件名：源文件名必须和类名相同。当保存文件的时候，应该使用类名作为文件名保存（切记Java是大小写敏感的），文件名的后缀为.java,如果文件名和类名不相同则会导致编译错误
-* 主方法入口：所有的Java 程序由p ublic static void main(String []args) 方法开始执行
+* 类名：首字母应该大写。如果类名由若干单词组成，每个单词首字母应该大写，例如 MyFirstJavaClass
+* 方法名：以小写字母开头。如果方法名含有若干单词，则后面的每个单词首字母大写
+* 源文件名：必须和类名相同。当保存文件的时候，应该使用类名作为文件名保存，文件名的后缀为.java,如果文件名和类名不相同则会导致编译错误
+* 包名：包名应该尽量保证小写，例如 my.first.package
+* 主方法入口：所有 Java 程序由 `public static void main(String []args)` 方法开始执行
 * 注释：单行注释与多行注释
 * 标志符：类名、变量名以及方法名
-  - 所有的标识符都应该以字母（A-Z或者a-z）,美元符（$）、或者下划线（_）开始
+  - 标识符都应该以字母（A-Z或者a-z）,美元符（$）、或者下划线（_）开始
   - 首字符之后可以是字母（A-Z或者a-z）,美元符（$）、下划线（_）或数字的任何字符组合
   - 关键字不能用作标识符
-  - 标识符是大小写敏感
-
-```java
-/** 这是第一个Java程序
-*它将打印Hello World
-* 这是一个多行注释的示例
-*/
-
-// 这是单行注释的示例
-
-public class Test {
-  int d = 25;
-
-  public static void main(String[] args) {
-     System.out.println("d++   = " +  (d++) );
-     System.out.println("++d   = " +  (++d) );
-  }
-}
-```
+  - 大小写敏感
 
 ## 常量
 
-常量在程序运行时是不能被修改的。 使用 final 关键字来修饰常量.用大写字母表示常量
+* 在程序运行时是不能被修改。
+* 使用 final 关键字来修饰常量
+* 大写字母表示
 
 ```java
 final double PI = 3.1415927;
@@ -233,28 +213,18 @@ final double PI = 3.1415927;
 char a = '\u0001';
 String a = "\u0001";
 
-// 转义字符序列
-\n 换行 (0x0a)
-\r  回车 (0x0d)
-\f  换页符(0x0c)
-\b  退格 (0x08)
-\0  空字符 (0x20)
-\s  字符串
-\t  制表符
-\"  双引号
-\'  单引号
-\\  反斜杠
-\ddd  八进制字符 (ddd)
-\uxxxx  16进制Unicode字符 (xxxx)
+\ddd  // 八进制字符 (ddd)
+\uxxxx  // 16进制Unicode字符 (xxxx)
 ```
 
 ## 变量
 
-* 创建变量时，需在内存中申请空间。变量为地址别名，值为存储内容。内存管理系统根据变量的类型为变量分配存储空间，分配的空间只能用来储存该类型数据
+* 创建时，在内存中申请空间。变量为地址别名，值为存储内容
+* 内存管理系统根据变量的类型为变量分配存储空间，分配的空间只能用来储存该类型数据
 * 可以重新赋值，还可以赋值给其他变量 `= `是赋值语句
-- 成员变量（非静态变量）：声明在类中，方法体之外的变量。在创建对象的时候实例化。可以被类中方法、构造方法和特定类的语句块访问
-  - 当一个对象被实例化之后，每个实例变量的值就跟着确定
-  - 在对象创建的时候创建，在对象被销毁的时候销毁
+- 成员变量（非静态变量）：声明在类中，方法体之外的变量。创建对象时实例化。可以被类中方法、构造方法和特定类的语句块访问
+  - 一个对象被实例化之后，每个实例变量的值就跟着确定
+  - 对象创建时创建，对象被销毁时销毁
   - 可以声明在使用前或者使用后
   - 访问修饰符可以修饰实例变量
   - 对于类中的方法、构造方法或者语句块是可见的。一般情况下应该把实例变量设为私有。通过使用访问修饰符可以使实例变量对子类可见
@@ -277,51 +247,47 @@ String a = "\u0001";
 
 ## 数据类型
 
-* 基本数据类型：CPU可以直接进行运算的类型
-  - 字面量可以赋给任何内置类型变量
-  - 整数类型：byte、int、long、和short 都可以用十进制、16进制以及8进制方式来表示
-  * byte（字节）
-    - 8位、有符号的，以二进制补码表示整数
-    - 范围：128（-2^7）127（2^7-1）
-    - 默认值 0
-    - 占用空间只有 int 类型的四分之一
-  * short（短整型）
-    + 数据类型是 16 位、有符号的以二进制补码表示的整数
-    + 范围：-32768（-2^15） 32767（2^15 - 1）
-    + 一个short变量是int型变量所占空间的二分之一
-    + 默认值 0
-  - int（整型）Integer
-    + 32位、有符号的以二进制补码表示整数
-    + 范围：-2,147,483,648（-2^31） 2,147,483,647（2^31 - 1）
-    + 整型变量默认 int 类型
-    + 默认值 0
-  - long（长整型）Long
-    +  64 位、有符号的以二进制补码表示整数
-    + 范围： -9,223,372,036,854,775,808（-2^63） 9,223,372,036,854,775,807（2^63 -1）
-    + 主要使用在需要比较大整数的系统上
-    + 默认值 0L
-  - float（单精度浮点）Float
-    + 单精度、32位、符合IEEE 754标准的浮点数
-    + 在储存大型浮点数组时候可节省内存空间 3.4x1038
-    + 默认值 0.0f
-    + 不能用来表示精确的值，如货币
-  - double（双精度浮点）Double
-    + 数据类型是双精度、64 位、符合IEEE 754标准的浮点数
-    + 浮点数默认类型为double 1.79x10308
-    + 同样不能表示精确的值，如货币
-    + 默认值是 0.0d
-  - boolean Boolea
-    + 表示一位信息,总是关系运算的计算结果,JVM内部会把boolean表示为4字节整数
+* 基本数据类型：CPU可以直接进行运算,字面量可以赋给任何内置类型变量
+  - 整数类型：可以用十进制、16进制以及8进制方式来表示
+    - byte（字节）
+      + 8位、有符号，以二进制补码表示整数
+      + 范围：128（-2^7）127（2^7-1）
+      + 默认值 0
+      + 占用空间只有 int 类型的四分之一
+    - short（短整型）
+      * 16 位、有符号的以二进制补码表示整数
+      * 范围：-32768（-2^15） 32767（2^15 - 1）
+      * 默认值 0
+    + int（整型）Integer
+      * 32位、有符号的以二进制补码表示整数
+      * 范围：-2,147,483,648（-2^31） 2,147,483,647（2^31 - 1）
+      * 整型变量默认 int 类型
+      * 默认值 0
+    + long（长整型）Long
+      * 64 位、有符号的以二进制补码表示整数
+      * 范围： -9,223,372,036,854,775,808（-2^63） 9,223,372,036,854,775,807（2^63 -1）
+      * 主要使用在需要比较大整数的系统上
+      * 默认值 0L
+  - 浮点型
+    + float（单精度浮点）Float
+      * 单精度、32位、符合IEEE 754标准的浮点数
+      * 在储存大型浮点数组时候可节省内存空间 3.4x1038
+      * 默认值 0.0f
+      * 不能用来表示精确的值，如货币
+    + double（双精度浮点）Double
+      * 数据类型是双精度、64 位、符合IEEE 754标准的浮点数
+      * 浮点数默认类型为double 1.79x10308
+      * 同样不能表示精确的值，如货币
+      * 默认值是 0.0d
+  - boolean
+    + 一位信息,总是关系运算的计算结果,JVM内部会把boolean表示为4字节整数
     + 两个取值：true 和 false
     + 默认值是 false
   - char
     + 一个单一 16 位 Unicode 字符
-    + 最小值是 \u0000（即为0）,最大值是 \uffff（即为65,535）
+    + 范围 \u0000（即为0）~ \uffff（即为65,535）
     + 可以储存任何字符
     + 使用单引号'，且仅有一个字符
-* 引用类型
-  - String
-  - 数组
 * 类型转换
   - 自动类型转换
     * 整型、实型（常量）、字符型数据可以混合运算。运算中，不同类型的数据先转化为同一类型，然后进行运算.
@@ -377,6 +343,8 @@ byte b = (byte)i1;
 
 int a[] = new int[10]; //定义了一个长度是10的int类型数组
 ```
+
+## 枚举
 
 ## HashMap
 
@@ -471,35 +439,25 @@ public class MapTest {
 
 ## 运算符
 
-* 算术运算符：用在数学表达式 + - * / % ++ --
-* 关系运算符: == != > < >= <=
-* 位运算符：应用于整数类型(int)，长整型(long)，短整型(short)，字符型(char)，和字节型(byte)等类型，作用在所有的位上，并且按位运算。
-  - & |:与 或
+* 算术 + - * / % ++ --
+* 关系  == != > < >= <=
+* 位 作用在所有的位上，并且按位运算
+  - & 与
+  - | 或
   - ^：如果相对应位值相同，则结果为0，否则为1
   - ~：按位取反运算符翻转操作数的每一位，即0变成1，1变成0
   - <<  按位左移运算符。左操作数按位左移右操作数指定的位数
   - />>  按位右移运算符。左操作数按位右移右操作数指定的位数
   - />>>   按位右移补零操作符。左操作数的值按右操作数指定的位数右移，移动得到的空位以零填充。
-* 逻辑运算符：&& || ！
+* 逻辑 && || ！
   - 当使用与逻辑运算符时，在两个操作数都为true时，结果才为true，但是当得到第一个操作为false时，其结果就必定是false，这时候就不会再判断第二个操作了
   - 逻辑或时，有一个为true,就通过
-* 赋值运算符：= != += -= /= (%)= <<= >>= &= ^= |=
-* 条件运算符（?:）
-* instanceof 运算符:用于操作对象实例，检查该对象是否是一个特定类型（类类型或接口类型）
+* 赋值 = != += -= /= (%)= <<= >>= &= ^= |=
+* 条件（?:）
+* instanceof :用于操作对象实例，检查该对象是否是一个特定类型（类类型或接口类型）
 * 优先级：属性》一元〉乘法》加减〉移位》关系〉是否相等》位与〉位异或》位或〉逻辑与》逻辑或〉条件》赋值〉逗号
 
-```java
-int a = 10;
-d++   = 25
-++d   = 27
-
-A = 0011 1100
-A << 2 // 240，即 1111 0000
-A >> 2 // 15 1111
-A>>>2 // 15即0000 1111
-
-variable x = (expression) ? value if true : value if false
-
+```
 ( Object reference variable ) instanceof  (class/interface type)
 String name = "James";
 boolean result = name instanceof String;
@@ -527,8 +485,8 @@ boolean result = name instanceof String;
 * 条件
   - if
   - switch
-    + 变量类型可以是： byte、short、int 或者 char。从 Java SE 7 开始，支持字符串 String 类型
-    + 可以拥有多个 case 语句。每个 case 后面跟一个要比较的值和冒号。
+    + 变量类型： byte、short、int 或者 char。从 Java SE 7 开始，支持字符串 String 类型
+    + 拥有多个 case 语句。每个 case 后面跟一个要比较的值和冒号。
     + case 语句中的值的数据类型必须与变量的数据类型相同，而且只能是常量或者字面常量。
     + 当变量的值与 case 语句的值相等时，那么 case 语句之后的语句开始执行，直到 break 语句出现才会跳出 switch 语句。
     + case 语句不必须要包含 break 语句。如果没有 break 语句出现，程序会继续执行下一条 case 语句，直到出现 break 语句。
@@ -539,10 +497,9 @@ boolean result = name instanceof String;
   - while
   - do...while
   - for
-* 其它
-  - break 主要用在循环语句或者 switch 语句中，用来跳出整个语句块。跳出最里层的循环，并且继续执行该循环下面的语句。
-  - continue 适用于任何循环控制结构中。作用是让程序立刻跳转到下一次循环的迭代。
-  - return
+* break 跳出整个语句块。跳出最里层的循环，并且继续执行该循环下面的语句
+* continue 适用于任何循环控制结构中。作用是让程序立刻跳转到下一次循环的迭代。
+* return
 
 ### Number and Math
 
@@ -579,7 +536,7 @@ boolean result = name instanceof String;
   - toDegrees() 将参数转化为角度
   - toRadians() 将角度转换为弧度
 
-### Character 类
+### Character
 
 用于对单个字符进行操作。 在对象中包装一个基本类型 char 的值.常会遇到需要使用对象，而不是内置数据类型的情况。为了解决这个问题，Java语言为内置数据类型char提供了包装类Character类
 
@@ -716,49 +673,63 @@ str2.compareTo( str3 ); // -3
 str3.compareTo( str1 ); // 3
 ```
 
-## 泛型 generics
-
-* 提供了编译时类型安全检测机制，该机制允许开发者在编译时检测到非法的类型
-* 本质是参数化类型
-* 通配符
-  - ？表示不确定的 java 类型
-  - T (type) 表示具体的一个java类型
-  - K V (key value) 分别代表java键值中的Key Value
-  - E (element) 代表Element
-
 ## OOP
 
-* 包:对类和接口进行分类。如果给出一个完整的限定名，包括包名、类名，那么Java编译器就可以很容易地定位到源代码或者类。
-  - Import语句就是用来提供一个合理的路径，使得编译器可以找到某个类。
-* 类：类是一个模板，描述一类对象的行为和状态
-  - 变量
-    + 成员变量（非静态变量）：成员变量是定义在类中，方法体之外的变量。这种变量在创建对象的时候实例化。成员变量可以被类中方法、构造方法和特定类的语句块访问。
-    + 类变量（静态变量）：类变量也声明在类中，方法体之外，但必须声明为static类型。
-    + 局部变量：在方法、构造方法或者语句块中定义的变量被称为局部变量。变量声明和初始化都是在方法中，方法结束后，变量就会自动销毁
+* 包 package
+  - Import语句就是用来提供一个合理的路径，使得编译器可以找到某个类
+* 类 描述一类对象的行为和状态的模板
+  - 静态属性：声明在类中，方法体之外
+    + 声明为static类型
+  - 静态方法
+  - 普通属性：定义在类中，方法体外变量
+    + 创建对象时实例化
+    + 可以被类中方法、构造方法和特定类的语句块访问
+  - 普通方法块
   - 构造方法
-    + 每个类都有构造方法。如果没有显式地为类定义构造方法，Java编译器将会为该类提供一个默认构造方法。
-    + 在创建一个对象的时候，至少要调用一个构造方法。构造方法的名称必须与类同名，一个类可以有多个构造方法。
-  - 抽象类：如果一个类包含抽象方法，那么该类一定要声明为抽象类
-    + 抽象方法是一种没有任何实现的方法，该方法的的具体实现由子类提供。
-    + 抽象方法不能被声明成 final 和 static。
-    + 任何继承抽象类的子类必须实现父类的所有抽象方法，除非该子类也是抽象类。
-    + 如果一个类包含若干个抽象方法，那么该类必须声明为抽象类。抽象类可以不包含抽象方法。
-    + 抽象方法的声明以分号结尾，例如：public abstract sample();
+    + 每个类都有构造方法。如果没有显式定义构造方法， JVM 自动生成一个构造方法
+    + 创建对象时，至少要调用一个构造方法
+    + 构造方法的名称必须与类同名
+    + 不加任何参数的构造方法被为默认的构造方法
+  - 局部变量：在方法、构造方法或者语句块中定义
+    + 声明和初始化都是在方法中
+    + 方法结束后，变量就会自动销毁
+* 重载：重载方法都有独一无二的参数列表
+  - 条件
+    + 方法名称必须相同
+    + 参数列表必须不同（个数不同、类型不同、参数类型排列顺序不同等）
+    + 返回类型可以相同也可以不相同，仅仅返回类型不同不足以成为方法的重载
+    + 发生在编译时的，因为编译器可以根据参数的类型来选择使用哪个方法
+  - 构造函数重载
+  - 方法重载
+* 重写：重写描述是对子类和父类之间的。重载指的是同一类中的
+  - 重写方法必须要和父类保持一致，包括返回值类型,方法名,参数列表 也都一样
+  - 重写方法可以使用 @Override 注解来标识
+  - 子类中重写方法的访问权限不能低于父类中方法的访问权限
 * 对象：对象是类的一个实例，有状态和行为,用关键字new来创建一个新的对象
   - 声明：声明一个对象，包括对象名称和对象类型。
   - 实例化：使用关键字new来创建一个对象。
   - 初始化：使用new创建对象时，会调用构造方法初始化对象。
-* 接口
-  - 可理解为对象间相互通信的协议
-  - 只定义派生要用到的方法，但是方法的具体实现完全取决于派生类
+* 抽象类：如果一个类包含抽象方法，那么该类一定要声明为抽象类
+  - 一种没有任何实现方法，方法体实现由子类提供
+  - 抽象方法不能被声明成 final 和 static。
+  - 任何继承抽象类的子类必须实现父类的所有抽象方法，除非该子类也是抽象类
+  - 如果一个类包含若干个抽象方法，那么该类必须声明为抽象类
+  - 可以不包含抽象方法
+  - 抽象方法的声明以分号结尾，例如：public abstract sample();
+* 接口 interface
+  - 对象间相互通信协议
+  - 只定义派生要用到方法，具体实现完全取决于派生类
   - 使用默认访问修饰符声明的变量和方法，对同一个包内的类是可见的
-  - 接口里的变量都隐式声明为 public static final
-  - 接口里的方法默认情况下访问权限为 public
+  - 变量都隐式声明为 public static final
+  - 方法默认情况下访问权限为 public
+  - 不能被实例化，不能有任何构造方法
+  - 一个类中有抽象方法，那么这个类一定是抽象类,使用关键字 abstract 修饰的方法一定是抽象方法，具有抽象方法的类一定是抽象类
 * 继承
-  - 可以重用已存在类的所有非 private 属性和方法。被继承的类称为超类（super class），派生类称为子类（subclass）
+  - 可以重用已存在类的所有非 private 属性和方法
+  - 被继承的类称为超类（super class），派生类称为子类（subclass）
   - 父类中声明为 public 的方法在子类中也必须为 public
   - 父类中声明为 protected 的方法在子类中要么声明为 protected，要么声明为 public，不能声明为 private。
-  - 父类中声明为 private 的方法，不能够被继承。
+  - 父类中声明为 private 的方法，不能够被继承
 * 访问控制修饰符
   - private:在同一类内可见。使用对象：变量、方法。 注意：不能修饰类（外部类）
     + 声明为 private 的方法、变量和构造方法只能被所属类访问
@@ -771,7 +742,7 @@ str3.compareTo( str1 ); // 3
     + 子类与基类在同一包中：被声明为 protected 的变量、方法和构造器能被同一个包中的任何其他类访问；
     + 子类与基类不在同一包中：那么在子类中，子类实例可以访问其从基类继承而来的 protected 方法，而不能访问基类实例的protected方法。
 * 非访问控制修饰符
-  - static:用来修饰类方法和类变量。
+  - static:修饰类方法和类变量
     + 静态变量：关键字用来声明独立于对象的静态变量，无论一个类实例化多少对象，它的静态变量只有一份拷贝
     + 静态方法不能使用类的非静态变量。
   - final:用来修饰类、方法和变量
@@ -857,11 +828,80 @@ public class Puppy{
 
 ## 容器
 
-一些工具类，底层封装了各种数据结构
+* Iterable 接口:允许对象成为 for-each 循环的目标
+* Collection 是一个顶层接口，用来定义集合的约定
+  - List
+  - Set 对add、equals、hashCode  方法提供了额外的标准
+    + SortedSet 接口直接继承于 Set 接口，使用 Comparable 对元素进行自然排序或者使用 Comparator 在创建时对元素提供定制的排序规则。set 的迭代器将按升序元素顺序遍历集合。
+  - Queue 用来在处理之前保持元素的访问次序。除了 Collection 基础的操作之外，队列提供了额外的插入，读取，检查操作。
+* Map 一个支持 key-value 存储的对象，不能包含重复的 key，每个键最多映射一个值。这个接口代替了Dictionary 类，Dictionary 是一个抽象类而不是接口。
 
-* ArrayList 底层就是数组
-* LinkedList 底层就是链表
-* HashMap 底层就是散列表
+* ArrayList 实现了 List 接口的可扩容数组(动态数组)，内部基于数组实现  `public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAccess, Cloneable, java.io.Serializable {...}`
+  - 可以实现所有可选择的列表操作，允许所有的元素，包括空值。ArrayList 还提供了内部存储 list 的方法，它能够完全替代 Vector，只有一点例外，ArrayList 不是线程安全的容器。
+  - 有一个容量的概念，这个数组的容量就是 List 用来存储元素的容量
+  - 不是线程安全的容器，如果多个线程中至少有两个线程修改了 ArrayList 的结构的话就会导致线程安全问题，作为替代条件可以使用线程安全的 List，应使用 Collections.synchronizedList 。
+  - 具有 fail-fast 快速失败机制，能够对 ArrayList 作出失败检测。当在迭代集合的过程中该集合在结构上发生改变的时候，就有可能会发生 fail-fast，即抛出 ConcurrentModificationException异常
+* Vector
+  - 同 ArrayList 一样，都是基于数组实现的
+  - Vector 是一个线程安全的容器，它对内部的每个方法都简单粗暴的上锁，避免多线程引起的安全性问题，但是通常这种同步方式需要的开销比较大，因此，访问元素的效率要远远低于 ArrayList。
+  - ArrayList 扩容后的数组长度会增加 50%，而 Vector 的扩容长度后数组会增加一倍。
+* LinkedList 双向链表，允许存储任何元素(包括 null )
+  - 所有的操作都可以表现为双向性的，索引到链表的操作将遍历从头到尾，视哪个距离近为遍历顺序。
+  - 注意这个实现也不是线程安全的，如果多个线程并发访问链表，并且至少其中的一个线程修改了链表的结构，那么这个链表必须进行外部加锁。或者使用
+* Stack
+  - 继承了 Vector 类，提供了通常用的 push 和 pop 操作，以及在栈顶的 peek 方法，测试 stack 是否为空的 empty 方法，和一个寻找与栈顶距离的 search 方法
+  - 一个更完善，可靠性更强的 LIFO 栈操作由 Deque 接口和他的实现提供
+* HashSet 是 Set 接口的实现类，由哈希表支持(实际上 HashSet 是 HashMap 的一个实例)。它不能保证集合的迭代顺序。这个类允许 null 元素
+  - 这个实现不是线程安全的。如果多线程并发访问 HashSet，并且至少一个线程修改了set，必须进行外部加锁。或者使用 Collections.synchronizedSet() 方法重写。
+  - 支持 fail-fast 机制
+* TreeSet 一个基于 TreeMap 的 NavigableSet 实现。这些元素使用他们的自然排序或者在创建时提供的Comparator 进行排序，具体取决于使用的构造函数。
+  - 此实现为基本操作 add,remove 和 contains 提供了 log(n) 的时间成本。
+  - 注意这个实现不是线程安全的。如果多线程并发访问 TreeSet，并且至少一个线程修改了 set，必须进行外部加锁。或者使用
+* LinkedHashSet 继承于 Set接口的 Hash 表和 LinkedList 的实现。这个实现不同于 HashSet 的是它维护着一个贯穿所有条目的双向链表。此链表定义了元素插入集合的顺序。注意：如果元素重新插入，则插入顺序不会受到影响。
+  - LinkedHashSet 有两个影响其构成的参数：初始容量和加载因子。它们的定义与 HashSet 完全相同。但请注意：对于 LinkedHashSet，选择过高的初始容量值的开销要比 HashSet 小，因为 LinkedHashSet 的迭代次数不受容量影响。
+  - 注意 LinkedHashSet 也不是线程安全的，如果多线程同时访问 LinkedHashSet，必须加锁，或者通过使用
+  - 该类也支持fail-fast机制
+* PriorityQueue:AbstractQueue 的实现类，优先级队列的元素根据自然排序或者通过在构造函数时期提供Comparator 来排序，具体根据构造器判断。PriorityQueue 不允许 null 元素。
+  - 队列的头在某种意义上是指定顺序的最后一个元素。队列查找操作 poll,remove,peek 和 element 访问队列头部元素。
+  -优先级队列是无限制的，但具有内部 capacity，用于控制用于在队列中存储元素的数组大小。
+  -该类以及迭代器实现了 Collection、Iterator 接口的所有可选方法。这个迭代器提供了 iterator() 方法不能保证以任何特定顺序遍历优先级队列的元素。如果你需要有序遍历，考虑使用 Arrays.sort(pq.toArray())。
+  -注意这个实现不是线程安全的，多线程不应该并发访问 PriorityQueue 实例如果有某个线程修改了队列的话，使用线程安全的类 PriorityBlockingQueu
+* HashMap 利用哈希表原理来存储元素的集合，并且允许空的 key-value 键值对。HashMap 是非线程安全的，也就是说在多线程的环境下，可能会存在问题，而 Hashtable 是线程安全的容器。HashMap 也支持 fail-fast 机制。HashMap 的实例有两个参数影响其性能：初始容量 和加载因子。可以使用 Collections.synchronizedMap(new HashMap(...)) 来构造一个线程安全的 HashMap。
+* TreeMap 类
+  - 一个基于 NavigableMap 实现的红黑树。这个 map 根据 key 自然排序存储，或者通过 Comparator 进行定制排序。
+  - TreeMap 为 containsKey,get,put 和remove方法提供了 log(n) 的时间开销。
+  - 注意这个实现不是线程安全的。如果多线程并发访问 TreeMap，并且至少一个线程修改了 map，必须进行外部加锁。这通常通过在自然封装集合的某个对象上进行同步来实现，或者使用 SortedMap m = Collections.synchronizedSortedMap(new TreeMap(...))。
+  - 这个实现持有fail-fast机制。
+* LinkedHashMap 类
+  - LinkedHashMap 是 Map 接口的哈希表和链表的实现。这个实现与 HashMap 不同之处在于它维护了一个贯穿其所有条目的双向链表。这个链表定义了遍历顺序，通常是插入 map 中的顺序。
+  - 它提供一个特殊的 LinkedHashMap(int,float,boolean) 构造器来创建 LinkedHashMap，其遍历顺序是其最后一次访问的顺序。
+  - 可以重写 removeEldestEntry(Map.Entry) 方法，以便在将新映射添加到 map 时强制删除过期映射的策略。
+  - 这个类提供了所有可选择的 map 操作，并且允许 null 元素。由于维护链表的额外开销，性能可能会低于HashMap，有一条除外：遍历 LinkedHashMap 中的 collection-views 需要与 map.size 成正比，无论其容量如何。HashMap 的迭代看起来开销更大，因为还要求时间与其容量成正比。
+  - LinkedHashMap 有两个因素影响了它的构成：初始容量和加载因子。
+  - 注意这个实现不是线程安全的。如果多线程并发访问LinkedHashMap，并且至少一个线程修改了map，必须进行外部加锁。这通常通过在自然封装集合的某个对象上进行同步来实现 Map m = Collections.synchronizedMap(new LinkedHashMap(...))。
+  - 个实现持有fail-fast机制。
+* Hashtable 类
+  - Hashtable 类实现了一个哈希表，能够将键映射到值。任何非空对象都可以用作键或值。
+  - 此实现类支持 fail-fast 机制
+  - 与新的集合实现不同，Hashtable 是线程安全的。如果不需要线程安全的容器，推荐使用 HashMap，如果需要多线程高并发，推荐使用 ConcurrentHashMap。
+* IdentityHashMap 类
+  - IdentityHashMap 是比较小众的 Map 实现了。
+  - 这个类不是一个通用的 Map 实现！虽然这个类实现了 Map 接口，但它故意违反了 Map 的约定，该约定要求在比较对象时使用 equals 方法，此类仅适用于需要引用相等语义的极少数情况。
+  - 同 HashMap，IdentityHashMap 也是无序的，并且该类不是线程安全的，如果要使之线程安全，可以调用Collections.synchronizedMap(new IdentityHashMap(...))方法来实现。
+  - 支持fail-fast机制
+* WeakHashMap 类
+  - WeakHashMap 类基于哈希表的 Map 基础实现，带有弱键。WeakHashMap 中的 entry 当不再使用时还会自动移除。更准确的说，给定key的映射的存在将不会阻止 key 被垃圾收集器丢弃。
+  - 基于 map 接口，是一种弱键相连，WeakHashMap 里面的键会自动回收
+  - 支持 null 值和 null 键。
+  - fast-fail 机制
+  - 不允许重复
+* WeakHashMap 经常用作缓存
+
+![Alt text](../_static/container.png "Optional title")
+
+## 内部类
+
+* 一种非常有用的特性，定义在类内部的类，持有外部类的引用，但却对其他外部类不可见
 
 ## 异常 Exception
 
@@ -880,7 +920,7 @@ public class Puppy{
   - NoSuchMethodException 表示该类没有指定方法抛出来的异常
   - IllegalAccessException  不允许访问某个类的异常
   - ClassNotFoundException  类没有找到抛出异常
-* Error 是程序无法处理的错误，表示运行应用程序中较严重问题。大多数错误与代码编写者执行的操作无关，而表示代码运行时 JVM（Java 虚拟机）出现的问题
+* Error 程序无法处理的错误，表示运行应用程序中较严重问题。大多数错误与代码编写者执行的操作无关，而表示代码运行时 JVM（Java 虚拟机）出现的问题
 * 规范
   - 在Finally块中清理资源或者使用try-with-resource语句
   - 尽可能的使用最具体的异常来声明方法，这样才能使得代码更容易理解
@@ -961,6 +1001,17 @@ static void cacheException() throws Exception{
   }
 }
 ```
+
+## 泛型 generics
+
+* 提供了编译时类型安全检测机制，允许开发者在编译时检测到非法的类型
+* 一种参数化的集合，它限制了你添加进集合的类型。泛型的本质就是一种参数化类型。多态也可以看作是泛型的机制。一个类继承了父类，那么就能通过它的父类找到对应的子类，但是不能通过其他类来找到具体要找的这个类。泛型的设计之处就是希望对象或方法具有最广泛的表达能力
+* 本质是参数化类型
+* 通配符
+  - ？表示不确定的 java 类型
+  - T (type) 表示具体的一个java类型
+  - K V (key value) 分别代表java键值中的Key Value
+  - E (element) 代表Element
 
 ## 类加载
 
@@ -1094,26 +1145,19 @@ JavaEE/JDBC/Weblogic
 
 ## 图书
 
-* 《[深入理解Java虚拟机（第2版）](https://www.amazon.cn/gp/product/B01HI0BUF8)》
-* Java虚拟机
-* 《Java核心技术系列：Java多线程编程核心技术》
-* [Thinking In Java](https://www.codeguru.com/java/tij/tij_c.shtml)
-*  《Java 编程思想》第五版 [on Java8](https://lingcoder.github.io/OnJava8/#/)
+* [Thinking In Java Java 编程思想](https://www.codeguru.com/java/tij/tij_c.shtml)
+* Java核心技术·卷 I（原书第10版）
+* Java核心技术·卷 II（原书第10版）
+* Effective java
+* Head First Java
 * [Introduction to Programming Using Java](http://math.hws.edu/javanotes/)
 * 《[Java8 实战](https://www.amazon.cn/gp/product/B01ER75QC8)》
-* 《[Java并发编程实战](https://www.amazon.cn/gp/product/B0077K9XHW)》
+* Java并发编程实战 Java concurrency in practice
 * 《Java并发编程的艺术》
 * 《[Java性能权威指南](https://www.amazon.cn/gp/product/B01DLB7Z66)》
 * 《[Java程序员修炼之道](https://www.amazon.cn/gp/product/B00E0D2OX4)》
-* 《[实战Java高并发程序设计 Java concurrency in practice](https://www.amazon.cn/gp/product/B017MEN094)》
-* 《[Java编程思想 （第4版）](https://www.amazon.cn/gp/product/B0011F7WU4)》：todo
-* 《[Effective java 中文版（第2版）](https://www.amazon.cn/gp/product/B001PTGR52)》
-* 《[Java核心技术·卷1：基础知识（原书第9版）](https://www.amazon.cn/gp/product/B01M22BGUQ)》
-* 《[Java核心技术·卷2：高级特性（原书第9版）](https://www.amazon.cn/gp/product/B00IK7SM6O)》
-* Spring实战（第4版）
+* 深入理解Java虚拟机（第3版）
 * 《大型网站系统与 Java 中间件实践》
-* Head First Java
-* Tomcat架构解析
 
 ## 教程
 
@@ -1183,3 +1227,4 @@ JavaEE/JDBC/Weblogic
 * [crossoverJie/JCSprout](https://github.com/crossoverJie/JCSprout):👨‍🎓 Java Core Sprout : basic, concurrent, algorithm
 * [ruibaby/halo](https://github.com/ruibaby/halo):Halo可能是最好的Java博客系统😉 https://docs.halo.run
 * [精简之道](https://mp.weixin.qq.com/s/Icn5_RZzFHB9WsKip2ZZ6g)
+*  [on Java8](https://lingcoder.github.io/OnJava8/#/)

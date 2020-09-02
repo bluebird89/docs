@@ -559,3 +559,4 @@ https://juejin.im/post/5ba792f5e51d450e9e44184d
 * [重磅开源KSQL：用于Apache Kafka的流数据SQL引擎](http://www.infoq.com/cn/news/2017/08/KSQL-open-source-apache-kafka):一个基于流的SQL。推出KSQL是为了降低流式处理的门槛，为处理Kafka数据提供简单而完整的可交互式SQL接口。
 * <https://www.confluent.io/blog/publishing-apache-kafka-new-york-times/>
 * [在生产环境使用Kafka构建和部署大规模机器学习](https://juejin.im/entry/5a02660b6fb9a0452a3bbe53)
+* [RabbitMQ 七战 Kafka，差异立现](https://mp.weixin.qq.com/s/uEmD5YVGG5LHQEmJQ2GSfw)

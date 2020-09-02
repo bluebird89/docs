@@ -10,6 +10,3 @@
 ## project
 
 * [ ] Instead of just scraping the data, why not build a website with that data:elect the most popular posts. From there it could copy the title, along with a few sentences, and then create a post that it shares online
-
-
-https://mp.weixin.qq.com/s?__biz=MzAxNDYwODEzNw==&mid=2247485656&amp;idx=1&amp;sn=075e30ccf138da444301430289c54bda

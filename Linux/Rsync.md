@@ -14,6 +14,17 @@ rsync is a file transfer program capable of efficient remote update via a fast d
 * 一个模块定义以方括弧中的模块名开始，直到下一个模块定义开始或者文件结束，模块中包含格式为name = value的参数定义
 * 每个模块其实就对应需要备份的一个目录树
 
+```sh
+# Debian
+$ sudo apt-get install rsync
+
+# Red Hat
+$ sudo yum install rsync
+
+# Arch Linux
+$ sudo pacman -S rsync
+```
+
 ## 参数
 
 * -a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD
@@ -38,7 +49,7 @@ rsync is a file transfer program capable of efficient remote update via a fast d
 * -D, --devices  保持设备文件信息
 * -t, --times    保持文件时间信息
 * -S, --sparse  对稀疏文件进行特殊处理以节省DST的空间
-* -n, --dry-run  现实哪些文件将被传输
+* -n, --dry-run  现实哪些文件将被传输 模拟命令执行的结果，并不真的执行命令。
 * -W, --whole-file  拷贝文件，不进行增量检测
 * -x, --one-file-system  不要跨越文件系统边界
 * -B, --block-size=SIZE  检验算法使用的块尺寸，默认是700字节
@@ -146,6 +157,8 @@ backup@192.168.0.101:/www/ /backup/www/
 
 rsync -av --include '*/' --exclude '*' \
 backup@192.168.0.101:/www/ /backup/www-tree/
+
+rsync -av -e 'ssh -p 2234' source/ user@remote_host:/destination
 
 - *.o # 不传输所有后缀为 .o 的文件
 - /foo # 不传输传输根目录下名为 foo 的文件或目录
@@ -305,7 +318,7 @@ chmod 600 /etc/rsyncucweb.password
 rsync -avz --password-file=/etc/rsyncucweb.password images@172.16.10.201::case /opt/case
 
 vim /usr/sbin/rsync.sh # 设置自动化
-rsync -avz --password-file=/etc/rsyncucweb.password images@172.16.10.201::case /opt/case 
+rsync -avz --password-file=/etc/rsyncucweb.password images@172.16.10.201::case /opt/case
 tar -zcvf /opt/case.$(date +%Y-%m-%d).tar.gz /opt/case
 
 chmod 770 /usr/sbin/rsync.sh
@@ -327,4 +340,5 @@ done
 ## 参考
 
 * [ncw/rclone](https://github.com/ncw/rclone):"rsync for cloud storage" - Google Drive, Amazon Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Cloudfiles, Google Cloud Storage, Yandex Files https://rclone.org
+* [rsync 用法教程](http://www.ruanyifeng.com/blog/2020/08/rsync.html)
 

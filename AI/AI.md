@@ -440,6 +440,8 @@
 
 ## 参考
 
-* [完备的 AI 学习路线，最详细的资源整理](https://mp.weixin.qq.com/s?__biz=Mzg5NzAxMDgwNg==&mid=2247484212&idx=1&sn=18de3f24ff47ff0e096c38ce90a8d95d&chksm=c0791e2df70e973b03a0496ac045974f581bade3a05aa1416104b5556a515acf0ee07a1c3554)
+* [完备的 AI 学习路线，最详细的资源整理](https://mp.weixin.qq.com/s?__biz=MzIwODI2NDkxNQ==&mid=2247484347&amp;idx=1&amp;sn=a86919fadffed619bfe744dcef514923)
 * [OpenAI](https://openai.com)
 * [wx-chevalier/AIDL-Series](https://github.com/wx-chevalier/AIDL-Series):📚 Series of Artificial Intelligence & Deep Learning, including Mathematics Fundamentals, Python Practices, NLP Application, etc. 💫 人工智能与深度学习实战，机器学习篇 | Tensoflow 篇
+* [](http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
+)
