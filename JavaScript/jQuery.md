@@ -2,14 +2,18 @@
 
 jQuery JavaScript Library https://jquery.com/
 
-* 消除浏览器差异：你不需要自己写冗长的代码来针对不同的浏览器来绑定事件，编写AJAX等代码；
-* 简洁的操作DOM的方法：写$('#test')肯定比document.getElementById('test')来得简洁；
-* 轻松实现动画、修改CSS等各种操作。
-
-jQuery把所有功能全部封装在一个全局变量jQuery中，而$也是一个合法的变量名，它是变量jQuery的别名：
-`$`本质上就是一个函数，但是函数也是对象，于是`$`除了可以直接调用外，也可以有很多其他属性。`$`函数名可能不是j`Query(selector, context)`，因为很多JavaScript压缩工具可以对函数名和参数改名，所以压缩过的jQuery源码$函数可能变成`a(b, c)`。
-
-$_分离出来，如果_$这个变量不幸地被占用了，而且还不能改，那我们就只能让jQuery把$变量交出来，然后就只能使用jQuery这个变量
+* 消除浏览器差异：不需要自己写冗长的代码来针对不同的浏览器来绑定事件，编写AJAX等代码
+* 简洁的操作DOM方法：写$('#test')肯定比document.getElementById('test')来得简洁
+* 轻松实现动画、修改CSS等各种操作
+* 把所有功能全部封装在一个全局变量jQuery中，而$也是一个合法的变量名，是变量jQuery的别名：`$`本质上就是一个函数，但是函数也是对象，于是`$`除了可以直接调用外，也可以有很多其他属性。`$`函数名可能不是`jQuery(selector, context)`，因为很多JavaScript压缩工具可以对函数名和参数改名，所以压缩过的jQuery源码$函数可能变成`a(b, c)`。
+* $_分离出来，如果_$这个变量不幸地被占用了，而且还不能改，那我们就只能让jQuery把$变量交出来，然后就只能使用jQuery这个变量
+* 特点
+    - 语法糖：链式调用、实用函数
+    - 选择元素：基于各种标准选择符和库自定义的选择符，以及通过回调进行筛选
+    - 操作DOM：创建和操作元素，乃至各种属性操作
+    - 处理事件：ready事件及各种注册和触发事件的方法，乃至委托
+    - 动画：基于animate的CSS属性动画，以及内置动画方法
+    - Ajax：封装原生的XMLHttpRequest API，简化请求方法及回调处理
 
 ```html
 <script type="text/javascript" src="jquery.js"></script>
@@ -34,15 +38,6 @@ $(document).ready(function(){
 });
 </script>
 ```
-
-## 特点
-
-* 语法糖：链式调用、实用函数
-* 选择元素：基于各种标准选择符和库自定义的选择符，以及通过回调进行筛选
-* 操作DOM：创建和操作元素，乃至各种属性操作
-* 处理事件：ready事件及各种注册和触发事件的方法，乃至委托
-* 动画：基于animate的CSS属性动画，以及内置动画方法
-* Ajax：封装原生的XMLHttpRequest API，简化请求方法及回调处理
 
 ## 功能
 
@@ -343,12 +338,9 @@ $('ul.lang li.lang-javascript'); // 每个 <ul> 的第一个 <li> 元素
 
 ### 事件
 
-JavaScript在浏览器中以单线程模式运行，页面加载后，一旦页面上所有的JavaScript代码被执行完后，就只能依赖触发事件来执行JavaScript代码。
-
-浏览器在接收到用户的鼠标或键盘输入后，会自动在对应的DOM节点上触发相应的事件。如果该节点已经绑定了对应的JavaScript处理函数，该函数就会自动调用。
-
-由于不同的浏览器绑定事件的代码都不太一样，所以用jQuery来写代码，就屏蔽了不同浏览器的差异，我们总是编写相同的代码。
-
+* JavaScript在浏览器中以单线程模式运行，页面加载后，一旦页面上所有的JavaScript代码被执行完后，就只能依赖触发事件来执行JavaScript代码。
+* 浏览器在接收到用户的鼠标或键盘输入后，会自动在对应的DOM节点上触发相应的事件。如果该节点已经绑定了对应的JavaScript处理函数，该函数就会自动调用。
+* 由于不同的浏览器绑定事件的代码都不太一样，所以用jQuery来写代码，就屏蔽了不同浏览器的差异，我们总是编写相同的代码
 * on方法用来绑定一个事件，我们需要传入事件名称和对应的处理函数.
 * 鼠标事件：
     - click: 鼠标单击时触发；
@@ -558,6 +550,26 @@ var jqxhr = $.getJSON('/path/to/resource', {
 }).done(function (data) {
     // data已经被解析为JSON对象了
 });
+
+# send credentials along with cross-domain posts:using credentials such as cookies, authorization headers or TLS client certificates.
+$.ajaxSetup({
+    type: "POST",
+    data: {},
+    dataType: 'json',
+    xhrFields: {
+       withCredentials: true
+    },
+    crossDomain: true
+});
+
+$.ajax({
+    url: 'http://bar.other',
+    data: { whatever:'cool' },
+    type: 'GET',
+    beforeSend: function(xhr){
+       xhr.withCredentials = true;
+    }
+});
 ```
 
 ## 遍历
@@ -665,34 +677,6 @@ $('#test-external a').external();
 </script>
 ```
 
-## AJAX
-
-```js
-# send credentials along with cross-domain posts:using credentials such as cookies, authorization headers or TLS client certificates.
-$.ajaxSetup({
-    type: "POST",
-    data: {},
-    dataType: 'json',
-    xhrFields: {
-       withCredentials: true
-    },
-    crossDomain: true
-});
-
-$.ajax({
-    url: 'http://bar.other',
-    data: { whatever:'cool' },
-    type: 'GET',
-    beforeSend: function(xhr){
-       xhr.withCredentials = true;
-    }
-});
-```
-
-## 参考
-* <https://juejin.im/post/58c883ecb123db005311861a>
-* [Ajax 知识体系大梳理](https://juejin.im/post/58c883ecb123db005311861a)
-
 ## [blueimp/jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload)
 
 File Upload widget with multiple file selection, drag&drop support, progress bar, validation and preview images, audio and video for jQuery. Supports cross-domain, chunked and resumable file uploads. Works with any server-side platform (Google App Engine, PHP, Python, Ruby on Rails, Java, etc.) that supports standard HTML form file uploads. [https://blueimp.github.io/jQuery-File...](https://blueimp.github.io/jQuery-File…)
@@ -705,6 +689,10 @@ var jq=jQuery.noConflict();
 
 ## jQuery UI
 
+## 图书
+
+* 《[锋利的 jQuery（第2版）](https://www.amazon.cn/gp/product/B0089TDFNS)》
+
 ## 扩展
 
 - [blueimp/jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload)
@@ -714,8 +702,10 @@ var jq=jQuery.noConflict();
 - [DataTables/DataTables](https://github.com/DataTables/DataTables):Tables plug-in for jQuery http://www.datatables.net/
 - [jquery-validation](https://github.com/jquery-validation/jquery-validation):clone本地，grunt安装，编译;test中的index.html会有测试断言
 * [flesler/jquery.scrollTo](https://github.com/flesler/jquery.scrollTo):Lightweight, cross-browser and highly customizable animated scrolling with jQuery http://demos.flesler.com/jquery/scrollTo/
+* [plugin](http://www.jq22.com/)
 
 ## 参考
 
 * [oneuijs/You-Dont-Need-jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery):Examples of how to do query, style, dom, ajax, event etc like jQuery with plain javascript.
-* [plugin](http://www.jq22.com/)
+* <https://juejin.im/post/58c883ecb123db005311861a>
+* [Ajax 知识体系大梳理](https://juejin.im/post/58c883ecb123db005311861a)

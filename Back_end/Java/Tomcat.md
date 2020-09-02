@@ -100,6 +100,10 @@ JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx
 
 ## Catalina
 
+## 图书
+
+* Tomcat架构解析
+
 ## 参考
 
 * [Tomcat 内核设计剖析](link)

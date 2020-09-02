@@ -129,6 +129,8 @@
 * 国内云服务商 UCloud 进一步迭代了负载均衡产品----Vortex，成功地提升了单机性能
     - 在技术实现上，UCloud Vortex与Google Maglev颇为相似。以一台普通性价比的x86 1U服务器为例，Vortex可以实现吞吐量达14M PPS(10G, 64字节线速)，新建连接200k CPS以上，并发连接数达到3000万、10G线速的转发。
 
+## [Keepalived 原理介绍和配置实践](https://wsgzao.github.io/post/keepalived/)
+
 ### 算法
 
 * 衡量标准

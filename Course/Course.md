@@ -103,6 +103,7 @@
 * 《计算机程序的构造和解释》：https://www.bilibili.com/video/av8515129?from=search&seid=537958487190286356
 * 《编译原理》：https://www.bilibili.com/video/av17649289?from=search&seid=5673462623145874347
 * 《数据库系统概念》：https://www.bilibili.com/video/av52007695?from=search&seid=9723583724024090244
+* [CS106A - Programming Methodology](http://web.stanford.edu/class/cs106a/index.html)
 
 ## Data Scientist
 

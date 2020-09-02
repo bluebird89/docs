@@ -1189,6 +1189,8 @@ dmesg -T
 * synchronous IO VS asynchronous IO
   - A synchronous I/O operation causes the requesting process to be blocked until that I/O operation completes;
   - An asynchronous I/O operation does not cause the requesting process to be blocked;
+* 参考
+  - [操作系统 I/O 全流程](https://www.cnblogs.com/cxuanBlog/p/13156493.html)
 
 ```sh
 # 内存够大，那么可以做一个内存盘
@@ -1511,6 +1513,9 @@ static void modify_event(int epollfd, int fd, int state) {
   - 如果在的话strace、psstack看下进程当前信息，是不是卡死在哪个位置，对比各帧最后调用信息找到异常点
   - 如果进程不再了，如果有corefile文件，直接上gdb查看corefile信息
   - 其他疑难杂症怀疑进程状态信息的时候，看看/proc/pid下面的进程状态信息，可能会给你启发
+* 参考
+  - [进程和线程基础知识全家桶](https://mp.weixin.qq.com/s/HFscrp3jsu_Cz52cGqm73A)
+  - [参透并发编程](https://mp.weixin.qq.com/s/-PRq4ChaCkEFB_DJyyKhvg)
 
 * 孤儿进程、僵尸进程和守护进程
 * 进程间通信方式signal、file、pipe、shm、sem、msg、socket
@@ -1884,6 +1889,8 @@ perf report # 查看相关结果
       * 每个inode结构体都有一个指向inode_operations结构体的指针，后者也是一组函数指针指向一些完成文件目录操作的内核函数.inode_operations所指向的不是针对某一个文件进行操作的函数，而是影响文件和目录布局的函数
       * inode结构体有一个指向super_block结构体的指针。super_block结构体保存着从磁盘分区的超级块读上来的信息，例如文件系统类型、块大小等
       * super_block结构体的s_root成员是一个指向dentry的指针，表示这个文件系统的根目录被mount到哪里，在上图的例子中这个分区被mount到/home目录下。
+    + 参考
+      * [文件系统](https://mp.weixin.qq.com/s/qJdoXTv_XS_4ts9YuzMNIw)
 
 ![VFS子系统](../_static/VFS.png "VFS子系统")
 

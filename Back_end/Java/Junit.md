@@ -17,24 +17,30 @@ Error:代码异常引起
 
 * JUnit5=Platform+Jupiter+Vintage
 
+## 断言
+
+* void assertEquals(boolean expected, boolean actual):检查两个变量或者等式是否平衡
+* void assertTrue(boolean expected, boolean actual):检查条件为真
+* void assertFalse(boolean condition):检查条件为假
+* void assertNotNull(Object object):检查对象不为空
+* void assertNull(Object object):检查对象为空
+* void assertSame(boolean condition):assertSame() 方法检查两个相关对象是否指向同一个对象
+* void assertNotSame(boolean condition):assertNotSame() 方法检查两个相关对象是否不指向同一个对象
+* void assertArrayEquals(expectedArray, resultArray):assertArrayEquals() 方法检查两个数组是否相等
+
+## 注解
+
+* @Test:这个注释说明依附在 JUnit 的 public void 方法可以作为一个测试案例。
+* @Before:有些测试在运行前需要创造几个相似的对象。在 public void 方法加该注释是因为该方法需要在 test 方法前运行。
+* @After:如果你将外部资源在 Before 方法中分配，那么你需要在测试运行后释放他们。在 public void 方法加该注释是因为该方法需要在 test 方法后运行。
+* @BeforeClass:在 public void 方法加该注释是因为该方法需要在类中所有方法前运行。
+* @AfterClass:它将会使方法在所有测试结束后执行。这个可以用来进行清理活动。
+* @Ignore:这个注释是用来忽略有关不需要执行的测试的。
+
 ## 工具
 
 * [JUnitGenerator V2.0](link)自动生成测试代码，需要安装
 
+## 参考
 
-gradle
-
-构建打包命令 gradle clean build
-编译时跳过测试，使用-x,-x参数用来排除不需要执行的任务
-
-gradle clean build -x test
-
-没有失败的测试就不能写代码
-只写让测试代码恰好通过的代码
-
-IDE 快捷键
-代码生成
-    testP  模版
-    import包配置
-
-    guava
+* [docs](https://junit.org/junit5/docs/current/user-guide/)

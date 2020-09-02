@@ -33,6 +33,7 @@ sudo apt-get install code
 * Color Info
 * Color Picker
 * Code Spell Checker
+* [vscode-debug-visualizer](https://github.com/hediet/vscode-debug-visualizer)
 * Debugger for Chrome
 * Document This
 * advanced-new-file

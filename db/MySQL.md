@@ -1704,7 +1704,7 @@ COMMIT;
 
 ## 锁
 
-并发控制:确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性以及数据库的统一性
+并发控制:确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性
 
 * 类型
     - 共享锁（S锁，MyISAM 叫做读锁）：由读表操作加上的锁，加锁后其他用户只能获取该表或行的共享锁，不能获取排它锁，也就是说只能读不能写
@@ -1722,7 +1722,7 @@ COMMIT;
             * 回滚时只有少量的更改
             * 可以长时间锁定单一的行
         + 缺点
-            *  比页级或表级锁定占用更多的内存。
+            *  比页级或表级锁定占用更多的内存
             *  当在表的大部分中使用时，比页级或表级锁定速度慢，因为你必须获取更多的锁。
             *  如果你在大部分数据上经常进行GROUP BY操作或者必须经常扫描整个表，比其它锁定明显慢很多。
             *  用高级别锁定，通过支持不同的类型锁定，你也可以很容易地调节应用程序，因为其锁成本小于行级锁定。
@@ -1786,6 +1786,8 @@ COMMIT;
         + Innodb对于行的查询使用next-key lock
         + Next-locking keying为了解决Phantom Problem幻读问题
         + 当查询的索引含有唯一属性时，将next-key lock降级为record key
+    - SELECT ... LOCK IN SHARE MODE：在读取到的行上设置共享锁。其他会话可以读取行，也可以继续给行加共享锁，但是在当前事务提交之前其他会话不能修改加了共享锁的行。如果这些行中的任何一个被尚未提交的另一个事务更改，则当前查询将等待直到该事务结束，然后使用最新值。
+    - SELECT ... FOR UPDATE 用排他锁锁定行和任何关联的索引条目，就像在这些行上执行UPDATE语句一样。禁止其他事务在这些加了锁的行上进行UPDATE、执行LOCK IN SHARE MODE或者读取某些事务隔离级别的数据。
 * LOCK TABLES 和 UNLOCK TABLES:服务器层（MySQL Server层）实现
     - LOCK TABLES 可以锁定用于当前线程的表。如果表被其他线程锁定，则当前线程会等待，直到可以获取所有锁定为止
     - UNLOCK TABLES 可以释放当前线程获得的任何锁定。当前线程执行另一个 LOCK TABLES 时，或当与服务器的连接被关闭时，所有由当前线程锁定的表被隐含地解锁
@@ -3665,6 +3667,8 @@ mysqlbinlog /var/lib/mysql/mysql-bin.000015 | mysql -uroot -p123456 zone;
 * 禁止大表使用JOIN查询，禁止大表使用子查询
 * 禁止使用OR条件，必须改为IN查询
 
+## [SQL审核利器-goinception](https://mp.weixin.qq.com/s/-fGPsqH8D93KZKqH52t0kg)
+
 ## Docker
 
 ```
@@ -3739,6 +3743,7 @@ include snippets/phpmyadmin.conf; # add to one domain
 * 《[高性能 MySQL（第3版）](https://book.douban.com/subject/23008813/)》
 * [数据库索引设计与优化](https://book.douban.com/subject/26419771/)》
 * 《[数据库系统概念（第6版）](https://book.douban.com/subject/10548379/)》
+* MySQL技术内幕
 
 ## 工具
 
@@ -3798,3 +3803,4 @@ include snippets/phpmyadmin.conf; # add to one domain
 * [学 SQL 就看这些了](https://mp.weixin.qq.com/s/GZW7RZTLEVGBCRS4b66kig)
 * [jaywcjlove/mysql-tutorial](https://github.com/jaywcjlove/mysql-tutorial):MySQL入门教程（MySQL tutorial book）
 * [SQL语句百万数据量优化方案](https://juejin.im/post/5a01257a6fb9a045211e1bdc)
+* [GDB调试 MSQL](https://mp.weixin.qq.com/s/lLfbUpd_SMCpFm1vNQlHRQ)

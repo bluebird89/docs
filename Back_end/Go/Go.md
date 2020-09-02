@@ -1107,6 +1107,8 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * 《Go 并发编程实战》
 * [Mastering_Go_ZH_CN](https://wskdsgcf.gitbook.io/mastering-go-zh-cn/)
 * [Go 语言设计与实现](https://draveness.me/golang/)
+* [The Go Programming Language](http://www.gopl.io/)
+    - [Code](https://github.com/adonovan/gopl.io/):Example programs from "The Go Programming Language"
 * Go 语言学习笔记
 * [ chai2010 / go-ast-book ](https://github.com/chai2010/go-ast-book/):books 《Go语法树入门》(开源免费图书/Go语言进阶/掌握抽象语法树/Go语言AST/LLVM/LLIR/凹语言)
 

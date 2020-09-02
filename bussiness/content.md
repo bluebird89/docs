@@ -1,6 +1,5 @@
 # content
 
-
 * Wikipedia
 * Quora
 * Imgur
@@ -24,3 +23,4 @@
 ## 新闻
 
 * [theatlantic](https://www.theatlantic.com/world/)
+* [](https://www.morningbrew.com/emerging-tech/stories)

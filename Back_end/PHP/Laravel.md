@@ -2523,6 +2523,7 @@ fire 使用很少的代码快速构建一个功能完善的高颜值后台系统
 * 部署
   - [envoyer](https://envoyer.io):Deployments you've only dreamed about. Zero downtime. Zero fuss
 * [overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat):微信 SDK for Laravel, 基于 overtrue/wechat
+* [livewire](https://github.com/livewire/livewire):A full-stack framework for Laravel that takes the pain out of building dynamic UIs.
 
 ```sh
 # laravel-admin
