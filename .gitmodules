@@ -209,9 +209,6 @@
 [submodule "AI/AiLearning"]
 	path = AI/AiLearning
 	url = git@github.com:apachecn/AiLearning.git
-[submodule "AI/ML/EffectiveTensorflow"]
-	path = AI/ML/EffectiveTensorflow
-	url = git@github.com:vahidk/EffectiveTensorflow.git
 [submodule "Shell/awesome-shell"]
 	path = Shell/awesome-shell
 	url = git@github.com:alebcay/awesome-shell.git
@@ -230,3 +227,7 @@
 [submodule "Finance/awesome-quant"]
 	path = Finance/awesome-quant
 	url = git@github.com:thuquant/awesome-quant.git
+[submodule "effecftiveTf"]
+	path = AI/ml/EffectiveTensorflow
+	url = git@github.com:vahidk/EffectiveTensorflow.git
+	branch = master
