@@ -41,7 +41,6 @@
 *   综合类
     - MOOC 学院 — 各种实用课程（职业技能，心理学，生命科学等等），演讲等。
     - Scratch — Imagine, Program, Share — 为小孩子设计，通过游戏学编程。
-    - Udemy — 通过教学视频教你生活和工作中的实用技能，需要付费。
     - E-learning for kids — 向 5-12 岁的儿童提供小学程度基础课程。
     - Ed2go — 又一个学习技能的线上课程网站，主要面向成年人。
     - GCF Learn Free — 由 Goodwill Community Foundation 和 Goodwill Industries 创办，教授实用技能。
@@ -56,6 +55,7 @@
     - Adafruit Learning System — 提供免费电子设备 DIY 教程。
     - Grovo — 学习如何使用上百种网站应用，提高自己的工作效率。
 *  Udemy
+    -  [](SaleWebDesign.Com)
 * [Basecamp](https://basecamp.com)
 
 ## 前端
