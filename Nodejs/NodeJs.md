@@ -168,6 +168,9 @@ npm install -g pnpm
 curl -L https://raw.githubusercontent.com/pnpm/self-installer/master/install.js | node
 # No write access to the found global executable directories
 pnpm add -g pnpm
+
+npm run dev
+npm run watch
 ```
 
 ## [yarnpkg/yarn](https://github.com/yarnpkg/yarn)

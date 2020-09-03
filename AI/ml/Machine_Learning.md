@@ -17,6 +17,18 @@
 
 * 学习它们的模型函数、目标函数，从模型函数到目标函数的运算过程，各个函数相应的物理意义，最优化的方法
 * 再与特征工程结合
+* 完成任务
+  - 处理输入
+    + 需要获得已有的数据
+    + 需要对数据做矢量化操作，把原本丰富多样的数据变成有若干列的矢量
+    + 需要对数据做特征工程，找出可能蕴涵了知识、值得被学习的那些特征项
+  - 获得模型
+    + 实际上很多时候你可以使用现成的模型，包括：（i）下载现成的离线模型，或者（ii）使用在线的人工智能服务
+    + 如果没有现成的模型，你也可以考虑使用现有的数据来自行训练模型
+  - 提供产出
+    + 机器学习的结果可能通过某种人-机（UI）或机-机界面（API）被用户直接使用
+    + 作为项目的产出，机器学习模型需要被嵌入到整个数据流水线中
+    + 作为项目的产出，机器学习模型的开发、测试、部署需要有DevOps的支撑
 
 ## 问题
 
@@ -61,8 +73,21 @@
 * 使用了多少个维度的变量，将作用大的特征提取出来，并把不重要的特征去掉，比如用PCA降维。
 * 不是监督也不是非监督？考虑强化学习
 
-## 损失函数
+## 特征
 
+* 把“【模型在训练集上的表现】与【期望值】之间的差距”叫做Bias
+* 模型在训练集上的表】与【模型在测试集上的表现】之间的差距”叫做Variance
+* High Bias：模型在训练集上的表现远低于期望，模型还不能实用（此时Variance如何并不重要）
+  - 拟合不足”（Under-fitting）
+  - 使用更复杂的机器学习算法
+  - 使用更复杂的神经网络架构
+* Low Bias, High Variance：模型在训练集上表现好，但是在测试集上表现差，模型还不能实用
+  - 过度拟合”（Over-fitting）
+  - 引入Regularization通常能降低over-fitting的程度
+  - 通过特征工程可以避免一些over-fitting的情况，例如排除掉一些严重过度拟合的特征
+  - 引入更多的训练数据，包括数据量和特征量
+* Low Bias, Low Variance：模型在训练集和测试集上表现都好，可以投入实用
+*
 损失函数用于衡量模型质量，它可以度量模型预测值与实际期望之间的差距，选择不合适的函数可能会影响模型的准确性，甚至影响收敛速度。
 
 ## 模型训练
@@ -75,9 +100,9 @@
 
 一般将整个数据集分成三组，比例是7:2:1
 
-* 第一组为训练集，用于调整模型参数；
-* 第二种为验证集，用于比较多个模型直接的表现；
-* 第三组为测试集，用于测试训练得到的模型准确性。
+* 训练集(training set）:用于调整模型参数
+* 验证集(validation set）:用于比较多个模型直接的表现
+* 测试集(test set）:用于测试训练得到的模型准确性
 
 ## 模型效果
 
@@ -99,9 +124,11 @@
   - 完整性
   - V度量
 
+## [SMO](https://mp.weixin.qq.com/s/oNKBpZpqX-Y6opBQ2e9oqQ)
+
 ## 课程列表
 
-* 机器学习的数学基础
+* 机器学习数学基础
     - 机器学习的数学基础
         + 函数与数据的泛化
         + 推理与归纳 (Deduction and Induction)
@@ -114,7 +141,6 @@
         + 条件概率与经典问题 (Conditional Probability)
         + 边缘概率 (Marginal Probability)
     - 作业/实践： 财宝问题的概率计算程序
-* 机器学习的数学基础
    - 统计推理（Statistical Inference）
         + 贝叶斯原理与推理 (Bayesian Theorem)
         + 极大似然估计 (Maximum Likelihood)
@@ -127,7 +153,6 @@
    - 概率分布（Probability Distributions)
    - 中心极限定理（Central Limit Theorem)
    - 作业/实践： 概率分布采样与不同随机变量之间协方差计算
-* 机器学习的数学基础
    - 梯度下降（Gradient Descent）
         + 导数与梯度（Derivative and Gradient）
         + 随机梯度下降（SGD）
@@ -154,7 +179,6 @@
         + 条件独立（Conditional Independence）
         + 分类（Naive Bayes for Classification)
    - 作业/实践：垃圾邮件分类的案例
-* 经典机器学习模型（Classical ML Models）
    - 决策树（Decision Tree Learning）
          + 信息论与概率
          + 信息熵（Information Entropy）
@@ -163,7 +187,6 @@
          - Gini指标（Gini Index）
          - 决策树与规则（DT and Rule Learning）
    - 作业/实践：决策树分类实验
-* 经典机器学习模型（Classical ML Models）
    - 集成学习（Ensemble learning）
         + Bagging and Boosting
         + AdaBoost
@@ -183,7 +206,6 @@
    - 对数几率回归（Logistic Regression）
    - 线性模型的概率解释 (Probabilistic Interpretation)
    - 作业/实践：对数几率回归的文本情感分析中应用
-* 线性模型（Linear Models）
    - 线性判别分析 (Linear Discrimination Analysis)
    - 约束线性模型 (Linear Model with Regularization)
          + LASSO
@@ -197,7 +219,6 @@
         + 最大间距（Maximum Margin）
         + 支撑向量（Support Vectors）
    - 作业/实践：SVM不同核函数在实际分类中比较
-* 核方法（Kernel Methods）
    - 对偶拉格朗日乘子
    - KKT条件（KKT Conditions）
    - Support Vector Regression (SVR)
@@ -213,19 +234,16 @@
         + 混合模型的EM算法（EM for Mixture Models）
         + Jensen 不等式 (Jensen's Inequality)
         + EM算法推导与性能 (EM Algorithm)
-* 统计学习（Statistical Learning）
    - 隐马可夫模型（Hidden Markov Models）
         + 动态混合模型（Dynamic Mixture Model）
         + 维特比算法（Viterbi Algorithm）
         + 算法推导 (Algorithm)
    - 条件随机场（Conditional Random Field）
-* 统计学习（Statistical Learning）
     - 层次图模型（Hierarchical Bayesian Model）
         + 概率图模型 (Graphical Model)
         + 从隐含语义模型到p-LSA (From LSA to P-LSA)
         + Dirichlet 分布与特点（Dirichlet Distribution）
         + 对偶分布（Conjugate Distribution）
-* 统计学习（Statistical Learning）
     - 主题模型（Topic Model – LDA）
         + Latent Dirichlet Allocation
         + 文本分类（LDA for Text Classification）
@@ -271,7 +289,7 @@
   - 工具：将你的machine learning知识应用于实际业务的工具
   - 逻辑：你的举一反三的能力，你解决问题的条理性，你发散思维的能力，你的聪明程度
   - 业务：深入理解所在行业的商业模式，从业务中发现motivation并进而改进模型算法的能力
-* 周志华老师的《机器学习》,又称之为西瓜书。基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等。
+* 《机器学习》又称为西瓜书。基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等。
   - [西瓜书](https://github.com/datawhalechina/pumpkin-book) 《机器学习》（西瓜书）公式推导解析，在线阅读地址：https://datawhalechina.github.io/pumpkin-book
   - [在线阅读](https://datawhalechina.github.io/pumpkin-book/)
 * 《推荐系统实战》：项亮，很适合对于想了解推荐系统
