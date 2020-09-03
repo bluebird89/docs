@@ -20,7 +20,10 @@ sudo service php5.6-fpm start
 brew install php71-phalcon
 
 ## Phalcon Developer Tools
+php_psr
+
 composer global require phalcon/devtools
+extension=psr.so
 
 git clone git://github.com/phalcon/phalcon-devtools.git
 cd phalcon-devtools/

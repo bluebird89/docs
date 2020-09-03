@@ -225,8 +225,8 @@ npm run build
 - 复用:每个组件都会各自独立维护它的数据
 - 嵌套
 - 注册：能在模板中使用，组件必须先注册以便 Vue 能够识别
-  - 全局注册:可以用在其被注册之后的任何 (通过 new Vue) 新创建的 Vue 根实例，也包括其组件树中的所有子组件的模板中
-  - 局部注册：通过普通 JavaScript 对象来定义组件，添加到　 compontents
+  - 全局注册:可以用在其被注册之后的任何 (通过 new Vue) 新创建的 Vue 根实例，也包括其组件树中的所有子组件的模板中,整个 Vue 全局对象实例作用域内有效
+  - 局部注册：通过普通 JavaScript 对象来定义组件，添加到compontents,注册到指定父组件
 - 子组件可以通过调用内建的 \$emit 方法并传入事件名称来触发一个事件
 - 父级组件监听事件时，通过 \$event 访问到被抛出的这个值
 - v-modal
@@ -291,6 +291,16 @@ dev: {
     }
   }
 }
+```
+
+## Vue Loader
+
+* 一个 Webpack loader,实现单文件 Vue 组件
+
+```sh
+npm install -g @vue/cli
+vue create demo-project
+npm run serve
 ```
 
 ### 添加插件
