@@ -53,7 +53,7 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
 * 虚拟 DOM
   - 通过建立一个虚拟DOM来追踪要如何改变真实DOM,createNodeDescription，因为所包含的信息会告诉 Vue 页面上需要渲染什么样的节点，包括及其子节点的描述信息
 
-![生命周期](./../../_static/lifecycle.png "Optional title")
+![生命周期](./../../_static/vue-lifecycle.jpg "Optional title")
 
 ## 版本
 

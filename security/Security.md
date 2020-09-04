@@ -241,7 +241,6 @@ exit
 git clone https://github.com/unixhot/waf.git
 cp -a ./waf/waf /usr/local/openresty/nginx/conf/
 
-
 # /usr/local/openresty/nginx/conf/nginx.conf
 ...
 http {
@@ -323,6 +322,26 @@ java\.lang
 \$_(GET|post|cookie|files|session|env|phplib|GLOBALS|SERVER)\[
 \<(iframe|script|body|img|layer|div|meta|style|base|object|input)
 (onmouseover|onerror|onload)\=
+```
+## Google Authenticator
+
+* 动态产生一次性口令（「OTP, One-time Password」），可以防止密码被盗用引发的安全风险
+* 开启二次验证功能:弹出一个二维码，然后使用 「Google Authenticator」 APP 扫码绑定
+* 解析二维码，对应字符串：otpauth://totp/Google%3Ayourname@gmail.com?secret=xxxx&issuer=Google,最重要是这一串密钥 secret，一个经过 「BASE32」 编码之后的字符串，真正使用时需要将其使用「BASE32」 解码
+    - 生成一个动态码
+        + 首先需要经过一个签名函数，**Google Authenticator **采用「HMAC-SHA1,一种基于哈希的消息验证码，可以用比较安全的单向哈希函数（如 SHA1）来产生签名 `hmac = SHA1(secret + SHA1(secret + input))` `input = CURRENT_UNIX_TIME() / 30` 整除 30，是为了赋予验证码一个 30 秒的有效期.对于用户输入来讲，可以有充足时间准备输入这个动态码，另外一点客户端与服务端可能存在时间偏差，30 秒的间隔可以很大概率的屏蔽这种差异
+        + 得到一个长度为 40 的字符串，我们还需要将其转化为 6 位数字，方便用户输入
+        + 当客户端将动态码上传给服务端，服务端查询数据库获取到用户对应的密钥，然后使用同样的算法进行处理生成一个动态码，最后比较客户端上传动态码与服务端生成是否一致
+* 密钥客户端与服务端将会同时保存一份，两端将会同样的算法计算，以此用来比较动态码的正确性。
+
+```
+original_secret = xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+secret = BASE32_DECODE(TO_UPPERCASE(REMOVE_SPACES(original_secret)))
+input = CURRENT_UNIX_TIME() / 30
+hmac = SHA1(secret + SHA1(secret + input))
+four_bytes = hmac[LAST_BYTE(hmac):LAST_BYTE(hmac) + 4]
+large_integer = INT(four_bytes)
+small_integer = large_integer % 1,000,000
 ```
 
 ## 案例
