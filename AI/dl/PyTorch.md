@@ -15,6 +15,7 @@ Tensors and Dynamic neural networks in Python with strong GPU acceleration http:
 ## 工具
 
 * [zasdfgbnm/TorchSnooper](https://github.com/zasdfgbnm/TorchSnooper):Debug PyTorch code using PySnooper
+* [pytorch-lightning](https://github.com/PyTorchLightning/pytorch-lightning):The lightweight PyTorch wrapper for high-performance AI research. Scale your models, not the boilerplate. https://pytorch-lightning.readthedocs.io/en/stable/
 
 ## 参考
 

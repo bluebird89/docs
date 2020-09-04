@@ -125,8 +125,9 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * 隔离性（isolation) 通常来说，一个事务所做的修改在最终提交以前，对其他事务是不可见的。
 * 持久性（durability) 一旦事务提交，则其所做的修改就会永久保存到数据库中。此时即使系统崩溃，修改的数据也不会丢失。持久性是个有点模糊的概念，因为实际上持久性也分很多不同的级别。有些持久性策略能够提供非常强的安全保障，而有些则未必。而且「不可能有能做到100%的持久性保证的策略」否则还需要备份做什么。
 
-## [clickhouse](https://clickhouse.tech/docs/zh/)
+## [clickhouse](https://github.com/ClickHouse/ClickHouse)
 
+*  a free analytics DBMS for big data [](https://clickhouse.tech/docs/zh/)
 * Yandex（俄罗斯最大的搜索引擎）开源的一个用于实时数据分析的基于列存储的数据库
 
 ## 分层数据库
@@ -266,3 +267,4 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [数据库的原理](http://blog.jobbole.com/100349/)
 * [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)
 * [enochtangg/quick-SQL-cheatsheet](https://github.com/enochtangg/quick-SQL-cheatsheet):A quick reminder of all SQL queries and examples on how to use them.
+* [Pool-Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)

@@ -1507,6 +1507,7 @@ Namespaces are one honking great idea -- let's do more of those!
 * [vinta/awesome-python](https://github.com/vinta/awesome-python):A curated list of awesome Python frameworks, libraries, software and resources https://awesome-python.com/
 * [jobbole/awesome-python-cn](https://github.com/jobbole/awesome-python-cn):Python资源大全中文版，包括：Web框架、网络爬虫、模板引擎、数据库、数据可视化、图片处理等，由伯乐在线持续更新。
 * [mahmoud/awesome-python-applications](https://github.com/mahmoud/awesome-python-applications):cd Free software that works great, and also happens to be open-source Python. ftp://you:relookin@it.example.com#readme
+* [wtfpython](https://github.com/satwikkansal/wtfpython):What the f*ck Python?
 * [ gto76 / python-cheatsheet ](https://github.com/gto76/python-cheatsheet):Comprehensive Python Cheatsheet https://gto76.github.io/python-cheatsheet/
 * [中文文档](https://docs.python.org/zh-cn/3/)
 * [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide)

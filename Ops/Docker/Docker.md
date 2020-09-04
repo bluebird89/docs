@@ -1062,15 +1062,17 @@ docker tag  csphere/nginx:1.7 192.168.1.2/csphere/nginx:1.7
 docker push 192.168.1.2/csphere/nginx:1.7
 ```
 
-## [docker/compose](https://github.com/docker/compose):Define and run multi-container applications with Docker https://docs.docker.com/compose/
+## [docker/compose](https://github.com/docker/compose)
+
+Define and run multi-container applications with Docker https://docs.docker.com/compose/
 
 * Docker 官方编排（Orchestration）项目之一，负责快速在集群中部署分布式应用
 * 来源于之前的Fig项目，使用python代码编写
 * 一款容器编排程序，使用 YAML 配置的形式将需要启动的容器管理起来
 * 能够处理容器的依赖关系，在每个容器中会将容器的 IP 和服务的名称使用 hosts 的方式绑定，这样就能在容器中直接使用服务名称来接入对应的容器了
-* 三个步骤：
+* 步骤：
   - 使用 Dockerfile 定义应用程序的环境。
-  - 使用 docker-compose.yml 定义构成应用程序的服务，这样它们可以在隔离环境中一起运行。
+  - 使用 docker-compose.yml 定义构成应用程序的服务，这样它们可以在隔离环境中一起运行
   - 执行 docker-compose up 命令来启动并运行整个应用程序
 * 允许用户在一个模板（YAML 格式）中定义一组相关联的应用容器（被称为一个 project，即项目），部署流程中各个动作的执行顺序，部署过程所需要依赖文件和被部署文件的存储位置和获取方式，以及如何验证部署成功。例如一个 Web 服务容器再加上后端的数据库服务容器等。
 * 概念
