@@ -1751,6 +1751,7 @@ source ~/.bash_profile
     -  [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
     -  [kubectx](https://github.com/ahmetb/kubectx)
     -  [Kube-shell](https://github.com/cloudnativelabs/kube-shell)
+    -  [k9s](https://github.com/derailed/k9s):dog Kubernetes CLI To Manage Your Clusters In Style! https://k9scli.io/
 *  Serverless
     -  [Kubeless](https://kubeless.io/):用于部署小型应用程序的本地Kubernetes工具。它使用Kubernetes资源来执行许多任务，这有利于自动扩容、路由API、监控以及故障排查
     -  [IronFunction：](https://open.iron.io/):用Golang编写的开源Serverless工具。它支持任何编程语言。支持AWS Lambda函数

@@ -4,16 +4,17 @@ The Swift Programming Language https://swift.org/
 
 ## 工具
 
-* [pujiaxin33/JXCategoryView](https://github.com/pujiaxin33/JXCategoryView):A powerful and easy to use category view (segmentedcontrol, segmentview, pagingview, pagerview, pagecontrol) 
+* [pujiaxin33/JXCategoryView](https://github.com/pujiaxin33/JXCategoryView):A powerful and easy to use category view (segmentedcontrol, segmentview, pagingview, pagerview, pagecontrol)
 * [jpsim/SourceKitten](https://github.com/jpsim/SourceKitten):An adorable little framework and command line tool for interacting with SourceKit.
 * [thoughtbot/Argo](https://github.com/thoughtbot/Argo):Functional JSON parsing library for Swift https://thoughtbot.com/open-source
 * [vapor/vapor](https://github.com/vapor/vapor):💧 A server-side Swift web framework. https://vapor.codes
 * [mxcl/PromiseKit](https://github.com/mxcl/PromiseKit):Promises for Swift & ObjC
 * [bizz84/SwiftyStoreKit](https://github.com/bizz84/SwiftyStoreKit):Lightweight In App Purchases Swift framework for iOS 8.0+, tvOS 9.0+ and macOS 10.10+
 * [Daltron/NotificationBanner](https://github.com/Daltron/NotificationBanner):The easiest way to display highly customizable in app notification banners in iOS
-* [nicklockwood/SwiftFormat](https://github.com/nicklockwood/SwiftFormat):A code library and command-line formatting tool for reformatting Swift code 
+* [nicklockwood/SwiftFormat](https://github.com/nicklockwood/SwiftFormat):A code library and command-line formatting tool for reformatting Swift code
 * [realm/jazzy](https://github.com/realm/jazzy):Soulful docs for Swift & Objective-C https://realm.io
 * [ Moya / Moya ](https://github.com/Moya/Moya):Network abstraction layer written in Swift. https://moya.github.io
+* [RxSwift](https://github.com/ReactiveX/RxSwift)Reactive Programming in Swift
 
 ## 参考
 
