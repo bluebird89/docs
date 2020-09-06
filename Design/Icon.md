@@ -45,3 +45,4 @@
 * [Fotor](Fotor.com):免费在线平面设计工具和图片编辑器
 * [coreui / coreui-icons](https://github.com/coreui/coreui-icons):CoreUI Free Icons - Premium designed free icon set with marks in SVG, Webfont and raster formats https://coreui.io/icons/
 * [astrit / css.gg](https://github.com/astrit/css.gg):500+ CSS Icons. Customizable, Retina Ready with API & NPM https://css.gg
+* [twbs/icons](https://github.com/twbs/icons):Official open source SVG icon library for Bootstrap. https://icons.getbootstrap.com/

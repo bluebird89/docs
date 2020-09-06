@@ -62,7 +62,7 @@ cd elasticsearch-5.5.2/
 ## 配置
 
 * 默认情况下，Elastic 只允许本机访问
-* 远程访问，可以修改 Elastic 安装目录的config/elasticsearch.yml文件，去掉network.host的注释，值改成0.0.0.0，然后重新启动 Elastic
+* 远程访问:修改 Elastic 安装目录config/elasticsearch.yml文件，去掉network.host的注释，值改成0.0.0.0，然后重新启动 Elastic
 
 ```sh
 # /etc/elasticsearch/elasticsearch.yml
@@ -106,43 +106,85 @@ curl -XGET 'localhost:9200/_cat/health?v&pretty'
 
 ## 概念
 
-* 本质上是一个分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个 Elastic 实例
-* 集群（Cluster）：物理概念，由多个节点组成Es集群
-* 节点（Node)：物理概念，一个运行的Elasticearch实例，一般是一台机器上一个进程
+* 对应关系
+  - 关系数据库：表 ⇒ 行 ⇒ 列(Columns) schema SQL
+  - Elasticsearch：索引 ⇒ 类型 ⇒ 文档 ⇒ 字段(Fields) mapping DSL
+  - 索引和文档偏向于逻辑概念，节点和分片偏向于物理上概念
+* 文档（Document）：Index 里面单条的记录称为 Document（文档），所有可搜索数据的最小单位
+  - 理解为关系型数据库中的一条记录
+  - 在 ES 中文档会被序列化成 JSON 格式，保存在 ES 中，JSON 对象由字段组成，其中每个字段都有对应的字段类型（字符串/数组/布尔/日期/二进制/范围类型），ES 中数据还支持数组和嵌套
+  - 每个文档都有一个 Unique ID，可以自己指定 ID 或者通过 ES 自动生成
+  - 同一个 Index 里面的 Document，不要求有相同的结构（scheme），但是最好保持相同，这样有利于提高搜索效率
+* 索引（Index）
+  - 逻辑概念
+  - 每一个索引都是自己的 Mapping 定义文件，用来去描述去包含文档字段的类型，保存在master主节点，可以去为它设置 Mapping 和 Setting
+    + Mapping 定义的是索引当中所有文档字段的类型结构
+    + Setting 主要是指定要用多少的分片以及数据是怎么样进行分布的。
+  - Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）,查找数据的时候，直接查找该索引
+  - Elastic 数据管理的顶层单位就叫做 Index（索引）,它是单个数据库的同义词
+  - 索引有一个名称，名字必须是小写
+  - 相似结构文档的集合，每个文档都有一个对应的文档 ID，文档内容被表示为一系列关键词的集合。例如，文档 1 经过分词，提取了 20 个关键词，每个关键词都会记录它在文档中出现的次数和出现位置
+* 节点 Node
+  - 物理概念，一个运行的Elasticearch实例，本质上是一个 Java 进程，一般建议一台机器上只运行一个 ES 实例
+  - 每一个节点都有自己的名字，通过配置文件进行配置，或者启动的时候 -E node.name=node1 指定。每一个节点在启动之后，会分配一个 UID，保存在 data 目录下
+  - 默认节点会去加入一个名称为 elasticsearch 的集群，如果直接启动很多节点，那么它们会自动组成一个 elasticsearch 集群，当然一个节点也可以组成一个 elasticsearch 集群
+  - 候选主节点 Master-eligible Node 每一个节点启动后，默认就是一个 Master-eligible 节点，可以通过在配置文件中设置 node.master: false 禁止，Master-eligible 节点可以参加选主流程，成为 Master 节点。当第一个节点启动时候，它会将自己选举成 Master 节点
+  - 每个节点上都保存了集群的状态，只有 Master 节点才能修改集群的状态信息
   - 主节点（master node）:只参与元数据管理，整个集群只有一个唯一主节点，多个主节点会参与竞选为唯一主节点
     + 有多台保证高可用
     + 选举机制保证主节点只能有一台运行时管理集群
-  - 数据节点（data node）:保存数据，完成本节点数据查询的功能
-  - 协调节点或客户端节点（client node）：数据分片到不同datanode后，分布式查询分为：查询阶段+取回阶段。该节点接受客户端请求并路由到各datanode完成数据查询，在协调节点完成数据合并取回阶段的功能
-* 对应关系
-  - 关系数据库：数据库 ⇒ 表 ⇒ 行 ⇒ 列(Columns)
-  - Elasticsearch：索引 ⇒ 类型 ⇒ 文档 ⇒ 字段(Fields)
-* 索引（Index）：逻辑概念，包括配置信息mapping和倒排正排数据文件，一个索引的数据文件可能会分布于一台机器，也有可能分布于多台机器。索引的另外一层意思是倒排索引文件。索引中数据是保存在datanode，但是mapping等元数据是保存在master主节点
-  - Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）,查找数据的时候，直接查找该索引
-  - Elastic 数据管理的顶层单位就叫做 Index（索引）,它是单个数据库的同义词
-  - 每个 Index （即数据库）的名字必须是小写
+  - 数据节点（data node）:负责保存分片上存储的所有数据，当集群无法保存现有数据的时候，可以通过增加数据节点来解决存储上的问题，在数据扩展上有至关重要的作用，完成本节点数据查询的功能
+  - 协调节点 Coordinating Node 或客户端节点（client node）：数据分片到不同datanode后，分布式查询分为：查询阶段+取回阶段。该节点接受客户端请求并路由到各datanode完成数据查询，在协调节点完成数据合并取回阶段的功能。每个节点默认都起到了 Coordinating Node 的职责
+  - 冷热节点（Hot & Warm Node） ：热节点（Hot Node）就是配置高的节点，可以有更好的磁盘吞吐量和更好的 CPU，那冷节点（Warm Node）存储一些比较久的节点，这些节点的机器配置会比较低。不同硬件配置的 Data Node，用来实现 Hot & Warm 架构，降低集群部署的成本。
+  - 机器学习节点（Machine Learning Node）：负责跑机器学习的工作，用来做异常检测。
+  - 部落节点（Tribe Node）：连接到不同的 ES 集群，并且支持将这些集群当成一个单独的集群处理。
+  - 预处理节点（Ingest Node）：预处理操作允许在索引文档之前，即写入数据之前，通过事先定义好的一系列的 processors（处理器）和 pipeline（管道），对数据进行某种转换、富化。
+  - 配置节点类型：开发环境中一个节点可以承担多种角色。生产环境中，应该设置单一的角色的节点（dedicated node）
+* 集群 Cluster
+  - 物理概念，由多个节点组成Es集群
+  - 一个分布式系统，要满足高可用性，高可用就是当集群中有节点服务停止响应的时候，整个服务还能正常工作，也就是服务可用性；或者说整个集群中有部分节点丢失的情况下，不会有数据丢失，即数据可用性。
+  - 当用户的请求量越来越高，数据的增长越来越多的时候，系统需要把数据分散到其他节点上，最后来实现水平扩展。当集群中有节点出现问题的时候，整个集群的服务也不会受到影响。
+  - 不同的集群是通过不同的名字来区分的，默认的名字为 elasticsearch，可以在配置文件中进行修改，或者在命令行中使用 -E cluster.name=wupx 进行设定
+  - 健康程度：
+    + Green：主分片与副本都正常分配
+    + Yellow：主分片全部正常分配，有副本分片未能正常分配
+    + Red：有主分片未能分配（例如，当服务器的磁盘容量超过 85% 时，去创建了一个新的索引）
+  - 集群状态（Cluster State），维护一个集群中必要的信息，主要包括如下信息：
+    + 所有的节点信息
+    + 所有的索引和其相关的 Mapping 与 Setting 信息
+    + 分片的路由信息
 * 分片（Shard）
+  - 物理空间的概念，索引中数据分散在分片上
   - 为了支持更大量的数据，索引一般会按某个维度分成多个部分，每个部分就是一个分片，分片被数据节点(dataNode)管理。
-  - 一个节点(Node)一般会管理多个分片，这些分片可能是属于同一份索引，也有可能属于不同索引，但是为了可靠性和可用性，同一个索引的分片尽量会分布在不同节点(Node)上。
-  - 分片有两种，主分片和副本分片。
-    + 主分片（Primary）：每个索引必须包含1个主分片，也可以多个主分片。按照mysql概念理解的话，一个表=一个index， 这表水平拆分为能n个分表，相当于这个index有n个分片。 主分片可以在同一个物理datanode上，也可以在不同datanode，没有强制要求。为了性能，最好分散开来。
-    + 副本（Replica）：同一个分片(Shard)的备份数据，一个分片可能会有0个或多个副本，这些副本中的数据保证强一致或最终一致（可配置）。**副本分片必须和相同数据的主分片不在同一个datanode，是强制要求**。如果datanode不够，副本分片将不工作。 副本分片不工作，不影响正常数据存储和读取，只是index状态为红色。
+  - 一个节点(Node)一般会管理多个分片，这些分片可能是属于同一份索引，也有可能属于不同索引，但是为了可靠性和可用性，同一个索引的分片尽量会分布在不同节点(Node)上
+  - 索引与分片的关系
+    + 一个 ES 索引包含很多分片，一个分片是一个 Lucene 的索引，它本身就是一个完整的搜索引擎，可以独立执行建立索引和搜索任务。
+    + Lucene 索引又由很多分段组成，每个分段都是一个倒排索引。
+    + ES 每次 refresh 都会生成一个新的分段，其中包含若干文档的数据。
+    + 在每个分段内部，文档的不同字段被单独建立索引。每个字段的值由若干词（Term）组成，Term 是原文本内容经过分词器处理和语言处理后的最终结果
+  - 分片有两种
+    + 主分片（Primary）：每个索引必须包含1个主分片，也可以多个主分片
+      * 按照mysql概念理解的话，一个表=一个index， 这表水平拆分为能n个分表，相当于这个index有n个分片
+      * 主分片可以在同一个物理datanode上，也可以在不同datanode，没有强制要求。为了性能，最好分散开来
+      * 主要用以解决水平扩展的问题，通过主分片，就可以将数据分布到集群上的所有节点上，一个主分片就是一个运行的 Lucene 实例，当创建 ES 索引的时候，可以指定分片数，但是主**分片数在索引创建时指定，后续不允许修改，除非使用 Reindex 进行修改**，需要提前做好容量规划
+    + 副本（Replica）
+      * 同一个分片(Shard)的备份数据，一个分片可能会有0个或多个副本，这些副本中的数据保证强一致或最终一致（可配置）
+      * **副本分片必须和相同数据的主分片不在同一个datanode，是强制要求**。如果datanode不够，副本分片将不工作。 副本分片不工作，不影响正常数据存储和读取，只是index状态为红色。
+      * 用以解决数据高可用的问题，也就是说集群中有节点出现硬件故障的时候，通过副本的方式，也可以保证数据不会产生真正的丢失，因为副本分片是主分片的拷贝，在索引中副本分片数可以动态调整，通过增加副本数，可以在一定程度上提高服务查询的性能（读取的吞吐）
+  - 分片设置过大的时候，也会带来副作用，一方面来说会影响搜索结果的打分，影响统计结果的准确性，另外，单个节点上过多的分片，也会导致资源浪费，同时也会影响性能。从 7.0 版本开始，ES 的默认主分片数设置从 5 改为了 1，从这个方面也可以解决 over-sharding 的问题。
 * 倒排索引
-  - 每个文档都有一个对应的文档 ID，文档内容被表示为一系列关键词的集合。例如，文档 1 经过分词，提取了 20 个关键词，每个关键词都会记录它在文档中出现的次数和出现位置
   - 倒排索引就是关键词到文档 ID 的映射，每个关键词都对应着一系列的文件，这些文件中都出现了关键词
-  - 所有词项对应一个或多个文档
   - 倒排索引中的词项根据字典顺序升序排列
 * 服务
   - 分布式存储都支持数据分片存储，分片储存需要两阶段查询。查询阶段+结果合并阶段。
   - 分布式存储都支持分片的副本存储，数据写入主分片后，需要同步、异步机制同步数据到副本分片，冗余保存。
   - 数据分片需要有路由规则，内部叫route table，存储在主节点中，作为整个集群元数据一部分。
 * type:相当于表结构描述
+  - 在 7.0 开始，一个索引只能创建一个 Type，也就是 _doc
+  - 每个索引里都可以有一个或多个 Type，Type 是索引中的一个逻辑数据分类，一个 Type 下的文档，都有相同的字段（Field），比如博客系统，有一个索引，可以定义用户数据 Type，博客数据 Type，评论数据 Type 等
   - Document 可以分组，比如weather这个 Index 里面，可以按城市分组（北京和上海），也可以按气候分组（晴天和雨天）。这种分组就叫做 Type，它是虚拟的逻辑分组，用来过滤 Document
   - 类型是通过mapping来定义每个字段的类型
   - 不同的 Type 应该有相似的结构（schema），举例来说，id字段不能在这个组是字符串，在另一个组是数值。这是与关系型数据库的表的一个区别。性质完全不同的数据（比如products和logs）应该存成两个 Index，而不是一个 Index 里面的两个 Type（虽然可以做到）
-* document：Index 里面单条的记录称为 Document（文档）
-  - 多条 Document 构成了一个 Index
-  - Document 使用 JSON 格式表示，同一个 Index 里面的 Document，不要求有相同的结构（scheme），但是最好保持相同，这样有利于提高搜索效率
 
 ```sh
 # 查看当前节点的所有 Index
@@ -167,6 +209,7 @@ curl -X DELETE 'localhost:9200/accounts/person/1'
 
 ## 原理
 
+* 本质上是一个分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个 Elastic 实例
 * 分布式实时文件存储，并将每一个字段都编入索引，使其可以被搜索
 * 可以扩展到上百台服务器，处理PB级别的结构化或非结构化数据
 * 为每个field都建立了一个倒排索引,数据结构：Posting list就是一个int的数组，存储了所有符合某个term的文档id, term =>Posting list, 比如 John => [1,2]
@@ -251,19 +294,17 @@ curl -X DELETE 'localhost:9200/accounts/person/1'
   - query phase：每个 shard 将自己的搜索结果（其实就是一些 doc id ）返回给协调节点，由协调节点进行数据的合并、排序、分页等操作，产出最终结果。
   - fetch phase：接着由协调节点根据 doc id 去各个节点上拉取实际的 document 数据，最终返回给客户端
 
-## 集群
+## REST API
 
-## 节点
-
-## 索引
-
-## 分片
+* 对索引的名字进行通配符查询:GET /_cat/indices/mov*?v&s=index
+* GET /_cat/indices?v&s=docs.count:desc，可以按照文档个数排序。
+* 使用 GET /_cat/indices?v&health=green，可以查看状态为 green 的索引。
+* 使用 GET /_cat/indices?v&h=i,tm&s=tm:desc，可以查看每个索引占用的内存
 
 ```sh
 //查看_cat支持的信息
 kibana: GET /_cat
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat'
-
 
 //查看集群所有节点
 kibana: GET /_cat/nodes?v
@@ -279,7 +320,6 @@ bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cl
 kibana: GET /_cat/master?v
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/master?v'
 
-
 //查看所有索引信息
 kibana: GET /_cat/indices?v
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/indices?v'
@@ -291,6 +331,10 @@ bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_ca
 kibana: GET _all/_count
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_all/_count?pretty'
 
+//查看指定索引文档总数
+kibana: GET movies/_count
+bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/movies/_count?pretty'
+
 //查看所有分片信息
 kibana: GET /_cat/shards?v
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/shards?v'
@@ -299,14 +343,9 @@ bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_ca
 kibana: GET /_cat/shards/movies?v
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/shards/movies?v'
 
-
 //查看插件
 kibana: GET /_cat/plugins?v
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/plugins?v'
-
-//查看指定索引文档总数
-kibana: GET movies/_count
-bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/movies/_count?pretty'
 
 //查看所有模板
 kibana: GET _cat/templates
@@ -460,10 +499,159 @@ GET _mget
 {"query" : {"match_all" : {}}}
 ```
 
+## 聚合 Aggregation
+
+* 进行统计分析功能
+* 特点
+  - 实时性高:所有计算结果都是即时返回
+  - 性能高:得到一个数据的概览，是分析和总结全套的数据
+* 分类
+  - Bucket Aggregation：分桶类型，按照一定的规则将文档分配到不同的桶中，达到分类分析的目的
+    + 说相当于 SQL 中的 GROUP，可以根据条件，把结果分成一个一个的组
+    + Terms：直接按照 term 来分桶，如果是 text 类型，则按照分词后的结果分桶
+    + Range：指定数值的范围来设定分桶规则
+    + Date Range：指定日期的范围来设定分桶规则
+    + Histogram：直方图，以固定间隔的策略来分割数据
+    + Date Histogram：针对日期的直方图或者柱状图，是时序数据分析中常用的聚合分析类型
+  - Metric Aggregation：指标分析类型，一些数学运算，可以对文档字段进行统计分析，比如计算最大值、最小值、平均值等
+    + 相当于 SQL 中的 COUNT，可以去执行一系列的统计方法
+    + 单值分析
+      * Min、Max、Avg、Sum
+      * Cardinality：指不同数值的个数，相当于 SQL 中的 distinct
+    + 多值分析
+      * Stats 做多样的数据分析，可以一次性得到最大值、最小值、平均值、中值等数据
+      * Extended Stats 对 Stats 的扩展，包含了更多的统计数据，比如方差、标准差等
+      * Percentiles、Percentile Ranks：百分位数的一个统计
+      * Top Hits：用于分桶后获取桶内最匹配的顶部文档列表，即详情数据
+    +
+  - Pipeline Aggregation：管道分析类型，对其他聚合结果进行二次聚合
+  - Matrix Aggregation：矩阵分析类型，支持对多个字段的操作并提供一个结果矩阵
+
+## Search API
+
+* URI Search：用 HTTP GET 的方式在 URL 中使用查询参数已达到查询的目的
+  - GET /users/_search?q=username:wupx
+    + q 指定查询语句，语法为 Query String Syntax，是 KV 键值对的形式
+    + df：默认字段，不指定时会对所有字段进行查询
+    + sort：根据字段名排序
+    + from：返回的索引匹配结果的开始值，默认为 0
+    + size：搜索结果返回的条数，默认为 10
+    + timeout：超时的时间设置
+    + fields：只返回索引中指定的列，多个列中间用逗号分开
+    + analyzer：当分析查询字符串的时候使用的分词器
+    + analyze_wildcard：通配符或者前缀查询是否被分析，默认为 false
+    + explain：在每个返回结果中，将包含评分机制的解释
+    + _source：是否包含元数据，同时支持 _source_includes 和 _source_excludes
+    + lenient：若设置为 true，字段类型转换失败的时候将被忽略，默认为 false
+    + default_operator：默认多个条件的关系，AND 或者 OR，默认为 OR
+    + search_type：搜索的类型，可以为 dfs_query_then_fetch 或 query_then_fetch，默认为 query_then_fetch
+  - Term Query
+    + GET /movies/_search?q=title:(Beautiful Mind)：查询 title 中包括 Beautiful 或者 Mind
+    + Beautiful Mind 等效于 Beautiful OR Mind
+    + "Beautiful Mind"等效于 Beautiful AND Mind，另外还要求前后顺序保存一致
+  - Phrase Query
+    + 用引号包起来，请求为 GET /movies/_search?q=title:"Beautiful Mind"
+  - 布尔操作
+    + GET /movies/_search?q=title:(Beautiful NOT Mind)，这个请求表示查询 title 中必须包括 Beautiful 不能包括 Mind 的文档
+  - 范围查询和数学运算符号，比如指定电影的年份大于 1994：GET /movies/_search?q=year:>=1994
+  - 通配符查询（查询效率低，占用内存大，不建议使用，特别是放在最前面），还支持正则表达式，以及模糊匹配和近似查询
+  - URI Search 好处就是操作简单，只要写个 URI 就可以了，方便测试，但是 URI Search 只包含一部分查询语法，不能覆盖所有 ES 支持的查询语法
+* Request Body Search：用 ES 提供的基于 JSON 格式的格式更加完备的查询语言 Query DSL（Domain Specific Language）
+  - 支持 GET 和 POST 方式对索引进行查询，需要指定操作的索引名称，同样也要通过 _search 来标明这个请求为搜索请求
+  - 脚本字段可以使用 ES 中的 painless 的脚本去算出一个新的字段结果。
+  - Match Query:在 query match 的方式把信息填在里面
+    + 查询两者同时出现，可以通过加 "operator": "and" 来实现
+  - Match Phrase 查询，但在 query 条件中的词必须顺序出现的，可以通过 slop 参数控制单词间的间隔，比如加上 "slop" :1，表示中间可以有一个其他的字符
+  - Term Query:将查询语句作为整个单词进行查询
+  - Query String 查询:指定默认查询的字段名 default_field 就和前面介绍的 df 是一样的，在 query 中也可以使用 AND 来实现一个与的操作
+  - Simple Query String Query，它其实和 Query String 类似，但是会忽略错误的查询语法，同时只支持部分查询语法，不支持 AND OR NOT，会当作字符串处理，Term 之间默认的关系是 OR，可以指定 default_operator 来实现 AND 或者 OR，支持用 + 替代 AND，用 | 替代 OR，用 - 替代 NOT
+* Response
+  - 概念
+    + 在搜索结果中，黄色的三角形起名为 False Positive（纳伪，简写 fp），通常称作误报，绿色的圆起名为 True Positive（纳真，简写 tp）
+    + 在没有被搜索到的范围中，绿色的圆的起名为 False Negatives（去真，简写 fn），也常称作漏报，黄色的三角形起名为 True Negative（去伪，简写 tn）
+  - 相关性（Relevance）:
+    + 查准率（Precision），具体含义是尽可能返回较少的无关文档给用户 正确的搜索结果除以全部返回的结果，即 Precision = tp / ( tp + fp )
+    + 查全率（Recall），也就是尽量返回较多的相关文档 正确的搜索结果除以所有应该返回的结果，即 Recall = tp / ( tp + fn )
+    + 是否能够按照相关度进行排序（Ranking）
+
+```
+POST /movies/_search
+{
+  "from":10,
+  "size":20,
+  "_source":["title"],
+  "sort":[{"year":"desc"}],
+  "script_fields": {
+    "new_field": {
+      "script": {
+        "lang": "painless",
+        "source": "doc['year'].value+'_hello'"
+      }
+    }
+  },
+  "query":{
+    "match_all": {}
+  }
+}
+
+POST /users/_search
+{
+  "query": {
+    "match": {
+      "title": "wupx huxy"
+      "operator": "and"
+    }
+  }
+}
+
+POST /movies/_search
+{
+  "query": {
+    "match_phrase": {
+      "title":{
+        "query": "one love"
+        "slop":1
+      }
+    }
+  }
+}
+
+POST /users/_search
+{
+  "query": {
+      "username": [
+        "wupx",
+        "huxy"
+      ]
+  }
+}
+
+
+POST users/_search
+{
+  "query": {
+    "query_string": {
+      "default_field": "username",
+      "query": "wupx AND huxy"
+    }
+  }
+}
+
+{
+  "query": {
+    "simple_query_string": {
+      "query": "wu px",
+      "fields": ["username"],
+      "default_operator": "AND"
+    }
+  }
+}
+```
+
 ## 性能
 
 * filesystem cache:查询的时候，操作系统会将磁盘文件里的数据自动缓存到 filesystem cache 里面去
-  - es 的搜索引擎严重依赖于底层的 filesystem cache，你如果给 filesystem cache 更多的内存，尽量让内存可以容纳所有的 idx segment file 索引数据文件，那么你搜索的时候就基本都是走内存的，性能会非常高
+  - es 的搜索引擎严重依赖于底层的 filesystem cache，如果给 filesystem cache 更多的内存，尽量让内存可以容纳所有的 idx segment file 索引数据文件，那么搜索的时候就基本都是走内存的，性能会非常高
 
 ## ELK
 
@@ -564,6 +752,10 @@ output {
 ## [elastic/kibana](https://github.com/elastic/kibana)
 
 📊 Kibana analytics and search dashboard for Elasticsearch https://www.elastic.co/products/kibana
+
+* 汉化
+  - 7.0 版本之后，官方自带汉化资源文件（位于 Kibana 目录下的 node_modules/x-pack/plugins/translations/translations/）
+  - 在 config 目录下修改 kibana.yml 文件，在文件中加上配置项 i18n.locale: "zh-CN"，然后重新启动 Kibana 就汉化完成
 
 ```sh
 # 搭建
