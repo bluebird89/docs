@@ -19,6 +19,7 @@
 * [简书](http://www.jianshu.com/)
 * [Medium]():一个非常优质的写作社区
 * [Byword](https://metaclassy.com/):简洁，优美，专注于文字。非常棒的写作工具。
+* [hackernews-daily](https://github.com/headllines/hackernews-daily)
 
 ## 新闻
 

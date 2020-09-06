@@ -118,6 +118,7 @@ print(torch.cuda.is_available())
 * [Curt-Park/rainbow-is-all-you-need](https://github.com/Curt-Park/rainbow-is-all-you-need):Rainbow is all you need! Step-by-step tutorials from DQN to Rainbow
 * [](https://www.cs.toronto.edu/~hinton/)
 * [TensorFlow, Keras and deep learning, without a PhD access_time ](https://codelabs.developers.google.com/codelabs/cloud-tensorflow-mnist/#3)
+* [Practical Deep Learning for Coders](https://course.fast.ai/)
 
 ## 图书
 

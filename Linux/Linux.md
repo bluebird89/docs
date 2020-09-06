@@ -1035,6 +1035,8 @@ sync # 将所有未写的系统缓冲区写到磁盘中
   - To free pagecache, dentries and inodes, use echo 3 >/proc/sys/vm/drop_caches
 * 参考
   - [Linux系统内存知识](https://mp.weixin.qq.com/s/aw9dq77SdO2pWxu049drwA)
+  - [Linux内存管理（下篇）：10张图解再谈物理内存和虚拟内存](https://mp.weixin.qq.com/s/EvU7pV51ctPooREQt_8SaQ)
+  - [](https://mp.weixin.qq.com/s/Aj-A5ltGJoD5fkFiMlhjoA)
 
 ```sh
 cat /proc/meminfo
@@ -2699,6 +2701,7 @@ Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能
       * 在 BSD 上，百分号（%）表示涂改whiteout（某些文件系统上的文件删除方法）。
       * 在 GNU 上，尖括号（>）表示门door（Illumos 和 Solaris上的进程间通信）。
       * 竖线（|）表示 FIFO 管道。    这个选项的一个更简单的版本是 -p，它只区分文件和目录。
+    + [broot](https://dystroy.org/broot/) Get an overview of a directory, even a big one
   - cat:concatenate and write file(s) to your screen
     + -b, --number-nonblank    number nonempty output lines, overrides -n
     + -n, --number             number all output lines
@@ -2771,6 +2774,7 @@ Linux 的磁盘是"挂在"（挂载在）目录上的，每一个目录不仅能
   - -z 调用 gzip 进行解压缩
   - -t 列出归档中的文件
 * 一个块是 512 个字节大小，不足或正好 512 个字节将占据一个块
+* [ranger](https://github.com/ranger/ranger):A VIM-inspired filemanager for the console https://ranger.github.io/
 
 ```sh
 ls -F # 查看目录中的文件

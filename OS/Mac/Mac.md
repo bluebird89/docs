@@ -383,6 +383,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * Hidden Bar - 另一款通知栏折叠工具
 * [eZip](https://ezip.awehunt.com/):优秀的 macOS 压缩软件
 * [poolside-fm](https://apps.apple.com/us/app/poolside-fm/id1514817810?mt=12)
+* [Lunar](https://github.com/alin23/Lunar)
 
 ### screensavers
 

@@ -113,7 +113,8 @@
 ## 课程
 
 * [eseedo/iOSCourse](https://github.com/eseedo/iOSCourse):iOS开发初学者入门 http://icode.fun/
-* 斯坦福大学的 iOS 开发公开课
+* [斯坦福大学的 iOS 开发公开课](https://cs193p.sites.stanford.edu/):斯坦福大学的高质量免费课程，使用了最新的 SwiftUI，充分展示了 APP 开发的整个流程，适合新手进行 iOS 的开发入门。
+*
 
 ## 图书
 
