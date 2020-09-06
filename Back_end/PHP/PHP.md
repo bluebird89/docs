@@ -1125,25 +1125,65 @@ class Outer
 echo (new Outer)->func2()->func3(); # 6
 ```
 
-## 命名空间
+## 命名空间 namespace
 
-* 出现之前，PHP开发者使用Zend风格的类名解决命名冲突问题:在PHP类名中使用下划线的方式表示文件系统的目录分隔符。这种约定有两个作用：其一，确保类名是唯一的；其二，原生的自动加载器会把类名中的下划线替换成文件系统的目录分隔符，从而确定文件的路径。例如，`Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query`类对应的文件是Zend/Cloud/DocumentService/Adapter/WindowsAzure/Query.php.类名特别长
-* PHP5.3.0中引入，其作用是按照一种虚拟的层次结构组织PHP代码,现代的PHP组件框架代码都是放在各自全局唯一的厂商命名空间中，以免和其他厂商使用的常见类名冲突
+* 出现之前，使用Zend风格的类名解决命名冲突问题:在PHP类名中使用下划线的方式表示文件系统的目录分隔符。这种约定有两个作用
+    - 确保类名是唯一
+    - 原生的自动加载器会把类名中的下划线替换成文件系统的目录分隔符，从而确定文件的路径。例如，`Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query`类对应的文件是Zend/Cloud/DocumentService/Adapter/WindowsAzure/Query.php.类名特别长
+* PHP5.3.0中引入，作用是按照一种虚拟的层次结构组织PHP代码,现代的PHP组件框架代码都是放在各自全局唯一的厂商命名空间中，以免和其他厂商使用的常见类名冲突,可以和其他开发者使用相同的类名、接口名、函数或常量名
 * 5.6开始还可以导入函数和常量
-* 将代码放到唯一的厂商命名空间，代码就可以和其他开发者使用相同的类名、接口名、函数或常量名
 * 声明命名空间的代码始终应该放在<?php  标签后的第一行 `namespace LaravelAcademy\ModernPHP;`
-* 作用是封装和组织相关的PHP类
-* 多重导入
-* 一个文件使用多个命名空间
-* 如果引用的类、接口、函数和常量没有指定命名空间，PHP假定引用的类、接口、函数和常量在当前的命名空间中。如果要使用其他命名空间的类、接口、函数或常量，需要使用完全限定的PHP类名（命名空间+类名）
-* 导入和别名:`use Illuminate\Http\Response as Res;`
+* 一个文件可以使用多个命名空间
+* 导入和别名:`use Illuminate\Http\Response as Res;`，支持多重导入
 * 借助 spl_auto_register 函数注册自动加载器，实现系统未定义类或接口的自动加载
     - 存在一个问题:不同库/组件类名冲突问题
-* 声明后
-    - 手动加载
-    - 通过`Composer classmap`
-* 使用的PSR-4自动加载标准，会把命名空间放到对应文件系统的子目录中
-*
+* 分类
+    - 完全限定命名空间 `new \成都\徐大帅();`
+    - 限定命名空间 `new 成都\徐大帅();`
+* 在当前命名空间没有声明的情况下，限定类名和完全限定类名是等价的。因为如果不指定空间，则默认为全局（\）
+* 在命名空间下，使用限定类名和完全限定类名的区别,完全限定类名 = 当前命名空间 + 限定类名,如果引用的类、接口、函数和常量没有指定命名空间，PHP假定引用的类、接口、函数和常量在当前的命名空间中
+* 要使用其他命名空间的类、接口、函数或常量，需要使用完全限定的PHP类名（命名空间+类名）
+
+## AUTOLOAD
+
+* PHP5中引入了类的自动装载(autoload)机制。可以使得PHP程序有可能在使用类时才自动包含类文件，而不是一开始就将所有的类文件include进来，这种机制也称为lazy loading
+* 过程
+    - 根据类名确定类文件名
+    - 确定类文件所在的磁盘路径
+    - 将类从磁盘文件中加载到系统中
+* 机制实现
+    - 检查执行器全局变量函数指针autoload_func是否为NULL
+    - 如果autoload_func==NULL, 则查找系统中是否定义有__autoload()函数，如果没有，则报告错误并退出
+    - 如果定义了__autoload()函数，则执行__autoload()尝试加载类，并返回加载结果
+    - 如果autoload_func不为NULL，则直接执行autoload_func指针指向的函数用来加载类。注意此时并不检查__autoload()函数是否定义
+    - 是一个魔术函数,当php文件中使用了new关键字实例化一个对象时，如果该类没有在本php文件中被定义，将会触发__autoload函数，此时，就可以引进定义该类的php文件，而后，就能实例化成功了
+    - __autoload() 在php7中已经不建议使用了
+* SPL Standard PHP Library(标准PHP库)
+    - PHP5引入的一个扩展库，其主要功能包括autoload机制的实现及包括各种Iterator接口或类。
+    - SPL autoload机制的实现是通过将函数指针autoload_func指向自己实现的具有自动装载功能的函数来实现的。
+    - SPL有两个不同的函数 spl_autoload, spl_autoload_call，通过将autoload_func指向这两个不同的函数地址来实现不同的自动加载机制。
+    - spl_autoload:SPL实现的默认自动加载函数，功能比较简单。可以接收两个参数，第一个参数是$class_name 表示类名，第二个参数$file_extensions是可选的.首先将$class_name变为小写，然后在所有的 include path中搜索$class_name.inc或$class_name.php文件(如果不指定$file_extensions参数的话)，如果找 到，就加载该类文件
+    - spl_autoload_register 函数的功能就是把传入的函数（参数可以为回调函数或函数名称形式）注册到 SPL __autoload 函数队列中，并移除系统默认的 __autoload() 函数
+    - 在PHP脚本中第一次调用spl_autoload_register()时不使用任何参数，就可以将autoload_func指向spl_autoload.将用户定义的自动加载函数注册到这个链表中，并将autoload_func函数指针指向spl_autoload_call函数。也可以通过spl_autoload_unregister函数将已经注册的函数从autoload_functions链表中删除
+    - 在SPL模块内部，有一个全局变量autoload_functions，本质上是一个HashTable，不过可以将其简单的看作一个链表，链表中的每一个元素都是一个函数指针,指向一个具有自动加载类功能的函数
+    - spl_autoload_call本身的实现很简单，只是简单的按顺序执行这个链表中每个函数，在每个函数执行完成后都判断一次需要的类是否已经加载， 如果加载成功就直接返回，不再继续执行链表中的其它函数。如果这个链表中所有的函数都执行完成后类还没有加载，spl_autoload_call就直接 退出，并不向用户报告错误
+* 手动加载 `spl_autoload_register`
+* 通过`Composer classmap`
+* PSR-4自动加载标准，会把命名空间放到对应文件系统的子目录中
+    - 必须要有一个顶级命名空间，它的意义在于表示某一个特殊的目录（文件基目录）
+
+```php
+spl_autoload_register(function ($class){
+   $map = [
+       'top\\School'=>'./School.php'
+   ];
+
+   $file = $map[$class];
+    //查看对应的文件是否存在
+   if (file_exists($file))
+       include $file;
+});
+```
 
 ## 魔术方法
 
