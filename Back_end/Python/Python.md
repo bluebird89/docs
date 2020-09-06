@@ -1469,6 +1469,7 @@ Namespaces are one honking great idea -- let's do more of those!
 * [简明 Python 教程 A Byte of Python](https://bop.mol.uno)
 * [Python最佳实践指南](https://pythonguidecn.readthedocs.io/zh/latest/index.html)
 * [Python进阶](https://docs.pythontab.com/interpy/)
+* [CODE WITH REPL.IT](https://www.codewithrepl.it/)
 * A Byte of Python
 
 * https://www.shiyanlou.com/courses/31

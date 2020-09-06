@@ -21,6 +21,7 @@
 ## 工具
 
 * [jmschrei/pomegranate](https://github.com/jmschrei/pomegranate):Fast, flexible and easy to use probabilistic modelling in Python.https://pomegranate.readthedocs.io/en/latest/
+* [Seeing Theory](https://seeing-theory.brown.edu/): A visual instroduction ot probability and statistics
 
 ## 参考
 

@@ -95,6 +95,7 @@
 * [facebookresearch/LASER](https://github.com/facebookresearch/LASER):Language-Agnostic SEntence Representations
 * [asciimoo/searx](https://github.com/asciimoo/searx):Privacy-respecting metasearch engine https://asciimoo.github.io/searx/
 * [OKlog](https://github.com/oklog/oklog)
+* [searx.space](https://searx.space/)
 
 ## 参考
 
@@ -102,3 +103,4 @@
 * example
 	- 网页分词在线工具：http://www.78901.net/fenci/
 	- 抓取网页：https://tech.huanqiu.com/article/3zMq4KbdTAA
+* [浅谈基于simhash的文本去重原理](https://mp.weixin.qq.com/s/hyXG1czry6_YOXFwqBTbdQ)

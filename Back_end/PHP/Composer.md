@@ -25,8 +25,6 @@ Dependency Manager for PHP https://getcomposer.org/  [中文](https://www.phpcom
 
 ## 安装
 
-* window配置：`C:\Users\XXX\AppData\Roaming\Composer\config.json`
-* composer config composer_home
 * 源
   - [aliyun](https://mirrors.aliyun.com/composer/)
   - [tencent](https://mirrors.cloud.tencent.com/composer/)
@@ -62,38 +60,30 @@ sudo chown -R $USER .composer/
 
 ### 卸载composer:找到文件删除即可
 # ~/.composer/auth.json
+# C:\Users\XXX\AppData\Roaming\Composer\config.json
 composer config -l # 查看
 composer config --list --global
 composer config -g repo.packagist composer https://packagist.phpcomposer.com # 全局配置
 composer config repo.packagist composer https://packagist.phpcomposer.com # 项目配置
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 composer config -g repo.packagist composer https://mirrors.huaweicloud.com/repository/php/
+composer config composer_home
 
 composer config -g --unset repos.packagist
 composer config --global --auth github-oauth.github.com myCorrectLongToken
+
+composer config repositories.repo-name vcs https://github.com//repo
+composer config -g  repositories.tmo composer https://packages.tmogroup.asia/
 ```
 
 ## package
 
-* 如果编辑了composer.json,增加或更新了细节信息，比如库的描述、作者、更多参数，甚至仅仅增加了一个空格，都会改变文件的md5sum。然后Composer就会警告哈希值和composer.lock中记载的不同:composer update nothing
-* autoload:PHP autoloader 的自动加载映射
-    * Files类型格式：支持将数组中的文件进行自动加载，文件的路径相对于项目的根目录.需要在任何请求中都加载某些文件，可以使用 files 自动加载机制
-    * classmap类型格式：支持将数组中的路径下的文件进行自动加载。其很方便，但缺点是一旦增加了新文件，需要执行dump-autoload命令重新生成映射文件vendor/composer/autoload_classmap.php。
-    * psr-0类型:支持将命名空间映射到路径。命名空间结尾的\\不可省略
-      - 当执行install或update时，加载信息会写入vendor/composer/autoload_namespace.php文件
-      - 如果希望解析指定路径下的所有命名空间，则将命名空间置为空串即可
-      - 需要注意的是对应name2\space\Foo类的类文件的路径为path2/name2/space/Foo.php
-    * psr-4类型:支持将命名空间映射到路径。命名空间结尾的\\不可省略。当执行install或update时，加载信息会写入vendor/composer/autoload_psr4.php文件。如果希望解析指定路径下的所有命名空间，则将命名空间置为空串即可。需要注意的是对应name2\space\Foo类的类文件的路径为path2/space/Foo.php，name2不出现在路径中。
-    * PSR-4和PSR-0
-      - PSR-4指定的就当作当前命名空间的目录
-      - PSR-0 指定的是当前命名空间的父目录
-      * 最大的区别是对下划线（underscore)的定义不同。PSR-4中，在类名中使用下划线没有任何特殊含义。而PSR-0则规定类名中的下划线_会被转化成目录分隔符。
-      * 按需加载
+* 编辑composer.json,增加或更新了细节信息，比如库的描述、作者、更多参数，甚至仅仅增加了一个空格，都会改变文件的md5sum。然后Composer就会警告哈希值和composer.lock中记载的不同:composer update nothing
 * name格式："name":"vendor/package"
 * version格式："version":"1.0.2"
 * repositories仓库地址
   - 默认Composer 只使用 Packagist 仓库。通过指定仓库地址，可以从任何地方获取包
-  - composer:仓库通过网络提供 packages.json 文件，它包含一个 composer.json 对象的列表，还有额外的 dist 或 source 信息。packages.json 文件通过 PHP 流加载
+  - composer:仓库通过网络提供 packages.json 文件，包含一个 composer.json 对象的列表，还有额外的 dist 或 source 信息。packages.json 文件通过 PHP 流加载
   - vcs:版本控制系统仓库，如：git、svn、hg
   - pear:可以导入任何 pear 仓库到你的项目中
 * 加载自定义包
@@ -103,27 +93,6 @@ composer config --global --auth github-oauth.github.com myCorrectLongToken
 * 加载没有制作 Composer，以 require 的方式进行加载
 
 ```
-# 添加自定义包
-"autoload":{
-  "files":["src/MyLibrary/functions.php","path/to/2.php"],
-  "classmap": ["path/to/src1","path/to/src2",...]
-  "psr-0":
-    {
-      "Monolog\\": "src/",
-      "Vendor\\Namespace\\": "src/",
-      "Vendor_Namespace_": "src/",
-      "Monolog\\": ["src/", "lib/"],
-      # PHP 源文件放在项目的根目录
-      "UniqueGlobalClass": "",
-      # 有个目录下全是用命名空间组织的，你可以用空前缀
-      "": "src/"
-    },
-  "psr-4":{
-    "name1\\space\\":["path/",...],
-    "name2\\space\\":["path2/",...],
-  }
-},
-
 "repositories": [
         {
             "type": "composer",
@@ -165,32 +134,37 @@ composer config --global --auth github-oauth.github.com myCorrectLongToken
     ]
 ```
 
-* PSR-0: $student = new \Bpp\Student(); 时，对于 PSR-0 代码目录结构是： bpp/Bpp/Student.php 。即目录包含了最外层的命名空间 Bpp
-  - 目录名称与命名空间层层对应，类名中的下划线_会被转化成目录分隔符，会导致目录结构变得比较深,加载”Foo\Bar\Baz”这个class时，会去寻找“src\Foo\Bar\Baz.php”这个文件，这个配置会以map的形式写入生成的vendor/composer/autoload_namespaces.php中。
-* PSR-4: $user = new \App\User(); 时，对于 PSR-4 代码目录结构是： app/User.php 。即目录不需要包含最外层的命名空间 App
-  - 去加载”Foo\Bar\Baz”这个class时，会去寻找“src\Bar\Baz.php”这个文件，对应的会写入到vendor/composer/autoload_psr4.php 这个文件中
-* classmap:通过配置指定的目录或者文件，然后在composer安装或者更新的时，它会扫描指定目录下以.php和.inc结尾的文件中的class，生成class到指定file path的映射，并加入到新生成的vendor/composer/autoload_classmap.php 文件 所以通过 classmap 的类即使不遵循 PSR-0 和 PSR-4 规范也可以自动加载成功。
-* files:手动指定供直接加载的文件（相对于 vendor 目录）所以也不需要满足 PSR-0 和 PSR-4 规范。
+##  自动加载
+
+* Files：手动指定直接加载的文件（相对于 vendor 目录）
+  - 不需要满足 PSR-0 和 PSR-4 规范
+  - 将数组中文件进行自动加载，文件路径相对于项目根目录
+* classmap：支持将数组中路径下的文件进行自动加载
+  - 配置指定目录或者文件，然后在composer安装或者更新的时，会扫描指定目录下以.php和.inc结尾的文件中的class，生成class到指定file path映射`vendor/composer/autoload_classmap.php`
+  - 用 spl_autoload_register 这个函数来怒做自动加载了
+  - 即使不遵循 PSR-0 和 PSR-4 规范也可以自动加载成功
+  - 缺点:一旦增加了新文件，需要执行dump-autoload命令重新生成映射文件
+* psr-0:支持将命名空间映射到路径。命名空间结尾`\\`不可省略
+  * 执行install或update时，加载信息会写入`vendor/composer/autoload_namespace.php`
+  * 如果希望解析指定路径下所有命名空间，则将命名空间置为空串即可
+  * 注意:对应name2\space\Foo类的类文件的路径为path2/name2/space/Foo.php
+* psr-4:支持将命名空间映射到路径。命名空间结尾的`\\`不可省略
+  - 执行install或update时，加载信息会写入~~`vendor/composer/autoload_psr4.php`
+  - 如果希望解析指定路径下的所有命名空间，则将命名空间置为空串即可。
+  - 注意:对应name2\space\Foo类的类文件的路径为path2/space/Foo.php，name2不出现在路径中
+* PSR-4 vs PSR-0
+  - $student = new \Bpp\Student()
+  * PSR-4指定的就当作当前命名空间的目录,代码目录结构是： app/Student.php 。即目录不需要包含最外层的命名空间 App
+    - 去加载”Foo\Bar\Baz”这个class时，会去寻找“src\Bar\Baz.php”这个文件，对应的会写入到vendor/composer/autoload_psr4.php 这个文件中
+  * PSR-0 指定的是当前命名空间的父目录,代码目录结构是： bpp/Bpp/Student.php 。即目录包含最外层命名空间 Bpp
+    - 目录名称与命名空间层层对应，类名中的下划线_会被转化成目录分隔符，会导致目录结构变得比较深,加载”Foo\Bar\Baz”这个class时，会去寻找“src\Foo\Bar\Baz.php”这个文件，这个配置会以map的形式写入生成的vendor/composer/autoload_namespaces.php中。
+  + 最大区别是对下划线（underscore)定义不同
+    * PSR-4中，在类名中使用下划线没有任何特殊含义
+    * PSR-0则规定类名中的下划线_会被转化成目录分隔符
+  + 按需加载
 
 ```
-composer config repositories.repo-name vcs https://github.com//repo
-composer config -g  repositories.tmo composer https://packages.tmogroup.asia/
-
- "autoload": {
-    "psr-0": {
-      "Bpp\\": "bpp/",
-      "Foo\\": "src/"
-    },
-    "psr-4": {
-      "App\\": "app/"
-      "Foo\\": "src/"
-    },
-    "classmap": ["map"],
-    "files": [
-      "aes/Aes.php",
-      "aes/test/TestAes.php"
-    ]
-  }
+require '../vendor/autoload.php
 ```
 
 ## 使用
