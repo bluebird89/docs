@@ -576,3 +576,4 @@ r       对单词字符进行替换
 
 * [Vim教程](https://vimjc.com/)
 * [简明 VIM 练级攻略](https://coolshell.cn/articles/5426.html)
+* [](https://github.com/iggredible/Learn-Vim):A book for learning the Vim editor the smart way.

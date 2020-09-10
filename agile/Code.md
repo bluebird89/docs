@@ -283,3 +283,23 @@
 * [斯坦福大学公开课：编程方法学28集全](https://www.bilibili.com/video/av8048664)
 * [hellerve/programming-talks](https://github.com/hellerve/programming-talks):Awesome & interesting talks about programming
 * [charlax/professional-programming](https://github.com/charlax/professional-programming):A collection of full-stack resources for programmers.
+
+## 编程：Google: github awesome talks
+
+- [Inventing on Principle (2012)](https://vimeo.com/36579366):用真正的「幻灯片」，讨论未来
+- [The future of programming (2013)](https://vimeo.com/71278954):优秀的工具是如何能够帮助人们思考和创造
+- Rich Hickey:clojure 的创始人，十多年来他为社区贡献了很多经典的演讲
+    + Are we there yet? (2009)：包含后面两个主题（simplicity, value）的讲座，醍醐灌顶。
+    + Simple made easy（2011）：大道至简。Rich 介绍了简约和简单的区别 —— do one thing and do it well。我们很容易设计出复杂的系统，却很难剥茧抽丝，设计出简约富有美感的系统。
+    + the value of values（2012）：醍醐灌顶的讲座。Rich 喜好从事物的本源和基本属性出发，来探究那些我们自以为懂却没弄懂的内容。什么是 value？value 和 place 如何 decouple，如果我们在代码中都能使用 value，我们有何收益等。
+    + The language of the system (2013)：提到了 machine 的概念，以及 transform，move，route 等让人赏心悦目的函数式编程的思想。如果对做 system 感兴趣，这个讲座一定不要错过。
+    + Transducers（2014）：哈，transform，map/reduce 就听过，transducer 是什么鬼？这个讲座可以主要关注其产生 transducer 的思想。
+    + Persistent Data Structures and Managed References（2019）：immutable 背后的数据结构。来源于 Chris Okasaki 的 “Purely Functional Data Structures”。其实好多人讲过这个，比如 2017 CppCon 的 Postmodern immutable data structures，还有早期 react 的作者。
+- Joe Armstrong
+    + the mess we’re in（2014）：介绍了一些有趣的 history，讲了 name，causality，simultanuity 和 entropy。
+    + The Forgotten Ideas in Computer Science (2018)：这个视频有些琐碎，不感兴趣的地方可以高倍速播放
+- [Forget Velocity, Let’s Talk Acceleration（2017）](https://www.youtube.com/watch?v=Lbcyyu8XB_Y)
+- [Railway oriented programming（2014）](https://vimeo.com/113707214)
+- [Functional Design Patterns (2017)](https://www.youtube.com/watch?v=srQt1NAHYC0)
+- [Architecture the Lost Years（2011）](https://www.youtube.com/watch?v=WpkDN78P884)
+- [The Future of Programming（2016）](https://www.youtube.com/watch?v=ecIWPzGEbFc)

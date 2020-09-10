@@ -682,3 +682,4 @@ for developing fast and powerful web interfaces.
 * [danielcrisp/hot-new-css-features](https://github.com/danielcrisp/hot-new-css-features):A step-by-step demonstration of five new hot CSS features
 * [CSS：层叠样式表](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
 * [](https://generative-art-with-css.commons.host/)
+* [](https://github.com/jgthms/web-design-in-4-minutes):https://jgthms.com/web-design-in-4-minutes/

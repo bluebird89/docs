@@ -4,7 +4,15 @@ A PHP Framework For Web Artisans https://laravel.com
 
 * 8.0
   - php artisan serve 命令增强:更新 .env 文件后不再需要运行 php artisan serve 手动重启 Web 服务器，Laravel 会监听 .env 文件的修改并自动替你重启
-  - 初始化项目后在代码骨架中提供了 app/Models 目录，并将新建的模型类默认存放到这个目录
+  - 模型类目录:初始化项目后在代码骨架中提供了 app/Models 目录，并将新建的模型类默认存放到这个目录
+  - Laravel Jetstream:进行优化和全新设计的 Laravel UI 脚手架代码
+    + 包含了登录、注册、邮箱验证、双因子认证（2FA）、会话管理、基于 Laravel Sanctum 的 API 支持、以及可选的团队管理等功能
+    + 使用的 CSS 框架是 Tailwind CSS，并且提供了 Livewire 和 Inertia 脚手架选项
+  - 模型工厂类
+  - 迁移文件压缩
+  - 频率限制优化
+  - 时间测试辅助函数
+  - 动态 Blade 组件
 
 ## 安装
 
@@ -292,7 +300,7 @@ exit
 
 * MVC
   - 控制器适合承担的角色其实是负责对 HTTP 请求进行路由，因为还有很多其他访问应用方式，比如 Artisan 命令、队列、调度任务等等，控制器并非唯一入口，所以不适合也不应该将所有业务逻辑封装于此，过度依赖控制器会对以后应用的扩展带来麻烦
-  - 控制器的主要职责就是获取 HTTP 请求，进行一些简单处理（如验证）后将其传递给真正处理业务逻辑的职能部门，如 Service
+  - 控制器主要职责就是获取 HTTP 请求，进行一些简单处理（如验证）后将其传递给真正处理业务逻辑的职能部门，如 Service
 * 没有模型：概念不清楚
     - 所有业务逻辑总体
     - 与关系数据库交互的类
@@ -304,7 +312,7 @@ exit
 * Mail：通过make:mail 时生成。包含应用所有的邮件发送类。邮件对象允许你将构建邮件的逻辑封装在可以使用 Mail::send 方法来发送邮件的地方
 * Notifications：命令 make:notification 时生成。Notifications 目录包含应用发送的所有「事务性」通知，比如关于在应用中发生的事件的简单通知。Laravel 的通知功能抽象了通知发送，可以通过各种驱动（例如邮件、Slack、短信）发送通知，或是存储在数据库中。
 * Policies：命令 make:policy 来创建。Policies 目录包含了应用的授权策略类。策略可以用来决定一个用户是否有权限去操作指定资源
-* Providers：服务提供器通过在服务容器中绑定服务、注册事件、以及执行其他任务来为即将到来的请求做准备来启动应用。
+* Providers：服务提供器通过在服务容器中绑定服务、注册事件、以及执行其他任务来为即将到来的请求做准备来启动应用
 * Rules：命令 make:rule 命令时被创建。Rules 目录包含应用自定义验证规则对象。这些规则意在将复杂的验证逻辑封装在一个简单的对象中
 * Broadcast
 * markdown:在邮件中利用预置模板和邮件通知组件，由于消息使用Markdown格式编写，因此Laravel可以将这些消息渲染成美观、响应式的HTML模板的同时自动为其生成纯文本副本
@@ -328,12 +336,10 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
 * 载入服务提供者至容器：在内核引导启动的过程中最重要的动作之一就是载入服务提供者到你的应用，服务提供者负责引导启动框架的全部各种组件，例如数据库、队列、验证器以及路由组件。因为这些组件引导和配置了框架的各种功能，所以服务提供者是整个 Laravel 启动过程中最为重要的部分，所有的服务提供者都配置在 config/app.php 文件中的 providers 数组中。首先，所有提供者的 register 方法会被调用；一旦所有提供者注册完成，接下来，boot 方法将会被调用
 * 分发请求：一旦应用完成引导和所有服务提供者都注册完成，Request 将会移交给路由进行分发。路由将分发请求给一个路由或控制器，同时运行路由指定的中间件
 
-## 配置
-
-* `.env`
-
 ## 服务容器(IocContainer)
 
+* 服务提供者主要用来进行注册服务容器绑定（即注册接口及其实现类的绑定）
+* 一个服务提供者必须至少有一个 register 方法。你可以在这个方法里将类绑定到容器
 * 用于管理类依赖和执行依赖注入的工具
 * 依赖注入（DI）:应用程序依赖容器创建并注入它所需要的外部资源
   - 由内部生产（比如初始化、构造函数 __construct 中通过工厂方法、自行手动 new 的）
@@ -357,6 +363,7 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
 * laravel 自动搜寻依赖需求的功能，是通过 反射（Reflection） 实现
 * 服务提供者（ServiceProvider）
   - register（注册）：不要有对未知事物的依赖，如果有，就要移步至 boot 部分,不需要尝试在 register 方法中注册任何事件监听器、路由或任何其他功能
+    + 永远不要在 register 方法里面使用任何服务。该方法只是用来将对象绑定到服务容器的地方。所有关于绑定类的解析、交互都要在 boot 方法（服务提供者的另一个方法）里进行
   - boot（引导、初始化）:此方法在所有其他服务提供器都注册之后才能调用，可以访问已经被框架注册的所有服务
 * 引导方法依赖注入：可以为服务提供器的 boot 方法设置类型提示
   * 延迟提供器：提供器仅在服务容器中注册绑定，直到真正需要注册绑定，提高应用程序的性能，因为它不会在每次请求时都从文件系统中加载
@@ -377,6 +384,7 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
 * 解析
   - make:从服务容器中解析出服务对象，该方法接收想要解析的类名或接口名作为参数
   - build:职能是构建解析出来的服务的对象
+* 所有服务提供者都注册以后（register 方法调用完），它们就进入了「启动」状态。这将会触发每个服务提供者执行各自的 boot 方法
 
 ```sh
 php artisan make:provider HelperServiceProvider
@@ -430,7 +438,7 @@ $this->app->resolving(HelpSpot\API::class, function ($api, $app) {
 
 ## 门面（Facades）
 
-为应用程序的 服务容器 中可用的类提供了一个「静态」接口. 是服务容器中底层类的「静态代理」，提供了简洁而富有表现力的语法，甚至比传统的静态方法更具可测试性和扩展性
+为应用程序的服务容器中可用的类提供了一个「静态」接口. 是服务容器中底层类的「静态代理」，提供了简洁而富有表现力的语法，甚至比传统的静态方法更具可测试性和扩展性
 
 * 原理
     - 继承自 Illuminate\Support\Facades\Facade 类。使用了 __callStatic() 魔术方法将的 Facades 的调用延迟，直到对象从容器中被解析出来
@@ -457,7 +465,7 @@ public function testBasicExample()
 
 ## 契约 (Contracts)
 
-一组定义框架提供的核心服务的接口,框架对每个契约都提供了相应的实现.
+一组定义框架提供的核心服务的接口,框架对每个契约都提供了相应的实现
 
 * 契约 VS Facades
     - Facades，不需要你在类的构造函数中类型提示.契约则需要在类中明显地定义依赖项。
@@ -818,39 +826,6 @@ $.ajaxSetup({
   - `Route::apiResources(['photos' => 'PhotoController', 'posts' => 'PostController']);`
 
 ```php
-namespace App\Http\Controllers;
-
-use App\User;
-use App\Http\Controllers\Controller;
-
-class UserController extends Controller
-{
-    /**
-     * 实例化一个新的控制器实例。
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-
-        $this->middleware('log')->only('index');
-
-        $this->middleware('subscribed')->except('store');
-    }
-
-    /**
-     * 展示给定用户的信息。
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('user.profile', ['user' => User::findOrFail($id)]);
-    }
-}
-Route::get('user/{id}', 'UserController@show');
 
 namespace App\Http\Controllers;
 
@@ -1525,7 +1500,6 @@ flat map
 * Laravel表单验证拥有标准且庞大的[规则集]( <http://d.laravel-china.org/docs/5.4/validation#可用的验证规则)，通过规则调用来完成数据验证
 * 多个规则组合调用须以"|"符号连接，一次验证required失败后将立即停止验证,自动回退并可自动绑定视图
 * "."语法符号在Laravel中通常表示嵌套包含关系，这个在其他语言或框架语法中也比较常见
-
 - 自定义FormRequest (须继承自 Illuminate\Foundation\Http\FormRequest )
 - Validator::make()手动创建validator实例
 - 创建validator实例验证后钩子
@@ -1541,177 +1515,34 @@ $this->validate($request, [
 ]);
 ```
 
-## 事件
+## 事件 Event
 
-Laravel事件机制是一种很好的应用解耦方式，因为一个事件可以拥有多个互不依赖的监听器。事件类 (Event) 类通常保存在 app/Events 目录下，而它们的监听类 (Listener) 类被保存在 app/Listeners 目录下，使用 Artisan 命令来生成事件和监听器时他们会被自动创建。
+一种很好的应用解耦方式,一个事件可以拥有多个互不依赖的监听器
 
-- 注册事件和监听器：EventServiceProvider的 listen 属性数组用于事件（键）到对应的监听器（值）的注册，然后运行 php artisan event:generate将自动生成EventServiceProvider中所注册的事件(类)模板和监听器模板，然后在此基础之上进行修改来实现完整事件和监听器定义；另外，你也可以在 EventServiceProvider 类的 boot 方法中通过注册闭包事件来实现
-- 定义事件(类)：事件(类)就是一个包含与事件相关信息数据的容器，不包含其它逻辑
-
-```
- 1 <?php
- 2
- 3 namespace App\Events;
- 4
- 5 use App\Order;
- 6 use Illuminate\Queue\SerializesModels;
- 7
- 8 class OrderShipped
- 9 {
-10     use SerializesModels;
-11
-12     public $order;
-13
-14     /**
-15      * 创建一个事件实例。
-16      *
-17      * @param  Order  $order
-18      * @return void
-19      */
-20     public function __construct(Order $order)
-21     {
-22         $this->order = $order;
-23     }
-24 }
-```
-
-- 定义监听器：事件监听器在 handle 方法中接受了事件实例作为参数
-
-  ```
-  1 <?php
-  2
-  3 namespace App\Listeners;
-  4
-  5 use App\Events\OrderShipped;
-  6
-  7 class SendShipmentNotification
-  8 {
-  9     /**
-  10      * 创建事件监听器。
-  11      *
-  12      * @return void
-  13      */
-  14     public function __construct()
-  15     {
-  16         //
-  17     }
-  18
-  19     /**
-  20      * 处理事件
-  21      *
-  22      * @param  OrderShipped  $event
-  23      * @return void
-  24      */
-  25     public function handle(OrderShipped $event)
-  26     {
-  27         // 使用 $event->order 来访问 order ...
-  28     }
-  29 }
-  ```
-
-- 停止事件传播：在监听器的 handle 方法中返回 false 来停止事件传播到其他的监听器
-- 触发事件：调用 event 辅助函数可触发事件，事件将被分发到它所有已经注册的监听器上
-
-  ```
-  1 <?php
-  2
-  3 namespace App\Http\Controllers;
-  4
-  5 use App\Order;
-  6 use App\Events\OrderShipped;
-  7 use App\Http\Controllers\Controller;
-  8
-  9 class OrderController extends Controller
-  10 {
-  11     /**
-  12      * 将传递过来的订单发货。
-  13      *
-  14      * @param  int  $orderId
-  15      * @return Response
-  16      */
-  17     public function ship($orderId)
-  18     {
-  19         $order = Order::findOrFail($orderId);
-  20
-  21         // 订单的发货逻辑...
-  22
-  23         event(new OrderShipped($order));
-  24     }
-  25 }
-  ```
-
-- 队列化事件监听器：如果监听器中需要实现一些耗时的任务，比如发送邮件或者进行 HTTP 请求，那把它放到队列中处理是非常有用的。在使用队列化监听器，须在服务器或者本地环境中配置队列并开启一个队列监听器，还要增加 ShouldQueue 接口到你的监听器类；如果你想要自定义队列的连接和名称，你可以在监听器类中定义 $connection 和 $queue 属性；如果队列监听器任务执行次数超过在工作队列中定义的最大尝试次数，监听器的 failed 方法将会被自动调用
-
-  ```
-  1 <?php
-  2
-  3 namespace App\Listeners;
-  4
-  5 use App\Events\OrderShipped;
-  6 use Illuminate\Contracts\Queue\ShouldQueue;
-  7
-  8 class SendShipmentNotification implements ShouldQueue
-  9 {
-  10     /**
-  11      * 队列化任务使用的连接名称。
-  12      *
-  13      * @var string|null
-  14      */
-  15     public $connection = 'sqs';
-  16
-  17     /**
-  18      * 队列化任务使用的队列名称。
-  19      *
-  20      * @var string|null
-  21      */
-  22     public $queue = 'listeners';
-  23
-  24     public function failed(OrderShipped $event, $exception)
-  25     {
-  26         //
-  27     }
-  28 }
-  ```
-
-- 事件订阅者：事件订阅者允许在单个类中定义多个事件处理器，还应该定义一个 subscribe 方法，这个方法接受一个事件分发器的实例，通过调用事件分发器的 listen 方法来注册事件监听器，然后在 EventServiceProvider 类的 $subscribe 属性中注册订阅者
-
-```
- 1 <?php
- 2
- 3 namespace App\Listeners;
- 4
- 5 class UserEventSubscriber
- 6 {
- 7     /**
- 8      * 处理用户登录事件。
- 9      */
-10     public function onUserLogin($event) {}
-11
-12     /**
-13      * 处理用户注销事件。
-14      */
-15     public function onUserLogout($event) {}
-16
-17     /**
-18      * 为订阅者注册监听器。
-19      *
-20      * @param  Illuminate\Events\Dispatcher  $events
-21      */
-22     public function subscribe($events)
-23     {
-24         $events->listen(
-25             'Illuminate\Auth\Events\Login',
-26             'App\Listeners\UserEventSubscriber@onUserLogin'
-27         );
-28
-29         $events->listen(
-30             'Illuminate\Auth\Events\Logout',
-31             'App\Listeners\UserEventSubscriber@onUserLogout'
-32         );
-33     }
-34
-35 }
-```
+* 流程
+  + **注册事件和监听器映射**
+    * EventServiceProvider的 listen 属性数组用于事件（键）到对应的监听器（值）的注册,添加events 和 listerner
+    * php artisan event:generate 将自动生成 EventServiceProvider中所注册的事件(类)模板和监听器模板
+    * 在此基础之上进行修改来实现完整事件和监听器定义
+    * 可以在 EventServiceProvider 类的 boot 方法中通过注册闭包事件来实现全局监听
+  + **定义事件**(Event) ：一个包含与事件相关信息数据的容器，不包含其它逻辑
+    * 传递到 listener 消息体
+  + **定义监听器**(Listener) ：事件监听器在 handle 方法中接受了事件实例作为参数
+    * 停止事件传播：监听器 handle 方法中返回 false 来停止事件传播到其他的监听器
+  + **触发事件**：调用 event 辅助函数可触发事件，事件将被分发到已经注册监听器上
+    * 模型 $events
+* 事件订阅者
+  + 订阅可以把很多处理器（handler）放到一个类里面，然后用一个 listner 把它们集合起来
+  + EventServiceProvider 中 subscribe属性中声明
+  + 允许在单个类中定义多个事件处理器，还应该定义一个 subscribe 方法，这个方法接受一个事件分发器的实例，通过调用事件分发器的 listen 方法来注册事件监听器，然后在 EventServiceProvider 类的 $subscribe 属性中注册订阅者
+* 队列化事件监听器
+  + 如果监听器中需要实现一些耗时的任务，比如发送邮件或者进行 HTTP 请求，那把它放到队列中处理是非常有用的
+  + 在使用队列化监听器，须在服务器或者本地环境中配置队列并开启一个队列监听器，还要增加 ShouldQueue 接口到监听器类
+  + 如果想要自定义队列的连接和名称，可以在监听器类中定义 $connection 和 $queue 属性
+  + 如果队列监听器任务执行次数超过在工作队列中定义的最大尝试次数，监听器的 failed 方法将会被自动调用
+* 事件是一种『钩子』，Fire 事件的位置就是放置钩子的地方。解耦，事件只定义发生了什么事
+* 一种管理 + 实现的体现，首先有一个总的目录，可以宏观的看到所有事件，而不需要每次都要打开控制器的方法才能知道注册后会发生什么
+* 场景
 
 ## Eloquent
 
