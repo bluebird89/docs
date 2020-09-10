@@ -61,6 +61,7 @@ docker-compose up -d
 * [isnowfy/snownlp](https://github.com/isnowfy/snownlp):Python library for processing Chinese text
 * [textlint/textlint](https://github.com/textlint/textlint):The pluggable natural language linter for text and markdown. https://textlint.github.io/
 * [huggingface / transformers](https://github.com/huggingface/transformers):🤗 Transformers: State-of-the-art Natural Language Processing for TensorFlow 2.0 and PyTorch. https://huggingface.co/transformers
+* [HanLP](https://github.com/hankcs/HanLP):中文分词 词性标注 命名实体识别 依存句法分析 语义依存分析 新词发现 关键词短语提取 自动摘要 文本分类聚类 拼音简繁转换 自然语言处理 https://hanlp.hankcs.com/
 
 ## 参考
 

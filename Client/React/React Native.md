@@ -268,6 +268,7 @@ Flexbox 是css3 里面引入的布局模型－弹性盒子模型，旨在通过�
 * animations
     - [react-tools/react-move](https://github.com/react-tools/react-move):React Move 🌀 Beautiful, data-driven animations for React https://react-move.js.org
     - [react-dnd/react-dnd](https://github.com/react-dnd/react-dnd):Drag and Drop for React http://react-dnd.github.io/react-dnd
+    - [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd):Beautiful and accessible drag and drop for lists with React https://react-beautiful-dnd.netlify.com/
     - [react-spring/react-spring](https://github.com/react-spring/react-spring):✌️ A spring physics based React animation library https://react-spring.github.iov
 * 脚手架
   - [youzan/zent-kit](https://github.com/youzan/zent-kit)React 组件库开发脚手架

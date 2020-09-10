@@ -44,7 +44,6 @@
 		+ 要展开学习的话，则可以稍微花一些时间读一读金字塔原理.常说的总-分-总模式
 		+ 背诵课文可能是提高写作水平的一个捷径.背诵native speaker写的文章都可以让你快速的学会很多常见词组的使用方法，将这些固定搭配烂熟于心
 
-
 ##  习惯
 
 * 认真对待词汇量。丰富的词汇量是学习更近一步内容的基石.一方面，可以帮助更好的理解其他人的意图，捕捉到细微的感情差异。另一方面，可以帮助更精确，更快速有效的将自己的思想传递给他人
@@ -59,6 +58,10 @@
     + 能用主动语态的不用被动语态。
     + 如果你能从日常英语中找到合适的对应的词，绝不使用外国短语、科学词语和一些专门的行话。
     + 如果按规则会说出粗野的话，立即打破上述规则。
+
+## 工具
+
+* [goldendict](https://github.com/goldendict/goldendict):A feature-rich dictionary lookup program, supporting multiple dictionary formats (StarDict/Babylon/Lingvo/Dictd) and online dictionaries, featuring perfect article rendering with the complete markup, illustrations and other content retained, and allowing you to type in words without any accents or correct case. http://goldendict.org/
 
 ## 参考
 

@@ -217,7 +217,7 @@
     - (https://github.com/InterNations/http-mock)[HTTP Mock]: 一个在单元测试模拟HTTP请求的库
     - (https://github.com/kahlan/kahlan)[Kahlan]: 全栈Unit/BDD测试框架，内置stub，mock和代码覆盖率的支持
     - (http://mink.behat.org/en/latest/)[Mink]: Web验收测试
-    - (https://github.com/padraic/mockery)[Mockery]: 一个用于测试的模拟对象的库
+    - [Mockery](https://github.com/mockery/mockery):Mockery is a simple yet flexible PHP mock object framework for use in unit testing with PHPUnit, PHPSpec or any other testing framework. Its core goal is to offer a test double framework with a succinct API capable of clearly defining all possible object operations and interactions using a human readable Domain Specific Language (DSL). http://docs.mockery.io/
     - (https://github.com/brianium/paratest)[ParaTest]: 一个PHPUnit的并行测试库
     - (https://github.com/peridot-php/peridot)[Peridot]: 一个事件驱动开发的测试框架
     - (https://github.com/mlively/Phake)[Phake]: 另一个用于测试的模拟对象的库
