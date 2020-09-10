@@ -12,7 +12,6 @@ cd cmake-3.10.2/
 gmake -v
 ```
 
-
 ```
 # makefile
 hello.out:max.o min.o hello.c
@@ -27,3 +26,7 @@ min.o:min.c
 
 * 《CMake实践》
 * 《Mastering CMake》
+
+## 参考
+
+* [cmake-examples](https://github.com/ttroy50/cmake-examples)Useful CMake Examples http://ttroy50.github.io/cmake-examples

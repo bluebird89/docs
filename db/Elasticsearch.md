@@ -302,70 +302,89 @@ curl -X DELETE 'localhost:9200/accounts/person/1'
 * 使用 GET /_cat/indices?v&h=i,tm&s=tm:desc，可以查看每个索引占用的内存
 
 ```sh
-//查看_cat支持的信息
+# 查看_cat支持信息
 kibana: GET /_cat
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat'
 
-//查看集群所有节点
+# 查看集群的节点
+http://localhost:9200/_cat/?v
+
+# 查看集群所有节点
 kibana: GET /_cat/nodes?v
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/nodes?v'
 
-//查看集群健康状态
+#  查看集群健康状态
 kibana: GET /_cat/health?v
 kibana: GET _cluster/health
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/health?v'
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cluster/health?pretty'
 
-//查看主节点信息
+# 查看主节点信息
 kibana: GET /_cat/master?v
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/master?v'
 
-//查看所有索引信息
+# 查看所有索引信息
 kibana: GET /_cat/indices?v
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/indices?v'
-//查看单个索引信息
+
+# 创建一个名为 customer 的索引。pretty要求返回一个漂亮的json 结果
+PUT /customer?pretty
+
+# 查看单个索引信息
 kibana: GET /_cat/indices/movies?v
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/indices/movies?v'
 
-//查看所有索引文档总数
+# 查询所有文档
+GET /customer/_search?q=*&sort=name:asc&pretty
+
+# 查看所有索引文档总数
 kibana: GET _all/_count
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_all/_count?pretty'
 
-//查看指定索引文档总数
+# 查看指定索引文档总数
 kibana: GET movies/_count
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/movies/_count?pretty'
 
-//查看所有分片信息
+# 查看所有分片信息
 kibana: GET /_cat/shards?v
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/shards?v'
 
-//查看单个索引分片信息
+# 查看单个索引分片信息
 kibana: GET /_cat/shards/movies?v
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/shards/movies?v'
 
-//查看插件
+# 查看插件
 kibana: GET /_cat/plugins?v
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/plugins?v'
 
-//查看所有模板
+# 查看所有模板
 kibana: GET _cat/templates
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/templates?v'
 
-//查看状态为绿的索引
+# 查看状态为绿的索引
 kibana: GET /_cat/indices?v&health=green
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/indices?v&health=green'
 
-//查看movies索引元数据
+# 查看movies索引元数据
 kibana: GET movies
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/movies?pretty'
 
-//按照文档数量排序索引
+# 按照文档数量排序索引
 kibana: GET _cat/indices?v&s=docs.count:desc
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/indices?v&s=docs.count:desc'
 
-//查看各个索引占用内存大小并进行排序
+# /查看各个索引占用内存大小并进行排序
 kibana:
 bash: curl -XGET -u elastic:26tBktGolYCyZD2pPISW 'http://192.168.31.215:9201/_cat/indices?v&h=i,tm&s=tm:desc'
+
+# 索引一个文档到customer索引中
+curl -X PUT "localhost:9200/customer/_doc/1?pretty" -H 'Content-Type: application/json' -d'
+{
+  "name": "John Doe"
+}
+'
+# 从customer索引中获取指定id的文档
+curl -X GET "localhost:9200/customer/_doc/1?pretty"
 ```
 
 ## 操作
