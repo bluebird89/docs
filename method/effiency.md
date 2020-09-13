@@ -3,6 +3,11 @@
 * smart（specific、measurable、attainable、relevant、time-bound）
 * 肌肉记忆
 
+## 实践
+
+* 修正自己方法
+* 视频有捷径的嫌疑，没有自己基础的搭建
+
 ## Rest: Why You Get More Done When You Work Less (Alex Soojung-Kim Pang; Penguin, 2018)
 
 * 方法
@@ -20,7 +25,6 @@
 	- 重要的是工作效率而不是投入工作的绝对时间（每日 4 小时、早起、不要 overwork）
 	- 要改变“休息是懒惰，是浪掷生命”的观念，好的休息不仅是必要的，且能提高效率和创造力（散步、午睡、睡眠的重要性、修复的机会）
 	- 要给大脑安排转换（shift gears）的机会，这样有助于刺激创造力（散步、锻炼、深度爱好、休假）
-
 
 ## The Off Switch: Leave work on time, relax your mind, but still get more done (Mark Cropley; London: Virgin Books, 2015)
 
