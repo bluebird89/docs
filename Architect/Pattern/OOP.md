@@ -460,7 +460,6 @@ notification.sendMessage("13918942177", "短信验证码：2346");
 * 在白板前研讨。通过UML简单表示设计的意图和想法就可以了。一些重要的设计可以拍照存档
 * 但不需要有一个重量级的过程专门设计，然后编码.因为在项目的任何一个阶段，我们对需求的理解都是不完整的，所以要强调迭代
 
-
 ## KISS Keep It Simple and Stupid
 
 * 考虑逻辑复杂度、实现难度、代码的可读性
@@ -473,7 +472,7 @@ notification.sendMessage("13918942177", "短信验证码：2346");
 
 ## YAGNI You Ain’t Gonna Need It
 
-需不需要做的问题
+* 需不需要做的问题
 
 ## DRY Don’t Repeat Yourself
 
