@@ -45,16 +45,22 @@ vagrant box list # 列表
 vagrant box add {title} {url} # 添加镜像 title ubuntu/trusty64 [laravel/homestead](https://vagrantcloud.com/laravel/boxes/homestead/versions/3.0.0/providers/virtualbox.box)外网不稳定，可以试着换时间下载
 vagrant box add ubuntu/trusty64 # 通过包名先去本地是否存在，没有去仓库下载，下载的版本在上述命令行下加入 --box-version=版本号
 vagrant box add hahaha ~/box/package.box # 加载本地文件(package包)
+vagrant box add laravel/homestead ~/Downloads/virtualbox.box
 vagrant box add precise64 http://files.vagrantup.com/precise64.box
 # The specified checksum type is not supported by Vagrant: sha512. Vagrant supports the following checksum types: md5, sha1, sha256
 # Upgrade vagrant version to 2.2.6 and up
+
+# Check your Homestead.yaml file, the path to your private key does not exist.
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+eval "$(ssh-agent -s)"
+ssh-add -K ~/.ssh/id_rsa
 
 # ubuntu 18.04 LTS:
 vagrant box add https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cloud-images/bionic/current/bionic-server-cloudimg-amd64-vagrant.box --name ubuntu18
 
 vagrant box remove ubuntu/trusty64  --box-version=20170810.0.0  # 移除镜像,指定版本
 vagrant box repackage  # 重新打包
-vagant box update # 更新box
+vagrant box update # 更新box
 
 vagrant plugin repair|update
 vagrant plugin expunge --reinstall

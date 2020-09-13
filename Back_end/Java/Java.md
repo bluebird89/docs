@@ -201,7 +201,7 @@ java HelloWorld // 运行
 
 ## 常量
 
-* 在程序运行时是不能被修改。
+* 在程序运行时是不能被修改
 * 使用 final 关键字来修饰常量
 * 大写字母表示
 
@@ -553,7 +553,7 @@ boolean result = name instanceof String;
   - toLowerCase() 指定字母的小写形式
   - toString() 返回字符的字符串形式，字符串的长度仅为1
 
-```java
+```
 char ch = 'a';
 // Unicode 字符表示形式
 char uniChar = '\u039A';
@@ -1025,6 +1025,7 @@ static void cacheException() throws Exception{
 
 * 线程安全
 * 线程池
+  - [线程池参数动态化配置](https://mp.weixin.qq.com/s/EhBt44Rj0c5E-UVf742aGw)
 * AQS
 * 锁
 * 悲观锁/乐观锁

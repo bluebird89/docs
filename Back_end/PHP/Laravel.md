@@ -19,7 +19,7 @@ A PHP Framework For Web Artisans https://laravel.com
 * [laravel/homestead](https://github.com/laravel/homestead):an official, pre-packaged Vagrant box that provides you a wonderful development environment without requiring you to install PHP, a web server, and any other server software on your local machine
   - 安装 virtualbox vagrant
   - parallels `vagrant plugin install vagrant-parallels`
-  - vagrant box add [--name] laravel\homestead [homestead.box] <https://atlas.hashicorp.com/laravel/boxes/homestead> <https://atlas.hashicorp.com/laravel/boxes/homestead/versions/2.1.0/providers/virtualbox.box>
+  - vagrant box add [--name] laravel\homestead [homestead.box] <https://atlas.hashicorp.com/laravel/boxes/homestead> <https://atlas.hashicorp.com/laravel/boxes/homestead/versions/2.1.0/providers/virtualbox.box> <https://vagrantcloud.com/laravel/boxes/homestead/versions/10.0.0/providers/virtualbox.box>
   - `vagrant list`
   - git clone <https://github.com/laravel/homestead.git> Homestead
   - `bash init.sh`
@@ -204,9 +204,11 @@ php artisan config:clear  # 删除配置的缓存文件
 利用PHP的CLI构建了强大Console工具，创建想要的模板类以及管理配置应用
 
 ```sh
-php artisan --version
+php artisan --version|-V
 php artisan help [name]  # 显示命令行帮助
 php artisan list  # 列出命令
+
+php artisan serve
 
 php artisan env # 显示当前框架环境
 php artisan down --message="Upgrading Database" --retry=60 # 进入维护模式
