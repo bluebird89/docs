@@ -2,15 +2,6 @@
 
 MySQL Server, the world's most popular open source database, and MySQL Cluster, a real-time, open source transactional database. http://www.mysql.com/
 
-* InnoDB B+树
-* MyISAM
-* 字符集
-* 索引
-* 数据库范式
-* 事务及其隔离级别
-* MVCC
-* 数据库锁
-
 ## 版本
 
 * MySQL 最初由瑞典 MySQL AB 公司开发，MySQL 的创始人是乌尔夫·米卡埃尔·维德纽斯，常用昵称蒙提（Monty）
@@ -238,124 +229,6 @@ mysql_config --include
 show variables like '%query_cache%'
 ```
 
-## [日志实现](https://mp.weixin.qq.com/s/SVbLDtr0lGGwfKcj4O6XFg)
-
-* 类型
-    - 逻辑日志：简单理解为记录的就是sql语句 。
-    - 物理日志：mysql 数据最终是保存在数据页中的，物理日志记录的就是数据页变更
-- redo log
-    +  用于记录数据库执行的写入性操作(不包括查询)信息，以二进制的形式保存在磁盘中
-    + 先写入log buffer，之后才会被刷新到磁盘的redo日志文件
-    + redo log 是 InnoDB 引擎提供的日志系统，最开始 MySQL 里并没有 InnoDB 引擎。MySQL 自带引擎是 MyISAM，但是 MyISAM 没有 crash-safe 的能力，binlog 日志只能用于归档，不具备数据库崩溃重启后的数据恢复功能。而 InnoDB 是另一个公司以插件形式引入 MySQL 的，既然只依靠 binlog 是没有 crash-safe 能力的，所以 InnoDB 使用另外一套日志系统——也就是 redo log 来实现 crash-safe 能力。
-    + 保存了对 InnoDB 表中数据的修改记录,所以也叫日志文件
-    + 在 InnoDB 存储引擎中，一般默认包括 2 个日志文件，新建数据库之后，会有名为 ib_logfile0 和 ib_logfile1 的两个文件，如果在启动数据库时，这两个文件不存在，则 InnoDB 会根据配置参数或默认值，重新创建日志文件
-    + LSN Log Sequence Number:用来精确记录日志位置信息，且是连续增长的。在 InnoDB 中，大小为 8 个字节的值，它的增长量是根据一个 MTR（mini-transaction）写入的日志量来计算的，写多少日志（单位字节），LSN 就增长多少。日志文件轮循一圈（所有日志文件是以循环方式使用的），那么 LSN 的增长量大约就是整个日志文件的大小（日志文件存在文件头等会占用一部分空间）。它是一个集逻辑意义与物理意义于一身的概念。而在有些数据库中，LSN 是一个完全逻辑的概念，每提交一个物理事务，LSN 就加 1
-    + 通过日志组来管理日志文件，是一个逻辑定义，包含若干个日志文件，一个组中的日志文件大小相等，大小通过参数来设置。现在 InnoDB 只⽀持一个日志组。在 MySQL5.5 及之前的版本中，整个日志组的容量不能大于 4GB（实际上是 3.9GB 多，因为还有一些文件头信息等），到了 MySQL 5.6.3 版本之后，整个日志组的容量可以设置得很大，最大可以达到 512GB
-        * show variables like 'datadir'
-        * 将缓冲区log buffer里面的redo日志刷新到这个两个文件里面，写入的方式 是循环写入的
-    + REDO 日志的写入，都是字节连续的，虽然看上去是多个日志文件，但理解的时候，完全可以把它想象成一个文件，对每一文件掐头去尾，把剩下的空间连接起来，就是总的日志空间了。
-    + 日志组中的每一个日志文件，都有自己的格式，内部也是按照大小相等的页面切割，但这里的页面大小是 512 个字节，由于历史的原因，考虑到机械硬盘的块大小是 512 字节，日志块大小也如此设计。这是因为写日志其实就是为了提高数据库写入吞吐量，如果每次写入是磁盘块大小的倍数，效率才是最高的，并且日志将逻辑事务对数据库的分散随机写入转化成了顺序的 512 字节整数倍数据的写入，这样就大大提高了数据库的效率。正是因为这个原因，REDO 日志才可以说是数据库管理系统与通过直接写文件来管理数据的最根本的区别之一。
-    + 普通页面中，都会有 12 个字节用来存储页面头信息，这些信息主要用于管理这个页面本身的数据存储方式。
-        - LOG_BLOCK_HDR_NO：4 个字节，一个与 LSN 有关系的块号。
-        - LOG_BLOCK_HDR_DATA_LEN：2 个字节，表示当前页面中存储的日志长度，这个值一般都等于 512-12（12 为页面头的大小），因为日志在相连的块中是连续存储的，中间不会存在空闲空间，所以如果这个长度不为 500，表示此时日志已经扫描完成（Crash Recovery 的工作）。
-        - LOG_BLOCK_FIRST_REC_GROUP：2 个字节，表示在当前块中是不是有一个 MTR（关于这个概念的意义，会在下一节中专门介绍）的开始位置。因为一个 MTR 所产生的日志量有可能是超过一个块大小的，那么如果一个 MTR 跨多个块时，这个值就表示了这个 MTR 的开始位置究竟是在哪一个块中。如果为 0，则表示当前块的日志都属于同一个 MTR；而如果其值大于 0 并且小于上面 LOG_BLOCK_HDR_DATA_LEN 所表示的值，则说明当前块中的日志是属于两个 MTR 的，后面 MTR 的开始位置就是 LOG_BLOCK_FIRST_REC_GROUP 所表示的位置。
-        - LOG_BLOCK_CHECKPOINT_NO：4 个字节，存储的是检查点的序号。具体什么是检查点，后面会详细介绍。
-    * MTR Mini-transaction: MTR，是因为它的意义相当于一个 Mini-transaction，用来保证物理页面写入操作完整性及持久性的机制
-        - 不管读还是写，只要使用到底层 Buffer Pool 的页面，都会使用到 MTR，它是上面逻辑层与下面物理层的交互窗口，同时也是用来保证下层物理数据正确性、完整性及持久性的机制。
-        - 在访问一个文件页面的时候，系统都会将要访问的页面载入到 Buffer Pool 中，然后才可以访问这个页面，此时可以读取或更新这个页面。在这个页面不断更新变化的过程中，有一个系统一直扮演着很重要的角色，那就是日志系统。因为 InnoDB 采用的也是 LOGWRITE-AHEAD，所以所有的写操作，都会有日志记录，这样才能保证数据库事务的 ACID 特性。
-        * redo log 的写入拆成了两个步骤：prepare 和 commit，这就是两阶段提交
-            - 提交主要是将所有这个物理事务产生的日志写入到 InnoDB 日志系统的日志缓冲区中，然后等待 srvmasterthread 线程定时将日志系统的日志缓冲区中的日志数据刷到日志文件中，这会涉及日志刷盘时机的问题
-            - 日志产生的作用，是将随机页面的写入变成顺序日志的写入，从而用一个速度更快的写入来保证速度较慢的写入的完整性，以提高整体数据库的性能。其根本目的是要将随机变成顺序，所以日志的量才是一个相对固定循环使用的空间
-            - 不使用两阶段提交，会导致两份日志恢复的数据不一致：比如先写 redo log，binlog 还没有写入，数据库崩溃重启；或者先写 binlog，redo 还没有写入数据库崩溃重启，都将造成恢复数据的不一致
-            - 使用两阶段提交后，就可以保证两份日志恢复的数据一致：只有 binlog 写入成功的情况下，才会提交 redo log，否则 redo log 处于 prepare 状态，事务会回滚，这样一来，就保证了数据的一致性
-    + WAL（Write-Ahead Logging）：先写日志，再写磁盘。
-        * 当有一条记录需要更新的时候，InnoDB 引擎就会先把记录写到 redo log 里面，并更新内存，这个时候更新就算完成了。
-        * 同时，InnoDB 引擎会在适当的时候，将这个操作记录更新到磁盘里面，而这个更新往往是在系统比较空闲的时候做
-    + 有固定大小的，比如可以配置为一组 4 个文件，每个文件的大小是 1GB，那么总共就可以记录 4GB 的操作。从头开始写，写到末尾就又回到开头循环写
-    + checkpoint
-        * write pos 是当前记录的位置，一边写一边后移，写到第 3 号文件末尾后就回到 0 号文件开头。checkpoint 是当前要擦除的位置，也是往后推移并且循环的，擦除记录前要把记录更新到数据文件。
-        * write pos 和 checkpoint 之间的是“粉板”上还空着的部分，可以用来记录新的操作。如果 write pos 追上 checkpoint，表示“粉板”满了，这时候不能再执行新的更新，得停下来先擦掉一些记录，把 checkpoint 推进一下。
-        * 保证即使数据库发生异常崩溃或者重启，之前提交的记录都不会丢失，可以根据这个日志记录的步骤完成未持久化到磁盘的数据更新操作，从而保证数据的一致性。这个能力称为 crash-safe
-        * 做一次checkpoint分为两步
-            - 计算当前系统可以被覆盖的redo日志对应的lsn最大值是多少。redo日志可以被覆盖，意味着他对应的脏页被刷新到磁盘上，只要我们计算出当前系统中最早被修改的oldest_modification, 只要系统中lsn小于该节点的oldest_modification值磁盘的redo日志都是可以被覆盖的。
-            - 将lsn过程中的一些数据统计。
-    + log buffer:
-        * `show VARIABLES like 'innodb_log_buffer_size'`
-        * 什么时候刷新到硬盘
-            - log buffer空间不足。上面有指定缓冲区的内存大小，MySQL认为日志量已经占了 总容量的一半左右，就需要将这些日志刷新到磁盘上。
-            - 事务提交时。使用redo日志的目的就是将未刷新到磁盘的记录保存起来，防止丢失，如果数据提交了，我们是可以不把数据提交到磁盘的，但为了保证持久性，必须 把修改这些页面的redo日志刷新到磁盘。
-            - 后台线程不同的刷新 后台有一个线程，大概每秒都会将log buffer里面的redo日志刷新到硬盘上。
-            - checkpoint
-- binlog
-    + 数量
-        * binlog的最大序号是 pow(2,31)-1 = 2147483647。
-        * 当序号接近这个值，且差距小于 1000 时（也就是序号大于 2147482647 时），就开始向error log中写入警告。
-        * 当序号达到最大值时，mysqld 进程直接退出。
-        * 生成新的binlog时，会扫描当前已存在的binlog文件，最终取得最大序号值。因此，如果binlog文件数目特别多的话，是会影响MySQL的启动及日志切换效率的。
-        * 由此可见有两个隐患，当binlog文件数目过大，会导致binlog切换效率较低。当binlog文件最大序号快达到最大值时，离mysqld进程挂掉就不远了，需要加急处理。
-        * 因此，除了要监控binlog文件数目、最大序号外，还应该再error log的内容，都予以足够重视
-    + 区别
-        * redo log 是 InnoDB 引擎特有的；binlog 是 MySQL 的 Server 层实现的，所有引擎都可以使用。
-        * redo log 是物理日志，记录的是“在某个数据页上做了什么修改”；binlog 是逻辑日志，记录的是这个语句的原始逻辑，比如“给 ID=2 这一行的 c 字段加 1 ”。
-        * redo log 是循环写的，空间固定会用完；binlog 是可以追加写入的。“追加写”是指 binlog 文件写到一定大小后会切换到下一个，并不会覆盖以前的日志
-- 两个日志是如何写入 `update T set c=c+1 where ID=2;`
-    + 执行器先找引擎取 ID=2 这一行。ID 是主键，引擎直接用树搜索找到这一行。
-    + 如果 ID=2 这一行所在的数据页本来就在内存中，就直接返回给执行器；否则，需要先从磁盘读入内存，然后再返回。
-    + 执行器拿到引擎给的行数据，把这个值加上 1，比如原来是 N，现在就是 N+1，得到新的一行数据，再调用引擎接口写入这行新数据。
-    + 引擎将这行新数据更新到内存中，同时将这个更新操作记录到 redo log 里面，此时 redo log 处于 prepare 状态。然后告知执行器执行完成了，随时可以提交事务
-    + 执行器生成这个操作的 binlog，并把 binlog 写入磁盘
-    + 执行器调用引擎的提交事务接口，引擎把刚刚写入的 redo log 改成提交（commit）状态，更新完成
-- redo vs bin
-    + redo log 是循环写（后面的记录会覆盖前面的），不能持久保存全量日志
-    + binlog 是增量写（一直追加写入），可以保存全部归档日志
-    + redo log 主要适用于数据库崩溃后重启的数据恢复，而 binlog 可用于全量备份，以及创建「数据库分身」，实现主从同步
-- 让数据库恢复到半个月内任意一秒的状态
-    + binlog 会记录所有的逻辑操作，并且是采用“追加写”的形式。如果你的 DBA 承诺说半个月内可以恢复，那么备份系统中一定会保存最近半个月的所有 binlog
-    + 系统会定期做整库备份。这里的“定期”取决于系统的重要性，可以是一天一备，也可以是一周一备
-    + 恢复过程
-        * 找到最近的一次全量备份，如果运气好，可能就是昨天晚上的一个备份，从这个备份恢复到临时库
-        * 从备份的时间点开始，将备份的 binlog 依次取出来，重放到中午误删表之前的那个时刻
-        * 临时库就跟误删之前的线上库一样了，然后你可以把表数据从临时库取出来，按需要恢复到线上库去
-    + 如果不使用“两阶段提交”，那么数据库的状态就有可能和用它的日志恢复出来的库的状态不一致
-* [基于日志还原数据](https://mp.weixin.qq.com/s/juX32qyu-k_vX6YrPt5bMA)
-    - 传统二进制文件
-    - GTID二进制文件
-        + --include-gtids:包含事务
-        + --exclude-gtids:排除事务
-        + --skip-gtids:跳过事务
-
-```sh
-svi /etc/my.cnf
-[server]
-server-id=1
-log-bin=binlog
-
-systemctl restart mysqld
-create database mydb charset utf8mb4;
-use mydb;
-create table test(id int)engine=innodb charset=utf8mb4;
-insert into test values(1),(2),(3),(4);
-
-show master status\G;
-# 查找起始点
-show binlog events in 'binlog.000001';
-
-mysqlbinlog --start-position=219 --stop-position=1868 /var/lib/mysql/binlog.000001 > /tmp/binlog.sql
-set sql_log_bin=0;
-source /tmp/binlog.sql
-set sql_log_bin=1;
-
-# 基于GTID
-server-id=1
-log-bin=binlog
-gtid_mode=ON
-enforce_gtid_consistency=true
-log_slave_updates=1
-
-insert into test values(1),(2),(3),(4),(11),(12);
-mysqlbinlog --skip-gtids --include-gtids='51d3db57-bf69-11ea-976c-000c2911a022:1-7' /var/lib/mysql/binlog.000003 >  /tmp/gtid.sql
-```
-
 ### 配置
 
 * 配置文件：/usr/local/etc/my.cnf或者 my.ini
@@ -423,7 +296,7 @@ mysqlbinlog --skip-gtids --include-gtids='51d3db57-bf69-11ea-976c-000c2911a022:1
     - innodb_buffer_pool_size:对于InnoDB表来说，innodb_buffer_pool_size的作用就相当于key_buffer_size对于MyISAM表的作用一样。InnoDB使用该参数指定大小的内存来缓冲数据和二级索引，脏数据(已经被更改但没有刷新到硬盘的数据)以及各种内部结构如自适应哈希索引。对于单独的MySQL数据库服务器，最大可以把该值设置成物理内存的80%。根据MySQL手册，对于2G内存的机器，推荐值是1G（50%）。
     - innodb_flush_log_at_trx_commit: 控制事务提交时，刷redo log的策略,控制innodb将log buffer中的数据写入日志文件并flush磁盘
         + 0:表示当事务提交时，不做日志写入操作，而是每秒钟将log buffer中的数据写入日志文件并flush磁盘一次，同时MySQL主动fsync
-        + 1(默认配置):每秒钟或是每次事物的提交都会引起日志文件写入、flush磁盘的操作，同时MySQL主动fsync，确保了事务的ACID,可以获得强一致性
+        + 1(默认配置):每秒钟或是每次事务的提交都会引起日志文件写入、flush磁盘的操作，同时MySQL主动fsync，确保了事务的ACID,可以获得强一致性
         + 2:每次事务提交引起写入日志文件的动作，每秒钟完成一次flush磁盘操作. 建议：不仅可以保证性能，也相对可以保障安全性
         + 实测发现，该值对插入数据的速度影响非常大，设置为2时插入10000条记录只需要2秒，设置为0时只需要1秒，而设置为1时则需要229秒，MySQL手册也建议尽量将插入操作合并成一个事务，这样可以大幅提高速度。根据MySQL手册，在允许丢失最近部分事务的危险的前提下，可以把该值设为0或2
     - innodb_log_buffer_size:log缓存大小，一般为1-8M，默认为1M，对于较大的事务，可以增大缓存大小。可设置为4M或8M。
@@ -1585,11 +1458,162 @@ FROM customers
 WHERE cust_name = 'Fun4All';
 ```
 
-## 事务
+## [日志](https://mp.weixin.qq.com/s/SVbLDtr0lGGwfKcj4O6XFg)
 
-* 一组原子性的SQL查询，或者说一个独立的工作单元。如果数据库引擎能够成功地对数据库应用该组查询的全部语句，那么就执行该组查询。如果其中有任何一条语句因为崩溃或其他原因无法执行，那么所有的语句都不会执行。也就是说，事务内的语句，要么全部执行成功，要么全部执行失败
+* 类型
+    - 逻辑日志：简单理解为记录的就是sql语句
+    - 物理日志：mysql 数据最终是保存在数据页中的，物理日志记录的就是数据页变更
+* binlog
+    - 记录数据库执行的写入性操作(不包括查询)信息，以二进制的形式保存在磁盘中
+    - mysql的逻辑日志，并且由 Server 层进行记录，使用任何存储引擎的 mysql 数据库都会记录 binlog 日志
+    - 通过追加的方式进行写入的，可以通过max_binlog_size 参数设置每个 binlog文件的大小，当文件大小达到给定值之后，会生成新的文件来保存日志
+    - 场景
+        + 主从复制 ：在 Master 端开启 binlog ，然后将 binlog发送到各个 Slave 端， Slave 端重放 binlog 从而达到主从数据一致。
+        + 数据恢复 ：通过使用 mysqlbinlog 工具来恢复数据
+    - 刷盘
+        + 对于 InnoDB 存储引擎而言，只有在事务提交时才会记录biglog. 通过 sync_binlog 参数控制 biglog 的刷盘时机，取值范围是 0-N
+            * 0：不去强制要求，由系统自行判断何时写入磁盘
+            * 1：每次 commit 的时候都要将 binlog 写入磁盘
+            * N：每N个事务，才会将 binlog 写入磁盘
+    - 格式
+        + STATMENT：基于SQL 语句的复制( statement-based replication, SBR )，每一条会修改数据的sql语句会记录到binlog 中
+            * 优点：不需要记录每一行的变化，减少了 binlog 日志量，节约了 IO  , 从而提高了性能；
+            * 缺点：在某些情况下会导致主从数据不一致，比如执行sysdate() 、  slepp()  等 。
+        + ROW：基于行的复制(row-based replication, RBR )，不记录每条sql语句的上下文信息，仅需记录哪条数据被修改了 。
+            * 优点：不会出现某些特定情况下的存储过程、或function、或trigger的调用和触发无法被正确复制的问题 ；
+            * 缺点：会产生大量的日志，尤其是` alter table ` 的时候会让日志暴涨
+        + MIXED：基于STATMENT 和 ROW 两种模式的混合复制(mixed-based replication, MBR )，一般的复制使用STATEMENT 模式保存 binlog ，对于 STATEMENT 模式无法复制的操作使用 ROW 模式保存 binlog
+    - binlog的最大序号 pow(2,31)-1 = 2147483647
+    - 隐患
+        + 生成新binlog时，会扫描当前已存在binlog文件，取得最大序号值。因此，如果binlog文件数目特别多的话，会影响MySQL的启动及日志切换效率
+        + 当序号接近这个值，且差距小于 1000 时（序号大于 2147482647 时），就开始向error log中写入警告
+        + 当序号达到最大值时，mysqld 进程直接退出
+        + 除了要监控binlog文件数目、最大序号外，还应该再error log的内容，都予以足够重视
+- redo log
+    + InnoDB 引擎提供的日志系统，最开始 MySQL 里并没有 InnoDB 引擎。MySQL 自带引擎是 MyISAM，但是 MyISAM 没有 crash-safe 的能力，binlog 日志只能用于归档，不具备数据库崩溃重启后的数据恢复功能。
+    + InnoDB 是另一个公司以插件形式引入 MySQL 的，既然只依靠 binlog 是没有 crash-safe 能力的，所以 InnoDB 使用另外一套日志系统——也就是 redo log 来实现 crash-safe 能力
+    + crash-safe：保证即使数据库发生异常崩溃或者重启，之前提交的记录都不会丢失，可以根据这个日志记录的步骤完成未持久化到磁盘的数据更新操作，从而**保证数据一致性**
+    + 事务**保证一致性**
+        * 最简单的做法是在每次事务提交的时候，将该事务涉及修改的数据页全部刷新到磁盘中。但是这么做会有严重的性能问题
+            - 因为 Innodb 是以 页 为单位进行磁盘交互的，而一个事务很可能只修改一个数据页里面的几个字节，这个时候将完整的数据页刷到磁盘的话，太浪费资源了！
+            - 一个事务可能涉及修改多个数据页，并且这些数据页在物理上并不连续，使用随机IO写入性能太差
+        * redo log：只记录事务对数据页做了哪些修改
+    + redo log buffer
+        * `show VARIABLES like 'innodb_log_buffer_size'`
+        * 什么时候刷新到硬盘
+            - log buffer空间不足：上面有指定缓冲区的内存大小，MySQL认为日志量已经占了总容量的一半左右，就需要将这些日志刷新到磁盘上
+            - 事务提交时：redo日志目的就是将未刷新到磁盘的记录保存起来，防止丢失
+            - 后台线程不同的刷新：后台有一个线程，大概每秒都会将log buffer里面的redo日志刷新到硬盘上
+            - checkpoint
+    + redo logfile
+        * redo log buffer（user space）写入 redo logfile：先写入 OS Buffer ，然后再通过系统调用 fsync() 将其刷到 redo log file
+        * 通过 innodb_flush_log_at_trx_commit 参数配置
+        * 存在的意义主要就是降低对 数据页 刷盘的要求
+        * write pos 表示 redo log 当前记录的 LSN (逻辑序列号)位置，一边写一边后移，写到第 3 号文件末尾后就回到 0 号文件开头
+        * check point 表示数据页更改记录刷盘后对应 redo log 所处的 LSN(逻辑序列号)位置，当前要擦除的位置，也是往后推移并且循环的，擦除记录前要把记录更新到数据文件
+        * write pos 和 checkpoint 之间的是“粉板”上还空着的部分，可以用来记录新的操作。如果 write pos 追上 checkpoint，表示“粉板”满了，这时候不能再执行新的更新，得停下来先擦掉一些记录，把 checkpoint 推进一下。
+        * 做一次checkpoint分为两步
+            - 计算当前系统可以被覆盖的redo日志对应的lsn最大值是多少。redo日志可以被覆盖，意味着他对应的脏页被刷新到磁盘上，只要我们计算出当前系统中最早被修改的oldest_modification, 只要系统中lsn小于该节点的oldest_modification值磁盘的redo日志都是可以被覆盖的。
+            - 将lsn过程中的一些数据统计
+    + WAL（Write-Ahead Logging）：先写日志，再写磁盘
+        * 每执行一条 DML 语句，先将记录写入 redo log buffer，这个时候更新就算完成了
+        * 在适当的时候，一次性将多个操作记录写到 redo logfile，而这个更新往往是在系统比较空闲的时候做
+    + redo log 实际上记录数据页的变更，而这种变更记录是没必要全部保存，因此 redo log实现上采用了大小固定，循环写入的方式，比如可以配置为一组 4 个文件，每个文件的大小是 1GB，那么总共就可以记录 4GB 的操作。当写到结尾时，会回到开头循环写日志
+        * 通过日志组来管理日志文件，是一个逻辑定义，包含若干个日志文件，一个组中的日志文件大小相等，大小通过参数来设置。现在 InnoDB 只⽀持一个日志组。在 MySQL5.5 及之前的版本中，整个日志组的容量不能大于 4GB（实际上是 3.9GB 多，因为还有一些文件头信息等），到了 MySQL 5.6.3 版本之后，整个日志组的容量可以设置得很大，最大可以达到 512GB
+        * show variables like 'datadir'
+        * 将缓冲区log buffer里面的redo日志刷新到这个两个文件里面，写入方式是循环写入
+        * 在 InnoDB 存储引擎中，一般默认包括 2 个日志文件，新建数据库之后，会有名为 ib_logfile0 和 ib_logfile1 的两个文件，如果在启动数据库时，这两个文件不存在，则 InnoDB 会根据配置参数或默认值，重新创建日志文件
+    + LSN Log Sequence Number:用来精确记录日志位置信息，且是连续增长的。在 InnoDB 中，大小为 8 个字节的值，它的增长量是根据一个 MTR（mini-transaction）写入的日志量来计算的，写多少日志（单位字节），LSN 就增长多少。日志文件轮循一圈（所有日志文件是以循环方式使用的），那么 LSN 的增长量大约就是整个日志文件的大小（日志文件存在文件头等会占用一部分空间）。它是一个集逻辑意义与物理意义于一身的概念。而在有些数据库中，LSN 是一个完全逻辑的概念，每提交一个物理事务，LSN 就加 1
+    + REDO 日志的写入，都是字节连续的，虽然看上去是多个日志文件，但理解的时候，完全可以把它想象成一个文件，对每一文件掐头去尾，把剩下的空间连接起来，就是总的日志空间了。
+    + 日志组中的每一个日志文件，都有自己的格式，内部也是按照大小相等的页面切割，但这里的页面大小是 512 个字节，由于历史的原因，考虑到机械硬盘的块大小是 512 字节，日志块大小也如此设计。这是因为写日志其实就是为了提高数据库写入吞吐量，如果每次写入是磁盘块大小的倍数，效率才是最高的，并且日志将逻辑事务对数据库的分散随机写入转化成了顺序的 512 字节整数倍数据的写入，这样就大大提高了数据库的效率。正是因为这个原因，REDO 日志才可以说是数据库管理系统与通过直接写文件来管理数据的最根本的区别之一。
+    + 普通页面中，都会有 12 个字节用来存储页面头信息，这些信息主要用于管理这个页面本身的数据存储方式。
+        - LOG_BLOCK_HDR_NO：4 个字节，一个与 LSN 有关系的块号。
+        - LOG_BLOCK_HDR_DATA_LEN：2 个字节，表示当前页面中存储的日志长度，这个值一般都等于 512-12（12 为页面头的大小），因为日志在相连的块中是连续存储的，中间不会存在空闲空间，所以如果这个长度不为 500，表示此时日志已经扫描完成（Crash Recovery 的工作）。
+        - LOG_BLOCK_FIRST_REC_GROUP：2 个字节，表示在当前块中是不是有一个 MTR（关于这个概念的意义，会在下一节中专门介绍）的开始位置。因为一个 MTR 所产生的日志量有可能是超过一个块大小的，那么如果一个 MTR 跨多个块时，这个值就表示了这个 MTR 的开始位置究竟是在哪一个块中。如果为 0，则表示当前块的日志都属于同一个 MTR；而如果其值大于 0 并且小于上面 LOG_BLOCK_HDR_DATA_LEN 所表示的值，则说明当前块中的日志是属于两个 MTR 的，后面 MTR 的开始位置就是 LOG_BLOCK_FIRST_REC_GROUP 所表示的位置。
+        - LOG_BLOCK_CHECKPOINT_NO：4 个字节，存储的是检查点的序号。具体什么是检查点，后面会详细介绍。
+    * MTR Mini-transaction: MTR，是因为它的意义相当于一个 Mini-transaction，用来保证物理页面写入操作完整性及持久性的机制
+        - 不管读还是写，只要使用到底层 Buffer Pool 的页面，都会使用到 MTR，它是上面逻辑层与下面物理层的交互窗口，同时也是用来保证下层物理数据正确性、完整性及持久性的机制。
+        - 在访问一个文件页面的时候，系统都会将要访问的页面载入到 Buffer Pool 中，然后才可以访问这个页面，此时可以读取或更新这个页面。在这个页面不断更新变化的过程中，有一个系统一直扮演着很重要的角色，那就是日志系统。因为 InnoDB 采用的也是 LOGWRITE-AHEAD，所以所有的写操作，都会有日志记录，这样才能保证数据库事务的 ACID 特性。
+        * redo log 的写入拆成了两个步骤：prepare 和 commit，这就是两阶段提交
+            - 提交主要是将所有这个物理事务产生的日志写入到 InnoDB 日志系统的日志缓冲区中，然后等待 srvmasterthread 线程定时将日志系统的日志缓冲区中的日志数据刷到日志文件中，这会涉及日志刷盘时机的问题
+            - 日志产生的作用，是将随机页面的写入变成顺序日志的写入，从而用一个速度更快的写入来保证速度较慢的写入的完整性，以提高整体数据库的性能。其根本目的是要将随机变成顺序，所以日志的量才是一个相对固定循环使用的空间
+            - 不使用两阶段提交，会导致两份日志恢复的数据不一致：比如先写 redo log，binlog 还没有写入，数据库崩溃重启；或者先写 binlog，redo 还没有写入数据库崩溃重启，都将造成恢复数据的不一致
+            - 使用两阶段提交后，就可以保证两份日志恢复的数据一致：只有 binlog 写入成功的情况下，才会提交 redo log，否则 redo log 处于 prepare 状态，事务会回滚，这样一来，就保证了数据的一致性
+    + 启动 innodb 的时候，不管上次是正常关闭还是异常关闭，总是会进行恢复操作。因为 redo log记录的是数据页的物理变化，因此恢复的时候速度比逻辑日志(如 binlog )要快很多。重启innodb 时，首先会检查磁盘中数据页的 LSN ，如果数据页的LSN 小于日志中的 LSN ，则会从 checkpoint 开始恢复。
+    + 有一种情况，在宕机前正处于checkpoint 的刷盘过程，且数据页的刷盘进度超过了日志页的刷盘进度，此时会出现数据页中记录的 LSN 大于日志中的 LSN，这时超出日志进度的部分将不会重做，因为这本身就表示已经做过的事情，无需再重做。
+- undo log：原子性是指对数据库的一系列操作，要么全部成功，要么全部失败，不可能出现部分成功的情况
+    + 记录了数据的逻辑变化，比如一条 INSERT 语句，对应一条DELETE 的 undo log ，对于每个 UPDATE 语句，对应一条相反的 UPDATE 的 undo log ，这样在发生错误时，就能回滚到事务之前的数据状态。
+    + 是 MVCC(多版本并发控制)实现的关键
+* 区别
+    - redo log 是 InnoDB 引擎特有的；binlog 是 MySQL 的 Server 层实现的，所有引擎都可以使用。
+    - redo log 是物理日志，记录的是“在某个数据页上做了什么修改”；binlog 是逻辑日志，记录的是这个语句的原始逻辑，比如“给 ID=2 这一行的 c 字段加 1 ”
+    - redo log 是循环写的（后面的记录会覆盖前面的），不能持久保存全量日志，空间固定会用完；binlog 是可以追加写入的。“追加写”是指 binlog 文件写到一定大小后会切换到下一个，并不会覆盖以前的日志，可以保存全部归档日志
+    + redo log 主要适用于数据库崩溃后重启的数据恢复，而 binlog 可用于全量备份，以及创建「数据库分身」，实现主从同步
+    + 需要 binlog和 redo log二者同时记录，才能保证当数据库发生宕机重启时，数据不会丢失
+- 两个日志是如何写入 `update T set c=c+1 where ID=2;`
+    + 执行器先找引擎取 ID=2 这一行。ID 是主键，引擎直接用树搜索找到这一行。
+    + 如果 ID=2 这一行所在的数据页本来就在内存中，就直接返回给执行器；否则，需要先从磁盘读入内存，然后再返回。
+    + 执行器拿到引擎给的行数据，把这个值加上 1，比如原来是 N，现在就是 N+1，得到新的一行数据，再调用引擎接口写入这行新数据。
+    + 引擎将这行新数据更新到内存中，同时将这个更新操作记录到 redo log 里面，此时 redo log 处于 prepare 状态。然后告知执行器执行完成了，随时可以提交事务
+    + 执行器生成这个操作的 binlog，并把 binlog 写入磁盘
+    + 执行器调用引擎的提交事务接口，引擎把刚刚写入的 redo log 改成提交（commit）状态，更新完成
+- 让数据库恢复到半个月内任意一秒的状态
+    + binlog 会记录所有的逻辑操作，并且是采用“追加写”的形式。如果你的 DBA 承诺说半个月内可以恢复，那么备份系统中一定会保存最近半个月的所有 binlog
+    + 系统会定期做整库备份。这里的“定期”取决于系统的重要性，可以是一天一备，也可以是一周一备
+    + 恢复过程
+        * 找到最近的一次全量备份，如果运气好，可能就是昨天晚上的一个备份，从这个备份恢复到临时库
+        * 从备份的时间点开始，将备份的 binlog 依次取出来，重放到中午误删表之前的那个时刻
+        * 临时库就跟误删之前的线上库一样了，然后你可以把表数据从临时库取出来，按需要恢复到线上库去
+    + 如果不使用“两阶段提交”，那么数据库的状态就有可能和用它的日志恢复出来的库的状态不一致
+* [基于日志还原数据](https://mp.weixin.qq.com/s/juX32qyu-k_vX6YrPt5bMA)
+    - 传统二进制文件
+    - GTID二进制文件
+        + --include-gtids:包含事务
+        + --exclude-gtids:排除事务
+        + --skip-gtids:跳过事务
+* 参考
+    - [三大日志-binlog、redo log和undo log](https://mp.weixin.qq.com/s/_nK9pXOYfmqktZO36PeuAA)
+
+```sh
+svi /etc/my.cnf
+[server]
+server-id=1
+log-bin=binlog
+
+systemctl restart mysqld
+create database mydb charset utf8mb4;
+use mydb;
+create table test(id int)engine=innodb charset=utf8mb4;
+insert into test values(1),(2),(3),(4);
+
+show master status\G;
+# 查找起始点
+show binlog events in 'binlog.000001';
+
+mysqlbinlog --start-position=219 --stop-position=1868 /var/lib/mysql/binlog.000001 > /tmp/binlog.sql
+set sql_log_bin=0;
+source /tmp/binlog.sql
+set sql_log_bin=1;
+
+# 基于GTID
+server-id=1
+log-bin=binlog
+gtid_mode=ON
+enforce_gtid_consistency=true
+log_slave_updates=1
+
+insert into test values(1),(2),(3),(4),(11),(12);
+mysqlbinlog --skip-gtids --include-gtids='51d3db57-bf69-11ea-976c-000c2911a022:1-7' /var/lib/mysql/binlog.000003 >  /tmp/gtid.sql
+```
+
+## transaction 事务
+
 * MySQL中InnoDB和NDB Cluster存储引擎提供了事务处理能力，以及其他支持事务的第三引擎
-
+* ACID
+    - 原子性（atomicity) 一个事务必须被视为一个不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败回滚，对于一个事务来说，不可能只执行其中的一部分操作。
+    - 一致性（consistency) 数据库总是从一个一致性的状态转换到另外一个一致性的状态。
+    - 隔离性（isolation) 通常来说，一个事务所做的修改在最终提交以前，对其他事务是不可见的。
+    - 持久性（durability) 一旦事务提交，则其所做的修改就会永久保存到数据库中。此时即使系统崩溃，修改的数据也不会丢失。持久性是个有点模糊的概念，因为实际上持久性也分很多不同的级别。有些持久性策略能够提供非常强的安全保障，而有些则未必。而且「不可能有能做到100%的持久性保证的策略」否则还需要备份做什么。
 * 脏读 Dirty Read
     - 事务A修改数据之后提交数据之前
     - 另一个事务B来读取数据，如果不加控制，事务B读取到A修改过数据
@@ -1605,14 +1629,14 @@ WHERE cust_name = 'Fun4All';
     - 幻读的重点在于新增或者删除因为中间有其他事务提交了插入/删除
 * 隔离级别:对于读数据的定义。四个级别逐渐增强，每个级别解决一个问题。事务级别越高,性能越差
     - 读未提交(Read Uncommitted)：允许脏读，也就是可能读取到其他会话中未提交事务修改的数据
-        + 事物一可以获取事物二中未提交的修改
-        + 事物一中未提交的修改事物（添加共享锁），事物二同样数据修改会被挂起，等待事物一commit
+        + 事务一可以获取事务二中未提交的修改
+        + 事务一中未提交的修改事务（添加共享锁），事务二同样数据修改会被挂起，等待事务一commit
     - 读已提交(Read Committed)：只能读取到已经提交的数据，Oracle等多数数据库默认都是该级别。造成事务一在同一个transaction中两次读取到的数据不同，这就是不可重复读问题。并且在对表进行修改时，会对表数据行加上行共享锁
         + 数据的读取都是不加锁的，但是数据的写入、修改和删除是需要加锁的
     - 可重复读(Repeated Read)：在同一个事务内的查询都是事务开始时刻一致的，InnoDB默认级别。在SQL标准中，该隔离级别消除了不可重复读，存在幻读
         + 概念是一事务的多个实例在并发读取数据时，会看到同样的数据行
         + 当两个事务同时进行时，其中一个事务修改数据对另一个事务不会造成影响，即使修改的事务已经提交也不会对另一个事务造成影响。
-        + 两个事物：事物二修改提交后，事物一不提交无法获取事物二的更新；事物一的修改未提交，事物二的修改无法成功等待事物一提交或者超时
+        + 两个事务：事务二修改提交后，事务一不提交无法获取事务二的更新；事务一的修改未提交，事务二的修改无法成功等待事务一提交或者超时
         + 读到的数据可能是历史数据，是不及时的数据，不是数据库当前的数据
         + 对于这种读取历史数据的方式叫快照读 (snapshot read)，而读取数据库当前版本数据的方式，叫当前读 (current read)
             * 每行数据的最后加两个隐藏列,一个保存行的创建事务id，一个保存行的删除事务id.事务id，在mysql内部是全局唯一递增的
@@ -1684,21 +1708,21 @@ CREATE TABLE user (
  UNIQUE `uniq_name` USING BTREE (name)
 ) ENGINE=`InnoDB` AUTO_INCREMENT=10 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-set autocommit=0; # 关闭事物自动提交
-# 设置事物隔离级别与查看
+set autocommit=0; # 关闭事务自动提交
+# 设置事务隔离级别与查看
 set session transaction isolation level read uncommitted;
 select @@global.tx_isolation;
 select @@session.tx_isolation;
 select @@tx_isolation;
 
-start transaction; # 事物一
+start transaction; # 事务一
 insert into user(name) values('ziwenxie');
 
 set session transaction isolation level read uncommitted;
 # Read Uncommitted：事务二中会读取到事务一中没有commit的数据，这就是脏读。
-# Read Committed：事物一提交后影响到事务二的查询结果，前后查询的结果不一致
+# Read Committed：事务一提交后影响到事务二的查询结果，前后查询的结果不一致
 # REPEATABLE-READ：事务二中无法读取到事务一中没有commit的数据
-start transaction; # 事物二
+start transaction; # 事务二
 select * from user;
 
 set session transaction isolation level repeatable read;
@@ -1706,9 +1730,9 @@ set session transaction isolation level repeatable read;
 # RC级别：
 select id,class_name,teacher_id from class_teacher where teacher_id=30; # 2 初三二班 30
 begin;
-update class_teacher set class_name='初三四班' where teacher_id=30;  # 事物一更新
+update class_teacher set class_name='初三四班' where teacher_id=30;  # 事务一更新
 
-insert into class_teacher values (null,'初三二班',30); # 事物二插入
+insert into class_teacher values (null,'初三二班',30); # 事务二插入
 commit;
 select id,class_name,teacher_id from class_teacher where teacher_id=30; #  2 初三四班 30   10 初三二班 30
 # RR级别：事务A在update后加锁，事务B无法插入新数据，这样事务A在update前后读的数据保持一致，避免了幻读。这个锁，就是Gap锁。
@@ -1839,8 +1863,8 @@ COMMIT;
     - 快照读 (snapshot read)：读取的是记录的可见版本 (有可能是历史版本)，不用加锁（共享读锁s锁也不加，所以不会阻塞其他事务的写）,执行select的时候，innodb默认会执行
         + 数据虽然是一致的，但是数据是历史数据
         + 只是简单的 select ，不包括 select … lock in share mode, select … for update
-        + 事物commit未完成时，会利用行锁锁住满足where条件的行，并且对满足where条件的行的两边数据加上间隙锁。
-        + 这时候另一个事物操作前面已经上了间隙锁的行就会Lock wait timeout exceeded
+        + 事务commit未完成时，会利用行锁锁住满足where条件的行，并且对满足where条件的行的两边数据加上间隙锁。
+        + 这时候另一个事务操作前面已经上了间隙锁的行就会Lock wait timeout exceeded
     - 当前读 (current read)：读取的是记录的最新版本，并且，当前读返回的记录，都会加上锁，保证其他事务不会再并发修改这条记录
         + 默认会执行当前读会加锁，也就是会读取最新的记录，也就是别的事务提交的数据也可以看到
         + select … lock in share mode
@@ -2213,7 +2237,7 @@ where a.table_id=b.table_id and a.space <> 0;
             * 不论是使用主键索引、唯一索引或普通索引，InnoDB 都会使用行锁来对数据加锁
         - mysql的读写之间是可以并发的，普通的select是不需要锁的，当查询的记录遇到锁时，用的是一致性的非锁定快照读，也就是根据数据库隔离级别策略，会去读被锁定行的快照，其它更新或加锁读语句用的是当前读，读取原始行；因为普通读与写不冲突，所以innodb不会出现读写饿死的情况，又因为在使用索引的时候用的是行锁，锁的粒度小，竞争相同锁的情况就少，就增加了并发处理，所以并发读写的效率还是很优秀的，问题在于索引查询后的根据主键的二次查找导致效率低
         - 所有扫描到的记录都加锁，范围查询会加间隙锁，保证数据无法添加,然后加锁过程按照两阶段锁 2PL 来实现
-            + 也就是先加锁，然后所有的锁在事物提交的时候释放
+            + 也就是先加锁，然后所有的锁在事务提交的时候释放
             + 加锁的策略会和数据库的隔离级别有关，在默认的可重复读的隔离级别的情况下，加锁的流程还会和查询条件中是否包含索引，是主键索引还是普通索引，是否是唯一索引等有关
     - 采用多版本并发控制（MVCC，MultiVersion Concurrency Control）来支持高并发
     - 通过间隙锁next-key locking策略防止幻读的出现
@@ -2341,7 +2365,7 @@ select * from o_order where order_sn = '201912102322' for update;
 # order_sn 是普通索引，并且是唯一索引，将会对普通索引上对应的一条记录加排他锁，对主键索引上对应的记录加排他锁。
 # order_sn 是普通索引，并且不是唯一索引，将会对普通索引上 order_sn = 201912102322 一条或者多条记录加锁，并且对这些记录对应的主键索引上的记录加锁。这里除了加上行锁外，还会加上间隙锁，防止其他事务插入 order_sn = 201912102322 的记录，然而如果是唯一索引就不需要间隙锁，行锁就可以。
 # order_sn 上没有索引，innoDB 将会在主键索引上全表扫描，这里并没有加表锁，而是将所有的记录都会加上行级排他锁，而实际上 innoDB 内部做了优化，当扫描到一行记录后发现不匹配就会把锁给释放，当然这个违背了 2PL 原则在事务提交的时候释放。这里除了对记录进行加锁，还会对每两个记录之间的间隙加锁，所以最终将会保存所有的间隙锁和 order_sn = 201912102322 的行锁。
-# order_sn = 201912102322 这条记录不存在的情况下，如果 order_sn 是主键索引，则会加一个间隙锁，而这个间隙是主键索引中 order_sn 小于 201912102322 的第一条记录到大于 201912102322 的第一条记录。试想一下如果不加间隙锁，如果其他事物插入了一条 order_sn = 201912102322 的记录，由于 select for update 是当前读，即使上面那个事物没有提交，如果在该事物中重新查询一次就会发生幻读。
+# order_sn = 201912102322 这条记录不存在的情况下，如果 order_sn 是主键索引，则会加一个间隙锁，而这个间隙是主键索引中 order_sn 小于 201912102322 的第一条记录到大于 201912102322 的第一条记录。试想一下如果不加间隙锁，如果其他事务插入了一条 order_sn = 201912102322 的记录，由于 select for update 是当前读，即使上面那个事务没有提交，如果在该事务中重新查询一次就会发生幻读。
 # 如果没有索引，则对扫描到的所有记录和间隙都加锁，如果不匹配行锁将会释放只剩下间隙锁。回忆一下上面讲的数据页的结果中又一个最大记录和最小记录，Infimum 和 Supremum Record，这两个记录在加间隙锁的时候就会用到。
 
 show engine innodb status # 存储引擎的运行状态
