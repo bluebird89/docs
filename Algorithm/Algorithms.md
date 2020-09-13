@@ -476,6 +476,7 @@ def backtrack(路径, 选择列表):
 * 算法图解
 * Algorithms to Live By
 * [Analytic Combinatorics](https://ac.cs.princeton.edu/home/)
+* [ProblemSolvingwithAlgorithmsandDataStructures](https://www.cs.auckland.ac.nz/compsci105s1c/resources/ProblemSolvingwithAlgorithmsandDataStructures.pdf)
 
 ## 工具
 

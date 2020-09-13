@@ -115,7 +115,6 @@
 * 密切关注您的项目速度和积雪。您可能需要重新估算所有故事并每三到五次迭代重新协商发布计划，这是正常的。只要您始终首先实施最有价值的故事，您将始终尽可能为您的客户和管理层做好准备。
 * 迭代开发风格可以为开发过程增加灵活性。通过不比当前迭代更远地规划特定的编程任务来尝试及时规划
 
-
 ## 核心实践
 
 * 规划策略(Planning Game)：计划是持续的、循序渐进的。每2周，开发人员就为下2周估算候选特性的成本，而客户则根据成本和商务价值来选择要实现的特性。
@@ -346,7 +345,6 @@
 		+ 对练习的结果给出反馈；
 		+ 引导学员进行反思和改进
 
-
 ## 参考
 
 * [Extremeprogramming](http://www.extremeprogramming.org/)
@@ -354,3 +352,4 @@
 * [Xprogramming](http://www.xprogramming.com/)
 * [What is Extreme Programming?](https://ronjeffries.com/xprog/what-is-extreme-programming/)
 * [The Rules of Extreme Programming](http://www.extremeprogramming.org/rules.html)
+* [Extreme Programming - Introduction](https://www.tutorialspoint.com/extreme_programming/extreme_programming_introduction.htm)

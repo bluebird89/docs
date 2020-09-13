@@ -133,6 +133,16 @@ ps auxw|head -1;ps auxw|sort -rn -k4|head -40
     - [Get started](https://learn.hashicorp.com/vault)
 * [AWS Secrets Manager](link)
 
+## CI/CD
+
+* CI 持续集成主要是在代码更改时自动分支合并、构建并执行一系列的测试（包括单元测试、集成测试、端到端测试等），确保这些变更不会破坏原来的应用。
+* CD 持续交付和部署则是 CI 测试通过之后把构建结果存档、发布到预布环境和生产环境、最后再进行验收测试的过程。
+* CI/CD 是 DevOps 的基础，CI/CD 侧重于软件开发过程中的自动化，而 Devops 则是侧重于文化构建，旨在减少开发、运维、QA之间的沟通鸿沟，促进快速可靠发布的同时还保证产品质量。
+* CI/CD 一系列流程通常会组成一个流水线，docker和Kubernetes则可以简化这些流水线中的很多流程，比如Docker容器可以很容易把有冲突的环境隔离开来，而Kubernetes则更进一步简化整个流水线的构建、执行和维护工作。
+* 工具
+    - 传统的 CI/CD 工具，典型的是 Jenkins 和 Gitlab，功能强大，配置灵活，使用场景没有限制。
+    - Kubernetes native 工具，典型的是 Jenkins X 和 Argo，专为 Kubernetes 场景构建，跟 Kubernetes 生态紧密集成，但缺少灵活性。
+
 ## 图书
 
 * 文化
