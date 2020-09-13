@@ -1758,7 +1758,7 @@ External commands:
 * [pomber/git-history](https://github.com/pomber/git-history)：Quickly browse the history of a file from any git repository https://githistory.xyz/
 * [okonet/lint-staged](https://github.com/okonet/lint-staged):🚫💩 — Run linters on git staged files
 
-* [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git)
+* [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git) `git clone https://github.com/arialdomartini/oh-my-git.git ~/.oh-my-git && echo source ~/.oh-my-git/prompt.sh >> ~/.profile`
 * [magicmonty/bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):An informative and fancy bash prompt for Git users
 * [nosarthur/gita](https://github.com/nosarthur/gita):Manage many git repos with sanity 从容管理多个git库
 
