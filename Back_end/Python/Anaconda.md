@@ -1,4 +1,4 @@
-# [Anaconda](https://www.anaconda.com/download/)
+# [Anaconda](https://www.anaconda.com/)
 
 一个包含180+的科学包及其依赖项的发行版本。其包含的科学包包括：conda, numpy, scipy, ipython notebook等
 

@@ -650,7 +650,7 @@ ls -l my_script # 过滤输出列表
 
 ### [zsh-users/zsh](https://github.com/zsh-users/zsh)
 
-* [ ohmyzsh / ohmyzsh ](https://github.com/ohmyzsh/ohmyzsh)：A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
+* [ohmyzsh/ohmyzsh ](https://github.com/ohmyzsh/ohmyzsh)：A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community. https://ohmyz.sh/
     - 兼容bash
     - 自动cd：只需输入目录名称
     - 命令选项补齐，比如输入 git，然后按 Tab，即可显示出 git都有哪些命令
@@ -675,6 +675,7 @@ ls -l my_script # 过滤输出列表
     - cloud
     - wedisagree
     - ambda-mod
+    - [ romkatv/powerlevel10k ](https://github.com/romkatv/powerlevel10k) `git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k`
     - [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
 * use
     - 路径别名
@@ -697,9 +698,12 @@ cat /etc/shells
 echo $SHELL/bin/bash
 
 sudo yum install zsh
+
 sudo apt-get install zsh git wget
-brew install zsh zsh-completions
 sudo apt-get install powerline fonts-powerline
+
+brew install zsh zsh-completions
+brew cask install font-sourcecodepro-nerd-font
 
 brew install zplug
 
@@ -718,15 +722,17 @@ chsh -s /bin/zsh
 source ~/.bashrc # 运行
 sudo usermod -s /usr/bin/zsh $(whoami) # set ZSH as the default login shell for the user
 
-cd ~/.oh-my-zsh/custom/plugins
-git clone git://github.com/zsh-users/zsh-syntax-highlighting.git # add to .zshrc plugin
-
 ## 配置：home目录的.zshrc(不用单配，插件配置有)
 sudo apt-get install zsh-theme-powerlevel9k
+git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 echo "source /usr/share/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
+p10k configure
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # config 主题设置(（)文件在~/.oh-my-zsh/themes)
-ZSH_THEME="agnoster"  |robbyrussell
+ZSH_THEME="agnoster"  |robbyrussell| powerlevel9k/powerlevel9k
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 # 插件

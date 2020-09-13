@@ -94,7 +94,7 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 150
 sudo update-alternatives --config python #如果要切换到Python2
 ```
 
-### 版本管理工具pyenv
+### pyenv
 
 修改系统环境变量 PATH。多版本python共存的环境工具，可以在不改变系统环境的情况下，可以随意切换不同python版本。基于某个版本开发的工具，在更换了不同python版本之后，就会导致工具中的某个模块、代码错误，而不能正常使用。
 
