@@ -2,19 +2,6 @@
 
 Elixir is a dynamic, functional language designed for building scalable and maintainable applications http://elixir-lang.org/
 
-## 安装
-
-```sh
-brew install elixir
-
-# Add Erlang Solutions repo
-wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb && sudo dpkg -i erlang-solutions_2.0_all.deb
-sudo apt-get update
-# Install the Erlang/OTP platform and all of its applications
-sudo apt-get install esl-erlang
-sudo apt-get install elixir
-```
-
 ## 特点
 
 * erlang VM 自带的 observer 是个非常棒的工具，能够帮助了解系统运行的状态
@@ -34,6 +21,19 @@ observer:
 
 remsh:
   @iex --name observer@127.0.0.1 --cookie '$(COOKIE)' --remsh cms_
+```
+
+## 安装
+
+```sh
+brew install elixir
+
+# Add Erlang Solutions repo
+wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb && sudo dpkg -i erlang-solutions_2.0_all.deb
+sudo apt-get update
+# Install the Erlang/OTP platform and all of its applications
+sudo apt-get install esl-erlang
+sudo apt-get install elixir
 ```
 
 ## 配置

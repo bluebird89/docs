@@ -20,6 +20,7 @@
 * MapReduce系统架构
 * BigTable系统架构
 * [USENIX](：https://www.usenix.org/conference/nsdi18/presentation/dalton)
+* [applied-ml](https://github.com/eugeneyan/applied-ml)books Papers & articles of companies sharing their work on applied data science & machine learning.
 
 ## 工具
 
