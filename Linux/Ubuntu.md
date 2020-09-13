@@ -836,6 +836,8 @@ im-config -n fcitx　# 切换为 Fcitx输入法
 sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb # 手动安装
 sudo apt-get install -f
 
+sogouIme-configtool
+
 # 不提示待选词
 rm -rf ~/.config/SogouPY* ~/.config/sogou*
 
