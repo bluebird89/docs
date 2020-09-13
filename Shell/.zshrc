@@ -324,7 +324,7 @@ zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/wprompt.zsh}"
 zplug "plugins/git-open",   from:oh-my-zsh
 # Support checking out a specific branch/tag/commit of a plugin
 zplug "b4b4r07/enhancd", at:v1
-zplug "mollifier/anyframe", commit:4c23cb60
+zplug "mollifier/anyframe", at:4c23cb60
 
 zplug "junegunn/fzf", use:"shell/*.zsh"
 # Grab binaries from GitHub Releases
@@ -352,7 +352,6 @@ zplug "plugins/z",   from:oh-my-zsh
 zplug "plugins/d",   from:oh-my-zsh
 zplug "plugins/extract",   from:oh-my-zsh
 
-zplug "plugins/sudo",   from:oh-my-zsh
 zplug "plugins/cp",   from:oh-my-zsh
 zplug "plugins/web-search",   from:oh-my-zsh
 zplug "plugins/rand-quote", from:oh-my-zsh
