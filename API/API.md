@@ -820,6 +820,10 @@ print dec_message   // Hello World!
 * [RollToolsApi](https://www.mxnzp.com/):开放易用的接口服务
 * [ chubin / wttr.in ](https://github.com/chubin/wttr.in): partly_sunny The right way to check the weather https://wttr.in
 
+## 图书
+
+* [The Design of Web APIs](https://livebook.manning.com/book/the-design-of-everyday-apis/)
+
 ## 工具
 
 * [Branca](https://branca.io/):Authenticated and encrypted API tokens using modern crypto.

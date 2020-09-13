@@ -616,7 +616,6 @@ Docker 的出现实在是太赞了，以前需要通过 VM 来捣鼓的东西，
 * [jwasham/coding-interview-university](https://github.com/jwasham/coding-interview-university):A complete computer science study plan to become a software engineer.
 * [jdsutton/Technical-Interview-Megarepo](https://github.com/jdsutton/Technical-Interview-Megarepo):Study materials for SE/CS technical interviews
 * [h5bp/Front-end-Developer-Interview-Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions):A list of helpful front-end related questions you can use to interview potential candidates, test yourself or completely ignore.
-* [arialdomartini/Back-End-Developer-Interview-Questions](https://github.com/arialdomartini/Back-End-Developer-Interview-Questions):A list of helpful back-end related questions you can use to interview potential candidates, test yourself or completely ignore.
 * [MaximAbramchuck/awesome-interview-questions](https://github.com/MaximAbramchuck/awesome-interview-questions)::octocat: A curated awesome list of lists of interview questions. Feel free to contribute! 🎓 https://github.com/BotCube/awesome-bots
 * [kdn251/interviews](https://github.com/kdn251/interviews):Everything you need to know to get the job.
 * [ElemeFE/node-interview](https://github.com/ElemeFE/node-interview):How to pass the Node.js interview of ElemeFE.

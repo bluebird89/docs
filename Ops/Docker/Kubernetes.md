@@ -1692,6 +1692,12 @@ kubectl get pods -w -l app=nginx
 
 flannel is a network fabric for containers, designed for Kubernetes
 
+## CI/CD
+
+* 本地开发:需要能在开发环境中构建、部署和调试就可以了.有三个工具可以简化这个过程：Skaffold、Tilt 和 Draft。这些工具都支持自动化本地镜像构建、推送镜像并部署新的应用到Kubernetes集群中
+    - Tilt的功能最为丰富，既有 UI 支持，还可以管理多个微服务，使用起来也稍微有些麻烦，需要编写 Tiltfile 文件描述应用程序
+    - Skaffold和Draft的功能特性基本相同，但Draft已经很长时间都不维护了，所以这二者 Skaffold 是个不错的选择。
+
 ## 问题
 
 ```

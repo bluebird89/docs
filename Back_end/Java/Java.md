@@ -1212,6 +1212,8 @@ JavaEE/JDBC/Weblogic
 * [SDKMAN](https://sdkman.io):The Software Development Kit Manager
   - `curl -s "https://get.sdkman.io" | bash`
   - `source "$HOME/.sdkman/bin/sdkman-init.sh"`
+* Log
+  - [主流日志工具库](https://mp.weixin.qq.com/s/iuWJxBghqhF09JqYfejBWw)
 * [liuanxin/api-document](https://github.com/liuanxin/api-document):java spring-mvc document collect
 * [jenv/jenv](https://github.com/jenv/jenv):Manage your Java environment http://www.jenv.be
 

@@ -2040,6 +2040,7 @@ rename-command CONFIG ASC12_CONFIG
 
 * [《Redis设计与实现》](http://redisbook.com/) <https://redisbook.readthedocs.io/en/latest/index.html>
 * Redis 4.X Cookbook
+* [redis-in-action](https://github.com/josiahcarlson/redis-in-action):Example code from the book
 
 ## [rdr](https://github.com/xueqiu/rdr)
 
