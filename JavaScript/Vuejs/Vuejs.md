@@ -12,6 +12,27 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
 * 状态管理
 * 虚拟 DOM
 
+## 版本
+
+* vue2
+  - 通过两Object.prototype
+* Vue3
+  - 通过proxy实现
+
+## 安装
+
+```sh
+sudo npm install -g vue-cli vue-router vuex vue-resource vue-loader webpack
+#  webpack模板初始化项目：
+vue init webpack sell
+# 模块安装
+npm insall
+# 运行开发者模式
+npm run dev(
+# 打包文件
+npm run build
+```
+
 ## 原理
 
 * **响应式**
@@ -54,27 +75,6 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
   - 通过建立一个虚拟DOM来追踪要如何改变真实DOM,createNodeDescription，因为所包含的信息会告诉 Vue 页面上需要渲染什么样的节点，包括及其子节点的描述信息
 
 ![生命周期](./../../_static/vue-lifecycle.jpg "Optional title")
-
-## 版本
-
-* vue2
-  - 通过两Object.prototype
-* Vue3
-  - 通过proxy实现
-
-## 安装
-
-```sh
-sudo npm install -g vue-cli vue-router vuex vue-resource vue-loader webpack
-#  webpack模板初始化项目：
-vue init webpack sell
-# 模块安装
-npm insall
-# 运行开发者模式
-npm run dev(
-# 打包文件
-npm run build
-```
 
 ## 语法
 

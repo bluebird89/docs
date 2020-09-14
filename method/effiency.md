@@ -5,7 +5,18 @@
 
 ## 实践
 
-* 修正自己方法
+* 知行合一
+* 自律,做事边界
+* 效率
+* 体系构建
+    - 看书
+    - 做思维导图
+    - 回顾有个结论
+* 方法+内容
+* 舍弃
+* 反思,修正自己方法
+* 聚焦
+* 学习>>加班
 * 视频有捷径的嫌疑，没有自己基础的搭建
 
 ## Rest: Why You Get More Done When You Work Less (Alex Soojung-Kim Pang; Penguin, 2018)

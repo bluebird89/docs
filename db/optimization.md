@@ -1204,6 +1204,9 @@ perl Makefile.PL
 make && make install
 
 ./pt-query-digest  slow.log
+pt-query-digest --since=148h mysql-slow.log | less
+
+tcpdump -i bond0 -s 0 -l -w - dst port 3316 | strings | grep select | egrep -i 'arrival_record' >/tmp/select_arri.log
 ```
 
 ## Percona Monitoring and Management PMM
@@ -1236,3 +1239,4 @@ pmm-admin config --server 47.92.131.xxx:80
 
 * [MySQL 设计总结](https://mp.weixin.qq.com/s?__biz=MzAwNzY4OTgyNA==&mid=2651827083&idx=1&sn=3f8b2a861f2d8df005e541600b276a20&chksm=80814884b7f6c192e1a3c6151b16129f936b3453eb7a6da3aee15815a763cf595cf0ccf9ff21)
 * [MySQL优化原理](https://mp.weixin.qq.com/s?__biz=MzAwNzA5MzA0NQ==&mid=2652151595&idx=1&sn=cd9c3764ba981b8d06e9b79022442574&chksm=80e35171b794d86754de840c510562888d45961c131ff034b5ae37dde14851226d4e0cda3329)
+* [大表优化](https://mp.weixin.qq.com/s/znKM4fblunhO_VqaAYFS3g)
