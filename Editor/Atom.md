@@ -1,6 +1,6 @@
 ## [Atom](https://github.com/atom/atom)
 
-:atom: The hackable text editor https://atom.io GitHub推出的一款编辑器,
+:atom: The hackable text editor https://atom.io GitHub推出的一款编辑器
 
 ## 安装
 
@@ -13,11 +13,6 @@ choco install atom
 # 命令行启动
 atom
 ```
-
-## 插件安装
-
-* 命令面板：Ctrl + Shift + P
-* 设置面板:Edit->Preferences 命令面板 Settings View:Open ctrl + ,
 
 ## 初始化配置
 
@@ -64,6 +59,11 @@ atom.commands.add 'atom-text-editor', 'custom:jump-over-symbol': (event) ->
 
 ⇧⌘P 输入reload:重新加载配置
 ```
+
+## 插件
+
+* 命令面板：Ctrl + Shift + P
+* 设置面板:Edit->Preferences 命令面板 Settings View:Open ctrl + ,
 
 ## snippets
 
