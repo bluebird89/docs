@@ -21,19 +21,15 @@ Mac：最大优势是 GUI 和命令行的完美结合
 
 ### 配置
 
-* [arialdomartini/dotfiles](https://github.com/arialdomartini/dotfiles)Just my Mac OS X and Linux dot files
 * [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
 * [skwp/dotfiles](https://github.com/skwp/dotfiles) YADR - The best vim,git,zsh plugins and the cleanest vimrc you've ever seen
 * [holman/dotfiles](https://github.com/holman/dotfiles)@holman does dotfiles
 * [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files.
-* [使用 dotfiles 和 stow 管理你的 dotfiles](https://github.com/jcouyang/dotfiles)
-* [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
-* [donnemartin/dev-setup](https://github.com/˚∫)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
+* [donnemartin/dev-setup](https://github.com/donnemartin/dev-setup)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
 * [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
 * [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
 * [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
-* [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
-* [maximum-awesome](https://github.com/square/maximum-awesome)Config files for vim and tmux.
+
 * [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
 * [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
 * [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
@@ -41,7 +37,6 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * [mac-setup/](http://sourabhbajaj.com/mac-setup/) the basics of setting up a development environment on a new Mac
 * [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
 * [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
-* [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
 * [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
 * [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
 * [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
@@ -49,6 +44,8 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
 * [Mac OS X 配置指南](https://wild-flame.github.io/guides/)
 * [phodal/setup.guide](https://github.com/phodal/setup.guide)
+* 参考
+    * [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
 
 ```sh
 # 开启 SSD 的 Trim 模式
@@ -180,12 +177,14 @@ pbpaste
 
 for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World';done
 ```
+
 ## 触控板
 
 *　轻拍来点按
 *　辅助点按
 *　查找
 *　三指拖移
+* [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
 
 ### Spoitlight
 
@@ -204,7 +203,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - 通过Web
     - Create a Progressive Web App (PWA) :More Tools-> Create Shortcut
     - More Tools, and then click Create Shortcut.
-* 系统自带的便利贴
+* 系统自带便利贴
 
 ## 软件
 
@@ -239,14 +238,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - [wulkano/kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology <https://getkap.co>
     - [Unarchiver](link)
     - [LICEcap](link):gif录制
-    - [sizeup](link) 窗口管理软件
-        + control+option+command + M ： 使当前窗口全屏
-        + control+option+command + 方向键上键 ： 使当前窗口占用当前屏幕上半部分
-        + control+option+command + 方向键下键 ： 使当前窗口占用当前屏幕下半部分
-        + control+option+command + 方向键左键 ： 使当前窗口占用当前屏幕左半部分
-        + control+option+command + 方向键右键 ： 使当前窗口占用当前屏幕右半部分
-        + control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
-        + control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
     - [chunkwm](https://koekeishiya.github.io/chunkwm/index.html):a tiling window manager for macOS
     - [onmyway133/FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
     - [sveinbjornt/Sloth](https://github.com/sveinbjornt/Sloth):Mac app that shows all open files and sockets in use by all running processes. Nice GUI for lsof. https://sveinbjorn.org/sloth
@@ -254,7 +245,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - 实用工具：/System/Library/CoreServices/Applications
     - [QSpace](link)一个国产软件，MacOS 系统的多视图文件管理器，支持很多特色功能。让你摆脱多窗口来回切换的繁琐，和拖拽时找不准目标的尴尬
     - [Ityscal](https://www.mowglii.com/itsycal/)  日历
-    - [ sindresorhus / quick-look-plugins ](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
+    - [sindresorhus/quick-look-plugins ](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
     - TotalFinder - macOS 上最强的 Finder 增强软件
     - uTools - 比 Alfred 更简洁的工作流
 * vpn
@@ -283,11 +274,20 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - [CheatSheet] 长按⌘键可以显示当前程序快捷键
     - [flux](https://justgetflux.com/) 屏幕颜色控制
     - [moom](https://manytricks.com/moom/)使用体验优异的窗口管理软件
+* 窗口管理
     - [Spectacle](link):控制窗口
+    - [sizeup](link) 窗口管理软件
+        + control+option+command + M ： 使当前窗口全屏
+        + control+option+command + 方向键上键 ： 使当前窗口占用当前屏幕上半部分
+        + control+option+command + 方向键下键 ： 使当前窗口占用当前屏幕下半部分
+        + control+option+command + 方向键左键 ： 使当前窗口占用当前屏幕左半部分
+        + control+option+command + 方向键右键 ： 使当前窗口占用当前屏幕右半部分
+        + control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
+        + control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
+
     - [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
     - [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):essentially an IDE for automation
     - [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
-    - [beaker](https://beakerbrowser.com/):Beaker is a peer-to-peer browser with tools to create and host websites.
     - [Helium](http://heliumfloats.com/):A floating browser window for OS X
     - Android file transfer
     - SensibleSideButtons - 在 macOS 上使用鼠标上的前进后退按键
@@ -309,12 +309,9 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - feedly
     - leaf
 * 管理
-    - Keyboard Maestro:流程制作工具
     - OmniOutliner
     - OmniPlan
     - OmniFocus：GTD思路的应用
-    - Fantastical：日程管理应用
-    - sourcetree
     - [Ship](https://www.realartists.com/index.html):Fast, native, comprehensive issue tracking and code review for GitHub
     - [trello](https://trello.com/home): Project management tool
     - [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
@@ -372,7 +369,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * 迷你天气：macOS 天气应用，在 Dock 栏知实时天气
 * Things 3
 * [ MonitorControl / MonitorControl ](https://github.com/MonitorControl/MonitorControl):desktop_computer Control your external monitor brightness & volume on your Mac
-* [mind node](https://mindnode.com/)
 
 * Moment：常驻于 macOS 菜单栏和通知中心的倒数日工具，又不止于倒数日。我们还支持了纪念日、时间进度条、你关心的人的年龄，每一个事件都支持单独添加到菜单栏
 * Dropzone 就是这样一款，既能给你带来键盘上如同 Launch Center Pro 体验同时，也提供了通过鼠标拖拽这样的操作，实现鼠标操作的肌肉记忆的应用
@@ -384,6 +380,8 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * [eZip](https://ezip.awehunt.com/):优秀的 macOS 压缩软件
 * [poolside-fm](https://apps.apple.com/us/app/poolside-fm/id1514817810?mt=12)
 * [Lunar](https://github.com/alin23/Lunar)
+* 参考
+    - [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
 
 ### screensavers
 
