@@ -1763,8 +1763,7 @@ External commands:
 * [nosarthur/gita](https://github.com/nosarthur/gita):Manage many git repos with sanity 从容管理多个git库
 
 * 客户端
-  - msysgit
-  - sourcetree
+  - [sourcetree](https://www.sourcetreeapp.com/)
   - [GitHawkApp/GitHawk](https://github.com/GitHawkApp/GitHawk):A GitHub project manager app for iOS. http://githawk.com
   - Linux
     + [SmartGit](https://www.syntevo.com/)

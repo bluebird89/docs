@@ -5,11 +5,12 @@ A PHP Framework For Web Artisans https://laravel.com
 * 8.0
   - php artisan serve 命令增强:更新 .env 文件后不再需要运行 php artisan serve 手动重启 Web 服务器，Laravel 会监听 .env 文件的修改并自动替你重启
   - 模型类目录:初始化项目后在代码骨架中提供了 app/Models 目录，并将新建的模型类默认存放到这个目录
-  - Laravel Jetstream:进行优化和全新设计的 Laravel UI 脚手架代码
-    + 包含了登录、注册、邮箱验证、双因子认证（2FA）、会话管理、基于 Laravel Sanctum 的 API 支持、以及可选的团队管理等功能
-    + 使用的 CSS 框架是 Tailwind CSS，并且提供了 Livewire 和 Inertia 脚手架选项
   - 模型工厂类
+  - [Laravel Jetstream](https://jetstream.laravel.com/):进行优化和全新设计的 Laravel UI 脚手架代码
+    + 包含了登录、注册、邮箱验证、双因子认证（2FA）、会话管理、基于 Laravel Sanctum 的 API 支持、以及可选的团队管理等功能
+    + 使用的 CSS 框架是 Tailwind CSS，并且提供了 [Livewire](https://laravel-livewire.com/) 和 [Inertia](https://inertiajs.com/) 脚手架选项
   - 迁移文件压缩
+    + 将多个迁移文件压缩到单个 SQL 文件 php artisan schema:dump [--prune]
   - 频率限制优化
   - 时间测试辅助函数
   - 动态 Blade 组件
@@ -338,7 +339,7 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
 * 载入服务提供者至容器：在内核引导启动的过程中最重要的动作之一就是载入服务提供者到你的应用，服务提供者负责引导启动框架的全部各种组件，例如数据库、队列、验证器以及路由组件。因为这些组件引导和配置了框架的各种功能，所以服务提供者是整个 Laravel 启动过程中最为重要的部分，所有的服务提供者都配置在 config/app.php 文件中的 providers 数组中。首先，所有提供者的 register 方法会被调用；一旦所有提供者注册完成，接下来，boot 方法将会被调用
 * 分发请求：一旦应用完成引导和所有服务提供者都注册完成，Request 将会移交给路由进行分发。路由将分发请求给一个路由或控制器，同时运行路由指定的中间件
 
-## 服务容器(IocContainer)
+## 服务容器(Ioc Container)
 
 * 服务提供者主要用来进行注册服务容器绑定（即注册接口及其实现类的绑定）
 * 一个服务提供者必须至少有一个 register 方法。你可以在这个方法里将类绑定到容器
@@ -503,7 +504,7 @@ class Repository
 }
 ```
 
-##  路由（Routes）
+## 路由（Routes）
 
 * 基本路由：需要一个 URI 与一个 闭包
 * 默认路由：在 routes 目录中的路由文件中定义，这些文件都由框架自动加载
@@ -649,7 +650,9 @@ $action = Route::currentRouteAction();
         + 在 app/Http/Kernel.php 文件内为该中间件指定一个 键。默认情况下，Kernel 类的 $routeMiddleware 属性包含 Laravel 内置的中间件条目，加入自定义的，只需把它附加到列表后并为其分配一个自定义 键 即可
         + 使用 middleware 方法将中间件分配给路由
 * 中间件组：使用 Kernel 类的 $middlewareGroups 属性来实现
-* 可以接受额外的参数
+  - 包含可以应用到 Web 和 API 路由的通用中间件
+  - 中间件组使用和分配单个中间件同样的语法被分配给路由和控制器动作
+* 可以接受额外参数
 * Terminable 中间件：在 HTTP 响应发送到浏览器之后处理一些工作。内置的「session」中间件会在响应发送到浏览器之后将会话数据写入存储器中。如果在中间件中定义一个 terminate 方法，则会在响应发送到浏览器后自动调用
 
 ```php
@@ -1958,9 +1961,80 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
+## [jetstream](https://jetstream.laravel.com/)
+
+* Available Stacks
+  - Livewire + Blade
+  - Inertia.js + Vue
+
+```sh
+composer require laravel/jetstream
+php artisan jetstream:install livewire
+
+php artisan jetstream:install inertia --teams
+
+npm install && npm run dev
+
+php artisan migrate
+```
+
 ## [Laravel Mix](https://laravel-mix.com/)
 
 An elegant wrapper around Webpack for the 80% use case.
+
+* css
+  - less
+  - sass
+  - stylus
+  - PossCSS
+* 在 webpack.mix.js 文件中调用 mix.sourceMaps() 来激活  Source Map,在编译资源的时候可以提供额外的调试信息给浏览器的开发者工具
+  - ES2015 语法
+  - 模块
+  - 编译 .vue 文件
+  - 最小化生产环境
+
+```
+mix.less('resources/assets/less/app.less', 'public/css', {
+    strictMath: true
+});
+
+mix.sass('resources/assets/sass/app.sass', 'public/css', {
+    precision: 5
+});
+
+mix.stylus('resources/assets/stylus/app.styl', 'public/css', {
+    use: [
+        require('rupture')()
+    ]
+});
+
+mix.sass('resources/assets/sass/app.scss', 'public/css')
+   .options({
+        postCss: [
+            require('postcss-css-variables')()
+        ],
+          processCssUrls: false
+   });
+
+# combine
+mix.styles([
+    'public/css/vendor/normalize.css',
+    'public/css/vendor/videojs.css'
+], 'public/css/all.css');
+
+let productionSourceMaps = false;
+
+mix.js('resources/js/app.js', 'public/js')
+   .sourceMaps(productionSourceMaps, 'source-map') .version();
+
+mix.webpackConfig({
+    resolve: {
+        modules: [
+            path.resolve(__dirname, 'vendor/laravel/spark/resources/assets/js')
+        ]
+    }
+});
+```
 
 ## Mail
 
@@ -2162,6 +2236,16 @@ php artisan clear-compiled
 php artisan cache:clear
 php artisan route:clear
 $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
+```
+
+## dusk
+
+```sh
+composer require --dev laravel/dusk
+php artisan dusk:install
+php artisan dusk
+
+php artisan dusk:make LoginTest
 ```
 
 ## 任务调度

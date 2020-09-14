@@ -24,13 +24,14 @@ generate:Alt+ins
   - Save Actions
 * Diagrams
   - Project tool window->right-click ->Diagrams | Show Diagram
-*  Navigate
+*  Navigate shift+shift
   -  Class 代表类
   -  File 代表文件
   -  Symbol 代表符号/标记（可用于导航到指定变量、方法）
-  -  Line
+  -  Line ctrl + G
   -  自定义搜索作用域
-*  Command + Shift + A 调出 Action 导航界面，在输入框输入 templates，在下拉列表中选中「File and Code Templates」
+*  File and Code Templates 文件代码模版 :Command + Shift + A 调出 Action 导航界面，在输入框输入 templates，在下拉列表中选中「File and Code Templates」
+*  代码片段模版:Live Templates
 *  Option 键（Windows 系统是 Alt 键:锚定多个光标的方式同时编辑多处文本,  Ctrl + G
 *  debug
   -  F7:step into 单步执行
@@ -45,6 +46,8 @@ generate:Alt+ins
   - Preferences | Tools | External Tools 界面点击「+」
   - fix $FileDir$ --rules=@PSR2
   - $ProjectFileDir$
+  - 右键-> External Tools->PHP CS Fixer
+* ctrl+ ` :View -> Quick Switch Scheme... 快速切换主题
 
 ## 快捷键
 
@@ -306,8 +309,12 @@ generate:Alt+ins
 
 数据是统一的，能够实现批量处理
 
-## live template
+## Refactor
 
+* 变量/属性
+* 函数/方法
+* 在父子类之间转移方法
+* 接口
 
 ## postfix
 
@@ -328,6 +335,12 @@ generate:Alt+ins
 ## plugin
 
 * IdeaVim
+  - key map:Editor->Vim Emulation
+
+## action
+
+* 通过锚定多个光标的方式同时编辑多处文本:按住 Option 键（Windows 系统是 Alt 键），将光标移动到其他要编辑的文本起始位置
+* 分割窗口
 
 ## 问题
 
