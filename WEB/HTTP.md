@@ -794,7 +794,6 @@ sudo apt-get update
 sudo apt-get install python-certbot-apache
 sudo certbot --apache -d packagist.domain.com
 
-
 curl https://get.acme.sh | sh
 alias acme.sh=~/.acme.sh/acme.sh
 
@@ -817,6 +816,45 @@ sudo yum install certbot python2-certbot-nginx
 sudo certbot --nginx
 sudo certbot certonly --nginx
 echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew -q" | sudo tee -a /etc/crontab > /dev/null
+```
+
+## [Let's Encrypt实践指北](https://mp.weixin.qq.com/s/_JwBVwv2QAuWcf4WHzL2nQ)
+
+* 不支持IP绑定,只支持域名
+* 单张证书下最多可包含100个子域名，而每个注册域名（顶级域名）的证书数量是50张/每周，续期证书也算入域名证书数量内
+* 证书类型
+    - 单域名证书，顾名思义，此证书只包含一个域名，属于基本类型。
+    - SAN证书，一张证书可以包含多个域名，早期用于多个子域名申请同一张证书的情况。经实践得知，此种证书在使用客户端申请时最大的弊端需要一次性写出所有的域名，对于后期扩展不太方便。*
+    - Wildcard 通配符证书，是本文详细介绍的对象。此种证书类型是LE后期支持的，使用起来极大方便了小型开发团队和个人开发者。比如针对.example.com这个域名，申请通配符证书（表达式为*.example.com）后，凡是基于它的子域名，都可以使用这个证书。但为了支持此特性，用于申请证书的客户端也必须要支持ACME的V2版本。（官方推荐的Cerbot客户端在0.22版本后）
+* 客户端：官方推荐 Certbot，必须支持 ACME的v2版本
+    - certbot-auto：相当于certbot的wrapper，使用它能自动选择最新版本的cerbot，对已有cerbot进行升级等操作
+* Certbot 插件
+* 使用
+    - 安装certbot-auto
+    - 获取证书
+        + certonly: 表示使用certbot只用来申请获取证书，而不做安装操作。
+        + -d: 域名。这里注意，通配符证书一定配置为*.domain.com，而不是 domain.com。
+        + —manual: 手动模式，理论上也可以选择DNS plugins。
+        + —preferred-challenges:虽然manual模式下是同时支持两种验证方式的，而通配符证书需要采用dns-01验证方式
+        + —server: ACME v2 验证使用的具体地址
+    - DNS配置
+        + 根据提示，去DNS服务提供商那里手动配置一条记录，用于验证你对此域名的所有权
+
+```sh
+# 安装certbot-auto
+cd ~
+wget https://dl.eff.org/certbot-auto
+sudo mv certbot-auto /usr/local/bin/certbot-auto
+sudo chown root /usr/local/bin/certbot-auto
+sudo chmod 0755 /usr/local/bin/certbot-auto
+/usr/local/bin/certbot-auto --help
+
+# 获取证书
+certbot-auto certonly
+\ -d *.your_domain.com --manual --preferred-challenges dns
+\ --server https://acme-v02.api.letsencrypt.org/directory
+# 配置好之后，过一分钟左右，利用dig命令查询一下是否生效
+dig  -t txt  _acme-challenge.your_domain.com @8.8.8.8
 ```
 
 ## 认证

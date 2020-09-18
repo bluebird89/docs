@@ -132,6 +132,7 @@
 * [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books)Freely available programming books
 * [justjavac/free-programming-books-zh_CN](https://github.com/justjavac/free-programming-books-zh_CN)
 * [mr-mig/every-programmer-should-know](https://github.com/mr-mig/every-programmer-should-know):A collection of (mostly) technical things every software developer should know
+* [Aggregated Awesome](https://aggregatedawesome.com/):There are several awesome lists on GitHub that collect and curate the best resources for a specific programming language, framework, platform, etc.
 * [kdeldycke/awesome-falsehood](https://github.com/kdeldycke/awesome-falsehood):Curated list of falsehoods programmers believe in.
 * [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV\* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 * [oldratlee/translations](https://github.com/oldratlee/translations):Chinese translations for classic IT resources
