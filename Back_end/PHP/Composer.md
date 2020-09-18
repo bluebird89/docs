@@ -42,6 +42,8 @@ php composer-setup.php # 安装
 php -r "unlink('composer-setup.php');" # 删除
 sudo mv composer.phar /usr/local/bin/composer
 
+sudo chown -R $USER .composer/
+
 # method 3
 wget https://getcomposer.org/composer.phar
 chmod +x composer.phar

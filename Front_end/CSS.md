@@ -596,6 +596,63 @@ a:hover {border-color: gray;}
 * caniuse检测你正在使用的属性是否被广泛支持
 * Validate
 
+## CSS 预编译语言
+
+* CSS 作为一门样式语言，语法简单，易于上手，但是由于不具备常规编程语言提供的变量、函数、继承等机制，因此很容易写出大量没有逻辑、难以复用和扩展的代码，在日常开发使用中，如果没有完善的编码规范，编写的 CSS 代码会非常冗余且难以维护
+* 基于 CSS 语言的语法扩展，除了能解决上述缺乏语言特性带来的问题之外，还支持嵌套书写，减少重复输入父级选择器（可理解为 CSS 中的继承机制），提高了代码的可读性和编写效率
+* Sass 的功能更加强大或者说 Sass 的语言层面更接近于一门完整的编程语言，而 Less 则更接近于 CSS 语法
+
+## [sass/sass](https://github.com/sass/sass)
+
+* Sass makes CSS fun again. http://sass-lang.com
+* 两种不同的后缀名分别对应两套语法
+  - 最早 Sass 使用的是缩进式语法，使用缩进来区分代码块，并通过分号将具体样式分开，这种语法以 .sass 作为后缀
+  - 使用了和 CSS 一样的块语法，这种语法以 .scss 作为后缀。后者更加兼容原生 CSS 语法
+* 编写好 Sass 文件后，需要将其编译为 CSS 文件才能在项目中使用.NPM 扩展包 node-sass 就封装了对 libSass 的实现
+* 语法
+  - 变量
+  - 数据结构包括数字、字符串、数组、颜色、布尔值、null、List、Map、函数引用
+  - 嵌套
+  - 混合（Mixin）：有一段 CSS 样式代码需要在多个地方使用，这可以通过 Sass 提供的混合（Mixin）功能来实现
+    + 定义混合代码的时候需要在选择器前面加上 @mixin 标识
+    + 引用混合代码的时候需要通过 @include 来引入
+  - 函数：
+      + 可以传入参数并实现运算功能
+      + 函数通过 @function 标识声明
+      + 函数名允许出现短划线 -
+      + 函数体内可以使用在函数声明之前定义的所有变量，同时计算时会带上变量声明时的单位
+  - 控制结构
+  - 导入:支持通过 @import 指令导入其它 Sass 文件，既可以导入本地开发文件，也可以导入前端依赖库中的文件，还可以导入网络字体文件
+  - 继承:通过 % 前缀指定用于继承的样式，然后在需要继承的地方提供 @extend 指令继承相应的父类样式
+* 教程
+  * [Sass 基础教程](http://www.sasschina.com/guide/)
+* 资源
+  * [devlint/gridlex](https://github.com/devlint/gridlex):Just a CSS Flexbox Grid System http://gridlex.devlint.fr
+  * [alexwolfe/Buttons](https://github.com/alexwolfe/Buttons):A CSS button library built using Sass and Compass http://unicorn-ui.com/buttons/builder/
+  * [eduardoboucas/include-media](https://github.com/eduardoboucas/include-media/):📐 Simple, elegant and maintainable media queries in Sass http://include-media.com
+  * [thoughtbot/bourbon](https://github.com/thoughtbot/bourbon/):A Lightweight Sass Tool Set https://www.bourbon.io/
+* 参考
+  * [thoughtbot/bourbon](https://github.com/thoughtbot/bourbon):https://github.com/thoughtbot/bourbon
+  * https://www.jianshu.com/p/e2c23a74636d
+
+## LESS
+
+* 语法
+  - 变量
+  - 嵌套引用
+  - 导入SASS文件
+  - 混合器
+  - 选择器继承来精简CSS
+* 工具
+  - [apercss/papercss](https://github.com/papercss/papercss):The Less Formal CSS Framework https://www.getpapercss.com/
+* 参考
+  - [LESS 语法](http://www.bootcss.com/p/lesscss/)
+
+```sh
+npm install -g less
+lessc style.less style.css
+```
+
 ## [PostCSS](https://github.com/postcss/postcss)
 
 Transforming styles with JS plugins https://postcss.org/ <https://www.postcss.com.cn/>
