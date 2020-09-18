@@ -12,6 +12,16 @@
 
 generate:Alt+ins
 
+## 配置
+
+* 依赖指定版本
+* `.local/share/JetBrains/Toolbox/apps/`
+* `.cache/JetBrains/PhpStorm2020.2/log/`
+* JVM Options
+  - sucked in X11 input-methods related function
+  - `.local/share/JetBrains/Toolbox/apps/PhpStorm/ch-0/202.6948.87.vmoptions`
+  - -Dawt.ime.disabled=true
+
 ## Tips
 
 * 打印统一 keyMap

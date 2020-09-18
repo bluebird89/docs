@@ -2173,4 +2173,4 @@
 
 * [koreader/koreader](https://github.com/koreader/koreader):An ebook reader application supporting PDF, DjVu, EPUB, FB2 and many more formats, running on Kindle, Kobo, PocketBook, Ubuntu Touch and Android devices http://koreader.rocks/
 * Klib - 标注 & 笔记管理:Kindle、Apple Books、多看标注&笔记管理工具
-*  MarginNote
+* MarginNote

@@ -1137,6 +1137,10 @@ Content-Security-Policy：default-src 'self'; img-src https://*; child-src 'none
 * 前后端不同端口
 * 后端允许跨域
 
+##  micro frontends
+
+* [qiankun](https://github.com/umijs/qiankun)package rocket Blazing fast, simple and completed solution for micro frontends. https://qiankun.umijs.org/
+
 ## 服务端渲染 SSR(Server Side Render)
 
 * 不同于客户端渲染，服务端渲染会在后端把页面 DOM 的结构树转成 String 吐出来，然后到前端（如浏览器）解析渲染。
@@ -1252,3 +1256,4 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * [张鑫旭](https://www.zhangxinxu.com/)
 * [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
 * [木易杨前端进阶](https://muyiy.cn/blog/)
+* [WebFundamentals](https://github.com/google/WebFundamentals)Best practices for modern web development https://developers.google.com/web/fundamentals

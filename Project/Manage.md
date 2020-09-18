@@ -272,6 +272,7 @@
 * 华为团队工作法
 * 《管理的尝试》
 * 《OKR工作法：谷歌、领英等顶级公司的高绩效秘籍》
+* Getting Things Done
 
 ## 工具
 
@@ -280,6 +281,10 @@
 * [basecamp](https://basecamp.com/)
 * [teambition](https://www.teambition.com/)
 * [禅道]
+* [omnigroup](https://www.omnigroup.com/)
+    - omnifocus
+    - omniplan
+    - omnigraffle
 * JIRA
 * Asana
 * [trello](https://trello.com/)

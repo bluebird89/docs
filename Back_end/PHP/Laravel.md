@@ -14,13 +14,19 @@ A PHP Framework For Web Artisans https://laravel.com
   - 频率限制优化
   - 时间测试辅助函数
   - 动态 Blade 组件
+  - Route
+    + removed default namespace form RouteServiceProvider.php file
+      * define $namespace = 'App\Http\Controllers' in RouteServiceProvider.php
+      * Route::get('event/test', 'OrderController@ship'); => Route::get('form/{id}', [RequestController::form, 'index']);
 
 ## 安装
 
 * [laravel/homestead](https://github.com/laravel/homestead):an official, pre-packaged Vagrant box that provides you a wonderful development environment without requiring you to install PHP, a web server, and any other server software on your local machine
   - 安装 virtualbox vagrant
   - parallels `vagrant plugin install vagrant-parallels`
-  - vagrant box add [--name] laravel\homestead [homestead.box] <https://atlas.hashicorp.com/laravel/boxes/homestead> <https://atlas.hashicorp.com/laravel/boxes/homestead/versions/2.1.0/providers/virtualbox.box> <https://vagrantcloud.com/laravel/boxes/homestead/versions/10.0.0/providers/virtualbox.box>
+  - vagrant box add [--name] laravel\homestead [homestead.box]
+    + <https://atlas.hashicorp.com/laravel/boxes/homestead/versions/2.1.0/providers/virtualbox.box>
+    + <https://vagrantcloud.com/laravel/boxes/homestead/versions/10.0.0/providers/virtualbox.box>
   - `vagrant list`
   - git clone <https://github.com/laravel/homestead.git> Homestead
   - `bash init.sh`
@@ -48,7 +54,7 @@ A PHP Framework For Web Artisans https://laravel.com
 * [Laragon](https://sourceforge.net/projects/laragon/):适用于 Windows 的轻量级开发环境
 * [laradock/laradock](https://github.com/laradock/laradock):Docker PHP development environment. http://laradock.io
 
-```
+```sh
 yum install php-mbstring php-dom php-zip php-posix php-simplexml php-bcmath php-ctype php-json php-openssl php-pdo php-tokenizer
 
 brew install php  # 确保 ~/.composer/vendor/bin
@@ -62,27 +68,21 @@ config.vm.box_check_update = false #box是否检查更新
 config.ssh.username = 'vagrant'
 config.ssh.password = 'vagrant'
 
-sudo chown -R $USER .composer/
 composer global require laravel/valet
 export PATH=$PATH:~/.composer/vendor/bin
+
 valet install  # 终端ping一下任意 *.dev 域名
 valet domain app # 修改域名
 valet park # 将当前的工作目录作为 Valet 搜索站点的路径
-laravel new blog
-http://blog.test
-
-composer global update # 升级
-
 valet stop|uninstall|restart
+valet links # 查看所有目录链接的列表
+valet link|unlink app-name # 目录中提供单个站点 Valet 会在 ~/.valet/Sites 中创建一个符号链接指向当前的目录
+valet secure|unsecure laravel # 用 HTTP/2 提供加密的 TLS 站点
 
 composer global require laravel/installer
 # $HOME/.config/composer/vendor/bin
 laravel new blog # 访问 http://blog.test
 #  99160 segmentation fault
-
-valet links # 查看所有目录链接的列表
-valet link|unlink app-name # 目录中提供单个站点 Valet 会在 ~/.valet/Sites 中创建一个符号链接指向当前的目录
-valet secure|unsecure laravel # 用 HTTP/2 提供加密的 TLS 站点
 
 composer create-project --prefer-dist laravel/laravel blog "5.5.*"
 
@@ -97,16 +97,11 @@ chmod -R 755 /var/www/laravel
 chmod -R 777 /var/www/laravel/storage
 chmod -R 777 /var/www/laravel/bootstrap/cache
 
-cp env.example .env
-php artisan key:generate # 生成应用的key(APP_KEY)为一个随机字符串
-php artisan serve --port=8010 --host=127.0.0.1
-
 mysql -u root -p
-
-mysql> CREATE DATABASE laravel;
-mysql> GRANT ALL ON laravel.* to 'laravel'@'localhost' IDENTIFIED BY 'secret_password';
-mysql> FLUSH PRIVILEGES;
-mysql> quit
+CREATE DATABASE laravel;
+GRANT ALL ON laravel.* to 'laravel'@'localhost' IDENTIFIED BY 'secret_password';
+FLUSH PRIVILEGES;
+quit
 
 # update the database settings in .env file
 # Configuring Apache for Laravel
@@ -118,45 +113,10 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [L]
 
-server {
-    listen 80;
-    server_name example.com;
-    root /example.com/public;
-
-    add_header X-Frame-Options "SAMEORIGIN";
-    add_header X-XSS-Protection "1; mode=block";
-    add_header X-Content-Type-Options "nosniff";
-
-    index index.html index.htm index.php;
-
-    charset utf-8;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location = /robots.txt  { access_log off; log_not_found off; }
-
-    error_page 404 /index.php;
-
-    location ~ \.php$ {
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;
-        fastcgi_index index.php;
-        include fastcgi_params;
-    }
-
-    location ~ /\.(?!well-known).* {
-        deny all;
-    }
-}
-
-composer global require laravel/installer
-laravel new blog
-
-php artisan key:generate
-php artisan serve
+cp env.example .env
+php artisan key:generate  # 设置程序密钥 The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. 不正确 500 错误，nginx 没有日志记录
+php artisan serve --port=8010 --host=127.0.0.1
+dump-server：启动 dump server 收集 dump 信息
 
 ## 问题
 > No such file or directory: u'./docker-compose.dev.yml'
@@ -202,14 +162,47 @@ php artisan config:clear  # 删除配置的缓存文件
 
 ## Artisan
 
-利用PHP的CLI构建了强大Console工具，创建想要的模板类以及管理配置应用
+* 利用PHP的CLI构建了强大Console工具，创建想要的模板类以及管理配置应用
+* 看应用根目录，会看到一个 artisan 文件,在 artisan 文件中，处理流程会像 Web 请求一样，注册类的自动加载器，初始化容器和异常处理器，获取用户输入，执行处理逻辑，最后发送响应，只不过这一切都是在控制台中完成
+* 选项：有前缀 --，可以在没有值的情况下使用
+  - -v、-vv、-vvv：命令执行输出的三个级别，分别代表正常、详细、调试
+  - --no-interaction：不会问任何交互问题，所以适用于运行无人值守自动处理命令
+  - --env：允许你指定命令运行的环境
+  - --version：打印当前 Laravel 版本
+* 参数：必须设值或默认值
+  - 必须要设置选项值，可以加上一个 = `make:migration {name} {--table=}`
+  - -q：禁止所有输出
+  - 必填参数，需要用花括号将其包裹起来
+  - 可选参数，可以在参数名称后面加一个问号 `make:migration {name?}`
+  - 可选参数定义默认值，可以这么做：`make:migration {name=create_users_table}`
+* 数组参数和数组选项:使用 * 通配符
+  - `make:migration {name*} {--table=*}`
+* 分组：
+  - app：只包含 app:name 命令，用于替换应用默认命名空间 App\
+  - auth：只包含 auth:clear-resets，用于从数据库清除已过期的密码 Token
+  - cache：应用缓存相关命令
+  - config：config:cache 用于缓存应用配置，config:clear 用于清除缓存配置
+  - db：db:seed 用于通过填充器填充数据库（如果编写了填充器的话）
+  - event：event:generate 用于根据注册信息生成未创建的事件类及监听器类
+  - key：key:generate 用于手动设置应用的 APP_KEY
+  - make：用于根据模板快速生成应用各种脚手架代码，如认证、模型、控制器、数据库迁移文件等等等，我们会将每个命令穿插在相应教程中介绍
+  - migrate：数据库迁移相关命令（数据库教程中会详细介绍）
+  - notifications：notifications:table 用于生成通知表
+  - optimize：optimize:clear 用于清除缓存的启动文件
+  - package：package:discover 用于重新构建缓存的扩展包 manifest
+  - queue：队列相关命令（队列教程中会详细介绍）
+  - route：路由相关命令，route:cache 和 route:clear 分别用于缓存路由信息和清除路由缓存，route:list 用于列出应用所有路由信息
+  - schedule：调度任务相关命令（调度任务教程中会介绍）
+  - session：对于数据库驱动的 Session，我们通过 session:table 生成 sessions 数据表
+  - storage：storage:link 生成一个软链 public/storage 指向 storage/app/public
+  - vendor：vendor:publish 用于发布扩展包中的公共资源
+  - view：view:cache 用于编译应用所有 Blade 模板，view:clear 用于清除这些编译文件
+* 通过 Artisan:call() 调用指定命令，也可以通过 Artisan:queue() 将命令推送到队列中执行
 
 ```sh
 php artisan --version|-V
 php artisan help [name]  # 显示命令行帮助
 php artisan list  # 列出命令
-
-php artisan serve
 
 php artisan env # 显示当前框架环境
 php artisan down --message="Upgrading Database" --retry=60 # 进入维护模式
@@ -220,8 +213,6 @@ php artisan migrate # 运行数据库迁移
 php artisan optimize # 为了更好的框架去优化性能
 php artisan serve
 php artisan app:name #  设置应用程序命名空间
-
-php artisan key:generate  # 设置程序密钥 The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. 不正确 500 错误，nginx 没有日志记录
 
 php artisan auth:clear-resets # 清除过期的密码重置密钥 未使用过
 
@@ -264,10 +255,6 @@ php artisan queue:subscribe # 订阅URL,放到队列上
 php artisan queue:table # 创建一个迁移的队列数据库工作表
 php artisan queue:work  # 进行下一个队列任务
 
-php artisan route:list # 列出全部的注册路由
-php artisan route:cache # 会生成 bootstrap/cache/routes.php 文件，注意，路由缓存不支持路由匿名函数编写逻辑
-php artisan route:clear # 清除路由缓存文件
-
 php artisan schedule:run # 运行预定命令
 php artisan optimize --force # 把常用加载的类合并到一个文件里，通过减少文件的加载.生成 bootstrap/cache/compiled.php 和 bootstrap/cache/services.json 两个文件。可以通过修改 config/compile.php 文件来添加要合并的类。在 production 环境中，参数 --force 不需要指定，文件就会自动生成
 php artisan clear-compiled  # 清除类映射加载优化
@@ -297,6 +284,24 @@ $user->save();
 "insert into `users` (`name`, `email`, `password`, `updated_at`, `created_at`) values (?, ?, ?, ?, ?)"
 => true
 exit
+```
+
+## Tinker 命令行交互式 Shell
+
+* 原生 php -a
+* 通过 PsySH 实现
+  - `composer g require psy/psysh:@stable`
+  - psysh
+* 自带了一个功能强大的 REPL —— Tinker，所谓 REPL，是 Read–Eval–Print-Loop 的缩写，这是一种交互式 Shell：获取用户输入并执行它们，然后将结果打印出来返回给用户 `php artisan tinker`
+  - 添加一些命令到 Shell，这些命令定义在 Laravel\Tinker\Console\TinkerCommand 的 $commandWhitelist 属性中
+* 测试 Laravel 代码
+  - 可以使用控制台来创建一个新的模型，将其保存到数据库，然后查询这条记录
+
+```sh
+# 查看帮助文档
+doc config
+# 查看该函数的代码
+show config
 ```
 
 ## 概念
@@ -441,7 +446,7 @@ $this->app->resolving(HelpSpot\API::class, function ($api, $app) {
 
 ## 门面（Facades）
 
-为应用程序的服务容器中可用的类提供了一个「静态」接口. 是服务容器中底层类的「静态代理」，提供了简洁而富有表现力的语法，甚至比传统的静态方法更具可测试性和扩展性
+为应用程序的服务容器中可用的类提供了一个「静态」接口.是服务容器中底层类的「静态代理」，提供了简洁而富有表现力的语法，甚至比传统的静态方法更具可测试性和扩展性
 
 * 原理
     - 继承自 Illuminate\Support\Facades\Facade 类。使用了 __callStatic() 魔术方法将的 Facades 的调用延迟，直到对象从容器中被解析出来
@@ -530,97 +535,31 @@ class Repository
     - 显式绑定：注册显式绑定，使用路由器的 model 方法来为给定参数指定类
 * 自定义解析逻辑：使用 Route::bind 方法。传递到 bind 方法的闭包会接受 URI 中大括号对应的值，并且返回你想要在该路由中注入的类的实例
 * 表单伪造：需要在表单中增加隐藏的 `_method` 输入标签。使用 `_method` 字段的值作为 HTTP 的请求方法；也可以使用辅助函数 `method_field` 来生成隐藏的 _method 输入标签
+* 获取路由参数值:一般显式将其作为控制器方法参数或者定义路由的匿名函数参数传入，以便在代码中获取
 
-```php
-Route::get('foo', function () {
-    return 'Hello World';
-});
+```
+php artisan route:list # 列出全部的注册路由
+php artisan route:cache # 会生成 bootstrap/cache/routes.php 文件，注意，路由缓存不支持路由匿名函数编写逻辑
+php artisan route:clear
 
-Route::get('/user', 'UsersController@index');
-
-# 可用方法
-Route::get($uri, $callback);
-Route::post($uri, $callback);
-Route::put($uri, $callback);
-Route::patch($uri, $callback);
-Route::delete($uri, $callback);
-Route::options($uri, $callback);
-Route::match(['get', 'post'], '/', function () {
-    //
-});
-Route::any('foo', function () {
-    //
-});
-
-Route::redirect('/here', '/there', 301);
-
-Route::view('/welcome', 'welcome');
-Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
-
-Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
-    //
-});
-Route::get('user/{name?}', function ($name = 'John') {
-    return $name;
-});
-Route::get('user/{id}/{name}', function ($id, $name) {
-    //
-})->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
-Route::get('user/profile', 'UserController@showProfile')->name('profile');
 # 生成 URL
 $url = route('profile');
-// 生成重定向...
-return redirect()->route('profile');
-
 // 判断当前请求是否指向了某个路由
-$request->route()->named('profile')
+$request->route()->named('profile');
 
-Route::middleware(['first', 'second'])->group(function () {
-    Route::get('/', function () {
-        // 使用 first 和 second 中间件
-    });
-
-    Route::get('user/profile', function () {
-        // 使用 first 和 second 中间件
-    });
-});
-
-Route::namespace('Admin')->group(function () {
-    // 在 "App\Http\Controllers\Admin" 命名空间下的控制器
-});
-Route::domain('{account}.myapp.com')->group(function () {
-    Route::get('user/{id}', function ($account, $id) {
-        //
-    });
-});
-Route::prefix('admin')->group(function () {
-    Route::get('users', function () {
-        // 匹配包含 "/admin/users" 的 URL
-    });
-});
-
-Route::get('api/users/{user}', function (App\User $user) {
-    return $user->email;
-});
-
-public function boot()
-{
-    parent::boot();
-
-    Route::model('user', App\User::class);
-}
-Route::get('profile/{user}', function (App\User $user) {
-    //
-});
-
+# 显式绑定
+# 手动配置路由模型绑定，在 App\Providers\RouteServiceProvider 的 boot() 方法中新增
 public function boot()
 {
     parent::boot();
 
     Route::bind('user', function ($value) {
         return App\User::where('name', $value)->first();
-    });
-}
+    }
+    Route::model('user', App\User::class);
+});
+# 隐式绑定
+Route::get('profile/{user}', function (App\User $user) {}
 
 <form action="/foo/bar" method="POST">
     <input type="hidden" name="_method" value="PUT">
@@ -628,6 +567,8 @@ public function boot()
 </form>
 
 {{ method_field('PUT') }}
+
+<a href="{{ url('/') }}">
 
 ## 当前路由
 $route = Route::current();
@@ -777,6 +718,7 @@ php artisan db:seed --class=UsersTableSeeder
   - 当前的 CSRF 令牌存储在由框架生成的每个响应中包含的一个 XSRF-TOKEN cookie 中。为方便起见，你可以使用 cookie 值来设置 X-XSRF-TOKEN 请求头
 
 ```php
+php artisan storage:link
 <form method="POST" action="/profile">
     {{ csrf_field() }}
     ...
@@ -806,6 +748,8 @@ $.ajaxSetup({
 
 * 继承了 Laravel 内置的基础控制器类
 * 定义控制器路由时，不需要指定完整的控制器命名空间。因为 RouteServiceProvider 会在一个包含命名空间的路由器组中加载路由文件，所以只需要指定类名中 App\Http\Controllers 命名空间之后的部分就可以了
+* 默认的命名空间是 App\Http\Controllers
+* 获取用户输入
 * 单个行为控制器:控制器中放置一个 __invoke 方法
 * 控制器的构造方法中指定中间件会更方便
 * 资源控制器
@@ -932,71 +876,6 @@ Route::resource('fotos', 'PhotoController')
   - 可以配置代理发送包含原始请求信息的请求头
 
 ```php
-php artisan make:request TagCreateRequest
-// 创建的类存放在 app/Http/Requests 目录下
-<?php
-
-namespace App\Http\Requests;
-
-use App\Http\Requests\Request;
-
-class TagCreateRequest extends Request
-{
-
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            'tag' => 'required|unique:tags,tag',
-            'title' => 'required',
-            'subtitle' => 'required',
-            'layout' => 'required',
-        ];
-    }
-}
-
-//  应的Controller方法里引入 注意这里使用的是TagCreateRequest
-public function store(TagCreateRequest $request)
-{
-    $tag = new Tag();
-    foreach (array_keys($this->fields) as $field) {
-        $tag->$field = $request->get($field);
-    }
-    $tag->save();
-    return redirect('/admin/tag')
-        ->withSuccess("The tag '$tag->tag' was created.");
-}
-
-Route::put('user/{id}', 'UserController@update');
-public function update(Request $request, $id)
-{
-    //
-}
-
-Route::get('/', function (Request $request) {
-    //
-});
-
-use Psr\Http\Message\ServerRequestInterface;
-
-Route::get('/', function (ServerRequestInterface $request) {
-    //
-});
-
 $request->flash();
 $request->flashOnly(['username', 'email']);
 $request->flashExcept('password');
@@ -1259,6 +1138,12 @@ View::composer('*', function ($view) {
 View::creator('profile', 'App\Http\ViewCreators\ProfileCreator');
 
 php artisan storage:link # public/storage（软连接） → storage/app/public
+```
+
+## UI
+
+```sh
+preset：切换应用前端框架脚手架代码，比如从 Vue 切换到 React
 ```
 
 ### URL

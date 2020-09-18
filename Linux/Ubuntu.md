@@ -104,6 +104,8 @@ sed -ie 's/DIR 01;34/DIR 38;5;39/g' ~/.dircolors
   - AMD官网 驱动与支持页 下载对应的[安装包](https://drivers.amd.com/drivers/linux/amdgpu-pro-20.10-1048554-ubuntu-18.04.tar.xz)
   - `tar -Jxvf amdgpu-pro-20.10-1048554-ubuntu-18.04.tar.xz`
   - `sudo -i && ./amdgpu-pro-install -y --opencl=pal,legacy`
+* disk
+  - [repair](https://recoverit.wondershare.com/harddrive-tips/repair-linux-disk.html)
 
 ```sh
 sudo apt install hwinfo
@@ -370,6 +372,7 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
     + xchm:`sudo apt-get install xchm`
     + Foxit Reader
     + okular
+    + [envice](https://wiki.gnome.org/Apps/Evince) `sudo apt install envice`
     + Foliate
     + Bookworm
     + [Calibre](https://calibre-ebook.com/) — E-book Manager `sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin`

@@ -185,6 +185,25 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 *　查找
 *　三指拖移
 * [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
+* 查询单词释义：鼠标放在单词上，不用选中，直接长按，再抬起
+* 双手轻按屏幕：唤醒右键
+* 双指旋转：改变照片的显示方向
+* 屏幕缩放：双指放大放小
+* 显示通知中心：双手从触控盘外右侧滑至触控盘内
+* 桌面调度：三指往下&三指往上
+* 启动台启动：拇指和三指聚拢
+* 返回桌面：拇指和三指张开
+* 右上方的图标，按住command键可调整位置，往下拖可删除，又可在系统偏好设置里重新找回
+* 桌面分配：对应不同应用场景
+* 聚焦搜索：command+空格，直接弹出搜索内容，再点击command+B即可跳转到Safari里查看搜索内容
+* 画中画功能：在视频网站中点击右键，鼠标挪到一旁，再点一下右键，选择“画中画’’功能，视频画面大小可自由拖拽
+* Option按键的使用场景：
+    - 拖拽文件时按住option，即可复制粘贴当前所拖拽文件
+    - 按菜单栏时，按住option，会出现多种功能；按住Wi-Fi图标同时按住option，可显示当前IP信息
+    - 按住option同时按住通知中心的图标，系统进入勿扰模式
+* 程序安装&卸载
+    - 安装程序：通过APP store或者通过网页，网页下载的dmg文件相当于Windows里的EXE文件
+    - 删除程序：在启动台长按程序图标再删除，或者在访达的应用程序里，将程序拖拽到废纸篓
 
 ### Spoitlight
 
@@ -442,6 +461,8 @@ route add [-net|-host] [网域或主机] netmask [mask] [gw|dev]
 * 打开文件 -->Command+O
 * 剪切文件 -->Command+Option+v
 * 删除文件 -->Command+BackSpace
+* command+delete，即删除选中文件
+* command+双击选中的文件，即打开文件
 * 隐藏dock：option + command + d
 * 隐藏最前面的应用的窗口 Command-H
 * 要查看最前面的应用但隐藏所有其他应用： option + command + h
@@ -463,6 +484,13 @@ route add [-net|-host] [网域或主机] netmask [mask] [gw|dev]
 * 按着Option键 -->如关机时免再确认一次
 * Shift+Control+ 推出键:锁屏键
 * command + l 进入地址栏
+* 截屏
+    - command+shift+5
+    - command+shift+3 截取当前整个屏幕，默认保存到桌面
+    - command+shift+4 截取部分屏幕，默认保存到桌面
+    - command+shift+option +3 截取当前整个屏幕，默认复制到剪切板（可直接粘贴到指定的窗口）
+    - command+shift+option +4 截取部分屏幕，默认复制到剪切板（可直接粘贴到指定的窗口）
+    - command+shift+4+空格键，精准剪切当前窗口
 
 #### 系统功能
 
@@ -836,7 +864,7 @@ Keep your application settings in sync (OS X/Linux)系统配置备份
 
 linux下（mac下）有各种app，每个人会根据个人的喜好和习惯来设置一些（快捷键，变量等等），而dotfiles就是保存了这些自定义设置的文件。在系统中使用一个文件夹，通过ln命令，将不同的app，不同的系统设置文件都指引到这个文件夹
 
-```
+```sh
 brew install mackup # 通过mackup备份 默认放在文件Dropbox/
 
 mackup backup

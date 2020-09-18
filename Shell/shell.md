@@ -1067,6 +1067,43 @@ A cat(1) clone with wings
 wget https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.deb
 ```
 
+## Termial
+
+- ios
+    + [ish-app / ish](https://github.com/ish-app/ish):Linux shell for iOS https://ish.app
+- Mac
+    + Iterm2
+        * [mbadolato / iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes):Over 200 terminal color schemes/themes for iTerm/iTerm2. Includes ports to Terminal, Konsole, PuTTY, Xresources, XRDB, Remmina, Termite, XFCE, Tilda, FreeBSD VT, Terminator, Kitty, MobaXterm, LXTerminal, Microsoft's Windows Terminal, Visual Studio http://www.iterm2colorschemes.com
+- Linux
+    + 原生命令行
+    + [Konsole](https://konsole.kde.org/)
+        * 搜索/高亮功能。高亮匹配是实时刷新的，这对于拖尾日志文件真的很方便
+        * 易于选择和复制文本块
+        * 简单选择屏幕滚动，使用CTRL + SHIFT + K清理缓冲区
+        * 可自定义隐藏大部分不必要的细节(（)标签栏、菜单)，默认提供许多颜色主题
+- Windows
+    + [putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+    + xshell6
+    + [FinalShell](http://www.hostbuf.com/)
+    + WinSSHTerm
+    + KiTTY
+    + ZOC Terminal
+    + [MobaXterm](https://mobaxterm.mobatek.net/) Enhanced terminal for Windows with X11 server, tabbed SSH client, network tools and much more
+    + Console2
+    + [cmder + gow](http://bliker.github.io/cmder/)
+    + ConEmu
+    + [Babun](http://babun.github.io/)
+    + [ nushell / nushell ](https://github.com/nushell/nushell): A new type of shell www.nushell.sh/ `cargo install nu --features=stable`
+        * The goal of this project is to take the Unix philosophy of shells, where pipes connect simple commands together, and bring it to the modern style of development
+- [Hyper](https://github.com/zeit/hyper):A terminal built on web technologies create a beautiful and extensible experience for command-line interface users, built on open web standards https://hyper.is
+- mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连
+- [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
+- [msys2](http://www.msys2.org/)
+- powercmd
+- [alacritty / alacritty](https://github.com/alacritty/alacritty):A cross-platform, GPU-accelerated terminal emulator
+- [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
+- [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
+
 ## Linux环境高级编程
 
 * 学习系统编程接口、系统调用 API 、内存管理、进程间通信（ IPC ）
@@ -1082,41 +1119,6 @@ wget https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.d
 ## 工具
 
 * [ GitSquared / edex-ui ](https://github.com/GitSquared/edex-ui):A cross-platform, customizable science fiction terminal emulator with advanced monitoring & touchscreen support.
-* terminal
-    - ios
-        + [ish-app / ish](https://github.com/ish-app/ish):Linux shell for iOS https://ish.app
-    - Mac
-        + Iterm2
-            * [mbadolato / iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes):Over 200 terminal color schemes/themes for iTerm/iTerm2. Includes ports to Terminal, Konsole, PuTTY, Xresources, XRDB, Remmina, Termite, XFCE, Tilda, FreeBSD VT, Terminator, Kitty, MobaXterm, LXTerminal, Microsoft's Windows Terminal, Visual Studio http://www.iterm2colorschemes.com
-    - Linux
-        + 原生命令行
-        + [Konsole](https://konsole.kde.org/)
-            * 搜索/高亮功能。高亮匹配是实时刷新的，这对于拖尾日志文件真的很方便
-            * 易于选择和复制文本块
-            * 简单选择屏幕滚动，使用CTRL + SHIFT + K清理缓冲区
-            * 可自定义隐藏大部分不必要的细节(（)标签栏、菜单)，默认提供许多颜色主题
-    - Windows
-        + [putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
-        + xshell6
-        + [FinalShell](http://www.hostbuf.com/)
-        + WinSSHTerm
-        + KiTTY
-        + ZOC Terminal
-        + [MobaXterm](https://mobaxterm.mobatek.net/) Enhanced terminal for Windows with X11 server, tabbed SSH client, network tools and much more
-        + Console2
-        + [cmder + gow](http://bliker.github.io/cmder/)
-        + ConEmu
-        + [Babun](http://babun.github.io/)
-        + [ nushell / nushell ](https://github.com/nushell/nushell): A new type of shell www.nushell.sh/ `cargo install nu --features=stable`
-            * The goal of this project is to take the Unix philosophy of shells, where pipes connect simple commands together, and bring it to the modern style of development
-    - [Hyper](https://github.com/zeit/hyper):A terminal built on web technologies create a beautiful and extensible experience for command-line interface users, built on open web standards https://hyper.is
-    - mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连
-    - [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
-    - [msys2](http://www.msys2.org/)
-    - powercmd
-    - [alacritty / alacritty](https://github.com/alacritty/alacritty):A cross-platform, GPU-accelerated terminal emulator
-    - [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
-    - [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
 * help
     - [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
     - [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/ `npm install -g tldr`
