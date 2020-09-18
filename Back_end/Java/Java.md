@@ -79,6 +79,7 @@ Path %JAVA_HOME%\bin;%JAVA_HOME%\jre\bin\; # win10 path 分条添加
 # using the version packaged with Debian：OpenJDK 8
 sudo apt-get update
 sudo apt install openjdk-11-jdk
+apt-get install default-jdk
 
 # Installing the Oracle JDK
 sudo apt-get install software-properties-common
@@ -118,6 +119,9 @@ source .bash_profile | source .zshrc
 ## centos
 sudo yum install java-1.8.0-openjdk
 sudo yum install java-1.8.0-openjdk-devel
+
+sudo sh -c 'for bin in /usr/lib/jvm/java-11-openjdk-amd64/bin/*; do update-alternatives --install /usr/bin/$(basename $bin) $(basename $bin) $bin 100; done'
+sudo sh -c 'for bin in /usr/lib/jvm/java-11-openjdk-amd64/bin/*; do update-alternatives --set $(basename $bin) $bin; done'
 
 # 多版本管理
 sudo update-alternatives --config java | javac # 会获得程序路径

@@ -16,6 +16,10 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
   - 底层实现则借助了LXC, 管理利用了namespace做全县控制和隔离，cgroup来进行资源配置，aufs（类似git的思想，把文件系统的修改当作一次代码commit进行叠加从而节省存储）提高文件系统资源利用率
   - 提供了简洁易用的命令行和API
   - 基于联合文件系统的镜像分层技术，加上在线Docker Hub服务，容器迁移方便快捷
+* 功能
+  - 工作区隔离（进程，网络）
+  - 资源隔离（CPU，内存）
+  - 文件系统隔离（联合文件系统）
 * 优点
   - 更高效的利用系统资源，不需要等待虚拟系统启动所以启动快速资源占用低，启动速度快
   - 面向软件开发者而非硬件运维
