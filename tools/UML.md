@@ -398,6 +398,7 @@ state Configuring {
 * [WebSequenceDiagrams](https://www.websequencediagrams.com/):Create sequence diagrams in seconds.
 * [edraw-max](https://www.edrawsoft.com/edraw-max/):All-in-One
 Diagram Software
+* [Dia](http://dia-installer.de/) `sudo apt install dia`
 
 ## 参考
 

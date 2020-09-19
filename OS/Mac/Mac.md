@@ -249,6 +249,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     - [Hammerspoon](http://www.hammerspoon.org/): a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
     - SwitchHosts
     - manico
+    - [](https://github.com/gao-sun/eul):desktop_computer macOS status monitoring app written in SwiftUI.
     - [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
     - [MrRio/vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. <http://parall.ax/vtop>
     - [GPG Suite](https://gpgtools.org/)

@@ -100,3 +100,7 @@
     - 降温
     - 别碰咖啡因
     - 不要喝酒
+
+## 工具
+
+* [GNU Health](https://www.gnuhealth.org/)：a free, extremely scalable Health and Hospital Information Platform

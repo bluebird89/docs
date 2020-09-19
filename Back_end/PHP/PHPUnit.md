@@ -117,6 +117,6 @@ phpunit -c phpunit.xml --testsuite=Unit  # 指定套件
 
 ## 参考
 
-* [PHPUnit 文档](http://www.phpunit.cn) <https://phpunit.de/manual/6.5/zh_cn/>
+* [PHPUnit 文档](http://www.phpunit.cn)
 * [PHPUnit Manual](https://phpunit.readthedocs.io/zh_CN/latest/index.html)
 *　Gerard Meszaros《xUnit 测试模式》
