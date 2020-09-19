@@ -1,4 +1,4 @@
-# [laravel/laravel](https://github.com/laravel/laravel)
+    # [laravel/laravel](https://github.com/laravel/laravel)
 
 A PHP Framework For Web Artisans https://laravel.com
 
@@ -8,7 +8,7 @@ A PHP Framework For Web Artisans https://laravel.com
   - 模型工厂类
   - [Laravel Jetstream](https://jetstream.laravel.com/):进行优化和全新设计的 Laravel UI 脚手架代码
     + 包含了登录、注册、邮箱验证、双因子认证（2FA）、会话管理、基于 Laravel Sanctum 的 API 支持、以及可选的团队管理等功能
-    + 使用的 CSS 框架是 Tailwind CSS，并且提供了 [Livewire](https://laravel-livewire.com/) 和 [Inertia](https://inertiajs.com/) 脚手架选项
+    + 使用 Tailwind CSS 框架，提供了 [Livewire](https://laravel-livewire.com/) 和 [Inertia](https://inertiajs.com/) 脚手架选项
   - 迁移文件压缩
     + 将多个迁移文件压缩到单个 SQL 文件 php artisan schema:dump [--prune]
   - 频率限制优化
@@ -126,17 +126,17 @@ dump-server：启动 dump server 收集 dump 信息
 
 ## 配置
 
-启动时会加载项目中的.env文件的所有变量,bootstrap过程中的LoadEnvironmentVariables.超级全局变量 `$_ENV` 中或者 `env` 函数检索变量值
+启动时会加载项目中的.env文件中变量,bootstrap过程中的LoadEnvironmentVariables.超级全局变量 `$_ENV` 中或者 `env` 函数检索变量值
 
 * 开发、测试、生产三套环境:.env.dev`、`.env.test`、`.env.prod`
-  - nginx配置文件里设置APP_ENV环境变量fastcgi_param APP_ENV dev;
+  - nginx配置文件里设置APP_ENV环境变量fastcgi_param APP_ENV dev
   - 设置服务器上运行PHP的用户的环境变量，比如在www用户的/home/www/.bashrc中添加export APP_ENV dev
   - 在部署项目的持续集成任务或者部署脚本里执行`cp .env.dev .env`
 * `APP_ENV` 通过 `App::environment` 方法来访问此值
 * 使用全局 config 函数来访问配置值 `$value = config('app.timezone');`,临时设置配置值，传递一个数组给 config 函数
     - 需要config/app.php 配置
-* 存储会话 config/session.php `'driver' => 'memcached'`
-* 缓存驱动器 config/cache.php `'default' => 'redis'`
+* 会话 config/session.php `'driver' => 'memcached'`
+* 缓存 config/cache.php `'default' => 'redis'`
 
 ```php
 'debug' => env('APP_DEBUG', false),
@@ -163,7 +163,9 @@ php artisan config:clear  # 删除配置的缓存文件
 ## Artisan
 
 * 利用PHP的CLI构建了强大Console工具，创建想要的模板类以及管理配置应用
-* 看应用根目录，会看到一个 artisan 文件,在 artisan 文件中，处理流程会像 Web 请求一样，注册类的自动加载器，初始化容器和异常处理器，获取用户输入，执行处理逻辑，最后发送响应，只不过这一切都是在控制台中完成
+* 自定义的 Artisan 命令
+  - 通过 make:command 来生成,包含了控制台内核，可以用来注册自定义 Artisan 命令和定义计划任务的地方
+* 应用根目录有一个 artisan 文件,在 artisan 文件中，处理流程会像 Web 请求一样，注册类的自动加载器，初始化容器和异常处理器，获取用户输入，执行处理逻辑，最后发送响应，只不过这一切都是在控制台中完成
 * 选项：有前缀 --，可以在没有值的情况下使用
   - -v、-vv、-vvv：命令执行输出的三个级别，分别代表正常、详细、调试
   - --no-interaction：不会问任何交互问题，所以适用于运行无人值守自动处理命令
@@ -265,7 +267,17 @@ php artisan baum # Get Baum version notice.
 php artisan baum:install # Scaffolds a new migration and model suitable for Baum
 ```
 
-```php
+## Tinker 命令行交互式 Shell
+
+* 原生 php -a
+* 一个由 PsySH 扩展包驱动的REPL（Read-Eval-Print Loop，即终端命令行"读取-求值-输出"循环工具）,通过命令行与整个 Laravel 应用进行交互，包括 Eloquent ORM、任务、事件等等。
+  - psysh `composer g require psy/psysh:@stable`
+  - 添加一些命令到 Shell，这些命令定义在 Laravel\Tinker\Console\TinkerCommand 的 $commandWhitelist 属性中
+* 测试 Laravel 代码
+  - 可以使用控制台来创建一个新的模型，将其保存到数据库，然后查询这条记录
+
+```
+php artisan tinker
 //生成30条数据
 factory(App\User::class,30)->create()
 
@@ -284,20 +296,7 @@ $user->save();
 "insert into `users` (`name`, `email`, `password`, `updated_at`, `created_at`) values (?, ?, ?, ?, ?)"
 => true
 exit
-```
 
-## Tinker 命令行交互式 Shell
-
-* 原生 php -a
-* 通过 PsySH 实现
-  - `composer g require psy/psysh:@stable`
-  - psysh
-* 自带了一个功能强大的 REPL —— Tinker，所谓 REPL，是 Read–Eval–Print-Loop 的缩写，这是一种交互式 Shell：获取用户输入并执行它们，然后将结果打印出来返回给用户 `php artisan tinker`
-  - 添加一些命令到 Shell，这些命令定义在 Laravel\Tinker\Console\TinkerCommand 的 $commandWhitelist 属性中
-* 测试 Laravel 代码
-  - 可以使用控制台来创建一个新的模型，将其保存到数据库，然后查询这条记录
-
-```sh
 # 查看帮助文档
 doc config
 # 查看该函数的代码
@@ -307,32 +306,29 @@ show config
 ## 概念
 
 * MVC
-  - 控制器适合承担的角色其实是负责对 HTTP 请求进行路由，因为还有很多其他访问应用方式，比如 Artisan 命令、队列、调度任务等等，控制器并非唯一入口，所以不适合也不应该将所有业务逻辑封装于此，过度依赖控制器会对以后应用的扩展带来麻烦
-  - 控制器主要职责就是获取 HTTP 请求，进行一些简单处理（如验证）后将其传递给真正处理业务逻辑的职能部门，如 Service
-* 没有模型：概念不清楚
-    - 所有业务逻辑总体
-    - 与关系数据库交互的类
-* Console 包含了所有自定义的 Artisan 命令。通过 make:command 来生成,包含了控制台内核，可以用来注册你的自定义 Artisan 命令和你定义的 计划任务 的地方
-* Event:通过 event:generate 或 event:make 时生成。Events 目录存放了 事件类。可以使用事件来提醒应用其他部分发生了特定的操作，为应用提供了大量的灵活性和解耦。
-* Exceptions:应用的异常处理器，也是应用抛出异常的好地方。如果想自定义记录或者渲染异常的方式，你就要修改此目录下的 Handler 类。
-* Job:通过make:job 时生成。存放了应用中的 队列任务。应用的任务可以被推送到队列或者在当前请求的生命周期内同步运行。在当前请求期间同步运行的任务可以看做是一个「命令」，因为它们是 命令模式 的实现
-* Listeners：通过event:generate 或 make:listener 时生成，包含了用来处理 事件 的类。事件监听器接收事件实例并执行响应该事件被触发的逻辑。例如，UserRegistered 事件可能由 SendWelcomeEmail 监听器处理
+  - 控制器：负责对 HTTP 请求进行路由，因为还有很多其他访问应用方式，比如 Artisan 命令、队列、调度任务等等，控制器并非唯一入口，所以不适合也不应该将所有业务逻辑封装于此，过度依赖控制器会对以后应用的扩展带来麻烦
+    + 主要职责就是获取 HTTP 请求，进行一些简单处理（如验证）后将其传递给真正处理业务逻辑的职能部门，如 Service
+* Event:通过 event:generate 或 event:make 时生成
+  - Events 目录存放了事件类
+  - 可以使用事件来提醒应用其他部分发生了特定的操作，为应用提供了大量的灵活性和解耦
+* Listeners：通过 event:generate 或 make:listener 时生成，包含了用来处理事件的类。
+  - 事件监听器接收事件实例并执行响应该事件被触发的逻辑。例如，UserRegistered 事件可能由 SendWelcomeEmail 监听器处理
+* Exceptions:应用异常处理器，也是应用抛出异常的好地方。如果想自定义记录或者渲染异常的方式，就要修改此目录下的 Handler 类
+* Job:通过 make:job 时生成
+  - 存放了应用中队列任务。应用的任务可以被推送到队列或者在当前请求的生命周期内同步运行。
+  - 在当前请求期间同步运行的任务可以看做是一个「命令」，因为它们是 命令模式 的实现
 * Mail：通过make:mail 时生成。包含应用所有的邮件发送类。邮件对象允许你将构建邮件的逻辑封装在可以使用 Mail::send 方法来发送邮件的地方
+  - markdown:在邮件中利用预置模板和邮件通知组件，由于消息使用Markdown格式编写，因此Laravel可以将这些消息渲染成美观、响应式的HTML模板的同时自动为其生成纯文本副本
 * Notifications：命令 make:notification 时生成。Notifications 目录包含应用发送的所有「事务性」通知，比如关于在应用中发生的事件的简单通知。Laravel 的通知功能抽象了通知发送，可以通过各种驱动（例如邮件、Slack、短信）发送通知，或是存储在数据库中。
 * Policies：命令 make:policy 来创建。Policies 目录包含了应用的授权策略类。策略可以用来决定一个用户是否有权限去操作指定资源
 * Providers：服务提供器通过在服务容器中绑定服务、注册事件、以及执行其他任务来为即将到来的请求做准备来启动应用
 * Rules：命令 make:rule 命令时被创建。Rules 目录包含应用自定义验证规则对象。这些规则意在将复杂的验证逻辑封装在一个简单的对象中
 * Broadcast
-* markdown:在邮件中利用预置模板和邮件通知组件，由于消息使用Markdown格式编写，因此Laravel可以将这些消息渲染成美观、响应式的HTML模板的同时自动为其生成纯文本副本
-* dusk: 提供了优雅的、易于使用的浏览器自动化测试API。默认情况下，Dusk不需要在机器上安装JDK或Selenium，取而代之的，Dusk使用一种独立的ChromeDriver安装方式。由于Dusk在操作过程中使用了真实的浏览器，所以可以很轻松地对那些重度使用JavaScript的应用进行测试和交互：
-* Mix是Laravel Elixir的精神继承者，完全基于Webpack而不是Gulp。Laravel Mix为使用通用CSS和JavaScript预处理器定义Laravel应用的Webpack构建步骤提供了流式API。通过简单的方法链，你可以定义流式资源管道
 * Blade组件和插槽为section和layout提供了类似的好处
-* 目前支持高阶消息传递的集合方法有：contains、each、every、filter、first、 map、 partition、 reject、sortBy、 sortByDesc和 sum。
+* 高阶消息传递的集合方法有：contains、each、every、filter、first、 map、 partition、 reject、sortBy、 sortByDesc和 sum。
 * Eloquent事件处理器现在可以被映射到事件对象上，这为处理Eloquent事件并让其变得易于测试提供了一种直观的方式
   - 门面仅仅是静态代理，底层调用的还是 $request->input 方法，语法糖而已，建议大家还是用 $request 来获取
 * CSRF保护
-* tinker：所有的 Laravel 应用都提供了 Tinker ---- 一个由 PsySH 扩展包驱动的REPL（Read-Eval-Print Loop，即终端命令行"读取-求值-输出"循环工具）。Tinker 允许你通过命令行与整个 Laravel 应用进行交互，包括 Eloquent ORM、任务、事件等等。
-* Laravel Elixir
 
 ## 请求周期
 
@@ -344,7 +340,7 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
 * 载入服务提供者至容器：在内核引导启动的过程中最重要的动作之一就是载入服务提供者到你的应用，服务提供者负责引导启动框架的全部各种组件，例如数据库、队列、验证器以及路由组件。因为这些组件引导和配置了框架的各种功能，所以服务提供者是整个 Laravel 启动过程中最为重要的部分，所有的服务提供者都配置在 config/app.php 文件中的 providers 数组中。首先，所有提供者的 register 方法会被调用；一旦所有提供者注册完成，接下来，boot 方法将会被调用
 * 分发请求：一旦应用完成引导和所有服务提供者都注册完成，Request 将会移交给路由进行分发。路由将分发请求给一个路由或控制器，同时运行路由指定的中间件
 
-## 服务容器(Ioc Container)
+## 服务容器 Ioc Container
 
 * 服务提供者主要用来进行注册服务容器绑定（即注册接口及其实现类的绑定）
 * 一个服务提供者必须至少有一个 register 方法。你可以在这个方法里将类绑定到容器
@@ -444,7 +440,31 @@ $this->app->resolving(HelpSpot\API::class, function ($api, $app) {
 });
 ```
 
-## 门面（Facades）
+## 中间件（Middleware）
+
+提供了一种方便的机制来过滤进入应用的 HTTP 请求,中间件都位于 app/Http/Middleware 目录
+
+* 内置中间件
+    - 用户的身份认证
+    - CORS 中间件可以负责为所有离开应用的响应添加合适的头部信息
+    - 日志中间件可以记录所有传入应用的请求。
+* 前置 & 后置中间件：中间件中定义执行
+* 注册中间件
+    - 全局中间件：应用的每个 HTTP 请求期间运行，只需在 app/Http/Kernel.php 类中的 $middleware 属性里列出这个中间件类
+    - 特定的路由分配中间件
+        + 在 app/Http/Kernel.php 文件内为该中间件指定一个 键。默认情况下，Kernel 类的 $routeMiddleware 属性包含 Laravel 内置的中间件条目，加入自定义的，只需把它附加到列表后并为其分配一个自定义 键 即可
+        + 使用 middleware 方法将中间件分配给路由
+* 中间件组：使用 Kernel 类的 $middlewareGroups 属性来实现
+  - 包含可以应用到 Web 和 API 路由的通用中间件
+  - 中间件组使用和分配单个中间件同样的语法被分配给路由和控制器动作
+* 可以接受额外参数
+* Terminable 中间件：在 HTTP 响应发送到浏览器之后处理一些工作。内置的「session」中间件会在响应发送到浏览器之后将会话数据写入存储器中。如果在中间件中定义一个 terminate 方法，则会在响应发送到浏览器后自动调用
+
+```php
+php artisan make:middleware CheckAge
+```
+
+## 门面 Facades
 
 为应用程序的服务容器中可用的类提供了一个「静态」接口.是服务容器中底层类的「静态代理」，提供了简洁而富有表现力的语法，甚至比传统的静态方法更具可测试性和扩展性
 
@@ -576,173 +596,16 @@ $name = Route::currentRouteName();
 $action = Route::currentRouteAction();
 ```
 
-## 中间件（Middleware）
+### URL
 
-提供了一种方便的机制来过滤进入应用的 HTTP 请求,中间件都位于 app/Http/Middleware 目录
-
-* 内置中间件
-    - 用户的身份认证
-    - CORS 中间件可以负责为所有离开应用的响应添加合适的头部信息
-    - 日志中间件可以记录所有传入应用的请求。
-* 前置 & 后置中间件：中间件中定义执行
-* 注册中间件
-    - 全局中间件：应用的每个 HTTP 请求期间运行，只需在 app/Http/Kernel.php 类中的 $middleware 属性里列出这个中间件类
-    - 特定的路由分配中间件
-        + 在 app/Http/Kernel.php 文件内为该中间件指定一个 键。默认情况下，Kernel 类的 $routeMiddleware 属性包含 Laravel 内置的中间件条目，加入自定义的，只需把它附加到列表后并为其分配一个自定义 键 即可
-        + 使用 middleware 方法将中间件分配给路由
-* 中间件组：使用 Kernel 类的 $middlewareGroups 属性来实现
-  - 包含可以应用到 Web 和 API 路由的通用中间件
-  - 中间件组使用和分配单个中间件同样的语法被分配给路由和控制器动作
-* 可以接受额外参数
-* Terminable 中间件：在 HTTP 响应发送到浏览器之后处理一些工作。内置的「session」中间件会在响应发送到浏览器之后将会话数据写入存储器中。如果在中间件中定义一个 terminate 方法，则会在响应发送到浏览器后自动调用
-
-```php
-php artisan make:middleware CheckAge
-
-namespace App\Http\Middleware;
-
-use Closure;
-
-class CheckAge
-{
-    /**
-     * 处理传入的请求
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next, $role)
-    {
-        if (! $request->user()->hasRole($role)) {
-            // 重定向...
-        }
-
-        if ($request->age <= 200) {
-            return redirect('home');
-        }
-
-        return $next($request);
-    }
-
-}
-
-class AfterMiddleware
-{
-    public function handle($request, Closure $next)
-    {
-        $response = $next($request);
-
-        // 执行动作
-
-        return $response;
-    }
-
-    public function terminate($request, $response)
-    {
-        // Store the session data...
-    }
-}
-
-Route::group(['middleware' => ['web']], function () {
-    //
-});
-Route::put('post/{id}', function ($id) {
-    //
-})->middleware('role:editor');
-```
-
-### 迁移与填充 Migration && Seeder
-
-* 外键：数据类型一致 `unsignedInteger`
-
-```php
-// 创建迁移
-php artisan make:migration create_users_table
-// 指定路径
-php artisan make:migration --path=app\providers create_users_table
-// 一次性创建
-// 下述命令会做两件事情：
-// 在 app 目录下创建模型类 App\Post
-// 创建用于创建 posts 表的迁移，该迁移文件位于 database/migrations 目录下。
-// php artisan make:model --migration Post
-// 运行数据库迁移
-php artisan migrate
-# 初始化迁移数据表:php artisan migrate:install
-# 重置并重新执行所有的数据迁移:php artisan migrate:refresh
-# 回滚所有的数据迁移:php artisan migrate:reset
-# 回滚最近一次数据迁移:php artisan migrate:rollback
-# 填充种子数据 测试用:php artisan db:seed
-# 创建一个种子数据:php artisan make:seeder
-# 创建一个数据迁移:php artisan make:migration name
-
-  // 创建要填充的数据类
-php artisan make:seeder UsersTableSeeder
-
-use Illuminate\Database\Seeder;
-
-class UsersTableSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        factory(\App\User::class)->times(300)->create();
-    }
-}
-
-// DatabaseSeeder里面调用UserTableSeeder
-public function run()
-    {
-         $this->call(UsersTableSeeder::class);
-    }
-// 数据填充（全部表）
-php artisan db:seed
-// 指定要填充的表
-php artisan db:seed --class=UsersTableSeeder
-```
-
-## 表单
-
-* Laravel 的控制器基类使用 ValidatesRequests Trait，它提供了一种方便的方法使用各种强大的验证规则来验证传入的 HTTP 请求![]()
-* 伪造跨站请求保护 CSRF
-  - 保护应用程序免受 跨站请求伪造 (CSRF) 的攻击，自动为每个活跃用户的会话生成一个 CSRF「令牌」。该令牌用于验证经过身份验证的用户是否是向应用程序发出请求的用户。
-  - 在应用程序中定义 HTML 表单时，都应该在表单中包含一个隐藏的 CSRF 令牌字段，以便 CSRF 保护中间件可以验证该请求
-  - 包含在 web 中间件组里的 VerifyCsrfToken 中间件会自动验证请求里的令牌是否与存储在会话中令牌匹配。
-  - resources/assets/js/bootstrap.js 文件会用 Axios HTTP 函数库注册的 csrf-token meta 标签中的值
-  - 白名单
-  - 会检查 X-CSRF-TOKEN 请求头:将令牌保存在 HTML meta 标签中
-  - 当前的 CSRF 令牌存储在由框架生成的每个响应中包含的一个 XSRF-TOKEN cookie 中。为方便起见，你可以使用 cookie 值来设置 X-XSRF-TOKEN 请求头
-
-```php
-php artisan storage:link
-<form method="POST" action="/profile">
-    {{ csrf_field() }}
-    ...
-</form>
-
-class VerifyCsrfToken extends BaseVerifier
-{
-    /**
-     * 这些 URI 将免受 CSRF 验证
-     *
-     * @var array
-     */
-    protected $except = [
-        'stripe/*',
-    ];
-}
-
-<meta name="csrf-token" content="{{ csrf_token() }}">
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-```
+* 基础 URL echo url("/posts/{$post->id}")
+* 当前 URL
+  - 获取没有查询字符串的当前的 URL echo url()->current();
+  - 获取包含查询字符串的当前的 URL echo url()->full();
+  - 获取上一个请求的完整的 URL echo url()->previous();
+  - use Illuminate\Support\Facades\URL; echo URL::current();
+* 命名路由的 URL:辅助函数 route 可以用于为指定路由生成 URL。命名路由生成的 URL 不与路由上定义的 URL 相耦合。因此，就算路由的 URL 有任何更改，都不需要对 route 函数调用进行任何更改 命名路由生成的 URL  Route::get('/post/{post}', function () {// })->name('post.show'); echo route('post.show', ['post' => $post]);
+* action 功能可以为给定的控制器行为生成 URL action('UserController@profile', ['id' => 1]);
 
 ## 控制器
 
@@ -825,7 +688,7 @@ Route::resource('fotos', 'PhotoController')
 /fotos/{foto}/editar
 ```
 
-### 请求 request
+## 请求 request
 
 * 通过依赖注入的方式来获取当前 HTTP 请求的实例，你应该在控制器方法中类型提示 Illuminate\Http\Request。传入的请求的实例将通过 服务容器 自动注入
 * 路由参数
@@ -927,6 +790,62 @@ class TrustProxies extends Middleware
 }
 ```
 
+## 表单
+
+* 伪造跨站请求保护 CSRF
+  - 保护应用程序免受 跨站请求伪造 (CSRF) 的攻击，自动为每个活跃用户的会话生成一个 CSRF「令牌」。该令牌用于验证经过身份验证的用户是否是向应用程序发出请求的用户。
+  - 在应用程序中定义 HTML 表单时，都应该在表单中包含一个隐藏的 CSRF 令牌字段，以便 CSRF 保护中间件可以验证该请求
+  - 包含在 web 中间件组里的 VerifyCsrfToken 中间件会自动验证请求里的令牌是否与存储在会话中令牌匹配。
+  - resources/assets/js/bootstrap.js 文件会用 Axios HTTP 函数库注册的 csrf-token meta 标签中的值
+  - 白名单
+  - 会检查 X-CSRF-TOKEN 请求头:将令牌保存在 HTML meta 标签中
+  - 当前的 CSRF 令牌存储在由框架生成的每个响应中包含的一个 XSRF-TOKEN cookie 中。为方便起见，你可以使用 cookie 值来设置 X-XSRF-TOKEN 请求头
+* 表单验证:用 ValidatesRequests Trait，提供了一种方便的方法使用各种强大的验证规则来验证传入的 HTTP 请求
+  - Laravel表单验证拥有标准且庞大的[规则集]( <http://d.laravel-china.org/docs/5.4/validation#可用的验证规则)，通过规则调用来完成数据验证
+  - 多个规则组合调用须以"|"符号连接，一次验证required失败后将立即停止验证,自动回退并可自动绑定视图
+  - "."语法符号在Laravel中通常表示嵌套包含关系，这个在其他语言或框架语法中也比较常见
+  + 自定义FormRequest (须继承自 Illuminate\Foundation\Http\FormRequest )
+  + Validator::make()手动创建validator实例
+  + 创建validator实例验证后钩子
+  + 按条件增加规则
+  + 数组验证
+  + 自定义验证规则
+
+```
+$this->validate($request, [
+    'title' => 'bail|required|unique:posts|max:255',
+    'author.name' => 'required',
+    'author.description' => 'required',
+]);
+```
+
+```php
+php artisan storage:link
+<form method="POST" action="/profile">
+    {{ csrf_field() }}
+    ...
+</form>
+
+class VerifyCsrfToken extends BaseVerifier
+{
+    /**
+     * 这些 URI 将免受 CSRF 验证
+     *
+     * @var array
+     */
+    protected $except = [
+        'stripe/*',
+    ];
+}
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+```
+
 ## 响应 Response
 
 返回一个响应并发送给用户的浏览器
@@ -953,14 +872,6 @@ class TrustProxies extends Middleware
   - 响应宏：定义可以在各种路由和控制器中重复使用的自定义响应，可以在 Response Facade 上使用 macro 方法。
 
 ```php
-Route::get('/', function () {
-    return 'Hello World';
-});
-
-Route::get('/', function () {
-    return [1, 2, 3];
-});
-
 Route::get('home', function () {
     return response('Hello World', 200)
                   ->header('Content-Type', 'text/plain')
@@ -1042,20 +953,7 @@ return response()->caps('foo');
 * 视图构造器添加到多个视图：将一组视图作为第一个参数传入 composer 方法，creator 方法注册视图构造器
 * 视图构造器在视图实例化之后立即执行，而视图合成器在视图即将渲染时执行。
 
-```php
-<!-- 此视图文件位置：resources/views/admin/profile.blade.php -->
-<html>
-    <body>
-        <h1>Hello, {{ $name }}</h1>
-    </body>
-</html>
-
-Route::get('/', function () {
-    return view('admin.profile', ['name' => 'James']);
-});
-# 将单个数据片段添加到视图
-return view('greeting')->with('name', 'Victoria');
-
+```
 # AppServiceProvider
 public function boot()
 {
@@ -1145,17 +1043,6 @@ php artisan storage:link # public/storage（软连接） → storage/app/public
 ```sh
 preset：切换应用前端框架脚手架代码，比如从 Vue 切换到 React
 ```
-
-### URL
-
-* 基础 URL echo url("/posts/{$post->id}");
-* 当前 URL
-  - 获取没有查询字符串的当前的 URL echo url()->current();
-  - 获取包含查询字符串的当前的 URL echo url()->full();
-  - 获取上一个请求的完整的 URL echo url()->previous();
-  - use Illuminate\Support\Facades\URL; echo URL::current();
-* 命名路由的 URL:辅助函数 route 可以用于为指定路由生成 URL。命名路由生成的 URL 不与路由上定义的 URL 相耦合。因此，就算路由的 URL 有任何更改，都不需要对 route 函数调用进行任何更改 命名路由生成的 URL  Route::get('/post/{post}', function () {// })->name('post.show'); echo route('post.show', ['post' => $post]);
-* action 功能可以为给定的控制器行为生成 URL action('UserController@profile', ['id' => 1]);
 
 ### session
 
@@ -1255,90 +1142,69 @@ class SessionServiceProvider extends ServiceProvider
 }
 ```
 
-### Command
+## 数据库
 
-```php
-php artisan make:command TopicMakeExcerptCommand --command=topics:excerpt
-php artisan make:console #  生成一个Artisan命令
-
-//在 app/Console/Kernel.php 文件里面, 添加以下
-protected $commands = [
-    \App\Console\Commands\TopicMakeExcerptCommand::class,
-];
-//在生成的TopicMakeExcerptCommand.php 文件, 修改以下区域
-<?php
-
-namespace App\Console\Commands;
-
-use Illuminate\Console\Command;
-
-class TopicMakeExcerptCommand extends Command
-{
-    /**
-     * 1\. 这里是命令行调用的名字, 如这里的: `topics:excerpt`,
-     * 命令行调用的时候就是 `php artisan topics:excerpt`
-     *
-     * @var string
-     */
-    protected $signature = 'topics:excerpt';
-
-    /**
-     * 2\. 这里填写命令行的描述, 当执行 `php artisan` 时
-     *   可以看得见.
-     *
-     * @var string
-     */
-    protected $description = '这里修改为命令行的描述';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * 3\. 这里是放要执行的代码, 如在我这个例子里面,
-     *   生成摘要, 并保持.
-     *
-     * @return mixed
-     */
-    public function handle()
-    {
-        $topics = Topic::all();
-        $transfer_count = 0;
-
-        foreach ($topics as $topic) {
-          if (empty($topic->excerpt))
-          {
-              $topic->excerpt = Topic::makeExcerpt($topic->body);
-              $topic->save();
-              $transfer_count++;
-          }
-        }
-        $this->info("Transfer old data count: " . $transfer_count);
-        $this->info("It's Done, have a good day.");
-    }
-}
-// 命令行调用
-php artisan topics:excerpt
-```
-
-## 数据操作
-
+* 配置 `./config/database.php`
+  - 配置多个数据库连接
+    + connections 配置项中新增一个 MySQL 连接 `mysql_old`
+    + DB::connection('mysql_old')->select(...)
+  - 读写分离连接
+    + `mysql` 中加 read 和 write 字段
+  - sticky 配置项
+    + true 在同一个请求生命周期中，写入的数据会被立刻读取到，底层原理其实就是读操作也从写数据库读取，因为写数据库始终是最新数据，从而避免主从同步延迟导致的数据不一致
+* 迁移 Migration
+  - 数据表的每次变动（创建、修改、删除）都对应一个迁移文件，这些迁移文件位于 database/migrations 目录下，以日期时间为条件确定执行的先后顺序。
+  - 每个迁移文件中包含一个迁移类，有两部分组成
+    + 负责执行数据库迁移的 up 方法
+    + 负责回滚此次迁移的 down 方法
+    + 基于 Schema 门面来完成（底层对应的类是 Illuminate\Database\Schema\Builder）
+  - 修改表字段
+    + `composer require doctrine/dbal`
+    + `$table->string('nickname', 50)->change();`
+  - 外键
+    + `$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');`
+    + `$table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');`
+  - 回滚
+    + `php artisan migrate:rollback --step=5`
+  - 选项
+    + --create= 用于指定要创建的数据表名称，在定义创建数据表迁移文件时使用
+    + --table= 用于指定要修改的数据表名称，在定义更新数据表迁移文件时使用
+  - `php artisan make:model --migration Post`
+    + 在 app 目录下创建模型类 App\Post
+    + 创建用于创建 posts 表的迁移，该迁移文件位于 database/migrations 目录下
+* 填充 Seeder
+  - 外键：数据类型一致 `unsignedInteger`
 * 优化
     - 数据关联模型读取时使用 延迟预加载 和 预加载
     - 使用 Laravel Debugbar 或者 Clockwork 留意每一个页面的总数据库请求数量
     - 从数据库里面拿出来的数据集合进行缓存，减少数据库的压力，运行在内存上的专业缓存软件对数据的读取也远远快于数据库
-* 方式
+* 查询
     - facade
     - 查询构造器
     - Eloquent ORM:对象关系映射(Object Relational Mapping)
 
-```php
+```sh
+php artisan make:migration create_users_table
+php artisan make:migration create_users_table --create=users  # 创建数据表迁移
+php artisan make:migration alter_users_add_nickname --table=users  # 更新数据表迁移
+php artisan make:migration --path=app\providers create_users_table
+
+php artisan migrate
+# 初始化迁移数据表
+php artisan migrate:install
+# 重置并重新执行所有的数据迁移
+php artisan migrate:refresh
+# 回滚所有的数据迁移
+php artisan migrate:reset
+
+php artisan make:seeder UsersTableSeeder
+php artisan db:seed
+php artisan db:seed --class=UsersTableSeeder
+php artisan migrate --seed
+
+# 原生 Statement 语句
+DB::statement('create table `users` (`id` int(10) unsigned NOT NULL AUTO_INCREMENT,`name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL)');
+# 原生查询语句
 DB::insert("insert into student(name,age) values(?,?)",['sandy',19]);
 DB::delete('delete from student where name=?',['sandy']);
 DB::update('update student set sex=? where name=?',['男','tory']);
@@ -1347,15 +1213,55 @@ DB::select('select * from users where id = :id', ['id' => 1]);
 DB::statement('drop table users');
 
 # 查询构建器
-$res=DB::table('student')->get();//first()返回结果集中的第一条数据
-$res=DB::table('student')->where('id','1001')->first();//value()返回一条数据中的指定字段
-$res=DB::table('student')->where('id','1003')->value('name');//pluck()返回结果集中name字段的所有值
+$res=DB::table('student')->get();
+$exists = DB::table('users')->where('name', $name)->exists();
+DB::table('posts')->where('id', '<', 10)->where('views', '>', 0)->get();
+DB::table('posts')->where([
+    ['id', '<', 10],
+    ['views', '>', 0]
+])->get();
+DB::table('posts')->where('id', '<', 10)->orWhere('views', '>', 0)->get();
+DB::table('posts')->whereBetween('views', [10, 100])->get();
+DB::table('posts')->whereNotBetween('views', [10, 100])->get();
+DB::table('posts')->whereIn('user_id', [1, 3, 5, 7, 9])->get();
+$res=DB::table('student')->where('id','1001')->first();
+$res=DB::table('student')->where('id','1003')->value('name');
+# 分割成多个的组块依次返回进行处理
+DB::table('users')->where('id', '<', 10)->pluck('name', 'id');
 $res=DB::table('student')->pluck(2,function ($res){
   foreach ($res as $user){
     var_dump($user);
     if ($user->id >=1003) return false;
   }
 });
+$flag = DB::table('users')->insert([
+    'name' => str_random(10),
+    'email' => str_random(8) . '@163.com',
+    'password' => bcrypt('secret')
+]);
+$userId = DB::table('users')->insertGetId([
+    'name' => str_random(10),
+    'email' => str_random(8) . '@qq.com',
+    'password' => bcrypt('secret')
+]);
+DB::table('users')->where('id', '>', $id)->update(['name' => str_random(8)]);
+DB::table('users')->where('id', '>=', $id)->delete();
+$affectedRows = DB::table('users')->truncate();
+
+$num = DB::table('users')->count();
+$sum = DB::table('users')->sum('id');
+$avg = DB::table('users')->avg('id');
+$min = DB::table('users')->min('id');
+$max = DB::table('users')->max('id');
+
+DB::table('posts')->whereDay('created_at', '28')->get();
+
+DB::table('users')
+    ->where('options->language', 'en')
+    ->get();
+DB::table('users')
+    ->whereJsonContains('options->languages', ['en_US', 'zh_CN'])
+    ->get();
 
 # Eloquent
 # 查询
@@ -1384,26 +1290,6 @@ $posts = Cache::remember('index.posts', $minutes = 30, function()
 ### collection
 
 flat map
-
-## 表单验证
-
-* Laravel表单验证拥有标准且庞大的[规则集]( <http://d.laravel-china.org/docs/5.4/validation#可用的验证规则)，通过规则调用来完成数据验证
-* 多个规则组合调用须以"|"符号连接，一次验证required失败后将立即停止验证,自动回退并可自动绑定视图
-* "."语法符号在Laravel中通常表示嵌套包含关系，这个在其他语言或框架语法中也比较常见
-- 自定义FormRequest (须继承自 Illuminate\Foundation\Http\FormRequest )
-- Validator::make()手动创建validator实例
-- 创建validator实例验证后钩子
-- 按条件增加规则
-- 数组验证
-- 自定义验证规则
-
-```
-$this->validate($request, [
-    'title' => 'bail|required|unique:posts|max:255',
-    'author.name' => 'required',
-    'author.description' => 'required',
-]);
-```
 
 ## 事件 Event
 
@@ -1437,13 +1323,6 @@ $this->validate($request, [
 ## Eloquent
 
 Eloquent ORM 以ActiveRecord形式来和数据库进行交互，拥有全部的数据表操作定义，单个模型实例对应数据表中的一行
-
-```
-1 $flights = App\Flight::where('active', 1)
-2                ->orderBy('name', 'desc')
-3                ->take(10)
-4                ->get();
-```
 
 config/database.php中包含了模型的相关配置项。Eloquent 模型约定：
 
@@ -1790,6 +1669,13 @@ Eloquent 会假设对应关联的外键名称是基于模型名称的。在这�
 如果在一个给定的模型中监听许多事件，也可使用观察者将所有监听器变成一个类，类的一个方法就是一个事件监听器
 
 ```php
+
+1 $flights = App\Flight::where('active', 1)
+2                ->orderBy('name', 'desc')
+3                ->take(10)
+4                ->get();
+
+
 # 定义观察者：
 <?php
 namespace App\Observers;
@@ -1851,6 +1737,7 @@ class AppServiceProvider extends ServiceProvider
 * Available Stacks
   - Livewire + Blade
   - Inertia.js + Vue
+* [livewire](https://github.com/livewire/livewire):A full-stack framework for Laravel that takes the pain out of building dynamic UIs.
 
 ```sh
 composer require laravel/jetstream
@@ -1865,8 +1752,9 @@ php artisan migrate
 
 ## [Laravel Mix](https://laravel-mix.com/)
 
-An elegant wrapper around Webpack for the 80% use case.
-
+* An elegant wrapper around Webpack for the 80% use case.
+* Laravel Elixir的精神继承者，完全基于Webpack而不是Gulp。
+* 使用通用CSS和JavaScript预处理器定义Laravel应用的Webpack构建步骤提供了流式API。通过简单的方法链定义流式资源管道
 * css
   - less
   - sass
@@ -1878,7 +1766,7 @@ An elegant wrapper around Webpack for the 80% use case.
   - 编译 .vue 文件
   - 最小化生产环境
 
-```
+```js
 mix.less('resources/assets/less/app.less', 'public/css', {
     strictMath: true
 });
@@ -1901,7 +1789,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
           processCssUrls: false
    });
 
-# combine
+// combine
 mix.styles([
     'public/css/vendor/normalize.css',
     'public/css/vendor/videojs.css'
@@ -1925,30 +1813,15 @@ mix.webpackConfig({
 
 * `Swift_TransportException with message 'Expected response code 250 but got code "530", with message "530 5.7.1 Authentication required`
 
-## Laravel的Restful风格
+## Restful风格
 
 一般认为Restful风格的资源定义不包含操作，但是在Laravel中操作(动词)也可作为一种资源来定义。下图是对Laravel中资源控制器操作原理的描述，可以看到，create、edit就直接出现在了URI中，它们是一种合法的资源。对于create和edit这两种资源的访问都采用GET方法来实现，第一眼看到顿感奇怪，后来尝试通过artisan console生成资源控制器，并注意到其对create、edit给出注释" Show the form for "字样，方知它们只是用来展现表单而非提交表单的。
 
 ## 扩展开发
 
-Laravel本身是基于Composer管理的一个包，遵循Composer的相关规范，可以通过Composer来添加所依赖的其他Composer包，因此在做应用的扩展开发时，可以开发Composer包然后引入项目中即可；
-另外也可开发基于Laravel的专属扩展包。下面所讲的就是Laravel的专属扩展开发，最好的方式是使用 contracts ，而不是 facades，因为你开发的包并不能访问所有 Laravel 提供的测试辅助函数，模拟 contracts 要比模拟 facade 简单很多。
-
-* 服务提供者：服务提供者是你的扩展包与 Laravel 连接的重点，须定义自己的服务提供者并继承自 Illuminate\Support\ServiceProvider 基类
-* 路由：若要为你的扩展包定义路由，只需在包的服务提供者的 boot 方法中传递 routes 文件路径到 loadRoutesFrom 方法即可
-
-```
-1 /**
-2  * 在注册后进行服务的启动。
-3  *
-4  * @return void
-5  */
-6 public function boot()
-7 {
-8     $this->loadRoutesFrom(__DIR__.'/path/to/routes.php');
-9 }
-```
-
+* 最好的方式是使用 contracts ，而不是 facades，因为开发的包并不能访问所有 Laravel 提供的测试辅助函数，模拟 contracts 要比模拟 facade 简单很多
+* 服务提供者：服务提供者是扩展包与 Laravel 连接的重点，须定义自己的服务提供者并继承自 Illuminate\Support\ServiceProvider 基类
+* 路由：若要为扩展包定义路由，只需在包的服务提供者的 boot 方法中传递 routes 文件路径到 loadRoutesFrom 方法即可
 - 配置文件：你可以选择性地将扩展包的配置文件发布(publishes)到应用程序本身的config目录上或者合并(mergeConfigFrom)到应用程序里的副本配置文件中，但不应在配置文件中定义闭包函数，当执行 config:cache Artisan命令时，它们将不能正确地序列化
 
   ```
@@ -2112,8 +1985,8 @@ function boot()
 
 ## 调试
 
-* 配置文件:`APP_DEBUG`
-* `storage/logs`中的日志文件
+* 配置:`APP_DEBUG`
+* `storage/logs`中日志文件
 * lavavel批量插入保证字段名称、数量一致，不要赛选数据
 
 ```sh
@@ -2123,7 +1996,17 @@ php artisan route:clear
 $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 ```
 
-## dusk
+## 任务调度
+
+```sh
+php artisan schedule:run
+```
+
+## [laravel/dusk](https://github.com/laravel/dusk)
+
+* provides an expressive, easy-to-use browser automation and testing API.
+* 提供了优雅的、易于使用的浏览器自动化测试API。默认情况下，Dusk不需要在机器上安装JDK或Selenium，取而代之的，Dusk使用一种独立的ChromeDriver安装方式。
+* Dusk在操作过程中使用了真实的浏览器，所以可以很轻松地对那些重度使用JavaScript的应用进行测试和交互：
 
 ```sh
 composer require --dev laravel/dusk
@@ -2131,12 +2014,6 @@ php artisan dusk:install
 php artisan dusk
 
 php artisan dusk:make LoginTest
-```
-
-## 任务调度
-
-```sh
-php artisan schedule:run
 ```
 
 ## 测试
@@ -2320,12 +2197,9 @@ fire 使用很少的代码快速构建一个功能完善的高颜值后台系统
 * cron
   - [Forge](https://forge.laravel.com):Painless PHP Servers Provision and deploy unlimited PHP applications on DigitalOcean, Linode, AWS, and more.
 * [Laravel Spark](https://spark.laravel.com):provides the perfect starting point for your next big idea. Forget all the boilerplate and focus on what matters: your application.
-* 测试
-  - [laravel/dusk](https://github.com/laravel/dusk):Laravel Dusk provides an expressive, easy-to-use browser automation and testing API.
 * 部署
   - [envoyer](https://envoyer.io):Deployments you've only dreamed about. Zero downtime. Zero fuss
 * [overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat):微信 SDK for Laravel, 基于 overtrue/wechat
-* [livewire](https://github.com/livewire/livewire):A full-stack framework for Laravel that takes the pain out of building dynamic UIs.
 
 ```sh
 # laravel-admin

@@ -79,8 +79,12 @@
             * fork Worker进程：按照配置fork出N个Worker进程，一般说来配置推荐Worker进程数量和CPU核数保持一致即可
             * 监控Worker进程，当某个Worker异常挂了后，Master进程负责重新拉起一个
     - 多个worker进程:用来处理基本的网络事件，每个 worker 请求相互独立且平等的竞争来自客户端的请求，共同竞争来处理来自客户端的请求
+        + 每个 Worker 进程都是从 Master 进程fork过来
         + 具体的 HTTP 连接与请求处理工作由 worker 进程来完成
         + 请求只能在一个 worker 进程中被处理，且一个 worker 进程只有一个主线程，所以同时只能处理一个请求
+        + 所有 Worker 进程的 listenfd 会在新连接到来时变得可读，为保证只有一个进程处理该连接，所有 Worker 进程在注册 listenfd 读事件前抢互斥锁accept_mutex，抢到互斥锁的那个进程注册 listenfd 读事件，在读事件里调用 accept 接受该连接。
+        + 当一个 Worker 进程在 accept 这个连接之后，就开始读取、解析、处理请求，在产生数据后再返回给客户端，最后才断开连接
+        + 一个请求完全由 Worker 进程来处理，而且只在一个 Worker 进程中处理
         + 为了减少进程切换（需要系统调用）的性能损耗，一般设置 Worker 进程数量和 CPU 数量一致
         + 每个worker基于时间驱动机制可以并行响应多个请求,底层实现的原理是事件驱动和多路 IO 复用,采取了 Reactor 模型（也就是 I/O 多路复用，NIO）
             * I/O 多路复用模型：最重要的系统调用函数就是 Select（其他的还有 epoll 等）
@@ -101,20 +105,22 @@
         + 可以使用 nginx-s reload 热部署
         + 每个 Worker 是独立的进程，不需要加锁，省掉了锁带来的开销
         + 采用独立的进程，互相之间不会影响，一个进程退出后，其他进程还在工作，服务不会中断，Master 进程则很快启动新的 Worker 进程
-* fast-CGI：一个协议
-    - CGI不涉及进程管理，PHP解析器被调用完一次后，就销毁掉了，下次调用需要重新初始化
-    - fastCGI涉及到了进程管理，携带着PHP解析器功能的FPM进程是常驻内存的，解析完毕后就一直静静地还在那里，等待请求
-* PHP-FPM（PHP FastCGI Process Manager）PHP对于fast-CGI协议具体实现
-    - 配置其实是个反向代理配置，Nginx 本身的高性能高并发设计更适用于作为静态资源服务器，对应 PHP 脚本文件这种动态资源请求，Nginx 的处理方式是通过反向代理的方式将其转发给真正的 PHP 脚本处理进程，通常是 PHP-FPM
-    - php-fpm的进程模型和nginx一模一样，就是一个Master进程按照配置fork出Worker进程
-    - 不同的是，fpm的worker进程没有“powered by epoll”，每个worker进程内都内嵌了php解析器用来解析php代码，一个fpm进程在已经干活的时候拒绝接受新的请求，是完完全全的基于同步阻塞的工作方式，只有活干完了才会接受新的请求
-    - Nginx和php-FPM之间是如何通信的？其实就是靠socket
-    - php-PFM会监听在回环地址的9000端口上，然后Nginx会将解析PHP的请求发到9000端口上
-    - 或者通过本地unixsocket的方式与php-FPM进行通信
+* 缓存加载器进程（Cache Loader ）
+    - 在Nginx服务启动一段时间后由主进程生成，在缓存元数据重建完成后就自动退出
+* 缓存管理器进程（Cache Manager）
+    - 一般存在于主进程的整个生命周期，负责对缓存索引进行管理。通过缓存机制，可以提高对请求的响应效率，进一步降低网络压力
 * 事件驱动：多进程（单线程）&多路 IO 复用模型，异步，非阻塞 epoll(Linux),kqueue（FreeBSD）, /dev/poll(Solaris)
 * 消息通知：select,poll, rt signals
     - 支持sendfile,  sendfile64
     - 支持AIO，mmap
+* 热升级：在不停止服务的情况下更换 Nginx 的binary文件
+    - 把旧的 Nginx binary 文件替换为新的，新编译的 nginx 文件所指定的相应的配置选项，必须保持和老的 Nginx 是一致的，否则的话没有办法复用 nginx.conf 文件
+    - 向现有老的 Master (Old) 进程发生  USR2 信号，之后 Master (Old) 进程会将修改 pid 文件名，添加后缀 .oldbin
+    - 使用新的 binary 文件启动新的 Master (New) 进程。会出现两个 Master 进程：Master(Old) 和 Master (New)，Master (New) 进程会自动启动新的 Worker 进程。这里新的 Master (New) 进程是怎么样启动的呢？它其实是老的 Master(Old) 进程的子进程，不过这个子进程是使用了新的 binary 文件带入来启动的
+    - 向 Master(Old)  进程发送 QUIT 信号
+    - 整个过程中，Master(Old)  进程是一直存活的，这是为了方便回滚
+        + 向 Master(Old)  进程发送 HUP 信号，相当于执行了一次 reload，会启动新的 Worker 进程
+        + 再向 Master (New) 进程发送 QUIT 信号
 
 ![](../../_static/nginx_archetect.png "Optional title")
 
@@ -363,6 +369,19 @@ location /video {
     aio threads=default_pool;
 }
 ```
+
+## 模块化
+
+* Nginx（内核）本身做的工作实际很少，当它接到一个 HTTP 请求时，它仅仅是通过查找配置文件将此次请求映射到一个 location block，而此 location 中所配置的各个指令则会启动不同的模块去完成工作，因此模块可以看做 Nginx 真正的劳动工作者。
+    - 通常一个 location 中的指令会涉及一个 Handler 模块和多个 Filter 模块（当然，多个location可以复用同一个模块）。
+    - Handler模块负责处理请求，完成响应内容的生成，而 Filter 模块对响应内容进行处理。
+* 核心模块（HTTP模块、EVENT模块和MAIL模块）
+* 基础模块（HTTP Access模块、HTTP FastCGI模块、HTTP Proxy模块和HTTP Rewrite模块）
+* 第三方模块（ HTTP Upstream Request Hash模块、Notice模块和HTTP Access Key模块）
+* 功能分类
+    - Handlers（处理器模块）：此类模块直接处理请求，并进行输出内容和修改 headers 信息等操作。Handlers 处理器模块一般只能有一个。
+    - Filters（过滤器模块）：此类模块主要对其他处理器模块输出的内容进行修改操作，最后由 Nginx 输出。
+    - Proxies（代理类模块）：此类模块是 Nginx 的 HTTP Upstream 之类的模块，这些模块主要与后端一些服务比如FastCGI 等进行交互，实现服务代理和负载均衡等功能。
 
 ### 配置
 
@@ -786,7 +805,8 @@ location ~ \.(htm|html)?$ {
     - 代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息
     - 静态代理：可以做缓存，加速访问资源
     - 对客户端访问授权，上网进行认证
-* 反向代理（Reverse Proxy）:以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端。“代理”的是服务端
+    - proxy_pass
+* 反向代理（Reverse Proxy）:以代理服务器来接受internet上的连接请求，然后将请求转发给**内部网络**上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端。“代理”的是服务端
     - 典型用途是将防火墙后面的服务器提供给 Internet 用户访问，加强安全防护
     - 简单来说就是真实的服务器不能直接被外部网络访问，所以需要一台代理服务器，而代理服务器能被外部网络访问的同时又跟真实服务器在同一个网络环境，当然也可能是同一台服务器，端口不同而已。
     - 保护和隐藏原始资源服务器 保证内网的安全，通常将反向代理作为公网访问地址，Web 服务器是内网
@@ -865,12 +885,12 @@ server
 
 ## 负载均衡
 
-* 链接
+* 链接限制
     - ulimit -a                        //查看所有属性值
     - ulimit -Hn 100000                //设置硬限制（临时规则）
     - ulimit -Hn 100000                //设置硬限制（临时规则）
 * 分摊到多个操作单元上进行执行,共同完成工作任务，以反向代理的方式进行负载均衡的
-* 算法
+* 策略
     - Round Robin（默认）:轮询(weight=1):每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。
     - weight 加权轮询:指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
     - Least Connections(least_conn): 跟踪和backend当前的活跃连接数目，最少的连接数目说明这个backend负载最轻，将请求分配给他，这种方式会考虑到配置中给每个upstream分配的weight权重信息；

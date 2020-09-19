@@ -126,6 +126,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 * [KDE Neon](https://neon.kde.org/):基于 Ubuntu 的轻量级 Linux 发行版,采用 KDE Plasma 桌面，看起来精美绝伦
 * [Nitrux](https://nxos.org/)
 * [MX Linux](https://mxlinux.org/)
+* [Solus](https://getsol.us/home/)
 * [AntiX](https://antixlinux.com/)
 * 安装
   - 最外层客户机Ubuntu
@@ -2037,6 +2038,8 @@ sudo umount /mnt
 * 从二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到/opt，建立软连接/usr/local/bin/
 * [Pkgs](https://pkgs.org/):Packages Search for Linux and Unix
 * AppImage
+* [Bleachbit](https://www.bleachbit.org/download/linux)
+  - `sudo apt install bleachbit`
 
 ```sh
 sudo apt-get install cowsay
