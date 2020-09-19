@@ -133,6 +133,8 @@
 * [FeelUOwn](https://github.com/feeluown/FeelUOwn):trying to be a user-friendly and hackable music player feeluown.readthedocs.io
 	- undefined symbol: cairo_tag_end
 * [koel](https://github.com/koel/koel):bird A personal music streaming server that works. https://koel.dev/
+* [TuxGuitar](https://sourceforge.net/projects/tuxguitar/):edit and play guitar tablatures like a pro
+* [MuseScore](https://musescore.org/en):an open-source and free professional music notation application that is used to create, play and print beautiful sheet music using easy to use, yet powerful interface
 
 ```sh
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 4773BD5E130D1D45

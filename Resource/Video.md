@@ -172,7 +172,8 @@ rtmp://localhost/vod/out.mp4
 * [xbmc/xbmc](https://github.com/xbmc/xbmc):Kodi is an award-winning free and open source home theater/media center software and entertainment hub for digital media. With its beautiful interface and powerful skinning engine, it's available for Android, BSD, Linux, macOS, iOS and Windows. https://kodi.tv/
 * [MoePlayer/DPlayer](https://github.com/MoePlayer/DPlayer):🍭 Wow, such a lovely HTML5 danmaku video player http://dplayer.js.org
 * [iina/iina](https://github.com/iina/iina):The modern video player for macOS. https://iina.io
-* [kodi](https://kodi.tv/):
+* [kodi](https://kodi.tv/)
+* [iawia002 / annie](https://github.com/iawia002/annie):space_invader Fast, simple and clean video downloader
 * [mpv](https://mpv.io/):别致轻量的界面和丰富的功能，MPV 拥有对一个好的视频播放器的一切期望。甚至可以在命令行使用它
 * [mifi/lossless-cut](https://github.com/mifi/lossless-cut):Save space by quickly and losslessly trimming video and audio files
 * [asdjgfr/operationRecord](https://github.com/asdjgfr/operationRecord):记录产品，测试的沙雕操作，方便debugger

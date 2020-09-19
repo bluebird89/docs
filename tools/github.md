@@ -8,11 +8,6 @@
   - hexo：添加文章后现hexo g（生成） hexo d（部署）
   - jekyll：直接push到master就好
 * [import](https://github.com/new/import)
-* [CLi](https://github.com/cli/cli) GitHub’s official command line tool https://cli.github.com
-  - `brew install github/gh/gh`
-  - `scoop bucket add github-gh https:scoop install gh`
-  - `gh pr [status, list, view, checkout, create]gh issue [status, list, view, create]gh help`
-  - [文档](https://cli.github.com/manual/)
 * 技巧
   - Fuzzy file finder: 按 t 可以快速进入模糊文件名搜索模式
   - 仓库主页，按 w 可以快速进行分支过滤
@@ -31,7 +26,6 @@
   - <raw.githubusercontent.com>, 同上
   - 先通过码云导入 GitHub 上项目；码云clone；修改 .git/config 替换为原来 github地址
   - [GitHub 加速下载](https://toolwa.com/github/)
-* action
 
 ![Git 使用规范流程](../_static/bg2015080501.png)
 
@@ -99,6 +93,35 @@ jobs:
   - [awesome-actions](https://github.com/sdras/awesome-actions):A curated list of awesome actions to use on GitHub
   - [github actions marketpalce](https://github.com/marketplace?type=actions)
   - [ github / super-linter ](https://github.com/github/super-linter):Combination of multiple linters to install as a GitHub Action
+
+## [CLi](https://github.com/cli/cli)
+
+* GitHub’s official command line tool https://cli.github.com
+  - `brew install github/gh/gh`
+  - `scoop bucket add github-gh https:scoop install gh`
+  - `gh pr [status, list, view, checkout, create]gh issue [status, list, view, create]gh help`
+* COMMANDS
+  - gist:       Create gists
+  - issue:      Manage issues
+  - pr:         Manage pull requests
+  - release:    Manage GitHub releases
+  - repo:       Create, clone, fork, and view repositories
+  - alias:      Create command shortcuts
+  - api:        Make an authenticated GitHub API request
+  - auth:       Login, logout, and refresh your authentication
+  - completion: Generate shell completion scripts
+  - config:     Manage configuration for gh
+  - help:
+* auth
+* condi
+* [文档](https://cli.github.com/manual/)
+
+```sh
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+sudo apt-add-repository https://cli.github.com/packages
+sudo apt update
+sudo apt install gh
+```
 
 ## [521xueweihan / GitHub520](https://github.com/521xueweihan/GitHub520)
 
