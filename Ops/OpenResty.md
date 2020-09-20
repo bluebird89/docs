@@ -10,7 +10,14 @@ Turning Nginx into a Full-Fledged Scriptable Web Platform https://openresty.org
 * 围绕这个模块，OpenResty 构建了一套完备的测试框架、调试技术和由 Lua 实现的周边功能库
 * 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将 Nginx 有效地变成一个强大的通用 Web 应用平台。Web 开发人员和系统工程师可以使用 Lua 脚本语言调动 Nginx 支持的各种 C 以及 Lua 模块，快速构造出足以胜任 10K 乃至 1000K 以上单机并发连接的高性能 Web 应用系统
 * 目标是让Web服务直接跑在 Nginx 服务内部，充分利用 Nginx 的非阻塞 I/O 模型，不仅仅对 HTTP 客户端请求,甚至于对远程后端诸如 MySQL、PostgreSQL、Memcached 以及 Redis 等都进行一致的高性能响应
+
+## 历史
+
 * 最早是雅虎中国的一个公司项目，起步于 2007 年 10 月。当时兴起了 OpenAPI 的热潮，用于满足各种 Web Service 的需求，就诞生了 OpenResty。在公司领导的支持下，最早的 OpenResty 实现从一开始就开源了
+* 最初的定位是服务于公司外的开发者，像其他的 OpenAPI 那样，但后来越来越多地是为雅虎中国的搜索产品提供内部服务
+	- 应用的重点是为公司内部的其他团队提供 Web Service
+* 第二代的 OpenResty ngx_openresty
+	- 章亦春在加入淘宝数据部门的量子团队之后，决定对 OpenResty 进行重新设计和彻底重写，并把应用重点放在支持像量子统计这样的 web 产品上面，所以量子统计 3.0 开始也几乎完全是 Web Service 驱动的纯 AJAX 应用
 
 ## install
 
@@ -49,6 +56,7 @@ sudo make install
 resty -e 'print("hello, world")'
 
 nginx -p `pwd`/ -c conf/nginx.conf
+openresty -p `pwd` -c conf/nginx.conf
 
 ab -c10 -n50000 http://localhost:8080/
 
@@ -69,6 +77,7 @@ sudo killall -9 nginx
 ## 原理
 
 * 实际上是Nginx+LuaJIT的完美组合
+* 将 LuaJIT 的虚拟机嵌入到 Nginx 的管理进程和工作进程中，同一个进程内的所有协程都会共享这个虚拟机，并在虚拟机中执行Lua代码。在性能上，OpenResty接近或超过 Nginx 的C模块，而且开发效率更高
 * 每个worker使用一个LuaVM，每个请求被分配到worker时，将在这个LuaVM中创建一个coroutine协程。协程之间数据隔离，每个协程具有独立的全局变量_G
 * Lua中的协程和多线程下的线程类似，都有自己的堆栈、局部变量、指令指针...，但是和其他协程程序共享全局变量等信息。线程和协程主要不同在于：多处理器的情况下，概念上来说多线程是同时运行多个线程，而协程是通过代码来完成协程的切换，任何时刻只有一个协程程序在运行。并且这个在运行的协程只有明确被要求挂起时才会被挂起。
 * 负载均衡 LVS+HAProxy将流量转发给核心Nginx1和Nginx2，即实现了流量的负载均衡。
@@ -77,6 +86,25 @@ sudo killall -9 nginx
 	- 遇到存储瓶颈 磁盘或内存遇到天花板
 	- 解决数据不一致比较好的办法是采用主从或分布式集中存储，而遇到存储瓶颈就需要进行按业务键进行分片，将数据分散到多台服务器。
 * 接入网关 接入网关又叫接入层，即接收流量的入口
+* Lua协程
+	- 协程是不被操作系统内核所管理的，而完全由程序控制（也就是用户态执行），这样带来的好处就是性能得到了极大地提升。
+	- 进程和线程切换要经过用户态到内核态再到用户态的过程，而协程的切换可以直接在用户态完成，不需要陷入内核态，切换效率高，降低资源消耗。
+	- Lua协程与线程类似，拥有独立的堆栈、独立的局部变量、独立的指令指针，同时又与其他协同程序共享全局变量和其他大部分东西。
+* cosocoket
+	- cosocket将 Lua 协程和 Nginx 的事件机制结合在一起，最终实现了非阻塞网络IO。不仅和HTTP客户端之间的网络通信是非阻塞的，与MySQL、Memcached以及Redis等众多后端之间的网络通信也是非阻塞的。
+	- 在OpenResty中调用一个cosocket相关的网络函数
+		+ 用户的Lua脚本每触发一个网络操作，都会有协程的yield和resume。当遇到网络 I/O 时，Lua协程会交出控制权（yield），把网络事件注册到 Nginx 监听列表中，并把运行权限交给 Nginx 。
+		+ 当有 Nginx 注册网络事件到达触发条件时，便唤醒（resume）对应的协程继续处理。这样就可以实现全异步的 Nginx 机制，不会影响 Nginx 的高并发处理性能。
+* 多阶段处理：在HTTP处理阶段基础上分别在Rewrite/Access阶段、Content阶段、Log阶段注册了自己的handler
+	- init_by_lua*：Master进程加载 Nginx 配置文件时运行，一般用来注册全局变量或者预加载Lua模块。
+	- init_worker_by_lua*：每个worker进程启动时执行，通常用于定时拉取配置/数据或者进行后端服务的健康检查。
+	- set_by_lua*：变量初始化。
+	- rewrite_by_lua*:可以实现复杂的转发、重定向逻辑。
+	- access_by_lua*:IP准入、接口权限等情况集中处理。
+	- content_by_lua*:内容处理器，接收请求处理并输出响应。
+	- header_filter_by_lua*:响应头部或者cookie处理。
+	- body_filter_by_lua*:对响应数据进行过滤，如截断或者替换。
+	- log_by_lua*:会话完成后，本地异步完成日志记录
 
 ## 语法
 
