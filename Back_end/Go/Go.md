@@ -1162,6 +1162,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     - [zserge/lorca](https://github.com/zserge/lorca):Build cross-platform modern desktop apps in Go + HTML5
 * Cli
     - [spf13/cobra](https://github.com/spf13/cobra):A Commander for modern Go CLI interactions
+        + [](https://mp.weixin.qq.com/s?__biz=MzU0MzQ5MDA0Mw==&mid=2247486779&idx=2&sn=31f80b575eb4d225cb59a77f78c043ec&chksm=fb0be7afcc7c6eb95ecdbd7d3434808356bc0ebcc3c232eb60c619d90b9d9cf43a0ad0184ef4)
     - [magefile / mage](https://github.com/magefile/mage):a Make/rake-like dev tool using Go https://magefile.org
     - [motemen / gore](https://github.com/motemen/gore):Yet another Go REPL that works nicely. Featured with line editing, code completion, and more.
     - [ urfave / cli ](https://github.com/urfave/cli):A simple, fast, and fun package for building command line apps in Go
