@@ -482,6 +482,7 @@ route add [-net|-host] [网域或主机] netmask [mask] [gw|dev]
 * F11: 回到桌面
 * 设置触发角 -->系统偏好 － Mission Control
 * 隐藏DOCK -->Command+Option+D
+* option+command+v
 * 按着Option键 -->如关机时免再确认一次
 * Shift+Control+ 推出键:锁屏键
 * command + l 进入地址栏

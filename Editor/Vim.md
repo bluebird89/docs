@@ -628,5 +628,4 @@ To install from command line: vim +PluginInstall +qall
 * [Vim教程](https://vimjc.com/)
 * [简明 VIM 练级攻略](https://coolshell.cn/articles/5426.html)
 * [](https://github.com/iggredible/Learn-Vim):A book for learning the Vim editor the smart way.
-* [square/maximum-awesome](git@github.com:square/maximum-awesome.git):Config files for vim and tmux.
 * [vimwiki / vimwiki](https://github.com/vimwiki/vimwiki):Personal Wiki for Vim http://vimwiki.github.io/
