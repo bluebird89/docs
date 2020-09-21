@@ -4,7 +4,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 
 ## 硬件
 
-* Apple Magic Trackpad 2：重现Mac pro mul touch功能
+* Apple Magic Trackpad 2：重现 Mac pro mul touch 功能
 * 耳机 BeoPlay H6
 * iPad Pro：阅读利器
 * 格式化移动硬盘：ExFAT格式
