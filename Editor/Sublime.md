@@ -535,7 +535,7 @@ Alt + 左/右/上/下/  # 移动
 }
 ```
 
-### 主题theme
+### 主题 theme
 
 * Material Theme
 * Monokai Pro
