@@ -29,6 +29,27 @@
 
 ![Git 使用规范流程](../_static/bg2015080501.png)
 
+## GitHub Actions
+
+持续集成由很多操作组成，比如抓取代码、运行测试、登录远程服务器，发布到第三方服务等等,把每个操作写成独立的脚本文件，存放到代码仓库，使得其他开发者可以引用
+
+* 原理：每个 action 就是一个独立脚本，因此可以做成代码仓库，使用userName/repoName的语法引用 action。用户可以引用某个具体版本的 action
+  - 存放在代码仓库的.github/workflows目录
+  - 文件采用 YAML 格式，后缀名统一为.yml，GitHub 只要发现.github/workflows目录里面有.yml文件，就会自动运行该文件
+  - 仓库顶部的菜单会出现Actions一项
+  - 密钥储存到当前仓库的Settings/Secrets里面
+* 术语
+  - workflow （工作流程）：持续集成一次运行的过程，就是一个 workflow。
+  - job （任务）：一个 workflow 由一个p或多个 jobs 构成，含义是一次持续集成的运行，可以完成多个任务。
+  - step（步骤）：每个 job 由多个 step 构成，一步步完成。
+  - action （动作）：每个 step 可以依次执行一个或多个命令（action）
+* starter
+  - [actions/starter-workflows](https://github.com/actions/starter-workflows):Accelerating new GitHub Actions workflows https://github.com/features/actions
+* actions
+  - [awesome-actions](https://github.com/sdras/awesome-actions):A curated list of awesome actions to use on GitHub
+  - [github actions marketpalce](https://github.com/marketplace?type=actions)
+  - [ github / super-linter ](https://github.com/github/super-linter):Combination of multiple linters to install as a GitHub Action
+
 ```yaml
 name: GitHub Actions Demo
 
@@ -66,33 +87,7 @@ jobs:
     needs: build-and-deploy
   job3:
     needs: [build-and-deploy, job2]
-
-# github
-219.76.4.4 github-cloud.s3.amazonaws.com
-192.30.253.112 github.com
-151.101.185.194 github.global.ssl.fastly.net
 ```
-
-## action
-
-持续集成由很多操作组成，比如抓取代码、运行测试、登录远程服务器，发布到第三方服务等等,把每个操作写成独立的脚本文件，存放到代码仓库，使得其他开发者可以引用
-
-* 原理：每个 action 就是一个独立脚本，因此可以做成代码仓库，使用userName/repoName的语法引用 action。用户可以引用某个具体版本的 action
-  - 存放在代码仓库的.github/workflows目录
-  - 文件采用 YAML 格式，后缀名统一为.yml，GitHub 只要发现.github/workflows目录里面有.yml文件，就会自动运行该文件
-  - 仓库顶部的菜单会出现Actions一项
-  - 密钥储存到当前仓库的Settings/Secrets里面
-* 术语
-  - workflow （工作流程）：持续集成一次运行的过程，就是一个 workflow。
-  - job （任务）：一个 workflow 由一个或多个 jobs 构成，含义是一次持续集成的运行，可以完成多个任务。
-  - step（步骤）：每个 job 由多个 step 构成，一步步完成。
-  - action （动作）：每个 step 可以依次执行一个或多个命令（action）
-* starter
-  - [actions/starter-workflows](https://github.com/actions/starter-workflows):Accelerating new GitHub Actions workflows https://github.com/features/actions
-* actions
-  - [awesome-actions](https://github.com/sdras/awesome-actions):A curated list of awesome actions to use on GitHub
-  - [github actions marketpalce](https://github.com/marketplace?type=actions)
-  - [ github / super-linter ](https://github.com/github/super-linter):Combination of multiple linters to install as a GitHub Action
 
 ## [CLi](https://github.com/cli/cli)
 

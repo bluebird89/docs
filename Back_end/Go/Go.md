@@ -1117,6 +1117,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [hajimehoshi/ebiten](https://github.com/hajimehoshi/ebiten):A dead simple 2D game library in Go https://hajimehoshi.github.io/ebiten/
 * [go-shiori/shiori](https://github.com/go-shiori/shiori):Simple bookmark manager built with Go
 * [maxence-charriere / go-app](https://github.com/maxence-charriere/go-app):A package to build progressive web apps with Go programming language and WebAssembly. https://luck.murlok.io
+* [](https://github.com/lexkong/apiserver_demos)
 
 ## 教程
 
@@ -1312,8 +1313,9 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 
 * [Wiki](https://github.com/golang/go/wiki)
 * [Alikhll/golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
+* [Go 语言设计与实现](https://draveness.me/golang/)
 * [spec](https://golang.google.cn/ref/spec)
-* [developer-learning/learning-golang](https://github.com/developer-learning/learning-golang):Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（文档、书籍、视频
+* [developer-learning/learning-golang](https://github.com/developer-learning/learning-golang):Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（文档、书籍、视频)
 * [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
 * [yinggaozhen/awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 https://awesome-go.cn(建设中)
 * [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
@@ -1332,6 +1334,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - `godoc -http=:6060` 访问`http://localhost:6060/`
 * [deanishe/awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
 * [ hackstoic / golang-open-source-projects ](https://github.com/hackstoic/golang-open-source-projects):为互联网IT人打造的中文版awesome-go
+* [Go内存分配](https://mp.weixin.qq.com/s/3gGbJaeuvx4klqcv34hmmw)
 * [effective_go](https://go-zh.org/doc/effective_go.html)
 * https://learn.go.dev/
 

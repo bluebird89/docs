@@ -389,3 +389,4 @@ CREATE TABLE `leaf_alloc` (
 * [分布式系统架构经典资料](https://www.infoq.cn/article/2018/05/distributed-system-architecture/)
 * [MIT parallel and distributed Group](https://pdos.csail.mit.edu/)
 * [数据布局服务与局部性管理 with Akkio](https://draveness.me//papers-akkio)
+* [分布式系统原理介绍](http://guanzhou.pub/2018/06/04/Distributed/)

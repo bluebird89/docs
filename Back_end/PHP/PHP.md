@@ -1187,21 +1187,21 @@ spl_autoload_register(function ($class){
 
 ## 魔术方法
 
-* `__construct()`
-* `__destruct()`
-* `__call($funName, $arguments)`:当调用一个未定义或不可达方法时， __call () 方法将被调用
+* __construct 构造函数 初始化赋值 实例化对象的时候自己调用
+* __destruct 析构方法，PHP 将在对象被销毁前（即从内存中清除前）调用这个方法
+* __get ($property) 当调用一个未定义的属性时，此方法会被触发，传递的参数是被访问的属性名
+* __set ($property, $value) 给一个未定义的属性赋值时，此方法会被触发，传递的参数是被设置的属性名和值这里的没有声明包括当使用对象调用时，访问控制为 proteced,private 的属性（即没有权限访问的属性）。
+* __isset ($property) 当在一个未定义的属性上调用 isset () 函数时调用此方法
+* __unset ($property) 当在一个未定义的属性上调用 unset () 函数时调用此方法
+* _call ($method, $arg_array) 当调用一个未定义的方法是调用此方法
+* __autoload 函数，它会在试图使用尚未被定义的类时自动调用。通过调用此函数，脚本引擎在 PHP 出错失败前有了最后一个机会加载所需的类。
+* __clone 复制一个对象时自动调用 clone 方法，如果在对象复制需要执行某些初始化操作，可以在 clone 方法实现。
+* __toString 方法在将一个对象转化成字符串时自动调用，比如使用 echo 打印对象时。
 * `__callStatic($funName, $arguments)`   当调用一个未定义或不可达的静态方法时， __callStatic () 方法将被调用
-* `__clone()`
-* `__get()`:读取不可访问属性的值
-* `__set()`:在给不可访问属性赋值时
-* `__isset()`:当对不可访问属性调用 isset() 或 empty() 时
-* `__unset()`:当对不可访问属性调用 unset() 时
 * `__sleep()`:serialize() 函数会检查类中是否存在一个魔术方法 __sleep()。如果存在，该方法会先被调用，然后才执行序列化操作,可以用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组,不能返回父类的私有成员的名字。这样做会产生一个 E_NOTICE 级别的错误.
 * `__wakeup()`:unserialize() 会检查是否存在一个 __wakeup() 方法。如果存在，则会先调用 __wakeup 方法，预先准备对象需要的资源
-* `__toString()`:用于一个类被当成字符串时应怎样回应
 * `__invoke()`:以调用函数的方式访问一个对象时， __invoke () 方法将首先被调用
 * `__set_state()`:当调用 var_export () 方法时，__set_state () 方法将被调用
-* `__autoload($className)`   试图载入一个未定义的类时调用。
 * `__debugInfo()`   输出 debug 信息
 
 ## 反射

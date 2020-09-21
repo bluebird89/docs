@@ -84,7 +84,7 @@ ps -ef |grep mysql  ##显示mysql现有的进程
 kill pid  ##删除mysql现有进程
 ```
 
-##  XtraBackup
+## XtraBackup
 
 * an open-source hot backup utility for MySQL that doesn't lock your database during the backup. It can back up data from InnoDB, XtraDB and MyISAM tables on MySQL/Percona Server/MariaDB servers, and has many advanced features.
 * 一款基于MySQL的服务器的开源热备份实用程序，在备份过程中不会锁定数据库
@@ -97,9 +97,11 @@ kill pid  ##删除mysql现有进程
 	- 在MySQL服务器之间移动表格
 	- 轻松创建新的MySQL复制从站
 	- 在不增加服务器负载的情况下备份MySQL
-* 包含两个工具：
-	- xtrabackup：是用于热备份innodb, xtradb表中数据的工具，不能备份其他类型的表(Myisam表)，也不能备份数据表结构。
+* 包含工具：
+	- xtrabackup：用于热备份innodb, xtradb表中数据的工具，不能备份其他类型的表(Myisam表)，也不能备份数据表结构。
 	- innobackupex：是将xtrabackup进行封装的perl脚本，可以备份和恢复MyISAM表以及数据表结构
+* 参考
+    - [Xtrabackup 实现数据的备份与恢复](https://learnku.com/articles/27641)
 
 ```sh
 sudo yum install http://www.percona.com/downloads/percona-release/redhat/0.1-4/percona-release-0.1-4.noarch.rpm

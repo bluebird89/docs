@@ -123,7 +123,7 @@ location ~ .*\.php(\/.*)*$ {
 * 分发
     - [OpenWrite](https://openwrite.cn/)
     - [ crawlab-team / artipub ](https://github.com/crawlab-team/artipub):Article publishing platform that automatically distributes your articles to various media channels
-
+* [一只特立独行的猪](http://guanzhou.pub/tag/)
 * [没有了老师，该如何学习？](http://www.cnblogs.com/qianqian-li/p/6028745.html)
 * [How To Ask Questions The Smart Way](http://www.catb.org/esr/faqs/smart-questions.html)
 * [lifesinger](https://github.com/lifesinger/blog):岁月如歌
