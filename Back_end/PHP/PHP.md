@@ -1187,7 +1187,6 @@ spl_autoload_register(function ($class){
 
 ## 魔术方法
 
-* 以双下划线（__）开始命名的方法
 * `__construct()`
 * `__destruct()`
 * `__call($funName, $arguments)`:当调用一个未定义或不可达方法时， __call () 方法将被调用
@@ -1389,7 +1388,10 @@ $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 
 ### 生成器 iterator
 
-
+*  PHP 5.5 引入
+*  生成器不要求类实现Iterator接口，从而减轻了类的开销和负担。生成器会根据需求每次计算并产出需要迭代的值，对应用的性能有很大的影响：试想假如标准的PHP迭代器经常在内存中执行迭代操作，这要预先计算出数据集，性能低下；如果要使用特定方式计算大量数据，如操作Excel表数据，对性能影响更甚。使用生成器，即时计算并产出后续值，不占用宝贵的内存空间
+*  使用生成器迭代流资源（文件、音频等）
+*  生成器只是向前进的迭代器，这意味着不能使用生成器在数据集中执行后退、快进或查找操作，只能让生成器计算并产出下一个值
 * 提供了一种更容易的方法来实现简单的对象迭代，性能开销和复杂性大大降低
 * 一个生成器函数看起来像一个普通的函数，不同的是普通函数返回一个值，而一个生成器可以yield生成许多它所需要的值
 * 一个简单的例子就是使用生成器来重新实现 range() 函数。 标准的 range() 函数需要在内存中生成一个数组包含每一个在它范围内的值，然后返回该数组, 结果就是会产生多个很大的数组。 比如，调用 range(0, 1000000) 将导致内存占用超过 100 MB。
@@ -1402,13 +1404,6 @@ $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 * 在没有参数传入的情况下被调用来生成一个 NULL值并配对一个自动的键名
 * 方法
     - array iterator_to_array ( Traversable $iterator [, bool $use_keys = true ] )
-
-## 生成器
-
-*  PHP 5.5 引入
-*  生成器不要求类实现Iterator接口，从而减轻了类的开销和负担。生成器会根据需求每次计算并产出需要迭代的值，对应用的性能有很大的影响：试想假如标准的PHP迭代器经常在内存中执行迭代操作，这要预先计算出数据集，性能低下；如果要使用特定方式计算大量数据，如操作Excel表数据，对性能影响更甚。使用生成器，即时计算并产出后续值，不占用宝贵的内存空间
-*  使用生成器迭代流资源（文件、音频等）
-*  生成器只是向前进的迭代器，这意味着不能使用生成器在数据集中执行后退、快进或查找操作，只能让生成器计算并产出下一个值
 
 ## 调用外部命令
 
@@ -1468,7 +1463,11 @@ system("/usr/a.sh");
 
 ## 错误
 
-* 级别:致命错误、运行时错误、编译时错误、启动错误和用户触发的错误等,最常见错误是由语法错误或未捕获异常导致的错误,使用 `error_reporting()` 函数或者在 php.ini 文件中使用` error_reporting` 指令
+* 级别:致命错误、运行时错误、编译时错误、启动错误和用户触发的错误等,最常见错误是由语法错误或未捕获异常导致的错误
+    - `E_ALL & ~E_NOTICE` # 除了提示级别
+    - `E_ALL ^ E_NOTICE` #
+    - `E_ERROR | E_RECOVERABLE_ERROR` # 只显示错误和可恢复
+* 使用 `error_reporting()` 函数或者在 php.ini 文件中使用` error_reporting` 指令
 * 使用 trigger_error 函数自己触发错误，然后使用自定义的错误处理程序进行处理
 * 编写运行在用户空间里的代码时最好使用异常。与错误不同的是，PHP 异常可以在 PHP 应用的任何层级抛出和捕获。异常提供的上下文信息比错误多，而且可以扩展最顶层的 Exception 类，创建自定义的异常子类。异常加上一个好的日志记录器（如 Monolog）比错误能解决更多的问题
 * 开发环境中，倾向于让 PHP 显示并记录所有错误信息，而在生产环境中我们会让 PHP 记录大部分错误信息，但不显示出来.规则：
@@ -1480,6 +1479,18 @@ system("/usr/a.sh");
 * 处理完成后，可以使用 `restore_error_handler()` 函数还原错误处理程序
 * 工具
     - `composer require filp/whoops`
+
+```
+    |- Exception implements Throwable
+        |- ...
+    |- Error implements Throwable
+        |- TypeError extends Error
+        |- ParseError extends Error
+        |- AssertionError extends Error
+        |- ArithmeticError extends Error
+            |- DivisionByZeroError extends ArithmeticError
+
+```
 
 ## 序列化
 
@@ -1540,7 +1551,68 @@ system("/usr/a.sh");
 * 存储算法
     - 最佳实践是计算密码的哈希值
     - 加密和哈希不是一回事，加密事双向算法，加密的数据可以解密，而哈希是单向算法，哈希后的数据不能再还原成原始值，而且相同的数据得到的哈希值始终相同
-* 最安全的算法当属bcrypt，与md5和SHA1不同，bcrypt故意设计得很慢，bcrypt会自动加盐（salt），防止潜在的彩虹表攻击，bcrypt算法会花费大量时间反复处理数据，生成特别安全的哈希值。在这个过程中，处理数据的次数叫工作因子，工作因子的值越高，破解密码所需的时间越长，安全性越好。bcrypt算法永不过时，如果计算机运算速度变快了，我们只需提高工作因子的值
+* 最安全的算法当属bcrypt，与md5和SHA1不同，bcrypt故意设计得很慢，bcrypt会自动加盐（salt），防止潜在的彩虹表攻击
+    - bcrypt算法会花费大量时间反复处理数据，生成特别安全的哈希值。在这个过程中，处理数据的次数叫工作因子，工作因子的值越高，破解密码所需的时间越长，安全性越好。
+    - bcrypt算法永不过时，如果计算机运算速度变快了，只需提高工作因子的值
+* md5：一种信息摘要算法（其实就是哈希），不是加密算法，因为md5不可逆，但是加解密是一个可逆的过程
+* 分类
+    - 对称加密，常见算法 DES、3DES、AES等
+        + 用同一个密钥对信息加解密
+        + 欲要加密，必先加密密钥的矛盾
+        + [gibberish-aes-php](https://github.com/ivantcholakov/gibberish-aes-php)
+    - 非对称加密，RSA、DSA、ECDH等
+        + 公钥和私钥是成双成对生成的，二者之间通过某种神秘的数学原理连接
+        + 公钥加密的数据，只能通过相应的私钥解密；私钥加密的数据，只能通过对应的公钥解密
+        + 发给谁信息用谁公钥加密,用自己公钥加密，只有自己私钥解密，利用自己私钥加密，所有有自己公钥的都可以解密
+        + 私钥加密，公钥验签
+        + 公钥可以颁发给任何人，私钥自己保留
+        + [pikirasa](https://github.com/vlucas/pikirasa)
+        + 加密周期长,耗资源
+    - 混合
+        + 随机生成一个AES对称加密用的密钥，然后用客户端的RSA公钥加密后传给客户端
+        + 客户端再通过自己的RSA私钥解密得到这个AES对称密钥，然后再用这个AES对称密钥进行后续的加解密即可
+        + 给这个AES密钥设定一个有效期，过期后，就再次利用上面的流程申请新的AES密钥即可
+* 密钥协商\交换
+    - 避免密钥在网络上的传输被劫持导致的安全问题
+    - 利用RSA等非对称加密技术进行交换
+    - 利用专门伺候密钥交换需求的交换算法，比如DH算法，全称叫做Diffie-Hellman密钥交换
+        + 元首手里有的数据有100（基数）、9、300（加密），古德里安手里的数据有100、3、900（加密），然后两个人此时只需要默默地做下面这一步：元首：9 * 300 = 2700 古德里安：3 * 900 = 2700，就是2700
+        + [diffie-hellman-php](https://github.com/jcink/diffie-hellman-php)
+        + ECDH [ECDH-PHP](https://github.com/Querdos/ECDH-PHP)
+
+```php
+https://github.com/Querdos/ECDH-PHP
+
+<?php
+require_once './autoloader.php';
+use Querdos\lib\ECDHCurve25519;
+$xitele   = new ECDHCurve25519();
+$gudelian = new ECDHCurve25519();
+$xitele->computeSecret( $gudelian->getPublic() );
+$gudelian->computeSecret( $xitele->getPublic() );
+// shareKey1 和 shareKey2 就是协商出来的密钥
+$shareKey1 = $xitele->getSecret();
+echo $shareKey1.PHP_EOL;
+$shareKey2 = $gudelian->getSecret();
+echo $shareKey2.PHP_EOL;
+// 我们用gmp cmp来对比是否为同一个密钥
+if ( 0 == gmp_cmp( $shareKey1, $shareKey2 ) ) {
+  echo "一样".PHP_EOL;
+}
+else {
+  echo "不一样".PHP_EOL;
+}
+// 除此之外，ecdh比dh多了一个验证数据签名验证，也就是说ecdh可以检验数据是否被篡改！
+$msg = "hello world";
+$signature = $xitele->signMessage( $msg );
+if ( $gudelian->verifySignature( $signature, $xitele->getPublic(), $msg ) ) {
+  echo "验证数据签名成功".PHP_EOL;
+}
+else {
+  echo "验证数据签名失败".PHP_EOL;
+}
+exit;
+```
 
 ## 跨域请求
 
@@ -1795,10 +1867,6 @@ $host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
 
 ## web
 
-* apache
-    - module
-    - CGI
-    - php-fpm
 
 ```php
 <?php header("Content-type: text/html; charset=utf-8"); ?>
@@ -1808,7 +1876,7 @@ $host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
 
 * 面向对象编程中的一种设计原则，可以用来减低代码之间的耦合度，为相互依赖的组件提供抽象，将依赖的获取交给第三方来控制，即依赖对象不在被依赖的模块中获取
 * 方式
-    - 依赖注入（Dependency Injection，简称DI）：构造函数注入 或者 属性注入
+    - 依赖注入（Dependency Injection，简称DI）：构造函数注入或者属性注入
     - 依赖查找（Dependency Lookup）
 * 控制反转：对象在被创建的时候，由一个调控系统内所有对象的外界实体，将其所依赖的对象的引用传递(注入)给它，由外部负责其依赖需求
 * 依赖倒置(Dependence Inversion Principle,DIP) 是一种抽象的软件设计原则
@@ -1864,8 +1932,6 @@ $host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
     - CURLOPT_INFILE: 这个文件是传送过来的输入文件。
     - CURLOPT_WRITEHEADER: 这个文件写有输出的头部分。
     - CURLOPT_STDERR: 这个文件写有错误而不是stderr。用来获取需要登录的页面的例子,当前做法是每次或许都登录一次,有需要的人再做改进了.
-
-## APCu
 
 ## 正则表达式 PREG
 
@@ -1995,216 +2061,31 @@ $host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
         + 执行效率高：用最简单的程序流程实现应用需求，勿扰大弯子
         + 代码安全性好：做一名警惕的程序员，任何有用户输入和上传文件的地方都得额外谨慎，也许一个程序员一时的疏忽就会导致一个系统顷刻间崩溃。
 
-
-## 第一阶段：基础阶段（基础PHP程序员）
-
-重点：把LNMP搞熟练（核心是安装配置基本操作)
-
-目标：能够完成基本的LNMP系统安装，简单配置维护；能够做基本的简单系统的PHP开发；能够在PHP中型系统中支持某个PHP功能模块的开发。
-
-时间：完成本阶段的时间因人而异，有的成长快半年一年就过了，成长慢的两三年也有。
-
-### Linux
-
-基本命令、操作、启动、基本服务配置（包括rpm安装文件，各种服务配置等）
-会写简单的shell脚本和awk/sed 脚本命令等。
-
-### Nginx
-
-做到能够安装配置nginx+php，知道基本的nginx核心配置选项，知道 server/fastcgi_pass/access_log 等基础配置，目标是能够让nginx+php_fpm顺利工作。
-
-### MySQL
-
-会自己搭建mysql，知道基本的mysql配置选项；知道innodb和myisam的区别，知道针对InnoDB和MyISAM两个引擎的不同配置选项；
-知道基本的两个引擎的差异和选择上面的区别；能够纯手工编译搭建一个MySQL数据库并且配置好编码等正常稳定运行；核心主旨是能够搭建一个可运行的MySQL数据库。
-
-### PHP
-
-基本语法数组、字符串、数据库、XML、Socket、GD/ImageMgk图片处理等等；
-熟悉各种跟MySQL操作链接的api（mysql/mysqli/PDO)，知道各种编码问题的解决；知道常规熟练使用的PHP框架（ThinkPHP、Zendframework、Yii、Yaf等）；
-了解基本MVC的运行机制和为什么这么做，稍微知道不同的PHP框架之间的区别；
-能够快速学习一个MVC框架。能够知道开发工程中的文件目录组织，有基本的良好的代码结构和风格，能够完成小系统的开发和中型系统中某个模块的开发工作。
-
-### 前端
-
-如果条件时间允许，可以适当学习下 HTML/CSS/JS 等相关知识，知道什么web标准，div+css的web/wap页面模式，知道HTML5和HTML4的区别；
-了解一些基本的前端只是和JS框架（jQuery之类的）；
-了解一些基本的JavaScript编程知识；（本项不是必须项，如果有时间，稍微了解一下是可以的，不过不建议作为重点，除非个人有强烈兴趣）
-
-### 系统设计
-能够完成小型系统的基本设计，包括简单的数据库设计，能够完成基本的浏览器 -< Nginx+PHP -< 数据库 架构的设计开发工作；
-能够支撑每天几十万到数百万流量网站的开发维护工作；
-
-## 第二阶段：提高阶段
-
-重点：提高针对LNMP的技能，能够更全面的对LNMP有熟练的应用。
-目标：能够随时随地搭建好LNMP环境，快速完成常规配置；能够追查解决大部分遇到的开发和线上环境的问题；能够独立承担中型系统的构架和开发工作；能够在大型系统中承担某个中型模块的开发工作；
-
-### Linux
-
-在第一阶段的基础上面，能够流畅的使用Shell脚本来完成很多自动化的工作；
-awk/sed/perl 也操作的不错，能够完成很多文本处理和数据统计等工作；
-基本能够安装大部分非特殊的Linux程序（包括各种库、包、第三方依赖等等，比如MongoDB/Redis/Sphinx/Luncene/SVN之类的）；
-了解基本的Linux服务，知道如何查看Linux的性能指标数据，知道基本的Linux下面的问题跟踪等。
-
-### Nginx:
-
-在第一阶段的基础上面，了解复杂一些的Nginx配置；
-包括 多核配置、events、proxy_pass，sendfile/tcp_*配置，知道超时等相关配置和性能影响；
-知道nginx除了web server，还能够承担代理服务器、反向静态服务器等配置；
-知道基本的nginx配置调优；
-知道如何配置权限、编译一个nginx扩展到nginx；
-知道基本的nginx运行原理（master/worker机制，epoll），知道为什么nginx性能比apache性能好等知识；
-
-### MySQL/MongoDB：
-
-在第一阶段的基础上面，在MySQL开发方面，掌握很多小技巧，包括常规SQL优化（group by/order by/rand优化等）；
-除了能够搭建MySQL，还能够冷热备份MySQL数据，还知道影响innodb/myisam性能的配置选项（比如key_buffer/query_cache/sort_buffer/innodb_buffer_pool_size/innodb_flush_log_at_trx_commit等），也知道这些选项配置成为多少值合适；
-另外也了解一些特殊的配置选项，比如 知道如何搭建mysql主从同步的环境，知道各个binlog_format的区别；
-知道MySQL的性能追查，包括slow_log/explain等，还能够知道基本的索引建立处理等知识；
-原理方面了解基本的MySQL的架构（Server+存储引擎），知道基本的InnoDB/MyISAM索引存储结构和不同（聚簇索引，B树）；
-知道基本的InnoDB事务处理机制；
-了解大部分MySQL异常情况的处理方案（或者知道哪儿找到处理方案）；
-条件允许的情况，建议了解一下NoSQL的代表MongoDB数据库，顺便对比跟MySQL的差别，同时能够在合适的应用场景安全谨慎的使用MongoDB，知道基本的PHP与MongoDB的结合开发。
-
-### Redis/Memcached：
-
-在大部分中型系统里面一定会涉及到缓存处理，所以一定要了解基本的缓存；
-知道Memcached和Redis的异同和应用场景，能够独立安装 Redis/Memcached，了解Memcahed的一些基本特性和限制，比如最大的value值，知道PHP跟他们的使用结合；
-Redis了解基本工作原理和使用，了解常规的数据类型，知道什么场景应用什么类型，了解Redis的事务等等;
-原理部分，能够大概了解Memcached的内存结构（slab机制），redis就了解常用数据类型底层实现存储结构（SDS/链表/SkipList/HashTable）等等，顺便了解一下Redis的事务、RDB、AOF等机制更好
-
-### PHP：
-
-除了第一阶段的能力，安装配置方面能够随意安装PHP和各种第三方扩展的编译安装配置；
-了解php-fpm的大部分配置选项和含义（如max_requests/max_children/request_terminate_timeout之类的影响性能的配置），知道mod_php/fastcgi的区别；
-在PHP方面已经能够熟练各种基础技术，还包括各种深入些的PHP，包括对PHP面向对象的深入理解/SPL/语法层面的特殊特性比如反射之类的；
-在框架方面已经阅读过最少一个以上常规PHP MVC框架的代码了，知道基本PHP框架内部实现机制和设计思想；在PHP开发中已经能够熟练使用常规的设计模式来应用开发（抽象工厂/单例/观察者/命令链/策略/适配器 等模式）；
-建议开发自己的PHP MVC框架来充分让开发自由化，让自己深入理解MVC模式，也让自己能够在业务项目开发里快速升级；
-熟悉PHP的各种代码优化方法，熟悉大部分PHP安全方面问题的解决处理；熟悉基本的PHP执行的机制原理（Zend引擎/扩展基本工作机制）；
-
-### C/C++：
-
-开始涉猎一定的C/C++语言，能够写基本的C/C++代码，对基本的C/C++语法熟悉（指针、数组操作、字符串、常规标准API）和数据结构（链表、树、哈希、队列）有一定的熟悉下；
-对Linux下面的C语言开发有基本的了解概念，会简单的makefile文件编写，能够使用简单的GCC/GDB的程序编译简单调试工作；
-对基本的网络编程有大概了解。（本项是为了向更高层次打下基础）
-
-### 前端：
-
-在第一阶段的基础上面，熟悉基本的HTTP协议（协议代码200/300/400/500，基本的HTTP交互头）；
-条件允许，可以在深入写出稍微优雅的HTML+CSS+JavaScript，或者能够大致简单使用某些前端框架（jQuery/YUI/ExtJS/RequireJS/BootStrap之类）；
-如果条件允许，可以深入学习JavaScript编程，比如闭包机制、DOM处理；再深入些可以读读jQuery源码做深入学习。（本项不做重点学习，除非对前端有兴趣）
-
-### 系统设计：
-
-能够设计大部分中型系统的网站架构、数据库、基本PHP框架选型；性能测试排查处理等；
-能够完成类似：浏览器 -< CDN(Squid) -< Nginx+PHP -< 缓存 -< 数据库 结构网站的基本设计开发维护；
-能够支撑每天数百万到千万流量基本网站的开发维护工作；
-
-## 第三阶段：高级阶段 （高级PHP程序员）
-
-重点：除了基本的LNMP程序，还能够在某个方向或领域有深入学习。（纵深维度发展）
-
-目标：除了能够完成基本的PHP业务开发，还能够解决大部分深入复杂的技术问题，并且可以独立设计完成中大型的系统设计和开发工作；自己能够独立hold深入某个技术方向，在这块比较专业。（比如在MySQL、Nginx、PHP、Redis等等任一方向深入研究）
-
-### Linux：
-
-除了第二阶段的能力，在Linux下面除了常规的操作和性能监控跟踪，还能够使用很多高级复杂的命令完成工作（watch/tcpdump/starce/ldd/ar等)；
-在shell脚本方面，已经能够编写比较复杂的shell脚本（超过500行）来协助完成很多包括备份、自动化处理、监控等工作的shell；
-对awk/sed/perl 等应用已经如火纯青，能够随意操作控制处理文本统计分析各种复杂格式的数据；
-对Linux内部机制有一些了解，对内核模块加载，启动错误处理等等有个基本的处理；
-同时对一些其他相关的东西也了解，比如NFS、磁盘管理等等；
-
-## Nginx:
-
-在第二阶段的基础上面，已经能够把Nginx操作的很熟练，能够对Nginx进行更深入的运维工作，比如监控、性能优化，复杂问题处理等等；
-看个人兴趣，更多方面可以考虑侧重在关于Nginx工作原理部分的深入学习，主要表现在阅读源码开始，比如具体的master/worker工作机制，Nginx内部的事件处理，内存管理等等；
-同时可以学习Nginx扩展的开发，可以定制一些自己私有的扩展；
-同时可以对Nginx+Lua有一定程度的了解，看看是否可以结合应用出更好模式；
-这个阶段的要求是对Nginx原理的深入理解，可以考虑成为Nginx方向的深入专业者。
-
-### MySQL/MongoDB：
-
-在第二阶段的基础上面，在MySQL应用方面，除了之前的基本SQL优化，还能够在完成一些复杂操作，比如大批量数据的导入导出，线上大批量数据的更改表结构或者增删索引字段等等高危操作；
-除了安装配置，已经能够处理更多复杂的MySQL的问题，比如各种问题的追查，主从同步延迟问题的解决、跨机房同步数据方案、MySQL高可用架构等都有涉及了解；
-对MySQL应用层面，对MySQL的核心关键技术比较熟悉，比如事务机制（隔离级别、锁等）、对触发器、分区等技术有一定了解和应用；
-对MySQL性能方面，有包括磁盘优化（SAS迁移到SSD）、服务器优化（内存、服务器本身配置）、除了二阶段的其他核心性能优化选项（innodb_log_buffer_size/back_log/table_open_cache/thread_cache_size/innodb_lock_wait_timeout等）、连接池软件选择应用，对show *（show status/show profile）类的操作语句有深入了解，能够完成大部分的性能问题追查；
-MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解，冷热备份，多IDC备份等；在MySQL原理方面，有更多了解，比如对MySQL的工作机制开始阅读部分源码，比如对主从同步（复制）技术的源码学习，或者对某个存储引擎（MyISAM/Innodb/TokuDB）等等的源码学习理解，如果条件允许，可以参考CSV引擎开发自己简单的存储引擎来保存一些数据，增强对MySQL的理解；
-在这个过程，如果自己有兴趣，也可以考虑往DBA方向发展。MongoDB层面，可以考虑比如说在写少读多的情况开始在线上应用MongoDB，或者是做一些线上的数据分析处理的操作，具体场景可以按照工作来，不过核心是要更好的深入理解RMDBS和NoSQL的不同场景下面的应用，如果条件或者兴趣允许，可以开始深入学习一下MongoDB的工作机制。
-
-### Redis/Memcached：
-
-在第二阶段的基础上面，能够更深入的应用和学习。因为Memcached不是特别复杂，建议可以把源码进行阅读，特别是内存管理部分，方便深入理解；Redis部分，可以多做一些复杂的数据结构的应用（zset来做排行榜排序操作/事务处理用来保证原子性在秒杀类场景应用之类的使用操作）；
-多涉及aof等同步机制的学习应用，设计一个高可用的Redis应用架构和集群；
-建议可以深入的学习一下Redis的源码，把在第二阶段积累的知识都可以应用上，特别可以阅读一下包括核心事件管理、内存管理、内部核心数据结构等充分学习了解一下。如果兴趣允许，可以成为一个Redis方面非常专业的使用者。
-
-### PHP：
-
-作为基础核心技能，在第二阶段的基础上面，需要有更深入的学习和应用
-
-从基本代码应用上面来说，能够解决在PHP开发中遇到95%的问题，了解大部分PHP的技巧；
-对大部分的PHP框架能够迅速在一天内上手使用，并且了解各个主流PHP框架的优缺点，能够迅速方便项目开发中做技术选型；
-在配置方面，除了常规第二阶段会的知识，会了解一些比较偏门的配置选项（php auto_prepend_file/auto_append_file），包括扩展中的一些复杂高级配置和原理（比如memcached扩展配置中的memcache.hash_strategy、apc扩展配置中的apc.mmap_file_mask/apc.slam_defense/apc.file_update_protection之类的）；
-对php的工作机制比较了解，包括php-fpm工作机制（比如php-fpm在不同配置机器下面开启进程数量计算以及原理），对zend引擎有基本熟悉（vm/gc/stream处理），阅读过基本的PHP内核源码（或者阅读过相关文章），对PHP内部机制的大部分核心数据结构（基础类型/Array/Object）实现有了解，对于核心基础结构（zval/hashtable/gc）有深入学习了解；
-能够进行基本的PHP扩展开发，了解一些扩展开发的中高级知识（minit/rinit等），熟悉php跟apache/nginx不同的通信交互方式细节（mod_php/fastcgi）；
-除了开发PHP扩展，可以考虑学习开发Zend扩展，从更底层去了解PHP。
-
-### C/C++：
-
-在第二阶段基础上面，能够在C/C++语言方面有更深入的学习了解，能够完成中小型C/C++系统的开发工作；
-除了基本第二阶段的基础C/C++语法和数据结构，也能够学习一些特殊数据结构（b-tree/rb-tree/skiplist/lsm-tree/trie-tree等）方便在特殊工作中需求；
-在系统编程方面，熟悉多进程、多线程编程；多进程情况下面了解大部分多进程之间的通信方式，能够灵活选择通信方式（共享内存/信号量/管道等）；
-多线程编程能够良好的解决锁冲突问题，并且能够进行多线程程序的开发调试工作；同时对网络编程比较熟悉，了解多进程模型/多线程模型/异步网络IO模型的差别和选型，熟悉不同异步网络IO模型的原理和差异（select/poll/epoll/iocp等），并且熟悉常见的异步框架（ACE/ICE/libev/libevent/libuv/Boost.ASIO等）和使用，如果闲暇也可以看看一些国产自己开发的库（比如muduo）；
-同时能够设计好的高并发程序架构（leader-follow/master-worker等）；
-了解大部分C/C++后端Server开发中的问题（内存管理、日志打印、高并发、前后端通信协议、服务监控），知道各个后端服务RPC通信问题（struct/http/thirft/protobuf等）；
-能够更熟络的使用GCC和GDB来开发编译调试程序，在线上程序core掉后能够迅速追查跟踪解决问题；
-通用模块开发方面，可以积累或者开发一些通用的工具或库（比如异步网络框架、日志库、内存池、线程池等），不过开发后是否应用要谨慎，省的埋坑去追bug；
-
-### 前端：
-
-深入了解HTTP协议（包括各个细致协议特殊协议代码和背后原因，比如302静态文件缓存了，502是nginx后面php挂了之类的）；
-除了之前的前端方面的各种框架应用整合能力，前端方面的学习如果有兴趣可以更深入，表现形式是，可以自己开发一些类似jQuery的前端框架，或者开发一个富文本编辑器之类的比较琐碎考验JavaScript功力；
-
-### 其他领域语言学习：
-
-在基础的PHP/C/C++语言方面有基本积累，建议在当前阶段可以尝试学习不同的编程语言，看个人兴趣爱好，脚本类语言可以学学 Python/Ruby 之类的，函数式编程语言可以试试 Lisp/Haskell/Scala/Erlang 之类的，静态语言可以试试 Java/Golang，数据统计分析可以了解了解R语言，如果想换个视角做后端业务，可以试试 Node.js还有前面提到的跟Nginx结合的Nginx_Lua等。学习不同的语言主要是提升自己的视野和解决问题手段的差异，比如会了解除了进程/线程，还有轻量级协程；
-比如在跨机器通信场景下面，Erlang的解决方案简单的惊人；比如在不想选择C/C++的情况下，还有类似高效的Erlang/Golang可用等等；
-主要是提升视野。
-
-### 其他专业方向学习：
-
-在本阶段里面，会除了基本的LNMP技能之外，会考虑一些其他领域知识的学习，这些都是可以的，看个人兴趣和长期的目标方向。
-
-目前情况能够选择的领域比较多，比如、云计算（分布式存储、分布式计算、虚拟机等），机器学习（数据挖掘、模式识别等，应用到统计、个性化推荐），自然语言处理（中文分词等），搜索引擎技术、图形图像、语音识别等等。
-
-除了这些高大上的，也有很多偏工程方面可以学习的地方，比如高性能系统、移动开发（Android/IOS）、计算机安全、嵌入式系统、硬件等方向。
-
-### 系统设计：
-
-系统设计在第二阶段的基础之上，能够应用掌握的经验技能，设计出比较复杂的中大型系统，能够解决大部分线上的各种复杂系统的问题，完成类似 浏览器 -< CDN -< 负载均衡 -<接入层 -< Nginx+PHP -< 业务缓存 -< 数据库 -< 各路复杂后端RPC交互（存储后端、逻辑后端、反作弊后端、外部服务） -< 更多后端 酱紫的复杂业务；
-能够支撑每天数千万到数亿流量网站的正常开发维护工作。
-
 ## 面试
 
-> mysql_real_escape_string mysql_escape_string区别
+* [Web 开发进阶指南](https://laravel-china.org/articles/9059/web-development-guide)
+* [todayqq/PHPerInterviewGuide](https://github.com/todayqq/PHPerInterviewGuide)
+* [sushengbuhuo/php-interview-2018](https://github.com/sushengbuhuo/php-interview-2018)
+* [xianyunyh/PHP-Interview](https://github.com/xianyunyh/PHP-Interview)PHP面试整理的资料。包括PHP、MySQL、Linux、计算机网络等资料
+* [金题](https://www.jintix.com/)
+* [colinlet/PHP-Interview-QA](https://github.com/colinlet/PHP-Interview-QA):PHP面试问答
+* [](https://github.com/disxo/PHP-interview-myway)
 
+```
+> mysql_real_escape_string mysql_escape_string区别
 mysql_real_escape_string需要预先连接数据库，并可在第二个参数传入数据库连接（不填则使用上一个连接）
 两者都是对数据库插入数据进行转义，但是mysql_real_escape_string转义时，会考虑数据库连接的字符集。
 它们的用处都是用来能让数据正常插入到数据库中，并防止sql注入，但是并不能做到100%防止sql注入。
 
 > 内存泄漏
-
 内存泄漏是因为一块被分配内存既不能被使用，也不能被回收，直到浏览器进程结束。
-
 页面元素被删除，但是绑定在该元素上的事件未被删除；
 闭包维持函数内局部变量（外部不可控），使其得不到释放；
 意外的全局变量；
 引用被删除，但是引用内的引用，还存在内存中。
-
 外部调用类函数
 
 > sql注入
-
 ZEND引擎维护了一个栈zval，每个创建的变量和资源都会压入这个栈中，每个压入的数组结构都类似：[refcount => int, is_ref => 0|1, value => union, type => string]，变量被unset时，ref_count如果变成0，则被回收。
 
 当遇到变量循环引用自身时，使用同步回收算法回收。
@@ -2213,14 +2094,10 @@ sapi是php封装的对外数据传递接口，通常有cgi/fastcgi/cli/apache2ha
 
 crc32
 
-
-索引用b+树存储，而不是哈希表，数据库索引存储还有其他数据结构吗？
-
-答：O(log(n))，O(1)
-
-因为哈希表是散列的，在遇到`key`>'12'这种查找条件时，不起作用，并且空间复杂度较高。
-
+> 索引用b+树存储，而不是哈希表，数据库索引存储还有其他数据结构吗？
+O(log(n))，O(1).因为哈希表是散列的，在遇到`key`>'12'这种查找条件时，不起作用，并且空间复杂度较高。
 备注：b+数根据层数决定时间复杂度，数据量多的情况下一般4-5层，然后用二分法查找页中的数据，时间复杂度远小于log(n)。
+```
 
 ## 大数据
 
@@ -2228,86 +2105,6 @@ crc32
 * 如果正在做SQL查询，然后获得结果，并把很多数字弄到一起，看看能不能使用像SUM（）和AVG（）之类的函数调用GROUP BY语句
     - 跟普遍的情况下，让数据库处理尽量多的计算。一点很重要的提示是：（至少在MySQL里是这样）布尔表达式的值为0或1，如果有创意的话，可以使用SUM（）和它的小伙伴们做些很让人惊讶的事情。
 * 是不是把这些同样很耗费时间的数字计算了很多遍。例如，假设1000袋土豆的成本是昂贵的计算，但并不需要把这个成本计算500次，然后才把1000袋土豆的成本存储在一个数组或其他类似的地方，所以你不必把同样的东西翻来覆去的计算。这个技术叫做记忆术，在像你这样的报告中使用往往会带来奇迹般的效果
-
-## 安全
-
-* md5：一种信息摘要算法（其实就是哈希），不是加密算法，因为md5不可逆，但是加解密是一个可逆的过程
-* 分类
-    - 对称加密，常见算法 DES、3DES、AES等
-        + 用同一个密钥对信息加解密
-        + 欲要加密，必先加密密钥的矛盾
-        + [gibberish-aes-php](https://github.com/ivantcholakov/gibberish-aes-php)
-    - 非对称加密，RSA、DSA、ECDH等
-        + 公钥和私钥是成双成对生成的，二者之间通过某种神秘的数学原理连接
-        + 公钥加密的数据，只能通过相应的私钥解密；私钥加密的数据，只能通过对应的公钥解密
-        + 发给谁信息用谁公钥加密,用自己公钥加密，只有自己私钥解密，利用自己私钥加密，所有有自己公钥的都可以解密
-        + 私钥加密，公钥验签
-        + 公钥可以颁发给任何人，私钥自己保留
-        + [pikirasa](https://github.com/vlucas/pikirasa)
-        + 加密周期长,耗资源
-    - 混合
-        + 随机生成一个AES对称加密用的密钥，然后用客户端的RSA公钥加密后传给客户端
-        + 客户端再通过自己的RSA私钥解密得到这个AES对称密钥，然后再用这个AES对称密钥进行后续的加解密即可
-        + 给这个AES密钥设定一个有效期，过期后，就再次利用上面的流程申请新的AES密钥即可
-* 密钥协商\交换
-    - 避免密钥在网络上的传输被劫持导致的安全问题
-    - 利用RSA等非对称加密技术进行交换
-    - 利用专门伺候密钥交换需求的交换算法，比如DH算法，全称叫做Diffie-Hellman密钥交换
-        + 元首手里有的数据有100（基数）、9、300（加密），古德里安手里的数据有100、3、900（加密），然后两个人此时只需要默默地做下面这一步：元首：9 * 300 = 2700 古德里安：3 * 900 = 2700，就是2700
-        + [diffie-hellman-php](https://github.com/jcink/diffie-hellman-php)
-        + ECDH [ECDH-PHP](https://github.com/Querdos/ECDH-PHP)
-
-```php
-https://github.com/Querdos/ECDH-PHP
-
-<?php
-require_once './autoloader.php';
-use Querdos\lib\ECDHCurve25519;
-$xitele   = new ECDHCurve25519();
-$gudelian = new ECDHCurve25519();
-$xitele->computeSecret( $gudelian->getPublic() );
-$gudelian->computeSecret( $xitele->getPublic() );
-// shareKey1 和 shareKey2 就是协商出来的密钥
-$shareKey1 = $xitele->getSecret();
-echo $shareKey1.PHP_EOL;
-$shareKey2 = $gudelian->getSecret();
-echo $shareKey2.PHP_EOL;
-// 我们用gmp cmp来对比是否为同一个密钥
-if ( 0 == gmp_cmp( $shareKey1, $shareKey2 ) ) {
-  echo "一样".PHP_EOL;
-}
-else {
-  echo "不一样".PHP_EOL;
-}
-// 除此之外，ecdh比dh多了一个验证数据签名验证，也就是说ecdh可以检验数据是否被篡改！
-$msg = "hello world";
-$signature = $xitele->signMessage( $msg );
-if ( $gudelian->verifySignature( $signature, $xitele->getPublic(), $msg ) ) {
-  echo "验证数据签名成功".PHP_EOL;
-}
-else {
-  echo "验证数据签名失败".PHP_EOL;
-}
-exit;
-```
-
-## 错误
-
-* `E_ALL & ~E_NOTICE` # 除了提示级别
-* `E_ALL ^ E_NOTICE` #
-* `E_ERROR | E_RECOVERABLE_ERROR` # 只显示错误和可恢复
-
-```
-    |- Exception implements Throwable
-        |- ...
-    |- Error implements Throwable
-        |- TypeError extends Error
-        |- ParseError extends Error
-        |- AssertionError extends Error
-        |- ArithmeticError extends Error
-            |- DivisionByZeroError extends ArithmeticError
-
-```
 
 ## [xdebug](https://xdebug.org/)
 
@@ -2360,15 +2157,6 @@ URL # 实际URL
 >  5096 segmentation fault (core dumped)  php http_server.php
 
 >  Warning: "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"?
-
-## 面试
-
-* [Web 开发进阶指南](https://laravel-china.org/articles/9059/web-development-guide)
-* [todayqq/PHPerInterviewGuide](https://github.com/todayqq/PHPerInterviewGuide)
-* [sushengbuhuo/php-interview-2018](https://github.com/sushengbuhuo/php-interview-2018)
-* [xianyunyh/PHP-Interview](https://github.com/xianyunyh/PHP-Interview):PHP面试整理的资料。包括PHP、MySQL、Linux、计算机网络等资料
-* [金题](https://www.jintix.com/)
-* [colinlet/PHP-Interview-QA](https://github.com/colinlet/PHP-Interview-QA):PHP面试问答
 
 ## 扩展
 
@@ -2457,7 +2245,7 @@ pecl channel-update pecl.php.net
 
 ## 最佳实践
 
-*  配置文件（configuration file）:写在一个文件里,方便地适应开发环境的变化。配置文件通常包含以下信息：数据库参数、email地址、各类选项、debug和logging输出开关、应用程序常数
+* 配置文件（configuration file）:写在一个文件里,方便地适应开发环境的变化。配置文件通常包含以下信息：数据库参数、email地址、各类选项、debug和logging输出开关、应用程序常数
 * 名称空间（namespace）: 选择类和函数名的时候，必须很小心，避免出现重名。尽可能不要在类以外，放置全局性函数，类对内部的属性和方法，相当于有一层名称空间保护。如果你确实有必要声明全局性函数，那么使用一个前缀，比如dao_factory()、db_getConnection()、text_parseDate()等等
 * 数据库抽象层: PHP不提供数据库操作的通用函数，每种数据库都有一套自己的函数,不应该直接使用这些函数.数据库抽象层通常比系统本身的数据库函数，更易用一些
 * "值对象"（Value Object, VO）: 值对象（VO）在形式上，就像C语言的struct结构。它是一个只包含属性、不包含任何方法（或只包含很少方法）的类。一个值对象，就对应一个实体。它的属性，通常应该与数据库的字段名保持相同。此外，还应该有一个ID属性
@@ -2507,7 +2295,7 @@ pecl channel-update pecl.php.net
     - 《[深入PHP：面向对象、模式与实践（第3版）](https://www.amazon.cn/gp/product/B005D6IRRY)》
 * 《[Head First PHP & MySQL（中文版）](https://www.amazon.cn/gp/product/B004R1QIJU)》
 * 《PHP and MySQL Web Development PHP与MySQL程序设计(第5版)》
-* Modern PHP(中文版)
+* Modern PHP
 * 深入理解PHP:高级技巧、面向对象与核心技术(原书第3版)
 
 ## 工具

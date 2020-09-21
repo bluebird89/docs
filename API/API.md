@@ -284,6 +284,8 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
     - 基于访问控制列表（ACL）
     - 基于用户角色的访问控制（RBAC）
 * OAuth 代表开放授权协议。这允许通过在 HTTP 服务上启用客户端应用（例如第三方提供商 Facebook，GitHub等）来访问资源所有者的资源。因此，你可以在不使用其凭据的情况下与另一个站点共享存储在一个站点上的资源
+* 如果禁用浏览器 cookie，如何实现用户追踪和认证
+    - 把 user ID 存储到 local storage 中当做 token 使用
 
 ```
 {

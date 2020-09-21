@@ -626,6 +626,9 @@ sudo apt install gnome-tweak-tool
 gsettings set org.gnome.desktop.interface gtk-theme Ant
 gsettings set org.gnome.desktop.wm.preferences theme Ant
 
+# 调整界面的缩放比例
+gsettings set org.gnome.desktop.interface scaling-factor 2
+
 gsettings set org.gnome.settings-daemon.plugins.orientation active false # 禁止屏幕自动旋转
 gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
 
