@@ -3,7 +3,7 @@
 A PHP Framework For Web Artisans https://laravel.com
 
 * 8.0
-  - php artisan serve 命令增强:更新 .env 文件后不再需要运行 php artisan serve 手动重启 Web 服务器，Laravel 会监听 .env 文件的修改并自动替你重启
+  - `php artisan serve` 命令增强:更新 .env 文件后不再需要重新运行命令
   - 模型类目录:初始化项目后在代码骨架中提供了 app/Models 目录，并将新建的模型类默认存放到这个目录
   - 模型工厂类
   - [Laravel Jetstream](https://jetstream.laravel.com/):进行优化和全新设计的 Laravel UI 脚手架代码
@@ -27,13 +27,6 @@ A PHP Framework For Web Artisans https://laravel.com
   - vagrant box add [--name] laravel\homestead [homestead.box]
     + <https://atlas.hashicorp.com/laravel/boxes/homestead/versions/2.1.0/providers/virtualbox.box>
     + <https://vagrantcloud.com/laravel/boxes/homestead/versions/10.0.0/providers/virtualbox.box>
-  - `vagrant list`
-  - git clone <https://github.com/laravel/homestead.git> Homestead
-  - `bash init.sh`
-  - 修改.homestread\Homestead.yaml
-  - 修改scripts/homestead.rb
-  - vagrant provision
-  - vagrant init
   - vagrant up:The SSH command responded with a non-zero exit status.
   - 添加ip
   - 从主机的数据库客户端连接到 MySQL 或 Postgres，就连接到 127.0.0.1 和端口 33060 (MySQL) 或 54320 (Postgres)。账号密码分别是 homestead／secret
@@ -61,12 +54,21 @@ brew install php  # 确保 ~/.composer/vendor/bin
 brew install mysql # 安装MySQL
 brew services start mysql # 启动服务
 
+vagrant list
+git clone https://github.com/laravel/homestead.git
+bash init.sh
+
+# homestread\Homestead.yaml
+
 # scripts/homestead.rb
 config.vm.box = "laravel/homestead" #box的名字（需与盒子列表中的一致）
 config.vm.box_version = "0" #box的版本号（需与盒子列表中的一致）
 config.vm.box_check_update = false #box是否检查更新
 config.ssh.username = 'vagrant'
 config.ssh.password = 'vagrant'
+
+vagrant provision
+vagrant init
 
 composer global require laravel/valet
 export PATH=$PATH:~/.composer/vendor/bin
@@ -128,7 +130,7 @@ dump-server：启动 dump server 收集 dump 信息
 
 启动时会加载项目中的.env文件中变量,bootstrap过程中的LoadEnvironmentVariables.超级全局变量 `$_ENV` 中或者 `env` 函数检索变量值
 
-* 开发、测试、生产三套环境:.env.dev`、`.env.test`、`.env.prod`
+* 开发、测试、生产三套环境:`.env.dev`、`.env.test`、`.env.prod`
   - nginx配置文件里设置APP_ENV环境变量fastcgi_param APP_ENV dev
   - 设置服务器上运行PHP的用户的环境变量，比如在www用户的/home/www/.bashrc中添加export APP_ENV dev
   - 在部署项目的持续集成任务或者部署脚本里执行`cp .env.dev .env`
@@ -155,152 +157,9 @@ if (App::environment(['local', 'staging'])) {
     // 环境为 local 或 staging
 }
 
-# 清除配置缓存
+# 配置缓存
 php artisan config:cache  # 所有配置信息合并到一个文件里，减少运行时文件的载入数量
 php artisan config:clear  # 删除配置的缓存文件
-```
-
-## Artisan
-
-* 利用PHP的CLI构建了强大Console工具，创建想要的模板类以及管理配置应用
-* 自定义的 Artisan 命令
-  - 通过 make:command 来生成,包含了控制台内核，可以用来注册自定义 Artisan 命令和定义计划任务的地方
-* 应用根目录有一个 artisan 文件,在 artisan 文件中，处理流程会像 Web 请求一样，注册类的自动加载器，初始化容器和异常处理器，获取用户输入，执行处理逻辑，最后发送响应，只不过这一切都是在控制台中完成
-* 选项：有前缀 --，可以在没有值的情况下使用
-  - -v、-vv、-vvv：命令执行输出的三个级别，分别代表正常、详细、调试
-  - --no-interaction：不会问任何交互问题，所以适用于运行无人值守自动处理命令
-  - --env：允许你指定命令运行的环境
-  - --version：打印当前 Laravel 版本
-* 参数：必须设值或默认值
-  - 必须要设置选项值，可以加上一个 = `make:migration {name} {--table=}`
-  - -q：禁止所有输出
-  - 必填参数，需要用花括号将其包裹起来
-  - 可选参数，可以在参数名称后面加一个问号 `make:migration {name?}`
-  - 可选参数定义默认值，可以这么做：`make:migration {name=create_users_table}`
-* 数组参数和数组选项:使用 * 通配符
-  - `make:migration {name*} {--table=*}`
-* 分组：
-  - app：只包含 app:name 命令，用于替换应用默认命名空间 App\
-  - auth：只包含 auth:clear-resets，用于从数据库清除已过期的密码 Token
-  - cache：应用缓存相关命令
-  - config：config:cache 用于缓存应用配置，config:clear 用于清除缓存配置
-  - db：db:seed 用于通过填充器填充数据库（如果编写了填充器的话）
-  - event：event:generate 用于根据注册信息生成未创建的事件类及监听器类
-  - key：key:generate 用于手动设置应用的 APP_KEY
-  - make：用于根据模板快速生成应用各种脚手架代码，如认证、模型、控制器、数据库迁移文件等等等，我们会将每个命令穿插在相应教程中介绍
-  - migrate：数据库迁移相关命令（数据库教程中会详细介绍）
-  - notifications：notifications:table 用于生成通知表
-  - optimize：optimize:clear 用于清除缓存的启动文件
-  - package：package:discover 用于重新构建缓存的扩展包 manifest
-  - queue：队列相关命令（队列教程中会详细介绍）
-  - route：路由相关命令，route:cache 和 route:clear 分别用于缓存路由信息和清除路由缓存，route:list 用于列出应用所有路由信息
-  - schedule：调度任务相关命令（调度任务教程中会介绍）
-  - session：对于数据库驱动的 Session，我们通过 session:table 生成 sessions 数据表
-  - storage：storage:link 生成一个软链 public/storage 指向 storage/app/public
-  - vendor：vendor:publish 用于发布扩展包中的公共资源
-  - view：view:cache 用于编译应用所有 Blade 模板，view:clear 用于清除这些编译文件
-* 通过 Artisan:call() 调用指定命令，也可以通过 Artisan:queue() 将命令推送到队列中执行
-
-```sh
-php artisan --version|-V
-php artisan help [name]  # 显示命令行帮助
-php artisan list  # 列出命令
-
-php artisan env # 显示当前框架环境
-php artisan down --message="Upgrading Database" --retry=60 # 进入维护模式
-php artisan up # 退出维护模式
-
-php artisan fresh # 清除包含框架外的支架
-php artisan migrate # 运行数据库迁移
-php artisan optimize # 为了更好的框架去优化性能
-php artisan serve
-php artisan app:name #  设置应用程序命名空间
-
-php artisan auth:clear-resets # 清除过期的密码重置密钥 未使用过
-
-php artisan cache:clear # 清除应用程序缓存
-php artisan cache:table # 创建一个缓存数据库表的迁移
-
-php artisan db:seed # 数据库生成模拟数据
-
-php artisan event:generate  # 生成event和listen  需要实现配置eventserviceprivoder
-
-php artisan make:controller App\TestController # 指定创建位置 在app目录下创建TestController
-php artisan make:controller PhotoController --resource # 创建Rest风格资源控制器
-php artisan make:controller PhotoController --resource --model=Photo
-
-php artisan make:middleware # 生成一个中间件
-
-php artisan make:model Models/Blog -m
-php artisan make:Model App\\Models\\User(linux or macOs 加上转义符) # 指定路径创建
-php artisan make:provider # 生成一个服务提供商的类
-php artisan make:request #  生成一个表单消息类
-
-php artisan vendor:publish # 发布来自插件包的资源:
-php artisan vendor:publish # 发表一些可以发布的有用的资源来自提供商的插件包
-
-php artisan make:migration create_users_table --create=users #  生成一个迁移文件
-php artisan migrate:install # 创建一个迁移库文件
-php artisan migrate:refresh # 复位并重新运行所有的迁移
-php artisan migrate:reset # 回滚全部数据库迁移
-php artisan migrate:rollback #  回滚最后一个数据库迁移
-php artisan migrate:status  # 显示列表的迁移
-
-php artisan queue:failed  # 列出全部失败的队列工作
-php artisan queue:failed-table # 创建一个迁移的失败的队列数据库工作表
-php artisan queue:flush # 清除全部失败的队列工作
-php artisan queue:forget #  删除一个失败的队列工作
-php artisan queue:listen #  监听一个确定的队列工作
-php artisan queue:restart # 重启现在正在运行的所有队列工作
-php artisan queue:retry # 重试一个失败的队列工作
-php artisan queue:subscribe # 订阅URL,放到队列上
-php artisan queue:table # 创建一个迁移的队列数据库工作表
-php artisan queue:work  # 进行下一个队列任务
-
-php artisan schedule:run # 运行预定命令
-php artisan optimize --force # 把常用加载的类合并到一个文件里，通过减少文件的加载.生成 bootstrap/cache/compiled.php 和 bootstrap/cache/services.json 两个文件。可以通过修改 config/compile.php 文件来添加要合并的类。在 production 环境中，参数 --force 不需要指定，文件就会自动生成
-php artisan clear-compiled  # 清除类映射加载优化
-php artisan view:clear
-php artisan session:table # 创建一个迁移的SESSION数据库工作表
-
-php artisan baum # Get Baum version notice.
-php artisan baum:install # Scaffolds a new migration and model suitable for Baum
-```
-
-## Tinker 命令行交互式 Shell
-
-* 原生 php -a
-* 一个由 PsySH 扩展包驱动的REPL（Read-Eval-Print Loop，即终端命令行"读取-求值-输出"循环工具）,通过命令行与整个 Laravel 应用进行交互，包括 Eloquent ORM、任务、事件等等。
-  - psysh `composer g require psy/psysh:@stable`
-  - 添加一些命令到 Shell，这些命令定义在 Laravel\Tinker\Console\TinkerCommand 的 $commandWhitelist 属性中
-* 测试 Laravel 代码
-  - 可以使用控制台来创建一个新的模型，将其保存到数据库，然后查询这条记录
-
-```
-php artisan tinker
-//生成30条数据
-factory(App\User::class,30)->create()
-
-// 交互 tinker使用
-php artisan tinker
-Psy Shell v0.7.2 (PHP 5.6.19 鈥?cli) by Justin Hileman
-$user = new App\User;
-=> App\User {#628}
-$user->name = 'admin'
-=> "admin"
-$user->email = 'fation@126.com'
-=> "fation@126.com"
-$user->password = bcrypt('123456');
-=> "$2y$10$kyCuwqSpzGTTZgAPMgCDgung9miGRygyCAIKHJhylYyW9osKKc3lu"
-$user->save();
-"insert into `users` (`name`, `email`, `password`, `updated_at`, `created_at`) values (?, ?, ?, ?, ?)"
-=> true
-exit
-
-# 查看帮助文档
-doc config
-# 查看该函数的代码
-show config
 ```
 
 ## 概念
@@ -440,7 +299,7 @@ $this->app->resolving(HelpSpot\API::class, function ($api, $app) {
 });
 ```
 
-## 中间件（Middleware）
+## 中间件 Middleware
 
 提供了一种方便的机制来过滤进入应用的 HTTP 请求,中间件都位于 app/Http/Middleware 目录
 
@@ -460,7 +319,7 @@ $this->app->resolving(HelpSpot\API::class, function ($api, $app) {
 * 可以接受额外参数
 * Terminable 中间件：在 HTTP 响应发送到浏览器之后处理一些工作。内置的「session」中间件会在响应发送到浏览器之后将会话数据写入存储器中。如果在中间件中定义一个 terminate 方法，则会在响应发送到浏览器后自动调用
 
-```php
+```
 php artisan make:middleware CheckAge
 ```
 
@@ -477,21 +336,9 @@ php artisan make:middleware CheckAge
     - 依赖注入的主要优点之一是切换注入类的实现的能力。这在测试的时候很有用，因为你可以注入一个 mock 或者 stub ，并断言在 stub 上调用的各种方法。
     - Facades 使用动态方法来代理从服务容器解析的对象的方法调用，我们可以像测试注入的类实例一样来测试 Facades
 * Facades Vs 辅助函数
-    - 在底层，辅助函数 cache 实际是调用 Cache facade 中的 get 方法。因此，尽管我们使用的是辅助函数，我们依然可以编写以下测试来验证该方法是否使用我们预期的参数来调用：
+    - 底层辅助函数实际是调用facade
 
-```php
-public function testBasicExample()
-{
-    Cache::shouldReceive('get')
-         ->with('key')
-         ->andReturn('value');
-
-    $this->visit('/cache')
-         ->see('value');
-}
-```
-
-## 契约 (Contracts)
+## 契约 Contracts
 
 一组定义框架提供的核心服务的接口,框架对每个契约都提供了相应的实现
 
@@ -502,34 +349,141 @@ public function testBasicExample()
     - 根据接口定义，就很容易判断给定服务提供的功能。 可以将契约视为说明框架功能的简洁文档。
 * 使用：要获得一个契约的实现，只需要被解析的类的构造函数中添加「类型提示」即可
 
-```php
-<?php
+## 辅助函数
 
-namespace App\Orders;
+* 数组 & 对象
+* Str
+* trans
 
-use Illuminate\Contracts\Cache\Repository as Cache;
+## Artisan
 
-class Repository
-{
-    /**
-     * 缓存实例。
-     */
-    protected $cache;
+* 利用PHP的CLI构建了强大Console工具，创建想要的模板类以及管理配置应用
+* 自定义的 Artisan 命令
+  - 通过 make:command 来生成,包含了控制台内核，可以用来注册自定义 Artisan 命令和定义计划任务的地方
+* 应用根目录有一个 artisan 文件,在 artisan 文件中，处理流程会像 Web 请求一样，注册类的自动加载器，初始化容器和异常处理器，获取用户输入，执行处理逻辑，最后发送响应，只不过这一切都是在控制台中完成
+* 选项：有前缀 --，可以在没有值的情况下使用
+  - -v、-vv、-vvv：命令执行输出的三个级别，分别代表正常、详细、调试
+  - --no-interaction：不会问任何交互问题，所以适用于运行无人值守自动处理命令
+  - --env：允许你指定命令运行的环境
+  - --version：打印当前 Laravel 版本
+* 参数：必须设值或默认值
+  - 必须要设置选项值，可以加上一个 = `make:migration {name} {--table=}`
+  - -q：禁止所有输出
+  - 必填参数，需要用花括号将其包裹起来
+  - 可选参数，可以在参数名称后面加一个问号 `make:migration {name?}`
+  - 可选参数定义默认值，可以这么做：`make:migration {name=create_users_table}`
+* 数组参数和数组选项:使用 * 通配符
+  - `make:migration {name*} {--table=*}`
+* 分组：
+  - app：只包含 app:name 命令，用于替换应用默认命名空间 App\
+  - auth：只包含 auth:clear-resets，用于从数据库清除已过期的密码 Token
+  - cache：应用缓存相关命令
+  - config：config:cache 用于缓存应用配置，config:clear 用于清除缓存配置
+  - db：db:seed 用于通过填充器填充数据库（如果编写了填充器的话）
+  - event：event:generate 用于根据注册信息生成未创建的事件类及监听器类
+  - key：key:generate 用于手动设置应用的 APP_KEY
+  - make：用于根据模板快速生成应用各种脚手架代码，如认证、模型、控制器、数据库迁移文件等等等，我们会将每个命令穿插在相应教程中介绍
+  - migrate：数据库迁移相关命令（数据库教程中会详细介绍）
+  - notifications：notifications:table 用于生成通知表
+  - optimize：optimize:clear 用于清除缓存的启动文件
+  - package：package:discover 用于重新构建缓存的扩展包 manifest
+  - queue：队列相关命令（队列教程中会详细介绍）
+  - route：路由相关命令，route:cache 和 route:clear 分别用于缓存路由信息和清除路由缓存，route:list 用于列出应用所有路由信息
+  - schedule：调度任务相关命令（调度任务教程中会介绍）
+  - session：对于数据库驱动的 Session，我们通过 session:table 生成 sessions 数据表
+  - storage：storage:link 生成一个软链 public/storage 指向 storage/app/public
+  - vendor：vendor:publish 用于发布扩展包中的公共资源
+  - view：view:cache 用于编译应用所有 Blade 模板，view:clear 用于清除这些编译文件
+* 通过 Artisan:call() 调用指定命令，也可以通过 Artisan:queue() 将命令推送到队列中执行
 
-    /**
-     * 创建一个仓库实例。
-     *
-     * @param  Cache  $cache
-     * @return void
-     */
-    public function __construct(Cache $cache)
-    {
-        $this->cache = $cache;
-    }
-}
+```sh
+php artisan --version|-V
+php artisan help [name]  # 显示命令行帮助
+php artisan list  # 列出命令
+
+php artisan env # 显示当前框架环境
+php artisan down --message="Upgrading Database" --retry=60 # 进入维护模式
+php artisan up # 退出维护模式
+
+php artisan fresh # 清除包含框架外的支架
+php artisan migrate # 运行数据库迁移
+php artisan optimize # 为了更好的框架去优化性能
+php artisan serve
+php artisan app:name #  设置应用程序命名空间
+
+php artisan auth:clear-resets # 清除过期的密码重置密钥 未使用过
+
+php artisan cache:clear # 清除应用程序缓存
+php artisan cache:table # 创建一个缓存数据库表的迁移
+
+php artisan event:generate  # 生成event和listen  需要实现配置eventserviceprivoder
+
+php artisan make:model Models/Blog -m
+php artisan make:Model App\\Models\\User(linux or macOs 加上转义符) # 指定路径创建
+php artisan make:provider # 生成一个服务提供商的类
+php artisan make:request #  生成一个表单消息类
+
+php artisan vendor:publish # 发布插件包资源
+
+
+php artisan schedule:run # 运行预定命令
+php artisan optimize --force # 把常用加载的类合并到一个文件里，通过减少文件的加载.生成 bootstrap/cache/compiled.php 和 bootstrap/cache/services.json 两个文件。可以通过修改 config/compile.php 文件来添加要合并的类。在 production 环境中，参数 --force 不需要指定，文件就会自动生成
+php artisan clear-compiled  # 清除类映射加载优化
+php artisan view:clear
+php artisan session:table # 创建一个迁移的SESSION数据库工作表
+
+php artisan baum # Get Baum version notice.
+php artisan baum:install # Scaffolds a new migration and model suitable for Baum
 ```
 
-## 路由（Routes）
+## Tinker 命令行交互式 Shell
+
+* 原生 php -a
+* 一个由 PsySH 扩展包驱动的REPL（Read-Eval-Print Loop，即终端命令行"读取-求值-输出"循环工具）,通过命令行与整个 Laravel 应用进行交互，包括 Eloquent ORM、任务、事件等等。
+  - psysh `composer g require psy/psysh:@stable`
+  - 添加一些命令到 Shell，这些命令定义在 Laravel\Tinker\Console\TinkerCommand 的 $commandWhitelist 属性中
+* 测试 Laravel 代码
+  - 可以使用控制台来创建一个新的模型，将其保存到数据库，然后查询这条记录
+
+```
+php artisan tinker
+//生成30条数据
+factory(App\User::class,30)->create()
+
+// 交互 tinker使用
+php artisan tinker
+Psy Shell v0.7.2 (PHP 5.6.19 鈥?cli) by Justin Hileman
+$user = new App\User;
+=> App\User {#628}
+$user->name = 'admin'
+=> "admin"
+$user->email = 'fation@126.com'
+=> "fation@126.com"
+$user->password = bcrypt('123456');
+=> "$2y$10$kyCuwqSpzGTTZgAPMgCDgung9miGRygyCAIKHJhylYyW9osKKc3lu"
+$user->save();
+"insert into `users` (`name`, `email`, `password`, `updated_at`, `created_at`) values (?, ?, ?, ?, ?)"
+=> true
+exit
+
+# 查看帮助文档
+doc config
+# 查看该函数的代码
+show config
+```
+
+## Command
+
+* 结构
+  - signature
+  - description
+  - handle 命令执行时被调用
+
+```sh
+php artisan make:command SendEmails
+```
+
+## 路由 Routes
 
 * 基本路由：需要一个 URI 与一个 闭包
 * 默认路由：在 routes 目录中的路由文件中定义，这些文件都由框架自动加载
@@ -638,59 +592,14 @@ $action = Route::currentRouteAction();
   - `Route::apiResources(['photos' => 'PhotoController', 'posts' => 'PostController']);`
 
 ```php
-
-namespace App\Http\Controllers;
-
-use App\User;
-use App\Http\Controllers\Controller;
-
-class ShowProfile extends Controller
-{
-    /**
-     * 展示给定用户的信息。
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function __invoke($id)
-    {
-        return view('user.profile', ['user' => User::findOrFail($id)]);
-    }
-}
-
-$this->middleware(function ($request, $next) {
-    // ...
-
-    return $next($request);
-});
-
-Route::resource('user', 'AdminUserController', ['parameters' => [
-    'user' => 'admin_user'
-]]); # /user/{admin_user}
-
-# 在 AppServiceProvider 的 boot 中使用 Route::resourceVerbs 方法实现
-use Illuminate\Support\Facades\Route;
-
-/**
- * 引导任何应用服务。
- *
- * @return void
- */
-public function boot()
-{
-    Route::resourceVerbs([
-        'create' => 'crear',
-        'edit' => 'editar',
-    ]);
-}
-Route::resource('fotos', 'PhotoController')
-/fotos/crear
-/fotos/{foto}/editar
+php artisan make:controller App\TestController # 指定创建位置 在app目录下创建TestController
+php artisan make:controller PhotoController --resource # 创建Rest风格资源控制器
+php artisan make:controller PhotoController --resource --model=Photo
 ```
 
 ## 请求 request
 
-* 通过依赖注入的方式来获取当前 HTTP 请求的实例，你应该在控制器方法中类型提示 Illuminate\Http\Request。传入的请求的实例将通过 服务容器 自动注入
+* 通过依赖注入的方式来获取当前 HTTP 请求的实例，你应该在控制器方法中类型提示 Illuminate\Http\Request。传入的请求的实例将通过服务容器自动注入
 * 路由参数
 * 通过路由闭包获取请求:在路由闭包中类型提示 Illuminate\Http\Request 类。服务容器在执行时会自动将当前请求注入到闭包中
 * 方法
@@ -737,6 +646,7 @@ Route::resource('fotos', 'PhotoController')
 * 配置可信代理：应用程序有时不能生成 HTTPS 链接。通常这是因为你的应用程序正在从端口 80 上的负载平衡器转发流量，却不知道是否应该生成安全链接。
   - App\Http\Middleware\TrustProxies自定义应用程序信任的负载均衡器或代理。你信任的代理应该保存在这个中间件的 $proxies 数组中。使用 ** 来信任所有代理，protected $proxies = '**';
   - 可以配置代理发送包含原始请求信息的请求头
+* Illuminate\Support\Facades\Http
 
 ```php
 $request->flash();
@@ -867,7 +777,8 @@ $.ajaxSetup({
   - 视图响应：使用 view 方法
   - JSON 响应：json 方法
   - JSONP 响应：使用 json 方法并与 withCallback 方法配合使用
-  - 文件下载：download 方法可以用来生成强制用户浏览器下载指定路径文件的响应。download 方法的第二个参数接受一个文件名，它将作为用户下载的时所看见的文件名。最后，你可以传递一个 HTTP 响应头数组作为该方法的第三个参数
+* 存储
+  - 下载：download 方法可以用来生成强制用户浏览器下载指定路径文件的响应。download 方法的第二个参数接受一个文件名，它将作为用户下载的时所看见的文件名。最后，你可以传递一个 HTTP 响应头数组作为该方法的第三个参数
   - 文件响应：file 方法可以直接在用户浏览器中显示文件（不是发起下载），例如图像或者 PDF
   - 响应宏：定义可以在各种路由和控制器中重复使用的自定义响应，可以在 Response Facade 上使用 macro 方法。
 
@@ -875,12 +786,9 @@ $.ajaxSetup({
 Route::get('home', function () {
     return response('Hello World', 200)
                   ->header('Content-Type', 'text/plain')
+                  ->header('X-Header-One', 'Header Value')
                   ->cookie('name', 'value', $minutes);
 });
-return response($content)
-            ->header('Content-Type', $type)
-            ->header('X-Header-One', 'Header Value')
-            ->header('X-Header-Two', 'Header Value');
 return response($content)
             ->withHeaders([
                 'Content-Type' => $type,
@@ -920,28 +828,6 @@ return response()->download($pathToFile)->deleteFileAfterSend(true);
 
 return response()->file($pathToFile);
 return response()->file($pathToFile, $headers);
-
-# 定义响应宏
-namespace App\Providers;
-
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Response;
-
-class ResponseMacroServiceProvider extends ServiceProvider
-{
-    /**
-     * 注册应用程序的响应宏。
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        Response::macro('caps', function ($value) {
-            return Response::make(strtoupper($value));
-        });
-    }
-}
-return response()->caps('foo');
 ```
 
 ### 视图
@@ -1090,56 +976,6 @@ Schema::create('sessions', function ($table) {
 });
 php artisan session:table
 php artisan migrate
-
-namespace App\Extensions;
-
-class MongoHandler implements SessionHandlerInterface
-{
-   # 用于基于文件的 Session 存储系统,不需要在该方法中放置任何代码
-    public function open($savePath, $sessionName) {}
-    # 跟 open 方法很相似，通常也可以被忽略
-    public function close() {}
-    # 应当返回与给定的 $sessionId 相匹配的 Session 数据的字符串格式。在你的自定义的驱动中获取或存储 Session 数据时，不需要进行任何序列化或其它编码，因为 Laravel 会执行序列化
-    public function read($sessionId) {}
-    # write 将与 $sessionId 关联的给定的 $data 字符串写入到一些持久化存储系统,不需要进行任何序列化或其它编码
-    public function write($sessionId, $data) {}
-    # 从持久化存储中移除与 $sessionId 相关联的数据
-    public function destroy($sessionId) {}
-    # 能销毁给定的 $lifetime （UNIX 的时间戳）之前的所有数据。对本身拥有过期机制的系统如 Memcached 和 Redis 而言，该方法可以置空
-    public function gc($lifetime) {}
-}
-
-namespace App\Providers;
-
-use App\Extensions\MongoSessionStore;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\ServiceProvider;
-
-class SessionServiceProvider extends ServiceProvider
-{
-    /**
-     * 执行注册后引导服务。
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        Session::extend('mongo', function ($app) {
-            // Return implementation of SessionHandlerInterface...
-            return new MongoSessionStore;
-        });
-    }
-
-    /**
-     * 在容器中注册绑定。
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-}
 ```
 
 ## 数据库
@@ -1196,6 +1032,8 @@ php artisan migrate:install
 php artisan migrate:refresh
 # 回滚所有的数据迁移
 php artisan migrate:reset
+php artisan migrate:rollback #  回滚最后一个数据库迁移
+php artisan migrate:status  # 显示列表的迁移
 
 php artisan make:seeder UsersTableSeeder
 php artisan db:seed
@@ -1289,7 +1127,9 @@ $posts = Cache::remember('index.posts', $minutes = 30, function()
 
 ### collection
 
-flat map
+* 为处理数组数据提供了流式、方便的封装
+* flat
+* map
 
 ## 事件 Event
 
@@ -1318,7 +1158,19 @@ flat map
   + 如果队列监听器任务执行次数超过在工作队列中定义的最大尝试次数，监听器的 failed 方法将会被自动调用
 * 事件是一种『钩子』，Fire 事件的位置就是放置钩子的地方。解耦，事件只定义发生了什么事
 * 一种管理 + 实现的体现，首先有一个总的目录，可以宏观的看到所有事件，而不需要每次都要打开控制器的方法才能知道注册后会发生什么
+* 事件订阅者是指那些在类本身中订阅多个事件的类，通过事件订阅者可以在单个类中定义多个事件处理器
+  - 订阅者需要定义一个 subscribe 方法，该方法中传入一个事件分发器实例
 * 场景
+
+## Mail
+
+```sh
+php artisan make:mail OrderShipped
+
+php artisan make:mail OrderShipped --markdown=emails.orders.shipped
+
+php artisan vendor:publish --tag=laravel-mail
+```
 
 ## Eloquent
 
@@ -1732,6 +1584,20 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
+## 广播 Broadcast
+
+* service
+  - [Pusher](https://pusher.com/)
+  - [Laravel Websockets](https://github.com/beyondcode/laravel-websockets)
+  - Redis 的功能 pub/sub
+  - Socket.IO
+
+## 通知
+
+```
+php artisan make:notification InvoicePaid
+```
+
 ## [jetstream](https://jetstream.laravel.com/)
 
 * Available Stacks
@@ -1809,9 +1675,70 @@ mix.webpackConfig({
 });
 ```
 
+## 认证 authentication
+
+* 配置文件: config/auth.php
+* 登录认证时做两件事，一个是从数据库存取用户数据，一个是把用户登录状态保存起来
+* 认证组件由「guards」和「providers」组成
+  - Guard 定义了用户在每个请求中如何实现认证,存储用户认证信息,主要和 Session 打交道（API 例外）
+  - Provider 定义了如何从持久化存储中获取用户信息
+    + 底层支持通过 Eloquent 和数据库查询构建器两种方式来获取用户
+    + 可以定义额外的 Provider
+* 浏览器认证服务
+  - 通过 Auth 和 Session 门面提供了内置的认证和会话服务，这些功能提供了基于 Cookie 的浏览器请求认证，可以使用这些门面提供的方法验证用户登录凭证然后对用户进行认证操作
+  - 这些服务还会自动存储相应的认证数据到用户 Session 并通过 HTTP 响应发送包含对应 Session ID 的 Cookie
+* API 认证服务
+  - 只会通过浏览器访问，使用 Laravel 内置的认证服务就好
+  - 提供了 API 接口，可以在 Passport 和 Sanctum 扩展包中任选其一提供 API 令牌认证。一般来说，优先使用 Sanctum，因为它位 API 认证、SPA 认证以及移动端认证提供了简单但完整的解决方案，包括对「作用域」和「权限」的支持
+  - Passport 可用于构建基于 OAuth2 规范的认证功能，比如我们要做开放平台，需要提供针对第三方应用的授权认证（比如微信、支付宝、QQ、微博之类的开发平台），则只能选择 Passport
+  - 新安装的 Laravel 项目中快速搭建认证系统，推荐使用 Laravel Jetstream，其中包含了 Laravel 内置的认证服务（通过 Laravel Fortify 集成）和 Laravel Sanctum 提供完整的用户认证解决方案
+* [Laravel Fortify](https://github.com/laravel/fortify) 是一个针对 Laravel 项目开发的开箱即用认证后端，实现了本文档介绍的大部分功能，包括基于 Cookie 的认证以及双因子认证和邮箱验证。
+
+## 授权 authorization
+
+* 一个简单的方式来管理授权逻辑以便控制对资源的访问权限,有两种方式，Gate 和 Policy 分别看作路由和控制器
+* Gate 提供了简单的基于闭包的方式进行授权
+  - 用于判断用户是否有权进行某项操作的闭包，通常使用 Gate 门面定义在 App\Providers\AuthServiceProvider 类中
+  - Gate 总是接收用户实例作为第一个参数，还可以接收相关的 Eloquent 模型实例作为额外参数
+  - 授权动作：使用 allows 或 denies 方法，需要注意的是可以不传用户实例到这些方法，Laravel 会自动将用户实例（当前用户）传递到 Gate 闭包
+* Policy：对特定模型或资源上的复杂授权逻辑进行分组
+  - 用于组织基于特定模型或资源的授权逻辑类
+
+```sh
+php artisan make:policy PostPolicy
+```
+
+## Passport
+
+* 一个 OAuth2 认证服务商，提供了多个 OAuth2「授权类型」以便颁发不同类型的访问令牌。总体来说，它是一个健全且复杂的 API 认证扩展包
+    + 大多数应用并不需要 OAuth2 规范提供的复杂特性，这会让开发者和用户都感到困惑
+    + 开发者也一直对如何使用 Passport 认证 SPA 应用和移动应用感到困扰。
+
+## Laravel Sanctum
+
+* 更加简单、更加精练的认证扩展包用于处理来自浏览器的第一方 Web 请求和基于令牌的 API 请求
+* 对于除了 API 接口之外还提供第一方 Web UI 的应用、或者前后端分离的单页面应用、以及带有移动客户端的 Laravel 应用，优先推荐使用 Sanctum 这个认证扩展包
+* Laravel Sanctum 是一个混合了 Web/API 认证的扩展包，可用于管理应用的整个认证流程
+* 工作原理
+  - 对于一个基于 Sanctum 提供认证服务的应用，当服务端接收到请求时，Sanctum 会先判断请求是否包含引用了认证 Session 的会话 Cookie，
+  - 如果没有通过会话 Cookie 认证，Sanctum 会继续检查请求是否包含 API 令牌，如果 API 令牌存在，则 Sanctum 会使用 API 令牌认证请求。想要了解更多关于这个处理流程的底层细节
+
+## Laravel Jetstream
+
+* 一个 UI 扩展包，基于 Tailwind CSS、Laravel Livewire 以及 Inertia.js 等前端技术栈为 Laravel Fortify 的后端认证服务提供了美观的、现代的 UI 界面。
+* Laravel Jetstream 除了提供基于浏览器的 Cookie 认证外，还内置集成了 Laravel Sanctum 提供 API 令牌认证
+
+```sh
+laravel new blog --jet
+```
+
 ## Mail
 
 * `Swift_TransportException with message 'Expected response code 250 but got code "530", with message "530 5.7.1 Authentication required`
+
+## Hash
+
+* Hash 门面为存储用户密码提供了安全的 Bcrypt 和 Argon2 哈希算法
 
 ## Restful风格
 
@@ -1996,10 +1923,36 @@ php artisan route:clear
 $arr[$key]['android_url'] = isset($val[6]) ? trim($val[6]) : '';
 ```
 
-## 任务调度
+## 队列
+
+```sh
+php artisan queue:table # 创建一个迁移的队列数据库工作
+php artisan migrate
+
+php artisan make:job ProcessPodcast
+
+php artisan queue:failed  # 列出全部失败的队列工作
+php artisan queue:failed-table # 创建一个迁移的失败的队列数据库工作表
+php artisan queue:flush # 清除全部失败的队列工作
+php artisan queue:forget #  删除一个失败的队列工作
+php artisan queue:listen #  监听一个确定的队列工作
+php artisan queue:restart # 重启现在正在运行的所有队列工作
+php artisan queue:retry # 重试一个失败的队列工作
+php artisan queue:subscribe # 订阅URL,放到队列上
+php artisan queue:work  # 进行下一个队列任务
+```
+
+## 任务调度 Task scheduler
 
 ```sh
 php artisan schedule:run
+```
+
+## API 资源类
+
+```sh
+php artisan make:resource Users --collection
+php artisan make:resource UserCollection
 ```
 
 ## [laravel/dusk](https://github.com/laravel/dusk)
@@ -2011,6 +1964,8 @@ php artisan schedule:run
 ```sh
 composer require --dev laravel/dusk
 php artisan dusk:install
+# .env 文件中设置 APP_URL 变量 与在浏览器中打开本应用的 URL 匹配
+# 手动启动 chromedrive
 php artisan dusk
 
 php artisan dusk:make LoginTest
@@ -2103,6 +2058,35 @@ php artisan jwt:secret # 使用
 </Files>
 ```
 
+## [laravel/telescope](https://github.com/laravel/telescope)
+
+* provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more
+* 调试助手。Telescope 可深入了解进入应用程序的请求、异常、日志条目、数据库查询、排队作业、邮件、通知、缓存操作、计划任务、变量转储等
+* [uri](./telescope)
+
+```sh
+composer require laravel/telescope
+php artisan telescope:install
+php artisan migrate
+
+php artisan telescope:publish # 更新
+# 从 app 配置文件中删除 TelescopeServiceProvider 服务提供注册。相反，在 AppServiceProvider 的 register 方法中手动注册服务
+php artisan vendor:publish --tag=telescope-migrations # 导出默认迁移
+# 配置文件 config/telescope.php 监听配置
+# app/Providers/TelescopeServiceProvider.php
+# 过滤 授权
+```
+
+## [Algolia](https://www.algolia.com/doc/api-client/laravel/algolia-and-scout/)
+
+Algolia is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke
+
+```sh
+composer require laravel/scout
+php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
+php artisan scout:import "App\Models\Post"
+```
+
 ### [andersao/l5-repository](https://github.com/andersao/l5-repository)
 
 Laravel 5 - Repositories to abstract the database layer http://andersao.github.io/l5-repository
@@ -2161,7 +2145,6 @@ fire 使用很少的代码快速构建一个功能完善的高颜值后台系统
   - [Adldap2/Adldap2-Laravel](https://github.com/Adldap2/Adldap2-Laravel):LDAP Authentication & Management for Laravel
   - [FrozenNode/Laravel-Administrator](https://github.com/FrozenNode/Laravel-Administrator):An administrative interface package for Laravel http://administrator.frozennode.com/
 * [LaravelCollective/html](https://github.com/LaravelCollective/html):HTML and Form Builders for the Laravel Framework
-* [Algolia](https://www.algolia.com/doc/api-client/laravel/algolia-and-scout/):Algolia is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke
 * [launcher-host/mercurius](https://github.com/launcher-host/mercurius):Real-time Messenger for Laravel http://mercurius.launcher.host/
 * DB
   - [Laravel-Backpack/CRUD](https://github.com/Laravel-Backpack/CRUD):Build a custom admin interface for your Eloquent models, using Laravel 5.2 to 5.7 http://backpackforlaravel.com
@@ -2172,7 +2155,6 @@ fire 使用很少的代码快速构建一个功能完善的高颜值后台系统
     + [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb#installation):A MongoDB based Eloquent model and Query builder for Laravel (Moloquent) https://jenssegers.com
 * [GrahamCampbell/Laravel-Throttle](https://github.com/GrahamCampbell/Laravel-Throttle):A rate limiter for Laravel 5 https://gjcampbell.co.uk/
 * debug
-  - [laravel/telescope](https://github.com/laravel/telescope):provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more
   - [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
   - [stefanzweifel/laravel-stats](https://github.com/stefanzweifel/laravel-stats):📈 Get insights about your Laravel or Lumen Project
   - [wujunze/laravel-debug-helper](https://github.com/wujunze/laravel-debug-helper):Laravel package to help debug
@@ -2246,27 +2228,6 @@ Debugbar::addMeasure('now', LARAVEL_START, microtime(true));
 Debugbar::measure('My long operation', function() {
     // Do something…
 });
-
-# Larave Telescope 是 Laravel 框架的优雅调试助手。Telescope 可深入了解进入应用程序的请求、异常、日志条目、数据库查询、排队作业、邮件、通知、缓存操作、计划任务、变量转储等
-composer require laravel/telescope
-php artisan telescope:install
-php artisan migrate
-
-php artisan telescope:publish # 更新
-# 从 app 配置文件中删除 TelescopeServiceProvider 服务提供注册。相反，在 AppServiceProvider 的 register 方法中手动注册服务
-php artisan vendor:publish --tag=telescope-migrations # 导出默认迁移
-# 配置文件 config/telescope.php 监听配置
-# app/Providers/TelescopeServiceProvider.php
-# 过滤 授权
-
-# Laravel Dusk
-composer require --dev laravel/dusk
-php artisan dusk:install
-# .env 文件中设置 APP_URL 变量 与在浏览器中打开本应用的 URL 匹配
-# 手动启动 chromedrive
-php artisan dusk
-
-php artisan dusk:make LoginTest
 
 # laravel/envoy
 composer global require laravel/envoy

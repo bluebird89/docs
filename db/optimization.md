@@ -615,6 +615,8 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
 * 更新频繁字段不适合创建索引,频繁查询条件字段应创建索引`select * from order_copy where id = $id`
 * 唯一性太差、基数（Cardinality）太小（比如说，该列的唯一值总数少于255、字段不适合单独创建索引，区分度不高，字段值离散度低 `select * from order_copy where sex=’女’`
 * 优先考虑 where、order by、GROUP BY 、JOIN 使用到的字段，对<，<=，=，>，>=，BETWEEN，IN，以及某些时候的LIKE才会使用索引
+* IN适合主表大子表小，EXIST适合主表小子表大
+    - 尝试改为join查询
 * 尽量避免使用 or，会导致数据库引擎放弃索引进行全表扫描
     - 用 union 代替 or
 * 尽量避免进行 null 值判断，会导致数据库引擎放弃索引进行全表扫描
@@ -623,6 +625,7 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
     - 如果是连续数值，可以用 between 代替
     - 如果是子查询，可以用 exists 代替
 * 查询条件不能用 <> 或者 !=
+    - 采用union聚合搜索结果
 * 不要过度使用索引:会导致过高的磁盘使用率以及过高的内存占用
     - 索引固然可以提高相应 select 效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时写操作有可能会重建索引,增加了大量I/O
     - 降低更新表速度：被索引的表上INSERT和DELETE会变慢，因为更新表时，MySQL不仅要保存数据，还要保存索引文件
@@ -789,6 +792,8 @@ explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by
         + `PREPARE stmt_name FROM SELECT * FROM 表名称 WHERE id_pk > (？* ？) ORDER BY id_pk ASC LIMIT M`
         + 尽可能的使用覆盖索引扫描，而不是查询所有的列。然后根据需要做一次关联查询再返回所有的列
         + 利用表的覆盖索引来加速分页查询
+        + 如果查询数据量超过30%，MYSQL不会使用索引
+        + `select * from orders where id > (select id from orders order by id desc  limit 1000000, 1) order by id desc limit 0,10`
 * 对于复杂的查询，可以使用中间临时表暂存数据
 * 拆分复杂 SQL 为多个小 SQL，避免大事务
 	- 简单的 SQL 容易使用到 MySQL 的 QUERY CACHE。
