@@ -84,7 +84,7 @@ Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
 Sec-WebSocket-Protocol: chat
 ```
 
-```js
+```
 if('WebSocket' in window){
     // 创建websocket实例
     var socket = new WebSocket('ws://localhost:8080');
@@ -185,7 +185,7 @@ this.heartTimer = setInterval(() => {
 
 ## 心跳检测
 
-```
+```go
 package main
 
 import (
