@@ -751,17 +751,20 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
 * 事件
     - onmousedown:点击鼠标按钮时
     - onmouseup: 释放鼠标按钮时
-    - onfocus:当输入字段获得焦点时
     - onclick:当用户点击鼠标时
+    - dbclick
+    - onmouseover 和 onmouseout当鼠标移动到或移出元素上时
+    - onfocus:当输入字段获得焦点时
+    - blur
     - onload当网页已加载时
       + 可用于检测访问者的浏览器类型和浏览器版本，并基于这些信息来加载网页的正确版本。可用于处理 cookie。
     - onunload 离开页面时被触发
     - 当图像已加载时
-    - onmouseover 和 onmouseout当鼠标移动到或移出元素上时
-    - onchange当输入字段被改变时
-      + 对输入字段的验证来使用
     - onsubmit:当提交 HTML 表单时
     - onkeydown:按下键盘按键
+    - keyup
+    - onchange当输入字段被改变时
+      + 对输入字段的验证来使用
 * document.getElementById() 可以直接定位唯一的一个DOM节点
 * document.getElementsByTagName() 总是返回一组DOM节点
 * CSS选择器document.getElementsByClassName() 返回一组DOM节点
@@ -777,6 +780,13 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
 - 删除：将该节点从HTML中删除，相当于删掉了该DOM节点的内容以及它包含的所有子节点。
     + 要删除一个节点，首先要获得该节点本身以及它的父节点，然后，调用父节点的removeChild把自己删掉
     + 当<p>First</p>节点被删除后，parent.children的节点数量已经从2变为了1，索引[1]已经不存在了。
+* 加载顺序
+  - 解析 HTML 结构。
+  - 加载外部脚本和样式表文件。
+  - 解析并执行脚本代码。
+  - 构造 HTML DOM 模型。
+  - 加载图片等外部文件。
+  - 页面加载完毕
 
 ### 操作表单
 

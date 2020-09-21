@@ -1281,9 +1281,9 @@ sticky learn
    timeout=1h;
 ```
 
-## 日志
+## 日志 log
 
-* `access_log `主要记录客户端访问 Nginx 的每一个请求，格式可以自定义。可以得到用户地域来源、跳转来源、使用终端、某个 URL 访问量等相关信息。
+* access_log 主要记录客户端访问 Nginx 的每一个请求，格式可以自定义 `log_format name string;`。可以得到用户地域来源、跳转来源、使用终端、某个 URL 访问量等相关信息。
     - `log_format` 指令用于定义日志的格式，语法: `log_format name string;` 其中 name 表示格式名称，string 表示定义的格式字符串。log_format 有一个默认的无需设置的组合日志格式.`log_format` 配置必须放在 http 内，否则会出现警告
     - `access_log `指令用来指定访问日志文件的存放路径（包含日志文件名）、格式和缓存大小
 * error_log 主要记录客户端访问 Nginx 出错时的日志，格式不支持自定义.语法: `error_log path [level]`; 其中 path 表示错误日志存放路径，level 表示错误日志等级，日志等级包括 debug、info、notice、warn、error、crit、alert、emerg，从左至右，日志详细程度逐级递减
@@ -1299,6 +1299,9 @@ sticky learn
 log_format myformat '$remote_addr  $status  $time_local';
 access_log logs/access.log  myformat;
 
+log_format combined '$remote_addr - $remote_user  [$time_local]  '
+                    ' "$request"  $status  $body_bytes_sent  '
+                    ' "$http_referer"  "$http_user_agent" ';
 
 awk '{print $11}' access.log | sort | uniq -c | sort -rn # Processing log file group by HTTP Status Code
 awk '($11 ~ /502/)' access.log | awk '{print $4, $9}' | sort | uniq -c | sort -rn # Getting All URL's in log file of specific Status Code, below example 502
@@ -1353,21 +1356,13 @@ awk '{print $1}' time_access.log | sort | uniq -c | sort -n -k 1 -r | head -n 20
 
 ## 日志
 
-* access_log 主要记录客户端访问 Nginx 的每一个请求，格式可以自定义 `log_format name string;`
-* error_log 主要记录客户端访问 Nginx 出错时的日志，格式不支持自定义
-
-```
-log_format combined '$remote_addr - $remote_user  [$time_local]  '
-                    ' "$request"  $status  $body_bytes_sent  '
-                    ' "$http_referer"  "$http_user_agent" ';
-```
 
 ## 优化
 
 * 调整 worker_processes：指 Nginx 要生成的 Worker 数量，最佳实践是每个 CPU 运行 1 个工作进程。
 * 最大化 worker_connections
-* 启用 Gzip 压缩：压缩文件大小，减少了客户端 HTTP 的传输带宽，因此提高了页面加载速度。
-* 为静态文件启用缓存。
+* 启用 Gzip 压缩：压缩文件大小，减少了客户端 HTTP 的传输带宽，因此提高了页面加载速度
+* 为静态文件启用缓存
 * 禁用 access_logs：访问日志记录，记录每个 Nginx 请求，因此消耗了大量 CPU 资源，从而降低了 Nginx 性能。
 
 ## [Nginx+Lua](https://github.com/loveshell/ngx_lua_waf)
@@ -1696,7 +1691,7 @@ and stable NGINX server.
 * [alibaba/tengine](https://github.com/alibaba/tengine):A distribution of Nginx with some advanced features http://tengine.taobao.org/
 * [Nginx documentation](http://nginx.org/en/docs/)
 * [《Nginx官方文档》使用nginx作为HTTP负载均衡](http://ifeve.com/nginx-http/)
-* [xuexb/learn-nginx](https://github.com/xuexb/learn-nginx):学习nginx配置, 包括: 编译安装、反向代理、重定向、url重写、nginx缓存、跨域配置等
+* [xuexb/learn-nginx](https://github.com/xuexb/learn-nginx):学习nginx配置,包括:编译安装、反向代理、重定向、url重写、nginx缓存、跨域配置等
 * [Nginx 配置简述](http://www.cnblogs.com/hustskyking/p/nginx-configuration-start.html)
 * [Understanding the Nginx Configuration File Structure and Configuration Contexts](https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts)
 * [jaywcjlove/nginx-tutorial](https://github.com/jaywcjlove/nginx-tutorial):Nginx安装维护入门学习笔记，以及各种实例。

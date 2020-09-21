@@ -133,7 +133,6 @@
     - 易理解，趣味
 * 准备
 
-
 Mentor and motivate developers
 Suggest and enforce best code practices
 Perform code reviews

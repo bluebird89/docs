@@ -99,7 +99,6 @@
 * 构建API通常是构建微服务器所需的工作量的50％
 * 监控分析:需要持续地监视和跟踪模块和文档的状态
 
-
 * 围绕业务构建团队
     - 康威定律:“任何设计系统的组织（广泛定义）都将产生一种设计，其结构是组织通信结构的副本。” ——  Mel Conway
     - 银弹：人月神话
@@ -624,5 +623,5 @@ APP要符合12因子（Twelve-Factor）的规范：
 * [一篇文章带你了解Cloud Native](https://blog.csdn.net/u011537073/article/details/72360966)
 * [B 站在微服务治理中的探索与实践](https://www.infoq.cn/article/zRuGHM_SsQ0lk7gWyBgG)
 * [微服务架构体系的深度治理](https://www.infoq.cn/article/q65dDiRTdSbF*E6Ki2P4)
-
+* [基于 DDD 的微服务设计和开发实战](https://www.infoq.cn/article/s_LFUlU6ZQODd030RbH9)
 * [PHP微服务练兵](https://blog.csdn.net/donjan/article/details/103005084)
