@@ -97,6 +97,7 @@ a package manager for javascript <http://www.npmjs.com/>
     - [rlidwka/sinopia](https://github.com/rlidwka/sinopia):Private npm repository server
     - [request/request](https://github.com/request/request):🏊🏾 Simplified HTTP request client.
     - [ksky521/nodeppt](https://github.com/ksky521/nodePPT):This is probably the best web presentation tool so far! http://js8.in/nodeppt
+    - [](https://github.com/lerna/lerna):🐉 A tool for managing JavaScript projects with multiple packages.https://lerna.js.org/
 * 配置文件`package.json`
     - scripts：script会安装一定顺序寻找命令对应位置，本地的node_modules/.bin路径就在这个寻找清单中.`npm run {script name}`,将构建命令提到外部指令来
 
