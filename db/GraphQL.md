@@ -2,7 +2,7 @@
 
 GraphiQL & the GraphQL LSP Reference Ecosystem for building browser & IDE tools.
 
-
+* 向服务端发送一次描述信息，告知客户端所需的所有数据，数据的控制甚至可以精细到字段，达到一次请求获取所有所需数据的目的
 
 ## 请求与响应
 
@@ -13,7 +13,7 @@ GraphiQL & the GraphQL LSP Reference Ecosystem for building browser & IDE tools.
         + subscription 订阅操作
     - 操作名称：可选参数，对整个请求并不产生影响，只是赋予请求体一个名字，可以作为调试的依据
     - 变量定义：声明一个变量使用$符号开头，冒号后面紧跟着变量的传入类型。如果要使用变量，直接引用即可
-    - 选择集：所需要的字段合在一起
+    - 选择集：所需要字段合在一起
     - 字段请求的是一个数据单元。标量字段是粒度最细的一个数据单元了，同时作为返回 JSON 响应数据中的最后一个字段。如果是一个 Object，还必须选择至少其中的一个字段。
     - 请求体的结构确定了最终返回数据的结构
 
@@ -39,7 +39,8 @@ query myQry ($name: String!) {
 
 ## Server
 
-* 类型的定义以及查询本身都是通过 Schema 去定义的。GraphQL 的 Schema 语言全称叫 Schema Definition Language。Schema 本身并不代表你数据库中真实的数据结构，它的定义决定了这整个端点能干些什么事情，能向端点要什么，操作什么
+* 类型的定义以及查询本身都是通过 Schema 去定义的。GraphQL 的 Schema 语言全称叫 Schema Definition Language。
+* Schema 本身并不代表数据库中真实的数据结构，它的定义决定了这整个端点能干些什么事情，能向端点要什么，操作什么
 
 ## 项目
 
