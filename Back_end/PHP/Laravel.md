@@ -120,6 +120,24 @@ php artisan key:generate  # 设置程序密钥 The only supported ciphers are AE
 php artisan serve --port=8010 --host=127.0.0.1
 dump-server：启动 dump server 收集 dump 信息
 
+
+git clone https://github.com/Laradock/laradock.git
+git submodule add https://github.com/Laradock/laradock.git # exist project
+
+cp env-example .env
+# . env
+DB_HOST=mysql
+REDIS_HOST=redis
+QUEUE_HOST=beanstalkd
+APP_CODE_PATH_HOST=../project-z/ #  exist project
+docker-compose up -d nginx mysql phpmyadmin redis workspace
+docker-compose up --build # 会构建所有容器：Service 'aws' failed to build: COPY failed: stat /var/lib/docker/tmp/docker-builder279203978/ssh_keys: no such file or directory
+
+docker-compose exec workspace bash
+docker-compose exec --user=laradock workspace bash
+docker-compose ps|stop|down
+docker-compose logs -f {container-name}
+
 ## 问题
 > No such file or directory: u'./docker-compose.dev.yml'
 
@@ -321,6 +339,20 @@ $this->app->resolving(HelpSpot\API::class, function ($api, $app) {
 
 ```
 php artisan make:middleware CheckAge
+
+ $pipe_arr = [
+        'VerfiyCsrfToekn',
+        'VerfiyAuth',
+        'SetCookie',
+    ];
+
+$callback = array_reduce($pipe_arr,function($stack,$pipe) {
+    return function() use($stack,$pipe){
+        return $pipe::handle($stack);
+    };
+},$handle);
+
+call_user_func($callback);
 ```
 
 ## 门面 Facades
@@ -328,7 +360,9 @@ php artisan make:middleware CheckAge
 为应用程序的服务容器中可用的类提供了一个「静态」接口.是服务容器中底层类的「静态代理」，提供了简洁而富有表现力的语法，甚至比传统的静态方法更具可测试性和扩展性
 
 * 原理
-    - 继承自 Illuminate\Support\Facades\Facade 类。使用了 __callStatic() 魔术方法将的 Facades 的调用延迟，直到对象从容器中被解析出来
+  - Facade 提前注入 Ioc 容器
+  - 定义一个服务提供者的外观类继承自 Illuminate\Support\Facades\Facade，在该类定义一个类的变量，跟 ioc 容器绑定的 key 一样,通过静态魔术方法__callStatic 可以得到当前想要调用的方法
+  - 实现 getFacadeAccessor 方法
     - 使用 Facade 进行的任何调用都将传递给 Laravel 缓存服务的底层实例。
 * 缺点
     - 会引起类作用范围的膨胀：因为 Facades 使用起来非常简单而且不需要注入，就会使得我们在不经意间在单个类中使用许多 Facades，从而导致类变的越来越大。而使用依赖注入的时候，使用的类越多，构造方法就会越长，在视觉上就会引起注意，提醒你这个类有点庞大了。因此在使用 Facades 的时候，要特别注意控制好类的大小，让类的作用范围保持短小。
@@ -342,6 +376,7 @@ php artisan make:middleware CheckAge
 
 一组定义框架提供的核心服务的接口,框架对每个契约都提供了相应的实现
 
+* 契约规范:Illuminate\Contracts\**\Repository
 * 契约 VS Facades
     - Facades，不需要你在类的构造函数中类型提示.契约则需要在类中明显地定义依赖项。
 * 使用接口的原因：低耦合和简单性
@@ -1147,6 +1182,7 @@ $posts = Cache::remember('index.posts', $minutes = 30, function()
     * 停止事件传播：监听器 handle 方法中返回 false 来停止事件传播到其他的监听器
   + **触发事件**：调用 event 辅助函数可触发事件，事件将被分发到已经注册监听器上
     * 模型 $events
+- 观察者模式实现
 * 事件订阅者
   + 订阅可以把很多处理器（handler）放到一个类里面，然后用一个 listner 把它们集合起来
   + EventServiceProvider 中 subscribe属性中声明
@@ -1162,6 +1198,37 @@ $posts = Cache::remember('index.posts', $minutes = 30, function()
   - 订阅者需要定义一个 subscribe 方法，该方法中传入一个事件分发器实例
 * 场景
 
+```php
+// 服务类　去实现事件的创建和触发，不关心具体多少调用方需要监听
+class DemoService
+{
+    public function demo()
+    {
+        //创建一个事件
+        $event = new Event();
+
+        ...
+
+        //执行事件 通知旁观者
+        $event->trigger();
+    }
+}
+
+// 调用方，调用方仅仅需要知道服务类创建了哪些事件
+class DoService
+{
+    public function do()
+    {
+        //为事件增加旁观者
+        $event->add(new Observer1());
+        $event->add(new Observer2());
+    }
+}
+
+php artisan make:event // 创建事件
+php artisan make:listener // 创建事件监听者，可以为多个
+```
+
 ## Mail
 
 ```sh
@@ -1176,46 +1243,22 @@ php artisan vendor:publish --tag=laravel-mail
 
 Eloquent ORM 以ActiveRecord形式来和数据库进行交互，拥有全部的数据表操作定义，单个模型实例对应数据表中的一行
 
-config/database.php中包含了模型的相关配置项。Eloquent 模型约定：
-
-- 数据表名：模型以单数形式命名(CamelCase)，对应的数据表为蛇形复数名(snake_cases)，模型的$table属性也可用来指定自定义的数据表名称
-- 主键：模型默认以id为主键且假定id是一个递增的整数值，也可以通过primaryKey来自定义；如果主键非递增数字值，应设置primaryKey来自定义；如果主键非递增数字值，应设置incrementing = false
-- 时间戳：模型会默认在你的数据库表有 created_at 和 updated_at 字段，设置timestamps=false可关闭模型自动维护这两个字段；timestamps=false可关闭模型自动维护这两个字段；dateFormat 属性用于在模型中设置自己的时间戳格式
-- 数据库连接：模型默认会使用应用程序中配置的数据库连接，如果你想为模型指定不同的连接，可以使用 $connection 属性自定义
-- 批量赋值：当用户通过 HTTP 请求传入了非预期的参数，并借助这些参数 create 方法更改了数据库中你并不打算要更改的字段，这时就会出现批量赋值（Mass-Assignment）漏洞，所以你需要先在模型上定义一个 fillable(白名单，允许批量赋值字段名数组)或fillable(白名单，允许批量赋值字段名数组)或guarded(黑名单，禁止批量赋值字段名数组)
-
-```
-1 // 用属性取回航班，当结果不存在时创建它...
-2 $flight = App\Flight::firstOrCreate(['name' => 'Flight 10']);
-3
-4 // 用属性取回航班，当结果不存在时实例化一个新实例...
-5 $flight = App\Flight::firstOrNew(['name' => 'Flight 10']);
-```
-
+* config/database.php中包含了模型的相关配置项。Eloquent 模型约定：
+  + 数据表名：模型以单数形式命名(CamelCase)，对应的数据表为蛇形复数名(snake_cases)，模型的$table属性也可用来指定自定义的数据表名称
+  + 主键：模型默认以id为主键且假定id是一个递增的整数值，也可以通过primaryKey来自定义；如果主键非递增数字值，应设置primaryKey来自定义；如果主键非递增数字值，应设置incrementing = false
+  + 时间戳：模型会默认在你的数据库表有 created_at 和 updated_at 字段，设置timestamps=false可关闭模型自动维护这两个字段；timestamps=false可关闭模型自动维护这两个字段；dateFormat 属性用于在模型中设置自己的时间戳格式
+  + 数据库连接：模型默认会使用应用程序中配置的数据库连接，如果你想为模型指定不同的连接，可以使用 $connection 属性自定义
+  + 批量赋值：当用户通过 HTTP 请求传入了非预期的参数，并借助这些参数 create 方法更改了数据库中你并不打算要更改的字段，这时就会出现批量赋值（Mass-Assignment）漏洞，所以你需要先在模型上定义一个 fillable(白名单，允许批量赋值字段名数组)或fillable(白名单，允许批量赋值字段名数组)或guarded(黑名单，禁止批量赋值字段名数组)
+* 步骤
+  - Article::find (1); 发现没有 find 方法就会调用 Model 的__callStatic
+  - callStatic 方法又回去调用 call 方法，这时发现有 find 方法
+  - find 方法会调用 where 拼装要查询的参数，然后调用 first ()
+  - 因为 first () 只需要取 1 条，所以设置 $limit 1
+  - 最后组装 sql
+  - 交给 mysql 执行 返回结果。
 - 模型软删除：如果模型有一个非空值 deleted_at，代表模型已经被软删除了。要在模型上启动软删除，则必须在模型上使用Illuminate\Database\Eloquent\SoftDeletes trait 并添加 deleted_at 字段到你的模型 $dates 属性上和数据表中，通过调用trashed方法可查询模型是否被软删除
-
-  ```
-  1 <?php
-  2
-  3 namespace App;
-  4
-  5 use Illuminate\Database\Eloquent\Model;
-  6 use Illuminate\Database\Eloquent\SoftDeletes;
-  7
-  8 class Flight extends Model
-  9 {
-  10     use SoftDeletes;
-  11
-  12     /**
-  13      * 需要被转换成日期的属性。
-  14      *
-  15      * @var array
-  16      */
-  17     protected $dates = ['deleted_at'];
-  18 }
-  ```
-
 - 查询作用域：Laravel允许对模型设定全局作用域和本地作用域(包括动态范围)，全局作用域允许我们为模型的所有查询添加条件约束(定义一个实现 Illuminate\Database\Eloquent\Scope 接口的类)，而本地作用域允许我们在模型中定义通用的约束集合(模型方法前加上一个 scope 前缀)。作用域总是返回查询构建器
+- 隐藏和显示属性：模型 hidden属性用于隐藏属性和关联的输出，hidden属性用于隐藏属性和关联的输出，visible 属性用于显示属性和关联的输出，另外makeVisible()还可用来临时修改可见性。当你要对关联进行隐藏时，需使用关联的方法名称，而不是它的动态属性名称
 
   ```
   1 全局作用域定义：
@@ -1293,8 +1336,31 @@ config/database.php中包含了模型的相关配置项。Eloquent 模型约定�
   73 }
   ```
 
-- 隐藏和显示属性：模型 hidden属性用于隐藏属性和关联的输出，hidden属性用于隐藏属性和关联的输出，visible 属性用于显示属性和关联的输出，另外makeVisible()还可用来临时修改可见性。当你要对关联进行隐藏时，需使用关联的方法名称，而不是它的动态属性名称
 
+  1 <?php
+  2
+  3 namespace App;
+  4
+  5 use Illuminate\Database\Eloquent\Model;
+  6 use Illuminate\Database\Eloquent\SoftDeletes;
+  7
+  8 class Flight extends Model
+  9 {
+  10     use SoftDeletes;
+  11
+  12     /**
+  13      * 需要被转换成日期的属性。
+  14      *
+  15      * @var array
+  16      */
+  17     protected $dates = ['deleted_at'];
+  18 }
+
+1 // 用属性取回航班，当结果不存在时创建它...
+2 $flight = App\Flight::firstOrCreate(['name' => 'Flight 10']);
+3
+4 // 用属性取回航班，当结果不存在时实例化一个新实例...
+5 $flight = App\Flight::firstOrNew(['name' => 'Flight 10']);
   ```
   1 <?php
   2
