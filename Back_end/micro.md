@@ -17,8 +17,6 @@ curl -H 'Content-Type: application/json' \
 
 go run client.go
 
-
-
 micro proxy go.micro.srv.greeter
 curl \
 -H 'Content-Type: application/json' \
@@ -26,7 +24,6 @@ curl \
 -H 'Micro-Endpoint: Greeter.Hello' \
 -d '{"name": "学院君"}' \
 http://localhost:8081
-
 
 micro cli
 micro list services
@@ -38,12 +35,11 @@ micro logs example-service
 micro bot --inputs=slack --slack_token=SLACK_TOKEN
 ```
 
-
-## 工具
-
-* [ micro / micro ](https://github.com/micro/micro):Micro is a cloud native development platform
-
 ## 问题
 
 * `etcd@v3.XXXX+incompatible\clientv3\balancer\resolver\endpoint\endpoint.go:114:78: undefined: resolver.BuildOption`：`go mod edit -require=google.golang.org/grpc@v1.26.0`　`go get -u -x google.golang.org/grpc@v1.26.0` `replace google.golang.org/grpc => google.golang.org/grpc v1.26.0` `go mod edit -replace google.golang.org/grpc@v1.29.1=google.golang.org/grpc@v1.26.0`
 * `Account not issued by ''`:
+
+## 工具
+
+* [ micro / micro ](https://github.com/micro/micro):Micro is a cloud native development platform

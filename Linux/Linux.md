@@ -3458,6 +3458,8 @@ sort authors.txt | uniq -c > authors-sorted.txt
 * Linux命令行与shell脚本编程大全（第3版）
 * 《只是为了好玩 : Linux 之父林纳斯自传》
 * 《Linux Shell 脚本攻略》
+* Linux 内核揭秘
+  - [linux-insides-zh](https://github.com/MintCN/linux-insides-zh) https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html
 
 ## 工具
 

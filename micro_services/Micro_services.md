@@ -625,3 +625,4 @@ APP要符合12因子（Twelve-Factor）的规范：
 * [微服务架构体系的深度治理](https://www.infoq.cn/article/q65dDiRTdSbF*E6Ki2P4)
 * [基于 DDD 的微服务设计和开发实战](https://www.infoq.cn/article/s_LFUlU6ZQODd030RbH9)
 * [PHP微服务练兵](https://blog.csdn.net/donjan/article/details/103005084)
+* [谷歌在微服务上的坑和教训](https://www.infoq.cn/article/L*bT1UfuVoj1I6NRNM3U)
