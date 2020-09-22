@@ -241,17 +241,16 @@ Hugepagesize:       2048 kB
 
 * php-dev
     - phpize
+        + 有版本号，依赖安装指定目录
+        + mac:`/usr/local/lib/php/pecl/20180731/`
+        + 需要php7.*-dev 支持
     - php-config
 * php-cgi
-* 程序路径：`/usr/local/Cellar/php71/7.1.12_23`
-* 配置文件: `/usr/local/etc/php/7.1/` The php.ini and php-fpm.ini file
+* 程序 `/usr/local/Cellar/php71/7.1.12_23`
+* 配置 `/usr/local/etc/php/7.1/`
 * 通过php-fpm进程运行 `/usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx`
 * php71卸载后php-fpm仍然运行
     - `brew services stop php`
-* phpize
-    - phpize有版本号，依赖安装指定目录
-        + mac:`/usr/local/lib/php/pecl/20180731/`
-    - 需要php7.*-dev 支持
 * 准备
     - libpcre3-dev: Perl 5 Compatible Regular Expression Library
     - gettext
@@ -265,16 +264,18 @@ LoadModule php5_module modules/libphp5.so # httpd.conf中添加
 
 extension_dir = "/usr/local/lib/php/pecl/20180731"
 
-cgi.fix_pathinfo=0 #  php.ini:如果文件不存在，则阻止 Nginx 将请求发送到后端的 PHP-FPM 模块， 以避免遭受恶意脚本注入的攻击
+#  php.ini:如果文件不存在，则阻止 Nginx 将请求发送到后端的 PHP-FPM 模块， 以避免遭受恶意脚本注入的攻击
+cgi.fix_pathinfo=0
 # 确保 php-fpm 模块使用 www-data 用户和 www-data 用户组的身份运行
 # This is an extremely insecure setting because it tells PHP to attempt to execute the closest file it can find if a PHP file does not match exactly. This basically would allow users to craft PHP requests in a way that would allow them to execute scripts that they shouldn't be allowed to execute.
 
 ### windows 下载PHP安装包，解压即可
-./php.exe -f e:\www\test.php # 不一定非php扩展名文件
+./php.exe -f e:\www\test.php
 php.exe -v
 php.exe -i # 运行phpinfo()函数
 
-php -a # 进入命令行模式
+# 进入命令行模式
+php -a
 
 ### Mac
 brew install --without-apache --with-fpm php
@@ -454,22 +455,23 @@ php -dvld.active=1 -dvld.excute=0 at.php # excute =0 opcode在么 并不执行
     - The configuration is loaded fresh each time you invoke PHP from the CLI.
     - 配置比较长的max_execution_time
 
-```
-php --ini　# 查找PHP CLI的ini文件位置
-php -r "echo php_sapi_name();" # 判断当前执行的php是什么模式下 R RUN
-php -f /path/to/yourfile.php # 调用PHP CLI解释器，并给脚本传递参数。这种方法首先要设置php解释器的路径，Windows平台在运行CLI之前，需设置类似path c:\php的命令，也失去了CLI脚本第一行的意义，因此不建议使用该方法。
+```sh
+# 查找PHP CLI ini文件位置
+php --ini
+# 调用PHP CLI解释器，并给脚本传递参数
+php -f /path/to/yourfile.php
 
-# 第二种方法是首先运行chmod+x <要运行的脚本文件名>（UNIX/Linux环境），将该PHP文件置为可执行权限，然后在CLI脚本头部第一行加入声明（类似于#! /usr/bin/php或PHP CLI解释器位置），接着在命令行直接执行。这是CLI首选方法，建议采用
+# 内置 web 服务器
+php -S localhost:8000 -c app/config/php.ini
 
-# /usr/local/lib/php/pecl/20180731/swoole.so doesn't appear to be a valid Zend extension
+# 判断当前执行的php是什么模式下 R RUN
+php -r "echo php_sapi_name();"
 
-php -S localhost:8000 -c app/config/php.ini  # 内置 web 服务器
-
-if (php_sapi_name() == ‘cli-server') {
-    // PHP 内置 Web 服务器
-} else {
-    // 其他Web服务器
-}
+# if (php_sapi_name() == ‘cli-server') {
+#     // PHP 内置 Web 服务器
+# } else {
+#     // 其他Web服务器
+# }
 ```
 
 ## 配置
@@ -595,14 +597,14 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 ### 数据类型
 
 * 标量
-    + Boolean（布尔型）
+    + Boolean 布尔型
         + 布尔值 FALSE 本身
         + 整型值 0（零）
         + 浮点型值 0.0（零）
         + 空字符串，以及字符串 "0"
         + 不包括任何元素的数组
         + 从空标记生成的 SimpleXML 对象
-    + String（字符串）
+    + String 字符串
         * 单引号PHP字符串中，大多数转义序列和变量不会被解释。 可以使用单引号`\'`反斜杠和通过`\\`在单引号引用PHP字符串
         * 双引号的PHP字符串中存储多行文本，特殊字符和转义序列,对一些特殊的字符进行解析
             * `\n`  换行（ASCII 字符集中的 LF 或 0x0A (10)）
@@ -760,10 +762,9 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 * 错误控制操作符:@,当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉
 * 三元运算符：`$first ? $second : $third`
 
-### 函数
+### 函数 function
 
-一段可以重复使用多次的代码
-
+* 一段可以重复使用代码
 * 参数
     - 值传递:传递给函数的值默认情况下不会修改实际值(通过值调用),传递给函数的值是通过值调用。作用域函数范围内
     - 引用调用:要传递值作为参考(引用)，需要在参数名称前使用＆符号(&)
@@ -772,26 +773,29 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
     - 可变长度参数
     - 可变数量的参数列表:`...`
 * 可变函数：一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数
-* 匿名函数（Anonymous functions），也叫闭包函数（Closure），允许 临时创建一个没有指定名称的函数
-    - 变量值是一个闭包，闭包对象实现了`__invoke()`魔术方法，只要变量名后有()，PHP就会查找并调用__invoke方法
-    - 闭包在匿名函数的基础上增加了与外部环境的变量交互，通过 use 子句中指定要导入的外部环境变量
-    - 闭包和普通的PHP函数很像：常用的句法相同，也接受参数，而且能返回值。不过闭包没有函数名
-    - 5.3.0中引入
-    - 经常作回调函数（callback）使用
-    - 不能直接访问闭包外的变量，通过 use 关键字把父作用域变量及状态附加到PHP闭包中
-    - 闭包内所引用的变量不能被外部所访问,在闭包内对变量的改变从而影响到上下文变量的值，使用&的引用传参
-    - Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态
-    - 在闭包中使用$this关键字获取闭包内部状态
-        + bindTo:可以把闭包的内部状态绑定到其他对象上。方法第二个参数作用是指定绑定闭包的那个对象所属的PHP类.闭包就可以在其他地方访问邦定闭包的对象中受保护和私有的成员变量
-        + 框架经常使用bindTo方法把路由URL映射到匿名回调函数上，框架会把匿名回调函数绑定到应用对象上，这样在匿名函数中就可以使用$this关键字引用重要的应用对象
 * 返回值
 * 递归函数
+
+## 匿名函数 Anonymous functions ｜ 闭包 Closure
+
+* 5.3.0中引入，和普通PHP函数很像：常用句法相同，也接受参数，而且能返回值。不过闭包没有函数名
+* 允许临时创建一个没有指定名称的函数
+* 变量值是一个闭包
+* 闭包对象实现了`__invoke()`魔术方法，只要变量名后有()，PHP就会查找并调用__invoke方法
+* 闭包在匿名函数的基础上增加了与外部环境的变量交互，不能直接访问闭包外的变量，通过 use 关键字把父作用域变量及状态附加到PHP闭包中
+* 在闭包中使用$this关键字获取闭包内部状态
+    + bindTo:可以把闭包的内部状态绑定到其他对象上。方法第二个参数作用是指定绑定闭包的那个对象所属的PHP类.闭包就可以在其他地方访问邦定闭包的对象中受保护和私有的成员变量
+    + 框架经常使用bindTo方法把路由URL映射到匿名回调函数上，框架会把匿名回调函数绑定到应用对象上，这样在匿名函数中就可以使用$this关键字引用重要的应用对象
+* 场景
+    - 作回调函数（callback）使用
+* 闭包内所引用的变量不能被外部所访问,在闭包内对变量的改变从而影响到上下文变量的值，使用&的引用传参
+* Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态
 
 ### 状态管理
 
 服务器端存储技术
 
-* cookie是一个小段信息，存储在客户端浏览器中。用于识别用户。cookie在服务器端创建并保存到客户端浏览器。 每当客户端向服务器发送请求时，cookie都会嵌入请求。 这样，cookie数据信息可以在服务器端接收。
+* cookie是一个小段信息，存储在客户端浏览器中。用于识别用户。cookie在服务器端创建并保存到客户端浏览器。 每当客户端向服务器发送请求时，cookie都会嵌入请求。 这样，cookie数据信息可以在服务器端接收
     - 设置
     - 获取
     - 删除
@@ -832,14 +836,14 @@ $value=$_COOKIE["CookieName"];//returns cookie value
     - 使用 php://filter 流封装协议把过滤器附加到流上
 * 与远程网址交互:curl
 
-### 文件操作
+### 文件
 
 * 创建文件
-* 访问文件有三种方式
+* 访问文件
     - 相对文件 `foo.txt => currentdirectory/foo.txt`
     - 相对路径 `subdirectory/foo.txt=> currentdirectory/subdirectory/foo.txt`
     - 绝对路径 `/main/foo.txt=> /main/foo.txt`
-* 打开文件：`resource fopen ( string $filename , string $mode [, bool $use_include_path = false [, resource $context ]] )` 用于打开文件或URL并返回资源
+* 打开 `resource fopen ( string $filename , string $mode [, bool $use_include_path = false [, resource $context ]] )`
     - filename 是 "scheme://..." 的格式，则被当成一个 URL，PHP 将搜索协议处理器（也被称为封装协议）来处理此模式
     - 如果该协议尚未注册封装协议，PHP 将发出一条消息来帮助检查脚本中潜在的问题并将 filename 当成一个普通的文件名继续执行下去
     - 指定的是一个本地文件，将尝试在该文件上打开一个流。该文件必须是 PHP 可以访问的，因此需要确认文件访问权限允许该访问
@@ -865,30 +869,30 @@ $value=$_COOKIE["CookieName"];//returns cookie value
     - 注意
         + 设置一个超时时间
 * 不使用 flock 函数，借用临时文件来解决读写冲突的问题，需要更新的文件考虑一份到我们的临时文件目录，将文件最后修改时间保存到一个变量，并为这个临时文件取一个随机的，不容易重复的文件名。当对这个临时文件进行更新后，再检测原文件的最后更新时间和先前所保存的时间是否一致。如果最后一次修改时间一致，就将所修改的临时文件重命名到原文件，为了确保文件状态同步更新，所以需要清除一下文件状态。
-* 读取文件：`string fread (resource $handle , int $length )`函数用于读取文件的数据
+* 读取：`string fread (resource $handle , int $length )`函数用于读取文件的数据
     - 参数：文件资源($handle 由fopen()函数创建的文件指针)和文件大小($length 要读取的字节长度)
     - 逐行读取文件：`string fgets ( resource $handle [, int $length ] )`函数用于从文件中读取单行数据内容
     - 逐个字符读取文件：`string fgetc ( resource $handle )`函数用于从文件中读取单个字符
         + 要使用fgetc()函数获取所有数据，请在while循环中使用!feof()函数作为条件。
     - `file_get_contents`
-* 写入文件：`int fwrite ( resource $handle , string $string [, int $length ] )`：用于将字符串的内容写入文件
+* 写入：`int fwrite ( resource $handle , string $string [, int $length ] )`：用于将字符串的内容写入文件
     - 如果再次运行上面的代码，将擦除文件的前一个数据并写入新的数据。
     - 附加文件
     - fputs
-* 删除文件：`bool unlink ( string $filename [, resource $context ] )`
-* 关闭文件 `fclose($fd)`
-* 上传文件：`bool move_uploaded_file ( string $filename , string $destination )`
+* 删除 `bool unlink ( string $filename [, resource $context ] )`
+* 关闭 `fclose($fd)`
+* 上传 `bool move_uploaded_file ( string $filename , string $destination )`
     - `$_FILES['filename']['name']`   返回文件名称
     - `$_FILES['filename']['type']` 返回文件的MIME类型
     - `$_FILES['filename']['size']` 返回文件的大小(以字节为单位)
     - `$_FILES['filename']['tmp_name']` 返回存储在服务器上的文件的临时文件名。
     - `$_FILES['filename']['error']`    返回与此文件相关联的错误代码。
-* 下载文件：`int readfile ( string $filename [, bool $use_include_path = false [, resource $context ]] )`
+* 下载 `int readfile ( string $filename [, bool $use_include_path = false [, resource $context ]] )`
     - $filename：表示文件名
     - $use_include_path：它是可选参数。它默认为false。可以将其设置为true以搜索included_path中的文件
     - $context：表示上下文流资源
     - int：它返回从文件读取的字节数
-* 方法：
+* 方法
     - basename:返回路径中的文件名部分
 
 ### php://input
@@ -909,7 +913,7 @@ $value=$_COOKIE["CookieName"];//returns cookie value
 
 ### MySQL
 
-* mysql:PHP 5.5以来扩展已被弃用，建议使用以下2种替代方法之一
+* mysql:PHP 5.5以来扩展已被弃用，建议使用以下替代
 * mysqli
 * PDO
     - fetch() 方法时，传入了 PDO::FETCH_ASSOC 参数，该参数决定如何返回查询结果，该参数支持以下常量：
@@ -923,94 +927,75 @@ $value=$_COOKIE["CookieName"];//returns cookie value
     - 错误异常处理、灵活取得查询结果（返回数组、字符串、对象、回调函数）、字符过滤防止 SQL 攻击、事务处理、存储过程
         - errorCode errotInfo
 
-## 面向对象(OOP)
+## 面向对象 OOP
 
-* 继承：类分层、接口分层
-* 实现：类实现接口
-* 依赖：类作为另一个类方法的参数
-* 关联：类属性
-* 聚合：可以有
-* 组合：必须有
-
-### 类
-
-* spl_autoload：__autoload()函数的默认实现
-* spl_autoload_register:  注册给定的函数作为 __autoload（7.2之后废弃） 的实现，替代spl_autoload（）
-* 构造函数：创建新对象时先调用此方法，适合在使用对象之前做一些初始化工作
-    - 子类中定义了构造函数则不会隐式调用其父类的构造函数
-    - 要执行父类的构造函数，需要在子类的构造函数中调用 parent::__construct()
-    - 如果子类没有定义构造函数则会如同一个普通的类方法一样从父类继
-* 析构函数
-* final
-    - 父类中的方法被声明为 final，则子类无法覆盖该方法
-    - 如果一个类被声明为 final，则不能被继承
-
-### 对象
-
-* 对象是一堆属性组成
-    - 在底层的实现,采取属性数组+方法数组来实现的。对象在zend中的定义是使用了一种zend_object_value结构体来存储的，这个结构体包含：
-        + 一个指针L说明这个对象由哪个类实现出来的
-        + 对象的属性
-        + guards:阻止递归调用
-    - 对象的方法不会存在对象里面，要使用对象的方法，实际上是通过指针找到这个类，再用这个类里面的方法来执行的。（通过类序列化检测）
-* static
-    - 修饰函数或变量使其成为类函数和类变量
-    - 修饰函数内变量延长生命周期至整个应用程序
-    - 延迟绑定：子类重写父类方法，其它调用该方法时用static而非self
-        + static:: 不再被解析为定义当前方法所在的类，而是在实际运行时计算的。也可以称之为"静态绑定"，因为它可以用于（但不限于）静态方法的调用
-        + 当进行静态方法调用时，该类名即为明确指定的那个（通常在 :: 运算符左侧部分）
-        + 当进行非静态方法调用时，即为该对象所属的类
-    - self 只引用声明，static 执行当前对象.static 指的调用上下文，self 解析上下文
-    - 静态方法可以在非静态上下文调用
-* 对象复制：对对象的所有属性执行一个浅复制（shallow copy）。所有的引用属性仍然会是一个指向原来的变量的引用
-    - 赋值与传递通过引用进行
-    - 获取副本用clone，只复制引用，不复制引用的对象
-    - `__clone()` 在复制得到的对象上运行
-* 传递:默认情况下通过引用传递
-    - 对象作为参数传递、作为结果返回或者赋值给另外一个变量
-    - 另外一个变量跟原来的不是引用的关系，只是他们都保存着同一个标识符的拷贝，这个标识符指向同一个对象的真正内容
-* 场景
-    + PHP异步调用
-    + 正则匹配src标签
-    + 处理回文字符
-
-#### 访问控制(可见性)
-
-* public:类成员在任何地方可见
-* protected:类成员在自身、子类和父类内可见
-* private:类成员只对自己可见。
-* private和protected有个特例:同一个类的对象即使不是同一个实例也可以互相访问对方的私有与受保护成员
-* 范围解析符(::)：通常以self::、 parent::、 static:: 和 `<classname>::`形式来访问静态成员、类常量
-* static::、self:: 和 parent:: 可用来调用类中的非静态方法。类中实例或自己
-* self
-    - 替代类名，引用当前类的静态成员变量和静态函数；
-    - 抑制多态行为，引用当前类的函数而非子类中覆盖的实现；
-* self VS static
-    - 在函数引用上
-        + 对于静态成员函数，self指向代码当前类，static指向调用类
-        + 对于非静态成员函数，self抑制多态，指向当前类的成员函数，static等同于this，动态指向调用类的函数
-* parent
-* this
-    - this不能用在静态成员函数中，self可以；
-    - 对静态成员函数/变量的访问，建议 用self，不要用$this::或$this->的形式；
-    - 对非静态成员变量的访问，不能用self，只能用this;
-    - this要在对象已经实例化的情况下使用，self没有此限制；
-    - 在非静态成员函数内使用，self抑制多态行为，引用当前类的函数；而this引用调用类的重写(override)函数（如果有的话）
-* static:调用类里面的静态属性与静态方法
-
-#### 多态
-
-多态性是指相同的操作或函数、过程可作用于多种类型的对象上并获得不同的结果
-
-* 一个对外接口，多个内部实现方法
-* 多态性允许每个对象以适合自身的方式去响应共同的消息。多态性增强了软件的灵活性和重用性。
-* 面向对象编程并不只是将相关的方法与数据简单的结合起来，而是采用面向对象编程中的各种要素将现实生活中的各种情况清晰的描述出来
-* 主要在于可以将不同的子类对象都当作一个父类来处理，并且可以屏蔽不同子类对象之间所存在的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化
-* 通常为了使项目能够在以后的时间里的轻松实现扩展与升级，需要通过继承实现可复用模块进行轻松升级
-* 在进行可复用模块设计时，就需要尽可能的减少使用流程控制语句。此时就可以采用多态实现该类设计。
-
-#### 接口与抽象类
-
+* 类
+    - spl_autoload：__autoload()函数的默认实现
+    - spl_autoload_register:注册给定的函数作为 __autoload（7.2之后废弃） 的实现，替代spl_autoload（）
+    - 构造函数：创建新对象时先调用此方法，适合在使用对象之前做一些初始化工作
+        + 子类中定义了构造函数则不会隐式调用其父类的构造函数
+        + 要执行父类的构造函数，需要在子类的构造函数中调用 parent::__construct()
+        + 如果子类没有定义构造函数则会如同一个普通的类方法一样从父类继
+    - 析构函数
+    - final
+        + 父类中的方法被声明为 final，则子类无法覆盖该方法
+        + 如果一个类被声明为 final，则不能被继承
+* 对象
+    - 对象是一堆属性组成
+        + 在底层的实现,采取属性数组+方法数组来实现的。对象在zend中的定义是使用了一种zend_object_value结构体来存储的，这个结构体包含：
+            * 一个指针L说明这个对象由哪个类实现出来的
+            * 对象的属性
+            * guards:阻止递归调用
+        + 对象的方法不会存在对象里面，要使用对象的方法，实际上是通过指针找到这个类，再用这个类里面的方法来执行的。（通过类序列化检测）
+    - static
+        + 修饰函数或变量使其成为类函数和类变量
+        + 修饰函数内变量延长生命周期至整个应用程序
+        + 延迟绑定：子类重写父类方法，其它调用该方法时用static而非self
+            * static:: 不再被解析为定义当前方法所在的类，而是在实际运行时计算的。也可以称之为"静态绑定"，因为它可以用于（但不限于）静态方法的调用
+            * 当进行静态方法调用时，该类名即为明确指定的那个（通常在 :: 运算符左侧部分）
+            * 当进行非静态方法调用时，即为该对象所属的类
+        + self 只引用声明，static 执行当前对象.static 指的调用上下文，self 解析上下文
+        + 静态方法可以在非静态上下文调用
+    - 对象复制：对对象的所有属性执行一个浅复制（shallow copy）。所有的引用属性仍然会是一个指向原来的变量的引用
+        + 赋值与传递通过引用进行
+        + 获取副本用clone，只复制引用，不复制引用的对象
+        + `__clone()` 在复制得到的对象上运行
+    - 传递:默认情况下通过引用传递
+        + 对象作为参数传递、作为结果返回或者赋值给另外一个变量
+        + 另外一个变量跟原来的不是引用的关系，只是他们都保存着同一个标识符的拷贝，这个标识符指向同一个对象的真正内容
+    - 场景
+        * PHP异步调用
+        * 正则匹配src标签
+        * 处理回文字符
+* 访问控制(可见性)
+    - public:类成员在任何地方可见
+    - protected:类成员在自身、子类和父类内可见
+    - private:类成员只对自己可见。
+    - private和protected有个特例:同一个类的对象即使不是同一个实例也可以互相访问对方的私有与受保护成员
+    - 范围解析符(::)：通常以self::、 parent::、 static:: 和 `<classname>::`形式来访问静态成员、类常量
+    - static::、self:: 和 parent:: 可用来调用类中的非静态方法。类中实例或自己
+    - self
+        + 替代类名，引用当前类的静态成员变量和静态函数；
+        + 抑制多态行为，引用当前类的函数而非子类中覆盖的实现；
+    - self VS static
+        + 在函数引用上
+            * 对于静态成员函数，self指向代码当前类，static指向调用类
+            * 对于非静态成员函数，self抑制多态，指向当前类的成员函数，static等同于this，动态指向调用类的函数
+    - parent
+    - this
+        + this不能用在静态成员函数中，self可以；
+        + 对静态成员函数/变量的访问，建议 用self，不要用$this::或$this->的形式；
+        + 对非静态成员变量的访问，不能用self，只能用this;
+        + this要在对象已经实例化的情况下使用，self没有此限制；
+        + 在非静态成员函数内使用，self抑制多态行为，引用当前类的函数；而this引用调用类的重写(override)函数（如果有的话）
+    - static:调用类里面的静态属性与静态方法
+* 多态：相同的操作或函数、过程可作用于多种类型的对象上并获得不同的结果
+    - 一个对外接口，多个内部实现方法
+    - 多态性允许每个对象以适合自身的方式去响应共同的消息。多态性增强了软件的灵活性和重用性。
+    - 面向对象编程并不只是将相关的方法与数据简单的结合起来，而是采用面向对象编程中的各种要素将现实生活中的各种情况清晰的描述出来
+    - 主要在于可以将不同的子类对象都当作一个父类来处理，并且可以屏蔽不同子类对象之间所存在的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化
+    - 通常为了使项目能够在以后的时间里的轻松实现扩展与升级，需要通过继承实现可复用模块进行轻松升级
+    - 在进行可复用模块设计时，就需要尽可能的减少使用流程控制语句。此时就可以采用多态实现该类设计。
 * 接口
     - 通过interface关键字来定义，定义所有的方法都是空的，访问控制必须是public
     - 可以如类一样定义常量，可以使用extends来继承其他接口
@@ -1028,46 +1013,12 @@ $value=$_COOKIE["CookieName"];//returns cookie value
     - 重载指多个名字相同，但参数不同的函数在同一作用域并存的现象.参数不同有三种情况：参数个数不同，参数类型不同，参数顺序不同.函数重载多见于强类型语言，编译后函数在函数符号表的名称一般是函数名加参数类型
         + php不支持：function_exists、 method_exists、is_callable、get_defined_functions、ReflectionMethod/ReflectionFunction类的getParameters/getNumberOfParameters/getNumberOfRequiredParameters
     - 重写出现在继承中，指子类重定义父类功能的现象，也被称为覆盖,即相同签名的成员函数在子类中重新定义（实现抽象函数或接口不是重写），是实现多态（polymorphism）的一种关键技术
-
-```php
-// 定义接口
-interface  Log{
-    public function save($message);
-}
-
-// 稳健型日志
-class FileLog implements Log{
-    public function save($message){
-        var_dump('log into file'.$message);
-    }
-}
-// 数据库型日志
-class DatabaseLog implements Log{
-    public function save($message){
-        var_dump('log into database'.$message);
-    }
-}
-
-//自定义类实现接口
-class UsersController{
-    protected $log;
-    public function __construct(Log $log)
-    {
-        $this->log = $log;
-    }
-
-    public function register(){
-        $name= 'long';
-        $this->log->save($name);
-    }
-}
-
-//$controller = new UsersController(new DatabaseLog());
-//string(21) "log into databaselong"
-$controller = new UsersController(new FileLog());
-//string(17) "log into filelong"
-$controller->register();
-```
+* 继承：类分层、接口分层
+* 实现：类实现接口
+* 依赖：类作为另一个类方法的参数
+* 关联：类属性
+* 聚合：可以有
+* 组合：必须有
 
 ### trait
 
@@ -1190,7 +1141,7 @@ spl_autoload_register(function ($class){
 * __construct 构造函数 初始化赋值 实例化对象的时候自己调用
 * __destruct 析构方法，PHP 将在对象被销毁前（即从内存中清除前）调用这个方法
 * __get ($property) 当调用一个未定义的属性时，此方法会被触发，传递的参数是被访问的属性名
-* __set ($property, $value) 给一个未定义的属性赋值时，此方法会被触发，传递的参数是被设置的属性名和值这里的没有声明包括当使用对象调用时，访问控制为 proteced,private 的属性（即没有权限访问的属性）。
+* __set ($property, $value)给一个未定义的属性赋值时，此方法会被触发，传递的参数是被设置的属性名和值这里的没有声明包括当使用对象调用时，访问控制为 proteced,private 的属性（即没有权限访问的属性）。
 * __isset ($property) 当在一个未定义的属性上调用 isset () 函数时调用此方法
 * __unset ($property) 当在一个未定义的属性上调用 unset () 函数时调用此方法
 * _call ($method, $arg_array) 当调用一个未定义的方法是调用此方法
@@ -2291,12 +2242,12 @@ pecl channel-update pecl.php.net
 ## 图书
 
 * [The Best PHP Books](https://github.com/manithchhuon/the-best-php-books)
-* [php-objects-patterns-practice-13](https://github.com/apress/php-objects-patterns-practice-13):Source code for 'PHP Objects, Patterns, and Practice' by Matt Zandstra
-    - 《[深入PHP：面向对象、模式与实践（第3版）](https://www.amazon.cn/gp/product/B005D6IRRY)》
 * 《[Head First PHP & MySQL（中文版）](https://www.amazon.cn/gp/product/B004R1QIJU)》
 * 《PHP and MySQL Web Development PHP与MySQL程序设计(第5版)》
 * Modern PHP
 * 深入理解PHP:高级技巧、面向对象与核心技术(原书第3版)
+* [php-objects-patterns-practice-13](https://github.com/apress/php-objects-patterns-practice-13):Source code for 'PHP Objects, Patterns, and Practice' by Matt Zandstra
+    - 《[深入PHP：面向对象、模式与实践（第3版）](https://www.amazon.cn/gp/product/B005D6IRRY)》
 
 ## 工具
 
