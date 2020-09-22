@@ -150,6 +150,10 @@ match VALUE {
 * [richardanaya / tour_of_rust](https://github.com/richardanaya/tour_of_rust):A tour of rust's language features https://tourofrust.com/
 * [Command line apps in Rust](https://rust-cli.github.io/book/index.html)
 
+## 项目
+
+* [bevy](https://github.com/bevyengine/bevy):A refreshingly simple data-driven game engine built in Rust https://bevyengine.org/
+
 ## 工具
 
 * 包管理
