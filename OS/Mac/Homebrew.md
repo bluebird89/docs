@@ -43,7 +43,7 @@ CORE_TAP_REPO = "git://mirrors.ustc.edu.cn/homebrew-core.git".freeze
 ### brew vs brew cask
 
 * Homebrew 默认情况下会自带：
-    - homebrew/core：
+    - homebrew/core
     - homebrew/cask：Homebrew 的 macOS Native 应用扩展，通过 cask 可以安装各类应用程序
     - homebrew/services：台服务程序扩展，它基于 macOS 的 launchctl
     - homebrew/bundle：解决所有软件依赖，包括官方和第三方的 formula 以及 cask
@@ -210,11 +210,6 @@ cd /usr/local && sudo chown -R $(whoami) bin etc include lib sbin share var Fram
 
 brew update --force
 ```
-
-## 软件
-
-* bash_completion
-* zsh_completion
 
 ## 工具
 
