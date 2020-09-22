@@ -155,6 +155,8 @@ sudo npm cache clean -f # 清除node.js的cache
 npm install -g n  安装 n 工具，这个工具是专门用来管理node.js版本
 n stable
 
+npm audit fix
+
 npm update [-g] [<package>]
 npm uninstall [-g] <package>
 

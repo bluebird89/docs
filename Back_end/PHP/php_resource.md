@@ -1,9 +1,8 @@
 # PHP RESOURCE
 
-* PHP 程序员可以学习一门静态编译语言作为补充实现动静互补，C/C++/Go 都是不错的选择。
-* 静态语言的编程体验与动态语言完全不同，学习过程可以让你得到更大的提升
+* 可以学习一门静态编译语言作为补充实现动静互补，C/C++/Go 都是不错的选择,静态语言的编程体验与动态语言完全不同，学习过程可以得到更大的提升
 * 掌握 C/C++ 语言后，还可以阅读 PHP 、 Swoole 、 Nginx 、Redis 、 Linux内核 等开源软件的源码，了解其底层运行原理
-* 现在最新版本Swoole提供了C++扩展模块的支持，封装了Zend API，用C++操作PHP变得很简单，可以用C++实现PHP扩展函数和类
+* Swoole提供了C++扩展模块的支持，封装了Zend API，用C++操作PHP变得很简单，可以用C++实现PHP扩展函数和类
 
 ## 包管理
 
@@ -71,7 +70,6 @@
     - [Elgg](https://github.com/Elgg/Elgg ) <http://learn.elgg.org/en/stable/guides>
     - [TIGERB/easy-php](https://github.com/TIGERB/easy-php):A Faster Lightweight Full-Stack PHP Framework 🚀 http://easy-php.tigerb.cn
 * 异步框架
-    - Swoole
     - Amp
     - [reactphp/reactphp](https://github.com/reactphp/react):Event-driven, non-blocking I/O with PHP. https://reactphp.org
 * 论坛
