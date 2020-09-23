@@ -204,14 +204,14 @@ gpg --sign demo.txt #签名
 ## 原理
 
 * 基于时间点的快照：将提交点指向提交时的项目快照
-* HEAD:的是当前分支最末梢最新的一个提交
+* HEAD:当前分支最新一个提交
 * 对代码的任何修改，最终都会反映到 commit 上面去。创建和保存项目的快照及与之后的快照进行对比
-* 维护的就是一个commitID树，分别保存着不同状态下的代码
-* objects 目录下有 3 种类型的数据： `git cat-file -p`
+* 维护一个commitID树，分别保存着不同状态代码
+* objects 目录下有 3 种类型数据： `git cat-file -p`
   - Blob 文件
   - Tree 文件夹
   - Commit 创建的提交节点 整合了 tree 和 blob 类型，保存了当前的所有变化
-* sdf
+* 结构
   - `config` 配置文件
   - `description` 仅供 Git Web 程序使用的描述
   - `HEAD`  当前被检出分支
@@ -225,6 +225,7 @@ gpg --sign demo.txt #签名
 ![Git原理-2](../_static/git_2.png)
 ![object structure](../_static/object_struct.png)
 ![commit、tree和blob三个对象之间的关系](../_static/tree.jpg)
+
 <!-- ![Git原理-3](../_static/git_3.jpg) 图片待修复-->
 
 ```sh
@@ -429,10 +430,10 @@ git update-index --no-assume-unchanged <file>
 * stash:还未提交的修改内容以及新添加的文件，留在索引区域或工作树的情况下切换到其他的分支时，修改内容会从原来的分支移动到目标分支
   - 如果在checkout的目标分支中相同的文件也有修改，checkout会失败的。这时要么先提交修改内容，要么用stash暂时保存修改内容后再checkout
 * merge 命令把不同分支合并起来。合并前，索引必须和当前提交相同。
-    - 如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做。
-    - 如果当前提交是另一个分支的祖父节点，就导致fast-forward合并。指向只是简单的移动，并生成一个新的提交。
-    - 一次真正的合并。默认把当前提交(ed489 如下所示)和另一个提交(33104)以及他们的共同祖父节点(b325c)进行一次三方合并。结果是先保存当前目录和索引，然后和父节点33104一起做一次新提交。
-    - merge的特殊选项squash：选项指定分支的合并，就可以把所有汇合的提交添加到分支上
+  - 如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做。
+  - 如果当前提交是另一个分支的祖父节点，就导致fast-forward合并。指向只是简单的移动，并生成一个新的提交。
+  - 一次真正的合并。默认把当前提交(ed489 如下所示)和另一个提交(33104)以及他们的共同祖父节点(b325c)进行一次三方合并。结果是先保存当前目录和索引，然后和父节点33104一起做一次新提交。
+  - merge的特殊选项squash：选项指定分支的合并，就可以把所有汇合的提交添加到分支上
 * Commit Message 格式
   - type: commit 的类型
     + feat: 新特性
@@ -594,19 +595,29 @@ squash 7d33868 update
 ### 版本库|本地仓库（commit history）
 
 * `.git`文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；
+
 * 包括git自动创建的master分支，并且将HEAD指针指向master分支
+
 * 文件状态：committed
+
 * 每个commit都有一个唯一的 Hash 值
+
 * 通过git log命令来查看
 
 * merge:保持修改内容的历史记录，但是历史记录会很复杂
+  
   - fast-forward:bugfix分支的历史记录包含master分支所有的历史记录，所以通过把master分支的位置移动到bugfix的最新分支上，Git 就会合并
+
 * rebase:历史记录简单，是在原有提交的基础上将差异内容反映进去。因此，可能导致原本的提交内容无法正常运行
+  
   - 待合并分支rebase主分支
   - 主分钟merge待合并分支
+
 * 流程
+  
   - 在topic分支中更新merge分支的最新代码，请使用rebase。
   - 向merge分支导入topic分支的话，先使用rebase，再使用merge
+
 * branch name should be descriptive
 
 ```sh
@@ -1057,9 +1068,9 @@ git --work-tree=/home/www checkout -f
     + 每一次更新，添加对应的版本号标签（TAG）
     + master分支存储了正式发布的历史：
   * develop分支:功能的集成分支，包含了项目的全部历史。用于整合 Feature 分支
-      * 功能开发完毕等待最后QA的验收
-      * 可进行每日夜间发布的代码
-      * 用于生成提测分支release，始终保持最新
+    * 功能开发完毕等待最后QA的验收
+    * 可进行每日夜间发布的代码
+    * 用于生成提测分支release，始终保持最新
   * feature分支:用于开发新需求和需要较长时间的BUG修改
     - 使用develop分支作为父分支
     - 当新功能完成时，合并回develop分支，不直接和 Master 分支交互
@@ -1087,14 +1098,14 @@ git --work-tree=/home/www checkout -f
     + develop分支上有了做一次发布（或者说快到了既定的发布日）的足够功能，就从develop分支上checkout一个发布分支
     + 新建的分支用于开始发布循环，所以从这个时间点开始之后新的功能不能再加到这个分支上---- 这个分支只应该做Bug修复、文档生成和其它面向发布任务
     + 一旦对外发布的工作都完成了，发布分支合并到master分支并分配一个版本号打好Tag
-    +  这些从新建发布分支以来的做的修改要合并回develop分支
-    +  The developer forks the open-source software’s official repository. A copy of this repository is created in their account.
-    +  The developer then clones the repository from their account to their local system.
-    +  A remote path for the official repository is added to the repository that is cloned to the local system.
-    +  The developer creates a new feature branch is created in their local system, makes changes, and commits them.
-    +  These changes along with the branch are pushed to the developer’s copy of the repository on their account.
-    +  A pull request from the branch is opened to the official repository.
-    +  The official repository’s manager checks the changes and approves the changes to get merged into the official repository
+    + 这些从新建发布分支以来的做的修改要合并回develop分支
+    + The developer forks the open-source software’s official repository. A copy of this repository is created in their account.
+    + The developer then clones the repository from their account to their local system.
+    + A remote path for the official repository is added to the repository that is cloned to the local system.
+    + The developer creates a new feature branch is created in their local system, makes changes, and commits them.
+    + These changes along with the branch are pushed to the developer’s copy of the repository on their account.
+    + A pull request from the branch is opened to the official repository.
+    + The official repository’s manager checks the changes and approves the changes to get merged into the official repository
   - 利用Git有提供各种勾子（hook），即仓库有事件发生时触发执行的脚本
     + 配置一个勾子，在push中央仓库的master分支时，自动构建好对外发布
   - [nvie/gitflow](https://github.com/nvie/gitflow)：Git extensions to provide high-level repository operations for Vincent Driessen's branching model.
@@ -1420,7 +1431,7 @@ git-quick-stats
 * [GitAlias/gitalias](https://github.com/GitAlias/gitalias#shortcut-examples):Git alias commands for faster easier version control
 
 | Alias                | Command                                                                                                                                 |
-| :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+|:-------------------- |:--------------------------------------------------------------------------------------------------------------------------------------- |
 | g                    | git                                                                                                                                     |
 | ga                   | git add                                                                                                                                 |
 | gaa                  | git add --all                                                                                                                           |
@@ -1543,7 +1554,7 @@ git-quick-stats
 ### Current
 
 | Command                | Description                             |
-| :--------------------- | :-------------------------------------- |
+|:---------------------- |:--------------------------------------- |
 | current_branch         | Return the name of the current branch   |
 | current_repository     | Return the names of the current remotes |
 | git_current_user_name  | Returns the `user.name` config value    |
@@ -1554,7 +1565,7 @@ git-quick-stats
 These features allow to pause a branch development and switch to another one (_"Work in Progress"_,  or wip). When you want to go back to work, just unwip it.
 
 | Command          | Description                                     |
-| :--------------- | :---------------------------------------------- |
+|:---------------- |:----------------------------------------------- |
 | work_in_progress | Echoes a warning if the current branch is a wip |
 | gwip             | Commit wip branch                               |
 | gunwip           | Uncommit wip branch                             |
@@ -1578,16 +1589,16 @@ These features allow to pause a branch development and switch to another one (_"
 
 [Tig: text-mode interface for Git](https://jonas.github.io/tig/) 字符模式下交互查看git项目，可以替代git命令
 
-*  l:全屏查看 commit 记录
-*  r:进入 refs view 模式，查看所有分支
-*  s:进入 status view，效果同 git status 命令，会展示所有 Untracked 和 UnStaged 文件
-*  选中 Unstaged 的文件键入【 u 】效果同 git add
-*  选中 staged 的文件键入 【 u 】效果同 git reset，即撤销 add 操作
-*  status view 模式
-  -  C 进入 vim 编辑器，
-  -  i 进入编辑模式，在第一行输入 commit 信息
-  -  :x 退出并保存
-  -  m 查看 commit 记录
+* l:全屏查看 commit 记录
+* r:进入 refs view 模式，查看所有分支
+* s:进入 status view，效果同 git status 命令，会展示所有 Untracked 和 UnStaged 文件
+* 选中 Unstaged 的文件键入【 u 】效果同 git add
+* 选中 staged 的文件键入 【 u 】效果同 git reset，即撤销 add 操作
+* status view 模式
+  - C 进入 vim 编辑器，
+  - i 进入编辑模式，在第一行输入 commit 信息
+  - :x 退出并保存
+  - m 查看 commit 记录
 
 ```sh
 brew install tig
@@ -1721,7 +1732,7 @@ External commands:
 
 > error: insufficient permission for adding an object to repository database .git/objects
 > chown -R henry:henry .git/objects
->
+> 
 > git clone:
 > error: object 3cb254d902a9b226bf95696af3a98839bb7797a4: badDate: invalid author/committer line - bad date
 > fatal: fsck error in packed object
@@ -1730,40 +1741,71 @@ External commands:
 ## 工具
 
 * highlighter
+  
   - [ dandavison / delta ](https://github.com/dandavison/delta):A syntax-highlighter for git and diff output
+
 * [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
+
 * [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
+  
   - `git summary`
+
 * [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
+
 * [kennethreitz/legit](https://github.com/kennethreitz/legit):Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
+
 * [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
+
 * [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
+
 * [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
+
 * [conventional-changelog/conventional-changelog](https://github.com/conventional-changelog/conventional-changelog):Generate a changelog from git metadata.
+
 * [pstadler/keybase-gpg-github](https://github.com/pstadler/keybase-gpg-github):Step-by-step guide on how to create a GPG key on keybase.io, adding it to a local GPG setup and use it with Git and GitHub.
+
 * [jesseduffield/lazygit](https://github.com/jesseduffield/lazygit):simple terminal UI for git commands `sudo add-apt-repository ppa:lazygit-team/release` `sudo apt-get install lazygit`
+
 * [isomorphic-git/isomorphic-git](https://github.com/isomorphic-git/isomorphic-git):A pure JavaScript implementation of git for node and browsers! https://isomorphic-git.org/
+
 * [Fakerr/git-recall](https://github.com/Fakerr/git-recall):An interactive way to peruse your git history from the terminal
+
 * [rgburke/grv](https://github.com/rgburke/grv):GRV is a terminal interface for viewing git repositories
+
 * [magit/magit](https://github.com/magit/magit):It's Magit! A Git porcelain inside Emacs. https://magit.vc
+
 * [carloscuesta/gitmoji](https://github.com/carloscuesta/gitmoji):An emoji guide for your commit messages. 😜 https://gitmoji.carloscuesta.me
+
 * [magit/magit](https://github.com/magit/magit):It's Magit! A Git porcelain inside Emacs. https://magit.vc
+
 * [zenhub](https://app.zenhub.com)：Agile project management integrated with GitHub
+
 * [commitizen/cz-cli](https://github.com/commitizen/cz-cli):The commitizen command line utility. http://commitizen.github.io/cz-cli/
+
 * [imsun/gitment](https://github.com/imsun/gitment):A comment system based on GitHub Issues. https://imsun.github.io/gitment/
+
 * [rtyley/bfg-repo-cleaner](https://github.com/rtyley/bfg-repo-cleaner):Removes large or troublesome blobs like git-filter-branch does, but faster. And written in Scala
+
 * [sdg-mit/gitless](https://github.com/sdg-mit/gitless):A version control system built on top of Git http://gitless.com
+
 * [sobolevn/git-secret](https://github.com/sobolevn/git-secret):👥 A bash-tool to store your private data inside a git repository. http://git-secret.io
+
 * [scmmanager](https://www.scm-manager.org/):The easiest way to share and manage your Git, Mercurial and Subversion repositories over http
+
 * [marionebl/commitlint](https://github.com/marionebl/commitlint):📓 Lint commit messages https://marionebl.github.io/commitlint/
+
 * [pomber/git-history](https://github.com/pomber/git-history)：Quickly browse the history of a file from any git repository https://githistory.xyz/
+
 * [okonet/lint-staged](https://github.com/okonet/lint-staged):🚫💩 — Run linters on git staged files
 
 * [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git) `git clone https://github.com/arialdomartini/oh-my-git.git ~/.oh-my-git && echo source ~/.oh-my-git/prompt.sh >> ~/.profile`
+
 * [magicmonty/bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):An informative and fancy bash prompt for Git users
+
 * [nosarthur/gita](https://github.com/nosarthur/gita):Manage many git repos with sanity 从容管理多个git库
 
 * 客户端
+  
   - [sourcetree](https://www.sourcetreeapp.com/)
   - [GitHawkApp/GitHawk](https://github.com/GitHawkApp/GitHawk):A GitHub project manager app for iOS. http://githawk.com
   - Linux

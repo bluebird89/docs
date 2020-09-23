@@ -16,8 +16,8 @@
 ## 安装
 
 * 先分区格式化，主分区激活
-    - 主分区
-    - 逻辑分区
+  - 主分区
+  - 逻辑分区
 * 更新引导记录
 
 ## 配置
@@ -138,8 +138,8 @@ scoop + search|install|status|uninstall|home + 对象
 ## 快捷键
 
 * alt+tab：长按为显示任务列表，短切为与上次任务切换
-*  Windows Key + Tab will bring up the task view
-*  Windows Key + Ctrl + D to create a whole new virtual desktop
+* Windows Key + Tab will bring up the task view
+* Windows Key + Ctrl + D to create a whole new virtual desktop
 * WIN+D：显示桌面，再按一次还原桌面
 * WIN+R：打开运行，输入命令可以执行相应操作，输入路径可以打开对应路径，输入程序名称可以打开对应程序（前提是你打开的是windows下面的程序）;输入cmd打- 开DOS窗口，输入notepad打开记事本，输入calc打开计算器等
 * WIN+E：打开我的电脑
@@ -308,11 +308,11 @@ wsl --set-version Ubuntu-18.04 2 # reboot
 The new Windows Terminal and the original Windows console host, all in the same place!
 
 * Theme
-    - [](https://aka.ms/terminal-profiles-schema)
-    - [](https://atomcorp.github.io/themes/)
-    - 使用
-        + add theme(s) to schemes
-        + in profiles, find the shell you're using (eg cmd, powershell, ubuntu) and replace colorScheme with the name of the theme
+  - [](https://aka.ms/terminal-profiles-schema)
+  - [](https://atomcorp.github.io/themes/)
+  - 使用
+    + add theme(s) to schemes
+    + in profiles, find the shell you're using (eg cmd, powershell, ubuntu) and replace colorScheme with the name of the theme
 
 ## 系统
 
