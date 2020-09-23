@@ -5,9 +5,9 @@ A fast, simple & powerful blog framework, powered by Node.js. https://hexo.io
 * 配置：站点目录下的_config.yml为站点配置文件，主题目录下的_config.yml为主题配置文件
 * [jaredly/hexo-admin](https://github.com/jaredly/hexo-admin):An Admin Interface for Hexo http://jaredly.github.io/hexo-admin/
 * [barretlee/hexo-admin](https://github.com/barretlee/hexo-admin):小胡子优化版本
-    - 按照官方的方式安装 hexo-admin
-    - 下载修改的代码到一个文件夹，执行 `npm link`
-    - 在 hexo 根目录下执行 `npm link hexo-admin`
+  - 按照官方的方式安装 hexo-admin
+  - 下载修改的代码到一个文件夹，执行 `npm link`
+  - 在 hexo 根目录下执行 `npm link hexo-admin`
 * [barretlee/hexo-admin](https://github.com/barretlee/hexo-admin)
 
 ```sh
@@ -46,9 +46,8 @@ The world’s fastest framework for building websites. https://gohugo.io
 * deploy 通过Aerobatic[<https://gohugo.io/hosting-and-deployment/hosting-on-bitbucket/>]
 * [gcushen/hugo-academic](https://github.com/gcushen/hugo-academic):📝 The website builder for Hugo. Build and deploy a beautiful website in minutes! https://sourcethemes.com/academic/
 * Theme
-    - [Hugo Themes](https://themes.gohugo.io)
+  - [Hugo Themes](https://themes.gohugo.io)
 * https://jimmysong.io/hugo-handbook
-
 
 ```sh
 brew install hugo
@@ -83,17 +82,17 @@ hugo server -t themename
 🌐 Jekyll is a blog-aware static site generator in Ruby https://jekyllrb.com static website generator，搭建静态博客，通过markdown文件自动生成html文件。Github Pages即靠Jekyll实现的。[官网](https://jekyllrb.com)
 
 * 结构
-    - _config.yml 是配置文件，最为重要，包含了所有配置信息
-    - _includes 文件夹包含了将被反复利用的文件，比如footer，header
-    - _layouts 文件夹包含了主页面的排版布局
-    - _posts 文件夹将包含所有的日志文件，Markdown格式
+  - _config.yml 是配置文件，最为重要，包含了所有配置信息
+  - _includes 文件夹包含了将被反复利用的文件，比如footer，header
+  - _layouts 文件夹包含了主页面的排版布局
+  - _posts 文件夹将包含所有的日志文件，Markdown格式
 * 配置
-    - github新仓库 开启Github pages
-    - 将代码推送到仓库
-    - [访问页面](https://bluebird89.github.io/)
+  - github新仓库 开启Github pages
+  - 将代码推送到仓库
+  - [访问页面](https://bluebird89.github.io/)
 * 主题
-    - [mmistakes/so-simple-theme](https://github.com/mmistakes/so-simple-theme):A simple Jekyll theme for words and pictures.
-    - [plusjade/jekyll-bootstrap](https://github.com/plusjade/jekyll-bootstrap):The quickest way to start and publish your Jekyll powered blog. 100% compatible with GitHub pages. http://jekyllbootstrap.com
+  - [mmistakes/so-simple-theme](https://github.com/mmistakes/so-simple-theme):A simple Jekyll theme for words and pictures.
+  - [plusjade/jekyll-bootstrap](https://github.com/plusjade/jekyll-bootstrap):The quickest way to start and publish your Jekyll powered blog. 100% compatible with GitHub pages. http://jekyllbootstrap.com
 
 ```sh
 gem install jekyll bundler
@@ -125,8 +124,8 @@ A simple, Git-powered wiki with a sweet API and local frontend.
 
 * [Work life](https://www.atlassian.com/blog)
 * 分发
-    - [OpenWrite](https://openwrite.cn/)
-    - [ crawlab-team / artipub ](https://github.com/crawlab-team/artipub):Article publishing platform that automatically distributes your articles to various media channels
+  - [OpenWrite](https://openwrite.cn/)
+  - [ crawlab-team / artipub ](https://github.com/crawlab-team/artipub):Article publishing platform that automatically distributes your articles to various media channels
 * [一只特立独行的猪](http://guanzhou.pub/tag/)
 * [没有了老师，该如何学习？](http://www.cnblogs.com/qianqian-li/p/6028745.html)
 * [How To Ask Questions The Smart Way](http://www.catb.org/esr/faqs/smart-questions.html)

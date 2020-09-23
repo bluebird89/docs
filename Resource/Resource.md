@@ -10,9 +10,9 @@
 * [Chineasy](https://www.chineasy.com/):设计很出色，充分利用汉字的优势，将汉字转换为一幅幅精美的图片，让识字变成一种享受。
 * [造字](http://www.myfont.me):用手写来造字
 * dictionary
-    - [goldendict/goldendict](https://github.com/goldendict/goldendict)
-    - [Flowerowl/ici](https://github.com/Flowerowl/ici):💥A dictionary used by programmers in the command line https://pypi.python.org/pypi/ici/
-    - [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf):⭐️ 给变量起名的事情上，为你生命省 3s (Save 3 seconds of your life when naming things.)
+  - [goldendict/goldendict](https://github.com/goldendict/goldendict)
+  - [Flowerowl/ici](https://github.com/Flowerowl/ici):💥A dictionary used by programmers in the command line https://pypi.python.org/pypi/ici/
+  - [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf):⭐️ 给变量起名的事情上，为你生命省 3s (Save 3 seconds of your life when naming things.)
 
 ## 建站
 
@@ -47,71 +47,71 @@
 * [asdf-vm/asdf](https://github.com/asdf-vm/asdf):Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more
 * [代码片段](http://www.phpxs.com/code/)
 * cheatsheet
-    - [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
-    - [chubin/cheat.sh](https://github.com/chubin/cheat.sh):the only cheat sheet you need https://cheat.sh/
-    * [Rico's cheatsheets](https://devhints.io/)
+  - [rstacruz/cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets https://devhints.io
+  - [chubin/cheat.sh](https://github.com/chubin/cheat.sh):the only cheat sheet you need https://cheat.sh/
+  * [Rico's cheatsheets](https://devhints.io/)
 * [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 * barcode
-    - [zxing/zxing](https://github.com/zxing/zxing):ZXing ("Zebra Crossing") barcode scanning library for Java, Android
+  - [zxing/zxing](https://github.com/zxing/zxing):ZXing ("Zebra Crossing") barcode scanning library for Java, Android
 * ReCaptcha
-    - [ecthros/uncaptcha2](https://github.com/ecthros/uncaptcha2):defeating the latest version of ReCaptcha with 91% accuracy http://uncaptcha.cs.umd.edu/
+  - [ecthros/uncaptcha2](https://github.com/ecthros/uncaptcha2):defeating the latest version of ReCaptcha with 91% accuracy http://uncaptcha.cs.umd.edu/
 * record
-    - [ShareX/ShareX](https://github.com/ShareX/ShareX):ShareX is a free and open source program that lets you capture or record any area of your screen and share it with a single press of a key. It also allows uploading images, text or other types of files to over 80 supported destinations you can choose from. https://getsharex.com
+  - [ShareX/ShareX](https://github.com/ShareX/ShareX):ShareX is a free and open source program that lets you capture or record any area of your screen and share it with a single press of a key. It also allows uploading images, text or other types of files to over 80 supported destinations you can choose from. https://getsharex.com
 * window
-    - [DaveDavenport/rofi](https://github.com/DaveDavenport/rofi):Rofi: A window switcher, application launcher and dmenu replacement
+  - [DaveDavenport/rofi](https://github.com/DaveDavenport/rofi):Rofi: A window switcher, application launcher and dmenu replacement
 * instant Messaging
-    - [processone/ejabberd](https://github.com/processone/ejabberd):Robust, ubiquitous and massively scalable Jabber / XMPP Instant Messaging platform https://www.process-one.net/en/ejabberd/
+  - [processone/ejabberd](https://github.com/processone/ejabberd):Robust, ubiquitous and massively scalable Jabber / XMPP Instant Messaging platform https://www.process-one.net/en/ejabberd/
 * table
-    - [Table Convert Online](https://tableconvert.com/)
+  - [Table Convert Online](https://tableconvert.com/)
 * flowchart
-    - [Zen Flowchart](https://www.zenflowchart.com)
+  - [Zen Flowchart](https://www.zenflowchart.com)
 * 輸入法
-    - [Rime](https://rime.im)
+  - [Rime](https://rime.im)
 * task:带日历与todo功能，全平台
-    - todolist
-    - TickTick
-    - [any do](https://www.any.do)
-    - [Microsoft To Do](https://todo.microsoft.com/tasks/)
-    - [calcurse](http://calcurse.org/):a calendar and scheduling application for the command line
-    - [Remember The Milk](link)
+  - todolist
+  - TickTick
+  - [any do](https://www.any.do)
+  - [Microsoft To Do](https://todo.microsoft.com/tasks/)
+  - [calcurse](http://calcurse.org/):a calendar and scheduling application for the command line
+  - [Remember The Milk](link)
 * 日历
-    - [MineTime ](https://minetime.ai/)
+  - [MineTime ](https://minetime.ai/)
 * URL Shortener
-    - [YOURLS/YOURLS](https://github.com/YOURLS/YOURLS):🔗 Your Own URL Shortener https://yourls.org
-        + 自增序列算法:设置 id 自增，一个 10进制 id 对应一个 62进制的数值，1对1，也就不会出现重复的情况
+  - [YOURLS/YOURLS](https://github.com/YOURLS/YOURLS):🔗 Your Own URL Shortener https://yourls.org
+    + 自增序列算法:设置 id 自增，一个 10进制 id 对应一个 62进制的数值，1对1，也就不会出现重复的情况
 * 加密
-    - [hashicorp/vault](https://github.com/hashicorp/vault):A tool for secrets management, encryption as a service, and privileged access management https://www.vaultproject.io/
+  - [hashicorp/vault](https://github.com/hashicorp/vault):A tool for secrets management, encryption as a service, and privileged access management https://www.vaultproject.io/
 * Sass
-    - [Atarity/deploy-your-own-saas](https://github.com/Atarity/deploy-your-own-saas):List of "only yours" cloud services for everyday needs 🏴
+  - [Atarity/deploy-your-own-saas](https://github.com/Atarity/deploy-your-own-saas):List of "only yours" cloud services for everyday needs 🏴
 * 亮度管理
-    - [Redshift](http://jonls.dk/redshift/)
+  - [Redshift](http://jonls.dk/redshift/)
 * 白板
-    - [excalidraw / excalidraw](https://github.com/excalidraw/excalidraw):Excalidraw is a whiteboard tool that lets you easily sketch diagrams that have a hand-drawn feel to them. https://excalidraw.com
+  - [excalidraw / excalidraw](https://github.com/excalidraw/excalidraw):Excalidraw is a whiteboard tool that lets you easily sketch diagrams that have a hand-drawn feel to them. https://excalidraw.com
 * Station
 * 专注
-    - [Cold Turky](https://getcoldturkey.com/):Meet your match, Zuckerberg. Reclaim your free time and boost your productivity by blocking time-wasting websites and applications.
+  - [Cold Turky](https://getcoldturkey.com/):Meet your match, Zuckerberg. Reclaim your free time and boost your productivity by blocking time-wasting websites and applications.
 * 资源
-    - [helloacm](https://helloacm.com/crontab-generator/): 集成工具集
-    - [scottslowe/learning-tools](https://github.com/scottslowe/learning-tools):A collection of tools and files for learning new technologies
+  - [helloacm](https://helloacm.com/crontab-generator/): 集成工具集
+  - [scottslowe/learning-tools](https://github.com/scottslowe/learning-tools):A collection of tools and files for learning new technologies
 * 生活
-    - [testerSunshine/12306](https://github.com/testerSunshine/12306):12306智能刷票，订票
+  - [testerSunshine/12306](https://github.com/testerSunshine/12306):12306智能刷票，订票
 * 分享
-    - [kosmi](https://kosmi.io/):Watch videos together, play games, or simply chat with friends or strangers all from within your browser!
+  - [kosmi](https://kosmi.io/):Watch videos together, play games, or simply chat with friends or strangers all from within your browser!
 * 剪贴板
-    - [CopyQ](https://github.com/hluk/CopyQ)
+  - [CopyQ](https://github.com/hluk/CopyQ)
 * kindle
-    - <http://kindle115.com/>
-    - [鸠摩搜书](https://www.jiumodiary.com/)
-    - [Calibre](https://calibre-ebook.com/) `sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin`
-    - <http://kmate.me/cn/>
-    - <https://readfree.me/>
-    - [时钟](http://k.ilib.io/u/clock.html)
-    - Knotes:Kindle 标注管理器
+  - <http://kindle115.com/>
+  - [鸠摩搜书](https://www.jiumodiary.com/)
+  - [Calibre](https://calibre-ebook.com/) `sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin`
+  - <http://kmate.me/cn/>
+  - <https://readfree.me/>
+  - [时钟](http://k.ilib.io/u/clock.html)
+  - Knotes:Kindle 标注管理器
 * PDF
-    - [Foxit Reader](https://www.foxitsoftware.cn/)
-    - [SumatraPDF](https://www.sumatrapdfreader.org/
-    - [MuPDF](https://mupdf.com/))
-    - Nuance PDF Reader
+  - [Foxit Reader](https://www.foxitsoftware.cn/)
+  - [SumatraPDF](https://www.sumatrapdfreader.org/
+  - [MuPDF](https://mupdf.com/))
+  - Nuance PDF Reader
 * [OnlineToolsBook](https://github.com/zhaoolee/OnlineToolsBook):lollipop在线工具秘籍,为在线工具写一本优质说明书,让在线工具造福人类~ Online tool cheats, write a quality manual for online tools, make online tools benefit humanity~https://www.v2fy.com/p/readme-onlinetoolsbook/
 * [fliqlo](https://fliqlo.com/)
 
@@ -121,9 +121,9 @@
 * 不同服务提供不同触发器接口
 * 开启 webhooks 服务:会生成一个key
 * new Applet:定义触发事件发送HTTP请求，推送notification
-    - this:create triggers:service webhooks-》Receive a web request-》eventName（不可修改）
-    - that:service:notification(mutal-media)->add intergedient(通过请求参数或者全局参数 event name(可修改) OccurredAt)
-    - test: 发送http请求
+  - this:create triggers:service webhooks-》Receive a web request-》eventName（不可修改）
+  - that:service:notification(mutal-media)->add intergedient(通过请求参数或者全局参数 event name(可修改) OccurredAt)
+  - test: 发送http请求
 
 ## 参考
 

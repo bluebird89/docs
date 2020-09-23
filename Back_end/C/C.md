@@ -1,9 +1,9 @@
 # [C](link)
 
 * 编写好的C程序需要先编译成可执行的机器指令才能运行
-     - 预处理作为一个阶段，它主要是对源文件进行一些处理，比如将#define替换成实际值、将#include指定的文件内容填充进来。
-     - 编译（compile）就是源代码到目标代码
-     - 链接(link)是将各个目标文件链接起来从而形成一个可执行的程序，当然链接器也会引入被程序所用到的所有标准C函数库的函数
+  - 预处理作为一个阶段，它主要是对源文件进行一些处理，比如将#define替换成实际值、将#include指定的文件内容填充进来。
+  - 编译（compile）就是源代码到目标代码
+  - 链接(link)是将各个目标文件链接起来从而形成一个可执行的程序，当然链接器也会引入被程序所用到的所有标准C函数库的函数
 
 ## 编译器
 
@@ -13,8 +13,8 @@
 * Turbo C，这是一个比较流行的C编译器，小巧快速。
 * cc，即C Compiler，这是一个unix系统古老的编译器，很多经典书籍会看到这个编译器。为保持兼容，现在的linux系统会将cc作为一个符号连接指向gcc，即/usr/bin/cc -> gcc。
 * CMake 编译程序需要两步
-   - 执行 Cmake 生成配置文件，主要是 Makefile；具体做法是执行`cd build && cmake -f ../`命令，之后在 build 目录下，会发现 CMake 根据系统环境如编译器、头文件等自动生成了一份 Makefile
-   - build 目录运行 make，让 make 驱动 gcc 编译、链接生成二进制可执行程序，这个过程可能会持续几分钟。最后在 build/bin 目录下，会生成所有可运行的二进制程序
+  - 执行 Cmake 生成配置文件，主要是 Makefile；具体做法是执行`cd build && cmake -f ../`命令，之后在 build 目录下，会发现 CMake 根据系统环境如编译器、头文件等自动生成了一份 Makefile
+  - build 目录运行 make，让 make 驱动 gcc 编译、链接生成二进制可执行程序，这个过程可能会持续几分钟。最后在 build/bin 目录下，会生成所有可运行的二进制程序
 
 ```sh
 sudo apt install gcc-7 g++-7 gcc-8 g++-8 gcc-9 g++-9
@@ -31,14 +31,21 @@ Ctrl+Shift+B
 ## 运行
 
 * Linux平台上的编译器更为重要，最典型的当属 GCC
+
 * 企业里实际项目的编译动作叫 make，编译的实际动作和过程都是写在 makefile文件里，所以makefile的书写规则建议学习！
 
 * -o 指定输出文件的文件名
+
 * -E：gcc -E test.c -o test.i  // 预处理
+
 * -S：gcc -S test.i  // 将预处理输出文件test.i汇编成test.s文件
+
 * -c：gcc -c test.s  // 编译
+
 * -O：gcc -O1 test.c -otest // 使用编译优化级别1编译程序。级别为1~3，级别越大优化效果越好，但编译时间越长
+
 * gcc testfun.c test.c -o test // 编译链接
+
 * gcc -otestfun.o test.o -o test // 链接
 
 ```

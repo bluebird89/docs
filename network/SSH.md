@@ -8,17 +8,17 @@
 * SKM(SSH Key Manager):一个在命令行下帮助管理和切换多个SSH key的工具
 * `ls -l /etc/init.d/sshd`
 * ssh-keygen
-	- -t rsa：指定密钥算法 RSA。
-	- -b 4096：指定密钥的位数是4096位。安全性要求不高的场合，这个值可以小一点，但是不应小于1024。
-	- -f ~/.ssh/user_ca：指定生成密钥的位置和文件名。
-	- -C user_ca：指定密钥的识别字符串，相当于注释
-	- -I：身份字符串，可以随便设置，相当于注释，方便区分证书，将来可以使用这个字符串撤销证书。
-	- -h：指定该证书是服务器证书，而不是用户证书。
-	- -n host.example.com：指定服务器的域名，表示证书仅对该域名有效。如果有多个域名，则使用逗号分隔。用户登录该域名服务器时，SSH 通过证书的这个值，分辨应该使用哪张证书发给用户，用来证明服务器的可信性。
-		+ user：指定用户名，表示证书仅对该用户名有效。如果有多个用户名，使用逗号分隔。用户以该用户名登录服务器时，SSH 通过这个值，分辨应该使用哪张证书，证明自己的身份，发给服务器
-	- -V +52w：指定证书的有效期，这里为52周（一年）。默认情况下，证书是永远有效的。建议使用该参数指定有效期，并且有效期最好短一点，最长不超过52周。
-	- ssh_host_rsa_key.pub：服务器公钥
-	- -s：指定 CA 签发证书的密钥
+  - -t rsa：指定密钥算法 RSA。
+  - -b 4096：指定密钥的位数是4096位。安全性要求不高的场合，这个值可以小一点，但是不应小于1024。
+  - -f ~/.ssh/user_ca：指定生成密钥的位置和文件名。
+  - -C user_ca：指定密钥的识别字符串，相当于注释
+  - -I：身份字符串，可以随便设置，相当于注释，方便区分证书，将来可以使用这个字符串撤销证书。
+  - -h：指定该证书是服务器证书，而不是用户证书。
+  - -n host.example.com：指定服务器的域名，表示证书仅对该域名有效。如果有多个域名，则使用逗号分隔。用户登录该域名服务器时，SSH 通过证书的这个值，分辨应该使用哪张证书发给用户，用来证明服务器的可信性。
+    + user：指定用户名，表示证书仅对该用户名有效。如果有多个用户名，使用逗号分隔。用户以该用户名登录服务器时，SSH 通过这个值，分辨应该使用哪张证书，证明自己的身份，发给服务器
+  - -V +52w：指定证书的有效期，这里为52周（一年）。默认情况下，证书是永远有效的。建议使用该参数指定有效期，并且有效期最好短一点，最长不超过52周。
+  - ssh_host_rsa_key.pub：服务器公钥
+  - -s：指定 CA 签发证书的密钥
 
 ```sh
 sudo apt install sshd
@@ -82,7 +82,7 @@ service sshd restart
 * 查看连接过程:`ssh -v root@192.168.75.136`
 
 ```
-#	$OpenBSD: sshd_config,v 1.101 2017/03/14 07:19:07 djm Exp $
+#    $OpenBSD: sshd_config,v 1.101 2017/03/14 07:19:07 djm Exp $
 
 # This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
@@ -121,7 +121,7 @@ ListenAddress 192.168.9.1
 #PubkeyAuthentication yes
 
 # Expect .ssh/authorized_keys2 to be disregarded by default in future.
-#AuthorizedKeysFile	.ssh/authorized_keys .ssh/authorized_keys2
+#AuthorizedKeysFile    .ssh/authorized_keys .ssh/authorized_keys2
 
 #AuthorizedPrincipalsFile none
 
@@ -196,14 +196,14 @@ UseDNS no
 AcceptEnv LANG LC_*
 
 # override default of no subsystems
-Subsystem	sftp	/usr/lib/openssh/sftp-server
+Subsystem    sftp    /usr/lib/openssh/sftp-server
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
-#	X11Forwarding no
-#	AllowTcpForwarding no
-#	PermitTTY no
-#	ForceCommand cvs server
+#    X11Forwarding no
+#    AllowTcpForwarding no
+#    PermitTTY no
+#    ForceCommand cvs server
 
 AllowUsers henry@192.168.0.100
 ```
@@ -211,26 +211,26 @@ AllowUsers henry@192.168.0.100
 ## 证书登录
 
 * 非证书登录缺点
-	- 密码登录:需要输入服务器密码，非常麻烦，也不安全，存在被暴力破解的风险
-	- 密钥登录:需要服务器保存用户的公钥，也需要用户保存服务器公钥的指纹。对于多用户、多服务器的大型机构很不方便，如果有员工离职，需要将他的公钥从每台服务器删除
+  - 密码登录:需要输入服务器密码，非常麻烦，也不安全，存在被暴力破解的风险
+  - 密钥登录:需要服务器保存用户的公钥，也需要用户保存服务器公钥的指纹。对于多用户、多服务器的大型机构很不方便，如果有员工离职，需要将他的公钥从每台服务器删除
 * 证书登录
-	- 引入了一个证书颁发机构（Certificate1 authority，简称 CA），对信任的服务器颁发服务器证书，对信任的用户颁发用户证书.登录时，用户和服务器不需要提前知道彼此的公钥，只需要交换各自的证书，验证是否可信即可。
-	- 优点
-		+ 用户和服务器不用交换公钥，这更容易管理，也具有更好的可扩展性
-		+ 证书可以设置到期时间，而公钥没有到期时间
-	- 流程
-		+ 没有证书，需要生成证书
-			* 用户和服务器都将自己的公钥，发给 CA
-			* CA 使用服务器公钥，生成服务器证书，发给服务器
-			* CA 使用用户的公钥，生成用户证书，发给用户
-		+ 用户登录服务器时，SSH 自动将用户证书发给服务器。
-		+ 服务器检查用户证书是否有效，以及是否由可信的 CA 颁发。
-		+ SSH 自动将服务器证书发给用户。
-		+ 用户检查服务器证书是否有效，以及是否由信任的 CA 颁发。
-		+ 双方建立连接，服务器允许用户登录。
-	- CA 至少需要两对密钥
-		+ 一对是签发用户证书的密钥，假设叫做user_ca
-		+ 另一对是签发服务器证书的密钥，假设叫做host_ca
+  - 引入了一个证书颁发机构（Certificate1 authority，简称 CA），对信任的服务器颁发服务器证书，对信任的用户颁发用户证书.登录时，用户和服务器不需要提前知道彼此的公钥，只需要交换各自的证书，验证是否可信即可。
+  - 优点
+    + 用户和服务器不用交换公钥，这更容易管理，也具有更好的可扩展性
+    + 证书可以设置到期时间，而公钥没有到期时间
+  - 流程
+    + 没有证书，需要生成证书
+      * 用户和服务器都将自己的公钥，发给 CA
+      * CA 使用服务器公钥，生成服务器证书，发给服务器
+      * CA 使用用户的公钥，生成用户证书，发给用户
+    + 用户登录服务器时，SSH 自动将用户证书发给服务器。
+    + 服务器检查用户证书是否有效，以及是否由可信的 CA 颁发。
+    + SSH 自动将服务器证书发给用户。
+    + 用户检查服务器证书是否有效，以及是否由信任的 CA 颁发。
+    + 双方建立连接，服务器允许用户登录。
+  - CA 至少需要两对密钥
+    + 一对是签发用户证书的密钥，假设叫做user_ca
+    + 另一对是签发服务器证书的密钥，假设叫做host_ca
 
 ```sh
 # 生成 CA 签发用户证书的密钥
@@ -300,8 +300,8 @@ git commit -S -m your commit message
 * ~/.ssh/id_rsa.pub ： 生成的公钥文件
 * ~/.ssh/know_hosts : 已知的主机公钥清单　
 * 如果希望ssh公钥生效需满足至少下面两个条件：
-    - .ssh目录的权限必须是700
-    - .ssh/authorized_keys文件权限必须是600
+  - .ssh目录的权限必须是700
+  - .ssh/authorized_keys文件权限必须是600
 
 ```sh
 ssh-keygen -t rsa # 生成.ssh文件目录

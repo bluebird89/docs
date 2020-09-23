@@ -278,7 +278,7 @@ curl -X DELETE 'localhost:9200/accounts/person/1'
     + 这个 commit 操作叫做 flush 。默认 30 分钟自动执行一次 flush ，但如果 translog 过大，也会触发 flush 。flush 操作就对应着 commit 的全过程，可以通过 es api，手动执行 flush 操作，手动将 os cache 中的数据 fsync 强刷到磁盘上去。
     + translog 日志文件的作用是什么？你执行 commit 操作之前，数据要么是停留在 buffer 中，要么是停留在 os cache 中，无论是 buffer 还是 os cache 都是内存，一旦这台机器死了，内存中的数据就全丢了。所以需要将数据对应的操作写入一个专门的日志文件 translog 中，一旦此时机器宕机，再次重启的时候，es 会自动读取 translog 日志文件中的数据，恢复到内存 buffer 和 os cache 中去。
     + translog 其实也是先写入 os cache 的，默认每隔 5 秒刷一次到磁盘中去，所以默认情况下，可能有 5 秒的数据会仅仅停留在 buffer 或者 translog 文件的 os cache 中，如果此时机器挂了，会丢失 5 秒钟的数据。但是这样性能比较好，最多丢 5 秒的数据。也可以将 translog 设置成每次写操作必须是直接 fsync 到磁盘，但是性能会差很多。
-    +  es 第一是准实时的，数据写入 1 秒后可以搜索到；可能会丢失数据的。有 5 秒的数据，停留在 buffer、translog os cache、segment file os cache 中，而不在磁盘上，此时如果宕机，会导致 5 秒的数据丢失。
+    + es 第一是准实时的，数据写入 1 秒后可以搜索到；可能会丢失数据的。有 5 秒的数据，停留在 buffer、translog os cache、segment file os cache 中，而不在磁盘上，此时如果宕机，会导致 5 秒的数据丢失。
 * 读数据：通过 doc id 来查询，会根据 doc id 进行 hash，判断出来当时把 doc id 分配到了哪个 shard 上面去，从那个 shard 去查询
   - 客户端发送请求到任意一个 node，成为 coordinate node
   - coordinate node 对 doc id 进行哈希路由，将请求转发到对应的 node，此时会使用 round-robin 随机轮询算法，在 primary shard 以及其所有 replica 中随机选择一个，让读请求负载均衡。
@@ -392,22 +392,30 @@ curl -X GET "localhost:9200/customer/_doc/1?pretty"
 * URL: `/index_name/_action/document_id`
 
 * 索引
+  
   - PUT|POST   /index/_create/id 指定Document ID，创建文档，如果ID已存在，则失败
   - POST       /index/_doc       自动生成ID，不会重复，重复提交则创建多个文档，文档版本都为1
   - Delete     /index            删除索引，索引内的文档也会被随之而删除,索引不存在返回 "404"
+
 * 文档
+  
   - PUT|POST   /index/_doc/id    如果ID不存在,则创建新的文档,如果ID存在,则删除现有文档后创建新的文档,版本+1,ID相同
   - POST       /index/_update/id    文档必须存在,否则更新失败,只能增量修改字段,不能减少字段,字段值可以随意修改,版本加1（字段扩充）
   - GET        /index/_doc/id    查看Document ID为1的文档
   - Delete     /index/_doc/id 删除文档,否则返回"not_found"
+
 * Bulk API 批量操作，每条语句都会进行返回结果
+  
   - 支持在一次API调用中，对不同索引进行操作
   - 支持四种操作 Index、Create、Update、Delete
   - 可以在 URI 中指定 Index，也可以在请求的 Playoad 中进行
   - 操作中单条语句操作失败，不会影响后续操作
   - 返回结果包含了每一条的执行结果
+
 * mget 批量读取的方式，批量操作，减少了网络连接所产生的开销。提高性能
+
 * msearch Multi Serach：一个可以进行条件匹配查询的语法 GET /<index>/_msearch
+  
   - 从单个API中获取多个搜索结果，请求的格式类似于批量API格式，并使用换行符分隔的JSON（NDJSON）格式。最后一行数据必须以换行符 \n 结尾。每个换行符前面都可以有一个回车符 \r。向此端点发送请求时，Content-Type标头应设置为application/x-ndjson
   - 路径参数：（可选，字符串）索引名称的逗号分隔列表或通配符表达式，用于限制请求
   - 主体
@@ -542,7 +550,7 @@ GET _mget
       * Extended Stats 对 Stats 的扩展，包含了更多的统计数据，比如方差、标准差等
       * Percentiles、Percentile Ranks：百分位数的一个统计
       * Top Hits：用于分桶后获取桶内最匹配的顶部文档列表，即详情数据
-    +
+        +
   - Pipeline Aggregation：管道分析类型，对其他聚合结果进行二次聚合
   - Matrix Aggregation：矩阵分析类型，支持对多个字段的操作并提供一个结果矩阵
 
@@ -675,31 +683,31 @@ POST users/_search
 ## ELK
 
 * 标准化:
-    - 路径规划: /data/logs/,/data/logs/access,/data/logs/error,/data/logs/run
-    - 格式要求: 严格要求使用json
-    - 命名规则: access_log error_log runtime_log system_log
-    - 日志切割: 按天，按小时。访问,错误，程序日志按小时，系统日志按天收集。
-    - 原始文本: rsync推送NAS，后删除最近三天前。
-    - 消息队列: 访问日志,写入Redis_DB6，错误日志Redis_DB7,程序日志Redis_DB8
+  - 路径规划: /data/logs/,/data/logs/access,/data/logs/error,/data/logs/run
+  - 格式要求: 严格要求使用json
+  - 命名规则: access_log error_log runtime_log system_log
+  - 日志切割: 按天，按小时。访问,错误，程序日志按小时，系统日志按天收集。
+  - 原始文本: rsync推送NAS，后删除最近三天前。
+  - 消息队列: 访问日志,写入Redis_DB6，错误日志Redis_DB7,程序日志Redis_DB8
 * 工具化:
-    - 访问日志  Apache、Nginx、Tomcat       (使用file插件)
-    - 错误日志  java日志、异常日志          (使用mulitline多行插件)
-    - 系统日志  /var/log/*、rsyslog         (使用syslog)
-    - 运行日志  程序写入的日志文件          (可使用file插件或json插件)
-    - 网络日志  防火墙、交换机、路由器      (syslog插件)
+  - 访问日志  Apache、Nginx、Tomcat       (使用file插件)
+  - 错误日志  java日志、异常日志          (使用mulitline多行插件)
+  - 系统日志  /var/log/*、rsyslog         (使用syslog)
+  - 运行日志  程序写入的日志文件          (可使用file插件或json插件)
+  - 网络日志  防火墙、交换机、路由器      (syslog插件)
 * 集群化:
-    - 每台ES上面都启动一个Kibana
-    - Kibana都连自己的ES
-    - 前端Nginx负载均衡+验证,代理至后端Kibana
-    - 通过消息队列来实现程序解耦以及高可用等扩展
+  - 每台ES上面都启动一个Kibana
+  - Kibana都连自己的ES
+  - 前端Nginx负载均衡+验证,代理至后端Kibana
+  - 通过消息队列来实现程序解耦以及高可用等扩展
 * 监控化:
-    - 对ES以及Kibana、进行监控。如果服务DOWN及时处理。
-    - 使用Redis的list作为ELKstack消息队列。
-    - Redis的List Key长度进行监控(llen key_name)。例:超过"10万"即报警(根据实际情况以及业务情况)
+  - 对ES以及Kibana、进行监控。如果服务DOWN及时处理。
+  - 使用Redis的list作为ELKstack消息队列。
+  - Redis的List Key长度进行监控(llen key_name)。例:超过"10万"即报警(根据实际情况以及业务情况)
 * 迭代化:
-    - 开源日志分析平台:ELK、EFK、EHK
-    - 数据收集处理:Flume、heka
-    - 消息队列:Redis、Rabbitmq、Kafka、Hadoop、webhdfs
+  - 开源日志分析平台:ELK、EFK、EHK
+  - 数据收集处理:Flume、heka
+  - 消息队列:Redis、Rabbitmq、Kafka、Hadoop、webhdfs
 
 ```
 elasticsearch-plugin list

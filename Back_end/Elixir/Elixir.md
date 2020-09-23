@@ -5,7 +5,7 @@ Elixir is a dynamic, functional language designed for building scalable and main
 ## 特点
 
 * erlang VM 自带的 observer 是个非常棒的工具，能够帮助了解系统运行的状态
-    - 服务在 epmd 注册的端口是动态的:需要保持一个范围内的端口全开，但是必须限制访问的源 IP
+  - 服务在 epmd 注册的端口是动态的:需要保持一个范围内的端口全开，但是必须限制访问的源 IP
 * shell 也可以用来做运行系统的 introspection
 
 ```
@@ -44,8 +44,8 @@ sudo apt-get install elixir
 * 和现有的系统无缝对接:因为 rest API 是浅浅的一层，所以使用了 plug
 * 完善的部署脚本
 * 和现有的日志系统以及错误报告系统集成
-    - 使用文件日志，可以用 logstash 或者 file beat 将日志文件送入 elasticsearch 进行 aggregation
-    - sentry 官方有 elixir 的客户端，只要注册一个新的 app，把 dsn 写入到配置文件中即可实现和错误报系统的集成
+  - 使用文件日志，可以用 logstash 或者 file beat 将日志文件送入 elasticsearch 进行 aggregation
+  - sentry 官方有 elixir 的客户端，只要注册一个新的 app，把 dsn 写入到配置文件中即可实现和错误报系统的集成
 * 和现有的监控系统集成
 
 ```sh

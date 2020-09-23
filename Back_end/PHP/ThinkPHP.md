@@ -5,10 +5,10 @@ PHP Framework ThinkPHP5——为API开发而设计的高性能PHP框架（基于
 ## 说明
 
 * 3.1
-    - 数据插入字段的过滤，通过表字段缓存
-    - 核心（Core）：就是框架的核心代码，不可缺少的东西，TP本身是基于MVC思想开发的框架。
-    - 行为（Behavior）：行为在新版ThinkPHP的架构里面起着举足轻重的作用，在系统核心之上，设置了很多标签扩展位，而每个标签位置可以依次执行各自的独立行为。行为扩展就因此而诞生了，而且很多系统功能也是通过内置的行为扩展完成的，所有行为扩展都是可替换和增加的，由此形成了底层框架可组装的基础。
-    - 驱动（ Driver ）：数据库驱动、缓存驱动、标签库驱动和模板引擎驱动，以及外置的类扩展。
+  - 数据插入字段的过滤，通过表字段缓存
+  - 核心（Core）：就是框架的核心代码，不可缺少的东西，TP本身是基于MVC思想开发的框架。
+  - 行为（Behavior）：行为在新版ThinkPHP的架构里面起着举足轻重的作用，在系统核心之上，设置了很多标签扩展位，而每个标签位置可以依次执行各自的独立行为。行为扩展就因此而诞生了，而且很多系统功能也是通过内置的行为扩展完成的，所有行为扩展都是可替换和增加的，由此形成了底层框架可组装的基础。
+  - 驱动（ Driver ）：数据库驱动、缓存驱动、标签库驱动和模板引擎驱动，以及外置的类扩展。
 * 5.1.37
 * 6
 
@@ -56,15 +56,15 @@ php public/index.php index/Demon/start # 命令行运行
 ## 扩展
 
 * framework
-    - [top-think/framework](https://github.com/top-think/framework):ThinkPHP5 Framework http://www.thinkphp.cn
+  - [top-think/framework](https://github.com/top-think/framework):ThinkPHP5 Framework http://www.thinkphp.cn
 * swoole
-    * [top-think/think-swoole](https://github.com/top-think/think-swoole):Swoole extend for thinkphp5
+  * [top-think/think-swoole](https://github.com/top-think/think-swoole):Swoole extend for thinkphp5
 * admin
-    * [Ucer/ucer-admin](https://github.com/Ucer/ucer-admin):ucer admin system based Thinkphp5.0.10 http://codehaoshi.com
-    * [yuan1994/tpAdmin](https://github.com/yuan1994/tpAdmin):一个基于ThinkPHP5的管理后台，支持代码自动生成，RBAC权限管理，无限级节点权限管理，一个智能化的管理后台
-    * [Astonep/tp-admin](https://github.com/Astonep/tp-admin):基于ThinkPHP5拿来即用高性能后台管理系统 http://tpadmin.shijinrong.cn/admin/login
-    * [zhongshaofa/layuimini](https://github.com/zhongshaofa/layuimini):后台admin前端模板，基于 layui 编写的最简洁、易用的后台框架模板。只需提供一个接口就直接初始化整个框架，无需复杂操作。 http://layuimini.99php.cn
-    * [ijry/lyadmin](https://github.com/ijry/lyadmin):lyadmin是一套轻量级通用后台，采用ThinkPHP+Bootstrap3制作，内置系统设置、上传管理、权限管理、模块管理、插件管理等功能，独有的Builder页面自动生成技术节省50%开发成本，先进的模块化开发的支持让开发成本一降再降，致力于为个人和中小型企业打造全方位的PHP企业级开发解决方案。另外提供整套企业开发解决方案，集PC、手机、微信、App、小程序五端于一体，更有用户中心模块、门户模块、钱包支付中心模块、商城模块、OAuth2统一登陆、内部Git模块、Docker模块可供选择。 https://www.lingyun.net/lyadmin.html
+  * [Ucer/ucer-admin](https://github.com/Ucer/ucer-admin):ucer admin system based Thinkphp5.0.10 http://codehaoshi.com
+  * [yuan1994/tpAdmin](https://github.com/yuan1994/tpAdmin):一个基于ThinkPHP5的管理后台，支持代码自动生成，RBAC权限管理，无限级节点权限管理，一个智能化的管理后台
+  * [Astonep/tp-admin](https://github.com/Astonep/tp-admin):基于ThinkPHP5拿来即用高性能后台管理系统 http://tpadmin.shijinrong.cn/admin/login
+  * [zhongshaofa/layuimini](https://github.com/zhongshaofa/layuimini):后台admin前端模板，基于 layui 编写的最简洁、易用的后台框架模板。只需提供一个接口就直接初始化整个框架，无需复杂操作。 http://layuimini.99php.cn
+  * [ijry/lyadmin](https://github.com/ijry/lyadmin):lyadmin是一套轻量级通用后台，采用ThinkPHP+Bootstrap3制作，内置系统设置、上传管理、权限管理、模块管理、插件管理等功能，独有的Builder页面自动生成技术节省50%开发成本，先进的模块化开发的支持让开发成本一降再降，致力于为个人和中小型企业打造全方位的PHP企业级开发解决方案。另外提供整套企业开发解决方案，集PC、手机、微信、App、小程序五端于一体，更有用户中心模块、门户模块、钱包支付中心模块、商城模块、OAuth2统一登陆、内部Git模块、Docker模块可供选择。 https://www.lingyun.net/lyadmin.html
 * [think-seaslog](https://github.com/top-think/think-seaslog)
 * [top-think/think-annotation](https://github.com/top-think/think-annotation):ThinkPHP6注解
 

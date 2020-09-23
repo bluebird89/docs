@@ -6,12 +6,12 @@
 
 * Spring Cloud Config：配置管理工具，支持使用Git存储配置内容，可以使用它实现应用配置的外部化存储，并支持客户端配置信息刷新，加密/解密配置内容等。
 * Spring Cloud Netflix：核心组件，对多个Netflix OSS开源套件进行整合。
-	- Eureka：服务治理组件，包含服务注册中心、服务注册与发现机制的实现。
-	-  Hystrix：容错管理组件，实现断路器模式，帮助服务依赖中出现的延迟和为故障提供强大的容错能力。
- 	-  Ribbon：客户端负载均衡的服务调用组件。
- 	-  Feign：基于Ribbon和Hystrix的声明式服务调用组件。
- 	-  Zuul：网关组件，提供智能路由、访问过滤等功能。
-Archaius：外部化配置组件。
+  - Eureka：服务治理组件，包含服务注册中心、服务注册与发现机制的实现。
+  - Hystrix：容错管理组件，实现断路器模式，帮助服务依赖中出现的延迟和为故障提供强大的容错能力。
+    - Ribbon：客户端负载均衡的服务调用组件。
+    - Feign：基于Ribbon和Hystrix的声明式服务调用组件。
+    - Zuul：网关组件，提供智能路由、访问过滤等功能。
+      Archaius：外部化配置组件。
 * Spring Cloud Bus：事件、消息总线，用于传播集群中的状态变化或事件，以触发后续的处理，比如用来动态刷新配置。
 * Spring Cloud Cluster：针对ZooKeeper、Redis、Hazelcast、Consul的选举算法和通用状态模式的实现。
 * Spring Cloud Consul：服务发现与配置管理工具。

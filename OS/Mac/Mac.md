@@ -9,7 +9,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 * iPad Pro：阅读利器
 * 格式化移动硬盘：ExFAT格式
 * imac Radeon Pro 580
-    + (2019)Radeon Pro 580X 图形处理器 (配备 8GB 显存) 可选配 Radeon Pro Vega 48
+  + (2019)Radeon Pro 580X 图形处理器 (配备 8GB 显存) 可选配 Radeon Pro Vega 48
 
 ## 系统配置
 
@@ -22,30 +22,52 @@ Mac：最大优势是 GUI 和命令行的完美结合
 ### 配置
 
 * [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
+
 * [skwp/dotfiles](https://github.com/skwp/dotfiles) YADR - The best vim,git,zsh plugins and the cleanest vimrc you've ever seen
+
 * [holman/dotfiles](https://github.com/holman/dotfiles)@holman does dotfiles
+
 * [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files.
+
 * [donnemartin/dev-setup](https://github.com/donnemartin/dev-setup)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
+
 * [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
+
 * [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
+
 * [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
 
 * [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
+
 * [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
+
 * [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
+
 * [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(<http://sourabhbajaj.com/mac-setup/>) 推荐
+
 * [mac-setup/](http://sourabhbajaj.com/mac-setup/) the basics of setting up a development environment on a new Mac
+
 * [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
+
 * [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
+
 * [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
+
 * [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
+
 * [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
+
 * [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
+
 * [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
+
 * [Mac OS X 配置指南](https://wild-flame.github.io/guides/)
+
 * [phodal/setup.guide](https://github.com/phodal/setup.guide)
+
 * 参考
-    * [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
+  
+  * [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
 
 ```sh
 # 开启 SSD 的 Trim 模式
@@ -55,76 +77,76 @@ sudo trimforce enable
 ## 启动项
 
 * 配置目录
-    - ~/Library/Preferences/ – （当前用户设置的进程）
-    - ~/Library/LaunchAgents/ – （当前用户的守护进程）
-    - /Library/LaunchAgents/ – （管理员设置的用户进程）
-    - /Library/LaunchDaemons/ – （管理员提供的系统守护进程）
-    - /System/Library/LaunchAgents/ – （Mac操作系统提供的用户进程）
-    - /System/Library/LaunchDaemons/ – （Mac操作系统提供的系统守护进程）
+  
+  - ~/Library/Preferences/ – （当前用户设置的进程）
+  - ~/Library/LaunchAgents/ – （当前用户的守护进程）
+  - /Library/LaunchAgents/ – （管理员设置的用户进程）
+  - /Library/LaunchDaemons/ – （管理员提供的系统守护进程）
+  - /System/Library/LaunchAgents/ – （Mac操作系统提供的用户进程）
+  - /System/Library/LaunchDaemons/ – （Mac操作系统提供的系统守护进程）
 
 * 在 Mac 设备启动时通过 Command + V 或者 Command +S 这类快捷键改变启动行为。但是除此以外，通过 NVRAM 或第三方引导程序（如 Clover）中也可以设置启动参数。macOS 内置了许多启动参数，可以用于专业用户调试或排除故障。可以通过 nvram 工具设置启动参数： `sudo nvram boot-args="-v"`
-* 对于使用第三方引导程序（如 Clover 等）的用户来说，可以在 config.plist 文件、或者在启动菜单中设置引导参数。
 
--   - v：以「啰嗦模式」启动，等价于 Mac 设备上的快捷键 Command + V。
-    - -x：以「安全模式」启动，等价于 Mac 设备上的长按 Shift 键。在这一模式下 macOS 会加载尽可能少的内核扩展（kext）文件。
-    - -s：以「单用户模式」启动，等价于 Mac 设备上的快捷键 Command + S。这一模式将会启动终端模式，你可以用这种方式修复你的系统。
-    - f：旧版的「安全模式」。
-    - -f：启动时强制重建内核扩展（kext）缓存。
-    - config：指定用于代替 com.apple.Boot.plist 的配置文件。config=sukka 将会加载 /Library/Preferences/SystemConfiguration/sukka.plist
-    - arch=x86_64：在 OS X Snow Leopard 中，即使已经内置了 64 位内核，系统也依然默认启动 32 位内核。这个启动参数可以使系统强制使用 64 位内核。如果要使系统总是以 32 位内核启动，请将 x86_64 部分替换为 i386。在某些情况下，第三方 kext 可能只有 32 位或 64 位，需要启动到相应的内核类型才能加载。
-    - -legacy：启动到 32 位内核。
-    - maxmem=32：将可寻址内存限制为指定的容量，本例中为 32 GB。如果没有这一启动参数，macOS 会将内存限制设置为硬件可以寻址的最大容量、亦或是安装的内存容量。
-    - cpus=1：限制系统中活动 CPU 的数量。苹果的开发者工具有一个选项用于启用或禁用系统中的一些 CPU，但你也可以通过这个参数指定要使用的 CPU 数量。在某些情况下，这也许有助于省电、或者你正在调试 X86 电源驱动，否则这一选项真的没什么别的作用。
-    - rd=disk0s1：强制指定启动分区。
-    - rp：根目录位置。
-    - trace：Kernel Trace 缓冲区大小。
-    - iog=0x0：这一参数强制 macOS 在笔记本上 不使用 Clamshell 模式。此时当你外接了显示器和键盘，合盖后笔记本不会睡眠、但内置显示器将会关闭。
-    - serverperfmode：为 macOS Server 开启 性能模式
-    - _panicd_ip=11.4.5.14：设置一个 Kernel Panic 收集服务器的 IP 地址，日志将会通过 UDP 协议发送给这个 IP 的 1069 端口。
-    - panicd_port：修改日志发送端口（默认为 1069）。
-    - debug=0x144：这一参数结合了内核调试功能来显示内核进程的额外信息，这在 Kernel Panic 时很有用。可用的参数包括以下这些：
-    - 0x1：DB_HALT，在引导时暂停，直到外部调试串口已经连接并被识别
-    - 0x2：DB_PRT，将内核的 printf() 函数输出的信息打印到 Console.app
-    - 0x4：DB_NMI，启用内核调试功能，包括生成非屏蔽中断（NMI）。在 Power Mac 上，只需简单地按下电源键就能产生 NMI。在笔记本电脑上，在按下电源键时必须按住命令键。如果按住电源键超过五秒钟，系统将关闭电源。在「系统偏好设置」中更改启动盘时 DB_NMI 位将被清除。
-    - 0x8：DB_KPRT，将 kprintf() 产生的内核调试输出发送到远程输出设备，通常是一个调试串口（如果有的话）。注意， kprintf() 的输出是同步的。
-    - 0x10：DB_KDB，使用 KDB 代替 GDB 作为默认的内核调试器。与 GDB 不同，KDB 必须被显式编译到内核中。此外，基于 KDB 的调试需要原生的串口硬件（而不是基于 USB 的串口适配器）。
-    - 0x20：SB_SLOG，启用将杂项诊断记录到系统日志中。设置了这个位后，load_shared_file() 内核函数会记录额外的信息。
-    - 0x40：DB_ARP，允许跨局域网调试内核。
-    - 0x80：DB_KDP_BP_DIS，已经被弃用，用于支持旧版的 GDB。
-    - 0x100：DB_LOG_PI_SCRN，禁用五国、而把 Kernel Panic 的相关数据直接打印在屏幕上。这一参数还可以用于 Core Dump。
-    - 0x200：DB_KDP_GETC_ENA，在 Kernel Panic 后启用快捷键（c 继续，r 重启，k 进入 KDB）
-    - 0x400：DB_KERN_DUMP_ON_PANIC，当 Kernel Panic 时触发一次 Core Dump。
-    - 0x800：DB_KERN_DUMP_ON_NMI，当产生 NMI 时触发一次 Core Dump。
-    - 0x1000：DB_DBG_POST_CORE，等待调试器连接（如果使用 GDB）或在 NMI 触发的内核转储后等待调试器（如果使用 KDB）。如果没有设置 DB_DBG_POST_CORE，内核在 Core Dump 后继续运行。
-    - 0x2000：只生成并发送 Kernel Panic Log，不生成完整的 Core Dump。
-    - artsize：指定要用于地址解析表（ART）的页数。
-    - BootCacheOverride：BootCache 驱动程序被加载，但从网络启动时不会运行。设置 BootCacheOverride=1 可以覆盖此行为。
-    - dart：设置 dart=0 会关闭 64 位硬件上的系统 PCI 地址映射器（DART）。DART 在拥有 2GB 以上物理内存的机器上是必需的，但在所有机器上无论内存大小，默认情况下都会启用 DART
-    - diag：启用内核的内置诊断接口及其特定功能。
-    - fill：指定一个整数值，在启动是将会用这个整数填充所有内存。
-    - fn：改变处理器的强制休眠行为。设置 fn=1 将关闭强制休眠；设置 fn=2 将开启强制休眠。
-    - _fpu：禁用x86上的FPU功能。_fpu=387 将禁用 FXSR/SSE/SSE2，而字符串值为 _fpu=se 的字符串值将禁用 SSE2。
-    - hfile：休眠文件的名称（这一参数也会修改 sysctl 中的 kern.hibernatefile 变量）。
-    - io：I/O Kit 驱动调试位。设置为 0x00200000 （即 kIOLogSynchronous）时会使 IOLog() 函数同步执行。
-    - novmx=1：禁用 AltiVec。
-    - pcata=0：禁用板载 PC ATA 驱动器。
-    - pmsx=1：在 OS X 10.4.3 上启用实验性电源管理（PMS）。
-    - _router_ip=11.4.5.14：使用跨局域网内核调试时指定网关 IP。
-    - serial=1，启用串口调试。
-    - smbios=1：在 SMBIOS 驱动中启用详细的日志信息，仅限于 32 位机器。
-    - vmdx 和pmdx：内核启动时在内存中创建一个分区，参数格式为 base.size，其中 base 是对齐的内存地址、size 是内存页面大小的倍数。vmdx 指虚拟内存、pmdx 指物理内存。创建成功后将会被分别挂载在 dev/mdx 和 dev/emdx 下。
-    - -b：不执行 /etc/rc.boot。
-    - -l：日志中输出内存泄漏相关记录。
-    - srv=1：如果你在 X Servers 或 macOS Server 系统中使用这一参数，macOS 会修改内核的电源和网络参数，提升作为服务器的性能。
-    - nvram_paniclog：将 Kernel Panic 日志写入 NVRAM。
-    - acpi：启用 AppleACPIPlatform 调试。
-    - acpi_level：ACPI 调试等级。
-    - idlehalt=1：无视所有空闲进程、使 CPU 进入低功率模式。
-    - platform：platform=X86PC 强制禁用 ACPI 电源管理；platform=ACPI 强制启用 ACPI 电源管理。
-    - keepsyms=1：保留 KLD/Address-Symbol 翻译
+* 对于使用第三方引导程序（如 Clover 等）的用户来说，可以在 config.plist 文件、或者在启动菜单中设置引导参数。
+- - v：以「啰嗦模式」启动，等价于 Mac 设备上的快捷键 Command + V。
+  - -x：以「安全模式」启动，等价于 Mac 设备上的长按 Shift 键。在这一模式下 macOS 会加载尽可能少的内核扩展（kext）文件。
+  - -s：以「单用户模式」启动，等价于 Mac 设备上的快捷键 Command + S。这一模式将会启动终端模式，你可以用这种方式修复你的系统。
+  - f：旧版的「安全模式」。
+  - -f：启动时强制重建内核扩展（kext）缓存。
+  - config：指定用于代替 com.apple.Boot.plist 的配置文件。config=sukka 将会加载 /Library/Preferences/SystemConfiguration/sukka.plist
+  - arch=x86_64：在 OS X Snow Leopard 中，即使已经内置了 64 位内核，系统也依然默认启动 32 位内核。这个启动参数可以使系统强制使用 64 位内核。如果要使系统总是以 32 位内核启动，请将 x86_64 部分替换为 i386。在某些情况下，第三方 kext 可能只有 32 位或 64 位，需要启动到相应的内核类型才能加载。
+  - -legacy：启动到 32 位内核。
+  - maxmem=32：将可寻址内存限制为指定的容量，本例中为 32 GB。如果没有这一启动参数，macOS 会将内存限制设置为硬件可以寻址的最大容量、亦或是安装的内存容量。
+  - cpus=1：限制系统中活动 CPU 的数量。苹果的开发者工具有一个选项用于启用或禁用系统中的一些 CPU，但你也可以通过这个参数指定要使用的 CPU 数量。在某些情况下，这也许有助于省电、或者你正在调试 X86 电源驱动，否则这一选项真的没什么别的作用。
+  - rd=disk0s1：强制指定启动分区。
+  - rp：根目录位置。
+  - trace：Kernel Trace 缓冲区大小。
+  - iog=0x0：这一参数强制 macOS 在笔记本上 不使用 Clamshell 模式。此时当你外接了显示器和键盘，合盖后笔记本不会睡眠、但内置显示器将会关闭。
+  - serverperfmode：为 macOS Server 开启 性能模式
+  - _panicd_ip=11.4.5.14：设置一个 Kernel Panic 收集服务器的 IP 地址，日志将会通过 UDP 协议发送给这个 IP 的 1069 端口。
+  - panicd_port：修改日志发送端口（默认为 1069）。
+  - debug=0x144：这一参数结合了内核调试功能来显示内核进程的额外信息，这在 Kernel Panic 时很有用。可用的参数包括以下这些：
+  - 0x1：DB_HALT，在引导时暂停，直到外部调试串口已经连接并被识别
+  - 0x2：DB_PRT，将内核的 printf() 函数输出的信息打印到 Console.app
+  - 0x4：DB_NMI，启用内核调试功能，包括生成非屏蔽中断（NMI）。在 Power Mac 上，只需简单地按下电源键就能产生 NMI。在笔记本电脑上，在按下电源键时必须按住命令键。如果按住电源键超过五秒钟，系统将关闭电源。在「系统偏好设置」中更改启动盘时 DB_NMI 位将被清除。
+  - 0x8：DB_KPRT，将 kprintf() 产生的内核调试输出发送到远程输出设备，通常是一个调试串口（如果有的话）。注意， kprintf() 的输出是同步的。
+  - 0x10：DB_KDB，使用 KDB 代替 GDB 作为默认的内核调试器。与 GDB 不同，KDB 必须被显式编译到内核中。此外，基于 KDB 的调试需要原生的串口硬件（而不是基于 USB 的串口适配器）。
+  - 0x20：SB_SLOG，启用将杂项诊断记录到系统日志中。设置了这个位后，load_shared_file() 内核函数会记录额外的信息。
+  - 0x40：DB_ARP，允许跨局域网调试内核。
+  - 0x80：DB_KDP_BP_DIS，已经被弃用，用于支持旧版的 GDB。
+  - 0x100：DB_LOG_PI_SCRN，禁用五国、而把 Kernel Panic 的相关数据直接打印在屏幕上。这一参数还可以用于 Core Dump。
+  - 0x200：DB_KDP_GETC_ENA，在 Kernel Panic 后启用快捷键（c 继续，r 重启，k 进入 KDB）
+  - 0x400：DB_KERN_DUMP_ON_PANIC，当 Kernel Panic 时触发一次 Core Dump。
+  - 0x800：DB_KERN_DUMP_ON_NMI，当产生 NMI 时触发一次 Core Dump。
+  - 0x1000：DB_DBG_POST_CORE，等待调试器连接（如果使用 GDB）或在 NMI 触发的内核转储后等待调试器（如果使用 KDB）。如果没有设置 DB_DBG_POST_CORE，内核在 Core Dump 后继续运行。
+  - 0x2000：只生成并发送 Kernel Panic Log，不生成完整的 Core Dump。
+  - artsize：指定要用于地址解析表（ART）的页数。
+  - BootCacheOverride：BootCache 驱动程序被加载，但从网络启动时不会运行。设置 BootCacheOverride=1 可以覆盖此行为。
+  - dart：设置 dart=0 会关闭 64 位硬件上的系统 PCI 地址映射器（DART）。DART 在拥有 2GB 以上物理内存的机器上是必需的，但在所有机器上无论内存大小，默认情况下都会启用 DART
+  - diag：启用内核的内置诊断接口及其特定功能。
+  - fill：指定一个整数值，在启动是将会用这个整数填充所有内存。
+  - fn：改变处理器的强制休眠行为。设置 fn=1 将关闭强制休眠；设置 fn=2 将开启强制休眠。
+  - _fpu：禁用x86上的FPU功能。_fpu=387 将禁用 FXSR/SSE/SSE2，而字符串值为 _fpu=se 的字符串值将禁用 SSE2。
+  - hfile：休眠文件的名称（这一参数也会修改 sysctl 中的 kern.hibernatefile 变量）。
+  - io：I/O Kit 驱动调试位。设置为 0x00200000 （即 kIOLogSynchronous）时会使 IOLog() 函数同步执行。
+  - novmx=1：禁用 AltiVec。
+  - pcata=0：禁用板载 PC ATA 驱动器。
+  - pmsx=1：在 OS X 10.4.3 上启用实验性电源管理（PMS）。
+  - _router_ip=11.4.5.14：使用跨局域网内核调试时指定网关 IP。
+  - serial=1，启用串口调试。
+  - smbios=1：在 SMBIOS 驱动中启用详细的日志信息，仅限于 32 位机器。
+  - vmdx 和pmdx：内核启动时在内存中创建一个分区，参数格式为 base.size，其中 base 是对齐的内存地址、size 是内存页面大小的倍数。vmdx 指虚拟内存、pmdx 指物理内存。创建成功后将会被分别挂载在 dev/mdx 和 dev/emdx 下。
+  - -b：不执行 /etc/rc.boot。
+  - -l：日志中输出内存泄漏相关记录。
+  - srv=1：如果你在 X Servers 或 macOS Server 系统中使用这一参数，macOS 会修改内核的电源和网络参数，提升作为服务器的性能。
+  - nvram_paniclog：将 Kernel Panic 日志写入 NVRAM。
+  - acpi：启用 AppleACPIPlatform 调试。
+  - acpi_level：ACPI 调试等级。
+  - idlehalt=1：无视所有空闲进程、使 CPU 进入低功率模式。
+  - platform：platform=X86PC 强制禁用 ACPI 电源管理；platform=ACPI 强制启用 ACPI 电源管理。
+  - keepsyms=1：保留 KLD/Address-Symbol 翻译
 
 ```sh
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -184,6 +206,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 *　辅助点按
 *　查找
 *　三指拖移
+
 * [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
 * 查询单词释义：鼠标放在单词上，不用选中，直接长按，再抬起
 * 双手轻按屏幕：唤醒右键
@@ -198,12 +221,12 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * 聚焦搜索：command+空格，直接弹出搜索内容，再点击command+B即可跳转到Safari里查看搜索内容
 * 画中画功能：在视频网站中点击右键，鼠标挪到一旁，再点一下右键，选择“画中画’’功能，视频画面大小可自由拖拽
 * Option按键的使用场景：
-    - 拖拽文件时按住option，即可复制粘贴当前所拖拽文件
-    - 按菜单栏时，按住option，会出现多种功能；按住Wi-Fi图标同时按住option，可显示当前IP信息
-    - 按住option同时按住通知中心的图标，系统进入勿扰模式
+  - 拖拽文件时按住option，即可复制粘贴当前所拖拽文件
+  - 按菜单栏时，按住option，会出现多种功能；按住Wi-Fi图标同时按住option，可显示当前IP信息
+  - 按住option同时按住通知中心的图标，系统进入勿扰模式
 * 程序安装&卸载
-    - 安装程序：通过APP store或者通过网页，网页下载的dmg文件相当于Windows里的EXE文件
-    - 删除程序：在启动台长按程序图标再删除，或者在访达的应用程序里，将程序拖拽到废纸篓
+  - 安装程序：通过APP store或者通过网页，网页下载的dmg文件相当于Windows里的EXE文件
+  - 删除程序：在启动台长按程序图标再删除，或者在访达的应用程序里，将程序拖拽到废纸篓
 
 ### Spoitlight
 
@@ -213,206 +236,280 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 ## 共享目录
 
 * smaba
-    - windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
-    - Mac中， 先打开Finder, command +K  打开共享目录 输入： smb://192.168.0.4/share
+  - windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
+  - Mac中， 先打开Finder, command +K  打开共享目录 输入： smb://192.168.0.4/share
 
 ## Stickies
 
 * notes
-    - 通过Web
-    - Create a Progressive Web App (PWA) :More Tools-> Create Shortcut
-    - More Tools, and then click Create Shortcut.
+  - 通过Web
+  - Create a Progressive Web App (PWA) :More Tools-> Create Shortcut
+  - More Tools, and then click Create Shortcut.
 * 系统自带便利贴
 
 ## 软件
 
 * 安装
-    - 可以通过plist文件安装软件
-    - app store安装
-    - 互联网下载：下载dmg，会打开安装包，需将app图标拖到application中（文件位置/Users/henry/Library/Application Support）
-    - 文件包直接拖进application
-    - `brew cask install firefox`
-* 卸载
-    - launchpad 长按
-    - finder 找到移动到垃圾桶
-    - 通过appcleaner彻底清除
-* 系统
-    - [airmail](http://airmailapp.com/):mail client
-    - [Hazel](https://www.noodlesoft.com/):Automated Organization for Your Mac.
-    - [Gemini](https://macpaw.com/gemini):The intelligent duplicate file finder
-    - BTT(BetterTouchTool) 触控板手势增强
-    - CleanMyMac（需购买解说功能）
-    - [Little Snitch 4](https://www.obdev.at/products/littlesnitch/index.html):makes these Internet connections visible and puts you back in control!
-    - [Dropzone](https://aptonic.com/):makes it faster and easier to move and copy files, launch applications, upload to many different services, and more.
-    - [Time](https://timingapp.com/):automatically tracking how you spend your time.
-    - [Fantastical 2](https://flexibits.com/fantastical):The calendar app 收费
-    - [Hammerspoon](http://www.hammerspoon.org/): a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
-    - SwitchHosts
-    - manico
-    - [](https://github.com/gao-sun/eul):desktop_computer macOS status monitoring app written in SwiftUI.
-    - [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
-    - [MrRio/vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. <http://parall.ax/vtop>
-    - [GPG Suite](https://gpgtools.org/)
-    - [dashlane](https://www.dashlane.com/zh):密码管理工具
-    - [spectacl](https://www.spectacleapp.com/):Move and resize windows with ease
-    - [wulkano/kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology <https://getkap.co>
-    - [Unarchiver](link)
-    - [LICEcap](link):gif录制
-    - [chunkwm](https://koekeishiya.github.io/chunkwm/index.html):a tiling window manager for macOS
-    - [onmyway133/FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
-    - [sveinbjornt/Sloth](https://github.com/sveinbjornt/Sloth):Mac app that shows all open files and sockets in use by all running processes. Nice GUI for lsof. https://sveinbjorn.org/sloth
-    - Luna Display:Turn your iPad into a second display
-    - 实用工具：/System/Library/CoreServices/Applications
-    - [QSpace](link)一个国产软件，MacOS 系统的多视图文件管理器，支持很多特色功能。让你摆脱多窗口来回切换的繁琐，和拖拽时找不准目标的尴尬
-    - [Ityscal](https://www.mowglii.com/itsycal/)  日历
-    - [sindresorhus/quick-look-plugins ](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
-    - TotalFinder - macOS 上最强的 Finder 增强软件
-    - uTools - 比 Alfred 更简洁的工作流
-* vpn
-    - Tunnelblick_3.7.2_build_4850：点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
-* 设计
-    - UI:sketch sketch box
-    - Axure：原型工具
-    - CmapTools：概念图
-    - 截图
-    - Snipaste - 灵活的截图 + 贴图软件
-* 写作
-    - Latex
-    - Alternote(evernote简单客户端)
-    - Quiver：笔记软件
-    - [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
-    - [ulysses](https://ulyssesapp.com/)
-    - [marked2](http://marked2app.com/)
-    - [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
-    - Upad
-    - [Bear](https://bear.app/):Write beautifully on iPhone, iPad, and Mac
-* 下载
-    - bitlord
-    - Folx
-    - [CodeTips/BaiduNetdiskPlugin-macOS](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~
-* 工具
-    - [CheatSheet] 长按⌘键可以显示当前程序快捷键
-    - [flux](https://justgetflux.com/) 屏幕颜色控制
-    - [moom](https://manytricks.com/moom/)使用体验优异的窗口管理软件
-* 窗口管理
-    - [Spectacle](link):控制窗口
-    - [sizeup](link) 窗口管理软件
-        + control+option+command + M ： 使当前窗口全屏
-        + control+option+command + 方向键上键 ： 使当前窗口占用当前屏幕上半部分
-        + control+option+command + 方向键下键 ： 使当前窗口占用当前屏幕下半部分
-        + control+option+command + 方向键左键 ： 使当前窗口占用当前屏幕左半部分
-        + control+option+command + 方向键右键 ： 使当前窗口占用当前屏幕右半部分
-        + control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
-        + control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
+  
+  - 可以通过plist文件安装软件
+  - app store安装
+  - 互联网下载：下载dmg，会打开安装包，需将app图标拖到application中（文件位置/Users/henry/Library/Application Support）
+  - 文件包直接拖进application
+  - `brew cask install firefox`
 
-    - [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
-    - [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):essentially an IDE for automation
-    - [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
-    - [Helium](http://heliumfloats.com/):A floating browser window for OS X
-    - Android file transfer
-    - SensibleSideButtons - 在 macOS 上使用鼠标上的前进后退按键
+* 卸载
+  
+  - launchpad 长按
+  - finder 找到移动到垃圾桶
+  - 通过appcleaner彻底清除
+
+* 系统
+  
+  - [airmail](http://airmailapp.com/):mail client
+  - [Hazel](https://www.noodlesoft.com/):Automated Organization for Your Mac.
+  - [Gemini](https://macpaw.com/gemini):The intelligent duplicate file finder
+  - BTT(BetterTouchTool) 触控板手势增强
+  - CleanMyMac（需购买解说功能）
+  - [Little Snitch 4](https://www.obdev.at/products/littlesnitch/index.html):makes these Internet connections visible and puts you back in control!
+  - [Dropzone](https://aptonic.com/):makes it faster and easier to move and copy files, launch applications, upload to many different services, and more.
+  - [Time](https://timingapp.com/):automatically tracking how you spend your time.
+  - [Fantastical 2](https://flexibits.com/fantastical):The calendar app 收费
+  - [Hammerspoon](http://www.hammerspoon.org/): a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
+  - SwitchHosts
+  - manico
+  - [](https://github.com/gao-sun/eul):desktop_computer macOS status monitoring app written in SwiftUI.
+  - [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
+  - [MrRio/vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. <http://parall.ax/vtop>
+  - [GPG Suite](https://gpgtools.org/)
+  - [dashlane](https://www.dashlane.com/zh):密码管理工具
+  - [spectacl](https://www.spectacleapp.com/):Move and resize windows with ease
+  - [wulkano/kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology <https://getkap.co>
+  - [Unarchiver](link)
+  - [LICEcap](link):gif录制
+  - [chunkwm](https://koekeishiya.github.io/chunkwm/index.html):a tiling window manager for macOS
+  - [onmyway133/FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
+  - [sveinbjornt/Sloth](https://github.com/sveinbjornt/Sloth):Mac app that shows all open files and sockets in use by all running processes. Nice GUI for lsof. https://sveinbjorn.org/sloth
+  - Luna Display:Turn your iPad into a second display
+  - 实用工具：/System/Library/CoreServices/Applications
+  - [QSpace](link)一个国产软件，MacOS 系统的多视图文件管理器，支持很多特色功能。让你摆脱多窗口来回切换的繁琐，和拖拽时找不准目标的尴尬
+  - [Ityscal](https://www.mowglii.com/itsycal/)  日历
+  - [sindresorhus/quick-look-plugins ](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
+  - TotalFinder - macOS 上最强的 Finder 增强软件
+  - uTools - 比 Alfred 更简洁的工作流
+
+* vpn
+  
+  - Tunnelblick_3.7.2_build_4850：点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
+
+* 设计
+  
+  - UI:sketch sketch box
+  - Axure：原型工具
+  - CmapTools：概念图
+  - 截图
+  - Snipaste - 灵活的截图 + 贴图软件
+
+* 写作
+  
+  - Latex
+  - Alternote(evernote简单客户端)
+  - Quiver：笔记软件
+  - [tusk](https://github.com/champloohq/tusk):自定义主题的evernote的app
+  - [ulysses](https://ulyssesapp.com/)
+  - [marked2](http://marked2app.com/)
+  - [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
+  - Upad
+  - [Bear](https://bear.app/):Write beautifully on iPhone, iPad, and Mac
+
+* 下载
+  
+  - bitlord
+  - Folx
+  - [CodeTips/BaiduNetdiskPlugin-macOS](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~
+
+* 工具
+  
+  - [CheatSheet] 长按⌘键可以显示当前程序快捷键
+  - [flux](https://justgetflux.com/) 屏幕颜色控制
+  - [moom](https://manytricks.com/moom/)使用体验优异的窗口管理软件
+
+* 窗口管理
+  
+  - [Spectacle](link):控制窗口
+  
+  - [sizeup](link) 窗口管理软件
+    
+    + control+option+command + M ： 使当前窗口全屏
+    + control+option+command + 方向键上键 ： 使当前窗口占用当前屏幕上半部分
+    + control+option+command + 方向键下键 ： 使当前窗口占用当前屏幕下半部分
+    + control+option+command + 方向键左键 ： 使当前窗口占用当前屏幕左半部分
+    + control+option+command + 方向键右键 ： 使当前窗口占用当前屏幕右半部分
+    + control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
+    + control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
+  
+  - [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
+  
+  - [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):essentially an IDE for automation
+  
+  - [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
+  
+  - [Helium](http://heliumfloats.com/):A floating browser window for OS X
+  
+  - Android file transfer
+  
+  - SensibleSideButtons - 在 macOS 上使用鼠标上的前进后退按键
+
 * Pod
-    - [insidegui/PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
+  
+  - [insidegui/PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
+
 * Web开发
-    - [Paw](https://paw.cloud/):The most advanced API tool for Mac
-    - MAMP:基础版不支持自定义
-    - [yichengchen/clashX](https://github.com/yichengchen/clashX):A rule based custom proxy with GUI for Mac base on clash.
+  
+  - [Paw](https://paw.cloud/):The most advanced API tool for Mac
+  - MAMP:基础版不支持自定义
+  - [yichengchen/clashX](https://github.com/yichengchen/clashX):A rule based custom proxy with GUI for Mac base on clash.
+
 * 沟通
-    - [Textual 7](<Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.>)
-    - [OmniGraffle](https://www.omnigroup.com/omnigraffle)
-    - slack
-    - [telegram](https://telegram.org/)
-    - weibo:WeiboX
-    - IM+
+  
+  - [Textual 7](<Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.>)
+  - [OmniGraffle](https://www.omnigroup.com/omnigraffle)
+  - slack
+  - [telegram](https://telegram.org/)
+  - weibo:WeiboX
+  - IM+
+
 * RSS
-    - [Reeder 3](http://reederapp.com/mac/)
-    - feedly
-    - leaf
+  
+  - [Reeder 3](http://reederapp.com/mac/)
+  - feedly
+  - leaf
+
 * 管理
-    - OmniOutliner
-    - OmniPlan
-    - OmniFocus：GTD思路的应用
-    - [Ship](https://www.realartists.com/index.html):Fast, native, comprehensive issue tracking and code review for GitHub
-    - [trello](https://trello.com/home): Project management tool
-    - [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
-    - Day One - Digital journal
-    - Just Focus：商店下载
-    - [pomofocus](https://pomofocus.io/):网页版
-    - Any.do
-    - Todoist
-    - TickTick
-    - Lucidchart
-    - Kanban
+  
+  - OmniOutliner
+  - OmniPlan
+  - OmniFocus：GTD思路的应用
+  - [Ship](https://www.realartists.com/index.html):Fast, native, comprehensive issue tracking and code review for GitHub
+  - [trello](https://trello.com/home): Project management tool
+  - [2do](https://www.2doapp.com/mac):helping me organise my tasks and things
+  - Day One - Digital journal
+  - Just Focus：商店下载
+  - [pomofocus](https://pomofocus.io/):网页版
+  - Any.do
+  - Todoist
+  - TickTick
+  - Lucidchart
+  - Kanban
+
 * 文档
-    - [dash](https://kapeli.com/dash):语言文档
-    - [TRANSMIT 5](https://www.panic.com/transmit/):Upload, download, and manage files on tons of servers with an easy, familiar, and powerful UI. It’s quite good.
-    - Cloud Outline
-    - iCHM
-    * Clearview - 支持 PDF, EPUB, CHM, MOBI 的免费阅读器
+  
+  - [dash](https://kapeli.com/dash):语言文档
+  - [TRANSMIT 5](https://www.panic.com/transmit/):Upload, download, and manage files on tons of servers with an easy, familiar, and powerful UI. It’s quite good.
+  - Cloud Outline
+  - iCHM
+  * Clearview - 支持 PDF, EPUB, CHM, MOBI 的免费阅读器
+
 * 音乐
-    - 播放器：MPlayerX
-    - [beardedspice/beardedspice](https://github.com/beardedspice/beardedspice):Mac Media Keys for the Masses <http://beardedspice.github.io>
-    - [Noizio](http://noiz.io/):turn on the sound and allow yourself to become engulfed in the tranquil sounds of nature.
+  
+  - 播放器：MPlayerX
+  - [beardedspice/beardedspice](https://github.com/beardedspice/beardedspice):Mac Media Keys for the Masses <http://beardedspice.github.io>
+  - [Noizio](http://noiz.io/):turn on the sound and allow yourself to become engulfed in the tranquil sounds of nature.
+
 * 图片
-    - 修图Snapseed
-    - iShot
-    - [Pixave](http://www.littlehj.com/mac/) - Image/GIF/Video organizer
+  
+  - 修图Snapseed
+  - iShot
+  - [Pixave](http://www.littlehj.com/mac/) - Image/GIF/Video organizer
+
 * 录屏
-    - [wulkano/kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology https://getkap.co
+  
+  - [wulkano/kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology https://getkap.co
+
 * 阅读
-    - ibooks：阅读支持pdf与epub，可以通过icloud同步
-    - iTunes Movie Trailers
-    - mounty:win的移动硬盘
-    - [irreader](http://irreader.fatecore.com)
-    - [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
+  
+  - ibooks：阅读支持pdf与epub，可以通过icloud同步
+  - iTunes Movie Trailers
+  - mounty:win的移动硬盘
+  - [irreader](http://irreader.fatecore.com)
+  - [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
+
 * 代码
-    - Xcode
-    - [SnippetsLab](https://www.renfei.org/snippets-lab/):SnippetsLab is an easy-to-use code snippets manager
-    - [PHPstrom](https://www.jetbrains.com/phpstorm/download/download-thanks.html?pl)
-    - atom:通过brew安装
-    - [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
-    - [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
+  
+  - Xcode
+  - [SnippetsLab](https://www.renfei.org/snippets-lab/):SnippetsLab is an easy-to-use code snippets manager
+  - [PHPstrom](https://www.jetbrains.com/phpstorm/download/download-thanks.html?pl)
+  - atom:通过brew安装
+  - [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
+  - [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
+
 * 虚拟机
-    - Parallels Desktop
+  
+  - Parallels Desktop
+
 * 安全
-    - WireGuard for macOS
+  
+  - WireGuard for macOS
+
 * Screensaver
-    - Apple TV Aerial
+  
+  - Apple TV Aerial
+
 * 软件订阅
-    - [setapp](https://setapp.com)The first subscription service for Mac apps.
+  
+  - [setapp](https://setapp.com)The first subscription service for Mac apps.
+
 * [LyricsX](https://github.com/MichaelRow/Lyrics)
+
 * [fliqlo](https://fliqlo.com/):A flip Clock screensavers
+
 * 说明
-    - strace在linux下用来跟踪某个进程的系统调用，dtruss
+  
+  - strace在linux下用来跟踪某个进程的系统调用，dtruss
+
 * [JadenGeller/Helium](https://github.com/JadenGeller/Helium):A floating browser window for OS X <http://heliumfloats.com>
+
 * elpass
+
 * 迷你天气：macOS 天气应用，在 Dock 栏知实时天气
+
 * Things 3
+
 * [ MonitorControl / MonitorControl ](https://github.com/MonitorControl/MonitorControl):desktop_computer Control your external monitor brightness & volume on your Mac
 
 * Moment：常驻于 macOS 菜单栏和通知中心的倒数日工具，又不止于倒数日。我们还支持了纪念日、时间进度条、你关心的人的年龄，每一个事件都支持单独添加到菜单栏
+
 * Dropzone 就是这样一款，既能给你带来键盘上如同 Launch Center Pro 体验同时，也提供了通过鼠标拖拽这样的操作，实现鼠标操作的肌肉记忆的应用
+
 * [Here](https://here.app/)
+
 * [glushchenko/fsnotes](https://github.com/glushchenko/fsnotes):Notes manager for macOS/iOS
+
 * AutoSwitchInput - 自动切换输入法
+
 * Bartender 3 - 通知栏折叠工具 $15
+
 * Hidden Bar - 另一款通知栏折叠工具
+
 * [eZip](https://ezip.awehunt.com/):优秀的 macOS 压缩软件
+
 * [poolside-fm](https://apps.apple.com/us/app/poolside-fm/id1514817810?mt=12)
+
 * [Lunar](https://github.com/alin23/Lunar)
+
 * 参考
-    - [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
+  
+  - [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
 
 ### screensavers
 
 * 安装
-    - /Library/Screen Savers/ 或者 ~/Library/Screen Savers/
+  - /Library/Screen Savers/ 或者 ~/Library/Screen Savers/
 * 资源
-    - Fliqlo
-    - [JohnCoates/Aerial](https://github.com/JohnCoates/Aerial):Apple TV Aerial Screensaver for Mac
-        + 航拍横跨了中国、拉斯维加斯、旧金山、夏威夷、迪拜等等地方的白天和夜晚的精美景象。因为每一个航拍体积都很大
-        + brew cask install aerial
-        + 下载点击安装，重新进入系统偏好设置
+  - Fliqlo
+  - [JohnCoates/Aerial](https://github.com/JohnCoates/Aerial):Apple TV Aerial Screensaver for Mac
+    + 航拍横跨了中国、拉斯维加斯、旧金山、夏威夷、迪拜等等地方的白天和夜晚的精美景象。因为每一个航拍体积都很大
+    + brew cask install aerial
+    + 下载点击安装，重新进入系统偏好设置
 
 ### 苹果铃声制作
 
@@ -442,12 +539,12 @@ route add [-net|-host] [网域或主机] netmask [mask] [gw|dev]
 ## 快捷键
 
 * ## 键位
-    - Command ⌘
-    - Shift ⇧
-    - Option ⌥
-    - Control ⌃
-    - Caps Lock ⇪
-    - Fn
+  - Command ⌘
+  - Shift ⇧
+  - Option ⌥
+  - Control ⌃
+  - Caps Lock ⇪
+  - Fn
 * option + command + sapce：finder
 * Command–空格键：打开Spotlight
 * command + n:新文件或新窗口
@@ -487,12 +584,12 @@ route add [-net|-host] [网域或主机] netmask [mask] [gw|dev]
 * Shift+Control+ 推出键:锁屏键
 * command + l 进入地址栏
 * 截屏
-    - command+shift+5
-    - command+shift+3 截取当前整个屏幕，默认保存到桌面
-    - command+shift+4 截取部分屏幕，默认保存到桌面
-    - command+shift+option +3 截取当前整个屏幕，默认复制到剪切板（可直接粘贴到指定的窗口）
-    - command+shift+option +4 截取部分屏幕，默认复制到剪切板（可直接粘贴到指定的窗口）
-    - command+shift+4+空格键，精准剪切当前窗口
+  - command+shift+5
+  - command+shift+3 截取当前整个屏幕，默认保存到桌面
+  - command+shift+4 截取部分屏幕，默认保存到桌面
+  - command+shift+option +3 截取当前整个屏幕，默认复制到剪切板（可直接粘贴到指定的窗口）
+  - command+shift+option +4 截取部分屏幕，默认复制到剪切板（可直接粘贴到指定的窗口）
+  - command+shift+4+空格键，精准剪切当前窗口
 
 #### 系统功能
 
@@ -518,7 +615,7 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * 使用快速查看窗口
 * 同时移动所有的窗口
 * 使用键盘控制导航
-    - Control键和向上方向键来启用 Mission Control
+  - Control键和向上方向键来启用 Mission Control
 
 ### finder
 
@@ -594,7 +691,7 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * Command+Shift+G 可以前往任何文件夹,包括隐藏文件夹
 * Command+Shift+. 显示或隐藏 隐藏文件
 * 修改DNS提高Apple Store 网速:打开：systerm Preferences > Network > Advanced > DNS
-    - 223.5.5.5 223.6.6.6 114.114.114.114 168.95.1.1 168.95.192.22 68.95.192.33
+  - 223.5.5.5 223.6.6.6 114.114.114.114 168.95.1.1 168.95.192.22 68.95.192.33
 
 ## Safari && [Chrome](https://www.google.com/chrome/browser/desktop/index.html#)
 
@@ -628,21 +725,21 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * Command+W: 关闭窗口
 * Command+Q: 退出程序
 * 按住⌘键:
-    - 可以拖拽选中的字符串；
-    - 点击 url：调用默认浏览器访问该网址；
-    - 点击文件：调用默认程序打开文件；
-    - 如果文件名是filename:42，且默认文本编辑器是 Macvim、Textmate或BBEdit，将会直接打开到这一行；
-    - 点击文件夹：在 finder 中打开该文件夹；
-    - 同时按住option键，可以以矩形选中，类似于vim中的ctrl v操作。
+  - 可以拖拽选中的字符串；
+  - 点击 url：调用默认浏览器访问该网址；
+  - 点击文件：调用默认程序打开文件；
+  - 如果文件名是filename:42，且默认文本编辑器是 Macvim、Textmate或BBEdit，将会直接打开到这一行；
+  - 点击文件夹：在 finder 中打开该文件夹；
+  - 同时按住option键，可以以矩形选中，类似于vim中的ctrl v操作。
 - tab操作
-    - 切换 tab：⌘+←, ⌘+→, ⌘+{, ⌘+}。⌘+数字直接定位到该 tab；
-    - 新建 tab：⌘+t；
-    - 顺序切换 pane：⌘+[, ⌘+]；
-    - 按方向切换 pane：⌘+Option+方向键；
-    - 切分屏幕：⌘+d 水平切分，⌘+Shift+d 垂直切分；
-    - 智能查找，支持正则查找：⌘+f。
-    - ⌘+;弹出自动补齐窗口 之前做法 control + r：历史命令行匹配
-    - ⌘+Option+e全屏展示所有的 tab，可以搜索
+  - 切换 tab：⌘+←, ⌘+→, ⌘+{, ⌘+}。⌘+数字直接定位到该 tab；
+  - 新建 tab：⌘+t；
+  - 顺序切换 pane：⌘+[, ⌘+]；
+  - 按方向切换 pane：⌘+Option+方向键；
+  - 切分屏幕：⌘+d 水平切分，⌘+Shift+d 垂直切分；
+  - 智能查找，支持正则查找：⌘+f。
+  - ⌘+;弹出自动补齐窗口 之前做法 control + r：历史命令行匹配
+  - ⌘+Option+e全屏展示所有的 tab，可以搜索
 
 #### 文稿快捷键
 
@@ -755,14 +852,14 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * Unintelligent：Search all file types 搜索所有文件类型。使用 Find+空格+文件名 来查询文件或文件夹；使用 Open+空格+文件名 也可以打开文件。键入空格，输入要查找文件名 find是定位文件，open是定位并打开文件，in是在文件中进行全文检索
 * Search Scope：设置 Alfred 查询时会搜索的文件夹范围，可自己添加和删除。
 * Fallbacks：若上面的查询搜索不到结果时，就会调用这里设置的网站或搜索引擎来进行进一步的查询。默认反馈结果为 Google、Amazon、Wikipedia 网页搜索。
-    - 自定义搜索页面
-        - <https://www.baidu.com/s?ie=utf-8&f=8&wd={query}>
-        - <http://www.stackoverflow.com/search?q={query}>
-        - <http://www.stackoverflow.com/search?q={query}>
-    - 当计数器用:直接输入计算
-    - 设置搜索关键字搜索浏览器书签
-    - 自定义关键词搜索单词
-    - 操作Shell：输入>即可直接运行shell命令。比如>cat \*.py | grep print，可以直接打开终端并查找当前py文件中包含 print 的语句
+  - 自定义搜索页面
+    - <https://www.baidu.com/s?ie=utf-8&f=8&wd={query}>
+    - <http://www.stackoverflow.com/search?q={query}>
+    - <http://www.stackoverflow.com/search?q={query}>
+  - 当计数器用:直接输入计算
+  - 设置搜索关键字搜索浏览器书签
+  - 自定义关键词搜索单词
+  - 操作Shell：输入>即可直接运行shell命令。比如>cat \*.py | grep print，可以直接打开终端并查找当前py文件中包含 print 的语句
 
 ### workflows
 
@@ -893,18 +990,18 @@ karabiner
 ## 端口查看
 
 * lsof
-    - -a 列出打开文件存在的进程
-    - -c<进程名> 列出指定进程所打开的文件
-    - -g 列出GID号进程详情
-    - -d<文件号> 列出占用该文件号的进程
-    - +d<目录> 列出目录下被打开的文件
-    - +D<目录> 递归列出目录下被打开的文件
-    - -n<目录> 列出使用NFS的文件
-    - -i<条件> 列出符合条件的进程。（4、6、协议、:端口、 @ip ）
-    - -p<进程号> 列出指定进程号所打开的文件
-    - -u 列出UID号进程详情
-    - -h 显示帮助信息
-    - -v 显示版本信息
+  - -a 列出打开文件存在的进程
+  - -c<进程名> 列出指定进程所打开的文件
+  - -g 列出GID号进程详情
+  - -d<文件号> 列出占用该文件号的进程
+  - +d<目录> 列出目录下被打开的文件
+  - +D<目录> 递归列出目录下被打开的文件
+  - -n<目录> 列出使用NFS的文件
+  - -i<条件> 列出符合条件的进程。（4、6、协议、:端口、 @ip ）
+  - -p<进程号> 列出指定进程号所打开的文件
+  - -u 列出UID号进程详情
+  - -h 显示帮助信息
+  - -v 显示版本信息
 
 ```sh
 sudo lsof -nP -iTCP:端口号 -sTCP:LISTEN

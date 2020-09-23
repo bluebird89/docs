@@ -36,10 +36,15 @@
 # 个人信息
 
 - 胶布帝/男/1990
+
 - 本科/萌鹿大学计算机系
+
 - 工作年限：3年
+
 - 微博：[@JobDeer](http://weibo.com/jobdeer) （`如果没有技术相关内容，也可以不放`）
+
 - 技术博客：<http://blog.github.io> ( `使用GitHub Host的Big较高` )
+
 - Github：<http://github.com/geekcompany> ( `有原创repo的Github帐号会极大的提升你的个人品牌` )
 
 - 期望职位：PHP高级程序员，应用架构师
@@ -107,7 +112,7 @@
 （放置你代表公司在一些技术会议上做过的演讲，以及你在公司分享时制作的讲义）
 
 - 2014架构师大会演讲：[如何通过Docker优化内部开发](http://jobdeer.com)
-
+  
   - 9月公司内部分享：[云计算的前生今世](http://jobdeer.com)
 
 # 技能清单
@@ -211,6 +216,6 @@
 
 感谢您花时间阅读我的简历，期待能有机会和您共事。
 
-##  参考
+## 参考
 
 * [resume/resume.github.com](https://github.com/resume/resume.github.com):Resumes generated using the GitHub informations https://resume.github.com

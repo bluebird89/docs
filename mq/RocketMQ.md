@@ -16,6 +16,6 @@
 * 拉消息的时候严格的说对于 CommitLog 来说读取是随机的，因为 CommitLog 的消息是混合的存储的，但是从整体上看，消息还是从 CommitLog 顺序读的，都是从旧数据到新数据有序的读取。并且一般而言消息存进去马上就会被消费，因此消息这时候应该还在页缓存中，所以不需要读盘
 * 页缓存会定时刷盘，这刷盘不可控，并且内存是有限的，会有swap等情况.mmap其实只是做了映射，当真正读取页面的时候产生缺页中断，才会将数据真正加载到内存中，这对于消息队列来说可能会产生监控上的毛刺
 * 文件预分配
-	- CommitLog 的大小默认是1G，当超过大小限制的时候需要准备新的文件，而 RocketMQ 就起了一个后台线程 AllocateMappedFileService，不断的处理 AllocateRequest，AllocateRequest其实就是预分配的请求，会提前准备好下一个文件的分配，防止在消息写入的过程中分配文件，产生抖动
+  - CommitLog 的大小默认是1G，当超过大小限制的时候需要准备新的文件，而 RocketMQ 就起了一个后台线程 AllocateMappedFileService，不断的处理 AllocateRequest，AllocateRequest其实就是预分配的请求，会提前准备好下一个文件的分配，防止在消息写入的过程中分配文件，产生抖动
 * 文件预热
-	- 有一个warmMappedFile方法，它会把当前映射的文件，每一页遍历多去，写入一个0字节，然后再调用mlock 和 madvise(MADV_WILLNEED)
+  - 有一个warmMappedFile方法，它会把当前映射的文件，每一页遍历多去，写入一个0字节，然后再调用mlock 和 madvise(MADV_WILLNEED)

@@ -5,10 +5,13 @@
 UML是一种开放的方法，用于说明、可视化、构建和编写一个正在开发的、面向对象的、软件密集系统的制品的开放方法
 
 * 功能模型：从用户角度展示系统的功能，包括用例图
+
 * 对象模型：采用对象，属性，操作，关联等概念展示系统的结构和基础，包括类别图、对象图
+
 * 动态模型：展现系统的内部行为。包括序列图，活动图，状态图
 
 * 结构图分为类图、轮廓图、组件图、组合结构图、对象图、部署图、包图
+
 * 行为图又分活动图、用例图、状态机图和交互图(序列图、时序图、通讯图、交互概览图)
 
 ## 时序图 sequence diagram
@@ -397,7 +400,7 @@ state Configuring {
   - [diagram](https://webdemo.myscript.com)
 * [WebSequenceDiagrams](https://www.websequencediagrams.com/):Create sequence diagrams in seconds.
 * [edraw-max](https://www.edrawsoft.com/edraw-max/):All-in-One
-Diagram Software
+  Diagram Software
 * [Dia](http://dia-installer.de/) `sudo apt install dia`
 
 ## 参考

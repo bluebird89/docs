@@ -210,7 +210,7 @@ axios.interceptors.response.use(function (response) {
   - 生成（generate）
 * 版本
   - 7.0
-      + 引入了 babel.config.js
+    + 引入了 babel.config.js
 * 参考
   - [jamiebuilds/babel-handbook](https://github.com/jamiebuilds/babel-handbook):📘 A guided handbook on how to use Babel and how to create plugins for Babel. https://git.io/babel-handbooks
   - [swc-project/swc](https://github.com/swc-project/swc):Super-fast alternative for babel https://swc-project.github.io/rustdoc/swc/

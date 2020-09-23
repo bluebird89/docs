@@ -18,23 +18,23 @@
 ## 原理
 
 * 服务器认证以后，生成一个 JSON 对象，发回给用户，实际上就是一个字符串，它由三部分组成,将包含的信息进行base64编码(不建议用 jwt 传输敏感信息，例如密码)，为各部分内容，最后拼接为完整的token
-    * 头部 (Header)：一个 JSON 对象，描述 JWT 的元数据，例如其类型以及签名所用的算法等，使用 Base64URL 算法转成字符串
-        - alg属性表示签名的算法（algorithm），默认是 HMAC SHA256（写成 HS256）
-        - typ属性表示这个令牌（token）的类型（type），JWT 令牌统一写为JWT
-    * 载荷(Payload）:一个 JSON 对象，存放实际需要传递的数据。JWT 规定了7个官方字段，供选用，还可以定义私有字段，默认是不加密的，任何人都可以读到，所以不要把秘密信息放在这个部分。使用 Base64URL 算法转成字符串
-        + iss (issuer)：签发人
-        + exp (expiration time)：过期时间
-        + sub (subject)：主题
-        + aud (audience)：受众
-        + nbf (Not Before)：生效时间
-        + iat (Issued At)：签发时间
-        + jti (JWT ID)：编号
-    * 签名(Signature)：对前两部分的签名，防止数据篡改
-        - 将头部和载荷使用 . 进行拼接(头部在前), 得到用于签名的字符串
-        - 使用签名方法对用于签名的字符串进行签名，得到签名(Signature)
-        - 此时的签名(Signature)并没有签发者特有的身份信息，所有数据都是明文的，所以这样签名是不安全的，应该加上 secret 进行签名。
-        - 需要准备一个可以确认自己身份的字符串（secret），只需要将上面准备的 用于签名的字符串简单的与 secret 进行拼接，这时候得到的签名是受 secret 值影响的,密钥只有服务器才知道，不能泄露给用户
-    * 把 Header、Payload、Signature 三个部分拼成一个字符串，每个部分之间用"点"（.）分隔，就可以返回给用户
+  * 头部 (Header)：一个 JSON 对象，描述 JWT 的元数据，例如其类型以及签名所用的算法等，使用 Base64URL 算法转成字符串
+    - alg属性表示签名的算法（algorithm），默认是 HMAC SHA256（写成 HS256）
+    - typ属性表示这个令牌（token）的类型（type），JWT 令牌统一写为JWT
+  * 载荷(Payload）:一个 JSON 对象，存放实际需要传递的数据。JWT 规定了7个官方字段，供选用，还可以定义私有字段，默认是不加密的，任何人都可以读到，所以不要把秘密信息放在这个部分。使用 Base64URL 算法转成字符串
+    + iss (issuer)：签发人
+    + exp (expiration time)：过期时间
+    + sub (subject)：主题
+    + aud (audience)：受众
+    + nbf (Not Before)：生效时间
+    + iat (Issued At)：签发时间
+    + jti (JWT ID)：编号
+  * 签名(Signature)：对前两部分的签名，防止数据篡改
+    - 将头部和载荷使用 . 进行拼接(头部在前), 得到用于签名的字符串
+    - 使用签名方法对用于签名的字符串进行签名，得到签名(Signature)
+    - 此时的签名(Signature)并没有签发者特有的身份信息，所有数据都是明文的，所以这样签名是不安全的，应该加上 secret 进行签名。
+    - 需要准备一个可以确认自己身份的字符串（secret），只需要将上面准备的 用于签名的字符串简单的与 secret 进行拼接，这时候得到的签名是受 secret 值影响的,密钥只有服务器才知道，不能泄露给用户
+  * 把 Header、Payload、Signature 三个部分拼成一个字符串，每个部分之间用"点"（.）分隔，就可以返回给用户
 
 ```
 # header

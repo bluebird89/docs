@@ -17,11 +17,11 @@
   - 启动通过U盘
     + 安装类型：其他选项
     + 磁盘空间分区
-        * 根分区 /：主分区 系统文件，20GB(根本不够)；  挂载点 /  /dev/sda
-        * /swap：逻辑分区 交换分区（虚拟内存），建议是当前 RAM(或者两倍)
-        * /boot：逻辑分区 引导分区 安装启动引导器的设备,包含系统内核和系统启动所需的文件，实现双系统的关键所在，建议500M 挂载点 /boot
-        * /home：逻辑分区 home目录，存放音乐、图片及下载等文件的空间，建议最后分配所有剩下的空间 挂载点 /home
-        * 生产服务器建议单独再划分一个/data分区存放数据
+      * 根分区 /：主分区 系统文件，20GB(根本不够)；  挂载点 /  /dev/sda
+      * /swap：逻辑分区 交换分区（虚拟内存），建议是当前 RAM(或者两倍)
+      * /boot：逻辑分区 引导分区 安装启动引导器的设备,包含系统内核和系统启动所需的文件，实现双系统的关键所在，建议500M 挂载点 /boot
+      * /home：逻辑分区 home目录，存放音乐、图片及下载等文件的空间，建议最后分配所有剩下的空间 挂载点 /home
+      * 生产服务器建议单独再划分一个/data分区存放数据
     + 安装系统
   - 通过EASYCD配置启动
     + 添加新条目 linux/BSD选项
@@ -336,7 +336,7 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
   - 如果本地的数据库不够新，可能就会发生搜索不到的情况，需要更新本地的数据库，使用命令`sudo apt-get update`可执行更新
   - 软件源镜像服务器可能会有多个，有时候某些特定的软件需要添加特定的源
   - apt-fast 是一个为 apt-get 和 aptitude 做的 shell 脚本封装，通过对每个包进行并发下载的方式可以大大减少 APT 的下载时间
-    +  `sudo add-apt-repository -y ppa:apt-fast/stable && \ sudo apt install -y apt-fast`
+    + `sudo add-apt-repository -y ppa:apt-fast/stable && \ sudo apt install -y apt-fast`
   - deb包是Debian，Ubuntu等Linux发行版的软件安装包，扩展名为.deb，是类似于rpm的软件包，Debian，Ubuntu系统不推荐使用deb软件包，因为要解决软件包依赖问题，安装也比较麻烦。下载相应deb软件包，使用dpkg命令来安装
     + gdebi:比软件中心更快，而且还能处理依赖问题。不满足依赖还需要手动执行`sudo apt install -f`
       * `sudo apt install gdebi`
@@ -784,7 +784,7 @@ kill -9 pid
 * default polices are defined in the /etc/default/ufw file
 * can be changed either by manually modifying the file or with the sudo ufw default <policy> <chain> command
   - ufw allow port_number/protocol
-  -
+  - 
 
 ```sh
 sudo apt install ufw
@@ -1165,37 +1165,37 @@ top [-] [d] [p] [q] [c] [C] [S] [s]  [n]，参数
     + 该数值即为这些内容已存在于内存中的交换区的大小。
     + 相应的内存再次被换出时可不必再对交换区写入。
 * 进程信息区：显示了各个进程的详细信息
-  -  PID 进程id
-  -  PPID  父进程id
-  -  RUSER Real user name
-  -  UID 进程所有者的用户id
-  -  USER  进程所有者的用户名
-  -  GROUP 进程所有者的组名
-  -  TTY 启动进程的终端名。不是从终端启动的进程则显示为 ?
-  -  PR  优先级
-  -  NI  nice值。负值表示高优先级，正值表示低优先级
-  -  P 最后使用的CPU，仅在多CPU环境下有意义
-  -  %CPU  上次更新到现在的CPU时间占用百分比
-  -  TIME  进程使用的CPU时间总计，单位秒
-  -  TIME+ 进程使用的CPU时间总计，单位1/100秒
-  -  %MEM  进程使用的物理内存百分比
-  -  VIRT  进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES
-  -  SWAP  进程使用的虚拟内存中，被换出的大小，单位kb。
-  -  RES 进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA
-  -  CODE  可执行代码占用的物理内存大小，单位kb
-  -  DATA  可执行代码以外的部分(数据段+栈)占用的物理内存大小，单位kb
-  -  SHR 共享内存大小，单位kb
-  -  nFLT  页面错误次数
-  -  nDRT  最后一次写入到现在，被修改过的页面数。
-  -  S 进程状态。
+  - PID 进程id
+  - PPID  父进程id
+  - RUSER Real user name
+  - UID 进程所有者的用户id
+  - USER  进程所有者的用户名
+  - GROUP 进程所有者的组名
+  - TTY 启动进程的终端名。不是从终端启动的进程则显示为 ?
+  - PR  优先级
+  - NI  nice值。负值表示高优先级，正值表示低优先级
+  - P 最后使用的CPU，仅在多CPU环境下有意义
+  - %CPU  上次更新到现在的CPU时间占用百分比
+  - TIME  进程使用的CPU时间总计，单位秒
+  - TIME+ 进程使用的CPU时间总计，单位1/100秒
+  - %MEM  进程使用的物理内存百分比
+  - VIRT  进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES
+  - SWAP  进程使用的虚拟内存中，被换出的大小，单位kb。
+  - RES 进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA
+  - CODE  可执行代码占用的物理内存大小，单位kb
+  - DATA  可执行代码以外的部分(数据段+栈)占用的物理内存大小，单位kb
+  - SHR 共享内存大小，单位kb
+  - nFLT  页面错误次数
+  - nDRT  最后一次写入到现在，被修改过的页面数。
+  - S 进程状态。
     + =不可中断的睡眠状态
     + =运行
     + =睡眠
     + =跟踪/停止
     + =僵尸进程
-  -  COMMAND 命令名/命令行
-  -  WCHAN 若该进程在睡眠，则显示睡眠中的系统函数名
-  -  Flags 任务标志，参考 sched.h
+  - COMMAND 命令名/命令行
+  - WCHAN 若该进程在睡眠，则显示睡眠中的系统函数名
+  - Flags 任务标志，参考 sched.h
 * f 键可以选择显示的内容。按 f 键之后会显示列的列表，按 a-z 即可显示或隐藏对应的列，最后按回车键确定。
 * 按 o 键可以改变列的显示顺序。按小写的 a-z 可以将相应的列向右移动，而大写的 A-Z可以将相应的列向左移动。最后按回车键确定。
 * 按大写的 F 或 O 键，然后按 a-z 可以将进程按照相应的列进行排序。而大写的 R 键可以将当前的排序倒转。
@@ -1226,10 +1226,10 @@ top [-] [d] [p] [q] [c] [C] [S] [s]  [n]，参数
 * 针对 SATA Link 电源管理的改进
 * 默认采用的 JRE/JDK 是 OpenJDK 10
 * Keymap
-   - Switch to overview: Super key
-   - List all applications: Super key + A
-   - Switch workspaces: Ctrl + Alt + Up/Down
-   - ctlr+alt+shift+上下键:窗口移入下一个工作区
+  - Switch to overview: Super key
+  - List all applications: Super key + A
+  - Switch workspaces: Ctrl + Alt + Up/Down
+  - ctlr+alt+shift+上下键:窗口移入下一个工作区
 
 ## 问题
 

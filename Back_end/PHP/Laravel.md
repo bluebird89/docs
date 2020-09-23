@@ -154,7 +154,7 @@ docker-compose logs -f {container-name}
   - 在部署项目的持续集成任务或者部署脚本里执行`cp .env.dev .env`
 * `APP_ENV` 通过 `App::environment` 方法来访问此值
 * 使用全局 config 函数来访问配置值 `$value = config('app.timezone');`,临时设置配置值，传递一个数组给 config 函数
-    - 需要config/app.php 配置
+  - 需要config/app.php 配置
 * 会话 config/session.php `'driver' => 'memcached'`
 * 缓存 config/cache.php `'default' => 'redis'`
 
@@ -226,19 +226,19 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
   - 由内部生产（比如初始化、构造函数 __construct 中通过工厂方法、自行手动 new 的）
   - 由外部以参数或其他形式注入
 * 简单绑定:在类中可通过 $this->app 来访问容器，在类之外通过 $app 来访问容器.通过 bind 方法注册绑定，传递想要注册的类或接口名称再返回类的实例的 Closure
-    - 绑定一个单例:将类或接口绑定到只能解析一次的容器中。绑定的单例被解析后，相同的对象实例会在随后的调用中返回到容器中
-    - 绑定实例:使用 instance 方法将现有对象实例绑定到容器中。给定的实例会始终在随后的调用中返回到容器中
-    - 绑定初始数据:需要注入一个基本值
-    - 绑定接口到实现:将接口绑定到给定实现
-    - 上下文绑定:使用了相同的接口，但希望每个类都能注入不同的实现
-    - 标记：解析某个「分类」下的所有绑定
-    - 解析：使用 make 方法将容器中的类实例解析出来
-    - 自动注入：使用「类型提示」的方式在由容器解析的类的构造函数中添加依赖项，包括 控制器、事件监听器、队列任务、中间件 等
-      + 构造函数注入
-      + 方法注入：在控制器方法中类型提示依赖项，常见的用法就是将 Illuminate\Http\Request 实例注入到控制器方法
-    - 容器事件：当服务容器解析一个对象时触发一个事件。你可以使用 resolving 方法监听这个事件，被解析的对象会被传递给回调中，让你在对象被传递出去之前可以在对象上设置任何属性
-    - 服务容器实现了 PSR-11 接口：可以对 PSR-11 容器接口类型提示来获取 Laravel 容器的实例
-    - 用门面调用的方法肯定可以用依赖注入来实现，而可以通过依赖注入实现的功能不一定可以通过门面来调用，除非你自定义实现这个门面
+  - 绑定一个单例:将类或接口绑定到只能解析一次的容器中。绑定的单例被解析后，相同的对象实例会在随后的调用中返回到容器中
+  - 绑定实例:使用 instance 方法将现有对象实例绑定到容器中。给定的实例会始终在随后的调用中返回到容器中
+  - 绑定初始数据:需要注入一个基本值
+  - 绑定接口到实现:将接口绑定到给定实现
+  - 上下文绑定:使用了相同的接口，但希望每个类都能注入不同的实现
+  - 标记：解析某个「分类」下的所有绑定
+  - 解析：使用 make 方法将容器中的类实例解析出来
+  - 自动注入：使用「类型提示」的方式在由容器解析的类的构造函数中添加依赖项，包括 控制器、事件监听器、队列任务、中间件 等
+    + 构造函数注入
+    + 方法注入：在控制器方法中类型提示依赖项，常见的用法就是将 Illuminate\Http\Request 实例注入到控制器方法
+  - 容器事件：当服务容器解析一个对象时触发一个事件。你可以使用 resolving 方法监听这个事件，被解析的对象会被传递给回调中，让你在对象被传递出去之前可以在对象上设置任何属性
+  - 服务容器实现了 PSR-11 接口：可以对 PSR-11 容器接口类型提示来获取 Laravel 容器的实例
+  - 用门面调用的方法肯定可以用依赖注入来实现，而可以通过依赖注入实现的功能不一定可以通过门面来调用，除非你自定义实现这个门面
 * 控制反转（IoC）：依赖接口而非实现，由外部负责其依赖需求行为
   - 容器控制应用程序，由容器反向的向应用程序注入应用程序所需要的外部资源
 * laravel 自动搜寻依赖需求的功能，是通过 反射（Reflection） 实现
@@ -249,11 +249,11 @@ Laravel 采用了单一入口模式，应用的所有请求入口都是 public/i
 * 引导方法依赖注入：可以为服务提供器的 boot 方法设置类型提示
   * 延迟提供器：提供器仅在服务容器中注册绑定，直到真正需要注册绑定，提高应用程序的性能，因为它不会在每次请求时都从文件系统中加载
 * 服务提供者是 Laravel 应用程序引导启动的中心，所有核心服务都是通过服务提供器进行引导。注册服务容器绑定、事件监听器、中间件，甚至是路由的注册
-    - `config/app.php` 中的providers数组中进行注册
-    - 注册的路由:`RouteServiceProvider`实例来加载
-    - 事件监听器:`EventServiceProvider`类中进行注册
-    - 中间件（路由中间件）：在app/Http/Kernel.php类文件中注册，调用时与路由进行绑定
-    - 在新创建的应用中，AppServiceProvider 文件中方法实现都是空的，这个提供者是你添加应用专属的引导和服务的最佳位置，当然，对于大型应用你可能希望创建几个服务提供者，每个都具有粒度更精细的引导
+  - `config/app.php` 中的providers数组中进行注册
+  - 注册的路由:`RouteServiceProvider`实例来加载
+  - 事件监听器:`EventServiceProvider`类中进行注册
+  - 中间件（路由中间件）：在app/Http/Kernel.php类文件中注册，调用时与路由进行绑定
+  - 在新创建的应用中，AppServiceProvider 文件中方法实现都是空的，这个提供者是你添加应用专属的引导和服务的最佳位置，当然，对于大型应用你可能希望创建几个服务提供者，每个都具有粒度更精细的引导
 * 绑定
   - instance:将一个已存在对象绑定到服务容器里，随后通过名称解析该服务时，容器将总返回这个绑定的实例,把对象注册到服务容器的$instances属性
   - bind:把服务注册到服务容器的$bindings属性里
@@ -322,15 +322,15 @@ $this->app->resolving(HelpSpot\API::class, function ($api, $app) {
 提供了一种方便的机制来过滤进入应用的 HTTP 请求,中间件都位于 app/Http/Middleware 目录
 
 * 内置中间件
-    - 用户的身份认证
-    - CORS 中间件可以负责为所有离开应用的响应添加合适的头部信息
-    - 日志中间件可以记录所有传入应用的请求。
+  - 用户的身份认证
+  - CORS 中间件可以负责为所有离开应用的响应添加合适的头部信息
+  - 日志中间件可以记录所有传入应用的请求。
 * 前置 & 后置中间件：中间件中定义执行
 * 注册中间件
-    - 全局中间件：应用的每个 HTTP 请求期间运行，只需在 app/Http/Kernel.php 类中的 $middleware 属性里列出这个中间件类
-    - 特定的路由分配中间件
-        + 在 app/Http/Kernel.php 文件内为该中间件指定一个 键。默认情况下，Kernel 类的 $routeMiddleware 属性包含 Laravel 内置的中间件条目，加入自定义的，只需把它附加到列表后并为其分配一个自定义 键 即可
-        + 使用 middleware 方法将中间件分配给路由
+  - 全局中间件：应用的每个 HTTP 请求期间运行，只需在 app/Http/Kernel.php 类中的 $middleware 属性里列出这个中间件类
+  - 特定的路由分配中间件
+    + 在 app/Http/Kernel.php 文件内为该中间件指定一个 键。默认情况下，Kernel 类的 $routeMiddleware 属性包含 Laravel 内置的中间件条目，加入自定义的，只需把它附加到列表后并为其分配一个自定义 键 即可
+    + 使用 middleware 方法将中间件分配给路由
 * 中间件组：使用 Kernel 类的 $middlewareGroups 属性来实现
   - 包含可以应用到 Web 和 API 路由的通用中间件
   - 中间件组使用和分配单个中间件同样的语法被分配给路由和控制器动作
@@ -365,12 +365,12 @@ call_user_func($callback);
   - 实现 getFacadeAccessor 方法
     - 使用 Facade 进行的任何调用都将传递给 Laravel 缓存服务的底层实例。
 * 缺点
-    - 会引起类作用范围的膨胀：因为 Facades 使用起来非常简单而且不需要注入，就会使得我们在不经意间在单个类中使用许多 Facades，从而导致类变的越来越大。而使用依赖注入的时候，使用的类越多，构造方法就会越长，在视觉上就会引起注意，提醒你这个类有点庞大了。因此在使用 Facades 的时候，要特别注意控制好类的大小，让类的作用范围保持短小。
+  - 会引起类作用范围的膨胀：因为 Facades 使用起来非常简单而且不需要注入，就会使得我们在不经意间在单个类中使用许多 Facades，从而导致类变的越来越大。而使用依赖注入的时候，使用的类越多，构造方法就会越长，在视觉上就会引起注意，提醒你这个类有点庞大了。因此在使用 Facades 的时候，要特别注意控制好类的大小，让类的作用范围保持短小。
 * Facades Vs 依赖注入
-    - 依赖注入的主要优点之一是切换注入类的实现的能力。这在测试的时候很有用，因为你可以注入一个 mock 或者 stub ，并断言在 stub 上调用的各种方法。
-    - Facades 使用动态方法来代理从服务容器解析的对象的方法调用，我们可以像测试注入的类实例一样来测试 Facades
+  - 依赖注入的主要优点之一是切换注入类的实现的能力。这在测试的时候很有用，因为你可以注入一个 mock 或者 stub ，并断言在 stub 上调用的各种方法。
+  - Facades 使用动态方法来代理从服务容器解析的对象的方法调用，我们可以像测试注入的类实例一样来测试 Facades
 * Facades Vs 辅助函数
-    - 底层辅助函数实际是调用facade
+  - 底层辅助函数实际是调用facade
 
 ## 契约 Contracts
 
@@ -378,10 +378,10 @@ call_user_func($callback);
 
 * 契约规范:Illuminate\Contracts\**\Repository
 * 契约 VS Facades
-    - Facades，不需要你在类的构造函数中类型提示.契约则需要在类中明显地定义依赖项。
+  - Facades，不需要你在类的构造函数中类型提示.契约则需要在类中明显地定义依赖项。
 * 使用接口的原因：低耦合和简单性
-    - 高耦合:依赖于一个扩展包的特定缓存类。一旦这个扩展包的 API 被更改了，我们的代码就必须跟着改变
-    - 根据接口定义，就很容易判断给定服务提供的功能。 可以将契约视为说明框架功能的简洁文档。
+  - 高耦合:依赖于一个扩展包的特定缓存类。一旦这个扩展包的 API 被更改了，我们的代码就必须跟着改变
+  - 根据接口定义，就很容易判断给定服务提供的功能。 可以将契约视为说明框架功能的简洁文档。
 * 使用：要获得一个契约的实现，只需要被解析的类的构造函数中添加「类型提示」即可
 
 ## 辅助函数
@@ -522,26 +522,26 @@ php artisan make:command SendEmails
 
 * 基本路由：需要一个 URI 与一个 闭包
 * 默认路由：在 routes 目录中的路由文件中定义，这些文件都由框架自动加载
-    - routes/web.php 文件用于定义 web 界面的路由。这里面的路由都会被分配给 web 中间件组，它提供了会话状态和 CSRF 保护等功能。
-    - routes/api.php 中的路由都是无状态的，并且被分配了 api 中间件组。通过 RouteServiceProvider 被嵌套到一个路由组里面。在这个路由组中，会自动添加 URL 前缀 /api 到此文件中的每个路由，可以在 RouteServiceProvider 类中修改此前缀以及其他路由组选项
+  - routes/web.php 文件用于定义 web 界面的路由。这里面的路由都会被分配给 web 中间件组，它提供了会话状态和 CSRF 保护等功能。
+  - routes/api.php 中的路由都是无状态的，并且被分配了 api 中间件组。通过 RouteServiceProvider 被嵌套到一个路由组里面。在这个路由组中，会自动添加 URL 前缀 /api 到此文件中的每个路由，可以在 RouteServiceProvider 类中修改此前缀以及其他路由组选项
 * CSRF 保护：指向 web 路由文件中定义的 POST、PUT 或 DELETE 路由的任何 HTML 表单都应该包含一个 CSRF 令牌字段，否则，这个请求将会被拒绝
 * 视图路由：使用 Route::view 方法，有三个参数，其中前两个是必填参数，分别是 URL 和视图名称。第三个参数选填，可以传入一个数组，数组中的数据会被传递给视图。
 * 路由参数
-    - 必填参数：在路由中捕获一些 URL 片段,路由的参数通常都会被放在 {} 内，并且参数名只能为字母，同时路由参数不能包含 - 符号，如果需要可以用下划线 (_) 代替。路由参数会按顺序依次被注入到路由回调或者控制器中，而不受回调或者控制器的参数名称的影响。
-    - 可选参数:需要指定一个路由参数，但你希望这个参数是可选的。你可以在参数后面加上 ? 标记来实现，但前提是要确保路由的相应变量有默认值
-    - 正则表达式约束:使用路由实例上的 where 方法约束路由参数的格式。where 方法接受参数名称和定义参数应如何约束的正则表达式
+  - 必填参数：在路由中捕获一些 URL 片段,路由的参数通常都会被放在 {} 内，并且参数名只能为字母，同时路由参数不能包含 - 符号，如果需要可以用下划线 (_) 代替。路由参数会按顺序依次被注入到路由回调或者控制器中，而不受回调或者控制器的参数名称的影响。
+  - 可选参数:需要指定一个路由参数，但你希望这个参数是可选的。你可以在参数后面加上 ? 标记来实现，但前提是要确保路由的相应变量有默认值
+  - 正则表达式约束:使用路由实例上的 where 方法约束路由参数的格式。where 方法接受参数名称和定义参数应如何约束的正则表达式
 * 全局约束：希望某个具体的路由参数都遵循同一个正则表达式的约束，就使用 pattern 方法在 RouteServiceProvider 的 boot 方法中定义这些模式
 * 命名路由可以方便地为指定路由生成 URL 或者重定向。通过在路由定义上链式调用 name 方法指定路由名称
-    - 可以使用全局辅助函数 route 来生成链接或者重定向到该路由
+  - 可以使用全局辅助函数 route 来生成链接或者重定向到该路由
 * 路由组允许在大量路由之间共享路由属性，例如中间件或命名空间，而不需要为每个路由单独定义这些属性。共享属性应该以数组的形式传入 Route::group 方法的第一个参数中
-    - 给路由组中所有的路由分配中间件，可以在 group 之前调用 middleware 方法。中间件会依照它们在数组中列出的顺序来运行
-    - 使用 namespace 方法将相同的 PHP 命名空间分配给路由组的中所有的控制器
-    - 用来处理子域名。子域名可以像路由 URI 一样被分配路由参数，允许你获取一部分子域名作为参数给路由或控制器使用
-    - 路由前缀：可以用 prefix 方法为路由组中给定的 URL 增加前缀
+  - 给路由组中所有的路由分配中间件，可以在 group 之前调用 middleware 方法。中间件会依照它们在数组中列出的顺序来运行
+  - 使用 namespace 方法将相同的 PHP 命名空间分配给路由组的中所有的控制器
+  - 用来处理子域名。子域名可以像路由 URI 一样被分配路由参数，允许你获取一部分子域名作为参数给路由或控制器使用
+  - 路由前缀：可以用 prefix 方法为路由组中给定的 URL 增加前缀
 * 路由模型绑定：向路由或控制器行为注入模型 ID 时，就需要查询这个 ID 对应的模型
-    - 隐式绑定：自动解析定义在路由或控制器行为中与类型提示的变量名匹配的路由段名称的 Eloquent 模型
-        + 自定义键名：要模型绑定在检索给定的模型类时使用除 id 之外的数据库字段，可以在 Eloquent 模型上重写 getRouteKeyName 方法
-    - 显式绑定：注册显式绑定，使用路由器的 model 方法来为给定参数指定类
+  - 隐式绑定：自动解析定义在路由或控制器行为中与类型提示的变量名匹配的路由段名称的 Eloquent 模型
+    + 自定义键名：要模型绑定在检索给定的模型类时使用除 id 之外的数据库字段，可以在 Eloquent 模型上重写 getRouteKeyName 方法
+  - 显式绑定：注册显式绑定，使用路由器的 model 方法来为给定参数指定类
 * 自定义解析逻辑：使用 Route::bind 方法。传递到 bind 方法的闭包会接受 URI 中大括号对应的值，并且返回你想要在该路由中注入的类的实例
 * 表单伪造：需要在表单中增加隐藏的 `_method` 输入标签。使用 `_method` 字段的值作为 HTTP 的请求方法；也可以使用辅助函数 `method_field` 来生成隐藏的 _method 输入标签
 * 获取路由参数值:一般显式将其作为控制器方法参数或者定义路由的匿名函数参数传入，以便在代码中获取
@@ -1046,13 +1046,13 @@ php artisan migrate
 * 填充 Seeder
   - 外键：数据类型一致 `unsignedInteger`
 * 优化
-    - 数据关联模型读取时使用 延迟预加载 和 预加载
-    - 使用 Laravel Debugbar 或者 Clockwork 留意每一个页面的总数据库请求数量
-    - 从数据库里面拿出来的数据集合进行缓存，减少数据库的压力，运行在内存上的专业缓存软件对数据的读取也远远快于数据库
+  - 数据关联模型读取时使用 延迟预加载 和 预加载
+  - 使用 Laravel Debugbar 或者 Clockwork 留意每一个页面的总数据库请求数量
+  - 从数据库里面拿出来的数据集合进行缓存，减少数据库的压力，运行在内存上的专业缓存软件对数据的读取也远远快于数据库
 * 查询
-    - facade
-    - 查询构造器
-    - Eloquent ORM:对象关系映射(Object Relational Mapping)
+  - facade
+  - 查询构造器
+  - Eloquent ORM:对象关系映射(Object Relational Mapping)
 
 ```sh
 php artisan make:migration create_users_table
@@ -1244,12 +1244,15 @@ php artisan vendor:publish --tag=laravel-mail
 Eloquent ORM 以ActiveRecord形式来和数据库进行交互，拥有全部的数据表操作定义，单个模型实例对应数据表中的一行
 
 * config/database.php中包含了模型的相关配置项。Eloquent 模型约定：
+  
   + 数据表名：模型以单数形式命名(CamelCase)，对应的数据表为蛇形复数名(snake_cases)，模型的$table属性也可用来指定自定义的数据表名称
   + 主键：模型默认以id为主键且假定id是一个递增的整数值，也可以通过primaryKey来自定义；如果主键非递增数字值，应设置primaryKey来自定义；如果主键非递增数字值，应设置incrementing = false
   + 时间戳：模型会默认在你的数据库表有 created_at 和 updated_at 字段，设置timestamps=false可关闭模型自动维护这两个字段；timestamps=false可关闭模型自动维护这两个字段；dateFormat 属性用于在模型中设置自己的时间戳格式
   + 数据库连接：模型默认会使用应用程序中配置的数据库连接，如果你想为模型指定不同的连接，可以使用 $connection 属性自定义
   + 批量赋值：当用户通过 HTTP 请求传入了非预期的参数，并借助这些参数 create 方法更改了数据库中你并不打算要更改的字段，这时就会出现批量赋值（Mass-Assignment）漏洞，所以你需要先在模型上定义一个 fillable(白名单，允许批量赋值字段名数组)或fillable(白名单，允许批量赋值字段名数组)或guarded(黑名单，禁止批量赋值字段名数组)
+
 * 步骤
+  
   - Article::find (1); 发现没有 find 方法就会调用 Model 的__callStatic
   - callStatic 方法又回去调用 call 方法，这时发现有 find 方法
   - find 方法会调用 where 拼装要查询的参数，然后调用 first ()
@@ -1257,9 +1260,11 @@ Eloquent ORM 以ActiveRecord形式来和数据库进行交互，拥有全部的�
   - 最后组装 sql
   - 交给 mysql 执行 返回结果。
 - 模型软删除：如果模型有一个非空值 deleted_at，代表模型已经被软删除了。要在模型上启动软删除，则必须在模型上使用Illuminate\Database\Eloquent\SoftDeletes trait 并添加 deleted_at 字段到你的模型 $dates 属性上和数据表中，通过调用trashed方法可查询模型是否被软删除
-- 查询作用域：Laravel允许对模型设定全局作用域和本地作用域(包括动态范围)，全局作用域允许我们为模型的所有查询添加条件约束(定义一个实现 Illuminate\Database\Eloquent\Scope 接口的类)，而本地作用域允许我们在模型中定义通用的约束集合(模型方法前加上一个 scope 前缀)。作用域总是返回查询构建器
-- 隐藏和显示属性：模型 hidden属性用于隐藏属性和关联的输出，hidden属性用于隐藏属性和关联的输出，visible 属性用于显示属性和关联的输出，另外makeVisible()还可用来临时修改可见性。当你要对关联进行隐藏时，需使用关联的方法名称，而不是它的动态属性名称
 
+- 查询作用域：Laravel允许对模型设定全局作用域和本地作用域(包括动态范围)，全局作用域允许我们为模型的所有查询添加条件约束(定义一个实现 Illuminate\Database\Eloquent\Scope 接口的类)，而本地作用域允许我们在模型中定义通用的约束集合(模型方法前加上一个 scope 前缀)。作用域总是返回查询构建器
+
+- 隐藏和显示属性：模型 hidden属性用于隐藏属性和关联的输出，hidden属性用于隐藏属性和关联的输出，visible 属性用于显示属性和关联的输出，另外makeVisible()还可用来临时修改可见性。当你要对关联进行隐藏时，需使用关联的方法名称，而不是它的动态属性名称
+  
   ```
   1 全局作用域定义：
   2 <?php
@@ -1336,7 +1341,6 @@ Eloquent ORM 以ActiveRecord形式来和数据库进行交互，拥有全部的�
   73 }
   ```
 
-
   1 <?php
   2
   3 namespace App;
@@ -1361,7 +1365,8 @@ Eloquent ORM 以ActiveRecord形式来和数据库进行交互，拥有全部的�
 3
 4 // 用属性取回航班，当结果不存在时实例化一个新实例...
 5 $flight = App\Flight::firstOrNew(['name' => 'Flight 10']);
-  ```
+
+```
   1 <?php
   2
   3 namespace App;
@@ -1381,7 +1386,7 @@ Eloquent ORM 以ActiveRecord形式来和数据库进行交互，拥有全部的�
   17
   18 //makeVisible()用来临时修改可见性
   19 return $user->makeVisible('attribute')->toArray();
-  ```
+```
 
 - 访问器和修改器：访问器(getFooAttribute)和修改器(setFooAttribute)可以让你修改 Eloquent 模型中的属性或者设置它们的值，比如你想要使用 Laravel 加密器来加密一个被保存在数据库中的值，当你从 Eloquent 模型访问该属性时该值将被自动解密。访问器和修改器要遵循cameCase命名规范，修改器会设置值到 Eloquent 模型内部的 $attributes 属性上
 
@@ -1427,7 +1432,7 @@ Eloquent ORM 以ActiveRecord形式来和数据库进行交互，拥有全部的�
 ```
 
 - 追加属性：在转换模型到数组或JSON时，你希望添加一个在数据库中没有对应字段的属性，首先你需要为这个值定义一个 访问器，然后添加该属性到改模型的 appends 属性中
-
+  
   ```
   1 <?php
   2
@@ -1457,7 +1462,7 @@ Eloquent ORM 以ActiveRecord形式来和数据库进行交互，拥有全部的�
   ```
 
 - 属性类型转换：$casts 属性数组在模型中提供了将属性转换为常见的数据类型的方法，且键是那些需要被转换的属性名称，值则是代表字段要转换的类型。支持的转换的类型有：integer、real、float、double、string、boolean、object、array、collection、date、datetime、timestamp
-
+  
   ```
   1 <?php
   2
@@ -1557,7 +1562,7 @@ Eloquent 会假设对应关联的外键名称是基于模型名称的。在这�
 ```
 
 - 模型事件： Laravel为模型定义的事件包括creating, created, updating, updated, saving, saved, deleting, deleted, restoring, restored。 模型上定义一个 $events 属性
-
+  
   ```
   1 <?php
   2
@@ -1587,7 +1592,6 @@ Eloquent 会假设对应关联的外键名称是基于模型名称的。在这�
 如果在一个给定的模型中监听许多事件，也可使用观察者将所有监听器变成一个类，类的一个方法就是一个事件监听器
 
 ```php
-
 1 $flights = App\Flight::where('active', 1)
 2                ->orderBy('name', 'desc')
 3                ->take(10)
@@ -1777,8 +1781,8 @@ php artisan make:policy PostPolicy
 ## Passport
 
 * 一个 OAuth2 认证服务商，提供了多个 OAuth2「授权类型」以便颁发不同类型的访问令牌。总体来说，它是一个健全且复杂的 API 认证扩展包
-    + 大多数应用并不需要 OAuth2 规范提供的复杂特性，这会让开发者和用户都感到困惑
-    + 开发者也一直对如何使用 Passport 认证 SPA 应用和移动应用感到困扰。
+  + 大多数应用并不需要 OAuth2 规范提供的复杂特性，这会让开发者和用户都感到困惑
+  + 开发者也一直对如何使用 Passport 认证 SPA 应用和移动应用感到困扰。
 
 ## Laravel Sanctum
 
@@ -1813,10 +1817,12 @@ laravel new blog --jet
 ## 扩展开发
 
 * 最好的方式是使用 contracts ，而不是 facades，因为开发的包并不能访问所有 Laravel 提供的测试辅助函数，模拟 contracts 要比模拟 facade 简单很多
+
 * 服务提供者：服务提供者是扩展包与 Laravel 连接的重点，须定义自己的服务提供者并继承自 Illuminate\Support\ServiceProvider 基类
+
 * 路由：若要为扩展包定义路由，只需在包的服务提供者的 boot 方法中传递 routes 文件路径到 loadRoutesFrom 方法即可
 - 配置文件：你可以选择性地将扩展包的配置文件发布(publishes)到应用程序本身的config目录上或者合并(mergeConfigFrom)到应用程序里的副本配置文件中，但不应在配置文件中定义闭包函数，当执行 config:cache Artisan命令时，它们将不能正确地序列化
-
+  
   ```
   1 /**
   2  * 在注册后进行服务的启动。
@@ -2112,8 +2118,8 @@ php artisan jwt:secret # 使用
   - `php artisan config:cache // 配置缓存，生成：bootstrap/cache/config.php`
   - `php artisan config:clear // 清除配置缓存`
 * 缓存路由
- - `php artisan route:cache // 路由缓存，生成：bootstrap/cache/routes.php`
- - `php artisan config:clear // 清除路由缓存`
+  - `php artisan route:cache // 路由缓存，生成：bootstrap/cache/routes.php`
+  - `php artisan config:clear // 清除路由缓存`
 * 性能优化 `php artisan optimize // 优化，生成编译文件；`
 * 优化自动加载 `composer dump-autoload --optimize`
 * 禁止列出上传目录
@@ -2165,88 +2171,139 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
 ## 扩展
 
 * 框架
+  
   - [bagisto/bagisto](https://github.com/bagisto/bagisto):A Free and Opensource laravel eCommerce framework built for all to build and scale your business. https://bagisto.com
   - [laravel/framework](https://github.com/laravel/framework)
   - [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js.
   - [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
   - [bosnadev/repository](https://github.com/bosnadev/repository):Laravel Repositories is a package for Laravel 5 which is used to abstract the database layer. This makes applications much easier to maintain. https://bosnadev.com
+
 * lumen
+  
   - [laravel/lumen-framework](https://github.com/laravel/lumen-framework) <https://lumen.laravel.com/docs/5.6>
   - [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
+
 * API
+  
   - [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
   - [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp
   - [mylxsw/wizard](https://github.com/mylxsw/wizard):Wizard是基于Laravel开发框架开发的一款开源项目（API）文档管理工具。 https://mylxsw.github.io/wizard/
   - [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
+
 * Swoole
+  
   - [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
+
 * logger
+  
   - [overtrue/laravel-query-logger](https://github.com/overtrue/laravel-query-logger):📝 A dev tool to log all queries for laravel application.
   - [andersao/laravel-request-logger](https://github.com/andersao/laravel-request-logger):HTTP request logger middleware for Laravel
   - [antonioribeiro/tracker](https://github.com/antonioribeiro/tracker):Laravel Stats Tracker
+
 * [ livewire / livewire ](https://github.com/livewire/livewire):A full-stack framework for Laravel that takes the pain out of building dynamic UIs.
+
 * Oauth
+  
   - [laravel/socialite](https://github.com/laravel/socialite):an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub, GitLab and Bitbucket
   - [overtrue/socialite](https://github.com/overtrue/socialite)::octocat: Socialite is an OAuth2 Authentication tool. It is inspired by laravel/socialite, you can easily use it without Laravel.
   - [laravel/passport](https://github.com/laravel/passport):Laravel Passport is an OAuth2 server and API authentication package that is simple and enjoyable to use.
+
 * websocket
+  
   - [beyondcode/laravel-websockets](https://github.com/beyondcode/laravel-websockets):Websockets for Laravel. Done right.https://docs.beyondco.de/laravel-websockets/
   - [laravel/echo](https://github.com/laravel/echo):provides a more robust, efficient alternative to continually polling your application for websocket changes.
+
 * admin
+  
   - [z-song/laravel-admin](https://github.com/z-song/laravel-admin):Build a full-featured administrative interface in ten minutes http://laravel-admin.org
   - [the-control-group/voyager](https://github.com/the-control-group/voyager):Voyager - The Missing Laravel Admin https://laravelvoyager.com
   - [LaraAdmin](https://laraadmin.com/)
   - [Laravel Nova](https://nova.laravel.com):a beautifully designed administration panel for Laravel. Carefully crafted by the creators of Laravel to make you the most productive developer in the galaxy.
   - [ jqhph / dcat-admin ](https://github.com/jqhph/dcat-admin):
-fire 使用很少的代码快速构建一个功能完善的高颜值后台系统，内置丰富的后台常用组件，开箱即用，让开发者告别冗杂的HTML代码。 http://www.dcatadmin.com
+    fire 使用很少的代码快速构建一个功能完善的高颜值后台系统，内置丰富的后台常用组件，开箱即用，让开发者告别冗杂的HTML代码。 http://www.dcatadmin.com
 
 * pay
+  
   - [laravel/cashier](https://github.com/laravel/cashier):provides an expressive, fluent interface to Stripe's subscription billing services.
+
 * [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
+
 * [laravel/envoy](https://github.com/laravel/envoy):Elegant SSH tasks for PHP. a clean, minimal syntax for defining common tasks you run on your remote servers
+
 * [barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf):A DOMPDF Wrapper for Laravel
+
 * RBAC
+  
   - [Zizaco/entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
   - [spatie/laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
   - [Adldap2/Adldap2-Laravel](https://github.com/Adldap2/Adldap2-Laravel):LDAP Authentication & Management for Laravel
   - [FrozenNode/Laravel-Administrator](https://github.com/FrozenNode/Laravel-Administrator):An administrative interface package for Laravel http://administrator.frozennode.com/
+
 * [LaravelCollective/html](https://github.com/LaravelCollective/html):HTML and Form Builders for the Laravel Framework
+
 * [launcher-host/mercurius](https://github.com/launcher-host/mercurius):Real-time Messenger for Laravel http://mercurius.launcher.host/
+
 * DB
+  
   - [Laravel-Backpack/CRUD](https://github.com/Laravel-Backpack/CRUD):Build a custom admin interface for your Eloquent models, using Laravel 5.2 to 5.7 http://backpackforlaravel.com
   - [illuminate/database](https://github.com/illuminate/database):[READ ONLY] Subtree split of the Illuminate Database component (see laravel/framework)
   - [protoqol/prequel](https://github.com/Protoqol/Prequel)
   - Redis
   - MongoDB
     + [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb#installation):A MongoDB based Eloquent model and Query builder for Laravel (Moloquent) https://jenssegers.com
+
 * [GrahamCampbell/Laravel-Throttle](https://github.com/GrahamCampbell/Laravel-Throttle):A rate limiter for Laravel 5 https://gjcampbell.co.uk/
+
 * debug
+  
   - [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
   - [stefanzweifel/laravel-stats](https://github.com/stefanzweifel/laravel-stats):📈 Get insights about your Laravel or Lumen Project
   - [wujunze/laravel-debug-helper](https://github.com/wujunze/laravel-debug-helper):Laravel package to help debug
   - [beyondcode/laravel-dump-server](link)
+
 * [codex-project/codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! http://codex-project.ninja
+
 * [laravelshift](https://laravelshift.com/):laravel upgrade
+
 * [Laravel Analyzer](link)
+
 * MQ
+  
   - [vyuldashev/laravel-queue-rabbitmq](https://github.com/vyuldashev/laravel-queue-rabbitmq):RabbitMQ driver for Laravel Queue
   - [laravel/horizon](https://github.com/laravel/horizon):Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues. https://horizon.laravel.com
+
 * [InfyOmLabs/laravel-generator](https://github.com/InfyOmLabs/laravel-generator):InfyOm Laravel Generator - API, Scaffold, CRUD Laravel Generator http://labs.infyom.com/laravelgenerator/
+
 * [spatie/laravel-fractal](https://github.com/spatie/laravel-fractal):An easy to use Fractal wrapper built for Laravel and Lumen applications
+
 * [barryvdh/laravel-snappy](https://github.com/barryvdh/laravel-snappy):Laravel Snappy PDF
+
 * [antonioribeiro/health](https://github.com/antonioribeiro/health):Laravel Health Panel
+
 * [spatie/laravel-backup](https://github.com/spatie/laravel-backup):A package to backup your Laravel app
+
 * [elasticquent/Elasticquent](https://github.com/elasticquent/Elasticquent):Maps Laravel Eloquent models to Elasticsearch types
+
 * [saleem-hadad/larecipe](https://github.com/saleem-hadad/larecipe):🍪 Write gorgeous documentations for your products using Markdown inside your Laravel app. https://larecipe.binarytorch.com.my/
+
 * IDE
+  
   - [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
+
 * [laravel-zero/laravel-zero](https://github.com/laravel-zero/laravel-zero):A PHP framework for console artisans https://laravel-zero.com
+
 * [nWidart/laravel-modules](https://github.com/nWidart/laravel-modules):Module Management In Laravel https://nwidart.com/laravel-modules/
+
 * cron
+  
   - [Forge](https://forge.laravel.com):Painless PHP Servers Provision and deploy unlimited PHP applications on DigitalOcean, Linode, AWS, and more.
+
 * [Laravel Spark](https://spark.laravel.com):provides the perfect starting point for your next big idea. Forget all the boilerplate and focus on what matters: your application.
+
 * 部署
+  
   - [envoyer](https://envoyer.io):Deployments you've only dreamed about. Zero downtime. Zero fuss
+
 * [overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat):微信 SDK for Laravel, 基于 overtrue/wechat
 
 ```sh
@@ -2378,23 +2435,39 @@ password: password
 ## 参考
 
 * [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
+
 * [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 http://laravelacademy.org
+
 * [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
+
 * [laravel-china/laravel-docs](https://github.com/laravel-china/laravel-docs):Laravel 中文文档 https://d.laravel-china.org
+
 * [laravel/spark-docs](https://github.com/laravel/spark-docs)
+
 * [samedreams/artisan-road](https://github.com/samedreams/artisan-road):Programmers are artisans （This book is a guide for artisans）
+
 * [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
 
 * [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
+
 * [LeoYang90/laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis):详解 laravel 源码
+
 * [深入 Laravel 核心](https://learnku.com/docs/laravel-core-concept/5.5)
+
 * [Laravel 之道](https://learnku.com/docs/the-laravel-way/5.6)
+
 * [xiaohuilam/laravel](https://github.com/xiaohuilam/laravel/wiki):Laravel 深入浅出指南 —— Laravel 5.7 源代码解析，新手进阶指南。
+
 * [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
+
 * [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. http://laravel.com/docs/quickstart
+
 * [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
+
 * [laravel入门教程](https://d.laravel-china.org/docs/5.5)
+
 * [基于 Laravel + Vue 构建 API 驱动的前后端分离应用系列](https://laravelacademy.org/category/api-app)
+
 * [基于 Laravel 构建前后端分离应用系列教程](https://laravelacademy.org/api-driven-development-laravel-vue)
 
 ## 前后端分离

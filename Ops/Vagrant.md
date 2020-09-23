@@ -35,9 +35,9 @@ alias vagrant-plugin-install='vagrant plugin install --plugin-clean-sources --pl
 ## box管理
 
 * 下载
-    - 环境有默认的box名称，添加box时不带url或uri会默认从官网下载（速度不敢保证）
-    - 国外服务器通过wget下载，scp root@192.168.10.10:virtualbox.box virtualbox.box
-    - box版本号的问题
+  - 环境有默认的box名称，添加box时不带url或uri会默认从官网下载（速度不敢保证）
+  - 国外服务器通过wget下载，scp root@192.168.10.10:virtualbox.box virtualbox.box
+  - box版本号的问题
 
 ```sh
 vagrant box list # 列表
@@ -90,10 +90,10 @@ vagrant box add metadata.json
 通常情况下Box只做最基本的设置,使用Chef或者Puppet (provisioning)来做进一步的环境搭建,而该命令就是指定开启相应的provisioning
 
 * 所谓的provisioning就是"The problem of installing software on a booted system"的意思。
-    - Chef
-    - Puppet
-    - Ansible
-    - 使用Shell来编写安装脚本
+  - Chef
+  - Puppet
+  - Ansible
+  - 使用Shell来编写安装脚本
 
 ```sh
 vagrant -h
@@ -132,13 +132,13 @@ vagrant global-status --prune
 ## 配置
 
 * 文件默认Vagrantfile，基于Ruby配置
-    - 虚拟机的配置
-    - SSH配置
-    - Vagrant配置
+  - 虚拟机的配置
+  - SSH配置
+  - Vagrant配置
 * 搭建集群:ip中的0与1默认被占用，hostname不能含特殊符号
 * 网络
-    - 默认使用的NAT类型的网络
-    - public_network：新建新网络，与宿主机的ip处于同一个IP网段里面
+  - 默认使用的NAT类型的网络
+  - public_network：新建新网络，与宿主机的ip处于同一个IP网段里面
 
 ```ruby
 # -*- mode: ruby -*-

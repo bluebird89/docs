@@ -4,27 +4,27 @@
 
 * [腾讯微云](https://www.weiyun.com/)
 * [Google Drive](https://drive.google.com/drive/)
-    - [harababurel/gcsf](https://github.com/harababurel/gcsf):a FUSE file system based on Google Drive
+  - [harababurel/gcsf](https://github.com/harababurel/gcsf):a FUSE file system based on Google Drive
 * 华为云 OBS
 * [icloud](https://www.icloud.com/)
 * [juicefs](https://juicefs.io/):为云端设计的 POSIX 共享文件系统
 * dropbox
 * [pCloud](https://www.pcloud.com/zh/)
 * 百度云
-    - [Pan](https://pandownload.com)
-    - [acgotaku/BaiduExporter](https://github.com/acgotaku/BaiduExporter):Assistant for Baidu to export download links to aria2/aria2-rpc
-    - [b3log/baidu-netdisk-downloaderx](https://github.com/b3log/baidu-netdisk-downloaderx):⚡️ 百度网盘不限速下载器 BND，支持 Windows、Mac 和 Linux。 https://hacpai.com/tag/bnd
-    - [CodeTips/BaiduNetdiskPlugin-macOS ](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~
-    - [ liuzhuoling2011 / baidupcs-web ](https://github.com/liuzhuoling2011/baidupcs-web):
+  - [Pan](https://pandownload.com)
+  - [acgotaku/BaiduExporter](https://github.com/acgotaku/BaiduExporter):Assistant for Baidu to export download links to aria2/aria2-rpc
+  - [b3log/baidu-netdisk-downloaderx](https://github.com/b3log/baidu-netdisk-downloaderx):⚡️ 百度网盘不限速下载器 BND，支持 Windows、Mac 和 Linux。 https://hacpai.com/tag/bnd
+  - [CodeTips/BaiduNetdiskPlugin-macOS ](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~
+  - [ liuzhuoling2011 / baidupcs-web ](https://github.com/liuzhuoling2011/baidupcs-web):
 * [坚果云](https://www.jianguoyun.com/)
 * [数蚁](https://teamyi.com)
 * [nextcloud/server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data https://nextcloud.com
-    - `sudo -u www-data php occ maintenance:install --database "mysql" --database-name "henry" --database-user "nextcloud" --database-port:"33060" --database-pass "henry" --admin-user "admin" --admin-pass "admin"`
+  - `sudo -u www-data php occ maintenance:install --database "mysql" --database-name "henry" --database-user "nextcloud" --database-port:"33060" --database-pass "henry" --admin-user "admin" --admin-pass "admin"`
 * [Resilio](https://www.resilio.com/):在几台不同的设备之间同步文件,是一种分布式网盘  `config.getsync.com/sync.conf `
 * 建议
-    -  40GB 空间以下选阿里云的 OSS
-    -  40GB 以上可以对比下腾讯云的 COS
-    -  国外服务商，请优先选择 BackBlaze，性价比完爆 AWS、MS、Google
+  - 40GB 空间以下选阿里云的 OSS
+  - 40GB 以上可以对比下腾讯云的 COS
+  - 国外服务商，请优先选择 BackBlaze，性价比完爆 AWS、MS、Google
 
 ## 服务
 
@@ -34,7 +34,7 @@
 * [cytopia/linux-timemachine](https://github.com/cytopia/linux-timemachine):Rsync-based OSX-like time machine for Linux and BSD (and even OSX)
 * [mmastrac/iterm2-zmodem](https://github.com/mmastrac/iterm2-zmodem):Automatic ZModem support for iTerm 2
 * [bailicangdu/node-fs](https://github.com/bailicangdu/node-fs):基于node搭建的文件/图片管理系统
-    - [UZER.ME](https://uzer.me/)
+  - [UZER.ME](https://uzer.me/)
 
 ## 下载
 
@@ -49,24 +49,24 @@
 - [Algram/ytdl-webserver](https://github.com/Algram/ytdl-webserver):📻 Webserver for downloading youtube videos. Ready for docker.
 - [Free Download Manager](https://www.freedownloadmanager.org/)
 - qBittorrent
-    + `sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable`
-    + `sudo apt-get update && sudo apt-get install qbittorrent`
-    + 开启 UPnP / NAT-PMP 功能
-    + 添加 trackers 优化下载速度
-        - [ngosang / trackerslist](https://github.com/ngosang/trackerslist):Updated list of public BitTorrent trackers
-        - https://torrents.io/tracker-list/
-        - https://newtrackon.com/list
-    * 连接 DHT 节点
+  + `sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable`
+  + `sudo apt-get update && sudo apt-get install qbittorrent`
+  + 开启 UPnP / NAT-PMP 功能
+  + 添加 trackers 优化下载速度
+    - [ngosang / trackerslist](https://github.com/ngosang/trackerslist):Updated list of public BitTorrent trackers
+    - https://torrents.io/tracker-list/
+    - https://newtrackon.com/list
+  * 连接 DHT 节点
 + C-torrent:最简单的命令行torrent下载工具
 + [utorrent](https://www.utorrent.com/intl/zh_cn/)
 + [Transmission](https://transmissionbt.com/):  a cross-platform BitTorrent client
 + IDM
 * axel:多线程下载工具，可下载独立文件片段，因而文件下载起来更快速 `sudo apt install axel`
 * [aria2](https://aria2.github.io/) a lightweight multi-protocol & multi-source command-line download utility It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink. aria2 can be manipulated via built-in JSON-RPC and XML-RPC interfaces.
-    -  `sudo apt install aria2`
-    - `~/.aria2/aria2.conf`
-    - `aria2c 'magnet:xxxxxxx'`
-    - [yangshun1029/aria2gui](https://github.com/yangshun1029/aria2gui):Aria2GUI for macOS
+  - `sudo apt install aria2`
+  - `~/.aria2/aria2.conf`
+  - `aria2c 'magnet:xxxxxxx'`
+  - [yangshun1029/aria2gui](https://github.com/yangshun1029/aria2gui):Aria2GUI for macOS
 * [iawia002/annie](https://github.com/iawia002/annie):👾 Fast, simple and clean video downloader
 * [soimort/you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
 * [rg3/youtube-dl](https://github.com/rg3/youtube-dl):Command-line program to download videos from YouTube.com and other video sites http://rg3.github.io/youtube-dl/ `curl https://yt-dl.org/latest/youtube-dl -o /usr/local/bin/youtube-dl `

@@ -5,16 +5,20 @@ Status, process, and documents for ECMA262 https://tc39.github.io/ecma262/
 ## 版本
 
 * ES6
-
+  
   - let, const（变量类型）：解决变量作用域泄露的问题
   - Class, extends, super（类、继承）：让对象原型的写法更加清晰、更像面向对象编程的语法，也更加通俗易懂
   - Arrow functions（箭头函数）：简洁，解决this绑定的问题（继承外面的this）
   - Template string（模板字符串）：解决传统写法非常麻烦的问题
   - Destructuring（解构）：避免让API使用者记住多个参数的使用顺序
   - Default, rest（默认值、参数）：简化，替代arguments，使代码更易于阅读
+
 * ECMAScript 2016
+  
   - Array.prototype.includes
+
 * ECMAScript 2017
+  
   - Object.values():返回 Object 所有属性的值
   - Object.entries():与 Object.keys 相关，不仅返回键，而是以数组的方式返回键和值。这使得在循环中使用对象或将对象转换为 Map 等操作变得非常简单
   - String.prototype.padStart 和 String.prototype.padEnd——允许将空字符串或其他字符串追加或前置到原始字符串的尾部或开头
@@ -22,8 +26,11 @@ Status, process, and documents for ECMA262 https://tc39.github.io/ecma262/
   - Object.assign 将浅复制除原始源对象的 getter 和 setter 函数之外的所有东西
   - 函数参数中添加尾逗号（trailing comma）
   - async/await:async 关键字告诉 JavaScript 编译器要以不同的方式处理这个函数。在遇到函数中的 await 关键字时，编译器就会暂停。它假定 await 之后的表达式会返回一个 promise 并等待，直到 promise 完成或被拒绝
+
 * ECMAScript 2018
+
 * ES2019
+  
   - toString()方法返回函数代码本身，以前会省略注释和空格
   - 允许catch语句省略参数
 
@@ -44,7 +51,7 @@ Status, process, and documents for ECMA262 https://tc39.github.io/ecma262/
 #### 基本用法
 
 * export用于规定输出模块的对外接口
-    - default用于指定模块输出的默认接口
+  - default用于指定模块输出的默认接口
 * as用于重命名输出和输入接口
 
 ```js
@@ -80,9 +87,9 @@ function foo() {
 ```
 
 * import用于输入模块提供的接口
-    - *表示输入模块的所有接口。
-    - 如果多次重复执行同一句import语句，那么只会执行一次，而不会执行多次
-    - import命令输入的变量都是只读的，加载后不能修改接口。
+  - *表示输入模块的所有接口。
+  - 如果多次重复执行同一句import语句，那么只会执行一次，而不会执行多次
+  - import命令输入的变量都是只读的，加载后不能修改接口。
 
 ```js
 // 用法1：仅执行 my_module 模块，不输入任何值（可能没啥用，但是是合法的）
@@ -114,7 +121,6 @@ if (x === 1) {
 * 在浏览器中下快速使用import
 
 ```js
-
 // myModule.js 在script标签上添加一个type="module"的属性来表示这个文件是以module的方式来运行
 export default {
   name: 'my-module'
@@ -135,10 +141,10 @@ export default {
 ```
 
 * 在Node下快速使用export/import:Node还没有原生支持ES模块
-    - Node从9.0版本开始支持ES模块，可以在flag模式下使用ES模块，不过这还处于试验阶段（Stability: 1 - Experimental）。其用法也比较简单，执行脚本或者启动时加上--experimental-modules即可。不过这一用法要求import/export的文件后缀名必须为*.mjs。
+  - Node从9.0版本开始支持ES模块，可以在flag模式下使用ES模块，不过这还处于试验阶段（Stability: 1 - Experimental）。其用法也比较简单，执行脚本或者启动时加上--experimental-modules即可。不过这一用法要求import/export的文件后缀名必须为*.mjs。
 * 借助babel-node执行包含ES模块代码的文件
-    - 安装babel-cli和babel-preset-env，并将其保存为开发依赖。
-    - 在根目录创建.babelrc文件，在其中添加如下配置。
+  - 安装babel-cli和babel-preset-env，并将其保存为开发依赖。
+  - 在根目录创建.babelrc文件，在其中添加如下配置。
 
 ```js
 node --experimental-modules test-my-module.mjs
@@ -425,7 +431,7 @@ myOptions.style.color = "red";
 * 事件监听
 * 发布/订阅
 * Promise 对象
-*  Generator 函数的语法糖
+* Generator 函数的语法糖
 
 ## 参考
 
@@ -439,5 +445,5 @@ myOptions.style.color = "red";
 ## 工具
 
 * code generator
-    - [estools/escodegen](https://github.com/estools/escodegen):ECMAScript code generator
+  - [estools/escodegen](https://github.com/estools/escodegen):ECMAScript code generator
 * [addyosmani/es6-tools](https://github.com/addyosmani/es6-tools):An aggregation of tooling for using ES6 today

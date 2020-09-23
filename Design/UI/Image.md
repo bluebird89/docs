@@ -302,6 +302,7 @@ md5sum out11.jpg
 * [GIPHY](https://giphy.com/):寻找动图好去处。
 * [Beautiful Royalty-Free Photos Sorted By AI](https://www.pickpik.com)
 * [yandex search](https://yandex.com/images/)
+* [](https://www.pinterest.com/)
 
 ## 工具
 

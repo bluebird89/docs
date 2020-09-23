@@ -18,8 +18,8 @@ A web worker is a JavaScript program running on a different thread, in parallel 
 
 * 在浏览器调试工具中sources中看到不同进程
 * 同一main进程间子进程可以互相传递数据，相互通信：postmessage
-    - 值传递
-    - 引用传递
+  - 值传递
+  - 引用传递
 
 ```js
 worker.postMessage(payload, transferableObjects)

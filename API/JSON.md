@@ -13,7 +13,7 @@ json_rpc 提交formdata json字符串
 ## 工具
 
 * [ stedolan / jq ](https://github.com/stedolan/jq):Command-line JSON processor http://stedolan.github.io/jq/
-	- `cat demo.json | jq '.id,.name,.status,.attachments'`
+  - `cat demo.json | jq '.id,.name,.status,.attachments'`
 * [antonmedv/fx](https://github.com/antonmedv/fx):Command-line JSON processing tool 🔥
 * [json-path/JsonPath](https://github.com/json-path/JsonPath):Java JsonPath implementation
 * [alibaba/fastjson](https://github.com/alibaba/fastjson):🚄 A fast JSON parser/generator for Java https://github.com/alibaba/fastjson/wiki

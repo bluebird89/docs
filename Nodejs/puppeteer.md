@@ -15,4 +15,4 @@ npm i puppeteer
 ## 参考
 
 * [](https://theheadless.dev/):Learn Puppeteer & Playwright
-Tips, tricks and in-depth guides from the trenches
+  Tips, tricks and in-depth guides from the trenches

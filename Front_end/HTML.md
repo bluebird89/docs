@@ -123,17 +123,17 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
   - 支持嵌套：表格、列表
   - 创建布局的一种简单的方式
   - `<table>`属性
-     + width：表格的宽度，默认单位是px(像素)。
-     + height：表格的高度。
-     + border：边框的粗细,不定义边框属性，表格将不显示边框
-     + bordercolor：边框颜色。
-     + rules：合并单元格边线。取值：All
-     + cellpadding：单元格边线到内容之间的距离(填充距离)
-     + cellspacing：两个单元格之间的距离(间距)
-     + background：背景图片
-     + bgColor：表格背景颜色
-     + align：表格水平对齐方式，取值：left、center、right
-     + frame：边框：box above below hsides(上下) vsides（左右）
+    + width：表格的宽度，默认单位是px(像素)。
+    + height：表格的高度。
+    + border：边框的粗细,不定义边框属性，表格将不显示边框
+    + bordercolor：边框颜色。
+    + rules：合并单元格边线。取值：All
+    + cellpadding：单元格边线到内容之间的距离(填充距离)
+    + cellspacing：两个单元格之间的距离(间距)
+    + background：背景图片
+    + bgColor：表格背景颜色
+    + align：表格水平对齐方式，取值：left、center、right
+    + frame：边框：box above below hsides(上下) vsides（左右）
   - 标题：`<caption>我的标题</caption>`
   - `<thead>`
   - `<tfoot>`

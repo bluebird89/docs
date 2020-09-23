@@ -7,23 +7,23 @@ gorilla The Cloud-Native API Gateway & Service Mesh https://konghq.com
 * 扩展是通过插件机制进行的，并且也提供了插件的定制示例方法
 * 插件定义了一个请求从进入到最后反馈到客户端的整个生命周期，所以可以满足大部分的定制需求，本身 Kong 也已经集成了相当多的插件，包括密钥认证、CORS、文件日志、API 请求限流、请求转发、健康检查、熔断等
 * Nginx、Openresty和Kong三者紧密相连：
-    - Nginx = Http Server + Reversed Proxy + Load Balancer
-    - Openresty = Nginx + Lua-nginx-module，Openresty是寄生在 Nginx 上，暴露 Nginx 处理的各个阶段的钩子， 使用 Lua 扩展 Nginx
-    - Kong = Openresty + Customized Framework，Kong作为 OpenResty 的一个应用程序
+  - Nginx = Http Server + Reversed Proxy + Load Balancer
+  - Openresty = Nginx + Lua-nginx-module，Openresty是寄生在 Nginx 上，暴露 Nginx 处理的各个阶段的钩子， 使用 Lua 扩展 Nginx
+  - Kong = Openresty + Customized Framework，Kong作为 OpenResty 的一个应用程序
 * 特性：
-    - 可扩展性: 通过简单地添加更多的服务器，可以轻松地进行横向扩展，这意味着您的平台可以在一个较低负载的情况下处理任何请求。
-    - 模块化: 可以通过添加新的插件进行扩展，这些插件可以通过RESTful Admin API轻松配置。
-    - 在任何基础架构上运行: Kong 网关可以在任何地方都能运行。可以在云或内部网络环境中部署 Kong，包括单个或多个数据中心设置，以及 public，private 或 invite-only APIs
+  - 可扩展性: 通过简单地添加更多的服务器，可以轻松地进行横向扩展，这意味着您的平台可以在一个较低负载的情况下处理任何请求。
+  - 模块化: 可以通过添加新的插件进行扩展，这些插件可以通过RESTful Admin API轻松配置。
+  - 在任何基础架构上运行: Kong 网关可以在任何地方都能运行。可以在云或内部网络环境中部署 Kong，包括单个或多个数据中心设置，以及 public，private 或 invite-only APIs
 
 ## 安装
 
 * 两种方式:一种是没有数据库依赖的DB-less 模式，另一种是with a Database 模式
 * [Docker](https://docs.konghq.com/install/docker/)
 * 端口
-    - 8000：用来接收客户端的 HTTP 请求，并转发到 upstream
-    - 8443：用来接收客户端的 HTTPS 请求，并转发到 upstream
-    - 8001：HTTP 监听的 API 管理接口
-    - 8444：HTTPS 监听的 API 管理接口
+  - 8000：用来接收客户端的 HTTP 请求，并转发到 upstream
+  - 8443：用来接收客户端的 HTTPS 请求，并转发到 upstream
+  - 8001：HTTP 监听的 API 管理接口
+  - 8444：HTTPS 监听的 API 管理接口
 
 ```sh
 docker network create kong-net
@@ -43,11 +43,11 @@ curl -i http://localhost:8001/
 ## 原理
 
 * 架构
-    - Kong Restful 管理API：提供了API、API消费者、插件、upstreams、证书等管理
-    - Kong 插件：拦截请求/响应，相当于 Servlet中的拦截器，实现请求的AOP处理
-    - 数据中心：用于存储 Kong 集群节点信息、API、消费者、插件等信息，目前提供了PostgreSQL和Cassandra支持，如果需要高可用建议使用Cassandra
-    - Kong 集群中的节点通过 Gossip 协议自动发现其他节点，当通过一个 Kong 节点的管理 API 进行一些变更时也会通知其他节点。每个 Kong 节点的配置信息是会缓存的，如插件，那么当在某一个 Kong 节点修改了插件配置时，需要通知其他节点配置的变更。
-    - Kong 核心基于 OpenResty，实现了请求/响应的 Lua 处理化
+  - Kong Restful 管理API：提供了API、API消费者、插件、upstreams、证书等管理
+  - Kong 插件：拦截请求/响应，相当于 Servlet中的拦截器，实现请求的AOP处理
+  - 数据中心：用于存储 Kong 集群节点信息、API、消费者、插件等信息，目前提供了PostgreSQL和Cassandra支持，如果需要高可用建议使用Cassandra
+  - Kong 集群中的节点通过 Gossip 协议自动发现其他节点，当通过一个 Kong 节点的管理 API 进行一些变更时也会通知其他节点。每个 Kong 节点的配置信息是会缓存的，如插件，那么当在某一个 Kong 节点修改了插件配置时，需要通知其他节点配置的变更。
+  - Kong 核心基于 OpenResty，实现了请求/响应的 Lua 处理化
 * Service:抽象层面的服务，可以直接映射到一个物理服务，也可以指向一个Upstream（同Nginx中的Upstream，是对上游服务器的抽象）
 * Route是路由的抽象，负责将实际的请求映射到 Service
 * Tag
@@ -72,8 +72,8 @@ curl -i -X PATCH http://localhost:8001/services/hello-service --data url='http:/
 ## Kong Plugins
 
 * key-auth
-    - 接收config.key_names定义参数，默认参数名称 ['apikey']。在HTTP请求中 header和params参数中包含apikey参数，参数值必须apikey密钥，Kong网关将检查密钥，验证通过才可以访问后续服务
-    - 为Service添加服务消费者（Consumer）定义消费者访问 API Key, 让他拥有访问hello-service的权限
+  - 接收config.key_names定义参数，默认参数名称 ['apikey']。在HTTP请求中 header和params参数中包含apikey参数，参数值必须apikey密钥，Kong网关将检查密钥，验证通过才可以访问后续服务
+  - 为Service添加服务消费者（Consumer）定义消费者访问 API Key, 让他拥有访问hello-service的权限
 * [Kong Hub](https://docs.konghq.com/hub/）
 * 身份认证插件：Kong提供了Basic Authentication、Key authentication、OAuth2.0 authentication、HMAC authentication、JWT、LDAP authentication认证实现。
 * 安全控制插件：ACL（访问控制）、CORS（跨域资源共享）、动态SSL、IP限制、爬虫检测实现。
@@ -94,25 +94,25 @@ curl -i -X POST http://localhost:8001/consumers/Hidden/key-auth/ --data key=ENTE
 ## 工具
 
 * Admin
-    - Kong 企业版提供了管理UI
-    - [PGBI/kong-dashboard](https://github.com/PGBI/kong-dashboard):Dashboard for managing Kong gateway 当前最新版本（3.6.x）并不支持最新版本的 Kong，最后一次更新也要追溯到1年多以前了
-        + `docker run --rm --network=kong-net -p 8080:8080  pgbi/kong-dashboard start --kong-url http://kong:8001`
-    - [pantsel/konga](https://github.com/pantsel/konga): More than just another GUI to Kong Admin API <https://pantsel.github.io/konga/> 观察到现在 Kong 的所有的配置，并且可以对于管理 Kong 节点情况进行查看、监控和预警。Konga 主要是用 AngularJS 写的，运行于nodejs服务端
-        + 特点
-            * 管理所有Kong Admin API对象。
-            * 支持从远程源（数据库，文件，API等）导入使用者。
-            * 管理多个Kong节点。使用快照备份，还原和迁移Kong节点。
-            * 使用运行状况检查监视节点和API状态。
-            * 支持电子邮件和闲置通知。
-            * 支持多用户。
-            * 易于数据库集成（MySQL，PostgresSQL，MongoDB，SQL Server
-        + 安装：`docker run  -d -p 1337:1337 --network kong-net --name konga -e "DB_ADAPTER=postgres" -e "DB_URI=postgresql://kong:kong@kong-database/kong" pantsel/konga`
-        + 通过 <http://localhost:1337/> 访问管理界面
-        + 在 CONNECTIONS 中添加 Kong 服务的管理路径 `http://xxx.xxx.xxx.xxx:8001`
+  - Kong 企业版提供了管理UI
+  - [PGBI/kong-dashboard](https://github.com/PGBI/kong-dashboard):Dashboard for managing Kong gateway 当前最新版本（3.6.x）并不支持最新版本的 Kong，最后一次更新也要追溯到1年多以前了
+    + `docker run --rm --network=kong-net -p 8080:8080  pgbi/kong-dashboard start --kong-url http://kong:8001`
+  - [pantsel/konga](https://github.com/pantsel/konga): More than just another GUI to Kong Admin API <https://pantsel.github.io/konga/> 观察到现在 Kong 的所有的配置，并且可以对于管理 Kong 节点情况进行查看、监控和预警。Konga 主要是用 AngularJS 写的，运行于nodejs服务端
+    + 特点
+      * 管理所有Kong Admin API对象。
+      * 支持从远程源（数据库，文件，API等）导入使用者。
+      * 管理多个Kong节点。使用快照备份，还原和迁移Kong节点。
+      * 使用运行状况检查监视节点和API状态。
+      * 支持电子邮件和闲置通知。
+      * 支持多用户。
+      * 易于数据库集成（MySQL，PostgresSQL，MongoDB，SQL Server
+    + 安装：`docker run  -d -p 1337:1337 --network kong-net --name konga -e "DB_ADAPTER=postgres" -e "DB_URI=postgresql://kong:kong@kong-database/kong" pantsel/konga`
+    + 通过 <http://localhost:1337/> 访问管理界面
+    + 在 CONNECTIONS 中添加 Kong 服务的管理路径 `http://xxx.xxx.xxx.xxx:8001`
 
 ## 参考
 
 * [RESTful API](https://docs.konghq.com/2.0.x/admin-api/):管理API的端口是8001
-    - 添加一个Service:`curl -i -X POST http://localhost:8001/services  --data name=hello-service  --data url='http://xxx.xxx.xxx.xxx:8081/hello'`
-    - Service 添加一个 Route:`curl -i -X POST --url http://localhost:8001/services/hello-service/routes --data 'paths[]=/hello' --data name=hello-route`
-    - 验证:`http://localhost:8000/hello`
+  - 添加一个Service:`curl -i -X POST http://localhost:8001/services  --data name=hello-service  --data url='http://xxx.xxx.xxx.xxx:8081/hello'`
+  - Service 添加一个 Route:`curl -i -X POST --url http://localhost:8001/services/hello-service/routes --data 'paths[]=/hello' --data name=hello-route`
+  - 验证:`http://localhost:8000/hello`

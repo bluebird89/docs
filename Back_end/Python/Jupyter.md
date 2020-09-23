@@ -14,10 +14,10 @@
 * 对代码编写说明文档或语句时，支持Markdown语法。
 * 支持使用LaTeX编写数学性说明
 * Notebook 文档是由一系列单元（Cell）构成，主要有两种形式的单元：
-    - code：这里是你编写代码的地方，通过按 Shift + Enter 运行代码，其结果显示在本单元下方。代码单元左边有 In [1]: 这样的序列标记，方便人们查看代码的执行次序。
-    - Markdown 单元：在这里对文本进行编辑，采用 markdown 的语法规范，可以设置文本格式、插入链接、图片甚至数学公式。同样使用 Shift + Enter 运行 markdown 单元来显示格式化的文本。
-        * 编辑数学公式：LaTeX `$$ z = \frac{x}{y} $$`
-        * 幻灯片
+  - code：这里是你编写代码的地方，通过按 Shift + Enter 运行代码，其结果显示在本单元下方。代码单元左边有 In [1]: 这样的序列标记，方便人们查看代码的执行次序。
+  - Markdown 单元：在这里对文本进行编辑，采用 markdown 的语法规范，可以设置文本格式、插入链接、图片甚至数学公式。同样使用 Shift + Enter 运行 markdown 单元来显示格式化的文本。
+    * 编辑数学公式：LaTeX `$$ z = \frac{x}{y} $$`
+    * 幻灯片
 
 ## Install
 
@@ -56,51 +56,51 @@ c.InteractiveShell.ast_node_interactivity = "all"
 ## 使用
 
 * 文件
-    - Terminal:支持 bash
-    - Markdown
+  - Terminal:支持 bash
+  - Markdown
 * 与　vim 类似
 * 命令模式:当前cell侧边为蓝色时
-    - H：显示快捷键帮助
-    - F：查找和替换
-    - P：打开命令面板
-    - Enter切换为编辑模式
-    - Ctrl-Enter：运行当前cell
-    - Shift-Enter：运行当前cell并跳转到下一cell
-    - Alt-Enter：运行当前cell并在下方新建cell
-    - Y：把当前cell内容转换为代码形式
-    - M：把当前cell内容转换为markdown形式
-    - R 将单元格切换至raw状态
-    - 1~6：把当前cell内容设置为标题1~6格式
-    - Shift+上下键|K|J：按住Shift进行上下键操作可复选多个cell
-    - ↑|K   选中上方单元格
-    - ↓|J   选中下方单元格
-    - A：在上方新建cell
-    - B：在下方新建cell
-    - X/C/Shift-V/V：剪切/复制/上方粘贴/下方粘贴
-    - D, D：删除当前cell
-    - ⇧M    合并选中单元格，若直选中一个则与下一个单元格合并
-    - Z：撤销删除
-    - S：保存notebook
-    - L   转换行号
-    - O   转换输出 在cell和输出结果间切换
-    - ⇧O  转换滚动输出
-    - H   显示快捷键帮助
-    - I, I    中断Notebook内核
-    - O, O    重启Notebook内核
-    - Shift-L：为所有cell的代码添加行编号
-    - Shift-M：合并所选cell或合并当前cell和下方的cell
-    - Q 关闭页面
+  - H：显示快捷键帮助
+  - F：查找和替换
+  - P：打开命令面板
+  - Enter切换为编辑模式
+  - Ctrl-Enter：运行当前cell
+  - Shift-Enter：运行当前cell并跳转到下一cell
+  - Alt-Enter：运行当前cell并在下方新建cell
+  - Y：把当前cell内容转换为代码形式
+  - M：把当前cell内容转换为markdown形式
+  - R 将单元格切换至raw状态
+  - 1~6：把当前cell内容设置为标题1~6格式
+  - Shift+上下键|K|J：按住Shift进行上下键操作可复选多个cell
+  - ↑|K   选中上方单元格
+  - ↓|J   选中下方单元格
+  - A：在上方新建cell
+  - B：在下方新建cell
+  - X/C/Shift-V/V：剪切/复制/上方粘贴/下方粘贴
+  - D, D：删除当前cell
+  - ⇧M    合并选中单元格，若直选中一个则与下一个单元格合并
+  - Z：撤销删除
+  - S：保存notebook
+  - L   转换行号
+  - O   转换输出 在cell和输出结果间切换
+  - ⇧O  转换滚动输出
+  - H   显示快捷键帮助
+  - I, I    中断Notebook内核
+  - O, O    重启Notebook内核
+  - Shift-L：为所有cell的代码添加行编号
+  - Shift-M：合并所选cell或合并当前cell和下方的cell
+  - Q 关闭页面
 * 编辑模式：前cell侧边为绿色
-    - Esc 切换为命令模式
-    - Tab：代码补全
-    - Ctrl-A：全选
-    - Ctrl-Z：撤销
-    - Ctrl-Home：将光标移至cell最前端
-    - Ctrl-End：将光标移至cell末端
-    - Ctrl + /  为一行或者多行添加/取消注释
-    - Alt Multicursor support
+  - Esc 切换为命令模式
+  - Tab：代码补全
+  - Ctrl-A：全选
+  - Ctrl-Z：撤销
+  - Ctrl-Home：将光标移至cell最前端
+  - Ctrl-End：将光标移至cell末端
+  - Ctrl + /  为一行或者多行添加/取消注释
+  - Alt Multicursor support
 * 输出
-    - 只执行到光标处，print 可以执行多行
+  - 只执行到光标处，print 可以执行多行
 * 修改之前的单元格，对其重新计算，这样就可以更新整个文档
 * 主题:重启生效
 * 扩展: 通过　NJupyter-contrib extensions　安装
@@ -113,7 +113,7 @@ c.InteractiveShell.ast_node_interactivity = "all"
     -　Variable inspector：显示在Notebook中创建的所有变量的名称，以及类型、大小、形状和值
     -　ExecuteTime
     -　Hide input
-*　shift+tab: 查看函数解释
+  *　shift+tab: 查看函数解释
 
 ```sh
 conda install|remove nb_conda　# conda创建的环境与Jupyter Notebook相关联，便于在Jupyter Notebook的使用中，在不同的环境下创建笔记本进行工作
@@ -150,10 +150,10 @@ jupyter nbextension enable --py --sys-prefix widgetsnbextension
 ## plot
 
 * tool
-    - matplotlib （事实标准），可通过%matplotlib inline 激活
-    - %matplotlib notebook 提供交互性操作，但可能会有点慢，因为响应是在服务器端完成的。
-    - mpld3 提供matplotlib代码的替代性呈现（通过d3），虽然不完整，但很好。
-    - bokeh 生成可交互图像的更好选择。
+  - matplotlib （事实标准），可通过%matplotlib inline 激活
+  - %matplotlib notebook 提供交互性操作，但可能会有点慢，因为响应是在服务器端完成的。
+  - mpld3 提供matplotlib代码的替代性呈现（通过d3），虽然不完整，但很好。
+  - bokeh 生成可交互图像的更好选择。
 * 不让末句的函数输出结果比较方便，比如在作图的时候，此时，只需在该函数末尾加上一个分号即可
 
 ## [magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html)
@@ -161,13 +161,13 @@ jupyter nbextension enable --py --sys-prefix widgetsnbextension
 * %lsmagic
 * %env:设置环境变量
 * %run file 运行.py格式的python代码.使用%run 与导入一个python模块是不同的
-    * `ln [*]`: 正在运行状态
+  * `ln [*]`: 正在运行状态
 * %load file：从外部脚本中插入代码 用外部脚本替换当前cell.也可以使用URL
 * %store: 在notebook文件之间传递变量
 * %who: 列出所有的全局变量
 * 用于计时
-    - %%time 会告诉你cell内代码的单次运行时间信息
-    - %%timeit 使用了Python的 timeit 模块，该模块运行某语句100，000次（默认值），然后提供最快的3次的平均值作为结果
+  - %%time 会告诉你cell内代码的单次运行时间信息
+  - %%timeit 使用了Python的 timeit 模块，该模块运行某语句100，000次（默认值），然后提供最快的3次的平均值作为结果
 * %%write file:导出cell内容
 * %pycat file:显示外部脚本的内容
 * %prun: 告诉程序中每个函数消耗的时间
@@ -226,14 +226,14 @@ names[:5]
 对内核的操作，比如中断、重启、连接、关闭、切换内核
 
 * 用不同的内核运行代码
-    - %%bash
-    - %%HTML
-    - %%python2
-    - %%python3
-    - %%ruby
-    - %%perl
+  - %%bash
+  - %%HTML
+  - %%python2
+  - %%python3
+  - %%ruby
+  - %%perl
 * 用其他语言写函数
-    - 在cython或fortran里写函数，然后在python代码里直接调用
+  - 在cython或fortran里写函数，然后在python代码里直接调用
 
 ```python
 !python myfile.py  # 在Jupyter Notebook中执行shell命令的语法
@@ -306,8 +306,8 @@ jupyter lab
 ## Debugger
 
 * Xeus 是 Jupyter kernel protocol 的 C++实现，它本身并不是一个内核，而是能帮助构建内核的库。当开发者希望构建 Python、Lua 等拥有 C、C++ API 的语言内核时，它非常有用
-    - 具有可插拔的并发模型，它允许在不同的线程中运行 Control channel 的处理过程
-    - 有非常轻量级的代码库，因此迭代与更新都非常方便
+  - 具有可插拔的并发模型，它允许在不同的线程中运行 Control channel 的处理过程
+  - 有非常轻量级的代码库，因此迭代与更新都非常方便
 
 ```sh
 jupyter labextension install @jupyterlab/debugger

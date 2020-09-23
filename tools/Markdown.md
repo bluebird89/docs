@@ -7,19 +7,19 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 ## 设计哲学 Philosophy
 
 > Markdown 的目標是實現「易讀易寫」。
->
+> 
 > 不過最需要強調的便是它的可讀性。一份使用 Markdown 格式撰寫的文件應該可以直接以純文字發佈，並且看起來不會像是由許多標籤或是格式指令所構成。
->
+> 
 > Markdown 的語法有個主要的目的：用來作為一種網路內容的*寫作*用語言。
->
->
+> 
 > Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
->
+> 
 > Readability, however, is emphasized above all else. A Markdown-formatted document should be publishable as-is, as plain text, without looking like it's been marked up with tags or formatting instructions.
->
+> 
 > Markdown's syntax is intended for one purpose: to be used as a format for *writing* for the web.
 
 <!-- more -->
+
 --------------------------------------------------------------------------------
 
 ## 标题 Headers
@@ -39,12 +39,18 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 **Result:**
 
 # 第一级标题  `</h1>`
+
 ## 第二级标题 `<h2>`
+
 ###### 第六级标题 `<h6>`
 
 # This is an `<h1>` tag
+
 ## This is an `<h2>` tag
+
 ###### This is an `<h6>` tag
+
+---
 
 ## 强调 Emphasis
 
@@ -99,9 +105,12 @@ __This will also be bold__
 * add new line between two section
 * first line add <br> </br>
 
+---
+
 ## 分隔线 Horizontal Rules
 
-以下三种方式都可以生成分隔线：
+三种方式：
+
 ```
 ***
 
@@ -146,12 +155,15 @@ __This will also be bold__
 **Result:**
 
 * Item 1 unordered list `* + SPACE`
-* Item 2
-    - Item 2a unordered list `TAB + * + SPACE`
-    - Item 2b
 
+* Item 2
+  
+  - Item 2a unordered list `TAB + * + SPACE`
+  - Item 2b
 - Dashes work just as well
+
 - And if you have sub points, put two spaces before the dash or star:
+  
   - Like this
   - And this
 
@@ -174,8 +186,10 @@ __This will also be bold__
 1. Item 1 ordered list `Number + . + SPACE`
 2. Item 2
 3. Item 3
-    1. Item 3a ordered list `TAB + Number + . + SPACE`
-    2. Item 3b
+   1. Item 3a ordered list `TAB + Number + . + SPACE`
+   2. Item 3b
+
+---
 
 ### 任务列表 Task lists
 
@@ -188,12 +202,16 @@ __This will also be bold__
 - [x] task two finished `- + SPACE + [x]`
 ```
 
-效果如下：**Result:**
+效果 **Result:**
 
 - [ ] 任务一 未做任务 `- + 空格 + [ ]`
 - [x] 任务二 已做任务 `- + 空格 + [x]`
 - [ ] task one not finish `- + SPACE + [ ]`
 - [x] task two finished `- + SPACE + [x]`
+
+## 
+
+---
 
 ## 图片 Images
 
@@ -221,6 +239,10 @@ __This will also be bold__
 * 插入图片![有道云笔记logo](http://note.youdao.com/favicon.ico)
 * ![爱情](http://i.imgur.com/zjwDS9u.jpg)
 
+## 
+
+---
+
 ## 链接 Links
 
 **Example:**
@@ -246,7 +268,6 @@ autolink  <http://www.github.com/>
 * 插入超链接 [直播吧](http://www.zhibo8.com)
 * [本地链接](../Tools/Document/Document.md#使用)
 
-
 ## Section links
 
 You can link directly to a section in a rendered file by hovering over the section heading to expose the link:
@@ -271,13 +292,15 @@ As Kanye West said:
 效果如下：
 
 某某说:
+
 > 第一行引用
->
+> 
 > 第二行费用文字
 
 As Kanye West said:
+
 > We're living the future so
->
+> 
 > the present is our past.
 
 > 一盏灯， 一片昏黄； 一简书， 一杯淡茶。 守着那一份淡定， 品读属于自己的寂寞。 保持淡定， 才能欣赏到最美丽的风景！ 保持淡定， 人生从此不再寂寞。
@@ -321,8 +344,11 @@ function fancyAlert(arg) {
 }
 ```
 
-## 顺序图或流程图 Sequence and Flow chart github不支持
+## 
 
+---
+
+## 顺序图或流程图 Sequence and Flow chart github不支持
 
 **Example:**
 
@@ -342,6 +368,7 @@ st->op->cond
 cond(yes)->e
 cond(no)->op
 ```
+
 ```sequence
 Andrew->China: Says Hello
 Note right of China: China thinks about it
@@ -402,6 +429,10 @@ st->op1->cond
 cond(yes)->io->e
 cond(no)->sub1(right)->op1
 ```
+
+## 
+
+---
 
 ## 表格 Tables
 
@@ -416,28 +447,32 @@ Content in the first column | Content in the second column
 
 **Result:**
 
-First Header | Second Header
------------- | -------------
-Content from cell 1 | Content from cell 2
-Content in the first column | Content in the second column
+| First Header                | Second Header                |
+| --------------------------- | ---------------------------- |
+| Content from cell 1         | Content from cell 2          |
+| Content in the first column | Content in the second column |
 
-Tables        |      Are      |  Cool
-------------- | :-----------: | ----:
-col 3 is      | right-aligned | $1600
-col 2 is      |   centered    |   $12
-zebra stripes |   are neat    |    $1
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      | $12   |
+| zebra stripes | are neat      | $1    |
 
-项目  |     价格 | 数量
---- | -----: | :-:
-计算机 | \$1600 |  5
-手机  |   \$12 | 12
-管线  |    \$1 | 234
+| 项目  | 价格     | 数量  |
+| --- | ------:|:---:|
+| 计算机 | \$1600 | 5   |
+| 手机  | \$12   | 12  |
+| 管线  | \$1    | 234 |
 
-Year | Temperature (low) | Temperature (high)
----- | ----------------- | ------------------
-1900 | -10               | 25
-1910 | -15               | 30
-1920 | -10               | 32
+| Year | Temperature (low) | Temperature (high) |
+| ---- | ----------------- | ------------------ |
+| 1900 | -10               | 25                 |
+| 1910 | -15               | 30                 |
+| 1920 | -10               | 32                 |
+
+## 
+
+---
 
 ## MathJax LaTex github不支持
 
@@ -479,6 +514,10 @@ For example this is a Block level $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$ formu
 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
 {1+\frac{e^{-8\pi}} {1+\ldots} } } } \\]
 
+## 
+
+---
+
 ## 脚注 Footnote github不支持
 
 Markdown 语法：
@@ -492,9 +531,6 @@ This is a footnote:[^sample_footnote]
 
 这是一个脚注：[^sample_footnote]
 
-[^sample_footnote]: 这里是脚注信息
-
-
 ## 注释和阅读更多 Comment And Read More..
 
 <!-- comment -->
@@ -503,6 +539,9 @@ This is a footnote:[^sample_footnote]
 
 **注** 阅读更多的功能只用在生成网站或博客时，插入时注意要后空一行。
 
+#### 
+
+---
 
 #### TOC Table of Contents 内容列表
 
@@ -543,6 +582,10 @@ graph TB
 graph LR
 a-->b
 ```
+
+## 
+
+---
 
 ## 十、甘特图
 
@@ -654,33 +697,32 @@ Actions->Insert Read More Comment *或者* `Command + .`
 ## 编辑器
 
 * [typora](https://www.typora.io/)
-	- `sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE` `wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -`
-	- `sudo add-apt-repository 'deb https://typora.io/linux ./'`
-	- `sudo apt-get install typora`
-    - PicGo 是一款免费的图床管理应用，支持拖拽上传，剪切板上传等方式。你可以用它快捷地将图片上传到图床并获得网络链接。
+  - `sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE` `wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -`
+  - `sudo add-apt-repository 'deb https://typora.io/linux ./'`
+  - `sudo apt-get install typora`
+  - PicGo 是一款免费的图床管理应用，支持拖拽上传，剪切板上传等方式。你可以用它快捷地将图片上传到图床并获得网络链接。
 * [marktext/marktext](https://github.com/marktext/marktext):📝A simple and elegant markdown editor, available for Linux, macOS and Windows. https://marktext.app
 * [ zadam / trilium ](https://github.com/zadam/trilium):Build your personal knowledge base with Trilium Notes
 * [Haroopad](http://pad.haroopress.com/user.html):a markdown enabled document processor for creating web-friendly documents
 * [notable/notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. https://notable.app/
 * [Cmd Markdown](https://www.zybuluo.com/cmd/):网页版
 * Mac
-	- [Mou](http://25.io/mou/):Markdown editor for developers.
-	- [Bear](https://bear.app/):Write beautifully on iPhone, iPad, and Mac
-	- [Ulysses for Mac](https://ulysses.app/):The Ultimate Writing App for Mac, iPad and iPhone
-	- [Twig](https://github.com/lukakerr/Pine):A modern, native macOS markdown editor https://lukakerr.github.io/Pine
-	- [MacDown](https://github.com/MacDownApp/macdown):Open source Markdown editor for macOS. https://macdown.uranusjr.com/
-	- [Quiver](http://happenapps.com/):a notebook built for programmers. It lets you easily mix text, code, Markdown and LaTeX within one note, edit code with an awesome code editor, live preview Markdown and LaTeX, and find any note instantly via the full-text search.收费
-	- [幕布](https://mubu.com/):极简大纲笔记 | 一键生成思维导图
-	- [MWeb](https://zh.mweb.im/):是专业的 Markdown 写作、记笔记、静态博客生成软件。
-    - Mark Text
+  - [Mou](http://25.io/mou/):Markdown editor for developers.
+  - [Bear](https://bear.app/):Write beautifully on iPhone, iPad, and Mac
+  - [Ulysses for Mac](https://ulysses.app/):The Ultimate Writing App for Mac, iPad and iPhone
+  - [Twig](https://github.com/lukakerr/Pine):A modern, native macOS markdown editor https://lukakerr.github.io/Pine
+  - [MacDown](https://github.com/MacDownApp/macdown):Open source Markdown editor for macOS. https://macdown.uranusjr.com/
+  - [Quiver](http://happenapps.com/):a notebook built for programmers. It lets you easily mix text, code, Markdown and LaTeX within one note, edit code with an awesome code editor, live preview Markdown and LaTeX, and find any note instantly via the full-text search.收费
+  - [幕布](https://mubu.com/):极简大纲笔记 | 一键生成思维导图
+  - [MWeb](https://zh.mweb.im/):专业付费 Markdown 写作、记笔记、静态博客生成软件。
 * Windows
-	- MarkdownPad(需要浏览器渲染插件awesome)
-	- MarkPad
+  - MarkdownPad(需要浏览器渲染插件awesome)
+  - MarkPad
 * [GitNote](https://www.gitnoteapp.com)
 * [MedleyText](https://medleytext.net/):reate stylish and meaningful programming notes, blogs with ease
 * [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
 * 开源
-	- [CherryTree](http://www.giuspen.com/cherrytree/):A hierarchical note taking application, featuring rich text and syntax highlighting, storing data in a single XML or SQLite file
+  - [CherryTree](http://www.giuspen.com/cherrytree/):A hierarchical note taking application, featuring rich text and syntax highlighting, storing data in a single XML or SQLite file
 * Apostrophe:An elegant, distraction-free markdown editor
 * [ Zettlr / Zettlr ](https://github.com/Zettlr/Zettlr): A Markdown Editor for the 21st century. www.zettlr.com/
 
@@ -714,3 +756,5 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * [js-sequence-diagrams](https://bramp.github.io/js-sequence-diagrams/):Turns text into UML sequence diagrams
 * [flowchart.js](http://adrai.github.io/flowchart.js/):Draws simple SVG flow chart diagrams from textual representation of the diagram
 * [adam-p/markdown-here](https://github.com/adam-p/markdown-here):Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. http://markdown-here.com
+
+[^sample_footnote]: 这里是脚注信息

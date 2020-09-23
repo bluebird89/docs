@@ -89,8 +89,8 @@ a:link { font-size: 14pt; text-decoration: underline; color: blue; }
   - background-position：图像在背景中的位置 top、bottom、left、right 和 center，图像位于 0% 0%，其左上角将放在元素内边距区的左上角。如果图像位置是 100% 100%，会使图像的右下角放在右边距的右下角。
   - background-attachment：文档比较长，那么当文档向下滚动时，背景图像也会随之滚动 防止这种滚动。声明图像相对于可视区是固定的（fixed），因此不会受到滚动的影响
 * 尺寸
-    - width：元素的宽度。
-    - height：元素的高度。
+  - width：元素的宽度。
+  - height：元素的高度。
 * 字体
   - `font-family`：字体
     + 通用
@@ -110,26 +110,26 @@ a:link { font-size: 14pt; text-decoration: underline; color: blue; }
   - `font-style`：斜体效果。取值：normal italic oblique
   - font-variant:设定小型大写字母,不是一般的大写字母，也不是小写字母，这种字母采用不同大小的大写字母
 * 文本
-    - color：文本颜色。
-    - `line-height`：行高，可以是百分比，也可以是固定值。
-    - `text-align`：文本的水平对齐方式，取值：left、center、right
-      - justify 文本行的左右两端都放在父元素的内边界上。然后，调整单词和字母间的间隔，使各行的长度恰好相等
-    * word-spacing 属性可以改变字（单词）之间的标准间隔 接受一个正长度值或负长度值。如果提供一个正长度值，那么字之间的间隔就会增加。为 word-spacing 设置一个负值，会把它拉近
-    - `letter-spacing`：字母间隔修改的是字符或字母之间的间隔
-    - text-transform：none uppercase lowercase capitalize
-    - `text-decoration`：文本修饰线，取值：none、underline(下划线)、overline(上划线)、line-through(删除线)
-    - white-space：默认的 XHTML 处理已经完成了空白符处理：它会把所有空白符合并为一个空格。
-      + normal：各个字之间只会显示一个空格，同时忽略元素中的换行
-      + pre：空白符不会被忽略
-      + nowrap：防止元素中的文本换行，除非使用了一个 br 元素
-      + pre-wrap，那么该元素中的文本会保留空白符序列，但是文本行会正常地换行。源文本中的行分隔符以及生成的行分隔符也会保留
-      + pre-line 与 pre-wrap 相反，会像正常文本中一样合并空白符序列，但保留换行符
-    - `text-indent`：首行缩进，长度可以是负值，也可以用百分比值
-      + 为所有块级元素应用 text-indent，但无法将该属性应用于行内元素，图像之类的替换元素上也无法应用 text-indent 属性
-      + 设置负值时要注意：首行的某些文本可能会超出浏览器窗口的左边界。为了避免出现这种显示问题，建议针对负缩进再设置一个外边距或一些内边距
-      + text-indent 属性可以继承
-    - direction 属性规定文本的方向 / 书写方向，ltr 和 rtl
-      - 对于行内元素，只有当 unicode-bidi 属性设置为 embed 或 bidi-override 时才会应用 direction 属性 unicode-bidi  设置文本方向，值 normal embed 或 bidi-overrid
+  - color：文本颜色。
+  - `line-height`：行高，可以是百分比，也可以是固定值。
+  - `text-align`：文本的水平对齐方式，取值：left、center、right
+    - justify 文本行的左右两端都放在父元素的内边界上。然后，调整单词和字母间的间隔，使各行的长度恰好相等
+  * word-spacing 属性可以改变字（单词）之间的标准间隔 接受一个正长度值或负长度值。如果提供一个正长度值，那么字之间的间隔就会增加。为 word-spacing 设置一个负值，会把它拉近
+  - `letter-spacing`：字母间隔修改的是字符或字母之间的间隔
+  - text-transform：none uppercase lowercase capitalize
+  - `text-decoration`：文本修饰线，取值：none、underline(下划线)、overline(上划线)、line-through(删除线)
+  - white-space：默认的 XHTML 处理已经完成了空白符处理：它会把所有空白符合并为一个空格。
+    + normal：各个字之间只会显示一个空格，同时忽略元素中的换行
+    + pre：空白符不会被忽略
+    + nowrap：防止元素中的文本换行，除非使用了一个 br 元素
+    + pre-wrap，那么该元素中的文本会保留空白符序列，但是文本行会正常地换行。源文本中的行分隔符以及生成的行分隔符也会保留
+    + pre-line 与 pre-wrap 相反，会像正常文本中一样合并空白符序列，但保留换行符
+  - `text-indent`：首行缩进，长度可以是负值，也可以用百分比值
+    + 为所有块级元素应用 text-indent，但无法将该属性应用于行内元素，图像之类的替换元素上也无法应用 text-indent 属性
+    + 设置负值时要注意：首行的某些文本可能会超出浏览器窗口的左边界。为了避免出现这种显示问题，建议针对负缩进再设置一个外边距或一些内边距
+    + text-indent 属性可以继承
+  - direction 属性规定文本的方向 / 书写方向，ltr 和 rtl
+    - 对于行内元素，只有当 unicode-bidi 属性设置为 embed 或 bidi-override 时才会应用 direction 属性 unicode-bidi  设置文本方向，值 normal embed 或 bidi-overrid
 * 链接
   - a:link - 普通的、未被访问的链接
   - a:visited - 用户已访问的链接
@@ -142,8 +142,8 @@ a:link { font-size: 14pt; text-decoration: underline; color: blue; }
   - list-style-type：修改用于列表项的标志类型
     + 无序：disc circle square none
     + 有序：decimal decimal-leading-zero lower-roman upper-roman lower-alpha upper-alpha lower-greek lower-latin upper-latin hebrew armenian georgian cjk-ideographic hiragana hiragana-iroha katakana-iroha
-  -  list-style-image：对各标志使用一个图像
-  -  list-style-position: 确定标志出现在列表项内容之外还是内容内部 inside outside
+  - list-style-image：对各标志使用一个图像
+  - list-style-position: 确定标志出现在列表项内容之外还是内容内部 inside outside
 * table
   - border:边框
   - border-collapse 属性设置是否将表格边框折叠为单一边框. 这是由于 table、th 以及 td 元素都有独立的边框,默认表格具有双线条边框 collapse separate
@@ -155,23 +155,23 @@ a:link { font-size: 14pt; text-decoration: underline; color: blue; }
   - text-align:表格文本对齐 设置水平对齐方式
   - vertical-align 表格文本对齐 设置垂直对齐方式
   - padding 表格内边距 内容与边框的距离
-  -  background-color color
-  -  table-layout
-    +  automatic:列的宽度是由列单元格中没有折行的最宽的内容设定的
-    +  fixed:允许浏览器更快地对表格进行布局 水平布局仅取决于表格宽度、列宽度、表格边框宽度、单元格间距，而与单元格的内容无关
-*  Outline
-  -  outline  在一个声明中设置所有的轮廓属性
-  -  outline-color  设置轮廓的颜色
+  - background-color color
+  - table-layout
+    + automatic:列的宽度是由列单元格中没有折行的最宽的内容设定的
+    + fixed:允许浏览器更快地对表格进行布局 水平布局仅取决于表格宽度、列宽度、表格边框宽度、单元格间距，而与单元格的内容无关
+* Outline
+  - outline  在一个声明中设置所有的轮廓属性
+  - outline-color  设置轮廓的颜色
   - outline-style 设置轮廓的样式
   - outline-width 设置轮廓的宽度
 * 边框
-    - border-left border-right border-top border-bottom
-        + 格式：border-left: 粗细 线型 颜色;
-        + 线型：none(无线)、solid(实线)、dotted(点状线)、dashed(虚线)、double(双线)
-        + 注意：多个参数值之间用空格隔开。
-        + 举例：div{border-left:5px solid red;} div{border:2px solid blue;}
-        + border-radius
-          * oval(椭圆形):border-radius: 100px / 50px;
+  - border-left border-right border-top border-bottom
+    + 格式：border-left: 粗细 线型 颜色;
+    + 线型：none(无线)、solid(实线)、dotted(点状线)、dashed(虚线)、double(双线)
+    + 注意：多个参数值之间用空格隔开。
+    + 举例：div{border-left:5px solid red;} div{border:2px solid blue;}
+    + border-radius
+      * oval(椭圆形):border-radius: 100px / 50px;
 * 内填充属性：边线到内容间的距离
   + padding-left padding-right padding-top padding-bottom
 * 外边距属性：边框线往外的距离
@@ -281,24 +281,34 @@ outline-width:thin;
 依赖 display 属性 + position属性 + float属性.规定了元素框处理元素内容、内边距、边框 和 外边距 的方式
 
 * 由内到外：element(height width)->padding(内边距呈现了元素的背景)->border->margin(默认是透明)
+
 * 背景应用于由内容和内边距、边框组成的区域
+
 * 通过将元素的 margin 和 padding 设置为零来覆盖这些浏览器样式
+
 * element
+  
   - 元素的内边距设置百分数值。百分数值是相对于其父元素的 width 计算的，这一点与外边距一样。所以，如果父元素的 width 改变，它们也会改变。
   - width 和 height 指的是内容区域的宽度和高度。增加内边距、边框和外边距不会影响内容区域的尺寸，但是会增加元素框的总尺寸。
+
 * padding
+  
   - padding-top
   - padding-right
   - padding-bottom
   - padding-left
+
 * border 边框绘制在“元素的背景之上”
+  
   - border-style:none outset solid dotted dashed double groove ridge inset inherit
     - border-top-style border-right-style border-bottom-style border-left-style
   - border-width:2px 或 0.1em；或者使用关键字: thin 、medium（默认值） 和 thick。
     + border-top-width border-right-width border-bottom-width border-left-width
   - border-color:默认的边框颜色是元素本身的前景色。如果没有为边框声明颜色，它将与元素的文本颜色相同
     + border-top-color border-right-color border-bottom-color border-left-color
+
 * margin:围绕在元素边框的空白区域
+  
   - 默认值是 0，所以如果没有为 margin 声明一个值，就不会出现外边距
   - 浏览器对许多元素已经提供了预定的样式，外边距也不例外。例如，在支持 CSS 的浏览器中，外边距会在每个段落元素的上面和下面生成“空行”
   - margin-top margin-right margin-bottom margin-left
@@ -308,7 +318,9 @@ outline-width:thin;
     + 有一个空元素，它有外边距，但是没有边框或填充。在这种情况下，上外边距与下外边距就碰到了一起，发生合并
 
 * box-sizing：有利于样式化，而且你在也不用做乏味的数学运算
+
 * content-box(default) - 当我们为元素设置了宽度和高度，但那只是内容的尺寸。所有的 padding 和 border 都在不包含在内容当中，也就是在内容的外部。
+
 * border-box - padding和 border 被包含在 宽度和高度当中。 如果一个 div 的宽度为 100px ，而被设置了 box-sizing: border-box， 那么它的宽度将始终是 100px， 无论你添加多少 padding 和 border 。
 
 ```css
@@ -345,7 +357,7 @@ a:hover {border-color: gray;}
 * transform
   - skew(20deg)
   - rotate(45deg)
-*  transform-origin: 100% 100%;
+* transform-origin: 100% 100%;
 
 ## 定位
 
@@ -388,7 +400,7 @@ a:hover {border-color: gray;}
 ```html
   <style> 元素 来包含CSS</li>
   <li>外部引用 - 使用外部 CSS 文件</li>
-  <li>外部样式表(External style sheet)&lt;内部样式表(Internal style sheet)&lt;内联样式(Inline style)</li>
+  <li>外部样式表(External style sheet)<内部样式表(Internal style sheet)<内联样式(Inline style)</li>
   </ul>
   <h4 id="-">　选择器　</h4>
   <ul>
@@ -405,7 +417,7 @@ a:hover {border-color: gray;}
         .div2{width: 80px;height: 80px;background: blue;float: left;}
         .div3{width: 80px;height: 280px;background: sienna;float: right;}
         .clear{clear:both; height: 0; line-height: 0; font-size: 0}
-    &lt;/style&gt;
+    </style>
   </code></pre>  <div class="outer">
         <div class="div1">1</div>
         <div class="div2">2</div>
@@ -429,29 +441,30 @@ a:hover {border-color: gray;}
 ## 设备：
 
 - mobile
+
 - PC
 
 - 实现：
-
+  
   - 头部添加标签，viewport是网页默认的宽度和高度，上面这行代码的意思是，网页宽度默认等于屏幕宽度（width=device-width），原始缩放比例（initial-scale=1）为1.0，即网页初始大小占屏幕面积的100%。网页会根据屏幕宽度调整布局，所以不能使用绝对宽度的布局，也不能使用具有绝对宽度的元素，使用百分比或auto，字体使用相对大小（em）；
-
+    
     ```html
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     ```
-
+  
   - 流动布局：各个区块的位置都是浮动的，不是固定不变的。如果宽度太小，放不下两个元素，后面的元素会自动滚动到前面元素的下方，不会在水平方向overflow（溢出），避免了水平滚动条的出现。
-
+  
   - "自适应网页设计"的核心，就是CSS3引入的Media Query模块。它的意思就是，自动探测屏幕宽度，然后加载相应的CSS文件。
-
+    
     ```html
     <link rel="stylesheet" type="text/css"
     　　　　media="screen and (min-width: 400px) and (max-device-width: 600px)"
     　　　　href="smallScreen.css" />
     @import url("tinyScreen.css") screen and (max-device-width: 400px);
     ```
-
+  
   - CSS实现
-
+    
     ```css
     @media screen and (max-device-width: 400px) {
     　　　　.column {
@@ -463,12 +476,12 @@ a:hover {border-color: gray;}
     　　　　}
     　　}
     ```
-
+  
   - 图片 视频的自动缩放
-
+    
     ```html
     img, object { max-width: 100%;}
-
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <style>
       .red-text {
@@ -617,10 +630,10 @@ a:hover {border-color: gray;}
     + 定义混合代码的时候需要在选择器前面加上 @mixin 标识
     + 引用混合代码的时候需要通过 @include 来引入
   - 函数：
-      + 可以传入参数并实现运算功能
-      + 函数通过 @function 标识声明
-      + 函数名允许出现短划线 -
-      + 函数体内可以使用在函数声明之前定义的所有变量，同时计算时会带上变量声明时的单位
+    + 可以传入参数并实现运算功能
+    + 函数通过 @function 标识声明
+    + 函数名允许出现短划线 -
+    + 函数体内可以使用在函数声明之前定义的所有变量，同时计算时会带上变量声明时的单位
   - 控制结构
   - 导入:支持通过 @import 指令导入其它 Sass 文件，既可以导入本地开发文件，也可以导入前端依赖库中的文件，还可以导入网络字体文件
   - 继承:通过 % 前缀指定用于继承的样式，然后在需要继承的地方提供 @extend 指令继承相应的父类样式
@@ -691,7 +704,7 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * [OfficeDev/office-ui-fabric-core](https://github.com/OfficeDev/office-ui-fabric-core):The front-end CSS framework for building experiences for Office and Office 365.
 * [tailwindcss/tailwindcss](https://github.com/tailwindcss/tailwindcss):A utility-first CSS framework for rapid UI development.  https://tailwindcss.com/
   - [ mertJF / tailblocks ](https://github.com/mertJF/tailblocks):
-tada Ready-to-use Tailwind CSS blocks. https://mertjf.github.io/tailblocks/
+    tada Ready-to-use Tailwind CSS blocks. https://mertjf.github.io/tailblocks/
 * iView
 * [animate-css/animate.css](https://github.com/animate-css/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. https://animate.style/
 * [Dogfalo/materialize](https://github.com/Dogfalo/materialize) Materialize, a CSS Framework based on Material Design https://materializecss.com
@@ -699,7 +712,7 @@ tada Ready-to-use Tailwind CSS blocks. https://mertjf.github.io/tailblocks/
 * [kbrsh/moon](https://github.com/kbrsh/moon) 🌙 The minimal & fast UI library https://kbrsh.github.io/moon [moon](http://moonjs.ga/docs/getting-started.html)
 * [picturepan2/spectre](https://github.com/picturepan2/spectre) Spectre.css - A Lightweight, Responsive and Modern CSS Framework https://picturepan2.github.io/spectre/
 * [UIkit](https://getuikit.com/):A lightweight and modular front-end framework
-for developing fast and powerful web interfaces.
+  for developing fast and powerful web interfaces.
 * [ shoelace-style / shoelace ](https://github.com/shoelace-style/shoelace):A collection of professionally designed, every day UI components built on a framework-agnostic technology. https://shoelace.style/
 
 ## 实例
@@ -720,7 +733,7 @@ for developing fast and powerful web interfaces.
 * [matthiasmullie/minify](https://github.com/matthiasmullie/minify):CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns. https://www.minifier.org
 * [IanLunn/Hover](https://github.com/IanLunn/Hover):A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS. http://ianlunn.github.io/Hover/
 * [styled-components/styled-components](https://github.com/styled-components/styled-components) Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
-*  [yui/yui3](https://github.com/yui/yui3) A library for building richly interactive web applications. http://yuilibrary.com/
+* [yui/yui3](https://github.com/yui/yui3) A library for building richly interactive web applications. http://yuilibrary.com/
 
 ## 参考
 
