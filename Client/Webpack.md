@@ -178,7 +178,7 @@ gulp.task("webpack", function(callback) { // 配合grunt/pulp使用
     + 默认有两个cacheGroup，一个为vendors用于处理第三方依赖库；一个是default(处理当module被引用等于或超过2次时情况)
   - 一个module有可能同属于多个cacheGroup，因此可以通过设置某个cacheGroup的优先级(priority)来解决，priority值越大，表示优先级越高，也即会优先其作用。Webpack的两个默认cacheGroup的优先级都被设置成了负数，而我们自定义的cacheGroup的默认priority为0，因此可以初步保证自定义的cacheGroup总会优先于默认的起作用。
 
-### [配置不同环境](https://zhuanlan.zhihu.com/p/29161762)
+### [配置环境](https://zhuanlan.zhihu.com/p/29161762)
 
 * 开发环境
     - NODE_ENV 为 development
@@ -207,16 +207,6 @@ gulp.task("webpack", function(callback) { // 配合grunt/pulp使用
 }
 
 npm run dev // 构建npm脚本
-```
-
-## [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
-
-hammer_and_wrench CLI for rapid Vue.js development https://cli.vuejs.org/
-
-```sh
-npm install -g vue-cli
-vue list
-vue init <template-name> <project-name>
 ```
 
 ### [webpack-dashboard](https://github.com/FormidableLabs/webpack-dashboard)
@@ -332,6 +322,7 @@ proxyTable: {
 ```
 
 ## "微前端"（micro front-end）
+
 ## "模块联合"（module federation）
 
 ## 问题

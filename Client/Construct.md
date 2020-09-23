@@ -182,6 +182,9 @@ npm install postcss-modules autoprefixer -S
    }
  }
 }
+
+parcel index.html
+parcel watch index.html
 ```
 
 ## [rollup](https://rollupjs.org/)

@@ -73,6 +73,10 @@
 * [ popcorn-official / popcorn-desktop ](https://github.com/popcorn-official/popcorn-desktop):Popcorn Time is a multi-platform, free software BitTorrent client that includes an integrated media player. Desktop ( Windows / Mac / Linux ) a Butter-Project Fork https://popcorntime.app
 * [ xiandanin / magnetW ](https://github.com/xiandanin/magnetW):磁力链接聚合搜索
 
+## 传输
+
+* [](https://github.com/schollz/croc):Easily and securely send things from one computer to another 🐊 📦 https://schollz.com/software/croc6
+
 ## wget
 
 *　参数

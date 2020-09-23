@@ -88,8 +88,7 @@ http://xyz.amazonaws.com/hello-world
     - [Knative ](https://www.ibm.com/developerworks/cn/opensource/os-knative-what-is-it-why-you-should-care/index.html)
     - [构建基于 Kubernetes 的现代化Serverless应用](https://www.servicemesher.com/getting-started-with-knative/knative-overview.html)
 * [serverless/serverless](https://github.com/serverless/serverless):Serverless Framework – Build web, mobile and IoT applications with serverless architectures using AWS Lambda, Azure Functions, Google CloudFunctions & more! – https://serverless.com
-* provider
-    - AWS, Microsoft Azure, Google Cloud, IBM Cloud,
+* [midway](https://github.com/midwayjs/midway):🍔 A Node.js Serverless Framework for front-end/full-stack developers. Build the application for next decade. Works on AWS, Alibaba Cloud, Tencent Cloud and traditional VM/Container. Super easy integrate with React and Vue. 🌈
 * [Cloudflare Workers](https://workers.cloudflare.com/)
 
 ## 参考
