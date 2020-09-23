@@ -1,6 +1,6 @@
 # [facebook/jest](https://github.com/facebook/jest)
 
-🃏 Delightful JavaScript Testing. http://facebook.github.io/jest/
+Delightful JavaScript Testing. https://jestjs.io/
 
 ## 工具
 
