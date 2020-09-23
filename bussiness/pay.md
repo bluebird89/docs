@@ -5,12 +5,12 @@
 * 支付金额有输入和确认两步，需要双方交互
 
 * 客户扫描商家收款码
-  
+
   - 输入金额（确认）
   - 支付
 
 * 商家扫描客户付款码：支持离线
-  
+
   - 商家端获取 付款码（「其实就是一串数字」），然后后台调用支付宝支付接口完成扣款
     + 客户端在线:可以通过服务端向客户端发送付款码
     + 客户端没网:通过客户端通过一定算法生成付款码，服务端收到经过相关校验，确认是哪个用户，确认码有效性，并且完成扣款
@@ -27,6 +27,10 @@
 * 支付宝
 * stripe
 * 微信
+
+## 方案
+
+* [invoiceninja](https://github.com/invoiceninja/invoiceninja):Invoices, Expenses and Tasks built with Laravel and Flutter https://invoiceninja.com/
 
 ## 参考
 

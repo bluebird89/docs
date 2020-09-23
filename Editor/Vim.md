@@ -517,9 +517,7 @@ r       对单词字符进行替换
 * Command-t :用Commad-t命令快速查找切换文件。如果是用Vundle安装的话，还不能使用，在MacVim中输入“:CommandT”命令会报错。用Vundle安装好打开终端，输入如下命令，等待   　　    编译完毕后就可以使用了:
 * NERD_commenter.vim : 注释插件。
 * DoxygenToolkit.vim : 用于快速生成注释，并由注释生成文档。
-* winmanager : 可以用Vundle安装，管理窗口的插件，可以跟NERD_tree、Taglist插件结合，打造一个类似IDE的界面。只需要在NERD_tree.vim中加入如下代码:
-
-
+* winmanager : 可以用Vundle安装，管理窗口的插件，可以跟NERD_tree、Taglist插件结合，打造一个类似IDE的界面。只需要在NERD_tree.vim中加入代码
 
 ## 学习计划
 
@@ -566,7 +564,7 @@ r       对单词字符进行替换
 
 ## [neovim/neovim](https://github.com/neovim/neovim)
 
-Vim-fork focused on extensibility and usability https://salt.bountysource.com/teams/n… (https://neovim.io/) hyperextensible Vim-based text editor
+Vim-fork focused on extensibility and usability https://neovim.io/
 
 * [Doc](https://neovim.io/doc/)
 
@@ -627,5 +625,5 @@ To install from command line: vim +PluginInstall +qall
 
 * [Vim教程](https://vimjc.com/)
 * [简明 VIM 练级攻略](https://coolshell.cn/articles/5426.html)
-* [](https://github.com/iggredible/Learn-Vim):A book for learning the Vim editor the smart way.
+* [Learn-Vim](https://github.com/iggredible/Learn-Vim):A book for learning the Vim editor the smart way.
 * [vimwiki / vimwiki](https://github.com/vimwiki/vimwiki):Personal Wiki for Vim http://vimwiki.github.io/

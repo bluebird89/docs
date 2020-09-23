@@ -1,8 +1,4 @@
-# Qt
-
-## 工具
-
-* [官网](https://www.qt.io)
+# [Qt](https://www.qt.io)
 
 ## 工具
 

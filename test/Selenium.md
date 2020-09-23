@@ -1,6 +1,6 @@
-# [Selenium](https://www.selenium.dev/)
+# [Selenium](https://github.com/SeleniumHQ/selenium)
 
-推荐ruby ,python ,java 任意一门语言来进行学习
+A browser automation framework and ecosystem. https://selenium.dev/
 
 ## 安装
 
@@ -37,15 +37,21 @@ selenium-server -port 4444 # 启动服务
 
 ### selenium 2.0
 
-　　selenium 2.0 = selenium 1.0 + WebDriver
+* selenium 2.0 = selenium 1.0 + WebDriver
+* selenium 2.0 中主推的是WebDriver ，WebDriver 是selenium RC 的替代品，因为 selenium 为了向下兼容性，所以selenium RC 并没有彻底抛弃，如果你使用selenium开发一个新自动化测试项目，强列推荐使用WebDriver 。那么selenium RC 与webdriver 主要有什么区别呢？
+* selenium RC 在浏览器中运行JavaScript应用，使用浏览器内置的JavaScript 翻译器来翻译和执行selenese命令（selenese 是selenium命令集合）。
+* WebDriver通过原生浏览器支持或者浏览器扩展直接控制浏览器。WebDriver针对各个浏览器而开发，取代了嵌入到被测Web应用中的JavaScript。与浏览器的紧密集成支持创建更高级的测试，避免了JavaScript安全模型导致的限制。除了来自浏览器厂商的支持，WebDriver还利用操作系统级的调用模拟用户输入。
 
-　　需要强调的是，在selenium 2.0 中主推的是WebDriver ，WebDriver 是selenium RC 的替代品，因为 selenium 为了向下兼容性，所以selenium RC 并没有彻底抛弃，如果你使用selenium开发一个新自动化测试项目，强列推荐使用WebDriver 。那么selenium RC 与webdriver 主要有什么区别呢？
+## 问题
 
-　　selenium RC 在浏览器中运行JavaScript应用，使用浏览器内置的JavaScript 翻译器来翻译和执行selenese命令（selenese 是selenium命令集合）。
+```
+> The path to the driver executable must be set by the webdriver.gecko.driver system property;
+download [geckodriver](link) and run
 
-　　WebDriver通过原生浏览器支持或者浏览器扩展直接控制浏览器。WebDriver针对各个浏览器而开发，取代了嵌入到被测Web应用中的JavaScript。与浏览器的紧密集成支持创建更高级的测试，避免了JavaScript安全模型导致的限制。除了来自浏览器厂商的支持，WebDriver还利用操作系统级的调用模拟用户输入。
+Facebook\WebDriver\Exception\WebDriverException : JSON decoding of remote response failed.
+Error code: 4
+```
 
-　　如果是新项目直接学习webdriver 就OK了，RC是过时技术。
 
 ## 学习路线
 

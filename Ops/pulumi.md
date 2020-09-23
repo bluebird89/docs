@@ -7,12 +7,13 @@
 ```
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
+
 const ami = pulumi.output(aws.getAmi({
     filters: [{
         name: "name",
         values: ["openresty-*"],
     }],
-    owners: ["xxxx"], // 我个人的 aws 账号 ID
+    owners: ["xxxx"], // 个人 aws 账号 ID
     mostRecent: true,
 }));
 

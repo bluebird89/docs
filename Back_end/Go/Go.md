@@ -1199,7 +1199,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - [globalsign/mgo](https://github.com/globalsign/mgo):The MongoDB driver for God
   - `go get -u github.com/go-sql-driver/mysql`
   - [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io
-  - [jinzhu/gorm](https://github.com/jinzhu/gorm):The fantastic ORM library for Golang, aims to be developer friendly https://gorm.io `go get -u github.com/jinzhu/gorm`
+  - [gorm](https://github.com/go-gorm/gorm):The fantastic ORM library for Golang, aims to be developer friendly https://gorm.io `go get -u github.com/jinzhu/gorm`
 * Http
   - [panjf2000/gnet](https://github.com/panjf2000/gnet):🌐🐳 A high-performance, lightweight, non-blocking, event-driven networking framework written in pure Go.
   - [xtaci/kcp-go](https://github.com/xtaci/kcp-go):A Production-Grade Reliable-UDP Library for golang

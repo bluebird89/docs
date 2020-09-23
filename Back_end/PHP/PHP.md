@@ -1359,16 +1359,16 @@ $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 ## 调用外部命令
 
 * 能执行linux系统的shell命令:可以获得命令执行的状态码
-  
+
   - system() 输出并返回最后一行shell结果
-    
+
     + 关掉 安全模式 safe_mode = off
     + 禁用函数列表 disable_functions = proc_open, popen, exec, system, shell_exec, passthru 把 exec 去掉
-  
+
   - exec() 不输出结果，返回最后一行shell结果，所有结果可以保存到一个返回的数组里面。
-  
+
   - passthru() 只调用命令，把命令的运行结果原样地直接输出到标准输出设备上。
-    
+
     ```sh
     system("/usr/a.sh");
     ```
@@ -2104,6 +2104,21 @@ localhost 80 Xdebug
 URL # 实际URL
 
 ## start listening
+```
+
+## [steward](https://github.com/lmc-eu/steward)
+
+* PHP libraries that makes Selenium WebDriver + PHPUnit functional testing easy and robust
+* 准备
+  - [geckodriver](https://github.com/mozilla/geckodriver/releases)
+
+```sh
+composer require lmc/steward
+
+# Get Selenium Standalone Server
+./vendor/bin/steward install
+java -jar ./vendor/bin/selenium-server-standalone-3.4.0.jar
+./vendor/bin/steward run staging firefox
 ```
 
 ## 问题
