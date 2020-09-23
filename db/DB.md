@@ -1,55 +1,76 @@
 # Database
 
 * 数据库类别
+
 * 关系型数据库和非关系型数据库区别
+
 * SQL常见语句
+
 * MySQL内链接，外链接（左链接、右链接、全链接）
+
 * MySQL索引类型和原理
+
 * MySQL事务实现原理ACID
+
 * MySQL数据存储引擎
+
 * MySQL主从复制原理、作用和实现
+
 * MySQL日记系统redo log、binlog、undo log
+
 * MVCC实现原理
+
 * Sql优化思路
+
 * 范式理论
+
 * 数据库高并发解决方法
 
 * 功能
-    - 数据存储
-    - 数据检索
+  
+  - 数据存储
+  - 数据检索
+
 * CAP 理论
-    + Consistency（强一致性）：系统在执行某项操作后仍然处于一致的状态
-        * 强一致性：更新操作执行成功之后，所有的用户都能读取到最新的值，这样的系统被认为具有
-        * 最终一致性：更新操作完成之后，用户最终会读取到数据更新之后的值，但是会存在一定的时间窗口，用户仍会读取到更新之前的旧数据；在一定的时间延迟之后，数据达到一致性。
-    + Availability（可用性）：用户执行的操作在一定时间内，必须返回结果。如果超时，那么操作回滚，跟操作没有发生一样。
-    + Partition Tolerance（分区容错）：分布式系统是由多个分区节点组成的，每个分区节点都是一个独立的Server，P属性表明系统能够处理分区节点的动态加入和离开。
+  
+  + Consistency（强一致性）：系统在执行某项操作后仍然处于一致的状态
+    * 强一致性：更新操作执行成功之后，所有的用户都能读取到最新的值，这样的系统被认为具有
+    * 最终一致性：更新操作完成之后，用户最终会读取到数据更新之后的值，但是会存在一定的时间窗口，用户仍会读取到更新之前的旧数据；在一定的时间延迟之后，数据达到一致性。
+  + Availability（可用性）：用户执行的操作在一定时间内，必须返回结果。如果超时，那么操作回滚，跟操作没有发生一样。
+  + Partition Tolerance（分区容错）：分布式系统是由多个分区节点组成的，每个分区节点都是一个独立的Server，P属性表明系统能够处理分区节点的动态加入和离开。
+
 * 数据库
-    - 传统的关系型DB，注重的是CA特性，数据一般存储在一台Server上
-        + 在多表查询的时候并且数据量很大的时候效率很低
-    - 处理海量数据的分布式存储和处理系统更注重AP，AP的优先级要高于C
-    - NoSQL并不是完全放弃一致性（Consistency），保留数据的最终一致性（Eventually Consistency）
-    - 在分布式数据库环境中，为了保持构架的扩展性，在分区容错性不变的前提下，必须从一致性和可用性中取其一
-        + HBase选择了一致性与分区可容忍性
-        + Cassandra选择了可用性与分区可容忍性
-    - 国际标准化组织 ISO 将图形数据库查询语言 GQL 通过为国际标准，这是继 SQL 以后第二种成为国际标准的数据库查询语言。
+  
+  - 传统的关系型DB，注重的是CA特性，数据一般存储在一台Server上
+    + 在多表查询的时候并且数据量很大的时候效率很低
+  - 处理海量数据的分布式存储和处理系统更注重AP，AP的优先级要高于C
+  - NoSQL并不是完全放弃一致性（Consistency），保留数据的最终一致性（Eventually Consistency）
+  - 在分布式数据库环境中，为了保持构架的扩展性，在分区容错性不变的前提下，必须从一致性和可用性中取其一
+    + HBase选择了一致性与分区可容忍性
+    + Cassandra选择了可用性与分区可容忍性
+  - 国际标准化组织 ISO 将图形数据库查询语言 GQL 通过为国际标准，这是继 SQL 以后第二种成为国际标准的数据库查询语言。
+
 * 关系型数据库管理系统(RDBMS Relational Database Management System)
-    - 采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解
-    - 行和列被称为表，一组表组成了数据库
-    - 用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码
-    - 优势
-        + 易于理解
-        + 关系型二维表的结构非常贴近现实世界，二维表格，容易理解。
-        + 支持复杂查询 可以用 SQL 语句方便的在一个表以及多个表之间做非常复杂的数据查询。
-        + 支持事务 可靠的处理事务并且保持事务的完整性，使得对于安全性能很高的数据访问要求得以实现。
+  
+  - 采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解
+  - 行和列被称为表，一组表组成了数据库
+  - 用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码
+  - 优势
+    + 易于理解
+    + 关系型二维表的结构非常贴近现实世界，二维表格，容易理解。
+    + 支持复杂查询 可以用 SQL 语句方便的在一个表以及多个表之间做非常复杂的数据查询。
+    + 支持事务 可靠的处理事务并且保持事务的完整性，使得对于安全性能很高的数据访问要求得以实现。
+
 * 类型
-    - OLTP（Online Transaction Processing）：传统的关系型数据库，主要用于处理基本的、日常的事务处理
-        + 通过 INSERT、UPDATE 和 DELETE 语句对表中的数据进行增加、修改和删除；
-        + 通过 UPDATE 和 DELETE 语句对符合条件的数据进行批量的删除；
-        + 通过 SELECT 语句和主键查询某条记录的全部列；
-        + 通过 SELECT 语句在表中查询符合某些条件的记录并根据某些字段排序；
-        + 通过 SELECT 语句查询表中数据的行数；
-        + 通过唯一索引保证表中某个字段或者某几个字段的唯一性；
-    - OLAP（Online Analytical Processing）：主要在数据仓库中使用，用于支持一些复杂的分析和决策
+  
+  - OLTP（Online Transaction Processing）：传统的关系型数据库，主要用于处理基本的、日常的事务处理
+    + 通过 INSERT、UPDATE 和 DELETE 语句对表中的数据进行增加、修改和删除；
+    + 通过 UPDATE 和 DELETE 语句对符合条件的数据进行批量的删除；
+    + 通过 SELECT 语句和主键查询某条记录的全部列；
+    + 通过 SELECT 语句在表中查询符合某些条件的记录并根据某些字段排序；
+    + 通过 SELECT 语句查询表中数据的行数；
+    + 通过唯一索引保证表中某个字段或者某几个字段的唯一性；
+  - OLAP（Online Analytical Processing）：主要在数据仓库中使用，用于支持一些复杂的分析和决策
 
 ## 命名
 
@@ -68,9 +89,9 @@
 索引是用来快速检索出具有特定值的记录。没有索引，数据库就必须从第一条记录开始进行全表扫描，直到找出相关的行。数据越多，检索的代价就越高，检索时如果表的列存在索引，那么MySQL就能快速到达指定位置去搜索数据文件，而不必查看所有数据。主要有两种结构：B+Tree索引和Hash索引。
 
 * 主键:本质是保证唯一记录，并不要求主键是连续的。用一个UUID作为主键，即varchar(32)，除了占用的存储空间较多外，字符串主键具有不可预测性。
-    - 主键不可修改:主键的第二个作用是让其他表的外键引用自己，从而实现关系结构
-    - 业务字段不可用于主键:主键必须使用单独的，完全没有业务含义的字段，也就是主键本身除了唯一标识和不可修改这两个责任外，主键没有任何业务含义。
-    - 主键应该使用字符串:自增主键最大的问题是把公司业务的关键运营数据完全暴露给了竞争对手和VC
+  - 主键不可修改:主键的第二个作用是让其他表的外键引用自己，从而实现关系结构
+  - 业务字段不可用于主键:主键必须使用单独的，完全没有业务含义的字段，也就是主键本身除了唯一标识和不可修改这两个责任外，主键没有任何业务含义。
+  - 主键应该使用字符串:自增主键最大的问题是把公司业务的关键运营数据完全暴露给了竞争对手和VC
 
 ## 连接
 
@@ -78,9 +99,9 @@
 
 * 内连接（inner join）:只返回两张表匹配的记录
 * 外连接（outer join）:还包含不匹配的记录
-    - 左连接（left join）:返回匹配的记录，以及表 A 多余的记录
-    - 右连接（right join）:返回匹配的记录，以及表 B 多余的记录
-    - 全连接（full join）:返回匹配的记录，以及表 A 和表 B 各自的多余记录
+  - 左连接（left join）:返回匹配的记录，以及表 A 多余的记录
+  - 右连接（right join）:返回匹配的记录，以及表 B 多余的记录
+  - 全连接（full join）:返回匹配的记录，以及表 A 和表 B 各自的多余记录
 
 ```sql
 SELECT * FROM A INNER JOIN B ON A.book_id=B.book_id;
@@ -113,10 +134,10 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 ## NoSQL
 
 * 场景
-    - 少量数据存储，高速读写访问。此类产品通过数据全部in-momery 的方式来保证高速访问，同时提供数据落地的功能，实际这正是Redis最主要的适用场景。
-    - 海量数据存储，分布式系统支持，数据一致性保证，方便的集群节点添加/删除。
-    - 这方面最具代表性的是dynamo和bigtable 2篇论文所阐述的思路。前者是一个完全无中心的设计，节点之间通过gossip方式传递集群信息，数据保证最终一致性，后者是一个中心化的方案设计，通过类似一个分布式锁服务来保证强一致性,数据写入先写内存和redo log，然后定期compat归并到磁盘上，将随机写优化为顺序写，提高写入性能。
-    - Schema free，auto-sharding等。比如目前常见的一些文档数据库都是支持schema-free的，直接存储json格式数据，并且支持auto-sharding等功能，比如mongodb。
+  - 少量数据存储，高速读写访问。此类产品通过数据全部in-momery 的方式来保证高速访问，同时提供数据落地的功能，实际这正是Redis最主要的适用场景。
+  - 海量数据存储，分布式系统支持，数据一致性保证，方便的集群节点添加/删除。
+  - 这方面最具代表性的是dynamo和bigtable 2篇论文所阐述的思路。前者是一个完全无中心的设计，节点之间通过gossip方式传递集群信息，数据保证最终一致性，后者是一个中心化的方案设计，通过类似一个分布式锁服务来保证强一致性,数据写入先写内存和redo log，然后定期compat归并到磁盘上，将随机写优化为顺序写，提高写入性能。
+  - Schema free，auto-sharding等。比如目前常见的一些文档数据库都是支持schema-free的，直接存储json格式数据，并且支持auto-sharding等功能，比如mongodb。
 
 ## 事务 (ACID)
 
@@ -127,7 +148,7 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 
 ## [clickhouse](https://github.com/ClickHouse/ClickHouse)
 
-*  a free analytics DBMS for big data [](https://clickhouse.tech/docs/zh/)
+* a free analytics DBMS for big data [](https://clickhouse.tech/docs/zh/)
 * Yandex（俄罗斯最大的搜索引擎）开源的一个用于实时数据分析的基于列存储的数据库
 
 ## 分层数据库
@@ -187,48 +208,48 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [apache/hive](https://github.com/apache/hive) Mirror of Apache Hive
 * [google/leveldb](https://github.com/google/leveldb) LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.
 * [DCache](https://github.com/tencent/dcache):分布式 NoSQL 存储系统,基于 TARS 微服务治理方案，支持 k-v、k-k-row、list、set 与 zset 多种数据结构，数据基于内存存储，同时支持后接 DB 实现数据持久化。DCache 具备快速水平扩展能力，同时配套有 Web 运维平台实现高效的运维操作。
-    - 对外提供服务的粒度是 group，一个 group 负责一部分的数据分片，至于每个 group 服务哪些数据，是根据数据的 key 做 hash 映射后所处的范围来确定的。
-    - 自身会处理缓存与DB之间的数据一致性问题
+  - 对外提供服务的粒度是 group，一个 group 负责一部分的数据分片，至于每个 group 服务哪些数据，是根据数据的 key 做 hash 映射后所处的范围来确定的。
+  - 自身会处理缓存与DB之间的数据一致性问题
 * [MemSQL](link)
 * 时间序列数据库 Time Series Database (TSDB)：一系列数据点按照时间顺序排列，具有不变性,、唯一性、时间排序性。需要展现其历史趋势、周期规律、异常性的，进一步对未来做出预测分析的，都是时序数据库适合的场景。
-    - 原理
-        + 时序数据的写入：如何支持每秒钟上千万上亿数据点的写入。
-        + 时序数据的读取：又如何支持在秒级对上亿数据的分组聚合运算。
-        + 成本敏感：由海量数据存储带来的是成本问题。如何更低成本的存储这些数据，将成为时序数据库需要解决的重中之重。
-        + 处理带时间标签（按照时间的顺序变化，即时间序列化）的数据
-        + 特性分为两类
-            * 高频率低保留期（数据采集，实时展示）
-            * 低频率高保留期（数据展现、分析）
-        + 按频度
-            * 规则间隔（数据采集）
-            * 不规则间隔（事件驱动）
-        +  时间序列数据的几个前提
-            * 单条数据并不重要
-            * 数据几乎不被更新，或者删除（只有删除过期数据时），新增数据是按时间来说最近的数据
-            * 同样的数据出现多次，则认为是同一条数据
-        + 使用
-            * Influxdb与ES都是REST API风格接口
-            * 通常ES搭配Logstash使用，Influxdb搭配telegraf使用
-    - 概念
-        + metric: 度量，相当于关系型数据库中的table。
-        + data point: 数据点，相当于关系型数据库中的row。
-        + timestamp：时间戳，代表数据点产生的时间。
-        + field: 度量下的不同字段。比如位置这个度量具有经度和纬度两个field。一般情况下存放的是会随着时间戳的变化而变化的数据。
-        + tag: 标签，或者附加信息。一般存放的是并不随着时间戳变化的属性信息。timestamp加上所有的tags可以认为是table的primary key。
-    - 数据
-        + 行存：一个数组包含多个点，如 [{t: 2017-09-03-21:24:44, v: 0.1002}, {t: 2017-09-03-21:24:45, v: 0.1012}]
-        + 列存：两个数组，一个存时间戳，一个存数值，如[ 2017-09-03-21:24:44, 2017-09-03-21:24:45], [0.1002,  0.1012]，一般情况下：列存能有更好的压缩率和查询性能
-    - beringei：Facebook
-    - TimeScaleDB：PostgreSQL
-    - [rethinkdb/rethinkdb](https://github.com/rethinkdb/rethinkdb) The open-source database for the realtime web. <https://rethinkdb.com>
-    - [VividCortex](https://www.vividcortex.com)：MySQL
-    -  [Graphite](https://graphiteapp.org/)
-        +  [文档](https://graphite.readthedocs.io/en/latest/index.html)
-    -  [InfluxDB](https://github.com/influxdata/influxdb)：高频度低保留期用Influxdb，低频度高保留期用ES
-        +  Time Structured Merge Tree
-    -  [DolphinDB](https://www.dolphindb.cn/):自带金融基因，内置并优化了很多与金融分析相关的函数，譬如各种sliding window function, correlation/covariance/beta/percentile, 处理panel data的分组计算功能 context by， 用于数据透视的pivot by、用于数据聚合的group by， 用于时间序列数据分段处理的segment by， 以及时间序列数据特有的asof join和window join， 也包括常用的分类和拟合算法
-        +  [文档](dolphindb/Tutorials_CN)
-    -  Informix TimeSeries
+  - 原理
+    + 时序数据的写入：如何支持每秒钟上千万上亿数据点的写入。
+    + 时序数据的读取：又如何支持在秒级对上亿数据的分组聚合运算。
+    + 成本敏感：由海量数据存储带来的是成本问题。如何更低成本的存储这些数据，将成为时序数据库需要解决的重中之重。
+    + 处理带时间标签（按照时间的顺序变化，即时间序列化）的数据
+    + 特性分为两类
+      * 高频率低保留期（数据采集，实时展示）
+      * 低频率高保留期（数据展现、分析）
+    + 按频度
+      * 规则间隔（数据采集）
+      * 不规则间隔（事件驱动）
+    + 时间序列数据的几个前提
+      * 单条数据并不重要
+      * 数据几乎不被更新，或者删除（只有删除过期数据时），新增数据是按时间来说最近的数据
+      * 同样的数据出现多次，则认为是同一条数据
+    + 使用
+      * Influxdb与ES都是REST API风格接口
+      * 通常ES搭配Logstash使用，Influxdb搭配telegraf使用
+  - 概念
+    + metric: 度量，相当于关系型数据库中的table。
+    + data point: 数据点，相当于关系型数据库中的row。
+    + timestamp：时间戳，代表数据点产生的时间。
+    + field: 度量下的不同字段。比如位置这个度量具有经度和纬度两个field。一般情况下存放的是会随着时间戳的变化而变化的数据。
+    + tag: 标签，或者附加信息。一般存放的是并不随着时间戳变化的属性信息。timestamp加上所有的tags可以认为是table的primary key。
+  - 数据
+    + 行存：一个数组包含多个点，如 [{t: 2017-09-03-21:24:44, v: 0.1002}, {t: 2017-09-03-21:24:45, v: 0.1012}]
+    + 列存：两个数组，一个存时间戳，一个存数值，如[ 2017-09-03-21:24:44, 2017-09-03-21:24:45], [0.1002,  0.1012]，一般情况下：列存能有更好的压缩率和查询性能
+  - beringei：Facebook
+  - TimeScaleDB：PostgreSQL
+  - [rethinkdb/rethinkdb](https://github.com/rethinkdb/rethinkdb) The open-source database for the realtime web. <https://rethinkdb.com>
+  - [VividCortex](https://www.vividcortex.com)：MySQL
+  - [Graphite](https://graphiteapp.org/)
+    + [文档](https://graphite.readthedocs.io/en/latest/index.html)
+  - [InfluxDB](https://github.com/influxdata/influxdb)：高频度低保留期用Influxdb，低频度高保留期用ES
+    + Time Structured Merge Tree
+  - [DolphinDB](https://www.dolphindb.cn/):自带金融基因，内置并优化了很多与金融分析相关的函数，譬如各种sliding window function, correlation/covariance/beta/percentile, 处理panel data的分组计算功能 context by， 用于数据透视的pivot by、用于数据聚合的group by， 用于时间序列数据分段处理的segment by， 以及时间序列数据特有的asof join和window join， 也包括常用的分类和拟合算法
+    + [文档](dolphindb/Tutorials_CN)
+  - Informix TimeSeries
 * [Pivotal Greenplum](https://pivotal.io/pivotal-greenplum):Parallel Postgres for enterprise analytics at scale
 
 ## 图书
@@ -250,7 +271,7 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [harelba/q](https://github.com/harelba/q):Run SQL directly on CSV or TSV files http://harelba.github.io/q/
 * [ClickHouse / ClickHouse](https://github.com/yandex/ClickHouse):ClickHouse is a free analytic DBMS for big data. https://clickhouse.tech
 * [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. https://osquery.io
-    - [Docs](https://osquery.readthedocs.io)
+  - [Docs](https://osquery.readthedocs.io)
 * [vrana/adminer](https://github.com/vrana/adminer):Database management in a single PHP file https://www.adminer.org/
 * [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. http://vitess.io
 * [getredash/redash](https://github.com/getredash/redash):Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. http://redash.io/

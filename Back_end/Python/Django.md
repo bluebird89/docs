@@ -24,15 +24,15 @@ pip install django gunicorn psycopg2
 * django-admin.py:全局脚本
 * manage.py: 一个实用的命令行工具，以各种方式与该 Django 项目进行交互
 * Django_app: 项目的容器
-    - urls.py: 网址入口，关联到对应的views.py中的一个函数（或generic类）
-    - views.py：处理用户发出的请求，与urls.py对应, 通过渲染templates中的网页可以将显示内容
-    - models.py：与数据库操作相关，存入或读取数据时用到
-    - forms.py：表单，用户在浏览器上输入数据提交，对数据的验证工作以及输入框的生成等工作
-    - templates文件夹：views.py中的函数渲染templates中的html模板，得到动态内容的网页，可以用缓存来提高速度。
-    - admin.py：后台，可以用很少的代码就拥有一个强大的后台
-    - settings.py: Django 的配置文件，如 DEBUG 的开关，静态文件的位置
-    - __init__.py: 一个空文件，告诉 Python 该目录是一个 Python 包
-    - wsgi.py: 一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目
+  - urls.py: 网址入口，关联到对应的views.py中的一个函数（或generic类）
+  - views.py：处理用户发出的请求，与urls.py对应, 通过渲染templates中的网页可以将显示内容
+  - models.py：与数据库操作相关，存入或读取数据时用到
+  - forms.py：表单，用户在浏览器上输入数据提交，对数据的验证工作以及输入框的生成等工作
+  - templates文件夹：views.py中的函数渲染templates中的html模板，得到动态内容的网页，可以用缓存来提高速度。
+  - admin.py：后台，可以用很少的代码就拥有一个强大的后台
+  - settings.py: Django 的配置文件，如 DEBUG 的开关，静态文件的位置
+  - __init__.py: 一个空文件，告诉 Python 该目录是一个 Python 包
+  - wsgi.py: 一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目
 
 ## 配置
 
@@ -113,7 +113,7 @@ python manage.py runserver # 在本电脑访问服务器，访问http://server_d
 ## 服务器搭建
 
 * 静态文件的处理都直接由nginx完成
-搭建uwsgi
+  搭建uwsgi
 
 ```
 pip install uwsgi
@@ -183,7 +183,6 @@ Requested setting INSTALLED_APPS, but settings are not configured. You must eith
 * [geex-arts/django-jet](https://github.com/geex-arts/django-jet):Modern responsive template for the Django admin interface with improved functionality http://jet.geex-arts.com/
 * [nioperas06/awesome-django-rest-framework](https://github.com/nioperas06/awesome-django-rest-framework):Tools, processes and resources you need to create an awesome API with Django REST Framework
 * [divio/django-cms](https://github.com/divio/django-cms):The easy-to-use and developer-friendly CMS http://www.django-cms.org
-
 
 ## 参考
 

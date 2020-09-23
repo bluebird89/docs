@@ -91,9 +91,9 @@ Mirror of git://source.ffmpeg.org/ffmpeg.git  Fast Forward Moving Pictures Exper
   - -ss  seek for that second to start its processing, so it will extract frames from that moment. (00:00:07.000 is the second 7 from the video in this case)
   - -vframes the number of frames to extract (1 in this case). FFMPEG will extract only one image and it will use thumb.jpg as output file. You might notice that in this case we are not using a pattern like "%04d" as we are extracting only one frame.
   - -vf
-      - "fps=1" so ffmpeg will filter the video and extract one image (1 frame per second) for the output;
-      - fps=1/5 extract one image every 5 seconds
-      - -vsync vfr: This is a parameter that tells the filter to use a variable bitrate video synchronization. If we do not use this parameter ffmpeg will fail to find only the keyframes and shoud extract other frames that can be not processed correctly.
+    - "fps=1" so ffmpeg will filter the video and extract one image (1 frame per second) for the output;
+    - fps=1/5 extract one image every 5 seconds
+    - -vsync vfr: This is a parameter that tells the filter to use a variable bitrate video synchronization. If we do not use this parameter ffmpeg will fail to find only the keyframes and shoud extract other frames that can be not processed correctly.
   - -s 480x300: frame size of image to output (image resized to fit dimensions)
   - -f image2: forces format
   - -b:v 64k  video bitrate of the output file to 64 kbit/s
@@ -238,7 +238,7 @@ ffmpeg -f dshow -i video="USB2.0 PC CAMERA" -f dshow -i audio="麦克风 (2- USB
 ffmpeg -f dshow -i video="USB2.0 PC CAMERA":audio="麦克风 (2- USB2.0 MIC)" -vcodec libx264 -r 25 -preset:v ultrafast -tune:v zerolatency -f flv rtmp://127.0.0.1:1935/live/123
 ```
 
-## 架设服务
+## 服务
 
 * 安装nginx-rtmp模块
 * 配置
@@ -265,4 +265,3 @@ rtmp {
 
 * [Documentation](https://ffmpeg.org/documentation.html)
 * [FFMPEG视音频编解码零基础学习方法](https://blog.csdn.net/leixiaohua1020/article/details/15811977)
-

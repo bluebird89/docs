@@ -154,6 +154,10 @@ match VALUE {
 
 * [bevy](https://github.com/bevyengine/bevy):A refreshingly simple data-driven game engine built in Rust https://bevyengine.org/
 
+## 图书
+
+* [Rust程序设计](https://kaisery.github.io/trpl-zh-cn/) [美]吉姆·布兰迪（Jim Blandy）[美]贾森·奥伦多夫（Jason Orendorff）李松峰 (译)
+
 ## 工具
 
 * 包管理

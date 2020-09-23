@@ -5,17 +5,17 @@ an open source implementation of the Java Servlet, JavaServer Pages, Java Expres
 ## 安装
 
 * 配置
-    - CATALINA_HOME:/usr/share/tomcat8
-        + 默认根目录：/usr/share/tomcat8-root/default_root
+  - CATALINA_HOME:/usr/share/tomcat8
+    + 默认根目录：/usr/share/tomcat8-root/default_root
 * `http://localhost:8080`
 * `http://localhost:8080/docs/`
 * `http://localhost:8080/examples/`
 * Web Manager App:`http://localhost:8080/manager/html/` `/usr/share/tomcat8-admin/manager/META-INF/context.xml`
 * Host Manager:`http://server_domain_or_IP:8080/host-manager/html/` `/usr/share/tomcat8-admin/host-manager/META-INF/context.xml`
 * CATALINA_BASE:/var/lib/tomcat8, 应用程序、配置与日志
-    - 用户帐号信息都保存在 /var/lib/tomcat8/conf/tomcat-users.xml 的文件中
-    * 服务器配置server.xml
-    * 用户配置：tomcat-users.xml
+  - 用户帐号信息都保存在 /var/lib/tomcat8/conf/tomcat-users.xml 的文件中
+  * 服务器配置server.xml
+  * 用户配置：tomcat-users.xml
 
 ```sh
 sudo add-apt-repository ppa:linuxuprising/java

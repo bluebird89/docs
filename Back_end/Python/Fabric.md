@@ -5,7 +5,7 @@ Simple, Pythonic remote execution and deployment. http://fabfile.org
 ## 工具
 
 * UI
-    - [OfficeDev/office-ui-fabric-react](https://github.com/OfficeDev/office-ui-fabric-react):React components for building Microsoft web experiences. https://developer.microsoft.com/en-us/fabric/#/components
+  - [OfficeDev/office-ui-fabric-react](https://github.com/OfficeDev/office-ui-fabric-react):React components for building Microsoft web experiences. https://developer.microsoft.com/en-us/fabric/#/components
 
 ## 参考
 

@@ -10,15 +10,15 @@ Scrapy, a fast high-level web crawling & scraping framework for Python. https://
 * 下载器中间件 (Downloader middlewares) 下载器中间件是在引擎及下载器之间的特定钩子 (specific hook)，处理 Downloader 传递给引擎的 response。 其提供了一个简便的机制，通过插入自定义代码来扩展 Scrapy 功能。通过设置下载器中间件可以实现爬虫自动更换 user-agent、IP 等功能。
 * Spider 中间件 (Spider middlewares) Spider 中间件是在引擎及 Spider 之间的特定钩子 (specific hook)，处理 spider 的输入 (response) 和输出 (items 及 requests)。 其提供了一个简便的机制，通过插入自定义代码来扩展 Scrapy 功能。
 * 数据流 (Data flow)
-    - 引擎打开一个网站 (open a domain)，找到处理该网站的 Spider 并向该 spider 请求第一个要爬取的 URL (s)。
-    - 引擎从 Spider 中获取到第一个要爬取的 URL 并在调度器 (Scheduler) 以 Request 调度。
-    - 引擎向调度器请求下一个要爬取的 URL。
-    - 调度器返回下一个要爬取的 URL 给引擎，引擎将 URL 通过下载中间件 (请求 (request) 方向) 转发给下载器 (Downloader)
-    - 一旦页面下载完毕，下载器生成一个该页面的 Response，并将其通过下载中间件 (返回 (response) 方向) 发送给引擎。
-    - 引擎从下载器中接收到 Response 并通过 Spider 中间件 (输入方向) 发送给 Spider 处理。
-    - Spider 处理 Response 并返回爬取到的 Item 及 (跟进的) 新的 Request 给引擎。
-    - 引擎将 (Spider 返回的) 爬取到的 Item 给 Item Pipeline，将 (Spider 返回的) Request 给调度器。
-    - (从第二步) 重复直到调度器中没有更多地 request，引擎关闭该网站。
+  - 引擎打开一个网站 (open a domain)，找到处理该网站的 Spider 并向该 spider 请求第一个要爬取的 URL (s)。
+  - 引擎从 Spider 中获取到第一个要爬取的 URL 并在调度器 (Scheduler) 以 Request 调度。
+  - 引擎向调度器请求下一个要爬取的 URL。
+  - 调度器返回下一个要爬取的 URL 给引擎，引擎将 URL 通过下载中间件 (请求 (request) 方向) 转发给下载器 (Downloader)
+  - 一旦页面下载完毕，下载器生成一个该页面的 Response，并将其通过下载中间件 (返回 (response) 方向) 发送给引擎。
+  - 引擎从下载器中接收到 Response 并通过 Spider 中间件 (输入方向) 发送给 Spider 处理。
+  - Spider 处理 Response 并返回爬取到的 Item 及 (跟进的) 新的 Request 给引擎。
+  - 引擎将 (Spider 返回的) 爬取到的 Item 给 Item Pipeline，将 (Spider 返回的) Request 给调度器。
+  - (从第二步) 重复直到调度器中没有更多地 request，引擎关闭该网站。
 
 ## Xpath
 
@@ -68,25 +68,25 @@ xpath('//div[contains(text(),"ma")]') # 选取节点文本包含ma的div节点
 ## 参数
 
 `scrapy shell "http://quotes.toscrape.com/page/1/"`
-* module
-    - crawler    <scrapy.crawler.Crawler object at 0x110f58a50>
-    - item       {}
-    - request    <GET http://quotes.toscrape.com/page/1/>
-    - response   <200 http://quotes.toscrape.com/page/1/>
-    - settings   <scrapy.settings.Settings object at 0x110f58ad0>
-    - spider     <DefaultSpider 'default' at 0x1112eab50>
-* shortcuts
-    - fetch(url[, redirect=True]) Fetch URL and update local objects (by default, redirects are followed)
-    - fetch(req)                  Fetch a scrapy.Request and update local objects
-    - shelp()           Shell help (print this help)
-    - view(response)    View response in a browser
 
+* module
+  - crawler    <scrapy.crawler.Crawler object at 0x110f58a50>
+  - item       {}
+  - request    <GET http://quotes.toscrape.com/page/1/>
+  - response   <200 http://quotes.toscrape.com/page/1/>
+  - settings   <scrapy.settings.Settings object at 0x110f58ad0>
+  - spider     <DefaultSpider 'default' at 0x1112eab50>
+* shortcuts
+  - fetch(url[, redirect=True]) Fetch URL and update local objects (by default, redirects are followed)
+  - fetch(req)                  Fetch a scrapy.Request and update local objects
+  - shelp()           Shell help (print this help)
+  - view(response)    View response in a browser
 
 ## 工具
 
 * [scrapy/quotesbot](https://github.com/scrapy/quotesbot):This is a sample Scrapy project for educational purposes
 * admin UI
-    - [DormyMo/SpiderKeeper](https://github.com/DormyMo/SpiderKeeper)：admin ui for scrapy/open source scrapinghub http://sk.7mdm.com:5000/
+  - [DormyMo/SpiderKeeper](https://github.com/DormyMo/SpiderKeeper)：admin ui for scrapy/open source scrapinghub http://sk.7mdm.com:5000/
 
 ## 参考
 

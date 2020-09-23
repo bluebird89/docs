@@ -87,8 +87,7 @@
   - 通过特征工程可以避免一些over-fitting的情况，例如排除掉一些严重过度拟合的特征
   - 引入更多的训练数据，包括数据量和特征量
 * Low Bias, Low Variance：模型在训练集和测试集上表现都好，可以投入实用
-*
-损失函数用于衡量模型质量，它可以度量模型预测值与实际期望之间的差距，选择不合适的函数可能会影响模型的准确性，甚至影响收敛速度。
+* 
 
 ## 模型训练
 
@@ -129,158 +128,162 @@
 ## 课程列表
 
 * 机器学习数学基础
-    - 机器学习的数学基础
-        + 函数与数据的泛化
-        + 推理与归纳 (Deduction and Induction)
-    - 线性代数（Linear Algebra）
-        + 向量与矩阵 (Vector and Matrix)
-        + 特征值与特征向量
-        + 向量与高维空间
-        + 特征向量（Feature Vector）
-    - 概率与统计（Probability and Statistics）
-        + 条件概率与经典问题 (Conditional Probability)
-        + 边缘概率 (Marginal Probability)
-    - 作业/实践： 财宝问题的概率计算程序
-   - 统计推理（Statistical Inference）
-        + 贝叶斯原理与推理 (Bayesian Theorem)
-        + 极大似然估计 (Maximum Likelihood)
-        + 主观概率（Subjective Probability）
-        + 最大后延概率（MAP)
-   - 随机变量（Random Variable）
-        + 独立与相关 (Independence)
-        + 均值与方差 （Mean and Variance）
-        + 协方差 (Co-Variance)
-   - 概率分布（Probability Distributions)
-   - 中心极限定理（Central Limit Theorem)
-   - 作业/实践： 概率分布采样与不同随机变量之间协方差计算
-   - 梯度下降（Gradient Descent）
-        + 导数与梯度（Derivative and Gradient）
-        + 随机梯度下降（SGD）
-        + 牛顿方法（Newton's Method)
-   - 凸函数（Convex Function）
-        + Jensen不等式（Jensen's Inequality）
-        + 拉格朗日乘子（Lagrange Multiplier）
-   - 作业/实践： 利用牛顿方法求解给定的方程
+  - 机器学习的数学基础
+    + 函数与数据的泛化
+    + 推理与归纳 (Deduction and Induction)
+  - 线性代数（Linear Algebra）
+    + 向量与矩阵 (Vector and Matrix)
+    + 特征值与特征向量
+    + 向量与高维空间
+    + 特征向量（Feature Vector）
+  - 概率与统计（Probability and Statistics）
+    + 条件概率与经典问题 (Conditional Probability)
+    + 边缘概率 (Marginal Probability)
+  - 作业/实践： 财宝问题的概率计算程序
+    - 统计推理（Statistical Inference）
+      + 贝叶斯原理与推理 (Bayesian Theorem)
+      + 极大似然估计 (Maximum Likelihood)
+      + 主观概率（Subjective Probability）
+      + 最大后延概率（MAP)
+    - 随机变量（Random Variable）
+      + 独立与相关 (Independence)
+      + 均值与方差 （Mean and Variance）
+      + 协方差 (Co-Variance)
+    - 概率分布（Probability Distributions)
+    - 中心极限定理（Central Limit Theorem)
+    - 作业/实践： 概率分布采样与不同随机变量之间协方差计算
+    - 梯度下降（Gradient Descent）
+      + 导数与梯度（Derivative and Gradient）
+      + 随机梯度下降（SGD）
+      + 牛顿方法（Newton's Method)
+    - 凸函数（Convex Function）
+      + Jensen不等式（Jensen's Inequality）
+      + 拉格朗日乘子（Lagrange Multiplier）
+    - 作业/实践： 利用牛顿方法求解给定的方程
 * 机器学习的哲学（Philosophy of ML）
-   - 算法的科学（Science of Algorithms）
-        + 输入与输出的神话（Mystery of I/O）
-        + 奥卡姆剃刀（Occam’s Razor）
-   - 维数的诅咒（Curse of Dimensionality）
-        + 高维的几何特性 (Geometric Properity )
-        + 高维空间流形（High-dimensional Manifold）
-   - 机器学习与人工智能（Machine learning and AI）
-   - 机器学习的范式（Paradigms of ML）
+  - 算法的科学（Science of Algorithms）
+    + 输入与输出的神话（Mystery of I/O）
+    + 奥卡姆剃刀（Occam’s Razor）
+  - 维数的诅咒（Curse of Dimensionality）
+    + 高维的几何特性 (Geometric Properity )
+    + 高维空间流形（High-dimensional Manifold）
+  - 机器学习与人工智能（Machine learning and AI）
+  - 机器学习的范式（Paradigms of ML）
 * 经典机器学习模型（Classical ML Models）
-   - 样本学习（Case-Based Reasoning）
-        + K-近邻（K-Nearest Neighbors）
-        + K-近邻预测（KNN for Prediction）
-        + 距离与测度（Distance and Metric）
-   - 朴素贝叶斯（Naïve Bayes Classifier)
-        + 条件独立（Conditional Independence）
-        + 分类（Naive Bayes for Classification)
-   - 作业/实践：垃圾邮件分类的案例
-   - 决策树（Decision Tree Learning）
-         + 信息论与概率
-         + 信息熵（Information Entropy）
-         + ID3
-   - 预测树（CART）
-         - Gini指标（Gini Index）
-         - 决策树与规则（DT and Rule Learning）
-   - 作业/实践：决策树分类实验
-   - 集成学习（Ensemble learning）
-        + Bagging and Boosting
-        + AdaBoost
-        + 误差分解（Bias-Variance Decomposition）
-        + 随机森林（Boosting and Random Forest）
-   + 模型评估（Model Evaluation）
-        + 交叉验证（Cross-Validation）
-        + ROC (Receiver Operating Characteristics)
-        + Cost-Sensitive Learning
-   - 作业/实践：随机森林与决策树分类实验的比较
+  - 样本学习（Case-Based Reasoning）
+    + K-近邻（K-Nearest Neighbors）
+    + K-近邻预测（KNN for Prediction）
+    + 距离与测度（Distance and Metric）
+  - 朴素贝叶斯（Naïve Bayes Classifier)
+    + 条件独立（Conditional Independence）
+    + 分类（Naive Bayes for Classification)
+  - 作业/实践：垃圾邮件分类的案例
+  - 决策树（Decision Tree Learning）
+    
+        + 信息论与概率
+        + 信息熵（Information Entropy）
+        + ID3
+  - 预测树（CART）
+    
+        - Gini指标（Gini Index）
+        - 决策树与规则（DT and Rule Learning）
+  - 作业/实践：决策树分类实验
+  - 集成学习（Ensemble learning）
+    + Bagging and Boosting
+    + AdaBoost
+    + 误差分解（Bias-Variance Decomposition）
+    + 随机森林（Boosting and Random Forest）
+  + 模型评估（Model Evaluation）
+    + 交叉验证（Cross-Validation）
+    + ROC (Receiver Operating Characteristics)
+    + Cost-Sensitive Learning
+  - 作业/实践：随机森林与决策树分类实验的比较
 * 线性模型（Linear Models）
-   - 线性模型（Linear Models）
-        + 线性拟合（Linear Regression）
-   - 最小二乘法（LMS）
-        + 线性分类器（Linear Classifier）
-   - 感知器（Perceptron）
-   - 对数几率回归（Logistic Regression）
-   - 线性模型的概率解释 (Probabilistic Interpretation)
-   - 作业/实践：对数几率回归的文本情感分析中应用
-   - 线性判别分析 (Linear Discrimination Analysis)
-   - 约束线性模型 (Linear Model with Regularization)
-         + LASSO
-         + Ridge Regression
-   - 稀疏表示与字典学习
-         + Sparse Representation & Coding
-         + Dictionary Learning
+  - 线性模型（Linear Models）
+    + 线性拟合（Linear Regression）
+  - 最小二乘法（LMS）
+    + 线性分类器（Linear Classifier）
+  - 感知器（Perceptron）
+  - 对数几率回归（Logistic Regression）
+  - 线性模型的概率解释 (Probabilistic Interpretation)
+  - 作业/实践：对数几率回归的文本情感分析中应用
+  - 线性判别分析 (Linear Discrimination Analysis)
+  - 约束线性模型 (Linear Model with Regularization)
+    
+        + LASSO
+        + Ridge Regression
+  - 稀疏表示与字典学习
+    
+        + Sparse Representation & Coding
+        + Dictionary Learning
 * 核方法（Kernel Methods）
-   - 支持向量机SVM（Support Vector Machines）
-        + VC-维（VC-Dimension）
-        + 最大间距（Maximum Margin）
-        + 支撑向量（Support Vectors）
-   - 作业/实践：SVM不同核函数在实际分类中比较
-   - 对偶拉格朗日乘子
-   - KKT条件（KKT Conditions）
-   - Support Vector Regression (SVR)
-   - 核方法（Kernel Methods）
+  - 支持向量机SVM（Support Vector Machines）
+    + VC-维（VC-Dimension）
+    + 最大间距（Maximum Margin）
+    + 支撑向量（Support Vectors）
+  - 作业/实践：SVM不同核函数在实际分类中比较
+  - 对偶拉格朗日乘子
+  - KKT条件（KKT Conditions）
+  - Support Vector Regression (SVR)
+  - 核方法（Kernel Methods）
 * 统计学习（Statistical Learning）
-   - 判别模型与生成模型
-        + 隐含变量（Latent Variable）
-   - 混合模型（Mixture Model）
-        + 三枚硬币问题（3-Coin Problem）
-        + 高斯混合模型（Gaussian Mixture Model）
-   - EM算法（Expectation Maximization）
-        + 期望最大（Expectation Maximization）
-        + 混合模型的EM算法（EM for Mixture Models）
-        + Jensen 不等式 (Jensen's Inequality)
-        + EM算法推导与性能 (EM Algorithm)
-   - 隐马可夫模型（Hidden Markov Models）
-        + 动态混合模型（Dynamic Mixture Model）
-        + 维特比算法（Viterbi Algorithm）
-        + 算法推导 (Algorithm)
-   - 条件随机场（Conditional Random Field）
+  - 判别模型与生成模型
+    + 隐含变量（Latent Variable）
+  - 混合模型（Mixture Model）
+    + 三枚硬币问题（3-Coin Problem）
+    + 高斯混合模型（Gaussian Mixture Model）
+  - EM算法（Expectation Maximization）
+    + 期望最大（Expectation Maximization）
+    + 混合模型的EM算法（EM for Mixture Models）
+    + Jensen 不等式 (Jensen's Inequality)
+    + EM算法推导与性能 (EM Algorithm)
+  - 隐马可夫模型（Hidden Markov Models）
+    + 动态混合模型（Dynamic Mixture Model）
+    + 维特比算法（Viterbi Algorithm）
+    + 算法推导 (Algorithm)
+  - 条件随机场（Conditional Random Field）
     - 层次图模型（Hierarchical Bayesian Model）
-        + 概率图模型 (Graphical Model)
-        + 从隐含语义模型到p-LSA (From LSA to P-LSA)
-        + Dirichlet 分布与特点（Dirichlet Distribution）
-        + 对偶分布（Conjugate Distribution）
+      + 概率图模型 (Graphical Model)
+      + 从隐含语义模型到p-LSA (From LSA to P-LSA)
+      + Dirichlet 分布与特点（Dirichlet Distribution）
+      + 对偶分布（Conjugate Distribution）
     - 主题模型（Topic Model – LDA）
-        + Latent Dirichlet Allocation
-        + 文本分类（LDA for Text Classification）
-   - 中文主题模型（Topic Modeling for Chinese）
-   - 其他主题模型（Other Topic Variables）
+      + Latent Dirichlet Allocation
+      + 文本分类（LDA for Text Classification）
+  - 中文主题模型（Topic Modeling for Chinese）
+  - 其他主题模型（Other Topic Variables）
 * 无监督学习（Unsupervised Learning）
-   - K-均值算法（K-Means）
-        + 核密度估计（Kernel Density Estimation）
-        + 层次聚类（Hierarchical Clustering）
-   - 蒙特卡洛(Monte Carlo)
-        + 蒙特卡洛树搜索（Monte Carol Tree Search）
-        + MCMC（Markov Chain Monte Carlo）
-        + Gibbs Sampling
+  - K-均值算法（K-Means）
+    + 核密度估计（Kernel Density Estimation）
+    + 层次聚类（Hierarchical Clustering）
+  - 蒙特卡洛(Monte Carlo)
+    + 蒙特卡洛树搜索（Monte Carol Tree Search）
+    + MCMC（Markov Chain Monte Carlo）
+    + Gibbs Sampling
 * 流形学习（Manifold Learning）
-   - 主成分分析（PCA）
-        + PCA and ICA
-   - 低维嵌入（Low-Dimensional Embedding）
-        + 等度量映射（Isomap）
-        + 局部线性嵌入（Locally Linear Embedding）
+  - 主成分分析（PCA）
+    + PCA and ICA
+  - 低维嵌入（Low-Dimensional Embedding）
+    + 等度量映射（Isomap）
+    + 局部线性嵌入（Locally Linear Embedding）
 * 概念学习（Concept Learning）
-   - 概念学习（Concept Learning）
-        + 经典概念学习
-        + One-Short概念学习
-   - 高斯过程学习（Gaussian Process for ML）
-        + Dirichlet Process
+  - 概念学习（Concept Learning）
+    + 经典概念学习
+    + One-Short概念学习
+  - 高斯过程学习（Gaussian Process for ML）
+    + Dirichlet Process
 * 强化学习（Reinforcement Learning）
-    - 奖赏与惩罚（Reward and Penalty）
-        + 状态空间 (State-Space Model)
-        + Q-学习算法 (Q-Learning)
-   - 路径规划 （Path Planning）
-   - 游戏人工智能 （Game AI）
-   - 作业/实践：小鸟飞行游戏的自动学习算法
+  - 奖赏与惩罚（Reward and Penalty）
+    + 状态空间 (State-Space Model)
+    + Q-学习算法 (Q-Learning)
+      - 路径规划 （Path Planning）
+      - 游戏人工智能 （Game AI）
+      - 作业/实践：小鸟飞行游戏的自动学习算法
 * 神经网络
-   - 多层神经网络
-        + 非线性映射（Nonlinear Mapping）
-        + 反向传播（Back-propagation）
-   - 自动编码器（Auto-Encoder）
+  - 多层神经网络
+    + 非线性映射（Nonlinear Mapping）
+    + 反向传播（Back-propagation）
+  - 自动编码器（Auto-Encoder）
 
 ## 图书
 

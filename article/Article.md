@@ -13,14 +13,14 @@
 > Obama retires at 55,
 > but Trump starts at 70.
 > Absolutely everyone in this world works based on their Time Zone.>
->
+> 
 > People around you might seem to go ahead of you,
 > some might seem to be behind you.
 > But everyone is running their own RACE, in their own TIME.
 > Don’t envy them or mock them.
 > They are in their TIME ZONE, and you are in yours!
 > Life is about waiting for the right moment to act.>
->
+> 
 > So, RELAX.
 > You’re not LATE.
 > You’re not EARLY.
@@ -56,7 +56,6 @@
 > 不知怎么睡着了
 > 梦里花落知多少
 
-
 舒婷 《致橡树》（1977年)
 
 > 我如果爱你，绝不像攀援的凌霄花，借你的高枝炫耀自己；
@@ -77,7 +76,6 @@
 > 这才是伟大的爱情，坚贞就在这里：
 > 爱，不仅爱你伟岸的身躯，也爱你坚持的位置，足下的土地。
 
-
 面朝大海，春暖花开
 
 > 从明天起，做一个幸福的人
@@ -95,7 +93,6 @@
 > 愿你有情人终成眷属
 > 愿你在尘世获得幸福
 > 我也愿面朝大海，春暖花开
-
 
 《我曾经七次鄙视自己的灵魂 》 卡里·纪伯伦
 
@@ -115,7 +112,6 @@
 > The fifth time when she forbode for weakness, and attributed her patience to strength.
 > The sixth time when she despised the ugliness of a face, and knew not that it was one of her own masks.
 > And the seventh time when she sang a song of praise, and deemed it a virtue.
-
 
     “孤”“独”二字 拆字新解 林语堂
 
@@ -252,7 +248,6 @@
 * 为什么有些事对别人来说只是举手之劳可他们却不愿帮忙？ 我去做一件事并不是因为它简单，而是因为它值得。
 * 有哪些我们熟知的名言其实还有后半句？ 「人是生而自由的」
 
-
 * 每一个不曾起舞的日子， 都是对生命的辜负。 ——尼采
 * 生活在阴沟里， 依然有仰望星空的权利。 ——王尔德
 * 从童年起，我便独自一人 照顾着历代的星辰 ——白鹤林《孤独》
@@ -304,14 +299,12 @@
 * 蒹葭苍苍，白露为霜。 所谓伊人，在水一方。 ——《诗经》
 * 我欲与君相知，长命无绝衰。 山无陵，江水为竭，冬雷震震，夏雨雪， 天地合，乃敢与君绝！ ——《上邪》
 
-
 白茶清欢无别事，我在等风也等你
 三里清风三里路，步步清风再无你
 
 ## The Road Not Taken 罗伯特·弗罗斯特
 
 ```
-
 Two roads diverged in a yellow wood,
 And sorry I could not travel both
 And be one traveler, long I stood
@@ -362,7 +355,6 @@ And that has made all the difference.
 恓惶戎旅下，蹉跎淮海滨。
 涧树含朝雨，山鸟哢馀春。
 我有一瓢酒，可以慰风尘。
-
 
 ## 过零丁洋
 
@@ -743,4 +735,4 @@ The night before the Youth Day
 ## 图书
 
 * 《世说新语》
-* 《聊斋志异
+* 《聊斋志异》

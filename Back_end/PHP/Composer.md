@@ -10,13 +10,13 @@ Dependency Manager for PHP https://getcomposer.org/  [中文](https://www.phpcom
 ## 原理
 
 * zend_lookup_class_ex
-    * EG(class_table)
-    * spl_autoload_call  spl_autoload_register:将用户的autoload函数放到SPL_G(autoload_functions)中，且将spl_autoload_call注册到PHP中。
-        * Composer\Autoload\ClassLoader::loadClass
-            * findFile
-                * class map lookup
-                * PSR-4 lookup
-                * PSR-0 :autoload_namespaces.php
+  * EG(class_table)
+  * spl_autoload_call  spl_autoload_register:将用户的autoload函数放到SPL_G(autoload_functions)中，且将spl_autoload_call注册到PHP中。
+    * Composer\Autoload\ClassLoader::loadClass
+      * findFile
+        * class map lookup
+        * PSR-4 lookup
+        * PSR-0 :autoload_namespaces.php
 * $prefix不为空的PSR-4加载规则:比如类A\B\C，先找A\B\对应目录下面的C.php；再找A\对应目录下面的B\C.php；以此类推
 * $prefix为空的PSR-4加载规则:如果找不到，那就在fallbackDirsPsr4下找A\B\C.php文件
 * $prefix不为空的PSR-0加载规则:PSR-0支持namespace和下划线分隔的类（PEAR-like class name）；这点对一些需要向namespace迁移的旧仓库很有用 对于类A\B\C或者A_B_C，先找A\B\对应目录下面的C.php；再找A\对应目录下面的B\C.php；以此类推
@@ -136,7 +136,7 @@ composer config -g  repositories.tmo composer https://packages.tmogroup.asia/
     ]
 ```
 
-##  自动加载
+## 自动加载
 
 * Files：手动指定直接加载的文件（相对于 vendor 目录）
   - 不需要满足 PSR-0 和 PSR-4 规范
@@ -250,15 +250,15 @@ composer install --no-plugins --no-scripts
 * 以下类型的代码受命名空间的影响，它们是：类（包括抽象类和traits）、接口、函数和常量
 * 可以在同一个文件中定义多个命名空间,建议使用下面的大括号形式的语法
 * 类名可以通过三种方式引用
-    - 非限定名称，或不包含前缀的类名称，例如 $a=new foo(); 或 foo::staticmethod();。如果当前命名空间是 currentnamespace，foo 将被解析为 currentnamespace\foo。如果使用 foo 的代码是全局的，不包含在任何命名空间中的代码，则 foo 会被解析为foo。
-    - 限定名称,或包含前缀的名称，例如 $a = new subnamespace\foo(); 或 subnamespace\foo::staticmethod();。如果当前的命名空间是 currentnamespace，则 foo 会被解析为 currentnamespace\subnamespace\foo。如果使用 foo 的代码是全局的，不包含在任何命名空间中的代码，foo 会被解析为subnamespace\foo。
-    - 完全限定名称，或包含了全局前缀操作符的名称，例如， $a = new \currentnamespace\foo(); 或 \currentnamespace\foo::staticmethod();。
+  - 非限定名称，或不包含前缀的类名称，例如 $a=new foo(); 或 foo::staticmethod();。如果当前命名空间是 currentnamespace，foo 将被解析为 currentnamespace\foo。如果使用 foo 的代码是全局的，不包含在任何命名空间中的代码，则 foo 会被解析为foo。
+  - 限定名称,或包含前缀的名称，例如 $a = new subnamespace\foo(); 或 subnamespace\foo::staticmethod();。如果当前的命名空间是 currentnamespace，则 foo 会被解析为 currentnamespace\subnamespace\foo。如果使用 foo 的代码是全局的，不包含在任何命名空间中的代码，foo 会被解析为subnamespace\foo。
+  - 完全限定名称，或包含了全局前缀操作符的名称，例如， $a = new \currentnamespace\foo(); 或 \currentnamespace\foo::staticmethod();。
 * 两种抽象的访问当前命名空间内部元素的方法，`__NAMESPACE__` 魔术常量和namespace关键字
-    - 常量__NAMESPACE__的值是包含当前命名空间名称的字符串。在全局的，不包括在任何命名空间中的代码，它包含一个空的字符串
+  - 常量__NAMESPACE__的值是包含当前命名空间名称的字符串。在全局的，不包括在任何命名空间中的代码，它包含一个空的字符串
 * 导入：允许通过别名引用或导入外部的完全限定名称
-    - 为类名称使用别名
-    - 为接口使用别名
-    - 为命名空间名称使用别名
+  - 为类名称使用别名
+  - 为接口使用别名
+  - 为命名空间名称使用别名
 
 ```php
 namespace my\name;
@@ -411,11 +411,11 @@ PHP在需要类定义的时候调用它
 
 * include 或 require
 * `__autoload`:调用不存在的类时会被自动调用,现在基本废弃
-    - 一个文件中不允许有多个 `__autoload()`方法，引入文件中也存在`__autoload()`
-    - 一个文件中引入多个文件目录
+  - 一个文件中不允许有多个 `__autoload()`方法，引入文件中也存在`__autoload()`
+  - 一个文件中引入多个文件目录
 * bool spl_autoload_register ([ callable $autoload_function [, bool $throw = true [, bool $prepend = false ]]] ) :注册给定的函数作为 `__autoload` 的实现
-    - 函数名称
-    - 闭包函数
+  - 函数名称
+  - 闭包函数
 * 获取所有已注册的 `__autoload()` 函数:spl_autoload_functions ( void )
 * spl_classes — 返回所有可用的SPL类
 * spl_autoload_unregister — 注销已注册的`__autoload()`函数
@@ -452,10 +452,15 @@ $cat = new \Animal\Cat();
 ## 创建组件
 
 * 确定厂商名称和包名，即形如laravel/framework这样，要确保其全局唯一性，在Packagist中不存在
+
 * 系统结构基本上是确定的：
+  
   - src：存放组件源代码
+  
   - tests：存放组件测试代码
+  
   - composer.json：Composer配置文件，用于描述组件，声明组件依赖以及自动加载配置等
+    
     + name：组件的厂商名和包名，也是Packagist中的组件名
     + description：简要说明组件
     + keywords：描述属性的关键字
@@ -467,7 +472,9 @@ $cat = new \Animal\Cat();
     + require-dev：开发这个组件所需的依赖
     + suggest：建议安装的组件
     + autoload：告诉Composer自动加载器如何自动加载这个组件
+  
   - README.md：关于组件的相关信息、使用文档说明、软件许可证等
+    
     + 组件的名称和描述
     + 安装说明
     + 使用说明
@@ -476,9 +483,11 @@ $cat = new \Animal\Cat();
     + 支持资源
     + 作者信息
     + 软件许可证
-
+  
   - CONTRIBUTING.md：告知别人如何为这个组件做贡献
+  
   - LICENSE：纯文本文件，声明组件的软件许可证
+  
   - CHANGELOG.md：列出组件在每个版本中引入的改动
 
 ```sh

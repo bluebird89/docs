@@ -5,31 +5,31 @@
 ## 分类
 
 * 计算机视觉(Computer Vision)
-    - [magenta](link):探索机器学习在艺术、音乐创作中的作用的研究项目
-    - [Mask-RCNN](link)
+  - [magenta](link):探索机器学习在艺术、音乐创作中的作用的研究项目
+  - [Mask-RCNN](link)
 * 自然语言处理(Natural Language Processing)
-    - [WaveNet](link)
-    - [Sentence Classification with CNN](link): Convolutional Neural Networks for Sentence Classification
+  - [WaveNet](link)
+  - [Sentence Classification with CNN](link): Convolutional Neural Networks for Sentence Classification
 * 生成模型(Generative Models)
-    - [DCGAN-tensorflow](link):Deep Convolutional Generative Adversarial Networks
-    - [Image-to-Image Translation with Conditional Adversarial Networks](link)
+  - [DCGAN-tensorflow](link):Deep Convolutional Generative Adversarial Networks
+  - [Image-to-Image Translation with Conditional Adversarial Networks](link)
 * 强化学习（Reinforcement Learing）
-    * [Deep Reinforcement Learning for Keras](link)
-    * [DQN-tensorflow](link)
+  * [Deep Reinforcement Learning for Keras](link)
+  * [DQN-tensorflow](link)
 * 无监督学习(Unsupervised Learning)
-    - [MUSE: Multilingual Unsupervised and Supervised Embeddings](link)
-    - [Domain Transfer Network (DTN)](link)
+  - [MUSE: Multilingual Unsupervised and Supervised Embeddings](link)
+  - [Domain Transfer Network (DTN)](link)
 
 ## 环境配置
 
 * 硬件配置： 超微塔式服务器
-    - 显卡 NVIDIA TITAN Xp *4
-    - 内存 128G
-    - CPU 2620V4* 2
-    - 电源 1600w *2
-    - 硬盘 256G*2+2T*2
+  - 显卡 NVIDIA TITAN Xp *4
+  - 内存 128G
+  - CPU 2620V4* 2
+  - 电源 1600w *2
+  - 硬盘 256G*2+2T*2
 * 使用U盘进行Ubuntu操作系统的安装
-    - 一开始安装选择"Install Ubuntu"回车后过一会儿屏幕如果显示“输入不支持”，这和Ubuntu对显卡的支持有关，在安装主界面的F6，选择nomodeset，就可以进入下一步安装了
+  - 一开始安装选择"Install Ubuntu"回车后过一会儿屏幕如果显示“输入不支持”，这和Ubuntu对显卡的支持有关，在安装主界面的F6，选择nomodeset，就可以进入下一步安装了
 * 安装ssh `sudo apt-get install openssh-server`
 
 ```sh
@@ -94,30 +94,53 @@ print(torch.cuda.is_available())
 ## 课程
 
 * [深度学习](https://mooc.study.163.com/university/deeplearning_ai#/c)
-    - [fengdu78/deeplearning_ai_books](https://github.com/fengdu78/deeplearning_ai_books):deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）
-    - [Deep Learning Specialization](http://www.deeplearning.ai)
-    - [coursera](https://www.coursera.org/specializations/deep-learning)
-            * [enggen/Deep-Learning-Coursera](https://github.com/enggen/Deep-Learning-Coursera):Deep Learning Specialization by Andrew Ng, deeplearning.ai.
-    - [神经网络和深度学习](https://mooc.study.163.com/)
+  
+  - [fengdu78/deeplearning_ai_books](https://github.com/fengdu78/deeplearning_ai_books):deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）
+  
+  - [Deep Learning Specialization](http://www.deeplearning.ai)
+  
+  - [coursera](https://www.coursera.org/specializations/deep-learning)
+    
+          * [enggen/Deep-Learning-Coursera](https://github.com/enggen/Deep-Learning-Coursera):Deep Learning Specialization by Andrew Ng, deeplearning.ai.
+  
+  - [神经网络和深度学习](https://mooc.study.163.com/)
+
 * [深度学习（小象学院）](https://www.bilibili.com/video/av10324235)
+
 * [李宏毅深度学习(2017)](https://www.bilibili.com/video/av9770302/)
+
 * [斯坦福2017季CS224n深度学习自然语言处理课程](https://www.bilibili.com/video/av13383754)
+
 * [斯坦福深度学习课程CS231N](https://www.bilibili.com/video/av17204303)
+
 * [深度学习与计算机视觉](https://www.bilibili.com/video/av17741845)
+
 * [Andrew Ng (吴恩达) 深度学习专项课程](http://coursegraph.com/coursera-specializations-deep-learning)
+
 * [apachecn/fastai-ml-dl-notes-zh](https://github.com/apachecn/fastai-ml-dl-notes-zh):📖 [译] fast.ai 机器学习和深度学习中文笔记
+
 * [fchollet/deep-learning-with-python-notebooks](https://github.com/fchollet/deep-learning-with-python-notebooks):Jupyter notebooks for the code samples of the book "Deep Learning with Python"
+
 * [PaddlePaddle/book](https://github.com/PaddlePaddle/book):Deep Learning 101 with PaddlePaddle （深度学习框架入门教程）
+
 * [d2l-ai/d2l-zh](https://github.com/d2l-ai/d2l-zh):《动手学深度学习》，英文版即伯克利深度学习（STAT 157，2019春）教材。面向中文读者、能运行、可讨论。 https://zh.d2l.ai
+
 * [aamini/introtodeeplearning_labs](https://github.com/aamini/introtodeeplearning_labs/):Lab Materials for MIT 6.S191: Introduction to Deep Learning  https://youtu.be/5v1JnYv_yWs?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI
+
 * [神经网络与深度学习](https://nndl.github.io/):复旦邱锡鹏 《神经网络与深度学习》
-    - 图书：https://nndl.github.io/nndl-book.pdf
-    - 示例代码：https://github.com/nndl/nndl-codes
-    - 课程练习：https://github.com/nndl/exercise
+  
+  - 图书：https://nndl.github.io/nndl-book.pdf
+  - 示例代码：https://github.com/nndl/nndl-codes
+  - 课程练习：https://github.com/nndl/exercise
+
 * [Deep Learning from the Foundations](https://www.fast.ai/2019/06/28/course-p2v3/)
+
 * [Curt-Park/rainbow-is-all-you-need](https://github.com/Curt-Park/rainbow-is-all-you-need):Rainbow is all you need! Step-by-step tutorials from DQN to Rainbow
+
 * [](https://www.cs.toronto.edu/~hinton/)
+
 * [TensorFlow, Keras and deep learning, without a PhD access_time ](https://codelabs.developers.google.com/codelabs/cloud-tensorflow-mnist/#3)
+
 * [Practical Deep Learning for Coders](https://course.fast.ai/)
 
 ## 图书
