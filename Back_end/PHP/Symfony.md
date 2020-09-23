@@ -124,7 +124,7 @@ app/config/config.yml里有个assetic配置段  HenryWebBundle
 * 压缩 `https://github.com/mishoo/UglifyJS2`
 * 版本控制
 * 资源合并：`php app/console assetic:dump  --env=prod --on-debug 生成静态文件以及合并`
-    - 2.5 --fork :多线程生成
+  - 2.5 --fork :多线程生成
 
 ## View
 
@@ -142,33 +142,33 @@ Warning: "continue" targeting switch is equivalent to
 ## 工具
 
 * Debug
-	- Debug bar
+  - Debug bar
 * [bundles 仓库](http://knpbundles.com/)
-	- [jonaswouters/XhprofBundle](https://github.com/jonaswouters/XhprofBundle):XHProf bundle for Symfony 2
-	- [symfony/maker-bundle](https://github.com/symfony/maker-bundle):Symfony Maker Bundle https://symfony.com/
-	- [symfony/security-bundle(https://github.com/symfony/security-bundle):The security system is one of the most powerful parts of Symfony and can largely be controlled via its configuration. https://symfony.com/security-bundle
-	- [symfony/framework-bundle](https://github.com/symfony/framework-bundle):The FrameworkBundle defines the main framework configuration, from sessions and translations to forms, validation, routing and more. https://symfony.com/framework-bundle
+  - [jonaswouters/XhprofBundle](https://github.com/jonaswouters/XhprofBundle):XHProf bundle for Symfony 2
+  - [symfony/maker-bundle](https://github.com/symfony/maker-bundle):Symfony Maker Bundle https://symfony.com/
+  - [symfony/security-bundle(https://github.com/symfony/security-bundle):The security system is one of the most powerful parts of Symfony and can largely be controlled via its configuration. https://symfony.com/security-bundle
+  - [symfony/framework-bundle](https://github.com/symfony/framework-bundle):The FrameworkBundle defines the main framework configuration, from sessions and translations to forms, validation, routing and more. https://symfony.com/framework-bundle
 * Compontent
-	- [symfony/http-kernel](https://github.com/symfony/http-kernel):The HttpKernel component provides a structured process for converting a Request into a Response. https://symfony.com/http-kernel
-	- [symfony/routing](https://github.com/symfony/routing):The Routing component maps an HTTP request to a set of configuration variables. https://symfony.com/routing
-	- [symfony/contracts](https://github.com/symfony/contracts):A set of abstractions extracted out of the Symfony components https://symfony.com
-	- [symfony/dom-crawler](https://github.com/symfony/dom-crawler):The DomCrawler component eases DOM navigation for HTML and XML documents. https://symfony.com/dom-crawler
-	- [symfony/config](https://github.com/symfony/config):The Config component helps you find, load, combine, autofill and validate configuration values of any kind, whatever their source may be (YAML, XML, INI files, or for instance a database). https://symfony.com/config
-	- [symfony/dependency-injection](https://github.com/symfony/dependency-injection):The DependencyInjection component allows you to standardize and centralize the way objects are constructed in your application. https://symfony.com/dependency-injection
+  - [symfony/http-kernel](https://github.com/symfony/http-kernel):The HttpKernel component provides a structured process for converting a Request into a Response. https://symfony.com/http-kernel
+  - [symfony/routing](https://github.com/symfony/routing):The Routing component maps an HTTP request to a set of configuration variables. https://symfony.com/routing
+  - [symfony/contracts](https://github.com/symfony/contracts):A set of abstractions extracted out of the Symfony components https://symfony.com
+  - [symfony/dom-crawler](https://github.com/symfony/dom-crawler):The DomCrawler component eases DOM navigation for HTML and XML documents. https://symfony.com/dom-crawler
+  - [symfony/config](https://github.com/symfony/config):The Config component helps you find, load, combine, autofill and validate configuration values of any kind, whatever their source may be (YAML, XML, INI files, or for instance a database). https://symfony.com/config
+  - [symfony/dependency-injection](https://github.com/symfony/dependency-injection):The DependencyInjection component allows you to standardize and centralize the way objects are constructed in your application. https://symfony.com/dependency-injection
 * 扩展
-	- [symfony/console](https://github.com/symfony/console):The Console component eases the creation of beautiful and testable command line interfaces. https://symfony.com/console
-	- [symfony/http-foundation](https://github.com/symfony/http-foundation):The HttpFoundation component defines an object-oriented layer for the HTTP specification. https://symfony.com/http-foundation
-	- [symfony/dotenv](https://github.com/symfony/dotenv):Symfony Dotenv parses .env files to make environment variables stored in them accessible via getenv(), `$_ENV`, or `$_SERVER`. https://symfony.com/dotenv
+  - [symfony/console](https://github.com/symfony/console):The Console component eases the creation of beautiful and testable command line interfaces. https://symfony.com/console
+  - [symfony/http-foundation](https://github.com/symfony/http-foundation):The HttpFoundation component defines an object-oriented layer for the HTTP specification. https://symfony.com/http-foundation
+  - [symfony/dotenv](https://github.com/symfony/dotenv):Symfony Dotenv parses .env files to make environment variables stored in them accessible via getenv(), `$_ENV`, or `$_SERVER`. https://symfony.com/dotenv
 * Admin
-	- [EasyCorp/EasyAdminBundle](https://github.com/EasyCorp/EasyAdminBundle):The new (and simple) admin generator for Symfony applications.
+  - [EasyCorp/EasyAdminBundle](https://github.com/EasyCorp/EasyAdminBundle):The new (and simple) admin generator for Symfony applications.
 * Framework
-	- [symfony-standard](https://github.com/symfony/symfony-standard):The "Symfony Standard Edition" distribution http://symfony.com
+  - [symfony-standard](https://github.com/symfony/symfony-standard):The "Symfony Standard Edition" distribution http://symfony.com
 * security
-	- [symfony/security](https://github.com/symfony/security):The Security component provides a complete security system for your web application. https://symfony.com/components/Security
+  - [symfony/security](https://github.com/symfony/security):The Security component provides a complete security system for your web application. https://symfony.com/components/Security
 * DEMO
-	- [symfony/demo](https://github.com/symfony/demo):Symfony Demo Application https://symfony.com/
+  - [symfony/demo](https://github.com/symfony/demo):Symfony Demo Application https://symfony.com/
 * Frontend
-	- [symfony/webpack-encore](https://github.com/symfony/webpack-encore):A simple but powerful API for processing & compiling assets built around Webpack
+  - [symfony/webpack-encore](https://github.com/symfony/webpack-encore):A simple but powerful API for processing & compiling assets built around Webpack
 
 ## 参考
 
@@ -178,4 +178,4 @@ Warning: "continue" targeting switch is equivalent to
 * [symfonycasts](https://symfonycasts.com/)
 * [洪大师带你解读Symfony 2框架](https://www.imooc.com/learn/244)
 * Blog
-	- [教程](http://www.newlifeclan.com/)
+  - [教程](http://www.newlifeclan.com/)

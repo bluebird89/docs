@@ -1,6 +1,5 @@
 # Physics
 
-
 ## Introductory Mechanics
 
 * University Physics with Modern Physics by Young and Freedman (essential). Work through all of the "Mechanics" chapters (in my edition, these are chapters 1-14). This is the best introductory book I've found, and you can use it when you learn electrostatics and modern physics, too. It contains plenty of great example problems to work through, and the solutions are easy to find online. It does a great job of introducing the relevant mathematics, but you'll need to be learning calculus alongside it. You don't need to spend $250 on the new edition - Amazon has lots of copies of the 12th edition and the 13th edition that contain the same material.

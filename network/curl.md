@@ -10,7 +10,7 @@ curl is used in command lines or scripts to transfer data.发出网络请求，�
 * <PROTOCOL>：协议，一般为HTTP协议
 * <HOST>：主机，可为主机的IP地址或Hostname
 * <PORT>：主机端口
-*  <VERB>：GET,POST,PUT,DELETE   一般请求为GET、提交变更为POST、上传文件为PUT、删除操作为DELETE
+* <VERB>：GET,POST,PUT,DELETE   一般请求为GET、提交变更为POST、上传文件为PUT、删除操作为DELETE
 * -x参数指定 HTTP 请求的代理
 * -H/--header                           指定请求的 HTTP Header
 * -d/--data                             发送 POST 请求的数据体
@@ -105,8 +105,8 @@ wget -r -p -np -k $url
 ## Notice
 
 * network
-    - ping
-    - network timeout
+  - ping
+  - network timeout
 
 ## 参考
 

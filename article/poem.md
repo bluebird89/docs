@@ -100,7 +100,7 @@ I took the less traveled by,
 And that has made all the difference.
 ```
 
-## 　Sonnet 18 William Shakespeare
+## Sonnet 18 William Shakespeare
 
 ```
 Shall I compare thee to a summer's day?

@@ -2,7 +2,7 @@
 
 High performance, minimalist Go web framework https://echo.labstack.com
 
-##  install
+## install
 
 ```sh
 go get -u github.com/labstack/echo/

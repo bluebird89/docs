@@ -43,10 +43,10 @@ CORE_TAP_REPO = "git://mirrors.ustc.edu.cn/homebrew-core.git".freeze
 ### brew vs brew cask
 
 * Homebrew 默认情况下会自带：
-    - homebrew/core
-    - homebrew/cask：Homebrew 的 macOS Native 应用扩展，通过 cask 可以安装各类应用程序
-    - homebrew/services：台服务程序扩展，它基于 macOS 的 launchctl
-    - homebrew/bundle：解决所有软件依赖，包括官方和第三方的 formula 以及 cask
+  - homebrew/core
+  - homebrew/cask：Homebrew 的 macOS Native 应用扩展，通过 cask 可以安装各类应用程序
+  - homebrew/services：台服务程序扩展，它基于 macOS 的 launchctl
+  - homebrew/bundle：解决所有软件依赖，包括官方和第三方的 formula 以及 cask
 * cask-versions：旧版的软件
 * cask-fonts： Homebrew 官方的字体源
 * brew:下载源码解压后。／.configure&& make install,同时包含相关以来库，并自动配置好各种环境变量，易于卸载

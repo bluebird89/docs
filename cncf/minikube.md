@@ -6,20 +6,20 @@
 * config file: `~/.kube/`
 * all the virtual machine bits:`~/.minikube/`
 * 启动参数
-    - export http_proxy命令是添加命令行代理，主要是为了让minikube可以在命令行通过proxy去下载相关文件
-    - --docker-env http_proxy...，设置虚拟机中docker daemon的环境变量，这里的环境变量http_proxy表示虚拟机中docker daemon使用的代理
-    - --docker-env no_proxy，设置虚拟机中docker daemon不使用代理的地址段
-    - --log_dir=tmp，设置minikube的日志存储位置，这里是当前目录下的tmp文件夹。该目录下会出现INFO和ERROR的日志，INFO是一定会有，ERROR是出错的时候才有。比如
-    - --cpus 4，设置虚拟机的cpu核数
-    - --memory 8192，设置虚拟机的内存大小，单位为M
+  - export http_proxy命令是添加命令行代理，主要是为了让minikube可以在命令行通过proxy去下载相关文件
+  - --docker-env http_proxy...，设置虚拟机中docker daemon的环境变量，这里的环境变量http_proxy表示虚拟机中docker daemon使用的代理
+  - --docker-env no_proxy，设置虚拟机中docker daemon不使用代理的地址段
+  - --log_dir=tmp，设置minikube的日志存储位置，这里是当前目录下的tmp文件夹。该目录下会出现INFO和ERROR的日志，INFO是一定会有，ERROR是出错的时候才有。比如
+  - --cpus 4，设置虚拟机的cpu核数
+  - --memory 8192，设置虚拟机的内存大小，单位为M
 * start主要做了这些事：
-    - 创建了名为minikube的虚拟机，并在虚拟机中安装了Docker容器运行时。（实际就是Docker-machine）
-    - 下载了Kubeadm与Kubelet工具
-    - 通过Kubeadm部署Kubernetes集群
-    - 进行各组件间访问授权、健康检查等工作
-    - 在用户操作系统安装并配置kubectl
+  - 创建了名为minikube的虚拟机，并在虚拟机中安装了Docker容器运行时。（实际就是Docker-machine）
+  - 下载了Kubeadm与Kubelet工具
+  - 通过Kubeadm部署Kubernetes集群
+  - 进行各组件间访问授权、健康检查等工作
+  - 在用户操作系统安装并配置kubectl
 * 参考
-    - [Hello Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/)
+  - [Hello Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/)
 
 ```sh
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"

@@ -1,6 +1,6 @@
 # App
 
-*  CLT(The Command Line Developer Tools）
+* CLT(The Command Line Developer Tools）
 
 ## 安装
 
