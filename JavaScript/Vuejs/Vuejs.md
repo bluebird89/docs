@@ -307,6 +307,21 @@ npm run serve
 
 - package.json中添加"stylus-loader": "^1.4.0"，npm install安装插件
 
+## [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
+
+🛠️ Standard Tooling for Vue.js Development https://cli.vuejs.org/
+
+* 3.0:图形化界面
+
+```sh
+npm install -g @vue/cli
+yarn global add @vue/cli
+
+vue list
+vue init webpack my-project
+vue init Plortinus/vue-multiple-pages new-project
+```
+
 ## 项目
 
 * [pwa](https://github.com/vuejs-templates/pwa) progressive-web-apps
@@ -355,11 +370,6 @@ npm run serve
 * [kaorun343/vue-property-decorator](https://github.com/kaorun343/vue-property-decorator):Vue.js and Property Decorator
 * chart
     - [ElemeFE/v-charts](https://github.com/ElemeFE/v-charts):基于 Vue2.0 和 ECharts 封装的图表组件📈📊 https://v-charts.js.org
-* [vuejs/vue-cli](https://github.com/vuejs/vue-cli):🛠️ Standard Tooling for Vue.js Development https://cli.vuejs.org/
-  - `npm install -g @vue/cli` `yarn global add @vue/cli`
-  - 3.0:图形化界面
-  - `vue list`
-  - `vue init <template-name> <project-name>` # vue init webpack my-project  vue init Plortinus/vue-multiple-pages new-project
 * 模板
   - [ SimulatedGREG / electron-vue ](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack. <https://simulatedgreg.gitbooks.io/electron-vue/content/>
     - [ epicmaxco / vuestic-admin ](https://github.com/epicmaxco/vuestic-admin):Free and Beautiful Vue.js Admin Template http://vuestic.epicmax.co

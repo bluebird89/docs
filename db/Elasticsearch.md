@@ -5,10 +5,11 @@ Open Source, Distributed, RESTful Search Engine，一个基于Lucene的实时的
 * 基于RESTful接口
 * 面向文档型数据库，一条数据就是一个文档，用JSON作为文档序列化的格式
 * 场景
-  - 搜索领域：相对于solr，真正的后起之秀，成为很多搜索系统的不二之选。
+  - 一个分布式的实时文档存储，每个字段可以被索引与搜索
   - Json文档数据库：相对于MongoDB，读写性能更佳，而且支持更丰富的地理位置查询以及数字、文本的混合查询等
   - 时序数据分析处理：日志处理、监控数据的存储、分析和可视化方面做得非常好
-* 底层 lucene,封装好的各种建立倒排索引的算法代码
+  - 一个分布式实时分析搜索引擎
+  - 能胜任上百个服务节点的扩展，并支持 PB 级别的结构化或者非结构化数据
 * 特点
   - 通过数据分片技术，分区存储数据。（水平分表）
   - 通过副本技术冗余保存数据，es副本可以提供查询（读写分离）
@@ -18,7 +19,7 @@ Open Source, Distributed, RESTful Search Engine，一个基于Lucene的实时的
 
 ## 安装
 
-* 安装Java8 环境
+* 安装 Java8 环境
 * Mac
   - bin:
   - Data:    /usr/local/var/elasticsearch/elasticsearch_henry/
@@ -38,10 +39,10 @@ wget https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/
 unzip elasticsearch-5.5.2.zip
 tar xf elasticsearch-2.1.0.tar.gz
 
+# ubuntu
 curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.5.1-amd64.deb
 sudo dpkg -i elasticsearch-7.5.1-amd64.deb
 
-# ubuntu
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 sudo apt-get install apt-transport-https
@@ -51,9 +52,10 @@ sudo service elasticsearch start
 brew install elasticsearch # http://localhost:9200
 
 cd elasticsearch-5.5.2/
-./plugin  -install mobz/elasticsearch-head  # web集群管理插件  安装好了以后可以在plugin文件发现多了一个head
+# 安装web集群管理插件,在plugin文件发现一个head
+./plugin  -install mobz/elasticsearch-head
 
-# 开启服务，默认的9200端口运行
+# 开启服务 默认9200端口运行
 ./bin/elasticsearch
 ./elasticsearch  -Des.insecure.allow.root=true  #加这个参数才可以root启动
 ./bin/elasticsearch -d -p pid # 后台运行
@@ -61,8 +63,7 @@ cd elasticsearch-5.5.2/
 
 ## 配置
 
-* 默认情况下，Elastic 只允许本机访问
-* 远程访问:修改 Elastic 安装目录config/elasticsearch.yml文件，去掉network.host的注释，值改成0.0.0.0，然后重新启动 Elastic
+* 默认情况下只允许本机访问,修改 elasticsearch.yml 文件，去掉network.host的注释，值改成 0.0.0.0，然后重启 Elastic
 
 ```sh
 # /etc/elasticsearch/elasticsearch.yml
@@ -70,42 +71,28 @@ network.host: localhost
 
 sudo ufw allow from 198.51.100.0 to any port 9200
 sudo ufw enable
-
-# 开启另一端开口,返回一个 JSON 对象，包含当前节点、集群、版本等信息
-curl -X GET 'http://localhost:9200'
-curl -XGET 'http://localhost:9200/_nodes?pretty'
-
-# add
-curl -XPOST -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1' -d '{ "message": "Hello World!" }'
-
-# retrieve
-curl -X GET -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1' -d '{ "message": "Hello World!" }'
-
-# modify
-curl -X PUT -H "Content-Type: application/json"  'localhost:9200/tutorial/helloworld/1?pretty' -d '
-{
-  "message": "Hello, People!"
-}'
-curl -X GET -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1?pretty'
-
-curl -XGET 'localhost:9200/_cat/health?v&pretty'
-{
- "name" : "Reeva Payge",
- "cluster_name" : "elasticsearch",
- "version" : {
-   "number" : "2.1.0",
-   "build_hash" : "72cd1f1a3eee09505e036106146dc1949dc5dc87",
-   "build_timestamp" : "2015-11-18T22:40:03Z",
-   "build_snapshot" : false,
-   "lucene_version" : "5.3.1"
- },
- "tagline" : "You Know, for Search"
-}
 # web地址  http://192.168.88.250:9200/_plugin/head/
 ```
 
+## Lucene
+
+* 一个工具包，不是一个完整的全文检索引擎
+* 目的:为软件开发人员提供一个简单易用的工具包，以方便的在目标系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎
+* 以 Lucene 为基础建立的开源可用全文搜索引擎主要是 Solr 和 Elasticsearch
+* 倒排索引
+  * 通过分词器将每个文档内容域拆分成单独的词（词条或 Term），创建一个包含所有不重复词条的排序列表，然后列出每个词条出现在哪个文档.由属性值来确定记录的位置的结构就是倒排索引
+  - 关键词到文档 ID 的映射，每个关键词都对应着一系列文件，这些文件中都出现了关键词
+  - 倒排索引中词项根据字典顺序升序排列
+- 术语
+  * 词条（Term）:索引里面最小的存储和查询单元，对于英文来说是一个单词，对于中文来说一般指分词后的一个词。
+  - 词典（Term Dictionary）：或字典，是词条 Term 的集合。搜索引擎的通常索引单位是单词，单词词典是由文档集合中出现过的所有单词构成的字符串集合，单词词典内每条索引项记载单词本身的一些信息以及指向“倒排列表”的指针。
+  - 倒排表（Post list）：一个文档通常由多个词组成，倒排表记录的是某个词在哪些文档里出现过以及出现的位置。每条记录称为一个倒排项（Posting）。倒排表记录的不单是文档编号，还存储了词频等信息。
+  - **倒排文件（Inverted File）：**所有单词的倒排列表往往顺序地存储在磁盘的某个文件里，这个文件被称之为倒排文件，倒排文件是存储倒排索引的物理文件
+
 ## 概念
 
+* 将非结构化数据中一部分信息提取出来，重新组织，使其变得有一定结构，然后对此有一定结构的数据进行搜索，从而达到搜索相对较快的目的
+* ES 使用 Java 编写的一种开源搜索引擎，在内部使用 Lucene 做索引与搜索，通过对 Lucene 封装隐藏了 Lucene 的复杂性，取而代之的提供一套简单一致的 RESTful API
 * 对应关系
   - 关系数据库：表 ⇒ 行 ⇒ 列(Columns) schema SQL
   - Elasticsearch：索引 ⇒ 类型 ⇒ 文档 ⇒ 字段(Fields) mapping DSL
@@ -141,11 +128,23 @@ curl -XGET 'localhost:9200/_cat/health?v&pretty'
   - 预处理节点（Ingest Node）：预处理操作允许在索引文档之前，即写入数据之前，通过事先定义好的一系列的 processors（处理器）和 pipeline（管道），对数据进行某种转换、富化。
   - 配置节点类型：开发环境中一个节点可以承担多种角色。生产环境中，应该设置单一的角色的节点（dedicated node）
 * 集群 Cluster
-  - 物理概念，由多个节点组成Es集群
-  - 一个分布式系统，要满足高可用性，高可用就是当集群中有节点服务停止响应的时候，整个服务还能正常工作，也就是服务可用性；或者说整个集群中有部分节点丢失的情况下，不会有数据丢失，即数据可用性。
+  - 不需要依赖第三方协调管理组件，自身内部就实现了集群的管理功能
+  - 一个分布式系统，要满足高可用性
+    + 高可用就是当集群中有节点服务停止响应的时候，整个服务还能正常工作，也就是服务可用性
+    + 整个集群中有部分节点丢失的情况下，不会有数据丢失，即数据可用性。
   - 当用户的请求量越来越高，数据的增长越来越多的时候，系统需要把数据分散到其他节点上，最后来实现水平扩展。当集群中有节点出现问题的时候，整个集群的服务也不会受到影响。
-  - 不同的集群是通过不同的名字来区分的，默认的名字为 elasticsearch，可以在配置文件中进行修改，或者在命令行中使用 -E cluster.name=wupx 进行设定
-  - 健康程度：
+  - 物理概念，一个集群由一个或多个 Elasticsearch 节点组成，每个节点配置相同的 cluster.name 即可加入集群，默认值为 “elasticsearch”，确保不同的环境中使用不同的集群名称，否则最终会导致节点加入错误的集群。
+  - 发现机制：Zen Discovery，通过一个相同的设置 cluster.name 就能将不同的节点连接到同一个集群
+    + Zen Discovery 是 Elasticsearch 的内置默认发现模块（发现模块的职责是发现集群中的节点以及选举 Master 节点）。提供单播和基于文件的发现，并且可以扩展为通过插件支持云环境和其他形式的发现
+    + Zen Discovery 与其他模块集成，例如，节点之间的所有通信都使用 Transport 模块完成。节点使用发现机制通过 Ping 的方式查找其他节点
+    + Elasticsearch 默认被配置为使用单播发现，以防止节点无意中加入集群。只有在同一台机器上运行的节点才会自动组成集群。
+    + 如果集群的节点运行在不同的机器上，使用单播，可以为 Elasticsearch 提供一些它应该去尝试连接的节点列表。当一个节点联系到单播列表中的成员时，它就会得到整个集群所有节点的状态，然后它会联系 Master 节点，并加入集群
+    + 意味着单播列表不需要包含集群中的所有节点， 它只是需要足够的节点，当一个新节点联系上其中一个并且说上话就可以了
+    + 使用 Master 候选节点作为单播列表，只要列出三个就可以了。这个配置在 elasticsearch.yml 文件中：discovery.zen.ping.unicast.hosts: ["host1", "host2:port"].节点启动后先 Ping ，如果 discovery.zen.ping.unicast.hosts 有设置，则 Ping 设置中的 Host ，否则尝试 ping localhost 的几个端口
+    + 支持同一个主机启动多个节点，Ping 的 Response 会包含该节点的基本信息以及该节点认为的 Master 节点。
+  - 一个 Elasticsearch 服务启动实例就是一个节点（Node）。节点通过 node.name 来设置节点名称，如果不设置则在启动时给节点分配一个随机通用唯一标识符作为名称
+  - 不同的集群是通过不同的名字来区分的，默认的名字为 elasticsearch，可以在配置文件中进行修改，或者在命令行中使用 -E cluster.name=wupx 进行设定。
+  - 健康程度
     + Green：主分片与副本都正常分配
     + Yellow：主分片全部正常分配，有副本分片未能正常分配
     + Red：有主分片未能分配（例如，当服务器的磁盘容量超过 85% 时，去创建了一个新的索引）
@@ -172,9 +171,6 @@ curl -XGET 'localhost:9200/_cat/health?v&pretty'
       * **副本分片必须和相同数据的主分片不在同一个datanode，是强制要求**。如果datanode不够，副本分片将不工作。 副本分片不工作，不影响正常数据存储和读取，只是index状态为红色。
       * 用以解决数据高可用的问题，也就是说集群中有节点出现硬件故障的时候，通过副本的方式，也可以保证数据不会产生真正的丢失，因为副本分片是主分片的拷贝，在索引中副本分片数可以动态调整，通过增加副本数，可以在一定程度上提高服务查询的性能（读取的吞吐）
   - 分片设置过大的时候，也会带来副作用，一方面来说会影响搜索结果的打分，影响统计结果的准确性，另外，单个节点上过多的分片，也会导致资源浪费，同时也会影响性能。从 7.0 版本开始，ES 的默认主分片数设置从 5 改为了 1，从这个方面也可以解决 over-sharding 的问题。
-* 倒排索引
-  - 倒排索引就是关键词到文档 ID 的映射，每个关键词都对应着一系列的文件，这些文件中都出现了关键词
-  - 倒排索引中的词项根据字典顺序升序排列
 * 服务
   - 分布式存储都支持数据分片存储，分片储存需要两阶段查询。查询阶段+结果合并阶段。
   - 分布式存储都支持分片的副本存储，数据写入主分片后，需要同步、异步机制同步数据到副本分片，冗余保存。
@@ -187,11 +183,42 @@ curl -XGET 'localhost:9200/_cat/health?v&pretty'
   - 不同的 Type 应该有相似的结构（schema），举例来说，id字段不能在这个组是字符串，在另一个组是数值。这是与关系型数据库的表的一个区别。性质完全不同的数据（比如products和logs）应该存成两个 Index，而不是一个 Index 里面的两个 Type（虽然可以做到）
 
 ```sh
-# 查看当前节点的所有 Index
+# 查看当前节点所有 Index
 curl -X GET 'http://localhost:9200/_cat/indices?v'
 
 # 列出每个 Index 所包含的 Type
 curl 'localhost:9200/_mapping?pretty=true'
+
+# 开启另一端开口,返回一个 JSON 对象，包含当前节点、集群、版本等信息
+curl -X GET 'http://localhost:9200'
+curl -XGET 'http://localhost:9200/_nodes?pretty'
+
+# add
+curl -XPOST -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1' -d '{ "message": "Hello World!" }'
+
+# retrieve
+curl -X GET -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1' -d '{ "message": "Hello World!" }'
+
+# modify
+curl -X PUT -H "Content-Type: application/json"  'localhost:9200/tutorial/helloworld/1?pretty' -d '
+{
+  "message": "Hello, People!"
+}'
+curl -X GET -H "Content-Type: application/json" 'http://localhost:9200/tutorial/helloworld/1?pretty'
+
+curl -XGET 'localhost:9200/_cat/health?v&pretty'
+{
+ "name" : "Reeva Payge",
+ "cluster_name" : "elasticsearch",
+ "version" : {
+   "number" : "2.1.0",
+   "build_hash" : "72cd1f1a3eee09505e036106146dc1949dc5dc87",
+   "build_timestamp" : "2015-11-18T22:40:03Z",
+   "build_snapshot" : false,
+   "lucene_version" : "5.3.1"
+ },
+ "tagline" : "You Know, for Search"
+}
 
 # 新建一个名叫weather的 Index
 curl -X PUT 'localhost:9200/accounts/person/1' -d'
@@ -392,20 +419,20 @@ curl -X GET "localhost:9200/customer/_doc/1?pretty"
 * URL: `/index_name/_action/document_id`
 
 * 索引
-  
+
   - PUT|POST   /index/_create/id 指定Document ID，创建文档，如果ID已存在，则失败
   - POST       /index/_doc       自动生成ID，不会重复，重复提交则创建多个文档，文档版本都为1
   - Delete     /index            删除索引，索引内的文档也会被随之而删除,索引不存在返回 "404"
 
 * 文档
-  
+
   - PUT|POST   /index/_doc/id    如果ID不存在,则创建新的文档,如果ID存在,则删除现有文档后创建新的文档,版本+1,ID相同
   - POST       /index/_update/id    文档必须存在,否则更新失败,只能增量修改字段,不能减少字段,字段值可以随意修改,版本加1（字段扩充）
   - GET        /index/_doc/id    查看Document ID为1的文档
   - Delete     /index/_doc/id 删除文档,否则返回"not_found"
 
 * Bulk API 批量操作，每条语句都会进行返回结果
-  
+
   - 支持在一次API调用中，对不同索引进行操作
   - 支持四种操作 Index、Create、Update、Delete
   - 可以在 URI 中指定 Index，也可以在请求的 Playoad 中进行
@@ -415,7 +442,7 @@ curl -X GET "localhost:9200/customer/_doc/1?pretty"
 * mget 批量读取的方式，批量操作，减少了网络连接所产生的开销。提高性能
 
 * msearch Multi Serach：一个可以进行条件匹配查询的语法 GET /<index>/_msearch
-  
+
   - 从单个API中获取多个搜索结果，请求的格式类似于批量API格式，并使用换行符分隔的JSON（NDJSON）格式。最后一行数据必须以换行符 \n 结尾。每个换行符前面都可以有一个回车符 \r。向此端点发送请求时，Content-Type标头应设置为application/x-ndjson
   - 路径参数：（可选，字符串）索引名称的逗号分隔列表或通配符表达式，用于限制请求
   - 主体
@@ -784,7 +811,7 @@ output {
   - 7.0 版本之后，官方自带汉化资源文件（位于 Kibana 目录下的 node_modules/x-pack/plugins/translations/translations/）
   - 在 config 目录下修改 kibana.yml 文件，在文件中加上配置项 i18n.locale: "zh-CN"，然后重新启动 Kibana 就汉化完成
 
-```sh
+```
 # 搭建
 wget https://artifacts.elastic.co/downloads/kibana/kibana-7.1.1-darwin-x86_64.tar.gz # http://localhost:5601
 tar xf kibana-4.3.1-linux-x64.tar.gz
@@ -793,7 +820,7 @@ cd /usr/local/kibana-4.3.1-linux-x64/
 # ./config/kibana.yml
 elasticsearch.url: #   只需要修改URL为ElasticSearch的IP地址
 
-./kibana& # 后台启动
+./kibana&
 # 启动成功以后 会监听 5601端口
 
 # 可以用Kibana查看 地址 : 192.168.88.250:5601
@@ -802,82 +829,6 @@ elasticsearch.url: #   只需要修改URL为ElasticSearch的IP地址
 
 echo "kibanaadmin:`openssl passwd -apr1`" | sudo tee -a /etc/nginx/htpasswd.users
 kibanaadmin:$apr1$M2kx248q$TRbbkejn8bxFsdztudF6Z0
-
-# nginx
-# 搭建nginx之前需要安装 pcre
-tar xf nginx-1.7.8.tar.gz
-cd /usr/local/nginx
-vim /usr/local/nginx/conf/nginx.conf
-
-#user  nobody;
-worker_processes  1;
-
-#error_log  logs/error.log  notice;
-#error_log  logs/error.log  info;
-
-#pid        logs/nginx.pid;
-
-events {
-  worker_connections  1024;
-}
-
-http {
-    upstream kibana4 {  #对Kibana做代理
-           server 127.0.0.1:5601 fail_timeout=0;
-    }
-   include       mime.types;
-   default_type  application/octet-stream;
-
-   #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-   #                  '$status $body_bytes_sent "$http_referer" '
-   #                  '"$http_user_agent" "$http_x_forwarded_for"';
-
-    log_format json '{"@timestamp":"$time_iso8601",'   #配置NGINX的日志格式 json
-                       '"host":"$server_addr",'
-                       '"clientip":"$remote_addr",'
-                       '"size":$body_bytes_sent,'
-                       '"responsetime":$request_time,'
-                       '"upstreamtime":"$upstream_response_time",'
-                       '"upstreamhost":"$upstream_addr",'
-                       '"http_host":"$host",'
-                       '"url":"$uri",'
-                       '"xff":"$http_x_forwarded_for",'
-                       '"referer":"$http_referer",'
-                       '"agent":"$http_user_agent",'
-                       '"status":"$status"}';
-    access_log /var/log/nginx/access.log_json json;   #配置日志路径 json格式
-    error_log /var/log/nginx/error.log;
-
-   sendfile        on;
-   #tcp_nopush     on;
-
-   #keepalive_timeout  0;
-   keepalive_timeout  65;
-
-   #gzip  on;
-
-server {
-   listen               *:80;
-   server_name          kibana_server;
-   access_log           /var/log/nginx/kibana.srv-log-dev.log;
-   error_log            /var/log/nginx/kibana.srv-log-dev.error.log;
-
-   location / {
-       root   /var/www/kibana;
-       index  index.html  index.htm;
-   }
-
-   location ~ ^/kibana4/.* {
-       proxy_pass           http://kibana4;
-       rewrite             ^/kibana4/(.*)  /$1 break;
-       proxy_set_header     X-Forwarded-For $proxy_add_x_forwarded_for;
-       proxy_set_header     Host            $host;
-       auth_basic           "Restricted";
-       auth_basic_user_file /etc/nginx/conf.d/kibana.myhost.org.htpasswd;
-   }
-
-}
-}
 ```
 
 ## BEATS
@@ -921,10 +872,8 @@ setup.kibana:
 
 ## X-Pack
 
-keyword类型是不会分词的，直接根据字符串内容建立反向索引
-text类型在存入elasticsearch的时候，会先分词，然后根据分词后的内容建立反向索引
-
-## API
+* keyword类型是不会分词的，直接根据字符串内容建立反向索引
+* text类型在存入elasticsearch的时候，会先分词，然后根据分词后的内容建立反向索引
 
 ## 分布式
 
@@ -944,6 +893,31 @@ text类型在存入elasticsearch的时候，会先分词，然后根据分词后
   - solr xml json
   - es json
 * 近实时搜索
+
+## 优化
+
+* 磁盘 I/O
+  - 使用 SSD，比机械磁盘优秀多了
+  - 使用 RAID 0。条带化 RAID 会提高磁盘 I/O，代价显然就是当一块硬盘故障时整个就故障了。不要使用镜像或者奇偶校验 RAID 因为副本已经提供了这个功能。
+  - 使用多块硬盘，并允许 Elasticsearch 通过多个 path.data 目录配置把数据条带化分配到它们上面。
+  - 不要使用远程挂载的存储，比如 NFS 或者 SMB/CIFS。这个引入的延迟对性能来说完全是背道而驰的。
+  - 如果用的是 EC2，当心 EBS。即便是基于 SSD 的 EBS，通常也比本地实例的存储要慢。
+* 内部索引
+  - Term 太多，有了 Term Index。包含的是 Term 的一些前缀。通过 Term Index 可以快速地定位到 Term Dictionary 的某个 Offset，然后从这个位置再往后顺序查找
+  - 包含的是 Term 的一些前缀。通过 Term Index 可以快速地定位到 Term Dictionary 的某个 Offset，然后从这个位置再往后顺序查找
+* 调整配置参数
+  - 给每个文档指定有序的具有压缩良好的序列模式 ID，避免随机的 UUID-4 这样的 ID，这样的 ID 压缩比很低，会明显拖慢 Lucene。
+  - 对于那些不需要聚合和排序的索引字段禁用 Doc values。Doc Values 是有序的基于 document=>field value 的映射列表。
+  - 不需要做模糊检索的字段使用 Keyword 类型代替 Text 类型，这样可以避免在建立索引前对这些文本进行分词。
+  - 如果搜索结果不需要近实时的准确度，考虑把每个索引的 index.refresh_interval 改到 30s 。
+  - 如果在做大批量导入，导入期间可以通过设置这个值为 -1 关掉刷新，还可以通过设置 index.number_of_replicas: 0 关闭副本。别忘记在完工的时候重新开启它。
+  - 避免深度分页查询建议使用 Scroll 进行分页查询。普通分页查询时，会创建一个 from+size 的空优先队列，每个分片会返回 from+size 条数据，默认只包含文档 ID 和得分 Score 给协调节点。
+  - 如果有 N 个分片，则协调节点再对（from+size）×n 条数据进行二次排序，然后选择需要被取回的文档。当 from 很大时，排序过程会变得很沉重，占用 CPU 资源严重。
+  - 减少映射字段，只提供需要检索，聚合或排序的字段。其他字段可存在其他存储设备上，例如 Hbase，在 ES 中得到结果后再去 Hbase 查询这些字段。创建索引和查询时指定路由 Routing 值，这样可以精确到具体的分片查询，提升查询效率。路由的选择需要注意数据的分布均衡。
+* JVM 调优
+  - 确保堆内存最小值（ Xms ）与最大值（ Xmx ）的大小是相同的，防止程序在运行时改变堆内存大小。Elasticsearch 默认安装后设置的堆内存是 1GB。可通过 ../config/jvm.option 文件进行配置，但是最好不要超过物理内存的50%和超过 32GB。
+  - GC 默认采用 CMS 的方式，并发但是有 STW 的问题，可以考虑使用 G1 收集器。
+  - ES 非常依赖文件系统缓存（Filesystem Cache），快速搜索。一般来说，应该至少确保物理上有一半的可用内存分配到文件系统缓存
 
 ## [deviantony/docker-elk](https://github.com/deviantony/docker-elk)
 
