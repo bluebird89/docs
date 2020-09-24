@@ -67,10 +67,11 @@ gcc name.o adder.o hello.c
 ## 图书
 
 * 《C Primer Plus》
+    - 这地方有一个巨大的错觉，就是读完一遍《C Primer Plus》后就觉得自己会CLang了，有这种优越感的，请你尝试用CLang做个什么东西出来？然后你发现似乎真的什么也做不了，这会儿就可以步入到《Unix环境高级编程》的节奏
 * 《C和指针》
 * 《C专家编程》
 * 《debuging with gdb》（中文版）
-* 陈皓 《跟我一起写makefile》
+* 《Unix环境高级编程》
 * [C Internals](http://www.avabodh.com/cin/cin.html)
 
 ## 工具
@@ -80,3 +81,4 @@ gcc name.o adder.o hello.c
 * [hellogcc/100-gdb-tips](https://github.com/hellogcc/100-gdb-tips):A collection of gdb tips. 100 maybe just mean many here.
 * [Source Insight](https://www.sourceinsight.com/)
 * ccache：高速C/C++编译缓存工具，反复编译内核非常有用。使用起来也非常方便
+* 陈皓 《跟我一起写makefile》
