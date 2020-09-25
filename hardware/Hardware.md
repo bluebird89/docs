@@ -24,7 +24,6 @@
 * Libratone小鸟音响
 * Computer（大尺寸屏幕,甚至两块屏幕）
 
-
 ## 显示器
 
 * 明基 EW2780
@@ -161,6 +160,10 @@ EndSection
 ## 路由
 
 * PHICOMM 斐讯K2p A2
+
+## 课程
+
+* [CS107e: Computer Systems from the Ground Up](http://cs107e.github.io/)
 
 ## 工具
 

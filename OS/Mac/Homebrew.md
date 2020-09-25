@@ -57,13 +57,11 @@ CORE_TAP_REPO = "git://mirrors.ustc.edu.cn/homebrew-core.git".freeze
 # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-# 使用brew的国内镜像
-cd $home && brew update
-
 echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile(.zshrc)
-brew doctor
+
 brew -v|version
 brew config
+brew doctor
 
 brew tap homebrew/services # brew 服务管理
 # brew tap caskroom/cask
@@ -108,14 +106,8 @@ brew prune
 rm -rf Library .git .gitignore bin/brew README.md share/man/man1/brew
 rm -rf ~/Library/Caches/Homebrew
 
-brew cask search # 列出所有可以被安装的软件
-brew cask search name # 查找所有和 name相关的应用
-brew cask install name
-brew cask info app # 下载安装软件(报错的话用bash)
-brew cask uninstall name
+brew cask search|install|info|uninstall name
 brew cask list # 列出应用的信息
-
-brew cask cleanup
 
 # plugins
 brew cask install \
@@ -157,8 +149,7 @@ brew cask install \
 ##
 # Homebrew
 ##
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 ##
 # Homebrew bash completion
@@ -172,7 +163,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 ## 源管理
 
-```
+```sh
 # 替换清华 https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/
 git -C "$(brew --repo)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
 git -C "$(brew --repo homebrew/core)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
@@ -196,7 +187,14 @@ git -C "$(brew --repo homebrew/core)" remote set-url origin https://github.com/H
 git -C "$(brew --repo homebrew/cask)" remote set-url origin https://github.com/Homebrew/homebrew-cask.git
 
 brew update
+
 source ~/.zshrc
+```
+
+## 服务管理
+
+```sh
+brew services start|stop|run mysql
 ```
 
 ## 问题

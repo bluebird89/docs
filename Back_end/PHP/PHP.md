@@ -249,6 +249,11 @@ Hugepagesize:       2048 kB
 * 程序 `/usr/local/Cellar/php71/7.1.12_23`
 * 配置 `/usr/local/etc/php/7.1/`
 * 通过php-fpm进程运行 `/usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx`
+* built-in web server
+  - php_sapi_name() return cli-server:the current script is served with the PHP built-in server
+  - performs suboptimally because it handles one request at a time, and each HTTP request is blocking
+  - supports only a limited number of mimetypes
+  - limited URL rewriting with router scripts.
 * php71卸载后php-fpm仍然运行
   - `brew services stop php`
 * 准备
@@ -373,6 +378,8 @@ libsqlite3-dev libssl-dev libcurl4-openssl-dev libpng-dev libonig-dev libzip-dev
 PhpStorm: Settings -> Language & Frameworks -> PHP->CLI Interpreter->From Docker, Vagrant, VM, WSL, Remote...
 Composer
 TestFramework -> PHPUnit
+
+php -S localhost:8000 -c app/config/php.ini router.php
 ```
 
 ### 扩展
@@ -2262,7 +2269,7 @@ pecl channel-update pecl.php.net
 * [The Best PHP Books](https://github.com/manithchhuon/the-best-php-books)
 * 《[Head First PHP & MySQL（中文版）](https://www.amazon.cn/gp/product/B004R1QIJU)》
 * 《PHP and MySQL Web Development PHP与MySQL程序设计(第5版)》
-* Modern PHP
+* [Modern PHP](https://github.com/codeguy/modern-php)
 * 深入理解PHP:高级技巧、面向对象与核心技术(原书第3版)
 * [php-objects-patterns-practice-13](https://github.com/apress/php-objects-patterns-practice-13):Source code for 'PHP Objects, Patterns, and Practice' by Matt Zandstra
   - 《[深入PHP：面向对象、模式与实践（第3版）](https://www.amazon.cn/gp/product/B005D6IRRY)》

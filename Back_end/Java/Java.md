@@ -847,7 +847,7 @@ public class Puppy{
 * Iterable 接口:允许对象成为 for-each 循环的目标
 
 * Collection 是一个顶层接口，用来定义集合的约定
-  
+
   - List
   - Set 对add、equals、hashCode  方法提供了额外的标准
     + SortedSet 接口直接继承于 Set 接口，使用 Comparable 对元素进行自然排序或者使用 Comparator 在创建时对元素提供定制的排序规则。set 的迭代器将按升序元素顺序遍历集合。
@@ -856,46 +856,46 @@ public class Puppy{
 * Map 一个支持 key-value 存储的对象，不能包含重复的 key，每个键最多映射一个值。这个接口代替了Dictionary 类，Dictionary 是一个抽象类而不是接口。
 
 * ArrayList 实现了 List 接口的可扩容数组(动态数组)，内部基于数组实现  `public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAccess, Cloneable, java.io.Serializable {...}`
-  
+
   - 可以实现所有可选择的列表操作，允许所有的元素，包括空值。ArrayList 还提供了内部存储 list 的方法，它能够完全替代 Vector，只有一点例外，ArrayList 不是线程安全的容器。
   - 有一个容量的概念，这个数组的容量就是 List 用来存储元素的容量
   - 不是线程安全的容器，如果多个线程中至少有两个线程修改了 ArrayList 的结构的话就会导致线程安全问题，作为替代条件可以使用线程安全的 List，应使用 Collections.synchronizedList 。
   - 具有 fail-fast 快速失败机制，能够对 ArrayList 作出失败检测。当在迭代集合的过程中该集合在结构上发生改变的时候，就有可能会发生 fail-fast，即抛出 ConcurrentModificationException异常
 
 * Vector
-  
+
   - 同 ArrayList 一样，都是基于数组实现的
   - Vector 是一个线程安全的容器，它对内部的每个方法都简单粗暴的上锁，避免多线程引起的安全性问题，但是通常这种同步方式需要的开销比较大，因此，访问元素的效率要远远低于 ArrayList。
   - ArrayList 扩容后的数组长度会增加 50%，而 Vector 的扩容长度后数组会增加一倍。
 
 * LinkedList 双向链表，允许存储任何元素(包括 null )
-  
+
   - 所有的操作都可以表现为双向性的，索引到链表的操作将遍历从头到尾，视哪个距离近为遍历顺序。
   - 注意这个实现也不是线程安全的，如果多个线程并发访问链表，并且至少其中的一个线程修改了链表的结构，那么这个链表必须进行外部加锁。或者使用
 
 * Stack
-  
+
   - 继承了 Vector 类，提供了通常用的 push 和 pop 操作，以及在栈顶的 peek 方法，测试 stack 是否为空的 empty 方法，和一个寻找与栈顶距离的 search 方法
   - 一个更完善，可靠性更强的 LIFO 栈操作由 Deque 接口和他的实现提供
 
 * HashSet 是 Set 接口的实现类，由哈希表支持(实际上 HashSet 是 HashMap 的一个实例)。它不能保证集合的迭代顺序。这个类允许 null 元素
-  
+
   - 这个实现不是线程安全的。如果多线程并发访问 HashSet，并且至少一个线程修改了set，必须进行外部加锁。或者使用 Collections.synchronizedSet() 方法重写。
   - 支持 fail-fast 机制
 
 * TreeSet 一个基于 TreeMap 的 NavigableSet 实现。这些元素使用他们的自然排序或者在创建时提供的Comparator 进行排序，具体取决于使用的构造函数。
-  
+
   - 此实现为基本操作 add,remove 和 contains 提供了 log(n) 的时间成本。
   - 注意这个实现不是线程安全的。如果多线程并发访问 TreeSet，并且至少一个线程修改了 set，必须进行外部加锁。或者使用
 
 * LinkedHashSet 继承于 Set接口的 Hash 表和 LinkedList 的实现。这个实现不同于 HashSet 的是它维护着一个贯穿所有条目的双向链表。此链表定义了元素插入集合的顺序。注意：如果元素重新插入，则插入顺序不会受到影响。
-  
+
   - LinkedHashSet 有两个影响其构成的参数：初始容量和加载因子。它们的定义与 HashSet 完全相同。但请注意：对于 LinkedHashSet，选择过高的初始容量值的开销要比 HashSet 小，因为 LinkedHashSet 的迭代次数不受容量影响。
   - 注意 LinkedHashSet 也不是线程安全的，如果多线程同时访问 LinkedHashSet，必须加锁，或者通过使用
   - 该类也支持fail-fast机制
 
 * PriorityQueue:AbstractQueue 的实现类，优先级队列的元素根据自然排序或者通过在构造函数时期提供Comparator 来排序，具体根据构造器判断。PriorityQueue 不允许 null 元素。
-  
+
   - 队列的头在某种意义上是指定顺序的最后一个元素。队列查找操作 poll,remove,peek 和 element 访问队列头部元素。
     -优先级队列是无限制的，但具有内部 capacity，用于控制用于在队列中存储元素的数组大小。
     -该类以及迭代器实现了 Collection、Iterator 接口的所有可选方法。这个迭代器提供了 iterator() 方法不能保证以任何特定顺序遍历优先级队列的元素。如果你需要有序遍历，考虑使用 Arrays.sort(pq.toArray())。
@@ -904,14 +904,14 @@ public class Puppy{
 * HashMap 利用哈希表原理来存储元素的集合，并且允许空的 key-value 键值对。HashMap 是非线程安全的，也就是说在多线程的环境下，可能会存在问题，而 Hashtable 是线程安全的容器。HashMap 也支持 fail-fast 机制。HashMap 的实例有两个参数影响其性能：初始容量 和加载因子。可以使用 Collections.synchronizedMap(new HashMap(...)) 来构造一个线程安全的 HashMap。
 
 * TreeMap 类
-  
+
   - 一个基于 NavigableMap 实现的红黑树。这个 map 根据 key 自然排序存储，或者通过 Comparator 进行定制排序。
   - TreeMap 为 containsKey,get,put 和remove方法提供了 log(n) 的时间开销。
   - 注意这个实现不是线程安全的。如果多线程并发访问 TreeMap，并且至少一个线程修改了 map，必须进行外部加锁。这通常通过在自然封装集合的某个对象上进行同步来实现，或者使用 SortedMap m = Collections.synchronizedSortedMap(new TreeMap(...))。
   - 这个实现持有fail-fast机制。
 
 * LinkedHashMap 类
-  
+
   - LinkedHashMap 是 Map 接口的哈希表和链表的实现。这个实现与 HashMap 不同之处在于它维护了一个贯穿其所有条目的双向链表。这个链表定义了遍历顺序，通常是插入 map 中的顺序。
   - 它提供一个特殊的 LinkedHashMap(int,float,boolean) 构造器来创建 LinkedHashMap，其遍历顺序是其最后一次访问的顺序。
   - 可以重写 removeEldestEntry(Map.Entry) 方法，以便在将新映射添加到 map 时强制删除过期映射的策略。
@@ -921,20 +921,20 @@ public class Puppy{
   - 个实现持有fail-fast机制。
 
 * Hashtable 类
-  
+
   - Hashtable 类实现了一个哈希表，能够将键映射到值。任何非空对象都可以用作键或值。
   - 此实现类支持 fail-fast 机制
   - 与新的集合实现不同，Hashtable 是线程安全的。如果不需要线程安全的容器，推荐使用 HashMap，如果需要多线程高并发，推荐使用 ConcurrentHashMap。
 
 * IdentityHashMap 类
-  
+
   - IdentityHashMap 是比较小众的 Map 实现了。
   - 这个类不是一个通用的 Map 实现！虽然这个类实现了 Map 接口，但它故意违反了 Map 的约定，该约定要求在比较对象时使用 equals 方法，此类仅适用于需要引用相等语义的极少数情况。
   - 同 HashMap，IdentityHashMap 也是无序的，并且该类不是线程安全的，如果要使之线程安全，可以调用Collections.synchronizedMap(new IdentityHashMap(...))方法来实现。
   - 支持fail-fast机制
 
 * WeakHashMap 类
-  
+
   - WeakHashMap 类基于哈希表的 Map 基础实现，带有弱键。WeakHashMap 中的 entry 当不再使用时还会自动移除。更准确的说，给定key的映射的存在将不会阻止 key 被垃圾收集器丢弃。
   - 基于 map 接口，是一种弱键相连，WeakHashMap 里面的键会自动回收
   - 支持 null 值和 null 键。
@@ -1099,7 +1099,7 @@ static void cacheException() throws Exception{
 * UML
 
 * 基础知识：
-  
+
   - Java反射：Field、Type
   - Java代理：proxy、cglib
   - Java线程：Thread、Runnable、ExecutorService、Callable、Future、ThreadPoolExecutor
@@ -1125,19 +1125,19 @@ static void cacheException() throws Exception{
   - 监控：zabbix、prometheus
 
 * 数据库：
-  
+
   - Mysql：主备、读写分、横向纵向拆分、调优、语法、索引、优化
   - Redis：主备、读写分离、持久化、命中和过期
   - MogoDB：集合、文档、文件、索引、聚合函数、分片
 
 * 消息队列：
-  
+
   - 概念：topic、message、queue、producer、consumer、broker
   - 消息类型：顺序消息、定时消息、延迟消息、事务消息
   - 消息回溯、消息堆积、消息拉取、消息签收
 
 * 高并发：
-  
+
   - 服务拆分：微服务化、分布式事务、数据库水平垂直拆分
   - 服务治理：zookeeper、rpc
   - 消息队列：异步处理、最终一致性
@@ -1152,7 +1152,7 @@ static void cacheException() throws Exception{
     + [Java并发](https://mp.weixin.qq.com/s?__biz=MjM5MzA1Mzc3Nw==&mid=2247484908&idx=1&sn=fe9004cd8369cabf448c9f43466bad0f)
 
 * 高可用：
-  
+
   - 负载均衡：算法、动静分离、切换、检测
   - 超时重试：超时时间、重试机制和策略
   - 限流：算法、容器、nginx、防止抖动
@@ -1169,6 +1169,21 @@ static void cacheException() throws Exception{
 * [volatile](https://mp.weixin.qq.com/s/x78EZQ0E0fgKSwGdK5vtwg)
 
 jvm原理，spring+springmvc原理及源码，linux，mysql事务隔离与锁机制，mongodb，http/tcp，多线程，分布式架构（dubbo，dubbox，spring cloud），弹性计算架构，微服务架构（springboot+zookeeper+docker+jenkins），java性能优化，以及相关的项目管理等等。
+
+## Java Agent
+
+* Java代理是为应用程序提供检测功能的软件组件。在代理的上下文中 ，检测提供了重新定义在运行时加载的类内容的功能。
+* [Jacoco](https://www.eclemma.org/jacoco/) 代理是 Java 代理之一，可以在 JVM 加载类文件时标记类代码，并在调用任何代码后及时计算覆盖范围。可以转储覆盖数据并上传到SonarQube以使其可视化，获取最新的Jacoco代理
+* 使用
+  - 需要使用以下两个文件：
+    + lib / jacocoagent.jar –> Java代理用以标记代码
+    + lib / jacococli.jar –> CLI转储覆盖率数据并生成报告
+  - 宿主应用程序启动参数设置
+    + `java -javaagent:/lib/jacocoagent.jar=includes=*,output=tcpserver,port=6300,address=localhost,append=true -jar MyBackendService.jar`
+    + 通过 Docker 运行后端服务:在 docker 镜像中构建jacocoagent
+* 转储覆盖率数据: `java -jar /lib/jacococli.jar dump --address localhost --port 6300 --destfile ./coverage.exec`
+* 生成可视化报告: `java -jar /lib/jacococli.jar report ./coverage.exec --classfiles ./build/classes --html htmlReportFolder --xml xmlReportFileName.xml`
+* 报告上传到SonarQube `./mvnw sonar:sonar -Dsonar.coverage.jacoco.xmlReportPaths=./xmlReportFileName.xml -Dsonar.java.binaries=./build/classes -Dsonar.sources=./src/main/java -Dsonar.inclusions="**/*Api.java,**/*Controller.java"`
 
 ## Lombok
 

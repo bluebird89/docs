@@ -58,7 +58,7 @@
   - 进行检索词的意图理解、词条切分、同义词替换、语法纠错等处理，再根据这些检索词去获取数据，为用户找到心中所想的网页
   - 用户的查询词、分词、同义词转换、语义理解等等，去揣摩用户的真实意图、查询重点才能返回正确的结果
 
-## 搜索引擎优化 SEO，即Search Engine Optimization
+## 搜索引擎优化 SEO Search Engine Optimization
 
 * 一种通过分析搜索引擎的排名规律，了解各种搜索引擎怎样进行搜索、怎样抓取互联网页面、怎样确定特定关键词的搜索结果排名的技术
 
@@ -68,12 +68,19 @@
 
 ## 技巧
 
-* 站内搜索 keyword site:baidu.com
-* 标题搜索 intitle：keyword
+* 站内搜索 keyword site:baidu.com site:.gov covid-19
+* 标题搜索 intitle:keyword
 * 替代词 理想*义
-* 关键词不打散,按照关键词的先后顺序查找网页内容 “keyword”
+* Exact matches only “keyword”
 * 文件类型 keyword filetype:pdf
-* 短横（-）：排除你不想要的结果
+* 排除不想要结果 Mercedes -Benz
+* google
+  - stopwatch|timer
+  - color picker
+  - 6 inches to cm
+  - what is my ip|my ip
+  - Japan time 5pm
+  - @character
 
 ## 搜索和推荐
 
