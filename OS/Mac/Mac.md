@@ -1,6 +1,6 @@
 # MAC
 
-Mac：最大优势是 GUI 和命令行的完美结合
+最大优势 GUI 和命令行的完美结合
 
 ## 硬件
 
@@ -14,7 +14,7 @@ Mac：最大优势是 GUI 和命令行的完美结合
 ## 系统配置
 
 * 开启鼠标更多功能
-* 将功能键(F1-F12)的行为设置为标准的功能键
+* 功能键(F1-F12)的行为设置为标准功能键
 * dock 停在左边
 * iphone,只能同步一台设备itunes配置
 * 设置未收录的开发者应用`sudo spctl --master-disable`
@@ -22,51 +22,28 @@ Mac：最大优势是 GUI 和命令行的完美结合
 ### 配置
 
 * [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
-
 * [skwp/dotfiles](https://github.com/skwp/dotfiles) YADR - The best vim,git,zsh plugins and the cleanest vimrc you've ever seen
-
 * [holman/dotfiles](https://github.com/holman/dotfiles)@holman does dotfiles
-
 * [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files.
-
 * [donnemartin/dev-setup](https://github.com/donnemartin/dev-setup)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
-
 * [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
-
 * [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
-
 * [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
-
 * [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
-
 * [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
-
 * [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
-
 * [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(<http://sourabhbajaj.com/mac-setup/>) 推荐
-
 * [mac-setup/](http://sourabhbajaj.com/mac-setup/) the basics of setting up a development environment on a new Mac
-
 * [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
-
 * [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
-
 * [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
-
 * [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
-
 * [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
-
 * [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
-
 * [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
-
 * [Mac OS X 配置指南](https://wild-flame.github.io/guides/)
-
 * [phodal/setup.guide](https://github.com/phodal/setup.guide)
-
 * 参考
-  
   * [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
 
 ```sh
@@ -77,7 +54,7 @@ sudo trimforce enable
 ## 启动项
 
 * 配置目录
-  
+
   - ~/Library/Preferences/ – （当前用户设置的进程）
   - ~/Library/LaunchAgents/ – （当前用户的守护进程）
   - /Library/LaunchAgents/ – （管理员设置的用户进程）
@@ -85,9 +62,8 @@ sudo trimforce enable
   - /System/Library/LaunchAgents/ – （Mac操作系统提供的用户进程）
   - /System/Library/LaunchDaemons/ – （Mac操作系统提供的系统守护进程）
 
-* 在 Mac 设备启动时通过 Command + V 或者 Command +S 这类快捷键改变启动行为。但是除此以外，通过 NVRAM 或第三方引导程序（如 Clover）中也可以设置启动参数。macOS 内置了许多启动参数，可以用于专业用户调试或排除故障。可以通过 nvram 工具设置启动参数： `sudo nvram boot-args="-v"`
-
-* 对于使用第三方引导程序（如 Clover 等）的用户来说，可以在 config.plist 文件、或者在启动菜单中设置引导参数。
+* 在 Mac 设备启动时通过 Command + V 或者 Command +S 快捷键改变启动行为。除此外，通过 NVRAM 或第三方引导程序（如 Clover）中也可以设置启动参数。macOS 内置了许多启动参数，可以用于专业用户调试或排除故障。可以通过 nvram 工具设置启动参数： `sudo nvram boot-args="-v"`
+* 对于三方引导程序（如 Clover 等）的用户来说，可以在 config.plist 文件、或者在启动菜单中设置引导参数。
 - - v：以「啰嗦模式」启动，等价于 Mac 设备上的快捷键 Command + V。
   - -x：以「安全模式」启动，等价于 Mac 设备上的长按 Shift 键。在这一模式下 macOS 会加载尽可能少的内核扩展（kext）文件。
   - -s：以「单用户模式」启动，等价于 Mac 设备上的快捷键 Command + S。这一模式将会启动终端模式，你可以用这种方式修复你的系统。
@@ -167,21 +143,18 @@ sudo trimforce enable
   </dict>
 </plist>
 
-# 查看服务名
+# 查看服务
 launchctl list | grep anydesk
 # 停止服务
 launchctl stop com.philandro.anydesk
 # 移除服务
 launchctl unload com.philandro.anydesk
-
 # 添加服务
 launchctl load -w ~/Library/LaunchAgents/memcached.plist
 
 ## sudo免输入密码
-sudo chmod u+w /etc/sudoers
-sudo vi /etc/sudoers
+sudo visudo
 %admin ALL=(ALL) NOPASSWD: ALL
-sudo chmod u-w /etc/sudoers
 ```
 
 ### 命令行
@@ -200,14 +173,12 @@ pbpaste
 for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World';done
 ```
 
-## 触控板
+## [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
 
 *　轻拍来点按
 *　辅助点按
 *　查找
 *　三指拖移
-
-* [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
 * 查询单词释义：鼠标放在单词上，不用选中，直接长按，再抬起
 * 双手轻按屏幕：唤醒右键
 * 双指旋转：改变照片的显示方向
@@ -220,7 +191,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * 桌面分配：对应不同应用场景
 * 聚焦搜索：command+空格，直接弹出搜索内容，再点击command+B即可跳转到Safari里查看搜索内容
 * 画中画功能：在视频网站中点击右键，鼠标挪到一旁，再点一下右键，选择“画中画’’功能，视频画面大小可自由拖拽
-* Option按键的使用场景：
+* Option 使用场景：
   - 拖拽文件时按住option，即可复制粘贴当前所拖拽文件
   - 按菜单栏时，按住option，会出现多种功能；按住Wi-Fi图标同时按住option，可显示当前IP信息
   - 按住option同时按住通知中心的图标，系统进入勿扰模式
@@ -250,7 +221,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 ## 软件
 
 * 安装
-  
+
   - 可以通过plist文件安装软件
   - app store安装
   - 互联网下载：下载dmg，会打开安装包，需将app图标拖到application中（文件位置/Users/henry/Library/Application Support）
@@ -258,13 +229,13 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - `brew cask install firefox`
 
 * 卸载
-  
+
   - launchpad 长按
   - finder 找到移动到垃圾桶
   - 通过appcleaner彻底清除
 
 * 系统
-  
+
   - [airmail](http://airmailapp.com/):mail client
   - [Hazel](https://www.noodlesoft.com/):Automated Organization for Your Mac.
   - [Gemini](https://macpaw.com/gemini):The intelligent duplicate file finder
@@ -296,13 +267,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - [sindresorhus/quick-look-plugins ](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
   - TotalFinder - macOS 上最强的 Finder 增强软件
   - uTools - 比 Alfred 更简洁的工作流
-
-* vpn
-  
-  - Tunnelblick_3.7.2_build_4850：点击配置文件（xxx.tblk 或者 .conf）就可以加载陪配置
-
 * 设计
-  
   - UI:sketch sketch box
   - Axure：原型工具
   - CmapTools：概念图
@@ -310,7 +275,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - Snipaste - 灵活的截图 + 贴图软件
 
 * 写作
-  
   - Latex
   - Alternote(evernote简单客户端)
   - Quiver：笔记软件
@@ -320,25 +284,20 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - [freemind](http://freemind.sourceforge.net/wiki/index.php/Download)
   - Upad
   - [Bear](https://bear.app/):Write beautifully on iPhone, iPad, and Mac
-
 * 下载
-  
   - bitlord
   - Folx
   - [CodeTips/BaiduNetdiskPlugin-macOS](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~
 
 * 工具
-  
-  - [CheatSheet] 长按⌘键可以显示当前程序快捷键
+
+  - [CheatSheet]() 长按⌘键可以显示当前程序快捷键
   - [flux](https://justgetflux.com/) 屏幕颜色控制
   - [moom](https://manytricks.com/moom/)使用体验优异的窗口管理软件
 
 * 窗口管理
-  
   - [Spectacle](link):控制窗口
-  
   - [sizeup](link) 窗口管理软件
-    
     + control+option+command + M ： 使当前窗口全屏
     + control+option+command + 方向键上键 ： 使当前窗口占用当前屏幕上半部分
     + control+option+command + 方向键下键 ： 使当前窗口占用当前屏幕下半部分
@@ -346,31 +305,31 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     + control+option+command + 方向键右键 ： 使当前窗口占用当前屏幕右半部分
     + control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
     + control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
-  
+
   - [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
-  
+
   - [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):essentially an IDE for automation
-  
+
   - [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
-  
+
   - [Helium](http://heliumfloats.com/):A floating browser window for OS X
-  
+
   - Android file transfer
-  
+
   - SensibleSideButtons - 在 macOS 上使用鼠标上的前进后退按键
 
 * Pod
-  
+
   - [insidegui/PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
 
 * Web开发
-  
+
   - [Paw](https://paw.cloud/):The most advanced API tool for Mac
   - MAMP:基础版不支持自定义
   - [yichengchen/clashX](https://github.com/yichengchen/clashX):A rule based custom proxy with GUI for Mac base on clash.
 
 * 沟通
-  
+
   - [Textual 7](<Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.>)
   - [OmniGraffle](https://www.omnigroup.com/omnigraffle)
   - slack
@@ -379,13 +338,13 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - IM+
 
 * RSS
-  
+
   - [Reeder 3](http://reederapp.com/mac/)
   - feedly
   - leaf
 
 * 管理
-  
+
   - OmniOutliner
   - OmniPlan
   - OmniFocus：GTD思路的应用
@@ -402,7 +361,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - Kanban
 
 * 文档
-  
+
   - [dash](https://kapeli.com/dash):语言文档
   - [TRANSMIT 5](https://www.panic.com/transmit/):Upload, download, and manage files on tons of servers with an easy, familiar, and powerful UI. It’s quite good.
   - Cloud Outline
@@ -410,23 +369,23 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   * Clearview - 支持 PDF, EPUB, CHM, MOBI 的免费阅读器
 
 * 音乐
-  
+
   - 播放器：MPlayerX
   - [beardedspice/beardedspice](https://github.com/beardedspice/beardedspice):Mac Media Keys for the Masses <http://beardedspice.github.io>
   - [Noizio](http://noiz.io/):turn on the sound and allow yourself to become engulfed in the tranquil sounds of nature.
 
 * 图片
-  
+
   - 修图Snapseed
   - iShot
   - [Pixave](http://www.littlehj.com/mac/) - Image/GIF/Video organizer
 
 * 录屏
-  
+
   - [wulkano/kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology https://getkap.co
 
 * 阅读
-  
+
   - ibooks：阅读支持pdf与epub，可以通过icloud同步
   - iTunes Movie Trailers
   - mounty:win的移动硬盘
@@ -434,7 +393,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
 
 * 代码
-  
+
   - Xcode
   - [SnippetsLab](https://www.renfei.org/snippets-lab/):SnippetsLab is an easy-to-use code snippets manager
   - [PHPstrom](https://www.jetbrains.com/phpstorm/download/download-thanks.html?pl)
@@ -443,19 +402,19 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - [b4winckler/macvim](https://github.com/b4winckler/macvim)Vim - the text editor - for Mac OS X
 
 * 虚拟机
-  
+
   - Parallels Desktop
 
 * 安全
-  
+
   - WireGuard for macOS
 
 * Screensaver
-  
+
   - Apple TV Aerial
 
 * 软件订阅
-  
+
   - [setapp](https://setapp.com)The first subscription service for Mac apps.
 
 * [LyricsX](https://github.com/MichaelRow/Lyrics)
@@ -463,7 +422,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * [fliqlo](https://fliqlo.com/):A flip Clock screensavers
 
 * 说明
-  
+
   - strace在linux下用来跟踪某个进程的系统调用，dtruss
 
 * [JadenGeller/Helium](https://github.com/JadenGeller/Helium):A floating browser window for OS X <http://heliumfloats.com>
@@ -497,7 +456,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * [Lunar](https://github.com/alin23/Lunar)
 
 * 参考
-  
+
   - [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
 
 ### screensavers
@@ -533,12 +492,12 @@ route add [-net|-host] [网域或主机] netmask [mask] [gw|dev]
 
 #### iTerm2
 
-* iTerm2 的标签的颜色会变化，以指示该 tPab 当前的状态。当该标签有新输出的时候，标签会变成洋红色；新的输出长时间没有查看，标签会变成红色。可在设置中关掉该功能。
+* iTerm2 的标签的颜色会变化，以指示该 tab 当前的状态。当该标签有新输出的时候，标签会变成洋红色；新的输出长时间没有查看，标签会变成红色。可在设置中关掉该功能。
 * 在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等
 
 ## 快捷键
 
-* ## 键位
+* 键位
   - Command ⌘
   - Shift ⇧
   - Option ⌥
@@ -562,8 +521,8 @@ route add [-net|-host] [网域或主机] netmask [mask] [gw|dev]
 * command+delete，即删除选中文件
 * command+双击选中的文件，即打开文件
 * 隐藏dock：option + command + d
-* 隐藏最前面的应用的窗口 Command-H
-* 要查看最前面的应用但隐藏所有其他应用： option + command + h
+* 隐藏最前面应用窗口 Command-H
+* 查看最前面应用但隐藏所有其他应用： option + command + h
 * 强制退出： Option-Command-Esc
 * control + command + Space:打开emoji
 * Command-Shift-G：调出窗口，可输入绝对路径直达文件夹
@@ -955,7 +914,7 @@ lsof -i tcp:8081  # 端口查看
 
 ## 远程登录
 
-开启设置-〉共享-〉远程登录
+* 开启设置-〉共享-〉远程登录
 
 ## [lra/mackup](https://github.com/lra/mackup)
 
@@ -1044,6 +1003,7 @@ brew switch icu4c 62.1
 * [basecamp/pow](https://github.com/basecamp/pow):Zero-configuration Rack server for Mac OS X http://pow.cx/v
 * macOS Server拥有众多强大工具可以让整个团队更高效地分享信息，分工合理第一合作
 * [ sickcodes / Docker-OSX ](https://github.com/sickcodes/Docker-OSX):Mac in Docker! Run near native OSX-KVM in Docker! X11 Forwarding!
+* [sindresorhus / quick-look-plugins](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
 
 ## 参考
 

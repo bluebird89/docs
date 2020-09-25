@@ -28,80 +28,78 @@ brew services start php
 
 ## 原理
 
-* socket 是Nginx 与 PHP 的通信载体
-  - fastcgi_pass所配置的内容，是告诉Nginx接收到用户请求以后该往哪里转发
-  - fastcgi 是实现 webserver 协议的一种实现
+* socket 是 Nginx 与 PHP 的通信载体
+  - fastcgi_pass 所配置内容告诉 Nginx 接收到用户请求以后该往哪里转发
+  - fastcgi 是 webserver 协议的一种实现
+* 进程模型
+  - 预派生子进程模式，Apache 就是采用该模式，程序启动后就会创建N个进程，每个子进程进入 Accept，等待新的连接进入
+  - 当客户端连接到服务器时，其中一个子进程会被唤醒，开始处理客户端请求，并且不再接受新的TCP连接
+  - 来一个请求就 fork 一个进程，进程的开销是非常大的，会大大降低吞吐率，并发数由进程数决定
+  - 当此连接关闭时，子进程会释放，重新进入Accept，参与处理新的连接
 * 运作模式
-  - 使用 Nginx 提供 HTTP 服务（Apache 同理），所有客户端发起的请求最先抵达的都是 Nginx
+  - Nginx 提供 HTTP 服务（Apache 同理），所有客户端发起的请求最先抵达的都是 Nginx
   - Nginx 通过 FastCGI 协议将请求转发给 PHP-FPM 处理
-  - PHP-FPM 的 Master进程 会为每个请求分配一个 Worker进程来处理
-    + 在启动阶段设置 HTTP 环境变量，然后通过 PHP 核心代码初始化所有已经启用的 PHP 模块（即扩展），并对此次请求上下文进行初始化，完成，这些操作后再调用 Zend 引擎来编译并执行业务逻辑代码
-    + 等待 PHP 脚本的解析，等待业务处理的结果返回，完成后回收子进程，这整个的过程是阻塞等待的，也就意味着 PHP-FPM 的进程数有多少能处理的请求也就是多少，假设 PHP-FPM 有 200 个 Worker进程，一个请求将耗费 1 秒的时间，那么简单的来说整个服务器理论上最多可以处理的请求也就是 200 个，QPS 即为 200/s，
-    + 在高并发的场景下，这样的性能是不够的，尽管可以利用 Nginx 作为负载均衡配合多台 PHP-FPM 服务器来提供服务，但由于 PHP-FPM 的阻塞等待的工作模型，一个请求会占用至少一个 MySQL 连接，多节点高并发下会产生大量的 MySQL 连接，而 MySQL 的最大连接数默认值为 100，尽管可以修改，但显而易见该模式没法很好的应对高并发的场景
-  - Zend 引擎会检查 OpCode 缓存，如果代码片段已经缓存，则从缓存中读取并执行，否则还要编译成 OpCode 并缓存后才能执行
+  - Master 进程为每个请求分配一个 Worker 进程来处理
+  - 在启动阶段设置 HTTP 环境变量，然后通过 PHP 核心代码初始化所有已经启用的 PHP 模块（即扩展），并对此次请求上下文进行初始化，完成这些操作后再调用 Zend 引擎来编译并执行业务逻辑代码
+  - 等待 PHP 脚本解析，等待业务处理的结果返回，完成后回收子进程，这整个的过程是阻塞等待的，也就意味着 PHP-FPM 的进程数有多少能处理的请求也就是多少，假设 PHP-FPM 有 200 个 Worker进程，一个请求将耗费 1 秒的时间，那么简单的来说整个服务器理论上最多可以处理的请求也就是 200 个，QPS 即为 200/s
+  - Zend 引擎会检查 OpCode 缓存，如果代码片段已经缓存，则从缓存中读取并执行，否则编译成 OpCode 并缓存后执行
   - 代码执行完成后，会将处理结果打印或着发送 HTTP 响应给客户端，然后 PHP 底层代码会执行请求关闭及模块关闭函数进行后续清理工作，最后再回到 SAPI 层，调用 PHP-FPM 对应的关闭函数，从而完成此次请求的所有流程
   - 过程周而复始，每次用户有新请求过来都会从头执行一遍，所有的环境初始化、模块初始化、请求初始化以及 Laravel 应用的启动过程，乃至后续请求关闭、模块关闭、PHP-FPM 关闭
-* 在 Nginx + PHP-Fpm 模式下开发非常简单 不用担心内存泄露
-  - nginx基于epoll事件模型，一个worker同时可处理多个请求
-  - fpm-worker在同一时刻可处理一个请求
+* 在 Nginx + PHP-Fpm 模式下开发非常简单,不用担心内存泄露
+  - nginx 基于 epoll 事件模型，一个 worker 同时可处理多个请求, 但在同一时刻可处理一个请求
   - fpm-worker每次处理请求前需要重新初始化mvc框架，然后再释放资源
-  - 高并发请求时，fpm-worker不够用，nginx直接响应502
+  - 高并发请求时，fpm-worker不够用，nginx 直接响应 502
   - fpm-worker进程间切换消耗大
-* php的fastcgi进程管理器php-fpm和nginx的配合已经运行得足够好，但是由于php-fpm本身是同步阻塞进程模型，在请求结束后释放所有的资源（包括框架初始化创建的一系列对象，导致PHP进程空转（创建<-->销毁<-->创建）消耗大量的CPU资源，从而导致单机的吞吐能力有限。请求夯住，会导致 CPU 不能释放资源， 大大浪费了 CPU 使用率。
-* php-fpm进程模型非常简单，属于预派生子进程模式。Apache 就是采用该模式来一个请求就 fork 一个进程，进程的开销是非常大的。这会大大降低吞吐率，并发数由进程数决定。
-  - 程序启动后就会创建N个进程。每个子进程进入Accept，等待新的连接进入
-  - 当客户端连接到服务器时，其中一个子进程会被唤醒，开始处理客户端请求，并且不再接受新的TCP连接
-  - 当此连接关闭时，子进程会释放，重新进入Accept，参与处理新的连接
+* php的fastcgi进程管理器php-fpm和nginx的配合已经运行得足够好，但是由于php-fpm本身是同步阻塞进程模型，在请求结束后释放所有的资源（包括框架初始化创建的一系列对象，导致PHP进程空转（创建<-->销毁<-->创建）消耗大量的CPU资源，从而导致单机的吞吐能力有限。请求夯住，会导致 CPU 不能释放资源， 大大浪费了 CPU 使用率
 * 优点
   - 完全可以复用进程，不需要太多的上下文切换
 * 缺点
-  - 严重依赖进程的数量解决并发问题，一个客户端连接就需要占用一个进程，工作进程的数量有多少，并发处理能力就有多少。操作系统可以创建的进程数量是有限的。
+  - 严重依赖进程的数量解决并发问题，一个客户端连接就需要占用一个进程，工作进程的数量有多少，并发处理能力就有多少。操作系统可以创建的进程数量是有限的
   - PHP框架初始化会占用大量的计算资源，每个请求都需要初始化
   - 启动大量进程会带来额外的进程调度消耗。数百个进程时可能进程上下文切换调度消耗占CPU不到1%可以忽略不计，如果启动数千甚至数万个进程，消耗就会直线上升。调度消耗可能占到 CPU 的百分之几十甚至 100%。
   - 如果请求一个第三方请求非常慢，请求过程中会一直占用 CPU 资源，浪费了昂贵的硬件资源
+  - 高并发的场景下，这样的性能是不够的，尽管可以利用 Nginx 作为负载均衡配合多台 PHP-FPM 服务器来提供服务，但由于 PHP-FPM 的阻塞等待的工作模型，一个请求会占用至少一个 MySQL 连接，多节点高并发下会产生大量的 MySQL 连接，而 MySQL 的最大连接数默认值为 100，尽管可以修改，但显而易见该模式没法很好的应对高并发的场景
 * 解决
   - IO密集性业务：频繁的上下文切换
     + 提高IO复用的能力
     + 将php-fpm同步阻塞模式替换为异步非阻塞模式，异步开启模式比较复杂不易维护，当然不一定使用php-fpm
   - 线程模式开发太过复杂
     + 一个进程中能开的线程数也有限，线程太多也会增加 CPU 的负荷和内存资源，线程没有阻塞态，IO 阻塞也不能主动让出 CPU资源，属于抢占式调度模型。不太适合 php 开发。
-  - swoole 4.+开启了全协程模式，让同步代码异步执行
+  - swoole 4.+ 开启了全协程模式，让同步代码异步执行
 
 ![php-fpm工作模式](../../_static/php-fpm-struct.png "Optional title")
 
 ## 服务
 
-```
+```sh
 # 测试php-fpm配置
-/usr/local/php/sbin/php-fpm -t
 /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf -t
 
-#启动php-fpm
+# 启动
 /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf
-/usr/local/Cellar/php71/7.1.10_21/sbin/php-fpm --daemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf --pid /usr/local/var/run/php-fpm.pid`
+/usr/local/Cellar/php71/7.1.10_21/sbin/php-fpm --daemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf --pid /usr/local/var/run/php-fpm.pid
+php-fpm -D
 
-ps aux | grep -c php-fpm # 查看php-fpm进程数
-ps aux | grep php-fpm 查看php-fpm的master进程号
+# 查看php-fpm进程数
+ps aux | grep -c php-fpm
+# 查看php-fpm的master进程号
+ps aux | grep php-fpm
 
-## Mac
-php-fpm -D # 启动
+## linux 进程管理
+/etc/init.d/php7.2-fpm start
+/usr/local/php/sbin/php-fpm
+sudo service php7.0-fpm {start|stop|status|restart|reload|force-reload}
+sudo systemctl status php7.3-fpm
+
 kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
 kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid` # 平滑重启
 pkill php-fpm # 强制关闭
 killall php-fpm # 关闭进程
-
-## linux 进程管理
-sudo service php7.0-fpm {start|stop|status|restart|reload|force-reload}
-sudo systemctl status php7.3-fpm
-
-/etc/init.d/php7.2-fpm start
-/usr/local/php/sbin/php-fpm # 启动
-killall php-fpm
 ```
 
 ## 配置
 
-* nginx 一般是把请求根据请求类型，加载 对应的 fast-cgi 模块，fascgi管理进程选择cgi 子进程处理结果，并返回给nginx
+* nginx 一般是把请求根据请求类型，加载对应的 fast-cgi 模块，fascgi管理进程选择 cgi 子进程处理结果，并返回给nginx
 * 静态：直接开启指定数量的php-fpm进程，不再增加或者减少
 * 动态：开始的时候开启一定数量的php-fpm进程，当请求量变大的时候，动态的增加php-fpm进程数到上限，当空闲的时候自动释放空闲的进程数到一个下限。
 * 通信方式
@@ -112,8 +110,7 @@ killall php-fpm
     - unix socket 高并发时不稳定，连接数爆发时，会产生大量的长时缓存，在没有面向连接协议的支撑下，大数据包可能会直接出错不返回异常。而 tcp 这样的面向连接的协议，可以更好的保证通信的正确性和完整性。
     - 由于 socket 文件本质上是一个文件，存在权限控制的问题，所以需要注意 nginx 进程的权限与 php-fpm 的权限问题，不然会提示无权限访问
   - TCP sockets:使用TCP端口连接127.0.0.1:9000，可以跨服务器，当 nginx 和 php-fpm 不在同一台机器上时，只能使用这种方式
-
-用到一些 PHP 的第三方库，这些第三方库经常存在内存泄漏问题，如果不定期重启 PHP-CGI 进程，势必造成内存使用量不断增长。因此 PHP-FPM 作为 PHP-CGI 的管理器，提供了这么一项监控功能，对请求达到指定次数的 PHP-CGI 进程进行重启，保证内存使用量不增长。
+* 用到一些 PHP 的第三方库，第三方库存在内存泄漏问题，如果不定期重启 PHP-CGI 进程，势必造成内存使用量不断增长。因此 PHP-FPM 作为 PHP-CGI 管理器提供了这么一项监控功能，对请求达到指定次数的 PHP-CGI 进程进行重启，保证内存使用量不增长。
 
 ## 连接方式
 
