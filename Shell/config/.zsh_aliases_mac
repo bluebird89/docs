@@ -1,0 +1,131 @@
+
+alias l="ls -l"
+alias ll="ls -la"
+alias lt="ls -lhtrF"
+alias la='ls -a'
+alias l.="ls -lhtrdF .*"
+
+alias cd..="cd .."
+alias cd...="cd ../.."
+alias cd....="cd ../../.."
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
+alias path='echo -e ${PATH//:/\\n}'
+
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+alias cls='clear'
+
+alias sublime='open -a "Sublime Text"'
+alias st='sublime'
+alias m='mate'
+alias vi="nvim"
+alias vim="nvim"
+alias svi='sudo vi'
+alias vis='vim "+set si"'
+
+alias br="brew remove"
+alias bi="brew install"
+alias bs="brew services start"
+alias be="brew services stop"
+alias bu="brew upgrade"
+
+alias -s html=mate
+alias -s rb=mate
+alias -s py=vi
+alias -s js=vi
+alias -s c=vi
+alias -s java=vi
+alias -s txt=vi
+alias -s go=vi
+alias -s json=vi
+alias -s gz='tar -xzvf'
+alias -s tgz='tar -xzvf'
+alias -s zip='unzip'
+alias -s bz2='tar -xjvf'
+
+alias zshconfig="mate ~/.zshrc"
+alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias javac="javac -J-Dfile.encoding=utf8"
+
+alias bc='bc -l'
+
+alias sha1='openssl sha1'
+alias mkdir='mkdir -pv'
+
+# install  colordiff package :)
+alias diff='colordiff'
+
+alias mount='mount | column -t'
+
+alias h='history'
+
+alias now='date +"%T"'
+alias nowtime=now
+alias nowdate='date +"%d-%m-%Y"'
+
+alias top='htop'
+
+alias ping='ping -c 5'
+alias fping='ping -c 100 -s.2'
+alias ports='netstat -tulanp'
+
+# alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
+# alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
+# alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
+# alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
+# alias firewall=`iptlist`
+# alias ipt='sudo /sbin/iptables'
+
+alias header='curl -I'
+alias headerc='curl -I --compress'
+
+# do not delete / or prompt if deleting more than 3 files at a time #
+alias rm='rm -I --preserve-root'
+
+# confirmation #
+alias mv='mv -i'
+alias cp='cp -i'
+alias ln='ln -i'
+
+# Parenting changing perms on / #
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+alias k="kubectl"
+
+alias f='fuck'
+alias jn='jupyter notebook'
+
+alias wget='aria2c'
+alias tail='sudo tail -f -n 20'
+alias cat='bat'
+
+alias tmux="tmux -2"
+alias ssh="ssh -X"
+alias s="ssh -X"
+alias md="mkdir -p"
+alias rd="rmdir"
+alias df="df -h"
+
+# docker
+alias d='docker'
+alias di='docker image'
+alias dc='docker container'
+alias dm="docker-machine"
+alias di="docker images"
+alias dps="docker ps"
+alias dsp="docker stop"
+alias ds="docker start"
+alias dl="docker logs --tail=50"
+alias drm="docker rm"
+alias drmi="docker rmi $(docker images --filter "dangling=true" -q --no-trunc)"

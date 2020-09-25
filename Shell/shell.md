@@ -650,68 +650,66 @@ ls -l my_script # 过滤输出列表
 
 ### [zsh-users/zsh](https://github.com/zsh-users/zsh)
 
+* [An Introduction to the Z Shell](http://zsh.sourceforge.net)
 * [ohmyzsh/ohmyzsh ](https://github.com/ohmyzsh/ohmyzsh)：A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community. https://ohmyz.sh/
-    - 兼容bash
-    - 自动cd：只需输入目录名称
-    - 命令选项补齐，比如输入 git，然后按 Tab，即可显示出 git都有哪些命令
-    - 目录一次性补全：比如输入 Doc/doc按 Tab键会自动变成 Documents/document/
+    - 兼容 bash
+    - 自动 cd:只需输入目录名称
+    - 命令选项补齐
+    - 目录一次性补全：比如输 Doc/doc
+    - lazyload 特点是启动时快，首次使用时慢，因此很适合用于优化不常用而且初始化非常耗时的功能
 * powerline: need font support
 * [plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins)
-    - [zsh-users/antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
-    - [zplug / zplug](https://github.com/zplug/zplug):🌺 A next-generation plugin manager for zsh
-    - autojump:访问 ~/workspace/src ，输入 j src
-    - sublime:st README.md 就可以调用机器上安装的Sublime Text打开当前目录的README.md文件进行编辑操作
-    - web-search:baidu hhkb pro2 直接在浏览器打开百度搜索关键字”hhkb pro2”
-    - [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
-    - [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh.记录平时输入过的命令，下次再输入的时候，会提前提示，方便懒人。如果是需要的命令，直接 Ctrl+F 搞定
-    - extract:所有类型的文件解压通过一个命令x全搞定
-    - [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
-    - incr 一款自动提示插件
-    - [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt
-    - [git-open](https://github.com/paulirish/git-open)
-    - [sindresorhus / quick-look-plugins](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
+    - plugin manager
+        + [antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
+        + [zplug](https://github.com/zplug/zplug):🌺 A next-generation plugin manager for zsh
+        + [](https://github.com/getantibody/antibody) The fastest shell plugin manager.
+    - [Overview](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins-Overview)
+    - custom
+        + [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
+        + [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
+        + [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt `npm install --global pure-prompt`
 * [Theme](~/.oh-my-zsh/themes )hibiscus A next-generation plugin manager for zsh `curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh`
     - agnoster
     - cloud
     - wedisagree
     - ambda-mod
-    - [ romkatv/powerlevel10k ](https://github.com/romkatv/powerlevel10k) `git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k`
+    - [powerlevel10k](https://github.com/romkatv/powerlevel10k) `git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k`
     - [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
 * use
+    -  `j src` autojump 访问 ~/workspace/src
+    - `st README.md` Sublime Text 打开当前目录 README.md 文件
+    -` web-search:baidu hhkb pro2` 直接在浏览器打开百度搜索关键字”hhkb pro2”
     - 路径别名
     - 进程id补全
     - 快速跳转:d + enter，列出最近访问过的各个目录，然后选择目录前面的数字进行快速跳转
     - 目录名简写与补全:只需要输入每个目录的首字母就行，然后再TAB键补全
     - r :重复执行上一条命令
-* lazyload 的特点是启动时快，首次使用时慢，因此很适合用于优化不常用而且初始化非常耗时的功能
+* 参考
+    - [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
 * 优化
     - 禁用多余插件
     - 避免产生子进程:常见的会产生子进程的语法有是 eval 和 Command substitution，在编写 .zshrc 时应该尽量避免使用它们
     - 启用 ZSH_DISABLE_COMPFIX
 *  macOS
-    -  zsh 启动序列的第一项为 /etc/zprofile 而不是 ~/.zprofile。macOS 通过 /etc/zprofile 来调用 path_helper。path_helper 又会读取 /etc/paths 、/etc/paths/d、etc/manpaths 和 etc/manpaths.d、并将其添加到 $PATH 和 $MANPATH 变量中。通过 path_helper macOS 提供了一种快速在不同 shell 中共享 $PATH 和 $MANPATH 的方法。过去，path_helper 是一个 运行速度很慢的 shell 脚本[6] 以至于有人制作了 专门的 patch[7]、甚至 使用 Perl[8] 重写了一个替代品。不过 macOS 意识到了这个问题，现在 path_helper 不再是一个脚本而是一个预编译好的二进制文件。如果你通过 profiling 发现 path_helper 有在拖累 zsh 启动，那么可以考虑放弃使用 /etc/paths/d、而是在 .zshrc 中直接维护 $PATH
-    -  login process： 默认在启动、终端登陆 shell 时会触发 macOS 的 login -fp username。这一操作会调用 syslog() 函数向 /var/log/asl 写入日志、并读取上一次登录记录、以 Last login 的形式显示出来。可以修改 etc/asl.conf 配置文件中定义的日志等级。修改 iTerm2 设置中的 Login Command 为 /bin/zsh 可以加快 zsh 启动速度，本质上也是绕过了上述读取和写入日志的环节
+    - zsh 启动序列的第一项为 /etc/zprofile 而不是 ~/.zprofile。通过 /etc/zprofile 来调用 path_helper
+    - path_helper 又会读取 /etc/paths 、/etc/paths/d、etc/manpaths 和 etc/manpaths.d、并将其添加到 $PATH 和 $MANPATH 变量中。通过 path_helper 提供了一种快速在不同 shell 中共享 $PATH 和 $MANPATH 的方法。过去，path_helper 是一个运行速度很慢的 shell 脚本[6] 以至于有人制作了专门的 patch[7]、甚至 使用 Perl[8] 重写了一个替代品。不过 macOS 意识到了这个问题，现在 path_helper 不再是一个脚本而是一个预编译好的二进制文件。如果通过 profiling 发现 path_helper 有在拖累 zsh 启动，那么可以考虑放弃使用 /etc/paths/d、而是在 .zshrc 中直接维护 $PATH
+    - login process：默认在启动、终端登陆 shell 时会触发 macOS 的 login -fp username。这一操作会调用 syslog() 函数向 /var/log/asl 写入日志、并读取上一次登录记录、以 Last login 的形式显示出来。可以修改 etc/asl.conf 配置文件中定义的日志等级。修改 iTerm2 设置中的 Login Command 为 /bin/zsh 可以加快 zsh 启动速度，本质上也是绕过了上述读取和写入日志的环节
 
 ```sh
 cat /etc/shells
-
-echo $SHELL/bin/bash
+echo $SHELL
 
 sudo yum install zsh
-
 sudo apt-get install zsh git wget
 sudo apt-get install powerline fonts-powerline
-
 brew install zsh zsh-completions
 brew cask install font-sourcecodepro-nerd-font
-
 brew install zplug
 
 # oh-my-zsh
-# 自动安装
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 wget --no-check-certificate 。![]https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
 
 # 手动
@@ -722,10 +720,11 @@ chsh -s /bin/zsh
 source ~/.bashrc # 运行
 sudo usermod -s /usr/bin/zsh $(whoami) # set ZSH as the default login shell for the user
 
-## 配置：home目录的.zshrc(不用单配，插件配置有)
+## 配置：~/.zshrc(不用单配，插件配置有)
 sudo apt-get install zsh-theme-powerlevel9k
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 echo "source /usr/share/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
+
 p10k configure
 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -737,8 +736,8 @@ export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 # 插件
 plugins=(git textmate ruby autojump osx mvn gradle)
-
-export DEFAULT_USER="henry" # hide username
+# hide username
+export DEFAULT_USER="henry"
 
 PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}>'
 #PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
@@ -1134,7 +1133,7 @@ wget https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.d
     - [ncdu](https;//dev.yorhel.nl/ncdu)
     - [nnn](https://github.com/jarun/nnn)
 * [asciinema](https://asciinema.org/)和 [svg-trem](https://github.com/marionebl/svg-term-cli) 如果想把的命令行操作建录制成一个 SVG 动图
-* [Taskbook](https://github.com/klaussinani/taskbook) 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级
+* [Taskbook](https://github.com/klaussinani/taskbook) 可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级
 * [sshrc](https://github.com/Russell91/sshrc ) 在登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置
 * monitor
     - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序

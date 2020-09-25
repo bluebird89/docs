@@ -578,6 +578,9 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
 * DNS缓存污染，不是指域名被墙。墙，域名仍能被解析到正确的IP地址，只是客户端（指用户浏览器/服务请求端）不能与网站服务器握手，或通过技术阻断或干扰的方式阻止握手成功，以至达到超时、屏蔽、连接重置、服务中断的现象
   - [检测](https://www.checkgfw.com/)
 * DNS 请求是可以被抢答 `dig www.bennythink.com +short`
+* 工具
+  - [ChinaDNS](https://github.com/shadowsocks/ChinaDNS):Protect yourself against DNS poisoning in China.
+  - [dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
 
 ```
 ## `/etc/resolv.conf`
@@ -588,11 +591,10 @@ ns3.dnsowl.com
 # Google Public DNS IP addresses
 8.8.8.8
 8.8.4.4
-
 2001:4860:4860::8888
 2001:4860:4860::8844
 
-Public DNS+
+# Public DNS+
 119.29.29.29
 182.254.116.116
 
@@ -613,6 +615,8 @@ Public DNS+
 # alidns
 nameserver 223.5.5.5
 nameserver 223.6.6.6
+2400:3200::1
+2400:3200:baba::1
 
 # tsinghua
 101.6.6.6
@@ -621,8 +625,14 @@ nameserver 223.6.6.6
 2001:da8::666
 
 # OpenDNS
+208.67.222.222
+208.67.220.220
 2620:0:ccc::2
 2620:0:ccd::2
+
+# DNSPod DNS+
+119.29.29.29
+182.254.116.116
 
 # Neustar UltraDNS IPv6
 2610:a1:1018::1
@@ -636,8 +646,10 @@ nameserver 223.6.6.6
 # 上海交通大学 IPv6 DNS 服务器
 2001:da8:8000:1:202:120:2:100
 2001:da8:8000:1:202:120:2:101
+
 # 中科院网络信息中心 IPv6 DNS 服务器
 2001:cc0:2fff:1::6666
+
 # 北京交通大学 IPv6 DNS 服务器
 2001:da8:205:2060::188
 
@@ -649,7 +661,10 @@ nameserver 223.6.6.6
 # 下一代互联网北京研究中心
 240C::6666
 240C::6644
+
 # CNNIC IPv6 DNS 服务器
+1.2.4.8
+210.2.4.8
 2001:dc7:1000::1
 ```
 
@@ -805,11 +820,11 @@ ifconfig /flushdns # 刷新DNS
 * 《TCP/IP高效编程：改善网络程序的44个技巧》
 
 * 《TCP/IP网络编程》
-  
+
   - [chankeh/net-lenrning-reference](https://github.com/chankeh/net-lenrning-reference):TCP/IP网络编程笔记
 
 * DNS
-  
+
   - [jedisct1/dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. https://dnscrypt.info
   - [googlehosts/hosts](https://github.com/googlehosts/hosts):镜像：https://coding.net/u/scaffrey/p/hosts/git
   - [tenta-browser/tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS https://tenta.com/test
