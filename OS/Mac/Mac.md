@@ -273,7 +273,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - CmapTools：概念图
   - 截图
   - Snipaste - 灵活的截图 + 贴图软件
-
 * 写作
   - Latex
   - Alternote(evernote简单客户端)
@@ -288,13 +287,11 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - bitlord
   - Folx
   - [CodeTips/BaiduNetdiskPlugin-macOS](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~
-
 * 工具
-
   - [CheatSheet]() 长按⌘键可以显示当前程序快捷键
   - [flux](https://justgetflux.com/) 屏幕颜色控制
   - [moom](https://manytricks.com/moom/)使用体验优异的窗口管理软件
-
+  - [](https://github.com/pqrs-org/Karabiner-Elements):Karabiner-Elements is a powerful utility for keyboard customization on macOS Sierra (10.12) or later. https://pqrs.org/osx/karabiner/
 * 窗口管理
   - [Spectacle](link):控制窗口
   - [sizeup](link) 窗口管理软件
@@ -307,27 +304,17 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
     + control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
 
   - [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
-
   - [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):essentially an IDE for automation
-
   - [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
-
   - [Helium](http://heliumfloats.com/):A floating browser window for OS X
-
   - Android file transfer
-
   - SensibleSideButtons - 在 macOS 上使用鼠标上的前进后退按键
-
 * Pod
-
   - [insidegui/PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
-
 * Web开发
-
   - [Paw](https://paw.cloud/):The most advanced API tool for Mac
   - MAMP:基础版不支持自定义
   - [yichengchen/clashX](https://github.com/yichengchen/clashX):A rule based custom proxy with GUI for Mac base on clash.
-
 * 沟通
 
   - [Textual 7](<Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.>)
@@ -336,15 +323,11 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - [telegram](https://telegram.org/)
   - weibo:WeiboX
   - IM+
-
 * RSS
-
   - [Reeder 3](http://reederapp.com/mac/)
   - feedly
   - leaf
-
 * 管理
-
   - OmniOutliner
   - OmniPlan
   - OmniFocus：GTD思路的应用
@@ -359,9 +342,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - TickTick
   - Lucidchart
   - Kanban
-
 * 文档
-
   - [dash](https://kapeli.com/dash):语言文档
   - [TRANSMIT 5](https://www.panic.com/transmit/):Upload, download, and manage files on tons of servers with an easy, familiar, and powerful UI. It’s quite good.
   - Cloud Outline
@@ -420,43 +401,24 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * [LyricsX](https://github.com/MichaelRow/Lyrics)
 
 * [fliqlo](https://fliqlo.com/):A flip Clock screensavers
-
 * 说明
-
   - strace在linux下用来跟踪某个进程的系统调用，dtruss
-
 * [JadenGeller/Helium](https://github.com/JadenGeller/Helium):A floating browser window for OS X <http://heliumfloats.com>
-
 * elpass
-
 * 迷你天气：macOS 天气应用，在 Dock 栏知实时天气
-
 * Things 3
-
-* [ MonitorControl / MonitorControl ](https://github.com/MonitorControl/MonitorControl):desktop_computer Control your external monitor brightness & volume on your Mac
-
+* [MonitorControl ](https://github.com/MonitorControl/MonitorControl):desktop_computer Control your external monitor brightness & volume on your Mac
 * Moment：常驻于 macOS 菜单栏和通知中心的倒数日工具，又不止于倒数日。我们还支持了纪念日、时间进度条、你关心的人的年龄，每一个事件都支持单独添加到菜单栏
-
 * Dropzone 就是这样一款，既能给你带来键盘上如同 Launch Center Pro 体验同时，也提供了通过鼠标拖拽这样的操作，实现鼠标操作的肌肉记忆的应用
-
 * [Here](https://here.app/)
-
 * [glushchenko/fsnotes](https://github.com/glushchenko/fsnotes):Notes manager for macOS/iOS
-
 * AutoSwitchInput - 自动切换输入法
-
 * Bartender 3 - 通知栏折叠工具 $15
-
 * Hidden Bar - 另一款通知栏折叠工具
-
 * [eZip](https://ezip.awehunt.com/):优秀的 macOS 压缩软件
-
 * [poolside-fm](https://apps.apple.com/us/app/poolside-fm/id1514817810?mt=12)
-
 * [Lunar](https://github.com/alin23/Lunar)
-
 * 参考
-
   - [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
 
 ### screensavers
@@ -943,7 +905,6 @@ ideaic15
 zsh
 mackup
 dash
-karabiner
 ```
 
 ## 端口查看

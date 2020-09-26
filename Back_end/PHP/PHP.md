@@ -34,6 +34,10 @@ The PHP Interpreter <http://www.php.net>
 
 * PHP5.3
   - 支持了类似 Java 的 jar 包，名为 phar。可以像 Java 一样方便地实现应用程序打包和组件化，一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行
+* 5.5
+  - Opcache
+    + PHP->Compiler->Opcodes->Zend VM
+    + PHP->Opcodes Cache->Zend VM
 * 7: zval 不再单独从堆上分配内存并且不自己存储引用计数
   - 变量标量类型声明：标量类型声明与返回类型声明
   - 短闭包
@@ -2267,12 +2271,13 @@ pecl channel-update pecl.php.net
 ## 图书
 
 * [The Best PHP Books](https://github.com/manithchhuon/the-best-php-books)
-* 《[Head First PHP & MySQL（中文版）](https://www.amazon.cn/gp/product/B004R1QIJU)》
-* 《PHP and MySQL Web Development PHP与MySQL程序设计(第5版)》
+* [Head First PHP & MySQL](https://www.amazon.cn/gp/product/B004R1QIJU)
+* PHP and MySQL Web Development PHP 和 MySQL Web 开发
 * [Modern PHP](https://github.com/codeguy/modern-php)
-* 深入理解PHP:高级技巧、面向对象与核心技术(原书第3版)
-* [php-objects-patterns-practice-13](https://github.com/apress/php-objects-patterns-practice-13):Source code for 'PHP Objects, Patterns, and Practice' by Matt Zandstra
-  - 《[深入PHP：面向对象、模式与实践（第3版）](https://www.amazon.cn/gp/product/B005D6IRRY)》
+* 深入理解PHP:高级技巧、面向对象与核心技术
+* [深入PHP：面向对象、模式与实践 PHP Objects, Patterns, and Practice](https://www.amazon.cn/gp/product/B005D6IRRY)
+  - [php-objects-patterns-practice-13](https://github.com/apress/php-objects-patterns-practice-13):Source code by Matt Zandstra
+* PHP 7: Real World Application Development
 
 ## 工具
 
