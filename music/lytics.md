@@ -62,6 +62,36 @@ You can checkout any time you like，
 but you can never leave!
 ```
 
+## Edelweiss
+Jeanette Olsson
+
+## The End of World
+    Skeeter Davis 作词、作曲并演唱
+
+```
+Why does the sun go on shining?
+Why does the sea rush to shore?
+Don't they know it's the end of the world
+'Cause you don't love me anymore?
+Why do the birds go on singing?
+Why do the stars glow above?
+Don't they know it's the end of the world
+
+It ended when I lost your love
+I wake up in the morning and I wonder
+Why everything is the same as it was
+I can't understand, no, I can't understand
+How life goes on the way it does!
+Why does my heart go on beating?
+Why do these eyes of mine cry?
+Don't they know it's the end of the world?
+It ended when you said goodbye
+Why does my heart go on beating?
+Why do these eyes of mine cry?
+Don't they know it's the end of the world?
+It ended when you said goodbye
+```
+
 ## 囍帖街
 
 ```
@@ -859,6 +889,48 @@ Whatever it takes
 Or how my heart breaks
 I will be right here waiting for you
 Waiting for you
+```
+
+## The Sound Of Silence
+ Simon And Garfunkel 1964年发行的这张专辑 《Wednesday Morning, 3 A.M.》由于这张专辑销量实在太差，解散了——Simon回了英国，Garfunkel回了哥大
+
+```
+Hello darkness, my old friend,
+I've come to talk with you again,
+Because a vision softly creeping,
+Left its seeds while I was sleeping,
+And the vision that was planted in my brain
+Still remains
+Within the sound of silence.
+In restless dreams I walk alone
+Narrow streets of cobblestone,
+'Neath the halo of a street lamp,
+I turned my collar to the cold and damp
+When my eyes were stabbed by the flash of a neon light
+That split the night
+And touched the sound of silence.
+And in the naked light I saw
+Ten thousand people, maybe more.
+People talking without speaking,
+People hearing without listening,
+People writing songs that voices never share
+And no one dared
+Disturb the sound of silence.
+"Fools" said I,"You do not know
+Silence like a cancer grows.
+Hear my words that I might teach you,
+Take my arms that I might reach you."
+But my words like silent raindrops fell,
+And echoed
+In the wells of silence
+And the people bowed and prayed
+To the neon god they made.
+And the sign flashed its warning,
+In the words that it was forming.
+And the signs said, 'The words of the prophets are written on the subway walls
+And tenement halls.
+And whisper'd in the sounds of silence.
+
 ```
 
 ## You raise me up
