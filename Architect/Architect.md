@@ -16,10 +16,10 @@
 * 满足业务需求且保证系统质
 * 在可预见的周期内具备扩展
 * 并在系统生命周期内持续演
-* 逻辑思维能力很强，思路清晰，有洞察力，善于抓重点。
-* 善于抽象，形成自己的结构化认知框架，有大局观。
-* 解构，拆分业务、系统模块和代码。
-* 发现问题，思考解决，设计取舍，重构迭代，协作传道，响应支持，持续学习，积累提高。
+* 逻辑思维能力很强，思路清晰，有洞察力，善于抓重点
+* 善于抽象，形成自己的结构化认知框架，有大局观
+* 解构，拆分业务、系统模块和代码
+* 发现问题，思考解决，设计取舍，重构迭代，协作传道，响应支持，持续学习，积累提高
 
 ## 路径
 
@@ -630,6 +630,18 @@ service UserService {
 * 《分析模式》，《UML精粹》，《领域特定语言》
 
 * 架构整洁之道
+
+* [GitHub - aosabook/500lines: 500 Lines or Less](https://github.com/aosabook/500lines)
+
+* ## The Performance of Open Source Applications
+
+* ### The Architecture of Open Source Applications,
+  
+  Volume I
+
+* ### The Architecture of Open Source Applications,
+  
+  Volume II
 
 ## 实例
 

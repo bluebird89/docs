@@ -14,7 +14,7 @@
   - -mtime:查找在某个参考时间范围内状态（如权限）发生更改的文件
   - -atime:查找在访问过的本地文件
   - -newer:查找比其他文件更新的文件
-  - 过文件类型找到一个文件
+  - 文件类型找到一个文件
     + b      块特殊文件（缓冲的）
     + c      字符特殊文件（无缓冲的）
     + d      目录
@@ -31,7 +31,7 @@
 * 通配符 `*` ，请将搜索字符串放到单引号或双引号内，以避免通配符被 shell 所解释
 
 ```sh
-find  /  -name  passwd     # "递归遍历"系统全部目录查找名字等于passwd的文件
+find  /  -name passwd     # "递归遍历"系统全部目录查找名字等于passwd的文件
 find . -type f -name "*.css"  # List all CSS files (including subdirectories)
 find . -type f \( -name "*.css" -or -name "*.html" \) # List all CSS or HTML files
 find . -name  "an*"  # 模糊查找文件名字以an开始
@@ -69,7 +69,7 @@ find / -name *.conf -type f -print | xargs file
 find / -name *.conf -type f -print | xargs tar cjf test.tar.gz
 ```
 
-###  [fzf](https://github.com/junegunn/fzf)
+### [fzf](https://github.com/junegunn/fzf)
 
 * 🌸 A command-line fuzzy finder
 * `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install`
@@ -84,7 +84,7 @@ find / -name *.conf -type f -print | xargs tar cjf test.tar.gz
 
 A simple, fast and user-friendly alternative to 'find'
 
-* 方便语法: fd PATTERN而不是find -iname '*PATTERN*'
+* 方便语法: fd PATTERN 而不是 `find -i name '*PATTERN*'`
 * 彩色终端输出
 * 聪明案例: 默认情况下,搜索不区分大小写. 如果模式包含大写字符*, 则切换为区分大小写字符.
 * 默认情况下,忽略隐藏的目录和文件,要禁用此行为,使用-H (或) --hidden选项
@@ -146,9 +146,7 @@ fd -e md
 fd -H pre-commit
 
 fd -0 -e rs | xargs -0 wc -l
-```
 
-```
 # 使用fd生成fzf命令行模糊查找器的输入:
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -160,4 +158,10 @@ export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 # 置fzf内的fd的颜色输出:
 export FZF_DEFAULT_COMMAND="fd --type file --color=always"
 export FZF_DEFAULT_OPTS="--ansi"
+```
+
+## grep
+
+```sh
+grep root /etc/passwd
 ```

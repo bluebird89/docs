@@ -118,7 +118,6 @@ alias rd="rmdir"
 alias df="df -h"
 
 # docker
-alias d='docker'
 alias di='docker image'
 alias dc='docker container'
 alias dm="docker-machine"
