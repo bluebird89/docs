@@ -94,10 +94,10 @@ the basic file, shell and text manipulation utilities of the GNU operating syste
 
 ## 文件描述符
 
-* 命令行都会打开三个文件
-* 标准输入文件:stdin文件描述符为0
-* 标准输出文件:stdout文件描述符为1
-* 标准错误文件:stderr文件描述符2
+* 命令行会打开三个文件
+    - 标准输入文件:stdin文件描述符为0
+    - 标准输出文件:stdout文件描述符为1
+    - 标准错误文件:stderr文件描述符2
 
 ## 变量
 
@@ -543,34 +543,11 @@ GET / HTTP/1.1
 Host: ispconfig.org
 Referrer: mypage.com
 User-Agent: my-browser
-```
 
-## 查找
-
-* xargs:给命令传递参数的一个过滤器
-    - 将管道或标准输入(（)stdin)数据转换成命令行参数 也能够从文件的输出中读取数据
-    - 能够捕获一个命令的输出，然后传递给另外一个命令
-    - 参数
-        + -a file 从文件中读入作为sdtin
-        + -e flag ，注意有的时候可能会是-E，flag必须是一个以空格分隔的标志，当xargs分析到含有flag这个标志的时候就停止。
-        + -p 当每次执行一个argument的时候询问一次用户。
-        + -n num 后面加次数，表示命令在执行的时候一次用的argument的个数，默认是用所有的。
-        + -t 表示先打印命令，然后再执行。
-        + -i|I，将xargs的每项名称，一般是一行一行赋值给 {}，可以用 {} 代替。
-        + -r no-run-if-empty 当xargs的输入为空的时候则停止xargs，不用再去执行了。
-        + -s num 命令行的最大字符数，指的是 xargs 后面那个命令的最大命令行字符数。
-        + -L|l num 从标准输入一次读取 num 行送给 command 命令。
-        + -d delim 分隔符，默认的xargs分隔符是回车，argument的分隔符是空格，这里修改的是xargs的分隔符。
-        + -x exit的意思，主要是配合-s使用。。
-        + -P 修改最大的进程数，默认是1，为0时候为as many as it can
-
-```sh
 ssh -p 22 -C -f -N -g -L 9200:192.168.1.19:9200 ihavecar@192.168.1.19
 
 netstat -anlp|grep 80|grep tcp|awk '{print $5}'|awk -F: '{print $1}'|sort|uniq -c|sort -nr|head -n20
-
 netstat -nat |awk ‘{print $6}’|sort|uniq -c|sort -rn
-
 ping api.jpush.cn | awk ‘{ print $0”    “ strftime(“%Y-%m-%d %H:%M:%S”,systime()) } ‘ >> /tmp/jiguang.log &
 
 wget ftp://ftp.is.co.za/mirror/ftp.rpmforge.net/redhat/el6/en/x86_64/dag/RPMS/multitail-5.2.9-1.el6.rf.x86_64.rpm
@@ -581,9 +558,60 @@ ps -aux | sort -rnk 3 | head -20
 ps -aux | sort -rnk 4 | head -20
 
 netstat -nat | awk  '{print  $5}' | awk -F ':' '{print $1}' | sort | uniq -c | sort -rn | head -n 10 # 查看连接你服务器 top10 用户端的 IP 地址
-cat .bash_history | sort | uniq -c | sort -rn | head -n 10 (or cat .zhistory | sort | uniq -c | sort -rn | head -n 10 # 查看一下你最常用的10个命令
+cat .bash_history | sort | uniq -c | sort -rn | head -n 10 (or cat .zhistory | sort | uniq -c | sort -rn | head -n 10 # 查看一下最常用的10个命令
 
+# 输出nginx日志的ip和每个ip的pv，pv最高的前10
+#2019-06-26T10:01:57+08:00|nginx001.server.ops.pro.dc|100.116.222.80|10.31.150.232:41021|0.014|0.011|0.000|200|200|273|-|/visit|sign=91CD1988CE8B313B8A0454A4BBE930DF|-|-|http|POST|112.4.238.213
+awk -F"|" '{print $3}' access.log | sort | uniq -c | sort -nk1 -r | head -n10
+```
+
+## xargs
+
+* xargs:给命令传递参数的过滤器，将管道或标准输入(（)stdin)数据转换成命令行参数 `xargs [-options] [command]`
+    - xargs后面的命令默认是echo
+        + 输入xargs按下回车以后，命令行就会等待用户输入，作为标准输入。
+        + 可以输入任意内容，然后按下Ctrl d，表示输入结束，这时echo命令就会把前面的输入打印出来
+    - 能够从文件的输出中读取数据
+    - 能够捕获一个命令的输出，然后传递给另外一个命令
+    - 参数
+        + -a file 从文件中读入作为sdtin
+        + -e flag ，注意有的时候可能会是-E，flag必须是一个以空格分隔的标志，当xargs分析到含有flag这个标志的时候就停止。
+        + -p 每次执行时候询问用户确认
+        + -t 打印出最终要执行的命令，然后直接执行，不需要用户确认
+        + -n num 指定每次将多少项，作为命令行参数，默认是用所有的
+        + -I 指定每一项命令行参数的替代字符串将xargs的每项名称，一般是一行一行赋值给 {}，可以用 {} 代替。
+        + -r no-run-if-empty 当xargs的输入为空的时候则停止xargs，不用再去执行了。
+        + -s num 命令行的最大字符数，指的是 xargs 后面那个命令的最大命令行字符数。
+        + -L|l num 指定多少行作为一个命令行参数
+        + -d delim 分隔符，默认的xargs分隔符是回车，argument的分隔符是空格，这里修改的是xargs的分隔符。
+        + -x exit的意思，配合-s使用
+        + -P 修改最大进程数，默认是1，为0时候为as many as it can
+        + -print0，指定输出的文件列表以null分隔。然后，xargs命令的-0参数表示用null当作分隔符
+* xargs find -name: 执行命令，将参数分离出来
+    - 后紧跟要执行命令
+    - 参数输入
+        + 通过管道输入
+        + 通过命令行直接输入
+* 特别适合find命令
+
+```sh
 cat test.txt | xargs # 多行输入单行输出
+echo "one two three" | xargs mkdir
+
+# 命令行会等待用户输入所要搜索的文件。用户输入"*.txt"，表示搜索当前目录下的所有 TXT 文件，然后按下Ctrl d，表示输入结束。这时就相当执行find -name *.txt
+xargs find -name
+
+# 删除/path路径下的所有文件。由于分隔符是null，所以处理包含空格的文件名，也不会报错
+find /path -type f -print0 | xargs -0 rm
+find . -name "*.txt" | xargs grep "abc"
+# 每行运行一次echo命令
+echo -e "a\nb\nc" | xargs -L 1 echo
+
+echo {0..9} | xargs -n 2 echo
+
+# 前面file声明参数，后面是执行体，每一项带入到后面脚本
+cat foo.txt | xargs -I file sh -c 'echo file; mkdir file'
+
 echo "nameXnameXnameXname" | xargs -dX -n2 # 自定义一个定界符
 
 ls *.jpg | xargs -n1 -I {} cp {} /data/images # 复制所有图片文件到 /data/images 目录下
@@ -598,10 +626,6 @@ find . -type f -name "*.log" -print0 | xargs -0 rm -f
 echo $*
 
 cat arg.txt | xargs -I {} ./sk.sh -p {} -l
-
-# 输出nginx日志的ip和每个ip的pv，pv最高的前10
-#2019-06-26T10:01:57+08:00|nginx001.server.ops.pro.dc|100.116.222.80|10.31.150.232:41021|0.014|0.011|0.000|200|200|273|-|/visit|sign=91CD1988CE8B313B8A0454A4BBE930DF|-|-|http|POST|112.4.238.213
-awk -F"|" '{print $3}' access.log | sort | uniq -c | sort -nk1 -r | head -n10
 ```
 
 ## 磁盘管理
@@ -656,7 +680,6 @@ ls -l my_script # 过滤输出列表
     - 自动 cd:只需输入目录名称
     - 命令选项补齐
     - 目录一次性补全：比如输 Doc/doc
-    - lazyload 特点是启动时快，首次使用时慢，因此很适合用于优化不常用而且初始化非常耗时的功能
 * powerline: need font support
 * [plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins)
     - plugin manager
@@ -676,14 +699,19 @@ ls -l my_script # 过滤输出列表
     - [powerlevel10k](https://github.com/romkatv/powerlevel10k) `git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k`
     - [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts https://denysdovhan.com/spaceship-prompt/
 * use
-    -  `j src` autojump 访问 ~/workspace/src
+    - `j src` autojump 访问 ~/workspace/src
     - `st README.md` Sublime Text 打开当前目录 README.md 文件
-    -` web-search:baidu hhkb pro2` 直接在浏览器打开百度搜索关键字”hhkb pro2”
-    - 路径别名
-    - 进程id补全
+    - web-search `baidu hhkb pro2` 直接在浏览器打开百度搜索关键字”hhkb pro2”
+    - 进程id补全 kill firefox + tab
     - 快速跳转:d + enter，列出最近访问过的各个目录，然后选择目录前面的数字进行快速跳转
     - 目录名简写与补全:只需要输入每个目录的首字母就行，然后再TAB键补全
-    - r :重复执行上一条命令
+    - r 重复执行上一条命令
+    - catimg 查看图片
+    - encode64
+    - wd 书签功能
+        + wd list
+        + wd add web
+        + wb web
 * 参考
     - [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
 * 优化
@@ -960,14 +988,15 @@ ln -s /usr/local/bin/gtac /usr/local/bin/tac
 ## [autojump](https://github.com/joelthelion/autojump)
 
 * 记得之前某个访问过的目录的大概名字，配合autojump，就能快速跳转过去
+* j + 目录名
 
 ```sh
 brew install autojump
 sudo apt-get install autojump
-. /usr/share/autojump/autojump.sh # 以使得qutojump生效，
+# 以使得qutojump生效
+. /usr/share/autojump/autojump.sh
+echo . /usr/share/autojump/autojump.sh >> ~/.zshrc
 source ~/.zshrc
-
-j + 目录名
 ```
 
 ## [nvbn / thefuck](https://github.com/nvbn/thefuck)
@@ -976,7 +1005,7 @@ j + 目录名
 sudo pip3 install thefuck
 ```
 
-## [ bats-core / bats-core ](https://github.com/bats-core/bats-core)
+## [bats-core/bats-core](https://github.com/bats-core/bats-core)
 
 Bash Automated Testing System
 
@@ -1064,6 +1093,8 @@ A cat(1) clone with wings
 
 ```sh
 wget https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.deb
+
+brew install bat
 ```
 
 ## Termial

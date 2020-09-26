@@ -131,7 +131,7 @@ V       enter visual line mode
 - https://openuserjs.org
     + [xthexder / Wide Github](https://openuserjs.org/scripts/xthexder/Wide_Github)
     + 豆瓣资源下载大师
-    + 计时器掌控者 - 控制网页计时器速度 | 加速跳过页面计时广告 | 视频快进（慢放）| 跳过广告 | 支持几乎所有网页
+    + 计时器掌控者|视频广告跳过|视频广告加速器
     + Bilibili Evolved
     + YAWF - 新浪微博根据关键词、作者、话题、来源等过滤微博，清理版面，以及其他改造功能
     + anti-redirect - 去除各搜索引擎 / 常用网站的重定向
