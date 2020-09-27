@@ -1664,7 +1664,7 @@ class AppServiceProvider extends ServiceProvider
 
 ## 通知
 
-```
+```sh
 php artisan make:notification InvoicePaid
 ```
 
@@ -1674,6 +1674,7 @@ php artisan make:notification InvoicePaid
   - Livewire + Blade
   - Inertia.js + Vue
 * [livewire](https://github.com/livewire/livewire):A full-stack framework for Laravel that takes the pain out of building dynamic UIs.
+  - [](https://xueyuanjun.com/post/22042)
 
 ```sh
 composer require laravel/jetstream

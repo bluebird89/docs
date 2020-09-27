@@ -767,8 +767,15 @@ UPDATE mysql.user SET authentication_string = '' WHERE user = 'root';
 UPDATE mysql.user SET plugin = '' WHERE user = 'root';s
 sudo systemctl restart mariadb
 
-SHOW PROCESSLIST # 显示哪些线程正在运行
-SHOW VARIABLES
+mysqld_safe --defaults-file=my.cnf --skip-grant-tables  --skip-networking &
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY "markjun";
+flush privileges;
+# The MySQL server is running with the --skip-grant-tables option so it cannot execute this statement
+set global read_only=0;
+flush privileges;
+
+SHOW PROCESSLIST; # 显示哪些线程正在运行
+SHOW VARIABLES;
 ```
 
 ### 数据定义语言 DDL Data Definition Language
@@ -933,7 +940,7 @@ REPAIR [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... [QUICK] [EXT
 ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和存储表的关键字分布
 ```
 
-## 数据查询语言 DQL(Data Query Language)
+### 数据查询语言 Data Query Language DQL
 
 * 查询数据库中表的记录，关键字：select from where等
 * `select [all|distinct] select_expr from -> where -> group by [合计函数] -> having -> order by -> limit`
@@ -966,6 +973,16 @@ ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和
   - 以按多个列进行排序，并且为每个列指定不同的排序方式
   - ORDER BY 联合指的是如果 ORDER BY 后面的字段是联合索引覆盖 where 条件之后的一个字段，由于索引已经处于有序状态，MySQL 就会直接从索引上读取有序的数据，然后在磁盘上读取数据之后按照该顺序组织数据，从而减少了对磁盘数据进行排序的操作。
   - 对于未覆盖 ORDER BY 的查询，其有一项 Creating sort index，即为磁盘数据进行排序的耗时最高；对于覆盖 ORDER BY 的查询，其就不需要进行排序，而其耗时主要体现在从磁盘上拉取数据的过程
+  - 通常是在数据库查询返回的结果集上进行的，如果结果集不大，可以直接在内存中通过快排、归并等排序算法完成
+  - 如果数据集很大，内存不能完全加载，还需要借助磁盘空间完成排序操作，这种排序被称作文件排序
+  - 如果 where 条件语句命中了索引，由于 B+ 树索引数据本身已经做好了排序没，排序比较规则和索引排序一样
+  - 使用联合索引的字段而言，如果要设定多个排序字段，需要遵循索引列的顺序设置排序字段顺序，这样，才可以使用索引的排序
+  - 对于升序排序，直接在 B+ 树索引数据中从左往右读取数据返回即可，无需再在内存中对结果集排序，对于降序排序，直接在 B+ 树索引数据中从右往左读取数据返回即可，无需再在内存中对结果集排序
+  - 不能使用索引
+    + 如果排序字段没有出现在 where 条件语句中，或者压根没有 where 条件
+    + 联合索引混合使用了升序和降序，则不能直接使用索引排序
+    + 包含非同一个索引的列排序
+    + 对于使用函数的表达式，不能使用索引排序，如果是 where 语句中调用了函数，则也不能使用索引
 * limit 子句，限制结果数量子句 `imit 起始位置, 获取条数` 从表记录的指定位置开始取
   - 仅对处理好的结果进行数量限制。将处理好的结果的看作是一个集合，按照记录出现的顺序，索引从0开始。
   - 省略第一个参数，表示从索引0开始
@@ -994,6 +1011,39 @@ ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和
 * with：表示对汇总之后的记录进行再次汇总
 
 ```sql
+SELECT
+DISTINCT <select_list>
+FROM <left_table>
+<join_type> JOIN <right_table>
+ON <join_condition>
+WHERE <where_condition>
+GROUP BY <group_by_list>
+HAVING <having_condition>
+ORDER BY <order_by_condition>
+LIMIT <limit_number>
+
+FROM
+<表名> # 选取表，将多个表数据通过笛卡尔积变成一个表。
+ON
+<筛选条件> # 对笛卡尔积的虚表进行筛选
+JOIN <join, left join, right join...>
+<join表> # 指定join，用于添加数据到on之后的虚表中，例如left join会将左表的剩余数据添加到虚表中
+WHERE
+<where条件> # 对上述虚表进行筛选
+GROUP BY
+<分组条件> # 分组
+<SUM()等聚合函数> # 用于having子句进行判断，在书写上这类聚合函数是写在having判断里面的
+HAVING
+<分组筛选> # 对分组后的结果进行聚合筛选
+SELECT
+<返回数据列表> # 返回的单列必须在group by子句中，聚合函数除外
+DISTINCT
+# 数据除重
+ORDER BY
+<排序条件> # 排序
+LIMIT
+<行数限制>
+
 SELECT [DISTINCT] 字段列表|* FROM table_name [WHERE条件][ORDER BY 排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
 
 SELECT id,title,author,hits,addate from news ORDER BY id DESC LIMIT 10 * $p,10; # limit [offset,]rowcount:offset 为偏移量，而非主键id 分页实现
@@ -1988,7 +2038,7 @@ Select sum(subtotal) from order_detail;
 Unlock tables;
 ```
 
-### B-Tree
+## B-Tree
 
 * 定义：一种多路搜索树（并不是二叉的），一颗M阶的B-树
   - 定义任意非叶子结点最多只有M个儿子,且M>2
