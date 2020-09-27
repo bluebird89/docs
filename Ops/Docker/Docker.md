@@ -22,7 +22,6 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
   - 文件系统隔离（联合文件系统）
 * 优点
   - 更高效的利用系统资源，不需要等待虚拟系统启动所以启动快速资源占用低，启动速度快
-  - 面向软件开发者而非硬件运维
   - 不需要打包系统进镜像所以体积非常小,性能开销小
   - Dockerfile 镜像构建机制让镜像打包部署自动化
   - 灵活：即使是最复杂的应用也可以集装箱化
@@ -123,19 +122,17 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
 sudo add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
-
-sudo add-apt-repository "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"  # aliyun
+sudo add-apt-repository "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io
-## Install Docker CE.
-apt-get update && apt-get install -y \
+sudo apt-get update && apt-get install -y \
   containerd.io=1.2.10-3 \
   docker-ce=5:19.03.4~3-0~ubuntu-$(lsb_release -cs) \
   docker-ce-cli=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)
 
 # /etc/default/docker
 DOCKER_OPTS="--registry-mirror=https://registry.docker-cn.com"
-# Setup daemon.
+# Setup daemon
 cat > /etc/docker/daemon.json <<EOF
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
@@ -166,7 +163,7 @@ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
 sudo chmod g+rwx "$HOME/.docker" -R
 
 docker version|info # docker 服务状态查看
-docker system df # 镜像、容器、数据卷所占用的空间
+docker system df # 镜像、容器、数据卷所占用空间
 
 docker events # 得到docker服务器的实时的事件
 docker port # 显示容器的端口映射
@@ -310,10 +307,11 @@ sudo systemctl restart docker
 
 ### 核心技术
 
+* 本质就是宿主机的一个进程
 * 概念
   - Docker Engine：整个Docker的核心与基础，平时使用的docker命令，以及提供Docker核心功能的Docker守护进程（Docker Deamon）——包括管理Image、运行Contrainer等
   - Boot2Docker：Docker基于Linux内核特性，因此只能运行于Linux之上，为了能在Mac/Windows系统上运行，有了Boot2Docker。Boot2Docker会先启动一个VirtualBox虚拟机，然后在该虚拟机中运行一个Linux系统，再在Linux中运行Docker
-* LXC(Linux Container)
+* LXC Linux Container
   - 可以提供轻量级的虚拟化，以便隔离进程和资源，而且不需要提供指令解释机制以及全虚拟化的其他复杂性
   - 容器有效地将由单个操作系统管理的资源划分到孤立的组中，以更好地在孤立的组之间平衡有冲突的资源使用需求
   - 与传统虚拟化技术相比，优势在于：
@@ -323,38 +321,35 @@ sudo systemctl restart docker
     + 容器可以在CPU核心的本地运行指令，不需要任何专门的解释机制
     + 避免了准虚拟化和系统调用替换中的复杂性
     + 轻量级隔离，在隔离的同时还提供共享机制，以实现容器与宿主机的资源共享
-  - 提供了在单一可控主机节点上支持多个相互隔离的server container同时执行的机制。Linux Container有点像chroot，提供了一个拥有自己进程和网络空间的虚拟环境，但又有别于虚拟机，因为lxc是一种操作系统层次上的资源的虚拟化
+    + 提供了在单一可控主机节点上支持多个相互隔离的server container同时执行的机制。Linux Container有点像chroot，提供了一个拥有自己进程和网络空间的虚拟环境，但又有别于虚拟机，因为lxc是一种操作系统层次上的资源的虚拟化
   - 与docker关系:docker并不是LXC替代品，docker底层使用了LXC来实现，LXC将linux进程沙盒化，使得进程之间相互隔离，并且能够配置各进程的资源分配。在LXC的基础之上，docker提供了一系列更强大的功能
-* 隔离
-  - docker本质就是宿主机的一个进程
+* 通过namespace实现资源隔离
   - 文件系统隔离 rootfs：每个容器都有自己的 root 文件系统
-  - 进程隔离：每个容器都运行在自己的进程环境中
-  - 网络隔离：容器间的虚拟网络接口和 IP 地址都是分开的
   - 资源隔离和分组 namespace:每个容器都有单独的名字空间，运行在其中的应用都像是在独立的操作系统中运行一样。保证了容器之间彼此互不影响
-    + pid namespace：不同用户的进程就是通过pid隔离开的，且不同的namespace中可以有相同pid。所有LXC进程在Docker中的父进程为Docker进程，同时允许嵌套，实现Docker in Docker
-    + net namespace:网络的隔离则通过net namespace实现，每个net namspace有独立的network device， IP, IP routing table， /proc/net目录等。默认采用 veth 的方式，将容器中的虚拟网卡同 host 上的一 个Docker 网桥 docker0 连接在一起
-    + ipc namespace:Container中进程交互采用linux的进程间交互方法， Interprocess Communicaiton - IPC， 包括信号量，消息队列，共享内存等。容器的进程间交互实际上还是 host 上具有相同 pid 名字空间中的进程间交互，因此需要在 IPC 资源申请时加入名字空间信息，每个 IPC 资源有一个唯一的 32 位 id
-    + mnt namespace:允许不同namespace的进程看到的文件结构不同，即隔离文件系统
-    + uts namesapce:UTS(Unix Time-Sharing System) namespace允许每个Container拥有独立的hostname和domain name，使其在网络上可以独立的节点而非 主机上的一个进程
-    + user namespace：每个Container拥有不同 user 和group id，可以在容器内用容器内部的用户执行程序而非主机上的用户
-  - cgroups 资源限制:将 CPU 和内存之类的资源独立分配给每个 Docker 容器
-    + 功能
-      * 资源限制：可以对任务使用的资源总额进行限制
-      * 优先级分配：通过分配的cpu时间片数量以及磁盘IO带宽大小，实际上相当于控制了任务运行优先级
-      * 资源统计：可以统计系统的资源使用量，如cpu时长，内存用量等
-      * 任务控制：cgroup可以对任务执行挂起、恢复等操作
-    + 特点
-      * cgroup的api以一个伪文件系统的实现方式，用户的程序可以通过文件系统实现cgroup的组件管理
-      * cgroup的组件管理操作单元可以细粒度到线程级别，另外用户可以创建和销毁cgroup，从而实现资源载分配和再利用
-      * 所有资源管理的功能都以子系统的方式实现，接口统一子任务创建之初与其父任务处于同一个cgroup的控制组
-  - 通过写时复制技术（copy-on-write）实现了高效的文件操作（类似虚拟机的磁盘比如分配500g并不是实际占用物理磁盘500g）
-* 可配额/可度量
+  - pid namespace 进程隔离：每个容器都运行在自己的进程环境中,不同用户的进程就是通过pid隔离开的，且不同的namespace中可以有相同pid。所有LXC进程在Docker中的父进程为Docker进程，同时允许嵌套，实现Docker in Docker
+  - net namespace:网络隔离,容器间的虚拟网络接口和 IP 地址都是分开的.则通过net namespace实现，每个net namspace有独立的network device， IP, IP routing table， /proc/net目录等。默认采用 veth 的方式，将容器中的虚拟网卡同 host 上的一 个Docker 网桥 docker0 连接在一起
+  - ipc namespace:Container中进程交互采用linux的进程间交互方法， Interprocess Communicaiton - IPC，包括信号量，消息队列，共享内存等。容器的进程间交互实际上还是 host 上具有相同 pid 名字空间中的进程间交互，因此需要在 IPC 资源申请时加入名字空间信息，每个 IPC 资源有一个唯一的 32 位 id
+  - mnt namespace:允许不同namespace的进程看到的文件结构不同，即隔离文件系统
+  - uts namesapce:UTS(Unix Time-Sharing System) namespace允许每个Container拥有独立的hostname和domain name，使其在网络上可以独立的节点而非 主机上的一个进程
+  - user namespace：每个Container拥有不同 user 和group id，可以在容器内用容器内部的用户执行程序而非主机上的用户
+* 通过cgroup实现资源限制
   - Linux的控制组 cgroups（Control Groups）限制一个进程组能够使用的资源上限，包括 CPU、内存、磁盘、网络带宽等等,实现了对资源配额和度量,容器资源统计和隔离。可以限制、记录、隔离进程组（process groups）所使用的物理资源（如：cpu,memory, io 等等）的机制
+  - 将 CPU 和内存之类的资源独立分配给每个 Docker 容器,确保各个容器可以公平地分享主机的内存、CPU、磁盘 IO 等资源；当然，更重要的是，控制组确保了当容器内的资源使用产生压力时不会连累主机系统
+  - 功能
+    + 资源限制：可以对任务使用的资源总额进行限制
+    + 优先级分配：通过分配的cpu时间片数量以及磁盘IO带宽大小，实际上相当于控制了任务运行优先级
+    + 资源统计：可以统计系统的资源使用量，如cpu时长，内存用量等
+    + 任务控制：cgroup可以对任务执行挂起、恢复等操作
+  - 特点
+    + cgroup的api以一个伪文件系统的实现方式，用户的程序可以通过文件系统实现cgroup的组件管理
+    + cgroup的组件管理操作单元可以细粒度到线程级别，另外用户可以创建和销毁cgroup，从而实现资源载分配和再利用
+    + 所有资源管理的功能都以子系统的方式实现，接口统一子任务创建之初与其父任务处于同一个cgroup的控制组
+  - 可配额/可度量
     + –cpu-period和–cpu-quota组合使用来限制容器使用的CPU时间。表示在–cpu-period的一段时间内，容器只能被分配到总量为 --cpu-quota 的 CPU 时间
     + -m选项则限制了容器使用宿主机内存的上限
-  - 确保各个容器可以公平地分享主机的内存、CPU、磁盘 IO 等资源；当然，更重要的是，控制组确保了当容器内的资源使用产生压力时不会连累主机系统
   - cgroups类似文件的接口，在/cgroups目录下新建一个group，在此文件夹新建task，并将pid写入即可实现对改进程的资源控制
   - blkio，cpu，devices，memory，net_cls, ns等9大子系统
+* 写时复制技术（copy-on-write）实现了高效的文件操作
 * 便携性
   - AUFX（Another UnionFS），做到了支持将不同目录挂在到同一个虚拟文件系统下，AUFX支持为每一个成员目录设定权限readonly，readwrite等，同时引入分层概念，对于readonly的权限branch可以逻辑进行增量修改
     + 典型：aufs/overlayfs，分层镜像实现的基础
@@ -363,35 +358,65 @@ sudo systemctl restart docker
   - 借助linux的kernel namspace和cgroups实现
   - deamon的安全接口
   - linux本身提供的安全方案，apparmor，selinux
-* 架构
-  - docker Client：通过命令行或者其他工具使用 [Docker API](https://docs.docker.com/reference/api/docker_remote_api) 与 Docker 的守护进程通信
+
+## 架构
+
+* docker Client：通过命令行或者其他工具使用 [Docker API](https://docs.docker.com/reference/api/docker_remote_api) 与 Docker 的守护进程通信
+  - docker架构中用户用来和docker daemon建立通信的客户端，用户使用的可执行文件为docker，通过docker命令行工具可以发起众多管理container的请求
+  - 方式
     + tcp://host:port
     + unix:path_to_socket
     + fd://socketfd
-  - docker Server：一个物理或者虚拟的机器用于执行 Docker 守护进程和管理所有容器
-    + 确保只有可信的用户才可以访问 Docker 服务。Docker 允许用户在主机和容器间共享文件夹，同时不需要限制容器的访问权限，这就容易让容器突破资源限制
-    + Docker 的 REST API（客户端用来跟服务端通信）在 0.5.2 之后使用本地的 Unix 套接字机制替代了原先绑定在 127.0.0.1 上的 TCP 套接字，因为后者容易遭受跨站脚本攻击。现在用户使用 Unix 权限检查来加强套接字的访问安全
-    + image management
-      * distribution:负责与docker registry交互
-      * registry:负责docker registry有关的身份认证、镜像查找、镜像验证以及管理registry mirror等交互操作
-      * image 负责与镜像源数据有关的存储、查找，镜像层的索引、查找以及镜像tar包有关的导入、导出操作
-      * reference负责存储本地所有镜像的repository和tag名，并维护与镜像id之间的映射关系
-      * layer模块负责与镜像层和容器层源数据有关的增删改查，并负责将镜像层的增删改查映射到实际存储镜像层文件的graphdriver模块
-      * graghdriver是所有与容器镜像相关操作的执行者
-    + libcontainer是一项独立的容器管理包，networkdriver以及execdriver都是通过libcontainer来实现具体对容器进行的操作。当执行完运行容器的命令后，一个实际的Docker容器就处于运行状态，该容器拥有独立的文件系统，独立并且安全的运行环境等
-  - Docker daemon 作为服务端接受来自客户的请求，并处理这些请求（创建、运行、分发容器）
+  - 可以通过设置命令行flag参数的形式设置安全传输层协议(TLS)的有关参数，保证传输的安全性
+  - docker client发送容器管理请求后，由docker daemon接受并处理请求，当docker client 接收到返回的请求相应并简单处理后，docker client 一次完整的生命周期就结束了
+* Docker daemon
+  - 常驻后台系统进程
+  - 功能：接收处理docker client发送的请求。该守护进程在后台启动一个server，server负载接受docker client发送的请求；接受请求后，server通过路由与分发调度，找到相应的handler来执行请求
+  - 启动所使用的可执行文件也为docker，与docker client启动所使用的可执行文件docker相同，在docker命令执行时，通过传入的参数来判别docker daemon与docker client
+  - 架构
+    + docker server
+    + engine：扮演Docker container存储仓库的角色，并且通过执行job的方式来操纵管理这些容器
+    + job：最基本的工作执行单元。Docker可以做的每一项工作，都可以抽象为一个job
+  - 流程
     + Engine执行Docker内部的一系列工作，每一项工作都是以一个Job的形式的存在
-    + 当需要容器镜像时，则从Docker Registry中下载镜像，并通过镜像管理驱动graphdriver将下载镜像以Graph的形式存储
-    + 当需要为Docker创建网络环境时，通过网络管理驱动networkdriver创建并配置Docker容器网络环境
-    + 当需要限制Docker容器运行资源或执行用户指令等操作时，则通过execdriver来完成
+    + 需要容器镜像时，则从Docker Registry中下载镜像，并通过镜像管理驱动graphdriver将下载镜像以Graph的形式存储
+    + 需要为Docker创建网络环境时，通过网络管理驱动networkdriver创建并配置Docker容器网络环境
+    + 需要限制Docker容器运行资源或执行用户指令等操作时，则通过execdriver来完成
+* docker Server：一个物理或者虚拟的机器用于执行 Docker 守护进程和管理所有容器
+  - 服务于docker client的server，该server的功能是：接受并调度分发docker client发送的请求
+  - 确保只有可信的用户才可以访问 Docker 服务。Docker 允许用户在主机和容器间共享文件夹，同时不需要限制容器的访问权限，这就容易让容器突破资源限制
+  - Docker 的 REST API（客户端用来跟服务端通信）在 0.5.2 之后使用本地的 Unix 套接字机制替代了原先绑定在 127.0.0.1 上的 TCP 套接字，因为后者容易遭受跨站脚本攻击。现在用户使用 Unix 权限检查来加强套接字的访问安全
+  - image management
+    + distribution:负责与docker registry交互
+    + registry:负责docker registry有关的身份认证、镜像查找、镜像验证以及管理registry mirror等交互操作
+    + image 负责与镜像源数据有关的存储、查找，镜像层的索引、查找以及镜像tar包有关的导入、导出操作
+    + reference负责存储本地所有镜像的repository和tag名，并维护与镜像id之间的映射关系
+    + layer模块负责与镜像层和容器层源数据有关的增删改查，并负责将镜像层的增删改查映射到实际存储镜像层文件的graphdriver模块
+    + graghdriver是所有与容器镜像相关操作的执行者
+  - libcontainer是一项独立的容器管理包，networkdriver以及execdriver都是通过libcontainer来实现具体对容器进行的操作。当执行完运行容器的命令后，一个实际的Docker容器就处于运行状态，该容器拥有独立的文件系统，独立并且安全的运行环境等
+* Driver是Docker架构中的驱动模块。通过Driver驱动，Docker可以实现对Docker容器执行环境的定制
+  - 由于Docker运行的生命周期中，并非用户所有的操作都是针对Docker容器的管理，另外还有关于Docker运行信息的获取，Graph的存储与记录等。因此，为了将Docker容器的管理从Docker Daemon内部业务逻辑中区分开来，设计了Driver层驱动来接管所有这部分请求
+  - graphdriver:用于完成容器镜像的管理，包括存储与获取。
+    + 当用户需要下载指定的容器镜像时，graphdriver将容器镜像存储在本地的指定目录
+    + 当用户需要使用指定的容器镜像来创建容器的rootfs时，graphdriver从本地镜像存储目录中获取指定的容器镜像
+  - networkdriver:完成Docker容器网络环境的配置
+    + Docker启动时为Docker环境创建网桥
+    + Docker容器创建时为其创建专属虚拟网卡设备
+    + 为Docker容器分配IP、端口并与宿主机做端口映射，设置容器防火墙策略等
+  - execdriver:作为Docker容器的执行驱动，负责创建容器运行命名空间，负责容器资源使用的统计与限制，负责容器内部进程的真正运行等
+    + 现在execdriver默认使用native驱动，不依赖于LXC。具体体现在Daemon启动过程中加载的ExecDriverflag参数，该参数在配置文件已经被设为”native”。这可以认为是Docker在1.2版本上一个很大的改变，或者说Docker实现跨平台的一个先兆
+
 
 ![初始化](../_static/docker_init.jpg)
 ![Docker架构](../../_static/docker_structure.jpg "Docker架构")
 
-## 镜像（Image）
+## 镜像 Image
 
 * 一个只读的模版，用来创建容器
 * 一个特殊的文件系统，提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）
+* Graph在Docker架构中扮演已下载容器镜像的保管者，以及已下载容器镜像之间关系的记录者。一方面，Graph存储着本地具有版本信息的文件系统镜像，另一方面也通过GraphDB记录着所有文件系统镜像彼此之间的关系
+  - GraphDB是一个构建在SQLite之上的小型图数据库，实现了节点的命名以及节点之间关联关系的记录。它仅仅实现了大多数图数据库所拥有的一个小的子集，但是提供了简单的接口表示节点之间的关系。
+  - 在Graph的本地目录中，关于每一个的容器镜像，具体存储的信息有：该容器镜像的元数据，容器镜像的大小信息，以及该容器镜像所代表的具体rootfs。
 * Dockerfile中的命令都会在文件系统中创建一个新的层次结构，镜像则构建与这些文件系统之上.一层层叠加，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层.这些叠加的最后一层就是container，所以在container里面改了文件，其实不会进image
 * 一种UnionFS（联合文件系统），是一种分层、轻量级并且高性能的文件系统，支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem),Union FS 有两个用途
   - 可以实现不借助 LVM、RAID 将多个 disk 挂到同一个目录下
@@ -459,7 +484,7 @@ docker push username/repository:tag
 docker push registry-host:5000/username/repository
 ```
 
-## 容器(Container)
+## 容器 Container
 
 * 容器是镜像创建的实例,在启动的时候创建一层可写层作为最上层（因为镜像是只读的）.使用Copy-On-Write的方式完成对文件系统的修改， 这样对文件系统的修改将会作为一个新的层添加到既有层之上，而不是直接修改既有的层
 * 容器时在linux上本机运行，并与其他容器共享主机的内核，它运行的一个独立的进程，不占用其他任何可执行文件的内存，非常轻量
@@ -997,10 +1022,11 @@ ONBUILD COPY . /app/
 CMD [ "npm", "start" ]
 ```
 
-## 仓库（Repository）
+## 仓库 Repository
 
-镜像的仓库，用来保存images
-
+* doker registry
+  - 一个存储容器镜像的仓库。而容器镜像是在容器被创建时，被加载用来初始化容器的文件架构与目录
+  - Docker Daemon会与Docker Registry通信，并实现搜索镜像、下载镜像、上传镜像三个功能，这三个功能对应的job名称分别为”search”，”pull” 与 “push”
 * 创建了自己的image后可用 push 上传到公有或者私有仓库，这样其他开发人员可以 pull 用来开发或者部署
 * 支持tag标签
 * 仓库
@@ -1702,14 +1728,14 @@ kubectl-debug <POD_NAME>
 * 不要在单个容器中运行一个以上进程 容器只运行一个进程（HTTP 守护进程、应用程序服务器、数据库）时效果最佳
 * 不要只使用“最新版”标签：因为无法跟踪当前运行的镜像版本
 * 不要从正在运行的容器中创建镜像 换句话说，不要使用"docker commit"命令来创建镜像。这一镜像创建方法不可复制，因此应完全避免使用。请始终使用 Dockerfile 或其他任何可完全复制的 S21（从源代码到镜像）方法
-* 不要使用单层镜像 为了有效利用多层文件系统，请始终为操作系统创建属于自己的基本镜像层，然后为用户名定义创建一个层，为运行时安装创建一个层，为配置创建一个层，最后再为应用程序创建一个层。这样，重新创建、管理和分配镜像就会容易些。
+* 不要使用单层镜像 为了有效利用多层文件系统，请始终为操作系统创建属于自己的基本镜像层，然后为用户名定义创建一个层，为运行时安装创建一个层，为配置创建一个层，最后再为应用程序创建一个层。这样，重新创建、管理和分配镜像就会容易些
 * 不要创建大尺寸镜像 大尺寸的镜像难以分配。请确保仅使用必需文件和库来运行应用程序。
-* 不要分两部分传送应用程序 有些人把容器当作虚拟机，所以他们大多会认为，应该将应用程序部署到现有正在运行的容器中。在需要不断部署和调试的开发阶段，可能确实如此；但对于 QA 和生产的持续交付 (CD) 渠道，应用程序应当是镜像的一部分。切记：容器转瞬即逝
+* 不要分两部分传送应用程序:有些人把容器当作虚拟机，所以他们大多会认为，应该将应用程序部署到现有正在运行的容器中。在需要不断部署和调试的开发阶段，可能确实如此；但对于 QA 和生产的持续交付 (CD) 渠道，应用程序应当是镜像的一部分。切记：容器转瞬即逝
 
 ## 图书
 
 * [Docker — 从入门到实践](https://yeasy.gitbooks.io/docker_practice/content/)
-* 《[Docker——容器与容器云（第2版）](https://book.douban.com/subject/26894736/)》
+* [Docker——容器与容器云（第2版）](https://book.douban.com/subject/26894736/)
 
 ## 资源
 
@@ -1752,6 +1778,7 @@ kubectl-debug <POD_NAME>
 
 * [官网](https://www.docker.com/) <http://www.docker.org.cn>
 * [manuals](https://docs.docker.com/manuals/)
+* [Docker 架构原理及简单使用](https://www.cnblogs.com/zhangxingeng/p/11236968.html)
 * [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects
 * [yeasy/docker_practice](https://github.com/yeasy/docker_practice):Learn and understand Docker technologies, with real DevOps practice! https://legacy.gitbook.com/book/yeasy/docker_practice/details
 * [中文文档](https://docker-doc.readthedocs.io/zh_CN/latest/index.html)
