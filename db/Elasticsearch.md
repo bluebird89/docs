@@ -971,6 +971,8 @@ setup.ilm.overwrite: true
 * [Yelp/elastalert](https://github.com/Yelp/elastalert):Easy & Flexible Alerting With ElasticSearch https://elastalert.readthedocs.org
 * UI
   - [appbaseio/dejavu](https://github.com/appbaseio/dejavu):The Missing Web UI for Elasticsearch: Import, browse and edit data with rich filters and query views, create search UIs visually. https://opensource.appbase.io/dejavu/
+  - [ElasticHD](https://github.com/360EntSecGroup-Skylar/ElasticHDv):支持 ES监控、实时搜索、Index template快捷替换修改、索引列表信息查看， SQL converts to DSL工具
+  - [elasticsearch-head](https://github.com/mobz/elasticsearch-head):用于监控 Elasticsearch 状态的客户端插件，包括数据可视化、执行增删改查操作等
 * [deviantony / docker-elk](https://github.com/deviantony/docker-elk):The Elastic stack (ELK) powered by Docker and Compose.
 
 ## 参考
@@ -979,3 +981,4 @@ setup.ilm.overwrite: true
 * [elastic/elasticsearch-definitive-guide](https://github.com/elastic/elasticsearch-definitive-guide):The Definitive Guide to Elasticsearch https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html
 * [Elasticsearch 权威指南](https://fuxiaopang.gitbooks.io/learnelasticsearch/)
 * [Kibana User Guide](https://www.elastic.co/guide/en/kibana/current/index.html)
+* [SpringBoot 操作 ElasticSearch 详解](https://mp.weixin.qq.com/s/qDbaDDDIJ81u8JY8CQJCTQ)
