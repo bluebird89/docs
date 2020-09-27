@@ -1,34 +1,23 @@
 ## MySQL optimize
 
-* 在实际的业务场景下通过测试来验证关于执行计划以及响应时间的假设，找出系统瓶颈,提高MySQL数据库的整体性能。不要听信看到的关于优化的“绝对真理”
-
+* 在实际业务场景下通过测试来验证关于执行计划以及响应时间的假设，找出系统瓶颈,提高MySQL数据库的整体性能。不要听信看到的关于优化的“绝对真理”
 * 合理的结构设计和参数调整,以提高用户的相应速度,同时还要尽可能的节约系统资源,以便让系统提供更大的负荷
-
 * 不同的语句，根据选择的引擎、表中数据的分布情况、索引情况、数据库优化策略、查询中的锁策略等因素，最终查询的效率相差很大
-
 * 效果：SQL及索引 > 数据库表结构 > 系统配置 > 硬件，成本则相反
-
   - 软优化一般是操作数据库即可
   - 硬优化则是操作服务器硬件及参数设置：CPU——Cache(L1-L2-L3)——内存——SSD硬盘——网络——硬盘
-
 * 原则：
-
   - 减少数据访问（减少磁盘访问）：设置合理的字段类型，启用压缩，通过索引访问等减少磁盘 IO。**尽可能避免全表扫描**
   - 返回更少的数据（减少网络传输或磁盘访问）：只返回需要的字段和数据分页处理，减少磁盘 IO 及网络 IO。**减少无效数据的查询**
   - 减少交互次数（减少网络传输）：批量 DML 操作，函数存储等减少数据连接次数。**最大化利用索引**
   - 减少服务器 CPU 开销：尽量减少数据库排序操作以及全表查询，减少 CPU 内存占用。
   - 利用更多资源：使用表分区，可以增加并行操作，更大限度利用 CPU 资源
-
 * 优先考虑通过缓存降低对数据库的读操作（如：redis）
-
 * 考虑读写分离，降低数据库写操作
-
 * 开始数据拆分
-
   - 首先考虑按照业务垂直拆分
   - 再考虑水平拆分：先分库（设置数据路由规则，把数据分配到不同的库中）
   - 最后再考虑分表，单表拆分到数据1000万以内
-
 * 只要一行数据时使用limit 1，MySQL数据库引擎会在找到一条数据后停止搜索，而不是继续往后查少下一条符合记录的数据
 
 ## 指标
@@ -52,43 +41,6 @@
     + CPU在饱和的时候一般发生在数据装入内存或从磁盘上读取数据时候。
     + 磁盘I/O瓶颈发生在装入数据远大于内存容量的时候
     + 如果应用分布在网络上，那么查询量相当大的时候那么平瓶颈就会出现在网络上，我们可以用mpstat, iostat, sar和vmstat来查看系统的性能状态
-
-## SQL 执行顺序
-
-```
-SELECT
-DISTINCT <select_list>
-FROM <left_table>
-<join_type> JOIN <right_table>
-ON <join_condition>
-WHERE <where_condition>
-GROUP BY <group_by_list>
-HAVING <having_condition>
-ORDER BY <order_by_condition>
-LIMIT <limit_number>
-
-FROM
-<表名> # 选取表，将多个表数据通过笛卡尔积变成一个表。
-ON
-<筛选条件> # 对笛卡尔积的虚表进行筛选
-JOIN <join, left join, right join...>
-<join表> # 指定join，用于添加数据到on之后的虚表中，例如left join会将左表的剩余数据添加到虚表中
-WHERE
-<where条件> # 对上述虚表进行筛选
-GROUP BY
-<分组条件> # 分组
-<SUM()等聚合函数> # 用于having子句进行判断，在书写上这类聚合函数是写在having判断里面的
-HAVING
-<分组筛选> # 对分组后的结果进行聚合筛选
-SELECT
-<返回数据列表> # 返回的单列必须在group by子句中，聚合函数除外
-DISTINCT
-# 数据除重
-ORDER BY
-<排序条件> # 排序
-LIMIT
-<行数限制>
-```
 
 ## 检测
 
@@ -215,7 +167,9 @@ SHOW WARNINGS\G
 EXPLAIN SELECT * FROM order_copy WHERE id=12345\G; # 给id添加了索引，才使得rows的结果为1
 ```
 
-### PROCEDURE ANALYSE() 分析字段和其实际的数据，并会给一些有用的建议。只有表中有实际的数据，这些建议才会变得有用，因为要做一些大的决定是需要有数据作为基础的
+### PROCEDURE ANALYSE()
+
+* 分析字段和其实际的数据，并会给一些有用的建议。只有表中有实际的数据，这些建议才会变得有用，因为要做一些大的决定是需要有数据作为基础的
 
 ### profiling:准确的SQL执行消耗系统资源的信息
 
@@ -412,7 +366,7 @@ kB_read：读取的总数据量；
 kB_wrtn：写入的总数量数据量；这些单位都为Kilobytes。
 ```
 
-### MySQL 配置
+### 配置
 
 * MySQL 客户端和服务端通信协议是“半双工”的，客户端发送给服务器和服务器发给客户端是不能同时发生，这种协议让MySQL通信简单快速，但也就无法进行流量控制，一旦一端开始了，另一端是能等它结束。所以查询语句很长的时候，参数max_allowed_packet就特别重要了
 * 使用 innodb_flush_method=O_DIRECT 来避免写的时候出现双缓冲区
@@ -804,7 +758,7 @@ explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by
     + 利用表的覆盖索引来加速分页查询
     + 如果查询数据量超过30%，MYSQL不会使用索引
     + `select * from orders where id > (select id from orders order by id desc  limit 1000000, 1) order by id desc limit 0,10`
-* 对于复杂的查询，可以使用中间临时表暂存数据
+* 对于复杂查询，可以使用中间临时表暂存数据
 * 拆分复杂 SQL 为多个小 SQL，避免大事务
   - 简单的 SQL 容易使用到 MySQL 的 QUERY CACHE。
   - 减少锁表时间特别是使用 MyISAM 存储引擎的表。
@@ -817,7 +771,8 @@ explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by
     + 关于not in和not exists，推荐使用not exists，不仅仅是效率问题，not in可能存在逻辑问题。如何高效的写出一个替代not exists的sql语句？
   - 对于 IN 做了相应的优化，即将 IN 中的常量全部存储在一个数组里面，而且这个数组是排好序的。对于连续的数值，能用 between 就不要用 in 了
   - 在 where 子句中使用参数，也会导致全表扫描 select id from t where num = @num
-  - 在查询中存在常量相等where条件字段（索引中的字段），且该字段在group by指定的字段的前面或者中间。来自于相等条件的常量能够填充搜索keys中的gaps，因而可以构成一个索引的完整前缀。索引前缀能够用于索引查找。如果要求对group by的结果进行排序，并且查找字段组成一个索引前缀，那么MySQL同样可以避免额外的排序操作。 c2在c1,c3之前，c2='a'填充这个坑，组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c2 = 'a' group by c1,c3 c1在索引的最前面，c1=a和group by c2,c3组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c1 = 'a' group by c2,c3 使用紧凑索引扫描，执行计划Extra一般显示"using index"，相当于使用了覆盖索引。
+  - 在查询中存在常量相等where条件字段（索引中的字段），且该字段在group by指定的字段的前面或者中间。来自于相等条件的常量能够填充搜索keys中的gaps，因而可以构成一个索引的完整前缀。索引前缀能够用于索引查找。如果要求对group by的结果进行排序，并且查找字段组成一个索引前缀，那么MySQL同样可以避免额外的排序操作
+  - c2在c1,c3之前，c2='a'填充这个坑，组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c2 = 'a' group by c1,c3 c1在索引的最前面，c1=a和group by c2,c3组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c1 = 'a' group by c2,c3 使用紧凑索引扫描，执行计划Extra一般显示"using index"，相当于使用了覆盖索引。
   - 通过索引 MySQL建立的索引（B+Tree）通常是有序的，如果通过读取索引就完成group by操作，那么就可避免创建临时表和排序。因而使用索引进行group by的最重要的前提条件是所有group by的参照列（分组依据的列）来自于同一个索引，且索引按照顺序存储所有的keys（即BTREE index，而HASH index没有顺序的概念）。松散索引扫描和紧凑索引扫描的最大区别是是否需要扫描整个索引或者整个范围扫描。
   + 正常流程 group by操作在没有合适的索引可用的时候，通常先扫描整个表提取数据并创建一个临时表，然后按照group by指定的列进行排序。在这个临时表里面，对于每一个group的数据行来说是连续在一起的。完成排序之后，就可以发现所有的groups，并可以执行聚集函数（aggregate function）。可以看到，在没有使用索引的时候，需要创建临时表和排序。在执行计划中通常可以看到"Using temporary; Using filesort"。
   - order by：尽量通过索引直接返回有序数据，减少额外的排序。MySQL中有两种排序方式：
@@ -830,8 +785,8 @@ explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by
   - 优化 group by 语句
     + 默认情况下，MySQL 会对 GROUP BY 分组的所有值进行排序。如果显式包括一个包含相同的列的 ORDER BY 子句，MySQL 可以毫不减速地对它进行优化，尽管仍然进行排序
     + 如果查询包括 GROUP BY 但并不想对分组的值进行排序，可以指定 ORDER BY NULL 禁止排序 `SELECT col1, col2, COUNT(*) FROM table GROUP BY col1, col2 ORDER BY NULL ;`
-* ORM（Object Relational Mapper）
-  - 最重要的是“Lazy Loading”：只有在需要的去取值的时候才会去真正的去做
+* ORM Object Relational Mapper
+  - Lazy Loading：只有在需要的去取值的时候才会去真正的去做
   - 需要小心处理他们，否则可能最终创建了许多微型查询，这会降低数据库性能
   - 可以将多个查询批处理到事务中，其操作速度比向数据库发送单个查询快得多
 * 排序
@@ -858,6 +813,9 @@ explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by
     + 如果查询中存在除了group by指定的列之外的索引其他部分，那么必须以常量的形式出现（除了min()和max()两个聚集函数）。比如，select c1,c3 from t1 group by c1,c2不能使用松散索引扫描。而select c1,c3 from t1 where c3 = 3 group by c1,c2可以使用松散索引扫描
     + 索引中的列必须索引整个数据列的值(full column values must be indexed)，而不是一个前缀索引。比如，c1 varchar(20), INDEX (c1(10)),这个索引没发用作松散索引扫描
     + 紧凑索引扫描方式下，先对索引执行范围扫描（range scan），再对结果元组进行分组。可能是全索引扫描或者范围索引扫描，取决于查询条件。当松散索引扫描条件没有满足的时候，group by仍然有可能避免创建临时表。如果在where条件有范围扫描，那么紧凑索引扫描仅读取满足这些条件的keys（索引元组），否则执行全索引扫描。这种方式读取所有where条件定义的范围内的keys，或者扫描整个索引。紧凑索引扫描，只有在所有满足范围条件的keys被找到之后才会执行分组操作
+* order by
+  - 随着分页偏移量越来越大，分页查询的性能也越来越低,偏移量是相对于匹配到的第一个索引值来的，如果偏移量很大，就又相当于进行全表扫描了
+    + 改变 where 语句中的偏移量起始值
 
 ```sql
 SELECT A.xx , B.yy FROM A INNER JOIN B USING (c) WHERE A.xx IN (5 , 6)
