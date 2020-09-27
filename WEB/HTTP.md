@@ -58,7 +58,7 @@
 * URI 格式:router+search+hash `https://www.baidu.com?key1=vvalue1&key2=value2#test`
   - hash，哈希值或者称为锚，是#后面的字符串，一般作为单页应用的路由地址，或者文档的锚
 
-## [CORS（cross-origin resource sharing）跨源资源共享（俗称『跨域请求』）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
+## [跨源资源共享 cross-origin resource sharing CORS（俗称『跨域请求』）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
 
 * 允许浏览器向跨源服务器，发出XMLHttpRequest请求，克服了AJAX只能同源使用的限制.浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉
 * 限制获取cookie，用iframe的方式放置了一个淘宝网页到真实页面中，获取淘宝密码信息
@@ -68,7 +68,7 @@
   - 开个口子，对于使用`<script src='//static.store.com/jquery.js'>` 加载的JavaScript，我们认为它的源属于www.store.com， 而不属于static.store.com，这样就可以操作www.store.com的页面了
   - 两个网页的一级域名是相同的，可以共享cookie, 不过cookie的domain一定要设置为那个一级域名才可以，例如：`document.cookie = 'test=true;path=/;domain=store.com'`
   - 对XMLHttpReqeust对象施加同源策略
-    - 代理模式：通过服务器端中转，例如你是来自book.com的， 现在想访问movie.com，那可以让那个book.com把请求转发给movie.com嘛！人类好像给这种方式起了个名字
+    - 代理模式：通过服务器端中转，例是来自book.com的，现在想访问movie.com，那可以让那个book.com把请求转发给movie.com
     - 服务器(domain)可以设置一个白名单，里边列出它允许哪些服务器(domain)的AJAX请求
 * 简单请求（simple request）:普通 HTML Form 在不依赖脚本的情况下可以发出的请求，比如表单的 method 如果指定为 POST ，可以用 enctype 属性指定用什么方式对表单内容进行编码
   - 自动在头信息之中，添加一个Origin字段
@@ -247,7 +247,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
 ## 地址栏输入 URL
 
 * 浏览器从 URL 中解析出服务器的域名
-  
+
   + 根据输入 URL 地址，去查找域名是否被本地 DNS 缓存，不同浏览器对 DNS 的设置不同，如果浏览器缓存了 URL 地址，那就直接返回 ip
   - 如果没有缓存 URL 地址，浏览器就会发起系统调用来查询本机 hosts 文件是否有配置 ip 地址，如果找到，直接返回
   - 如果找不到，就向网络中发起一个 DNS 查询
@@ -267,13 +267,13 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
 * 关闭连接或者为后续请求重用连接
 
 * 报文:用于 HTTP 协议交互的信息,本身是由多行（用CR+LF作换行符，即\r\n）数据构成的字符串文本
-  
+
   - HTTP/1.1以及更早的HTTP协议报文都是语义可读的
   - HTTP/2中，报文被嵌入到了一个新的二进制结构帧,帧允许实现很多优化，比如报文头部的压缩和复用。即使只有原始HTTP报文的一部分以HTTP/2发送出来，每条报文的语义依旧不变，客户端会重组原始HTTP/1.1请求。因此用HTTP/1.1格式来理解HTTP/2报文仍旧有效
   - 分为报文首部和报文主体两块，两者由首次出现的空行来分隔
 
 * 请求报文
-  
+
   - 状态行(request line)
     + 方法（method）:由一个动词像GET, POST 或者一个名词像OPTIONS，HEAD 来定义客户端的动作行为。通常客户端操作都是获取资源（GET方法）或者发送HTML form表单值（POST方法），在一些情况下也会有其他操作
     + 请求 URL（request-URL）:通常是上下文中元素资源的URL
@@ -284,7 +284,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
   - HTTP 1.1 后默认使用长连接，只需要一次握手即可多次传输数据
 
 * 响应报文
-  
+
   - 状态行(request line)
     + HTTP协议版本号
     + 状态码（status code）:来告知对应请求执行成功或失败，以及失败的原因
@@ -292,7 +292,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
   - 响应头
 
 * 格式
-  
+
   - 起始行：报文的第一行,在请求报文中用来说明要做什么，在响应报文中说明出现了什么情况
   - 首部字段：起始行后面有零个或多个首部字段，每个首部字段包含一个名字和对应的值，为了便于解析，两者之间用冒号分隔,最后是一个 CR+LF（即\r\n）.在请求报文中将其称作请求头，在响应报文中将其称作响应头
     + 请求首部字段
@@ -992,7 +992,7 @@ $un_data = unserialize_php($data);
 ## HTTP 1.1
 
 * 1999 年提出，做出以下变化
-  
+
   - 使用了摘要算法来进行身份验证
   - 默认使用长连接
   - 中新增加了 E-tag，If-Unmodified-Since, If-Match, If-None-Match 等缓存控制标头来控制缓存失效
@@ -1006,7 +1006,7 @@ $un_data = unserialize_php($data);
 * 维持连接，SSL 的开销也可以避免
 
 * 单个 TCP 连接在同一时刻只能处理一个请求
-  
+
   - 任意两个 HTTP 请求从开始到结束的时间在同一个 TCP 连接里不能重叠
   - 支持请求管道化，“并行”发送请求，但是这个并行，也不是真正意义上的并行，而是可以把先进先出队列从客户端（请求队列）迁移到服务端（响应队列）,在浏览器中默认是关闭的
     + 一些代理服务器不能正确的处理 HTTP Pipelining
@@ -1014,23 +1014,23 @@ $un_data = unserialize_php($data);
     + Head-of-line Blocking 连接头阻塞：在建立起一个 TCP 连接之后，假设客户端在这个连接连续向服务器发送了几个请求，按照标准，服务器应该按照收到请求的顺序返回结果 假设服务器在处理首个请求时花费了大量时间，那么后面所有的请求都需要等着首个请求结束才能响应(堵塞)
 
 * 浏览器客户端在同一时间，针对同一域名下的请求有一定数量限制。超过限制数目的请求会被阻塞 通常一次只能有 6 个连接。例如，如果其中一个请求由于服务器上的某些复杂逻辑而卡住，那么它们中的每一个都可以一次处理一个请求，整个连接就会冻结并等待响应。这个问题称为前端阻塞
-  
+
   - 为何一些站点会有多个静态资源 CDN 域名的原因
 
 * 缺点
-  
+
   - 一条连接同时只能发送一个请求
-  
+
   - 请求只能从客户端发起
-  
+
   - 请求/响应首部未经压缩就直接发送，首部信息越多延迟越大
-  
+
   - 明文传输
-  
+
   - 没有解决无状态连接的
-  
+
   - 当有多个请求同时被挂起的时候 就会拥塞请求通道，导致后面请求无法发送
-  
+
   - 臃肿的消息首部:HTTP/1.1能压缩请求内容,但是消息首部不能压缩;在现今请求中,消息首部占请求绝大部分(甚至是全部)也较为常见,造成通信的浪费
 
 ## HTTP /2

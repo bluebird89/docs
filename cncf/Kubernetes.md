@@ -1765,6 +1765,7 @@ source ~/.bash_profile
     -  [lensapp / lens ](https://github.com/lensapp/lens):Lens - The Kubernetes IDE https://k8slens.dev/
         +  `sudo snap install kontena-lens --classic`
     - [Kubernetic](https://kubernetic.com/)The Kubernetes Desktop Client
+* [](https://github.com/sighupio/permission-manager)
 * [kubesphere/kubesphere](https://github.com/kubesphere/kubesphere):Easy-to-use Production Ready Container Platform https://kubesphere.io  <https://fuckcloudnative.io/posts/kubesphere/>
 * [openshift/origin](https://github.com/openshift/origin):Enterprise Kubernetes for Developers http://www.openshift.org
 * [kubernetes/kops](https://github.com/kubernetes/kops):Kubernetes Operations (kops) - Production Grade K8s Installation, Upgrades, and Management

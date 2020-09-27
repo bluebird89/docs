@@ -74,12 +74,30 @@
 * Nginx 启动以后，会在系统中以 daemon 的方式在后台运行，包括一个 master 进程，n(n>=1) 个 worker 进程。所有的进程都是单线程（即只有一个主线程），进程间通信主要使用共享内存方式
     - master进程:充当整个进程组与用户的交互接口
         + 接受外界信号,负责处理 Nginx 主服务的启动、关闭与重载,管理 Worker 进程(给Worker进程发信号)来实现重启服务、平滑升级、更换日志文件、配置文件实时生效等功能
+        + 进行一系列的初始化，包括但不限于：
+            * 命令行参数解析
+            * 时间初始化
+            * 日志初始化
+            * ssl初始化
+            * 操作系统相关初始化
+            * 一致性hash表初始化
+            * 模块编号处理
+        + 另外一个最重要的初始化由ngx_init_cycle()函数完成，该函数围绕nginx中非常核心的一个全局数据结构ngx_cycle_t展开
+            * 配置文件解析
+            * 创建并监听socket
+            * 初始化nginx各模块
+        + main函数的最后，根据是否启用多进程模型，分别进入多进程版本的ngx_master_process_cycle和单进程版本的ngx_single_process_cycle()。
         + 负责收集、分发请求:在接收客户端连接信号后会将这个网络事件发送给某个 worker 进程，由该 worker 进程来接管后续的连接建立和请求处理
         + 维护 worker 进程的运行状态
             * fork Worker进程：按照配置fork出N个Worker进程，一般说来配置推荐Worker进程数量和CPU核数保持一致即可
             * 监控Worker进程，当某个Worker异常挂了后，Master进程负责重新拉起一个
     - 多个worker进程:用来处理基本的网络事件，每个 worker 请求相互独立且平等的竞争来自客户端的请求，共同竞争来处理来自客户端的请求
-        + 每个 Worker 进程都是从 Master 进程fork过来
+        + 每个 Worker 进程都是从 Master 进程 fork 过来
+        + 子进程启动后，进入ngx_worker_process_cycle，进行一些工作进程的初始化，随后修改进程名称为："worker process"。
+        + 接着进入工作循环函数ngx_process_events_and_timers，在该函数中主要负责：
+            * 竞争互斥锁，拿到锁的进程才能执行accept接受新的连接，以此在多进程之间解决惊群效应
+            * 通过epoll异步IO模型处理网络IO事件，包括新的连接事件和已建立连接发生的读写事件
+            * 处理定时器队列中到期的定时器事件，定时器通过红黑树的方式存储
         + 具体的 HTTP 连接与请求处理工作由 worker 进程来完成
         + 请求只能在一个 worker 进程中被处理，且一个 worker 进程只有一个主线程，所以同时只能处理一个请求
         + 所有 Worker 进程的 listenfd 会在新连接到来时变得可读，为保证只有一个进程处理该连接，所有 Worker 进程在注册 listenfd 读事件前抢互斥锁accept_mutex，抢到互斥锁的那个进程注册 listenfd 读事件，在读事件里调用 accept 接受该连接。
@@ -121,8 +139,26 @@
     - 整个过程中，Master(Old)  进程是一直存活的，这是为了方便回滚
         + 向 Master(Old)  进程发送 HUP 信号，相当于执行了一次 reload，会启动新的 Worker 进程
         + 再向 Master (New) 进程发送 QUIT 信号
+* HTTP请求预处理:当连接有数据产生时，工作线程读取socket中到来的数据，并根据HTTP协议格式进行解析，最终封装成ngx_request_t请求对象，提交处理
+    - 请求处理的11个阶段:在nginx中各HTTP模块是以挂载的形式串接而成，以流水线工作模式进行HTTP请求的处理，nginx将一个HTTP请求的处理划分为11个阶段
 
 ![](../../_static/nginx_archetect.png "Optional title")
+
+```
+typedef enum {
+    NGX_HTTP_POST_READ_PHASE = 0,
+    NGX_HTTP_SERVER_REWRITE_PHASE,
+    NGX_HTTP_FIND_CONFIG_PHASE,
+    NGX_HTTP_REWRITE_PHASE,
+    NGX_HTTP_POST_REWRITE_PHASE,
+    NGX_HTTP_PREACCESS_PHASE,
+    NGX_HTTP_ACCESS_PHASE,
+    NGX_HTTP_POST_ACCESS_PHASE,
+    NGX_HTTP_PRECONTENT_PHASE,
+    NGX_HTTP_CONTENT_PHASE,
+    NGX_HTTP_LOG_PHASE
+} ngx_http_phases;
+```
 
 ## 安装
 
@@ -147,6 +183,10 @@
     - -u显示UDP连接的端口
     - -l显示服务正在监听的端口信息，如httpd启动后，会一直监听80端口
     - -p显示监听端口的服务名称是什么（也就是程序名称）
+* 核心模块群
+    - 每个模块有一个支持的命令解析列表，在初始化过程中，主进程将会遍历所有模块的命令列表，进行配置文件中的命令解析
+    - ngx_http_proxy_module
+    - ngx_http_core_module
 
 ```sh
 brew info nginx
@@ -170,21 +210,31 @@ wget http://zlib.net/zlib-1.2.11.tar.gz && tar -zxf zlib-1.2.11.tar.gz
 wget http://www.openssl.org/source/openssl-1.1.1f.tar.gz && tar -zxf openssl-1.1.1f.tar.gz
 wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar.gz
 
-
 sudo apt install gcc libpcre3-dev zlib1g-dev libssl-dev libxml2-dev libxslt1-dev  libgd-dev google-perftools libgoogle-perftools-dev libperl-dev # the Google perftools module requires the Google perftools library
 
 sudo apt install libgeoip-dev  # the GeoIP module requires the GeoIP library
 # --with-ld-opt=-ltcmalloc   checking for --with-ld-opt="-ljemalloc" ... not found
-
-./configure --user=www-data --group=www-data --prefix=/opt/nginx --with-http_auth_request_module --with-http_realip_module --with-http_v2_module --with-debug  --with-http_random_index_module --with-http_sub_module --with-http_addition_module --with-http_secure_link_module --with-http_geoip_module --with-http_ssl_module --with-stream_ssl_module --with-stream_realip_module --with-stream_ssl_preread_module --with-stream  --with-http_slice_module --with-google_perftools_module --with-threads  --with-http_gzip_static_module --with-http_gunzip_module --with-http_stub_status_module  --with-ld-opt=-ltcmalloc  --add-module=/home/henry/src/nginx_module/echo-nginx-module --add-module=/home/henry/src/nginx_module/nginx-http-concat/ --add-module=/home/henry/src/nginx_module/ngx_cache_purge/
-
-sudo ./configure --user=nginx --group=nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --with-select_module --with-poll_module --with-threads --with-file-aio --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_addition_module --with-http_xslt_module --with-http_xslt_module=dynamic --with-http_image_filter_module --with-http_image_filter_module=dynamic --with-http_geoip_module --with-http_geoip_module=dynamic --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_auth_request_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_slice_module --with-http_stub_status_module --with-http_perl_module --with-http_perl_module=dynamic --with-mail --with-mail=dynamic --with-mail_ssl_module --with-stream --with-stream=dynamic --with-stream_ssl_module --with-stream_realip_module --with-stream_geoip_module --with-stream_geoip_module=dynamic --with-stream_ssl_preread_module --with-google_perftools_module --with-cpp_test_module --with-compat --with-pcre --with-pcre-jit  --with-zlib-asm=CPU --with-libatomic --with-debug --with-ld-opt="-Wl,-E"
+nginx modules path: "/usr/share/nginx/modules"
 
 ./configure \
+--user=www-data \
+--group=www-data \
 --prefix=/usr/share/nginx \
 --sbin-path=/usr/sbin/nginx \
 --conf-path=/etc/nginx/nginx.conf \
 --pid-path=/run/nginx.pid \
+--error-log-path=/var/log/nginx/error.log \
+--http-log-path=/var/log/nginx/access.log \
+--lock-path=/var/lock/nginx.lock \
+--http-client-body-temp-path=/var/lib/nginx/body \
+--http-fastcgi-temp-path=/var/lib/nginx/fastcgi \
+--http-proxy-temp-path=/var/lib/nginx/proxy \
+--http-scgi-temp-path=/var/lib/nginx/scgi \
+--http-uwsgi-temp-path=/var/lib/nginx/uwsgi \
+--with-compat \
+--with-file-aio \
+--with-threads \
+--with-http_addition_module \
 --with-pcre=../pcre-8.40 \
 --with-zlib=../zlib-1.2.11 \
 --with-openssl=../openssl-1.1.0f \
@@ -192,7 +242,6 @@ sudo ./configure --user=nginx --group=nginx --sbin-path=/usr/sbin/nginx --conf-p
 --with-openssl-opt=no-nextprotoneg \
 --with-openssl-opt=no-weak-ssl-ciphers \
 --with-openssl-opt=no-ssl3 \
---with-http_ssl_module \
 --with-stream \
 --with-stream_realip_module \
 --with-stream_ssl_module \
@@ -200,17 +249,7 @@ sudo ./configure --user=nginx --group=nginx --sbin-path=/usr/sbin/nginx --conf-p
 --with-mail \
 --with-mail_ssl_module \
 --with-mail=dynamic \
---error-log-path=/var/log/nginx/error.log \
---http-log-path=/var/log/nginx/access.log \
---lock-path=/var/lock/nginx.lock \
---user=www-data \
---group=www-data \
 --build=Ubuntu \
---http-client-body-temp-path=/var/lib/nginx/body \
---http-fastcgi-temp-path=/var/lib/nginx/fastcgi \
---http-proxy-temp-path=/var/lib/nginx/proxy \
---http-scgi-temp-path=/var/lib/nginx/scgi \
---http-uwsgi-temp-path=/var/lib/nginx/uwsgi \
 --with-pcre-jit \
 --with-compat \
 --with-file-aio \
@@ -230,61 +269,23 @@ sudo ./configure --user=nginx --group=nginx --sbin-path=/usr/sbin/nginx --conf-p
 --with-http_stub_status_module \
 --with-http_v2_module \
 --with-http_secure_link_module \
---with-debug \
---with-cc-opt='-g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2' \
---with-ld-opt='-Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now'
---add-module= "rtmp包的路径"
-
-./configure \
---prefix=/data/service/nginx \
---sbin-path=/data/service/nginx/sbin/nginx \
---conf-path=/data/service/nginx/conf/nginx.conf \
---pid-path=/data/service/nginx/logs/nginx.pid \
---lock-path=/data/service/nginx/lock/nginx.lock \
---error-log-path=/data/service/nginx/logs/error.log \
---http-log-path=/data/service/nginx/logs/access.log \
---http-scgi-temp-path=/data/service/nginx/scgi \
---http-uwsgi-temp-path=/data/service/nginx/uwsgi \
---http-proxy-temp-path=/data/service/nginx/proxy \
---http-fastcgi-temp-path=/data/service/nginx/fastcig \
---http-client-body-temp-path=/data/service/nginx/body \
---user=www-data \
---group=www-data \
 --with-ipv6 \
 --with-debug \
 --with-file-aio \
 --with-rtsig_module \
---with-http_ssl_module \
---with-http_flv_module \
---with-http_mp4_module \
---with-http_sub_module \
---with-http_dav_module \
 --with-http_xslt_module \
---with-http_geoip_module \
---with-http_realip_module \
---with-http_addition_module \
---with-http_gzip_static_module \
---with-http_secure_link_module \
 --with-http_degradation_module \
---with-http_stub_status_module \
---with-http_random_index_module \
---with-http_image_filter_module
-
-./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -fPIC' --with-ld-opt='-Wl,-z,relro -Wl,-z,now -pie' --add-module=/opt/download/ngx_devel_kit-0.3.0 --add-module=/opt/download/lua-nginx-module-0.10.9rc7
-
-  nginx path prefix: "/usr/share/nginx"
-  nginx binary file: "/usr/sbin/nginx"
-  nginx modules path: "/usr/share/nginx/modules"
-  nginx configuration prefix: "/etc/nginx"
-  nginx configuration file: "/etc/nginx/nginx.conf"
-  nginx pid file: "/run/nginx.pid"
-  nginx error log file: "/var/log/nginx/error.log"
-  nginx http access log file: "/var/log/nginx/access.log"
-  nginx http client request body temporary files: "/var/lib/nginx/body"
-  nginx http proxy temporary files: "/var/lib/nginx/proxy"
-  nginx http fastcgi temporary files: "/var/lib/nginx/fastcgi"
-  nginx http uwsgi temporary files: "/var/lib/nginx/uwsgi"
-  nginx http scgi temporary files: "/var/lib/nginx/scgi"
+--with-http_image_filter_module \
+--with-debug \
+--with-http_geoip_module \
+--with-google_perftools_module \
+--with-cc-opt='-g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -fPIC' \
+--with-ld-opt='-Wl,-z,relro -Wl,now -pie,-Bsymbolic-functions -fPIE -pie,-ltcmalloc' \
+--add-module=/opt/download/ngx_devel_kit-0.3.0
+--add-module=/opt/download/lua-nginx-module-0.10.9rc7
+--add-module=/opt/src/nginx_module/echo-nginx-module
+--add-module=/opt/src/nginx_module/nginx-http-concat/
+--add-module=/opt/src/nginx_module/ngx_cache_purge/
 
 make && sudo make install
 
@@ -292,7 +293,6 @@ echo "/usr/local/LuaJIT/lib" >> /etc/ld.so.conf
 ldconfig
 
 # /etc/systemd/system/nginx.service
-
 sudo systemctl start nginx.service && sudo systemctl enable nginx.service
 
 # /etc/ufw/applications.d/nginx
