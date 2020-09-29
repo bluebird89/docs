@@ -1,4 +1,4 @@
-# Extreme Programming
+# 极限编程 Xtreme Programming XP
 
 * 一套软件开发方法是由一系列与开发相关的规则、规范和惯例
 * Kent Beck 等人在上世纪九十年代发明的一种软件工程方法。极限编程是一种强调团队工作的工作方式，是多种敏捷方式的一种

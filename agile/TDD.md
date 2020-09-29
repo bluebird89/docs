@@ -1,4 +1,4 @@
-# TDD 测试驱动开发
+# 测试驱动开发 Test-Driven Development TDD
 
 * 正确软件的开发套路
 * 提高软件认知能力的方法

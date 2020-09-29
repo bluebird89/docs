@@ -12,7 +12,7 @@ The Ruby Programming Language https://www.ruby-lang.org/
 
 * [rbenv/rbenv](https://github.com/rbenv/rbenv):Groom your app’s Ruby environment
 
-```
+```sh
 # ubuntu
 sudo apt-get install ruby-full
 
