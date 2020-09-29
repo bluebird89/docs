@@ -21,6 +21,9 @@ ENVOY IS AN OPEN SOURCE EDGE AND SERVICE PROXY, DESIGNED FOR CLOUD-NATIVE APPLIC
   - Listener filter：Listener 使用 listener filter（监听器过滤器）来操作连接的元数据。它的作用是在不更改 Envoy 的核心功能的情况下添加更多的集成功能。Listener filter 的 API 相对简单，因为这些过滤器最终是在新接受的套接字上运行。在链中可以互相衔接以支持更复杂的场景，例如调用速率限制。Envoy 已经包含了多个监听器过滤器
   - Http Route Table：HTTP 的路由规则，例如请求的域名，Path 符合什么规则，转发给哪个 Cluster
   - Health checking：健康检查会与SDS服务发现配合使用。但是，即使使用其他服务发现方式，也有相应需要进行主动健康检查的情况
+* 功能
+  - 本身就是一个七层代理，通过模块化结构实现了流量治理、信息监控等核心功能，比如流量治理功能就包括自动重连、熔断、全局限速、流量镜像和异常检测等多种高级功能
+  - 边缘代理，比如 Istio 的 Ingress Gateway、基于 Envoy 实现的 Ingress Controller（Contour、Ambassador[1]、Gloo[2] 等
 
 ## 配置
 
