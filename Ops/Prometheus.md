@@ -15,11 +15,18 @@ The Prometheus monitoring system and time series database. https://prometheus.io
 * 需要处理的告警才发出来，发出来的告警必须得到处理。
 * 简单的架构就是最好的架构，业务系统都挂了，监控也不能挂。Google SRE 里面也说避免使用 Magic 系统，例如机器学习报警阈值、自动修复之类。这一点见仁见智吧，感觉很多公司都在搞智能 AI 运维。
 * 局限
-  - Prometheus 是基于 Metric 的监控，不适用于日志（Logs）、事件（Event）、调用链（Tracing）。
-  - Prometheus 默认是 Pull 模型，合理规划你的网络，尽量不要转发。
-  - 对于集群化和水平扩展，官方和社区都没有银弹，需要合理选择 Federate、Cortex、Thanos 等方案。
-  - 监控系统一般情况下可用性大于一致性，容忍部分副本数据丢失，保证查询请求成功。这个后面说 Thanos 去重的时候会提到。
-  - Prometheus 不一定保证数据准确，这里的不准确一是指 rate、histogram_quantile 等函数会做统计和推断，产生一些反直觉的结果，这个后面会详细展开。二来查询范围过长要做降采样，势必会造成数据精度丢失，不过这是时序数据的特点，也是不同于日志系统的地方。
+  - Prometheus 是基于 Metric 的监控，不适用于日志（Logs）、事件（Event）、调用链（Tracing）
+  - Prometheus 默认是 Pull 模型，合理规划你的网络，尽量不要转发
+  - 对于集群化和水平扩展，官方和社区都没有银弹，需要合理选择 Federate、Cortex、Thanos 等方案
+  - 监控系统一般情况下可用性大于一致性，容忍部分副本数据丢失，保证查询请求成功。这个后面说 Thanos 去重的时候会提到
+  - Prometheus 不一定保证数据准确
+    + rate、histogram_quantile 等函数会做统计和推断，产生一些反直觉的结果
+    + 查询范围过长要做降采样，势必会造成数据精度丢失，不过这是时序数据的特点，也是不同于日志系统的地方
+*  对比其它方案
+  - Prometheus属于一站式监控告警平台，依赖少，功能齐全
+  - Prometheus支持对云或容器的监控，其他系统主要对传统物理机监控
+  - Prometheus数据查询语句表现力更强大，内置更强大的统计函数
+  - Prometheus在数据存储扩展性以及持久性上没有InfluxDB，OpenTSDB，Sensu好
 
 ## 安装
 
@@ -83,18 +90,11 @@ curl -X POST http://localhost:9090/-/reload
 * Prometheus targets: Prometheus监控目标服务，Prometheus通过轮询这些目标服务拉取监控Metrics数据。
 * Push gateway: 某些场景Prometheus无法直接拉取监控数据，Pushgateway的作用在于提供了中间代理。我们可以在应用程序中定时将监控Metrics数据提交到Pushgateway，Prometheus Server定时从Pushgateway的/metrics接口采集数据。
 * Prometheus alerting: Prometheus告警，Alertmanager用于管理告警，支持告警通知。
-* Data visualization: 数据可视化展示，通过PromQL对时间序列数据进行查询、聚合以及逻辑运算。除了Prometheus自带的UI，Grafana对Prometheus也提供了非常好的支持。
-
-## 对比其它方案
-
-* Prometheus属于一站式监控告警平台，依赖少，功能齐全。
-* Prometheus支持对云或容器的监控，其他系统主要对传统物理机监控。
-* Prometheus数据查询语句表现力更强大，内置更强大的统计函数。
-* Prometheus在数据存储扩展性以及持久性上没有InfluxDB，OpenTSDB，Sensu好。
+* Data visualization: 数据可视化展示，通过PromQL对时间序列数据进行查询、聚合以及逻辑运算。除了Prometheus自带的UI，Grafana对Prometheus也提供了非常好的支持
 
 ## 数据模型
 
-* 时序数据:以时间维度存储连续的数据集合,用以下表达式标识 `<metric name>{<label name>=<label value>, ...}``
+* 时序数据:以时间维度存储连续的数据集合,用以下表达式标识 `<metric name>{<label name>=<label value>, ...}`
     - Metric name: 统计指标名称，名称应该具有语义化，例如”fluentd_flowcounter_out_bytes”。Metric name必须满足正则表达式[a-zA-Z_:][a-zA-Z0-9_:]*
       + metrics名称必须满足 [a-zA-Z_:][a-zA-Z0-9_:]* 这个正则表达式，label名称必须满足 [a-zA-Z_][a-zA-Z0-9_]* 这个正则表达式
       + metrics名称需要使用前缀来表示特定的服务，例如prometheus_notifications_total表示Prometheus服务，http_request_duration_seconds表示HTTP服务
@@ -115,7 +115,7 @@ curl -X POST http://localhost:9090/-/reload
             * 统计所有采样点总数
     - Labels: 标签是一组Key-Value，labels让Prometheus数据具有多个维度。例如我们可以用{hostname=”…”, type=”…“}这个标签来区分不同的时序数据。标签的命名应该具有语义化，同时必须满足正则表达式[a-zA-Z_][a-zA-Z0-9_]*，所有_开头的标签名被Prometheus内部保留使用。
     - Value: 实际的时序数据值，包括一个float64值和一个毫秒级时间戳
-* 拉取的每一个目标服务实例称为instance，所有相同服务实例称为Job，Prometheus拉取目标服务监控Metric数据的时候，会自动添加job和instance两个标签。
+* 拉取每一个目标服务实例称为instance，所有相同服务实例称为Job，Prometheus拉取目标服务监控Metric数据的时候，会自动添加job和instance两个标签。
     - job: 值为prometheus.yml配置的job名称
     - instance: 值为服务实例的host:port
     - 自动生成以下4个Metrics数据
