@@ -92,68 +92,6 @@ curl -X POST http://localhost:9090/-/reload
 * Prometheus alerting: Prometheus告警，Alertmanager用于管理告警，支持告警通知。
 * Data visualization: 数据可视化展示，通过PromQL对时间序列数据进行查询、聚合以及逻辑运算。除了Prometheus自带的UI，Grafana对Prometheus也提供了非常好的支持
 
-## 数据模型
-
-* 时序数据:以时间维度存储连续的数据集合,用以下表达式标识 `<metric name>{<label name>=<label value>, ...}`
-    - Metric name: 统计指标名称，名称应该具有语义化，例如”fluentd_flowcounter_out_bytes”。Metric name必须满足正则表达式[a-zA-Z_:][a-zA-Z0-9_:]*
-      + metrics名称必须满足 [a-zA-Z_:][a-zA-Z0-9_:]* 这个正则表达式，label名称必须满足 [a-zA-Z_][a-zA-Z0-9_]* 这个正则表达式
-      + metrics名称需要使用前缀来表示特定的服务，例如prometheus_notifications_total表示Prometheus服务，http_request_duration_seconds表示HTTP服务
-      + metrics名称需要使用后缀来表示监控数值的单位，例如http_request_duration_seconds和node_memory_usage_bytes，http_requests_total total则是用来表示次数
-      + metrics名称应该使用基本单位，例如seconds，bytes，meters
-      + metrics名称最好使用单个单位，不要使用多个单位，例如不要混淆seconds 和 bytes
-      + 不应该把label名称放在metrics名称上
-    - Metrics类型
-        + Counter是一个计数器指标，它是一个只能递增的数值（服务重启的时候会被reset为0）。 Counter主要用于统计服务的请求数、任务完成数、错误出现的次数等
-        + Gauge是一个仪表盘指标，它表示一个既可以递增, 又可以递减的值。主要用于统计类似于温度、当前内存使用量等会上下浮动的指标
-        + histogram是柱状图，定义一个Histogram类型Metric，则Prometheus系统会自动生成三个对应的指标
-            * 对每个采样点进行统计，打到各个分类桶中(bucket)
-            * 对每个采样点值累计和(sum)
-            * 对采样点的次数累计和(count)
-        + summary是采样点分位图统计(通常的使用场景：请求持续时间和响应大小)，定义一个Summary类型Metric，则Prometheus系统会自动生成三个对应的指标
-            * 对于每个采样点进行统计，并形成分位图。
-            * 统计所有采样点的和
-            * 统计所有采样点总数
-    - Labels: 标签是一组Key-Value，labels让Prometheus数据具有多个维度。例如我们可以用{hostname=”…”, type=”…“}这个标签来区分不同的时序数据。标签的命名应该具有语义化，同时必须满足正则表达式[a-zA-Z_][a-zA-Z0-9_]*，所有_开头的标签名被Prometheus内部保留使用。
-    - Value: 实际的时序数据值，包括一个float64值和一个毫秒级时间戳
-* 拉取每一个目标服务实例称为instance，所有相同服务实例称为Job，Prometheus拉取目标服务监控Metric数据的时候，会自动添加job和instance两个标签。
-    - job: 值为prometheus.yml配置的job名称
-    - instance: 值为服务实例的host:port
-    - 自动生成以下4个Metrics数据
-        + `up{job="{job-name}", instance="{host:port}"}`: 用来反馈目标服务监控状态，值为1表示服务健康，否则表示服务不通。
-        + `scrape_duration_seconds{job="{job-name}", instance="{host:port}"}`: 拉取监控Metrics数据时间开销。
-        + `scrape_samples_post_metric_relabeling{job="{job-name}", instance="{host:port}"}`: labels变化后，仍然剩余的监控数据条数。
-        + `scrape_samples_scraped{job="{job-name}", instance="{host:port}"}`: 拉取监控Metrics数据的条数。
-
-```
-# 总请求
-sum(http_requests_total{label1=value1, label2=value2 ...})
-# 每秒请求量
-sum(rate(http_requests_total{label1=value1, label2=value2 ...}[5m]))
-# 请求量Top 10的URI
-topk(10, sum(http_requests_total{label1=value1, label2=value2 ...}) by (path))
-
-# 总的buffer
-sum(buffer_total_bytes{label1=value1, label2=value2 ...})
-# buffer按label分类
-sum(buffer_total_bytes{label1=value1, label2=value2 ...}) by (label)
-
-# 总次数
-http_requests_latency_seconds_histogram_count{label1=value1, label2=value2 ...}
-# 总和
-http_requests_latency_seconds_histogram_sum{label1=value1, label2=value2 ...}
-分类桶的数据
-# http请求响应时间 <=0.005 秒的请求次数
-http_requests_latency_seconds_histogram_bucket{le="0.005", label1=value1, label2=value2 ...}
-# http请求响应时间 <=0.01 秒的请求次数
-http_requests_latency_seconds_histogram_bucket{le="0.01", label1=value1, label2=value2 ...}
-
-job: api-server
-  instance 1：1.2.3.4:5670
-  instance 2：1.2.3.4:5671
-  instance 3：5.6.7.8:5670
-  instance 4：5.6.7.8:5671
-```
-
 ## 配置
 
 * 配置文件是YAML格式，启动的时候可以加载运行参数-config.file指定配置文件，默认为prometheus.yml
@@ -351,11 +289,47 @@ alerting:
       - "1.2.3.6:9093"
 ```
 
-## 查询
+## [PromQL](https://mp.weixin.qq.com/s/ESzq9_wtO-ezxnRp1HAtnw)
 
-* 提供了内置的PromQL，用户可以实时的查询和聚合时序数据，计算结果可以通过Expression Browser、Grafana展示，也可以通过HTTP API请求获取
-* 结果有4种类型
-    - Instant vector: 即时向量，同一时间点的一组时序数据
+* 时间序列,:以时间维度存储连续的数据集合,用以下表达式标识 `<metric name>{<label name>=<label value>, ...}`,每一个点称之为样本，每个样本由三部分组成：
+  - 指标：由指标名称和描述指标的级别组成的
+    + Prometheus的底层实现中指标名称实际上是以__name__=<metric name>的形式保存在数据库中的
+  - 时间戳：一个精确到毫秒级别的时间戳
+  - 值：一个float64位的值
++ Metric name: 统计指标名称，名称应该具有语义化
+  * 必须满足正则表达式 `[a-zA-Z_:][a-zA-Z0-9_:]*`
+  * 使用前缀表示特定服务，例如prometheus_notifications_total表示Prometheus服务，http_request_duration_seconds表示HTTP服务
+  * 使用后缀来表示监控数值的单位，例如http_request_duration_seconds和node_memory_usage_bytes，http_requests_total
+  * 使用基本单位，例如seconds，bytes，meters
+  * 最好使用单个单位，不要使用多个单位，例如不要混淆seconds 和 bytes
+  * 不应该把label名称放在metrics名称上
++ Metrics类型
+    * Counter 一个计数器指标，一个只能递增的数值（服务重启的时候会被reset为0）。主要用于统计服务的请求数、任务完成数、错误出现的次数等
+    * Gauge 一个仪表盘指标，表示一个既可以递增, 又可以递减的值。主要用于统计类似于温度、当前内存使用量等会上下浮动的指标
+    * histogram 柱状图，Prometheus系统会自动生成三个对应指标
+        - 对每个采样点进行统计，打到各个分类桶中(bucket)
+        - 对每个采样点值累计和(sum)
+        - 对采样点的次数累计和(count)
+    * summary是采样点分位图统计(通常的使用场景：请求持续时间和响应大小)，Prometheus系统会自动生成三个对应的指标
+        - 对于每个采样点进行统计，并形成分位图
+        - 统计所有采样点的和
+        - 统计所有采样点总数
+    - Labels: 标签是一组Key-Value，labels让Prometheus数据具有多个维度。例如可以用{hostname=”…”,type=”…“}这个标签来区分不同的时序数据
+      + 标签的命名应该具有语义化
+      + 满足正则表达式[a-zA-Z_][a-zA-Z0-9_]*
+      + 所有_开头的标签名被Prometheus内部保留使用。
+    - Value: 实际的时序数据值，包括一个float64值和一个毫秒级时间戳
+* 拉取每一个目标服务实例称为instance，所有相同服务实例称为Job，Prometheus拉取目标服务监控Metric数据的时候，会自动添加job和instance两个标签
+    - job: 值为prometheus.yml配置的job名称
+    - instance: 值为服务实例的host:port
+    - 自动生成以下4个Metrics数据
+        + `up{job="{job-name}", instance="{host:port}"}`: 用来反馈目标服务监控状态，值为1表示服务健康，否则表示服务不通。
+        + `scrape_duration_seconds{job="{job-name}", instance="{host:port}"}`: 拉取监控Metrics数据时间开销。
+        + `scrape_samples_post_metric_relabeling{job="{job-name}", instance="{host:port}"}`:labels变化后，仍然剩余的监控数据条数
+        + `scrape_samples_scraped{job="{job-name}", instance="{host:port}"}`: 拉取监控Metrics数据的条数。
+* 内置PromQL，用户可以实时的查询和聚合时序数据，计算结果可以通过Expression Browser、Grafana展示，也可以通过HTTP API请求获取
+* 结果类型
+    - Instant vector: 即时向量，一时间点的一组时序数据
     - Range vector: 范围向量，一个时间段内的一组时序数据
     - Scalar: 标量，一个浮点数值
     - String: 一个字符串，目前未使用
@@ -364,15 +338,24 @@ alerting:
     - 条件查询
         + =: 等于条件，例如 http_requests_total{environment="test",method="Get"}
         + !=: 不等于条件，例如 http_requests_total{environment!=”test”}
-        + =~: 匹配正则表达式条件，例如 http_requests_total{environment=~”t.”}
-        + !~: 不匹配正则表达式条件，例如 http_requests_total{environment!=~”t.”}
     - 模糊查询
         + 查询http_requests_total environment label值匹配`t.*`正则的时序数据  http_requests_total{environment=~"t.*"}
         + 查询http_requests_total environment label值不匹配`t.*`正则的时序数据 http_requests_total{environment!~"t.*"}
     - 区间查询
         + http_requests_total{environment="test", method="Get"}[10s]
         + s: 秒 m: 分 h: 时 d: 天 w: 周 y: 年
-    - 聚合查询： Prometheus内置支持以下几种类型的聚合函数，用于即时向量聚合操作
+        + 时间位移：选择一个参考点，上面的范围查询都是使用的是当前的时间值，位移操作的关键字为offset http_request_total{}[1d] offset 1d
+    * 瞬时数据:返回最近的一条http_request_total{}
+    - 运算符 + - * / % ^
+      +  如果是瞬时向量与瞬时向量之间进行数学运算时，左边向量元素匹配（标签完全一致）右边向量元素，如果没找到匹配元素，则直接抛弃
+      +  `{device="sda",instance="localhost:9100",job="node_exporter"}=>1634967552@1518146427.807 + 864551424@1518146427.807`
+      +  `{device="sdb",instance="localhost:9100",job="node_exporter"}=>0@1518146427.807 + 1744384@1518146427.807`
+    - 瞬时向量与标量进行布尔运算时，PromQL依次比较向量中的所有时间序列样本的值，如果比较结果为true则保留，反之丢弃
+    - 集合运行
+      + vector1 and vector2 会产生一个由vector1的元素组成的新的向量。该向量包含vector1中完全匹配vector2中的元素组成
+      + vector1 or vector2 会产生一个新的向量，该向量包含vector1中所有的样本数据，以及vector2中没有与vector1匹配到的样本数据
+      + vector1 unless vector2 会产生一个新的向量，新向量中的元素由vector1中没有与vector2匹配的元素组成
+    - 聚合查询：用于即时向量聚合操作 <aggr-op>([parameter,] <vector expression>) [without|by (<label list>)]
         + sum: 求和 sum(http_requests_total){environment="test"}
         + min: 求最小值
         + max: 求最大值
@@ -384,9 +367,56 @@ alerting:
         + bottomk: 最小k个数
         + topk: 最大k个数 topk(3, http_requests_total)
         + quantile: 分布统计
+    * 向量匹配模式
+      - 向量与向量之间运算时会基于默认的匹配规则，依次找到右边边向量元素和左边向量元素匹配(标签完全一致)的进行运算，不匹配则丢弃
+      - 一对一（one to one） 会从操作符两边获取瞬时向量依次比较并找到唯一匹配的样本值 `vector1 <operator> vector2`,作符两边表达式标签不一致的情况下
+        + on(label list) 将匹配行为限定在某些便签之内 method_code:http_errors:rate5m{code="500"} / ignoring(code) method:http_requests:rate5m
+        + ignoring(label list）在匹配时忽略某些便签
+      - 多对一和一对多:“一”侧的每一个向量元素可以与”多”侧的多个元素匹配的情况,必须使用group修饰符：group_left或者group_right来确定哪一个向量具有更高的基数（充当“多”的角色）
+        + method_code:http_errors:rate5m / ignoring(code) group_left method:http_requests:rate5m
+        + <vector expr> <bin-op> ignoring(<label list>) group_right(<label list>) <vector expr>
+        + <vector expr> <bin-op> on(<label list>) group_left(<label list>) <vector expr>
+        + <vector expr> <bin-op> on(<label list>) group_right(<label list>) <vector expr>
     - 函数计算
-        + rate(range vector): 用于计算过去一段时间每秒平均值，取指定时间范围内所有数据点，算出一组速率，然后取平均值作为结果。仅适用于counter类型数据，适合缓慢变化的数据分析。`sum(rate(http_requests_total{environment="release"}[2m]))`
-        + irate(range vector): 用于计算过去一段时间每秒平均值，取指定时间范围内最近两个数据点来算速率，然后作为结果。仅适用于counter类型数据，适合快速变化的数据分析。 `sum(rate(http_requests_total{environment="release"}[2m])) by (method)`
+      + 计算Counter类型的指标增长率
+        * rate(range vector):用于计算过去一段时间每秒平均值，取指定时间范围内所有数据点，算出一组速率，然后取平均值作为结果。仅适用于counter类型数据，适合缓慢变化的数据分析。`sum(rate(http_requests_total{environment="release"}[2m]))`
+        * increase(v range-vector)函数：获取区间向量的增长量
+        * irate(range vector):用于计算过去一段时间每秒平均值，取指定时间范围内最近两个数据点来算速率，然后作为结果。仅适用于counter类型数据，适合快速变化的数据分析。`sum(rate(http_requests_total{environment="release"}[2m])) by (method)`
+      + 预测Gauge指标变化趋势
+        * predict_linear(v range-vector, t scalar)函数：基于简单的线性回归的方式进行t秒后的v值的预测
+
+```
+<--------------- metric="" ---------------------=""><-timestamp -=""><-value->
+http_request_total{status=”200”, method=”GET”}@1434417560938 => 94355
+
+# 总请求
+sum(http_requests_total{label1=value1, label2=value2 ...})
+# 每秒请求量
+sum(rate(http_requests_total{label1=value1, label2=value2 ...}[5m]))
+# 请求量Top 10的URI
+topk(10, sum(http_requests_total{label1=value1, label2=value2 ...}) by (path))
+
+# 总的buffer
+sum(buffer_total_bytes{label1=value1, label2=value2 ...})
+# buffer按label分类
+sum(buffer_total_bytes{label1=value1, label2=value2 ...}) by (label)
+
+# 总次数
+http_requests_latency_seconds_histogram_count{label1=value1, label2=value2 ...}
+# 总和
+http_requests_latency_seconds_histogram_sum{label1=value1, label2=value2 ...}
+
+# http请求响应时间 <=0.005 秒的请求次数
+http_requests_latency_seconds_histogram_bucket{le="0.005", label1=value1, label2=value2 ...}
+# http请求响应时间 <=0.01 秒的请求次数
+http_requests_latency_seconds_histogram_bucket{le="0.01", label1=value1, label2=value2 ...}
+
+job: api-server
+  instance 1：1.2.3.4:5670
+  instance 2：1.2.3.4:5671
+  instance 3：5.6.7.8:5670
+  instance 4：5.6.7.8:5671
+```
 
 ## Storage
 

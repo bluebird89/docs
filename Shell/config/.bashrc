@@ -22,6 +22,8 @@ set -o emacs
  # Set emacs mode in bash (see below)
 set bell-style visible
 
+export EDITOR=vim
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
