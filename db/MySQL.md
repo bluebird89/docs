@@ -1541,7 +1541,8 @@ WHERE cust_name = 'Fun4All';
     * 最简单的做法是在每次事务提交时候，将该事务涉及修改的数据页全部刷新到磁盘中。但是会有严重性能问题
       - 因为 Innodb 是以页为单位进行磁盘交互的，一个事务很可能只修改一个数据页里面几个字节，这个时候将完整的数据页刷到磁盘的话，太浪费资源了
       - 一个事务可能涉及修改多个数据页，并且这些数据页在物理上并不连续，使用随机IO写入性能太差
-  + redo log 实际上记录数据页变更，这种变更记录是没必要全部保存，因此 redo log 实现上采用了大小固定，循环写入的方式，比如可以配置为一组 4 个文件，每个文件大小是 1GB，那么总共就可以记录 4GB 的操作。当写到结尾时，会回到开头循环写日志
+  + redo log 实际上记录数据页的物理修改，这种变更记录是没必要全部保存，因此 redo log 实现上采用了大小固定，循环写入的方式，比如可以配置为一组 4 个文件，每个文件大小是 1GB，那么总共就可以记录 4GB 的操作。当写到结尾时，会回到开头循环写日志
+    * 用来恢复提交后的物理数据页(恢复数据页，且只能恢复到最后一次提交的位置)。
     * 通过日志组来管理日志文件，是一个逻辑定义，包含若干个日志文件，一个组中日志文件大小相等，大小通过参数来设置。现在 InnoDB 只⽀持一个日志组。在 MySQL5.5 及之前的版本中，整个日志组的容量不能大于 4GB（实际上是 3.9GB 多，因为还有一些文件头信息等），到了 MySQL 5.6.3 版本之后，整个日志组的容量可以设置得很大，最大可以达到 512GB
     * show variables like 'datadir',在 InnoDB 存储引擎中，一般默认包括 2 个日志文件，新建数据库之后，会有名为 ib_logfile0 和 ib_logfile1 的两个文件，如果在启动数据库时，这两个文件不存在，则 InnoDB 会根据配置参数或默认值，重新创建日志文件
     * 将缓冲区 log buffer 里面的 redo 日志刷新到这个两个文件里面，写入方式是循环写入
@@ -3231,6 +3232,10 @@ SELECT '存在缺失的编号' AS post FROM post HAVING COUNT(*) <> MAX(id);
   - 添加server-id and log_bin=
   - 主从服务器检查show variables like 'server%'
   - 主服务器与从服务器
+* 复制协议
+  - replication
+  - Semisync replication
+  - Group replication
 
 ![master-slave](../_static/master-slave.gif "master-slave")
 
@@ -3387,6 +3392,13 @@ LVS、HAProxy、Nginx
   - Kafka
   - Canal
 
+## 高可用 HA High Availability
+
+* 实现数据备份
+* 如果有从服务器，主服务器发生故障之后，开通从服务器的写入功能，从而提供高可用的使用功能
+* 异地容灾
+* 分摊负载（scale out ）主服务器：写      从服务器：读
+
 ## 分区、分表、分库
 
 * 瓶颈:数据放在一起量太大 或者 数据库的活跃连接数增加，进而逼近甚至达到数据库可承载活跃连接数的阈值，出现了磁盘、IO、网络、CPU等撑不住的情况
@@ -3425,7 +3437,7 @@ LVS、HAProxy、Nginx
     + MySQL的分区适用于一个表的所有数据和索引，不能只对表数据分区而不对索引分区，也不能只对索引分区而不对表分区，也不能只对表的一部分数据分区
     + 所有分区必须使用相同的存储引擎
   - 配置 `show variables like '%partition%'` have_partintioning 的值为YES，表示支持分区
-  - 合的场景数据的时间序列性比较强，则可以按时间来分区
+  - 适合场景：用于数据库高可用性的管理，数据的时间序列性比较强，则可以按时间来分区
 * 分表与分区区别：分区从逻辑上来讲只有一张表，分表则是将一张表分解成多张表
 * 分库分表
   - 水平拆分:以字段为依据，按照一定策略（hash、range等），将一个库（表）中的数据拆分到多个库（表）中。分库内分表和分库两部分，每片数据会分散到不同的MySQL表或库，达到分布式的效果，能够支持非常大的数据量。前面的表分区本质上也是一种特殊的库内分表
@@ -3721,15 +3733,6 @@ WantedBy=multi-user.target
     + 部分mysql工具，如 navicat 直接使用它自带的导出功能，也会锁住全表。所以尽量不要使用工具去处理导出工作
     + 5.6 的主从的坑已经踩了很多了，大多是由于自身的bug，而且在 5.6 下根本体现不出 MTS 的优势。把 5.6 升级至 5.7 或 8.0 是非常有必要的，之前测试的 8.0 的复制稳定性和性能的提升非常大，推荐直接升级至 8.0 版本
 
-```sh
-mysqldump -uXXX -p osdc osdc_XXX > /tmp/osdc_info.sql；
-show variables like '%slave_parallel_workers%';
-show variables like '%innodb_lock_wait_timeout%';
-show variables like '%slave_transaction_retries%';
-
-mysqldump -uroot -p --skip-opt --default-character-set=utf8  --single-transaction --master-data=2 --no-autocommit -B d1> backup.sql
-```
-
 * 语法
   - 生成的数据默认的分隔符是制表符
   - local未指定，则数据文件必须在服务器上
@@ -3761,6 +3764,13 @@ mysqldump -uroot -p --skip-opt --default-character-set=utf8  --single-transactio
 * mysqlcheck
 
 ```sh
+mysqldump -uXXX -p osdc osdc_XXX > /tmp/osdc_info.sql；
+show variables like '%slave_parallel_workers%';
+show variables like '%innodb_lock_wait_timeout%';
+show variables like '%slave_transaction_retries%';
+
+mysqldump -uroot -p --skip-opt --default-character-set=utf8  --single-transaction --master-data=2 --no-autocommit -B d1> backup.sql
+
 select * into outfile 文件地址 [控制格式] from 表名;   # 导出表数据
 SELECT a,b,a+b INTO OUTFILE '/tmp/result.text' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' FROM test_table;
 load data [local] infile 文件地址 [replace|ignore] into table 表名 [控制格式]; # 导入数据
