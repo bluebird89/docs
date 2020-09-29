@@ -4,7 +4,7 @@ fast, scalable, distributed revision control system. https://git-scm.com/
 
 ## 服务
 
-* [GitHub](https://github.com/)
+* [GitHub](./github.md)
 * [Bitbucket](https://bitbucket.org/product)
 * [Gitlab](https://gitlab.com/)
   - [gitlabhq/gitlabhq](https://github.com/gitlabhq/gitlabhq):GitLab CE Mirror | Please open new issues in our issue tracker on GitLab.com https://about.gitlab.com/getting-help/
@@ -204,8 +204,22 @@ gpg --sign demo.txt #签名
 ## 原理
 
 * 基于时间点的快照：将提交点指向提交时的项目快照
+* 任何人，在任何硬件环境下，相同的内容都会生成相同的对象
+* 内部对象：
+  - blob：存储实际文件
+  - tree：存储文件目录结构
+  - commit：存储提交信息（主要是当前的树根和上一棵树的树根）
+  - tag：存储版本信息，相当于对对象库中的某个 commit 显式标记了一下
+* 文件对象blob:认为每个文件一旦写入对象数据库中都是不可更改的（immutable），任何微小的修改，都会在数据库中形成一个新的对象。对象的 id 就是其 sha1 哈希
+  - 用了两层目录结构:文件名是文件 sha1 后 base16 编码的字符串
+* tree:文件对象（blob）可以被组织成树（更确切地说是默克尔树），一次提交（commit）就是根据更改的文件的信息生成新的树的过程，新树和老树共享相同的子树，只有变化的部分才会分叉。在漫长的操作之后，对象数据库中有无数棵树，这些树构成了一个默克尔图（merkle DAG）
+* 通过使用引用（ref），比如 HEAD, heads/master，tags/v0.1，git 可以很方便地追踪用户关心的每一棵树的确切状态
+* 文件的文件名并没有存在 blob 对象中，而是存储在 tree 里。这样有两个好
+  - 相同内容的文件，即便拷贝多份，依然只存储一份数据 — 这多见于二进制文件
+  - 更改文件名只是生成一个新的 tree，并不需要生成新的 blb
 * HEAD:当前分支最新一个提交
 * 对代码的任何修改，最终都会反映到 commit 上面去。创建和保存项目的快照及与之后的快照进行对比
+  - 数据会产生分叉，因为设置的作者名，邮件，以及 PGP key 不同
 * 维护一个commitID树，分别保存着不同状态代码
 * objects 目录下有 3 种类型数据： `git cat-file -p`
   - Blob 文件
@@ -226,8 +240,6 @@ gpg --sign demo.txt #签名
 ![object structure](../_static/object_struct.png)
 ![commit、tree和blob三个对象之间的关系](../_static/tree.jpg)
 
-<!-- ![Git原理-3](../_static/git_3.jpg) 图片待修复-->
-
 ```sh
 # git add 原理
 touch test.txt
@@ -240,7 +252,8 @@ git cat-file -p e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 # 什么也看不到
 echo 'hello world' > test.txt
 git hash-object -w test.txt # 3b18e512dba79e4c8300dd08aeb37f8e728b8dad
 git cat-file -p 3b18e512dba79e4c8300dd08aeb37f8e728b8dad #  查看原文件内容 hello world fatal: Not a valid object name 7db03de997c86a4a028e1ebd3a1ceb225be238
-
+git show --pretty=raw f93e
+git ls-tree f93e
 .
 └── .git
     ├── HEAD  # 存储的是当前所在的位置，其内容是分支的名称
