@@ -18,6 +18,8 @@ tmux # into 底部有一个状态栏。状态栏的左侧是窗口信息（编�
 
 ## 配置
 
+* [.tmux](https://github.com/gpakosz/.tmux)  🇫🇷 Oh My Tmux! Pretty & versatile tmux configuration made with ❤️
+
 ```
 touch ~/.tmux.conf # 新建用户配置文件
 

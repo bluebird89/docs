@@ -386,26 +386,20 @@ public class OrderCreatedEvent extends OrderEvent {
 * 《领域特定语言》
 * 《领域驱动设计 Domain-driven Design》 Vaughn Vernon
   - [gdut-yy/Domain-Driven-Design-zh](https://github.com/gdut-yy/Domain-Driven-Design-zh):中文翻译 http://gdut_yy.gitee.io/doc-ddd/
+* 《领域驱动设计》Eric Evans
 * 《Patterns, Principles and Practices of Domain-Driven Design》
 * 《领域驱动设计精粹》
 * 《复杂软件设计之道：领域驱动设计全面解析与实战》
+* 《实现领域驱动设计》
 
 ## 参考
 
-* [citerus/dddsample-core](https://github.com/citerus/dddsample-core):This is the new home of the original DDD Sample app (previously hosted at sf.net)..
-
+* [citerus/dddsample-core](https://github.com/citerus/dddsample-core):This is the new home of the original DDD Sample app (previously hosted at sf.net)
 * [heynickc/awesome-ddd](https://github.com/heynickc/awesome-ddd):A curated list of Domain-Driven Design (DDD), Command Query Responsibility Segregation (CQRS), Event Sourcing, and Event Storming resources
-
 * [使用什么样的开发流程才能更好实现DDD？不是敏捷！](https://www.jdon.com/54721)
-
 * [领域驱动设计(DDD)实现之路](https://www.jianshu.com/p/cdbefdd55b99)
-
 * [领域驱动设计(DDD)编码实践](https://www.jianshu.com/p/84f1d922a6d4)
-
 * [事件驱动架构(EDA)编码实践](https://www.jianshu.com/p/fbd3951259eb)
-
 * [简单可用的CQRS编码实践](https://www.jianshu.com/p/d5e344ccf62a)
-
 * [后端开发实践系列——领域驱动设计(DDD)编码实践](https://insights.thoughtworks.cn/backend-development-ddd)
-
 * [后端开发实践](https://insights.thoughtworks.cn/tag/backend-development/)
