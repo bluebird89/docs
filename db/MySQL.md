@@ -1453,6 +1453,10 @@ WHERE id IN (1,2,3)
     + `SELECT customers.cust_id, orders.order_num FROM customers LEFT JOIN orders ON customers.cust_id = orders.cust_id;`
   - 右连接 right join：以右边表数据为基准，去匹配左边表数据，如果匹配到就显示，匹配不到就显示为null，保留右表没有关联的行
     + `SELECT customers.cust_id, orders.order_num FROM customers RIGHT JOIN orders ON customers.cust_id = orders.cust_id;`
+* 原理 嵌套循环连接 Nested-Loop Join
+  - 根据驱动表上设置的查询条件到驱动表匹配记录
+  - 再根据从驱动表匹配的记录逐个去被驱动表根据被驱动表设置的查询条件进行匹配
+  - 将匹配记录放入结果集，直到最后一条驱动表匹配记录在被驱动表完成匹配，将最终结果集返回给客户端
 * 连接 vs 子查询:连接可以替换子查询，并且比子查询的效率一般会更快
 
 ```sql
