@@ -10,8 +10,6 @@
 * [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
 * [theia-ide/theia](https://github.com/theia-ide/theia):Theia is a cloud & desktop IDE framework implemented in TypeScript. http://theia-ide.org
 
-generate:Alt+ins
-
 ## 配置
 
 * 依赖指定版本
@@ -25,6 +23,47 @@ generate:Alt+ins
 ## Tips
 
 * 打印统一 keyMap
+
+## IDEA
+
+* 可以自动生成对应的Junit方法:  ALT+SHIFT+T
+* 最近修改过的文件: Ctrl+E
+* 定位类: ctrl+n
+* 定位文件: ctrl + shift +n
+* 定位函数或者属性 ctrl + shift + alt +n
+* 字符串 ctrl + shift + f
+* 大小写 ctrl+shift+u
+* 列操作 ctrl+shift+alt +j
+* 插件
+  - Alibaba Java Code Guidelines—阿里巴巴 Java 代码规范
+  - Alibaba Cloud Toolkit
+  - CamelCase-多种命名格式之间切换
+  - Codota—代码智能提示
+  - GsonFormat+RoboPOJOGenerator—JSON转类对象
+  - GitToolBox
+  - IDE Features Trainer—IDEA交互式教程
+  - Key Promoter X—快捷键
+  - Lombok
+  - Presentation Assistant—快捷键展示
+  - RestfulToolkit—RESTful服务开发
+  - SequenceDiagram
+  - Statistic—项目信息统计
+  - Translation-必备的翻译插件
+* [IntelliJ IDEA config](https://www.jianshu.com/p/320d82d405ad)
+* Diagrams
+* theme
+  - Dark Purple Theme
+  -  Cyan Light Theme
+* ctrl + `
+  - 5 switch theme
+  - 1 Editor Color Scheme
+  - 3 keymap
+*  ⌘N (macOS) or Alt+Insert (Windows/Linux):generate
+  -  build.gradle add a new dependency
+*  ⇧⌘I, or Ctrl+Shift+O on Windows and Linux: load the changes
+* test
+  - ⌃R or Shift+F10
+  - ⌃⇧R or Ctrl+Shift+F10 (Windows/Linux)
 
 ## PHPStrom
 
@@ -122,6 +161,7 @@ generate:Alt+ins
 - alt+/ 代码补全
 - command + shift + a:
 - command + shift + n:
+- generate:Alt+ins
 
 自定义：
 
@@ -281,41 +321,6 @@ generate:Alt+ins
 * vagrant
     - Init in Project Root
     - Start SSH session
-
-## IDEA
-
-* 可以自动生成对应的Junit方法:  ALT+SHIFT+T
-* 最近修改过的文件: Ctrl+E
-* 定位类: ctrl+n
-* 定位文件: ctrl + shift +n
-* 定位函数或者属性 ctrl + shift + alt +n
-* 字符串 ctrl + shift + f
-* 大小写 ctrl+shift+u
-* 列操作 ctrl+shift+alt +j
-* 插件
-  - Alibaba Java Code Guidelines—阿里巴巴 Java 代码规范
-  - Alibaba Cloud Toolkit
-  - CamelCase-多种命名格式之间切换
-  - Codota—代码智能提示
-  - GsonFormat+RoboPOJOGenerator—JSON转类对象
-  - GitToolBox
-  - IDE Features Trainer—IDEA交互式教程
-  - Key Promoter X—快捷键
-  - Lombok
-  - Presentation Assistant—快捷键展示
-  - RestfulToolkit—RESTful服务开发
-  - SequenceDiagram
-  - Statistic—项目信息统计
-  - Translation-必备的翻译插件
-* [IntelliJ IDEA config](https://www.jianshu.com/p/320d82d405ad)
-* Diagrams
-* theme
-  - Dark Purple Theme
-  -  Cyan Light Theme
-* ctrl + `
-  - 5 switch theme
-  - 1 Editor Color Scheme
-  - 3 keymap
 
 数据是统一的，能够实现批量处理
 

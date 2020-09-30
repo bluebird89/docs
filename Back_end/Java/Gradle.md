@@ -4,7 +4,7 @@ Adaptable, fast automation for all https://gradle.org
 
 ## 安装
 
-```shell
+```sh
 java -version
 
 brew install gradle
@@ -19,6 +19,8 @@ export GRADLE_HOME=/opt/gradle/gradle-6.4.1
 export PATH=$PATH:${GRADLE_HOME}/bin
 
 gradle -v
+
+./gradlew wrapper --gradle-version=6.6.1 --distribution-type=bin
 ```
 
 ## 配置
@@ -54,6 +56,9 @@ allprojects {
         maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
     }
 }
+
+gradle init
+
 ```
 
 ## 使用
