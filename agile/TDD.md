@@ -30,11 +30,15 @@
   - 可执行的以及永远最新的说明文档(Live Document)
   - 更少的回归测试,正确率提高.
   - 安全重构(经验值：80%)
+* 重要的不是测试代码本身，是解决问题的思维:小步快跑，快速反馈，实现刚好，设计优美，价值优先，增量完美
 * 三层含义
   - Test-Driven Development，测试驱动开发
   - Task-Driven Development，任务驱动开发，要对问题进行分析并进行任务分解
   - Test-Driven Design，测试保护下的设计改善。TDD 并不能直接提高设计能力，只是给更多机会和保障去改善设计
   - Testability Driven Design 可测试性驱动设计，在每一个小步、每一行代码都必须先考虑“怎么测”，可测试性是潜移默化地植根在软件整个建造过程中的，所以用TDD方法开发出来的软件具有极佳的可测试性，质量也自然地更可靠
+* 测试具有业务价值，测试的粒度，测试即文档。
+* DD增加我们的信心，促进反馈周期，价值的稳定的叠加。
+* 重构是程序员的一项有利工具
 
 ## 分类
 
@@ -129,9 +133,25 @@
 * Test Double 类型
   - Stub： 测试桩是用来接受SUT内部的间接输入（indirect inputs），并返回特定的值给SUT
   - Spy： Test Spy只负责获取内部情报，并把情报发出去，不负责验证情报的正确性
-  - Mock： Mock Object和Test Spy有类似的地方，不同的是，Mock Object还负责对情报（intelligence）进行验证，总部（外部的测试案例）信任Mock Object的验证结果。
-  - Fake： 仅仅是用来替代一个实际的对象，并且拥有几乎和实际对象一样的功能，保证SUT能够正常工作。实际对象过分依赖外部环境，Fake Object可以减少这样的依赖。
-  - Dummy：Dummy Objects泛指在测试中必须传入的对象，而传入的这些对象实际上并不会产生任何作用，仅仅是为了能够调用被测对象而必须传入的一个东西。
+  - Mock： Mock Object和Test Spy有类似的地方，不同的是，Mock Object还负责对情报（intelligence）进行验证，总部（外部的测试案例）信任Mock Object的验证结果
+  - Fake： 仅仅是用来替代一个实际的对象，并且拥有几乎和实际对象一样的功能，保证SUT能够正常工作。实际对象过分依赖外部环境，Fake Object可以减少这样的依赖
+  - Dummy：Dummy Objects泛指在测试中必须传入的对象，而传入的这些对象实际上并不会产生任何作用，仅仅是为了能够调用被测对象而必须传入的一个东西
+* 命名规则
+  - should_not_charge_addition_fare_when_given_distance_is_less_than_base_meter
+  - should_charge_addition_fare_when_given_distance_is_more_than_base_meter
+* 从依赖的角度看,并不一定需要优先选择前序任务,因为我们可以使用 Mock 的方式驱动出当前任务需要依赖的接口,而不用考虑实现。
+* 对于任务的重要性,主要是判断任务是否整个系统(模块)的核心功能。一个 判断标准是确定任务是功能的主要流程还是异常流程
+* 从消费者的角度去思考用例
+* 选择测试样本 (从易到难，高风险到低风险)
+
+## Mock
+
+* 依赖注入（DI）
+* 面向接口设计，而不是面向实现
+* 限制对外部的依赖
+* 不要Mock私有方法，只Mock需要的方法
+* 不要自欺欺人
+* 什么时候使用
 
 ## Test
 

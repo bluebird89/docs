@@ -288,9 +288,144 @@
   - 验证
   - 优化
 
+
+## [ThoughtWorks(中国)程序员读书雷达](http://agiledon.github.io/blog/2013/04/17/thoughtworks-developer-reading-radar/)
+
+* Coding Practice | 编程实践
+  - 基础篇
+    + Clean Code《代码整洁之道》
+    + Pragmatic Unit Testing《单元测试之道》
+    + The Productive Programmer《卓有成效的程序员》
+    + Test-Driven Development By Example《测试驱动开发》
+    + Clean Coder《程序员的职业修养》
+    + The Art of Readable Code《编写可读代码的艺术》
+  - 进阶篇
+    + Refactoring To Patterns《重构与模式》
+    + Implementation Patterns《实现模式》
+    + Code Complete《代码大全》
+    + The Pragmatic Programmer《程序员修炼之道》
+  - 高级篇
+    + Structure and Interpretation of Computer Programs《计算机程序的构造和解释》
+    + Working Effectively with Legacy Code《修改代码的艺术》
+* Architecture & Design | 架构与设计
+  - 基础篇
+    + Agile Software Development 《敏捷软件开发：原则、实践与模式》
+    + Head First Design Patterns《深入浅出设计模式》
+    + Design Patterns 《设计模式》
+  - 进阶篇
+    + The Art of UNIX Programming 《Unix编程艺术》
+    + Practical API Design 《框架设计的艺术》
+    + Domain Specific Languages 《领域特定语言》
+    + Patterns of Enterprise Application Architecture 《企业应用架构模式》
+  - 高级篇
+    + Release It
+    + Domain-Driven Design 《领域驱动设计》
+    + Enterprise Integration Patterns《企业集成模式》
+    + Beautiful Architecture《架构之美》
+    + Pattern-Oriented Software Architecture《面向模式的软件架构》
+* Methodology | 方法学
+  - 基础篇
+    + User Stories Applied《用户故事与敏捷方法》
+    + The Gold Mine《金矿》
+    + Scrum and XP From the Trenches《硝烟中的Scrum和XP》
+    + Continuous Integration《持续集成》
+    + Extreme Programming Explained《解析极限编程》
+  - 进阶篇
+    + Lean Thinking《精益思想》
+    + Continuous Delivery《持续交付》
+    + How Google Tests Software
+    + Agile Testing
+    + Extreme Programming Refactored《重构极限编程》
+  - 高级篇
+    + Specification By Example
+* Thought & Leadership | 思想与领导力
+  - 基础篇
+    + The Effective Executive《卓有成效的管理者》
+    + Are Your Lights On?《你的灯亮着吗》
+    + Becoming A Technical Leader《成为技术领导者》
+  - 进阶篇
+    + The Fifth Discipline《第五项修炼》
+    + The Design Of Business
+    + Management 3.0《管理3.0：培养和提升敏捷领导力》
+    + Presentation To Win
+    + The McKinsey Way《麦肯锡方法》
+  - 高级篇
+    + Thinking, Fast and Slow《思考快与慢》
+
+## [ThoughtWorks读书雷达（2016）](https://insights.thoughtworks.cn/reading-radar-2016/)
+
+* 编程与实践
+  - 基础篇
+    + 白帽子讲Web安全:互联网时代，每个人都需要知道的安全知识必备书籍。
+    + 敏捷软件开发：原则、实践和模式
+    + 重构
+    + 编写可读代码的艺术
+    + 程序员的职业素养
+    + 软件开发践行录:ThoughtWorks聚集了很多爱思考爱分享的人。本书可以说就是这样一群极有天分的软件精英的思想和观点的汇聚，是他们多年的宝贵实践经验的凝结。涉猎广泛，通俗易懂，相信你读完肯定会有收获。
+  - 进阶篇
+    + 实现模式
+    + 领域特定语言
+    + Building Microservices:微服务是支持可演化性的一些一起协同工作的小而自治的服务。许多组织发现这种细粒度的架构让系统更具弹性，扩展，也能增加团队的自治。但是，大量的服务会导致很多令人头疼的问题必须处理。这本书作为一个一站式商店包含微服务涉及的各种主题，并且通过在ThoughtWorks，Amazon，Netflix和其他公司的具体实践，帮助大家了解微服务。
+  - 高级篇
+    + 计算机程序的构造和解释
+    + 修改代码的艺术
+* 提升与修炼
+  - 基础篇
+    + 程序员思维修炼
+    + 金字塔原理
+    + 暗时间:为什么我每天都看书学习进步却并不明显？为什么有些人玩得时间不比我少学的时间不比我多，但却越来越牛？也许刘未鹏会给你答案。
+    + 黑客：计算机革命的英雄 每门专业都有其灵魂，或者说启蒙思想。黑客精神伦理及其独特的价值观在很多方面都深刻地影响了今天软件业的形态。这本书对“黑客”的起源及发展做了详尽的阐释。对于一位以计算机，尤其是软件为职业的人来说，这本书将带你“寻根访祖”，探寻我们日常工作背后的哲思。
+  - 进阶篇
+    + 系统思考
+    + 咨询的奥秘
+    + The Trusted Advisor:这本书初看有点儿像中文版的“厚黑学”，但是它内容并不是教读者取得个人功利的最大化，而是如何与他人合作，达到“win-win”。它的内容虽然涉及作为顾问如何有效地为客户提供价值，不过书中的建议操作性很强，完全可以应用在更广泛的范畴——我们每天与他人的交流很多都是向别人提建议或者接受别人建议的过程。最初我担心这本书的内容不适合“国情”，但后来的经历告诉我，在沟通与协作上，全人类都面临相同的挑战。
+    + Unix编程艺术:UNIX作为一款软件，绝对是人类的工程史上的奇迹，今天最重要的系统几乎全部运行在UNIX或其变体之上。它诞生于软件工程方法论的“创世纪”。得益于数位天才的努力，UNIX将他们的智慧全部包容进来，比如我们耳熟能详的KISS，YAGNI原则。不过这些智慧大多以源代码的形式保留在磁盘上了。所幸Eric Raymond的妙笔让这些睿智跃然纸上，触手可得，也让后人可以不断地从中汲取智慧和精神动力。
+  - 高级篇
+    + 分析模式
+    + 实现领域驱动设计:本书适合于那些已经具备面向对象编程基础并想进一步提升的开发人员，它告诉我们：好的软件不只是用好设计模式这么简单，而是要能够准确地表达业务意图，达到“代码本身即是设计”
+* 流程与交付
+  - 基础篇
+    + 硝烟中的Scrum和XP
+    + 用户故事与敏捷方法
+  - 进阶篇
+    + 持续交付
+    + Google软件测试之道
+    + 敏捷软件测试
+    + 精益软件度量:软件度量是当今软件开发行业的热点话题，但同时也是推广实施过程中的难题。一方面软件企业管理存在度量的迫切需求，另一方面，企业在推行软件度量的实践上问题颇多、效果不佳。人们迫切需要破解度量难题，找到切实可行的软件度量的实践方法。而这本书从精益理念的角度，尝试重新梳理在中等规模到大规模软件开发中度量体系设计和实施的思路。
+  - 高级篇
+    + 发布！软件的设计与部署
+    + 看板方法
+    + 实例化需求：团队如何交付正确的软件
+    + 精益和敏捷开发大型应用指南:精益和敏捷在很多人眼里只是那些小而美的团队才能玩的转的工具，在大团队大项目中会出现各种各样的阻碍，源于和已有组织结构，沟通结构甚至绩效考核制度的不匹配。而大团体如何运用精益思想和敏捷的原则与实践开发？相信看完本书你会找到答案。
+* 思想与领导力
+  - 基础篇
+    + 门后的秘密
+    + 部落的力量
+      * 如果你幸运的话，在你的一生中，会有一些经历让你难忘，每当你遇到困难的时候，你都会不自觉的想起那个时候是什么样的，从中寻找答案，你在努力让自己身边的环境回到“当年”的那个状态，虽然已经物是人非。如果你不能，你会痛苦、无力、抱怨世事不如以前了。
+
+        然而“当年”那个状态到底是什么状态？所谓伟大的团队到底有什么样的特点？他们中的每一个人心里想的是什么，他们之间又是如何交互的？所谓团队建设究竟应该怎么做？你又如何领导你的团队到达这样的状态？
+
+        作为一个软件工程师，你一定会多多少少的遇到这些困惑，我强烈建议你读读这本书，因为，毕竟，软件是一个协作的游戏。
+  - 进阶篇
+    + 精益思想
+    + 第五项修炼
+    + 影响力:为什么有些人极具说服力？同样的观点为什么不同人说出来的大家的反应是不一样的甚至截然相反的？这就是影响力这个武器的威力所在。影响力的打造和经营，无论对于个人还是企业，都可以让我们做到事半功倍，节省更多的成本，创造更多的价值
+  - 高级篇
+    + Agile IT Organization Design
+    + 管理3.0：培养和提升敏捷领导力
+    + 精益企业:“精益”的概念源自于二十世纪末期美国人对丰田制造方法的研究，总结出的可以同是提高质量并降低成本的秘密。“精益创业”将这种方法用于初创企业，并随着很多硅谷的明星公司以及国内很多创业奇迹故事而流行开来。于是很多人开始认为只有小型的初创企业才能谈及“精益”。本书的三位作者以他们自身丰富的经历告诉我们，同样的原则、方法、实践也适用于“恐龙”般的大型企业，从而保持它们与“初创公司”的竞争力。
+
+![Alt text](../_static/dev_book.png "Optional title")
+
 ## 项目
 
 * [gothinkster/realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 https://realworld.io/
+
+## 图书
+
+* 《发布！软件的设计与部署》：现实世界中充满了恶意用户，无论是主观的恶意，还是那种当点击页面上的按钮无响应后又多点击了100次的并非故意的恶意。这本书交给你如何为失败而做准备，并将这些恶意的影响降低到最低。欢迎来到现实世界。
+* 《正见：佛陀的证悟》：一本直指内心的书，用极为平白的语言描述了原始佛教的四圣谛，没有任何的高深莫测或者故弄玄虚，作者用现实世界中的例子来阐述最为幽深的佛法，每个字都值得玩味。她可以让你在纷乱的现世中找到内心的平静。
+* [Technology Radar](https://www.thoughtworks.com/radar)
 
 ## 工具
 
