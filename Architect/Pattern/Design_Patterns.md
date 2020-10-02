@@ -191,6 +191,7 @@
 * 《[设计模式 : 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)》 Design Patterns:Elements of Reusable Object-Oriented Software
 * 《大话设计模式》
 * 《设计模式之禅》
+* 设计模式解析
 
 ## 参考
 

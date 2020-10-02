@@ -1,4 +1,4 @@
-# BDD，Behavior Driven Development，行为驱动开发
+# 行为驱动开发 Behavior Driven Development BDD
 
 * 产生背景：开发软件系统最困难的部分就是准确说明开发什么” (“The hardest single part of building a software system is deciding precisely what to build” — No Silver Bullet, Fred Brooks)，不同角色有着不同的领域知识，说着不同的语言，必然会产生沟通代沟，导致理解的不一致性
 * 提出者Dan North强调BDD不是关于测试的，它是在应用程序存在之前，写出用例与期望，从而描述应用程序的行为，并且促使在项目中的人们彼此互相沟通
@@ -8,12 +8,56 @@
   - 不是关于测试的：BDD源自TDD,目的不是自动化测试，但是可以有效指导自动化测试，基于BDD的自动化测试相当于维护了一份需求活文档，对项目需求的维护和管理非常有价值。所强调的沟通与协作可以指导更好的做自动化测试
   - 全栈敏捷方法：BDD促使团队所有角色从需求到最后的测试验证，进行高度的协作和沟通，以交付最有价值的功能。
 * 采用统一的领域特定语言（DSL）来描述业务场景和用户行为，让团队各个不同角色对业务需求有一致认识，从而做到更有效的沟通和更高效的协作
+* 好处：把利益关系人、交付团队等不同方面的项目相关人员集中到一起，形成共同的理解，共同的价值观以及共同的期望值
+  - 关注用户行为
+  - 交付最有用的功能
+  - 在团队内部维护一致的术语
+  - 探究需求实例
+  - 编写和维护需求
+  - 创建活的文档
+  - 消除协作与沟通障碍
+* 适合项目
+  - 简单的一次性项目，沟通交流成本都较低的情况下，没有必要使用BDD
+  - 业务比较轻量，重在技术方面的项目，可以只使用TDD，或者简单的白板上的BDD，不需要在BDD工具记录需求用例文档
+  - 业务复杂、团队成员较多的项目，沟通成本高，BDD很有必要
 
 ## 愿景
 
 * 协作：多个角色在一个团队，如何从一致理解需求开始高效协作？
 * 语言：不同的角色业务、开发和测试人员分别说自己的语言，如何统一语言，更有效的沟通？
 * 文档：编写和维护的成本都很高，如何低成本的维护一份有价值的文档？
+
+## 实例化需求
+
+* 关注的是业务领域，而不是技术：BDD强调用领域特定语言（DSL, domain specific language）描述用户行为，定义业务需求，而不会关心系统的技术实现
+* 不是工具，强调的是一种协作方式：BDD要求各个角色共同参与系统行为的挖掘和定义，以实现对业务价值的一致理解
+* 不是关于测试的：BDD源自TDD,但重点不是关于测试，所强调的沟通与协作可以指导更好的做自动化测试
+* 全栈敏捷方法：BDD促使团队所有角色从需求到最后的测试验证，进行高度的协作和沟通，以交付最有价值的功能
+* 怎么做
+  - 业务层抽取，业务语言描述
+  - 技术人员可懂，自动化友好
+  - 数据驱动，需求实例化
+
+```
+Scenario: Check Inbox
+  Given a user "Tom" with password "123"
+  And a user "Jerry" with password "abc"
+  And an email to "Tom" from "Jerry"
+  When I sign in as "Tom" with password "123"
+  Then I should see one email from "Jerry" in my inbox
+
+Scenario: Check Inbox
+  Given a user "Tom"
+  And a user "Jerry"
+  And an email to "Tom" from "Jerry"
+  When I sign in as "Tom"
+  Then I should see one email from "Jerry" in my inbox
+
+Scenario: Check Inbox
+  Given I have received an email from "Jerry"
+  When I sign in
+  Then I should see one email from "Jerry" in my inbox
+```
 
 ## 怎么做
 
@@ -78,7 +122,6 @@ When I authenticate with valid credentials
 Then I should be shown the restricted content
 
 # 添加图书到购物车并计算总额。
-
 Scenario: Books add to shopping cart with correct number and total price
 Given a book "BDD" with price "30.5"
 And a book "Cucumber" with price "25.8"
@@ -106,24 +149,6 @@ SEE HomePage
 DO [Click] "Login".Button
 REACT Success: SHOW "Login Success".Toast with ANIMATE(bounce)
 ```
-
-## 好处
-
-把利益关系人、交付团队等不同方面的项目相关人员集中到一起，形成共同的理解，共同的价值观以及共同的期望值
-
-* 关注用户行为
-* 交付最有用的功能
-* 在团队内部维护一致的术语
-* 探究需求实例
-* 编写和维护需求
-* 创建活的文档
-* 消除协作与沟通障碍
-
-## 适合项目
-
-* 简单的一次性项目，沟通交流成本都较低的情况下，没有必要使用BDD
-* 业务比较轻量，重在技术方面的项目，可以只使用TDD，或者简单的白板上的BDD，不需要在BDD工具记录需求用例文档；
-* 业务复杂、团队成员较多的项目，沟通成本高，BDD很有必要。
 
 ## 痛点
 
@@ -157,10 +182,6 @@ Then('the page title should start with {string}', {timeout: 60 * 1000}, async fu
   expect(isTitleStartWithCheese).to.equal(true);
 });
 ```
-
-## [behave/behave](https://github.com/behave/behave)
-
-BDD, Python style
 
 ## 问题
 
