@@ -1153,6 +1153,7 @@ brew install bat
     - [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
     - [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/ `npm install -g tldr`
     - [jaywcjlove / linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
+    - cheat
 * [lynx](link):终端构建的Web浏览应用程序
 * cd
     - [fasd](https://github.com/clvv/fasd) 增强cd命令
