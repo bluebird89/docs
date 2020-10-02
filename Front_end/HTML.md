@@ -1,9 +1,9 @@
-# HTML（HyperText Markup Language）
+# HTML HyperText Markup Language 超文本标记语言
 
-* 超文本标记语言,是一套标记标签 (markup tag);
-* HTML 使用标记标签来描述网页,标签或元素(element),格式:<开始标签>内容<结束标签>;
-* HTML 文档由嵌套的 HTML 元素构成。
-* 元素属性:属性可以在元素中添加附加信息,属性一般描述于开始标签,属性总是以名称/值对的形式出现，比如：name="value"。
+* 一种用于创建[网页](https://zh.wikipedia.org/wiki/%E7%BD%91%E9%A1%B5)的标准标记语言
+* HTML 使用标记标签来描述网页,标签或元素(element),格式:<开始标签>内容<结束标签>
+* HTML 文档由嵌套的 HTML 元素构成
+* 元素属性:属性可以在元素中添加附加信息,属性一般描述于开始标签,属性总是以名称/值对的形式出现，比如：name="value"
 
 ## 历史
 
@@ -63,8 +63,24 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
     // user-scalable    是否允许手动缩放
 ```
 
+## header
+
+* title：标题
+* base:页面上的所有链接规定默认地址或默认目标
+* meta：关于 HTML 文档的元数据,元数据（metadata）是关于数据的信息,用name 和 content 属性来索引您的页面
+  - description
+  - keywords
+  - author
+* link:定义文档与外部资源之间的关系
+* style:为 HTML 文档定义样式信息
+
+```html
+<meta name="description" content="Free Web tutorials on HTML, CSS, XML" />
+```
+
 ## 元素 Element
 
+* 自闭合元素 self-closing elements:只有开标签，没有闭标签
 * `<html>`  定义 HTML 文档。
 * `<body>`  定义文档的主体。
   - 页面背景图片:background="../i/eg_background.jpg"
@@ -407,6 +423,26 @@ City<br>
 </html>
 ```
 
+## 显示类型
+
+* 块元素 div,ul,li,dl,dt,dd,p,h1-h6,blockquote
+  - 总在新行上开始，占据一整行
+  - 默认情况下，其宽度自动填满其父元素宽度
+  - 宽度始终是与浏览器宽度一样，与内容无关
+  - 可以容纳内联元素和其他块元素
+  - display属性为block
+  - 垂直相邻外边距margin会合并
+* 内联元素 a,b,span,img,input,strong,select,label,em,button,textarea
+  - 和其他元素都在一行上
+  - 高，行高及外边距和内边距部分可改变
+  - 宽度只与内容有关
+  - 行内元素只能容纳文本或者其他行内元素
+  - display属性为inline
+  - 水平方向的padding-left、padding-right、margin-left、margin-right都产生边距效果，但竖直方向的padding-top、padding-bottom、margin-top、margin-bottom却不会产生边距效果。
+  - 不可以设置宽高，其宽度随着内容增加，高度随字体大小而改变，内联元素可以设置外边界，但是外边界不对上下起作用，只能对左右起作用
+* 空元素 br,meta,hr,link,input,img
+  - 没有内容的 HTML 内容被称为空元素。空元素是在开始标签中关闭的
+
 ### 属性
 
 * Backgrounds
@@ -425,7 +461,7 @@ City<br>
   - rgb(0,0,255)
   - blue
 
-### 框架(frameset)
+### 框架 frameset
 
 在同一个浏览器窗口中显示不止一个页面
 
@@ -470,21 +506,6 @@ City<br>
 </frameset>
 
 <iframe src="URL"></iframe>
-```
-
-## header
-
-* title：标题
-* base:页面上的所有链接规定默认地址或默认目标
-* meta：关于 HTML 文档的元数据,元数据（metadata）是关于数据的信息,用name 和 content 属性来索引您的页面
-  - description
-  - keywords
-  - author
-* link:定义文档与外部资源之间的关系
-* style:为 HTML 文档定义样式信息
-
-```html
-<meta name="description" content="Free Web tutorials on HTML, CSS, XML" />
 ```
 
 ## 脚本
@@ -624,17 +645,15 @@ pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0">
 user-select: none;
 ```
 
-## 扩展
-
-* [hakimel/reveal.js](https://github.com/hakimel/reveal.js):The HTML Presentation Framework http://lab.hakim.se/reveal-js/
-
-## Dashboard
-
-* [tabler/tabler](https://github.com/tabler/tabler):Tabler is free and open-source HTML Dashboard UI Kit built on Bootstrap 4 https://tabler.github.io/
-
 ## 项目
 
 * [使用canvas实现和HTML5 video交互的弹幕效果](https://www.zhangxinxu.com/wordpress/2017/09/html5-canvas-video-barrage/)
+
+## 扩展
+
+* [hakimel/reveal.js](https://github.com/hakimel/reveal.js):The HTML Presentation Framework http://lab.hakim.se/reveal-js/
+* Dashboard
+  - [tabler/tabler](https://github.com/tabler/tabler):Tabler is free and open-source HTML Dashboard UI Kit built on Bootstrap 4 https://tabler.github.io/
 
 ## 参考
 

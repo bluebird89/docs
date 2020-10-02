@@ -278,37 +278,30 @@ outline-width:thin;
 
 ## 盒子模型 Box Model
 
-依赖 display 属性 + position属性 + float属性.规定了元素框处理元素内容、内边距、边框 和 外边距 的方式
-
+* 依赖 display 属性 + position属性 + float属性.规定了元素框处理元素内容、内边距、边框 和 外边距 方式
 * 由内到外：element(height width)->padding(内边距呈现了元素的背景)->border->margin(默认是透明)
-
 * 背景应用于由内容和内边距、边框组成的区域
-
 * 通过将元素的 margin 和 padding 设置为零来覆盖这些浏览器样式
-
 * element
-  
-  - 元素的内边距设置百分数值。百分数值是相对于其父元素的 width 计算的，这一点与外边距一样。所以，如果父元素的 width 改变，它们也会改变。
-  - width 和 height 指的是内容区域的宽度和高度。增加内边距、边框和外边距不会影响内容区域的尺寸，但是会增加元素框的总尺寸。
-
+  - 元素的内边距设置百分数值。百分数值是相对于其父元素的 width 计算的，这一点与外边距一样。所以，如果父元素的 width 改变，它们也会改变
+  - width 和 height 指的是内容区域的宽度和高度。增加内边距、边框和外边距不会影响内容区域的尺寸，但是会增加元素框的总尺寸
+  - content-box(default) - 为元素设置了宽度和高度，只是内容尺寸。所有的 padding 和 border 都在不包含在内容当中，也就是在内容的外部
 * padding
-  
   - padding-top
   - padding-right
   - padding-bottom
   - padding-left
-
-* border 边框绘制在“元素的背景之上”
-  
+* border 边框 绘制在“元素的背景之上”
   - border-style:none outset solid dotted dashed double groove ridge inset inherit
     - border-top-style border-right-style border-bottom-style border-left-style
-  - border-width:2px 或 0.1em；或者使用关键字: thin 、medium（默认值） 和 thick。
+  - border-width:2px 或 0.1em；或者使用关键字: thin 、medium（默认值） 和 thick
     + border-top-width border-right-width border-bottom-width border-left-width
   - border-color:默认的边框颜色是元素本身的前景色。如果没有为边框声明颜色，它将与元素的文本颜色相同
     + border-top-color border-right-color border-bottom-color border-left-color
-
+  - background-color
+  - background-image
+  - border-box - padding和 border 被包含在宽度和高度当中。如果一个div的宽度为100px，而被设置了box-sizing:border-box，那么它的宽度将始终是 100px， 无论添加多少 padding 和 border
 * margin:围绕在元素边框的空白区域
-  
   - 默认值是 0，所以如果没有为 margin 声明一个值，就不会出现外边距
   - 浏览器对许多元素已经提供了预定的样式，外边距也不例外。例如，在支持 CSS 的浏览器中，外边距会在每个段落元素的上面和下面生成“空行”
   - margin-top margin-right margin-bottom margin-left
@@ -316,12 +309,7 @@ outline-width:thin;
     + 当两个垂直外边距相遇时，它们将形成一个外边距。合并后的外边距的高度等于两个发生合并的外边距的高度中的较大者
     + 当一个元素包含在另一个元素中时（假设没有内边距或边框把外边距分隔开），它们的上和/或下外边距也会发生合并，一侧合为一个较大值
     + 有一个空元素，它有外边距，但是没有边框或填充。在这种情况下，上外边距与下外边距就碰到了一起，发生合并
-
 * box-sizing：有利于样式化，而且你在也不用做乏味的数学运算
-
-* content-box(default) - 当我们为元素设置了宽度和高度，但那只是内容的尺寸。所有的 padding 和 border 都在不包含在内容当中，也就是在内容的外部。
-
-* border-box - padding和 border 被包含在 宽度和高度当中。 如果一个 div 的宽度为 100px ，而被设置了 box-sizing: border-box， 那么它的宽度将始终是 100px， 无论你添加多少 padding 和 border 。
 
 ```css
 * {
@@ -445,26 +433,26 @@ a:hover {border-color: gray;}
 - PC
 
 - 实现：
-  
+
   - 头部添加标签，viewport是网页默认的宽度和高度，上面这行代码的意思是，网页宽度默认等于屏幕宽度（width=device-width），原始缩放比例（initial-scale=1）为1.0，即网页初始大小占屏幕面积的100%。网页会根据屏幕宽度调整布局，所以不能使用绝对宽度的布局，也不能使用具有绝对宽度的元素，使用百分比或auto，字体使用相对大小（em）；
-    
+
     ```html
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     ```
-  
+
   - 流动布局：各个区块的位置都是浮动的，不是固定不变的。如果宽度太小，放不下两个元素，后面的元素会自动滚动到前面元素的下方，不会在水平方向overflow（溢出），避免了水平滚动条的出现。
-  
+
   - "自适应网页设计"的核心，就是CSS3引入的Media Query模块。它的意思就是，自动探测屏幕宽度，然后加载相应的CSS文件。
-    
+
     ```html
     <link rel="stylesheet" type="text/css"
     　　　　media="screen and (min-width: 400px) and (max-device-width: 600px)"
     　　　　href="smallScreen.css" />
     @import url("tinyScreen.css") screen and (max-device-width: 400px);
     ```
-  
+
   - CSS实现
-    
+
     ```css
     @media screen and (max-device-width: 400px) {
     　　　　.column {
@@ -476,12 +464,12 @@ a:hover {border-color: gray;}
     　　　　}
     　　}
     ```
-  
+
   - 图片 视频的自动缩放
-    
+
     ```html
     img, object { max-width: 100%;}
-    
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <style>
       .red-text {

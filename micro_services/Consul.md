@@ -36,13 +36,9 @@ export PATH="/Users/sunqiang/go/tools:$PATH"
 ## 服务
 
 * 集群是由N个SERVER，加上M个CLIENT组成的。不管是SERVER还是CLIENT，都是consul的一个节点，所有的服务都可以注册到这些节点上，实现服务注册信息的共享
-
 * CLIENT:客户端, 无状态, 将 HTTP 和 DNS 接口请求转发给局域网内的服务端集群
-
 * SERVER:保存配置信息, 高可用集群, 在局域网内与本地客户端通讯, 通过广域网与其他数据中心通讯. 每个数据中心的 server 数量推荐为 3 个或是 5 个.
-
 * 组件
-  
   - Agent: 在consul集群上每个节点运行的后台进程，在服务端模式和客户端模式都需要运行该进程。
   - client: 客户端是无状态的，负责把RPC请求转发给服务端， 占用资源和带宽比较少
   - server: 维持集群状态， 相应rpc请求， 选举算法
@@ -52,41 +48,27 @@ export PATH="/Users/sunqiang/go/tools:$PATH"
   - LAN Gossip： 在同一个局域网或者数据中心中所有的节点
   - Refers to the LAN gossip pool which contains nodes that are all located on the same local area network or datacenter.
   - Server和Client。客户端不存储配置数据，官方建议每个Consul Cluster至少有3个或5个运行在Server模式的Agent，Client节点不限
-
 * 一个集群中的所有节点都添加到 gossip protocol（通过这个协议进行成员管理和信息广播）中
-  
   - 客户端不用知道服务地址
   - 节点失败检测是分布式的， 不用只在服务端完成
-
 * 数据中心的所有服务端节点组成一个raft集合
-  
   - 会选举出一个leader，leader服务所有的请求和事务， 如果非leader收到请求， 会转发给leader.
   - leader通过一致性协议（consensus protocol），把所有的改变同步(复制)给非leader
   - 所有数据中心的服务器组成了一个WAN gossip pool，他存在目的就是使数据中心可以相互交流，增加一个数据中心就是加入一个WAN gossip pool
   - 当一个服务端节点收到其他数据中心的请求， 会转发给对应数据中心的服务端
-
 * 参数
-  
   - -server ： 定义agent运行在server模式
   - -bootstrap-expect ：在一个datacenter中期望提供的server节点数目，当该值提供的时候，consul一直 等到达到指定sever数目的时候才会引导整个集群，该标记不能和bootstrap共用
   - -data-dir：提供一个目录用来存放agent的状态，所有的agent允许都需要该目录，该目录必须是稳定的，系统 重启后都继续存在 -node：节点在集群中的名称，在一个集群中必须是唯一的，默认是该节点的主机名 -bind：该地址用来在集群内部的通讯，集群内的所有节点到地址都必须是可达的，默认是0.0.0.0
   - -ui： 启动web界面
   - -config-dir：：配置文件目录，里面所有以.json结尾的文件都会被加载 -rejoin：使consul忽略先前的离开，在再次启动后仍旧尝试加入集群中。 -client：consul服务侦听地址，这个地址提供HTTP、DNS、RPC等服务，默认是127.0.0.1所以不对外提供服 务，如果你要对外提供服务改成0.0.0.0
-
 * SERVER是它们的老大，它和其它SERVER不一样的一点是，它需要负责同步注册的信息给其它的SERVER，同时也要负责各个节点的健康监测
-
 * 节点异常consul的处理
-  
   - leader挂了，consul会重新选取出新的leader，只要超过一半的SERVER还活着，集群是可以正常工作的
-
 * Node Name 是代理的唯一名称，默认情况下是主机名称，可以通过 -node 选项进行指定；
-
 * Datacenter 是代理被配置运行的数据中心，默认值是 dc1，可以通过 -datacenter 选项指定；
-
 * Server 表明代理以 server 还是 client 模式运行，true 表示 server 模式；
-
 * Client Addr 表示提供给客户端接口的代理地址，默认是本地 IP 地址，可以通过 -http-addr 选项进行指定；
-
 * Cluster Addr 用于集群中 Consul 代理间通信的地址和端口集
 
 ```sh

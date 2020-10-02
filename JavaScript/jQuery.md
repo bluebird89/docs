@@ -1,6 +1,6 @@
-# [jquery/jquery](https://github.com/jquery/jquery)
+# [jQuery](https://github.com/jquery/jquery)
 
-jQuery JavaScript Library https://jquery.com/
+JavaScript Library https://jquery.com/
 
 * 消除浏览器差异：不需要自己写冗长的代码来针对不同的浏览器来绑定事件，编写AJAX等代码
 * 简洁的操作DOM方法：写$('#test')肯定比document.getElementById('test')来得简洁
@@ -35,6 +35,11 @@ $(document).ready(function(){
 
 --- jQuery functions go here ----
 
+});
+
+$(function() {
+// The DOM is ready!
+// The rest of the code goes here
 });
 </script>
 ```
@@ -162,6 +167,13 @@ var haskell = langs.last(); // Haskell, 相当于$('ul.lang li:last-child')
 var sub = langs.slice(2, 4); // Swift, Scheme, 参数和数组的slice()方法一致
 
 $('ul.lang li.lang-javascript'); // 每个 <ul> 的第一个 <li> 元素
+
+  $(".container input#elem").attr("title", $(".container input#elem").text());
+  // Set's an element's text color to red
+  $(".container input#elem").css("color", "red");
+  // Makes the element fade out
+  $(".container input#elem").fadeOut();
+
 ```
 
 ### 操作DOM
@@ -336,7 +348,7 @@ $('ul.lang li.lang-javascript'); // 每个 <ul> 的第一个 <li> 元素
 </script>
 ```
 
-### 事件
+### 事件 Event
 
 * JavaScript在浏览器中以单线程模式运行，页面加载后，一旦页面上所有的JavaScript代码被执行完后，就只能依赖触发事件来执行JavaScript代码。
 * 浏览器在接收到用户的鼠标或键盘输入后，会自动在对应的DOM节点上触发相应的事件。如果该节点已经绑定了对应的JavaScript处理函数，该函数就会自动调用。
@@ -403,41 +415,48 @@ input.change(); // 触发change事件
 $(function () {
     window.open('/');
 });
+
+      var listItems = $("#longlist li");
+      listItems.on({
+        "mouseenter": function() {
+          $(this).text("Click me!");
+        },
+        "click": function() {
+          $(this).text("Why did you click me?!");
+        }
+      })
+
+    var list = $("#longlist");
+      list.on("mouseenter", "li", function(){
+        $(this).text("Click me!");
+      });
+      list.on("click", "li", function() {
+        $(this).text("Why did you click me?!");
+      });
+    $(document).on('ready', function () {
+        $('#testForm).on('submit', function () {
+            alert('submit!');
+        });
+    });
+
+    // 简化
+    $(document).ready(function () {
+        // on('submit', function)也可以简化:
+        $('#testForm).submit(function () {
+            alert('submit!');
+        });
+    });
+    // 是document对象的ready事件处理函数。完全可以反复绑定事件处理函数，它们会依次执行
+    $(function () {
+        // init...
+    });
+
+    $(function () {
+        $('#testMouseMoveDiv').mousemove(function (e) {
+            $('#testMouseMoveSpan').text('pageX = ' + e.pageX + ', pageY = ' + e.pageY);
+        });
+    });
 </script>
-
-<html>
-<head>
-    <script>
-        $(document).on('ready', function () {
-            $('#testForm).on('submit', function () {
-                alert('submit!');
-            });
-        });
-
-        // 简化
-        $(document).ready(function () {
-            // on('submit', function)也可以简化:
-            $('#testForm).submit(function () {
-                alert('submit!');
-            });
-        });
-        // 是document对象的ready事件处理函数。完全可以反复绑定事件处理函数，它们会依次执行
-        $(function () {
-            // init...
-        });
-
-        $(function () {
-            $('#testMouseMoveDiv').mousemove(function (e) {
-                $('#testMouseMoveSpan').text('pageX = ' + e.pageX + ', pageY = ' + e.pageY);
-            });
-        });
-    </script>
-</head>
-<body>
-    <form id="testForm">
-        ...
-    </form>
-</body>
 ```
 
 ### 动画
@@ -499,17 +518,18 @@ div.slideDown(2000)
 
 ### AJAX
 
-在全局对象jQuery（也就是$）绑定了ajax()函数，可以处理AJAX请求。ajax(url, settings)函数需要接收一个URL和一个可选的settings对象，常用的选项如下：
-* async：是否异步执行AJAX请求，默认为true，千万不要指定为false；
-* method：发送的Method，缺省为'GET'，可指定为'POST'、'PUT'等；
-* contentType：发送POST请求的格式，默认值为'application/x-www-form-urlencoded; charset=UTF-8'，也可以指定为text/plain、application/json；
-* data：发送的数据，可以是字符串、数组或object。如果是GET请求，data将被转换成query附加到URL上，如果是POST请求，根据contentType把data序列化成合适的格式；
-* headers：发送的额外的HTTP头，必须是一个object；
-* dataType：接收的数据格式，可以指定为'html'、'xml'、'json'、'text'等，缺省情况下根据响应的Content-Type猜测。
-    * $.ajax()
-    * $.get()
-    * $.post():传入的第二个参数默认被序列化为application/x-www-form-urlencoded
-    * $.getJSON()
+* 在全局对象jQuery（也就是$）绑定了ajax()函数，可以处理AJAX请求。ajax(url, settings)函数需要接收一个URL和一个可选的settings对象
+* 常用选项：
+    - async：是否异步执行AJAX请求，默认为true，千万不要指定为false；
+    - method：发送的Method，缺省为'GET'，可指定为'POST'、'PUT'等；
+    - contentType：发送POST请求的格式，默认值为'application/x-www-form-urlencoded; charset=UTF-8'，也可以指定为text/plain、application/json；
+    - data：发送的数据，可以是字符串、数组或object。如果是GET请求，data将被转换成query附加到URL上，如果是POST请求，根据contentType把data序列化成合适的格式；
+    - headers：发送的额外的HTTP头，必须是一个object；
+    - dataType：接收的数据格式，可以指定为'html'、'xml'、'json'、'text'等，缺省情况下根据响应的Content-Type猜测。
+        - $.ajax()
+        - $.get()
+        - $.post():传入的第二个参数默认被序列化为application/x-www-form-urlencoded
+        - $.getJSON()
 * 用promise实现链式写法
 * 使用JSONP，可以在ajax()中设置jsonp: 'callback'，让jQuery实现JSONP跨域加载数据
 
@@ -549,6 +569,63 @@ var jqxhr = $.getJSON('/path/to/resource', {
     check: 1
 }).done(function (data) {
     // data已经被解析为JSON对象了
+});
+
+function getName(personid) {
+    var dynamicData = {};
+    dynamicData["id"] = personID;
+    $.ajax({
+      url: "getName.php",
+      type: "get",
+      data: dynamicData,
+      success: function(data) {
+        // Updates the UI based the ajax result
+        $(".person-name").text(data.name);
+      }
+    });
+  }
+  getName("2342342");
+
+function getName(personid) {
+    var dynamicData = {};
+    dynamicData["id"] = personID;
+    return $.ajax({
+      url: "getName.php",
+      type: "get",
+      data: dynamicData
+    });
+}
+getName("2342342").done(function(data) {
+// Updates the UI based the ajax result
+    $(".person-name").text(data.name);
+});
+
+$.ajax({
+  statusCode: {
+    404: function() {
+      alert( "page not found" );
+    }
+  }
+});
+
+$.ajax({
+    url: "update.php",
+    type: "POST",
+    data: customObj
+})
+.fail(function( jqXHR, textStatus, errorThrown) {
+    if (jqXHR.status == 403) {
+        alert( "forbidden" );
+    }
+});
+
+$.ajax({
+    url: "update.php",
+    type: "POST",
+})
+.statusCode({
+    401: function() { alert( 'Unauthorized' ); },
+    200: function() { alert( 'OK!'); }
 });
 
 # send credentials along with cross-domain posts:using credentials such as cookies, authorization headers or TLS client certificates.

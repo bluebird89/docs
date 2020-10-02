@@ -52,7 +52,18 @@
   - CI 持续集成主要是在代码更改时自动分支合并、构建并执行一系列的测试（包括单元测试、集成测试、端到端测试等），确保这些变更不会破坏原来的应用。
   - CD 持续交付和部署则是 CI 测试通过之后把构建结果存档、发布到预布环境和生产环境、最后再进行验收测试的过程。
   - CI/CD 是 DevOps 的基础，CI/CD 侧重于软件开发过程中的自动化，而 Devops 则是侧重于文化构建，旨在减少开发、运维、QA之间的沟通鸿沟，促进快速可靠发布的同时还保证产品质量。
-  - CI/CD 一系列流程通常会组成一个流水线，docker和Kubernetes则可以简化这些流水线中的很多流程，比如Docker容器可以很容易把有冲突的环境隔离开来，而Kubernetes则更进一步简化整个流水线的构建、执行和维护工作。
+  - CI/CD 一系列流程通常会组成一个流水线，docker和Kubernetes则可以简化这些流水线中的很多流程，比如Docker容器可以很容易把有冲突的环境隔离开来，而Kubernetes则更进一步简化整个流水线的构建、执行和维护工作
+  - 机制
+    + 持续集成工具的对比和选择 Jenkins， GoCD， ConsourseCI, TravisCI, etc
+    + Jenkins搭建持续集成服务器
+    + 基于Jenkins搭建持续集成流水线
+* 实践：
+  - 小步提交
+  - 每日构建成功
+  - 单元测试在本地提交前通过
+  - 自动化功能测试
+  - 构建失败，优先级最高
+  - 代码风格问题也让构建失败
 * 工具
   - 传统的 CI/CD 工具，典型的是 Jenkins 和 Gitlab，功能强大，配置灵活，使用场景没有限制。
   - Kubernetes native 工具，典型的是 Jenkins X 和 Argo，专为 Kubernetes 场景构建，跟 Kubernetes 生态紧密集成，但缺少灵活性
@@ -67,7 +78,12 @@
   - LuntBuild：LntBuild 是一个强大自动构建的工具。通过一个简洁的web接口就可以很容易地进行系统的持续构建。
   - CruiseControl：CuiseControl 是一个针对持续构建程序(项目持续集成)的框架，它包括一个email通知的插件，Ant和各种各样的CVS工具。CruiseControl提供了一个Web接口，可随时查看当前的编译状况和历史状况。
   - Integrity：Integrity 是 Ruby 开发的持续集成服务器。
-  - Gump：Gump 是 Apache 的整合工具。它以 Python 写成、完全支持 Apache Ant、Apache Maven 等等软件组建工具。
+  - Gump：Gump 是 Apache 的整合工具。它以 Python 写成、完全支持 Apache Ant、Apache Maven 等等软件组建工具
+* 度量
+  - 代码度量
+  - 流水线度量
+  - 团队交付速率度量
+  - 持续改进
 * Webhooks
   - [GitHub Developer](https://developer.github.com/webhooks/)
   - [adnanh/webhook](https://github.com/adnanh/webhook):webhook is a lightweight configurable tool written in Go, that allows you to easily create HTTP endpoints (hooks) on your server, which you can use to execute configured commands.
@@ -85,7 +101,7 @@
   - QUnit：QUnit 是 jQuery 的单元测试框架。
   - JMeter：JMeter 是 Apache 组织的开放源代码项目，它是功能和性能测试的工具，100% 的用 java 实现。
   - Gradle：Gradle 就是可以使用 Groovy 来书写构建脚本的构建系统，支持依赖管理和多项目，类似 Maven，但比之简单轻便。
-  - PHPUnit：PHPUnit 是一个轻量级的PHP测试框架。它是在PHP5下面对JUnit3系列版本的完整移植，是xUnit测试框架家族的一员(它们都基于模式先锋Kent Beck的设计)。
+  - PHPUnit：PHPUnit 是一个轻量级的PHP测试框架。它是在PHP5下面对JUnit3系列版本的完整移植，是xUnit测试框架家族的一员(它们都基于模式先锋Kent Beck的设计)
 
 ## 持续反馈
 

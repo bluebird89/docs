@@ -19,22 +19,40 @@
   - Agile（敏捷）这个术语，但它比 Git 或 Redux 被提及的频率更高，这说明 JS 开发者们除了要获得开发岗位必须的硬技能，软技能同样不可忽视。UX 也是如此
   - 作为一个前端开发者，需要知道如何在技术层面为用户提供更流畅的体验，而不是在设计层面
 
-## 功能
+## DOM Document Object Model 文档对象模型
 
-* 写入 HTML 输出流
-  - document.write
-* 事件响应
-  - onclick
-* 改变 HTML 内容
-  - document.getElementById("demo").innerHTML
-* 改变属性
-  - document.getElementById('myimage').src
-  - document.getElementById('myimage').style.color
+* HTML 看做一个对象树（DOM树), DOM 看成节点
+* 针对 HTML 和 XML 提供的一个API,操作 HTML 中的元素
+* Javascript 不能够真正改变 DOM，仅仅是改变呈现内容，当刷新的时候就会发现都还原
+* 可以把这些改变传递给服务器，用户的交互没必要让服务器掺和，因为交互只是暂时
+* 对象
+  - document
+    + 当浏览器下载到一个网页，通常是 HTML，这个 HTML 就叫 document
+    + 通常是整个 DOM 树的根节点
+    + 包含了标题（document.title）、URL（document.URL）等属性，可以直接在 JS 中访问到
+    + 可以通过 document 访问任何节点
+    + 功能
+      * 写入 HTML 输出流
+        - document.write
+      * 事件响应
+        - onclick
+      * 改变 HTML 内容
+        - document.getElementById("demo").innerHTML
+      * 改变属性
+        - document.getElementById('myimage').src
+        - document.getElementById('myimage').style.color
+
+## BOM Browser Object Model 浏览器对象模型
+
+* 为了控制浏览器的行为而出现的接口
+* 对象
+  - location.href
+  - window
 
 ## 引入
 
 * 默认的type就是JavaScript，所以不必显式地把type指定为JavaScript
-* 由`<script>...</script>`包含的代码就是JavaScript代码，它将直接被浏览器执行。JavaScript代码可以直接嵌在网页的任何地方，不过通常我们都把JavaScript代码放到`<body>`后
+* 由`<script>...</script>`包含的代码就是JavaScript代码，将直接被浏览器执行。JavaScript代码可以直接嵌在网页的任何地方，不过通常我们都把JavaScript代码放到`<body>`后
 * 把JavaScript代码放到一个单独的.js文件，然后在HTML中通过`<script src="..."></script>`引入这个文件
   - 更利于维护/复用
   - 在同一个页面中引入多个.js文件
@@ -604,7 +622,7 @@ ES6标准引入的新的数据类型。一个generator看上去像一个函数�
 * 最大的缺点是继承的实现需要编写大量代码，并且需要正确实现原型链
 
 * JavaScript最重要的概念可能在于原型链。基于原型链的委托机制就是原型继承的本质。
-  
+
   - 所有的数据都是对象，JS的根对象是Object.prototype对象，它是一个空对象
   - 要得到一个对象，不是通过实例化类而是找到一个对象作为原型来克隆它
   - 对象会记住它的原型；就JS而言，对象的原型其实是其构造器的原型（new），包含在其隐藏属性_proto_中
@@ -962,7 +980,7 @@ fileInput.addEventListener('change', function () {
 * 默认情况下，JavaScript在发送AJAX请求时，URL的域名必须和当前页面完全一致。域名要相同（www.example.com和example.com不同），协议要相同（http和https不同），端口号要相同（默认是:80端口，它和:8080就不同）
 
 * 用JavaScript请求外域（就是其他网站）的URL
-  
+
   - 通过在同源域名下架设一个代理服务器来转发，JavaScript负责把请求发送到代理服务器：'/proxy?url=http://www.sina.com.cn',代理服务器再把结果返回，这样就遵守了浏览器的同源策略。这种方式麻烦之处在于需要服务器端额外做开发。
   - JSONP:它有个限制，只能用GET请求，并且要求返回JavaScript。这种方式跨域实际上是利用了浏览器允许跨域引用JavaScript资源.常以函数调用的形式返回,实例：`http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice`，返回`refreshPrice({"0000001":{"code": "0000001", ... });`,在页面中准备好好回调函数refreshPrice。
   - CORS全称Cross-Origin Resource Sharing：HTML5规范定义的如何跨域访问资源。Origin表示本域，也就是浏览器当前页面的域。当JavaScript向外域（如sina.com）发起请求后，浏览器收到响应后，首先检查Access-Control-Allow-Origin是否包含本域，如果是，则此次跨域请求成功，如果不是，则请求失败，JavaScript将无法获取到响应的任何数据。
@@ -1055,12 +1073,12 @@ function getPrice() {
 * 由于这个“缺陷”，导致JavaScript的所有网络操作，浏览器事件，都必须是异步执行。
 
 * 将任务的执行模式分成两种：同步（Synchronous）和异步（Asynchronous）。
-  
+
   * "同步模式"就是后一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的；
   * "异步模式"则完全不同，每一个任务有一个或多个回调函数（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数；后一个任务则是不等前一个任务结束就执行，所以程序的执行顺序与任务的排列顺序是不一致的、异步的。
 
 * "异步模式"非常重要。在浏览器端，耗时很长的操作都应该异步执行，避免浏览器失去响应，最好的例子就是Ajax操作。在服务器端，"异步模式"甚至是唯一的模式，因为执行环境是单线程的，如果允许同步执行所有http请求，服务器性能会急剧下降，很快就会失去响应。异步代码会被放入一个事件队列，等到所有其他代码执行后才进行，而不会阻塞线程。异步编程的方法：
-  
+
   - 回调函数:假定有两个函数f1和f2，后者等待前者的执行结果。f1()和f2().被压入了称之为Event Loop的队列。
     - 回调函数的优点是简单、容易理解和部署，
     - 缺点是不利于代码的阅读和维护，各个部分之间高度耦合（Coupling），流程会很混乱，而且每个任务只能指定一个回调函数
@@ -1378,7 +1396,7 @@ rome check
 * [Meteor](https://www.meteor.com/)
 
 * 框架
-  
+
   - [Requarks/wiki](https://github.com/Requarks/wiki):Wiki.js | A modern, lightweight and powerful wiki app built on NodeJS, Git and Markdown https://wiki.js.org
   - [tj/should.js](https://github.com/tj/should.js):BDD style assertions for node.js -- test framework agnostic
   - [fastify/fastify](https://github.com/fastify/fastify):Fast and low overhead web framework, for Node.js https://www.fastify.io
@@ -1388,7 +1406,7 @@ rome check
   - [Foundation](https://get.foundation/): The most advanced responsive front-end framework in the world. <http://foundation.zurb.com/>
 
 * 包管理
-  
+
   - [JedWatson/classnames](https://github.com/JedWatson/classnames):A simple javascript utility for conditionally joining classNames together
   - [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
   - [lerna/lerna](https://github.com/lerna/lerna):🐉 A tool for managing JavaScript projects with multiple packages. https://lernajs.io
@@ -1397,12 +1415,12 @@ rome check
   - [npm/tink](https://github.com/npm/tink):a dependency unwinder for javascript
 
 * lightbox
-  
+
   - [feimosi/baguetteBox.js](https://github.com/feimosi/baguetteBox.js):⚡️ Simple and easy to use lightbox script written in pure JavaScript
   - [sachinchoolur/lightgallery.js](https://github.com/sachinchoolur/lightgallery.js):Full featured JavaScript image & video gallery. No dependencies
 
 * 图片
-  
+
   - [oliver-moran/jimp](https://github.com/oliver-moran/jimp):An image processing library written entirely in JavaScript for Node, with zero external or native dependencies.
   - [Foliotek/Croppie](https://github.com/Foliotek/Croppie):A Javascript Image Cropper http://foliotek.github.io/Croppie
   - [pshihn/rough](https://github.com/pshihn/rough):Create graphics with a hand-drawn, sketchy, appearance http://roughjs.com
@@ -1411,7 +1429,7 @@ rome check
   - [Paul-Browne/lazyestload.js](https://github.com/Paul-Browne/lazyestload.js):load images only when they are in (and remain in) the viewport
 
 * 编辑器
-  
+
   - [codemirror/CodeMirror](https://github.com/codemirror/CodeMirror):In-browser code editor http://codemirror.net/
   - [ajaxorg/ace](https://github.com/ajaxorg/ace):Ace (Ajax.org Cloud9 Editor) https://ace.c9.io
   - [ianstormtaylor/slate](https://github.com/ianstormtaylor/slate):A completely customizable framework for building rich text editors. http://slatejs.org
@@ -1422,17 +1440,17 @@ rome check
   - [domchristie/turndown](https://github.com/domchristie/turndown):🛏 An HTML to Markdown converter written in JavaScript http://domchristie.github.io/turndown
 
 * Highlight
-  
+
   - [julmot/mark.js](https://github.com/julmot/mark.js):JavaScript keyword highlighting. Mark text with with options that fit every application. Also available as jQuery plugin. https://markjs.io/
   - [highlightjs/highlight.js](https://github.com/highlightjs/highlight.js):Javascript syntax highlighter https://highlightjs.org/
   - [PrismJS/prism](https://github.com/PrismJS/prism):Lightweight, robust, elegant syntax highlighting. http://prismjs.com
 
 * fuzzy-search
-  
+
   - [krisk/Fuse](https://github.com/krisk/Fuse):Lightweight fuzzy-search, in JavaScript http://fusejs.io/
 
 * 日期
-  
+
   - [date-fns/date-fns](https://github.com/date-fns/date-fns):⏳ Modern JavaScript date utility library ⌛️ https://date-fns.org
   - [dangrossman/daterangepicker](https://github.com/dangrossman/daterangepicker):JavaScript Date Range, Date and Time Picker Component http://www.daterangepicker.com
   - [DateJS](https://github.com/datejs/Datejs)
@@ -1441,7 +1459,7 @@ rome check
   - [moment/moment-timezone](https://github.com/moment/moment-timezone):Timezone support for moment.js http://momentjs.com/timezone
 
 * 图表 Data Visualization
-  
+
   - [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
   - [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js):A JavaScript Chart Library
   - [clientIO/joint](https://github.com/clientIO/joint):JavaScript diagramming library http://www.jointjs.com
@@ -1458,33 +1476,33 @@ rome check
   - [ alyssaxuu / flowy ](https://github.com/alyssaxuu/flowy):The minimal javascript library to create flowcharts sparkles
 
 * fingerprinting
-  
+
   - [Valve/fingerprintjs2](https://github.com/Valve/fingerprintjs2):Modern & flexible browser fingerprinting library http://valve.github.io/fingerprintjs2/
 
 * Animations
-  
+
   - [juliangarnier/anime](https://github.com/juliangarnier/anime):JavaScript Animation Engine http://animejs.com
   - [Popmotion/popmotion](https://github.com/Popmotion/popmotion):Simple animation libraries for delightful user interfaces https://popmotion.io
 
 * Canvas
-  
+
   - [spritejs/spritejs](https://github.com/spritejs/spritejs):A cross-platform lightweight 2D render object model. http://spritejs.org
   - [blueimp/JavaScript-Canvas-to-Blob](https://github.com/blueimp/JavaScript-Canvas-to-Blob):JavaScript Canvas to Blob is a function to convert canvas elements into Blob objects.
 
 * dialog
-  
+
   - [zewish/rmodal.js](https://github.com/zewish/rmodal.js):A simple 1.2 KB modal dialog with no dependencies https://rmodal.js.org/
 
 * trace
-  
+
   - [stacktracejs/stacktrace.js](https://github.com/stacktracejs/stacktrace.js):Generate, parse, and enhance JavaScript stack traces in all web browsers https://www.stacktracejs.com/
 
 * 虚拟化
-  
+
   - [copy/v86](https://github.com/copy/v86):x86 virtualization in JavaScript, running in your browser and NodeJS
 
 * 代码格式化
-  
+
   - [airbnb/javascript](https://github.com/airbnb/javascript):JavaScript Style Guide
   - [standard/standard](https://github.com/standard/standard):🌟 JavaScript Style Guide, with linter & automatic code fixer https://standardjs.com
   - JSHint
@@ -1492,162 +1510,162 @@ rome check
   - [HubSpot/odometer](https://github.com/HubSpot/odometer):Smoothly transitions numbers with ease. #hubspot-open-source
 
 * 压缩
-  
+
   - [mishoo/UglifyJS](https://github.com/mishoo/UglifyJS):JavaScript parser / mangler / compressor / beautifier library for NodeJS http://marijn.haverbeke.nl/uglifyjs
   - [mishoo/UglifyJS2](https://github.com/mishoo/UglifyJS2):JavaScript parser / mangler / compressor / beautifier toolkit http://lisperator.net/uglifyjs/
   - [kangax/html-minifier](https://github.com/kangax/html-minifier):Javascript-based HTML compressor/minifier (with Node.js support) http://kangax.github.com/html-minifier/
 
 * 调试Debug
-  
+
   - [GoogleChromeLabs/ndb](https://github.com/GoogleChromeLabs/ndb):ndb is an improved debugging experience for Node.js, enabled by Chrome DevTools
   - [nswbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
   - [zeeshanu/dumper.js](https://github.com/zeeshanu/dumper.js):A better and pretty variable inspector for your Node.js applications
   - [chancejs/chancejs](https://github.com/chancejs/chancejs):Chance - Random generator helper for JavaScript http://chancejs.com
 
 * NLP
-  
+
   - [NaturalNode/natural](https://github.com/NaturalNode/natural):general natural language facilities for node
 
 * Cli
-  
+
   - [nexe/nexe](https://github.com/nexe/nexe):🎉 create a single executable out of your node.js apps
   - [chalk/chalk](https://github.com/chalk/chalk):🖍 Terminal string styling done right
   - [SBoudrias/Inquirer.js](https://github.com/SBoudrias/Inquirer.js):A collection of common interactive command line user interfaces.
 
 * HTTP
-  
+
   - [visionmedia/superagent](https://github.com/visionmedia/superagent):Ajax with less suck - (and node.js HTTP client to match) http://visionmedia.github.io/superagent/
   - [alibaba/anyproxy](https://github.com/alibaba/anyproxy):A fully configurable http/https proxy in NodeJS http://anyproxy.io
 
 * promise
-  
+
   - [petkaantonov/bluebird](https://github.com/petkaantonov/bluebird):🐦 ⚡️ Bluebird is a full featured promise library with unmatched performance. http://bluebirdjs.com
   - [JacksonTian/eventproxy](https://github.com/JacksonTian/eventproxy):An implementation of task/event based asynchronous pattern. http://html5ify.com/eventproxy
   - [wendux/fly](https://github.com/wendux/fly):🚀 Supporting request forwarding and Promise based HTTP client for all JavaScript runtimes. https://wendux.github.io/dist/#/language
 
 * 状态
-  
+
   - [mweststrate/immer](https://github.com/mweststrate/immer):Create the next immutable state by mutating the current one
 
 * History
-  
+
   - [browserstate/history.js](https://github.com/browserstate/history.js):History.js gracefully supports the HTML5 History/State APIs (pushState, replaceState, onPopState) in all browsers. Including continued support for data, titles, replaceState. Supports jQuery, MooTools and Prototype. For HTML5 browsers this means that you can modify the URL directly, without needing to use hashes anymore
 
 * keyboard input
-  
+
   - [jaywcjlove/hotkeys](https://github.com/jaywcjlove/hotkeys):➷ A robust Javascript library for capturing keyboard input. It has no dependencies. https://git.io/hotkeys.js
 
 * 服务
-  
+
   - [nodemon](http://nodemon.io/):a utility that will monitor for any changes in your source and automatically restart your server.
 
 * 验证
-  
+
   - [jaywcjlove/validator.js](https://github.com/jaywcjlove/validator.js):⁉️轻量级的JavaScript表单验证，字符串验证。没有依赖，支持UMD，~3kb。 https://git.io/validatorjs
   - [yiminghe/async-validator](https://github.com/yiminghe/async-validator):validate form asynchronous
   - [imbrn/v8n](https://github.com/imbrn/v8n):☑️ JavaScript fluent validation library.
   - [sindresorhus/ow](https://github.com/sindresorhus/ow):Function argument validation for humans
 
 * 网页
-  
+
   - [jiahaog/nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
   - [palmerhq/the-platform](https://github.com/palmerhq/the-platform):Web. Components.
 
 * 模拟器
-  
+
   - [bfirsh/jsnes](https://github.com/bfirsh/jsnes):A JavaScript NES emulator. https://jsnes.org
 
 * 播放器
-  
+
   - [jwplayer/jwplayer](https://github.com/jwplayer/jwplayer):JW Player is the world's most popular embeddable media player. https://developer.jwplayer.com/
   - [videojs/video.js](https://github.com/videojs/video.js):Video.js - open source HTML5 & Flash video player http://www.videojs.com
 
 * css
-  
+
   - [webpack-contrib/mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin):Lightweight CSS extraction plugin
 
 * 写作
-  
+
   - [get-alex/alex](https://github.com/get-alex/alex):Catch insensitive, inconsiderate writing https://alexjs.com
   - [mozilla/pdf.js](https://github.com/mozilla/pdf.js):PDF Reader in JavaScript
 
 * 颜色
-  
+
   - [gka/chroma.js](https://github.com/gka/chroma.js):JavaScript library for all kinds of color manipulations http://gka.github.io/chroma.js
 
 * layout
-  
+
   - [dagrejs/dagre](https://github.com/dagrejs/dagre):Directed graph layout for JavaScript
 
 * 安全
-  
+
   - [leizongmin/js-xss](https://github.com/leizongmin/js-xss):Sanitize untrusted HTML (to prevent XSS) with a configuration specified by a Whitelist http://jsxss.com
 
 * screenshots
-  
+
   - [dawnlabs/carbon](https://github.com/dawnlabs/carbon):🎨 Create and share beautiful images of your source code https://dawnlabs.io/carbon
 
 * SVG
-  
+
   - [svgdotjs/svg.js](https://github.com/svgdotjs/svg.js):The lightweight library for manipulating and animating SVG http://svgjs.com/
   - [riccardoscalco/textures](https://github.com/riccardoscalco/textures):Textures.js is a JavaScript library for creating SVG patterns
 
 * 2D
-  
+
   - [liabru/matter-js](https://github.com/liabru/matter-js):a 2D rigid body physics engine for the web ▲● ■
   - [CreateJS/EaselJS](https://github.com/CreateJS/EaselJS):The Easel Javascript library provides a full, hierarchical display list, a core interaction model, and helper classes to make working with the HTML5 Canvas element much easier. http://createjs.com/
   - [konvajs/konva](https://github.com/konvajs/konva):Konva.js is an HTML5 Canvas JavaScript framework that extends the 2d context by enabling canvas interactivity for desktop and mobile applications. http://konvajs.github.io/
 
 * 3D
-  
+
   - [mrdoob/three.js](https://github.com/mrdoob/three.js)：JavaScript 3D library. https://threejs.org/
 
 * xml
-  
+
   - [Leonidas-from-XIV/node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js):XML to JavaScript object converter.
   - [nodeca/js-yaml](https://github.com/nodeca/js-yaml):JavaScript YAML parser and dumper. Very fast. http://nodeca.github.com/js-yaml/
 
 * DOM
-  
+
   - [jsdom/jsdom](https://github.com/jsdom/jsdom):A JavaScript implementation of the WHATWG DOM and HTML standards, for use with node.js
 
 * 文件
-  
+
   - [mholt/PapaParse](https://github.com/mholt/PapaParse):Fast and powerful CSV (delimited text) parser that gracefully handles large files and malformed input http://PapaParse.com
   - [jprichardson/node-fs-extra](https://github.com/jprichardson/node-fs-extra):Node.js: extra methods for the fs object like copy(), remove(), mkdirs()
 
 * qrcode
-  
+
   - [kciter/qart.js](https://github.com/kciter/qart.js):Generate artistic QR code. 🎨 https://kciter.github.io/qart.js/
   - [soldair/node-qrcode](https://github.com/soldair/node-qrcode):qr code generator
 
 * 正则
-  
+
   - [gskinner/regexr](https://github.com/gskinner/regexr):RegExr is a HTML/JS based tool for creating, testing, and learning about Regular Expressions. http://regexr.com/
 
 * logger
-  
+
   - [klauscfhq/signale](https://github.com/klauscfhq/signale):👋 Hackable console logger
   - [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
 
 * Parser
-  
+
   - [acornjs/acorn](https://github.com/acornjs/acorn):A small, fast, JavaScript-based JavaScript parser
 
 * debounce
-  
+
   - [niksy/throttle-debounce](https://github.com/niksy/throttle-debounce)：Throttle and debounce functions.
 
 * 算法
-  
+
   - [trekhleb/javascript-algorithms](https://github.com/trekhleb/javascript-algorithms):📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings
 
 * jwt
-  
+
   - [themikenicholson/passport-jwt](https://github.com/themikenicholson/passport-jwt):Passport authentication using JSON Web Tokens
 
 * 代码在线分享工具
-  
+
   - JS Fiddle
   - .NET Fiddle
   - SQL Fiddle
@@ -1656,62 +1674,62 @@ rome check
   - [CodePen](https://codepen.io)
 
 * functional programming
-  
+
   - [origamitower/folktale](https://github.com/origamitower/folktale):A standard library for functional programming in JavaScript https://folktale.origamitower.com/
 
 * git
-  
+
   - [isomorphic-git/isomorphic-git](https://github.com/isomorphic-git/isomorphic-git):A pure JavaScript implementation of git for node and browsers! https://isomorphic-git.org/
 
 * object
-  
+
   - [oussamahamdaoui/forgJs](https://github.com/oussamahamdaoui/forgJs):ForgJs is a javascript lightweight object validator. Go check the Quick start section and start coding with love
 
 * validate
-  
+
   - [chriso/validator.js](https://github.com/chriso/validator.js):String validation
   - [hapijs/joi](https://github.com/hapijs/joi): The most powerful data validation library for JS
 
 * Grid
-  
+
   - [e-oj/Magic-Grid](https://github.com/e-oj/Magic-Grid):A simple, lightweight Javascript library for dynamic grid layouts. https://www.npmjs.com/package/magic-grid
 
 * bundler
-  
+
   - [rollup/rollup](https://github.com/rollup/rollup):Next-generation ES module bundler https://rollupjs.org
 
 * i18n
-  
+
   - [facebookincubator/fbt](https://github.com/facebookincubator/fbt):A JavaScript Internationalization Framework https://facebookincubator.github.io/fbt
   - [lingui/js-lingui](https://github.com/lingui/js-lingui):🌍📖 A readable, automated, and optimized (5 kb) internationalization for JavaScript https://lingui.js.org/
 
 * html
-  
+
   - [Polymer/lit-html](https://github.com/Polymer/lit-html):An efficient, expressive, extensible HTML templating library for JavaScript. https://lit-html.polymer-project.org/
 
 * cookie
-  
+
   - [js-cookie/js-cookie](https://github.com/js-cookie/js-cookie):A simple, lightweight JavaScript API for handling browser cookies
 
 * spreadsheet
-  
+
   - [myliang/x-spreadsheet](https://github.com/myliang/x-spreadsheet):a javascript spreadsheet for web
   - [ handsontable / handsontable ](https://github.com/handsontable/handsontable):Handsontable is a JavaScript/HTML5 data grid with spreadsheet look & feel. Available for React, Vue and Angular. https://handsontable.com
 
 * money
-  
+
   - [sarahdayan/dinero.js](https://github.com/sarahdayan/dinero.js):💸 An immutable library to create, calculate and format money. https://sarahdayan.github.io/dinero.js
 
 * clipboard
-  
+
   - [zenorocha/clipboard.js](https://github.com/zenorocha/clipboard.js):✂️ Modern copy to clipboard. No Flash. Just 3kb gzipped 📋 https://clipboardjs.com
 
 * upload
-  
+
   - [transloadit/uppy](https://github.com/transloadit/uppy):The next open source file uploader for web browsers 🐶 https://uppy.io
 
 * pdf
-  
+
   - [alvarcarto/url-to-pdf-api](https://github.com/alvarcarto/url-to-pdf-api):Web page PDF/PNG rendering done right. Self-hosted service for rendering receipts, invoices, or any content.
 
 * [zhangkaitao/es](https://github.com/zhangkaitao/es):JavaEE项目开发脚手架 https://github.com/zhangkaitao/es
@@ -1719,7 +1737,7 @@ rome check
 * [facebook/flow](https://github.com/facebook/flow):Adds static typing to JavaScript to improve developer productivity and code quality. https://flow.org/
 
 * db
-  
+
   - [pubkey/rxdb](https://github.com/pubkey/rxdb):💻 📱 A realtime Database for JavaScript Applications https://rxdb.info/
   - [facebook/dataloader](https://github.com/facebook/dataloader):DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching.
   - [sidorares/node-mysql2](https://github.com/sidorares/node-mysql2):⚡️ fast node-mysql compatible mysql driver for node.js
@@ -1729,7 +1747,7 @@ rome check
   - [typeorm/typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. http://typeorm.io
 
 * test
-  
+
   - live-server
   - [avajs/ava](https://github.com/avajs/ava) 🚀 Testing can be a drag. AVA helps you get it done.
   - [jasmine / jasmine ](https://github.com/jasmine/jasmine): Simple JavaScript testing framework for browsers and node.js http://jasmine.github.io/
@@ -1737,7 +1755,7 @@ rome check
   - [minimaxir/big-list-of-naughty-strings](https://github.com/minimaxir/big-list-of-naughty-strings):The Big List of Naughty Strings is a list of strings which have a high probability of causing issues when used as user-input data.
 
 * 机器学习
-  
+
   - [junku901/machine_learning](https://github.com/junku901/machine_learning):Machine learning library for Node.js http://joonku.com/project/machine_learning
   - [janhuenermann/neurojs](https://github.com/janhuenermann/neurojs):A javascript deep learning and reinforcement learning library. https://janhuenermann.com/projects/learning-to-drive
   - [dmotz/thing-translator](https://github.com/dmotz/thing-translator):Point your camera at things to hear how to say them in a different language https://thing-translator.appspot.com/
@@ -1815,7 +1833,7 @@ rome check
 * [benjamn/recast](https://github.com/benjamn/recast):JavaScript syntax tree transformer, nondestructive pretty-printer, and automatic source map generator
 
 * compiler
-  
+
   - [swc-project/swc](https://github.com/swc-project/swc):Super-fast javascript to javascript compiler written in rust https://swc-project.github.io
 
 * [github/fetch](https://github.com/github/fetch):A window.fetch JavaScript polyfill. http://github.github.io/fetch/
