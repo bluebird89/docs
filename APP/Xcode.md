@@ -4,9 +4,11 @@
 
 ## 安装
 
-```
+```sh
 # install
 xcode-select –install
+
+sudo gem install cocoapods
 ```
 
 ## 参考

@@ -22,6 +22,7 @@ sudo apt-get install code
 * advanced-new-file
 * Apollo GraphQL
 * Auto Close Tag
+* Auto Rename Tag
 * Auto Import:自动去查找、分析、然后提供代码补全。对于TypeScript和TSX
 * Bracket Pair Colorizer
 * Beautify
@@ -59,6 +60,7 @@ sudo apt-get install code
     - React Native Tools
     - Vue 2 Snippets
 * Laravel Blade Snippets
+* Live Server
 * Indent-Rainbow:使得对齐更加具有可读性
 * IntelliCode, Microsoft’s tool for AI-assisted coding
 * JavaScript (ES6) code snippets
