@@ -26,6 +26,9 @@
 * [ZenHub](https://www.zenhub.com):Easier than Jira. More powerful than Trello. Built for developers.
 * UDESK:集成客服接入平台
 * towe
+* odoo是近几年发展非常迅猛的开源ERP/CRM套件，使用Python、XML、PostgreSQL构建
+* Adempiere是一个很主流的开源ERP/CRM系统，也是一个完整的企业应用套件和堆栈
+* Mogui是一个企业ERP/CRM的生态系统，一个类似地球：地核、地幔、地壳的的构造结构
 * [飞书](https://www.feishu.cn/): slack + google docs
 * [welink](https://www.huaweicloud.com/product/welink.html):
 * [tinode/chat](https://github.com/tinode/chat):Instant messaging server; backend in Go; Android, web command line clients; chatbots

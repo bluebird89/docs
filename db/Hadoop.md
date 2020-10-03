@@ -2,62 +2,39 @@
 
 Mirror of Apache Hadoop
 
-2003年，这一年Google发表《Google File System》，其中提出一个GFS集群中由多个节点组成，其中主要分为两类：一个Master node，很多Chunkservers。之后于2004年Google发表论文并引入MapReduce。2006年2月，Doug Cutting等人在Nutch项目上应用GFS和 MapReduce思想,并演化为Hadoop项目。
-
-Hadoop的出现解决了互联网时代的海量数据存储和处理，其是一种支持分布式计算和存储的框架体系。假如把Hadoop集群抽象成一台机器的话，理论上我们的硬件资源（CPU、Memoery等）是可以无限扩展的。
+* 2003年，Google发表《Google File System》，其中提出一个GFS集群中由多个节点组成，其中主要分为两类：一个Master node，很多Chunkservers
+* 2004年,Google发表论文并引入MapReduce
+* 2006年2月，Doug Cutting等人在Nutch项目上应用GFS和 MapReduce思想,并演化为Hadoop项目。
+* Hadoop的出现解决了互联网时代的海量数据存储和处理，其是一种支持分布式计算和存储的框架体系。假如把Hadoop集群抽象成一台机器的话，理论上我们的硬件资源（CPU、Memoery等）是可以无限扩展的。
 
 ## 组件介绍
 
-### HDFS
-
-HDFS,Hadoop Distributed File System （Hadoop分布式文件系统）被设计成适合运行在通用硬件(commodity hardware)上的分布式文件系统。它和现有的分布式文件系统有很多共同点，例如典型的Master/Slave架构（这里不准备展开介绍）；然而HDFS是一个高度容错性的系统，适合部署在廉价的机器上。
-
-- HDFS中的默认副本数是3，这里涉及到一个问题为什么是3而不是2或者4。
-- 机架感知（Rack Awareness）
-
-### Yarn
-
-Yarn,Yet Another Resource Negotiator(又一个资源协调者)
-
-原来系统问题：
-- 扩展性差。JobTracker兼备资源管理和作业控制两个功能。
-- 可靠性差。在Master/Slave架构中,存在Master单点故障。
-- 资源利用率低。Map Slot（1.x中资源分配的单位）和Reduce Slot分开,两者之间无法共享。
-- 无法支持多种计算框架。MapReduce计算框架是基于磁盘的离线计算 模型,新应用要求支持内存计算、流式计算、迭代式计算等多种计算框架。
-
-Yarn通过拆分原有的JobTracker为：
-- 全局的 ResourceManager(RM)。
-- 每个Application有一个ApplicationMaster(AM)。
-
-由Yarn专门负责资源管理,JobTracker可以专门负责作业控制,Yarn接替 TaskScheduler的资源管理功能,这种松耦合的架构方式 实现了Hadoop整体框架的灵活性。
-
-### Hive
-
-Hive的是基于Hadoop上的数据仓库基础构架，利用简单的SQL语句（简称HQL）来查询、分析存储在HDFS的数据。并且把SQL语句转换成MapReduce程序来数据的处理。
-
-Hive与传统的关系数据库主要区别在以下几点：
-
-- 存储的位置 Hive的数据存储在HDFS或者Hbase中，而后者一般存储在裸设备或者本地的文件系统中。
-- 数据库更新 Hive是不支持更新的，一般是一次写入多次读写。
-- 执行SQL的延迟 Hive的延迟相对较高，因为每次执行HQL需要解析成MapReduce。
-- 数据的规模上 Hive一般是TB级别，而后者相对较小。
-- 可扩展性上 Hive支持UDF/UDAF/UDTF，后者相对来说较差。
-
-### HBase
-
-HBase，是Hadoop Database，是一个高可靠性、高性能、面向列、可伸缩的分布式存储系统。它底层的文件系统使用HDFS，使用Zookeeper来管理集群的HMaster和各Region server之间的通信，监控各Region server的状态，存储各Region的入口地址等。
-
-HBase是Key-Value形式的数据库（类比Java中的Map）。那么既然是数据库那肯定就有表，HBase中的表大概有以下几个特点：
-
-- 大：一个表可以有上亿行，上百万列（列多时，插入变慢）。
-- 面向列：面向列(族)的存储和权限控制，列(族)独立检索。
-- 稀疏：对于为空(null)的列，并不占用存储空间，因此，表可以设计的非常稀疏。
-- 每个cell中的数据可以有多个版本，默认情况下版本号自动分配，是单元格插入时的时间戳。
-- HBase中的数据都是字节，没有类型（因为系统需要适应不同种类的数据格式和数据源，不能预先严格定义模式）。
-
-### Spark
-
-Spark是由伯克利大学开发的分布式计算引擎，解决了海量数据流式分析的问题。Spark首先将数据导入Spark集群，然后再通过基于内存的管理方式对数据进行快速扫描 ，通过迭代算法实现全局I/O操作的最小化，达到提升整体处理性能的目的，这与Hadoop从“计算”找“数据”的实现思路是类似的。
+* HDFS,Hadoop Distributed File System （Hadoop分布式文件系统）被设计成适合运行在通用硬件(commodity hardware)上的分布式文件系统。它和现有的分布式文件系统有很多共同点，例如典型的Master/Slave架构（这里不准备展开介绍）；然而HDFS是一个高度容错性的系统，适合部署在廉价的机器上
+    - HDFS中的默认副本数是3，这里涉及到一个问题为什么是3而不是2或者4。
+    - 机架感知（Rack Awareness）
+* Yarn,Yet Another Resource Negotiator(又一个资源协调者)
+    - 原来系统问题：
+        + 扩展性差。JobTracker兼备资源管理和作业控制两个功能。
+        + 可靠性差。在Master/Slave架构中,存在Master单点故障。
+        + 资源利用率低。Map Slot（1.x中资源分配的单位）和Reduce Slot分开,两者之间无法共享。
+        + 无法支持多种计算框架。MapReduce计算框架是基于磁盘的离线计算 模型,新应用要求支持内存计算、流式计算、迭代式计算等多种计算框架。
+    - Yarn通过拆分原有的JobTracker为：
+        + 全局的 ResourceManager(RM)。
+        + 每个Application有一个ApplicationMaster(AM)。
+    - 由Yarn专门负责资源管理,JobTracker可以专门负责作业控制,Yarn接替TaskScheduler的资源管理功能,这种松耦合的架构方式实现了Hadoop整体框架的灵活性。
+* Hive是基于Hadoop上的数据仓库基础构架，利用简单的SQL语句（简称HQL）来查询、分析存储在HDFS的数据。并且把SQL语句转换成MapReduce程序来数据的处理,与传统的关系数据库主要区别在以下几点：
+    + 存储的位置 Hive的数据存储在HDFS或者Hbase中，而后者一般存储在裸设备或者本地的文件系统中。
+    + 数据库更新 Hive是不支持更新的，一般是一次写入多次读写。
+    + 执行SQL的延迟 Hive的延迟相对较高，因为每次执行HQL需要解析成MapReduce。
+    + 数据的规模上 Hive一般是TB级别，而后者相对较小。
+    + 可扩展性上 Hive支持UDF/UDAF/UDTF，后者相对来说较差。
+* HBase，是Hadoop Database，是一个高可靠性、高性能、面向列、可伸缩的分布式存储系统。它底层的文件系统使用HDFS，使用Zookeeper来管理集群的HMaster和各Region server之间的通信，监控各Region server的状态，存储各Region的入口地址等。HBase是Key-Value形式的数据库（类比Java中的Map）。那么既然是数据库那肯定就有表，HBase中的表大概有以下几个特点：
+    + 大：一个表可以有上亿行，上百万列（列多时，插入变慢）。
+    + 面向列：面向列(族)的存储和权限控制，列(族)独立检索。
+    + 稀疏：对于为空(null)的列，并不占用存储空间，因此，表可以设计的非常稀疏。
+    + 每个cell中的数据可以有多个版本，默认情况下版本号自动分配，是单元格插入时的时间戳。
+    + HBase中的数据都是字节，没有类型（因为系统需要适应不同种类的数据格式和数据源，不能预先严格定义模式）。
+* Spark是由伯克利大学开发的分布式计算引擎，解决了海量数据流式分析的问题。Spark首先将数据导入Spark集群，然后再通过基于内存的管理方式对数据进行快速扫描 ，通过迭代算法实现全局I/O操作的最小化，达到提升整体处理性能的目的，这与Hadoop从“计算”找“数据”的实现思路是类似的。
 
 ## Hadoop集群硬件和拓扑规划
 
@@ -135,6 +112,31 @@ MapReduce可谓Hadoop的精华所在，是用于数据处理的编程模型。Ma
 MapReduce的执行流程
 
 ![](../_static/mapreduce-process.png)
+
+## [HDP Hortonworks Data Platform](https://docs.hortonworks.com/)
+
+* HDP：100%开源，零锁定
+* Hortonworks解决方案包含HDF和HDP
+    - Hortonworks DataFlow(HDF)收集、组织、整理和传送来自设备、传感器、点击流、日志等的实时数据
+    - Hortonworks Data Platform(HDP)用于创建安全的企业数据湖，为企业提供实现快速、实时商业洞察力所需的分析信息
+
+## [CDH](https://zh-cn.cloudera.com/documentation.html)
+
+* Cloudera有很强的商业化解决方案和服务能力，取得了很好的商业价值，应该是目前最赚钱的Hadoop商业化公司，同时也开源了众多优秀的开源软件
+
+## [ODPi](https://www.odpi.org/)
+
+* Linux基金会下的一个项目，成员包括HDP的开发商Hortonworks
+
+## HPCC
+
+* 核心组件
+    - Thor (the Data Refinery Cluster)
+    - Roxie (Rapid Online XML Inquiry Engine, the Query Cluster)
+    - ECL (Enterprise Control Language)
+    - ECL IDE
+    - ESP (Enterprise Services Platform)
+
 
 ## 案列
 
