@@ -24,6 +24,8 @@
 ![code review流程](../_static/code_review_flow.jpg "Optional title")
 ![开发流程](../_static/dev_flow.jpg "Optional title")
 
+## PDCA 刻意练习
+
 ## Task
 
 * [Yixiaohan/show-me-the-code](https://github.com/Yixiaohan/show-me-the-code):Python 练习册，每天一个小程序

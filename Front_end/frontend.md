@@ -125,7 +125,6 @@
 
 * 当应用变得越来越复杂时，就很容易出现 bug，或者完全破坏现有的功能。单元、集成和行为测试是很棒的测试方法，可以确保你在添加新功能时不会破坏代码
 * Mocha： Mocha 是一个 JavaScript 测试框架，在 Node.js 和浏览器中运行，使异步测试变得简单起来
-* Jasmine： Jasmine 是一个开源、行为驱动的 JavaScript 测试框架
 
 ## 软技能
 
@@ -632,7 +631,6 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
   + ESLint 做代码风格规范检测
   + Grunt 启动 Karma 统一项目管理
   + [gotwarlost/istanbul](https://github.com/gotwarlost/istanbul): 检查单元测试代码覆盖率 Yet another JS code coverage tool that computes statement, line, function and branch coverage with module loader hooks to transparently add coverage when running tests. Supports all JS coverage use cases including unit tests, server side functional tests and browser tests. Built for scale.
-  + Jasmine 做单元测试
   + JSDoc 规范代码注释风格
   + Karma 自动化完成单元测试
   + Webpack 最终打包整个项目文件

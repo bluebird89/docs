@@ -11,6 +11,18 @@
 * imac Radeon Pro 580
   + (2019)Radeon Pro 580X 图形处理器 (配备 8GB 显存) 可选配 Radeon Pro Vega 48
 
+## 操作系统
+
+* macOS在剥离了Cocoa、Carbon等东西后，剩下的叫Darwin，它包含POSIX兼容、UNIX线程、进程实现
+* [XNU](https://github.com/apple/darwin-xnu):是macOS和iOS的核心，由三个主要部分组成的一个分层体系结构
+  - 内核的内环是Mach层，源自卡纳基-梅隆大学开发的Mach内核
+  - BSD层
+  - I/O Kit
+
+![Alt text](../_static/MacOS-architecture.gif "Optional title")
+![Alt text](../_static/Darwin-and-macOS.gif "Optional title")
+![Alt text](../_static/MacOS-kernel-architecture.gif "Optional title")
+
 ## 系统配置
 
 * 开启鼠标更多功能

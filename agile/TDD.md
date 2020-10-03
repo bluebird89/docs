@@ -43,7 +43,12 @@
 ## 分类
 
 * UTDD（Unit Test Driven Development）
-* ATDD（Acceptance Test Driven Development）
+* 验收测试驱动开发 ATDD Acceptance Test-Driven Development
+  - ATDD强调的也是需求的澄清，通过举例的手段对用户故事需求进行澄清，再接着让这些例子变成一个个的测试用例，在功能需求被实现后，用这些测试用例去验证功能实现是否满足需求，而这需求的澄清和测试用例的实现是前置在具体的开发实现之前的
+  - 因为是通过举例的形式来描述功能的需求说明，也称之为SbE（Specification by Example，中文译为实例化需求），其同样要求测试前置。
+  - 可以比较着TDD的概念来理解，TDD是对函数级别的需求说明，再驱动实现，而ATDD是对用户故事的级别的需求说明，分析，再驱动实现，都要求测试前置，即关注WHAT
+  - 测试自动化是一种缩短反馈周期，实现回归测试（Regression Test）的手段。结合着持续集成系统，可以实现一键自动化的集成与部署。
+
   - BDD（Behavior Driven Development）
   - Consumer-Driven Contracts Development
 * 单元测试：可以进行的最低级别的测试。通常是在类内部测试方法。单元测试不直接与其他类交互，而是与模拟交互。这使单元测试变得孤立，并且易于调试和重构

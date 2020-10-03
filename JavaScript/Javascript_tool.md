@@ -200,32 +200,6 @@ axios.interceptors.response.use(function (response) {
   });
 ```
 
-## [babel/babel](https://github.com/babel/babel)
-
-🐠 Babel is a compiler for writing next generation JavaScript. https://babeljs.io/
-
-* 流程
-  - 解析（parse）
-  - 转换（transform）
-  - 生成（generate）
-* 版本
-  - 7.0
-    + 引入了 babel.config.js
-* 参考
-  - [jamiebuilds/babel-handbook](https://github.com/jamiebuilds/babel-handbook):📘 A guided handbook on how to use Babel and how to create plugins for Babel. https://git.io/babel-handbooks
-  - [swc-project/swc](https://github.com/swc-project/swc):Super-fast alternative for babel https://swc-project.github.io/rustdoc/swc/
-
-```sh
-npm install --save-dev @babel/core @babel/preset-env
-npm install --save-dev babel-loader
-# .babelrc
-{
-  "presets": [
-    "@babel/preset-env"
-  ]
-}
-```
-
 ## [lodash/lodash](https://github.com/lodash/lodash)
 
 为数组、字符串、object 和 argument 对象提供更一致的跨环境迭代支持，并已成为 Underscore 的超集 A modern JavaScript utility library delivering modularity, performance, & extras. https://lodash.com/
@@ -243,8 +217,8 @@ A fully pluggable tool for identifying and reporting on patterns in JavaScript h
     + Environments - 指定脚本的运行环境。每种环境都有一组特定的预定义全局变量。
     + Globals - 脚本在执行期间访问的额外的全局变量。
     + Rules - 启用的规则及其各自的错误级别。
-    + parserOptions 
-      * ecmaVersion - 默认设置为 3，5（默认）， 可以使用 6、7、8、9 或 10 来指定你想要使用的 ECMAScript 版本 
+    + parserOptions
+      * ecmaVersion - 默认设置为 3，5（默认）， 可以使用 6、7、8、9 或 10 来指定你想要使用的 ECMAScript 版本
       * sourceType - 设置为 "script" (默认) 或 "module"（如果代码是 ECMAScript 模块)
       * ecmaFeatures - 这是个对象，表示你想使用的额外的语言特性:
       * globalReturn - 允许在全局作用域下使用 return 语句
