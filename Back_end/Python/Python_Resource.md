@@ -828,7 +828,6 @@ Python实现的数据库。
   - green：干净，多彩的测试工具。[官网](https://github.com/CleanCut/green)
   - pyvows：BDD 风格的测试工具，受Vows.js的启发。[官网](http://heynemann.github.io/pyvows/)-
   - Robot Framework：一个通用的自动化测试框架。[官网](https://github.com/robotframework/robotframework)
-  - [Jasmine]()
   - [RedwoodHQ]()
 * Web 测试
   - Selenium：[Selenium](http://www.seleniumhq.org/) WebDriver 的 Python 绑定。[官网](https://pypi.python.org/pypi/selenium)
