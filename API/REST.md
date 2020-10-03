@@ -219,3 +219,4 @@
 * [A API Design Case](https://www.ibm.com/developerworks/cn/webservices/0907_rest_soap/)
 * [StrongLoop](https://mac.aotu.io/docs/dev-rd/strongloop.html): StrongLoop API Platform构建于开源的LoopBack.io之上，LoopBack是一个高度可扩展的Node.js API框架。借助于LoopBack，可以快速创建可扩展的API和数据库映射。
   - [文档](https://docs.strongloop.com/pages/viewpage.action?pageId=10879061)
+* [best-practices-for-a-pragmatic-restful-api](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
