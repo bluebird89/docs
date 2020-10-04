@@ -11,6 +11,30 @@
   - [GitHub 加速下载](https://toolwa.com/github/)
 * 从 2020年 10 月 1 日开始，GitHub 上所有新创建的源代码库都将被命名为 main
 
+## [实践](https://insights.thoughtworks.cn/agile-learning-method-base-on-github/)
+
+* 收集：需求无时无刻，无处不在，anywhere anytime
+  - 通过 GitHub Issues 收集需求
+  - 以解决问题为导向，就是有什么需求就直接给 repo 建一个 issue 作为 Story Card
+  - 通过ISSUE_TEMPLATE这样一个模板来新建某个issue，从而更快地定位问题所在和解析自己的想法，最主要的是能够输出更具体的 TODOs，即下一步行动的具体内容
+    + issue 和 issue 之间是可以通过 # 相互连接，甚至可以跨仓库，被 reference 的 issue 也会出现在另外一边的 issue 里面；
+    + 通过 #! 符号是可以在 comments 里面直接新建一个 issue ，这在思维爆炸的时候来得特别爽快；
+    + 还可以随意艾特你的小伙伴们，互相监督、互相学习或者给出 Constructive Feedback 之类的，😂；
+    + 更甚至于，若是在 Intellij 里面关联了 GitHub，就可以在 git commit 信息里面直接看到你所要关联的 issues 列表了
+  - 移动端则可以通过 GitDo 这个 App 来轻松新建和管理自己的 Issues
+* 整理：as BA，即分析，Elaboration & Estimation & IPM => 确定 MVP & Efforts
+  - 整理 GitHub Issues:大胆地把 issues 作为个人需求列表吧，需要解决的问题可以大到做一个开源项目，或者小到读一本书、写一篇文章。对于比较大的需求，你还可以将其转化为 Epic 然后把拆分过后的小 issues 们加入到这个列表里面来
+  - 使用 GitHub 新出的 Projects 特性或者使用 ZenHub 的 Boards 就可以让你瞬间拥有日常敏捷工作的感觉
+* 执行：as Dev & QA，Developing & Testing & Review/Sign-Off
+  - 制定迭代计划:新建一个 Milestone 来制定计划，也就是决定在一个 Iteration 里面你需要完成哪些 issues。在这里我所制定的阶段性计划周期为一个月，当然你也可以勤快一点，以2周作为一个 Iteration，享受一下自己的计划要完成不了、这个 Milestone 就要废了
+    + 在月初做计划的时候给自己准备专门的时间来做 Elaboration，把 Backlog 里面的卡拖到 Rethink/Plan 这一列，经过分析和详细输出 TODOs 以及所对应的估点 points 之后便可以将其拖到 Ready For Todo 了，一般我给自己估的点数就是完成这件事情所需要的时间，一小时即对应一个 point
+    + 选择 Filter Issues by Milestone 专注于当前 Iteration，专注于 In Progress 这一列所要做的事情，并且垂涎于 Ready For Todo 里面将要做的事情，每次做完还可以放到 Review/SignOff，在里面写写对这件事情的总结和感想什么的，每次挪卡都充满了敏捷的仪式感
+  - 进度的把控
+    + 拖动某个 item 进行排序，而且可以在前面的勾选项中直接打勾 ☑️ 标记为完成
+    + 完成之后这个 issue 还能直接显示完成进度；前面所提到的 Epic 也能直接显示子 issues 的完成情况即 closed 比例，两者结合起来简直不能再美好
+  - 专注当下
+* 回顾：Retrospection，Introspection，持续反思，持续进步…
+
 ## GitHub Actions
 
 持续集成由很多操作组成，比如抓取代码、运行测试、登录远程服务器，发布到第三方服务等等,把每个操作写成独立的脚本文件，存放到代码仓库，使得其他开发者可以引用

@@ -418,7 +418,7 @@ git update-index --assume-unchanged <file>Resume tracking files with:
 git update-index --no-assume-unchanged <file>
 ```
 
-### 暂存区（Index/Stage）:
+### 暂存区 Index/Stage
 
 * 任何修改都是从进入index区才开始被版本控制
 * .git目录下的index文件, 暂存区会索引
@@ -607,30 +607,23 @@ squash 7d33868 update
 
 ### 版本库|本地仓库（commit history）
 
-* `.git`文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹；
-
+* `.git`文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹
 * 包括git自动创建的master分支，并且将HEAD指针指向master分支
-
 * 文件状态：committed
-
 * 每个commit都有一个唯一的 Hash 值
-
+* branch用来管理分支
+* checkout用来切换分支，切换分支时，也可以新建分支
+  - 命令会用仓库中的文件，覆盖索引区(staged or index)和工作目录(work tree)
+  - 新的switch命令用来接替checkout的功能，但switch不能切换到commit id
 * 通过git log命令来查看
-
 * merge:保持修改内容的历史记录，但是历史记录会很复杂
-
   - fast-forward:bugfix分支的历史记录包含master分支所有的历史记录，所以通过把master分支的位置移动到bugfix的最新分支上，Git 就会合并
-
 * rebase:历史记录简单，是在原有提交的基础上将差异内容反映进去。因此，可能导致原本的提交内容无法正常运行
-
   - 待合并分支rebase主分支
-  - 主分钟merge待合并分支
-
+  - 主分支merge待合并分支
 * 流程
-
   - 在topic分支中更新merge分支的最新代码，请使用rebase。
   - 向merge分支导入topic分支的话，先使用rebase，再使用merge
-
 * branch name should be descriptive
 
 ```sh
@@ -668,7 +661,7 @@ git rm –cached FILE # 这个命令只删除远程文件
 ![merge](../_static/merge.svg "merge")
 ![rebase](../_static/rebase.svg "rebase")
 
-## 分支（branch）
+## 分支 branch
 
 * 指向某个快照的指针，分支名就是指针名
 * 分支会自动更新，如果当前分支有新的快照，指针就会自动指向它
@@ -677,6 +670,19 @@ git rm –cached FILE # 这个命令只删除远程文件
   - 新提交节点（下图中的a47c3）中的所有文件都会被复制（到暂存区域和工作目录中）
   - 只存在于老提交节点（ed489）中的文件会被删除
   - 不属于上述两者的文件会被忽略，不受影响保留
+
+## 文件恢复
+```sh
+git checkout -- aaa # 从staged中恢复aaa到worktree
+git reset -- aaa # 从repo中恢复aaa到staged
+git checkout -- HEAD aaa # 从repo中恢复aaa到staged和worktree
+git reset --hard -- aaa # 同上
+
+git restore [--worktree] aaa # 从staged中恢复aaa到worktree
+git restore --staged aaa # 从repo中恢复aaa到staged
+git restore --staged --worktree aaa # 从repo中恢复aaa到staged和worktree
+git restore --source dev aaa # 从指定commit中恢复aaa到worktree
+```
 
 ### 远程分支
 
