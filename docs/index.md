@@ -2,7 +2,7 @@
 
 ## frontend
 
-* [vue](link)
+* [vue](../javascript/vuejs/vuejs.md)
 * [reactjs](link)
 * [angular](link)
 
@@ -39,7 +39,7 @@
 ## tools
 
 * [markodwn](link)
-* [git](link)
+* [git](../tools/git.md)
 * [notion](link)
 
 ### Support or Contact
