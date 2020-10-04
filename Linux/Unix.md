@@ -18,6 +18,14 @@
 * signal driven IO - 信号驱动IO
 * asynchronous IO - 异步IO
 
+## HOC High Order Calculator
+
+* 组件
+    - 词法分析器lex
+    - 语法分析器yacc
+    - 标准数学库stdlib
+
+
 ## 系统
 
 * [XINU](https://xinu.cs.purdue.edu/)

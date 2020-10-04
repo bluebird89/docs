@@ -1,5 +1,21 @@
 # DevOps
 
+* 追求愿景:“让业务所要求的那些变化能随时上线可用”
+* 起源
+  - 比利时独立咨询师Patrick Debois:2007年他在比利以咨询师的身份，参与了一个政府数据中心迁移中的测试工作。他在做测试时，需要频繁往返于Dev团队和Ops团队之间。Dev团队已经实践了敏捷，而Ops团队还是传统运维的工作方式。看到Ops团队每天忙于救火和疲于奔命的状态，他在想：能否把敏捷的实践引入Ops团队呢？
+  - 雅虎旗下的图片分享网站Flickr:运维部门经理John Allspaw和工程师Paul Hammond，于2009年6月23日在美国圣荷西举办的Velocity 2009大会上，发表了一个引燃DevOps的演讲。这个演讲的题目在当时很抢眼－－《每天部署10次以上：Flickr公司的Dev与Ops的合作》
+  - Debois。他在“推特”上发帖：“可惜没法去现场参加。”朋友Paul Nasrat回帖说：“为什么不在比利时搞一个你自己的Velocity大会？”
+  - 2009年10月30至31日，在比利时的第二大城市根特，以社区自发的形式举办了一个名为DevOpsDays的大会.会议结束还不过瘾，回去继续在“推特”上聊。限于推特140个字符的制约，Debois把DevOpsDays中的Days去掉，而创建了#DevOps#这个“推特”聊天主题标签，DevOps诞生了。
+* Damon Edwards所定义并被Jez Humble所修订的CALMS
+  - Culture – 文化：公司各个角色一起担当业务变化，实现有效协作和沟通；
+  - Automation – 自动化：在价值链中尽量除去手工步骤；
+  - Lean – 精益：运用精益原则更频繁地交付价值；
+  - Metrics – 度量：度量并使用数据来优化交付周期；
+  - Sharing – 分享：分享成功和失败的经验来相互学习
+* Gene Kim所定义的The Three Ways
+  - The First Way： System Thinking （系统思考：强调全局优化，避免局部优化）；
+  - The Second Way： Amplify Feedback Loops （经过放大的反馈回路：创建从开发过程下游至上游的反馈环）；
+  - The Third Way： Culture of Continual Experimentation And Learning（持续做试验和学习的文化：持续做试验，承担风险、从失败中学习；通过反复实践来达到精通）
 * 优势
   - 稳定的运行环境
   - 超快速的交付
@@ -14,7 +30,28 @@
   - 持续监测
   - 持续部署
   - 持续运维
-* 一套完全开源的工具链：Gitlab + Maven + Jenkins + TestNg + SonarQuebe + Allure
+* 一套完全开源工具链：Gitlab + Maven + Jenkins + TestNg + SonarQuebe + Allure
+
+## 原则
+
+* 人
+  - 领导者身体力行持续改进 高于 关注工具和基础设施
+  - 试验并改进流程 而非 指责人的过失
+  - 产品思维 高于 项目思维
+* 产品
+  - 质量和安全内建 而非 晚期度量和检查,一次就根据最佳流程或实践把事情做对，并持续改进这些流程和实践，使其一直保持最佳
+  - 客户反馈 高于 按期交付
+  - 基于不可变容器的微服务 高于 单块应用
+* 流程
+  - 管理层实践Improvement Kata和Coaching Kata进行流程持续改进 高于 用结果导向进行管理
+    + Improvement Kata是通过一系列“确定目标—>考察现状—>识别困难—>制定方案—>观察成效”的PDCA反馈环来做持续改进
+    + Coaching Kata是通过导师“一对一带学徒”的方式来让企业全员掌握持续改进的方法
+  - 全局优化 而非 局部优化
+  - 单件流 高于 库存
+* 工具
+  - 自动化 高于 手工
+  - 基础设施及代码 高于 手工配置
+  - 部署流水线 而非 每日构建
 
 ## 持续开发
 

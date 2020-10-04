@@ -214,6 +214,8 @@ css3 里面引入的布局模型－弹性盒子模型，旨在通过弹性的方
 * React Native入门与实战
 * React Native开发指南
 * React Native精解与实战
+* [React Native精解与实践](link)
+* The Road to learn React React 学习之道
 
 ## 工具
 
@@ -478,6 +480,4 @@ css3 里面引入的布局模型－弹性盒子模型，旨在通过弹性的方
 * [youzan/zent](https://github.com/youzan/zent)A collection of essential UI components written with React.
 * [vhpoet/react-native-styling-cheat-sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet):Most of the React Native styling material in one page
 * [tachyons-css/tachyons](https://github.com/tachyons-css/tachyons/):Functional css for humans https://tachyons.io
-* [React Native精解与实践](link)
-* 《React 学习之道》
 * [Learn the Basics](https://facebook.github.io/react-native/docs/tutorial)
