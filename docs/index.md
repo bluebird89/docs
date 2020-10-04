@@ -2,7 +2,7 @@
 
 ## frontend
 
-* [vue](../javascript/vuejs/vuejs.md)
+* [vue](../JavaScript/Vuejs/Vuejs.md)
 * [reactjs](link)
 * [angular](link)
 
