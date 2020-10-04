@@ -1,36 +1,46 @@
-## Welcome to GitHub Pages
+## My Personal Wiki
 
-You can use the [editor on GitHub](https://github.com/bluebird89/docs/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+## frontend
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+* [vue](link)
+* [reactjs](link)
+* [angular](link)
 
-### Markdown
+## [backend](./Back_end/backend.md)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+* [PHP](./Back_end/PHP/PHP.md)
+* [JAVA](link)
+* [Python](link)
+* [Go](link)
 
-```markdown
-Syntax highlighted code block
+## ops
 
-# Header 1
-## Header 2
-### Header 3
+* [linux](link)
+* [shell](link)
+* [docker](link)
+* [k8s](link)
 
-- Bulleted
-- List
+## History
 
-1. Numbered
-2. List
+* [china](link)
+* [america](link)
+* [germany](link)
+* [janpan](link)
 
-**Bold** and _Italic_ and `Code` text
+## entermainment
 
-[Link](url) and ![Image](src)
-```
+* [film](link)
+* [director](link)
+* [actor](link)
+* [band](link)
+* [podcast](link)
+* [before](link)
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## tools
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/bluebird89/docs/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+* [markodwn](link)
+* [git](link)
+* [notion](link)
 
 ### Support or Contact
 
