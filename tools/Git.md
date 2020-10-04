@@ -1320,6 +1320,8 @@ git status --ignore-submodules=dirty
 
 git reset HEAD .
 git checkout --  .
+
+git submodule deinit project-sub-1
 ```
 
 ### subtree
