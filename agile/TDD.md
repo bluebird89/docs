@@ -135,9 +135,21 @@
   - You are not allowed to write any more production code than is sufficient to pass the one failing unit test.不允许编写多于恰好能让测试通过的产品代码
 * 防止过度设计
 
-## Unit Test Skill
+## Unit Test 单元测试
 
+* 动机
+  - 驱动和验证功能实现
+  - 保护已有的功能不被破坏
 * 不能针对方法编写测试，而应根据业务编写测试用例。一个测试方法只能做一件事情，代表一个测试样本和一个业务规则
+* 用例太过具体容易忽略测试意图:应该明确描述待测方法的行为，而不是陈述一个例子
+  - 生成式测试 Generative Testing，也称Property-Based :会基于输入假设输出，并且生成许多可能的数据来验证假设正确性
+    + 先声明传入数据可能的情况，然后使用生成器生成符合入参情况的数据，调用待测方法，最后进行验证
+    + Given阶段:Clojure 1.9（Alpha）新内置的Clojure.spec可以很轻松地做到这点
+      * 两个参数可能出现的情况或者称为规格（specification）
+    + Then阶段:助test.check
+    + 凡是想到的情况都能测试，但是想不到情况也需要测试，这才是生成式测试的价值所在
+* 测试完备性:找一个明显异常路径进行测试
+  - 使用较少的用例做到有效覆盖，比如：等价类、边界值、判定表、因果图、pairwise等等
 * Test Double 类型
   - Stub： 测试桩是用来接受SUT内部的间接输入（indirect inputs），并返回特定的值给SUT
   - Spy： Test Spy只负责获取内部情报，并把情报发出去，不负责验证情报的正确性
@@ -151,6 +163,28 @@
 * 对于任务的重要性,主要是判断任务是否整个系统(模块)的核心功能。一个 判断标准是确定任务是功能的主要流程还是异常流程
 * 从消费者的角度去思考用例
 * 选择测试样本 (从易到难，高风险到低风险)
+* 参考
+  - [改善单元测试的新方法](https://insights.thoughtworks.cn/improve-the-effectiveness-of-unit-testing/)
+
+```
+;; 定义输入参数的可能情况：两个整型参数
+(s/def ::add-operators (s/cat :a int? :b int?))
+;; 尝试生成数据
+(gen/generate (s/gen ::add-operators))
+;; 生成的数据
+-> (1 -122)
+
+(def test-add
+(prop/for-all [a (gen/int)
+              b (gen/int)]
+             (= (add a b) (+ a b))))
+
+;; 随机生成100组数据测试add方法
+(tc/quick-check 100 test-add)
+
+;; 测试结果
+-> {:result true, :num-tests 100, :seed 1477285296502}
+```
 
 ## Mock
 

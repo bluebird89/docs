@@ -348,7 +348,6 @@ Socks 主机 127.0.0.1 7891
 * [StreisandEffect/streisand](https://github.com/StreisandEffect/streisand):Streisand sets up a new server running L2TP/IPsec, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, a Tor bridge, and WireGuard. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.
 * [Nyr/openvpn-install](https://github.com/Nyr/openvpn-install):OpenVPN road warrior installer for Debian, Ubuntu and CentOS
 * [trailofbits/algo](https://github.com/trailofbits/algo):Set up a personal IPSEC VPN in the cloud
-* [](https://github.com/XX-net/XX-Net):A proxy tool to bypass GFW.
 * 三方
   - blinkload
   - ndss
@@ -357,7 +356,8 @@ Socks 主机 127.0.0.1 7891
 
 * [Lantern](https://github.com/getlantern/lantern)
 * [firefly-proxy](https://github.com/yinghuocho/firefly-proxy):A proxy software to help circumventing the Great Firewall.
-* [XX-net/XX-Net](https://github.com/XX-net/XX-Net)a web proxy tool
+* [XX-net/XX-Net](https://github.com/XX-net/XX-Net):A proxy tool to bypass GFW.
+  - [中文文档](https://github.com/XX-net/XX-Net/wiki/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3)
 * [googlehosts/hosts](https://github.com/googlehosts/hosts) https://scaffrey.coding.net/p/hosts/git / https://git.qvq.network/googlehosts/hosts
 * [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
 * [iMeiji/shadowsocks_install](https://github.com/iMeiji/shadowsocks_install)
@@ -405,7 +405,7 @@ Socks 主机 127.0.0.1 7891
 * [Dreamacro / clash](https://github.com/Dreamacro/clash):A rule-based tunnel in Go.
   - `go get -u -v github.com/Dreamacro/clash`
 * [](https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt)
-*　KoolClash*
+*　KoolClash
 
 ```
 #  /usr/share/applications/clash.desktop

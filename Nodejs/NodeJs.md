@@ -83,7 +83,7 @@ nvm ls-remote           # list all the Node versions you can install
 nvm alias default node # set the installed stable version as the default Node
 ```
 
-# [npm (node package manager)](https://github.com/npm/npm)
+### [npm (node package manager)](https://github.com/npm/npm)
 
 a package manager for javascript <http://www.npmjs.com/>
 
