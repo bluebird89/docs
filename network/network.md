@@ -1032,6 +1032,8 @@ ssh -p remote_port username@server_addr
 
 Introspected tunnels to localhost
 
+* [](https://ngrok.com/):Spend more time programming. One command for an instant, secure URL to your localhost server through any NAT or firewall.
+
 ## 工具集
 
 * nc:快速构建网络链接

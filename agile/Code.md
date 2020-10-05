@@ -95,6 +95,29 @@
 
 * 从业时间平均是在 24 岁，黄金年龄，这时候的程序员该把自己的绝大多数时间和精力，财力用来投资自己，拼命学习编程，业务等各个方面有益于自己的知识。在 30 岁之前把自己打磨成一个技术专
 * 后续的收益很难像刚开始工作那样持续每年 30%的复合增长。最好把投资当作自己的第二曲线
+* 技能变现
+  - 千里之行，积于跬步。任何一件成功的大事，都是通过一个一个的小成功达到的。所以，得确保有一个一个的小成功
+  - 关注有价值的东西
+    + 市场需求
+    + 技术趋势
+  - 找到能体现价值的地方。在一家高速发展的公司中，技术人员的价值可以达到最大化
+  - 动手能力很重要。成为一个手艺人，动手能力是很重要的，因为在解决任何一个具体问题的时候，有没有动手能力就成为了关键。这也是我一直在写代码的原因，代码里全是细节，细节是魔鬼，只有了解了细节，你才能提出更好或是更靠谱、可以落地的解决方案。而不是一些笼统和模糊的东西。这太重要了
+  - 关注技术付费点。技术付费点基本体现在两个地方
+    + 能帮别人“挣钱”的地方
+    + 能帮别人“省钱”的地方
+  - 提升自己的能力和经历
+  - 找到有价值的信息源，英文资料，如果信息来自朋友圈、微博、知乎、百度或是今日头条，那么我觉得你完蛋了。因为这些渠道有价值的信息不多，有营养的可能只有 1%，而为了这 1%，需要读完 99% 的信息，太不划算了
+    +  Google 搜索
+    +  英文能力很关键
+  -  输出观点和价值观：只有输出了更先进的价值观，才会获得真正的影响力
+  -  朋友圈很重要
+    +  比较有想法、有观点，经验也比较丰富
+    +  涉猎的面比较广
+    +  有或多或少的成功
+    +  是喜欢折腾喜欢搞事的人
+    +  对现状有些不满，并想做一些改变
+    +  有一定的影响力
+  -  会挣钱的人一定是会投资的人。我一直认为，最宝贵的财富并不是钱，而是你的时间，时间比钱更宝贵，因为钱你不用还在那里，而时间你不用就浪费掉了。你把你的时间投资在哪些地方，就意味着你未来会走什么样的路。所以，利用好你的时间，投到一些有意义的地方吧
 
 ## 方法
 
@@ -411,7 +434,7 @@
   - 基础篇
     + 白帽子讲Web安全:互联网时代，每个人都需要知道的安全知识必备书籍。
     + 敏捷软件开发：原则、实践和模式
-    + 重构
+    + 重构 代码坏味道和相应代码的最佳实践。
     + 编写可读代码的艺术
     + 程序员的职业素养
     + 软件开发践行录:ThoughtWorks聚集了很多爱思考爱分享的人。本书可以说就是这样一群极有天分的软件精英的思想和观点的汇聚，是他们多年的宝贵实践经验的凝结。涉猎广泛，通俗易懂，相信你读完肯定会有收获。
@@ -477,6 +500,17 @@
 * 《发布！软件的设计与部署》：现实世界中充满了恶意用户，无论是主观的恶意，还是那种当点击页面上的按钮无响应后又多点击了100次的并非故意的恶意。这本书交给你如何为失败而做准备，并将这些恶意的影响降低到最低。欢迎来到现实世界。
 * 《正见：佛陀的证悟》：一本直指内心的书，用极为平白的语言描述了原始佛教的四圣谛，没有任何的高深莫测或者故弄玄虚，作者用现实世界中的例子来阐述最为幽深的佛法，每个字都值得玩味。她可以让你在纷乱的现世中找到内心的平静。
 * [Technology Radar](https://www.thoughtworks.com/radar)
+* [每个程序员都应该要读的书](https://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read)
+  - 程序员修练之道
+  - 《算法导论》 美国的本科生教材，这本书应该也是中国计算机学生的教材
+  - 人月神话
+  - 《Effective C++》/《More Effective C++》 C++ 中两本经典得不能再经典的书。也许你觉得 C++ 复杂，但这两本书中带来对代码稳定性的探索方式让人受益，因为这种思维方式同样可以用在其它地方。以至于各种模仿者，比如《Effective Java》也是一本经典书。
+  - 《Unix 编程艺术》、《Unix 高级环境编程》也是相关的经典
+* [ optimization](https://www.agner.org/optimize/)
+  - Optimizing subroutines in assembly language: An optimization guide for x86 platforms
+  - The microarchitecture of Intel, AMD and VIA CPUs: An optimization guide for assembly programmers and compiler makers
+  - Instruction tables: Lists of instruction latencies, throughputs and micro-operation breakdowns for Intel, AMD and VIA CPUs
+  - Calling conventions for different C++ compilers and operating systems
 
 ## 工具
 
@@ -502,6 +536,10 @@
 * [hellerve/programming-talks](https://github.com/hellerve/programming-talks):Awesome & interesting talks about programming
 * [charlax/professional-programming](https://github.com/charlax/professional-programming):A collection of full-stack resources for programmers.
 * [Full Stack Developer's Roadmap](https://dev.to/ender_minyard/full-stack-developer-s-roadmap-2k12)
+* [What every computer science major should know](http://matt.might.net/articles/what-cs-majors-should-know/)
+  - 个人来说，作品集（Portfolio）会比简历（Resume）更有参考意义
+  - 计算机专业工作者也要学会与人交流的技巧，包括如何写演示文稿，以及面对质疑时如何与人辩论的能力
+  - 所需要的硬技能：工程类数学、Unix 哲学和实践、系统管理、程序设计语言、离散数学、数据结构与算法、计算机体系结构、操作系统、网络、安全、密码学、软件测试、用户体验、可视化、并行计算、软件工程、形式化方法、图形学、机器人、人工智能、机器学习、数据库等等
 
 ## 编程：Google: github awesome talks
 
