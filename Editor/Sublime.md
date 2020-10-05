@@ -147,6 +147,13 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
 * LaTeXYZ 提供更加智能的数学环境下的自动补全以及快捷键
 * Markdown Preview：预览
 * MarkdownEditing：代码提示
+    - Cmd + Shift + K ![]()
+    - Cmd + Option + V []()
+    - Cmd + Option + B 加粗
+    - Cmd + Option + I 斜体
+    - Cmd + Shift + ./, 切换 indent quote
+    - Option + Shift + 6 该把注脚这个功能用起来啦，用于必要的解释
+
 * Markdown Extended：语法高亮
 * MarkdownLivePreview `alt + m`
 * Markdown​TOC
