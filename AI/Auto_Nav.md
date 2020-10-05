@@ -17,6 +17,12 @@ An open autonomous driving platform
 
 ## 四驱
 
+## SUV
+
+* 大梁式车架 vs 承载式车架 车身高
+* 高扭矩发动机：行程长，大排量+涡轮
+* 悬挂（连接车身与车轮）
+
 ## 技术
 
 * 无线雷达（Radio Detection and Ranging）
