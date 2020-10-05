@@ -7,15 +7,15 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 ## 设计哲学 Philosophy
 
 > Markdown 的目標是實現「易讀易寫」。
-> 
+>
 > 不過最需要強調的便是它的可讀性。一份使用 Markdown 格式撰寫的文件應該可以直接以純文字發佈，並且看起來不會像是由許多標籤或是格式指令所構成。
-> 
+>
 > Markdown 的語法有個主要的目的：用來作為一種網路內容的*寫作*用語言。
-> 
+>
 > Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
-> 
+>
 > Readability, however, is emphasized above all else. A Markdown-formatted document should be publishable as-is, as plain text, without looking like it's been marked up with tags or formatting instructions.
-> 
+>
 > Markdown's syntax is intended for one purpose: to be used as a format for *writing* for the web.
 
 <!-- more -->
@@ -157,13 +157,13 @@ __This will also be bold__
 * Item 1 unordered list `* + SPACE`
 
 * Item 2
-  
+
   - Item 2a unordered list `TAB + * + SPACE`
   - Item 2b
 - Dashes work just as well
 
 - And if you have sub points, put two spaces before the dash or star:
-  
+
   - Like this
   - And this
 
@@ -209,7 +209,7 @@ __This will also be bold__
 - [ ] task one not finish `- + SPACE + [ ]`
 - [x] task two finished `- + SPACE + [x]`
 
-## 
+##
 
 ---
 
@@ -239,7 +239,7 @@ __This will also be bold__
 * 插入图片![有道云笔记logo](http://note.youdao.com/favicon.ico)
 * ![爱情](http://i.imgur.com/zjwDS9u.jpg)
 
-## 
+##
 
 ---
 
@@ -294,13 +294,13 @@ As Kanye West said:
 某某说:
 
 > 第一行引用
-> 
+>
 > 第二行费用文字
 
 As Kanye West said:
 
 > We're living the future so
-> 
+>
 > the present is our past.
 
 > 一盏灯， 一片昏黄； 一简书， 一杯淡茶。 守着那一份淡定， 品读属于自己的寂寞。 保持淡定， 才能欣赏到最美丽的风景！ 保持淡定， 人生从此不再寂寞。
@@ -344,7 +344,7 @@ function fancyAlert(arg) {
 }
 ```
 
-## 
+##
 
 ---
 
@@ -430,7 +430,7 @@ cond(yes)->io->e
 cond(no)->sub1(right)->op1
 ```
 
-## 
+##
 
 ---
 
@@ -470,7 +470,7 @@ Content in the first column | Content in the second column
 | 1910 | -15               | 30                 |
 | 1920 | -10               | 32                 |
 
-## 
+##
 
 ---
 
@@ -514,7 +514,7 @@ For example this is a Block level $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$ formu
 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
 {1+\frac{e^{-8\pi}} {1+\ldots} } } } \\]
 
-## 
+##
 
 ---
 
@@ -539,7 +539,7 @@ This is a footnote:[^sample_footnote]
 
 **注** 阅读更多的功能只用在生成网站或博客时，插入时注意要后空一行。
 
-#### 
+####
 
 ---
 
@@ -583,7 +583,7 @@ graph LR
 a-->b
 ```
 
-## 
+##
 
 ---
 
@@ -749,6 +749,7 @@ Actions->Insert Read More Comment *或者* `Command + .`
 * [markdown-it/markdown-it](https://github.com/markdown-it/markdown-it):Markdown parser, done right. 100% CommonMark support, extensions, syntax plugins & high speed https://markdown-it.github.io
 * [xi-editor/xi-editor](https://github.com/xi-editor/xi-editor):A modern editor with a backend written in Rust. https://xi-editor.io
 * [taniarascia/takenote](https://github.com/taniarascia/takenote):📝 A web-based note-taking app with GitHub sync and Markdown support. https://takenote.dev
+* markoff:A lightweight Markdown (CommonMark) previewer for macOS
 
 ## 参考
 

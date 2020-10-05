@@ -453,6 +453,20 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * 拖进tones
 * 同步手机
 
+## Mission Control
+
+* 区分工作台:不同的桌面存放不同的软件。使用 Mission Control 和多 Desktop 工作区，简直就是完美任务切换
+  - control+num:切换窗口
+* 保持专注,一个工作区下做一件事情,至于这件事情需要多少软件，那就提前把这些软件放进来就好
+  - [ShiftIt](https://github.com/fikovnik/ShiftIt):布局程序窗口
+  - Option+Tab 在同一工作台切换不同的程序
+  - Cmd+~:切换同一个软件不同窗口
+
+## 输入
+
+*  Cmd + Ctrl + Space 输入表情
+*  Cmd + Ctrl + E 找菜单栏应用
+
 ## Automator
 
 ## Route table

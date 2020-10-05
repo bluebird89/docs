@@ -67,13 +67,6 @@
   - [Zen Flowchart](https://www.zenflowchart.com)
 * 輸入法
   - [Rime](https://rime.im)
-* task:带日历与todo功能，全平台
-  - todolist
-  - TickTick
-  - [any do](https://www.any.do)
-  - [Microsoft To Do](https://todo.microsoft.com/tasks/)
-  - [calcurse](http://calcurse.org/):a calendar and scheduling application for the command line
-  - [Remember The Milk](link)
 * 日历
   - [MineTime ](https://minetime.ai/)
 * URL Shortener
@@ -114,6 +107,19 @@
   - Nuance PDF Reader
 * [OnlineToolsBook](https://github.com/zhaoolee/OnlineToolsBook):lollipop在线工具秘籍,为在线工具写一本优质说明书,让在线工具造福人类~ Online tool cheats, write a quality manual for online tools, make online tools benefit humanity~https://www.v2fy.com/p/readme-onlinetoolsbook/
 * [fliqlo](https://fliqlo.com/)
+
+## task:带日历与todo功能，全平台
+
+* todolist
+* TickTick
+* [any do](https://www.any.do)
+* [Microsoft To Do](https://todo.microsoft.com/tasks/)
+* [calcurse](http://calcurse.org/):a calendar and scheduling application for the command line
+* [Remember The Milk](link)
+* [滴答清单](https://www.dida365.com/)
+* [Toggl](https://www.toggl.com/)
+  - toggl plan
+  - Toggl Track
 
 ## [IFTTT(if this then that)](https://ifttt.com/)
 

@@ -425,46 +425,23 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 
 ## 图书
 
-* 《The C++ Programming Language》
-
-* **《C++ Primer》**
-
-* 《Effective C++》：写过几万行C++代码之后，再去阅读会更好。而且推荐每年都至少读一遍。
-
-* 《More Effective C++（中文版）》
-
-* 《C++ 标准程序库》
-
-* 《STL源码剖析》
-
-* 《深度探索C++对象模型》
-
-* Think in C++
-
-* Modern C++ Tutorial
-  
-  - [changkun / modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial)
-
-* 《深入理解C++11》
-
-* 《[C++标准库](https://www.amazon.cn/gp/product/B00YLZIRHI)》
-
-* 《[C++编程思想](https://www.amazon.cn/gp/product/B005CFUQR0)》
-
-* 《C++语言的设计与演化》
-
-* 《[C++程序设计原理与实践](https://www.amazon.cn/gp/product/B003VPX6YS)》
-
-* 《[C++ Primer （中文第5版）](https://www.amazon.cn/gp/product/B00ESUIL0O)》
-
-* 《[C++ Primer习题集(第5版)](https://www.amazon.cn/gp/product/B00S6U4C6E) 》
-
 * 《[C++程序设计语言(The C++ Programming Language)(原书第4版)](https://www.amazon.cn/gp/product/B01I9BNASA) 》
-
-* 《[Effective C++:改善程序与设计的55个具体做法(第3版)(中文版)](https://www.amazon.cn/gp/product/B004G72P24) 》 todo
-
+* **《C++ Primer》**
+  - 《[C++ Primer习题集(第5版)](https://www.amazon.cn/gp/product/B00S6U4C6E) 》
+* 《[Effective C++:改善程序与设计的55个具体做法(第3版)(中文版)](https://www.amazon.cn/gp/product/B004G72P24) 》 todo 写过几万行C++代码之后，再去阅读会更好。而且推荐每年都至少读一遍。
 * 《[More Effective C++:35个改善编程与设计的有效方法(中文版)](https://www.amazon.cn/gp/product/B004IP8BD6) 》
-
+* 《C++ 标准程序库》
+* 《STL源码剖析》
+* 《深度探索C++对象模型》
+* Think in C++
+* Modern C++ Tutorial
+  - [changkun / modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial)
+* 《深入理解C++11》
+* 《[C++标准库](https://www.amazon.cn/gp/product/B00YLZIRHI)》
+* 《[C++编程思想](https://www.amazon.cn/gp/product/B005CFUQR0)》
+* 《C++语言的设计与演化》
+* 《[C++程序设计原理与实践](https://www.amazon.cn/gp/product/B003VPX6YS)》
+* [C++ 软件性能优化](https://www.agner.org/optimize/optimizing_cpp.pdf)
 * C++沉思录
 
 ## 工具
