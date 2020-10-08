@@ -175,6 +175,7 @@ docker cp # 从容器里向外拷贝文件或目录
 ## 配置
 
 * `/etc/docker/daemon.json`
+* centos:`/usr/lib/systemd/system/docker.service `
 
 ```sh
 docker build  --no-cache --build-arg HTTP_PROXY=http://xx.xx.xx.xx:xx --build-arg HTTPS_PROXY=http://xx.xx.xx.xx:xx -t elasticsearch-curator:5.4 .
@@ -369,6 +370,7 @@ sudo systemctl restart docker
     + fd://socketfd
   - 可以通过设置命令行flag参数的形式设置安全传输层协议(TLS)的有关参数，保证传输的安全性
   - docker client发送容器管理请求后，由docker daemon接受并处理请求，当docker client 接收到返回的请求相应并简单处理后，docker client 一次完整的生命周期就结束了
+  - 通过rest api进行通信
 * Docker daemon
   - 常驻后台系统进程
   - 功能：接收处理docker client发送的请求。该守护进程在后台启动一个server，server负载接受docker client发送的请求；接受请求后，server通过路由与分发调度，找到相应的handler来执行请求
@@ -382,21 +384,38 @@ sudo systemctl restart docker
     + 需要容器镜像时，则从Docker Registry中下载镜像，并通过镜像管理驱动graphdriver将下载镜像以Graph的形式存储
     + 需要为Docker创建网络环境时，通过网络管理驱动networkdriver创建并配置Docker容器网络环境
     + 需要限制Docker容器运行资源或执行用户指令等操作时，则通过execdriver来完成
-* docker Server：一个物理或者虚拟的机器用于执行 Docker 守护进程和管理所有容器
-  - 服务于docker client的server，该server的功能是：接受并调度分发docker client发送的请求
-  - 确保只有可信的用户才可以访问 Docker 服务。Docker 允许用户在主机和容器间共享文件夹，同时不需要限制容器的访问权限，这就容易让容器突破资源限制
-  - Docker 的 REST API（客户端用来跟服务端通信）在 0.5.2 之后使用本地的 Unix 套接字机制替代了原先绑定在 127.0.0.1 上的 TCP 套接字，因为后者容易遭受跨站脚本攻击。现在用户使用 Unix 权限检查来加强套接字的访问安全
-  - image management
-    + distribution:负责与docker registry交互
-    + registry:负责docker registry有关的身份认证、镜像查找、镜像验证以及管理registry mirror等交互操作
-    + image 负责与镜像源数据有关的存储、查找，镜像层的索引、查找以及镜像tar包有关的导入、导出操作
-    + reference负责存储本地所有镜像的repository和tag名，并维护与镜像id之间的映射关系
-    + layer模块负责与镜像层和容器层源数据有关的增删改查，并负责将镜像层的增删改查映射到实际存储镜像层文件的graphdriver模块
-    + graghdriver是所有与容器镜像相关操作的执行者
-  - libcontainer是一项独立的容器管理包，networkdriver以及execdriver都是通过libcontainer来实现具体对容器进行的操作。当执行完运行容器的命令后，一个实际的Docker容器就处于运行状态，该容器拥有独立的文件系统，独立并且安全的运行环境等
+  - docker Server：一个物理或者虚拟的机器用于执行 Docker 守护进程和管理所有容器
+    + 服务于docker client的server，该server的功能是：接受并调度分发docker client发送的请求
+    + 确保只有可信的用户才可以访问 Docker 服务。Docker 允许用户在主机和容器间共享文件夹，同时不需要限制容器的访问权限，这就容易让容器突破资源限制
+    + 在Docker的启动过程中，通过包gorilla/mux（golang的类库解析），创建了一个mux.Router，提供请求的路由功能
+    + Docker 的 REST API（客户端用来跟服务端通信）在 0.5.2 之后使用本地的 Unix 套接字机制替代了原先绑定在 127.0.0.1 上的 TCP 套接字，因为后者容易遭受跨站脚本攻击。现在用户使用 Unix 权限检查来加强套接字的访问安全
+    + 若Docker Client通过HTTP的形式访问Docker Daemon，创建完mux.Router之后，Docker将Server的监听地址以及mux.Router作为参数，创建一个httpSrv=http.Server{}，最终执行httpSrv.Serve()为请求服务
+    + 在Server的服务过程中，Server在listener上接受Docker Client的访问请求，并创建一个全新的goroutine来服务该请求。在goroutine中，首先读取请求内容，然后做解析工作，接着找到相应的路由项，随后调用相应的Handler来处理该请求，最后Handler处理完请求之后回复该请求。
+    + image management
+      * distribution:负责与docker registry交互
+      * registry:负责docker registry有关的身份认证、镜像查找、镜像验证以及管理registry mirror等交互操作
+      * image 负责与镜像源数据有关的存储、查找，镜像层的索引、查找以及镜像tar包有关的导入、导出操作
+      * reference负责存储本地所有镜像的repository和tag名，并维护与镜像id之间的映射关系
+      * layer模块负责与镜像层和容器层源数据有关的增删改查，并负责将镜像层的增删改查映射到实际存储镜像层文件的graphdriver模块
+      * graghdriver是所有与容器镜像相关操作的执行者
+  - Engine:扮演Docker container存储仓库的角色，并且通过执行job的方式来操纵管理这些容器
+    + 在Engine数据结构的设计与实现过程中，有一个handler对象。该handler对象存储的都是关于众多特定job的handler处理访问。举例说明，Engine的handler对象中有一项为：{“create”: daemon.ContainerCreate,}，则说明当名为”create”的job在运行时，执行的是daemon.ContainerCreate的handler
+  - Job
+    + 是Docker架构中Engine内部最基本的工作执行单元
+    + 当需要容器镜像时，则从Docker Registry中下载镜像，并通过镜像管理驱动graphdriver将下载镜像以Graph的形式存储
+    + 当需要为Docker创建网络环境时，通过网络管理驱动networkdriver创建并配置Docker容器网络环境
+    + 当需要限制Docker容器运行资源或执行用户指令等操作时，则通过execdriver来完成
+* Docker Registry是一个存储容器镜像的仓库。而容器镜像是在容器被创建时，被加载用来初始化容器的文件架构与目录
+  - 在Docker的运行过程中，Docker Daemon会与Docker Registry通信，并实现搜索镜像、下载镜像、上传镜像三个功能，这三个功能对应的job名称分别为”search”，”pull” 与 “push”
+* Graph在Docker架构中扮演已下载容器镜像的保管者，以及已下载容器镜像之间关系的记录者
+  - Graph存储着本地具有版本信息的文件系统镜像
+  - 在Graph的本地目录中，关于每一个的容器镜像，具体存储的信息有：该容器镜像的元数据，容器镜像的大小信息，以及该容器镜像所代表的具体rootfs
+  - 也通过GraphDB记录着所有文件系统镜像彼此之间的关系
+  - GraphDB是一个构建在SQLite之上的小型图数据库，实现了节点的命名以及节点之间关联关系的记录。它仅仅实现了大多数图数据库所拥有的一个小的子集，但是提供了简单的接口表示节点之间的关系
 * Driver是Docker架构中的驱动模块。通过Driver驱动，Docker可以实现对Docker容器执行环境的定制
   - 由于Docker运行的生命周期中，并非用户所有的操作都是针对Docker容器的管理，另外还有关于Docker运行信息的获取，Graph的存储与记录等。因此，为了将Docker容器的管理从Docker Daemon内部业务逻辑中区分开来，设计了Driver层驱动来接管所有这部分请求
-  - graphdriver:用于完成容器镜像的管理，包括存储与获取。
+  - graphdriver:用于完成容器镜像的管理，包括存储与获取
+    + 在graphdriver的初始化过程之前，有4种文件系统或类文件系统在其内部注册，分别是aufs、btrfs、vfs和devmapper。而Docker在初始化之时，通过获取系统环境变量”DOCKER_DRIVER”来提取所使用driver的指定类型。而之后所有的graph操作，都使用该driver来执行
     + 当用户需要下载指定的容器镜像时，graphdriver将容器镜像存储在本地的指定目录
     + 当用户需要使用指定的容器镜像来创建容器的rootfs时，graphdriver从本地镜像存储目录中获取指定的容器镜像
   - networkdriver:完成Docker容器网络环境的配置
@@ -405,7 +424,12 @@ sudo systemctl restart docker
     + 为Docker容器分配IP、端口并与宿主机做端口映射，设置容器防火墙策略等
   - execdriver:作为Docker容器的执行驱动，负责创建容器运行命名空间，负责容器资源使用的统计与限制，负责容器内部进程的真正运行等
     + 现在execdriver默认使用native驱动，不依赖于LXC。具体体现在Daemon启动过程中加载的ExecDriverflag参数，该参数在配置文件已经被设为”native”。这可以认为是Docker在1.2版本上一个很大的改变，或者说Docker实现跨平台的一个先兆
-
+* libcontainer
+  - Docker架构中一个使用Go语言设计实现的库，设计初衷是希望该库可以不依靠任何依赖，直接访问内核中与容器相关的API
+  - Docker可以直接调用libcontainer，而最终操纵容器的namespace、cgroups、apparmor、网络设备以及防火墙规则等。这一系列操作的完成都不需要依赖LXC或者其他包
+  - 提供了一整套标准的接口来满足上层对容器管理的需求。或者说，libcontainer屏蔽了Docker上层对容器的直接管理
+  - 由于libcontainer使用Go这种跨平台的语言开发实现，且本身又可以被上层多种不同的编程语言访问，因此很难说，未来的Docker就一定会紧紧地和Linux捆绑在一起
+  - 一项独立的容器管理包，networkdriver以及execdriver都是通过libcontainer来实现具体对容器进行的操作。当执行完运行容器的命令后，一个实际的Docker容器就处于运行状态，该容器拥有独立的文件系统，独立并且安全的运行环境等
 
 ![初始化](../_static/docker_init.jpg)
 ![Docker架构](../../_static/docker_structure.jpg "Docker架构")
@@ -490,6 +514,11 @@ docker push registry-host:5000/username/repository
 * 容器时在linux上本机运行，并与其他容器共享主机的内核，它运行的一个独立的进程，不占用其他任何可执行文件的内存，非常轻量
   - 虚拟机运行的是一个完成的操作系统，通过虚拟机管理程序对主机资源进行虚拟访问，相比之下需要的资源更多
 * 连接：会创建一个父子关系，其中父容器可以看到子容器的信息
+* 配置
+  - 用户通过指定容器镜像，使得Docker容器可以自定义rootfs等文件系统
+  - 用户通过指定计算资源的配额，使得Docker容器使用指定的计算资源
+  - 用户通过配置网络及其安全策略，使得Docker容器拥有独立且安全的网络环境
+  - 用户通过指定运行的命令，使得Docker容器执行指定的工作
 * run 启动一个容器时，在后台 Docker 为容器创建了一个独立的名字空间和控制组集合
   - 名字空间提供了最基础也是最直接的隔离，在容器中运行的进程不会被运行在主机上的进程和其它容器发现和作用
   - 每个容器都有自己独有的网络栈，意味着它们不能访问其他容器的 sockets 或接口
@@ -505,9 +534,9 @@ docker push registry-host:5000/username/repository
   - 执行完毕后容器被终止
 * 启动：基于镜像新建一个容器并启动或者将在终止状态（stopped）的容器重新启动
   - --name标识来命名容器
-  - -P:是容器内部端口随机映射到主机端口
-  - -p:是容器内部端口绑定到指定的主机端口
-  - –name:给容器定义一个名称，名称是唯一的。如果已经命名了一个叫 web 的容器，当你要再次使用 web 这个名称的时候，需要先用docker rm 来删除之前创建的同名容器
+  - -P:容器内部端口随机映射到主机端口
+  - -p:容器内部端口绑定到指定主机端口
+  - –name:给容器定义一个名称，名称是唯一的。如果已经命名了一个叫 web 的容器，当要再次使用 web 这个名称的时候，需要先用docker rm 来删除之前创建的同名容器
   - -i:允许对容器内的标准输入 (STDIN) 进行交互
   - -t:让Docker分配一个伪终端并绑定到容器的标准输入上
   - -d 后台运行container 参数启动后会返回一个唯一的 id，也可以通过 docker ps 命令来查看容器信息
@@ -519,9 +548,11 @@ docker push registry-host:5000/username/repository
 * 交互
   - 短暂方式
     + 启动命令中带有执行语句
-    + exit后 container就终止了，不过并没有消失，可以用 `sudo docker ps -a`，可以启动：`sudo docker start container_id`
+    + exit 后 container就终止了，不过并没有消失，可以用 `sudo docker ps -a`，可以启动：`sudo docker start container_id`
     + 用logs命令： `sudo docker logs container_id`
   - 交互方式：`docker run -i -t image_name /bin/bash`
+  - `docker attach mynginx`
+  - `docker exec -it mynginx sh`
 * 从已经创建的容器中更新镜像，并且提交这个镜像
   - `docker run -i -t ubuntu:15.10 /bin/bash` # 在新容器内建立一个伪终端或终端
   - -p 3306:3306   表示在这个容器中使用3306端口(第二个)映射到本机的端口号也为3306(第一个)
@@ -538,9 +569,9 @@ docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py
 docker port adoring_stonebraker 5002
 
 # 查看
-docker [container] ps # 列出正在运行的容器(containers)
-docker ps -a # 列出所有的容器
-docker ps -l   # 查看最后一次创建的容器
+docker [container] ps # 列出正在运行容器(containers)
+docker ps -a # 列出所有容器
+docker ps -l   # 查看最后一次创建容器
 docker container ls --format "table\t\t"
 
 # 创建
@@ -562,12 +593,10 @@ docker run -e MY_ENV=some_value alpine # 指定环境变量
 docker run -it -w /home alpine sh # 设置container的工作路径
 docker run -it --link source-container:alias alpine sh # link两个container
 
-docker logs -f $CONTAINER_ID  # 查看日志
 docker attach $CONTAINER_ID # 退出容器会终止容器
+docker top determined_swanson    # 查看容器内部运行进程
 
-docker top determined_swanson    # 查看容器内部运行的进程
-
-docker inspect [CONTAINER ID] # Shows all the info of a container. 退出容器终端，不会导致容器的停止
+docker inspect CONTAINER_ID|name # Shows all the info of a container. 退出容器终端，不会导致容器的停止
 docker inspect id | grep IPAddress | cut -d '"' -f 4 # 获取Container IP地址
 docker inspect -f '{{range $p, $conf := .NetworkSettings.Ports}} {{$p}} -> {{(index $conf 0).HostPort}} {{end}}' id # 获取端口映射
 docker inspect name  ||  docker ps -l(ast)/-a(ll)     # 查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息
@@ -575,6 +604,7 @@ docker inspect -f "{{ .Name }}" aed84ee21bde # 查看容器的名字
 docker inspect <container id> | grep "IPAddress"
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
 docker inspect [CONTAINER ID] | grep -wm1 IPAddress | cut -d '"' -f 4 # Get IP address of running container
+docker logs -f $CONTAINER_ID  # 查看日志
 
 docker exec [CONTAINER ID] touch /tmp/exec_works # Execute a command inside a running container.
 docker exec -i 69d1 bash
