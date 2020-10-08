@@ -2,9 +2,9 @@
 
 Node.js JavaScript runtime ✨🐢🚀✨ <https://nodejs.org>
 
-* 因为JavaScript是单线程执行，根本不能进行同步IO操作，所以，JavaScript的这一“缺陷”导致了它只能使用异步IO。
-* 在2009年，Ryan正式推出了基于JavaScript语言和V8引擎的开源Web服务器项目，命名为Node.js。借助JavaScript天生的事件驱动机制加V8高性能引擎，使编写高性能Web服务轻而易举。
-* 其高性能并行I/O使得分布式开发更加高效，利用稳定接口可提升web渲染速度，也十分适合做实时应用开发。
+* 因为JavaScript是单线程执行，根本不能进行同步IO操作，所以，JavaScript的这一“缺陷”导致了它只能使用异步IO
+* 2009年，Node.js 项目诞生，创始人为 Ryan Dahl，它标志着 JavaScript 可以用于服务器端编程，从此网站的前端和后端可以使用同一种语言开发
+* 借助JavaScript天生的事件驱动机制加V8高性能引擎，使编写高性能Web服务轻而易举 Node.js ,其高性能并行I/O使得分布式开发更加高效，利用稳定接口可提升web渲染速度，也十分适合做实时应用开发
 
 ## 场景
 

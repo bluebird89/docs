@@ -23,7 +23,7 @@
     + 更甚至于，若是在 Intellij 里面关联了 GitHub，就可以在 git commit 信息里面直接看到你所要关联的 issues 列表了
   - 移动端则可以通过 GitDo 这个 App 来轻松新建和管理自己的 Issues
 * 整理：as BA，即分析，Elaboration & Estimation & IPM => 确定 MVP & Efforts
-  - 整理 GitHub Issues:大胆地把 issues 作为个人需求列表吧，需要解决的问题可以大到做一个开源项目，或者小到读一本书、写一篇文章。对于比较大的需求，你还可以将其转化为 Epic 然后把拆分过后的小 issues 们加入到这个列表里面来
+  - 整理GitHub Issues:把issues作为个人需求列表，需要解决的问题可以大到做一个开源项目，或者小到读一本书、写一篇文章。对于比较大的需求，还可以将其转化为 Epic 然后把拆分过后的小 issues 们加入到这个列表里面来
   - 使用 GitHub 新出的 Projects 特性或者使用 ZenHub 的 Boards 就可以让你瞬间拥有日常敏捷工作的感觉
 * 执行：as Dev & QA，Developing & Testing & Review/Sign-Off
   - 制定迭代计划:新建一个 Milestone 来制定计划，也就是决定在一个 Iteration 里面你需要完成哪些 issues。在这里我所制定的阶段性计划周期为一个月，当然你也可以勤快一点，以2周作为一个 Iteration，享受一下自己的计划要完成不了、这个 Milestone 就要废了
@@ -34,6 +34,42 @@
     + 完成之后这个 issue 还能直接显示完成进度；前面所提到的 Epic 也能直接显示子 issues 的完成情况即 closed 比例，两者结合起来简直不能再美好
   - 专注当下
 * 回顾：Retrospection，Introspection，持续反思，持续进步…
+* [参考](https://github.com/JimmyLv/jimmylv.github.io)
+
+## issue
+
+* 内容
+  - 一个软件的 bug
+  - 一项功能建议
+  - 一项待完成的任务
+  - 文档缺失的报告
+* 项目管理
+  - 指定 Issue 的优先级
+  - 指定 Issue 所在的阶段
+  - 分配负责 Issue 的处理人员
+  - 制定日程
+  - 监控进度，提供统计
+* 团队合作
+  - 讨论
+  - 邮件通知
+* 代码管理
+  - 将 Issue 关联源码
+  - 将 Issue 关联代码提交与合并
+* 配置项
+  - Assignees：人员
+  - Labels：标签
+    + 至少应该有两个 Label
+    + 性质
+    + 优先级
+      * 高优先级（High）：对系统有重大影响，只有解决它之后，才能去完成其他任务。
+      * 普通优先级（Medium）：对系统的某个部分有影响，用户的一部分操作会达不到预期效果。
+      * 低优先级（Low）：对系统的某个部分有影响，用户几乎感知不到。
+      * 微不足道（Trivial）：对系统的功能没有影响，通常是视觉效果不理想，比如字体和颜色不满意
+  - Projects：项目
+  - Milestone：里程碑，用作 Issue 的容器。相关 Issue 可以放在一个 Milestone 里面。常见的例子是不同的版本（version）和迭代（sprint）
+* [全局视图](github.com/issues)
+
+## pull request
 
 ## GitHub Actions
 
