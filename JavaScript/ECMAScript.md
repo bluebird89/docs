@@ -4,21 +4,16 @@ Status, process, and documents for ECMA262 https://tc39.github.io/ecma262/
 
 ## 版本
 
-* ES6
-  
+* [ES6](https://github.com/lukehoban/es6features) ES2015
   - let, const（变量类型）：解决变量作用域泄露的问题
   - Class, extends, super（类、继承）：让对象原型的写法更加清晰、更像面向对象编程的语法，也更加通俗易懂
   - Arrow functions（箭头函数）：简洁，解决this绑定的问题（继承外面的this）
   - Template string（模板字符串）：解决传统写法非常麻烦的问题
   - Destructuring（解构）：避免让API使用者记住多个参数的使用顺序
   - Default, rest（默认值、参数）：简化，替代arguments，使代码更易于阅读
-
 * ECMAScript 2016
-  
   - Array.prototype.includes
-
 * ECMAScript 2017
-  
   - Object.values():返回 Object 所有属性的值
   - Object.entries():与 Object.keys 相关，不仅返回键，而是以数组的方式返回键和值。这使得在循环中使用对象或将对象转换为 Map 等操作变得非常简单
   - String.prototype.padStart 和 String.prototype.padEnd——允许将空字符串或其他字符串追加或前置到原始字符串的尾部或开头
@@ -26,11 +21,9 @@ Status, process, and documents for ECMA262 https://tc39.github.io/ecma262/
   - Object.assign 将浅复制除原始源对象的 getter 和 setter 函数之外的所有东西
   - 函数参数中添加尾逗号（trailing comma）
   - async/await:async 关键字告诉 JavaScript 编译器要以不同的方式处理这个函数。在遇到函数中的 await 关键字时，编译器就会暂停。它假定 await 之后的表达式会返回一个 promise 并等待，直到 promise 完成或被拒绝
-
 * ECMAScript 2018
-
 * ES2019
-  
+
   - toString()方法返回函数代码本身，以前会省略注释和空格
   - 允许catch语句省略参数
 
