@@ -277,6 +277,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - [QSpace](link)一个国产软件，MacOS 系统的多视图文件管理器，支持很多特色功能。让你摆脱多窗口来回切换的繁琐，和拖拽时找不准目标的尴尬
   - [Ityscal](https://www.mowglii.com/itsycal/)  日历
   - [sindresorhus/quick-look-plugins ](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
+  - [smcfunControl](link)
   - TotalFinder - macOS 上最强的 Finder 增强软件
   - uTools - 比 Alfred 更简洁的工作流
 * 设计
@@ -304,6 +305,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - [flux](https://justgetflux.com/) 屏幕颜色控制
   - [moom](https://manytricks.com/moom/)使用体验优异的窗口管理软件
   - [](https://github.com/pqrs-org/Karabiner-Elements):Karabiner-Elements is a powerful utility for keyboard customization on macOS Sierra (10.12) or later. https://pqrs.org/osx/karabiner/
+  - [stats](https://github.com/exelban/stats):macOS system monitor in your menu bar
 * 窗口管理
   - [Spectacle](link):控制窗口
   - [sizeup](link) 窗口管理软件
@@ -328,7 +330,6 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - MAMP:基础版不支持自定义
   - [yichengchen/clashX](https://github.com/yichengchen/clashX):A rule based custom proxy with GUI for Mac base on clash.
 * 沟通
-
   - [Textual 7](<Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.>)
   - [OmniGraffle](https://www.omnigroup.com/omnigraffle)
   - slack

@@ -27,6 +27,30 @@ A declarative, efficient, and flexible JavaScript library for building user inte
   - 单向响应数据流 − React 实现了单向响应的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。提高可维护性
   - 模块化：通过模块化工具库来解决模块化问题——提高可维护性和复用性
 
+## 安装
+
+* 在线体验
+  -  CodePen
+  -  CodeSandbox
+  -  Glitch
+  -  Stackblitz
+* 在网站中添加 React
+  - div
+  - 添加 Script 标签
+  - 创建一个 React 组件
+* 工具链
+  - 学习 React 或创建一个新单页应用，使用 Create React App
+  - 用 Node.js 构建服务端渲染的网站: Next.js
+  - 面向内容的静态网站:Gatsby
+  - 组件库或将 React 集成到现有代码仓库，尝试更灵活的[工具链](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658)
+
+```sh
+npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/preset-react
+npm install --save-dev webpack webpack-cli webpack-dev-server style-loader css-loader babel-loader
+
+npm run --save react react-dom react-hot-loader
+```
+
 ## 工作机制
 
 * ReactDOM.render 将模板转为 HTML 语言，并插入指定的 DOM 节点

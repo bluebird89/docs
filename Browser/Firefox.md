@@ -1,5 +1,6 @@
 # Firefox
 
+* 1998年，Netscape 公司开源了浏览器，这导致了 Mozilla 项目的诞生。几个月后，美国在线（AOL）宣布并购 Netscape
 * 中文与[英文](https://accounts.firefox.com)两套数据
 * Servo 引擎:用 Rust 编程语言开发的
 * 在 Windows 10 上面默认开启了 WebRender，使用 GPU 渲染网页，而不是传统的 CPU。大大改善网页的渲染性能，页面滚动和动画都会有更好的表现。

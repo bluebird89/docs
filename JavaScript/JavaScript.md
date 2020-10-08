@@ -1,9 +1,22 @@
 # JavaScript
 
-* JavaScript是世界上最流行的脚本语言。运行在浏览器中的解释型的编程语言。
-* 1995年，网景公司正凭借其Navigator浏览器成为Web时代开启时最著名的第一代互联网公司。由于网景公司希望能在静态HTML页面上添加一些动态效果，于是叫Brendan Eich这哥们在两周之内设计出了JavaScript语言。你没看错，这哥们只用了10天时间。为什么起名叫JavaScript？原因是当时Java语言非常红火，所以网景公司希望借Java的名气来推广，但事实上JavaScript除了语法上有点像Java，其他部分基本上没啥关系
-* 因为网景开发了JavaScript，一年后微软又模仿JavaScript开发了JScript，为了让JavaScript成为全球标准，几个公司联合ECMA（European Computer Manufacturers Association）组织定制了JavaScript语言的标准，被称为ECMAScript标准。
-* ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标准的一种实现。ECMAScript 6标准（简称ES6）已经在2015年6月正式发布了，所以，讲到JavaScript的版本，实际上就是说它实现了ECMAScript标准的哪个版本。
+* JavaScript是世界上最流行的脚本语言。运行在浏览器中的解释型的编程语言
+* 1995年，网景公司正凭借其Navigator浏览器成为Web时代开启时最著名的第一代互联网公司
+* 网景公司希望能在静态HTML页面上添加一些动态效果，于是叫Brendan Eich这哥们在两周之内设计出了JavaScript语言。只用了10天时间，语法有多个来源
+  - 基本语法：借鉴 C 语言和 Java 语言。
+  - 数据结构：借鉴 Java 语言，包括将值分成原始值和对象两大类。
+  - 函数的用法：借鉴 Scheme 语言和 Awk 语言，将函数当作第一等公民，并引入闭包。
+  - 原型继承模型：借鉴 Self 语言（Smalltalk 的一种变种）。
+  - 正则表达式：借鉴 Perl 语言。
+  - 字符串和数组处理：借鉴 Python 语言
+* 最初名字叫做 Mocha，1995年9月改为 LiveScript。12月，Netscape 公司与 Sun 公司（Java 语言的发明者和所有者）达成协议，后者允许将这种语言叫做 JavaScript。这样一来，Netscape 公司可以借助 Java 语言的声势，而 Sun 公司则将自己的影响力扩展到了浏览器
+* 1995年12月4日，Netscape 公司与 Sun 公司联合发布了 JavaScript 语言，对外宣传 JavaScript 是 Java 的补充，属于轻量级的 Java，专门用来操作网页
+* 1996年3月，Navigator 2.0 浏览器正式内置了 JavaScript 脚本语言
+* 1996年8月，微软模仿 JavaScript 开发了一种相近的语言，取名为JScript（JavaScript 是 Netscape 的注册商标，微软不能用），首先内置于IE 3.0
+* 1996年11月，Netscape 公司决定将 JavaScript 提交给国际标准化组织 ECMA（European Computer Manufacturers Association），希望 JavaScript 能够成为国际标准，以此抵抗微软。ECMA 的39号技术委员会（Technical Committee 39）负责制定和审核这个标准，成员由业内的大公司派出的工程师组成，目前共25个人。该委员会定期开会，所有的邮件讨论和会议记录，都是公开的。
+* 1997年7月，ECMA 组织发布262号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为 ECMAScript。这个版本就是 ECMAScript 1.0 版。之所以不叫 JavaScript，一方面是由于商标的关系，Java 是 Sun 公司的商标，根据一份授权协议，只有 Netscape 公司可以合法地使用 JavaScript 这个名字，且 JavaScript 已经被 Netscape 公司注册为商标，另一方面也是想体现这门语言的制定者是 ECMA，不是 Netscape，这样有利于保证这门语言的开放性和中立性。因此，ECMAScript 和 JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现
+* ECMAScript 只用来标准化 JavaScript 这种语言的基本语法结构，与部署环境相关的标准都由其他标准规定，比如 DOM 的标准就是由 W3C组织（World Wide Web Consortium）制定的
+* ECMA-262 标准后来也被另一个国际标准化组织 ISO（International Organization for Standardization）批准，标准号是 ISO-1626
 * 生态
   - TypeScript 对战 ES6
     + 深入理解 ES6 中的基础语法非常重要
@@ -18,6 +31,60 @@
   - 预测像 Next.js、Nuxt.js 和 Gatsby.js 这样的混合框架将占据很大一部分项目，因此 JavaScript 开发人员必须了解这些工具。
   - Agile（敏捷）这个术语，但它比 Git 或 Redux 被提及的频率更高，这说明 JS 开发者们除了要获得开发岗位必须的硬技能，软技能同样不可忽视。UX 也是如此
   - 作为一个前端开发者，需要知道如何在技术层面为用户提供更流畅的体验，而不是在设计层面
+* 强大性能
+  - 灵活的语法，表达力强
+    + 既支持类似 C 语言清晰的过程式编程，也支持灵活的函数式编程，可以用来写并发处理（concurrent）。这些语法特性已经被证明非常强大，可以用于许多场合，尤其适用异步编程。
+    + JavaScript 的所有值都是对象，这为程序员提供了灵活性和便利性
+  - 支持编译运行
+    + 在现代浏览器中，JavaScript 都是编译后运行。程序会被高度优化，运行效率接近二进制程序
+    + 有一种 WebAssembly 格式，是 JavaScript 引擎的中间码格式，全部都是二进制代码。由于跳过了编译步骤，可以达到接近原生二进制代码的运行速度。各种语言（主要是 C 和 C++）通过编译成 WebAssembly，就可以在浏览器里面运行
+  - 事件驱动和非阻塞式设计
+    + 可以采用事件驱动（event-driven）和非阻塞式（non-blocking）设计，在服务器端适合高并发环境，普通的硬件就可以承受很大的访问量
+  - 对于 JavaScript，常常需要学习各种解决问题的模式。而且由于来源多样，从一开始就注定，JavaScript 的编程风格是函数式编程和面向对象编程的一种混合体
+* 从语法角度看，JavaScript 语言是一种“对象模型”语言。各种宿主环境通过这个模型，描述自己的功能和操作接口，从而通过 JavaScript 控制这些功能
+* JavaScript 并不是纯粹的“面向对象语言”，还支持其他编程范式（比如函数式编程）
+* JavaScript 的使用范围，慢慢超越了浏览器，正在向通用的系统语言发展
+* JavaScript 也是一种嵌入式（embedded）语言。本身提供的核心语法不算很多，只能用来做一些数学和逻辑运算。JavaScript 本身不提供任何与 I/O（输入/输出）相关的 API，都要靠宿主环境（host）提供，所以 JavaScript 只合适嵌入更大型的应用程序环境，去调用宿主环境提供的底层 API
+
+## 核心语法
+
+* 基本的语法构造（比如操作符、控制结构、语句）
+* 标准库
+  - Array
+  - Date
+  - Math
+* 虽然核心语法不难，但是 JavaScript 的复杂性体现在另外两个方面
+  - 涉及大量的外部 API。JavaScript 要发挥作用，必须与其他组件配合，这些外部组件五花八门，数量极其庞大，几乎涉及网络应用的各个方面，掌握它们绝非易事
+  - JavaScript 语言有一些设计缺陷：学习 JavaScript，很大一部分时间是用来搞清楚哪些地方有陷阱。Douglas Crockford 写过一本有名的书，名字就叫《JavaScript: The Good Parts》
+
+## 浏览器环境
+
+* JavaScript 的发明目的，就是作为浏览器的内置脚本语言，为网页开发者提供操控浏览器的能力。它是目前唯一一种通用的浏览器脚本语言，所有浏览器都支持。它可以让网页呈现各种特殊效果，为用户提供良好的互动体验
+* 浏览器的平台化：随着 HTML5 的出现，浏览器本身的功能越来越强，不再仅仅能浏览网页，而是越来越像一个平台，JavaScript 因此得以调用许多系统功能，比如操作本地文件、操作图片、调用摄像头和麦克风等等。这使得 JavaScript 可以完成许多以前无法想象的事情
+* 提供的额外 API
+  - 浏览器控制类：操作浏览器
+  - DOM 类：操作网页的各种元素
+  - Web 类：实现互联网的各种功能
+
+## 服务器环境 Node
+
+* Node 项目使得 JavaScript 可以用于开发服务器端的大型项目，网站的前后端都用 JavaScript 开发已经成为了现实。有些嵌入式平台（Raspberry Pi）能够安装 Node，于是 JavaScript 就能为这些平台开发应用程序
+* 提供各种操作系统 API
+  - 文件操作 API
+  - 网络通信 API
+
+## 数据库操作
+
+* NoSQL 数据库这个概念，本身就是在 JSON（JavaScript Object Notation）格式的基础上诞生的，大部分 NoSQL 数据库允许 JavaScript 直接操作。基于 SQL 语言的开源数据库 PostgreSQL 支持 JavaScript 作为操作语言，可以部分取代 SQL 查询语言。
+
+## 移动平台开发
+
+* PhoneGap 项目就是将 JavaScript 和 HTML5 打包在一个容器之中，使得它能同时在 iOS 和安卓上运行。Facebook 公司的 React Native 项目则是将 JavaScript 写的组件，编译成原生组件，从而使它们具备优秀的性能。
+
+## 版本
+
+
+* 2015年6月，ECMAScript 6 正式发布，并且更名为“ECMAScript 2015”。这是因为 TC39 委员会计划，以后每年发布一个 ECMAScript 的版本
 
 ## DOM Document Object Model 文档对象模型
 
@@ -1916,20 +1983,20 @@ rome check
 
 ## 教程
 
-* [JavaScript全栈教程](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000)
-* [michaelliao/learn-javascript](https://github.com/michaelliao/learn-javascript):JavaScript全栈教程参考源码
-* [JavaScript 标准参考教程](http://javascript.ruanyifeng.com/)
+* [verekia/js-stack-from-scratch](https://github.com/verekia/js-stack-from-scratch):🛠️⚡ Step-by-step tutorial to build a modern JavaScript stack.
+* [JavaScript全栈教程](https://www.liaoxuefeng.com/wiki/1022910821149312)
+  - [michaelliao/learn-javascript](https://github.com/michaelliao/learn-javascript):JavaScript全栈教程参考源码
+* [JavaScript 教程](https://wangdoc.com/javascript/index.html)
   - [ruanyf/jstutorial](https://github.com/ruanyf/jstutorial):Javascript tutorial book http://javascript.ruanyifeng.com
 * [阮一峰ECMAScript 6](http://es6.ruanyifeng.com/)
-  - [songjinzhong/ES6Learning](https://github.com/songjinzhong/ES6Learning):阮一峰老师的 ES6 入门教程笔记 http://es6.ruanyifeng.com/
-* [6周学习计划，攻克JavaScript难关(React/Redux/ES6 etc.)](https://zhuanlan.zhihu.com/p/23412169)
+  - [songjinzhong/ES6Learning](https://github.com/songjinzhong/ES6Learning):阮一峰老师的 ES6 入门教程笔记
+
 * [mqyqingfeng/Blog](https://github.com/mqyqingfeng/Blog):冴羽写博客的地方，预计写四个系列：JavaScript深入系列、JavaScript专题系列、ES6系列、React系列。
 * [N-blog](https://maninboat.gitbooks.io/n-blog/content/):使用 Express + MongoDB 搭建多人博客
 * [leonardomso/33-js-concepts](https://github.com/leonardomso/33-js-concepts):📜 33 concepts every JavaScript developer should know.
 * [iliakan/javascript-tutorial-en](https://github.com/iliakan/javascript-tutorial-en):Modern JavaScript Tutorial https://javascript.info
 * [llh911001/mostly-adequate-guide-chinese](https://github.com/llh911001/mostly-adequate-guide-chinese):JS 函数式编程指南中文版 https://legacy.gitbook.com/book/llh911001/mostly-adequate-guide-chinese/details
 * [getify/You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter. https://www.kickstarter.com/projects/getify/you-dont-know-js-book-series
-* [verekia/js-stack-from-scratch](https://github.com/verekia/js-stack-from-scratch):🛠️⚡ Step-by-step tutorial to build a modern JavaScript stack.
 * [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 * [ teambit / bit ](https://github.com/teambit/bit): Build, distribute and collaborate on components. https://bit.dev/  Get your enterprise-grade component cloud
 
@@ -1962,7 +2029,9 @@ rome check
 * [addyosmani/essential-js-design-patterns](https://github.com/addyosmani/essential-js-design-patterns):Repo for my 'Learning JavaScript Design Patterns' book https://addyosmani.com/resources/essentialjsdesignpatterns/book/
 * [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API)
 * [comparing-javascript-test-runners](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/README.md):Comparing AVA, Jest, Mocha, and mocha-parallel-tests testing frameworks
+
 * [原生JS(上)](https://juejin.im/post/5cab0c45f265da2513734390)
+* [6周学习计划，攻克JavaScript难关(React/Redux/ES6 etc.)](https://zhuanlan.zhihu.com/p/23412169)
 
 ## 问题
 

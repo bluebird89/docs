@@ -12,13 +12,13 @@ npm install -g typescript
 
 使用 TypeScript 编译器，名称叫 tsc，可将编译结果生成 js 文件 `tsc filename.ts`
 
-- 类型批注：提供静态类型以在编译时启动类型检查。这是可选的，而且可以被忽略而使用 JavaScript 常规的动态类型。
+* 类型批注：提供静态类型以在编译时启动类型检查。这是可选的，而且可以被忽略而使用 JavaScript 常规的动态类型。
   - 基本类型的批注是number, bool和string。而弱或动态类型的结构则是any类型
   - 可以被导出到一个单独的声明文件以让使用类型的已被编译为JavaScript的TypeScript脚本的类型信息可用。批注可以为一个现有的JavaScript库声明，就像已经为Node.js和jQuery所做的那样
-- 接口：对象作为数据集合
-- 箭头函数表达式（lambda表达式）：()=>{something}或()=>something 相当于js中的函数,它的好处是可以自动将函数中的this附加到上下文中。
-- 类：支持集成了可选的类型批注支持的ECMAScript 6的类。public 和 private 访问修饰符。Public 成员可以在任何地方访问， private 成员只允许在类中访问.默认为private
-- 继承：可以继承一个已存在的类并创建一个派生类，继承使用关键字 extends
+* 接口：对象作为数据集合
+* 箭头函数表达式（lambda表达式）：()=>{something}或()=>something 相当于js中的函数,它的好处是可以自动将函数中的this附加到上下文中。
+* 类：支持集成了可选的类型批注支持的ECMAScript 6的类。public 和 private 访问修饰符。Public 成员可以在任何地方访问， private 成员只允许在类中访问.默认为private
+* 继承：可以继承一个已存在的类并创建一个派生类，继承使用关键字 extends
   - 继承了父类（super）的属性
   - 可复用构造函数
   - 在重写父类的方法实现
@@ -29,10 +29,6 @@ superShout() {
   return super.shoutout();
 }
 ```
-
-## 测试
-
-* [kulshekhar/ts-jest](https://github.com/kulshekhar/ts-jest):TypeScript preprocessor with sourcemap support for Jest https://kulshekhar.github.io/ts-jest
 
 ## 教程
 
@@ -45,8 +41,6 @@ superShout() {
 
 ## 工具
 
-* [ry/deno](https://github.com/ry/deno):A secure TypeScript runtime on V8
-* [DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped):The repository for high quality TypeScript type definitions. http://definitelytyped.org/
 * orm
     - [typeorm/typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. http://typeorm.io
     - [prisma/prisma](https://github.com/prisma/prisma):Modern DB toolkit to query, migrate and model your database https://www.prisma.io/
@@ -58,14 +52,16 @@ superShout() {
 * [rpgeeganage/async-ray](https://github.com/rpgeeganage/async-ray):Provide async/await callbacks for every, find, findIndex, filter, forEach, map, reduce, reduceRight and some methods in Array. https://rpgeeganage.github.io/async-ray
 * [TypeStrong/typedoc](https://github.com/TypeStrong/typedoc):Documentation generator for TypeScript projects. https://typedoc.org
 * [palmerhq/tsdx](https://github.com/palmerhq/tsdx):Zero-config CLI for TypeScript package development https://npm.im/tsdx
+* 测试
+    - [kulshekhar/ts-jest](https://github.com/kulshekhar/ts-jest):TypeScript preprocessor with sourcemap support for Jest https://kulshekhar.github.io/ts-jest
 
 ## 参考
 
 * [TypeScript 中文手册](https://typescript.bootcss.com/)
 * [The TypeScript Handbook](https://www.staging-typescript.org/docs/handbook/intro.html)
 * [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/getting-started)
+* [basarat/typescript-book](https://github.com/basarat/typescript-book):📚 The definitive guide to TypeScript and possibly the best TypeScript book 📖. Free and Open Source 🌹
 * [DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped):The repository for high quality TypeScript type definitions. http://definitelytyped.org/
 * [gcanti/fp-ts](https://github.com/gcanti/fp-ts):Functional programming in TypeScript https://gcanti.github.io/fp-ts/
 * [jkchao/typescript-book-chinese](https://github.com/jkchao/typescript-book-chinese):TypeScript Deep Dive 中文版
-* [basarat/typescript-book](https://github.com/basarat/typescript-book):📚 The definitive guide to TypeScript and possibly the best TypeScript book 📖. Free and Open Source 🌹
 * [why is so important?](https://www.warambil.com/typescript-why-is-so-important)

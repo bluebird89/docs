@@ -413,47 +413,25 @@ def backtrack(路径, 选择列表):
 ## 参考
 
 * [OpenGenus/cosmos](https://github.com/OpenGenus/cosmos):[Show ❤️ love by 🌟] Your personal library of every algorithm and data structure code that you will ever encounter
-
 * [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges):Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
-
 * [keon/algorithms](https://github.com/keon/algorithms)Minimal examples of data structures and algorithms in Python
-
 * [LeuisKen/algorithm](https://github.com/LeuisKen/algorithm)
-
 * [Dictionary of Algorithms and Data Structures](https://xlinux.nist.gov/dads/)
-
 * [frowhy/Algorithm](https://github.com/frowhy/Algorithm)
-
 * [python](https://github.com/ssjssh/algorithm)
-
 * [TheAlgorithms/Python](https://github.com/TheAlgorithms/Python):All Algorithms implemented in Python
-
 * [TheAlgorithms/Java](https://github.com/TheAlgorithms/Java):All Algorithms implemented in Java
-
 * [TheAlgorithms / Go](https://github.com/TheAlgorithms/Go):Algorithms Implemented in GoLang
-
 * [skybebe/Algorithms-Learning-With-Go](https://github.com/skybebe/Algorithms-Learning-With-Go):算法学习 Golang 版，参考 raywenderlich/swift-algorithm-club
-
 * [TheAlgorithms / Javascript](https://github.com/TheAlgorithms/Javascript):A repository for All algorithms implemented in Javascript (for educational purposes only)
-
 * [trekhleb/javascript-algorithms](https://github.com/trekhleb/javascript-algorithms):📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings
-
 * [apachecn/awesome-algorithm](https://github.com/apachecn/awesome-algorithm):Leetcode 题解 (跟随思路一步一步撸出代码) 及经典算法实现
-
 * [ChrisKnott/Algojammer](https://github.com/ChrisKnott/Algojammer):An experimental code editor for writing algorithms
-
 * [algorithm-visualizer/algorithm-visualizer](https://github.com/algorithm-visualizer/algorithm-visualizer):🎆Interactive Online Platform that Visualizes Algorithms from Code https://algorithm-visualizer.org/
-
 * [VisuAlgo](https://visualgo.net/en):visualising data structures and algorithms through animation
-
 * [algorithm004-01/algorithm004-01](https://github.com/algorithm004-01/algorithm004-01)
-
 * https://www.geekxh.com/
-
 * [动态规划解题技巧](https://mp.weixin.qq.com/s?__biz=MzI1MzYzMTI2Ng==&mid=2247484431&idx=3&sn=35abe41394f24167b78419edbc36fc7c)
-
 * [我接触过的前端数据结构与算法](https://juejin.im/post/5958bac35188250d892f5c91)
-
 * [wangzheng0822/algo](https://github.com/wangzheng0822/algo):数据结构和算法必知必会的50个代码实现
-
 * [美国高薪计算机大公司流行算法面试题，LeetCode算法题成为破解高薪之道？ - ycombinator](https://www.jdon.com/54814)

@@ -1,6 +1,4 @@
-# PVN （Virtual Private Network）
-
-虚拟专用网络
+# PVN Virtual Private Network 虚拟专用网络
 
 ## 概念
 
@@ -351,6 +349,7 @@ Socks 主机 127.0.0.1 7891
 * 三方
   - blinkload
   - ndss
+  - 快连
 
 ## 工具
 
@@ -365,7 +364,6 @@ Socks 主机 127.0.0.1 7891
 * Perfect Privacy
 * ExpressVPN
 * NordVPN
-* 私人互联网接入
 * PureVPN
 * 完美隐私
 * [txthinking/brook](https://github.com/txthinking/brook):Brook is a cross-platform(Linux/MacOS/Windows/Android/iOS) proxy/vpn software

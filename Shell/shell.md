@@ -684,14 +684,14 @@ ls -l my_script # 过滤输出列表
 * [plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins)
     - plugin manager
         + [antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. http://antigen.sharats.me
-        + [zplug](https://github.com/zplug/zplug):🌺 A next-generation plugin manager for zsh
+        + [zplug](https://github.com/zplug/zplug):🌺 A next-generation plugin manager for zsh `curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh`
         + [](https://github.com/getantibody/antibody) The fastest shell plugin manager.
     - [Overview](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins-Overview)
     - custom
         + [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
         + [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
         + [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt `npm install --global pure-prompt`
-* [Theme](~/.oh-my-zsh/themes )hibiscus A next-generation plugin manager for zsh `curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh`
+* [Theme](~/.oh-my-zsh/themes)
     - agnoster
     - cloud
     - wedisagree
