@@ -159,6 +159,8 @@
 ## 图书
 
 * 《深入理解计算机系统》
+* 计算机程序的构造和解释 Structure and Interpertation of Computer Programming, SICP
+* 计算机程序的概念、技术和模型 Concepts, Techniques, and Models of Computer Programming，CTMCP
 * 《异类》
 * Addison-Wesley professional computing series
 

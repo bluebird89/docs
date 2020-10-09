@@ -69,8 +69,8 @@
 * 用kindle
 * 从简单到复杂，再回到简单。
   - 先把简单的事情做复杂：搭建读书系统，确定读书规则。
-  - 找到适合你的工具、制度和规则，构建推动你不断实现目标的读书系统。
-    - 电子书管理：Calibre;
+  - 找到适合你的工具、制度和规则，构建推动你不断实现目标的读书系统
+    + [Calibre](https://calibre-ebook.com/) — E-book Manager `sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin`
     - 书单工具：OmniFocus(OF)中的『阅读』项目+豆瓣读书的豆列;
     - 阅读工具：Kindle Paperwhite
     - 笔记体系：Evernote(读书笔记)+Clippings.io(导出标注至Evernote)

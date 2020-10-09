@@ -95,7 +95,7 @@
 * kindle
   - <http://kindle115.com/>
   - [鸠摩搜书](https://www.jiumodiary.com/)
-  - [Calibre](https://calibre-ebook.com/) `sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin`
+  - [Calibre](https://github.com/kovidgoyal/calibre) https://calibre-ebook.com/ `sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin`
   - <http://kmate.me/cn/>
   - <https://readfree.me/>
   - [时钟](http://k.ilib.io/u/clock.html)

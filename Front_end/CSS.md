@@ -573,13 +573,13 @@ a:hover {border-color: gray;}
 
 字体图标缩小时可能会遇到部分图标存在锯齿现象
 
-```css
-# 消除锯齿
+```
+/*# 消除锯齿*/
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 -webkit-text-stroke-width: 0.2px;
 
-# 文字正体显示为背景模样，再配合-webkit-text-stroke描边也是不错的一种体验
+/*# 文字正体显示为背景模样，再配合-webkit-text-stroke描边也是不错的一种体验*/
 -webkit-text-stroke-width: 0.5px;
 -webkit-text-fill-color: transparent;
 ```
@@ -588,9 +588,9 @@ a:hover {border-color: gray;}
 
 自适应
 
-- 方法：
-- 组件：表单 、表格、图标、面包屑、菜单、导航、Modal 窗口
-- 修改源代码
+* 方法：
+* 组件：表单 、表格、图标、面包屑、菜单、导航、Modal 窗口
+* 修改源代码
 
 ## 优化
 
@@ -602,61 +602,6 @@ a:hover {border-color: gray;}
 * CSS 作为一门样式语言，语法简单，易于上手，但是由于不具备常规编程语言提供的变量、函数、继承等机制，因此很容易写出大量没有逻辑、难以复用和扩展的代码，在日常开发使用中，如果没有完善的编码规范，编写的 CSS 代码会非常冗余且难以维护
 * 基于 CSS 语言的语法扩展，除了能解决上述缺乏语言特性带来的问题之外，还支持嵌套书写，减少重复输入父级选择器（可理解为 CSS 中的继承机制），提高了代码的可读性和编写效率
 * Sass 的功能更加强大或者说 Sass 的语言层面更接近于一门完整的编程语言，而 Less 则更接近于 CSS 语法
-
-## [sass/sass](https://github.com/sass/sass)
-
-* Sass makes CSS fun again. http://sass-lang.com
-* 两种不同的后缀名分别对应两套语法
-  - 最早 Sass 使用的是缩进式语法，使用缩进来区分代码块，并通过分号将具体样式分开，这种语法以 .sass 作为后缀
-  - 使用了和 CSS 一样的块语法，这种语法以 .scss 作为后缀。后者更加兼容原生 CSS 语法
-* 编写好 Sass 文件后，需要将其编译为 CSS 文件才能在项目中使用.NPM 扩展包 node-sass 就封装了对 libSass 的实现
-* 语法
-  - 变量
-  - 数据结构包括数字、字符串、数组、颜色、布尔值、null、List、Map、函数引用
-  - 嵌套
-  - 混合（Mixin）：有一段 CSS 样式代码需要在多个地方使用，这可以通过 Sass 提供的混合（Mixin）功能来实现
-    + 定义混合代码的时候需要在选择器前面加上 @mixin 标识
-    + 引用混合代码的时候需要通过 @include 来引入
-  - 函数：
-    + 可以传入参数并实现运算功能
-    + 函数通过 @function 标识声明
-    + 函数名允许出现短划线 -
-    + 函数体内可以使用在函数声明之前定义的所有变量，同时计算时会带上变量声明时的单位
-  - 控制结构
-  - 导入:支持通过 @import 指令导入其它 Sass 文件，既可以导入本地开发文件，也可以导入前端依赖库中的文件，还可以导入网络字体文件
-  - 继承:通过 % 前缀指定用于继承的样式，然后在需要继承的地方提供 @extend 指令继承相应的父类样式
-* 教程
-  * [Sass 基础教程](http://www.sasschina.com/guide/)
-* 资源
-  * [devlint/gridlex](https://github.com/devlint/gridlex):Just a CSS Flexbox Grid System http://gridlex.devlint.fr
-  * [alexwolfe/Buttons](https://github.com/alexwolfe/Buttons):A CSS button library built using Sass and Compass http://unicorn-ui.com/buttons/builder/
-  * [eduardoboucas/include-media](https://github.com/eduardoboucas/include-media/):📐 Simple, elegant and maintainable media queries in Sass http://include-media.com
-  * [thoughtbot/bourbon](https://github.com/thoughtbot/bourbon/):A Lightweight Sass Tool Set https://www.bourbon.io/
-* 参考
-  * [thoughtbot/bourbon](https://github.com/thoughtbot/bourbon):https://github.com/thoughtbot/bourbon
-  * https://www.jianshu.com/p/e2c23a74636d
-
-## LESS
-
-* 语法
-  - 变量
-  - 嵌套引用
-  - 导入SASS文件
-  - 混合器
-  - 选择器继承来精简CSS
-* 工具
-  - [apercss/papercss](https://github.com/papercss/papercss):The Less Formal CSS Framework https://www.getpapercss.com/
-* 参考
-  - [LESS 语法](http://www.bootcss.com/p/lesscss/)
-
-```sh
-npm install -g less
-lessc style.less style.css
-```
-
-## [PostCSS](https://github.com/postcss/postcss)
-
-Transforming styles with JS plugins https://postcss.org/ <https://www.postcss.com.cn/>
 
 ## 问题
 
@@ -670,8 +615,8 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * 《CSS 世界》
 * 《[CSS 设计指南（第3版）](https://www.amazon.cn/gp/product/B00M2DKZ1W)》
 * 《[CSS 权威指南（第3版）](https://www.amazon.cn/gp/product/B0011F5SIC)》
-* 《CSS 禅意花园(修订版)》[css zen garden禅意花园](http://www.csszengarden.com/)
-* 《精通 CSS: 高级 Web 标准解决方案(第2版)》
+* [CSS 禅意花园](http://www.csszengarden.com/) css zen garden
+* 《精通 CSS: 高级 Web 标准解决方案》
 * 《众妙之门: 精通 CSS3》
 * 《[深入浅出 HTML 与 CSS](https://www.amazon.cn/gp/product/B01LXL42O5)》
 * 《[点石成金 : 访客至上的网页设计秘笈](https://www.amazon.cn/gp/product/B00QGA04RM)》
@@ -682,11 +627,13 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * Flat UI
 * Semantic UI
 * BootMetro
-* [ pure-css / pure ](https://github.com/pure-css/pure):A set of small, responsive CSS modules that you can use in every web project. https://purecss.io/
+* [pure](https://github.com/pure-css/pure):A set of small, responsive CSS modules that you can use in every web project. https://purecss.io/
 * Metro UI CSS
 * Bootswatch
 * jQuery UI Bootstrap
 * EZ-CSS
+* [PostCSS](https://github.com/postcss/postcss) Transforming styles with JS plugins https://postcss.org/ <https://www.postcss.com.cn/>
+
 * [Dogfalo/materialize](https://github.com/Dogfalo/materialize):Materialize, a CSS Framework based on Material Design https://materializecss.com
 * [BcRikko/NES.css](https://github.com/BcRikko/NES.css):NES-style CSS Framework | ファミコン風CSSフレームワーク https://bcrikko.github.io/NES.css
 * [OfficeDev/office-ui-fabric-core](https://github.com/OfficeDev/office-ui-fabric-core):The front-end CSS framework for building experiences for Office and Office 365.
@@ -695,13 +642,12 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
     tada Ready-to-use Tailwind CSS blocks. https://mertjf.github.io/tailblocks/
 * iView
 * [animate-css/animate.css](https://github.com/animate-css/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. https://animate.style/
-* [Dogfalo/materialize](https://github.com/Dogfalo/materialize) Materialize, a CSS Framework based on Material Design https://materializecss.com
 * [milligram/milligram](https://github.com/milligram/milligram) A minimalist CSS framework. https://milligram.io
 * [kbrsh/moon](https://github.com/kbrsh/moon) 🌙 The minimal & fast UI library https://kbrsh.github.io/moon [moon](http://moonjs.ga/docs/getting-started.html)
 * [picturepan2/spectre](https://github.com/picturepan2/spectre) Spectre.css - A Lightweight, Responsive and Modern CSS Framework https://picturepan2.github.io/spectre/
 * [UIkit](https://getuikit.com/):A lightweight and modular front-end framework
   for developing fast and powerful web interfaces.
-* [ shoelace-style / shoelace ](https://github.com/shoelace-style/shoelace):A collection of professionally designed, every day UI components built on a framework-agnostic technology. https://shoelace.style/
+* [shoelace](https://github.com/shoelace-style/shoelace):A collection of professionally designed, every day UI components built on a framework-agnostic technology. https://shoelace.style/
 
 ## 实例
 
@@ -712,7 +658,6 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 ## 工具
 
 * [basscss/basscss](https://github.com/basscss/basscss):Low-level CSS Toolkit http://basscss.com
-* [Dogfalo/materialize](https://github.com/Dogfalo/materialize):Materialize, a CSS Framework based on Material Design https://materializecss.com
 * [Chalarangelo/mini.css](https://github.com/Chalarangelo/mini.css):A minimal, responsive, style-agnostic CSS framework! https://minicss.org/
 * [Spiderpig86/Cirrus](https://github.com/Spiderpig86/Cirrus):☁️ The CSS framework for the modern web. https://spiderpig86.github.io/Cirrus
 * [szynszyliszys/repaintless](https://github.com/szynszyliszys/repaintless):Library for fast CSS Animations
@@ -725,6 +670,7 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 
 ## 参考
 
+* [CSS：层叠样式表](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
 * [scottjehl/Respond](https://github.com/scottjehl/Respond):A fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more)
 * [IanLunn/Hover](https://github.com/IanLunn/Hover):A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS. http://ianlunn.github.io/Hover/
 * [basscss/basscss](https://github.com/basscss/basscss):Low-level CSS Toolkit http://basscss.com
@@ -735,9 +681,9 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * [30-seconds/30-seconds-of-css](https://github.com/30-seconds/30-seconds-of-css):A curated collection of useful CSS snippets you can understand in 30 seconds or less.
 * [Jxnblk](https://jxnblk.com/)
 * [l-hammer/You-need-to-know-css](https://github.com/l-hammer/You-need-to-know-css):🖖CSS tricks web developers need to know~ https://lhammer.cn/You-need-to-know-css/
+
 * [五个最新的CSS特性以及如何使用它们](https://zhuanlan.zhihu.com/p/40736286)
 * [chokcoco/iCSS](https://github.com/chokcoco/iCSS):谈谈一些有趣的 CSS 话题
 * [danielcrisp/hot-new-css-features](https://github.com/danielcrisp/hot-new-css-features):A step-by-step demonstration of five new hot CSS features
-* [CSS：层叠样式表](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
 * [](https://generative-art-with-css.commons.host/)
 * [](https://github.com/jgthms/web-design-in-4-minutes):https://jgthms.com/web-design-in-4-minutes/
