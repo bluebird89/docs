@@ -13,22 +13,22 @@
 
 * 《设计原本》
 * 《写给大家看的设计书》：界面设计
-* 通用设计法则：交互设计
 * 《[精益设计：设计团队如何改善用户体验](https://book.douban.com/subject/24896848/)》
 * 《[用户体验草图设计](https://book.douban.com/subject/10542579/)》
 * 《[About Face 4: 交互设计精髓](https://book.douban.com/subject/26642302/)》
 * 《[移动优先+响应式Web设计](https://book.douban.com/subject/26291332/)》
 * 《[交互设计指南](https://book.douban.com/subject/4881989/)》
-* 《设计心理学》系列
+* 通用设计法则：交互设计
 * 《交互设计之路：让高科技产品回归人性（The Inmates Are Running The Asylum: Why High Tech Products Drive Us Crazy and How to Restore the Sanity）》
+* 交互设计那些事儿
+* 《设计心理学》系列
+* 设计师要懂心理学
 * 《简约至上》
 * 《用户体验的要素》
 * 《人人都是产品经理》
 * 可士和式
 * 设计中的设计
-* 设计师要懂心理学
 * 移动交互设计精髓：设计完美的移动用户界面
-* 交互设计那些事儿
 * 无懈可击的web设计
 * 无界面交互
 * 非设计人员的设计
@@ -46,4 +46,5 @@
 ## 参考
 
 * [gztchan/awesome-design](https://github.com/gztchan/awesome-design):Curated design resources
+* [awesome-product-design](https://github.com/teoga/awesome-product-design):A collection of bookmarks, resources, articles for product designers.
 * [空谷札记](https://www.yuque.com/arvinxx/note)

@@ -426,7 +426,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
 * [Here](https://here.app/)
 * [glushchenko/fsnotes](https://github.com/glushchenko/fsnotes):Notes manager for macOS/iOS
 * AutoSwitchInput - 自动切换输入法
-* Bartender 3 - 通知栏折叠工具 $15
+* [Bartender](https://www.macbartender.com/):Organize your menu bar icons
 * Hidden Bar - 另一款通知栏折叠工具
 * [eZip](https://ezip.awehunt.com/):优秀的 macOS 压缩软件
 * [poolside-fm](https://apps.apple.com/us/app/poolside-fm/id1514817810?mt=12)
@@ -784,14 +784,16 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * 四指左扫或右扫： 在全屏幕的应用之间轻扫
 * 五指张开或捏合： 显示桌面
 
-## [alfred](https://www.alfredapp.com/):a very powerful launcher that you can program to show you anything you want
+## [alfred](https://www.alfredapp.com/)
+
+a very powerful launcher that you can program to show you anything you want
 
 * 购买 Powerpack. 快捷键：option + space
 * [workflow](http://www.alfredworkflow.com/)
-* [learn-anything / alfred-workflows](https://github.com/learn-anything/alfred-workflows):Amazing Alfred Workflows
-* [gharlan / alfred-github-workflow](https://github.com/gharlan/alfred-github-workflow):GitHub Workflow for Alfred 3
-* [hzlzh / AlfredWorkflow.com](https://github.com/hzlzh/AlfredWorkflow.com):A public Collection of Alfred Workflows. http://www.alfredworkflow.com/
-* [zenorocha / alfred-workflows](https://github.com/zenorocha/alfred-workflows):🤘 A collection of Alfred 3 and 4 workflows that will rock your world
+  - [learn-anything / alfred-workflows](https://github.com/learn-anything/alfred-workflows):Amazing Alfred Workflows
+  - [gharlan / alfred-github-workflow](https://github.com/gharlan/alfred-github-workflow):GitHub Workflow for Alfred 3
+  - [hzlzh / AlfredWorkflow.com](https://github.com/hzlzh/AlfredWorkflow.com):A public Collection of Alfred Workflows. http://www.alfredworkflow.com/
+  - [zenorocha / alfred-workflows](https://github.com/zenorocha/alfred-workflows):🤘 A collection of Alfred 3 and 4 workflows that will rock your world
 
 ### features
 

@@ -83,7 +83,6 @@
 
 ## 版本
 
-
 * 2015年6月，ECMAScript 6 正式发布，并且更名为“ECMAScript 2015”。这是因为 TC39 委员会计划，以后每年发布一个 ECMAScript 的版本
 
 ## DOM Document Object Model 文档对象模型
@@ -1986,6 +1985,7 @@ rome check
 * [verekia/js-stack-from-scratch](https://github.com/verekia/js-stack-from-scratch):🛠️⚡ Step-by-step tutorial to build a modern JavaScript stack.
 * [JavaScript全栈教程](https://www.liaoxuefeng.com/wiki/1022910821149312)
   - [michaelliao/learn-javascript](https://github.com/michaelliao/learn-javascript):JavaScript全栈教程参考源码
+* [javascript-tutorial](https://github.com/wangdoc/javascript-tutorial):JavaScript 教程 https://wangdoc.com/javascript
 * [JavaScript 教程](https://wangdoc.com/javascript/index.html)
   - [ruanyf/jstutorial](https://github.com/ruanyf/jstutorial):Javascript tutorial book http://javascript.ruanyifeng.com
 * [阮一峰ECMAScript 6](http://es6.ruanyifeng.com/)

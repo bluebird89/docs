@@ -563,6 +563,7 @@ uname -sr
   - -S : 不包括子目录下的总计，与-s有点差别；
   - -k : 以KB列出容量显示
   - -m : 以MB列出容量显示
+* [duf](https://github.com/muesli/duf):Disk Usage/Free Utility
 * rm:删除文件之后，空间就被释放了吗
   - 只有当一个文件的引用计数为0（包括硬链接数）的时候，才可能调用unlink删除，只要它不是0，那么就不会被删除
   - 删除：文件名到 inode 的链接删除，只要不被重新写入新的数据，磁盘上的block数据块不会被删除
