@@ -81,7 +81,6 @@ systeminfo | findstr Build
 * Sumatra PDF
 * Foxit Reader
 * editor：Visual Studio Code
-* 电子书管理神器：Calibre
 * CCleaner, Defraggler, Recuva & Speccy.
 * Evernote
 * Foxmail

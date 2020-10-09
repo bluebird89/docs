@@ -16,7 +16,7 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
 
 * vue2
   - 通过两Object.prototype
-* Vue3
+* [Vue3](https://github.com/vuejs/vue-next) https://v3.vuejs.org/
   - 通过proxy实现
 
 ## 安装
@@ -31,6 +31,8 @@ npm insall
 npm run dev(
 # 打包文件
 npm run build
+
+vue upgrade --next
 ```
 
 ## 原理

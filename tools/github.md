@@ -131,6 +131,8 @@ jobs:
     needs: [build-and-deploy, job2]
 ```
 
+## WIP
+
 ## [CLi](https://github.com/cli/cli)
 
 * GitHub’s official command line tool https://cli.github.com
@@ -209,6 +211,12 @@ zap Dynamically generated stats for your github readmes
 ## Integrations & services
 
 * 集成其他功能：`repository > Settings > Integrations & services`
+* 工具
+  - [marketplace](https://github.com/marketplace)
+
+## [zenhub](https://app.zenhub.com)
+
+Agile project management integrated with GitHub
 
 ## 实践
 
