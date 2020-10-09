@@ -87,7 +87,7 @@
   - 通过特征工程可以避免一些over-fitting的情况，例如排除掉一些严重过度拟合的特征
   - 引入更多的训练数据，包括数据量和特征量
 * Low Bias, Low Variance：模型在训练集和测试集上表现都好，可以投入实用
-* 
+*
 
 ## 模型训练
 
@@ -179,12 +179,12 @@
     + 分类（Naive Bayes for Classification)
   - 作业/实践：垃圾邮件分类的案例
   - 决策树（Decision Tree Learning）
-    
+
         + 信息论与概率
         + 信息熵（Information Entropy）
         + ID3
   - 预测树（CART）
-    
+
         - Gini指标（Gini Index）
         - 决策树与规则（DT and Rule Learning）
   - 作业/实践：决策树分类实验
@@ -209,11 +209,11 @@
   - 作业/实践：对数几率回归的文本情感分析中应用
   - 线性判别分析 (Linear Discrimination Analysis)
   - 约束线性模型 (Linear Model with Regularization)
-    
+
         + LASSO
         + Ridge Regression
   - 稀疏表示与字典学习
-    
+
         + Sparse Representation & Coding
         + Dictionary Learning
 * 核方法（Kernel Methods）
@@ -404,6 +404,7 @@
 ## 参考
 
 * [Vay-keen/Machine-learning-learning-notes](https://github.com/Vay-keen/Machine-learning-learning-notes):周志华《机器学习》又称西瓜书是一本较为全面的书籍，书中详细介绍了机器学习领域不同类型的算法(例如：监督学习、无监督学习、半监督学习、强化学习、集成降维、特征选择等)，记录了本人在学习过程中的理解思路与扩展知识点，希望对新人阅读西瓜书有所帮助！
+* [](https://github.com/eriklindernoren/ML-From-Scratch):Machine Learning From Scratch. Bare bones NumPy implementations of machine learning models and algorithms with a focus on accessibility. Aims to cover everything from linear regression to deep learning.
 * [josephmisiti/awesome-machine-learning](https://github.com/josephmisiti/awesome-machine-learning)A curated list of awesome Machine Learning frameworks, libraries and software.
 * [ZuzooVn/machine-learning-for-software-engineers](https://github.com/ZuzooVn/machine-learning-for-software-engineers):A complete daily plan for studying to become a machine learning engineer.
 * [airbnb/aerosolve](https://github.com/airbnb/aerosolve):A machine learning package built for humans. http://airbnb.github.io/aerosolve/

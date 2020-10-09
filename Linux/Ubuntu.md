@@ -375,7 +375,6 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
     + [envice](https://wiki.gnome.org/Apps/Evince) `sudo apt install envice`
     + Foliate
     + Bookworm
-    + [Calibre](https://calibre-ebook.com/) — E-book Manager `sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin`
   - RSS
     + Liferea — Feed Reader 一个自由开源的新闻聚合工具，用于在线新闻订阅
   - Podcasts
@@ -784,7 +783,7 @@ kill -9 pid
 * default polices are defined in the /etc/default/ufw file
 * can be changed either by manually modifying the file or with the sudo ufw default <policy> <chain> command
   - ufw allow port_number/protocol
-  - 
+  -
 
 ```sh
 sudo apt install ufw
