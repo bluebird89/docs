@@ -90,7 +90,28 @@ curl -sLf https://spacevim.org/install.sh | bash
 * 普通模式下，输入:即可进入
 * Ctrl+u：删除输入方式下所输入的文本
 
-* :E Opens explorer for locating files and directories
+* :E Opens explorer for locating files and directories 浏览目录
+    - 【 – 】 到上级目录
+    - 【D】删除文件（大写）
+    - 【R】改文件名（大写）
+    - 【s】对文件排序（小写）
+    - 【x】执行文件
+    - :cd <dir> – 改变当前目录
+    - :pwd  – 查看当前目录
+    - :ls  查看缓冲区
+        + %a，这表示当前文件
+        + – （非活动的缓冲区）
+        + a （当前被激活缓冲区）
+        + h （隐藏的缓冲区）
+        + % （当前的缓冲区）
+        + # （交换缓冲区）
+        + = （只读缓冲区）
+        + + （已经更改的缓冲区）
+    - :buffer 4|:buffer src/http/ngx_http.c 切换文件
+    - :bnext      缩写 :bn
+    - :bprevious   缩写 :bp
+    - :blast  缩写 :bl
+    - :bfirst 缩写 :bf
 * 打开文件
     - `:e ftp://192.168.10.76/abc.txt`
     - `:e \\qadrive\test\1.txt`
