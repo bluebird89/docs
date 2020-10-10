@@ -156,3 +156,4 @@ onHide  当 uni-app 从前台进入后台
 * [airbnb/lottie-ios](https://github.com/airbnb/lottie-ios):An iOS library to natively render After Effects vector animations http://airbnb.io/lottie/
 * [zwwill/blog](https://github.com/zwwill/blog):✏️ stay hungry stay foolish
 * [RubyLouvre/mobileHack](https://github.com/RubyLouvre/mobileHack):移动端上遇到的各种坑
+* [](https://github.com/tauri-apps/tauri):Build smaller, faster, and more secure desktop applications with a web frontend.https://tauri.studio/

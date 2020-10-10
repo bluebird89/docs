@@ -1,5 +1,8 @@
 # [Notion](https://www.notion.so/)
 
+Work offline, collaborate in real-time, write without distractions.
+
+* 创始人 Ivan 是一位中国人，在五六年前创立了 Notion。曾因一个版本的 Notion 不够稳定，解雇了全公司的员工。之后与联合创始人搬去了日本京都从头编程，才有了如今的 Notion
 * workspace：工作空间
 * page：页面
   - 自定义icon,支持 url

@@ -7,9 +7,9 @@ npm i -g @storybook/cli
 cd my-react-app
 
 npm run storybook
-
 ```
 
 ## 参考
 
 * [Docs](https://storybook.js.org/docs/basics/introduction/)
+* [learnstorybook](https://www.learnstorybook.com/)

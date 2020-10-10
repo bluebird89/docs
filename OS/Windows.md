@@ -67,6 +67,7 @@ systeminfo | findstr Build
   - [Listary](https://www.listary.com/) :Windows 文件浏览增强工具极速的文件和APP搜索工具，可大幅度提高打开文件和app的速度
   - Everything
   - [火柴](https://huochaipro.com/)
+* [Windows File Recovery](https://www.microsoft.com/en-us/p/windows-file-recovery/9n26s50ln705)
 * Notepad++
 * 工具：ShareX
 * 同步工具：goodsync

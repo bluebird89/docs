@@ -633,13 +633,9 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * jQuery UI Bootstrap
 * EZ-CSS
 * [PostCSS](https://github.com/postcss/postcss) Transforming styles with JS plugins https://postcss.org/ <https://www.postcss.com.cn/>
-
 * [Dogfalo/materialize](https://github.com/Dogfalo/materialize):Materialize, a CSS Framework based on Material Design https://materializecss.com
 * [BcRikko/NES.css](https://github.com/BcRikko/NES.css):NES-style CSS Framework | ファミコン風CSSフレームワーク https://bcrikko.github.io/NES.css
 * [OfficeDev/office-ui-fabric-core](https://github.com/OfficeDev/office-ui-fabric-core):The front-end CSS framework for building experiences for Office and Office 365.
-* [tailwindcss/tailwindcss](https://github.com/tailwindcss/tailwindcss):A utility-first CSS framework for rapid UI development.  https://tailwindcss.com/
-  - [ mertJF / tailblocks ](https://github.com/mertJF/tailblocks):
-    tada Ready-to-use Tailwind CSS blocks. https://mertjf.github.io/tailblocks/
 * iView
 * [animate-css/animate.css](https://github.com/animate-css/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. https://animate.style/
 * [milligram/milligram](https://github.com/milligram/milligram) A minimalist CSS framework. https://milligram.io

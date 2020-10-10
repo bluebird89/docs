@@ -244,6 +244,10 @@
 - WIP: Work In Progress，未完成，还在进行中
 - WYSIWYG: What You See Is What You Get, 所见即所得
 
+## 工具
+
+* [bluespice](https://bluespice.com/)
+
 ## 资源
 
 * [](https://www.nexthink.com/periodic-table/)

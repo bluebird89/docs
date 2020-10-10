@@ -269,6 +269,11 @@
 * 编程规范主要解决的是代码的可读性问题。编码规范相对于设计原则、设计模式，更加具体、更加偏重代码细节、更加能落地。持续的小重构依赖的理论基础主要就是编程规范
 * 重构作为保持代码质量不下降的有效手段，利用的就是面向对象、设计原则、设计模式、编码规范这些理论
 
+## 编程范式
+
+* 面向对象编程 Object Oriented Programming OOP
+* 过程式编程 procedural programming
+
 ## 任务分解
 
 * 将复杂问题拆解为可验证的、相互独立的、简单任务；当所有简单任务都完成时，复杂问题也就解决了
@@ -508,6 +513,7 @@
 * [hellerve/programming-talks](https://github.com/hellerve/programming-talks):Awesome & interesting talks about programming
 * [charlax/professional-programming](https://github.com/charlax/professional-programming):A collection of full-stack resources for programmers.
 * [Full Stack Developer's Roadmap](https://dev.to/ender_minyard/full-stack-developer-s-roadmap-2k12)
+* [todomvc](https://github.com/tastejs/todomvc)Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com/
 * [What every computer science major should know](http://matt.might.net/articles/what-cs-majors-should-know/)
   - 个人来说，作品集（Portfolio）会比简历（Resume）更有参考意义
   - 计算机专业工作者也要学会与人交流的技巧，包括如何写演示文稿，以及面对质疑时如何与人辩论的能力
