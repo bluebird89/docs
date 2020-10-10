@@ -446,7 +446,8 @@
 
 ## 参考
 
-* [Extremeprogramming](http://www.extremeprogramming.org/)
+* [Extreme programming](http://www.extremeprogramming.org/)
+* [eXtremeProgramming-cn/xp-gym-training](https://github.com/eXtremeProgramming-cn/xp-gym-training):Free open source training materials for eXtreme Programming practitioners and promoters
 * [](http://www.extremeprogramming.cn/)
 * [XPdeveloper](http://http://www.xpdeveloper.com/)
 * [Xprogramming](http://www.xprogramming.com/)

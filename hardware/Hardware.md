@@ -165,6 +165,10 @@ EndSection
 
 * [CS107e: Computer Systems from the Ground Up](http://cs107e.github.io/)
 
+## 项目
+
+* [open-source-rover](https://github.com/nasa-jpl/open-source-rover):A build-it-yourself, 6-wheel rover based on the rovers on Mars! https://opensourcerover.jpl.nasa.gov/
+
 ## 工具
 
 * [Krog](https://www.korg.com)
