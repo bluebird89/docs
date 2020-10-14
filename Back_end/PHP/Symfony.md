@@ -139,6 +139,10 @@ Warning: "continue" targeting switch is equivalent to
   "break". Did you mean to use "continue 2"
 ```
 
+## 图书
+
+* [The Definitive Guide to symfony](https://github.com/Apress/def-guide-to-symfony) http://www.apress.com/9781590597866
+
 ## 工具
 
 * Debug

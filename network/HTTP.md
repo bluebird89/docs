@@ -66,8 +66,9 @@
   - `https://www.baidu.com?key1=vvalue1&key2=value2#test`
   - hash，哈希值或者称为锚，是#后面的字符串，一般作为单页应用的路由地址，或者文档的锚
 
-## [跨源资源共享 cross-origin resource sharing CORS（俗称『跨域请求』）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
+## [跨源资源共享 cross-origin resource sharing CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
 
+* 俗称『跨域请求』
 * 允许浏览器向跨源服务器，发出XMLHttpRequest请求，克服了AJAX只能同源使用的限制.浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉
 * 限制获取cookie，用iframe的方式放置了一个淘宝网页到真实页面中，获取淘宝密码信息
 * 同源策略/SOP（Same origin policy）：从一个域上加载的脚本不允许访问另外一个域的文档属性，只要协议、域名、端口有任何一个不同，都被当作是不同的域.除非两个网页是来自于统一‘源头’，否则不允许一个网页的JavaScript访问另外一个网页的内容，像Cookie，DOM，LocalStorage统统禁止访问

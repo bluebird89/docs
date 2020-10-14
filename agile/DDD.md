@@ -396,6 +396,10 @@ public class OrderCreatedEvent extends OrderEvent {
 
 * [citerus/dddsample-core](https://github.com/citerus/dddsample-core):This is the new home of the original DDD Sample app (previously hosted at sf.net)
 * [heynickc/awesome-ddd](https://github.com/heynickc/awesome-ddd):A curated list of Domain-Driven Design (DDD), Command Query Responsibility Segregation (CQRS), Event Sourcing, and Event Storming resources
+* [ddd-starter-modelling-process](https://github.com/ddd-crew/ddd-starter-modelling-process):If you're new to DDD and not sure where to start, this process will guide you step-by-step
+* [free-ddd-learning-resources](https://github.com/ddd-crew/free-ddd-learning-resources):A collection of resources for learning DDD. All are free to access.
+* [](https://github.com/valignatev/ddd-dynamic):Domain Driven Design in Python, Ruby and other dynamic languages resources
+
 * [使用什么样的开发流程才能更好实现DDD？不是敏捷！](https://www.jdon.com/54721)
 * [领域驱动设计(DDD)实现之路](https://www.jianshu.com/p/cdbefdd55b99)
 * [领域驱动设计(DDD)编码实践](https://www.jianshu.com/p/84f1d922a6d4)
