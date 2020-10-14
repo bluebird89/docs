@@ -16,3 +16,5 @@
 ## 参考
 
 * [](https://www.mindtools.com/)
+* [](https://github.com/ssjssh/notes)
+* [](https://github.com/TeamStuQ/skill-map)程序员技能图谱  github.com/teamstuq/skill-map
