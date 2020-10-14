@@ -967,6 +967,7 @@ man 2 execve
 
 * [cfenollosa/os-tutorial](https://github.com/cfenollosa/os-tutorial):How to create an OS from scratch
 * [30dayMakeOS](git@github.com:yourtion/30dayMakeOS.git)
+* [How-to-Make-a-Computer-Operating-System](https://github.com/SamyPesse/How-to-Make-a-Computer-Operating-System):How to Make a Computer Operating System in C++ samypesse.gitbook.io/how-to-create-an-operating-system
 
 * [操作系统中用到的那些魔鬼算法](https://mp.weixin.qq.com/s/J6PdEPV180ZkiUJJo97w6Q)
 * [设计高性能高并发网络系统需考虑哪些因素](https://mp.weixin.qq.com/s/aE0Q0syOO0mThn2_pBBKHw)
