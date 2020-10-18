@@ -1523,7 +1523,7 @@ WHERE cust_name = 'Fun4All';
   - 逻辑日志，由 Server 层进行记录，使用任何存储引擎的 mysql 数据库都会记录 binlog 日志
   - 通过追加方式进行写入，可以通过`max_binlog_size`参数设置每个 binlog 文件的大小，当文件大小达到给定值之后，会生成新文件来保存日志
   - 场景
-    + 主从复制 ：在 Master 端开启 binlog ，然后将 binlog发送到各个 Slave 端， Slave 端重放 binlog 从而达到主从数据一致。
+    + 主从复制 ：在 Master 端开启 binlog ，然后将 binlog发送到各个 Slave 端， Slave 端重放 binlog 从而达到主从数据一致
     + 数据恢复 ：通过使用 mysqlbinlog 工具来恢复数据
   - 刷盘
     + 对于 InnoDB 存储引擎而言，只有在事务提交时才会记录biglog. 通过 sync_binlog 参数控制 biglog 刷盘时机，取值范围是 0-N
@@ -1552,19 +1552,23 @@ WHERE cust_name = 'Fun4All';
     * 最简单的做法是在每次事务提交时候，将该事务涉及修改的数据页全部刷新到磁盘中。但是会有严重性能问题
       - 因为 Innodb 是以页为单位进行磁盘交互的，一个事务很可能只修改一个数据页里面几个字节，这个时候将完整的数据页刷到磁盘的话，太浪费资源了
       - 一个事务可能涉及修改多个数据页，并且这些数据页在物理上并不连续，使用随机IO写入性能太差
+  + 会把数据库事务在执行过程中对数据库所做的所有修改以 redo 日志的方式持久化到磁盘，之后需要进行数据恢复时，通过对应的 redo 日志来恢复数据即可
   + redo log 实际上记录数据页的物理修改，这种变更记录是没必要全部保存，因此 redo log 实现上采用了大小固定，循环写入的方式，比如可以配置为一组 4 个文件，每个文件大小是 1GB，那么总共就可以记录 4GB 的操作。当写到结尾时，会回到开头循环写日志
-    * 用来恢复提交后的物理数据页(恢复数据页，且只能恢复到最后一次提交的位置)。
+    * 用来恢复提交后的物理数据页(恢复数据页，且只能恢复到最后一次提交的位置)
     * 通过日志组来管理日志文件，是一个逻辑定义，包含若干个日志文件，一个组中日志文件大小相等，大小通过参数来设置。现在 InnoDB 只⽀持一个日志组。在 MySQL5.5 及之前的版本中，整个日志组的容量不能大于 4GB（实际上是 3.9GB 多，因为还有一些文件头信息等），到了 MySQL 5.6.3 版本之后，整个日志组的容量可以设置得很大，最大可以达到 512GB
     * show variables like 'datadir',在 InnoDB 存储引擎中，一般默认包括 2 个日志文件，新建数据库之后，会有名为 ib_logfile0 和 ib_logfile1 的两个文件，如果在启动数据库时，这两个文件不存在，则 InnoDB 会根据配置参数或默认值，重新创建日志文件
     * 将缓冲区 log buffer 里面的 redo 日志刷新到这个两个文件里面，写入方式是循环写入
   + WAL（Write-Ahead Logging）：先写日志，再写磁盘
     * 每执行一条 DML 语句，**先将记录写入 redo log buffer，这个时候更新就算完成了**
     * 适当时候，一次性将多个操作记录写到 redo logfile，而这个更新往往是在系统比较空闲的时候做
-  + redo log 写入拆成了两个步骤：prepare 和 commit，就是两阶段提交
-    * prepare 主要是将所有这个物理事务产生的日志写入到 InnoDB 日志系统日志缓冲区中，然后等待 srvmasterthread 线程定时将日志系统的日志缓冲区中的日志数据刷到日志文件中，这会涉及日志刷盘时机问题
-    * 日志产生的作用，是将随机页面的写入变成顺序日志的写入，从而用一个速度更快的写入来保证速度较慢的写入的完整性，以提高整体数据库的性能。其根本目的是要将随机变成顺序，所以日志的量才是一个相对固定循环使用的空间
+  + redo log 两阶段提交：prepare 和 commit
+    * 更新数据后，先将其更新到内存，同时将这个更新操作记录到 redo log，此时 redo log 处于 prepare 状态，然后告知执行器执行完成了，随时可以提交事务
+    * 执行器生成这个操作的 binlog，并把 binlog 写入磁盘
+    * 执行器调用引擎的提交事务接口，引擎把刚刚写入的 redo log 改成 commit 状态，更新完成
+    * prepare 主要是将物理事务产生的日志写入到 InnoDB 日志系统日志缓冲区中，然后等待 srvmasterthread 线程定时将日志系统的日志缓冲区中的日志数据刷到日志文件中，会涉及日志刷盘时机问题
+    * 日志作用:将随机页面的写入变成顺序日志的写入，从而用一个速度更快的写入来保证速度较慢的写入的完整性，以提高整体数据库的性能。其根本目的是要将随机变成顺序，所以日志的量才是一个相对固定循环使用的空间
     * 不使用两阶段提交，会导致两份日志恢复的数据不一致：比如先写 redo log，binlog 还没有写入，数据库崩溃重启；或者先写 binlog，redo 还没有写入数据库崩溃重启，都将造成恢复数据的不一致
-    * 使用两阶段提交后，就可以保证两份日志恢复的数据一致：只有 binlog 写入成功的情况下，才会提交 redo log，否则 redo log 处于 prepare 状态，事务会回滚，这样一来，就保证了数据的一致性
+    * 使用两阶段提交可以保证两份日志恢复的数据一致：只有 binlog 写入成功的情况下，才会提交 redo log，否则 redo log 处于 prepare 状态，事务会回滚，这样一来，就保证了数据的一致性
   + redo log buffer
     * `show VARIABLES like 'innodb_log_buffer_size'`
     * 刷新到硬盘 buffer
@@ -2272,11 +2276,15 @@ where a.table_id=b.table_id and a.space <> 0;
       * 表结构保存在 .frm 文件中
       * 数据和索引在 `innodb_data_home_dir` 和 ` innodb_data_file_path`定义的表空间中，可以是多个文件
     + 多表空间存储：段-》区（1M，最多可包含64页）->页（16k）
-      * 表结构保存在 .frm 文件中。
-      * `innodb_file_per_table` 从MySQL5.6开始已经设置为1。这样设置，schema中每个表都是一个文件（如果是分区表，则有多个文件），每个表的数据和索引单独保存在 .ibd 中,这个文件被分为N个段。每个段都与一个索引相关联
-        - 文件不会因删除数据而收缩，段本身会增长或收缩
+      * 表结构保存在 .frm 文件中
+      * `innodb_file_per_table`从MySQL5.6开始已经设置为1。这样设置，schema中每个表都是一个文件（如果是分区表，则有多个文件），每个表的数据和索引单独保存在 .ibd 中,这个文件被分为N个段。每个段都与一个索引相关联
+        - 当参数为 OFF 的时候，所有数据都存放于默认路径下名为 ibdata* 的共享表空间里，即将数据库所有的表数据及索引文件存放到一个文件中。在删除数据表的时候，ibdata* 文件不会自动收缩
+        - 参数为 ON 的时候，每一个表都将存储在一个以 .ibd 为后缀的文件中。这样每个表都有了自己独立的表空间，通过 drop table 命令就可以将表空间进行回收
+        - OFF->ON:修改前的数据还维持原状，也就是说之前的数据继续存放于 ibdata* 文件中，修改后的使用独立表空间
         - 一个页可以包含2到N行。一个页可以容纳的行数与行大小有关，这是表结构设计时定义的。InnoDB中有一个规则，至少要在一个页中容纳两行。因此，行大小限制为8000字节。
     + InnoDB 会根据主键 ID 作为 KEY 建立索引 B+树，B+树的叶子节点存储的是主键 ID 对应的数据。建表的时候 InnoDB 就会自动建立好主键 ID 索引树。是为什么 Mysql 在建表时要求必须指定主键的原因
+  - 删掉 记录，InnoDB 引擎只会将其标记为删除状态，并不会真正把这行数据所占的空间释放掉，也就是说这个坑位还留着。如果后续所插入，这个空间是可以被使用上的
+  - 一页的数据都被删掉了，那么 所在的空间都会被标记为可复用。如果插入的数据需要使用新页的话，原来坑位就可以被利用起来了
   - 特点
     + 插入缓冲（Insert buffer): Insert Buffer 用于非聚集索引的插入和更新操作。先判断插入的非聚集索引是否在缓存池中，如果在则直接插入，否则插入到 Insert Buffer 对象里。再以一定的频率进行 Insert Buffer 和辅助索引叶子节点的 merge 操作，将多次插入合并到一个操作中，提高对非聚集索引的插入性能
     + 二次写 (Double write): Double Write由两部分组成，一部分是内存中的double write buffer，大小为2MB，另一部分是物理磁盘上共享表空间连续的128个页，大小也为 2MB。在对缓冲池的脏页进行刷新时，并不直接写磁盘，而是通过 memcpy 函数将脏页先复制到内存中的该区域，之后通过doublewrite buffer再分两次，每次1MB顺序地写入共享表空间的物理磁盘上，然后马上调用fsync函数，同步磁盘，避免操作系统缓冲写带来的问题。
@@ -2435,6 +2443,10 @@ where a.table_id=b.table_id and a.space <> 0;
     + 插入，然后回滚,回收：`alter table ins_frag engine=innodb;`
     + 插入语句失败
     + 页分裂引起的碎片
+* optimize table 的本质是 ALTER TABLE xxx ENGINE = InnoDB;
+  - 5.5 之前：通过触发器，将旧表更新同步到新表中
+  - 5.5 之后：重做 redo log
+  - 创建大表时，使用下面的建表语句可节省 50% 左右的空间：ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=8
 
 ```sql
 show engines; # 显示当前数据库支持的存储引擎情况
@@ -3792,7 +3804,6 @@ WantedBy=multi-user.target
 * mysqlcheck
 
 ```sh
-mysqldump -uXXX -p osdc osdc_XXX > /tmp/osdc_info.sql；
 show variables like '%slave_parallel_workers%';
 show variables like '%innodb_lock_wait_timeout%';
 show variables like '%slave_transaction_retries%';
@@ -3803,9 +3814,16 @@ select * into outfile 文件地址 [控制格式] from 表名;   # 导出表数�
 SELECT a,b,a+b INTO OUTFILE '/tmp/result.text' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' FROM test_table;
 load data [local] infile 文件地址 [replace|ignore] into table 表名 [控制格式]; # 导入数据
 
+# 导出所有数据库
 mysqldump [-h 主机名] -u 用户名 -p --all-databases > dump.sql
+# 导出指定数据库
 mysqldump [-h 主机名] -u 用户名 -p --databases 库名1 [库名2 ...] > dump.sql
-mysqldump [-h 主机名] -u 用户名 -p 库名 表名1 [表名2 ...] > dump.sql
+# 导出指定表
+mysqldump [-h 主机名] -u 用户名 -p 库名 --tables 表名1 [表名2 ...] > dump.sql
+# 根据条件导出数据
+mysqldump -uroot -p123456 --databases db --tables a --where='id=1' >/tmp/a.sql
+# 只导出表结构
+mysqldump -uroot -p123456 --no-data --databases db  >/tmp/db.sql
 
 mysqldump -u wcnc -p -d –add-drop-table smgp_apps_wcnc >d:wcnc_db.sql # 导出数据结构
 mysqldump -uroot -p test > /download/testbak_$(date +%F).sql
