@@ -380,6 +380,7 @@ public class OrderCreatedEvent extends OrderEvent {
 ## 项目
 
 * [jivejdon](https://github.com/banq/jivejdon):Jivejdon is a Domain Driven Design appication with CQRS/ES/Clean/Hexagonal architecture
+* [freedom](https://github.com/8treenet/freedom):Freedom是一个基于六边形架构的框架，可以支撑充血的领域模型范式。
 
 ## 图书
 
