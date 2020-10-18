@@ -432,6 +432,7 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 * 《[More Effective C++:35个改善编程与设计的有效方法(中文版)](https://www.amazon.cn/gp/product/B004IP8BD6) 》
 * 《C++ 标准程序库》
 * 《STL源码剖析》
+* inside c++model
 * 《深度探索C++对象模型》
 * Think in C++
 * Modern C++ Tutorial

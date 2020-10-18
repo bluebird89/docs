@@ -424,7 +424,7 @@ open http://127.0.0.1:8000
   - [Shopware](https://github.com/shopware/shopware): 一个可高度定制的电子商务软件
   - [Swap](https://github.com/florianv/swap): 一个汇率库
   - [Sylius](http://sylius.org/): 一个开源的电子商务解决方案
-  - [ invoiceninja / invoiceninja ](https://github.com/invoiceninja/invoiceninja):Invoices, Expenses and Tasks built with Laravel and Flutter https://invoiceninja.com
+  - [invoiceninja ](https://github.com/invoiceninja/invoiceninja):Invoices, Expenses and Tasks built with Laravel and Flutter https://invoiceninja.com
 * PDF 处理PDF文件的库和软件
   - (https://github.com/dompdf/dompdf)[Dompdf]: 一个将HTML转换为PDF的工具
   - (https://github.com/psliwa/PHPPdf)[PHPPdf]: 一个将XML文件转换为PDF和图片的库
@@ -712,6 +712,7 @@ open http://127.0.0.1:8000
   - (https://github.com/phpmyadmin/phpmyadmin)[phpMyAdmin]: 一个MySQL/MariaDB的web界面
   - (https://www.adminer.org/)[Adminer]: 一个数据库管理工具
   - (https://github.com/getgrav/grav)[Grav]: 一个现代的flat－file的CMS
+  - [phpsysinfo](https://github.com/phpsysinfo/phpsysinfo):phpSysInfo: a customizable PHP script that displays information about your system nicely http://phpsysinfo.github.com/phpsysinfo
 * 基础架构 Infrastructure 提供PHP应用和服务的基础架构
   - [appserver.io](http://appserver.io/): 一个用PHP写的多线程的PHP应用服务器
   - [php-pm](https://github.com/php-pm/php-pm): 一个PHP应用的进程管理器、修改器和负载平衡器
@@ -793,6 +794,7 @@ open http://127.0.0.1:8000
 * [elarity/advanced-php](https://github.com/elarity/advanced-php):最近打算写一些php一些偏微妙的教程，比如关于多进程、socket等相关，都是自己的一些感悟心得
 * [php architect Magazine](https://www.phparch.com/magazine/)
 * [PHP Best Practices](https://phpbestpractices.org/)
+* [PHP7-Data-Structures-and-Algorithms](https://github.com/PacktPublishing/PHP7-Data-Structures-and-Algorithms):PHP 7 Data Structures and Algorithm, published by Packt
 
 ## PHP内核
 
@@ -890,8 +892,6 @@ open http://127.0.0.1:8000
 ## coding standard
 
 * [Symplify/EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard):[READ-ONLY] Easiest way to start using PHP CS Fixer and PHP_CodeSniffer with 0-knowledge
-
-## [PacktPublishing / PHP7-Data-Structures-and-Algorithms](https://github.com/PacktPublishing/PHP7-Data-Structures-and-Algorithms):PHP 7 Data Structures and Algorithm, published by Packt
 
 ## 存储
 
