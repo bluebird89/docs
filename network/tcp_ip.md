@@ -1,4 +1,4 @@
-## TCP/IP 传输控制协议/网际协议 (Transmission Control Protocol / Internet Protocol)
+## TCP/IP 传输控制协议/网际协议 Transmission Control Protocol/Internet Protocol
 
 * OSI七层协议体系结构，在五层协议中应用层下面加了表示层和会话层
   - 应用层：打包请求，根据传输数据加密与否分为 HTTP 请求和 HTTPS 请求，封装请求头和请求参数，应用层的包通过 Socket 编程交个下一层去完成
@@ -6,12 +6,11 @@
   - 网络层：封装客户与服务IP地址
   - 数据链路层：本地客户端MAC 本地网关MAC
   - 物理层
-* 通信的过程其实就对应着数据入栈与出栈的过程,供已连接因特网的计算机进行通信的通信协议,定义了电子设备（比如计算机）如何连入因特网，以及数据如何在它们之间传输的标准。包含了一系列构成互联网基础的网络协议，是Internet的核心协议
+* 通信过程其实就对应着数据入栈与出栈的过程,供已连接因特网的计算机进行通信的通信协议,定义了电子设备（比如计算机）如何连入因特网，以及数据如何在它们之间传输的标准。包含了一系列构成互联网基础的网络协议，是Internet的核心协议
   - 入栈:数据发送方每层不断地封装首部与尾部，添加一些传输的信息，确保能传输到目的地
   - 出栈:数据接收方每层不断地拆除首部与尾部，得到最终传输的数据
   - TCP 负责将数据分割并装入 IP 包，然后在到达的时候重新组合
   - IP 负责将包发送至接受者
-* 思考TCP/IP在发展过程中的问题以及解决方案，并且当前存在的瓶颈作出自己的判断和思考，都是很有益的
 * RTT：“We define the round-trip time, which is the time it takes for a small packet to travel from client to server and back to the client.” “The RTT includes packet-propagation delays, packet-queuing delays and packet -processing delay.” RTT=传播时延（往返）+排队时延（路由器和交换机的）+数据处理时延（应用程序的）
 
 ## 应用层
@@ -26,7 +25,7 @@
 * 序列号：用来解决乱序问题等
 * 窗口大小：用来做流量控制
 
-## TCP Transmission Control Protocol 传输控制协议
+### TCP Transmission Control Protocol 传输控制协议
 
 * 基于连接的协议、端到端和可靠的数据包发送。应用程序之间通信,当应用程序希望通过 TCP 与另一个应用程序通信时，会发送一个通信请求。这个请求必须被送到一个确切的地址。在双方“握手”之后，TCP 将在两个应用程序之间建立一个全双工 (full-duplex) 的通信。在数据传送前分割为 IP 包，然后在到达时重组
 + 建立在不可靠的网络层 IP 协议之上，IP协议并不能提供任何可靠性机制，TCP的可靠性完全由自己实现，提供的服务包括数据流传送、可靠性、有效流控、全双工操作和多路复用
@@ -37,7 +36,7 @@
   * 能够提供错误校验和，甄别有害的数据包
   * TCP头部：20个字节的固定首部
 + 编程步骤
-  * 服务器端： 
+  * 服务器端
     - 创建一个socket，用函数socket()； 
     - 设置socket属性，用函数setsockopt(); *可选*
     - 绑定IP地址、端口等信息到socket上，用函数bind(); 
@@ -81,7 +80,23 @@
   * Ws: 窗口缩放调整因子：在前面说 TCP 窗口大小中说到，默认情况下， TCP 窗口大小最大只能支持 64KB的缓冲数据，在今天这个高速上网时代，这个大小肯定不满足条件了，所以，为了能够支持更多的缓冲数据 RFC 1323中就规定了 TCP 的扩展选项，其中窗口缩放调整因子就是其中之一，这个是如何起作用的呢？首先说明，这个参数是在 [SYN] 同步阶段进行协商的，结合抓包数据分析下。看到第一次请求协商的结果是 WS=256,然后再 ACK 阶段扩展因子生效，调整了窗口大小
   * 检验和 —— 占 2 字节。检验和字段检验的范围包括首部和数据这两部分。在计算检验和时，要在TCP 报文段的前面加上 12 字节的伪部(协议字段为6，表示TCP)
   * 紧急指针字段 —— 占 16 位，指出在本报文段中紧急数据共有多少个字节(紧急数据放在本报文段数据的最前面)
-  * 选项字段 —— 长度可变。① 最大报文段长度 MSS：MSS是指在TCP连接建立时，收发双发协商的通信时每一个报文段所能承载的数据字段的最大长度（并不是TCP报文段的最大长度，而是：MSS=TCP报文段长度-TCP首部长度），单位为字节（双方提供的MSS中的最小值，为本次连接的最大MSS值）；② 窗口扩大选项；③ 时间戳选项； ④ 选择确认选项；
+  * 选项字段 —— 长度可变。① 最大报文段长度 MSS：MSS是指在TCP连接建立时，收发双发协商的通信时每一个报文段所能承载的数据字段的最大长度（并不是TCP报文段的最大长度，而是：MSS=TCP报文段长度-TCP首部长度），单位为字节（双方提供的MSS中的最小值，为本次连接的最大MSS值）；② 窗口扩大选项；③ 时间戳选项； ④ 选择确认选项
+* TCP报文首部
+  - 源端口和目的端口，各占2个字节，分别写入源端口和目的端口
+  - 序列号:占4个字节，TCP连接中传送的字节流中的每个字节都按顺序编号。通过 SYN 包传给接收端主机，每发送一次数据，就「累加」一次该「数据字节数」的大小。用来解决网络包乱序问题
+  - 确认应答号:占4个字节，是期望收到对方下一个报文的第一个数据字节的序号。例如，B收到了A发送过来的报文，其序列号字段是501，而数据长度是200字节，这表明B正确的收到了A发送的到序号700为止的数据。因此，B期望收到A的下一个数据序号是701，于是B在发送给A的确认报文段中把确认号置为701；用来解决不丢包的问题
+  - 数据偏移，占4位，它指出TCP报文的数据距离TCP报文段的起始处有多远；
+  - 保留，占6位，保留今后使用，但目前应都位0；
+  - 紧急URG，当URG=1，表明紧急指针字段有效。告诉系统此报文段中有紧急数据；
+  - 确认ACK，仅当ACK=1时，确认号字段才有效。TCP规定，在连接建立后所有报文的传输都必须把ACK置1；
+  - 推送PSH，当两个应用进程进行交互式通信时，有时在一端的应用进程希望在键入一个命令后立即就能收到对方的响应，这时候就将PSH=1；
+  - 复位RST，当RST=1，表明TCP连接中出现严重差错，必须释放连接，然后再重新建立连接；
+  - 同步SYN，在连接建立时用来同步序号。当SYN=1，ACK=0，表明是连接请求报文，若同意连接，则响应报文中应该使SYN=1，ACK=1；
+  - 终止FIN，用来释放连接。当FIN=1，表明此报文的发送方的数据已经发送完毕，并且要求释放；
+  - 窗口，占2字节，指的是通知接收方，发送本报文你需要有多大的空间来接受；
+  - 检验和，占2字节，校验首部和数据这两部分；
+  - 紧急指针，占2字节，指出本报文段中的紧急数据的字节数；
+  - 选项，长度可变，定义一些其他的可选的参数
 * 三次握手 建立连接：客户端与服务端建立起可靠的双工的连接。(3个包)
   * 第一次握手：客户端向服务器发送请求报文段 SYN，其中同步位SYN=1，序号SEQ=x（表明传送数据时的第一个数据字节的序号是x），并进入SYN_SEND状态，等待服务器确认
   * 第二次握手：服务器收到客户端发来的请求，如果同意建立连接，就发回一个确认报文段 SYN-ACK，该报文段中同步位SYN=1，确认号ACK=x+1，序号SEQ=y,此时服务器进入SYN_RECV状态
@@ -212,25 +227,7 @@ hping3 -S -p 80 --flood 192.168.33.10
 netstat -s | grep "SYNs to LISTEN" # 查看累计
 ```
 
-## TCP报文首部
-
-* 源端口和目的端口，各占2个字节，分别写入源端口和目的端口
-* 序列号:占4个字节，TCP连接中传送的字节流中的每个字节都按顺序编号。通过 SYN 包传给接收端主机，每发送一次数据，就「累加」一次该「数据字节数」的大小。用来解决网络包乱序问题
-* 确认应答号:占4个字节，是期望收到对方下一个报文的第一个数据字节的序号。例如，B收到了A发送过来的报文，其序列号字段是501，而数据长度是200字节，这表明B正确的收到了A发送的到序号700为止的数据。因此，B期望收到A的下一个数据序号是701，于是B在发送给A的确认报文段中把确认号置为701；用来解决不丢包的问题
-* 数据偏移，占4位，它指出TCP报文的数据距离TCP报文段的起始处有多远；
-* 保留，占6位，保留今后使用，但目前应都位0；
-* 紧急URG，当URG=1，表明紧急指针字段有效。告诉系统此报文段中有紧急数据；
-* 确认ACK，仅当ACK=1时，确认号字段才有效。TCP规定，在连接建立后所有报文的传输都必须把ACK置1；
-* 推送PSH，当两个应用进程进行交互式通信时，有时在一端的应用进程希望在键入一个命令后立即就能收到对方的响应，这时候就将PSH=1；
-* 复位RST，当RST=1，表明TCP连接中出现严重差错，必须释放连接，然后再重新建立连接；
-* 同步SYN，在连接建立时用来同步序号。当SYN=1，ACK=0，表明是连接请求报文，若同意连接，则响应报文中应该使SYN=1，ACK=1；
-* 终止FIN，用来释放连接。当FIN=1，表明此报文的发送方的数据已经发送完毕，并且要求释放；
-* 窗口，占2字节，指的是通知接收方，发送本报文你需要有多大的空间来接受；
-* 检验和，占2字节，校验首部和数据这两部分；
-* 紧急指针，占2字节，指出本报文段中的紧急数据的字节数；
-* 选项，长度可变，定义一些其他的可选的参数
-
-## 连接建立（三次握手）
+## 三次握手连接建立
 
 * 开始的时候客户端和服务器都是处于CLOSED状态。主动打开连接的为客户端，被动打开连接的是服务器
 * TCP服务器进程先创建传输控制块TCB，时刻准备接受客户进程的连接请求，此时服务器就进入了LISTEN（监听）状态；
@@ -246,7 +243,7 @@ netstat -s | grep "SYNs to LISTEN" # 查看累计
 netstat -napt
 ```
 
-## 连接释放（四次挥手）
+## 四次挥手释放连接
 
 * 数据传输完毕后，双方都可释放连接。最开始的时候，客户端和服务器都是处于ESTABLISHED状态，然后客户端主动关闭，服务器被动关闭。
 * 客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。
@@ -423,7 +420,21 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 
 ![Alt text](__/_static/tcp_block_control.png "Optional title")
 
-## UDP（User Data Protocol，用户数据报协议）
+## TCP BBR
+
+Google给出的一个改良版的tcp网络协议，相当于在已有TCP协议的基础上打了个补丁的意思，这个改良版TCP协议对拥塞控制有很好的支持，对于网络较差的环境有不错的应用场景.Linux系统内核版本大于4.9
+
+```
+echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+
+sysctl   -p # 配置生效
+
+sysctl net.ipv4.tcp_available_congestion_control # 查看
+lsmod | grep bbr
+```
+
+## UDP User Data Protocol 用户数据报协议
 
 + 编程步骤
   * 服务器端： 
@@ -447,8 +458,8 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
   * 具有低延迟的特点
   * 能够发送大量的数据包
   * 能够允许 DNS 查找，DNS 是建立在 UDP 之上的应用层协议
-+ 面向报文：应用层交给UDP多长的报文，UDP就照样发送，即一次发送一个报文。因此，应用程序必须选择合适大小的报文。若报文太长，则IP层需要分片，降低效率。若太短，会是IP太小。
-+ UDP则不为IP提供可靠性、流控或差错恢复功能,让广播和细节控制交给应用的通信传输
++ 面向报文：应用层交给UDP多长的报文，UDP就照样发送，即一次发送一个报文。因此，应用程序必须选择合适大小的报文。若报文太长，则IP层需要分片，降低效率。若太短，会是IP太小
++ 不为IP提供可靠性、流控或差错恢复功能,让广播和细节控制交给应用的通信传输
 + 首部开销小，只有8个字节:因为UDP不需要应答，所以来源端口是可选的，如果来源端口不用，那么置为零
 + UDP支持的应用层协议主要有：NFS（网络文件系统）、SNMP（简单网络管理协议）、DNS（主域名称系统）、TFTP（通用文件传输协议）动态主机配置协议（DHCP）路由信息协议（RIP）自举协议（BOOTP）实时游戏（自定义重传策略，能够把丢包产生的延迟降到最低，尽量减少网络问题对游戏性造成的影响）
 + 场景：对网络通讯质量要求不高，要求网络通讯速度能尽量的快。流媒体、实时游戏、物联网
@@ -465,25 +476,27 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 
 ## TCP vs UDP
 
-- TCP是面向连接(Connection oriented)，UDP是无连接(Connection less)协议
+* TCP是面向连接(Connection oriented)，UDP是无连接(Connection less)协议
   + TCP 是面向连接的传输层协议，传输数据前先要建立连接。
   + UDP 是不需要连接，即刻传输数据。
 * 首部开销
   + TCP 首部长度较长，会有一定的开销，首部在没有使用「选项」字段时是 20 个字节，如果使用了「选项」字段则会变长的
   + UDP 首部只有 8 个字节，并且是固定不变的，开销较小
-- TCP是重量级的，UDP是轻量级的；TCP要建立连接、保证可靠性和有序性，就会传输更多的信息，如TCP头部需要20字节，UDP头部只要8个字节，为什么视频流、广播电视、在线多媒体游戏等选择使用UDP
-- TCP无界，UDP有界；TCP通过字节流传输，流模式（TCP）一连串无结构的字节流；UDP中每一个包都是单独的，数据报模式(UDP)
-- 可靠性
+* TCP是重量级的，UDP是轻量级的；TCP要建立连接、保证可靠性和有序性，就会传输更多的信息，如TCP头部需要20字节，UDP头部只要8个字节，为什么视频流、广播电视、在线多媒体游戏等选择使用UDP
+* TCP无界，UDP有界
+  - TCP通过字节流传输，流模式（TCP）一连串无结构的字节流
+  - UDP中每一个包都是单独的，数据报模式(UDP)
+* 可靠性
   - TCP 是可靠交付数据的，数据可以无差错、不丢失、不重复、按序到达。
   - UDP 是尽最大努力交付，不保证可靠交付数据。
-- TCP有序，UDP无序；消息在传输过程中可能会乱序，后发送的消息可能会先到达，TCP会对其进行重排序，UDP不会。
-- 服务对象
-  - TCP 是一对一的两点服务，即一条连接只有两个端点。
+* TCP有序，UDP无序；消息在传输过程中可能会乱序，后发送的消息可能会先到达，TCP会对其进行重排序，UDP不会。
+* 服务对象
+  - TCP 是一对一的两点服务，即一条连接只有两个端点
   - UDP 支持一对一、一对多、多对多的交互通信
-- 拥塞控制、流量控制
+* 拥塞控制、流量控制
   - TCP 有拥塞控制和流量控制机制，保证数据传输的安全性。
   - UDP 则没有，即使网络非常拥堵了，也不会影响 UDP 的发送速率,网络出现拥塞不会使源主机的发送速率降低
-- TCP的逻辑通信信道是全双工的可靠信道，UDP则是不可靠信道
+* TCP的逻辑通信信道是全双工的可靠信道，UDP则是不可靠信道
 - 场景
   + FTP 文件传输 HTTP / HTTPS
   + 包总量较少的通信，如 DNS 、SNMP 等 视频、音频等多媒体通信 广播通信
@@ -564,13 +577,35 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
 ![TCP状态转换图](../_static/tcp_status.jpg "Optional title")
 ![TCP与UDP对比](../_static/TCPvsUDP.png)
 
-## 以太网（Ethernet）
+## 以太网 Ethernet
 
 * 目标MAC地址(6个字节)：源MAC地址(6个字节)：类型(2个字节)：数据：FCS帧检验序列（4个字节）
 
-## DNS（Domain Name System 域名系统）
+## DNS Domain Name System 域名解析系统
 
-因特网上作为域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过主机名，最终得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）。DNS协议运行在UDP协议之上，使用端口号53
+因特网上作为域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过主机名，最终得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）
+
+* 应用层协议，为其他应用层协议工作的，包括不限于HTTP和SMTP以及FTP，用于将用户提供的主机名解析为ip地址
+* DNS服务器,存储了IP地址和域名对应关系，是一台数据库服务器
+* 流程
+  - 当用户在浏览器中输入网址域名时，首先就会访问系统设置的DNS域名解析服务器（通常由ISP运营商如电信、联通提供）
+  - 如果该服务器内保存着该域名对应的IP信息，则直接返回该信息供用户访问网站
+  - 否则，就会向上级DNS逐层查找该域名的对应数据。
+  - www.baidu.com 通过dig +trace 查看域名解析过程
+* 本机DNS
+  - `C:\Windows\System32\drivers\etc\hosts`隐藏文件没有扩展名
+  - `/etc/hosts`
+* 公共DNS服务
+  - 设计为分布式集群的工作方式：使用分布式的层次数据库模式以及缓存方法来解决单点集中式的问题。
+  - 可通过修改网络连接的DNS server 地址
+* 国内用户普遍使用的是ISP运营商提供的DNS服务器，这样有着一个巨大的风险，就是DNS劫持,目前国内ISP运营商普遍采用DNS劫持的方法，干扰用户正常上网，例如，当用户访问一个不存在（或者被封）的网站，电信运营商就会把用户劫持到一个满屏都是广告的页面，以帮助自己盈利！
+  - 劫持广告：原来的网页被放置到一个iframe里，并注入了flash广告。
+  - 面地址后面是不是有后缀
+* 低延迟说明全国各地（至少在省内或者附近，不会南方跨到北方）直接返回被劫持的IP；
+* TCP查询同样中枪，排除黑阔采用全国发UDP包方式进行劫持；
+* 同网段有那啥网站
+* 利用DNS实现DNS的负载均衡，并且在配置运营商CDN机房时也是重要的一部分。DNS技术属于前端架构甚至更前的一部分，不难看出一个大型网站在提供好扎实的应用层和数据层服务后亟待解决的是访问的问题，访问安全问题也是伴随着要解决的问题之一。
+  - 出于资源消耗和响应速度的综合考虑，一般来说从主机到本地DNS服务器是递归查询，从本地DNS到其他DNS服务器是迭代查询。
 
 * 由分层的 DNS 服务器实现的分布式数据库。运行在 UDP 上，使用 53 端口
 * 互联网上几乎一切活动都以 DNS 请求开始。DNS 是 Internet 的目录,您的 ISP (Internet Service Provider) 以及在 Internet 上进行监听的其他任何人，都能够看到访问的站点以及您使用的每个应用.一些 DNS 提供商会出售个人 Internet 活动相关数据，或是利用这些数据向您发送有针对性的广告
@@ -595,6 +630,15 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
 * 查询方式
   - 递归查询(Recursive query)：如果根域名服务器无法告知本地 DNS 服务器下一步需要访问哪个顶级域名服务器
   - 迭代查询(Iteration query)：如果根域名服务器能够告知 DNS 服务器下一步需要访问的顶级域名服务器
+* DNS 请求是可以被抢答 `dig www.bennythink.com +short`
+* 工具
+  - [ChinaDNS](https://github.com/shadowsocks/ChinaDNS):Protect yourself against DNS poisoning in China.
+  - [dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.* DNS
+  - [jedisct1/dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. https://dnscrypt.info
+  - [googlehosts/hosts](https://github.com/googlehosts/hosts):镜像：https://coding.net/u/scaffrey/p/hosts/git
+  - [tenta-browser/tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS https://tenta.com/test
+  - [Cloudflare](https://www.cloudflare.com):域名注册服务
+  - [coredns/coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins https://coredns.io
 * 资源
   - [NameSilo](https://www.namesilo.com/)
 * 域名的NS记录（Name Server）是指处理域名解析的服务器
@@ -603,10 +647,6 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
   - [NextDNS](https://nextdns.io/):Block ads, trackers and malicious websites on all your devices. Get in-depth analytics about your Internet traffic. Protect your privacy and bypass censorship. Shield your kids from adult content.
 * DNS缓存污染，不是指域名被墙。墙，域名仍能被解析到正确的IP地址，只是客户端（指用户浏览器/服务请求端）不能与网站服务器握手，或通过技术阻断或干扰的方式阻止握手成功，以至达到超时、屏蔽、连接重置、服务中断的现象
   - [检测](https://www.checkgfw.com/)
-* DNS 请求是可以被抢答 `dig www.bennythink.com +short`
-* 工具
-  - [ChinaDNS](https://github.com/shadowsocks/ChinaDNS):Protect yourself against DNS poisoning in China.
-  - [dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
 
 ```
 ## `/etc/resolv.conf`
@@ -620,6 +660,15 @@ ns3.dnsowl.com
 2001:4860:4860::8888
 2001:4860:4860::8844
 
+# SDNS（`http://www.sdns.cn/`）
+1.2.4.8  210.2.4.8
+
+# 中科大的DNS
+202.38.64.1 202.112.20.131 202.141.160.95 202.141.160.99 202.141.176.95 202.141.176.99
+
+# OneDNS:
+112.124.47.27 南方首选/北方备用  114.215.126.16 北方首选/南方备用
+
 # Public DNS+
 119.29.29.29
 182.254.116.116
@@ -631,6 +680,10 @@ ns3.dnsowl.com
 # 114dns
 114.114.114.114
 114.114.114.115
+## 拦截钓鱼病毒木马网站，增强网银、证券、购物、游戏、隐私信息安全
+114.114.114.119 114.114.115.119
+## 学校或家长可选，拦截色情网站，保护少年儿童免受网络色情内容的毒害
+114.114.114.110 114.114.115.110
 
 # Cloudflare
 1.1.1.1
@@ -692,6 +745,21 @@ nameserver 223.6.6.6
 1.2.4.8
 210.2.4.8
 2001:dc7:1000::1
+```
+
+## [Wireshark](https://www.wireshark.org)
+
+* <https://github.com/dafang/notebook/issues/114>
+* CTRL 按钮: 捕获多个网卡
+* save 捕获数据
+
+```sh
+sudo apt install wireshark
+# 是否允许非超级用户捕获数据包。选择“Yes”允许，选择“No”限制非超级用户捕获数据包
+sudo dpkg-reconfigure wireshark-common
+# 允许非超级用户捕获数据包，因此你必须将该用户添加到 wireshark 组
+sudo usermod -aG wireshark $(whoami)
+sudo wireshark
 ```
 
 ## tcpdump
@@ -836,26 +904,11 @@ ifconfig /flushdns # 刷新DNS
 ## 图书
 
 * 《TCP/IP详解 卷1：协议》
-
-* 《TCP/IP详解 卷3：TCP事务协议、HTTP、NNTP和UNIX域协议》
-
 * 《TCP/IP详解 卷2：实现》
-
-* 《TCP/IP 协议详解》
-
+* 《TCP/IP详解 卷3：TCP事务协议、HTTP、NNTP和UNIX域协议》
 * 《TCP/IP高效编程：改善网络程序的44个技巧》
-
 * 《TCP/IP网络编程》
-
   - [chankeh/net-lenrning-reference](https://github.com/chankeh/net-lenrning-reference):TCP/IP网络编程笔记
-
-* DNS
-
-  - [jedisct1/dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. https://dnscrypt.info
-  - [googlehosts/hosts](https://github.com/googlehosts/hosts):镜像：https://coding.net/u/scaffrey/p/hosts/git
-  - [tenta-browser/tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS https://tenta.com/test
-  - [Cloudflare](https://www.cloudflare.com):域名注册服务
-  - [coredns/coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins https://coredns.io
 
 ## 参考
 
