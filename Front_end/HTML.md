@@ -649,6 +649,10 @@ user-select: none;
 
 * [使用canvas实现和HTML5 video交互的弹幕效果](https://www.zhangxinxu.com/wordpress/2017/09/html5-canvas-video-barrage/)
 
+## 工具
+
+* [lazysizes](https://github.com/aFarkas/lazysizes):High performance and SEO friendly lazy loader for images (responsive and normal), iframes and more, that detects any visibility changes triggered through user interaction, CSS or JavaScript without configuration.
+
 ## 扩展
 
 * [hakimel/reveal.js](https://github.com/hakimel/reveal.js):The HTML Presentation Framework http://lab.hakim.se/reveal-js/

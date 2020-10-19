@@ -61,7 +61,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
   - Windows集群技术
   - Linux HA 集群技术
   - IBM AIX 集群
-* LVS集群采用三层结构，负载调度器、服务器池、共享存储主要组成。
+* LVS集群采用三层结构，负载调度器、服务器池、共享存储主要组成
 * 构架师来运营一家公司的网站必须考虑的三个问题
   - 网络构架
   - 服务器构架
@@ -69,7 +69,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 
 ## 大数据存储
 
-* 目前有四种主流的数据库：
+* 四种主流数据库
   - Mysql
   - Oracle
   - DB2（IBM）
@@ -112,32 +112,20 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 ## 安全
 
 * 常见的比如数据库安全，主要是 SQL 注入，前端 XSS 注入攻击，以及提交请求时 CSRF 攻击  DDoS 攻击、恶意爬取页面如何防护（限制 IP 等）、用户认证/授权安全如何保证（密码、令牌安全等）
-
 * 永远不要相信用户的输入（包括Cookies，因为那也是用户的输入）
-
 * 对用户的口令进行Hash，并使用salt，以防止Rainbow 攻击
-  
   - Hash算法可用MD5或SHA1等
   - 对口令使用salt的意思是，user 在设定密码时，system 产生另外一个random string(salt)。在datbase 存的​​是与salt + passwd 产的md5sum 及salt
   - 当要验证密码时就把user 输入的string 加上使用者的salt，产生md5s​​um 来比对。 理论上用salt 可以大幅度让密码更难破解，相同的密码除非刚好salt 相同，最后​​存在database 上的内容是不一样的。google一下md5+salt你可以看到很多文章
   - 关于Rainbow 攻击，其意思是很像密码字典表，但不同的是，Rainbow Table存的是已经被Hash过的密码了，而且其查找密码的速度更快，这样可以让攻击非常快）。使用慢一点的Hash算法来保存口令，如 bcrypt (被时间检证过了) 或是 scrypt (更强，但是也更新一些) (1, 2)。你可以阅读一下 How To Safely Store A Password（陈皓注：酷壳以前曾介绍过bcrypt这个算法，这里，我更建议我们应该让用户输入比较强的口令，比如Apple ID注册的过程需要用户输入超过8位，需要有大小写和数字的口令，或是做出类似于这样的用户体验的东西）。
-
 * 不要试图自己去发明或创造一个自己的[fancy的认证系统](https://stackoverflow.com/questions/1581610/how-can-i-store-my-users-passwords-safely/1581919#1581919)，你可能会忽略到一些不容易让你查觉的东西而导致你的站点被hack了。（陈皓注：我在腾讯那坑爹的申诉系统中说过这个事了，我说过这句话——“真正的安全系统是协同整个社会的安全系统做出来的一道安全长城，而不是什么都要自己搞”，当然，很遗憾不是所有的人都能看懂这个事，包括一些资深的人）
-
 * 了解 [处理信用卡的一些规则](https://www.pcisecuritystandards.org/) . ([这里也有一个问题你可以查看一下](https://stackoverflow.com/questions/51094/payment-processors-what-do-i-need-to-know-if-i-want-to-accept-credit-cards-on)) （有两上vendor可以帮助你，一个是 Authorize.Net 另一个是 PayFlow Pro）
-
-* 使用 SSL/HTTPS 来加密传输登录页面或是任可有敏感信息的页面，比如信用卡号等。
-
-* 知道如何对付session 劫持。（陈皓注：请参看wikipedia的这[Session Hijacking](https://en.wikipedia.org/wiki/Session_hijacking)，）
-
-* 保持你的系统里的所有软件更新到最新的patch。
-
-* 确保你的数据库连接是安全的。
-
-* 确保你能了解最新的攻击技术，以及你系统的脆弱处。
-
+* 使用 SSL/HTTPS 来加密传输登录页面或是任可有敏感信息的页面，比如信用卡号等
+* [Session Hijacking](https://en.wikipedia.org/wiki/Session_hijacking)
+* 保持系统里所有软件更新到最新的patch
+* 确保数据库连接是安全的
+* 确保了解最新的攻击技术，以及系统的脆弱处
 * XSS 跨站脚本攻击（Cross-Site Scripting）：浏览器错误的将攻击者提供的用户输入数据（表单提交或URL参数）当做JavaScript脚本给执行了
-  
   - 看见输入框就输入：` /><script>alert("xss")</script> ` 进行提交
   - JS 代码被执行后果
     + 偷走用户浏览器里的 Cookie；
@@ -151,16 +139,12 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
     + 对style、script、image、src、a等等不安全的因素进行过滤或转义(htmlentities htmlspecialchars  strip_tags() 函数来去除 HTML 标签或者使用 htmlentities() 或是 htmlspecialchars())，smarty twig 都会默认为输出加上 htmlentities 防范
     + 将cookie设置成HTTP-only:禁止客户端操作cookie
     + [BeEF](https://beefproject.com/)
-
 * SQL 注入 Injection：通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。 `SELECT * FROM users WHERE username = 'peter' OR '1' = '1'`
-  
   - 解决
     + 转义用户输入的数据 addslashes 和 mysql_real_escape_string 这种转义是不安全的
     + 使用封装好的语句,使用PDO 或 MySQLi 的数据库扩展
     + 工具 [SQLmap](http://sqlmap.org/)
-
 * iframe带来的风险：需要用到第三方提供的页面组件，通常会以iframe的方式引入：添加第三方提供的广告、天气预报、社交分享插件等等。可以在iframe中运行JavaScirpt脚本、Flash插件、弹出对话框等等，这可能会破坏前端用户体验
-  
   - 如果iframe中的域名因为过期而被恶意攻击者抢注，或者第三方被黑客攻破，iframe中的内容被替换掉了，从而利用用户浏览器中的安全漏洞下载安装木马、恶意勒索软件等等
   - 解决
     + 在HTML5中，iframe有了一个叫做sandbox的安全属性，通过它可以对iframe的行为进行各种限制，充分实现“最小权限“原则。使用sandbox的最简单的方式就是只在iframe元素中添加上这个关键词就好 `<iframe sandbox src="..."> ... </iframe>`
@@ -170,9 +154,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
       * allow-popups：允许iframe中弹出新的窗口或者标签页（例如，window.open()，showModalDialog()，target=”_blank”等等）
       * allow-scripts：允许iframe中执行JavaScript
       * allow-same-origin：允许iframe中的网页开启同源策略
-
 * ClickJacking（点击劫持）：在通过iframe使用别人提供的内容时，自己的页面也可能正在被不法分子放到他们精心构造的iframe或者frame当中，进行点击劫持攻击，攻击利用了受害者的用户身份，在其不知情的情况下进行一些操作，删除某个重要文件记录，或者窃取敏感信息
-  
   - 步骤
     + 攻击者精心构造一个诱导用户点击的内容，比如Web页面小游戏
     + 将我们的页面放入到iframe当中
@@ -182,16 +164,12 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
   - 解决
     + Frame Breaking方案
     + 使用X-Frame-Options：DENY这个HTTP Header来明确的告知浏览器，不要把当前HTTP响应中的内容在HTML Frame中显示出来
-
 * 错误的内容推断
-  
   - 攻击者在上传图片的时候，看似提交的是个图片文件，实则是个含有JavaScript的脚本文件
   - 后端服务器在返回的响应中设置的Content-Type Header仅仅只是给浏览器提供当前响应内容类型的建议，而浏览器有可能会自作主张的根据响应中的实际内容去推断内容的类型。
   - 解决
-    + 通过设置X-Content-Type-Options参数值为nosniff 这个HTTP Header明确禁止浏览器去推断响应类型
-
+    + 通过设置X-Content-Type-Options参数值为nosniff 这个HTTP Header明确禁止浏览器去推断响应类
 * SSRF（Server-Side Request Forgery：服务器端请求伪造）：通过注入恶意代码从服务端发起，通过服务端就再访问内网的系统，然后获取不该获取的数据
-  
   - 产生在包含这些方法的代码中，比如 curl、file_get_contents、fsockopen
     + curl 中 `http://www.xxx.com/demo.php?url=file:///etc/passwd`
   - 解决
@@ -200,32 +178,24 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
     + 限制协议只能为HTTP或HTTPS，禁止进行跳转。
     + 如果有白名单，解析参数中的URL，判断是否在白名单内。
     + 如果没有白名单，解析参数中的URL，判断是否为内网IP。
-
 * CSRF（Cross-site request forgery：跨站请求伪造）：攻击者通过伪装成受信任的用户，盗用受信任用户的身份，用受信任用户的身份发送恶意请求
-  
   - 解决
     + 服务端生成一个 CSRF 令牌加密安全字符串Token传递给用户，并将 Token 存储于 Cookie 或者 Session 中,在网页构造表单时，将 Token 令牌放在表单中的隐藏字段，表单请求服务器以后会根据用户的 Cookie 或者 Session 里的 Token 令牌比对，校验成功才给予通过
     + 对于不确定是否有csrf风险的请求，可以使用验证码（尽管体验会变差）
     + 对于一些重要的操作（修改密码、修改邮箱），必须使用二次验证
     + 利用HTTP头中的Referer判断请求来源是否合法
-
 * 文件上传：上传了一个可执行的文件到服务器上执行
-  
   - 解决
     + 文件扩展名检测
     + 文件 MIME 验证
     + 文件重命名
     + 文件目录设置不可执行权限
     + 设置单独域名的文件服务器
-
 * HTTPS也可能掉坑里：浏览器发出去第一次请求就被攻击者拦截了下来并做了修改，根本不给浏览器和服务器进行HTTPS通信的机会
-  
   - 用户在浏览器里输入URL的时候往往不是从https://开始的，而是直接从域名开始输入，随后浏览器向服务器发起HTTP通信，然而由于攻击者的存在，它把服务器端返回的跳转到HTTPS页面的响应拦截了，并且代替客户端和服务器端进行后续的通信
   - 解决
     + 使用HSTS（HTTP Strict Transport Security），它通过HTTP Header以及一个预加载的清单，来告知浏览器在和网站进行通信的时候强制性的使用HTTPS，而不是通过明文的HTTP进行通信 `Strict-Transport-Security: max-age=<seconds>; includeSubDomains; preload`
-
 * 信息泄露：敏感数据泄露
-  
   - 本地存储数据泄露:前端存储敏感、机密信息始终都是一件危险的事情，推荐的做法是尽可能不在前端存这些数据
   - 解决
     + 敏感数据脱敏（比如手机号、身份证、邮箱、地址）
@@ -235,21 +205,15 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
       * 哈希（Hash）是将目标文本转换成具有相同长度的、不可逆的杂凑字符串（或叫做消息摘要)
       * 加密（Encrypt）是将目标文本转换成具有不同长度的、可逆的密文
       * 加盐处理避免了两个同样的密码会产生同样哈希的问题， bcrypt
-
 * 中间人攻击：MITM （中间人） 攻击不是针对服务器直接攻击，而是针对用户进行，攻击者作为中间人欺骗服务器他是用户，欺骗用户他是服务器，从而来拦截用户与网站的流量，并从中注入恶意内容或者读取私密信息，通常发生在公共 WiFi 网络中，也有可能发生在其他流量通过的地方，例如ISP运营商。
-  
   - 解决
     + 使用 HTTPS，使用 HTTPS 可以将你的连接加密，并且无法读取或者篡改流量。
     + WEB 服务器配置加上 Strict-Transport-Security 标示头，此头部信息告诉浏览器，你的网站始终通过 HTTPS 访问，如果未通过 HTTPS 将返回错误报告提示浏览器不应显示该页面。 需要到 https://hstspreload.org 注册网站，
-
 * 不安全的第三方依赖包
-  
   - 自动化的工具可以使用，比如NSP(Node Security Platform)，Snyk等等
   - 静态资源完整性校验
     + 每个资源文件都可以有一个SRI值。它由两部分组成，减号（-）左侧是生成SRI值用到的哈希算法名，右侧是经过Base64编码后的该资源文件的Hash值。 <script src=“https://example.js” integrity=“sha384-eivAQsRgJIi2KsTdSnfoEGIRTo25NCAqjNJNZalV63WKX3Y51adIzLT4So1pk5tX”></script>
-
 * DDoS 分布式拒绝服务，Distributed Denial of Service，其原理就是利用大量的请求造成资源过载，导致服务不可用
-  
   - 网络层 DDoS
     + SYN Flood：当攻击方随意构造源 IP 去发送 SYN 包时，服务器返回的 SYN + ACK 就不能得到应答（因为 IP 是随意构造的），此时服务器就会尝试重新发送，并且会有至少 30s 的等待时间，导致资源饱和服务不可用，此攻击属于慢型 DDoS 攻击
     + ACK Flood：在 TCP 连接建立之后，所有的数据传输 TCP 报文都是带有 ACK 标志位的，主机在接收到一个带有 ACK 标志位的数据包的时候，需要检查该数据包所表示的连接四元组是否存在，如果存在则检查该数据包所表示的状态是否合法，然后再向应用层传递该数据包
@@ -279,7 +243,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
       * 编写代码时，尽量实现优化，并合理使用缓存技术，减少数据库的读取操作。
 
 * 流量劫持
-  
+
   - DNS 劫持:如果当用户通过某一个域名访问一个站点的时候，被篡改的 DNS 服务器返回的是一个恶意的钓鱼站点的 IP，用户就被劫持到了恶意钓鱼站点
     + 要不就是网络运营商搞的鬼，一般小的网络运营商与黑产勾结会劫持 DNS，要不就是电脑中毒，被恶意篡改了路由器的 DNS 配置
     + 应对
@@ -290,14 +254,14 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
     + 根本原因，是 HTTP 协议没有办法对通信对方的身份进行校验以及对数据完整性进行校验
 
 * 服务器漏洞
-  
+
   - 越权操作：涉及到数据库的操作都需要先进行严格的验证
   - 目录遍历漏洞：通过在 URL 或参数中构造 ../，./ 和类似的跨父目录字符串的 ASCII 编码、unicode 编码等，完成目录跳转，读取操作系统各个目录下的敏感文件
     + 需要对 URL 或者参数进行 ../，./ 等字符的转义过滤
   - 源码暴露漏洞：
 
 * 设计缺陷
-  
+
   - 返回信息过多：不要返回 用户已被禁用，统一返回 用户名或密码错误
   - 短信接口
     + 设置同一手机号短信发送间隔
@@ -325,20 +289,6 @@ if(password_verify($password, $hash)) {
 } else {
   echo 'Invalid password.';
 }
-```
-
-## TCP BBR
-
-Google给出的一个改良版的tcp网络协议，相当于在已有TCP协议的基础上打了个补丁的意思，这个改良版TCP协议对拥塞控制有很好的支持，对于网络较差的环境有不错的应用场景.Linux系统内核版本大于4.9
-
-```
-echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
-echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
-
-sysctl   -p # 配置生效
-
-sysctl net.ipv4.tcp_available_congestion_control # 查看
-lsmod | grep bbr
 ```
 
 ## SSO（Single Sign On，单点登录）
@@ -523,7 +473,7 @@ lsmod | grep bbr
 * [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) https://solid.mit.edu/
 
 * [OWASP 开发指导](https://www.owasp.org/index.php/OWASP_Guide_Project) 涵盖了几乎所有关于Web站点安全的东西。
-  
+
   - OWASP(开放Web应用安全项目- Open Web Application Security Project)是一个开放的非营利性组织，目前全球有130个分会近万名会员，其主要目标是研议协助解决Web软体安全之标准、工具与技术文件，长期 致力于协助政府或企业了解并改善网页应用程式与网页服务的安全性
   - OWASP被视为Web应用安全领域的权威参考。2009年下列发布的美国国家和国际立法、标准、准则、委员会和行业实务守则参考引用了OWASP。美国联邦贸易委员会(FTC)强烈建议所有企业需遵循OWASP十大WEB弱点防护守则）
 

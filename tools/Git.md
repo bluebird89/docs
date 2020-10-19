@@ -10,6 +10,8 @@ fast, scalable, distributed revision control system. https://git-scm.com/
   - [gitlabhq/gitlabhq](https://github.com/gitlabhq/gitlabhq):GitLab CE Mirror | Please open new issues in our issue tracker on GitLab.com https://about.gitlab.com/getting-help/
 * [码云](https://gitee.com)
 * [Coding](https://coding.net)  <https://arsenal.coding.net/p/coding-demo>
+  - 敏捷任务管理
+  - Cloud Studio
 * [sourceforge](https://sourceforge.net/):The Complete Open-Source Software Platform
 * [backlog](https://backlog.com/):Online project management tool for developers
 * [gogits/gogs](https://github.com/gogits/gogs):Gogs is a painless self-hosted Git service. https://gogs.io
