@@ -1296,6 +1296,7 @@ JavaEE/JDBC/Weblogic
   - [主流日志工具库](https://mp.weixin.qq.com/s/iuWJxBghqhF09JqYfejBWw)
 * [liuanxin/api-document](https://github.com/liuanxin/api-document):java spring-mvc document collect
 * [jenv/jenv](https://github.com/jenv/jenv):Manage your Java environment http://www.jenv.be
+* [akka](https://github.com/akka/akka):Build highly concurrent, distributed, and resilient message-driven applications on the JVM https://akka.io/
 
 ## 参考
 

@@ -1,11 +1,11 @@
-# [HTTP协议 HyperText Transfer Protocol 超文本传输协议](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)
+# [HTTP HyperText Transfer Protocol 超文本传输协议](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)
 
 因特网上应用最为广泛的一种基于 TCP/IP 通信协议来传递数据的网络传输应用层协议。以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规范
 
 * TCP/IP协议是传输层协议，主要解决数据如何在网络中传输
 * HTTP协议是一种分布式的面向资源的网络应用层协议，无论是服务器端提供Web服务，还是客户端消费Web服务都非常简单
 * 协议指的就是是网络中(包括互联网)传递、管理信息的一些规范。如同人与人之间相互交流是需要遵循一定的规矩一样，计算机之间的相互通信需要共同遵守一定的规则，这些规则就称为协议，只不过是网络协议
-* HTTP是应用层协议，主要解决如何包装数据。详细规定了浏览器与服务器之间相互通信的规则，是万维网交换信息的基础
+* 应用层协议，主要解决如何包装数据。详细规定了浏览器与服务器之间相互通信的规则，是万维网交换信息的基础
   - 超文本就是不单单只是本文，还可以传输图片、音频、视频，甚至点击文字或图片能够进行超链接的跳转
   - 传输就是数据需要经过一系列的物理介质从一个端系统传送到另外一个端系统的过程。通常把传输数据包的一方称为请求方，把接到二进制数据包的一方称为应答方
   - 无状态协议(Stateless Protocol)
@@ -520,14 +520,20 @@ Content-Type: text/html
   - Allow：服务器支持哪些请求方法（如GET、POST等）
 * 扩展字段:引入 Cookie 的初衷就是实现客户端用户识别和状态管理
   - 调用 Cookie 时，由于可以校验 Cookie 的有效期，以及发送方的域（Domain）、路径（URL Path）、协议等信息，所以正规发布的 Cookie 内的数据不会因来自其它 Web 站点和攻击者的攻击而泄露
-  - Set-Cookie:该字段用于响应首部，服务器通过该字段将需要设置的 Cookie 信息告知客户端，客户端接收到响应后将相应的 Cookie 信息存储到本地 `Set-Cookie: laravel_session=eyJpdiI6InpDTWIxczdmK2hJZ1hPcWVsRU9uRUE9PSIsInZhbHVlIjoib244YVppNWFWdU04K3kxT3pUM3FmTWVqNkYxQXo3QUJHRzV0OWZnOEE1TzZKZGxxNHlpaXZnNlwvYzRrZ0RcL1lrIiwibWFjIjoiODZlZDgzNzlmNmNkZTJhNGFmNThmYTE2NGYxMTIyM2EwNGY5ZThkZmQ5MDU0NWQ0ZTJlY2M1ZTJmNjJmNDIzMiJ9; expires=Wed, 24-Apr-2019 04:03:23 GMT; Max-Age=7200; path=/; httponly`
+  - Set-Cookie:该字段用于响应首部，服务器通过该字段将需要设置的 Cookie 信息告知客户端，客户端接收到响应后将相应的 Cookie 信息存储到本地 ``
     + expires: 指定 Cookie 的有效期，省略的话默认在浏览器会话时间内有效（浏览器关闭失效），Cookie 一旦发送至客户端，就不能在服务器端显式删除，只能通过覆盖实现对客户端 Cookie 的「删除」
     + Max-Age：和 expires 作用类似，用于指定从现在开始该 Cookie 存在的秒数，如果同时指定了 expires 和 Max-Age，那么 Max-Age 的值将优先生效
     + path: 指定 Cookie 生效的路径，默认路径是根路径 /
     + domain: 指定 Cookie 所属的域名，省略的话默认是当前域名，Cookie 只有在所属域名下才能获取，不能跨域名获取 Cookie
     + Secure: 限制浏览器只有在页面启用 HTTPS 安全连接时才可以发送 Cookie
     + httponly: 指定之后javascript无法读取cookie,主要目的是为了防止跨站脚本攻击（XSS）对 Cookie 信息的窃取
-  - Cookie 该字段用于请求首部，客户端通过该字段告知服务器当客户端想要获取 HTTP 状态管理支持时，就会在请求中包含从服务器接收到的 Cookie `Cookie: hello=eyJpdiI6IktlV2RlQUhnbDBJN2Z0UUhFSHl3bkE9PSIsInZhbHVlIjoieElBdFpOV3crNm5IZytnRzlJUW1LUT09IiwibWFjIjoiNzFiZGEzMzg1MzgyYTMyYjM0YzcyNTViZWU2NGI2MDM2NzJhMGEwNmFkYWE5ZGY4N2I5ZDA4ZWQ0NmVkZjcyOCJ9; XSRF-TOKEN=eyJpdiI6IndOeWNWVmxXVEdpZkdlWFFkMENtckE9PSIsInZhbHVlIjoiYWJNb28yMlROWE1YOEVyTnhrbmJwYjRpdHB3S2diUDBcLzI2d1ViNXpRYkxzb2pMZEZWVll0cVFoejhlNG1jdEwiLCJtYWMiOiI1NzUwMWRjYzhjMjAwMDkwMWI4NDY0ZTIzMzY2NDYwMDY1NmYzZmMyOTA3ZjM2YTRmN2FmM2U1OGU3MWQyNTVkIn0%3D; laravel_session=eyJpdiI6ImpwcWx6SGttbUlCU2dCREVyRWp1WFE9PSIsInZhbHVlIjoiU0djd0Vjc3JRZzNuWUgyUWlRSStiUURcL2RPWFpxdjBjdXRrdVRjZ1hzdDZpTGNzZWtKNXpVTTJlXC9Fbms3ZWpqIiwibWFjIjoiMmI0NmJiZWYyOGViOGI5ZDVhY2EwMjI4NjAwODYwMzg1ZGZlODY0NjExNzIzMjczMGRiMjdjNDIyMTdiNzQ1MCJ9`
+  - Cookie 该字段用于请求首部，客户端通过该字段告知服务器当客户端想要获取 HTTP 状态管理支持时，就会在请求中包含从服务器接收到的 Cookie
+
+```
+Set-Cookie: laravel_session=eyJpdiI6InpDTWIxczdmK2hJZ1hPcWVsRU9uRUE9PSIsInZhbHVlIjoib244YVppNWFWdU04K3kxT3pUM3FmTWVqNkYxQXo3QUJHRzV0OWZnOEE1TzZKZGxxNHlpaXZnNlwvYzRrZ0RcL1lrIiwibWFjIjoiODZlZDgzNzlmNmNkZTJhNGFmNThmYTE2NGYxMTIyM2EwNGY5ZThkZmQ5MDU0NWQ0ZTJlY2M1ZTJmNjJmNDIzMiJ9; expires=Wed, 24-Apr-2019 04:03:23 GMT; Max-Age=7200; path=/; httponly
+
+Cookie: hello=eyJpdiI6IktlV2RlQUhnbDBJN2Z0UUhFSHl3bkE9PSIsInZhbHVlIjoieElBdFpOV3crNm5IZytnRzlJUW1LUT09IiwibWFjIjoiNzFiZGEzMzg1MzgyYTMyYjM0YzcyNTViZWU2NGI2MDM2NzJhMGEwNmFkYWE5ZGY4N2I5ZDA4ZWQ0NmVkZjcyOCJ9; XSRF-TOKEN=eyJpdiI6IndOeWNWVmxXVEdpZkdlWFFkMENtckE9PSIsInZhbHVlIjoiYWJNb28yMlROWE1YOEVyTnhrbmJwYjRpdHB3S2diUDBcLzI2d1ViNXpRYkxzb2pMZEZWVll0cVFoejhlNG1jdEwiLCJtYWMiOiI1NzUwMWRjYzhjMjAwMDkwMWI4NDY0ZTIzMzY2NDYwMDY1NmYzZmMyOTA3ZjM2YTRmN2FmM2U1OGU3MWQyNTVkIn0%3D; laravel_session=eyJpdiI6ImpwcWx6SGttbUlCU2dCREVyRWp1WFE9PSIsInZhbHVlIjoiU0djd0Vjc3JRZzNuWUgyUWlRSStiUURcL2RPWFpxdjBjdXRrdVRjZ1hzdDZpTGNzZWtKNXpVTTJlXC9Fbms3ZWpqIiwibWFjIjoiMmI0NmJiZWYyOGViOGI5ZDVhY2EwMjI4NjAwODYwMzg1ZGZlODY0NjExNzIzMjczMGRiMjdjNDIyMTdiNzQ1MCJ9
+```
 
 ### 请求方式
 
@@ -1006,48 +1012,32 @@ $un_data = unserialize_php($data);
 ## HTTP 1.1
 
 * 1999 年提出，做出以下变化
-
   - 使用了摘要算法来进行身份验证
   - 默认使用长连接
   - 中新增加了 E-tag，If-Unmodified-Since, If-Match, If-None-Match 等缓存控制标头来控制缓存失效
   - 支持断点续传，通过使用请求头中的 Range 来实现
   - 使用了虚拟网络，在一台物理服务器上可以存在多个虚拟主机（Multi-homed Web Servers），并且它们共享一个IP地址
-
 * 把 Connection 头写进标准，并且默认开启持久连接,除非请求中写明 Connection: close，那么浏览器和服务器之间是会维持一段时间的 TCP 连接，不会一个请求结束就断掉
-
 * 持久连接:`Connection: keep-alive` 头部字段 ，表示会在建立TCP连接后，完成首次的请求，并不会立刻断开TCP连接，而是保持这个连接状态进而可以复用
-
 * 维持连接，SSL 的开销也可以避免
-
 * 单个 TCP 连接在同一时刻只能处理一个请求
-
   - 任意两个 HTTP 请求从开始到结束的时间在同一个 TCP 连接里不能重叠
   - 支持请求管道化，“并行”发送请求，但是这个并行，也不是真正意义上的并行，而是可以把先进先出队列从客户端（请求队列）迁移到服务端（响应队列）,在浏览器中默认是关闭的
     + 一些代理服务器不能正确的处理 HTTP Pipelining
     + 正确的流水线实现是复杂的
     + Head-of-line Blocking 连接头阻塞：在建立起一个 TCP 连接之后，假设客户端在这个连接连续向服务器发送了几个请求，按照标准，服务器应该按照收到请求的顺序返回结果 假设服务器在处理首个请求时花费了大量时间，那么后面所有的请求都需要等着首个请求结束才能响应(堵塞)
-
 * 浏览器客户端在同一时间，针对同一域名下的请求有一定数量限制。超过限制数目的请求会被阻塞 通常一次只能有 6 个连接。例如，如果其中一个请求由于服务器上的某些复杂逻辑而卡住，那么它们中的每一个都可以一次处理一个请求，整个连接就会冻结并等待响应。这个问题称为前端阻塞
-
   - 为何一些站点会有多个静态资源 CDN 域名的原因
-
 * 缺点
-
   - 一条连接同时只能发送一个请求
-
   - 请求只能从客户端发起
-
   - 请求/响应首部未经压缩就直接发送，首部信息越多延迟越大
-
   - 明文传输
-
   - 没有解决无状态连接的
-
   - 当有多个请求同时被挂起的时候 就会拥塞请求通道，导致后面请求无法发送
-
   - 臃肿的消息首部:HTTP/1.1能压缩请求内容,但是消息首部不能压缩;在现今请求中,消息首部占请求绝大部分(甚至是全部)也较为常见,造成通信的浪费
 
-## HTTP /2
+## HTTP/2
 
 * 2015 年开发出来的标准 基于Google的SPDY,从2012年诞生到2016停止维护
 * 头部压缩（Header Compression）:由于 HTTP 1.1 经常会出现 User-Agent、Cookie、Accept、Server、Range 等字段可能会占用几百甚至几千字节，而 Body 却经常只有几十字节，所以导致头部偏重。HTTP 2.0 使用 HPACK 算法进行压缩
@@ -1147,20 +1137,12 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 
 ## URL Schemes
 
-## [Wireshark](https://www.wireshark.org)
+## [wg / wrk](https://github.com/wg/wrk)
 
-* <https://github.com/dafang/notebook/issues/114>
-* CTRL 按钮: 捕获多个网卡
-* save 捕获数据
+Modern HTTP benchmarking tool
 
-```sh
-sudo apt install wireshark
-# 是否允许非超级用户捕获数据包。选择“Yes”允许，选择“No”限制非超级用户捕获数据包
-sudo dpkg-reconfigure wireshark-common
-# 允许非超级用户捕获数据包，因此你必须将该用户添加到 wireshark 组
-sudo usermod -aG wireshark $(whoami)
-sudo wireshark
-```
+* `git clone --depth=1 https://github.com/wg/wrk.git` `make` `sudo cp wrk /usr/local/bin`
+* `wrk -t5 -c5 -d30s http://www.baidu.com`
 
 ## 图书
 
