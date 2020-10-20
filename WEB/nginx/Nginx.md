@@ -1,13 +1,17 @@
-# [nginx/nginx](https://github.com/nginx/nginx)
+# [nginx](https://github.com/nginx/nginx)
 
-2006年俄罗斯编写。全称为engine X，缩减合并称为nginx。一个免费、开源、高性能、轻量级的 HTTP 和反向代理服务器 基于事件驱动（event-driven） 非阻塞模式的 Web 服务器.与事件循环相比 fork 子进程消耗更多系统资源，基于事件的 HTTP 服务器完胜。解决基于进程模型产生的C10k问题，请求时即使无状态连接如web服务都无法达到并发响应量级一万现状。
+* 2006年由俄罗斯人发布。全称为engine X，缩减合并称为[nginx](https://nginx.org/)
+* 一个免费、开源、高性能、轻量级的 HTTP 和反向代理服务器
+* 基于事件驱动（event-driven）非阻塞模式的 Web 服务器
+* 与事件循环相比 fork 子进程消耗更多系统资源，基于事件的 HTTP 服务器完胜
+* 解决基于进程模型产生的C10k问题，请求时即使无状态连接如web服务都无法达到并发响应量级一万现状
 
 ## 特性
 
 * 高并发 高性能
-    - 内存消耗低：10000个keep-alive连接模式下的非活动连接仅消耗2.5M内存；
+    - 内存消耗低：10000个keep-alive连接模式下的非活动连接仅消耗2.5M内存
     - 非阻塞、高并发连接：官方测试能够支撑5万并发连接，在实际生产环境中跑到2～3万并发连接数
-    - 事件驱动：通信机制采用 epoll 模型，支持更大的并发连接
+    - 事件驱动：通信机制采用 epoll 模型，支持更大并发连接
         - 支持event-driven事件驱动模型, aio异步驱动机制, mmap内存映射
         - 新的epoll（Linux 2.6内核）和kqueue（freebsd）网络I/O模型
     - 节省带宽：支持 GZIP 压缩，可以添加浏览器本地缓存的 Header 头
@@ -16,36 +20,45 @@
     - 用于反向代理，宕机的概率微乎其微
 * 热部署(平滑迁移)：不停机更新配置文件、更换日志、更新服务器程序版本
 * 可扩展性好：高度模块化（非DSO机制）
-* 跨平台：Nginx 可以在大多数 Unix like OS编译运行，而且也有 Windows 的移植版本
-* 配置异常简单：非常容易上手
+* 跨平台：可以在大多数 Unix like OS编译运行，也有 Windows 移植版本
+* 配置简单，容易上手
 * 缺点
-    - 仅能支持http、https 和 Email 协议，这样就在适用范围上面小些
-    - 对后端服务器的健康检查，只支持通过端口来检测，不支持通过 url来检测。不支持 Session 的直接保持，但能通过 ip_hash 来解决
-    - 模块默认编译进 Nginx 中，如果需要增加或删除模块，需要重新编译 Nginx，这一点不如 Apache 的动态加载模块方便
-    - Apache:一个进程处理一个链接
+    - 仅能支持http、https 和 Email 协议，适用范围上小些
+    - 对后端服务器健康检查，只支持通过端口来检测，不支持通过 url 来检测
+    - 不支持 Session 的直接保持，但能通过 ip_hash 来解决
+    - 增加、删除或更新模块，需要重新编译
 
 ## 版本
 
 *  1.7.11
-    - [多线程特性（multi-threading）](https://www.nginx.com/blog/thread-pools-boost-performance-9x/)开始实现了线程池机制，大部分场景中可以避免使用阻塞，整体性能有了数倍提升.仅用在aio模型中对本地文件的操作上，出发点就是以非阻塞模式，来提高文件IO的效率和并发能力
-* NGINX Plus 由 Web 服务器、内容缓存和负载均衡器组成。流行的开源 NGINX Web 服务器的商业版本。NGINX Web 应用程序防火墙（WAF）是一款基于开源 ModSecurity 研发的商业软件，为针对七层的攻击提供保护，例如 SQL 注入或跨站脚本攻击，并根据如 IP 地址或者报头之类的规则阻止或放行， NGNX WAF 作为 NGINX Plus 的动态模块运行，部署在网络的边缘，以保护内部的 Web 服务和应用程序免受 DDoS 攻击和骇客入侵。
-    - NGINX Unit 是 Igor Sysoev 设计的新型开源应用服务器，由核心 NGINX 软件开发团队实施。可运行 PHP、Python 和 Go 的新型开源应用服务器。Unit 是"完全动态的"，并允许以蓝绿部署的方式无缝重启新版本的应用程序，而无需重启任何进程。所有的 Unit 配置都通过使用 JSON 配置语法的内置 REST API 进行处理，并没有配置文件。目前 Unit 可运行由最近版本的 PHP、Python 和 Go 编写的代码。在同一台服务器上可以支持多语言的不同版本混合运行。即将推出更多语言的支持，包括 Java 和 Node.JS。
+    - [多线程特性（multi-threading）](https://www.nginx.com/blog/thread-pools-boost-performance-9x/)实现线程池机制，大部分场景中可以避免使用阻塞，整体性能有了数倍提升.仅用在aio模型中对本地文件的操作上，出发点就是以非阻塞模式，来提高文件IO的效率和并发能力
+* NGINX Plus 由 Web 服务器、内容缓存和负载均衡器组成。NGINX Web 服务器的商业版本
+    - NGINX Unit 是 Igor Sysoev 设计的新型开源应用服务器，由核心 NGINX 软件开发团队实施。可运行 PHP、Python 和 Go 的新型开源应用服务器。Unit 是"完全动态的"，并允许以蓝绿部署的方式无缝重启新版本的应用程序，而无需重启任何进程。所有的 Unit 配置都通过使用 JSON 配置语法的内置 REST API 进行处理，并没有配置文件。在同一台服务器上可以支持多语言的不同版本混合运行
     - NGINX Controller 是 NGINX Plus 的中央集中式监控和管理平台。Controller 充当控制面板，并允许用户通过使用图形用户界面"在单一位置管理数百个 NGINX Plus 服务器"。该界面可以创建 NGINX Plus 服务器的新实例，并实现负载平衡、 URL 路由和 SSL 终端的中央集中配置。Controller 还具备监控功能，可观察应用程序的健壮性和性能。
     - NGINX Plus（Kubernetes）Ingress Controller 解决方案基于开源的 NGINX kubernetes-ingress 项目，经过测试、认证和支持，为 Red Hat OpenShift 容器平台提供负载平衡。该解决方案增加了对 NGINX Plus 中高级功能的支持，包括高级负载平衡算法、第7层路由、端到端认证、request/rate 限制以及内容缓存和 Web 服务器。
     - NGINX 还发布了 nginmesh，这是 NGINX 的开源预览版本，作为 Istio Service Mesh 平台中第7层负载平衡和代理的服务代理。它旨在作为挎斗容器（sidecar container）时，能提供与 Istio 集成的关键功能，并以"标准、可靠和安全的方式"促进服务之间的通信能力。此外，NGINX 将通过加入 Istio 网络特别兴趣小组，与 Istio 社区合作。
-    - NGINX Web 应用防火墙（WAF）
-    - NGINX Controller NGINX Plus 的中央控制面板 ![](../_static/nignx.png)
+    - NGINX Web 应用程序防火墙（WAF）一款基于开源 ModSecurity 研发的商业软件，为针对七层的攻击提供保护，例如 SQL 注入或跨站脚本攻击，并根据如 IP 地址或者报头之类的规则阻止或放行， NGNX WAF 作为 NGINX Plus 的动态模块运行，部署在网络的边缘，以保护内部的 Web 服务和应用程序免受 DDoS 攻击和骇客入侵
 * 淘宝网发起的 Web 服务器 Tengine
-* 基于 Nginx 和 Lua 的 Web 平台 OpenResty
+* 基于 Nginx 和 Lua 的 Web 平台 [OpenResty](../../ops/openresty.md)
+
+![NGINX Controller](../_static/nignx.png)
 
 ## 功能
 
-* 由内核和一系列模块组成，内核提供 Web 服务的基本功能，如启用网络协议，创建运行环境，接收和分配客户端请求，处理模块之间的交互
-* 模块结构：
+* 由内核和一系列模块组成
+* 内核提供 Web 服务基本功能，如启用网络协议，创建运行环境，接收和分配客户端请求，处理模块之间的交互
+    - Nginx（内核）本身做的工作实际很少，当接到一个 HTTP 请求时，通过查找配置文件将此次请求映射到一个 location block，而此 location 中所配置的各个指令则会启动不同的模块去完成工作，因此模块可以看做 Nginx 真正劳动工作者
+    - 通常一个 location 中的指令会涉及一个 Handler 模块和多个 Filter 模块（当然，多个location可以复用同一个模块）
+    - Handler模块负责处理请求，完成响应内容的生成，而 Filter 模块对响应内容进行处理
+* 模块化
     - 核心模块 core module：HTTP 模块、EVENT 模块和 MAIL 模块
-    - 基础模块 Standard HTTP  modules：HTTP Access 模块、HTTP FastCGI 模块、HTTP Proxy 模块和 HTTP Rewrite 模块。
+    - 基础模块 Standard HTTP  modules：HTTP Access 模块、HTTP FastCGI 模块、HTTP Proxy 模块和 HTTP Rewrite 模块
     - Optional HTTP  modules：可选HTTP模块
     - 第三方模块 3rd party modules：HTTP Upstream Request Hash 模块、Notice 模块和 HTTP Access Key 模块及用户自己开发的模块
+    - 功能分类
+        + Handlers（处理器模块）：直接处理请求，并进行输出内容和修改 headers 信息等操作。Handlers 处理器模块一般只能有一个
+        + Filters（过滤器模块）：主要对其他处理器模块输出的内容进行修改操作，最后由 Nginx 输出
+        + Proxies（代理类模块）： Nginx 的 HTTP Upstream 之类的模块，这些模块主要与后端一些服务比如FastCGI 等进行交互，实现服务代理和负载均衡等功能
 * Web 服务器，以 B/S（Browser/Server）方式提供服务
     - 静态资源服务
     - 支持 CGI 协议的动态语言，比如 Perl、PHP 等，但是不支持 Java。将处理过的内容通过 HTTP Server 分发
@@ -66,15 +79,13 @@
     * 负载均衡：容灾
 * 支持过滤器，例如zip，SSI
 * 支持SSL加密机制
-* API服务：OpenResty
 
 ## 进程模型
 
 * 多进程模型,采用模块化的、基于事件驱动、异步、单线程且非阻塞,使用多路复用和事件通知
-* Nginx 启动以后，会在系统中以 daemon 的方式在后台运行，包括一个 master 进程，n(n>=1) 个 worker 进程。所有的进程都是单线程（即只有一个主线程），进程间通信主要使用共享内存方式
+* Nginx 启动以后，会在系统中以 daemon 的方式在后台运行，包括一个 master 进程，n(n>=1) 个 worker 进程。所有进程都是单线程（即只有一个主线程），进程间通信主要使用共享内存方式
     - master进程:充当整个进程组与用户的交互接口
-        + 接受外界信号,负责处理 Nginx 主服务的启动、关闭与重载,管理 Worker 进程(给Worker进程发信号)来实现重启服务、平滑升级、更换日志文件、配置文件实时生效等功能
-        + 进行一系列的初始化，包括但不限于：
+        + 进行一系列初始化，包括但不限于：
             * 命令行参数解析
             * 时间初始化
             * 日志初始化
@@ -82,30 +93,30 @@
             * 操作系统相关初始化
             * 一致性hash表初始化
             * 模块编号处理
-        + 另外一个最重要的初始化由ngx_init_cycle()函数完成，该函数围绕nginx中非常核心的一个全局数据结构ngx_cycle_t展开
+        + 另外一个最重要初始化由ngx_init_cycle()函数完成，该函数围绕nginx中非常核心的一个全局数据结构`ngx_cycle_t`展开
             * 配置文件解析
             * 创建并监听socket
             * 初始化nginx各模块
-        + main函数的最后，根据是否启用多进程模型，分别进入多进程版本的ngx_master_process_cycle和单进程版本的ngx_single_process_cycle()。
-        + 负责收集、分发请求:在接收客户端连接信号后会将这个网络事件发送给某个 worker 进程，由该 worker 进程来接管后续的连接建立和请求处理
-        + 维护 worker 进程的运行状态
+        + main函数最后，根据是否启用多进程模型，分别进入多进程版本的ngx_master_process_cycle和单进程版本的ngx_single_process_cycle()
+        + 接受外界信号:负责收集、分发请求,在接收客户端连接信号后会将这个网络事件发送给某个 worker 进程，由该 worker 进程来接管后续的连接建立和请求处理
+        + 负责处理 Nginx 主服务启动、关闭与重载
+        + 管理维护 Worker 进程(给Worker进程发信号) 运行状态
             * fork Worker进程：按照配置fork出N个Worker进程，一般说来配置推荐Worker进程数量和CPU核数保持一致即可
             * 监控Worker进程，当某个Worker异常挂了后，Master进程负责重新拉起一个
-    - 多个worker进程:用来处理基本的网络事件，每个 worker 请求相互独立且平等的竞争来自客户端的请求，共同竞争来处理来自客户端的请求
-        + 每个 Worker 进程都是从 Master 进程 fork 过来
-        + 子进程启动后，进入ngx_worker_process_cycle，进行一些工作进程的初始化，随后修改进程名称为："worker process"。
-        + 接着进入工作循环函数ngx_process_events_and_timers，在该函数中主要负责：
+        + 实现重启服务、平滑升级、更换日志文件、配置文件实时生效等功能
+    - 多个worker进程:用来处理基本网络事件，每个 worker 请求相互独立且平等的竞争来自客户端的请求，共同竞争来处理来自客户端的请求
+        + 每个 Worker 进程都由 Master 进程 fork 出来
+        + 子进程启动后，进入ngx_worker_process_cycle，进程初始化，随后修改进程名称为："worker process"
+        + 进入工作循环函数ngx_process_events_and_timers，在该函数中主要负责：
             * 竞争互斥锁，拿到锁的进程才能执行accept接受新的连接，以此在多进程之间解决惊群效应
             * 通过epoll异步IO模型处理网络IO事件，包括新的连接事件和已建立连接发生的读写事件
             * 处理定时器队列中到期的定时器事件，定时器通过红黑树的方式存储
         + 具体的 HTTP 连接与请求处理工作由 worker 进程来完成
-        + 请求只能在一个 worker 进程中被处理，且一个 worker 进程只有一个主线程，所以同时只能处理一个请求
+        + 一个请求完全由 Worker 进程来处理，只能在一个 worker 进程中被处理，且一个 worker 进程只有一个主线程，所以同时只能处理一个请求
         + 所有 Worker 进程的 listenfd 会在新连接到来时变得可读，为保证只有一个进程处理该连接，所有 Worker 进程在注册 listenfd 读事件前抢互斥锁accept_mutex，抢到互斥锁的那个进程注册 listenfd 读事件，在读事件里调用 accept 接受该连接。
         + 当一个 Worker 进程在 accept 这个连接之后，就开始读取、解析、处理请求，在产生数据后再返回给客户端，最后才断开连接
-        + 一个请求完全由 Worker 进程来处理，而且只在一个 Worker 进程中处理
-        + 为了减少进程切换（需要系统调用）的性能损耗，一般设置 Worker 进程数量和 CPU 数量一致
         + 每个worker基于时间驱动机制可以并行响应多个请求,底层实现的原理是事件驱动和多路 IO 复用,采取了 Reactor 模型（也就是 I/O 多路复用，NIO）
-            * I/O 多路复用模型：最重要的系统调用函数就是 Select（其他的还有 epoll 等）
+            * I/O 多路复用模型：最重要系统调用函数就是 Select（其他的还有 epoll 等）
             * 该方法能够同时监控多个文件描述符的可读可写情况（每一个网络连接其实都对应一个文件描述符），当其中的某些文件描述符可读或者可写时，Select 方法就会返回可读以及可写的文件描述符个数
             * Work 进程使用 I/O 多路复用模块同时监听多个 FD（文件描述符），当 Accept、Read、Write 和 Close 事件产生时，操作系统就会回调 FD 绑定的事件处理器。这时 Worker 进程去处理相应事件，而不是阻塞在某个请求连接上等待
         + accept 客户端请求,建立链接，从连接上读取请求报文数据并进行解析
@@ -113,25 +124,26 @@
         + Nginx 能映射到对应的虚拟主机配置文件，主要依靠 Nginx 将从请求首部解析出来的 Host 字段值与所有虚拟主机配置文件中的 server_name 配置项做对比
         + 通过 `ngx_http_send_header` 方法构造 HTTP 响应的起始行、响应首部，并将响应头信息保存在 `ngx_http_request_s` 的 `headers_out` 数据结构中，然后通过 `ngx_http_header_filter` 方法按照 HTTP 规范将其序列化为字节流缓冲区，最后通过 `ngx_http_write_filter` 方法将响应头部发送出去
     - 设置 Worker数量：Nginx 同 Redis 类似都采用了 IO 多路复用机制，每个 Worker 都是一个独立的进程，但每个进程里只有一个主线程，通过异步非阻塞的方式来处理请求
+        + 为了减少进程切换（需要系统调用）的性能损耗，一般设置 Worker 进程数量和 CPU 数量一致
         + 每个 Worker 的线程可以把一个 CPU 的性能发挥到极致。所以 Worker 数和服务器的 CPU 数相等是最为适宜的。设少了会浪费 CPU，设多了会造成 CPU 频繁切换上下文带来的损耗
         + 连接数 worker_connection：表示每个 Worker 进程所能建立连接的最大值。
         + 一个 Nginx 能建立的最大连接数
             * 对于 HTTP 请求本地资源来说， 能够支持的最大并发数量是 `worker_connections*worker_processes`
             * 如果是支持 http1.1 的浏览器每次访问要占两个连接。所以普通的静态访问最大并发数是：`worker_connections*worker_processes /2`
             * 如果是 HTTP 作为反向代理来说，最大并发数量应该是 `worker_connections*worker_processes/4`。作为反向代理服务器，每个并发会建立与客户端的连接和与后端服务的连接，会占用两个连接
-    - 优点
-        + 可以使用 nginx-s reload 热部署
-        + 每个 Worker 是独立的进程，不需要加锁，省掉了锁带来的开销
-        + 采用独立的进程，互相之间不会影响，一个进程退出后，其他进程还在工作，服务不会中断，Master 进程则很快启动新的 Worker 进程
-* 缓存加载器进程（Cache Loader ）
+* 优点
+    - 可以使用 nginx-s reload 热部署
+    - 每个 Worker 是独立的进程，不需要加锁，省掉了锁带来的开销
+    - 采用独立的进程，互相之间不会影响，一个进程退出后，其他进程还在工作，服务不会中断，Master 进程则很快启动新的 Worker 进程
+* 缓存加载器进程 Cache Loader
     - 在Nginx服务启动一段时间后由主进程生成，在缓存元数据重建完成后就自动退出
-* 缓存管理器进程（Cache Manager）
+* 缓存管理器进程 Cache Manager
     - 一般存在于主进程的整个生命周期，负责对缓存索引进行管理。通过缓存机制，可以提高对请求的响应效率，进一步降低网络压力
 * 事件驱动：多进程（单线程）&多路 IO 复用模型，异步，非阻塞 epoll(Linux),kqueue（FreeBSD）, /dev/poll(Solaris)
 * 消息通知：select,poll, rt signals
     - 支持sendfile,  sendfile64
     - 支持AIO，mmap
-* 热升级：在不停止服务的情况下更换 Nginx 的binary文件
+* 热升级：在不停止服务情况下更换 Nginx 的binary文件
     - 把旧的 Nginx binary 文件替换为新的，新编译的 nginx 文件所指定的相应的配置选项，必须保持和老的 Nginx 是一致的，否则的话没有办法复用 nginx.conf 文件
     - 向现有老的 Master (Old) 进程发生  USR2 信号，之后 Master (Old) 进程会将修改 pid 文件名，添加后缀 .oldbin
     - 使用新的 binary 文件启动新的 Master (New) 进程。会出现两个 Master 进程：Master(Old) 和 Master (New)，Master (New) 进程会自动启动新的 Worker 进程。这里新的 Master (New) 进程是怎么样启动的呢？它其实是老的 Master(Old) 进程的子进程，不过这个子进程是使用了新的 binary 文件带入来启动的
@@ -370,22 +382,9 @@ location /video {
 }
 ```
 
-## 模块化
-
-* Nginx（内核）本身做的工作实际很少，当它接到一个 HTTP 请求时，它仅仅是通过查找配置文件将此次请求映射到一个 location block，而此 location 中所配置的各个指令则会启动不同的模块去完成工作，因此模块可以看做 Nginx 真正的劳动工作者。
-    - 通常一个 location 中的指令会涉及一个 Handler 模块和多个 Filter 模块（当然，多个location可以复用同一个模块）。
-    - Handler模块负责处理请求，完成响应内容的生成，而 Filter 模块对响应内容进行处理。
-* 核心模块（HTTP模块、EVENT模块和MAIL模块）
-* 基础模块（HTTP Access模块、HTTP FastCGI模块、HTTP Proxy模块和HTTP Rewrite模块）
-* 第三方模块（ HTTP Upstream Request Hash模块、Notice模块和HTTP Access Key模块）
-* 功能分类
-    - Handlers（处理器模块）：此类模块直接处理请求，并进行输出内容和修改 headers 信息等操作。Handlers 处理器模块一般只能有一个。
-    - Filters（过滤器模块）：此类模块主要对其他处理器模块输出的内容进行修改操作，最后由 Nginx 输出。
-    - Proxies（代理类模块）：此类模块是 Nginx 的 HTTP Upstream 之类的模块，这些模块主要与后端一些服务比如FastCGI 等进行交互，实现服务代理和负载均衡等功能。
-
 ### 配置
 
-* 语法：
+* 语法
     - 配置文件由指令和指令块构成
     - 每条指令以分号（;）结尾，指令和参数间以空格符分隔
     - 指令块以大括号{}将多条指令组织在一起
@@ -393,52 +392,48 @@ location /video {
     - 使用 # 添加注释
     - 使用 $ 定义变量
     - 部分指令的参数支持正则表达式
-* 全局块：主要影响Nginx全局，通常包括下面几个部分：
-    - 配置运行Nginx服务器用户（组）
-        - PHP7默认的用户和组是www-data。The main configuration file is: /etc/nginx/nginx.conf
-    - worker process数:worker角色的工作进程的个数
-        + master进程是接收并分配请求给worker处理
-        + 简单一点可以设置为cpu的核数grep ^processor /proc/cpuinfo | wc -l，也是 auto 值
-        + 如果开启了ssl和gzip更应该设置成与逻辑CPU数量一样甚至为2倍，可以减少I/O操作
-    - worker_cpu_affinity:在高并发情况下，通过设置cpu粘性来降低由于多CPU核切换造成的寄存器等现场重建带来的性能损耗。如worker_cpu_affinity 0001 0010 0100 1000; （四核）
-    - worker_rlimit_nofile 10240 默认是没有设置，可以限制为操作系统最大的限制65535
+* The main configuration file is: /etc/nginx/nginx.conf
+* 全局块：影响Nginx全局
+    - 配置运行Nginx服务器用户（组）:PHP7默认的用户和组是www-data
+    - worker process:worker 进程个数
+        + master进程接收并分配请求给worker处理
+        + 简单一点可以设置为cpu核心数 `grep ^processor /proc/cpuinfo | wc -l` ，也是 auto 值
+        + 如果开启了ssl和gzip应该设置成与逻辑CPU数量一样甚至为2倍，可以减少I/O操作
+    - `worker_cpu_affinity 0001 0010 0100 1000`:在高并发情况下，通过设置cpu粘性来降低由于多CPU核切换造成的寄存器等现场重建带来的性能损耗
+    - worker_rlimit_nofile 10240 默认没有设置，可以限制为操作系统最大的限制65535
     - Nginx进程PID存放路径
-    - 错误日志的存放路径
+    - 错误日志存放路径
     - 配置文件的引入
-* events:该部分配置主要影响Nginx服务器与用户的网络连接
-    - worker_connections:每一个worker进程能并发处理（发起）的最大连接数（包含与客户端或后端被代理服务器间等所有连接数）
+* events:主要影响Nginx服务器与用户的网络连接
+    - worker_connections:每个worker进程能并发处理（发起）的最大连接数（包含与客户端或后端被代理服务器间等所有连接数）
         + 最大连接数 = worker_processes * worker_connections/4
-        + 不能超过后面的worker_rlimit_nofile
+        + 不能超过 worker_rlimit_nofile
     - 设置网络连接的序列化
-    - keepalive 连接数是能够有效减少延迟提升 web 页面加载速度的优化性能手段
-    - keepalive_requests 指令用于设置单个客户端能够在一个 keepalive 连接上处理的请求数量。
-    - keepalive_timeout 设置空闲 keepalive 连接保持打开的时间。
-    - keepalive 是关于 upstream（上游） 服务器和 Nginx 连接有关的配置 - 当 Nginx 充当代理或负载均衡服务器角色时。表示在空闲状态 upstream 服务器在单个 worker 进程中支持的 keepalive 连接数。
-    - 是否允许同时接收多个网络连接
+    - keepalive 是关于 upstream（上游） 服务器和 Nginx 连接有关的配置 - 当 Nginx 充当代理或负载均衡服务器角色时。表示在空闲状态 upstream 服务器在单个 worker 进程中支持的 keepalive 连接数
+        + 是否允许同时接收多个网络连接
+        + keepalive 连接数是能够有效减少延迟提升 web 页面加载速度的优化性能手段
+        + keepalive_requests 指令用于设置单个客户端能够在一个 keepalive 连接上处理的请求数量
+        + keepalive_timeout 设置空闲 keepalive 连接保持打开的时间
     - 事件驱动模型的选择
-    - 最大连接数的配置
-    - 事件模型：
-        + 标准事件模型：Select、poll属于标准事件模型，如果当前系统不存在更有效的方法，nginx会选择select或poll
-    - 高效事件模型
-        + Kqueue：使用于FreeBSD 4.1+, OpenBSD 2.9+, NetBSD 2.0 和 MacOS X.使用双处理器的MacOS X系统使用kqueue可能会造成内核崩溃。
-        + Epoll：使用于Linux内核2.6版本及以后的系统。
-        + /dev/poll：使用于Solaris 7 11/99+，HP/UX 11.22+ (eventport)，IRIX 6.5.15+ 和 Tru64 UNIX 5.1A+。
-        + Eventport：使用于Solaris 10。 为了防止出现内核崩溃的问题， 有必要安装安全补丁
-* HTTP 块：代理、缓存和日志定义等绝大多数功能和第三方模块的配置都在这里
+        + Select、poll属于标准事件模型，如果当前系统不存在更有效的方法，nginx会选择select或poll
+        + 高效事件模型
+            * Kqueue：使用于FreeBSD 4.1+, OpenBSD 2.9+, NetBSD 2.0 和 MacOS X.使用双处理器的MacOS X系统使用kqueue可能会造成内核崩溃。
+            * Epoll：使用于Linux内核2.6版本及以后的系统。
+            * /dev/poll：使用于Solaris 7 11/99+，HP/UX 11.22+ (eventport)，IRIX 6.5.15+ 和 Tru64 UNIX 5.1A+。
+            * Eventport：使用于Solaris 10。 为了防止出现内核崩溃的问题， 有必要安装安全补丁
+* HTTP 块：代理、缓存和日志定义等绝大多数功能和第三方模块的配置
     - sendfile on 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，减少用户空间到内核空间的上下文切换。对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载
     - 当使用sendfile函数时，TCP_NOPUSH才起作用，因为在sendfile时，Nginx会要求发送某些信息来预先解释数据，这些信息其实就是报头内容，典型情况下报头很小，而且套接字上设置了TCP_NODELAY。有报头的包将被立即传输，在某些情况下（取决于内部的包计数器），因为这个包成功地被对方收到后需要请求对方确认。这样，大量数据的传输就会被推迟而且产生了不必要的网络流量交换。而通过设置TCP_NOPUSH=on，表示将所有HTTP的header一次性发出去
     - TCP_NODELAY只有在配置长连接时才起作用，因为长连接可能引起小包的阻塞，配置TCP_NODELAY可以避免该阻塞
     - Use the tcp_nopush directive together with the sendfile on;directive. This enables NGINX to send HTTP response headers in one packet right after the chunk of data has been obtained by sendfile().
     - 在 nginx 中，tcp_nopush 配置和 tcp_nodelay “互斥”。
-    - 定义MIMI-Type
-    - keepalive_timeout 65 : 长连接超时时间，单位是秒 长连接请求大量小文件的时候，可以减少重建连接的开销，但假如有大文件上传，65s内没上传完成会导致失败。如果设置时间过长，用户又多，长时间保持连接会占用大量资源。
-    - send_timeout : 用于指定响应客户端的超时时间。这个超时仅限于两个连接活动之间的时间，如果超过这个时间，客户端没有任何活动，Nginx将会关闭连接。
+    - 定义 MIMI-Type
+    - keepalive_timeout 65: 长连接超时时间，单位是秒 长连接请求大量小文件的时候，可以减少重建连接的开销，但假如有大文件上传，65s内没上传完成会导致失败。如果设置时间过长，用户又多，长时间保持连接会占用大量资源。
+    - send_timeout 用于指定响应客户端的超时时间。这个超时仅限于两个连接活动之间的时间，如果超过这个时间，客户端没有任何活动，Nginx将会关闭连接
     - 自定义服务日志
     - client_max_body_size 10m 允许客户端请求的最大单文件字节数。如果有上传较大文件，请设置它的限制值
     - client_body_buffer_size 128k  缓冲区代理缓冲用户端请求的最大字节数
-    - 允许sendfile方式传输文件
     - 增大TCP的listen queue：sudo sysctl -w net.core.somaxconn=4096或者永久修改/etc/sysctl.conf：net.core.somaxconn = 4096，然后修改Nginx：`listen 80 backlog=4096;`
-    - 连接超时时间
     - 单连接请求数上限
     - windows调用php-cgi启动服务
     - linux通过转交服务给php-fpm处理:配置www.conf服务转交TCP socket或Unix Socket
@@ -448,7 +443,7 @@ location /video {
         + TCP Sockets
             * This makes PHP-FPM able to be listened to by remote servers
             * listen.allowed_clients = 127.0.0.1
-    - http_proxy：:nginx作为反向代理服务器的功能，包括缓存功能
+    - http_proxy：nginx作为反向代理服务器的功能，包括缓存功能
         + proxy_connect_timeout 60 nginx跟后端服务器连接超时时间(代理连接超时)
         + proxy_read_timeout 60 连接成功后，与后端服务器两个成功的响应操作之间超时时间(代理接收超时)
         + proxy_buffer_size 4k 设置代理服务器（nginx）从后端realserver读取并保存用户头信息的缓冲区大小，默认与proxy_buffers大小相同，其实可以将这个指令值设的小一点
@@ -465,10 +460,10 @@ location /video {
         + gzip_types ：匹配mime类型进行压缩，无论是否指定,”text/html”类型总是会被压缩的。
         + gzip_proxied any ：Nginx作为反向代理的时候启用，决定开启或者关闭后端服务器返回的结果是否压缩，匹配的前提是后端服务器必须要返回包含”Via”的 header头。
         + gzip_vary on ：和http头有关系，会在响应头加个 Vary: Accept-Encoding ，可以让前端的缓存服务器缓存经过gzip压缩的页面，例如，用Squid缓存经过Nginx压缩的数据。
-* server：也被叫做“虚拟服务器”部分，它描述的是一组根据不同server_name指令逻辑分割的资源，这些虚拟服务器响应 HTTP 请求，因此都包含在 HTTP 部分。
-    - 配置网络监听
+* server：也被叫做“虚拟服务器”部分，一组根据不同server_name指令逻辑分割的资源，这些虚拟服务器响应 HTTP 请求，因此都包含在 HTTP 部分
     - 基于名称的虚拟主机配置
     - 基于IP的虚拟主机配置
+    - 配置网络监听
     - http_stream
         + 通过一个简单的调度算法来实现客户端IP到后端服务器的负载均衡，upstream后接负载均衡器的名字，后端realserver以 host:port options; 方式组织在 {} 中。如果后端被代理的只有一台，也可以直接写在 proxy_pass
 * location：基于 Nginx 服务器接收到的请求字符串（例如 server_name/uri-string），对虚拟主机名称 （也可以是 IP 别名）之外的字符串（例如前面的 /uri-string）进行匹配，对特定的请求进行处理。
@@ -476,12 +471,12 @@ location /video {
     - 请求根目录配置
     - 更改location的URI
         + proxy_pass http:/backend 请求转向backend定义的服务器列表，即反向代理，对应upstream负载均衡器。也可以proxy_pass http://ip:port。
-    - 网站默认首页配置
+    - 默认首页配置
 * 通用
-    - autoindex on;  允许列出整个目录
+    - autoindex on; 允许列出整个目录
     - autoindex_exact_size off; 默认为on，显示出文件的确切大小，单位是bytes。改为off后，显示出文件的大概大小，单位是kB或者MB或者GB
-    - autoindex_localtime on;默认为off，显示的文件时间为GMT时间。改为on后，显示的文件时间为文件的服务器时间
-* add_header并不享受Nginx的继承机制，意味着如果子context中有add_header，那么它将覆盖所有的父context中的add_header配置。比如，在http中配置了3个add_header，然后在server中配置了1个add_header，那么server中的add_header会将http中的所有3个add_header给覆盖掉
+    - autoindex_localtime on; 默认为off，显示的文件时间为GMT时间。改为on后，显示的文件时间为文件的服务器时间
+    - `add_header`并不享受Nginx的继承机制，意味着如果子context中有add_header，那么将覆盖所有的父context中的add_header配置。比如，在http中配置了3个add_header，然后在server中配置了1个add_header，那么server中的add_header会将http中的所有3个add_header给覆盖掉
 *  /status
     - Active connections：当前活动的连接数量。
     - Accepts：已经接受客户端的连接总数量。
@@ -490,6 +485,10 @@ location /video {
     - Reading：当前服务器正在读取客户端请求头的数量。
     - Writing：当前服务器正在写响应信息的数量。
     - Waiting：当前多少客户端在等待服务器的响应。
+* 工具
+    - [valentinxxx/nginxconfig.io](https://github.com/valentinxxx/nginxconfig.io):⚙️ NGiИX config generator generator on steroids 💉 https://nginxconfig.io
+    - [NGINX Config](https://www.digitalocean.com/community/tools/nginx):The easiest way to configure a performant, secure,
+    and stable NGINX server.
 
 ```json
 $args # 请求中的参数
@@ -523,7 +522,7 @@ $document_uri # 同 $uri
 
 ### server
 
-* http服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
+* http 服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
 * backlog 默认位 128，1024 这个值换成自己正常的 QPS
 * 流程
     - First, the incoming URI will be normalized even before any of the location matching takes place. For example, First it will decode the “%XX” values in the URL.
@@ -537,18 +536,18 @@ $document_uri # 同 $uri
 * location匹配优先级:一次请求只能匹配一个location，一旦匹配成功后，便不再继续匹配其余
     - 先匹配普通字符串，然后再匹配正则表达式
         + 普通字符串匹配顺序是根据配置中字符长度从长到短，也就是说使用普通字符串配置的location顺序是无关紧要的
-        + 正则表达式按照配置文件里的顺序测试。找到第一个比配的正则表达式将停止搜索。
-    - `=` 精确匹配并且终止搜索。match only the following EXACT URL
+        + 正则表达式按照配置文件里的顺序测试。找到第一个比配的正则表达式将停止搜索
+    - `=` 精确匹配并且终止搜索 match only the following EXACT URL
     - `~` 区分大小写的正则匹配；case sensitive regular expression match modifier
     - `~*` 不区分字符大小写正则表达式匹配
     - `^~` uri以指定字符或字符串开头，立即使用此 Location 处理请求，而不再使用 Location 块中的正则 URI 和请求字符串做匹配；this configuration will be used as the prefix match, but this will not perform any further regular expression match even if one is available.等同无标志符号，多了不会匹配后面对应规则
     - 不带任何修饰符，也表示前缀匹配，但是在正则匹配之后 location /uri
     - `/` 通用匹配，任何请求都会匹配到
-    - 优先级：= >完整路径 >^~ > ~* > ~ > /
-    - 没有正则表达式的 Location 被作为最佳的匹配，独立于含有正则表达式的 Location 顺序。
-    - 在配置文件中按照查找顺序进行正则表达式匹配。在查找到第一个正则表达式匹配之后结束查找。由这个最佳的 Location 提供请求处理。
-* rewrite：使用正则匹配请求的url，然后根据定义的规则进行重写和改变，需ngx_http_rewrite_module模块来支持url重写功能，该模块是标准模块，默认已经安装
-    - 正则表达式需要使用PCRE格式。PCRE正则表达式元字符：
+    - 优先级：= > 完整路径 >^~ > ~* > ~ > /
+    - 没有正则表达式的 Location 被作为最佳的匹配，独立于含有正则表达式的 Location 顺序
+    - 在配置文件中按照查找顺序进行正则表达式匹配。在查找到第一个正则表达式匹配之后结束查找。由这个最佳的 Location 提供请求处理
+* rewrite：使用正则匹配请求url，根据定义规则进行重写和改变，需`ngx_http_rewrite_module`模块来支持url重写功能，该模块是标准模块，默认已经安装
+    - 正则表达式需要使用PCRE格式
         + 字符匹配
             * . : 匹配除换行符以外的任意字符
             * 匹配单个字符
@@ -558,7 +557,7 @@ $document_uri # 同 $uri
             * \d ：匹配数字
         + 位置锚定
             * ^
-          + $ at the end means that the specified keyword should be at the end of the URL.
+            * $ at the end means that the specified keyword should be at the end of the URL.
         + 或者：|  OR operator
         + 分组：(),后向引用, $1, $2, ...
         + ( ) – all the values inside this regular expression will be considered as keywords in the URL
@@ -586,7 +585,6 @@ $document_uri # 同 $uri
 * 缓存
     - 浏览器缓存，静态资源缓存用：`expires 7d;`
     - 代理层缓存
-
 * location 匹配规则 语法规则：location [=|~|~*|^~] /uri/ { … }
     - location = /uri \= 表示精确匹配，只有完全匹配上才能生效
     - location ^~ /uri    ^~ 开头对 URL 路径进行前缀匹配，并且在正则之前。
@@ -605,8 +603,8 @@ $document_uri # 同 $uri
     - 意：前缀匹配，如果有包含关系时，按最大匹配原则进行匹配。比如在前缀匹配：location /dir01 与 location /dir01/dir02，如有请求 http://localhost/dir01/dir02/file 将最终匹配到 location /dir01/dir02
 
 ```
-
 listen 8080 default backlog=5000;
+
 location = / {
    echo "规则 A";
 }
@@ -631,7 +629,6 @@ location /img {
 location / {
    echo "规则 F";
 }
-```
 
 访问根目录 /，比如 http://localhost/ 将匹配 规则 A
 访问 http://localhost/login 将匹配 规则 B，http://localhost/register 则匹配 规则 F
@@ -642,6 +639,7 @@ location / {
 访问 http://localhost/img/a.gif 会匹配上 规则 D, 虽然 规则 Y 也可以匹配上，但是因为正则匹配优先，而忽略了 规则 Y。
 访问 http://localhost/img/a.tiff 会匹配上 规则 Y。
 访问 http://localhost/category/id/1111 则最终匹配到规则 F ，因为以上规则都不匹配，这个时候应该是 Nginx 转发请求给后端应用服务器，比如 FastCGI（php），tomcat（jsp），Nginx 作为反向代理服务器存在。
+```
 
 ### 伪静态
 
@@ -785,7 +783,7 @@ location ~ \.(htm|html)?$ {
 
 * `proxy_cache_path` 参数及对应配置说明如下：
     - 用于缓存的本地磁盘目录是 /path/to/cache/
-    -levels 在 /path/to/cache/ 设置了一个两级层次结构的目录。将大量的文件放置在单个目录中会导致文件访问缓慢，所以针对大多数部署，我们推荐使用两级目录层次结构。如果 levels 参数没有配置，则 Nginx 会将所有的文件放到同一个目录中。
+    - levels 在 /path/to/cache/ 设置了一个两级层次结构的目录。将大量的文件放置在单个目录中会导致文件访问缓慢，所以针对大多数部署，我们推荐使用两级目录层次结构。如果 levels 参数没有配置，则 Nginx 会将所有的文件放到同一个目录中。
     - `keys_zone `设置一个共享内存区，该内存区用于存储缓存键和元数据，有些类似计时器的用途。将键的拷贝放入内存可以使 Nginx 在不检索磁盘的情况下快速决定一个请求是 HIT 还是 MISS，这样大大提高了检索速度。一个 1MB 的内存空间可以存储大约 8000 个 key，那么上面配置的 10MB 内存空间可以存储差不多 80000 个 key
     - max_size 设置了缓存的上限（在上面的例子中是 10G）。这是一个可选项；如果不指定具体值，那就是允许缓存不断增长，占用所有可用的磁盘空间。当缓存达到这个上限，处理器便调用 cache manager 来移除最近最少被使用的文件，这样把缓存的空间降低至这个限制之下。
     - inactive 指定了项目在不被访问的情况下能够在内存中保持的时间。在上面的例子中，如果一个文件在 60 分钟之内没有被请求，则缓存管理将会自动将其在内存中删除，不管该文件是否过期。该参数默认值为 10 分钟（10m）。注意，非活动内容有别于过期内容。Nginx 不会自动删除由缓存控制头部指定的过期内容（本例中 Cache-Control:max-age=120）。过期内容只有在 inactive 指定时间内没有被访问的情况下才会被删除。如果过期内容被访问了，那么 Nginx 就会将其从原服务器上刷新，并更新对应的 inactive 计时器。
@@ -1112,15 +1110,15 @@ sudo certbot renew --dry-run
 ## 故障转移和高可用
 
 * Keepalived 软件起初是专为 LVS 负载均衡软件设计的，用来管理并监控 LVS 集群系统中各个服务节点的状态。后来又加入了可以实现高可用的 VRRP (Virtual Router Redundancy Protocol ，虚拟路由器冗余协议）功能
-    - 故障切换转移，是通过 VRRP 来实现的
+    - 故障切换转移通过 VRRP 来实现
         + 在 Keepalived服务正常工作时，主 Master 节点会不断地向备节点发送（多播的方式）心跳消息，用以告诉备 Backup 节点自己还活着。
         + 当主 Master 节点发生故障时，就无法发送心跳消息，备节点也就因此无法继续检测到来自主  Master 节点的心跳了，于是调用自身的接管程序，接管主 Master 节点的 IP 资源及服务。
         + 而当主 Master节点恢复时，备 Backup 节点又会释放主节点故障时自身接管的 IP 资源及服务，恢复到原来的备用角色。
-    - 模仿
-        + 准备两台安装 Nginx 和 Keepaliver(yum install keepalived -y)的服务器.配置如下
-        + 启动 Nginx 和 Keepalived（systemctl start keepalived.service）
-        + 模拟 Nginx 故障（关闭主服务器 Nginx），验证，仍可以通过配置的虚拟 IP 访问
-        + 启动 Nginx 和 Keepalived
+* 模仿
+    - 准备两台安装 Nginx 和 Keepaliver(yum install keepalived -y)的服务器.配置如下
+    - 启动 Nginx 和 Keepalived（systemctl start keepalived.service）
+    - 模拟 Nginx 故障（关闭主服务器 Nginx），验证，仍可以通过配置的虚拟 IP 访问
+    - 启动 Nginx 和 Keepalived
 
 ```
 #主机
@@ -1194,7 +1192,7 @@ fi
 
 * 连接数限流模块ngx_http_limit_conn_module
     - 可以根据定义的键来限制每个键值的连接数，如同一个IP来源的连接数。并不是所有的连接都会被该模块计数，只有那些正在被处理的请求（这些请求的头信息已被完全读入）所在的连接才会被计数
-* 漏桶算法实现的请求限流模块ngx_http_limit_req_module
+* 漏桶算法实现的请求限流模块 ngx_http_limit_req_module
     - limit_req_zone定义在http块中，$binary_remote_addr 表示保存客户端IP地址的二进制形式
     - Zone定义IP状态及URL访问频率的共享内存区域。zone=keyword标识区域的名字，以及冒号后面跟区域大小。16000个IP地址的状态信息约1MB，所以示例中区域可以存储160000个IP地址。
     - Rate定义最大请求速率。示例中速率不能超过每秒100个请求
@@ -1354,16 +1352,13 @@ awk '{print $1}' time_access.log | sort | uniq -c | sort -n -k 1 -r | head -n 20
 
 ```
 
-## 日志
-
-
 ## 优化
 
-* 调整 worker_processes：指 Nginx 要生成的 Worker 数量，最佳实践是每个 CPU 运行 1 个工作进程。
+* 调整 worker_processes：Nginx 要生成的 Worker 数量，最佳实践是每个 CPU 运行 1 个工作进程
 * 最大化 worker_connections
-* 启用 Gzip 压缩：压缩文件大小，减少了客户端 HTTP 的传输带宽，因此提高了页面加载速度
+* 启用 Gzip 压缩：压缩文件大小，减少了客户端 HTTP 的传输带宽 提高了页面加载速度
 * 为静态文件启用缓存
-* 禁用 access_logs：访问日志记录，记录每个 Nginx 请求，因此消耗了大量 CPU 资源，从而降低了 Nginx 性能。
+* 禁用 access_logs：访问日志记录，记录每个 Nginx 请求，消耗了大量 CPU 资源，从而降低了 Nginx 性能
 
 ## [Nginx+Lua](https://github.com/loveshell/ngx_lua_waf)
 
@@ -1564,7 +1559,6 @@ server {
 }
 
 <VirtualHost *:80>
-
   ServerName example.com
   Redirect permanent / https://example.com/
 </VirtualHost>
@@ -1579,7 +1573,6 @@ LoadModule headers_module modules/mod_headers.so
 
     # Uncomment the following directive when using client certificate authentication
     #SSLCACertificateFile    /path/to/ca_certs_for_client_authentication
-
 
     # HSTS (mod_headers is required) (15768000 seconds = 6 months)
     Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
@@ -1612,7 +1605,7 @@ nginx -s reload
 * www目录将映射为nginx容器配置的虚拟目录
 * logs目录将映射为nginx容器的日志目录
 * conf目录里的配置文件将映射为nginx容器的配置文件
-* [ nginx-proxy / nginx-proxy ](https://github.com/nginx-proxy/nginx-proxy):Automated nginx proxy for Docker containers using docker-gen
+* [nginx-proxy](https://github.com/nginx-proxy/nginx-proxy):Automated nginx proxy for Docker containers using docker-gen
 
 ```
 mkdir -p ~/nginx/www ~/nginx/logs ~/nginx/conf
@@ -1673,11 +1666,7 @@ fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 
 ## 工具
 
-* [openresty/openresty](https://github.com/openresty/openresty):Turning Nginx into a Full-Fledged Scriptable Web Platform https://openresty.org
 * [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes https://kubernetes.github.io/ingress-nginx/
-* [valentinxxx/nginxconfig.io](https://github.com/valentinxxx/nginxconfig.io):⚙️ NGiИX config generator generator on steroids 💉 https://nginxconfig.io
-* [NGINX Config](https://www.digitalocean.com/community/tools/nginx):The easiest way to configure a performant, secure,
-and stable NGINX server.
 * [lebinh/ngxtop](https://github.com/lebinh/ngxtop):Real-time metrics for nginx server
     - `pip install ngxtop`
     - `ngxtop [选项]（print | top | avg | sum） <var>`
