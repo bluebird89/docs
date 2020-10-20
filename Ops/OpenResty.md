@@ -5,7 +5,7 @@ Turning Nginx into a Full-Fledged Scriptable Web Platform https://openresty.org
 * 一个基于 Nginx 与 Lua 的高性能 Web 平台，内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关
 * 包含技术
   - Nginx: 一个免费的、开源的、高性能的 HTTP 服务器和反向代理，也是一个电子邮件（IMAP/POP3/SMTP）代理服务器
-  - Lua: 一种轻量、小巧、可移植、快速的脚本语言；LuaJIT即时编译器会将频繁执行的Lua代码编译成本地机器码交给CPU直接执行，执行效率更高，OpenResty会默认启用LuaJIT。
+  - Lua: 一种轻量、小巧、可移植、快速的脚本语言；LuaJIT即时编译器会将频繁执行的Lua代码编译成本地机器码交给CPU直接执行，执行效率更高，OpenResty会默认启用LuaJIT
 * 基于 Nginx 的一个 C 模块（lua-nginx-module）,将 LuaJIT 嵌入到 Nginx 服务器中，并对外提供一套完整的 Lua API，透明地支持非阻塞 I/O，提供了轻量级线程、定时器等高级抽象。
 * 围绕这个模块，OpenResty 构建了一套完备的测试框架、调试技术和由 Lua 实现的周边功能库
 * 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将 Nginx 有效地变成一个强大的通用 Web 应用平台。Web 开发人员和系统工程师可以使用 Lua 脚本语言调动 Nginx 支持的各种 C 以及 Lua 模块，快速构造出足以胜任 10K 乃至 1000K 以上单机并发连接的高性能 Web 应用系统
@@ -115,16 +115,16 @@ sudo killall -9 nginx
 * 异步输出:当调用 ngx.say 后并不会立刻输出响应体
 * 响应体过大输出:输出内容本身体积很大，例如超过 2G 的文件下载;输出内容本身是由各种碎片拼凑的，碎片数量庞大，例如应答数据是某地区所有人的姓名
   - 没有必要一定连接成字符串后再进行输出。完全可以直接存放在 table 中，用数组的方式把这些碎片数据统一起来，直接调用 ngx.print(table) 即可
-    
-    ```
-    nginx -p `pwd`/ -c conf/nginx.conf
-    ```
+
+```
+nginx -p `pwd`/ -c conf/nginx.conf
+```
 
 ## 日志
 
-* 主力作者 对测试和调试代码
+* 主力作者对测试和调试代码
   - Luiz Henrique de Figueiredo：我主要是一块一块的构建，分块测试。我很少使用调试器。即使用调试器，也只是调试 C 代码。我从不用调试器调试 Lua 代码。对于 Lua 来说，在适当的位置放几条打印语句通常就可以胜任了
-  - Roberto Ierusalimschy：我差不多也是这样。当我使用调试器时，通常只是用来查找代码在哪里崩溃了。对于 C 代码，有个像 Valgrind 或者 Purify 这样的工具是必要
+  - Roberto Ierusalimschy：差不多也是这样。使用调试器时，通常只是用来查找代码在哪里崩溃了。对于 C 代码，有个像 Valgrind 或者 Purify 这样的工具是必要
 * 日志级别
   - ngx.STDERR     -- 标准输出
   - ngx.EMERG      -- 紧急报错
