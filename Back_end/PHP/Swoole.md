@@ -111,37 +111,40 @@ php --ri swoole
 
 * 上下文:存在不同生命周期，就有了不同的上下文 Context
   - 上下文对象都实现了基础的 ContextInterface 接口，因此可以使用上下文存取当前请求生命周期的数据
-* master进程：一个包含多线程进程，运行启动 Swoole PHP 脚本时，首先会创建该进程（整个应用的 root 进程），然后由该进程 fork 出 Reactor 线程和 Manager 进程
-* Reactor线程组：Reactor 是包含在 Master 进程中的多线程程序，用来处理 TCP 连接和数据收发（异步非阻塞方式）
-  - 以多线程的方式运行
-  - 负责维护客户端TCP连接、处理网络IO、处理协议、收发数据
-  - Reactor 主线程用于accept在 Accept 新的连接后,会将这个连接分配给一个固定的 Reactor 线程，并由这个线程负责监听此 socket。在 socket 可读时读取数据，并进行协议解析，将请求通过管道的方式传递给Worker进程(不包括Tasker进程)；在 socket 可写时将数据发送给 TCP 客户端。
-  - 后面的网络数据IO则靠Reactor线程与客户端完成
-    + 将TCP客户端发来的数据缓冲、拼接、拆分成完整的一个请求数据包
-    + 在 socket 可读时读取数据，并进行协议解析，将请求投递到 Worker 进程
-    + 在 socket 可写时将数据发送给 TCP 客户端
-  - 完全是异步非阻塞的模式
-    + socket可读时读取数据，并进行协议解析，将请求投递到Worker进程
-    + socket可写时将数据发送给TCP客户端
-  - 全部为C代码，除Start/Shudown事件回调外，不执行任何PHP代码
-  - 方法
-    + onStart
-    + onShutdown
-* manager进程：由Master进程fork出来，主要负责管理 Worker 进程,包括fork worker进程、监控worker进程状态、重新拉起新的worker进程等等
+* master进程：一个包含多线程进程，启动 Swoole PHP 脚本时
+  - 创建 master 进程（整个应用的 root 进程）
+  - master 进程 fork 出 Manager 进程 和 Reactor 线程组
+  - Reactor线程组：包含在 Master 进程中的多线程程序，用来处理 TCP 连接和数据收发（异步非阻塞方式）
+    + 以多线程方式运行
+    + 负责维护客户端TCP连接、处理网络IO、处理协议、收发数据
+    + Reactor 主线程用于accept在 Accept 新的连接后,会将这个连接分配给一个固定的 Reactor 线程，并由这个线程负责监听此 socket
+    + 后面的网络数据IO则靠Reactor线程与客户端完成
+      * 将TCP客户端发来的数据缓冲、拼接、拆分成完整的一个请求数据包
+      * 在 socket 可读时读取数据，并进行协议解析，将请求投递到 Worker 进程(不包括Tasker进程)
+      * 在 socket 可写时将数据发送给 TCP 客户端
+    + 完全是异步非阻塞的模式
+    + 方法
+      * onStart
+      * onShutdown
+* manager进程
   - 方法
     + onManagerStart
     + onManagerStop
-  - 管理
-    + 子进程结束运行时，manager进程负责回收此子进程，避免成为僵尸进程。并创建新的子进程
+  - 负责管理 Worker 进程
+    + fork worker进程
+    + 监控worker进程状态
+    + 当Worker进程异常退出，如发生PHP的致命错误、被其他程序误杀，或达到max_request次数之后正常退出。会重新拉起新的Worker进程
+    + 子进程结束运行时，负责回收此子进程，避免成为僵尸进程
     + 服务器关闭时，manager进程将发送信号给所有子进程，通知子进程关闭服务
     + 服务器reload时，manager进程会逐个关闭/重启子进程
     + Master进程是多线程，不能安全的执行fork操作
-* worker进程：以多进程方式运行，每个子进程负责接受由 Reactor 线程投递的请求数据包，并执行 PHP 回调函数处理数据，然后生成响应数据并发给 Reactor 线程，由 Reactor 线程发送给 TCP 客户端。所有请求的处理逻辑都是在 Worker 子进程中完成
-  - 由Manager进程fork而出
-  - 当Worker进程异常退出，如发生PHP的致命错误、被其他程序误杀，或达到max_request次数之后正常退出。主进程会重新拉起新的Worker进程
-  - 响应
-    + TCP客户端，Worker进程处理完请求后，调用$server->send会将数据发给Reactor线程，由Reactor线程再发给客户端
-    + UDP客户端，Worker进程处理完请求后，调用$server->sendto会直接发给客户端，无需经过Reactor线程
+* worker进程
+  - 以多进程方式运行
+  - 请求的处理逻辑
+    + 接受由 Reactor 线程投递的请求数据包，并执行 PHP 回调函数处理数据
+    + 生成响应数据并发给 Reactor 线程，由 Reactor 线程发送给客户端
+      * TCP客户端，Worker进程处理完请求后，调用$server->send会将数据发给Reactor线程，由Reactor线程再发给客户端
+      * UDP客户端，Worker进程处理完请求后，调用$server->sendto会直接发给客户端，无需经过Reactor线程
   - 可以是异步非阻塞模式，也可以是同步阻塞模式
   - 方法
     + onWorkerStart
@@ -150,11 +153,12 @@ php --ri swoole
     + onClose
     + onReceive
     + onFinish
-* TaskWorker进程：以多进程方式运行，仅用于任务分发，当 Worker 进程将任务异步分发到任务队列时，Task Worker 负责从队列中消费这些任务（同步阻塞方式处理），处理完成后将结果返回给 Worker 进程
+* TaskWorker进程：以多进程方式运行
+  - 用于任务分发：当 Worker 进程将任务异步分发到任务队列时，Task Worker 负责从队列中消费这些任务（同步阻塞方式处理），处理完成后将结果返回给 Worker 进程
+    + 接受由Worker进程通过swoole_server->task/taskwait方法投递的任务
+    + 处理任务，并将结果数据返回（使用swoole_server->finish）给Worker进程
   - 支持定时器
-  - 做一些异步的慢速任务，比如webim中发广播，发送邮件
-  - 接受由Worker进程通过swoole_server->task/taskwait方法投递的任务
-  - 处理任务，并将结果数据返回（使用swoole_server->finish）给Worker进程
+  - 做一些异步慢速任务，比如webim中发广播，发送邮件
   - 实现PHP的数据库连接池，异步队列等
   - 完全是同步阻塞模式
   - 方法
@@ -180,15 +184,16 @@ php --ri swoole
 
 * 强大的TCP/UDP Server框架，支持多线程，EventLoop，事件驱动，异步，Worker进程组，Task异步任务，毫秒定时器，SSL/TLS隧道加密
 * 类型
-  - `swoole_http_server`是swoole_server的子类，内置了Http的支持
+  - `swoole_http_server` swoole_server子类，内置Http支持
     + 采用优秀的 Reactor 模型，处理速度可逼进 NGINX 处理静态页面速度
   - `swoole_websocket_server`是swoole_http_server的子类，内置了WebSocket的支持
-  - `swoole_redis_server`是swoole_server的子类，内置了Redis服务器端协议的支持
+  - `swoole_redis_server`是swoole_server子类，内置Redis服务器端协议支持
 * 默认使用SWOOLE_PROCESS模式，因此会额外创建Master和Manager两个进程
-* TCP协议:流式的，数据包没有边界.在接收1个大数据包时，可能会被拆分成多个数据包发送。多次Send底层也可能会合并成一次进行发送。需要2个操作来解决：
-  - 分包：Server收到了多个数据包，需要拆分数据包
-  - 合包：Server收到的数据只是包的一部分，需要缓存数据，合并成完整的包
-  - 基于TCP的协议：HTTP、HTTPS、FTP、SMTP、POP3、IMAP、SSH、Redis、Memcache、MySQL
+* TCP协议
+  - 流式：数据包没有边界.在接收1个大数据包时，可能会被拆分成多个数据包发送。多次Send底层也可能会合并成一次进行发送
+    + 分包：Server收到了多个数据包，需要拆分数据包
+    + 合包：Server收到数据只是包的一部分，需要缓存数据，合并成完整的包
+  - 基于TCP协议的应用层协议：HTTP、HTTPS、FTP、SMTP、POP3、IMAP、SSH、Redis、Memcache、MySQL
   - 自定义网络通信协议
     + EOF协议:每个数据包结尾加一串特殊字符表示包已结束。如memcache、ftp、stmp都使用\r\n作为结束符。发送数据时只需要在包末尾增加\r\n即可。使用EOF协议处理，一定要确保数据包中间不会出现EOF，否则会造成分包错误。
     + 固定包头+包体协议:一个数据包总是由包头+包体2部分组成。包头由一个字段指定了包体或整个包的长度，长度一般是使用2字节/4字节整数来表示。服务器收到包头后，可以根据长度值来精确控制需要再接收多少数据就是完整的数据包。
@@ -227,7 +232,7 @@ dtruss|strace -f -p masterPid
 
 ## Client
 
-* TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支持SSL双向证书，支持同步并发调用，支持异步事件驱动编程。
+* TCP/UDP/UnixSocket客户端，支持IPv4/IPv6，支持SSL/TLS隧道加密，支持SSL双向证书，支持同步并发调用，支持异步事件驱动编程
 
 ## Event
 
@@ -303,11 +308,11 @@ dtruss|strace -f -p masterPid
     + 对于全局变量，均是跟随着一个 请求(Request) 而产生的,CLI 应用，会存在 全局周期 和 请求周期(协程周期) 两种长生命周期
       * 全局周期，我们只需要创建一个静态变量供全局调用即可，静态变量意味着在服务启动后，任意协程和代码逻辑均共享此静态变量内的数据，也就意味着存放的数据不能是特别服务于某一个请求或某一个协程；
       * 协程周期，由于 Hyperf 会为每个请求自动创建一个协程来处理，那么一个协程周期在此也可以理解为一个请求周期，在协程内，所有的状态数据均应存放于 Hyperf\Utils\Context 类中，通过该类的 get、set 来读取和存储任意结构的数据，这个 Context(协程上下文) 类在执行任意协程时读取或存储的数据都是仅限对应的协程的，同时在协程结束时也会自动销毁相关的上下文数据。
-* 适用场景：
+* 适用场景
   - 高并发服务，如秒杀系统、高性能 API 接口、RPC 服务器，使用协程模式，服务的容错率会大大增加，某些接口出现故障时，不会导致整个服务崩溃
   - 爬虫，可实现非常强大的并发能力，即使是非常慢速的网络环境，也可以高效地利用带宽
   - 即时通信服务，如 IM 聊天、游戏服务器、物联网、消息服务器等等，可以确保消息通信完全无阻塞，每个消息包均可即时地被处理
-* 问题：
+* 问题
   - 需要为每个并发保存栈内存并维护对应的虚拟机状态，如果程序并发很大可能会占用大量内存
   - 调度会增加额外的一些 CPU 开销
 * 协程在底层实现上是单线程的，因此同一时间只有一个协程在工作，协程的执行是串行的，与线程不同，多个线程会被操作系统调度到多个 CPU 并行执行
@@ -532,71 +537,6 @@ fi
   - swoole_event系列函数
   - swoole_table/swoole_atomic/swoole_buffer
   - swoole_server->task/finish函数
-
-## 数据结构
-
-* 队列：PHP的SPL标准库中提供了SplQueue扩展内置的队列数据结构
-* 堆：排序功能，SplHeap就是一种有序的数据结构。数据总是按照最小在前或最大在前排序。新插入的数据会自动进行排序
-  - SplHeap底层使用跳表数据结构，insert操作的时间复杂度为O(Log(n))
-
-```php
-$queue = new SplQueue;
-//入队
-$queue->push($data);
-//出队
-$data = $queue->shift();
-//查询队列中的排队数量
-$n = count($queue);
-
-# 功能
-$splq = new SplQueue;
-for($i = 0; $i < 1000000; $i++)
-{
-    $data = "hello $i\n";
-    $splq->push($data);
-
-    if ($i % 100 == 99 and count($splq) > 100)
-    {
-        $popN = rand(10, 99);
-        for ($j = 0; $j < $popN; $j++)
-        {
-            $splq->shift();
-        }
-    }
-}
-
-$popN = count($splq);
-for ($j = 0; $j < $popN; $j++)
-{
-    $splq->pop();
-}
-
-//最大堆
-class MaxHeap extends SplHeap
-{
-    protected function compare($a, $b)
-    {
-        return $a - $b;
-    }
-}
-
-//最小堆
-class MinHeap extends SplHeap
-{
-    protected function compare($a, $b)
-    {
-        return $b - $a;
-    }
-}
-
-$list = new MaxHeap;
-$list->insert(56);
-$list->insert(22);
-$list->insert(35);
-$list->insert(11);
-$list->insert(88);
-$list->insert(36);
-```
 
 ## 内存分配
 

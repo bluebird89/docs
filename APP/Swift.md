@@ -1,4 +1,4 @@
-# [apple/swift](https://github.com/apple/swift)
+# [swift](https://github.com/apple/swift)
 
 The Swift Programming Language https://swift.org/
 

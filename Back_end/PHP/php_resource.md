@@ -413,7 +413,7 @@ open http://127.0.0.1:8000
 * 日志 Logging 生成和处理日志文件的库
   - [Analog](https://github.com/jbroadway/analog): 一个基于闭包的微型日志包
   - [KLogger](https://github.com/katzgrau/KLogger): 一个易用的兼容PSR-3的日志类
-  - [Monolog](https://github.com/Seldaek/monolog): 一个全面的日志工具
+  - [Monolog](https://github.com/Seldaek/monolog): Sends your logs to files, sockets, inboxes, databases and various web services https://seldaek.github.io/monolog/
   - [log4php](http://logging.apache.org/log4php/)
   - [EasyCorp/easy-log-handler](https://github.com/EasyCorp/easy-log-handler):Human-friendly log files that make you more productive https://easycorp.io/EasyLog
   - [SeasX/SeasLog](https://github.com/SeasX/SeasLog)：An effective,fast,stable log extension for PHP.http://pecl.php.net/package/SeasLog http://neeke.github.io/SeasLog/

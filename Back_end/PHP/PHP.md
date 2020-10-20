@@ -1779,25 +1779,25 @@ $host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
 
 * 测试
   - 压测
-    + ab `ab -n1000 -c10 https://www.baidu.com/`  -n请求数 -c并发数,结果看下面参数
+    + ab `ab -n1000 -c10 https://www.baidu.com/`  -n请求数 -c并发数,结果参数
       * requests per second
       * time per request
-  - `time php php-src/Zend/micro_bench.php` :查看 user 参数
+  - `time php php-src/Zend/micro_bench.php`:查看 user 参数
   - XHPorf
 * 语言级
-  - 编译解析开销:zend逐行扫描 分析 成zend能识别的语法解析成opcode（内置方法生成opcode 少）执行
+  - 编译解析开销:zend逐行扫描分析成zend能识别的语法解析成opcode（内置方法生成opcode 少）执行
     + 用语言内置函数:已做优化，比自己实现的方法优化
     + 内置函数性能：知道方法的时间复杂度 比如：isset arrat_key_exists
     + 魔法函数性能不佳
     + 产生错误抑制符：代码前后改变错误等级 error_reporting 前面忽略 后面还原，通过vld:查看opcode
   - 合理使用内存：unset释放掉
     - unset注销不掉
-  - 正则 回溯开销大
+  - 正则的回溯开销大
   - 避免循环内运算：for中 length 放在外面
   - 减少密集运算：开销比C大
   - 带引号字符串作为键值
 * 周边：系统依赖，找到问题核心
-  - php是串行执行的
+  - php是串行执行
   - 文件操作性能：读写内存 << 读写数据库 << 读写磁盘 << 读写网络（网络延时）
   - 硬件
     + 运行环境linux
@@ -1837,23 +1837,6 @@ $host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
 <?php header("Content-type: text/html; charset=utf-8"); ?>
 ```
 
-## 控制反转（Inversion of Control，缩写为IoC）
-
-* 面向对象编程中的一种设计原则，可以用来减低代码之间的耦合度，为相互依赖的组件提供抽象，将依赖的获取交给第三方来控制，即依赖对象不在被依赖的模块中获取
-* 方式
-  - 依赖注入（Dependency Injection，简称DI）：构造函数注入或者属性注入
-  - 依赖查找（Dependency Lookup）
-* 控制反转：对象在被创建的时候，由一个调控系统内所有对象的外界实体，将其所依赖的对象的引用传递(注入)给它，由外部负责其依赖需求
-* 依赖倒置(Dependence Inversion Principle,DIP) 是一种抽象的软件设计原则
-  - 高层模块不应依赖于低层模块，底层的模块要依赖于高层模块定义的接口,两者应该依赖于抽象
-  - 抽象不应该依赖于实现，实现应该依赖于抽象
-  - 电脑就相当于是高层模块，而 U盘、鼠标等就相当于是底层模块。电脑定义了一个插口（接口），可以供其他的设备插入使用，但是电脑并不依赖于具体要插入的设备，它只是定义好了一个接口规范，只要是符合这个接口规范的设备都可以插入到这台电脑上来使用
-* IOC 容器功能：
-  - 自动的管理依赖关系，避免手工管理的缺陷
-  - 再需要使用依赖的时候自动的为我们注入所需依赖
-  - 管理对象的声明周期
-  - 利用反射类来完成容器的自动注入
-
 ## curl
 
 * 选项的值将被作为长整形使用(在option参数中指定)：
@@ -1880,23 +1863,23 @@ $host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
   - CURLOPT_CONNECTTIMEOUT:告诉 PHP 在成功连接服务器前等待多久 **连接超时**
   - CURLOPT_TIMEVALUE: 传递一个从1970-1-1开始到现在的秒数。这个时间将被CURLOPT_TIMEVALUE选项作为指定值使用，或被默认TIMECOND_IFMODSINCE使用。
 * 选项的值将被作为字符串：
-  - CURLOPT_URL: 这是想用PHP取回的URL地址。也可以在用curl_init()函数初始化时设置这个选项。
-  - CURLOPT_USERPWD: 传递一个形如[username]:[password]风格的字符串,作用PHP去连接。
-  - CURLOPT_PROXYUSERPWD: 传递一个形如[username]:[password] 格式的字符串去连接HTTP代理。
-  - CURLOPT_RANGE: 传递一个想指定的范围。它应该是”X-Y”格式，X或Y是被除外的。HTTP传送同样支持几个间隔，用逗句来分隔(X-Y,N-M)。
-  - CURLOPT_POSTFIELDS: 传递一个作为HTTP “POST”操作的所有数据的字符串。
-  - CURLOPT_REFERER: 在HTTP请求中包含一个”referer”头的字符串。
-  - CURLOPT_USERAGENT: 在HTTP请求中包含一个”user-agent”头的字符串。
-  - CURLOPT_FTPPORT: 传递一个包含被ftp “POST”指令使用的IP地址。这个POST指令告诉远程服务器去连接我们指定的IP地址。这个字符串可以是一个IP地址，一个主机名，一个网络界面名(在UNIX下)，或是‘-'(使用系统默认IP地址)。
-  - CURLOPT_COOKIE: 传递一个包含HTTP cookie的头连接。
-  - CURLOPT_SSLCERT: 传递一个包含PEM格式证书的字符串。
+  - CURLOPT_URL: 这是想用PHP取回的URL地址。也可以在用curl_init()函数初始化时设置这个选项
+  - CURLOPT_USERPWD: 传递一个形如[username]:[password]风格的字符串,作用PHP去连接
+  - CURLOPT_PROXYUSERPWD: 传递一个形如[username]:[password] 格式的字符串去连接HTTP代理
+  - CURLOPT_RANGE: 传递一个想指定的范围。它应该是”X-Y”格式，X或Y是被除外的。HTTP传送同样支持几个间隔，用逗句来分隔(X-Y,N-M)
+  - CURLOPT_POSTFIELDS: 传递一个作为HTTP “POST”操作的所有数据的字符串
+  - CURLOPT_REFERER: 在HTTP请求中包含一个”referer”头的字符串
+  - CURLOPT_USERAGENT: 在HTTP请求中包含一个”user-agent”头的字符串
+  - CURLOPT_FTPPORT: 传递一个包含被ftp “POST”指令使用的IP地址。这个POST指令告诉远程服务器去连接我们指定的IP地址。这个字符串可以是一个IP地址，一个主机名，一个网络界面名(在UNIX下)，或是‘-'(使用系统默认IP地址)
+  - CURLOPT_COOKIE: 传递一个包含HTTP cookie的头连接
+  - CURLOPT_SSLCERT: 传递一个包含PEM格式证书的字符串
   - CURLOPT_SSLCERTPASSWD: 传递一个包含使用CURLOPT_SSLCERT证书必需的密码。
   - CURLOPT_COOKIEFILE: 传递一个包含cookie数据的文件的名字的字符串。这个cookie文件可以是Netscape格式，或是堆存在文件中的HTTP风格的头。
   - CURLOPT_CUSTOMREQUEST: 当进行HTTP请求时，传递一个字符被GET或HEAD使用。为进行DELETE或其它操作是有益的，更Pass a string to be used instead of GET or HEAD when doing an HTTP request. This is useful for doing or another, more obscure, HTTP request. 注意: 在确认的服务器支持命令先不要去这样做。下列的选项要求一个文件描述(通过使用fopen()函数获得)：　
-  - CURLOPT_FILE: 这个文件将是放置传送的输出文件，默认是STDOUT.
-  - CURLOPT_INFILE: 这个文件是传送过来的输入文件。
-  - CURLOPT_WRITEHEADER: 这个文件写有输出的头部分。
-  - CURLOPT_STDERR: 这个文件写有错误而不是stderr。用来获取需要登录的页面的例子,当前做法是每次或许都登录一次,有需要的人再做改进了.
+  - CURLOPT_FILE: 这个文件将是放置传送的输出文件，默认是STDOUT
+  - CURLOPT_INFILE: 这个文件是传送过来的输入文件
+  - CURLOPT_WRITEHEADER: 这个文件写有输出的头部分
+  - CURLOPT_STDERR: 这个文件写有错误而不是stderr。用来获取需要登录的页面的例子,当前做法是每次或许都登录一次,有需要的人再做改进了
 
 ## 正则表达式 PREG
 
@@ -1988,6 +1971,71 @@ $host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
   - https://blog.csdn.net/kkobebryant/article/details/267527
   - http://www.jb51.net/article/77428.htm
   - https://www.cnblogs.com/hellohell/p/5718319.html
+
+## SPL
+
+* SplQueue
+* SplHeap:一种有序的数据结构。数据总是按照最小在前或最大在前排序。新插入的数据会自动进行排序
+  - SplHeap底层使用跳表数据结构，insert操作的时间复杂度为O(Log(n))
+
+```php
+$queue = new SplQueue;
+//入队
+$queue->push($data);
+//出队
+$data = $queue->shift();
+//查询队列中的排队数量
+$n = count($queue);
+
+# 功能
+$splq = new SplQueue;
+for($i = 0; $i < 1000000; $i++)
+{
+    $data = "hello $i\n";
+    $splq->push($data);
+
+    if ($i % 100 == 99 and count($splq) > 100)
+    {
+        $popN = rand(10, 99);
+        for ($j = 0; $j < $popN; $j++)
+        {
+            $splq->shift();
+        }
+    }
+}
+
+$popN = count($splq);
+for ($j = 0; $j < $popN; $j++)
+{
+    $splq->pop();
+}
+
+//最大堆
+class MaxHeap extends SplHeap
+{
+    protected function compare($a, $b)
+    {
+        return $a - $b;
+    }
+}
+
+//最小堆
+class MinHeap extends SplHeap
+{
+    protected function compare($a, $b)
+    {
+        return $b - $a;
+    }
+}
+
+$list = new MaxHeap;
+$list->insert(56);
+$list->insert(22);
+$list->insert(35);
+$list->insert(11);
+$list->insert(88);
+$list->insert(36);
+```
 
 ## 禁止
 
