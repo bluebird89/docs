@@ -1729,16 +1729,16 @@ mysqlbinlog --skip-gtids --include-gtids='51d3db57-bf69-11ea-976c-000c2911a022:1
   - COMMIT - 提交事务
 * 原理
   - redo log和undo log来保证事务的原子性、一致性和持久性，同时采用预写日志（WAL）方式将随机写入变成顺序追加写入，提升事务性能。而隔离性是通过锁技术来保证的。
-    + 原子性：使用 undo log来实现，如果事务执行过程中出错或者用户执行了rollback，系统通过undo log日志返回事务开始的状态。
-    + 持久性：使用 redo log来实现，只要redo log日志持久化了，当系统崩溃，即可通过redo log把数据恢复。
-    + 隔离性：通过锁以及MVCC来实现。
+    + 原子性：使用 undo log来实现，如果事务执行过程中出错或者用户执行了rollback，系统通过undo log日志返回事务开始的状态
+    + 持久性：使用 redo log来实现，只要redo log日志持久化了，当系统崩溃，即可通过redo log把数据恢复
+    + 隔离性：通过锁以及MVCC来实现
     + 一致性：通过回滚、恢复以及并发情况下的隔离性，从而实现一致性
   - redo log是重做日志，提供前滚操作
     + redo log通常是物理日志，记录的是数据页的物理修改，而不是某一行或某几行修改成怎样怎样，用来恢复提交后的物理数据页(恢复数据页，且只能恢复到最后一次提交的位置)
     + 包含两部分
-      * 内存中的日志缓冲(redo log buffer)，该部分日志是易失性的
-      * 磁盘上的重做日志文件(redo log file)，该部分日志是持久的。
-    + 当需要修改事务中的数据时，先将对应的redo log写入到redo log buffer中，然后才在内存中执行相关的数据修改操作。InnoDB通过“force log at commit”机制实现事务的持久性，即在事务提交的时候，必须先将该事务的所有redo log都写入到磁盘上的redo log file中，然后待事务的commit操作完成才算整个事务操作完成。
+      * 内存中日志缓冲(redo log buffer)，该部分日志是易失性的
+      * 磁盘上重做日志文件(redo log file)，该部分日志是持久的
+    + 当需要修改事务中的数据时，先将对应的redo log写入到redo log buffer中，然后才在内存中执行相关的数据修改操作。InnoDB通过“force log at commit”机制实现事务的持久性，即在事务提交的时候，必须先将该事务的所有redo log都写入到磁盘上的redo log file中，然后待事务的commit操作完成才算整个事务操作完成
     + 每次将redo log buffer中的内容写入redo log file时，都需要调用一次fsync操作，以此确保redo log成功写入到磁盘上（内容的流向为：用户态的内存->操作系统的页缓存->物理磁盘）。因此，磁盘的性能在一定程度上也决定了事务提交的性能。这里还可以通过innodb_flush_log_at_trx_commit来控制redo log刷磁盘的策略
   - undo log是回滚日志，提供回滚操作
     + 用来回滚行记录到某个版本。undo log一般是逻辑日志，根据每行记录进行记录。可以认为当delete一条记录时，undo log中会记录一条对应的insert记录，反之亦然，当update一条记录时，它记录一条对应相反的update记录。
