@@ -1,14 +1,10 @@
-# [swoole/swoole-src](https://github.com/swoole/swoole-src)
+# [swoole-src](https://github.com/swoole/swoole-src)
 
-Event-driven asynchronous & concurrent & coroutine networking engine with high performance for PHP. <http://www.swoole.com/> PHP的 协程 高性能网络通信引擎，使用C/C++语言编写，提供了多种通信协议的网络服务器和客户端模块
+Event-driven asynchronous & concurrent & coroutine networking engine with high performance for PHP. <http://www.swoole.com/>
 
 * 一个异步并行的通信引擎，作为 PHP 的扩展来运行
-* 其进程模型的设计，既解决了异步问题，又解决了并行
-* 常驻内存，避免重复加载带来的性能损耗，提升海量性能
-  - 进程常驻内存
-  - PHP代码解析后是常驻内存的，不会反复解析,意味着mysql和redis等连接将会是长连接
+* 常驻内存，避免重复加载带来的性能损耗，提升性能,意味着mysql和redis等连接将会是长连接
 * 协程异步，提高对 I/O 密集型场景并发处理能力
-  - redis
 * 方便地开发Http、WebSocket、TCP、UDP 等应用，可以与硬件通信
   - TCP/UDP/UnixSock 服务器端
   - Http/WebSocket/Http2.0 服务器端
@@ -20,21 +16,25 @@ Event-driven asynchronous & concurrent & coroutine networking engine with high p
   - 毫秒定时器
   - 协程文件读写
 * 优点
-  - Node.js 的异步回调
-  - Go语言的协程
-  - 实现常驻内存的 Server 程序:在每个 Worker 进程中，应用启动及之前的环境初始化工作只执行一次，请求结束后，应用实例不会回收，后续发给该 Worker 进程处理的请求会复用之前已经启动的 应用实例，再结合 MySQL、Redis 长连接，从而极大提高了应用性能
-  - 实现 TCP 、 UDP 异步网络通信的编程开发
+  - Node.js 异步回调
+  - Go语言协程
+  - 常驻内存 Server 程序:在每个 Worker 进程中，应用启动及之前的环境初始化工作只执行一次，请求结束后，应用实例不会回收，后续发给该 Worker 进程处理的请求会复用之前已经启动应用实例，再结合 MySQL、Redis 长连接，从而极大提高了应用性能
+  - 实现 TCP 、 UDP 异步网络通信
 * 缺点
   - 无法做密集计算:php甚至是所有动态语言都存在的问题
-  - 更容易内存泄露。在处理全局变量，静态变量的时候一定要小心，不会被GC清理的变量会存在整个生命周期中，如果没有正确的处理，很容易消耗完所有的内存
-* 场景：WebSocket 即时通信、聊天、推送服务器、RPC 远程调用服务、网关、代理、游戏服务器等
+  - 容易内存泄露:在处理全局变量，静态变量一定要小心，不会被GC清理的变量会存在整个生命周期中，如果没有正确的处理，很容易消耗完所有内存
+* 场景
+  - WebSocket 即时通信、聊天
+  - 推送服务器
+  - RPC 远程调用服务、网关、代理、游戏服务器等
 
 ## 版本
 
 * 4.0
-  - 提供了完整的协程(Coroutine)+通道(Channel)特性，带来全的CSP编程模型。应用层使用完全同步的编程方式，底层自动实现异步IO
-  - 底层加入 Hook 机制，使原生的 Mysql PDO、Redis 操作协程化
-  - 协程（Coroutine）取代了异步回调，成为 Swoole 官方推荐的编程方式：解决了异步回调编程困难的问题，使用协程可以以传统同步编程的方法编写代码，底层自动切换为异步 IO，既保证了编程的简单性，又可借助异步 IO，提升系统的并发能力
+  - 提供了完整协程(Coroutine)+通道(Channel)特性，带来全的CSP编程模型
+  - 底层加入 Hook 机制，使原生 Mysql PDO、Redis 操作协程化
+  - 协程（Coroutine）取代了异步回调，成为 Swoole 官方推荐编程方式
+  - 解决了异步回调编程困难的问题，应用层使用同步编程方式，底层自动实现异步IO，既保证了编程的简单性，又可借助异步 IO，提升系统的并发能力
 * 4.3
   - 异步回调模块已过时，目前仅修复 BUG，不再进行维护, 且在4.3版本中移除了异步模块。使用 Coroutine 协程模块
 * 4.4
@@ -109,9 +109,9 @@ php --ri swoole
 
 ## 原理
 
-* 上下文:存在不同的生命周期，就有了不同的上下文 Context
+* 上下文:存在不同生命周期，就有了不同的上下文 Context
   - 上下文对象都实现了基础的 ContextInterface 接口，因此可以使用上下文存取当前请求生命周期的数据
-* master进程：是一个包含多线程进程，运行启动 Swoole 的 PHP 脚本时，首先会创建该进程（整个应用的 root 进程），然后由该进程 fork 出 Reactor 线程和 Manager 进程
+* master进程：一个包含多线程进程，运行启动 Swoole PHP 脚本时，首先会创建该进程（整个应用的 root 进程），然后由该进程 fork 出 Reactor 线程和 Manager 进程
 * Reactor线程组：Reactor 是包含在 Master 进程中的多线程程序，用来处理 TCP 连接和数据收发（异步非阻塞方式）
   - 以多线程的方式运行
   - 负责维护客户端TCP连接、处理网络IO、处理协议、收发数据
@@ -171,7 +171,7 @@ php --ri swoole
   - TaskWorker可以理解为行政人员，可以帮助Worker干些杂事，让Worker专心工作
 * 一个形象的比喻，如果把基于 Swoole 的 Web 服务器比作一个工厂，那么 Reactor 就是这个工厂的销售员，Worker 是负责生产的工人，销售员负责接订单，然后交给工人生产，而 Task Worker 可以理解为行政人员，负责提工人处理生产以外的杂事，比如订盒饭、收快递，让工人可以安心生产
 
-![运行流程图](../../_static/swoole_run_cycle.jpg "Optional title")
+![运行流程图](../../_static/swoole_run_crycle.jpg "Optional title")
 ![运行流程图](../../_static/swoole_model.jpg "Optional title")
 ![进程/线程结构图](../../_static/swoole_server_model.jpg "Optional title")
 ![进程/线程结构图](../../_static/process.jpg "Optional title")
