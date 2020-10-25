@@ -758,25 +758,25 @@ def fact_iter(num, product):
 * Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。
 
 * 高阶函数：函数参数能够接收别的函数
-  
+
   - map()函数接收两个参数，一个是函数，一个是Iterable，map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回.
   - reduce把一个函数作用在一个序列[x1, x2, x3, ...]上，这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算
   - filter()把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素.关键在于正确实现一个“筛选”函数
   - 排序算法 sorted（），可以接收一个key函数来实现自定义的排序
 
 * 返回函数：把函数作为结果值返回
-  
+
   - 闭包
   - 在函数lazy_sum中又定义了函数sum，并且，内部函数sum可以引用外部函数lazy_sum的参数和局部变量，当lazy_sum返回函数sum时，相关参数和变量都保存在返回的函数中，这种称为“闭包（Closure）”
   - 调用lazy_sum()时，每次调用都会返回一个新的函数，即使传入相同的参数
 
 * 匿名函数
-  
+
   - 关键字lambda表示匿名函数，冒号前面的x表示函数参数
   - 有个限制，就是只能有一个表达式，不用写return，返回值就是该表达式的结果
 
 * 装饰器
-  
+
   - decorator就是一个返回函数的高阶函数
   - 接受一个函数作为参数，并返回一个函数。借助Python的@语法，把decorator置于函数的定义处
   - 将函数包裹重新指向原函数变量名
@@ -785,7 +785,7 @@ def fact_iter(num, product):
   - 在面向对象（OOP）的设计模式中，decorator被称为装饰模式。OOP的装饰模式需要通过继承和组合来实现，而Python除了能支持OOP的decorator外，直接从语法层次支持decorator。Python的decorator可以用函数实现，也可以用类实现。
 
 * 偏函数：functools模块提供了很多有用的功能，其中一个就是偏函数（Partial function）
-  
+
   - functools.partial的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单。
   - 创建偏函数时，实际上可以接收函数对象、*args和**kw这3个参数
   - 将自第二位起的参数作为*args和**kw自动加到函数里面参数的左边
@@ -1029,7 +1029,7 @@ sys.path.append('/Users/michael/my_py_scripts')
 * 抽象出Class，根据Class创建Instance。
 
 * 类是创建实例的模板
-  
+
   - 通过class关键字
   - 类名通常是大写开头的单词
   - 紧接着是(object)，表示该类是从哪个类继承下来的，没有合适的继承类，就使用object类，这是所有类最终都会继承的类
@@ -1039,7 +1039,7 @@ sys.path.append('/Users/michael/my_py_scripts')
   - 允许对实例变量绑定任何数据
 
 * 封装
-  
+
   - 类中定义的函数只有一点不同，就是第一个参数永远是实例变量self，并且，调用时，不用传递该参数。除此之外，类的方法和普通函数没有什么区别，所以，你仍然可以用默认参数、可变参数、关键字参数和命名关键字参数。
   - 类的方法：在类的内部定义访问数据的函数，这样，就把“数据”给封装起来了。这些封装数据的函数是和类本身是关联起来的，可以直接访问与操作实例的数据；
   - 从外部看Student类，就只需要知道，创建实例需要给出name和score，而如何打印，都是在Student类的内部定义的，这些数据和逻辑被“封装”起来了，调用就直接操作了对象内部的数据，但无需知道方法内部的实现细节。
@@ -1047,7 +1047,7 @@ sys.path.append('/Users/michael/my_py_scripts')
 * 实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同，互相独立，互不影响。
 
 * 访问限制
-  
+
   - 让内部属性不被外部访问，可以把属性的名称前加上两个下划线__，实例的变量名如果以__开头，就变成了一个私有变量（private），只有内部可以访问，外部不能访问。解释器对外把__name变量改成了_Student__name，所以，仍然可以通过_Student__name来访问__name变量（不同版本的Python解释器可能会把__name改成不同的变量名）
   - 外部代码不能随意访问与修改对象内部的状态，这样通过访问限制的保护，代码更加健壮
   - set方法可以做参数
@@ -1055,12 +1055,12 @@ sys.path.append('/Users/michael/my_py_scripts')
   - _name，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，意思就是，“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”。
 
 * 继承Inheritance：定义一个class的时候，可以从某个现有的class继承，新的class称为子类（Subclass），而被继承的class称为基类、父类或超类（Base class、Super class）
-  
+
   - 子类获得了父类的全部功能
   - 对子类增加一些方法
 
 * 多态Override：当子类和父类都存在相同的run()方法时，子类的run()覆盖了父类的run()，在代码运行的时候，总是会调用子类的run()
-  
+
   - 定义一个class的时候，实际上就定义了一种数据类型，与自带的数据类型一样
   - 子类也是父类的实例
   - run_twice()调用方只管调用，不管对象细节（只要确保run()方法编写正确，不用管原来的代码是如何调用的）
@@ -1071,7 +1071,7 @@ sys.path.append('/Users/michael/my_py_scripts')
     + 对于Python这样的动态语言来说，则不一定需要传入Animal类型。我们只需要保证传入的对象有一个run()方法就可以了（方法检查）。“鸭子类型”，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子
 
 * 判断对象类型
-  
+
   - 使用type()函数
   - 使用types模块中定义的常量
   - 判断class的类型，可以使用isinstance()函数,优先使用
@@ -1080,7 +1080,7 @@ sys.path.append('/Users/michael/my_py_scripts')
   - 要判断该对象是否存在read方法，如果存在，则该对象是一个流，如果不存在，则无法读取。hasattr()就派上了用场。
 
 * 类属性：定义了一个类属性后，这个属性归类所有，类的所有实例都可以访问到
-  
+
   - 给实例绑定属性的方法是通过实例变量，或者通过self变量
   - 不要对实例属性和类属性使用相同的名字，因为相同名称的实例属性将屏蔽掉类属性，但是当你删除实例属性后，再使用相同的名称，访问到的将是类属性。
 
@@ -1349,98 +1349,6 @@ CMD ["python3"]
 /System/Library/Frameworks/Python.framework/Versions/2.7/share': Operation not permitted
 ```
 
-* 基础知识：日常的重复训练
-  
-  - 变量
-  - 语句
-  - 数据类型
-  - 数值类型
-  - 字符串
-  - 布尔类型
-  - 列表
-  - 字典
-  - 元组
-  - 条件语句
-  - 循环语句
-  - 函数
-  - 装饰器
-  - 面向对象
-  - 网络socket
-  - 爬虫
-
-* 基础库
-
-* 模块
-
-* 模块
-  
-  - 将多个代码块（按功能）定义到同一个文件中。别的文件中使用时则先导入模块，在调用模块内变量或函数。
-  - 模块命名规范
-    + 建议全小写英文字母和数字
-    + 避免与常用模块或第三方模块名称冲突
-  - 控制模块内代码在使用python mod.py时执行，在导入时不执行
-    + 通过Global内变量__name__进行判断
-    + 当以python mod.py运行脚本时__name__变量为__main__字符串
-    + 当以模块导入时__name__为模块名称字符串
-
-* 系统模块
-
-* 三方模块
-
-* 包
-  
-  - 将不同模块文件放在不同文件夹内，包文件夹下面需要有__init__.py文件用以声明该文件为Python包。
-  - 使用时需要从包内导入模块后调用模块中变量和函数。
-
-* 文件处理（读、写、执行、）
-
-* 字符
-  
-  - 统计
-  - 排序
-
-* 数据排序
-
-* 网络编程
-
-* 掌握最基础的姿势，就可以骑上车出发了，实际联系几天，摔几跤，基本就学会了
-
-* Python基础语法都学会了，但不知如何写项目进阶？
-
-1.给你一个字符串“come baby,python rocks!” 如何统计里面字母o出现的次数！
-思路：遍历字符串，定义一个变量，每次o出现，都+1
-
-2.给你一个字符串“come baby,python rocks!” 如何统计这里面所有字母出现的次数！（普通变量肯定无法完成。）
-思路：需要使用字典这类复杂的数据结构处理，字母当key，出现的次数当value，每个key出现，对应的value+1
-
-3.给你一个字符串“come baby,python rocks!” 如何统计这里面字母出现次数的前三名！
-思路：排序，取出前三
-
-1.给你一个字符串“come baby,python rocks!” 怎么统计出现次数前三的字母。
-2.一个nginx日志文件，怎么统计IP出现次数前三的url。
-3.一个nginx日志文件，统计IP出现前三后，如何存入MySQL数据库。
-4.存入MySQL中的日志文件，如何输出给浏览器端显示。
-5.如何美化前端表格等等。
-
-* 全栈Web开发学习路线
-  - 基础入门（入门、数据类型、条件表达、循环语句）
-  - 基础进阶（文件操作、函数、装饰器、模块、面向对象、网络编程）
-  - 前端知识（Html、Css、Js、Jquery、Bootstrap、）
-  - 高级用法（Django、Flask、数据库操作、MVC、ORM、Admin、template）
-  - 项目实战（电商项目、爬虫项目、常用组件、运维项目、代码调优）
-  - 高级进阶（数据算法、代码规范、面试技巧）
-
-并发
-了解线程、进程，它们如何运行，以及它们在Python中的弱点。
-了解Sockets，Network库，异步功能
-了解解释器的设计和运行原理：为什么有这么多不同的Python实现。（Python是用英语编写的，不是C语言），这个概念非常重要。
-了解Python生态
-PyCharm
-PEP8
-PIP
-setuptools
-virtualenv
-
 ## UWSGI
 
 ## GunicornNGINX
@@ -1471,104 +1379,51 @@ Namespaces are one honking great idea -- let's do more of those!
 ## 图书
 
 * [Automate the Boring Stuff with Python](https://automatetheboringstuff.com)
-
 * [Learning with Python 3](http://openbookproject.net/thinkcs/python/english3e/)
-
 * [learn python the hardway](https://learnpythonthehardway.org/python3/)
-
 * [Think Python: How to Think Like a Computer Scientist](http://greenteapress.com/thinkpython2/html/index.html)
-
 * Python性能分析与优化
-
 * Python高性能编程
-
 * [pythonbook](https://python.cs.southern.edu/pythonbook/pythonbook.pdf)
-
 * [Introduction to Programming in Python: An Interdisciplinary Approach](https://introcs.cs.princeton.edu/python/home/)
-
 * 《[集体智慧编程](https://www.amazon.cn/gp/product/B00UI93JD8)》
-
 * 《[笨办法学Python](https://www.amazon.cn/gp/product/B00P6OJ0TC)》
-
 * 《[Python基础教程(第3版)](https://www.amazon.cn/Python基础教程-Magnus-Lie-Hetland/dp/B079BJPVFL/ref=dp_ob_title_bk)》
-
 * 《Python源码剖析》
-
 * 《[Head First Python](https://www.amazon.cn/gp/product/B007NB2B4M)》
-
 * 《[与孩子一起学编程](https://www.amazon.cn/gp/product/B00HECW20S)》
-
 * 《[Python学习手册（第4版）](https://www.amazon.cn/gp/product/B004TUJ7A6)》
-
 * 《[Python Cookbook（第3版）](https://www.amazon.cn/gp/product/B00WKR1OKG)》
-
 * 《[Python参考手册（第4版）](https://www.amazon.cn/gp/product/B01MCUN37Y)》
-
 * 《[Python核心编程（第3版）](https://www.amazon.cn/gp/product/B01FQAS0KK)》
-
 * 《[Python科学计算（第2版）](https://www.amazon.cn/gp/product/B01HCVUJFA)》
-
 * 《[利用 Python 进行数据分析](https://www.amazon.cn/gp/product/B00GHGZLWS)》
-
 * 《[Think Python：像计算机科学家一样思考Python（第2版）](https://www.amazon.cn/gp/product/B01ION3W54)》
-
 * 《[Python编程实战:运用设计模式、并发和程序库创建高质量程序](https://www.amazon.cn/gp/product/B00MHDPIJ6)》
-
 * 《[Python绝技：运用Python成为顶级黑客](https://www.amazon.cn/gp/product/B019ZRGBVU)》
-
-* 《[Flask Web开发:基于Python的Web应用开发实战](https://www.amazon.cn/gp/product/B0153177A6)》
-
 * 《用 Python 写网络爬虫》
-
 * 《[深度学习:基于Keras的Python实践](https://www.amazon.cn/gp/product/B07D5855F4)》
-
 * Python与量化投资从基础到实践
-
 * Learning Python, 5th Edition
-
 * Python编程 从入门到实践
-
 * 流畅的Python Fluent Python
-
-* [Flask Web开发实战：入门、进阶与原理解析](https://item.jd.com/12430774.html)
 
 ## 教程
 
 * [jackfrued/Python-100-Days](https://github.com/jackfrued/Python-100-Days):Python - 100天从新手到大师
-
 * [Python 中文学习大本营](http://www.pythondoc.com/)
-
 * [Yixiaohan/codeparkshare](https://github.com/Yixiaohan/codeparkshare):Python初学者（零基础学习Python、Python入门）书籍、视频、资料、社区推荐
-
 * [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide):Python best practices guidebook, written for Humans. http://docs.python-guide.org
-
 * [michaelliao/learn-python3](https://github.com/michaelliao/learn-python3): Learn Python 3 Sample Code
-
 * [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
-
 * [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
-
 * [Python 3 cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/):Python3教学手册
-
 * [在 Windows 上用 Python 做开发](https://docs.microsoft.com/zh-cn/windows/python/)
-
 * [简明 Python 教程 A Byte of Python](https://bop.mol.uno)
-
 * [Python最佳实践指南](https://pythonguidecn.readthedocs.io/zh/latest/index.html)
-
 * [Python进阶](https://docs.pythontab.com/interpy/)
-
 * [CODE WITH REPL.IT](https://www.codewithrepl.it/)
-
 * A Byte of Python
-
-* https://www.shiyanlou.com/courses/31
-
-* https://www.shiyanlou.com/courses/487
-
-* https://www.shiyanlou.com/courses/552
-
-* [python3](http://www.runoob.com/python3)
 
 ## 工具
 

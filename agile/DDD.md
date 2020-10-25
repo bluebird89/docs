@@ -391,7 +391,7 @@ public class OrderCreatedEvent extends OrderEvent {
 * 《Patterns, Principles and Practices of Domain-Driven Design》
 * 《领域驱动设计精粹》
 * 《复杂软件设计之道：领域驱动设计全面解析与实战》
-* 《实现领域驱动设计》
+* 《实现领域驱动设计 implementing domain-driven design》
 
 ## 参考
 

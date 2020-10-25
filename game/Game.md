@@ -60,9 +60,9 @@
   - 更典型的例子则是《超级马里奥：奥德赛》。在十几个不同的世界里，玩家可以通过帽子附身各种不同的东西，体验到各种不同的玩法。每一个世界都是一个独立的箱庭，一个充满乐趣的游乐园。
   - 动森里的无人岛，也是一个很典型的箱庭
 
-## Play station 4
+## Play station
 
-* PlayStation 5
+* 5
 * 配置 - pro - slim - 天蝎 - 1080ti
 * 刺客信条
 * 荒野大镖客 救赎2
@@ -132,15 +132,10 @@
 ### [Steam](https://store.steampowered.com/)
 
 * [ ] PLAYERUNKNOWN'S BATTLEGROUNDS 绝地求生
-
 * [ ] Counter-Strike: Global Offensive
-
 * [ ] Frostpunk
-
 * [ ] 双点医生
-
 * PES2020
-  
   - PS4 CONTROLLER NOT WORKING
     - Steam > Library > Right Click PES > Properties>;steam input per-game settings  and use bpm overlay when steam input is active both off
 + Gris:类似纪念碑谷那样作画唯美，难度不高的独立游
