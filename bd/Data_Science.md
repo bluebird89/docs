@@ -136,3 +136,4 @@ SAS网站的Eight levels of analytics
 * [BrambleXu/pydata-notebook](https://github.com/BrambleXu/pydata-notebook):利用Python进行数据分析 第二版 (2017) 中文翻译笔记
 * [data-visualization-from-non-coder-to-coder](https://www.kaggle.com/learn/data-visualization-from-non-coder-to-coder)
 * [ fengdu78 / Data-Science-Notes ](https://github.com/fengdu78/Data-Science-Notes):数据科学的笔记以及资料搜集
+* [Awesome Data Engineering](https://awesomedataengineering.com/)
