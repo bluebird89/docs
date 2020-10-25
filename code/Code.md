@@ -474,6 +474,11 @@
 
 ## 图书
 
+* [经典编程书籍大全](https://github.com/jobbole/awesome-programming-books):100+ 经典技术书籍，涵盖：计算机系统与网络、系统架构、算法与数据结构、前端开发、后端开发、移动开发、数据库、测试、项目与团队、程序员职业修炼、求职面试 和 编程相关的经典书籍。
+* [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books)Freely available programming books
+* [justjavac/free-programming-books-zh_CN](https://github.com/justjavac/free-programming-books-zh_CN)
+* [waylau/books-collection](https://github.com/waylau/books-collection):To the programmer's open source and free books collection 给程序员的开源、免费书籍收集，图书集合。
+* [programthink/books](https://github.com/programthink/books):【编程随想】收藏的电子书清单
 * 《发布！软件的设计与部署》：现实世界中充满了恶意用户，无论是主观的恶意，还是那种当点击页面上的按钮无响应后又多点击了100次的并非故意的恶意。这本书交给你如何为失败而做准备，并将这些恶意的影响降低到最低。欢迎来到现实世界。
 * 《正见：佛陀的证悟》：一本直指内心的书，用极为平白的语言描述了原始佛教的四圣谛，没有任何的高深莫测或者故弄玄虚，作者用现实世界中的例子来阐述最为幽深的佛法，每个字都值得玩味。她可以让你在纷乱的现世中找到内心的平静。
 * [Technology Radar](https://www.thoughtworks.com/radar)
@@ -502,8 +507,6 @@
 
 ## 参考
 
-* [Java World](http://www.javaworld.com/)
-* [Java SE 技术文档](http://docs.oracle.com/javase/)
 * [DZone](http://www.dzone.com)
 * [Stackoverflow](http://stackoverflow.com/)
 * [30-seconds/30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code)：Curated collection of useful Javascript snippets that you can understand in 30 seconds or less. https://30secondsofcode.org/
@@ -512,7 +515,7 @@
 * [斯坦福大学公开课：编程方法学28集全](https://www.bilibili.com/video/av8048664)
 * [hellerve/programming-talks](https://github.com/hellerve/programming-talks):Awesome & interesting talks about programming
 * [charlax/professional-programming](https://github.com/charlax/professional-programming):A collection of full-stack resources for programmers.
-* [Full Stack Developer's Roadmap](https://dev.to/ender_minyard/full-stack-developer-s-roadmap-2k12)
+* [mr-mig/every-programmer-should-know](https://github.com/mr-mig/every-programmer-should-know):A collection of (mostly) technical things every software developer should know
 * [todomvc](https://github.com/tastejs/todomvc)Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com/
 * [What every computer science major should know](http://matt.might.net/articles/what-cs-majors-should-know/)
   - 个人来说，作品集（Portfolio）会比简历（Resume）更有参考意义

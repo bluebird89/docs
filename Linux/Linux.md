@@ -3494,6 +3494,15 @@ sort authors.txt | uniq -c > authors-sorted.txt
 * 高负载排查
 * 流量录制
 
+## 教程
+
+* [Introduction to Linux](https://www.ibm.com/developerworks/linux/newto/) – 来自IBM的教程，用于给那些想学习Linux的人。
+* [Linux Desktop 101](https://www.lifewire.com/learn-how-linux-4102755):14周课时的教程，主要用于学校里教学生如何在一个PC上运行一个Linux操作系统。
+* [Hands-On Introduction to Linux](http://tldp.org/LDP/intro-linux/html/index.html) – Machtelt Garrels 的一个格式相当不错的教程。
+* [Getting Started with Linux](https://www.linux.org/lessons/beginner/index.html) – 来自Linux Online 的20课时的用于新手的教程。
+* [IBM’s Technical Library](https://www.ibm.com/developerworks/views/linux/libraryview.jsp?type_by=Tutorials) – IBM’s Technical Library 提供的一组给高级Linux用户的教程。
+* [judasn/Linux-Tutorial](https://github.com/judasn/Linux-Tutorial):《Java 程序员眼中的 Linux》 https://github.com/judasn/Linux-Tutorial
+
 ## 图书
 
 * Essential System Administration: Tools and Techniques for Linux and Unix Administration by Æleen Frisch
@@ -3525,7 +3534,7 @@ sort authors.txt | uniq -c > authors-sorted.txt
 * Linux 内核揭秘
   - [linux-insides-zh](https://github.com/MintCN/linux-insides-zh) https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html
 * LINUX操作系统(第2版)
-
+* [Advanced Linux Programming](http://www.advancedlinuxprogramming.com/)一本免费下载电子书,主要教程序员们怎么在Linux下做软件和编程序
 * 《unix环境高级编程》
 * 《Linux多线程服务端编程》
 * 《鸟哥的Linux私房菜:服务器架设篇(第3版)》
@@ -3536,6 +3545,7 @@ sort authors.txt | uniq -c > authors-sorted.txt
 * Linux命令行与shell脚本编程大全（第3版）
 * 《只是为了好玩 : Linux 之父林纳斯自传》
 * 《Linux Shell 脚本攻略》
+* [Linux 内核揭密](https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html)
 
 ## 工具
 
@@ -3560,61 +3570,25 @@ sort authors.txt | uniq -c > authors-sorted.txt
 ## 参考
 
 * [luong-komorebi/Awesome-Linux-Software](https://github.com/luong-komorebi/Awesome-Linux-Software):A list of awesome applications, software, tools and other materials for Linux distros. https://luong-komorebi.github.io/Awesome-Linux-Software/
-
+* [aleksandar-todorovic/awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
+* [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
 * [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/index.html)
+* [面向 Linux 程序员和系统管理员的技术资源](https://www.ibm.com/developerworks/cn/linux/)
+* [HAPPY HACKING LINUX](https://azer.bike/happy-hacking-linux/)
+* [linuxkit](https://github.com/linuxkit/linuxkit):A toolkit for building secure, portable and lean operating systems for containers
+* [jaywcjlove/linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
+* [feiskyer/linux-perf-examples](https://github.com/feiskyer/linux-perf-examples):《Linux 性能优化实战》案例
+* [trimstray/test-your-sysadmin-skills](https://github.com/trimstray/test-your-sysadmin-skills):A collection of *nix Sysadmin Test Questions and Answers. Test your knowledge and skills in different fields with these Q/A.
+* [0xAX/linux-insides)](https://github.com/0xAX/linux-insides) A little bit about a linux kernel https://0xax.gitbooks.io/linux-insides/content/index.html
+* [trimstray/the-practical-linux-hardening-guide](https://github.com/trimstray/the-practical-linux-hardening-guide):🔥 This guide details the planning and the tools involved in creating a secure Linux production systems - work in progress.
+* [VITUX](https://vitux.com) Linux Compendium
+* [Linux From Scratch](http://www.linuxfromscratch.org/):a project that provides you with step-by-step instructions for building your own custom Linux system, entirely from source code
+* [Unix Toolbox](http://cb.vu/unixtoolbox.xhtml)
+* [Borg+Vorta is finally a usable backup solution for Linux desktop](https://simon-frey.com/blog/borgvorta-is-finally-a-usable-backup-solution-for-linux-desktop/)
+* [nevermosby / linux-bpf-learning](https://github.com/nevermosby/linux-bpf-learning):learn how to use BPF/eBPF
+
 
 * [LVS：跑在Linux内核上的负载均衡器](https://liangshuang.name/2017/11/19/lvs/)
-
-* [The Linux Kernel documentation](https://www.kernel.org/doc/html/v4.20/index.html)
-
-* [Introduction to Linux](https://www.ibm.com/developerworks/linux/newto/) – 来自IBM的教程，用于给那些想学习Linux的人。
-
-* [Linux Desktop 101](https://www.lifewire.com/learn-how-linux-4102755) – 这是一个 14周 课时的教程，主要用于学校里教学生如何在一个PC上运行一个Linux操作系统。
-
-* [Hands-On Introduction to Linux](http://tldp.org/LDP/intro-linux/html/index.html) – Machtelt Garrels 的一个格式相当不错的教程。
-
-* [Getting Started with Linux](https://www.linux.org/lessons/beginner/index.html) – 来自Linux Online 的20课时的用于新手的教程。
-
-* [Advanced Linux Programming](http://www.advancedlinuxprogramming.com/) 一本免费下载电子书,主要教程序员们怎么在Linux下做软件和编程序。
-
-* [IBM’s Technical Library](https://www.ibm.com/developerworks/views/linux/libraryview.jsp?type_by=Tutorials) – IBM’s Technical Library 提供的一组给高级Linux用户的教程。
-
-* [HAPPY HACKING LINUX](https://azer.bike/happy-hacking-linux/)
-
-* [linuxkit/linuxkit](https://github.com/linuxkit/linuxkit):A toolkit for building secure, portable and lean operating systems for containers
-
-* [jaywcjlove/linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
-
-* [feiskyer/linux-perf-examples](https://github.com/feiskyer/linux-perf-examples):《Linux 性能优化实战》案例
-
-* [trimstray/test-your-sysadmin-skills](https://github.com/trimstray/test-your-sysadmin-skills):A collection of *nix Sysadmin Test Questions and Answers. Test your knowledge and skills in different fields with these Q/A.
-
-* [aleksandar-todorovic/awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
-
-* [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
-
-* [面向 Linux 程序员和系统管理员的技术资源](https://www.ibm.com/developerworks/cn/linux/)
-
-* [0xAX/linux-insides)](https://github.com/0xAX/linux-insides) A little bit about a linux kernel https://0xax.gitbooks.io/linux-insides/content/index.html
-
-* [Linux 内核揭密](https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html)
-
-* [trimstray/the-practical-linux-hardening-guide](https://github.com/trimstray/the-practical-linux-hardening-guide):🔥 This guide details the planning and the tools involved in creating a secure Linux production systems - work in progress.
-
-* [linux 内存管理初探](https://mp.weixin.qq.com/s?__biz=MzA3OTgyMDcwNg==&mid=2650636296&idx=1&sn=48ca904ca1e71ffb467fb0befdd39853&chksm=87a482c5b0d30bd3da8d6fba90d8eb17438103806bb99d20c8713dd67af7929833ceea7502ab)
-
-* [十五分钟制作一个属于自己得Linux操作系统](https://mp.weixin.qq.com/s?__biz=MzA3OTgyMDcwNg==&mid=2650636229&idx=1&sn=5904d82ee06d0e78a6140e1905bd06f0&chksm=87a47d08b0d3f41e592774b07f2977876f42e4d14d7f148e53f0f805d249bd20cdd83495a337)
-
-* [VITUX](https://vitux.com) Linux Compendium
-
-* [judasn/Linux-Tutorial](https://github.com/judasn/Linux-Tutorial):《Java 程序员眼中的 Linux》 https://github.com/judasn/Linux-Tutorial
-
-* [Linux From Scratch]http://www.linuxfromscratch.org/):a project that provides you with step-by-step instructions for building your own custom Linux system, entirely from source code
-
-* [Unix Toolbox](http://cb.vu/unixtoolbox.xhtml)
-
 * [全面理解Linux性能优化](https://mp.weixin.qq.com/s/C7KDLcHUhr7QR2hq_pm4kA)
-
-* [Borg+Vorta is finally a usable backup solution for Linux desktop](https://simon-frey.com/blog/borgvorta-is-finally-a-usable-backup-solution-for-linux-desktop/)
-
-* [nevermosby / linux-bpf-learning](https://github.com/nevermosby/linux-bpf-learning):learn how to use BPF/eBPF
+* [linux 内存管理初探](https://mp.weixin.qq.com/s?__biz=MzA3OTgyMDcwNg==&mid=2650636296&idx=1&sn=48ca904ca1e71ffb467fb0befdd39853&chksm=87a482c5b0d30bd3da8d6fba90d8eb17438103806bb99d20c8713dd67af7929833ceea7502ab)
+* [十五分钟制作一个属于自己得Linux操作系统](https://mp.weixin.qq.com/s?__biz=MzA3OTgyMDcwNg==&mid=2650636229&idx=1&sn=5904d82ee06d0e78a6140e1905bd06f0&chksm=87a47d08b0d3f41e592774b07f2977876f42e4d14d7f148e53f0f805d249bd20cdd83495a337)
