@@ -134,18 +134,11 @@
 ## 参考
 
 * [2017 杭州云栖大会](https://github.com/Alimei/hangzhouYunQi2017ppt?files=1)
-* [sindresorhus/awesome](https://github.com/sindresorhus/awesome) Curated list of awesome lists
-* [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books)Freely available programming books
-* [justjavac/free-programming-books-zh_CN](https://github.com/justjavac/free-programming-books-zh_CN)
-* [mr-mig/every-programmer-should-know](https://github.com/mr-mig/every-programmer-should-know):A collection of (mostly) technical things every software developer should know
-* [Aggregated Awesome](https://aggregatedawesome.com/):There are several awesome lists on GitHub that collect and curate the best resources for a specific programming language, framework, platform, etc.
 * [kdeldycke/awesome-falsehood](https://github.com/kdeldycke/awesome-falsehood):Curated list of falsehoods programmers believe in.
 * [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV\* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 * [oldratlee/translations](https://github.com/oldratlee/translations):Chinese translations for classic IT resources
-* [bmorelli25/Become-A-Full-Stack-Web-Developer](https://github.com/bmorelli25/Become-A-Full-Stack-Web-Developer):Free resources for learning Full Stack Web Development
 * [gothinkster/realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 https://realworld.io/
 * [CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers):aka "Bayesian Methods for Hackers": An introduction to Bayesian methods + probabilistic programming with a computation/understanding-first, mathematics-second point of view. All in pure Python ;)
-* [jobbole/awesome-machine-learning-cn](https://github.com/jobbole/awesome-machine-learning-cn):机器学习资源大全中文版，包括机器学习领域的框架、库以及软件
 * [Best-websites-a-programmer-should-visit](https://github.com/sdmg15/Best-websites-a-programmer-should-visit)
 * [how to be a Programmer](https://github.com/braydie/HowToBeAProgrammer) <https://braydie.gitbooks.io/how-to-be-a-programmer/content/zh/>
 * [be-a-professional-programmer](https://github.com/stanzhai/be-a-professional-programmer)
@@ -156,15 +149,7 @@
 * [stanzhai/be-a-professional-programmer](https://github.com/stanzhai/be-a-professional-programmer):成为专业程序员路上用到的各种优秀资料、神器及框架 http://tools.stanzhai.site
 * [hedengcheng/tech](https://github.com/hedengcheng/tech):programming, database, distributed systemee
 * [Tutorials & training to grow your development skills](https://www.ibm.com/developerworks/learn/)
-* [Open source](https://www.ibm.com/developerworks/cn/opensource)
 * [TIGERB/easy-tips](https://github.com/TIGERB/easy-tips):A little Tips in my Code Career with PHP&Go 🐘 http://easy-tips.tigerb.cn
 * [xitu/gold-miner](https://github.com/xitu/gold-miner):🥇掘金翻译计划，可能是世界最大最好的英译中技术社区，最懂读者和译者的翻译平台： https://juejin.im/tag/掘金翻译计划
-* [Trending](https://github.com/trending):See what the GitHub community is most excited about today.
-* [wx-chevalier/Awesome-Lists](https://github.com/wx-chevalier/Awesome-Lists):📚 Guide to Galaxy, curated, worthy and up-to-date links/reading list for ITCS-Coding/Algorithm/SoftwareArchitecture/AI. 💫 ITCS-编程/算法/软件架构/人工智能等领域的文章/书籍/资料/项目链接精选，岁月沉淀的美好
 * [wx-chevalier/Developer-Zero-To-Mastery](https://github.com/wx-chevalier/Developer-Zero-To-Mastery):📚 To Be Professional Developer From Zero To Mastery, Interactive MindMap, RoadMap(Learning Path/Interview Questions), xCompass, Weekly for Developer, to Learn Everything in ITCS 💫 程序员的技术视野、知识管理与职业规划，提高个人与团队的研发效能
-* [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub):octocat: Find pearls on open-source seashore 分享 GitHub 上有趣、入门级的开源项目 https://hellogithub.com/
 * [rsapkf/goodies](https://github.com/rsapkf/goodies):Collection of GitHub repos, blogs and websites to learn cool things https://goodies.gitbook.io/goodies/
-* [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):The most comprehensive database of Chinese poetry
-* [jnv/lists](https://github.com/jnv/lists):The definitive list of lists (of lists) curated on GitHub and elsewhere
-* [Awesome Open Source](https://awesomeopensource.com/):Find Open Source By Searching, Browsing and Combining 7,000 Topics Across 59 Categories And 310,836 Projects
-* [ kon9chunkit / GitHub-Chinese-Top-Charts ](https://github.com/kon9chunkit/GitHub-Chinese-Top-Charts):GitHub中文排行榜

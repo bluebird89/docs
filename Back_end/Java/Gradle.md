@@ -57,8 +57,28 @@ allprojects {
     }
 }
 
+allprojects {
+    repositories {
+        def ALIYUN_REPOSITORY_URL = 'https://maven.aliyun.com/repository/public'
+        def ALIYUN_GOOGLE_URL = 'https://maven.aliyun.com/repository/google'
+        all { ArtifactRepository repo ->
+            if(repo instanceof MavenArtifactRepository){
+                def url = repo.url.toString()
+                if (url.startsWith('https://repo1.maven.org/maven2') || url.startsWith('https://jcenter.bintray.com')) {
+                    project.logger.lifecycle "Repository ${repo.url} replaced by $ALIYUN_REPOSITORY_URL."
+                    remove repo
+                }
+                if (url.startsWith('https://dl.google.com/dl/android/maven2')) {
+                    project.logger.lifecycle "Repository ${repo.url} replaced by $ALIYUN_GOOGLE_URL."
+                    remove repo
+                }
+            }
+        }
+        maven { url ALIYUN_REPOSITORY_URL }
+        maven { url ALIYUN_GOOGLE_URL }
+    }
+}
 gradle init
-
 ```
 
 ## 使用

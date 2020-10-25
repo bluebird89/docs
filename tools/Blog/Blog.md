@@ -129,6 +129,7 @@ A simple, Git-powered wiki with a sweet API and local frontend.
 * [一只特立独行的猪](http://guanzhou.pub/tag/)
 * [schollz](https://schollz.com/)
 * [lifesinger](https://github.com/lifesinger/blog):岁月如歌
+* [前端精读](https://github.com/dt-fe/)
 
 ## 文章
 

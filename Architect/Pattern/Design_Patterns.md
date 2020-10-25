@@ -151,7 +151,7 @@
 
 ## 装饰
 
-式以对客户端透明的方式扩展对象的功能，是继承关系的一个替代方案，提供比继承更多的灵活性。动态给一个对象增加功能，这些功能可以再动态的撤消。增加由一些基本功能的排列组合而产生的非常大量的功能。
+* 以对客户端透明的方式扩展对象的功能，是继承关系的一个替代方案，提供比继承更多的灵活性。动态给一个对象增加功能，这些功能可以再动态的撤消。增加由一些基本功能的排列组合而产生的非常大量的功能。
 
 ## 适配器
 
@@ -188,7 +188,7 @@
 ## 图书
 
 * 《[Head First 设计模式（中文版）](https://book.douban.com/subject/2243615/)》
-* 《[设计模式 : 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)》 Design Patterns:Elements of Reusable Object-Oriented Software
+* [设计模式:可复用面向对象软件的基础 Design Patterns:Elements of Reusable Object-Oriented Software](https://book.douban.com/subject/1052241/)
 * 《大话设计模式》
 * 《设计模式之禅》
 * [设计模式解析](https://portal.netobjectives.com/pages/books/design-patterns-explained/)

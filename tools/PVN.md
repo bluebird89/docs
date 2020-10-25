@@ -419,14 +419,14 @@ Type=Application
 
 ## 参考
 
-* [Shadowsocks (简体中文)](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
+* [Shadowsocks](https://wiki.archlinux.org/index.php/Shadowsocks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 * [openvpn](https://help.ubuntu.com/lts/serverguide/openvpn.html)
 * [gfwlist/gfwlist](https://github.com/gfwlist/gfwlist):The one and only one gfwlist here
 * [How To Set Up an OpenVPN Server on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04)
 * [max2max/freess](https://github.com/max2max/freess)
 * [haoel/haoel.github.io](https://github.com/haoel/haoel.github.io)
 * [JadaGates/ShadowsocksBio](https://github.com/JadaGates/ShadowsocksBio):SS的前世今生
-* [yangchuansheng / love-gfw](https://github.com/yangchuansheng/love-gfw):🔥以社会主义核心价值观为指导思想，实现 Linux 和 MacOS 设备的全局智能分流 https://fuckcloudnative.io/posts/linux-circumvent/
+* [love-gfw](https://github.com/yangchuansheng/love-gfw):🔥以社会主义核心价值观为指导思想，实现 Linux 和 MacOS 设备的全局智能分流 https://fuckcloudnative.io/posts/linux-circumvent/
 * [Linux全局智能分流方案](https://fuckcloudnative.io/posts/linux-circumvent/)
 * [](https://github.com/freefq/free)
 * [w3-goto-world](https://github.com/hoochanlon/w3-goto-world):tomatoGit/AWS/Google 镜像 ,SS/SSR/VMESS节点,WireGuard,IPFS, DeepWeb,Capitalism 知识储备库

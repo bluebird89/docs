@@ -1748,6 +1748,8 @@ mysqlbinlog --skip-gtids --include-gtids='51d3db57-bf69-11ea-976c-000c2911a022:1
 * MVCC 多版本并发控制
   - 依赖了undo log、隐藏字段（DB_TRX_ID,DB_ROLL_PTR,DB_ROW_ID）、Read View等
   - 在使用READ COMMITTD、REPEATABLE READ这两种隔离级别的事务下执行一致性读操作有了保证；为了查询一些正在被另一个事务更新的行，并且可以看到它们被更新之前的值。这是一个可以用来增强并发性的强大技术，因为这样的一来的话查询就不用等待另一个事务释放锁，使不同事务的读-写、写-读操作并发执行，从而提升系统性能
+  - 查找创建版本小于或等于当前事务版本
+  - 删除版本为空或者大于当前事务版本
   - 这里的读指的是“快照读”。普通的SELECT操作就是快照读，有的地方也称之为“一致性读”或者“一致性无锁读”
     + 不会对表中的任何记录做加锁动作，即不加锁的非阻塞读。快照读的前提是隔离级别不是串行化级别，串行化级别下的快照读会退化成当前读
     + 之所以出现快照读的情况，是基于提高并发性能的考虑，这里可以认为MVCC是行锁的一个变种，但它在很多情况下，避免了加锁操作，降低了开销
@@ -2312,11 +2314,10 @@ where a.table_id=b.table_id and a.space <> 0;
       + 加锁的策略会和数据库的隔离级别有关，在默认的可重复读的隔离级别的情况下，加锁的流程还会和查询条件中是否包含索引，是主键索引还是普通索引，是否是唯一索引等有关
   - 采用多版本并发控制（MVCC，MultiVersion Concurrency Control）来支持高并发
   - 通过间隙锁next-key locking策略防止幻读的出现
-  - 引擎的表基于聚簇索引建立，聚簇索引对主键查询有很高的性能。不过它的二级索引secondary index非主键索引中必须包含主键列，所以如果主键列很大的话，其他的所有索引都会很大。因此，若表上的索引较多的话，主键应当尽可能的小
-  - 分析系统上的行锁的争夺情况:`show status like 'innodb_row_lock%';`
-  - 间隙锁next-key locking策略防止幻读的出现
     + 防止幻读，以满足相关隔离级别的要求
     + 满足恢复和复制的需要
+  - 引擎的表基于聚簇索引建立，聚簇索引对主键查询有很高的性能。不过它的二级索引secondary index非主键索引中必须包含主键列，所以如果主键列很大的话，其他的所有索引都会很大。因此，若表上的索引较多的话，主键应当尽可能的小
+  - 分析系统上的行锁的争夺情况:`show status like 'innodb_row_lock%';`
   - 在聚集索引（主键索引）中，如果有唯一性约束，InnoDB会将默认的next-key lock降级为record lock
   - 磁盘读取数据方式采用的可预测性预读、自动在内存中创建hash索引以加速读操作的自适应哈希索引（adaptive hash index)，以及能够加速插入操作的插入缓冲区（insert buffer)等
   - 通过一些机制和工具支持真正的热备份，MySQL 的其他存储引擎不支持热备份，要获取一致性视图需要停止对所有表的写入，而在读写混合场景中，停止写入可能也意味着停止读取。备份方式稍微复杂一点。xtradb是innodb存储引擎的增强版本，更高性能环境下的新特性
@@ -2520,6 +2521,17 @@ where table_schema='percona' and table_name='ins_frag';
 SET GLOBAL innodb_monitor_enable=all;
 # 查看也分裂
 select name,count,type,status,comment from information_schema.innodb_metrics where name like '%index_page_spl%'G
+
+begin;
+select * from user where age=20 for update;
+
+begin;
+insert into user(age) values(10); #成功
+insert into user(age) values(11); #失败
+insert into user(age) values(20); #失败
+insert into user(age) values(21); #失败
+insert into user(age) values(30); #失败
+# 表的间隙mysql自动帮我们生成了区间(左开右闭) (negative infinity，10],(10,20],(20,30],(30,positive infinity)
 ```
 
 ## 索引 index
@@ -3276,6 +3288,8 @@ SELECT '存在缺失的编号' AS post FROM post HAVING COUNT(*) <> MAX(id);
   - replication
   - Semisync replication
   - Group replication
+* 全同步复制：主库写入binlog后强制同步日志到从库，所有的从库都执行完成后才返回给客户端，但是很显然这个方式的话性能会受到严重影响
+* 半同步复制：从库写入日志成功后返回ACK确认给主库，主库收到至少一个从库的确认就认为写操作完成。
 
 ![master-slave](../_static/master-slave.gif "master-slave")
 
@@ -3564,6 +3578,10 @@ LVS、HAProxy、Nginx
       * 单表数据库到达某个量级的上限时，导致内存无法存储其索引，使得之后的 SQL 查询会产生磁盘 IO，从而导致性能下降
     + 不应该滥用分库分表,如果预计三年后的数据量根本达不到这个级别，请不要在创建表时就分库分表
     + 会遇到单体瓶颈，比如库存表，每次交易、下单、秒杀都会涉及到频繁修改库存表，当业务到达一定级别，可能导致库存表单体性能瓶颈，这个时候需要对其进行水平拆分
+* 分表后ID唯一性
+  - 设定步长，比如1-1024张表我们分别设定1-1024的基础步长，这样主键落到不同的表就不会冲突了。
+  - 分布式ID，自己实现一套分布式ID生成算法或者使用开源的比如雪花算法这种
+  - 分表后不使用主键作为查询依据，而是每张表单独新增一个字段作为唯一主键使用，比如订单表订单号是唯一的，不管最终落在哪张表都基于订单号作为查询依据，更新也一样。
 * 工具
   - sharding-sphere:前身是sharding-jdbc
   - TDDL(Taobao Distribute Data Layer)

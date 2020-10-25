@@ -38,6 +38,10 @@ flutter upgrade
 flutter doctor --android-licenses
 ```
 
+```sh
+flutter pub get
+```
+
 ## 问题
 
 ```

@@ -519,12 +519,7 @@
 
 ## 参考
 
-* [经典编程书籍大全](https://github.com/jobbole/awesome-programming-books):100+ 经典技术书籍，涵盖：计算机系统与网络、系统架构、算法与数据结构、前端开发、后端开发、移动开发、数据库、测试、项目与团队、程序员职业修炼、求职面试 和 编程相关的经典书籍。
-* [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books):books: Freely available programming books
-* [justjavac/free-programming-books-zh_CN](https://github.com/justjavac/free-programming-books-zh_CN):📚 免费的计算机编程类中文书籍，欢迎投稿 http://weibo.com/justjavac
-* [programthink/books](https://github.com/programthink/books):【编程随想】收藏的电子书清单
 * [threerocks/studyFiles](https://github.com/threerocks/studyFiles):一些经典且高质量的电子书分享
 * [it-ebooks/kindle114-rsrc-gathering](https://github.com/it-ebooks/kindle114-rsrc-gathering):📚 Kindle114 资源集结计划 http://kindle115.com
-* [waylau/books-collection](https://github.com/waylau/books-collection):To the programmer's open source and free books collection 给程序员的开源、免费书籍收集，图书集合。
 * [itbook.store](https://itbook.store/)
 * [free books from Springer](https://hnarayanan.github.io/springer-books/): support everyone during Covid-19, Springer has released a ton of free textbooks

@@ -1300,6 +1300,8 @@ JavaEE/JDBC/Weblogic
 
 ## 参考
 
+* [Java World](http://www.javaworld.com/)
+* [Java SE 技术文档](http://docs.oracle.com/javase/)
 * [apachecn/thinking-in-java-zh](https://github.com/apachecn/thinking-in-java-zh):📖 Java 编程思想
 * [doocs/advanced-java](https://github.com/doocs/advanced-java):😮 互联网 Java 工程师进阶知识完全扫盲 https://doocs.github.io/advanced-java
 * [hollischuang / toBeTopJavaer](https://github.com/hollischuang/toBeTopJavaer):To Be Top Javaer - Java 工程师成神之路 www.hollischuang.com
