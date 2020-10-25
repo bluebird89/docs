@@ -42,7 +42,7 @@ The official GitHub mirror of the Chromium source https://chromium.googlesource.
 * User-Agent Switcher for Chrome
 * [Video Speed Controller](https://github.com/igrigorik/videospeed):给视频加个速
 * v2ex plus
-* [philc/vimium](The hacker's browser.)The hacker's browser.
+* [vimium](The hacker's browser.)The hacker's browser.
 * Wappalyzer:网站分析工具  know a web sites’ tech stack
 * Web Developer:Adds a toolbar button with various web developer tools
 * XML Tree

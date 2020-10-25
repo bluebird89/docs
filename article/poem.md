@@ -203,6 +203,21 @@ A heart whose love is innocent!
 ## 卜算子·黄州定慧院寓居作 苏轼
 
 ```
-缺月挂疏桐，漏断人初静。时见幽人独往来，缥缈孤鸿影。
-惊起却回头，有恨无人省。拣尽寒枝不肯栖，寂寞沙洲冷。
+缺月挂疏桐，漏断人初静。
+时见幽人独往来，缥缈孤鸿影。
+惊起却回头，有恨无人省。
+拣尽寒枝不肯栖，寂寞沙洲冷。
 ```
+
+## 过零丁洋 文天祥
+
+```
+辛苦遭逢起一经，干戈寥落四周星。
+山河破碎风飘絮，身世浮沉雨打萍。
+惶恐滩头说惶恐，零丁洋里叹零丁。
+人生自古谁无死，留取丹心照汗青。
+```
+
+## 参考
+
+* [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):The most comprehensive database of Chinese poetry
