@@ -1,4 +1,4 @@
-## Video
+# Video
 
 ## 概念
 
@@ -96,6 +96,16 @@
 
 ![视频播放器的原理](../_static/video_play.png "视频播放器的原理")
 
+## 格式
+
+* AVI .avi  AVI (Audio Video Interleave) 格式是由微软开发的。所有运行 Windows 的计算机都支持 AVI 格式。它是因特网上很常见的格式，但非 Windows 计算机并不总是能够播放
+* WMV .wmv  Windows Media 格式是由微软开发的。Windows Media 在因特网上很常见，但是如果未安装额外的（免费）组件，就无法播放 Windows Media 电影。一些后期的 Windows Media 电影在所有非 Windows 计算机上都无法播放，因为没有合适的播放器。
+* MPEG .mpg .mpeg MPEG (Moving Pictures Expert Group) 格式是因特网上最流行的格式。它是跨平台的，得到了所有最流行的浏览器的支持。
+* QuickTime .mov  QuickTime 格式是由苹果公司开发的。QuickTime 是因特网上常见的格式，但是 QuickTime 电影不能在没有安装额外的（免费）组件的 Windows 计算机上播放
+* RealVideo .rm .ram RealVideo 格式是由 Real Media 针对因特网开发的。该格式允许低带宽条件下（在线视频、网络电视）的视频流。由于是低带宽优先的，质量常会降低
+* Flash .swf .flv Flash (Shockwave) 格式是由 Macromedia 开发的。Shockwave 格式需要额外的组件来播放。但是该组件会预装到 Firefox 或 IE 之类的浏览器上
+* Mpeg-4  .mp4  Mpeg-4 (with H.264 video compression) 是一种针对因特网的新格式。事实上，YouTube 推荐使用 MP4。YouTube 接收多种格式，然后全部转换为 .flv 或 .mp4 以供分发。越来越多的视频发布者转到 MP4，将其作为 Flash 播放器和 HTML5 的因特网共享格式
+
 ## 编码
 
 * 国际电信联盟电信标准化部门（简称 ITU-T）旗下的 VCEG（Video Coding Experts Group，视频编码专家组），因为是电信联盟，所以最初做视频编码主要侧重传输，这个编码组制定的视频通信协议包括 H.261、 H.262、H.263、H.264、H.265 等；
@@ -161,40 +171,43 @@ rtmp://localhost/vod/out.mp4
   - [99美剧网](https://www.jjmeiju.com/)
 * [Roku](https://www.roku.com/)
 * IPTV
-  - [iptv-org / iptv](https://github.com/iptv-org/iptv):Collection of 8000+ publicly available IPTV channels from all over the world
-  - [iptv-org / awesome-iptv](https://github.com/iptv-org/awesome-iptv):A curated list of resources related to IPTV
+  - [iptv](https://github.com/iptv-org/iptv):Collection of 8000+ publicly available IPTV channels from all over the world
+  - [awesome-iptv](https://github.com/iptv-org/awesome-iptv):A curated list of resources related to IPTV
+* [real-live](https://github.com/parzulpan/real-live) 跨平台网络直播聚合平台，支持视频直播、高清电视和广播电台等。A cross-platform webcast aggregation platform that supports live video, high-definition TV and radio stations.
+
 
 ## 工具
 
 * [obsproject/obs-studio](https://github.com/obsproject/obs-studio):OBS Studio - Free and open source software for live streaming and screen recording https://obsproject.com/
 * [ossrs/srs](https://github.com/ossrs/srs):SRS's a simplest, conceptual integrated, industrial-strength live streaming origin cluster.
 * [video-dev/hls.js](https://github.com/video-dev/hls.js):JavaScript HLS client using Media Source Extension http://video-dev.github.io/hls.js/stable/demo
-* [xbmc/xbmc](https://github.com/xbmc/xbmc):Kodi is an award-winning free and open source home theater/media center software and entertainment hub for digital media. With its beautiful interface and powerful skinning engine, it's available for Android, BSD, Linux, macOS, iOS and Windows. https://kodi.tv/
-* [MoePlayer/DPlayer](https://github.com/MoePlayer/DPlayer):🍭 Wow, such a lovely HTML5 danmaku video player http://dplayer.js.org
-* [iina/iina](https://github.com/iina/iina):The modern video player for macOS. https://iina.io
-* [kodi](https://kodi.tv/)
-* [iawia002 / annie](https://github.com/iawia002/annie):space_invader Fast, simple and clean video downloader
-* [mpv](https://mpv.io/):别致轻量的界面和丰富的功能，MPV 拥有对一个好的视频播放器的一切期望。甚至可以在命令行使用它
+* [Bilibili/flv.js](https://github.com/Bilibili/flv.js)HTML5 FLV Player
+* 播放器
+  - [xbmc](https://github.com/xbmc/xbmc):Kodi is an award-winning free and open source home theater/media center software and entertainment hub for digital media. With its beautiful interface and powerful skinning engine, it's available for Android, BSD, Linux, macOS, iOS and Windows. https://kodi.tv/
+  - [iina/iina](https://github.com/iina/iina):The modern video player for macOS. https://iina.io
+  - [annie](https://github.com/iawia002/annie):space_invader Fast, simple and clean video downloader
+  - [mpv](https://mpv.io/):别致轻量的界面和丰富的功能，MPV 拥有对一个好的视频播放器的一切期望。甚至可以在命令行使用它
+  - [GSYVideoPlayer](https://github.com/CarGuo/GSYVideoPlayer):视频播放器（IJKplayer、ExoPlayer、MediaPlayer），HTTPS，支持弹幕，支持滤镜、水印、gif截图，片头广告、中间广告，多个同时播放，支持基本的拖动，声音、亮度调节，支持边播边缓存，支持视频自带rotation的旋转（90,270之类），重力旋转与手动旋转的同步支持，支持列表播放 ，列表全屏动画，视频加载速度，列表小窗口支持拖动，动画效果，调整比例，多分辨率切换，支持切换播放器，进度条小窗口预览，列表切换详情页面无缝播放，rtsp、concat、mpeg。
+  - [MoePlayer/DPlayer](https://github.com/MoePlayer/DPlayer):🍭 Wow, such a lovely HTML5 danmaku video player http://dplayer.js.org
+  - [ZY-Player](https://github.com/Hunlongyu/ZY-Player):arrow_forward 跨跨平台桌面端视频资源播放器.简洁无广告.免费高颜值. film_strip
 * [mifi/lossless-cut](https://github.com/mifi/lossless-cut):Save space by quickly and losslessly trimming video and audio files
 * [asdjgfr/operationRecord](https://github.com/asdjgfr/operationRecord):记录产品，测试的沙雕操作，方便debugger
 * [daniulive/SmarterStreaming](https://github.com/daniulive/SmarterStreaming):国内外为数不多致力于极致体验的超强全自研跨平台(windows/android/iOS)流媒体内核，通过模块化自由组合，支持实时RTMP推流、RTSP推流、RTMP播放器、RTSP播放器、录像、多路流媒体转发、音视频导播、动态视频合成、音频混音、直播互动、内置轻量级RTSP服务等，比快更快，业界真正靠谱的超低延迟直播SDK(1秒内，低延迟模式下200~400ms)。 https://www.daniulive.com
-* [CarGuo/GSYVideoPlayer](https://github.com/CarGuo/GSYVideoPlayer):视频播放器（IJKplayer、ExoPlayer、MediaPlayer），HTTPS，支持弹幕，支持滤镜、水印、gif截图，片头广告、中间广告，多个同时播放，支持基本的拖动，声音、亮度调节，支持边播边缓存，支持视频自带rotation的旋转（90,270之类），重力旋转与手动旋转的同步支持，支持列表播放 ，列表全屏动画，视频加载速度，列表小窗口支持拖动，动画效果，调整比例，多分辨率切换，支持切换播放器，进度条小窗口预览，列表切换详情页面无缝播放，rtsp、concat、mpeg。
-* 切片
-  - FFmpeg
-  - MP4Box
+
 * [parse 视频解析网 video](https://pv.vlogdownloader.com/?)
 * [WebTorrent Desktop](https://webtorrent.io/):Streaming torrent app
-* [cisco / openh264](https://github.com/cisco/openh264):Open Source H.264 Codec
+* [openh264](https://github.com/cisco/openh264):Open Source H.264 Codec
 * [potplayercn](http://www.potplayercn.com/)
-  - [billy21 / Tvlist-awesome-m3u-m3u8](https://github.com/billy21/Tvlist-awesome-m3u-m3u8):直播源相关资源汇总
-* [Tinywan / html5-dash-hls-rtmp](https://github.com/Tinywan/html5-dash-hls-rtmp):🌻 HTML5播放器、M3U8直播/点播、RTMP直播、低延迟、推流/播流地址鉴权 https://github.tinywan.com/html5-dash-hls-rtmp/
+  - [Tvlist-awesome-m3u-m3u8](https://github.com/billy21/Tvlist-awesome-m3u-m3u8):直播源相关资源汇总
+* [html5-dash-hls-rtmp](https://github.com/Tinywan/html5-dash-hls-rtmp):🌻 HTML5播放器、M3U8直播/点播、RTMP直播、低延迟、推流/播流地址鉴权 https://github.tinywan.com/html5-dash-hls-rtmp/
+* 切片
+  - [FFmpeg](../tools/FFmpeg.md)
+  - MP4Box
 * 录屏
   - Ocam:录屏软件
   - Quicktime:切分音视频，可以录屏
-* [Hunlongyu / ZY-Player](https://github.com/Hunlongyu/ZY-Player):arrow_forward 跨跨平台桌面端视频资源播放器.简洁无广告.免费高颜值. film_strip
-* [real-live](https://github.com/parzulpan/real-live) 跨平台网络直播聚合平台，支持视频直播、高清电视和广播电台等。A cross-platform webcast aggregation platform that supports live video, high-definition TV and radio stations.
 
 ## 参考
 
-* [leandromoreira / digital_video_introduction ](https://github.com/leandromoreira/digital_video_introduction):A hands-on introduction to video technology: image, video, codec (av1, vp9, h265) and more (ffmpeg encoding).
+* [digital_video_introduction](https://github.com/leandromoreira/digital_video_introduction):A hands-on introduction to video technology: image, video, codec (av1, vp9, h265) and more (ffmpeg encoding).
 * [insecam](https://www.insecam.org/en/):The world biggest directory of online surveillance security cameras
