@@ -2209,11 +2209,9 @@ Laravel 5 - Repositories to abstract the database layer http://andersao.github.i
   - [bagisto/bagisto](https://github.com/bagisto/bagisto):A Free and Opensource laravel eCommerce framework built for all to build and scale your business. https://bagisto.com
   - [laravel/framework](https://github.com/laravel/framework)
   - [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js.
-  - [octobercms/october](https://github.com/octobercms/october):Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework
   - [bosnadev/repository](https://github.com/bosnadev/repository):Laravel Repositories is a package for Laravel 5 which is used to abstract the database layer. This makes applications much easier to maintain. https://bosnadev.com
-* lumen
-  - [laravel/lumen-framework](https://github.com/laravel/lumen-framework) <https://lumen.laravel.com/docs/5.6>
-  - [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
+* [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
+  - [laravel/lumen-framework](https://github.com/laravel/lumen-framework)
 * API
   - [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
   - [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp

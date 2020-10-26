@@ -1,6 +1,6 @@
 # [phoenixframework/phoenix](https://github.com/phoenixframework/phoenix)
 
-Productive. Reliable. Fast. http://www.phoenixframework.org
+Peace of mind from prototype to production http://www.phoenixframework.org
 
 ## 安装
 
@@ -12,5 +12,3 @@ cd hello # configure your database in config/dev.exs
 mix ecto.create
 mix phx.server
 ```
-
-Plug

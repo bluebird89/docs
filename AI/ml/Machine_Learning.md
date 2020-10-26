@@ -337,7 +337,7 @@
   - http://open.163.com/special/opencourse/machinelearning.html
   - https://www.coursera.org/learn/machine-learning
   - [fengdu78/Coursera-ML-AndrewNg-Notes](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes):吴恩达老师的机器学习课程个人笔记
-* [李宏毅Machine Learning ](https://www.bilibili.com/video/av15889450)
+* [李宏毅Machine Learning](https://www.bilibili.com/video/av15889450)
   - 资料：http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML19.html
   - 课程视频：https://www.bilibili.com/video/av46561029/
   - https://www.youtube.com/playlist?list=PLJV_el3uVTsOK_ZK5L0Iv_EQoL1JefRL4
@@ -350,7 +350,7 @@
 * [Doraemonzzz/Learning-from-data](https://github.com/Doraemonzzz/Learning-from-data):记录Learning from data一书中的习题解答 http://amlbook.com/
 * [Built on the AWS Cloud. Developed for Amazon developers and engineers.](https://aws.amazon.com/training/learning-paths/machine-learning/)
 * 火光摇曳：腾讯技术大牛们的博客 http://www.flickering.cn/
-* 美团技术团队的博客：里面也有很多干货： https://tech.meituan.com/
+* 美团技术团队的博客：https://tech.meituan.com/
 * 苏剑林的博客里面也全是干货 https://spaces.ac.cn/
 * Netflix：Netflix技术博客，很多干货。 https://medium.com/netflix-techblog
 * Towards Data Science：主要分享些概念、idea和代码。 https://towardsdatascience.com/

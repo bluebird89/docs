@@ -1,4 +1,4 @@
-# [composer/composer](https://github.com/composer/composer)
+# [composer](https://github.com/composer/composer)
 
 Dependency Manager for PHP https://getcomposer.org/  [中文](https://www.phpcomposer.com/)
 
@@ -6,6 +6,14 @@ Dependency Manager for PHP https://getcomposer.org/  [中文](https://www.phpcom
   - _autoload()有个缺点就是一个进程中只能定义一次
   - sql_autoload_register()不存在这个问题，它可以把函数注册到__autoload队列中
 * 底层也是通过 spl_autoload_register 函数实现类的自动加载的，只是在此之前，还会建立命令空间与类脚本路径的映射
+* 程序员节这天发布了 2.0 版本
+  - 从 Composer 和 packagist.org 之间使用的协议到依赖解析对几乎所有代码都进行了彻底的重构，包括使用 curl 并行下载文件和约束评估的优化（即扩展包的版本控制）等，这些重构使得 Composer 2.0 不论是速度还是内存使用方面都得到了大幅改进
+  - 对依赖更新内部执行的方式进行了重构:安装流程会自动并发执行，从而避免只安装到一半因网络问题导致流程被终止
+  - 运行时新特性:vendor/autoload.php 初始化时新增了平台检测步骤，主要检查当前 PHP 版本和扩展包版本是否匹配，不匹配的话会初始化失败
+    +  vendor/composer 目录下看到一个新增的 InstalledVersions 类，它会在每个项目中自动加载并且在运行时有效，可以通过它来检查运行时项目中有效的扩展包及其版本号
+    + 代码依赖这些运行时新特性，可以在 composer.json 的 require 配置项中添加 "composer-runtime-api": "^2.0" 依赖声明
+  - 错误报告优化:优化了依赖不能被解析时错误报告的显示，现在的错误消息会更短、更清晰、更少重复
+  - 带临时约束的部分更新:composer update vendor/package:1.0.* 升级指定扩展包版本，不会更新 composer.json，也不会更新 composer.lock 文件，如果想添加这个临时约束的同时更新所有依赖，需要使用 composer update --with vendor/package:1.0.* 命令
 
 ## 原理
 
@@ -59,6 +67,8 @@ yum install composer
 
 # file_put_contents(./composer.json): failed to open stream: Permission denied
 sudo chown -R $USER .composer/
+
+composer self-update --2
 
 ### 卸载composer:找到文件删除即可
 # ~/.composer/auth.json
@@ -454,13 +464,13 @@ $cat = new \Animal\Cat();
 * 确定厂商名称和包名，即形如laravel/framework这样，要确保其全局唯一性，在Packagist中不存在
 
 * 系统结构基本上是确定的：
-  
+
   - src：存放组件源代码
-  
+
   - tests：存放组件测试代码
-  
+
   - composer.json：Composer配置文件，用于描述组件，声明组件依赖以及自动加载配置等
-    
+
     + name：组件的厂商名和包名，也是Packagist中的组件名
     + description：简要说明组件
     + keywords：描述属性的关键字
@@ -472,9 +482,9 @@ $cat = new \Animal\Cat();
     + require-dev：开发这个组件所需的依赖
     + suggest：建议安装的组件
     + autoload：告诉Composer自动加载器如何自动加载这个组件
-  
+
   - README.md：关于组件的相关信息、使用文档说明、软件许可证等
-    
+
     + 组件的名称和描述
     + 安装说明
     + 使用说明
@@ -483,11 +493,11 @@ $cat = new \Animal\Cat();
     + 支持资源
     + 作者信息
     + 软件许可证
-  
+
   - CONTRIBUTING.md：告知别人如何为这个组件做贡献
-  
+
   - LICENSE：纯文本文件，声明组件的软件许可证
-  
+
   - CHANGELOG.md：列出组件在每个版本中引入的改动
 
 ```sh

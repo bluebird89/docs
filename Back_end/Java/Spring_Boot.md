@@ -7,7 +7,7 @@ Spring Boot http://projects.spring.io/spring-boot
 * Spring Cloud 为开发人员提供了一些快速构建分布式系统常见模式的工具（例如配置管理、服务发现、断路器、智能路由、领导选举、分布式会话、集群状态）。
 
 * Spring Boot 开发分布式微服务时，我们面临的一些问题可以由 Spring Cloud 解决。
-  
+
   - **与分布式系统相关的复杂性 -  **这包括网络问题、延迟开销、带宽问题、安全问题。
   - **处理服务发现的能力 -  **服务发现允许群集中的进程和服务找到彼此并进行通信。
   - **解决了冗余问题 -  **冗余问题经常发生在分布式系统中。
@@ -283,7 +283,6 @@ url: jdbc:mysql://localhost:13306/ecommerce_order_mysql?allowMultiQueries=true&u
 
 ## 项目
 
-* [小柒2012 / spring-boot-seckill](https://gitee.com/52itstyle/spring-boot-seckill):从0到1构建分布式秒杀系统，脱离案例讲架构都是耍流氓 https://blog.52itstyle.vip/archives/2853/
 * [ityouknow/spring-boot-examples](https://github.com/ityouknow/spring-boot-examples):about learning Spring Boot via examples. Spring Boot 教程、技术栈示例代码，快速简单上手教程。 http://www.ityouknow.com/
 * admin
   - [codecentric/spring-boot-admin](https://github.com/codecentric/spring-boot-admin):Admin UI for administration of spring boot applications
@@ -300,11 +299,7 @@ url: jdbc:mysql://localhost:13306/ecommerce_order_mysql?allowMultiQueries=true&u
 ## 参考
 
 * [葬爱家族丶冷少](https://jiangyongkang.gitee.io)
-
 * [qibaoguang / Spring-Boot-Reference-Guide](https://github.com/qibaoguang/Spring-Boot-Reference-Guide):Spring Boot Reference Guide 中文翻译 -《Spring Boot 参考指南》
-
 * [Spring Boot 系列教程](https://www.cnblogs.com/vipstone/p/9967649.html)
-
 * [最棒 Spring Boot 干货总结](https://mp.weixin.qq.com/s/tWV8lUznOIJwSUPPQlKJUg)
-
 * https://blog.csdn.net/weixin_39800144/category_9271492.html

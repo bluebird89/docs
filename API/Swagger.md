@@ -1,6 +1,9 @@
-# Swagger
+# [swagger-api/swagger-ui](https://github.com/swagger-api/swagger-ui)
 
-Swagger是一种通用的、和编程语言无关的API的描述规范。只要开发者在自己的API之上添加符合Swagger规范的描述，就能利用上Swagger丰富的生态，找到符合自己开发语言的工具去做很多事：比如最常用的生成API文档，或者生成返回假数据的服务端基础代码等等。
+Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. http://swagger.io
+
+* 以将扫描工具生成的 swagger.json 文件内容展示在网页上
+* Swagger是一种通用的、和编程语言无关的API的描述规范。只要开发者在自己的API之上添加符合Swagger规范的描述，就能利用上Swagger丰富的生态，找到符合自己开发语言的工具去做很多事：比如最常用的生成API文档，或者生成返回假数据的服务端基础代码等等。
 
 * scheme
 * 授权
@@ -112,7 +115,6 @@ public function myWebPageAction(){
 
 ## 参考
 
-* [swagger-api/swagger-ui](https://github.com/swagger-api/swagger-ui)：Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. http://swagger.io.以将扫描工具生成的 swagger.json 文件内容展示在网页上.
 * [Swagger从入门到精通](https://www.gitbook.com/book/huangwenchao/swagger/details)
 * [swagger-api/swagger-codegen](https://github.com/swagger-api/swagger-codegen):swagger-codegen contains a template-driven engine to generate documentation, API clients and server stubs in different languages by parsing your OpenAPI / Swagger definition. http://swagger.io
 * [Swagger2Markup/swagger2markup](https://github.com/Swagger2Markup/swagger2markup):A Swagger to AsciiDoc or Markdown converter to simplify the generation of an up-to-date RESTful API documentation by combining documentation that’s been hand-written with auto-generated API documentation.

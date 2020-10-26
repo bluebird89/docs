@@ -13,11 +13,6 @@ Build cross-platform desktop apps with JavaScript, HTML, and CSS https://electro
 
 * [electron/electron-quick-start](https://github.com/electron/electron-quick-start):Clone to try a simple Electron app https://electron.atom.io/docs/tutoria…
 * [electron/electron-api-docs](https://github.com/electron/electron-api-docs):Electron's API documentation in a structured JSON format
-
-## 项目
-
-* [electronic-wechat](https://github.com/geeeeeeeeek/electronic-wechat):A better WeChat on macOS and Linux. Built with Electron by Zhongyi Tong.
-* [electron/electron](https://github.com/electron/electron):Build cross platform desktop apps with JavaScript, HTML, and CSS https://electron.atom.io
 * [electron/electron-api-demos](https://github.com/electron/electron-api-demos):Explore the Electron APIs http://electronjs.org/#get-started
 
 ## 工具
@@ -25,7 +20,6 @@ Build cross-platform desktop apps with JavaScript, HTML, and CSS https://electro
 * 框架
     - [mherrmann/fbs](https://github.com/mherrmann/fbs):Electron alternative based on Python and Qt https://build-system.fman.io
 * [chentsulin/electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate):Live editing development on desktop app
-* [electron/electron-api-demos](https://github.com/electron/electron-api-demos):Explore the Electron APIs http://electron.atom.io/#get-started
 * [electron/devtron](https://github.com/electron/devtron):An Electron DevTools Extension http://electron.atom.io/devtron
 * [fraserxu/electron-pdf](https://github.com/fraserxu/electron-pdf)：A command line tool to generate PDF from URL, HTML or Markdown files.
 * [connors/photon](https://github.com/connors/photon):The fastest way to build beautiful Electron apps using simple HTML and CSS http://photonkit.com

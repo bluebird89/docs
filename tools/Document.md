@@ -119,6 +119,11 @@ pandoc API.md -o api.docx -c Github.css
 }
 ```
 
+## [deepnote](https://deepnote.com/)
+
+ a new kind of data science notebook. Jupyter-compatible with real-time collaboration and easy deployment. Oh, and it's free
+
+
 ## 工具
 
 * [coolwanglu/pdf2htmlEX](https://github.com/coolwanglu/pdf2htmlEX):Convert PDF to HTML without losing text or format. http://coolwanglu.github.com/pdf2htmlEX/
