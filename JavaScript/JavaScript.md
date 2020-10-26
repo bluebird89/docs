@@ -3,11 +3,11 @@
 * JavaScript是世界上最流行的脚本语言。运行在浏览器中的解释型的编程语言
 * 1995年，网景公司正凭借其Navigator浏览器成为Web时代开启时最著名的第一代互联网公司
 * 网景公司希望能在静态HTML页面上添加一些动态效果，于是叫Brendan Eich这哥们在两周之内设计出了JavaScript语言。只用了10天时间，语法有多个来源
-  - 基本语法：借鉴 C 语言和 Java 语言。
-  - 数据结构：借鉴 Java 语言，包括将值分成原始值和对象两大类。
-  - 函数的用法：借鉴 Scheme 语言和 Awk 语言，将函数当作第一等公民，并引入闭包。
-  - 原型继承模型：借鉴 Self 语言（Smalltalk 的一种变种）。
-  - 正则表达式：借鉴 Perl 语言。
+  - 基本语法：借鉴 C 语言和 Java 语言
+  - 数据结构：借鉴 Java 语言，包括将值分成原始值和对象两大类
+  - 函数的用法：借鉴 Scheme 语言和 Awk 语言，将函数当作第一等公民，并引入闭包
+  - 原型继承模型：借鉴 Self 语言（Smalltalk 的一种变种）
+  - 正则表达式：借鉴 Perl 语言
   - 字符串和数组处理：借鉴 Python 语言
 * 最初名字叫做 Mocha，1995年9月改为 LiveScript。12月，Netscape 公司与 Sun 公司（Java 语言的发明者和所有者）达成协议，后者允许将这种语言叫做 JavaScript。这样一来，Netscape 公司可以借助 Java 语言的声势，而 Sun 公司则将自己的影响力扩展到了浏览器
 * 1995年12月4日，Netscape 公司与 Sun 公司联合发布了 JavaScript 语言，对外宣传 JavaScript 是 Java 的补充，属于轻量级的 Java，专门用来操作网页
@@ -46,32 +46,24 @@
 * JavaScript 的使用范围，慢慢超越了浏览器，正在向通用的系统语言发展
 * JavaScript 也是一种嵌入式（embedded）语言。本身提供的核心语法不算很多，只能用来做一些数学和逻辑运算。JavaScript 本身不提供任何与 I/O（输入/输出）相关的 API，都要靠宿主环境（host）提供，所以 JavaScript 只合适嵌入更大型的应用程序环境，去调用宿主环境提供的底层 API
 
-## 核心语法
+## 版本
 
-* 基本的语法构造（比如操作符、控制结构、语句）
-* 标准库
-  - Array
-  - Date
-  - Math
-* 虽然核心语法不难，但是 JavaScript 的复杂性体现在另外两个方面
-  - 涉及大量的外部 API。JavaScript 要发挥作用，必须与其他组件配合，这些外部组件五花八门，数量极其庞大，几乎涉及网络应用的各个方面，掌握它们绝非易事
-  - JavaScript 语言有一些设计缺陷：学习 JavaScript，很大一部分时间是用来搞清楚哪些地方有陷阱。Douglas Crockford 写过一本有名的书，名字就叫《JavaScript: The Good Parts》
+* 2015年6月，ECMAScript 6 正式发布，并且更名为“ECMAScript 2015”。这是因为 TC39 委员会计划，以后每年发布一个 ECMAScript 的版本
 
-## 浏览器环境
+## 环境
 
-* JavaScript 的发明目的，就是作为浏览器的内置脚本语言，为网页开发者提供操控浏览器的能力。它是目前唯一一种通用的浏览器脚本语言，所有浏览器都支持。它可以让网页呈现各种特殊效果，为用户提供良好的互动体验
-* 浏览器的平台化：随着 HTML5 的出现，浏览器本身的功能越来越强，不再仅仅能浏览网页，而是越来越像一个平台，JavaScript 因此得以调用许多系统功能，比如操作本地文件、操作图片、调用摄像头和麦克风等等。这使得 JavaScript 可以完成许多以前无法想象的事情
-* 提供的额外 API
-  - 浏览器控制类：操作浏览器
-  - DOM 类：操作网页的各种元素
-  - Web 类：实现互联网的各种功能
-
-## 服务器环境 Node
-
-* Node 项目使得 JavaScript 可以用于开发服务器端的大型项目，网站的前后端都用 JavaScript 开发已经成为了现实。有些嵌入式平台（Raspberry Pi）能够安装 Node，于是 JavaScript 就能为这些平台开发应用程序
-* 提供各种操作系统 API
-  - 文件操作 API
-  - 网络通信 API
+* 浏览器环境
+  - JavaScript 的发明目的，就是作为浏览器的内置脚本语言，为网页开发者提供操控浏览器的能力。它是目前唯一一种通用的浏览器脚本语言，所有浏览器都支持。它可以让网页呈现各种特殊效果，为用户提供良好的互动体验
+  - 浏览器的平台化：随着 HTML5 的出现，浏览器本身的功能越来越强，不再仅仅能浏览网页，而是越来越像一个平台，JavaScript 因此得以调用许多系统功能，比如操作本地文件、操作图片、调用摄像头和麦克风等等。这使得 JavaScript 可以完成许多以前无法想象的事情
+  - 提供的额外 API
+    + 浏览器控制类：操作浏览器
+    + DOM 类：操作网页的各种元素
+    + Web 类：实现互联网的各种功能
+* 服务器环境 Node
+  - Node 项目使得 JavaScript 可以用于开发服务器端的大型项目，网站的前后端都用 JavaScript 开发已经成为了现实。有些嵌入式平台（Raspberry Pi）能够安装 Node，于是 JavaScript 就能为这些平台开发应用程序
+  - 提供各种操作系统 API
+    + 文件操作 API
+    + 网络通信 API
 
 ## 数据库操作
 
@@ -80,40 +72,6 @@
 ## 移动平台开发
 
 * PhoneGap 项目就是将 JavaScript 和 HTML5 打包在一个容器之中，使得它能同时在 iOS 和安卓上运行。Facebook 公司的 React Native 项目则是将 JavaScript 写的组件，编译成原生组件，从而使它们具备优秀的性能。
-
-## 版本
-
-* 2015年6月，ECMAScript 6 正式发布，并且更名为“ECMAScript 2015”。这是因为 TC39 委员会计划，以后每年发布一个 ECMAScript 的版本
-
-## DOM Document Object Model 文档对象模型
-
-* HTML 看做一个对象树（DOM树), DOM 看成节点
-* 针对 HTML 和 XML 提供的一个API,操作 HTML 中的元素
-* Javascript 不能够真正改变 DOM，仅仅是改变呈现内容，当刷新的时候就会发现都还原
-* 可以把这些改变传递给服务器，用户的交互没必要让服务器掺和，因为交互只是暂时
-* 对象
-  - document
-    + 当浏览器下载到一个网页，通常是 HTML，这个 HTML 就叫 document
-    + 通常是整个 DOM 树的根节点
-    + 包含了标题（document.title）、URL（document.URL）等属性，可以直接在 JS 中访问到
-    + 可以通过 document 访问任何节点
-    + 功能
-      * 写入 HTML 输出流
-        - document.write
-      * 事件响应
-        - onclick
-      * 改变 HTML 内容
-        - document.getElementById("demo").innerHTML
-      * 改变属性
-        - document.getElementById('myimage').src
-        - document.getElementById('myimage').style.color
-
-## BOM Browser Object Model 浏览器对象模型
-
-* 为了控制浏览器的行为而出现的接口
-* 对象
-  - location.href
-  - window
 
 ## 引入
 
@@ -154,10 +112,7 @@ document.write("<p>This is a paragraph</p>");
 * 以`//`开头直到行末的字符被视为行注释
 * 块注释是用`/*...*/`把多行字符包裹起来
 * 区分大小写
-
-## 常量
-
-要申明一个常量，在ES6之前是不行的，我们通常用全部大写的变量来表示“这是一个常量，不要修改它的值”。
+* 常量：在ES6之前是不行的，通常用全部大写的变量来表示“这是一个常量，不要修改它的值”
 
 ```javascript
 var PI = 3.14;
@@ -185,11 +140,51 @@ PI; // 3.14
   - 使用var申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内（函数的概念将稍后讲解），同名变量在不同的函数体内互不冲突。
 * 如果重新声明 JavaScript 变量，该变量的值不会丢失
 * 生命周期：在声明时初始化，局部变量在函数执行完毕后销毁，全局变量在页面关闭后销毁
+* 变量作用域
+  - 全局作用域：JavaScript默认有一个全局对象window，全局作用域的变量实际上被绑定到window的一个属性
+  - 局部作用域：如果一个变量在函数体内部申明，则该变量的作用域为整个函数体，在函数体外不可引用该变量
+  - 不同函数内部的同名变量互相独立，互不影响
+  - 函数可以嵌套，此时，内部函数可以访问外部函数定义的变量，反过来则不行：函数在查找变量时从自身函数定义开始，从“内”向“外”查找。如果内部函数定义了与外部函数重名的变量，则内部函数的变量将“屏蔽”外部函数的变量
 
 ```js
 var carname; // 声明变量，值为undefined
 var answer='Yes I am!'; // 声明变量并赋值
 var name="Gates", age=56, job="CEO";
+
+function foo() {
+    alert('foo');
+}
+
+foo(); // 直接调用foo()
+window.foo(); // 通过window.foo()调用
+
+window.alert('调用window.alert()');
+// 把alert保存到另一个变量:
+var old_alert = window.alert;
+// 给alert赋一个新函数:
+window.alert = function () {
+
+}
+alert('无法用alert()显示了!');
+window.alert = old_alert;
+alert('又可以用alert()了!');
+
+// 测试:
+var i, args = [];
+for (i=1; i<=100; i++) {
+    args.push(i);
+}
+if (sum() !== 0) {
+    alert('测试失败: sum() = ' + sum());
+} else if (sum(1) !== 1) {
+    alert('测试失败: sum(1) = ' + sum(1));
+} else if (sum(2, 3) !== 5) {
+    alert('测试失败: sum(2, 3) = ' + sum(2, 3));
+} else if (sum.apply(null, args) !== 5050) {
+    alert('测试失败: sum(1, 2, 3, ..., 100) = ' + sum.apply(null, args));
+} else {
+    alert('测试通过!');
+}
 ```
 
 ### 数据类型
@@ -393,29 +388,19 @@ new String('str') === 'str'; // false
   - 对象的类（class），标识对象类型的字符串
   - 对象的扩展标记（extensible flag），标识是否可以向该对象添加新属性（ECMAScript 5）
 
-## 函数
+### Map Set iterable ES6标准新增的数据类型
 
-* 事件驱动的或者当被调用时执行的可重复使用的代码块
-* 函数是“头等公民”，而且可以像变量一样使用，具有非常强大的抽象能力。
-* 最基本的一种代码抽象的方式。能不关心底层的具体计算过程，而直接在更高的层次上思考问题
-* 括号内列出函数的参数，多个参数以,分隔
-* { ... }之间的代码是函数体，可以包含若干语句，甚至可以没有任何语句
-* 先扫描整个函数体的语句，把所有申明的变量（而非赋值）“提升”到函数顶部.严格遵守“在函数内部首先申明所有变量”这一规则
-* 一旦执行到return时，函数就执行完毕，并将结果返回,如果没有return语句，返回 undefined
-* 由于JavaScript的函数也是一个对象，定义的abs()函数实际上是一个函数对象，而函数名abs可以视为指向该函数的变量。
-* 调用函数：顺序传入参数即可；允许传入任意个参数而不影响调用，因此传入的参数比定义的参数多也没有问题
-* 使用 Function() 构造函数的注意事项：
-  - 可以通过 Function() 构造函数在运行时动态定义并编译函数
-  - 每次调用 Function() 都会解析函数体并创建新的函数对象，在循环中使用会影响效率
-  - 由 Function() 创建的函数并不使用词法作用域，相反，函数体代码的编译总是会在顶层函数执行
-* 参数检测：类型判断
-* 关键字arguments，它只在函数内部起作用，并且永远指向当前函数的调用者传入的所有参数。arguments类似Array但它不是一个Array。利用arguments，你可以获得调用者传入的所有参数。也就是说，即使函数不定义任何参数，还是可以拿到参数的值。实际上arguments最常用于判断传入参数的个数
-* ES6标准引入了rest参数:rest参数只能写在最后，前面用...标识，从运行结果可知，传入的参数先绑定已声明参数，多余的参数以数组形式交给变量rest，所以，不再需要arguments我们就获取了全部参数。
-- 作用域：
-  - 局部变量：只能在函数内部访问它
-  - 全局变量：网页上的所有脚本和函数都能访问它
+* map:一组键值对的结构，具有极快的查找速度.根据同学的名字查找对应的成绩,用Map实现，只需要一个“名字”-“成绩”的对照表，直接根据名字查找成绩，无论这个表有多大，查找速度都不会变慢。一个key只能对应一个value，所以，多次对一个key放入value，后面的值会把前面的值冲掉
+* set:一组key的集合，但不存储value。由于key不能重复，所以，在Set中，没有重复的key.重复元素在Set中自动被过滤
+* 为了统一集合类型,ES6标准引入了新的iterable类型，Array、Map和Set都属于iterable类型,具有iterable类型的集合可以通过新的for ... of循环来遍历.for ... in循环由于历史遗留问题，它遍历的实际上是对象的属性名称。一个Array数组实际上也是一个对象，它的每个元素的索引被视为一个属性。给数组添加`a.name = 'Hello';`后，`for ... in`可以遍历出来name，而length却没有。`for ... of`循环则完全修复了这些问题，它只循环集合本身的元素
 
-### 运算符
+## 标准库
+
+* Array
+* Date
+* Math
+
+## 运算符
 
 * 赋值运算符：= += -= *= /= %=
 * 计算运算符：+ - * / %
@@ -466,6 +451,28 @@ false || true || false; // 这个||语句计算结果为true
 greeting=(visitor=="PRES")?"Dear President ":"Dear ";
 ```
 
+## 函数
+
+* 事件驱动的或者当被调用时执行的可重复使用的代码块
+* 函数是“头等公民”，而且可以像变量一样使用，具有非常强大的抽象能力。
+* 最基本的一种代码抽象的方式。能不关心底层的具体计算过程，而直接在更高的层次上思考问题
+* 括号内列出函数的参数，多个参数以,分隔
+* { ... }之间的代码是函数体，可以包含若干语句，甚至可以没有任何语句
+* 先扫描整个函数体的语句，把所有申明的变量（而非赋值）“提升”到函数顶部.严格遵守“在函数内部首先申明所有变量”这一规则
+* 一旦执行到return时，函数就执行完毕，并将结果返回,如果没有return语句，返回 undefined
+* 由于JavaScript的函数也是一个对象，定义的abs()函数实际上是一个函数对象，而函数名abs可以视为指向该函数的变量。
+* 调用函数：顺序传入参数即可；允许传入任意个参数而不影响调用，因此传入的参数比定义的参数多也没有问题
+* 使用 Function() 构造函数的注意事项：
+  - 可以通过 Function() 构造函数在运行时动态定义并编译函数
+  - 每次调用 Function() 都会解析函数体并创建新的函数对象，在循环中使用会影响效率
+  - 由 Function() 创建的函数并不使用词法作用域，相反，函数体代码的编译总是会在顶层函数执行
+* 参数检测：类型判断
+* 关键字arguments，它只在函数内部起作用，并且永远指向当前函数的调用者传入的所有参数。arguments类似Array但它不是一个Array。利用arguments，你可以获得调用者传入的所有参数。也就是说，即使函数不定义任何参数，还是可以拿到参数的值。实际上arguments最常用于判断传入参数的个数
+* ES6标准引入了rest参数:rest参数只能写在最后，前面用...标识，从运行结果可知，传入的参数先绑定已声明参数，多余的参数以数组形式交给变量rest，所以，不再需要arguments我们就获取了全部参数。
+- 作用域：
+  - 局部变量：只能在函数内部访问它
+  - 全局变量：网页上的所有脚本和函数都能访问它
+
 ### 控制语句
 
 * 条件语句
@@ -484,56 +491,6 @@ greeting=(visitor=="PRES")?"Dear President ":"Dear ";
 * break 语句可用于跳出循环
 * continue 语句中断循环中的迭代，如果出现了指定的条件，然后继续循环中的下一个迭代
 * try 语句允许我们定义在执行时进行错误测试的代码块。catch 语句允许我们定义当 try 代码块发生错误时，所执行的代码块。
-
-### Map Set iterable(ES6标准新增的数据类型)
-
-* map:一组键值对的结构，具有极快的查找速度.根据同学的名字查找对应的成绩,用Map实现，只需要一个“名字”-“成绩”的对照表，直接根据名字查找成绩，无论这个表有多大，查找速度都不会变慢。一个key只能对应一个value，所以，多次对一个key放入value，后面的值会把前面的值冲掉
-* set:一组key的集合，但不存储value。由于key不能重复，所以，在Set中，没有重复的key.重复元素在Set中自动被过滤
-* 为了统一集合类型,ES6标准引入了新的iterable类型，Array、Map和Set都属于iterable类型,具有iterable类型的集合可以通过新的for ... of循环来遍历.for ... in循环由于历史遗留问题，它遍历的实际上是对象的属性名称。一个Array数组实际上也是一个对象，它的每个元素的索引被视为一个属性。给数组添加`a.name = 'Hello';`后，`for ... in`可以遍历出来name，而length却没有。`for ... of`循环则完全修复了这些问题，它只循环集合本身的元素
-
-### 变量作用域
-
-* 全局作用域：JavaScript默认有一个全局对象window，全局作用域的变量实际上被绑定到window的一个属性
-* 局部作用域：如果一个变量在函数体内部申明，则该变量的作用域为整个函数体，在函数体外不可引用该变量。
-* 不同函数内部的同名变量互相独立，互不影响
-* 函数可以嵌套，此时，内部函数可以访问外部函数定义的变量，反过来则不行：函数在查找变量时从自身函数定义开始，从“内”向“外”查找。如果内部函数定义了与外部函数重名的变量，则内部函数的变量将“屏蔽”外部函数的变量。
-
-```javascript
-function foo() {
-    alert('foo');
-}
-
-foo(); // 直接调用foo()
-window.foo(); // 通过window.foo()调用
-
-window.alert('调用window.alert()');
-// 把alert保存到另一个变量:
-var old_alert = window.alert;
-// 给alert赋一个新函数:
-window.alert = function () {
-
-}
-alert('无法用alert()显示了!');
-window.alert = old_alert;
-alert('又可以用alert()了!');
-
-// 测试:
-var i, args = [];
-for (i=1; i<=100; i++) {
-    args.push(i);
-}
-if (sum() !== 0) {
-    alert('测试失败: sum() = ' + sum());
-} else if (sum(1) !== 1) {
-    alert('测试失败: sum(1) = ' + sum(1));
-} else if (sum(2, 3) !== 5) {
-    alert('测试失败: sum(2, 3) = ' + sum(2, 3));
-} else if (sum.apply(null, args) !== 5050) {
-    alert('测试失败: sum(1, 2, 3, ..., 100) = ' + sum.apply(null, args));
-} else {
-    alert('测试通过!');
-}
-```
 
 ### 名字空间
 
@@ -582,7 +539,7 @@ function foo() {
   * 返回当前array
 + 可以把函数作为结果值返回
 
-## 闭包（Closure）
+## 闭包 Closure
 
 * 函数体内部的变量都可以保存在函数作用域内.函数定义时的作用域链在函数执行时依然有效
 * 函数`lazy_sum中`中定义了函数sum，内部函数sum可以引用外部函数`lazy_sum`的参数和局部变量，当lazy_sum返回函数sum时，**相关参数和变量都保存在返回的函数中**
@@ -626,9 +583,9 @@ ES6标准引入的新的数据类型。一个generator看上去像一个函数�
 * 既可以显示本地时间，也可以显示调整后的UTC时间，只要我们传递的是一个number类型的时间戳，我们就不用关心时区转换。任何浏览器都可以把一个时间戳正确转换为本地时间。
 * 时间戳是一个自增的整数，它表示从1970年1月1日零时整的GMT时区开始的那一刻，到现在的毫秒数。假设浏览器所在电脑的时间是准确的，那么世界上无论哪个时区的电脑，它们此刻产生的时间戳数字都是一样的，所以，时间戳可以精确地表示一个时刻，并且与时区无关。我们只需要传递时间戳，或者把时间戳从数据库里读出来，再让JavaScript自动转换为当地时间就可以了
 
-### RegExp
+### RegExp 正则表达式
 
-正则表达式是一种用来匹配字符串的强有力的武器。它的设计思想是用一种描述性的语言来给字符串定义一个规则，凡是符合规则的字符串，就认为它“匹配”了。RegExp 对象用于存储检索模式
+一种用来匹配字符串的强有力的武器。它的设计思想是用一种描述性的语言来给字符串定义一个规则，凡是符合规则的字符串，就认为它“匹配”了。RegExp 对象用于存储检索模式
 
 * `\d`可以匹配一个数字，
 * `\w`可以匹配一个字母或数字
@@ -670,25 +627,19 @@ ES6标准引入的新的数据类型。一个generator看上去像一个函数�
   - array：就是JavaScript的Array表示方式——[]；
   - object：就是JavaScript的{ ... }表示方式。
 * 字符集必须是UTF-8
-* 字符串规定必须用双引号""，Object的键也必须用双引号""。
+* 字符串规定必须用双引号""，Object的键也必须用双引号""
 * 在JavaScript中，可以直接使用JSON，因为JavaScript内置了JSON的解析。
 * 序列化：把这个对象序列化成一个JSON格式的字符串，这样才能够通过网络传递给其他计算机:`JSON.stringify(obj, null, '   '); ` 第一个参数是对象；第二个参数用于控制如何筛选对象的键值，如果我们只想输出指定的属性，可以传入Array或者处理函数；第三个参数是输出缩进。要精确控制如何序列化小明，可以给xiaoming定义一个toJSON()的方法，直接返回JSON应该序列化的数据
 * 反序列化：收到一个JSON格式的字符串，只需要把它反序列化成一个JavaScript对象，就可以在JavaScript中直接使用这个对象了
 
-## 面向对象编程（设计模式）
+## 面向对象编程
 
 * 类：类是对象的类型模板，例如，定义Student类来表示学生，类本身是一种类型，Student表示学生类型，但不表示任何具体的某个学生；
-
-* 实例：实例是根据类创建的对象，例如，根据Student类可以创建出xiaoming、xiaohong、xiaojun等多个实例，每个实例表示一个具体的学生，他们全都属于Student类型。
-
+* 实例：实例是根据类创建的对象，例如，根据Student类可以创建出xiaoming、xiaohong、xiaojun等多个实例，每个实例表示一个具体的学生，他们全都属于Student类型
 * JavaScript不区分类和实例的概念，而是通过原型（prototype）来实现面向对象编程。
-
 * 对象模型是基于原型实现的，特点是简单，缺点是理解起来比传统的类－实例模型要困难，
-
 * 最大的缺点是继承的实现需要编写大量代码，并且需要正确实现原型链
-
 * JavaScript最重要的概念可能在于原型链。基于原型链的委托机制就是原型继承的本质。
-
   - 所有的数据都是对象，JS的根对象是Object.prototype对象，它是一个空对象
   - 要得到一个对象，不是通过实例化类而是找到一个对象作为原型来克隆它
   - 对象会记住它的原型；就JS而言，对象的原型其实是其构造器的原型（new），包含在其隐藏属性_proto_中
@@ -765,16 +716,9 @@ JavaScript对每个创建的对象都会设置一个原型，指向它的原型�
 * 类静态方法
 * 继承：当子类想要实现特有的构造函数 constructor 时，首行必须使用 super(...)调用父类的构造函数，先得到父类的this作为自己的 this
 
-### 浏览器对象模型(BOM)
+## BOM Browser Object Model 浏览器对象模型
 
-```javascript
-// 折行
-document.write("你好 \
-世界!");
-```
-
-JavaScript可以获取浏览器提供的很多对象，并进行操作。
-
+* JavaScript可以获取浏览器提供的很多对象，并进行操作 的接口
 * window：不但充当全局作用域（所有 JavaScript 全局对象、函数以及变量均自动成为 window 对象的成员），而且表示浏览器窗口：
   - `window.innerWidth`
   - `window.innerHeight`
@@ -829,33 +773,47 @@ JavaScript可以获取浏览器提供的很多对象，并进行操作。
   - var t=setTimeout("alert('5 秒！')",5000)
   - clearTimeout(t)
 
-### HTML DOM
+```javascript
+// 折行
+document.write("你好 \
+世界!");
+```
 
-由于HTML文档被浏览器解析后就是一棵文档对象模型（Document Object Model），要改变HTML的结构，就需要通过JavaScript来操作DOM.DOM节点是指Element，但是DOM节点实际上是Node，在HTML中，Node包括Element、Comment、CDATA_SECTION等很多种，以及根节点Document类型，但是，绝大多数时候我们只关心Element，也就是实际控制页面结构的Node，其他类型的Node忽略即可。根节点Document已经自动绑定为全局变量document。
+## DOM Document Object Model 文档对象模型
 
+* HTML 看做一个对象树（DOM树), DOM 看成节点
+* 针对 HTML 和 XML 提供的一个API,操作 HTML 中的元素
+* Javascript 不能够真正改变 DOM，仅仅是改变呈现内容，当刷新的时候就会发现都还原
+* 可以把这些改变传递给服务器，用户的交互没必要让服务器掺和，因为交互只是暂时
 * 所有 HTML 元素、属性
   - 获取
   - 修改
   - 新增
   - 删除
 * CSS 样式
-* 事件
-  - onmousedown:点击鼠标按钮时
-  - onmouseup: 释放鼠标按钮时
-  - onclick:当用户点击鼠标时
-  - dbclick
-  - onmouseover 和 onmouseout当鼠标移动到或移出元素上时
-  - onfocus:当输入字段获得焦点时
-  - blur
-  - onload当网页已加载时
-    + 可用于检测访问者的浏览器类型和浏览器版本，并基于这些信息来加载网页的正确版本。可用于处理 cookie。
-  - onunload 离开页面时被触发
-  - 当图像已加载时
-  - onsubmit:当提交 HTML 表单时
-  - onkeydown:按下键盘按键
-  - keyup
-  - onchange当输入字段被改变时
-    + 对输入字段的验证来使用
+* 对象
+  - document
+    + 当浏览器下载到一个网页，通常是 HTML，这个 HTML 就叫 document
+    + 通常是整个 DOM 树的根节点
+    + 包含了标题（document.title）、URL（document.URL）等属性，可以直接在 JS 中访问到
+    + 可以通过 document 访问任何节点
+    + 功能
+      * 写入 HTML 输出流
+        - document.write
+      * 事件响应
+        - onclick
+      * 改变 HTML 内容
+        - document.getElementById("demo").innerHTML
+      * 改变属性
+        - document.getElementById('myimage').src
+        - document.getElementById('myimage').style.color
+
+  - classname：getElementByClassName
+  - id:
+  - tagName
+  - querySelector
+  - querySelectorAll
+由于HTML文档被浏览器解析后就是一棵文档对象模型（Document Object Model），要改变HTML的结构，就需要通过JavaScript来操作DOM.DOM节点是指Element，但是DOM节点实际上是Node，在HTML中，Node包括Element、Comment、CDATA_SECTION等很多种，以及根节点Document类型，但是，绝大多数时候我们只关心Element，也就是实际控制页面结构的Node，其他类型的Node忽略即可。根节点Document已经自动绑定为全局变量document
 * document.getElementById() 可以直接定位唯一的一个DOM节点
 * document.getElementsByTagName() 总是返回一组DOM节点
 * CSS选择器document.getElementsByClassName() 返回一组DOM节点
@@ -1018,35 +976,52 @@ fileInput.addEventListener('change', function () {
 </script>
 ```
 
-## 同步 VS 异步
+## event
 
-* 同步：占对象，会降低并发，顺序执行
-* 异步：响应好，并发高，并行
+* 窗口事件 (Window Events) 仅在 body 和 frameset 元素中有效
+  - onload:当文档被载入时执行脚本
+    + 可用于检测访问者的浏览器类型和浏览器版本，并基于这些信息来加载网页的正确版本。可用于处理 cookie
+  - onunload:当文档被卸下时执行脚本
+* 表单元素事件 (Form Element Events) 仅在表单元素中有效。
+  - onchange:当输入字段被改变时
+    + 对输入字段的验证来使用
+  - onsubmit:当表单被提交时执行脚本
+  - onreset:当表单被重置时执行脚本
+  - onselect:当元素被选取时执行脚本
+  - onblur:当元素失去焦点时执行脚本
+  - onfocus:当元素获得焦点时执行脚本
+* 图像事件 (Image Events) 该属性可用于 img 元素：
+  - onabort:当图像加载中断时执行脚本
+* 键盘事件 (Keyboard Events):在下列元素中无效：base、bdo、br、frame、frameset、head、html、iframe、meta、param、script、style 以及 title 元素。
+  - onkeydown:当键盘被按下时执行脚本
+  - onkeypress:当键盘被按下后又松开时执行脚本
+  - onkeyup:当键盘被松开时执行脚本
+* 鼠标事件 (Mouse Events):在下列元素中无效：base、bdo、br、frame、frameset、head、html、iframe、meta、param、script、style 以及 title 元素。
+  - onclick:当鼠标被单击时执行脚本
+  - ondblclick:当鼠标被双击时执行脚本
+  - onmousedown:当鼠标按钮被按下时执行脚本
+  - onmousemove:当鼠标指针移动时执行脚本
+  - onmouseout:当鼠标指针移出某元素时执行脚本
+  - onmouseover:当鼠标指针悬停于某元素之上时执行脚本
+  - onmouseup:当鼠标按钮被松开时执行脚本
+* 监听事件
+  - window.onpopstate
+* Event对象
 
 ### AJAX Asynchronous JavaScript and XML
 
 用JavaScript执行异步网络请求。AJAX请求是异步执行的，也就是说，要通过回调函数获得响应。早大规模使用AJAX的就是Gmail，Gmail的页面在首次加载后，剩下的所有数据都依赖于AJAX来更新
 
 * 一种可以有效利用 JavaScript 与 DOM 操作，实现 Web 页面局部刷新，而不用重新加载页面的异步通信技术
-
 * 核心技术是一个名为 XMLHttpRequest 的 API， 通过 JavaScript 的调用就可以实现与服务器的通信，以便在已加载成功的页面发起请求，再通过 DOM 操作实现页面的局部刷新，在早期返回的数据格式是 XML，但是随着更加轻量级的 JSON 出现，现在 Ajax 调用多返回 JSON 格式数据，与返回完整 HTML 文档不同，局部刷新返回的数据体量更小
-
 * 一次HTTP请求对应一个页面
-
 * 如果要让用户留在当前页面中，同时发出新的HTTP请求，就必须用JavaScript发送这个新请求，接收到数据后，再用JavaScript更新页面，这样一来，用户就感觉自己仍然停留在当前页面，但是数据却可以不断地更新
-
 * 通过检测window对象是否有XMLHttpRequest属性来确定浏览器是否支持标准的XMLHttpRequest。注意，不要根据浏览器的navigator.userAgent来检测浏览器是否支持某个JavaScript特性，一是因为这个字符串本身可以伪造，二是通过IE版本判断JavaScript特性将非常复杂。
-
 * 当创建了XMLHttpRequest对象后，要先设置onreadystatechange的回调函数。在回调函数中，通常我们只需通过readyState === 4判断请求是否完成，如果已完成，再根据status === 200判断是否是一个成功的响应。
-
 * XMLHttpRequest对象的open()方法有3个参数，第一个参数指定是GET还是POST，第二个参数指定URL地址，第三个参数指定是否使用异步，默认是true，所以不用写。
-
 * 注意，千万不要把第三个参数指定为false，否则浏览器将停止响应，直到AJAX请求完成。如果这个请求耗时10秒，那么10秒内你会发现浏览器处于“假死”状态。最后调用send()方法才真正发送请求。GET请求不需要参数，POST请求需要把body部分以字符串或者FormData对象传进去。
-
 * 默认情况下，JavaScript在发送AJAX请求时，URL的域名必须和当前页面完全一致。域名要相同（www.example.com和example.com不同），协议要相同（http和https不同），端口号要相同（默认是:80端口，它和:8080就不同）
-
 * 用JavaScript请求外域（就是其他网站）的URL
-
   - 通过在同源域名下架设一个代理服务器来转发，JavaScript负责把请求发送到代理服务器：'/proxy?url=http://www.sina.com.cn',代理服务器再把结果返回，这样就遵守了浏览器的同源策略。这种方式麻烦之处在于需要服务器端额外做开发。
   - JSONP:它有个限制，只能用GET请求，并且要求返回JavaScript。这种方式跨域实际上是利用了浏览器允许跨域引用JavaScript资源.常以函数调用的形式返回,实例：`http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice`，返回`refreshPrice({"0000001":{"code": "0000001", ... });`,在页面中准备好好回调函数refreshPrice。
   - CORS全称Cross-Origin Resource Sharing：HTML5规范定义的如何跨域访问资源。Origin表示本域，也就是浏览器当前页面的域。当JavaScript向外域（如sina.com）发起请求后，浏览器收到响应后，首先检查Access-Control-Allow-Origin是否包含本域，如果是，则此次跨域请求成功，如果不是，则请求失败，JavaScript将无法获取到响应的任何数据。
@@ -1128,23 +1103,16 @@ function getPrice() {
 
 ### promise
 
-#### 异步编程
+## 异步
 
 * 在JavaScript的世界中，所有代码都是单线程（single thread）执行的。一个浏览器进程中只有一个JS的执行线程，同一时刻内只会有一段代码在执行。
-
 * 异步机制是浏览器的两个或以上常驻线程共同完成的，例如异步请求是由两个常驻线程：JS执行线程和事件触发线程共同完成的，JS的执行线程发起异步请求（这时浏览器会开一条新的HTTP请求线程来执行请求，这时JS的任务已完成，继续执行线程队列中剩下的其他任务），然后在未来的某一时刻事件触发线程监视到之前的发起的HTTP请求已完成，它就会把完成事件插入到JS执行队列的尾部等待JS处理。又例如定时触发（settimeout和setinterval）是由浏览器的定时器线程执行的定时计数，然后在定时时间把定时处理函数的执行请求插入到JS执行队列的尾端（所以用这两个函数的时候，实际的执行时间是大于或等于指定时间的，不保证能准确定时的）。
-
 * 所谓的单线程就是一次只能完成一个任务，其任务的调度方式就是排队，这就和火车站洗手间门口的等待一样，前面的那个人没有搞定，你就只能站在后面排队等着.这种模式的好处是实现起来比较简单，执行环境相对单纯；坏处是只要有一个任务耗时很长，后面的任务都必须排队等着，会拖延整个程序的执行。常见的浏览器无响应（假死），往往就是因为某一段Javascript代码长时间运行（比如死循环），导致整个页面卡在这个地方，其他任务无法执行。
-
-* 由于这个“缺陷”，导致JavaScript的所有网络操作，浏览器事件，都必须是异步执行。
-
-* 将任务的执行模式分成两种：同步（Synchronous）和异步（Asynchronous）。
-
+* 由于这个“缺陷”，导致JavaScript的所有网络操作，浏览器事件，都必须是异步执行
+* 将任务的执行模式分成两种：同步（Synchronous）和异步（Asynchronous）
   * "同步模式"就是后一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的；
   * "异步模式"则完全不同，每一个任务有一个或多个回调函数（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数；后一个任务则是不等前一个任务结束就执行，所以程序的执行顺序与任务的排列顺序是不一致的、异步的。
-
 * "异步模式"非常重要。在浏览器端，耗时很长的操作都应该异步执行，避免浏览器失去响应，最好的例子就是Ajax操作。在服务器端，"异步模式"甚至是唯一的模式，因为执行环境是单线程的，如果允许同步执行所有http请求，服务器性能会急剧下降，很快就会失去响应。异步代码会被放入一个事件队列，等到所有其他代码执行后才进行，而不会阻塞线程。异步编程的方法：
-
   - 回调函数:假定有两个函数f1和f2，后者等待前者的执行结果。f1()和f2().被压入了称之为Event Loop的队列。
     - 回调函数的优点是简单、容易理解和部署，
     - 缺点是不利于代码的阅读和维护，各个部分之间高度耦合（Coupling），流程会很混乱，而且每个任务只能指定一个回调函数
@@ -1157,6 +1125,9 @@ function getPrice() {
     + 串行执行若干异步任务外
     + 并行执行异步任务：需要从两个不同的URL分别获得用户的个人信息和好友列表，这两个任务是可以并行执行的，用Promise.all()，多个异步任务是为了容错。比如，同时向两个URL读取用户的个人信息，只需要获得先返回的结果即可
     + 可以把很多异步任务以并行和串行的方式组合起来执行
+* 同步 VS 异步
+  - 同步：占对象，会降低并发，顺序执行
+  - 异步：响应好，并发高，并行
 
 ```javascript
 // 异步测试
@@ -1350,12 +1321,6 @@ then(function( fromLatLng, toLatLng ) {
 });
 ```
 
-## 事件
-
-* 监听事件
-  - window.onpopstate
-* Event对象
-
 ## callback
 
 * [callbag/callbag](https://github.com/callbag/callbag):👜 A standard for JS callbacks that enables lightweight observables and iterables
@@ -1381,6 +1346,7 @@ then(function( fromLatLng, toLatLng ) {
   * cookie：cookie 是存储于访问者的计算机中的变量。每当同一台计算机通过浏览器请求某个页面时，就会发送这个 cookie。你可以使用 JavaScript 来创建和取回 cookie 的值。
 * Web存储
 * Web数据库
+* sessionStorage
 
 ## console
 
@@ -1391,10 +1357,6 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 ## [localForage/localForage](https://github.com/localForage/localForage)
 
 💾 Offline storage, improved. Wraps IndexedDB, WebSQL, or localStorage using a simple but powerful API.https://localforage.github.io/localForage/
-
-## sessionStorage
-
-## Web API
 
 ## 模块
 
@@ -1437,8 +1399,9 @@ rome check
 
 * JavaScript 语言精髓与编程实践
 * [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter
+* 你不知道的javascript
 * 《Javascript高级编程》
-* 《[JavaScript 权威指南（第6版）](https://www.amazon.cn/gp/product/B007VISQ1Y)》
+* 《[JavaScript 权威指南](https://www.amazon.cn/gp/product/B007VISQ1Y)》
 * 《ES6 标准入门(第3版)》
 * 《深入理解ES6》
 * 《JavaScript开发框架权威指南》
@@ -1446,18 +1409,16 @@ rome check
 * 《JavaScript 框架设计》
 * 《单页 Web 应用: JavaScript 从前端到后端》
 * 《基于 MVC 的 JavaScript Web 富应用开发》
-* 你不知道的javascript
-* 《[高性能 JavaScript](https://www.amazon.cn/gp/product/B013SGB2AO)》
 * 《[JavaScript 忍者秘籍](https://www.amazon.cn/gp/product/B016DWSEWO)》（感谢[@joker-danta](https://github.com/jobbole/awesome-programming-books/issues?q=is%3Aissue+is%3Aopen+author%3Ajoker-danta) 补充推荐）
 * 《[编写可维护的 JavaScript](https://www.amazon.cn/gp/product/B00BQ7RMW0)》
 * 《[JavaScript 语言精粹](https://www.amazon.cn/gp/product/B0097CON2S)》
-* 《[JavaScript DOM编程艺术 （第2版）](https://www.amazon.cn/gp/product/B004VJM5KE)》
-* 《[JavaScript 高级程序设计（第3版）](https://www.amazon.cn/gp/product/B007OQQVMY)》
+* 《[JavaScript DOM编程艺术](https://www.amazon.cn/gp/product/B004VJM5KE)》
+* 《[JavaScript 高级程序设计](https://www.amazon.cn/gp/product/B007OQQVMY)》
 * 《[JavaScript 异步编程：设计快速响应的网络应用](https://www.amazon.cn/gp/product/B00JVLEYY2)》
 * 《[Effective JavaScript：编写高质量JavaScript代码的68个有效方法](https://www.amazon.cn/gp/product/B00GMXI1QY)》
+* 《[高性能 JavaScript](https://www.amazon.cn/gp/product/B013SGB2AO)》
 * 《JavaScript设计模式》
 * 《JavaScript设计模式与开发实践》
-* 《Effective JavaScript：编写高质量JavaScript代码的68个有效方法》
 
 ## 资源
 

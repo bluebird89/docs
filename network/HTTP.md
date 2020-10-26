@@ -56,15 +56,6 @@
   - 一旦激活，通道便被认为不属于HTTP通讯，尽管通道可能是被一个HTTP请求初始化的
   - 当被中继的连接两端关闭时，通道便消失。当一个门户(Portal)必须存在或中介(Intermediary)不能解释中继的通讯时通道被经常使用。
 * 缓存(Cache)：反应信息的局域存储
-* URL（Uniform Resource Locator，统一资源定位符）也就是俗称的网址，表示某一网络资源存在于所在计算机网络上的位置，同时也是用于检索该资源的机制 `<scheme>://<user>:<password>@<host>:<port>/<path>;<params>?<query>#<frag>`
-  - 第一部分称为方案（scheme），说明了访问资源所使用的协议类型，通常是 http:// 或 https://
-  - 第二部分给出了服务器的域名/IP地址和端口号（不指定默认为80）
-  - 其余部分指定的是 URI 的路径信息，比如 /wp-statics/images/carousel/LaravelAcademy.jpg
-  - 使用 ASCII 字符集，对于不安全的字符则使用「%+两个ASCII码的十六进制数」进行编码
-* URL(Uniform Resource Locator) 地址用于描述一个网络上的资源
-  - schema://host[:port#]/path/.../[?query-string][#anchor]
-  - `https://www.baidu.com?key1=vvalue1&key2=value2#test`
-  - hash，哈希值或者称为锚，是#后面的字符串，一般作为单页应用的路由地址，或者文档的锚
 
 ## [跨源资源共享 cross-origin resource sharing CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
 
