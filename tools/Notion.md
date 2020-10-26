@@ -66,20 +66,20 @@ Work offline, collaborate in real-time, write without distractions.
   - 当前路径
 * 操作
   - 选取
-    + Esc 键：选中当前编辑的 Block，逻辑是退出编辑，进入 Block 操作。
+    + Esc 键：选中当前编辑的 Block，逻辑是退出编辑，进入 Block 操作
     + Shift 键：多选 Block
     + 选中 Block 时，↑ ↓ ← → 方向键：上下选取 Block
     + 选中 Block 时，Ctrl + A：全选所有的 Bloc
-    + - 选中 Block 时，Ctrl + D：复制一份 Block。
+    + - 选中 Block 时，Ctrl + D：复制一份 Block
     + 选中 Block 时，Ctrl + Enter：激活，可以用于按钮、选中、切换待办事项、或者进入全屏图片
     + 选中 Page Block 时，Ctrl + Shift + R：重命名这个 Page
     + 选中 Image Block 时，空格键：进入图片全屏浏览
-
-Ctrl + B：加粗文字
-Ctrl + I：斜体文字
-Ctrl + K：添加超链接
-Ctrl + E：添加代码格式（同时变为等宽字体）
-Ctrl + Shift + S：添加删除线
+  - 字体
+    + Ctrl + B：加粗文字
+    + Ctrl + I：斜体文字
+    + Ctrl + K：添加超链接
+    + Ctrl + E：添加代码格式（同时变为等宽字体）
+    + Ctrl + Shift + S：添加删除线
 
 ## 数据库 Database
 
