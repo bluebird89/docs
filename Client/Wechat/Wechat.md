@@ -56,15 +56,15 @@ function getToken(){
         return $result['access_token'];
     }
 }
-  
+
 //获取新的access_token
 function getNewToken($appid,$appsecret){
     $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appsecret}";
     $access_token_Arr =  https_request($url);
-    
+
     return $access_token_Arr['access_token'];
 }
-  
+
 //向获取access_token接口发起请求
 function https_request ($url){
         $ch = curl_init();
@@ -75,12 +75,12 @@ function https_request ($url){
         curl_close($ch);
         return  json_decode($out,true);
 }
-  
+
 //调用函数
 getToken();
-  
+
 //输出当前缓存文件有效期内的access_token
-$jsondata = file_get_contents('access_token.json'); 
+$jsondata = file_get_contents('access_token.json');
 $access_token_data = json_decode($jsondata);
 echo $access_token_data->access_token;
 ?>
@@ -105,6 +105,7 @@ echo $access_token_data->access_token;
 ## 工具
 
 * [15921483570/wechat_spider](https://github.com/15921483570/wechat_spider):微信公众号爬虫 (只需设置代理, 一键可以爬取所有历史文章)
+* [electronic-wechat](https://github.com/geeeeeeeeek/electronic-wechat):A better WeChat on macOS and Linux. Built with Electron by Zhongyi Tong.
 * [aiportal/wechat-proxy](https://github.com/aiportal/wechat-proxy):微信代理服务
 * [TKkk-iOSer/WeChatPlugin-MacOS](https://github.com/TKkk-iOSer/WeChatPlugin-MacOS):一款功能强大的 macOS 版微信小助手 v1.7.1 / A powerful assistant for wechat macOS
 * [TKkk-iOSer/WeChatPlugin-iOS](https://github.com/TKkk-iOSer/WeChatPlugin-iOS):iOS 版微信小助手(防撤回、修改微信运动、游戏作弊、群管理、好友请求管理)

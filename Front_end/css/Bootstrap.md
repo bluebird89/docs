@@ -83,4 +83,3 @@ npm install bootstrap@3
 * [Bootstrap 4: Everything You Need to Know](https://medium.freecodecamp.org/bootstrap-4-everything-you-need-to-know-c750991f6784)
 * [Understanding Flexbox: Everything you need to know](https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af)
 * [How to Efficiently Master the CSS Grid in a Jiffy](https://medium.com/flexbox-and-grids/how-to-efficiently-master-the-css-grid-in-a-jiffy-585d0c213577)
-* [keen/dashboards](https://github.com/keen/dashboards):Responsive dashboard templates for Bootstrap 📊✨ http://keen.github.io/dashboards/
