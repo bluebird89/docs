@@ -213,7 +213,7 @@
 
 ## 自动化工具
 
-* 通过自制工具来提升工作的效率
+* 通过自制工具来提升工作效率
 * 机器人
   - Issue 机器人:用于同步 GitHub 中来自社区的 Issue 到内部的 JIRA 中
   - 每天下班之前自动生成的当天动态报告
@@ -284,7 +284,7 @@
 
 ## 沟通
 
-* 学会说NO和有勇气说NO（大概还加上审视情势知道什么时候说NO，什么时候哪怕装YES也不能说NO）是多么重要的人生技能啊。
+* 学会说NO和有勇气说NO（大概还加上审视情势知道什么时候说NO，什么时候哪怕装YES也不能说NO）是多么重要的人生技能啊
 * 和面试官的沟通，对一个问题的阐述方式和表达方式，逻辑思维能力等。项目描述需要严谨的表述，个人的优缺点基本要做到随口而出..等这些其实就是软实力的体现。
 * 可以问业务、技术、团队，或者您对我这次面试的评价，优点及不足之处，或者你们的技术栈和我们的有点区别，我可能在某某方面比较欠缺，不过根据我之前做XX的经验，我觉得我适应一段时间应该很快能上手。反杀型问题、没什么想问的，都不加分。至于你们公司怎么样啊之类的问题太大，也很难得到有用的信息
 
@@ -292,7 +292,7 @@
 
 * 有限与无限的游戏
 * 精益创业
-* 《项目管理知识体系指南（PMBOK指南）》
+* 项目管理知识体系指南（PMBOK指南）
 * 华为团队工作法
 * 《管理的尝试》
 * 《OKR工作法：谷歌、领英等顶级公司的高绩效秘籍》
@@ -301,7 +301,7 @@
 ## 工具
 
 * [imdone](https://imdone.io)
-* [notion](https://www.notion.so/):Write, plan, collaborate, and get organized. Notion is all you need — in one tool.
+* [notion](../tools/Notion.md)
 * [basecamp](https://basecamp.com/)
 * [teambition](https://www.teambition.com/)
 * [禅道]
@@ -312,7 +312,7 @@
 * JIRA
 * Asana
 * [trello](https://trello.com/)
-* [wtfutil/wtf](https://github.com/wtfutil/wtf):The personal information dashboard for your terminal. http://wtfutil.com
+* [wtf](https://github.com/wtfutil/wtf):The personal information dashboard for your terminal. http://wtfutil.com
 * [Taskwarrior](https://taskwarrior.org/) Free and Open Source Software that manages your TODO list from the command line
 * 时间统计
   - [Rescuetime](https://www.rescuetime.com/):统计到用户使用每个电脑或手机应用的时长，访问每个网站的时长，会自动给这些行为分类，并且标记为不同等级的 Productive 或 Distracting 的属性
@@ -323,5 +323,4 @@
 
 * [tron1991/open-product-management](https://github.com/tron1991/open-product-management):A curated list of product management advice for technical people.
 * [basecamp/sub](https://github.com/basecamp/sub):a delicious way to organize programs
-* [一篇文章读懂项目管理中的精髓](http://blog.csdn.net/gitchat/article/details/77688870)
-* [ ksindi / managers-playbook ](https://github.com/ksindi/managers-playbook#principles):book Heuristics for effective management
+* [managers-playbook ](https://github.com/ksindi/managers-playbook#principles):book Heuristics for effective management

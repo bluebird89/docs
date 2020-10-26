@@ -4,7 +4,7 @@
 ## 图书
 
 * WebAssembly原理与核心技术
-    - [wasmgo-book ](https://github.com/zxh0/wasmgo-book):随书源代码
+    - [wasmgo-book](https://github.com/zxh0/wasmgo-book):随书源代码
 
 ## 工具
 
