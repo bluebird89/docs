@@ -46,7 +46,7 @@
 
 ## pull request
 
-## GitHub Actions
+## Actions
 
 持续集成由很多操作组成，比如抓取代码、运行测试、登录远程服务器，发布到第三方服务等等,把每个操作写成独立的脚本文件，存放到代码仓库，使得其他开发者可以引用
 
@@ -60,12 +60,13 @@
   - job （任务）：一个 workflow 由一个p或多个 jobs 构成，含义是一次持续集成的运行，可以完成多个任务。
   - step（步骤）：每个 job 由多个 step 构成，一步步完成。
   - action （动作）：每个 step 可以依次执行一个或多个命令（action）
-* starter
+* 教程
   - [actions/starter-workflows](https://github.com/actions/starter-workflows):Accelerating new GitHub Actions workflows https://github.com/features/actions
+  - [weather-bot](link)
 * actions
   - [awesome-actions](https://github.com/sdras/awesome-actions):A curated list of awesome actions to use on GitHub
   - [github actions marketpalce](https://github.com/marketplace?type=actions)
-  - [ github / super-linter ](https://github.com/github/super-linter):Combination of multiple linters to install as a GitHub Action
+  - [super-linter](https://github.com/github/super-linter):Combination of multiple linters to install as a GitHub Action
 
 ```yaml
 name: GitHub Actions Demo
@@ -172,6 +173,10 @@ ipconfig /flushdns
 sudo rcnscd restart
 sudo killall -HUP mDNSResponder
 ```
+
+## profiles
+
+* [profile-summary-for-github](https://github.com/tipsy/profile-summary-for-github):Tool for visualizing GitHub profiles
 
 ## Trending
 

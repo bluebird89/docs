@@ -1,7 +1,7 @@
-# CSS Cascading Style Sheet层叠样式表。
+# [CSS Cascading Style Sheet 层叠样式表](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
 
-* “层叠”是指多个外层元素的样式，会被内层元素去继承。
-* “样式”，主要指外观。包括：字体、文本、背景图片、定位、浮点等。
+* 层叠:多个外层元素的样式，会被内层元素去继承
+* 样式:外观。包括：字体、文本、背景图片、定位、浮点等
 * 优先级
   - 浏览器缺省设置
   - 外部样式表
@@ -24,9 +24,12 @@ This is a paragraph
 
 ## 历史
 
-* CSS1.0在1997 年 由W3C发布，第一版主要规定了选择器、样式属性、伪类 / 对象几个大的部分；
-* CSS2.0/2.1在1998 年 由W3C发布，CSS2 规范是基于 CSS1 设计的，扩充和改进了很多更加强大的属性。包括选择器、位置模型、布局、表格样式、媒体类型、伪类、光标样式；
-* 将CSS模块化，并且按照每个模块的进度来标准化。所以从形式上来讲，CSS3已经不存在了。现在CSS 包括了修订后的 CSS2.1 以及完整模块对它的扩充，模块的 level（级别）数并不一致。可以在每个时间点上为 CSS 标准定义一个 snapshots
+* CSS1.0在 1997 年 由W3C发布，第一版主要规定了选择器、样式属性、伪类 / 对象几个大的部分
+* CSS2.0/2.1在1998 年 由W3C发布
+  - 基于 CSS1 设计的，扩充和改进了很多更加强大的属性。包括选择器、位置模型、布局、表格样式、媒体类型、伪类、光标样式；
+* CSS 3
+  - 将 CSS 模块化，并且按照每个模块的进度来标准化。所以从形式上来讲，CSS3已经不存在了
+  - 现在CSS 包括了修订后的 CSS2.1 以及完整模块对它的扩充，模块的 level（级别）数并不一致。可以在每个时间点上为 CSS 标准定义一个 snapshots
 
 ## 格式
 
@@ -417,14 +420,14 @@ a:hover {border-color: gray;}
   </style>
 ```
 
-## 自适应网页设计（Responsive Web Design)
+## 自适应网页设计 Responsive Web Design
 
 一次设计，普遍适用，可以自动识别屏幕宽度、并做出相应调整的网页设计。
 
 ## 显示
 
-- 像素（pixels）：显示器上的图像是由许多点构成的，这些点称为像素，意思就是"构成图像的元素"。500×300像素，是分辨率的尺寸单位。是指在由一个数字序列表示的图像中的一个最小单位
-- 像素每英寸PPI（pixels per inch）为单位来表示影像分辨率的大小。
+* 像素（pixels）：显示器上的图像是由许多点构成的，这些点称为像素，意思就是"构成图像的元素"。500×300像素，是分辨率的尺寸单位。指在由一个数字序列表示的图像中的一个最小单位
+* 像素每英寸PPI（pixels per inch）为单位来表示影像分辨率的大小
 
 ## 设备：
 
@@ -491,13 +494,9 @@ a:hover {border-color: gray;}
 
 ```css
 * {
-
       margin: 0;
-
       padding: 0;
-
       box-sizing: border-box;
-
   }
 ```
 
@@ -586,22 +585,21 @@ a:hover {border-color: gray;}
 
 ## 框架
 
-自适应
-
 * 方法：
 * 组件：表单 、表格、图标、面包屑、菜单、导航、Modal 窗口
 * 修改源代码
 
 ## 优化
 
-* caniuse检测你正在使用的属性是否被广泛支持
+* caniuse 检测正在使用的属性是否被广泛支持
 * Validate
 
 ## CSS 预编译语言
 
 * CSS 作为一门样式语言，语法简单，易于上手，但是由于不具备常规编程语言提供的变量、函数、继承等机制，因此很容易写出大量没有逻辑、难以复用和扩展的代码，在日常开发使用中，如果没有完善的编码规范，编写的 CSS 代码会非常冗余且难以维护
 * 基于 CSS 语言的语法扩展，除了能解决上述缺乏语言特性带来的问题之外，还支持嵌套书写，减少重复输入父级选择器（可理解为 CSS 中的继承机制），提高了代码的可读性和编写效率
-* Sass 的功能更加强大或者说 Sass 的语言层面更接近于一门完整的编程语言，而 Less 则更接近于 CSS 语法
+* [Sass](./sass.nd) 的功能更加强大或者说 Sass 的语言层面更接近于一门完整的编程语言
+* [Less](./less.md) 则更接近于 CSS 语法
 
 ## 问题
 
@@ -613,37 +611,39 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 
 * 《[CSS 揭秘](https://www.amazon.cn/gp/product/B01ET3FO86)》
 * 《CSS 世界》
-* 《[CSS 设计指南（第3版）](https://www.amazon.cn/gp/product/B00M2DKZ1W)》
-* 《[CSS 权威指南（第3版）](https://www.amazon.cn/gp/product/B0011F5SIC)》
+* 《[CSS 设计指南](https://www.amazon.cn/gp/product/B00M2DKZ1W)》
+* 《[CSS 权威指南](https://www.amazon.cn/gp/product/B0011F5SIC)》
 * [CSS 禅意花园](http://www.csszengarden.com/) css zen garden
 * 《精通 CSS: 高级 Web 标准解决方案》
 * 《众妙之门: 精通 CSS3》
 * 《[深入浅出 HTML 与 CSS](https://www.amazon.cn/gp/product/B01LXL42O5)》
-* 《[点石成金 : 访客至上的网页设计秘笈](https://www.amazon.cn/gp/product/B00QGA04RM)》
+* 《[点石成金:访客至上的网页设计秘笈](https://www.amazon.cn/gp/product/B00QGA04RM)》
 * 超越css
 
 ## framework
 
-* Flat UI
-* Semantic UI
-* BootMetro
-* [pure](https://github.com/pure-css/pure):A set of small, responsive CSS modules that you can use in every web project. https://purecss.io/
-* Metro UI CSS
-* Bootswatch
-* jQuery UI Bootstrap
-* EZ-CSS
-* [PostCSS](https://github.com/postcss/postcss) Transforming styles with JS plugins https://postcss.org/ <https://www.postcss.com.cn/>
-* [Dogfalo/materialize](https://github.com/Dogfalo/materialize):Materialize, a CSS Framework based on Material Design https://materializecss.com
-* [BcRikko/NES.css](https://github.com/BcRikko/NES.css):NES-style CSS Framework | ファミコン風CSSフレームワーク https://bcrikko.github.io/NES.css
-* [OfficeDev/office-ui-fabric-core](https://github.com/OfficeDev/office-ui-fabric-core):The front-end CSS framework for building experiences for Office and Office 365.
-* iView
 * [animate-css/animate.css](https://github.com/animate-css/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. https://animate.style/
+* BootMetro
+* Bootswatch
+* [Dogfalo/materialize](https://github.com/Dogfalo/materialize):Materialize, a CSS Framework based on Material Design https://materializecss.com
+* EZ-CSS
+* Flat UI
+* iView
+* jQuery UI Bootstrap
+* laiketui
+* Metro UI CSS
 * [milligram/milligram](https://github.com/milligram/milligram) A minimalist CSS framework. https://milligram.io
-* [kbrsh/moon](https://github.com/kbrsh/moon) 🌙 The minimal & fast UI library https://kbrsh.github.io/moon [moon](http://moonjs.ga/docs/getting-started.html)
+* [moon](https://github.com/kbrsh/moon) 🌙 The minimal & fast UI library https://kbrsh.github.io/moon
+* [NES.css](https://github.com/BcRikko/NES.css):NES-style CSS Framework | ファミコン風CSSフレームワーク https://bcrikko.github.io/NES.css
+* [office-ui-fabric-core](https://github.com/OfficeDev/office-ui-fabric-core):The front-end CSS framework for building experiences for Office and Office 365.
 * [picturepan2/spectre](https://github.com/picturepan2/spectre) Spectre.css - A Lightweight, Responsive and Modern CSS Framework https://picturepan2.github.io/spectre/
+* [PostCSS](./postcss.md)
+* [pure](https://github.com/pure-css/pure):A set of small, responsive CSS modules that you can use in every web project. https://purecss.io/
+* Semantic UI
+* [shoelace](https://github.com/shoelace-style/shoelace):A collection of professionally designed, every day UI components built on a framework-agnostic technology. https://shoelace.style/
+  - [moon](http://moonjs.ga/docs/getting-started.html)
 * [UIkit](https://getuikit.com/):A lightweight and modular front-end framework
   for developing fast and powerful web interfaces.
-* [shoelace](https://github.com/shoelace-style/shoelace):A collection of professionally designed, every day UI components built on a framework-agnostic technology. https://shoelace.style/
 
 ## 实例
 
@@ -661,15 +661,13 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * [ConnorAtherton/loaders.css](https://github.com/ConnorAtherton/loaders.css):Delightful, performance-focused pure css loading animations. https://connoratherton.com/loaders
 * [matthiasmullie/minify](https://github.com/matthiasmullie/minify):CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns. https://www.minifier.org
 * [IanLunn/Hover](https://github.com/IanLunn/Hover):A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS. http://ianlunn.github.io/Hover/
-* [styled-components/styled-components](https://github.com/styled-components/styled-components) Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
-* [yui/yui3](https://github.com/yui/yui3) A library for building richly interactive web applications. http://yuilibrary.com/
+* [styled-components](https://github.com/styled-components/styled-components) Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
+* [yui3](https://github.com/yui/yui3) A library for building richly interactive web applications. http://yuilibrary.com/
 
 ## 参考
 
-* [CSS：层叠样式表](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
 * [scottjehl/Respond](https://github.com/scottjehl/Respond):A fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more)
 * [IanLunn/Hover](https://github.com/IanLunn/Hover):A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS. http://ianlunn.github.io/Hover/
-* [basscss/basscss](https://github.com/basscss/basscss):Low-level CSS Toolkit http://basscss.com
 * [necolas/normalize.css](https://github.com/necolas/normalize.css):A collection of HTML element and attribute style-normalizations http://necolas.github.io/normalize.css/
 * [bjankord/Style-Guide-Boilerplate](https://github.com/bjankord/Style-Guide-Boilerplate):A starting point for crafting living style guides.
 * [sindresorhus/modern-normalize](https://github.com/sindresorhus/modern-normalize):Normalize browsers' default style

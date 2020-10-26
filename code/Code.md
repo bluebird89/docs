@@ -468,6 +468,10 @@
 
 ![Alt text](../_static/dev_book.png "Optional title")
 
+## 课程
+
+* [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp): freeCodeCamp.org's open source codebase and curriculum. Learn to code at home. https://www.freecodecamp.org/
+
 ## 项目
 
 * [gothinkster/realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 https://realworld.io/

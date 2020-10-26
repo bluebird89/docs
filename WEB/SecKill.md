@@ -291,5 +291,6 @@ ab -n 1000 -c 100 http://127.0.0.1/
 ## 参考
 
 * [小柒2012 / spring-boot-seckill](https://gitee.com/52itstyle/spring-boot-seckill):从0到1构建分布式秒杀系统 https://blog.52itstyle.com/archives/2853/
+* [](https://github.com/GuoZhaoran/spikeSystem):一个秒杀系统的例子分析
 * [分布式秒杀系统构建中的多种限流实现](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650768375&idx=1&sn=0b1de5c41ac15db0fc53f279fcfa58b6&chksm=f3f93662c48ebf7481bd7ce8ca74a3f2ad66fd80e7f50e313d8ebd1152a094045d75113a832d)
 * [秒杀系统的设计思考](https://mp.weixin.qq.com/s/CVFKTx016BqnOxdzxnW9dg)
