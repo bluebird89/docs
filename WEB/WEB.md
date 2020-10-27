@@ -508,56 +508,24 @@ if(password_verify($password, $hash)) {
 ## 参考
 
 * [wx-chevalier/Web-Series](https://github.com/wx-chevalier/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
-
 * [Web](https://developers.google.com/web/)
-
 * [Web](https://developer.mozilla.org/zh-CN/docs/Web)
-
 * [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
-
 * [Web 开发](https://www.ibm.com/developerworks/cn/web/)
-
-* [Design Issues](https://www.w3.org/DesignIssues/)
-
+* [W3C](https://www.w3.org/)
 * [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) https://solid.mit.edu/
-
-* [OWASP 开发指导](https://www.owasp.org/index.php/OWASP_Guide_Project) 涵盖了几乎所有关于Web站点安全的东西。
-
-  - OWASP(开放Web应用安全项目- Open Web Application Security Project)是一个开放的非营利性组织，目前全球有130个分会近万名会员，其主要目标是研议协助解决Web软体安全之标准、工具与技术文件，长期 致力于协助政府或企业了解并改善网页应用程式与网页服务的安全性
-  - OWASP被视为Web应用安全领域的权威参考。2009年下列发布的美国国家和国际立法、标准、准则、委员会和行业实务守则参考引用了OWASP。美国联邦贸易委员会(FTC)强烈建议所有企业需遵循OWASP十大WEB弱点防护守则）
-
-* [OWASP™ Foundation](https://www.owasp.org/index.php/Main_Page):the free and open software security community
-
-* [The Google Browser Security Handbook](https://code.google.com/p/browsersec/wiki/Main).
-
-* [The Web Application Hacker’s Handbook](https://www.amazon.com/dp/0470170778/?tag=stackoverflow17-20).
-
-* [Mozilla的安全编程规范](https://wiki.mozilla.org/WebAppSec/Secure_Coding_Guidelines)
-
-* [Ruby on Rails的Web安全的开发教程](https://guides.rubyonrails.org/security.html)
-
 * [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning Area. https://developer.mozilla.org/en-US/docs/Learn
-
 * [WEB开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
-
 * [What technical details should a programmer of a web application consider before making the site public?](https://softwareengineering.stackexchange.com/questions/46716/what-technical-details-should-a-programmer-of-a-web-application-consider-before/46738#46738)
-
 * [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
-
 * [A Beginner’s Guide to Website Speed Optimization](https://kinsta.com/learn/page-speed/)
 
 * [关于大型网站技术演进的思考](http://blog.jobbole.com/84761/)
-
 * [大型WEB架构设计](https://mp.weixin.qq.com/s?__biz=MzAwNzY4OTgyNA==&mid=2651826002&idx=1&sn=237e6c340626171cf1f4eb6e0f19f182&chksm=8081445db7f6cd4bea29330141ac28228f09c024dd5671cb945171bf41a20d6f1386c455e330)
-
 * [PHP 进阶之路 - 亿级 pv 网站架构实战之性能压榨](https://segmentfault.com/a/1190000010455076)
-
 * [全站缓存](https://segmentfault.com/a/1190000005808789)
-
 * 《构建高性能Web站点》第12章 web负载均衡
-
 * 《大型网站技术架构：核心原理与案例分析》 6.2 应用服务器集群的伸缩性设计
-
 <https://zhuanlan.zhihu.com/p/22360384>
 <http://tips.codekiller.cn/2017/05/17/maglev_describe/>
 <http://developer.51cto.com/art/200807/83518.htm>

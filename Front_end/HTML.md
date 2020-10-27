@@ -190,19 +190,21 @@ document.write("Hello World!")
 ## 块级元素 block
 
 * 默认占据一个独立的区域，在网页上会自动另起一行，占据 100% 的宽度
-* div,ul,li,dl,dt,dd,p,h1-h6,blockquote,<table>
+* dl,dt,dd,blockquote,<div>、<p>、<h1>、<table>、<form>、<ul>、<ol>、<li>、<pre>
 * 默认情况下，宽度自动填满其父元素宽度
 * 可以容纳内联元素和其他块元素
 * display属性为block
 * 垂直相邻外边距margin会合并
+* 左右都有换行符
+* 可以设置width和height属性
 
 ## 行内元素 inline
 
 * 默认与其他元素在同一行，不产生换行
-* a,b,span,img,input,strong,select,label,em,button,textarea,td
-* 高，行高及外边距和内边距部分可改变
-* 宽度只与内容有关
-* 高度随字体大小而改变
+* strong,select,em,button,textarea,td <span>、<font>、<b>、<i>、<u>、<s>、<a>、<input>、<label>、<img>
+* 没有width和height属性
+  - 宽度只与内容有关
+  - 高度随字体大小而改变
 * 只能容纳文本或者其他行内元素
 * display属性为inline
 * 水平方向的padding-left、padding-right、margin-left、margin-right都产生边距效果
