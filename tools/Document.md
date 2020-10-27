@@ -86,7 +86,7 @@ pandoc API.md -o api.docx -c Github.css
   - gitbook serve 运行
   - gitbook build 编译书籍
 
-```markdown
+```
 # Summary
 - [Introduction](README.md)
 # 一级分类，不显示，会以横线分隔，相当于注释
@@ -123,6 +123,9 @@ pandoc API.md -o api.docx -c Github.css
 
  a new kind of data science notebook. Jupyter-compatible with real-time collaboration and easy deployment. Oh, and it's free
 
+## pdf
+
+* [paperplane](https://www.paperplane.app/):High quality HTML to PDF conversion API for developers
 
 ## 工具
 
