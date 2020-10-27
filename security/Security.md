@@ -419,6 +419,11 @@ small_integer = large_integer % 1,000,000
 * [CS 253 Web Security](https://web.stanford.edu/class/cs253/)
 * The Web Application Hacker's Handbook: Finding and Exploiting Security Flaws 2nd Edition
 * [How to Build a Cybersecurity Career [ 2019 Update ]](https://danielmiessler.com/blog/build-successful-infosec-career/)
+* [Ruby on Rails的Web安全的开发教程](https://guides.rubyonrails.org/security.html)
+
+## 图书
+
+* [The Web Application Hacker’s Handbook](https://www.amazon.com/dp/0470170778/?tag=stackoverflow17-20).
 
 ## 工具
 
@@ -436,7 +441,13 @@ small_integer = large_integer % 1,000,000
 
 ## 参考
 
+* [OWASP 开发指导](https://www.owasp.org/index.php/OWASP_Guide_Project) 涵盖了几乎所有关于Web站点安全的东西
+  - OWASP(开放Web应用安全项目- Open Web Application Security Project)是一个开放的非营利性组织，目前全球有130个分会近万名会员，其主要目标是研议协助解决Web软体安全之标准、工具与技术文件，长期 致力于协助政府或企业了解并改善网页应用程式与网页服务的安全性
+  - OWASP被视为Web应用安全领域的权威参考。2009年下列发布的美国国家和国际立法、标准、准则、委员会和行业实务守则参考引用了OWASP。美国联邦贸易委员会(FTC)强烈建议所有企业需遵循OWASP十大WEB弱点防护守则）
+  * [OWASP™ Foundation](https://www.owasp.org/index.php/Main_Page):the free and open software security community
+  * [The Google Browser Security Handbook](https://code.google.com/p/browsersec/wiki/Main).
 * [Hacker0x01/hacker101](https://github.com/Hacker0x01/hacker101):Hacker101 https://www.hacker101.com
+* [Mozilla的安全编程规范](https://wiki.mozilla.org/WebAppSec/Secure_Coding_Guidelines)
 * [SecWiki/sec-chart](https://github.com/SecWiki/sec-chart):安全思维导图集合 https://www.sec-wiki.com
 * [phith0n/Mind-Map](https://github.com/phith0n/Mind-Map):各种安全相关思维导图整理收集
 * [trimstray/the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge):💫 A collection of awesome lists, manuals, blogs, hacks, one-liners, cli/web tools and more. Especially for System and Network Administrators, DevOps, Pentesters or Security Researchers.
