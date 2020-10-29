@@ -1,9 +1,5 @@
 # PHP RESOURCE
 
-* 可以学习一门静态编译语言作为补充实现动静互补，C/C++/Go 都是不错的选择,静态语言的编程体验与动态语言完全不同，学习过程可以得到更大的提升
-* 掌握 C/C++ 语言后，还可以阅读 PHP 、 Swoole 、 Nginx 、Redis 、 Linux内核 等开源软件的源码，了解其底层运行原理
-* Swoole提供了C++扩展模块的支持，封装了Zend API，用C++操作PHP变得很简单，可以用C++实现PHP扩展函数和类
-
 ## 包管理
 
 * Composer包 Composer Repositories

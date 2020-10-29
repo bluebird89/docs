@@ -1,5 +1,8 @@
 # 文档
 
+* 方法
+  - 记录
+  - 整理
 * 概念用文档整理
 * 结构化用思维导图，不宜太详细
 
@@ -11,7 +14,7 @@
 * [Paper](http://www.fiftythree.com/):优雅，美观，做笔记，记录灵感
 * [语雀](https://www.yuque.com)
 * [Google文档](https://docs.google.com/document/u/0/)
-* [腾讯文档](https://docs.qq.com/)：对表Google docs
+* [腾讯文档](https://docs.qq.com/)：对标Google docs
 * youdaonote ：格式化笔记
 * simplenote：简单笔记（无格式）
 * xmind：结构化整理
@@ -27,7 +30,7 @@
   - `brew cask install joplin`
   - `wget -O - https://raw.githubusercontent.com/laurent22/joplin/master/Joplin_install_and_update.sh | bash`
 * [P3X OneNote](link)： a cloud-based note-taking application and is considered as an exact alternative to the well known Microsoft OneNote application
-* [Notion](./Notion)
+* [Notion](./Notion.md)
 * [Roam Research](https://roamresearch.com/)
 * [Simple note](https://standardnotes.org):收费
 * [Grace Note](https://grace-note.app/#/)
@@ -121,7 +124,7 @@ pandoc API.md -o api.docx -c Github.css
 
 ## [deepnote](https://deepnote.com/)
 
- a new kind of data science notebook. Jupyter-compatible with real-time collaboration and easy deployment. Oh, and it's free
+a new kind of data science notebook. Jupyter-compatible with real-time collaboration and easy deployment. Oh, and it's free
 
 ## pdf
 
@@ -140,7 +143,6 @@ pandoc API.md -o api.docx -c Github.css
 * [prezi](https://prezi.com/pricing/edu/)
 * [linkedin/hopscotch](https://github.com/linkedin/hopscotch):A framework to make it easy for developers to add product tours to their pages.
 * [gitpitch/gitpitch](https://github.com/gitpitch/gitpitch):The Markdown Presentation Service For Everyone on GitHub, GitLab, Bitbucket, GitBucket, Gitea, and Gogs. https://gitpitch.com
-* [tldr-pages/tldr](https://github.com/tldr-pages/tldr):📚 Simplified and community-driven man pages http://tldr-pages.github.io/
 * [enquirer/enquirer](https://github.com/enquirer/enquirer):Stylish, intuitive and user-friendly prompt system.
 * [sofish/typo.css](https://github.com/sofish/typo.css):中文网页重设与排版：一致化浏览器排版效果，构建最适合中文阅读的网页排版 http://typo.sofi.sh
 * [unifiedjs/unified](https://github.com/unifiedjs/unified):☔ friendly interface backed by an ecosystem of plugins built for creating and manipulating content https://unified.js.org
