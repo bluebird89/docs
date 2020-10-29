@@ -38,12 +38,11 @@
 * Upper Sobel
 * Blur
 
-## cahng
-
 ## 项目
 
 * [deeppomf/DeepCreamPy](https://github.com/deeppomf/DeepCreamPy):Decensoring Hentai with Deep Neural Networks
 * [thunil/TecoGAN](https://github.com/thunil/TecoGAN):This repo will contain source code and materials for the TecoGAN project, i.e. code for a TEmporally COherent GAN
+* [vision](https://github.com/pytorch/vision) Datasets, Transforms and Models specific to Computer Vision
 
 ## 参考
 
@@ -52,4 +51,3 @@
 * [makelove/OpenCV-Python-Tutorial](https://github.com/makelove/OpenCV-Python-Tutorial)
 * [muhsinali/opencv-book](https://github.com/muhsinali/opencv-book):Exercises and solutions from the Practical Python and OpenCV book
 * [whydna/Deep-Learning-For-Computer-Vision](https://github.com/whydna/Deep-Learning-For-Computer-Vision):Exercises from https://www.pyimagesearch.com/deep-learning-computer-vision-python-book/
-* 一文看懂卷积神经网络-CNN（基本原理+独特价值+实际应用）

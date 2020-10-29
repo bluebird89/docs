@@ -1765,6 +1765,7 @@ kubectl-debug <POD_NAME>
 ## 图书
 
 * [Docker — 从入门到实践](https://yeasy.gitbooks.io/docker_practice/content/)
+  - [docker_practice](https://github.com/yeasy/docker_practice) Learn and understand Docker technologies, with real DevOps practice!
 * [Docker——容器与容器云（第2版）](https://book.douban.com/subject/26894736/)
 
 ## 资源
@@ -1810,7 +1811,6 @@ kubectl-debug <POD_NAME>
 * [manuals](https://docs.docker.com/manuals/)
 * [Docker 架构原理及简单使用](https://www.cnblogs.com/zhangxingeng/p/11236968.html)
 * [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects
-* [yeasy/docker_practice](https://github.com/yeasy/docker_practice):Learn and understand Docker technologies, with real DevOps practice! https://legacy.gitbook.com/book/yeasy/docker_practice/details
 * [中文文档](https://docker-doc.readthedocs.io/zh_CN/latest/index.html)
 * [中文文档](http://www.dockerinfo.net)
 

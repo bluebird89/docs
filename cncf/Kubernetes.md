@@ -1711,10 +1711,9 @@ source ~/.bash_profile
 
 ## 图书
 
-* 《[Kubernetes权威指南 : 从Docker到Kubernetes实践全接触（第2版）](https://book.douban.com/subject/26902153/)》
 * Kubernetes Handbook
 * Kubernetes 指南
-* Kubernates in action
+* **Kubernates in action**
 
 ## 课程
 
