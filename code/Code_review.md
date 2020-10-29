@@ -119,7 +119,7 @@ XXX：添加一些新功能（简短的说明）
   - 提完了好模式，主持人问：“大家说说这段代码有没有可以改进的反模式？”大家开始提反模式，注意不要提谁是作者。
     主持人在整个过程中注意计时，快到半小时的时候，可以这样结束代码回顾：“今天时间也快到了，代码回顾的重点在识别模式，而不是看全部的代码。希望大家继续发扬今天识别到的好模式，另外在明天代码回顾时，把今天识别到的反模式改进为好模式。”
 
-##  LinkedIn 相关实践
+## [LinkedIn’s Tips for Highly Effective Code Review](https://thenewstack.io/linkedin-code-review/)
 
 * 从 2011 年开始，强制要求在团队成员之间做代码复查。Code Review 带来的反馈意见让团队成员能够迅速提升自己的技能水平，这解决了 LinkedIn 各个团队近年来因迅速扩张带来的技能不足的问题
 * 建立公司范围的 Code Review 工具，这就可以做跨团队的 Code Review。既有利于消除 bug，提升质量，也有利于不同团队之间经验互通
@@ -149,4 +149,3 @@ XXX：添加一些新功能（简短的说明）
 * RhodeCode
 * Gerrit
 * [reviewdog](https://github.com/reviewdog/reviewdog):dog Automated code review tool integrated with any code analysis tools regardless of programming language https://medium.com/@haya14busa/reviewdog-a-code-review-dog-who-keeps-your-codebase-healthy-d957c471938b#.8xctbaw5u
-

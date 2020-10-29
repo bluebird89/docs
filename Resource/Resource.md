@@ -134,6 +134,7 @@
 ## 参考
 
 * [2017 杭州云栖大会](https://github.com/Alimei/hangzhouYunQi2017ppt?files=1)
+* [awesome](https://github.com/sindresorhus/awesome):😎 Awesome lists about all kinds of interesting topics
 * [kdeldycke/awesome-falsehood](https://github.com/kdeldycke/awesome-falsehood):Curated list of falsehoods programmers believe in.
 * [tastejs/todomvc](https://github.com/tastejs/todomvc):Helping you select an MV\* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com
 * [oldratlee/translations](https://github.com/oldratlee/translations):Chinese translations for classic IT resources

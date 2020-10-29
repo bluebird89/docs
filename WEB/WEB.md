@@ -1,4 +1,4 @@
-# Web
+# [Web](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web)
 
 系统的健壮性、 可用性：原则是要保护系统，不能让所有用户都失败。直接抛弃一半请求
 

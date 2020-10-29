@@ -1792,15 +1792,16 @@ rome check
 
 ## 教程
 
+* [MDN JavaScript 教程](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
 * [verekia/js-stack-from-scratch](https://github.com/verekia/js-stack-from-scratch):🛠️⚡ Step-by-step tutorial to build a modern JavaScript stack.
 * [JavaScript全栈教程](https://www.liaoxuefeng.com/wiki/1022910821149312)
   - [michaelliao/learn-javascript](https://github.com/michaelliao/learn-javascript):JavaScript全栈教程参考源码
 * [javascript-tutorial](https://github.com/wangdoc/javascript-tutorial):JavaScript 教程 https://wangdoc.com/javascript
 * [JavaScript 教程](https://wangdoc.com/javascript/index.html)
   - [ruanyf/jstutorial](https://github.com/ruanyf/jstutorial):Javascript tutorial book http://javascript.ruanyifeng.com
-* [阮一峰ECMAScript 6](http://es6.ruanyifeng.com/)
+* [阮一峰 ECMAScript 6](http://es6.ruanyifeng.com/)
   - [songjinzhong/ES6Learning](https://github.com/songjinzhong/ES6Learning):阮一峰老师的 ES6 入门教程笔记
-* [mqyqingfeng/Blog](https://github.com/mqyqingfeng/Blog):冴羽写博客的地方，预计写四个系列：JavaScript深入系列、JavaScript专题系列、ES6系列、React系列。
+* [mqyqingfeng/Blog](https://github.com/mqyqingfeng/Blog):冴羽写博客的地方，预计写四个系列：JavaScript深入系列、JavaScript专题系列、ES6系列、React系列
 * [N-blog](https://maninboat.gitbooks.io/n-blog/content/):使用 Express + MongoDB 搭建多人博客
 * [leonardomso/33-js-concepts](https://github.com/leonardomso/33-js-concepts):📜 33 concepts every JavaScript developer should know.
 * [iliakan/javascript-tutorial-en](https://github.com/iliakan/javascript-tutorial-en):Modern JavaScript Tutorial https://javascript.info
