@@ -413,7 +413,7 @@
     + 敏捷软件开发：原则、实践和模式
     + 重构 代码坏味道和相应代码的最佳实践。
     + 编写可读代码的艺术
-    + 程序员的职业素养
+    + 程序员的职业素养 The Clean Coder：A Code of Conduct for Professional Programmers
     + 软件开发践行录:ThoughtWorks聚集了很多爱思考爱分享的人。本书可以说就是这样一群极有天分的软件精英的思想和观点的汇聚，是他们多年的宝贵实践经验的凝结。涉猎广泛，通俗易懂，相信你读完肯定会有收获。
   - 进阶篇
     + 实现模式
@@ -468,9 +468,14 @@
 
 ![Alt text](../_static/dev_book.png "Optional title")
 
+## [Technology Radar](https://www.thoughtworks.com/radar)
+
+* ThoughtWorks每半年发布一次的技术趋势报告，它持续追踪有趣的技术是如何发展的，我们将其称之为条目。技术雷达使用象限和环对其进行分类，不同象限代表不同种类的技术，而环则代表我们对其作出的成熟度评估
+
 ## 课程
 
 * [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp): freeCodeCamp.org's open source codebase and curriculum. Learn to code at home. https://www.freecodecamp.org/
+* [斯坦福大学公开课：编程方法学28集全](https://www.bilibili.com/video/av8048664)
 
 ## 项目
 
@@ -481,18 +486,17 @@
 * [经典编程书籍大全](https://github.com/jobbole/awesome-programming-books):100+ 经典技术书籍，涵盖：计算机系统与网络、系统架构、算法与数据结构、前端开发、后端开发、移动开发、数据库、测试、项目与团队、程序员职业修炼、求职面试 和 编程相关的经典书籍。
 * [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books)Freely available programming books
 * [justjavac/free-programming-books-zh_CN](https://github.com/justjavac/free-programming-books-zh_CN)
-* [waylau/books-collection](https://github.com/waylau/books-collection):To the programmer's open source and free books collection 给程序员的开源、免费书籍收集，图书集合。
+* [waylau/books-collection](https://github.com/waylau/books-collection):To the programmer's open source and free books collection 给程序员的开源、免费书籍收集，图书集合
 * [programthink/books](https://github.com/programthink/books):【编程随想】收藏的电子书清单
 * 《发布！软件的设计与部署》：现实世界中充满了恶意用户，无论是主观的恶意，还是那种当点击页面上的按钮无响应后又多点击了100次的并非故意的恶意。这本书交给你如何为失败而做准备，并将这些恶意的影响降低到最低。欢迎来到现实世界。
 * 《正见：佛陀的证悟》：一本直指内心的书，用极为平白的语言描述了原始佛教的四圣谛，没有任何的高深莫测或者故弄玄虚，作者用现实世界中的例子来阐述最为幽深的佛法，每个字都值得玩味。她可以让你在纷乱的现世中找到内心的平静。
-* [Technology Radar](https://www.thoughtworks.com/radar)
 * [每个程序员都应该要读的书](https://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read)
   - 程序员修练之道
   - 《算法导论》 美国的本科生教材，这本书应该也是中国计算机学生的教材
   - 人月神话
   - 《Effective C++》/《More Effective C++》 C++ 中两本经典得不能再经典的书。也许你觉得 C++ 复杂，但这两本书中带来对代码稳定性的探索方式让人受益，因为这种思维方式同样可以用在其它地方。以至于各种模仿者，比如《Effective Java》也是一本经典书。
   - 《Unix 编程艺术》、《Unix 高级环境编程》也是相关的经典
-* [ optimization](https://www.agner.org/optimize/)
+* [optimization](https://www.agner.org/optimize/)
   - Optimizing subroutines in assembly language: An optimization guide for x86 platforms
   - The microarchitecture of Intel, AMD and VIA CPUs: An optimization guide for assembly programmers and compiler makers
   - Instruction tables: Lists of instruction latencies, throughputs and micro-operation breakdowns for Intel, AMD and VIA CPUs
@@ -508,23 +512,25 @@
 * [prettier/prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. https://prettier.io
 * [ggreer/the_silver_searcher](https://github.com/ggreer/the_silver_searcher):A code-searching tool similar to ack, but faster. http://geoff.greer.fm/ag/
 * [hackmdio/codimd](https://github.com/hackmdio/codimd):CodiMD - Realtime collaborative markdown notes on all platforms.
+* [cheatsheets](https://github.com/rstacruz/cheatsheets) My cheatsheets https://devhints.io/
+* [awesome-cheatsheet](https://github.com/detailyang/awesome-cheatsheet)🍻 awesome cheatsheet
 
 ## 参考
 
 * [DZone](http://www.dzone.com)
 * [Stackoverflow](http://stackoverflow.com/)
 * [30-seconds/30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code)：Curated collection of useful Javascript snippets that you can understand in 30 seconds or less. https://30secondsofcode.org/
-* [教程](http://www.phperz.com/special.html)
 * [aosabook/500lines](https://github.com/aosabook/500lines):500 Lines or Less
-* [斯坦福大学公开课：编程方法学28集全](https://www.bilibili.com/video/av8048664)
 * [hellerve/programming-talks](https://github.com/hellerve/programming-talks):Awesome & interesting talks about programming
 * [charlax/professional-programming](https://github.com/charlax/professional-programming):A collection of full-stack resources for programmers.
-* [mr-mig/every-programmer-should-know](https://github.com/mr-mig/every-programmer-should-know):A collection of (mostly) technical things every software developer should know
 * [todomvc](https://github.com/tastejs/todomvc)Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com/
 * [What every computer science major should know](http://matt.might.net/articles/what-cs-majors-should-know/)
   - 个人来说，作品集（Portfolio）会比简历（Resume）更有参考意义
   - 计算机专业工作者也要学会与人交流的技巧，包括如何写演示文稿，以及面对质疑时如何与人辩论的能力
   - 所需要的硬技能：工程类数学、Unix 哲学和实践、系统管理、程序设计语言、离散数学、数据结构与算法、计算机体系结构、操作系统、网络、安全、密码学、软件测试、用户体验、可视化、并行计算、软件工程、形式化方法、图形学、机器人、人工智能、机器学习、数据库等等
+  - [mr-mig/every-programmer-should-know](https://github.com/mr-mig/every-programmer-should-know):A collection of (mostly) technical things every software developer should know
+* [Teach Yourself Programming in Ten Years](http://norvig.com/21-days.html)
+* [97 Things Every Programmer Should Know](https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know)
 
 ## 编程：Google: github awesome talks
 

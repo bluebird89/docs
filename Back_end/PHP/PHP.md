@@ -30,9 +30,9 @@ The PHP Interpreter <http://www.php.net>
     + 微服务架构
     + Docker发布代码
 
-## 发展
+## 版本
 
-* PHP5.3
+* 5.3
   - 支持了类似 Java 的 jar 包，名为 phar。可以像 Java 一样方便地实现应用程序打包和组件化，一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行
 * 5.5
   - Opcache
@@ -148,6 +148,21 @@ The PHP Interpreter <http://www.php.net>
   - 箭头函数
   - 协变量返回和协变量参数
 * 8
+  - 新增对联合类型的支持，允许一个变量拥有多个类型的值
+  - 新增 WeakMap 特性：创建对象到任意值的映射，同时也不会阻止作为键的对象被垃圾回收，如果某个对象键被垃圾回收，对应键值对将从集合中移除
+  - 新增 ValueError 异常类，继承自 Exception 基类。每次当传递值到函数时，如果是一个无效类型，则会抛出该异常
+  - 重写方法时允许可变参数
+  - 使用 static 关键字标识某个方法返回该方法当前所属的类，即使它是继承的（后期静态绑定）
+  - $object::class 获取对象的类名，其返回结果和 get_class($object) 一样
+  - new 和 instanceof 关键字现在可以被用于任意表达式
+  - 引入了新的 Stringable 接口，只要某个类实现了 __toString 方法，即被视作自动实现了 Stringable 接口
+  - Trait 可以定义抽象私有方法
+  - throw 语句可以用在只允许表达式出现的地方，例如箭头函数、合并运算符和三元运算符等
+  - 参数列表中允许出现可选的尾部逗号
+  - 捕获异常而不存储到变量
+  - 新增对 mixed 类型的支持
+  - 对注解的支持：允许添加元数据到 PHP 函数、参数、类等，这些元数据随后可以通过可编程方式获取，通过注解可以直接访问深度集成到 PHP 自身的这些信息
+  - 新增构造函数属性提示支持：将属性声明和构造函数属性初始化合并到一起
   - JIT:主要针对 CPU 密集型操作优化效果明显, IO 密集型操作的 Web 应用中，启用 JIT 与不启用相比，性能不但没有提升，反而有 10% 左右的损耗，至少在 Laravel 应用中是如此
     + 在 Opcache 之中提供,结合 Runtime 信息将字节码编译为机器码缓存起来
     + 在原来Opcache优化的优化基础之上进行优化
@@ -1598,6 +1613,16 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'); //允许的请求类型
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"); // 允许的请求头字段
+
+location / {
+    add_header Access-Control-Allow-Origin *;
+    add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+    add_header Access-Control-Allow-Headers 'DNT,Keep-Alive,User-Agent,Cache-Control,Content-Type,Authorization';
+
+    if ($request_method = 'OPTIONS') {
+        return 204;
+    }
+}
 ```
 
 ## Docker
@@ -2348,5 +2373,6 @@ pecl channel-update pecl.php.net
 ## 参考
 
 * [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
+* [clean-code-php](https://github.com/jupeter/clean-code-php):🛁 Clean Code concepts adapted for PHP
 * [tpunt/PHP7-Reference](tpunt/PHP7-Reference):An overview of the features, changes, and backward compatibility breakages in PHP 7
 * [PHP 25周年纪事](https://www.jetbrains.com/lp/php-25/)

@@ -1060,10 +1060,7 @@ lsof -d 2-3
 * Computer Networking: A Top Down Approach 计算机网络：自顶向下方法
   - [PPT](https://gaia.cs.umass.edu/kurose_ross/ppt.htm)
 * 《计算机网络自顶向下方法》
-* 《TCP/IP 详解 卷一：协议》
-* The TCP/IP GUIDE
-* 图解HTTP
-* HTTP权威指南：需要理解HTTP的本质复杂度，并且避免被作者引入的非本质复杂度的干扰。
+* 计算机网络 Computer Networks Andrew S. Tanenbaum / David J. Wetherall
 
 ## 课程
 

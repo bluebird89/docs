@@ -66,26 +66,29 @@ but you can never leave!
 Jeanette Olsson
 
 ## The End of World
-    Skeeter Davis 作词、作曲并演唱
+   原唱 Skeeter Davis 作词：Sylvia Dee 作曲：Arthur Kent
 
 ```
 Why does the sun go on shining?
 Why does the sea rush to shore?
 Don't they know it's the end of the world
 'Cause you don't love me anymore?
+
 Why do the birds go on singing?
 Why do the stars glow above?
 Don't they know it's the end of the world
-
 It ended when I lost your love
+
 I wake up in the morning and I wonder
 Why everything is the same as it was
 I can't understand, no, I can't understand
 How life goes on the way it does!
+
 Why does my heart go on beating?
 Why do these eyes of mine cry?
 Don't they know it's the end of the world?
 It ended when you said goodbye
+
 Why does my heart go on beating?
 Why do these eyes of mine cry?
 Don't they know it's the end of the world?

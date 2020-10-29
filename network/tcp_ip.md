@@ -907,6 +907,7 @@ ifconfig /flushdns # 刷新DNS
 * 《TCP/IP详解 卷2：实现》
 * 《TCP/IP详解 卷3：TCP事务协议、HTTP、NNTP和UNIX域协议》
 * 《TCP/IP高效编程：改善网络程序的44个技巧》
+* The TCP/IP GUIDE
 * 《TCP/IP网络编程》
   - [chankeh/net-lenrning-reference](https://github.com/chankeh/net-lenrning-reference):TCP/IP网络编程笔记
 

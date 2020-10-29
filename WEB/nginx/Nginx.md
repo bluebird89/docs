@@ -1664,6 +1664,10 @@ fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 * [winshining/nginx-http-flv-module](https://github.com/winshining/nginx-http-flv-module):Media streaming server based on nginx-rtmp-module, HTTP-FLV/RTMP/HLS/DASH supported.
 * [arut/nginx-rtmp-module](https://github.com/arut/nginx-rtmp-module):NGINX-based Media Streaming Server http://nginx-rtmp.blogspot.com
 
+## 图书
+
+* [nginx-book](https://github.com/taobao/nginx-book) Nginx开发从入门到精通
+
 ## 工具
 
 * [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes https://kubernetes.github.io/ingress-nginx/
