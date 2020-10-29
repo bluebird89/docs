@@ -302,7 +302,7 @@ public OrderRepresentation toRepresentation(Order order) {
   - 与UI或通信协议无关：ApplicationService的定位并不是整个软件系统的门面，而是领域模型的门面，意味着ApplicationService不应该处理诸如UI交互或者通信协议之类的技术细节。在本例中，Controller作为ApplicationService的调用者负责处理通信协议(HTTP)以及与客户端的直接交互。这种处理方式使得ApplicationService具有普适性，也即无论最终的调用方是HTTP的客户端，还是RPC的客户端，甚至一个Main函数，最终都统一通过ApplicationService才能访问到领域模型
   - 接受原始数据类型：ApplicationService作为领域模型的调用方，领域模型的实现细节对其来说应该是个黑盒子，因此ApplicationService不应该引用领域模型中的对象。此外，ApplicationService接受的请求对象中的数据仅仅用于描述本次业务请求本身，在能够满足业务需求的条件下应该尽量的简单。因此，ApplicationService通常处理一些比较原始的数据类型。在本例中，OrderApplicationService所接受的Order ID是Java原始的String类型，在调用领域模型中的Repository时，才被封装为OrderId对象。
 
-## 事件驱动架构(Event Driven Architecture, EDA)
+## 事件驱动架构 Event Driven Architecture EDA
 
 * 在一个领域中所发生的一次对业务有价值的事情，落到技术层面就是在一个业务实体对象(通常来说是聚合根)的状态发生了变化之后需要发出一个领域事件
 * 创建
@@ -337,7 +337,7 @@ public class OrderCreatedEvent extends OrderEvent {
 }
 ```
 
-## 动态领域建模（dynamic domain modelling）
+## 动态领域建模 dynamic domain modelling
 
 * 复杂性的挑战，在于其中涉及了两种类型的连接，即能导致结构复杂性的稳定连接，和能导致动态复杂性的任意连接。
 * 结构复杂性常见于嵌套结构常见于嵌套结构,对象变得复杂的因素，包括其内部状态模型、规则及对象之间的连通性和可变性的深度

@@ -1,6 +1,9 @@
 # Machine learning
 
-研究计算机怎样模拟或实现人类的学习行为，以获取新的知识或技能，重新组织已有的知识结构使之不断改善自身的性能。它是人工智能的核心，是使计算机具有智能的根本途径，其应用遍及人工智能的各个领域，它主要使用归纳、综合而不是演译。在过去的十年中，机器学习帮助我们自动驾驶汽车，有效的语音识别，有效的网络搜索，并极大地提高了人类基因组的认识。机器学习是当今非常普遍，你可能会使用这一天几十倍而不自知。很多研究者也认为这是最好的人工智能的取得方式。在本课中，您将学习最有效的机器学习技术，并获得实践，让它们为自己的工作。更重要的是，你会不仅得到理论基础的学习，而且获得那些需要快速和强大的应用技术解决问题的实用技术。最后，你会学到一些硅谷利用机器学习和人工智能的最佳实践创新。
+* 研究计算机怎样模拟或实现人类的学习行为，以获取新的知识或技能，重新组织已有的知识结构使之不断改善自身的性能
+* 人工智能的核心，是使计算机具有智能的根本途径，其应用遍及人工智能的各个领域，它主要使用归纳、综合而不是演译
+* 在过去的十年中，机器学习帮助我们自动驾驶汽车，有效的语音识别，有效的网络搜索，并极大地提高了人类基因组的认识
+* 机器学习是当今非常普遍，可能会使用这一天几十倍而不自知。很多研究者也认为这是最好的人工智能的取得方式
 
 * 利用事物本身具有的数据特征用数学来表达并构建模型，然后完成既定任务，总的来说模型就是特征到任务结果的某种数学规律
 * 主要关乎算法与数据，尤其是数据;:可以没有复杂的算法，但不能没有好的数据。
@@ -45,23 +48,11 @@
 * 待收集的数据可能是表格数据、一串实时数据，N维矩阵或其他类型数据，同时也可能是多种存储介质，通过ETL处理将混合的数据源转成我们需要的格式，生成结构化数据类型。
 * 对于收集的数据，可能存在缺陷，比如空值、异常值或数据产生器本身引起的偏差。这些缺陷可能导致模型效果不佳，同时为了优化更快收敛，需要做数据标准化处理，所以需要进行数据预处理。
   - 比如缺失值可以简单设为0、列平均值、中值、最高频率值、甚至是稳健算法和knn等等。
-  - 比如标准化数据集，使数据集正态分布，平均值为0标准差为1。而且还达到了特征缩放效果。
-
-## 算法
-
-* 线性回归，比较简单且直观的回归算法，线性回归可以有n个属性值，然后每个属性的线性组合组成一个预测函数，通过定义误差函数然后最小化样本整体的误差来确定预测函数的参数。
-* 逻辑斯蒂回归，可以说它是广义线性模型，原来的线性回归无法用于分类任务，那么通过一个sigmoid函数可以将其用于分类任务，这便是逻辑斯蒂回归。线性函数被映射到了S函数中，以0.5为分割点可作为二分类。逻辑斯蒂回归往多分类推广则变为softmax回归，可用于多分类任务。
-* 朴素贝叶斯，它是概率论中非常经典的方法，核心就是贝叶斯定理，通过条件独立假设来简化模型，通过样本来学习联合概率分布，其中涉及到先验概率分布和条件概率分布。
-* 决策树，根据属性构造一个树形的决策策略，按各个属性值不断往下便能确定最终的结果。训练时可以以信息增益作为准则。
-* 支持向量机，它规定了最优分类线不仅能正确将两类分开，而且还要使分类间隔最大，当然对于高维空间则是超平面。它的本质问题是凸二次规划问题的极小问题，这方面涉及到凸优化理论。对于线性不可分的情况可以引入核函数，将低维空间线性不可分的点映射到高维空间中，从而使得它们可分。
-* 集成学习（boosting、bagging、stacking），集成学习核心思想是结合多个模型算法来完成任务，这个假设了单个算法学习的知识是局限的，多个算法组合则能发挥各个算法模型的长处，从而增加模型性能。boosting、bagging、stacking分别是三种不同的集成方式，boosting的个体学习器有强依赖关系，每个个体学习器依赖于前一个个体学习器的输出，bagging个体学习器之间没有依赖关系且通过一定的结合策略产生最终输出，stacking则是一种分层特征学习的结构。
-* 神经网络（感知机、BP神经网络、卷积神经网络、循环神经网络），神经网络基础版本是感知机和BP神经网络，通过模拟人脑神经一样构建起一个神经网络，并通过梯度下降之类的学习模型参数。后面通过加深网络层数和引入卷积等操作发展成卷积神经网络，此外还有改造成循环神经网络等，也就是后来的深度学习。
-* 聚类（kmeans、密度聚类、层次聚类），聚类就是通过一定的算法将属性相近的个体聚集到一起，并将属性不同的个体尽量隔离远一点。kmeans是基于距离的聚类，密度聚类则是寻找被低密度区域分离的高密度区域，层次聚类congratulation上往下将大集群进行分割。
-* 降维（PCA、LDA），PCA主成分分析将数据congratulation原来的坐标转换到新坐标使得可以用更少维度来表示数据，LDA线性判别分析将高维样本投印到最佳鉴别矢量空间以达到压缩特征空间维度的效果。
+  - 比如标准化数据集，使数据集正态分布，平均值为0标准差为1。而且还达到了特征缩放效果
 
 ## 模型定义
 
-机器学习主要就是模型问题，我们通过机器学习来对现实进行抽象建模，以解决现实问题。所以机器学习主要工作就是使用哪种模型来建模，尽管各种大大小小模型一大堆，但大体上也有些套路。
+机器学习主要就是模型问题，通过机器学习来对现实进行抽象建模，以解决现实问题。所以机器学习主要工作就是使用哪种模型来建模，尽管各种大大小小模型一大堆，但大体上也有些套路
 
 * 回归问题：预测结果
 * 分类问题：对数据进行分类
@@ -87,13 +78,12 @@
   - 通过特征工程可以避免一些over-fitting的情况，例如排除掉一些严重过度拟合的特征
   - 引入更多的训练数据，包括数据量和特征量
 * Low Bias, Low Variance：模型在训练集和测试集上表现都好，可以投入实用
-*
 
 ## 模型训练
 
-* 迭代，表示模型计算和调整的一次过程；
-* 批，数据集每次以一批为单位输入到模型中；
-* epoch，每当整个数据集被处理完称为一个epoch。
+* 迭代，表示模型计算和调整的一次过程
+* 批，数据集每次以一批为单位输入到模型中
+* epoch，每当整个数据集被处理完称为一个epoch
 
 ## 数据分割
 
@@ -125,165 +115,231 @@
 
 ## [SMO](https://mp.weixin.qq.com/s/oNKBpZpqX-Y6opBQ2e9oqQ)
 
-## 课程列表
+## 监督式学习
 
-* 机器学习数学基础
-  - 机器学习的数学基础
-    + 函数与数据的泛化
-    + 推理与归纳 (Deduction and Induction)
-  - 线性代数（Linear Algebra）
-    + 向量与矩阵 (Vector and Matrix)
-    + 特征值与特征向量
-    + 向量与高维空间
-    + 特征向量（Feature Vector）
-  - 概率与统计（Probability and Statistics）
-    + 条件概率与经典问题 (Conditional Probability)
-    + 边缘概率 (Marginal Probability)
-  - 作业/实践： 财宝问题的概率计算程序
-    - 统计推理（Statistical Inference）
-      + 贝叶斯原理与推理 (Bayesian Theorem)
-      + 极大似然估计 (Maximum Likelihood)
-      + 主观概率（Subjective Probability）
-      + 最大后延概率（MAP)
-    - 随机变量（Random Variable）
-      + 独立与相关 (Independence)
-      + 均值与方差 （Mean and Variance）
-      + 协方差 (Co-Variance)
-    - 概率分布（Probability Distributions)
-    - 中心极限定理（Central Limit Theorem)
-    - 作业/实践： 概率分布采样与不同随机变量之间协方差计算
-    - 梯度下降（Gradient Descent）
-      + 导数与梯度（Derivative and Gradient）
-      + 随机梯度下降（SGD）
-      + 牛顿方法（Newton's Method)
-    - 凸函数（Convex Function）
-      + Jensen不等式（Jensen's Inequality）
-      + 拉格朗日乘子（Lagrange Multiplier）
-    - 作业/实践： 利用牛顿方法求解给定的方程
-* 机器学习的哲学（Philosophy of ML）
-  - 算法的科学（Science of Algorithms）
-    + 输入与输出的神话（Mystery of I/O）
-    + 奥卡姆剃刀（Occam’s Razor）
-  - 维数的诅咒（Curse of Dimensionality）
-    + 高维的几何特性 (Geometric Properity )
-    + 高维空间流形（High-dimensional Manifold）
-  - 机器学习与人工智能（Machine learning and AI）
-  - 机器学习的范式（Paradigms of ML）
-* 经典机器学习模型（Classical ML Models）
-  - 样本学习（Case-Based Reasoning）
-    + K-近邻（K-Nearest Neighbors）
-    + K-近邻预测（KNN for Prediction）
-    + 距离与测度（Distance and Metric）
-  - 朴素贝叶斯（Naïve Bayes Classifier)
-    + 条件独立（Conditional Independence）
-    + 分类（Naive Bayes for Classification)
-  - 作业/实践：垃圾邮件分类的案例
-  - 决策树（Decision Tree Learning）
+* 需要提供一组学习样本，包括相关的特征数据以及相应的标签。程序可以通过这组样本来学习相关的规律或是模式，然后通过得到的规律或模式来判断没有被打过标签的数据是什么样的数据
+* 决策树（Decision Tree）。比如自动化放贷、风控。
+* 朴素贝叶斯分类（Naive Bayesian classification）。可以用于判断垃圾邮件，对新闻的类别进行分类，比如科技、政治、运动，判断文本表达的感情是积极的还是消极的，以及人脸识别等。
+* 最小二乘法（Ordinary Least Squares Regression）。算是一种线性回归。
+* 逻辑回归（Logisitic Regression）。一种强大的统计学方法，可以用一个或多个变量来表示一个二项式结果。它可以用于信用评分、计算营销活动的成功率、预测某个产品的收入等。
+* 支持向量机（Support Vector Machine，SVM）。可以用于基于图像的性别检测，图像分类等。
+* 集成方法（Ensemble methods）。通过构建一组分类器，然后根据它们的预测结果进行加权投票来对新的数据点进行分类。原始的集成方法是贝叶斯平均，但是最近的算法包括纠错输出编码、Bagging 和 Boosting
+* 方法
+    - 模型
+        + 正则化
+        + 交叉验证
+        + 生成方法
+            * 朴素贝叶斯
+            * 隐马尔可夫
+        + 判别方法
+            * k近邻法
+            * 感知机
+            * 决策树
+            * 逻辑斯蒂回归模型
+            * 最大熵模型
+            * 支持向量机
+            * 提升方法
+            * 条件随机场
+    - 策略
+    - 算法
+* 泛化能力：根据上界定义
+* 标注分类
+    - 分类器
+        + 精确率
+        + 召回率
+* 回归
+    - 单变量回归
+    - 多变量线性回归
+* 线性回归，比较简单且直观的回归算法，线性回归可以有n个属性值，然后每个属性的线性组合组成一个预测函数，通过定义误差函数然后最小化样本整体的误差来确定预测函数的参数。
+* 逻辑斯蒂回归，可以说它是广义线性模型，原来的线性回归无法用于分类任务，那么通过一个sigmoid函数可以将其用于分类任务，这便是逻辑斯蒂回归。线性函数被映射到了S函数中，以0.5为分割点可作为二分类。逻辑斯蒂回归往多分类推广则变为softmax回归，可用于多分类任务。
+* 朴素贝叶斯，它是概率论中非常经典的方法，核心就是贝叶斯定理，通过条件独立假设来简化模型，通过样本来学习联合概率分布，其中涉及到先验概率分布和条件概率分布。
+* 决策树，根据属性构造一个树形的决策策略，按各个属性值不断往下便能确定最终的结果。训练时可以以信息增益作为准则。
+* 支持向量机，它规定了最优分类线不仅能正确将两类分开，而且还要使分类间隔最大，当然对于高维空间则是超平面。它的本质问题是凸二次规划问题的极小问题，这方面涉及到凸优化理论。对于线性不可分的情况可以引入核函数，将低维空间线性不可分的点映射到高维空间中，从而使得它们可分。
+* 集成学习（boosting、bagging、stacking），集成学习核心思想是结合多个模型算法来完成任务，这个假设了单个算法学习的知识是局限的，多个算法组合则能发挥各个算法模型的长处，从而增加模型性能。boosting、bagging、stacking分别是三种不同的集成方式，boosting的个体学习器有强依赖关系，每个个体学习器依赖于前一个个体学习器的输出，bagging个体学习器之间没有依赖关系且通过一定的结合策略产生最终输出，stacking则是一种分层特征学习的结构。
+* 神经网络（感知机、BP神经网络、卷积神经网络、循环神经网络），神经网络基础版本是感知机和BP神经网络，通过模拟人脑神经一样构建起一个神经网络，并通过梯度下降之类的学习模型参数。后面通过加深网络层数和引入卷积等操作发展成卷积神经网络，此外还有改造成循环神经网络等，也就是后来的深度学习。
+* 聚类（kmeans、密度聚类、层次聚类），聚类就是通过一定的算法将属性相近的个体聚集到一起，并将属性不同的个体尽量隔离远一点。kmeans是基于距离的聚类，密度聚类则是寻找被低密度区域分离的高密度区域，层次聚类congratulation上往下将大集群进行分割。
+* 降维（PCA、LDA），PCA主成分分析将数据congratulation原来的坐标转换到新坐标使得可以用更少维度来表示数据，LDA线性判别分析将高维样本投印到最佳鉴别矢量空间以达到压缩特征空间维度的效果。
 
-        + 信息论与概率
-        + 信息熵（Information Entropy）
-        + ID3
-  - 预测树（CART）
+## 机器学习数学基础
 
-        - Gini指标（Gini Index）
-        - 决策树与规则（DT and Rule Learning）
-  - 作业/实践：决策树分类实验
-  - 集成学习（Ensemble learning）
-    + Bagging and Boosting
-    + AdaBoost
-    + 误差分解（Bias-Variance Decomposition）
-    + 随机森林（Boosting and Random Forest）
-  + 模型评估（Model Evaluation）
-    + 交叉验证（Cross-Validation）
-    + ROC (Receiver Operating Characteristics)
-    + Cost-Sensitive Learning
-  - 作业/实践：随机森林与决策树分类实验的比较
+* 机器学习的数学基础
+  - 函数与数据的泛化
+  - 推理与归纳 (Deduction and Induction)
+* 线性代数（Linear Algebra）
+  - 向量与矩阵 (Vector and Matrix)
+  - 特征值与特征向量
+  - 向量与高维空间
+  - 特征向量（Feature Vector）
+* 概率与统计（Probability and Statistics）
+  - 条件概率与经典问题 (Conditional Probability)
+  - 边缘概率 (Marginal Probability)
+* 作业/实践： 财宝问题的概率计算程序
+  * 统计推理（Statistical Inference）
+    - 贝叶斯原理与推理 (Bayesian Theorem)
+    - 极大似然估计 (Maximum Likelihood)
+    - 主观概率（Subjective Probability）
+    - 最大后延概率（MAP)
+  * 随机变量（Random Variable）
+    - 独立与相关 (Independence)
+    - 均值与方差 （Mean and Variance）
+    - 协方差 (Co-Variance)
+  * 概率分布（Probability Distributions)
+  * 中心极限定理（Central Limit Theorem)
+  * 作业/实践： 概率分布采样与不同随机变量之间协方差计算
+  * 梯度下降（Gradient Descent）
+    - 导数与梯度（Derivative and Gradient）
+    - 随机梯度下降（SGD）
+    - 牛顿方法（Newton's Method)
+  * 凸函数（Convex Function）
+    - Jensen不等式（Jensen's Inequality）
+    - 拉格朗日乘子（Lagrange Multiplier）
+  * 作业/实践： 利用牛顿方法求解给定的方程
+
+## 机器学习的哲学（Philosophy of ML）
+
+* 算法的科学（Science of Algorithms）
+  - 输入与输出的神话（Mystery of I/O）
+  - 奥卡姆剃刀（Occam’s Razor）
+* 维数的诅咒（Curse of Dimensionality）
+  - 高维的几何特性 (Geometric Properity )
+  - 高维空间流形（High-dimensional Manifold）
+* 机器学习与人工智能（Machine learning and AI）
+* 机器学习的范式（Paradigms of ML）
+
+## 经典机器学习模型（Classical ML Models）
+
+* 样本学习（Case-Based Reasoning）
+  - K-近邻（K-Nearest Neighbors）
+  - K-近邻预测（KNN for Prediction）
+  - 距离与测度（Distance and Metric）
+* 朴素贝叶斯（Naïve Bayes Classifier)
+  - 条件独立（Conditional Independence）
+  - 分类（Naive Bayes for Classification)
+* 作业/实践：垃圾邮件分类的案例
+* 决策树（Decision Tree Learning）
+      - 信息论与概率
+      - 信息熵（Information Entropy）
+      - ID3
+* 预测树（CART）
+      * Gini指标（Gini Index）
+      * 决策树与规则（DT and Rule Learning）
+* 作业/实践：决策树分类实验
+* 集成学习（Ensemble learning）
+  - Bagging and Boosting
+  - AdaBoost
+  - 误差分解（Bias-Variance Decomposition）
+  - 随机森林（Boosting and Random Forest）
+- 模型评估（Model Evaluation）
+  - 交叉验证（Cross-Validation）
+  - ROC (Receiver Operating Characteristics)
+  - Cost-Sensitive Learning
+* 作业/实践：随机森林与决策树分类实验的比较
+
+## 线性模型（Linear Models）
+
 * 线性模型（Linear Models）
-  - 线性模型（Linear Models）
-    + 线性拟合（Linear Regression）
-  - 最小二乘法（LMS）
-    + 线性分类器（Linear Classifier）
-  - 感知器（Perceptron）
-  - 对数几率回归（Logistic Regression）
-  - 线性模型的概率解释 (Probabilistic Interpretation)
-  - 作业/实践：对数几率回归的文本情感分析中应用
-  - 线性判别分析 (Linear Discrimination Analysis)
-  - 约束线性模型 (Linear Model with Regularization)
+  - 线性拟合（Linear Regression）
+* 最小二乘法（LMS）
+  - 线性分类器（Linear Classifier）
+* 感知器（Perceptron）
+* 对数几率回归（Logistic Regression）
+* 线性模型的概率解释 (Probabilistic Interpretation)
+* 作业/实践：对数几率回归的文本情感分析中应用
+* 线性判别分析 (Linear Discrimination Analysis)
+* 约束线性模型 (Linear Model with Regularization)
+      - LASSO
+      - Ridge Regression
+* 稀疏表示与字典学习
+      - Sparse Representation & Coding
+      - Dictionary Learning
 
-        + LASSO
-        + Ridge Regression
-  - 稀疏表示与字典学习
+## 核方法（Kernel Methods）
 
-        + Sparse Representation & Coding
-        + Dictionary Learning
+* 支持向量机SVM（Support Vector Machines）
+  - VC-维（VC-Dimension）
+  - 最大间距（Maximum Margin）
+  - 支撑向量（Support Vectors）
+* 作业/实践：SVM不同核函数在实际分类中比较
+* 对偶拉格朗日乘子
+* KKT条件（KKT Conditions）
+* Support Vector Regression (SVR)
 * 核方法（Kernel Methods）
-  - 支持向量机SVM（Support Vector Machines）
-    + VC-维（VC-Dimension）
-    + 最大间距（Maximum Margin）
-    + 支撑向量（Support Vectors）
-  - 作业/实践：SVM不同核函数在实际分类中比较
-  - 对偶拉格朗日乘子
-  - KKT条件（KKT Conditions）
-  - Support Vector Regression (SVR)
-  - 核方法（Kernel Methods）
-* 统计学习（Statistical Learning）
-  - 判别模型与生成模型
-    + 隐含变量（Latent Variable）
-  - 混合模型（Mixture Model）
-    + 三枚硬币问题（3-Coin Problem）
-    + 高斯混合模型（Gaussian Mixture Model）
-  - EM算法（Expectation Maximization）
-    + 期望最大（Expectation Maximization）
-    + 混合模型的EM算法（EM for Mixture Models）
-    + Jensen 不等式 (Jensen's Inequality)
-    + EM算法推导与性能 (EM Algorithm)
-  - 隐马可夫模型（Hidden Markov Models）
-    + 动态混合模型（Dynamic Mixture Model）
-    + 维特比算法（Viterbi Algorithm）
-    + 算法推导 (Algorithm)
-  - 条件随机场（Conditional Random Field）
-    - 层次图模型（Hierarchical Bayesian Model）
-      + 概率图模型 (Graphical Model)
-      + 从隐含语义模型到p-LSA (From LSA to P-LSA)
-      + Dirichlet 分布与特点（Dirichlet Distribution）
-      + 对偶分布（Conjugate Distribution）
-    - 主题模型（Topic Model – LDA）
-      + Latent Dirichlet Allocation
-      + 文本分类（LDA for Text Classification）
-  - 中文主题模型（Topic Modeling for Chinese）
-  - 其他主题模型（Other Topic Variables）
-* 无监督学习（Unsupervised Learning）
-  - K-均值算法（K-Means）
-    + 核密度估计（Kernel Density Estimation）
-    + 层次聚类（Hierarchical Clustering）
-  - 蒙特卡洛(Monte Carlo)
-    + 蒙特卡洛树搜索（Monte Carol Tree Search）
-    + MCMC（Markov Chain Monte Carlo）
-    + Gibbs Sampling
-* 流形学习（Manifold Learning）
-  - 主成分分析（PCA）
-    + PCA and ICA
-  - 低维嵌入（Low-Dimensional Embedding）
-    + 等度量映射（Isomap）
-    + 局部线性嵌入（Locally Linear Embedding）
+
+## 统计学习（Statistical Learning）
+
+* 判别模型与生成模型
+  - 隐含变量（Latent Variable）
+* 混合模型（Mixture Model）
+  - 三枚硬币问题（3-Coin Problem）
+  - 高斯混合模型（Gaussian Mixture Model）
+* EM算法（Expectation Maximization）
+  - 期望最大（Expectation Maximization）
+  - 混合模型的EM算法（EM for Mixture Models）
+  - Jensen 不等式 (Jensen's Inequality)
+  - EM算法推导与性能 (EM Algorithm)
+* 隐马可夫模型（Hidden Markov Models）
+  - 动态混合模型（Dynamic Mixture Model）
+  - 维特比算法（Viterbi Algorithm）
+  - 算法推导 (Algorithm)
+* 条件随机场（Conditional Random Field）
+  * 层次图模型（Hierarchical Bayesian Model）
+    - 概率图模型 (Graphical Model)
+    - 从隐含语义模型到p-LSA (From LSA to P-LSA)
+    - Dirichlet 分布与特点（Dirichlet Distribution）
+    - 对偶分布（Conjugate Distribution）
+  * 主题模型（Topic Model – LDA）
+    - Latent Dirichlet Allocation
+    - 文本分类（LDA for Text Classification）
+* 中文主题模型（Topic Modeling for Chinese）
+* 其他主题模型（Other Topic Variables）
+
+## 无监督学习（Unsupervised Learning）
+
+* 数据是没有被标注过的，所以相关的机器学习算法需要找到这些数据中的共性
+* 让大量未标识的数据能够更有价值，找到人类很难发现的数据里的规律或模型
+* K-均值算法（K-Means）
+  - 核密度估计（Kernel Density Estimation）
+  - 层次聚类（Hierarchical Clustering）
+* 蒙特卡洛(Monte Carlo)
+  - 蒙特卡洛树搜索（Monte Carol Tree Search）
+  - MCMC（Markov Chain Monte Carlo）
+  - Gibbs Sampling
+* 聚类算法（Clustering Algorithms）。聚类算法有很多，目标是给数据分类
+* 主成分分析（Principal Component Analysis，PCA）。PCA 的一些应用包括压缩、简化数据，便于学习和可视化等
+* 奇异值分解（Singular Value Decomposition，SVD）。实际上，PCA 是 SVD 的一个简单应用。在计算机视觉中，第一个人脸识别算法使用 PCA 和 SVD 来将面部表示为“特征面”的线性组合，进行降维，然后通过简单的方法将面部匹配到身份。虽然现代方法更复杂，但很多方面仍然依赖于类似的技术
+* 独立成分分析（Independent Component Analysis，ICA）。ICA 是一种统计技术，主要用于揭示随机变量、测量值或信号集中的隐藏因素
+
+## 流形学习（Manifold Learning）
+
+* 主成分分析（PCA）
+  - PCA and ICA
+* 低维嵌入（Low-Dimensional Embedding）
+  - 等度量映射（Isomap）
+  - 局部线性嵌入（Locally Linear Embedding）
+
+## 概念学习（Concept Learning）
+
 * 概念学习（Concept Learning）
-  - 概念学习（Concept Learning）
-    + 经典概念学习
-    + One-Short概念学习
-  - 高斯过程学习（Gaussian Process for ML）
-    + Dirichlet Process
-* 强化学习（Reinforcement Learning）
-  - 奖赏与惩罚（Reward and Penalty）
-    + 状态空间 (State-Space Model)
-    + Q-学习算法 (Q-Learning)
-      - 路径规划 （Path Planning）
-      - 游戏人工智能 （Game AI）
-      - 作业/实践：小鸟飞行游戏的自动学习算法
-* 神经网络
-  - 多层神经网络
-    + 非线性映射（Nonlinear Mapping）
-    + 反向传播（Back-propagation）
-  - 自动编码器（Auto-Encoder）
+  - 经典概念学习
+  - One-Short概念学习
+* 高斯过程学习（Gaussian Process for ML）
+  - Dirichlet Process
+
+## 强化学习（Reinforcement Learning）
+
+* 奖赏与惩罚（Reward and Penalty）
+  - 状态空间 (State-Space Model)
+  - Q-学习算法 (Q-Learning)
+    * 路径规划 （Path Planning）
+    * 游戏人工智能 （Game AI）
+    * 作业/实践：小鸟飞行游戏的自动学习算法
+
+## 神经网络
+
+* 多层神经网络
+  - 非线性映射（Nonlinear Mapping）
+  - 反向传播（Back-propagation）
+* 自动编码器（Auto-Encoder）
 
 ## 图书
 
@@ -305,7 +361,7 @@
 * [《面向机器学习的特征工程》](https://github.com/apachecn/feature-engineering-for-ml-zh)
 * [Model-Based Machine Learning](http://mbmlbook.com/index.html)
 * [Evolutionary Learning: Advances in Theories and Algorithms）](https://www.springer.com/cn/book/9789811359552)
-* [ chiphuyen / machine-learning-systems-design ](https://github.com/chiphuyen/machine-learning-systems-design):A booklet on machine learning systems design with exercises
+* [machine-learning-systems-design ](https://github.com/chiphuyen/machine-learning-systems-design):A booklet on machine learning systems design with exercises
 * 《[数据之巅](https://www.amazon.cn/gp/product/B00JUE9DXW)》
 * 《[矩阵分析](https://www.amazon.cn/gp/product/B00NTM5GK0)》
 * 《[机器学习](https://www.amazon.cn/gp/product/B002WC7NH2)》
@@ -321,6 +377,7 @@
 * 《Python深度学习（Keras）》
 * 《深度学习入门：基于Python的理论与实现》
 * 深入理解Tensor Flow：架构
+* [](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)
 
 ## 教程
 
@@ -329,7 +386,7 @@
 * [kubeflow/kubeflow](https://github.com/kubeflow/kubeflow):Machine Learning Toolkit for Kubernetes
 * [Avik-Jain/100-Days-Of-ML-Code](https://github.com/Avik-Jain/100-Days-Of-ML-Code):100 Days of ML Coding
 * [llSourcell/Learn_Machine_Learning_in_3_Months](https://github.com/llSourcell/Learn_Machine_Learning_in_3_Months):This is the code for "Learn Machine Learning in 3 Months" by Siraj Raval on Youtube
-* [机器学习（Machine Learning）- 吴恩达（Andrew Ng）](https://www.bilibili.com/video/av9912938)
+* [机器学习（Machine Learning）吴恩达（Andrew Ng）](https://www.bilibili.com/video/av9912938)
   - [斯坦福大学2014（吴恩达）机器学习教程中文笔记](https://www.coursera.org/course/ml)
   - [斯坦福大学机器学习课程](http://open.163.com/special/opencourse/machinelearning.html)
   - [Andrew Ng 老师的 机器学习课程](http://coursegraph.com/coursera-machine-learning) http://coursegraph.com/coursera_ml
@@ -346,14 +403,10 @@
   - [Doraemonzzz/ML-Foundation-and-ML-Techniques](https://github.com/Doraemonzzz/ML-Foundation-and-ML-Techniques):台大机器学习课程作业详解
 * [机器学习中的数学基础](https://www.bilibili.com/video/av15673238/)
 * [afshinea/stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning):VIP cheatsheets for Stanford's CS 229 Machine Learning
+* [Machine Learning 10-701/15-781, Spring 2011](http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml)
 * [DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python](https://github.com/DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python):这是一个完整的，端到端的机器学习项目，非常适合有一定基础后拿来练习，以提高对完整机器学习项目的认识
 * [Doraemonzzz/Learning-from-data](https://github.com/Doraemonzzz/Learning-from-data):记录Learning from data一书中的习题解答 http://amlbook.com/
 * [Built on the AWS Cloud. Developed for Amazon developers and engineers.](https://aws.amazon.com/training/learning-paths/machine-learning/)
-* 火光摇曳：腾讯技术大牛们的博客 http://www.flickering.cn/
-* 美团技术团队的博客：https://tech.meituan.com/
-* 苏剑林的博客里面也全是干货 https://spaces.ac.cn/
-* Netflix：Netflix技术博客，很多干货。 https://medium.com/netflix-techblog
-* Towards Data Science：主要分享些概念、idea和代码。 https://towardsdatascience.com/
 * [fengdu78/machine_learning_beginner](https://github.com/fengdu78/machine_learning_beginner)
 * [A Course in Machine Learning](http://ciml.info/)
 * [Machine-Learning-Study-Path-March-2019](https://github.com/clone95/Machine-Learning-Study-Path-March-2019)
@@ -424,5 +477,10 @@
 * [hankcs / HanLP](https://github.com/hankcs/HanLP):中文分词 词性标注 命名实体识别 依存句法分析 语义依存分析 新词发现 关键词短语提取 自动摘要 文本分类聚类 拼音简繁转换 自然语言处理 http://hanlp.com/
 * [](https://github.com/apache/predictionio)
 * [Bilibili-机器学习白板系列](https://www.yuque.com/bystander-wg876/yc5f72)
-* [](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)
 * [Support Vector Machine](https://mp.weixin.qq.com/s/SackOqskC88pB0582bDg8A)
+
+* 火光摇曳：腾讯技术大牛们的博客 http://www.flickering.cn/
+* 美团技术团队的博客：https://tech.meituan.com/
+* 苏剑林的博客里面也全是干货 https://spaces.ac.cn/
+* Netflix：Netflix技术博客，很多干货。 https://medium.com/netflix-techblog
+* Towards Data Science：主要分享些概念、idea和代码。 https://towardsdatascience.com/

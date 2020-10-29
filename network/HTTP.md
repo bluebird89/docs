@@ -1137,7 +1137,8 @@ Modern HTTP benchmarking tool
 
 ## 图书
 
-* 《HTTP 权威指南》
+* 图解HTTP
+* HTTP权威指南
 
 ## 实例
 

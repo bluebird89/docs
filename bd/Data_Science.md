@@ -56,6 +56,10 @@ SAS网站的Eight levels of analytics
 
 * 达观数据
 
+## [apache/incubator-superset](https://github.com/apache/incubator-superset)
+
+Apache Superset is a Data Visualization and Data Exploration Platform  https://superset.incubator.apache.org/
+
 ## 教程
 
 * [数据可视化入门教程](https://www.yuque.com/mo-college/beginner-tutorial)
@@ -70,12 +74,14 @@ SAS网站的Eight levels of analytics
 * [Data Science Math Skills](http://coursegraph.com/coursera-datasciencemathskills)
 * [Data Science Ethics](http://coursegraph.com/coursera-data-science-ethics)
 * [How to Win a Data Science Competition: Learn from Top Kagglers](http://coursegraph.com/coursera-competitive-data-science)
+* [Learning from data](http://work.caltech.edu/lectures.html)
 
 ## 资源
 
 * [iphysresearch/DataSciComp](https://github.com/iphysresearch/DataSciComp):A collection of popular Data Science Competitions
 * [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! http://pachyderm.io
 * [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):最全中华古诗词数据库, 唐宋两朝近一万四千古诗人, 接近5.5万首唐诗加26万宋诗. 两宋时期1564位词人，21050首词。 http://shici.store
+* [google-research](https://github.com/google-research/google-research) Google Research  https://research.google/
 
 ## 实例
 
@@ -107,7 +113,6 @@ SAS网站的Eight levels of analytics
 * [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! http://pachyderm.io
 * [golemfactory/golem](https://github.com/golemfactory/golem):Golem is creating a global market for computing power. https://golem.network
 * [facebook/dataloader](https://github.com/facebook/dataloader):DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching.
-* [apache/incubator-superset](https://github.com/apache/incubator-superset):Apache Superset (incubating) is a modern, enterprise-ready business intelligence web application
 * [TuiQiao/CBoard](https://github.com/TuiQiao/CBoard):An easy to use, self-service open BI reporting and BI dashboard platform. https://tuiqiao.github.io/CBoardDoc/#/
 * [apache/arrow](https://github.com/apache/arrow):Apache Arrow is a cross-language development platform for in-memory data. It specifies a standardized language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. It also provides computational libraries and zero-copy streaming messaging and interprocess communication… https://arrow.apache.org
 * [jeroenjanssens/data-science-at-the-command-line](https://github.com/jeroenjanssens/data-science-at-the-command-line):Data Science at the Command Line https://datascienceatthecommandline.com

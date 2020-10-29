@@ -576,14 +576,12 @@ service UserService {
   - 《软件工程 - 实践者的研究方法》（Roger S.Pressman 著）
   - 《软件工程》（Ian Sommerville 著）
   - 《人月神话》（Fredrick P.Brooks，Jr. 著）
-  - 《敏捷软件开发：原则
+  - 敏捷软件开发：原则
   - 《模式与实践》（Robert C.Martin）
   - 《Scrum 敏捷软件开发》（Mike Cohn 著）。
 * 流程优化:除了流程管理层面的技术知识外，更重要的可能来自于管理学，不妨多读读管理类书籍，拓宽思路，再考虑具体的流程优化
   - 《目标》（Eliyahu M.Goidratt 著）
   - 《凤凰项目 - 一个 IT 运维的传奇故事》（Gene Kim, Kevin Behr & George Spafford 著）
-* 建模技术方面
-  - 《UML- 面向对象建模与设计》（Michael Blaha，James Rumbaugh 著）
 * 扩展阅读
   - 业务类书籍，建议多读些具有多年从业经验的人写的具有一定“感受”性特点的书籍，单纯的教材类书籍可能代入感稍微有些欠缺
   - 历史、军事、经济、哲学类书籍其实很有助于从更宏观、更本质的层面了解社会的运行，有助于从更开阔的视角理解业
@@ -600,9 +598,7 @@ service UserService {
 * 《[软件系统架构：使用视点和视角与利益相关者合作（第2版）](https://www.amazon.cn/gp/product/B00CMMUXC4)》
 * 《图解服务器端网络架构》
 * 《大型分布式网站架构设计与实践》
-* 《分析模式》，《UML精粹》，《领域特定语言》
-* 架构整洁之道
-* [GitHub - aosabook/500lines: 500 Lines or Less](https://github.com/aosabook/500lines)
+* 《分析模式》
 * The Performance of Open Source Applications
 * The Architecture of Open Source Applications, Volume I
 * The Architecture of Open Source Applications, Volume II
@@ -615,18 +611,16 @@ service UserService {
 
 * [xingshaocheng/architect-awesome](https://github.com/xingshaocheng/architect-awesome)
 * [toutiaoio/awesome-architecture](https://github.com/toutiaoio/awesome-architecture):架构师技术图谱
-* [优秀架构师必须掌握的架构思维](http://www.infoq.com/cn/articles/architecture-thought)
-* [《微服务架构实战 160 讲》](https://time.geekbang.org/course/intro/84)
-* [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer):Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.
+* [system-design-primer](https://github.com/donnemartin/system-design-primer):Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.
 * [davideuler/architecture.of.internet-product](https://github.com/davideuler/architecture.of.internet-product):互联网公司技术架构，微信/淘宝/微博/腾讯/阿里/美团点评/百度/Google/Facebook/Amazon/eBay的架构
 * [aosabook/500lines](https://github.com/aosabook/500lines):source for the book 500 Lines or Less
 * [alexpate/awesome-design-systems](https://github.com/alexpate/awesome-design-systems):💅🏻 ⚒ A collection of awesome design systems
 * [0voice/from_coder_to_expert](https://github.com/0voice/from_coder_to_expert):2019年最新总结，从程序员到CTO，从专业走向卓越，分享大牛企业内部pdf与PPT
 * [Software Architecture is Overrated, Clear and Simple Design is Underrated](https://blog.pragmaticengineer.com/software-architecture-is-overrated/)
-* [](https://refactoring.guru/)
-* [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer):Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.
 * [binhnguyennus/awesome-scalability](https://github.com/binhnguyennus/awesome-scalability):An updated and curated list of selected readings to illustrate Scalability, Availability, and Stability Design Patterns in Back-end Development.
 * [microsoft/fast](https://github.com/microsoft/fast):The adaptive interface system  for modern web experiences. https://www.fast.design/
+
 * [“构建”世界的能力-架构能力](https://mp.weixin.qq.com/s/Qw8TEIssMwrE9l2Y8BzjaA)
 * [最小可用架构](https://mp.weixin.qq.com/s/rZWxtVyJjgiUBPeY5gPqOA)
 * [百万年薪架构师是如何炼成的？](https://mp.weixin.qq.com/s/D8-fdrJzggAFH-UbsLmjew)
+* [优秀架构师必须掌握的架构思维](http://www.infoq.com/cn/articles/architecture-thought)

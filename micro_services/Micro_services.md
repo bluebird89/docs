@@ -685,6 +685,10 @@ APP要符合12因子（Twelve-Factor）的规范：
 * 《架构修炼之道》
 * Microservices for Java Developers
 
+## course
+
+* [《微服务架构实战 160 讲》](https://time.geekbang.org/course/intro/84)
+
 ### 工具
 
 * 框架

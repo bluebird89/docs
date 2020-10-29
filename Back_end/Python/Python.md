@@ -1378,10 +1378,13 @@ Namespaces are one honking great idea -- let's do more of those!
 
 ## 图书
 
-* [Automate the Boring Stuff with Python](https://automatetheboringstuff.com)
+* [与孩子一起学编程 Hello World！Computer Programming for Kids and Other Beginners](https://www.amazon.cn/gp/product/B00HECW20S)
+* [Python编程快速上手 Automate the Boring Stuff with Python: Practical Programming for Total Beginners](https://automatetheboringstuff.com)
 * [Learning with Python 3](http://openbookproject.net/thinkcs/python/english3e/)
 * [learn python the hardway](https://learnpythonthehardway.org/python3/)
-* [Think Python: How to Think Like a Computer Scientist](http://greenteapress.com/thinkpython2/html/index.html)
+* Learning Python
+* Python编程 从入门到实践 Python Crash Course
+* 流畅的Python Fluent Python
 * Python性能分析与优化
 * Python高性能编程
 * [pythonbook](https://python.cs.southern.edu/pythonbook/pythonbook.pdf)
@@ -1391,9 +1394,9 @@ Namespaces are one honking great idea -- let's do more of those!
 * 《[Python基础教程(第3版)](https://www.amazon.cn/Python基础教程-Magnus-Lie-Hetland/dp/B079BJPVFL/ref=dp_ob_title_bk)》
 * 《Python源码剖析》
 * 《[Head First Python](https://www.amazon.cn/gp/product/B007NB2B4M)》
-* 《[与孩子一起学编程](https://www.amazon.cn/gp/product/B00HECW20S)》
 * 《[Python学习手册（第4版）](https://www.amazon.cn/gp/product/B004TUJ7A6)》
 * 《[Python Cookbook（第3版）](https://www.amazon.cn/gp/product/B00WKR1OKG)》
+  - [Python 3 cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/):Python3教学手册
 * 《[Python参考手册（第4版）](https://www.amazon.cn/gp/product/B01MCUN37Y)》
 * 《[Python核心编程（第3版）](https://www.amazon.cn/gp/product/B01FQAS0KK)》
 * 《[Python科学计算（第2版）](https://www.amazon.cn/gp/product/B01HCVUJFA)》
@@ -1404,20 +1407,17 @@ Namespaces are one honking great idea -- let's do more of those!
 * 《用 Python 写网络爬虫》
 * 《[深度学习:基于Keras的Python实践](https://www.amazon.cn/gp/product/B07D5855F4)》
 * Python与量化投资从基础到实践
-* Learning Python, 5th Edition
-* Python编程 从入门到实践
-* 流畅的Python Fluent Python
+* [Think Python: How to Think Like a Computer Scientist](http://greenteapress.com/thinkpython2/html/index.html)
 
 ## 教程
 
 * [jackfrued/Python-100-Days](https://github.com/jackfrued/Python-100-Days):Python - 100天从新手到大师
 * [Python 中文学习大本营](http://www.pythondoc.com/)
 * [Yixiaohan/codeparkshare](https://github.com/Yixiaohan/codeparkshare):Python初学者（零基础学习Python、Python入门）书籍、视频、资料、社区推荐
-* [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide):Python best practices guidebook, written for Humans. http://docs.python-guide.org
+* [python-guide](https://github.com/kennethreitz/python-guide):Python best practices guidebook, written for Humans. http://docs.python-guide.org
 * [michaelliao/learn-python3](https://github.com/michaelliao/learn-python3): Learn Python 3 Sample Code
 * [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
 * [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
-* [Python 3 cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/):Python3教学手册
 * [在 Windows 上用 Python 做开发](https://docs.microsoft.com/zh-cn/windows/python/)
 * [简明 Python 教程 A Byte of Python](https://bop.mol.uno)
 * [Python最佳实践指南](https://pythonguidecn.readthedocs.io/zh/latest/index.html)
