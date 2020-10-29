@@ -1,9 +1,8 @@
-# [php/php-src](https://github.com/php/php-src)
+# [PHP Hypertext Preprocessor](https://github.com/php/php-src)
 
 The PHP Interpreter <http://www.php.net>
 
-* PHP(Hypertext Preprocessor)
-* 一门弱类型的语言，变量在声明时不需要确定类型，运行时类型会发生显式或隐式的类型改变
+* 一门弱类型语言，变量在声明时不需要确定类型，运行时类型会发生显式或隐式的类型改变
 * 一种解释型语言，即不需要编译。构建在 Zend 虚拟机之上
 * 一种服务器端脚本语言，只能通过服务器访问，需要配置虚拟主机调试,结果以纯 HTML 形式返回给浏览器
 * HTTP协议在Nginx等服务器的解析下,传送给相应的Handler（PHP等）来处理
@@ -57,7 +56,7 @@ The PHP Interpreter <http://www.php.net>
   - 安全随机数发生器 - 加入新的安全随机数生成器的API
   - 已过时的API和扩展删除 - 不同的旧的和不支持的应用程序和扩展，从最新的版本中删除
   - 零成本声明支持零成本加入断言
-  - 飞船操作符：用于比较两个表达式。当第一个表达式较第二个表达式分别小于，等于或大于时它分别返回-1，0或1。
+  - 飞船操作符：用于比较两个表达式。当第一个表达式较第二个表达式分别小于，等于或大于时它分别返回-1，0或1
   + 定义常量数组
   + Closure::call() 方法加入到临时绑定（bindTo）的对象范围
   + 需要使用 zval 指针的复杂类型（比如字符串、数组和对象）会自己存储引用计数。这样就可以有更少的内存分配操作、更少的间接指针使用以及更少的内存分配。在 PHP7 中的 zval, 已经变成了一个值指针，它要么保存着原始值，要么保存着指向一个保存原始值的指针。也就是说现在的 zval 相当于 PHP5 的时候的 zval . 只不过相比于 zval , 直接存储 zval, 我们可以省掉一次指针解引用，从而提高缓存友好性
@@ -65,27 +64,27 @@ The PHP Interpreter <http://www.php.net>
     * 变量存储字节减小，减少内存占用，提升变量操作速度
     * 改善数组结构，数组元素和 hash 映射表被分配在同一块内存里，降低了内存占用、提升了 cpu 缓存命中率
     * 改进了函数的调用机制，通过优化参数传递的环节，减少了一些指令，提高执行效率
-  + 引入过滤 unserialize（）函数以在反序列化不受信任的数据对象时提供更好的安全性。它可以防止可能的代码注入，使开发人员能够使用序列化白名单类。
+  + 引入过滤 unserialize（）函数以在反序列化不受信任的数据对象时提供更好的安全性。它可以防止可能的代码注入，使开发人员能够使用序列化白名单类
   + IntlChar类：这个类自身定义了许多静态方法用于操作多字符集的 unicode 字符。需要安装intl拓展
   + 两个新的函数引入以产生一个跨平台的方式加密安全整数和字符串
-    + random_bytes() - 生成加密安全伪随机字节。
-    + random_int() - 生成加密安全伪随机整数。
-  + 期望是向后兼容的增强到旧 assert() 函数。期望允许在生产代码零成本的断言，并提供在断言失败时抛出自定义异常的能力。assert() 不是一种语言构建体，其中第一个参数是一个表达式的比较字符串或布尔用于测试。
-    + ssertion - 断言。在PHP 5中，这必须是要计算一个字符串或要测试一个布尔值。 在PHP中7，这也可能是一个返回值的表达式，将执行和使用的结果，以指示断言是成功还是失败。
-  + 生成器支持返回表达式：允许在生成器函数中通过使用 return 语法来返回一个表达式 （但是不允许返回引用值）， 可以通过调用 Generator::getReturn() 方法来获取生成器的返回值， 但是这个方法只能在生成器完成产生工作以后调用一次。
+    + random_bytes() - 生成加密安全伪随机字节
+    + random_int() - 生成加密安全伪随机整数
+  + 期望是向后兼容的增强到旧 assert() 函数。期望允许在生产代码零成本的断言，并提供在断言失败时抛出自定义异常的能力。assert() 不是一种语言构建体，其中第一个参数是一个表达式的比较字符串或布尔用于测试
+    + ssertion - 断言。在PHP5中，这必须是要计算一个字符串或要测试一个布尔值。在PHP中7，这也可能是一个返回值的表达式，将执行和使用的结果，以指示断言是成功还是失败
+  + 生成器支持返回表达式：允许在生成器函数中通过使用 return 语法来返回一个表达式 （但是不允许返回引用值），可以通过调用 Generator::getReturn() 方法来获取生成器的返回值， 但是这个方法只能在生成器完成产生工作以后调用一次
   + 生成器委派：只需在最外层生成其中使用yield from，就可以把一个生成器自动委派给其他的生成器
   + 会话选项设置：session_start() 可以加入一个数组覆盖php.ini的配置
-  + 单次使用 use 语句可以用来从同一个命名空间导入类，函数和常量(而不用多次使用 use 语句)。
+  + 单次使用 use 语句可以用来从同一个命名空间导入类，函数和常量(而不用多次使用 use 语句)
   + 错误处理：传统的错误报告机制的错误：通过抛出异常错误处理。类似于异常，这些错误异常会冒泡，直到它们到达第一个匹配的catch块。如果没有匹配的块，那么会使用 set_exception_handler() 安装一个默认的异常处理并被调用，并在情况下，如果没有默认的异常处理程序，那么该异常将被转换为一个致命的错误，并会像传统错误那样处理。
-    + 由于 Error 层次结构不是从异常（Exception），代码扩展使用catch (Exception $e) { ... } 块来处理未捕获的异常，PHP5中将不会处理这样的错误。  catch (Error $e) { ... } 块或 set_exception_handler（）处理程序需要处理的致命错误。
+    + 由于 Error 层次结构不是从异常（Exception），代码扩展使用catch (Exception $e) { ... } 块来处理未捕获的异常，PHP5中将不会处理这样的错误。  catch (Error $e) { ... } 块或 set_exception_handler（）处理程序需要处理的致命错误
   + 引入了intdiv()的新函数，它执行操作数的整数除法并返回结果为 int 类型
   + Unicode codepoint 转译语法:接受一个以16进制形式的 Unicode codepoint，并打印出一个双引号或heredoc包围的 UTF-8 编码格式的字符串。 可以接受任何有效的 codepoint，并且开头的 0 是可以省略的
-  + preg_replace_callback_array：可以使用一个关联数组来对每个正则表达式注册回调函数， 正则表达式本身作为关联数组的键， 而对应的回调函数就是关联数组的值
-  - 改变了大多数错误的报告方式。不同于传统（PHP 5）的错误报告机制，大多数错误被作为 Error 异常抛出。
+  + `preg_replace_callback_array`：可以使用一个关联数组来对每个正则表达式注册回调函数，正则表达式本身作为关联数组的键，而对应的回调函数就是关联数组的值
+  - 改变了大多数错误的报告方式。不同于传统（PHP 5）的错误报告机制，大多数错误被作为 Error 异常抛出
   - list 会按照原来的顺序进行赋值。不再是逆序了.不再支持解开字符串
   - foreach不再改变内部数组指针
   - 十六进制字符串不再被认为是数字
-  - $HTTP_RAW_POST_DATA 被移 使用php://input代替
+  - $HTTP_RAW_POST_DATA 被移除，使用php://input代替
 * 7.1 :2015.12.3
   - 减少内存分配次数
   - 多使用栈内存
@@ -94,19 +93,19 @@ The PHP Interpreter <http://www.php.net>
   - 使用大块连续内存代替小块破碎内存
   - 空合并赋值操作符:第一个操作数是存在并且不为 NULL，则返回该操作数。否则返回第二个操作数
   - 参数以及返回值的类型现在可以通过在类型前加上一个问号使之允许为空。当启用这个特性时，传入的参数或者函数返回的结果要么是给定的类型，要么是null
-  - 返回值声明为 void 类型的方法要么干脆省去 return 语句。对于 void来说，NULL 不是一个合法的返回值。
+  - 返回值声明为 void 类型的方法要么干脆省去 return 语句。对于 void来说，NULL 不是一个合法的返回值
   - 类常量可见性
-  - iterable 伪类:可以被用在参数或者返回值类型中，它代表接受数组或者实现了Traversable接口的对象.
+  - iterable 伪类:可以被用在参数或者返回值类型中，它代表接受数组或者实现了Traversable接口的对象
   - 多异常捕获处理:一个catch语句块现在可以通过管道字符(|)来实现多个异常的捕获。 这对于需要同时处理来自不同类的不同异常时很有用
   - list支持键名
   - 字符串支持负向
-  - 将callback 转闭包:Closure新增了一个静态方法，用于将callable快速地 转为一个Closure 对象。
+  - 将callback 转闭包:Closure新增了一个静态方法，用于将callable快速地 转为一个Closure 对象
   - 对http2服务器推送的支持现在已经被加入到 CURL 扩展
   - 传递参数过少时将抛出错误:过去我们传递参数过少 会产生warning。php7.1开始会抛出error
   - 移除了ext/mcrypt拓展
 * 7.2
   - 增加新类型object
-  - 通过名称加载扩展:扩展文件不再需要通过文件加载 (Unix下以.so为文件扩展名，在Windows下以 .dll 为文件扩展名) 进行指定。可以在php.ini配置文件进行启用
+  - 通过名称加载扩展:扩展文件不再需要通过文件加载 (Unix下以.so为文件扩展名，在Windows下以 .dll 为文件扩展名)进行指定。可以在php.ini配置文件进行启用
   - 允许重写抽象方法:当一个抽象类继承于另外一个抽象类的时候，继承后的抽象类可以重写被继承的抽象类的抽象方法
   - 使用Argon2算法生成密码散列:Argon2 已经被加入到密码散列（password hashing） API (这些函数以 password_ 开头), 以下是暴露出来的常量
   - 新增 PDO 字符串扩展类型,准备支持多语言字符集，PDO的字符串类型已经扩展支持国际化的字符集。以下是扩展的常量：
@@ -119,20 +118,20 @@ The PHP Interpreter <http://www.php.net>
   - count 作用在不是 Countable Types 将发生warning
   - 不带引号的字符串:在之前不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。现在将会产生waring
   - __autoload 被废弃
-  - each 被废弃:使用此函数遍历时，比普通的 foreach 更慢，并且给新语法的变化带来实现问题。因此它被废弃了。
+  - each 被废弃:使用此函数遍历时，比普通的 foreach 更慢，并且给新语法的变化带来实现问题。因此被废弃了
   - is_object、gettype修正:is_object 作用在**__PHP_Incomplete_Class** 将反正 true;gettype作用在闭包在将正确返回resource
-  - Convert Numeric Keys in Object/Array Casts:把数组转对象的时候，可以访问到整型键的值。
+  - Convert Numeric Keys in Object/Array Casts:把数组转对象的时候，可以访问到整型键的值
 * 7.3
   - 添加了 array_key_first() 和 array_key_last() 来获取数组的第一个和最后一个元素的键名
-  - 添加了 fpm_get_status() 方法, 来获取FPM状态数组,
+  - 添加了 fpm_get_status() 方法, 来获取FPM状态数组
   - 添加了几个FPM的配置项, 用来控制日志单行最大字符数, 日志缓冲等: log_limit, log_buffering, decorate_workers_output
   - libcurl >= 7.15.5 is now required
   - curl 添加了一堆常量
   - `json_decode `添加了一个常量`, JSON_THROW_ON_ERROR`,如果解析失败可以抛出异常,而不是通过之前的方法 `json_last_error()` 去获取
   - spl autoloader: 如果一个加载失败, 剩下的都不再执行
   - 说明了一些循环引用的情况会得到怎样的结果
-  - heredoc/nowdoc 中如果遇到跟定界符相同的字符串就认为结束了,而最后真正的结束符则会被认为是语法错误;
-  - 在 循环+switch-case 语句的case 中使用continue 会报warning,说明了, 静态变量在被继承时, 如果在子类里发生了循环引用, 父类里的静态变量会跟着变
+  - heredoc/nowdoc 中如果遇到跟定界符相同的字符串就认为结束了,而最后真正的结束符则会被认为是语法错误
+  - 在 循环+switch-case 语句的case 中使用continue 会报warning,说明了, 静态变量在被继承时,如果在子类里发生了循环引用,父类里的静态变量会跟着变
 * 7.4
   - 短闭包函数
   - 预加载:框架启动时在内存中加载文件，而且在后续请求中永久有效,每次预加载的文件发生改变时，框架需要重新启动
@@ -188,37 +187,38 @@ php -d opcache.jit=1205 -dopcache.jit_debug=0x01
 
 ## 原理
 
-* PHP是以多进程模型设计的，好处是请求之间互不干涉，一个请求失败也不会对其他进程造成影响
-* Zend引擎读取.php文件
+* 以多进程模型设计
+  - 子进程结束以后, 内核会负责回收资源
+  - 请求之间互不干涉，子进程异常退出不会导致整个进程Thread退出. 父进程还有机会重建流程
 * 实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
 * PHP 代码 => Token => 抽象语法树 => Opcodes => 执行
   - 源代码通过词法分析得到 Token： Token 是 PHP 代码被切割成的有意义的标识。PHP7 一共有 137 种 Token，在 zend_language_parser.h 文件中做了定义
   - 基于语法分析器将 Token 转换成抽象语法树（AST）：Token 就是一个个的词块，但是单独的词块不能表达完整的语义，还需要借助一定的规则进行组织串联。所以就需要语法分析器根据语法匹配 Token，将 Token 进行串联。语法分析器串联完 Token 后的产物就是抽象语法树（AST，Abstract Syntax Tree）。 AST 是 PHP7 版本的新特性，之前版本的 PHP 代码的执行过程中是没有生成 AST 这一步的。它的作用主要是实现了 PHP 编译器和解释器的解耦，提升了可维护性。
   - 语法树转换成 Opcode
-  - 执行 Opcodes： opcodes 是 opcode 的集合形式，是 PHP 执行过程中的中间代码。
+  - 执行 Opcodes： opcodes 是 opcode 的集合形式，是 PHP 执行过程中的中间代码
 * 开启 opcache：指将 opcodes 进行缓存。通过省去从源码到 opcode 的阶段，引擎直接执行缓存好的 opacode，以提升性能
-* 四层体系构成，从下到上依次是 Zend 引擎、Extensions 扩展、SAPI 接口、上层应用
-* Zend 引擎:PHP4 以后加入 PHP 的，是对原有PHP解释器的重写，整体使用 C 语言进行开发。作用是将PHP代码翻译为一种叫opcode的中间语言，它类似于JAVA的ByteCode（字节码）。引擎对PHP代码会执行四个步骤：
-  - 词法分析 Scanning（Lexing），将 PHP 代码转换为语言片段（Tokens）
-  - 解析 Parsing， 将 Tokens 转换成简单而有意义的表达式
-  - 编译 Compilation， AST 将表达式编译成Opcode
-  - 执行 Execution，虚拟机顺序执行Opcode，每次一条，以实现PHP代码所表达的功能
-  - APC、Opchche 这些扩展可以将Opcode缓存以加速PHP应用的运行速度，使用它们就可以在请求再次来临时省略前三步
-  - 引擎也实现了基本的数据结构、内存分配及管理，提供了相应的API方法供外部调用
-* Extensions 扩展:常见的内置函数、标准库都是通过extension来实现的，这些叫做PHP的核心扩展，用户也可以根据自己的要求安装PHP的扩展
-* SAPI(Server Application Programming Interface) 服务端应用编程接口：通过一系列钩子函数使得PHP可以和外围交换数据
-  - SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性
-  - 通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式
-  - 几种常用的 SAPI：
-    + apache2handler: Apache 扩展，编译后生成动态链接库，配置到 Apache 下。当有 http 请求到 Apache 时，根据配置会调用此动态链接库来执行 PHP 代码，完成与 PHP 的交互。
-    + cgi-fcgi: 编译后生成支持 CGI 协议的可执行程序，webserver（如 NGINX）通过 CGI 协议把请求传给 CGI 进程，CGI 进程根据请求执行相应代码后将执行结果返回给 webserver。
-    + fpm-fcgi: fpm 是 FastCGI 进程管理器。以 NGINX 服务器为例，当有请求发送到 NGINX 服务器，NGINX 按照 FastCGI 协议把请求交给 php-fpm 进程处理。
-    + cli: PHP 的命令行交互接口
-      * Zend 目录 Zend 目录是 PHP 的核心代码。PHP 中的内存管理，垃圾回收、进程管理、变量、数组实现等均在该目录的源码里。
-      * main 目录 main 目录是 SAPI 层和 Zend 层的黏合剂。Zend 层实现了 PHP 脚本的编译和执行，sapi 层实现了输入和输出的抽象，main 目录则在它们中间起着承上启下的作用。承上，解析 SAPI 的请求，分析要执行的脚本文件和参数；启下，调用 zend 引擎之前，完成必要的模块初始化等工作。
-      * ext 目录 ext 是 PHP 扩展相关的目录，常用的 array、str、pdo 等系列函数都在这里定义。
-      * TSRM TSRM（Thread Safe Resource Manager）—— 线程安全资源管理器， 是用来保证资源共享的安全。
-* 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用都是上层应用
+* 四层体系构成，从上到下依次
+  - 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用
+  - SAPI(Server Application Programming Interface) 服务端应用编程接口：通过一系列钩子函数使得PHP可以和外围交换数据
+    + SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性
+    + 通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式
+  - Extensions 扩展:常见的内置函数、标准库都是通过extension来实现的，这些叫做PHP的核心扩展，用户也可以根据自己的要求安装PHP的扩展
+    + 常用 SAPI
+      * apache2handler: Apache 扩展，编译后生成动态链接库，配置到 Apache 下。当有 http 请求到 Apache 时，根据配置会调用此动态链接库来执行 PHP 代码，完成与 PHP 的交互。
+      * cgi-fcgi: 编译后生成支持 CGI 协议的可执行程序，webserver（如 NGINX）通过 CGI 协议把请求传给 CGI 进程，CGI 进程根据请求执行相应代码后将执行结果返回给 webserver。
+      * fpm-fcgi: fpm 是 FastCGI 进程管理器。以 NGINX 服务器为例，当有请求发送到 NGINX 服务器，NGINX 按照 FastCGI 协议把请求交给 php-fpm 进程处理。
+      * cli: PHP 的命令行交互接口
+        - Zend 目录 Zend 目录是 PHP 的核心代码。PHP 中的内存管理，垃圾回收、进程管理、变量、数组实现等均在该目录的源码里。
+        - main 目录 main 目录是 SAPI 层和 Zend 层的黏合剂。Zend 层实现了 PHP 脚本的编译和执行，sapi 层实现了输入和输出的抽象，main 目录则在它们中间起着承上启下的作用。承上，解析 SAPI 的请求，分析要执行的脚本文件和参数；启下，调用 zend 引擎之前，完成必要的模块初始化等工作
+        - ext 目录 ext 是 PHP 扩展相关的目录，常用的 array、str、pdo 等系列函数都在这里定义
+        - TSRM TSRM（Thread Safe Resource Manager）—— 线程安全资源管理器， 是用来保证资源共享的安全
+  - Zend 引擎:PHP4 以后加入 PHP 的，是对原有PHP解释器的重写，整体使用 C 语言进行开发。作用是将PHP代码翻译为一种叫opcode的中间语言，它类似于JAVA的ByteCode（字节码）。引擎对PHP代码会执行四个步骤：
+    + 词法分析 Scanning（Lexing），将 PHP 代码转换为语言片段（Tokens）
+    + 解析 Parsing， 将 Tokens 转换成简单而有意义的表达式
+    + 编译 Compilation， AST 将表达式编译成Opcode
+    + 执行 Execution，虚拟机顺序执行Opcode，每次一条，以实现PHP代码所表达的功能
+    + APC、Opchche 这些扩展可以将Opcode缓存以加速PHP应用的运行速度，使用它们就可以在请求再次来临时省略前三步
+    + 引擎也实现了基本的数据结构、内存分配及管理，提供了相应的API方法供外部调用
 * 请求
   - php_module_startup()
   - php_request_startup()
@@ -465,9 +465,6 @@ php -dvld.active=1 -dvld.excute=0 at.php # excute =0 opcode在么 并不执行
 
 ### Cli
 
-* 用多进程
-  - 子进程结束以后, 内核会负责回收资源
-  - 子进程异常退出不会导致整个进程Thread退出. 父进程还有机会重建流程
 * 一个常驻主进程, 只负责任务分发, 逻辑更清楚
 * 实现定时任务
 * 开发桌面应用就是使用PHP-CLI和GTK包
@@ -788,7 +785,7 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 * 错误控制操作符:@,当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉
 * 三元运算符：`$first ? $second : $third`
 
-### 函数 function
+## 函数 function
 
 * 一段可以重复使用代码
 * 参数
@@ -801,27 +798,25 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 * 可变函数：一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数
 * 返回值
 * 递归函数
+* 匿名函数 Anonymous functions ｜ 闭包 Closure
+  - 5.3.0中引入，和普通PHP函数很像：常用句法相同，也接受参数，而且能返回值。不过闭包没有函数名
+  - 允许临时创建一个没有指定名称的函数
+  - 变量值是一个闭包
+  - 闭包对象实现了`__invoke()`魔术方法，只要变量名后有()，PHP就会查找并调用__invoke方法
+  - 闭包在匿名函数的基础上增加了与外部环境的变量交互，不能直接访问闭包外的变量，通过 use 关键字把父作用域变量及状态附加到PHP闭包中
+  - 在闭包中使用$this关键字获取闭包内部状态
+    * bindTo:可以把闭包的内部状态绑定到其他对象上。方法第二个参数作用是指定绑定闭包的那个对象所属的PHP类.闭包就可以在其他地方访问邦定闭包的对象中受保护和私有的成员变量
+    * 框架经常使用bindTo方法把路由URL映射到匿名回调函数上，框架会把匿名回调函数绑定到应用对象上，这样在匿名函数中就可以使用$this关键字引用重要的应用对象
+  - 场景
+    + 作回调函数（callback）使用
+  - 闭包内所引用的变量不能被外部所访问,在闭包内对变量的改变从而影响到上下文变量的值，使用&的引用传参
+  - Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态
 
-## 匿名函数 Anonymous functions ｜ 闭包 Closure
-
-* 5.3.0中引入，和普通PHP函数很像：常用句法相同，也接受参数，而且能返回值。不过闭包没有函数名
-* 允许临时创建一个没有指定名称的函数
-* 变量值是一个闭包
-* 闭包对象实现了`__invoke()`魔术方法，只要变量名后有()，PHP就会查找并调用__invoke方法
-* 闭包在匿名函数的基础上增加了与外部环境的变量交互，不能直接访问闭包外的变量，通过 use 关键字把父作用域变量及状态附加到PHP闭包中
-* 在闭包中使用$this关键字获取闭包内部状态
-  + bindTo:可以把闭包的内部状态绑定到其他对象上。方法第二个参数作用是指定绑定闭包的那个对象所属的PHP类.闭包就可以在其他地方访问邦定闭包的对象中受保护和私有的成员变量
-  + 框架经常使用bindTo方法把路由URL映射到匿名回调函数上，框架会把匿名回调函数绑定到应用对象上，这样在匿名函数中就可以使用$this关键字引用重要的应用对象
-* 场景
-  - 作回调函数（callback）使用
-* 闭包内所引用的变量不能被外部所访问,在闭包内对变量的改变从而影响到上下文变量的值，使用&的引用传参
-* Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态
-
-### 状态管理
+## 状态管理
 
 服务器端存储技术
 
-* cookie是一个小段信息，存储在客户端浏览器中。用于识别用户。cookie在服务器端创建并保存到客户端浏览器。 每当客户端向服务器发送请求时，cookie都会嵌入请求。 这样，cookie数据信息可以在服务器端接收
+* cookie是一个小段信息，存储在客户端浏览器中。用于识别用户。cookie在服务器端创建并保存到客户端浏览器。每当客户端向服务器发送请求时，cookie都会嵌入请求。 这样，cookie数据信息可以在服务器端接收
   - 设置
   - 获取
   - 删除
@@ -864,8 +859,8 @@ $value=$_COOKIE["CookieName"];//returns cookie value
 
 ### 文件
 
-* 创建文件
-* 访问文件
+* 创建
+* 访问
   - 相对文件 `foo.txt => currentdirectory/foo.txt`
   - 相对路径 `subdirectory/foo.txt=> currentdirectory/subdirectory/foo.txt`
   - 绝对路径 `/main/foo.txt=> /main/foo.txt`
@@ -894,7 +889,7 @@ $value=$_COOKIE["CookieName"];//returns cookie value
   - LOCK_NB 如果不希望 flock () 在锁定时堵塞
   - 注意
     + 设置一个超时时间
-* 不使用 flock 函数，借用临时文件来解决读写冲突的问题，需要更新的文件考虑一份到我们的临时文件目录，将文件最后修改时间保存到一个变量，并为这个临时文件取一个随机的，不容易重复的文件名。当对这个临时文件进行更新后，再检测原文件的最后更新时间和先前所保存的时间是否一致。如果最后一次修改时间一致，就将所修改的临时文件重命名到原文件，为了确保文件状态同步更新，所以需要清除一下文件状态。
+  - 不使用 flock 函数，借用临时文件来解决读写冲突的问题，需要更新的文件考虑一份到我们的临时文件目录，将文件最后修改时间保存到一个变量，并为这个临时文件取一个随机的，不容易重复的文件名。当对这个临时文件进行更新后，再检测原文件的最后更新时间和先前所保存的时间是否一致。如果最后一次修改时间一致，就将所修改的临时文件重命名到原文件，为了确保文件状态同步更新，所以需要清除一下文件状态。
 * 读取：`string fread (resource $handle , int $length )`函数用于读取文件的数据
   - 参数：文件资源($handle 由fopen()函数创建的文件指针)和文件大小($length 要读取的字节长度)
   - 逐行读取文件：`string fgets ( resource $handle [, int $length ] )`函数用于从文件中读取单行数据内容
@@ -1167,7 +1162,7 @@ spl_autoload_register(function ($class){
 * __construct 构造函数 初始化赋值 实例化对象的时候自己调用
 * __destruct 析构方法，PHP 将在对象被销毁前（即从内存中清除前）调用这个方法
 * __get ($property) 当调用一个未定义的属性时，此方法会被触发，传递的参数是被访问的属性名
-* __set ($property, $value)给一个未定义的属性赋值时，此方法会被触发，传递的参数是被设置的属性名和值这里的没有声明包括当使用对象调用时，访问控制为 proteced,private 的属性（即没有权限访问的属性）。
+* __set ($property, $value)给一个未定义的属性赋值时，此方法会被触发，传递的参数是被设置的属性名和值这里的没有声明包括当使用对象调用时，访问控制为 proteced,private 的属性（即没有权限访问的属性）
 * __isset ($property) 当在一个未定义的属性上调用 isset () 函数时调用此方法
 * __unset ($property) 当在一个未定义的属性上调用 unset () 函数时调用此方法
 * _call ($method, $arg_array) 当调用一个未定义的方法是调用此方法
@@ -1371,7 +1366,7 @@ $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 * 生成器只是向前进的迭代器，这意味着不能使用生成器在数据集中执行后退、快进或查找操作，只能让生成器计算并产出下一个值
 * 提供了一种更容易的方法来实现简单的对象迭代，性能开销和复杂性大大降低
 * 一个生成器函数看起来像一个普通的函数，不同的是普通函数返回一个值，而一个生成器可以yield生成许多它所需要的值
-* 一个简单的例子就是使用生成器来重新实现 range() 函数。 标准的 range() 函数需要在内存中生成一个数组包含每一个在它范围内的值，然后返回该数组, 结果就是会产生多个很大的数组。 比如，调用 range(0, 1000000) 将导致内存占用超过 100 MB。
+* 一个简单的例子就是使用生成器来重新实现 range() 函数。 标准的 range() 函数需要在内存中生成一个数组包含每一个在它范围内的值，然后返回该数组, 结果就是会产生多个很大的数组。 比如，调用 range(0, 1000000) 将导致内存占用超过 100 MB
 * 当一个生成器被调用的时候，返回一个可以被遍历的对象.当遍历这个对象的时候(例如通过一个foreach循环)，PHP 将会在每次需要值的时候调用生成器函数，并在产生一个值之后保存生成器的状态，这样它就可以在需要产生下一个值的时候恢复调用状态。
 * 一旦不再需要产生更多的值，生成器函数可以简单退出，而调用生成器的代码还可以继续执行，就像一个数组已经被遍历完了
 * 生成器函数核心是 yield 关键字。最简单的调用形式看起来像一个return申明，不同之处在于普通return会返回值并终止函数的执行，而yield会返回一个值给循环调用此生成器的代码并且只是暂停执行生成器函数。
@@ -1385,19 +1380,15 @@ $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 ## 调用外部命令
 
 * 能执行linux系统的shell命令:可以获得命令执行的状态码
-
   - system() 输出并返回最后一行shell结果
-
     + 关掉 安全模式 safe_mode = off
     + 禁用函数列表 disable_functions = proc_open, popen, exec, system, shell_exec, passthru 把 exec 去掉
-
   - exec() 不输出结果，返回最后一行shell结果，所有结果可以保存到一个返回的数组里面。
+  - passthru() 只调用命令，把命令的运行结果原样地直接输出到标准输出设备上
 
-  - passthru() 只调用命令，把命令的运行结果原样地直接输出到标准输出设备上。
-
-    ```sh
-    system("/usr/a.sh");
-    ```
+```sh
+system("/usr/a.sh");
+```
 
 ## 过滤
 
@@ -1729,7 +1720,7 @@ docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/l
 * 一个分层PHP性能分析工具。报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情况。
 * [longxinH/xhprof](https://github.com/longxinH/xhprof):PHP7 support
 * 工具
-  - [EvaEngine/xhprof.io ](https://github.com/EvaEngine/xhprof.io):GUI to analyze the profiling data collected using XHProf – A Hierarchical Profiler for PHP. http://xhprof.io/
+  - [EvaEngine/xhprof.io](https://github.com/EvaEngine/xhprof.io):GUI to analyze the profiling data collected using XHProf – A Hierarchical Profiler for PHP. http://xhprof.io/
   - [perftools/xhgui](https://github.com/perftools/xhgui):A graphical interface for XHProf data built on MongoDB
 * 方法
   - xhprof_disable — 停止 xhprof 分析器
@@ -1856,7 +1847,7 @@ $host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
   - 扩展实现高频逻辑
   - runtime优化:HHVM
 
-## web
+## 编码
 
 ```php
 <?php header("Content-type: text/html; charset=utf-8"); ?>
