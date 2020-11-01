@@ -2,7 +2,8 @@
 
 GraphiQL & the GraphQL LSP Reference Ecosystem for building browser & IDE tools.
 
-* 向服务端发送一次描述信息，告知客户端所需的所有数据，数据的控制甚至可以精细到字段，达到一次请求获取所有所需数据的目的
+* 向服务端发送一次描述信息，告知客户端所需所有数据
+* 数据控制甚至可以精细到字段，达到一次请求获取所有所需数据目的
 
 ## 请求与响应
 
@@ -73,7 +74,7 @@ query myQry ($name: String!) {
 ## 参考
 
 * [教程](https://www.howtographql.com/)
-* [ graphql / graphql-spec ](https://github.com/graphql/graphql-spec);GraphQL is a query language and execution engine tied to any backend service. https://spec.graphql.org
+* [graphql-spec ](https://github.com/graphql/graphql-spec);GraphQL is a query language and execution engine tied to any backend service. https://spec.graphql.org
 * 《GraphQL 学习之道》
 * [chentsulin/awesome-graphql](https://github.com/chentsulin/awesome-graphql):Awesome list of GraphQL & Relay## 实例
 * [learnapollo/learnapollo](https://github.com/learnapollo/learnapollo)

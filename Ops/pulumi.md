@@ -3,6 +3,7 @@
 * Pulumi - Modern Infrastructure as Code. Any cloud, any language rocket https://www.pulumi.com/
 * 诞生于 2017 年，是微软和亚马逊云服务的老兵 Joe Duffy（CEO） 和 Luke Hoban（CTO）创建的，对标 terraform 的一款软件
 * 使用熟悉的编程语言来编写 devOps 代码
+* 专注于原生云架构，包括容器、无服务器函数和数据服务，并为Kubernetes 提供了良好的支持
 
 ```
 import * as pulumi from "@pulumi/pulumi";

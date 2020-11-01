@@ -9,7 +9,6 @@ Terraform is a tool for building, changing, and combining infrastructure safely 
 	- terraform cloud 才刚刚起步
 
 ```
-
 provider "aws" {
   region = "us-west-2"
 }

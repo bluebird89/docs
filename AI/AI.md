@@ -404,6 +404,7 @@
 ## 图书
 
 * 《人工智能极简编程入门（基于Python）》
+* [paip-lisp](https://github.com/norvig/paip-lisp):Lisp code for the textbook "Paradigms of Artificial Intelligence Programming"
 
 ## 信息
 

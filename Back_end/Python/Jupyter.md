@@ -292,7 +292,7 @@ jupyter-nbextension enable rise --py --sys-prefix
 * pyspark
 * spark-sql magic %%sql
 
-## [ jupyterlab / jupyterlab ](https://github.com/jupyterlab/jupyterlab)
+## [JupyterLab](https://github.com/jupyterlab/jupyterlab)
 
 JupyterLab computational environment. https://jupyterlab.readthedocs.io/
 
