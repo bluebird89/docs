@@ -1807,7 +1807,12 @@ source ~/.bash_profile
 * Marmot是一个来自于谷歌的工作流执行引擎，用于处理SRE和Ops需要的工作流。它被设计为处理基础架构变更的工具，但它可以和Kubernetes一起使用
 * Ark 是一个用于管理从你的Kubernetes资源和卷做灾难恢复的工具。Ark提供一个简单并且鲁棒的方式来备份和从系列的检查点恢复Kubernetes资源和持久化的卷。备份文件被存储在一个对象存储服务
 * Sysdig是一个容器排错工具，它可以捕获系统调用和来自于Linux内核的事件。简单的说，对于整个集群，Sysdig就是strace + tcpdump + htop + iftop + lsof + wireshark。
-* [rancher / k3s](https://github.com/rancher/k3s):Lightweight Kubernetes https://k3s.io/
+* [k3s](https://github.com/rancher/k3s):Lightweight Kubernetes https://k3s.io/
+    - 轻量级的用于物联网和边缘计算的 Kubernetes 发行版
+    - 被打包成一个单独的二进制文件，对于操作系统的依赖性微乎其微，这使得它非常易于运维和使用
+    - 使用 sqlite3 而非 etcd 作为默认的存储后端
+    - 由于所有相关的组件都运行在同一个进程里，这使得 K3s 的内存占用非常低
+    - 通过剥离不相关的第三方存储驱动和云提供商，K3s 的二进制文件得以控制得非常小。在资源受限的环境中，K3s 是一个值得考虑的非常不错的选择
     - `curl -sfL https://get.k3s.io | sh -`
 * [ crossplane / crossplane ](https://github.com/crossplane/crossplane):Manage any infrastructure your applications need directly from Kubernetes https://crossplane.io
 

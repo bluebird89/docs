@@ -2352,7 +2352,7 @@ pecl channel-update pecl.php.net
 * [rectorphp/rector](https://github.com/rectorphp/rector):Instant Upgrades for PHP Applications https://www.tomasvotruba.cz/blog/2018/02/19/rector-part-1-what-and-how/
 * 环境平台
   - [XAMPP](https://www.apachefriends.org/index.html)
-  - [wamp](link)
+  - [wampserver](link)
   - [mamp](https://www.mamp.info)
     + http://localhost:8888/MAMP/
     + /Applications/MAMP/htdocs
