@@ -12,11 +12,11 @@ npm install -g typescript
 
 使用 TypeScript 编译器，名称叫 tsc，可将编译结果生成 js 文件 `tsc filename.ts`
 
-* 类型批注：提供静态类型以在编译时启动类型检查。这是可选的，而且可以被忽略而使用 JavaScript 常规的动态类型。
+* 类型批注：提供静态类型以在编译时启动类型检查。可选的，而且可以被忽略而使用 JavaScript 常规的动态类型
   - 基本类型的批注是number, bool和string。而弱或动态类型的结构则是any类型
   - 可以被导出到一个单独的声明文件以让使用类型的已被编译为JavaScript的TypeScript脚本的类型信息可用。批注可以为一个现有的JavaScript库声明，就像已经为Node.js和jQuery所做的那样
 * 接口：对象作为数据集合
-* 箭头函数表达式（lambda表达式）：()=>{something}或()=>something 相当于js中的函数,它的好处是可以自动将函数中的this附加到上下文中。
+* 箭头函数表达式（lambda表达式）：()=>{something}或()=>something 相当于js中的函数,它的好处是可以自动将函数中的this附加到上下文中
 * 类：支持集成了可选的类型批注支持的ECMAScript 6的类。public 和 private 访问修饰符。Public 成员可以在任何地方访问， private 成员只允许在类中访问.默认为private
 * 继承：可以继承一个已存在的类并创建一个派生类，继承使用关键字 extends
   - 继承了父类（super）的属性
@@ -29,6 +29,26 @@ superShout() {
   return super.shoutout();
 }
 ```
+
+## 数据类型
+
+* Boolean
+* Number
+* String
+* Array
+* Tuple 类似于数组，但是成员数量是已知的
+* Enum 一个常量集合。创建一个Enum，就创建了一个数据的新类型
+* Any 表示接受任何值
+* Void 只能接受undefined和null作为值，主要用来标记不返回任何值的函数返回值的类型
+* Function
+
+## class
+
+* 当通过this为实例分配属性时，必须添加属性定义
+* 实例属性还可以用public或private修饰
+* 继承与ES6的继承是一致的
+* Interface用来定义和描述Class
+  - 属性名后面如果有问号，就表示可以不部署
 
 ## 教程
 

@@ -268,6 +268,9 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [xo/usql](https://github.com/xo/usql):Universal command-line interface for SQL databases
 * [ClickHouse](https://github.com/ClickHouse/ClickHouse):ClickHouse is a free analytics DBMS for big data https://clickhouse.tech
 * [franchise](https://github.com/HVF/franchise)：🍟 a notebook sql client. what you get when have a lot of sequels. https://franchise.cloud
+* [Debezium](link)
+  - 一个变更数据捕获（Change Data Capture, CDC） 平台，可以将数据库变更流式传输到Kafka 的 topics
+  - 对数据库日志文件中的变更做出反应，并具有多个CDC连接器，适用于多种数据库，其中包括Postgres、MySQL、Oracle 和 MongoDB
 
 ## 参考
 

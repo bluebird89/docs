@@ -404,6 +404,7 @@ Socks 主机 127.0.0.1 7891
   - `go get -u -v github.com/Dreamacro/clash`
 * [](https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt)
 *　KoolClash
+* [Diode](https://support.diode.io/article/ss32engxlq)以将本机（localhost）的网站公开到互联网上，提供一个二级域名，使得外部用户可以访问
 
 ```
 #  /usr/share/applications/clash.desktop
