@@ -38,7 +38,7 @@
   - 不但节省开发时间，有助于建立更稳定的应用，而且减少了重复编码的开发
   - 可以帮助初学者建立更稳定的应用服务，这可以让你花更多的时间去创建实际的Web应用程序，而不是花时间写重复的代码
 * 通用
-  - [Laravel](https://laravel.com/): 另一个PHP框架 (L5)
+  - [Laravel](https://laravel.com/): 一个PHP框架 (L5)
   - [Symfony](https://symfony.com/): 一个独立组件组成的框架 (SF)
   - [Aura PHP](http://auraphp.com/): 一个独立的组件框架
   - [CakePHP](https://cakephp.org/): 一个快速应用程序开发框架 (CP)
@@ -239,7 +239,7 @@ open http://127.0.0.1:8000
 
 ## 持续集成 Continuous Integration
 
-* [CircleCI](https://circleci.com)[: 一个持续集成平台
+* [CircleCI](https://circleci.com): 一个持续集成平台
 * [GitlabCi](https://about.gitlab.com/gitlab-ci/): 使用GitLab CI测试、构建、部署你的代码，像TravisCI
 * [Jenkins](https://jenkins.io/index.html): 一个(http://jenkins-php.org/index.html)[PHP支持]的持续集成平台
 * [JoliCi](https://github.com/jolicode/JoliCi): 一个用PHP编写的由Docker支持的持续集成的客户端
