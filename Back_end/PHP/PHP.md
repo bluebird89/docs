@@ -11,23 +11,10 @@ The PHP Interpreter <http://www.php.net>
   - 开发方便
   - 效率高
 * 缺点
-  - 性能差：在密集运算的场景下比 C 、C++ 相差很大
+  - 性能差：密集运算场景下比 C 、C++ 相差很大
   - 不可以直接操作底层，需要依赖扩展库来提供 API 实现
-  - **可控**：常驻内存运行环境的缺失
-  - 不可控：进程的入口点和退出时机由额外的程序控制，执行PHP脚本的时机仍然由外部驱动
-* 方向
-  - SPL库系列请仔细研究
-  - PHP的socket模块以及pcntl模块
-  - 从工程代码组织角度去理解和学习设计模式和面向对象OOP
-  - 接纳一门新的语言。推荐Golang或者研究C语言
-  - 一切基于基础之上的上层应用都是海市蜃楼，犹如过眼云烟。不变的永远是基于事件监听的异步非阻塞IO
-  - 技术
-    + 分布式配置中心
-    + 服务熔断、限流、降级
-    + 异步框架
-    + 分布式KV数据库
-    + 微服务架构
-    + Docker发布代码
+  - **可控**：进程入口点和退出时机由额外的程序控制，执行PHP脚本时机仍然由外部驱动
+  - 不可控：常驻内存运行环境缺失
 
 ## 版本
 
@@ -258,6 +245,15 @@ Hugepagesize:       2048 kB
 
 ## 安装
 
+* 综合环境
+  - [XAMPP](https://www.apachefriends.org/index.html)
+  - [wampserver](link)
+  - [mamp](https://www.mamp.info)
+    + http://localhost:8888/MAMP/
+    + /Applications/MAMP/htdocs
+    + MySQL port：8889
+  - Wnmp:Version of nginx for Windows uses the native Win32 API (not the Cygwin emulation layer). Only the select() connection processing method is currently used, so high performance and scalability should not be expected.
+    + `tasklist /fi "imagename eq nginx.exe" # 查看进程，没有查看error.log`
 * php-dev
   - phpize
     + 有版本号，依赖安装指定目录
@@ -267,18 +263,14 @@ Hugepagesize:       2048 kB
 * php-cgi
 * 程序 `/usr/local/Cellar/php71/7.1.12_23`
 * 配置 `/usr/local/etc/php/7.1/`
-* 通过php-fpm进程运行 `/usr/local/opt/php71/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf :nginx`
-* built-in web server
-  - php_sapi_name() return cli-server:the current script is served with the PHP built-in server
-  - performs suboptimally because it handles one request at a time, and each HTTP request is blocking
-  - supports only a limited number of mimetypes
-  - limited URL rewriting with router scripts.
 * php71卸载后php-fpm仍然运行
   - `brew services stop php`
 * 准备
   - libpcre3-dev: Perl 5 Compatible Regular Expression Library
   - gettext
-* [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only.
+* [ircmaxell/phpvm](https://github.com/ircmaxell/phpvm):A PHP version manager for CLI PHP
+* [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only
+* [swisnl/php7-upgrade-tools](https://github.com/swisnl/php7-upgrade-tools):A set of tools for upgrading applications to PHP 7
 
 ```sh
 /usr/local/apache2/bin/apachectl start|stop
@@ -303,19 +295,6 @@ php -a
 
 ### Mac
 brew install --without-apache --with-fpm php
-
-/usr/local/Cellar/php/7.2.9_2/bin/pear config-set php_ini /usr/local/etc/php
-/usr/local/Cellar/php/7.2.9_2/bin/pear config-set php_dir /usr/local/share/p
-/usr/local/Cellar/php/7.2.9_2/bin/pear config-set doc_dir /usr/local/share/p
-/usr/local/Cellar/php/7.2.9_2/bin/pear config-set ext_dir /usr/local/lib/php
-/usr/local/Cellar/php/7.2.9_2/bin/pear config-set bin_dir /usr/local/opt/php
-/usr/local/Cellar/php/7.2.9_2/bin/pear config-set data_dir /usr/local/share/
-/usr/local/Cellar/php/7.2.9_2/bin/pear config-set cfg_dir /usr/local/share/p
-/usr/local/Cellar/php/7.2.9_2/bin/pear config-set www_dir /usr/local/share/p
-/usr/local/Cellar/php/7.2.9_2/bin/pear config-set man_dir /usr/local/share/m
-/usr/local/Cellar/php/7.2.9_2/bin/pear config-set test_dir /usr/local/share/
-/usr/local/Cellar/php/7.2.9_2/bin/pear config-set php_bin /usr/local/opt/php
-/usr/local/Cellar/php/7.2.9_2/bin/pear update-channels
 
 ## 配置文件添加扩展
 include=/usr/local/etc/php/7.1/conf.d/*.ini
@@ -401,79 +380,20 @@ TestFramework -> PHPUnit
 php -S localhost:8000 -c app/config/php.ini router.php
 ```
 
-### 扩展
-
-* `php-config --extension-dir`
-* apt或者yum命令安装
-* [PECL](http://pecl.php.net/):PHP Extension Community Library，管理着最底层的PHP扩展。用 C 写的
-* [PEAR](http://pear.php.net/)：PHP Extension and Application Repository，管理着项目环境的扩展。用 PHP 写的
-  - 编译好的依赖：/usr/lib/php
-* Composer：和PEAR都管理着项目环境的依赖，这些依赖也是用 PHP 写的，区别不大。但 composer 却比 PEAR 更受欢迎
-* 扩展
-  - vld:查看代码opcache
-
-```sh
-php -m # 查看添加扩展
-php --ri xhprof
-php --ini
-
-ln -s /etc/php5/mods-available/redis.ini /etc/php5/cli/conf.d/10-redis.ini
-ln -s /etc/php5/mods-available/redis.ini /etc/php5/apache2/conf.d/10-redis.ini
-
-apt-cache search memcached
-apt-get install -y php5-memcached
-
-sudo apt-get install php-xml php7.*-xml php-dev php7.*-dev
-
-# Invalid argument supplied for foreach() in Command.php on line 249
-sudo apt isntall php7.4-xml
-# Trying to access array offset on value of type bool in PEAR/REST.php on line 187
-mkdir -p /tmp/pear/cache
-
-sudo apt install php-pear
-
-curl -O https://pear.php.net/go-pear.phar
-sudo php -d detect_unicode=0 go-pear.phar
-#  1 Installation base /usr/local/pear
-#  4 Binaries directory /usr/local/bin
-
-phpize -v # 需要安装php7.*-dev
-cd extname
-phpize
-./configure
-make
-make install
-# 配置文件添加扩展
-extension="swoole.so"
-
-sudo pecl channel-update pecl.php.net
-sudo pecl update-channels
-sudo pecl search|install|uninstall memcached
-sudo pecl install mcrypt
-
-sudo vim /etc/php/7.4/cli/php.ini
-extension=mcrypt.so
-
-php -m | grep mcrypt
-
-pear update-channels
-pear upgrade
-
-pecl install channel://pecl.php.net/vld-0.16.0
-php -dvld.active=1 -dvld.excute=0 at.php # excute =0 opcode在么 并不执行
-```
-
 ### Cli
 
-* 一个常驻主进程, 只负责任务分发, 逻辑更清楚
+* 一个常驻主进程,只负责任务分发
 * 实现定时任务
 * 开发桌面应用就是使用PHP-CLI和GTK包
 * linux下用php编写shell脚本
-* 内置的Web服务器不能在生成环境使用，只能在本地开发环境中使用
-  - 性能不佳。一次只能处理一个请求，其他请求会受到阻塞。如果某个进程耗时较长（数据库查询、远程API调用），则整个Web应用会陷入停顿状态。
+* built-in web server 内置Web服务器不能在生成环境使用，只能在本地开发环境中使用
+  - php_sapi_name() return cli-server:the current script is served with the PHP built-in server
+  - performs suboptimally because it handles one request at a time, and each HTTP request is blocking
+  - supports only a limited number of mimetypes
+  - limited URL rewriting with router scripts.
+  - 性能不佳:一次只能处理一个请求，其他请求会受到阻塞。如果某个进程耗时较长（数据库查询、远程API调用），则整个Web应用会陷入停顿状态。
   - 支持媒体类型较少（PHP 5.5.7以后有较大改进）
-  - 路由脚本仅支持少量的URL重写
-* [ircmaxell/phpvm](https://github.com/ircmaxell/phpvm):A PHP version manager for CLI PHP
+  - 路由脚本仅支持少量URL重写
 * 配置
   - The configuration is loaded fresh each time you invoke PHP from the CLI.
   - 配置比较长的max_execution_time
@@ -497,7 +417,290 @@ php -r "echo php_sapi_name();"
 # }
 ```
 
-## 配置
+## PHP-FPM PHP-FastCGI Process Manager
+
+* 安装
+  - bin: /usr/local/php/sbin/php-fpm
+  - 配置
+    + /usr/local/php/etc/php.ini
+    + /usr/local/php/etc/php-fpm.conf
+    + /private/etc/php-fpm.conf
+    + /private/etc/php-fpm.d/www.conf.default
+    + /usr/local/etc/php/7.3/php-fpm.d/www.conf
+* PHP-FPM 是 FastCGI 的实现，提供了多进程 FastCGI 管理功能
+  - master 进程负责与 Web 服务器进行通信，接收 HTTP 请求，再将请求转发给 worker 进程进行处理
+  - worker 进程负责动态执行 PHP 代码，处理完成后，将处理结果返回给 Web 服务器，再由 Web 服务器将结果发送给客户端
+  - 常驻内存启动一些 PHP 进程待命，请求进入时分配一个进程进行处理，进程处理完毕后回收进程，并不销毁进程，让PHP能应对高流量访问请求
+  - Nginx 通过 FastCGI 协议将请求转发给 PHP-FPM 处理，PHP-FPM 的 Worker 进程会抢占式的获得 CGI 请求进行处理，整个的过程是阻塞等待的，也就意味着 PHP-FPM 的进程数有多少能处理的请求也就是多少
+* 高并发场景下，异步非阻塞就显得优势明显
+  - Worker 进程不再同步阻塞去处理一个请求，可以同时处理多个请求，无需 I/O 等待，并发能力极强，可以同时发起或维护大量的请求
+  - 缺点：永无止境的回调
+* 原理
+  - nginx 一般根据请求类型，把请求加载对应 fast-cgi 模块，fascgi管理进程选择 cgi 子进程处理结果，并返回给nginx
+  - socket 是 Nginx 与 PHP 的通信载体
+    + fastcgi_pass 所配置内容告诉 Nginx 接收到用户请求以后该往哪里转发
+    + fastcgi 是 webserver 协议的一种实现
+  - 进程模型
+    + 预派生子进程模式，Apache 就是采用该模式，程序启动后就会创建N个进程，每个子进程进入 Accept，等待新的连接进入
+    + 当客户端连接到服务器时，其中一个子进程会被唤醒，开始处理客户端请求，并且不再接受新的TCP连接
+    + 来一个请求就 fork 一个进程，进程的开销是非常大的，会大大降低吞吐率，并发数由进程数决定
+    + 当此连接关闭时，子进程会释放，重新进入Accept，参与处理新的连接
+  - 运作模式
+    + Nginx 提供 HTTP 服务，所有客户端发起的请求最先抵达 Nginx
+    + Nginx 通过 FastCGI 协议将请求转发给 PHP-FPM 处理
+    + Master 进程为每个请求分配一个 Worker 进程来处理
+    + 在启动阶段设置 HTTP 环境变量，然后通过 PHP 核心代码初始化所有已经启用的 PHP 模块（即扩展），并对此次请求上下文进行初始化，完成这些操作后再调用 Zend 引擎来编译并执行业务逻辑代码
+    + 等待 PHP 脚本解析，业务处理的结果返回，完成后回收子进程，这整个的过程是阻塞等待的，也就意味着 PHP-FPM 的进程数有多少能处理的请求也就是多少，假设 PHP-FPM 有 200 个 Worker进程，一个请求将耗费 1 秒的时间，那么简单的来说整个服务器理论上最多可以处理的请求也就是 200 个，QPS 即为 200/s
+    + Zend 引擎会检查 OpCode 缓存，如果代码片段已经缓存，则从缓存中读取并执行，否则编译成 OpCode 并缓存后执行
+    + 代码执行完成后，会将处理结果打印或着发送 HTTP 响应给客户端，然后 PHP 底层代码会执行请求关闭及模块关闭函数进行后续清理工作，最后再回到 SAPI 层，调用 PHP-FPM 对应的关闭函数，从而完成此次请求的所有流程
+    + 过程周而复始，每次用户有新请求过来都会从头执行一遍:所有的环境初始化、模块初始化、请求初始化以及框架应用启动过程，乃至后续请求关闭、模块关闭、PHP-FPM 关闭
+  - 在 Nginx + PHP-Fpm 模式下开发非常简单,不用担心内存泄露
+    + nginx 基于 epoll 事件模型，一个 worker 同时可处理多个请求, 但在同一时刻可处理一个请求
+    + fpm-worker 每次处理请求前需要重新初始化mvc框架，然后再释放资源
+    + 高并发请求时，fpm-worker不够用，nginx 直接响应 502
+    + fpm-worker 进程间切换消耗大
+  - php的fastcgi进程管理器php-fpm和nginx的配合已经运行得足够好，但是由于php-fpm本身是同步阻塞进程模型，在请求结束后释放所有的资源（包括框架初始化创建的一系列对象，导致PHP进程空转（创建<-->销毁<-->创建）消耗大量的CPU资源，从而导致单机的吞吐能力有限。请求夯住，会导致 CPU 不能释放资源， 大大浪费了 CPU 使用率
+* 优点
+  - 复用进程，不需要太多上下文切换
+* 缺点
+  - 严重依赖进程数量解决并发问题，一个客户端连接就需要占用一个进程，工作进程数量有多少，并发处理能力就有多少。操作系统可以创建的进程数量是有限的
+  - PHP 框架初始化会占用大量的计算资源，每个请求都需要初始化
+  - 启动大量进程会带来额外的进程调度消耗。数百个进程时可能进程上下文切换调度消耗占CPU不到1%可以忽略不计，如果启动数千甚至数万个进程，消耗就会直线上升。调度消耗可能占到 CPU 的百分之几十甚至 100%
+  - 如果请求一个第三方请求非常慢，请求过程中会一直占用 CPU 硬件资源
+  - 高并发的场景下，这样的性能是不够的，尽管可以利用 Nginx 作为负载均衡配合多台 PHP-FPM 服务器来提供服务，但由于 PHP-FPM 的阻塞等待工作模型，一个请求会占用至少一个 MySQL 连接，多节点高并发下会产生大量的 MySQL 连接，而 MySQL 最大连接数默认值为 100，尽管可以修改，但显而易见该模式没法很好的应对高并发的场景
+* 解决
+  - IO密集性业务：频繁上下文切换
+    + 提高 IO 复用能力
+    + 将php-fpm同步阻塞模式替换为异步非阻塞模式，异步开启模式比较复杂不易维护，当然不一定使用php-fpm
+  - 线程模式开发太过复杂
+    + 一个进程中能开的线程数也有限，线程太多也会增加 CPU 的负荷和内存资源，线程没有阻塞态，IO 阻塞也不能主动让出 CPU资源，属于抢占式调度模型。不太适合 php 开发
+  - swoole 4.+ 开启了全协程模式，同步代码异步执行
+* 配置
+  - 静态：直接开启指定数量 php-fpm 进程，不再增加或者减少
+  - 动态：开始时候开启一定数量php-fpm进程，当请求量变大时候，动态增加php-fpm进程数到上限，当空闲时候自动释放空闲的进程数到一个下限
+  - 通信方式
+    + Unix socket:又叫 IPC(inter-process communication 进程间通信) socket，用于实现同一主机上进程间通信，需要在 nginx 配置文件中填写 php-fpm 的 socket 文件位置
+      * 与管道相比，Unix domain sockets 既可以使用字节流和数据队列，而管道通信则只能通过字节流
+      * Unix domain socket 的功能是POSIX操作系统里的一种组件。Unix domain sockets 使用系统文件的地址来作为自己的身份。可以被系统进程引用。所以两个进程可以同时打开一个Unix domain sockets来进行通信。不过这种通信方式是发生在系统内核里而不会在网络里传播。压力比较满的时候，用套接字方式，效果确实比较好
+      + Unix domain sockets的接口和Internet socket很像，但不使用网络底层协议来通信,不需要经过网络协议栈，不需要打包拆包、计算校验和、维护序号和应答等，只是将应用层数据从一个进程拷贝到另一个进程。所以其效率比 tcp socket 的方式要高，可减少不必要的 tcp 开销。
+      + unix socket 高并发时不稳定，连接数爆发时，会产生大量的长时缓存，在没有面向连接协议的支撑下，大数据包可能会直接出错不返回异常。而 tcp 这样的面向连接的协议，可以更好的保证通信的正确性和完整性。
+      + 由于 socket 文件本质上是一个文件，存在权限控制的问题，所以需要注意 nginx 进程的权限与 php-fpm 的权限问题，不然会提示无权限访问
+    + TCP socket:使用TCP端口连接127.0.0.1:9000，可以跨服务器，当 nginx 和 php-fpm 不在同一台机器上时，只能使用这种方式
+* 用到一些 PHP 第三方库，存在内存泄漏问题，如果不定期重启 PHP-CGI 进程，势必造成内存使用量不断增长。因此 PHP-FPM 作为 PHP-CGI 管理器提供了这么一项监控功能，对请求达到指定次数的 PHP-CGI 进程进行重启，保证内存使用量不增长
+* 连接方式 与CPU 频率缩放问题一样？（CPUFreq governor）这些设置在类 Unix 系统和 Windows 上是有效的，可以通过修改 CPU governor，将其从 ondemand 修改为 performance 来提高性能并加快系统响应
+  - Governor = ondemand：根据当前负荷动态调整 CPU 频率。先将 CPU 频率调整至最大，然后随着空闲时间增加而缩小频率
+  - Governor = conservative：根据当前负荷动态调整频率。比设置成 ondemand 更加缓慢
+  - Governor = performance：始终以最大频率运行 CPU。一个非常安全的性能提升方式，因为能完美的使用服务器 CPU 的全部性能。唯一需要考虑因素就是一些诸如散热、电池寿命（笔记本电脑）和一些由 CPU 始终保持 100% 所带来的一些副作用
+* pm
+  - static 设置取决于服务器有多少闲置内存 子进程的数量是由 pm.max_children 指令来确定的
+    + 大多数情况下，如果服务器内存不足，那么 PM 设置成 ondemand 或 dynamic 将是更好选择
+    + 一旦有可用的闲置内存，那么把 PM 设置成 static 最大值将减少许多 PHP 进程管理器（PM）所带来开销，应该在没有内存不足和缓存压力的情况下使用 pm.static 来设置 PHP-FPM 进程的最大数量。此外，也不能影响到 CUP 的使用和其他待处理的 PHP-FPM 操作
+    + 当流量波动比较大的时候，，PHP-FPM 的 ondemand 和 dynamic 会因为固有开销而限制吞吐量。 您需要了解您的系统并设置 PHP-FPM 进程数，以匹配服务器的最大容量
+    + 从 pm.max_children 开始，根据 pm dynamic 或 ondemand 的最大使用情况去设置
+    + 子进程数量是根据以下指令来动态生成的：pm.max_children, pm.start_servers, pm.min_spare_servers, pm.max_spare_servers.
+    + dynamic模式，可能会出现mysql连接数被占满的情况，这也跟mysql服务的连接超时时间有关
+    + 在 pm static 模式下，因为您将所有内容都保存在内存中，所以随着时间的推移，流量峰值会对 CPU 造成比较小的峰值，并且您的服务器负载和 CPU 平均值将变得更加平滑。 每个需要手动调整的 PHP-FPM 进程数的平均大小会有所不同
+  - pm = ondemand：在服务启动时候根据 pm.start_servers 指令生成进程，而非动态生成
+* 短连接：应对并发消耗过多的资源开销
+* 长连接：不同请求会使用同一个连接句柄
+* 状态查看
+  - 在server配置中添加
+  - 开启缓存
+* 问题
+  - FPM's security.limit_extension setting is used to limit the extensions of the main script it will be allowed to parse. It prevents malicious code from being executed. The default value is simply .php It can be configured in /etc/php5/fpm/pool.d/www.conf
+  - 解决：cgi.fix_pathinfo=1
+  - 待测试： fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info; 屏蔽掉
+
+![php-fpm工作模式](../../_static/php-fpm-struct.png "[php-fpm工作模式")
+
+```sh
+brew install php --without-apache --with-fpm
+brew services start php
+
+# 测试php-fpm配置
+/usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf -t
+
+# 启动
+/usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf
+/usr/local/Cellar/php71/7.1.10_21/sbin/php-fpm --daemonize --fpm-config /usr/local/etc/php/7.1/php-fpm.conf --pid /usr/local/var/run/php-fpm.pid
+php-fpm -D
+
+# 查看 php-fpm
+ps aux | grep -c php-fpm
+
+## linux 进程管理
+/etc/init.d/php7.2-fpm start
+/usr/local/php/sbin/php-fpm
+sudo service php7.0-fpm {start|stop|status|restart|reload|force-reload}
+sudo systemctl status php7.3-fpm
+
+kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
+kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid` # 平滑重启
+pkill php-fpm # 强制关闭
+killall php-fpm # 关闭进程
+
+location ~ ^/status$ {
+    include fastcgi_params;
+    fastcgi_split_path_info ^(.+\.php)(/.+)$; # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+    fastcgi_pass unix:/usr/local/var/run/php-fpm.sock;
+    fastcgi_param SCRIPT_FILENAME $fastcgi_script_name;
+}
+
+pm.status_path = /status # php-fpm.conf里面打开选项
+# 访问 http://域名/status
+
+2018/09/02 23:26:10 [error] 37283#0: *69 FastCGI sent in stderr: "Access to the script '/Users/henry/Workspace/Code/PHP' has been denied (see security.limit_extensions)" while reading response header from upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/usr/local/var/run/php-fpm.sock:", host: "localhost:8080"
+
+#  www.conf
+security.limit_extensions = .php .php3 .php4 .php5
+
+ERROR: failed to open error_log (/usr/var/log/php-fpm.log): No such file or directory
+
+vim /usr/local/etc/php-fpm.conf
+error_log = /usr/local/var/log/php-fpm.log
+pid = /usr/local/var/run/php-fpm.pid
+```
+
+### 扩展
+
+* `php-config --extension-dir`
+* 安装
+  - apt|yum 命令安装
+  - [PECL](http://pecl.php.net/):PHP Extension Community Library，管理最底层PHP扩展。用 C 写的
+  - [PEAR](http://pear.php.net/)：PHP Extension and Application Repository，管理项目环境扩展。用 PHP 写的
+    + 编译好的依赖：/usr/lib/php
+  - Composer：和PEAR都管理着项目环境的依赖，这些依赖也是用 PHP 写的，区别不大。但 composer 却比 PEAR 更受欢迎
+* 扩展
+  - vld:查看代码 opcache
+  - intl
+  - mcrypt
+  - memeached
+    + memcache 完全在PHP框架内开发的，提供了memcached的接口，memecached扩展是使用了libmemcached库提供的api与memcached服务端进行交互。 libmemcached 是 memcache 的 C 客户端，它具有低内存，线程安全等优点
+      * memcache 提供了面向过程及面向对象的接口，memached只支持面向对象的接口。 memcached 实现了更多的 memcached 协议
+    + memcached 支持 Binary Protocol，而 memcache 不支持，意味着 memcached 会有更高的性能。注意目前还不支持长连接
+  - mongodb
+  - Opcache
+    + PHP 5.5.0开始，PHP内置了字节码缓存功能，名为Zend Opcache
+    + PHP是解释型语言，构建在Zend 虚拟机之上，PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码,每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码
+    + 通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能，省去了每次加载和解析 PHP 脚本的开销，对于I/O开销如读写磁盘文件、读写数据库等并无影响
+    + 字节码(Byte Code)：一种包含执行程序比机器码更抽象的中间码，由一序列 op代码/数据对组成的二进制文件
+    + HHVM(HipHop Virtual Machine，Facebook开源的PHP虚拟机)采用了JIT(Just In Time Just Compiling，即时编译)技术，在运行时编译字节码为机器码，让性能测试提升了一个数量级。 唯有C/C++编译生成的二进制文件可直接运行。
+    + 机器码(Machine Code)：也被称为原生码(Native Code)，用二进制代码表示的计算机能直接识别和执行的一种机器指令的集合，它是计算机硬件结构赋予的操作功能
+  - apc:op缓存
+  - pdo-pgsql
+  - phalcon
+  - [redis](http://pecl.php.net/package/redis)
+    + [predis](https://github.com/nrk/predis/):Flexible and feature-complete Redis client for PHP and HHVM https://github.com/nrk/predis/wiki 纯 php 实现，通过 socket 与 redis 服务器通信，通过 composer 加载依赖，无需额外安装扩展
+    + [phpredis/phpredis](https://github.com/phpredis/phpredis): A PHP extension for Redis 基于 c 开发的 PHP 扩展，速度快、内存小.与 predis 功能上两者差不多，性能上略胜一筹，但由于与 redis 通信的主要瓶颈还是在网络 IO 上
+  - sphinx
+  - [swoole](./Swoole.md)
+  - [defuse/php-encryption](https://github.com/defuse/php-encryption):Simple Encryption in PHP.
+  - [jedisct1/libsodium](https://github.com/jedisct1/libsodium):A modern, portable, easy to use crypto library https://libsodium.org
+  - PHPDoc
+  - [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)：PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards. http://pear.php.net/package/PHP_CodeS…
+  - [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)：PHP Code Beautifier and Fixer(phpcbf) PHP代码规范与质量检查工具
+
+```sh
+# 查看添加扩展
+php -m | grep mcrypt
+php --ri xhprof
+php --ini
+
+sudo pecl channel-update pecl.php.net
+sudo pecl update-channels
+sudo pecl search|install|uninstall memcached｜mcrypt-snapshot|mcrypt-1.0.1
+sudo pecl install mcrypt
+
+sudo vim /etc/php/7.4/cli/php.ini
+extension=mcrypt.so
+
+mkdir -p /tmp/pear/cache
+sudo apt install php-pear
+curl -O https://pear.php.net/go-pear.phar
+sudo php -d detect_unicode=0 go-pear.phar
+#  1 Installation base /usr/local/pear
+#  4 Binaries directory /usr/local/bin
+
+pear config-set php_ini /usr/local/etc/php
+pear config-set php_dir /usr/local/share/p
+pear config-set doc_dir /usr/local/share/p
+pear config-set ext_dir /usr/local/lib/php
+pear config-set bin_dir /usr/local/opt/php
+pear config-set data_dir /usr/local/share/
+pear config-set cfg_dir /usr/local/share/p
+pear config-set www_dir /usr/local/share/p
+pear config-set man_dir /usr/local/share/m
+pear config-set test_dir /usr/local/share/
+pear config-set php_bin /usr/local/opt/php
+pear update-channels
+pear upgrade
+pear install PHP_CodeSniffer｜channel://pecl.php.net/vld-0.16.0
+
+brew tap homebrew/homebrew-php
+brew install php71 --with-pear
+brew install mcrypt|php71-mcrypt
+
+yum install php-mcrypt|php5-mcrypt
+apt-cache search memcached
+sudo apt-get install php-mcrypt|php5-mcrypt｜php5-memcached php-xml php7.*-xml php-dev php7.*-dev
+# Invalid argument supplied for foreach() in Command.php on line 249
+sudo apt install php7.4-xml
+# Trying to access array offset on value of type bool in PEAR/REST.php on line 187
+
+composer global require "squizlabs/php_codesniffer=*"
+
+# PHP_CodeSniffer
+curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+php phpcs.phar -h
+curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
+php phpcbf.phar -h
+
+phpcs --config-show
+phpcs --config-set
+/Users/henry/.composer/vendor/bin/phpcs # phpstrom 开启
+# vscode
+phpcs.enable true
+
+phpcs /path/to/code/myfile.php
+phpcs /path/to/code
+
+# php-cs-fixer
+wget http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -O php-cs-fixer
+wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.10.0/php-cs-fixer.phar -O php-cs-fixer
+curl -L http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -o php-cs-fixer
+
+sudo chmod a+x php-cs-fixer
+sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
+
+composer global require friendsofphp/php-cs-fixer
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+brew install homebrew/php/php-cs-fixer
+
+sudo php-cs-fixer self-update
+brew upgrade php-cs-fixer
+
+php php-cs-fixer.phar fix /path/to/dir
+php php-cs-fixer.phar fix /path/to/file
+
+composer global require phpmd/phpmd
+
+ln -s /etc/php5/mods-available/redis.ini /etc/php5/cli/conf.d/10-redis.ini
+ln -s /etc/php5/mods-available/redis.ini /etc/php5/apache2/conf.d/10-redis.ini
+
+# 编译扩展安装
+phpize -v # 需要安装php7.*-dev
+cd extname
+phpize
+./configure
+make
+make install
+# 配置文件添加扩展
+extension="swoole.so"
+
+php -dvld.active=1 -dvld.excute=0 at.php # excute =0 opcode在么 并不执行
+```
+
+## php.ini 配置
 
 * `short_open_tag` 设为0，即永远使用PHP的长标签形式：`<?php echo "hello world"; ?>`，不用短标签形式<`?= "hello world" ?>`
 * `asp_tags` 设为0，不使用ASP标签`<% echo "hello world"; %>`
@@ -549,72 +752,75 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 
 * 代码标记：`<?php …… ?>`
 * 文件扩展名 `.php`
-* 每行代码必须以英文下分号`;`结束
-* 区分大小写，但函数名和关键字不区分大小写。如：`if、break、switch`
-* 访问PHP文件，必须要经过服务器访问。如：<http://www.2015.com/test.php>
+* 每行代码必须以英文分号`;`结束
+* 区分大小写，但函数名和关键字不区分大小写
 * 文件名及路径中不能包括中文或空格
 * 单行注释：`//、#`
 * 多行注释：`/* …… */`
-* 变量：临时存储数据的容器，指向值的指针
-  - 变量复制用的是写时复制方式
-    + 基础类型是值赋值
-    + 复杂类型是引用赋值
-  - 引用计数,给变量引用的次数进行计算,当计数不等于0时,说明这个变量已经被引用,不能直接被回收,否则可以直接回收.xdebug_debug_zval
-    + 当变量值为整型,浮点型时,在赋值变量时,php7底层将会直接把值存储(php7的结构体将会直接存储简单数据类型),refcount将为0
-    + 当变量值为interned string字符串型(变量名,函数名,静态字符串,类名等)时,变量值存储在静态区,内存回收被系统全局接管,引用计数将一直为1
-    + 当变量值为以上几种时,复制变量将会直接拷贝变量值,所以将不存在多次引用的情况
-    + $b = &$a; 当引用时,被引用变量的value以及类型将会更改为引用类型,并将引用值指向原来的值内存地址中.之后引用变量的类型也会更改为引用类型,并将值指向原来的值内存地址,这个时候,值内存地址被引用了2次,所以refcount=2.
-  - 作用域
-    + 包含了 include 和 require 引入的文件
-    + 局部变量 local：函数内部声明的变量，仅在函数内部访问
-    + 全局作用域 global：在所有函数外部定义的变量
-      + 除了函数外，全局变量可以被脚本中的任何部分访问
-      + 要在一个函数中访问一个全局变量，需要使用 global 关键字
-      + 所有全局变量存储在一个名为 $GLOBALS[index] 的数组中。index 保存变量的名称,可以在函数内部访问，也可以直接用来更新全局变量
-    + 静态变量（static variable）：仅在局部函数域中存在，当程序执行离开此作用域时，其值并不丢失
-    + parameter：通过调用代码将值传递给函数的局部变量
-  - 本身没有类型(变量中存储的数据的类型)
-  - 命名
-    + 可以包含：字母、数字、下划线，可以用中文。
-    + 不能以数字和特殊符号开头，但可以以字母或下划线开头。如：$_ABC、$abc
-  - 变量名称前必须要带`$`符号。`$`不是变量名称一部分，只是对变量名称的一个引用或标识符
-  - 命名规则
-    + “驼峰式”命名：$getUserName、$getUserPwd
-    + “下划线”命名：$get_user_name、$set_user_pwd
-  - 赋值
-    - 传值:$variablename指向value存储的地址 `$foo = 'Bob';`
-    - 引用:新的变量简单的引用了原始变量,只有有名字的变量才可以引用赋值 `$bar = &$foo`
-    - 对象赋值，浅拷贝,取了另一个名字而已，指向的内存空间还是一样 还是两份数据？
-    - `$a = $b $b =56` $a 的值不变
-    - clone函数在克隆对象时候，普通属性是深拷贝，原对象的对象属性还是引用赋值，浅拷贝
-    - 魔术方法__clone实现真正深拷贝
-  - 可变变量：`$$var`是一个引用变量，用于存储$var的值
+
+### 变量：临时存储数据的容器，指向值的指针
+
+* 变量复制用的是写时复制方式
+  - 基础类型是值赋值
+  - 复杂类型是引用赋值
+* 引用计数,给变量引用的次数进行计算,当计数不等于0时,说明这个变量已经被引用,不能直接被回收,否则可以直接回收.xdebug_debug_zval
+  - 当变量值为整型,浮点型时,在赋值变量时,php7底层将会直接把值存储(php7的结构体将会直接存储简单数据类型),refcount将为0
+  - 当变量值为interned string字符串型(变量名,函数名,静态字符串,类名等)时,变量值存储在静态区,内存回收被系统全局接管,引用计数将一直为1
+  - 当变量值为以上几种时,复制变量将会直接拷贝变量值,所以将不存在多次引用的情况
+  - $b = &$a; 当引用时,被引用变量的value以及类型将会更改为引用类型,并将引用值指向原来的值内存地址中.之后引用变量的类型也会更改为引用类型,并将值指向原来的值内存地址,这个时候,值内存地址被引用了2次,所以refcount=2.
+* 作用域
+  - 包含了 include 和 require 引入的文件
+  - 局部变量 local：函数内部声明的变量，仅在函数内部访问
+  - 全局作用域 global：在所有函数外部定义的变量
+    - 除了函数外，全局变量可以被脚本中的任何部分访问
+    - 要在一个函数中访问一个全局变量，需要使用 global 关键字
+    - 所有全局变量存储在一个名为 $GLOBALS[index] 的数组中。index 保存变量的名称,可以在函数内部访问，也可以直接用来更新全局变量
+  - 静态变量（static variable）：仅在局部函数域中存在，当程序执行离开此作用域时，其值并不丢失
+  - parameter：通过调用代码将值传递给函数的局部变量
+* 本身没有类型(变量中存储的数据的类型)
+* 命名
+  - 可以包含：字母、数字、下划线，可以用中文。
+  - 不能以数字和特殊符号开头，但可以以字母或下划线开头。如：$_ABC、$abc
+* 变量名称前必须要带`$`符号。`$`不是变量名称一部分，只是对变量名称的一个引用或标识符
+* 命名规则
+  - “驼峰式”命名：$getUserName、$getUserPwd
+  - “下划线”命名：$get_user_name、$set_user_pwd
+* 赋值
+  * 传值:$variablename指向value存储的地址 `$foo = 'Bob';`
+  * 引用:新的变量简单的引用了原始变量,只有有名字的变量才可以引用赋值 `$bar = &$foo`
+  * 对象赋值，浅拷贝,取了另一个名字而已，指向的内存空间还是一样 还是两份数据？
+  * `$a = $b $b =56` $a 的值不变
+  * clone函数在克隆对象时候，普通属性是深拷贝，原对象的对象属性还是引用赋值，浅拷贝
+  * 魔术方法__clone实现真正深拷贝
+* 可变变量：`$$var`是一个引用变量，用于存储$var的值
 * PHP 之外变量
   - `$_GET $_POST $_REQUEST`
   - `$_SERVER`
   - `$_COOKIE`
-* 常量
-  - 定义
-    + 常量前面没有`$`
-    + 只能用 `define()` 函数定义，而不能通过赋值语句
-    + 可以不用理会变量的作用域而在任何地方定义和访问
-    + 一旦定义就不能被重新定义或者取消定义
-    + 常量的值只能是标量, PHP 7 中还允许是 array
-  - `define(name, value, case-insensitive = false)`: 区分大小写,成功时返回 TRUE， 或者在失败时返回 FALSE
-  - defined():检查某个名称的常量是否存在
-  - const关键字在编译时定义常量
-    + 是一个语言构造不是一个函数
-    + 比define()快一点，因为没有返回值
-    + 区分大小写
-  - 魔术常量
-    + `__LINE__`  表示使用当前行号。
-    + `__FILE__`    表示文件的完整路径和文件名。 如果它在include中使用，则返回包含文件的名称。
-    + `__DIR__`表示文件的完整目录路径。 等同于dirname(__file__)。 除非它是根目录，否则它没有尾部斜杠。 它还解析符号链接。
-    + `__FUNCTION__`    表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白。
-    + `__CLASS__`   表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白。
-    + `__TRAIT__`   表示使用它的特征名称。 如果它在任何函数之外使用，则它将返回空白。 它包括它被声明的命名空间。
-    + `__METHOD__`  表示使用它的类方法的名称。方法名称在有声明时返回。
-    + `__NAMESPACE__`   表示当前命名空间的名称。
+
+### 常量
+
+* 定义
+  - 常量前面没有`$`
+  - 只能用 `define()` 函数定义，而不能通过赋值语句
+  - 可以不用理会变量的作用域而在任何地方定义和访问
+  - 一旦定义就不能被重新定义或者取消定义
+  - 常量的值只能是标量, PHP 7 中还允许是 array
+* `define(name, value, case-insensitive = false)`: 区分大小写,成功时返回 TRUE， 或者在失败时返回 FALSE
+* defined():检查某个名称的常量是否存在
+* const关键字在编译时定义常量
+  - 是一个语言构造不是一个函数
+  - 比define()快一点，因为没有返回值
+  - 区分大小写
+* 魔术常量
+  - `__LINE__` 表示当前行号
+  - `__FILE__` 表示文件完整路径和文件名。如果在include中使用，则返回包含文件的名称
+  - `__DIR__`表示文件完整目录路径。等同于dirname(__file__)。除非它是根目录，否则它没有尾部斜杠。还解析符号链接
+  - `__FUNCTION__` 表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白
+  - `__CLASS__` 表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白
+  - `__TRAIT__` 表示使用它的特征名称。如果它在任何函数之外使用，则它将返回空白。 它包括它被声明的命名空间
+  - `__METHOD__`  表示使用它的类方法的名称。方法名称在有声明时返回
+  - `__NAMESPACE__` 表示当前命名空间名称
 * 内存泄漏
 
 ### 数据类型
@@ -673,7 +879,7 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
       - 比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值
     * unset 变量与给变量赋值NULL不同，变量赋值NULL直接对相应变量容器refcount = 0
 
-#### 复合
+### 复合
 
 * Array（数组）:一个有序映射
   - 映射是一种把 values 关联到 keys 的类型。因此可以当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性
@@ -714,8 +920,8 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 
 ### 控制语句
 
-* 表达式：任何有值的东西
-* echo：是一个语言结构(语句)，不是一个函数，所以不需要使用括号。但是如果要使用多个参数，则需要使用括号。打印字符串，多行字符串，转义字符，变量，数组等
+* 表达式：任何有值东西
+* echo：一个语言结构(语句）不是一个函数，所以不需要使用括号。要使用多个参数，则需要使用括号。打印字符串，多行字符串，转义字符，变量，数组等
 * print
 * print_r
 * printf()
@@ -724,66 +930,64 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
   - if-else
   - elseif/else if
   - 嵌套if
-  - switch语句
+  - switch
 * 循环
-  - for语句
-  - foreach循环循环用于遍历数组元素、对象属性
+  - for
+  - foreach
   - while
   - do...while
-* break:中断当前for，while，do-while，switch和for-each循环的执行
-  - 如果在内循环中使用break，只中断了内循环的执行
-  - 接受一个可选的数字参数来决定跳出几重循环
-* continue：跳过本次循环中剩余的代码并在条件求值为真时开始执行下一次循环
-  - 接受一个可选的数字参数来决定跳过几重循环到循环结尾
-* return
-* include
-  - 被包含文件先按参数给出的路径寻找
-  - 如果没有给出目录（只有文件名）时则按照 include_path 指定的目录寻找
-  - 如果在 include_path 下没找到该文件则 include 最后才在调用脚本文件所在的目录和当前工作目录下寻找
-  - 如果最后仍未找到文件则 include 结构会发出一条警告
-  - include_once 语句在脚本执行期间包含并运行指定文件。此行为和 include 语句类似，唯一区别是如果该文件中已经被包含过，则不会再次包含。如同此语句名字暗示的那样，只会包含一次
-  - require 在出错时产生 E_COMPILE_ERROR 级别的错误,include 没有找到对应路径脚本时发出警告（E_WARNING）
+* break:中断当前循环执行
+  - 内循环中使用break，只中断了内循环的执行
+  - 接受一个可选数字参数来决定跳出几重循环
+* continue：在条件求值为真时，跳过本次循环中剩余代码并开始执行下一次循环
+  - 接受一个可选数字参数来决定跳过几重循环到循环结尾
+* include 加载优先级
+  - 先按参数给出路径寻找
+  - 如果没有给出目录（只有文件名）时则按照 include_path 指定目录寻找
+  - 未找到调用脚本文件所在目录和当前工作目录下寻找
+  - 仍未找到文件则 include 结构会发出一条警告
+  - include_once 语句在脚本执行期间包含并运行指定文件。此行为和 include 语句类似，唯一区别是如果该文件中已经被包含过，则不会再次包含
+* require 出错时产生 E_COMPILE_ERROR 级别的错误,include 没有找到对应路径脚本时发出警告（E_WARNING）
   - require_once 语句和 require 语句完全相同，唯一区别是 PHP 会检查该文件是否已经被包含过，如果是则不会再次包含
-  - include_once/require_once 与 include/require 的区别是如果指定路径已经包含过，不会再次包含，只会包含一次同一路径脚本
-  - include_once/require_once 性能更好一些,至于使用 include_once 还是 require_once，取决于你对指定路径 PHP 脚本不存在的预期处理
-* goto:跳转到程序中的另一位置
-  - 该目标位置可以用目标名称加上冒号来标记，而跳转指令是 goto 之后接上目标位置的标记
+  - `include_once/require_once` 性能更好一些,至于使用 include_once 还是 require_once，取决于对指定路径 PHP 脚本不存在的预期处理
+* goto 跳转到程序中另一位置
+  - 声明目标标记：目标名称加上冒号
+  - 跳转：goto 之后接上目标位置标记
 * 替代语法
 * 嵌套使用
 
-#### 运算符
+### 运算符
 
-用于对操作数执行操作
-
-* 算术运算符:`* / % + - **`
-* 赋值运算符:`= += -= *= **= /= .= %= &= ^= <<= >>= =>`
-* 位运算符：`&(位与) ^（异或） | ~ << >>`
-  - &: 转换为布尔 5&1 为1
+* 算术运算符 `* / % + - **`
+* 赋值运算符 `= += -= *= **= /= .= %= &= ^= <<= >>= =>`
+* 位运算符 `&(位与) ^（异或） | ~ << >>`
+  - &  转换为布尔 5&1 为1
   - |：合并集合 1101 | 1011 为 1111
 * 比较运算符:`< <= > >= == != === !== <>`
-  - $a <=> $b:太空船运算符 当$a小于、等于、大于$b时 分别返回一个小于、等于、大于0的integer 值
+  - $a <=> $b 太空船运算符 当$a小于、等于、大于$b时 分别返回一个小于、等于、大于0的integer 值
   - $a ?? $b ?? $c:NULL 合并操作符  从左往右第一个存在且不为 NULL 的操作数。如果都没有定义且不为 NULL，则返回 NULL
 * 逻辑运算符:`&& and ||or xor  !`,有优先级
 * 字符串运算符
-  - 连接运算符（"."）：返回其左右参数连接后的字符串
-  - 连接赋值运算符（".="）：将右边参数附加到左边的参数之后
+  - 连接运算符（"."） 返回其左右参数连接后的字符串
+  - 连接赋值运算符（".="） 将右边参数附加到左边的参数之后
 * 递增/递减运算符
-  - ++$a    前加  $a 的值加一，然后返回 $a
-  - $a++    后加  返回 $a，然后将 $a 的值加一
-  - --$a    前减  $a 的值减一， 然后返回 $a
-  - $a--    后减  返回 $a，然后将 $a 的值减一
+  - ++$a 前加  $a 值加一，然后返回 $a
+  - $a++ 后加  返回 $a，然后将 $a 值加一
+  - --$a 前减  $a 值减一， 然后返回 $a
+  - $a-- 后减  返回 $a，然后将 $a 值减一
 * 数组运算符
-  - $a + $b：相同key保留前面
-  - $a == $b： 如果 $a 和 $b 具有相同的键／值对则为 TRUE
-  - $a === $b：如果 $a 和 $b 具有相同的键／值对并且顺序和类型都相同则为 TRUE
-  - $a != $b    不等  如果 $a 不等于 $b 则为 TRUE
-  - $a <> $b    不等  如果 $a 不等于 $b 则为 TRUE
-  - $a !== $b   不全等 如果 $a 不全等于 $b 则为 TRUE
+  - $a + $b 保留前面相同key
+  - $a == $b $a 和 $b 具有相同键／值对 为 TRUE
+  - $a <> $b 不等  如果 $a 不等于 $b 则为 TRUE
+  - $a != $b 不等  如果 $a 不等于 $b 则为 TRUE
+  - $a === $b $a 和 $b 具有相同的键／值对并且顺序和类型都相同 为 TRUE
+  - $a !== $b 不全等 如果 $a 不全等于 $b 则为 TRUE
 * 类型运算符:`instanceof (int) (float) (string) (array) (object) (bool)`
-* 执行操作符:反引号（``）,尝试将反引号中的内容作为 shell 命令来执行，并将其输出信息返回
+* 执行操作符 反引号（``）
+  - 尝试将反引号中内容作为 shell 命令来执行，并将其输出信息返回
   - 激活了安全模式或者关闭了 shell_exec() 时无效
-* 错误控制操作符:@,当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉
-* 三元运算符：`$first ? $second : $third`
+* 错误控制操作符 @ 当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉
+* 三元运算符 `$first ? $second : $third`
 
 ## 函数 function
 
@@ -794,39 +998,40 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
   - 允许使用数组 array 、object、特殊类型 NULL 作为默认参数
   - 可以设置默认参数
   - 可变长度参数
-  - 可变数量的参数列表:`...`
+  - 可变数量参数列表 `...`
 * 可变函数：一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数
 * 返回值
 * 递归函数
-* 匿名函数 Anonymous functions ｜ 闭包 Closure
+* 匿名函数 Anonymous functions ｜
   - 5.3.0中引入，和普通PHP函数很像：常用句法相同，也接受参数，而且能返回值。不过闭包没有函数名
-  - 允许临时创建一个没有指定名称的函数
-  - 变量值是一个闭包
-  - 闭包对象实现了`__invoke()`魔术方法，只要变量名后有()，PHP就会查找并调用__invoke方法
-  - 闭包在匿名函数的基础上增加了与外部环境的变量交互，不能直接访问闭包外的变量，通过 use 关键字把父作用域变量及状态附加到PHP闭包中
+  - 允许临时创建一个没有指定名称函数
+  - 变量值是一个闭包对象
+* 闭包 Closure
+  - 实现了`__invoke()`魔术方法，变量名后有()，就会查找并调用__invoke方法
+  - 在匿名函数的基础上增加了与外部环境的变量交互，不能直接访问闭包外的变量，通过 use 关键字把父作用域变量及状态附加到PHP闭包中
   - 在闭包中使用$this关键字获取闭包内部状态
-    * bindTo:可以把闭包的内部状态绑定到其他对象上。方法第二个参数作用是指定绑定闭包的那个对象所属的PHP类.闭包就可以在其他地方访问邦定闭包的对象中受保护和私有的成员变量
+  + bindTo:可以把闭包内部状态绑定到其他对象上
+    * 第二个参数作用是指定绑定闭包的那个对象所属的PHP类.闭包就可以在其他地方访问邦定闭包的对象中受保护和私有的成员变量
     * 框架经常使用bindTo方法把路由URL映射到匿名回调函数上，框架会把匿名回调函数绑定到应用对象上，这样在匿名函数中就可以使用$this关键字引用重要的应用对象
   - 场景
-    + 作回调函数（callback）使用
-  - 闭包内所引用的变量不能被外部所访问,在闭包内对变量的改变从而影响到上下文变量的值，使用&的引用传参
+    + 作回调函数（callback）
+  - 闭包内所引用的变量不能被外部所访问
   - Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态
 
 ## 状态管理
 
-服务器端存储技术
-
-* cookie是一个小段信息，存储在客户端浏览器中。用于识别用户。cookie在服务器端创建并保存到客户端浏览器。每当客户端向服务器发送请求时，cookie都会嵌入请求。 这样，cookie数据信息可以在服务器端接收
+* cookie 一个小段信息，存储在客户端浏览器中,用于识别用户
+  - PHP 自动维护 cookie 机制：在服务器端创建 并发送给客户端，后面客户端向服务器发送请求时，cookie都会嵌入请求，服务器端能够识别
   - 设置
   - 获取
   - 删除
-* session:用于临时存储和从一个页面传递信息到另一个页面(直到用户关闭网站)
-  - 广泛应用于购物网站(需要存储和传递购物车信息、用户名，产品代码，产品名称，产品价格等信息），从一个页面传递到另一个页面。
-  - PHP会话为每个浏览器创建唯一的用户ID，以识别用户，并避免多个浏览器之间的冲突
-  - session_start()函数用于启动会话，它启动一个新的或恢复现有会话
+* 服务器端存储技术 session:用于临时存储 直到用户关闭网站
+  - 从一个页面传递到另一个页面：广泛应用于购物网站(需要存储和传递购物车信息、用户名，产品代码，产品名称，产品价格等信息）
+  - 会话为每个浏览器创建唯一的用户ID，以识别用户，并避免多个浏览器之间冲突
+  - session_start() 启动会话，启动一个新的或恢复现有会话
     + 如果已创建会话，则返回现有会话
-    + 如果会话不可用，它将创建并返回新会话
-  - $_SESSION是一个包含所有会话变量的关联数组。 它用于设置和获取会话变量值
+    + 如果会话不可用，创建并返回新会话
+  - $_SESSION 一个包含所有会话变量的关联数组，用于设置和获取会话变量值
   - session_destroy()
 
 ```php
@@ -856,6 +1061,16 @@ $value=$_COOKIE["CookieName"];//returns cookie value
   - `stream_filter_append()` 过滤器附加到现有的流上
   - 使用 php://filter 流封装协议把过滤器附加到流上
 * 与远程网址交互:curl
+
+### php://input
+
+* Coentent-Type仅在取值为application/x-www-data-urlencoded和multipart/form-data两种情况下，PHP才会将http请求数据包中相应的数据填入全局变量$_POST
+* PHP不能识别的Content-Type类型的时候，会将http请求包中相应的数据填入变量$HTTP_RAW_POST_DATA
+* Coentent-Type为multipart/form-data的时候，PHP不会将http请求数据包中的相应数据填入php://input
+* “php://input可以读取没有处理过的POST数据
+* php://input读取不到`$_GET`数据。因为`$_GET`数据作为query_path写在http请求头部(header)的PATH字段，而不是写在http请求的body部分
+* 只有Content-Type为application/x-www-data-urlencoded时，php://input数据才跟$_POST数据相一致
+* 相较于$HTTP_RAW_POST_DATA而言，它给内存带来的压力较小，并且不需要特殊的php.ini设置
 
 ### 文件
 
@@ -916,16 +1131,6 @@ $value=$_COOKIE["CookieName"];//returns cookie value
 * 方法
   - basename:返回路径中的文件名部分
 
-### php://input
-
-* Coentent-Type仅在取值为application/x-www-data-urlencoded和multipart/form-data两种情况下，PHP才会将http请求数据包中相应的数据填入全局变量$_POST
-* PHP不能识别的Content-Type类型的时候，会将http请求包中相应的数据填入变量$HTTP_RAW_POST_DATA
-* Coentent-Type为multipart/form-data的时候，PHP不会将http请求数据包中的相应数据填入php://input
-* “php://input可以读取没有处理过的POST数据
-* php://input读取不到`$_GET`数据。因为`$_GET`数据作为query_path写在http请求头部(header)的PATH字段，而不是写在http请求的body部分
-* 只有Content-Type为application/x-www-data-urlencoded时，php://input数据才跟$_POST数据相一致
-* 相较于$HTTP_RAW_POST_DATA而言，它给内存带来的压力较小，并且不需要特殊的php.ini设置
-
 ### redirect
 
 * `header ( string $header [, bool $replace = TRUE [, int $http_response_code ]] ) : void`
@@ -934,15 +1139,15 @@ $value=$_COOKIE["CookieName"];//returns cookie value
 
 ### MySQL
 
-* mysql:PHP 5.5以来扩展已被弃用，建议使用以下替代
+* mysql:PHP 5.5以后扩展已被弃用，建议使用以下替代
 * mysqli
 * PDO
-  - fetch() 方法时，传入了 PDO::FETCH_ASSOC 参数，该参数决定如何返回查询结果，该参数支持以下常量：
+  - fetch() 参数决定如何返回查询结果
     + PDO::FETCH_ASSOC：返回关联数组，数组的键是数据表的列名
     + PDO::FETCH_NUM：返回键为数字的数组
     + PDO::FETCH_BOTH：顾名思义，返回一个既有键为列名又有键为数字的数组
     + PDO::FETCH_OBJ：返回一个对象，对象的属性是数据表的列名
-  - 提供预处理语句查询
+  - 预处理语句查询
     + 位置参数`$tis = $conn->prepare("INSERT INTO STUDENTS(name, age) values(?, ?)"); $tis->bindParam(1,$name); $tis->bindParam(2,$age);`
     + 命名参数 `$tis = $conn->prepare("INSERT INTO STUDENTS(name, age) values(:name, :age)"); $tis->bindParam(':name', $name); $tis->bindParam(':age', $age);`
   - 错误异常处理、灵活取得查询结果（返回数组、字符串、对象、回调函数）、字符过滤防止 SQL 攻击、事务处理、存储过程
@@ -993,7 +1198,7 @@ $value=$_COOKIE["CookieName"];//returns cookie value
   - protected:类成员在自身、子类和父类内可见
   - private:类成员只对自己可见。
   - private和protected有个特例:同一个类的对象即使不是同一个实例也可以互相访问对方的私有与受保护成员
-  - 范围解析符(::)：通常以self::、 parent::、 static:: 和 `<classname>::`形式来访问静态成员、类常量
+* 范围解析符(::)：通常以self::、 parent::、 static:: 和 `<classname>::`形式来访问静态成员、类常量
   - static::、self:: 和 parent:: 可用来调用类中的非静态方法。类中实例或自己
   - self
     + 替代类名，引用当前类的静态成员变量和静态函数；
@@ -1010,13 +1215,19 @@ $value=$_COOKIE["CookieName"];//returns cookie value
     + this要在对象已经实例化的情况下使用，self没有此限制；
     + 在非静态成员函数内使用，self抑制多态行为，引用当前类的函数；而this引用调用类的重写(override)函数（如果有的话）
   - static:调用类里面的静态属性与静态方法
-* 多态：相同的操作或函数、过程可作用于多种类型的对象上并获得不同的结果
+* 多态 相同操作或函数、过程可作用于多种类型对象上并获得不同的结果
   - 一个对外接口，多个内部实现方法
-  - 多态性允许每个对象以适合自身的方式去响应共同的消息。多态性增强了软件的灵活性和重用性。
+  - 允许每个对象以适合自身的方式去响应共同的消息
+  - 增强了软件的灵活性和重用性
   - 面向对象编程并不只是将相关的方法与数据简单的结合起来，而是采用面向对象编程中的各种要素将现实生活中的各种情况清晰的描述出来
   - 主要在于可以将不同的子类对象都当作一个父类来处理，并且可以屏蔽不同子类对象之间所存在的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化
   - 通常为了使项目能够在以后的时间里的轻松实现扩展与升级，需要通过继承实现可复用模块进行轻松升级
-  - 在进行可复用模块设计时，就需要尽可能的减少使用流程控制语句。此时就可以采用多态实现该类设计。
+  - 在进行可复用模块设计时，就需要尽可能的减少使用流程控制语句。此时就可以采用多态实现该类设计
+* 抽象类
+  - abstract 的方法，继承类不必非要写那个方法
+  - 抽象类定义要使用abstract关键字来声明，凡是用abstract关键字定义了抽象方法的类必须声明为抽象类
+  - 子类实现抽象方法时访问控制必须和父类中一样（或者更为宽松），同时调用方式必须匹配，即类型和所需参数数量必须一致
+  - 抽象类可用于对多个同构类的通用部分定义，用extends关键字继承(父子间存在"is a"关系)，属单继承。接口可用于多个异构类的通用部分定义，用implements关键字继承(父子间存在"like a"关系)，可多继承。如果子类不能实现父类或接口的全部抽象方法，则该子类只能被声明成抽象类
 * 接口
   - 通过interface关键字来定义，定义所有的方法都是空的，访问控制必须是public
   - 可以如类一样定义常量，可以使用extends来继承其他接口
@@ -1024,14 +1235,12 @@ $value=$_COOKIE["CookieName"];//returns cookie value
   - 方法后面不要跟大口号{},因为接口只是定义函数，并不实现
   - 两个PHP对象之间契约（Contract）:将代码和依赖解耦，而且允许依赖任何实现了预期接口的第三方代码，不管第三方代码是如何实现接口的，只关心第三方代码是否实现了指定的接口
   - 不能实例化，抽象类中 abstract 的方法，强制要求子类定义这些方法，也可以理解成接口中的每个方法都是 abstract 方法
-* 抽象类
-  - abstract 的方法，继承类不必非要写那个方法
-  - 抽象类定义要使用abstract关键字来声明，凡是用abstract关键字定义了抽象方法的类必须声明为抽象类。
-  - 子类实现抽象方法时访问控制必须和父类中一样（或者更为宽松），同时调用方式必须匹配，即类型和所需参数数量必须一致；
-  - 抽象类可用于对多个同构类的通用部分定义，用extends关键字继承(父子间存在"is a"关系)，属单继承。接口可用于多个异构类的通用部分定义，用implements关键字继承(父子间存在"like a"关系)，可多继承。如果子类不能实现父类或接口的全部抽象方法，则该子类只能被声明成抽象类。
-* 接口比抽象更严格
+  - 接口比抽象更严格
 * 重写vs重载
-  - 重载指多个名字相同，但参数不同的函数在同一作用域并存的现象.参数不同有三种情况：参数个数不同，参数类型不同，参数顺序不同.函数重载多见于强类型语言，编译后函数在函数符号表的名称一般是函数名加参数类型
+  - 重载 名字相同但参数不同函数在同一作用域并存的现象，多见于强类型语言，编译后函数在函数符号表的名称一般是函数名加参数类型
+    + 参数个数不同
+    + 参数类型不同
+    + 参数顺序不同
     + php不支持：function_exists、 method_exists、is_callable、get_defined_functions、ReflectionMethod/ReflectionFunction类的getParameters/getNumberOfParameters/getNumberOfRequiredParameters
   - 重写出现在继承中，指子类重定义父类功能的现象，也被称为覆盖,即相同签名的成员函数在子类中重新定义（实现抽象函数或接口不是重写），是实现多态（polymorphism）的一种关键技术
 * 继承：类分层、接口分层
@@ -1043,20 +1252,19 @@ $value=$_COOKIE["CookieName"];//returns cookie value
 
 ### trait
 
-* PHP 5.4引入
-* 看做类的部分实现，可以混入一个或多个现有的PHP类中，其作用有两个：表明类可以做什么；提供模块化实现
-* 减少单继承语言的限制，自由地在不同层次结构内独立的类中复用 method
-* 优先级:当前类的成员 > trait 的方法 > 被继承的方法
+* PHP 5.4 引入，突破语言单继承限制，在不同层次结构内独立类中复用 method
+* 看做类部分实现，可以混入一个或多个现有PHP类中，作用：表明类可以做什么；提供模块化实现
 * 和 Class 相似，但仅旨在用细粒度和一致的方式来组合功能
-* 让两个无关的PHP类具有类似的行为:为传统继承增加了水平特性的组合；应用的Class 之间不需要继承
+* 让两个无关PHP类具有类似行为:为传统继承增加了水平特性的组合；应用的Class 之间不需要继承
 * 无法通过 trait 自身来实例化
-* 命名冲突问题：使用insteadof关键字
+* 优先级:当前类的成员 > trait 的方法 > 被继承的方法
+* 命名冲突：使用insteadof关键字
 
 ### 匿名类
 
 * 匿名类被嵌套进普通 Class 后，不能访问这个外部类（Outer class）的 private（私有）、protected（受保护）方法或者属性
-* 为了访问外部类（Outer class）protected 属性或方法，匿名类可以 extend（扩展）此外部类
-* 为了使用外部类（Outer class）的 private 属性，必须通过构造器传进来
+* 访问外部类（Outer class）protected 属性或方法，匿名类可以 extend（扩展）此外部类
+* 使用外部类（Outer class）private 属性，必须通过构造器传进来
 
 ```php
 $util->setLogger(new class {
@@ -1096,25 +1304,6 @@ class Outer
 
 echo (new Outer)->func2()->func3(); # 6
 ```
-
-## 命名空间 namespace
-
-* 出现之前，使用Zend风格的类名解决命名冲突问题:在PHP类名中使用下划线的方式表示文件系统的目录分隔符。这种约定有两个作用
-  - 确保类名是唯一
-  - 原生的自动加载器会把类名中的下划线替换成文件系统的目录分隔符，从而确定文件的路径。例如，`Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query`类对应的文件是Zend/Cloud/DocumentService/Adapter/WindowsAzure/Query.php.类名特别长
-* PHP5.3.0中引入，作用是按照一种虚拟的层次结构组织PHP代码,现代的PHP组件框架代码都是放在各自全局唯一的厂商命名空间中，以免和其他厂商使用的常见类名冲突,可以和其他开发者使用相同的类名、接口名、函数或常量名
-* 5.6开始还可以导入函数和常量
-* 声明命名空间的代码始终应该放在<?php  标签后的第一行 `namespace LaravelAcademy\ModernPHP;`
-* 一个文件可以使用多个命名空间
-* 导入和别名:`use Illuminate\Http\Response as Res;`，支持多重导入
-* 借助 spl_auto_register 函数注册自动加载器，实现系统未定义类或接口的自动加载
-  - 存在一个问题:不同库/组件类名冲突问题
-* 分类
-  - 完全限定命名空间 `new \成都\徐大帅();`
-  - 限定命名空间 `new 成都\徐大帅();`
-* 在当前命名空间没有声明的情况下，限定类名和完全限定类名是等价的。因为如果不指定空间，则默认为全局（\）
-* 在命名空间下，使用限定类名和完全限定类名的区别,完全限定类名 = 当前命名空间 + 限定类名,如果引用的类、接口、函数和常量没有指定命名空间，PHP假定引用的类、接口、函数和常量在当前的命名空间中
-* 要使用其他命名空间的类、接口、函数或常量，需要使用完全限定的PHP类名（命名空间+类名）
 
 ## AUTOLOAD
 
@@ -1157,26 +1346,209 @@ spl_autoload_register(function ($class){
 });
 ```
 
+## 命名空间 namespace
+
+* 出现之前，使用Zend风格的类名解决命名冲突问题:在PHP类名中使用下划线的方式表示文件系统的目录分隔符。这种约定有两个作用
+  - 确保类名是唯一
+  - 原生的自动加载器会把类名中的下划线替换成文件系统的目录分隔符，从而确定文件的路径。例如，`Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query`类对应的文件是Zend/Cloud/DocumentService/Adapter/WindowsAzure/Query.php.类名特别长
+* PHP5.3.0引入，作用是按照一种虚拟的层次结构组织PHP代码,现代的PHP组件框架代码都是放在各自全局唯一的厂商命名空间中，以免和其他厂商使用的常见类名冲突,可以和其他开发者使用相同的类名、接口名、函数或常量名
+* 5.6 可以导入函数和常量
+* 声明命名空间的代码始终应该放在`<?php` 标签后第一行 `namespace LaravelAcademy\ModernPHP;`
+* 一个文件可以使用多个命名空间
+* 导入和别名:`use Illuminate\Http\Response as Res;`，支持多重导入
+* 借助 `spl_auto_register` 函数注册自动加载器，实现系统未定义类或接口的自动加载
+  - 存在一个问题:不同库/组件类名冲突问题
+* 分类
+  - 完全限定命名空间 `new \成都\徐大帅();`
+  - 限定命名空间 `new 成都\徐大帅();`
+* 在当前命名空间没有声明的情况下，限定类名和完全限定类名是等价的。因为如果不指定空间，则默认为全局（\）
+* 在命名空间下，使用限定类名和完全限定类名的区别,完全限定类名 = 当前命名空间 + 限定类名,如果引用的类、接口、函数和常量没有指定命名空间，PHP假定引用的类、接口、函数和常量在当前的命名空间中
+* 要使用其他命名空间的类、接口、函数或常量，需要使用完全限定的PHP类名（命名空间+类名）
+
 ## 魔术方法
 
-* __construct 构造函数 初始化赋值 实例化对象的时候自己调用
-* __destruct 析构方法，PHP 将在对象被销毁前（即从内存中清除前）调用这个方法
-* __get ($property) 当调用一个未定义的属性时，此方法会被触发，传递的参数是被访问的属性名
-* __set ($property, $value)给一个未定义的属性赋值时，此方法会被触发，传递的参数是被设置的属性名和值这里的没有声明包括当使用对象调用时，访问控制为 proteced,private 的属性（即没有权限访问的属性）
-* __isset ($property) 当在一个未定义的属性上调用 isset () 函数时调用此方法
-* __unset ($property) 当在一个未定义的属性上调用 unset () 函数时调用此方法
-* _call ($method, $arg_array) 当调用一个未定义的方法是调用此方法
-* __autoload 函数，它会在试图使用尚未被定义的类时自动调用。通过调用此函数，脚本引擎在 PHP 出错失败前有了最后一个机会加载所需的类。
-* __clone 复制一个对象时自动调用 clone 方法，如果在对象复制需要执行某些初始化操作，可以在 clone 方法实现。
-* __toString 方法在将一个对象转化成字符串时自动调用，比如使用 echo 打印对象时。
-* `__callStatic($funName, $arguments)`   当调用一个未定义或不可达的静态方法时， __callStatic () 方法将被调用
-* `__sleep()`:serialize() 函数会检查类中是否存在一个魔术方法 __sleep()。如果存在，该方法会先被调用，然后才执行序列化操作,可以用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组,不能返回父类的私有成员的名字。这样做会产生一个 E_NOTICE 级别的错误.
-* `__wakeup()`:unserialize() 会检查是否存在一个 __wakeup() 方法。如果存在，则会先调用 __wakeup 方法，预先准备对象需要的资源
-* `__invoke()`:以调用函数的方式访问一个对象时， __invoke () 方法将首先被调用
-* `__set_state()`:当调用 var_export () 方法时，__set_state () 方法将被调用
-* `__debugInfo()`   输出 debug 信息
+* __construct 构造函数
+  - 功能：初始化赋值
+  - 场景：实例化对象时候调用
+* __destruct 析构方法
+  - 对象被销毁前（即从内存中清除前）调用
+* __get ($property) 调用一个未定义属性时，此方法会被触发，参数是被访问属性名
+* __set ($property, $value)给一个未定义的属性赋值时，此方法会被触发
+  - 参数是被设置的属性名和值这里的没有声明包括当使用对象调用时，访问控制为 proteced,private 的属性（即没有权限访问的属性）
+* __isset ($property) 当在一个未定义的属性上调用 isset () 函数时调用
+* __unset ($property) 当在一个未定义的属性上调用 unset () 函数时调用
+* `_call ($method, $arg_array)` 调用一个未定义的方法时调用
+* __autoload 函数，它会在试图使用尚未被定义的类时自动调用。通过调用此函数，脚本引擎在 PHP 出错失败前有了最后一个机会加载所需的类
+* __clone 复制一个对象时自动调用 clone 方法，如果在对象复制需要执行某些初始化操作，可以在 clone 方法实现
+* `__toString`  将一个对象转化成字符串时自动调用，比如使用 echo 打印对象时
+* `__callStatic($funName, $arguments)` 当调用一个未定义或不可达的静态方法时， __callStatic () 方法将被调用
+* `__sleep()` serialize() 函数会检查类中是否存在一个魔术方法 __sleep()。如果存在，该方法会先被调用，然后才执行序列化操作,可以用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组,不能返回父类的私有成员的名字。这样做会产生一个 E_NOTICE 级别的错误.
+* `__wakeup()` unserialize() 会检查是否存在一个 __wakeup() 方法。如果存在，则会先调用 __wakeup 方法，预先准备对象需要的资源
+* `__invoke()` 以调用函数的方式访问一个对象时， __invoke () 方法将首先被调用
+* `__set_state()` 当调用 var_export () 方法时，__set_state () 方法将被调用
+* `__debugInfo()` 输出 debug 信息
 
 ## 反射
+
+### 生成器 iterator
+
+* PHP 5.5 引入
+* 生成器不要求类实现Iterator接口，从而减轻了类的开销和负担。生成器会根据需求每次计算并产出需要迭代的值，对应用的性能有很大的影响：试想假如标准的PHP迭代器经常在内存中执行迭代操作，这要预先计算出数据集，性能低下；如果要使用特定方式计算大量数据，如操作Excel表数据，对性能影响更甚。使用生成器，即时计算并产出后续值，不占用宝贵的内存空间
+* 使用生成器迭代流资源（文件、音频等）
+* 生成器只是向前进的迭代器，这意味着不能使用生成器在数据集中执行后退、快进或查找操作，只能让生成器计算并产出下一个值
+* 提供了一种更容易的方法来实现简单的对象迭代，性能开销和复杂性大大降低
+* 一个生成器函数看起来像一个普通的函数，不同的是普通函数返回一个值，而一个生成器可以yield生成许多它所需要的值
+* 一个简单的例子就是使用生成器来重新实现 range() 函数。 标准的 range() 函数需要在内存中生成一个数组包含每一个在它范围内的值，然后返回该数组, 结果就是会产生多个很大的数组。 比如，调用 range(0, 1000000) 将导致内存占用超过 100 MB
+* 当一个生成器被调用的时候，返回一个可以被遍历的对象.当遍历这个对象的时候(例如通过一个foreach循环)，PHP 将会在每次需要值的时候调用生成器函数，并在产生一个值之后保存生成器的状态，这样它就可以在需要产生下一个值的时候恢复调用状态。
+* 一旦不再需要产生更多的值，生成器函数可以简单退出，而调用生成器的代码还可以继续执行，就像一个数组已经被遍历完了
+* 生成器函数核心是 yield 关键字。最简单的调用形式看起来像一个return申明，不同之处在于普通return会返回值并终止函数的执行，而yield会返回一个值给循环调用此生成器的代码并且只是暂停执行生成器函数。
+* 在一个表达式上下文(例如在一个赋值表达式的右侧)中使用yield，你必须使用圆括号把yield申明包围起来
+* 使用，函数yield返回，遍历获取值
+* 支持关联键值对,制定键名
+* 在没有参数传入的情况下被调用来生成一个 NULL值并配对一个自动的键名
+* 方法
+  - array iterator_to_array ( Traversable $iterator [, bool $use_keys = true ] )
+
+## 调用外部命令
+
+* 能执行linux系统的shell命令:可以获得命令执行的状态码
+  - system() 输出并返回最后一行shell结果
+    + 关掉 安全模式 safe_mode = off
+    + 禁用函数列表 disable_functions = proc_open, popen, exec, system, shell_exec, passthru 把 exec 去掉
+  - exec() 不输出结果，返回最后一行shell结果，所有结果可以保存到一个返回的数组里面。
+  - passthru() 只调用命令，把命令的运行结果原样地直接输出到标准输出设备上
+
+```sh
+system("/usr/a.sh");
+```
+
+## 过滤
+
+* 所有外部源都可能是攻击媒介，可能会（有意或无意）把恶意数据注入PHP脚本
+* 过滤输入:转义或删除不安全的字符
+  - HTML
+    + 使用htmlentities函数过滤HTML，该函数会将所有HTML标签字符（&、<、>等）转化为对应的HTML实体，以便在应用存储层取出后安全渲染,htmlentities的第一个参数表示要处理的HTML字符串，第二个参数表示要转义单引号，第三个参数表示输入字符串的字符集编码
+    + `html_entity_decode`:将所有HTML实体转化为对应的HTML标签
+    + 强大的过滤HTML功能，可以使用HTML Purifier库，这是一个很强健且安全的PHP库，专门用于使用指定规则过滤HTML输入
+  - SQL:SQL查询中一定不能使用未过滤的输入数据，如果要在SQL查询中使用输入数据，一定要使用PDO预处理语句
+* 验证数据
+  - 把`FILTER_VALIDATE_*`标识传递给filter_var函数，PHP提供了验证布尔值、电子邮件地址、浮点数、整数、IP、正则表达式和URL的标识
+  - 框架中的数据验证
+
+## 转义
+
+* htmlentities 函数转义输出
+  - 第二个参数一定要使用ENT_QUOTES，让这个函数转义单引号和双引号
+  - 第三个参数中指定合适的字符编码（通常是UTF-8）
+
+## 异常 Exception
+
+* PHP 的错误处理系统向面向对象演进后的产物。异常要先实例化，然后抛出，最后再捕获
+* 异常是 Exception 类的对象，在遇到无法修复的状况时抛出（例如，远程 API 无响应，数据库查询失败等），使用 try catch 代码块预测第三方代码可能抛出的异常
+* 出现问题时,预期并处理问题更为灵活的方式
+  - 可以主动出击，委托职责 抛出异常，把不知道怎么处理的特定情况交给上层开发者来处理
+  - 用于防守，预测潜在的问题，减轻其影响
+  - 可以就地处理，无需停止执行脚本
+* 内置的异常类及其子类如下：
+  - Exception
+  - ErrorException
+  - LogicException
+    + BadFunctionCallException
+    + BadMethodCallException
+    + DomainException
+    + InvalidArgumentException
+    + LengthException
+    + OutOfRangeException
+  - RuntimeException
+    + OutOfBoundsException
+    + OverflowException
+    + RangeException
+    + UnderflowException
+    + UnExpectedValueException
+* 异常处理: 允许注册一个全局异常处理程序，捕获所有未被捕获的异常。一定要设置一个全局异常处理程序，它是最后的安全保障。如果没有成功捕获并处理异常，通过这个措施可以给 PHP 应用的用户显示合适的错误信息。一般会在开发环境显示调试信息，而在线上环境显示对用户友好的提示信息
+* 使用自定义的异常处理程序替换现有的全局异常处理程序，代码执行完毕后，PHP 会礼貌性地建议你还原现有的异常处理程序，还原的方式是调用 `restore_exception_handler()` 函数
+
+## 错误 Error
+
+* 级别:致命错误、运行时错误、编译时错误、启动错误和用户触发的错误等,最常见错误是由语法错误或未捕获异常导致的错误
+  - `E_ALL & ~E_NOTICE` # 除了提示级别
+  - `E_ALL ^ E_NOTICE`
+  - `E_ERROR | E_RECOVERABLE_ERROR` # 只显示错误和可恢复
+* 使用 `error_reporting()` 函数或者在 php.ini 文件中使用` error_reporting` 指令
+* 使用 trigger_error 函数自己触发错误，然后使用自定义的错误处理程序进行处理
+* 编写运行在用户空间里的代码时最好使用异常。与错误不同的是，PHP 异常可以在 PHP 应用的任何层级抛出和捕获。异常提供的上下文信息比错误多，而且可以扩展最顶层的 Exception 类，创建自定义的异常子类。异常加上一个好的日志记录器（如 Monolog）比错误能解决更多的问题
+* 开发环境中，让 PHP 显示并记录所有错误信息，而在生产环境中记录大部分错误信息，但不显示出来.规则：
+  - 一定要让 PHP 报告错误
+  - 在开发环境中要显示错误
+  - 在生产环境中不能显示错误
+  - 在开发环境和生成环境中都要记录错误
+* 使用自定义错误处理程序时需要注意的是 PHP 会把所有错误都交给错误处理程序处理，甚至包括错误报告（php.ini 中 error_reporting 设置）中排除的错误，因此，要在检查错误代码之后进行处理
+* 处理完成后，可以使用 `restore_error_handler()` 函数还原错误处理程序
+* 工具
+  - `composer require filp/whoops`
+
+```
+|- Exception implements Throwable
+    |- ...
+|- Error implements Throwable
+    |- TypeError extends Error
+    |- ParseError extends Error
+    |- AssertionError extends Error
+    |- ArithmeticError extends Error
+        |- DivisionByZeroError extends ArithmeticError
+```
+
+## 序列化
+
+* 作用
+  - 方便传输
+  - 方便存储
+* 方案
+  - 文本序列化,更好可读性
+    + json
+    + jsond:jsond_encode() jsond_decode()
+    + serialize:serialize() unserialize()
+    + xml
+  - 二进制序列化,速度快
+    + msgpack: msgpack_pack() msgpack_unpack()
+    + protobuf
+    + thrift
+* 指标
+  - 序列化的速度
+  - 序列化后数据的大小
+* JSON
+  - `json_encode( mixed $value [, int $options = 0 [, int $depth = 512 ]] )` 函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据
+    + 1:JSON_HEX_TAG:所有的 < 和 > 转换成 \u003C 和 \u003E
+    + 2:JSON_HEX_AMP:所有的 & 转换成 \u0026
+    + 4:JSON_HEX_APOS:所有的 ' 转换成 \u0027
+    + 8:JSON_HEX_QUOT:所有的 " 转换成 \u0022
+    + 16:JSON_FORCE_OBJECT:使一个非关联数组输出一个类（Object）而非数组。 在数组为空而接受者需要一个类（Object）的时候尤其有用
+    + 32:JSON_NUMERIC_CHECK:将所有数字字符串编码成数字（numbers）
+    + 64:JSON_UNESCAPED_SLASHES:不要编码 /： 已转义用htmlspecialchars_decode()处理
+    + 128:JSON_PRETTY_PRINT:用空白字符格式化返回的数据
+    + 256:JSON_UNESCAPED_UNICODE:以字面编码多字节 Unicode 字符（默认是编码成 \uXXXX）
+    + 512:JSON_PARTIAL_OUTPUT_ON_ERROR:Substitute some unencodable values instead of failing
+    + 1024:JSON_PRESERVE_ZERO_FRACTION:Ensures that float values are always encoded as a float value
+  - json_decode()函数解码JSON字符串：将JSON字符串转换为PHP变量
+    + 字符串要求
+      * 使用UTF-8编码
+      * 不能在最后元素有逗号
+      * 不能使用单引号
+      * 不能有\r,\t，如果有请替换
+  - `int json_last_error ( void )`:返回json_encode() or json_decode() call的错误
+    + JSON_ERROR_NONE   没有错误发生   
+    + JSON_ERROR_DEPTH    到达了最大堆栈深度    
+    + JSON_ERROR_STATE_MISMATCH   无效或异常的 JSON  
+    + JSON_ERROR_CTRL_CHAR    控制字符错误，可能是编码不对   
+    + JSON_ERROR_SYNTAX   语法错误     
+    + JSON_ERROR_UTF8 异常的 UTF-8 字符，也许是因为不正确的编码。   PHP 5.3.3
+    + JSON_ERROR_RECURSION    One or more recursive references in the value to be encoded PHP 5.5.0
+    + JSON_ERROR_INF_OR_NAN   One or more NAN or INF values in the value to be encoded    PHP 5.5.0
+    + JSON_ERROR_UNSUPPORTED_TYPE 指定的类型，值无法编码。    PHP 5.5.0
+    + JSON_ERROR_INVALID_PROPERTY_NAME    指定的属性名无法编码。 PHP 7.0.0
+    + JSON_ERROR_UTF16    畸形的 UTF-16 字符，可能因为字符编码不正确
+
+## socket pcntl模块
 
 ## 杂项
 
@@ -1196,8 +1568,6 @@ spl_autoload_register(function ($class){
   - password_​needs_​rehash
   - password_​verify
 * 性能
-  - memory_get_usage()
-  - microtime()
   - `$jRawData = file_get_contents( 'php://input' );`
 
 ```php
@@ -1357,162 +1727,6 @@ var_dump(date("Y-m-d", strtotime("first day of +1 month", strtotime("2017-08-31"
 
 $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 ```
-
-### 生成器 iterator
-
-* PHP 5.5 引入
-* 生成器不要求类实现Iterator接口，从而减轻了类的开销和负担。生成器会根据需求每次计算并产出需要迭代的值，对应用的性能有很大的影响：试想假如标准的PHP迭代器经常在内存中执行迭代操作，这要预先计算出数据集，性能低下；如果要使用特定方式计算大量数据，如操作Excel表数据，对性能影响更甚。使用生成器，即时计算并产出后续值，不占用宝贵的内存空间
-* 使用生成器迭代流资源（文件、音频等）
-* 生成器只是向前进的迭代器，这意味着不能使用生成器在数据集中执行后退、快进或查找操作，只能让生成器计算并产出下一个值
-* 提供了一种更容易的方法来实现简单的对象迭代，性能开销和复杂性大大降低
-* 一个生成器函数看起来像一个普通的函数，不同的是普通函数返回一个值，而一个生成器可以yield生成许多它所需要的值
-* 一个简单的例子就是使用生成器来重新实现 range() 函数。 标准的 range() 函数需要在内存中生成一个数组包含每一个在它范围内的值，然后返回该数组, 结果就是会产生多个很大的数组。 比如，调用 range(0, 1000000) 将导致内存占用超过 100 MB
-* 当一个生成器被调用的时候，返回一个可以被遍历的对象.当遍历这个对象的时候(例如通过一个foreach循环)，PHP 将会在每次需要值的时候调用生成器函数，并在产生一个值之后保存生成器的状态，这样它就可以在需要产生下一个值的时候恢复调用状态。
-* 一旦不再需要产生更多的值，生成器函数可以简单退出，而调用生成器的代码还可以继续执行，就像一个数组已经被遍历完了
-* 生成器函数核心是 yield 关键字。最简单的调用形式看起来像一个return申明，不同之处在于普通return会返回值并终止函数的执行，而yield会返回一个值给循环调用此生成器的代码并且只是暂停执行生成器函数。
-* 在一个表达式上下文(例如在一个赋值表达式的右侧)中使用yield，你必须使用圆括号把yield申明包围起来
-* 使用，函数yield返回，遍历获取值
-* 支持关联键值对,制定键名
-* 在没有参数传入的情况下被调用来生成一个 NULL值并配对一个自动的键名
-* 方法
-  - array iterator_to_array ( Traversable $iterator [, bool $use_keys = true ] )
-
-## 调用外部命令
-
-* 能执行linux系统的shell命令:可以获得命令执行的状态码
-  - system() 输出并返回最后一行shell结果
-    + 关掉 安全模式 safe_mode = off
-    + 禁用函数列表 disable_functions = proc_open, popen, exec, system, shell_exec, passthru 把 exec 去掉
-  - exec() 不输出结果，返回最后一行shell结果，所有结果可以保存到一个返回的数组里面。
-  - passthru() 只调用命令，把命令的运行结果原样地直接输出到标准输出设备上
-
-```sh
-system("/usr/a.sh");
-```
-
-## 过滤
-
-* 所有外部源都可能是攻击媒介，可能会（有意或无意）把恶意数据注入PHP脚本
-* 过滤输入:转义或删除不安全的字符
-  - HTML
-    + 使用htmlentities函数过滤HTML，该函数会将所有HTML标签字符（&、<、>等）转化为对应的HTML实体，以便在应用存储层取出后安全渲染,htmlentities的第一个参数表示要处理的HTML字符串，第二个参数表示要转义单引号，第三个参数表示输入字符串的字符集编码
-    + `html_entity_decode`:将所有HTML实体转化为对应的HTML标签
-    + 强大的过滤HTML功能，可以使用HTML Purifier库，这是一个很强健且安全的PHP库，专门用于使用指定规则过滤HTML输入
-  - SQL:SQL查询中一定不能使用未过滤的输入数据，如果要在SQL查询中使用输入数据，一定要使用PDO预处理语句
-* 验证数据
-  - 把`FILTER_VALIDATE_*`标识传递给filter_var函数，PHP提供了验证布尔值、电子邮件地址、浮点数、整数、IP、正则表达式和URL的标识
-  - 框架中的数据验证
-
-## 转义
-
-* htmlentities函数转移输出，该函数的第二个参数一定要使用ENT_QUOTES，让这个函数转义单引号和双引号，而且，还要在第三个参数中指定合适的字符编码（通常是UTF-8）
-
-## 异常
-
-* PHP 的错误处理系统向面向对象演进后的产物。异常要先实例化，然后抛出，最后再捕获
-* 异常是 Exception 类的对象，在遇到无法修复的状况时抛出（例如，远程 API 无响应，数据库查询失败等），使用 try catch 代码块预测第三方代码可能抛出的异常
-* 出现问题时,预期并处理问题更为灵活的方式
-  - 可以主动出击，委托职责 抛出异常，把不知道怎么处理的特定情况交给上层开发者来处理
-  - 用于防守，预测潜在的问题，减轻其影响
-  - 可以就地处理，无需停止执行脚本
-* 内置的异常类及其子类如下：
-  - Exception
-  - ErrorException
-  - LogicException
-    + BadFunctionCallException
-    + BadMethodCallException
-    + DomainException
-    + InvalidArgumentException
-    + LengthException
-    + OutOfRangeException
-  - RuntimeException
-    + OutOfBoundsException
-    + OverflowException
-    + RangeException
-    + UnderflowException
-    + UnExpectedValueException
-* 异常处理: 允许注册一个全局异常处理程序，捕获所有未被捕获的异常。一定要设置一个全局异常处理程序，它是最后的安全保障。如果没有成功捕获并处理异常，通过这个措施可以给 PHP 应用的用户显示合适的错误信息。一般会在开发环境显示调试信息，而在线上环境显示对用户友好的提示信息
-* 使用自定义的异常处理程序替换现有的全局异常处理程序，代码执行完毕后，PHP 会礼貌性地建议你还原现有的异常处理程序，还原的方式是调用 `restore_exception_handler()` 函数
-
-## 错误
-
-* 级别:致命错误、运行时错误、编译时错误、启动错误和用户触发的错误等,最常见错误是由语法错误或未捕获异常导致的错误
-  - `E_ALL & ~E_NOTICE` # 除了提示级别
-  - `E_ALL ^ E_NOTICE` #
-  - `E_ERROR | E_RECOVERABLE_ERROR` # 只显示错误和可恢复
-* 使用 `error_reporting()` 函数或者在 php.ini 文件中使用` error_reporting` 指令
-* 使用 trigger_error 函数自己触发错误，然后使用自定义的错误处理程序进行处理
-* 编写运行在用户空间里的代码时最好使用异常。与错误不同的是，PHP 异常可以在 PHP 应用的任何层级抛出和捕获。异常提供的上下文信息比错误多，而且可以扩展最顶层的 Exception 类，创建自定义的异常子类。异常加上一个好的日志记录器（如 Monolog）比错误能解决更多的问题
-* 开发环境中，倾向于让 PHP 显示并记录所有错误信息，而在生产环境中我们会让 PHP 记录大部分错误信息，但不显示出来.规则：
-  - 一定要让 PHP 报告错误
-  - 在开发环境中要显示错误
-  - 在生产环境中不能显示错误
-  - 在开发环境和生成环境中都要记录错误
-* 使用自定义错误处理程序时需要注意的是 PHP 会把所有错误都交给错误处理程序处理，甚至包括错误报告（php.ini 中 error_reporting 设置）中排除的错误，因此，要在检查错误代码之后进行处理
-* 处理完成后，可以使用 `restore_error_handler()` 函数还原错误处理程序
-* 工具
-  - `composer require filp/whoops`
-
-```
-    |- Exception implements Throwable
-        |- ...
-    |- Error implements Throwable
-        |- TypeError extends Error
-        |- ParseError extends Error
-        |- AssertionError extends Error
-        |- ArithmeticError extends Error
-            |- DivisionByZeroError extends ArithmeticError
-```
-
-## 序列化
-
-* 作用
-  - 方便传输
-  - 方便存储
-* 方案
-  - 文本序列化,更好可读性
-    + json
-    + jsond:jsond_encode() jsond_decode()
-    + serialize:serialize() unserialize()
-    + xml
-  - 二进制序列化,速度快
-    + msgpack: msgpack_pack() msgpack_unpack()
-    + protobuf
-    + thrift
-* 指标
-  - 序列化的速度
-  - 序列化后数据的大小
-* JSON
-  - `json_encode( mixed $value [, int $options = 0 [, int $depth = 512 ]] )` 函数返回值JSON的表示形式：它将PHP变量(包含数组)转换为JSON格式数据
-    + 1:JSON_HEX_TAG:所有的 < 和 > 转换成 \u003C 和 \u003E
-    + 2:JSON_HEX_AMP:所有的 & 转换成 \u0026
-    + 4:JSON_HEX_APOS:所有的 ' 转换成 \u0027
-    + 8:JSON_HEX_QUOT:所有的 " 转换成 \u0022
-    + 16:JSON_FORCE_OBJECT:使一个非关联数组输出一个类（Object）而非数组。 在数组为空而接受者需要一个类（Object）的时候尤其有用
-    + 32:JSON_NUMERIC_CHECK:将所有数字字符串编码成数字（numbers）
-    + 64:JSON_UNESCAPED_SLASHES:不要编码 /： 已转义用htmlspecialchars_decode()处理
-    + 128:JSON_PRETTY_PRINT:用空白字符格式化返回的数据
-    + 256:JSON_UNESCAPED_UNICODE:以字面编码多字节 Unicode 字符（默认是编码成 \uXXXX）
-    + 512:JSON_PARTIAL_OUTPUT_ON_ERROR:Substitute some unencodable values instead of failing
-    + 1024:JSON_PRESERVE_ZERO_FRACTION:Ensures that float values are always encoded as a float value
-  - json_decode()函数解码JSON字符串：将JSON字符串转换为PHP变量
-    + 字符串要求
-      * 使用UTF-8编码
-      * 不能在最后元素有逗号
-      * 不能使用单引号
-      * 不能有\r,\t，如果有请替换
-  - `int json_last_error ( void )`:返回json_encode() or json_decode() call的错误
-    + JSON_ERROR_NONE   没有错误发生   
-    + JSON_ERROR_DEPTH    到达了最大堆栈深度    
-    + JSON_ERROR_STATE_MISMATCH   无效或异常的 JSON  
-    + JSON_ERROR_CTRL_CHAR    控制字符错误，可能是编码不对   
-    + JSON_ERROR_SYNTAX   语法错误     
-    + JSON_ERROR_UTF8 异常的 UTF-8 字符，也许是因为不正确的编码。   PHP 5.3.3
-    + JSON_ERROR_RECURSION    One or more recursive references in the value to be encoded PHP 5.5.0
-    + JSON_ERROR_INF_OR_NAN   One or more NAN or INF values in the value to be encoded    PHP 5.5.0
-    + JSON_ERROR_UNSUPPORTED_TYPE 指定的类型，值无法编码。    PHP 5.5.0
-    + JSON_ERROR_INVALID_PROPERTY_NAME    指定的属性名无法编码。 PHP 7.0.0
-    + JSON_ERROR_UTF16    畸形的 UTF-16 字符，可能因为字符编码不正确
 
 ## 安全
 
@@ -1717,7 +1931,7 @@ docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/l
 
 ## [xhprof](https://github.com/phacility/xhprof)
 
-* 一个分层PHP性能分析工具。报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情况。
+* 一个分层PHP性能分析工具。报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情况
 * [longxinH/xhprof](https://github.com/longxinH/xhprof):PHP7 support
 * 工具
   - [EvaEngine/xhprof.io](https://github.com/EvaEngine/xhprof.io):GUI to analyze the profiling data collected using XHProf – A Hierarchical Profiler for PHP. http://xhprof.io/
@@ -1728,10 +1942,10 @@ docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/l
     + 如果xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY)可以输出更多指标
   - xhprof_sample_disable — 停止 xhprof 性能采样分析器
   - xhprof_sample_enable — 以采样模式启动 XHProf 性能分析
-* 主要指标： 
-  - Inclusive Time (或子树时间)：包括子函数所有执行时间。 
-  - Exclusive Time/Self Time：函数执行本身花费的时间，不包括子树执行时间。 
-  - Wall时间：花去了的时间或挂钟时间。 
+* 主要指标
+  - Inclusive Time (或子树时间)：包括子函数所有执行时间
+  - Exclusive Time/Self Time：函数执行本身花费的时间，不包括子树执行时间
+  - Wall时间：花去了的时间或挂钟时间
   - CPU时间：用户耗的时间+内核耗的时间 
   - Function Name 函数名 
   - Calls 调用次数 
@@ -1842,6 +2056,8 @@ $host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
     + 前提是后任务不强依赖前一任务
     + 旁路方案
 * 方法
+  - memory_get_usage()
+  - microtime()
   - APC：Opcache缓存
     + yac
   - 扩展实现高频逻辑
@@ -2057,7 +2273,7 @@ $list->insert(36);
 
 * 不要使用 `mysql_` 函数：从核心中全部移除了
 
-## PHP能力
+## 能力
 
 用工具来实现想法，不管是自己的想法还是他人的需求，学会转化
 
@@ -2072,23 +2288,22 @@ $list->insert(36);
   - 字符串处理问题：正则表达式处理或简单PHP字符串处理函数来处理
   - 各种模板引擎的编写局限性问题
   - PHP和web端数据交互问题（如ajax，接口调用等）
-* PHP基础知识：过硬的基础知识会让你在项目开发过程中游刃有余
-  - 语法规则
+* PHP基础知识
   - MYSQL各种sql语句的写法，增删改查基本的不说了,in(),union,left(),leftjoin,as,replace,alter table,where的字段排序,各种索引建立的方法要特别熟悉
-  - 会自己搭建LAMP环境和WAMP环境，用集成软件一键式安装的不算。开发程序，对于自己开发的环境构建结构都不清楚，怎么排查问题？所以至少要会用对立的msi文件来安装自己需要的开发环境。安装3-5遍成功，这个算还行，还得会安装各种扩展，配置apache服务，知道各种参数设置的地方以及知道怎么设置各种参数；会linux操作系统的基本命令。
-  - 熟悉web方面的其他程序，因为PHP不是一个完全独立的东西，他是一个和其他语言和要素配合来完成一个项目的，如果对其他语言和要素不太熟悉，在团队协作过程中会非常吃力。这些其他要素包括：html，javascript，jquery，xml，http协议，正则表达式等
 * 综合的互联网应用及项目管理知识和素养
-  - 见识广博，擅于学习：不要只顾着天天编程，学会抽点时间去看看一些大型开源系统的架构思路，以及大型商务网站的构建方式。向他们学习，补充自己的不足。比如至少该晓得不同类型的开源系统有哪些吧，比如Uchome,dede,phpcms,wordpress,discuz,帝国等等看多了，会总结发现一些常规性的思路，比如缓存的机制，比如模板机制，比如静态页面生成等等。
-  - 项目解决方案选型：不同需求，用不同的机构和选型。有些架构固然强大，但是用于小型项目也会很吃力，就是杀机不用牛刀。根据需求来选型很重要。选型不是随口就能定的，需要一个PHP程序员用于良好的储备，个人觉得至少需要以下储备，才具备选型能力：熟练应用至少一个PHP框架，两-三个PHP开源系统；拥有自己的一套应用系统。
-  - 良好的项目管理素养：项目不是一直开发过程中，项目也会进入运营期，维护期，这样，具备良好的项目管理素养会使项目更加稳定，可控。良好的项目管理素养包括：
-    + 良好的项目开发及维护习惯，记住：千万别为了一时的省力，造成后面多次的重复劳动。时时提醒自己将工作流程化，流程规划化，规范简单化。
-    + 良好的多人合作管理意识：项目不是一个人的，是多人协作的产物，也是服务于大众的，因而，要提升协作意识，让相关人员一同来完善项目。
-  - 丰富的项目开发应用经验：学理论，去考试或考核是学校里面的事儿，没有项目经验，就像满肚子经文，吐也难吐出。这就需要实际的项目将自己的知识去学会转化为需求实现。
-  - 良好的开发规范
-    + 代码可读性强：对象，方法，函数的注释；一套成熟的命名规范；
-    + 代码冗余度底：程序和文件的重用性大，高内聚，低耦合
-    + 执行效率高：用最简单的程序流程实现应用需求，勿扰大弯子
-    + 代码安全性好：做一名警惕的程序员，任何有用户输入和上传文件的地方都得额外谨慎，也许一个程序员一时的疏忽就会导致一个系统顷刻间崩溃。
+  - 见识广博，擅于学习：不要只顾着天天编程，学会抽点时间去看看一些大型开源系统的架构思路，以及大型商务网站的构建方式。向他们学习，补充自己的不足。比如至少该晓得不同类型的开源系统有哪些吧，比如Uchome,dede,phpcms,wordpress,discuz,帝国等等看多了，会总结发现一些常规性的思路，比如缓存的机制，比如模板机制，比如静态页面生成等等
+  - 项目解决方案选型：不同需求，用不同的机构和选型。有些架构固然强大，但是用于小型项目也会很吃力，就是杀机不用牛刀。根据需求来选型很重要。选型不是随口就能定的，需要一个PHP程序员用于良好的储备，个人觉得至少需要以下储备，才具备选型能力：熟练应用至少一个PHP框架，两-三个PHP开源系统；拥有自己的一套应用系统
+  - 项目管理素养：项目不是一直开发过程中，也会进入运营期，维护期，这样，具备良好的项目管理素养会使项目更加稳定，可控
+    + 项目开发及维护习惯，记住：千万别为了一时的省力，造成后面多次的重复劳动。时时提醒自己将工作流程化，流程规划化，规范简单化
+    + 多人合作管理意识：项目不是一个人的，是多人协作的产物，也是服务于大众的，因而，要提升协作意识，让相关人员一同来完善项目
+  - 丰富的项目开发应用经验：学理论，去考试或考核是学校里面的事儿，没有项目经验，就像满肚子经文，吐也难吐出。这就需要实际的项目将自己的知识去学会转化为需求实现
+
+## 开发规范
+
+* 代码可读性强：对象，方法，函数的注释；一套成熟命名规范
+* 代码冗余度底：程序和文件的重用性大，高内聚，低耦合
+* 执行效率高：用最简单的程序流程实现应用需求，勿扰大弯子
+* 代码安全性好：做一名警惕的程序员，任何有用户输入和上传文件的地方都得额外谨慎，也许一个程序员一时的疏忽就会导致一个系统顷刻间崩溃
 
 ## 面试
 
@@ -2198,100 +2413,15 @@ java -jar ./vendor/bin/selenium-server-standalone-3.4.0.jar
 
 ## 问题
 
->  5096 segmentation fault (core dumped)  php http_server.php
+> 5096 segmentation fault (core dumped)  php http_server.php
 
->  Warning: "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"?
-
-## 扩展
-
-* intl
-* mcrypt
-* memeached
-  - memcache完全在PHP框架内开发的，提供了memcached的接口，memecached扩展是使用了libmemcached库提供的api与memcached服务端进行交互。 libmemcached 是 memcache 的 C 客户端，它具有低内存，线程安全等优点
-  - memcache提供了面向过程及面向对象的接口，memached只支持面向对象的接口。 memcached 实现了更多的 memcached 协议。
-  - memcached 支持 Binary Protocol，而 memcache 不支持，意味着 memcached 会有更高的性能。不过，还需要注意的是，memcached 目前还不支持长连接。
-* mongodb
-* Opcache
-  - PHP 5.5.0开始，PHP内置了字节码缓存功能，名为Zend Opcache
-  - PHP是解释型语言，构建在Zend 虚拟机之上，PHP解释器在执行PHP脚本时会解析PHP脚本代码，把PHP代码编译成一系列Zend操作码,每个操作码都是一个字节长，所以又叫字节码，字节码可以直接被Zend虚拟机执行），然后执行字节码
-  - 通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能，省去了每次加载和解析 PHP 脚本的开销，对于I/O开销如读写磁盘文件、读写数据库等并无影响
-  - 字节码(Byte Code)：一种包含执行程序比机器码更抽象的中间码，由一序列 op代码/数据对组成的二进制文件
-  - HHVM(HipHop Virtual Machine，Facebook开源的PHP虚拟机)采用了JIT(Just In Time Just Compiling，即时编译)技术，在运行时编译字节码为机器码，让性能测试提升了一个数量级。 唯有C/C++编译生成的二进制文件可直接运行。
-  - 机器码(Machine Code)：也被称为原生码(Native Code)，用二进制代码表示的计算机能直接识别和执行的一种机器指令的集合，它是计算机硬件结构赋予的操作功能。
-* pdo-pgsql
-* phalcon
-* [redis](http://pecl.php.net/package/redis)
-  - [predis](https://github.com/nrk/predis/):Flexible and feature-complete Redis client for PHP and HHVM https://github.com/nrk/predis/wiki 纯 php 实现的，通过 socket 与 redis 服务器通信，使用时只需要通过 composer 加载依赖，无需额外安装扩展
-  - [phpredis/phpredis](https://github.com/phpredis/phpredis): A PHP extension for Redis 是基于 c 语言开发的 PHP 扩展，速度快、内存小.需要安装对应的扩展才能使用.功能上两者差不多，性能上略胜一筹，但由于与 redis 通信的主要瓶颈还是在网络 IO 上
-* sphinx
-* swoole
-* apc:op缓存
-* [defuse/php-encryption](https://github.com/defuse/php-encryption):Simple Encryption in PHP.
-* [jedisct1/libsodium](https://github.com/jedisct1/libsodium):A modern, portable, easy to use crypto library https://libsodium.org
-* PHPDoc
-* [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)：PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards. http://pear.php.net/package/PHP_CodeS…
-* [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)：PHP Code Beautifier and Fixer(phpcbf) PHP代码规范与质量检查工具
-
-```sh
-brew tap homebrew/homebrew-php
-brew install php71 --with-pear
-
-brew install mcrypt
-
-yum install php-mcrypt|php5-mcrypt
-apt-get install php-mcrypt|php5-mcrypt
-pecl install mcrypt-snapshot|mcrypt-1.0.1
-brew install php71-mcrypt
-
-# PHP_CodeSniffer
-curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-php phpcs.phar -h
-curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
-php phpcbf.phar -h
-
-pear install PHP_CodeSniffer
-
-composer global require "squizlabs/php_codesniffer=*"
-
-phpcs /path/to/code/myfile.php
-phpcs /path/to/code
-
-/Users/henry/.composer/vendor/bin/phpcs # phpstrom 开启
-
-# vscode
-phpcs.enable true
-
-# php-cs-fixer
-wget http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -O php-cs-fixer
-wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.10.0/php-cs-fixer.phar -O php-cs-fixer
-curl -L http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -o php-cs-fixer
-
-sudo chmod a+x php-cs-fixer
-sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
-
-composer global require friendsofphp/php-cs-fixer
-export PATH="$PATH:$HOME/.composer/vendor/bin"
-brew install homebrew/php/php-cs-fixer
-
-composer global require phpmd/phpmd
-
-sudo php-cs-fixer self-update
-brew upgrade php-cs-fixer
-
-php php-cs-fixer.phar fix /path/to/dir
-php php-cs-fixer.phar fix /path/to/file
-
-phpcs --config-show
-phpcs --config-set
-
-pecl channel-update pecl.php.net
-```
+> Warning: "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"?
 
 ## 最佳实践
 
 * 配置文件（configuration file）:写在一个文件里,方便地适应开发环境的变化。配置文件通常包含以下信息：数据库参数、email地址、各类选项、debug和logging输出开关、应用程序常数
-* 名称空间（namespace）: 选择类和函数名的时候，必须很小心，避免出现重名。尽可能不要在类以外，放置全局性函数，类对内部的属性和方法，相当于有一层名称空间保护。如果你确实有必要声明全局性函数，那么使用一个前缀，比如dao_factory()、db_getConnection()、text_parseDate()等等
-* 数据库抽象层: PHP不提供数据库操作的通用函数，每种数据库都有一套自己的函数,不应该直接使用这些函数.数据库抽象层通常比系统本身的数据库函数，更易用一些
+* 名称空间（namespace）: 选择类和函数名的时候，必须很小心，避免出现重名。尽可能不要在类以外，放置全局性函数，类对内部的属性和方法，相当于有一层名称空间保护。如果确实有必要声明全局性函数，那么使用一个前缀，比如dao_factory()、db_getConnection()、text_parseDate()等等
+* 数据库抽象层:PHP不提供数据库操作的通用函数，每种数据库都有一套自己的函数,不应该直接使用这些函数.数据库抽象层通常比系统本身的数据库函数，更易用一些
 * "值对象"（Value Object, VO）: 值对象（VO）在形式上，就像C语言的struct结构。它是一个只包含属性、不包含任何方法（或只包含很少方法）的类。一个值对象，就对应一个实体。它的属性，通常应该与数据库的字段名保持相同。此外，还应该有一个ID属性
 * 数据访问对象（Data Access Object, DAO）: 数据访问对象（DAO）的作用，主要是将数据库访问与其他代码相隔离。DAO应该是可以叠加（stacked）的，这样就有利于将来你再添加数据库缓存。每一个值对象的类，都应该有自己的DAO
   - save：插入或更新一条记录
@@ -2347,19 +2477,8 @@ pecl channel-update pecl.php.net
 
 * [https://phar.io](https://phar.io):The PHAR Installation and Verification Environment (PHIVE)
 * [sebastianfeldmann/phpbu](https://github.com/sebastianfeldmann/phpbu):PHP Backup Utility - Creates and encrypts database and file backups, syncs your backups to other servers or cloud services and assists you monitor your backup process https://phpbu.de
-* [laradock/laradock](https://github.com/Laradock/laradock):The most popular full PHP development environment on Docker. http://laradock.io
-* [swisnl/php7-upgrade-tools](https://github.com/swisnl/php7-upgrade-tools):A set of tools for upgrading applications to PHP 7
 * [rectorphp/rector](https://github.com/rectorphp/rector):Instant Upgrades for PHP Applications https://www.tomasvotruba.cz/blog/2018/02/19/rector-part-1-what-and-how/
-* 环境平台
-  - [XAMPP](https://www.apachefriends.org/index.html)
-  - [wampserver](link)
-  - [mamp](https://www.mamp.info)
-    + http://localhost:8888/MAMP/
-    + /Applications/MAMP/htdocs
-    + MySQL port：8889
-  - Wnmp:Version of nginx for Windows uses the native Win32 API (not the Cygwin emulation layer). Only the select() connection processing method is currently used, so high performance and scalability should not be expected.
-    + `tasklist /fi "imagename eq nginx.exe" # 查看进程，没有查看error.log`
-* [ beyondcode / expose ](https://github.com/beyondcode/expose): A beautiful, fully open-source, tunneling service - written in pure PHP https://beyondco.de  expose features, like sharing your local sites, out of the box - without any additional setup required
+* [expose](https://github.com/beyondcode/expose): A beautiful, fully open-source, tunneling service - written in pure PHP https://beyondco.de  expose features, like sharing your local sites, out of the box - without any additional setup required
 
 ## 参考
 
