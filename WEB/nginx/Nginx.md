@@ -1281,17 +1281,21 @@ sticky learn
 
 ## 日志 log
 
-* access_log 主要记录客户端访问 Nginx 的每一个请求，格式可以自定义 `log_format name string;`。可以得到用户地域来源、跳转来源、使用终端、某个 URL 访问量等相关信息。
-    - `log_format` 指令用于定义日志的格式，语法: `log_format name string;` 其中 name 表示格式名称，string 表示定义的格式字符串。log_format 有一个默认的无需设置的组合日志格式.`log_format` 配置必须放在 http 内，否则会出现警告
-    - `access_log `指令用来指定访问日志文件的存放路径（包含日志文件名）、格式和缓存大小
-* error_log 主要记录客户端访问 Nginx 出错时的日志，格式不支持自定义.语法: `error_log path [level]`; 其中 path 表示错误日志存放路径，level 表示错误日志等级，日志等级包括 debug、info、notice、warn、error、crit、alert、emerg，从左至右，日志详细程度逐级递减
+* access_log 主要记录客户端访问 Nginx 的每一个请求，格式可以自定义 `log_format name string;`,得到用户地域来源、跳转来源、使用终端、某个 URL 访问量等相关信息。
+    - `log_format`定义日志的格式，语法: `log_format name string;`
+        + name 表示格式名称
+        + string 表示定义的格式字符串
+    - log_format 有一个默认无需设置的组合日志格式.`log_format` 配置必须放在 http 内，否则会出现警告
+    - `access_log` 指定访问日志文件存放路径（包含日志文件名）、格式和缓存大小
+* error_log 记录客户端访问 Nginx 出错时的日志，格式不支持自定义.语法: `error_log path [level]`; 其中 path 表示错误日志存放路径，level 表示错误日志等级，日志等级包括 debug、info、notice、warn、error、crit、alert、emerg，从左至右，日志详细程度逐级递减
 * gnuplot:生成png
-* [allinurl / goaccess](https://github.com/allinurl/goaccess):GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. https://goaccess.io
+* [goaccess](https://github.com/allinurl/goaccess):GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. https://goaccess.io
 * ngxtop 统计实时数据
     - `pip install ngxtop`
     - `ngxtop -c conf/nginx.conf -t 1` -c 指定配置文件，-t 刷新频率，单位为秒
 * lua-nginx-module，nginx/tengine
-* 直接安装openresty的话，就方便了，内嵌了lua，不需要重新编译nginx了
+* 直接安装openresty内嵌了lua，不需要重新编译nginx
+* http 模块日志不生效
 
 ```sh
 log_format myformat '$remote_addr  $status  $time_local';

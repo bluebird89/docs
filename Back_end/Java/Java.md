@@ -1072,7 +1072,7 @@ static void cacheException() throws Exception{
 * 线程安全
 * 线程池
   - [线程池参数动态化配置](https://mp.weixin.qq.com/s/EhBt44Rj0c5E-UVf742aGw)
-* AQS
+* [AQS](https://mp.weixin.qq.com/s/ae60O68UofpuO0Cq5OEnNA)
 * 锁
 * 悲观锁/乐观锁
 * 非/公平锁
