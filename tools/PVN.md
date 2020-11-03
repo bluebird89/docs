@@ -365,7 +365,6 @@ Socks 主机 127.0.0.1 7891
 * ExpressVPN
 * NordVPN
 * PureVPN
-* 完美隐私
 * [txthinking/brook](https://github.com/txthinking/brook):Brook is a cross-platform(Linux/MacOS/Windows/Android/iOS) proxy/vpn software
 * [Alvin9999/new-pac](https://github.com/Alvin9999/new-pac)
 * BT sync
@@ -387,6 +386,7 @@ Socks 主机 127.0.0.1 7891
   - [jiangxufeng/v2rayL](https://github.com/jiangxufeng/v2rayL):v2ray linux GUI客户端，支持订阅、vemss、ss等协议，自动更新订阅、检查版本更新
   - pharos Pro:ios 付费
   - [Trojan-Qt5](https://github.com/TheWanderingCoel/Trojan-Qt5)
+  - shadowrocket
   - Quantumult
     + 分流
       * `https://raw.githubusercontent.com/limbopro/Profiles/master/Quantumult/Pro.conf`

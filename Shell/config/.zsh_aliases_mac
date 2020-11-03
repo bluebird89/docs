@@ -23,6 +23,11 @@ alias fgrep='fgrep --color=auto'
 
 alias cls='clear'
 
+alias bsl='brew services list'
+alias bsu='brew services start'
+alias bsd='brew services stop'
+alias bsr='brew services restart'
+
 alias sublime='open -a "Sublime Text"'
 alias st='sublime'
 alias m='mate'

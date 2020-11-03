@@ -266,11 +266,12 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [alibaba/druid](https://github.com/alibaba/druid):阿里巴巴数据库事业部出品，为监控而生的数据库连接池。阿里云Data Lake Analytics(https://www.aliyun.com/product/datalakeanalytics )、DRDS、TDDL 连接池powered by Druid https://github.com/alibaba/druid/wiki
 * [cloudera/hue](https://github.com/cloudera/hue):Hue is an open source SQL Cloud Assistant for developing and accessing SQL/Data Apps. http://gethue.com
 * [xo/usql](https://github.com/xo/usql):Universal command-line interface for SQL databases
-* [ClickHouse](https://github.com/ClickHouse/ClickHouse):ClickHouse is a free analytics DBMS for big data https://clickhouse.tech
 * [franchise](https://github.com/HVF/franchise)：🍟 a notebook sql client. what you get when have a lot of sequels. https://franchise.cloud
 * [Debezium](link)
   - 一个变更数据捕获（Change Data Capture, CDC） 平台，可以将数据库变更流式传输到Kafka 的 topics
   - 对数据库日志文件中的变更做出反应，并具有多个CDC连接器，适用于多种数据库，其中包括Postgres、MySQL、Oracle 和 MongoDB
+
+* [TablePlus](https://tableplus.com/) Database management made easy
 
 ## 参考
 

@@ -344,12 +344,11 @@
 ## 图书
 
 * 百面机器学习
-  - 知识：主要是指你对machine learning相关知识和理论的储备
-  - 工具：将你的machine learning知识应用于实际业务的工具
-  - 逻辑：你的举一反三的能力，你解决问题的条理性，你发散思维的能力，你的聪明程度
+  - 知识：主要是指对machine learning相关知识和理论的储备
+  - 工具：将machine learning知识应用于实际业务的工具
+  - 逻辑：举一反三的能力，解决问题的条理性，你发散思维的能力，你的聪明程度
   - 业务：深入理解所在行业的商业模式，从业务中发现motivation并进而改进模型算法的能力
-* 《机器学习》又称为西瓜书。基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等。
-  - [西瓜书](https://github.com/datawhalechina/pumpkin-book) 《机器学习》（西瓜书）公式推导解析，在线阅读地址：https://datawhalechina.github.io/pumpkin-book
+* [机器学习 西瓜书 ](https://github.com/datawhalechina/pumpkin-book)基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等
   - [在线阅读](https://datawhalechina.github.io/pumpkin-book/)
 * 《推荐系统实战》：项亮，很适合对于想了解推荐系统
 * 《概率论与数理统计》
@@ -376,6 +375,7 @@
 * 《统计学习方法》  李航
 * 《Python深度学习（Keras）》
 * 《深度学习入门：基于Python的理论与实现》
+* [机器学习基础 Foundations of Machine Learning](https://cs.nyu.edu/~mohri/mlbook/)
 * 深入理解Tensor Flow：架构
 * [](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)
 

@@ -2,7 +2,7 @@
 
 The Go programming language https://golang.org [中国官网](https://golang.google.cn/)
 
-## Install
+## [Install](https://golang.org/dl/)
 
 * Go 编译器支持交叉编译，可以在一台机器上构建运行在具有不同操作系统和处理器架构上运行的应用程序，也就是说编写源代码的机器可以和目标机器有完全不同的特性
   - $GOOS       $GOARCH
@@ -38,47 +38,50 @@ The Go programming language https://golang.org [中国官网](https://golang.goo
   - windows     386
   - windows     amd64
 * 环境变量
-  - GOROOT：(std lib)golang安装路径,默认会安装到如下目录：`/usr/local/go`
+  - GOROOT：(std lib)Go的安装路径,默认会安装到如下目录：`/usr/local/go`
   - GOARCH 表示目标机器的处理器架构，值可以是 386、amd64 或 arm。
   - GOOS 表示目标机器的操作系统，值可以是 darwin、freebsd、linux 或 windows。
-  - GOBIN 表示编译器和链接器的安装位置，默认是 GOROOT/bin
-  - GOPATH：(external libs):一个目录的路径，也可以是多个目录路径，每个目录都代表 Go语言的一个工作区,存放Go的开发代码和第三方包代码
+  - GOBIN Go项目的二进制文件存放目录，默认是 GOROOT/bin
+  - GOPATH：(external libs):Go的工作空间
+    + 可以是多个目录路径，每个目录都代表 Go语言的一个工作区,存放Go的开发代码和第三方包代码
     + 允许设置多个路径，和各个系统环境多路径设置一样，windows用“;”，linux（mac）用“:”分隔
     + 不要把GOPATH设置成go的安装路径,在用户目录下面创建一个目录, 如gopath.$GOPATH 默认采用和 $GOROOT 一样的值，但从 Go 1.1 版本开始，必须修改为其它路径
     + go get命令去获取远程库的时候，一般会安装到第一个工作区当中
     + 可以包含多个包含 Go 语言源码文件、包文件和可执行文件的路径，每个目录下包含目录
-      * bin：存放可执行文件：需要把GOPATH中的可执行目录也配置到环境变量中, 否则自行下载的第三方go工具就无法使用了 编译后二进制的存放目的地
-      * pkg：存放安装后的归档文件, 主要是`*.a`文件
-      * src：存放go的源文件 import 包时的搜索路径
+      * bin：编译生成的可执行文件路径：需要把GOPATH中的可执行目录也配置到环境变量中, 否则自行下载的第三方go工具就无法使用了 编译后二进制的存放目的地
+      * pkg：编译包时，生成的.a文件存放路径
+      * src：源码路径 import 包时的搜索路径
 
 ```sh
 sudo snap install go --classic
 
-### linux
+## linux
 wget https://dl.google.com/go/go1.12.6.linux-amd64.tar.gz
 tar -xvzf go1.10.2.linux-amd64.tar.gz -C /usr/local
 
-# /etc/profile or $HOME/.profile or ~/.bashrc
-echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
-echo 'export PATH=$PATH:$HOME/go/bin' >> ~/.profile
 
 mkdir -p ~/projects/{bin,pkg,src}
 
-export GOROOT=/usr/local/go # Installing to a custom location.install the Go tools to a different location. In this case you must set the GOROOT environment variable to point to the directory in which it was installed.
-export GOPATH=$HOME/projects # 默认安装包的路径
-export PATH=$GOPATH/bin:$PATH:$GOROOT/bin
+# /etc/profile or $HOME/.profile or ~/.bashrc
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/projects
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
 
-source ~/.zshrc
+source ~/.zshrc|/etc/profile
 
 ### Mac
 brew install golang
 mkdir -p $GOPATH $GOPATH/src $GOPATH/pkg $GOPATH/bin
-export GOPATH=$HOME/go
+
 export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=$HOME/go
 export GOPROXY=https://goproxy.cn
 export GOBIN=$GOPATH/bin
 export PATH=$GOPATH/bin:$PATH:$GOROOT/bin
-source .bash_profile # 使修改立刻生效
+
+source .bash_profile
 
 go version
 go env
@@ -209,18 +212,18 @@ go run hello.go
 
 ## 常量
 
-* 常量的声明与变量类似，使用 const 关键字
-* 常量可以是字符、字符串、布尔值或数值
-* 常量不能用 := 语法声明
-* 数值常量是高精度的值。 一个未指定类型的常量由上下文来决定其类型
+* 声明与变量类似，使用 const 关键字
+* 类型可以是字符、字符串、布尔值或数值
+* 不能用 := 语法声明
+* 数值常量是高精度的值。一个未指定类型的常量由上下文来决定其类型
   - int 类型最大可以存储一个 64 位的整数，有时会更小）
   - int 可以存放最大64位的整数，根据平台不同有时会更少）
 * iota
 
 ## 数据类型
 
-* type: 查看数据类型
-* 基础数据类型 值类型
+* type 查看数据类型
+* 基础数据类型｜值类型
   - bool
   - string
     * \n ：换行符
@@ -270,8 +273,8 @@ go run hello.go
       * b = b[1:]      // len(b)=4, cap(b)=4
     + 值是可变长的。切片的长度可以自动地随着其中元素数量的增长而增长，但不会随着元素数量的减少而减小。
     + a[low : high] 过两个下标来界定,会选择一个半开区间，包括第一个元素，但排除最后一个元素,利用它的默认行为来忽略上下界。切片下界的默认值为 0，上界则是该切片的长度。
-    + 切片并不存储任何数据，它只是描述了底层数组中的一段。
-    + 更改切片的元素会修改其底层数组中对应的元素。 与它共享底层数组的切片都会观测到这些修改。
+    + 切片并不存储任何数据，只是描述了底层数组中的一段
+    + 更改切片的元素会修改其底层数组中对应的元素。 与它共享底层数组的切片都会观测到这些修改
     + 在每个切片的底层数据结构中，一定会包含一个数组。数组可以被叫做切片的底层数组
     + 切片也可以被看作是对数组的某个连续片段的引用
     + 通过切片表达式基于某个数组或切片生成新切片的时候
@@ -464,6 +467,8 @@ func main() {
 * 一个 io.Reader 包装另一个 io.Reader，然后通过某种方式修改其数据流
 * image 包定义了 Image 接口
   - Bounds 方法的返回值 Rectangle 实际上是一个 image.Rectangle，它在 image 包中声明
+* Print采用默认格式将其参数格式化并写入标准输出。如果两个相邻的参数都不是字符串，会在它们的输出之间添加空格。返回写入的字节数和遇到的任何错误
+* Println采用默认格式将其参数格式化并写入标准输出。总是会在相邻参数的输出之间添加空格并在输出结束后添加换行符。返回写入的字节数和遇到的任何错误
 
 ```go
 type Stringer interface {
@@ -782,7 +787,7 @@ replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
   - 接口类型 Go 语言有接口类型，任何结构都可以简单地通过实现接口的方法来满足接口。这允许你解耦代码中的依赖项。然后，你可以在测试中模拟你的依赖项。通过使用接口，你可以编写更加模块化的可测试代码。Go 语言还具有头等函数，这使得开发人员以更实用的方式编写代码成为可能。
   - 标准库 Go 语言有一个相当不错的标准库。它提供了方便的内置函数，用于处理基本类型。有些包可以让你轻松构建一个 Web 服务器、处理 I/O、使用加密技术以及操作原始字节。标准库提供的 JSON 序列化和反序列化非常简单。通过使用“tags”，你可以在 struct 字段旁边指定 JSON 字段名。
   - 测试支持 测试支持内置在标准库中，不需要额外的依赖。如果你有个名为 thing.go 的文件，请在另一个名为 thing_test.go 的文件中编写测试，并运行“go test”。Go 就将快速执行这些测试。
-  - 静态分析工具 Go 语言的静态分析工具众多且强大。一种特别的工具是 gofmt，它根据 Go 的建议风格对代码进行格式化。这可以规范项目的许多意见，让团队奖经理集中在代码所做的工作上。我们对每个构建运行 gofmt、golint 和 vet，如果发现任何警告的话，则构建将会失败。
+  - 静态分析工具 Go 语言的静态分析工具众多且强大。一种特别的工具是 gofmt，根据 Go 的建议风格对代码进行格式化。这可以规范项目的许多意见，让团队奖经理集中在代码所做的工作上。我们对每个构建运行 gofmt、golint 和 vet，如果发现任何警告的话，则构建将会失败。
   - 垃圾收集 在设计 Go 语言时，有意将内存管理设计得比 C 和 C++ 更容易。动态分配的对象是垃圾收集。Go 语言使指针的使用更加安全，因为它不允许指针运算。还提供了使用值类型的选项。
   - 更容易的并发模型 虽然并发编程从来就不是一件易事，但 Go 语言在并发编程要比其他语言更容易。创建一个名为“goroutine”的轻量级线程，并通过“channel”与它进行通信几乎是非常简单的事情，至于更为复杂的模型，也是有可能能够实现的。
 * 弊
@@ -1110,13 +1115,13 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [The Go Programming Language](http://www.gopl.io/)
   - [Code](https://github.com/adonovan/gopl.io/):Example programs from "The Go Programming Language"
 * Go 语言学习笔记
-* [ chai2010 / go-ast-book ](https://github.com/chai2010/go-ast-book/):books 《Go语法树入门》(开源免费图书/Go语言进阶/掌握抽象语法树/Go语言AST/LLVM/LLIR/凹语言)
+* [go-ast-book](https://github.com/chai2010/go-ast-book/):books 《Go语法树入门》(开源免费图书/Go语言进阶/掌握抽象语法树/Go语言AST/LLVM/LLIR/凹语言)
 
 ## 项目
 
 * [hajimehoshi/ebiten](https://github.com/hajimehoshi/ebiten):A dead simple 2D game library in Go https://hajimehoshi.github.io/ebiten/
 * [go-shiori/shiori](https://github.com/go-shiori/shiori):Simple bookmark manager built with Go
-* [maxence-charriere / go-app](https://github.com/maxence-charriere/go-app):A package to build progressive web apps with Go programming language and WebAssembly. https://luck.murlok.io
+* [maxence-charriere/go-app](https://github.com/maxence-charriere/go-app):A package to build progressive web apps with Go programming language and WebAssembly. https://luck.murlok.io
 * [](https://github.com/lexkong/apiserver_demos)
 
 ## 教程
@@ -1335,11 +1340,11 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - `godoc -http=:6060` 访问`http://localhost:6060/`
 * [deanishe/awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
 * [ hackstoic / golang-open-source-projects ](https://github.com/hackstoic/golang-open-source-projects):为互联网IT人打造的中文版awesome-go
-* [Go内存分配](https://mp.weixin.qq.com/s/3gGbJaeuvx4klqcv34hmmw)
 * [effective_go](https://go-zh.org/doc/effective_go.html)
 * https://learn.go.dev/
 
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>
 
+* [Go内存分配](https://mp.weixin.qq.com/s/3gGbJaeuvx4klqcv34hmmw)
 [](https://mp.weixin.qq.com/s?__biz=MzUzNTY5MzU2MA==&mid=2247484112&idx=1&sn=79d0d3167d0d962fe41ec00cdafffbb0)

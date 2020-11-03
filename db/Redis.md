@@ -164,7 +164,7 @@ CLIENT KILL # 关闭客户端连接
 
 ## 内存
 
-* 内存统计: `info memeory`
+* 统计: `info memeory`
   - used_memory：Redis分配器分配的内存总量（单位是字节），包括使用的虚拟内存（即swap）
   - `used_memory_rss`Redis进程占据操作系统的内存（单位是字节），与top及ps命令看到的值是一致的；除了分配器分配的内存之外，used_memory_rss还包括进程运行本身需要的内存、内存碎片等，但是不包括虚拟内存。
   - 二者之所以有所不同，一方面是因为内存碎片和Redis进程运行需要占用内存，使得前者可能比后者小，另一方面虚拟内存的存在，使得前者可能比后者大
@@ -289,8 +289,8 @@ struct sdshdr {
   - CLIENT KILL [ip:port] [ID client-id] :关闭客户端连接
   - SLAVEOF host port 将当前服务器转变为指定服务器的从属服务器(slave server)
 * 配置
-  - config get 配置项：获取服务器配置的信息
-  - config set 配置项  值：设置配置项信息
+  - config get 配置项：获取服务器配置信息
+  - config set 配置项值：设置配置项信息
 * 数据
   - MOVE key db：将key移动到1数据库
   - dbsize：返回当前数据库中key的数目
@@ -2073,8 +2073,8 @@ rdr keys FILE1 [FILE2] [FILE3]...
 ## 工具
 
 * 客户端
-  - [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager):🔧 Cross-platform GUI management tool for Redis http://redisdesktop.com
-  - [luin/medis](https://github.com/luin/medis):💻 Medis is a beautiful, easy-to-use Mac database management application for Redis. http://getmedis.com
+  - [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager):🔧 Cross-platform GUI management tool for Redis https://rdm.dev/
+  - [medis](https://github.com/luin/medis):💻 Medis is a beautiful, easy-to-use Mac database management application for Redis. http://getmedis.com
   - [mylxsw/redis-tui](https://github.com/mylxsw/redis-tui):A Redis Text-based UI client in CLI
 * [sripathikrishnan/redis-rdb-tools](https://github.com/sripathikrishnan/redis-rdb-tools):Parse Redis dump.rdb files, Analyze Memory, and Export Data to JSON
 * [twitter/twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis

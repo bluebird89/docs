@@ -11,12 +11,12 @@ The Ruby Programming Language https://www.ruby-lang.org/
 ## [安装](https://gorails.com/setup/ubuntu/14.04)
 
 * [rbenv/rbenv](https://github.com/rbenv/rbenv):Groom your app’s Ruby environment
+* [rvm](http://rvm.io/) Ruby  版本管理工具，其作用是在系统中安装若干个不同版本的 Ruby，且不让它们之间发生冲突
 
 ```sh
 # ubuntu
-sudo apt-get install ruby-full
+sudo apt-get install curl ruby-full
 
-sudo apt install curl
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -38,19 +38,6 @@ rbenv install -l
 rbenv install 2.7.0
 rbenv global 2.7.0
 
-#  卸载
-rbenv uninstall 2.1.3
-# 卸载 rbenv,屏蔽~/.bashrc
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-rm -rf `rbenv root`
-
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-curl -sSL https://get.rvm.io | bash -s stable
-source ~/.rvm/scripts/rvm
-rvm install 2.4.0
-rvm use 2.4.0 --default
-
 # Mac
 brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
 echo 'eval "$(rbenv init -)"' >> ~/Projects/config/env.sh
@@ -60,10 +47,18 @@ rbenv global 2.1.1
 # rbenv works by creating a directory of shims, which point to the files used by the Ruby version that's currently enabled. Through the rehash sub-command, rbenv maintains shims in that directory to match every Ruby command across every installed version of Ruby on your server.
 rbenv rehash
 
-# rvm 是 Ruby 的版本管理工具，其作用是在系统中安装若干个不同版本的 Ruby，且不让它们之间发生冲突
+#  卸载
+rbenv uninstall 2.1.3
+# 卸载 rbenv,屏蔽~/.bashrc
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+rm -rf `rbenv root`
+
+# rvm
 sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-curl -sSL https://get.rvm.io | bash -s stable
+
+gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+\curl -sSL https://get.rvm.io | bash -s stable
 source ~/.rvm/scripts/rvm
 rvm install 2.7.0
 rvm use 2.7.0 --default
@@ -79,7 +74,7 @@ sudo make install
 
 ## trouble
 ERROR:  Loading command: install (LoadError) cannot load such file -- zlib
-ERROR:  While executing gem ... (NoMethodError)    undefined method `invoke_with_build_args' for nil:NilClass
+ERROR:  While executing gem ... (NoMethodError)    undefined method 'invoke_with_build_args' for nil:NilClass
 
 # ext/zlib ext/openssl
 ruby ./extconf.rb
@@ -109,13 +104,19 @@ rails -v
 
 Find, install, and publish RubyGems.
 
-```
+```sh
+# 源配置
 gem sources -l
 gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
+gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
+
 gem sources --remove https://rubygems.org/
 gem sources -a https://mirrors.aliyun.com/rubygems/
+
+bundle config mirror.https://rubygems.org https://mirrors.tuna.tsinghua.edu.cn/rubygems
 ```
-## * [Bundler](https://bundler.io/)
+
+## [Bundler](https://bundler.io/)
 
 provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
 
