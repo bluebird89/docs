@@ -1107,6 +1107,14 @@ sysbench ./tests/include/oltp_legacy/oltp.lua --mysql-host=192.168.10.10 --mysql
 * 分析来自日志和tcpdump的查询
 * 当系统出问题的时候收集重要的系统信息
 * 工具列表
+  - pt-variable-advisor:分析MySQL变量并就可能出现的问题提出建议
+    + `wget https://www.percona.com/downloads/percona-toolkit/3.0.13/binary/redhat/7/x86_64/percona-toolkit-3.0.13-re85ce15-el7-x86_64-bundle.tar`
+    + `pt-variable-advisor localhost --socket /var/lib/mysql/mysql.sock`
+    + 重点关注有WARN的信息的条目
+  - pt-query-digest 主要功能是从日志、进程列表和tcpdump分析MySQL查询.用来分析mysql的慢日志，与mysqldumpshow工具相比，py-query_digest 工具的分析结果更具体，更完善
+    + 分析指含有select语句的慢查询:`pt-query-digest --filter '$event-&gt;{fingerprint} =~ m/^select/i' /var/lib/mysql/slowtest-slow.log&gt; slow_report4.log`
+    + 分析指定时间范围内的查询:`pt-query-digest /var/lib/mysql/slowtest-slow.log --since '2017-01-07 09:30:00' --until '2017-01-07 10:00:00'&gt; &gt; slow_report3.log`
+    + 查询所有所有的全表扫描或full join的慢查询 `pt-query-digest --filter '(($event-&gt;{Full_scan} || "") eq "yes") ||(($event-&gt;{Full_join} || "") eq "yes")' /var/lib/mysql/slowtest-slow.log&gt; slow_report6.log`
   - pt-align
   - pt-archiver
   - pt-config-diff
@@ -1139,7 +1147,6 @@ sysbench ./tests/include/oltp_legacy/oltp.lua --mysql-host=192.168.10.10 --mysql
   - pt-mysql-summary
   - pt-online-schema-change
   - pt-pmp
-  - pt-query-digest 分析慢日志
   - pt-secure-collect
   - pt-show-grants
   - pt-sift
@@ -1162,7 +1169,6 @@ sysbench ./tests/include/oltp_legacy/oltp.lua --mysql-host=192.168.10.10 --mysql
   - pt-table-sync
   - pt-table-usage
   - pt-upgrade
-  - pt-variable-advisor
   - pt-visual-explain
   - tpcc-mysql
 

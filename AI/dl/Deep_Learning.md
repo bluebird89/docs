@@ -119,6 +119,8 @@ print(torch.cuda.is_available())
 * [](https://www.cs.toronto.edu/~hinton/)
 * [TensorFlow, Keras and deep learning, without a PhD access_time ](https://codelabs.developers.google.com/codelabs/cloud-tensorflow-mnist/#3)
 * [Practical Deep Learning for Coders](https://course.fast.ai/)
+  - [Deep Learning for Coders with Fastai and PyTorch: AI Applications Without a PhD](link)
+  - [fastbook](https://github.com/fastai/fastbook):The fastai book, published as Jupyter Notebooks
 
 ## 图书
 
