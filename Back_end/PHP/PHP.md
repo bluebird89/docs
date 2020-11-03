@@ -2305,16 +2305,6 @@ $list->insert(36);
 * 执行效率高：用最简单的程序流程实现应用需求，勿扰大弯子
 * 代码安全性好：做一名警惕的程序员，任何有用户输入和上传文件的地方都得额外谨慎，也许一个程序员一时的疏忽就会导致一个系统顷刻间崩溃
 
-## 面试
-
-* [Web 开发进阶指南](https://laravel-china.org/articles/9059/web-development-guide)
-* [todayqq/PHPerInterviewGuide](https://github.com/todayqq/PHPerInterviewGuide)
-* [sushengbuhuo/php-interview-2018](https://github.com/sushengbuhuo/php-interview-2018)
-* [xianyunyh/PHP-Interview](https://github.com/xianyunyh/PHP-Interview)PHP面试整理的资料。包括PHP、MySQL、Linux、计算机网络等资料
-* [金题](https://www.jintix.com/)
-* [colinlet/PHP-Interview-QA](https://github.com/colinlet/PHP-Interview-QA):PHP面试问答
-* [](https://github.com/disxo/PHP-interview-myway)
-
 ```
 > mysql_real_escape_string mysql_escape_string区别
 mysql_real_escape_string需要预先连接数据库，并可在第二个参数传入数据库连接（不填则使用上一个连接）
@@ -2461,6 +2451,15 @@ java -jar ./vendor/bin/selenium-server-standalone-3.4.0.jar
     + 配置文件
     + /lib/model之中所有类
     + /lib/dao的之中所有类
+
+## 面试
+
+* [todayqq/PHPerInterviewGuide](https://github.com/todayqq/PHPerInterviewGuide)
+* [sushengbuhuo/php-interview-2018](https://github.com/sushengbuhuo/php-interview-2018)
+* [xianyunyh/PHP-Interview](https://github.com/xianyunyh/PHP-Interview)PHP面试整理的资料。包括PHP、MySQL、Linux、计算机网络等资料
+* [金题](https://www.jintix.com/)
+* [colinlet/PHP-Interview-QA](https://github.com/colinlet/PHP-Interview-QA):PHP面试问答
+* [](https://github.com/disxo/PHP-interview-myway)
 
 ## 图书
 

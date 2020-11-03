@@ -1,6 +1,6 @@
-# [Homebrew/homebrew-cask](https://github.com/Homebrew/homebrew-cask)
+# [brew](https://github.com/Homebrew/brew)
 
-🍻 A CLI workflow for the administration of macOS applications distributed as binaries https://brew.sh
+🍺 The missing package manager for macOS (or Linux)
 
 * brew（意为酿酒）的命名很有意思，全部都使用了酿酒过程中采用的材料/器具，名词对应以下的概念：
 * Formula（配方） 程序包定义，本质上是一个rb文件
@@ -25,8 +25,10 @@
 * 日志文件/usr/local/var
 * 链接文件 /usr/local/opt
 
-```
-curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install >> brew_install
+```sh
+# 安装
+# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 HOMEBREW_PREFIX = "/usr/local".freeze
 HOMEBREW_REPOSITORY = "/usr/local/Homebrew".freeze
@@ -40,7 +42,9 @@ CORE_TAP_REPO = "git://mirrors.ustc.edu.cn/homebrew-core.git".freeze
 /usr/bin/ruby ~/brew_install
 ```
 
-### brew vs brew cask
+### brew vs [Homebrew/homebrew-cask](https://github.com/Homebrew/homebrew-cask)
+
+🍻 A CLI workflow for the administration of macOS applications distributed as binaries https://brew.sh
 
 * Homebrew 默认情况下会自带：
   - homebrew/core
@@ -53,9 +57,6 @@ CORE_TAP_REPO = "git://mirrors.ustc.edu.cn/homebrew-core.git".freeze
 * brew cask：在 Homebrew 基础上的一个增强工具，用来安装 Mac 上的 GUI 程序应用包.已经编译好的应用包（.dmg/.pkg）,仅仅下载解压，放到统一目录（／opt/homebrew-cask/caskroom）,再软链到~/Applications/目录下
 
 ```shell
-# 安装homebrew
-# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile(.zshrc)
 
@@ -88,7 +89,7 @@ brew upgrade name  #更新安装过的软件(如果不加软件名，就更新�
 brew uninstall --force name # 卸载软件
 brew remove  name # 卸载软件
 
-brew cleanup #清除下载的缓存
+brew cleanup #清除下载缓存
 brew update && brew upgrade && brew cleanup ; say mission complete
 
 brew update-reset # `require': cannot load such file -- active_support/core_ext/object/blank (LoadError)
@@ -97,7 +98,6 @@ brew link --force openssl # 链接新的openssl到环境变量中
 brew link --overwrite docker
 
 brew services [-v|--verbose] [list | run | start | stop | restart| reload | cleanup] formula|--all
-brew services start postgresql
 
 # 卸载
 cd `brew –prefix`
@@ -107,7 +107,7 @@ rm -rf Library .git .gitignore bin/brew README.md share/man/man1/brew
 rm -rf ~/Library/Caches/Homebrew
 
 brew cask search|install|info|uninstall name
-brew cask list # 列出应用的信息
+brew list --cask # 列出应用的信息
 
 # plugins
 brew cask install \
@@ -159,6 +159,15 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+
+brews   brew list -1
+brewsp  brew list --pinned
+bubo    brew update && brew outdated
+bubc    brew upgrade && brew cleanup
+bubu    bubo && bubc
+buf brew upgrade --formula
+bcubo   brew update && brew outdated --cask
+bcubc   brew cask reinstall $(brew outdated --cask) && brew cleanup
 ```
 
 ## 源管理
@@ -185,6 +194,9 @@ echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 git -C "$(brew --repo)" remote set-url origin https://github.com/Homebrew/brew.git
 git -C "$(brew --repo homebrew/core)" remote set-url origin https://github.com/Homebrew/homebrew-core.git
 git -C "$(brew --repo homebrew/cask)" remote set-url origin https://github.com/Homebrew/homebrew-cask.git
+
+git -C "/usr/local/Homebrew" remote set-url origin https://github.com/Homebrew/brew
+git -C "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core" remote set-url origin https://github.com/Homebrew/homebrew-core
 
 brew update
 
