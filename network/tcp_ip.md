@@ -424,13 +424,17 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 
 Google给出的一个改良版的tcp网络协议，相当于在已有TCP协议的基础上打了个补丁的意思，这个改良版TCP协议对拥塞控制有很好的支持，对于网络较差的环境有不错的应用场景.Linux系统内核版本大于4.9
 
-```
-echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
-echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+```sh
+sudo modprobe tcp_bbr
+echo "tcp_bbr" | sudo tee --append /etc/modules-load.d/modules.conf
 
-sysctl   -p # 配置生效
+echo "net.core.default_qdisc=fq" | sudo tee --append /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee --append /etc/sysctl.conf
 
-sysctl net.ipv4.tcp_available_congestion_control # 查看
+sudo sysctl -p # 配置生效
+
+sysctl net.ipv4.tcp_available_congestion_control
+sysctl net.ipv4.tcp_congestion_control
 lsmod | grep bbr
 ```
 
@@ -596,22 +600,22 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
   - `C:\Windows\System32\drivers\etc\hosts`隐藏文件没有扩展名
   - `/etc/hosts`
 * 公共DNS服务
-  - 设计为分布式集群的工作方式：使用分布式的层次数据库模式以及缓存方法来解决单点集中式的问题。
+  - 设计为分布式集群的工作方式：使用分布式的层次数据库模式以及缓存方法来解决单点集中式的问题
   - 可通过修改网络连接的DNS server 地址
-* 国内用户普遍使用的是ISP运营商提供的DNS服务器，这样有着一个巨大的风险，就是DNS劫持,目前国内ISP运营商普遍采用DNS劫持的方法，干扰用户正常上网，例如，当用户访问一个不存在（或者被封）的网站，电信运营商就会把用户劫持到一个满屏都是广告的页面，以帮助自己盈利！
-  - 劫持广告：原来的网页被放置到一个iframe里，并注入了flash广告。
+* 国内用户普遍使用的是ISP运营商提供的DNS服务器，这样有着一个巨大的风险，就是DNS劫持,目前国内ISP运营商普遍采用DNS劫持的方法，干扰用户正常上网，例如，当用户访问一个不存在（或者被封）的网站，电信运营商就会把用户劫持到一个满屏都是广告的页面，以帮助自己盈利
+  - 劫持广告：原来的网页被放置到一个iframe里，并注入了flash广告
   - 面地址后面是不是有后缀
-* 低延迟说明全国各地（至少在省内或者附近，不会南方跨到北方）直接返回被劫持的IP；
-* TCP查询同样中枪，排除黑阔采用全国发UDP包方式进行劫持；
+* 低延迟说明全国各地（至少在省内或者附近，不会南方跨到北方）直接返回被劫持的IP
+* TCP查询同样中枪，排除黑阔采用全国发UDP包方式进行劫持
 * 同网段有那啥网站
 * 利用DNS实现DNS的负载均衡，并且在配置运营商CDN机房时也是重要的一部分。DNS技术属于前端架构甚至更前的一部分，不难看出一个大型网站在提供好扎实的应用层和数据层服务后亟待解决的是访问的问题，访问安全问题也是伴随着要解决的问题之一。
-  - 出于资源消耗和响应速度的综合考虑，一般来说从主机到本地DNS服务器是递归查询，从本地DNS到其他DNS服务器是迭代查询。
+  - 出于资源消耗和响应速度的综合考虑，一般来说从主机到本地DNS服务器是递归查询，从本地DNS到其他DNS服务器是迭代查询
 
 * 由分层的 DNS 服务器实现的分布式数据库。运行在 UDP 上，使用 53 端口
 * 互联网上几乎一切活动都以 DNS 请求开始。DNS 是 Internet 的目录,您的 ISP (Internet Service Provider) 以及在 Internet 上进行监听的其他任何人，都能够看到访问的站点以及您使用的每个应用.一些 DNS 提供商会出售个人 Internet 活动相关数据，或是利用这些数据向您发送有针对性的广告
 * 域名与IP之间的对应关系，称为"记录"（record）。根据使用场景，"记录"可以分成不同的类型（type） `Domain_name Time_to_live Class Type Value`
   - Domain_name：指出这条记录适用于哪个域名
-  - Time_to_live：用来表明记录的生存周期，也就是说最多可以缓存该记录多长时间
+  - Time_to_live：表明记录生存周期，也就是说最多可以缓存该记录多长时间
   - Class：一般总是IN
   - Type：记录的类型
     + A：IPv4地址记录（Address），返回域名指向的IP地址
@@ -633,22 +637,37 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
 * DNS 请求是可以被抢答 `dig www.bennythink.com +short`
 * 工具
   - [ChinaDNS](https://github.com/shadowsocks/ChinaDNS):Protect yourself against DNS poisoning in China.
-  - [dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.* DNS
+  - [dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
   - [jedisct1/dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. https://dnscrypt.info
   - [googlehosts/hosts](https://github.com/googlehosts/hosts):镜像：https://coding.net/u/scaffrey/p/hosts/git
   - [tenta-browser/tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS https://tenta.com/test
   - [Cloudflare](https://www.cloudflare.com):域名注册服务
   - [coredns/coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins https://coredns.io
-* 资源
-  - [NameSilo](https://www.namesilo.com/)
 * 域名的NS记录（Name Server）是指处理域名解析的服务器
   - [Cloudflare](https://dash.cloudflare.com/):国外站点解析加速
   - [DNSpod](https://console.dnspod.cn/)
   - [NextDNS](https://nextdns.io/):Block ads, trackers and malicious websites on all your devices. Get in-depth analytics about your Internet traffic. Protect your privacy and bypass censorship. Shield your kids from adult content.
 * DNS缓存污染，不是指域名被墙。墙，域名仍能被解析到正确的IP地址，只是客户端（指用户浏览器/服务请求端）不能与网站服务器握手，或通过技术阻断或干扰的方式阻止握手成功，以至达到超时、屏蔽、连接重置、服务中断的现象
   - [检测](https://www.checkgfw.com/)
+* Dnsmasq 提供 DNS 缓存和 DHCP 服务功能。作为域名解析服务器(DNS)，dnsmasq可以通过缓存 DNS 请求来提高对访问过的网址的连接速度。作为DHCP 服务器，dnsmasq 可以用于为局域网电脑分配内网ip地址和提供路由。DNS和DHCP两个功能可以同时或分别单独实现。dnsmasq轻量且易配置，适用于个人用户或少于50台主机的网络。此外它还自带了一个 PXE 服务器
+  - 将Dnsmasq作为本地DNS服务器使用，直接修改电脑的本地DNS的IP地址即可
+  - 应对ISP的DNS劫持（反DNS劫持），输入一个不存在的域名，正常的情况下浏览器是显示无法连接，DNS劫持会跳转到一个广告页面。先随便nslookup 一个不存在的域名，看看ISP商劫持的IP地址
+  - 智能DNS加快解析速度，打开/etc/dnsmasq.conf文件，server=后面可以添加指定的DNS，例如国内外不同的网站使用不同的DNS
+  - 配置 /etc/dnsmasq.conf
+    + resolv-file 定义dnsmasq从哪里获取上游DNS服务器的地址， 默认从/etc/resolv.conf获取。
+    + strict-order 表示严格按照resolv-file文件中的顺序从上到下进行DNS解析，直到第一个解析成功为止。
+    + listen-address 定义dnsmasq监听的地址，默认是监控本机的所有网卡上。
+    + address 启用泛域名解析，即自定义解析a记录，例如：address=/long.com/192.168.115.10 访问long.com时的所有域名都会被解析成192.168.115.10
+    + bogus-nxdomain 对于任何被解析到此 IP 的域名，将响应 NXDOMAIN 使其解析失效，可以多次指定,通常用于对于访问不存在的域名，禁止其跳转到运营商的广告站点
+    + server 指定使用哪个DNS服务器进行解析，对于不同的网站可以使用不同的域名对应解析。例如：server=/google.com/8.8.8.8#表示对于google的服务，使用谷歌的DNS解析
+  - 解析流程
+    + 先去解析hosts文件， 再去解析/etc/dnsmasq.d/下的*.conf文件，并且这些文件的优先级要高于dnsmasq.conf
+    + 自定义的resolv.dnsmasq.conf中的DNS也被称为上游DNS，这是最后去查询解析的
+    + 不想用hosts文件做解析:在/etc/dnsmasq.conf中加入no-hosts
 
 ```
+168.138.42.153
+
 ## `/etc/resolv.conf`
 ns3.dnsowl.com # name silo default name server
 ns3.dnsowl.com
@@ -661,19 +680,27 @@ ns3.dnsowl.com
 2001:4860:4860::8844
 
 # SDNS（`http://www.sdns.cn/`）
-1.2.4.8  210.2.4.8
+1.2.4.8
+210.2.4.8
 
-# 中科大的DNS
-202.38.64.1 202.112.20.131 202.141.160.95 202.141.160.99 202.141.176.95 202.141.176.99
+# 中科大DNS
+202.38.64.1
+202.112.20.131
+202.141.160.95
+202.141.160.99
+202.141.176.95
+202.141.176.99
 
 # OneDNS:
-112.124.47.27 南方首选/北方备用  114.215.126.16 北方首选/南方备用
+112.124.47.27 南方首选/北方备用
+114.215.126.16 北方首选/南方备用
+42.236.82.22 共用
 
 # Public DNS+
 119.29.29.29
 182.254.116.116
 
-# 百度 BaiduDNS
+# BaiduDNS
 180.76.76.76
 2400:da00::6666
 
@@ -681,9 +708,11 @@ ns3.dnsowl.com
 114.114.114.114
 114.114.114.115
 ## 拦截钓鱼病毒木马网站，增强网银、证券、购物、游戏、隐私信息安全
-114.114.114.119 114.114.115.119
+114.114.114.119
+114.114.115.119
 ## 学校或家长可选，拦截色情网站，保护少年儿童免受网络色情内容的毒害
-114.114.114.110 114.114.115.110
+114.114.114.110
+114.114.115.110
 
 # Cloudflare
 1.1.1.1
@@ -692,8 +721,8 @@ ns3.dnsowl.com
 2606:4700:4700::1001
 
 # alidns
-nameserver 223.5.5.5
-nameserver 223.6.6.6
+223.5.5.5
+223.6.6.6
 2400:3200::1
 2400:3200:baba::1
 
@@ -745,7 +774,19 @@ nameserver 223.6.6.6
 1.2.4.8
 210.2.4.8
 2001:dc7:1000::1
+
+# Quad9 DNS IBM 发起的 Quad9 提供的公共免费 DNS 上海
+9.9.9.9
+149.112.112.112
 ```
+
+## [NameSilo](https://www.namesilo.com/)
+
+* 域名注册
+* 二级域名解析
+  - 登录后点击右上角  Manage My Domains
+  - 已经购买的域名。然后点击右边的 蓝色小球 编辑 DNS
+  - 点击上方的A，在hostname里填www，ipv4 address填你服务器的ip，TTL改成3600
 
 ## [Wireshark](https://www.wireshark.org)
 

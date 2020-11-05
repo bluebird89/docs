@@ -48,6 +48,10 @@
   - 在本地优先应用中，我们可以做的只受物理定律的约束，而不受任何服务条款的约束。
   - 根据欧洲人权公约，自由的思想和观点是无条件的 — 国家永远不会干扰它，因为它是你自己的 — 而表达自由（包括言论自由），可以在某些方面受到限制，因为它影响到其他人。社交网络这样的传播服务传递着表达方式，但创意人的原始笔记和未发表的作品是一种发展思想和观点的方式，因此需要无条件的保护。
 
+## 块存储
+
+## 对象存储
+
 ## 工具
 
 * [capstone](https://www.inkandswitch.com/capstone-manuscript.html):an experimental tool for creative professionals to develop their ideas
@@ -71,7 +75,8 @@
 * [CloudCone](https://app.cloudcone.com/)
 * [Oracle cloud](https://www.oraclecloud.com):免费资源 https://51.ruyo.net/14138.html
   - 登录有传统 与 [cloud]() 用户
-  - centos  默认登录账户是 opc,ubuntu 默认登录账户是 ubuntu
+  - centos  默认登录账户是 opc
+  - ubuntu 默认登录账户是 ubuntu
 * [GetStream/awesome-saas-services](https://github.com/GetStream/awesome-saas-services):A curated list of the best in class SaaS services for developers and business owners.
 * [LeanCLoud](https://leancloud.cn/)
   - [leancloud/ticket](https://github.com/leancloud/ticket)
