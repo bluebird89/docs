@@ -98,7 +98,7 @@ alias ad='sudo apt-fast update'
 alias ag='sudo apt-fast upgrade -y'
 alias ar='sudo apt-fast remove --purge'
 alias ac='sudo apt-fast autoremove --purge && sudo apt-fast autoclean'
-alias adg='sudo apt-get update && sudo apt-get upgrade -y '
+alias adg='sudo apt-get update && sudo apt-get upgrade -y'
 alias update='yum update'
 alias updatey='yum -y update'
 

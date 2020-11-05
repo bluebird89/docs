@@ -66,7 +66,7 @@ gcc name.o adder.o hello.c
 
 ## 图书
 
-* C 程序设计语言
+* The C Programming Language C 程序设计语言
 * C语言程序设计现代方法
 * 《C Primer Plus》
     - 这地方有一个巨大的错觉，就是读完一遍《C Primer Plus》后就觉得自己会CLang了，有这种优越感的，请你尝试用CLang做个什么东西出来？然后你发现似乎真的什么也做不了，这会儿就可以步入到《Unix环境高级编程》的节奏

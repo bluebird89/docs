@@ -60,6 +60,10 @@
   - 劈开脑海（先被大家看见，最好能记住，不一定是一次就能成功）
   - 重复记忆（不断的在用户心智中强化第一次见到的印象，多次重复，重复的有逻辑）
 
+## 平台
+
+* [新抖](https://xd.newrank.cn/)
+
 ## 参考
 
 * 《计算广告》
@@ -67,5 +71,5 @@
 
 ## 工具
 
-* [ pi-hole / pi-hole ](https://github.com/pi-hole/pi-hole):A black hole for Internet advertisements https://pi-hole.net
+* [pi-hole](https://github.com/pi-hole/pi-hole):A black hole for Internet advertisements https://pi-hole.net
 * [ AdguardTeam / AdGuardHome ](https://github.com/AdguardTeam/AdGuardHome):Network-wide ads & trackers blocking DNS server https://adguard.com/adguard-home.html

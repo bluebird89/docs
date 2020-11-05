@@ -186,7 +186,7 @@ php -d opcache.jit=1205 -dopcache.jit_debug=0x01
 * 开启 opcache：指将 opcodes 进行缓存。通过省去从源码到 opcode 的阶段，引擎直接执行缓存好的 opacode，以提升性能
 * 四层体系构成，从上到下依次
   - 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用
-  - SAPI(Server Application Programming Interface) 服务端应用编程接口：通过一系列钩子函数使得PHP可以和外围交换数据
+  - SAPI Server Application Programming Interface) 服务端应用编程接口：通过一系列钩子函数使得PHP可以和外围交换数据
     + SAPI 就是 PHP 和外部环境的代理器，它把外部环境抽象后，为内部的PHP提供一套固定的，统一的接口，使得 PHP 自身实现能够不受错综复杂的外部环境影响，保持一定的独立性
     + 通过 SAPI 的解耦，PHP 可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式
   - Extensions 扩展:常见的内置函数、标准库都是通过extension来实现的，这些叫做PHP的核心扩展，用户也可以根据自己的要求安装PHP的扩展
@@ -257,18 +257,97 @@ Hugepagesize:       2048 kB
 * php-dev
   - phpize
     + 有版本号，依赖安装指定目录
-    + mac:`/usr/local/lib/php/pecl/20180731/`
-    + 需要php7.*-dev 支持
+    + mac:`/usr/local/lib/php/pecl/`
+    + 需要 php7.*-dev 支持
   - php-config
 * php-cgi
-* 程序 `/usr/local/Cellar/php71/7.1.12_23`
-* 配置 `/usr/local/etc/php/7.1/`
-* php71卸载后php-fpm仍然运行
+* 程序 `/usr/local/Cellar/php`
+* 配置 `/usr/local/etc/php/`
+* php71 卸载后 php-fpm仍然运行
   - `brew services stop php`
 * 准备
   - libpcre3-dev: Perl 5 Compatible Regular Expression Library
   - gettext
+* 源码自带扩展模块
+  - Date/Time Support(date),默认编译安装，不可禁止
+  - 默认启用，编译时可通过下列选项禁用
+    + −−disable-ctype
+    + −−disable-dom DOM Document Object Model
+    + −−disable-fileinfo fileinfo support
+    + −−disable-hash  Disable hash support
+    + −−without-iconv=DIR  Exclude iconv support
+    + −−disable-json  Disable JavaScript Object Serialization support
+    + −−disable-libxml  Disable LIBXML support
+      * −−with-libxml-dir=DIR   LIBXML: libxml2 install prefix Debian/Ubuntu 需安装 libxml2, libxml2-dev 依赖包，Redhat/CentOS 需安装 libxml2, libxml2-devel 依赖包
+    + −−disable-phar  Disable phar support
+    + −−disable-pdo  Disable PHP Data Objects support
+    + −−disable-posix  Disable POSIX-like functions
+    + −−disable-session  Disable session support
+    + −−disable-simplexml  Disable SimpleXML support
+    + −−disable-tokenizer  Disable tokenizer support
+    + −−disable-xml  Disable XML support
+  - 开启扩展
+    + −−enable-bcmath Enable bc style precision math functions
+    + −−enable-calendar Enable support for calendar conversion
+    + −−enable-dba Build DBA with bundled modules
+      * 默认自带 3 个参数，−−with-cdb，−−enable-inifile，inifile-flatfile
+      * 若要禁止，则需通过参数−−without-cdb=DIR，−−disable-inifile，−−disable-flatfile 实现
+    + −−enable-exif Enable EXIF (metadata from images) support
+    + −−enable-intl Enable internationalization support
+    + −−enable-mbstring Enable multibyte string support
+      * −disable-mbregex  MBSTRING: Disable multibyte regex support
+      * −−disable-mbregex-backtrack  MBSTRING: Disable multibyte regex backtrack check
+      * −−with-libmbfl=DIR  MBSTRING: Use external libmbfl.  DIR is the libmbfl base install directory BUNDLED
+      * −−with-onig=DIR  MBSTRING: Use external oniguruma. DIR is the oniguruma install prefix. If DIR is not set, the bundled oniguruma will be used
+    + −−enable-ftp Enable FTP support
+      * 参数 −−with-openssl-dir=DIR  FTP: openssl install prefix，可不指定，则使用系统自带 openssl 库
+    + DB-LIB (MS SQL, Sybase)(pdo_dblib)，Windows 专用扩展。用于连接 SQL Server 和 Sybase 数据库的 PDO 驱动扩展
+    + −−enable-mysqlnd Enable mysqlnd explicitly, will be done implicitly when required by other extensions
+    + -−enable-shmop  Enable shmop support
+    + −−enable-soap Enable SOAP support
+    + −−enable-sockets Enable sockets support
+    + −−enable-zip  Include Zip read/write support
+  - −−with-curl=DIR Include cURL support Debian/Ubuntu 需安装 libcurl4-gnutls-dev 依赖包。Redhat/CentOS 需安装 curl-devel 依赖包
+  - −−with-bz2=DIR Include BZip2 support 安装 Debian/Ubuntu 需安装 libbz2-dev 依赖包,Redhat/CentOS 需安装 bzip2-devel 依赖包
+  - −−with-enchant=DIR Debian/Ubuntu 需安装 libenchant-dev, libpspell-dev 依赖包，Redhat/CentOS 需安装 enchant-devel,aspell-devel 依赖包
+  - GD imaging(gd) −−with-gd=DIR  Include GD support.  DIR is the GD library base install directory BUNDLED
+    + −−with-webp-dir=DIR(PHP 7.0, 7.1 only)
+    + −−with-jpeg-dir=DIR
+    + −−with-png-dir=DIR
+    + −−with-zlib-dir=DIR
+    + −−with-xpm-dir=DIR
+    + −−with-freetype-dir=DIR
+    + −−enable-gd-native-ttf
+    + −−enable-gd-jis-conv
+    + Debian/Ubuntu 需安装 libwebp-dev, libjpeg-dev, libpng-dev, libxpm-dev, libfreetype6-dev, libvpx-dev 依赖包
+    + Redhat/CentOS 需安装 libwebp-devel, libjpeg-devel, libpng-devel, libXpm-devel, freetype-devel, libvpx-devel
+  - −−with-gettext=DIR  Include GNU gettext support
+  - −−with-interbase=DIR Include Firebird support
+  - −−with-pdo-firebird=DIR PDO: Firebird support
+  - −−with-gmp=DIR Include GNU MP support
+  - −−with-ldap=DIR         Include LDAP support
+  - −−with-ldap-sasl=DIR    LDAP: Include Cyrus SASL support，Debian/Ubuntu 需安装 libldap-2.4-2, libldap2-dev 依赖包。Redhat/CentOS 需安装 openldap, openldap-devel 依赖包
+  - IMAP
+    + −−with-imap=DIR         Include IMAP support. DIR is the c-client install prefix
+    + −−with-kerberos=DIR     IMAP: Include Kerberos support. DIR is the Kerberos install prefix
+    + −−with-imap-ssl=DIR     IMAP: Include SSL support. DIR is the OpenSSL install prefix
+  - −−with-mcrypt=DIR Include mcrypt support，Debian/Ubuntu 需安装 libmcrypt-dev 依赖包，Redhat/CentOS 需编译安装 libmcrypt 和 mcrypt 。如果安装了 EPEL 的话，则需安装 libmcrypt-devel 依赖包
+  - −−with-mysql-sock=SOCKPATH  MySQLi/PDO_MYSQL: Location of the MySQL unix socket pointer
+  - −−with-pdo-mysql=DIR  PDO: MySQL support. DIR is the MySQL base directory，若未指定，则默认安装 mysqlnd
+  - −−with-mysqli=FILE  Include MySQLi support. FILE is the path to mysql_config
+  - −−with-oci8=DIR  Include Oracle Database OCI8 support. DIR defaults to $ORACLE_HOME
+  - −−with-pdo-odbc=flavour,dir
+  - −−with-openssl=DIR      Include OpenSSL support (requires OpenSSL >= 1.0.1)
+  - −−with-kerberos=DIR     OPENSSL: Include Kerberos support
+  - −−with-system-ciphers   OPENSSL: Use system default cipher list instead of hardcoded value
+  - −−enable-pcntl  Enable pcntl support (CLI/CGI only)
+  - −−with-pcre-regex=DIR   Include Perl Compatible Regular Expressions support. DIR is the PCRE install prefix BUNDLED
+  - −−with-pcre-jit  Enable PCRE JIT functionality
+  - −−with-pdo-pgsql=DIR  PDO: PostgreSQL support.  DIR is the PostgreSQL base install directory or the path to pg_config
+  - −−with-pgsql=DIR  Include PostgreSQL support.  DIR is the PostgreSQL base install directory or the path to pg_config
+  - −−with-readline=DIR  Include readline support (CLI/CGI only)
 * [ircmaxell/phpvm](https://github.com/ircmaxell/phpvm):A PHP version manager for CLI PHP
+* −−with-tidy=DIR  Include TIDY support
 * [philcook/brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only
 * [swisnl/php7-upgrade-tools](https://github.com/swisnl/php7-upgrade-tools):A set of tools for upgrading applications to PHP 7
 

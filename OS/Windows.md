@@ -50,7 +50,7 @@ systeminfo | findstr Build
   - [Scoop](https://scoop.sh)
     + 在用户根目录（C:\Users\用户名）下创建了一个名为 scoop 的文件夹，并默认将软件下载安装到这个文件夹下
     + 软件安装到一个相对隔离的环境下（Each program you install is isolated and independent），从而保证环境的统一和路径不被污染
-  - [ microsoft / winget-cli ](https://github.com/microsoft/winget-cli):Windows Package Manager CLI (aka winget)
+  - [winget-cli](https://github.com/microsoft/winget-cli):Windows Package Manager CLI (aka winget)
   - [GEEK UNINSTALLER](https://geekuninstaller.com/):Efficient and Fast, Small and Portabl
 * 快速启动
   - launchy
@@ -276,7 +276,7 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
 
 Zeal is an offline documentation browser for software developers.linux and windows
 
-```
+```sh
 # download
 # by choco
 choco install zeal
@@ -284,17 +284,18 @@ choco install zeal
 sudo apt-get install zeal
 ```
 
-## WSL(Windows Subsystem for Linux)
+## WSL Windows Subsystem for Linux
 
-* 提供了一个由微软开发的Linux兼容的内核接口(（)不包含Linux内核代码)，然后可以在其上运行GNU用户空间
+* 提供了一个由微软开发的Linux兼容的内核接口(不包含Linux内核代码)，可以在其上运行GNU用户空间
 * WSL2
-* 支持bash：在启用或关闭 Windows 功能，开启Windows Subsystem for linux (Beta) [参考](https://blog.jessfraz.com/post/windows-for-linux-nerds/)
+* 支持bash
+* 在启用或关闭 Windows 功能，开启 Windows Subsystem for linux (Beta) [参考](https://blog.jessfraz.com/post/windows-for-linux-nerds/)
 * [Dev on Windows with WSL](https://dowww.spencerwoo.com/)
 * 添加 Linux GUI 支持，即 Windows 原生支持 Linux 图形界面程序。意味着，大部分 Linux 应用将可以在 Windows 运行
 * 版本
-  - WLinux+  X410 作为 X Server
+  - WLinux+ X410 作为 X Server
 
-```
+```sh
 # PowerShell as Administrator
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
@@ -303,7 +304,7 @@ wsl -l -v
 wsl --set-version Ubuntu-18.04 2 # reboot
 ```
 
-## [ microsoft/terminal](https://github.com/microsoft/terminal)
+## [terminal](https://github.com/microsoft/terminal)
 
 The new Windows Terminal and the original Windows console host, all in the same place!
 
