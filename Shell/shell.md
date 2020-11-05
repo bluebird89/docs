@@ -29,7 +29,7 @@
     - https://www.digitalocean.com/community/questions/what-are-your-favorite-bash-aliases
     - https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/
     - https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/
-    - [ gto76 / standard-aliases ](https://github.com/gto76/standard-aliases):Attempt at defining a standard extension to Linux in form of Bash functions
+    - [standard-aliases ](https://github.com/gto76/standard-aliases):Attempt at defining a standard extension to Linux in form of Bash functions
 * 参考
     - https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4
     - https://dev.to/_darrenburns/tools-to-power-up-your-command-line-part-2-2737
@@ -1000,7 +1000,7 @@ echo . /usr/share/autojump/autojump.sh >> ~/.zshrc
 source ~/.zshrc
 ```
 
-## [nvbn / thefuck](https://github.com/nvbn/thefuck)
+## [thefuck](https://github.com/nvbn/thefuck)
 
 ```sh
 sudo pip3 install thefuck

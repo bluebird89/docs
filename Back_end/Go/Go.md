@@ -2,6 +2,18 @@
 
 The Go programming language https://golang.org [中国官网](https://golang.google.cn/)
 
+* 第一个正式版本的Go语言于2012 年3月28日正式发布，让Go语言迎来了第一个引人瞩目的里程碑
+* 特性
+  - 自动垃圾回收
+  - 更丰富的内置类型
+  - 函数多返回值
+  - 错误处理
+  - 匿名函数和闭包
+  - 类型和接口
+  - 并发编程
+  - 反射
+  - 语言交互性
+
 ## [Install](https://golang.org/dl/)
 
 * Go 编译器支持交叉编译，可以在一台机器上构建运行在具有不同操作系统和处理器架构上运行的应用程序，也就是说编写源代码的机器可以和目标机器有完全不同的特性
@@ -42,15 +54,14 @@ The Go programming language https://golang.org [中国官网](https://golang.goo
   - GOARCH 表示目标机器的处理器架构，值可以是 386、amd64 或 arm。
   - GOOS 表示目标机器的操作系统，值可以是 darwin、freebsd、linux 或 windows。
   - GOBIN Go项目的二进制文件存放目录，默认是 GOROOT/bin
-  - GOPATH：(external libs):Go的工作空间
-    + 可以是多个目录路径，每个目录都代表 Go语言的一个工作区,存放Go的开发代码和第三方包代码
-    + 允许设置多个路径，和各个系统环境多路径设置一样，windows用“;”，linux（mac）用“:”分隔
-    + 不要把GOPATH设置成go的安装路径,在用户目录下面创建一个目录, 如gopath.$GOPATH 默认采用和 $GOROOT 一样的值，但从 Go 1.1 版本开始，必须修改为其它路径
-    + go get命令去获取远程库的时候，一般会安装到第一个工作区当中
-    + 可以包含多个包含 Go 语言源码文件、包文件和可执行文件的路径，每个目录下包含目录
+  - GOPATH：(external libs):Go工作空间
+    + 可以接受多个路径，并且路径和路径之间用windows用“;”，linux（mac）用“:”分隔,每个目录下包含目录
       * bin：编译生成的可执行文件路径：需要把GOPATH中的可执行目录也配置到环境变量中, 否则自行下载的第三方go工具就无法使用了 编译后二进制的存放目的地
       * pkg：编译包时，生成的.a文件存放路径
       * src：源码路径 import 包时的搜索路径
+    + 每个目录都代表一个工作区,存放Go的开发代码和第三方包代码
+    + 不要把GOPATH设置成go的安装路径,在用户目录下面创建一个目录, 如gopath.$GOPATH 默认采用和 $GOROOT 一样的值，但从 Go 1.1 版本开始，必须修改为其它路径
+    + go get命令去获取远程库时，一般会安装到第一个工作区当中
 
 ```sh
 sudo snap install go --classic
@@ -58,7 +69,6 @@ sudo snap install go --classic
 ## linux
 wget https://dl.google.com/go/go1.12.6.linux-amd64.tar.gz
 tar -xvzf go1.10.2.linux-amd64.tar.gz -C /usr/local
-
 
 mkdir -p ~/projects/{bin,pkg,src}
 
@@ -122,7 +132,7 @@ GOOS=linux GOARCH=amd64 go build main.go
       * 设置别名
       * 导入的点操作，import(. "bbbb")。这样就可以直接调用bbbb下面的函数而不用再bbbb.funcname的方式调用
       * 如果只是想引入某包并没有在代码中实际调用则可以这么处理来避免冲突:import(_ "bbbb")
-    + 在 Go 1.5 及后续版本中，可以通过创建internal代码包让一些程序实体仅仅能被当前模块中的其他代码引用。这被称为 Go 程序实体的第三种访问权限：模块级私有。
+    + 在 Go 1.5 及后续版本中，可以通过创建internal代码包让一些程序实体仅仅能被当前模块中的其他代码引用。这被称为 Go 程序实体的第三种访问权限：模块级私有
 * 安装
   - 某个工作区的 src 子目录下的源码文件在安装后一般会被放置到当前工作区的 pkg 子目录下对应的目录中，，或者被直接放置到该工作区的 bin 子目录中
   - 安装某个代码包而产生的归档文件是与这个代码包同名的
@@ -386,7 +396,7 @@ go run hello.go
     + -f 只有在你包含了-u参数的时候才有效，不让-u去验证import中的每一个都已经获取了，这对于本地fork的包特别有用
     + -fix 在获取源码之后先运行一个用于根据当前 Go 语言版本修正代码的工具，然后再去做其他的事情
     + -t 同时也下载需要为运行测试所需要的包
-    + -insecure：允许通过非安全的网络协议下载和安装代码包。HTTP 就是这样的协议。
+    + -insecure：允许通过非安全的网络协议下载和安装代码包。HTTP 就是这样的协议
     + -u ：下载并安装代码包，不论工作区中是否已存在它们。强制使用网络去更新包和它的依赖包:存在unrecognized import path "golang.org/x问题，需要添加代理
     + -v 显示执行的命令
 * 对代码包的远程导入路径进行自定义方法
@@ -419,6 +429,9 @@ go: cannot use path@version syntax in GOPATH mode # export GO111MODULE=on
 
 ## 面向对象
 
+* OOP 实现接口的另一种实现
+  - 声明类数据
+  - 定义接口，实现接口
 * Go 没有类,类方法的实现，定义时指明数据结构
   - 为结构体类型定义方法
   - 为非结构体类型声明方法
@@ -429,9 +442,9 @@ go: cannot use path@version syntax in GOPATH mode # export GO111MODULE=on
     + 优点
       * 方法能够修改其接收者指向的值
       * 可以避免在每次调用方法时复制该值。若值的类型为大型结构体时，这样做会更加高效。
-* 只能为在同一包内定义的类型的接收者声明方法，而不能为其它包内定义的类型（包括 int 之类的内建类型）的接收者声明方法。
-* 方法就是一类带特殊的 接收者 参数的函数。
-* 方法接收者在它自己的参数列表内，位于 func 关键字和方法名之间。
+* 只能为在同一包内定义的类型的接收者声明方法，而不能为其它包内定义的类型（包括 int 之类的内建类型）的接收者声明方法
+* 方法就是一类带特殊的 接收者 参数的函数
+* 方法接收者在它自己的参数列表内，位于 func 关键字和方法名之间
 * 方法只是个带接收者参数的函数
 
 ```go
@@ -512,7 +525,7 @@ func main() {
 }
 ```
 
-## 信道
+## 信道 channel
 
 * 带有类型的管道
 * 声明`ch := make(chan int, n)`
@@ -548,7 +561,7 @@ func main() {
 * bouk/monkey 能够通过替换函数指针的方式修改任意函数的实现，所以如果上述的几种方法都不能满足需求，就只能够通过猴子补丁这种比较 hack 的方法 Mock 依赖了
   - 由于它是在运行时替换了函数的指针，所以如果遇到一些简单的函数，例如 rand.Int63n 和 time.Now，编译器可能会直接将这种函数内联到调用实际发生的代码处并不会调用原有的方法，所以使用这种方式往往需要我们在测试时额外指定 -gcflags=-l 禁止编译器的内联优化 `go test -gcflags=-l ./...`
 
-```
+```go
 package blog
 
 type Post struct {}
@@ -693,19 +706,28 @@ func TestSomething(t *testing.T) {
 }
 ```
 
-## 代理
+## 代理 proxy
 
 * 代理并缓存go模块。可以利用该代理来避免DNS污染导致的模块拉取缓慢或失败的问题，加速构建
 * 构建或运行应用时，Go 将会通过 goproxy.cn 获取依赖
 * docker->performence->damon=>+
 * https://g.widora.cn/
+* 类库
+  - [goproxy/goproxy.cn](https://github.com/goproxy/goproxy.cn):The most trusted Go module proxy in China. https://goproxy.cn
+  - [gomods/athens](https://github.com/gomods/athens):A Go module datastore and proxy https://docs.gomods.io
+  - [goproxy](https://github.com/goproxyio/goproxy):A global proxy for Go modules. https://goproxy.io
+  - [snail007 / goproxy ](https://github.com/snail007/goproxy):Proxy是高性能全功能的http代理、https代理、socks5代理、内网穿透、内网穿透p2p、内网穿透代理、内网穿透反向代理、内网穿透服务器、Websocket代理、TCP代理、UDP代理、DNS代理、DNS加密代理，代理API认证，全能跨平台代理服务器。 http://snail007.github.io/goproxy
 
-```
+```sh
 go env -w GOPROXY=https://goproxy.cn,direct # windows
-export GOPROXY=https://goproxy.cn # 七牛云
-export GOPROXY=https://mirrors.aliyun.com/goproxy/ # 阿里
-export GOPROXY=https://goproxy.io　＃　 Go 官方提供的全球代理
-export GOPROXY=https://athens.azurefd.net"
+
+# 七牛云
+export GOPROXY=https://goproxy.cn
+# 阿里
+export GOPROXY=https://mirrors.aliyun.com/goproxy/
+# Go 官方提供的全球代理
+export GOPROXY=https://goproxy.io　
+export GOPROXY=https://athens.azurefd.net
 
 echo "export GO111MODULE=on" >> ~/.profile && source ~/.profile
 echo "export GOPROXY=https://goproxy.cn" >> ~/.profile && source ~/.profile
@@ -727,16 +749,13 @@ go env -w GOSUMDB="sum.golang.google.cn"
     + GO111MODULE=auto 在 GOPATH/src 外面且根目录有 go.mod 文件时，开启模块支持。
   - 1.13 成为了Go语言默认的依赖管理工具，默认打开
   - 不允许在 GOPATH 下使用 gomod
-* 类库
-  * [goproxyio / goproxy](https://github.com/goproxyio/goproxy):A global proxy for Go modules. https://goproxy.io
-  * [gomods / athens](https://github.com/gomods/athens):A Go module datastore and proxy https://docs.gomods.io
 + gomod 和 gopath 两个包管理方案
   * gopath 查找包，按照 goroot 和多 gopath 目录下 src/xxx 依次查找
   * gomod 下查找包，解析 go.mod 文件查找包，mod 包名就是包的前缀，里面的目录就后续路径了。 在 gomod 模式下，查找包就不会去 gopath 查找，只是 gomod 包缓存在 gopath/pkg/mod 里面
 + `package animal is not in GOROOT (/usr/local/go/src/animal)`  将 GO111MODULE 设置为 off
 * indirect
 
-```
+```sh
 # 开启
 export GO111MODULE=on
 
@@ -747,8 +766,8 @@ go list -u -m all
 
 go get -u .　# 更新一下项目依赖
 
-'go mod init example.com/m' to initialize a v0 or v1 module
-'go mod init example.com/m/v2' to initialize a v2 module
+go mod init example.com/m # to initialize a v0 or v1 module
+go mod init example.com/m/v2 # to initialize a v2 module
 
 go mod download     # 下载依赖包到本地（默认为 GOPATH/pkg/mod 目录）
 go mod edit     # 编辑 go.mod 文件
@@ -1106,16 +1125,18 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 
 ## 图书
 
-* [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源图书，涵盖CGO、Go汇编语言、RPC实现、Protobuf插件实现、Web框架实现、分布式系统等高阶主题 https://legacy.gitbook.com/book/chai2010/advanced-go-programming-book/details
-* 《Go 入门指南 The Way to Go》
-  - [Unknwon/the-way-to-go_ZH_CN](https://github.com/Unknwon/the-way-to-go_ZH_CN)
+* [The Go Programming Language](http://www.gopl.io/)
+  - [中文](https://github.com/golang-china/gopl-zh)
+  - [Code](https://github.com/adonovan/gopl.io/):Example programs from "The Go Programming Language"
+* [《Go语言高级编程》](https://github.com/chai2010/advanced-go-programming-book):https://chai2010.cn/advanced-go-programming-book/
+* [《Go 入门指南 The Way to Go》](https://github.com/Unknwon/the-way-to-go_ZH_CN)
+  - [《Go入门指南》](https://fuckcloudnative.io/the-way-to-go/)
 * 《Go 并发编程实战》
 * [Mastering_Go_ZH_CN](https://wskdsgcf.gitbook.io/mastering-go-zh-cn/)
 * [Go 语言设计与实现](https://draveness.me/golang/)
-* [The Go Programming Language](http://www.gopl.io/)
-  - [Code](https://github.com/adonovan/gopl.io/):Example programs from "The Go Programming Language"
 * Go 语言学习笔记
-* [go-ast-book](https://github.com/chai2010/go-ast-book/):books 《Go语法树入门》(开源免费图书/Go语言进阶/掌握抽象语法树/Go语言AST/LLVM/LLIR/凹语言)
+* [《Go语法树入门》](https://github.com/chai2010/go-ast-book/)
+* [Go2编程指南](https://github.com/chai2010/go2-book)
 
 ## 项目
 
@@ -1128,8 +1149,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 
 * [Go 指南](https://tour.go-zh.org/basics/2)
 * [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
-* [hyper0x / Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers):An example project, for my column named "Core Golang - 36 lessons"
-* [chai2010/advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book):📚 《Go语言高级编程》开源免费图书(开发中...)https://github.com/chai2010/advanced-go-programming-book
+* [Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers):An example project, for my column named "Core Golang - 36 lessons"
 * [astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
 * [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
 * [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. https://iris-go.com
@@ -1143,9 +1163,8 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [hoanhan101/ultimate-go](https://github.com/hoanhan101/ultimate-go):Ultimate Go study guide, with heavily documented code and programs analysis all in 1 place →
 * [ardanlabs/gotraining](https://github.com/ardanlabs/gotraining):Go Training Class Material
 * [alco/gostart](https://github.com/alco/gostart):A getting started guide for Go newcomers
-* [geektutu / 7days-golang](https://github.com/geektutu/7days-golang):7 days golang apps from scratch (web framework Gee, distributed cache GeeCache, object relational mapping ORM framework GeeORM etc) 7天用Go动手写/从零实现系列 https://geektutu.com/post/gee.html
-* [go101 / go101](https://github.com/go101/go101):An online book focusing on Go syntax/semantics. https://go101.org
-* [《Go入门指南》](https://fuckcloudnative.io/the-way-to-go/)
+* [7days-golang](https://github.com/geektutu/7days-golang):7 days golang apps from scratch (web framework Gee, distributed cache GeeCache, object relational mapping ORM framework GeeORM etc) 7天用Go动手写/从零实现系列 https://geektutu.com/post/gee.html
+* [go101](https://github.com/go101/go101):An online book focusing on Go syntax/semantics. https://go101.org
 
 ## 扩展
 
@@ -1193,7 +1212,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - [flosch/pongo2](https://github.com/flosch/pongo2):Django-syntax like template-engine for Go
 * logger
   - [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
-  - [allinurl / goaccess](https://github.com/allinurl/goaccess):GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. https://goaccess.io
+  - [goaccess](https://github.com/allinurl/goaccess):GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. https://goaccess.io
 * 缓存
   - [patrickmn/go-cache](https://github.com/patrickmn/go-cache):An in-memory key:value store/cache (similar to Memcached) library for Go, suitable for single-machine applications. https://patrickmn.com/projects/go-cache/
 * DB
@@ -1210,12 +1229,12 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - [panjf2000/gnet](https://github.com/panjf2000/gnet):🌐🐳 A high-performance, lightweight, non-blocking, event-driven networking framework written in pure Go.
   - [xtaci/kcp-go](https://github.com/xtaci/kcp-go):A Production-Grade Reliable-UDP Library for golang
   - [valyala/fasthttp](https://github.com/valyala/fasthttp):Fast HTTP package for Go. Tuned for high performance. Zero memory allocations in hot paths. Up to 10x faster than net/http
-  - [parnurzeal / gorequest](https://github.com/parnurzeal/gorequest):GoRequest -- Simplified HTTP client ( inspired by nodejs SuperAgent ) http://parnurzeal.github.io/gorequest/
+  - [gorequest](https://github.com/parnurzeal/gorequest):GoRequest -- Simplified HTTP client ( inspired by nodejs SuperAgent ) http://parnurzeal.github.io/gorequest/
   - [davyxu/cellnet](https://github.com/davyxu/cellnet):High performance, simple, extensible golang open source network library
 * graphql
   - [graphql-go/graphql](https://github.com/graphql-go/graphql):An implementation of GraphQL for Go / Golang
 * QUIC
-  - [lucas-clemente / quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
+  - [quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
 * load
   - [ tsenart / vegeta ](https://github.com/tsenart/vegeta):HTTP load testing tool and library. It's over 9000!
 * excel
@@ -1230,7 +1249,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * UI
   - [andlabs/ui](https://github.com/andlabs/ui):Platform-native GUI library for Go.
   - [google/gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
-  - [fyne-io / fyne](https://github.com/fyne-io/fyne):Cross platform GUI in Go based on Material Design https://fyne.io/
+  - [fyne](https://github.com/fyne-io/fyne):Cross platform GUI in Go based on Material Design https://fyne.io/
   - [vugu/vugu](https://github.com/vugu/vugu):Vugu: A modern UI library for Go+WebAssembly (experimental) https://www.vugu.org
 * numeric
   - [gonum/gonum](https://github.com/gonum/gonum):Gonum is a set of numeric libraries for the Go programming language. It contains libraries for matrices, statistics, optimization, and more https://www.gonum.org/
@@ -1242,23 +1261,18 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - [OWASP/Go-SCP](https://github.com/OWASP/Go-SCP):Go programming language secure coding practices guide
   - [Checkmarx/Go-SCP](https://github.com/Checkmarx/Go-SCP):Go programming language secure coding practices guide
 * Plot
-  - [gonum / plot](https://github.com/gonum/plot):A repository for plotting and visualizing data
+  - [plot](https://github.com/gonum/plot):A repository for plotting and visualizing data
 * 配置
   - [kelseyhightower/envconfig](https://github.com/kelseyhightower/envconfig):Golang library for managing configuration data from environment variables
 * Admin
-  - [GoAdminGroup / go-admin](https://github.com/GoAdminGroup/go-admin):A golang framework helps gopher to build a data visualization and admin panel in ten minutes https://www.go-admin.com
-  - [qor / qor](https://github.com/qor/qor):QOR is a set of libraries written in Go that abstracts common features needed for business applications, CMSs, and E-commerce systems. http://getqor.com/
+  - [go-admin](https://github.com/GoAdminGroup/go-admin):A golang framework helps gopher to build a data visualization and admin panel in ten minutes https://www.go-admin.com
+  - [qor](https://github.com/qor/qor):QOR is a set of libraries written in Go that abstracts common features needed for business applications, CMSs, and E-commerce systems. http://getqor.com/
   - [flipped-aurora / gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin):基于gin+vue搭建的后台管理系统框架，集成jwt鉴权，权限管理，动态路由，分页封装，多点登录拦截，资源权限，上传下载，代码生成器，表单生成器等基础功能，更多功能正在开发中，欢迎issue和pr~ http://qmplus.henrongyi.top
 * [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
 * [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
 * [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
 * [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
 * [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
-* proxy
-  - [goproxy/goproxy.cn](https://github.com/goproxy/goproxy.cn):The most trusted Go module proxy in China. https://goproxy.cn
-  - [gomods/athens](https://github.com/gomods/athens):A Go module datastore and proxy https://docs.gomods.io
-  - [goproxyio/goproxy](https://github.com/goproxyio/goproxy):A global proxy for Go modules. https://goproxy.io
-  - [snail007 / goproxy ](https://github.com/snail007/goproxy):Proxy是高性能全功能的http代理、https代理、socks5代理、内网穿透、内网穿透p2p、内网穿透代理、内网穿透反向代理、内网穿透服务器、Websocket代理、TCP代理、UDP代理、DNS代理、DNS加密代理，代理API认证，全能跨平台代理服务器。 http://snail007.github.io/goproxy
 * 代码规范
   - [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
   - [golang-standards / project-layout](https://github.com/golang-standards/project-layout):Standard Go Project Layout

@@ -2,23 +2,24 @@
 
 一个易于配置、快速且安全的开源 VPN，利用了最新的加密技术。目的是提供一种更快、更简单、更精简的通用 VPN，可以轻松地在树莓派这类低端设备到高端服务器上部署
 
-* 由 Jason Donenfeld 等人用 C 语言编写的一个开源 VPN 协议，被视为下一代 VPN 协议，旨在解决许多困扰 IPSec/IKEv2、OpenVPN 或 L2TP 等其他 VPN 协议的问题。它与 Tinc 和 MeshBird 等现代 VPN 产品有一些相似之处，即加密技术先进、配置简单。从 2020 年 1 月开始，它已经并入了 Linux 内核的 5.6 版本
+* 由 Jason Donenfeld 等人用 C 语言编写的一个开源 VPN 协议，被视为下一代 VPN 协议，旨在解决许多困扰 IPSec/IKEv2、OpenVPN 或 L2TP 等其他 VPN 协议的问题。与 Tinc 和 MeshBird 等现代 VPN 产品有一些相似之处，即加密技术先进、配置简单
+* 从 2020 年 1 月开始，已经并入了 Linux 内核的 5.6 版本
 * 运行在内核空间(可以将 WireGuard 作为内核模块安装在 Linux 中)，因此可以高速提供安全的网络。碾压其他 VPN 协议。再来说说 OpenVPN，大约有 10 万行代码，而 WireGuard  只有大概 4000 行代码
 * 优点：
   - 配置精简，可直接使用默认值
-  - 只需最少的密钥管理工作，每个主机只需要 1 个公钥和 1 个私钥。
-  - 就像普通的以太网接口一样，以 Linux 内核模块的形式运行，资源占用小。
-  - 能够将部分流量或所有流量通过 VPN 传送到局域网内的任意主机。
-  - 能够在网络故障恢复之后自动重连，戳到了其他 VPN 的痛处。
-  - 比目前主流的 VPN 协议，连接速度要更快，延迟更低（见上图）。
-  - 使用了更先进的加密技术，具有前向加密和抗降级攻击的能力。
-  - 支持任何类型的二层网络通信，例如 ARP、DHCP 和 ICMP，而不仅仅是 TCP/HTTP。
+  - 只需最少的密钥管理工作，每个主机只需要 1 个公钥和 1 个私钥
+  - 就像普通的以太网接口一样，以 Linux 内核模块的形式运行，资源占用小
+  - 能够将部分流量或所有流量通过 VPN 传送到局域网内的任意主机
+  - 能够在网络故障恢复之后自动重连，戳到了其他 VPN 的痛处
+  - 比目前主流的 VPN 协议，连接速度要更快，延迟更低
+  - 使用了更先进的加密技术，具有前向加密和抗降级攻击的能力
+  - 支持任何类型的二层网络通信，例如 ARP、DHCP 和 ICMP，而不仅仅是 TCP/HTTP
   - 可以运行在主机中为容器之间提供通信，也可以运行在容器中为主机之间提供通信
 * 不能做的事：
-  - 类似 gossip 协议实现网络自愈。
-  - 通过信令服务器突破双重 NAT。
-  - 通过中央服务器自动分配和撤销密钥。
-  - 发送原始的二层以太网帧。
+  - 类似 gossip 协议实现网络自愈
+  - 通过信令服务器突破双重 NAT
+  - 通过中央服务器自动分配和撤销密钥
+  - 发送原始的二层以太网帧
 
 ## 安装
 
@@ -26,47 +27,66 @@
 
 ```sh
 # CentOS7
-$ yum install epel-release https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
-$ yum install yum-plugin-elrepo
-$ yum install kmod-wireguard wireguard-tools
+yum install epel-release https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
+yum install yum-plugin-elrepo
+yum install kmod-wireguard wireguard-tools
 
 # 如果使用的是非标准内核，需要安装 DKMS 包
-$ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-$ curl -o /etc/yum.repos.d/jdoss-wireguard-epel-7.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-7/jdoss-wireguard-epel-7.repo
-$ yum install wireguard-dkms wireguard-tools
+yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+curl -o /etc/yum.repos.d/jdoss-wireguard-epel-7.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-7/jdoss-wireguard-epel-7.repo
+yum install wireguard-dkms wireguard-tools
 
 # Ubuntu ≥ 18.04
-$ apt install wireguard
+apt install wireguard
 
 # Ubuntu ≤ 16.04
-$ add-apt-repository ppa:wireguard/wireguard
-$ apt-get update
-$ apt-get install wireguard
+add-apt-repository ppa:wireguard/wireguard
+apt-get update
+apt-get install wireguard
+lsmod | grep wireguard
 
 # MacOS
-$ brew install wireguard-tools
+brew install wireguard-tools
 
 sudo -s
 wg # for configuring WireGuard interfaces.
 wg-quick # for starting and stopping WireGuard VPN tunnels.
 
+# 配置步骤
 mkdir /etc/wireguard/keys
 cd /etc/wireguard/keys
 umask 077 #  Set the directory user mask to 077 by running umask 077. A umask of 077 allows read, write, and execute permissions for the file’s owner (root in this case), but prohibits read, write, and execute permissions for everyone else and makes sure credentials don’t leak in a race condition
 wg genkey | tee privatekey | wg pubkey > publickey
+
+wg genkey | tee sprivatekey | wg pubkey > spublickey
+wg genkey | tee cprivatekey | wg pubkey > cpublickey
 
 # 生成私钥
 wg genkey > example.key
 # 生成公钥
 wg pubkey < example.key > example.key.pub
 
-vim /etc/wireguard/wg0.conf
+# 服务端配置文件 /etc/wireguard/wg0.conf
 [Interface]
-PrivateKey = <server private key>
+PrivateKey = $(cat sprivatekey)
 Address = 10.0.0.1/24
 ListenPort = 51820
 PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+ListenPort = 443
+# 服务端请求域名解析 DNS
+DNS = 8.8.8.8
+# 保持默认
+MTU = 1420
+# [Peer] 代表客户端配置，每增加一段 [Peer] 就是增加一个客户端账号，具体我稍后会写多用户教程。
+[Peer]
+# 该客户端账号的公匙，对应客户端配置中的私匙（自动读取上面刚刚生成的密匙内容）
+PublicKey = $(cat cpublickey)
+# 该客户端账号的内网IP地址
+AllowedIPs = 10.0.0.2/32
+
+sed '/^#/d;/^\s*$/d' > wg0.conf
 
 # EC2 instance → Security groups → Click on security group → Edit inbound rules → Add rules → Custom UDP → Port range: 51820 → Source: Anywhere → Save rules
 
@@ -79,10 +99,10 @@ echo "net.ipv4.conf.all.proxy_arp = 1" >> /etc/sysctl.conf
 sysctl -p # the changes to take effect without requiring a reboot
 
 # 添加 iptables 规则，允许本机的 NAT 转换： 需要把 eth0 改成你实际使用的网卡接口名称
-$ iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
-$ iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
-$ iptables -A FORWARD -i wg0 -o wg0 -m conntrack --ctstate NEW -j ACCEPT
-$ iptables -t nat -A POSTROUTING -s 192.0.2.0/24 -o eth0 -j MASQUERADE
+iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i wg0 -o wg0 -m conntrack --ctstate NEW -j ACCEPT
+iptables -t nat -A POSTROUTING -s 192.0.2.0/24 -o eth0 -j MASQUERADE
 
 # 启动与停止
 wg-quick up /full/path/to/wg0.conf
@@ -141,6 +161,11 @@ vim /etc/wireguard/wg0-iphone.conf
 PublicKey = H6StMJOYIjfqhDvG9v46DSX9UlQl52hOoUm7F3COxC4=
 Endpoint = 54.225.123.18:51820
 AllowedIPs = 0.0.0.0/0
+
+# 启动|停止
+wg-quick up|down wg0
+# 查询WireGuard状态
+wg
 ```
 
 ## 概念
@@ -176,11 +201,11 @@ AllowedIPs = 0.0.0.0/0
 ## 安全模型
 
 * 加密技术：
-  - 使用 ChaCha20 进行对称加密，使用 Poly1305 进行数据验证。
-  - 利用 Curve25519 进行密钥交换。
-  - 使用 BLAKE2 作为哈希函数。
-  - 使用 HKDF 进行解密。
-* 本质上是 Trevor Perrin 的 Noise 框架的实例化，它简单高效，其他的 VPN 都是通过一系列协商、握手和复杂的状态机来保障安全性。WireGuard 就相当于 VPN 协议中的 qmail，代码量比其他 VPN 协议少了好几个数量级
+  - 使用 ChaCha20 进行对称加密，使用 Poly1305 进行数据验证
+  - 利用 Curve25519 进行密钥交换
+  - 使用 BLAKE2 作为哈希函数
+  - 使用 HKDF 进行解密
+* 本质上是 Trevor Perrin 的 Noise 框架的实例化，简单高效，其他的 VPN 都是通过一系列协商、握手和复杂的状态机来保障安全性。WireGuard 就相当于 VPN 协议中的 qmail，代码量比其他 VPN 协议少了好几个数量级
 
 ## 密钥管理
 

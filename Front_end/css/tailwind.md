@@ -16,4 +16,4 @@ A utility-first CSS framework for rapid UI development.  https://tailwindcss.com
 
 ## 工具
 
-* [ mertJF / tailblocks ](https://github.com/mertJF/tailblocks): tada Ready-to-use Tailwind CSS blocks. https://mertjf.github.io/tailblocks/
+* [tailblocks](https://github.com/mertJF/tailblocks): tada Ready-to-use Tailwind CSS blocks. https://mertjf.github.io/tailblocks/

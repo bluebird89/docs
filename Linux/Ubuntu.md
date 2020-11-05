@@ -91,7 +91,7 @@ zpool add mainpool /dev/sdc
   - 颜色:关闭 使用系统主题中的颜色,置方案 -> Tango 暗色
   - 关闭 使用系统主题的透明度,开启 使用透明背景 ，将其调整为约 15%
 
-```
+```sh
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[38;5;39m\]\w\[\033[00m\]\$ '
 
 dircolors -p > ~/.dircolors
@@ -161,7 +161,7 @@ ip addr # 查看IP地址
 hostname  www  #设置主机名为www
 
 # etc/hostname
-www   localhost.localdomain  #修改localhost.localdomain为www
+www localhost.localdomain  #修改localhost.localdomain为www
 
 sudo gedit /etc/modprobe.d/iwlwifi.config add `options iwlwifi 11n_disable=1`
 
@@ -189,8 +189,7 @@ sudo update-alternatives --config editor # 修改默认编辑器
 ## DNS
 
 * 默认使用一个名为 systemd-resolved 的系统服务接管本机的 DNS 查询，它默认是启动的且监听 53 端口
-* 配置文件 /etc/systemd/resolved.conf
-* 系统已经弃用 /etc/resolv.conf 并且将其转移到 /etc/systemd/resolved.conf
+* 配置:弃用 /etc/resolv.conf 转移到 /etc/systemd/resolved.conf
 
 ```sh
 # /etc/resolv.conf
@@ -719,10 +718,16 @@ sudo journalctl --vacuum-time=3d
 
 ## 端口与进程管理
 
+* UFW
+  - default polices are defined in the /etc/default/ufw file
+  - can be changed either by manually modifying the file or with the sudo ufw default <policy> <chain> command
+    + ufw allow port_number/protocol
+
 ```sh
 # 防火墙
+sudo apt install ufw
 sudo ufw status
-
+sudo ufw status verbose
 
 sudo ufw enable/disable|reset
 sudo ufw app list
@@ -776,25 +781,8 @@ ps aux | grep nginx
 lsof -Pni4 | grep LISTEN | grep php
 # 关闭进程
 kill -9 pid
-```
 
-## UFW
-
-* default polices are defined in the /etc/default/ufw file
-* can be changed either by manually modifying the file or with the sudo ufw default <policy> <chain> command
-  - ufw allow port_number/protocol
-  -
-
-```sh
-sudo apt install ufw
-sudo ufw status verbose
-sudo ufw app list
-sudo ufw app info 'Nginx Full'
-sudo ufw allow ssh
-sudo ufw allow 7722/tcp
-sudo ufw allow 7100:7200/tcp
-
-sudo ufw enable
+No route to host iptables
 ```
 
 ## perf
@@ -864,7 +852,7 @@ sudo apt upgrade
 sudo apt install sogouimebs
 sudo dpkg-divert --package im-config --rename /usr/bin/ibus-daemon
 
-#  rime 小鹤双拼
+# rime 小鹤双拼
 sudo apt install ibus-rime librime-data-double-pinyin
 
 # chrome(firefox 禁用console.log)
@@ -1249,7 +1237,7 @@ pkexec chown root /usr/lib/sudo/sudoers.so
 chown root /usr/lib/sudo/sudoers.so
 
 # Failed to connect to 127.0.0.1 port 1080: Connection refused
-检测网络代理
+# 检测网络代理
 
 ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib # configure: error: Cannot find OpenSSL’s libraries
 
