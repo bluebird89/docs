@@ -604,6 +604,61 @@ POST users/_search
 }
 ```
 
+## DSL
+
+```
+{
+  "query": {
+    "terms": {
+      "name": [
+        "main",
+        "cxk"
+      ]
+    },
+    "bool": {
+      "should": [{
+          "term": {
+            "name": {
+              "value": "cxk"
+            }
+          }
+        }, //满足其中一个对象查询条件就行 想sql里的or
+       "must": [{
+          "match": {
+            "name": "main"
+          }
+        }, //必须满足所有对象的查询条件 就像sql里的and
+      "must_not": [{}] //必须不满足所有对象的查询条件 就像sql里的and !=
+    },
+    }, //具体的查询语句对象
+  "from": 0,   //从第几条数据开始返回
+  "size": 100, //返回的条数 默认ES最多返回10000条
+  "highlight": { //高亮
+    "pre_tags": {}, //高亮内容的前面标签 一般都是html比如<b> <p>这种
+    "post_tags": {},//高亮内容的后面标签 一般都是html比如</b> </p>这种
+    "fields": { //需要高亮的字段
+    }
+  },
+  "sort": [{ //排序
+    "FIELD": { //排序的字段（需要填上具体的字段名）
+      "order": "desc"
+    }
+  }],
+  "collapse": {
+      "field": "age" //你需要distinct的字段
+   },
+   "aggs": {
+    "age_group": {//这个是指你要返回字段名
+      "terms": { //这里还可以用其它关键词 这里的terms才能实现group by效果
+        "field": "age",//groupby的字段
+        "size":1 //返回的条数 相当于group by limit
+      }
+    }
+  }
+  "_source": "{field}" //指定返回的字段
+}
+```
+
 ## 聚合 Aggregation
 
 * 进行统计分析功能

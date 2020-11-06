@@ -7,6 +7,11 @@
 * 命令列 表要想成为进程列表，这些命令必须包含在括号里 `(pwd ; ls ; cd /etc ; pwd ; cd ; pwd ; ls)` 生成了一个子shell来执行对应的命令
 * 要想知道是否生成了子shell，借助一个使用了环境变量的命令。`echo $BASH_SUBSHELL` 如果该命令返回0，就表明没有子shell。如果返回 1 或者其他更大的数字，就表明存在子shell。 `( pwd ; echo $BASH_SUBSHELL)`
 * 生成子shell的成本不低，而且速度还慢。创建嵌套子shell更是火上浇油
+* 命令行shell：系统的用户界面，提供了用户与内核进行交互操作的一种接口。接收用户输入的命令并把它送入内核去执行，是一个命令解释器
+  - Bourne Shell：是贝尔实验室开发的
+  - BASH：是GNU的Bourne Again Shell，是GNU操作系统上默认的shell,大部分linux的发行套件使用的都是这种shell
+  - Korn Shell：是对Bourne SHell的发展，在大部分内容上与Bourne Shell兼容
+  - C Shell：是SUN公司Shell的BSD版本
 
 ## 配置
 
@@ -292,10 +297,12 @@ PATH=$PATH:/home/christine/Scripts
     - 小心不同的平台，尤其是 MacOS 和 Linux 的跨平台。
     - 对于 rm -rf 这样的高危操作，需要检查后面的变量名是否为空，比如：rm -rf $MYDIDR/* 如果 $MYDIR为空，结果是灾难性的。
     - 考虑使用 “find/while” 而不是 “for/find”。如：for F in $(find . -type f) ; do echo $F; done 写成 find . -type f | while read F ; do echo $F ; done 不但可以容忍空格，而且还更快。
-    - 防御式编程，在正式执行命令前，把相关的东西都检查好，比如，文件目录有没有存在。
+    - 防御式编程，在正式执行命令前，把相关的东西都检查好，比如，文件目录有没有存在
 * 调试
 * `前置 commands ; command1 && command2 || command3 ; 跟随 commands` 假如 command1 退出时返回码为零，就执行 command2，否则执行 command3
     - command1 && command2 这样的控制语句能够运行的原因是，每条命令执行完毕时都会给 shell 发送一个返回码，用来表示它执行成功与否。默认情况下，返回码为 0 表示成功，其他任何正值表示失败
+* “&” 脚本在后台运行时使用它
+* “&&”当前一个脚本成功完成才执行后面的命令
 
 ```sh
 type -a|t cd
@@ -311,28 +318,6 @@ echo "Hello $*"
 echo "Args count: $#"
 exit 0
 ```
-
-## 重定向
-
-* /dev/null文件:写入到它的内容都会被丢弃，会起到"禁止输出"的效果，如果希望屏蔽stdout和stderr
-* redirect output：[number]>
-* redirect input: [number]<
-* error messages go to a stream called stderr, which is designated as 2>
-
-```sh
-ls /void 2> output.log
-wc < output.log
-
-command > /dev/null 2>&1
-```
-
-* uniq - 删除排序文件中的重复行
-* sort对于文本进行排序
-    - -l 按照当前环境排序.
-    - -m 合并已经排序好的文件,不排序.
-    - -n 按照字符串的数值顺序比较,暗含-b
-    - -r 颠倒比较的结果.
-* “&” 脚本在后台运行时使用它。“&&”当前一个脚本成功完成才执行后面的命令
 
 ## PS1
 
@@ -808,7 +793,7 @@ echo ${HOST/.local/}
 echo ${HOST/.local/.foxtail}
 ```
 
-### [fish-shell/fish-shell](https://github.com/fish-shell/fish-shell)
+### [fish-shell](https://github.com/fish-shell/fish-shell)
 
 The user-friendly command line shell. http://fishshell.com
 
@@ -1019,24 +1004,6 @@ Bash Automated Testing System
 henry ALL=(ALL) NOPASSWD:ALL
 ```
 
-## 教程
-
-* [learnbyexample/command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):⚡️ From finding text to search and replace, from sorting to beautifying text and more 🎨
-* [learnbyexample/Linux_command_line](https://github.com/learnbyexample/Linux_command_line):💻 Introduction to Linux commands and Shell scripting
-* [learnbyexample/scripting_course](https://github.com/learnbyexample/scripting_course):📓 A reference guide to Linux command line, Vim and Scripting https://learnbyexample.github.io/scripting_course/
-* [Introduction to text manipulation on UNIX-based systems](https://www.ibm.com/developerworks/aix/library/au-unixtext/index.html)
-* [Linux 教程](https://www.runoob.com/linux/linux-tutorial.html)
-* [linuxcommand](http://linuxcommand.org)
-* [Advanced Bash-Scripting Guide](http://tldp.org/LDP/abs/html/index.html)
-* [denysdovhan/bash-handbook](https://github.com/denysdovhan/bash-handbook):book For those who wanna learn Bash https://git.io/bash-handbook
-* [dylanaraps / pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
-* [Idnan / bash-guide](https://github.com/Idnan/bash-guide):A guide to learn bash
-
-```sh
-axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso
-ccache gcc foo.c
-```
-
 ## [terminator](https://terminator-gtk3.readthedocs.io/en/latest/index.html)
 
 * depend python2.7
@@ -1136,21 +1103,44 @@ brew install bat
 * [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. https://scoop.sh
 * [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
 
-## Linux环境高级编程
+## [bash](http://ftp.gnu.org/gnu/bash/) https://www.gnu.org/software/bash/manua
 
-* 学习系统编程接口、系统调用 API 、内存管理、进程间通信（ IPC ）
+* [Bash-it/bash-it](https://github.com/Bash-it/bash-it):A community Bash framework.
+* [dylanaraps/pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):📖 A collection of pure bash alternatives to external processes.
+* [Bash Guide for Beginners](https://www.tldp.org/LDP/Bash-Beginners-Guide/html/)
+* [Bash Reference Manual](https://tiswww.case.edu/php/chet/bash/bashref.html)
+* [Bash scripting cheat sheet](https://devhints.io/bash)
+* [bash(1) – Linux man page](https://linux.die.net/man/1/bash)
+* [An A-Z Index of the Bash command line for Linux.](https://ss64.com/bash/)
+
+## 教程
+
+* [learnbyexample/command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):⚡️ From finding text to search and replace, from sorting to beautifying text and more 🎨
+* [learnbyexample/Linux_command_line](https://github.com/learnbyexample/Linux_command_line):💻 Introduction to Linux commands and Shell scripting
+* [learnbyexample/scripting_course](https://github.com/learnbyexample/scripting_course):📓 A reference guide to Linux command line, Vim and Scripting https://learnbyexample.github.io/scripting_course/
+* [Introduction to text manipulation on UNIX-based systems](https://www.ibm.com/developerworks/aix/library/au-unixtext/index.html)
+* [Linux 教程](https://www.runoob.com/linux/linux-tutorial.html)
+* [linuxcommand](http://linuxcommand.org)
+* [Advanced Bash-Scripting Guide](http://tldp.org/LDP/abs/html/index.html)
+* [denysdovhan/bash-handbook](https://github.com/denysdovhan/bash-handbook):book For those who wanna learn Bash https://git.io/bash-handbook
+* [dylanaraps / pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
+* [Idnan / bash-guide](https://github.com/Idnan/bash-guide):A guide to learn bash
+
+```sh
+axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso
+ccache gcc foo.c
+```
 
 ## 图书
 
-* 《鸟哥的Linux私房菜基础学习篇》
 * 《Linux Shell脚本攻略》
 * 《Shell脚本学习指南》
-* **《UNIX环境高级编程》**
-* 《Linux/UNIX系统编程手册》
+* Linux命令行与shell脚本编程大全（第3版）
+    - [fengyuhetao/shell](https://github.com/fengyuhetao/shell):Linux命令行与shell脚本编程大全案例
 
 ## 工具
 
-* [ GitSquared / edex-ui ](https://github.com/GitSquared/edex-ui):A cross-platform, customizable science fiction terminal emulator with advanced monitoring & touchscreen support.
+* [edex-ui](https://github.com/GitSquared/edex-ui):A cross-platform, customizable science fiction terminal emulator with advanced monitoring & touchscreen support.
 * help
     - [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
     - [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages http://tldr-pages.github.io/ `npm install -g tldr`
@@ -1215,9 +1205,6 @@ brew install bat
     - cloc：代码统计工具，能够统计代码的空行数、注释行、编程语言
 * benchmark
     - [sharkdp/hyperfine](https://github.com/sharkdp/hyperfine):A command-line benchmarking tool
-* [bash](http://ftp.gnu.org/gnu/bash/) https://www.gnu.org/software/bash/manua
-    - [Bash-it/bash-it](https://github.com/Bash-it/bash-it):A community Bash framework.
-    - [dylanaraps/pure-bash-bible ](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
 * [svenstaro/genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator https://svenstaro.github.io/genact/
 * [kentcdodds/cross-env](https://github.com/kentcdodds/cross-env):🔀 Cross platform setting of environment scripts https://www.npmjs.com/package/cross-env
 * [Swordfish90/cool-retro-term](https://github.com/Swordfish90/cool-retro-term):A good looking terminal emulator which mimics the old cathode display...
@@ -1251,16 +1238,9 @@ brew install bat
 
 ## 参考
 
-* [dylanaraps/pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):📖 A collection of pure bash alternatives to external processes.
 * [alebcay/awesome-shell](https://github.com/alebcay/awesome-shell)：A curated list of awesome command-line frameworks, toolkits, guides and gizmos. Inspired by awesome-php.
-* [fengyuhetao/shell](https://github.com/fengyuhetao/shell):Linux命令行与shell脚本编程大全案例
-* [Bash Guide for Beginners](https://www.tldp.org/LDP/Bash-Beginners-Guide/html/)
-* [Bash Reference Manual](https://tiswww.case.edu/php/chet/bash/bashref.html)
-* [Bash scripting cheat sheet](https://devhints.io/bash)
-* [bash(1) – Linux man page](https://linux.die.net/man/1/bash)
-* [An A-Z Index of the Bash command line for Linux.](https://ss64.com/bash/)
 * [Google’s Shell Style Guide](https://google.github.io/styleguide/shell.xml)
-* [jlevy/the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
+* [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
 
 * [teddysun / across](https://github.com/teddysun/across)
 * 脚本参考
