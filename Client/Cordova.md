@@ -1,4 +1,4 @@
-# Cordova
+# [cordova](http://cordova.apache.org/)
 
 ```sh
 npm install -g cordova
@@ -10,6 +10,5 @@ npm install -g cordova
 
 ## 参考
 
-* [cordova](http://cordova.apache.org/)
 * [中文网](http://cordova.axuer.com/)
 * [Guides](http://cordova.apache.org/docs/en/5.0.0/)

@@ -1,16 +1,16 @@
-# [pallets/flask](https://github.com/pallets/flask)
+# [flask](https://github.com/pallets/flask)
 
 The Python micro framework for building web applications. https://www.palletsprojects.com/p/flask/
-
-## 项目
-
-* [flaskbb/flaskbb](https://github.com/flaskbb/flaskbb):A classic Forum Software in Python using Flask. https://flaskbb.org
-* [Flask大型教程项目](https://flask-mega-tutorial.readthedocs.io/zh_CN/latest/)
 
 ## 图书
 
 * [Flask Web开发实战：入门、进阶与原理解析](https://item.jd.com/12430774.html)
 * 《[Flask Web开发:基于Python的Web应用开发实战](https://www.amazon.cn/gp/product/B0153177A6)》
+
+## 项目
+
+* [flaskbb/flaskbb](https://github.com/flaskbb/flaskbb):A classic Forum Software in Python using Flask. https://flaskbb.org
+* [Flask大型教程项目](https://flask-mega-tutorial.readthedocs.io/zh_CN/latest/)
 
 ## 参考
 

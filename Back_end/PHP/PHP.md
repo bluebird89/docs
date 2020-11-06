@@ -2551,12 +2551,20 @@ java -jar ./vendor/bin/selenium-server-standalone-3.4.0.jar
   - [php-objects-patterns-practice-13](https://github.com/apress/php-objects-patterns-practice-13):Source code by Matt Zandstra
 * PHP 7: Real World Application Development
 
+## 项目
+
+* [a54552239/projectManageApi](https://github.com/a54552239/projectManageApi):项目管理系统接口
+
 ## 工具
 
 * [https://phar.io](https://phar.io):The PHAR Installation and Verification Environment (PHIVE)
 * [sebastianfeldmann/phpbu](https://github.com/sebastianfeldmann/phpbu):PHP Backup Utility - Creates and encrypts database and file backups, syncs your backups to other servers or cloud services and assists you monitor your backup process https://phpbu.de
 * [rectorphp/rector](https://github.com/rectorphp/rector):Instant Upgrades for PHP Applications https://www.tomasvotruba.cz/blog/2018/02/19/rector-part-1-what-and-how/
 * [expose](https://github.com/beyondcode/expose): A beautiful, fully open-source, tunneling service - written in pure PHP https://beyondco.de  expose features, like sharing your local sites, out of the box - without any additional setup required
+
+* [cytopia/docker-php-fpm-7.2](https://github.com/cytopia/docker-php-fpm-7.2):PHP-FPM 7.2 on CentOS 7 http://devilbox.org/
+* [travis-ci-examples/php](https://github.com/travis-ci-examples/php):Example PHP project using Travis CI http://travis-ci.org
+* [shlinkio/shlink](https://github.com/shlinkio/shlink):A self-hosted and PHP-based URL shortener with CLI and REST interfaces https://shlink.io
 
 ## 参考
 

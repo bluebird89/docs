@@ -1,9 +1,8 @@
-# NLP(Natural Language Processing)
-
+# NLP Natural Language Processing
 
 ## 图书
 
-* [基于深度学习的自然语言处理]
+* [基于深度学习的自然语言处理]()
 * 信息检索导论 Introduction to Information Retrieval
 * 统计自然语言处理（第2版）
 * Neural Network Methods for Natural Language Processing Yoav Goldberg

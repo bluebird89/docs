@@ -1,4 +1,4 @@
-# [percona/percona-server](https://github.com/percona/percona-server)
+# [percona-server](https://github.com/percona/percona-server)
 
 Percona Server https://www.percona.com/software/mysql-database/percona-server
 

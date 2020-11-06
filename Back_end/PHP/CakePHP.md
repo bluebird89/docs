@@ -1,4 +1,4 @@
-# [cakephp/cakephp](https://github.com/cakephp/cakephp)
+# [cakephp](https://github.com/cakephp/cakephp)
 
 CakePHP: The Rapid Development Framework for PHP - Official Repository http://cakephp.org
 

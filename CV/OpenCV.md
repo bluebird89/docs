@@ -1,4 +1,4 @@
-# [opencv/opencv](https://github.com/opencv/opencv)
+# [opencv](https://github.com/opencv/opencv)
 
 Open Source Computer Vision Library https://opencv.org 英特尔开源的跨平台计算机视觉库
 

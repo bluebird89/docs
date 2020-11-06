@@ -13,14 +13,14 @@
 > Obama retires at 55,
 > but Trump starts at 70.
 > Absolutely everyone in this world works based on their Time Zone.>
-> 
+>
 > People around you might seem to go ahead of you,
 > some might seem to be behind you.
 > But everyone is running their own RACE, in their own TIME.
 > Don’t envy them or mock them.
 > They are in their TIME ZONE, and you are in yours!
 > Life is about waiting for the right moment to act.>
-> 
+>
 > So, RELAX.
 > You’re not LATE.
 > You’re not EARLY.
@@ -41,7 +41,7 @@
 待从头、收拾旧山河，朝天阙。
 ```
 
-《我是一个任性的孩子》 顾城
+## 《我是一个任性的孩子》 顾城
 
 > 我是一个任性的孩子
 > 我想擦去一切不幸
@@ -56,7 +56,7 @@
 > 不知怎么睡着了
 > 梦里花落知多少
 
-舒婷 《致橡树》（1977年)
+## 舒婷 《致橡树》（1977年)
 
 > 我如果爱你，绝不像攀援的凌霄花，借你的高枝炫耀自己；
 > 我如果爱你，绝不学痴情的鸟儿，为绿荫重复单调的歌曲；
@@ -76,7 +76,7 @@
 > 这才是伟大的爱情，坚贞就在这里：
 > 爱，不仅爱你伟岸的身躯，也爱你坚持的位置，足下的土地。
 
-面朝大海，春暖花开
+## 面朝大海，春暖花开
 
 > 从明天起，做一个幸福的人
 > 喂马，劈柴，周游世界
@@ -94,7 +94,7 @@
 > 愿你在尘世获得幸福
 > 我也愿面朝大海，春暖花开
 
-《我曾经七次鄙视自己的灵魂 》 卡里·纪伯伦
+## 《我曾经七次鄙视自己的灵魂 》 卡里·纪伯伦
 
 > 第一次，当它本可进取时，却故作谦卑
 > 第二次，当它在空虚时，用爱欲来填充
@@ -124,7 +124,7 @@
 生年不满百，常怀千岁忧。
 昼短苦夜长，何不秉烛游。
 
-    誓词
+## 誓词
 
 > When love is the way, then no child will go to bed hungry in this world ever again. When love is the way, we will let justice roll down like a mighty stream and righteousness like an everflowing brook. When love is the way, poverty will become history. "
 > “当我们心中有爱，再也不会有孩子忍饥挨饿；当我们心中有爱，我们能让公正似水奔流，正义如泉喷涌；当我们心中有爱，贫穷将会成为历史。”
@@ -356,14 +356,6 @@ And that has made all the difference.
 涧树含朝雨，山鸟哢馀春。
 我有一瓢酒，可以慰风尘。
 
-## 过零丁洋
-
-```
-辛苦遭逢起一经，干戈寥落四周星。
-山河破碎风飘絮，身世浮沉雨打萍。
-惶恐滩头说惶恐，零丁洋里叹零丁。
-人生自古谁无死，留取丹青照汗青！
-```
 
 我们知道他们在撒谎
 他们也知道自己在撒谎

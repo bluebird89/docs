@@ -67,22 +67,7 @@ http://www.runoob.com/xpath/xpath-tutorial.html
 * [ hardikvasa / google-images-download ](https://github.com/hardikvasa/google-images-download):Python Script to download hundreds of images from 'Google Images'. It is a ready-to-run code!
 * [Jack-Cherish / python-spider ](https://github.com/Jack-Cherish/python-spider/tree/master/2020):
   rainbowPython3网络爬虫实战：淘宝、京东、网易云、B站、12306、抖音、笔趣阁、漫画小说下载、音乐电影下载等 https://cuijiahua.com/blog/spider/
-
-## [XuefengHuang/lianjia-scrawler](https://github.com/XuefengHuang/lianjia-scrawler)
-
-链家二手房租房在线数据，存量房交易服务平台数据，详细数据分析教程 http://www.ershoufangdata.com
-
-```sh
-1. git clone https://github.com/XuefengHuang/lianjia-scrawler.git
-2. cd lianjia-scrawler
-# If you'd like not to use [virtualenv](https://virtualenv.pypa.io/en/stable/), please skip step 3 and 4.
-3. virtualenv lianjia
-4. source lianjia/bin/activate
-5. pip install -r requirements.txt
-6. python scrawl.py
-
-# ModuleNotFoundError: No module named 'ConfigParser'
-```
+* [XuefengHuang/lianjia-scrawler](https://github.com/XuefengHuang/lianjia-scrawler)
 
 ## 工具
 

@@ -1,7 +1,6 @@
 # UE
 
-* UI(User Interface)
-* UE & UX(User Expericence)
+* UE
 * IxD(Interaction design):它定义了两个或多个互动的个体之间交流的结构和行为
 * UID(User Interface Design)
     - 输入控件：按钮、文本框、选取框、单选按钮、下拉列表、列表框、开关按钮、
@@ -13,7 +12,6 @@
     - 行业工具: Sketch、 Mockplus、Axure、Fireworks、UXPin
 * UCD(User Centered Design):Business Technique User
 * IA(Infomation Architect):网站、App的结构安排以及内容是如何组织的，目的是帮助用户快速找到信息并且完成操作。包括设计网站地图、层次结构、分类、导航和元数据
-
 
 ## 验证类型
 
@@ -28,7 +26,7 @@
 
 ```html
 <!-- 取消分享 -->
-<meta name="xiaoheiban_disable_share" content="true"> 
+<meta name="xiaoheiban_disable_share" content="true">
 <!-- 微信分享链接显示 -->
 <meta name="sharecontent" data-msg-img="你的缩略图地址" data-msg-title="你的标题" data-msg-content="你的简介" data-msg-callBack="" data-line-img="你的缩略图地址" data-line-title="你的标题" data-line-callBack=""/>
 <!-- 字符长度限制 -->
@@ -40,7 +38,7 @@
     location.reload();
     location.replace("http://www.runoob.com")
     // 每隔5秒刷新一次页面。
-    <meta http-equiv="refresh" content="5"> 
+    <meta http-equiv="refresh" content="5">
 </script>
 ```
 
