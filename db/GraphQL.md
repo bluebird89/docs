@@ -1,4 +1,4 @@
-# [ graphql / graphiql ](https://github.com/graphql/graphiql)
+# [graphiql](https://github.com/graphql/graphiql)
 
 GraphiQL & the GraphQL LSP Reference Ecosystem for building browser & IDE tools.
 

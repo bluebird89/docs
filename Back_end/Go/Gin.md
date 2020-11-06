@@ -1,4 +1,4 @@
-# [gin-gonic/gin](https://github.com/gin-gonic/gin)
+# [gin](https://github.com/gin-gonic/gin)
 
 Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance -- up to 40 times faster. If you need smashing performance, get yourself some Gin. https://gin-gonic.github.io/gin/
 
@@ -6,8 +6,8 @@ Gin is a HTTP web framework written in Go (Golang). It features a Martini-like A
   - 基于 Radix 树（一种更节省空间的 Trie 树结构）的路由，占用内存更少；
   - 没有反射；
   - 可预测的 API 性能。
-* 内置路由器:开箱即用的路由器功能，不需要做任何配置即可使用。
-* 支持中间件:传入的 HTTP 请求可以经由一系列中间件和最终操作来处理，例如 Logger、Authorization、GZIP 以及最终的 DB 操作。
+* 内置路由器:开箱即用的路由器功能，不需要做任何配置即可使用
+* 支持中间件:传入的 HTTP 请求可以经由一系列中间件和最终操作来处理，例如 Logger、Authorization、GZIP 以及最终的 DB 操作
 * Crash 处理 :Gin 框架可以捕获一个发生在 HTTP 请求中的 panic 并 recover 它，从而保证服务器始终可用。此外，你还可以向 Sentry 报告这个 panic！
 * JSON 验证:Gin 框架可以解析并验证 JSON 格式的请求数据，例如检查某个必须值是否存在。
 * 路由群组 :支持通过路由群组来更好地组织路由，例如是否需要授权、设置 API 的版本等，此外，这些群组可以无限制地嵌套而不会降低性能。

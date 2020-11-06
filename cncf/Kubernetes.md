@@ -1,4 +1,4 @@
-# [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes)
+# [kubernetes](https://github.com/kubernetes/kubernetes)
 
 Production-Grade Container Scheduling and Management http://kubernetes.io
 

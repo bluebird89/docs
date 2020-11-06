@@ -1,4 +1,4 @@
-# [zeit/next.js](https://github.com/zeit/next.js)
+# [next.js](https://github.com/zeit/next.js)
 
 The React Framework https://nextjs.org
 

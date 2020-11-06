@@ -4,9 +4,9 @@
 
 ## 应用生命周期
 
-onLaunch    当uni-app 初始化完成时触发（全局只触发一次)
-onShow  当 uni-app 启动，或从后台进入前台显示
-onHide  当 uni-app 从前台进入后台
+* onLaunch    当uni-app 初始化完成时触发（全局只触发一次)
+* onShow  当 uni-app 启动，或从后台进入前台显示
+* onHide  当 uni-app 从前台进入后台
 
 ## 页面生命周期
 

@@ -1,4 +1,4 @@
-# [kubernetes/minikube](https://github.com/kubernetes/minikube)
+# [minikube](https://github.com/kubernetes/minikube)
 
 * Run Kubernetes locally https://minikube.sigs.k8s.io/
 * Minikube is a small setup by Kubernetes guys, which will spawn a virtual machine and have a tiny (but fully functional) Kubernetes cluster inside the VM.

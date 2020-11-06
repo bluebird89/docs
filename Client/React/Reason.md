@@ -1,4 +1,4 @@
-# [facebook/reason](https://github.com/facebook/reason)
+# [reason](https://github.com/facebook/reason)
 
 Simple, fast & type safe code that leverages the JavaScript & OCaml ecosystems http://reasonml.github.io
 

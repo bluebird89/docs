@@ -1,4 +1,4 @@
-# [clojure/clojure](https://github.com/clojure/clojure)
+# [clojure](https://github.com/clojure/clojure)
 
 ## 参考
 

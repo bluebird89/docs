@@ -1,4 +1,4 @@
-# [channelcat/sanic](https://github.com/channelcat/sanic)
+# [sanic](https://github.com/channelcat/sanic)
 
 Async Python 3.5+ web server that's written to go fast
 

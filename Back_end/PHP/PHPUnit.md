@@ -1,4 +1,4 @@
-# [sebastianbergmann/phpunit](https://github.com/sebastianbergmann/phpunit)
+# [phpunit](https://github.com/sebastianbergmann/phpunit)
 
 The PHP Unit Testing framework. https://phpunit.de/
 
@@ -96,7 +96,7 @@ phpunit -c phpunit.xml --testsuite=Unit  # 指定套件
 * 会降低测试的价值。潜在的设计问题是对象之间并非松散耦合。如果解决掉潜在的设计问题并使用桩件(stub)来编写测试，就能达成更好的结果，而不是在测试之间产生运行时依赖并错过改进设计的机会。
 
 * 全局状态:使用单件(singleton)的代码很难测试,使用全局变量的代码也一样。通常情况下，欲测代码和全局变量之间会强烈耦合，并且其创建无法控制。另外一个问题是，一个测试对全局变量的改变可能会破坏另外一个测试。
-  
+
   - 全局变量 $foo = 'bar'; 实际上是存储为 $GLOBALS['foo'] = 'bar'; 的。
   - ``$GLOBALS``这个变量是一种被称为*超全局*变量的变量。
   - 超全局变量是一种在任何变量作用域中都总是可用的内建变量。
@@ -104,7 +104,7 @@ phpunit -c phpunit.xml --testsuite=Unit  # 指定套件
   - 类的静态属性也是一种全局状态
 
 * 组织测试
-  
+
   - 文件系统来编排测试套件:所有测试用例源文件放在一个测试目录中
     - 通过对测试目录进行递归遍历，PHPUnit 能自动发现并运行测试 `phpunit --bootstrap src/autoload.php tests`,
     - `phpunit --bootstrap src/autoload.php tests/CurrencyTest` 单个文件
@@ -113,7 +113,7 @@ phpunit -c phpunit.xml --testsuite=Unit  # 指定套件
 * 未完成的测试与跳过的测试
 
 * 数据库测试:DbUnit 扩展大大简化了为测试设置数据库的操作，并且可以在对数据执行了一系列操作之后验证数据库的内容,支持 MySQL、PostgreSQL、Oracle 和 SQLite。通过集成 Zend Framework 或 Doctrine 2，也可以访问其他数据库系统，比如 IBM DB2 或者 Microsoft SQL Server。
-  
+
   - 数据库交互建立和维护都很复杂。对数据库进行测试时，需要考虑以下这些变数：
     + 数据库和表
     + 向表中插入测试所需要的行

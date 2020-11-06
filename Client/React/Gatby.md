@@ -1,4 +1,4 @@
-# [gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby)
+# [gatsby](https://github.com/gatsbyjs/gatsby)
 
 ⚛️📄🚀 Blazing fast site generator for React https://www.gatsbyjs.org
 
