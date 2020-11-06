@@ -15,6 +15,10 @@
     + 消除南北访问障碍。由于BGP可以将联通、电信、移动等运营商的线路“合并”，使得中国南北无障碍通讯成为可能。对接入层来说，可使“联通、电信”这类区别消失，更能使一个网站资源无限制的在全国范围内无障碍访问，而不需要在异地部署VPN或者异地加速站来实现异地无障碍访问
     + 高速互联互通:原来一条线路访问另一线路往往要经过很多层路由，但实现BGP以后就像进入了高速公路,带宽的利用率由40%左右达到80%以上
   - 用于BGP路由中的每个自治系统都被分配一个唯一的自治系统编号（ASN），通常以AS开头。对BGP来说，因为ASN是区别整个相互连接的网络中的各个网络的唯一标识，所以这个自治系统编号非常重要。 互联网地址分派机构将64512到65535的ASN编号保留给（私有）专用网络使用
+* CN2 GIA 全称 China telecom Next Carrier Network- Global Internet Access 电信国际精品网络
+* NCP New Cross Pacific（新跨太平洋海底光缆系统）。2018年11月底，中国到美国之间的海底光缆新开通了NCP线路，并且容量更大（系统设计容量超过80Tbps），路由更少（中国上海到美国中间路由节点只有11个，ping值110ms）。全长13,000公里，连接美国俄勒冈州希尔斯伯勒，连接崇明（中国大陆），南汇（中国大陆），临港（中国大陆），釜山（韩国），头城（台湾），和丸山（日本）
+  - 相对于第二条中美直达海底光缆系统（跨太平洋快线，TPE），现阶段NCP线路的网络流量更少更稳定。特征是华东/中地区流量会经过NCP直达路由节点，IP地址为202.97.95.201/202
+* 用VPN，SS，SSR，都有可能被识别，只有使用 HTTP over TLS 的样子，才会跟正常的流量混在一起，很难被识别，所以，目前来说，V2Ray客户端 + Nginx + V2Ray服务端的方式，或是gost的HTTPS的方式，基本上来说，在网络四层上看到的都是TLS的包，很难被识别。这种代理服务觉得只能做探测，或是得到更多的算力来做统计学分析。所以，V2Ray 和 gost 的服务器端用 nginx 再挡一道，那么就很难被发现了
 * 分流规则（或出站模式）:即配置哪些网站走
   - 代理模式（Proxy）国外网站（例如Twitter/YouTube/Pornhub/..）与打不开（被墙）网站
   - 直连模式Direct: 国内网站
@@ -67,7 +71,23 @@ chmod +x shadowsocks.sh
 
 A platform for building proxies to bypass network restrictions. <https://www.v2ray.com/> 通过nginx的负载均衡功能，来自web访问的流量就直接访问到网站，而通过v2ray来的流量就通过v2ray的服务端转发，实现KX代理的功能
 
+* 服务器端
+  - usr/bin/v2ray/v2ray：V2Ray 程序；
+  - /usr/bin/v2ray/v2ctl：V2Ray 工具；
+  - /etc/v2ray/config.json：配置文件；
+  - /usr/bin/v2ray/geoip.dat：IP 数据文件
+  - /usr/bin/v2ray/geosite.dat：域名数据文件 此脚本会配置自动运行脚本。自动运行脚本会在系统重启之后，自动运行 V2Ray。目前自动运行脚本只支持带有 Systemd 的系统，以及 Debian / Ubuntu 全系列
+  - 运行脚本位置
+    + /etc/systemd/system/v2ray.service: Systemd
+    + /etc/init.d/v2ray: SysV
 * [v2rayL](https://github.com/jiangxufeng/v2rayL):v2ray linux GUI客户端，支持订阅、vemss、ss等协议，自动更新订阅、检查版本更新
+
+```sh
+# 安装v2ray
+bash <(curl -L -s https://install.direct/go.sh) # 直接使用脚本
+service v2ray start # 启动
+vim /etc/v2ray/config.json # 修改配置文件
+```
 
 ## [txthinking/brook](https://github.com/txthinking/brook)
 
@@ -176,7 +196,7 @@ An unidentifiable mechanism that helps you bypass GFW. https://trojan-gfw.github
 * 模仿了互联网上最常见的HTTPS协议，以诱骗GFW认为它就是HTTPS，从而不被识别
 * 需要一个域名用来做伪装 [freenom](linhttps://www.freenom.comk)
 
-```
+```sh
 sudo useradd -m -s /bin/bash trojanuser
 sudo passwd trojanuser
 sudo usermod -G sudo trojanuser
@@ -406,12 +426,24 @@ Socks 主机 127.0.0.1 7891
       * IP-CIDR（无类别域间路由例如192.168.xx）
       * GEOIP（GeoIP数据库IP匹配，参数填US，则为美国 ip 数据库匹配，所有美国IP匹配该规则则执行）
 
+## [科学网上](https://github.com/haoel/haoel.github.io)
+
+* CN2 GIA + 香港机房
+* [gost](https://github.com/ginuerzh/gost):GO Simple Tunnel - a simple tunnel written in golang
+  - 可以设置成 HTTPS 代理，然后把你的服务伪装成一个Web服务器，比其它的流量伪装更好，也更隐蔽。这也是这里强烈推荐的一个方式
+  - [wiki](https://docs.ginuerzh.xyz/gost/)
+
+```sh
+gost -L=:8080 -F=quic://192.168.1.1:8081 -F=socks5+wss://192.168.1.2:8082 -F=http2://192.168.1.3:8083
+
+curl -v "https://www.google.com" --proxy "https://arsenal.bluebird89.online:19007" --proxy-user 'bluebird89:2007006018aC&'
+```
+
 ## 参考
 
 * [love-gfw](https://github.com/yangchuansheng/love-gfw):🔥以社会主义核心价值观为指导思想，实现 Linux 和 MacOS 设备的全局智能分流 https://fuckcloudnative.io/posts/linux-circumvent/
 * [gfwlist](https://github.com/gfwlist/gfwlist):The one and only one gfwlist here
 * [trojan-gfw](https://github.com/trojan-gfw/trojan):An unidentifiable mechanism that helps you bypass GFW. https://trojan-gfw.github.io/trojan/
-* [科学网上](https://github.com/haoel/haoel.github.io)
 * [](https://github.com/freefq/free)
 * [max2max/freess](https://github.com/max2max/freess)
 * [JadaGates/ShadowsocksBio](https://github.com/JadaGates/ShadowsocksBio):SS的前世今生
