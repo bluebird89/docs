@@ -1,4 +1,4 @@
-# [ruby/ruby](https://github.com/ruby/ruby)
+# [ruby](https://github.com/ruby/ruby)
 
 The Ruby Programming Language https://www.ruby-lang.org/
 

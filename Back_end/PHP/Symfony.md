@@ -1,4 +1,4 @@
-# [symfony/symfony](https://github.com/symfony/symfony)
+# [symfony](https://github.com/symfony/symfony)
 
 The Symfony PHP framework http://symfony.com. Fabien Potencier
 

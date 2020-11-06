@@ -1,4 +1,4 @@
-# * [react-native](https://github.com/facebook/react-native)
+# [react-native](https://github.com/facebook/react-native)
 
 A framework for building native apps with React. http://facebook.github.io/react-native/
 
@@ -31,7 +31,6 @@ A framework for building native apps with React. http://facebook.github.io/react
   - 公司里有一个 iOS 团队和一个 Android 团队：要让原生开发和 React Native 开发在企业中大规模并存仍然很困难
 
 ## [安装](https://facebook.github.io/react-native/docs/getting-started.html)
-
 
 * 安装 Android Studio
   - Android Studio的欢迎界面中选择Configure | SDK Manager

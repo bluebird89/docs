@@ -1,4 +1,4 @@
-# [numpy/numpy](https://github.com/numpy/numpy)
+# [numpy](https://github.com/numpy/numpy)
 
 The fundamental package for scientific computing with Python. https://www.numpy.org/
 

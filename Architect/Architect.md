@@ -6,7 +6,6 @@
   - 应用架构很容易也很难，容易的在于 不需过多关注技术实现，难的在于 必须根据实际业务场景和业务需要及时间、成本、资源等给出当下最合适、一定不是最完美的架构方案。
   - 所有的大型互联网系统在初期一定不是设计成现在这个样子的，都是伴随着业务从小到大、从少到多、从简单到复杂的过程演进而来，架构的演进过程也见证了业务的发展历程。
 * 应用架构（业务系统）对技术的追求要有所止境，当 DB 瓶颈解决不了时换个思路，来个排队系统和预约系统，技术难度就降低了很多；分布式事务解决不了，那就做好回滚、补偿、对账这些基础工作。多从应用架构的角度去思考解决方案
-* 具备特质
 
 ## 能力
 
@@ -605,7 +604,7 @@ service UserService {
 
 ## 实例
 
-* [ alibaba /COLA ](https://github.com/alibaba/COLA):Clean Object-oriented & Layered Architecture
+* [COLA](https://github.com/alibaba/COLA):Clean Object-oriented & Layered Architecture
 
 ## 参考
 

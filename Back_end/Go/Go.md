@@ -1332,15 +1332,13 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 ## 参考
 
 * [Wiki](https://github.com/golang/go/wiki)
+* [The Go Programming Language Specification](https://golang.google.cn/ref/spec)
 * [Alikhll/golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
-* [Go 语言设计与实现](https://draveness.me/golang/)
-* [spec](https://golang.google.cn/ref/spec)
 * [developer-learning/learning-golang](https://github.com/developer-learning/learning-golang):Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（文档、书籍、视频)
 * [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
 * [yinggaozhen/awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 https://awesome-go.cn(建设中)
 * [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 * [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
-* [The Go Programming Language Specification](https://golang.google.cn/ref/spec)
 * [GO语言中文网](https://studygolang.com/)
 * [uber-go/guide](https://github.com/uber-go/guide):The Uber Go Style Guide.
 * [qiniu/gobook](https://github.com/qiniu/gobook):The Go Programming Language
@@ -1353,12 +1351,11 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - `go get golang.org/x/tools/cmd/godoc`
   - `godoc -http=:6060` 访问`http://localhost:6060/`
 * [deanishe/awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
-* [ hackstoic / golang-open-source-projects ](https://github.com/hackstoic/golang-open-source-projects):为互联网IT人打造的中文版awesome-go
+* [golang-open-source-projects](https://github.com/hackstoic/golang-open-source-projects):为互联网IT人打造的中文版awesome-go
 * [effective_go](https://go-zh.org/doc/effective_go.html)
-* https://learn.go.dev/
 
+* https://learn.go.dev/
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>
-
 * [Go内存分配](https://mp.weixin.qq.com/s/3gGbJaeuvx4klqcv34hmmw)
 [](https://mp.weixin.qq.com/s?__biz=MzUzNTY5MzU2MA==&mid=2247484112&idx=1&sn=79d0d3167d0d962fe41ec00cdafffbb0)

@@ -2,16 +2,6 @@
 
 一个包含180+的科学包及其依赖项的发行版本。其包含的科学包包括：conda, numpy, scipy, ipython notebook等
 
-* 环境管理： 可以建立多个虚拟环境，用于隔离不同项目所需的不同版本的工具包，以防止版本上的冲突
-* packages 管理： 可以使用 conda 来安装、更新 、卸载工具包 ，并且它更关注于数据科学相关的工具包。预先集成了像 Numpy、Scipy、 pandas、Scikit-learn 在数据分析中常用的包,也能安装非python的包,比如可以安装R语言的集成开发环境 Rstudio
-
-## packages
-
-* Anaconda Navigator ：用于管理工具包和环境的图形用户界面，后续涉及的众多管理命令也可以在 Navigator 中手工实现。
-* qtconsole ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。
-* spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境
-* [tsinghua mirror](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/)
-
 ## install
 
 ```sh
@@ -63,18 +53,12 @@ conda update --all
 conda update conda
 ```
 
-## 使用
 
-*　虚拟环境：按需部署
+## 环境管理 env
+
+* 建立多个虚拟环境，用于隔离不同项目所需的不同版本的工具包，以防止版本上的冲突
 
 ```sh
-conda info -e|--envs # 显示已创建环境
-conda update conda|anaconda|python
-
-# package
-conda search [--full-name] <package_full_name>
-
-# env
 conda env list # 显示所有的环境
 conda list [-n python34|--revisions] # 查看某个指定环境的已安装包
 conda create --name|n  py35 python=3.5 numpy pandas
@@ -95,6 +79,23 @@ activate env_name # for Windows
 deactivate [env_name] # for Windows
 
 conda env remove -n env_name --all # 删除名为 env_name 的环境
+
+```
+
+## packages 管理
+
+* 使用 conda 来安装、更新 、卸载工具包 ，并且它更关注于数据科学相关的工具包。预先集成了像 Numpy、Scipy、 pandas、Scikit-learn 在数据分析中常用的包,也能安装非python的包,比如可以安装R语言的集成开发环境 Rstudio
+* Anaconda Navigator ：用于管理工具包和环境的图形用户界面，后续涉及的众多管理命令也可以在 Navigator 中手工实现。
+* qtconsole ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。
+* spyder ：一个使用Python语言、跨平台的、科学运算集成开发环境
+* [tsinghua mirror](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/)
+
+```sh
+conda info -e|--envs # 显示已创建环境
+conda update conda|anaconda|python
+
+# package
+conda search [--full-name] <package_full_name>
 
 python --version|V #查看版本
 which -a python

@@ -1,4 +1,4 @@
-# [rust-lang/cargo](https://github.com/rust-lang/cargo)
+# [cargo](https://github.com/rust-lang/cargo)
 
 Rust’s build system and package manager. https://doc.rust-lang.org/cargo
 

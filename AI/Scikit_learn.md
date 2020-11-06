@@ -1,6 +1,6 @@
-# [scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn)
+# [scikit-learn](https://github.com/scikit-learn/scikit-learn)
 
-scikit-learn: machine learning in Python http://scikit-learn.org
+machine learning in Python http://scikit-learn.org
 
 ## 安装
 

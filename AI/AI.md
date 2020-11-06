@@ -1,6 +1,6 @@
-# 人工智能：Artificial Intelligence
+# 人工智能 Artificial Intelligence
 
-* 在1956年的达特茅斯会议上被提出来，它研究的是如何制造智能机器或模拟人类的智能行为。大数据与人工智能之间可以说是相辅相成，人工智能的基础是数据，而数据的利用又离不开人工智能。
+* 在1956年的达特茅斯会议上被提出来，它研究的是如何制造智能机器或模拟人类的智能行为。大数据与人工智能之间可以说是相辅相成，人工智能的基础是数据，而数据的利用又离不开人工智能
 * 领域方向
   - 模式识别
   - 机器学习
@@ -32,7 +32,7 @@
 
 ## 深度学习
 
-一种特殊的机器学习，它通过学习将世界表示为嵌套的概念层次结构来实现强大的功能和灵活性，每个概念都是根据更简单的概念进行定义的，而更抽象的表示则用不那么抽象的概念计算出来。
+一种特殊的机器学习，它通过学习将世界表示为嵌套的概念层次结构来实现强大的功能和灵活性，每个概念都是根据更简单的概念进行定义的，而更抽象的表示则用不那么抽象的概念计算出来
 
 * 确定那些特征与找出猫和狗最相关
 * 以层次结构为基础，找到可以找到的特征的组合。例如，是否存在胡须，或是否存在耳朵等。
@@ -453,5 +453,4 @@
 * [完备的 AI 学习路线，最详细的资源整理](https://mp.weixin.qq.com/s?__biz=MzIwODI2NDkxNQ==&mid=2247484347&amp;idx=1&amp;sn=a86919fadffed619bfe744dcef514923)
 * [OpenAI](https://openai.com)
 * [wx-chevalier/AIDL-Series](https://github.com/wx-chevalier/AIDL-Series):📚 Series of Artificial Intelligence & Deep Learning, including Mathematics Fundamentals, Python Practices, NLP Application, etc. 💫 人工智能与深度学习实战，机器学习篇 | Tensoflow 篇
-* [](http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
-  )
+* [](http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)

@@ -1,4 +1,0 @@
-# Xhprof
-
-
-tideways_xhprof

@@ -1,4 +1,4 @@
-# [neo4j/neo4j](https://github.com/neo4j/neo4j)
+# [neo4j](https://github.com/neo4j/neo4j)
 
 Graphs for Everyone http://neo4j.com
 

@@ -1,4 +1,4 @@
-# [electron/electron](https://github.com/electron/electron)
+# [electron](https://github.com/electron/electron)
 
 Build cross-platform desktop apps with JavaScript, HTML, and CSS https://electronjs.org， 用 web 技术构建跨平台的桌面应用。它有如下特性：
 

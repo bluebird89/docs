@@ -1,4 +1,4 @@
-# [gradle/gradle](https://github.com/gradle/gradle)
+# [gradle](https://github.com/gradle/gradle)
 
 Adaptable, fast automation for all https://gradle.org
 

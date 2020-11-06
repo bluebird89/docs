@@ -1,5 +1,4 @@
-
-## Business Analyst
+## BA Business Analyst
 
 * Produce and explore requirements in collaboration with users, at a different level of detail to what is required following the traditional blue process methodology
 * Facilitate and participate in discovery workshops aimed at engaging with potential and existing users to understand their needs and pains

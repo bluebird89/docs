@@ -1,4 +1,4 @@
-# [django/django](https://github.com/django/django)
+# [django](https://github.com/django/django)
 
 The Web framework for perfectionists with deadlines. <https://www.djangoproject.com/>.
 自身带有轻量级服务器，部署用 Apache with mod_wsgi，每个django项目中可以包含多个APP，相当于一个大型项目中的分系统、子模块、功能部件等等，相互之间比较独立，但也有联系。
@@ -66,7 +66,7 @@ DATABASES = {
     }
 }
 
-# add a setting indicating where the static files should be placed. This is necessary so that Nginx can handle requests for these items. 
+# add a setting indicating where the static files should be placed. This is necessary so that Nginx can handle requests for these items.
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 ```
@@ -170,19 +170,15 @@ Requested setting INSTALLED_APPS, but settings are not configured. You must eith
 * [viewflow/django-material](https://github.com/viewflow/django-material):Material Design for Django http://forms.viewflow.io/
 * [jcalazan/ansible-django-stack](https://github.com/jcalazan/ansible-django-stack):Ansible Playbook for setting up a Django app with Nginx, Gunicorn, PostgreSQL, Celery, RabbitMQ, Supervisor, Virtualenv, and Memcached. A Vagrantfile for provisioning a VirtualBox virtual machine is included as well.
 * [django/daphne](https://github.com/django/daphne):Django Channels HTTP/WebSocket server
-
-## Taiga
-
-* [Taiga Documentation](http://taigaio.github.io/taiga-doc/dist/#_installation_guide)
-* [taigaio/taiga-front](https://github.com/taigaio/taiga-front):Project management web application with scrum in mind! Built on top of Django and AngularJS (Front) http://taiga.io
-* [taigaio/taiga-back](https://github.com/taigaio/taiga-back):Project management web application with scrum in mind! Built on top of Django and AngularJS (Backend Code)
-
-## 框架
-
-* [encode/django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. ⚡️ https://www.django-rest-framework.org
-* [geex-arts/django-jet](https://github.com/geex-arts/django-jet):Modern responsive template for the Django admin interface with improved functionality http://jet.geex-arts.com/
-* [nioperas06/awesome-django-rest-framework](https://github.com/nioperas06/awesome-django-rest-framework):Tools, processes and resources you need to create an awesome API with Django REST Framework
-* [divio/django-cms](https://github.com/divio/django-cms):The easy-to-use and developer-friendly CMS http://www.django-cms.org
+* Taiga
+  - [Taiga Documentation](http://taigaio.github.io/taiga-doc/dist/#_installation_guide)
+  - [taigaio/taiga-front](https://github.com/taigaio/taiga-front):Project management web application with scrum in mind! Built on top of Django and AngularJS (Front) http://taiga.io
+  - [taigaio/taiga-back](https://github.com/taigaio/taiga-back):Project management web application with scrum in mind! Built on top of Django and AngularJS (Backend Code)
+* 框架
+  - [encode/django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. ⚡️ https://www.django-rest-framework.org
+  - [geex-arts/django-jet](https://github.com/geex-arts/django-jet):Modern responsive template for the Django admin interface with improved functionality http://jet.geex-arts.com/
+  - [nioperas06/awesome-django-rest-framework](https://github.com/nioperas06/awesome-django-rest-framework):Tools, processes and resources you need to create an awesome API with Django REST Framework
+  - [divio/django-cms](https://github.com/divio/django-cms):The easy-to-use and developer-friendly CMS http://www.django-cms.org
 
 ## 参考
 

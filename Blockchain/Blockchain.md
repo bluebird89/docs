@@ -1,4 +1,4 @@
-# 区块链（blockchain）
+# 区块链 blockchain
 
 A distributed database that is used to maintain a continuously growing list of records, called blocks.所有的记账能迅速同步到所有账本 设计者署名为中本聪的人创造一种不受政府或其他任何人控制的货币！
 

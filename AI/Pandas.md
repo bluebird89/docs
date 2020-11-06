@@ -1,11 +1,11 @@
-# [pandas-dev/pandas](https://github.com/pandas-dev/pandas)
+# [pandas](https://github.com/pandas-dev/pandas)
 
 Flexible and powerful data analysis / manipulation library for Python, providing labeled data structures similar to R data.frame objects, statistical functions, and much more http://pandas.pydata.org
 
 ## 数据结构
 
-df：任意的Pandas DataFrame对象
-s：任意的Pandas Series对象
+* df：任意的Pandas DataFrame对象
+* s：任意的Pandas Series对象
 
 ## API
 

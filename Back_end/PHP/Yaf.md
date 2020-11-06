@@ -1,4 +1,4 @@
-# [laruence/yaf](https://github.com/laruence/yaf)
+# [yaf](https://github.com/laruence/yaf)
 
 A fast php framework written in c, built in php-ext <http://pecl.php.net/package/yaf>
 

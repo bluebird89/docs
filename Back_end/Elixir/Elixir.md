@@ -1,4 +1,4 @@
-# [elixir-lang/elixir](https://github.com/elixir-lang/elixir)
+# [elixir](https://github.com/elixir-lang/elixir)
 
 Elixir is a dynamic, functional language designed for building scalable and maintainable applications http://elixir-lang.org/
 
@@ -8,7 +8,7 @@ Elixir is a dynamic, functional language designed for building scalable and main
   - 服务在 epmd 注册的端口是动态的:需要保持一个范围内的端口全开，但是必须限制访问的源 IP
 * shell 也可以用来做运行系统的 introspection
 
-```
+```sh
 # observer，需要在 mix.exs 里加入 runtime_tools application，这样 observer backend 才会运行
 # 要想在本地远程连接生产环境的 node，需要知道其在 epmd 下注册的端口。这样的需求一般都用 ssh port forwarding 来完成
 PORT_PROD=$(shell ssh prod-cms-service "epmd -names" | grep cms_service | sed 's/[^0-9]//g') # 显示本机在 epmd 注册的服务的端口号,找到生产环境下当前运行的服务的端口号，我们需要 ssh 上去运行这条命令
@@ -98,7 +98,7 @@ version-bump:
 
 ## 使用
 
-```
+```sh
 iex
 ```
 

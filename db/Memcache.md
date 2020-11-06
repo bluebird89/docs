@@ -1,4 +1,4 @@
-# [memcached/memcached](https://github.com/memcached/memcached)
+# [memcached](https://github.com/memcached/memcached)
 
 Memcached是一个自由开源的，高性能，分布式内存对象缓存系统,基于内存的key-value存储，用来存储小块的任意数据（字符串、对象）https://memcached.org
 

@@ -1,4 +1,4 @@
-# [moby/moby](https://github.com/moby/moby)
+# [moby](https://github.com/moby/moby)
 
 Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
 

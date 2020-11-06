@@ -1,4 +1,4 @@
-# [astaxie/beego](https://github.com/astaxie/beego)
+# [beego](https://github.com/astaxie/beego)
 
 beego is an open-source, high-performance web framework for the Go programming language. http://beego.me
 
