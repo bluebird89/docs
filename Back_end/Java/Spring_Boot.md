@@ -1,4 +1,4 @@
-# [spring-projects/spring-boot](https://github.com/spring-projects/spring-boot)
+# [spring-boot](https://github.com/spring-projects/spring-boot)
 
 Spring Boot http://projects.spring.io/spring-boot
 

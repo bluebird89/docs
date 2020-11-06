@@ -67,6 +67,8 @@
   - `~/.aria2/aria2.conf`
   - `aria2c 'magnet:xxxxxxx'`
   - [yangshun1029/aria2gui](https://github.com/yangshun1029/aria2gui):Aria2GUI for macOS
+  - [aria2/aria2](https://github.com/aria2/aria2):aria2 is a lightweight multi-protocol & multi-source, cross platform download utility operated in command-line. It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink. https://aria2.github.io/
+  - [ziahamza/webui-aria2](https://github.com/ziahamza/webui-aria2):The aim for this project is to create the worlds best and hottest interface to interact with aria2. Very simple to use, just download and open index.html in any web browser.
 * [iawia002/annie](https://github.com/iawia002/annie):👾 Fast, simple and clean video downloader
 * [you-get](https://github.com/soimort/you-get):⏬ Dumb downloader that scrapes the web https://you-get.org/
 * [rg3/youtube-dl](https://github.com/rg3/youtube-dl):Command-line program to download videos from YouTube.com and other video sites http://rg3.github.io/youtube-dl/ `curl https://yt-dl.org/latest/youtube-dl -o /usr/local/bin/youtube-dl `

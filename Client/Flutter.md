@@ -1,4 +1,4 @@
-# [flutter/flutter](https://github.com/flutter/flutter)
+# [flutter](https://github.com/flutter/flutter)
 
 Flutter makes it easy and fast to build beautiful mobile apps. https://flutter.dev https://flutter.cn
 

@@ -1,4 +1,4 @@
-# [magento/magento2](https://github.com/magento/magento2)
+# [magento2](https://github.com/magento/magento2)
 
 All Submissions you make to Magento Inc. (“Magento") through GitHub are subject to the following terms and conditions: (1) You grant Magento a perpetual, worldwide, non-exclusive, no charge, royalty free, irrevocable license under your applicable copyrights and patents to reproduce, prepare derivative works of, display, publically perform, subli… http://www.magento.com
 
@@ -59,8 +59,8 @@ listen.mode = 0660
 composer create-project --repository=https://repo.magento.com/ magento/project-community-edition magento2
 
 find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
-find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} + 
-chown -R :www-data . # Ubuntu  chown -R :<your web server group name> 
+find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
+chown -R :www-data . # Ubuntu  chown -R :<your web server group name>
 chmod u+x bin/magento
 
 ps aux | grep nginx
@@ -111,7 +111,7 @@ chmod -R 777 var/ generated/
    set $MAGE_ROOT /var/www/html/magento2;
    include /var/www/html/magento2/nginx.conf.sample;
  }
- 
+
 
 <VirtualHost *:80>
         ServerName packagist.domain.com
@@ -247,7 +247,7 @@ bin/magento admin:user:create --admin-user=henry --admin-password=111111 --admin
 </route>
 
 # CategoryLinkManagementInterface.php under Scommerce\Custom\Api\namespace Scommerce\Custom\Api;
- 
+
 /**
  * @api
  */
@@ -265,7 +265,7 @@ interface CategoryLinkManagementInterface
 
 #  CategoryProductLinkInterface.php under \Scommerce\Custom\Api\Data\
 namespace Scommerce\Custom\Api\Data;
- 
+
 /**
  * @api
  */
@@ -275,51 +275,51 @@ interface CategoryProductLinkInterface
      * @return string|null
      */
     public function getSku();
- 
+
     /**
      * @param string $sku
      * @return $this
      */
     public function setSku($sku);
- 
+
     /**
      * @return string|null
      */
     public function getName();
- 
+
     /**
      * @param string $name
      * @return $this
      */
     public function setName($name);
- 
+
     /**
      * @return float|null
      */
     public function getPrice();
- 
+
     /**
      * @param float $price
      * @return $this
      */
     public function setPrice($price);
- 
+
     /**
      * @return int|null
      */
     public function getPosition();
- 
+
     /**
      * @param int $position
      * @return $this
      */
     public function setPosition($position);
- 
+
     /**
      * @return string|null
      */
     public function getCategoryDescription();
- 
+
     /**
      * @param string $description
      * @return $this
@@ -335,7 +335,7 @@ interface CategoryProductLinkInterface
 
 # under Scommerce\Custom\Model\CategoryLinkManagement.php as specified in di.xml
 namespace Scommerce\Custom\Model;
- 
+
 /**
  * Class CategoryLinkManagement
  */
@@ -345,12 +345,12 @@ class CategoryLinkManagement implements  \Scommerce\Custom\Api\CategoryLinkManag
      * @var \Magento\Catalog\Api\CategoryRepositoryInterface
      */
     protected $categoryRepository;
- 
+
     /**
      * @var \Scommerce\Custom\Api\Data\CategoryProductLinkInterfaceFactory
      */
     protected $productLinkFactory;
- 
+
     /**
      * CategoryLinkManagement constructor.
      *
@@ -364,7 +364,7 @@ class CategoryLinkManagement implements  \Scommerce\Custom\Api\CategoryLinkManag
         $this->categoryRepository = $categoryRepository;
         $this->productLinkFactory = $productLinkFactory;
     }
- 
+
     /**
      * {@inheritdoc}
      */
@@ -378,16 +378,16 @@ class CategoryLinkManagement implements  \Scommerce\Custom\Api\CategoryLinkManag
             ]];
         }
         $categoryDesc = $category->getDescription();
- 
+
         /** @var \Magento\Catalog\Model\ResourceModel\Product\Collection $products */
         $products = $category->getProductCollection()
             ->addFieldToSelect('position')
             ->addFieldToSelect('name')
             ->addFieldToSelect('price');
- 
+
         /** @var \Scommerce\Custom\Api\Data\CategoryProductLinkInterface[] $links */
         $links = [];
- 
+
         /** @var \Magento\Catalog\Model\Product $product */
         foreach ($products->getItems() as $product) {
             /** @var \Scommerce\Custom\Api\Data\CategoryProductLinkInterface $link */
@@ -399,14 +399,14 @@ class CategoryLinkManagement implements  \Scommerce\Custom\Api\CategoryLinkManag
                 ->setCategoryDescription($categoryDesc);
             $links[] = $link;
         }
- 
+
         return $links;
     }
 }
 
 # Scommerce\Custom\Model\CategoryProductLink.php
 namespace Scommerce\Custom\Model;
- 
+
 /**
  * @codeCoverageIgnore
  */
@@ -421,7 +421,7 @@ class CategoryProductLink implements \Scommerce\Custom\Api\Data\CategoryProductL
     const KEY_CATEGORY_DESC         = 'category_description';
     const KEY_POSITION              = 'position';
     /**#@-*/
- 
+
     /**
      * {@inheritdoc}
      */
@@ -429,7 +429,7 @@ class CategoryProductLink implements \Scommerce\Custom\Api\Data\CategoryProductL
     {
         return $this->_get(self::KEY_SKU);
     }
- 
+
     /**
      * {@inheritdoc}
      */
@@ -437,7 +437,7 @@ class CategoryProductLink implements \Scommerce\Custom\Api\Data\CategoryProductL
     {
         return $this->_get(self::KEY_NAME);
     }
- 
+
     /**
      * {@inheritdoc}
      */
@@ -445,7 +445,7 @@ class CategoryProductLink implements \Scommerce\Custom\Api\Data\CategoryProductL
     {
         return $this->_get(self::KEY_POSITION);
     }
- 
+
     /**
      * {@inheritdoc}
      */
@@ -453,7 +453,7 @@ class CategoryProductLink implements \Scommerce\Custom\Api\Data\CategoryProductL
     {
         return $this->_get(self::KEY_PRICE);
     }
- 
+
     /**
      * {@inheritdoc}
      */
@@ -461,7 +461,7 @@ class CategoryProductLink implements \Scommerce\Custom\Api\Data\CategoryProductL
     {
         return $this->_get(self::KEY_CATEGORY_DESC);
     }
- 
+
     /**
      * @param string $sku
      * @return $this
@@ -470,7 +470,7 @@ class CategoryProductLink implements \Scommerce\Custom\Api\Data\CategoryProductL
     {
         return $this->setData(self::KEY_SKU, $sku);
     }
- 
+
     /**
      * @param string $name
      * @return $this
@@ -479,7 +479,7 @@ class CategoryProductLink implements \Scommerce\Custom\Api\Data\CategoryProductL
     {
         return $this->setData(self::KEY_NAME, $name);
     }
- 
+
     /**
      * @param int $position
      * @return $this
@@ -488,7 +488,7 @@ class CategoryProductLink implements \Scommerce\Custom\Api\Data\CategoryProductL
     {
         return $this->setData(self::KEY_POSITION, $position);
     }
- 
+
     /**
      * @param float $price
      * @return $this
@@ -497,7 +497,7 @@ class CategoryProductLink implements \Scommerce\Custom\Api\Data\CategoryProductL
     {
         return $this->setData(self::KEY_PRICE, $price);
     }
- 
+
     /**
      * @param string $description
      * @return $this
@@ -506,7 +506,7 @@ class CategoryProductLink implements \Scommerce\Custom\Api\Data\CategoryProductL
     {
         return $this->setData(self::KEY_CATEGORY_DESC, $description);
     }
- 
+
 }
 
 # generate admin level access key
@@ -741,7 +741,7 @@ foreach($product_ids as $id){
 ```
 ```php
 namespace \Vendor\Module\Plugin\ModelName;
- 
+
 class ProductPlugin
 {
     public function aroundSave(\Magento\Catalog\Model\Product $subject, callable $proceed)
@@ -759,7 +759,7 @@ class ProductPlugin
     {
         return $result + 1;
     }
-    
+
     public function beforeSetPrice(\Magento\Catalog\Model\Product $subject, $price)
     {
         return [$price + 1];
@@ -834,9 +834,9 @@ View, edit, create and fulfill orders from admin panel
 Create one or multiple invoices, shipments and credit memos per order to allow for split fulfillment
 Print invoices and packing slips
 -
- Call Center (phone) order creation − Includes ability to create new 
-customer, or select existing customer and view - shopping cart, 
-wishlist, last ordered items, and compared products list, as well as 
+ Call Center (phone) order creation − Includes ability to create new
+customer, or select existing customer and view - shopping cart,
+wishlist, last ordered items, and compared products list, as well as
 select addresses, give discounts and assign custom prices
 Create re-orders for customers from administration panel
 Email Notifications of Orders
@@ -882,8 +882,8 @@ Search Results rewrites and redirects
 Approve, Edit and Delete Product Tags
 Approve, Edit and Delete Product Reviews
 -
- RSS feed for Low Inventory Alerts Customer Personalized Products – 
-Upload text for embroidery, monogramming, etc. (this one is 
+ RSS feed for Low Inventory Alerts Customer Personalized Products –
+Upload text for embroidery, monogramming, etc. (this one is
 already there, but want to have the following shown after it)
 Customer Personalized Products – Upload Image
 Customer Personalized Products – Select Date/Time options for products
@@ -1014,7 +1014,7 @@ varnishncsa -F '%U%q %{Varnish:hitmiss}x'
 * EVA
     - eav_entity_type  根据type 获取类型id
     - eav_attribute:获取类型属性id
-* product  
+* product 
     - image detail role:`SELECT * FROM catalog_product_entity_varchar where entity_id=59 and attribute_id in (87,88,89,128) order by store_id asc;`
     - `SELECT * FROM magento.catalog_product_entity_int where attribute_id =97;`
 
@@ -1050,7 +1050,7 @@ if ($userData && $userData->getInterfaceLocale()) {
 }
 
 ## accountLogin.php 权限验证：郵箱登錄問題：因爲websiteId 的問題
-$customer = $this->accountAuthenticator->authenticateWithoutPassword($accountId); 
+$customer = $this->accountAuthenticator->authenticateWithoutPassword($accountId);
 
 public function authenticateWithoutPassword($username) {
     try {

@@ -2,39 +2,28 @@
 
 策略从正向开始还是反向开始，正向放最小，反向放最大
 
-
-
 - 选择考虑
-  
   - 时间复杂度
   - 空间复杂度(对内存空间的消耗）
   - 算法稳定性:如果待排序序列中存在值相等的元素，经过排序之后，相等元素之间原有的先后顺序不变
     - 插入排序、合并排序、冒泡排序等都是稳定
     - 堆排序、快速排序 不稳定
     - 不稳定缺点:多重排序时可能会产生问题
-
 - 总结
-  
   - 遍历作用
     - 数据范围控制
     - 次数控制
-
 - 思路
-  
   - 外层遍历数组：限定边界条件
   - 处理方法：取什么元素，怎么放
-
 - bubble sort 冒泡
-  
   - 一次冒泡会让至少一个元素移动到应该在的位置
   - 外层控制执行次数n：i o~n
   - 内层控制比较范围：j从0开始到n-i-1,j 与 j+1 俩俩比较（比较次数 n-1 n-2 1）
   - 时间复杂度:O(n2)
   - 空间复杂度：只涉及相邻元素的交换，是原地排序算法
   - 算法稳定性：元素相等不会交换，是稳定的排序算法
-
 - Insert Sort **插入**
-  
   - 将数组数据分为已排序区间和未排序区间两个区间，初始已排序区间只有数组第一个元素
   - **取未排序区间中元素，在已排序区间中插入合适位置** 外层i从 1~n（未排序区间），0 为已排序区间,i 取出 value(必须取出，后面i 要与i-1位比较，需要i个位置)
   - 保证插入已排序区间数据有序：直到未排序区间中元素为空
@@ -47,9 +36,7 @@
   - 不涉及相等元素位置交换，是稳定排序算法
   - 不涉及数据交换
   - 时间复杂度是O(n2)
-
 - Selection Sort 选择
-  
   - 分已排序区间和未排序区间
   - **从未排序区间中选择最小元素** 外层i从 0～n-1，最小 min = i
     - 与j 从i+1 到 n 对比
@@ -64,11 +51,8 @@
   - 时间复杂度也是 O(n2)
   - 不涉及额外的存储空间，所以是原地排序
   - 由于涉及非相邻元素位置交换，所以是不稳定的排序算法
-
 - 插入排序 > 冒泡排序 >> 选择排序
-
 - Quick sort 快速
-  
   - 子数组有序时，整个数组也就有序了，合并排序相似
   - 排序数组中下标从 p 到 r 之间一组数据，选择 p 到 r 之间任意一个数据a[q]作为 pivot（分区点）
     - 一般会将数组最后一个元素或者第一个元素作为 pivot
@@ -85,9 +69,7 @@
   - 原地排序算法，时间复杂度和归并排序一样，也是 O(nlogn)
   - 缺点:涉及到数据的交换，有可能破坏原来相等元素的位置排序，所以是不稳定排序算法
   - PHP 数组的 sort 函数底层就是基于快速排序来实现
-
 - Merge sort 归并
-  
   - 使用分治思想，就是分而治之，将一个大问题分解成小的子问题来解决
   - 把数组从中间分成前后两部分，然后对前后两部分分别排序，再将排好序两部分合并在一起
   - 递归将传入待排序数组一分为二，直到不能分割，然后将排序后序列合并，最终返回排序后的数组
@@ -100,27 +82,18 @@
   - 不涉及相等元素位置交换，是稳定排序算法
   - 时间复杂度是 O(nlogn) `T(n) = 2*T(n/2) + n = 2^k*T(n/2^k) + k*n`，优于冒泡排序和插入排序的 O(n2)
   - 需要额外空间存放排序数据，不是原地排序，最多需要和待排序数组同样大小的空间，空间复杂度是 O(n)
-
 - External Merge Sort:数据量特别大时，或者说比内存容量还要大时，数据就无法一次性放入内存中，只能放在硬盘等外存储器上
-  
   - 要对 900MB 的数据进行排序，但是内存只有 100MB
   - 读取 10MB 的数据，那就相当于把 900MB 的数据分成了 90 份
   - 在内存中排序完成后写入磁盘
   - 把这 90 份数据都排好序，那就会产生 90 个临时文件
   - 用 k-way merge 对着 90 个文件进行合并，比如每次读取每个文件中的 1MB 拿到内存里来 merge，保证加起来是小于内存容量且能保证程序能够运行的
-
 - Heap sort 堆排序
-
 - Shell Sort 希尔排序
-
 - Bucket Sort 桶排序
-
 - 基数排序 Dadix Sort
-
 - 贪心
-
 - 剪枝
-
 - 图算法
 
 ## 计数排序（Counting Sort）
@@ -131,8 +104,6 @@
   - 计数：遍历 arr，value 存在,则 ++ count[value],得到所有 value 的 count，此时得到不稳定的排序结果
   - 地址范围（位置信息）：遍历 count[i] = count[i] + count[i-1]。i 范围 [count[i-1],count[i - 1]]
   - 从后向前遍历:output[arr[i]] = count[arr[i]] -1; --count[arr[i]];
-    
-    
 
 ## 指标
 
@@ -170,18 +141,18 @@ function bubbleSort3(arr3) {
     while (low < high) {
         for (j= low; j< high; ++j) //正向冒泡,找到最大者
             if (arr[j]> arr[j+1]) {
-                tmp = arr[j]; 
-                arr[j]=arr[j+1]; 
+                tmp = arr[j];
+                arr[j]=arr[j+1];
                 arr[j+1]=tmp;
             }
         --high;                 //修改high值, 前移一位
         for (j=high; j>low; --j) //反向冒泡,找到最小者
         if (arr[j] < arr[j+1]) {
-            tmp = arr[j]; 
-            arr[j]=arr[j+1]; 
+            tmp = arr[j];
+            arr[j]=arr[j+1];
             arr[j+1]=tmp;
-        } 
-    } 
+        }
+    }
   }
 var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
 console.log(bubbleSort2(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
@@ -261,13 +232,13 @@ function binaryInsertionSort(array) {
 
         for (var i = 1; i < array.length; i++) {
             var key = array[i], left = 0, right = i - 1;
-            while (left <= right) { 
+            while (left <= right) {
               var="";
               middle="parseInt((left" +="" 2);
               if (key="" <="" array[middle]){
-                right="middle" - 1; 
-              }else{ 
-                  left="middle"; 
+                right="middle" - 1;
+              }else{
+                  left="middle";
               }
               for (var="" j="i">= left; j--) {
                 array[j + 1] = array[j];
@@ -368,16 +339,16 @@ function merge(left, right){
     console.time('归并排序耗时');
     while (left.length && right.length) {
         if (left[0] <= right[0]) {
-           result.push(left.shift()); 
+           result.push(left.shift());
         }else{
-            result.push(right.shift()); 
+            result.push(right.shift());
             while (left.length)= (right.length){
-              console.timeend('归并排序耗时'); 
-              return result; 
-          } 
-              var=""; 
-              arr="[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];" 
-              console.log(mergesort(arr)); 
+              console.timeend('归并排序耗时');
+              return result;
+          }
+              var="";
+              arr="[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];"
+              console.log(mergesort(arr));
               <="" code="">
               }
           }
@@ -411,20 +382,20 @@ function quickSort(array, left, right) {
     if (Object.prototype.toString.call(array).slice(8, -1) === 'Array' && typeof left === 'number' && typeof right === 'number') {
         if (left < right) {
             var x = array[right], i = left - 1, temp;
-            for (var j = left; j <= right;j++) { 
+            for (var j = left; j <= right;j++) {
               if(array[j] <= x){
-                i++; 
-                temp=array[i]; 
-                array[i]=array[j]; 
-                array[j]="temp;" 
-                } 
-                quicksort(array,="" left,="" i="" -="" 1);="" +="" 1,="" right);="" console.timeend('1.快速排序耗时');="" return="" array;="" else="" 'array="" is="" not="" an="" array="" or="" left="" right="" a="" number!';="" 方法二="" var="" quicksort2="function(arr)" console.time('2.快速排序耗时');="" 　　if="" (arr.length="" arr;="" 　　var="" pivotindex="Math.floor(arr.length" 2);="" pivot="arr.splice(pivotIndex," 1)[0];="" 　　for="" (var="" arr.length;="" i++){="" 　　　　if="" (arr[i]="" pivot)="" 　　　　　　left.push(arr[i]);="" 　　　　}="" 　　　　　　right.push(arr[i]);="" 　　}="" 
+                i++;
+                temp=array[i];
+                array[i]=array[j];
+                array[j]="temp;"
+                }
+                quicksort(array,="" left,="" i="" -="" 1);="" +="" 1,="" right);="" console.timeend('1.快速排序耗时');="" return="" array;="" else="" 'array="" is="" not="" an="" array="" or="" left="" right="" a="" number!';="" 方法二="" var="" quicksort2="function(arr)" console.time('2.快速排序耗时');="" 　　if="" (arr.length="" arr;="" 　　var="" pivotindex="Math.floor(arr.length" 2);="" pivot="arr.splice(pivotIndex," 1)[0];="" 　　for="" (var="" arr.length;="" i++){="" 　　　　if="" (arr[i]="" pivot)="" 　　　　　　left.push(arr[i]);="" 　　　　}="" 　　　　　　right.push(arr[i]);="" 　　}=""
                 console.timeend('2.快速排序耗时'); 　　
-                return quicksort2(left).concat([pivot], quicksort2(right));  
-                } 
-             arr="[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];" 
-             console.log(quicksort(arr,0,arr.length-1)); 
-            [2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50] 
+                return quicksort2(left).concat([pivot], quicksort2(right));
+                }
+             arr="[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];"
+             console.log(quicksort(arr,0,arr.length-1));
+            [2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
             console.log(quicksort2(arr)); 50]< code>
         }
     }
@@ -683,4 +654,4 @@ MSD 从高位开始进行排序 LSD 从低位开始进行排序
 
 ## 参考
 
-- [十大经典排序算法总结（JavaScript描述）](https://juejin.im/post/57dcd394a22b9d00610c5ec8)
+* [十大经典排序算法总结（JavaScript描述）](https://juejin.im/post/57dcd394a22b9d00610c5ec8)

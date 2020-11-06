@@ -2,7 +2,6 @@
 
 基于jQuery.前后端分离的框架,数据通过接口获取
 
-
 ## 参考
 
 * [中文网](http://www.jeasyui.net/)

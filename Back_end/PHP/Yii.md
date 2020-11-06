@@ -1,4 +1,4 @@
-# [yiisoft/yii2](https://github.com/yiisoft/yii2)
+# [yii2](https://github.com/yiisoft/yii2)
 
 Yii 2: The Fast, Secure and Professional PHP Framework <http://www.yiiframework.com>
 
@@ -111,7 +111,7 @@ server {
   - 包含 Yii 类文件
   - 加载应用配置
   - 创建一个应用实例并配置 Bootstrapping
-    
+
           * preInit()（预初始化）方法，配置一些高优先级的应用属性
           * 注册 errorHandler
           * 配置应用主体属性
@@ -744,7 +744,7 @@ $module = Yii::$app->controller->module;
   - 发布资源: 资源文件放在可通过Web直接访问的Web目录中
   - 外部资源: 资源文件放在你的Web应用不同的Web服务器上
 * sourcePath: 指定包包含资源文件的根目录， 当资源文件不能被Web访问时该属性应设置
-* 
+*
 * basePath: 指定包含资源包中资源文件并可Web访问的目录，当指定 sourcePath 属性， 资源管理器 会发布包的资源到一个可Web访问并覆盖该属性
 * baseUrl: 指定对应到yiiwebAssetBundle::basePath目录的URL
 * js: 一个包含该资源包JavaScript文件的数组
@@ -1219,7 +1219,7 @@ $compontent->on($eventName, $handler);
 * 随时可拿来使用的， 并可重发布的软件包
 
 * 创建
-  
+
   - 按照 Composer package 的条款创建扩展
   - 包名 myname/yii2-mywidget
   - 包类型  yii2-extension

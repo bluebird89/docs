@@ -1,4 +1,4 @@
-## [sentsin/layui](https://github.com/sentsin/layui)
+## [layui](https://github.com/sentsin/layui)
 
 采用自身模块规范编写的前端 UI 框架，遵循原生 HTML/CSS/JS 的书写形式，极低门槛，拿来即用。 http://www.layui.com
 

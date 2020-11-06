@@ -1,4 +1,4 @@
-    # [laravel/laravel](https://github.com/laravel/laravel)
+# [laravel](https://github.com/laravel/laravel)
 
 A PHP Framework For Web Artisans https://laravel.com
 

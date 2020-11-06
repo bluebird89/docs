@@ -1,5 +1,4 @@
-
-# [NervJS/taro](https://github.com/NervJS/taro)
+# [taro](https://github.com/NervJS/taro)
 
 多端统一开发框架，支持用 React 的开发方式编写一次代码，生成能运行在微信小程序、H5、React Native 等的应用。 https://taro.aotu.io
 

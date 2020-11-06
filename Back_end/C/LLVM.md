@@ -1,4 +1,4 @@
-# [llvm-mirror/llvm](https://github.com/llvm-mirror/llvm)
+# [llvm](https://github.com/llvm-mirror/llvm)
 
 Mirror of official llvm git repository located at http://llvm.org/git/llvm. Updated every five minutes. http://llvm.org
 

@@ -1,4 +1,4 @@
-# [Admin]()
+# Admin]
 
 ## 概念
 
@@ -8,7 +8,7 @@
     + 字典类型：对数据进行分类管理
     + 字典数据项：需要管理的枚举数据
   - 应用管理
-    + 在多应用系统以及单应用系统下，实现对应用的服务功能的权限控制。实现角色、用户、功能的灵活绑定。
+    + 在多应用系统以及单应用系统下，实现对应用的服务功能的权限控制。实现角色、用户、功能的灵活绑定
 * 权限管理
   - 角色：权限集
   - 用户
@@ -31,7 +31,7 @@
   - 服务路由
 * 模版复用
 
-## SSO(Single Sign On)单点登录
+## SSO Single Sign On 单点登录
 
 多个应用系统中，只需要登录一次，就可以访问其他相互信任的应用系统
 
@@ -84,7 +84,7 @@
   - 参数加密
     + hashids
 
-## [tabler/tabler](https://github.com/tabler/tabler)
+## [tabler](https://github.com/tabler/tabler)
 
 Tabler is free and open-source HTML Dashboard UI Kit built on Bootstrap 4 https://tabler.github.io/
 
@@ -112,7 +112,6 @@ npm run serve
 * [kahun/awesome-sysadmin](https://github.com/kahun/awesome-sysadmin)：A curated list of amazingly awesome open source sysadmin resources inspired by Awesome PHP.
 * [zuiidea/antd-admin](https://github.com/zuiidea/antd-admin):A admin dashboard application demo built upon Ant Design and Dva.js http://antd-admin.zuiidea.com
 * [akveo/blur-admin](https://github.com/akveo/blur-admin):Angular Bootstrap Admin Panel Framework http://akveo.github.io/blur-admin/
-* [ant-design/ant-design-pro](https://github.com/ant-design/ant-design-pro): 👨🏻‍💻👩🏻‍💻 An out-of-box UI solution for enterprise applications http://pro.ant.design/
 * [akveo/ngx-admin](https://github.com/akveo/ngx-admin):Admin dashboard template based on Angular 5+, Bootstrap 4 (previously known as ng2-admin) http://akveo.com/ngx-admin/
 * [PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin): 🎉 A magical vue admin http://panjiachen.github.io/vue-element-admin
 * [withspectrum/spectrum](https://github.com/withspectrum/spectrum):Simple, powerful online communities. https://spectrum.chat
