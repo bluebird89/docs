@@ -420,9 +420,12 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 
 ![Alt text](__/_static/tcp_block_control.png "Optional title")
 
-## TCP BBR
+## TCP BBR Bottleneck Bandwidth and Round-trip propagation time
 
-Google给出的一个改良版的tcp网络协议，相当于在已有TCP协议的基础上打了个补丁的意思，这个改良版TCP协议对拥塞控制有很好的支持，对于网络较差的环境有不错的应用场景.Linux系统内核版本大于4.9
+* 由Google设计，于2016年发布的拥塞算法
+* 以往大部分拥塞算法是基于丢包来作为降低传输速率的信号，而BBR则基于模型主动探测。该算法使用网络最近出站数据分组当时的最大带宽和往返时间来创建网络的显式模型,数据包传输的每个累积或选择性确认用于生成记录在数据包传输过程和确认返回期间的时间内所传送数据量的采样率
+* 该算法认为随着网络接口控制器逐渐进入千兆速度时，分组丢失不应该被认为是识别拥塞的主要决定因素，所以基于模型的拥塞控制算法能有更高的吞吐量和更低的延迟，可以用BBR来替代其他流行的拥塞算法
+* 移植入Linux内核4.9版本，并且对于QUIC可用
 
 ```sh
 sudo modprobe tcp_bbr
