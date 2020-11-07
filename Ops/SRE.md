@@ -1,12 +1,12 @@
-# SRE 站点可靠性工程(Site Reliability Engineering)：
+# SRE Site Reliability Engineering 站点可靠性工程
 
 ## 黄金指标
 
-称为“黄金”指标，最重要的原因之一在于其直接衡量的事物会对系统的最终用户及工作生产环节产生影响——换言之，其是在直接衡量最关键的对象。
+称为“黄金”指标最重要原因之一在于其直接衡量的事物会对系统的最终用户及工作生产环节产生影响——换言之，其是在直接衡量最关键的对象
 
-* 来自谷歌 SRE 书: 延迟、流量、错误以及饱和度；
-* USE 方法(来自 Brendan Gregg): 利用率、饱和度与错误；
-* RED 方法(来自 Tom Wilkie): 速率、错误与持续时间。
+* 谷歌 SRE 书: 延迟、流量、错误以及饱和度
+* USE 方法(来自 Brendan Gregg): 利用率、饱和度与错误
+* RED 方法(来自 Tom Wilkie): 速率、错误与持续时间
 
 ### 指标
 
@@ -43,7 +43,7 @@
         + 请求率：即每秒请求数量，我们可以使用以下两种方式：
             - 请求 Count REQ_TOT 不适用于每服务器，而仅计算全部服务器的总体请求率（虽然仅限于最后一秒）。
             - 你也可以使用 REQ_RATE (每秒请求)，但其仅限于最后一秒，因此大家可能会错过数据峰值时段——特别是你的监控时长在一分钟以下时。
-        + 错误率：响应错误（简称 ERESP），代表来自后端的错误数量。这是一个计数器，因此你必须对其进行增量计算。不过需要注意的是，相关文档指出其中包含“客户端套接上的写入错误”，所以我们很难搞清这一数值中包含哪些客户端错误类型（特别是在移动设备上）。大家也可以使用这种方法获取每后端服务器信号。关于更多细节信息以及纯 HTTP 错误，大家通常会得到 4xx 及 5xx 错误计数，用户对这类提示也表现得最为敏感。其中 4xx 错误通常不属于客户自身的问题，但如果其突然出现，则通常源自代码错误或者某种形式的攻击。而监控 5xx 错误对于所有系统都非常重要。   你可能还希望查看请求错误（简称 EREQ），但请注意，这类错误中包括可能带来大量噪声的客户端关闭（特别是在低速或移动网络情况下）。仅限于前端。
+        + 错误率：响应错误（简称 ERESP），代表来自后端的错误数量。这是一个计数器，因此你必须对其进行增量计算。不过需要注意的是，相关文档指出其中包含“客户端套接上的写入错误”，所以我们很难搞清这一数值中包含哪些客户端错误类型（特别是在移动设备上）。大家也可以使用这种方法获取每后端服务器信号。关于更多细节信息以及纯 HTTP 错误，大家通常会得到 4xx 及 5xx 错误计数，用户对这类提示也表现得最为敏感。其中 4xx 错误通常不属于客户自身的问题，但如果其突然出现，则通常源自代码错误或者某种形式的攻击。而监控 5xx 错误对于所有系统都非常重要。  你可能还希望查看请求错误（简称 EREQ），但请注意，这类错误中包括可能带来大量噪声的客户端关闭（特别是在低速或移动网络情况下）。仅限于前端。
         + 延迟：即每后端响应时间（简称 RTIME），代表过去 1024 条请求的平均延迟（在繁忙系统上，1024 条请求周期可能太短并导致错失峰值状况 ; 但在新启动的系统上，1024 条请求周期可能太长而混入大量噪声）。此项信号适用于每服务器。
         + 饱和度：队列请求的数量（简称 QCUR）。这一信号适用于后端（代表未被分配至服务器的请求）以及每服务器（代表未被发送至目标服务器的请求）。你可能需要将各项数值相加以计算整体饱和度，或追踪每服务器信号以了解单服务器饱和度（详见 Web 服务器章节）。如果使用每服务器监控方式，则应追踪每套后端服务器的饱和度（但请注意，该服务器自身可能同样在排队，因此负载均衡器中的任何队列都代表着一项严重问题）。
         + 利用率：HAProxy 通常不会耗尽全部容量，除非 CPU 资源已经被全部占用，但你也可以监控实际会话 SCUR/SLIM。
@@ -76,7 +76,7 @@
     - Nginx: 启用 stub_status_module。详见 DataDog 的良好 Nginx 指南。
 * 启用日志记录:首先需要进行配置，将其存放在理想位置，且最好能够利用 vhost 进行隔离。还需要在日志当中纳入响应时间指标，遗憾的是标准或者默认格式当中并不包括此项指标。因此你需要编辑 Web 配置以实现此项目标：
     - Apache: 我们需要在日志定义当中添加 “%D” 字段（通常位于末尾），其将以毫秒为单位记录响应时间（在 Apache V1.x 版本中需要使用 %T，但其将以秒为单位）。具体操作与下面要介绍的 Nginx $request_time 基本相同。需要注意的是，其并不支持使用更接近于 Nginx Supstream_time 的 mod-log-firstbyte 模块，但它测量的才是真正的后端响应时间。具体请参阅 Apache Log 说明文档。
-    - Nginx: 我们需要为后端响应时间添加 "\$upstream_response_time" 字段，通常位于日志行末尾。利用此“后端时间”将可避免系统向低速客户端发送大量响应。Nginx 同样支持在日志定义当中添加 “\$request_time” 字段。此时间截至面向客户端的最后一个字节发送完成，因此能够捕捉到大量响应与 / 或低速客户端。   这可能会带来更为准确的用户体验反应（并不总能），但如果你的大多数问题出现在系统而非客户端处，这种方法可能引发更多噪声。具体请参阅 Nginx Log 说明文档。
+    - Nginx: 我们需要为后端响应时间添加 "\$upstream_response_time" 字段，通常位于日志行末尾。利用此“后端时间”将可避免系统向低速客户端发送大量响应。Nginx 同样支持在日志定义当中添加 “\$request_time” 字段。此时间截至面向客户端的最后一个字节发送完成，因此能够捕捉到大量响应与 / 或低速客户端。  这可能会带来更为准确的用户体验反应（并不总能），但如果你的大多数问题出现在系统而非客户端处，这种方法可能引发更多噪声。具体请参阅 Nginx Log 说明文档。
     - 将 X-Forwarded-For 标头添加到日志当中。如果存在这一或者其它字段，你可能需要调整解析工具以获取正确的字段。
 * 最重要的各项 Web 服务器信号（特别是延迟）只能通过日志获取，但日志信息往往难于读取、解析以及汇总
     - ELK 堆栈就能实现一部分功能（包括 Splunk、Sumologic、Logs 等等）
@@ -108,8 +108,8 @@
     - PHP-FPM，需要关注的信号
         + 速率：遗憾的是，并不存在直接方式来获取访问记录并将其合并为每秒请求次数。
         + 错误：这在很大程度上取决于您 PHP 的具体记录位置。PHP-FPM 错误记录实用性不高，因为其通常只包含缓慢请求追踪，且其中存在大量噪声信号。因此，大家应启用并监控实际 php 错误记录，并将其合并为每秒错误数量。
-        + 延迟：从 PHP-FPM 访问记录当中，我们能够获得以毫秒为单位的响应时间，正如在 Apache/Nginx 当中一样。   与 Apache/Nginx 延迟一样，如果您的监控系统能够从负载均衡器当中直接提取相关信号，那么延迟的获取将更为轻松（不过其中将包含非 FPM 请求，例如静态 JS/CSS 文件延迟）。   如果您无法获取这些记录，亦可监控“Slow Requests”以获取缓慢响应数量，并通过增量计算将其合并为每秒缓慢请求数量。
-        + 饱和度：监控“Listen Queue”，若其不为零，则代表着没有多余的 FPM 进程可供使用，而 FPM 系统亦宣告饱和。需要注意的是，导致这种情况的原因可能包括 CPU、内存 / 交换、数据库缓慢以及外部服务缓慢等等。   您也可以监控“Max Children Reached”以了解 FPM 上达到饱和的具体次数，不过我们无法轻松将其转换为具体速率（因为饱和状况可能持续一整天）。但在采样过程当中，该计数器的任何变化都代表着采样期间曾经出现饱和。
+        + 延迟：从 PHP-FPM 访问记录当中，我们能够获得以毫秒为单位的响应时间，正如在 Apache/Nginx 当中一样。  与 Apache/Nginx 延迟一样，如果您的监控系统能够从负载均衡器当中直接提取相关信号，那么延迟的获取将更为轻松（不过其中将包含非 FPM 请求，例如静态 JS/CSS 文件延迟）。  如果您无法获取这些记录，亦可监控“Slow Requests”以获取缓慢响应数量，并通过增量计算将其合并为每秒缓慢请求数量。
+        + 饱和度：监控“Listen Queue”，若其不为零，则代表着没有多余的 FPM 进程可供使用，而 FPM 系统亦宣告饱和。需要注意的是，导致这种情况的原因可能包括 CPU、内存 / 交换、数据库缓慢以及外部服务缓慢等等。  您也可以监控“Max Children Reached”以了解 FPM 上达到饱和的具体次数，不过我们无法轻松将其转换为具体速率（因为饱和状况可能持续一整天）。但在采样过程当中，该计数器的任何变化都代表着采样期间曾经出现饱和。
         + 利用率：我们希望监控使用中的 FPM 进程（即‘Active Processes’）与已配置最大值，不过后者的获取难度较高（需要解析配置），因此大家可能需要对其进行硬编码。
 * JAVA:通常为各类用量繁重的网站、大规模电子商务以及逻辑复杂的网站提供动力，换方之主要面向企业用例。其运行在各类不同的服务器与环境当中，但大多立足于 Tomcat
     - 在 Web 服务器当中也应尽可能立足上游进行黄金信号监控，特别是考虑到每个 Tomcat 实例在同一主机内往往位于一个专用的 Nginx 服务器之后（但这种作法现在正逐渐被淘汰）。直接部署在 Tomcat 之前的负载均衡器（或者是 Nginx）亦可提供速率与延迟指标。
@@ -118,7 +118,7 @@
     - Tomcat 信号
         + 速率：通过 JMX，大家可以获取 GlobalRequestProcessor 的 requestCount 并对其进行增量处理，从而获取每秒请求数量。其将对全部请求进行计数，其中包括 HTTP，但考虑到 HTTP 有可能在请求当中占大部分比例，我们可以将其中一个 Processor 名称指定为过滤器，具体名称与您配置的 HTTP Processor 名称相同。
         + 错误：通过 JMX，大家可以获取 GlobalRequestProcessor 的 errorCount 并对其进行增量处理，从而获取每秒错误数量。其中会包含非 HTTP 内容，除非您利用 processor 进行过滤。
-        + 延迟：通过 JMX，大家可以获取 GlobalRequestProcessor 的 processingTime，但其为自重启以来的总时间。我们可以将其除以 requestCount 以获得长期平均响应时间，但这项指标的实用性不高。   在理想情况下，您的监控系统或者脚本能够在每一次采样时存储上述值，而后发现其中的差异并进行等分——这种作法并不理想，但已经是我们最好的选择。
+        + 延迟：通过 JMX，大家可以获取 GlobalRequestProcessor 的 processingTime，但其为自重启以来的总时间。我们可以将其除以 requestCount 以获得长期平均响应时间，但这项指标的实用性不高。  在理想情况下，您的监控系统或者脚本能够在每一次采样时存储上述值，而后发现其中的差异并进行等分——这种作法并不理想，但已经是我们最好的选择。
         + 饱和度：如果 ThreadPool 的 currentThreadsBusy=maxThreads，那么您将面临排队，即意味着已经饱和。因此，请监控这两项指标。
         + 利用率：利用 JMX 以获取 (currentThreadsBusy / maxThreads)，从而查看您当前线程的使用百分比。
 * Python:大多数人都需要在代码当中嵌入指标以及 / 或者使用特定工具包 /APM 工具才能实现监控。Django 就拥有一套 Prometheus 模块。
@@ -141,7 +141,7 @@
 
 MySQL 监控当中的黄金标准为 Vivid Cortex
 
-* 请求率：每秒查询数量，最简单的办法是对 MySQL 的状态变量 com_select、com_insert、com_update 以及 com_delete 进行加和，而后通过增量处理最终获得每秒查询数量。  不同监控工具在实现方式也有所区别。一般我们可以通过 SQL 进行：
+* 请求率：每秒查询数量，最简单的办法是对 MySQL 的状态变量 com_select、com_insert、com_update 以及 com_delete 进行加和，而后通过增量处理最终获得每秒查询数量。 不同监控工具在实现方式也有所区别。一般我们可以通过 SQL 进行：
 ```sql
 SHOW GLOBAL STATUS LIKE “com_select”;
 SHOW GLOBAL STATUS LIKE “com_insert”;
@@ -153,12 +153,12 @@ SELECT sum(variable_value) FROM information_schema.global_status WHERE variable_
 SELECT sum(sum_errors) AS query_count FROM events_statements_summary_by_user_by_event_name WHERE event_name IN (‘statement/sql/select’, ‘statement/sql/insert’, ‘statement/sql/
 update’, ‘statement/sql/delete’);
 ```
-* 延迟：我们可以从 Performance Schema 中获取延迟。正如前文所述，要获取理想的数据，我们需要解决以下复杂问题：  我们需要使用 events_statements_summary_global_by_event_name 表，因为来自其它潜在实用表的数据（例如 events_statements_history_long）会在线程 / 连接中止时自动被删除（这种情况在 PHP 等非 Java 系统中相当常见）。另外大家所熟知的摘要表在数学层面非常难于使用，因为其中存在复杂的溢出与时钟 / 计时器计算。   不过 events_statements_summary_global_by_event_name 表是一种汇总表，因此其中包含有自服务器启动以来的全部数据。这意味着我们必须随时对该表进行 TRUNCATE 方可实现读取——如果还有其它工具需要使用此表，则可能产生问题。不过这种情况似乎并无避免的方法。具体查询如下，但获取 SELECT 的延迟与获取全部查询的数据一样，都不可避免地涉及更为复杂的数学计算或查询——以下两条语句分别用于获取数据以及截断该表：
+* 延迟：我们可以从 Performance Schema 中获取延迟。正如前文所述，要获取理想的数据，我们需要解决以下复杂问题：  我们需要使用 events_statements_summary_global_by_event_name 表，因为来自其它潜在实用表的数据（例如 events_statements_history_long）会在线程 / 连接中止时自动被删除（这种情况在 PHP 等非 Java 系统中相当常见）。另外大家所熟知的摘要表在数学层面非常难于使用，因为其中存在复杂的溢出与时钟 / 计时器计算。  不过 events_statements_summary_global_by_event_name 表是一种汇总表，因此其中包含有自服务器启动以来的全部数据。这意味着我们必须随时对该表进行 TRUNCATE 方可实现读取——如果还有其它工具需要使用此表，则可能产生问题。不过这种情况似乎并无避免的方法。具体查询如下，但获取 SELECT 的延迟与获取全部查询的数据一样，都不可避免地涉及更为复杂的数学计算或查询——以下两条语句分别用于获取数据以及截断该表：
 ```sql
 SELECT (avg_timer_wait)/1e9 AS avg_latency_ms FROM performance_schema.events_statements_summary_global_by_event_name WHERE event_name = ‘statement/sql/select’;
 TRUNCATE TABLE performance_schema.events_statements_summary_global_by_event_name;
 ```
-* 饱和度：最简单的饱和度查看方法为根据队列深度判断，但深度指标非常难以获取。因此：  最好的办法就是解析 SHOW ENGINE INNODB STATUS 输出结果（或者 Innodb Status 文件）。我们在自己的系统中执行这一操作，但非常麻烦（参见以下并发设置）。如果选择这种方法，那么大家需要的两个变量分别为“Queries Running # queries inside InnoDB”以及“# queries in queue”。如果你只希望获取其中之一，则应选择 queue，其将告知我们 InnoDB 是否饱和。   需要注意的是，以上输出结果取决于 innodb_thread_concurrency 是否大于零。最近的新版本当中，人们往往将其设置为零，这意味着状态输出结果中将禁用这两项状态。在这种情况下，大家必须使用全局 Threads Running，具体如下所示。如果 innodb_thread_concurrency = 0 或者无法读取该状态输出文件，我们则需要着眼于更简单的 THREADS_RUNNING 全局状态变量，其将告知我们存在多少非活动线程——不过我们无法查看其是否正在排队等待 CPU、Locks 或者 IO。这是一种即时测量方法，因此其中可能包含大量噪声。大家可能需要立足多个监控周期求取平均值。以下为两种获取方法：
+* 饱和度：最简单的饱和度查看方法为根据队列深度判断，但深度指标非常难以获取。因此：  最好的办法就是解析 SHOW ENGINE INNODB STATUS 输出结果（或者 Innodb Status 文件）。我们在自己的系统中执行这一操作，但非常麻烦（参见以下并发设置）。如果选择这种方法，那么大家需要的两个变量分别为“Queries Running # queries inside InnoDB”以及“# queries in queue”。如果你只希望获取其中之一，则应选择 queue，其将告知我们 InnoDB 是否饱和。  需要注意的是，以上输出结果取决于 innodb_thread_concurrency 是否大于零。最近的新版本当中，人们往往将其设置为零，这意味着状态输出结果中将禁用这两项状态。在这种情况下，大家必须使用全局 Threads Running，具体如下所示。如果 innodb_thread_concurrency = 0 或者无法读取该状态输出文件，我们则需要着眼于更简单的 THREADS_RUNNING 全局状态变量，其将告知我们存在多少非活动线程——不过我们无法查看其是否正在排队等待 CPU、Locks 或者 IO。这是一种即时测量方法，因此其中可能包含大量噪声。大家可能需要立足多个监控周期求取平均值。以下为两种获取方法：
 ```sql
  SHOW GLOBAL STATUS LIKE “THREADS_RUNNING”;
  SELECT sum(variable_value) FROM information_schema.global_status WHERE Variable_name = “THREADS_RUNNING” ;

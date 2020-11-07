@@ -1,4 +1,4 @@
-# [git/git](https://github.com/git/git)
+# [git](https://github.com/git/git)
 
 fast, scalable, distributed revision control system. https://git-scm.com/
 

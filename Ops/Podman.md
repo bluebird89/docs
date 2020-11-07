@@ -22,7 +22,7 @@ podman inspect -l | grep IPAddress\":
             "SecondaryIPAddresses": null,
             "IPAddress": "",
 
-# Viewing the container’s logs    
+# Viewing the container’s logs
 sudo podman logs --latest
 # Viewing the container’s pids
 sudo podman top <container_id>
@@ -33,7 +33,7 @@ sudo podman container checkpoint <container_id>
 sudo podman container restore <container_id>
 # Migrate the container
 sudo podman container checkpoint <container_id> -e /tmp/checkpoint.tar.gz # source system
-scp /tmp/checkpoint.tar.gz <destination_system>:/tmp 
+scp /tmp/checkpoint.tar.gz <destination_system>:/tmp
 
 sudo podman container restore -i /tmp/checkpoint.tar.gz # destination system
 
@@ -66,7 +66,7 @@ sudo systemctl start nginx_podman.service
 
 ## Podman vs docker
 
-* docker 需要在我们的系统上运行一个守护进程(docker daemon)，而podman 不需要
+* docker 需要在系统上运行一个守护进程(docker daemon)，而podman 不需要
 * 启动容器的方式不同：
   - docker cli 命令通过API跟 Docker Engine(引擎)交互告诉它我想创建一个container，然后docker Engine才会调用OCI container runtime(runc)来启动一个container。这代表container的process(进程)不会是Docker CLI的child process(子进程)，而是Docker Engine的child process。
   - Podman是直接给OCI containner runtime(runc)进行交互来创建container的，所以container process直接是podman的child process。

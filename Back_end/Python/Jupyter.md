@@ -288,7 +288,7 @@ jupyter-nbextension enable rise --py --sys-prefix
 
 ## data analysis
 
-* ipyparallel（之前叫 ipython cluster） 是一个在python中进行简单的map-reduce运算的良好选择。我们在rep中使用它来并行训练很多机器学习模型。
+* ipyparallel（之前叫 ipython cluster）是一个在python中进行简单的map-reduce运算的良好选择。我们在rep中使用它来并行训练很多机器学习模型。
 * pyspark
 * spark-sql magic %%sql
 

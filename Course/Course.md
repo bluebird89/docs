@@ -33,8 +33,7 @@
     - Dave Conservatoire — 一个完全免费的音乐学习网站，口号是“让每一个人都可以接受世界级的音乐教育”，有视频，有练习。
     - Drawspace — 如果你想学习绘画，或者提高自己的绘画技能，就来 Drawspace 吧。
     - Justin Guitar — 超过 800 节免费的吉他课程，有自己的 app，还有电子书、DVD 等实用内容。
-*   数学，数据科学与工程
-    - Codecademy — Codecademy 还用多介绍吗？学编程，来 Codeacademy 就对了。
+* 数学，数据科学与工程
     - Stanford Engineering Everywhere — 有很多免费的工程类课程资源。
     - Big Data University — 教你如何做大数据分析。
     - Better Explained — 从整体图景着手，通过图像向你解释抽象的数学（还有其他领域）概念。
@@ -54,55 +53,37 @@
     - Do It Yourself — 教你成为家居改造达人。
     - Adafruit Learning System — 提供免费电子设备 DIY 教程。
     - Grovo — 学习如何使用上百种网站应用，提高自己的工作效率。
-*  Udemy
+
+* Udemy
     -  [](SaleWebDesign.Com)
 * [Basecamp](https://basecamp.com)
 
-## 前端
-
-* [FE-star](https://github.com/FE-star)
-* [Google 推出的 31 套在线课程](https://chinagdg.org/2015/12/google-%E6%8E%A8%E5%87%BA%E7%9A%84-31-%E5%A5%97%E5%9C%A8%E7%BA%BF%E8%AF%BE%E7%A8%8B/)
-* HOW Design University — 主要教授图像与交互设计。
-* HTML Dog — 学习 HTML, CSS 和 JavaScript 编程技能。
-* Skillcrush — 提供职业网页设计与开发课程。
-* Hack Design — 全球顶级设计师教你网页/app 设计，完全免费。
-* Frontend Masters
+* [Udacity](https://www.udacity.com/)
+* [edX](https://www.edx.org/)
+* [Codecademy](https://www.codecademy.com/)
+* [studytonight](https://www.studytonight.com/)
+* Learnable
+* Pluralsight
+* [tutorialspoint](https://www.tutorialspoint.com/index.htm)
+* [classcentral](https://www.classcentral.com/)
+* [nptel](https://nptel.ac.in/):印度的国家增强型学习计划，也就是说，印度的各大名校联合推出的免费学习计划
+* [codescracker](link)
+* [sciencedirect](link)
+* [homepage](https://homepage.cs.uri.edu/faculty/wolfe/book/Readings/Reading01.htm)
+* [computer.howstuffworks.com](link)
+* [tldp.org](link)
+* [envato](https://tutsplus.com)
 
 ## 后端
 
 * [高性能 高价值的PHP API接口开发](https://coding.imooc.com/class/122.html)
 
-## 外语
-
-* Duolingo — 中文名「多邻国」，据说学习方式非常有效。我感觉它的 app 设计得不错。主要推荐英语和别的欧洲语言。
-* Memrise — Memrise 的教程由许多简短的课程组成，比如日语五十音、德语基础、SAT 备考等。用游戏化的概念学习语言。
-* Busuu — 主要通过记常用词汇和常用语来学习，有一些简单的填空练习，课程设置比较合理。
-* Lingua.ly — Lingua.ly 的主要功能就是阅读文章、学习词汇和练习。
-* lernu.net — 在多邻国的世界语课程出来之前，这应该是学习世界语最好的网站了吧。不过，它除了课程以外还有一个挺好玩的社区，和一些阅读材料。
-* Lingvist — 号称在 200 小时内让你学会一门语言。
-* vocabulary.com — 用例句和游戏化背单词(应用商店有对应的 APP)。
-* [elllo](http://www.elllo.org/)
-* [learningenglish](http://www.bbc.co.uk/learningenglish/)
-* [](http://www.sparknotes.com/)
-* [English-level-up-tips-for-Chinese](https://byoungd.gitbooks.io/english-level-up-tips-for-chinese/content/)
-
 ## 课程
 
 * [微服务架构实战160讲]()
-* [分布式系统架构]():陈皓（左耳朵耗子）
 * [mbinary/USTC-CS-Courses-Resource](https://github.com/mbinary/USTC-CS-Courses-Resource):❤️中国科学技术大学计算机学院课程资源(https://mbinary.xyz/ustc-cs/) https://mbinary.xyz/ustc-cs/
     - ftp.ustclug.org； /ebook/USTC-CS-Courses-Resource； ftp@ftp
     - afp://ftp.ustclug.org/； /ebook/USTC-CS-Courses-Resource； Connect As Guest
-* Pluralsight
-* 逻辑推理
-    - [牛津大学公开课：批判性推理入门](https://www.bilibili.com/video/av2576527/)
-* 《现代操作系统》：https://www.bilibili.com/video/av9555596?from=search&seid=8107077283516919308
-* 《算法导论》https://www.bilibili.com/video/av48922404?from=search&seid=10653982037326460685
-* 《深入理解计算机系统》https://www.bilibili.com/video/av31289365?from=search&seid=16298868573410423104
-* 《计算机网络：自顶向下方法》：https://www.bilibili.com/video/av41404195?from=search&seid=15854652450440912260
-* 《计算机程序的构造和解释》：https://www.bilibili.com/video/av8515129?from=search&seid=537958487190286356
-* 《编译原理》：https://www.bilibili.com/video/av17649289?from=search&seid=5673462623145874347
-* 《数据库系统概念》：https://www.bilibili.com/video/av52007695?from=search&seid=9723583724024090244
 * [CS106A - Programming Methodology](http://web.stanford.edu/class/cs106a/index.html)
 
 ## Data Scientist
@@ -116,21 +97,3 @@
 * [Introduction to Deep Learning](https://www.coursera.org/learn/intro-to-deep-learning)
 * [How to Win a Data Science Competition: Learn from Top Kagglers](How to Win a Data Science Competition: Learn from Top Kagglers)
 * [AI for Medicine Specialization](https://www.coursera.org/specializations/ai-for-medicine)
-
-## 资源
-
-* [Udacity](https://www.udacity.com/)
-* [edX](https://www.edx.org/)
-* [codecademy](https://www.codecademy.com/)
-* [studytonight](https://www.studytonight.com/)
-* Learnable
-* Pluralsight
-* [tutorialspoint](https://www.tutorialspoint.com/index.htm)
-* [classcentral](https://www.classcentral.com/)
-* [nptel](https://nptel.ac.in/):印度的国家增强型学习计划，也就是说，印度的各大名校联合推出的免费学习计划
-* [codescracker](link)
-* [sciencedirect](link)
-* [homepage](https://homepage.cs.uri.edu/faculty/wolfe/book/Readings/Reading01.htm)
-* [computer.howstuffworks.com](link)
-* [tldp.org](link)
-* [envato](https://tutsplus.com)

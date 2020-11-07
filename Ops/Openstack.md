@@ -1,4 +1,4 @@
-*  [openstack/openstack](https://github.com/openstack/openstack)
+# [openstack/openstack](https://github.com/openstack/openstack)
 
 Repository containing OpenStack repositories http://openstack.org
 

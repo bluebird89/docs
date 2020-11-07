@@ -25,7 +25,7 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
 ## 配置
 
 * 配置文件以对象.功能命名:user重写default
-    -   配置:Preferences.sublime-settings
+    - 配置:Preferences.sublime-settings
         + 包配置：Package Control.sublime-settings
         + 界面配置：Preferences.sublime-settings
         + 自定义代码片段：\*.sublime-snippet
@@ -35,17 +35,18 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
     -   主题配置：在包文件下Theme - Monokai Pro
     -   快捷键：Default (Windows).sublime-keymap
     -   index_files:改为false
-* 包管理工具[Package Control](https://packagecontrol.io/installation)
-    + Preferences > Browse Packages：Installed Packages； windows中~\\AppData\\Roaming\\Sublime Text 3\\
+* [Package Control 包管理工具](https://packagecontrol.io/installation)
+    + Preferences > Browse Packages：Installed Packages
+        *  windows中`~\AppData\Roaming\Sublime Text 3\`
     + 安装package：打开控制台console:`ctrl+\`
-    + 如果安装报错，比如连接远程服务器失败之类的，请设置wbond.net的host，如下：50.116.33.29 sublime.wbond.net
-    + 重启sublime
+    + 如果安装报错，比如连接远程服务器失败之类的，请设置wbond.net的host，50.116.33.29 sublime.wbond.net
+    + 重启
     + open Package Control's Command Palette：Control + Shift + P (Windows)，Command + Shift + P (on Mac)，或者通过菜单 Tools > Command Palette
     + install package->输入package文件名称
     + channel配置：
         + 添加channle:`Control + Shift + P `, `Package Control  Settings-user`
 
-```
+```sh
 import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
 
 "channels":
@@ -113,7 +114,6 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
 "word_wrap": true
 }
 ```
-
 
 ## 插件
 
@@ -386,42 +386,58 @@ Alt + 左/右/上/下/  # 移动
 
 ### 管理
 
--   切换标签：ctrl+tab
--   切换侧栏：ctrl+k ctrl+b
--   恢复标签：ctrl+shift+t
+*   切换标签：ctrl+tab
+*   切换侧栏：ctrl+k ctrl+b
+*   恢复标签：ctrl+shift+t
 
 ### html
 
--   激发zencoding控制台:ctrl+alt+enter
--   默认标签为div:.container #container
--   获取模板：输入! ctrl+e
--   闭合标签：alt+.
--   移除父标签：ctrl+shift+;
--   添加标签：ctrl+shift+g
--   全屏：f11
--   免打扰：shift+f11
--   后代：ul>li .wrap>ul.list>.sites
--   兄弟：div+p+bq
--   分组：div>(header>ul>li\*2>a)+footer>p
--   乘法：li\*5
--   向上一层：.warp>p>a^p .warp>p>a^^p
--   a[href="<http://www.baidu.com"]{百度}>
--   递增：
--   包含多个类：p.class1.class2.class3
--   自定义属性：p[title='hello'] td[rowspan=2 colspan=3 title]
--   section#block$\_3>h2.title+p.words_2
--   文本：{}
--   隐标签：ul>.class table>.row>.col
--   a:link a:mail meta:utf
--   form：get
+*   激发zencoding控制台:ctrl+alt+enter
+*   默认标签为div:.container #container
+*   获取模板：输入! ctrl+e
+*   闭合标签：alt+.
+*   移除父标签：ctrl+shift+;
+*   添加标签：ctrl+shift+g
+*   全屏：f11
+*   免打扰：shift+f11
+*   后代：ul>li .wrap>ul.list>.sites
+*   兄弟：div+p+bq
+*   分组：div>(header>ul>li\*2>a)+footer>p
+*   乘法：li\*5
+*   向上一层：.warp>p>a^p .warp>p>a^^p
+*   a[href="<http://www.baidu.com"]{百度}>
+*   递增：
+*   包含多个类：p.class1.class2.class3
+*   自定义属性：p[title='hello'] td[rowspan=2 colspan=3 title]
+*   section#block$\_3>h2.title+p.words_2
+*   文本：{}
+*   隐标签：ul>.class table>.row>.col
+*   a:link a:mail meta:utf
+*   form：get
 
 ```
-    ul>li.item${item$$}*5
-    h$[title=item$]{Header $}*3(添加属性)
-    ul>li.item$$$*5(多个占位符)
-    ul>li.item$@-*5(逆序)
-    ul>li.item$@3_5(定位起始符) div#v$@3_5
+ul>li.item${item$$}*5
+h$[title=item$]{Header $}*3(添加属性)
+ul>li.item$$$*5(多个占位符)
+ul>li.item$@-*5(逆序)
+ul>li.item$@3_5(定位起始符) div#v$@3_5
 ```
+
+## [Emmet](https://docs.emmet.io/cheat-sheet/)
+
+* html:5 或!：用于HTML5文档类型
+* html:xt：用于XHTML过渡文档类型
+* html:4s：用于HTML4严格文档类型
+* p#foo 补充ID
+* p.foo 补充类
+* h1{foo} 和 a[href=#] 为h1和a标签
+* `>`：子元素符号，表示嵌套的元素
+* +：同级标签符号
+* ^：可以使该符号前的标签提升一行
+* (.foo>h1)+(.bar>h2)
+* ul>li*3
+* ul>li.item$*3
+* ((h4>a[rel=external])+p>img[width=500 height=320])*12
 
 #### 选择类
 
@@ -516,7 +532,7 @@ Alt + 左/右/上/下/  # 移动
 -   行注释：Ctrl+/
 -   块注释：Ctrl+Shift+/
 
-### 构建build
+### 构建 build
 
 -   构建：ctrl+b
 -   运行：ctrl+shift+b
@@ -556,7 +572,7 @@ Package Control ‣ Install Package ‣ Theme - Monokai Pro
 Command Palette ‣ Monokai Pro: select theme
 ```
 
-### [代码段（Code Snippets）](http://www.jianshu.com/p/356bd7b2ea8e)
+### [代码段 Code Snippets](http://www.jianshu.com/p/356bd7b2ea8e)
 
 Snippet可以存储在任何的文件夹中, 并且以.sublime-snippet为文件扩展名, 默认是存储在.sublime-snippet文件夹下 四个组成部分:
 
@@ -569,41 +585,42 @@ Snippet可以存储在任何的文件夹中, 并且以.sublime-snippet为文件�
 *   snippet镜像区域,会使相同编号的位置同时进行编辑:系统$n -snippet Placeholders:添加默认值，占位符设置嵌套
 
 ```
-    <snippet>
-       <content><![CDATA[
-    =================================
-    $TM_FILENAME   用户文件名
-    $TM_FILEPATH   用户文件全路径
-    $TM_FULLNAME    用户的用户名
-    $TM_LINE_INDEX   插入多少列, 默认为0
-    $TM_LINE_NUMBER   一个snippet插入多少行
-    $TM_SOFT_TABS  如果设置translate_tabs_to_spaces : true 则为Yes
-    $TM_TAB_SIZE   每个Tab包含几个空格
-    First Name: ${1:Guillermo}
-    Second Name: ${2:López}
-    Address: ${3:Main Street 1234}
-    User name: $1
-    Environment Variable : ${4:$TM_FILEPATH }  #可以设置默认占位符为环境变量
-    Test: ${5:Nested ${6:Placeholder}}
-    =================================
-    ]]></content>
-        <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-        <tabTrigger>hello</tabTrigger>
-        <!-- Optional: Set a scope to limit where the snippet will trigger -->
-        <scope>source.python</scope>
-    </snippet>
+<snippet>
+   <content><![CDATA[
+=================================
+$TM_FILENAME   用户文件名
+$TM_FILEPATH   用户文件全路径
+$TM_FULLNAME    用户的用户名
+$TM_LINE_INDEX   插入多少列, 默认为0
+$TM_LINE_NUMBER   一个snippet插入多少行
+$TM_SOFT_TABS  如果设置translate_tabs_to_spaces : true 则为Yes
+$TM_TAB_SIZE   每个Tab包含几个空格
+First Name: ${1:Guillermo}
+Second Name: ${2:López}
+Address: ${3:Main Street 1234}
+User name: $1
+Environment Variable : ${4:$TM_FILEPATH }  #可以设置默认占位符为环境变量
+Test: ${5:Nested ${6:Placeholder}}
+=================================
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>hello</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.python</scope>
+</snippet>
 ```
 
-### 配置同步
+### [配置同步:同步Packages/User文件夹](https://packagecontrol.io/docs/syncing)
 
-[配置同步:同步Packages/User文件夹](https://packagecontrol.io/docs/syncing)
+* 通过共享文件
+    -   清除 Packages 目录下User
+    -   `ln -s ~/baiduyunebooks/sublime3/Packages/User User` // 建立符号链接
+* 通过sync-setting配置
+    - 新建github的token
+    - 安装syn-setting插件
+    - 配置文件，主进程download，其它更新
 
-#### 通过共享文件
-
-*   清除 Packages 目录下User
-*   `ln -s ~/baiduyunebooks/sublime3/Packages/User User` // 建立符号链接
-
-```shell
+```sh
 # 通过云端工具git 网盘
 # Close Sublime Text
 # Open Terminal
@@ -617,11 +634,9 @@ rm -r User
 ln -s ~/Dropbox/Sublime/User
 ```
 
-#### 通过sync-setting配置
+## 问题
 
-* 新建github的token
-* 安装syn-setting插件
-* 配置文件，主进程download，其它更新
+> markdown-editing无法snipeet,语法高亮  移除JavaScriptNext Package
 
 ## 参考
 
@@ -631,8 +646,3 @@ ln -s ~/Dropbox/Sublime/User
 * [文档](http://www.sublimetext.com/docs/3)
 * [Sublime Text 全程指南](http://lucida.me/blog/sublime-text-complete-guide/)
 * [非官方文档](http://sublime-text-unofficial-documentation.readthedocs.org/)
-
-## 问题
-
-markdown-editing无法snipeet,语法高亮：移除JavaScriptNext Package
-

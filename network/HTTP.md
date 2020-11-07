@@ -712,13 +712,13 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
   * 因为请求的首部中携带了 Cookie 信息，如果 Access-Control-Allow-Origin 的值为“*”，请求将会失败。而将 Access-Control-Allow-Origin 的值设置为 foo.example，则请求将成功执行
   * 响应首部中也携带了 Set-Cookie 字段，尝试对 Cookie 进行修改。如果操作失败，将会抛出异常。
 
-## HTTPS（HyperText Transfer Protocol over Secure Socket Layer）
+## HTTPS HyperText Transfer Protocol over Secure Socket Layer
 
 * HTTP缺点
   - 通信使用明文，内容可能会被窃听：HTTP 协议本身不具备加密功能，所以无法对通信整体（请求和响应的内容）进行加密，即 HTTP 报文使用明文方式发送。按照 TCP/IP 协议族的工作机制，通信内容在所有线路上都有可能被窃听。
   - 不验证通信方的身份，因此有可能遭遇伪装：HTTP 协议中的请求和响应不会对通信方进行确认，所以任何人都可以发起请求，另外，服务器只要接收到请求，不管对方是谁都会返回一个响应，即使是伪装的客户端。另外，即使是无意义的请求也会处理，无法阻止海量请求下的 DoS 攻击。
   - 无法证明报文的完整性，所以有可能已遭篡改：没有任何办法确认发出的请求/响应和接收到的请求/响应是前后相同的，请求或响应在传输途中，遭攻击者拦截并篡改内容的攻击称为中间人攻击（Main-in-the-Middle attack，MITM）
-* HTTP下加入SSL(Secure Sockets Layer 安全套接层),将 HTTP 通信接口部分用 SSL 协议代替,身披 SSL 协议外壳的 HTTP 而已.SSL 会建立一个安全的通信线路，在此线路上传输的内容都会经过加密处理，此外 SSL 还通过证书的方式来确认通信双方的身份，这样就可以从源头上杜绝了通信方被伪装以及信息被窃听和篡改的可能性，从而确保 HTTP 通信的安全
+* HTTPS在HTTP的基础上加入了SSL(Secure Sockets Layer 安全套接层)协议，将 HTTP 通信接口部分用 SSL 协议代替,身披 SSL 协议外壳的 HTTP 而已.SSL依靠证书来验证服务器的身份，会建立一个安全的通信线路，在此线路上传输的内容都会经过加密处理，这样就可以从源头上杜绝了通信方被伪装以及信息被窃听和篡改的可能性，从而确保 HTTP 通信的安全
 * HTTPS = HTTP 协议(进行通信) + SSL/TLS 协议（加密数据包），增加的 S 代表 Secure
   - SSL（Secure Sockets Layer 安全套接字层）:一项标准技术，用于在客户端与服务器之间进行加密通信，可确保互联网连接安全，防止网络犯罪分子读取和修改任何传输信息，包括个人资料。使用40 位关键字作为RC4流加密算法
   - TSL（Transport Layer Security 传输层安全）:是 SSL 的继承协议，建立在 SSL 3.0 协议规范之上，是更为安全的升级版 SSL
@@ -749,24 +749,23 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
   - Session key 其实就是用公钥证书加密的公钥
   - 实现了安全的非对称加密：然后，服务器再发送 ChangeCipherSpec 和 Finished 告诉客户端解密完成，至此实现了 RSA 的非对称加密
 * 作用
+  - 身份认证：确认网站的真实性
   - 内容加密：建立一个信息安全通道，来保证数据传输的安全
     + HTTPS 采用共享密钥加密和公开密钥加密两者并用的混合加密机制
-    + 公开密钥加密与共享密钥加密相比，其处理速度要慢。所以应充分利用两者各自的优势，将多种方法组合起来用于通信。在交换密钥环节使用公开密钥加密方式，之后的建立通信交换报文阶段则使用共享密钥加密方式。
-  - 身份认证：确认网站的真实性
+    + 公开密钥加密与共享密钥加密相比，其处理速度要慢。所以应充分利用两者各自的优势，将多种方法组合起来用于通信。在交换密钥环节使用公开密钥加密方式，之后的建立通信交换报文阶段则使用共享密钥加密方式
   - 数据完整性：防止内容被第三方冒充或者篡改
 * 缺点
   - 当使用 SSL 时，处理速度会变慢
     + 通信慢：和使用 HTTP 相比，网络负载可能会变慢 2 到 100 倍
     + 大量消耗 CPU 及内存等资源，导致处理速度变慢
-    + ssl握手需要的9个包
+    + ssl握手需要9个包
 * HTTP vs HTTPS
-  - HTTP 在地址栏上的协议是以 http:// 开头，而 HTTPS 在地址栏上的协议是以 https:// 开头
-  - HTTP 是未经安全加密的协议，传输过程容易被攻击者监听、数据容易被窃取、发送方和接收方容易被伪造；而 HTTPS 是安全的协议，它通过 密钥交换算法 - 签名算法 - 对称加密算法 - 摘要算法 能够解决上面这些问题
-* HTTPS在HTTP的基础上加入了SSL协议，SSL依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密
+  - http连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。
   - 需要到CA申请证书
   - 具有安全性的ssl加密传输协议
   - 端口也不一样，前者是80，后者是443
-  - http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。
+  - HTTP 在地址栏上的协议是以 http:// 开头，而 HTTPS 在地址栏上的协议是以 https:// 开头
+  - HTTP 是未经安全加密的协议，传输过程容易被攻击者监听、数据容易被窃取、发送方和接收方容易被伪造；而 HTTPS 是安全的协议，它通过 密钥交换算法 - 签名算法 - 对称加密算法 - 摘要算法 能够解决上面这些问题
 * 流程
   - 购买证书，获取证书文件
     + 证书其实就是公钥，只是包含了很多信息，如证书的颁发机构，过期时间等等
@@ -794,6 +793,7 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
   - 会话票或ID。把特定SSL/TLS会话的信息保存为一个会话票或ID，以便连接重用，而不必重新握手。
   - OCSP封套。通过缓存SSL/TLS证书信息减少握手时间。
 
+![Alt text](../_staic/SSL_handshake_with_two_way_authentication_with_certificates.svg "Optional title")
 ![HTTPS签名和验证](../static/https-ac.png "HTTPS签名和验证")
 ![HTTP vs HTTPS](../static/https.png "HTTP与HTTPS区别")
 
@@ -925,7 +925,7 @@ service nginx stop
   - 找到这个session文件后，检查是否过期，如果没有过期，去读取Session文件中的配置；如果已经过期，清空其中的配置
 * token
   - 流程
-    + 用户通过用户名和密码发送请求。
+    + 用户通过用户名和密码发送请求
     + 程序验证。
     + 程序返回一个签名的token 给客户端。用HMAC-SHA256 算法，加上一个密钥， 对数据做一个签名， 把这个签名和数据一起作为token ， 由于密钥别人不知道， 就无法伪造token了。
     + 客户端储存token,并且每次用于每次发送请求。
@@ -1031,7 +1031,7 @@ $un_data = unserialize_php($data);
   - 当有多个请求同时被挂起的时候 就会拥塞请求通道，导致后面请求无法发送
   - 臃肿的消息首部:HTTP/1.1能压缩请求内容,但是消息首部不能压缩;在现今请求中,消息首部占请求绝大部分(甚至是全部)也较为常见,造成通信的浪费
 
-## HTTP/2
+## [HTTP/2](https://http2.github.io/)
 
 * 2015 年开发出来的标准 基于Google的SPDY,从2012年诞生到2016停止维护
 * 头部压缩（Header Compression）:由于 HTTP 1.1 经常会出现 User-Agent、Cookie、Accept、Server、Range 等字段可能会占用几百甚至几千字节，而 Body 却经常只有几十字节，所以导致头部偏重。HTTP 2.0 使用 HPACK 算法进行压缩
@@ -1131,13 +1131,6 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 
 ## URL Schemes
 
-## [wg / wrk](https://github.com/wg/wrk)
-
-Modern HTTP benchmarking tool
-
-* `git clone --depth=1 https://github.com/wg/wrk.git` `make` `sudo cp wrk /usr/local/bin`
-* `wrk -t5 -c5 -d30s http://www.baidu.com`
-
 ## 图书
 
 * 图解HTTP
@@ -1173,8 +1166,6 @@ http localhost:8000 Host:example.com
 ## 工具
 
 * [snail007/goproxy](https://github.com/snail007/goproxy):Proxy is a high performance HTTP(S), websocket, TCP, UDP,Secure DNS, Socks5 proxy server implemented by golang. Now, it supports chain-style proxies,nat forwarding in different lan,TCP/UDP port forwarding, SSH forwarding.Proxy是golang实现的高性能http,https,websocket,tcp,防污染DNS,socks5代理服务器,支持内网穿透,链式代理,通讯加密,智能HTTP,SOCKS5代理,域名黑白名单,跨平台,KCP协议支持,集成外部API。
-* [ProxymanApp / Proxyman](https://github.com/ProxymanApp/Proxyman):Modern and Delightful HTTP Debugging Proxy for macOS, iOS and Android ⚡️ https://proxyman.io
-* [whistle](https://github.com/avwo/whistle) HTTP, HTTP2, HTTPS, Websocket debugging proxy https://wproxy.org/
 * [Netflix/pollyjs](https://github.com/Netflix/pollyjs):Record, Replay, and Stub HTTP Interactions. https://netflix.github.io/pollyjs
 * [hazbo/httpu](https://github.com/hazbo/httpu):The terminal-first http client
 * [fukamachi/woo](https://github.com/fukamachi/woo):A fast non-blocking HTTP server on top of libev http://ultra.wikia.com/wiki/Woo_(kaiju)
@@ -1195,6 +1186,7 @@ http localhost:8000 Host:example.com
   * [Microsoft/Ethr](https://github.com/Microsoft/Ethr):Ethr is a Network Performance Measurement Tool for TCP, UDP & HTTP.
 * proxy
   - [avwo/whistle](https://github.com/avwo/whistle):HTTP, HTTPS, WebSocket debugging proxy https://wproxy.org/
+  - [ProxymanApp / Proxyman](https://github.com/ProxymanApp/Proxyman):Modern and Delightful HTTP Debugging Proxy for macOS, iOS and Android ⚡️ https://proxyman.io
 * certificates
   - [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
   - [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh):A pure Unix shell script implementing ACME client protocol https://acme.sh
