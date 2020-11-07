@@ -1,4 +1,4 @@
-# Markdown syntax guide
+# [Markdown guide](https://www.markdownguide.org/)
 
 Markdown is a way to style text on the web. You control the display of the document; formatting words as bold or italic, adding images, and creating lists are just a few of the things we can do with Markdown. Mostly, Markdown is just regular text with a few non-alphabetic characters thrown in, like `#` or `*`.
 
@@ -67,8 +67,11 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 ## 强调 Emphasis
 
 * Bold:command/control + b
+  - 使用双星号asterisks
 * Italic:command/control + i
+  - 用单星号标注单词中间的斜体来表示
 * Bold and italic
+  - 用三星号将单词或短语的中间部分加粗并以斜体显示
 * Strikethrough
 * [font-awesome](http://fortawesome.github.io/Font-Awesome/3.2.1/icons/)
 
@@ -119,9 +122,15 @@ __This will also be bold__
 
 ---
 
+## 段落 Paragraphs
+
+* 用一个或多个空白行对段落和标题进行分隔
+* 创建段落，使用空白行将一行或多行文本进行分隔
+* 不要用空格（spaces）或制表符（ tabs）缩进段落
+
 ## 换行 Newlines
 
-* End a line with two or more spaces + enter
+* 结尾空格（trailing whitespace）：End a line with two or more spaces + enter 在一行的末尾添加两个或多个空格，然后按回车键（return），即可创建一个换行（line break） (<br>)
 * add new line between two section
 * first line add <br> </br>
 
@@ -136,7 +145,9 @@ __This will also be bold__
 
 *****
 
-- - -
+---
+
+_________________
 ```
 
 **Result:**
@@ -145,7 +156,9 @@ __This will also be bold__
 
 *****
 
-- - -
+---
+
+_________________
 
 ---
 
@@ -215,6 +228,15 @@ __This will also be bold__
 
 ---
 
+### Definition Lists
+
+First Term
+: This is the definition of the first term.
+
+Second Term
+: This is one definition of the second term.
+: This is another definition of the second term.
+
 ### 任务列表 Task lists
 
 **Example:**
@@ -263,6 +285,7 @@ An email <example@example.com> link.
 自动生成连接  <http://www.github.com/>
 
 [GitHub](http://github.com)
+`http://www.example.com`
 ```
 
 **Result:**
@@ -274,6 +297,7 @@ An email <example@example.com> link.
 * [another one with a title](http://lmgtfy.com/ "Hello, world")
 * 插入超链接 [直播吧](http://www.zhibo8.com)
 * [本地链接](../Tools/Document/Document.md#使用)
+* `http://www.example.com`
 
 ---
 
@@ -281,11 +305,9 @@ An email <example@example.com> link.
 
 You can link directly to a section in a rendered file by hovering over the section heading to expose the link
 
-**Example:**
+[markdown][1]
+[hobbit-hole](https://en.wikipedia.org/wiki/Hobbit#Lifestyle "Hobbit lifestyles")
 
-```markdown
-[列表 Lists](# 列表 Lists)
-```
 
 **Result:**
 
@@ -315,6 +337,9 @@ As Kanye West said:
 > * 发布日记，杂文，所见所想
 > * 撰写发布技术文稿（代码支持）
 > * 撰写发布学术论文（LaTeX 公式支持）
+
+ <!-- 嵌套块引用（Nested Blockquotes） -->
+> > 一寸山河一寸血，十万青年十万军 ......蒋介石；
 ```
 
 效果如下：
@@ -494,11 +519,36 @@ For example this is a Block level $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$ formu
 ```markdown
 这是一个脚注：[^sample_footnote]
 This is a footnote:[^sample_footnote]
+
+Here's a simple footnote,[^1] and here's a longer one.[^bignote]
+
+[^1]: This is the first footnote.
+
+[^bignote]: Here's one with multiple paragraphs and code.
+
+    Indent paragraphs to include them in the footnote.
+
+    `{ my code }`
+
+    Add as many paragraphs as you like.
 ```
 
 效果：
 
 这是一个脚注：[^sample_footnote]
+
+Here's a simple footnote,[^1] and here's a longer one.[^bignote]
+
+[^1]: This is the first footnote.
+
+[^bignote]: Here's one with multiple paragraphs and code.
+
+    Indent paragraphs to include them in the footnote.
+
+    `{ my code }`
+
+    Add as many paragraphs as you like.
+
 
 ## 注释和阅读更多 Comment And Read More..
 
@@ -669,6 +719,10 @@ You can add emoji to your writing by typing :EMOJICODE:.
 
 @octocat :+1: This PR looks great - it's ready to merge! :shipit:
 
+Gone camping! :tent: Be back soon.
+
+That is so funny! :joy:
+
 ### Ignoring Markdown formatting
 
 You can tell GitHub to ignore (or escape) Markdown formatting by using \ before the Markdown character.
@@ -717,6 +771,7 @@ Let's rename *our-new-project* to \*our-old-project\*.
 * [Haroopad](http://pad.haroopress.com/user.html):a markdown enabled document processor for creating web-friendly documents
 * [notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. https://notable.app/
 * [Cmd Markdown](https://www.zybuluo.com/cmd/) 开启卓越写作之旅
+* [Dillinger ](https://dillinger.io/) 在线
 * Mac
   - [Mou](http://25.io/mou/):Markdown editor for developers.
   - [Bear](https://bear.app/):Write beautifully on iPhone, iPad, and Mac
