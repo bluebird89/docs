@@ -131,9 +131,9 @@ kill -USR2 主进程PID
     + 可靠传输: 在出错率很低的链路上很少用，但是无线链路WLAN会保证可靠传输
     + 差错检测(CRC):接收者检测错误,如果发现差错，丢弃该帧
   - 物理层：数据被称为比特流（Bits）负责0、1比特流与物理设备电压高低、光的闪灭之间的互换。通信线缆（光缆、无线），线缆的标准统统属于物理层  _物理设备_
-* TCP/IP协议模型（Transmission Control Protocol/Internet Protocol）层对应关系
+* TCP/IP协议模型 Transmission Control Protocol/Internet Protocol
   - 应用层：HTTP 应用层 表示层 会话层 curl
-    + 在传输数据时，可以只使用（传输层）TCP/IP协议，但是那样的话，如果没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用到应用层协议，应用层协议有很多，比如HTTP、FTP、TELNET等，也可以自己定义应用层协议。WEB使用HTTP协议作应用层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发到网络上。
+    + 传输数据时，可以只使用（传输层）TCP/IP协议，但是那样的话，如果没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用到应用层协议，应用层协议有很多，比如HTTP、FTP、TELNET等，也可以自己定义应用层协议。WEB使用HTTP协议作应用层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发到网络上
   - 传输层  TCP UDP telent
   - 网络层 IP ping traceroute
   - 数据链路层 物理层
@@ -1059,7 +1059,8 @@ lsof -d 2-3
 * 《Linux多线程服务器端编程》
 * Computer Networking: A Top Down Approach 计算机网络：自顶向下方法
   - [PPT](https://gaia.cs.umass.edu/kurose_ross/ppt.htm)
-* 《计算机网络自顶向下方法》
+* 《计算机网络：自顶向下方法》
+  - [](https://www.bilibili.com/video/av41404195)
 * 计算机网络 Computer Networks Andrew S. Tanenbaum / David J. Wetherall
 
 ## 课程

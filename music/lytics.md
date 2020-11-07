@@ -1,9 +1,5 @@
 # 歌词
 
-* 流行音乐不流行，是这五年流行音乐的一个最大现象
-* 音乐出版不受关注，但音乐秀盛行。音乐秀实质上是音乐萧条的表征
-* 大歌手未能沉淀大作，成就经典名作。未来的可能的大歌手未能引人注目，拥有舞台。好嗓子没有影响力，仅成为各类老歌、好听歌曲的复读机，为各“平行宇宙”的居民们提供情感抚慰。
-
 ## Hotel California
 
 ```
@@ -63,7 +59,7 @@ but you can never leave!
 ```
 
 ## Edelweiss
-Jeanette Olsson
+    Jeanette Olsson
 
 ## The End of World
    原唱 Skeeter Davis 作词：Sylvia Dee 作曲：Arthur Kent
@@ -295,7 +291,6 @@ music
 ```
 
 ## 《朋友》
-
     谭咏麟
 
 ```

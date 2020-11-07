@@ -1,4 +1,4 @@
-# [grpc/grpc](https://github.com/grpc/grpc)
+# [grpc](https://github.com/grpc/grpc)
 
 The C based gRPC (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)
 
@@ -262,6 +262,8 @@ Reflection request not implemented; is the ServerReflection service enabled?
 
 * [Linkerd](https://kubernetes.io/blog/2018/11/07/grpc-load-balancing-on-kubernetes-without-tears/)
 * [uw-labs/bloomrpc](https://github.com/uw-labs/bloomrpc):GUI Client for GRPC Services
+* [grpc/grpc-web](https://github.com/grpc/grpc-web):gRPC for Web Clients https://grpc.io
+* [improbable-eng/grpc-web](https://github.com/improbable-eng/grpc-web):gRPC Web implementation for Golang and TypeScript
 
 ## 参考
 

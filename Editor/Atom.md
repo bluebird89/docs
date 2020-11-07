@@ -60,11 +60,6 @@ atom.commands.add 'atom-text-editor', 'custom:jump-over-symbol': (event) ->
 ⇧⌘P 输入reload:重新加载配置
 ```
 
-## 插件
-
-* 命令面板：Ctrl + Shift + P
-* 设置面板:Edit->Preferences 命令面板 Settings View:Open ctrl + ,
-
 ## snippets
 
 - \n 表示的是纯文本中默认并不显示的"换行符号"；
@@ -76,13 +71,16 @@ atom.commands.add 'atom-text-editor', 'custom:jump-over-symbol': (event) ->
 ## 自定义
 
 ```
-# 尽量不要直接使用别人写好的 Snippets，要自己写、自己敲；而别人写好的，尽量只用来参考。
+# 尽量不要直接使用别人写好的 Snippets，要自己写、自己敲；而别人写好的，尽量只用来参考
 ⇧⌘P 输入Open Your Snippets,添加自定义代码片段
 prefix 不要用缩写
 ```
 
+
 ## 插件
 
+* 命令面板：Ctrl + Shift + P
+* 设置面板:Edit->Preferences 命令面板 Settings View:Open ctrl + ,
 * `apm` is Atom's package manager, based on Node's `npm` tool.
 
 Command                    | Description

@@ -237,18 +237,22 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [MemSQL](link)
 * [Pivotal Greenplum](https://pivotal.io/pivotal-greenplum):Parallel Postgres for enterprise analytics at scale
 
+## 课程
+
+* 《数据库系统概念》：https://www.bilibili.com/video/av52007695
+
 ## 图书
 
+* 《数据库系统概念》
 * 《数据库系统实现》
 * 《SQL基础教程》
 * 《[SQL应用重构](https://www.amazon.cn/gp/product/B00H6X6M1A)》
 * 《[SQL Cookbook](https://www.amazon.cn/gp/product/0596009763)》
-* 《[高性能MySQL（第3版）](https://www.amazon.cn/gp/product/B00C1W58DE)》
+* 《[高性能MySQL](https://www.amazon.cn/gp/product/B00C1W58DE)》
 * 《[MySQL技术内幕 : InnoDB存储引擎（第2版）](https://www.amazon.cn/gp/product/B00ETOV48K)》
 * 《[深入浅出MySQL : 数据库开发、优化与管理维护](https://www.amazon.cn/gp/product/B00KR87J8G)》
 * 《SQL必知必会(第4版)》
 * 《SQL 反模式》
-* 《数据库系统概念》
 * 《收获，不止Oracle》（第2版）
 
 ## 工具

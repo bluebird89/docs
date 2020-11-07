@@ -1,4 +1,4 @@
-# [beanstalkd/beanstalkd](https://github.com/beanstalkd/beanstalkd)
+# [beanstalkd](https://github.com/beanstalkd/beanstalkd)
 
 Beanstalk is a simple, fast work queue. https://beanstalkd.github.io/
 

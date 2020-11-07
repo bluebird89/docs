@@ -1,4 +1,4 @@
-# [chromium/chromium](https://github.com/chromium/chromium)
+# [chromium](https://github.com/chromium/chromium)
 
 The official GitHub mirror of the Chromium source https://chromium.googlesource.com/chromium/src
 

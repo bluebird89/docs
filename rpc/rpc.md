@@ -1,4 +1,4 @@
-# RPC（Remote Procedure Call Protocol）远程过程调用协议
+# RPC Remote Procedure Call Protocol 远程过程调用协议
 
 * 现有 RPC 框架都是基于 Andrew D. Birrell 和 Bruce Jay Nelson 的论文实现的：[Implementing Remote Procedure Calls](http://www.cs.cmu.edu/~dga/15-712/F07/papers/birrell842.pdf)， [中文](https://www.jianshu.com/p/91be39f72c74)该论文定义了 RPC 的调用标准
 * 让一个应用调用另一个应用中方法的一种实现方式
@@ -113,8 +113,6 @@ Brpc 是百度开源的一个基于 protobuf 接口的 RPC 框架，它囊括了
 
 ## 框架
 
-* [grpc/grpc](https://github.com/grpc/grpc)The C based gRPC (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)
-* [apache/thrift](https://github.com/apache/thrift)a lightweight, language-independent software stack with an associated code generation mechanism for RPC
 * [alibaba/dubbo](https://github.com/alibaba/dubbo)Dubbo is a high-performance, java based, open source RPC framework
 * [weibocom/motan](https://github.com/weibocom/motan)A remote procedure call(RPC) framework for rapid development of high performance distributed services.
 * [dangdangdotcom/dubbox](https://github.com/dangdangdotcom/dubbox)Dubbox now means Dubbo eXtensions, and it adds features like RESTful remoting, Kyro/FST serialization, etc to the Dubbo service framework.
@@ -126,7 +124,5 @@ Brpc 是百度开源的一个基于 protobuf 接口的 RPC 框架，它囊括了
 ## 工具
 
 * [uber/prototool](https://github.com/uber/prototool):Your Swiss Army Knife for Protocol Buffers
-* [grpc/grpc-web](https://github.com/grpc/grpc-web):gRPC for Web Clients https://grpc.io
-* [improbable-eng/grpc-web](https://github.com/improbable-eng/grpc-web):gRPC Web implementation for Golang and TypeScript
 * [Tencent/Tars](https://github.com/Tencent/Tars):Tars is a highly performance rpc framework based on naming service using tars protocol and provides a semi-automatic operation platform.
 * [smallnest / rpcx](https://github.com/smallnest/rpcx):A zero cost, faster multi-language bidirectional microservices framework in Go, like alibaba Dubbo, but with more features, Scale easily. Try it. Test it. If you feel it's better, use it! 𝐉𝐚𝐯𝐚有𝐝𝐮𝐛𝐛𝐨, 𝐆𝐨𝐥𝐚𝐧𝐠有𝐫𝐩𝐜𝐱! https://rpcx.io

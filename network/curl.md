@@ -1,4 +1,4 @@
-# [curl/curl](https://github.com/curl/curl)
+# [curl](https://github.com/curl/curl)
 
 curl is used in command lines or scripts to transfer data.发出网络请求，然后得到和提取数据，显示在"标准输出"（stdout）上面.Curl 是一个命令行工具，用来通过 HTTP（s），FTP 等其它几十种你可能尚未听说过的协议来发起网络请求。
 
@@ -95,7 +95,14 @@ curl localhost:3000/api/json -X POST -d @data.json --header "Content-Type: appli
 
 ## wget
 
+*　参数
+    * -b :后台下载
+    * -o:
+    * -c:恢复下载
+
 ```sh
+wget http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4
+wget --ftp-user=<user_name> --ftp-password=<Give_password> Download-url-address
 # 断点续传下载文件
 wget -c $url
 # 下载整站

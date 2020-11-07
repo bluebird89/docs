@@ -1,4 +1,4 @@
-# [ protocolbuffers / protobuf ](https://github.com/protocolbuffers/protobuf/)
+# [protobuf](https://github.com/protocolbuffers/protobuf/)
 
 Protocol Buffers - Google's data interchange format  https://developers.google.com/protocol-buffers/
 
@@ -189,8 +189,6 @@ option go_package = "hs";
 
 protoc --go_out=$GOPATH/src/github.com/protocolbuffers/protobuf/examples/tutorial ./addressbook.proto
 ```
-
-
 
 ## 问题
 

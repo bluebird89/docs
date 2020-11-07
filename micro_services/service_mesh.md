@@ -28,24 +28,17 @@
 ## 历程
 
 * 原始的主机之间直接使用网线相连
-
 * 网络层的出现
-
 * 出现网络层（4层协议）控制的需求
-
 * 控制逻辑下移到网络
-
 * 出现新的应用层（7层协议）需求（服务发现、熔断、超时重试等）
-
 * 封装成三方库（服务发现：Dubbo/HSF）
-  
   - 原本在进程中互相调用那么简单的事情，都要变成一次在 7 层网络上的远程调用
   - 原本公共工具类做的事情，现在需要写成二方库 SDK 等，在每一个进程中使用，版本迭代成为了灾难
   - 原本是内部透明调用的不需要做任何防护，分离后却要额外增加安全防护和隔离的工作
   - 不再是代码即文档，需要维护大量的 API 定义和版本管理
-
 * Sidecar模式：通过给应用服务加装一个“边车”来达到控制和逻辑的分离的目的
-  
+
   - 服务网格技术中常用的(其中)一种设计架构，在 Kubernates 中，不同的容器允许被运行在同一个 Pod 中（即多个进程运行在同一个 cgroup 下），这在很大程度上给 Sidecar 模式提供了良好的土壤
   - 微服务之间的调用在架构图中是横向的，被称为东西流量。服务暴露到外部被公网可见的外部调用，被称为南北流量
   - Consumer 与 Provider 就是微服务互相调用的一种解决方案
@@ -58,7 +51,7 @@
 * 所有使用中间件的服务组成了一个大的服务网格。服务网格基于 Kubernates 这样的容器技术，将东西流量的问题解决得更加透明无感
 
 * 通讯层的实现方式，有以下选择：
-  
+
   - 用库的形式在微服务应用程序中导入使用:每个微服务应用程序包中都有实现Service Mesh功能的库。像Hystrix和Ribbon就是用库的方法
     + 调用方式是进程内的，没有安全隔离的包袱
     + 随着编程语言的发展，新的语言为特定的场景而生，而SDK库的方式限制了使用方必须用支持列表中的语言,用不同语言去重复实现多次，挑战在于实现的复杂性和一遍又一遍去实现同样概念的工作量
@@ -164,10 +157,10 @@
 
 ## 工具
 
-* [rootsongjc / kubernetes-vagrant-centos-cluster](https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster):Setting up a distributed Kubernetes cluster along with Istio service mesh locally with Vagrant and VirtualBox, only PoC or Demo use. https://jimmysong.io
+* [kubernetes-vagrant-centos-cluster](https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster):Setting up a distributed Kubernetes cluster along with Istio service mesh locally with Vagrant and VirtualBox, only PoC or Demo use. https://jimmysong.io
 * linkerd
-* envoy:数据平面
-* lstio：增加控制平面，收购enovy
+* [envoy](./envoy.md):数据平面
+* [lstio](./lstio.md)：增加控制平面，收购enovy
 * AWS：App Mesh
 
 ## 参考
