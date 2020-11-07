@@ -171,6 +171,8 @@ __This will also be bold__
   - Like this
   - And this
 
+---
+
 ### 有序列表 Ordered
 
 有序列表，在文字前面加上 1\. 2\. 3\.
@@ -255,6 +257,8 @@ An email <example@example.com> link.
 * 插入超链接 [直播吧](http://www.zhibo8.com)
 * [本地链接](../Tools/Document/Document.md#使用)
 
+---
+
 ## Section links
 
 You can link directly to a section in a rendered file by hovering over the section heading to expose the link
@@ -275,6 +279,8 @@ You can link directly to a section in a rendered file by hovering over the secti
 
 [Contribution guidelines for this project](../TODO.md)
 
+---
+
 ## 区块引用 Blockquotes/Quoting text
 
 **Example:**
@@ -286,6 +292,11 @@ You can link directly to a section in a rendered file by hovering over the secti
 As Kanye West said:
 > We're living the future so
 > the present is our past.
+
+> * 整理知识，学习笔记
+> * 发布日记，杂文，所见所想
+> * 撰写发布技术文稿（代码支持）
+> * 撰写发布学术论文（LaTeX 公式支持）
 ```
 
 效果如下：
@@ -302,9 +313,16 @@ As Kanye West said:
 >
 > the present is our past.
 
+> * 整理知识，学习笔记
+> * 发布日记，杂文，所见所想
+> * 撰写发布技术文稿（代码支持）
+> * 撰写发布学术论文（LaTeX 公式支持）
+
 > 一盏灯， 一片昏黄； 一简书， 一杯淡茶。 守着那一份淡定， 品读属于自己的寂寞。 保持淡定， 才能欣赏到最美丽的风景！ 保持淡定， 人生从此不再寂寞。
 
 > > 一寸山河一寸血，十万青年十万军 ......蒋介石；
+
+---
 
 ## 行内代码 Inline code/Quoting code
 
@@ -321,11 +339,13 @@ I think you should use an `<addr>` `code` element here instead.
 
 I think you should use an `<addr>` `code` element here instead.
 
+---
+
 ## 多行或者一段代码 Multi-line code
 
 **Example:**
 
-```js
+```markdown
 function fancyAlert(arg) {
     if(arg) {
         $.facebox({div:'#foo'})
@@ -341,111 +361,31 @@ function fancyAlert(arg) {
         $.facebox({div:'#foo'})
     }
 }
-```
-
----
-
-## 顺序图或流程图 Sequence and Flow chart github不支持
-
-**Example:**
-
-```sequence
-张三->李四: 嘿，小四儿, 写博客了没?
-Note right of 李四: 李四愣了一下，说：
-李四-->张三: 忙得吐血，哪有时间写。
-```
-
-```flow
-st=>start: 开始
-e=>end: 结束
-op=>operation: 我的操作
-cond=>condition: 确认？
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-
-```sequence
-Andrew->China: Says Hello
-Note right of China: China thinks about it
-China-->Andrew: How are you?
-Andrew->>China: I am good thanks!
-```
-
-```flow
-st=>start: Start:>http://www.google.com[blank]
-e=>end:>http://www.google.com
-op1=>operation: My Operation
-sub1=>subroutine: My Subroutine
-cond=>condition: Yes
-or No?:>http://www.google.com
-io=>inputoutput: catch something...
-
-st->op1->cond
-cond(yes)->io->e
-cond(no)->sub1(right)->op1
-```
-
-**Result:**
-
-```sequence
-张三->李四: 嘿，小四儿, 写博客了没?
-Note right of 李四: 李四愣了一下，说：
-李四-->张三: 忙得吐血，哪有时间写。
-```
-
-```flow
-st=>start: 开始
-e=>end: 结束
-op=>operation: 我的操作
-cond=>condition: 确认？
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-
-```sequence
-Andrew->China: Says Hello
-Note right of China: China thinks about it
-China-->Andrew: How are you?
-Andrew->>China: I am good thanks!
-```
-
-```flow
-st=>start: Start:>http://www.google.com[blank]
-e=>end:>http://www.google.com
-op1=>operation: My Operation
-sub1=>subroutine: My Subroutine
-cond=>condition: Yes
-or No?:>http://www.google.com
-io=>inputoutput: catch something...
-
-st->op1->cond
-cond(yes)->io->e
-cond(no)->sub1(right)->op1
 ```
 
 ---
 
 ## 表格 Tables
 
+* 默认靠左，居中两边加冒号
+
 **Example:**
 
 ```
-First Header | Second Header
------------- | -------------
-Content from cell 1 | Content from cell 2
-Content in the first column | Content in the second column
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      | $12   |
+| zebra stripes | are neat      | $1    |
+
+| 项目  | 价格     | 数量  |
+| --- | ------:|:---:|
+| 计算机 | \$1600 | 5   |
+| 手机  | \$12   | 12  |
+| 管线  | \$1    | 234 |
 ```
 
 **Result:**
-
-| First Header                | Second Header                |
-| --------------------------- | ---------------------------- |
-| Content from cell 1         | Content from cell 2          |
-| Content in the first column | Content in the second column |
 
 | Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
@@ -459,19 +399,13 @@ Content in the first column | Content in the second column
 | 手机  | \$12   | 12  |
 | 管线  | \$1    | 234 |
 
-| Year | Temperature (low) | Temperature (high) |
-| ---- | ----------------- | ------------------ |
-| 1900 | -10               | 25                 |
-| 1910 | -15               | 30                 |
-| 1920 | -10               | 32                 |
-
 ---
 
 ## MathJax LaTex github不支持
 
 Use double US dollars sign pair for Block level Math formula, and one US dollar sign pair for Inline Level.
 
-Markdown 语法：
+语法：
 
 ```
 块级公式： Block level
@@ -507,20 +441,20 @@ For example this is a Block level $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$ formu
 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
 {1+\frac{e^{-8\pi}} {1+\ldots} } } } \\]
 
-##
+书写一个质能守恒公式[^LaTeX] $$E=mc^2$$
 
 ---
 
 ## 脚注 Footnote github不支持
 
-Markdown 语法：
+语法：
 
 ```
 这是一个脚注：[^sample_footnote]
 This is a footnote:[^sample_footnote]
 ```
 
-效果如下：
+效果：
 
 这是一个脚注：[^sample_footnote]
 
@@ -530,9 +464,7 @@ This is a footnote:[^sample_footnote]
 
 <!-- more -->
 
-**注** 阅读更多的功能只用在生成网站或博客时，插入时注意要后空一行。
-
-####
+**注** 阅读更多的功能只用在生成网站或博客时，插入时注意要后空一行
 
 ---
 
@@ -552,55 +484,32 @@ Insert `[ TOC ]` without spaces to generate a table of contents (builtin parsers
 
 --------------------------------------------------------------------------------
 
-### 九、流程图
+### [序列图|顺序图 Sequence chart](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-序列图) github不支持
+
+**Example:**
+
+```sequence
+张三->李四: 嘿，小四儿, 写博客了没?
+Note right of 李四: 李四愣了一下，说：
+李四-->张三: 忙得吐血，哪有时间写。
+```
+
+```seq
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
+
+```sequence
+Andrew->China: Says Hello
+Note right of China: China thinks about it
+China-->Andrew: How are you?
+Andrew->>China: I am good thanks!
+```
+
+## [流程图 Flow chart](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图) github不支持
 
 说明：TOP BOTTOM RIGHT LEFT
-
-#### 实例
-
-```
-graph TB
-a-->b
-```
-
-```
-graph TB
-    A{开始}-->B(输入打印份数)
-    B --> C[打印机是否正常]
-    C -->|是|D[装订]
-    C -->|否|E[修复错误]
-```
-
-```
-graph LR
-a-->b
-```
-
-##
-
----
-
-## 十、甘特图
-
-### 实例
-
-```
-gantt
-    dateFormat YYYY-MM-DD
-    title 计划进度表
-
-    section 问卷调查阶段
-    项目确认:done,des1,2015-06-01,2015-06-06
-    问卷设计:done,des2,2015-06-04, 4d
-    问卷确定:done,des3,after des2,3d
-    报告提交:active，des4，2015-06-26，5d
-```
-
-### 2\. 书写一个质能守恒公式[^LaTeX]
-
-$$E=mc^2$$
-
-### 4\. 高效绘制 [流程图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图)
 
 ```flow
 st=>start: Start
@@ -613,12 +522,63 @@ cond(yes)->e
 cond(no)->op
 ```
 
-### 5\. 高效绘制 [序列图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-序列图)
+```flow
+graph TB
+a-->b
+```
 
-```seq
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
+```flow
+graph TB
+    A{开始}-->B(输入打印份数)
+    B --> C[打印机是否正常]
+    C -->|是|D[装订]
+    C -->|否|E[修复错误]
+```
+
+```flow
+graph LR
+a-->b
+```
+
+```flow
+st=>start: 开始
+e=>end: 结束
+op=>operation: 我的操作
+cond=>condition: 确认？
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+
+```flow
+st=>start: Start:>http://www.google.com[blank]
+e=>end:>http://www.google.com
+op1=>operation: My Operation
+sub1=>subroutine: My Subroutine
+cond=>condition: Yes
+or No?:>http://www.google.com
+io=>inputoutput: catch something...
+
+st->op1->cond
+cond(yes)->io->e
+cond(no)->sub1(right)->op1
+```
+
+---
+
+## 甘特图
+
+```
+gantt
+    dateFormat YYYY-MM-DD
+    title 计划进度表
+
+    section 问卷调查阶段
+    项目确认:done,des1,2015-06-01,2015-06-06
+    问卷设计:done,des2,2015-06-04, 4d
+    问卷确定:done,des3,after des2,3d
+    报告提交:active，des4，2015-06-26，5d
 ```
 
 ### Mentioning people and teams
@@ -645,7 +605,7 @@ You can add emoji to your writing by typing :EMOJICODE:.
 
 You can tell GitHub to ignore (or escape) Markdown formatting by using \ before the Markdown character.
 
-Let's rename \*our-new-project\* to \*our-old-project\*.
+Let's rename *our-new-project* to \*our-old-project\*.
 
 [1]: https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown
 [2]: https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#cmd-markdown-高阶语法手册
@@ -660,16 +620,6 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 [revolunet]: http://revolunet.com
 [revolunet-logo]: http://www.revolunet.com/static/parisjs8/img/logo-revolunet-carre.jpg "revolunet logo"
 [st]: http://sublimetext.com
-
-### writing on MWeb MWeb 写作使用说明
-
-如果不想打这么多空格，只要回车就为换行，请勾选：`Preferences` - `Themes` - `Translate newlines to <br> tags`
-如果是 MWeb 的文档库中的文档，还可以用拖放图片、`CMD + V` 粘贴、`CMD + Option + I` 导入这三种方式来增加图片。
-MWeb 引入的特别的语法来设置图片宽度，方法是在图片描述后加 `-w + 图片宽度` 即可，比如说要设置上面的图片的宽度为 140
-如果是 MWeb 的文档库中的文档，拖放或`CMD + Option + I` 导入非图片时，会生成连接。
-`Preferences` - `Themes` - `Enable sequence & flow chart`
-Actions->Insert Read More Comment *或者* `Command + .`
-**注** 阅读更多的功能只用在生成网站或博客时，插入时注意要后空一行。
 
 #### 快捷键 **Shortcuts:**
 
@@ -694,10 +644,10 @@ Actions->Insert Read More Comment *或者* `Command + .`
   - `sudo add-apt-repository 'deb https://typora.io/linux ./'`
   - `sudo apt-get install typora`
   - PicGo 是一款免费的图床管理应用，支持拖拽上传，剪切板上传等方式。你可以用它快捷地将图片上传到图床并获得网络链接。
-* [marktext/marktext](https://github.com/marktext/marktext):📝A simple and elegant markdown editor, available for Linux, macOS and Windows. https://marktext.app
-* [ zadam / trilium ](https://github.com/zadam/trilium):Build your personal knowledge base with Trilium Notes
+* [marktext](https://github.com/marktext/marktext):📝A simple and elegant markdown editor, available for Linux, macOS and Windows. https://marktext.app
+* [trilium](https://github.com/zadam/trilium):Build your personal knowledge base with Trilium Notes
 * [Haroopad](http://pad.haroopress.com/user.html):a markdown enabled document processor for creating web-friendly documents
-* [notable/notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. https://notable.app/
+* [notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. https://notable.app/
 * [Cmd Markdown](https://www.zybuluo.com/cmd/):网页版
 * Mac
   - [Mou](http://25.io/mou/):Markdown editor for developers.
@@ -713,11 +663,11 @@ Actions->Insert Read More Comment *或者* `Command + .`
   - MarkPad
 * [GitNote](https://www.gitnoteapp.com)
 * [MedleyText](https://medleytext.net/):reate stylish and meaningful programming notes, blogs with ease
-* [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
+* [Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
 * 开源
   - [CherryTree](http://www.giuspen.com/cherrytree/):A hierarchical note taking application, featuring rich text and syntax highlighting, storing data in a single XML or SQLite file
 * Apostrophe:An elegant, distraction-free markdown editor
-* [ Zettlr / Zettlr ](https://github.com/Zettlr/Zettlr): A Markdown Editor for the 21st century. www.zettlr.com/
+* [Zettlr](https://github.com/Zettlr/Zettlr): A Markdown Editor for the 21st century. www.zettlr.com/
 
 ## 工具
 
