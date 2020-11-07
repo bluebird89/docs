@@ -308,10 +308,7 @@ You can link directly to a section in a rendered file by hovering over the secti
 [markdown][1]
 [hobbit-hole](https://en.wikipedia.org/wiki/Hobbit#Lifestyle "Hobbit lifestyles")
 
-
-**Result:**
-
-[列表 Lists](# 列表 Lists)
+^1:<https://en.wikipedia.org/wiki/Hobbit#Lifestyle "Hobbit lifestyles">
 
 ---
 
