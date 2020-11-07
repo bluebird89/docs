@@ -1,4 +1,4 @@
-# [hashicorp / consul](https://github.com/hashicorp/consul)
+# [consul](https://github.com/hashicorp/consul)
 
 Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure. https://www.consul.io
 

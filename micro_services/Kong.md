@@ -1,4 +1,4 @@
-# [Kong/kong](https://github.com/Kong/kong)
+# [kong](https://github.com/Kong/kong)
 
 gorilla The Cloud-Native API Gateway & Service Mesh https://konghq.com
 

@@ -1,4 +1,4 @@
-# [emacs-mirror/emacs](https://github.com/emacs-mirror/emacs)
+# [emacs](https://github.com/emacs-mirror/emacs)
 
 ## 安装
 
@@ -13,6 +13,12 @@ sudo add-apt-repository ppa:kelleyk/emacs
 sudo apt update
 sudo apt install emacs26
 ```
+
+## 配置
+
+* [purcell/emacs.d](https://github.com/purcell/emacs.d):An Emacs configuration bundle with batteries included
+* [hlissner / doom-emacs](https://github.com/hlissner/doom-emacs):An Emacs configuration for the stubborn martian vimmer
+* 陈斌的 Emacs 配置 https://github.com/redguardtoo/emacs.d
 
 ### [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs)
 
@@ -46,11 +52,11 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
         ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
 ```
 
-## [ purcell / emacs.d ](https://github.com/purcell/emacs.d)
+## [purcell/emacs.d](https://github.com/purcell/emacs.d)
 
 An Emacs configuration bundle with batteries included
 
-```
+```sh
 sudo rm ~/.emacs.d/
 git clone https://github.com/purcell/emacs.d.git ~/.emacs.d
 ```
@@ -304,17 +310,13 @@ M-g                    设置字体
 
 ## 参考
 
-* [joaotavora/yasnippet](https://github.com/joaotavora/yasnippet):A template system for Emacs http://joaotavora.github.com/yasnippet/
-* Config
-    - [purcell/emacs.d](https://github.com/purcell/emacs.d):An Emacs configuration bundle with batteries included
-    - [hlissner / doom-emacs](https://github.com/hlissner/doom-emacs):An Emacs configuration for the stubborn martian vimmer
 * [emacs-tw/awesome-emacs](https://github.com/emacs-tw/awesome-emacs):A community driven list of useful Emacs packages, libraries and others.
+* [joaotavora/yasnippet](https://github.com/joaotavora/yasnippet):A template system for Emacs http://joaotavora.github.com/yasnippet/
 * [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust ❤️ Emacs
 * [abo-abo/hydra](https://github.com/abo-abo/hydra):make Emacs bindings that stick around
 * [Spacemacs Rocks](http://book.emacs-china.org/):用 21 天学习 Emacs 以及 Spacemacs 的使用
 
 * [redguardtoo / mastering-emacs-in-one-year-guide](https://github.com/redguardtoo/mastering-emacs-in-one-year-guide)Be great at emacs in one year
-* 陈斌的 Emacs 配置 https://github.com/redguardtoo/emacs.d
 
 * reddit 的 Emacs 频道，最前沿的 Emacs 技巧：https://www.reddit.com/r/emacs/
 * Emacs org-mode 的文档，从这个文档中你可以发现纯文本的魔力：https://orgmode.org/

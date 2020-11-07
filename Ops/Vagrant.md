@@ -1,4 +1,4 @@
-# [hashicorp/vagrant](https://github.com/hashicorp/vagrant)
+# [vagrant](https://github.com/hashicorp/vagrant)
 
 Vagrant is a tool for building and distributing development environments. https://www.vagrantup.com
 

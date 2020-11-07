@@ -386,8 +386,9 @@ def backtrack(路径, 选择列表):
 * 《大话数据结构》
 * 《剑指offer》
 * 编程珠玑
-* 《[算法导论（原书第2版)(Introduction to Algorithms）](https://www.amazon.cn/gp/product/B00AK7BYJY)》
+* 算法导论 Introduction to Algorithms
   - [huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms](huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms):《算法导论》第三版中算法的C++实现
+  - [](https://www.bilibili.com/video/av48922404)
 * 数论
 * [Algorithms, 4th Edition](https://algs4.cs.princeton.edu/home/)
 * [An Introduction to the Analysis of Algorithms](https://aofa.cs.princeton.edu/home/)
@@ -399,7 +400,7 @@ def backtrack(路径, 选择列表):
 * 《[数据结构与算法分析 : Java语言描述（第2版）](https://www.amazon.cn/gp/product/B01CNP0CG6)》
 * 《数据结构与算法 JavaScript 描述》
 * 算法图解
-* Algorithms to Live By
+* Algorithms to Live
 * [Analytic Combinatorics](https://ac.cs.princeton.edu/home/)
 * [ProblemSolvingwithAlgorithmsandDataStructures](https://www.cs.auckland.ac.nz/compsci105s1c/resources/ProblemSolvingwithAlgorithmsandDataStructures.pdf)
 

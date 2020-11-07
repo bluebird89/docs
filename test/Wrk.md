@@ -1,6 +1,6 @@
 # [Wrk](https://github.com/wg/wrk)
 
-一款针对 Http 协议的基准测试工具，它能够在单机多核 CPU 的条件下，使用系统自带的高性能 I/O 机制，如 epoll，kqueue 等，通过多线程和事件模式，对目标机器产生大量的负载。
+Modern HTTP benchmarking tool, 一款针对 Http 协议的基准测试工具，它能够在单机多核 CPU 的条件下，使用系统自带的高性能 I/O 机制，如 epoll，kqueue 等，通过多线程和事件模式，对目标机器产生大量的负载。
 
 * 轻量级性能测试工具;
 * 安装简单（相对 Apache ab 来说）;
@@ -15,6 +15,7 @@
 ```sh
 sudo apt-get install build-essential libssl-dev git -y
 git clone https://github.com/wg/wrk.git wrk
+git clone --depth=1 https://github.com/wg/wrk.git` `make` `sudo cp wrk /usr/local/bin
 cd wrk
 make
 # 将可执行文件移动到 /usr/local/bin 位置
@@ -53,4 +54,7 @@ Time arguments may include a time unit (2s, 2m, 2h)
 
 wrk -t12 -c400 -d30s http://www.baidu.com # 线程数为 12，模拟 400 个并发请求，持续 30 秒
 wrk -t12 -c400 -d30s --latency http://www.baidu.com # 生成如下压测报告
+
+
+wrk -t5 -c5 -d30s http://www.baidu.com
 ```

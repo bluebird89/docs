@@ -1,4 +1,4 @@
-# [istio/istio](https://github.com/istio/istio)
+# [istio](https://github.com/istio/istio)
 
 Connect, secure, control, and observe services. https://istio.io
 
@@ -156,11 +156,12 @@ istioctl manifest apply --set profile=demo
 ## 图书
 
 * [Istio 服务网格进阶实战](https://www.bookstack.cn/books/istio-handbook)
+  - [servicemesher/istio-handbook](https://github.com/servicemesher/istio-handbook):Istio Service Mesh Advanced Practical
+  - [Istio Handbook——Istio 服务网格进阶实战](https://www.servicemesher.com/istio-handbook/)
 * 《云原生服务网格 Istio：原理、实践、架构与源码解析》
 * 深入浅出Istio：Service Mesh快速入门与实践
 * Service Mesh实战：用Istio软负载实现服务网格
 * Istio 入门与实战
-* [servicemesher/istio-handbook](https://github.com/servicemesher/istio-handbook):Istio Service Mesh Advanced Practical [Istio Handbook——Istio 服务网格进阶实战](https://www.servicemesher.com/istio-handbook/)
 
 ## 工具
 
@@ -168,6 +169,5 @@ istioctl manifest apply --set profile=demo
 
 ## 参考
 
-* [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/)
 * [servicemesher / awesome-servicemesh](https://github.com/servicemesher/awesome-servicemesh/):Awesome service mesh - https://servicemesher.github.io/awesome-servicemesh/
 * [实例](https://istiobyexample.dev/)

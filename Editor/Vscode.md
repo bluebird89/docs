@@ -1,4 +1,4 @@
-# [Microsoft/vscode](https://github.com/Microsoft/vscode)
+# [vscode](https://github.com/Microsoft/vscode)
 
 Visual Studio Code <https://code.visualstudio.com>
 
@@ -80,6 +80,7 @@ sudo apt-get install code
 * Regex Previewer
 * Remote
 * Settings Sync
+    - [shanalikhan/code-settings-sync](https://github.com/shanalikhan/code-settings-sync):🌴💪 Synchronize your Visual Studio Code Settings Across Multiple Machines using Github GIST 💪🌴
 * snippets
 * Stylelint
 * Sublime Text Keymap and Settings Importer
@@ -316,25 +317,21 @@ code --disable-extensions . # disable all extensions
 
 ## [Set Up Remote Development Workflow With VS Code in Your Browser](https://hackernoon.com/how-you-can-set-up-remote-development-workflow-with-vs-code-in-your-browser-3y3q3wu9)
 
-* [ cdr / code-server ](https://github.com/cdr/code-server):VS Code in the browser https://coder.com
+* [cdr/code-server ](https://github.com/cdr/code-server):VS Code in the browser https://coder.com
 
 ## 扩展
 
-* [VSCodium/vscodium](https://github.com/VSCodium/vscodium):binary releases of VS Code without MS branding/telemetry/licensing
-
 * [viatsko/awesome-vscode](https://github.com/viatsko/awesome-vscode):A curated list of delightful VS Code packages and resources.
-* [Microsoft/vscode-tips-and-tricks](https://github.com/Microsoft/vscode-tips-and-tricks):Collection of helpful tips and tricks for VS Code.
 * [vscode-element-helper](https://github.com/ElemeFE/vscode-element-helper)
 * [keyboard-shortcuts-macos](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
-*
 * [octref/polacode](https://github.com/octref/polacode):📸 Polaroid for your code
-* [shanalikhan/code-settings-sync](https://github.com/shanalikhan/code-settings-sync):🌴💪 Synchronize your Visual Studio Code Settings Across Multiple Machines using Github GIST 💪🌴
 
 ## 工具
 
 * [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/
-* [eclipse-theia / theia](https://github.com/eclipse-theia/theia):Eclipse Theia is a cloud & desktop IDE framework implemented in TypeScript. http://theia-ide.org
+* [eclipse-theia/theia](https://github.com/eclipse-theia/theia):Eclipse Theia is a cloud & desktop IDE framework implemented in TypeScript. http://theia-ide.org
 
 ## 參考
 
 * [文檔](https://code.visualstudio.com/docs)
+* [Microsoft/vscode-tips-and-tricks](https://github.com/Microsoft/vscode-tips-and-tricks):Collection of helpful tips and tricks for VS Code.

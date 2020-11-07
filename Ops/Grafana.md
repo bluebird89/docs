@@ -1,4 +1,4 @@
-## [grafana/grafana](https://github.com/grafana/grafana)
+## [grafana](https://github.com/grafana/grafana)
 
 The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More https://grafana.com
 
@@ -39,7 +39,7 @@ group by time_sec
 
 * `/var/lib/grafana/plugins/` `/usr/local/var/lib/grafana/plugins`
 
-```SH
+```sh
 grafana-cli plugins install percona-percona-app
 ```
 

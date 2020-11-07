@@ -16,13 +16,13 @@ rsync is a file transfer program capable of efficient remote update via a fast d
 
 ```sh
 # Debian
-$ sudo apt-get install rsync
+sudo apt-get install rsync
 
 # Red Hat
-$ sudo yum install rsync
+sudo yum install rsync
 
 # Arch Linux
-$ sudo pacman -S rsync
+sudo pacman -S rsync
 ```
 
 ## 参数
@@ -341,4 +341,3 @@ done
 
 * [ncw/rclone](https://github.com/ncw/rclone):"rsync for cloud storage" - Google Drive, Amazon Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Cloudfiles, Google Cloud Storage, Yandex Files https://rclone.org
 * [rsync 用法教程](http://www.ruanyifeng.com/blog/2020/08/rsync.html)
-

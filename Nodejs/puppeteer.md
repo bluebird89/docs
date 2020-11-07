@@ -1,4 +1,4 @@
-# [GoogleChrome/puppeteer](https://github.com/GoogleChrome/puppeteer)
+# [puppeteer](https://github.com/GoogleChrome/puppeteer)
 
 Headless Chrome Node API https://pptr.dev
 

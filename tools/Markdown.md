@@ -54,12 +54,12 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 
 ## 强调 Emphasis
 
-**Example:**
-
 * Bold:command/control + b
 * Italic:command/control + i
 * Bold and italic
 * Strikethrough
+
+**Example:**
 
 ```
 *这些文字会生成`<em>`*
@@ -98,6 +98,8 @@ __This will also be bold__
 **This text is _extremely_ important**
 
 ~~This was mistaken text~~
+
+---
 
 ## 换行 Newlines
 
@@ -126,6 +128,8 @@ __This will also be bold__
 *****
 
 - - -
+
+---
 
 ## 列表 Lists
 
@@ -209,37 +213,24 @@ __This will also be bold__
 - [ ] task one not finish `- + SPACE + [ ]`
 - [x] task two finished `- + SPACE + [x]`
 
-##
-
 ---
 
 ## 图片 Images
 
 **Example:**
 
-格式: Format: ![Alt Text](url)
+格式: Format: `![Alt Text](url)`
 
-```
+```markdown
 ![GitHub set up](http://zh.mweb.im/asset/img/set-up-git.gif)
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
-
-* ![tully](../_static/tully.jpg)
-
-* 插入图片![有道云笔记logo](http://note.youdao.com/favicon.ico)
-
-* ![爱情](http://i.imgur.com/zjwDS9u.jpg)
+插入图片![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
 ```
 
 效果如下：**Result:**
 
 * ![GitHub set up](https://help.github.com/assets/images/site/set-up-git.gif)
-* ![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
-* ![tully](../_static/tully.jpg)
-* 插入图片![有道云笔记logo](http://note.youdao.com/favicon.ico)
-* ![爱情](http://i.imgur.com/zjwDS9u.jpg)
-
-##
+* 插入图片![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
 
 ---
 
@@ -248,20 +239,16 @@ __This will also be bold__
 **Example:**
 
 ```
-email <example@example.com>
+An email <example@example.com> link.
 自动生成连接  <http://www.github.com/>
-email <example@example.com>
-autolink  <http://www.github.com/>
 
 [GitHub](http://github.com)
 ```
 
 **Result:**
 
-* Email 连接： <example@example.com>
 * 自动生成连接像： <http://www.github.com/>
 * An email <example@example.com> link.
-* Automatic linking for URLs
 * Any URL (like <http://www.github.com/>) will be automatically converted into a clickable link.
 * [连接标题Github网站](http://github.com)
 * [another one with a title](http://lmgtfy.com/ "Hello, world")
@@ -270,11 +257,23 @@ autolink  <http://www.github.com/>
 
 ## Section links
 
-You can link directly to a section in a rendered file by hovering over the section heading to expose the link:
+You can link directly to a section in a rendered file by hovering over the section heading to expose the link
+
+**Example:**
+
+```markdown
+[列表 Lists](# 列表 Lists)
+```
+
+**Result:**
+
+[列表 Lists](# 列表 Lists)
+
+---
 
 ## Relative links
 
-[Contribution guidelines for this project](docs/CONTRIBUTING.md)
+[Contribution guidelines for this project](../TODO.md)
 
 ## 区块引用 Blockquotes/Quoting text
 
@@ -343,8 +342,6 @@ function fancyAlert(arg) {
     }
 }
 ```
-
-##
 
 ---
 
@@ -430,8 +427,6 @@ cond(yes)->io->e
 cond(no)->sub1(right)->op1
 ```
 
-##
-
 ---
 
 ## 表格 Tables
@@ -469,8 +464,6 @@ Content in the first column | Content in the second column
 | 1900 | -10               | 25                 |
 | 1910 | -15               | 30                 |
 | 1920 | -10               | 32                 |
-
-##
 
 ---
 

@@ -853,6 +853,7 @@ man 2 execve
 * [操作系统 - 清华大学](https://www.bilibili.com/video/BV1js411b7vg)
   - 搭配书《现代操作系统》
 * [操作系统 - 哈工大](https://www.bilibili.com/video/BV1d4411v7u7)
+* [《现代操作系统》](https://www.bilibili.com/video/av9555596)
 
 ## 工具
 

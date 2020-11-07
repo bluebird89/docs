@@ -20,7 +20,7 @@
 * [数蚁](https://teamyi.com)
 * [nextcloud/server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data https://nextcloud.com
   - `sudo -u www-data php occ maintenance:install --database "mysql" --database-name "henry" --database-user "nextcloud" --database-port:"33060" --database-pass "henry" --admin-user "admin" --admin-pass "admin"`
-* [Resilio](https://www.resilio.com/):在几台不同的设备之间同步文件,是一种分布式网盘  `config.getsync.com/sync.conf `
+* [Resilio](https://www.resilio.com/):在几台不同的设备之间同步文件,是一种分布式网盘 `config.getsync.com/sync.conf `
 * 建议
   - 40GB 空间以下选阿里云的 OSS
   - 40GB 以上可以对比下腾讯云的 COS
@@ -38,17 +38,17 @@
 
 ## 下载
 
-- [proxyee-down-org/proxyee-down](https://github.com/proxyee-down-org/proxyee-down):http下载工具，基于http代理，支持多连接分块下载
-- [webtorrent/webtorrent-desktop](https://github.com/webtorrent/webtorrent-desktop):❤️ Streaming torrent app for Mac, Windows, and Linux https://webtorrent.io/desktop
-- [agalwood/Motrix](https://github.com/agalwood/Motrix):A full-featured download manger. https://motrix.app/
-- [Downie](https://software.charliemonroe.net/downie/):YouTube Video Downloader for macOS - Charlie
-- [bundlehunt](https://bundlehunt.com/)
-- [盘下载器](https://www.baiduwp.com/)
-- [EagleGet](http://www.eagleget.com/cn/)
-- [agalwood / Motrix](https://github.com/agalwood/Motrix):A full-featured download manager. https://motrix.app/ 百度网盘直链提取和多线程下载
-- [Algram/ytdl-webserver](https://github.com/Algram/ytdl-webserver):📻 Webserver for downloading youtube videos. Ready for docker.
-- [Free Download Manager](https://www.freedownloadmanager.org/)
-- qBittorrent
+* [proxyee-down-org/proxyee-down](https://github.com/proxyee-down-org/proxyee-down):http下载工具，基于http代理，支持多连接分块下载
+* [webtorrent/webtorrent-desktop](https://github.com/webtorrent/webtorrent-desktop):❤️ Streaming torrent app for Mac, Windows, and Linux https://webtorrent.io/desktop
+* [agalwood/Motrix](https://github.com/agalwood/Motrix):A full-featured download manger. https://motrix.app/
+* [Downie](https://software.charliemonroe.net/downie/):YouTube Video Downloader for macOS - Charlie
+* [bundlehunt](https://bundlehunt.com/)
+* [盘下载器](https://www.baiduwp.com/)
+* [EagleGet](http://www.eagleget.com/cn/)
+* [agalwood / Motrix](https://github.com/agalwood/Motrix):A full-featured download manager. https://motrix.app/ 百度网盘直链提取和多线程下载
+* [Algram/ytdl-webserver](https://github.com/Algram/ytdl-webserver):📻 Webserver for downloading youtube videos. Ready for docker.
+* [Free Download Manager](https://www.freedownloadmanager.org/)
+* qBittorrent
   + `sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable`
   + `sudo apt-get update && sudo apt-get install qbittorrent`
   + 开启 UPnP / NAT-PMP 功能
@@ -57,10 +57,10 @@
     - https://torrents.io/tracker-list/
     - https://newtrackon.com/list
   * 连接 DHT 节点
-+ C-torrent:最简单的命令行torrent下载工具
-+ [utorrent](https://www.utorrent.com/intl/zh_cn/)
-+ [Transmission](https://transmissionbt.com/):  a cross-platform BitTorrent client
-+ IDM
+* C-torrent:最简单的命令行torrent下载工具
+* [utorrent](https://www.utorrent.com/intl/zh_cn/)
+* [Transmission](https://transmissionbt.com/):  a cross-platform BitTorrent client
+* IDM
 * axel:多线程下载工具，可下载独立文件片段，因而文件下载起来更快速 `sudo apt install axel`
 * [aria2](https://aria2.github.io/) a lightweight multi-protocol & multi-source command-line download utility It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink. aria2 can be manipulated via built-in JSON-RPC and XML-RPC interfaces.
   - `sudo apt install aria2`
@@ -78,18 +78,6 @@
 ## 传输
 
 * [](https://github.com/schollz/croc):Easily and securely send things from one computer to another 🐊 📦 https://schollz.com/software/croc6
-
-## wget
-
-*　参数
-    * -b :后台下载
-    * -o:
-    * -c:恢复下载
-
-```sh
-wget http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4
-wget --ftp-user=<user_name> --ftp-password=<Give_password> Download-url-address
-```
 
 ## md5 verdify
 

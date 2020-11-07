@@ -1,4 +1,4 @@
-# [koajs/koa](https://github.com/koajs/koa)
+# [koa](https://github.com/koajs/koa)
 
 Expressive middleware for node.js using ES2017 async functions <http://koajs.com>
 

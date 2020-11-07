@@ -1,9 +1,9 @@
-# [nodejs/node](https://github.com/nodejs/node)
+# [node](https://github.com/nodejs/node)
 
 Node.js JavaScript runtime ✨🐢🚀✨ <https://nodejs.org>
 
 * 因为JavaScript是单线程执行，根本不能进行同步IO操作，所以，JavaScript的这一“缺陷”导致了它只能使用异步IO
-* 2009年，Node.js 项目诞生，创始人为 Ryan Dahl，它标志着 JavaScript 可以用于服务器端编程，从此网站的前端和后端可以使用同一种语言开发
+* 2009年，Node.js 项目诞生，创始人为 Ryan Dahl，标志着 JavaScript 可以用于服务器端编程，从此网站的前端和后端可以使用同一种语言开发
 * 借助JavaScript天生的事件驱动机制加V8高性能引擎，使编写高性能Web服务轻而易举 Node.js ,其高性能并行I/O使得分布式开发更加高效，利用稳定接口可提升web渲染速度，也十分适合做实时应用开发
 
 ## 场景
@@ -83,16 +83,16 @@ nvm ls-remote           # list all the Node versions you can install
 nvm alias default node # set the installed stable version as the default Node
 ```
 
-### [npm (node package manager)](https://github.com/npm/npm)
+### [npm node package manager](https://github.com/npm/npm)
 
 a package manager for javascript <http://www.npmjs.com/>
 
-* Node的包描述文件是一个JSON文件，用于描述非代码相关的信息。而NPM则是一个根据包规范来提供Node服务的Node包管理器。它解决了依赖包安装的问题，却面临着两个新的问题：
-    - 安装的时候无法保证速度和一致性。
-    - 安全问题，因为NPM安装时允许运行代码。
-* 大家都把自己开发的模块打包后放到npm官网上，如果要使用，直接通过npm安装就可以直接用，不用管代码存在哪，应该从哪下载。
-* npm可以根据依赖关系，把所有依赖的包都下载下来并管理起来。
-* [ pnpm / pnpm ](https://github.com/pnpm/pnpm):packagerocket Fast, disk space efficient package manager https://pnpm.js.org
+* Node的包描述文件是一个JSON文件，用于描述非代码相关的信息。而NPM则是一个根据包规范来提供Node服务的Node包管理器。解决了依赖包安装的问题，却面临着两个新的问题：
+    - 安装的时候无法保证速度和一致性
+    - 安全问题，因为NPM安装时允许运行代码
+* 自己开发的模块打包后放到npm官网上，如果要使用，直接通过npm安装就可以直接用，不用管代码存在哪，应该从哪下载
+* npm可以根据依赖关系，把所有依赖的包都下载下来并管理起来
+* [pnpm](https://github.com/pnpm/pnpm):packagerocket Fast, disk space efficient package manager https://pnpm.js.org
 * Packages
     - [rlidwka/sinopia](https://github.com/rlidwka/sinopia):Private npm repository server
     - [request/request](https://github.com/request/request):🏊🏾 Simplified HTTP request client.
@@ -180,7 +180,7 @@ npm run dev
 npm run watch
 ```
 
-## [yarnpkg/yarn](https://github.com/yarnpkg/yarn)
+## [yarn](https://github.com/yarnpkg/yarn)
 
 Fast, reliable, and secure dependency management. <https://yarnpkg.com>
 
@@ -581,7 +581,7 @@ cluster模块，nodejs是单线程，不能充分利用多核cpu资源，因此�
 - 启多个进程，每个进程绑定不同的端口，主进程对外接受所有的网络请求，再将这些请求分别代理到不同的端口的进程上，通过代理可以避免端口不能重复监听的问题，甚至可以再代理进程上做适当的负载均衡，由于进程每接收到一个连接，将会用掉一个文件描述符，因此代理方案中客户端连接到代理进程，代理进程连接到工作进程的过程需要用掉两个文件描述符，操作系统的文件描述符是有限的，代理方案浪费掉一倍数量的文件描述符的做法影响了系统的扩展能力。
 - 父进程创建socket，并且bind、listen后，通过fork创建多个子进程，通过send方法给每个子进程传递这个socket，子进程调用accpet开始监听等待网络连接。
 
-```javascript
+```js
 // master.js
 var fork =require('child_process').fork;
 var cpus =require('os').cpus();
@@ -593,14 +593,14 @@ for(vari=0;i<cpus.length;i++){
 }
 
 // worker.js
-var http =require('http')
+var http =require('http');
 var server =http.createServer(function(req,res){
   res.writeHead(200, {'Content-Type':'text/plain'});
   res.end('handled by child, pid is ' +process.pid +'\n')
 })
 process.on('message',function(m,tcp){
-  if(m ==='server') {
-    tcp.on('connection',function(socket){
+  if(m === 'server') {
+    // tcp.on('connection', function(socket){
       server.emit('connection',socket);
     })
   }
@@ -635,7 +635,7 @@ var server =http.createServer(function(req,res){
   res.end('handled by child, pid is ' +process.pid +'\n')
 })
 process.on('message', function(socket){
-  if(m === 'server') {
+  // if(m === 'server') {
     server.emit('connection', socket)
   }
 })
@@ -645,7 +645,7 @@ process.on('message', function(socket){
 
 ### 集群稳定
 
-* 自动重启：我们在主进程上要加入一些子进程管理的机制，比如在一个子进程挂掉后，要重新启动一个子进程来继续服务.假设子进程中有未捕获异常发生；
+* 自动重启：在主进程上要加入一些子进程管理的机制，比如在一个子进程挂掉后，要重新启动一个子进程来继续服务.假设子进程中有未捕获异常发生
 
 ```js
 // worker.js
@@ -667,7 +667,7 @@ var other_work = {};
 var createWorker = function() {
 var worker = fork('./worker.js')
 // 退出时启动新的进程
-worker.on('exit',function(){
+// worker.on('exit',function(){
   console.log('worker ' +worker.pid +' exited.');
   delete other_work[worker.pid]
   createWorker();
@@ -794,16 +794,16 @@ ORM框架比Web框架要少一些：Sequelize，ORM2，Bookshelf.js，Objection.
 
 ### 实际服务器
 
-* nginx作为反向代理服务器，拥有诸多优势，可以做负载均衡和静态资源服务器。
-* 后面的两台机器就是我们的nodejs应用服务器集群。
-* nginx 的负载均衡是用在多机器环境下的，单机的负载均衡还是要靠cluster 这类模块来做。
+* nginx作为反向代理服务器，拥有诸多优势，可以做负载均衡和静态资源服务器
+* 后面的两台机器就是我们的nodejs应用服务器集群
+* nginx 的负载均衡是用在多机器环境下的，单机的负载均衡还是要靠cluster 这类模块来做
 * nginx与node应用服务器的对比：
 * nginx是一个高性能的反向代理服务器，要大量并且快速的转发请求，所以不能采用上面第三种方法，原因是仅有一个进程去accept，然后通过消息队列等同步方式使其他子进程处理这些新建的连接，效率会低一些。
 * nginx采用第二种方法，那就依然可能会产生负载不完全均衡和惊群问题。nginx是怎么解决的呢：
 * nginx中使用mutex互斥锁解决这个问题，具体措施有使用全局互斥锁，每个子进程在epoll_wait()之前先去申请锁，申请到则继续处理，获取不到则等待，并设置了一个负载均衡的算法（当某一个子进程的任务量达到总设置量的7/8时，则不会再尝试去申请锁）来均衡各个进程的任务量。具体的nginx如何解决惊群，看这篇文章: <http://blog.csdn.net/russell_tao/article/details/7204260>
 * node应用服务器为什么可以采用方案三呢，我的理解是：node作为具体的应该服务器负责实际处理用户的请求，处理可能包含数据库等操作，不是必须快速的接收大量请求，而且转发到某具体的node单台服务器上的请求较之nginx也少了很多。
 
-##  问题
+## 问题
 
 > node-sass
 
@@ -822,37 +822,27 @@ yarn install node-sass
 
 ## 教程
 
-* [](https://github.com/wangdoc/node-tutorial)
+* [Node.js 教程](https://github.com/wangdoc/node-tutorial)
 * [The Node Beginner Book](https://www.nodebeginner.org/index-zh-cn.html)
 * [ElemeFE/node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
-* [Chiara-yen/startLearningNodejs](https://github.com/Chiara-yen/startLearningNodejs):
+* [Chiara-yen/startLearningNodejs](https://github.com/Chiara-yen/startLearningNodejs)
 * [scotch-io/node-todo](https://github.com/scotch-io/node-todo):A simple Node/MongoDB/Angular todo app https://scotch.io/tutorials/creating-…
-* [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list. Curated from the top ranked articles and always updated
-* [nodejs](https://www.runoob.com/nodejs)
 * [alsotang/node-lessons](https://github.com/alsotang/node-lessons):📕《Node.js 包教不包会》 by alsotang
 * [node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
-* [nodejs入门](https://leanpub.com/nodebeginner-chinese)
 * [NodeJS的代码调试和性能调优](http://www.cnblogs.com/hustskyking/p/how-to-build-a-https-server.html)
-* [swbmw/node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
-* [Node.js v8.x 中文文档](https://www.nodeapp.cn/)
-* [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list (November 2018) https://twitter.com/nodepractices/
 
 ## 工具
 
 * main
-  - [nodesource/distributions](https://github.com/nodesource/distributions):NodeSource Node.js Binary Distributions
   - [Dist](http://nodejs.org/dist/)
   - [motdotla/dotenv](https://github.com/motdotla/dotenv):Loads environment variables from .env for nodejs projects.
 * 框架
     - [fastify/fastify](https://github.com/fastify/fastify) Fast and low overhead web framework, for Node.js https://www.fastify.io/
     - [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications
     - [balderdashy/sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js https://sailsjs.com
-    - [nestjs/nest](https://github.com/nestjs/nest):A progressive Node.js framework for building efficient, scalable, and enterprise-grade server-side applications on top of TypeScript & JavaScript (ES6, ES7, ES8) rocket https://nestjs.com/
     - [NodeBB/NodeBB](https://github.com/NodeBB/NodeBB):Node.js based forum software built for the modern web https://nodebb.org
 * Compiler
   - [zeit/ncc](https://github.com/zeit/ncc):Node.js Compiler Collection
-* Weibo
-  - [node-modules/weibo](https://github.com/node-modules/weibo):weibo nodejs sdk http://github.com/fengmk2/node-weibo
 * 缓存
   - [isaacs/node-lru-cache](https://github.com/isaacs/node-lru-cache)
 * Error
@@ -902,7 +892,6 @@ yarn install node-sass
   - [ mcollina / autocannon ](https://github.com/mcollina/autocannon):fast HTTP/1.1 benchmarking tool written in Node.js
   - [ octalmage / robotjs ](https://github.com/octalmage/robotjs):Node.js Desktop Automation. http://robotjs.io/
   - [Marak/faker.js](https://github.com/Marak/faker.js):generate massive amounts of realistic fake data in Node.js and the browser
-* [Unitech / pm2](https://github.com/Unitech/pm2):Node.js Production Process Manager with a built-in Load Balancer. https://pm2.io
 * date
     - [](https://github.com/date-fns/date-fns): hourglass_flowing_sand Modern JavaScript date utility library hourglass
 * [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
@@ -913,5 +902,7 @@ yarn install node-sass
 ## reference
 
 * [Guides](https://nodejs.org/en/docs/guides/)
+* [Node.js v8.x 中文文档](https://www.nodeapp.cn/)
 * [Node.js v11.6.0 Documentation](https://nodejs.org/api/)
 * [goldbergyoni/nodebestpractices](https://github.com/goldbergyoni/nodebestpractices):white_check_mark The largest Node.js best practices list (September 2019) https://twitter.com/nodepractices/
+* [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list. Curated from the top ranked articles and always updated

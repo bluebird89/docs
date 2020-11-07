@@ -29,7 +29,7 @@
   - 重启运行
 * [ubuntudde](https://ubuntudde.com):Powerful Ubuntu with the most beautiful desktop environment.
 * grub
-  - [Tela grub theme ](https://www.gnome-look.org/p/1307852/)
+  - [Tela grub theme](https://www.gnome-look.org/p/1307852/)
 * 工具
   - [Etcher](https://www.balena.io/etcher/)
 

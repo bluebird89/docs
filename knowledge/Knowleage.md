@@ -70,15 +70,6 @@
   - 及时有效的反馈
 * 练习的心态
 
-## VR Virtual Reality 虚拟现实技术
-
-* 一种可以创建和体验虚拟世界的计算机仿真系统，它利用计算机生成一种模拟环境，是一种多源信息融合的、交互式的三维动态视景和实体行为的系统仿真使用户沉浸到该环境中。
-* 多种技术的综合，包括实时三维计算机图形技术，广角（宽视野）立体显示技术，对观察者头、眼和手的跟踪技术，以及触觉/力觉反馈、立体声、网络传输、语音输入输出技术等。
-
-## AR Augmented Reality
-
-一种实时地计算摄影机影像的位置及角度并加上相应图像、视频、3D模型的技术，这种技术的目标是在屏幕上把虚拟世界套在现实世界并进行互动
-
 ## 葡萄酒
 
 * 风土
@@ -199,7 +190,7 @@
   - 每个乱流中都藏着新概念，乱流的终点不可测，但不逐流，便意味死亡。没人愿意像曾经的诺基亚，失败后仍委屈不解：我们并没有做错什么，但不知为什么，我们输了。 张小龙说，他两个月就对认知迭代一次。微信的每个版本该做什么，都是等上个版本发布之后才确定的；我们不可能知道半年后的产品形态，规划都是骗人的。适应认知飞迭，或许便是这个时代，我们的天赋，或者宿命。
   - 《人类简史》中写道，虽然哥伦布发现了美洲大陆，但他的认知并未迭代。直到死前，他都认为他来到了印度，而不是《圣经》中从未提及的新大陆。 当你以为一切约定俗成，便会与新世界擦肩而过。
 
-## 扑克（Poker)
+## 扑克 Poker
 
 * 花色分别为黑桃♠（spade，又名葵扇）、红心♥（heart，又名红桃）、梅花♣（club，又名草花）、方块♦（diamond，又名阶砖或方片，川渝地区称为"巴片"）
 * 扑克牌54张，表示一年有52个星期，两张副牌大猫代表太阳，小猫代表月亮；
@@ -229,20 +220,20 @@
 
 ## 缩略语
 
-- GIYF: Google Is Your Friend, 请自己去谷歌
-- IIRC: If I Recall Correctly, 如果我记得没错的话
-- IMHO: In My Humble Opinion, 依我愚见
-- IMO: In My Opinion, 依我之见
-- LGTM: Looks Good To Me, 在我看起来还不错
-- LMGTFY: Let Me Google That For You, 让我为你谷歌一下（意思是问题太简单)
-- PR: Pull Request, 合并请求
-- RFC: Request For Comment, 征求意见
-- RTFM: Read The Fucking Manual, 请读文档
-- STFW: Search The Fucking Web, 自己去网上搜索
-- TIL: Today I Learned, 今天又学到了新知识
-- TL;DR: Too Long, Don’t Read，总结起来，就是
-- WIP: Work In Progress，未完成，还在进行中
-- WYSIWYG: What You See Is What You Get, 所见即所得
+* GIYF: Google Is Your Friend, 请自己去谷歌
+* IIRC: If I Recall Correctly, 如果我记得没错的话
+* IMHO: In My Humble Opinion, 依我愚见
+* IMO: In My Opinion, 依我之见
+* LGTM: Looks Good To Me, 在我看起来还不错
+* LMGTFY: Let Me Google That For You, 让我为你谷歌一下（意思是问题太简单)
+* PR: Pull Request, 合并请求
+* RFC: Request For Comment, 征求意见
+* RTFM: Read The Fucking Manual, 请读文档
+* STFW: Search The Fucking Web, 自己去网上搜索
+* TIL: Today I Learned, 今天又学到了新知识
+* TL;DR: Too Long, Don’t Read，总结起来，就是
+* WIP: Work In Progress，未完成，还在进行中
+* WYSIWYG: What You See Is What You Get, 所见即所得
 
 ## 工具
 

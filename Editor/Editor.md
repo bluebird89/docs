@@ -8,13 +8,12 @@
 * [zyedidia/micro](https://github.com/zyedidia/micro):A modern and intuitive terminal-based text editor https://micro-editor.github.io
 * [Ghost 2.0](https://blog.ghost.org/2-0/):A powerful new editor, multi-language support, custom homepages, dynamic routes, custom structures and much more
     - [Etherpad](http://etherpad.org/):老牌的多人实时编辑协同工具
-*  WebStorm
 *  Brackets
 * [Atom](./Atom.md)
 * [asciidoctor/asciidoctor](https://github.com/asciidoctor/asciidoctor):gem A fast, open source text processor and publishing toolchain, written in Ruby, for converting AsciiDoc content to HTML5, DocBook 5 (or 4.5) and other formats. https://asciidoctor.org
 * [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
-* [textmate/textmate](https://github.com/textmate/textmate):TextMate is a graphical text editor for macOS 10.10 or later https://macromates.com/
 * [Kate](https://kate-editor.org/):Get an Edge in Editing
+* [VSCodium/vscodium](https://github.com/VSCodium/vscodium):binary releases of VS Code without MS branding/telemetry/licensing
 
 ### EditPlus
 

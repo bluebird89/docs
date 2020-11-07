@@ -133,12 +133,10 @@ systemctl restart sshd
     - bin/vctl 这是一个在前台运行的命令行实用程序，它可以将用户输入转发到 containerd 守护进程，和 containerd 进程进行交互，类似于 crictl 的功能。
 * 启动 Containerd：
 
-
-
 ## 工具
 
 * Mac
     - Parallels Desktop
     - GNOME Boxes
-* [ myspaghetti / macos-virtualbox ](https://github.com/myspaghetti/macos-virtualbox):Push-button installer of macOS Catalina, Mojave, and High Sierra guests in Virtualbox for Windows, Linux, and macOS
+* [macos-virtualbox ](https://github.com/myspaghetti/macos-virtualbox):Push-button installer of macOS Catalina, Mojave, and High Sierra guests in Virtualbox for Windows, Linux, and macOS
 * [bottlerocket](https://github.com/bottlerocket-os/bottlerocket):An operating system designed for hosting containers

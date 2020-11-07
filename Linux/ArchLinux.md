@@ -7,7 +7,7 @@
     - EFI引导+GPT分区表（较新）
     - BIOS(LEGACY)引导+MBR分区表
 
-`````sh
+```sh
 # 验证启动模式来判断主板是以何种方式引导系统
 ls /sys/firmware/efi/efivars # 目录不存在，系统就可能以BIOS模式启动
 
@@ -25,8 +25,8 @@ timedatectl set-ntp true # 开启ntp服务，它会每隔11分钟进行一次网
 lsblk
 # 分区
 
-## 一个根分区（挂载在根目录）  /  
-## 如果 UEFI 模式被启用，你还需要一个 EFI 系统分区（512M） EFI分区需要FAT32文件格式 
+## 一个根分区（挂载在根目录）  /
+## 如果 UEFI 模式被启用，你还需要一个 EFI 系统分区（512M） EFI分区需要FAT32文件格式
 ## Swap 可以在一个独立的分区上设置，也可以直接建立 交换文件
 
 # BIOS/MBR方式引导，跳过下面创建一个引导分区的步骤
@@ -73,7 +73,7 @@ hwclock --systohc --utc # 设置时间标准为UTC，并调整时间漂移
 pacman -S vim dialog wpa_supplicant ntfs-3g networkmanager
 
 # 设置主机名 并添加到/etc/hosts
-echo archlinux >/etc/hostname 
+echo archlinux >/etc/hostname
 127.0.0.1   localhost.localdomain   localhost archlinux
 ::1     localhost.localdomain   localhost archlinux
 

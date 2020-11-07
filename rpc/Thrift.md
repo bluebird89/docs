@@ -1,7 +1,7 @@
-# [thrift](http://thrift.apache.org)
+# [thrift](https://github.com/apache/thrift)
 
-for scalable cross-language services development, combines a software stack with a code generation engine to build services that work efficiently and seamlessly between C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml and Delphi and other languages.
-
+* a lightweight, language-independent software stack with an associated code generation mechanism for RPC http://thrift.apache.org
+* for scalable cross-language services development, combines a software stack with a code generation engine to build services that work efficiently and seamlessly between C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml and Delphi and other languages.
 
 * 能够选择传输协议，包括原始 TCP 和 HTTP
     - 原始 TCP 比 HTTP 更高效，然而 HTTP 对于防火墙、浏览器和使用者来说更友好
@@ -39,7 +39,6 @@ for scalable cross-language services development, combines a software stack with
     - 采用管理服务实例注册的其它系统组件，即第三方注册模式
     - 方法一把服务实例和服务注册表耦合，必须在每个编程语言和框架内实现注册代码。但是在自己实现完整微服务架构中，考虑到PaaS平台下微服务模块的动态部署和扩展，采用方法1相当来说更加容易实现。但是方法1仍然不能代替服务注册库本身应该具备的服务节点的心跳检测能力
 
-
 ## Install
 
 * [Boost](https://dl.bintray.com/boostorg/release/1.70.0/source/boost_1_70_0.7z)
@@ -61,7 +60,7 @@ sudo make install
 ./configure --prefix=/usr/local/ --with-boost=/usr/local --with-libevent=/usr/local
 ```
 
-## 数据类型：
+## 数据类型
 
 * 基本
     - bool: 布尔类型(true / false)
@@ -74,7 +73,8 @@ sudo make install
     - map<t1,t2> 键值对
     - list<t1> 列表
     - set<t1> 集合
-```language
+
+```
 # 结构：
 struct User {
 1: i32 uid,

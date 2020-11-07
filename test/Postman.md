@@ -163,6 +163,6 @@ tests["Valid Data2"] = tv4.validate(data2, schema);
 
 - [Postman API Network](https://www.getpostman.com/api-network/)
 - [postman](http://lucia.xicp.cn/2016/05/21/test/postman%E7%AC%94%E8%AE%B0/)
-- 研究自带实例Postman Echo collection
+- 研究自带实例 Postman Echo collection
 - Postman Interceptor
 

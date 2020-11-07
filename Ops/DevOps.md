@@ -197,8 +197,6 @@
 ## 持续运维
 
 * 目的是使发布的应用程序和后续更新的过程自动化。持续运维中的开发周期更短，从而使开发人员能够不断加快该应用程序的上市时间
-
-
 * Configuration Management:统一使用 Kubernetes 提供的 configmap 和 secret 资源对象来实现，对于一般的应用配置使用 configmap 管理，对于敏感数据使用 secret 存储
   - [Vault](link):Manage Secrets and Protect Sensitive Data
     + [Get started](https://learn.hashicorp.com/vault)
@@ -372,11 +370,9 @@ script: phpunit -v
 * [IOTop](link) 实时监控磁盘
 * IPtraf 是一个运行在 Linux 下的简单的网络状况分析工具
 * iftop 是类似于 linux 下面 top 的实时流量监控工具。比 iptraf 直观些
-* HTop 是一个 Linux 下的交互式的进程浏览器可以用来替换 Linux 下的 top 命令
 * [NMON](http://sourceforge.jp/projects/sfnet_nmon/releases/) 是一种在 AIX 与各种 Linux 操作系统上广泛使用的监控与分析工具
 * MultiTail 是在控制台打开多个窗口用来实现同时监控多个日志文档、类似 tail 命令的功能的软件
 * [Fail2ban](http://www.fail2ban.org/wiki/index.php/Downloads) 可以监视你的系统日志然后匹配日志的错误信息正则式匹配执行相应的屏蔽动作一般情况下是调用防火墙屏蔽
-* Tmux 是一个优秀的终端复用软件类似 GNU Screen 比 Screen 更加方面、灵活和高效。为了确保连接 SSH 时掉线不影响任务运行
 * [Agedu](http://www.chiark.greenend.org.uk/~sgtatham/agedu/):页面显示磁盘空间使用情况
 * [NMap](http://nmap.org/download.html)是 Linux 下的网络连接扫描和嗅探工具包用来扫描网上电脑开放的网络连接端。
 * [Httperf](http://code.google.com/p/httperf/downloads/list) 比 ab 更强大，能测试出 web 服务能承载的最大服务量及发现潜在问题；比如：内存使用、稳定性。最大优势：可以指定规律进行压力测试，模拟真实环境。
@@ -384,7 +380,6 @@ script: phpunit -v
   - [demo](http://demo.opendevops.cn) 用户：demo 密码：2ZbFYNv9WibWcR7GB6kcEY
 * [Tencent/bk-ci](https://github.com/Tencent/bk-ci):蓝鲸CI平台(BlueKing CI) https://bk.tencent.com
 * [theonedev / onedev](https://github.com/theonedev/onedev):Super Easy All-In-One DevOps Platform
-* [Semantic Versioning](https://semver.org/)
 * [TeamCity](https://www.jetbrains.com/teamcity/)
 * [danger/danger-js](https://github.com/danger/danger-js):⚠️ Stop saying "you forgot to …" in code review http://danger.systems/js/
 
@@ -393,3 +388,4 @@ script: phpunit -v
 * [liquanzhou/ops_doc](https://github.com/liquanzhou/ops_doc):运维简洁实用手册
 * [digitalocean tutorials](https://www.digitalocean.com/community/tutorials)
 * [18F/development-guide](https://github.com/18F/development-guide):A set of guidelines and best practices for an awesome engineering team
+* [Semantic Versioning](https://semver.org/)

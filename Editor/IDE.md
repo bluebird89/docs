@@ -368,8 +368,6 @@ fs.inotify.max_user_watches = 524288
 ## 工具
 
 * [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/
-* [cdoco/jetbrains-license-server](https://github.com/cdoco/jetbrains-license-server):已废弃
-* [激活](https://www.jianshu.com/p/133af2e4fe3f): 修改host 0.0.0.0 account.jetbrains.com  去http://idea.lanyus.com/ 生存激活码
 * [LightTable/LightTable](https://github.com/LightTable/LightTable):The Light Table IDE ⛺ http://www.lighttable.com
 * [申请免费使用](https://www.jetbrains.com/shop/eform/opensource?product=ALL)
 * [ChrisRM/material-theme-jetbrains](https://github.com/ChrisRM/material-theme-jetbrains#installation):JetBrains theme of Material Theme
