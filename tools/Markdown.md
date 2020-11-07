@@ -534,6 +534,8 @@ Here's a simple footnote,[^1] and here's a longer one.[^bignote]
 
 这是一个脚注：[^sample_footnote]
 
+[^sample_footnote]: 这里是脚注信息
+
 Here's a simple footnote,[^1] and here's a longer one.[^bignote]
 
 [^1]: This is the first footnote.
@@ -820,5 +822,3 @@ Let's rename *our-new-project* to \*our-old-project\*.
 * [js-sequence-diagrams](https://bramp.github.io/js-sequence-diagrams/):Turns text into UML sequence diagrams
 * [flowchart.js](http://adrai.github.io/flowchart.js/):Draws simple SVG flow chart diagrams from textual representation of the diagram
 * [adam-p/markdown-here](https://github.com/adam-p/markdown-here):Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. http://markdown-here.com
-
-[^sample_footnote]: 这里是脚注信息
