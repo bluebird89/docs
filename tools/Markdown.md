@@ -26,7 +26,7 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 
 **Example:**
 
-```
+```markdown
 # 第一级标题 `<h1>`
 ## 第二级标题 `<h2>`
 ###### 第六级标题 `<h6>`
@@ -34,6 +34,12 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 # This is an `<h1>` tag
 ## This is an `<h2>` tag
 ###### This is an `<h6>` tag
+
+这是一个一级标题
+============================
+这是一个二级标题
+--------------------------------------------------
+### 这是一个三级标题
 ```
 
 **Result:**
@@ -50,6 +56,12 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 
 ###### This is an `<h6>` tag
 
+这是一个一级标题
+============================
+这是一个二级标题
+--------------------------------------------------
+### 这是一个三级标题
+
 ---
 
 ## 强调 Emphasis
@@ -58,10 +70,11 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 * Italic:command/control + i
 * Bold and italic
 * Strikethrough
+* [font-awesome](http://fortawesome.github.io/Font-Awesome/3.2.1/icons/)
 
 **Example:**
 
-```
+```markdown
 *这些文字会生成`<em>`*
 _这些文字会生成`<u>`_
 
@@ -78,6 +91,9 @@ __This will also be bold__
 **This text is _extremely_ important**
 
 ~~This was mistaken text~~
+
+<!-- 显示icon -->
+<i class="icon-file"></i> **新文稿**
 ```
 
 **Result:**
@@ -99,6 +115,8 @@ __This will also be bold__
 
 ~~This was mistaken text~~
 
+<i class="icon-file"></i> **新文稿**
+
 ---
 
 ## 换行 Newlines
@@ -113,7 +131,7 @@ __This will also be bold__
 
 三种方式：
 
-```
+```markdown
 ***
 
 *****
@@ -139,7 +157,7 @@ __This will also be bold__
 
 **Example:**
 
-```
+```markdown
 * 项目一 无序列表 `* + 空格键`
 * 项目二
     * 项目二的子项目一 无序列表 `TAB + * + 空格键`
@@ -179,7 +197,7 @@ __This will also be bold__
 
 **Example:**
 
-```
+```markdown
 1. Item 1 ordered list `Number + . + SPACE`
 2. Item 2
 3. Item 3
@@ -201,7 +219,7 @@ __This will also be bold__
 
 **Example:**
 
-```
+```markdown
 - [ ] 任务一 未做任务 `- + 空格 + [ ]`
 - [x] 任务二 已做任务 `- + 空格 + [x]`
 - [ ] task one not finish `- + SPACE + [ ]`
@@ -240,7 +258,7 @@ __This will also be bold__
 
 **Example:**
 
-```
+```markdown
 An email <example@example.com> link.
 自动生成连接  <http://www.github.com/>
 
@@ -285,7 +303,7 @@ You can link directly to a section in a rendered file by hovering over the secti
 
 **Example:**
 
-```
+```markdown
 某某说:
 > 第一行引用
 > 第二行费用文字
@@ -328,7 +346,7 @@ As Kanye West said:
 
 **Example:**
 
-```
+```markdown
 像这样即可：`<addr>` `code`
 I think you should use an `<addr>` `code` element here instead.
 ```
@@ -371,7 +389,7 @@ function fancyAlert(arg) {
 
 **Example:**
 
-```
+```markdown
 | Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
 | col 3 is      | right-aligned | $1600 |
@@ -401,13 +419,39 @@ function fancyAlert(arg) {
 
 ---
 
+## Html 标签
+
+在 Markdown 语法中嵌套 Html 标签
+
+<table>
+    <tr>
+        <th rowspan="2">值班人员</th>
+        <th>星期一</th>
+        <th>星期二</th>
+        <th>星期三</th>
+    </tr>
+    <tr>
+        <td>李强</td>
+        <td>张明</td>
+        <td>王平</td>
+    </tr>
+</table>
+
+---
+
+## 标签
+
+标签： 数学 英语 Markdown
+Tags： 数学 英语 Markdown
+
 ## MathJax LaTex github不支持
 
-Use double US dollars sign pair for Block level Math formula, and one US dollar sign pair for Inline Level.
+Use double US dollars sign pair for Block level Math formula
+one US dollar sign pair for Inline Level.
 
 语法：
 
-```
+```markdown
 块级公式： Block level
 $$  x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
 
@@ -441,15 +485,13 @@ For example this is a Block level $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$ formu
 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
 {1+\frac{e^{-8\pi}} {1+\ldots} } } } \\]
 
-书写一个质能守恒公式[^LaTeX] $$E=mc^2$$
-
 ---
 
-## 脚注 Footnote github不支持
+## 脚注｜角标 Footnote github不支持
 
 语法：
 
-```
+```markdown
 这是一个脚注：[^sample_footnote]
 This is a footnote:[^sample_footnote]
 ```
@@ -474,7 +516,7 @@ Insert `[ TOC ]` without spaces to generate a table of contents (builtin parsers
 
 **Example:**
 
-```
+```markdown
 [TOC]
 ```
 
@@ -488,13 +530,7 @@ Insert `[ TOC ]` without spaces to generate a table of contents (builtin parsers
 
 **Example:**
 
-```sequence
-张三->李四: 嘿，小四儿, 写博客了没?
-Note right of 李四: 李四愣了一下，说：
-李四-->张三: 忙得吐血，哪有时间写。
-```
-
-```seq
+```markdown
 Alice->Bob: Hello Bob, how are you?
 Note right of Bob: Bob thinks
 Bob-->Alice: I am good thanks!
@@ -506,6 +542,8 @@ Note right of China: China thinks about it
 China-->Andrew: How are you?
 Andrew->>China: I am good thanks!
 ```
+
+更多语法参考：[序列图语法参考](http://bramp.github.io/js-sequence-diagrams/)
 
 ## [流程图 Flow chart](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图) github不支持
 
@@ -541,17 +579,6 @@ a-->b
 ```
 
 ```flow
-st=>start: 开始
-e=>end: 结束
-op=>operation: 我的操作
-cond=>condition: 确认？
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-
-```flow
 st=>start: Start:>http://www.google.com[blank]
 e=>end:>http://www.google.com
 op1=>operation: My Operation
@@ -565,12 +592,13 @@ cond(yes)->io->e
 cond(no)->sub1(right)->op1
 ```
 
+更多语法参考：[流程图语法参考](http://adrai.github.io/flowchart.js/)
+
 ---
 
 ## 甘特图
 
-```
-gantt
+```gantt
     dateFormat YYYY-MM-DD
     title 计划进度表
 
@@ -580,6 +608,46 @@ gantt
     问卷确定:done,des3,after des2,3d
     报告提交:active，des4，2015-06-26，5d
 ```
+
+```gantt
+    title 项目开发流程
+    section 项目确定
+        需求分析       :a1, 2016-06-22, 3d
+        可行性报告     :after a1, 5d
+        概念验证       : 5d
+    section 项目实施
+        概要设计      :2016-07-05  , 5d
+        详细设计      :2016-07-08, 10d
+        编码          :2016-07-15, 10d
+        测试          :2016-07-22, 5d
+    section 发布验收
+        发布: 2d
+        验收: 3d
+```
+
+更多语法参考：[甘特图语法参考](https://knsv.github.io/mermaid/#gant-diagrams)
+
+## Mermaid 流程图
+
+```graphLR
+    A[Hard edge] -->|Link text| B(Round edge)
+    B --> C{Decision}
+    C -->|One| D[Result one]
+    C -->|Two| E[Result two]
+```
+
+更多语法参考：[Mermaid 流程图语法参考](https://knsv.github.io/mermaid/#flowcharts-basic-syntax)
+
+## Mermaid 序列图
+
+```sequence
+    Alice->John: Hello John, how are you?
+    loop every minute
+        John-->Alice: Great!
+    end
+```
+
+[Mermaid 序列图语法参考](https://knsv.github.io/mermaid/#sequence-diagrams)
 
 ### Mentioning people and teams
 
@@ -607,35 +675,35 @@ You can tell GitHub to ignore (or escape) Markdown formatting by using \ before 
 
 Let's rename *our-new-project* to \*our-old-project\*.
 
-[1]: https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown
-[2]: https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#cmd-markdown-高阶语法手册
-[3]: http://weibo.com/ghosert
-[4]: http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference
-[emoji]: http://www.emoji-cheat-sheet.com/
-[gfm]: https://help.github.com/articles/github-flavored-markdown/
-[markdownpreview]: https://github.com/revolunet/sublimetext-markdown-preview
-[markdownref]: http://daringfireball.net/projects/markdown/basics
-[ref1]: http://revolunet.com
-[ref2]: http://revolunet.com "rich web apps"
-[revolunet]: http://revolunet.com
-[revolunet-logo]: http://www.revolunet.com/static/parisjs8/img/logo-revolunet-carre.jpg "revolunet logo"
-[st]: http://sublimetext.com
+[^1]: https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown
+[^2]: https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#cmd-markdown-高阶语法手册
+[^3]: http://weibo.com/ghosert
+[^4]: http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference
+[^emoji]: http://www.emoji-cheat-sheet.com/
+[^gfm]: https://help.github.com/articles/github-flavored-markdown/
+[^markdownpreview]: https://github.com/revolunet/sublimetext-markdown-preview
+[^markdownref]: http://daringfireball.net/projects/markdown/basics
+[^ref1]: http://revolunet.com
+[^ref2]: http://revolunet.com "rich web apps"
+[^revolunet]: http://revolunet.com
+[^revolunet-logo]: http://www.revolunet.com/static/parisjs8/img/logo-revolunet-carre.jpg "revolunet logo"
+[^st]: http://sublimetext.com
 
 #### 快捷键 **Shortcuts:**
 
-* `CMD + 4` 或 `CMD + R` 预览才可以看效果
-* `Control + Shift + I` 可插入图片
-* `Control + Shift + L` 可插入链接
+* `CMD + 4` 或 `CMD + R` 预览效果
+* `Control + Shift + I` 插入图片
+* `Control + Shift + L` 插入链接
 * `Option + U` 无序列表
 * `CMD + Shift + B` 可插入区块引用区块引用
-* `CMD + K` 可插入行内代码
+* `CMD + K` 插入行内代码
 * `CMD + Shift + K` 多行或者一段代码
 * `CMD + U`、`CMD + I`、`CMD + B` 强调
-* `CMD + 1` 是在仅编辑器模式和三栏模式中切换。
-* `CMD + 2` 是在二栏模式和仅编辑器模式中切换。
-* `CMD + 3` 是在三栏模式和仅编辑器模式中切换。
-* `CMD + 4` 是在编辑器/预览模式和三栏模式中切换。
-* `CMD + R` 是在编辑器和预览模式中切换。
+* `CMD + 1` 在仅编辑器模式和三栏模式中切换
+* `CMD + 2` 在二栏模式和仅编辑器模式中切换
+* `CMD + 3` 在三栏模式和仅编辑器模式中切换
+* `CMD + 4` 在编辑器/预览模式和三栏模式中切换
+* `CMD + R` 在编辑器和预览模式中切换
 
 ## 编辑器
 
@@ -643,12 +711,12 @@ Let's rename *our-new-project* to \*our-old-project\*.
   - `sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE` `wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -`
   - `sudo add-apt-repository 'deb https://typora.io/linux ./'`
   - `sudo apt-get install typora`
-  - PicGo 是一款免费的图床管理应用，支持拖拽上传，剪切板上传等方式。你可以用它快捷地将图片上传到图床并获得网络链接。
+  - PicGo 一款免费的图床管理应用，支持拖拽上传，剪切板上传等方式。可以用它快捷地将图片上传到图床并获得网络链接
 * [marktext](https://github.com/marktext/marktext):📝A simple and elegant markdown editor, available for Linux, macOS and Windows. https://marktext.app
 * [trilium](https://github.com/zadam/trilium):Build your personal knowledge base with Trilium Notes
 * [Haroopad](http://pad.haroopress.com/user.html):a markdown enabled document processor for creating web-friendly documents
 * [notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. https://notable.app/
-* [Cmd Markdown](https://www.zybuluo.com/cmd/):网页版
+* [Cmd Markdown](https://www.zybuluo.com/cmd/) 开启卓越写作之旅
 * Mac
   - [Mou](http://25.io/mou/):Markdown editor for developers.
   - [Bear](https://bear.app/):Write beautifully on iPhone, iPad, and Mac
