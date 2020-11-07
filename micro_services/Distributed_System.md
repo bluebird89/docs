@@ -1,82 +1,30 @@
 # 分布式系统
 
-理论基础有CAP、BASE等。针对一致性，有特别多的算法，其中Raft作为易懂的新贵
-
+* 分布式是将一个完整的系统，按照业务功能拆分成一个个独立的子系统，这些服务之间使用更高效的通信协议比如RPC来完成调度，各个子服务就像在一台机器上一样，实现了业务解耦，同时提高了并发能力
 * 连接管理与业务处理拆分
-
 * 业务处理从功能角度拆分
-
 * 场景
-
   - 分布式存储
   - 分布式计算
-
 * 一批物理不相邻的计算机组合起来共同对外提供服务
-
 * 集群化:集群中的N台机器上部署一样的程序，就像一台机器被复制多份一样
-
-* 分布式是将一个完整的系统，按照业务功能拆分成一个个独立的子系统，这些服务之间使用更高效的通信协议比如RPC来完成调度，各个子服务就像在一台机器上一样，实现了业务解耦，同时提高了并发能力
-
 * 数据复制与一致性
-
-* CAP理论， BASE原则，幂等性, 2PC, TCC
-
-* Paxos , Raft , Gossip
-
 * 数据分片和路由
-
 * Hash分片：Hash取模（实际中非常常见的算法）， 虚拟桶（Redis使用），一致性Hash（memcached使用）
-
 * 范围分片
 
-## 指标
+## CAP 定理
 
-1998年，加州大学的计算机科学家 Eric Brewer 提出，分布式系统有三个指标。Eric Brewer 说，这三个指标不可能同时做到。这个结论就叫做 CAP 定理。
+1998年，加州大学的计算机科学家 Eric Brewer 提出，分布式系统有三个指标，这三个指标不可能同时做到
 
-* 可用性Consistency：只要收到用户的请求，服务器就必须给出回应
-* 一致性Availability：写操作之后的读操作，必须返回该值
-* 分区容错Partition tolerance：大多数分布式系统都分布在多个子网络。每个子网络就叫做一个区（partition）。区间通信可能失败。
+* Consistency（一致性）：在分布式系统中的所有数据备份，在同一时刻是否同样的值。（等同于所有节点访问同一份最新的数据副本）
+* Availability（可用性）：在集群中一部分节点故障后，集群整体是否还能响应客户端的读写请求。（对数据更新具备高可用性）
+* Partition tolerance（分区容错性）：以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在 C 和 A 之间做出选择。
+* 在一个分布式系统中，最多能支持上面两种属性。但显然既然是分布式注定是必然要进行分区，既然分区，就无法百分百避免分区的错误。因此，只能在一致性和可用性去作出选择。往往追求的是可用性，它的重要性比一致性要高
+* ACID理论和CAP理论都有一个C区别
+  - ACID的C指的是事务中的一致性，在一系列对数据修改的操作中，保证数据的正确性。即数据在事务期间的多个操作中，数据不会凭空的消失或增加，数据的每一个增删改操作都是有因果关系的。比如用户A向用户B转了200块钱，不会出现用户A扣了款，而用户B没有收到的情况。
+  - 在分布式环境中，多服务之间的复制是异步，需要一定耗时，不会瞬间完成。在某个服务节点的数据修改之后，到同步到其它服务节点之间存在一定的时间间隔，如果在这个间隔内有并发读请求过来，而这些请求又负载均衡到多个节点，可能会出现从多个节点数据不一致的情况，因为请求有可能会落到还没完成数据同步的节点上。CAP中的C就是为了做到在分布式环境中读取的数据是一致的
 * 无法同时做到一致性和可用性。系统设计时只能选择一个目标。如果追求一致性，那么无法保证所有节点的可用性；如果追求所有节点的可用性，那就没法做到一致性
-
-## 分层
-
-* 反向代理层（关联https连接）
-  - 可以通过nginx集群实现，也可以通过lvs,f5实现。
-  - 通过上层nginx实现，可以知道该层应对的是大量http或https请求。
-  - 核心指标是：并发连接数、活跃连接数、出入流量、出入包数、吞吐量等。
-  - 内部关于协议解析模块、压缩模块、包处理模块优化等。关键方向代理出去的请求吞吐量，也就是nginx转发到后端应用服务器的处理能力，决定整体吞吐量。
-  - 静态文件都走cdn。
-  - 关于https认证比较费时，建议使用http2.0，或保持连接时间长点。但这也与业务情况有关。如：每个app与后端交互是否频繁。毕竟维护太多连接，成本也很高，影响多路复用性能。
-* 网关层(通用无业务的操作)：反向代理层通过http协议连接网关层，二者之间通过内网ip通信，效率高很多。我们假定网关层往下游都使用tcp长连接，java语言中dobbo等rpc框架都可以实现。
-  - 网关层主要做几个事情：
-  - 鉴权
-  - 数据包完整性检查
-  - http json 传输协议转化为java对象
-  - 路由转义（转化为微服务调用）
-  - 服务治理相关（限流、降级、熔断等）功能
-  - 负载均衡
-  - 网关层可以由：有开源的Zuul，spring cloud gateway,nodejs等实现。nginx也可以做网关需要定制开发，与反向代理层物理上合并。
-* 业务逻辑层（业务层面的操作）：考虑按照业务逻辑垂直分层。例如：用户逻辑层、订单逻辑层等。如果这样拆分，可能会抽象一层通过的业务逻辑层。我们尽量保证业务逻辑层不横向调用，只上游调用下游。
-  - 业务逻辑判断
-  - 业务逻辑处理（组合）
-  - 分布式事务实现
-  - 分布式锁实现
-  - 业务缓存
-* 数据访问层（数据库存储相关的操作）；专注数据增删改查操作。
-  - orm封装
-  - 隐藏分库分表的细节。
-  - 缓存设计
-  - 屏蔽存储层差异
-  - 数据存储幂等实现
-* 网关层以下，数据库以上，RPC中间件技术选型及技术指标如下（来源dubbo官网）：
-  - 核心指标是：并发量、TQps、Rt响应时间。
-  - 选择协议因素：dubbo、rmi、hesssion、webservice、thrift、memached、redis、rest
-  - 连接个数：长连接一般单个；短连接需要多个
-  - 是否长连接：长短连接
-  - 传输协议：TCP、http
-  - 传输方式：：同步、NIO非阻塞
-  - 序列化：二进制（hessian）
-  - 使用范围：大文件、超大字符串、短字符串等
 
 ## 概念
 
@@ -159,9 +107,7 @@ eter Deutsch 提出的分布式系统八大谬论概括了程序员新手可能�
 
 ![Alt text](../_static/hash_one.png "Optional title")
 
-## CAP/BASE
-
-## Gosslp
+## Gossip
 
 ## [分布式事务](https://mp.weixin.qq.com/s/ek3ycMJ1qbMXtMRAvTQDZg)
 
@@ -173,54 +119,75 @@ eter Deutsch 提出的分布式系统八大谬论概括了程序员新手可能�
   - 服务进行了分布式，随着各个数据库也随着变成分布式每个数据库不一定存在相同的物理机中。追求集群的 ACID 会导致系统变得很差，就需要引入一个新的理论原则来适应这种集群的情况，就是 CAP
 * 刚性事务是指完全遵循ACID规范的事务
 * 柔性事务为了满足可用性、性能与降级服务的需要，降低了一致性（Consistency）与隔离性（Isolation）的要求
-* CAP 定理:在一个分布式系统中,三者不可得兼
-    -Consistency（一致性）：在分布式系统中的所有数据备份，在同一时刻是否同样的值。（等同于所有节点访问同一份最新的数据副本）
-  - Availability（可用性）：在集群中一部分节点故障后，集群整体是否还能响应客户端的读写请求。（对数据更新具备高可用性）
-  - Partition tolerance（分区容错性）：以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在 C 和 A 之间做出选择。
-  - 在一个分布式系统中，最多能支持上面两种属性。但显然既然是分布式注定是必然要进行分区，既然分区，就无法百分百避免分区的错误。因此，只能在一致性和可用性去作出选择。往往追求的是可用性，它的重要性比一致性要高
-  - ACID理论和CAP理论都有一个C区别
-    + ACID的C指的是事务中的一致性，在一系列对数据修改的操作中，保证数据的正确性。即数据在事务期间的多个操作中，数据不会凭空的消失或增加，数据的每一个增删改操作都是有因果关系的。比如用户A向用户B转了200块钱，不会出现用户A扣了款，而用户B没有收到的情况。
-    + 在分布式环境中，多服务之间的复制是异步，需要一定耗时，不会瞬间完成。在某个服务节点的数据修改之后，到同步到其它服务节点之间存在一定的时间间隔，如果在这个间隔内有并发读请求过来，而这些请求又负载均衡到多个节点，可能会出现从多个节点数据不一致的情况，因为请求有可能会落到还没完成数据同步的节点上。CAP中的C就是为了做到在分布式环境中读取的数据是一致的。
-* 如何实现高可用：BASE理论，源于 ebay 在 2008 年 ACM 中发表的[论文](https://dl.acm.org/doi/10.1145/1394127.1394128)，无法做到强一致，但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性
-  - BASE 理论的基本原则有三个
+
+* 写多个分片的协调
+* 并发读写某一个值
+* 如何实现高可用
+  - BASE Basically Available（基本可用）， Soft state（软状态），Eventually consistent（最终一致性）理论，源于 ebay 在 2008 年 ACM 中发表的[论文](https://dl.acm.org/doi/10.1145/1394127.1394128)，无法做到强一致，但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性.选择的是弱一致性，高度依赖业务监控组件
+  - 基本原则
     + Basically Available（基本可用）:分布式系统在出现不可预知故障的时候，允许损失部分可用性.响应时间上的损失 系统功能上的损失
     + Soft state（软状态）:允许系统中的数据存在中间状态，并认为该中间状态的存在不会影响系统的整体可用性，即允许系统在不同节点的数据副本之间进行数据同步的过程存在延时。
     + Eventually consistent（最终一致性）:强调的是所有的数据副本，在经过一段时间的同步之后，最终都能够达到一个一致的状态
   - 主要目的是为了提升分布式系统的可伸缩性，论文同样阐述了如何对业务进行调整以及折中的手段，BASE 理论的提出为分布式事务的发展指出了一个方向。
   - 方案
-    + 二阶段提交协议 Two-phase Commit 2PC
-      * 是几乎所有分布式事务算法的基础，后续的分布式事务算法几乎都由此改进而来
-      * 为了使基于分布式系统架构下的所有节点在进行事务提交时保持一致性而设计的一种算法（Algorithm）。通常2PC也被称为是一种协议（Protocol）
-      * 一个事务管理器（Transaction Manager，简称 TM，也被称之为“协调者”）协调 1 个或多个资源管理器（Resource Manager，简称 RM，也被称之为“参与者”）的活动，所有资源管理器（参与者）向事务管理器（协调者）汇报自身活动状态，由事务管理器（协调者）根据各资源管理器（协调者）汇报的状态（完成准备或准备失败）来决定各资源管理器（协调者）是“提交”事务还是进行“回滚”操作
-      * 思路:参与者将操作成败通知协调者，再由协调者根据所有参与者的反馈情报决定各参与者是否要提交操作还是中止操作。
-      * 两个阶段
-        - 协调者通知各个参与者准备提交它们的事务分支。如果参与者判断自己进行的工作可以被提交，那就对工作内容进行持久化，再给协调者肯定答复；要是发生了其他情况，那给协调者的都是否定答复。在发送了否定答复并回滚了已经的工作后，参与者就可以丢弃这个事务分支信息。
-        - 协调者根据第一阶段中各个参与者 Prepare的结果，决定是提交还是回滚事务。如果所有的参与者都Prepare成功，那么协调者通知所有的参与者进行提交；如果有参与者Prepare失败的话，则协调者通知所有参与者回滚自己的事务分支。
-      * 明显的缺点：
-        - 单点故障：由于协调者的重要性，一旦协调者发生故障，参与者会一直阻塞，尤其是在第二阶段，协调者发生故障，那么所有的参与者都处于锁定事务资源的状态中，而无法继续完成事务操作。
-        - 同步阻塞：由于所有节点在执行操作时都是同步阻塞的，当参与者占有公共资源时，其他第三方节点访问公共资源不得不处于阻塞状态。
-        - 数据不一致：在第二阶段中，当协调者向参与者发送提交事务请求之后，发生了局部网络异常或者在发送提交事务请求过程中协调者发生了故障，这会导致只有一部分参与者接收到了提交事务请求。而在这部分参与者接到提交事务请求之后就会执行提交事务操作。但是其他部分未接收到提交事务请求的参与者则无法提交事务。从而导致分布式系统中的数据不一致。
+    + 二阶段提交协议 2PC
     + XA 两阶段提交，这个在很多传统型公司会被使用，但不适合互联网微服务的分布式系统，锁定资源时间长，性能影响大，排除
     + MQ 消息事务：RocketMQ（4.3 版本已经正式宣布支持分布式事务）
     + TCC
     + 3PC
-* 幂等性:能够以同样的方式做两次，而最终结果将保持不变，就好像它只做了一次的特性
+
+## 幂等性
+
+* 能够以同样的方式做两次，而最终结果将保持不变，就好像它只做了一次的特性
   - 用法：在远程服务或数据源中使用幂等性，以便当它多次接收指令时，只处理一次
 
-## 两阶段提交 2PC
+## 分布式ID生成服务
+
+* [leaf](https://tech.meituan.com/2017/04/21/mt-leaf.html)
+  - snowflake 模式
+    + snowflake 是 Twitter 开源的分布式 ID 生成算法，被广泛应用于各种生成 ID 的场景。Leaf 中也支持这种方式去生成 ID
+    + 依赖 Zookeeper:因为 snowflake 的 ID 组成中有 10bit 的 workerId,用了 Zookeeper 来生成 wokerID。就是用了 Zookeeper 持久顺序节点的特性自动对 snowflake 节点配置 wokerID
+  - segment 模式:基于数据库实现的 ID 生成方案，如果调用量不大，完全可以用 Mysql 的自增 ID 来实现 ID 的递增
+      +` biz_tag` 用于区分业务类型，比如下单，支付等。如果以后有性能需求需要对数据库扩容，只需要对 biz_tag 分库分表就行,`biz_tag` 之间是相互隔离的，互不影响
+    * `max_id` 表示该 biz_tag 目前所被分配的 ID 号段的最大值
+    - step 表示每次分配的号段长度
+    - 会在还没用完之前就去申请下一个范围段。并发量大的问题可以直接将 step 调大即可
+
+```sh
+# segment
+CREATE TABLE `leaf_alloc` (
+  `biz_tag` varchar(128) NOT NULL DEFAULT '',
+  `max_id` bigint(20) NOT NULL DEFAULT '1',
+  `step` int(11) NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`biz_tag`)
+) ENGINE=InnoDB;
+```
+
+## 两阶段提交 Two-phase Commit 2PC
 
 严重影响性能，并不适合高并发的场景，而且其实现复杂，牺牲了一部分可用性
 
+* 是几乎所有分布式事务算法的基础，后续的分布式事务算法几乎都由此改进而来
+* 为了使基于分布式系统架构下的所有节点在进行事务提交时保持一致性而设计的一种算法（Algorithm）。通常2PC也被称为是一种协议（Protocol）
+* 事务管理器 Transaction Manager TM 协调 1 个或多个资源管理器（Resource Manager RM）的活动
+  - 所有资源管理器（参与者）向事务管理器（协调者）汇报自身活动状态，由事务管理器（协调者）根据各资源管理器（协调者）汇报的状态（完成准备或准备失败）来决定各资源管理器（协调者）是“提交”事务还是进行“回滚”操作
+* 思路:参与者将操作成败通知协调者，再由协调者根据所有参与者的反馈情报决定各参与者是否要提交操作还是中止操作
+* 两个阶段
+  - 协调者通知各个参与者准备提交它们的事务分支。如果参与者判断自己进行的工作可以被提交，那就对工作内容进行持久化，再给协调者肯定答复；要是发生了其他情况，那给协调者的都是否定答复。在发送了否定答复并回滚了已经的工作后，参与者就可以丢弃这个事务分支信息。
+  - 协调者根据第一阶段中各个参与者 Prepare的结果，决定是提交还是回滚事务。如果所有的参与者都Prepare成功，那么协调者通知所有的参与者进行提交；如果有参与者Prepare失败的话，则协调者通知所有参与者回滚自己的事务分支。
+* 缺点：
+  - 协调者单点故障：由于协调者的重要性，一旦协调者发生故障，参与者会一直阻塞，尤其是在第二阶段，协调者发生故障，那么所有的参与者都处于锁定事务资源的状态中，而无法继续完成事务操作。
+  - 同步阻塞：由于所有节点在执行操作时都是同步阻塞的，当参与者占有公共资源时，其他第三方节点访问公共资源不得不处于阻塞状态。参与者阻塞超时：协调者不给信号会长时间阻塞，不释放资源，这样别人也没法处理其他事情
+  - 数据不一致：在第二阶段中，当协调者向参与者发送提交事务请求之后，发生了局部网络异常或者在发送提交事务请求过程中协调者发生了故障，这会导致只有一部分参与者接收到了提交事务请求。而在这部分参与者接到提交事务请求之后就会执行提交事务操作。但是其他部分未接收到提交事务请求的参与者则无法提交事务。从而导致分布式系统中的数据不一致。
+  - 网络分区
+  - 容错性
 * PrepareCommit
   - 协调者向参与者发送指令后，参与者如果具备执行条件，则获取锁并执行动作，只不过未真正提交，可以认为参与者就差临门一脚了，还得等协调者信号
   - commit 信号
   - rollback 信号
 * CoCommit
-* 问题
-  - 协调者单点
-  - 参与者阻塞超时：协调者不给信号会长时间阻塞，不释放资源，这样别人也没法处理其他事情
-  - 网络分区
-  - 容错性
 
 ## 3PC Three-Phase-Commit 三阶段提交协议
 
@@ -288,40 +255,7 @@ eter Deutsch 提出的分布式系统八大谬论概括了程序员新手可能�
 
 ## Quorum/NWR
 
-## 幂等
-
-## 分布式事务
-
-* 写多个分片的协调
-* 并发读写某一个值
-* 最终一致性
-  - 采用了BASE（Basically Available（基本可用）， Soft state（软状态），Eventually consistent（最终一致性）） 的系统，选择的是弱一致性，高度依赖业务监控组件
-
-## 分布式ID生成服务
-
-* [leaf](https://tech.meituan.com/2017/04/21/mt-leaf.html)
-  - snowflake 模式
-    + snowflake 是 Twitter 开源的分布式 ID 生成算法，被广泛应用于各种生成 ID 的场景。Leaf 中也支持这种方式去生成 ID
-    + 依赖 Zookeeper:因为 snowflake 的 ID 组成中有 10bit 的 workerId,用了 Zookeeper 来生成 wokerID。就是用了 Zookeeper 持久顺序节点的特性自动对 snowflake 节点配置 wokerID
-  - segment 模式:基于数据库实现的 ID 生成方案，如果调用量不大，完全可以用 Mysql 的自增 ID 来实现 ID 的递增
-      +` biz_tag` 用于区分业务类型，比如下单，支付等。如果以后有性能需求需要对数据库扩容，只需要对 biz_tag 分库分表就行,`biz_tag` 之间是相互隔离的，互不影响
-    * `max_id` 表示该 biz_tag 目前所被分配的 ID 号段的最大值
-    - step 表示每次分配的号段长度
-    - 会在还没用完之前就去申请下一个范围段。并发量大的问题可以直接将 step 调大即可
-
-```sh
-# segment
-CREATE TABLE `leaf_alloc` (
-  `biz_tag` varchar(128) NOT NULL DEFAULT '',
-  `max_id` bigint(20) NOT NULL DEFAULT '1',
-  `step` int(11) NOT NULL,
-  `description` varchar(256) DEFAULT NULL,
-  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`biz_tag`)
-) ENGINE=InnoDB;
-```
-
-## 高可用HA（High Availability）
+## 高可用HA High Availability
 
 通过设计减少系统不能提供服务的时间
 
@@ -372,6 +306,46 @@ CREATE TABLE `leaf_alloc` (
 
 ![Alt text](../_static/golden_signals.png "Optional title")
 
+## 分层
+
+* 反向代理层（关联https连接）
+  - 可以通过nginx集群实现，也可以通过lvs,f5实现。
+  - 通过上层nginx实现，可以知道该层应对的是大量http或https请求。
+  - 核心指标是：并发连接数、活跃连接数、出入流量、出入包数、吞吐量等。
+  - 内部关于协议解析模块、压缩模块、包处理模块优化等。关键方向代理出去的请求吞吐量，也就是nginx转发到后端应用服务器的处理能力，决定整体吞吐量。
+  - 静态文件都走cdn。
+  - 关于https认证比较费时，建议使用http2.0，或保持连接时间长点。但这也与业务情况有关。如：每个app与后端交互是否频繁。毕竟维护太多连接，成本也很高，影响多路复用性能。
+* 网关层(通用无业务的操作)：反向代理层通过http协议连接网关层，二者之间通过内网ip通信，效率高很多。我们假定网关层往下游都使用tcp长连接，java语言中dobbo等rpc框架都可以实现。
+  - 网关层主要做几个事情：
+  - 鉴权
+  - 数据包完整性检查
+  - http json 传输协议转化为java对象
+  - 路由转义（转化为微服务调用）
+  - 服务治理相关（限流、降级、熔断等）功能
+  - 负载均衡
+  - 网关层可以由：有开源的Zuul，spring cloud gateway,nodejs等实现。nginx也可以做网关需要定制开发，与反向代理层物理上合并。
+* 业务逻辑层（业务层面的操作）：考虑按照业务逻辑垂直分层。例如：用户逻辑层、订单逻辑层等。如果这样拆分，可能会抽象一层通过的业务逻辑层。我们尽量保证业务逻辑层不横向调用，只上游调用下游。
+  - 业务逻辑判断
+  - 业务逻辑处理（组合）
+  - 分布式事务实现
+  - 分布式锁实现
+  - 业务缓存
+* 数据访问层（数据库存储相关的操作）；专注数据增删改查操作。
+  - orm封装
+  - 隐藏分库分表的细节。
+  - 缓存设计
+  - 屏蔽存储层差异
+  - 数据存储幂等实现
+* 网关层以下，数据库以上，RPC中间件技术选型及技术指标如下（来源dubbo官网）：
+  - 核心指标是：并发量、TQps、Rt响应时间。
+  - 选择协议因素：dubbo、rmi、hesssion、webservice、thrift、memached、redis、rest
+  - 连接个数：长连接一般单个；短连接需要多个
+  - 是否长连接：长短连接
+  - 传输协议：TCP、http
+  - 传输方式：：同步、NIO非阻塞
+  - 序列化：二进制（hessian）
+  - 使用范围：大文件、超大字符串、短字符串等
+
 ## 课程
 
 * [6.824: Distributed Systems](http://nil.csail.mit.edu/6.824/2018/)
@@ -379,16 +353,14 @@ CREATE TABLE `leaf_alloc` (
 
 ## 工具
 
-* [hashicorp/consul](https://github.com/hashicorp/consul):Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure. https://www.consul.io/
 * [dmlc/xgboost](https://github.com/dmlc/xgboost):Scalable, Portable and Distributed Gradient Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and more. Runs on single machine, Hadoop, Spark, Flink and DataFlow https://xgboost.ai/
 * [firehol/netdata](https://github.com/firehol/netdata):Get control of your servers. Simple. Effective. Awesome! https://my-netdata.io/
 * [facebookincubator/LogDevice](https://github.com/facebookincubator/LogDevice):Distributed storage for sequential data https://logdevice.io
 * [meshbird/meshbird](https://github.com/meshbird/meshbird):Distributed private networking http://meshbird.com
 * [dragonflyoss/Dragonfly](https://github.com/dragonflyoss/Dragonfly):Dragonfly is an intelligent P2P based image and file distribution system. https://d7y.io
-* [etcd-io/etcd](https://github.com/etcd-io/etcd):Distributed reliable key-value store for the most critical data of a distributed system https://etcd.readthedocs.io/en/latest
 * [PhxPaxos](https://github.com/Tencent/phxpaxos)腾讯公司微信后台团队自主研发的一套基于Paxos协议的多机状态拷贝类库。它以库函数的方式嵌入到开发者的代码当中， 使得一些单机状态服务可以扩展到多机器，从而获得强一致性的多副本以及自动容灾的特性。文章：<http://www.infoq.com/cn/articles/weinxin-open-source-paxos-phxpaxos>
 * [busgo/forest](https://github.com/busgo/forest):分布式任务调度平台,分布式,任务调度,schedule,scheduler http://122.51.106.217:6579
-* [ xuxueli / xxl-job ](https://github.com/xuxueli/xxl-job): A distributed task scheduling framework.（分布式任务调度平台XXL-JOB） http://www.xuxueli.com/xxl-job/
+* [xxl-job](https://github.com/xuxueli/xxl-job): A distributed task scheduling framework.（分布式任务调度平台XXL-JOB） http://www.xuxueli.com/xxl-job/
 
 ## 参考
 

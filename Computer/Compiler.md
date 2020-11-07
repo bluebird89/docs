@@ -13,6 +13,10 @@
 * Modern Compiler Implementation in C  Andrew W.Appel,with Jens Palsberg  现代编译原理-C语言描述
 * Advanced Compiler Design and Implementation  Steven S.Muchnick  高级编译器设计与实现
 
+## 课程
+
+* 《编译原理》：https://www.bilibili.com/video/av17649289
+
 ## 工具
 
 * [Compiler Expolorer](https://godbolt.org/)

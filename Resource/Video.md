@@ -128,7 +128,7 @@
 
 * 视频直接拖可以播放不卡
 
-```
+```sh
 docker run --name video -v /Users/tangqingsong/files:/root/videos -d -i -p 8081:8081 -p 1935:1935 ubuntu:18.04 && docker ps
 docker exec -it video bash
 
@@ -174,7 +174,6 @@ rtmp://localhost/vod/out.mp4
   - [iptv](https://github.com/iptv-org/iptv):Collection of 8000+ publicly available IPTV channels from all over the world
   - [awesome-iptv](https://github.com/iptv-org/awesome-iptv):A curated list of resources related to IPTV
 * [real-live](https://github.com/parzulpan/real-live) 跨平台网络直播聚合平台，支持视频直播、高清电视和广播电台等。A cross-platform webcast aggregation platform that supports live video, high-definition TV and radio stations.
-
 
 ## 工具
 

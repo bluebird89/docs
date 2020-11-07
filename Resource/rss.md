@@ -11,5 +11,3 @@
 * [brainpickings](brainpickings.org):阅读充电好去处
 * [NetNewsWire5](https://github.com/brentsimmons/NetNewsWire/releases/download/mac-5.0.2/NetNewsWire5.0.2.zip)
 * [anyant / rssant](https://github.com/anyant/rssant):蚁阅 - 让 RSS 更好用，轻松订阅你喜欢的博客和资讯 https://rss.anyant.com
-* [theoldreader](https://theoldreader.com/)
-* [Reeder](link)

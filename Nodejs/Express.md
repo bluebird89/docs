@@ -1,4 +1,4 @@
-# [expressjs/express](https://github.com/expressjs/express)
+# [express](https://github.com/expressjs/express)
 
 Fast, unopinionated, minimalist web framework for node. <https://expressjs.com>
 

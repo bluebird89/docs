@@ -1,4 +1,4 @@
-# [gogs/gogs](https://github.com/gogs/gogs)
+# [gogs](https://github.com/gogs/gogs)
 
 Gogs is a painless self-hosted Git service. https://gogs.io
 

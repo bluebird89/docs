@@ -112,7 +112,6 @@ The Open Organization
 
 ## 工具
 
-* [odoo ](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business.
 * [freedesktop.org](https://www.freedesktop.org/wiki/):hosts the development of free and open source software, focused on interoperability and shared technology for open-source graphical and desktop systems.
 * https://github.com/uber/makisu
 * https://github.com/uber/prototool#quick-start
@@ -134,3 +133,4 @@ The Open Organization
 * [Open-source alternatives](https://opensource.builders/):Find open-source alternatives for your favorite apps
 * [Open source](https://www.ibm.com/developerworks/cn/opensource)
 * [Awesome Open Source](https://awesomeopensource.com/):Find Open Source By Searching, Browsing and Combining 7,000 Topics Across 59 Categories And 310,836 Projects
+* [The Open Group](https://www.opengroup.org/)

@@ -29,7 +29,6 @@
 * make deploy：给 travis deploy release 用的。
 * make create-pr：自动 bump version，生成 change log，并创建 github PR
 
-
 优化自己的TTP时间：当一个组织里的工程师有就手 deploy 的能力时，整个世界会大大不同。工程师们会自然而然把 feature 切碎，一点点迭代，一点点发布。这很符合人性 —— 越小的发布可控性越强，出问题的几率越小，万一出问题，跟踪定位也更容易，回退更简单。
 
 ## 自动化测试

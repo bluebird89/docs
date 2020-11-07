@@ -1,4 +1,4 @@
-# [FFmpeg/FFmpeg](https://github.com/FFmpeg/FFmpeg)
+# [FFmpeg](https://github.com/FFmpeg/FFmpeg)
 
 Mirror of git://source.ffmpeg.org/ffmpeg.git  Fast Forward Moving Pictures Experts Group https://ffmpeg.org
 
