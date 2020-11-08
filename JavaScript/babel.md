@@ -1,4 +1,4 @@
-## [babel/babel](https://github.com/babel/babel)
+## [babel](https://github.com/babel/babel)
 
 🐠 Babel is a compiler for writing next generation JavaScript. https://babeljs.io/
 

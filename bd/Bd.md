@@ -239,7 +239,8 @@
 * Polymaps是一个基于矢量和tile创建动态、交互式的动态地图。
 * Rickshaw是一个基于D3.JS来创建序交互式的时间序列图表库。
 * Sigma.js是一个开源的轻量级库，用来显示交互式的静态和动态图表。
-* Timeline即时间轴，用户通过这个工具可以一目了然的知道自己在何时做了什么。
+* Timeline即时间轴，用户通过这个工具可以一目了然的知道自己在何时做了什么
+* [visx](https://github.com/airbnb/visx) 🐯 visx | visualization components https://airbnb.io/visx
 * BirdEye是Decearative Visual Analytics，它属于一个群体专案，为了要提升设计和广泛的开源资料视觉化发展，并且为了Adobe Flex建视觉分析图库，这个动作以叙述性的资料库为主，让使用者能够建立多元资料视觉化界面来分析以及呈现资讯。
 * Arbor.Js提供有效率、以力导向的版面配置演算法，抽象画图表组织以及筛选更新的处理。
 * Highchart.js是单纯由JavaScript所写的图表资料库，提供简单的方法来增加互动性图表来表达你的网站或网站应用程式。目前它能支援线图、样条函数图。

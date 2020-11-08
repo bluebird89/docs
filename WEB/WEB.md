@@ -504,6 +504,7 @@ if(password_verify($password, $hash)) {
 * [the-benchmarker/web-frameworks](https://github.com/the-benchmarker/web-frameworks):Which is the fastest web framework?
 * [chaitin/xray](https://github.com/chaitin/xray):一款完善的安全评估工具，支持常见 web 安全问题扫描和自定义 poc | 使用之前务必先阅读文档 https://xray.cool
 * [zeit](https://zeit.co/)
+* [vite](https://github.com/vitejs/vite) Native-ESM powered web dev build tool. It's fast.
 
 ## 参考
 

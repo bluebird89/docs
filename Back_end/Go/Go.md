@@ -1336,7 +1336,8 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [Alikhll/golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
 * [developer-learning/learning-golang](https://github.com/developer-learning/learning-golang):Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（文档、书籍、视频)
 * [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
-* [yinggaozhen/awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 https://awesome-go.cn(建设中)
+  - [awesome-go-cn](https://github.com/jobbole/awesome-go-cn):Go 资源大全中文版
+  - [yinggaozhen/awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 https://awesome-go.cn(建设中)
 * [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 * [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
 * [GO语言中文网](https://studygolang.com/)

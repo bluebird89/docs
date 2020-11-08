@@ -130,7 +130,7 @@ npm run serve
 * [](https://github.com/puikinsh/gentelella)
 * [d2-projects/d2-admin](https://github.com/d2-projects/d2-admin):🌈 An elegant dashboard https://d2admin.fairyever.com
 * [jqhph/dcat-admin](https://github.com/jqhph/dcat-admin) http://www.dcatadmin.com/
-* [](https://github.com/iview/iview-admin)
+* [iview/iview-admin](https://github.com/iview/iview-admin):Vue 2.0 admin management system template based on iView https://iview.github.io/iview-admin
 
 * [yaronn/blessed-contrib](https://github.com/yaronn/blessed-contrib):Build terminal dashboards using ascii/ansi art and javascript
 * [keen/dashboards](https://github.com/keen/dashboards):Responsive dashboard templates 📊✨ http://keen.github.io/dashboards/
