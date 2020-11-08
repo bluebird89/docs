@@ -1,6 +1,5 @@
 # 效率
 
-* smart（specific、measurable、attainable、relevant、time-bound）
 * 肌肉记忆
 
 ## 实践
@@ -27,7 +26,7 @@
 * 紧急不重要 少少益善，学会拒绝
 * 不紧急不重要 靠自律
 
-## SMART原则
+## SMART specific、measurable、attainable、relevant、time-bound
 
 * S：任务是否明确
   - 不明确的任务搞起来就是浪费生命
