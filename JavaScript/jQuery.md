@@ -685,6 +685,12 @@ $(function () {
  });
 ```
 
+# [ajax](https://github.com/defunkt/jquery-pjax)
+
+pushState + ajax = pjax https://pjax.herokuapp.com
+
+http://www.jianshu.com/p/557cad38e7dd
+
 ### 插件
 
 * 给jQuery对象绑定一个新方法是通过扩展给$.fn绑定函数，实现插件的代码逻辑.返回`return this`,jQuery对象支持链式操作，自己写的扩展方法也要能继续链式下去

@@ -23,12 +23,12 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
 
 ```sh
 sudo npm install -g vue-cli vue-router vuex vue-resource vue-loader webpack
-#  webpack模板初始化项目：
+#  webpack模板初始化项目
 vue init webpack sell
 # 模块安装
 npm insall
 # 运行开发者模式
-npm run dev(
+npm run dev
 # 打包文件
 npm run build
 
@@ -41,17 +41,12 @@ vue upgrade --next
 * 不要用操作dom思维去用Vue，用操作数据思维
   - 只维护数据，不维护dom
   - vue 通过监听数据实现动态渲染 dom
-* MVVM模式（Model-View-ViewModel）
+* MVVM Model-View-ViewModel
   - 双向绑定:view 变动自动更新到 ViewModel，反之亦然
-  - view  DOM Listers Model
+  - view DOM Listers Model
   - model data bindings View
   - 每个Vue实例在创建时都会经历一系列实例化步骤，例如，需要设置数据观察、编译模板、以及创建必要的数据绑定
 * 数据:Vue实例都会代理其data对象中的所有属性.代理属性是反应式的，如果在实例创建之后添加一个新的属性到实例上，将不会触发任何视图更新
-* 生命周期钩子
-  - created
-  - mounted
-  - updated
-  - destroyed
 * 生命周期
   + new Vue()
   + init Events & Lifecycle
@@ -76,7 +71,7 @@ vue upgrade --next
 * 虚拟 DOM
   - 通过建立一个虚拟DOM来追踪要如何改变真实DOM,createNodeDescription，因为所包含的信息会告诉 Vue 页面上需要渲染什么样的节点，包括及其子节点的描述信息
 
-![生命周期](./../../_static/vue-lifecycle.jpg "Optional title")
+![生命周期](./../../_static/vue-lifecycle.jpg "生命周期")
 
 ## 语法
 
@@ -172,14 +167,15 @@ vue upgrade --next
   - 通过 \$once(eventName, eventHandler) 一次性侦听一个事件
   - 通过 \$off(eventName, eventHandler) 停止侦听一个事件
 
-## vue 参数
+## Vue 实例
 
-* 要挂载元素 el
-* data
-  - 将 data 对象中的所有的 property 加入到 Vue 的响应式系统中, `vm.a == data.a // => true`
+* 实例化
+  - 创建时，将 data 对象中的所有的 property 加入到 Vue 的响应式系统中
+  - 这些 property 的值发生改变时，视图将会产生“响应”，即匹配更新为新的值
   - 只有当实例被创建时就已经存在于 data 中的 property 才是响应式的
-  - 使用 Object.freeze()，这会阻止修改现有的 property，也意味着响应系统无法再追踪变化
-  - Vue 实例还暴露了一些有用的实例 property 与方法。它们都有前缀 $，以便与用户定义的 property 区分开来 `vm.$data === data // => true`
+* data
+  - 使用 Object.freeze() 会阻止修改现有的 property，也意味着响应系统无法再追踪变化
+  - 实例暴露了一些有用的实例 property 与方法。都有前缀 $，以便与用户定义的 property 区分开来 `vm.$data === data // => true`
   - this.\$root.foo
 * method
 * 模板 template
@@ -305,10 +301,6 @@ vue create demo-project
 npm run serve
 ```
 
-### 添加插件
-
-- package.json中添加"stylus-loader": "^1.4.0"，npm install安装插件
-
 ## [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
 
 🛠️ Standard Tooling for Vue.js Development https://cli.vuejs.org/
@@ -327,18 +319,13 @@ vue init Plortinus/vue-multiple-pages new-project
 ## 项目
 
 * [pwa](https://github.com/vuejs-templates/pwa) progressive-web-apps
-* [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):通过webpack打包的vuejs模版
 * [bailicangdu/vue2-happyfri](https://github.com/bailicangdu/vue2-happyfri)vue2 + vue-router + vuex 入门项目
 * [bailicangdu/node-elm](https://github.com/bailicangdu/vue2-elm)：基于 vue2 + vuex 构建一个具有 45 个页面的大型单页面应用，服务端
-* [bailicangdu/vue2-elm](https://github.com/bailicangdu/vue2-elm):客户端
 * [bailicangdu/vue2-manage](https://github.com/bailicangdu/vue2-manage):基于 vue + element-ui 的后台管理系统
 * [vuejs/vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
 * [liangxiaojuan/eleme](https://github.com/liangxiaojuan/eleme):vue2 +vue-router2 + es6 +webpack 高仿饿了么app商家详情，demo：http://yangyi1024.com/elem 还有我最新的实战项目,点它=》 http://yangyi1024.com/meizi
 * [ustbhuangyi/vue-sell](https://github.com/ustbhuangyi/vue-sell):Vue.js高仿饿了么外卖App课程源码 http://coding.imooc.com/class/74.html
 * [tonyfree/youzan](https://github.com/tonyfree/youzan):vue重构有赞商城
-* [webpack 前后端分离开发接口调试解决方案，proxyTable解决方案](https://www.cnblogs.com/coolslider/p/7076191.html)
-* [vue-cli + webpack 多页面实例配置优化方法](https://segmentfault.com/a/1190000006741478)
-* [bluefox1688/vue-cli-multi-page](https://github.com/bluefox1688/vue-cli-multi-page):vue2-cli-vux2-multe-page，使用了webpack2+vuejs2+vuxUI2的多页面脚手架
 * [codekerala/spa-laravel-vuejs](https://github.com/codekerala/spa-laravel-vuejs):Single Page Application with Laravel 5.3 and Vue.js 2.1.x https://codekerala.com
 * [codecasts/spa-starter-kit](https://github.com/codecasts/spa-starter-kit):A highly opinionated starter kit for building Single Page Applications with Laravel and Vue.js
 * [Plortinus/vue-multiple-pages](https://github.com/Plortinus/vue-multiple-pages):A modern Vue.js multiple pages cli which uses Vue 2, Webpack3, and Element UI （Thanks for your star）(Vue2、ElementUI多页应用脚手架)
@@ -350,9 +337,7 @@ vue init Plortinus/vue-multiple-pages new-project
 
 ## 工具
 
-* vue-resource
 * better-scroll
-* [ vitejs / vite ](https://github.com/vitejs/vite):Native-ESM powered web dev build tool. It's fast.
 * [vuejs/vuex](https://vuex.vuejs.org/zh-cn/):Centralized State Management for Vue.js.
 * [ElemeFE/vue-amap](https://github.com/ElemeFE/vue-amap):vue-amap - 基于 Vue 2.x 和高德地图的地图组件 https://elemefe.github.io/vue-amap/
 * [vuejs/vetur](https://github.com/vuejs/vetur)：Vue tooling for VSCode.
@@ -361,11 +346,9 @@ vue init Plortinus/vue-multiple-pages new-project
 * [vuejs/vue-router](https://github.com/vuejs/vue-router):The official router for Vue.js.https://router.vuejs.org/zh-cn/
 * [pagekit/vue-resource](https://github.com/pagekit/vue-resource):The HTTP client for Vue.js
 * [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
-* [iview/iview-admin](https://github.com/iview/iview-admin):Vue 2.0 admin management system template based on iView https://iview.github.io/iview-admin
 * [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
 * [vuejs/vuex-router-sync](https://github.com/vuejs/vuex-router-sync):Effortlessly keep vue-router and vuex store in sync.
 * [shentao/vue-multiselect](https://github.com/shentao/vue-multiselect):Universal select/multiselect/tagging component for Vue.js https://vue-multiselect.js.org/
-* [ElemeFE/vue-amap](https://github.com/ElemeFE/vue-amap):🌍 基于 Vue 2.x 和高德地图的地图组件 https://elemefe.github.io/vue-amap/
 * [kazupon/vue-i18n](https://github.com/kazupon/vue-i18n):🌐 Internationalization plugin for Vue.js https://kazupon.github.io/vue-i18n/
 * [SortableJS/Vue.Draggable](https://github.com/SortableJS/Vue.Draggable):Vue component allowing drag-and-drop sorting in sync with View-Model. Based on Sortable.js
 * [Akryum/vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller):⚡️ Blazing fast scrolling for any amount of data
@@ -390,32 +373,6 @@ vue init Plortinus/vue-multiple-pages new-project
   - [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
   - [dcloudio/uni-app](https://github.com/dcloudio/uni-app):使用 Vue.js 开发跨平台应用的前端框架 http://uniapp.dcloud.io
   - [quasarframework/quasar](https://github.com/quasarframework/quasar):Quasar Framework - High performance, Material Design 2, full front end stack with Vue.js https://quasar.dev http://www.quasarchs.com
-* UI
-  - [vuetifyjs/vuetify](https://github.com/vuetifyjs/vuetify):Material Component Framework for Vue.js 2 https://vuetifyjs.com
-  - [ElemeFE/element](https://github.com/ElemeFE/element)A Vue.js 2.0 UI Toolkit for Web
-  - [vuematerial/vue-material](https://github.com/vuematerial/vue-material):Material design for Vue.js http://vuematerial.io
-  - [Keen-UI](https://github.com/JosephusPaye/Keen-UI)
-  - [Buefy](https://github.com/buefy/buefy)
-  - [AT-UI/at-ui](https://github.com/at-ui/at-ui):A fresh and flat UI-Kit specially for desktop application, made with ♥ by Vue.js 2.0 https://at.aotu.io
-  - [museui/muse-ui](https://github.com/museui/muse-ui):Material Design UI library for Vuejs 2.0 https://museui.github.io
-  - [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
-  - [iview/iview](https://github.com/iview/iview):A high quality UI Toolkit built on Vue.js 2.0 https://iviewui.com/
-  - [Uiv](https://github.com/wxsms/uiv)
-  - [Onsen UI+Vue](https://onsen.io/v2/guide/vue/)
-  - [Semantic UI+Vue](https://semantic-ui-vue.github.io/)
-  - [Fish-UI](https://github.com/myliang/fish-ui)
-  - [ElemeFE/mint-ui](https://github.com/ElemeFE/mint-ui/):Mobile UI elements for Vue.js http://mint-ui.github.io/#!/en
-  - [Framework7 Vue](https://framework7.io/vue/)
-  - [didi/cube-ui](https://github.com/didi/cube-ui):🔶 A fantastic mobile ui lib implement by Vue https://didi.github.io/cube-ui/
-  - [Vueblu](https://github.com/chenz24/vue-blu)
-  - [Ant Design Vue](https://github.com/okoala/vue-antd)
-  - [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
-  - [youzan/vant](https://github.com/youzan/vant):Lightweight Mobile UI Components built on Vue https://youzan.github.io/vant
-  - [bootstrap-vue/bootstrap-vue](https://github.com/bootstrap-vue/bootstrap-vue/):BootstrapVue provides one of the most comprehensive implementations of Bootstrap 4 components and grid system for Vue.js and with extensive and automated WAI-ARIA accessibility markup. https://bootstrap-vue.js.org
-  - [Weex-ui](https://github.com/alibaba/weex-ui)
-  - [Eagle.js](https://github.com/Zulko/eagle.js)
-  - [jdf2e/nutui](https://github.com/jdf2e/nutui):京东风格的轻量级移动端Vue组件库 (A Vue.js 2.0 UI Toolkit for Mobile Web) https://nutui.jd.com
-  - [HEYUI](https://www.heyui.top/):基于Vue.js的高质量UI组件库
 * Admin
   - [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin):🎉 A magical vue admin https://panjiachen.github.io/vue-element-admin
   - [vue-admin](https://github.com/taylorchen709/vue-admin):admin template based on vuejs2 and element. https://taylorchen709.github.io/vue-admin/
@@ -427,8 +384,8 @@ vue init Plortinus/vue-multiple-pages new-project
 * [官方文档](https://cn.vuejs.org/v2/guide/) [文档](https://vuejs.org/v2/guide/)
 * [vuejs/awesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
 * [HcySunYang/vue-design](https://github.com/HcySunYang/vue-design):📖逐行级别的源码分析 http://hcysun.me/vue-design/
-* [Vue 2.0 的建议学习顺序](https://zhuanlan.zhihu.com/p/23134551)
 
+* [Vue 2.0 的建议学习顺序](https://zhuanlan.zhihu.com/p/23134551)
 * [Vue.js 技术揭秘](https://ustbhuangyi.github.io/vue-analysis/)
 * [开发技巧](https://segmentfault.com/a/1190000020620972)
 * http://www.cnblogs.com/keepfool/
@@ -436,4 +393,8 @@ vue init Plortinus/vue-multiple-pages new-project
 * [Vue2+VueRouter2+webpack 构建项目实战](http://blog.csdn.net/fungleo/article/details/53171052)
 * [Vue 脱坑记 - 查漏补缺](https://juejin.im/post/59fa9257f265da43062a1b0e)
 * [Vue.js 2.0 快速上手精华梳理](https://juejin.im/post/59aa1248518825392656a86a)
-* [JavaScript 进阶之 Vue.js + Node.js 入门实战开发](http://blog.csdn.net/gitchat/article/details/77931664
+* [JavaScript 进阶之 Vue.js + Node.js 入门实战开发](http://blog.csdn.net/gitchat/article/details/77931664)
+
+* [webpack 前后端分离开发接口调试解决方案，proxyTable解决方案](https://www.cnblogs.com/coolslider/p/7076191.html)
+* [vue-cli + webpack 多页面实例配置优化方法](https://segmentfault.com/a/1190000006741478)
+* [bluefox1688/vue-cli-multi-page](https://github.com/bluefox1688/vue-cli-multi-page):vue2-cli-vux2-multe-page，使用了webpack2+vuejs2+vuxUI2的多页面脚手架

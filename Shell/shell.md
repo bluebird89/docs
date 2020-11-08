@@ -1221,7 +1221,6 @@ ccache gcc foo.c
 * [jmacdonald/amp](https://github.com/jmacdonald/amp):A complete text editor for your terminal. https://amp.rs
 * [liamg/aminal](https://github.com/liamg/aminal):Golang terminal emulator from scratch
 * [amanusk/s-tui](https://github.com/amanusk/s-tui):Terminal based CPU stress and monitoring utility https://amanusk.github.io/s-tui/
-* [GitSquared/edex-ui](https://github.com/GitSquared/edex-ui):A science fiction terminal emulator designed for large touchscreens that runs on all major OSs.
 * [rupa/z](https://github.com/rupa/z):z - jump around
 * [jwilm/alacritty](https://github.com/jwilm/alacritty):A cross-platform, GPU-accelerated terminal emulator
 * [koalaman / shellcheck](https://github.com/koalaman/shellcheck)：ShellCheck, a static analysis tool for shell scripts https://www.shellcheck.net
