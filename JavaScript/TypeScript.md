@@ -1,4 +1,4 @@
-# [Microsoft/TypeScript](https://github.com/Microsoft/TypeScript)
+# [TypeScript](https://github.com/Microsoft/TypeScript)
 
 TypeScript is a superset of JavaScript that compiles to clean JavaScript output. http://www.typescriptlang.org
 

@@ -1,4 +1,3 @@
-
 ## [eslint/eslint](https://github.com/eslint/eslint)
 
 A fully pluggable tool for identifying and reporting on patterns in JavaScript https://eslint.org

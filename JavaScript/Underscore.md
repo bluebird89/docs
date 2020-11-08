@@ -1,4 +1,4 @@
-# [jashkenas/underscore](https://github.com/jashkenas/underscore)
+# [underscore](https://github.com/jashkenas/underscore)
 
 JavaScript's utility _ belt http://underscorejs.org
 
@@ -105,11 +105,11 @@ var names = ['Adam', 'Lisa', 'Bart'];
 var scores = [85, 92, 59];
 _.zip(names, scores);
 // [['Adam', 85], ['Lisa', 92], ['Bart', 59]]
- 
+
 var namesAndScores = [['Adam', 85], ['Lisa', 92], ['Bart', 59]];
 _.unzip(namesAndScores);
 // [['Adam', 'Lisa', 'Bart'], [85, 92, 59]]
- 
+
 var names = ['Adam', 'Lisa', 'Bart'];
 var scores = [85, 92, 59];
 _.object(names, scores);
@@ -187,7 +187,7 @@ factorial(9); // 362880
 var register = _.once(function () {
     alert('Register ok!');
 });
-register(); 
+register();
 register();
 register(); // 直执行一次
 
