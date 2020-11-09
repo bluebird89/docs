@@ -45,7 +45,7 @@ sudo apt-get install code
 * Faker
 * File Utils
 * Flutter
-* [foambubble / foam ](https://github.com/foambubble/foam):A personal knowledge management and sharing system for VSCode
+* [foam](https://github.com/foambubble/foam):A personal knowledge management and sharing system for VSCode
 * gi:给 .gitignore 文件添加各种语言忽略文件配置
 * Git Blame
 * Git History
@@ -81,6 +81,8 @@ sudo apt-get install code
 * Remote
 * Settings Sync
     - [shanalikhan/code-settings-sync](https://github.com/shanalikhan/code-settings-sync):🌴💪 Synchronize your Visual Studio Code Settings Across Multiple Machines using Github GIST 💪🌴
+    - ALT+SHIFT+D 下载配置
+    - ALT+SHIFT+U 上传配置
 * snippets
 * Stylelint
 * Sublime Text Keymap and Settings Importer
@@ -91,10 +93,11 @@ sudo apt-get install code
 * Trailing Spaces
 * TSLint
 * TypeScript Hero
-* Vetur:Vue工具
+* Vetur
 * vscode-icons
 * VS Live Share
-- vscode-pandoc:文档生成
+* vscode-pandoc:文档生成
+* View In Browser
 * WakaTime
 * vscode-leetcode
 
@@ -108,27 +111,6 @@ sudo apt-get install code
 * An Old Hope Theme
 
 ## 配置
-
-```
-{
-    "editor.multiCursorModifier": "ctrlCmd",
-    "editor.formatOnPaste": false,
-    "workbench.activityBar.visible": false,
-    "workbench.iconTheme": "eq-material-theme-icons-darker",
-    "workbench.colorCustomizations": {},
-    "materialTheme.cache.workbench.settings": {
-        "themeColours": "Darker",
-        "accentPrevious": "Acid Lime"
-    },
-    "workbench.colorTheme": "Material Theme Darker",
-    "material-icon-theme.angular.iconsEnabled": true,
-    "material-icon-theme.folders.icons": "specific",
-    "editor.lineHeight": 24,
-    "editor.fontLigatures": true,
-    "editor.fontFamily": "FiraCode-Medium",
-    "editor.multiCursorModifier": "ctrlCmd",
-}
-```
 
 ## vim
 
@@ -150,7 +132,7 @@ sudo apt-get install code
 -   Manage extensions `command + shift + x`
 -   `shift+cmd+m`
 
-### 快捷键
+### [快捷键](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
 
 * general
     - ⇧⌘P, F1 Show Command Palette
@@ -280,6 +262,14 @@ sudo apt-get install code
     - ⌘Home / End Scroll to top/bottom
     - ⇧⌥⌘↓, ⇧⌥⌘→, ⇧⌥⌘↑, ⇧⌥⌘← Box Selection
     - ctrl+K ctrl+s 进入快捷键设置界面
+* 行
+    - 重开一行：光标在行尾的话，回车即可；不在行尾，ctrl + enter 向下重开一行；ctrl+shift + enter 则是在上一行重开一行
+    - 删除一行：光标没有选择内容时，ctrl + x 剪切一行；ctrl +shift + k 直接删除一行
+    - 移动一行：alt + ↑ 向上移动一行；alt + ↓ 向下移动一行
+    - 复制一行：shift + alt + ↓ 向下复制一行；shift + alt + ↑ 向上复制一行
+    - ctrl + z 回退
+* 词
+    - 中一个词：ctrl + d
 
 ### CLI tool
 
@@ -295,8 +285,6 @@ code --locale=es # change the language
 code --diff <file1> <file2> # open diff editor
 code --disable-extensions . # disable all extensions
 ```
-
-## 代码片段
 
 ## 代码片段 User Snippets
 
@@ -315,9 +303,15 @@ code --disable-extensions . # disable all extensions
 
 ## task 构建（编译、链接等）任务
 
+## tips
+
+```sh
+"Developer: Open Process Explorer"
+```
+
 ## [Set Up Remote Development Workflow With VS Code in Your Browser](https://hackernoon.com/how-you-can-set-up-remote-development-workflow-with-vs-code-in-your-browser-3y3q3wu9)
 
-* [cdr/code-server ](https://github.com/cdr/code-server):VS Code in the browser https://coder.com
+* [cdr/code-server](https://github.com/cdr/code-server):VS Code in the browser https://coder.com
 
 ## 扩展
 

@@ -1,13 +1,44 @@
 # [Web](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web)
 
-系统的健壮性、 可用性：原则是要保护系统，不能让所有用户都失败。直接抛弃一半请求
+系统的健壮性、可用性：原则是要保护系统，不能让所有用户都失败。直接抛弃一半请求
 
 * 性能
   - 网页中代码真实的运行速度
   - 用户在使用时感受到的速度
 * HTML 语言定义网页的结构和内容，CSS 样式表定义网页的样式，JavaScript 语言定义网页与用户的互动行为
 
-## 架构
+## Web开发
+
+* 软件开始主要运行在桌面上，而数据库这样的软件运行在服务器端，这种Client/Server模式简称CS架构
+* CS架构不适合Web，最大的原因是Web应用程序的修改和升级非常迅速，而CS架构需要每个客户端逐个升级桌面App，因此，Browser/Server模式开始流行，简称BS架构
+* 客户端只需要浏览器，应用程序的逻辑和数据都存储在服务器端。浏览器只需要请求服务器，获取Web页面，并把Web页面展示给用户即可。
+* Web页面也具有极强的交互性。由于Web页面是用HTML编写的，而HTML具备超强的表现力，并且，服务器端升级后，客户端无需任何部署就可以使用到新的版本
+
+## 发展阶段
+
+* 静态Web页面：由文本编辑器直接编辑并生成静态的HTML页面，如果要修改Web页面的内容，就需要再次编辑HTML源文件，早期的互联网Web页面就是静态的
+* CGI：由于静态Web页面无法与用户交互，比如用户填写了一个注册表单，静态Web页面就无法处理。要处理用户发送的动态数据，出现了Common Gateway Interface，简称CGI，用C/C++编写
+* ASP/JSP/PHP：由于Web应用特点是修改频繁，用C/C++这样的低级语言非常不适合Web开发，而脚本语言由于开发效率高，与HTML结合紧密，因此，迅速取代了CGI模式。ASP是微软推出的用VBScript脚本编程的Web开发技术，而JSP用Java来编写脚本，PHP本身则是开源的脚本语言
+* MVC：为了解决直接用脚本语言嵌入HTML导致的可维护性差的问题，Web应用也引入了Model-View-Controller的模式，来简化Web开发。ASP发展为ASP.Net，JSP和PHP也有一大堆MVC框架
+* 技术栈
+  - 常见的Web框架包括：Express，Sails.js，koa，Meteor，DerbyJS，Total.js，restify
+  - ORM框架比Web框架要少一些：Sequelize，ORM2，Bookshelf.js，Objection.js
+  - 模版引擎PK：Jade，EJS，Swig，Nunjucks，doT.js
+  - 测试框架包括：Mocha，Expresso，Unit.js，Karma
+  - 构建工具有：Grunt，Gulp，Webpack
+
+### 服务器
+
+* nginx作为反向代理服务器，可以做负载均衡和静态资源服务器优势
+* 后面两台nodejs应用服务器集群
+* nginx 负载均衡是用在多机器环境下的，单机负载均衡还是要靠cluster 这类模块来做
+* nginx与node应用服务器的对比：
+  - nginx是一个高性能的反向代理服务器，要大量并且快速的转发请求，所以不能采用上面第三种方法，原因是仅有一个进程去accept，然后通过消息队列等同步方式使其他子进程处理这些新建的连接，效率会低一些
+  - nginx采用第二种方法，依然可能会产生负载不完全均衡和惊群问题。nginx是怎么解决的呢：
+    + nginx中使用mutex互斥锁解决这个问题，具体措施有使用全局互斥锁，每个子进程在epoll_wait()之前先去申请锁，申请到则继续处理，获取不到则等待，并设置了一个负载均衡的算法（当某一个子进程的任务量达到总设置量的7/8时，则不会再尝试去申请锁）来均衡各个进程的任务量。具体的nginx如何解决惊群，看这篇文章: <http://blog.csdn.net/russell_tao/article/details/7204260>
+  - node应用服务器采用方案三：node作为具体的应该服务器负责实际处理用户的请求，处理可能包含数据库等操作，不是必须快速的接收大量请求，而且转发到某具体的node单台服务器上的请求较之nginx也少了很多
+
+## 流程
 
 * Make Fewer HTTP Requests
 * Use a Content Delivery Network
@@ -74,14 +105,20 @@
 
 ## 压力测试
 
-* 产生压力的方法有很多
-  - 写脚本产生压力机器人对服务器进行发包和收包操作
-  - 使用现有的工具(像jmeter、LoadRunner这些python的FunkLoad）大的压力测试用 erlang开发的tsung
-  - 难点在于产生的压力是不是真实地反映了实际用户的操作场景。举个例子来说，对游戏来说单纯的并发登陆场景在整个线上环境中的占比可能并不大(新开服等特殊情况除外)，相反"登陆-开始战斗-结束战斗"、不同用户执行不同动作这种"混合模式"占了更大的比重。所以如何从实际环境中提炼出具体的场景比重，并且把这种比重转化成实际压力是一个重要的关注点。
-* 产生压力之后，通常我们可以拿到TPS、响应时延等性能数据，那么如何定位性能问题呢？
-  - TPS、响应时延只能告诉你服务器是否存在问题，但不能帮助你定位问题。这些表面背后是整个后台处理逻辑综合作用的结果，这时候可以先关注系统的CPU、内存、IO、网络，对比在tps、时延达到瓶颈时这些系统数据的情况，确定性能问题是系统哪一部分造成的，然后再回到代码的逻辑中逐个优化这些点。
-* 当服务器的整体性能就可以相对稳定下来，这时候就需要对自己服务器的承载能力有一个预估，通过产生真实压力、对比系统数据，大致可以对单套系统的处理能力有个真实的评价，然后结合业务规模配置服务器数量。
-* 压力测试的目标：是搞死服务器，从而找到瓶颈点，如果搞不死，意义就不大
+* 产生压力方法
+  - 写脚本：对服务器进行发包和收包操作
+  - 现有工具(像jmeter、LoadRunner这些python的FunkLoad）压力测试用，erlang开发的tsung
+  - 难点在于产生的压力是不是真实地反映了实际用户的操作场景
+    + 举个例子来说，对游戏来说单纯并发登陆场景在整个线上环境中的占比可能并不大(新开服等特殊情况除外)，相反"登陆-开始战斗-结束战斗"、不同用户执行不同动作这种"混合模式"占了更大的比重
+    + 如何从实际环境中提炼出具体的场景比重，并且把这种比重转化成实际压力是一个重要的关注点
+* 产生压力之后，通常可以拿到TPS、响应时延等性能数据，那么如何定位性能问题呢？
+  - TPS、响应时延只能告诉服务器是否存在问题，但不能帮助你定位问题
+  - 这些表面背后是整个后台处理逻辑综合作用的结果，这时候可以先关注系统的CPU、内存、IO、网络，对比在tps、时延达到瓶颈时这些系统数据的情况，确定性能问题是系统哪一部分造成的，然后再回到代码逻辑中逐个优化这些点
+* 当服务器整体性能就可以相对稳定下来，这时候就需要对自己服务器的承载能力有一个预估，通过产生真实压力、对比系统数据，大致可以对单套系统的处理能力有个真实的评价，然后结合业务规模配置服务器数量
+* 目标：是搞死服务器，从而找到瓶颈点，如果搞不死，意义就不大
+* 工具
+  - apache AB
+  - webbench
 
 ## 大流量
 
@@ -127,16 +164,16 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
   - 主打mysql数据库
   - IBM AIX小型机 + Oracle数据库【成本】
   - Mysql主群+集群+分区技术（承担光棍节巨大访问量）
-* 网络界最核心最重要的为数据的积累。这里我们先明确三个概念：
-  + 负载均衡：服务器都是激活的，并且是轮循的。
+* 网络界最核心最重要的为数据的积累。这里先明确三个概念：
+  + 负载均衡：服务器都是激活的，并且是轮循的
   + 冗余技术：一个激活，其它的备份处于休眠状态。
   + Mysql主从：依赖于Binary Log日志（记载CRUD，作用是恢复数据），主服务器的所有增删改的操作同时会备份复制一份给从服务器，让服务器同时执行，达到和主服务器的数据的同步和完整，它的重点是主服务器和从服务器都可以同时活动，即操作Mysql数据库时，增删改走都是主服务器，而查询走的是从服务器。所以，主从为负载的技术。
-* MySQL相关操作
-  - Mysql 分库分表
+* MySQL
+  - 分库分表
     + 垂直分表（字段不要太多，把一张大表竖切为许多小表）
     + 水平分表（把一张大表横切为若干小表）
-  - Mysql 分区技术:分区技术将一个表拆成多个表，比较常用的方式是将表中的记录按照某种Hash算法进行拆分，简单的拆分方法如取模方式。在一定的层面表名不变，在真正的磁盘存储时存储在不同的分区
-  - Mysql 集群;单点故障时，冗余备份
+  - 分区技术:将一个表拆成多个表，比较常用的方式是将表中的记录按照某种Hash算法进行拆分，简单的拆分方法如取模方式。在一定的层面表名不变，在真正的磁盘存储时存储在不同的分区
+  - 集群：单点故障时，冗余备份
 
 ## 加速技术
 
@@ -340,7 +377,7 @@ if(password_verify($password, $hash)) {
 }
 ```
 
-## SSO（Single Sign On，单点登录）
+## SSO Single Sign On，单点登录
 
 * 能够做到一次登录多次使用
   - 依赖项目为前后端分离项目
@@ -372,23 +409,20 @@ if(password_verify($password, $hash)) {
 
 ## 性能
 
-简单的浏览器 F12查看 Network 标签页就可以进行简单分析
+* 简单的浏览器 F12查看 Network 标签页就可以进行简单分析
+* 如果是加载前端资源太慢 比如图片、样式文件、脚本文件 可以考虑加带宽或者用 CDN 来加载这些静态资源 CDN 效果杠杠的 但是图片的压缩和缩略图还是要做 针对不同场景显示不同尺寸图片 不然 CDN 按流量收费能省则省 样式文件或者脚本文件如果过大 则该拆分拆分 反之如果都是分散的小文件 则该合并合并 更深入点还可以通过设置请求头/响应头字段设置浏览器缓存
+* 如果是后端接口问题，则需要借助工具进行细分，基础设施方面，是否是 DNS 域名解析慢 网络请求时间长，通常这在服务器放在国外的情况下比较常见，排除了这个问题，还要看看服务器负载，CPU、内存、带宽、磁盘空间是否充沛，这些资源的不足或者打满都会造成服务器响应慢，这些东西不足则要补足，要查明原因，是否有异常或恶意攻击，如果是这种原因则要处理掉这些异常流量和问题，如果确实是用户请求量大，则要对服务器扩容，设置集群，当然这个服务器涉及多种应用，后面我们再细谈
+* 基础设施没有问题，再往下看，需要从应用入口开始分析，是什么原因导致响应慢，代码问题？数据库问题？还是系统资源问题？如果是代码问题修复代码，数据库层面分析是否存在慢查询，慢查询可以通过优化索引解决，并且合理设置缓存来减少对数据库的IO 操作，或者引入搜索引擎实现宽表查询，如果数据库压力还是大，可以考虑读写分离、分库分表之类的后续分布式数据库解决方案，如果并发量大，缓存服务也扛不住，则把缓存拆分出去通过独立服务器进行操作，甚至构建分布式缓存，诸如此类，如果是单机 php-fpm 进程跑满，可以对 web 应用服务器进行扩容，然后做负载均衡，如果是单线程 IO 问题，考虑通过队列异步处理，或者引入 Swoole 提高系统并发性，等等。
 
-如果是加载前端资源太慢 比如图片、样式文件、脚本文件 可以考虑加带宽或者用 CDN 来加载这些静态资源 CDN 效果杠杠的 但是图片的压缩和缩略图还是要做 针对不同场景显示不同尺寸图片 不然 CDN 按流量收费 能省则省 样式文件或者脚本文件如果过大 则该拆分拆分 反之如果都是分散的小文件 则该合并合并 更深入点还可以通过设置请求头/响应头字段设置浏览器缓存
-
-如果是后端接口问题，则需要借助工具进行细分，基础设施方面，是否是 DNS 域名解析慢 网络请求时间长，通常这在服务器放在国外的情况下比较常见，排除了这个问题，还要看看服务器负载，CPU、内存、带宽、磁盘空间是否充沛，这些资源的不足或者打满都会造成服务器响应慢，这些东西不足则要补足，要查明原因，是否有异常或恶意攻击，如果是这种原因则要处理掉这些异常流量和问题，如果确实是用户请求量大，则要对服务器扩容，设置集群，当然这个服务器涉及多种应用，后面我们再细谈
-
-基础设施没有问题，再往下看，需要从应用入口开始分析，是什么原因导致响应慢，代码问题？数据库问题？还是系统资源问题？如果是代码问题修复代码，数据库层面分析是否存在慢查询，慢查询可以通过优化索引解决，并且合理设置缓存来减少对数据库的IO 操作，或者引入搜索引擎实现宽表查询，如果数据库压力还是大，可以考虑读写分离、分库分表之类的后续分布式数据库解决方案，如果并发量大，缓存服务也扛不住，则把缓存拆分出去通过独立服务器进行操作，甚至构建分布式缓存，诸如此类，如果是单机 php-fpm 进程跑满，可以对 web 应用服务器进行扩容，然后做负载均衡，如果是单线程 IO 问题，考虑通过队列异步处理，或者引入 Swoole 提高系统并发性，等等。
-
-* 只要需要，请实现cache机制，了解并合理地使用 HTTP caching 以及 HTML5 Manifest.
+* 只要需要，请实现cache机制，了解并合理地使用 HTTP caching 以及 HTML5 Manifest
 * 优化页面 —— 不要使用20KB图片来平铺网页背景。（陈皓注：还有很多网页页面优化性的文章，你可以STFG – Search The Fucking Google一下。如果你要调试的话，你可以使用firebug或是chrome内置的开发人员的工具来查看网页装载的性能）
-* 学习如何 gzip/deflate 网页 (deflate 更好).
-* 把多个CSS文件和Javascript文件合并成一个，这样可以减少浏览器的网络连数，并且使用gzip压缩被反复用到的文件。
-* 学习一下 Yahoo Exceptional Performance 这个网站上的东西，上面有很多非常不错的改善前端性能的指导，以及 YSlow 这个工具。 Google page speed 是另一个用来做性能采样的工具。这两个工具都需要安装 Firebug 。
+* 学习如何 gzip/deflate 网页 (deflate 更好)
+* 把多个CSS文件和Javascript文件合并成一个，这样可以减少浏览器的网络连数，并且使用gzip压缩被反复用到的文件
+* 学习一下 Yahoo Exceptional Performance 这个网站上的东西，上面有很多非常不错的改善前端性能的指导，以及 YSlow 这个工具。 Google page speed 是另一个用来做性能采样的工具。这两个工具都需要安装 Firebug
 * 为那些小的图片使用 CSS Image Sprites，就像工具条一样。 (参看 “最小化 HTTP 请求” ) （陈皓注：把所有的小图片合并成一个图片，然后用CSS把显示其中的一块，这样，这些小图片只用传输一次，酷壳的Wordpress样式的那个RSS订阅列表中的小图标就是这样做的）
 * 繁忙的网络应该考虑把网页的内容分开存放在不同的域名下。（陈皓注：比如有专门的图片服务器——图片相当耗带宽，或是专门的Ajax服务器）
-* 静态网页 (如，图片，CSS，JavaScript，以及一些不需要访问cookies的网页) 应该放在一个不使用cookies的独立的域名下，因为所有在同一个域名或子域名下的cookie会被这个域名下的请求一同发送。另一个好的选择是使用 Content Delivery Network (CDN).
-* 使用单个页面的HTTP请求数最小化。
+* 静态网页 (如，图片，CSS，JavaScript，以及一些不需要访问cookies的网页)应该放在一个不使用cookies的独立的域名下，因为所有在同一个域名或子域名下的cookie会被这个域名下的请求一同发送。另一个好的选择是使用 Content Delivery Network (CDN)
+* 使用单个页面的HTTP请求数最小化
 * 为Javascript使用 Google Closure Compiler 或是 其它压缩工具（陈皓注：压缩Javascript代码可以让你的页面减少网络传输从而可以得到很快的喧染。注意，并不是所有的工具都可以正确压缩Javascript的，Google的这个工具甚至还可以帮你优化你的代码）
 * 确认你的网站有一个 favicon.ico 文件放在网站的根下，如 /favicon.ico. 浏览器会自动请求这个文件，就算这个图标文件没有在你的网页中明显说明，浏览器也会请求。如果你没有这个文件，就会出大量的404错误，这会消耗你的服务器带宽。（陈皓注：服务器返回404页面会比这个ico文件可能还大）
 
@@ -447,7 +481,7 @@ if(password_verify($password, $hash)) {
   - 理解HTTP协议，以及诸如GET、POST、sessions、cookies之类的概念，包括"无状态"（stateless）是什么意思。
   - 确保你的XHTML/HTML和CSS符合W3C标准，使得它们能够通过检验。这可以使你的网页避免触发浏览器的古怪行为（quirk），而且使它在"屏幕朗读器"和手机上也能正常工作。
   - 理解浏览器如何处理JavaScript脚本。
-  - 理解网页上的JavaScript文件、样式表文件和其他资源是如何装载及运行的，考虑它们对页面性能有何影响。在某些情况下，可能应该将脚本文件放置在网页的尾部。
+  - 理解网页上的JavaScript文件、样式表文件和其他资源是如何装载及运行的，考虑它们对页面性能有何影响。在某些情况下，可能应该将脚本文件放置在网页的尾部
   - 理解JavaScript沙箱（Javascript sandbox）的工作原理，尤其是如果你打算使用iframe。
   - 知道JavaScript可能无法使用或被禁用，以及Ajax并不是一定会运行。记住，"不允许脚本运行"（NoScript）正在某些用户中变得流行，手机浏览器对脚本的支持千差万别，而Google索引网页时不运行大部分的脚本文件
   - 了解301重定向和302重定向之间的区别（这也是一个SEO相关问题）
@@ -472,10 +506,6 @@ if(password_verify($password, $hash)) {
 * 网页消息推送
 * Flash的一个致命弱点是他无法在移动设备中使用，HTML播放器Chimee
 
-## 课程
-
-* [深入浅出现代Web编程](https://fullstackopen.com/zh)
-
 ## 工具
 
 * [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ https://codesandbox.io
@@ -484,9 +514,6 @@ if(password_verify($password, $hash)) {
 * [coturn/coturn](https://github.com/coturn/coturn):coturn TURN server project
 * [codesandbox](https://codesandbox.io):The online code editor for Preact
 * [acaudwell/Logstalgia](https://github.com/acaudwell/Logstalgia):replay or stream website access logs as a retro arcade game https://logstalgia.io
-* 压力测试
-  - apache AB
-  - webbench
 * record and replay
   - [rrweb-io/rrweb](https://github.com/rrweb-io/rrweb):record and replay the web https://www.rrweb.io/
   - [sindresorhus/pageres](https://github.com/sindresorhus/pageres):Capture website screenshots
@@ -510,13 +537,13 @@ if(password_verify($password, $hash)) {
 
 * [wx-chevalier/Web-Series](https://github.com/wx-chevalier/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
 * [Web](https://developers.google.com/web/)
-* [Web](https://developer.mozilla.org/zh-CN/docs/Web)
 * [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
+  - [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning
 * [Web 开发](https://www.ibm.com/developerworks/cn/web/)
 * [W3C](https://www.w3.org/)
 * [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) https://solid.mit.edu/
-* [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning Area. https://developer.mozilla.org/en-US/docs/Learn
 * [WEB开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
+
 * [What technical details should a programmer of a web application consider before making the site public?](https://softwareengineering.stackexchange.com/questions/46716/what-technical-details-should-a-programmer-of-a-web-application-consider-before/46738#46738)
 * [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
 * [A Beginner’s Guide to Website Speed Optimization](https://kinsta.com/learn/page-speed/)
@@ -525,8 +552,6 @@ if(password_verify($password, $hash)) {
 * [大型WEB架构设计](https://mp.weixin.qq.com/s?__biz=MzAwNzY4OTgyNA==&mid=2651826002&idx=1&sn=237e6c340626171cf1f4eb6e0f19f182&chksm=8081445db7f6cd4bea29330141ac28228f09c024dd5671cb945171bf41a20d6f1386c455e330)
 * [PHP 进阶之路 - 亿级 pv 网站架构实战之性能压榨](https://segmentfault.com/a/1190000010455076)
 * [全站缓存](https://segmentfault.com/a/1190000005808789)
-* 《构建高性能Web站点》第12章 web负载均衡
-* 《大型网站技术架构：核心原理与案例分析》 6.2 应用服务器集群的伸缩性设计
 <https://zhuanlan.zhihu.com/p/22360384>
 <http://tips.codekiller.cn/2017/05/17/maglev_describe/>
 <http://developer.51cto.com/art/200807/83518.htm>

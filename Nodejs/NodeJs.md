@@ -2,21 +2,24 @@
 
 Node.js JavaScript runtime ✨🐢🚀✨ <https://nodejs.org>
 
-* JavaScript是单线程执行，根本不能进行同步IO操作，所以，JavaScript的这一“缺陷”导致了它只能使用异步IO
+* JavaScript是单进程单线程应用程序，根本不能进行同步IO操作，所以，JavaScript的这一“缺陷”导致了只能使用异步IO
 * 2009年，Node.js 项目诞生，创始人为 Ryan Dahl，标志着 JavaScript 可以用于服务器端编程，从此网站的前端和后端可以使用同一种语言开发
-* 借助JavaScript天生的事件驱动机制加V8高性能引擎，使编写高性能Web服务轻而易举 Node.js ,其高性能并行I/O使得分布式开发更加高效，利用稳定接口可提升web渲染速度，也十分适合做实时应用开发
-
-## 场景
-
-* 前端实践，脚手架，工程化，快速开发
-* API Proxy 中间层实践，页面即服务概念
-* 面向企业开发的 Web 框架
-* Node 最新技术与性能调优
+* 借助JavaScript天生的事件驱动机制加V8高性能引擎，使编写高性能Web服务轻而易举
+    - 高性能并行I/O使得分布式开发更加高效，利用稳定接口可提升web渲染速度，适合做实时应用开发
+    - V8 引擎提供的异步执行回调接口，通过这些接口可以处理大量的并发
+    - 几乎每一个 API 都是支持回调函数
+    - 所有的事件机制都是用设计模式中观察者模式实现:单线程类似进入一个while(true)的事件循环，直到没有事件观察者退出，每个异步事件都生成一个事件观察者，如果有事件发生就调用该回调函数
+* 场景
+    - 前端实践，脚手架，工程化，快速开发
+    - API Proxy 中间层实践，页面即服务概念
+    - 面向企业开发的 Web 框架
+    - Node 最新技术与性能调优
 
 ## [安装](https://github.com/nodesource/distributions)
 
 * [tj/n](https://github.com/tj/n):Node version management
 * [creationix/nvm](https://github.com/creationix/nvm):Node Version Manager - Simple bash script to manage multiple active node.js versions
+* [nodemon](https://nodemon.io/):nodemon reload, automatically.
 
 ```sh
 # ubuntu
@@ -172,8 +175,8 @@ nrm use taobao
 
 # 以树型结构列出当前项目安装的所有模块，以及它们依赖的模块。
 npm list
-npm list moduleName               ##List all locally installed packages
-npm list -a|g             ##List all globally installed packages
+npm list moduleName               ## List all locally installed packages
+npm list -a|g             ## List all globally installed packages
 npm list oauth # ind the version of a specific package
 npm list --depth=0
 
@@ -189,10 +192,12 @@ npm set init-author-name 'Your name'
 npm set init-author-email 'Your email'
 npm set init-author-url 'http://yourdomain.com'
 npm set init-license 'MIT'
+# npm err! Error: connect ECONNREFUSED 127.0.0.1:8087
+npm config set proxy null
 
 npm ls
 
-npm install <package> # Install locally
+npm install|uninstall <package> # Install locally
 npm install|i -g <package> cnpm --registry=https://registry.npm.taobao.org # Install globally
 nmp install -g --registery= https://registery.npm.taobao.org
 npm install <package> --save # To install a package and save it in your project's package.json file
@@ -369,7 +374,7 @@ Facebook提供的替代npm的工具，可以加速node模块的下载 与react-n
 * 升级依赖包: yarn upgrade [package]@[version|tag]
     - 会按照package.json里面指定的版本范围，更新依赖版本，重新生成yarn.lock
 * 移除依赖包: yarn remove [package]
-* [中文文档](https://yarnpkg.com/zh-Hans/) https://yarn.bootcss.com/docs/
+* [文档](https://yarnpkg.com/zh-Hans/) https://yarn.bootcss.com/docs/
 
 ```sh
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -401,34 +406,20 @@ npm login
 npm publish
 ```
 
-## REPL read-eval-print-loop
-
-* 命令行下 Node 引擎的一个互动式对话环境。用户在其中输入命令，就可以立刻看到结果。read 表示读取用户的输入，eval 表示执行，print 表示输出运行的结果，loop 表示重复执行这个过程
-* 退出 REPL，可以在行首按下 Ctrl + d，或者连续两次按下 Ctrl + c
-* 与 Node 脚本的执行环境
-    - REPL 环境不是通过脚本触发的，所以没有__dirname和__filename这两个内置变量
-    - 会自动加载 Node 的核心模块，比如 fs、http、os、path等，不必require就可以直接使用
-* -e参数，实际上就是在 REPL 环境运行代码
-* _变量 上一个表达式的值就存放在这个变量之中
-    - 允许用户对_变量赋值
-* 按下回车键，就会提交并执行当前的输入。这对输入多行的代码非常不方便，有两个办法可以输入多行代码
-    - 按 Shift + 回车键
-    - 使用.editor命令，键入编辑模式
-* 特殊命令
-    - .break：按下 Shift + 回车进入多行文本输入的过程中，输入.break命令会取消本次输入，相当于按下 Ctrl + c。
-    - .clear：重置 REPL 上下文为空，并清除当前输入的多行文本。
-    - .exit：关闭当前的 I/O 读写，退出 REPL 环境。
-    - .help：显示 REPL 环境的特殊命令列表。
-    - .save：将当前的 REPL 对换保存成一个文件，比如.save ./file/to/save.js。
-    - .load：加载一个文件进入当前的 REPL 对话，比如.load ./file/to/load.js
-* repl模块，可以在脚本中唤起 REPL 环境
-
 ## 基础
 
-* 在Node.js环境中，有唯一的全局对象，但不叫window，而叫global
+* 在Node.js环境中有唯一的全局对象，但不叫window，而叫global
     - 在 REPL 环境，顶层的this就指向global
     - 顶层变量是global和this的属性
-* 在模块环境
+    - global 最根本的作用是作为全局变量的宿主
+* 全局变量:全局对象的所有属性都可以在程序的任何地方访问
+    - __filename 表示当前正在执行的脚本的文件名。将输出文件所在位置的绝对路径，且和命令行参数所指定的文件名不一定相同
+    - __dirname 表示当前执行脚本所在的目录
+    - setTimeout(cb, ms) 全局函数在指定的毫秒(ms)数后执行指定函数(cb)。只执行一次指定函数。返回一个代表定时器的句柄值
+    - clearTimeout( t ) 全局函数用于停止一个之前通过 setTimeout() 创建的定时器。 参数 t 是通过 setTimeout() 函数创建的定时器
+    - setInterval(cb, ms) 全局函数在指定的毫秒(ms)数后执行指定函数(cb)。返回一个代表定时器的句柄值。可以使用 clearInterval(t) 函数来清除定时器
+    - setInterval() 方法会不停地调用函数，直到 clearInterval() 被调用或窗口被关闭
+* 模块环境
     - 顶层的this指向当前模块，即module.exports，默认是一个空对象,与global不是同一个对象
     - 模块内部的顶层变量，不会自动成为global和this的属性
 * 声明变量的时候，不使用var命令，而是直接赋值，那么该变量在 REPL 环境下将成为global和this的属性，在模块环境将只成为 global 的属性
@@ -436,15 +427,91 @@ npm publish
     - 函数内部的this指向global，REPL 环境和模块环境都是如此
     - 严格模式，函数内部的this返回undefined
 
+## 回调函数
+
+* 异步编程的直接体现
+* 添加监听：执行异步操作函数将回调函数作为最后一个参数
+* 监听：回调函数接收错误对象作为第一个参数
+* 触发：事件参数作为回调函数参数传递
+
+## REPL read-eval-print-loop
+
+* 命令行下 Node 引擎的一个互动式对话环境。在其中输入命令，就可以立刻看到结果
+    - read 表示读取用户的输入
+    - eval 表示执行
+    - print 表示输出运行的结果
+    - loop 表示重复执行这个过程
+* 退出:Ctrl + d 或者连续两次按下 Ctrl + c
+* 与 Node 脚本的执行环境
+    - REPL 环境不是通过脚本触发的，所以没有__dirname和__filename这两个内置变量
+    - 会自动加载 Node 的核心模块，比如 fs、http、os、path等，不必require就可以直接使用
+* 按下回车键，就会提交并执行当前输入。对输入多行的代码非常不方便，有两个办法可以输入多行代码
+    - 按 Shift + 回车键
+    - 使用.editor命令，键入编辑模式
+* -e参数，实际上就是在 REPL 环境运行代码
+* `_` 上一个表达式值就存放在这个变量之中
+    - 允许用户赋值
+* 特殊命令
+    - tab 列出当前命令
+    - .break Shift + 回车进入多行文本输入的过程中，输入.break命令会取消本次输入，相当于按下 Ctrl + c
+    - .clear：重置 REPL 上下文为空，并清除当前输入的多行文本
+    - .exit：关闭当前的 I/O 读写，退出 REPL 环境
+    - .help：显示 REPL 环境的特殊命令列表
+    - .save：将当前的 REPL 对换保存成一个文件，比如.save ./file/to/save.js
+    - .load：加载一个文件进入当前的 REPL 对话，比如.load ./file/to/load.js
+* 可以在脚本中唤起 REPL 环境
+
+## events
+
+* 提供事件，形成模块之间的通信机制，消除模块与模块的强耦合
+    - 同一个事件最多可以指定10个回调函数
+    - 事件接口可以部署在任意对象上，使得这些对象也能订阅和发布消息
+* 默认支持两个事件
+    - newListener事件：添加新的回调函数时触发。
+    - removeListener事件：移除回调时触发
+* 方法
+    - listeners方法接受一个事件名称作为参数，返回该事件所有回调函数组成的数组
+    - events模块提供一个构造函数EventEmitter()，可以用来生成事件发生器的实例
+    - emit()方法用于触发事件
+        + 第一个参数是触发事件
+        + 第二个参数是事件传递的数据
+    - emit()方法和on()方法都是同步
+    - emitter.on(name, f) 对事件name指定监听函数f
+    - emitter.addListener(name, f) addListener是on方法的别名
+    - emitter.once(name, f) 与on方法类似，但是监听函数f是一次性的，使用后自动移除
+    - emitter.listeners(name) 返回一个数组，成员是事件name所有监听函数
+    - emitter.removeListener(name, f) 移除事件name的监听函数f
+        + 不能用于移除匿名函数
+        + 可以模拟once方法
+    - emitter.removeAllListeners(name) 移除事件name的所有监听函数
+* 定义了一个特殊事件 error，包含了错误的语义，遇到异常的时候通常会触发 error 事件
+* 不会直接使用 EventEmitter，而是在对象中继承它。包括 fs、net、 http 在内的，只要是支持事件响应的核心模块都是 EventEmitter 的子类
+
 ## process
 
-* Node.js提供的一个对象，表示当前运行的 Node 进程。不用引入模块，可以直接使用
-* Node.js不断执行响应事件的JavaScript函数，直到没有任何响应事件的函数可以执行时，Node.js就退出了。如果我们想要在下一次事件响应中执行代码，可以调用process.nextTick()
-* 响应exit事件，就可以在程序即将退出时执行某个回调函数
-* process.argv是一个数组，表示启动脚本时的命令行参数
-    - 第一项是 Node 可执行文件的路径
-    - 第二项是 JavaScript 脚本的路径
-* process.nextTick()会立即执行回调函数。 微任务队列
+* 是global的一个属性
+* Node.js提供的一个全局对象，表示当前运行 Node 进程。不用引入模块，可以直接使用
+    - 提供了一个与操作系统的简单接口。通常在你写本地命令行程序的时候有用
+* Node.js不断执行响应事件的JavaScript函数，直到没有任何响应事件的函数可以执行时，Node.js就退出了。如果想要在下一次事件响应中执行代码，可以调用process.nextTick()
+* 事件
+    - exit 当进程准备退出时触发
+    - beforeExit 当 node 清空事件循环，并且没有其他安排时触发这个事件。通常来说，当没有进程安排时 node 退出，但是 'beforeExit' 的监听器可以异步调用，这样 node 就会继续执行
+    - uncaughtException 当一个异常冒泡回到事件循环，触发这个事件。如果给异常添加了监视器，默认的操作（打印堆栈跟踪信息并退出）就不会发生
+    - Signal 当进程接收到信号时就触发
+* 属性
+    - stdout 标准输出流
+    - stderr 标准错误流
+    - stdin 标准输入流
+    - argv 返回一个数组，由命令行执行脚本时的各个参数组成。它的第一个成员总是node，第二个成员是脚本文件名，其余成员是脚本文件的参数
+    - execPath 返回执行当前脚本的 Node 二进制文件的绝对路径
+    - execArgv 返回一个数组，成员是命令行下执行脚本时，在Node可执行文件与脚本文件之间的命令行参数
+    - env. 返回一个对象，成员为当前 shell 环境变量
+* 方法
+    - abort() 导致 node 触发 abort 事件。会让 node 退出并生成一个核心文件
+    - chdir(directory) 改变当前工作进程的目录，如果操作失败抛出异常
+    - cwd() 返回当前进程的工作目录
+    - nextTick(callback) 一旦当前事件循环结束，调用回调函数
+* process.nextTick()会立即执行回调函数。微任务队列
 * setImmediate()会在下一轮执行回调函数
 * 定时器在 IO 操作的回调函数之前执行
     - Timer: setTimeout和setInterval回调函数。
@@ -454,28 +521,34 @@ npm publish
 
 ## fs
 
-* 文件系统模块，负责读写文件,同时提供了异步和同步的方法
+* 文件系统模块，负责读写文件
 - 异步读：不用等待IO操作，但代码较麻烦。回调函数：第一个参数代表错误信息，第二个参数代表结果
     + 当读取二进制文件时，不传入文件编码时，回调函数的data参数将返回一个Buffer对象。在Node.js中，Buffer对象就是一个包含零个或任意个字节的数组
 - 同步读：`var data = getJSONSync('http://example.com/ajax');`同步操作的好处是代码简单，缺点是程序将等待IO操作，在等待时间内，无法响应其它任何事件。和异步函数相比，多了一个Sync后缀，并且不接收回调函数，函数直接返回结果。
 - 写文件
 - 要获取文件大小，创建时间等信息，可以使用fs.stat()
 - Node环境执行的JavaScript代码是服务器端代码，所以，绝大部分需要在服务器运行期反复执行业务逻辑的代码，必须使用异步代码，否则，同步代码在执行时期，服务器将停止响应
-
-## stream
-
-* 一种抽象的数据结构,从输入到输出的动态一致，标准输入流（stdin）与标准输出流（stdout）。流的特点是数据是有序的，而且必须依次读取，或者依次写入。分写入流与读取流
-* 在Node.js中，流是一个对象，只需要响应流的事件就可以了
-    + 所有可以读取数据的流都继承自stream.Readable
-    + 所有可以写入的流都继承自stream.Writable
-* 事件
-    - data事件表示流的数据已经可以读取了，可能会有多次，每次传递的chunk是流的一部分数据
-    - end事件表示这个流已经到末尾了，没有数据可以读取了
-    - error事件表示出错了
-* 需要不断调用write()方法，最后以end()结束
-* pipe：一个Readable流和一个Writable流串起来后，所有的数据自动从Readable流进入Writable流
-    - 实现文件复制：当Readable流的数据读取完毕，end事件触发后，将自动关闭Writable流
-    - 如果不希望自动关闭Writable流 `readable.pipe(writable, { end: false });`
+* stream
+    - 一种抽象数据结构,从输入到输出的动态一致，标准输入流（stdin）与标准输出流（stdout）
+    - 特点是数据是有序的，而且必须依次读取，或者依次写入
+    - 类型：
+        + Readable - 可读操作
+        + Writable - 可写操作
+        + Duplex - 可读可写操作
+        + Transform - 操作被写入数据，然后读出结果
+    - 事件
+        + data - 当有数据可读时触发,可能会有多次，每次传递的chunk是流的一部分数据
+        + end - 没有更多的数据可读时触发
+        + error - 在接收和写入过程中发生错误时触发
+        + finish - 所有数据已被写入到底层系统时触发
+    - 一个对象，只需要响应流的事件就可以了
+        * 所有可以读取数据的流都继承自stream.Readable
+        * 所有可以写入的流都继承自stream.Writable
+    - 需要不断调用write()方法，最后以end()结束
+    - pipe：一个Readable流和一个Writable流串起来后，所有数据自动从Readable流进入Writable流
+        + 实现文件复制：当Readable流的数据读取完毕，end事件触发后，将自动关闭Writable流
+        + 如果不希望自动关闭Writable流 `readable.pipe(writable, { end: false });`
+        + 通过连接输出流到另外一个流并创建多个流操作链的机制。链式流一般用于管道操作
 
 ## http
 
@@ -509,117 +582,57 @@ npm publish
 
 * cpus属性返回一个数组，每个成员对应一个 CPU 内核
 
-## events
+## Buffer
 
-* 提供事件，形成模块之间的通信机制，消除模块与模块的强耦合
-* 构造函数EventEmitter()，可以用来生成事件发生器的实例
-* emit()方法用于触发事件
-    - 第一个参数是触发事件
-    - 第二个参数是事件传递的数据
-* emitter.on(name, f) 对事件name指定监听函数f
-* emitter.addListener(name, f) addListener是on方法的别名
-* emitter.once(name, f) 与on方法类似，但是监听函数f是一次性的，使用后自动移除
-* emitter.listeners(name) 返回一个数组，成员是事件name所有监听函数
-* emitter.removeListener(name, f) 移除事件name的监听函数f
-* emitter.removeAllListeners(name) 移除事件name的所有监听函数
-* 事件接口可以部署在任意对象上，使得这些对象也能订阅和发布消息
+* JavaScript 语言自身只有字符串数据类型，没有二进制数据类型。在处理像TCP流或文件流时，必须使用到二进制数据。因此定义了一个 Buffer 类，该类用来创建一个专门存放二进制数据的缓存区
+* 字符编码
+    - Buffer 实例一般用于表示编码字符的序列
+    - 通过使用显式的字符编码，就可以在 Buffer 实例与普通的 JavaScript 字符串之间进行相互转换
+* 创建
+    - Buffer.alloc(size[, fill[, encoding]])： 返回一个指定大小的 Buffer 实例，如果没有设置 fill，则默认填满 0
+    - Buffer.allocUnsafe(size)： 返回一个指定大小的 Buffer 实例，但是它不会被初始化，所以它可能包含敏感的数据
+    - Buffer.allocUnsafeSlow(size)
+    - Buffer.from(array)： 返回一个被 array 的值初始化的新的 Buffer 实例（传入的 array 的元素只能是数字，不然就会自动被 0 覆盖）
+    - Buffer.from(arrayBuffer[, byteOffset[, length]])： 返回一个新建的与给定的 ArrayBuffer 共享同一内存的 Buffer。
+    - Buffer.from(buffer)： 复制传入的 Buffer 实例的数据，并返回一个新的 Buffer 实例
+    - Buffer.from(string[, encoding])：返回一个被 string 的值初始化的新的 Buffer 实例
+* 写入 Node 缓冲区语法：`int buf.write(string[, offset[, length]][, encoding])`
+* 读取 Node 缓冲区数据
+    - `string buf.toString([encoding[, start[, end]]])`
+    - 当字符串化一个 Buffer 实例时，JSON.stringify() 会隐式地调用该 toJSON()
+* 缓冲区合并 `Buffer.concat(list[, totalLength])`
+* 比较 返回一个数字，表示 buf 在 otherBuffer 之前，之后或相同
+* 拷贝 将一个缓冲区拷贝到另一个指定位置
 
-```js
-// 文件服务器
-var
-    fs = require('fs'),
-    url = require('url'),
-    path = require('path'),
-    http = require('http');
+### 模块系统
 
-// 从命令行参数获取root目录，默认是当前目录:
-var root = path.resolve(process.argv[2] || '.');
-
-console.log('Static root dir: ' + root);
-
-// 创建服务器:
-var server = http.createServer(function (request, response) {
-    // 获得URL的path，类似 '/css/bootstrap.css':
-    var pathname = url.parse(request.url).pathname;
-    // 获得对应的本地文件路径，类似 '/srv/www/css/bootstrap.css':
-    var filepath = path.join(root, pathname);
-    // 获取文件状态:
-    fs.stat(filepath, function (err, stats) {
-        if (!err && stats.isFile()) {
-            // 没有出错并且文件存在:
-            console.log('200 ' + request.url);
-            // 发送200响应:
-            response.writeHead(200);
-            // 将文件流导向response:
-            fs.createReadStream(filepath).pipe(response);
-        } else {
-            // 出错了或者文件不存在:
-            console.log('404 ' + request.url);
-            // 发送404响应:
-            response.writeHead(404);
-            response.end('404 Not Found');
-        }
-    });
-});
-server.listen(8080);
-console.log('Server is running at http://127.0.0.1:8080/');
-
-const crypto = require('crypto');
-const hash = crypto.createHash('md5');
-// 可任意多次调用update():
-hash.update('Hello, world!');
-hash.update('Hello, nodejs!');
-console.log(hash.digest('hex')); // 7e1977739c748beac0c0fd14fd26a544
-
-const hmac = crypto.createHmac('sha256', 'secret-key');
-hmac.update('Hello, world!');
-hmac.update('Hello, nodejs!');
-console.log(hmac.digest('hex'));
-
-function aesEncrypt(data, key) {
-    const cipher = crypto.createCipher('aes192', key);
-    var crypted = cipher.update(data, 'utf8', 'hex');
-    crypted += cipher.final('hex');
-    return crypted;
-}
-function aesDecrypt(encrypted, key) {
-    const decipher = crypto.createDecipher('aes192', key);
-    var decrypted = decipher.update(encrypted, 'hex', 'utf8');
-    decrypted += decipher.final('utf8');
-    return decrypted;
-}
-var data = 'Hello, this is a secret message!';
-var key = 'Password!';
-var encrypted = aesEncrypt(data, key);
-var decrypted = aesDecrypt(encrypted, key);
-console.log('Plain text: ' + data);
-console.log('Encrypted text: ' + encrypted);
-console.log('Decrypted text: ' + decrypted);
-```
-
-```sh
-API_URL=http://example.com/api node ./index.js # 通过process.env.API_URL取得传入的API地址
-```
-
-### 模块化
-
-为了编写可维护 代码，把很多函数分组，分别放到不同的文件里，这样，每个文件包含的代码就相对较少，很多编程语言都采用这种组织代码的方式。在Node环境中，一个.js文件就称之为一个模块（module）
-
-* 大大提高了代码的可维护性
-* 编写代码不必从零开始
-* 使用模块还可以避免函数名和变量名冲突。相同名字的函数和变量完全可以分别存在不同的模块中
-* 这种模块加载机制被称为CommonJS规范。在这个规范下，每个.js文件都是一个模块，它们内部各自使用的变量名和函数名都互不冲突
-* 模块的名字就是文件名（去掉.js后缀）
-* 封装模块导出 `module.exports = variable;`
-* 引入模块：如果不加相对地址：Node会依次在内置模块、全局模块和当前模块下查找 `var foo = require('other_module');`
-* 实现“模块”功能的奥妙就在于JavaScript是一种函数式编程语言，支持闭包。如果我们把一段JavaScript代码用一个函数包装起来，这段代码的所有“全局”变量就变成了函数内部的局部变量
-* module.exports vs exports
-    - Node会把整个待加载的hello.js文件放入一个包装函数load中执行。在执行这个load()函数前，Node准备好了module变量
-    - load()函数最终返回module.exports
-    - 默认情况下，Node准备的exports变量和module.exports变量实际上是同一个变量，并且初始化为空对象{}
-    - 如果我们要输出的是一个函数或数组，那么，只能给module.exports赋值 `module.exports = function () { return 'foo'; };` 给exports赋值是无效的，因为赋值后，module.exports仍然是空对象{}
-* 如果要输出一个键值对象{}，可以利用exports这个已存在的空对象{}，并继续在上面添加新的键值；
-* 如果要输出一个函数或数组，必须直接对module.exports对象赋值。
+* 模块是Node.js 应用程序的基本组成部分，文件和模块是一一对应的。一个 Node.js 文件就是一个模块，这个文件可能是JavaScript 代码、JSON 或者编译过的C/C++ 扩展
+* 优点
+    - 提高代码可维护性
+    - 编写不必从零开始
+    - 避免函数名和变量名冲突。相同名字的函数和变量完全可以分别存在不同的模块中
+* CommonJS规范
+* 实现“模块”功能的奥妙就在于JavaScript是一种函数式编程语言，支持闭包。如果把一段JavaScript代码用一个函数包装起来，这段代码的所有“全局”变量就变成了函数内部的局部变量
+* exports 是模块公开的接口
+    - 把一个对象封装到模块  `module.exports=`
+    - module.exports vs exports
+        + Node会把整个待加载的hello.js文件放入一个包装函数load中执行。在执行这个load()函数前，Node准备好了module变量
+        + load()函数最终返回module.exports
+        + 默认情况下，Node准备的exports变量和module.exports变量实际上是同一个变量，并且初始化为空对象{}
+        + 如果要输出的是一个函数或数组，那么，只能给module.exports赋值 `module.exports = function () { return 'foo'; };` 给exports赋值是无效的，因为赋值后，module.exports仍然是空对象{}
+    - 输出一个键值对象{}，可以利用exports这个已存在的空对象{}，并继续在上面添加新的键值
+    - 输出一个函数或数组，必须直接对module.exports对象赋值
+* require 用于从外部获取一个模块的接口，即所获取模块的 exports 对象
+    - 类型
+        + http、fs、path等，原生模块。
+        + ./mod或../mod，相对路径的文件模块。
+        + /pathtomodule/mod，绝对路径的文件模块。
+        + mod，非原生模块的文件模块
+    - 文件查找策略
+        + 优先从文件模块缓存中加载已经存在模块
+        + 原生模块优先级仅次于文件模块缓存的优先级
+        + 当文件模块缓存中不存在，而且不是原生模块的时候，Node.js 会解析 require 方法传入的参数，并从文件系统中加载实际的文件
+    - 引入模块：如果不加相对地址：Node会依次在内置模块、全局模块和当前模块下查找 `var foo = require('other_module');`
 
 ```js
 // hello.js
@@ -711,17 +724,29 @@ module.exports.bar = function () { return 'bar'; };
 module.exports = function () { return 'foo'; };
 ```
 
+## util
+
+* Node.js 核心模块，提供常用函数的集合
+* 方法
+    - callbackify(original) 将 async 异步函数（或者一个返回值为 Promise 的函数）转换成遵循异常优先的回调风格的函数
+        + 回调函数是异步执行的，并且有异常堆栈错误追踪。 如果回调函数抛出一个异常，进程会触发一个 'uncaughtException' 异常，如果没有被捕获，进程将会退出
+        + null 在回调函数中作为一个参数有其特殊的意义，如果回调函数的首个参数为 Promise 拒绝的原因且带有返回值，且值可以转换成布尔值 false，这个值会被封装在 Error 对象里，可以通过属性 reason 获取
+    - inherits(constructor, superConstructor) 是一个实现对象间原型继承的函数
+    - inspect(object,[showHidden],[depth],[colors]) 是一个将任意对象转换为字符串的方法，通常用于调试和错误输出。它至少接受一个参数 object，即要转换的对象
+    - isArray(object) 如果给定的参数 "object" 是一个数组返回 true，否则返回 false
+    -
+
 ## [mongodb](https://www.npmjs.com/package/mongodb)
 
 ```js
 npm install mongodb --save
 ```
 
-### nodejs多进程架构
+### 多进程架构
 
-cluster模块，nodejs是单线程，不能充分利用多核cpu资源，因此要启动多进程，每个进程利用一个CPU，实现多核CPU利用。
+cluster模块，nodejs是单线程，不能充分利用多核cpu资源，因此要启动多进程，每个进程利用一个CPU，实现多核CPU利用
 
-- 启多个进程，每个进程绑定不同的端口，主进程对外接受所有的网络请求，再将这些请求分别代理到不同的端口的进程上，通过代理可以避免端口不能重复监听的问题，甚至可以再代理进程上做适当的负载均衡，由于进程每接收到一个连接，将会用掉一个文件描述符，因此代理方案中客户端连接到代理进程，代理进程连接到工作进程的过程需要用掉两个文件描述符，操作系统的文件描述符是有限的，代理方案浪费掉一倍数量的文件描述符的做法影响了系统的扩展能力。
+* 启多个进程，每个进程绑定不同的端口，主进程对外接受所有的网络请求，再将这些请求分别代理到不同的端口的进程上，通过代理可以避免端口不能重复监听的问题，甚至可以再代理进程上做适当的负载均衡，由于进程每接收到一个连接，将会用掉一个文件描述符，因此代理方案中客户端连接到代理进程，代理进程连接到工作进程的过程需要用掉两个文件描述符，操作系统的文件描述符是有限的，代理方案浪费掉一倍数量的文件描述符的做法影响了系统的扩展能力。
 - 父进程创建socket，并且bind、listen后，通过fork创建多个子进程，通过send方法给每个子进程传递这个socket，子进程调用accpet开始监听等待网络连接。
 
 ```js
@@ -913,39 +938,6 @@ location / {
 }
 ```
 
-## Web开发
-
-软件开始主要运行在桌面上，而数据库这样的软件运行在服务器端，这种Client/Server模式简称CS架构。
-
-CS架构不适合Web，最大的原因是Web应用程序的修改和升级非常迅速，而CS架构需要每个客户端逐个升级桌面App，因此，Browser/Server模式开始流行，简称BS架构。
-
-* 客户端只需要浏览器，应用程序的逻辑和数据都存储在服务器端。浏览器只需要请求服务器，获取Web页面，并把Web页面展示给用户即可。
-* Web页面也具有极强的交互性。由于Web页面是用HTML编写的，而HTML具备超强的表现力，并且，服务器端升级后，客户端无需任何部署就可以使用到新的版本
-
-### 发展阶段
-
-* 静态Web页面：由文本编辑器直接编辑并生成静态的HTML页面，如果要修改Web页面的内容，就需要再次编辑HTML源文件，早期的互联网Web页面就是静态的；
-* CGI：由于静态Web页面无法与用户交互，比如用户填写了一个注册表单，静态Web页面就无法处理。要处理用户发送的动态数据，出现了Common Gateway Interface，简称CGI，用C/C++编写。
-* ASP/JSP/PHP：由于Web应用特点是修改频繁，用C/C++这样的低级语言非常不适合Web开发，而脚本语言由于开发效率高，与HTML结合紧密，因此，迅速取代了CGI模式。ASP是微软推出的用VBScript脚本编程的Web开发技术，而JSP用Java来编写脚本，PHP本身则是开源的脚本语言。
-* MVC：为了解决直接用脚本语言嵌入HTML导致的可维护性差的问题，Web应用也引入了Model-View-Controller的模式，来简化Web开发。ASP发展为ASP.Net，JSP和PHP也有一大堆MVC框架。
-
-常见的Web框架包括：Express，Sails.js，koa，Meteor，DerbyJS，Total.js，restify……
-ORM框架比Web框架要少一些：Sequelize，ORM2，Bookshelf.js，Objection.js……
-模版引擎PK：Jade，EJS，Swig，Nunjucks，doT.js……
-测试框架包括：Mocha，Expresso，Unit.js，Karma……
-构建工具有：Grunt，Gulp，Webpack……
-
-### 实际服务器
-
-* nginx作为反向代理服务器，拥有诸多优势，可以做负载均衡和静态资源服务器
-* 后面的两台机器就是我们的nodejs应用服务器集群
-* nginx 的负载均衡是用在多机器环境下的，单机的负载均衡还是要靠cluster 这类模块来做
-* nginx与node应用服务器的对比：
-* nginx是一个高性能的反向代理服务器，要大量并且快速的转发请求，所以不能采用上面第三种方法，原因是仅有一个进程去accept，然后通过消息队列等同步方式使其他子进程处理这些新建的连接，效率会低一些。
-* nginx采用第二种方法，那就依然可能会产生负载不完全均衡和惊群问题。nginx是怎么解决的呢：
-* nginx中使用mutex互斥锁解决这个问题，具体措施有使用全局互斥锁，每个子进程在epoll_wait()之前先去申请锁，申请到则继续处理，获取不到则等待，并设置了一个负载均衡的算法（当某一个子进程的任务量达到总设置量的7/8时，则不会再尝试去申请锁）来均衡各个进程的任务量。具体的nginx如何解决惊群，看这篇文章: <http://blog.csdn.net/russell_tao/article/details/7204260>
-* node应用服务器为什么可以采用方案三呢，我的理解是：node作为具体的应该服务器负责实际处理用户的请求，处理可能包含数据库等操作，不是必须快速的接收大量请求，而且转发到某具体的node单台服务器上的请求较之nginx也少了很多。
-
 ## 问题
 
 > node-sass
@@ -972,7 +964,6 @@ yarn install node-sass
 * [scotch-io/node-todo](https://github.com/scotch-io/node-todo):A simple Node/MongoDB/Angular todo app https://scotch.io/tutorials/creating-…
 * [alsotang/node-lessons](https://github.com/alsotang/node-lessons):📕《Node.js 包教不包会》 by alsotang
 * [node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
-* [NodeJS的代码调试和性能调优](http://www.cnblogs.com/hustskyking/p/how-to-build-a-https-server.html)
 
 ## 工具
 
@@ -1046,7 +1037,7 @@ yarn install node-sass
 ## reference
 
 * [Guides](https://nodejs.org/en/docs/guides/)
-* [Node.js v8.x 中文文档](https://www.nodeapp.cn/)
 * [Node.js v11.6.0 Documentation](https://nodejs.org/api/)
 * [goldbergyoni/nodebestpractices](https://github.com/goldbergyoni/nodebestpractices):white_check_mark The largest Node.js best practices list (September 2019) https://twitter.com/nodepractices/
 * [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list. Curated from the top ranked articles and always updated
+* [NodeJS的代码调试和性能调优](http://www.cnblogs.com/hustskyking/p/how-to-build-a-https-server.html)

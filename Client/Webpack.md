@@ -26,7 +26,6 @@ A bundler for javascript and friends. Packs many modules into a few bundled asse
 
 ## 安装与使用
 
-*
 * 参数
   - --progress  #  显示打包过程的进度
   - --display-modules  #  显示打包的模块

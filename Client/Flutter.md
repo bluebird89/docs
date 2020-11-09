@@ -26,6 +26,7 @@ sudo xcodebuild -runFirstLaunch
 # 运行模拟器
 open -a Simulator
 
+# 创建项⽬目
 flutter create myapp
 cd myapp
 flutter run
