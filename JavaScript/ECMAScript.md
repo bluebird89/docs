@@ -20,32 +20,38 @@ Status, process, and documents for ECMA262 https://tc39.github.io/ecma262/
   - Object.getOwnPropertyDescriptors:返回给定对象所有属性的详细信息（包括 get 和 set 方法）。添加它的主要动机是允许将一个对象浅复制 / 克隆到另一个对象，同时也复制 getter 和 setter 函数而不是 Object.assign
   - Object.assign 将浅复制除原始源对象的 getter 和 setter 函数之外的所有东西
   - 函数参数中添加尾逗号（trailing comma）
-  - async/await:async 关键字告诉 JavaScript 编译器要以不同的方式处理这个函数。在遇到函数中的 await 关键字时，编译器就会暂停。它假定 await 之后的表达式会返回一个 promise 并等待，直到 promise 完成或被拒绝
+  - async/await:async 关键字告诉 JavaScript 编译器要以不同的方式处理这个函数。在遇到函数中的 await 关键字时，编译器就会暂停。假定 await 之后的表达式会返回一个 promise 并等待，直到 promise 完成或被拒绝
 * ECMAScript 2018
 * ES2019
-
   - toString()方法返回函数代码本身，以前会省略注释和空格
   - 允许catch语句省略参数
 
-### Modules
+## Modules
 
-* CommonJS:Node.JS首先采用了js模块化的概念。Node.js服务器端通过exports、module.exports来输出模块，并使用require同步载入模块，而浏览器端的可以使用Browserify实现
-* AMD:AMD规范用于异步加载模块，主要用于浏览器端，当然也支持其他js环境，主要应用有requireJS
+* Node.JS首先采用了js模块化的概念
+* CommonJS
+  - Node.js服务器端通过exports、module.exports来输出模块，并使用require同步载入模块
+  - 浏览器端的可以使用Browserify实现
+* AMD规范 用于异步加载模块，主要用于浏览器端，当然也支持其他js环境，主要应用有requireJS
 * ImmutableJS:知道在JavaScript中有两种数据类型：基础数据类型和引用类型。在JavaScript中的对象数据是可以变的，由于使用了引用，所以修改了复制的值也会相应地修改原始值。通常用deepCopy来避免修改，但这样做法会产生资源浪费。而ImmutableJS的出现很好的解决了这一问题
-* ES6 Module:ES6标准定义了JS的模块化方式，目的是取代CommonJS、AMD、CMD等规范，一统江湖，成为通用的模块化解决方案。但浏览器和Node端对ES6的支持度还不是很高，需要用Babel进行转译（Babel编译器可以将ES6、JSX等代码转换成浏览器可以看得懂的语法）
-
-#### 优点
-
-* 将代码分割成功能独立的更小的文件
-* 有助于消除命名冲突
-* 不再需要对象作为命名空间（比如Math对象），不会污染全局变量
-* ES6 模块在编译时就能确定模块的依赖关系，以及输入和输出的变量，从而可以进行静态优化
+* ES6 Module
+  - ES6标准定义了JS模块化方式，目的是取代CommonJS、AMD、CMD等规范，一统江湖，成为通用的模块化解决方案
+  - 浏览器和Node端对ES6的支持度还不是很高，需要用Babel进行转译（Babel编译器可以将ES6、JSX等代码转换成浏览器可以看得懂的语法）
+* 优点
+  - 将代码分割成功能独立的更小的文件
+  - 有助于消除命名冲突
+  - 不再需要对象作为命名空间（比如Math对象），不会污染全局变量
+  - ES6 模块在编译时就能确定模块的依赖关系，以及输入和输出的变量，从而可以进行静态优化
 
 #### 基本用法
 
 * export用于规定输出模块的对外接口
   - default用于指定模块输出的默认接口
 * as用于重命名输出和输入接口
+* import用于输入模块提供的接口
+  - 表示输入模块的所有接口
+  - 多次重复执行同一句import语句，只会执行一次
+  - 输入变量都是只读的，加载后不能修改接口
 
 ```js
 // export 四种常规用法
@@ -77,14 +83,7 @@ export m;
 function foo() {
   export default 'bar' // SyntaxError
 }
-```
 
-* import用于输入模块提供的接口
-  - *表示输入模块的所有接口。
-  - 如果多次重复执行同一句import语句，那么只会执行一次，而不会执行多次
-  - import命令输入的变量都是只读的，加载后不能修改接口。
-
-```js
 // 用法1：仅执行 my_module 模块，不输入任何值（可能没啥用，但是是合法的）
 import 'my_module';
 // 用法2：输入 my_module 的默认接口, 默认接口重命名为 m
@@ -170,6 +169,12 @@ console.log(myOptions); // { style: { color: 'green', fontSize: 14 } }
 myOptions.style.color = "red";
 ```
 
+## 全局变量
+
+* 在最外层定义的变量
+* 全局对象的属性
+* 隐式定义的变量（未定义直接赋值的变量）
+
 ## 解构
 
 ## 箭头函数
@@ -184,9 +189,9 @@ myOptions.style.color = "red";
   - 定义对象的方法，且该方法内部包括this
   - 需要动态this的时候，也不应使用箭头函数
 
-## 尾调用优化（Tail call optimization）
+## 尾调用优化 Tail call optimization
 
-* 尾调用（Tail Call）是函数式编程的一个重要概念，是指某个函数的最后一步是调用另一个函数
+* 尾调用（Tail Call）是函数式编程的一个重要概念，指某个函数的最后一步是调用另一个函数
 * 调用被调函数后，调用函数就结束了，执行到最后一步，完全可以删除调用函数的调用帧，只保留被调函数的调用帧
 * 只保留内层函数的调用帧。如果所有函数都是尾调用，那么完全可以做到每次执行时，调用帧只有一项，这将大大节省内存
 * 只有不再用到外层函数的内部变量，内层函数的调用帧才会取代外层函数的调用帧，否则就无法进行“尾调用优化”
@@ -203,7 +208,7 @@ myOptions.style.color = "red";
 
 ## Array
 
-* 数组是复合的数据类型，直接复制的话，只是复制了指向底层数据结构的指针，而不是克隆一个全新的数组
+* 复合数据类型，直接复制的话，只是复制了指向底层数据结构的指针，而不是克隆一个全新的数组
 * 数组的空位指，数组的某一个位置没有任何值.空位不是undefined，一个位置的值等于undefined，依然是有值的。空位是没有任何值。ES6 则是明确将空位转为undefined
 * 扩展运算符（spread）是三个点（...）:好比 rest 参数的逆运算，将一个数组转为用逗号分隔的参数序列
   - 只有函数调用时，扩展运算符才可以放在圆括号中，否则会报错
@@ -312,7 +317,7 @@ myOptions.style.color = "red";
 * 在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写
 * 专术名词：
   - target是指代理的原对象，它是需要拦截访问的原始对象，它总是作为Proxy构造器的第一个方法，也可以传递到每个trap中。
-  - handler是一个包含要进行拦截和处理的对象，也就是拦截了原始对象以后想干什么？主要的代理内容在这里，是作为Proxy构造器的第二个方法参数传统，它是实现Proxy API。
+  - handler是一个包含要进行拦截和处理的对象，也就是拦截了原始对象以后想干什么？主要的代理内容在这里，是作为Proxy构造器的第二个方法参数传统，它是实现Proxy API
   - trap用来规定对于指定什么方法进行拦截处理，如果想拦截get方法的调用，那么要定义一个get trap。
 * 支持拦截操作
   - get(target, propKey, receiver)：拦截对象属性的读取，比如proxy.foo和proxy['foo']
@@ -357,7 +362,7 @@ myOptions.style.color = "red";
 
 * 异步编程的一种解决方案
 * 简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息
-* Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理
+* 提供统一的 API，各种异步操作都可以用同样的方法进行处理
 * 构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject函数
   - resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去
   - reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去
@@ -377,7 +382,7 @@ myOptions.style.color = "red";
 * Promise.all()方法用于将多个 Promise 实例，包装成一个新的 Promise 实例
   - 参数可以不是数组，但必须具有 Iterator 接口，且返回的每个成员都是 Promise 实例
 
-## 遍历器（Iterator）
+## 遍历器 Iterator
 
 * 一种接口，为各种不同的数据结构提供统一的访问机制。任何数据结构只要部署 Iterator 接口，就可以完成遍历操作（即依次处理该数据结构的所有成员）
 * 作用
@@ -426,6 +431,12 @@ myOptions.style.color = "red";
 * Promise 对象
 * Generator 函数的语法糖
 
+## 工具
+
+* code generator
+  - [estools/escodegen](https://github.com/estools/escodegen):ECMAScript code generator
+* [addyosmani/es6-tools](https://github.com/addyosmani/es6-tools):An aggregation of tooling for using ES6 today
+
 ## 参考
 
 * [standard-things/esm](https://github.com/standard-things/esm)：Tomorrow's ECMAScript modules today!
@@ -434,9 +445,3 @@ myOptions.style.color = "red";
 * [ericdouglas/ES6-Learning](https://github.com/ericdouglas/ES6-Learning):📋 List of resources to learn ECMAScript 6!
 * [metagrover/ES6-for-humans](https://github.com/metagrover/ES6-for-humans):A kickstarter guide to writing ES6
 * [DrkSephy/es6-cheatsheet](https://github.com/DrkSephy/es6-cheatsheet):ES2015 [ES6] cheatsheet containing tips, tricks, best practices and code snippets http://slides.com/drksephy/ecmascript-2015
-
-## 工具
-
-* code generator
-  - [estools/escodegen](https://github.com/estools/escodegen):ECMAScript code generator
-* [addyosmani/es6-tools](https://github.com/addyosmani/es6-tools):An aggregation of tooling for using ES6 today
