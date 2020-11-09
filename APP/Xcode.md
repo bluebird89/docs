@@ -9,6 +9,9 @@
 xcode-select –install
 
 sudo gem install cocoapods
+
+# unable to find utility "simctl", not a developer tool or in PATH
+Xcode>preferences>Locations里面，设置之后再运行终端即可
 ```
 
 ## Xcode Command Line Tools
