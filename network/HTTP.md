@@ -722,6 +722,9 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 * HTTPS = HTTP 协议(进行通信) + SSL/TLS 协议（加密数据包），增加的 S 代表 Secure
   - SSL（Secure Sockets Layer 安全套接字层）:一项标准技术，用于在客户端与服务器之间进行加密通信，可确保互联网连接安全，防止网络犯罪分子读取和修改任何传输信息，包括个人资料。使用40 位关键字作为RC4流加密算法
   - TSL（Transport Layer Security 传输层安全）:是 SSL 的继承协议，建立在 SSL 3.0 协议规范之上，是更为安全的升级版 SSL
+    + Privacy - encrypting data between client and server using Encryption Algorithms.
+    + Authentication - ensuring that server is who it claims to be using Certificates.
+    + Integrity - verifying that data have not been forged using Message Authentication Code (MAC)
   - 采用 SSL 后，HTTP 就拥有了 HTTPS 的加密、证书和完整性保护等功能
   - 其它运行在应用层的 SMTP 和 Telnet 等协议均可配合 SSL 协议使用
 * 数字证书
@@ -735,6 +738,15 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     + 认证服务器公钥的是真实有效的数字证书认证机构
     + 服务器的公钥是值得信赖的
 * HTTPS 综合运用了这两种加密方式的优势:使用非对称加密传输对称加密需要用到的密钥，而真正的双方大数据量的通信都是通过对称加密进行的，结合数字证书（包含公钥信息）验证服务端公钥的真实性
+  - Symmetric Encryption
+    + There is only one key: the client and server use the same key to encrypt and decrypt.
+    + Fast and cheap (nanoseconds per operation).
+    + A common algorithm is AES.
+  - Asymmetric Encryption (also known as Public-key Encryption)
+    + There is a pair of two keys: the public key encrypts the message, and only the corresponding private key can decrypt it.
+    + Slow and expensive (microseconds to milliseconds per operation).
+    + Some common algorithms are RSA and Diffie-Hellman (DH)
+  - TLS first uses an asymmetric algorithm to exchange shared secrets between both sides, then generates a symmetric key (the session key) from the shared secrets, finally uses the session key to encrypt application data (HTTP request/response). A cryptographic system involves certificates and public-key encryption is often called Public Key Infrastructure (PKI)
   - 启动和使用 TLS 加密的通信会话的过程。在 TLS 握手期间，Internet 中的通信双方会彼此交换信息，验证密码套件，交换会话密钥,会根据所使用的密钥交换算法的类型和双方支持的密码套件而不同
   - ClientHello：客户端通过向服务器发送 hello 消息开始建立与服务器的 SSL 通信。报文中包含了 客户端支持的 TLS 版本号(TLS1.0 、TLS1.2、TLS1.3) 、客户端支持的密码套件、加密组件、压缩算法等信息，另外，还有一个随机数，用于后续对称加密密钥的协商
   - ServerHello：服务器可以进行 SSL 通信时，会以 Server Hello 报文作为应答，含 SSL 协议版本、加密组件、压缩算法等信息，同时还有一个随机数，用于后续对称加密密钥的协商
@@ -791,7 +803,10 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 * 优化SSL/TLS
   - 会话缓存。使用ssl_session_cache指令开启缓存，缓存每次SSL/STL连接时用到的参数。
   - 会话票或ID。把特定SSL/TLS会话的信息保存为一个会话票或ID，以便连接重用，而不必重新握手。
-  - OCSP封套。通过缓存SSL/TLS证书信息减少握手时间。
+  - OCSP封套。通过缓存SSL/TLS证书信息减少握手时间
+* 参考
+  - [](https://howhttps.works/)
+  - [How HTTPS Works in Layman's Terms - TLS 1.2 and 1.3](https://vinta.ws/code/how-https-works-in-laymans-terms-tls-1-2-and-1-3.html)
 
 ![Alt text](../_staic/SSL_handshake_with_two_way_authentication_with_certificates.svg "Optional title")
 ![HTTPS签名和验证](../static/https-ac.png "HTTPS签名和验证")

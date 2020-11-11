@@ -2,10 +2,10 @@
 
 The Go programming language https://golang.org [中国官网](https://golang.google.cn/)
 
-* 第一个正式版本的Go语言于2012 年3月28日正式发布，让Go语言迎来了第一个引人瞩目的里程碑
+* 第一个正式版本 2012 年3月28日正式发布，迎来了第一个引人瞩目的里程碑
 * 特性
   - 自动垃圾回收
-  - 更丰富的内置类型
+  - 更丰富内置类型
   - 函数多返回值
   - 错误处理
   - 匿名函数和闭包
@@ -13,10 +13,12 @@ The Go programming language https://golang.org [中国官网](https://golang.goo
   - 并发编程
   - 反射
   - 语言交互性
+* 版本
+  - 1.16
 
 ## [Install](https://golang.org/dl/)
 
-* Go 编译器支持交叉编译，可以在一台机器上构建运行在具有不同操作系统和处理器架构上运行的应用程序，也就是说编写源代码的机器可以和目标机器有完全不同的特性
+* 编译器支持交叉编译，可以在一台机器上构建，运行在具有不同操作系统和处理器架构上，也就是说编写源代码的机器可以和目标机器有完全不同的特性
   - $GOOS       $GOARCH
   - android     arm
   - darwin      386
@@ -50,17 +52,16 @@ The Go programming language https://golang.org [中国官网](https://golang.goo
   - windows     386
   - windows     amd64
 * 环境变量
-  - GOROOT：(std lib)Go的安装路径,默认会安装到如下目录：`/usr/local/go`
-  - GOARCH 表示目标机器的处理器架构，值可以是 386、amd64 或 arm。
-  - GOOS 表示目标机器的操作系统，值可以是 darwin、freebsd、linux 或 windows。
-  - GOBIN Go项目的二进制文件存放目录，默认是 GOROOT/bin
-  - GOPATH：(external libs):Go工作空间
-    + 可以接受多个路径，并且路径和路径之间用windows用“;”，linux（mac）用“:”分隔,每个目录下包含目录
-      * bin：编译生成的可执行文件路径：需要把GOPATH中的可执行目录也配置到环境变量中, 否则自行下载的第三方go工具就无法使用了 编译后二进制的存放目的地
+  - GOROOT：(std lib)Go安装路径,默认会安装目录：`/usr/local/go`
+  - GOARCH 表示目标机器处理器架构，值可以是 386、amd64 或 arm
+  - GOOS 表示目标机器操作系统，值可以是 darwin、freebsd、linux 或 windows
+  - GOBIN Go项目二进制文件存放目录，默认 GOROOT/bin
+  - GOPATH：(external libs):Go工作空间，可以接受多个路径，路径之间用windows用“;”，linux（mac）用“:”分隔
+    + 每个目录都代表一个工作区,存放Go的开发代码和第三方包代码
+      * bin：编译生成可执行文件路径：需要把GOPATH中的可执行目录配置到环境变量中, 否则自行下载的第三方go工具就无法使用了，编译后二进制的存放目的地
       * pkg：编译包时，生成的.a文件存放路径
       * src：源码路径 import 包时的搜索路径
-    + 每个目录都代表一个工作区,存放Go的开发代码和第三方包代码
-    + 不要把GOPATH设置成go的安装路径,在用户目录下面创建一个目录, 如gopath.$GOPATH 默认采用和 $GOROOT 一样的值，但从 Go 1.1 版本开始，必须修改为其它路径
+    + 不要把GOPATH设置成go安装路径,在用户目录下面创建一个目录
     + go get命令去获取远程库时，一般会安装到第一个工作区当中
 
 ```sh
@@ -79,8 +80,6 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
 
-source ~/.zshrc|/etc/profile
-
 ### Mac
 brew install golang
 mkdir -p $GOPATH $GOPATH/src $GOPATH/pkg $GOPATH/bin
@@ -91,7 +90,7 @@ export GOPROXY=https://goproxy.cn
 export GOBIN=$GOPATH/bin
 export PATH=$GOPATH/bin:$PATH:$GOROOT/bin
 
-source .bash_profile
+source ~/.zshrc|/etc/profile｜.bash_profile
 
 go version
 go env
@@ -139,6 +138,7 @@ GOOS=linux GOARCH=amd64 go build main.go
   - 归档文件的相对目录与 pkg 目录之间还有一级目录，叫做平台相关目录。平台相关目录的名称是由 build（也称“构建”）的目标操作系统、下划线和目标计算架构的代号组成的，比如 linux_amd64
 * 构建 VS 安装
   - go install 安装操作会先执行构建，然后还会进行链接操作，并且把结果文件搬运到指定目录
+    + installs binaries to $GOBIN, which defaults to $GOPATH/bin
     + 安装的是库源码文件,结果文件会被搬运到它所在工作区的 pkg 目录下的某个子目录中
     + 如果安装的是命令源码文件，那么结果文件会被搬运到它所在工作区的 bin 目录中，或者环境变量
   - 构建和安装代码包的时候都会执行编译、打包等操作，并且，这些操作生成的任何文件都会先被保存到某个临时的目录中
@@ -152,6 +152,9 @@ GOOS=linux GOARCH=amd64 go build main.go
       * -x，命令具体都执行了哪些操作
       * -n，只查看具体操作而不执行它们
       * -v,看到编译的代码包的名称。它在与-a 结合
+  - go get
+    + caches downloaded modules in $GOMODCACHE, which defaults to $GOPATH/pkg/mod
+    + caches downloaded checksum database state in $GOPATH/pkg/sumdb
 * 结构
   - api：用于存放依照Go版本顺序的API增量列表文件。这里所说的API包含公开的变量、常量、函数等。这些API增量列表文件用于Go语言API检查
   - bin：用于存放主要的标准命令文件（可执行文件），包含go、godoc、gofmt
@@ -538,7 +541,7 @@ func main() {
 * 循环 for i := range c 会不断从信道接收值，直到它被关闭
 * 信道与文件不同，通常情况下无需关闭它们。只有在必须告诉接收者不再有需要发送的值时才有必要关闭，例如终止一个 range 循环
 
-## 互斥锁（Mutex）
+## 互斥锁 Mutex
 
 * 保证每次只有一个 Go 程能够访问一个共享的变量，从而避免冲突
 * 在代码前调用 Lock 方法，在代码后调用 Unlock 方法来保证一段代码的互斥执行
@@ -646,7 +649,6 @@ func main() {
   - 生成cpu profile文件`go test -bench=".*" -cpuprofile=cpu.prof -c`
   - 用go tool pprof工具 `go tool pprof *.test cpu.prof`
 * 辅助单元测试的 assert 包
-  -
 
 ```sh
 go test [-c] [-i] [build flags] [packages] [flags for test binary]
@@ -740,8 +742,22 @@ go env -w GOSUMDB=off # 示Get https://sum.golang.org/lookup/xxxxxx: dial tcp 21
 go env -w GOSUMDB="sum.golang.google.cn"
 ```
 
-## Module
+## modules
 
+* Before Go modules, Go development using dependencies used “GOPATH development mode,the go command used the GOPATH variable for the following purposes
+  - The go install command installed binaries to $GOBIN, which defaults to $GOPATH/bin.
+  - The go install command installed the compiled package file for import "example.com/y/z" to $GOPATH/pkg/example.com/y/z.a.
+  - The go get command downloaded source code satisfying import "example.com/y/z" to $GOPATH/src/example.com/y/z
+* Go modules
+  - Go 1.11 (August 2018) introduced the GO111MODULE variable, which defaulted to auto
+    + With GO111MODULE=off, the go command used GOPATH mode always.
+    + With GO111MODULE=on, the go command used module mode always
+    + With GO111MODULE=auto (or leaving GO111MODULE unset), the go command decided the mode based on the current directory
+      * If the current directory was outside $GOPATH/src and was within a source tree with a go.mod file in its root, then the go command used Go module mode
+      * Otherwise the go command used GOPATH mode
+  - Go 1.13 (August 2019) adjusted GO111MODULE=auto mode to remove the $GOPATH/src restriction: if a directory inside $GOPATH/src has a go.mod file, commands run in or below that directory now use module mode. This allows users to continue to organize their checked-out code in an import-based hierarchy but use modules for individual checkouts
+  - Go 1.16 (February 2021) will change the default to GO111MODULE=on, using module mode always. That is, GOPATH mode will be disabled entirely by default. Users who need one to use GOPATH mode for one more release can set GO111MODULE=auto or GO111MODULE=off explicitly.
+  - Go 1.17 (August 2021) will remove the GO111MODULE setting and GOPATH mode entirely, using module mode always
 * 包管理工具 go module
   - 在go1.11 版本中，新增了module管理模块功能，用来管理依赖包,之前，如果不使用第三方包管理工具可行，就是直接使用go get安装第三方包
     + GO111MODULE=off 无模块支持，go 会从 GOPATH 和 vendor 文件夹寻找包。
@@ -749,6 +765,8 @@ go env -w GOSUMDB="sum.golang.google.cn"
     + GO111MODULE=auto 在 GOPATH/src 外面且根目录有 go.mod 文件时，开启模块支持。
   - 1.13 成为了Go语言默认的依赖管理工具，默认打开
   - 不允许在 GOPATH 下使用 gomod
+  - 从GOPATH到go module的
+  - 最终终止对基于GOPATH的开发的支持：使用标准库以外的依赖项的任何程序都将需要一个go.mod
 + gomod 和 gopath 两个包管理方案
   * gopath 查找包，按照 goroot 和多 gopath 目录下 src/xxx 依次查找
   * gomod 下查找包，解析 go.mod 文件查找包，mod 包名就是包的前缀，里面的目录就后续路径了。 在 gomod 模式下，查找包就不会去 gopath 查找，只是 gomod 包缓存在 gopath/pkg/mod 里面
@@ -773,7 +791,7 @@ go mod download     # 下载依赖包到本地（默认为 GOPATH/pkg/mod 目录
 go mod edit     # 编辑 go.mod 文件
 go mod graph    # 打印模块依赖图
 go mod init     # 初始化当前文件夹，创建 go.mod 文件
-go mod tidy     # 增加缺少的包，删除无用的包
+go mod tidy     # 增加缺少的包，删除无用的包 确保项目具有所需内容的准确和完整的快照
 go mod vendor   # 将依赖复制到 vendor 目录下
 go mod verify  # 校验依赖
 go mod why github.com/coreos/etcd  # 解释为什么需要依赖
@@ -799,8 +817,8 @@ replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
 ## 利与弊
 
 * 利
-  - Go 语言速度非常快：Go 语言是一门非常快速的编程语言。因为 Go 语言是编译成机器码的，因此，它的表现自然会优于那些解释性或具有虚拟运行时的编程语言。Go 程序的编译速度也非常快，并且生成的二进制文件非常小。我们的 API 在短短几秒钟内就编译完毕，生成的可执行文件区区只有 11.5MB 这么小。
-  - 易于掌握 与其他语言相比，Go 语言的语法很简单，很容易掌握。你完全可以把 Go 语言的大部分语法记在脑子里，这意味着你并不需要花很多时间来查找东西。Go 语言也非常干净易读。非 Go 语言的程序员，尤其是那些习惯于 C 风格语法的程序员，就可以阅读 Go 程序代码，并且能够理解发生什么事。
+  - 速度非常快：Go 语言是一门非常快速的编程语言。因为 Go 语言是编译成机器码的，因此，它的表现自然会优于那些解释性或具有虚拟运行时的编程语言。Go 程序的编译速度也非常快，并且生成的二进制文件非常小。我们的 API 在短短几秒钟内就编译完毕，生成的可执行文件区区只有 11.5MB
+  - 易于掌握 与其他语言相比，Go 语言的语法很简单，很容易掌握。完全可以把 Go 语言的大部分语法记在脑子里，这意味着你并不需要花很多时间来查找东西。Go 语言也非常干净易读。非 Go 语言的程序员，尤其是那些习惯于 C 风格语法的程序员，就可以阅读 Go 程序代码，并且能够理解发生什么事
   - 静态类型定义语言 Go 语言是一种强大的静态类型定义语言。有基本类型，如 int、byte 和 string。也有结构类型。与任何强类型语言一样，类型系统允许编译器帮助捕获整个类的错误。Go 语言还具有内置的列表和映射类型，而且它们也易于使用。
   - 有编译器
   - 接口类型 Go 语言有接口类型，任何结构都可以简单地通过实现接口的方法来满足接口。这允许你解耦代码中的依赖项。然后，你可以在测试中模拟你的依赖项。通过使用接口，你可以编写更加模块化的可测试代码。Go 语言还具有头等函数，这使得开发人员以更实用的方式编写代码成为可能。
@@ -810,7 +828,7 @@ replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
   - 垃圾收集 在设计 Go 语言时，有意将内存管理设计得比 C 和 C++ 更容易。动态分配的对象是垃圾收集。Go 语言使指针的使用更加安全，因为它不允许指针运算。还提供了使用值类型的选项。
   - 更容易的并发模型 虽然并发编程从来就不是一件易事，但 Go 语言在并发编程要比其他语言更容易。创建一个名为“goroutine”的轻量级线程，并通过“channel”与它进行通信几乎是非常简单的事情，至于更为复杂的模型，也是有可能能够实现的。
 * 弊
-  - 没有泛型 首先，这个问题就像房间里的大象一样，是显而易见而又被忽略的事实。Go 语言没有泛型。对于来自使用 Java 这样的语言的开发者来说，要转向 Go 语言，这是一个需要克服的巨大障碍。这意味着代码的重用级别降低了。虽然 Go 语言有头等函数，但如果编写“map”、“reduce”和“filter”等函数，将这些函数设计为对一种类型的集合进行操作，就不能将这些函数重用于其他不同的类型集合。要解决这一问题有很多方法，但都最终都要涉及到编写更多的代码，如此一来，生产力和可维护性就降低了。
+  - 没有泛型 首先，这个问题就像房间里的大象一样，是显而易见而又被忽略的事实。Go 语言没有泛型。对于来自使用 Java 这样的语言的开发者来说，要转向 Go 语言，这是一个需要克服的巨大障碍。这意味着代码的重用级别降低了。虽然 Go 语言有头等函数，但如果编写“map”、“reduce”和“filter”等函数，将这些函数设计为对一种类型的集合进行操作，就不能将这些函数重用于其他不同的类型集合。要解决这一问题有很多方法，但都最终都要涉及到编写更多的代码，如此一来，生产力和可维护性就降低了
   - 接口是隐式的 虽然有接口这一点很好，但是结构却是隐式地而非显式地实现接口。这点被称为是 Go 语言的优势之一，但我们发现，很难从结构中看出它是否实现了接口。你只能通过尝试编译程序才能真正了解。如果程序很小，这当然没有什么问题。但如果这个程序是中大型规模，麻烦就大了。
   - 库支持不佳 Go 语言的库支持参差不齐。我们的 API 与 Contentful 集成，但后者并没有官方支持的 Go SDK。这意味着我们必须编写（并维护！）大量代码来请求和解析 Contentful 中的数据。我们还必须依赖第三方的 Elasticsearch 库。由厂商提供的 Go SDK 并不像他们的 Java、Ruby 或 JavaScript 同类产品那样受欢迎。
   - 社区沟通很难
@@ -818,10 +836,10 @@ replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
     + Go 社区似乎也不喜欢 Web 框架。虽然 Go 语言的 HTTP 库涵盖了很多方面，但它并不支持路径参数、输入检查和验证，也不支持 Web 应用程序中常见的横切关注点。Ruby 开发人员有 Rails，Java 开发人员有 Spring MVC，Python 开发者有 Django。但许多 Go 开发人员选择了避免使用框架。然而现实是，并非没有框架，恰恰相反有很多。但是，一旦你开始将某个框架用于某个项目，要想避免被遗弃的命运几乎是不可能的。
   - 分裂的依赖关系管理：Go 语言没有一个稳定的、正式的包管理器。经过多年的社区乞求，Go 项目最近才发布 godep。在此之前，已经有许多工具填补了这个空白。我们在项目中使用了非常强大的 govendor，但这意味着社区是分裂的，对刚接触 Go 语言的开发人员来说，这可能是非常令人困惑的。此外，几乎所有的包管理器都由 Git 存储库提供支持，Git 存储库的历史可能随时会发生更改。将其与 Maven Central 相比，后者永远不会删除或更改项目所依赖的库。
 * 决定是否使用 Go 语言
-  - 需要考虑一下机器的情况。你发送和接受字节时。你管理数千个并发进程时。你也有可能正在编写操作系统、容器系统或区块链节点。在这些情况下，很可能你不会关心泛型。因为你忙着从芯片榨取每纳秒的性能。
+  - 需要考虑一下机器的情况。你发送和接受字节时。你管理数千个并发进程时。你也有可能正在编写操作系统、容器系统或区块链节点。在这些情况下，很可能你不会关心泛型。因为你忙着从芯片榨取每纳秒的性能
   - 很多时候，你需要考虑人类。你需要处理的业务领域数据：客户、员工、产品、订单。你需要编写对这些域实体进行操作的业务逻辑，并且需要多年来维护此业务逻辑。并且需要处理不断变化的需求，还要做的越快越好。对于这些情况，开发人员的经验很重要。
-  - Go 语言是一种编程语言，它更重视的是机器时间而不是人类时间。有时候，你的领域中，机器，或者程序性能是最关键的。在这些情况下，Go 可以成为一个很好的 C 或 C++ 替代品。但是，当你编写一个典型的 n 层应用程序时，性能瓶颈通常会出现在数据库中，更重要的是，你将如何对数据建模。
-  - 处理的是字节，那么 Go 语言可能是一个不错的选择。 处理的是数据，那么 Go 语言可能不是一个好的选择
+  - Go 语言是一种编程语言，更重视的是机器时间而不是人类时间。有时候，你的领域中，机器，或者程序性能是最关键的。在这些情况下，Go 可以成为一个很好的 C 或 C++ 替代品。但是，当你编写一个典型的 n 层应用程序时，性能瓶颈通常会出现在数据库中，更重要的是，你将如何对数据建模
+  - 处理的是字节，那么 Go 语言可能是一个不错的选择。处理数据，那么 Go 语言可能不是一个好的选择
 
 ## The Zen of Go
 
@@ -1017,10 +1035,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 
 * 功能：测试账号系统（后面统称为apiserver）
   - API 服务器状态检查
-  - 登录测试账号
-  - 新增测试账号
-  - 删除测试账号
-  - 更新测试账号
+  - 登录|新增|删除|更新
   - 获取测试账号的信息
   - 获取测试账号列表
 * 准备阶段
@@ -1028,7 +1043,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - 如何安装和配置 Vim IDE
 * 设计阶段
   - API 构建技术选型
-    + Go 语言中常用的 API 风格是 RPC 和 REST，常用的媒体类型是 JSON、XML 和 Protobuf。
+    + Go 语言中常用的 API 风格是 RPC 和 REST，常用的媒体类型是 JSON、XML 和 Protobuf
     + 常用的组合是 gRPC + Protobuf 和 REST + JSON,API 风格采用 REST，媒体类型选择 JSON
   - API 基本原理
   - API 规范设计
@@ -1123,7 +1138,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
     └── vendor.json
 ```
 
-## 图书
+## [图书](https://github.com/golang/go/wiki/Books)
 
 * [The Go Programming Language](http://www.gopl.io/)
   - [中文](https://github.com/golang-china/gopl-zh)
@@ -1144,6 +1159,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [go-shiori/shiori](https://github.com/go-shiori/shiori):Simple bookmark manager built with Go
 * [maxence-charriere/go-app](https://github.com/maxence-charriere/go-app):A package to build progressive web apps with Go programming language and WebAssembly. https://luck.murlok.io
 * [](https://github.com/lexkong/apiserver_demos)
+* [](https://github.com/google/exposure-notifications-server) Exposure Notification Reference Server | Covid-19 Exposure Notifications
 
 ## 教程
 
@@ -1176,6 +1192,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - [ gofiber / fiber ](https://github.com/gofiber/fiber): zap Fiber is an Express inspired web framework written in Go with coffee https://gofiber.io
   - [go-martini/martini](https://github.com/go-martini/martini):Classy web framework for Go http://martini.codegangsta.io
   - [kataras / iris ](https://github.com/kataras/iris):The fastest community-driven web framework for Go. Socket-Sharding, gRPC, Automatic HTTPS with Public Domain, MVC, Sessions, Caching, Versioning API, Problem API, Websocket, Dependency Injection and more. Fully compatible with the standard library and 3rd-party middleware packages. | https://bit.ly/iriscandothat1
+  - [nitro](https://github.com/asim/nitro):Nitro (formerly known as Go Micro) is a blazingly fast framework for distributed app development. https://go-nitro.dev/
 * 包管理
   - [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
   - [Go Packages](https://godoc.org/)
@@ -1314,24 +1331,27 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [ginuerzh/gost](https://github.com/ginuerzh/gost):GO Simple Tunnel - a simple tunnel written in golang
 * [rakyll/statik](https://github.com/rakyll/statik):Embed files into a Go executable
 * [ry/v8worker](https://github.com/ry/v8worker):Minimal golang binding to V8
-* IDE
-  - [gopls](https://github.com/golang/tools/blob/master/gopls/doc/user.md) cannot use path@version syntax in GOPATH mode `GO111MODULE=on go get golang.org/x/tools/gopls@latest`
+* [gopls](https://github.com/golang/tools/blob/master/gopls/doc/user.md) cannot use path@version syntax in GOPATH mode `GO111MODULE=on go get golang.org/x/tools/gopls@latest`
 * Raft
   - [lni/dragonboat](https://github.com/lni/dragonboat):A feature complete and high performance multi-group Raft library in Go.
 * API
   - [go-swagger/go-swagger](https://github.com/go-swagger/go-swagger):Swagger 2.0 implementation for go https://goswagger.io
-  - [ swaggo / swag ](https://github.com/swaggo/swag):Automatically generate RESTful API documentation with Swagger 2.0 for Go.
+  - [swag](https://github.com/swaggo/swag):Automatically generate RESTful API documentation with Swagger 2.0 for Go.
 * 编辑器
   - [visualfc/liteide](https://github.com/visualfc/liteide)：LiteIDE is a simple, open source, cross-platform Go IDE.
   - VS Code Glide
+  - [go2go Playground](https://go2goplay.golang.org/):The go2go Playground
 * [rodrigo-brito/gocity](https://github.com/rodrigo-brito/gocity):📊 Code City metaphor for visualizing Go source code in 3D https://go-city.github.io
-* [shirou / gopsutil](https://github.com/shirou/gopsutil):psutil for golang
+* [gopsutil](https://github.com/shirou/gopsutil):psutil for golang
 * [panjf2000 / ants](https://github.com/panjf2000/ants):🐜🐜🐜 ants is a high-performance and low-cost goroutine pool in Go, inspired by fasthttp./ ants 是一个高性能且低损耗的 goroutine 池。
 * [claudiodangelis / qrcp](https://github.com/claudiodangelis/qrcp):⚡ Transfer files over wifi from your computer to your mobile device by scanning a QR code without leaving the terminal. https://claudiodangelis.com/qrcp
+* [Protocol Buffers](https://pkg.go.dev/google.golang.org/protobuf)
 
 ## 参考
 
 * [Wiki](https://github.com/golang/go/wiki)
+* [pkg.go.dev](https://pkg.go.dev/) `git clone https://go.googlesource.com/pkgsite`
+* [go.dev](https://go.dev/) Build fast, reliable, and efficient software at scale
 * [The Go Programming Language Specification](https://golang.google.cn/ref/spec)
 * [Alikhll/golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
 * [developer-learning/learning-golang](https://github.com/developer-learning/learning-golang):Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（文档、书籍、视频)
@@ -1340,7 +1360,6 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - [yinggaozhen/awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 https://awesome-go.cn(建设中)
 * [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 * [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
-* [GO语言中文网](https://studygolang.com/)
 * [uber-go/guide](https://github.com/uber-go/guide):The Uber Go Style Guide.
 * [qiniu/gobook](https://github.com/qiniu/gobook):The Go Programming Language
 * [changkun/go-under-the-hood](https://github.com/changkun/go-under-the-hood):Go 源码研究 (1.11.1, WIP)
