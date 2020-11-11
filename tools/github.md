@@ -257,6 +257,8 @@ Agile project management integrated with GitHub
 
 ## 参考
 
+* [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub)
+* [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
 * [gitalk/gitalk](https://github.com/gitalk/gitalk):Gitalk is a modern comment component based on Github Issue and Preact. https://gitalk.github.io
 * [desktop/desktop](https://github.com/desktop/desktop):Simple collaboration from your desktop https://desktop.github.com
 * [OctoLinker/OctoLinker](https://github.com/OctoLinker/OctoLinker):OctoLinker – Available on Chrome, Firefox and Opera https://octolinker.github.iow
