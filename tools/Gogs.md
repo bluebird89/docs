@@ -2,15 +2,15 @@
 
 Gogs is a painless self-hosted Git service. https://gogs.io
 
-## 搭建服务
+## 流程
 
-- Golang 安装配置
-- git安装配置
-- mysql安装配置
-- nginx安装配置
-- gogs安装配置
-- gogs配置运维
-- 安装 supervisor
+* Golang 安装配置
+* git安装配置
+* mysql安装配置
+* nginx安装配置
+* gogs安装配置
+* gogs配置运维
+* 安装 supervisor
 
 ```shell
 sudo adduser git
@@ -77,7 +77,7 @@ server {
 sudo service nginx restart|reload
 ```
 
-### 配置
+## 配置
 
 * 配置supervisor
 * 配置服务器
@@ -105,9 +105,9 @@ user = git
 service supervisor restart
 ```
 
-### 测试
+## 测试
 
-- 初始化 <http://local.gogs.test/install> 配置数据库与ip地址
+* 初始化 <http://local.gogs.test/install> 配置数据库与ip地址
 
 ```sh
 echo 'I love Gogs!' >> README.md

@@ -9,7 +9,7 @@
 * 生成子shell的成本不低，而且速度还慢。创建嵌套子shell更是火上浇油
 * 命令行shell：系统的用户界面，提供了用户与内核进行交互操作的一种接口。接收用户输入的命令并把它送入内核去执行，是一个命令解释器
   - Bourne Shell：是贝尔实验室开发的
-  - BASH：是GNU的Bourne Again Shell，是GNU操作系统上默认的shell,大部分linux的发行套件使用的都是这种shell
+  - BASH：GNU的Bourne Again Shell，是GNU操作系统上默认的shell,大部分linux的发行套件使用的都是这种shell
   - Korn Shell：是对Bourne SHell的发展，在大部分内容上与Bourne Shell兼容
   - C Shell：是SUN公司Shell的BSD版本
 
@@ -1112,6 +1112,7 @@ brew install bat
 * [Bash scripting cheat sheet](https://devhints.io/bash)
 * [bash(1) – Linux man page](https://linux.die.net/man/1/bash)
 * [An A-Z Index of the Bash command line for Linux.](https://ss64.com/bash/)
+* [bash-completion](https://github.com/scop/bash-completion) Programmable completion functions for bash
 
 ## 教程
 
