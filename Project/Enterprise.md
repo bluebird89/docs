@@ -278,7 +278,9 @@
   - 我们只告诉你目标，不会告诉你如何达成。
   - 我们只要超级英雄。
 * 参考
+  - 《奈飞文化手册》
   - [Netflix奈飞微服务架构设计解析](https://mp.weixin.qq.com/s/cjECHGCbB0gMw28bfBGuQw)
+  - [《No Rules Rules》](./no_rules_rules.md) 作者是联合创始人，现任 co-CEO Reed Hastings 和欧洲工商管理学院教授 Erin Meyer
 
 ## Apache
 
