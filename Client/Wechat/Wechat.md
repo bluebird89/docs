@@ -86,6 +86,12 @@ echo $access_token_data->access_token;
 ?>
 ```
 
+## 平台
+
+```
+{"base_resp":{"ret":-2}}
+```
+
 ## platform
 
 * [开放平台](https://open.weixin.qq.com/)

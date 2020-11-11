@@ -511,12 +511,11 @@ npm publish
     - chdir(directory) 改变当前工作进程的目录，如果操作失败抛出异常
     - cwd() 返回当前进程的工作目录
     - nextTick(callback) 一旦当前事件循环结束，调用回调函数
-* process.nextTick()会立即执行回调函数。微任务队列
 * setImmediate()会在下一轮执行回调函数
 * 定时器在 IO 操作的回调函数之前执行
-    - Timer: setTimeout和setInterval回调函数。
-    - I/O callbacks: 处理除了setTimeout、setInterval、setImmediate的回调函数。
-    - Check: 处理setImmediate()指定的回调函数。
+    - Timer: setTimeout和setInterval回调函数
+    - I/O callbacks: 处理除了setTimeout、setInterval、setImmediate的回调函数
+    - Check: 处理setImmediate()指定的回调函数
     - nextTickQueue: 处理process.nextTick()的回调函数，不是 event loop 的一部分
 
 ## fs
@@ -634,96 +633,6 @@ npm publish
         + 当文件模块缓存中不存在，而且不是原生模块的时候，Node.js 会解析 require 方法传入的参数，并从文件系统中加载实际的文件
     - 引入模块：如果不加相对地址：Node会依次在内置模块、全局模块和当前模块下查找 `var foo = require('other_module');`
 
-```js
-// hello.js
-var s = 'Hello';
-function greet(name) {
-    console.log(s + ', ' + name + '!');
-}
-module.exports = greet;  //作为模块的输出暴露出去，这样其他模块就可以使用greet函数了。
-
-// 引入hello模块:
-var greet = require('./hello'); // 引入的模块作为变量保存在greet变量中,
-var s = 'Michael';
-greet(s);
-
-// 模块代码
-var s = 'Hello';
-var name = 'world';
-console.log(s + ' ' + name + '!');
-
-// 封装后 原来的全局变量s现在变成了匿名函数内部的局部变量
-(function () {
-    // 读取的hello.js代码:
-    var s = 'Hello';
-    var name = 'world';
-
-    console.log(s + ' ' + name + '!');
-    // hello.js代码结束
-})();
-
-// module原理 准备module对象:
-var module = {
-    id: 'hello',
-    exports: {}
-};
-var load = function (module) {
-    // 读取的hello.js代码:
-    function greet(name) {
-        console.log('Hello, ' + name + '!');
-    }
-
-    module.exports = greet;
-    // hello.js代码结束
-    return module.exports;
-};
-var exported = load(module);
-// 保存module:
-save(module, exported);
-
-function hello() {
-    console.log('Hello, world!');
-}
-function greet(name) {
-    console.log('Hello, ' + name + '!');
-}
-module.exports = {
-    hello: hello,
-    greet: greet
-};
-exports.hello = hello;
-exports.greet = greet;
-
-// 代码可以执行，但是模块并没有输出任何变量:
-exports = {
-    hello: hello,
-    greet: greet
-};
-
-// Node会把整个待加载的hello.js文件放入一个包装函数load中执行。在执行这个load()函数前，Node准备好了module变量
-var module = {
-    id: 'hello',
-    exports: {}
-};
-
-var load = function (exports, module) {
-    // hello.js的文件内容
-    ...
-    // load函数返回:
-    return module.exports;
-};
-
-var exported = load(module.exports, module);
-
-exports.foo = function () { return 'foo'; };
-exports.bar = function () { return 'bar'; };
-module.exports.foo = function () { return 'foo'; };
-module.exports.bar = function () { return 'bar'; };
-
-// 只能这种写法
-module.exports = function () { return 'foo'; };
-```
-
 ## util
 
 * Node.js 核心模块，提供常用函数的集合
@@ -734,7 +643,6 @@ module.exports = function () { return 'foo'; };
     - inherits(constructor, superConstructor) 是一个实现对象间原型继承的函数
     - inspect(object,[showHidden],[depth],[colors]) 是一个将任意对象转换为字符串的方法，通常用于调试和错误输出。它至少接受一个参数 object，即要转换的对象
     - isArray(object) 如果给定的参数 "object" 是一个数组返回 true，否则返回 false
-    -
 
 ## [mongodb](https://www.npmjs.com/package/mongodb)
 
@@ -742,201 +650,32 @@ module.exports = function () { return 'foo'; };
 npm install mongodb --save
 ```
 
-### 多进程架构
+### child_process
 
-cluster模块，nodejs是单线程，不能充分利用多核cpu资源，因此要启动多进程，每个进程利用一个CPU，实现多核CPU利用
-
-* 启多个进程，每个进程绑定不同的端口，主进程对外接受所有的网络请求，再将这些请求分别代理到不同的端口的进程上，通过代理可以避免端口不能重复监听的问题，甚至可以再代理进程上做适当的负载均衡，由于进程每接收到一个连接，将会用掉一个文件描述符，因此代理方案中客户端连接到代理进程，代理进程连接到工作进程的过程需要用掉两个文件描述符，操作系统的文件描述符是有限的，代理方案浪费掉一倍数量的文件描述符的做法影响了系统的扩展能力。
-- 父进程创建socket，并且bind、listen后，通过fork创建多个子进程，通过send方法给每个子进程传递这个socket，子进程调用accpet开始监听等待网络连接。
-
-```js
-// master.js
-var fork =require('child_process').fork;
-var cpus =require('os').cpus();
-var server =require('net').createServer()
-server.listen(1337);
-for(vari=0;i<cpus.length;i++){
-  var worker = fork(.\/worker.js);
-  worker.send('server', server);
-}
-
-// worker.js
-var http =require('http');
-var server =http.createServer(function(req,res){
-  res.writeHead(200, {'Content-Type':'text/plain'});
-  res.end('handled by child, pid is ' +process.pid +'\n')
-})
-process.on('message',function(m,tcp){
-  if(m === 'server') {
-    // tcp.on('connection', function(socket){
-      server.emit('connection',socket);
-    })
-  }
-})
-```
-
-有多个进程同时等待网络的连接事件，当这个事件发生时，这些进程被同时唤醒，就会产生"惊群问题"。我们知道进程被唤醒，需要进行内核重新调度，这样每个进程同时去响应这一个事件，而最终只有一个进程能处理事件成功，其他的进程在处理该事件失败后重新休眠或其他，浪费性能。 而且这时采用的是操作系统的抢占式策略，谁抢到谁服务，一般而言这是公平的，各个进程可以根据自己的繁忙度来进行抢占，但对于node来说，需要分清他的繁忙度是由CPU，I/O两部分构成的，影响抢占的是CPU的繁忙度，对于不同的业务可能存在I/O繁忙，而CPU较为空闲的情况，这可能造成某个进程抢到较多请求，形成负载不均衡的情况。
-
-- 为了解决负载均衡以及消除惊群效应，改进是在master调用accpet开始监听等待网络连接，master来控制请求的给予。将获得的连接均衡的传递给子进程。
-
-```js
-// master.js
-var fork =require('child_process').fork;
-var cpus =require('os').cpus();
-var server =require('net').createServer()
-var workers = []
-server.listen(1337);
-server.on('connection',function(socket){
-  var one_worker =workers.pop();//取出一个worker
-  one_worker.send('server',socket);
-  workers.unshift(one_worker);//再放回取出的worker
-})
-for(vari=0;i<cpus.length;i++){
-  var worker = fork(.\/worker.js);
-  workers.push(worker);
-}
-[javascript] view plain copy
-// worker.js
-var http =require('http')
-var server =http.createServer(function(req,res){
-  res.writeHead(200, {'Content-Type':'text/plain'});
-  res.end('handled by child, pid is ' +process.pid +'\n')
-})
-process.on('message', function(socket){
-  // if(m === 'server') {
-    server.emit('connection', socket)
-  }
-})
-```
-
-但负责接收socket的master需要重新分配发送socket ，而且仅有一个进程去accept连接，效率会降低 node官方的cluster模块就是这么实现的，实质是采用了round－robin轮叫调度算法。
-
-### 集群稳定
-
-* 自动重启：在主进程上要加入一些子进程管理的机制，比如在一个子进程挂掉后，要重新启动一个子进程来继续服务.假设子进程中有未捕获异常发生
-
-```js
-// worker.js
-process.on('uncaughtException',function(err){
-console.error(err);
-//停止接收新的连接
-worker.close(function(){
-//所有已有连接断开后，退出进程
-  process.exit(1)
-})
-//如果存在长连接，断开可能需要较久的时间，要强制退出，
-setTimeout(function(){
-  process.exit(1)
-}, 5000);
-})
-// 主进程中监听每个子进程的exit事件
-// master.js
-var other_work = {};
-var createWorker = function() {
-var worker = fork('./worker.js')
-// 退出时启动新的进程
-// worker.on('exit',function(){
-  console.log('worker ' +worker.pid +' exited.');
-  delete other_work[worker.pid]
-  createWorker();
-})
-other_work[worker.pid] = worker;
-console.log('create worker pid: ' +worker.pid)
-}
-```
-
-上述代码中存在的问题是要等到已有的所有连接断开后进程才退出，在极端的情况下，所有工作进程都停止接收新链接，全处在等待退出状态。但在等到进程完全退出才重启的过程中，所有新来的请求可能存在没有工作进程为新用户服务的场景，这会丢掉大部分请求。 为此需要改进，在子进程停止接收新链接时，主进程就要fork新的子进程继续服务。为此在工作进程得知要退出时，向主进程主动发送一个自杀信号，然后才停止接收新连接。主进程在收到自杀信号后立即创建新的工作进程。
-
-```js
-// worker.js
-process.on('uncaughtException',function(err){
-  console.error(err);
-  process.send({act: 'suicide'})／／自杀信号
-  worker.close(function(){
-    process.exit(1)
-  })
-  //如果存在长连接，断开可能需要较久的时间，要强制退出，
-  setTimeout(function(){
-    process.exit(1)
-  }, 5000);
-})
-主进程将重启工作进程的任务，从exit事件的处理函数中转移到message事件的处理函数中
-
-// master.js
-var other_work = {};
-var createWorker = function() {
-  var worker = fork('./worker.js')
-  worker.on('message', function(){
-    if(message.act === 'suicide'){
-      createWorker();
-    }
-  })
-  worker.on('exit',function(){
-    console.log('worker ' +worker.pid +' exited.');
-    delete other_work[worker.pid]
-  })
-  other_work[worker.pid] =worker;
-  console.log('create worker pid: ' +worker.pid)
-}
-```
-
-### 限量重启
-
-工作进程不能无限制的被重启，如果启动的过程中就发生了错误或者启动后接到连接就收到错误，会导致工作进程被频繁重启。所以要加以限制，比如在单位时间内规定只能重启 多少次，超过限制就触发giveup事件，告知放弃重启工作进程这个重要事件。 我们引入一个队列来做标记，在每次重启工作进程之间打点判断重启是否过于频繁。
-
-```js
-// 在master.js加入如下代码
-
-//重启次数
-var limit =10;
-//时间单位
-var during =60000;
-var restart = [];
-var isTooFrequently =function() {
-  //纪录重启时间
-  var time =Date.now()
-  var length =restart.push(time);
-  if (length >limit) {
-    //取出最后10个纪录
-    restart = restart.slice(limit * -1)
-  }
-  return restart.length >=limit &&restart[restart.length -1] -restart[0] <during;
-}
-在createWorker方法最开始部分加入判断
-
-// 检查是否太过频繁
-if (isTooFrequently()) {
-  //触发giveup事件后，不再重启
-  process.emit('giveup', length, duiring);
-  return;
-}
-```
-
-giveup事件是比uncaughtException更严重的异常事件，giveup事件表示集群中没有任何进程服务了，十分危险。为了健壮性考虑，我们应在giveup事件中添加重要日志，并让监控系统监视到这个严重错误，进而报警等
-
-gisconnect事件表示父子进程用于通信的channel关闭了，此时父子进程之间失去了联系，自然是无法传递客户端接收到的连接了。失去联系不表示会退出，worker进程有可能仍然在运行，但此时已经无力接收请求了。所以当master进程收到某个worker disconnect的事件时，先需要kill掉worker，然后再fork一个worker。
-
-```js
-// 在createWorker中添加如下代码
-worker.on('disconnect', function(){
-  worker.kill();
-  console.log('worker' + worker.pid + 'killed')
-  createWorker();
-})
-```
-
-## 代理服务器
-
-```
-location / {
-    proxy_pass http://APP_PRIVATE_IP_ADDRESS:8080;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_cache_bypass $http_upgrade;
-}
-```
+* cluster模块
+* nodejs是单线程，不能充分利用多核cpu资源，因此要启动多进程，每个进程利用一个CPU，实现多核CPU利用
+    - 启多个进程，每个进程绑定不同的端口，主进程对外接受所有的网络请求，再将这些请求分别代理到不同的端口的进程上
+    - 通过代理可以避免端口不能重复监听的问题，
+    - 代理进程上做适当的负载均衡，由于进程每接收到一个连接，将会用掉一个文件描述符，因此代理方案中客户端连接到代理进程，代理进程连接到工作进程的过程需要用掉两个文件描述符，操作系统的文件描述符是有限的，代理方案浪费掉一倍数量的文件描述符的做法影响了系统的扩展能力。
+* child_process 模块来创建子进程
+* 方法
+    - exec 使用子进程执行命令，缓存子进程的输出，并将子进程的输出以回调函数参数的形式返回。
+    - spawn  使用指定命令行参数创建新进程
+    - fork - child_process.fork 是 spawn()的特殊形式，用于在子进程中运行的模块，如 fork('./son.js') 相当于 spawn('node', ['./son.js']) 。与spawn方法不同的是，fork会在父进程与子进程之间，建立一个通信管道，用于进程之间的通信
+* 有多个进程同时等待网络的连接事件，当这个事件发生时，这些进程被同时唤醒，就会产生"惊群问题"
+    - 进程被唤醒，需要进行内核重新调度，这样每个进程同时去响应这一个事件，而最终只有一个进程能处理事件成功，其他的进程在处理该事件失败后重新休眠或其他，浪费性能
+    - 这时采用的是操作系统的抢占式策略，谁抢到谁服务，一般而言这是公平的，各个进程可以根据自己的繁忙度来进行抢占，但对于node来说，需要分清他的繁忙度是由CPU，I/O两部分构成的，影响抢占的是CPU的繁忙度，对于不同的业务可能存在I/O繁忙，而CPU较为空闲的情况，这可能造成某个进程抢到较多请求，形成负载不均衡的情况
+- 为了解决负载均衡以及消除惊群效应，改进是在master调用accpet开始监听等待网络连接，master来控制请求的给予。将获得的连接均衡的传递给子进程
+    - 负责接收socket的master需要重新分配发送socket ，而且仅有一个进程去accept连接，效率会降低 node官方的cluster模块就是这么实现的，实质是采用了round－robin轮叫调度算法。
+* 集群稳定
+    - 自动重启：在主进程上要加入一些子进程管理的机制，比如在一个子进程挂掉后，要重新启动一个子进程来继续服务.假设子进程中有未捕获异常发生
+    - 等到已有的所有连接断开后进程才退出，在极端的情况下，所有工作进程都停止接收新链接，全处在等待退出状态。但在等到进程完全退出才重启的过程中，所有新来的请求可能存在没有工作进程为新用户服务的场景，这会丢掉大部分请求
+    - 为此需要改进，在子进程停止接收新链接时，主进程就要fork新的子进程继续服务。为此在工作进程得知要退出时，向主进程主动发送一个自杀信号，然后才停止接收新连接。主进程在收到自杀信号后立即创建新的工作进程
+* 限量重启
+    - 工作进程不能无限制的被重启，如果启动的过程中就发生了错误或者启动后接到连接就收到错误，会导致工作进程被频繁重启。所以要加以限制，比如在单位时间内规定只能重启多少次，超过限制就触发giveup事件，告知放弃重启工作进程这个重要事件。引入一个队列来做标记，在每次重启工作进程之间打点判断重启是否过于频繁
+    - giveup事件是比uncaughtException更严重的异常事件，giveup事件表示集群中没有任何进程服务了，十分危险。为了健壮性考虑，我们应在giveup事件中添加重要日志，并让监控系统监视到这个严重错误，进而报警等
+    - gisconnect事件表示父子进程用于通信的channel关闭了，此时父子进程之间失去了联系，自然是无法传递客户端接收到的连接了
+    - 失去联系不表示会退出，worker进程有可能仍然在运行，但此时已经无力接收请求了。所以当master进程收到某个worker disconnect的事件时，先需要kill掉worker，然后再fork一个worker
 
 ## 问题
 
@@ -988,10 +727,10 @@ yarn install node-sass
 * db
   - [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis):redis client for node http://redis.js.org/
   - [luin/ioredis](https://github.com/luin/ioredis):🚀A robust, performance-focused and full-featured Redis client for Node.js.
-  - [typeorm/typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. http://typeorm.io
-  - [sequelize/sequelize](https://github.com/sequelize/sequelize):An easy-to-use multi SQL dialect ORM for Node.js https://sequelize.org
+  - [typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. http://typeorm.io
+  - [sequelize](https://github.com/sequelize/sequelize):An easy-to-use multi SQL dialect ORM for Node.js https://sequelize.org
 * HTTP
-    - [sindresorhus / got](https://github.com/sindresorhus/got):🌐 Human-friendly and powerful HTTP request library for Node.js
+    - [got](https://github.com/sindresorhus/got):🌐 Human-friendly and powerful HTTP request library for Node.js
     - [tj/co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)
 * Logger
   - [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. http://github.com/winstonjs/winston
@@ -1002,7 +741,7 @@ yarn install node-sass
   - [lloyd/node-memwatch](https://github.com/lloyd/node-memwatch):A NodeJS library to keep an eye on your memory usage, and discover and isolate leaks.
   - [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
 * cli
-  - [yargs/yargs](https://github.com/yargs/yargs):yargs the modern, pirate-themed successor to optimist. http://yargs.js.org/
+  - [yargs](https://github.com/yargs/yargs):yargs the modern, pirate-themed successor to optimist. http://yargs.js.org/
   - [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
 * render
   - [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
@@ -1010,8 +749,6 @@ yarn install node-sass
   - [SOHU-Co/kafka-node](https://github.com/SOHU-Co/kafka-node):Node.js client for Apache Kafka 0.8 and later.
 * compression
   - [expressjs/compression](https://github.com/expressjs/compression):Node.js compression middleware
-* hooks
-  - [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
 * i18n
   - [i18next/i18next](https://github.com/i18next/i18next):i18next: learn once - translate everywhere http://i18next.com/
 * REST
@@ -1024,7 +761,6 @@ yarn install node-sass
   - [visionmedia/supertest](https://github.com/visionmedia/supertest):🕷Super-agent driven library for testing node.js HTTP servers using a fluent API
   - [ getgauge / taiko ](https://github.com/getgauge/taiko):A node.js library for testing modern web applications https://taiko.dev
   - [ mcollina / autocannon ](https://github.com/mcollina/autocannon):fast HTTP/1.1 benchmarking tool written in Node.js
-  - [ octalmage / robotjs ](https://github.com/octalmage/robotjs):Node.js Desktop Automation. http://robotjs.io/
   - [Marak/faker.js](https://github.com/Marak/faker.js):generate massive amounts of realistic fake data in Node.js and the browser
 * date
     - [](https://github.com/date-fns/date-fns): hourglass_flowing_sand Modern JavaScript date utility library hourglass
