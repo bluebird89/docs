@@ -13,11 +13,10 @@ fast, scalable, distributed revision control system. https://git-scm.com/
   - 敏捷任务管理
   - Cloud Studio
 * [sourceforge](https://sourceforge.net/):The Complete Open-Source Software Platform
-* [backlog](https://backlog.com/):Online project management tool for developers
-* [gogits/gogs](https://github.com/gogits/gogs):Gogs is a painless self-hosted Git service. https://gogs.io
-* [go-gitea/gitea](https://github.com/go-gitea/gitea):Gitea: Git with a cup of tea http://gitea.io
+* self-hosted
+  - [gogs](./Gogs.md)
+  - [go-gitea/gitea](https://github.com/go-gitea/gitea):Gitea: Git with a cup of tea http://gitea.io
 * [工蜂](https://git.code.tencent.com)
-* [GitKraken](https://www.gitkraken.com/)
 
 ## 安装
 
@@ -607,7 +606,7 @@ squash 9eb3188 update
 squash 7d33868 update
 ```
 
-### 版本库|本地仓库（commit history）
+### 版本库|本地仓库 commit history
 
 * `.git`文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹
 * 包括git自动创建的master分支，并且将HEAD指针指向master分支
@@ -660,9 +659,6 @@ git rm filename # 从 HEAD 中删除文件
 git rm –cached FILE # 这个命令只删除远程文件
 ```
 
-![merge](../_static/merge.svg "merge")
-![rebase](../_static/rebase.svg "rebase")
-
 ## 分支 branch
 
 * 指向某个快照的指针，分支名就是指针名
@@ -674,6 +670,7 @@ git rm –cached FILE # 这个命令只删除远程文件
   - 不属于上述两者的文件会被忽略，不受影响保留
 
 ## 文件恢复
+
 ```sh
 git checkout -- aaa # 从staged中恢复aaa到worktree
 git reset -- aaa # 从repo中恢复aaa到staged
@@ -702,6 +699,10 @@ git restore --source dev aaa # 从指定commit中恢复aaa到worktree
   - 从祖先节点把功能分支的提交记录摘下来，然后 rebase 到 master 分支
   - rebase 之后的 commitID 其实已经发生了变化
 * deploy your changes to verify them in production.If your branch causes issues, you can roll it back by deploying the existing master into production.
+
+![merge](../_static/merge.svg "merge")
+![rebase](../_static/rebase.svg "rebase")
+![rebase vs merge](../_static/mergevsrebase.jpeg "rebase vs merge")
 
 ```sh
 git config get --remote.origin.url
@@ -782,8 +783,6 @@ git push origin :<remote_branch>  # 省略本地分支名，则表示删除指�
 git branch -dr [remote/branch] # 删除远程分支
 git push origin --delete dev # 删除远程分支
 ```
-
-![rebase vs merge](../_static/mergevsrebase.jpeg "rebase vs merge")
 
 ### Pull Request
 
@@ -884,14 +883,14 @@ tar cJf .tar.xz / --exclude-vcs
   - `git log target/master`
   - `git cherry-pick <commitHash>`
 
+![cherry-pick](../_static/cherry-pick.svg "cherry-pick")
+
 ```sh
 git cherry-pick [commit] # 选择一个commit，合并进当前分支
 git cherry-pick hash_commit_A hash_commit_B
 git cherry-pick feature # 上面代码表示将feature分支的最近一次提交，转移到当前分支
 git cherry-pick -m 1 <commitHash> # 采用提交commitHash来自编号1的父分支的变动
 ```
-
-![cherry-pick](../_static/cherry-pick.svg "cherry-pick")
 
 ## .gitignore
 
@@ -1070,11 +1069,6 @@ echo "end"
 git --work-tree=/home/www checkout -f
 ```
 
-## 代码规范
-
-* 确保每一个进入主分支的commit都达到了一定的质量标准，例如：
-  - 编译必须通过，单元测试和接口测试必须通过，新代码的覆盖率不能低于某个水平，静态代码扫描必须通过
-
 ## 工作流
 
 * **集中式工作流**：维护一个master分支，开发者提交功能修改到中央库前，需要先fetch在中央库的新增提交，rebase自己提交到中央库提交历史之上
@@ -1171,6 +1165,11 @@ git --work-tree=/home/www checkout -f
   - 生产环境
     + 上线验收通过的tag
     + 回归测试，发现问题开发者从master切分支hotfix修正
+
+![功能迭代流程](https://github.com/xirong/my-git/raw/master/images/branch_module.png)
+![Git Flow](../_static/git_flow_1.png "Optional title")
+![Gitflow工作流](https://github.com/xirong/my-git/raw/master/images/git-workflow-release-cycle-4maintenance.png)
+![Git-Develop 分支模式](https://github.com/xirong/my-git/raw/master/_image/2016-09-22-20-57-27.jpg)
 
 ```shell
 # 功能分支
@@ -1281,11 +1280,6 @@ git checkout master
 git merge FETCH_HEAD
 ```
 
-![功能迭代流程](https://github.com/xirong/my-git/raw/master/images/branch_module.png)
-![Git Flow](../_static/git_flow_1.png "Optional title")
-![Gitflow工作流](https://github.com/xirong/my-git/raw/master/images/git-workflow-release-cycle-4maintenance.png)
-![Git-Develop 分支模式](https://github.com/xirong/my-git/raw/master/_image/2016-09-22-20-57-27.jpg)
-
 ### submodule
 
 用来管理一些单向更新的公共模块或底层逻辑
@@ -1326,11 +1320,9 @@ git checkout --  .
 git submodule deinit project-sub-1
 ```
 
-### subtree
+## [subtree](https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt)
 
-git subtree 对于部分需要双向更新的可复用逻辑来说，特别适合管理.比如一些需要复用的业务组件代码. Merge subtrees together and split repository into subtrees
-
-[文档](https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt)
+对于部分需要双向更新的可复用逻辑来说，特别适合管理.比如一些需要复用的业务组件代码. Merge subtrees together and split repository into subtrees
 
 ```sh
 git clone git@github.com:Ihavee/dotfiles.git
@@ -1339,16 +1331,16 @@ cd dotfiles
 git remote add bash git@github.com:Ihavee/bash.git        # 可以理解为远程仓库的别名
 git subtree add pull -P home/.bash bash master --squash   # 拉取远程仓库 bash 到本地仓库的home/.bash 目录。
 
-...... edit home/.bash/file......
+# ...... edit home/.bash/file......
 git commit -a -m 'update some'
 git subtree push -P home/.bash bash master
 git push origin master                                    # 顺便主项目也 push
 
 git subtree pull -P home/.bash bash master --squash
 
-对 git-subtree 下子项目有修改需求的，请先 git subtree pull
+# 对 git-subtree 下子项目有修改需求的，请先 git subtree pull
 
-git subtree add --prefix=client <https://github.com/example/project-client.git> master # 建立主项目里子树
+git subtree add --prefix=client https://github.com/example/project-client.git master # 建立主项目里子树
 ```
 
 ## Git worktree
@@ -1415,7 +1407,7 @@ Un-does the last commit in git history. (alias: un)
 branches
 ```
 
-### [so-fancy/diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
+### [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
 
 Good-lookin' diffs. Actually… nah… The best-lookin' diffs. tada git diff 格式化显示工具
 
@@ -1452,7 +1444,7 @@ git config --global alias.dsf '!f() { [ -z "$GIT_PREFIX" ] || cd "$GIT_PREFIX" '
 '&& git diff --color "$@" | diff-so-fancy  | less --tabs=4 -RFX; }; f'
 ```
 
-### [arzzen/git-quick-stats](https://github.com/arzzen/git-quick-stats)
+### [git-quick-stats](https://github.com/arzzen/git-quick-stats)
 
 Git quick statistics is a simple and efficient way to access various statistics in git repository.
 
@@ -1624,7 +1616,7 @@ These features allow to pause a branch development and switch to another one (_"
 * Use Branches:Branching is one of Git’s most powerful features – and this is not by accident: quick and easy branching was a central requirement from day one. Branches are the perfect tool to help you avoid mixing up different lines of development. You should use branches extensively in your development workflows: for new features, bug fixes, experiments, ideas…
 * Agree on a Workflow:Git lets you pick from a lot of different workflows: long-running branches, topic branches, merge or rebase, git-flow… Which one you choose depends on a couple of factors: your project, your overall development and deployment workflows and (maybe most importantly) on your and your teammates’ personal preferences. However you choose to work, just make sure to agree on a common workflow that everyone follows.
 
-## [jonas/tig](https://github.com/jonas/tig)
+## [tig](https://github.com/jonas/tig)
 
 [Tig: text-mode interface for Git](https://jonas.github.io/tig/) 字符模式下交互查看git项目，可以替代git命令
 
@@ -1767,6 +1759,11 @@ External commands:
                            ! ?git stash drop %(stash)
 ```
 
+## 代码规范
+
+* 确保每一个进入主分支的commit都达到了一定的质量标准，例如：
+  - 编译必须通过，单元测试和接口测试必须通过，新代码的覆盖率不能低于某个水平，静态代码扫描必须通过
+
 ## 问题
 
 > error: insufficient permission for adding an object to repository database .git/objects
@@ -1777,26 +1774,25 @@ External commands:
 > fatal: fsck error in packed object
 > fatal: index-pack failed
 
+## 图书
+
+* [Progit2](https://github.com/progit/progit2):Pro Git 2nd Edition
+
 ## 工具
 
-* highlighter
-  - [ dandavison / delta ](https://github.com/dandavison/delta):A syntax-highlighter for git and diff output
-* [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: https://github.com/works-with/category/desktop-tools
+* [delta](https://github.com/dandavison/delta):A viewer for git and diff output
 * [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
-  - `git summary`
 * [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
-* [kennethreitz/legit](https://github.com/kennethreitz/legit):Git for Humans, Inspired by GitHub for Mac™. http://www.git-legit.org/
 * [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
 * [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
 * [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
 * [conventional-changelog/conventional-changelog](https://github.com/conventional-changelog/conventional-changelog):Generate a changelog from git metadata.
 * [pstadler/keybase-gpg-github](https://github.com/pstadler/keybase-gpg-github):Step-by-step guide on how to create a GPG key on keybase.io, adding it to a local GPG setup and use it with Git and GitHub.
-* [jesseduffield/lazygit](https://github.com/jesseduffield/lazygit):simple terminal UI for git commands `sudo add-apt-repository ppa:lazygit-team/release` `sudo apt-get install lazygit`
 * [isomorphic-git/isomorphic-git](https://github.com/isomorphic-git/isomorphic-git):A pure JavaScript implementation of git for node and browsers! https://isomorphic-git.org/
 * [Fakerr/git-recall](https://github.com/Fakerr/git-recall):An interactive way to peruse your git history from the terminal
 * [rgburke/grv](https://github.com/rgburke/grv):GRV is a terminal interface for viewing git repositories
 * [carloscuesta/gitmoji](https://github.com/carloscuesta/gitmoji):An emoji guide for your commit messages. 😜 https://gitmoji.carloscuesta.me
-* [magit/magit](https://github.com/magit/magit):It's Magit! A Git porcelain inside Emacs. https://magit.vc
+* [magit/magit](https://github.com/magit/magit):It's Magit! A Git porcelain inside Emacs. https://magit.vc Git 在 Emacs 上的打开方式
 * [commitizen/cz-cli](https://github.com/commitizen/cz-cli):The commitizen command line utility. http://commitizen.github.io/cz-cli/
 * [imsun/gitment](https://github.com/imsun/gitment):A comment system based on GitHub Issues. https://imsun.github.io/gitment/
 * [rtyley/bfg-repo-cleaner](https://github.com/rtyley/bfg-repo-cleaner):Removes large or troublesome blobs like git-filter-branch does, but faster. And written in Scala
@@ -1810,12 +1806,13 @@ External commands:
 * [magicmonty/bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):An informative and fancy bash prompt for Git users
 * [nosarthur/gita](https://github.com/nosarthur/gita):Manage many git repos with sanity 从容管理多个git库
 * 客户端
+  - [jesseduffield/lazygit](https://github.com/jesseduffield/lazygit):simple terminal UI for git commands `sudo add-apt-repository ppa:lazygit-team/release` `sudo apt-get install lazygit`
   - [sourcetree](https://www.sourcetreeapp.com/)
   - [TortoiseGit](https://tortoisegit.org/) overlay icons showing the file status, a powerful context menu for Git and much more!
   - [GitHawkApp/GitHawk](https://github.com/GitHawkApp/GitHawk):A GitHub project manager app for iOS. http://githawk.com
   - Linux
     + [SmartGit](https://www.syntevo.com/)
-    + GitKraken
+    + [GitKraken](https://www.gitkraken.com/)
     + Git Cola
 
 ## 参考
@@ -1825,21 +1822,19 @@ External commands:
 * [Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials)
 * [git-tutorial](https://www.learnenough.com/git-tutorial)
 * [git exercises](https://gitexercises.fracz.com/)
-* [Progit2](https://github.com/progit/progit2):Pro Git 2nd Edition
 * [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
-* [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
-* [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
 * [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.http://marklodato.github.io/visual-git-guide/index-en.html
 * [rogerdudler/git-guide](https://github.com/rogerdudler/git-guide):git - the simple guide http://rogerdudler.github.com/git-guide
 * [练习沙盒](https://try.github.io)
 * [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. http://git.io/git-tips
-* [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub)
-* [susam/gitpr](https://github.com/susam/gitpr#with-merge-commit):A quick reference guide on fork and pull request workflow
+* [gitpr](https://github.com/susam/gitpr#with-merge-commit):A quick reference guide on fork and pull request workflow
 * [git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
 * [Git Immersion](http://gitimmersion.com/):The surest path to mastering Git is to immerse oneself in its utilities and operations, to experience it first-hand
-* [k88hudson/git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
+
 * [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate! https://learngitbranching.js.org/
-* [Magit](https://magit.vc/) Git 在 Emacs 上的打开方式
 * [learn-git-with-bitbucket-cloud](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
 * [Vim-fugitive](https://github.com/tpope/vim-fugitive) : Git 在 Vim 上的打开方式
 * [Git 原理](https://git-scm.com/book/zh/v1/Git-内部原理-Git-对象)
+* [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） https://github.com/xirong/my-git
+*
+* [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)

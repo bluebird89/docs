@@ -32,6 +32,10 @@ sudo apt update
 sudo apt install brave-browser
 ```
 
+## 功能
+
+* 右侧的➕，可以生成 PWA
+
 ## [Bookmarklets](https://www.ph-uhl.com/0010-Bookmarklets/)
 
 * Like a tiny Add-on for your browser. You drag it into your bookmark-bar and when you click it, it does something

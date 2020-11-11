@@ -1,4 +1,4 @@
-# [Sublime Text 3](https://www.sublimetext.com/3)
+# [Sublime Text](https://www.sublimetext.com/3)
 
 ## 安装
 
@@ -17,34 +17,30 @@ sudo ln -s /opt/sublime_text/sublime_text.desktop ~/.local/share/applications/
 ### Mac
 brew cask install sublime-text
 ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
-
-### windows 下载软件
-# 添加到命令行`D:\Program Files\Sublime Text 3`
 ```
 
 ## 配置
 
 * 配置文件以对象.功能命名:user重写default
-    - 配置:Preferences.sublime-settings
-        + 包配置：Package Control.sublime-settings
-        + 界面配置：Preferences.sublime-settings
-        + 自定义代码片段：\*.sublime-snippet
-        + 自动补全：\*.sublime-completions
-        + 自动构建：\*.sublime-build
-        + 批处理：\*.sublime-build 通过shell脚本构建
-    -   主题配置：在包文件下Theme - Monokai Pro
-    -   快捷键：Default (Windows).sublime-keymap
-    -   index_files:改为false
-* [Package Control 包管理工具](https://packagecontrol.io/installation)
+* Preferences.sublime-settings
+* 包配置：Package Control.sublime-settings
+* 界面配置：Preferences.sublime-settings
+* 自定义代码片段：`*.sublime-snippet`
+* 自动补全：`*.sublime-completions`
+* 自动构建：`*.sublime-build`
+* 批处理：`*.sublime-build` 通过shell脚本构建
+* 主题：在包文件下Theme - Monokai Pro
+* 快捷键：Default (Windows).sublime-keymap
+* index_files:改为false
+* [Package Control](https://packagecontrol.io/installation)
     + Preferences > Browse Packages：Installed Packages
-        *  windows中`~\AppData\Roaming\Sublime Text 3\`
+        * windows中`~\AppData\Roaming\Sublime Text 3\`
     + 安装package：打开控制台console:`ctrl+\`
     + 如果安装报错，比如连接远程服务器失败之类的，请设置wbond.net的host，50.116.33.29 sublime.wbond.net
     + 重启
     + open Package Control's Command Palette：Control + Shift + P (Windows)，Command + Shift + P (on Mac)，或者通过菜单 Tools > Command Palette
     + install package->输入package文件名称
-    + channel配置：
-        + 添加channle:`Control + Shift + P `, `Package Control  Settings-user`
+    + channel配置：添加channle:`Control + Shift + P `, `Package Control  Settings-user`
 
 ```sh
 import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
@@ -55,64 +51,6 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
         "https://packagecontrol.io/channel_v3.json"
         // "channel_v3.jsondir/channel_v3.json"
     ],
-
-# /home/henry/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
-{
-"always_show_minimap_viewport": true,
-"auto_find_in_selection": true,
-"bold_folder_labels": false,
-"caret_style": "wide",
-"close_windows_when_empty": false,
-"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
-"copy_with_empty_selection": false,
-"create_window_at_startup": false,
-"detect_indentation": true,
-"dictionary": "Packages/Language - English/en_GB.dic",
-"drag_text": false,
-"file_exclude_patterns":
-[
-    ".DS_Store"
-],
-"folder_exclude_patterns":
-[
-    ".bundle",
-    ".git",
-    ".hg",
-    ".sass-cache",
-    ".svn",
-    "bin",
-    "CVS",
-    "tmp"
-],
-"font_options":
-[
-    "subpixel_antialias"
-],
-"font_face": "Monaco",
-"font_size": 10,
-"highlight_line": true,
-"highlight_modified_tabs": true,
-"ignored_packages":
-[
-    "Vintage"
-],
-"indent_guide_options":
-[
-    "draw_normal",
-    "draw_active"
-],
-"line_padding_bottom": 3,
-"line_padding_top": 3,
-"match_brackets_angle": true,
-"material_theme_accent_orange": true,
-"material_theme_compact_sidebar": true,
-"material_theme_panel_separator": true,
-"material_theme_small_tab": true,
-"overlay_scroll_bars": "enabled",
-"theme": "Material-Theme.sublime-theme",
-"trim_trailing_white_space_on_save": true,
-"word_wrap": true
-}
 ```
 
 ## 插件
@@ -121,14 +59,13 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
 * Alignment：进行智能对齐
 * All Autocomplete: Extend Sublime Text 2 auto-completion to find matches in all open files of the current window
 * Anaconda
-* autofilename:自动关联图片,css,js等资源路径插件
 * AutoFileName: Plugin that auto-completes filenames
 * AutoPEP8：格式化Python代码
-* Autoprefixer插件：这是一款CSS3私有前缀自动补全插件
+* Autoprefixer ：这是一款CSS3私有前缀自动补全插件
 * Bootstrap 3 Snippets:A sublime plugin complete with Bootstrap 3 snippets
 * BracketHighlighter: Bracket and tag highlighter
 * ChineseLocalizations
-* Ctags:是一个经典的代码跳转插件
+* Ctags:代码跳转插件
 * ConvertToUTF8:支持 GBK, BIG5, EUC-KR, EUC-JP, Shift_JIS 等编码的插件
 * Codecs33
 * ColorHighlighter:展示你所选择的颜色代码的真正颜色。同时它还包含一个颜色选择器让你可以方便地更改颜色。
@@ -153,7 +90,6 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
     - Cmd + Option + I 斜体
     - Cmd + Shift + ./, 切换 indent quote
     - Option + Shift + 6 该把注脚这个功能用起来啦，用于必要的解释
-
 * Markdown Extended：语法高亮
 * MarkdownLivePreview `alt + m`
 * Markdown​TOC
@@ -161,7 +97,6 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
 * Modific:高亮自上次提交后修改过的代码行（支持Git，SVN，Bazaar，Mercurial以及TFS）
 * MultiEditUtils:该插件用于帮助多重选择下的编辑
 * Origami:可以随心所欲地分割窗口！创建新板块，删除板块，在板块之间移动或复制显示内容。
-* Package Control
 * PackageResourceViewer:查看和编辑SublimeText附带的不同的包
 * PHP Code Beautifier:代码美化
 * Pretty JSON
@@ -201,28 +136,30 @@ Alt + 左/右/上/下/  # 移动
 "auto_complete_triggers": [{"selector": "text.html", "characters": "bs3"}]
 ```
 
-## 通用快捷键
+## 快捷键
 
-* Ctrl+Shift+P|⌘⇧P：打开Package Control:Command prompt
-* Ctrl+p： 会列出当前打开的文件（或者是当前文件夹的文件），输入文件名然后 Enter 跳转至该文件
-    -   @ 符号跳转：输入 @symbol 跳转到 symbol 符号所在的位置 Ctrl+R
-    -   \# 关键字跳转：输入 #keyword 跳转到 keyword 所在的位置
-    -   : 行号跳转：输入 :12 跳转到文件的第12行。 Ctrl+G
-* ⌘K, ⌘B 隐藏/打开 侧边栏| Toggle side bar
-* set syntax php：设置高亮语言语法
-* html：ctrl+alt+h php注释 html:5
-* javascript：ctrl+alt+j
-* css：ctrl+alt+c
-* php：ctrl+alt+p
-* ruby：ctrl+alt+r
-* python：ctrl+alt+shift+p
+* Ctrl+Shift+P|⌘⇧P 打开 Package Control:Command prompt
+* Ctrl+p
+    - 输入文件名然后 Enter 跳转至该文件
+    -   `@`  输入 @symbol 跳转到 symbol 符号所在的位置 Ctrl+R
+    -   `#` 输入 #keyword 跳转到 keyword 所在的位置
+    -   `:` 输入 :12 跳转到文件的第12行。 Ctrl+G
+* Ctrl+K+B|⌘K, ⌘B 隐藏/打开 侧边栏| Toggle side bar
+* set syntax php 设置高亮语言语法
+* 快捷模版
+    - html：ctrl+alt+h
+    - javascript：ctrl+alt+j
+    - css：ctrl+alt+c
+    - php：ctrl+alt+p
+    - ruby：ctrl+alt+r
+    - python：ctrl+alt+shift+p
 * 新建窗口:Ctrl+Shift+N
+* Ctrl+N：新建tab
 * 打开文件:Ctrl+O
 * 保存文件:Ctrl+S
 * 另存文件:Ctrl+Shift+S
 * 关闭文件:Ctrl+W
 
-* Ctrl+W：关闭当前打开文件
 * Ctrl+Shift+W：关闭所有打开文件
 * Ctrl+Shift+V：粘贴并格式化
 * Ctrl+D：选择单词，重复可增加选择下一个相同的单词
@@ -237,8 +174,6 @@ Alt + 左/右/上/下/  # 移动
 * Ctrl+Shift+F：全项目查找并替换
 * Ctrl+H：替换
 * Ctrl+R：前往 method
-* Ctrl+N：新建窗口
-* Ctrl+K+B：开关侧栏
 * Ctrl+Shift+M：选中当前括号内容，重复可选着括号本身
 * Ctrl+F2：设置/删除标记
 * Ctrl+/：注释当前行
@@ -272,7 +207,7 @@ Alt + 左/右/上/下/  # 移动
     -   ⌘↩向光标后插入一行|inter line after
     -   ⌘⌥T插入特殊字符|Special characters
     -   ⌃D向后删除
-* Selection(光标选中)
+* Selection 光标选中
     - ⌘D选中相同的词 | Expand selection to words
     - ⌃⌘G多重文本光标选中| Expand all selection to words
     - ⌘L选中一行|Expand selection to lineEsc单选（取消多重选择）|Single selection,Cancel multiple selections
@@ -281,7 +216,7 @@ Alt + 左/右/上/下/  # 移动
     - ⌘⇧L将选中的区域分割成多行选中状态(多光标操作状态)|Split into lines
     - ⌥+拖动鼠标多重光标选中⌘⇧J已缩进层级为依据，一层层向外选中|Expand selection to indentation
     - ⌃⇧M将匹配括号中的内容选中|Expand selection to brackets
-* Find(查找)
+* Find 查找
     - ⌘F普通查找|Find
     - ⌘G查找下一个|Find next
     - ⌘⇧G查找上一个|Find prev
@@ -358,13 +293,13 @@ Alt + 左/右/上/下/  # 移动
 
 使用模糊字符串匹配（Fuzzy String Matching）
 
-*   Ctrl + R 会列出当前文件中的符号（例如类名和函数名，但无法深入到变量名），输入符号名称 Enter 即可以跳转到该处。
-*   可以使用 F12 快速跳转到当前光标所在符号的定义处（Jump to Definition）。
-*   直接查找文件
-*   @symbol跳转到symbol符号所在的位置（函数）
-*   `# 关键字跳转：输入#keyword跳转到keyword所在的位置`
-*   行号跳转：输入:12跳转到文件的第12行（ctrl+g）
-*   对于 Markdown， Ctrl + R 会列出其大纲
+* Ctrl + R 会列出当前文件中的符号（例如类名和函数名，但无法深入到变量名），输入符号名称 Enter 即可以跳转到该处。
+* 可以使用 F12 快速跳转到当前光标所在符号的定义处（Jump to Definition）。
+* 直接查找文件
+* @symbol跳转到symbol符号所在的位置（函数）
+  - 对于 Markdown， Ctrl + R 会列出其大纲
+* `# 关键字跳转：输入#keyword跳转到keyword所在的位置`
+* 行号跳转：输入:12跳转到文件的第12行（ctrl+g）
 
 ### 显示
 
@@ -387,7 +322,6 @@ Alt + 左/右/上/下/  # 移动
 ### 管理
 
 *   切换标签：ctrl+tab
-*   切换侧栏：ctrl+k ctrl+b
 *   恢复标签：ctrl+shift+t
 
 ### html
@@ -400,20 +334,34 @@ Alt + 左/右/上/下/  # 移动
 *   添加标签：ctrl+shift+g
 *   全屏：f11
 *   免打扰：shift+f11
-*   后代：ul>li .wrap>ul.list>.sites
-*   兄弟：div+p+bq
-*   分组：div>(header>ul>li\*2>a)+footer>p
-*   乘法：li\*5
-*   向上一层：.warp>p>a^p .warp>p>a^^p
-*   a[href="<http://www.baidu.com"]{百度}>
-*   递增：
-*   包含多个类：p.class1.class2.class3
-*   自定义属性：p[title='hello'] td[rowspan=2 colspan=3 title]
-*   section#block$\_3>h2.title+p.words_2
-*   文本：{}
-*   隐标签：ul>.class table>.row>.col
-*   a:link a:mail meta:utf
-*   form：get
+* [Emmet](https://docs.emmet.io/cheat-sheet/)
+    - 后代：ul>li .wrap>ul.list>.sites
+    - 兄弟：div+p+bq
+    - 分组：div>(header>ul>li\*2>a)+footer>p
+    - 乘法：li\*5
+    - 向上一层：.warp>p>a^p .warp>p>a^^p
+    - a[href="<http://www.baidu.com"]{百度}>
+    - 递增：
+    - 包含多个类：p.class1.class2.class3
+    - 自定义属性：p[title='hello'] td[rowspan=2 colspan=3 title]
+    - section#block$\_3>h2.title+p.words_2
+    - 文本：{}
+    - 隐标签：ul>.class table>.row>.col
+    - a:link a:mail meta:utf
+    - form：get
+    - html:5 或!：用于HTML5文档类型
+    - html:xt：用于XHTML过渡文档类型
+    - html:4s：用于HTML4严格文档类型
+    - p#foo 补充ID
+    - p.foo 补充类
+    - h1{foo} 和 a[href=#] 为h1和a标签
+    - `>`：子元素符号，表示嵌套的元素
+    - +：同级标签符号
+    - ^：可以使该符号前的标签提升一行
+    - (.foo>h1)+(.bar>h2)
+    - ul>li*3
+    - ul>li.item$*3
+    - ((h4>a[rel=external])+p>img[width=500 height=320])*12
 
 ```
 ul>li.item${item$$}*5
@@ -422,22 +370,6 @@ ul>li.item$$$*5(多个占位符)
 ul>li.item$@-*5(逆序)
 ul>li.item$@3_5(定位起始符) div#v$@3_5
 ```
-
-## [Emmet](https://docs.emmet.io/cheat-sheet/)
-
-* html:5 或!：用于HTML5文档类型
-* html:xt：用于XHTML过渡文档类型
-* html:4s：用于HTML4严格文档类型
-* p#foo 补充ID
-* p.foo 补充类
-* h1{foo} 和 a[href=#] 为h1和a标签
-* `>`：子元素符号，表示嵌套的元素
-* +：同级标签符号
-* ^：可以使该符号前的标签提升一行
-* (.foo>h1)+(.bar>h2)
-* ul>li*3
-* ul>li.item$*3
-* ((h4>a[rel=external])+p>img[width=500 height=320])*12
 
 #### 选择类
 
@@ -495,7 +427,7 @@ ul>li.item$@3_5(定位起始符) div#v$@3_5
 
 #### 搜索类
 
--   Ctrl+F 打开底部搜索框，查找关键字:存在不同的匹配模式
+*   Ctrl+F 打开底部搜索框，查找关键字:存在不同的匹配模式
     -   Alt + R 切换正则匹配模式的开启/关闭
     -   Alt + C 切换大小写敏感（Case-sensitive）模式
     -   Alt + W 切换整字匹配（Whole matching）模式
@@ -517,25 +449,25 @@ ul>li.item$@3_5(定位起始符) div#v$@3_5
 
 #### 格式化
 
--   Ctrl + \[ 向左缩进
--   Ctrl + ] 向右缩进
--   Ctrl + Shift + V 可以以当前缩进粘贴代码
+*   Ctrl + \[ 向左缩进
+*   Ctrl + ] 向右缩进
+*   Ctrl + Shift + V 可以以当前缩进粘贴代码
 
 ### 检查
 
--   F6: 开启/关闭拼写检查
--   Ctrl+F6: 定位下一个拼错
--   Ctrl+Shift+F6: 定位上一个拼错
+*   F6: 开启/关闭拼写检查
+*   Ctrl+F6: 定位下一个拼错
+*   Ctrl+Shift+F6: 定位上一个拼错
 
 ### 注释
 
--   行注释：Ctrl+/
--   块注释：Ctrl+Shift+/
+*   行注释：Ctrl+/
+*   块注释：Ctrl+Shift+/
 
 ### 构建 build
 
--   构建：ctrl+b
--   运行：ctrl+shift+b
+*   构建：ctrl+b
+*   运行：ctrl+shift+b
 
 ```json
 {
@@ -550,7 +482,7 @@ ul>li.item$@3_5(定位起始符) div#v$@3_5
     }
 }
 
-# 生效有延时,配置php环境变量
+// 生效有延时,配置php环境变量
 {
     "cmd": ["php", "$file"],
     "file_regex": "php$",
@@ -576,7 +508,7 @@ Command Palette ‣ Monokai Pro: select theme
 
 Snippet可以存储在任何的文件夹中, 并且以.sublime-snippet为文件扩展名, 默认是存储在.sublime-snippet文件夹下 四个组成部分:
 
-*   content:其中必须包含<![CDATA[...]]>,否则无法工作, Type your snippet here用来写你自己的代码片段
+*   content:必须包含<![CDATA[...]]>,否则无法工作, Type your snippet here用来写你自己的代码片段
 *   tabTrigger:用来引发代码片段的字符或者字符串, 比如在以上例子上, 在编辑窗口输入hello然后按下tab就会在编辑器输出Type your snippet here这段代码片段
 *   scope: 表示你的代码片段会在那种语言环境下激活, 比如上面代码定义了source.python, 意思是这段代码片段会在python语言环境下激活.
 *   description :展示代码片段的描述, 如果不写的话, 默认使用代码片段的文件名作为描述
@@ -620,29 +552,14 @@ Test: ${5:Nested ${6:Placeholder}}
     - 安装syn-setting插件
     - 配置文件，主进程download，其它更新
 
-```sh
-# 通过云端工具git 网盘
-# Close Sublime Text
-# Open Terminal
-cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-mkdir ~/Dropbox/Sublime
-mv User ~/Dropbox/Sublime/
-ln -s ~/Dropbox/Sublime/User
-# other machine
-cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-rm -r User
-ln -s ~/Dropbox/Sublime/User
-```
-
 ## 问题
 
-> markdown-editing无法snipeet,语法高亮  移除JavaScriptNext Package
+> markdown-editing无法snipeet,语法高亮:移除JavaScriptNext Package
 
 ## 参考
 
 * [总结配置](https://github.com/jikeytang/sublime-text)
 * [sublime-undocs](http://docs.sublimetext.info/en/latest/index.html#)
-* [精通 Sublime Text](http://laravelacademy.org/post/6711.html)
 * [文档](http://www.sublimetext.com/docs/3)
 * [Sublime Text 全程指南](http://lucida.me/blog/sublime-text-complete-guide/)
 * [非官方文档](http://sublime-text-unofficial-documentation.readthedocs.org/)

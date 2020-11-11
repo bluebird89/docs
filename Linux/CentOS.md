@@ -108,7 +108,18 @@ netstat -antlp | grep 8080
 iptables -L
 ```
 
-## 软件源管理
+## RPM Red Hat Package Manager
+
+*  Facts
+  - RPM is free and released under GPL (General Public License).
+  - RPM keeps the information of all the installed packages under /var/lib/rpm database.
+  - RPM is the only way to install packages under Linux systems, if you’ve installed packages using source code, then rpm won’t manage it.
+  - RPM deals with .rpm files, which contains the actual information about the packages such as: what it is, from where it comes, dependencies info, version info etc
+* resource
+  - http://rpmfind.net
+  - http://www.redhat.com
+  - http://freshrpms.net/
+  - http://rpm.pbone.net/
 
 ```sh
 # 配置本地yum源
@@ -128,6 +139,14 @@ sudo yum makecache fast  # 缓存本地yum源中的软件包信息
 
 yum install httpd   #安装apache
 rpm -ql httpd  #查询所有安装httpd的目录和文件
+# Check an RPM Signature
+rpm --checksig pidgin-2.7.9-5.el6.2.i686.rpm
+# Install
+rpm -ivh pidgin-2.7.9-5.el6.2.i686.rpm
+# check dependencies
+rpm -qpR BitTorrent-5.2.2-1-Python2.4.noarch.rpm
+# check an Installed RPM Package
+rpm -q BitTorrent
 
 systemctl start|stop|restart|enable httpd.service  #设置开机启动
 
