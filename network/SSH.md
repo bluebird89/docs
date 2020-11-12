@@ -53,159 +53,32 @@ scp -P 1101 username@servername:/remote_path/filename  ~/local_destination   # �
 ssh -p 2222 user@host   # 登陆服务器
 ssh username@remote_host ls /var/www
 ssh -i ~/.ssh/my_key root@$YOU_SERVER_IP
+# 查看连接过程
+ssh -v root@192.168.75.136
 
-# /etc/ssh/sshd_config
+# 服务端 /etc/ssh/sshd_config
 PasswordAuthentication no  # Disable Password Authentication
 PubkeyAuthentication yes
 ChallengeResponseAuthentication no
+# mux_client_request_session: read from master failed: Broken pipe
+UseDNS no
+service sshd restart
 
 PermitRootLogin no|yes|without-password  ## restrict the root login to only be permitted via SSH keys, no:禁止root通过ssh登录
 
 sudo systemctl reload sshd.service
 
-# ~/.ssh/config  复用  SSH 连接
+# 客户端 ~/.ssh/config  复用  SSH 连接
 Host *
     ControlMaster auto
     ControlPath /tmp/ssh_mux_%h_%p_%r
     ControlPersist 86400
-
-# mux_client_request_session: read from master failed: Broken pipe
-
-## 连接慢
-# /etc/ssh/sshd_config 添加
-UseDNS no
-service sshd restart
-```
-
-## sshd_config
-
-* 查看连接过程:`ssh -v root@192.168.75.136`
-
-```
-#    $OpenBSD: sshd_config,v 1.101 2017/03/14 07:19:07 djm Exp $
-
-# This is the sshd server system-wide configuration file.  See
-# sshd_config(5) for more information.
-
-# This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin
-
-# The strategy used for options in the default sshd_config shipped with
-# OpenSSH is to specify options with their default value where
-# possible, but leave them commented.  Uncommented options override the
-# default value.
-
-#Port 22
-#AddressFamily any
-ListenAddress 192.168.9.1
-#ListenAddress ::
-
-#HostKey /etc/ssh/ssh_host_rsa_key
-#HostKey /etc/ssh/ssh_host_ecdsa_key
-#HostKey /etc/ssh/ssh_host_ed25519_key
-
-# Ciphers and keying
-#RekeyLimit default none
-
-# Logging
-#SyslogFacility AUTH
-#LogLevel INFO
-
-# Authentication:
-
-#LoginGraceTime 2m
-#PermitRootLogin prohibit-password
-#StrictModes yes
-#MaxAuthTries 6
-#MaxSessions 10
-
-#PubkeyAuthentication yes
-
-# Expect .ssh/authorized_keys2 to be disregarded by default in future.
-#AuthorizedKeysFile    .ssh/authorized_keys .ssh/authorized_keys2
-
-#AuthorizedPrincipalsFile none
-
-#AuthorizedKeysCommand none
-#AuthorizedKeysCommandUser nobody
-
-# For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
-#HostbasedAuthentication no
-# Change to yes if you don't trust ~/.ssh/known_hosts for
-# HostbasedAuthentication
-#IgnoreUserKnownHosts no
-# Don't read the user's ~/.rhosts and ~/.shosts files
-#IgnoreRhosts yes
-
-# To disable tunneled clear text passwords, change to no here!
-#PasswordAuthentication yes
-#PermitEmptyPasswords no
-
-# Change to yes to enable challenge-response passwords (beware issues with
-# some PAM modules and threads)
-ChallengeResponseAuthentication no
-
-# Kerberos options
-#KerberosAuthentication no
-#KerberosOrLocalPasswd yes
-#KerberosTicketCleanup yes
-#KerberosGetAFSToken no
-
-# GSSAPI options
-GSSAPIAuthentication no
-GSSAPICleanupCredentials no
-#GSSAPIStrictAcceptorCheck yes
-#GSSAPIKeyExchange no
-
-# Set this to 'yes' to enable PAM authentication, account processing,
-# and session processing. If this is enabled, PAM authentication will
-# be allowed through the ChallengeResponseAuthentication and
-# PasswordAuthentication.  Depending on your PAM configuration,
-# PAM authentication via ChallengeResponseAuthentication may bypass
-# the setting of "PermitRootLogin without-password".
-# If you just want the PAM account and session checks to run without
-# PAM authentication, then enable this but set PasswordAuthentication
-# and ChallengeResponseAuthentication to 'no'.
-UsePAM yes
-
-#AllowAgentForwarding yes
-#AllowTcpForwarding yes
-#GatewayPorts no
-X11Forwarding yes
-#X11DisplayOffset 10
-#X11UseLocalhost yes
-#PermitTTY yes
-PrintMotd no
-#PrintLastLog yes
-#TCPKeepAlive yes
-#UseLogin no
-#PermitUserEnvironment no
-#Compression delayed
-#ClientAliveInterval 0
-#ClientAliveCountMax 3
-UseDNS no
-#PidFile /var/run/sshd.pid
-#MaxStartups 10:30:100
-#PermitTunnel no
-#ChrootDirectory none
-#VersionAddendum none
-
-# no default banner path
-#Banner none
-
-# Allow client to pass locale environment variables
-AcceptEnv LANG LC_*
-
-# override default of no subsystems
-Subsystem    sftp    /usr/lib/openssh/sftp-server
-
-# Example of overriding settings on a per-user basis
-#Match User anoncvs
-#    X11Forwarding no
-#    AllowTcpForwarding no
-#    PermitTTY no
-#    ForceCommand cvs server
-
-AllowUsers henry@192.168.0.100
+    TCPKeepAlive=yes
+    ServerAliveInterval=15
+    ServerAliveCountMax=6
+    StrictHostKeyChecking=no
+    Compression=yes
+    ForwardAgent=yes
 ```
 
 ## 证书登录

@@ -67,8 +67,8 @@ ChallengeResponseAuthentication no
 #KerberosGetAFSToken no
 
 # GSSAPI options
-#GSSAPIAuthentication no
-#GSSAPICleanupCredentials yes
+GSSAPIAuthentication no
+GSSAPICleanupCredentials no
 #GSSAPIStrictAcceptorCheck yes
 #GSSAPIKeyExchange no
 
@@ -97,7 +97,7 @@ PrintMotd no
 #Compression delayed
 #ClientAliveInterval 0
 #ClientAliveCountMax 3
-#UseDNS no
+UseDNS no
 #PidFile /var/run/sshd.pid
 #MaxStartups 10:30:100
 #PermitTunnel no
@@ -120,7 +120,7 @@ Subsystem       sftp    /usr/lib/openssh/sftp-server
 #       PermitTTY no
 #       ForceCommand cvs server
 # configured by CLion
-ListenAddress 0.0.0.0
-Port 23
 # UsePrivilegeSeparation no
 PasswordAuthentication yes
+
+AllowUsers henry@192.168.0.100
