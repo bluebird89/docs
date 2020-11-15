@@ -35,7 +35,7 @@
 * [pyflame](https://github.com/uber/pyflame):非侵入式得对运行中的 python 进程做 snapshot, 输出成 svg
     - `pyflame -s 60 -r 0.01 ${pid} | flamegraph.pl > myprofile.svg`
 * [newrelic](https://newrelic.com/)
-* [netdata/netdata](https://github.com/netdata/netdata):Real-time performance monitoring, done right! https://my-netdata.io/
+* [netdata](https://github.com/netdata/netdata):Real-time performance monitoring, done right! https://my-netdata.io/
 * [Monit](link)
 * CAT:作为美团点评基础监控组件，已经在中间件框架（MVC框架，RPC框架，数据库框架，缓存框架等）中得到广泛应用，为美团点评各业务线提供系统的性能指标、健康状况、基础告警等。
 

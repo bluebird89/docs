@@ -15,6 +15,11 @@ The Go programming language https://golang.org [中国官网](https://golang.goo
   - 语言交互性
 * 版本
   - 1.16
+* PHPer 应当学习 Golang
+  - PHP 脚本是由 SAPI 组件进行解析执行的
+  - 有一个强大的扩展系统。扩展使用 C 调用 Zend API 编写
+  - 没有内建的并行机制，没有线程、进程
+  - 转到 Go 是因为他们并未放弃太多的表达能力，但是获得了性能，并且与并发共舞（Rob Pike）
 
 ## [Install](https://golang.org/dl/)
 
@@ -1143,6 +1148,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [The Go Programming Language](http://www.gopl.io/)
   - [中文](https://github.com/golang-china/gopl-zh)
   - [Code](https://github.com/adonovan/gopl.io/):Example programs from "The Go Programming Language"
+  - [qiniu/gobook](https://github.com/qiniu/gobook):The Go Programming Language
 * [《Go语言高级编程》](https://github.com/chai2010/advanced-go-programming-book):https://chai2010.cn/advanced-go-programming-book/
 * [《Go 入门指南 The Way to Go》](https://github.com/Unknwon/the-way-to-go_ZH_CN)
   - [《Go入门指南》](https://fuckcloudnative.io/the-way-to-go/)
@@ -1168,6 +1174,8 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers):An example project, for my column named "Core Golang - 36 lessons"
 * [astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
 * [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
+* [learninggo](https://github.com/miekg/learninggo):Learning Go Book in mmark
+  - [Learning-Go-zh-cn](https://github.com/mikespook/Learning-Go-zh-cn) http://mikespook.com/learning-go/
 * [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. https://iris-go.com
 * [https://songjiayang.gitbooks.io](https://songjiayang.gitbooks.io)
 * [harlow/go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
@@ -1177,7 +1185,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [Alikhll/golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
 * [go_command_tutorial](https://github.com/hyper0x/go_command_tutorial):Golang command tutorial in Chinese.
 * [hoanhan101/ultimate-go](https://github.com/hoanhan101/ultimate-go):Ultimate Go study guide, with heavily documented code and programs analysis all in 1 place →
-* [ardanlabs/gotraining](https://github.com/ardanlabs/gotraining):Go Training Class Material
+* [ardanlabs/gotraining](https://github.com/ardanlabs/gotraining):Go Training Class Material https://www.ardanlabs.com/
 * [alco/gostart](https://github.com/alco/gostart):A getting started guide for Go newcomers
 * [7days-golang](https://github.com/geektutu/7days-golang):7 days golang apps from scratch (web framework Gee, distributed cache GeeCache, object relational mapping ORM framework GeeORM etc) 7天用Go动手写/从零实现系列 https://geektutu.com/post/gee.html
 * [go101](https://github.com/go101/go101):An online book focusing on Go syntax/semantics. https://go101.org
@@ -1354,14 +1362,15 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [go.dev](https://go.dev/) Build fast, reliable, and efficient software at scale
 * [The Go Programming Language Specification](https://golang.google.cn/ref/spec)
 * [Alikhll/golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
-* [developer-learning/learning-golang](https://github.com/developer-learning/learning-golang):Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（文档、书籍、视频)
+* [read](https://github.com/talkgo/read) About
+Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（文档、书籍、视频）
+* [](https://github.com/talkgo/night) Weekly Go Online Meetup via Bilibili｜Go 夜读｜由 SIG 成员维护｜通过 bilibili 在线直播的方式分享 Go 相关的技术话题，每天大家在微信/telegram/Slack 上及时沟通交流编程技术话题 https://talkgo.org/
 * [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
   - [awesome-go-cn](https://github.com/jobbole/awesome-go-cn):Go 资源大全中文版
   - [yinggaozhen/awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 https://awesome-go.cn(建设中)
 * [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 * [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
 * [uber-go/guide](https://github.com/uber-go/guide):The Uber Go Style Guide.
-* [qiniu/gobook](https://github.com/qiniu/gobook):The Go Programming Language
 * [changkun/go-under-the-hood](https://github.com/changkun/go-under-the-hood):Go 源码研究 (1.11.1, WIP)
 * [emirpasic/gods](https://github.com/emirpasic/gods):GoDS (Go Data Structures). Containers (Sets, Lists, Stacks, Maps, Trees), Sets (HashSet, TreeSet, LinkedHashSet), Lists (ArrayList, SinglyLinkedList, DoublyLinkedList), Stacks (LinkedListStack, ArrayStack), Maps (HashMap, TreeMap, HashBidiMap, TreeBidiMap, LinkedHashMap), Trees (RedBlackTree, AVLTree, BTree, BinaryHeap), Comparators, Iterators, …
 * [EDDYCJY/blog](https://github.com/EDDYCJY/blog):煎鱼的博客

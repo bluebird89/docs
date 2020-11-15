@@ -183,6 +183,8 @@ termianl1:bl + tab
 ## 教程
 
 * [itheima1/BlockChain](https://github.com/itheima1/BlockChain):黑马程序员 120天全栈区块链开发 开源教程
+* [比特币和数字货币技术](https://www.coursera.org/learn/cryptocurrency)
+* [demo](https://andersbrownworth.com/blockchain/)
 
 ## 工具
 
