@@ -1365,7 +1365,6 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
   - 使用import和export
   - import命令则是异步加载，或者更准确地说，ES6 模块有一个独立的静态解析阶段，依赖关系的分析是在那个阶段完成的，最底层的模块第一个执行
   - import命令可以加载 CommonJS 模块，但是只能整体加载，不能只加载单一的输出项：因为 ES6 模块需要支持静态代码分析，而 CommonJS 模块的输出接口是module.exports，是一个对象，无法被静态分析，所以只能整体加载
-    -
 * Node.js 专用的 CommonJS 模块，简称 CJS
   - 使用require()加载和module.exports输出
   - require()是同步加载，后面的代码必须等待这个命令执行完，才会执行
@@ -1375,6 +1374,7 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
     + 如果这时还要使用 CommonJS 模块，那么需要将 CommonJS 脚本的后缀名都改成.cjs。如果没有type字段，或者type字段为commonjs，则.js脚本会被解释成 CommonJS 模块
   - require()命令不能加载 ES6 模块，会报错，只能使用import()这个方法加载
     + require()不支持 ES6 模块的一个原因是，它是同步加载，而 ES6 模块内部可以使用顶层await命令，导致无法被同步加载
+* AMD
 
 ## [rome](https://github.com/facebookexperimental/rome)
 
