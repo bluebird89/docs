@@ -561,6 +561,9 @@ sudo apt install neofetch
 sudo apt-add-repository ppa:audio-recorder/ppa
 sudo apt-get update
 sudo apt-get install audio-recorder
+
+# debconf: DbDriver “config”: /var/cache/debconf/config.dat is locked by another process
+sudo fuser -v /var/cache/debconf/config.dat
 ```
 
 ## [Gnome](https://extensions.gnome.org/)
