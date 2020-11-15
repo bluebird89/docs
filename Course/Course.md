@@ -25,7 +25,7 @@
     - University of the People — 这是一间免学费的线上大学。
     - NovoEd — 学习 NovoEd 的课程，成为未来的领袖！
     - [北大图书馆](https://github.com/lib-pku/libpku):https://lib-pku.github.io/
-    - 浙大：https://github.com/QSCTech
+    - [浙江大学课程攻略共享计划](https://github.com/QSCTech/zju-icicles) https://qsctech.github.io/zju-icicles/
     - 清华大学：https://github.com/PKUanonym
     - 中科大：https://github.com/mbinary
     - 上海交大：https://github.com/CoolPhilChen
@@ -37,7 +37,7 @@
     - Stanford Engineering Everywhere — 有很多免费的工程类课程资源。
     - Big Data University — 教你如何做大数据分析。
     - Better Explained — 从整体图景着手，通过图像向你解释抽象的数学（还有其他领域）概念。
-*   综合类
+* 综合类
     - MOOC 学院 — 各种实用课程（职业技能，心理学，生命科学等等），演讲等。
     - Scratch — Imagine, Program, Share — 为小孩子设计，通过游戏学编程。
     - E-learning for kids — 向 5-12 岁的儿童提供小学程度基础课程。

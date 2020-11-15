@@ -74,7 +74,7 @@ node -v
 
 ## nvm node verison management
 brew install nvm
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.1/install.sh | bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh)"
 
 nvm install 4.4.5
 nvm use 4.4.5

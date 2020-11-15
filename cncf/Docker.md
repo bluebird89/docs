@@ -1784,8 +1784,8 @@ kubectl-debug <POD_NAME>
   - [DockStation](https://dockstation.io/)
   - [Rancher](https://rancher.com/)Rancher is an open source software platform that enables organizations to run and manage Docker and Kubernetes in production.
   - [Portainer](link) `docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer`
-  - [ jesseduffield / lazydocker ](https://github.com/jesseduffield/lazydocker):The lazier way to manage everything docker
-* [ sickcodes /Docker-OSX ](https://github.com/sickcodes/Docker-OSX):Mac in Docker! Run near native OSX-KVM in Docker! X11 Forwarding!
+  - [lazydocker](https://github.com/jesseduffield/lazydocker):The lazier way to manage everything docker
+* [Docker-OSX](https://github.com/sickcodes/Docker-OSX):Mac in Docker! Run near native OSX-KVM in Docker! X11 Forwarding!
 * [Derrick](https://mp.weixin.qq.com/s/Wq-wxnLBHdOtV9S4rj62xg):帮助开发者快速完成应用容器化的工具
 
 ## 工具

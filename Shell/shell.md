@@ -1067,7 +1067,7 @@ brew install bat
 
 ## Termial
 
-- ios
+* ios
     + [ish-app / ish](https://github.com/ish-app/ish):Linux shell for iOS https://ish.app
 - Mac
     + Iterm2
@@ -1096,7 +1096,7 @@ brew install bat
 * [Hyper](https://github.com/zeit/hyper):A terminal built on web technologies create a beautiful and extensible experience for command-line interface users, built on open web standards https://hyper.is
 * mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连
 * [PowerShell](https://github.com/PowerShell/PowerShell):PowerShell for every system! https://microsoft.com/PowerShell
-* [Eugeny/terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
+* [terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age https://eugeny.github.io/terminus/
 * [msys2](http://www.msys2.org/)
 * powercmd
 * [alacritty](https://github.com/alacritty/alacritty):A cross-platform, GPU-accelerated terminal emulator

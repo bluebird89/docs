@@ -26,7 +26,7 @@
 ## 图书
 
 * Compilers: Principles,Techniques,and Tools 编译原理技术和工具 Alfred V.Aho,Ravi Sethi,Jeffrey D.Ullman
-* Modern Compiler Implementation in C  Andrew W.Appel,with Jens Palsberg  现代编译原理-C语言描述
+* [Modern Compiler Implementation in C  现代编译原理-C语言描述](https://www.cs.princeton.edu/~appel/modern/c/)
     - 《编译原理》：https://www.bilibili.com/video/av17649289
 * Advanced Compiler Design and Implementation  Steven S.Muchnick  高级编译器设计与实现
 

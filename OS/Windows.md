@@ -107,7 +107,7 @@ systeminfo | findstr Build
 * Media Player Classic 媒体播放
 * EasyBCD 2.3：多系统引导文件管理
 * [阿呆猫](http://www.admflt.com/)
-* [microsoft/PowerToys](https://github.com/microsoft/PowerToys):Windows system utilities to maximize productivity
+* [PowerToys](https://github.com/microsoft/PowerToys):Windows system utilities to maximize productivity
   - Window Walker 直接输入软件的名字来进行准确定位, Ctrl+Win 徽标键即可打开
   - 批量调节图片尺寸
 * [xmeters](https://entropy6.com/xmeters/):Taskbar System Stats for Windows
