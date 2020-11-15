@@ -331,6 +331,7 @@ brctl delif br0 eth0
 ## 网络命令
 
 * ping:确定网络是否正确连接，以及网络连接的状况.是ICMP的最著名的应用，是TCP/IP协议的一部分。利用"ping"命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。原理是用类型码为0的ICMP发请 求，受到请求的主机则用类型码为8的ICMP回应
+  - [gping](https://github.com/orf/gping) Ping, but with a graph
 * ipconfig:用于显示当前的TCP/IP配置的设置值
   - 属于 net-tools 工具集。net-tools 起源于 BSD，自 2001 年起，Linux 社区已经停止对其进行维护
   - ip 命令归属于 iproute2 工具集，iproute2 旨在取代 net-tools，并提供了一些新功能
@@ -1088,6 +1089,7 @@ lsof -d 2-3
 * [SystemsApproach/book](https://github.com/SystemsApproach/book):Meta-data and Makefile needed to build the book. Main starting point.
 * [RFC 文档](https://datatracker.ietf.org/doc/rfc1644/)
 * [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
+* [submarine cable map](https://www.submarinecablemap.com/)
 * http://libevent.org/
 
 <http://blog.csdn.net/hguisu/article/details/7445768/>
