@@ -218,6 +218,25 @@ A heart whose love is innocent!
 人生自古谁无死，留取丹青照汗青！
 ```
 
+
+```
+生命如同走夜路
+灵魂/觉知就是光照
+事实上往哪走并不重要
+人都喜欢够亮的地方
+
+更深的觉知是可以选择往哪照
+而我关了灯坐下
+心念似已走遍大千
+
+知道言语后面成长/社会/演化的因缘
+见多了时下针孔里群雄并起的精彩
+放开乾坤大，也不怜草木青
+就什么都不做
+什么人的悲喜也不响应
+已是筋疲力尽
+```
+
 ## 参考
 
 * [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):The most comprehensive database of Chinese poetry
