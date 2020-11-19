@@ -36,6 +36,10 @@
 * 上瘾：让用户养成使用习惯的四大产品逻辑
 * 程序员的思维修炼
 
+## 资源
+
+* [Hack Design](https://hackdesign.org/) An easy to follow design course for people who do amazing things.
+
 ## 工具
 
 * [wiredjs/wired-elements](https://github.com/wiredjs/wired-elements):Collection of custom elements that appear hand drawn. Great for wireframes or a fun look. https://wiredjs.com
