@@ -35,6 +35,7 @@
     - https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/
     - https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/
     - [standard-aliases ](https://github.com/gto76/standard-aliases):Attempt at defining a standard extension to Linux in form of Bash functions
+* [starship](https://github.com/starship/starship):cometmilky_way The cross-shell prompt for astronauts https://starship.rs
 * 参考
     - https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4
     - https://dev.to/_darrenburns/tools-to-power-up-your-command-line-part-2-2737
@@ -1194,10 +1195,9 @@ ccache gcc foo.c
 * hex
     - [sharkdp/hexyl](https://github.com/sharkdp/hexyl):A command-line hex viewer
 * prompt
-    - [b-ryan/powerline-shell](https://github.com/b-ryan/powerline-shell):A beautiful and useful prompt for your shell
+    - [powerline-shell](https://github.com/b-ryan/powerline-shell):A beautiful and useful prompt for your shell
         + pre-patched and adjusted fonts for usage with the Powerline statusline plugin `sudo apt-get install fonts-powerline`
         + Powerline a statusline plugin for vim, and provides statuslines and prompts for several other applications `pip install powerline-status`
-    - [starship/starship](https://github.com/starship/starship):cometmilky_way The cross-shell prompt for astronauts https://starship.rs
 * sql
     - mycli：mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令
 * json

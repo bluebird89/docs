@@ -1091,6 +1091,7 @@ lsof -d 2-3
 * [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
 * [submarine cable map](https://www.submarinecablemap.com/)
 * http://libevent.org/
+* [家庭网络知识整理](https://github.com/blanboom/awesome-home-networking-cn)https://blanboom.org/2020/awesome-home-networking-cn/
 
 <http://blog.csdn.net/hguisu/article/details/7445768/>
 <http://blog.csdn.net/hguisu/article/details/7444092>

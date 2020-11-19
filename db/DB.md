@@ -274,7 +274,7 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [Debezium](link)
   - 一个变更数据捕获（Change Data Capture, CDC） 平台，可以将数据库变更流式传输到Kafka 的 topics
   - 对数据库日志文件中的变更做出反应，并具有多个CDC连接器，适用于多种数据库，其中包括Postgres、MySQL、Oracle 和 MongoDB
-
+* [textql](https://github.com/dinedal/textql) Execute SQL against structured text like CSV or TSV
 * [TablePlus](https://tableplus.com/) Database management made easy
 
 ## 参考

@@ -1210,12 +1210,10 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 ## 课程
 
 * [FE-star](https://github.com/FE-star)
-* [Google 推出的 31 套在线课程](https://chinagdg.org/2015/12/google-%E6%8E%A8%E5%87%BA%E7%9A%84-31-%E5%A5%97%E5%9C%A8%E7%BA%BF%E8%AF%BE%E7%A8%8B/)
-* HOW Design University — 主要教授图像与交互设计。
-* HTML Dog — 学习 HTML, CSS 和 JavaScript 编程技能。
-* Skillcrush — 提供职业网页设计与开发课程。
-* Hack Design — 全球顶级设计师教你网页/app 设计，完全免费。
-* Frontend Masters
+* [Web-Dev-For-Beginners](https://github.com/microsoft/Web-Dev-For-Beginners) Get Started as a Web Developer
+* [HTML Dog](https://htmldog.com/)Everything HTML, CSS, and JavaScript,
+the most common languages used in making web pages.
+* [Frontend Masters](https://frontendmasters.com/)Advance Your Skills with In-Depth, Modern Front-End Engineering Courses
 
 ## 面试
 
