@@ -1100,12 +1100,13 @@ sysbench ./tests/include/oltp_legacy/oltp.lua --mysql-host=192.168.10.10 --mysql
 
 ## [Percona Toolkit](https://www.percona.com/doc/percona-toolkit)
 
-* 检查master和slave数据的一致性
-* 有效地对记录进行归档
-* 查找重复的索引
-* 对服务器信息进行汇总
-* 分析来自日志和tcpdump的查询
-* 当系统出问题的时候收集重要的系统信息
+* 任务
+  - 检查master和slave数据的一致性
+  - 有效地对记录进行归档
+  - 查找重复的索引
+  - 对服务器信息进行汇总
+  - 分析来自日志和tcpdump的查询
+  - 当系统出问题的时候收集重要的系统信息
 * 工具列表
   - pt-variable-advisor:分析MySQL变量并就可能出现的问题提出建议
     + `wget https://www.percona.com/downloads/percona-toolkit/3.0.13/binary/redhat/7/x86_64/percona-toolkit-3.0.13-re85ce15-el7-x86_64-bundle.tar`

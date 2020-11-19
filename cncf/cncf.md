@@ -37,7 +37,7 @@ CNCF给出了路线图（Trail Map）用于对用户在整体上给出指导建�
 
 ![Alt text](https://www.cncf.io/ "Optional title")
 
-# Cloud Native
+## Cloud Native
 
 Matt Stine提出的一个概念，它是一个思想的集合，包括DevOps、持续交付（Continuous Delivery）、微服务（MicroServices）、敏捷基础设施（Agile Infrastructure）、康威定律（Conways Law）等，以及根据商业能力对公司进行重组。
 
@@ -268,6 +268,10 @@ Matt Stine提出的一个概念，它是一个思想的集合，包括DevOps、�
 * HP Enterprise (HPE) 宣布推出了专为加速企业数字化转型的软件组合品牌
 * 包含了多项产品，包括容器调度与管理平台、AI 和数据分析、跨云成本管控、IT 自动化和网络安全等，基本上是以 HPE 收购的 MapR、Scytale 等产品为核心提供的 IaaS 和 PaaS 产品.是 Ezmeral 的底层基础架构，包含了 HPE 最近收购的 BlueData 和 MapR 的创新成果，以及用于容器编排的开源产品 Kubernetes，支持在各种基础架构（私有云、公有云、边缘节点）上大量部署及管理容器应用
 * HPE 软件部门主管 Kumar Sreekani 直接放话要挑战 VMware Tanzu 和 Red Hat OpenShift，表示 Ezmeral 的最大优势是可以通过 MapR 的文件系统为容器应用提供数据持久化的能力，以及通过 BlueData 提供强大的 AI 能力
+
+## [火山引擎](https://www.volcengine.cn/)
+
+* 字节跳动旗下的数字服务与智能科技品牌，基于公司服务数亿用户的大数据、人工智能和基础服务等能力，以业界领先的超大容器集群规模支撑着今日头条、抖音、西瓜视频等产品线,为企业客户提供系统化全链路解决方案，助力企业务实地创新，实现业务持续快速的增长
 
 ## 图书
 
