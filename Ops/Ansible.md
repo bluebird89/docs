@@ -1,7 +1,8 @@
 # [ansible](https://github.com/ansible/ansible)
 
-面向客户端的软件部署、配置和管理自动化工具，支持Unix、Linux和Windows https://www.ansible.com
+https://www.ansible.com
 
+* 一款开源的、功能强大的IT自动化工具，常用于软件部署、系统配置、运维管理等应用场景
 * 使用JSON和YAML，而不是IAC，根本不需要节点代理就可以安装
 * 可以通过OpenStack在内部系统上使用，也可以在亚马逊EC2上使用
 

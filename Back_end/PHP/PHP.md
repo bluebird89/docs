@@ -247,7 +247,7 @@ Hugepagesize:       2048 kB
 
 * 综合环境
   - [XAMPP](https://www.apachefriends.org/index.html)
-  - [wampserver](link)
+  - [wampserver](https://www.wampserver.com/)
   - [mamp](https://www.mamp.info)
     + http://localhost:8888/MAMP/
     + /Applications/MAMP/htdocs
