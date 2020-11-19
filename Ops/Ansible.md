@@ -3,8 +3,14 @@
 https://www.ansible.com
 
 * 一款开源的、功能强大的IT自动化工具，常用于软件部署、系统配置、运维管理等应用场景
-* 使用JSON和YAML，而不是IAC，根本不需要节点代理就可以安装
-* 可以通过OpenStack在内部系统上使用，也可以在亚马逊EC2上使用
+* 不需要一个唯一的中控节点。通过可编辑的Inventory文件形式来保存节点信息，任意一台可运行Ansible的主机均可以作为管理节点来进行策略的执行
+* 采取了agentless的理念，通过SSH的方式来实现管理节点与被管理节点的通信，而不需要在被管理节点上安装额外的通信媒介，简化的同时也确保了通信的安全
+* 设计目标
+  - 轻量化。管理系统不应该要求环境搭载附加依赖。
+  - 一致性。借助Jinja的模板化、合理的任务执行策略，使用Ansible应当能够搭建高一致性的环境。
+  - 安全。被管理节点无需配置agent，仅需要其支持OpenSSH与Python即可。
+  - 可靠性。一个编写规范的Ansible Playbook应当具有幂等性，避免在管理节点过程中出现意料之外的行为。
+  - 易上手。由于Playbook基于YAML和Jinja template编写实现，学习成本低
 
 ## Install
 
@@ -42,13 +48,34 @@ vagrant ssh
 ansible --version
 ansible-config list # 查看配置
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.0.203
+
+sudo yum install ansible
+wget https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.9.9-1.el7.ans.noarch.rpm -O ansible.rpm
+sudo yum localinstall ansible.rpm
 ```
 
 ## 概念
 
-* inventory目录
-  - INI格式文件的主机清单，配置管理主机列表
+* 模块（Modules）
+  - Ansible执行命令或者Playbook时实际调用的即模块，执行某个模块实际上是在目标机上执行，Ansible控制机连接被控制节点，分发模块的执行脚本，执行完成后删除，最后获取返回结果，以此得以在远程主机上执行特定任务。用户可以按照自己的需求自己编写模块使用。
+* 插件（Plugins）
+  - Ansible的核心功能主要由插件提供，相对于模块在远程主机上执行，插件则是在控制机上执行，负责诸如数据变形、日志输出、连接远程Inventory等工作。用户同样被允许自定义编写插件
+* Control Node
+  - 任何安装了Ansible的（非Windows）机器都可以作为控制节点（Control Node），通过调用/usr/bin/ansible执行命令或调用/usr/bin/ansible-playbook执行playbook来管理被管理主机（Managed Nodes）。
+  - 允许有多个控制节点，多个控制节点间的配置（如Inventory和Playbook）同步，可以通过一个统一的远程仓库管理实现
+* Managed Nodes
+  - 利用Ansible管理的网络设备、服务器称作被管理节点（Managed Nodes），或者简称主机（hosts）
+  - 在这些设备上无需安装Ansible，只需其能够与控制节点建立ssh连接，即可实现设备的“被管理”
+* inventory
+  - Ansible用一个Inventory文件来描述、存放被管理节点信息
+  - 可以在Inventory文件中组织被管理节点的拓扑结构、进行分组，以便轻松实现扩缩容 scaling
   - 默认情况下，会将 /etc/ansible/hosts 文件作为inventory文件，通过 `ansible -i inventory` 来指定自己定义
+  - 用[]括起来的是组名，用以将不同主机分类分组。Ansible规定了两个默认组
+    + all组包含了所有的主机
+    + ungrouped组则包含所有未显式分组的主机
+  - 别名用来标识一台主机
+  - 变量则用来指定主机对应的一些属性，变量可以是Ansible内置变量，也可以是自定义的变量以在后续的playbook中使用
+  - 支持一次性给一个组里的所有主机赋值变量
   - 参数
     + ansible_host：host域名或者IP地址
     + ansible_port：ssh到远程机器的端口
@@ -58,13 +85,17 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.0.203
     + ansible_ssh_port SSH连接端口
     + ansible_ssh_user  默认SSH连接用户
     + ansible_ssh_pass SSH连接的密码（这是不安全的，ansible极力推荐使用--ask-pass选项或使用SSH keys）
-    + ansible_sudo_pass sudo用户的密码
+    + ansible_sudo_pass sudo用户密码
     + ansible_ssh_private_key_file：ssh到远程机器时所使用的密钥
-    + ansible_connection SSH连接的类型：local,ssh,paramiko，在ansible 1.2之前默认是paramiko，后来智能选择，优先使用基于ControlPersist的ssh（支持的前提）
+    + ansible_connection SSH连接类型
+      * local
+      * ssh
+      * paramiko
+      * ansible 1.2之前默认是paramiko，后来智能选择，优先使用基于ControlPersist的ssh（支持的前提）
     + ansible_shell_type 指定主机所使用的shell解释器，默认是sh，你可以设置成csh, fish等shell解释器
     + ansible_python_interpreter 用来指定python解释器的路径
-    + `ansible\_\*\_interpreter` 用来指定主机上其他语法解释器的路径，例如ruby，perl等
-  - 不要再inventory文件中存储变量，而是存于 `/etc/ansible/host_vars` 和 `/etc/ansible/group_vars`文件夹下，ansible会自动应用文件夹中的主机和组来定义变量
+    + `ansible_*_interpreter` 指定主机上其他语法解释器的路径，例如ruby，perl等
+  - 不再inventory文件中存储变量，而是存于 `/etc/ansible/host_vars` 和 `/etc/ansible/group_vars`文件夹下，ansible会自动应用文件夹中的主机和组来定义变量
   - 如果同时inventory和playbook所在文件夹同时有host_vars/group_vars，那么playbook的会覆盖inventory的
   - 变量可以存在于多个地方，但是在ansible运行时，所有地方的变量将针对于某个host机器进行合并。基于group和host的变量通过以下顺序进行覆盖，后面的覆盖前面的
     + all group (because it is the ‘parent’ of all other groups)
@@ -85,16 +116,31 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.0.203
       * 每一个task最好有name属性，这个是供人读的，没有实际的操作。然后会在命令行里面输出，提示用户执行情况。
       * Tasks中的任务都是有状态的，changed或者ok。 在Ansible中，只在task的执行状态为changed的时候，才会执行该task调用的handler，这也是handler与普通的event机制不同的地方。
     + vars: Variables for a role can be specified in files inside this directory and then referenced elsewhere in a role. 包含一个main.yml文件，列出将要使用的所有变量
-* Playbooks:将大量命令行配置集成到一起形成一个可定制的多主机配置管理部署工具，模块组织结构清晰，由ansible自动执行
-  - 运行剧本时的第一行总是“收集事实”，收集有关其配置的系统的信息，这些被称为事实
+* 动态Inventory的配置方式
+  - Inventory Plugins
+  - Inventory Scripts
+  - 原理是从某个源获取到关于主机的信息，进而动态地生成Inventory文件，保证生成结果中的主机信息都是最新且有效的
+* Tasks
+  - 一个任务（Task），是Ansible所执行动作的最小单位。根据需求的不同，可以把一个或多个任务串在一个playbook顺序执行，也可以通过单次调用/usr/bin/ansible执行某个任务
+* Playbooks
+  - 一个Playbook由用户以YAML格式文件的形式编写,可以包含变量，由于使用YAML来编写，其具有着易读、易写、易共享、易理解的特点
+    + 可以在其中按人为顺序组织完成一个大型任务所需要的各个子任务,运行一个playbook将会按顺序执行其中的所有任务
+    + 允许不同的任务步骤在不同的主机间按特定顺序相互跳转；任务的执行同时支持同步和异步两种方式
+  - 运行剧本时第一行总是“收集事实”，收集有关其配置的系统的信息，这些被称为事实
     + `ansible -m setup --connection=local localhost`
     + `ansible -i ./hosts remote -m setup`
+    + `ansible-playbook playbook.yml`
+  - 参数
+    + -m 跟一个模块名
+  - 借助Ansible内置关键字，可以不用写任何的实际命令，只需传入几个参数，就可以令Ansible自动生成并完成理想的任务
+  - 在某些场景下，任务的执行并不是顺序的，而是依赖事件响应的
+    + notify关键字指定了当目标配置文件发生改变时，应该响应任务进行执行动作,notify下的任务动作不应放在tasks栏下，因为它们有个专门的称呼：handlers，用以区分顺序执行的任务和事件响应式执行的任务
 
 ```sh
 # /etc/ansible/ansible.cfg
 [defaults]
-inventory=/etc/ansible/inventorys/        /**放置节点服务器名目录**/
-remote_user = czp               /**免密节点服务器用户名**/
+inventory=/etc/ansible/inventorys/
+remote_user = czp
 
 ## /etc/ansible/hosts
 [load_balancer]

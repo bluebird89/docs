@@ -693,6 +693,7 @@ yarn install node-sass
 ## 面试
 
 * [jimuyouyou/node-interview-questions](https://github.com/jimuyouyou/node-interview-questions)
+* [node-interview](https://github.com/ElemeFE/node-interview) How to pass the Node.js interview of ElemeFE. https://elemefe.github.io/node-interview/
 
 ## 教程
 

@@ -314,12 +314,14 @@ jupyter labextension install @jupyterlab/debugger
 conda install xeus-python -c conda-forge #  kernel 需要实现 Jupyter Debug Protocol，因此暂时只能用xeus-python
 ```
 
+## 工具
+
+* [Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb)
+* [deepnote](https://beta.deepnote.com)
+* [nbviewer](https://nbviewer.jupyter.org/)A simple way to share Jupyter Notebooks
+
 ## 参考
 
 * [markusschanta/awesome-jupyter](https://github.com/markusschanta/awesome-jupyter):A curated list of awesome Jupyter projects, libraries and resources
 * [The IPython notebook](http://ipython.org/ipython-doc/dev/notebook/index.html)
 
-## 工具
-
-* [Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb)
-* [deepnote](https://beta.deepnote.com)

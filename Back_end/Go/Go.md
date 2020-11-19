@@ -1197,7 +1197,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang http://go-colly.org/
   - [Gourouting/singo](https://github.com/Gourouting/singo):Gin+Gorm开发Golang API快速开发脚手架
   - [Terry-Mao / goim](https://github.com/Terry-Mao/goim):goim https://goim.io/
-  - [ gofiber / fiber ](https://github.com/gofiber/fiber): zap Fiber is an Express inspired web framework written in Go with coffee https://gofiber.io
+  - [fiber](https://github.com/gofiber/fiber): zap Fiber is an Express inspired web framework written in Go with coffee https://gofiber.io
   - [go-martini/martini](https://github.com/go-martini/martini):Classy web framework for Go http://martini.codegangsta.io
   - [kataras / iris ](https://github.com/kataras/iris):The fastest community-driven web framework for Go. Socket-Sharding, gRPC, Automatic HTTPS with Public Domain, MVC, Sessions, Caching, Versioning API, Problem API, Websocket, Dependency Injection and more. Fully compatible with the standard library and 3rd-party middleware packages. | https://bit.ly/iriscandothat1
   - [nitro](https://github.com/asim/nitro):Nitro (formerly known as Go Micro) is a blazingly fast framework for distributed app development. https://go-nitro.dev/

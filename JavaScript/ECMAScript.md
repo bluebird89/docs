@@ -29,6 +29,7 @@ Status, process, and documents for ECMA262 https://tc39.github.io/ecma262/
 ## Modules
 
 * Node.JS首先采用了js模块化的概念
+* ES2016中的Module机制借鉴自CommonJS，同时又提供了更优雅的关键字及语法
 * CommonJS
   - Node.js服务器端通过exports、module.exports来输出模块，并使用require同步载入模块
   - 浏览器端的可以使用Browserify实现
@@ -423,6 +424,7 @@ myOptions.style.color = "red";
 
 ### async await
 
+* 对Promise的上层封装，几乎同步的写法写异步比Promise更优雅更简单
 * 异步:一个任务不是连续完成的，可以理解成该任务被人为分成两段，先执行第一段，然后转而执行其他任务，等做好了准备，再回过头执行第二段
 * 回调函数
   - 把任务的第二段单独写在一个函数里面，等到重新执行这个任务的时候，就直接调用这个函数。回调函数的英语名字callback
