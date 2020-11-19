@@ -372,7 +372,6 @@ vue init Plortinus/vue-multiple-pages new-project
 * 框架
   - [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
   - [dcloudio/uni-app](https://github.com/dcloudio/uni-app):使用 Vue.js 开发跨平台应用的前端框架 http://uniapp.dcloud.io
-  - [quasarframework/quasar](https://github.com/quasarframework/quasar):Quasar Framework - High performance, Material Design 2, full front end stack with Vue.js https://quasar.dev http://www.quasarchs.com
 * Admin
   - [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin):🎉 A magical vue admin https://panjiachen.github.io/vue-element-admin
   - [vue-admin](https://github.com/taylorchen709/vue-admin):admin template based on vuejs2 and element. https://taylorchen709.github.io/vue-admin/
